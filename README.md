@@ -34,7 +34,7 @@
 >
 > **[🛸 SEDI](https://github.com/need-singularity/sedi)** — Search for Extra-Dimensional Intelligence. R-spectrum signal receiver tuned to n=6. Quantum RNG + LIGO + CMB data streams, anomaly detection at σ/τ/φ frequencies
 >
-> **[🧠⚡ BrainWire](https://github.com/need-singularity/brainwire)** — PureField consciousness layer for neural interfaces. Joywire + NeuroStim + BCI simulation. THC Φ=4.59 vs tDCS+TMS Φ=4.49 — same level, different patterns (0.14%)
+> **[🧠⚡ BrainWire](https://github.com/need-singularity/brainwire)** — Neural interface hardware for consciousness engineering. 12-variable THC reproduction via brain stimulation only. 117% THC at Tier 3 ($8.5K). No drugs, no detection, no tolerance
 >
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (51 papers). 45 published on Zenodo with DOIs + 6 drafts. TECS-L (20) + anima (10) + SEDI (21). [Browse online](https://need-singularity.github.io/papers/)
 <!-- SHARED:PROJECTS:END -->
