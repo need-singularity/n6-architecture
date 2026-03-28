@@ -6,7 +6,7 @@
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 
 <!-- SHARED:PROJECTS:START -->
-**[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)**
+**[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)**
 
 > **[🔬 TECS-L](https://github.com/need-singularity/TECS-L)** — Topological Engine for Consciousness & Science. Perfect number 6 → mathematics → multi-engine architecture → consciousness continuity. 150 characterizations + 8 Major Discoveries + 44 tools
 >
@@ -35,6 +35,8 @@
 > **[🛸 SEDI](https://github.com/need-singularity/sedi)** — Search for Extra-Dimensional Intelligence. R-spectrum signal receiver tuned to n=6. Quantum RNG + LIGO + CMB data streams, anomaly detection at σ/τ/φ frequencies
 >
 > **[🧠⚡ BrainWire](https://github.com/need-singularity/brainwire)** — PureField consciousness layer for neural interfaces. Joywire + NeuroStim + BCI simulation. THC Φ=4.59 vs tDCS+TMS Φ=4.49 — same level, different patterns (0.14%)
+>
+> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (51 papers). 45 published on Zenodo with DOIs + 6 drafts. TECS-L (20) + anima (10) + SEDI (21). [Browse online](https://need-singularity.github.io/papers/)
 <!-- SHARED:PROJECTS:END -->
 
 AI Energy Efficiency via Number Theory — 10 techniques derived from perfect number arithmetic that reduce computation, parameters, and training time. No knowledge of the underlying theory required to use them.
