@@ -1,7 +1,7 @@
 # Energy Efficiency
 
 ## Project Overview
-10 AI energy reduction techniques derived from perfect number arithmetic.
+16 AI energy reduction techniques + 3-layer engine derived from perfect number arithmetic.
 No knowledge of underlying theory required to use them.
 Extracted from TECS-L -- standalone technique library.
 
@@ -9,9 +9,10 @@ Extracted from TECS-L -- standalone technique library.
 Part of the TECS-L family. Mathematical foundation at https://github.com/need-singularity/TECS-L
 Atlas: https://need-singularity.github.io/TECS-L/atlas/
 
-## Techniques (10)
+## Techniques (16)
 ```
   techniques/
+    # Original (1-10)
     phi6simple.py          -- Cyclotomic activation (71% FLOPs reduction)
     hcn_dimensions.py      -- HCN tensor alignment (10-20% param reduction)
     phi_bottleneck.py      -- 4/3x FFN expansion (67% param reduction)
@@ -22,8 +23,22 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
     fft_mix_attention.py   -- FFT attention (3x faster, +0.55%)
     zetaln2_activation.py  -- zeta*ln(2) gated activation (71% FLOPs)
     egyptian_moe.py        -- 1/2+1/3+1/6=1 expert routing
+    # New (11-16) — N6 Inevitability Engine
+    dedekind_head.py       -- Dedekind head pruning (psi(6)=sigma(6)=12)
+    jordan_leech_moe.py    -- J_2(6)=24 expert capacity bound
+    mobius_sparse.py       -- Squarefree gradient topology (mu(6)=1)
+    carmichael_lr.py       -- lambda(6)=2 cycle LR schedule
+    boltzmann_gate.py      -- 1/e activation sparsity gate (63% sparse)
+    mertens_dropout.py     -- ln(4/3) dropout rate (no search needed)
+  engine/
+    thermodynamic_frame.py -- R(n) reversibility framework
+    leech24_surface.py     -- 24-dim energy surface (Leech lattice)
+    emergent_n6_trainer.py -- Self-converging architecture
+    phi_efficiency_bridge.py -- Phi*FLOPs conjecture
+    sedi_training_monitor.py -- SEDI 4-lens training diagnostic
+    anima_tension_loss.py  -- PureField dual-engine meta-loss
   experiments/
-    8 extended experiment files
+    12 extended experiment files (8 original + 4 new)
 ```
 
 ## Quick Run
@@ -44,6 +59,10 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian MoE routing:     1/2+1/3+1/6=1 expert allocation
   phi bottleneck:           67% parameter reduction
   Entropy early stopping:   33% training time saved
+  Dedekind head pruning:    ~25% attention parameter reduction
+  Boltzmann gate:           63% activation sparsity
+  Mertens dropout:          p=0.288 (no hyperparameter search)
+  Emergent convergence:     random init -> n=6 self-organization
 ```
 
 ## Background Execution
