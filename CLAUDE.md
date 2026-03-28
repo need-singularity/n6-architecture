@@ -30,6 +30,8 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
     carmichael_lr.py       -- lambda(6)=2 cycle LR schedule
     boltzmann_gate.py      -- 1/e activation sparsity gate (63% sparse)
     mertens_dropout.py     -- ln(4/3) dropout rate (no search needed)
+  docs/chip-architecture/
+    README.md              -- N6 chip design (28 hypotheses, H-CHIP-1~28)
   engine/
     thermodynamic_frame.py -- R(n) reversibility framework
     leech24_surface.py     -- 24-dim energy surface (Leech lattice)

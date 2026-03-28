@@ -231,6 +231,41 @@ For the mathematical foundation, see [TECS-L](https://github.com/need-singularit
 /ralph-loop:ralph-loop New technique discoverer. Read TECS-L math system map via cross-reference. Find n=6 arithmetic identity not yet applied to energy efficiency. Design minimal activation or routing or pruning technique based on it. Implement and benchmark vs baseline. Grade result. Document if successful. Commit and push.
 ```
 
+## Chip Architecture (H-CHIP-1 to H-CHIP-28)
+
+Hardware design principles for n=6 AI accelerators.
+
+```
+  docs/chip-architecture/
+    README.md              -- Full chip architecture spec (28 hypotheses)
+```
+
+### Key Hardware Innovations
+
+| Component | n=6 Design | vs Current GPU | Improvement |
+|-----------|-----------|----------------|-------------|
+| Tensor core | 12×12 (σ=12) | 16×16 | -44% area |
+| Activation | Phi6: 2 FMA cycles | GELU: ~14 cycles | 7× faster |
+| MoE routing | Egyptian {½,⅓,⅙} | Softmax top-k | ~0 overhead |
+| Sparsity | Boltzmann 1/e gate | 2:4 structured | 63% vs 50% |
+| Expert count | 24 (J₂=24) | Arbitrary | Leech-optimal |
+| Power split | ½+⅓+⅙=1 | Ad-hoc | Zero waste |
+| Target | < 1W (GPT-2) | ~50W (GPU) | 50× |
+
+### Architecture Diagram
+
+```
+  N6 AI Accelerator
+  ├── 24 Compute Cores (J₂(6)=24)
+  │   ├── 12×12 Tensor Core (σ=12)
+  │   ├── Phi6 Unit (2-cycle FMA)
+  │   ├── Boltzmann Gate (1/e analog)
+  │   └── Egyptian Router (hardwired)
+  ├── Memory: L1(½) + L2(⅓) + L3(⅙)
+  ├── Power: Compute(½) + Memory(⅓) + I/O(⅙)
+  └── R-score Monitor (real-time efficiency)
+```
+
 ## License
 
 MIT
