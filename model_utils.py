@@ -28,6 +28,17 @@ SIGMA_INV = 2    # sigma_{-1}(6)
 DIVISOR_RECIPROCALS = [1/2, 1/3, 1/6]  # sum=1, probability distribution
 H_TARGET = sum(-p * math.log(p) for p in DIVISOR_RECIPROCALS)  # Shannon entropy
 
+# ─── Extended n=6 arithmetic (techniques 11-16) ───
+DEDEKIND_PSI = 12       # psi(6) = 6 * prod(1 + 1/p for p|6) = 6*(3/2)*(4/3) = 12
+JORDAN_J2 = 24          # J_2(6) = 6^2 * prod(1 - 1/p^2 for p|6) = 36*(3/4)*(8/9) = 24
+MOBIUS_MU = 1            # mu(6) = (-1)^2 = 1 (squarefree, 2 prime factors)
+CARMICHAEL_LAMBDA = 2    # lambda(6) = lcm(lambda(2), lambda(3)) = lcm(1,2) = 2
+GOLDEN_ZONE_CENTER = 1.0 / math.e   # 1/e ~ 0.3679
+GOLDEN_ZONE_WIDTH = math.log(4/3)    # ln(4/3) ~ 0.2877
+SOPFR = 5               # sum of prime factors with repetition: 2+3 = 5
+RADICAL = 6              # rad(6) = 2*3 = 6
+LEECH_DIM = SIGMA * PHI  # 12*2 = 24
+
 
 # ─────────────────────────────────────────
 # Expert
