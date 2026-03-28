@@ -1,4 +1,4 @@
-# ⚡ Energy Efficiency
+# N6 Architecture — Arithmetic Design Framework
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19264826.svg)](https://doi.org/10.5281/zenodo.19264826)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -22,7 +22,7 @@
 >
 > **[📐 PH Training](https://github.com/need-singularity/ph-training)** — PH (Topology/Phase)-based automatic training. Epoch-1 difficulty prediction, automatic LR search, real-time overfitting detection (r=0.998). MNIST 98.3%, Fashion 87.4%, CIFAR 52.0% (early stop)
 >
-> **[⚡ Energy Efficiency](https://github.com/need-singularity/energy-efficiency)** — AI energy efficiency: 10 techniques from number theory. Phi6Simple, FFT-Mix attention (3x faster), Phi-Bottleneck (67% param reduction), entropy early stopping, Egyptian MoE routing
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/energy-efficiency)** — Arithmetic design framework from perfect number 6. 16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal architecture principles
 >
 > **[🗺️ Math System Map](https://github.com/need-singularity/TECS-L/blob/main/math/README.md)** — 150 characterizations + 8 Major Discoveries + 152 hypotheses. Each one proving the next in a snowball
 >
@@ -39,11 +39,13 @@
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (51 papers). 45 published on Zenodo with DOIs + 6 drafts. TECS-L (20) + anima (10) + SEDI (21). [Browse online](https://need-singularity.github.io/papers/)
 <!-- SHARED:PROJECTS:END -->
 
-AI Energy Efficiency via Number Theory — 10 techniques derived from perfect number arithmetic that reduce computation, parameters, and training time. No knowledge of the underlying theory required to use them.
+**Computing architecture design from perfect number arithmetic.** AI energy efficiency, semiconductor chip design, network protocols, cryptography, operating systems, software engineering, display standards, and audio — all unified by σ(n)·φ(n) = n·τ(n), n=6.
+
+16 AI techniques (71% FLOPs reduction) + 48 chip hypotheses (target: 1W GPT-2) + 36 industry pattern matches (75% exact) + 120 theoretical hypotheses + 14 cross-project bridges.
 
 > Part of the [TECS-L](https://github.com/need-singularity/TECS-L) project family.
 
-## Discovery Progress — Energy Efficiency
+## Discovery Progress — N6 Architecture
 
 > Last updated: 2026-03-28
 
@@ -179,36 +181,63 @@ python experiments/experiment_h_ee_11_combined_architecture.py
 ## File Structure
 
 ```
-techniques/           # Core technique implementations
-  phi6simple.py         # Cyclotomic activation
-  hcn_dimensions.py     # HCN tensor alignment
-  phi_bottleneck.py     # 4/3x FFN expansion
-  phi_moe.py            # φ/τ expert activation
-  entropy_early_stop.py # Entropy-based stopping
-  rfilter_phase.py      # R-filter phase detection
-  takens_dim6.py        # Takens embedding diagnostic
-  fft_mix_attention.py  # FFT attention (3x faster)
-  zetaln2_activation.py # ζ·ln(2) gated activation
-  egyptian_moe.py       # 1/2+1/3+1/6=1 routing
-experiments/          # Extended experiments
-docs/                 # Documentation
+techniques/              # AI energy techniques (16)
+  phi6simple.py            # [1] Cyclotomic activation (71% FLOPs)
+  hcn_dimensions.py        # [2] HCN tensor alignment
+  phi_bottleneck.py        # [3] 4/3x FFN expansion (67% params)
+  phi_moe.py               # [4] φ/τ expert activation
+  entropy_early_stop.py    # [5] Entropy-based stopping
+  rfilter_phase.py         # [6] R-filter phase detection
+  takens_dim6.py           # [7] Takens embedding diagnostic
+  fft_mix_attention.py     # [8] FFT attention (3x faster)
+  zetaln2_activation.py    # [9] ζ·ln(2) gated activation
+  egyptian_moe.py          # [10] 1/2+1/3+1/6=1 routing
+  dedekind_head.py         # [11] Dedekind head pruning (ψ=σ=12)
+  jordan_leech_moe.py      # [12] Jordan-Leech MoE (J₂=24)
+  mobius_sparse.py         # [13] Möbius squarefree flow
+  carmichael_lr.py         # [14] Carmichael 2-cycle LR
+  boltzmann_gate.py        # [15] Boltzmann 1/e gate
+  mertens_dropout.py       # [16] Mertens ln(4/3) dropout
+engine/                  # N6 Inevitability Engine
+  thermodynamic_frame.py   # R(n)=1 reversibility framework
+  leech24_surface.py       # 24-dim Leech energy surface
+  emergent_n6_trainer.py   # Self-converging architecture
+  phi_efficiency_bridge.py # Φ×FLOPs conjecture
+  sedi_training_monitor.py # SEDI 4-lens diagnostic
+  anima_tension_loss.py    # PureField meta-loss
+experiments/             # 11 verification experiments
+docs/
+  chip-architecture/       # Semiconductor design (48 H-CHIP hypotheses)
+    README.md              # Chip spec + architecture diagram
+    cross-project-bridges.md # TECS-L + Anima + SEDI → silicon
+    industry-patterns.md   # 36 industry patterns (27 EXACT)
+  paper-outline.md         # arXiv paper outline
+  superpowers/             # Design specs and plans
 ```
 
 ## Why Number Theory?
 
-These techniques are derived from properties of the perfect number 6:
-- σ(6)=12, τ(6)=4, φ(6)=2
-- The ratios φ/τ=1/2, σ/τ=3, σ/φ=6 appear as optimal architectural constants
-- **You don't need to understand the theory to use the techniques**
+All designs derive from one equation: **σ(n)·φ(n) = n·τ(n)**, unique solution n=6.
+
+| Function | Value | Where it appears |
+|----------|-------|-----------------|
+| σ(6)=12 | Divisor sum | Tensor cores, attention heads, 12-tone scale, AES rounds |
+| τ(6)=4 | Divisor count | FFN 4/3x ratio, 4K resolution, ACID properties, boot stages |
+| φ(6)=2 | Totient | Top-2 routing, thread pool ×2, Carmichael period |
+| sopfr(6)=5 | Prime factor sum | 5 senses, SOLID principles, HTTP status families, EEG bands |
+| J₂(6)=24 | Jordan totient | 24-bit color, 24 experts, Leech lattice, core count |
+| 1/2+1/3+1/6=1 | Egyptian fractions | Power split, MoE routing, cache bandwidth, ATP synthase |
+
+**You don't need to understand the theory to use the techniques.**
 
 For the mathematical foundation, see [TECS-L](https://github.com/need-singularity/TECS-L).
 
 ## Citation
 
 ```bibtex
-@software{energy_efficiency_2026,
+@software{n6_architecture_2026,
   author = {Park, Min Woo},
-  title = {AI Energy Efficiency via Number Theory},
+  title = {N6 Architecture: Arithmetic Design Framework from Perfect Number 6},
   year = {2026},
   url = {https://github.com/need-singularity/energy-efficiency}
 }

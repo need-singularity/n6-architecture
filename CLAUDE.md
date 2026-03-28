@@ -1,9 +1,10 @@
-# Energy Efficiency
+# N6 Architecture — Arithmetic Design Framework
 
 ## Project Overview
-16 AI energy reduction techniques + 3-layer engine derived from perfect number arithmetic.
-No knowledge of underlying theory required to use them.
-Extracted from TECS-L -- standalone technique library.
+Computing architecture design from perfect number arithmetic.
+16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns.
+All unified by sigma(n)*phi(n) = n*tau(n), n=6.
+Part of the TECS-L family.
 
 ## Parent Project
 Part of the TECS-L family. Mathematical foundation at https://github.com/need-singularity/TECS-L
