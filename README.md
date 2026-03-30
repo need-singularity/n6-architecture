@@ -43,18 +43,21 @@
 
 ```
   sigma(n) * phi(n) = n * tau(n)    Unique non-trivial solution: n = 6
-  700+ hypotheses | 150 EXACT | 265 CLOSE | 5 Breakthrough Theorems | 24 domains
+  1000+ hypotheses | 130+ EXACT | 160+ CLOSE | 12 Breakthrough Theorems | 28 domains
 ```
 
 > Part of the [TECS-L](https://github.com/need-singularity/TECS-L) project family. | [Visuals & Details](docs/README-details.md) | [Atlas](docs/atlas-constants.md) | [Papers](docs/paper/)
 
-## Discovery Progress — 24 Domains, 700+ Hypotheses
+## Discovery Progress — 28 Domains, 1000+ Hypotheses
 
 ```
   ╔══════════════════════════════════════════════════════════════════════════════╗
   ║  N6 ARCHITECTURE — ALL-DIRECTION DISCOVERY MAP                             ║
-  ║  700+ hypotheses │ 150 EXACT │ 265 CLOSE │ 44% confirmed │ 24 domains     ║
+  ║  1000+ hypotheses │ 130+ EXACT │ 160+ CLOSE │ 12 BTs │ 28 domains        ║
   ╠══════════════════════════════════════════════════════════════════════════════╣
+  ║                                                                            ║
+  ║  ◆ PURE MATHEMATICS                                                       ║
+  ║  pure-mathematics    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░  90%  ζ(2)=π²/6, Golay,Leech ║
   ║                                                                            ║
   ║  ◆ SOFTWARE & CHIP                                                        ║
   ║  chip-architecture   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░  85%  RISC-V=6, Apple=EF     ║
@@ -78,9 +81,12 @@
   ║  ai-efficiency       ▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░  55%  Φ₆=71%FLOPs, FFT=3x   ║
   ║  learning-algorithm  ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  47%  Φ₆ activation, 1/e     ║
   ║                                                                            ║
-  ║  ◆ PHYSICAL AI                                                            ║
+  ║  ◆ PHYSICAL AI & NATURAL SCIENCE                                          ║
   ║  robotics            ▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░  56%  6DOF=SE(3), hexapod    ║
   ║  plasma-physics      ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░  53%  KSTAR, MHD, q=1       ║
+  ║  cosmology-particle  ▓▓▓▓▓▓▓▓░░░░░░░░░░░░  40%  quarks=6, H₀=73=σn+μ  ║
+  ║  biology             ▓▓▓▓▓▓▓▓░░░░░░░░░░░░  38%  64codons=τ³, C₆H₁₂O₆  ║
+  ║  display-audio       ▓▓▓▓▓▓░░░░░░░░░░░░░░  33%  24bit=J₂, 12 semitones ║
   ║                                                                            ║
   ║  ◆ PHYSICS (independently verified, strictest grading)                    ║
   ║  superconductor      ▓▓▓▓▓▓▓░░░░░░░░░░░░░  34%  Cooper=φ, BCS=σ        ║
@@ -89,30 +95,28 @@
   ║  SC-magnet           ▓▓▓▓▓▓░░░░░░░░░░░░░░  29%  CICC=6, TF=3n         ║
   ║                                                                            ║
   ║  ────────────────────────────────────────────────────────────────────      ║
-  ║  GLOBAL              ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  44%  415/944 matched        ║
+  ║  GLOBAL              ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  44%  28 domains matched     ║
   ║  ════════════════════════════════════════════════════════════════════      ║
   ║                                                                            ║
-  ║  ★ Top EXACT:                                                             ║
-  ║    BT-5  q=1 = 1/2+1/3+1/6 = perfect number ≡ tokamak stability          ║
-  ║    Golay [24,12,8] = [J₂, σ, σ-τ] — triple perfect code match            ║
-  ║    Color [[6,4,2]] = [n, τ, φ]    — quantum error correction              ║
-  ║    6→12→24 pulse chain = n→σ→J₂   — power electronics standard            ║
-  ║    Apple M-series 50:33:17         — Egyptian fraction in silicon          ║
-  ║    Landauer kT·ln(2) = kT·ln(φ)   — thermodynamics ↔ information          ║
-  ║    Bott periodicity 8 = σ-τ        — topological K-theory                  ║
+  ║  ★ Top EXACT (12 Breakthrough Theorems):                                  ║
+  ║    BT-5   q=1 = 1/2+1/3+1/6 = perfect number ≡ tokamak stability ⭐⭐⭐  ║
+  ║    BT-6   Golay [24,12,8] = [J₂,σ,σ-τ] — both perfect codes     ⭐⭐⭐  ║
+  ║    BT-7   Egyptian 1/2+1/3+1/6 = 1 — 6 independent domains       ⭐⭐   ║
+  ║    BT-8   6→12→24 pulse chain = n→σ→J₂                            ⭐⭐   ║
+  ║    BT-10  Landauer kT·ln(2) = kT·ln(φ) — info ↔ thermo           ⭐⭐   ║
+  ║    BT-12  Hamming [7,4,3] = [σ-sopfr,τ,n/φ] — triple bridge      ⭐⭐   ║
+  ║    ζ(2)=π²/6, 64 codons=τ³, m_p/m_e=6π⁵, Apple M1=Egyptian              ║
   ║                                                                            ║
   ╚══════════════════════════════════════════════════════════════════════════════╝
-
-  Physics 29-34% = strictest independent verification.
-  Software 45-85% = engineering standards are exact by definition.
-  Both confirm: n=6 is structural, not random.
 ```
 
 ### Domain Links
 
 | Category | Domains |
 |----------|---------|
+| **Mathematics** | [pure-mathematics](docs/pure-mathematics/) &#183; [breakthrough theorems](docs/breakthrough-theorems.md) |
 | **Physics** | [superconductor](docs/superconductor/) &#183; [fusion](docs/fusion/) &#183; [tokamak](docs/tokamak-structure/) &#183; [SC-magnet](docs/superconducting-magnet/) &#183; [plasma](docs/plasma-physics/) |
+| **Natural Science** | [cosmology-particle](docs/cosmology-particle/) &#183; [biology](docs/biology/) &#183; [display-audio](docs/display-audio/) |
 | **Computing** | [AI efficiency](docs/ai-efficiency/) &#183; [chip](docs/chip-architecture/) &#183; [quantum](docs/quantum-computing/) &#183; [compiler-OS](docs/compiler-os/) &#183; [PL](docs/programming-language/) &#183; [software](docs/software-design/) |
 | **Energy** | [generation](docs/energy-generation/) &#183; [grid](docs/power-grid/) &#183; [battery](docs/battery-storage/) &#183; [thermal](docs/thermal-management/) |
 | **Infrastructure** | [crypto](docs/cryptography/) &#183; [network](docs/network-protocol/) &#183; [blockchain](docs/blockchain/) |

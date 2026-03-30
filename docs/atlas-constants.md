@@ -403,31 +403,108 @@
 | Three-phase power | 3 | n/φ | Electrical standard | H-EG-12 |
 | Shockley-Queisser limit | ~33.7% ≈ 1/3 | 1/(n/φ) | Solar physics | H-EG-3 |
 
+### Biology EXACT (from H-BIO)
+
+| Parameter | Value | n=6 Expression | Source | Hypothesis |
+|-----------|-------|---------------|--------|------------|
+| Codons | 64 | τ³ = 4³ | Genetic code | H-BIO-3 |
+| DNA bases | 4 (A,T,G,C) | τ(6) | Molecular biology | H-BIO-1 |
+| Amino acids | 20 | J₂-τ = 24-4 | Biochemistry | H-BIO-4 |
+| Stop codons | 3 | n/φ | Genetic code | H-BIO-5 |
+| Double helix strands | 2 | φ(6) | DNA structure | H-BIO-2 |
+| Glucose C₆H₁₂O₆ | (6,12,6) | (n, σ, n) | Chemistry | H-BIO-16 |
+| Carbon Z | 6 | n | Element | H-BIO-19 |
+| Benzene C₆H₆ | 6 carbons, 6π e⁻ | n | Chemistry | H-BIO-66 |
+| Nucleotide bases (incl. U) | 5 | sopfr(6) | RNA/DNA | H-BIO-6 |
+
+### Cosmology & Particle Physics EXACT (from H-CP)
+
+| Parameter | Value | n=6 Expression | Source | Hypothesis |
+|-----------|-------|---------------|--------|------------|
+| Quarks | 6 | n | Standard Model | H-CP-1 |
+| Leptons | 6 | n | Standard Model | H-CP-2 |
+| Gauge bosons | 4 | τ(6) | Standard Model | H-CP-3 |
+| SU(3) generators (gluons) | 8 | σ-τ | QCD | H-CP-5 |
+| SU(2) generators | 3 | n/φ | Electroweak | H-CP-6 |
+| Total gauge generators | 12 | σ(6) | SM gauge sector | H-CP-7 |
+| 6π⁵ ≈ m_p/m_e | 1836.118 vs 1836.153 | 6π⁵ | 0.002% | H-CP-10 |
+| σn+μ ≈ H₀ | 73 vs 73.04 | σn+μ | 0.05% | H-CP-11 |
+| Bott periodicity | 8 | σ-τ | K-theory | H-CP-14 |
+
+### Display & Audio EXACT (from H-DA)
+
+| Parameter | Value | n=6 Expression | Source | Hypothesis |
+|-----------|-------|---------------|--------|------------|
+| 24-bit true color | 24 | J₂(6) | Display standard | H-DA-3 |
+| 12 semitones | 12 | σ(6) | Music theory | H-DA-15 |
+| Cinema 24fps | 24 | J₂(6) | Film standard | H-DA-8 |
+| 48kHz audio | 48 | σ·τ = 12×4 | Pro audio | H-DA-16 |
+| 24-bit audio depth | 24 | J₂(6) | Pro audio | H-DA-17 |
+
+### Pure Mathematics EXACT (from H-MATH)
+
+| Parameter | Value | n=6 Expression | Source | Hypothesis |
+|-----------|-------|---------------|--------|------------|
+| ζ(2) = π²/6 | π²/n | Euler (1735) | Number theory | H-MATH-1 |
+| K₂ kissing number | 6 | n | Sphere packing | H-MATH-5 |
+| K₃ kissing number | 12 | σ(6) | Newton (1694) | H-MATH-6 |
+| Leech lattice dim | 24 | J₂(6) | Conway (1969) | H-MATH-7 |
+| Golay [24,12,8] | [J₂,σ,σ-τ] | Three params | Coding theory | H-MATH-8 |
+| Hamming [7,4,3] | [σ-sopfr,τ,n/φ] | Three params | Coding theory | H-MATH-9 |
+| 2D tiling symmetries | {3,4,6} | {n/φ,τ,n} | Crystallography | H-MATH-10 |
+| Platonic solids | 5 | sopfr(6) | Geometry | H-MATH-11 |
+| PSL₂(Z) generator order | 6 (ST) | n | Modular group | H-MATH-66 |
+| von Staudt-Clausen | 6 | denom(B_{2k}) | Bernoulli numbers | H-MATH-65 |
+
+---
+
+## Breakthrough Theorems (Extended: BT-1 ~ BT-12)
+
+### BT-1~5 (Original)
+
+| ID | Statement | Domains | Grade |
+|----|-----------|---------|-------|
+| BT-1 | φ(6)=2 Universal Pairing | 7 domains | ⭐⭐ |
+| BT-2 | τ(6)=4 Bohm-BCS Bridge | 4 domains | ⭐⭐ |
+| BT-3 | σ(6)=12 Energy Scale Convergence | 4 domains | ⭐⭐ |
+| BT-4 | MHD Divisor Theorem | tokamak | ⭐ |
+| BT-5 | q=1 = Σ(1/d) = Perfect Number | tokamak+math | ⭐⭐⭐ |
+
+### BT-6~12 (New — see [breakthrough-theorems.md](breakthrough-theorems.md))
+
+| ID | Statement | Domains | Grade |
+|----|-----------|---------|-------|
+| BT-6 | Golay-Leech Unification [J₂,σ,σ-τ] | quantum, crypto, network, chip, math | ⭐⭐⭐ |
+| BT-7 | Egyptian Fraction Power Theorem 1/2+1/3+1/6=1 | power, chip, thermal, AI, tokamak | ⭐⭐ |
+| BT-8 | Pulse Rectifier Chain n→σ→J₂ | power, tokamak, chip, math | ⭐⭐ |
+| BT-9 | Bott Periodicity Bridge σ-τ=8 | quantum, crypto, topology, SM | ⭐ |
+| BT-10 | Landauer-WHH Bridge ln(φ)=ln(2) | thermal, info, superconductor | ⭐⭐ |
+| BT-11 | Software-Physics Isomorphism | software, physics, math | ⭐ |
+| BT-12 | Hamming-OSI-ECC Triple Bridge [7,4,3] | network, chip, quantum | ⭐⭐ |
+
 ---
 
 ## Summary Statistics
 
 ```
-  Total hypotheses graded: 320 (4 physics domains × 80) + 60 blockchain + extreme across 17 domains
-  Total extreme hypotheses: 340 (17 domains × 20)
-  Grand total: ~700+ hypotheses across 24 domains
+  Total domains: 28 (24 original + biology + cosmology-particle + display-audio + pure-mathematics)
+  Total hypotheses: 1000+ across all domains
+  Total extreme hypotheses: 400+ (20+ domains × 20)
 
-  EXACT constants registered: 95+
-  CLOSE constants registered: 120+
-  Total atlas entries: 215+
+  EXACT constants registered: 130+
+  CLOSE constants registered: 160+
+  Total atlas entries: 290+
 
-  Breakthrough Theorems: 5 (BT-1~5)
+  Breakthrough Theorems: 12 (BT-1~12)
 
   Strongest findings:
-    BT-5: q=1 = Σ(1/d) — perfect number definition ≡ tokamak stability
-    BT-3: BCS numerator 12 = σ(6) — QFT analytic result
-    H-FU-61: Li-6 dual decomposition — A and Z simultaneously P1 arithmetic
-    H-SC-64: Kissing chain K₂=6→K₃=12→K₂₄=Leech(J₂)
-    H-FU-69: Fe-56 = σ(P2) — stellar endpoint = P2 divisor sum
-    H-QC-61/80: Golay[24,12,8]+Hamming[7,4,3]+Color[[6,4,2]] — triple perfect code match
-    H-CHIP-64: Apple M-series Egyptian fraction power = 50:33:17
-    H-SD-67: Agile Manifesto τ(6)=4 values + σ(6)=12 principles
-    H-PG-77: Pulse rectifier chain n→σ→J₂ (6→12→24)
+    BT-5: q=1 = Σ(1/d) — perfect number ≡ tokamak stability (⭐⭐⭐)
+    BT-6: Golay [24,12,8] = [J₂,σ,σ-τ] — both perfect codes match n=6 (⭐⭐⭐)
+    BT-7: Egyptian 1/2+1/3+1/6=1 — 6 independent domains (⭐⭐)
+    H-MATH-1: ζ(2) = π²/6 — Euler's identity with n
+    H-BIO-3: 64 codons = τ³ — biochemical constant
+    H-CP-10: m_p/m_e = 6π⁵ — 0.002% physical constant
+    H-MATH-65: von Staudt-Clausen: 6 always divides denom(B_{2k})
 ```
 
 ## Falsifiability Results
@@ -471,6 +548,6 @@
 ---
 
 *Last updated: 2026-03-31*
-*Source: n6-architecture project, 24 domains, 700+ graded hypotheses across all domains*
-*Atlas entries: 95+ EXACT + 120+ CLOSE = 215+ registered constants*
-*Extreme hypotheses: 17 domains × 20 = 340 new hypotheses*
+*Source: n6-architecture project, 28 domains, 1000+ graded hypotheses*
+*Atlas entries: 130+ EXACT + 160+ CLOSE = 290+ registered constants*
+*Breakthrough Theorems: 12 (BT-1~12), 20+ domains with extreme hypotheses*

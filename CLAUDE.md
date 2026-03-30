@@ -57,27 +57,30 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
 Full proof: docs/theorem-r1-uniqueness.md
 Falsifiability: z=0.74 (numerical matching NOT significant vs random)
 
-## Docs Structure (24 domains) — ALL have extreme-hypotheses.md
+## Docs Structure (28 domains) — ALL have extreme-hypotheses.md
 ```
   # Physics (4 domains × 80 hypotheses each + extreme)
-  superconductor/ (80 H-SC + extreme)
-  fusion/ (80 H-FU + extreme)
-  superconducting-magnet/ (80 H-SM + extreme)
-  tokamak-structure/ (80 H-TK + extreme)
+  superconductor/ fusion/ superconducting-magnet/ tokamak-structure/
   # Computing (all with hypotheses + extreme)
   ai-efficiency/ chip-architecture/ quantum-computing/
   compiler-os/ programming-language/ software-design/
   # Energy (all with hypotheses + extreme)
   energy-generation/ power-grid/ battery-storage/ thermal-management/
-  # Physical AI (all with hypotheses + extreme)
+  # Physical AI
   robotics/ learning-algorithm/
-  # Infrastructure (all with hypotheses + extreme)
-  blockchain/ (60 H-BC + verification + extreme)
-  network-protocol/ cryptography/
+  # Infrastructure
+  blockchain/ network-protocol/ cryptography/
+  # Natural Science (NEW — DFS expansion)
+  biology/ (30 H-BIO + verification + extreme)
+  cosmology-particle/ (30 H-CP + verification + extreme)
+  display-audio/ (30 H-DA + verification + extreme)
+  pure-mathematics/ (30 H-MATH + extreme)
   # Science
-  plasma-physics/ (19 files — most active domain)
-  paper/ (3 arXiv drafts: AI efficiency + cross-domain + tokamak physics)
-  # Total: 700+ hypotheses, 95+ EXACT, 215+ atlas entries
+  plasma-physics/ (20+ files — most active domain)
+  paper/ (3 arXiv drafts)
+  # Cross-domain
+  breakthrough-theorems.md (BT-1~12, 12 theorems spanning 3-7 domains each)
+  # Total: 1000+ hypotheses, 130+ EXACT, 290+ atlas entries, 12 BTs
 ```
 
 ## Rust Tools
