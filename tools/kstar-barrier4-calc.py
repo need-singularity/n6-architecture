@@ -110,41 +110,50 @@ print("  ═══ 4. Flux Balance → 운전 시간 ═══\n")
 
 CS_flux = 14.0  # Wb (available)
 
-# V_loop = R_plasma × I_p (resistive 성분)
-# R_plasma ≈ η_Spitzer / (σ_geometry)
-# 근사: V_loop ∝ (1 - f_ni) × V_loop_fully_ohmic
+# 수정된 V_loop 계산:
+# KSTAR 실측 V_loop ≈ 0.03-0.05 V/s (fully ohmic, 300초 운전)
+# V_loop = V_resistive × (1 - f_ni)
+# V_resistive = CS_flux / τ_pulse_ohmic
+# KSTAR CS flux = 14 Wb, τ_pulse_ohmic ≈ 340초
+# → V_resistive ≈ 14/340 ≈ 0.041 V
 
-def calc_pulse_time(Ip, f_ni, R_plasma_uOhm=20.0):
-    V_loop_ohmic = R_plasma_uOhm * 1e-6 * Ip * 1e6  # V
-    V_loop = V_loop_ohmic * (1.0 - f_ni)
-    if V_loop < 1e-6:
+V_loop_ohmic = CS_flux / 340.0  # ≈ 0.041 V (KSTAR 실측 기반)
+
+def calc_pulse_time(Ip_ratio, f_ni):
+    """Ip_ratio: Ip/Ip_ref (전류 비율), f_ni: non-inductive fraction"""
+    # V_loop ∝ (1-f_ni) × Ip/Ip_ref (전류 비례)
+    V_loop = V_loop_ohmic * (1.0 - f_ni) * Ip_ratio
+    if V_loop < 1e-8:
         return float('inf'), V_loop
     tau = CS_flux / V_loop
     return tau, V_loop
 
 print(f"    CS flux = {CS_flux} Wb")
-print(f"    R_plasma ≈ 20 μΩ (10 keV H-mode)")
+print(f"    V_loop (fully ohmic, 0.6MA) ≈ {V_loop_ohmic:.4f} V")
+print(f"    (KSTAR 300초 운전에서 역산: 14Wb / 340s)")
 print()
-print(f"    {'시나리오':<40} {'Ip':>4} {'f_ni':>5} {'V_loop':>7} {'τ_pulse':>10}")
-print(f"    {'─'*72}")
+print(f"    {'시나리오':<40} {'Ip':>4} {'f_ni':>5} {'V_loop':>8} {'τ_pulse':>12}")
+print(f"    {'─'*76}")
 
 scenarios_flux = [
-    ("현재 (300초 운전)",           0.6, 0.50),
-    ("ITB + ECCD 2MW",             0.6, 0.65),
-    ("대안A: 저전류",               0.4, 0.50),
-    ("대안A: 저전류 + ITB",         0.4, 0.70),
-    ("대안A: 저전류 + ECH 4MW",     0.4, 0.80),
-    ("대안A+C: 최적화",             0.4, 0.88),
-    ("대안A+C: 강최적화",           0.4, 0.92),
-    ("목표: 완전 비유도",           0.4, 1.00),
+    ("현재 (300초 운전, 50% ohmic)",  1.0, 0.50),  # Ip_ratio=1.0 (0.6MA)
+    ("ITB + ECCD 2MW",               1.0, 0.65),
+    ("대안A: 저전류 0.4MA",           0.667, 0.50), # 0.4/0.6
+    ("대안A: 저전류 + ITB",           0.667, 0.70),
+    ("대안A: 저전류 + ECH 4MW",       0.667, 0.80),
+    ("대안A+C: 최적화",               0.667, 0.88),
+    ("대안A+C: 강최적화",             0.667, 0.92),
+    ("대안A+C: 극한",                 0.667, 0.95),
+    ("목표: 완전 비유도",             0.667, 1.00),
 ]
 
-for name, Ip, f_ni in scenarios_flux:
-    tau, Vl = calc_pulse_time(Ip, f_ni)
-    tau_str = f"{tau:.0f}초" if tau < 1e6 else "∞"
-    hours = tau / 3600 if tau < 1e6 else float('inf')
-    h_str = f"({hours:.1f}h)" if hours < 100 else "(∞)"
-    print(f"    {name:<40} {Ip:>3.1f}  {f_ni*100:>4.0f}%  {Vl:>6.2f}V  {tau_str:>8} {h_str}")
+for name, Ip_r, f_ni in scenarios_flux:
+    tau, Vl = calc_pulse_time(Ip_r, f_ni)
+    tau_str = f"{tau:.0f}초" if tau < 1e8 else "∞"
+    hours = tau / 3600 if tau < 1e8 else float('inf')
+    h_str = f"({hours:.1f}h)" if hours < 1000 else "(∞)"
+    Ip_actual = Ip_r * 0.6
+    print(f"    {name:<40} {Ip_actual:>3.1f}  {f_ni*100:>4.0f}%  {Vl:>7.4f}V  {tau_str:>8} {h_str}")
 
 # ═══ 5. 대안 경로 종합 비교 ═══
 print("\n  ═══ 5. 대안 경로 종합 비교 ═══\n")
@@ -154,21 +163,22 @@ print("    │ 경로   Ip   f_bs  f_eccd f_nbi  f_ni   τ_pulse   ECH필요 │
 print("    ├──────────────────────────────────────────────────────────────┤")
 
 paths = [
-    ("원안",    0.6, 0.50, 0.33, 0.17, 7.2),
-    ("A",       0.4, 0.50, 0.25, 0.15, 3.6),
-    ("A+최적",  0.4, 0.55, 0.25, 0.15, 3.6),
-    ("A+C",     0.4, 0.50, 0.20, 0.18, 2.9),
-    ("B(LHCD)", 0.4, 0.45, 0.15, 0.15, 2.2),
+    ("원안",    1.0,   0.50, 0.33, 0.17, 7.2),
+    ("A",       0.667, 0.45, 0.25, 0.15, 3.6),
+    ("A+최적",  0.667, 0.47, 0.25, 0.18, 3.6),
+    ("A+C",     0.667, 0.45, 0.20, 0.18, 2.9),
+    ("B(LHCD)", 0.667, 0.40, 0.15, 0.15, 2.2),
 ]
 
-for label, Ip, fbs, fec, fnbi, ech_needed in paths:
+for label, Ip_r, fbs, fec, fnbi, ech_needed in paths:
     f_ni = fbs + fec + fnbi
-    tau, Vl = calc_pulse_time(Ip, f_ni)
-    tau_str = f"{tau:.0f}s" if tau < 1e6 else "∞"
-    if tau < 1e6:
+    Ip_actual = Ip_r * 0.6
+    tau, Vl = calc_pulse_time(Ip_r, f_ni)
+    tau_str = f"{tau:.0f}s" if tau < 1e8 else "∞"
+    if tau < 1e8:
         tau_str = f"{tau/3600:.1f}h" if tau > 3600 else f"{tau:.0f}s"
     feasible = "✅" if ech_needed <= 4.0 else "△" if ech_needed <= 6.0 else "❌"
-    print(f"    │ {label:<7} {Ip:.1f}  {fbs*100:>4.0f}%  {fec*100:>4.0f}%   {fnbi*100:>3.0f}%   {f_ni*100:>3.0f}%  {tau_str:>8}  {ech_needed:.1f}MW {feasible}│")
+    print(f"    │ {label:<7} {Ip_actual:.1f}  {fbs*100:>4.0f}%  {fec*100:>4.0f}%   {fnbi*100:>3.0f}%   {f_ni*100:>3.0f}%  {tau_str:>8}  {ech_needed:.1f}MW {feasible}│")
 
 print("    └──────────────────────────────────────────────────────────────┘")
 
@@ -214,16 +224,16 @@ for C_bs in [0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70]:
 print("\n  ═══ 7. 최종 판정 ═══\n")
 
 # 경로 A+C 최적:
-best_Ip = 0.4
-best_fbs = 0.50  # reversed shear + ITB, C=0.60, β_p=2.5
+best_Ip_r = 0.667  # 0.4/0.6
+best_fbs = 0.47  # reversed shear + ITB (정밀 계산 반영: C=0.70, β_p=3.5 → 47%)
 best_feccd = 0.20  # ECH 3MW
 best_fnbi = 0.18   # NBI 8MW optimized
 best_fni = best_fbs + best_feccd + best_fnbi
-best_tau, best_Vl = calc_pulse_time(best_Ip, best_fni)
+best_tau, best_Vl = calc_pulse_time(best_Ip_r, best_fni)
 
 print(f"    최적 경로 (A+C):")
-print(f"      I_p = {best_Ip} MA (저전류 AT)")
-print(f"      f_bs = {best_fbs*100:.0f}% (reversed shear + ITB)")
+print(f"      I_p = {best_Ip_r * 0.6:.1f} MA (저전류 AT)")
+print(f"      f_bs = {best_fbs*100:.0f}% (reversed shear + ITB, C=0.70, β_p≈3.5)")
 print(f"      f_eccd = {best_feccd*100:.0f}% (ECH ~3MW)")
 print(f"      f_nbi = {best_fnbi*100:.0f}% (NBI 8MW)")
 print(f"      f_ni = {best_fni*100:.0f}%")
@@ -235,8 +245,10 @@ print(f"      ECH: 1 MW → 3-4 MW (3-4× 업그레이드)")
 print(f"      (원안의 7× 대비 크게 완화)")
 print()
 print(f"    K-DEMO 데이터 확보 충분 조건:")
-print(f"      τ_pulse > 3,600초 (1시간) → f_ni > {100*(1 - CS_flux/(20e-6 * best_Ip * 1e6 * 3600)):.0f}%")
-print(f"      τ_pulse > 10,000초 (2.8시간) → f_ni > 88%")
+f_ni_1h = 1 - CS_flux / (V_loop_ohmic * best_Ip_r * 3600)
+f_ni_3h = 1 - CS_flux / (V_loop_ohmic * best_Ip_r * 10800)
+print(f"      τ_pulse > 3,600초 (1시간) → f_ni > {f_ni_1h*100:.0f}%")
+print(f"      τ_pulse > 10,800초 (3시간) → f_ni > {f_ni_3h*100:.0f}%")
 print()
 
 # n=6 검증
