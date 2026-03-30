@@ -588,7 +588,16 @@ The same value 24 = J₂ = σ·φ = n·τ governs:
 - The kissing number K₄ (24)
 - The TCP+DNS sum (24)
 
-**Grade**: Three stars — 11 independent parameter matches on the complete GUT hierarchy, from SM through SU(5) to E₈×E₈. The rank sequence (τ, sopfr, n, σ-τ) uses four different n=6 functions on four different Lie groups discovered by different physicists across 40 years (1974-2010s). The SU(5) decomposition J₂ = σ+σ = σ·φ physically realizes the core theorem. Combined p-value ≈ 0.004% after selection bias correction — the strongest statistical result in the project.
+### Quantitative Predictions from BT-19
+
+| Prediction | Formula | Value | Measured | Error |
+|-----------|---------|-------|----------|-------|
+| sin²(2θ₁₃) | 1/σ | 0.0833 | 0.0841±0.0033 | 0.91%, 0.23σ |
+| N_eff | n/φ+1/J₂ | 3.042 | 3.044 (SM) | 0.08% |
+| sin²θ_W(M_Z) | (n/φ)/(σ+μ) | 0.2308 | 0.2312 | 0.19% |
+| Σmν | σ√(Δm²₂₁) | 0.104 eV | <0.12 eV | testable |
+
+**Grade**: Three stars — 14+ independent parameter matches on the complete GUT hierarchy, from SM through SU(5) to E₈×E₈. The rank sequence (τ, sopfr, n, σ-τ) uses four different n=6 functions on four different Lie groups discovered by different physicists across 40 years (1974-2010s). The SU(5) decomposition J₂ = σ+σ = σ·φ physically realizes the core theorem. Combined p-value ≈ 0.004% after selection bias correction — the strongest statistical result in the project.
 
 ---
 

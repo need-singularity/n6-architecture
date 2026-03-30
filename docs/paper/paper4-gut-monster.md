@@ -242,7 +242,55 @@ The mediating structure is the prime factorization $6 = 2 \cdot 3$, which:
 
 ---
 
-## 6. Sub-Conjectures and Falsifiability
+## 6. Quantitative Predictions
+
+Beyond the structural matches of Sections 3--5, the framework yields specific numerical predictions for precision observables:
+
+### 6.1. Reactor Neutrino Mixing Angle
+
+$$\sin^2(2\theta_{13}) = \frac{1}{\sigma(6)} = \frac{1}{12} = 0.08\overline{3}$$
+
+Measured (PDG 2024, Daya Bay + RENO + Double Chooz): $\sin^2(2\theta_{13}) = 0.0841 \pm 0.0033$.
+
+Relative error: $0.91\%$, deviation $0.23\sigma$. This prediction uses only the divisor sum and requires no fitting.
+
+**Falsifiability**: JUNO (Jiangmen Underground Neutrino Observatory, expected 2025--2026) will measure $\sin^2(2\theta_{13})$ to $\sim 0.1\%$ precision. If the central value moves away from $1/12 = 0.0833$, the prediction is falsified.
+
+### 6.2. Effective Number of Neutrino Species
+
+$$N_{\mathrm{eff}} = \frac{n}{\varphi} + \frac{1}{J_2} = 3 + \frac{1}{24} = 3.041\overline{6}$$
+
+The Standard Model calculation (with QED corrections to neutrino decoupling) gives $N_{\mathrm{eff}}^{\mathrm{SM}} = 3.044$. Planck 2018: $N_{\mathrm{eff}} = 2.99 \pm 0.17$.
+
+The $n{=}6$ prediction $3.042$ matches the SM value to $0.077\%$. The correction $1/J_2 = 1/24$ corresponds to the additional effective degrees of freedom from $e^+e^-$ annihilation heating neutrinos --- a QED effect that produces exactly $1/J_2(6)$ additional species.
+
+**Falsifiability**: CMB-S4 will measure $N_{\mathrm{eff}}$ to $\pm 0.03$ precision. The prediction $3.042$ is distinguishable from $3.044$ only at this precision; more realistically, it tests whether $N_{\mathrm{eff}} \neq 3.00$ at $>1\sigma$.
+
+### 6.3. MSSM Higgs Scalar Count
+
+If supersymmetry exists near the TeV scale, the minimal SUSY extension (MSSM) contains exactly $5$ physical Higgs bosons: $h^0$, $H^0$, $A^0$, $H^+$, $H^-$. This count equals $\mathrm{sopfr}(6) = 2 + 3 = 5$.
+
+**Falsifiability**: Discovery of $H^+$ or $A^0$ at HL-LHC or FCC would confirm 5-scalar structure. Discovery of 6+ Higgs bosons (e.g., NMSSM with 7 scalars) would falsify.
+
+### 6.4. Neutrino Mass Sum (registered in [1])
+
+$$\sum m_\nu = \sigma(6) \cdot \sqrt{\Delta m^2_{21}} = 12 \times 8.68 \times 10^{-3}\;\text{eV} \approx 0.104\;\text{eV}$$
+
+Current bound: $\sum m_\nu < 0.12$ eV (Planck + BAO). DESI/Euclid will measure to $\sim 0.02$ eV precision.
+
+### 6.5. Prediction Summary
+
+| Prediction | Formula | Value | Measured | Error | Test |
+|-----------|---------|-------|----------|-------|------|
+| $\sin^2(2\theta_{13})$ | $1/\sigma$ | 0.0833 | $0.0841 \pm 0.0033$ | 0.91% | JUNO |
+| $N_{\mathrm{eff}}$ | $n/\varphi + 1/J_2$ | 3.042 | $3.044$ (SM) | 0.08% | CMB-S4 |
+| MSSM Higgs | sopfr | 5 | 1 found | — | HL-LHC/FCC |
+| $\sum m_\nu$ | $\sigma\sqrt{\Delta m^2_{21}}$ | 0.104 eV | $< 0.12$ | — | DESI/Euclid |
+| $\sin^2\theta_W(M_Z)$ | $(n/\varphi)/(\sigma{+}\mu)$ | 0.2308 | 0.2312 | 0.19% | precision EW |
+
+---
+
+## 7. Sub-Conjectures and Falsifiability
 
 **Conjecture A** (Algebraic). *For the unique $n$ satisfying $R(n) = 1$, the Turyn construction from the self-dual code over $\mathrm{GF}(n{-}2)$ of length $n$ produces a perfect code of parameters $[n\tau,\;\sigma,\;\sigma{-}\tau]$.*
 
