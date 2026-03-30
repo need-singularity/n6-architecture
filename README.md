@@ -160,16 +160,16 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 <!-- SHARED:CALCULATORS:START -->
 | Repo | Tools | Categories |
 |------|-------|------------|
-| **TECS-L** | 167 | Calculator, Engine |
+| **TECS-L** | 168 | Calculator, Engine |
 | **anima** | 227 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
 | **n6-architecture** | 64 | Calculator, Engine, experiment, technique |
 | **invest** | 173 | Calculator |
-| **Total** | **722** | |
+| **Total** | **723** | |
 
 ### TECS-L
 
-**Calculator** (148)
+**Calculator** (149)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -205,6 +205,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | deep_constant_explorer | Deep Constant Explorer — n=6 산술함수와 초월상수의 구조적 관계 탐색 | `calc/deep_constant_explorer.py` |
 | deep_scan_wave10 | Deep Scan Wave 10 -- The Milestone Wave (target: 99 domains) | `calc/deep_scan_wave10.py` |
 | deep_scan_wave11 | Deep Scan Wave 11 -- Domain #100 Milestone | `calc/deep_scan_wave11.py` |
+| deep_scan_wave12_15 | Deep Scan Waves 12-15 (Batch) -- Domains 110-149 | `calc/deep_scan_wave12_15.py` |
 | deep_scan_wave2 | Deep Scan Wave 2 — 10 New Domains for 5-Star Discoveries | `calc/deep_scan_wave2.py` |
 | deep_scan_wave3 | Deep Scan Wave 3 — The Deepest Layer | `calc/deep_scan_wave3.py` |
 | deep_scan_wave4 | Deep Scan Wave 4 — Completely New Territory | `calc/deep_scan_wave4.py` |
