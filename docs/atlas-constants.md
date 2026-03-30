@@ -290,7 +290,7 @@
 
 ## New Domains — Computing & Infrastructure (Extreme Hypotheses)
 
-### Cryptography EXACT (from H-CR extreme)
+### Cryptography EXACT (from H-CR, consolidated)
 
 | Parameter | Value | n=6 Expression | Source | Hypothesis |
 |-----------|-------|---------------|--------|------------|
@@ -298,7 +298,13 @@
 | AES-256 key size | 256 bit | 2^(σ-τ) = 2^8 | NIST standard | H-CR-4 |
 | SHA-256 output | 256 bit | 2^(σ-τ) | NIST standard | H-CR-9 |
 | RSA-2048 key | 2048 bit | 2^(σ-μ) = 2^11 | NIST standard | H-CR-14 |
+| RSA public exponent | 65537 = F₄ | F_{τ(6)} (last Fermat prime) | PKCS#1/RFC 3110 | H-CR-17 |
+| BLS12-381 embedding degree | k = 12 | σ(6) | Pairing crypto standard | H-CR-36 |
+| BLS12 tower extension | [2,3,2] | [φ, n/φ, φ] palindrome | Field arithmetic | H-CR-77 |
+| ML-DSA-65 parameters | (k=6, l=5) | (n, sopfr) 2-param match | NIST PQC Level 3 | H-CR-39 |
+| TLS 1.3 cipher suites | 5 | sopfr(6) | RFC 8446 | H-NP-29 |
 | ChaCha20 rounds | 20 | J₂-τ = 24-4 | IETF RFC 8439 | H-CR-12 |
+| DRBG reseed interval | 2⁴⁸ | 2^(σ·τ) | NIST SP 800-90A | H-CR-42 |
 
 ### Blockchain EXACT (from H-BC)
 
@@ -356,19 +362,6 @@
 | PCIe doubling per gen | ×2 | φ(6) | PCIe spec | H-CHIP-68 |
 | GPU texture filter modes | 4 | τ(6) | DirectX/Vulkan | H-CHIP-76 |
 | AI chip precision tiers | 4 | τ(6) | H100/TPU/MI300 | H-CHIP-77 |
-
-### Cryptography EXACT (from H-CR)
-
-| Parameter | Value | n=6 Expression | Source | Hypothesis |
-|-----------|-------|---------------|--------|------------|
-| RSA public exponent | 65537 = F₄ | F_{τ(6)} (last Fermat prime) | PKCS#1/RFC 3110 | H-CR-17 |
-| BLS12-381 embedding degree | k = 12 | σ(6) | Pairing crypto standard | H-CR-36 |
-| BLS12 tower extension | [2,3,2] | [φ, n/φ, φ] palindrome | Field arithmetic | H-CR-77 |
-| ML-DSA-65 parameters | (k=6, l=5) | (n, sopfr) 2-param match | NIST PQC Level 3 | H-CR-39 |
-| TLS 1.3 cipher suites | 5 | sopfr(6) | RFC 8446 | H-NP-29 |
-| ChaCha20 rounds | 20 | J₂-τ = 24-4 | IETF RFC 8439 | H-CR-12 |
-| DRBG reseed interval | 2⁴⁸ | 2^(σ·τ) | NIST SP 800-90A | H-CR-42 |
-| RSA min key 2048 | 2¹¹ | 2^(σ-μ) | NIST SP 800-57 | H-NP-16 |
 
 ### Software Design EXACT (from H-SD extreme)
 
@@ -503,13 +496,8 @@
 | Parameter | Value | n=6 Expression | Source | Hypothesis |
 |-----------|-------|---------------|--------|------------|
 | Page table levels (x86-64) | 4 | τ(6) | OS architecture | H-COS-10 |
-| RISC-V instruction formats | 6 | n | ISA spec | H-COS-64 |
 | Page size | 4096 = 2^12 | 2^σ | Memory management | H-COS-72 |
-| DNS root servers | 13 | σ+μ | Internet | H-NP-5 |
-| TCP state machine | 11 states | σ-μ | RFC 793 | H-NP-13 |
 | OpenFlow 1.0 match fields | 12 | σ | SDN | H-NP-76 |
-| RSA public exponent | 65537 = F₄ | F_τ | Cryptography | H-CR-17 |
-| BLS12 tower degrees | [2,3,2] | [φ,n/φ,φ] | Pairing crypto | H-CR-77 |
 | PWM resolution (robotics) | 12-bit | σ(6) | Servo control | H-ROB-9 |
 | se(3) structure constants | 12 | σ(6) | Lie algebra | H-ROB-73 |
 | Python indentation | 4 spaces | τ(6) | PEP 8 | H-PL-5 |
@@ -633,9 +621,9 @@
   Total hypotheses: 1000+ across all domains (network-protocol: 30)
   Total extreme hypotheses: 400+ (20+ domains × 20)
 
-  EXACT constants registered: 160+
+  EXACT constants registered: 155+
   CLOSE constants registered: 140+
-  Total atlas entries: 300+ (registered rows)
+  Total atlas entries: 295+ (registered rows, duplicates consolidated)
 
   Breakthrough Theorems: 17 (BT-1~17)
     Three-star (⭐⭐⭐): BT-5, BT-6, BT-13, BT-15, BT-16
