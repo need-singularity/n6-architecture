@@ -160,16 +160,16 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 <!-- SHARED:CALCULATORS:START -->
 | Repo | Tools | Categories |
 |------|-------|------------|
-| **TECS-L** | 149 | Calculator, Engine |
+| **TECS-L** | 153 | Calculator, Engine |
 | **anima** | 225 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
 | **n6-architecture** | 64 | Calculator, Engine, experiment, technique |
-| **invest** | 115 | Calculator |
-| **Total** | **644** | |
+| **invest** | 155 | Calculator |
+| **Total** | **688** | |
 
 ### TECS-L
 
-**Calculator** (130)
+**Calculator** (134)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -224,6 +224,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | factorial_structure_prover | Factorial Structure Prover — proves 3! uniqueness in criticality | `calc/factorial_structure_prover.py` |
 | family_fdr_corrector | family_fdr_corrector.py -- Benjamini-Hochberg FDR correction across hypothesis f | `calc/family_fdr_corrector.py` |
 | fermion_mass_calculator | Fermion Mass Calculator — Mass predictions from perfect number arithmetic | `calc/fermion_mass_calculator.py` |
+| feynman_diagrams_n6 | Feynman Diagrams, Renormalization, and Standard Model — n=6 Connections | `calc/feynman_diagrams_n6.py` |
 | fusion_hypothesis_verifier | Nuclear Fusion Hypothesis Verifier — P1=6 arithmetic connections | `calc/fusion_hypothesis_verifier.py` |
 | fusion_plasma_sc_verifier | Fusion/Plasma/Superconductor/Magnet/Tokamak Hypothesis Verifier | `calc/fusion_plasma_sc_verifier.py` |
 | gate_formula_calculator | Gate Formula Calculator — Law 77 adaptive consciousness gate | `calc/gate_formula_calculator.py` |
@@ -243,6 +244,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | hypothesis_verifier | Hypothesis Verification Calculator | `calc/hypothesis_verifier.py` |
 | information_theory_n6 | Information Theory and Perfect Number 6 | `calc/information_theory_n6.py` |
 | isco_calculator | ISCO Calculator -- Innermost Stable Circular Orbit in General Relativity. | `calc/isco_calculator.py` |
+| knot_theory_n6 | Knot Theory and n=6 Arithmetic — Systematic verification | `calc/knot_theory_n6.py` |
 | langlands_perfect | Langlands-Perfect Number Connection Calculator | `calc/langlands_perfect.py` |
 | law79_freedom_degree | Law 79 Freedom Degree Calculator — Consciousness freedom = ln(2) | `calc/law79_freedom_degree.py` |
 | lie_algebra_calculator | Exceptional Lie Algebra Calculator — Compute all invariants from n=6 arithmetic | `calc/lie_algebra_calculator.py` |
@@ -253,6 +255,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `calc/nobel_scorer.py` |
 | p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `calc/paper_claim_verifier.py` |
+| pascal_perfect | Pascal's Triangle and Perfect Number 6 — Structural Analysis | `calc/pascal_perfect.py` |
 | perfect_chain_bridges | Perfect Number Chain Bridges — Complete inter-perfect-number connection analysis | `calc/perfect_chain_bridges.py` |
 | perfect_number_classifier | Perfect Number Classifier — Systematic classification of n=6 properties | `calc/perfect_number_classifier.py` |
 | perfect_number_generalizer | Perfect Number Generalizer — Test if formulas holding at n=6 generalize to n=28, | `calc/perfect_number_generalizer.py` |
@@ -288,6 +291,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | symmetric_group_s6 | Symmetric Group S_6 Uniqueness Calculator | `calc/symmetric_group_s6.py` |
 | tension_calculator | Tension Calculator — Predict accuracy/precognition/identity from tension values | `calc/tension_calculator.py` |
 | texas_sharpshooter_v2 | Texas Sharpshooter v2 -- Enhanced statistical validator for GZ campaign | `calc/texas_sharpshooter_v2.py` |
+| thermodynamics_n6 | Thermodynamics & Statistical Mechanics n=6 Calculator | `calc/thermodynamics_n6.py` |
 | theta_perfect_pattern | Theta-Perfect Pattern Verifier | `calc/theta_perfect_pattern.py` |
 | topological_optics | Topological Lens and Telescope Calculator | `calc/topological_optics.py` |
 | unit_dependence_tester | unit_dependence_tester.py -- Check whether a numerical match between a formula | `calc/unit_dependence_tester.py` |
@@ -786,7 +790,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 
 ### invest
 
-**Calculator** (115)
+**Calculator** (155)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -797,16 +801,24 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | backtest_turbo | Turbo Backtest Engine — vectorized numpy, zero Python loops. | `backend/backend/calc/backtest_turbo.py` |
 | backtest_ultra | Ultra Backtest Engine — absolute speed limit. | `backend/backend/calc/backtest_ultra.py` |
 | base_dependence_checker | base_dependence_checker.py -- Tests if a numerical pattern is base-10 specific o | `backend/backend/tecs_calc/base_dependence_checker.py` |
+| bernoulli_perfect_exotic | Bernoulli-Perfect-Exotic Sphere Connection Calculator | `backend/backend/tecs_calc/bernoulli_perfect_exotic.py` |
+| bott_periodicity_p6 | Bott Periodicity and P1=6 Connection Explorer | `backend/backend/tecs_calc/bott_periodicity_p6.py` |
+| bridge_puremath_verifier | 순수수학 ↔ CX/PHYSICS 연결 수치 검증기 | `backend/backend/tecs_calc/bridge_puremath_verifier.py` |
 | bridge_ratio_analyzer | Bridge/Independent Ratio Analyzer — H-CX-461/462 | `backend/backend/tecs_calc/bridge_ratio_analyzer.py` |
+| bridge_ratio_uniqueness | Bridge Ratio Uniqueness Prover | `backend/backend/tecs_calc/bridge_ratio_uniqueness.py` |
+| calabi_yau_n6 | Calabi-Yau Threefold and Mirror Symmetry — n=6 Structure Verifier | `backend/backend/tecs_calc/calabi_yau_n6.py` |
 | calibration_analyzer | Calibration Analyzer — softmax ECE vs tension-based ECE comparison | `backend/backend/tecs_calc/calibration_analyzer.py` |
+| catalan_combinatorial_n6 | Catalan & Combinatorial Sequences at n=6 — Systematic verification | `backend/backend/tecs_calc/catalan_combinatorial_n6.py` |
 | cherry_pick_detector | Cherry-Pick Detector — Does a formula value hit a meaningful point in a band? | `backend/backend/tecs_calc/cherry_pick_detector.py` |
 | claim_verifier | Claim Verification Calculator | `backend/backend/tecs_calc/claim_verifier.py` |
 | codon_optimality_prover | Codon Optimality Prover — proves (4,3) is the uniquely optimal codon structure | `backend/backend/tecs_calc/codon_optimality_prover.py` |
 | confidence_analyzer | Consciousness Engine Confidence Analyzer | `backend/backend/tecs_calc/confidence_analyzer.py` |
+| connes_ncg_n6 | Connes Noncommutative Geometry and n=6 Connection Explorer | `backend/backend/tecs_calc/connes_ncg_n6.py` |
 | consciousness_bridge_verifier | Consciousness Bridge Verifier — All 29 H-CX-82~110 bridges in one tool. | `backend/backend/tecs_calc/consciousness_bridge_verifier.py` |
 | consciousness_cross_validator | Consciousness Cross-Validator — PSI Constants Across Multiple Architectures | `backend/backend/tecs_calc/consciousness_cross_validator.py` |
 | constant_verifier | Constant Verifier — Texas Sharpshooter Auto-test for New Constant Discovery | `backend/backend/tecs_calc/constant_verifier.py` |
 | continual_learning_tool | Mitosis-based continual learning tool | `backend/backend/tecs_calc/continual_learning_tool.py` |
+| control_group_texas | Control Group Texas Sharpshooter — Non-perfect number validation | `backend/backend/tecs_calc/control_group_texas.py` |
 | convergence_analyzer | Convergence Analyzer -- Depth-1 Reachability Across 8 Mathematical Domains | `backend/backend/tecs_calc/convergence_analyzer.py` |
 | counting_freedom_analyzer | counting_freedom_analyzer.py -- Measures degrees of freedom in particle counting | `backend/backend/tecs_calc/counting_freedom_analyzer.py` |
 | criticality_phase_scanner | Criticality Phase Scanner — Three Routes to n=6 | `backend/backend/tecs_calc/criticality_phase_scanner.py` |
@@ -814,14 +826,25 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | cross_domain_counter | Cross-Domain Match Counter -- Count how many cross-domain facts match arithmetic | `backend/backend/tecs_calc/cross_domain_counter.py` |
 | crystallographic_calculator | Crystallographic Calculator — Crystallographic restriction, Platonic solids, kis | `backend/backend/tecs_calc/crystallographic_calculator.py` |
 | data_type_explorer | Data Type Explorer — Quickly test repulsion field with new data | `backend/backend/tecs_calc/data_type_explorer.py` |
+| deep_constant_explorer | Deep Constant Explorer — n=6 산술함수와 초월상수의 구조적 관계 탐색 | `backend/backend/tecs_calc/deep_constant_explorer.py` |
 | depth_reachability | Depth Reachability Analyzer — H-CX-463/467 | `backend/backend/tecs_calc/depth_reachability.py` |
+| dfs_ralph_deep | DFS Ralph Deep — Phase 7 발견 검증 + 확장 탐색 | `backend/backend/tecs_calc/dfs_ralph_deep.py` |
+| dfs_ralph_deep2 | DFS Ralph Deep 2 — 새로운 방향 탐색 | `backend/backend/tecs_calc/dfs_ralph_deep2.py` |
+| dfs_ralph_deep3 | DFS Ralph Deep 3 | `backend/backend/tecs_calc/dfs_ralph_deep3.py` |
+| dfs_ralph_deep4 | DFS Ralph Deep 4 — 미개척 영역 | `backend/backend/tecs_calc/dfs_ralph_deep4.py` |
+| dfs_ralph_deep5 | DFS Ralph Deep 5 — 교차 분야 연결 | `backend/backend/tecs_calc/dfs_ralph_deep5.py` |
+| dfs_ralph_deep6 | DFS Ralph Deep 6 — 물리상수 + 새로운 수론 | `backend/backend/tecs_calc/dfs_ralph_deep6.py` |
+| dfs_ralph_deep7 | DFS Ralph Deep 7 — 그래프론, 라마누잔 합, 수열 주기 | `backend/backend/tecs_calc/dfs_ralph_deep7.py` |
 | direction_analyzer | Direction Analyzer — Decompose tension into magnitude (confidence) and direction | `backend/backend/tecs_calc/direction_analyzer.py` |
 | divisor_field_theory | Divisor Field Theory — Action S(n) uniqueness and spacetime analysis | `backend/backend/tecs_calc/divisor_field_theory.py` |
+| divisor_lattice_universal | Divisor Lattice Universal Analysis — Complete lattice-theoretic characterization | `backend/backend/tecs_calc/divisor_lattice_universal.py` |
 | domain_distance | Domain Distance Calculator — Inter-domain distance/overlap and topology visualiz | `backend/backend/tecs_calc/domain_distance.py` |
 | dual_mechanism | Dual Mechanism Quantifier — Anomaly Detection via Internal vs Inter-model Tensio | `backend/backend/tecs_calc/dual_mechanism.py` |
 | economic | Economic indicators and macro calculators. | `backend/backend/calc/economic.py` |
 | egyptian_fraction | Egyptian Fraction Calculator — Solutions of 1 = 1/a1 + ... + 1/aK | `backend/backend/tecs_calc/egyptian_fraction.py` |
+| elliptic_curves_perfect | Elliptic Curves and Perfect Numbers — Connection Scanner | `backend/backend/tecs_calc/elliptic_curves_perfect.py` |
 | equation_uniqueness_checker | Equation Uniqueness Checker | `backend/backend/tecs_calc/equation_uniqueness_checker.py` |
+| exotic_spheres_perfect | Exotic Spheres and Perfect Numbers Connection Explorer | `backend/backend/tecs_calc/exotic_spheres_perfect.py` |
 | experimental_protocol | Experimental Protocol Generator — Testable predictions for physical verification | `backend/backend/tecs_calc/experimental_protocol.py` |
 | extreme_hypothesis_verifier | Extreme Hypothesis Verifier — 16 Domains, 300+ Hypotheses | `backend/backend/tecs_calc/extreme_hypothesis_verifier.py` |
 | extreme_signals | Extreme Signal Generation — signals from all calculator combinations. | `backend/backend/calc/extreme_signals.py` |
@@ -836,9 +859,12 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | gauge_cosmology_calculator | Gauge Cosmology Calculator — Gauge groups, GUT dimensions, and cosmological cons | `backend/backend/tecs_calc/gauge_cosmology_calculator.py` |
 | generalization_gap_detector | Generalization Gap Detector — Real-time overfitting detection with PH (H-CX-95) | `backend/backend/tecs_calc/generalization_gap_detector.py` |
 | generator_finder | Generator Finder — Minimal generating sets for convergence constants | `backend/backend/tecs_calc/generator_finder.py` |
+| genetic_code_deep_n6 | Deep Analysis: Why Does Life Use Exactly These Numbers? | `backend/backend/tecs_calc/genetic_code_deep_n6.py` |
 | genetic_code_variant_tester | Genetic Code Variant Tester — n=6 Arithmetic Expressibility | `backend/backend/tecs_calc/genetic_code_variant_tester.py` |
 | golden_zone | - | `backend/backend/tecs/golden_zone.py` |
+| grand_unification_n6 | Grand Unification of n=6 Characterizations | `backend/backend/tecs_calc/grand_unification_n6.py` |
 | gravitational_optics | Gravitational Lens and Telescope Calculator | `backend/backend/tecs_calc/gravitational_optics.py` |
+| gw_quadrupole_p6 | Gravitational Wave Quadrupole Radiation and P1=6 Connections | `backend/backend/tecs_calc/gw_quadrupole_p6.py` |
 | gz_bridge_calculator | Golden Zone Bridge Calculator -- Complete GZ structure from two principles | `backend/backend/tecs_calc/gz_bridge_calculator.py` |
 | gz_hierarchy | Golden Zone Hierarchy Calculator — GZ boundaries for perfect numbers | `backend/backend/tecs_calc/gz_hierarchy.py` |
 | h_cx_434_phoneme | H-CX-434: Phoneme System = Perfect Number Arithmetic | `backend/backend/tecs_calc/h_cx_434_phoneme.py` |
@@ -846,23 +872,30 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | h_cx_436_recursion | H-CX-436: Grammar Recursion Depth = σ₋₁(6)=2 | `backend/backend/tecs_calc/h_cx_436_recursion.py` |
 | hypothesis_verifier | Hypothesis Verification Calculator | `backend/backend/tecs_calc/hypothesis_verifier.py` |
 | indicators | Technical indicators — numpy-only, no external TA libs. | `backend/backend/calc/indicators.py` |
+| information_theory_n6 | Information Theory and Perfect Number 6 | `backend/backend/tecs_calc/information_theory_n6.py` |
 | isco_calculator | ISCO Calculator -- Innermost Stable Circular Orbit in General Relativity. | `backend/backend/tecs_calc/isco_calculator.py` |
+| langlands_perfect | Langlands-Perfect Number Connection Calculator | `backend/backend/tecs_calc/langlands_perfect.py` |
 | law79_freedom_degree | Law 79 Freedom Degree Calculator — Consciousness freedom = ln(2) | `backend/backend/tecs_calc/law79_freedom_degree.py` |
 | lie_algebra_calculator | Exceptional Lie Algebra Calculator — Compute all invariants from n=6 arithmetic | `backend/backend/tecs_calc/lie_algebra_calculator.py` |
 | liquidity | Liquidity metrics — Amihud illiquidity, volume profile, spread proxy. numpy-only | `backend/backend/calc/liquidity.py` |
 | mitosis_calculator | Mitosis Simulator — Calculate optimal mutation/mitosis timing | `backend/backend/tecs_calc/mitosis_calculator.py` |
 | momentum | Momentum factors — time-series and cross-sectional momentum. numpy-only. | `backend/backend/calc/momentum.py` |
+| monster_moonshine_perfect | Monster Moonshine -- Perfect Number Connection Calculator | `backend/backend/tecs_calc/monster_moonshine_perfect.py` |
 | multi_timeframe | Multi-Timeframe Analysis — aggregate signals across timeframes. | `backend/backend/calc/multi_timeframe.py` |
 | music_consonance_calculator | Music Consonance Calculator -- Euler Gradus Suavitatis, N-TET analysis, circle o | `backend/backend/tecs_calc/music_consonance_calculator.py` |
 | n6_uniqueness_tester | n=6 Uniqueness Tester -- Check if an identity holds only for n=6 | `backend/backend/tecs_calc/n6_uniqueness_tester.py` |
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `backend/backend/tecs_calc/nobel_scorer.py` |
 | p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `backend/backend/tecs_calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `backend/backend/tecs_calc/paper_claim_verifier.py` |
+| perfect_chain_bridges | Perfect Number Chain Bridges — Complete inter-perfect-number connection analysis | `backend/backend/tecs_calc/perfect_chain_bridges.py` |
+| perfect_number_classifier | Perfect Number Classifier — Systematic classification of n=6 properties | `backend/backend/tecs_calc/perfect_number_classifier.py` |
 | perfect_number_generalizer | Perfect Number Generalizer — Test if formulas holding at n=6 generalize to n=28, | `backend/backend/tecs_calc/perfect_number_generalizer.py` |
 | perfect_number_physics | Perfect Number Physics — Core arithmetic functions and physics dimension mapping | `backend/backend/tecs_calc/perfect_number_physics.py` |
+| perfect_p3_496_explorer | Perfect Number P3=496 Deep Explorer | `backend/backend/tecs_calc/perfect_p3_496_explorer.py` |
 | permutation_tester | permutation_tester.py -- Null baseline via permutation testing. | `backend/backend/tecs_calc/permutation_tester.py` |
 | ph_confusion_analyzer | PH Confusion Analyzer — Analyzing Confusion Structure with Persistent Homology | `backend/backend/tecs_calc/ph_confusion_analyzer.py` |
 | pharmacology_verifier | pharmacology_verifier.py -- Pharmacology hypothesis verifier for TECS-L project. | `backend/backend/tecs_calc/pharmacology_verifier.py` |
+| platonic_solids_n6 | Platonic Solids and n=6 — Deep structural connections | `backend/backend/tecs_calc/platonic_solids_n6.py` |
 | portfolio | Portfolio optimization calculators. | `backend/backend/calc/portfolio.py` |
 | portfolio_optimizer | Portfolio Optimizer — Mean-Variance + TECS-L constraints, numpy-only. | `backend/backend/calc/portfolio_optimizer.py` |
 | precognition_system | Unified Precognition System — Size+Direction+Topology Combined Precognition (H-C | `backend/backend/tecs_calc/precognition_system.py` |
@@ -870,26 +903,37 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | psi_derivation_chain | PSI Derivation Chain — All consciousness constants from ln(2) | `backend/backend/tecs_calc/psi_derivation_chain.py` |
 | psychology | Trading psychology and behavioral economics calculators. | `backend/backend/calc/psychology.py` |
 | q_barrier_checker | Q-Domain Barrier Checker — Which constants can quantum coupling constants reach? | `backend/backend/tecs_calc/q_barrier_checker.py` |
+| quantum_ecc_n6 | Quantum Error Correction Codes and Perfect Number 6 | `backend/backend/tecs_calc/quantum_ecc_n6.py` |
 | r_spectrum | R-Spectrum Calculator — Arithmetic balance ratio analysis | `backend/backend/tecs_calc/r_spectrum.py` |
+| ramsey_n6 | Ramsey Theory and Perfect Number 6 — Comprehensive Calculator | `backend/backend/tecs_calc/ramsey_n6.py` |
 | rate_invariant_calculator | Rate Invariant Calculator — Law 82: r₀·r∞ = 7/20 substrate independence. | `backend/backend/tecs_calc/rate_invariant_calculator.py` |
 | reachability_calculator | Reachability Calculator — Measure what fraction of integers are reachable from a | `backend/backend/tecs_calc/reachability_calculator.py` |
+| reciprocal_miracle_generalize | reciprocal_miracle_generalize.py — Generalize the reciprocal miracle of sigma*ph | `backend/backend/tecs_calc/reciprocal_miracle_generalize.py` |
+| riemann_zeta_n6 | Riemann Zeta Function — n=6 Structure Calculator | `backend/backend/tecs_calc/riemann_zeta_n6.py` |
 | risk | Risk management calculators. | `backend/backend/calc/risk.py` |
 | rl_strategy | Reinforcement Learning Strategy — tabular Q-learning, numpy-only. | `backend/backend/calc/rl_strategy.py` |
 | seasonality | Seasonality & calendar effects — day-of-week, month, turn-of-month. numpy-only. | `backend/backend/calc/seasonality.py` |
+| self_referential_physics | Self-Referential Physics of Perfect Numbers | `backend/backend/tecs_calc/self_referential_physics.py` |
 | sentiment | Sentiment Analyzer — price-based sentiment proxies, numpy-only. | `backend/backend/calc/sentiment.py` |
 | sequence_scanner | Integer Sequence Scanner — Find n=6 characterizations in ANY sequence | `backend/backend/tecs_calc/sequence_scanner.py` |
+| sigma_phi_ntau_proof | sigma_phi_ntau_proof.py — Rigorous proof and verification: sigma(n)*phi(n) = n*t | `backend/backend/tecs_calc/sigma_phi_ntau_proof.py` |
 | signals | - | `backend/backend/tecs/signals.py` |
 | sim_constants_search | H-SIM-1: Search for physics constants as combinations of TECS-L constants. | `backend/backend/tecs_calc/sim_constants_search.py` |
 | sim_planck_grid | H-SIM-2: Planck Units = Minimum Resolution (Grid)? | `backend/backend/tecs_calc/sim_planck_grid.py` |
 | singleton_gz_mapper | Singleton-GZ Mapper -- Map coding bounds to GZ constants | `backend/backend/tecs_calc/singleton_gz_mapper.py` |
 | small_n_validator | small_n_validator.py -- Small-sample correlation validator. | `backend/backend/tecs_calc/small_n_validator.py` |
+| so32_anomaly_theta | SO(32) Anomaly Cancellation and Theta Series Calculator | `backend/backend/tecs_calc/so32_anomaly_theta.py` |
 | soc | Self-Organized Criticality (SOC) models for market analysis. | `backend/backend/calc/soc.py` |
+| sphere_packing_perfect | Sphere Packing and Perfect Numbers — Connections between optimal lattice | `backend/backend/tecs_calc/sphere_packing_perfect.py` |
+| sporadic_groups_perfect | Sporadic Groups x Perfect Number Structure Analysis | `backend/backend/tecs_calc/sporadic_groups_perfect.py` |
 | spurious_trend_detector | spurious_trend_detector.py -- Detects spurious correlations from shared monotoni | `backend/backend/tecs_calc/spurious_trend_detector.py` |
 | statistical_tester | statistical_tester.py -- Unified statistical testing for logout project. | `backend/backend/tecs_calc/statistical_tester.py` |
+| symmetric_group_s6 | Symmetric Group S_6 Uniqueness Calculator | `backend/backend/tecs_calc/symmetric_group_s6.py` |
 | technical_extended | Extended technical indicators beyond the core set. | `backend/backend/calc/technical_extended.py` |
 | tecs_tuned | TECS-L tuned calculators — standard finance formulas with Golden Zone optimizati | `backend/backend/calc/tecs_tuned.py` |
 | tension_calculator | Tension Calculator — Predict accuracy/precognition/identity from tension values | `backend/backend/tecs_calc/tension_calculator.py` |
 | texas_sharpshooter_v2 | Texas Sharpshooter v2 -- Enhanced statistical validator for GZ campaign | `backend/backend/tecs_calc/texas_sharpshooter_v2.py` |
+| theta_perfect_pattern | Theta-Perfect Pattern Verifier | `backend/backend/tecs_calc/theta_perfect_pattern.py` |
 | topological_optics | Topological Lens and Telescope Calculator | `backend/backend/tecs_calc/topological_optics.py` |
 | unit_dependence_tester | unit_dependence_tester.py -- Check whether a numerical match between a formula | `backend/backend/tecs_calc/unit_dependence_tester.py` |
 | validate_calculators | Calculator Validation Suite — Meta-calculator that tests ALL other calculators. | `backend/backend/tecs_calc/validate_calculators.py` |
