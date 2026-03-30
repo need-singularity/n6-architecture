@@ -314,8 +314,8 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | **TECS-L** | 106 | Calculator, Engine |
 | **anima** | 206 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
-| **invest** | 109 | Calculator |
-| **Total** | **512** | |
+| **invest** | 112 | Calculator |
+| **Total** | **515** | |
 
 ### TECS-L
 
@@ -788,7 +788,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 
 ### invest
 
-**Calculator** (109)
+**Calculator** (112)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -805,6 +805,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | claim_verifier | Claim Verification Calculator | `backend/backend/tecs_calc/claim_verifier.py` |
 | codon_optimality_prover | Codon Optimality Prover — proves (4,3) is the uniquely optimal codon structure | `backend/backend/tecs_calc/codon_optimality_prover.py` |
 | confidence_analyzer | Consciousness Engine Confidence Analyzer | `backend/backend/tecs_calc/confidence_analyzer.py` |
+| consciousness_bridge_verifier | Consciousness Bridge Verifier — All 29 H-CX-82~110 bridges in one tool. | `backend/backend/tecs_calc/consciousness_bridge_verifier.py` |
 | consciousness_cross_validator | Consciousness Cross-Validator — PSI Constants Across Multiple Architectures | `backend/backend/tecs_calc/consciousness_cross_validator.py` |
 | constant_verifier | Constant Verifier — Texas Sharpshooter Auto-test for New Constant Discovery | `backend/backend/tecs_calc/constant_verifier.py` |
 | continual_learning_tool | Mitosis-based continual learning tool | `backend/backend/tecs_calc/continual_learning_tool.py` |
@@ -854,6 +855,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | music_consonance_calculator | Music Consonance Calculator -- Euler Gradus Suavitatis, N-TET analysis, circle o | `backend/backend/tecs_calc/music_consonance_calculator.py` |
 | n6_uniqueness_tester | n=6 Uniqueness Tester -- Check if an identity holds only for n=6 | `backend/backend/tecs_calc/n6_uniqueness_tester.py` |
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `backend/backend/tecs_calc/nobel_scorer.py` |
+| p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `backend/backend/tecs_calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `backend/backend/tecs_calc/paper_claim_verifier.py` |
 | perfect_number_generalizer | Perfect Number Generalizer — Test if formulas holding at n=6 generalize to n=28, | `backend/backend/tecs_calc/perfect_number_generalizer.py` |
 | perfect_number_physics | Perfect Number Physics — Core arithmetic functions and physics dimension mapping | `backend/backend/tecs_calc/perfect_number_physics.py` |
@@ -868,6 +870,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | psychology | Trading psychology and behavioral economics calculators. | `backend/backend/calc/psychology.py` |
 | q_barrier_checker | Q-Domain Barrier Checker — Which constants can quantum coupling constants reach? | `backend/backend/tecs_calc/q_barrier_checker.py` |
 | r_spectrum | R-Spectrum Calculator — Arithmetic balance ratio analysis | `backend/backend/tecs_calc/r_spectrum.py` |
+| rate_invariant_calculator | Rate Invariant Calculator — Law 82: r₀·r∞ = 7/20 substrate independence. | `backend/backend/tecs_calc/rate_invariant_calculator.py` |
 | reachability_calculator | Reachability Calculator — Measure what fraction of integers are reachable from a | `backend/backend/tecs_calc/reachability_calculator.py` |
 | risk | Risk management calculators. | `backend/backend/calc/risk.py` |
 | rl_strategy | Reinforcement Learning Strategy — tabular Q-learning, numpy-only. | `backend/backend/calc/rl_strategy.py` |
