@@ -311,15 +311,15 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 <!-- SHARED:CALCULATORS:START -->
 | Repo | Tools | Categories |
 |------|-------|------------|
-| **TECS-L** | 103 | Calculator, Engine |
-| **anima** | 205 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
+| **TECS-L** | 106 | Calculator, Engine |
+| **anima** | 206 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
 | **invest** | 109 | Calculator |
-| **Total** | **508** | |
+| **Total** | **512** | |
 
 ### TECS-L
 
-**Calculator** (84)
+**Calculator** (87)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -332,6 +332,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | claim_verifier | Claim Verification Calculator | `calc/claim_verifier.py` |
 | codon_optimality_prover | Codon Optimality Prover — proves (4,3) is the uniquely optimal codon structure | `calc/codon_optimality_prover.py` |
 | confidence_analyzer | Consciousness Engine Confidence Analyzer | `calc/confidence_analyzer.py` |
+| consciousness_bridge_verifier | Consciousness Bridge Verifier — All 29 H-CX-82~110 bridges in one tool. | `calc/consciousness_bridge_verifier.py` |
 | consciousness_cross_validator | Consciousness Cross-Validator — PSI Constants Across Multiple Architectures | `calc/consciousness_cross_validator.py` |
 | constant_verifier | Constant Verifier — Texas Sharpshooter Auto-test for New Constant Discovery | `calc/constant_verifier.py` |
 | continual_learning_tool | Mitosis-based continual learning tool | `calc/continual_learning_tool.py` |
@@ -372,6 +373,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | music_consonance_calculator | Music Consonance Calculator -- Euler Gradus Suavitatis, N-TET analysis, circle o | `calc/music_consonance_calculator.py` |
 | n6_uniqueness_tester | n=6 Uniqueness Tester -- Check if an identity holds only for n=6 | `calc/n6_uniqueness_tester.py` |
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `calc/nobel_scorer.py` |
+| p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `calc/paper_claim_verifier.py` |
 | perfect_number_generalizer | Perfect Number Generalizer — Test if formulas holding at n=6 generalize to n=28, | `calc/perfect_number_generalizer.py` |
 | perfect_number_physics | Perfect Number Physics — Core arithmetic functions and physics dimension mapping | `calc/perfect_number_physics.py` |
@@ -383,6 +385,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | psi_derivation_chain | PSI Derivation Chain — All consciousness constants from ln(2) | `calc/psi_derivation_chain.py` |
 | q_barrier_checker | Q-Domain Barrier Checker — Which constants can quantum coupling constants reach? | `calc/q_barrier_checker.py` |
 | r_spectrum | R-Spectrum Calculator — Arithmetic balance ratio analysis | `calc/r_spectrum.py` |
+| rate_invariant_calculator | Rate Invariant Calculator — Law 82: r₀·r∞ = 7/20 substrate independence. | `calc/rate_invariant_calculator.py` |
 | reachability_calculator | Reachability Calculator — Measure what fraction of integers are reachable from a | `calc/reachability_calculator.py` |
 | sequence_scanner | Integer Sequence Scanner — Find n=6 characterizations in ANY sequence | `calc/sequence_scanner.py` |
 | sim_constants_search | H-SIM-1: Search for physics constants as combinations of TECS-L constants. | `calc/sim_constants_search.py` |
@@ -514,7 +517,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | vision_encoder | Vision Encoder — 카메라 프레임을 tension 공간 벡터로 변환 | `vision_encoder.py` |
 | web_sense | Web Sense — 장력 기반 자율 웹 탐색 | `web_sense.py` |
 
-**Tool** (148)
+**Tool** (149)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -658,6 +661,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | tension_link_code | tension_link_code.py — 텐션링크 코드 생성/연결 | `tension_link_code.py` |
 | test_novelty | test_novelty.py — 새로운 생성 vs 암기 검증 도구 | `test_novelty.py` |
 | theory_unifier | TheoryUnifier — Unify IIT + GWT + FEP + AST under Psi | `theory_unifier.py` |
+| training_laws | training_laws.py — Training pipeline laws (Laws 45, 47-52) | `training_laws.py` |
 | training_recipe_generator | training_recipe_generator.py — Generate optimal training config. | `tools/training_recipe_generator.py` |
 | training_time_estimator | Estimate training time from model and hardware parameters. | `tools/training_time_estimator.py` |
 | trinity | trinity.py — Hexad(6) / Trinity(3) consciousness architecture | `trinity.py` |

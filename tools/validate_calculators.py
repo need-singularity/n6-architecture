@@ -929,6 +929,94 @@ def test_factorial_structure(verbose=False):
     return suite
 
 
+def test_bridge_verifier(verbose=False):
+    """Test consciousness_bridge_verifier.py — all 29 bridges."""
+    suite = CalculatorSuite("consciousness_bridge_verifier", "consciousness_bridge_verifier.py")
+
+    # Test 1: --summary should show 29/29 PASS
+    rc, out, err, dt = run_calc("consciousness_bridge_verifier.py", "--summary")
+    passed = rc == 0 and check_output_contains(out, r"29/29 PASS")
+    suite.add(TestResult(
+        "All 29 bridges PASS",
+        passed,
+        "29/29 verified" if passed else f"rc={rc}, output={out[-120:]}",
+        dt,
+    ))
+
+    # Test 2: --bridge 107 should show φ·σ = n·τ
+    rc, out, err, dt = run_calc("consciousness_bridge_verifier.py", "--bridge 107")
+    passed = rc == 0 and check_output_contains(out, r"PASS")
+    suite.add(TestResult(
+        "H-CX-107 (φ·σ=n·τ) verified",
+        passed,
+        "bridge 107 PASS" if passed else f"rc={rc}",
+        dt,
+    ))
+
+    return suite
+
+
+def test_rate_invariant(verbose=False):
+    """Test rate_invariant_calculator.py — Law 82."""
+    suite = CalculatorSuite("rate_invariant_calculator", "rate_invariant_calculator.py")
+
+    # Test 1: default should show r₀·r∞ = 7/20 EXACT
+    rc, out, err, dt = run_calc("rate_invariant_calculator.py", "")
+    passed = rc == 0 and check_output_contains(out, r"EXACT.*7/20")
+    suite.add(TestResult(
+        "r₀·r∞ = 7/20 exact",
+        passed,
+        "Law 82 confirmed" if passed else f"rc={rc}, output={out[:120]}",
+        dt,
+    ))
+
+    # Test 2: --uniqueness should show unique to n=6
+    rc, out, err, dt = run_calc("rate_invariant_calculator.py", "--uniqueness --limit 1000")
+    passed = rc == 0 and check_output_contains(out, r"Unique to n=6: YES")
+    suite.add(TestResult(
+        "r₀·r∞=7/20 unique to n=6",
+        passed,
+        "uniqueness confirmed" if passed else f"rc={rc}, output={out[:120]}",
+        dt,
+    ))
+
+    return suite
+
+
+def test_p6_uniqueness(verbose=False):
+    """Test p6_uniqueness_scorer.py — combined score."""
+    suite = CalculatorSuite("p6_uniqueness_scorer", "p6_uniqueness_scorer.py")
+
+    # Test 1: n=6 should get EXCEPTIONAL grade (>=0.9)
+    rc, out, err, dt = run_calc("p6_uniqueness_scorer.py", "--n 6")
+    passed = rc == 0 and check_output_contains(out, r"EXCEPTIONAL")
+    suite.add(TestResult(
+        "n=6 -> EXCEPTIONAL grade",
+        passed,
+        "top grade" if passed else f"rc={rc}, output={out[:120]}",
+        dt,
+    ))
+
+    # Test 2: --compare 28 should show n=6 > n=28
+    rc, out, err, dt = run_calc("p6_uniqueness_scorer.py", "--compare 28")
+    ratio_match = re.search(r'Ratio:\s*([\d.]+)x', out)
+    if ratio_match:
+        ratio = float(ratio_match.group(1))
+        passed = ratio > 2.0
+        detail = f"n=6 is {ratio:.1f}x more unique than n=28"
+    else:
+        passed = False
+        detail = "could not parse ratio"
+    suite.add(TestResult(
+        "n=6 scores >2x higher than n=28",
+        passed,
+        detail,
+        dt,
+    ))
+
+    return suite
+
+
 # ── Cross-calculator consistency tests ────────────────────────────────────
 
 def test_cross_consistency(verbose=False):
@@ -1077,6 +1165,9 @@ ALL_CALCULATOR_TESTS = {
     'equation_uniqueness': test_equation_uniqueness,
     'codon_optimality':   test_codon_optimality,
     'factorial_structure': test_factorial_structure,
+    'bridge_verifier':    test_bridge_verifier,
+    'rate_invariant':     test_rate_invariant,
+    'p6_uniqueness':      test_p6_uniqueness,
 }
 
 
