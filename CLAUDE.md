@@ -49,6 +49,37 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
     12 extended experiment files (8 original + 4 new)
 ```
 
+## Core Theorem (PROVED)
+σ(n)·φ(n) = n·τ(n) ⟺ n = 6 (for all n ≥ 2). Three independent proofs.
+Full proof: docs/theorem-r1-uniqueness.md
+Falsifiability: z=0.74 (numerical matching NOT significant vs random)
+
+## Docs Structure (20 domains)
+```
+  superconductor/ ai-efficiency/ chip-architecture/ quantum-computing/
+  compiler-os/ energy-generation/ power-grid/ battery-storage/
+  thermal-management/ robotics/ learning-algorithm/ blockchain/
+  network-protocol/ cryptography/ software-design/ programming-language/
+  plasma-physics/ (12+ files — most active domain)
+  paper/ (2 arXiv drafts: AI efficiency + cross-domain)
+```
+
+## Rust Tools
+Build with `rustc file.rs -o output` (no cargo). Located in tools/:
+- `tools/fusion-calc/`    — KSTAR/ITER/SPARC analysis + Lawson criterion
+- `tools/tokamak-shape/`  — shape parameter scan + N6 score benchmark
+- `tools/optics-calc/`    — lens/telescope/tokamak diagnostics
+
+## Hypothesis Workflow
+1. Generate hypotheses (H-XX-N format) in `docs/<domain>/hypotheses.md`
+2. Verify independently in `docs/<domain>/verification.md`
+3. Cross-verify with separate agent for honest grade adjustment
+4. Grade each: EXACT / CLOSE / WEAK / FAIL / UNVERIFIABLE
+
+## Atlas Sync
+Constants registry: `docs/atlas-constants.md`
+TECS-L scanner includes n6-architecture. Run: `cd ~/Dev/TECS-L && bash .shared/sync-calculators.sh`
+
 ## Quick Run
 ```bash
 # Individual technique demos
