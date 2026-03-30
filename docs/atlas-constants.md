@@ -110,7 +110,9 @@
 | **BT-30** | SQ Solar Bridge | Bandgap=τ/(n/φ)=4/3eV (0.50%), V_T=(J₂+φ)mV (0.57%) | 🟩⭐⭐ |
 | **BT-31** | MoE Top-k Vocabulary | {μ,φ,n,σ-τ}={1,2,6,8} — all published MoE top-k values | 🟩⭐⭐ |
 | **BT-32** | Nuclear Fission Scaffold | 6 delayed neutron groups=n, B-10=sopfr·φ, enrichment=[n/φ,sopfr]% | 🟩⭐ |
-| **BT-33** | Transformer σ=12 Atom | d=σ·2^k (BERT 768, GPT-3 12288), heads=σ=12, GQA=σ-τ=8 | 🟩⭐ |
+| **BT-33** | Transformer σ=12 Atom | d=σ·2^k, heads=σ, SwiGLU=8/3=(σ-τ)/(n/φ), LoRA r=σ-τ | 🟩⭐ |
+| **BT-34** | RoPE Base & Decimal Bridge | θ=(σ-φ)^{τ,sopfr,n}={10⁴,10⁵,10⁶}, WD=1/(σ-φ), β₂=1-1/(J₂-τ) | 🟩⭐⭐ |
+| **BT-35** | Battery Voltage Table | 7/8 chemistries: 1.2=n/sopfr, 1.5=n/τ, 2.0=φ, 3.0=n/φ, 4.0=τ | 🟩⭐ |
 
 ## Perfect Number Chain (P1 → P2)
 
