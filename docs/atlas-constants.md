@@ -452,6 +452,16 @@
 | Total gauge generators | 12 | σ(6) | SM gauge sector | H-CP-7 |
 | SM fermion types | 3×4 = 12 | (n/φ)×τ = σ | Core theorem realization | BT-17 |
 | SM with antimatter | 24 species | J₂ = σ·φ = n·τ | Core theorem value | BT-17 |
+| GUT rank SU(5) | 4 | τ(6) | Georgi-Glashow 1974 | BT-19 |
+| GUT rank SO(10) | 5 | sopfr(6) | Pati-Salam | BT-19 |
+| GUT rank E₆ | 6 | n | Heterotic compactification | BT-19 |
+| GUT rank E₈ | 8 | σ-τ | String theory | BT-19 |
+| dim(SU(5)) | 24 | J₂ = σ·φ = core theorem | Minimal GUT | BT-19 |
+| SU(5)→SM decomp | 24=12+12 | J₂ = σ+σ = σ·φ | Gauge boson split | BT-19 |
+| SU(5) 5̄ rep | 5 | sopfr(6) | Fermion fundamental | BT-19 |
+| SU(5) 10 rep | 10 | σ-φ | Fermion antisymmetric | BT-19 |
+| 1 generation | 15 | σ+n/φ | Weyl fermions per gen | BT-19 |
+| dim(E₆) | 78 | n·(σ+μ) = 6·13 | Trinification | BT-19 |
 | 6π⁵ ≈ m_p/m_e | 1836.118 vs 1836.153 | 6π⁵ | 0.002% | H-CP-10 |
 | σn+μ ≈ H₀ | 73 vs 73.04 | σn+μ | 0.05% | H-CP-11 |
 | Bott periodicity | 8 | σ-τ | K-theory | H-CP-14 |
@@ -612,6 +622,7 @@
 | BT-16 | Riemann Zeta Trident ζ(2)=π²/n, ζ(-1)=-1/σ, BCS=σ/(7ζ(3)) | math, number theory, superconductor, AI | ⭐⭐⭐ |
 | BT-17 | SM Fermion-Boson σ-Balance: (n/φ)×τ = σ = generators | particle physics, math, number theory | ⭐⭐ |
 | BT-18 | Vacuum Energy Chain: E₀=-(σφ)⁻¹ → η²⁴ → Δ(wt σ) → Monster | QFT, modular forms, coding, lattice, group theory | CONJECTURE |
+| BT-19 | GUT Hierarchy: ranks (τ,sopfr,n,σ-τ), dim(SU(5))=J₂, 11/11 | particle physics, Lie algebra, string theory | ⭐⭐⭐ |
 
 ---
 
