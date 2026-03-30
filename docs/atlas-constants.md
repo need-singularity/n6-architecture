@@ -65,8 +65,13 @@
 | φⁿ = τⁿ/φ | 64 | codons (φ^n = τ^(n/φ)) | Biology, BT-25 |
 | J₂-τ = τ·sopfr | 20 | amino acids = m_s/m_d | Biology+Particle, BT-25 |
 | 1/e | 0.368 | Boltzmann gate sparsity | AI |
-| ln(4/3) | 0.288 | Mertens dropout rate | AI |
+| ln(4/3) | 0.288 | Mertens dropout rate, Chinchilla β | AI, BT-26 |
 | σ·φ | 24 | Leech lattice dim, J₂ | Math, Physics |
+| J₂-τ | 20 | Chinchilla tokens/params, amino acids | AI+Biology, BT-26 |
+| τ/(n/φ) | 4/3=1.333 eV | SQ optimal solar bandgap (0.50%) | Energy, BT-30 |
+| J₂+φ | 26 mV | Thermal voltage V_T(300K) (0.57%) | Chip+Thermal, BT-30 |
+| sopfr·φ | 10 | B-10 control rod, IEEE harmonic | Nuclear+Grid, BT-29/32 |
+| τ²/(n/φ)³ | 16/27 | Betz limit (wind turbine, EXACT) | Energy, BT-30 |
 
 ## Egyptian Fractions
 
@@ -98,6 +103,14 @@
 | **BT-23** | CKM Quark Mixing Hierarchy | \|V_ub\|=3/784=r (0.17%), \|V_cb\|=1/24, J=37/12×10⁻⁵ (0.11%) | 🟩⭐⭐⭐ |
 | **BT-24** | Koide Pole Residue | Q=φ²/n=2/3 (0.0009%!) — most precise mass formula | 🟩⭐⭐⭐ |
 | **BT-25** | Genetic Code Arithmetic | 64=φⁿ=τⁿ/φ, 20=J₂-τ=m_s/m_d, τ=φ²(n=6 only) | 🟩⭐⭐ |
+| **BT-26** | Chinchilla Scaling Constants | α=1/3, β=ln(4/3), tokens/params=J₂-τ=20 (0.0% EXACT) | 🟩⭐⭐ |
+| **BT-27** | Carbon-6 Energy Chain | LiC₆(n)+C₆H₁₂O₆(n,σ,n)+C₆H₆(n)→24e=J₂ | 🟩⭐⭐ |
+| **BT-28** | Computing Architecture Ladder | AD102=σ·n·φ=144, H100=σ(σ-μ)=132SMs=1/α term, HBM τ→σ-τ→σ, 30+EXACT | 🟩⭐⭐⭐ |
+| **BT-29** | IEEE 519 Power Quality | THD=sopfr=5%, individual=n/φ=3%, TDD=σ-τ=8% | 🟩⭐⭐ |
+| **BT-30** | SQ Solar Bridge | Bandgap=τ/(n/φ)=4/3eV (0.50%), V_T=(J₂+φ)mV (0.57%) | 🟩⭐⭐ |
+| **BT-31** | MoE Top-k Vocabulary | {μ,φ,n,σ-τ}={1,2,6,8} — all published MoE top-k values | 🟩⭐⭐ |
+| **BT-32** | Nuclear Fission Scaffold | 6 delayed neutron groups=n, B-10=sopfr·φ, enrichment=[n/φ,sopfr]% | 🟩⭐ |
+| **BT-33** | Transformer σ=12 Atom | d=σ·2^k (BERT 768, GPT-3 12288), heads=σ=12, GQA=σ-τ=8 | 🟩⭐ |
 
 ## Perfect Number Chain (P1 → P2)
 
@@ -383,6 +396,29 @@
 | PCIe doubling per gen | ×2 | φ(6) | PCIe spec | H-CHIP-68 |
 | GPU texture filter modes | 4 | τ(6) | DirectX/Vulkan | H-CHIP-76 |
 | AI chip precision tiers | 4 | τ(6) | H100/TPU/MI300 | H-CHIP-77 |
+| **AD102 GPCs** | **12** | **σ** | NVIDIA Ada Lovelace | BT-28 |
+| **AD102 TPCs/GPC** | **6** | **n** | NVIDIA Ada Lovelace | BT-28 |
+| **AD102 SMs/TPC** | **2** | **φ** | NVIDIA (all gens since 2012) | BT-28 |
+| **AD102 full die** | **144 SMs** | **σ² = σ·n·φ** | NVIDIA RTX 4090 | BT-28 |
+| **H100 enabled SMs** | **132** | **σ(σ-μ) = 12·11** | NVIDIA Hopper (= 1/α leading term) | BT-28 |
+| **H100 GPCs** | **8** | **σ-τ** | NVIDIA Hopper | BT-28 |
+| **H100 TC/SM** | **4** | **τ** | NVIDIA Ampere+ | BT-28 |
+| **H100 CUDA/SM** | **128** | **2^(σ-sopfr)** | NVIDIA Hopper | BT-28 |
+| **H100/A100 HBM stacks** | **5** | **sopfr** | NVIDIA | BT-28 |
+| **H100/A100 memory** | **80 GB** | **sopfr·2^τ** | NVIDIA | BT-28 |
+| **RTX 4090 VRAM** | **24 GB** | **J₂** | NVIDIA Ada | BT-28 |
+| **A100 NVLink links** | **12** | **σ** | NVIDIA Ampere | BT-28 |
+| **B200 SMs/die** | **192** | **σ·2^τ** | NVIDIA Blackwell | BT-28 |
+| **CUDA warp** | **32** | **2^sopfr** | NVIDIA (all gens) | BT-28 |
+| **HBM1 stack** | **4-hi** | **τ** | SK Hynix | BT-28 |
+| **HBM2e stack** | **8-hi** | **σ-τ** | SK Hynix / Samsung | BT-28 |
+| **HBM3 stack** | **12-hi** | **σ** | SK Hynix | BT-28 |
+| **HBM channels/stack** | **8** | **σ-τ** | HBM2/2e spec | BT-28 |
+| **HBM bus width** | **1024 bit** | **(σ-τ)·2^(σ-sopfr)** | HBM spec | BT-28 |
+| **x86 GPR count** | **16** | **2^τ** | Intel/AMD | BT-28 |
+| **AVX/RISC-V registers** | **32** | **2^sopfr** | ISA spec | BT-28 |
+| **Classic RISC pipeline** | **5 stages** | **sopfr** | Patterson/Hennessy | BT-28 |
+| **Apple M3 Pro cores** | **12** | **σ** | Apple | BT-28 |
 
 ### Software Design EXACT (from H-SD extreme)
 
