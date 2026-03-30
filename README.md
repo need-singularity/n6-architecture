@@ -160,16 +160,16 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 <!-- SHARED:CALCULATORS:START -->
 | Repo | Tools | Categories |
 |------|-------|------------|
-| **TECS-L** | 166 | Calculator, Engine |
+| **TECS-L** | 167 | Calculator, Engine |
 | **anima** | 227 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
 | **n6-architecture** | 64 | Calculator, Engine, experiment, technique |
-| **invest** | 159 | Calculator |
-| **Total** | **707** | |
+| **invest** | 173 | Calculator |
+| **Total** | **722** | |
 
 ### TECS-L
 
-**Calculator** (147)
+**Calculator** (148)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -264,6 +264,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | monster_moonshine_perfect | Monster Moonshine -- Perfect Number Connection Calculator | `calc/monster_moonshine_perfect.py` |
 | music_consonance_calculator | Music Consonance Calculator -- Euler Gradus Suavitatis, N-TET analysis, circle o | `calc/music_consonance_calculator.py` |
 | n6_uniqueness_tester | n=6 Uniqueness Tester -- Check if an identity holds only for n=6 | `calc/n6_uniqueness_tester.py` |
+| nobel_breakthrough | NOBEL BREAKTHROUGH ANALYSIS | `calc/nobel_breakthrough.py` |
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `calc/nobel_scorer.py` |
 | p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `calc/paper_claim_verifier.py` |
@@ -805,12 +806,13 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 
 ### invest
 
-**Calculator** (159)
+**Calculator** (173)
 
 | Name | Description | Path |
 |------|-------------|------|
 | algebra_closure | Algebraic Closure Checker — Relations among convergence points | `backend/backend/tecs_calc/algebra_closure.py` |
 | anomaly_scorer | Anomaly Score Calculator — Anomaly Detection via Tension | `backend/backend/tecs_calc/anomaly_scorer.py` |
+| atlas_domain_classifier | Atlas Domain Classifier — 도메인 없는 가설에 키워드 기반 도메인 부여 | `backend/backend/tecs_calc/atlas_domain_classifier.py` |
 | backtest | Backtest engine — strategy simulation on OHLCV data. | `backend/backend/calc/backtest.py` |
 | backtest_hyper | Hyper Backtest Engine — beyond Ultra, absolute physical limit. | `backend/backend/calc/backtest_hyper.py` |
 | backtest_turbo | Turbo Backtest Engine — vectorized numpy, zero Python loops. | `backend/backend/calc/backtest_turbo.py` |
@@ -842,6 +844,16 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | crystallographic_calculator | Crystallographic Calculator — Crystallographic restriction, Platonic solids, kis | `backend/backend/tecs_calc/crystallographic_calculator.py` |
 | data_type_explorer | Data Type Explorer — Quickly test repulsion field with new data | `backend/backend/tecs_calc/data_type_explorer.py` |
 | deep_constant_explorer | Deep Constant Explorer — n=6 산술함수와 초월상수의 구조적 관계 탐색 | `backend/backend/tecs_calc/deep_constant_explorer.py` |
+| deep_scan_wave10 | Deep Scan Wave 10 -- The Milestone Wave (target: 99 domains) | `backend/backend/tecs_calc/deep_scan_wave10.py` |
+| deep_scan_wave11 | Deep Scan Wave 11 -- Domain #100 Milestone | `backend/backend/tecs_calc/deep_scan_wave11.py` |
+| deep_scan_wave2 | Deep Scan Wave 2 — 10 New Domains for 5-Star Discoveries | `backend/backend/tecs_calc/deep_scan_wave2.py` |
+| deep_scan_wave3 | Deep Scan Wave 3 — The Deepest Layer | `backend/backend/tecs_calc/deep_scan_wave3.py` |
+| deep_scan_wave4 | Deep Scan Wave 4 — Completely New Territory | `backend/backend/tecs_calc/deep_scan_wave4.py` |
+| deep_scan_wave5 | Deep Scan Wave 5 — Beyond the Known | `backend/backend/tecs_calc/deep_scan_wave5.py` |
+| deep_scan_wave6 | Deep Scan Wave 6 — The Final Frontier | `backend/backend/tecs_calc/deep_scan_wave6.py` |
+| deep_scan_wave7 | Deep Scan Wave 7 — 60 domains and counting | `backend/backend/tecs_calc/deep_scan_wave7.py` |
+| deep_scan_wave8 | Deep Scan Wave 8 -- 69 domains done, pushing to 79 | `backend/backend/tecs_calc/deep_scan_wave8.py` |
+| deep_scan_wave9 | Deep Scan Wave 9 -- Quality over quantity | `backend/backend/tecs_calc/deep_scan_wave9.py` |
 | depth_reachability | Depth Reachability Analyzer — H-CX-463/467 | `backend/backend/tecs_calc/depth_reachability.py` |
 | dfs_ralph_deep | DFS Ralph Deep — Phase 7 발견 검증 + 확장 탐색 | `backend/backend/tecs_calc/dfs_ralph_deep.py` |
 | dfs_ralph_deep2 | DFS Ralph Deep 2 — 새로운 방향 탐색 | `backend/backend/tecs_calc/dfs_ralph_deep2.py` |
@@ -878,6 +890,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | genetic_code_deep_n6 | Deep Analysis: Why Does Life Use Exactly These Numbers? | `backend/backend/tecs_calc/genetic_code_deep_n6.py` |
 | genetic_code_variant_tester | Genetic Code Variant Tester — n=6 Arithmetic Expressibility | `backend/backend/tecs_calc/genetic_code_variant_tester.py` |
 | golden_zone | - | `backend/backend/tecs/golden_zone.py` |
+| grand_unification_deep | Grand Unification Deep Dive — 240 Theorem & Beyond | `backend/backend/tecs_calc/grand_unification_deep.py` |
 | grand_unification_n6 | Grand Unification of n=6 Characterizations | `backend/backend/tecs_calc/grand_unification_n6.py` |
 | gravitational_optics | Gravitational Lens and Telescope Calculator | `backend/backend/tecs_calc/gravitational_optics.py` |
 | gw_quadrupole_p6 | Gravitational Wave Quadrupole Radiation and P1=6 Connections | `backend/backend/tecs_calc/gw_quadrupole_p6.py` |
@@ -901,6 +914,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | multi_timeframe | Multi-Timeframe Analysis — aggregate signals across timeframes. | `backend/backend/calc/multi_timeframe.py` |
 | music_consonance_calculator | Music Consonance Calculator -- Euler Gradus Suavitatis, N-TET analysis, circle o | `backend/backend/tecs_calc/music_consonance_calculator.py` |
 | n6_uniqueness_tester | n=6 Uniqueness Tester -- Check if an identity holds only for n=6 | `backend/backend/tecs_calc/n6_uniqueness_tester.py` |
+| nobel_breakthrough | NOBEL BREAKTHROUGH ANALYSIS | `backend/backend/tecs_calc/nobel_breakthrough.py` |
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `backend/backend/tecs_calc/nobel_scorer.py` |
 | p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `backend/backend/tecs_calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `backend/backend/tecs_calc/paper_claim_verifier.py` |
@@ -920,6 +934,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | prime_pair_verifier | Prime Pair Verifier | `backend/backend/tecs_calc/prime_pair_verifier.py` |
 | psi_derivation_chain | PSI Derivation Chain — All consciousness constants from ln(2) | `backend/backend/tecs_calc/psi_derivation_chain.py` |
 | psychology | Trading psychology and behavioral economics calculators. | `backend/backend/calc/psychology.py` |
+| pure_math_deep_scan | Pure Math Deep Scan — 5-star Discovery Hunter | `backend/backend/tecs_calc/pure_math_deep_scan.py` |
 | q_barrier_checker | Q-Domain Barrier Checker — Which constants can quantum coupling constants reach? | `backend/backend/tecs_calc/q_barrier_checker.py` |
 | quantum_ecc_n6 | Quantum Error Correction Codes and Perfect Number 6 | `backend/backend/tecs_calc/quantum_ecc_n6.py` |
 | r_spectrum | R-Spectrum Calculator — Arithmetic balance ratio analysis | `backend/backend/tecs_calc/r_spectrum.py` |
