@@ -522,6 +522,16 @@
 | Keccak rounds | 24 | J₂(6) | SHA-3 | H-BC-75 |
 | LCO O3 coordination number | 6 | n | Battery chemistry | H-BS-61 |
 | LFP olivine Fe/Li CN | 6 | n | Battery chemistry | H-BS-63 |
+| LiC₆ intercalation stages | 4 | τ(6) | Li-ion anode | H-BS-62 |
+| LiC₆ stoichiometry C:Li | 6:1 | n | Li-ion anode | H-BS-62 |
+| Snowflake divertor legs | 6 | n (2nd-order null topology) | Tokamak | H-TK-73 |
+| Tokamak q_95 baseline | 3 | σ/τ = n/φ | ITER operating point | H-TK-68 |
+| MHD energy principle terms | 4 | τ(6) | Plasma stability | H-PP-63 |
+| Bohm diffusion 1/16 | 2^(-4) | 2^(-τ) | Plasma physics | H-PP-65 |
+| Flux quantum Φ₀ = h/(2e) | 2 (denominator) | φ(6) | Superconductor | H-SC-70 |
+| Spatial inertia matrix | 6×6, 4 blocks | n×n, τ blocks | Robotics | H-ROB-76 |
+| Hexacopter fault tolerance | 6 rotors, 5 min | n, sopfr | Robotics | H-ROB-79 |
+| Linux CFS base quantum | 6 ms | n | OS scheduler | H-COS-70 |
 
 ---
 
