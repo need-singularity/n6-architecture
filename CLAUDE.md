@@ -32,7 +32,10 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
     boltzmann_gate.py      -- 1/e activation sparsity gate (63% sparse)
     mertens_dropout.py     -- ln(4/3) dropout rate (no search needed)
   docs/
-    # Foundation: superconductor/
+    # Foundation: superconductor/ (60 H-SC + 20 extreme)
+    # Fusion: fusion/ (60 H-FU + 20 extreme)
+    # Magnets: superconducting-magnet/ (60 H-SM + 20 extreme)
+    # Tokamak: tokamak-structure/ (60 H-TK + 20 extreme)
     # Computing: ai-efficiency/ chip-architecture/ quantum-computing/ compiler-os/
     # Energy: energy-generation/ power-grid/ battery-storage/ thermal-management/
     # Physical AI: robotics/ learning-algorithm/
@@ -54,9 +57,13 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
 Full proof: docs/theorem-r1-uniqueness.md
 Falsifiability: z=0.74 (numerical matching NOT significant vs random)
 
-## Docs Structure (20 domains)
+## Docs Structure (24 domains)
 ```
-  superconductor/ ai-efficiency/ chip-architecture/ quantum-computing/
+  superconductor/ (60 H-SC hypotheses + extreme)
+  fusion/ (60 H-FU hypotheses + extreme — NEW)
+  superconducting-magnet/ (60 H-SM hypotheses + extreme — NEW)
+  tokamak-structure/ (60 H-TK hypotheses + extreme — NEW)
+  ai-efficiency/ chip-architecture/ quantum-computing/
   compiler-os/ energy-generation/ power-grid/ battery-storage/
   thermal-management/ robotics/ learning-algorithm/ blockchain/
   network-protocol/ cryptography/ software-design/ programming-language/
