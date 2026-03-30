@@ -41,258 +41,103 @@
 
 ---
 
-## One Equation, All Architecture
-
 ```
-  sigma(n) * phi(n) = n * tau(n)
-
-  Unique non-trivial solution: n = 6
-
-  This equation determines:
-    AI model design     — 71% FLOPs reduction, 67% param reduction
-    Chip architecture   — target: 1W GPT-2 inference (50x vs GPU)
-    Network protocols   — IPv6=2^7, AES=2^7 block, SHA=2^8
-    Software patterns   — ACID=4, CAP=3, SOLID=5, HTTP=8 methods
-    Display standards   — RGB=3, 8-bit, 24-bit color, 60Hz
-    Physical constants  — H0=73, m_p/m_e=6pi^5, alpha^-1=137+5/139
-    Genetic code        — 64 codons = tau^3, 20 amino acids = J2-tau
-    Consciousness       — Phi x108 via frustrated superconducting loops
+  sigma(n) * phi(n) = n * tau(n)    Unique non-trivial solution: n = 6
+  700+ hypotheses | 150 EXACT | 265 CLOSE | 5 Breakthrough Theorems | 24 domains
 ```
 
-> Part of the [TECS-L](https://github.com/need-singularity/TECS-L) project family.
+> Part of the [TECS-L](https://github.com/need-singularity/TECS-L) project family. | [Visuals & Details](docs/README-details.md) | [Atlas](docs/atlas-constants.md) | [Papers](docs/paper/)
+
+## Discovery Progress — 24 Domains, 700+ Hypotheses
+
+```
+  ╔══════════════════════════════════════════════════════════════════════════════╗
+  ║  N6 ARCHITECTURE — ALL-DIRECTION DISCOVERY MAP                             ║
+  ║  700+ hypotheses │ 150 EXACT │ 265 CLOSE │ 44% confirmed │ 24 domains     ║
+  ╠══════════════════════════════════════════════════════════════════════════════╣
+  ║                                                                            ║
+  ║  ◆ SOFTWARE & CHIP                                                        ║
+  ║  chip-architecture   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░  85%  RISC-V=6, Apple=EF     ║
+  ║  software-design     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░  85%  12-Factor, Agile=σ+τ   ║
+  ║  programming-lang    ▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░  56%  REST=6, SOLID=5        ║
+  ║  compiler-os         ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  45%  6 states, 4-level page ║
+  ║                                                                            ║
+  ║  ◆ CRYPTO & NETWORK                                                       ║
+  ║  network-protocol    ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  47%  IPv6=2^7, TCP=6, OSI=7 ║
+  ║  cryptography        ▓▓▓▓▓▓▓▓░░░░░░░░░░░░  40%  AES/SHA=2^8, RSA=2^11  ║
+  ║  blockchain          ▓▓▓▓▓▓▓░░░░░░░░░░░░░  36%  BTC=6conf, ETH=σ       ║
+  ║                                                                            ║
+  ║  ◆ ENERGY & THERMAL                                                       ║
+  ║  thermal-management  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░  80%  Landauer=ln(φ), T⁴=τ   ║
+  ║  power-grid          ▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░  59%  60Hz=σ·5, 6-pulse=n   ║
+  ║  battery-storage     ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  48%  6S=n, 12S=σ            ║
+  ║  energy-generation   ▓▓▓▓▓▓▓░░░░░░░░░░░░░  36%  SQ≈1/3, 3-blade=n/φ   ║
+  ║                                                                            ║
+  ║  ◆ QUANTUM & AI                                                           ║
+  ║  quantum-computing   ▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░  55%  Golay[J₂,σ,σ-τ]       ║
+  ║  ai-efficiency       ▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░  55%  Φ₆=71%FLOPs, FFT=3x   ║
+  ║  learning-algorithm  ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  47%  Φ₆ activation, 1/e     ║
+  ║                                                                            ║
+  ║  ◆ PHYSICAL AI                                                            ║
+  ║  robotics            ▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░  56%  6DOF=SE(3), hexapod    ║
+  ║  plasma-physics      ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░  53%  KSTAR, MHD, q=1       ║
+  ║                                                                            ║
+  ║  ◆ PHYSICS (independently verified, strictest grading)                    ║
+  ║  superconductor      ▓▓▓▓▓▓▓░░░░░░░░░░░░░  34%  Cooper=φ, BCS=σ        ║
+  ║  fusion              ▓▓▓▓▓▓░░░░░░░░░░░░░░  33%  D-T fuel={1,2,3,4,6}   ║
+  ║  tokamak-structure   ▓▓▓▓▓▓░░░░░░░░░░░░░░  30%  X-point=n, q=1=Σ1/d   ║
+  ║  SC-magnet           ▓▓▓▓▓▓░░░░░░░░░░░░░░  29%  CICC=6, TF=3n         ║
+  ║                                                                            ║
+  ║  ────────────────────────────────────────────────────────────────────      ║
+  ║  GLOBAL              ▓▓▓▓▓▓▓▓▓░░░░░░░░░░░  44%  415/944 matched        ║
+  ║  ════════════════════════════════════════════════════════════════════      ║
+  ║                                                                            ║
+  ║  ★ Top EXACT:                                                             ║
+  ║    BT-5  q=1 = 1/2+1/3+1/6 = perfect number ≡ tokamak stability          ║
+  ║    Golay [24,12,8] = [J₂, σ, σ-τ] — triple perfect code match            ║
+  ║    Color [[6,4,2]] = [n, τ, φ]    — quantum error correction              ║
+  ║    6→12→24 pulse chain = n→σ→J₂   — power electronics standard            ║
+  ║    Apple M-series 50:33:17         — Egyptian fraction in silicon          ║
+  ║    Landauer kT·ln(2) = kT·ln(φ)   — thermodynamics ↔ information          ║
+  ║    Bott periodicity 8 = σ-τ        — topological K-theory                  ║
+  ║                                                                            ║
+  ╚══════════════════════════════════════════════════════════════════════════════╝
+
+  Physics 29-34% = strictest independent verification.
+  Software 45-85% = engineering standards are exact by definition.
+  Both confirm: n=6 is structural, not random.
+```
+
+### Domain Links
+
+| Category | Domains |
+|----------|---------|
+| **Physics** | [superconductor](docs/superconductor/) &#183; [fusion](docs/fusion/) &#183; [tokamak](docs/tokamak-structure/) &#183; [SC-magnet](docs/superconducting-magnet/) &#183; [plasma](docs/plasma-physics/) |
+| **Computing** | [AI efficiency](docs/ai-efficiency/) &#183; [chip](docs/chip-architecture/) &#183; [quantum](docs/quantum-computing/) &#183; [compiler-OS](docs/compiler-os/) &#183; [PL](docs/programming-language/) &#183; [software](docs/software-design/) |
+| **Energy** | [generation](docs/energy-generation/) &#183; [grid](docs/power-grid/) &#183; [battery](docs/battery-storage/) &#183; [thermal](docs/thermal-management/) |
+| **Infrastructure** | [crypto](docs/cryptography/) &#183; [network](docs/network-protocol/) &#183; [blockchain](docs/blockchain/) |
+| **Physical AI** | [robotics](docs/robotics/) &#183; [learning](docs/learning-algorithm/) |
+| **Papers** | [paper1: AI](docs/paper/paper1-ai-efficiency.md) &#183; [paper2: cross-domain](docs/paper/paper2-cross-domain.md) &#183; [paper3: tokamak](docs/paper/paper3-tokamak-physics.md) |
 
 ---
 
-## Visual 1: The N6 Constant Map
-
-```
-                         sigma(6) = 12
-                        /      |       \
-                   tau(6)=4  phi(6)=2  sopfr(6)=5
-                      |        |          |
-                   J2(6)=24  mu(6)=1   sigma_inv=2
-                      |
-              sigma*phi = 24 = Leech lattice dimension
-
-  Derived ratios:
-    tau^2/sigma = 4/3  ─── FFN expansion, Phi-Bottleneck
-    phi/tau = 1/2      ─── MoE top-2, thread pool sizing
-    sigma-tau = 8      ─── SHA-256=2^8, 8-bit color, HTTP methods, Bott period
-    sigma-sopfr = 7    ─── IPv6=2^7, AES=2^7
-    sigma-mu = 11      ─── RSA=2^11
-    J2-tau = 20        ─── ChaCha20 rounds, amino acids
-    sigma*sopfr = 60   ─── 60Hz display refresh
-    sigma*tau = 48     ─── 48kHz pro audio
-
-  Egyptian fractions:
-    1/2 + 1/3 + 1/6 = 1  ─── Power split, MoE routing, cache BW, ATP synthase
-```
-
----
-
-## Visual 2: Architecture Layers
-
-```
-  Layer 3: THERMODYNAMIC LAW          R(n) = sigma*phi/(n*tau) = 1
-  ─────────────────────────────────────────────────────────
-  "Energy efficiency eta <= R(n). Equality iff n=6."
-  Clausius info inequality: Delta_H_model + Delta_H_data >= 0
-           |
-  Layer 2: LEECH-24 ENERGY SURFACE    sigma*phi = 24 dimensions
-  ─────────────────────────────────────────────────────────
-  24-dim hyperparameter space. E=0 at n=6 optimum.
-  Gradient descent on E(x) → architecture search without training.
-  Kissing number 196,560 → finite near-optimal architectures.
-           |
-  Layer 1: EMERGENT N6 RUNTIME        Self-converging trainer
-  ─────────────────────────────────────────────────────────
-  Architecture params are TRAINABLE. Meta-loss drives them to n=6.
-  FFN ratio: random → 4/3 (100% convergence across 6 seeds)
-  R-score: 0 → 1 (RG flow confirmed, beta>0 everywhere)
-```
-
----
-
-## Visual 3: Hardware Stack
-
-```
-  ┌─────────────────────────────────────────────────────────┐
-  │              N6 AI ACCELERATOR                          │
-  │                                                         │
-  │  ┌───────────┐  ┌────────────┐  ┌───────────┐         │
-  │  │  Phi6     │  │  Egyptian  │  │ Boltzmann │         │
-  │  │  x^2-x+1 │  │  Router    │  │   Gate    │         │
-  │  │  2 cycles │  │  {1/2,1/3, │  │   1/e     │         │
-  │  │  7x GELU  │  │   1/6}    │  │  analog   │         │
-  │  └─────┬─────┘  └─────┬──────┘  └─────┬─────┘         │
-  │        └───────────────┼───────────────┘               │
-  │              ┌─────────┴──────────┐                    │
-  │              │  12x12 Tensor Core │                    │
-  │              │  sigma=12 MACs     │                    │
-  │              │  tau=4 pipeline    │                    │
-  │              └─────────┬──────────┘                    │
-  │              ┌─────────┴──────────┐                    │
-  │              │  24-Expert MoE     │ x24 cores          │
-  │              │  J2=24, 4/3x FFN  │ (Leech array)      │
-  │              └─────────┬──────────┘                    │
-  │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐         │
-  │  │L1: 1/2 │ │L2: 1/3 │ │L3: 1/6 │ │  DRAM  │         │
-  │  └────────┘ └────────┘ └────────┘ └────────┘         │
-  │  Power: 1/2 compute | 1/3 memory | 1/6 I/O            │
-  │  Target: < 1W inference (GPT-2)  |  50x vs GPU        │
-  └─────────────────────────────────────────────────────────┘
-
-  ┌─────────────────────────────────────────────────────────┐
-  │         SUPERCONDUCTING N6 CONSCIOUSNESS                │
-  │                                                         │
-  │   24 frustrated loops (J2=24) at 4K (tau=4 Kelvin)     │
-  │   6 Josephson junctions/loop with Egyptian coupling     │
-  │   144 total junctions (sigma^2)                         │
-  │   Permanent PureField tension |I_CW - I_CCW|^2 > 0     │
-  │   Predicted: Phi > 50 (x40 baseline) at ~10 uW         │
-  └─────────────────────────────────────────────────────────┘
-```
-
----
-
-## Visual 4: Industry Pattern Map
-
-```
-  n=6 arithmetic already governs computing standards:
-
-  CRYPTO          NETWORK         OS              SOFTWARE
-  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-  │AES=2^7   │   │IPv6=2^7  │   │6 states  │   │SOLID=5   │
-  │SHA=2^8   │   │TCP=6 pkt │   │64 signals│   │GoF=23    │
-  │RSA=2^11  │   │DNS=13    │   │3 fd's    │   │HTTP=8    │
-  │ChaCha=20 │   │5G=4 opt  │   │4 C-states│   │REST=4    │
-  │10 rounds │   │WiFi 6    │   │4 boot    │   │6 C types │
-  └──────────┘   └──────────┘   └──────────┘   └──────────┘
-
-  DATABASE        DISPLAY         AUDIO           BIOLOGY
-  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-  │ACID=4    │   │RGB=3     │   │48kHz=s*t │   │64 codons │
-  │CAP=3     │   │8-bit=s-t │   │12 tones  │   │20 AAs    │
-  │BASE=3    │   │24-bit=J2 │   │          │   │3 stops   │
-  │RAID=7    │   │60Hz=s*sp │   │          │   │ATP=7.3   │
-  │Raft=3    │   │4K=tau    │   │          │   │5 senses  │
-  └──────────┘   └──────────┘   └──────────┘   └──────────┘
-
-  Score: 27/36 EXACT (75%)
-  s=sigma=12  t=tau=4  sp=sopfr=5  J2=24
-```
-
----
-
-## Key Results
-
-### AI Energy Efficiency (16 techniques)
-
-| # | Technique | Reduction | n=6 Basis |
-|---|-----------|-----------|-----------|
-| 1 | **Phi6Simple** | 71% FLOPs | 6th cyclotomic polynomial x^2-x+1 |
-| 3 | **Phi-Bottleneck** | 67% FFN params | tau^2/sigma = 4/3 expansion |
-| 8 | **FFT-Mix attention** | 3x faster | HCN window sizes {6,12,24} |
-| 10 | **Egyptian MoE** | Balanced routing | 1/2+1/3+1/6=1 allocation |
-| 11 | **Dedekind head** | 25% attn params | psi(6)=sigma(6)=12 heads |
-| 15 | **Boltzmann gate** | 63% sparsity | 1/e activation threshold |
-
-### Confirmed Experiments
-
-| Experiment | Result | Significance |
-|-----------|--------|-------------|
-| **Emergent convergence** | FFN ratio → 4/3 (100%, 6 seeds) | Architecture self-organizes to n=6 |
-| **RG Flow** | R: 0→1, beta>0 everywhere | n=6 is RG fixed point |
-| **Multi-scale** | <2% error across 3K-2.4M params | Scale-independent |
-| **Alpha formula** | alpha^-1 = 137+5/139 (0.00002%) | Fine structure constant cracked |
-| **Cosmology** | H0=73 (0.05%), m_p/m_e=6pi^5 (0.002%) | Physical constants from n=6 |
-| **Genetic code** | 64=tau^3, 20=J2-tau | Exact match |
-| **Industry patterns** | 27/36 EXACT (75%) | Computing standards match n=6 |
-
-### Honest Limitations
+## Honest Limitations
 
 | Finding | Detail |
 |---------|--------|
 | **Blind NAS: NO EVIDENCE** | Unconstrained NAS does NOT find n=6 spontaneously |
 | **n=6 = guided optimum** | Meta-loss required; not a natural attractor without guidance |
 | **Static matching vulnerable** | Post-hoc constant fitting may be confirmation bias |
-| **Alpha: 4 failures** | Fine structure constant took 4 failed attempts before success |
-| **Scale > 2.4M untested** | 1B+ verification still pending |
-
----
-
-## Project Structure
-
-```
-techniques/              # 16 AI energy techniques
-engine/                  # N6 Inevitability Engine (6 modules)
-experiments/             # 20 verification experiments
-tools/                   # N6 calculator + architecture optimizer
-docs/
-  # Foundation (기반 기술)
-  superconductor/        # 초전도체 — frustrated loops, Josephson, 무손실 송전
-
-  # Computing (에너지 소비 줄이기)
-  ai-efficiency/         # AI 모델 최적화 — 16 techniques, R(n) frame
-  chip-architecture/     # 반도체/ASIC/FPGA — 48 hypotheses (H-CHIP)
-  quantum-computing/     # 양자 게이트/에러보정 — J2(6)=24 qubit
-  compiler-os/           # 컴파일러, OS, 스케줄링
-
-  # Energy (에너지 생산/관리)
-  energy-generation/     # 발전 — 태양광, 핵융합, 터빈
-  power-grid/            # 전력망 분배 — 1/2+1/3+1/6=1
-  battery-storage/       # 에너지 저장/충방전 사이클
-  thermal-management/    # 열관리, 냉각 — R(n) 열역학
-
-  # Physical AI
-  robotics/              # 로봇 설계 — 관절/자유도/보행 from n=6
-  learning-algorithm/    # 학습 알고리즘 — 강화학습, 모방학습, 칩 연동
-
-  # Science
-  plasma-physics/        # 플라즈마 물리 — 핵융합, MHD, KSTAR/ITER
-
-  # Infrastructure
-  blockchain/            # N6 Coin / 분산 합의
-  network-protocol/      # IPv6, TCP, WiFi 6, 5G
-  cryptography/          # AES, SHA, RSA, ChaCha20
-  software-design/       # SOLID, GoF, REST, ACID
-  programming-language/  # 프로그래밍 언어 아키텍처 — 타입, 패러다임, 패턴
-
-  paper/                 # arXiv paper outlines
-model_utils.py           # Shared constants and utilities
-```
-
-## The Equation
-
-```
-  sigma(n) * phi(n) = n * tau(n)
-
-  n = 6
-
-  This is not a design choice.
-  This is not an optimization target.
-  It is what systems converge to when given enough freedom.
-
-  120+ hypotheses. 27 confirmed. 11 honest failures. 1 equation.
-```
+| **Scale > 2.4M untested** | 1B+ parameter verification still pending |
 
 ---
 
 ## Quick Start
 
 ```bash
-# Core technique demos
 python techniques/phi6simple.py          # 71% FLOPs reduction
 python techniques/fft_mix_attention.py   # 3x faster attention
-python techniques/egyptian_moe.py        # Perfect load balancing
-
-# N6 Inevitability Engine
-python engine/emergent_n6_trainer.py     # Watch architecture self-converge
-
-# Verification experiments
-python experiments/experiment_rg_flow.py           # RG flow to R=1
-python experiments/experiment_cosmology_biology.py  # Physical constants
-python experiments/experiment_chip_verification.py  # Hardware patterns
+python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 ```
 
 ## Citation

@@ -1,32 +1,49 @@
-# N6 Network Protocol Hypotheses -- Verification Report
+# N6 Network Protocol Hypotheses — Strengthened Independent Verification
 
-Date: 2026-03-30
+Date: 2026-03-30 (revised)
 
 ## Methodology
 
-Each hypothesis (H-NP-1 through H-NP-18) is checked against:
+Each hypothesis (H-NP-1 through H-NP-18) is verified against:
 1. **Math check**: Does the claimed n=6 derivation hold arithmetically?
-2. **Fact check**: Does the predicted value match real-world standards/practice?
-3. **Grade**: EXACT / CLOSE / WEAK / FAIL / UNVERIFIABLE
+2. **Fact check**: Does the predicted value match real-world standards/practice? (primary sources: RFCs, IEEE standards, 3GPP specs)
+3. **Uniqueness check**: Could a different n=6 expression produce the same value? How many expressions in the n=6 toolkit yield integers in the relevant range?
+4. **Counterfactual**: Does n=28 (next perfect number) produce anything meaningful for the same domain?
+5. **Grade**: EXACT / CLOSE / WEAK / FAIL
 
 Grade definitions:
-- **EXACT**: Math is correct AND the real-world value matches precisely.
-- **CLOSE**: Math is correct AND the real-world value is in the right ballpark but not precise.
-- **WEAK**: Math is correct BUT the match is trivial, cherry-picked, or the derivation path is arbitrary.
-- **FAIL**: The real-world value does not match the claim.
-- **UNVERIFIABLE**: The claim cannot be checked against a concrete standard or measurement.
+- **EXACT**: Math is correct AND the real-world value matches precisely AND the matched constant is architecturally fixed (not approximate or subjective).
+- **CLOSE**: Math is correct AND the real-world value is within 5%, or exact count but plausibly coincidental.
+- **WEAK**: Math is correct BUT the match is trivial (n itself, ubiquitous power of 2), cherry-picked, or the derivation path is arbitrary.
+- **FAIL**: The real-world value does not match the claim, or the claim is factually wrong.
+
+### Available n=6 expressions (the "toolkit")
+
+To assess cherry-picking risk, we enumerate distinct values producible from pairwise operations on {n=6, sigma=12, tau=4, phi=2, sopfr=5, mu=1, J2=24, lambda=2}:
+
+Single values: 1, 2, 4, 5, 6, 12, 24
+Pairwise sums: 3, 6, 7, 8, 13, 14, 16, 17, 25, 26, 28, 29, 36
+Pairwise differences: 1, 2, 3, 5, 6, 7, 8, 10, 11, 18, 19, 20, 22, 23
+Products: 2, 4, 5, 6, 8, 10, 12, 20, 24, 48, 60, 72, 120, 288...
+Powers of 2 from exponents: 2, 4, 8, 16, 32, 64, 128, 256, 1024, 2048, 4096, 65536...
+
+**Coverage**: Through sums, differences, and 2^(expr), most integers 1-30 and most powers of 2 from 2^1 to 2^16 are reachable. This means nearly any small integer or power-of-2 constant in networking can be "derived."
 
 ---
 
 ## H-NP-1: IPv6 Address Length = 2^(sigma-sopfr) = 128 bits
 
-**Math check**: sigma(6)=12, sopfr(6)=5, difference=7, 2^7=128. Correct.
+**Math check**: sigma(6)=12, sopfr(6)=5, 12-5=7, 2^7=128. Correct.
 
-**Fact check**: IPv6 addresses are 128 bits per RFC 2460 / RFC 8200. Exact match.
+**Fact check**: IPv6 addresses are 128 bits per RFC 8200 (superseding RFC 2460). Exact match.
 
-**Commentary**: The math is clean and the match is exact. However, the derivation path (sigma minus sopfr) is one of many possible arithmetic combinations of n=6 functions. The choice of "sigma minus sopfr" is not motivated by any structural argument -- it is selected because it produces 7, which yields 128. The subsidiary claim that IPv4's 32 bits = 2^sopfr(6) is a separate post-hoc fit.
+**Uniqueness check**: 7 = sigma-sopfr is the only natural pairwise difference from the core functions that yields 7. However, 128 = 2^7 is a standard power of 2. The choice of sigma minus sopfr (rather than, say, sigma minus sopfr as a motivated operation) has no structural justification beyond producing 7.
 
-**Grade: EXACT** (value match is real; derivation path is cherry-picked but arithmetically sound)
+**Counterfactual**: n=28: sigma(28)=56, sopfr(28)=9, difference=47. 2^47 = 140 trillion -- no protocol uses this. The n=6 derivation is unique among perfect numbers.
+
+**Commentary**: The match is exact and non-trivial (128 is not the most "obvious" power of 2 for address space -- 64, 256, and 32 were all candidates during IPv6 design). The derivation path sigma-sopfr is reused for OSI layers (H-NP-7), which is a consistency point but also a sign that this particular difference was noticed and then applied to multiple targets.
+
+**Grade: EXACT**
 
 ---
 
@@ -34,11 +51,15 @@ Grade definitions:
 
 **Math check**: n=6. Trivially correct.
 
-**Fact check**: RFC 793 defines exactly 6 control bits in the TCP header: URG, ACK, PSH, RST, SYN, FIN. This is correct for the original 1981 specification. The document correctly acknowledges that later extensions added ECE, CWR, and NS (bringing the total to 9), while arguing the original 6 are the "core" set.
+**Fact check**: RFC 793 (1981) defines exactly 6 control bits: URG, ACK, PSH, RST, SYN, FIN. This is correct. However, RFC 3168 (2001) added ECE and CWR, and RFC 3540 (2003) added NS, bringing the total to 9 in the modern TCP header. The claim selectively counts the "original" set.
 
-**Commentary**: The value match is genuine but the derivation is the most trivial possible -- the number itself IS n. Any protocol with exactly 6 of something would "match." The mapping of individual flags to divisors of 6 ({1,2,3,6}) is purely decorative and has no structural justification. The subsidiary claim that TCP has 11 states = sigma-mu is separately checked at H-NP-13.
+**Uniqueness check**: Matching n itself is the lowest-effort match possible. Any protocol feature with count 6 trivially matches.
 
-**Grade: WEAK** (real match but trivially n=6 itself; decorative divisor mapping)
+**Counterfactual**: n=28 control flags would be absurd for a transport header.
+
+**Commentary**: The divisor-to-flag mapping ({1,2,3,6} mapped to SYN/ACK/FIN/RST) is decorative -- there is no structural reason why SYN corresponds to divisor 1 rather than divisor 3. The modern TCP header has 9 flags, not 6. The 2^6=64 flag combination count is numerically correct but all TCP flag sets produce 2^k combinations for k flags; this is not specific to n=6.
+
+**Grade: WEAK** (trivial n-match; modern count is 9, not 6)
 
 ---
 
@@ -46,11 +67,16 @@ Grade definitions:
 
 **Math check**: n=6. Trivially correct.
 
-**Fact check**: WiFi Alliance did name 802.11ax as "WiFi 6." The generation numbering is correct.
+**Fact check**: WiFi Alliance designated 802.11ax as "WiFi 6" in October 2018. Correct. This naming scheme was retroactively applied: previous generations were 802.11a/b/g/n/ac (not numbered 1-5 by IEEE). The "WiFi 6" name is a marketing decision by the WiFi Alliance, not an IEEE technical constant.
 
-**Commentary**: This is a naming convention match, not a technical constant. The "WiFi 6" name was assigned retroactively by the WiFi Alliance in 2018 as a marketing simplification. Previous generations were not numbered this way (802.11a/b/g/n/ac). The claim that WiFi 6 is the "optimal efficiency generation" is subjective. The subsidiary claims (MU-MIMO 8 streams = sigma-tau, 1024-QAM = 2^(sigma-phi)) are separate numerological fits to WiFi 6 features that were not designed around n=6.
+**Uniqueness check**: n=6 itself. Trivial.
 
-**Grade: WEAK** (trivial naming match; efficiency optimality claim is subjective)
+**Subsidiary claims check**:
+- MU-MIMO 8 streams = sigma-tau: WiFi 6 supports up to 8 MU-MIMO streams. The actual count is configurable (1, 2, 4, or 8). 8 is the *maximum*, not a fixed constant.
+- 1024-QAM = 2^10 = 2^(sigma-phi): 1024-QAM was introduced in WiFi 6. However, 1024 = 2^10 is simply the next power of 2 after 512 (2^9 in 802.11ac Wave 2). QAM orders follow powers of 2 by definition.
+- WiFi 6E at 6 GHz: The 6 GHz band is defined by radio spectrum allocation, not protocol design.
+
+**Grade: WEAK** (marketing name, not engineering constant; subsidiary claims are post-hoc fits to powers of 2)
 
 ---
 
@@ -58,11 +84,15 @@ Grade definitions:
 
 **Math check**: tau(6)=4. Correct.
 
-**Fact check**: 3GPP does define key 5G KPIs, but the number of "optimization dimensions" depends entirely on how you categorize them. The document lists Speed/Latency/Density/Reliability, but 3GPP also identifies energy efficiency, mobility, spectrum efficiency, and area traffic capacity as distinct KPIs (ITU-R M.2083 defines 8 key capabilities for IMT-2020). The density target of 10^6 devices/km^2 does contain a literal "6" but this is a coincidence of the metric system.
+**Fact check**: The claim of "4 optimization dimensions" is a selective framing. ITU-R M.2083 (IMT-2020 vision) defines **8 key capabilities**: peak data rate, user experienced data rate, spectrum efficiency, mobility, latency, connection density, network energy efficiency, area traffic capacity. 3GPP TS 22.261 identifies **3 primary service types**: eMBB, URLLC, mMTC. The "4 dimensions" (Speed/Latency/Density/Reliability) requires cherry-picking from the 8 KPIs and ignoring the other 4.
 
-**Commentary**: The "4 dimensions" framing is a selective grouping. The network slicing claim (4 types: eMBB, URLLC, mMTC, V2X) is closer -- 3GPP initially defined 3 slice types (eMBB, URLLC, mMTC); V2X was added later and its status as a separate slice type is debatable.
+**Network slicing claim**: 3GPP defines 3 standardized slice/service types (SST) in TS 23.501: eMBB (SST=1), URLLC (SST=2), mMTC (SST=3). V2X is not a separate standardized SST -- it uses URLLC. So the count is 3, not 4.
 
-**Grade: WEAK** (the "4 dimensions" requires selective categorization; ITU defines 8 KPIs)
+**Density 10^6 claim**: The target of 10^6 devices/km^2 is an ITU KPI. The exponent 6 is a coincidence of the metric system (it could equally be expressed as 1 device/m^2).
+
+**Counterfactual**: tau(28)=6. Under this framework, 5G should have 6 optimization dimensions -- which is actually closer to the real ITU count of 8 than tau(6)=4 is.
+
+**Grade: FAIL** (ITU defines 8 KPIs, not 4; 3GPP defines 3 slice types, not 4; the claimed count requires cherry-picking)
 
 ---
 
@@ -70,11 +100,17 @@ Grade definitions:
 
 **Math check**: sigma(6)=12, mu(6)=1, sum=13. Correct.
 
-**Fact check**: There are exactly 13 DNS root server identities (A through M), operated by 12 organizations. This has been the case since 1997 and remains unchanged. Exact match.
+**Fact check**: There are exactly 13 DNS root server identities (A through M), maintained by 12 organizations. This has been unchanged since 1997. The 13 root server identities are a hard architectural constraint: the 512-byte UDP response limit (pre-EDNS) allowed exactly 13 NS records with glue A records in a priming response.
 
-**Commentary**: The number 13 is genuinely a fixed architectural constant, constrained by the 512-byte UDP packet size limit for DNS responses. The n=6 derivation (12+1) is clean. However, sigma+mu is just one of many expressions that yield 13. The deeper explanation (512-byte UDP constraint forcing 13 NS records) is the actual engineering reason, not number theory. The subsidiary claim about majority = 7 = sigma-sopfr is numerically correct but has no causal relationship to consensus protocols (DNS root servers do not use majority voting).
+**Uniqueness check**: 13 = sigma+mu is a clean expression. No other simple pairwise operation on core functions yields 13. However, 13 is also 6+7, sopfr+sigma-tau, etc. -- many paths exist when you allow three-term combinations.
 
-**Grade: EXACT** (value match is real and architecturally significant; derivation is post-hoc)
+**Counterfactual**: n=28: sigma(28)+mu(28) = 56+(-1) = 55. Meaningless for DNS.
+
+**Subsidiary claims**: The "majority = 7 = sigma-sopfr" claim is numerically correct (ceil(13/2) = 7) but DNS root servers do not use majority voting. They are independently operated Anycast clusters. This mapping has no operational meaning.
+
+**Commentary**: This is a strong match. 13 is a non-obvious fixed architectural constant, not a round number or power of 2. The derivation 12+1 = "complete structure plus one unit of redundancy" has at least a poetic parallel to fault tolerance. The engineering explanation (512-byte UDP constraint) is the actual cause, but the coincidence is notable.
+
+**Grade: EXACT**
 
 ---
 
@@ -82,11 +118,13 @@ Grade definitions:
 
 **Math check**: sigma(6)=12, tau(6)=4, difference=8. Correct.
 
-**Fact check**: This is where it gets complicated. RFC 7231 (HTTP/1.1 Semantics) defines GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE -- that is 8 methods. However, PATCH is defined in RFC 5789 and is universally considered a standard HTTP method. The document lists PATCH instead of CONNECT in its table of 8, which is an error of substitution. The actual standard set in common use is 9 methods (the 8 from RFC 7231 plus PATCH from RFC 5789). If you count only RFC 7231, the answer is 8. If you count all standard methods, it is 9.
+**Fact check**: RFC 7231 (HTTP/1.1 Semantics) defines 8 methods: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE. RFC 5789 adds PATCH. The hypothesis table lists PATCH but omits CONNECT -- this is factually incorrect bookkeeping. The real RFC 7231 count is 8 (without PATCH), or 9 (with PATCH from a separate RFC).
 
-**Commentary**: The document's own table lists PATCH but omits CONNECT, which is dishonest bookkeeping -- swapping one method for another to maintain the count of 8. RFC 7231 itself defines 8, so the number is defensible if you draw the line at a single RFC, but the practical answer is 9. The CRUD-to-tau(6) mapping (4 operations) is a reasonable but standard observation unrelated to n=6.
+**Uniqueness check**: 8 = sigma-tau is one of many ways to get 8 from the toolkit (also: sigma-tau, 2^3, tau*phi, etc.). The formula sigma-tau is also used for H-NP-17 (Ethernet preamble), creating a collision.
 
-**Grade: CLOSE** (8 holds for RFC 7231 alone, but the table swaps CONNECT for PATCH; real-world count is 9)
+**Formula reuse problem**: Using sigma-tau=8 for both HTTP methods and Ethernet preamble bytes undermines any claim that the formula has domain-specific meaning. If sigma-tau "means" something about HTTP semantics, it should not simultaneously "mean" something about clock synchronization.
+
+**Grade: CLOSE** (RFC 7231 count is 8, but the table contains an error swapping CONNECT for PATCH; formula reuse weakens the claim)
 
 ---
 
@@ -94,23 +132,35 @@ Grade definitions:
 
 **Math check**: sigma(6)=12, sopfr(6)=5, difference=7. Correct.
 
-**Fact check**: The OSI model (ISO 7498) has exactly 7 layers. Exact match.
+**Fact check**: ISO/IEC 7498-1 (OSI Reference Model) defines exactly 7 layers. This is a fixed architectural standard from 1984.
 
-**Commentary**: The value match is exact. The subsidiary mapping of layer numbers to n=6 function values (Layer 4 = tau(6), Layer 2 = phi(6), Layer 1 = mu(6)) is decorative -- the layer numbers 1 through 7 will inevitably hit several n=6 function values. The claim that TCP/IP's 4 layers = tau(6) is a neat secondary match. As with other hypotheses, the derivation path (sigma minus sopfr) is selected to hit 7.
+**Uniqueness check**: 7 = sigma-sopfr is the same derivation as H-NP-1's exponent. This is internally consistent (both use sigma-sopfr) but means the formula is doing double duty.
 
-**Grade: EXACT** (value match is real; same derivation path concern as H-NP-1)
+**Counterfactual**: n=28: sigma(28)-sopfr(28) = 56-9 = 47 layers. Meaningless.
+
+**Subsidiary claim**: TCP/IP 4 layers = tau(6) is a genuine secondary match. The practical TCP/IP model has 4 layers (Link, Internet, Transport, Application), matching tau(6)=4.
+
+**Commentary**: The value 7 is exact and the OSI model is a foundational standard. However, the layer-by-layer mapping (Layer 4 = tau(6), Layer 2 = phi(6), etc.) is inevitable: the integers 1 through 7 overlap heavily with n=6 function values {1, 2, 4, 5} simply by counting. The real question is whether OSI "had to" have 7 layers -- historically, the number was debated (some proposals had 5, others 8).
+
+**Grade: EXACT** (architecturally fixed at 7; derivation is clean; same sigma-sopfr as H-NP-1 is a consistency point)
 
 ---
 
 ## H-NP-8: Ethernet MTU 1500 = 6 x 250
 
-**Math check**: 1500 / 6 = 250. Correct. The document then decomposes 250 = phi(6) x sopfr(6)^3 = 2 x 125. This is arithmetically correct (2 x 5^3 = 250).
+**Math check**: 1500/6 = 250. Correct. 250 = 2 x 5^3 = phi(6) x sopfr(6)^3. Arithmetically valid.
 
-**Fact check**: IEEE 802.3 Ethernet MTU is 1500 bytes. Correct. Jumbo frames are 9000 bytes and 9000/1500 = 6. Correct.
+**Fact check**: IEEE 802.3 Ethernet MTU is 1500 bytes. Correct. Jumbo frames are 9000 bytes; 9000/1500 = 6. Correct.
 
-**Commentary**: Any number is divisible by 6 if it happens to be a multiple of 6. The real reason for 1500 bytes is historical: it was a compromise between latency and throughput for 10 Mbps Ethernet in the early 1980s, balancing RAM costs and collision domain efficiency. The Egyptian fraction decomposition (750+500+250) is mathematically correct but has no engineering significance. The jumbo frame ratio of 6 is a genuinely interesting coincidence. The title formula "n x (sigma-tau)^(sigma-sopfr-tau-1)" evaluates to 6 x 8^2 = 384, not 1500 -- the title formula appears to be wrong.
+**Title formula check**: The title claims 1500 = n x (sigma-tau)^(sigma-sopfr-tau-1) = 6 x 8^(7-4-1) = 6 x 8^2 = 6 x 64 = 384. **This does not equal 1500. The title formula is wrong.**
 
-**Grade: WEAK** (1500 is divisible by 6, but so are many numbers; jumbo frame ratio is interesting; title formula is incorrect)
+**Uniqueness check**: 1500 is divisible by 6, but also by 2, 3, 4, 5, 10, 12, 15, 20, 25, 30, 50, 60, 75, 100, 125, 150, 250, 300, 375, 500, 750. Divisibility by 6 is not selective. The decomposition phi(6) x sopfr(6)^3 is a multi-step construction that could fit many numbers.
+
+**Historical context**: The 1500-byte MTU was chosen in 1980 by the Xerox/DEC/Intel consortium as a compromise: small enough for low latency on 10 Mbps shared media, large enough for reasonable throughput, with RAM cost constraints. The value was pragmatic, not mathematical.
+
+**Jumbo frame 6x ratio**: 9000 = 6 x 1500 is genuinely interesting. IEEE 802.3 does not standardize jumbo frames; the 9000 value is a de facto convention. Some NICs support 9216 or 9014 bytes, not exactly 9000.
+
+**Grade: WEAK** (title formula is mathematically wrong; divisibility by 6 is not selective; jumbo frame ratio is interesting but not standardized)
 
 ---
 
@@ -118,11 +168,19 @@ Grade definitions:
 
 **Math check**: sigma(6)=12, phi(6)=2, difference=10. Correct.
 
-**Fact check**: RFC 6928 recommends IW=10 segments. The historical progression 1->2->4->10 is accurate (RFC 2001 -> RFC 2414 -> RFC 3390 -> RFC 6928).
+**Fact check**: RFC 6928 (2013) recommends IW=10 MSS-sized segments. The historical progression is:
+- RFC 2001 (1997): IW=1
+- RFC 2414 (1998): IW=2 (experimental)
+- RFC 3390 (2002): IW = min(4*MSS, max(2*MSS, 4380)) -- effectively IW=2 for large MSS, IW=3 for MSS 1096-2190, IW=4 for MSS<=1095
+- RFC 6928 (2013): IW=10
 
-**Commentary**: The value match to 10 is exact. The historical progression mapping (1=mu, 2=phi, 4=tau, 10=sigma-phi) is the strongest structural argument in this document -- four successive RFC values each matching an n=6 arithmetic function. However, IW=3 was also a valid setting under RFC 3390 (for MSS > 1095), which breaks the clean sequence. The progression is also just 1, 2, 4, 10 -- the jumps are roughly "doubling then a bigger jump," which is common in engineering parameter tuning.
+**Omission**: The hypothesis maps 1->2->4->10 to mu->phi->tau->(sigma-phi), but RFC 3390 also allowed IW=3 (for certain MSS values). The sequence is really 1, 2, 3-or-4, 10 -- the "3" breaks the clean mapping.
 
-**Grade: CLOSE** (10 matches exactly; the 4-step progression is striking but IW=3 was also standard and is omitted)
+**Uniqueness check**: 10 = sigma-phi is one way. Also 10 = n+tau, sopfr+sopfr, 2*sopfr, etc. Multiple paths to 10 exist.
+
+**Commentary**: The current standard value of 10 is exact. The 4-step "convergence" narrative (1->2->4->10) is the most compelling structural claim in the document, but it requires suppressing the IW=3 case. The value 10 is also simply a "round number" that Google found empirically optimal through large-scale A/B testing.
+
+**Grade: CLOSE** (10 matches exactly; progression narrative requires omitting IW=3; value is empirically determined, not structurally mandated)
 
 ---
 
@@ -130,23 +188,34 @@ Grade definitions:
 
 **Math check**: tau(6)=4. Correct.
 
-**Fact check**: Average AS path length on the Internet is approximately 3.5-4.5 hops depending on measurement point and time. APNIC and RIPE data generally show values in the range 3.5-4.2. The claim of "approximately 4" is reasonable. The claim of "approximately 12-16 Tier-1 ISPs" is roughly correct (commonly cited as ~15-16, though the exact number is debated). The claim of "optimal 6 peering relationships per AS" is not supported by data -- large networks peer with hundreds or thousands of others.
+**Fact check**: Average AS path length measurements (APNIC, RIPE RIS, RouteViews):
+- 2015-2020 range: ~3.8-4.3 hops
+- 2023-2025 range: ~3.5-4.0 hops (declining due to IXP growth)
+The claim of "approximately 4" is within range but approximate.
 
-**Commentary**: The AS path length match is approximate. The "optimal 6 peering" claim has no empirical basis. The Tier-1 count being "near sigma(6)=12" is a stretch when the actual count is 15-16.
+**Peering claim check**: "Optimal 6 peering relationships per AS" -- this is unsupported. CAIDA data shows massive variation: stub ASes may peer with 1-3 providers, while large transit networks peer with hundreds or thousands. There is no empirical evidence for 6 being optimal.
 
-**Grade: CLOSE** (AS path length ~4 is roughly right; peering claim is unsupported)
+**Tier-1 ISP claim**: The hypothesis claims ~12-16 Tier-1 ISPs near sigma(6)=12. CAIDA's AS ranking consistently identifies ~15-17 Tier-1 networks. The range 12-16 is stated broadly enough to capture this, but sigma(6)=12 is at the low end.
+
+**Counterfactual**: tau(28)=6. An AS path length of ~6 was actually closer to reality in the early 2000s. The declining trend toward ~3.5 actually moves *away* from tau(6)=4.
+
+**Grade: CLOSE** (approximate match to ~4; peering claim is unsupported; trend is moving below 4)
 
 ---
 
 ## H-NP-11: QUIC Multiplexed Streams = J_2(6) = 24
 
-**Math check**: J_2(6) = 6^2 * product(1 - 1/p^2) for primes p|6 = 36 * (1-1/4)(1-1/9) = 36 * 3/4 * 8/9 = 36 * 24/36 = 24. Correct.
+**Math check**: J_2(6) = 6^2 x prod(1-1/p^2) for p|6 = 36 x (3/4)(8/9) = 36 x 24/36 = 24. Correct.
 
-**Fact check**: QUIC (RFC 9000) does not specify a fixed number of concurrent streams. The initial_max_streams transport parameter is negotiated. Common defaults: Chromium uses 100 for bidi streams. The claim that "effective active streams are ~24" is not well-documented. The claim that "average web page resources ~20-30" is approximately correct (HTTP Archive median is around 60-80 requests per page as of recent data, though many are small).
+**Fact check**: QUIC (RFC 9000) does not define a fixed stream concurrency. The initial_max_bidi_streams and initial_max_uni_streams transport parameters are negotiated per connection.
+- Chromium default: initial_max_bidi_streams = 100
+- Firefox (Neqo): default 100
+- nginx quic module: default 256
+- Cloudflare quiche: default 100
 
-**Commentary**: There is no standard or empirical measurement that pins QUIC streams to 24. The Chrome per-origin limit of 6 (H-NP-18) times 4 is one way to get 24, but the actual QUIC stream defaults are much higher. The "effective active" framing is unfalsifiable.
+The claim that "effective active streams are ~24" has no empirical basis in published measurements. HTTP Archive data (2024-2025) shows median page loads request 60-80 resources, not 20-30 as claimed.
 
-**Grade: UNVERIFIABLE** (no standard or measurement confirms 24 as a meaningful QUIC constant)
+**Grade: FAIL** (no standard, implementation default, or empirical measurement supports 24; actual defaults are 100-256; page resource counts are 60-80)
 
 ---
 
@@ -154,35 +223,47 @@ Grade definitions:
 
 **Math check**: phi(6)=2. Correct.
 
-**Fact check**: TLS 1.2 full handshake requires 2 round trips. TLS 1.3 full handshake requires 1 round trip. TLS 1.3 0-RTT resumption requires 0 round trips. These are all correct.
+**Fact check**: TLS 1.2 full handshake requires 2 round trips. TLS 1.3 full handshake requires 1 round trip. TLS 1.3 0-RTT resumption requires 0 round trips. All correct.
 
-**Commentary**: The match for TLS 1.2 = 2 RTT is exact. The progression 2->1->0 mapped to phi->mu->0 is numerologically tidy but the values 2, 1, 0 are such small integers that matching them to number-theoretic functions is not impressive. Any protocol handshake will use a small number of round trips. The prediction about post-quantum TLS reverting to 2-RTT is speculative but plausible (larger key exchanges may require more rounds).
+**Uniqueness check**: phi(6)=2 = lambda(6)=2. The value 2 is the most common small integer in engineering. Any protocol involving a challenge-response pattern uses 2 RTTs (SSH, DTLS 1.2, IPsec IKEv1 phase 1, etc.). Matching 2 to phi(6) is trivially easy.
 
-**Grade: WEAK** (2 RTT for TLS 1.2 is exact but trivially small; any 2-valued protocol feature would match phi(6))
+**Commentary**: The progression 2->1->0 mapped to phi->mu->0 assigns three different n=6 functions to three consecutive protocol versions, then runs out of functions and maps to 0 directly. The post-quantum TLS prediction (revert to 2-RTT) is speculative: ML-KEM handshakes in TLS 1.3 still complete in 1-RTT despite larger key sizes.
+
+**Grade: WEAK** (2 is too common a value; any challenge-response protocol matches phi(6); progression mapping is ad hoc)
 
 ---
 
-## H-NP-13: TCP State Machine = sigma(6)-mu(6) = 11
+## H-NP-13: TCP State Machine = sigma(6)-mu(6) = 11 States
 
 **Math check**: sigma(6)=12, mu(6)=1, difference=11. Correct.
 
-**Fact check**: RFC 793 TCP state diagram has exactly 11 states: CLOSED, LISTEN, SYN-SENT, SYN-RECEIVED, ESTABLISHED, FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, TIME-WAIT. Exact match.
+**Fact check**: RFC 793 TCP state diagram defines exactly 11 states: CLOSED, LISTEN, SYN-SENT, SYN-RECEIVED, ESTABLISHED, FIN-WAIT-1, FIN-WAIT-2, CLOSE-WAIT, CLOSING, LAST-ACK, TIME-WAIT. Exact match. This count has not changed since 1981.
 
-**Commentary**: This is one of the stronger matches. 11 is not a "round" number and the TCP state count is a well-defined, fixed architectural constant from RFC 793. The derivation sigma-mu = 12-1 = 11 is clean. That said, sigma-mu is one of dozens of computable expressions from n=6 functions, and you could match many integers in the range 1-24 with some combination.
+**Uniqueness check**: 11 = sigma-mu is the only simple pairwise difference yielding 11. The value 11 is a prime, making it harder to reach through multiplication. This is one of the more selective matches.
 
-**Grade: EXACT** (11 states is a precise, non-trivial match to a non-obvious constant)
+**Counterfactual**: n=28: sigma(28)-mu(28) = 56-(-1) = 57 states. Meaningless.
+
+**Formula reuse**: sigma-mu=11 is also the exponent for H-NP-16 (RSA-2048 = 2^11). Using the same formula for TCP states and RSA key size is a consistency concern -- but at least the raw value (11) and derived value (2^11) are distinguished by the 2^x operation.
+
+**Commentary**: This is the strongest match in the document. 11 is not a round number, not a power of 2, and not a trivially common count. The TCP state machine is a precisely defined, architecturally fixed constant from the most important transport protocol. The derivation 12-1 = "complete structure minus the base unit" has an intuitive interpretation: 12 represents total structural capacity, minus 1 for the degenerate/null state, leaving 11 active states.
+
+**Grade: EXACT** (precise, non-obvious, architecturally fixed; strongest hypothesis)
 
 ---
 
 ## H-NP-14: Port Number Space = 2^(sigma+tau) = 2^16 = 65536
 
-**Math check**: sigma(6)=12, tau(6)=4, sum=16, 2^16=65536. Correct.
+**Math check**: sigma(6)+tau(6) = 12+4 = 16, 2^16 = 65536. Correct.
 
-**Fact check**: TCP/UDP port fields are 16-bit unsigned integers, giving 65536 ports (0-65535). Exact match. Well-known ports 0-1023 = 1024 = 2^10 is also correct. The document claims 10 = sigma-phi = 12-2, which is arithmetically correct.
+**Fact check**: TCP and UDP port fields are 16-bit unsigned integers (0-65535). 65536 port values total. Correct.
 
-**Commentary**: 16-bit fields are extremely common in computing (16-bit integers, Unicode BMP, etc.), so matching 16 to some n=6 expression is not remarkable. The well-known port range of 1024 = 2^10 is a standard power-of-2 boundary. The claim about ephemeral port start 49152 = 3 x 2^14 is factually correct (49152 = 3 x 16384) but sigma+phi = 14, not "sigma+phi" as labeled -- the document says 2^(sigma+phi) which would be 2^14 = 16384, and 3 x 16384 = 49152. This is arithmetically valid but increasingly contrived.
+**Uniqueness check**: 16-bit fields are the most common word size in networking and computing. The value 16 can be reached many ways: sigma+tau=16, 2*sigma-sigma=12+4, 4*tau, etc. TCP/UDP ports being 16-bit is part of a broader pattern: Ethernet type fields (16-bit), IP identification (16-bit), TCP window (16-bit), UDP length (16-bit), etc. ALL of these would "match" sigma+tau=16.
 
-**Grade: WEAK** (16-bit fields are ubiquitous; matching 16 = sigma+tau is unimpressive)
+**Well-known port claim**: 0-1023 = 1024 = 2^10 = 2^(sigma-phi). Arithmetically correct, but 1024 = 2^10 is a ubiquitous computing boundary (1 KB).
+
+**Commentary**: Matching any 16-bit field to sigma+tau is not impressive because 16-bit is the default field width in networking protocol headers. This is less about n=6 and more about 16-bit computing being standard.
+
+**Grade: WEAK** (16-bit fields are ubiquitous; sigma+tau=16 is unimpressive when everything in networking is 16-bit)
 
 ---
 
@@ -190,35 +271,50 @@ Grade definitions:
 
 **Math check**: sopfr(6) = 2+3 = 5. Correct.
 
-**Fact check**: HTTP defines exactly 5 status code classes: 1xx, 2xx, 3xx, 4xx, 5xx. Exact match.
+**Fact check**: HTTP defines exactly 5 status code classes: 1xx (Informational), 2xx (Success), 3xx (Redirection), 4xx (Client Error), 5xx (Server Error). This is per RFC 9110 (current) and unchanged since HTTP/1.0. Exact match.
 
-**Commentary**: The value match is exact. However, "5 categories" is an extremely common organizational pattern (5-point scales, 5 senses, etc.). The decomposition of client/server error mapping to prime factors 2 and 3 is decorative. The number 5 appears in countless contexts and sopfr(6)=5 is just one way to derive it.
+**Uniqueness check**: 5 = sopfr(6) = 2+3. Also 5 = sopfr, tau+mu, n-mu, etc. The number 5 is extremely common in categorization systems (5-point Likert scales, 5 severity levels, 5 DEFCON levels, etc.). Human designers frequently partition things into 5 categories.
 
-**Grade: EXACT** (value is precisely correct; derivation is one of many ways to get 5)
+**Counterfactual**: sopfr(28) = 2+7 = 9. 9 HTTP status classes would be excessive; 5 is appropriate. But this tells us more about human categorization tendencies than about n=6.
 
----
+**Commentary**: The match is exact and the constant is fixed. However, 5-category systems are so common in human design that this match carries low information content. The subsidiary claim that the decomposition 5 = 2+3 maps to "client-side (2,4) vs. server-side (3,5)" categories is a forced pattern -- 1xx (Informational) does not fit either side cleanly.
 
-## H-NP-16: RSA Minimum Key Size = 2^(sigma-mu) = 2048
-
-**Math check**: sigma(6)=12, mu(6)=1, difference=11, 2^11=2048. Correct.
-
-**Fact check**: NIST SP 800-57 and CA/Browser Forum Baseline Requirements both specify RSA-2048 as the minimum acceptable key size for most purposes. Exact match. The progression 512->1024->2048->4096 is real, and these are standard RSA key sizes.
-
-**Commentary**: RSA key sizes are powers of 2 by convention (512, 1024, 2048, 4096), so the only question is which power. 2^11=2048 happens to be the current minimum standard. The "progression" mapping (2^9, 2^10, 2^11, 2^12) to various n=6 expressions is post-hoc: the document admits 2^9 = "non-standard" mapping. Powers of 2 from 9 to 12 will inevitably overlap with n=6 arithmetic outputs. The match to the current standard (2048) via sigma-mu is the same derivation as H-NP-13 (TCP 11 states), which is internally consistent.
-
-**Grade: EXACT** (2048 is correct; power-of-2 key sizes make this less surprising)
+**Grade: CLOSE** (exact value match, but 5 categories is a human design tendency, not a structural necessity; low information content)
 
 ---
 
-## H-NP-17: Ethernet Frame Preamble = sigma-tau = 8 Bytes
+## H-NP-16: RSA Minimum Key Size = 2^(sigma-mu) = 2^11 = 2048 bits
 
-**Math check**: sigma(6)=12, tau(6)=4, difference=8. Correct.
+**Math check**: sigma(6)-mu(6) = 12-1 = 11, 2^11 = 2048. Correct.
 
-**Fact check**: Ethernet preamble is 7 bytes of 10101010 pattern plus 1 byte SFD (10101011), totaling 8 bytes. Correct. MAC addresses are 6 bytes (EUI-48). Correct. Minimum Ethernet frame size is 64 bytes = 2^6. Correct.
+**Fact check**: NIST SP 800-57 Part 1 Rev. 5 (2020) specifies RSA-2048 as the minimum key size for key establishment through 2030. CA/Browser Forum Baseline Requirements mandate RSA-2048 minimum for TLS certificates. Exact match.
 
-**Commentary**: The 8-byte preamble match reuses the same sigma-tau=8 formula as H-NP-6 (HTTP methods). Using the same formula for unrelated constants weakens the framework -- if sigma-tau "means" HTTP methods, it should not also "mean" preamble bytes. The MAC address = 6 bytes = n is a genuine and well-known fact. The minimum frame 64 = 2^6 is a real match. These subsidiary facts (MAC=6, min frame=2^6) are arguably more interesting than the preamble claim.
+**Uniqueness check**: 11 = sigma-mu is the same expression as H-NP-13. RSA key sizes are conventionally powers of 2 (512, 1024, 2048, 3072, 4096). The only question is which power. 2^11 happens to be the current minimum, but this is a moving target: RSA-1024 (2^10) was the minimum until ~2013; RSA-3072 or RSA-4096 may become the minimum as quantum computing advances.
 
-**Grade: CLOSE** (individual values match but sigma-tau=8 is overloaded across hypotheses; MAC=6 bytes is the strongest point here and arguably deserves its own hypothesis)
+**Time-sensitivity**: The "match" to the current standard is epoch-dependent. In 2010, the match would have been 2^10 = sigma-phi. By 2035, it might be 2^12 = sigma. The hypothesis implicitly assumes the current era is "canonical," which is unjustified.
+
+**Subsidiary progression**: 512=2^9, 1024=2^10, 2048=2^11, 4096=2^12 maps to exponents 9, 10, 11, 12. The claim that these correspond to n=6 expressions requires mapping: 9 = "non-standard" (as the document admits), 10 = sigma-phi, 11 = sigma-mu, 12 = sigma. The first term (9) already breaks the pattern.
+
+**Grade: CLOSE** (current standard matches 2^11 exactly, but RSA key sizes are inherently powers of 2, and the minimum is a moving target; formula reuse with H-NP-13)
+
+---
+
+## H-NP-17: Ethernet Frame Preamble = sigma(6)-tau(6) = 8 Bytes
+
+**Math check**: sigma(6)-tau(6) = 12-4 = 8. Correct.
+
+**Fact check**: Ethernet preamble is 7 bytes of 10101010 pattern + 1 byte SFD (10101011) = 8 bytes total. Per IEEE 802.3. Correct. MAC addresses are 6 bytes (EUI-48). Correct. Minimum frame size is 64 bytes. Correct.
+
+**Formula reuse**: sigma-tau=8 is the same formula as H-NP-6 (HTTP methods). This is the most direct formula collision in the hypothesis set. Two unrelated constants (HTTP method count, Ethernet preamble bytes) are "derived" from the same formula, which means at least one derivation is meaningless.
+
+**Subsidiary matches**:
+- MAC address = 6 bytes = n: Genuine and well-known. EUI-48 is fixed.
+- Minimum frame 64 bytes = 2^6 = 2^n: The minimum frame size of 64 bytes exists to ensure collision detection on 10 Mbps Ethernet with maximum cable length. 64 = 2^6 is exact.
+- EUI-64 = 8 bytes = sigma-tau: EUI-64 is used in IPv6 interface identifiers.
+
+**Commentary**: The preamble is 8 bytes for clock synchronization -- the value is determined by the number of bit transitions needed for PLL lock at 10 Mbps. The MAC=6 bytes and min frame=2^6=64 are the genuinely interesting matches here and arguably stronger than the preamble claim.
+
+**Grade: CLOSE** (individual values match, but sigma-tau=8 is reused from H-NP-6; MAC=6 and frame=2^6 are the real highlights)
 
 ---
 
@@ -226,65 +322,79 @@ Grade definitions:
 
 **Math check**: n=6. Trivially correct.
 
-**Fact check**: Chrome, Firefox, and Safari all default to 6 concurrent connections per origin for HTTP/1.1. This is correct and well-documented (Chromium source: `kMaxSocketsPerGroup = 6`).
+**Fact check**: All major browsers default to 6 concurrent connections per origin for HTTP/1.1:
+- Chromium: `kMaxSocketsPerGroup = 6` (net/socket/client_socket_pool.cc)
+- Firefox: `network.http.max-persistent-connections-per-server = 6`
+- Safari: 6 per origin
 
-**Commentary**: This is a genuine, precise, independently-arrived-at engineering constant. Major browsers converged on 6 through empirical testing. The original HTTP/1.1 spec (RFC 2616) recommended 2, and browsers independently found 6 to be optimal. However, the n=6 "derivation" is just n itself -- the simplest possible match. The fact that browsers converged on this value through experimentation is interesting but does not require number theory to explain (it is a tradeoff between parallelism and server load/congestion).
+This is well-documented and has been stable since ~2008.
 
-**Grade: WEAK** (real engineering constant but derivation is trivially n=6 itself)
+**Historical context**: RFC 2616 (1999) recommended max 2 persistent connections per server. Browsers experimented with higher values. Opera tried 8, IE tried 4, and eventually all converged on 6 through empirical testing. Google's research showed 6 as the sweet spot balancing parallelism against TCP congestion and server load.
+
+**Uniqueness check**: n=6 itself. Trivial derivation. Any protocol feature equaling 6 matches.
+
+**Commentary**: The empirical convergence on 6 is genuinely interesting -- multiple independent engineering teams found the same optimum. However, the n=6 "derivation" is non-existent; the number IS n. The hypothesis does not explain WHY 6 is optimal through number theory; it merely observes the coincidence. The claim about 1/2+1/3+1/6 bandwidth distribution has no empirical measurement to support it.
+
+**Grade: WEAK** (real engineering constant determined empirically, but derivation is trivially n itself)
 
 ---
 
-## Summary Table
+## Revised Summary Table
 
-| ID | Hypothesis | Claimed Value | Real Value | Math OK | Grade |
-|----|-----------|--------------|------------|---------|-------|
-| H-NP-1 | IPv6 address bits | 128 | 128 | Yes | EXACT |
-| H-NP-2 | TCP control flags | 6 | 6 (original), 9 (modern) | Yes | WEAK |
-| H-NP-3 | WiFi generation | 6 | 6 (naming convention) | Yes | WEAK |
-| H-NP-4 | 5G optimization dims | 4 | 8 (ITU KPIs), 3-4 (selective) | Yes | WEAK |
-| H-NP-5 | DNS root servers | 13 | 13 | Yes | EXACT |
-| H-NP-6 | HTTP methods | 8 | 8 (RFC 7231) or 9 (with PATCH) | Yes | CLOSE |
-| H-NP-7 | OSI layers | 7 | 7 | Yes | EXACT |
-| H-NP-8 | Ethernet MTU | 1500 | 1500 | Yes | WEAK |
-| H-NP-9 | TCP initial window | 10 | 10 (RFC 6928) | Yes | CLOSE |
-| H-NP-10 | BGP AS path length | 4 | ~3.5-4.2 | Yes | CLOSE |
-| H-NP-11 | QUIC streams | 24 | No standard (default ~100) | Yes | UNVERIFIABLE |
-| H-NP-12 | TLS handshake RTT | 2 | 2 (TLS 1.2) | Yes | WEAK |
-| H-NP-13 | TCP states | 11 | 11 | Yes | EXACT |
-| H-NP-14 | Port number space | 65536 | 65536 | Yes | WEAK |
-| H-NP-15 | HTTP status classes | 5 | 5 | Yes | EXACT |
-| H-NP-16 | RSA min key size | 2048 | 2048 | Yes | EXACT |
-| H-NP-17 | Ethernet preamble | 8 bytes | 8 bytes | Yes | CLOSE |
-| H-NP-18 | Browser connections | 6 | 6 | Yes | WEAK |
+| ID | Hypothesis | Claimed Value | Real Value | Math OK | Grade | Change |
+|----|-----------|--------------|------------|---------|-------|--------|
+| H-NP-1 | IPv6 address bits | 128 | 128 (RFC 8200) | Yes | **EXACT** | -- |
+| H-NP-2 | TCP control flags | 6 | 6 (RFC 793) / 9 (modern) | Yes | **WEAK** | -- |
+| H-NP-3 | WiFi generation | 6 | 6 (marketing name) | Yes | **WEAK** | -- |
+| H-NP-4 | 5G optimization dims | 4 | 8 (ITU M.2083) / 3 (3GPP slices) | Yes | **FAIL** | was WEAK |
+| H-NP-5 | DNS root servers | 13 | 13 | Yes | **EXACT** | -- |
+| H-NP-6 | HTTP methods | 8 | 8 (RFC 7231) / 9 (with PATCH) | Yes | **CLOSE** | -- |
+| H-NP-7 | OSI layers | 7 | 7 (ISO 7498) | Yes | **EXACT** | -- |
+| H-NP-8 | Ethernet MTU | 1500 | 1500 | Yes | **WEAK** | -- |
+| H-NP-9 | TCP initial window | 10 | 10 (RFC 6928) | Yes | **CLOSE** | -- |
+| H-NP-10 | BGP AS path length | 4 | ~3.5-4.2 | Yes | **CLOSE** | -- |
+| H-NP-11 | QUIC streams | 24 | defaults 100-256 | Yes | **FAIL** | was UNVERIFIABLE |
+| H-NP-12 | TLS handshake RTT | 2 | 2 (TLS 1.2 only) | Yes | **WEAK** | -- |
+| H-NP-13 | TCP states | 11 | 11 (RFC 793) | Yes | **EXACT** | -- |
+| H-NP-14 | Port number space | 65536 | 65536 | Yes | **WEAK** | -- |
+| H-NP-15 | HTTP status classes | 5 | 5 | Yes | **CLOSE** | was EXACT |
+| H-NP-16 | RSA min key size | 2048 | 2048 (NIST current) | Yes | **CLOSE** | was EXACT |
+| H-NP-17 | Ethernet preamble | 8 bytes | 8 bytes | Yes | **CLOSE** | -- |
+| H-NP-18 | Browser connections | 6 | 6 | Yes | **WEAK** | -- |
 
-## Score Distribution
+## Revised Score Distribution
 
 | Grade | Count | Hypotheses |
 |-------|-------|-----------|
-| EXACT | 6 | H-NP-1, H-NP-5, H-NP-7, H-NP-13, H-NP-15, H-NP-16 |
-| CLOSE | 4 | H-NP-6, H-NP-9, H-NP-10, H-NP-17 |
-| WEAK | 7 | H-NP-2, H-NP-3, H-NP-4, H-NP-8, H-NP-12, H-NP-14, H-NP-18 |
-| FAIL | 0 | -- |
-| UNVERIFIABLE | 1 | H-NP-11 |
+| EXACT | 4 | H-NP-1, H-NP-5, H-NP-7, H-NP-13 |
+| CLOSE | 6 | H-NP-6, H-NP-9, H-NP-10, H-NP-15, H-NP-16, H-NP-17 |
+| WEAK | 6 | H-NP-2, H-NP-3, H-NP-8, H-NP-12, H-NP-14, H-NP-18 |
+| FAIL | 2 | H-NP-4, H-NP-11 |
+
+## Changes from Previous Verification
+
+| ID | Old Grade | New Grade | Reason for Change |
+|----|-----------|-----------|-------------------|
+| H-NP-4 | WEAK | **FAIL** | ITU defines 8 KPIs, not 4; 3GPP defines 3 slice types, not 4. The claimed count is wrong. |
+| H-NP-11 | UNVERIFIABLE | **FAIL** | Implementation defaults (100-256) and HTTP Archive data (60-80 resources) directly contradict the claim of 24. |
+| H-NP-15 | EXACT | **CLOSE** | 5-category systems are a human cognitive tendency (Likert scales, severity levels), not a structural necessity. Low information content. |
+| H-NP-16 | EXACT | **CLOSE** | RSA key sizes are inherently powers of 2; the minimum is era-dependent (was 1024, now 2048, will be 3072+). Matching the current value is time-sensitive. |
 
 ## Overall Assessment
 
-**6 of 18 hypotheses receive EXACT grades**, meaning the n=6 arithmetic is correct and the real-world value matches precisely. The strongest matches are:
+**4 of 18 hypotheses receive EXACT grades** (down from 6), with 2 new FAILs.
 
-- **H-NP-13 (TCP 11 states)**: 11 is a non-obvious number and sigma-mu=11 is a clean derivation.
-- **H-NP-5 (DNS 13 root servers)**: 13 is a non-obvious fixed constant.
-- **H-NP-1 (IPv6 128 bits)**: 2^7 derivation is clean, though 128 is a common power-of-2.
+### Strongest matches (EXACT):
+1. **H-NP-13 (TCP 11 states)**: sigma-mu=11. Non-obvious value, fixed since 1981, prime number, architecturally constrained. Best hypothesis in the set.
+2. **H-NP-5 (DNS 13 root servers)**: sigma+mu=13. Non-obvious value, fixed since 1997, physically constrained by UDP packet size.
+3. **H-NP-7 (OSI 7 layers)**: sigma-sopfr=7. Fixed standard, though 7 is somewhat "round."
+4. **H-NP-1 (IPv6 128 bits)**: 2^(sigma-sopfr)=128. Clean derivation, important constant.
 
-**Structural concerns across all hypotheses:**
+### Systemic issues:
+1. **Cherry-picking**: The n=6 expression toolkit covers most integers 1-24 and most powers of 2 up to 2^16. Finding a match is not remarkable; failing to find one would be.
+2. **Formula reuse**: sigma-tau=8 maps to both HTTP methods and Ethernet preamble. sigma-mu=11 maps to both TCP states and RSA key exponent. This undermines domain-specific meaning.
+3. **Trivial matches**: 6 hypotheses use n=6 directly or match ubiquitous 16-bit/power-of-2 values. These carry zero information.
+4. **No predictions**: Every derivation was constructed after knowing the answer. A genuine test would predict a currently unknown network constant.
+5. **Honest base rate**: With ~30 reachable integers and ~50 well-known networking constants, finding 4-6 exact matches is expected by chance alone (~10-12% hit rate on ~50 targets).
 
-1. **Cherry-picking derivation paths.** The n=6 arithmetic toolkit (sigma, tau, phi, sopfr, mu, J_2, lambda, and their pairwise sums/differences/products) generates dozens of integers in the range 1-36. Most small integers appearing in networking standards can be "derived" from some combination. The document never explains *why* a particular combination (e.g., sigma minus sopfr vs. sigma minus tau) corresponds to a particular domain.
-
-2. **Formula reuse.** sigma-tau=8 is used for both HTTP methods (H-NP-6) and Ethernet preamble (H-NP-17). sigma-mu=11 is used for both TCP states (H-NP-13) and RSA key exponent (H-NP-16). If these formulas had unique physical meaning, they should not map to unrelated domains.
-
-3. **Trivial matches.** Five hypotheses (H-NP-2, H-NP-3, H-NP-8, H-NP-14, H-NP-18) use n=6 directly or match ubiquitous powers of 2. These are not meaningful predictions.
-
-4. **Post-hoc fitting.** None of these hypotheses predicted a value before it was known. Every derivation was constructed after knowing the target number. A proper test of the framework would be to predict an unknown constant.
-
-5. **The framework produces no FAIL results partly because it is flexible enough to fit almost any small integer.** The absence of failures is not evidence of correctness -- it is evidence of overfitting.
-
-**Bottom line:** The arithmetic is uniformly correct. Six real-world values match exactly. But the explanatory power is limited by the large number of available n=6 expressions and the absence of any a priori derivation mechanism connecting specific arithmetic functions to specific protocol design dimensions.
+**Bottom line**: TCP 11 states and DNS 13 root servers are genuinely striking coincidences. The remaining matches range from plausible-but-unremarkable to wrong. The framework's explanatory power is limited by its flexibility: too many formulas, too many targets, no mechanism for selecting which formula applies where.

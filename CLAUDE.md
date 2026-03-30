@@ -57,18 +57,27 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
 Full proof: docs/theorem-r1-uniqueness.md
 Falsifiability: z=0.74 (numerical matching NOT significant vs random)
 
-## Docs Structure (24 domains)
+## Docs Structure (24 domains) — ALL have extreme-hypotheses.md
 ```
-  superconductor/ (60 H-SC hypotheses + extreme)
-  fusion/ (60 H-FU hypotheses + extreme — NEW)
-  superconducting-magnet/ (60 H-SM hypotheses + extreme — NEW)
-  tokamak-structure/ (60 H-TK hypotheses + extreme — NEW)
+  # Physics (4 domains × 80 hypotheses each + extreme)
+  superconductor/ (80 H-SC + extreme)
+  fusion/ (80 H-FU + extreme)
+  superconducting-magnet/ (80 H-SM + extreme)
+  tokamak-structure/ (80 H-TK + extreme)
+  # Computing (all with hypotheses + extreme)
   ai-efficiency/ chip-architecture/ quantum-computing/
-  compiler-os/ energy-generation/ power-grid/ battery-storage/
-  thermal-management/ robotics/ learning-algorithm/ blockchain/
-  network-protocol/ cryptography/ software-design/ programming-language/
-  plasma-physics/ (12+ files — most active domain)
-  paper/ (2 arXiv drafts: AI efficiency + cross-domain)
+  compiler-os/ programming-language/ software-design/
+  # Energy (all with hypotheses + extreme)
+  energy-generation/ power-grid/ battery-storage/ thermal-management/
+  # Physical AI (all with hypotheses + extreme)
+  robotics/ learning-algorithm/
+  # Infrastructure (all with hypotheses + extreme)
+  blockchain/ (60 H-BC + verification + extreme)
+  network-protocol/ cryptography/
+  # Science
+  plasma-physics/ (19 files — most active domain)
+  paper/ (3 arXiv drafts: AI efficiency + cross-domain + tokamak physics)
+  # Total: 700+ hypotheses, 95+ EXACT, 215+ atlas entries
 ```
 
 ## Rust Tools
