@@ -543,6 +543,10 @@
 | Todd class coefficient | 1/12 | 1/σ = B₂/2 | Algebraic geometry | H-MATH-71 |
 | PSL₂(Z) generator orders | {2,3}, ST order 6 | primes of n | Modular group | H-MATH-66 |
 | Niemeier lattices in dim 24 | 24 | J₂(6) | Lattice classification | H-MATH-62 |
+| Perovskite ABX₃ B-site CN | 6 (octahedral) | n | Solar cell / battery | H-EG-64 |
+| Leech lattice QEC bound | 24 dim | J₂(6) | Quantum error correction | H-QC-62 |
+| Golay stabilizer generators | 12 | σ(6) | Quantum code | H-QC-67 |
+| Circle of fifths pairs | 6 | n | Music theory | H-DA-73 |
 
 ---
 
