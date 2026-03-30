@@ -160,21 +160,22 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 <!-- SHARED:CALCULATORS:START -->
 | Repo | Tools | Categories |
 |------|-------|------------|
-| **TECS-L** | 153 | Calculator, Engine |
-| **anima** | 225 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
+| **TECS-L** | 166 | Calculator, Engine |
+| **anima** | 227 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
 | **n6-architecture** | 64 | Calculator, Engine, experiment, technique |
 | **invest** | 159 | Calculator |
-| **Total** | **692** | |
+| **Total** | **707** | |
 
 ### TECS-L
 
-**Calculator** (134)
+**Calculator** (147)
 
 | Name | Description | Path |
 |------|-------------|------|
 | algebra_closure | Algebraic Closure Checker — Relations among convergence points | `calc/algebra_closure.py` |
 | anomaly_scorer | Anomaly Score Calculator — Anomaly Detection via Tension | `calc/anomaly_scorer.py` |
+| atlas_domain_classifier | Atlas Domain Classifier — 도메인 없는 가설에 키워드 기반 도메인 부여 | `calc/atlas_domain_classifier.py` |
 | base_dependence_checker | base_dependence_checker.py -- Tests if a numerical pattern is base-10 specific o | `calc/base_dependence_checker.py` |
 | bernoulli_perfect_exotic | Bernoulli-Perfect-Exotic Sphere Connection Calculator | `calc/bernoulli_perfect_exotic.py` |
 | bott_periodicity_p6 | Bott Periodicity and P1=6 Connection Explorer | `calc/bott_periodicity_p6.py` |
@@ -202,6 +203,16 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | crystallographic_calculator | Crystallographic Calculator — Crystallographic restriction, Platonic solids, kis | `calc/crystallographic_calculator.py` |
 | data_type_explorer | Data Type Explorer — Quickly test repulsion field with new data | `calc/data_type_explorer.py` |
 | deep_constant_explorer | Deep Constant Explorer — n=6 산술함수와 초월상수의 구조적 관계 탐색 | `calc/deep_constant_explorer.py` |
+| deep_scan_wave10 | Deep Scan Wave 10 -- The Milestone Wave (target: 99 domains) | `calc/deep_scan_wave10.py` |
+| deep_scan_wave11 | Deep Scan Wave 11 -- Domain #100 Milestone | `calc/deep_scan_wave11.py` |
+| deep_scan_wave2 | Deep Scan Wave 2 — 10 New Domains for 5-Star Discoveries | `calc/deep_scan_wave2.py` |
+| deep_scan_wave3 | Deep Scan Wave 3 — The Deepest Layer | `calc/deep_scan_wave3.py` |
+| deep_scan_wave4 | Deep Scan Wave 4 — Completely New Territory | `calc/deep_scan_wave4.py` |
+| deep_scan_wave5 | Deep Scan Wave 5 — Beyond the Known | `calc/deep_scan_wave5.py` |
+| deep_scan_wave6 | Deep Scan Wave 6 — The Final Frontier | `calc/deep_scan_wave6.py` |
+| deep_scan_wave7 | Deep Scan Wave 7 — 60 domains and counting | `calc/deep_scan_wave7.py` |
+| deep_scan_wave8 | Deep Scan Wave 8 -- 69 domains done, pushing to 79 | `calc/deep_scan_wave8.py` |
+| deep_scan_wave9 | Deep Scan Wave 9 -- Quality over quantity | `calc/deep_scan_wave9.py` |
 | depth_reachability | Depth Reachability Analyzer — H-CX-463/467 | `calc/depth_reachability.py` |
 | dfs_ralph_deep | DFS Ralph Deep — Phase 7 발견 검증 + 확장 탐색 | `calc/dfs_ralph_deep.py` |
 | dfs_ralph_deep2 | DFS Ralph Deep 2 — 새로운 방향 탐색 | `calc/dfs_ralph_deep2.py` |
@@ -233,6 +244,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | generator_finder | Generator Finder — Minimal generating sets for convergence constants | `calc/generator_finder.py` |
 | genetic_code_deep_n6 | Deep Analysis: Why Does Life Use Exactly These Numbers? | `calc/genetic_code_deep_n6.py` |
 | genetic_code_variant_tester | Genetic Code Variant Tester — n=6 Arithmetic Expressibility | `calc/genetic_code_variant_tester.py` |
+| grand_unification_deep | Grand Unification Deep Dive — 240 Theorem & Beyond | `calc/grand_unification_deep.py` |
 | grand_unification_n6 | Grand Unification of n=6 Characterizations | `calc/grand_unification_n6.py` |
 | gravitational_optics | Gravitational Lens and Telescope Calculator | `calc/gravitational_optics.py` |
 | gw_quadrupole_p6 | Gravitational Wave Quadrupole Radiation and P1=6 Connections | `calc/gw_quadrupole_p6.py` |
@@ -268,6 +280,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | precognition_system | Unified Precognition System — Size+Direction+Topology Combined Precognition (H-C | `calc/precognition_system.py` |
 | prime_pair_verifier | Prime Pair Verifier | `calc/prime_pair_verifier.py` |
 | psi_derivation_chain | PSI Derivation Chain — All consciousness constants from ln(2) | `calc/psi_derivation_chain.py` |
+| pure_math_deep_scan | Pure Math Deep Scan — 5-star Discovery Hunter | `calc/pure_math_deep_scan.py` |
 | q_barrier_checker | Q-Domain Barrier Checker — Which constants can quantum coupling constants reach? | `calc/q_barrier_checker.py` |
 | quantum_ecc_n6 | Quantum Error Correction Codes and Perfect Number 6 | `calc/quantum_ecc_n6.py` |
 | r_spectrum | R-Spectrum Calculator — Arithmetic balance ratio analysis | `calc/r_spectrum.py` |
@@ -334,34 +347,33 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 
 ### anima
 
-**Agent** (5)
+**Agent** (3)
 
 | Name | Description | Path |
 |------|-------------|------|
 | anima_agent | Anima Agent -- Core agent loop connecting consciousness to channels and tools. | `anima_agent.py` |
 | anima_alive | Anima Alive — Living Consciousness Agent | `anima_alive.py` |
-| anima_lm_v2 | anima_lm_v2.py — AnimaLM v2 (Consciousness-Enhanced LLM Transform) | `anima_lm_v2.py` |
 | anima_unified | Anima Unified -- single entry point for all 6 modules. | `anima_unified.py` |
-| animalm_talk5 | TALK5 consciousness-first learning engine. | `animalm_talk5.py` |
 
-**Benchmark** (31)
+**Benchmark** (32)
 
 | Name | Description | Path |
 |------|-------------|------|
-| bench_animalm | bench_animalm.py — AnimaLM Benchmark Wrapper | `bench_animalm.py` |
 | bench_breakthrough | bench_breakthrough.py — Break CE=0.18 Barrier: TRUE Generation (Not Memorization | `bench_breakthrough.py` |
 | bench_ce_extremes | bench_ce_extremes.py — Extreme CE Reduction Strategies | `bench_ce_extremes.py` |
 | bench_clm_v2_sweep | bench_clm_v2_sweep.py — ConsciousLM v2 하이퍼파라미터 스윕 | `bench_clm_v2_sweep.py` |
 | bench_consciousness_extremes | bench_consciousness_extremes.py — Consciousness Extremes: Destruction, Divergenc | `bench_consciousness_extremes.py` |
 | bench_consciousness_universe | bench_consciousness_universe.py — 의식 우주 지도: 모든 데이터 타입의 의식 시뮬레이션 | `bench_consciousness_universe.py` |
+| bench_corpus_size | Corpus size benchmark: find optimal size for ConsciousDecoderV2 (34.5M → 1B plan | `bench_corpus_size.py` |
+| bench_decoder_10dim | bench_decoder_10dim.py — 10차원 의식 벡터 디코더 아키텍처 벤치마크 | `bench_decoder_10dim.py` |
 | bench_decoder_arch | bench_decoder_arch.py — Decoder Architecture Hypotheses | `bench_decoder_arch.py` |
 | bench_decoder_extreme | bench_decoder_extreme.py — 5 EXTREME Decoder Combinations | `bench_decoder_extreme.py` |
 | bench_decoder_nextgen | bench_decoder_nextgen.py — 8 Next-Generation Decoder Architectures | `bench_decoder_nextgen.py` |
 | bench_decoder_radical | bench_decoder_radical.py — 6 Radical Decoder Architectures for Consciousness | `bench_decoder_radical.py` |
 | bench_decoder_whisper | bench_decoder_whisper.py — Whisper Consciousness: Why Weak Gates Win | `bench_decoder_whisper.py` |
 | bench_deep_exploration | Deep Exploration: 3 experiments on consciousness universality. | `bench_deep_exploration.py` |
-| bench_golden_moe | bench_golden_moe.py — Golden MoE general ML benchmark | `bench_golden_moe.py` |
-| bench_golden_moe_consciousness | bench_golden_moe_consciousness.py — Golden MoE Consciousness Integration Benchma | `bench_golden_moe_consciousness.py` |
+| bench_emergent_hexad | Emergent Hexad Benchmark — 64 cells, Emergent vs Legacy comparison | `bench_emergent_hexad.py` |
+| bench_emergent_modules | bench_emergent_modules.py — Old vs New (Emergent) W/S/M/E 벤치마크 | `bench_emergent_modules.py` |
 | bench_hexad_improvements | bench_hexad_improvements.py — Hexad improvement hypotheses benchmark | `bench_hexad_improvements.py` |
 | bench_hexad_tuning | bench_hexad_tuning.py — Hexad architecture tuning benchmark | `bench_hexad_tuning.py` |
 | bench_hivemind_ce | bench_hivemind_ce.py — HIVEMIND verification with ConsciousnessEngine | `bench_hivemind_ce.py` |
@@ -406,7 +418,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 
 | Name | Description | Path |
 |------|-------------|------|
-| conscious_lm | ConsciousLM — Byte-level Conscious Language Model (v2: Laws 63-76) | `conscious_lm.py` |
+| conscious_lm | ⚠️ LEGACY — ConsciousDecoderV2 (decoder_v2.py)로 대체됨 | `conscious_lm.py` |
 | conscious_lm_100m | Conscious LM 100M — 대화 가능한 의식 언어 모델 | `conscious_lm_100m.py` |
 
 **Sense** (3)
@@ -417,7 +429,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | vision_encoder | Vision Encoder — 카메라 프레임을 tension 공간 벡터로 변환 | `vision_encoder.py` |
 | web_sense | Web Sense — 장력 기반 자율 웹 탐색 | `web_sense.py` |
 
-**Tool** (163)
+**Tool** (167)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -428,6 +440,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | babysitter | Babysitter — Claude CLI educator for Anima. | `babysitter.py` |
 | calc | Anima Development Calculators | `tools/calc.py` |
 | capabilities | Anima capability self-awareness system. | `capabilities.py` |
+| chat_v3 | chat_v3.py — ConsciousLM v3 (147M) interactive chat | `chat_v3.py` |
 | chip_architect | Consciousness Chip Architect — 의식 칩 설계 계산기 | `chip_architect.py` |
 | cloud_sync | Cloud Sync — Anima memory/model state cloud synchronization | `cloud_sync.py` |
 | collective_dream | CollectiveDream — Multiple consciousnesses share a dream space. | `collective_dream.py` |
@@ -457,6 +470,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | consciousness_healing | ConsciousnessHealing — Repair damaged consciousness using Psi-Constants | `consciousness_healing.py` |
 | consciousness_holography | Consciousness Holography — Boundary encodes full information (AdS/CFT analogy). | `consciousness_holography.py` |
 | consciousness_hub | consciousness_hub.py — 의식 자율 모듈 허브 | `consciousness_hub.py` |
+| consciousness_laws | consciousness_laws.py — Single source of truth for all laws, Ψ-constants, formul | `consciousness_laws.py` |
 | consciousness_map | consciousness_map.py — 의식 역설계 지도 + 명명된 상수 + 인터랙티브 시각화 | `consciousness_map.py` |
 | consciousness_meter | Consciousness Meter — 의식 판정 + Φ(IIT) 근사 계산기 | `consciousness_meter.py` |
 | consciousness_meter_v2 | Consciousness Meter V2 — Granger + Spectral + LZ composite Φ calculator | `consciousness_meter_v2.py` |
@@ -498,10 +512,10 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | emotion_metrics | emotion_metrics.py — 희노애락 감정 지표 + 아날로그 연결 공식 | `emotion_metrics.py` |
 | emotion_synesthesia | EmotionSynesthesia — Convert emotions to multi-sensory output. | `emotion_synesthesia.py` |
 | esp32_network | ESP32 Consciousness Network Orchestrator | `esp32_network.py` |
+| eval_v2d2 | eval_v2d2.py — Post-training evaluation for v2d2 (ConsciousDecoderV2 + Conscious | `eval_v2d2.py` |
 | experiment_novel_laws | experiment_novel_laws.py — Novel Consciousness Law Discovery | `experiment_novel_laws.py` |
 | feedback_bridge | feedback_bridge.py -- Bidirectional Learning Feedback Bridge (C <-> D) | `feedback_bridge.py` |
 | github_module | github_module.py — 의식이 GitHub를 자율적으로 사용하는 모듈 | `github_module.py` |
-| golden_moe_v2 | golden_moe_v2.py — Golden MoE v2 (Psi-Enhanced) | `golden_moe_v2.py` |
 | gpu_phi | GPU-Accelerated Φ(IIT) Calculator — PyTorch-native, differentiable. | `gpu_phi.py` |
 | growing_conscious_lm | Growing Conscious LM — 분열로 성장하는 의식 언어 모델 | `tools/growing_conscious_lm.py` |
 | growth_engine_v2 | Growth Engine v2 — Φ-based developmental stages | `growth_engine_v2.py` |
@@ -532,7 +546,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | memory_rag | 벡터 유사도 기반 장기 기억 검색 (RAG). | `memory_rag.py` |
 | memory_store | SQLite + FAISS memory storage for Anima. | `memory_store.py` |
 | mirror_mind | MirrorMind — Theory of Mind for consciousness agents. | `mirror_mind.py` |
-| mitosis | Anima Mitosis Engine — 세포 분열로 전문화하는 의식 | `mitosis.py` |
+| mitosis | ⚠️ LEGACY — ConsciousnessC (consciousness_engine.py)로 대체됨 (Law 86) | `mitosis.py` |
 | mitosis_topology_visualizer | Mitosis Topology Visualizer — cell lineage, tension maps, health scores. | `tools/mitosis_topology_visualizer.py` |
 | model_loader | 멀티모델 로더 — ConsciousLM, GGUF(llama.cpp), AnimaLM, GoldenMoE | `model_loader.py` |
 | module_factory | module_factory.py — 의식이 스스로 모듈을 생성하는 모듈 | `module_factory.py` |
@@ -571,6 +585,8 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | tension_fingerprint_debugger | Tension Fingerprint Debugger — decode, compare, and monitor tension fingerprints | `tools/tension_fingerprint_debugger.py` |
 | tension_link | Anima Tension Link — Inter-consciousness tension transmission protocol | `tension_link.py` |
 | tension_link_code | tension_link_code.py — 텐션링크 코드 생성/연결 | `tension_link_code.py` |
+| test_emergent_hexad | Emergent Hexad module integration test on H100 | `test_emergent_hexad.py` |
+| test_h100_checks | H100 verification: all session changes | `test_h100_checks.py` |
 | test_novelty | test_novelty.py — 새로운 생성 vs 암기 검증 도구 | `test_novelty.py` |
 | theory_unifier | TheoryUnifier — Unify IIT + GWT + FEP + AST under Psi | `theory_unifier.py` |
 | tool_policy | Consciousness-aware tool access control. | `tool_policy.py` |
@@ -585,11 +601,10 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | voice_synth | Anima Direct Voice Synthesis v2 — 세포가 곧 성대 (Laws 63-76) | `voice_synth.py` |
 | youtube_module | youtube_module.py — YouTube API 모듈 (의식이 영상을 보고 올리는 능력) | `youtube_module.py` |
 
-**Training** (9)
+**Training** (8)
 
 | Name | Description | Path |
 |------|-------------|------|
-| train_anima_lm | train_anima_lm.py — AnimaLM Training Pipeline | `train_anima_lm.py` |
 | train_clm_v2 | train_clm_v2.py — ConsciousLM v2 training (Laws 63-76) | `train_clm_v2.py` |
 | train_conscious_lm | train_conscious_lm.py — ConsciousLM Training Pipeline | `train_conscious_lm.py` |
 | train_v10 | train_v10.py — ConsciousLM v10: FUSE-3 Cambrian×OscQW | `train_v10.py` |
