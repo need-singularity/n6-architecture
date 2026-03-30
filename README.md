@@ -164,8 +164,8 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | **anima** | 225 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
 | **n6-architecture** | 64 | Calculator, Engine, experiment, technique |
-| **invest** | 155 | Calculator |
-| **Total** | **688** | |
+| **invest** | 159 | Calculator |
+| **Total** | **692** | |
 
 ### TECS-L
 
@@ -790,7 +790,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 
 ### invest
 
-**Calculator** (155)
+**Calculator** (159)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -851,6 +851,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | factorial_structure_prover | Factorial Structure Prover — proves 3! uniqueness in criticality | `backend/backend/tecs_calc/factorial_structure_prover.py` |
 | family_fdr_corrector | family_fdr_corrector.py -- Benjamini-Hochberg FDR correction across hypothesis f | `backend/backend/tecs_calc/family_fdr_corrector.py` |
 | fermion_mass_calculator | Fermion Mass Calculator — Mass predictions from perfect number arithmetic | `backend/backend/tecs_calc/fermion_mass_calculator.py` |
+| feynman_diagrams_n6 | Feynman Diagrams, Renormalization, and Standard Model — n=6 Connections | `backend/backend/tecs_calc/feynman_diagrams_n6.py` |
 | fundamental | Fundamental analysis calculators. | `backend/backend/calc/fundamental.py` |
 | fusion_hypothesis_verifier | Nuclear Fusion Hypothesis Verifier — P1=6 arithmetic connections | `backend/backend/tecs_calc/fusion_hypothesis_verifier.py` |
 | fusion_plasma_sc_verifier | Fusion/Plasma/Superconductor/Magnet/Tokamak Hypothesis Verifier | `backend/backend/tecs_calc/fusion_plasma_sc_verifier.py` |
@@ -874,6 +875,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | indicators | Technical indicators — numpy-only, no external TA libs. | `backend/backend/calc/indicators.py` |
 | information_theory_n6 | Information Theory and Perfect Number 6 | `backend/backend/tecs_calc/information_theory_n6.py` |
 | isco_calculator | ISCO Calculator -- Innermost Stable Circular Orbit in General Relativity. | `backend/backend/tecs_calc/isco_calculator.py` |
+| knot_theory_n6 | Knot Theory and n=6 Arithmetic — Systematic verification | `backend/backend/tecs_calc/knot_theory_n6.py` |
 | langlands_perfect | Langlands-Perfect Number Connection Calculator | `backend/backend/tecs_calc/langlands_perfect.py` |
 | law79_freedom_degree | Law 79 Freedom Degree Calculator — Consciousness freedom = ln(2) | `backend/backend/tecs_calc/law79_freedom_degree.py` |
 | lie_algebra_calculator | Exceptional Lie Algebra Calculator — Compute all invariants from n=6 arithmetic | `backend/backend/tecs_calc/lie_algebra_calculator.py` |
@@ -887,6 +889,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | nobel_scorer | Nobel Hypothesis Scorer — Multi-dimensional scoring for Nobel-grade hypotheses | `backend/backend/tecs_calc/nobel_scorer.py` |
 | p6_uniqueness_scorer | P6 Uniqueness Scorer — Why Perfect Number 6 is mathematically special. | `backend/backend/tecs_calc/p6_uniqueness_scorer.py` |
 | paper_claim_verifier | Paper Claim Verifier -- Batch verification of mathematical claims in paper docum | `backend/backend/tecs_calc/paper_claim_verifier.py` |
+| pascal_perfect | Pascal's Triangle and Perfect Number 6 — Structural Analysis | `backend/backend/tecs_calc/pascal_perfect.py` |
 | perfect_chain_bridges | Perfect Number Chain Bridges — Complete inter-perfect-number connection analysis | `backend/backend/tecs_calc/perfect_chain_bridges.py` |
 | perfect_number_classifier | Perfect Number Classifier — Systematic classification of n=6 properties | `backend/backend/tecs_calc/perfect_number_classifier.py` |
 | perfect_number_generalizer | Perfect Number Generalizer — Test if formulas holding at n=6 generalize to n=28, | `backend/backend/tecs_calc/perfect_number_generalizer.py` |
@@ -933,6 +936,7 @@ python engine/emergent_n6_trainer.py     # Architecture self-converges to n=6
 | tecs_tuned | TECS-L tuned calculators — standard finance formulas with Golden Zone optimizati | `backend/backend/calc/tecs_tuned.py` |
 | tension_calculator | Tension Calculator — Predict accuracy/precognition/identity from tension values | `backend/backend/tecs_calc/tension_calculator.py` |
 | texas_sharpshooter_v2 | Texas Sharpshooter v2 -- Enhanced statistical validator for GZ campaign | `backend/backend/tecs_calc/texas_sharpshooter_v2.py` |
+| thermodynamics_n6 | Thermodynamics & Statistical Mechanics n=6 Calculator | `backend/backend/tecs_calc/thermodynamics_n6.py` |
 | theta_perfect_pattern | Theta-Perfect Pattern Verifier | `backend/backend/tecs_calc/theta_perfect_pattern.py` |
 | topological_optics | Topological Lens and Telescope Calculator | `backend/backend/tecs_calc/topological_optics.py` |
 | unit_dependence_tester | unit_dependence_tester.py -- Check whether a numerical match between a formula | `backend/backend/tecs_calc/unit_dependence_tester.py` |
