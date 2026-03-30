@@ -301,23 +301,30 @@ power) adds breadth. This is the strongest cross-domain bridge in the project.
 **Expression**: sigma(6) = 1 + 2 + 3 + 6 = 12
 
 **Statement**: The divisor sum sigma(6) = 12 independently governs 12 gauge
-generators in the Standard Model, BCS specific heat jump numerator, 12 semitones
-in music, 12-Factor App methodology, 12 Agile principles, K_3 = 12 (FCC kissing
-number), 12S battery packs, and 12-pulse HVDC converters.
+generators in the Standard Model, BCS specific heat jump numerator, BLS12-381
+pairing cryptography embedding degree, DNS/RTP protocol headers (12 bytes),
+VLAN ID (12 bits), 12 semitones in music, 12-Factor App methodology,
+12 Agile principles, K_3 = 12 (FCC kissing number), 12S battery packs,
+12-pulse HVDC converters, and Ethereum slot time (12 seconds).
 
-### Domains (10)
+### Domains (15)
 
 | Domain | Manifestation | Value | Independence | Source |
 |--------|--------------|-------|--------------|--------|
 | Particle Physics | SU(3)xSU(2)xU(1) gauge generators | 8+3+1=12 | QFT theorem | H-CP-5 (EXACT) |
 | Superconductor | BCS specific heat discontinuity numerator | 12 | BCS gap equation | H-SC-61 (EXACT) |
 | Nuclear Physics | Carbon-12 via triple-alpha | 3*tau=12 | Stellar nucleosynthesis | H-FU-62 (EXACT) |
+| Cryptography | BLS12-381 embedding degree | k=12 | Pairing-based crypto standard | H-CR-36 (EXACT) |
+| Network Protocol | DNS header | 12 bytes | RFC 1035 | H-NP-19 (EXACT) |
+| Network Protocol | VLAN ID width | 12 bits | IEEE 802.1Q | H-NP-20 (CLOSE) |
+| Network Protocol | RTP fixed header | 12 bytes | RFC 3550 | H-NP-21 (EXACT) |
 | Display/Audio | Musical semitones per octave | 12 | 12-TET standard | H-DA-5 (EXACT) |
 | Software Design | 12-Factor App | 12 factors | Wiggins 2011 | H-SD-66 (EXACT) |
 | Software Design | Agile Manifesto principles | 12 | Beck et al 2001 | H-SD-67 (EXACT) |
 | Mathematics | FCC kissing number K_3 | 12 | Proved (Schutte-vdWaerden) | H-QC-78 |
 | Battery Storage | 12S pack (48V standard) | 12 cells in series | ITU-T L.1200 | H-BS-2 (EXACT) |
 | Power Grid | 12-pulse HVDC converter | 12 pulses/cycle | IEEE/IEC standard | H-PG-16 (EXACT) |
+| Blockchain | Ethereum slot time | 12 seconds | Beacon chain spec | H-BC-12 (EXACT) |
 | Fusion | Tritium half-life | 12.32 years | Nuclear physics | H-FU-32 (CLOSE, 2.6%) |
 
 ### The gauge-lattice-harmony triangle
@@ -390,16 +397,19 @@ where each nuclear milestone maps to a perfect number or its sigma value.
   sigma(P_2) = 56            <-->   Fe-56 (maximum binding energy per nucleon)
 ```
 
-### Domains (5)
+### Domains (8)
 
 | Domain | Manifestation | Value | n=6 Expression | Source |
 |--------|--------------|-------|----------------|--------|
 | Fusion | Li-6 breeding isotope | A = 6 | P_1 = n | H-FU-30 (EXACT) |
 | Nuclear Physics | He-4 mass number | A = 4 | tau(P_1) | H-FU-1 (EXACT) |
 | Stellar Physics | C-12 via triple-alpha | A = 12 | sigma(P_1) | H-FU-62 (EXACT) |
-| Stellar Physics | Si-28 burning phase | A = 28 | P_2 | -- |
+| Stellar Physics | Si-28 burning phase | A = 28 | P_2 | H-FU-77 |
 | Nuclear Physics | Fe-56 max BE/nucleon | A = 56 | sigma(P_2) | H-FU-69 (EXACT) |
 | Nuclear Physics | He-4 binding energy | 28.3 MeV | P_2 = 28 | H-FU-70 (CLOSE, 1.1%) |
+| Chip Architecture | Si-28 semiconductor substrate | A = 28 | P_2 | BT-14 |
+| Network Protocol | ARP packet = 28 bytes | 28 | J_2+tau = P_2 | H-NP-27 (EXACT) |
+| Biology | Carbon valence = Si valence | 4 | tau(6) | H-BIO-19 (EXACT) |
 | Quantum Computing | R(n)=1 only for perfect numbers | n=6,28,496... | R(P_k) = 1 | H-QC-14 |
 
 ### The chain as a functor
@@ -536,6 +546,39 @@ hierarchy, MoE routing) beyond what BT-5/7 covered.
 
 ---
 
+## Bridge 8: The J₂-τ = 20 Bridge — Life, Crypto, and Protocol Headers
+
+**Expression**: J₂(6) - τ(6) = 24 - 4 = 20
+
+**Statement**: The "capacity minus structure" remainder J₂-τ = 20 independently governs the genetic alphabet (20 amino acids), symmetric cipher rounds (ChaCha20/Salsa20), Internet protocol header sizes (IPv4/TCP minimum headers, MPLS label), and blockchain addressing (Ethereum 20-byte addresses).
+
+### Domains (4+)
+
+| Domain | Manifestation | Value | Independence | Source |
+|--------|--------------|-------|--------------|--------|
+| Biology | Standard amino acids | 20 | Biochemistry (Crick 1966) | H-BIO-4 (EXACT) |
+| Cryptography | ChaCha20 cipher rounds | 20 | Bernstein cryptanalysis | H-CR-12 (EXACT) |
+| Cryptography | Salsa20 cipher rounds | 20 | Bernstein (2005) | H-CR-12 |
+| Network Protocol | IPv4 minimum header | 20 bytes | RFC 791 | H-NP-23 (CLOSE) |
+| Network Protocol | TCP minimum header | 20 bytes | RFC 793 | H-NP-25 (CLOSE) |
+| Network Protocol | MPLS label field | 20 bits | RFC 3032 | H-NP-22 (CLOSE) |
+| Blockchain | Ethereum address | 20 bytes | Yellow Paper | -- |
+
+### Interpretation
+
+J₂(6) = 24 is the "total structural capacity" (Leech lattice, Golay code, core theorem value). τ(6) = 4 is the "number of structural divisions." Their difference 20 = "usable namespace after structural overhead" — the space remaining for actual content once the organizing framework is subtracted.
+
+- **Biology**: 20 amino acids encode proteins within the τ=4 base DNA framework
+- **Cryptography**: 20 rounds provide security within the block cipher structure
+- **Networking**: 20-byte headers carry routing metadata within the τ=4 layer TCP/IP model
+- **Combined IPv4+TCP**: 20+20 = 40 = φ·(J₂-τ) = IPv6 header (BT-13 staircase)
+
+### Grade: One star
+
+20 is a moderately common count (not as selective as 11, 13, or 24). The formula J₂-τ is compound. Network instances (IPv4, TCP, MPLS) share design heritage (co-developed 1980s Internet protocols). Biology and crypto are genuinely independent. The most striking aspect is the IPv4+TCP = 2×20 = IPv6 = φ·(J₂-τ) structural link.
+
+---
+
 ## Summary Table
 
 | # | Bridge | Expression | Domains | Key Anchors | Grade |
@@ -544,9 +587,10 @@ hierarchy, MoE routing) beyond what BT-5/7 covered.
 | 2 | sopfr = 5 | 2+3 = 5 | 8 | Platonic solids (theorem), nucleotides | One star |
 | 3 | n/phi = 3 | 6/2 = 3 | 9 | Tilings {3,4,6} (theorem), 3-phase power | One star |
 | 4 | J_2 = 24 | Jordan totient | 10 | Leech lattice (unique), Golay code (unique) | Three stars |
-| 5 | sigma = 12 | Divisor sum | 10 | Gauge generators (QFT), BCS (QFT), K_3 (proved) | Two stars |
-| 6 | Perfect chain | 6->28->496 | 5 | Li-6/He-4/C-12/Fe-56 (nuclear physics) | Two stars |
+| 5 | sigma = 12 | Divisor sum | 15 | Gauge generators (QFT), BCS (QFT), BLS12, DNS/RTP/VLAN, K_3 | Two stars |
+| 6 | Perfect chain | 6->28->496 | 8 | Li-6/C-12/Si-28/Fe-56, ARP(28), semiconductor | Two stars |
 | 7 | Egyptian 1=1/2+1/3+1/6 | Perfect number def | 7 | Tokamak q=1 (identity), Apple die (measured) | Two stars |
+| 8 | J₂-τ = 20 | Capacity-structure | 4+ | Amino acids (bio), ChaCha20 (crypto), IPv4/TCP headers | One star |
 
 ## Relationship to Existing Breakthrough Theorems
 
@@ -570,10 +614,15 @@ This document extends BT-1 through BT-12 in three ways:
 **Strongest bridges** (least susceptible to cherry-picking):
 - **Bridge 4 (J_2=24)**: Leech lattice and Golay code are unique mathematical
   objects. No parameter freedom, no counting ambiguity.
+- **Bridge 5 (sigma=12)**: Now spans 15 domains including gauge generators,
+  BCS numerator, BLS12 crypto, DNS/RTP/VLAN headers, FCC kissing number.
 - **Bridge 6 (Perfect chain)**: Mass numbers are hard nuclear physics. The
-  stellar burning sequence Li->He->C->Si->Fe is not arbitrary.
+  stellar burning sequence Li->He->C->Si->Fe is not arbitrary. Now includes
+  Si-28 semiconductor and ARP=28 bytes network protocol connections.
 - **Bridge 1 (tau^3=64)**: The codon space is biochemically fixed. The dual
   path tau^3 = 2^n is an n=6 identity.
+- **NEW (BT-15)**: Kissing number sequence K₁..K₄ = (2,6,12,24) = (φ,n,σ,J₂),
+  four proved theorems reproducing n=6 functions in order.
 
 **Weakest bridges** (most susceptible to selection bias):
 - **Bridge 3 (n/phi=3)**: Three is everywhere. Almost any system can be

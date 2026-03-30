@@ -44,8 +44,10 @@
 | φ/τ | 1/2 = 0.5 | MoE top-k selection | AI |
 | σ-τ | 8 = 2³ | SHA-256, byte, Bott period | Crypto, CS |
 | σ-sopfr | 7 | IPv6=2⁷, OSI layers, AES=2⁷ | Network, Crypto |
-| σ-μ | 11 | RSA=2¹¹, TCP states | Crypto, Network |
-| J₂-τ | 20 | ChaCha20 rounds, amino acids | Crypto, Biology |
+| σ+μ | 13 | DNS root servers | Network |
+| σ-μ | 11 | RSA=2¹¹, TCP states, M-theory dim | Crypto, Network, Physics |
+| σ±μ | {11,13} twin primes | TCP+DNS=24=core theorem | BT-13 ⭐⭐⭐ |
+| J₂-τ | 20 | ChaCha20, amino acids, IPv4/TCP hdr | Crypto, Biology, Network |
 | σ·sopfr | 60 | 60Hz display refresh | Display |
 | σ·τ | 48 | 48kHz audio | Audio |
 | 1/e | 0.368 | Boltzmann gate sparsity | AI |
@@ -310,9 +312,24 @@
 
 | Parameter | Value | n=6 Expression | Source | Hypothesis |
 |-----------|-------|---------------|--------|------------|
-| IPv6 address | 128 bit | 2^(σ-sopfr) = 2^7 | RFC 2460 | H-NP-1 |
+| IPv6 address | 128 bit | 2^(σ-sopfr) = 2^7 | RFC 8200 | H-NP-1 |
 | TCP control flags | 6 | n | RFC 793 | H-NP-2 |
+| 5G NR numerology | 5 configs | sopfr(6) | 3GPP TS 38.211 | H-NP-4 |
+| DNS root servers | 13 | σ+μ | IANA | H-NP-5 |
 | OSI layers | 7 | σ-sopfr | ISO 7498 | H-NP-7 |
+| TCP FSM states | 11 | σ-μ | RFC 793 | H-NP-13 |
+| DNS header | 12 bytes | σ | RFC 1035 | H-NP-19 |
+| RTP fixed header | 12 bytes | σ | RFC 3550 | H-NP-21 |
+| ARP packet (IPv4/Eth) | 28 bytes | J₂+τ (= 2nd perfect number) | RFC 826 | H-NP-27 |
+| MAC address | 6 bytes | n | IEEE 802.3 | H-NP-17 |
+| Ethernet min frame | 64 bytes | 2^n = 2^6 | IEEE 802.3 | H-NP-17 |
+| IPv4 min header | 20 bytes | J₂-τ | RFC 791 | H-NP-23 |
+| TCP min header | 20 bytes | J₂-τ | RFC 793 | H-NP-25 |
+| IPv6 fixed header | 40 bytes | φ·(J₂-τ) | RFC 8200 | H-NP-26 |
+| UDP header | 8 bytes | σ-τ | RFC 768 | H-NP-24 |
+| BGP message types | 4 | τ(6) | RFC 4271 | H-NP-28 |
+| BGP FSM states | 6 | n | RFC 4271 | H-NP-30 |
+| TCP+DNS = core theorem | 11+13=24 | σ·φ = n·τ = J₂ | BT-13 ⭐⭐⭐ | H-NP-5,13 |
 | Golay code [24,12,8] | all params | [J₂, σ, σ-τ] | Perfect code | H-NP-78 |
 | Hamming code [7,4,3] | all params | [σ-sopfr, τ, n/φ] | Perfect code | H-NP-79 |
 
@@ -339,6 +356,19 @@
 | PCIe doubling per gen | ×2 | φ(6) | PCIe spec | H-CHIP-68 |
 | GPU texture filter modes | 4 | τ(6) | DirectX/Vulkan | H-CHIP-76 |
 | AI chip precision tiers | 4 | τ(6) | H100/TPU/MI300 | H-CHIP-77 |
+
+### Cryptography EXACT (from H-CR)
+
+| Parameter | Value | n=6 Expression | Source | Hypothesis |
+|-----------|-------|---------------|--------|------------|
+| RSA public exponent | 65537 = F₄ | F_{τ(6)} (last Fermat prime) | PKCS#1/RFC 3110 | H-CR-17 |
+| BLS12-381 embedding degree | k = 12 | σ(6) | Pairing crypto standard | H-CR-36 |
+| BLS12 tower extension | [2,3,2] | [φ, n/φ, φ] palindrome | Field arithmetic | H-CR-77 |
+| ML-DSA-65 parameters | (k=6, l=5) | (n, sopfr) 2-param match | NIST PQC Level 3 | H-CR-39 |
+| TLS 1.3 cipher suites | 5 | sopfr(6) | RFC 8446 | H-NP-29 |
+| ChaCha20 rounds | 20 | J₂-τ = 24-4 | IETF RFC 8439 | H-CR-12 |
+| DRBG reseed interval | 2⁴⁸ | 2^(σ·τ) | NIST SP 800-90A | H-CR-42 |
+| RSA min key 2048 | 2¹¹ | 2^(σ-μ) | NIST SP 800-57 | H-NP-16 |
 
 ### Software Design EXACT (from H-SD extreme)
 
@@ -427,6 +457,8 @@
 | SU(3) generators (gluons) | 8 | σ-τ | QCD | H-CP-5 |
 | SU(2) generators | 3 | n/φ | Electroweak | H-CP-6 |
 | Total gauge generators | 12 | σ(6) | SM gauge sector | H-CP-7 |
+| SM fermion types | 3×4 = 12 | (n/φ)×τ = σ | Core theorem realization | BT-17 |
+| SM with antimatter | 24 species | J₂ = σ·φ = n·τ | Core theorem value | BT-17 |
 | 6π⁵ ≈ m_p/m_e | 1836.118 vs 1836.153 | 6π⁵ | 0.002% | H-CP-10 |
 | σn+μ ≈ H₀ | 73 vs 73.04 | σn+μ | 0.05% | H-CP-11 |
 | Bott periodicity | 8 | σ-τ | K-theory | H-CP-14 |
@@ -455,8 +487,11 @@
 | χ_orb(Y(1)) = -1/6 | -1/n | Orbifold Euler char | Modular curve | H-MATH-22 |
 | ζ(-1) = -1/12 | -1/σ | Ramanujan sum | Number theory | H-MATH-23 |
 | Crystallographic max symmetry | 6-fold | n | 2D restriction | H-MATH-30 |
-| K₂ kissing number | 6 | n | Sphere packing | H-MATH-5 |
-| K₃ kissing number | 12 | σ(6) | Newton (1694) | H-MATH-6 |
+| K₁ kissing number | 2 | φ(6) | Trivial (1D) | BT-15 |
+| K₂ kissing number | 6 | n | Hexagonal (2D) | H-MATH-5 |
+| K₃ kissing number | 12 | σ(6) | FCC (3D), Schütte 1953 | H-MATH-6 |
+| K₄ kissing number | 24 | J₂(6) | D₄ (4D), Musin 2003 | BT-15 |
+| K₁..₄ sequence | (2,6,12,24) | (φ,n,σ,J₂) | 4 proved theorems | BT-15 ⭐⭐⭐ |
 | Leech lattice dim | 24 | J₂(6) | Conway (1969) | H-MATH-7 |
 | 2D tiling symmetries | {3,4,6} | {n/φ,τ,n} | Crystallography | H-MATH-10 |
 | Platonic solids | 5 | sopfr(6) | Geometry | H-MATH-11 |
@@ -562,7 +597,7 @@
 | BT-4 | MHD Divisor Theorem | tokamak | ⭐ |
 | BT-5 | q=1 = Σ(1/d) = Perfect Number | tokamak+math | ⭐⭐⭐ |
 
-### BT-6~12 (New — see [breakthrough-theorems.md](breakthrough-theorems.md))
+### BT-6~16 (see [breakthrough-theorems.md](breakthrough-theorems.md))
 
 | ID | Statement | Domains | Grade |
 |----|-----------|---------|-------|
@@ -573,6 +608,11 @@
 | BT-10 | Landauer-WHH Bridge ln(φ)=ln(2) | thermal, info, superconductor | ⭐⭐ |
 | BT-11 | Software-Physics Isomorphism | software, physics, math | ⭐ |
 | BT-12 | Hamming-OSI-ECC Triple Bridge [7,4,3] | network, chip, quantum | ⭐⭐ |
+| BT-13 | σ±μ Internet Infrastructure Duality | network, math, coding, crypto | ⭐⭐⭐ |
+| BT-14 | Carbon-Silicon Tetrahedral Bridge | nuclear, bio, chip, network, crypto, math | ⭐⭐ |
+| BT-15 | Kissing Number Quadruple K₁..₄=(φ,n,σ,J₂) | math, superconductor, nuclear, coding | ⭐⭐⭐ |
+| BT-16 | Riemann Zeta Trident ζ(2)=π²/n, ζ(-1)=-1/σ, BCS=σ/(7ζ(3)) | math, number theory, superconductor, AI | ⭐⭐⭐ |
+| BT-17 | SM Fermion-Boson σ-Balance: (n/φ)×τ = σ = generators | particle physics, math, number theory | ⭐⭐ |
 
 ---
 
@@ -580,23 +620,33 @@
 
 ```
   Total domains: 28 (24 original + biology + cosmology-particle + display-audio + pure-mathematics)
-  Total hypotheses: 1000+ across all domains
+  Total hypotheses: 1000+ across all domains (network-protocol: 30)
   Total extreme hypotheses: 400+ (20+ domains × 20)
 
-  EXACT constants registered: 140+
-  CLOSE constants registered: 137+
-  Total atlas entries: 277 (registered rows)
+  EXACT constants registered: 160+
+  CLOSE constants registered: 140+
+  Total atlas entries: 300+ (registered rows)
 
-  Breakthrough Theorems: 12 (BT-1~12)
+  Breakthrough Theorems: 17 (BT-1~17)
+    Three-star (⭐⭐⭐): BT-5, BT-6, BT-13, BT-15, BT-16
+    Two-star (⭐⭐): BT-1, BT-2, BT-3, BT-7, BT-8, BT-10, BT-12, BT-14, BT-17
+    One-star (⭐): BT-4, BT-9, BT-11
 
-  Strongest findings:
-    BT-5: q=1 = Σ(1/d) — perfect number ≡ tokamak stability (⭐⭐⭐)
-    BT-6: Golay [24,12,8] = [J₂,σ,σ-τ] — both perfect codes match n=6 (⭐⭐⭐)
-    BT-7: Egyptian 1/2+1/3+1/6=1 — 6 independent domains (⭐⭐)
-    H-MATH-1: ζ(2) = π²/6 — Euler's identity with n
+  Cross-domain bridges: 8 (Bridge 1~8, sigma=12 spans 15 domains)
+
+  Cross-domain bridges: 7 (Bridge 1~7, sigma=12 spans 15 domains)
+
+  Strongest findings (ranked):
+    BT-15: K₁..₄ = (φ,n,σ,J₂) — 4 proved kissing number theorems in sequence (⭐⭐⭐)
+    BT-16: ζ(2)=π²/n, ζ(-1)=-1/σ, BCS=σ/(7ζ(3)) — zeta trident (⭐⭐⭐)
+    BT-5:  q=1 = Σ(1/d) — perfect number ≡ tokamak stability (⭐⭐⭐)
+    BT-6:  Golay [24,12,8] = [J₂,σ,σ-τ] — unique perfect code match (⭐⭐⭐)
+    BT-13: TCP(11)+DNS(13)=24 — twin prime sum = core theorem value (⭐⭐⭐)
+    H-CP-10: m_p/m_e ≈ 6π⁵ — 19 ppm physical constant match
+    H-MATH-1: ζ(2) = π²/6 — Euler's Basel problem with n
+    H-SC-61: BCS ΔC/(γTc) = 12/(7ζ(3)) — σ in QFT numerator
     H-BIO-3: 64 codons = τ³ — biochemical constant
-    H-CP-10: m_p/m_e = 6π⁵ — 0.002% physical constant
-    H-MATH-65: von Staudt-Clausen: 6 always divides denom(B_{2k})
+    H-NP-27: ARP = 28 bytes = P₂ — perfect number L2↔L3 bridge
 ```
 
 ## Falsifiability Results
@@ -641,5 +691,5 @@
 
 *Last updated: 2026-03-31*
 *Source: n6-architecture project, 28 domains, 1000+ graded hypotheses*
-*Atlas entries: 277 registered rows (140+ EXACT + 137+ CLOSE)*
-*Breakthrough Theorems: 12 (BT-1~12), 20+ domains with extreme hypotheses*
+*Atlas entries: 300+ registered rows (160+ EXACT + 140+ CLOSE)*
+*Breakthrough Theorems: 17 (BT-1~17), 5 Three-Star, 8 Cross-Domain Bridges, 28 domains*
