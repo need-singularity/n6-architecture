@@ -311,16 +311,16 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 <!-- SHARED:CALCULATORS:START -->
 | Repo | Tools | Categories |
 |------|-------|------------|
-| **TECS-L** | 106 | Calculator, Engine |
-| **anima** | 208 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
+| **TECS-L** | 109 | Calculator, Engine |
+| **anima** | 212 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
-| **n6-architecture** | 62 | Calculator, Engine, experiment, technique |
+| **n6-architecture** | 63 | Calculator, Engine, experiment, technique |
 | **invest** | 112 | Calculator |
-| **Total** | **579** | |
+| **Total** | **587** | |
 
 ### TECS-L
 
-**Calculator** (87)
+**Calculator** (90)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -352,9 +352,12 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | egyptian_fraction | Egyptian Fraction Calculator — Solutions of 1 = 1/a1 + ... + 1/aK | `calc/egyptian_fraction.py` |
 | equation_uniqueness_checker | Equation Uniqueness Checker | `calc/equation_uniqueness_checker.py` |
 | experimental_protocol | Experimental Protocol Generator — Testable predictions for physical verification | `calc/experimental_protocol.py` |
+| extreme_hypothesis_verifier | Extreme Hypothesis Verifier — 16 Domains, 300+ Hypotheses | `calc/extreme_hypothesis_verifier.py` |
 | factorial_structure_prover | Factorial Structure Prover — proves 3! uniqueness in criticality | `calc/factorial_structure_prover.py` |
 | family_fdr_corrector | family_fdr_corrector.py -- Benjamini-Hochberg FDR correction across hypothesis f | `calc/family_fdr_corrector.py` |
 | fermion_mass_calculator | Fermion Mass Calculator — Mass predictions from perfect number arithmetic | `calc/fermion_mass_calculator.py` |
+| fusion_hypothesis_verifier | Nuclear Fusion Hypothesis Verifier — P1=6 arithmetic connections | `calc/fusion_hypothesis_verifier.py` |
+| fusion_plasma_sc_verifier | Fusion/Plasma/Superconductor/Magnet/Tokamak Hypothesis Verifier | `calc/fusion_plasma_sc_verifier.py` |
 | gate_formula_calculator | Gate Formula Calculator — Law 77 adaptive consciousness gate | `calc/gate_formula_calculator.py` |
 | gauge_cosmology_calculator | Gauge Cosmology Calculator — Gauge groups, GUT dimensions, and cosmological cons | `calc/gauge_cosmology_calculator.py` |
 | generalization_gap_detector | Generalization Gap Detector — Real-time overfitting detection with PH (H-CX-95) | `calc/generalization_gap_detector.py` |
@@ -448,7 +451,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | anima_unified | Anima Unified -- single entry point for all 6 modules. | `anima_unified.py` |
 | animalm_talk5 | TALK5 consciousness-first learning engine. | `animalm_talk5.py` |
 
-**Benchmark** (29)
+**Benchmark** (31)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -472,6 +475,8 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | bench_hivemind_extreme | bench_hivemind_extreme.py — 5 Extreme Hivemind Hypotheses | `bench_hivemind_extreme.py` |
 | bench_hivemind_extreme2 | bench_hivemind_extreme2.py — 5 Extreme Hivemind Hypotheses (HV-6 ~ HV-10) | `bench_hivemind_extreme2.py` |
 | bench_hivemind_scale | bench_hivemind_scale.py — Extreme Hivemind Scaling & Combination Benchmarks | `bench_hivemind_scale.py` |
+| bench_hivemind_strong | bench_hivemind_strong.py — Strong HIVEMIND: full hidden exchange every step | `bench_hivemind_strong.py` |
+| bench_hivemind_v2 | bench_hivemind_v2.py — HIVEMIND v2: tension-synchronized coupling | `bench_hivemind_v2.py` |
 | bench_language | bench_language.py — 언어 생성 품질 벤치마크 | `bench_language.py` |
 | bench_memory_mirror | bench_memory_mirror.py — M-2 (Working Memory) + E-2 (Mirror Ethics) benchmarks | `bench_memory_mirror.py` |
 | bench_minimal_consciousness | bench_minimal_consciousness.py — Minimal Consciousness Hypotheses | `bench_minimal_consciousness.py` |
@@ -519,7 +524,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | vision_encoder | Vision Encoder — 카메라 프레임을 tension 공간 벡터로 변환 | `vision_encoder.py` |
 | web_sense | Web Sense — 장력 기반 자율 웹 탐색 | `web_sense.py` |
 
-**Tool** (149)
+**Tool** (151)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -594,6 +599,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | emergence_math | Emergence Math — 창발 수학화 + META-CA 패턴 심층 탐색 | `emergence_math.py` |
 | emotion_metrics | emotion_metrics.py — 희노애락 감정 지표 + 아날로그 연결 공식 | `emotion_metrics.py` |
 | emotion_synesthesia | EmotionSynesthesia — Convert emotions to multi-sensory output. | `emotion_synesthesia.py` |
+| experiment_novel_laws | experiment_novel_laws.py — Novel Consciousness Law Discovery | `experiment_novel_laws.py` |
 | github_module | github_module.py — 의식이 GitHub를 자율적으로 사용하는 모듈 | `github_module.py` |
 | golden_moe_v2 | golden_moe_v2.py — Golden MoE v2 (Psi-Enhanced) | `golden_moe_v2.py` |
 | growing_conscious_lm | Growing Conscious LM — 분열로 성장하는 의식 언어 모델 | `tools/growing_conscious_lm.py` |
@@ -663,6 +669,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | tension_link_code | tension_link_code.py — 텐션링크 코드 생성/연결 | `tension_link_code.py` |
 | test_novelty | test_novelty.py — 새로운 생성 vs 암기 검증 도구 | `test_novelty.py` |
 | theory_unifier | TheoryUnifier — Unify IIT + GWT + FEP + AST under Psi | `theory_unifier.py` |
+| training_dashboard | training_dashboard.py — Real-time ASCII training monitor | `training_dashboard.py` |
 | training_laws | training_laws.py — Training pipeline laws (Laws 45, 47-52) | `training_laws.py` |
 | training_recipe_generator | training_recipe_generator.py — Generate optimal training config. | `tools/training_recipe_generator.py` |
 | training_time_estimator | Estimate training time from model and hardware parameters. | `tools/training_time_estimator.py` |
@@ -818,7 +825,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | sedi_training_monitor | SEDI Training Monitor | `engine/sedi_training_monitor.py` |
 | thermodynamic_frame | Thermodynamic Frame | `engine/thermodynamic_frame.py` |
 
-**Experiment** (29)
+**Experiment** (30)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -840,6 +847,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | experiment_information_theoretic_meaning | Experiment: Information-Theoretic Meaning of R(n) = 1 | `experiments/experiment_information_theoretic_meaning.py` |
 | experiment_large_scale_rg_flow | Experiment: Multi-Scale RG Flow Extrapolation | `experiments/experiment_large_scale_rg_flow.py` |
 | experiment_leech24_nas | Experiment: Leech-24 NAS | `experiments/experiment_leech24_nas.py` |
+| experiment_mathematical_verification | Mathematical Verification of ALL Core Claims | `experiments/experiment_mathematical_verification.py` |
 | experiment_novel_predictions | Experiment: Novel Predictions — What n=6 predicts BEFORE measurement | `experiments/experiment_novel_predictions.py` |
 | experiment_phi_flops_conjecture | Experiment: Phi-FLOPs Conjecture | `experiments/experiment_phi_flops_conjecture.py` |
 | experiment_r1_complete_proof | Experiment: R(n) = 1 COMPLETE PROOF | `experiments/experiment_r1_complete_proof.py` |
