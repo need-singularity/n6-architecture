@@ -57,7 +57,10 @@
 | τ/(σ-sopfr) | 4/7=0.5714 | sin²θ₂₃ neutrino (0.10%) | Neutrino, BT-21 |
 | μ/σ | 1/12=0.0833 | sin²(2θ₁₃) neutrino (0.91%) | Neutrino, BT-21 |
 | 1-μ/P₂ | 27/28=0.96429 | n_s spectral index (0.064%) | Cosmology, BT-22 |
-| σ/σ(P₂)² | 12/3136≈0.00383 | r tensor-to-scalar (TESTABLE) | Cosmology, BT-22 |
+| σ/σ(P₂)² | 12/3136≈0.00383 | r = \|V_ub\| (inflation=CKM!) | BT-22, BT-23 |
+| μ/J₂ | 1/24=0.04167 | \|V_cb\| CKM (1.26%) | Particle, BT-23 |
+| (n/φ+μ/σ)·10⁻ˢᵒᵖᶠʳ | 37/12×10⁻⁵ | Jarlskog J (0.11%) | Particle, BT-23 |
+| φ²/n | 2/3=0.66667 | Koide formula (0.0009%!) | Particle, BT-24 |
 | 1/e | 0.368 | Boltzmann gate sparsity | AI |
 | ln(4/3) | 0.288 | Mertens dropout rate | AI |
 | σ·φ | 24 | Leech lattice dim, J₂ | Math, Physics |
@@ -89,6 +92,8 @@
 | **BT-20** | Gauge Coupling Trinity | 1/α=σ(σ-μ)+sopfr+1/P₂ (2ppm), α_s=5/42 (0.97%), sin²θ_W=3/13 (0.19%) | 🟩⭐⭐⭐ |
 | **BT-21** | Neutrino Mixing Trident | sin²θ₁₂=3/10, sin²θ₂₃=4/7, sin²(2θ₁₃)=1/12 — all <1% | 🟩⭐⭐ |
 | **BT-22** | Inflation from Perfect Numbers | n_s=27/28 (0.064%), N=σ(P₂)=56, r=12/3136 testable | 🟩⭐⭐⭐ |
+| **BT-23** | CKM Quark Mixing Hierarchy | \|V_ub\|=3/784=r (0.17%), \|V_cb\|=1/24, J=37/12×10⁻⁵ (0.11%) | 🟩⭐⭐⭐ |
+| **BT-24** | Koide Pole Residue | Q=φ²/n=2/3 (0.0009%!) — most precise mass formula | 🟩⭐⭐⭐ |
 
 ## Perfect Number Chain (P1 → P2)
 
