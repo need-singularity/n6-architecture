@@ -248,11 +248,15 @@ docs/
   robotics/              # 로봇 설계 — 관절/자유도/보행 from n=6
   learning-algorithm/    # 학습 알고리즘 — 강화학습, 모방학습, 칩 연동
 
+  # Science
+  plasma-physics/        # 플라즈마 물리 — 핵융합, MHD, KSTAR/ITER
+
   # Infrastructure
   blockchain/            # N6 Coin / 분산 합의
   network-protocol/      # IPv6, TCP, WiFi 6, 5G
   cryptography/          # AES, SHA, RSA, ChaCha20
   software-design/       # SOLID, GoF, REST, ACID
+  programming-language/  # 프로그래밍 언어 아키텍처 — 타입, 패러다임, 패턴
 
   paper/                 # arXiv paper outlines
 model_utils.py           # Shared constants and utilities
