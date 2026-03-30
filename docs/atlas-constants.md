@@ -61,6 +61,9 @@
 | μ/J₂ | 1/24=0.04167 | \|V_cb\| CKM (1.26%) | Particle, BT-23 |
 | (n/φ+μ/σ)·10⁻ˢᵒᵖᶠʳ | 37/12×10⁻⁵ | Jarlskog J (0.11%) | Particle, BT-23 |
 | φ²/n | 2/3=0.66667 | Koide formula (0.0009%!) | Particle, BT-24 |
+| (σ+n/φ)/(σ-sopfr) | 15/7=2.1429 | m_t/m_W (0.20%) | Particle, BT-25 |
+| φⁿ = τⁿ/φ | 64 | codons (φ^n = τ^(n/φ)) | Biology, BT-25 |
+| J₂-τ = τ·sopfr | 20 | amino acids = m_s/m_d | Biology+Particle, BT-25 |
 | 1/e | 0.368 | Boltzmann gate sparsity | AI |
 | ln(4/3) | 0.288 | Mertens dropout rate | AI |
 | σ·φ | 24 | Leech lattice dim, J₂ | Math, Physics |
@@ -94,6 +97,7 @@
 | **BT-22** | Inflation from Perfect Numbers | n_s=27/28 (0.064%), N=σ(P₂)=56, r=12/3136 testable | 🟩⭐⭐⭐ |
 | **BT-23** | CKM Quark Mixing Hierarchy | \|V_ub\|=3/784=r (0.17%), \|V_cb\|=1/24, J=37/12×10⁻⁵ (0.11%) | 🟩⭐⭐⭐ |
 | **BT-24** | Koide Pole Residue | Q=φ²/n=2/3 (0.0009%!) — most precise mass formula | 🟩⭐⭐⭐ |
+| **BT-25** | Genetic Code Arithmetic | 64=φⁿ=τⁿ/φ, 20=J₂-τ=m_s/m_d, τ=φ²(n=6 only) | 🟩⭐⭐ |
 
 ## Perfect Number Chain (P1 → P2)
 
