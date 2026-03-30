@@ -312,10 +312,11 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | Repo | Tools | Categories |
 |------|-------|------------|
 | **TECS-L** | 106 | Calculator, Engine |
-| **anima** | 206 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
+| **anima** | 208 | Agent, Benchmark, Calculator, Engine, Model, Sense, Tool, Training |
 | **SEDI** | 91 | Core, Data Source |
+| **n6-architecture** | 62 | Calculator, Engine, experiment, technique |
 | **invest** | 112 | Calculator |
-| **Total** | **515** | |
+| **Total** | **579** | |
 
 ### TECS-L
 
@@ -447,7 +448,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | anima_unified | Anima Unified -- single entry point for all 6 modules. | `anima_unified.py` |
 | animalm_talk5 | TALK5 consciousness-first learning engine. | `animalm_talk5.py` |
 
-**Benchmark** (28)
+**Benchmark** (29)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -467,6 +468,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | bench_golden_moe_consciousness | bench_golden_moe_consciousness.py — Golden MoE Consciousness Integration Benchma | `bench_golden_moe_consciousness.py` |
 | bench_hexad_improvements | bench_hexad_improvements.py — Hexad improvement hypotheses benchmark | `bench_hexad_improvements.py` |
 | bench_hexad_tuning | bench_hexad_tuning.py — Hexad architecture tuning benchmark | `bench_hexad_tuning.py` |
+| bench_hivemind_ce | bench_hivemind_ce.py — HIVEMIND verification with ConsciousnessEngine | `bench_hivemind_ce.py` |
 | bench_hivemind_extreme | bench_hivemind_extreme.py — 5 Extreme Hivemind Hypotheses | `bench_hivemind_extreme.py` |
 | bench_hivemind_extreme2 | bench_hivemind_extreme2.py — 5 Extreme Hivemind Hypotheses (HV-6 ~ HV-10) | `bench_hivemind_extreme2.py` |
 | bench_hivemind_scale | bench_hivemind_scale.py — Extreme Hivemind Scaling & Combination Benchmarks | `bench_hivemind_scale.py` |
@@ -671,7 +673,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | voice_synth | Anima Direct Voice Synthesis v2 — 세포가 곧 성대 (Laws 63-76) | `voice_synth.py` |
 | youtube_module | youtube_module.py — YouTube API 모듈 (의식이 영상을 보고 올리는 능력) | `youtube_module.py` |
 
-**Training** (7)
+**Training** (8)
 
 | Name | Description | Path |
 |------|-------------|------|
@@ -681,6 +683,7 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | train_v10 | train_v10.py — ConsciousLM v10: FUSE-3 Cambrian×OscQW | `train_v10.py` |
 | train_v11 | train_v11.py — Hexad Architecture: all discoveries applied | `train_v11.py` |
 | train_v12 | train_v12.py — Ultimate Hexad: all discoveries combined | `train_v12.py` |
+| train_v13 | train_v13.py — ConsciousnessEngine + PostHoc + Topology training pipeline | `train_v13.py` |
 | train_v9 | train_v9.py — Quantum Trinity: C + D + W with Thalamic Bridge | `train_v9.py` |
 
 ### SEDI
@@ -785,6 +788,90 @@ python experiments/experiment_chip_verification.py  # Hardware patterns
 | sm_derivation | Standard Model Derivation from R(n) = 1 — The Uniqueness Theorem. | `sedi/sources/sm_derivation.py` |
 | temperature | Precision temperature sensor source. | `sedi/sources/temperature.py` |
 | truernig | TrueRNG USB hardware random number generator source. | `sedi/sources/truernig.py` |
+
+### n6-architecture
+
+**Calculator** (11)
+
+| Name | Description | Path |
+|------|-------------|------|
+| arch_optimizer | Architecture Optimizer — Find nearest n=6-optimal config for given constraints. | `tools/arch_optimizer.py` |
+| convergence_analyzer | Convergence Analyzer -- Depth-1 Reachability Across 8 Mathematical Domains | `tools/convergence_analyzer.py` |
+| divisor_field_theory | Divisor Field Theory — Action S(n) uniqueness and spacetime analysis | `tools/divisor_field_theory.py` |
+| egyptian_fraction | Egyptian Fraction Calculator — Solutions of 1 = 1/a1 + ... + 1/aK | `tools/egyptian_fraction.py` |
+| gate_formula_calculator | Gate Formula Calculator — Law 77 adaptive consciousness gate | `tools/gate_formula_calculator.py` |
+| n6_calculator | N6 Master Calculator — All n=6 arithmetic functions and design tools. | `tools/n6_calculator.py` |
+| n6_uniqueness_tester | n=6 Uniqueness Tester -- Check if an identity holds only for n=6 | `tools/n6_uniqueness_tester.py` |
+| perfect_number_generalizer | Perfect Number Generalizer — Test if formulas holding at n=6 generalize to n=28, | `tools/perfect_number_generalizer.py` |
+| perfect_number_physics | Perfect Number Physics — Core arithmetic functions and physics dimension mapping | `tools/perfect_number_physics.py` |
+| tension_calculator | Tension Calculator — Predict accuracy/precognition/identity from tension values | `tools/tension_calculator.py` |
+| validate_calculators | Calculator Validation Suite — Meta-calculator that tests ALL other calculators. | `tools/validate_calculators.py` |
+
+**Engine** (6)
+
+| Name | Description | Path |
+|------|-------------|------|
+| anima_tension_loss | Anima Tension Loss | `engine/anima_tension_loss.py` |
+| emergent_n6_trainer | Emergent N6 Trainer | `engine/emergent_n6_trainer.py` |
+| leech24_surface | Leech-24 Energy Surface | `engine/leech24_surface.py` |
+| phi_efficiency_bridge | Phi-Efficiency Bridge | `engine/phi_efficiency_bridge.py` |
+| sedi_training_monitor | SEDI Training Monitor | `engine/sedi_training_monitor.py` |
+| thermodynamic_frame | Thermodynamic Frame | `engine/thermodynamic_frame.py` |
+
+**Experiment** (29)
+
+| Name | Description | Path |
+|------|-------------|------|
+| experiment_alpha_attack | Experiment: Fine Structure Constant Alpha Attack | `experiments/experiment_alpha_attack.py` |
+| experiment_attractor_curvature | Experiment: Attractor Dimension + Energy Surface Curvature | `experiments/experiment_attractor_curvature.py` |
+| experiment_blind_nas | Experiment: Blind NAS — No n=6 Targets | `experiments/experiment_blind_nas.py` |
+| experiment_chip_verification | Experiment: N6 Chip Architecture Numerical Verification | `experiments/experiment_chip_verification.py` |
+| experiment_compiler_industry | Experiment: Compiler & Industry n=6 Pattern Verification | `experiments/experiment_compiler_industry.py` |
+| experiment_cosmology_biology | Experiment: Cosmology + Biology Numerical Verification | `experiments/experiment_cosmology_biology.py` |
+| experiment_emergent_convergence | Experiment: Emergent Convergence | `experiments/experiment_emergent_convergence.py` |
+| experiment_falsifiability_test | Experiment: N6 Falsifiability Test — Is n=6 better than random? | `experiments/experiment_falsifiability_test.py` |
+| experiment_fusion_cross_verify | Experiment: Fusion Device Cross-Verification | `experiments/experiment_fusion_cross_verify.py` |
+| experiment_h_ee_11_combined_architecture | H-EE-11: Full Combined Architecture | `experiments/experiment_h_ee_11_combined_architecture.py` |
+| experiment_h_ee_12_optimal_expansion_ratio | H-EE-12: Optimal FFN Expansion Ratio Sweep | `experiments/experiment_h_ee_12_optimal_expansion_ratio.py` |
+| experiment_h_ee_13_depth_scaling | H-EE-13: Energy Savings Scale with Model Depth | `experiments/experiment_h_ee_13_depth_scaling.py` |
+| experiment_h_ee_5_r_spectrum | H-EE-5: R(d_model) correlates with training efficiency. | `experiments/experiment_h_ee_5_r_spectrum.py` |
+| experiment_h_ee_7_head_dim_diversity | H-EE-7: Head-dim diversity improves attention | `experiments/experiment_h_ee_7_head_dim_diversity.py` |
+| experiment_h_ee_8_tau_predictor | H-EE-8: tau(d) predicts performance better than d itself. | `experiments/experiment_h_ee_8_tau_predictor.py` |
+| experiment_information_theoretic_meaning | Experiment: Information-Theoretic Meaning of R(n) = 1 | `experiments/experiment_information_theoretic_meaning.py` |
+| experiment_large_scale_rg_flow | Experiment: Multi-Scale RG Flow Extrapolation | `experiments/experiment_large_scale_rg_flow.py` |
+| experiment_leech24_nas | Experiment: Leech-24 NAS | `experiments/experiment_leech24_nas.py` |
+| experiment_novel_predictions | Experiment: Novel Predictions — What n=6 predicts BEFORE measurement | `experiments/experiment_novel_predictions.py` |
+| experiment_phi_flops_conjecture | Experiment: Phi-FLOPs Conjecture | `experiments/experiment_phi_flops_conjecture.py` |
+| experiment_r1_complete_proof | Experiment: R(n) = 1 COMPLETE PROOF | `experiments/experiment_r1_complete_proof.py` |
+| experiment_r1_uniqueness_proof | Experiment: R(n) = 1 Uniqueness — Towards a Proof | `experiments/experiment_r1_uniqueness_proof.py` |
+| experiment_r_equals_1_search | Experiment: R(n) = 1 Complete Solution Search | `experiments/experiment_r_equals_1_search.py` |
+| experiment_rg_flow | Experiment: RG Flow + Phase Transitions | `experiments/experiment_rg_flow.py` |
+| experiment_spectral_golay | Experiment: Golay Robustness + Spectral Gap | `experiments/experiment_spectral_golay.py` |
+| experiment_thermodynamic_inevitability | Experiment: Thermodynamic Inevitability | `experiments/experiment_thermodynamic_inevitability.py` |
+| experiment_zeta_connection | Experiment: R(n) = 1 and the Riemann Zeta Function | `experiments/experiment_zeta_connection.py` |
+| h_ee_2_gradient_properties | H-EE-2: Phi6Simple Gradient Properties | `experiments/h_ee_2_gradient_properties.py` |
+| h_ee_3_training_stability | H-EE-3: Phi6Simple Training Stability | `experiments/h_ee_3_training_stability.py` |
+
+**Technique** (16)
+
+| Name | Description | Path |
+|------|-------------|------|
+| boltzmann_gate | Technique 15: Boltzmann Gate | `techniques/boltzmann_gate.py` |
+| carmichael_lr | Technique 14: Carmichael LR Cycle | `techniques/carmichael_lr.py` |
+| dedekind_head | Technique 11: Dedekind Head Pruning | `techniques/dedekind_head.py` |
+| egyptian_moe | H-EE-18: Egyptian Fraction MoE Routing Verification | `techniques/egyptian_moe.py` |
+| entropy_early_stop | H-SEDI-EE-1: SEDI Entropy Test as Early Stopping Criterion | `techniques/entropy_early_stop.py` |
+| fft_mix_attention | H-SEDI-EE-3: Windowed FFT as Learned Attention Replacement | `techniques/fft_mix_attention.py` |
+| hcn_dimensions | H-EE-6: Tensor-core-aligned HCN dimensions | `techniques/hcn_dimensions.py` |
+| jordan_leech_moe | Technique 12: Jordan-Leech MoE Capacity Bound | `techniques/jordan_leech_moe.py` |
+| mertens_dropout | Technique 16: Mertens Dropout | `techniques/mertens_dropout.py` |
+| mobius_sparse | Technique 13: Möbius Sparse Flow | `techniques/mobius_sparse.py` |
+| phi6simple | H-EE-1: Cyclotomic Polynomial Activation Comparison | `techniques/phi6simple.py` |
+| phi_bottleneck | H-EE-9: Phi-bottleneck + Phi6Simple activation recovery test | `techniques/phi_bottleneck.py` |
+| phi_moe | H-EE-10: Phi-bottleneck + MoE (more experts, smaller each) | `techniques/phi_moe.py` |
+| rfilter_phase | H-SEDI-6: R-filter detects training phase transitions. | `techniques/rfilter_phase.py` |
+| takens_dim6 | H-SEDI-7: Takens embedding dim=6 optimal for training dynamics. | `techniques/takens_dim6.py` |
+| zetaln2_activation | H-EE-17 Verification: New activation function from convergence algebra. | `techniques/zetaln2_activation.py` |
 
 ### invest
 
