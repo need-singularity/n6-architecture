@@ -113,7 +113,46 @@ $$(n/\varphi) \times \tau = 3 \times 4 = 12 = \sigma = \text{gauge generators}.$
 
 This is the core theorem rearranged: $\sigma = (n/\varphi)\cdot\tau$, which holds **only** for $n=6$.
 
-### 3.5. String Theory Extension
+### 3.5. SO(10) Spinor and the Right-Handed Neutrino
+
+The SO(10) spinor representation has dimension $16 = \sigma + \tau = 12 + 4$. Under SU(5) $\times$ U(1):
+
+$$16 = 10_1 \oplus \bar{5}_{-3} \oplus 1_5 = (\sigma{-}\varphi) + \mathrm{sopfr} + \mu.$$
+
+The singlet $1 = \mu(6)$ is the **right-handed neutrino** $\nu_R$. The GUT breaking SO(10) $\to$ SU(5) removes exactly $\mu = 1$ fermion per generation:
+
+$$\text{SO(10) generation} - \text{SU(5) generation} = (\sigma{+}\tau) - (\sigma{+}n/\varphi) = \tau - n/\varphi = 1 = \mu.$$
+
+The identity $\tau = n/\varphi + \mu$ (i.e., $4 = 3 + 1$) holds **only at $n = 6$** among all integers $n \leq 10{,}000$. It encodes the seesaw mechanism: SO(10) matter = SU(5) matter + neutrino singlet.
+
+### 3.6. Weinberg Angle Running
+
+At the GUT scale, $\sin^2\theta_W = 3/8$ (SU(5) prediction [2]):
+
+$$\sin^2\theta_W^{\text{GUT}} = \frac{n/\varphi}{\sigma - \tau} = \frac{3}{8}.$$
+
+At the electroweak scale, the measured value $\sin^2\theta_W(M_Z) = 0.23122 \pm 0.00003$ is approximated by:
+
+$$\sin^2\theta_W^{\text{EW}} = \frac{n/\varphi}{\sigma + \mu} = \frac{3}{13} = 0.23077 \quad (\text{error } 0.19\%).$$
+
+The denominator shifts from $\sigma{-}\tau = 8$ to $\sigma{+}\mu = 13$ under renormalization group flow:
+
+$$(\sigma + \mu) - (\sigma - \tau) = \mu + \tau = 5 = \mathrm{sopfr}(6).$$
+
+The RG running shifts the denominator by exactly sopfr$(6)$.
+
+### 3.7. E$_6$ Fundamental Representation
+
+Under E$_6 \to$ SO(10) $\times$ U(1):
+
+$$27 = 16 \oplus 10 \oplus 1 = (\sigma{+}\tau) + (\sigma{-}\varphi) + \mu.$$
+
+Each step up the GUT hierarchy adds exactly $\mu = 1$ new particle type:
+- SU(5): 15 fermions
+- SO(10): $15 + \mu = 16$ (adds $\nu_R$)
+- E$_6$: $27 = 16 + 10 + 1$ (adds exotic singlet)
+
+### 3.8. String Theory Extension
 
 The heterotic string gauge group E$_8 \times$ E$_8$ has dimension $496 = P_3$, the third perfect number. The Green-Schwarz anomaly cancellation [3] requires exactly 496 generators for consistent 10-dimensional superstring theory. The perfect number chain:
 

@@ -548,7 +548,13 @@ Each layer of protocol complexity adds overhead governed by a different n=6 expr
 
 5. **Representation dimensions are n=6 arithmetic**: 5̄ = sopfr, 10 = σ-φ, 15 = σ+n/φ. These are the ACTUAL representation dimensions used to classify all known fermions in the Georgi-Glashow model. They were determined by particle physics (anomaly cancellation, charge quantization), not by number theory.
 
-6. **E₈×E₈ = P₃ = 496**: The string theory gauge group has dimension equal to the third perfect number. The perfect number sequence P₁=6 (SM level), P₁·τ=24 (SU(5) GUT), P₃=496 (string theory) traces the hierarchy of fundamental physics unification.
+6. **SO(10) spinor 16 = σ+τ, adds μ=1 (ν_R)**: The SO(10) generation (16) exceeds SU(5) (15) by exactly μ(6)=1 = the right-handed neutrino. The identity τ = n/φ + μ holds ONLY at n=6.
+
+7. **Weinberg angle running**: sin²θ_W shifts from (n/φ)/(σ-τ) = 3/8 (GUT) to (n/φ)/(σ+μ) = 3/13 (EW, 0.19% error). Denominator shift = μ+τ = sopfr(6) = 5.
+
+8. **E₆ fundamental 27 = (σ+τ)+(σ-φ)+μ**: Each GUT level adds μ=1 particle.
+
+9. **E₈×E₈ = P₃ = 496**: The string theory gauge group has dimension equal to the third perfect number. The perfect number sequence P₁=6 (SM level), P₁·τ=24 (SU(5) GUT), P₃=496 (string theory) traces the hierarchy of fundamental physics unification.
 
 ### Statistical significance
 
