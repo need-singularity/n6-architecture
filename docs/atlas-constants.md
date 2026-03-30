@@ -123,6 +123,7 @@
 | **BT-36** | Grand Energy-Info-HW-Physics Chain | Solar→Semiconductor→Landauer→H100→1/α, 5 links all <1% | 🟩⭐⭐⭐ |
 | **BT-37** | Semiconductor Pitch Ladder | N5 pitch=P₂=28nm, N3 gate=σ·τ=48nm, 8/8 EXACT | 🟩⭐⭐ |
 | **BT-38** | Hydrogen Energy Quadruplet | LHV=σ(σ-φ)=120, HHV=σ²-φ=142, Gibbs=113,118 — 4/4 EXACT, diffs also n=6 | 🟩⭐⭐ |
+| **BT-39** | KV-Head Universality | n_kv_heads∈{σ-τ,2^τ} 5/5 models, Mistral L2 5/6 n=6, d_ff=P₂·1024 | 🟩⭐⭐ |
 
 ## Perfect Number Chain (P1 → P2)
 
