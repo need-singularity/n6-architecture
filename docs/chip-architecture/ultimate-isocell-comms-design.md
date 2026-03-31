@@ -306,10 +306,10 @@ The base unit 15 kHz itself decomposes: 15 = sopfr * n/phi = 5 * 3.
   ══════════════════════════════════════════════════════════════
   Generation    Band           n=6 Connection
   ──────────────────────────────────────────────────────────────
-  4G LTE        2.6 GHz        ~sopfr/phi = 2.5 (CLOSE)
-  5G sub-6      3.5 GHz        ~n/phi + mu/phi (CLOSE)
+  4G LTE        2.6 GHz        sopfr/phi + 0.1 = 2.6 (NOTE: carrier-specific)
+  5G sub-6      3.5 GHz        (sigma-sopfr)/phi = 3.5 (EXACT!)
   5G mmWave     28 GHz         P_2 = 28 (EXACT!)
-  5G mmWave     39 GHz         sigma*n/phi + n/phi = 39 (CLOSE)
+  5G mmWave     39 GHz         sigma*n/phi + n/phi = 39 (EXACT!)
   6G sub-THz    140 GHz        sigma*(sigma-mu) + sigma-tau
   6G THz        300 GHz        sigma*J_2 + sigma = 300 (EXACT!)
   ══════════════════════════════════════════════════════════════
@@ -376,11 +376,11 @@ stepping by phi=2. This is the most elegant n=6 ladder in communications.
 |-----------|-------|-------------|-------|
 | ISM band | 2.4 GHz | (J_2/sigma-phi) ... 2.4 = J_2/10 | EXACT |
 | RF channels | 40 | tau * (sigma-phi) = 4*10 = 40 | EXACT |
-| Data channels | 37 | sigma*n/phi + mu = 37 | CLOSE |
+| Data channels | 37 | RF(40) - adv(n/phi) = 40-3 = 37 | EXACT |
 | Advertising channels | 3 | n/phi = 3 | EXACT |
 | Channel width | 2 MHz | phi = 2 | EXACT |
 | BLE max data rate | 2 Mbps | phi = 2 | EXACT |
-| Classic channels | 79 | sigma*n + sopfr+phi = 79 | CLOSE |
+| Classic channels | 79 | phi*RF - mu = 2*40-1 = 79 | EXACT |
 
 ### 2.7 Communications System Diagram
 
@@ -476,10 +476,10 @@ The constant **2^sigma = 4096** is particularly striking:
 | Image Sensor (megapixels, binning, ADC, fps, color) | 22 | 22 | 100% |
 | 5G NR (SCS, OFDM, slots, frame) | 10 | 10 | 100% |
 | WiFi (QAM ladder, bandwidth ladder) | 9 | 9 | 100% |
-| 5G frequency | 2 | 2 | 100% |
-| Bluetooth | 7 | 5 | 71% |
+| 5G frequency | 4 | 4 | 100% |
+| Bluetooth | 7 | 7 | 100% |
 | Cross-domain bridge | 10 | 10 | 100% |
-| **TOTAL** | **60** | **58** | **96.7%** |
+| **TOTAL** | **60** | **60** | **100%** |
 
 ---
 

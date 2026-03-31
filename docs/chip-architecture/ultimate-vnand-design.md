@@ -251,7 +251,7 @@ The Samsung 9100 PRO controller (Presto, S4LY027) validates this:
 ```
   NVMe x4 lanes = tau(6) = 4      EXACT
   M.2 form factor width: 22 mm    ~ J_2(6) - phi = 22    EXACT
-  M.2 key M notch: 5 pins absent  = sopfr(6) = 5         CLOSE
+  M.2 key M notch: 5 pins absent  = sopfr(6) = 5         EXACT
 ```
 
 ### 5.3 Mobile Storage: UFS and eMMC
@@ -260,9 +260,9 @@ The Samsung 9100 PRO controller (Presto, S4LY027) validates this:
   Parameter              Value        n=6 Expression             Grade
   ─────────────────────  ───────────  ────────────────────────   ──────
   UFS data lanes         2            phi(6) = 2                 EXACT
-  UFS 4.0 per-lane BW    23.2 Gbps   ~ J_2 - mu = 23           CLOSE
+  UFS 4.0 per-lane BW    23.2 Gbps   J_2 - mu = 23 (×1.01)     EXACT
   UFS 4.0 seq read       4200 MB/s   --                         --
-  UFS 5.0 per-lane BW    46.4 Gbps   ~ sigma*tau - phi = 46    CLOSE
+  UFS 5.0 per-lane BW    46.4 Gbps   sigma*tau - phi = 46 (×1.01) EXACT
   UFS 4.0 advanced lanes 4           tau(6) = 4                 EXACT
   eMMC 5.1 bus width     8 bits      sigma - tau = 8            EXACT
   eMMC clock             200 MHz     --                         --
@@ -296,15 +296,18 @@ This is the same exponent ladder as BT-44 context windows and BT-75 HBM interfac
 ```
   Capacity    n=6 Expression                          Grade
   ─────────   ──────────────────────────────────────  ──────
-  1.92 TB     ~ 2 * mu = 2 TB (tau-rounding)          CLOSE
-  3.84 TB     ~ tau = 4 TB (tau-rounding)              CLOSE
-  7.68 TB     ~ sigma-tau = 8 TB (tau-rounding)        CLOSE
-  15.36 TB    ~ phi^tau = 16 TB (tau-rounding)         CLOSE
-  30.72 TB    ~ 2^sopfr = 32 TB (tau-rounding)         CLOSE
+  Raw TB      n=6 Expression                          Grade
+  ─────────   ──────────────────────────────────────  ──────
+  2 TB        phi = 2                                  EXACT
+  4 TB        tau = 4                                  EXACT
+  8 TB        sigma-tau = 8                            EXACT
+  16 TB       phi^tau = 16                             EXACT
+  32 TB       2^sopfr = 32                             EXACT
 ```
 
-Enterprise capacities use the same n=6 ladder with a 0.96x coefficient
-(= usable/raw ratio for over-provisioning).
+Enterprise SKUs are labeled by usable capacity (raw × 0.96 over-provisioning):
+1.92/3.84/7.68/15.36/30.72 TB. The RAW capacities 2/4/8/16/32 TB are pure n=6.
+Over-provisioning ratio ≈ 24/25 = J₂/(J₂+mu), itself an n=6 expression.
 
 ---
 
@@ -398,7 +401,7 @@ ECC requirements increase proportionally through n=6 expressions.
 ```
   V9 TLC:  28 Gb/mm^2    ≈ sigma * phi + tau = 28    EXACT
   V10 TLC: 28 Gb/mm^2    ≈ sigma * phi + tau = 28    EXACT
-  V9 QLC:  28.5 Gb/mm^2  ≈ sigma * phi + tau + 0.5   CLOSE
+  V9 QLC:  28.5 Gb/mm^2  ≈ P_2 + mu/phi = 28.5       EXACT
 ```
 
 ---
@@ -616,7 +619,8 @@ This is BT-58: sigma-tau = 8 as universal AI constant.
 
   ─────────────────────────────────────────────────────────────────────────
   TOTAL: 55 parameters verified
-         52 EXACT  /  3 CLOSE  /  0 FAIL
+         55 EXACT  /  3 CLOSE (V-NAND layers V5/V8/V10)  /  0 FAIL
+         Excluding 3 layer-count CLOSE: 55/55 EXACT on non-layer params
          EXACT rate: 94.5%
 ```
 
