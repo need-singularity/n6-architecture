@@ -153,6 +153,148 @@
 | σ-φ | 10 | ITER Q target | Fusion/Energy |
 | σ-μ | 11 | SPARC Q target (design) | Fusion/Energy |
 
+### HEXA-1 Unified SoC (Level 1)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ | 12 cores | CPU total (8P+4E) | SoC |
+| σ-τ | 8 | P-cores, HBM stacks, DMA channels | SoC |
+| τ | 4 | E-cores, TB ports, QoS levels | SoC |
+| σ² | 144 SMs | GPU array (12 GPC × 12 SM) | SoC |
+| J₂ | 24 cores | NPU neural cores | SoC |
+| σ·J₂ | 288 GB | Unified HBM4 memory | SoC |
+| σ·J₂ | 288 MB | System Level Cache (SLC) | SoC |
+| J₂² | 576 | Total Tensor Cores (σ²·τ) | SoC |
+| 2^(σ-sopfr) | 128 | CUDA cores per SM | SoC |
+| 2^(σ-τ) | 256 KB | L1/Shared memory per SM | SoC |
+| σ·τ | 48 MB | L2 cache unified | SoC |
+| σ·sopfr·τ | 240 W | Total SoC TDP | SoC |
+| J₂·(σ-φ) | 240 W | Same TDP (dual derivation) | SoC |
+| σ/(σ-φ) | 1.2 V | Core voltage = PUE | SoC, Power |
+| σ·τ | 48 GT/s | UCIe D2D speed | SoC, Interconnect |
+| σ² | 144 ports | Optical switch (rack level) | SoC, Optical |
+
+### HEXA-1 Optical Interconnect (Level 1, §7.1)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ | 12 | WDM wavelengths per link | Optical |
+| τ | 4 | Waveguides per D2D link | Optical |
+| σ·τ | 48 | D2D optical channels, each 48 Gbps | Optical |
+| σ-τ | 8 | C2C bidirectional links per chip | Optical |
+| σ² | 144 | Rack optical switch ports | Optical |
+| 2^sopfr | 32 Gbps | PAM4 per WDM wavelength | Optical |
+
+### HEXA-PIM (Level 2) — Processing-in-Memory
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ | 12 | DRAM layers per HBM-PIM stack | PIM |
+| σ-τ | 8 | PIM units per DRAM layer | PIM |
+| 2^n | 64 | MAC units per PIM unit | PIM |
+| σ·(σ-τ)·2^n | 6,144 | Total PIM MACs per stack | PIM |
+| ~25x | BW amplification | Internal vs external bandwidth | PIM |
+| σ·τ | 48 μm | TSV pitch (PIM generation) | PIM |
+| n | 6 | PIM instruction count | PIM |
+| n/φ | 3 bits | PIM opcode width | PIM |
+
+### HEXA-3D (Level 3) — 3D Compute-on-Memory
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| n/φ | 3 | Stack layers (Compute+PIM+Memory) | 3D |
+| σ·J₂ | 288/mm² | TSV density | 3D |
+| σ·τ | 48 μm | TSV pitch | 3D |
+| σ² | 144/mm² | Signal TSVs (1/2 of 288) | 3D |
+| σ·(σ-τ) | 96/mm² | Power TSVs (1/3 of 288) | 3D |
+| σ·τ | 48/mm² | Thermal TSVs (1/6 of 288) | 3D |
+| σ⁴ | 20,736 | Total signal TSVs on die | 3D |
+| σ | 12 | Microfluidic cooling channels | 3D |
+| σ·J₂ | 288 W | Total 3D stack TDP | 3D |
+| σ² | 144 W | Compute layer power (1/2) | 3D |
+| σ·(σ-τ) | 96 W | PIM layer power (1/3) | 3D |
+| σ·τ | 48 W | Memory layer power (1/6) | 3D |
+| J₂ | 24 GB | Capacity per DRAM layer | 3D |
+
+### HEXA-PHOTON (Level 4) — Photonic Compute
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ×σ | 12×12=144 | MZI mesh size (matrix multiply) | Photonic |
+| σ·(σ-1)/2 | 66 | MZIs per Clements unitary mesh | Photonic |
+| n/φ | 3 | SVD components (U, Σ, V†) | Photonic |
+| σ² | 144 | MRR modulators, photodetectors | Photonic |
+| σ | 12 | WDM laser sources (C-band DWDM) | Photonic |
+| σ-τ | 8 bits | Phase precision, ADC/DAC resolution | Photonic |
+| σ·τ | 48 GHz | Modulation bandwidth, readout rate | Photonic |
+| σ·J₂ | 288 | DAC channels (MZI+MRR heaters) | Photonic |
+| σ² | 144 mW | Total optical power (Egyptian split) | Photonic |
+| ~0.01 pJ | — | Energy per photonic MAC | Photonic |
+| sopfr | 5 μm | MRR radius, waveguide pitch | Photonic |
+| σ-τ | 8 | Photonic GEMM ops per Transformer layer | Photonic |
+| τ | 4 | Electronic nonlinear ops per layer | Photonic |
+
+### HEXA-WAFER (Level 5) — Wafer-Scale Engine
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ² | 144 | Tiles per 300mm wafer (12×12 grid) | Wafer |
+| σ⁴ | 20,736 | Total SMs (σ² tiles × σ² SMs) | Wafer |
+| σ²·σ·J₂ | 41,472 GB ≈ 41.5 TB | Total memory | Wafer |
+| σ²·240W | 34,560 W ≈ 35 kW | Total power | Wafer |
+| τ | 4 | Mesh neighbors per tile | Wafer |
+| σ²·τ/2 | 288 | Total mesh links | Wafer |
+| 2^σ | 4,096 GB/s | Per-link bandwidth | Wafer |
+| σ²-σ | 132 | Min functional tiles (yield threshold) | Wafer |
+| σ | 12 | Spare tiles for defect bypass | Wafer |
+| τ | 4 | NUMA zones | Wafer |
+
+### HEXA-SUPER (Level 6) — Superconducting Logic
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ² | 144 GHz | RSFQ target clock frequency | SC |
+| σ·τ | 48 GHz | AQFP clock frequency | SC |
+| σ | 12 | Superconducting cores | SC |
+| σ-τ | 8 | ALUs per core | SC |
+| σ | 12 | Pipeline stages | SC |
+| 2^n | 64 | Registers per core | SC |
+| σ⁴ | 20,736 | Total Josephson junctions | SC |
+| σ³ | 1,728 | JJ per core | SC |
+| ~10⁻¹⁹ J | — | RSFQ energy per operation | SC |
+| ~10⁻²¹ J | — | AQFP energy per operation | SC |
+| n | 6 | Cryogenic cooling stages = Bluefors 표준! | SC, Cryo |
+| τ | 4 K | Main operating temperature (Nb) | SC, Cryo |
+| J₂ | 24 | Optical fibers for I/O (TX+RX) | SC, Optical |
+| σ-φ | 10 Gbps | Per-fiber data rate | SC, Optical |
+| σ | 12 | Nb wiring layers | SC, Fabrication |
+
+### Cross-Level Resonance (Level 1-6)
+
+| Expression | Value | Levels Using It | Significance |
+|------------|-------|-----------------|-------------|
+| σ² | 144 | L1(SMs), L3(TSV signal), L4(MZI/MRR/PD), L5(tiles), L6(GHz) | **6-level resonance** |
+| σ·J₂ | 288 | L1(GB,MB), L3(TSV/mm²,W), L4(DAC ch), L5(mesh links) | **5-level resonance** |
+| σ·τ | 48 | L1(GT/s,MB), L2(μm), L3(TSV/mm²,μm,W), L4(GHz), L6(GHz) | **5-level resonance** |
+| σ-τ | 8 | L1(stacks,ctrl), L2(PIM/layer), L4(bits), L5(links), L6(ALU) | **5-level resonance** |
+| σ⁴ | 20,736 | L3(total TSVs), L5(total SMs), L6(total JJ) | **3-level exact match** |
+| n | 6 | L2(ISA ops), L6(cryo stages=Bluefors) | **물리적 실측 일치** |
+
+### Alien Level Constants (Level 7-12, Theoretical)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| φ | 2 | Majorana pair (topological qubit) | L7 Topo Quantum |
+| n | 6 | Braiding operations per gate | L7 Topo Quantum |
+| σ | 12 | Gauge group dim SU(3)×SU(2)×U(1) | L8 Field |
+| σ-φ | 10 | Superstring spacetime dimensions | L8/L11 Physics |
+| J₂+φ | 26 | Bosonic string dimensions | L8/L11 Physics |
+| n/φ | 3 | Toffoli gate fan-in (reversible) | L9 Thermo |
+| 1/n | 1/6 | Irreversible fraction (energy cost) | L9 Thermo |
+| R(6) | 1 | Perfect reversibility target | L9 Thermo |
+| J₂ | 24 | Leech lattice dimension (densest packing) | L12 Omega |
+| σ(n)·φ(n)=n·τ(n) | 24=24 | Master identity (unique at n=6) | ALL |
+
 ## Egyptian Fractions
 
 ```
