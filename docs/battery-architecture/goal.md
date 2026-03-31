@@ -153,7 +153,7 @@
 
 ## Level 3: HEXA-PACK
 
-**Status**: 설계 예정 → [hexa-pack.md](hexa-pack.md)
+**Status**: 설계 완료 → [hexa-pack.md](hexa-pack.md) (1130줄)
 
 ```
   혁신: 팩 아키텍처 --- n→σ→J₂ 전압 래더 + 96/192 수렴
