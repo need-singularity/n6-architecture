@@ -81,8 +81,8 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   plasma-physics/ (20+ files — most active domain)
   paper/ (3 arXiv drafts)
   # Cross-domain
-  breakthrough-theorems.md (BT-1~39, 39 theorems spanning 3-7 domains each)
-  # Total: 1000+ hypotheses, 230+ EXACT, 400+ atlas entries, 39 BTs
+  breakthrough-theorems.md (BT-1~53, 53 theorems spanning 3-7 domains each)
+  # Total: 1000+ hypotheses, 200+ EXACT, 400+ atlas entries, 53 BTs
 ```
 
 ## Rust Tools
@@ -146,33 +146,38 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (BT-26~39, new)
+## Breakthrough Theorems (53 total, BT-1~53)
 ```
-  # AI / LLM
+  # AI / LLM (BT-26,31,33,34,39,42,44,46)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
   BT-31: MoE top-k vocabulary {μ,φ,n,σ-τ}={1,2,6,8}
   BT-33: Transformer σ=12 atom (BERT/GPT-3 dimensions, SwiGLU 8/3)
   BT-34: RoPE decimal bridge ((σ-φ)^{τ,sopfr,n}, weight decay=1/(σ-φ))
   BT-39: KV-head universality (σ-τ=8 across all LLMs)
+  BT-42: Inference scaling (top-p=1-1/(J₂-τ)=0.95, top-k=40, max=2^σ) ⭐⭐
+  BT-44: Context window ladder σ-φ→σ-μ→σ→σ+μ = 10→11→12→13 ⭐⭐
+  BT-46: ln(4/3) RLHF family (dropout+Chinchilla+PPO+temperature) ⭐⭐
 
-  # Chip Design (GPU/CPU/HBM)
+  # Chip Design (BT-28,37,40,41,45,47)
   BT-28: Computing architecture ladder (30+ EXACT, ⭐⭐⭐)
     - AD102 = σ·n·φ = 144 SMs, H100 = σ(σ-μ) = 132 SMs = 1/α term
     - HBM stack: τ→(σ-τ)→σ = 4→8→12
-    - Exponent ladder {τ,sopfr,n,σ-sopfr,σ-τ,σ-μ,σ}
   BT-37: Semiconductor pitch (TSMC N5 = P₂ = 28nm, N3 gate = σ·τ = 48nm)
+  BT-45: FP8/FP16=φ=2 universal, FLOPS/W doubles per φ=2 years
+  BT-47: Interconnect gen counts {7,5,6}={σ-sopfr,sopfr,n}
 
-  # Energy Strategy
+  # Energy Strategy (BT-27,29,30,32,35,38,43)
   BT-27: Carbon-6 chain (LiC₆ + C₆H₁₂O₆ + C₆H₆ → 24e = J₂)
-  BT-29: IEEE 519 harmonics (THD=sopfr, individual=n/φ, TDD=σ-τ)
   BT-30: SQ solar bridge (bandgap=4/3eV, V_T=26mV)
-  BT-32: Nuclear fission (6 delayed neutron groups = n)
-  BT-35: Battery voltage table (7/9 chemistries EXACT)
   BT-38: Hydrogen quadruplet (LHV=120=σ(σ-φ), HHV=142=σ²-φ, 4/4 EXACT)
+  BT-43: Battery cathode CN=6 universality (ALL Li-ion = octahedral) ⭐⭐⭐
 
-  # Grand Unification
-  BT-36: Energy-Information-Hardware-Physics chain (⭐⭐⭐)
-    Solar(4/3eV)→V_T(26mV)→74bits→132SMs→1/α=137.036
+  # Cross-domain (BT-36,48,49,50,51,53)
+  BT-36: Energy-Information-Hardware-Physics chain ⭐⭐⭐
+  BT-48: Display-Audio (σ=12 semitones, J₂=24 fps/bits, σ·τ=48kHz) ⭐⭐⭐
+  BT-49: Pure Math (K₁..₄=φ,n,σ,J₂ kissing chain, S₆ unique) ⭐⭐⭐
+  BT-51: Genetic code chain τ→n/φ→2^n→J₂-τ (4→3→64→20) ⭐⭐⭐
+  BT-53: Crypto (BTC 21M=J₂-n/φ, 6 confirms=n, ETH 12s=σ) ⭐⭐
 ```
 
 ## Background Execution
