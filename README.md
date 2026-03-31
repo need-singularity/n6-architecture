@@ -214,4 +214,11 @@ Contributions welcome:
 
 ---
 
+## Calculator Registry
+
+<!-- SHARED:CALCULATORS:START -->
+<!-- SHARED:CALCULATORS:END -->
+
+---
+
 *Part of the [TECS-L](https://github.com/need-singularity/TECS-L) project family.*
