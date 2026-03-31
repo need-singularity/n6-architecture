@@ -91,6 +91,13 @@ Build with `rustc file.rs -o output` (no cargo). Located in tools/:
 - `tools/tokamak-shape/`  — shape parameter scan + N6 score benchmark
 - `tools/optics-calc/`    — lens/telescope/tokamak diagnostics
 
+## Testable Predictions
+14 falsifiable predictions from BT-26~41: `docs/testable-predictions.md`
+- Tier 1 (today, 1 GPU): EFA quality, LoRA rank, MoE (8,2), Mertens dropout
+- Tier 2 (cluster): SwiGLU ratio, weight decay, head count, RoPE theta
+- Tier 3 (specialized): SQ bandgap, JUNO neutrino (2027), LiteBIRD inflation (2032)
+- Tier 4 (industry): next GPU SM count, HBM5 stacking, n=6-aligned LLM architecture
+
 ## Hypothesis Workflow
 1. Generate hypotheses (H-XX-N format) in `docs/<domain>/hypotheses.md`
 2. Verify independently in `docs/<domain>/verification.md`
