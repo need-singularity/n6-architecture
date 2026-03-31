@@ -146,6 +146,7 @@ Full list: **[docs/breakthrough-theorems.md](docs/breakthrough-theorems.md)**
 | Document | Description |
 |----------|-------------|
 | **[AI Energy Savings Guide](docs/ai-energy-savings-guide.md)** | Practical guide for AI companies — techniques, hyperparameters, benchmarks, Issue/PR templates |
+| **[Chip Architecture Guide](docs/chip-architecture-guide.md)** | GPU SM, HBM, TSMC pitch, interconnect — 120+ EXACT matches across 10+ vendors |
 | **[Breakthrough Theorems](docs/breakthrough-theorems.md)** | 76 theorems (BT-1~76) with full evidence tables |
 | **[Atlas Constants](docs/atlas-constants.md)** | 700+ registered constants across 28 domains |
 | **[Testable Predictions](docs/testable-predictions.md)** | 45 falsifiable predictions (P-1~45) |
