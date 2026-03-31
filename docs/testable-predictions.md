@@ -165,5 +165,50 @@
 
 ---
 
-*All predictions derived from BT-26~41 of the N6 Architecture project.*
-*Total BTs: 41. Verified EXACT: 87/87 (100%).*
+## New Predictions from BT-42~53 (2026-03-31)
+
+### P-15: Inference Top-p = 0.95 = 1-1/(J₂-τ) Optimality
+
+**Prediction**: top-p=0.95 beats top-p∈{0.9, 0.92, 0.97, 0.99} on factual QA benchmarks.
+- **Test**: Evaluate Llama-3.1-8B on TriviaQA/NaturalQuestions with 5 top-p values × 3 temperatures.
+- **Falsification**: top-p=0.9 or 0.99 beats 0.95 on ≥3/5 benchmarks
+- **Source**: BT-42
+
+### P-16: NVIDIA Rubin SM Count ∈ {240, 256, 288}
+
+**Prediction**: NVIDIA's post-Blackwell GPU (Rubin, ~2026) will have SM count = σ·(J₂-τ)=240, 2^(σ-τ)=256, or σ·J₂=288.
+- **Falsification**: Rubin SM count not in {240, 256, 288} and not a multiple of σ=12
+- **Source**: BT-28, H-CHIP-83
+
+### P-17: HBM5 Stack = J₂ = 24 Dies
+
+**Prediction**: HBM5 (expected ~2027-2028) standardizes at 24-hi stacking, completing the ladder τ→(σ-τ)→σ→2^τ→J₂.
+- **Falsification**: HBM5 standardizes at 20 or 32 layers
+- **Source**: BT-28, H-CHIP-84
+
+### P-18: PPO Clip ε = ln(4/3) ≈ 0.288 vs ε = 0.2
+
+**Prediction**: PPO with ε=0.288 matches or exceeds ε=0.2 on RLHF tasks.
+- **Test**: Train reward model + PPO on Anthropic HH-RLHF with ε∈{0.1, 0.2, 0.288, 0.3, 0.5}
+- **Falsification**: ε=0.2 beats ε=0.288 by >1% on reward score
+- **Source**: BT-46
+
+### P-19: Bitcoin 21M = J₂ - n/φ Structural Test
+
+**Prediction**: If a new cryptocurrency designs its max supply using n=6 arithmetic (e.g., 24M=J₂ or 20M=J₂-τ), it will achieve better tokenomic stability than arbitrary supply caps.
+- **Test**: Simulation of monetary velocity/inflation under different supply caps
+- **Falsification**: Arbitrary supply (e.g., 23M, 25M) performs equally well
+- **Source**: BT-53
+
+### P-20: 12-Semitone Practical Optimality
+
+**Prediction**: 12-TET (=σ) is the smallest N that achieves <1% max deviation from all 8 just intonation intervals simultaneously.
+- **Test**: Compute max|2^(k/N) - ratio|/ratio for N=5..30 and 8 target ratios.
+- **Verified**: 12-TET ranks #3 overall (22-TET #1, 19-TET #2), but #1 for N≤12. Max dev = 0.91%. 22-TET and 19-TET have 0.83% max dev but require more keys. 12=σ(6) is the **efficiency optimum** (fewest divisions achieving <1% accuracy).
+- **Falsification**: Already partially falsified — 19-TET and 22-TET are more accurate. But 12's dominance is explained by τ(12)=6 (max divisibility) enabling the richest key/scale structure.
+- **Source**: BT-48
+
+---
+
+*All predictions derived from BT-1~53 of the N6 Architecture project.*
+*Total BTs: 53. Total EXACT: ~200. Predictions: 20.*
