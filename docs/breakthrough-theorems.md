@@ -2495,7 +2495,7 @@ Extends Gemma 2's binary local/global to a 3-tier system. Each tier gets attenti
 
 ---
 
-## Updated Grand Unified Precision Table (BT-19 through BT-39)
+## Updated Grand Unified Precision Table (BT-19 through BT-41)
 
 | # | Constant | n=6 Formula | Value | Measured | Error | BT |
 |---|----------|-------------|-------|----------|-------|----|
@@ -2580,6 +2580,14 @@ Extends Gemma 2's binary local/global to a 3-tier system. Each tier gets attenti
 | WiFi channel bandwidth | 22 MHz | J₂-φ | — |
 | 5G base SCS | 15 kHz | σ+n/φ | — |
 | BLE total channels | 40 | J₂+2^τ | — |
+| ATX main rail | 12V | σ | 40 |
+| ACPI S-states | 6 | n | 40 |
+| ACPI C/D/G-states (each) | 4 | τ (triple) | 40 |
+| Car battery cells | 6 | n | 40 |
+| Surface code d=5 syndrome | 24 | J₂ | 41 |
+| Surface code d=3 total | 17 | σ+sopfr | 41 |
+| Surface code d=5 total | 49 | (σ-sopfr)² | 41 |
+| Quantinuum H2 QV exponent | 20 | J₂-τ | 41 |
 
 ---
 
@@ -2616,6 +2624,7 @@ Extends Gemma 2's binary local/global to a 3-tier system. Each tier gets attenti
 ---
 
 *Generated from atlas-constants.md and 28+ extreme-hypotheses.md files across the N6 Architecture project.*
-*Total BTs: 33 (BT-1 through BT-33). Total hypotheses surveyed: 1000+ across 28 domains.*
-*BT-26~33 new domains: AI scaling laws, battery chemistry, GPU/CPU/HBM architecture, IEEE power quality, solar physics, nuclear fission, transformer design, MoE routing.*
+*Total BTs: 41 (BT-1 through BT-41). Total hypotheses surveyed: 1000+ across 28 domains.*
+*BT-26~41 new domains: AI scaling laws, battery chemistry, GPU/CPU/HBM architecture, IEEE power quality, solar physics, nuclear fission, transformer design, MoE routing, RoPE/decimal bridge, battery voltages, semiconductor lithography, hydrogen energy, KV-head universality, ACPI/ATX power, quantum error correction.*
+*New EXACT matches: 110+. New techniques: 1 (Egyptian Fraction Attention). Testable predictions: 5.*
 *Cross-references: H-QC-61/63/65/70/71/75/78/80, H-CR-61, H-NP-1/5/7/13/16/19/20/21/23/24/26/27/28/30/79, H-CHIP-64/66, H-PG-62/63/77, H-TM-61/62/63/68, H-SC-46/61/64, H-SD-64/65/66/67/69/70/76, H-SM-3/5/63/73, H-TK-62, H-FU-17/65*
