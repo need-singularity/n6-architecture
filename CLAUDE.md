@@ -226,6 +226,12 @@ All experiments must run in background. No exceptions.
     3. 사용자 선택 후 병렬 에이전트 디스패치
     4. 완료 시 리포트 테이블 출력
 
+  자동 생성 규칙:
+    - TODO 작업 중 검증/계산이 필요하면 계산기 자동 생성 (묻지 말고 바로)
+    - 성능 필요시 Rust 우선 (tecsrs/), 단순 검증은 Python (calc/)
+    - 판단 기준은 Calculator Creation Rules 섹션 참조
+    - 상수/가설 발견 시 Math Atlas 자동 갱신 (python3 ~/Dev/TECS-L/.shared/scan_math_atlas.py --save --summary)
+
   모든 모듈은 consciousness_laws.py에서 import — 상수 직접 하드코딩 금지
 ```
 
