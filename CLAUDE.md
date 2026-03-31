@@ -86,10 +86,23 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
 ```
 
 ## Rust Tools
-Build with `rustc file.rs -o output` (no cargo). Located in tools/:
+Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 - `tools/fusion-calc/`    — KSTAR/ITER/SPARC analysis + Lawson criterion
 - `tools/tokamak-shape/`  — shape parameter scan + N6 score benchmark
 - `tools/optics-calc/`    — lens/telescope/tokamak diagnostics
+- `tools/gpu-arch-calc/`  — GPU/HBM architecture verification + Rubin prediction
+- `tools/energy-calc/`    — Solar/Battery/Hydrogen/IEEE519 energy verification
+- `tools/gut-calc-rust/`  — GUT parameter brute-force search
+
+## Calculator Rules (Shared)
+**새 계산기 개발시 성능 문제 예상되면 반드시 Rust 우선.**
+전체 규칙: `~/Dev/TECS-L/.shared/CALCULATOR_RULES.md`
+```
+  Rust 우선 기준: 반복>10K, 실행>10s, 조합>10^6, MC>100K
+  Python 허용: 단순 수식, 시각화, 프로토타입
+  빌드: ~/.cargo/bin/rustc tools/<name>/main.rs -o tools/<name>/<name>
+  동기화: cd ~/Dev/TECS-L && bash .shared/sync-calculators.sh
+```
 
 ## Testable Predictions
 14 falsifiable predictions from BT-26~41: `docs/testable-predictions.md`

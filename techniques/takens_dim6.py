@@ -3,7 +3,7 @@
 Embed loss curves at dims 4,5,6,7,8,10, compute persistence via distance matrices.
 Measure: which embedding dimension produces most persistent topological features?
 """
-import sys, os; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); sys.path.insert(0, '/Users/ghost/Dev/TECS-L')
 import torch, torch.nn as nn, numpy as np
 from model_pure_field import PureFieldEngine
 from model_utils import load_mnist

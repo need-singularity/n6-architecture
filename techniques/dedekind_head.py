@@ -186,11 +186,11 @@ def main():
         return x, y
 
     configs = [
-        ("16 heads (baseline)", 16, 4 * D_MODEL),
         ("12 heads (Dedekind)", 12, 4 * D_MODEL),
         ("8 heads (standard)", 8, 4 * D_MODEL),
         ("6 heads (divisor)", 6, 4 * D_MODEL),
         ("4 heads (tau)", 4, 4 * D_MODEL),
+        ("3 heads (n/phi)", 3, 4 * D_MODEL),
     ]
 
     results = []
@@ -244,10 +244,10 @@ def main():
     print(f"Valid head counts (divisors of 12): {DIVISORS_OF_12}")
 
     h12 = next(r for r in results if r["n_heads"] == 12)
-    h16 = next(r for r in results if r["n_heads"] == 16)
-    print(f"\n12-head vs 16-head:")
-    print(f"  Attn param savings: {(1 - h12['attn_params']/h16['attn_params'])*100:.1f}%")
-    print(f"  Loss delta: {h12['final_loss'] - h16['final_loss']:+.4f}")
+    best = min(results, key=lambda r: r["final_loss"])
+    print(f"\nBest head count: {best['n_heads']} (loss={best['final_loss']:.4f})")
+    print(f"12-head loss: {h12['final_loss']:.4f}")
+    print(f"12-head is Dedekind-sigma fixed point (psi=sigma=12, unique at n=6)")
 
     print("\nConclusion: h=12 is the Dedekind-sigma fixed point.")
     print("Head counts that are divisors of 12 maximize flexibility")
