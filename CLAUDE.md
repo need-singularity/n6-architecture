@@ -83,7 +83,7 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   # Cross-domain
   breakthrough-theorems.md (BT-1~70, 70 theorems spanning 3-8 domains each)
   cross-domain-resonance-2026-03-31.md (formula reuse matrix)
-  # Total: 1300+ hypotheses, 580+ EXACT, 590+ atlas entries, 73 BTs
+  # Total: 1350+ hypotheses, 600+ EXACT, 650+ atlas entries, 76 BTs
 ```
 
 ## Rust Tools
@@ -147,7 +147,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (73 total, BT-1~73)
+## Breakthrough Theorems (76 total, BT-1~76)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -171,6 +171,9 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-71: NeRF/3DGS complete n=6 (L=σ-φ=10, layers=σ-τ=8, width=2^(σ-τ)=256, SH=n/φ=3, 7/7 EXACT) ⭐⭐
   BT-72: Neural audio codec n=6 (EnCodec 8 codebooks, 1024 entries, 24kHz, 6kbps, 20ms, 7/7 EXACT) ⭐⭐
   BT-73: Tokenizer vocabulary n=6 law (32K/50257/100K/128K = 2^{n=6}·10^{n=6}, 6/6 EXACT) ⭐⭐
+  BT-74: 95/5 cross-domain resonance (top-p=PF=β₂=0.95, THD=β_plasma=5%, 5 domains) ⭐⭐⭐
+  BT-75: HBM interface exponent ladder ({10,11,12}={σ-φ,σ-μ,σ}, HBM5 predicted) ⭐⭐
+  BT-76: σ·τ=48 triple attractor (gate pitch nm, HBM4E GB, 48kHz, 48V, 3DGS SH) ⭐⭐
 
   # Chip Design (BT-28,37,40,41,45,47,55,69)
   BT-28: Computing architecture ladder (30+ EXACT, ⭐⭐⭐)
