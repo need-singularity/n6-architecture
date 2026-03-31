@@ -206,7 +206,7 @@
 
 ## Level 4: HEXA-GRID
 
-**Status**: 설계 예정 → [hexa-grid.md](hexa-grid.md)
+**Status**: 설계 완료 → [hexa-grid.md](hexa-grid.md) (1078줄)
 
 ```
   혁신: 그리드 인프라 통합 --- DC 체인 + HVDC + 주파수
