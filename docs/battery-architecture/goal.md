@@ -104,7 +104,7 @@
 
 ## Level 2: HEXA-ELECTRODE
 
-**Status**: 설계 예정 → [hexa-electrode.md](hexa-electrode.md)
+**Status**: 설계 완료 → [hexa-electrode.md](hexa-electrode.md) (896줄)
 
 ```
   혁신: 전극 아키텍처 최적화 --- n=6 용량 래더
