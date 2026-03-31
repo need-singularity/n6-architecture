@@ -81,9 +81,11 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   plasma-physics/ (20+ files — most active domain)
   paper/ (3 arXiv drafts)
   # Cross-domain
-  breakthrough-theorems.md (BT-1~70, 70 theorems spanning 3-8 domains each)
+  breakthrough-theorems.md (BT-1~84, 84 theorems spanning 3-8 domains each)
   cross-domain-resonance-2026-03-31.md (formula reuse matrix)
-  # Total: 1350+ hypotheses, 600+ EXACT, 650+ atlas entries, 76 BTs
+  # Battery Architecture (NEW — 소재→공정→코어→칩→시스템→차세대→극한→궁극)
+  battery-architecture/ (8 levels: HEXA-CELL/ELECTRODE/CORE/CHIP/PACK+GRID/SOLID/NUCLEAR/OMEGA-E)
+  # Total: 1350+ hypotheses, 630+ EXACT, 650+ atlas entries, 84 BTs
 ```
 
 ## Rust Tools
@@ -173,7 +175,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (76 total, BT-1~76)
+## Breakthrough Theorems (84 total, BT-1~84)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -220,6 +222,13 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-62: Grid frequency pair (60Hz=σ·sopfr, 50Hz=sopfr·(σ-φ), ratio=PUE=1.2) ⭐⭐
   BT-63: Solar panel cell ladder (60=σ·sopfr, 72=σ·n, 120=σ(σ-φ), 144=σ²) ⭐⭐
   BT-68: HVDC voltage ladder (±500/800/1100kV = {sopfr,σ-τ,σ-μ}·(σ-φ)², 10/10 EXACT) ⭐⭐
+
+  # Battery Architecture (BT-80,81,82,83,84)
+  BT-80: Solid-state electrolyte CN=6 universality (NASICON/Garnet/LLZO = CN=6, sulfide = τ=4, 6/6 EXACT) ⭐⭐⭐
+  BT-81: Anode capacity ladder σ-φ=10x (Si/Graphite=9.62x≈σ-φ, Li Metal=10.38x≈σ-φ) ⭐⭐
+  BT-82: Complete battery pack n=6 map (6→12→24 cells, 96S/192S EV, BMS div(6), 6/10 EXACT) ⭐⭐
+  BT-83: Li-S polysulfide n=6 ladder (S₈→S₄→S₂→S₁ = (σ-τ)→τ→φ→μ, 5/6 EXACT) ⭐⭐
+  BT-84: 96/192 energy-computing-AI triple convergence (Tesla 96S=Gaudi2 96GB=GPT-3 96L, 5/5 EXACT) ⭐⭐⭐
 
   # Cross-domain (BT-36,48,49,50,51,53,60)
   BT-36: Energy-Information-Hardware-Physics chain ⭐⭐⭐

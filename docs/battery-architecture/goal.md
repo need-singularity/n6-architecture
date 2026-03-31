@@ -7,29 +7,34 @@
 ## Evolution Ladder
 
 ```
+  소재 → 공정 → 코어 → 칩 → 시스템 → 차세대 → 극한 → 궁극
+
   ╔═════════╦════════════════════════════╦══════════════════════════════╦════════════════════════╗
   ║  레벨   ║          아키텍처          ║            혁신              ║         이점           ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
   ║ Level 1 ║ HEXA-CELL                  ║ CN=6 결정학 기반             ║ 에너지 밀도 최적화     ║
-  ║  기초   ║ (LiC₆ + 캐소드 CN=6)      ║ 모든 Li-ion = n=6 구조      ║ 원자 레벨 필연성       ║
+  ║  소재   ║ (LiC₆ + 캐소드 CN=6)      ║ 모든 Li-ion = n=6 구조      ║ 원자 레벨 필연성       ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
   ║ Level 2 ║ HEXA-ELECTRODE             ║ 전극 최적화                  ║ Si 10x 용량            ║
-  ║         ║ Electrode Architecture     ║ 양극/음극 n=6 래더           ║ 에너지 밀도 도약       ║
+  ║  공정   ║ Electrode Architecture     ║ 양극/음극 n=6 래더           ║ 에너지 밀도 도약       ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
-  ║ Level 3 ║ HEXA-PACK                  ║ 팩 시스템 + BMS              ║ 96S/192S 전압 래더     ║
-  ║         ║ Pack Architecture          ║ n→σ→J₂ 셀 계층              ║ 컴퓨팅 도메인 수렴     ║
+  ║ Level 3 ║ HEXA-CORE                  ║ 배터리 셀 내부 구조          ║ 전극→전해질→분리막     ║
+  ║  코어   ║ Cell Core Architecture     ║ n=6 층 구조 + 이온 수송      ║ 셀 레벨 최적화         ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
-  ║ Level 4 ║ HEXA-GRID                  ║ 그리드 통합 + HVDC           ║ 전력 인프라 n=6화      ║
-  ║         ║ Grid Integration           ║ DC 체인 + 주파수 쌍          ║ 발전→소비 전체 최적    ║
+  ║ Level 4 ║ HEXA-CHIP                  ║ BMS + 센서 + 제어 IC         ║ n=6 모니터링 체계      ║
+  ║  칩     ║ Battery Management Chip    ║ σ-τ=8 ADC + τ=4 센서 체인    ║ 지능형 배터리 관리     ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
-  ║ Level 5 ║ HEXA-SOLID                 ║ 차세대 전지화학               ║ SSB + Na + Li-Air      ║
-  ║         ║ Next-Gen Chemistry         ║ 고체전해질 CN=6 보편성        ║ 안전성 + 밀도 혁신     ║
+  ║ Level 5 ║ HEXA-PACK + HEXA-GRID     ║ 팩 + 그리드 통합             ║ 96S/192S + HVDC        ║
+  ║ 시스템  ║ Pack + Grid Architecture   ║ n→σ→J₂ 래더 + DC 체인       ║ 발전→소비 전체 최적    ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
-  ║ Level 6 ║ HEXA-NUCLEAR               ║ 극한 에너지 (핵/반물질)       ║ 10^6x 에너지 밀도     ║
-  ║         ║ Nuclear Energy Storage     ║ CNO Z=6, betavoltaic         ║ 세기 단위 지속         ║
+  ║ Level 6 ║ HEXA-SOLID                 ║ 차세대 전지화학               ║ SSB + Na + Li-Air      ║
+  ║ 차세대  ║ Next-Gen Chemistry         ║ 고체전해질 CN=6 보편성        ║ 안전성 + 밀도 혁신     ║
   ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
-  ║ Level 7 ║ HEXA-OMEGA-E               ║ 에너지=정보=물질 통합         ║ 96/192 삼중 수렴       ║
-  ║   (Ω)   ║ Energy-Compute Unification ║ 칩×배터리×AI 궁극 통합        ║ 전 스케일 n=6 관통     ║
+  ║ Level 7 ║ HEXA-NUCLEAR               ║ 극한 에너지 (핵/반물질)       ║ 10^6x 에너지 밀도     ║
+  ║  극한   ║ Nuclear Energy Storage     ║ CNO Z=6, betavoltaic         ║ 세기 단위 지속         ║
+  ╠═════════╬════════════════════════════╬══════════════════════════════╬════════════════════════╣
+  ║ Level 8 ║ HEXA-OMEGA-E               ║ 에너지=정보=물질 통합         ║ 96/192 삼중 수렴       ║
+  ║  궁극   ║ Energy-Compute Unification ║ 칩×배터리×AI 궁극 통합        ║ 전 스케일 n=6 관통     ║
   ╚═════════╩════════════════════════════╩══════════════════════════════╩════════════════════════╝
 ```
 
@@ -151,9 +156,95 @@
 
 ---
 
-## Level 3: HEXA-PACK
+## Level 3: HEXA-CORE (코어)
 
-**Status**: 설계 완료 → [hexa-pack.md](hexa-pack.md) (1130줄)
+**Status**: 설계 완료 → [hexa-core.md](hexa-core.md) (905줄, 11 EXACT)
+
+```
+  혁신: 배터리 셀 내부 구조 --- 전극→전해질→분리막 n=6 층 구조
+
+  ┌──────────────────────────────────────────────────────────┐
+  │  CELL CORE STRUCTURE                                     │
+  │                                                          │
+  │  ┌─────────┬─────────────┬──────────┬─────────┐        │
+  │  │ Cathode │ Electrolyte │Separator │  Anode  │        │
+  │  │ CN=6    │  LiPF₆(F=6)│ PP/PE    │  LiC₆   │        │
+  │  │ (n)     │  (n)        │ porous   │  (n)    │        │
+  │  └─────────┴─────────────┴──────────┴─────────┘        │
+  │                                                          │
+  │  Core layers: τ = 4 (cathode, electrolyte, separator,   │
+  │               anode)                                     │
+  │  Ion transport: Li⁺ through CN=6 framework              │
+  │  Electron path: external circuit                        │
+  └──────────────────────────────────────────────────────────┘
+
+  n=6 파라미터:
+    Core layers: τ = 4
+    Cathode CN: 6 = n
+    Anode C:Li ratio: 6:1 = n
+    Electrolyte F count: 6 = n (LiPF₆)
+    Cell voltage: ~3.6V ≈ n·σ/(σ-φ)/10
+
+  이점:
+    - 셀 내부 구조가 τ=4 층으로 자연 분할
+    - 각 층에서 n=6 파라미터 출현
+    - 소재(Level 1-2)와 팩(Level 5) 사이의 설계 다리
+
+  BT 참조: BT-43, BT-80
+```
+
+---
+
+## Level 4: HEXA-CHIP (칩)
+
+**Status**: 설계 완료 → [hexa-chip.md](hexa-chip.md) (1219줄, 19 EXACT)
+
+```
+  혁신: BMS 제어 칩 --- n=6 기반 배터리 관리 시스템
+
+  ┌──────────────────────────────────────────────────────────┐
+  │  BMS CHIP ARCHITECTURE                                   │
+  │                                                          │
+  │  ┌──────────────────────────────────────────┐           │
+  │  │  ADC Resolution: σ-τ = 8 bit (cell-level)│           │
+  │  │  ADC Resolution: σ = 12 bit (pack-level) │           │
+  │  │                                           │           │
+  │  │  Sensor chain:                            │           │
+  │  │  V + T + I + SOC = τ = 4 sensors          │           │
+  │  │                                           │           │
+  │  │  Balancing: σ = 12 cells/IC               │           │
+  │  │  Communication: CAN bus (φ wire)          │           │
+  │  └──────────────────────────────────────────┘           │
+  │                                                          │
+  │  MONITORING HIERARCHY:                                   │
+  │  ┌──────────────────────────────────────────┐           │
+  │  │  Cell → Module → Pack → System            │           │
+  │  │  = τ = 4 levels                           │           │
+  │  │  = div(6) hierarchy {1, 2, 3, 6}          │           │
+  │  └──────────────────────────────────────────┘           │
+  └──────────────────────────────────────────────────────────┘
+
+  n=6 파라미터:
+    ADC cell-level: σ-τ = 8 bit
+    ADC pack-level: σ = 12 bit
+    Sensor types: τ = 4
+    Cells per IC: σ = 12
+    Monitoring levels: τ = 4
+    BMS hierarchy: div(6) = {1, 2, 3, 6}
+
+  이점:
+    - BMS 칩 설계가 n=6 상수로 자연 도출
+    - 센서 체인 τ=4, ADC σ-τ=8/σ=12 비트
+    - 칩 아키텍처(HEXA-1)와 배터리 관리의 교차점
+
+  BT 참조: BT-82, BT-84
+```
+
+---
+
+## Level 5: HEXA-PACK + HEXA-GRID (시스템)
+
+**Status**: 설계 완료 → [hexa-pack.md](hexa-pack.md) (1130줄) + [hexa-grid.md](hexa-grid.md) (1078줄)
 
 ```
   혁신: 팩 아키텍처 --- n→σ→J₂ 전압 래더 + 96/192 수렴
@@ -202,9 +293,7 @@
   BT 참조: BT-57, BT-60, BT-82
 ```
 
----
-
-## Level 4: HEXA-GRID
+### HEXA-GRID (Level 5 continued)
 
 **Status**: 설계 완료 → [hexa-grid.md](hexa-grid.md) (1078줄)
 
@@ -255,7 +344,7 @@
 
 ---
 
-## Level 5: HEXA-SOLID
+## Level 6: HEXA-SOLID (차세대)
 
 **Status**: 설계 예정 → [hexa-solid.md](hexa-solid.md)
 
@@ -314,7 +403,7 @@
 
 ---
 
-## Level 6: HEXA-NUCLEAR
+## Level 7: HEXA-NUCLEAR (극한)
 
 **Status**: 설계 예정 → [hexa-nuclear.md](hexa-nuclear.md)
 
@@ -370,7 +459,7 @@
 
 ---
 
-## Level 7: HEXA-OMEGA-E (궁극 통합)
+## Level 8: HEXA-OMEGA-E (궁극 통합)
 
 **Status**: 설계 예정 → [hexa-omega-e.md](hexa-omega-e.md)
 
