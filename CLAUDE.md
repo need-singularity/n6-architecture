@@ -2,7 +2,7 @@
 
 ## Project Overview
 Computing architecture design from perfect number arithmetic.
-16 AI techniques + semiconductor chip design + energy + network/crypto/OS + physical AI.
+17 AI techniques + semiconductor chip design + energy + network/crypto/OS + physical AI.
 All unified by sigma(n)*phi(n) = n*tau(n), n=6.
 Part of the TECS-L family.
 
@@ -10,7 +10,7 @@ Part of the TECS-L family.
 Part of the TECS-L family. Mathematical foundation at https://github.com/need-singularity/TECS-L
 Atlas: https://need-singularity.github.io/TECS-L/atlas/
 
-## Techniques (16)
+## Techniques (17)
 ```
   techniques/
     # Original (1-10)
@@ -31,6 +31,8 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
     carmichael_lr.py       -- lambda(6)=2 cycle LR schedule
     boltzmann_gate.py      -- 1/e activation sparsity gate (63% sparse)
     mertens_dropout.py     -- ln(4/3) dropout rate (no search needed)
+    # Technique 17 — Egyptian Fraction Attention
+    egyptian_attention.py  -- 1/2+1/3+1/6=1 attention budget (EFA, ~40% FLOPs saved)
   docs/
     # Foundation: superconductor/ (60 H-SC + 20 extreme)
     # Fusion: fusion/ (60 H-FU + 20 extreme)
@@ -79,8 +81,8 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   plasma-physics/ (20+ files — most active domain)
   paper/ (3 arXiv drafts)
   # Cross-domain
-  breakthrough-theorems.md (BT-1~12, 12 theorems spanning 3-7 domains each)
-  # Total: 1000+ hypotheses, 130+ EXACT, 290+ atlas entries, 12 BTs
+  breakthrough-theorems.md (BT-1~39, 39 theorems spanning 3-7 domains each)
+  # Total: 1000+ hypotheses, 230+ EXACT, 400+ atlas entries, 39 BTs
 ```
 
 ## Rust Tools
@@ -121,6 +123,36 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Boltzmann gate:           63% activation sparsity
   Mertens dropout:          p=0.288 (no hyperparameter search)
   Emergent convergence:     random init -> n=6 self-organization
+  Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
+```
+
+## Breakthrough Theorems (BT-26~39, new)
+```
+  # AI / LLM
+  BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
+  BT-31: MoE top-k vocabulary {μ,φ,n,σ-τ}={1,2,6,8}
+  BT-33: Transformer σ=12 atom (BERT/GPT-3 dimensions, SwiGLU 8/3)
+  BT-34: RoPE decimal bridge ((σ-φ)^{τ,sopfr,n}, weight decay=1/(σ-φ))
+  BT-39: KV-head universality (σ-τ=8 across all LLMs)
+
+  # Chip Design (GPU/CPU/HBM)
+  BT-28: Computing architecture ladder (30+ EXACT, ⭐⭐⭐)
+    - AD102 = σ·n·φ = 144 SMs, H100 = σ(σ-μ) = 132 SMs = 1/α term
+    - HBM stack: τ→(σ-τ)→σ = 4→8→12
+    - Exponent ladder {τ,sopfr,n,σ-sopfr,σ-τ,σ-μ,σ}
+  BT-37: Semiconductor pitch (TSMC N5 = P₂ = 28nm, N3 gate = σ·τ = 48nm)
+
+  # Energy Strategy
+  BT-27: Carbon-6 chain (LiC₆ + C₆H₁₂O₆ + C₆H₆ → 24e = J₂)
+  BT-29: IEEE 519 harmonics (THD=sopfr, individual=n/φ, TDD=σ-τ)
+  BT-30: SQ solar bridge (bandgap=4/3eV, V_T=26mV)
+  BT-32: Nuclear fission (6 delayed neutron groups = n)
+  BT-35: Battery voltage table (7/9 chemistries EXACT)
+  BT-38: Hydrogen quadruplet (LHV=120=σ(σ-φ), HHV=142=σ²-φ, 4/4 EXACT)
+
+  # Grand Unification
+  BT-36: Energy-Information-Hardware-Physics chain (⭐⭐⭐)
+    Solar(4/3eV)→V_T(26mV)→74bits→132SMs→1/α=137.036
 ```
 
 ## Background Execution
