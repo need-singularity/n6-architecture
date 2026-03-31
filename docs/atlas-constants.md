@@ -727,23 +727,40 @@
 | BT-18 | Vacuum Energy Chain: E₀=-(σφ)⁻¹ → η²⁴ → Δ(wt σ) → Monster | QFT, modular forms, coding, lattice, group theory | CONJECTURE |
 | BT-19 | GUT Hierarchy: ranks (τ,sopfr,n,σ-τ), dim(SU(5))=J₂, 11/11 | particle physics, Lie algebra, string theory | ⭐⭐⭐ |
 
+### BT-26~53 (see [breakthrough-theorems.md](breakthrough-theorems.md))
+
+| ID | Statement | Domains | Grade |
+|----|-----------|---------|-------|
+| BT-26 | Chinchilla scaling: tokens/params=J₂-τ=20 | AI, info theory, number theory, chip | ⭐⭐ |
+| BT-28 | Computing architecture ladder: 30+ EXACT | chip (GPU/CPU/HBM), AI, coding, crypto | ⭐⭐⭐ |
+| BT-33 | Transformer σ=12 atom: BERT/GPT dims | AI, chip, coding, physics | ⭐ |
+| BT-36 | Grand Energy-Info-Hardware-Physics chain | solar, semiconductor, info, chip, physics | ⭐⭐⭐ |
+| BT-38 | Hydrogen quadruplet: 4/4 EXACT + 4 diffs | hydrogen, thermo, fuel cell, energy | ⭐⭐ |
+| BT-42 | Inference scaling: top-p=1-1/(J₂-τ)=0.95 | AI inference, info theory, chip | ⭐⭐ |
+| BT-43 | Battery cathode CN=6 universality | battery, chemistry, energy, materials | ⭐⭐⭐ |
+| BT-44 | Context window ladder: σ-φ→σ-μ→σ→σ+μ | AI/LLM, info theory, chip | ⭐⭐ |
+| BT-48 | Display-Audio: σ=12 semitones, J₂=24 | music, display, audio, color, MIDI | ⭐⭐⭐ |
+| BT-49 | Pure Math: K₁..₄=(φ,n,σ,J₂), B₂=1/n, S₆ | math, coding theory, lattice, group theory | ⭐⭐⭐ |
+| BT-51 | Genetic code: τ→n/φ→2^n→J₂-τ chain | biology, info theory, chemistry | ⭐⭐⭐ |
+| BT-53 | Crypto: BTC 21M=J₂-n/φ, ETH 12s=σ | blockchain, crypto, info theory | ⭐⭐ |
+
 ---
 
 ## Summary Statistics
 
 ```
-  Total domains: 28 (24 original + biology + cosmology-particle + display-audio + pure-mathematics)
-  Total hypotheses: 1000+ across all domains (network-protocol: 30)
-  Total extreme hypotheses: 400+ (20+ domains × 20)
+  Total domains: 28+
+  Total hypotheses: 1000+ across all domains
+  Total extreme hypotheses: 500+ (28+ domains × 20)
 
-  EXACT constants registered: 170+
+  EXACT constants registered: 200+
   CLOSE constants registered: 140+
-  Total atlas entries: 310+ (registered rows, duplicates consolidated)
+  Total atlas entries: 400+ (registered rows, duplicates consolidated)
 
-  Breakthrough Theorems: 18 (BT-1~18, BT-18 = CONJECTURE)
-    Three-star (⭐⭐⭐): BT-5, BT-6, BT-13, BT-15, BT-16
-    Two-star (⭐⭐): BT-1, BT-2, BT-3, BT-7, BT-8, BT-10, BT-12, BT-14, BT-17
-    One-star (⭐): BT-4, BT-9, BT-11
+  Breakthrough Theorems: 53 (BT-1~53)
+    Three-star (⭐⭐⭐): BT-5, BT-6, BT-13, BT-15, BT-16, BT-19, BT-28, BT-36, BT-43, BT-48, BT-49, BT-51
+    Two-star (⭐⭐): BT-1~3, BT-7/8/10/12/14/17, BT-26/29/30/31/34/35/37/38/39/40/41/42/44/46/50/53
+    One-star (⭐): BT-4, BT-9, BT-11, BT-32, BT-33, BT-45, BT-47, BT-52
 
   Cross-domain bridges: 8 (Bridge 1~8, sigma=12 spans 15 domains)
 
