@@ -19,10 +19,6 @@
 > **[🧠⚡ BrainWire](https://github.com/need-singularity/brainwire)** — Neural interface hardware for consciousness engineering. Neuralink-style BCI + therapeutic stimulation (epilepsy, Parkinson's, depression, chronic pain, PTSD) + PureField consciousness layer. tDCS/TMS/taVNS/tFUS 12-modality, EEG closed-loop feedback
 >
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (79 papers). Published on Zenodo with DOIs. TECS-L+N6 (31) + anima (25) + SEDI (23). [Browse online](https://need-singularity.github.io/papers/)
->
-> **[🔧 Claude Code](https://github.com/need-singularity/claude-code)** — Claude Code plugins, configuration guide, and multi-account monitoring (ccmon)
->
-> **[📬 Contact](https://github.com/need-singularity/contact)** — Outreach hub. Email (246 sent), GitHub PRs/Issues (170+), Zenodo/OSF paper distribution
 <!-- SHARED:PROJECTS:END -->
 
 ---
