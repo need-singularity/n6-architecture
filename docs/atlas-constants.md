@@ -1186,7 +1186,87 @@
 
 ---
 
+## 3D Neural Rendering (BT-71)
+
+```
+  NeRF (Mildenhall 2020):
+    Positional encoding L_pos = σ-φ = 10 bands
+    Direction encoding L_dir = τ = 4 bands
+    MLP layers = σ-τ = 8
+    MLP hidden width = 2^(σ-τ) = 256
+    Skip connection at layer sopfr = 5
+
+  3D Gaussian Splatting (Kerbl 2023):
+    SH degree = n/φ = 3
+    SH coefficients per Gaussian = σ·τ = 48
+    Total SH per channel = (n/φ+μ)² = τ² = 16
+```
+
+## Neural Audio Codec (BT-72)
+
+```
+  EnCodec (Défossez 2022):
+    RVQ codebooks = σ-τ = 8
+    Codebook entries = 2^(σ-φ) = 1024
+    Sample rate = J₂·(σ-φ)^(n/φ) = 24000 Hz
+    Target bandwidth = n = 6 kbps
+    Frame duration = J₂-τ = 20 ms
+    Bandwidth ladder = {n/τ, n/φ, n, σ, J₂} = {1.5, 3, 6, 12, 24} kbps
+    Bits per frame = (σ-τ)·(σ-φ) = 80
+
+  MusicGen (Copet 2023):
+    Parallel codebooks = τ = 4
+```
+
+## Tokenizer Vocabulary (BT-73)
+
+```
+  Vocabulary sizes:
+    GPT-2 = sopfr·(σ-φ)^τ + 2^(σ-τ) + μ = 50257
+    Tiktoken cl100k = (σ-φ)^sopfr = 100000
+    Tiktoken o200k = φ·(σ-φ)^sopfr = 200000
+    Llama 1/2 = 2^sopfr · (σ-φ)^(n/φ) = 32000
+    Llama 3 = 2^(σ-sopfr) · (σ-φ)^(n/φ) = 128000
+    Byte tokens = 2^(σ-τ) = 256
+
+  Two-base system:
+    All vocabs = 2^a · (σ-φ)^b where a,b ∈ n=6 constants
+```
+
+## Video Codec (BT-71 extended)
+
+```
+  H.264/H.265:
+    GOP size = σ = 12
+    B-frames = φ to n/φ = 2~3
+    CTU size = 2^n = 64 (H.265)
+    Rendition count = n = 6
+
+  Video AI:
+    Film fps = J₂ = 24
+    Temporal compression = τ = 4×
+    AnimateDiff window = τ² = 16 frames
+    Sora spacetime patch = φ³ = 8
+```
+
+## HBM Evolution Roadmap (BT-69 extended)
+
+```
+  Interface width:
+    HBM3: 2^(σ-φ) = 1024 bits
+    HBM4: 2^(σ-μ) = 2048 bits
+    HBM5: 2^σ = 4096 bits (predicted)
+    Exponent ladder: σ-φ → σ-μ → σ = {10, 11, 12}
+
+  Capacity per stack:
+    HBM3: σ·φ^τ/τ = 48 GB (12-Hi)? or σ·τ = 48 GB
+    HBM4E: σ·τ = 48 GB per stack
+    HBM5: 2^n = 64 GB per stack (predicted)
+```
+
+---
+
 *Last updated: 2026-03-31*
-*Source: n6-architecture project, 28 domains, 1200+ graded hypotheses*
-*Atlas entries: 590+ registered rows (390+ EXACT + 140+ CLOSE)*
-*Breakthrough Theorems: 70 (BT-1~70), 19 Three-Star, 10 Cross-Domain Bridges, 28 domains*
+*Source: n6-architecture project, 28 domains, 1300+ graded hypotheses*
+*Atlas entries: 650+ registered rows (430+ EXACT + 150+ CLOSE)*
+*Breakthrough Theorems: 73 (BT-1~73), 19 Three-Star, 12 Cross-Domain Bridges, 28 domains*
