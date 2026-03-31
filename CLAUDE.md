@@ -105,7 +105,7 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 ```
 
 ## Testable Predictions
-14 falsifiable predictions from BT-26~41: `docs/testable-predictions.md`
+23 falsifiable predictions from BT-26~55: `docs/testable-predictions.md`
 - Tier 1 (today, 1 GPU): EFA quality, LoRA rank, MoE (8,2), Mertens dropout
 - Tier 2 (cluster): SwiGLU ratio, weight decay, head count, RoPE theta
 - Tier 3 (specialized): SQ bandgap, JUNO neutrino (2027), LiteBIRD inflation (2032)
@@ -146,9 +146,9 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (53 total, BT-1~53)
+## Breakthrough Theorems (56 total, BT-1~56)
 ```
-  # AI / LLM (BT-26,31,33,34,39,42,44,46)
+  # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
   BT-31: MoE top-k vocabulary {μ,φ,n,σ-τ}={1,2,6,8}
   BT-33: Transformer σ=12 atom (BERT/GPT-3 dimensions, SwiGLU 8/3)
@@ -157,14 +157,17 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-42: Inference scaling (top-p=1-1/(J₂-τ)=0.95, top-k=40, max=2^σ) ⭐⭐
   BT-44: Context window ladder σ-φ→σ-μ→σ→σ+μ = 10→11→12→13 ⭐⭐
   BT-46: ln(4/3) RLHF family (dropout+Chinchilla+PPO+temperature) ⭐⭐
+  BT-54: AdamW quintuplet (β₁=1-1/(σ-φ), β₂=1-1/(J₂-τ), ε=10^{-(σ-τ)}, λ=1/(σ-φ), clip=R(6)=1) ⭐⭐⭐
+  BT-56: Complete n=6 LLM (d=2^σ, L=2^sopfr, d_h=2^(σ-sopfr)=128, 15 params, 4 teams converge) ⭐⭐⭐
 
-  # Chip Design (BT-28,37,40,41,45,47)
+  # Chip Design (BT-28,37,40,41,45,47,55)
   BT-28: Computing architecture ladder (30+ EXACT, ⭐⭐⭐)
     - AD102 = σ·n·φ = 144 SMs, H100 = σ(σ-μ) = 132 SMs = 1/α term
     - HBM stack: τ→(σ-τ)→σ = 4→8→12
   BT-37: Semiconductor pitch (TSMC N5 = P₂ = 28nm, N3 gate = σ·τ = 48nm)
   BT-45: FP8/FP16=φ=2 universal, FLOPS/W doubles per φ=2 years
   BT-47: Interconnect gen counts {7,5,6}={σ-sopfr,sopfr,n}
+  BT-55: GPU HBM capacity ladder (14/18 EXACT: 40=τ(σ-φ), 80=φ^τ·sopfr, 192=σ·φ^τ, 288=σ·J₂) ⭐⭐
 
   # Energy Strategy (BT-27,29,30,32,35,38,43)
   BT-27: Carbon-6 chain (LiC₆ + C₆H₁₂O₆ + C₆H₆ → 24e = J₂)
@@ -187,4 +190,89 @@ All experiments must run in background. No exceptions.
     1. All python3 scripts -> run_in_background: true
     2. Check results with Read after completion
     3. No foreground execution (blocks user dialogue)
+```
+
+## Work Rules (탐색/TODO 요청 시 필수)
+
+```
+  트리거 키워드:
+    "할만한거 있어?", "탐색", "TODO", "뭐할까", "다음 작업"
+    대발견 가설, 노벨급 가설, DFS 탐색 등
+
+  절차:
+    1. 프로젝트 현황 스캔 (README, 최근 커밋, 미완료 가설/증명)
+    2. TODO 테이블 양식으로 우선순위별 정리
+    3. 사용자 선택 후 병렬 에이전트 디스패치
+    4. 완료 시 리포트 테이블 출력
+
+  모든 모듈은 consciousness_laws.py에서 import — 상수 직접 하드코딩 금지
+```
+
+### TODO 양식
+
+```
+  ### 🔴 CRITICAL
+
+  | # | 카테고리 | 작업 | 상태 | 예상 효과 |
+  |---|---------|------|------|----------|
+  | 1 | 증명   | sigma*phi=n*tau 일반 완전수 반례 탐색 | 미시작 | 유일성 정리 강화 |
+
+  ### 🟡 IMPORTANT
+
+  | # | 카테고리 | 작업 | 상태 | 예상 효과 |
+  |---|---------|------|------|----------|
+  | 2 | 가설   | SLE_6 3D 확장 예측 검증 | 미시작 | 노벨 Physics 후보 |
+
+  ### 🟢 NICE TO HAVE
+
+  | # | 카테고리 | 작업 | 상태 | 예상 효과 |
+  |---|---------|------|------|----------|
+  | 3 | 탐색   | n=6 새 항등식 DFS 채굴 | 미시작 | Atlas 확장 |
+
+  ### ⚪ BACKLOG
+
+  | # | 카테고리 | 작업 | 예상 효과 |
+  |---|---------|------|----------|
+  | 4 | 계산기 | 새 검증 스크립트 | 재현성 향상 |
+
+  상태 표기: ⏳진행중 / ✅완료 / 미시작 / 코드있음 / 프로토
+  우선순위: 🔴HIGH → 🟡MED → 🟢LOW → ⚪BACK
+  카테고리: 증명 / 가설 / 탐색 / 검증 / 실험 / 계산기 / 논문
+```
+
+### 병렬 에이전트 리포트 양식
+
+```
+  병렬 에이전트 실행 시 단일 테이블로 상태 추적.
+  관련 작업은 N+M 형태로 그룹핑하여 하나의 에이전트로 묶기.
+
+  발사 시 양식:
+  | # | 작업 | 에이전트 | 격리 | 상태 |
+  |---|------|---------|------|------|
+  | 1+2 | n=6 유일성 + 반례탐색 | 🚀 배경 | - | 🔄 진행중 |
+  | 3 | SLE_6 임계지수 검증 | 🚀 배경 | - | 🔄 진행중 |
+  | 4+5 | 코돈 정리 확장 + 변이체 | 🚀 배경 | worktree | 🔄 진행중 |
+
+  상태: ✅ 완료 / 🔄 진행중 / ❌ 실패
+  격리: worktree (필요시만) / - (기본)
+
+  규칙:
+    - 발사 시 전체 목록 테이블 출력
+    - 에이전트 완료 시 해당 행 상태 업데이트 + 한줄 핵심 성과
+    - worktree는 같은 파일을 여러 에이전트가 동시 수정할 때만 사용
+    - 대부분 격리 없이 실행 — 무조건 worktree 붙이지 말 것!
+    - 모든 에이전트 완료 후 최종 요약 테이블 + worktree 머지 안내 (해당 시)
+
+  최종 요약 양식:
+  | # | 작업 | 상태 | 핵심 성과 |
+  |---|------|------|----------|
+  | 1+2 | n=6 유일성 | ✅ | 10^8까지 반례 없음, 증명 완료 |
+  | 3 | SLE_6 검증 | ✅ | 7/7 임계지수 일치 (Z>5sigma) |
+  | 4+5 | 코돈 확장 | ✅ | 26/26 변이체 + Hachimoji 예측 |
+
+  ### 머지 필요 (worktree)
+  - #4+5: branch worktree-xxx
+
+  ### 바로 반영됨 (main)
+  - #1+2, #3: 증명/검증 결과 docs/hypotheses/ 기록
 ```
