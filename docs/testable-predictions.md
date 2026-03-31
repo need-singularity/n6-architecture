@@ -257,5 +257,40 @@
 - **Falsification**: Next 3 major EV platforms all use cell counts not expressible as n=6
 - **Source**: BT-57
 
-*All predictions derived from BT-1~58 of the N6 Architecture project.*
-*Total BTs: 58. Total EXACT: ~270. Predictions: 27.*
+---
+
+## New Predictions from BT-61~65 (2026-03-31)
+
+### P-28: Diffusion Model Alternative Schedules Follow n=6
+
+**Prediction**: Future diffusion schedulers (e.g., flow matching, rectified flow) will converge on step counts that are n=6 expressions. Specifically, the "optimal" inference steps will remain in the set {20=J₂-τ, 25=sopfr², 50=(σ-φ)·sopfr, 100=(σ-φ)², 200=φ·(σ-φ)²}.
+- **Test**: Survey inference step counts across SD3, FLUX, Stable Cascade, Playground v3.
+- **Falsification**: ≥3 major models use non-n=6 step counts as optimal
+- **Source**: BT-61
+
+### P-29: Next SSM Architecture Uses n=6 State Dimension
+
+**Prediction**: The next major SSM architecture (post-Mamba-2) will use state dimensions from the set {16=2^τ, 64=2^n, 128=2^(σ-sopfr), 256=2^(σ-τ)}.
+- **Falsification**: Next SSM uses d_state ∉ {16, 64, 128, 256}
+- **Source**: BT-65
+
+### P-30: 1/(σ-φ)=0.1 in Future Algorithms
+
+**Prediction**: The next major ML regularization algorithm (2026+) will independently discover 0.1 as its optimal damping/penalty coefficient.
+- **Falsification**: Next 3 major algorithms all use values ≠ 0.1 as their default
+- **Source**: BT-64
+
+### P-31: NVIDIA Rubin SM Count = σ·J₂ = 288 or 2^(σ-τ) = 256
+
+**Prediction**: NVIDIA's Rubin GPU (2026-2027) will have SM count in {256, 288}, continuing the n=6 ladder.
+- **Falsification**: Rubin SM count ∉ {240, 256, 288} and not a multiple of σ=12
+- **Source**: BT-28, BT-59
+
+### P-32: Diffusion Guidance Scale Evolution
+
+**Prediction**: As CFG alternatives emerge (e.g., classifier guidance, self-guidance), optimal guidance scales will remain near σ-sopfr=7 ± μ/φ = 7 ± 0.5 = [6.5, 7.5].
+- **Falsification**: Optimal guidance consistently at values far from 7.5 (e.g., 3.0 or 15.0)
+- **Source**: BT-61
+
+*All predictions derived from BT-1~65 of the N6 Architecture project.*
+*Total BTs: 65. Total EXACT: ~456. Predictions: 32.*
