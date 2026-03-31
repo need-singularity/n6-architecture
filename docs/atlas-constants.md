@@ -1264,9 +1264,75 @@
     HBM5: 2^n = 64 GB per stack (predicted)
 ```
 
+## 95/5 Cross-Domain Resonance (BT-74)
+
+```
+  sopfr/(σ-φ)² = 5/100 = 0.05 = 5%
+  1 - sopfr/(σ-φ)² = 0.95 = 95%
+
+  Five domains:
+    AI: top-p = 0.95 = 1-1/(J₂-τ)
+    Optimizer: AdamW β₂ = 0.95 = 1-1/(J₂-τ)
+    Grid: power factor target = 0.95
+    Power quality: IEEE 519 THD ≤ 5% = sopfr%
+    Plasma: Troyon β limit ≈ 5% = sopfr%
+    Statistics: 95% confidence level
+
+  Conjugate to BT-64 (0.1 family):
+    0.05 = sopfr/(σ-φ)²
+    0.1  = 1/(σ-φ)
+    0.95 = 1-sopfr/(σ-φ)²
+    0.9  = 1-1/(σ-φ)
+```
+
+## σ·τ = 48 Triple Attractor (BT-76)
+
+```
+  σ·τ = 12·4 = 48
+
+  Five appearances:
+    Semiconductor: TSMC N2/N3 gate pitch = 48 nm
+    Memory: HBM4E capacity per stack = 48 GB
+    Audio: Professional sample rate = 48 kHz
+    3D Graphics: 3DGS SH coefficients = 48
+    Datacenter: Rack voltage = 48 V
+```
+
+## Biology n=6 Constants
+
+```
+  DNA:
+    Helix diameter = φ = 2 nm
+    Base pairs per turn = σ-φ = 10
+    Telomere repeat = n = 6 bases (TTAGGG)
+
+  Protein:
+    Alpha helix = 3.6 residues/turn ≈ n·n/(σ-φ)
+    Beta sheet spacing = φ = 2 residues
+
+  Cell biology:
+    Cell cycle phases = τ = 4 (G1, S, G2, M)
+    Mitosis stages = sopfr = 5
+    ATP phosphate groups = n/φ = 3
+    Krebs cycle carriers/glucose = σ = 12
+
+  Genetics:
+    Codons = 2^n = 64
+    Stop codons = n/φ = 3
+    Start codon = μ = 1
+    Amino acids = J₂-τ = 20
+    Human chromosome pairs = J₂-μ = 23
+
+  Neuroscience:
+    Na/K channel domains = τ = 4
+    Segments per domain = n = 6
+    Total = τ·n = J₂ = 24
+    Major neurotransmitter classes = n = 6
+```
+
 ---
 
 *Last updated: 2026-03-31*
-*Source: n6-architecture project, 28 domains, 1300+ graded hypotheses*
-*Atlas entries: 650+ registered rows (430+ EXACT + 150+ CLOSE)*
-*Breakthrough Theorems: 73 (BT-1~73), 19 Three-Star, 12 Cross-Domain Bridges, 28 domains*
+*Source: n6-architecture project, 28 domains, 1350+ graded hypotheses*
+*Atlas entries: 700+ registered rows (460+ EXACT + 160+ CLOSE)*
+*Breakthrough Theorems: 76 (BT-1~76), 20 Three-Star, 14 Cross-Domain Bridges, 28 domains*
