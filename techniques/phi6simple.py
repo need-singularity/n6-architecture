@@ -204,7 +204,8 @@ def analyze_shapes():
     x = rng.standard_normal(100_000).astype(np.float64)
 
     print("\n  Activation Shape Analysis (x ~ N(0,1), 100K samples)")
-    print(f"  {'Name':10s}  {'E[f(x)]':>10s}  {'Std[f(x)]':>10s}  {'Min':>8s}  {'Max':>8s}  {'f(0)':>8s}  {'f\'(0)':>8s}")
+    fprime_header = "f'(0)"
+    print(f"  {'Name':10s}  {'E[f(x)]':>10s}  {'Std[f(x)]':>10s}  {'Min':>8s}  {'Max':>8s}  {'f(0)':>8s}  {fprime_header:>8s}")
     print("  " + "-" * 72)
 
     for act_name, (fwd, bwd) in ACTIVATIONS.items():

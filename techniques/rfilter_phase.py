@@ -3,7 +3,7 @@
 Apply windowed FFT (window=6,12,24,36) to per-batch loss curve.
 Look for spectral peaks at 1/6, 1/4 frequencies indicating phase transitions.
 """
-import sys, os; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sys, os; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); sys.path.insert(0, '/Users/ghost/Dev/TECS-L')
 import torch, torch.nn as nn, numpy as np
 from model_pure_field import PureFieldEngine
 from model_utils import load_mnist

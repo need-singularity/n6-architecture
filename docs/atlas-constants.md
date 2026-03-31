@@ -434,6 +434,17 @@
 | **AVX/RISC-V registers** | **32** | **2^sopfr** | ISA spec | BT-28 |
 | **Classic RISC pipeline** | **5 stages** | **sopfr** | Patterson/Hennessy | BT-28 |
 | **Apple M3 Pro cores** | **12** | **σ** | Apple | BT-28 |
+| **GB200 dual die** | **2 die** | **φ** | NVIDIA Blackwell | H-CHIP-81 |
+| **GB200 total SMs** | **384** | **σ·2^sopfr** | NVIDIA GB200 | H-CHIP-81 |
+| **B200 GPCs** | **12** | **σ** | NVIDIA Blackwell | H-CHIP-82 |
+| **B200 TPCs/GPC** | **8** | **σ-τ** | NVIDIA Blackwell | H-CHIP-82 |
+| **B200 HBM stacks** | **6** | **n** | NVIDIA Blackwell | H-CHIP-82 |
+| **B200 VRAM** | **192 GB** | **σ·2^τ** | NVIDIA Blackwell | H-CHIP-92 |
+| **HBM4 stack** | **16-hi** | **2^τ** | SK Hynix 2025 | H-CHIP-84 |
+| **HBM4 channels** | **16** | **2^τ** | HBM4 spec | H-CHIP-85 |
+| **HBM4 bus width** | **2048 bit** | **2^(σ-μ)** | HBM4 spec | H-CHIP-85 |
+| **PCIe 7.0** | **128 GT/s** | **2^(σ-sopfr)** | PCI-SIG roadmap | H-CHIP-93 |
+| **Gaudi 3 MME** | **8** | **σ-τ** | Intel Habana | H-CHIP-94 |
 
 ### Software Design EXACT (from H-SD extreme)
 
