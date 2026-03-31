@@ -124,6 +124,8 @@
 | **BT-37** | Semiconductor Pitch Ladder | N5 pitch=P₂=28nm, N3 gate=σ·τ=48nm, 8/8 EXACT | 🟩⭐⭐ |
 | **BT-38** | Hydrogen Energy Quadruplet | LHV=σ(σ-φ)=120, HHV=σ²-φ=142, Gibbs=113,118 — 4/4 EXACT, diffs also n=6 | 🟩⭐⭐ |
 | **BT-39** | KV-Head Universality | n_kv_heads∈{σ-τ,2^τ} 5/5 models, Mistral L2 5/6 n=6, d_ff=P₂·1024 | 🟩⭐⭐ |
+| **BT-40** | Computing Power Ecosystem | ATX 12V=σ, ACPI triple-τ (C/D/G=4), S=n=6, car 6×2V=n×φ=σ | 🟩⭐⭐ |
+| **BT-41** | QEC at J₂ | Surface d=5: 24 syndrome=J₂=Golay, d=3: 17=σ+sopfr, QV=2^(J₂-τ) | 🟩⭐⭐ |
 
 ## Perfect Number Chain (P1 → P2)
 
