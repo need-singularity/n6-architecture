@@ -49,7 +49,7 @@
 
 **Documents**:
 - [Spec](ultimate-unified-soc.md) (1,664줄)
-- [Core Microarchitecture](hexa-core.md) — CPU·GPU·NPU 코어 내부 설계 (98/98 EXACT)
+- [Core Microarchitecture](hexa-core.md) — CPU·GPU·NPU 코어 내부 설계 (103/103 EXACT)
 - [Paper](../paper/n6-unified-soc-paper.md)
 - [Zenodo DOI: 10.5281/zenodo.19360359](https://zenodo.org/records/19360359)
 
