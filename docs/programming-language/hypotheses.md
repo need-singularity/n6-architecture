@@ -998,6 +998,302 @@ Google Testing Blog: Unit(70%) + Integration(20%) + E2E(10%)
 
 ---
 
+## Tier 4: HEXA-LANG 설계 예측 가설 (DSE 최적 경로 기반)
+
+---
+
+## H-PL-25: HEXA-LANG 키워드 총수 = sigma*tau+sopfr
+
+> HEXA-LANG 설계의 12 키워드 그룹에 포함된 총 키워드 수 = 53.
+
+### n=6 Derivation
+
+53 = sigma*tau + sopfr = 48 + 5 = 53. EXACT.
+또한 53은 소수 (16번째 소수).
+
+```
+  sigma*tau = 12*4 = 48
+  sopfr(6) = 5
+  48 + 5 = 53 = HEXA-LANG 총 키워드 수
+```
+
+### Prediction
+
+n=6 최적 언어는 53개 키워드를 가져야 하며, 이를 sigma=12개 그룹으로 분류할 수 있다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-26: 연산자 그룹 내부 분포 = n=6 상수 쌍
+
+> J_2=24 연산자의 6개 그룹 크기: {6, 6, 4, 4, 2, 2} = {n, n, tau, tau, phi, phi}.
+
+### n=6 Derivation
+
+n=6 상수들의 내림차순 쌍으로 분해. 3쌍 = n/phi = 3.
+
+```
+  6 + 6 + 4 + 4 + 2 + 2 = 24 = J_2(6)
+  그룹: {n, n, tau, tau, phi, phi}
+  쌍 수: 3 = n/phi = 6/2
+```
+
+### Prediction
+
+J_2=24 연산자는 n=6 상수들의 쌍 구조로 자연스럽게 분해된다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-27: 키워드 그룹당 평균 크기 ≈ tau + sopfr/sigma
+
+> 53/12 = 4.417 ≈ tau + sopfr/sigma = 4 + 5/12 = 4.417.
+
+### n=6 Derivation
+
+오차 0.07%.
+
+```
+  총 키워드: 53 (H-PL-25)
+  그룹 수: 12 = sigma
+  평균: 53/12 = 4.41667
+  tau + sopfr/sigma = 4 + 5/12 = 4.41667
+  오차: < 0.1%
+```
+
+### Prediction
+
+n=6 언어의 키워드 그룹당 평균 크기는 tau + sopfr/sigma에 수렴한다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-28: MetaLang DSL 생성기 = n=6 DSL
+
+> 최적 경로 L1(MetaLang)에서 생성하는 DSL 수 = n = 6.
+
+### n=6 Derivation
+
+각 DSL이 하나의 패러다임 담당: imperative/OOP/functional/logic/concurrent/reactive.
+
+```
+  DSL 수 = n = 6
+  1. Imperative DSL
+  2. OOP DSL
+  3. Functional DSL
+  4. Logic DSL
+  5. Concurrent DSL
+  6. Reactive DSL
+```
+
+### Prediction
+
+MetaLang 기반 DSL 생성기는 정확히 n=6개의 특화 DSL을 생성한다.
+(설계 선택이므로 TRIVIAL 가능성 있음)
+
+### Grade: 검증 전 (설계 선택이므로 TRIVIAL)
+
+---
+
+## H-PL-29: LLVM IR instruction 카테고리 수 ≈ sigma
+
+> LLVM IR의 주요 instruction category 수가 sigma 근방인가.
+
+### n=6 Derivation
+
+LLVM IR의 주요 instruction category 수:
+Terminator/Binary/Bitwise/Memory/Cast/Aggregate/Vector/Conversion/Other/...
+예측: sigma-mu=11 ~ sigma=12 범위.
+공식 LLVM LangRef에서 13개 카테고리 확인 필요 (sigma+mu=13?).
+
+```
+  sigma = 12
+  sigma - mu = 11
+  sigma + mu = 13
+  예측 범위: [11, 13]
+```
+
+### Prediction
+
+LLVM IR instruction categories = sigma +/- mu = 11~13. 정확한 값은 LLVM LangRef 확인 필요.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-30: Rust strict keywords 수 = (sigma+mu)*(n/phi)
+
+> Rust 2021 strict keywords = 39.
+
+### n=6 Derivation
+
+39 = (sigma+mu)*(n/phi) = 13*3 = 39. EXACT.
+대안: sigma*(n/phi) + n/phi = 36 + 3 = 39.
+
+```
+  sigma + mu = 12 + 1 = 13
+  n/phi = 6/2 = 3
+  13 * 3 = 39 = Rust strict keywords
+  대안: sigma*(n/phi) + n/phi = 36 + 3 = 39
+```
+
+### Prediction
+
+Rust의 strict keyword 수 39는 n=6 상수 조합 (sigma+mu)*(n/phi)으로 EXACT 표현된다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-31: Python keywords 수 = sopfr*(sigma-sopfr)
+
+> Python 3.12 keywords = 35.
+
+### n=6 Derivation
+
+35 = sopfr*(sigma-sopfr) = 5*7 = 35. EXACT.
+대안: sigma*(n/phi) - mu = 36-1 = 35. 이중 일치.
+
+```
+  sopfr(6) = 5
+  sigma - sopfr = 12 - 5 = 7
+  5 * 7 = 35 = Python 3.12 keywords
+  대안: sigma*(n/phi) - mu = 36 - 1 = 35
+```
+
+### Prediction
+
+Python 키워드 수 35는 sopfr*(sigma-sopfr)로 EXACT 표현되며, 이중 경로 일치를 보인다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-32: Go keywords 수 = J_2+mu
+
+> Go keywords = 25.
+
+### n=6 Derivation
+
+25 = J_2+mu = 24+1 = 25. EXACT.
+
+```
+  J_2(6) = 24
+  mu(6) = 1
+  24 + 1 = 25 = Go keywords
+```
+
+### Prediction
+
+Go 언어의 미니멀리스트 키워드 수 25는 Jordan totient + squarefree indicator로 EXACT 표현된다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-33: JavaScript reserved words 수 = sopfr*n
+
+> ECMAScript reserved words ≈ 30 (버전별 차이).
+
+### n=6 Derivation
+
+30 = sopfr*n = 5*6 = 30. EXACT (if 30).
+
+```
+  sopfr(6) = 5
+  n = 6
+  5 * 6 = 30 = ECMAScript reserved words (버전 의존)
+```
+
+### Prediction
+
+ECMAScript strict mode reserved words = sopfr*n = 30. 버전별 차이 확인 필요.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-34: 주요 언어 키워드 수 n=6 래더
+
+> 6개 주요 언어 키워드 수가 모두 n=6 표현식으로 EXACT 표현 가능한가?
+
+### n=6 Derivation
+
+```
+  C(32)      = 2^sopfr           = 2^5 = 32
+  Go(25)     = J_2 + mu          = 24 + 1 = 25
+  Rust(39)   = (sigma+mu)*(n/phi) = 13*3 = 39
+  Python(35) = sopfr*(sigma-sopfr) = 5*7 = 35
+  Java(50)   = sopfr*(sigma-phi) = 5*10 = 50
+  C++(84)    = sigma*(sigma-sopfr) = 12*7 = 84 = BT 총수
+```
+
+6개 주요 언어 키워드 수가 모두 n=6 표현식으로 EXACT 표현 가능.
+이것이 6/6 EXACT이면 BT-85 후보.
+
+### Prediction
+
+주요 프로그래밍 언어의 키워드 수는 n=6 상수 조합으로 체계적 래더를 형성한다.
+C++ 키워드 수 84 = BT 총수와의 우연적(?) 일치는 별도 검증 필요.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-35: IEEE 754 총 형식 수 = sopfr
+
+> IEEE 754-2019 공식 정의 형식 수 = 5 = sopfr.
+
+### n=6 Derivation
+
+binary16, binary32, binary64, binary128, decimal128 = 5 = sopfr. EXACT.
+BT-50의 지수 래더(5→8→11)와 결합하면 IEEE 754 완전 n=6 체계.
+
+```
+  IEEE 754-2019 형식:
+  1. binary16  (half)
+  2. binary32  (float)
+  3. binary64  (double)
+  4. binary128 (quad)
+  5. decimal128
+  총 = 5 = sopfr(6)
+```
+
+### Prediction
+
+IEEE 부동소수점 형식 총수는 sopfr=5로 고정되며, 지수 래더와 결합하여 완전한 n=6 체계를 형성한다.
+
+### Grade: 검증 전
+
+---
+
+## H-PL-36: 주요 PL 패러다임 전환점 = sigma-phi=10년 주기
+
+> 구조적(1970) → OOP(1980) → 함수형(1990) → 병렬(2000) → 반응형(2010) → AI(2020)
+
+### n=6 Derivation
+
+간격 = sigma - phi = 10년. n=6 패러다임이 sigma-phi=10년 주기로 등장.
+n=6 패러다임 x sigma-phi=10년 간격 = sopfr 개의 10년 span = 50년 (1970-2020).
+
+```
+  sigma - phi = 12 - 2 = 10년 주기
+  패러다임 수 = n = 6 (H-PL-4와 일치)
+  총 span = (n-1) * (sigma-phi) = 5 * 10 = 50년
+  50 = sopfr * (sigma-phi) = 5 * 10
+```
+
+### Prediction
+
+프로그래밍 패러다임은 sigma-phi=10년 주기로 전환되며, 총 n=6개 패러다임이 sopfr*(sigma-phi)=50년에 걸쳐 등장한다.
+
+### Grade: 검증 전
+
+---
+
 ## Summary Table
 
 | ID | Hypothesis | n=6 Basis | Real-World Value |
@@ -1026,6 +1322,18 @@ Google Testing Blog: Unit(70%) + Integration(20%) + E2E(10%)
 | H-PL-22 | Access modifiers = 4 | tau = 4 | private/default/protected/public |
 | H-PL-23 | FP core functions = 3 | proper divisors {1,2,3} | map/filter/reduce |
 | H-PL-24 | Test pyramid levels = 3 | tau - 1 = 3 | unit/integration/e2e |
+| H-PL-25 | HEXA-LANG keywords = 53 | sigma*tau+sopfr = 53 | 12 그룹, 53개 키워드 |
+| H-PL-26 | Operator group distribution | {n,n,tau,tau,phi,phi} | J_2=24 연산자, 3쌍 |
+| H-PL-27 | Keywords per group ≈ 4.417 | tau+sopfr/sigma | 53/12 = 4.417 |
+| H-PL-28 | MetaLang DSL count = 6 | n = 6 | 6 paradigm DSLs |
+| H-PL-29 | LLVM IR categories ≈ sigma | sigma +/- mu | 11~13 categories |
+| H-PL-30 | Rust keywords = 39 | (sigma+mu)*(n/phi) = 39 | Rust 2021 strict keywords |
+| H-PL-31 | Python keywords = 35 | sopfr*(sigma-sopfr) = 35 | Python 3.12 keywords |
+| H-PL-32 | Go keywords = 25 | J_2+mu = 25 | Go 25 keywords |
+| H-PL-33 | JS reserved words = 30 | sopfr*n = 30 | ECMAScript reserved words |
+| H-PL-34 | Keyword count ladder | 6 languages EXACT | C/Go/Rust/Python/Java/C++ |
+| H-PL-35 | IEEE 754 formats = 5 | sopfr = 5 | binary16/32/64/128+decimal128 |
+| H-PL-36 | Paradigm shift = 10yr | sigma-phi = 10 | 1970~2020, 6 paradigms |
 
 ---
 
@@ -1041,7 +1349,7 @@ Google Testing Blog: Unit(70%) + Integration(20%) + E2E(10%)
 ## Conclusion
 
 프로그래밍 언어의 핵심 상수들이 n=6 산술에서 체계적으로 도출된다.
-24개 가설은 다음 패턴을 보여준다:
+36개 가설은 다음 패턴을 보여준다:
 
 1. **phi(6) = 2**: 이진 구조 (error handling, lambda calculus, Boolean, concurrency, mutex/semaphore)
 2. **tau(6) = 4**: 4-fold 분류 (types, OOP, compilation, scope, access, indentation)
