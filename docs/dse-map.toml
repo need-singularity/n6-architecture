@@ -3,7 +3,7 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-01"
+updated = "2026-04-01T2"
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -214,9 +214,22 @@ n6_avg = 79.0
 note = "궁극의 암호 5단 DSE. AES 2^(sigma-tau)=256, BTC n=6 confirms, Kyber k=tau=4. BT-53/58/50 활용"
 
 [blockchain]
-goal = false
-dse = "none"
-cross_dse = ["cryptography", "network-protocol"]
+goal = true
+dse = "done"
+combos = 5400
+valid = 3370
+tool = "tools/universal-dse/ domains/blockchain.toml"
+levels = ["Protocol", "Crypto", "Execution", "Scaling", "Application"]
+cross_dse = ["cryptography", "network-protocol", "chip-architecture"]
+best_pareto = "PoS_Ethereum + ECDSA_secp256k1 + WASM_Runtime + Sharding_Dank + Identity_DID (0.8163)"
+best_n6 = "PoS_Ethereum + BLS12_381 + CairoVM_ZK + Sharding_Dank + DeFi_AMM (93.2%)"
+best_perf = "PoH_Solana + SNARK_Groth16 + SVM_Solana + Rollup_ZK + DeFi_AMM (perf=0.916)"
+best_power = "PoS_Ethereum + ECDSA_secp256k1 + MoveVM + State_Channel + Identity_DID (power=0.804)"
+best_cost = "PoS_Ethereum + ECDSA_secp256k1 + EVM_Solidity + State_Channel + DAO_Governance (cost=0.780)"
+pareto_frontier = 66
+n6_max = 93.2
+n6_avg = 73.0
+note = "궁극의 블록체인 5단 DSE. BT-53 n=6 confirms + ETH sigma=12s + KZG 2^sigma=4096. PoS_Ethereum+Danksharding 압도적"
 
 [display-audio]
 goal = true
@@ -322,6 +335,24 @@ n6_max = 96.0
 n6_avg = 79.5
 note = "궁극의 학습알고리즘 5단 DSE. BT-54/56/58/65/67 활용. AdamW+Mamba+LoRA 압도적"
 
+[space-engineering]
+goal = true
+dse = "done"
+combos = 4500
+valid = 3450
+tool = "tools/universal-dse/ domains/space.toml"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+cross_dse = ["chip-architecture", "battery-architecture", "fusion", "solar-architecture"]
+best_pareto = "SolarSail + Kepler6 + CarbonComp + LaserComm + Asteroid (0.7671)"
+best_n6 = "NuclearThermal + Kepler6 + CarbonComp + LaserComm + Asteroid (100.0%)"
+best_perf = "ChemRocket + Gravity + CarbonComp + LaserComm + LEO_Const (perf=0.886)"
+best_power = "SolarSail + Gravity + Inflatable + Relay + LEO_Const (power=0.760)"
+best_cost = "SolarSail + Gravity + Inflatable + Relay + LEO_Const (cost=0.580)"
+pareto_frontier = 50
+n6_max = 100.0
+n6_avg = 78.6
+note = "궁극의 우주공학 5단 DSE. Kepler n=6 궤도요소 + Carbon Z=6 구조 + D-T J₂=24 MeV. BT-27,30,38,63 활용"
+
 [material-synthesis]
 goal = true
 dse = "wip"
@@ -395,7 +426,21 @@ domains = ["chip-architecture", "display-audio"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + Diamond (100.0% n6, score 0.8736)"
-note = "MicroLED sigma*tau=48um + Diamond HEXA-P SoC — 미디어 처리 100% n6 EXACT"
+note = "MicroLED sigma*tau=48um + Diamond HEXA-P SoC — 미디어 처리 100% n6 EXACT (재확인)"
+
+[cross-dse.blockchain-x-crypto]
+domains = ["blockchain", "cryptography"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "PoS_Ethereum + Symmetric (94.9% n6, score 0.8491)"
+note = "PoS_Ethereum sigma=12s + AES-256=2^(sigma-tau) — 합의×암호 통합 94.9% n6"
+
+[cross-dse.blockchain-x-network]
+domains = ["blockchain", "network-protocol"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "PoS_Ethereum + Mesh_N6 (94.9% n6, score 0.8422)"
+note = "PoS_Ethereum + N6 Mesh SRv6 — P2P 네트워크×블록체인 통합 94.9% n6"
 
 [cross-dse.chip-x-energy]
 domains = ["chip-architecture", "energy-generation"]
@@ -641,3 +686,12 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "Symmetric + Diamond (98.3% n6, score 0.8804)"
 note = "AES256+AESNI → Diamond HEXA-P — AES-NI HW accel + Z=6 칩, sigma-tau=8 key size"
+
+# ── Space Engineering Cross-DSE ────────────────
+
+[cross-dse.space-x-chip]
+domains = ["space-engineering", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "NuclearThermal + Diamond (100.0% n6, score 0.8576)"
+note = "NTP Z=6 Carbon + Diamond HEXA-P — 우주등급 프로세서×핵열추진 100% n6 EXACT"
