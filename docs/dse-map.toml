@@ -147,9 +147,22 @@ n6_avg = 77.5
 note = "궁극의 프로그래밍언어 5단 DSE. BT-50,52,56,58,65,67 활용. 언어+AI코드생성 통합"
 
 [compiler-os]
-goal = false
-dse = "none"
-cross_dse = ["chip-architecture", "programming-language"]
+goal = true
+dse = "done"
+combos = 4500
+valid = 4060
+tool = "tools/universal-dse/ domains/compiler-os.toml"
+levels = ["Foundation", "Pipeline", "Runtime", "Kernel", "Ecosystem"]
+cross_dse = ["chip-architecture", "programming-language", "battery-architecture", "solar-architecture", "superconductor", "fusion", "energy-generation", "power-grid", "material-synthesis"]
+best_pareto = "RISCV_N6 + LLVM_N6 + N6_Scheduler + N6_Monolithic + FullStack_N6 (0.8920)"
+best_n6 = "Custom_N6_ISA + LLVM_N6 + N6_Hybrid + N6_Monolithic + FullStack_N6 (100.0%)"
+best_perf = "x86_64 + LLVM_N6 + RT_Preempt + N6_Monolithic + PGO_Adaptive (perf=0.980)"
+best_power = "Custom_N6_ISA + AOT_Minimal + Unikernel + Micro_seL4 + Embedded_N6 (power=0.950)"
+best_cost = "RISCV_Stock + AOT_Minimal + CFS_Linux + Linux_Stock + Embedded_N6 (cost=0.980)"
+pareto_frontier = 66
+n6_max = 100.0
+n6_avg = 70.0
+note = "궁극의 컴파일러/OS 5단 DSE. H-COS-1~26 + H-COS-61~80 활용. RISC-V N6 + LLVM 최적"
 
 [network-protocol]
 goal = false
@@ -379,5 +392,63 @@ note = "MetaLang → HTS 초전도 송전망 SCADA — 그리드 안정성 DSL"
 
 [cross-dse.lang-x-compiler]
 domains = ["programming-language", "compiler-os"]
-status = "none"
-note = "compiler-os DSE 미완료 — BT-52 6단계 파이프라인 연결 대기"
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + MetaLang (98.0% n6, score 0.8613)"
+note = "MetaLang 6-paradigm → RISC-V N6 LLVM 컴파일러 — 언어×컴파일러 통합 98%"
+
+[cross-dse.compiler-x-chip]
+domains = ["compiler-os", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + Diamond (100.0% n6, score 0.8991)"
+note = "RISC-V N6 컴파일러/OS → Diamond HEXA-P 칩 — 100% n6 EXACT"
+
+[cross-dse.compiler-x-battery]
+domains = ["compiler-os", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + LFP (96.7% n6, score 0.8506)"
+note = "RISC-V N6 OS 전력관리 → LFP BMS — 스케줄러×배터리 연동"
+
+[cross-dse.compiler-x-solar]
+domains = ["compiler-os", "solar-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + GaAs (95.0% n6, score 0.8735)"
+note = "RISC-V N6 RTOS → GaAs CPV MPPT — 임베디드 OS×태양전지 제어"
+
+[cross-dse.compiler-x-sc]
+domains = ["compiler-os", "superconductor"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + REBCO (86.0% n6, score 0.8278)"
+note = "RISC-V N6 → REBCO 초전도 제어 — Cooper pair phi=2 스케줄링"
+
+[cross-dse.compiler-x-fusion]
+domains = ["compiler-os", "fusion"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + DT (92.5% n6, score 0.8560)"
+note = "RISC-V N6 실시간OS → DT 핵융합 플라즈마 제어"
+
+[cross-dse.compiler-x-energy]
+domains = ["compiler-os", "energy-generation"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + Nuclear (100.0% n6, score 0.8605)"
+note = "RISC-V N6 안전OS → 원자력 제어 시스템 — 100% n6 EXACT"
+
+[cross-dse.compiler-x-grid]
+domains = ["compiler-os", "power-grid"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + HTS_YBCO (100.0% n6, score 0.8975)"
+note = "RISC-V N6 SCADA OS → HTS 초전도 송전망 — 100% n6 EXACT, score 0.8975"
+
+[cross-dse.compiler-x-material]
+domains = ["compiler-os", "material-synthesis"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + E1 (99.0% n6, score 0.8807)"
+note = "RISC-V N6 → 물질합성 자동화 제어 — Carbon Z=6 공정 제어"
