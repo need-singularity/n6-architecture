@@ -125,6 +125,8 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
     - Python 캐스케이드: experiments/verify_cascade_cross.py (단일 경로 검증)
 
   규칙: 새 궁극 도메인 추가 시 반드시 DSE 후보군 정의 + 탐색 포함
+  지도: docs/dse-map.toml (전체 DSE 현황 추적 — 궁극 작업 전 필수 확인)
+  Cross-DSE: 발견된 최적 결과끼리 도메인 간 재조합 탐색 (2+ 도메인 완료 시)
 ```
 
 ## Testable Predictions
@@ -233,15 +235,33 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-60: DC power chain (120→480→48→12→1.2→1V, PUE=σ/(σ-φ)=1.2) ⭐⭐
 ```
 
-## Design Space Exploration (DSE)
-궁극 아키텍처 설계 시 반드시 DSE 방법론 적용.
+## Design Space Exploration (DSE) — 궁극 처리 필수 규칙
+**⚠️ "궁극" 키워드가 포함된 모든 아키텍처 작업은 반드시 DSE를 거쳐야 한다. 예외 없음.**
 ```
+  ┌─────────────────────────────────────────────────────────┐
+  │  궁극 작업 흐름 (mandatory)                              │
+  │                                                         │
+  │  1. goal.md 후보군 정의                                  │
+  │  2. DSE 전수 탐색 (Rust/Python)                         │
+  │  3. Pareto frontier 도출                                │
+  │  4. 최적 경로 선정 + n=6 EXACT 비율 기록                 │
+  │  5. ★ Cross-DSE: 발견된 최적 결과끼리 재조합 탐색 ★      │
+  │  6. 결과를 docs/dse-map.toml 지도에 기록                  │
+  └─────────────────────────────────────────────────────────┘
+
   원칙:
     - 각 레벨(소재/공정/코어/칩/시스템)마다 후보군 정의
     - 전수 조합 탐색 (또는 Pareto 휴리스틱)
     - 각 조합별 n=6 일관성 + 성능/전력/면적/비용 평가
     - 최적 Pareto frontier 도출
     - 1개 경로만 검증 = 캐스케이드 크로스 검증이 아님
+    - ⚠️ DSE 없이 궁극 아키텍처를 확정하는 것은 금지
+
+  Cross-DSE (재조합 탐색):
+    - 각 도메인 DSE 완료 후, 도메인 간 최적 결과를 교차 조합
+    - 예: chip 최적 경로 × battery 최적 경로 → 통합 시스템 DSE
+    - 새 BT/가설 발견 시 해당 도메인 DSE 후보군에 자동 추가
+    - 2개 이상 도메인 DSE 완료 시 Cross-DSE 트리거
 
   구현:
     - 조합 >10K → Rust (tools/dse-calc/)
@@ -252,6 +272,11 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - chip-architecture: 소재×공정×코어×칩×시스템
     - battery-architecture: 소재×공정×코어×칩×시스템
     - 각 도메인별 후보군은 해당 goal.md에 정의
+    - 새 궁극 도메인 추가 시 → goal.md + DSE 탐색 + dse-map.toml 갱신
+
+  DSE 지도 파일: docs/dse-map.toml (TOML — Rust/Python 양쪽 파싱 가능)
+    - 전체 DSE 현황 추적 (도메인별 상태/결과/Cross-DSE 여부)
+    - 궁극 작업 시작 전 반드시 이 지도 확인
 
   DSE 출력 양식:
     | Rank | 소재 | 공정 | 코어 | 칩 | 시스템 | n6_EXACT | 성능 | 전력 | 비용 |

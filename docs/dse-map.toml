@@ -1,0 +1,155 @@
+# DSE Map — Design Space Exploration 현황 지도
+# 궁극 작업 시작 전 반드시 이 파일 확인
+# 상태: done / wip / none
+
+[meta]
+updated = "2026-04-01"
+rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
+cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
+
+# ── 완료 ──────────────────────────────────────────
+
+[chip-architecture]
+goal = true
+dse = "done"
+combos = 3125
+tool = "tools/dse-calc/"
+levels = ["HEXA-1", "PIM", "3D", "Photon", "Wafer", "Super", "OMEGA"]
+cross_dse = ["battery-architecture"]
+
+[battery-architecture]
+goal = true
+dse = "done"
+combos = 1908
+tool = "tools/battery-dse/"
+levels = ["Cell", "Electrode", "Core", "Chip", "Pack+Grid", "Solid", "Nuclear", "OMEGA-E"]
+cross_dse = ["chip-architecture", "power-grid", "energy-generation"]
+
+# ── 미시작 ────────────────────────────────────────
+
+[quantum-computing]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture", "superconductor"]
+
+[fusion]
+goal = false
+dse = "none"
+cross_dse = ["superconductor", "plasma-physics"]
+
+[superconductor]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture", "fusion"]
+
+[energy-generation]
+goal = false
+dse = "none"
+cross_dse = ["battery-architecture", "power-grid"]
+
+[power-grid]
+goal = false
+dse = "none"
+cross_dse = ["battery-architecture", "energy-generation"]
+
+[robotics]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture", "learning-algorithm"]
+
+[compiler-os]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture"]
+
+[network-protocol]
+goal = false
+dse = "none"
+cross_dse = ["cryptography", "blockchain"]
+
+[cryptography]
+goal = false
+dse = "none"
+cross_dse = ["network-protocol", "blockchain"]
+
+[blockchain]
+goal = false
+dse = "none"
+cross_dse = ["cryptography", "network-protocol"]
+
+[display-audio]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture"]
+
+[biology]
+goal = false
+dse = "none"
+cross_dse = ["cosmology-particle"]
+
+[cosmology-particle]
+goal = false
+dse = "none"
+cross_dse = ["pure-mathematics", "biology"]
+
+[pure-mathematics]
+goal = false
+dse = "none"
+cross_dse = ["cosmology-particle"]
+
+[plasma-physics]
+goal = false
+dse = "none"
+cross_dse = ["fusion", "superconductor"]
+
+[thermal-management]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture", "battery-architecture"]
+
+[software-design]
+goal = false
+dse = "none"
+cross_dse = ["compiler-os"]
+
+[learning-algorithm]
+goal = false
+dse = "none"
+cross_dse = ["chip-architecture", "robotics"]
+
+# ── Cross-DSE 결과 ────────────────────────────────
+
+[cross-dse.chip-x-battery]
+domains = ["chip-architecture", "battery-architecture"]
+status = "none"
+note = "BT-84 삼중수렴 관련"
+
+[cross-dse.chip-x-quantum]
+domains = ["chip-architecture", "quantum-computing"]
+status = "none"
+note = "초전도 로직 연계"
+
+[cross-dse.battery-x-grid]
+domains = ["battery-architecture", "power-grid"]
+status = "none"
+note = "ESS 통합 아키텍처"
+
+[cross-dse.battery-x-energy]
+domains = ["battery-architecture", "energy-generation"]
+status = "none"
+note = "발전-저장 체인"
+
+[cross-dse.fusion-x-superconductor]
+domains = ["fusion", "superconductor"]
+status = "none"
+note = "토카막 자석 최적화"
+
+[cross-dse.chip-x-display]
+domains = ["chip-architecture", "display-audio"]
+status = "none"
+note = "SoC 미디어 최적화"
+
+[cross-dse.chip-x-energy]
+domains = ["chip-architecture", "energy-generation"]
+status = "none"
+note = "전력공급 최적화"
