@@ -294,6 +294,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - material-synthesis: 원소×공정×조립×제어×공장 (3,600 조합)
     - fusion: 연료×가둠×가열×블랭킷×발전소 (TOML 정의 완료)
     - superconductor: 소재×공정×형태×응용×시스템 (TOML 정의 완료)
+    - programming-language: Foundation×Process×Core×Engine×System (5,016 조합)
     - 각 도메인별 후보군은 해당 goal.md + domains/*.toml에 정의
     - 새 궁극 도메인 추가 시 → goal.md + TOML + DSE 탐색 + dse-map.toml 갱신
 
