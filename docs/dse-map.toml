@@ -115,9 +115,18 @@ best_pareto = "HTS-YBCO + MMC + Oil-Immersed + UHVDC-1100kV + Supergrid (0.922)"
 n6_max = 100.0
 
 [robotics]
-goal = false
-dse = "none"
-cross_dse = ["chip-architecture", "learning-algorithm"]
+goal = true
+dse = "done"
+combos = 22500
+valid = 6472
+tool = "tools/robot-dse/"
+levels = ["Body", "Actuator", "Sensor", "Control", "AI", "System"]
+cross_dse = ["chip-architecture", "learning-algorithm", "battery-architecture"]
+best_pareto = "Humanoid + Pneumatic + Basic-6IMU + HEXA-1 + N6-Egyptian + Home-Care (80.70)"
+best_n6 = "Quadruped + BLDC-Gear + FullStack-12 + HEXA-1 + N6-Egyptian + Factory-12 (76.9%)"
+n6_max = 76.9
+n6_avg = 46.3
+note = "궁극의 로봇 6단 DSE. SE(3)=6, 6축IMU, σ=12DOF, J₂=24DOF"
 
 [programming-language]
 goal = true
