@@ -190,9 +190,21 @@ dse = "none"
 cross_dse = ["cosmology-particle"]
 
 [cosmology-particle]
-goal = false
-dse = "none"
-cross_dse = ["pure-mathematics", "biology"]
+goal = true
+dse = "done"
+combos = 25088
+valid = 22808
+tool = "tools/universal-dse/ domains/cosmology-particle.toml"
+levels = ["SymmetryOrigin", "GaugeStructure", "MatterContent", "ConstantPattern", "CosmosObservation"]
+cross_dse = ["pure-mathematics", "biology", "chip-architecture", "fusion"]
+best_pareto = "PerfNum + N6_Gauge + SM_3Gen + Mass_6pi5 + Inflation (0.8740)"
+best_n6 = "PerfNum + N6_Gauge + N6_Complete + Mass_6pi5 + Inflation (94.0%)"
+best_test = "Anthropic + SM_Direct + SM_3Gen + Neutrino_Mix + JUNO_DUNE (power=0.800)"
+best_depth = "PerfNum + GUT_E6 + N6_Complete + Alpha_BT86 + String_10D (cost=0.930)"
+pareto_frontier = 18
+n6_max = 94.0
+n6_avg = 78.2
+note = "궁극의 우주론/입자 5단 DSE. A+B+C 융합. H-CP-1~86 + BT-36,49,51,58 활용. 검증: LiteBIRD 2032, JUNO 2027, DUNE 2030"
 
 [pure-mathematics]
 goal = false
@@ -452,3 +464,33 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "RISCV_N6 + E1 (99.0% n6, score 0.8807)"
 note = "RISC-V N6 → 물질합성 자동화 제어 — Carbon Z=6 공정 제어"
+
+# ── Cosmology-Particle Cross-DSE ────────────────
+
+[cross-dse.cosmo-x-chip]
+domains = ["cosmology-particle", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "PerfNum + Diamond (97.0% n6, score 0.8886)"
+note = "n=6 완전수 산술 → Diamond HEXA-P — 기초물리×반도체 최적 97% n6"
+
+[cross-dse.cosmo-x-fusion]
+domains = ["cosmology-particle", "fusion"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "PerfNum + DT (90.0% n6, score 0.8455)"
+note = "n=6 산술 → DT 핵융합 — D=φ+T=n/φ=sopfr=5 입자물리 연결"
+
+[cross-dse.cosmo-x-sc]
+domains = ["cosmology-particle", "superconductor"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "PerfNum + REBCO (83.0% n6, score 0.8173)"
+note = "n=6 산술 → REBCO 초전도 — Cooper pair φ=2, BCS Δ/kT=σ 연결"
+
+[cross-dse.cosmo-x-battery]
+domains = ["cosmology-particle", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "PerfNum + LFP (93.7% n6, score 0.8401)"
+note = "n=6 산술 → LFP CN=6 — 입자물리 대칭×배터리 옥타헤드랄 구조"
