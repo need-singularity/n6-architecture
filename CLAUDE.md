@@ -87,7 +87,9 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   battery-architecture/ (8 levels: HEXA-CELL/ELECTRODE/CORE/CHIP/PACK+GRID/SOLID/NUCLEAR/OMEGA-E)
   # Solar Architecture (소재→공정→코어→칩→시스템, DSE 1,584 조합)
   solar-architecture/ (5 levels: HEXA-ABSORB/PROCESS/JUNCTION/POWER/ARRAY)
-  # Total: 1350+ hypotheses, 630+ EXACT, 650+ atlas entries, 84 BTs
+  # Material Synthesis (소재→공정→조립기→제어→시스템→변환→만능→궁극, DSE 3,600 조합)
+  material-synthesis/ (8 levels: HEXA-ELEMENT/PROCESS/ASSEMBLER/CONTROL/FACTORY/TRANSMUTE/UNIVERSAL/OMEGA-M)
+  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 88 BTs
 ```
 
 ## Rust Tools
@@ -100,6 +102,7 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 - `tools/gut-calc-rust/`  — GUT parameter brute-force search
 - `tools/dse-calc/`       — 소재×공정×코어×칩×시스템 DSE 전수 조합 탐색 + Pareto frontier
 - `tools/solar-dse/`      — 태양전지 DSE 전수 탐색 (1,584 조합, BT-30/63 기반)
+- `tools/material-dse/`   — 물질합성 DSE 전수 탐색 (3,600 조합, BT-85~88 기반)
 - `tools/universal-dse/`  — **공용 DSE 탐색기** (TOML 도메인 정의 → 전수 탐색 + Pareto + Cross-DSE)
 
 ## Calculator Rules (Shared)
@@ -284,6 +287,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - chip-architecture: 소재×공정×코어×칩×시스템 (3,000 조합)
     - battery-architecture: 소재×공정×코어×칩×시스템 (1,908 조합)
     - solar-architecture: 소재×공정×코어×칩×시스템 (1,584 조합)
+    - material-synthesis: 소재×공정×조립기×제어×시스템 (3,600 조합)
     - material-synthesis: 원소×공정×조립×제어×공장 (3,600 조합)
     - fusion: 연료×가둠×가열×블랭킷×발전소 (TOML 정의 완료)
     - superconductor: 소재×공정×형태×응용×시스템 (TOML 정의 완료)
