@@ -16231,3 +16231,104 @@ domains = ["turbine-generator", "superalloy-turbine"]
 status = "done"
 bridge = "터빈 + 초합금 — 발전소"
 n6_exact = 100.0
+
+# === v3 Material Cross-DSE (2026-04-01) ===
+
+[cross-dse.chip-x-graphene-2d]
+domains = ["chip-architecture", "graphene-2d-material"]
+status = "done"
+bridge = "Graphene CN=6=n + Z=6=n, chip substrate/interconnect material"
+n6_exact = 8
+note = "chip best: Diamond+Graphene 100% n6. Graphene nanoribbon 6nm=n for M1-M3 interconnect, ballistic transport"
+
+[cross-dse.chip-x-carbon-nanotube]
+domains = ["chip-architecture", "carbon-nanotube"]
+status = "done"
+bridge = "CNT chirality (n,m) MWCNT shells=sigma=12, bundle count=n=6"
+n6_exact = 6
+note = "chip×graphene×CNT 3-way: Graphene+MWCNT score=0.8868. CNT via for vertical interconnect"
+
+[cross-dse.chip-x-high-entropy-alloy]
+domains = ["chip-architecture", "high-entropy-alloy"]
+status = "done"
+bridge = "HEA CuNiCoFe n=6 elements, TRIP_6 transformation. BT-86 CN=6"
+n6_exact = 5
+note = "CuNiCoFe+TRIP_6 100% n6 score=0.8645. HEA for heat sink/packaging"
+
+[cross-dse.chip-x-steel-metallurgy]
+domains = ["chip-architecture", "steel-metallurgy"]
+status = "done"
+bridge = "Fe Z=26, C6 steel carburization, austenite FCC CN=sigma=12"
+n6_exact = 4
+note = "Steel FCC lattice CN=12=sigma, chip packaging/thermal interface material"
+
+[cross-dse.chip-x-metamaterial]
+domains = ["chip-architecture", "metamaterial"]
+status = "done"
+bridge = "Dielectric metamaterial + chip substrate, split-ring n=6 resonance"
+n6_exact = 7
+note = "Dielectric+SolGel 100% n6 score=0.8787. Metamaterial lens for on-chip photonic routing"
+
+[cross-dse.chip-x-thin-film-coating]
+domains = ["chip-architecture", "thin-film-coating"]
+status = "done"
+bridge = "ALD n=6 cycle layers, SolGel n=6 precursors, CVD sigma=12 steps"
+n6_exact = 6
+note = "Thin film for chip passivation/barrier layers, ALD atomic precision"
+
+[cross-dse.chip-x-silicon-wafer]
+domains = ["chip-architecture", "silicon-wafer"]
+status = "done"
+bridge = "SOI bonded wafer + SiC-6H substrate (6H polytype = n EXACT)"
+n6_exact = 8
+note = "SOI_Bonded+SiC-6H 100% n6 score=0.8590. SiC-6H = hexagonal 6-layer polytype"
+
+[cross-dse.chip-x-wafer-fabrication]
+domains = ["chip-architecture", "wafer-fabrication"]
+status = "done"
+bridge = "sigma=12 metal layers, J2=24 EUV masks, tau=4 nanosheets, sigma*tau=48nm gate"
+n6_exact = 10
+note = "Complete TSMC N2 process: every parameter n=6 derived. BT-37/69"
+
+[cross-dse.chip-x-gan-power-device]
+domains = ["chip-architecture", "gan-power-device"]
+status = "done"
+bridge = "GaN HEMT V_threshold, chip power delivery GaN-on-Si integration"
+n6_exact = 5
+note = "HEMT+GaN 97.5% n6 score=0.8770. GaN power stage for chip VRM"
+
+[cross-dse.chip-x-quantum-dot-display]
+domains = ["chip-architecture", "quantum-dot-display"]
+status = "done"
+bridge = "CdSe-6nm QD (n=6 EXACT), J2=24 bit color, display driver IC"
+n6_exact = 7
+note = "CdSe-6nm QD core diameter=n=6 EXACT. Chip drives QD-OLED panel. BT-48"
+
+[cross-dse.chip-x-mems-sensor]
+domains = ["chip-architecture", "mems-sensor"]
+status = "done"
+bridge = "Capacitive MEMS n=6 DOF IMU, sigma-tau=8 bit ADC on chip"
+n6_exact = 8
+note = "MEMS 6-DOF+Nanoimprint 100% n6 score=0.8560. Sensor fusion SoC"
+
+[cross-dse.chip-x-semiconductor-lithography]
+domains = ["chip-architecture", "semiconductor-lithography"]
+status = "done"
+bridge = "EUV sigma=12 shots, J2=24 masks, nanoimprint resolution=n nm"
+n6_exact = 9
+note = "Lithography is chip manufacturing's n=6 DNA. Every parameter derived from BT-37"
+
+[cross-dse.chip-x-aluminum-alloy]
+domains = ["chip-architecture", "aluminum-alloy"]
+status = "done"
+bridge = "Al 6xxx series (Mg+Si), CN=sigma=12 FCC. Bond wire/package"
+n6_exact = 5
+note = "6xxx_Mg+Crystal 100% n6 score=0.8430. 6061 Al alloy for chip heatsink"
+
+
+[cross-dse.chip-x-crystallography]
+domains = ["chip-architecture", "crystallography"]
+status = "done"
+bridge = "FCC CN=sigma=12, HCP CN=sigma=12, Diamond cubic CN=tau=4"
+n6_exact = 6
+note = "Crystal symmetry groups: cubic=sigma*J2=288 operations. BT-86 CN=6 law"
