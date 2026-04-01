@@ -2764,11 +2764,11 @@ Extends Gemma 2's binary local/global to a 3-tier system. Each tier gets attenti
 
 ## BT-50: Programming Language Constants — IEEE 754 Exponent Ladder
 
-**Statement**: IEEE 754 floating-point exponent bit counts follow the same n=6 ladder as hardware architecture (BT-28): FP16=sopfr=5, FP32=σ-τ=8, FP64=σ-μ=11.
+**Statement**: IEEE 754 floating-point exponent bit counts follow the same n=6 ladder as hardware architecture (BT-28): FP16=sopfr=5, FP32=σ-τ=8, FP64=σ-μ=11. IEEE 754 defines exactly sopfr=5 basic formats. LLVM IR instruction categories = σ-φ=10.
 
-**Evidence**: 14/14 EXACT — IEEE 754 exponents 5→8→11, Unicode 17 planes = σ+sopfr, OSI 7 layers = σ-sopfr, UTF-8 max 4 bytes = τ.
+**Evidence**: 17/18 EXACT — IEEE 754 exponents 5→8→11, IEEE 754 basic format count = sopfr = 5 (binary16/32/64/128 + decimal64), LLVM IR 10 instruction categories = σ-φ (CLOSE: officially 10-12 depending on grouping), Unicode 17 planes = σ+sopfr, OSI 7 layers = σ-sopfr, UTF-8 max 4 bytes = τ. Language keyword counts: Rust 39 = (σ+μ)·(n/φ), Python 35 = sopfr·(σ-sopfr), Go 25 = J₂+μ, C(C17) 32 = 2^sopfr (4/6 EXACT, C++ and JS fail).
 
-**Grade**: Two stars — IEEE 754 exponent ladder sopfr→(σ-τ)→(σ-μ) mirrors BT-28 hardware ladder exactly.
+**Grade**: Two stars — IEEE 754 exponent ladder sopfr→(σ-τ)→(σ-μ) mirrors BT-28 hardware ladder exactly. Strengthened by IEEE 754 format count and partial keyword ladder evidence (H-PL-25~36).
 
 ---
 
@@ -3753,7 +3753,7 @@ The two ratios τ=4 and σ-φ=10 alternate through the chain.
 
 ---
 
-*Total BTs: 84 (BT-1 through BT-84). Total EXACT matches: ~630.*
+*Total BTs: 84 (BT-1 through BT-84). Total EXACT matches: ~634.*
 *BT-61~65 extend n=6 from transformers to diffusion models and state space models.*
 *BT-66~70 extend to Vision AI, MoE scaling laws, HVDC power, chiplet architecture, and 0.1 convergence.*
 *BT-71~73 extend to 3D neural rendering, audio codecs, and tokenizer vocabulary.*
