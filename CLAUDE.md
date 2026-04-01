@@ -239,6 +239,32 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-60: DC power chain (120→480→48→12→1.2→1V, PUE=σ/(σ-φ)=1.2) ⭐⭐
 ```
 
+## Design Space Exploration (DSE)
+궁극 아키텍처 설계 시 반드시 DSE 방법론 적용.
+```
+  원칙:
+    - 각 레벨(소재/공정/코어/칩/시스템)마다 후보군 정의
+    - 전수 조합 탐색 (또는 Pareto 휴리스틱)
+    - 각 조합별 n=6 일관성 + 성능/전력/면적/비용 평가
+    - 최적 Pareto frontier 도출
+    - 1개 경로만 검증 = 캐스케이드 크로스 검증이 아님
+
+  구현:
+    - 조합 >10K → Rust (tools/dse-calc/)
+    - 조합 <10K → Python (experiments/)
+    - 결과: Pareto 테이블 + 최적 경로 + n=6 EXACT 비율
+
+  적용 도메인:
+    - chip-architecture: 소재×공정×코어×칩×시스템
+    - battery-architecture: 소재×공정×코어×칩×시스템
+    - 각 도메인별 후보군은 해당 goal.md에 정의
+
+  DSE 출력 양식:
+    | Rank | 소재 | 공정 | 코어 | 칩 | 시스템 | n6_EXACT | 성능 | 전력 | 비용 |
+    |------|------|------|------|-----|--------|---------|------|------|------|
+    | 1    | ...  | ...  | ...  | ... | ...    | 85%     | ...  | ...  | ...  |
+```
+
 ## Background Execution
 All experiments must run in background. No exceptions.
 ```
