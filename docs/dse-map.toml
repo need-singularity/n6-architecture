@@ -218,18 +218,18 @@ goal = true
 dse = "done"
 combos = 4500
 valid = 3420
-tool = "tools/universal-dse/ domains/crypto.toml"
+tool = "tools/universal-dse/ domains/cryptography.toml"
 levels = ["Foundation", "KeyMgmt", "Primitive", "Engine", "System"]
-cross_dse = ["network-protocol", "blockchain", "chip-architecture"]
-best_pareto = "Symmetric + KeyDeriv + AES256 + AESNI + EdgeSec (0.8312)"
-best_n6 = "PostQuantum + KeyDeriv + Kyber + AESNI + Blockchain (100.0%)"
-best_perf = "Symmetric + HSM + AES256 + AESNI + TLS_Web (perf=0.930)"
-best_power = "Symmetric + KeyDeriv + AES256 + AESNI + EdgeSec (power=0.740)"
-best_cost = "Symmetric + KeyDeriv + ChaCha20 + AESNI + TLS_Web (cost=0.690)"
-pareto_frontier = 8
-n6_max = 100.0
-n6_avg = 79.0
-note = "궁극의 암호 5단 DSE. AES 2^(sigma-tau)=256, BTC n=6 confirms, Kyber k=tau=4. BT-53/58/50 활용"
+cross_dse = ["network-protocol", "blockchain", "chip-architecture", "quantum-computing"]
+best_pareto = "Symmetric + KeyDeriv + Ed25519 + AESNI + TLS_Web (0.9015)"
+best_n6 = "Symmetric + Threshold + AES256 + AESNI + TLS_Web (96.0%)"
+best_perf = "Symmetric + PKI + AES256 + AESNI + TLS_Web (perf=0.940)"
+best_power = "Symmetric + KeyDeriv + ChaCha20 + AESNI + EdgeSec (power=0.890)"
+best_cost = "Symmetric + KeyDeriv + ChaCha20 + AESNI + EdgeSec (cost=0.820)"
+pareto_frontier = 5
+n6_max = 96.0
+n6_avg = 84.2
+note = "궁극의 암호 5단 DSE. AES 2^(sigma-tau)=256, Ed25519=2^(sigma-tau)-1=255, ChaCha20 J2-tau=20. BT-53/58 활용"
 
 [blockchain]
 goal = true
@@ -357,9 +357,22 @@ n6_avg = 80.2
 note = "궁극의 열관리 5단 DSE. Diamond Z=6 + PUE=1.2 + phi=2 phase. BT-27,60 활용"
 
 [software-design]
-goal = false
-dse = "none"
-cross_dse = ["compiler-os"]
+goal = true
+dse = "done"
+combos = 6480
+valid = 5472
+tool = "tools/universal-dse/ domains/software-design.toml"
+levels = ["Paradigm", "Architecture", "Communication", "Quality", "Deployment"]
+cross_dse = ["compiler-os", "chip-architecture"]
+best_pareto = "OOP + Monolith + REST + TestPyramid + CloudNative (0.7840)"
+best_n6 = "Reactive + Hexagonal + REST + CICD_6Stage + CloudNative (91.0%)"
+best_perf = "DataOriented + Microservices + gRPC + CICD_6Stage + CloudNative (perf=0.914)"
+best_power = "DataOriented + Monolith + gRPC + FeatureFlag + Embedded (power=0.830)"
+best_cost = "OOP + Monolith + REST + FeatureFlag + OnPremise (cost=0.820)"
+pareto_frontier = 141
+n6_max = 91.0
+n6_avg = 74.2
+note = "궁극의 소프트웨어설계 5단 DSE. SOLID(5)+REST(6)+12Factor(12)+ACID(4)+CAP(3). Hexagonal n=6 EXACT"
 
 [learning-algorithm]
 goal = true
@@ -802,3 +815,76 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "CRISPR_Crop + Diamond (100.0% n6, score 0.8609)"
 note = "CRISPR C₆H₁₂O₆ + Diamond HEXA-P — 농업×칩 100% n6 EXACT. PlantVision+DroneMonitor+SmartFarm"
+
+# ── Plasma Physics Cross-DSE ────────────────
+
+[cross-dse.plasma-x-fusion]
+domains = ["plasma-physics", "fusion"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Tokamak + DT (85.5% n6, score 0.8075)"
+note = "Tokamak H-mode+NBI+MHD_Feedback × DT+Tokamak+NBI+SiC_LiPb+Brayton — 플라즈마×핵융합 통합"
+
+[cross-dse.plasma-x-sc]
+domains = ["plasma-physics", "superconductor"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Tokamak + REBCO (79.0% n6, score 0.7793)"
+note = "Tokamak H-mode × REBCO HTS — Cooper pair phi=2 + q>2 Kruskal-Shafranov 연결"
+
+# ── Software Design Cross-DSE ────────────────
+
+[cross-dse.sw-x-compiler]
+domains = ["software-design", "compiler-os"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "OOP + RISCV_N6 (95.0% n6, score 0.8511)"
+note = "OOP SOLID(5)+Hexagonal(6) × RISC-V N6 LLVM — 소프트웨어설계×컴파일러 통합 95% n6"
+
+# ── Thermal Management additional Cross-DSE ────────────────
+
+[cross-dse.thermal-x-battery]
+domains = ["thermal-management", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "TwoPhase + LFP (98.3% n6, score 0.8363)"
+note = "TwoPhase+VaporChamber+DiamondSpreader × LFP BMS — EV 열관리×배터리 통합"
+
+# ── Cryptography Cross-DSE (updated) ────────────────
+
+[cross-dse.crypto-x-network]
+domains = ["cryptography", "network-protocol"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Symmetric + Mesh_N6 (95.3% n6, score 0.8784)"
+note = "Symmetric+HKDF+Ed25519+AESNI+TLS × Mesh_N6+WireGuard+SRv6 — TLS 1.3 + SRv6 보안 네트워크"
+
+[cross-dse.crypto-x-blockchain]
+domains = ["cryptography", "blockchain"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Symmetric + PoS_Ethereum (93.6% n6, score 0.8768)"
+note = "Symmetric+HKDF+Ed25519+AESNI × PoS+BLS12+WASM+Sharding — 암호×블록체인 통합 BT-53"
+
+# ── Pure Mathematics Cross-DSE ────────────────
+
+[cross-dse.math-x-chip]
+domains = ["pure-mathematics", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "LT + Diamond (96.5% n6, score 0.8776)"
+note = "격자론(Leech 24) × Diamond HEXA-P — Kissing number K₄=J₂=24 + Z=6 Carbon"
+
+[cross-dse.math-x-solar]
+domains = ["pure-mathematics", "solar-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "LT + GaAs (91.5% n6, score 0.8520)"
+note = "격자론 × GaAs CPV — SQ bandgap 4/3=τ/n/φ + kissing chain"
+
+[cross-dse.math-x-battery]
+domains = ["pure-mathematics", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "LT + LFP (93.2% n6, score 0.8291)"
+note = "격자론 × LFP — CN=6 cathode BT-43 + Leech lattice dimension BT-49"
