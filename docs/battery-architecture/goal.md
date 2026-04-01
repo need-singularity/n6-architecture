@@ -572,6 +572,53 @@
 
 ---
 
+## DSE Results (2026-04-01)
+
+**Tool**: `tools/battery-dse/battery-dse` (Rust) | **Combinations**: 3,750 → 1,908 compatible
+
+```
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  4 OPTIMAL PATHS                                                 │
+  ├──────────────────────────────────────────────────────────────────┤
+  │                                                                  │
+  │  ★ Best Pareto (균형 최적)                                       │
+  │    LFP + Graphite-Wet + 18650 + Discrete-6ch + DC-Micro         │
+  │    n6=88.2% | Perf=0.087 | Cost=$2.40 | Safety=0.81 | 4000cyc  │
+  │    Pareto: 0.6944                                                │
+  │                                                                  │
+  │  ★ Best n6 (94.1%)                                               │
+  │    LCO + Si-SSB + 18650 + Wireless-12ch + 48V-ESS              │
+  │    n6=94.1% | Perf=0.308 | Cost=$4.55 | Safety=0.55            │
+  │    16/17 EXACT parameters                                        │
+  │                                                                  │
+  │  ★ Best Performance (1,950 Wh/kg)                                │
+  │    Li-S + Si-SSB + 4680 + AI-BMS-12ch + Grid-MW                │
+  │    n6=84.2% | Perf=1.000 | Cost=$5.75                           │
+  │                                                                  │
+  │  ★ Best Cost ($2.00)                                             │
+  │    Na-ion + Na-HardCarbon + 18650 + Minimal-4ch + DC-Micro     │
+  │    n6=70.6% | Cost=$2.00 | Safety=0.78                          │
+  │                                                                  │
+  ├──────────────────────────────────────────────────────────────────┤
+  │  CHIP+BATTERY UNIFIED PATH                                      │
+  │                                                                  │
+  │  CHIP: Si + TSMC_N2 + HEXA-P + HEXA-1_Half + DGX_Style         │
+  │  BATT: LFP + Graphite-Wet + 18650 + Discrete-6ch + DC-Micro    │
+  │  BRIDGE: 48V = σ·τ (Battery DC ←→ Chip rack bus)               │
+  │  PUE = σ/(σ-φ) = 1.2                                           │
+  │  Combined n6: (82.6% + 88.2%) / 2 = 85.4%                      │
+  └──────────────────────────────────────────────────────────────────┘
+
+  통계:
+    Compatible: 1,908 / 3,750 (50.9%)
+    Max n6: 94.1% | Avg n6: 76.3%
+    ≥80%: 568 (29.8%) | ≥60%: 1,908 (100.0%)
+```
+
+**Full results**: [dse-results.md](dse-results.md)
+
+---
+
 ## Links
 
 - **Chip Architecture**: [../chip-architecture/goal.md](../chip-architecture/goal.md)

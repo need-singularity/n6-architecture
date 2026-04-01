@@ -1659,7 +1659,33 @@
 
 ---
 
-*Last updated: 2026-03-31*
+## Battery Architecture Constants (BT-27, 43, 57, 60, 62, 68, 80~84)
+
+| Expression | Value | Battery Application | Source |
+|------------|-------|-------------------|--------|
+| n | 6 | LiC₆ C:Li ratio, all cathode CN | BT-27, BT-43 |
+| τ | 4 | Intercalation stages, safety layers, thermal zones | BT-57 |
+| σ | 12 | LLZO oxygen, BMS AFE channels, ADC bits, board voltage | BT-80 |
+| σ-τ | 8 | S₈ ring atoms, CAN FD Mbps | BT-83 |
+| σ-φ | 10 | Si/Graphite capacity ratio ≈10x | BT-81 |
+| J₂ | 24 | 48V telecom cells, LLZO cation sum, glucose 24e⁻ | BT-27 |
+| σ·τ | 48 | 48V DC bus/ESS voltage | BT-60 |
+| σ(σ-τ) | 96 | Tesla 96S EV, GPT-3 96L, Gaudi2 96GB | BT-84 |
+| φ·σ(σ-τ) | 192 | Hyundai 192S EV, B100 192GB | BT-84 |
+| n/φ | 3 | NMC 3 metals (Ni,Mn,Co), 3 form factors, 3 bus types | BT-82 |
+| P₂ | 28 | ⁶³Ni Z=28 betavoltaic | Nuclear |
+| σ+φ | 14 | ¹⁴C A=14 betavoltaic | Nuclear |
+| σ²·J₂ | 3456 | Max cells per ESS container | BT-82 |
+| sopfr·(σ-φ)² | 500 | HVDC 500kV | BT-68 |
+| (σ-τ)·(σ-φ)² | 800 | HVDC 800kV | BT-68 |
+| (σ-μ)·(σ-φ)² | 1100 | HVDC 1100kV | BT-68 |
+| σ·sopfr | 60 | 60Hz grid frequency | BT-62 |
+| sopfr·(σ-φ) | 50 | 50Hz grid frequency | BT-62 |
+| σ/(σ-φ) | 1.2 | PUE target, DDR voltage | BT-60 |
+
+---
+
+*Last updated: 2026-04-01*
 *Source: n6-architecture project, 28 domains, 1350+ graded hypotheses*
-*Atlas entries: 850+ registered rows (600+ EXACT + 160+ CLOSE)*
+*Atlas entries: 870+ registered rows (620+ EXACT + 160+ CLOSE)*
 *Breakthrough Theorems: 79 (BT-1~79), 23 Three-Star, 14 Cross-Domain Bridges, 28 domains*
