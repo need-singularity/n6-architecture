@@ -263,35 +263,49 @@ note = "SoC 미디어 최적화"
 
 [cross-dse.chip-x-energy]
 domains = ["chip-architecture", "energy-generation"]
-status = "none"
-note = "전력공급 최적화"
+status = "done"
+tool = "tools/universal-dse/"
+best = "Diamond + Nuclear (100.0% n6, score 0.8646)"
+note = "Diamond chip × Nuclear fission — 100% n6 EXACT 달성"
 
 [cross-dse.solar-x-battery]
 domains = ["solar-architecture", "battery-architecture"]
-status = "none"
-note = "태양광 발전→배터리 저장 통합 자급자족 시스템"
+status = "done"
+tool = "tools/universal-dse/"
+best = "GaAs + LFP (91.7% n6, score 0.8291)"
+note = "GaAs 태양전지 + LFP 배터리 자급자족 시스템"
 
 [cross-dse.solar-x-chip]
 domains = ["solar-architecture", "chip-architecture"]
-status = "none"
-note = "MPPT/인버터 SoC + 태양전지 최적화"
+status = "done"
+tool = "tools/universal-dse/"
+best = "GaAs + Diamond (95.0% n6, score 0.8776)"
+note = "GaAs MPPT + Diamond SoC — SQ 4/3 bandgap 연결"
 
 [cross-dse.solar-x-grid]
 domains = ["solar-architecture", "power-grid"]
-status = "none"
-note = "분산발전→그리드 연계 최적화"
+status = "done"
+tool = "tools/universal-dse/"
+best = "GaAs + HTS_YBCO (95.0% n6, score 0.8760)"
+note = "GaAs 분산발전 + HTS 초전도 송전망"
 
 [cross-dse.material-x-chip]
 domains = ["material-synthesis", "chip-architecture"]
-status = "none"
-note = "반도체 소재 최적화"
+status = "done"
+tool = "tools/universal-dse/"
+best = "E1 + Diamond (99.0% n6, score 0.8848)"
+note = "물질합성 → Diamond 칩 소재 — 최고 n6 99%"
 
 [cross-dse.material-x-battery]
 domains = ["material-synthesis", "battery-architecture"]
-status = "none"
-note = "전극/전해질 소재 합성"
+status = "done"
+tool = "tools/universal-dse/"
+best = "E1 + LFP (95.7% n6, score 0.8363)"
+note = "물질합성 → LFP 전극 소재"
 
 [cross-dse.material-x-superconductor]
 domains = ["material-synthesis", "superconductor"]
-status = "none"
-note = "초전도체 소재 합성"
+status = "done"
+tool = "tools/universal-dse/"
+best = "E1 + REBCO (85.0% n6, score 0.8135)"
+note = "물질합성 → REBCO 초전도체 소재"
