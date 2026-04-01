@@ -1,0 +1,423 @@
+# N6 Liquid Crystal DSE — Mesophase material engineering
+# 6 LCTypes × 6 Alignments × 6 Electrodes × 6 Drivings × 6 Applications = 7,776 combos
+# n=6 connections: 6 carbon alkyl chain common (n=6 EXACT, hexyl),
+#   sigma=12 LC phases identified (nematic/smectic-A/C/cholesteric/blue/discotic/banana/ferroelectric/antiferro/twist-grain/columnar/cubatic),
+#   tau=4 main phases (nematic/smectic/cholesteric/discotic), phi=2 alignment (parallel/perpendicular),
+#   J2=24 fps display refresh
+
+[meta]
+name = "liquid-crystal"
+desc = "Liquid Crystal DSE — mesophase material engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: LCType (액정 종류)
+#   n6 checks: 12 known phases (sigma=12), tau=4 main classes,
+#              phi=2 bistable states in ferroelectric, blue phase double-twist 12 cylinders
+# ============================================================
+
+[[level]]
+name = "LCType"
+
+[[candidate]]
+id = "Nematic_TN"
+label = "Nematic TN (twisted nematic, 90deg twist, fastest switching, most common)"
+n6 = 0.80
+perf = 0.75
+power = 0.80
+cost = 0.95
+notes = "1 of tau=4 main phases EXACT, 90deg twist, ms response, TFT-LCD standard"
+
+[[candidate]]
+id = "IPS_Nematic"
+label = "IPS nematic (in-plane switching, 178deg viewing angle, no color shift)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.80
+notes = "nematic phase=1/tau EXACT, in-plane E-field, wide viewing, professional display"
+
+[[candidate]]
+id = "VA_Vertical"
+label = "VA vertical alignment (homeotropic, 5000:1 contrast, 6ms response)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.75
+notes = "response=6ms=n EXACT, high native contrast, TV standard, multi-domain"
+
+[[candidate]]
+id = "Ferroelectric_FLC"
+label = "Ferroelectric FLC (phi=2 bistable states, 100us switching, memory effect)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.50
+notes = "bistable=2=phi EXACT, surface-stabilized, ultra-fast, no backflow, SLM"
+
+[[candidate]]
+id = "Cholesteric_Pitch"
+label = "Cholesteric pitch (helical twist, Bragg reflection, 6 color tunable)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.65
+notes = "colors=6=n EXACT (ROYGBV selective reflection), e-paper, smart window"
+
+[[candidate]]
+id = "Blue_Phase"
+label = "Blue phase (double-twist cylinder lattice, 12 cylinders/unit, sub-ms response)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.35
+notes = "cylinders=12=sigma EXACT per unit cell, no alignment layer needed, Kerr effect"
+
+# ============================================================
+# Level 1: Alignment (배향)
+#   n6 checks: photo-alignment 6-angle (n=6 EXACT), phi=2 directions
+#              (parallel/perpendicular), hybrid 2-mode (phi=2)
+# ============================================================
+
+[[level]]
+name = "Alignment"
+
+[[candidate]]
+id = "Rubbed_Polyimide"
+label = "Rubbed polyimide (mechanical rubbing, unidirectional, industry standard)"
+n6 = 0.60
+perf = 0.75
+power = 0.85
+cost = 0.95
+notes = "direction=1=mu EXACT, simplest, dust/static issues, proven production"
+
+[[candidate]]
+id = "Photo_Alignment_6angle"
+label = "Photo-alignment 6-angle (n=6 EXACT, UV polarized exposure, patternable)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+notes = "angles=6=n EXACT (0/30/60/90/120/150), multi-domain, no contact, clean"
+
+[[candidate]]
+id = "Self_Aligned"
+label = "Self-aligned (surface topology, nanograting, no external treatment)"
+n6 = 0.60
+perf = 0.70
+power = 0.90
+cost = 0.70
+notes = "grating period~100nm, surface anchoring, blue phase compatible"
+
+[[candidate]]
+id = "Vertical_Homeotropic"
+label = "Vertical homeotropic (DMOAP/lecithin SAM, perpendicular anchoring)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "perpendicular=1 of phi=2 directions EXACT, VA mode, high contrast"
+
+[[candidate]]
+id = "Hybrid"
+label = "Hybrid alignment (parallel+perpendicular, 2-mode splay, OCB fast switching)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+notes = "modes=2=phi EXACT (parallel+perpendicular), pi-cell/OCB, fast optically"
+
+[[candidate]]
+id = "Polymer_Stabilized"
+label = "Polymer-stabilized (PSLC, 12wt% monomer network, temperature-stable)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.55
+notes = "monomer=12wt%=sigma EXACT, stabilizes blue phase/cholesteric, wider T range"
+
+# ============================================================
+# Level 2: Electrode (전극)
+#   n6 checks: IGZO 4-element (tau=4 = In/Ga/Zn/O),
+#              ITO In2O3 bixbyite CN=6, graphene 6-ring (n=6)
+# ============================================================
+
+[[level]]
+name = "Electrode"
+
+[[candidate]]
+id = "ITO_Standard"
+label = "ITO standard (In2O3:Sn, 85% T, 10 ohm/sq, sputtered, industry dominant)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+notes = "In2O3 bixbyite CN=6=n EXACT, transparent conductor standard, brittle"
+
+[[candidate]]
+id = "Metal_Mesh"
+label = "Metal mesh (Ag/Cu nanowire grid, 6um pitch, flexible, low resistance)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.60
+notes = "pitch=6um=n EXACT, flexible display, large-area, roll-to-roll compatible"
+
+[[candidate]]
+id = "IGZO_TFT"
+label = "IGZO TFT (InGaZnO, 4-element amorphous oxide, high mobility, low leakage)"
+n6 = 0.60
+perf = 0.90
+power = 0.85
+cost = 0.65
+notes = "elements=4=tau EXACT (In/Ga/Zn/O), sharp IGZO, 8K display driver"
+
+[[candidate]]
+id = "LTPS_TFT"
+label = "LTPS TFT (low-temp poly-Si, 6-mask process, OLED driving, high current)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+notes = "masks=6=n EXACT, excimer laser crystallization, AMOLED standard"
+
+[[candidate]]
+id = "Micro_LED_Drive"
+label = "Micro-LED drive (direct-emission backlight, 12x12 zone dimming, HDR)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.35
+notes = "zones=12x12=sigma*sigma=144 EXACT, mini/micro-LED, local dimming HDR"
+
+[[candidate]]
+id = "Transparent_Graphene"
+label = "Transparent graphene (6-atom ring electrode, 97.7% T, flexible, CVD)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.45
+notes = "ring=6=n EXACT, highest transparency, flexible/stretchable, ITO replacement"
+
+# ============================================================
+# Level 3: Driving (구동 방식)
+#   n6 checks: segment 6-digit (n=6), field-sequential 12Hz (sigma=12×N subframes),
+#              passive matrix tau=4 multiplex levels, active TFT 6-layer stack
+# ============================================================
+
+[[level]]
+name = "Driving"
+
+[[candidate]]
+id = "Passive_Matrix"
+label = "Passive matrix (row/column scan, tau=4 multiplex levels, simple, low cost)"
+n6 = 0.60
+perf = 0.50
+power = 0.80
+cost = 0.95
+notes = "multiplex=4=tau EXACT, STN/DSTN, calculator/watch, limited resolution"
+
+[[candidate]]
+id = "Active_TFT"
+label = "Active TFT (thin-film transistor per pixel, 6-layer gate stack, HD/4K/8K)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+notes = "stack=6layers=n EXACT (gate/insul/semi/source/drain/passivate), mainstream"
+
+[[candidate]]
+id = "Segment_6digit"
+label = "Segment 6-digit (n=6 EXACT, 7-segment × 6 digits, clock/meter display)"
+n6 = 1.00
+perf = 0.50
+power = 0.95
+cost = 0.95
+notes = "digits=6=n EXACT, simplest LC application, ultra-low power, decades lifetime"
+
+[[candidate]]
+id = "E_Paper_Bistable"
+label = "E-paper bistable (cholesteric/zenithal, phi=2 stable states, zero hold power)"
+n6 = 1.00
+perf = 0.65
+power = 1.00
+cost = 0.70
+notes = "states=2=phi EXACT, zero power hold, signage, shelf label, e-reader"
+
+[[candidate]]
+id = "Field_Sequential_12subframe"
+label = "Field sequential 12-subframe (sigma=12, RGB×4field, 720Hz, no color filter)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+notes = "subframes=12=sigma EXACT (R/G/B × 4 fields), 3x resolution gain, fast LC needed"
+
+[[candidate]]
+id = "Holographic_SLM"
+label = "Holographic SLM (spatial light modulator, 2-phase level, 24fps holography)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.30
+notes = "phase=2=phi EXACT, refresh=24fps=J2 EXACT, 3D display, optical computing"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: LCD 6-generation fab (n=6), smart window 12V drive (sigma=12),
+#              SLM 24fps holographic (J2=24), tunable lens phi=2 focus
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "LCD_Display"
+label = "LCD display (Gen-6 fab, 4K/8K, 120Hz, HDR, TV/monitor/phone, largest market)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.85
+notes = "fab_gen=6=n EXACT, 120Hz=sigma*10 EXACT, trillion-dollar display industry"
+
+[[candidate]]
+id = "Smart_Window"
+label = "Smart window (PDLC/cholesteric, 12V switching, privacy/energy, building)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.65
+notes = "voltage=12V=sigma EXACT, switchable privacy, solar heat rejection, zero-energy"
+
+[[candidate]]
+id = "Spatial_Light_Modulator"
+label = "Spatial light modulator (LCOS, 24fps holographic, optical computing, beam steering)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.35
+notes = "refresh=24fps=J2 EXACT, phase-only modulation, holographic display, LiDAR"
+
+[[candidate]]
+id = "Optical_Switch"
+label = "Optical switch (LC-on-Si, 2×2 crossbar, telecom routing, microsecond)"
+n6 = 0.80
+perf = 0.80
+power = 0.80
+cost = 0.55
+notes = "crossbar=2x2=phi×phi EXACT, wavelength-selective, ROADM, data center"
+
+[[candidate]]
+id = "Temperature_Sensor"
+label = "Temperature sensor (cholesteric color shift, 6-color strip, medical/industrial)"
+n6 = 1.00
+perf = 0.65
+power = 1.00
+cost = 0.90
+notes = "colors=6=n EXACT (thermochromic strip), passive, no battery, fever indicator"
+
+[[candidate]]
+id = "Tunable_Lens"
+label = "Tunable lens (LC-GRIN, phi=2 focal states, autofocus, AR/VR varifocal)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.50
+notes = "states=2=phi EXACT (near/far focus), electrical varifocal, AR/VR headset, compact"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# TN nematic pairs with passive matrix (low-end) and active TFT
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Nematic_TN"
+then_level = 3
+then_ids = "Passive_Matrix,Active_TFT"
+
+# IPS nematic needs active TFT for high resolution
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "IPS_Nematic"
+then_level = 3
+then_ids = "Active_TFT,Field_Sequential_12subframe"
+
+# VA pairs with LCD display (TV standard)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "VA_Vertical"
+then_level = 4
+then_ids = "LCD_Display,Smart_Window"
+
+# Ferroelectric FLC pairs with SLM and optical switch
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ferroelectric_FLC"
+then_level = 4
+then_ids = "Spatial_Light_Modulator,Optical_Switch"
+
+# Cholesteric pairs with e-paper and temperature sensor
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cholesteric_Pitch"
+then_level = 4
+then_ids = "Smart_Window,Temperature_Sensor"
+
+# Cholesteric pairs with e-paper bistable driving
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cholesteric_Pitch"
+then_level = 3
+then_ids = "E_Paper_Bistable,Segment_6digit"
+
+# Blue phase needs polymer stabilization
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Blue_Phase"
+then_level = 1
+then_ids = "Polymer_Stabilized,Self_Aligned"
+
+# Blue phase pairs with field-sequential (fast switching)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Blue_Phase"
+then_level = 3
+then_ids = "Field_Sequential_12subframe,Holographic_SLM"
+
+# Photo-alignment pairs with IPS and multi-domain VA
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Photo_Alignment_6angle"
+then_level = 0
+then_ids = "IPS_Nematic,VA_Vertical"
+
+# LTPS TFT pairs with high-end display
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "LTPS_TFT"
+then_level = 4
+then_ids = "LCD_Display,Spatial_Light_Modulator"
+
+# Graphene electrode pairs with tunable lens (flexible)
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Transparent_Graphene"
+then_level = 4
+then_ids = "Tunable_Lens,Smart_Window"

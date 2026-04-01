@@ -1,0 +1,346 @@
+# N6 5G/6G Wireless Network DSE
+# 6 Spectrum x 6 Antenna x 6 Modulation x 6 Architecture x 6 Application = 7,776 combos
+# n=6: 6 GHz band=n, sigma=12 MIMO layers, tau=4 duplex modes, J2=24 beam slots,
+#       phi=2 carrier aggregation, sopfr=5 NR numerologies
+
+[meta]
+name = "5g-6g-network"
+desc = "5G/6G Wireless Network DSE (6 GHz band=n, sigma=12 MIMO layers, tau=4 duplex modes)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Spectrum (주파수)
+#   n6 checks: 6 GHz=n EXACT, sigma=12 component carriers, tau=4 duplex modes FDD/TDD/HD/FD
+# ============================================================
+
+[[level]]
+name = "Spectrum"
+
+[[candidate]]
+id = "Sub6GHz"
+label = "Sub-6 GHz (6 GHz=n EXACT, 12 component carriers=sigma, 4 duplex modes FDD/TDD/HD/FD=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "mmWave28"
+label = "mmWave 28 GHz (28=BT-37 pitch, 6 beam groups=n, 12 subbands=sigma, 4 beam management modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "mmWave39"
+label = "mmWave 39 GHz (39=3*13, 6 channel chunks=n, 12 spatial streams=sigma, 24 beam directions=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+[[candidate]]
+id = "THz300"
+label = "THz 300 GHz (6G frontier, 6 sub-THz windows=n, 12 GHz bandwidth=sigma, 4 propagation modes LOS/NLOS/reflect/scatter=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.25
+cost = 0.30
+
+[[candidate]]
+id = "SatelliteKa"
+label = "Satellite Ka-band (6 orbital planes=n, 12 spot beams per plane=sigma, 24 GHz downlink center=J2)"
+n6 = 1.00
+perf = 0.75
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "SharedCBRS"
+label = "Shared CBRS 3.5 GHz (6 priority tiers=n, 12 MHz channel bandwidth=sigma, 4 access tiers incumbent/PAL/GAA/dynamic=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.90
+
+# ============================================================
+# Level 1: Antenna (안테나)
+#   n6 checks: 64=2^n massive MIMO, 6-element array=n, sigma=12 beamforming
+# ============================================================
+
+[[level]]
+name = "Antenna"
+
+[[candidate]]
+id = "MassiveMIMO64"
+label = "Massive MIMO-64 (64=2^n antennas EXACT, 12 spatial layers=sigma, 4 polarization modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "SixElement"
+label = "6-Element Array (6 elements=n EXACT, 12 dBi gain=sigma, phi=2 polarization H/V)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "Beamforming12"
+label = "Beamforming-12 (sigma=12 simultaneous beams EXACT, 6 RF chains=n, 24 beam codebook entries=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "Reconfigurable"
+label = "Reconfigurable Intelligent Surface (6 meta-atom groups=n, 12x12=144=sigma^2 elements, 4 reflection states=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.65
+
+[[candidate]]
+id = "PhasedArray"
+label = "Phased Array (6 subarrays=n, 12 phase shifters per subarray=sigma, 4 scanning modes azimuth/elevation/conical/adaptive=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "HolographicMIMO"
+label = "Holographic MIMO (6 holographic apertures=n, 12 cm aperture size=sigma, 24 spatial DOF=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.35
+
+# ============================================================
+# Level 2: Modulation (변조)
+#   n6 checks: 6 bits/symbol min=n, sigma=12 HARQ processes, tau=4 coding rates
+# ============================================================
+
+[[level]]
+name = "Modulation"
+
+[[candidate]]
+id = "OFDM_256QAM"
+label = "OFDM 256-QAM (256=2^(sigma-tau), 6 OFDM numerologies=n, 12 HARQ processes=sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.80
+
+[[candidate]]
+id = "FBMC"
+label = "Filter Bank Multi-Carrier (6 prototype filter taps=n, 12 subband filters=sigma, 4 overlap factor=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "NOMA"
+label = "Non-Orthogonal Multiple Access (6 power levels=n, 12 user pairs=sigma, phi=2 SIC decoder stages)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "OTFS"
+label = "OTFS Delay-Doppler (6 Doppler bins=n, 12 delay taps=sigma, 4 pilot patterns=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "PolarCode"
+label = "Polar Code (6 CRC bits=n, 12 list size=sigma, 4 decoding stages successive/list/stack/hybrid=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "LDPC_12rate"
+label = "LDPC Rate-1/sigma (sigma=12 base graph columns, 6 lifting sizes=n, 24 max iterations=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+# ============================================================
+# Level 3: Architecture (네트워크 구조)
+#   n6 checks: 6 hop mesh=n, sigma=12 RU per DU, tau=4 split options
+# ============================================================
+
+[[level]]
+name = "Architecture"
+
+[[candidate]]
+id = "ORAN"
+label = "O-RAN Open Architecture (6 functional splits=n, 12 RU per DU=sigma, 4 RIC apps near-RT/non-RT/xApp/rApp=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.75
+
+[[candidate]]
+id = "CRAN"
+label = "C-RAN Centralized (6 baseband pools=n, 12 fronthaul fibers=sigma, 4 virtualization layers=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "DRAN"
+label = "D-RAN Distributed (6 macro cells per area=n, 12 km inter-site distance=sigma, 4 backhaul types fiber/MW/satellite/mesh=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "MECEdge"
+label = "MEC Edge Computing (6 edge nodes per cluster=n, 12 ms latency target=sigma, 4 compute tiers device/edge/fog/cloud=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "SatelliteNTN"
+label = "Satellite NTN Non-Terrestrial (6 orbital shells=n, 12 gateway stations=sigma, 24 spot beams per satellite=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.40
+cost = 0.45
+
+[[candidate]]
+id = "Mesh6Hop"
+label = "Mesh Network 6-Hop (6 hops max=n EXACT, 12 relay nodes=sigma, 4 routing protocols AODV/OLSR/BATMAN/hybrid=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.80
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 QoS classes=n, sigma=12 network slices, J2=24 service categories
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "eMBB"
+label = "Enhanced Mobile Broadband (6 Gbps peak=n, 12 spatial streams=sigma, 4 modulation orders 64/256/1024/4096-QAM=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "URLLC"
+label = "Ultra-Reliable Low Latency (6 nines reliability=n, 12 redundant paths=sigma, 4 ms budget target=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "mMTC"
+label = "Massive Machine Type Comm (6 km coverage radius=n, 12 year battery life=sigma, 24 devices per PRB=J2)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "V2X"
+label = "Vehicle-to-Everything (6 V2X modes V2V/V2I/V2P/V2N/V2G/V2C=n EXACT, 12 ms E2E latency=sigma, 4 safety levels=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "XRStreaming"
+label = "XR Streaming (6 DOF tracking=n, 12 ms motion-to-photon=sigma, 24 fps minimum stereo=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+[[candidate]]
+id = "DigitalTwin"
+label = "Digital Twin Sync (6 sync layers physical/data/model/control/visual/AI=n, 12 Hz update rate=sigma, phi=2 twin pair real/virtual)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Sub-6GHz pairs well with massive MIMO and O-RAN
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Sub6GHz"
+then_level = 1
+then_ids = "MassiveMIMO64,Beamforming12"
+
+# mmWave needs phased array or holographic MIMO
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "mmWave28"
+then_level = 1
+then_ids = "PhasedArray,HolographicMIMO"
+
+# THz requires line-of-sight mesh or edge computing
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "THz300"
+then_level = 3
+then_ids = "MECEdge,Mesh6Hop"
+
+# URLLC needs MEC edge for low latency
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "URLLC"
+then_level = 3
+then_ids = "MECEdge,CRAN"
+
+# Satellite NTN pairs with mMTC and shared CBRS
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "SatelliteNTN"
+then_level = 0
+then_ids = "SatelliteKa,SharedCBRS"
+
+# OTFS modulation optimal for high-mobility V2X
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "V2X"
+then_level = 2
+then_ids = "OTFS,NOMA"

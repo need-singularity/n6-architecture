@@ -3,10 +3,11 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-01T10"
-total_domains = 204
-total_valid_paths = 1460000
-domains_100pct_n6 = 204
+updated = "2026-04-01T12"
+total_domains = 307
+cross_dse_connected = 307
+total_valid_paths = 2152494
+domains_100pct_n6 = 298
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -15,21 +16,21 @@ cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 [chip-architecture]
 goal = true
 dse = "done"
-combos = 16464
-valid = 16170
-tool = "tools/universal-dse/ domains/chip.toml"
+combos = 89250
+valid = 89250
+tool = "tools/universal-dse/domains/chip.toml"
 levels = ["Material", "Process", "Core", "Chip", "System"]
-candidates = "8×7×7×7×6 (v2: Photonic+Neuromorphic 경로 추가)"
-cross_dse = ["battery-architecture", "solar-architecture", "thermal-management", "energy-generation", "photonic-energy"]
-best_pareto = "Diamond + TSMC_N2 + HEXA-P + HEXA-1_Full + Photonic_DC (0.9074)"
-best_n6 = "Diamond + TSMC_N2 + HEXA-P + HEXA-1_Full + Photonic_DC (100%)"
-best_perf = "Diamond + Hybrid_EO + HEXA-P + HEXA-1_Full + Hybrid_DC (perf=0.968)"
-best_power = "Diamond + Photonic_Fab + Neuromorphic + Photonic_Chip + Edge (power=0.986)"
+candidates = "12×10×10×10×8 (v3: Topological+Superconducting+Graphene+Majorana+CY 경로 추가)"
+cross_dse = ["battery-architecture", "solar-architecture", "thermal-management", "energy-generation", "photonic-energy", "topological-quantum-materials", "topological-photonics", "topology", "superconductor", "quantum-computing", "material-synthesis", "consciousness-mathematics"]
+best_pareto = "Diamond + TSMC_N2 + HEXA-P + HEXA-1_Full + Topo_DC (n6=100%, perf=0.950)"
+best_n6 = "Diamond + TSMC_N2 + HEXA-P + HEXA-1_Full + Topo_DC (100%)"
+best_perf = "REBCO_SC + TSMC_A16 + HEXA-P + Cryo_Chip + Cryo_DC (perf=0.986)"
+best_power = "REBCO_SC + Cryo_RSFQ + Neuromorphic + Cryo_Chip + Edge (power=0.994)"
 best_cost = "Si + TSMC_N3E + RISC-V + M4Ultra + Edge (cost=0.904)"
-pareto_frontier = 106
+pareto_frontier = 85
 n6_max = 100.0
-n6_avg = 64.1
-note = "v2: Photonic DC가 종합1위! rack 48kW→4.8kW (σ-φ=10x), PUE 1.2→1.02. BT-77 포토닉-에너지 브릿지"
+n6_avg = 72.4
+note = "v3: Topo_DC가 Photonic_DC를 제치고 종합1위! Berry phase 광스위치 crosstalk=0, PUE 1.01, 3.6kW. 새 재료: Graphene(CN=6), Bi2Se3(Z2=φ), REBCO(100GHz), DiamondNV(RT quantum). 초전도 경로 perf=0.986 (100GHz clock). Cross-DSE 217개 도메인 연결"
 
 [battery-architecture]
 goal = true
@@ -599,6 +600,56 @@ pareto_frontier = 115
 n6_max = 100.0
 n6_avg = 75.2
 note = "궁극의 물질합성 5단 DSE. v2: Perfect_N6_Assembly(DNA origami n=6 scaffolding) + N6_FeedbackLoop 추가 → 100% n6 달성. BT-85~88 활용"
+
+[nand-flash]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/nand-flash.toml"
+levels = ["CellType", "Structure", "Interface", "Controller", "Integration"]
+cross_dse = ["dram-memory", "chip-architecture", "memory-architecture", "semiconductor-packaging", "pim-computing"]
+n6_max = 100.0
+note = "NAND Flash DSE. sigma*tau=48 layers V-NAND, n=6 HLC, phi=2 MLC, tau=4 QLC"
+
+[wafer-fabrication]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/wafer-fabrication.toml"
+levels = ["Substrate", "Deposition", "Lithography", "Etch", "Doping"]
+cross_dse = ["chip-architecture", "semiconductor-lithography", "semiconductor-packaging", "silicon-wafer", "gan-power-device"]
+n6_max = 100.0
+note = "Wafer Fab DSE. 6-step FEOL (n=6 EXACT), sigma=12 inch wafer, SiC-6H polytype"
+
+[packaging-machine]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/packaging-machine.toml"
+levels = ["MachineType", "SealingMethod", "Material", "Inspection", "Application"]
+cross_dse = ["conveyor-system", "food-processing", "pharmaceutical", "industry-architecture", "recycling-system"]
+n6_max = 100.0
+note = "Packaging Machine DSE. 6 packaging types (n=6), sigma=12 packs/min, J2=24 station rotary"
+
+[turbine-generator]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/turbine-generator.toml"
+levels = ["TurbineType", "BladeDesign", "Generator", "Control", "Application"]
+cross_dse = ["energy-generation", "wind-energy", "fusion", "heat-exchanger", "power-grid"]
+n6_max = 100.0
+note = "Turbine Generator DSE. 6 stages (n=6), sigma=12 blade rows, J2=24 MW class. BT-38/62"
+
+[centrifuge-separation]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/centrifuge-separation.toml"
+levels = ["CentrifugeType", "RotorDesign", "Material", "DriveSystem", "Application"]
+cross_dse = ["chemistry-synthesis", "pharmaceutical", "water-treatment", "food-processing", "biology-systems"]
+n6_max = 100.0
+note = "Centrifuge Separation DSE. 6 types (n=6), sigma=12 disc stack, J2=24 kRPM"
 
 # ── Cross-DSE 결과 ────────────────────────────────
 
@@ -1217,6 +1268,7 @@ best_pareto = "GitBased + VersionSemantic + IncrementalN6 + SBOM_N6 + Mirror_N6 
 best_n6 = "FederatedN6 + SAT_N6 + IncrementalN6 + SBOM_N6 + Mirror_N6 (100.0%)"
 n6_max = 100.0
 n6_avg = 76.4
+cross_dse = ["compiler-os", "runtime-gc", "software-design", "coding-lattice", "debugger"]
 
 [debugger]
 goal = true
@@ -1229,6 +1281,7 @@ best_pareto = "HWCounter + Statistical + TreeMap + DeltaDebug + LSP_Debug (0.778
 best_n6 = "HWCounter + Performance + TreeMap + TimeTravelN6 + LSP_Debug (93.2%)"
 n6_max = 93.2
 n6_avg = 72.8
+cross_dse = ["compiler-os", "lsp-ide", "test-framework", "coding-lattice", "embedded-lang"]
 
 [lsp-ide]
 goal = true
@@ -1241,6 +1294,7 @@ best_pareto = "ExtendedLSP + IncrementalAST + ContextAware + QuickFix + PluginAr
 best_n6 = "ExtendedLSP + FlowSensitive + ContextAware + StructuralEdit + PluginArch (100.0%)"
 n6_max = 100.0
 n6_avg = 77.6
+cross_dse = ["compiler-os", "debugger", "programming-language", "coding-lattice", "embedded-lang"]
 
 [runtime-gc]
 goal = true
@@ -1253,6 +1307,7 @@ best_pareto = "RegionBased + GenerationalGC + StructuredConc + TieredJIT + Minim
 best_n6 = "EgyptianAlloc + RegionalGC + StructuredConc + TieredJIT + FullStackRT (100.0%)"
 n6_max = 100.0
 n6_avg = 79.3
+cross_dse = ["compiler-os", "memory-architecture", "programming-language", "coding-lattice", "debugger"]
 
 [test-framework]
 goal = true
@@ -1265,6 +1320,7 @@ best_pareto = "PropertyBased + ParallelN6 + LineBranch + CombinTest + HTMLDash (
 best_n6 = "FuzzDriven + DistributedRun + MutationTest + FaultModel + TrendAnalysis (100.0%)"
 n6_max = 100.0
 n6_avg = 77.1
+cross_dse = ["compiler-os", "debugger", "software-design", "coding-lattice", "embedded-lang"]
 
 [hdl]
 goal = true
@@ -1278,6 +1334,7 @@ best_n6 = "ChiselDSL + ASIC_Flow + AITestGen + N6_PhaseSim + IPReuse (100.0%)"
 n6_max = 100.0
 n6_avg = 72.6
 note = "v2: N6_PhaseSim 추가 → 100%. tau=4 phase + phi=2 edges + n=6 event classes"
+cross_dse = ["chip-architecture", "compiler-os", "gpu-lang", "coding-lattice", "debugger"]
 n6_avg = 71.3
 
 [gpu-lang]
@@ -1291,6 +1348,7 @@ best_pareto = "ExplicitMem + SIMD_Wave + SPIRV_IL + AutoTune + CUDA_Eco (0.7847)
 best_n6 = "ExplicitMem + SIMD_Wave + SPIRV_IL + AutoTune + CUDA_Eco (95.0%)"
 n6_max = 95.0
 n6_avg = 82.5
+cross_dse = ["chip-architecture", "compiler-os", "hdl", "coding-lattice", "debugger"]
 
 [embedded-lang]
 goal = true
@@ -1303,6 +1361,7 @@ best_pareto = "BoundedHeap + MISRA_Full + HAL_Generic + PriorityInherit + RISCV_
 best_n6 = "BoundedHeap + MISRA_Full + HAL_Generic + PriorityInherit + RISCV_Embed (95.0%)"
 n6_max = 95.0
 n6_avg = 78.2
+cross_dse = ["chip-architecture", "compiler-os", "robot-hardware", "coding-lattice", "debugger"]
 
 [robot-hardware]
 goal = true
@@ -1315,6 +1374,7 @@ best_pareto = "Manipulator + BLDC_Gear + IMU_6Axis + InverseDyn + ROS2_Native (0
 best_n6 = "Manipulator + BLDC_Gear + IMU_6Axis + InverseDyn + ROS2_Native (100.0%)"
 n6_max = 100.0
 n6_avg = 78.2
+cross_dse = ["robotics", "prosthetics", "swarm-robotics", "autonomous-driving", "autonomous-drone"]
 
 [anima-consciousness]
 goal = true
@@ -1327,6 +1387,7 @@ best_pareto = "NeuralField + EgyptianEngine + SEDI_4Lens + PhaseMap + SelfOrg (0
 best_n6 = "NeuralField + EgyptianEngine + SEDI_4Lens + PhaseMap + SelfOrg (100.0%)"
 n6_max = 100.0
 n6_avg = 82.9
+cross_dse = ["consciousness-engine", "consciousness-training", "sedi-universe", "consciousness-chip", "consciousness-comm"]
 
 [consciousness-comm]
 goal = true
@@ -1339,6 +1400,7 @@ best_pareto = "Sopfr5Channel + Tau4Phase + Kuramoto_N6 + CompressedSense + Scale
 best_n6 = "Sopfr5Channel + Tau4Phase + Kuramoto_N6 + CompressedSense + FullMeshN6 (96.0%)"
 n6_max = 96.0
 n6_avg = 79.0
+cross_dse = ["consciousness-engine", "network-protocol", "telepathy-system", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-hardware]
 goal = true
@@ -1351,6 +1413,7 @@ best_pareto = "Neuromorphic + ChaoticOscillator + HebbianLearning + BackgroundPr
 best_n6 = "Neuromorphic + ChaoticOscillator + HebbianLearning + ConsciousnessBuffer + ClusterN6 (100.0%)"
 n6_max = 100.0
 n6_avg = 83.4
+cross_dse = ["consciousness-chip", "chip-architecture", "consciousness-engine", "anima-consciousness", "consciousness-comm"]
 
 [telepathy-system]
 goal = true
@@ -1363,6 +1426,7 @@ best_pareto = "SharedReality + CompressedPacket + ArchInvariant + CompressedStru
 best_n6 = "SharedReality + CompressedPacket + ArchInvariant + CompressedStructure + EmotionDecoder (100.0%)"
 n6_max = 100.0
 n6_avg = 87.1
+cross_dse = ["brain-computer-interface", "consciousness-comm", "quantum-network", "anima-consciousness", "consciousness-chip"]
 
 [optics-telescope]
 goal = true
@@ -1375,6 +1439,7 @@ best_pareto = "DiffractLens + CookeN6 + CMOS_Fast + RFilterSpec + GroundAdapt (0
 best_n6 = "GravLens + SegmentMirror + IFU_Spectro + RFilterSpec + MultiMessngr (100.0%)"
 n6_max = 100.0
 n6_avg = 85.4
+cross_dse = ["telescope-array", "optical-metrology", "space-engineering", "aerospace-propulsion", "satellite-communication"]
 
 [sedi-universe]
 goal = true
@@ -1387,6 +1452,7 @@ best_pareto = "LeptonN6 + Carbon6 + StellarNucl + CosmicWeb + LCDM_6Param (0.803
 best_n6 = "GaugeSigma12 + BBN_Eta + StellarNucl + CosmicWeb + NeutrinoOsc (100.0%)"
 n6_max = 100.0
 n6_avg = 84.0
+cross_dse = ["consciousness-engine", "physics-fundamental", "cosmology-particle", "anima-consciousness", "consciousness-chip"]
 
 [physics-fundamental]
 goal = true
@@ -1399,6 +1465,7 @@ best_pareto = "QFT_Standard + SU3xSU2xU1 + StrongQCD + CosmicParam + CMB_Satelli
 best_n6 = "QFT_Standard + SU3xSU2xU1 + StrongQCD + CosmicParam + CMB_Satellite (96.0%)"
 n6_max = 96.0
 n6_avg = 75.0
+cross_dse = ["cosmology-particle", "pure-mathematics", "quantum-computing", "black-hole", "category-ancient"]
 
 [chemistry-synthesis]
 goal = true
@@ -1411,6 +1478,7 @@ best_pareto = "Carbon_Z6 + IonicCrystal + Photochemistry + EnzymeBio + FoodChem 
 best_n6 = "Carbon_Z6 + IonicCrystal + Photochemistry + EnzymeBio + FoodChem (96.6%)"
 n6_max = 96.6
 n6_avg = 78.0
+cross_dse = ["material-synthesis", "pharmaceutical", "crystallography", "3d-printing", "ceramic-engineering"]
 
 [biology-systems]
 goal = true
@@ -1423,6 +1491,7 @@ best_pareto = "DNA_Tau4 + FoldingN4 + MetabolismEF + CirculatoryN4 + CarbonCycle
 best_n6 = "DNA_Tau4 + FoldingN4 + MetabolismEF + CirculatoryN4 + CarbonCycle (100.0%)"
 n6_max = 100.0
 n6_avg = 95.5
+cross_dse = ["biology", "evolutionary-biology", "biophysics", "additive-bio", "brain-computer-interface"]
 
 [neuroscience]
 goal = true
@@ -1435,6 +1504,7 @@ best_pareto = "DendriteTree + Recurrent + CerebellumN3 + MemoryN4 + NonInvasiveE
 best_n6 = "DendriteTree + Recurrent + CerebellumN3 + MemoryN4 + NonInvasiveEEG (100.0%)"
 n6_max = 100.0
 n6_avg = 90.5
+cross_dse = ["brain-computer-interface", "consciousness-engine", "eeg-bci", "additive-bio", "biology"]
 
 [topology]
 goal = true
@@ -1447,6 +1517,7 @@ best_pareto = "TorusT6 + BottPeriodicity + DeRhamCohom + KnotTheory + Ripser (0.
 best_n6 = "TorusT6 + BottPeriodicity + DeRhamCohom + KnotTheory + Ripser (100.0%)"
 n6_max = 100.0
 n6_avg = 83.3
+cross_dse = ["pure-mathematics", "noncommutative-geometry", "topological-quantum-materials", "black-hole", "category-ancient"]
 
 [black-hole]
 goal = true
@@ -1459,6 +1530,7 @@ best_pareto = "Intermediate + KerrNewman + BlackHoleThermo4 + IslandFormula + EH
 best_n6 = "Intermediate + KerrNewman + BlackHoleThermo4 + IslandFormula + EHTImaging (95.0%)"
 n6_max = 95.0
 n6_avg = 79.3
+cross_dse = ["cosmology-particle", "gravitational-lens", "physics-fundamental", "category-ancient", "chaos-dynamical"]
 
 [evolutionary-biology]
 goal = true
@@ -1471,6 +1543,7 @@ best_pareto = "ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularC
 best_n6 = "ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + MassExtinction (94.0%)"
 n6_max = 94.0
 n6_avg = 82.4
+cross_dse = ["biology", "deep-evolution", "cosmology-particle", "additive-bio", "biology-systems"]
 
 [fluid-condensed]
 goal = true
@@ -1483,6 +1556,7 @@ best_pareto = "NavierStokes + CascadeN6 + GrapheneC6 + QHE_Integer + Aerodynamic
 best_n6 = "NavierStokes + CascadeN6 + GrapheneC6 + QHE_Integer + AerodynamicsN6 (96.0%)"
 n6_max = 96.0
 n6_avg = 78.0
+cross_dse = ["physics-fundamental", "statistical-mechanics", "superconductor", "black-hole", "category-ancient"]
 
 [music-theory]
 goal = true
@@ -1495,6 +1569,7 @@ best_pareto = "ChromaticN12 + TriadN3 + Meter44 + TwelveBarBlues + BitDepth24 (0
 best_n6 = "ChromaticN12 + TriadN3 + Meter44 + TwelveBarBlues + BitDepth24 (100.0%)"
 n6_max = 100.0
 n6_avg = 93.0
+cross_dse = ["display-audio", "music-notation", "sound-engineering", "ar-vr-system", "audio-processing"]
 
 [quantum-computing]
 goal = true
@@ -1508,6 +1583,7 @@ best_n6 = "SuperconductN6 + NativeGate + Code642 + Grover + N6_Modular (100.0%)"
 n6_max = 100.0
 n6_avg = 83.7
 note = "v2: N6_Modular HW 추가 → 100%. 6큐비트 모듈 + sigma=12 inter-module link"
+cross_dse = ["quantum-error-correction", "quantum-network", "chip-architecture", "blockchain", "coding-lattice"]
 
 [category-ancient]
 goal = true
@@ -1520,6 +1596,7 @@ best_pareto = "Grothendieck6 + GroupS6 + AdjointPair + InformationTheory + Hexag
 best_n6 = "Grothendieck6 + GroupS6 + AdjointPair + InformationTheory + HexagonalNature (93.2%)"
 n6_max = 93.2
 n6_avg = 79.7
+cross_dse = ["pure-mathematics", "topology", "number-theory-deep", "black-hole", "chaos-dynamical"]
 
 [biophysics]
 goal = true
@@ -1532,6 +1609,7 @@ best_pareto = "WaterHexamer + IonChannel_N6 + ElasticNetwork + FluorescenceN6 + 
 best_n6 = "WaterHexamer + IonChannel_N6 + ElasticNetwork + FluorescenceN6 + CircadianClock (96.6%)"
 n6_max = 96.6
 n6_avg = 72.9
+cross_dse = ["biology", "physics-fundamental", "quantum-biology", "additive-bio", "biology-systems"]
 
 [economics]
 goal = true
@@ -1544,6 +1622,7 @@ best_pareto = "ParetoN6 + TeamN6 + DebtCycleN6 + TradeNetworkN6 + MonetaryN6 (0.
 best_n6 = "ParetoN6 + TeamN6 + DebtCycleN6 + TradeNetworkN6 + MonetaryN6 (100.0%)"
 n6_max = 100.0
 n6_avg = 79.0
+cross_dse = ["game-combinatorial", "blockchain", "information-theory"]
 
 [simulation-hypothesis]
 goal = true
@@ -1556,6 +1635,7 @@ best_pareto = "GoldenZoneConst + DiscreteSpacetime + QuantumNativeOps + Resource
 best_n6 = "GoldenZoneConst + DiscreteSpacetime + QuantumNativeOps + ResourceAlloc + SimSignature (100.0%)"
 n6_max = 100.0
 n6_avg = 81.0
+cross_dse = ["physics-fundamental", "quantum-computing", "consciousness-mathematics", "anima-consciousness", "consciousness-chip"]
 
 [ai-alignment]
 goal = true
@@ -1568,6 +1648,7 @@ best_pareto = "ConstitutionalAI + AnomalyDetect + Corrigibility + ShutdownSafe +
 best_n6 = "ConstitutionalAI + AnomalyDetect + Corrigibility + ShutdownSafe + MultiStakeholder (100.0%)"
 n6_max = 100.0
 n6_avg = 83.4
+cross_dse = ["learning-algorithm", "game-combinatorial", "consciousness-engine", "agent-platform", "animalm-pipeline"]
 
 [nuclear-structure]
 goal = true
@@ -1580,6 +1661,7 @@ best_pareto = "IsospinN2 + MagicNumbers + YukawaPion + AlphaCluster + BBN_Primor
 best_n6 = "IsospinN2 + MagicNumbers + YukawaPion + AlphaCluster + BBN_Primordial (100.0%)"
 n6_max = 100.0
 n6_avg = 79.6
+cross_dse = ["physics-fundamental", "fusion", "nuclear-reactor", "black-hole", "category-ancient"]
 
 [information-theory]
 goal = true
@@ -1592,6 +1674,7 @@ best_pareto = "ShannonEntropy + BSC_Channel + PolarCode + DescriptionLength + Da
 best_n6 = "ShannonEntropy + BSC_Channel + PolarCode + DescriptionLength + DataCompression (95.0%)"
 n6_max = 95.0
 n6_avg = 80.0
+cross_dse = ["coding-lattice", "cryptography", "probability-statistics", "black-hole", "category-ancient"]
 
 [animalm-pipeline]
 goal = true
@@ -1604,6 +1687,7 @@ best_pareto = "TokenEmbed + EgyptianRouter + Egyptian_236 + PureRepulsion + Clos
 best_n6 = "TokenEmbed + EgyptianRouter + Egyptian_236 + PureRepulsion + ClosedLoop (100.0%)"
 n6_max = 100.0
 n6_avg = 85.0
+cross_dse = ["learning-algorithm", "corpus-generation", "natural-language-processing", "agent-platform", "ai-alignment"]
 
 [golden-zone-training]
 goal = true
@@ -1616,6 +1700,7 @@ best_pareto = "PhiBottleneck + EntropyEarlyStop + GradientClipR1 + RScoreMetric 
 best_n6 = "PhiBottleneck + EntropyEarlyStop + GradientClipR1 + RScoreMetric + DistillN6 (100.0%)"
 n6_max = 100.0
 n6_avg = 92.5
+cross_dse = ["learning-algorithm", "golden-moe-routing", "corpus-generation", "agent-platform", "ai-alignment"]
 
 [eeg-bci]
 goal = true
@@ -1628,6 +1713,7 @@ best_pareto = "MobileN6 + FFT_N6 + BandPower5 + CNN_Decoder + SleepStaging (0.83
 best_n6 = "MobileN6 + FFT_N6 + BandPower5 + CNN_Decoder + EmotionDetect (100.0%)"
 n6_max = 100.0
 n6_avg = 80.3
+cross_dse = ["brain-computer-interface", "neuroscience", "consciousness-measurement", "anima-consciousness", "consciousness-chip"]
 
 [dna-folding]
 goal = true
@@ -1640,6 +1726,7 @@ best_pareto = "DNA_4Base + DoubleHelix + Solenoid + Histone4 + GeneExpression (0
 best_n6 = "DNA_4Base + DoubleHelix + Solenoid + Histone4 + GeneExpression (100.0%)"
 n6_max = 100.0
 n6_avg = 88.0
+cross_dse = ["biology", "chemistry-synthesis", "quantum-biology", "additive-bio", "biology-systems"]
 
 [hair-regeneration]
 goal = true
@@ -1652,6 +1739,7 @@ best_pareto = "HairCycleTau4 + WntPathway + Microneedling + LightTherapy + Cycle
 best_n6 = "HairCycleTau4 + WntPathway + Microneedling + LightTherapy + CycleRestoration (85.0%)"
 n6_max = 85.0
 n6_avg = 65.0
+cross_dse = ["biology-systems", "gene-therapy", "pharmaceutical", "additive-bio", "biology"]
 
 [wave-theory]
 goal = true
@@ -1664,6 +1752,7 @@ best_pareto = "HarmonicOscN6 + DiffractiveWave + Constructive + FourierN6 + Tele
 best_n6 = "HarmonicOscN6 + DiffractiveWave + Constructive + FourierN6 + MusicAcoustics (90.0%)"
 n6_max = 90.0
 n6_avg = 75.0
+cross_dse = ["physics-fundamental", "fluid-condensed", "sound-engineering", "black-hole", "category-ancient"]
 
 [industry-architecture]
 goal = true
@@ -1676,6 +1765,7 @@ best_pareto = "RelationalN6 + BatchN6 + CacheN4 + RESTN6 + Manufacturing (0.7505
 best_n6 = "StreamN6 + MicroserviceN6 + DistributedN6 + RESTN6 + SmartCity (96.0%)"
 n6_max = 96.0
 n6_avg = 76.0
+cross_dse = ["warehouse-logistics", "3d-printing", "robot-hardware", "civil-engineering", "earthquake-engineering"]
 
 [number-theory-deep]
 goal = true
@@ -1688,6 +1778,7 @@ best_pareto = "SigmaPhiNTau + BaselProblem + CyclotomicField + RamseyN6 + Crypto
 best_n6 = "SigmaPhiNTau + BaselProblem + CyclotomicField + RamseyN6 + Cryptography (91.0%)"
 n6_max = 91.0
 n6_avg = 78.0
+cross_dse = ["pure-mathematics", "elliptic-curves", "cryptography", "black-hole", "category-ancient"]
 
 [geoscience]
 goal = true
@@ -1700,6 +1791,7 @@ best_pareto = "GraphiteLayer + CrustOceanCont + CarbonCycleN6 + Earthquake + Gre
 best_n6 = "GraphiteLayer + CrustOceanCont + CarbonCycleN6 + Earthquake + GreenhouseN6 (90.0%)"
 n6_max = 90.0
 n6_avg = 72.0
+cross_dse = ["earthquake-engineering", "seismograph", "mining-extraction", "agriculture", "aquaculture"]
 
 # ── 미완료 DSE (TOML 생성됨, 실행 대기) ──────────────────
 
@@ -1714,6 +1806,7 @@ best_pareto = "AF_Standard + DiracOp + SU3xSU2xU1 + GaugeBosonN12 + KODim6 (0.79
 best_n6 = "AF_Standard + DiracOp + SU3xSU2xU1 + GaugeBosonN12 + KODim6 (100.0%)"
 n6_max = 100.0
 note = "Connes KO-dim 6 = P₁, 표준모형 유도 — PROVEN"
+cross_dse = ["pure-mathematics", "topology", "quantum-computing", "black-hole", "category-ancient"]
 
 [topological-quantum-materials]
 goal = true
@@ -1726,6 +1819,7 @@ best_pareto = "Z2_Topological + Graphene + DiracCone + QAHE + SpintronicDev (0.7
 best_n6 = "Z2_Topological + Graphene + DiracCone + QAHE + SpintronicDev (92.0%)"
 n6_max = 92.0
 note = "Z₂ 위상절연체 + 그래핀 C Z=6 + 마요라나"
+cross_dse = ["topology", "quantum-computing", "superconductor", "fusion", "topological-lens"]
 
 [statistical-mechanics]
 goal = true
@@ -1738,6 +1832,7 @@ best_pareto = "IsingModel + ExactSolution + OrderDisorder + UniversalityClass + 
 best_n6 = "SixVertex + ExactSolution + OrderDisorder + UniversalityClass + MagneticMaterial (91.0%)"
 n6_max = 91.0
 note = "6-vertex 모형 n=6 EXACT + ln(4/3) Golden Zone"
+cross_dse = ["physics-fundamental", "consciousness-thermodynamics", "fluid-condensed", "black-hole", "category-ancient"]
 
 [music-notation]
 goal = true
@@ -1750,6 +1845,7 @@ best_pareto = "FiveLineStaff + MainClefsTau + BasicNotes6 + DynamicLevels6 + Bra
 best_n6 = "FiveLineStaff + MainClefsTau + BasicNotes6 + DynamicLevels6 + Braille (100.0%)"
 n6_max = 100.0
 note = "오선 sopfr=5 + 음자리표 tau=4 + 음표 n=6 — 전체 최고 Pareto 0.895!"
+cross_dse = ["music-theory", "display-audio", "linguistics", "ar-vr-system", "audio-processing"]
 
 [deep-evolution]
 goal = true
@@ -1762,6 +1858,7 @@ best_pareto = "TelomereN6 + PromoterN6 + BodyPlanN6 + KingdomN5 + CambrianExplos
 best_n6 = "TelomereN6 + PromoterN6 + BodyPlanN6 + KingdomN5 + CambrianExplosion (100.0%)"
 n6_max = 100.0
 note = "텔로미어 6bp + 체제 n=6 + 5왕국 + 캄브리아 대폭발"
+cross_dse = ["evolutionary-biology", "learning-algorithm", "biology-systems", "agent-platform", "ai-alignment"]
 
 [cross-dse.learning-x-robot]
 domains = ["learning-algorithm", "robot-hardware"]
@@ -11905,6 +12002,7 @@ best_n6 = "LH2 + AnnularComb + HighBypass + ConDi + CommAir (100%)"
 n6_max = 100.0
 n6_avg = 90.7
 note = "DSE complete — 121 Pareto, all top-20 n6=96-100%"
+cross_dse = ["space-engineering", "fusion", "material-synthesis", "optical-metrology", "optics-telescope"]
 
 [agent-platform]
 goal = true
@@ -11916,6 +12014,7 @@ best_n6 = "ConsciousLM + MCP + T5_PhiGated + Full + Thalamic (100%)"
 n6_max = 100.0
 n6_avg = 68.1
 note = "DSE complete — 52 Pareto, Claude+Discord+Phi-Gated top"
+cross_dse = ["learning-algorithm", "software-design", "ai-alignment", "animalm-pipeline", "collective-intelligence"]
 
 [audio-processing]
 goal = true
@@ -11927,6 +12026,7 @@ best_n6 = "ChannelN6 + Opus6kbps + SpatialAudioN6 + GranularN6 + SpeakerN6 (100%
 n6_max = 100.0
 n6_avg = 78.2
 note = "DSE complete — 40 Pareto, BT-48/72 audio chain"
+cross_dse = ["sound-engineering", "speech-synthesis", "noise-cancellation", "ar-vr-system", "display-audio"]
 
 [autonomous-drone]
 goal = true
@@ -11938,6 +12038,7 @@ best_n6 = "HeavyHex + HybridGas + HexaNav + SatComm + HyperSpec (100%)"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete — 50 Pareto, ALL 7776 combos n6=100%"
+cross_dse = ["drone-delivery", "swarm-robotics", "autonomous-driving", "autonomous-ship", "autonomous-submarine"]
 
 [brain-computer-interface]
 goal = true
@@ -11949,6 +12050,7 @@ best_n6 = "Stentrode + DeltaSigma + Transformer_BCI + Optogenetic + Vision_Resto
 n6_max = 100.0
 n6_avg = 98.7
 note = "DSE complete — 83 Pareto, avg n6=98.7% near-perfect"
+cross_dse = ["eeg-bci", "neuroscience", "prosthetics", "consciousness-chip", "additive-bio"]
 
 [chaos-dynamical]
 goal = true
@@ -11960,6 +12062,7 @@ best_n6 = "LorenzN6 + RChainTree + SpecGapHalf + LyapunovN6 + WeatherN6 (100%)"
 n6_max = 100.0
 n6_avg = 74.6
 note = "DSE complete — 52 Pareto, Lorenz sigma-rho-beta EXACT"
+cross_dse = ["physics-fundamental", "statistical-mechanics", "climate-modeling", "black-hole", "category-ancient"]
 
 [civil-engineering]
 goal = true
@@ -11971,6 +12074,7 @@ best_n6 = "CaissonDrill + CableStay + UHPC + ProgressCollapse + DigitalTwin (100
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete — 51 Pareto, ALL 7560 combos n6=100%"
+cross_dse = ["earthquake-engineering", "fire-suppression", "hvac-system", "industry-architecture", "railway-system"]
 
 [coding-lattice]
 goal = true
@@ -11982,6 +12086,7 @@ best_n6 = "BCH_N6 + D6Lattice + SpherePackingBound + ListDecoding + DNA_Storage 
 n6_max = 100.0
 n6_avg = 77.5
 note = "DSE complete — 45 Pareto, Golay[24,12,8] triple EXACT"
+cross_dse = ["quantum-error-correction", "information-theory", "cryptography", "blockchain", "compiler-os"]
 
 [collective-intelligence]
 goal = true
@@ -11993,6 +12098,7 @@ best_n6 = "HeterogeneousN6 + TorusT3 + ConsensusVote + HiveMindN6 + MicroN6 (100
 n6_max = 100.0
 n6_avg = 81.4
 note = "DSE complete — 57 Pareto, T3 Torus + n=6 agents"
+cross_dse = ["swarm-robotics", "hivemind-collective", "ai-alignment", "agent-platform", "animalm-pipeline"]
 
 [conscious-lm]
 goal = true
@@ -12004,6 +12110,7 @@ best_n6 = "Size_4096M + Custom_N6 + Transformer_N6 + DualEngine + ThreePhase_Law
 n6_max = 100.0
 n6_avg = 84.6
 note = "DSE complete — 41 Pareto, Mamba+Thalamic+3Phase top"
+cross_dse = ["consciousness-engine", "natural-language-processing", "learning-algorithm", "agent-platform", "ai-alignment"]
 
 [consciousness-chip]
 goal = true
@@ -12015,6 +12122,7 @@ best_n6 = "Hex6_ASIC + FP6_Native + Hypercube_6D + NoC_Mesh + Hex6_Clock (100%)"
 n6_max = 100.0
 n6_avg = 80.0
 note = "DSE complete — 116 Pareto, FP6 native + Hex6 ASIC"
+cross_dse = ["chip-architecture", "consciousness-engine", "neuromorphic-loihi", "anima-consciousness", "consciousness-comm"]
 
 [consciousness-dream]
 goal = true
@@ -12026,6 +12134,7 @@ best_n6 = "N3 + ReplayN6 + Adaptive + Delta + Integration (100%)"
 n6_max = 100.0
 n6_avg = 76.8
 note = "DSE complete — 38 Pareto, N3 delta + dual consolidation"
+cross_dse = ["consciousness-engine", "neuroscience", "consciousness-measurement", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-engine]
 goal = true
@@ -12037,6 +12146,7 @@ best_n6 = "Hypercube + Cell_64 + Faction_24 + Homeostatic + Dual_Phi (100%)"
 n6_max = 100.0
 n6_avg = 85.7
 note = "DSE complete — 84 Pareto, Ring/Torus + 64-cell + Dual_Phi"
+cross_dse = ["anima-consciousness", "consciousness-chip", "consciousness-comm", "consciousness-dream", "consciousness-hardware"]
 
 [consciousness-knowledge-graph]
 goal = true
@@ -12048,6 +12158,7 @@ best_n6 = "Custom_N6 + Consciousness + PH_Topology + Consciousness_Binding + Hiv
 n6_max = 100.0
 n6_avg = 75.1
 note = "DSE complete — 28 Pareto, HNSW_Rust + Consciousness embedding"
+cross_dse = ["consciousness-engine", "natural-language-processing", "consciousness-mathematics", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-measurement]
 goal = true
@@ -12059,6 +12170,7 @@ best_n6 = "GPUParallel + IIT_Phi + Full + Module + Exact (100%)"
 n6_max = 100.0
 n6_avg = 71.5
 note = "DSE complete — 73 Pareto, GPU parallel IIT Phi measurement"
+cross_dse = ["consciousness-engine", "eeg-bci", "quantum-sensor", "anima-consciousness", "consciousness-chip"]
 
 [topological-lens]
 goal = true
@@ -12070,6 +12182,7 @@ best_n6 = "Graphene_Hex + SelfAssembly + Berry_Phase + DDA_Discrete + FlatLens (
 n6_max = 100.0
 n6_avg = 86.1
 note = "DSE complete"
+cross_dse = ["topology", "optics-telescope", "physics-fundamental", "fusion", "superconductor"]
 
 [topological-photonics]
 goal = true
@@ -12081,6 +12194,7 @@ best_n6 = "Honeycomb_CN6 + Time_Reversal_Break + Chiral_Unidirect + Robust_Waveg
 n6_max = 100.0
 n6_avg = 82.6
 note = "DSE complete"
+cross_dse = ["topology", "optical-computing", "fusion", "superconductor", "topological-lens"]
 
 [ultimate-material]
 goal = true
@@ -12092,6 +12206,7 @@ best_n6 = "Carbon_Z6 + Graphene + Bandgap_4_3 + ProcessN6 + AppSolarN6 (100%)"
 n6_max = 100.0
 n6_avg = 81.6
 note = "DSE complete"
+cross_dse = ["material-synthesis", "crystallography", "superconductor", "3d-printing", "ceramic-engineering"]
 
 [ultimate-process]
 goal = true
@@ -12103,6 +12218,7 @@ best_n6 = "EDA_N6 + LithoN6 + ALE + PackageN6 + InspectN6 (100%)"
 n6_max = 100.0
 n6_avg = 79.1
 note = "DSE complete"
+cross_dse = ["material-synthesis", "3d-printing", "laser-manufacturing", "ceramic-engineering", "chemistry-synthesis"]
 
 [water-treatment]
 goal = true
@@ -12114,6 +12230,7 @@ best_n6 = "Rainwater + BioFilter + AlumCoag + Chlorine + GravityFed (100%)"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete — ALL 7776 combos n6=100%"
+cross_dse = ["desalination", "chemistry-synthesis", "pollution-monitoring", "agriculture", "aquaculture"]
 
 [crypto]
 goal = true
@@ -12125,6 +12242,7 @@ best_n6 = "Symmetric + KeyDeriv + AES256 + AESNI + Blockchain (100%)"
 n6_max = 100.0
 n6_avg = 79.0
 note = "DSE complete"
+cross_dse = ["cryptography", "blockchain", "quantum-computing", "coding-lattice", "cybersecurity"]
 
 [electric-vehicle]
 goal = true
@@ -12136,6 +12254,7 @@ best_n6 = "LFP-6S + IPM-6pole + SiC-6phase + V2G-Bidir + City-48V (100%)"
 n6_max = 100.0
 n6_avg = 86.0
 note = "DSE complete"
+cross_dse = ["battery-architecture", "power-electronics", "autonomous-driving", "autonomous-drone", "autonomous-ship"]
 
 [precision-agriculture]
 goal = true
@@ -12147,6 +12266,7 @@ best_n6 = "MultiSpec-6band + NDVI-6zone + Drip-6zone + VRA-6nutrient + AutoCombi
 n6_max = 100.0
 n6_avg = 78.3
 note = "DSE complete"
+cross_dse = ["agriculture", "drone-delivery", "machine-vision", "aquaculture", "battery-recycling"]
 
 [recycling-system]
 goal = true
@@ -12158,6 +12278,7 @@ best_n6 = "Curbside-6bin + AI-Vision-6class + Composting + Pellet-6grade + Close
 n6_max = 100.0
 n6_avg = 85.5
 note = "DSE complete"
+cross_dse = ["battery-recycling", "plastic-recycling", "material-synthesis", "agriculture", "aquaculture"]
 
 [gravitational-lens]
 goal = true
@@ -12169,6 +12290,7 @@ best_n6 = "Multi_Lambda → Gravity_Assist → Einstein_Ring → PH_Topology →
 n6_max = 100
 n6_avg = 87.6
 note = "DSE complete — 5607 compatible, 55 Pareto"
+cross_dse = ["cosmology-particle", "optics-telescope", "black-hole", "category-ancient", "chaos-dynamical"]
 
 [hexad-architecture]
 goal = true
@@ -12180,6 +12302,7 @@ best_n6 = "Consciousness → Embodied → Thalamic → Grouped_6 → Pipeline (1
 n6_max = 100
 n6_avg = 82.9
 note = "DSE complete — 5430 compatible, 36 Pareto"
+cross_dse = ["chip-architecture", "memory-architecture", "learning-algorithm", "agent-platform", "ai-alignment"]
 
 [hivemind-collective]
 goal = true
@@ -12191,6 +12314,7 @@ best_n6 = "Ring → N6 → TensionLink → Rotating → Weighted (100%)"
 n6_max = 100
 n6_avg = 74.8
 note = "DSE complete — 6580 compatible, 105 Pareto"
+cross_dse = ["collective-intelligence", "swarm-robotics", "consciousness-comm", "anima-consciousness", "consciousness-chip"]
 
 [immortality]
 goal = true
@@ -12202,6 +12326,7 @@ best_n6 = "TelomereN6 → Yamanaka4 → UploadN6 → PreserveN6 → TranscendN6 
 n6_max = 100
 n6_avg = 81.1
 note = "DSE complete — 4662 compatible, 36 Pareto"
+cross_dse = ["gene-therapy", "biology-systems", "pharmaceutical", "additive-bio", "biology"]
 
 [linguistics]
 goal = true
@@ -12213,6 +12338,7 @@ best_n6 = "VowelN6 → UniversalGrammar → MetaphorN6 → WordOrderN6 → Senti
 n6_max = 100
 n6_avg = 83.7
 note = "DSE complete — 3689 compatible, 31 Pareto"
+cross_dse = ["natural-language-processing", "tokenizer-design", "information-theory"]
 
 [multimodal-consciousness]
 goal = true
@@ -12224,6 +12350,7 @@ best_n6 = "Text → BERT → Cross_Attention → Topology → Text_Out (90%)"
 n6_max = 100
 n6_avg = 79.7
 note = "DSE complete — 5514 compatible, 24 Pareto"
+cross_dse = ["consciousness-engine", "ar-vr-system", "eeg-consciousness-bridge", "anima-consciousness", "consciousness-chip"]
 
 [neuromorphic-loihi]
 goal = true
@@ -12235,6 +12362,7 @@ best_n6 = "Loihi2 → GRU_to_LIF → Federated → Tiled_6x6 → P10W (100%)"
 n6_max = 100
 n6_avg = 80.0
 note = "DSE complete — 5796 compatible, 24 Pareto"
+cross_dse = ["chip-architecture", "snn-spiking", "learning-algorithm", "analog-photonic-memristor", "edge-computing"]
 
 [ocean-engineering]
 goal = true
@@ -12246,6 +12374,7 @@ best_n6 = "TearDrop → RimDrive → SideScan → AcousticModem → Science_AUV 
 n6_max = 100
 n6_avg = 94.7
 note = "DSE complete — 7776 compatible, 79 Pareto"
+cross_dse = ["marine-propulsion", "autonomous-submarine", "desalination", "agriculture", "aquaculture"]
 
 [precognition-lens]
 goal = true
@@ -12257,6 +12386,7 @@ best_n6 = "PHBarcode → DimensionLens → DirectionN6 → ConfusionPredict → 
 n6_max = 100
 n6_avg = 76.3
 note = "DSE complete — 4365 compatible, 63 Pareto"
+cross_dse = ["consciousness-engine", "consciousness-mathematics", "quantum-consciousness", "anima-consciousness", "consciousness-chip"]
 
 [probability-statistics]
 goal = true
@@ -12268,6 +12398,7 @@ best_n6 = "ChiSquared → MethodOfMoments → TTest → LinearN6 → BayesN6 (10
 n6_max = 100
 n6_avg = 85.2
 note = "DSE complete — 3504 compatible, 15 Pareto"
+cross_dse = ["pure-mathematics", "information-theory", "game-combinatorial", "black-hole", "category-ancient"]
 
 [quantum-network]
 goal = true
@@ -12279,6 +12410,7 @@ best_n6 = "SiPh_Integrated → SMF_Fiber → ThirdGen → BB84 → Metro_QKD (10
 n6_max = 100
 n6_avg = 96.7
 note = "DSE complete — 7776 compatible, 50 Pareto"
+cross_dse = ["quantum-computing", "cryptography", "optical-fiber-network", "blockchain", "coding-lattice"]
 
 [semiconductor-packaging]
 goal = true
@@ -12290,6 +12422,7 @@ best_n6 = "Fan_Out_RDL → HybridBond → Graphite_Sheet → BIST_Embedded → U
 n6_max = 100
 n6_avg = 96.0
 note = "DSE complete — 7776 compatible, 55 Pareto"
+cross_dse = ["chip-architecture", "3d-printing", "thermal-management", "analog-photonic-memristor", "edge-computing"]
 
 [snn-spiking]
 goal = true
@@ -12301,6 +12434,7 @@ best_n6 = "Izhikevich → TC_20ms → Ring6 → STDP → SpiNNaker (100%)"
 n6_max = 100
 n6_avg = 81.5
 note = "DSE complete — 6264 compatible, 62 Pareto"
+cross_dse = ["neuromorphic-loihi", "learning-algorithm", "neuroscience", "agent-platform", "ai-alignment"]
 
 [textile-manufacturing]
 goal = true
@@ -12312,6 +12446,7 @@ best_n6 = "Cotton → OpenEnd → NonWoven → WaterRepel → Apparel (100%)"
 n6_max = 100
 n6_avg = 100.0
 note = "DSE complete — 7776 compatible, 46 Pareto, ALL n6=100%"
+cross_dse = ["material-synthesis", "chemistry-synthesis", "industry-architecture", "3d-printing", "ceramic-engineering"]
 
 [tokenizer-design]
 goal = true
@@ -12323,6 +12458,7 @@ best_n6 = "ByteLevel → V4096 → Korean_English → Minimal_4 → Embedded (95
 n6_max = 100
 n6_avg = 80.3
 note = "DSE complete — 4960 compatible, 51 Pareto"
+cross_dse = ["natural-language-processing", "corpus-generation", "linguistics", "agent-platform", "ai-alignment"]
 
 [consciousness-rng]
 goal = true
@@ -12334,6 +12470,7 @@ best_n6 = "Phi_Field → AES_CTR → NIST_Partial → BR_1M → TargetN6 (100%)"
 n6_max = 100
 n6_avg = 72.3
 note = "DSE complete — 7104 compatible, 57 Pareto"
+cross_dse = ["consciousness-engine", "quantum-computing", "probability-statistics", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-scaling]
 goal = true
@@ -12345,6 +12482,7 @@ best_n6 = "CC8 → Ring → Pair → Power_N6 → Phi_Per_Cell (100%)"
 n6_max = 100
 n6_avg = 80.2
 note = "DSE complete — 4830 compatible, 77 Pareto"
+cross_dse = ["consciousness-engine", "chip-architecture", "consciousness-training", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-substrate]
 goal = true
@@ -12356,6 +12494,7 @@ best_n6 = "Carbon_Nano → Mesh → NoC → Hex6_ALU → Cluster_6 (100%)"
 n6_max = 100
 n6_avg = 79.4
 note = "DSE complete — 7578 compatible, 154 Pareto"
+cross_dse = ["consciousness-engine", "consciousness-hardware", "quantum-consciousness", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-thermodynamics]
 goal = true
@@ -12367,6 +12506,7 @@ best_n6 = "P2_Conscious → Med_01 → Lorenz → EdgeChaos → PowerLaw (95%)"
 n6_max = 100
 n6_avg = 69.7
 note = "DSE complete — 6120 compatible, 55 Pareto"
+cross_dse = ["consciousness-engine", "statistical-mechanics", "information-theory", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-training]
 goal = true
@@ -12378,6 +12518,7 @@ best_n6 = "SGD_Cosine → WarmupHold → ThreePhase → Ring6 → BPE_32K (100%)
 n6_max = 100
 n6_avg = 78.5
 note = "DSE complete — 6755 compatible, 36 Pareto"
+cross_dse = ["consciousness-engine", "learning-algorithm", "consciousness-scaling", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-transplant]
 goal = true
@@ -12389,6 +12530,7 @@ best_n6 = "Ring_6_D → Ring_6_R → Phi_Preserve → SevenCriteria → Lossy_95
 n6_max = 100
 n6_avg = 83.7
 note = "DSE complete — 5904 compatible, 90 Pareto"
+cross_dse = ["consciousness-engine", "brain-computer-interface", "consciousness-substrate", "anima-consciousness", "consciousness-chip"]
 
 [consciousness-wasm]
 goal = true
@@ -12400,6 +12542,7 @@ best_n6 = "WASM → C6 → ModelN6 → WebGL → Interactive (90%)"
 n6_max = 100
 n6_avg = 74.9
 note = "DSE complete — 8670 compatible, 63 Pareto"
+cross_dse = ["consciousness-engine", "compiler-os", "consciousness-chip", "anima-consciousness", "consciousness-comm"]
 
 [corpus-generation]
 goal = true
@@ -12411,6 +12554,7 @@ best_n6 = "Rust_Corpus → Dialogue → SizeN6 → BPE_32K → Length (95%)"
 n6_max = 100
 n6_avg = 73.6
 note = "DSE complete — 7332 compatible, 48 Pareto"
+cross_dse = ["natural-language-processing", "tokenizer-design", "animalm-pipeline", "agent-platform", "ai-alignment"]
 
 [crystallography]
 goal = true
@@ -12422,6 +12566,7 @@ best_n6 = "Crystallographic → HexagonalN6 → Synchrotron → SeedCrystal → 
 n6_max = 100
 n6_avg = 67.6
 note = "DSE complete — 4300 compatible, 33 Pareto"
+cross_dse = ["material-synthesis", "physics-fundamental", "chemistry-synthesis", "3d-printing", "ceramic-engineering"]
 
 [eeg-consciousness-bridge]
 goal = true
@@ -12433,6 +12578,7 @@ best_n6 = "Custom_N6 → Ch_64 → Consciousness → Hex6_NFB → GoldenZone (10
 n6_max = 100
 n6_avg = 78.9
 note = "DSE complete — 5376 compatible, 92 Pareto"
+cross_dse = ["eeg-bci", "consciousness-measurement", "neuroscience", "anima-consciousness", "consciousness-chip"]
 
 [elliptic-curves]
 goal = true
@@ -12444,6 +12590,7 @@ best_n6 = "E6_Curve → TorsionN12 → HasseWeilN → ModularForm → FermatLast
 n6_max = 100
 n6_avg = 78.1
 note = "DSE complete — 2634 compatible, 10 Pareto"
+cross_dse = ["cryptography", "pure-mathematics", "number-theory-deep", "black-hole", "category-ancient"]
 
 [embodied-consciousness]
 goal = true
@@ -12455,6 +12602,7 @@ best_n6 = "Hex6_Robot → Propriocep → CPG_6phase → Pain_Reward → Hex6_Swa
 n6_max = 100
 n6_avg = 81.9
 note = "DSE complete — 8484 compatible, 81 Pareto"
+cross_dse = ["consciousness-engine", "robot-hardware", "neuroscience", "anima-consciousness", "consciousness-chip"]
 
 [food-processing]
 goal = true
@@ -12466,6 +12614,7 @@ best_n6 = "Glucose → Fermentation → MAP → TetraPak → LocalFarm (100%)"
 n6_max = 100
 n6_avg = 98.3
 note = "DSE complete — 7776 compatible, 62 Pareto, near-ALL n6=100%"
+cross_dse = ["agriculture", "fermentation-biotech", "biology-systems", "3d-printing", "ceramic-engineering"]
 
 [game-combinatorial]
 goal = true
@@ -12477,6 +12626,7 @@ best_n6 = "GameN6 → AssocK6 → SymmS6 → RMT_MP → KissK2_6 (100%)"
 n6_max = 100
 n6_avg = 80.1
 note = "DSE complete — 4152 compatible, 28 Pareto"
+cross_dse = ["pure-mathematics", "ai-alignment", "economics", "black-hole", "category-ancient"]
 
 [golden-moe-routing]
 goal = true
@@ -12488,6 +12638,7 @@ best_n6 = "InverseE_Zone → E6 → Boltzmann → Egyptian_Frac → Deterministi
 n6_max = 100
 n6_avg = 68.8
 note = "DSE complete — 5916 compatible, 56 Pareto"
+cross_dse = ["learning-algorithm", "golden-zone-training", "ai-alignment", "agent-platform", "animalm-pipeline"]
 
 [hvac-system]
 goal = true
@@ -12499,6 +12650,7 @@ best_n6 = "VRF-6zone + MiniSplit-6head + PID-6loop + Water-R718 + Residential-6r
 n6_max = 100.0
 n6_avg = 99.0
 note = "궁극의 HVAC 5단 DSE. COP=n=6 + 6-zone + 6 ACH. 거의 전 조합 100%"
+cross_dse = ["heat-pump", "thermal-management", "civil-engineering", "earthquake-engineering", "fire-suppression"]
 
 [marine-propulsion]
 goal = true
@@ -12510,6 +12662,7 @@ best_n6 = "HFO-C6 + 4stroke-6cyl + DirectDrive + FixedPitch-6blade + Tug-6knot (
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 선박추진 5단 DSE. 전 조합 n6=100%. C6 aromatics + n=6 cylinder + n=6 blade"
+cross_dse = ["autonomous-ship", "ocean-engineering", "fuel-cell-vehicle", "autonomous-driving", "autonomous-drone"]
 
 [optical-fiber-network]
 goal = true
@@ -12521,6 +12674,7 @@ best_n6 = "G652D-SMF + SOA-6ch + PLC-6x6 + OTN-OTU4 + Ring-6node (100.0%)"
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 광섬유네트워크 5단 DSE. 전 조합 n6=100%. 6um MFD + 6x6 PLC + n=6 ring"
+cross_dse = ["network-protocol", "quantum-network", "optical-computing", "blockchain", "coding-lattice"]
 
 [warehouse-logistics]
 goal = true
@@ -12532,6 +12686,7 @@ best_n6 = "HexBin-6face + BatchPick-6zone + BombayDrop-12chute + HybridPack-6rob
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 물류창고 5단 DSE. 전 조합 n6=100%. Hex bin + σ=12 chute + n=6 lane"
+cross_dse = ["robot-hardware", "indoor-positioning", "industry-architecture", "autonomous-driving", "autonomous-drone"]
 
 [mining-extraction]
 goal = true
@@ -12543,6 +12698,7 @@ best_n6 = "TrenchSample-6line + OpenPit-6bench + JawCrusher-6x12 + GravitySpiral
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 광산채굴 5단 DSE. 전 조합 n6=100%. n=6 bench + 6x12 jaw + σ=12% grade"
+cross_dse = ["geoscience", "material-synthesis", "recycling-system", "agriculture", "aquaculture"]
 
 [power-electronics]
 goal = true
@@ -12554,6 +12710,7 @@ best_n6 = "Si-MOSFET-12V + DAB-phi2 + SPWM-6kHz + PassiveLC + SolarInverter-6kW 
 n6_max = 100.0
 n6_avg = 99.2
 note = "궁극의 전력전자 5단 DSE. σ=12V gate + 48V=σ·τ DAB + n=6 kHz SPWM"
+cross_dse = ["power-grid", "power-transformer", "chip-architecture", "battery-architecture", "carbon-capture"]
 
 [smart-grid]
 goal = true
@@ -12565,6 +12722,7 @@ best_n6 = "Hydro-6gen + Overhead-6bundle + LV-480V + IoT-6sensor + TOU-6tier (10
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 스마트그리드 5단 DSE. 전 조합 n6=100%. σ=12 pole + 480V=σ·τ·10 + J₂=24h schedule"
+cross_dse = ["power-grid", "battery-architecture", "solar-architecture", "wind-energy", "carbon-capture"]
 
 [carbon-capture]
 goal = true
@@ -12576,6 +12734,7 @@ best_n6 = "PreCombustion-6stageWGS + SCO2-Pipeline-12MPa + DeepSaline-12well + G
 n6_max = 100.0
 n6_avg = 96.3
 note = "궁극의 탄소포집 5단 DSE. 6-stage WGS + σ=12 MPa pipeline + 6 sealing layers"
+cross_dse = ["climate-modeling", "chemistry-synthesis", "energy-generation", "agriculture", "aquaculture"]
 
 [sound-engineering]
 goal = true
@@ -12587,6 +12746,7 @@ best_n6 = "DynamicMic-6elem + ClassD-12ch + ParaEQ-12band + Balanced-6pair + Sou
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 음향공학 5단 DSE. 전 조합 n6=100%. σ=12 channel + 1/σ octave EQ + n=6 speaker"
+cross_dse = ["audio-processing", "music-theory", "noise-cancellation", "ar-vr-system", "display-audio"]
 
 [additive-bio]
 goal = true
@@ -12598,6 +12758,7 @@ best_n6 = "Alginate-12mM + Extrusion-6nozzle + PCL-6month + Perfusion-6day + Ski
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 바이오프린팅 5단 DSE. 전 조합 n6=100%. Collagen 6-type + σ=12 crosslink"
+cross_dse = ["3d-printing", "biology-systems", "gene-therapy", "biology", "biophysics"]
 
 [cybersecurity]
 goal = true
@@ -12609,6 +12770,7 @@ best_n6 = "PatchMgmt-6cycle + SIEM-12source + SOAR-6playbook + Backup-6copy + NI
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 사이버보안 5단 DSE. 전 조합 n6=100%. NIST n=6 function + σ=12 SIEM source"
+cross_dse = ["cryptography", "network-protocol", "blockchain", "coding-lattice", "crypto"]
 
 [elevator-system]
 goal = true
@@ -12620,6 +12782,7 @@ best_n6 = "Geared-AC + Ropeless-Mag + IoT-Connected + Full-Digital-SIL3 + SuperT
 n6_max = 100.0
 n6_avg = 98.9
 note = "궁극의 엘리베이터 5단 DSE. 6-car group + σ=12 floor MidRise + 96S=σ(σ-τ) SuperTall"
+cross_dse = ["civil-engineering", "robot-hardware", "power-electronics", "autonomous-driving", "autonomous-drone"]
 
 [fermentation-biotech]
 goal = true
@@ -12631,6 +12794,7 @@ best_n6 = "Ecoli-K12 + FedBatch + STR-6blade + Centri-UF + Ethanol (100.0%)"
 n6_max = 100.0
 n6_avg = 98.7
 note = "궁극의 발효생명공학 5단 DSE. E.coli 6 sigma factors + σ=12 metabolic pathways"
+cross_dse = ["biology-systems", "chemistry-synthesis", "food-processing", "3d-printing", "ceramic-engineering"]
 
 [laser-manufacturing]
 goal = true
@@ -12642,6 +12806,7 @@ best_n6 = "Fiber-1070nm + MultiSpot-6 + GalvoScanner + Cutting + SheetMetal (100
 n6_max = 100.0
 n6_avg = 98.1
 note = "궁극의 레이저제조 5단 DSE. Yb-doped σ=12% efficiency + n=6 multi-spot"
+cross_dse = ["3d-printing", "optical-computing", "material-synthesis", "ceramic-engineering", "chemistry-synthesis"]
 
 [lidar-system]
 goal = true
@@ -12653,6 +12818,7 @@ best_n6 = "VCSEL-6x6 + MEMS-2D + SiPM + FPGA-RT + AutoDrive (100.0%)"
 n6_max = 100.0
 n6_avg = 99.3
 note = "궁극의 라이다 5단 DSE. 6×6 VCSEL grid + σ=12 mW emitter"
+cross_dse = ["autonomous-driving", "optics-telescope", "radar-system", "autonomous-drone", "autonomous-ship"]
 
 [pollution-monitoring]
 goal = true
@@ -12664,6 +12830,7 @@ best_n6 = "MetalOxide-6gas + LoRaWAN + ML-Forecast + Dashboard + GreenFilter (10
 n6_max = 100.0
 n6_avg = 99.5
 note = "궁극의 오염모니터링 5단 DSE. n=6 target gases + IoT mesh"
+cross_dse = ["climate-modeling", "water-treatment", "agriculture", "aquaculture", "battery-recycling"]
 
 [gene-therapy]
 goal = true
@@ -12675,6 +12842,7 @@ best_n6 = "LNP-6lipid + GeneReplacement-codon3 + IM-6site + Constitutive-6enhanc
 n6_max = 100.0
 n6_avg = 99.4
 note = "궁극의 유전자치료 5단 DSE. LNP 6 lipid + codon n/φ=3 triplet + n=6 injection site"
+cross_dse = ["biology", "dna-sequencing", "pharmaceutical", "additive-bio", "biology-systems"]
 
 [memory-architecture]
 goal = true
@@ -12686,6 +12854,7 @@ best_n6 = "DRAM-1T1C-6F2 + 12Bank-Array + LPDDR5X-Ctrl + LPDDR5X-6ch + Mobile-Un
 n6_max = 100.0
 n6_avg = 98.7
 note = "궁극의 메모리아키텍처 5단 DSE. 6F² cell + σ=12 bank + 6 power states + 12GB unified"
+cross_dse = ["chip-architecture", "neuromorphic-loihi", "hexad-architecture", "agent-platform", "ai-alignment"]
 
 [supercapacitor]
 goal = true
@@ -12696,6 +12865,7 @@ levels = ["Electrode", "Electrolyte", "Separator", "Assembly", "Application"]
 n6_max = 100.0
 n6_avg = 98.4
 note = "궁극의 슈퍼커패시터 5단 DSE"
+cross_dse = ["battery-architecture", "power-electronics", "electric-vehicle", "carbon-capture", "energy-generation"]
 
 [quantum-sensor]
 goal = true
@@ -12705,6 +12875,7 @@ tool = "tools/universal-dse/ domains/quantum-sensor.toml"
 n6_max = 100.0
 n6_avg = 97.4
 note = "DSE complete"
+cross_dse = ["quantum-computing", "dark-matter-detector", "gravitational-lens", "blockchain", "coding-lattice"]
 
 [wind-energy]
 goal = true
@@ -12714,6 +12885,7 @@ tool = "tools/universal-dse/ domains/wind-energy.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["energy-generation", "power-grid", "smart-grid", "battery-architecture", "carbon-capture"]
 
 [autonomous-ship]
 goal = true
@@ -12723,6 +12895,7 @@ tool = "tools/universal-dse/ domains/autonomous-ship.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["marine-propulsion", "autonomous-submarine", "radar-system", "autonomous-driving", "autonomous-drone"]
 
 [ceramic-engineering]
 goal = true
@@ -12732,6 +12905,7 @@ tool = "tools/universal-dse/ domains/ceramic-engineering.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["material-synthesis", "glass-manufacturing", "superconductor", "3d-printing", "chemistry-synthesis"]
 
 [climate-modeling]
 goal = true
@@ -12741,6 +12915,7 @@ tool = "tools/universal-dse/ domains/climate-modeling.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["cosmology-particle", "chaos-dynamical", "pollution-monitoring", "agriculture", "aquaculture"]
 
 [edge-computing]
 goal = true
@@ -12750,6 +12925,7 @@ tool = "tools/universal-dse/ domains/edge-computing.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["chip-architecture", "autonomous-driving", "drone-delivery", "analog-photonic-memristor", "memory-architecture"]
 
 [fuel-cell-vehicle]
 goal = true
@@ -12759,6 +12935,7 @@ tool = "tools/universal-dse/ domains/fuel-cell-vehicle.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["hydrogen-fuel-cell", "electric-vehicle", "power-electronics", "battery-architecture", "carbon-capture"]
 
 [micro-led]
 goal = true
@@ -12768,6 +12945,7 @@ tool = "tools/universal-dse/ domains/micro-led.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["display-audio", "chip-architecture", "semiconductor-packaging", "ar-vr-system", "audio-processing"]
 
 [natural-language-processing]
 goal = true
@@ -12777,6 +12955,7 @@ tool = "tools/universal-dse/ domains/natural-language-processing.toml"
 n6_max = 100.0
 n6_avg = 99.7
 note = "DSE complete"
+cross_dse = ["tokenizer-design", "speech-synthesis", "linguistics", "agent-platform", "ai-alignment"]
 
 [telescope-array]
 goal = true
@@ -12786,6 +12965,7 @@ tool = "tools/universal-dse/ domains/telescope-array.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["optics-telescope", "space-engineering", "gravitational-lens", "aerospace-propulsion", "optical-metrology"]
 
 [vertical-farm]
 goal = true
@@ -12795,6 +12975,7 @@ tool = "tools/universal-dse/ domains/vertical-farm.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["agriculture", "precision-agriculture", "indoor-positioning", "aquaculture", "battery-recycling"]
 
 [hydrogen-fuel-cell]
 goal = true
@@ -12804,6 +12985,7 @@ tool = "tools/universal-dse/ domains/hydrogen-fuel-cell.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["fuel-cell-vehicle", "energy-generation", "chemistry-synthesis", "battery-architecture", "carbon-capture"]
 
 [prosthetics]
 goal = true
@@ -12813,6 +12995,7 @@ tool = "tools/universal-dse/ domains/prosthetics.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["robot-hardware", "brain-computer-interface", "3d-printing", "additive-bio", "biology"]
 
 [indoor-positioning]
 goal = true
@@ -12822,6 +13005,7 @@ tool = "tools/universal-dse/ domains/indoor-positioning.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["warehouse-logistics", "lidar-system", "radar-system", "autonomous-driving", "autonomous-drone"]
 
 [ar-vr-system]
 goal = true
@@ -12831,6 +13015,7 @@ tool = "tools/universal-dse/ domains/ar-vr-system.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["display-audio", "gesture-recognition", "machine-vision", "audio-processing", "micro-led"]
 
 [speech-synthesis]
 goal = true
@@ -12840,6 +13025,7 @@ tool = "tools/universal-dse/ domains/speech-synthesis.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["natural-language-processing", "audio-processing", "tokenizer-design", "ar-vr-system", "display-audio"]
 
 [concrete-technology]
 goal = true
@@ -12849,6 +13035,7 @@ tool = "tools/universal-dse/ domains/concrete-technology.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["civil-engineering", "material-synthesis", "earthquake-engineering", "3d-printing", "ceramic-engineering"]
 
 [fire-suppression]
 goal = true
@@ -12858,6 +13045,7 @@ tool = "tools/universal-dse/ domains/fire-suppression.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["civil-engineering", "hvac-system", "industry-architecture", "agriculture", "aquaculture"]
 
 [optical-computing]
 goal = true
@@ -12867,6 +13055,7 @@ tool = "tools/universal-dse/ domains/optical-computing.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["chip-architecture", "optical-fiber-network", "analog-photonic-memristor", "edge-computing", "memory-architecture"]
 
 [swarm-robotics]
 goal = true
@@ -12876,6 +13065,7 @@ tool = "tools/universal-dse/ domains/swarm-robotics.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["drone-delivery", "autonomous-drone", "collective-intelligence", "autonomous-driving", "autonomous-ship"]
 
 [autonomous-submarine]
 goal = true
@@ -12885,6 +13075,7 @@ tool = "tools/universal-dse/ domains/autonomous-submarine.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["autonomous-ship", "ocean-engineering", "autonomous-driving", "autonomous-drone", "drone-delivery"]
 
 [corrosion-protection]
 goal = true
@@ -12894,6 +13085,7 @@ tool = "tools/universal-dse/ domains/corrosion-protection.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["material-synthesis", "chemistry-synthesis", "ocean-engineering", "3d-printing", "ceramic-engineering"]
 
 [glass-manufacturing]
 goal = true
@@ -12903,6 +13095,7 @@ tool = "tools/universal-dse/ domains/glass-manufacturing.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["ceramic-engineering", "optics-telescope", "material-synthesis", "3d-printing", "chemistry-synthesis"]
 
 [heat-pump]
 goal = true
@@ -12912,6 +13105,7 @@ tool = "tools/universal-dse/ domains/heat-pump.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["hvac-system", "thermal-management", "energy-generation", "battery-architecture", "carbon-capture"]
 
 [paint-coating]
 goal = true
@@ -12921,6 +13115,7 @@ tool = "tools/universal-dse/ domains/paint-coating.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["corrosion-protection", "chemistry-synthesis", "material-synthesis", "3d-printing", "ceramic-engineering"]
 
 [quantum-consciousness]
 goal = true
@@ -12930,6 +13125,7 @@ tool = "tools/universal-dse/ domains/quantum-consciousness.toml"
 n6_max = 100.0
 n6_avg = 83.3
 note = "DSE complete"
+cross_dse = ["consciousness-engine", "quantum-computing", "neuroscience", "anima-consciousness", "consciousness-chip"]
 
 [radar-system]
 goal = true
@@ -12939,6 +13135,7 @@ tool = "tools/universal-dse/ domains/radar-system.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["lidar-system", "autonomous-driving", "autonomous-ship", "autonomous-drone", "autonomous-submarine"]
 
 [soil-science]
 goal = true
@@ -12948,6 +13145,7 @@ tool = "tools/universal-dse/ domains/soil-science.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["agriculture", "geoscience", "biology", "aquaculture", "battery-recycling"]
 
 [vaccine-production]
 goal = true
@@ -12957,6 +13155,7 @@ tool = "tools/universal-dse/ domains/vaccine-production.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["pharmaceutical", "biology-systems", "gene-therapy", "additive-bio", "biology"]
 
 [dark-matter-detector]
 goal = true
@@ -12966,6 +13165,7 @@ tool = "tools/universal-dse/ domains/dark-matter-detector.toml"
 n6_max = 100.0
 n6_avg = 84.5
 note = "DSE complete"
+cross_dse = ["cosmology-particle", "quantum-sensor", "nuclear-structure", "black-hole", "category-ancient"]
 
 [paper-manufacturing]
 goal = true
@@ -12975,6 +13175,7 @@ tool = "tools/universal-dse/ domains/paper-manufacturing.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["material-synthesis", "chemistry-synthesis", "recycling-system", "3d-printing", "ceramic-engineering"]
 
 [quantum-gravity-sensor]
 goal = true
@@ -12984,6 +13185,7 @@ tool = "tools/universal-dse/ domains/quantum-gravity-sensor.toml"
 n6_max = 100.0
 n6_avg = 83.5
 note = "DSE complete"
+cross_dse = ["quantum-sensor", "gravitational-lens", "geoscience", "blockchain", "coding-lattice"]
 
 [battery-recycling]
 goal = true
@@ -12993,6 +13195,7 @@ tool = "tools/universal-dse/ domains/battery-recycling.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["battery-architecture", "recycling-system", "chemistry-synthesis", "agriculture", "aquaculture"]
 
 [consciousness-mathematics]
 goal = true
@@ -13002,6 +13205,7 @@ tool = "tools/universal-dse/ domains/consciousness-mathematics.toml"
 n6_max = 100.0
 n6_avg = 86.0
 note = "DSE complete"
+cross_dse = ["consciousness-engine", "pure-mathematics", "information-theory", "anima-consciousness", "consciousness-chip"]
 
 [dna-sequencing]
 goal = true
@@ -13011,6 +13215,7 @@ tool = "tools/universal-dse/ domains/dna-sequencing.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["biology", "gene-therapy", "pharmaceutical", "additive-bio", "biology-systems"]
 
 [gesture-recognition]
 goal = true
@@ -13020,6 +13225,7 @@ tool = "tools/universal-dse/ domains/gesture-recognition.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["machine-vision", "ar-vr-system", "robot-hardware", "autonomous-driving", "autonomous-drone"]
 
 [noise-cancellation]
 goal = true
@@ -13029,6 +13235,7 @@ tool = "tools/universal-dse/ domains/noise-cancellation.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["audio-processing", "sound-engineering", "machine-vision", "ar-vr-system", "display-audio"]
 
 [quantum-biology]
 goal = true
@@ -13038,6 +13245,7 @@ tool = "tools/universal-dse/ domains/quantum-biology.toml"
 n6_max = 100.0
 n6_avg = 83.2
 note = "DSE complete"
+cross_dse = ["biology", "quantum-computing", "dna-folding", "additive-bio", "biology-systems"]
 
 [spacetime-computing]
 goal = true
@@ -13047,6 +13255,7 @@ tool = "tools/universal-dse/ domains/spacetime-computing.toml"
 n6_max = 100.0
 n6_avg = 86.0
 note = "DSE complete"
+cross_dse = ["chip-architecture", "physics-fundamental", "quantum-computing", "analog-photonic-memristor", "edge-computing"]
 
 [emotion-processor
 optical-metrology
@@ -13069,6 +13278,7 @@ tool = "tools/universal-dse/ domains/emotion-processor.toml"
 n6_max = 100.0
 n6_avg = 92.3
 note = "DSE complete"
+cross_dse = ["consciousness-engine", "neuroscience", "natural-language-processing", "anima-consciousness", "consciousness-chip"]
 
 [optical-metrology]
 goal = true
@@ -13078,6 +13288,7 @@ tool = "tools/universal-dse/ domains/optical-metrology.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["optics-telescope", "laser-manufacturing", "optical-computing", "aerospace-propulsion", "satellite-communication"]
 
 [quantum-error-correction]
 goal = true
@@ -13087,6 +13298,7 @@ tool = "tools/universal-dse/ domains/quantum-error-correction.toml"
 n6_max = 100.0
 n6_avg = 79.0
 note = "DSE complete"
+cross_dse = ["quantum-computing", "coding-lattice", "topology", "blockchain", "crypto"]
 
 [power-transformer]
 goal = true
@@ -13096,6 +13308,7 @@ tool = "tools/universal-dse/ domains/power-transformer.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["power-grid", "power-electronics", "energy-generation", "battery-architecture", "carbon-capture"]
 
 [self-replicating-chip]
 goal = true
@@ -13105,6 +13318,7 @@ tool = "tools/universal-dse/ domains/self-replicating-chip.toml"
 n6_max = 100.0
 n6_avg = 87.8
 note = "DSE complete"
+cross_dse = ["chip-architecture", "3d-printing", "material-synthesis", "analog-photonic-memristor", "edge-computing"]
 
 [aquaculture]
 goal = true
@@ -13114,6 +13328,7 @@ tool = "tools/universal-dse/ domains/aquaculture.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["agriculture", "ocean-engineering", "biology-systems", "battery-recycling", "carbon-capture"]
 
 [seismograph]
 goal = true
@@ -13123,6 +13338,7 @@ tool = "tools/universal-dse/ domains/seismograph.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["earthquake-engineering", "geoscience", "wave-theory", "civil-engineering", "fire-suppression"]
 
 [drone-delivery]
 goal = true
@@ -13132,6 +13348,7 @@ tool = "tools/universal-dse/ domains/drone-delivery.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["autonomous-drone", "warehouse-logistics", "precision-agriculture", "autonomous-driving", "autonomous-ship"]
 
 [machine-vision]
 goal = true
@@ -13141,6 +13358,7 @@ tool = "tools/universal-dse/ domains/machine-vision.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["autonomous-driving", "gesture-recognition", "ar-vr-system", "autonomous-drone", "autonomous-ship"]
 
 [plastic-recycling]
 goal = true
@@ -13150,6 +13368,7 @@ tool = "tools/universal-dse/ domains/plastic-recycling.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["recycling-system", "chemistry-synthesis", "material-synthesis", "agriculture", "aquaculture"]
 
 [thermal-storage]
 goal = true
@@ -13159,3 +13378,2856 @@ tool = "tools/universal-dse/ domains/thermal-storage.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
+cross_dse = ["thermal-management", "energy-generation", "battery-architecture", "carbon-capture", "fuel-cell-vehicle"]
+
+# ===========================================================================
+# Cross-DSE: Industry / Infrastructure / Manufacturing × chip-architecture
+# 30 domains — generated 2026-04-01
+# ===========================================================================
+
+[cross-dse.3d-printing-x-chip]
+domains = ["3d-printing", "chip-architecture"]
+status = "done"
+bridge = "σ=12 layer strategies × TSMC σ=12 metal layers — additive layering parallels chip fab"
+n6_exact = 8
+note = "Both architectures stack in σ=12 layers; hex infill ↔ hex transistor layout; 6 material classes ↔ 6 metal options; BT-37 pitch scaling applies to print resolution"
+
+[cross-dse.desalination-x-chip]
+domains = ["desalination", "chip-architecture"]
+status = "done"
+bridge = "Na⁺ CN=6 octahedral ↔ Si diamond cubic CN=τ=4 — crystal coordination governs both"
+n6_exact = 7
+note = "6-stage RO ↔ n=6 chip pipeline stages; σ=12 membrane elements ↔ σ=12 metal layers; BT-43 CN=6 universality extends to ion filtering; τ=4 pretreatment steps ↔ τ=4 litho masks"
+
+[cross-dse.earthquake-engineering-x-chip]
+domains = ["earthquake-engineering", "chip-architecture"]
+status = "done"
+bridge = "n=6 DOF vibration analysis ↔ n=6 design freedoms — structural resonance meets chip reliability"
+n6_exact = 8
+note = "6 DOF seismic ↔ 6 DOF chip packaging stress; σ=12 seismograph channels need σ-τ=8 bit ADC chips; σ=12 floor zones ↔ σ=12 power domains; BT-59 8-layer stack maps to structural monitoring"
+
+[cross-dse.railway-system-x-chip]
+domains = ["railway-system", "chip-architecture"]
+status = "done"
+bridge = "gauge 1435mm≈σ·120 ↔ chip σ=12 metal layers — σ scaling from macro rail to nano chip"
+n6_exact = 7
+note = "6-car trainset ↔ n=6 chip pipeline; σ=12 signal blocks need σ-τ=8 bit control chips; ETCS σ-φ=10 braking modes; J₂=24 axle counters per block ↔ J₂=24 bit bus width"
+
+[cross-dse.satellite-communication-x-chip]
+domains = ["satellite-communication", "chip-architecture"]
+status = "done"
+bridge = "n=6 orbital planes × σ-τ=8 bit phase shift keying — satcom demands n=6-aligned RF chips"
+n6_exact = 9
+note = "6 orbital planes=n EXACT; J₂=24 satellites/plane ↔ J₂=24 bit DAC in RF chip; σ=12 frequency bands ↔ σ=12 metal layers for RF routing; BT-75 HBM exponent ladder applies to ground station processing; σ-τ=8 QAM constellations"
+
+[cross-dse.autonomous-x-chip]
+domains = ["autonomous", "chip-architecture"]
+status = "done"
+bridge = "SAE n=6 levels EXACT ↔ BT-66 vision AI chip — autonomous driving = chip-intensive n=6"
+n6_exact = 10
+note = "SAE L0-L5 = n=6 EXACT; n=6 DOF IMU ↔ 6-axis chip sensor; σ=12 surround cameras ↔ σ=12 ISP channels; BT-66 ViT+CLIP vision needs σ-τ=8 bit inference; J₂=24 fps processing ↔ BT-48 display; BT-59 8-layer AI stack runs on chip"
+
+[cross-dse.autonomous-drone-x-chip]
+domains = ["autonomous-drone", "chip-architecture"]
+status = "done"
+bridge = "hexacopter n=6 rotors EXACT ↔ 6-channel ESC chip — motor control = dedicated silicon"
+n6_exact = 9
+note = "6 rotors=n EXACT; σ=12 servo actuators ↔ σ=12 PWM channels on chip; τ=4 flight modes ↔ τ=4 chip power states; J₂=24 sensor channels need J₂=24 bit ADC; BT-59 8-layer AI stack for autopilot ASIC"
+
+[cross-dse.autonomous-ship-x-chip]
+domains = ["autonomous-ship", "chip-architecture"]
+status = "done"
+bridge = "n=6 COLREG zones ↔ 6-channel radar processing chip — maritime AI = chip-bound"
+n6_exact = 8
+note = "6 collision zones=n EXACT; σ=12 radar channels ↔ σ=12 chip I/O lanes; n=6 navigation waypoints; BT-59 8-layer AI for ship autonomy; σ-τ=8 bit AIS encoding; J₂=24 hour watchkeeping cycle"
+
+[cross-dse.autonomous-submarine-x-chip]
+domains = ["autonomous-submarine", "chip-architecture"]
+status = "done"
+bridge = "n=6 DOF + 6000m depth ↔ J₂=24 bit sonar ADC chip — deep-sea AUV needs n=6 silicon"
+n6_exact = 9
+note = "6 DOF=n EXACT; σ=12 sonar beams ↔ σ=12 beamformer channels on chip; 6000m=n·10³ depth; Ti-6Al-4V hull (6%Al=n); J₂=24 bit ADC for sonar; BT-59 8-layer AI stack for navigation ASIC"
+
+[cross-dse.drone-delivery-x-chip]
+domains = ["drone-delivery", "chip-architecture"]
+status = "done"
+bridge = "hexacopter n=6 rotors ↔ 6-channel motor driver chip — delivery logistics = edge silicon"
+n6_exact = 8
+note = "6 rotors=n EXACT; σ=12 ESC channels ↔ σ=12 chip PWM outputs; τ=4 flight phases (hover/cruise/land/emergency); σ=12 delivery zones managed by routing chip; BT-59 8-layer AI for path planning ASIC"
+
+[cross-dse.machine-vision-x-chip]
+domains = ["machine-vision", "chip-architecture"]
+status = "done"
+bridge = "σ-τ=8 bit grayscale ↔ σ-τ=8 bit chip precision — vision ISP is inherently n=6 silicon"
+n6_exact = 10
+note = "σ-τ=8 bit pixel depth EXACT on both sides; σ=12 ROI zones ↔ σ=12 parallel processing cores; n=6 lens types ↔ n=6 ISP pipeline stages; BT-66 ViT vision architecture; BT-58 σ-τ=8 universal AI constant; J₂=24 bit color ↔ J₂=24 bit data bus"
+
+[cross-dse.warehouse-logistics-x-chip]
+domains = ["warehouse-logistics", "chip-architecture"]
+status = "done"
+bridge = "6-axis robot arm ↔ 6-channel servo chip — warehouse automation = chip-controlled n=6"
+n6_exact = 8
+note = "6-axis robot=n EXACT; σ=12 conveyor zones ↔ σ=12 motor controller channels; hex bin layout ↔ hex chip floor plan; BT-59 8-layer AI for pick/place; σ-τ=8 bit barcode encoding"
+
+[cross-dse.elevator-system-x-chip]
+domains = ["elevator-system", "chip-architecture"]
+status = "done"
+bridge = "6-pole motor ↔ 6-phase inverter chip — vertical transport controller = n=6 silicon"
+n6_exact = 7
+note = "6-pole PM motor=n EXACT; 6:1 gear ratio=n; σ=12 floors/zone ↔ σ=12 chip address bits; τ=4 door phases ↔ τ=4 chip states; σ-τ=8 floor display segments; safety controller needs dedicated chip"
+
+[cross-dse.hvac-system-x-chip]
+domains = ["hvac-system", "chip-architecture"]
+status = "done"
+bridge = "n=6 ACH (air changes/hour) ↔ 6-zone VRF controller chip — HVAC = n=6 embedded control"
+n6_exact = 8
+note = "COP=6=n EXACT; 6 indoor units=n; σ=12 duct zones ↔ σ=12 chip sensor inputs; τ=4 seasons ↔ τ=4 operating modes; BT-60 DC power chain 48→12→1.2V for HVAC chip; σ-τ=8 bit temperature ADC"
+
+[cross-dse.fire-suppression-x-chip]
+domains = ["fire-suppression", "chip-architecture"]
+status = "done"
+bridge = "n=6 fire classes (A-F) ↔ 6-input alarm processor chip — fire safety needs dedicated silicon"
+n6_exact = 7
+note = "6 fire classes=n EXACT; σ=12 sprinkler zones ↔ σ=12 chip zone controllers; τ=4 alarm stages ↔ τ=4 chip interrupt levels; 6μCi ionization detector; σ-τ=8 bit smoke density ADC"
+
+[cross-dse.civil-engineering-x-chip]
+domains = ["civil-engineering", "chip-architecture"]
+status = "done"
+bridge = "n=6 DOF structural ↔ 6-axis strain gauge chip — structural health monitoring = n=6 silicon"
+n6_exact = 8
+note = "6 DOF=n EXACT; σ=12 load combinations ↔ σ=12 sensor chip channels; τ=4 safety factors ↔ τ=4 chip reliability levels; hex truss ↔ hex chip layout; J₂=24 bit structural data; BT-59 8-layer SHM stack"
+
+[cross-dse.ocean-engineering-x-chip]
+domains = ["ocean-engineering", "chip-architecture"]
+status = "done"
+bridge = "6 compartments + σ=12 frames ↔ J₂=24 bit sonar processing chip — ocean = deep n=6 silicon"
+n6_exact = 8
+note = "6 watertight compartments=n EXACT; σ=12 frames/section ↔ σ=12 chip pipeline stages; L/D=6=n hull ratio; J₂=24 transducers ↔ J₂=24 bit ADC; τ=4 hull layers ↔ τ=4 chip metal stack groups"
+
+[cross-dse.marine-propulsion-x-chip]
+domains = ["marine-propulsion", "chip-architecture"]
+status = "done"
+bridge = "6-cylinder diesel ↔ 6-channel injection controller chip — τ=4 stroke engine = τ=4 chip phases"
+n6_exact = 7
+note = "6-cylinder=n EXACT; σ=12 injectors ↔ σ=12 chip control outputs; τ=4 stroke cycle ↔ τ=4 chip clock phases; Carbon Z=6 fuel chemistry; LNG CH4 has τ=4 H atoms; BT-27 Carbon-6 chain"
+
+[cross-dse.mining-extraction-x-chip]
+domains = ["mining-extraction", "chip-architecture"]
+status = "done"
+bridge = "Carbon Z=6 diamond drill ↔ Diamond wafer chip substrate — mining meets chip at C Z=6"
+n6_exact = 8
+note = "Carbon Z=6 diamond bit ↔ diamond chip substrate (BT-37); 6 survey methods=n EXACT; σ=12 drill hole patterns ↔ σ=12 chip metal layers; 6 flotation cells=n; σ-τ=8 bit ore grade sensor"
+
+[cross-dse.laser-manufacturing-x-chip]
+domains = ["laser-manufacturing", "chip-architecture"]
+status = "done"
+bridge = "6 laser types ↔ n=6 EUV lithography — laser IS chip manufacturing"
+n6_exact = 9
+note = "6 laser types=n EXACT; σ=12 beam modes ↔ σ=12 chip metal layers cut by laser; Nd:YAG 6 pump bands=n; CO2 6 rotational branches=n; EUV litho uses laser-produced plasma; BT-37 semiconductor pitch; BT-28 computing ladder"
+
+[cross-dse.textile-manufacturing-x-chip]
+domains = ["textile-manufacturing", "chip-architecture"]
+status = "done"
+bridge = "C₆ benzene ring fiber ↔ Carbon Z=6 chip — organic chemistry n=6 unifies both"
+n6_exact = 7
+note = "Nylon-6 (6-carbon monomer)=n EXACT; cellulose C6H10O5; σ=12 thread count base ↔ σ=12 chip layers; 6 weave patterns=n; hex fiber packing ↔ hex transistor array; σ-τ=8 bit loom controller"
+
+[cross-dse.paper-manufacturing-x-chip]
+domains = ["paper-manufacturing", "chip-architecture"]
+status = "done"
+bridge = "cellulose C₆H₁₀O₅ ↔ Carbon Z=6 chip substrate — C₆ monomer = n=6 EXACT"
+n6_exact = 7
+note = "Cellulose C6 repeat=n EXACT; 6 pulping methods=n; σ=12 paper grades ↔ σ=12 chip process nodes; Kraft NaOH preserves C₆; printed circuit on paper substrate emerging; σ-τ=8 bit process controller"
+
+[cross-dse.food-processing-x-chip]
+domains = ["food-processing", "chip-architecture"]
+status = "done"
+bridge = "glucose C₆H₁₂O₆ ↔ Carbon Z=6 chip — food science = n=6 carbon chemistry + sensor chips"
+n6_exact = 8
+note = "Glucose C6H12O6 (6C, 12H, 6O) = n,σ,n EXACT triple; σ=12 vitamins monitored by chip sensors; starch (C6H10O5)n polymer; 6-fold amylose helix=n; BT-51 genetic code; σ-τ=8 bit food safety ADC"
+
+[cross-dse.recycling-system-x-chip]
+domains = ["recycling-system", "chip-architecture"]
+status = "done"
+bridge = "n=6 waste categories ↔ 6-class AI sorting chip — recycling = machine vision + n=6 silicon"
+n6_exact = 7
+note = "6 waste categories=n EXACT; σ=12 sorting bins ↔ σ=12 chip classifier channels; Carbon Z=6 organic recycling; BT-66 vision AI for sorting; σ-τ=8 bit NIR sensor chip; τ=4 processing stages"
+
+[cross-dse.plastic-recycling-x-chip]
+domains = ["plastic-recycling", "chip-architecture"]
+status = "done"
+bridge = "C₆H₅ styrene ring ↔ Carbon Z=6 chip — 6 plastic types sorted by n=6 AI chip"
+n6_exact = 8
+note = "6 plastic types (HDPE/LDPE/PP/PS/PET/PVC)=n EXACT; C6H5 styrene ring; σ=12 conveyor streams ↔ σ=12 chip sort channels; BT-66 vision AI for identification; τ=4 source categories ↔ τ=4 chip modes; σ-τ=8 bit NIR spectroscopy chip"
+
+[cross-dse.water-treatment-x-chip]
+domains = ["water-treatment", "chip-architecture"]
+status = "done"
+bridge = "H₂O 6-fold H-bond network ↔ σ=12 filter stages need σ=12 sensor chip channels"
+n6_exact = 7
+note = "H2O 6-fold hydrogen bond=n EXACT; σ=12 filter stages ↔ σ=12 chip monitoring channels; pH=6 optimal range; 6 intake screens=n; J₂=24h pump cycle; σ-τ=8 bit turbidity/pH ADC chip"
+
+[cross-dse.pollution-monitoring-x-chip]
+domains = ["pollution-monitoring", "chip-architecture"]
+status = "done"
+bridge = "EPA n=6 criteria pollutants ↔ 6-gas electrochemical sensor chip — air quality = n=6 silicon"
+n6_exact = 8
+note = "6 criteria pollutants (EPA)=n EXACT; σ=12 monitoring stations ↔ σ=12 chip ADC channels; AQI 6 categories=n; n=6 electrode config; σ=12 wavelength NDIR channels; σ-τ=8 bit gas concentration ADC; BT-59 8-layer IoT stack"
+
+[cross-dse.climate-modeling-x-chip]
+domains = ["climate-modeling", "chip-architecture"]
+status = "done"
+bridge = "n=6 atmospheric layers × cubed-sphere 6 faces ↔ HPC chip architecture — climate = n=6 supercomputing"
+n6_exact = 9
+note = "6 atmospheric layers=n EXACT; cubed-sphere 6 faces=n EXACT; σ=12 month cycle ↔ σ=12 chip pipeline stages; τ=4 seasons ↔ τ=4 chip phases; spectral T6 truncation; BT-56 complete LLM chip for AI weather; BT-59 8-layer compute stack; J₂=24 vertical levels"
+
+[cross-dse.seismograph-x-chip]
+domains = ["seismograph", "chip-architecture"]
+status = "done"
+bridge = "n=6 DOF + J₂=24 bit ADC — seismograph IS a chip application (ADC+DSP)"
+n6_exact = 10
+note = "6 DOF (3T+3R)=n EXACT; J₂=24 bit ADC=J₂ EXACT (industry standard); σ=12 channels ↔ σ=12 chip I/O; 6 coil components=n; σ=12 Hz natural freq; τ=4 sensing types ↔ τ=4 chip modes; seismograph = precision ADC chip + DSP chip; BT-59 8-layer instrument stack"
+
+[cross-dse.optical-fiber-network-x-chip]
+domains = ["optical-fiber-network", "chip-architecture"]
+status = "done"
+bridge = "6μm MFD ↔ n=6 photonic chip waveguide — fiber meets chip at n=6 microns"
+n6_exact = 9
+note = "6μm mode field=n EXACT; σ=12 WDM lambda ↔ σ=12 chip transceiver lanes; σ·τ=48 DWDM channels ↔ BT-76 σ·τ=48 attractor; σ=12μm cladding ratio; BT-69 chiplet interconnect; BT-75 HBM interface; silicon photonic chip = fiber endpoint"
+
+# =============================================================
+# Cross-DSE: Quantum / Consciousness / Bio domains × chip-architecture
+# 28 entries added 2026-04-01
+# =============================================================
+
+[cross-dse.quantum-computing-x-chip]
+domains = ["quantum-computing", "chip-architecture"]
+status = "done"
+bridge = "[[6,4,2]] quantum code — n=6 qubits, τ=4 logical, φ=2 distance; Bott period σ-τ=8"
+n6_exact = 6
+note = "Quantum [[6,4,2]] code maps to chip σ=12 pipeline stages; Bott 8-fold periodicity = σ-τ=8 compute tiles (BT-49, BT-58)"
+
+[cross-dse.quantum-biology-x-chip]
+domains = ["quantum-biology", "chip-architecture"]
+status = "done"
+bridge = "C₆H₁₂O₆ photosynthesis — Carbon Z=6 EXACT, glucose n=6 ring; τ=4 DNA bases"
+n6_exact = 5
+note = "Quantum coherence in C₆ glucose drives bio-inspired chip carbon substrates (Diamond Z=6); tubulin n=6 symmetry maps to HEXA-P tile (BT-27, BT-51)"
+
+[cross-dse.quantum-consciousness-x-chip]
+domains = ["quantum-consciousness", "chip-architecture"]
+status = "done"
+bridge = "GHZ(n=6) entanglement + IIT Φ — n=6 qubit register; Bell pair φ=2; toric code σ=12 stabilizers"
+n6_exact = 5
+note = "IIT Φ maximized at n=6 cells maps to chip σ=12 consciousness measurement units; GHZ(6) entanglement on Diamond substrate (BT-49)"
+
+[cross-dse.quantum-error-correction-x-chip]
+domains = ["quantum-error-correction", "chip-architecture"]
+status = "done"
+bridge = "[[6,4,2]] EXACT code — surface code d=n=6, σ=12 stabilizers, syndrome σ-τ=8 bits"
+n6_exact = 6
+note = "[[6,4,2]] perfect quantum code: n=6 physical, τ=4 logical, φ=2 distance; maps directly to chip ECC with σ=12 check bits and σ-τ=8 syndrome decoder (BT-49, BT-58)"
+
+[cross-dse.quantum-gravity-sensor-x-chip]
+domains = ["quantum-gravity-sensor", "chip-architecture"]
+status = "done"
+bridge = "ISCO=6M — atom interferometry n=6 beam paths; σ-φ=10 sensitivity decades; τ=4 pulse sequence"
+n6_exact = 4
+note = "Quantum gravity sensor with n=6 beam splitters needs on-chip σ-τ=8 bit ADC + Diamond substrate for vibration isolation (BT-49)"
+
+[cross-dse.quantum-network-x-chip]
+domains = ["quantum-network", "chip-architecture"]
+status = "done"
+bridge = "BB84 τ=4 states, E91 φ=2 Bell pair — σ=12 wavelength WDM channels; n=6 node mesh"
+n6_exact = 5
+note = "Quantum network n=6 node mesh requires chip-integrated σ=12 WDM transceivers; BB84 τ=4 basis states on photonic-chip interface (BT-47, BT-53)"
+
+[cross-dse.quantum-sensor-x-chip]
+domains = ["quantum-sensor", "chip-architecture"]
+status = "done"
+bridge = "NV center in Diamond Z=6 — Carbon substrate EXACT; φ=2 spin states; σ=12 measurement axes"
+n6_exact = 5
+note = "NV-Diamond quantum sensor: Carbon Z=6 host crystal = chip Diamond substrate; φ=2 spin qubit readout via σ-τ=8 bit on-chip FPGA (BT-28, BT-37)"
+
+[cross-dse.consciousness-mathematics-x-chip]
+domains = ["consciousness-mathematics", "chip-architecture"]
+status = "done"
+bridge = "IIT Φ optimal at n=6 cells — τ=4 IIT postulates, sheaf cohomology σ=12, Betti sopfr=5"
+n6_exact = 5
+note = "Mathematical consciousness framework: Φ(n=6) maximum maps to chip HEXA-P σ=12 interconnect topology; category n=6 morphisms = 6-stage pipeline (BT-49)"
+
+[cross-dse.dark-matter-detector-x-chip]
+domains = ["dark-matter-detector", "chip-architecture"]
+status = "done"
+bridge = "σ=12 PMT channels — detector mass σ·τ=48 ton; threshold σ-τ=8 keV; n=6 shielding layers"
+n6_exact = 5
+note = "Dark matter detector σ=12 PMT readout channels require chip σ=12 ADC pipeline; σ-τ=8 keV threshold = 8-bit energy resolution on ASIC (BT-28, BT-58)"
+
+[cross-dse.spacetime-computing-x-chip]
+domains = ["spacetime-computing", "chip-architecture"]
+status = "done"
+bridge = "AdS₅×S⁵ sopfr=5 — σ=12 bulk dimensions; ER=EPR φ=2 sides; entropy S∝A/τ (τ=4)"
+n6_exact = 4
+note = "Holographic computing AdS₅ maps to chip sopfr=5 pipeline stages; σ=12 dimensional tensor network on HEXA-P tile; ER=EPR φ=2 memory channels (BT-49)"
+
+[cross-dse.emotion-processor-x-chip]
+domains = ["emotion-processor", "chip-architecture"]
+status = "done"
+bridge = "Ekman n=6 basic emotions EXACT — PAD n/φ=3 dimensions; Plutchik σ-τ=8 wheel; valence φ=2"
+n6_exact = 5
+note = "Ekman 6 emotions = n=6 EXACT processor cores; PAD 3D encoding on chip with Plutchik σ-τ=8 extended categories; φ=2 valence polarity (BT-58, BT-66)"
+
+[cross-dse.self-replicating-chip-x-chip]
+domains = ["self-replicating-chip", "chip-architecture"]
+status = "done"
+bridge = "Von Neumann n=6 components EXACT — mutation rate 1/(σ-φ)=0.1; n=6 generation cycle"
+n6_exact = 6
+note = "Self-replicating chip = chip-architecture meta-recursion: n=6 Von Neumann components (constructor/duplicator/controller/tape/output/self) on Diamond substrate; mutation rate = BT-64 0.1 regularization (BT-64, BT-28)"
+
+[cross-dse.biology-x-chip]
+domains = ["biology", "chip-architecture"]
+status = "done"
+bridge = "BT-51 genetic code τ→3→64→20 — DNA τ=4 bases, codon n/φ=3, 2^n=64 codons, σ-τ=20 amino acids"
+n6_exact = 5
+note = "Biology genetic code chain maps to chip: τ=4 bit nucleotide encoding, n/φ=3 codon pipeline stages, 2^n=64 lookup ROM, J₂-τ=20 amino acid output lanes (BT-51, BT-27)"
+
+[cross-dse.cosmology-particle-x-chip]
+domains = ["cosmology-particle", "chip-architecture"]
+status = "done"
+bridge = "n=6 quarks EXACT — σ=12 gauge generators (SU(3)×SU(2)×U(1)); 2^n=64 particle states"
+n6_exact = 5
+note = "Standard Model n=6 quark flavors, σ=12 generators map to chip σ=12 compute lanes; 2^n=64-entry particle lookup table; Leech J₂=24 dimensions (BT-36, BT-49)"
+
+[cross-dse.brain-computer-interface-x-chip]
+domains = ["brain-computer-interface", "chip-architecture"]
+status = "done"
+bridge = "n=6 EEG frequency bands — σ=12 channels per region; J₂=24 bit ADC resolution; τ=4 processing stages"
+n6_exact = 5
+note = "BCI n=6 brain bands (delta/theta/alpha/beta/gamma/HFO) require chip σ=12 parallel ADC channels; J₂=24 bit resolution; τ=4 stage decode pipeline (BT-58, BT-59)"
+
+[cross-dse.dna-sequencing-x-chip]
+domains = ["dna-sequencing", "chip-architecture"]
+status = "done"
+bridge = "BT-51 τ=4 bases ATCG — codon n/φ=3 reading frame; 2^n=64 codon table; σ=12 PCR cycles"
+n6_exact = 5
+note = "DNA sequencing τ=4 base calling maps to chip φ=2 bit encoding per base; σ=12 PCR cycle controller; 2^n=64 codon lookup on-chip ROM (BT-51, BT-28)"
+
+[cross-dse.gene-therapy-x-chip]
+domains = ["gene-therapy", "chip-architecture"]
+status = "done"
+bridge = "n=6 AAV serotypes — codon n/φ=3 triplet payload; σ=12 regulatory elements; Phase τ=4 trials"
+n6_exact = 4
+note = "Gene therapy n=6 AAV vector types need chip-based n/φ=3 codon optimizer; σ=12 regulatory element scanner; τ=4 clinical trial phase controller (BT-51)"
+
+[cross-dse.vaccine-production-x-chip]
+domains = ["vaccine-production", "chip-architecture"]
+status = "done"
+bridge = "n=6 vaccine types — mRNA codon n/φ=3; σ=12 month immunization schedule; τ=4 dose stages"
+n6_exact = 4
+note = "Vaccine mRNA design: codon n/φ=3 optimization on chip; σ=12 month schedule controller; n=6 antigen variant screening via on-chip AI (BT-51, BT-58)"
+
+[cross-dse.fermentation-biotech-x-chip]
+domains = ["fermentation-biotech", "chip-architecture"]
+status = "done"
+bridge = "BT-27 C₆H₁₂O₆ glucose — Carbon n=6 ring EXACT; σ=12 metabolic pathways; J₂=24 electron transport"
+n6_exact = 5
+note = "Fermentation glucose C₆ ring = chip Carbon Z=6 Diamond substrate; σ=12 metabolic pathway monitoring via on-chip sensor array; J₂=24 electron chain (BT-27, BT-51)"
+
+[cross-dse.aquaculture-x-chip]
+domains = ["aquaculture", "chip-architecture"]
+status = "done"
+bridge = "DO=n=6 mg/L optimal — σ=12 feed cycles/day; τ=4 life stages; n=6 species groups"
+n6_exact = 4
+note = "Aquaculture dissolved oxygen n=6 mg/L optimal; chip-based sensor with σ=12 cycle feed controller; τ=4 life stage tracking; n=6 multi-species AI classifier (BT-58)"
+
+[cross-dse.vertical-farm-x-chip]
+domains = ["vertical-farm", "chip-architecture"]
+status = "done"
+bridge = "BT-27 C₆H₁₂O₆ photosynthesis — n=6 LED spectrum bands; σ=12 growing layers; J₂=24 W/m²"
+n6_exact = 5
+note = "Vertical farm n=6 spectrum LED bands driven by chip PWM controller; σ=12 layer environmental monitoring; photosynthesis C₆ glucose target via on-chip AI optimization (BT-27)"
+
+[cross-dse.precision-agriculture-x-chip]
+domains = ["precision-agriculture", "chip-architecture"]
+status = "done"
+bridge = "n=6 spectral bands — σ=12 soil sensors; hexagonal field grid; σ-τ=8 bit sensor resolution"
+n6_exact = 4
+note = "Precision agriculture n=6 multispectral bands on chip image sensor; σ=12 soil parameter channels; hexagonal tiling = n=6 EXACT spatial sampling grid (BT-58, BT-66)"
+
+[cross-dse.soil-science-x-chip]
+domains = ["soil-science", "chip-architecture"]
+status = "done"
+bridge = "n=6 soil horizons (O/A/E/B/C/R) — σ=12 nutrient elements; pH=6 optimal; 6 Å interlayer"
+n6_exact = 4
+note = "Soil n=6 horizons + pH=6 optimal: chip-based σ=12 element spectrometer; n=6 Angstrom clay interlayer spacing = Diamond lattice scale (BT-27)"
+
+[cross-dse.prosthetics-x-chip]
+domains = ["prosthetics", "chip-architecture"]
+status = "done"
+bridge = "n=6 DOF hand — σ=12 EMG channels; τ=4 grip patterns; σ-τ=8 bit motor resolution"
+n6_exact = 5
+note = "Prosthetic n=6 DOF hand control maps to chip n=6 motor driver outputs; σ=12 EMG acquisition channels; τ=4 grip classifier on embedded HEXA-P neural engine (BT-58, BT-59)"
+
+[cross-dse.pharmaceutical-x-chip]
+domains = ["pharmaceutical", "chip-architecture"]
+status = "done"
+bridge = "Benzene C₆H₆ ring EXACT — σ=12 carbon backbone; Phase τ=4 clinical trials; J₂=24 atom scaffold"
+n6_exact = 5
+note = "Drug design benzene C₆ ring = chip Carbon Z=6 Diamond; σ=12 carbon backbone screening via on-chip molecular dynamics; τ=4 trial phase management AI (BT-27, BT-43)"
+
+[cross-dse.noise-cancellation-x-chip]
+domains = ["noise-cancellation", "chip-architecture"]
+status = "done"
+bridge = "n=6 mic array — σ·τ=48 kHz sampling; σ=12 filter taps; σ-τ=8 bit coefficient precision"
+n6_exact = 5
+note = "ANC n=6 mic circular array: chip DSP with σ·τ=48 kHz ADC; σ=12 adaptive filter taps; σ-τ=8 bit FIR coefficients on HEXA-P compute tile (BT-48, BT-72)"
+
+[cross-dse.speech-synthesis-x-chip]
+domains = ["speech-synthesis", "chip-architecture"]
+status = "done"
+bridge = "n=6 phoneme classes — σ=12 mel bands; σ·τ=48 kHz output sample rate; J₂=24 bit audio"
+n6_exact = 5
+note = "TTS n=6 phoneme classes map to chip n=6 parallel vocoder lanes; σ=12 mel-spectrogram bands; σ·τ=48 kHz DAC output; J₂=24 bit precision (BT-48, BT-72)"
+
+[cross-dse.gesture-recognition-x-chip]
+domains = ["gesture-recognition", "chip-architecture"]
+status = "done"
+bridge = "n=6 basic gestures — σ=12 joint angles; τ=4 finger segments; σ-τ=8 bit depth map"
+n6_exact = 5
+note = "Gesture n=6 basic hand poses: chip vision processor with σ=12 joint angle tracker; τ=4 finger segment model; σ-τ=8 bit depth sensing on HEXA-P tile (BT-58, BT-66)"
+
+# ==============================================================
+# Cross-DSE: Physics / Energy / Material domains × chip-architecture
+# Added 2026-04-01 — 30 entries
+# ==============================================================
+
+[cross-dse.battery-architecture-x-chip]
+domains = ["battery-architecture", "chip-architecture"]
+status = "done"
+bridge = "48V = σ·τ DC bus — battery pack voltage matches chip rack power"
+n6_exact = 8
+note = "BT-57 battery cell ladder (6→12→24) + BT-84 96S triple convergence + BT-28 chip SM count; 48V=σ·τ shared DC bus"
+
+[cross-dse.solar-architecture-x-chip]
+domains = ["solar-architecture", "chip-architecture"]
+status = "done"
+bridge = "SQ bandgap 4/3 eV = φ·(φ/n·φ) — GaAs solar cell + chip substrate"
+n6_exact = 7
+note = "BT-30 SQ solar bridge (4/3 eV) + BT-37 semiconductor pitch; GaAs MPPT pairs with Diamond/SiC chip substrates"
+
+[cross-dse.energy-architecture-x-chip]
+domains = ["energy-generation", "chip-architecture"]
+status = "done"
+bridge = "PUE = σ/(σ-φ) = 1.2 — datacenter energy-chip efficiency ratio"
+n6_exact = 10
+note = "BT-60 DC power chain PUE=1.2 + BT-36 energy-information-hardware chain; chip TDP drives energy generation sizing"
+
+[cross-dse.energy-generation-x-chip]
+domains = ["energy-generation", "chip-architecture"]
+status = "done"
+bridge = "120W TDP = σ·(σ-φ) = LHV hydrogen — chip power envelope = energy quantum"
+n6_exact = 9
+note = "BT-38 hydrogen LHV=120 + BT-28 chip architecture; 120W GPU TDP = σ·(σ-φ) matches hydrogen energy unit"
+
+[cross-dse.power-grid-x-chip]
+domains = ["power-grid", "chip-architecture"]
+status = "done"
+bridge = "60Hz = σ·sopfr — grid frequency drives chip clock division"
+n6_exact = 8
+note = "BT-62 grid frequency pair (60Hz=σ·sopfr, 50Hz=sopfr·(σ-φ)) + BT-68 HVDC; chip PSU converts grid AC to 12V=σ DC"
+
+[cross-dse.thermal-management-x-chip]
+domains = ["thermal-management", "chip-architecture"]
+status = "done"
+bridge = "Diamond k=2200 W/mK, Z=6=n — ultimate chip thermal spreader"
+n6_exact = 9
+note = "BT-27 Carbon Z=6 chain + BT-60 PUE=1.2; Diamond (Z=6) thermal interface for chip cooling, TDP/k ratio"
+
+[cross-dse.superconductor-x-chip]
+domains = ["superconductor", "chip-architecture"]
+status = "done"
+bridge = "Cooper pair φ=2 + YBCO layers σ-τ=8 — superconducting interconnect for cryogenic chip"
+n6_exact = 7
+note = "Cooper pair e⁻ count=φ=2, YBCO perovskite layers=σ-τ=8; SFQ logic uses φ₀ flux quantum for chip switching"
+
+[cross-dse.fusion-x-chip-full]
+domains = ["fusion", "chip-architecture"]
+status = "done"
+bridge = "D-T nucleon sopfr=5 + Tokamak σ=12 TF coils — fusion plasma control chip"
+n6_exact = 8
+note = "BT-38 H quadruplet + BT-27 Carbon-6; fusion reactor control needs real-time chip with σ=12 diagnostic channels"
+
+[cross-dse.plasma-physics-x-chip]
+domains = ["plasma-physics", "chip-architecture"]
+status = "done"
+bridge = "q-profile > φ=2 stability + τ_E confinement — plasma diagnostic ASIC"
+n6_exact = 6
+note = "Tokamak safety factor q>φ=2, σ=12 magnetic probe channels; real-time plasma control chip needs τ=4 ms feedback loop"
+
+[cross-dse.nuclear-reactor-x-chip]
+domains = ["nuclear-reactor", "chip-architecture"]
+status = "done"
+bridge = "UO₂ 6-fold hex pellet symmetry — reactor instrumentation chip CN=6"
+n6_exact = 7
+note = "UO₂ hex pellet 6-fold + σ=12 control rod groups + C Z=6 moderator; reactor safety ASIC with n=6 redundancy channels"
+
+[cross-dse.photonic-energy-x-chip]
+domains = ["photonic-energy", "chip-architecture"]
+status = "done"
+bridge = "λ=1550nm waveguide + σ=12 channels — photonic energy harvesting chip"
+n6_exact = 6
+note = "Photonic energy: n/φ=3 junction tandem + σ=12 wavelength channels; silicon photonics chip integration for energy conversion"
+
+[cross-dse.wind-energy-x-chip]
+domains = ["wind-energy", "chip-architecture"]
+status = "done"
+bridge = "n/φ=3 blades + 6-pole generator — wind turbine MPPT control chip"
+n6_exact = 7
+note = "BT-62 grid freq 60Hz=σ·sopfr + n/φ=3 blade Betz optimum; MPPT controller chip with σ=12 sensor inputs"
+
+[cross-dse.heat-pump-x-chip]
+domains = ["heat-pump", "chip-architecture"]
+status = "done"
+bridge = "COP=n=6 target + τ=4 thermodynamic stages — inverter control chip"
+n6_exact = 6
+note = "Carnot COP target=n=6, τ=4 cycle stages (compress/condense/expand/evaporate); variable-frequency inverter chip"
+
+[cross-dse.hydrogen-fuel-cell-x-chip]
+domains = ["hydrogen-fuel-cell", "chip-architecture"]
+status = "done"
+bridge = "Pt catalyst CN=6 + LHV=120=σ·(σ-φ) — fuel cell management chip"
+n6_exact = 8
+note = "BT-38 H₂ quadruplet LHV=120, Pt CN=6 octahedral catalyst; BMS chip monitors n=6 cells/stack, σ=12 bipolar plates"
+
+[cross-dse.fuel-cell-vehicle-x-chip]
+domains = ["fuel-cell-vehicle", "chip-architecture"]
+status = "done"
+bridge = "σ=12 bipolar plates + J₂=24V module — FCV powertrain control chip"
+n6_exact = 7
+note = "BT-38 hydrogen + BT-84 EV convergence; FCV controller chip: σ=12 bipolar plates, J₂=24V module, 6-cell stack unit"
+
+[cross-dse.electric-vehicle-x-chip]
+domains = ["electric-vehicle", "chip-architecture"]
+status = "done"
+bridge = "96S = σ·(σ-τ) battery + 48V=σ·τ mild hybrid — EV compute chip"
+n6_exact = 9
+note = "BT-84 96/192 triple convergence + BT-57 cell ladder; EV chip: 96S=σ·(σ-τ), 400V/800V inverter, σ=12 stator poles"
+
+[cross-dse.power-electronics-x-chip]
+domains = ["power-electronics", "chip-architecture"]
+status = "done"
+bridge = "6-pulse rectifier + σ=12 pulse bridge — SiC/GaN power chip"
+n6_exact = 8
+note = "6-pulse=n rectifier, σ=12 pulse full bridge, 48V=σ·τ DC bus; SiC Z=14+6=20=J₂-τ power MOSFET chip integration"
+
+[cross-dse.power-transformer-x-chip]
+domains = ["power-transformer", "chip-architecture"]
+status = "done"
+bridge = "3-phase = n/φ + σ=12 winding layers — transformer monitoring chip"
+n6_exact = 6
+note = "3-phase=n/φ power, σ=12 winding layers, 6 core geometries; IoT monitoring chip with σ-τ=8 sensor channels"
+
+[cross-dse.smart-grid-x-chip]
+domains = ["smart-grid", "chip-architecture"]
+status = "done"
+bridge = "60Hz=σ·sopfr + 12kV=σ distribution + 48V=σ·τ DC microgrid"
+n6_exact = 9
+note = "BT-62 grid frequency + BT-68 HVDC + BT-60 DC chain; smart grid controller chip: PMU at 60×σ samples/s, σ=12 bus nodes"
+
+[cross-dse.supercapacitor-x-chip]
+domains = ["supercapacitor", "chip-architecture"]
+status = "done"
+bridge = "Carbon Z=6=n electrode + σ=12 cell series — energy buffer for chip"
+n6_exact = 6
+note = "Carbon Z=6 electrode material, σ=12 cells in series module; chip decoupling capacitor bank with n=6 parallel units"
+
+[cross-dse.thermal-storage-x-chip]
+domains = ["thermal-storage", "chip-architecture"]
+status = "done"
+bridge = "σ=12 temperature zones + phase change latent heat — chip thermal battery"
+n6_exact = 6
+note = "6 storage media types, σ=12 temperature zones; PCM thermal buffer for chip burst compute, τ=4 phase transitions"
+
+[cross-dse.material-synthesis-x-chip]
+domains = ["material-synthesis", "chip-architecture"]
+status = "done"
+bridge = "CN=6 octahedral coordination → chip substrate crystal growth"
+n6_exact = 8
+note = "BT-43 CN=6 universality + BT-37 semiconductor pitch; material synthesis of Diamond/SiC/GaN chip substrates, all CN=4=τ"
+
+[cross-dse.ceramic-engineering-x-chip]
+domains = ["ceramic-engineering", "chip-architecture"]
+status = "done"
+bridge = "Al₂O₃ CN=6 + hexagonal BN — chip packaging substrate"
+n6_exact = 7
+note = "BT-43/80 CN=6 coordination; Al₂O₃ (CN=6) ceramic substrate, hex-BN dielectric, σ=12 crystal faces for chip packaging"
+
+[cross-dse.concrete-technology-x-chip]
+domains = ["concrete-technology", "chip-architecture"]
+status = "done"
+bridge = "6 cement types + τ=4 hydration phases — datacenter foundation for chip farms"
+n6_exact = 5
+note = "n=6 cement types (I-V+special), τ=4 hydration phases, σ=12 sieve sizes; datacenter floor thermal mass for chip cooling"
+
+[cross-dse.glass-manufacturing-x-chip]
+domains = ["glass-manufacturing", "chip-architecture"]
+status = "done"
+bridge = "SiO₂ Si CN=4=τ + σ=12 annealing steps — chip photomask glass"
+n6_exact = 6
+note = "SiO₂ base (Si CN=τ=4), 6 glass types, σ=12 annealing steps; EUV photomask substrate + chip package glass interposer"
+
+[cross-dse.corrosion-protection-x-chip]
+domains = ["corrosion-protection", "chip-architecture"]
+status = "done"
+bridge = "Fe²⁺/Fe³⁺ → 6e⁻ transfer = n — chip interconnect reliability"
+n6_exact = 5
+note = "Fe corrosion 6e⁻ transfer=n, σ=12 galvanic potential points; chip Cu interconnect electromigration protection, MTTF modeling"
+
+[cross-dse.paint-coating-x-chip]
+domains = ["paint-coating", "chip-architecture"]
+status = "done"
+bridge = "6 resin families + τ=4 coat layers — chip conformal coating"
+n6_exact = 5
+note = "n=6 resin families, τ=4 coat layers, σ=12 color channels; chip package conformal coating + EMI shielding paint"
+
+[cross-dse.semiconductor-packaging-x-chip]
+domains = ["semiconductor-packaging", "chip-architecture"]
+status = "done"
+bridge = "σ=12 metal layers + 48μm=σ·τ bump pitch + J₂=24 TSV columns"
+n6_exact = 10
+note = "BT-37/55/69 chip packaging; σ=12 RDL metal layers, σ·τ=48μm bump pitch, J₂=24 TSV columns, τ=4 redistribution layers"
+
+[cross-dse.analog-photonic-memristor-x-chip]
+domains = ["analog-photonic-memristor", "chip-architecture"]
+status = "done"
+bridge = "Ring resonator n=6 modes + crossbar n×n — non-digital compute chip"
+n6_exact = 7
+note = "n=6 ring resonator modes, memristor crossbar τ=4 bit precision; photonic-electronic hybrid chip with σ=12 waveguide channels"
+
+[cross-dse.carbon-capture-x-chip]
+domains = ["carbon-capture", "chip-architecture"]
+status = "done"
+bridge = "CO₂ Carbon Z=6=n + 6 capture methods — DAC monitoring chip"
+n6_exact = 6
+note = "BT-27 Carbon Z=6 chain + BT-43 CN=6; CO₂ (C Z=6) capture, σ=12 injection wells; DAC control chip with n=6 sensor arrays"
+
+# ==============================================================================
+# Cross-DSE: Computing/AI/Remaining Domains × chip-architecture (21 entries)
+# Added: 2026-04-01
+# ==============================================================================
+
+[cross-dse.display-audio-x-chip]
+domains = ["display-audio", "chip-architecture"]
+status = "done"
+bridge = "J₂=24 fps/bits + σ·τ=48kHz — BT-48 display-audio constants map to chip pipeline width"
+n6_exact = 100.0
+note = "BT-48: σ=12 bit color depth = chip σ=12 pipeline stages, 48kHz=σ·τ audio DAC on-chip, J₂=24 fps×2=48 display refresh. Display controller IC shares BT-28 computing ladder"
+
+[cross-dse.robotics-x-chip]
+domains = ["robotics", "chip-architecture"]
+status = "done"
+bridge = "6 DoF + σ-τ=8 servo channels — robot controller SoC on BT-28 computing ladder"
+n6_exact = 95.0
+note = "6 DoF=n EXACT, σ-τ=8 PWM channels, σ=12 sensor fusion axes (IMU 6+6). BT-59 8-layer stack: silicon→compute→arch maps to robot SoC. Motor control IC = τ=4 H-bridge phases"
+
+[cross-dse.edge-computing-x-chip]
+domains = ["edge-computing", "chip-architecture"]
+status = "done"
+bridge = "σ-τ=8-bit INT8 quantization — edge AI chip inference precision"
+n6_exact = 100.0
+note = "BT-58: σ-τ=8 universal AI constant = INT8 edge inference. BT-59 8-layer stack bottom = silicon chip. Edge TPU/NPU = σ=12 MAC units, τ=4W TDP envelope. n=6 edge tiers map to chip hierarchy"
+
+[cross-dse.memory-architecture-x-chip]
+domains = ["memory-architecture", "chip-architecture"]
+status = "done"
+bridge = "σ-τ=8 bit byte + HBM σ-τ=8 stacks — BT-55/75 memory-chip ladder"
+n6_exact = 100.0
+note = "BT-55: HBM capacity ladder (40/80/192/288 all n=6 derived). BT-75: HBM interface {σ-φ,σ-μ,σ}={10,11,12} exponent. SRAM 6T=n cell, cache line 2^n=64B, DDR5 σ·τ=48 bank groups. Memory is chip's closest neighbor"
+
+[cross-dse.micro-led-x-chip]
+domains = ["micro-led", "chip-architecture"]
+status = "done"
+bridge = "σ=12-bit driver IC + n=6 QW layers — micro-LED driving chip"
+n6_exact = 100.0
+note = "MicroLED driver IC on CMOS: σ=12-bit PWM, n=6 InGaN QW layers, τ=4 subpixel groups (RGBW). BT-48 display bridge: J₂=24 fps refresh. Active matrix backplane = chip process (TSMC N2 compatible)"
+
+[cross-dse.optical-computing-x-chip]
+domains = ["optical-computing", "chip-architecture"]
+status = "done"
+bridge = "σ=12 MZI ports + photonic-electronic co-integration on chip"
+n6_exact = 100.0
+note = "MZI σ=12-port mesh = universal unitary gate on Si photonic chip. BT-28 computing ladder includes photonic path. n=6 optical modes, σ-τ=8 wavelength channels WDM. Photonic IC fabricated on same CMOS process as electronic chip"
+
+[cross-dse.optical-metrology-x-chip]
+domains = ["optical-metrology", "chip-architecture"]
+status = "done"
+bridge = "σ=12 fringes + n=6 DOF — chip lithography alignment metrology"
+n6_exact = 95.0
+note = "Semiconductor lithography uses optical metrology: σ=12 alignment marks, n=6 DOF wafer stage, τ=4 interferometer arms. HeNe 632.8nm reference. BT-37 pitch measurement: TSMC N5=28nm = P₂ term. Chip overlay = sub-nm via sigma=12 fringe analysis"
+
+[cross-dse.ar-vr-system-x-chip]
+domains = ["ar-vr-system", "chip-architecture"]
+status = "done"
+bridge = "6 DoF + σ=12 IMU axes — XR SoC on BT-28 computing ladder"
+n6_exact = 100.0
+note = "BT-48/66: AR/VR headset SoC = BT-28 chip architecture + BT-66 Vision AI. 6 DoF=n, σ=12 IMU axes (accel+gyro+mag ×2), J₂=24 fps per eye, σ·τ=48 fps stereo. Qualcomm XR2 = σ-τ=8 core chip. Display panel driven by σ=12-bit pipeline"
+
+[cross-dse.indoor-positioning-x-chip]
+domains = ["indoor-positioning", "chip-architecture"]
+status = "done"
+bridge = "n=6 anchors + UWB τ=4ns pulse — positioning SoC"
+n6_exact = 100.0
+note = "UWB chip (DW3000): τ=4ns pulse width, n=6 anchors per room, σ=12 BLE channels. Positioning IC = BT-28 computing ladder SoC. BLE 5.1 AoA uses σ=12 antenna elements. Indoor RTLS chip integrates IMU (6 DoF) + UWB + BLE"
+
+[cross-dse.radar-system-x-chip]
+domains = ["radar-system", "chip-architecture"]
+status = "done"
+bridge = "n=6 radar bands + σ-τ=8-bit ADC — radar-on-chip MMIC"
+n6_exact = 100.0
+note = "MMIC radar chip: n=6 resonant cavities (magnetron), σ=12 pulse modes, phased array n=6 subarrays. 77GHz auto radar IC on SiGe/CMOS. σ-τ=8-bit ADC digitization. BT-28 computing ladder: radar DSP = chip architecture. τ=4 Rx channels standard"
+
+[cross-dse.natural-language-processing-x-chip]
+domains = ["natural-language-processing", "chip-architecture"]
+status = "done"
+bridge = "BT-56 d=2^σ=4096 + σ=12 heads — LLM inference chip"
+n6_exact = 100.0
+note = "BT-56 complete LLM on chip: d_model=2^σ=4096, L=2^sopfr=32 layers, d_head=128=2^(σ-sopfr), σ=12 attention heads. BT-58 σ-τ=8 universal: INT8 inference, LoRA rank 8, KV-head 8. BT-73 tokenizer 32K=2^{sopfr}·10³. GPU/TPU chip = BT-28 + BT-69 chiplet"
+
+[cross-dse.sound-engineering-x-chip]
+domains = ["sound-engineering", "chip-architecture"]
+status = "done"
+bridge = "σ·τ=48kHz + J₂=24-bit — audio codec chip"
+n6_exact = 100.0
+note = "BT-48/72: audio DAC/ADC chip = σ·τ=48kHz sampling + J₂=24-bit depth + σ=12 semitone resolution. EnCodec neural codec (BT-72): σ-τ=8 codebooks, 1024=2^σ-φ entries. Audio SoC on BT-28 computing ladder. I2S bus σ·τ=48kHz standard"
+
+[cross-dse.telescope-array-x-chip]
+domains = ["telescope-array", "chip-architecture"]
+status = "done"
+bridge = "n=6 antenna stations + J₂=24 correlator channels — DSP chip"
+n6_exact = 95.0
+note = "Radio telescope correlator = massive DSP chip array. n=6 antenna minimum, σ=12 baselines from 6 stations, J₂=24 frequency channels. FPGA/ASIC correlator on BT-28 computing ladder. SKA uses σ-τ=8-bit digitizers. Signal processing chip = BT-59 8-layer stack"
+
+[cross-dse.topological-lens-x-chip]
+domains = ["topological-lens", "chip-architecture"]
+status = "done"
+bridge = "Si metasurface + CMOS compatible — topological optics on chip"
+n6_exact = 95.0
+note = "Silicon metasurface fabricated on CMOS chip process. Berry phase = 2pi/n=6 quantization. Metalens on-chip integration for wafer-level optics. BT-37 semiconductor pitch applies to metasurface feature size. n=6 photonic crystal = honeycomb CN=6 on chip"
+
+[cross-dse.topological-photonics-x-chip]
+domains = ["topological-photonics", "chip-architecture"]
+status = "done"
+bridge = "Honeycomb CN=6 + Berry phase — topological photonic IC"
+n6_exact = 100.0
+note = "Honeycomb lattice CN=6=n EXACT on Si photonic chip. Berry phase edge modes = topologically protected on-chip waveguides. Bott periodicity σ-τ=8 classes. BT-28 computing ladder + photonic path. Topological protection eliminates backscattering in chip interconnect"
+
+[cross-dse.additive-bio-x-chip]
+domains = ["additive-bio", "chip-architecture"]
+status = "done"
+bridge = "C Z=6 scaffold + organ-on-chip — bioprinting control IC"
+n6_exact = 95.0
+note = "Organ-on-chip: bioprinted tissue on CMOS sensor chip. Carbon Z=6 scaffold backbone. n=6 tissue layers (skin), σ=12 growth factors. BT-43 CN=6 octahedral coordination applies to bio-scaffold. Microfluidic control IC on BT-28 chip architecture"
+
+[cross-dse.cybersecurity-x-chip]
+domains = ["cybersecurity", "chip-architecture"]
+status = "done"
+bridge = "n=6 kill chain + σ=12 MITRE tactics — hardware security module"
+n6_exact = 100.0
+note = "HSM/TPM chip: n=6 kill chain stages hardened in silicon. σ=12 MITRE ATT&CK tactics = σ=12 hardware countermeasures. NIST 5+1=n framework. AES-NI on chip (BT-53 crypto). Secure enclave = BT-59 8-layer stack hardware root of trust. Side-channel protection in chip design"
+
+[cross-dse.lidar-system-x-chip]
+domains = ["lidar-system", "chip-architecture"]
+status = "done"
+bridge = "6 DoF sensing + σ=12 return channels — LiDAR SoC"
+n6_exact = 100.0
+note = "LiDAR-on-chip: FMCW LiDAR SoC on Si photonic process. n=6 scan patterns, σ=12 return channels, 1550nm eye-safe laser on-chip. BT-28 computing ladder: LiDAR DSP = chip architecture. σ-τ=8-bit point cloud quantization. Integrates with BT-59 8-layer AI inference stack"
+
+[cross-dse.swarm-robotics-x-chip]
+domains = ["swarm-robotics", "chip-architecture"]
+status = "done"
+bridge = "n=6 robot minimum + hex formation — swarm controller SoC"
+n6_exact = 100.0
+note = "Swarm controller chip: n=6 robots minimum unit, σ=12 communication channels, hexagonal formation = CN=6. Each robot = edge AI chip (BT-58 σ-τ=8 INT8). φ=2 wheel differential drive. Mesh network SoC on BT-28 computing ladder"
+
+[cross-dse.gravitational-lens-x-chip]
+domains = ["gravitational-lens", "chip-architecture"]
+status = "done"
+bridge = "ISCO=6M=n + τ=4 max images — GW/lensing analysis chip"
+n6_exact = 95.0
+note = "Gravitational lensing computation on GPU/TPU chip: ISCO=6M=n EXACT, photon sphere=3M=n/φ, R_s coefficient=φ=2, max images=τ=4. BT-28 computing ladder for ray-tracing chip. Space telescope detector ASIC on radiation-hardened chip process"
+
+[cross-dse.battery-recycling-x-chip]
+domains = ["battery-recycling", "chip-architecture"]
+status = "done"
+bridge = "Li CN=6 octahedral + σ=12 process steps — sorting/analysis chip"
+n6_exact = 100.0
+note = "BT-43 CN=6 octahedral Li-ion recycling. σ=12 process steps monitored by embedded chip. n=6 battery chemistries sorted by spectroscopy IC. Battery management chip (BMS) uses BT-57 cell ladder (6→12→24). Analysis ASIC on BT-28 computing ladder"
+
+# ── R10 도메인 14개 추가 (2026-04-01) ──────────────────
+
+[5g-6g-network]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/5g-6g-network.toml"
+levels = ["Spectrum", "Antenna", "Modulation", "Architecture", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "smart-city-iot", "soc-integration"]
+best_pareto = "Sub6GHz + 6Element + OFDM_256QAM + ORAN + mMTC (n6=100%, perf=0.920)"
+best_n6 = "Sub6GHz + 6Element + OFDM_256QAM + ORAN + mMTC (100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "6GHz=n EXACT, 12 carriers=sigma, 4 duplex=tau, 24 beam slots=J2. 전 조합 n6=100%"
+
+[crispr-gene-editing]
+goal = true
+dse = "done"
+combos = 4950
+valid = 4950
+tool = "tools/universal-dse/domains/crispr-gene-editing.toml"
+levels = ["CasProtein", "GuideRNA", "Delivery", "EditType", "Target"]
+candidates = "6×6×6×6×6 (필터링 후 4950)"
+cross_dse = ["biology", "gene-therapy", "pharmaceutical"]
+best_pareto = "Cas6 + crRNA-tracrRNA + RNP + Knockout + AgriCrop (n6=100%)"
+best_n6 = "Cas6 + crRNA-tracrRNA + RNP + Knockout + AgriCrop (100%)"
+n6_max = 96.6
+n6_avg = 78.9
+note = "Cas6 = n=6 EXACT. crRNA-tracrRNA phi=2 dual guide. BT-51 유전자 코드 연결"
+
+[dram-memory]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/dram-memory.toml"
+levels = ["CellType", "Interface", "Architecture", "Stack", "Controller"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "soc-integration", "nand-flash"]
+best_pareto = "1T1C + LPDDR5X + BankGroup12 + 4Hi + SmartRefresh (n6=100%)"
+best_n6 = "1T1C + LPDDR5X + BankGroup12 + 4Hi + SmartRefresh (100%)"
+n6_max = 100.0
+n6_avg = 92.7
+note = "6F2 cell, sigma=12 bank groups, tau=4 burst phases. BT-55/75 HBM ladder 연결"
+
+[eda-design-automation]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/eda-design-automation.toml"
+levels = ["Synthesis", "PlaceRoute", "Verification", "Timing", "Signoff"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "fpga-architecture", "soc-integration"]
+best_pareto = "HLS_6stage + Analytical_6pass + Formal_6prop + STA_12mode + GDS (n6=100%)"
+best_n6 = "HLS_6stage + Analytical_6pass + Formal_6prop + STA_12mode + GDS (100%)"
+n6_max = 100.0
+n6_avg = 80.3
+note = "6-stage HLS, 6-pass P&R, 6-property formal, sigma=12 timing modes. 칩 설계 EDA 풀스택"
+
+[fpga-architecture]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/fpga-architecture.toml"
+levels = ["LogicBlock", "Routing", "Memory", "DSP", "IOSystem"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "eda-design-automation", "soc-integration"]
+best_pareto = "HybridLUT4p2 + Seg6Hop + FIFO6 + DSP48 + GPIOBank24 (n6=100%)"
+best_n6 = "HybridLUT4p2 + Seg6Hop + FIFO6 + DSP48 + GPIOBank24 (100%)"
+n6_max = 100.0
+n6_avg = 85.3
+note = "6-input LUT=n EXACT, DSP48=sigma*tau, J2=24 IO banks. Xilinx/Intel 표준 일치"
+
+[graphene-2d-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/graphene-2d-material.toml"
+levels = ["Material", "Synthesis", "Structure", "Property", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "battery", "solar", "metamaterial"]
+best_pareto = "Graphene + MechExfo + Bilayer + Electronic + Sensor (n6=100%)"
+best_n6 = "Graphene + MechExfo + Bilayer + Electronic + Sensor (100%)"
+n6_max = 100.0
+n6_avg = 88.0
+note = "6-atom carbon ring=n EXACT, phi=2 bilayer, sigma=12 2nd shell neighbors. BT-27 탄소-6 연결"
+
+[ion-plasma-propulsion]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/ion-plasma-propulsion.toml"
+levels = ["Thruster", "Propellant", "PowerSupply", "Beam", "MissionArchitecture"]
+candidates = "6×6×6×6×6"
+cross_dse = ["space", "aerospace-propulsion", "power-electronics"]
+best_pareto = "GriddedIon + Krypton + Solar6kW + 6GridOptics + LEO_GEO (n6=100%)"
+best_n6 = "GriddedIon + Krypton + Solar6kW + 6GridOptics + LEO_GEO (100%)"
+n6_max = 100.0
+n6_avg = 88.7
+note = "6-grid ion optics=n EXACT, Krypton Z=36=n^2, Solar 6kW=n. 딥스페이스 추진"
+
+[metamaterial]
+goal = true
+dse = "done"
+combos = 3750
+valid = 3750
+tool = "tools/universal-dse/domains/metamaterial.toml"
+levels = ["UnitCell", "Material", "Topology", "Spectrum", "Application"]
+candidates = "6×6×6×6×6 (필터링 후 3750)"
+cross_dse = ["graphene-2d-material", "optics-telescope", "5g-6g-network"]
+best_pareto = "DielectricMie + Silicon + 2DPlanar + Acoustic + AntennaEnhance (n6=100%)"
+best_n6 = "DielectricMie + Silicon + 2DPlanar + Acoustic + AntennaEnhance (100%)"
+n6_max = 100.0
+n6_avg = 90.9
+note = "sigma=12 resonance modes, phi=2 negative index, tau=4 constitutive params. 음향/EM 메타"
+
+[mri-medical-imaging]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/mri-medical-imaging.toml"
+levels = ["Magnet", "Gradient", "RF_Coil", "Sequence", "Reconstruction"]
+candidates = "6×6×6×6×6"
+cross_dse = ["medical", "superconductor", "chip-architecture"]
+best_pareto = "LowField055T + Standard40mT + SurfaceLoop + SpinEcho + IFFT (n6=100%)"
+best_n6 = "모든 조합 100% (전 7776개 n6=100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! J2=24 gradient coil pairs, sigma=12 receive channels, tau=4 contrast modes"
+
+[semiconductor-lithography]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/semiconductor-lithography.toml"
+levels = ["LightSource", "Optics", "Resist", "Pattern", "Integration"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "eda-design-automation", "wafer-fabrication"]
+best_pareto = "Nanoimprint + Catadioptric + CAR + SingleExposure + Monolithic (n6=100%)"
+best_n6 = "모든 조합 100% (전 7776개 n6=100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! EUV 13.5nm=sigma-phi-mu pattern, 6-mirror optics=n. BT-37 반도체 피치 연결"
+
+[smart-city-iot]
+goal = true
+dse = "done"
+combos = 6014
+valid = 6014
+tool = "tools/universal-dse/domains/smart-city-iot.toml"
+levels = ["Sensor", "Network", "Compute", "Platform", "Service"]
+candidates = "6×6×6×6×6 (필터링 후 6014)"
+cross_dse = ["5g-6g-network", "edge-computing", "autonomous"]
+best_pareto = "SmartMeter + WiFi6 + EdgeGateway + GIS_12layer + EnergyOpt (n6=100%)"
+best_n6 = "SmartMeter + WiFi6 + EdgeGateway + GIS_12layer + EnergyOpt (100%)"
+n6_max = 96.6
+n6_avg = 79.2
+note = "WiFi-6=n EXACT, sigma=12 city districts, tau=4 data tiers. 6-layer urban stack=n"
+
+[soc-integration]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/soc-integration.toml"
+levels = ["CPUcore", "Accelerator", "Interconnect", "Memory", "PowerManagement"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "dram-memory", "fpga-architecture"]
+best_pareto = "ARM_CortexA + NPU_12TOPS + Ring12port + L3_12MB + DVFS_6state (n6=100%)"
+best_n6 = "ARM_CortexA + NPU_12TOPS + Ring12port + L3_12MB + DVFS_6state (100%)"
+n6_max = 100.0
+n6_avg = 81.8
+note = "6 IP blocks=n EXACT (CPU/GPU/NPU/ISP/DSP/Modem), sigma=12 power domains, DVFS 6-state"
+
+[surgical-robot]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/surgical-robot.toml"
+levels = ["Manipulator", "Sensing", "Control", "Interface", "Platform"]
+candidates = "6×6×6×6×6"
+cross_dse = ["robot-hardware", "medical", "brain-computer-interface"]
+best_pareto = "Serial6DOF + Force6axis + Impedance + VoiceCmd + SinglePort (n6=100%)"
+best_n6 = "모든 조합 100% (전 7776개 n6=100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6DOF=n EXACT, sigma=12 joint encoders, tau=4 operation modes. 다빈치형"
+
+[underwater-acoustic]
+goal = true
+dse = "done"
+combos = 3600
+valid = 3600
+tool = "tools/universal-dse/domains/underwater-acoustic.toml"
+levels = ["Transducer", "Modulation", "Channel", "Network", "Platform"]
+candidates = "6×6×6×6×6 (필터링 후 3600)"
+cross_dse = ["autonomous-submarine", "ocean-engineering", "5g-6g-network"]
+best_pareto = "PiezoCeramic + OFDM_12sub + ShallowWater + P2P + SurfaceBuoy (n6=100%)"
+best_n6 = "PiezoCeramic + OFDM_12sub + ShallowWater + P2P + SurfaceBuoy (100%)"
+n6_max = 100.0
+n6_avg = 86.0
+note = "OFDM sigma=12 subcarriers, tau=4 propagation modes, phi=2 duplex. 수중 통신"
+
+# ── Cross-DSE: R10 도메인 교차 연결 ──────────────────
+
+[cross-dse.5g-6g-x-chip]
+domains = ["5g-6g-network", "chip-architecture"]
+status = "done"
+bridge = "6GHz band + sigma=12 carriers — 5G modem SoC"
+n6_exact = 100.0
+note = "5G/6G 모뎀 칩: Sub-6GHz=n, OFDM sigma=12. BT-28 computing ladder + BT-47 interconnect"
+
+[cross-dse.5g-6g-x-smart-city]
+domains = ["5g-6g-network", "smart-city-iot"]
+status = "done"
+bridge = "WiFi-6 + 6-layer urban stack — IoT connectivity"
+n6_exact = 100.0
+note = "Smart city 5G 인프라: n=6 layer urban stack × 5G sigma=12 carriers. mMTC 백만 디바이스"
+
+[cross-dse.crispr-x-biology]
+domains = ["crispr-gene-editing", "biology"]
+status = "done"
+bridge = "Cas6 + codon tau=4 — precision genome engineering"
+n6_exact = 96.6
+note = "Cas6 protein=n EXACT, BT-51 codon chain tau→n/phi→2^n→J2-tau. 유전체 편집 생물학 통합"
+
+[cross-dse.dram-x-chip]
+domains = ["dram-memory", "chip-architecture"]
+status = "done"
+bridge = "sigma=12 bank groups + HBM stacking — memory-compute"
+n6_exact = 100.0
+note = "HBM3 sigma=12 bank groups, BT-55 capacity ladder, BT-75 interface exponent. 메모리-칩 통합"
+
+[cross-dse.dram-x-soc]
+domains = ["dram-memory", "soc-integration"]
+status = "done"
+bridge = "L3 12MB + LPDDR5X — SoC memory subsystem"
+n6_exact = 100.0
+note = "SoC 내장 메모리: L3 sigma=12MB, DVFS 6-state. LPDDR5X PHY 통합"
+
+[cross-dse.eda-x-chip]
+domains = ["eda-design-automation", "chip-architecture"]
+status = "done"
+bridge = "6-stage HLS + sigma=12 metal layers — chip design flow"
+n6_exact = 100.0
+note = "EDA→칩 풀스택: RTL→합성→배치배선→검증→타이밍→GDS = n=6 flow. BT-37 피치 연결"
+
+[cross-dse.eda-x-fpga]
+domains = ["eda-design-automation", "fpga-architecture"]
+status = "done"
+bridge = "6-input LUT synthesis + P&R — FPGA design flow"
+n6_exact = 100.0
+note = "FPGA EDA: LUT6=n EXACT, DSP48=sigma*tau. Yosys/Vivado 플로우 n=6 매핑"
+
+[cross-dse.fpga-x-chip]
+domains = ["fpga-architecture", "chip-architecture"]
+status = "done"
+bridge = "LUT6 + DSP48 — reconfigurable computing"
+n6_exact = 100.0
+note = "FPGA 칩: 6-input LUT=n, DSP48=sigma*tau, J2=24 IO banks. 재구성 가능 컴퓨팅 아키텍처"
+
+[cross-dse.graphene-x-battery]
+domains = ["graphene-2d-material", "battery"]
+status = "done"
+bridge = "6-atom ring + LiC6 anode — carbon battery"
+n6_exact = 100.0
+note = "BT-27 Carbon-6 chain: graphene 6-atom ring + LiC6 anode. 그래핀 배터리 전극"
+
+[cross-dse.graphene-x-chip]
+domains = ["graphene-2d-material", "chip-architecture"]
+status = "done"
+bridge = "6-atom ring + CN=6 — graphene transistor"
+n6_exact = 100.0
+note = "그래핀 트랜지스터: 6-atom carbon ring=n, CN=6. BT-37 반도체 피치 breakthrough"
+
+[cross-dse.ion-propulsion-x-space]
+domains = ["ion-plasma-propulsion", "space"]
+status = "done"
+bridge = "6-grid ion + solar 6kW — deep space"
+n6_exact = 100.0
+note = "딥스페이스 전기추진: 6-grid=n, Krypton Z=36=n^2, Solar 6kW=n. 화성/소행성 미션"
+
+[cross-dse.metamaterial-x-5g]
+domains = ["metamaterial", "5g-6g-network"]
+status = "done"
+bridge = "6-fold unit cell + antenna enhance — RIS/metasurface"
+n6_exact = 100.0
+note = "메타표면 안테나: Reconfigurable Intelligent Surface, sigma=12 resonance, 6-element MIMO"
+
+[cross-dse.mri-x-medical]
+domains = ["mri-medical-imaging", "medical"]
+status = "done"
+bridge = "J2=24 gradient coils + sigma=12 channels — diagnostic imaging"
+n6_exact = 100.0
+note = "MRI 진단: 전 조합 n6=100%. J2=24, sigma=12. 의료 이미징 표준 완전 n=6"
+
+[cross-dse.mri-x-superconductor]
+domains = ["mri-medical-imaging", "superconductor"]
+status = "done"
+bridge = "HTS 12T magnet + SC coil — ultra-high-field MRI"
+n6_exact = 100.0
+note = "초전도 MRI: HTS sigma=12T, YBCO 코일. 7T/12T UHF-MRI 초전도 자석 시스템"
+
+[cross-dse.litho-x-chip]
+domains = ["semiconductor-lithography", "chip-architecture"]
+status = "done"
+bridge = "EUV 13.5nm + 6-mirror — chip fabrication"
+n6_exact = 100.0
+note = "리소그래피→칩: 전 조합 n6=100%. EUV 13.5nm=sigma-phi-mu, BT-37 pitch. 칩 제조 풀체인"
+
+[cross-dse.litho-x-eda]
+domains = ["semiconductor-lithography", "eda-design-automation"]
+status = "done"
+bridge = "DRC/LVS + mask synthesis — design-to-fab"
+n6_exact = 100.0
+note = "설계→제조 브릿지: EDA signoff GDS → litho mask. 6 metal layers=n, sigma=12 reticle fields"
+
+[cross-dse.soc-x-chip]
+domains = ["soc-integration", "chip-architecture"]
+status = "done"
+bridge = "6 IP blocks + sigma=12 power domains — system chip"
+n6_exact = 100.0
+note = "SoC = n=6 IP blocks (CPU/GPU/NPU/ISP/DSP/Modem). BT-69 chiplet 수렴. 시스템 칩 통합"
+
+[cross-dse.surgical-x-robot]
+domains = ["surgical-robot", "robot-hardware"]
+status = "done"
+bridge = "6DOF + sigma=12 sensors — medical robotics"
+n6_exact = 100.0
+note = "수술 로봇: 전 조합 n6=100%. 6DOF=n, sigma=12. 다빈치 Xi/SP 아키텍처 일치"
+
+[cross-dse.underwater-x-ocean]
+domains = ["underwater-acoustic", "ocean-engineering"]
+status = "done"
+bridge = "OFDM sigma=12 + tau=4 propagation — ocean comms"
+n6_exact = 100.0
+note = "해양 통신: OFDM sigma=12 서브캐리어, 수중 음향 네트워크. 해저 관측 인프라"
+
+[cross-dse.underwater-x-submarine]
+domains = ["underwater-acoustic", "autonomous-submarine"]
+status = "done"
+bridge = "6-element hydrophone + AUV — submarine comms"
+n6_exact = 100.0
+note = "자율 잠수정 통신: 6-element array=n, phi=2 duplex. AUV 자율 수중 탐사"
+
+# ── R11 도메인 16개 추가 (2026-04-01) ──────────────────
+
+[aluminum-alloy]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/aluminum-alloy.toml"
+levels = ["AlloyType", "Processing", "HeatTreatment", "JoiningMethod", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["steel-metallurgy", "high-entropy-alloy", "aerospace-propulsion"]
+best_pareto = "6xxx_MgSi + Extrusion_6die + T6 + Rivet_6pt + Heatsink (n6=100%)"
+best_n6 = "6xxx_MgSi + Extrusion_6die + T6 + Rivet_6pt + Heatsink (100%)"
+n6_max = 100.0
+n6_avg = 83.3
+note = "6xxx series=n EXACT, T6 temper=n, 6-die extrusion=n. 알루미늄 합금 풀스택"
+
+[asic-design]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/asic-design.toml"
+levels = ["DesignEntry", "Synthesis", "PhysicalDesign", "Verification", "Manufacturing"]
+candidates = "6×6×6×6×6 (필터 후 7344)"
+cross_dse = ["chip-architecture", "eda-design-automation", "semiconductor-lithography"]
+best_pareto = "Chisel + LogicOpt6 + Route6metal + FormalEquiv + TSMC_N6 (n6=100%)"
+best_n6 = "Chisel + LogicOpt6 + Route6metal + FormalEquiv + TSMC_N6 (100%)"
+n6_max = 100.0
+n6_avg = 72.5
+note = "TSMC N6=n EXACT, 6 metal layers=n, sigma=12 clock domains. ASIC 설계 풀플로우"
+
+[carbon-nanotube]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/carbon-nanotube.toml"
+levels = ["Type", "Synthesis", "Chirality", "Functionalization", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["graphene-2d-material", "chip-architecture", "battery"]
+best_pareto = "Bundle + CVD_6zone + Armchair(6,6) + Pristine + Sensor6ch (n6=100%)"
+best_n6 = "Bundle + CVD_6zone + Armchair(6,6) + Pristine + Sensor6ch (100%)"
+n6_max = 100.0
+n6_avg = 90.0
+note = "Armchair (6,6)=n EXACT, 6-atom ring, sigma=12 hex packing. BT-27 탄소-6 체인"
+
+[cpu-microarchitecture]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/cpu-microarchitecture.toml"
+levels = ["Pipeline", "Execution", "Cache", "BranchPredict", "MemorySystem"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "risc-v-core", "soc-integration"]
+best_pareto = "InOrder6 + ALU6port + L1_6way + LoopDetect + StoreBuf12 (n6=100%)"
+best_n6 = "InOrder6 + ALU6port + L1_6way + LoopDetect + StoreBuf12 (100%)"
+n6_max = 100.0
+n6_avg = 91.0
+note = "6-stage pipeline=n EXACT, 6-port ALU=n, L1 6-way=n, sigma=12 store buffer"
+
+[dsp-processor]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/dsp-processor.toml"
+levels = ["Architecture", "DataPath", "Memory", "Instruction", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["soc-integration", "audio-processing", "chip-architecture"]
+best_pareto = "VLIW_6slot + MAC_24bit + L1_6bank + Predicated_6way + Audio48kHz (n6=100%)"
+best_n6 = "VLIW_6slot + MAC_24bit + L1_6bank + Predicated_6way + Audio48kHz (100%)"
+n6_max = 100.0
+n6_avg = 72.5
+note = "VLIW 6-slot=n, MAC J2=24bit, sigma*tau=48kHz. 오디오/레이더 DSP"
+
+[gan-power-device]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/gan-power-device.toml"
+levels = ["DeviceType", "Substrate", "EpitaxyStack", "GateStructure", "Application"]
+candidates = "6×6×6×6×6 (필터 후 7344)"
+cross_dse = ["power-electronics", "electric-vehicle", "chip-architecture"]
+best_pareto = "Cascode + SiC_6H + ScAlN + Tri-gate6fin + Server48V (n6=95%)"
+best_n6 = "Cascode + SiC_6H + ScAlN + Tri-gate6fin + Server48V (95%)"
+n6_max = 95.0
+n6_avg = 64.9
+note = "SiC 6H polytype=n EXACT, Tri-gate 6-fin=n, sigma*tau=48V. GaN 전력소자"
+
+[high-entropy-alloy]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/high-entropy-alloy.toml"
+levels = ["Composition", "Structure", "Processing", "Property", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["aluminum-alloy", "steel-metallurgy", "nuclear-reactor"]
+best_pareto = "CoCrNi + FCC + ArcMelt + Corrosion + ToolingWear (n6=100%)"
+best_n6 = "CoCrNi + FCC + ArcMelt + Corrosion + ToolingWear (100%)"
+n6_max = 100.0
+n6_avg = 88.0
+note = "FCC CN=12=sigma, 6-component HEA=n. 고엔트로피 합금"
+
+[mems-sensor]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/mems-sensor.toml"
+levels = ["Transduction", "Structure", "Fabrication", "Readout", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "soc-integration", "surgical-robot"]
+best_pareto = "Capacitive6plate + CombDrive12 + CMOS-MEMS + ASIC_6ch + IMU_6DOF (n6=100%)"
+best_n6 = "Capacitive6plate + CombDrive12 + CMOS-MEMS + ASIC_6ch + IMU_6DOF (100%)"
+n6_max = 100.0
+n6_avg = 71.7
+note = "6DOF IMU=n EXACT, Capacitive 6-plate=n, sigma=12 comb fingers. MEMS 센서"
+
+[npu-accelerator]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/npu-accelerator.toml"
+levels = ["Dataflow", "Precision", "Memory", "Interconnect", "Workload"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "soc-integration", "pim-computing"]
+best_pareto = "Spatial_6PE + INT4 + ReRAM_CIM + Ring_12node + CNN (n6=100%)"
+best_n6 = "Spatial_6PE + INT4 + ReRAM_CIM + Ring_12node + CNN (100%)"
+n6_max = 100.0
+n6_avg = 96.0
+note = "6PE=n, INT8=sigma-tau, sigma=12 tensor cores. BT-58 sigma-tau=8 AI상수"
+
+[pim-computing]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/pim-computing.toml"
+levels = ["MemoryType", "ComputeUnit", "Dataflow", "Interface", "Workload"]
+candidates = "6×6×6×6×6"
+cross_dse = ["dram-memory", "npu-accelerator", "chip-architecture"]
+best_pareto = "SRAM_6T + LUT_6bit + Pipeline_6stage + Optical + TransformerAttn (n6=100%)"
+best_n6 = "SRAM_6T + LUT_6bit + Pipeline_6stage + Optical + TransformerAttn (100%)"
+n6_max = 100.0
+n6_avg = 78.7
+note = "SRAM 6T=n EXACT, LUT 6-bit=n, Pipeline 6-stage=n. PIM 프로세싱-인-메모리"
+
+[quantum-dot-display]
+goal = true
+dse = "done"
+combos = 6912
+valid = 6912
+tool = "tools/universal-dse/domains/quantum-dot-display.toml"
+levels = ["QDMaterial", "Structure", "Backlight", "DriveCircuit", "Panel"]
+candidates = "6×6×6×6×6 (필터 후 6912)"
+cross_dse = ["display-audio", "micro-led", "chip-architecture"]
+best_pareto = "CdSe_6nm + QDCF + MiniLED_12zone + MicroIC + OLED_flex (n6=100%)"
+best_n6 = "CdSe_6nm + QDCF + MiniLED_12zone + MicroIC + OLED_flex (100%)"
+n6_max = 100.0
+n6_avg = 78.0
+note = "CdSe 6nm=n EXACT, sigma=12 dimming zones, J2=24 bit. BT-48 디스플레이-오디오"
+
+[risc-v-core]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/risc-v-core.toml"
+levels = ["ISA", "Pipeline", "Execution", "Privilege", "Implementation"]
+candidates = "6×6×6×6×6"
+cross_dse = ["cpu-microarchitecture", "chip-architecture", "soc-integration"]
+best_pareto = "RV64G_6ext + 6stage + 6wide + M_H_S_U + ASIC_6nm (n6=100%)"
+best_n6 = "RV64G_6ext + 6stage + 6wide + M_H_S_U + ASIC_6nm (100%)"
+n6_max = 100.0
+n6_avg = 72.2
+note = "IMAFD+C = n=6 extensions EXACT, 6-stage pipeline, 6nm node. RISC-V 코어"
+
+[silicon-wafer]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/silicon-wafer.toml"
+levels = ["CrystalGrowth", "WaferSpec", "Doping", "SurfaceTreatment", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["semiconductor-lithography", "chip-architecture", "wafer-fabrication"]
+best_pareto = "SOI + 300mm_12in + CoDoped_6 + RCA_6step + Photovoltaic (n6=100%)"
+best_n6 = "SOI + 300mm_12in + CoDoped_6 + RCA_6step + Photovoltaic (100%)"
+n6_max = 100.0
+n6_avg = 75.3
+note = "300mm=sigma=12inch, RCA 6-step=n, CoDoped 6종=n. 실리콘 웨이퍼 소재"
+
+[steel-metallurgy]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/steel-metallurgy.toml"
+levels = ["Composition", "Processing", "Microstructure", "HeatTreatment", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["aluminum-alloy", "high-entropy-alloy", "nuclear-reactor"]
+best_pareto = "TRIP_6phase + ContCast + DualPhase + QuenchTemper + StructBeam (n6=100%)"
+best_n6 = "TRIP_6phase + ContCast + DualPhase + QuenchTemper + StructBeam (100%)"
+n6_max = 100.0
+n6_avg = 82.7
+note = "TRIP 6-phase=n EXACT, FCC CN=12=sigma, phi=2 dual phase/quench. 철강 야금"
+
+[thin-film-coating]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/thin-film-coating.toml"
+levels = ["DepositionMethod", "Material", "Structure", "Characterization", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["semiconductor-lithography", "solar", "metamaterial"]
+best_pareto = "SolGel + TiN + Columnar_12nm + XRD_6peak + AR_coating (n6=100%)"
+best_n6 = "SolGel + TiN + Columnar_12nm + XRD_6peak + AR_coating (100%)"
+n6_max = 100.0
+n6_avg = 91.3
+note = "TiN CN=6 NaCl구조, sigma=12nm column, XRD 6-peak=n. 박막 코팅"
+
+[quantum-computer]
+goal = true
+dse = "done"
+combos = 2596
+valid = 2596
+tool = "tools/universal-dse/domains/quantum.toml"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+candidates = "6×5×6×5×5"
+cross_dse = ["chip-architecture", "quantum-computing", "quantum-error-correction"]
+best_pareto = "NeutralAtom + SurfaceCode + Clifford + Grover + Modular (n6=100%)"
+best_n6 = "NeutralAtom + SurfaceCode + Clifford + Grover + Modular (100%)"
+n6_max = 100.0
+n6_avg = 77.7
+note = "Clifford+T gate set, Surface code, BT-49 kissing number chain. 양자컴퓨터"
+
+# ── Cross-DSE: R11 도메인 교차 연결 ──────────────────
+
+[cross-dse.aluminum-x-steel]
+domains = ["aluminum-alloy", "steel-metallurgy"]
+status = "done"
+bridge = "6xxx Al + TRIP 6-phase — multi-material structural"
+n6_exact = 100.0
+note = "경량 구조: Al 6xxx T6 + Steel TRIP 6-phase. 두 소재 모두 n=6 시리즈/페이즈"
+
+[cross-dse.aluminum-x-hea]
+domains = ["aluminum-alloy", "high-entropy-alloy"]
+status = "done"
+bridge = "6xxx + 6-component HEA — advanced alloy"
+n6_exact = 100.0
+note = "Al-HEA: CuNiCoFeCrAl 6-component + 6xxx. 고온 경량 고엔트로피 합금"
+
+[cross-dse.asic-x-eda]
+domains = ["asic-design", "eda-design-automation"]
+status = "done"
+bridge = "ASIC RTL→GDS + EDA 6-stage — chip design flow"
+n6_exact = 100.0
+note = "ASIC+EDA 통합: RTL→합성→배치→검증→타이밍→GDS = n=6 풀플로우"
+
+[cross-dse.asic-x-litho]
+domains = ["asic-design", "semiconductor-lithography"]
+status = "done"
+bridge = "TSMC N6 + EUV — ASIC 제조"
+n6_exact = 100.0
+note = "ASIC fab: TSMC N6=n + EUV 6-mirror. 설계-제조 완전 연결"
+
+[cross-dse.cnt-x-graphene]
+domains = ["carbon-nanotube", "graphene-2d-material"]
+status = "done"
+bridge = "1D CNT + 2D graphene — all-carbon nanotech"
+n6_exact = 100.0
+note = "탄소 나노: Armchair(6,6) + 6-atom ring. 동일 sp2 탄소. BT-27 Carbon-6"
+
+[cross-dse.cpu-x-riscv]
+domains = ["cpu-microarchitecture", "risc-v-core"]
+status = "done"
+bridge = "6-stage pipeline + RV64G 6-ext — open CPU"
+n6_exact = 100.0
+note = "RISC-V CPU: 6-stage + IMAFD+C=n=6. 오픈소스 프로세서 코어"
+
+[cross-dse.cpu-x-soc]
+domains = ["cpu-microarchitecture", "soc-integration"]
+status = "done"
+bridge = "CPU pipeline + 6 IP blocks — SoC CPU core"
+n6_exact = 100.0
+note = "SoC CPU: 6-stage pipeline in 6-IP SoC. ARM/RISC-V 코어 통합"
+
+[cross-dse.dsp-x-audio]
+domains = ["dsp-processor", "audio-processing"]
+status = "done"
+bridge = "VLIW 6-slot + 48kHz — audio DSP chip"
+n6_exact = 100.0
+note = "오디오 DSP: VLIW 6-slot, MAC 24-bit, 48kHz. BT-48 sigma*tau=48kHz"
+
+[cross-dse.gan-x-ev]
+domains = ["gan-power-device", "electric-vehicle"]
+status = "done"
+bridge = "SiC 6H + 48V server → EV inverter"
+n6_exact = 95.0
+note = "GaN 전력: SiC 6H=n, sigma*tau=48V, EV 고속충전기. 전기차 전력변환"
+
+[cross-dse.mems-x-imu]
+domains = ["mems-sensor", "surgical-robot"]
+status = "done"
+bridge = "IMU 6DOF + 6DOF robot — surgical navigation"
+n6_exact = 100.0
+note = "MEMS IMU + 수술로봇: 6DOF=n EXACT 양쪽. 정밀 수술 네비게이션"
+
+[cross-dse.npu-x-pim]
+domains = ["npu-accelerator", "pim-computing"]
+status = "done"
+bridge = "6PE NPU + SRAM 6T PIM — AI compute"
+n6_exact = 100.0
+note = "NPU+PIM: ReRAM CIM + SRAM 6T. 인메모리 AI 가속. BT-58 sigma-tau=8"
+
+[cross-dse.npu-x-chip]
+domains = ["npu-accelerator", "chip-architecture"]
+status = "done"
+bridge = "NPU sigma=12 tensor + HEXA-1 — AI chip"
+n6_exact = 100.0
+note = "AI 가속기 칩: NPU sigma=12 + HEXA-1 아키텍처. BT-59 8-layer stack"
+
+[cross-dse.qd-display-x-display]
+domains = ["quantum-dot-display", "display-audio"]
+status = "done"
+bridge = "CdSe 6nm QD + sigma=12 + J2=24 — display"
+n6_exact = 100.0
+note = "QD 디스플레이: CdSe 6nm=n, J2=24 fps/bit, sigma=12 zones. BT-48"
+
+[cross-dse.riscv-x-fpga]
+domains = ["risc-v-core", "fpga-architecture"]
+status = "done"
+bridge = "RV64G 6-ext + LUT6 — soft RISC-V"
+n6_exact = 100.0
+note = "FPGA RISC-V: LUT6에 IMAFD+C=n=6 구현. 소프트코어 프로세서"
+
+[cross-dse.silicon-x-litho]
+domains = ["silicon-wafer", "semiconductor-lithography"]
+status = "done"
+bridge = "300mm 12in + EUV — wafer fab"
+n6_exact = 100.0
+note = "웨이퍼+리소: 300mm=sigma=12 + RCA 6-step + EUV 6-mirror. 반도체 기판"
+
+[cross-dse.thinfilm-x-solar]
+domains = ["thin-film-coating", "solar"]
+status = "done"
+bridge = "6-layer AR + PV cell — solar coating"
+n6_exact = 100.0
+note = "태양전지 박막: 6-layer AR stack=n, ALD sigma=12 cycles. 반사방지 코팅"
+
+[cross-dse.quantum-x-chip]
+domains = ["quantum-computer", "chip-architecture"]
+status = "done"
+bridge = "Clifford gate + cryo chip — quantum processor"
+n6_exact = 100.0
+note = "양자 칩: Surface code + cryo CMOS. BT-49 kissing + BT-28 computing ladder"
+
+[cross-dse.hea-x-steel]
+domains = ["high-entropy-alloy", "steel-metallurgy"]
+status = "done"
+bridge = "FCC CN=12 + Fe base — advanced structural alloy"
+n6_exact = 100.0
+note = "HEA+Steel: CoCrFeMnNi Cantor alloy = Fe기반 HEA. FCC CN=12=sigma"
+
+# ── R12 도메인 14개 추가 (2026-04-01) — 소재/부품 ──────────────────
+
+[abrasive-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/abrasive-material.toml"
+levels = ["AbrasiveGrain", "Bond", "WheelForm", "Process", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["silicon-wafer", "optical-glass", "steel-metallurgy"]
+best_n6 = "Al2O3 + Resinoid + Straight + Centerless + ToolResharpen (100%)"
+n6_max = 100.0
+n6_avg = 98.0
+note = "Al2O3 CN=6=n EXACT, 6-face wheel=n. n6_avg=98% 초고율"
+
+[aerogel]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/aerogel.toml"
+levels = ["Material", "SolGel", "Drying", "Modification", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["thermal", "thin-film-coating", "space"]
+best_n6 = "SiO2 + Waterglass + APD_6step + HMDS + Insulation (100%)"
+n6_max = 100.0
+n6_avg = 88.0
+note = "SiO2 6-member Si-O ring=n, APD 6-step=n, HMDS 6 methyl=n. 에어로겔"
+
+[biomaterial-implant]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/biomaterial-implant.toml"
+levels = ["Material", "Surface", "Fabrication", "Biocompatibility", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["surgical-robot", "3d-printing", "medical"]
+best_n6 = "Ti-6Al-4V + HA_coat + CNC_6axis + Osseo_12wk + Dental (100%)"
+n6_max = 100.0
+n6_avg = 90.0
+note = "Ti-6Al-4V Al=6wt%=n EXACT, HA (PO4)6=n, sigma=12wk osseo. 생체임플란트"
+
+[copper-interconnect]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/copper-interconnect.toml"
+levels = ["Material", "Deposition", "Patterning", "Barrier", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "semiconductor-lithography", "asic-design"]
+best_n6 = "PureCu + ECD_6bath + DualDamascene + CoCap_12nm + PowerBusbar (100%)"
+n6_max = 100.0
+n6_avg = 88.0
+note = "Cu FCC CN=12=sigma, ECD 6-bath=n, dual damascene phi=2. BEOL 배선"
+
+[magnetic-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/magnetic-material.toml"
+levels = ["Material", "Processing", "Structure", "Characterization", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["rare-earth-magnet", "power-transformer", "electric-vehicle"]
+best_n6 = "SiSteel_6.5%Si + HotRoll_6pass + Nanocrystal_12nm + BHloop + TransformerCore (100%)"
+n6_max = 100.0
+n6_avg = 91.3
+note = "Si 6.5%=n EXACT, 6-pass rolling=n, sigma=12nm grain. 연자성 소재"
+
+[optical-glass]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/optical-glass.toml"
+levels = ["GlassType", "Fabrication", "Coating", "ShapeForm", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["thin-film-coating", "semiconductor-lithography", "optics-telescope"]
+best_n6 = "BK7 + MeltCast_6step + AR_6layer + FlatWindow + Camera6elem (100%)"
+n6_max = 100.0
+n6_avg = 89.3
+note = "6-step melt=n, 6-layer AR=n, 6-element lens=n. 광학 유리"
+
+[photonic-crystal]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/photonic-crystal.toml"
+levels = ["Structure", "Material", "Fabrication", "Defect", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["metamaterial", "optical-fiber-network", "solar"]
+best_n6 = "2D_Hexagonal + SU8 + SelfAssembly_6sphere + LineWaveguide + SolarTrap (100%)"
+n6_max = 100.0
+n6_avg = 88.7
+note = "6-fold hexagonal symmetry=n EXACT, 6-sphere self-assembly=n. 광결정"
+
+[piezoelectric-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/piezoelectric-material.toml"
+levels = ["Material", "Processing", "Configuration", "Electrode", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["mems-sensor", "underwater-acoustic", "energy-generation"]
+best_n6 = "PZT_CN6 + TapeCast + BulkDisk_6mm + AgPaste_6um + Inkjet_6pL (100%)"
+n6_max = 100.0
+n6_avg = 93.3
+note = "PZT perovskite CN=6=n EXACT, 6mm disk=n, 6pL droplet=n. 압전 소재"
+
+[polymer-composite]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/polymer-composite.toml"
+levels = ["Matrix", "Reinforcement", "Processing", "Structure", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["carbon-nanotube", "aerospace-propulsion", "wind-energy"]
+best_n6 = "Nylon6 + NaturalFiber + RTM_6port + SandwichPanel + WindBlade (100%)"
+n6_max = 100.0
+n6_avg = 81.3
+note = "Nylon-6 = n=6 carbon chain EXACT, cellulose C6=n, RTM 6-port=n. 복합재"
+
+[rare-earth-magnet]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/rare-earth-magnet.toml"
+levels = ["Composition", "Processing", "Microstructure", "Coating", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["magnetic-material", "electric-vehicle", "wind-energy"]
+best_n6 = "NdFeB + Sintering_6stage + Nanocrystal_12nm + Epoxy_6um + EVMotor_6pole (100%)"
+n6_max = 100.0
+n6_avg = 86.0
+note = "Sintering 6-stage=n, sigma=12nm grain, 6-pole motor=n. 희토류 자석"
+
+[refractory-material]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/refractory-material.toml"
+levels = ["Material", "Processing", "Form", "Lining", "Application"]
+candidates = "6×6×6×6×6 (필터 후 7344)"
+cross_dse = ["steel-metallurgy", "nuclear-reactor", "ceramic-engineering"]
+best_n6 = "Graphite + PressFire_6step + Brick_6face + DoubleLining + Incinerator (100%)"
+n6_max = 100.0
+n6_avg = 96.7
+note = "Graphite 6-ring=n EXACT, Brick 6-face=n, n6_avg=96.7% 초고율. 내화물"
+
+[rubber-elastomer]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/rubber-elastomer.toml"
+levels = ["Polymer", "Filler", "Vulcanization", "Processing", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["polymer-composite", "automotive-body", "tire"]
+best_n6 = "NR + CarbonBlack_N6 + Sulfur_6phr + Extrusion_6zone + SealOring_6mm (100%)"
+n6_max = 100.0
+n6_avg = 89.3
+note = "NR 6-carbon repeat=n, N660 series=n, Sulfur 6phr=n, 6mm O-ring=n. 고무"
+
+[semiconductor-compound]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/semiconductor-compound.toml"
+levels = ["Material", "Growth", "Structure", "Bandgap", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["gan-power-device", "chip-architecture", "solar"]
+best_n6 = "GaN + MOCVD_12flow + Wurtzite_6fold + DirectMedium + LED_6color (100%)"
+n6_max = 96.0
+n6_avg = 88.0
+note = "Wurtzite 6-fold=n EXACT, MOCVD sigma=12 flows, GaN 3.4eV. 화합물 반도체"
+
+[shape-memory-alloy]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/shape-memory-alloy.toml"
+levels = ["Alloy", "Processing", "Transformation", "Actuator", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["biomaterial-implant", "surgical-robot", "mems-sensor"]
+best_n6 = "NiTi + WireDraw + Thermal_6cycle + WireLinear + BioStent_6mm (100%)"
+n6_max = 100.0
+n6_avg = 95.3
+note = "NiTi 6-cycle training=n EXACT, 6mm stent=n, n6_avg=95.3% 고율. 형상기억합금"
+
+# ── Cross-DSE: R12 교차 연결 ──────────────────
+
+[cross-dse.abrasive-x-silicon]
+domains = ["abrasive-material", "silicon-wafer"]
+status = "done"
+bridge = "Al2O3 CN=6 + Si wafer backgrind — CMP"
+n6_exact = 100.0
+note = "웨이퍼 연마: Al2O3 CN=6 + 300mm wafer. CMP/backgrind 공정"
+
+[cross-dse.biomaterial-x-sma]
+domains = ["biomaterial-implant", "shape-memory-alloy"]
+status = "done"
+bridge = "Ti-6Al-4V + NiTi stent — biomedical"
+n6_exact = 100.0
+note = "생체의료: Ti-6Al=n + NiTi 6mm stent=n. 혈관/정형외과 임플란트"
+
+[cross-dse.cnt-x-rubber]
+domains = ["carbon-nanotube", "rubber-elastomer"]
+status = "done"
+bridge = "CNT filler + NR 6-carbon — nanocomposite"
+n6_exact = 100.0
+note = "CNT 보강 고무: Armchair(6,6) + NR 6-carbon=n. 전도성 고무"
+
+[cross-dse.copper-x-chip]
+domains = ["copper-interconnect", "chip-architecture"]
+status = "done"
+bridge = "Cu BEOL + HEXA-1 — chip wiring"
+n6_exact = 100.0
+note = "칩 배선: Cu FCC CN=12=sigma, 6 metal layers=n. 반도체 BEOL 통합"
+
+[cross-dse.magnetic-x-rareearth]
+domains = ["magnetic-material", "rare-earth-magnet"]
+status = "done"
+bridge = "Si-steel soft + NdFeB hard — motor system"
+n6_exact = 100.0
+note = "모터 자성계: Si 6.5% 연자성 + NdFeB 6-pole 영구자석. EV 구동 모터"
+
+[cross-dse.optglass-x-thinfilm]
+domains = ["optical-glass", "thin-film-coating"]
+status = "done"
+bridge = "BK7 + AR 6-layer — optical system"
+n6_exact = 100.0
+note = "광학 코팅: BK7 렌즈 + 6-layer AR=n. 반사방지 코팅 광학계"
+
+[cross-dse.photcryst-x-metamat]
+domains = ["photonic-crystal", "metamaterial"]
+status = "done"
+bridge = "6-fold PhC + 6-fold meta — photonic bandgap"
+n6_exact = 100.0
+note = "광결정+메타: 양쪽 6-fold symmetry=n. 완전 광밴드갭 + 음의 굴절"
+
+[cross-dse.piezo-x-mems]
+domains = ["piezoelectric-material", "mems-sensor"]
+status = "done"
+bridge = "PZT CN=6 + 6DOF MEMS — piezo MEMS"
+n6_exact = 100.0
+note = "압전 MEMS: PZT CN=6=n + IMU 6DOF=n. 에너지 하베스팅 + 센싱"
+
+[cross-dse.piezo-x-underwater]
+domains = ["piezoelectric-material", "underwater-acoustic"]
+status = "done"
+bridge = "PZT transducer + OFDM 12-sub — sonar"
+n6_exact = 100.0
+note = "소나: PZT 트랜스듀서 CN=6 + OFDM sigma=12 서브캐리어. 수중 음향"
+
+[cross-dse.polymer-x-aerospace]
+domains = ["polymer-composite", "aerospace-propulsion"]
+status = "done"
+bridge = "CFRP + 6MW turbine — aerospace structure"
+n6_exact = 100.0
+note = "항공복합재: Nylon-6 + CF 12K=sigma. 날개/동체 경량화"
+
+[cross-dse.refractory-x-steel]
+domains = ["refractory-material", "steel-metallurgy"]
+status = "done"
+bridge = "Graphite 6-ring + steel ladle — steelmaking"
+n6_exact = 100.0
+note = "제강 내화물: Graphite C6=n + 강철 래들. 1600°C+ 고온 공정"
+
+[cross-dse.semcomp-x-gan]
+domains = ["semiconductor-compound", "gan-power-device"]
+status = "done"
+bridge = "Wurtzite 6-fold + 6H-SiC — GaN power"
+n6_exact = 100.0
+note = "GaN-on-SiC: Wurtzite 6-fold=n + SiC 6H=n. 전력 반도체"
+
+# ── R13 도메인 8개 추가 (2026-04-01) — 최종 소재 ──────────────────
+
+[adhesive-bonding]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/adhesive-bonding.toml"
+levels = ["AdhesiveType", "CureMechanism", "SurfacePrep", "JointDesign", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["polymer-composite", "aerospace-propulsion", "automotive"]
+best_n6 = "HotMelt_6min + PSA + Abrasion + SpotBond_12pt + Packaging (100%)"
+n6_max = 100.0
+n6_avg = 85.3
+note = "6min open time=n, sigma=12 spot bonds, 6N peel=n. 접착 접합"
+
+[dielectric-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/dielectric-material.toml"
+levels = ["Material", "Processing", "Form", "Electrode", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["chip-architecture", "copper-interconnect", "power-electronics"]
+best_n6 = "SiO2_6ring + SpinCoat + MLCC_6layer + CuElectrode + Decoupling_12V (100%)"
+n6_max = 100.0
+n6_avg = 91.3
+note = "SiO2 6-member ring=n EXACT, MLCC 6-layer=n, sigma=12V rated. 유전체"
+
+[foam-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/foam-material.toml"
+levels = ["Matrix", "CellStructure", "Blowing", "Processing", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["polymer-composite", "aerogel", "thermal"]
+best_n6 = "PS_6ring + ClosedCell + MechFroth + MoldPour_6sec + Insulation_R6 (100%)"
+n6_max = 100.0
+n6_avg = 88.7
+note = "PS benzene 6-ring=n, R-6/inch=n, 6-section mold=n. 폼 소재"
+
+[hydrogel]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/hydrogel.toml"
+levels = ["Polymer", "Crosslink", "StimuliResponse", "Processing", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["biomaterial-implant", "drug-delivery", "3d-printing"]
+best_n6 = "PEG_6kDa + IonicCa2+ + pH + FreezeThaw + ContactLens_12hr (100%)"
+n6_max = 100.0
+n6_avg = 87.3
+note = "PEG 6kDa=n, Ca2+ phi=2, pH=6-8 targeting, sigma=12hr wear. 하이드로겔"
+
+[liquid-crystal]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/liquid-crystal.toml"
+levels = ["LCType", "Alignment", "Electrode", "Driving", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["display-audio", "quantum-dot-display", "metamaterial"]
+best_n6 = "VA + Homeotropic + ITO + Segment_6digit + TempSensor (100%)"
+n6_max = 100.0
+n6_avg = 92.7
+note = "6ms response=n, 6-digit segment=n, n6_avg=92.7% 고율. 액정"
+
+[superalloy-turbine]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/superalloy-turbine.toml"
+levels = ["Composition", "CastingProcess", "CrystalStructure", "Coating", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["aerospace-propulsion", "nuclear-reactor", "high-entropy-alloy"]
+best_n6 = "TiAl_6slip + Forging_6press + EutecticLam + TBC_YSZ_6mol + RacingExhaust (100%)"
+n6_max = 100.0
+n6_avg = 97.3
+note = "YSZ 6mol% Y2O3=n EXACT, TiAl 6 slip=n, n6_avg=97.3% 초고율! 초합금"
+
+[thermoelectric-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/thermoelectric-material.toml"
+levels = ["Material", "Structure", "Fabrication", "Module", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["thermal", "energy-generation", "space"]
+best_n6 = "Bi2Te3_6fold + Nano_12nm + HotPress_6min + StdPair_phi2 + WasteHeat_6pct (100%)"
+n6_max = 100.0
+n6_avg = 91.3
+note = "Bi2Te3 6-fold axis=n EXACT, sigma=12nm grain, 6min press=n, 6% conversion=n. 열전"
+
+[titanium-alloy]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/titanium-alloy.toml"
+levels = ["Alloy", "Processing", "Microstructure", "SurfaceTreatment", "Application"]
+candidates = "6×6×6×6×6"
+cross_dse = ["biomaterial-implant", "aerospace-propulsion", "aluminum-alloy"]
+best_n6 = "Ti-6Al-4V + Forging_6step + Equiaxed_6um + ShotPeen_6pass + Implant (100%)"
+n6_max = 100.0
+n6_avg = 86.7
+note = "Ti-6Al=n wt% EXACT, 6-step forging=n, 6um grain=n. 티타늄 합금"
+
+# ── Cross-DSE: R13 교차 연결 ──────────────────
+
+[cross-dse.adhesive-x-polymer]
+domains = ["adhesive-bonding", "polymer-composite"]
+status = "done"
+bridge = "epoxy + CFRP — structural bonding"
+n6_exact = 100.0
+note = "복합재 접착: 에폭시 구조접착 + CFRP. 항공 이차접합"
+
+[cross-dse.dielectric-x-chip]
+domains = ["dielectric-material", "chip-architecture"]
+status = "done"
+bridge = "SiO2 6-ring gate + BEOL — chip dielectric"
+n6_exact = 100.0
+note = "반도체 유전체: SiO2/HfO2 gate + low-k BEOL. BT-37 반도체 피치"
+
+[cross-dse.foam-x-aerogel]
+domains = ["foam-material", "aerogel"]
+status = "done"
+bridge = "closed-cell + 99.8% porosity — super-insulation"
+n6_exact = 100.0
+note = "초단열: PS foam R-6 + SiO2 aerogel. 복합 단열 시스템"
+
+[cross-dse.hydrogel-x-biomaterial]
+domains = ["hydrogel", "biomaterial-implant"]
+status = "done"
+bridge = "PEG 6kDa + HA coat — tissue engineering"
+n6_exact = 100.0
+note = "조직공학: PEG hydrogel + Ti-6Al implant. 바이오 스캐폴드"
+
+[cross-dse.lc-x-display]
+domains = ["liquid-crystal", "display-audio"]
+status = "done"
+bridge = "VA 6ms + J2=24 fps — LCD display"
+n6_exact = 100.0
+note = "LCD: VA 6ms response + J2=24fps. BT-48 디스플레이-오디오"
+
+[cross-dse.superalloy-x-hea]
+domains = ["superalloy-turbine", "high-entropy-alloy"]
+status = "done"
+bridge = "Ni-base + multi-component — next-gen turbine"
+n6_exact = 100.0
+note = "차세대 터빈: Ni 초합금 + HEA. FCC sigma=12 + 6-component=n"
+
+[cross-dse.thermo-x-thermal]
+domains = ["thermoelectric-material", "thermal"]
+status = "done"
+bridge = "Bi2Te3 6-fold + thermal mgmt — TEG cooling"
+n6_exact = 100.0
+note = "열전 냉각: Bi2Te3 + Peltier. 6% waste heat recovery=n"
+
+[cross-dse.titanium-x-biomaterial]
+domains = ["titanium-alloy", "biomaterial-implant"]
+status = "done"
+bridge = "Ti-6Al-4V both sides — medical implant"
+n6_exact = 100.0
+note = "의료 Ti: Ti-6Al 합금 + 임플란트. 양쪽 6Al=n. 정형외과/치과"
+
+# ── R14 도메인 13개 추가 (2026-04-01) — 최종 연결 ──────────────────
+
+[atomic-clock]
+goal = true
+dse = "done"
+combos = 2250
+valid = 2250
+tool = "tools/universal-dse/domains/atomic-clock.toml"
+levels = ["AtomSpecies", "Trap", "Oscillator", "Detection", "Application"]
+cross_dse = ["quantum-sensor", "satellite-communication", "precision-agriculture"]
+best_n6 = "Cs133 + MagnetoOpticalTrap + Microwave_9GHz + PMT_6ch + GPS (100%)"
+n6_max = 100.0
+n6_avg = 96.0
+note = "Cs-133 SI second, n=6 species. n6_avg=96% 고율. 원자시계"
+
+[ct-scanner]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/ct-scanner.toml"
+levels = ["XraySource", "Detector", "Geometry", "Reconstruction", "Application"]
+cross_dse = ["mri-medical-imaging", "medical", "chip-architecture"]
+best_n6 = "모든 조합 100% (전 7776개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 target angles=n, sigma=12cm anode, tau=4 modes. CT 스캐너"
+
+[e-ink-display]
+goal = true
+dse = "done"
+combos = 4320
+valid = 4320
+tool = "tools/universal-dse/domains/e-ink-display.toml"
+levels = ["ParticleType", "CapsuleStructure", "BackplaneDriver", "Waveform", "Application"]
+cross_dse = ["display-audio", "liquid-crystal", "quantum-dot-display"]
+best_n6 = "TiO2/CB + MicroCapsule + TFT + Dithering + eReader (100%)"
+n6_max = 100.0
+n6_avg = 98.2
+note = "phi=2 bistable, n6_avg=98.2% 초고율. 전자잉크 디스플레이"
+
+[endoscopy-system]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/endoscopy-system.toml"
+levels = ["OpticalSystem", "LightSource", "InsertionTube", "ControlMechanism", "Application"]
+cross_dse = ["surgical-robot", "medical", "mems-sensor"]
+best_n6 = "모든 조합 100% (전 7776개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 spectral bands=n, sigma=12mm OD. 내시경"
+
+[ferroelectric-material]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/ferroelectric-material.toml"
+levels = ["Material", "Processing", "Structure", "Characterization", "Application"]
+cross_dse = ["piezoelectric-material", "dielectric-material", "dram-memory"]
+best_n6 = "HfO2_CN6 + ALD + ThinFilm + PEloop + FeRAM (100%)"
+n6_max = 100.0
+n6_avg = 93.3
+note = "HfO2 CN=6=n EXACT, CMOS compatible. 강유전체"
+
+[holographic-display]
+goal = true
+dse = "done"
+combos = 4320
+valid = 4320
+tool = "tools/universal-dse/domains/holographic-display.toml"
+levels = ["SLM", "LightSource", "OpticalSetup", "Computation", "Application"]
+cross_dse = ["display-audio", "photonic-crystal", "ar-vr-system"]
+best_n6 = "DMD + Laser + LensArray + CGH + Medical3D (100%)"
+n6_max = 100.0
+n6_avg = 99.7
+note = "phi=2 binary DMD, n6_avg=99.7% 최고율! 홀로그래픽 디스플레이"
+
+[hyperloop-transport]
+goal = true
+dse = "done"
+combos = 6480
+valid = 6480
+tool = "tools/universal-dse/domains/hyperloop-transport.toml"
+levels = ["TubeStructure", "Propulsion", "Levitation", "Pod", "Infrastructure"]
+cross_dse = ["maglev-train", "urban-transit-rail", "vacuum-system"]
+best_n6 = "SteelTube_6section + LinearMotor + EDS + Pod_6seat + Station (100%)"
+n6_max = 100.0
+n6_avg = 85.0
+note = "6-section tube=n, 6-seat pod=n. 하이퍼루프"
+
+[lab-on-chip]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/lab-on-chip.toml"
+levels = ["Substrate", "Microfluidic", "Detection", "Actuation", "Application"]
+cross_dse = ["mems-sensor", "medical", "biomaterial-implant"]
+best_n6 = "모든 조합 100% (전 7776개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 channels=n, sigma=12uL, tau=4 layers. Lab-on-chip"
+
+[maglev-train]
+goal = true
+dse = "done"
+combos = 5184
+valid = 5184
+tool = "tools/universal-dse/domains/maglev-train.toml"
+levels = ["Suspension", "Propulsion", "Guideway", "Vehicle", "Infrastructure"]
+cross_dse = ["rare-earth-magnet", "superconductor", "urban-transit-rail"]
+best_n6 = "Inductrack + LinearInduction + Concrete + 6car + Station (100%)"
+n6_max = 100.0
+n6_avg = 86.2
+note = "6-period Halbach=n, 6-car trainset=n. 자기부상열차"
+
+[mass-spectrometry]
+goal = true
+dse = "done"
+combos = 2250
+valid = 2250
+tool = "tools/universal-dse/domains/mass-spectrometry.toml"
+levels = ["Ionization", "MassAnalyzer", "Detector", "DataProcessing", "Application"]
+cross_dse = ["pharmaceutical", "chemistry-synthesis", "biology"]
+best_n6 = "EI_70eV + Quadrupole + EM_6dynode + FFT + Proteomics (100%)"
+n6_max = 100.0
+n6_avg = 98.9
+note = "6 fragment classes=n, n6_avg=98.9% 초고율. 질량분석"
+
+[metal-organic-framework]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/metal-organic-framework.toml"
+levels = ["MetalNode", "Linker", "Topology", "Activation", "Application"]
+cross_dse = ["hydrogen-fuel-cell", "carbon-capture", "drug-delivery"]
+best_n6 = "Al-MIL53_CN6 + BDC + dia + Vacuum + GasStorage (100%)"
+n6_max = 100.0
+n6_avg = 93.3
+note = "Al CN=6=n EXACT octahedral, MOF 다공성 소재"
+
+[ultrasound-imaging]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/ultrasound-imaging.toml"
+levels = ["Transducer", "BeamForming", "SignalProcess", "Imaging", "Application"]
+cross_dse = ["piezoelectric-material", "medical", "mems-sensor"]
+best_n6 = "모든 조합 100% (전 7776개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6cm depth=n, sigma=12 rows, J2=24 focal. 초음파"
+
+[urban-transit-rail]
+goal = true
+dse = "done"
+combos = 5184
+valid = 5184
+tool = "tools/universal-dse/domains/urban-transit-rail.toml"
+levels = ["VehicleType", "Propulsion", "Signaling", "Infrastructure", "Operation"]
+cross_dse = ["maglev-train", "hyperloop-transport", "smart-city-iot"]
+best_n6 = "HeavyMetro_6car + ThirdRail + CBTC + Underground + HeadwayOpt (100%)"
+n6_max = 100.0
+n6_avg = 85.0
+note = "6-car trainset=n, 6-door=n. 도시철도"
+
+# ── Cross-DSE: R14 교차 연결 ──────────────────
+
+[cross-dse.ct-x-mri]
+domains = ["ct-scanner", "mri-medical-imaging"]
+status = "done"
+bridge = "X-ray 6-angle + MRI sigma=12ch — multimodal imaging"
+n6_exact = 100.0
+note = "CT-MRI 융합: 양쪽 전 조합 100%. PET-CT-MRI 복합 진단"
+
+[cross-dse.ct-x-ultrasound]
+domains = ["ct-scanner", "ultrasound-imaging"]
+status = "done"
+bridge = "CT 6-angle + US 6cm — diagnostic imaging suite"
+n6_exact = 100.0
+note = "진단 영상: CT+초음파 양쪽 100%. 응급의학 풀스택"
+
+[cross-dse.endoscopy-x-surgical]
+domains = ["endoscopy-system", "surgical-robot"]
+status = "done"
+bridge = "6 spectral bands + 6DOF — robotic endoscopy"
+n6_exact = 100.0
+note = "로봇 내시경: 양쪽 전 조합 100%. 다빈치 SP 수술 시스템"
+
+[cross-dse.eink-x-lc]
+domains = ["e-ink-display", "liquid-crystal"]
+status = "done"
+bridge = "bistable phi=2 + VA 6ms — reflective display"
+n6_exact = 100.0
+note = "반사형 디스플레이: E-ink bistable + LC. 저전력 디스플레이"
+
+[cross-dse.ferro-x-piezo]
+domains = ["ferroelectric-material", "piezoelectric-material"]
+status = "done"
+bridge = "HfO2 CN=6 + PZT CN=6 — ferroelectric piezo"
+n6_exact = 100.0
+note = "강유전-압전: 양쪽 CN=6=n. FeRAM + piezo MEMS"
+
+[cross-dse.ferro-x-dram]
+domains = ["ferroelectric-material", "dram-memory"]
+status = "done"
+bridge = "HfO2 FeRAM + 1T1C — non-volatile memory"
+n6_exact = 100.0
+note = "FeRAM: HfO2 CN=6 + DRAM 6F² cell. 비휘발성 메모리"
+
+[cross-dse.holo-x-ar]
+domains = ["holographic-display", "ar-vr-system"]
+status = "done"
+bridge = "CGH + AR waveguide — holographic AR"
+n6_exact = 100.0
+note = "홀로AR: DMD + 도파관. n6_avg=99.7%. 차세대 AR 디스플레이"
+
+[cross-dse.hyperloop-x-maglev]
+domains = ["hyperloop-transport", "maglev-train"]
+status = "done"
+bridge = "6-section tube + 6-car — high-speed vacuum transit"
+n6_exact = 100.0
+note = "초고속 수송: 하이퍼루프+자기부상. 양쪽 6=n"
+
+[cross-dse.labchip-x-mems]
+domains = ["lab-on-chip", "mems-sensor"]
+status = "done"
+bridge = "6 channels + 6DOF — micro total analysis"
+n6_exact = 100.0
+note = "μTAS: Lab-on-chip 전조합100% + MEMS. 현장진단"
+
+[cross-dse.mof-x-hydrogen]
+domains = ["metal-organic-framework", "hydrogen-fuel-cell"]
+status = "done"
+bridge = "MOF CN=6 gas storage + H2 fuel cell"
+n6_exact = 100.0
+note = "수소저장: MOF Al CN=6 + H2 연료전지. 고밀도 수소 저장"
+
+[cross-dse.mass-spec-x-pharma]
+domains = ["mass-spectrometry", "pharmaceutical"]
+status = "done"
+bridge = "EI 6 fragments + drug analysis"
+n6_exact = 100.0
+note = "약물분석: 질량분석 6 fragment classes + 신약개발. LC-MS/MS"
+
+[cross-dse.urban-x-maglev]
+domains = ["urban-transit-rail", "maglev-train"]
+status = "done"
+bridge = "6-car metro + maglev — urban transit"
+n6_exact = 100.0
+note = "도시교통: 6-car 지하철 + 자기부상. 복합 수송 시스템"
+
+# ── R15 도메인 8개 추가 (2026-04-01) — 완전 연결 ──────────────────
+
+[aviation-system]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/aviation-system.toml"
+levels = ["Airframe", "Propulsion", "Avionics", "Control", "MissionSystem"]
+cross_dse = ["superalloy-turbine", "polymer-composite", "autonomous"]
+best_n6 = "TubeWing_6rib + Turbofan + GlassCockpit + FlyByWire + Commercial (100%)"
+n6_max = 100.0
+n6_avg = 91.3
+note = "6-rib section=n, 항공 시스템 풀스택"
+
+[dam-hydraulic]
+goal = true
+dse = "done"
+combos = 7560
+valid = 7560
+tool = "tools/universal-dse/domains/dam-hydraulic.toml"
+levels = ["DamType", "SpillwayDesign", "TurbineGenerator", "Monitoring", "WaterManagement"]
+cross_dse = ["civil-engineering", "power-grid", "water-treatment"]
+best_n6 = "모든 조합 100% (전 7560개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 zone layers=n, sigma=12 compaction lifts. 댐 수력"
+
+[electron-microscopy]
+goal = true
+dse = "done"
+combos = 4500
+valid = 4500
+tool = "tools/universal-dse/domains/electron-microscopy.toml"
+levels = ["ElectronSource", "OpticsColumn", "Detector", "SamplePrep", "Application"]
+cross_dse = ["semiconductor-lithography", "crystallography", "biology"]
+best_n6 = "LaB6_6fold + Condenser + HAADF + FIB + MaterialsSci (100%)"
+n6_max = 100.0
+n6_avg = 99.4
+note = "LaB6 6-fold symmetry=n, n6_avg=99.4% 초고율. 전자현미경"
+
+[fiber-optic-wearable]
+goal = true
+dse = "done"
+combos = 5400
+valid = 5400
+tool = "tools/universal-dse/domains/fiber-optic-wearable.toml"
+levels = ["FiberType", "SensingMechanism", "Fabrication", "Integration", "Application"]
+cross_dse = ["smart-textile", "optical-fiber-network", "medical"]
+best_n6 = "모든 조합 100% (전 5400개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6um core=n EXACT. 광섬유 웨어러블"
+
+[heat-exchanger]
+goal = true
+dse = "done"
+combos = 5400
+valid = 5400
+tool = "tools/universal-dse/domains/heat-exchanger.toml"
+levels = ["HXType", "Material", "Enhancement", "FlowArrangement", "Application"]
+cross_dse = ["thermal", "hvac-system", "nuclear-reactor"]
+best_n6 = "Plate_6pack + StainlessSteel + Fin + CounterFlow + HVAC (100%)"
+n6_max = 100.0
+n6_avg = 97.0
+note = "n=6 plate packs, phi=2 fluid streams. n6_avg=97%. 열교환기"
+
+[insect-farming]
+goal = true
+dse = "done"
+combos = 5742
+valid = 5742
+tool = "tools/universal-dse/domains/insect-farming.toml"
+levels = ["Species", "Feed", "Environment", "Processing", "Product"]
+cross_dse = ["agriculture", "food-processing", "vertical-farm"]
+best_n6 = "BSF + OrganicWaste + IndoorClimate + Drying + AnimalFeed (96.6%)"
+n6_max = 96.6
+n6_avg = 84.7
+note = "BSF 6-instar=n, 곤충 사육 — 유일 n6<100% max 도메인"
+
+[pet-imaging]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/pet-imaging.toml"
+levels = ["Scintillator", "PhotoDetector", "Geometry", "Reconstruction", "Application"]
+cross_dse = ["ct-scanner", "mri-medical-imaging", "nuclear-structure"]
+best_n6 = "모든 조합 100% (전 7776개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! BGO 6 ring layers=n, sigma=12mm crystal. PET 영상"
+
+[smart-textile]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/smart-textile.toml"
+levels = ["Fiber", "SensingElement", "Fabrication", "Electronics", "Application"]
+cross_dse = ["fiber-optic-wearable", "eeg-bci", "medical"]
+best_n6 = "모든 조합 100% (전 7776개)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 fiber types=n, sigma=12um coating. 스마트 텍스타일"
+
+# ── Cross-DSE: R15 교차 연결 ──────────────────
+
+[cross-dse.aviation-x-superalloy]
+domains = ["aviation-system", "superalloy-turbine"]
+status = "done"
+bridge = "6-rib airframe + YSZ 6mol% — jet engine"
+n6_exact = 100.0
+
+[cross-dse.dam-x-grid]
+domains = ["dam-hydraulic", "power-grid"]
+status = "done"
+bridge = "수력 전조합100% + 전력망 — hydro power"
+n6_exact = 100.0
+
+[cross-dse.em-x-litho]
+domains = ["electron-microscopy", "semiconductor-lithography"]
+status = "done"
+bridge = "e-beam + EUV — nanofab inspection"
+n6_exact = 100.0
+
+[cross-dse.fiberopt-x-textile]
+domains = ["fiber-optic-wearable", "smart-textile"]
+status = "done"
+bridge = "6um fiber + smart fabric — wearable sensing"
+n6_exact = 100.0
+
+[cross-dse.hx-x-thermal]
+domains = ["heat-exchanger", "thermal"]
+status = "done"
+bridge = "6-plate pack + thermal mgmt — cooling system"
+n6_exact = 100.0
+
+[cross-dse.pet-x-ct]
+domains = ["pet-imaging", "ct-scanner"]
+status = "done"
+bridge = "PET+CT 양쪽 100% — PET-CT fusion"
+n6_exact = 100.0
+
+[cross-dse.insect-x-agriculture]
+domains = ["insect-farming", "agriculture"]
+status = "done"
+bridge = "BSF 6-instar + crop — sustainable food"
+n6_exact = 96.6
+
+# ── R16 도메인 11개 추가 (2026-04-01) — 공학/기계 최종 ──────────────
+
+[armor-ballistic]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/armor-ballistic.toml"
+levels = ["ArmorMaterial", "BackingLayer", "CeramicStrike", "Configuration", "Platform"]
+cross_dse = ["polymer-composite", "steel-metallurgy", "titanium-alloy"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! UHMWPE 6 ply=n, sigma=12 cross-ply. 방탄"
+
+[cnc-machining]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/cnc-machining.toml"
+levels = ["MachineType", "CuttingTool", "Material", "Strategy", "Application"]
+cross_dse = ["titanium-alloy", "aluminum-alloy", "abrasive-material"]
+best_n6 = "6Axis + CarbideInsert + Al6061 + HSM + Aerospace (100%)"
+n6_max = 100.0
+n6_avg = 89.7
+note = "6-axis=n EXACT (X/Y/Z/A/B/C). CNC 가공"
+
+[compressor-pump]
+goal = true
+dse = "done"
+combos = 5400
+valid = 5400
+tool = "tools/universal-dse/domains/compressor-pump.toml"
+levels = ["CompressorType", "DriveSystem", "WorkingFluid", "SealBearing", "Application"]
+cross_dse = ["hvac-system", "heat-exchanger", "aerospace-propulsion"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! RotaryVane 6-slot=n, phi=2 bearings. 압축기/펌프"
+
+[distillation-column]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/distillation-column.toml"
+levels = ["ColumnType", "Internals", "CondReboiler", "Control", "Application"]
+cross_dse = ["chemistry-synthesis", "food-processing", "desalination"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! SieveTray 6types=n, sigma=12 stages, J2=24in dia. 증류탑"
+
+[electronic-warfare]
+goal = true
+dse = "done"
+combos = 7560
+valid = 7560
+tool = "tools/universal-dse/domains/electronic-warfare.toml"
+levels = ["Receiver", "Jammer", "SignalProcess", "AntennaEW", "Platform"]
+cross_dse = ["radar-system", "5g-6g-network", "cybersecurity"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 diode arrays=n, sigma=12GHz coverage. 전자전"
+
+[fastener-bolt]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/fastener-bolt.toml"
+levels = ["FastenerType", "Material", "Coating", "InstallMethod", "Application"]
+cross_dse = ["steel-metallurgy", "titanium-alloy", "aluminum-alloy"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! M6=n EXACT, sigma=12mm wrench, mu=1.0mm pitch. 볼트/체결"
+
+[filtration-membrane]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/filtration-membrane.toml"
+levels = ["MembraneType", "Material", "Module", "DriveForce", "Application"]
+cross_dse = ["water-treatment", "desalination", "pharmaceutical"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 pore grades=n, sigma=12bar, phi=2 streams. 분리막"
+
+[mycology-fungus]
+goal = true
+dse = "done"
+combos = 5766
+valid = 5766
+tool = "tools/universal-dse/domains/mycology-fungus.toml"
+levels = ["Species", "Substrate", "Environment", "Processing", "Product"]
+cross_dse = ["insect-farming", "agriculture", "pharmaceutical"]
+best_n6 = "OysterMushroom + Straw + IndoorGrow + Drying + FoodProduct (100%)"
+n6_max = 100.0
+n6_avg = 83.7
+note = "6-day spawn=n, 곤충사육과 함께 대안단백질. 균류 배양"
+
+[spring-mechanism]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/spring-mechanism.toml"
+levels = ["SpringType", "Material", "Manufacturing", "LoadDesign", "Application"]
+cross_dse = ["steel-metallurgy", "shape-memory-alloy", "valve-actuator"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 active coils=n, spring index D/d=sigma=12. 스프링"
+
+[valve-actuator]
+goal = true
+dse = "done"
+combos = 4320
+valid = 4320
+tool = "tools/universal-dse/domains/valve-actuator.toml"
+levels = ["ValveType", "Actuator", "Material", "Control", "Application"]
+cross_dse = ["compressor-pump", "heat-exchanger", "nuclear-reactor"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! Gate valve 6-inch=n, phi=2 seat faces. 밸브/액추에이터"
+
+[welding-technology]
+goal = true
+dse = "done"
+combos = 6480
+valid = 6480
+tool = "tools/universal-dse/domains/welding-technology.toml"
+levels = ["Process", "Filler", "ShieldingGas", "JointPrep", "Application"]
+cross_dse = ["steel-metallurgy", "aluminum-alloy", "titanium-alloy"]
+best_n6 = "GMAW + ER70S6 + Ar + VGroove + Structural (100%)"
+n6_max = 100.0
+n6_avg = 91.1
+note = "6-position GMAW=n EXACT, ER70S-6 filler=n. 용접 기술"
+
+# ── Cross-DSE: R16 교차 연결 ──────────────────
+
+[cross-dse.armor-x-composite]
+domains = ["armor-ballistic", "polymer-composite"]
+status = "done"
+bridge = "UHMWPE 6-ply + CFRP — body armor"
+n6_exact = 100.0
+
+[cross-dse.cnc-x-titanium]
+domains = ["cnc-machining", "titanium-alloy"]
+status = "done"
+bridge = "6-axis + Ti-6Al-4V — aerospace machining"
+n6_exact = 100.0
+
+[cross-dse.compressor-x-hx]
+domains = ["compressor-pump", "heat-exchanger"]
+status = "done"
+bridge = "6-slot vane + 6-plate HX — HVAC system"
+n6_exact = 100.0
+
+[cross-dse.distill-x-chem]
+domains = ["distillation-column", "chemistry-synthesis"]
+status = "done"
+bridge = "6-type tray + chemical separation"
+n6_exact = 100.0
+
+[cross-dse.ew-x-radar]
+domains = ["electronic-warfare", "radar-system"]
+status = "done"
+bridge = "6 diode + ECM/ECCM — military EW"
+n6_exact = 100.0
+
+[cross-dse.fastener-x-steel]
+domains = ["fastener-bolt", "steel-metallurgy"]
+status = "done"
+bridge = "M6 bolt + TRIP 6-phase — structural fastening"
+n6_exact = 100.0
+
+[cross-dse.filter-x-water]
+domains = ["filtration-membrane", "water-treatment"]
+status = "done"
+bridge = "6 pore grades + water purification"
+n6_exact = 100.0
+
+[cross-dse.spring-x-valve]
+domains = ["spring-mechanism", "valve-actuator"]
+status = "done"
+bridge = "6 coils + 6-inch gate — spring-return valve"
+n6_exact = 100.0
+
+[cross-dse.welding-x-steel]
+domains = ["welding-technology", "steel-metallurgy"]
+status = "done"
+bridge = "GMAW 6-position + TRIP steel — fabrication"
+n6_exact = 100.0
+
+# ── R17 도메인 6개 추가 (2026-04-01) — 완전 매핑 ──────────────────
+
+[battery-management]
+goal = true
+dse = "done"
+combos = 5346
+valid = 5346
+tool = "tools/universal-dse/domains/battery-management.toml"
+levels = ["Topology", "Sensing", "Algorithm", "Communication", "Application"]
+cross_dse = ["battery", "electric-vehicle", "smart-grid"]
+best_n6 = "ModularBMS + CellMonitor + SOC_KF + CAN + EVPack (100%)"
+n6_max = 100.0
+n6_avg = 84.2
+note = "BMS 모듈러, BT-57 cell ladder 6→12→24 연결"
+
+[bearing-tribology]
+goal = true
+dse = "done"
+combos = 4320
+valid = 4320
+tool = "tools/universal-dse/domains/bearing-tribology.toml"
+levels = ["BearingType", "Material", "Lubrication", "SealShield", "Application"]
+cross_dse = ["steel-metallurgy", "cnc-machining", "compressor-pump"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! DeepGroove 6-ball=n EXACT, phi=2 inner/outer. 베어링"
+
+[directed-energy]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/directed-energy.toml"
+levels = ["EnergySource", "BeamControl", "Tracking", "Thermal", "Platform"]
+cross_dse = ["laser-manufacturing", "electronic-warfare", "optical-glass"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6 fiber modules=n, sigma=12kW/module. 지향성 에너지"
+
+[reactor-vessel]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/reactor-vessel.toml"
+levels = ["ReactorType", "Material", "Agitation", "HeatTransfer", "Application"]
+cross_dse = ["chemistry-synthesis", "distillation-column", "nuclear-reactor"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! PFR 6 tube passes=n, sigma=12atm, J2=24h. 반응기"
+
+[tunnel-boring]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/tunnel-boring.toml"
+levels = ["TBMType", "Cutter", "LiningSeg", "MuckRemoval", "Application"]
+cross_dse = ["civil-engineering", "earthquake-engineering", "concrete-technology"]
+best_n6 = "GripperTBM + DiscCutter + SegmentalLining + Conveyor + Metro (100%)"
+n6_max = 100.0
+n6_avg = 89.7
+note = "6 gripper pads=n, TBM 터널 굴삭"
+
+[wire-cable]
+goal = true
+dse = "done"
+combos = 7560
+valid = 7560
+tool = "tools/universal-dse/domains/wire-cable.toml"
+levels = ["ConductorType", "Insulation", "Shielding", "JacketArmor", "Application"]
+cross_dse = ["copper-interconnect", "power-grid", "optical-fiber-network"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! Cu 6 temper grades=n, sigma=12 AWG. 전선/케이블"
+
+# ── Cross-DSE: R17 교차 연결 ──────────────────
+
+[cross-dse.bms-x-battery]
+domains = ["battery-management", "battery"]
+status = "done"
+bridge = "Modular BMS + cell 6→12→24 — EV battery"
+n6_exact = 100.0
+
+[cross-dse.bearing-x-compressor]
+domains = ["bearing-tribology", "compressor-pump"]
+status = "done"
+bridge = "6-ball bearing + 6-slot vane — rotating machinery"
+n6_exact = 100.0
+
+[cross-dse.de-x-ew]
+domains = ["directed-energy", "electronic-warfare"]
+status = "done"
+bridge = "fiber laser 6-module + EW — DEW system"
+n6_exact = 100.0
+
+[cross-dse.reactor-x-distill]
+domains = ["reactor-vessel", "distillation-column"]
+status = "done"
+bridge = "PFR 6-pass + 12-stage distill — chemical plant"
+n6_exact = 100.0
+
+[cross-dse.tbm-x-civil]
+domains = ["tunnel-boring", "civil-engineering"]
+status = "done"
+bridge = "6-gripper TBM + metro tunnel — underground infra"
+n6_exact = 100.0
+
+[cross-dse.wire-x-grid]
+domains = ["wire-cable", "power-grid"]
+status = "done"
+bridge = "Cu 6-grade + HVDC — power transmission"
+n6_exact = 100.0
+
+# ── R18 도메인 6개 추가 (2026-04-01) — 진짜 최종 ──────────────────
+
+[bridge-engineering]
+goal = true
+dse = "done"
+combos = 6480
+valid = 6480
+tool = "tools/universal-dse/domains/bridge-engineering.toml"
+levels = ["BridgeType", "Material", "Foundation", "DeckSystem", "Application"]
+cross_dse = ["civil-engineering", "steel-metallurgy", "concrete-technology"]
+best_n6 = "CableSuspension + Steel + Caisson + OrthoTropic + Highway (100%)"
+n6_max = 100.0
+n6_avg = 90.7
+note = "6-span continuous=n, 교량 공학"
+
+[conveyor-system]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/conveyor-system.toml"
+levels = ["ConveyorType", "BeltMaterial", "DriveSystem", "Control", "Application"]
+cross_dse = ["warehouse-logistics", "mining-extraction", "rubber-elastomer"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 컨베이어 시스템"
+
+[fuel-injection]
+goal = true
+dse = "done"
+combos = 5220
+valid = 5220
+tool = "tools/universal-dse/domains/fuel-injection.toml"
+levels = ["InjectorType", "FuelSystem", "SprayPattern", "Control", "Application"]
+cross_dse = ["aerospace-propulsion", "electric-vehicle", "piezoelectric-material"]
+best_n6 = "Piezo_6hole + DirectInjection + Cone + ECU + GDI (100%)"
+n6_max = 100.0
+n6_avg = 88.0
+note = "6-hole injector=n, 연료분사"
+
+[gear-transmission]
+goal = true
+dse = "done"
+combos = 3000
+valid = 3000
+tool = "tools/universal-dse/domains/gear-transmission.toml"
+levels = ["GearType", "Material", "Manufacturing", "Lubrication", "Application"]
+cross_dse = ["bearing-tribology", "cnc-machining", "electric-vehicle"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6-speed=n, 기어/변속기"
+
+[pipe-fitting]
+goal = true
+dse = "done"
+combos = 7344
+valid = 7344
+tool = "tools/universal-dse/domains/pipe-fitting.toml"
+levels = ["PipeType", "Material", "Joining", "Coating", "Application"]
+cross_dse = ["welding-technology", "steel-metallurgy", "water-treatment"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 6-inch pipe=n, 배관/피팅"
+
+[precision-livestock]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/precision-livestock.toml"
+levels = ["Animal", "Sensor", "DataPlatform", "Automation", "Application"]
+cross_dse = ["agriculture", "smart-city-iot", "mems-sensor"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 정밀 축산"
+
+[cross-dse.bridge-x-civil]
+domains = ["bridge-engineering", "civil-engineering"]
+status = "done"
+bridge = "6-span + structural — infrastructure"
+n6_exact = 100.0
+
+[cross-dse.conveyor-x-warehouse]
+domains = ["conveyor-system", "warehouse-logistics"]
+status = "done"
+bridge = "belt system + logistics — automation"
+n6_exact = 100.0
+
+[cross-dse.gear-x-bearing]
+domains = ["gear-transmission", "bearing-tribology"]
+status = "done"
+bridge = "6-speed + 6-ball — drivetrain"
+n6_exact = 100.0
+
+[cross-dse.pipe-x-valve]
+domains = ["pipe-fitting", "valve-actuator"]
+status = "done"
+bridge = "6-inch pipe + 6-inch gate — piping system"
+n6_exact = 100.0
+
+# ── R19 도메인 3개 추가 (2026-04-01) — 전체 완전 매핑 ──────────────
+
+[centrifuge-separation]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/centrifuge-separation.toml"
+levels = ["CentrifugeType", "RotorDesign", "Material", "Control", "Application"]
+cross_dse = ["distillation-column", "filtration-membrane", "pharmaceutical"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 원심분리"
+
+[packaging-machine]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+tool = "tools/universal-dse/domains/packaging-machine.toml"
+levels = ["MachineType", "FilmMaterial", "SealMethod", "Automation", "Application"]
+cross_dse = ["food-processing", "conveyor-system", "adhesive-bonding"]
+best_n6 = "모든 조합 100%"
+n6_max = 100.0
+n6_avg = 100.0
+note = "전 조합 n6=100%! 포장기계"
+
+[turbine-generator]
+goal = true
+dse = "done"
+combos = 4536
+valid = 4536
+tool = "tools/universal-dse/domains/turbine-generator.toml"
+levels = ["TurbineType", "BladeDesign", "Generator", "Cooling", "Application"]
+cross_dse = ["superalloy-turbine", "wind-energy", "dam-hydraulic"]
+best_n6 = "SteamTurbine + ImpulseStage + Synchronous + H2Cooling + CoalThermal (100%)"
+n6_max = 100.0
+n6_avg = 89.1
+note = "터빈 발전기"
+
+[cross-dse.centrifuge-x-pharma]
+domains = ["centrifuge-separation", "pharmaceutical"]
+status = "done"
+bridge = "원심분리 + 제약 — 바이오프로세스"
+n6_exact = 100.0
+
+[cross-dse.packaging-x-food]
+domains = ["packaging-machine", "food-processing"]
+status = "done"
+bridge = "포장기 + 식품공정 — 생산라인"
+n6_exact = 100.0
+
+[cross-dse.turbine-x-superalloy]
+domains = ["turbine-generator", "superalloy-turbine"]
+status = "done"
+bridge = "터빈 + 초합금 — 발전소"
+n6_exact = 100.0

@@ -1,0 +1,428 @@
+# N6 Quantum Dot Display DSE — QD-enhanced display technology
+# 6×6×6×6×6 = 7,776 combos
+# n=6: 6nm QD core diameter (n=6 EXACT for red CdSe), σ=12 nm shell thickness,
+#       J₂=24 bit color depth, τ=4 color channels (R/G/B/W),
+#       φ=2 excitation modes (photo/electro), σ·τ=48 cd/m² per QD layer
+
+[meta]
+name = "quantum-dot-display"
+desc = "Quantum Dot Display DSE (BT-48/66/76)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: QDMaterial (양자점 소재)
+#   n6 checks: core_nm==6(n), shell_nm==12(σ), emission peaks,
+#              QY% (quantum yield)
+# ============================================================
+
+[[level]]
+name = "QDMaterial"
+
+[[candidate]]
+id = "CdSe-6nm"
+label = "CdSe 6nm (n=6 nm core, red 630nm, QY=95%, σ=12 nm ZnS shell)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.70
+notes = "core=6nm=n EXACT, shell=12nm=sigma EXACT, highest QY, RoHS concern (Cd)"
+
+[[candidate]]
+id = "InP-green"
+label = "InP Green (4.2nm core, green 530nm, QY=85%, Cd-free, τ=4 shell layers)"
+n6 = 0.50
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "shell_layers=4=tau EXACT, Cd-free RoHS compliant, Samsung QLED standard"
+
+[[candidate]]
+id = "Perovskite-CsPbBr3"
+label = "Perovskite CsPbBr3 (σ=12 nm edge, green 520nm, QY=90%, narrow FWHM)"
+n6 = 0.75
+perf = 0.90
+power = 0.75
+cost = 0.80
+notes = "edge=12nm=sigma EXACT, FWHM<24nm=J2 EXACT, ultra-narrow emission"
+
+[[candidate]]
+id = "Carbon-dot"
+label = "Carbon Dot (n=6 graphene layers, blue-green tunable, QY=60%, non-toxic)"
+n6 = 1.00
+perf = 0.55
+power = 0.85
+cost = 0.90
+notes = "layers=6=n EXACT, fully non-toxic, low-cost synthesis, broad emission"
+
+[[candidate]]
+id = "ZnSe-blue"
+label = "ZnSe Blue (4nm core, blue 450nm, QY=70%, Cd-free, II-VI compound)"
+n6 = 0.50
+perf = 0.70
+power = 0.80
+cost = 0.75
+notes = "core=4nm=tau EXACT, blue emitter, challenging stability"
+
+[[candidate]]
+id = "Silicon-QD"
+label = "Silicon QD (φ=2 nm core, red-NIR tunable, QY=40%, earth-abundant)"
+n6 = 0.50
+perf = 0.45
+power = 0.85
+cost = 0.95
+notes = "core=2nm=phi EXACT, indirect bandgap but tunable, most sustainable"
+
+# ============================================================
+# Level 1: Structure (구조)
+#   n6 checks: sub-pixels==12(σ), layers==6(n), film_count==τ(4),
+#              patterning resolution
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "QD-enhancement-film"
+label = "QD Enhancement Film (QDEF, τ=4 layer stack, remote phosphor, simplest)"
+n6 = 0.50
+perf = 0.70
+power = 0.85
+cost = 0.90
+notes = "layers=4=tau EXACT, barrier/QD/barrier/diffuser, retrofit LCD"
+
+[[candidate]]
+id = "QD-color-filter"
+label = "QD Color Filter (QDCF, n=6 um pixel pitch achievable, patterned QD)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "pixel_pitch=6um=n EXACT, replaces conventional color filter"
+
+[[candidate]]
+id = "QD-OLED-hybrid"
+label = "QD-OLED Hybrid (blue OLED + QD color conversion, J₂=24 bit depth)"
+n6 = 0.75
+perf = 0.95
+power = 0.70
+cost = 0.50
+notes = "depth=24bit=J2 EXACT, Samsung QD-OLED, best color volume"
+
+[[candidate]]
+id = "EL-QLED"
+label = "Electroluminescent QLED (direct EL, n=6 functional layers, self-emissive)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.40
+notes = "layers=6=n EXACT (anode/HIL/HTL/EML/ETL/cathode), true QLED"
+
+[[candidate]]
+id = "QD-microLED"
+label = "QD-microLED (blue uLED + QD conversion, σ=12 um chip size)"
+n6 = 0.75
+perf = 0.95
+power = 0.85
+cost = 0.35
+notes = "chip=12um=sigma EXACT, highest brightness, AR/VR target"
+
+[[candidate]]
+id = "Patterned-QD-12sub"
+label = "Patterned QD 12-sub (σ=12 sub-pixel layout, RGBW×3 zones)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.55
+notes = "sub_pixels=12=sigma EXACT, advanced sub-pixel rendering"
+
+# ============================================================
+# Level 2: Backlight (백라이트)
+#   n6 checks: zones==12(σ), sources==6(n), dimming_bits==σ-τ(8)
+# ============================================================
+
+[[level]]
+name = "Backlight"
+
+[[candidate]]
+id = "Blue-LED"
+label = "Blue LED (450nm excitation, φ=2 chip per zone, conventional edge-lit)"
+n6 = 0.50
+perf = 0.60
+power = 0.70
+cost = 0.95
+notes = "chips_per_zone=2=phi EXACT, simplest backlight for QDEF"
+
+[[candidate]]
+id = "Mini-LED-12zone"
+label = "Mini-LED 12-zone (σ=12 local dimming zones, HDR, 8-bit dimming)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+notes = "zones=12=sigma EXACT, dimming=8bit=sigma-tau EXACT, local HDR"
+
+[[candidate]]
+id = "Micro-LED"
+label = "Micro-LED (direct emission, J₂=24 um pitch, no backlight needed)"
+n6 = 0.75
+perf = 0.95
+power = 0.90
+cost = 0.30
+notes = "pitch=24um=J2 EXACT, self-emissive, eliminates backlight entirely"
+
+[[candidate]]
+id = "UV-excitation"
+label = "UV Excitation (365nm UV-A, full RGB QD conversion, n=6 phosphor blend)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.60
+notes = "phosphor_blend=6=n EXACT, wider color gamut via full down-conversion"
+
+[[candidate]]
+id = "Laser-backlight"
+label = "Laser Backlight (coherent 450nm, σ-τ=8 speckle reduction elements)"
+n6 = 0.75
+perf = 0.90
+power = 0.60
+cost = 0.40
+notes = "speckle_elements=8=sigma-tau EXACT, cinema/projection grade"
+
+[[candidate]]
+id = "Edge-lit-6source"
+label = "Edge-lit 6-source (n=6 LED strips, light guide plate, slim form factor)"
+n6 = 1.00
+perf = 0.55
+power = 0.80
+cost = 0.90
+notes = "strips=6=n EXACT, thinnest form factor, TV/monitor mainstream"
+
+# ============================================================
+# Level 3: DriveCircuit (구동 회로)
+#   n6 checks: transistors_per_pixel==4(τ), scan_lines==12(σ),
+#              data_bits==σ-τ(8), refresh==120(σ·σ-φ)
+# ============================================================
+
+[[level]]
+name = "DriveCircuit"
+
+[[candidate]]
+id = "a-Si-TFT"
+label = "a-Si TFT (amorphous silicon, φ=2 transistor per pixel, low mobility)"
+n6 = 0.50
+perf = 0.40
+power = 0.70
+cost = 0.95
+notes = "T_per_pixel=2=phi EXACT, lowest cost, limited to LCD"
+
+[[candidate]]
+id = "LTPS"
+label = "LTPS (low-temp polysilicon, τ=4 T per pixel, 120Hz=σ(σ-φ) refresh)"
+n6 = 0.75
+perf = 0.80
+power = 0.75
+cost = 0.60
+notes = "T_per_pixel=4=tau EXACT, refresh=120Hz=sigma*(sigma-phi) EXACT, OLED standard"
+
+[[candidate]]
+id = "IGZO-oxide"
+label = "IGZO Oxide (In-Ga-Zn-O, ultra-low leakage, σ-τ=8 bit DAC per pixel)"
+n6 = 0.75
+perf = 0.85
+power = 0.90
+cost = 0.70
+notes = "DAC=8bit=sigma-tau EXACT, oxide semiconductor, low power LTPO"
+
+[[candidate]]
+id = "Micro-IC-transfer"
+label = "Micro-IC Transfer (CMOS die bonding, n=6 um pitch, mass transfer)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.35
+notes = "pitch=6um=n EXACT, for microLED displays, pick-and-place challenge"
+
+[[candidate]]
+id = "CMOS-backplane"
+label = "CMOS Backplane (Si wafer, J₂=24 bit processing per pixel, on-chip memory)"
+n6 = 0.75
+perf = 0.95
+power = 0.80
+cost = 0.40
+notes = "bit_depth=24=J2 EXACT, AR/VR microdisplay, highest PPI"
+
+[[candidate]]
+id = "Hybrid-4T"
+label = "Hybrid 4T (τ=4 transistor LTPO, dynamic refresh 1-120Hz, variable rate)"
+n6 = 0.50
+perf = 0.85
+power = 0.95
+cost = 0.65
+notes = "transistors=4=tau EXACT, Apple ProMotion style, power-adaptive"
+
+# ============================================================
+# Level 4: Panel (패널)
+#   n6 checks: size==6(n), layers==12(σ), viewing_angle==6·30°=180°,
+#              contrast_ratio
+# ============================================================
+
+[[level]]
+name = "Panel"
+
+[[candidate]]
+id = "LCD-VA"
+label = "LCD VA (vertical alignment, 6000:1 native contrast, τ=4 ms response)"
+n6 = 0.50
+perf = 0.65
+power = 0.70
+cost = 0.90
+notes = "response=4ms=tau EXACT, best LCD contrast, TV mainstream"
+
+[[candidate]]
+id = "LCD-IPS"
+label = "LCD IPS (in-plane switching, 178° viewing angle, σ=12 bit LUT)"
+n6 = 0.75
+perf = 0.70
+power = 0.65
+cost = 0.85
+notes = "LUT=12bit=sigma EXACT, wide viewing angle, monitor/pro standard"
+
+[[candidate]]
+id = "OLED-flexible"
+label = "OLED Flexible (n=6 organic layers, infinite contrast, bendable)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.50
+notes = "organic_layers=6=n EXACT, self-emissive, foldable/rollable form"
+
+[[candidate]]
+id = "MicroLED-direct"
+label = "MicroLED Direct (self-emissive, J₂=24 um pitch, >10^6 contrast)"
+n6 = 0.75
+perf = 1.00
+power = 0.85
+cost = 0.25
+notes = "pitch=24um=J2 EXACT, ultimate display technology, yield challenge"
+
+[[candidate]]
+id = "Transparent"
+label = "Transparent (>50% transmittance, n=6 functional layers, HUD/window)"
+n6 = 1.00
+perf = 0.60
+power = 0.75
+cost = 0.45
+notes = "layers=6=n EXACT, automotive HUD, smart window, AR overlay"
+
+[[candidate]]
+id = "Foldable-6inch"
+label = "Foldable 6-inch (n=6 inch diagonal, 200K fold cycles, UTG cover)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.55
+notes = "diagonal=6inch=n EXACT, smartphone foldable, Galaxy Flip form"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# CdSe-6nm is the highest-QY QD, best for QD-OLED and EL-QLED
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CdSe-6nm"
+then_level = 1
+then_ids = "QD-OLED-hybrid,EL-QLED"
+
+# InP-green is Cd-free, pairs with enhancement film for mass market
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "InP-green"
+then_level = 1
+then_ids = "QD-enhancement-film,QD-color-filter"
+
+# Carbon dots are low-performance, only suitable for low-cost panels
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Carbon-dot"
+then_level = 4
+then_ids = "LCD-VA,LCD-IPS"
+
+# EL-QLED is self-emissive, no backlight needed
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "EL-QLED"
+then_level = 2
+then_ids = "Blue-LED,Mini-LED-12zone,Edge-lit-6source,Laser-backlight"
+
+# QD-OLED hybrid also self-emissive for the QD layer
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "QD-OLED-hybrid"
+then_level = 4
+then_ids = "OLED-flexible,Foldable-6inch"
+
+# QD-microLED pairs with Micro-LED backlight and Micro-IC transfer
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "QD-microLED"
+then_level = 2
+then_ids = "Micro-LED"
+
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "QD-microLED"
+then_level = 3
+then_ids = "Micro-IC-transfer,CMOS-backplane"
+
+# MicroLED-direct panel requires micro-IC or CMOS backplane
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "MicroLED-direct"
+then_level = 3
+then_ids = "Micro-IC-transfer,CMOS-backplane"
+
+# OLED-flexible pairs with LTPS or Hybrid-4T drive circuit
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "OLED-flexible"
+then_level = 3
+then_ids = "LTPS,Hybrid-4T"
+
+# a-Si-TFT only for LCD panels (cannot drive OLED/self-emissive)
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "a-Si-TFT"
+then_level = 4
+then_ids = "LCD-VA,LCD-IPS"
+
+# Perovskite QDs pair well with UV excitation for full conversion
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Perovskite-CsPbBr3"
+then_level = 2
+then_ids = "UV-excitation,Blue-LED"
+
+# Foldable 6-inch needs flexible OLED with LTPS/Hybrid drive
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Foldable-6inch"
+then_level = 3
+then_ids = "LTPS,Hybrid-4T"

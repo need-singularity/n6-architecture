@@ -1,0 +1,414 @@
+# N6 Thin Film & Coating DSE — Surface engineering via deposition
+# 6 DepositionMethods × 6 Materials × 6 Structures × 6 Characterizations × 6 Applications = 7,776 combos
+# n=6 connections: 6-layer optical stack (n=6 EXACT: AR/TCO/absorber/buffer/reflector/substrate),
+#   sigma=12 nm critical thickness, tau=4 deposition parameters (temp/pressure/rate/time),
+#   phi=2 bilayer period, J2=24 target materials
+
+[meta]
+name = "thin-film-coating"
+desc = "Thin Film & Coating DSE — surface engineering via deposition (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: DepositionMethod (증착 방법)
+#   n6 checks: PVD 6-target sputtering (n=6), ALD 12-cycle (sigma=12),
+#              CVD thermal 4-param control (tau=4), E-beam 2-source (phi=2)
+# ============================================================
+
+[[level]]
+name = "DepositionMethod"
+
+[[candidate]]
+id = "PVD_sputter_6target"
+label = "PVD sputtering 6-target (n=6 cathodes, reactive/DC/RF, industrial standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.65
+notes = "targets=6=n EXACT, versatile multi-layer, high throughput"
+
+[[candidate]]
+id = "CVD_thermal"
+label = "CVD thermal (4-param control: temp/pressure/rate/time, conformal, high purity)"
+n6 = 0.80
+perf = 0.80
+power = 0.45
+cost = 0.60
+notes = "params=4=tau EXACT, precursor chemistry, batch processing"
+
+[[candidate]]
+id = "ALD_12cycle"
+label = "ALD 12-cycle (sigma=12 precursor pulses, atomic precision, self-limiting)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.40
+notes = "cycles=12=sigma EXACT, angstrom-level control, conformal on 3D"
+
+[[candidate]]
+id = "Ebeam_evap"
+label = "E-beam evaporation (2-source co-deposition, line-of-sight, high rate)"
+n6 = 0.80
+perf = 0.75
+power = 0.50
+cost = 0.70
+notes = "sources=2=phi EXACT, high deposition rate, directional"
+
+[[candidate]]
+id = "SolGel"
+label = "Sol-gel dip/spin coating (6-step process: mix/age/coat/dry/anneal/densify)"
+n6 = 1.00
+perf = 0.60
+power = 0.85
+cost = 0.90
+notes = "steps=6=n EXACT, low-cost, large area, solution processable"
+
+[[candidate]]
+id = "Electroplating"
+label = "Electroplating (6-element bath: salt/acid/buffer/additive/brightener/leveler)"
+n6 = 1.00
+perf = 0.65
+power = 0.75
+cost = 0.85
+notes = "bath_components=6=n EXACT, metals/alloys, high throughput, selective"
+
+# ============================================================
+# Level 1: Material (소재)
+#   n6 checks: TiN 6-fold NaCl structure (n=6), HfO2 CN=8=sigma-tau,
+#              AlN wurtzite CN=4=tau, SiO2 tetrahedral CN=4=tau
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "TiN_hard"
+label = "TiN hard coating (NaCl structure CN=6, gold color, 2000HV, diffusion barrier)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.75
+notes = "CN=6=n EXACT, NaCl-type, hardness 24GPa=J2 EXACT, industrial standard"
+
+[[candidate]]
+id = "SiO2_dielectric"
+label = "SiO2 dielectric (tetrahedral CN=4, k=3.9, gate oxide, optical coating)"
+n6 = 0.80
+perf = 0.80
+power = 0.85
+cost = 0.90
+notes = "CN=4=tau EXACT, most common dielectric, thermal oxide benchmark"
+
+[[candidate]]
+id = "ITO_transparent"
+label = "ITO transparent conductor (In2O3:Sn, 12 ohm/sq, 90% transmittance)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "sheet_R=12=sigma EXACT, industry TCO standard, bixbyite structure"
+
+[[candidate]]
+id = "DLC_diamond"
+label = "DLC diamond-like carbon (sp3/sp2 hybrid, 6000HV, ultra-low friction)"
+n6 = 0.80
+perf = 0.95
+power = 0.65
+cost = 0.50
+notes = "carbon=6=n EXACT (atomic number), sp3 tetrahedral + sp2 trigonal"
+
+[[candidate]]
+id = "AlN_piezo"
+label = "AlN piezoelectric (wurtzite, d33=6pC/N, 6GHz BAW filter, 5G standard)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+notes = "d33=6=n EXACT, freq=6GHz=n EXACT, piezoelectric MEMS/BAW"
+
+[[candidate]]
+id = "HfO2_highk"
+label = "HfO2 high-k (k=24, CN=8, gate dielectric, ferroelectric phase, sub-5nm node)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.45
+notes = "k=24=J2 EXACT, CN=8=sigma-tau EXACT, Intel 45nm+ standard"
+
+# ============================================================
+# Level 2: Structure (구조)
+#   n6 checks: multilayer 6-stack (n=6), superlattice period phi=2,
+#              columnar grain 12nm (sigma=12), gradient 4-zone (tau=4)
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "Monolayer"
+label = "Monolayer (single layer, thickness 1-1000nm, uniform composition)"
+n6 = 0.40
+perf = 0.70
+power = 0.90
+cost = 0.95
+notes = "simplest structure, single deposition, baseline reference"
+
+[[candidate]]
+id = "Multilayer_6stack"
+label = "Multilayer 6-stack (n=6 layers: AR/TCO/absorber/buffer/reflector/substrate)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.45
+notes = "layers=6=n EXACT, optical stack design, each layer tuned independently"
+
+[[candidate]]
+id = "Superlattice"
+label = "Superlattice (phi=2 bilayer period A/B, 12nm repeat unit, quantum confinement)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.35
+notes = "period=2=phi EXACT, repeat=12nm=sigma EXACT, hardness enhancement"
+
+[[candidate]]
+id = "Gradient"
+label = "Gradient composition (4-zone transition, continuous property change, stress relief)"
+n6 = 0.80
+perf = 0.80
+power = 0.70
+cost = 0.60
+notes = "zones=4=tau EXACT, smooth interface, thermal stress mitigation"
+
+[[candidate]]
+id = "Nanocomposite"
+label = "Nanocomposite (nanocrystalline in amorphous matrix, 6nm grain, superhardness)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+notes = "grain=6nm=n EXACT, nc-TiN/a-Si3N4 model, hardness >40GPa"
+
+[[candidate]]
+id = "Columnar_12nm"
+label = "Columnar 12nm grains (sigma=12 nm column width, zone-T microstructure, GLAD)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+notes = "column_width=12nm=sigma EXACT, Thornton zone model, anisotropic"
+
+# ============================================================
+# Level 3: Characterization (분석)
+#   n6 checks: XRD 6-peak phase ID (n=6), 4-point probe (tau=4),
+#              ellipsometry 2-param (phi=2: psi/delta), XPS 12-element survey (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Characterization"
+
+[[candidate]]
+id = "XRD_6peak"
+label = "XRD 6-peak analysis (n=6 diffraction peaks, phase ID, texture, stress)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+notes = "peaks=6=n EXACT, crystal structure fingerprint, non-destructive"
+
+[[candidate]]
+id = "Ellipsometry"
+label = "Ellipsometry (phi=2 parameters psi/delta, thickness + optical constants, in-situ)"
+n6 = 0.80
+perf = 0.90
+power = 0.90
+cost = 0.85
+notes = "params=2=phi EXACT (psi+delta), angstrom precision, real-time capable"
+
+[[candidate]]
+id = "AFM_surface"
+label = "AFM surface mapping (6nm resolution, roughness Ra, grain morphology, 3D topo)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.65
+notes = "resolution=6nm=n EXACT, sub-nm height, contact/tapping/PeakForce"
+
+[[candidate]]
+id = "XPS_depth"
+label = "XPS depth profile (12-element survey, chemical bonding, composition vs depth)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.50
+notes = "elements=12=sigma EXACT, binding energy, oxidation state, Ar sputter"
+
+[[candidate]]
+id = "Nanoindent"
+label = "Nanoindentation (hardness H + modulus E, 6-point array, Oliver-Pharr method)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+notes = "points=6=n EXACT, mechanical properties, load-displacement curve"
+
+[[candidate]]
+id = "FourPointProbe"
+label = "4-point probe (tau=4 probes, sheet resistance, resistivity, contact-free option)"
+n6 = 0.80
+perf = 0.75
+power = 0.95
+cost = 0.95
+notes = "probes=4=tau EXACT, electrical characterization, fast inline QC"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: AR coating 6-layer (n=6), thermal barrier 12mil (sigma=12),
+#              photovoltaic 6-junction concept (n=6), biocompatible CN=6 hydroxyapatite
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "AntiReflection"
+label = "Anti-reflection coating (6-layer broadband AR, <0.5% R, camera/solar/display)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.70
+notes = "layers=6=n EXACT, quarter-wave stack, V-coat to broadband"
+
+[[candidate]]
+id = "WearResistant"
+label = "Wear-resistant coating (TiAlN/CrN, tool life 6x, cutting/forming/molding)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.75
+notes = "life_extension=6x=n EXACT, industrial tooling, high-speed machining"
+
+[[candidate]]
+id = "ThermalBarrier"
+label = "Thermal barrier coating (YSZ 12mil thick, 1300C capability, turbine blade)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.35
+notes = "thickness=12mil=sigma EXACT, jet engine/gas turbine, delta_T=300C"
+
+[[candidate]]
+id = "Biocompatible"
+label = "Biocompatible coating (hydroxyapatite CN=6, Ti implant, osseointegration)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.55
+notes = "Ca_CN=6=n EXACT in HAp, orthopedic/dental implant, FDA standard"
+
+[[candidate]]
+id = "Photovoltaic"
+label = "Photovoltaic thin film (6-layer stack, CdTe/CIGS/perovskite, 24% efficiency)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+notes = "layers=6=n EXACT, efficiency=24%=J2 EXACT, GW-scale manufacturing"
+
+[[candidate]]
+id = "CorrosionProtect"
+label = "Corrosion protection (Cr-free passivation, 4000hr salt spray, marine/auto)"
+n6 = 0.60
+perf = 0.80
+power = 0.90
+cost = 0.80
+notes = "test=4000hr~tau*10^3, environmental compliance, multi-layer barrier"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# ALD pairs best with high-k and superlattice structures
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ALD_12cycle"
+then_level = 1
+then_ids = "HfO2_highk,AlN_piezo"
+
+# PVD sputtering is ideal for hard coatings and multilayer stacks
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PVD_sputter_6target"
+then_level = 2
+then_ids = "Multilayer_6stack,Superlattice"
+
+# Sol-gel pairs with monolayer and large-area applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SolGel"
+then_level = 2
+then_ids = "Monolayer,Gradient"
+
+# TiN hard coating leads to wear-resistant applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "TiN_hard"
+then_level = 4
+then_ids = "WearResistant,ThermalBarrier"
+
+# HfO2 high-k pairs with ellipsometry and XPS characterization
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "HfO2_highk"
+then_level = 3
+then_ids = "Ellipsometry,XPS_depth"
+
+# ITO transparent conductor leads to photovoltaic and anti-reflection
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "ITO_transparent"
+then_level = 4
+then_ids = "Photovoltaic,AntiReflection"
+
+# Nanocomposite structure requires nanoindentation characterization
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Nanocomposite"
+then_level = 3
+then_ids = "Nanoindent,XRD_6peak"
+
+# Superlattice pairs with XRD for satellite peak analysis
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Superlattice"
+then_level = 3
+then_ids = "XRD_6peak,Ellipsometry"
+
+# Electroplating pairs with corrosion and biocompatible applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Electroplating"
+then_level = 4
+then_ids = "CorrosionProtect,Biocompatible"
+
+# E-beam evaporation best for anti-reflection optical coatings
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ebeam_evap"
+then_level = 4
+then_ids = "AntiReflection,Photovoltaic"

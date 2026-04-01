@@ -1,0 +1,360 @@
+# =============================================================
+# N6 Holographic Display DSE Domain Definition
+# 3D holographic visualization technology
+# n=6: 6 hologram types (n=6: Fresnel/Fourier/Lippmann/rainbow/CGH/digital),
+#   sigma=12 diffraction orders, tau=4 color channels (R/G/B/IR),
+#   phi=2 phase/amplitude modulation, J2=24 viewing angles,
+#   6-layer volume hologram
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "holographic-display"
+desc = "Holographic Display Architecture DSE (SLM/light-source/encoding/optical-path/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: SLM (6 candidates)
+# ============================================================
+
+[[level]]
+name = "SLM"
+
+[[candidate]]
+level = 0
+id = "LCoS-Phase"
+label = "LCoS Phase-Only (liquid crystal on silicon, sigma=12 bit depth, 4K native)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "DMD-Amplitude"
+label = "DMD Amplitude (TI DLP, phi=2 binary tilt states, fast switching)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "MEMS-Piston"
+label = "MEMS Piston Array (6 um pixel pitch EXACT, continuous phase, high diffraction)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Acousto-Optic"
+label = "Acousto-Optic Modulator (Bragg diffraction, sigma=12 diffraction orders, 1D fast)"
+n6 = 1.00
+perf = 0.78
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Meta-Surface"
+label = "Metasurface SLM (nanostructure, 6-fold rotational symmetry, flat optics)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Electro-Holographic"
+label = "Electro-Holographic Crystal (photorefractive, 6 layer volume grating, real-time)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.40
+
+# ============================================================
+# Level 1: LightSource (6 candidates)
+# ============================================================
+
+[[level]]
+name = "LightSource"
+
+[[candidate]]
+level = 1
+id = "RGB-Laser"
+label = "RGB Laser Diode (tau=4 channels R/G/B/IR, coherent, high contrast)"
+n6 = 0.90
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "DPSS-Green"
+label = "DPSS Green 532nm (frequency doubled, sigma=12 mW typical, lab standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "LED-Array"
+label = "LED Array (partially coherent, 6 LED cluster per color, low cost)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "VCSEL-Array"
+label = "VCSEL Array (vertical cavity, n=6 emitter groups, surface mount, compact)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Fiber-Coupled"
+label = "Fiber-Coupled Laser (single mode, 6 um core diameter, speckle reduced)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Supercontinuum"
+label = "Supercontinuum Source (broadband coherent, J₂=24 nm bandwidth slices, premium)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.25
+
+# ============================================================
+# Level 2: Encoding (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Encoding"
+
+[[candidate]]
+level = 2
+id = "Fresnel-CGH"
+label = "Fresnel CGH (near-field, 6 propagation distances, depth layers)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Fourier-CGH"
+label = "Fourier CGH (far-field, sigma=12 diffraction orders, frequency domain)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Phase-Retrieval"
+label = "Gerchberg-Saxton Phase Retrieval (iterative, 6 iteration loops, phi=2 constraints)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Neural-Holography"
+label = "Neural Holography (CNN/GAN, n=6 layer encoder, real-time, learned)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Layer-Based"
+label = "Layer-Based MDP (multi-depth plane, 6 depth layers EXACT, simple HW)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "Wavefront-Record"
+label = "Wavefront Recording (interference capture, J₂=24 angular samples, analog)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.40
+
+# ============================================================
+# Level 3: OpticalPath (6 candidates)
+# ============================================================
+
+[[level]]
+name = "OpticalPath"
+
+[[candidate]]
+level = 3
+id = "Free-Space"
+label = "Free-Space Propagation (lens relay, 6 optical elements, benchtop)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Waveguide"
+label = "Waveguide Combiner (diffractive, 6 grating layers, AR glass compatible)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Light-Field"
+label = "Light Field Lens Array (microlens, J₂=24 viewing angles, parallax)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Fiber-Bundle"
+label = "Fiber Bundle Relay (coherent bundle, 6 um fiber pitch, endoscopic)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Scanning-Mirror"
+label = "Scanning Mirror (galvo/MEMS, sigma=12 kHz scan rate, large FOV)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Volume-Bragg"
+label = "Volume Bragg Grating (multiplexed, 6-layer volume hologram, compact)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.35
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "AR-HUD"
+label = "AR Head-Up Display (automotive, J₂=24 degree FOV, windshield projection)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Medical-3D"
+label = "Medical 3D Imaging (surgical planning, sigma=12 depth planes, CT/MRI data)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Holographic-TV"
+label = "Holographic TV (living room, 6 inch~60 inch, consumer 3D, n=6 viewpoints)"
+n6 = 1.00
+perf = 0.88
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Near-Eye-VR"
+label = "Near-Eye VR/AR (headset, 6 mm eye relief, varifocal, vergence-accomm fix)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Holographic-Print"
+label = "Holographic Print/Security (static, 6 security layers, anti-counterfeit)"
+n6 = 1.00
+perf = 0.70
+power = 0.95
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Telepresence"
+label = "Telepresence Table (360 degree, J₂=24 viewpoints around table, collaboration)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.30
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# LED array insufficient coherence for wavefront recording
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "LED-Array"
+then_level = 2
+then_ids = ["Wavefront-Record", "Fourier-CGH"]
+
+# Acousto-optic SLM only for small displays
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Acousto-Optic"
+then_level = 4
+then_ids = ["Near-Eye-VR", "Holographic-Print"]
+
+# Waveguide optical path only for near-eye and HUD
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Waveguide"
+then_level = 4
+then_ids = ["AR-HUD", "Near-Eye-VR"]
+
+# Fiber bundle only for medical/telepresence
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Fiber-Bundle"
+then_level = 4
+then_ids = ["Medical-3D", "Telepresence"]

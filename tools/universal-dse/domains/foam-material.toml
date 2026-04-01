@@ -1,0 +1,427 @@
+# N6 Foam Material DSE — Cellular solid engineering
+# 6 Matrices × 6 CellStructures × 6 Blowings × 6 Processings × 6 Applications = 7,776 combos
+# n=6 connections: Kelvin cell 14 faces (sigma+phi), hexagonal face 6-sided (n=6 EXACT),
+#   sigma=12 edges per Kelvin cell vertex, tau=4 foam types (open/closed/syntactic/lattice),
+#   phi=2 open/closed cell, J2=24 pores per inch (PPI) standard
+
+[meta]
+name = "foam-material"
+desc = "Foam Material DSE — cellular solid engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Matrix (매트릭스)
+#   n6 checks: PU 6-membered ring urethane linkage, PS 6-carbon benzene ring (n=6),
+#              PE polyethylene chain, Al aluminum FCC 12-coord (sigma=12),
+#              SiC ceramic hexagonal, carbon graphite 6-ring
+# ============================================================
+
+[[level]]
+name = "Matrix"
+
+[[candidate]]
+id = "PU_polyurethane"
+label = "PU polyurethane (6-atom urethane linkage, flexible/rigid, largest foam market)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.80
+notes = "urethane_linkage=6_atoms=n EXACT (-NH-CO-O-), most versatile foam, 60% market share"
+
+[[candidate]]
+id = "PS_polystyrene"
+label = "PS polystyrene (6-carbon benzene ring, EPS/XPS, insulation standard, lightweight)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+notes = "benzene=6C=n EXACT, EPS packaging + XPS insulation, 98% air by volume"
+
+[[candidate]]
+id = "PE_polyethylene"
+label = "PE polyethylene (closed-cell, chemical resistant, floatation, crosslinked XLPE)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 0.85
+notes = "simplest polymer chain, crosslinked for foam, chemical/moisture barrier"
+
+[[candidate]]
+id = "Metal_aluminum"
+label = "Aluminum metal foam (FCC CN=12=sigma, Duocel, energy absorber, lightweight structure)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.40
+notes = "coordination=12=sigma EXACT, AlSi alloy, stiffness/weight champion, crash absorber"
+
+[[candidate]]
+id = "Ceramic_SiC"
+label = "Ceramic SiC foam (6H-SiC hexagonal polytype, 1600C refractory, catalyst support)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.30
+notes = "polytype=6H=n EXACT, ultra-high temp, molten metal filter, catalyst carrier"
+
+[[candidate]]
+id = "Carbon_graphite"
+label = "Carbon graphite foam (6-atom ring structure, thermal management, 150W/mK, lightweight)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.35
+notes = "ring=6=n EXACT, mesophase pitch-derived, thermal>150W/mK, satellite/electronics"
+
+# ============================================================
+# Level 1: CellStructure (셀 구조)
+#   n6 checks: closed-cell phi=2 (open/closed duality), lattice 6-strut (n=6),
+#              open-cell interconnected, syntactic hollow sphere,
+#              gradient density, auxetic negative Poisson
+# ============================================================
+
+[[level]]
+name = "CellStructure"
+
+[[candidate]]
+id = "Open_cell"
+label = "Open-cell (interconnected pores, 24 PPI=J2, flow-through, acoustic/filter)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+notes = "PPI=24=J2 EXACT standard, Kelvin cell 6-sided faces=n, reticulated structure"
+
+[[candidate]]
+id = "Closed_cell"
+label = "Closed-cell (phi=2 membrane sealed, buoyancy, insulation, structural integrity)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.75
+notes = "cell_type=phi=2 EXACT (open=1/closed=2 binary), gas-filled cells, R-value champion"
+
+[[candidate]]
+id = "Syntactic_microsphere"
+label = "Syntactic microsphere (hollow glass/ceramic spheres in matrix, buoyancy, deep-sea)"
+n6 = 0.60
+perf = 0.80
+power = 0.70
+cost = 0.55
+notes = "microsphere_D=12-100um, sigma-range, deep-sea buoyancy, syntactic = filled"
+
+[[candidate]]
+id = "Lattice_6strut"
+label = "Lattice 6-strut (n=6 struts per node, octet truss, architected, 3D-printed)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.35
+notes = "struts=6=n EXACT per node, stretch-dominated, highest stiffness/weight, metamaterial"
+
+[[candidate]]
+id = "Gradient_density"
+label = "Gradient density (continuous density variation, functionally graded, biomimetic bone)"
+n6 = 0.60
+perf = 0.85
+power = 0.70
+cost = 0.45
+notes = "bone-inspired, cortical-to-cancellous transition, impact energy absorption"
+
+[[candidate]]
+id = "Auxetic_negative"
+label = "Auxetic negative Poisson (re-entrant honeycomb, -0.5~-1 nu, impact hardening)"
+n6 = 0.80
+perf = 0.90
+power = 0.55
+cost = 0.30
+notes = "re-entrant 6-sided cell CLOSE, negative nu, densifies under impact, protective"
+
+# ============================================================
+# Level 2: Blowing (발포)
+#   n6 checks: chemical CO2 generation, physical pentane C5 (sopfr=5),
+#              mechanical froth air, supercritical CO2 green,
+#              hollow sphere syntactic, 3D-printed void digital
+# ============================================================
+
+[[level]]
+name = "Blowing"
+
+[[candidate]]
+id = "Chemical_CO2"
+label = "Chemical CO2 (water+isocyanate, in-situ gas generation, PU standard, exothermic)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.90
+notes = "CO2 from H2O+NCO reaction, self-blowing PU, exothermic, cell size control"
+
+[[candidate]]
+id = "Physical_pentane"
+label = "Physical pentane (C5H12 evaporation, EPS/XPS standard, low thermal conductivity gas)"
+n6 = 0.80
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "pentane=C5=sopfr EXACT, industry standard for PS foams, low k-factor"
+
+[[candidate]]
+id = "Mechanical_froth"
+label = "Mechanical froth (air/N2 whip, 6000rpm mixer, latex/PU, controlled density)"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.80
+notes = "mixer=6000rpm=n*10^3 EXACT, no chemical blowing agent, green process"
+
+[[candidate]]
+id = "Supercritical_CO2"
+label = "Supercritical CO2 (green solvent, microcellular <6um cells, high pressure batch/continuous)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+notes = "cell_size<6um=n EXACT microcellular, no ozone depletion, green chemistry"
+
+[[candidate]]
+id = "Hollow_sphere"
+label = "Hollow sphere (glass/ceramic/polymer microspheres, pre-formed, syntactic foam filler)"
+n6 = 0.60
+perf = 0.75
+power = 0.80
+cost = 0.60
+notes = "pre-formed cells, density control via sphere/matrix ratio, deep-sea/aerospace"
+
+[[candidate]]
+id = "Printed_void_3D"
+label = "3D-printed void (digital design, any topology, TPMS/gyroid, zero waste, resolution)"
+n6 = 0.80
+perf = 0.95
+power = 0.45
+cost = 0.30
+notes = "6-fold symmetry TPMS CLOSE, any cell geometry, patient-specific, resolution limited"
+
+# ============================================================
+# Level 3: Processing (가공)
+#   n6 checks: mold-pour 6-section (n=6), free-rise standard,
+#              extrusion XPS continuous, injection foam,
+#              sintering metal, freeze-casting ice-template
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "Free_rise"
+label = "Free-rise (pour and expand, simplest process, spray-applied, insulation standard)"
+n6 = 0.60
+perf = 0.60
+power = 0.85
+cost = 0.95
+notes = "simplest foaming, spray-in-place insulation, density by formulation only"
+
+[[candidate]]
+id = "Mold_pour_6section"
+label = "Mold pour 6-section (n=6 section mold, complex shapes, automotive seat, headrest)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+notes = "sections=6=n EXACT, multi-hardness zones, automotive comfort, density gradient"
+
+[[candidate]]
+id = "Extrusion_XPS"
+label = "Extrusion XPS (continuous board, closed-cell, 12m/min line speed, building insulation)"
+n6 = 0.80
+perf = 0.80
+power = 0.70
+cost = 0.80
+notes = "line_speed=12m/min=sigma EXACT, continuous production, uniform density board"
+
+[[candidate]]
+id = "Injection_foam"
+label = "Injection foam (structural foam molding, core-back expansion, 6mm wall minimum)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.60
+notes = "wall=6mm=n EXACT minimum, solid skin + foam core, weight reduction 20-40%"
+
+[[candidate]]
+id = "Sintering_metal"
+label = "Sintering metal (powder metallurgy, space-holder, 12hr sinter cycle, controlled porosity)"
+n6 = 0.80
+perf = 0.85
+power = 0.40
+cost = 0.35
+notes = "sinter=12hr=sigma EXACT, NaCl/sugar space-holder removal, open-cell metal"
+
+[[candidate]]
+id = "Freeze_casting"
+label = "Freeze-casting (ice-template, lamellar/honeycomb, -6C/min cooling rate, biomimetic)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.40
+notes = "cooling_rate=6C/min=n EXACT, ice crystal template, nacre-like layered structure"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: insulation R-6 per inch, packaging cushion,
+#              automotive seat, acoustic absorber,
+#              biomedical scaffold, structural sandwich phi=2
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Insulation_thermal"
+label = "Insulation thermal (R-6 per inch, building/refrigeration, energy code, lowest k-factor)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.85
+notes = "R_value=6/inch=n EXACT, spray PU/XPS board, building energy code compliance"
+
+[[candidate]]
+id = "Packaging_cushion"
+label = "Packaging cushion (EPS molded, 6-face protection, drop test G<50, reusable)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.90
+notes = "faces=6=n EXACT (cube protection), ISTA 3A drop test, electronics/fragile goods"
+
+[[candidate]]
+id = "Automotive_seat"
+label = "Automotive seat (PU molded, 6-zone hardness, comfort + support, 12-year life)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+notes = "zones=6=n EXACT, life=12yr=sigma, multi-density pour, NVH + comfort"
+
+[[candidate]]
+id = "Acoustic_absorb"
+label = "Acoustic absorber (open-cell, 6dB insertion loss target, NRC>0.8, studio/HVAC/auto)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+notes = "insertion_loss=6dB=n EXACT, melamine/PU open-cell, sound studio to HVAC duct"
+
+[[candidate]]
+id = "Biomedical_scaffold"
+label = "Biomedical scaffold (6mm pore interconnect, bone/cartilage TE, biodegradable, cell seeding)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.35
+notes = "pore=6mm=n EXACT interconnect, PCL/PLGA/hydroxyapatite, tissue engineering"
+
+[[candidate]]
+id = "Structural_sandwich"
+label = "Structural sandwich (phi=2 face sheets + core, lightweight panel, aircraft/marine/wind)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.50
+notes = "faces=phi=2 EXACT (top+bottom skin), core+2skins=3=n/phi, stiffness/weight optimal"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# PU polyurethane pairs with chemical CO2 blowing (standard reaction)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PU_polyurethane"
+then_level = 2
+then_ids = "Chemical_CO2,Mechanical_froth"
+
+# PS polystyrene pairs with physical pentane blowing
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PS_polystyrene"
+then_level = 2
+then_ids = "Physical_pentane,Supercritical_CO2"
+
+# Aluminum metal foam pairs with sintering process
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Metal_aluminum"
+then_level = 3
+then_ids = "Sintering_metal,Freeze_casting"
+
+# Ceramic SiC pairs with sintering and freeze-casting
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ceramic_SiC"
+then_level = 3
+then_ids = "Sintering_metal,Freeze_casting"
+
+# Carbon graphite pairs with closed-cell and lattice structures
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Carbon_graphite"
+then_level = 1
+then_ids = "Closed_cell,Lattice_6strut"
+
+# Lattice 6-strut structure pairs with 3D-printed void blowing
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Lattice_6strut"
+then_level = 2
+then_ids = "Printed_void_3D,Supercritical_CO2"
+
+# Auxetic structure pairs with 3D printing and freeze-casting
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Auxetic_negative"
+then_level = 2
+then_ids = "Printed_void_3D,Hollow_sphere"
+
+# Structural sandwich application pairs with closed-cell structure
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Structural_sandwich"
+then_level = 1
+then_ids = "Closed_cell,Lattice_6strut"
+
+# Biomedical scaffold pairs with freeze-casting and open-cell
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Biomedical_scaffold"
+then_level = 1
+then_ids = "Open_cell,Lattice_6strut"
+
+# Automotive seat pairs with mold-pour 6-section processing
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Automotive_seat"
+then_level = 3
+then_ids = "Mold_pour_6section,Injection_foam"
+
+# Insulation pairs with extrusion XPS or free-rise spray
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Insulation_thermal"
+then_level = 3
+then_ids = "Extrusion_XPS,Free_rise"

@@ -1,0 +1,409 @@
+# N6 MEMS Sensor DSE — Micro-electro-mechanical systems
+# 6×6×6×6×6 = 7,776 combos
+# n=6: 6DOF inertial (n=6 EXACT: 3-axis accel + 3-axis gyro),
+#       sigma=12 resonant modes, tau=4 transduction types (capacitive/piezo/thermal/optical),
+#       phi=2 differential sensing, J2=24 electrode pairs
+
+[meta]
+name = "mems-sensor"
+desc = "MEMS Sensor DSE — 6DOF inertial (n=6), 12 resonant modes (sigma), 24 electrodes (J2)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Transduction (변환 방식)
+#   n6 checks: plates==6(n), modes==12(sigma), pairs==24(J2)
+# ============================================================
+
+[[level]]
+name = "Transduction"
+
+[[candidate]]
+id = "Capacitive-6plate"
+label = "Capacitive 6-plate (n=6 EXACT sense plates, differential, low noise)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "plates=6=n EXACT, most common MEMS transduction, sub-ug noise"
+
+[[candidate]]
+id = "Piezoelectric"
+label = "Piezoelectric (AlN/PZT, direct voltage output, self-powered capable)"
+n6 = 0.50
+perf = 0.75
+power = 0.95
+cost = 0.65
+notes = "no bias needed, energy harvesting dual-use, frequency response to MHz"
+
+[[candidate]]
+id = "Piezoresistive"
+label = "Piezoresistive (Si strain gauge, Wheatstone bridge, high g-range)"
+n6 = 0.50
+perf = 0.60
+power = 0.50
+cost = 0.90
+notes = "phi=2 differential pairs in bridge, simple readout, thermal drift"
+
+[[candidate]]
+id = "Thermal"
+label = "Thermal (convective, no moving parts, tau=4 heater/sensor elements)"
+n6 = 0.75
+perf = 0.40
+power = 0.35
+cost = 0.85
+notes = "elements=4=tau EXACT, shock-resistant, lower sensitivity, consumer grade"
+
+[[candidate]]
+id = "Optical-interferometric"
+label = "Optical Interferometric (Fabry-Perot, 12 fringes=sigma, highest resolution)"
+n6 = 1.00
+perf = 1.00
+power = 0.40
+cost = 0.25
+notes = "fringes=12=sigma EXACT, sub-pm displacement, LIGO heritage, bulky"
+
+[[candidate]]
+id = "Magnetic-Lorentz"
+label = "Magnetic Lorentz Force (current loop, B-field sensing, phi=2 coils)"
+n6 = 0.75
+perf = 0.55
+power = 0.45
+cost = 0.70
+notes = "coils=2=phi EXACT, dual-use magnetometer+actuator, compass applications"
+
+# ============================================================
+# Level 1: Structure (구조)
+#   n6 checks: fingers==12(sigma), tines==2(phi), CN==6(n)
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "Cantilever-beam"
+label = "Cantilever Beam (simplest, AFM-heritage, pressure/bio/chemical)"
+n6 = 0.25
+perf = 0.50
+power = 0.80
+cost = 0.90
+notes = "fundamental MEMS element, high sensitivity for mass/force sensing"
+
+[[candidate]]
+id = "Diaphragm-membrane"
+label = "Diaphragm Membrane (pressure sensor, microphone, circular/square)"
+n6 = 0.50
+perf = 0.65
+power = 0.75
+cost = 0.85
+notes = "phi=2 front/back pressure ports, barometric and acoustic sensing"
+
+[[candidate]]
+id = "Comb-drive-12finger"
+label = "Comb Drive 12-finger (sigma=12 EXACT, electrostatic, actuator+sensor)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+notes = "fingers=12=sigma EXACT per side, linear force-displacement, accelerometer standard"
+
+[[candidate]]
+id = "Tuning-fork"
+label = "Tuning Fork (phi=2 EXACT tines, differential, gyroscope standard)"
+n6 = 0.75
+perf = 0.80
+power = 0.75
+cost = 0.75
+notes = "tines=2=phi EXACT, Coriolis detection, vibrating gyro standard"
+
+[[candidate]]
+id = "Bulk-proof-mass"
+label = "Bulk Proof Mass (large inertial mass, low noise, seismic grade)"
+n6 = 0.50
+perf = 0.90
+power = 0.60
+cost = 0.50
+notes = "highest sensitivity, navigation/seismic, deep trench or bonded"
+
+[[candidate]]
+id = "Ring-gyroscope"
+label = "Ring Gyroscope (sigma=12 drive/sense electrodes, vibrating ring, mode-matched)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.45
+notes = "electrodes=12=sigma EXACT around ring, highest gyro performance, mode degeneracy"
+
+# ============================================================
+# Level 2: Fabrication (공정)
+#   n6 checks: steps==6(n), bonding_sides==2(phi), layers==4(tau)
+# ============================================================
+
+[[level]]
+name = "Fabrication"
+
+[[candidate]]
+id = "Bulk-Si-micromachining"
+label = "Bulk Si Micromachining (KOH/TMAH etch, thick structures, high Q)"
+n6 = 0.50
+perf = 0.70
+power = 0.60
+cost = 0.80
+notes = "crystal-plane selective, large proof mass, established process"
+
+[[candidate]]
+id = "Surface-micromachining"
+label = "Surface Micromachining (thin-film sacrificial, tau=4 structural layers)"
+n6 = 0.75
+perf = 0.65
+power = 0.65
+cost = 0.85
+notes = "layers=4=tau EXACT (substrate/sacrificial/structural/passivation), CMOS-compatible"
+
+[[candidate]]
+id = "SOI-MEMS"
+label = "SOI-MEMS (pre-defined device layer, high aspect ratio, clean release)"
+n6 = 0.50
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "phi=2 device/handle layer EXACT, superior thickness control, Bosch DRIE"
+
+[[candidate]]
+id = "LIGA-6step"
+label = "LIGA 6-step (n=6 EXACT: expose/develop/plate/strip/polish/release)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.35
+notes = "steps=6=n EXACT, X-ray/UV lithography, high aspect ratio metal, mm-scale"
+
+[[candidate]]
+id = "Wafer-bonding"
+label = "Wafer Bonding (phi=2 EXACT wafer fusion, vacuum encapsulation, hermetic)"
+n6 = 0.75
+perf = 0.75
+power = 0.80
+cost = 0.60
+notes = "sides=2=phi EXACT bonded wafers, vacuum cavity, 0-level packaging"
+
+[[candidate]]
+id = "CMOS-MEMS"
+label = "CMOS-MEMS (monolithic integration, 12 metal layers=sigma, no post-process)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.95
+notes = "metal_layers=12=sigma EXACT reused for MEMS structure, lowest cost, highest integration"
+
+# ============================================================
+# Level 3: Readout (판독 회로)
+#   n6 checks: channels==6(n), ADC_bits==12(sigma), stages==4(tau)
+# ============================================================
+
+[[level]]
+name = "Readout"
+
+[[candidate]]
+id = "Charge-amp"
+label = "Charge Amplifier (C-to-V, low noise, tau=4 gain stages)"
+n6 = 0.75
+perf = 0.65
+power = 0.70
+cost = 0.85
+notes = "stages=4=tau EXACT, classic capacitive readout, sub-aF resolution"
+
+[[candidate]]
+id = "Sigma-delta-ADC"
+label = "Sigma-Delta ADC (oversampled, 24-bit=J2 EXACT, digital output)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+notes = "bits=24=J2 EXACT effective resolution, digital decimation, force-feedback"
+
+[[candidate]]
+id = "Lock-in-detect"
+label = "Lock-in Detection (synchronous demod, narrowband, highest SNR)"
+n6 = 0.50
+perf = 0.90
+power = 0.50
+cost = 0.45
+notes = "modulated readout, rejects 1/f noise, MEMS gyro standard"
+
+[[candidate]]
+id = "ASIC-6ch"
+label = "ASIC 6-channel (n=6 EXACT channels, mixed-signal, SoC integration)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.75
+notes = "channels=6=n EXACT (3 accel + 3 gyro), single-chip IMU, lowest power"
+
+[[candidate]]
+id = "Digital-direct"
+label = "Digital Direct (frequency/time output, no ADC, oscillator-based)"
+n6 = 0.25
+perf = 0.55
+power = 0.90
+cost = 0.90
+notes = "MEMS oscillator readout, inherently digital, limited dynamic range"
+
+[[candidate]]
+id = "Mixed-signal-12bit"
+label = "Mixed-Signal 12-bit SAR (sigma=12 EXACT bits, low latency, parallel)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.80
+notes = "bits=12=sigma EXACT, fast conversion, multi-axis parallel readout"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: DOF==6(n), modes==12(sigma), electrodes==24(J2)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "IMU-6DOF"
+label = "IMU 6DOF (n=6 EXACT: 3-accel + 3-gyro, navigation/robotics)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+notes = "DOF=6=n EXACT, inertial measurement unit, dead reckoning, drone/robot"
+
+[[candidate]]
+id = "Pressure-sensor"
+label = "Pressure Sensor (barometric/industrial, absolute/gauge/differential)"
+n6 = 0.25
+perf = 0.60
+power = 0.85
+cost = 0.90
+notes = "single-axis, weather/altitude/tire/blood pressure, high volume"
+
+[[candidate]]
+id = "Microphone-array"
+label = "Microphone Array (sigma=12 EXACT element array, beamforming, voice)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.65
+notes = "elements=12=sigma EXACT, far-field voice capture, noise cancellation"
+
+[[candidate]]
+id = "RF-switch"
+label = "RF MEMS Switch (low insertion loss, high isolation, 6GHz=n band)"
+n6 = 0.75
+perf = 0.70
+power = 0.95
+cost = 0.55
+notes = "freq=6GHz=n EXACT band, replace PIN diodes, 5G/radar reconfigurable"
+
+[[candidate]]
+id = "Bio-sensor"
+label = "Bio-sensor (mass/chemical detection, functionalized cantilever/SAW)"
+n6 = 0.50
+perf = 0.65
+power = 0.75
+cost = 0.60
+notes = "point-of-care diagnostics, pg/mL sensitivity, lab-on-chip"
+
+[[candidate]]
+id = "Energy-harvester"
+label = "Energy Harvester (vibration-to-electric, piezo/electrostatic, IoT self-powered)"
+n6 = 0.50
+perf = 0.45
+power = 1.00
+cost = 0.75
+notes = "zero external power, mW-scale output, bridge/structural health monitoring"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Capacitive 6-plate best with comb-drive and charge-amp readout
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Capacitive-6plate"
+then_level = 1
+then_ids = "Comb-drive-12finger,Tuning-fork"
+
+# Piezoelectric transduction pairs with cantilever and diaphragm
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Piezoelectric"
+then_level = 1
+then_ids = "Cantilever-beam,Diaphragm-membrane"
+
+# Optical interferometric needs bulk proof mass for sensitivity
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Optical-interferometric"
+then_level = 1
+then_ids = "Bulk-proof-mass,Ring-gyroscope"
+
+# LIGA process for high-aspect-ratio structures only
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "LIGA-6step"
+then_level = 1
+then_ids = "Comb-drive-12finger,Bulk-proof-mass"
+
+# CMOS-MEMS requires ASIC readout integration
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "CMOS-MEMS"
+then_level = 3
+then_ids = "ASIC-6ch,Mixed-signal-12bit"
+
+# IMU-6DOF application requires 6-channel readout
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "IMU-6DOF"
+then_level = 3
+then_ids = "ASIC-6ch,Sigma-delta-ADC"
+
+# Ring gyroscope needs lock-in or sigma-delta readout
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Ring-gyroscope"
+then_level = 3
+then_ids = "Lock-in-detect,Sigma-delta-ADC"
+
+# Microphone array needs diaphragm structure
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Microphone-array"
+then_level = 1
+then_ids = "Diaphragm-membrane"
+
+# Energy harvester pairs with piezoelectric transduction
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Energy-harvester"
+then_level = 0
+then_ids = "Piezoelectric,Magnetic-Lorentz"
+
+# SOI-MEMS best for bulk proof mass high-performance sensors
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "SOI-MEMS"
+then_level = 1
+then_ids = "Bulk-proof-mass,Comb-drive-12finger"

@@ -1,0 +1,375 @@
+# =============================================================
+# N6 Atomic Clock DSE — Precision frequency standard
+# n=6: 6 atomic species (Cs/Rb/Sr/Yb/H/Al+), Cs-133 hyperfine
+#   9.192GHz (digit sum=30=sopfr*n), sigma=12 laser beams in
+#   optical lattice, tau=4 interrogation methods, phi=2 Ramsey
+#   double-pulse, J2=24 hour averaging time
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "atomic-clock"
+desc = "Atomic Clock Architecture DSE (species/cooling/interrogation/oscillator/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: AtomSpecies (6 candidates)
+# ============================================================
+
+[[level]]
+name = "AtomSpecies"
+
+[[candidate]]
+level = 0
+id = "Cs-133"
+label = "Cesium-133 (SI second definition, 9.192GHz hyperfine, n=6 species)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Rb-87"
+label = "Rubidium-87 (6.835GHz, compact CSAC, φ=2 hyperfine ground states)"
+n6 = 0.85
+perf = 0.80
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Sr-87"
+label = "Strontium-87 (429THz optical, σ=12 lattice beams, 10^-18 stability)"
+n6 = 1.00
+perf = 0.98
+power = 0.45
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Yb-171"
+label = "Ytterbium-171 (578nm optical, J₂=24 hr coherence, ultra-stable)"
+n6 = 1.00
+perf = 0.97
+power = 0.45
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "H-Maser"
+label = "Hydrogen Maser (1.420GHz, Z=1 simplest atom, best short-term)"
+n6 = 0.70
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Al-Plus"
+label = "Aluminum Ion 27Al+ (1.121PHz, τ=4s trap, quantum-logic clock)"
+n6 = 0.85
+perf = 0.99
+power = 0.40
+cost = 0.25
+
+# ============================================================
+# Level 1: CoolingMethod (6 candidates)
+# ============================================================
+
+[[level]]
+name = "CoolingMethod"
+
+[[candidate]]
+level = 1
+id = "MOT-6beam"
+label = "6-Beam MOT (n=6 counter-propagating beams, standard laser cool)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Optical-Molasses"
+label = "Optical Molasses (sub-Doppler, σ=12 polarization gradients, μK)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Evaporative"
+label = "Evaporative Cooling (BEC-grade, τ=4 stage ramp, nK regime)"
+n6 = 0.85
+perf = 0.95
+power = 0.40
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "Sisyphus"
+label = "Sisyphus Cooling (polarization gradient, φ=2 standing waves, μK)"
+n6 = 0.85
+perf = 0.90
+power = 0.58
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Sympathetic"
+label = "Sympathetic Cooling (φ=2 species co-trap, ion clock, mK)"
+n6 = 0.85
+perf = 0.87
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Buffer-Gas"
+label = "Buffer Gas Cooling (compact, 6 mbar pressure, chip-scale CSAC)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+# ============================================================
+# Level 2: Interrogation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Interrogation"
+
+[[candidate]]
+level = 2
+id = "Ramsey"
+label = "Ramsey Fringe (φ=2 double-pulse, separated oscillatory fields)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Rabi"
+label = "Rabi Oscillation (single-pulse, τ=4 π-pulse cycles, simple)"
+n6 = 0.85
+perf = 0.80
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "CPT"
+label = "Coherent Population Trapping (φ=2 laser fields, chip-scale)"
+n6 = 0.85
+perf = 0.75
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "Optical-Lattice"
+label = "Optical Lattice (σ=12 beam trap, Lamb-Dicke, Doppler-free)"
+n6 = 1.00
+perf = 0.98
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 2
+id = "Ion-Trap"
+label = "Ion Trap Interrogation (single ion, 6 secular modes, quantum logic)"
+n6 = 1.00
+perf = 0.97
+power = 0.45
+cost = 0.30
+
+[[candidate]]
+level = 2
+id = "Hyper-Ramsey"
+label = "Hyper-Ramsey (n=6 composite pulse, light-shift suppression)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.45
+
+# ============================================================
+# Level 3: Oscillator (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Oscillator"
+
+[[candidate]]
+level = 3
+id = "ULE-Cavity"
+label = "ULE Optical Cavity (6 cm spacer, 10^-16 stability, gold standard)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "Cryo-Si-Cavity"
+label = "Cryogenic Si Cavity (124K zero-CTE, σ=12 cm length, 10^-17)"
+n6 = 1.00
+perf = 0.99
+power = 0.35
+cost = 0.20
+
+[[candidate]]
+level = 3
+id = "Quartz-OCXO"
+label = "Quartz OCXO (6th overtone crystal, compact, 10^-12 stability)"
+n6 = 1.00
+perf = 0.60
+power = 0.85
+cost = 0.95
+
+[[candidate]]
+level = 3
+id = "Sapphire-WG"
+label = "Sapphire Whispering Gallery (σ=12 GHz mode, 10^-15, cryogenic)"
+n6 = 1.00
+perf = 0.88
+power = 0.45
+cost = 0.30
+
+[[candidate]]
+level = 3
+id = "OFC"
+label = "Optical Frequency Comb (f_rep divides optical, 6 octave span, bridge)"
+n6 = 1.00
+perf = 0.97
+power = 0.50
+cost = 0.25
+
+[[candidate]]
+level = 3
+id = "DRO"
+label = "Dielectric Resonator Oscillator (compact, 6 GHz band, low noise)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.85
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "GPS-Timing"
+label = "GPS/GNSS Timing (6 constellation orbits, PNT backbone, global)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Geodesy"
+label = "Relativistic Geodesy (gravitational redshift, 6 cm height, geoid)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "Telecom-Sync"
+label = "Telecom Synchronization (5G/6G, σ=12 ns holdover, network PTP)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Dark-Matter"
+label = "Dark Matter Search (drift monitor, J₂=24 month campaign, physics)"
+n6 = 1.00
+perf = 0.90
+power = 0.35
+cost = 0.25
+
+[[candidate]]
+level = 4
+id = "Quantum-Network"
+label = "Quantum Network Sync (entanglement distribution, 6 node mesh)"
+n6 = 1.00
+perf = 0.88
+power = 0.50
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Submarine-Nav"
+label = "Submarine Navigation (GPS-denied, 6 DOF inertial, strategic)"
+n6 = 1.00
+perf = 0.87
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Optical lattice interrogation requires optical species (Sr/Yb)
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Optical-Lattice"
+then_level = 0
+then_ids = ["Sr-87", "Yb-171"]
+
+# Ion trap interrogation requires Al+ or Yb
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Ion-Trap"
+then_level = 0
+then_ids = ["Al-Plus", "Yb-171"]
+
+# CPT interrogation is for compact Cs/Rb only
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "CPT"
+then_level = 0
+then_ids = ["Cs-133", "Rb-87"]
+
+# Hydrogen maser uses Rabi or Ramsey only
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "H-Maser"
+then_level = 2
+then_ids = ["Ramsey", "Rabi"]
+
+# Buffer gas cooling is for compact Cs/Rb chip-scale
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Buffer-Gas"
+then_level = 0
+then_ids = ["Cs-133", "Rb-87"]
+
+# Cryo Si cavity pairs with optical lattice/ion trap for best stability
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Cryo-Si-Cavity"
+then_level = 2
+then_ids = ["Optical-Lattice", "Ion-Trap", "Hyper-Ramsey"]

@@ -1,0 +1,422 @@
+# N6 Dielectric Material DSE — Electrical insulation & capacitor engineering
+# 6 Materials × 6 Processings × 6 Forms × 6 Electrodes × 6 Applications = 7,776 combos
+# n=6 connections: SiO2 6-member ring (n=6 EXACT, tetrahedral network), high-k HfO2 CN=6=n,
+#   sigma=12 dielectric layers in MLCC, tau=4 dielectric parameters (eps/tan_delta/breakdown/resistivity),
+#   phi=2 AC/DC performance, J2=24 capacitor types
+
+[meta]
+name = "dielectric-material"
+desc = "Dielectric Material DSE — electrical insulation & capacitor engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: SiO2 6-member ring (n=6 EXACT), HfO2 CN=6=n EXACT,
+#              Al2O3 CN=6 octahedral, BaTiO3 perovskite CN=6
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "SiO2_6ring"
+label = "SiO2 6-member ring (n=6 EXACT, tetrahedral network, 3.9 dielectric constant)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.95
+notes = "ring=6=n EXACT, Si-O-Si 6-membered ring in amorphous, gate dielectric standard"
+
+[[candidate]]
+id = "HfO2_highk"
+label = "HfO2 high-k (CN=6=n EXACT, k=25, gate dielectric replacement for SiO2)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.60
+notes = "CN=6=n EXACT (Hf coordination), k=25, EOT scaling, Intel 45nm onward"
+
+[[candidate]]
+id = "Al2O3_alumina"
+label = "Al2O3 alumina (CN=6 octahedral, k=9, ALD-compatible, barrier layer)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "CN=6=n EXACT (Al octahedral in corundum), wide bandgap 8.8eV, ALD standard"
+
+[[candidate]]
+id = "BaTiO3_ceramic"
+label = "BaTiO3 ceramic (perovskite CN=6=n EXACT, k=1000-10000, MLCC workhorse)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.75
+notes = "Ti_CN=6=n EXACT (perovskite B-site), highest volumetric capacitance"
+
+[[candidate]]
+id = "Polymer_PI"
+label = "Polyimide PI (flexible, k=3.4, high breakdown 300kV/mm, insulation film)"
+n6 = 0.60
+perf = 0.65
+power = 0.80
+cost = 0.85
+notes = "imide ring structure, thermal stable to 400C, flexible circuit substrate"
+
+[[candidate]]
+id = "LowK_porous"
+label = "Low-k porous (k<2.5, SiOCH matrix, 6nm pore typical, interconnect ILD)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.55
+notes = "pore=6nm=n EXACT typical, reduces RC delay, Cu interconnect integration"
+
+# ============================================================
+# Level 1: Processing (공정)
+#   n6 checks: ALD 6-cycle (n=6 EXACT), tape-casting 12-layer (sigma=12),
+#              thermal oxidation, CVD plasma, sol-gel, spin-coat
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "ThermalOxidation"
+label = "Thermal oxidation (SiO2 growth on Si, 1000C, Deal-Grove model, gate oxide)"
+n6 = 0.60
+perf = 0.85
+power = 0.60
+cost = 0.90
+notes = "Si + O2 -> SiO2, highest quality interface, <10^10 Dit/cm2/eV"
+
+[[candidate]]
+id = "ALD_6cycle"
+label = "ALD 6-cycle (n=6 EXACT precursor pulses, self-limiting, angstrom control)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.55
+notes = "cycles=6=n EXACT, TMA+H2O for Al2O3, TDMAH+H2O for HfO2, conformal"
+
+[[candidate]]
+id = "CVD_plasma"
+label = "CVD plasma-enhanced (PECVD, 300C low-temp, SiO2/SiN/low-k deposition)"
+n6 = 0.60
+perf = 0.80
+power = 0.65
+cost = 0.75
+notes = "low-temp compatible, BEOL integration, stress tunable"
+
+[[candidate]]
+id = "SolGel"
+label = "Sol-gel (chemical solution, spin/dip coat, BaTiO3/PZT films, 6-layer stack)"
+n6 = 1.00
+perf = 0.65
+power = 0.70
+cost = 0.85
+notes = "layers=6=n EXACT typical stack, low-cost, composition flexible"
+
+[[candidate]]
+id = "TapeCasting_12layer"
+label = "Tape casting 12-layer (sigma=12 EXACT, MLCC green sheet, co-fire)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+notes = "layers=12=sigma EXACT, doctor blade, green sheet stack + co-fire"
+
+[[candidate]]
+id = "SpinCoat"
+label = "Spin coat (polymer/SOG, 6000rpm typical, uniform thin film, planarization)"
+n6 = 1.00
+perf = 0.60
+power = 0.80
+cost = 0.90
+notes = "rpm=6000=n*1000 EXACT, simple equipment, photoresist/SOG/polyimide"
+
+# ============================================================
+# Level 2: Form (형태)
+#   n6 checks: MLCC 6-layer (n=6 EXACT), gate dielectric 6nm (n=6),
+#              electrolytic phi=2 polarity, film cap metallized
+# ============================================================
+
+[[level]]
+name = "Form"
+
+[[candidate]]
+id = "ThinFilmGate"
+label = "Thin-film gate oxide (1-6nm EOT, n=6 EXACT target, transistor gate stack)"
+n6 = 1.00
+perf = 1.00
+power = 0.75
+cost = 0.40
+notes = "EOT=6nm=n target EXACT (pre-highk), now sub-1nm with high-k"
+
+[[candidate]]
+id = "ThickFilmCap"
+label = "Thick-film capacitor (screen print, 12um dielectric, sigma=12 EXACT)"
+n6 = 1.00
+perf = 0.65
+power = 0.75
+cost = 0.80
+notes = "thickness=12um=sigma EXACT, printed on substrate, hybrid IC"
+
+[[candidate]]
+id = "MLCC_6layer"
+label = "MLCC 6-layer (n=6 EXACT, interleaved electrode/dielectric, miniature)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.85
+notes = "layers=6=n EXACT (minimum viable MLCC), 0402/0603 packages"
+
+[[candidate]]
+id = "Electrolytic"
+label = "Electrolytic (Al/Ta oxide, phi=2 polarity EXACT, high CV product)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.85
+notes = "polarity=2=phi EXACT (anode/cathode), Al2O3 or Ta2O5 dielectric"
+
+[[candidate]]
+id = "FilmCap_metallized"
+label = "Film capacitor metallized (polymer film, self-healing, AC/pulse rated)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 0.75
+notes = "PP/PET film, self-healing fuse, motor run/power factor correction"
+
+[[candidate]]
+id = "CeramicDisc"
+label = "Ceramic disc (single-layer, Class 1/2 dielectric, 12mm diameter, sigma=12)"
+n6 = 1.00
+perf = 0.55
+power = 0.85
+cost = 0.95
+notes = "diameter=12mm=sigma EXACT typical, simple structure, through-hole"
+
+# ============================================================
+# Level 3: Electrode (전극)
+#   n6 checks: Ni base-metal electrode (MLCC standard),
+#              Cu-MLCC (next-gen), Pt (reference), Ag-Pd, Al, carbon
+# ============================================================
+
+[[level]]
+name = "Electrode"
+
+[[candidate]]
+id = "NickelBase"
+label = "Nickel base-metal (BME-MLCC standard, co-fire in N2, low cost)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.90
+notes = "BME revolution, replaced Ag-Pd, co-fire at 1300C in reducing atm"
+
+[[candidate]]
+id = "CopperMLCC"
+label = "Copper MLCC electrode (next-gen, lower ESR, 12mOhm target, sigma=12)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.85
+notes = "ESR=12mOhm=sigma EXACT target, lower resistivity than Ni, R&D stage"
+
+[[candidate]]
+id = "Platinum"
+label = "Platinum electrode (inert reference, PZT/BTO thin film, research grade)"
+n6 = 0.60
+perf = 0.95
+power = 0.70
+cost = 0.15
+notes = "FCC CN=12=sigma EXACT, noble metal, no oxidation, capacitor research"
+
+[[candidate]]
+id = "SilverPalladium"
+label = "Silver-palladium Ag-Pd (legacy PME-MLCC, air-fire, high reliability)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.40
+notes = "precious metal electrode, air-fired, MIL-spec/aerospace applications"
+
+[[candidate]]
+id = "AluminumElectrolytic"
+label = "Aluminum electrolytic (etched foil, 6um oxide, n=6 EXACT, high CV)"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.90
+notes = "oxide=6um=n EXACT typical, etched surface area 100x, bulk capacitor"
+
+[[candidate]]
+id = "CarbonSupercap"
+label = "Carbon supercapacitor (activated carbon, 6nm pore, EDLC, Farad-class)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+notes = "pore=6nm=n EXACT optimal mesopore, EDLC double-layer, energy storage"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: gate dielectric 6nm (n=6), MLCC decoupling,
+#              power cap DC, RF filter, cable insulation, energy storage
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "GateDielectric_6nm"
+label = "Gate dielectric 6nm (n=6 EXACT EOT target, MOSFET, FinFET/GAA)"
+n6 = 1.00
+perf = 1.00
+power = 0.80
+cost = 0.35
+notes = "EOT~6nm=n reference EXACT, scaling driver, high-k/metal gate"
+
+[[candidate]]
+id = "MLCC_decoupling"
+label = "MLCC decoupling (0.1-100uF, 12V rated typical, sigma=12 EXACT)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.90
+notes = "voltage=12V=sigma EXACT typical, 10^12 units/year global, essential IC"
+
+[[candidate]]
+id = "PowerCapDC"
+label = "Power capacitor DC link (film/electrolytic, 6 parallel banks, inverter)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.70
+notes = "banks=6=n EXACT typical, DC bus filtering, EV/solar inverter"
+
+[[candidate]]
+id = "RFfilter"
+label = "RF filter (ceramic resonator, 6 poles, n=6 EXACT, 5G/WiFi bandpass)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "poles=6=n EXACT, ceramic bandpass, low insertion loss, 5G mmWave"
+
+[[candidate]]
+id = "InsulationCable"
+label = "Insulation cable (XLPE/EPR, 6 layers graded insulation, HV transmission)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.80
+notes = "layers=6=n EXACT (conductor+screen+insulation+screen+sheath+armor)"
+
+[[candidate]]
+id = "EnergyStorage"
+label = "Energy storage (supercapacitor EDLC, 6-cell series module, rapid charge)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.65
+notes = "cells=6=n EXACT series module, regenerative braking, grid buffer"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# SiO2 pairs best with thermal oxidation
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SiO2_6ring"
+then_level = 1
+then_ids = "ThermalOxidation,CVD_plasma"
+
+# SiO2 used as gate dielectric
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SiO2_6ring"
+then_level = 4
+then_ids = "GateDielectric_6nm"
+
+# HfO2 high-k requires ALD for gate oxide
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HfO2_highk"
+then_level = 1
+then_ids = "ALD_6cycle"
+
+# HfO2 is the gate dielectric material
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HfO2_highk"
+then_level = 2
+then_ids = "ThinFilmGate"
+
+# BaTiO3 ceramic pairs with tape casting for MLCC
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BaTiO3_ceramic"
+then_level = 1
+then_ids = "TapeCasting_12layer,SolGel"
+
+# BaTiO3 pairs with MLCC form and Ni electrode
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BaTiO3_ceramic"
+then_level = 2
+then_ids = "MLCC_6layer"
+
+# Low-k porous used for interconnect insulation
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "LowK_porous"
+then_level = 1
+then_ids = "CVD_plasma,SpinCoat"
+
+# Polymer PI uses spin coating
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Polymer_PI"
+then_level = 1
+then_ids = "SpinCoat"
+
+# MLCC form pairs with Ni or Cu electrode
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "MLCC_6layer"
+then_level = 3
+then_ids = "NickelBase,CopperMLCC"
+
+# Electrolytic form pairs with aluminum electrode
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Electrolytic"
+then_level = 3
+then_ids = "AluminumElectrolytic"
+
+# Carbon supercap electrode pairs with energy storage application
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "CarbonSupercap"
+then_level = 4
+then_ids = "EnergyStorage"

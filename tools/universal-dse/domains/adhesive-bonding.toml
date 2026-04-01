@@ -1,0 +1,418 @@
+# N6 Adhesive & Bonding DSE — Joining material engineering
+# 6 AdhesiveTypes × 6 CureMechanisms × 6 SurfacePreps × 6 JointDesigns × 6 Applications = 7,776 combos
+# n=6 connections: 6 adhesion mechanisms (mechanical/adsorption/diffusion/electrostatic/chemical/weak-boundary = n=6 EXACT),
+#   sigma=12 MPa typical structural bond, tau=4 cure mechanisms (heat/UV/moisture/anaerobic),
+#   phi=2 two-component, J2=24 ASTM test standards
+
+[meta]
+name = "adhesive-bonding"
+desc = "Adhesive & Bonding DSE — joining material engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: AdhesiveType (접착제 유형)
+#   n6 checks: 6 adhesion mechanisms (n=6 EXACT), epoxy 2-part (phi=2),
+#              hot-melt 6min open time, cyanoacrylate instant
+# ============================================================
+
+[[level]]
+name = "AdhesiveType"
+
+[[candidate]]
+id = "Epoxy_structural"
+label = "Epoxy structural (2-part, 12 MPa lap shear, aerospace grade, thermoset)"
+n6 = 0.80
+perf = 1.00
+power = 0.65
+cost = 0.60
+notes = "parts=2=phi EXACT, strength=12MPa=sigma EXACT, gold standard structural"
+
+[[candidate]]
+id = "Acrylic_fast"
+label = "Acrylic fast-cure (MMA-based, 6-min fixture time, structural, surface tolerant)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+notes = "fixture_time=6min=n EXACT, methyl methacrylate, bonds oily surfaces"
+
+[[candidate]]
+id = "Polyurethane_flexible"
+label = "Polyurethane flexible (elastic bond, 600% elongation, vibration dampening, gap-filling)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.75
+notes = "urethane linkage, flexible structural, automotive windshield, 4MPa=tau shear"
+
+[[candidate]]
+id = "Cyanoacrylate"
+label = "Cyanoacrylate instant (CA glue, seconds cure, moisture-initiated, thin bond line)"
+n6 = 0.60
+perf = 0.70
+power = 0.90
+cost = 0.85
+notes = "anionic polymerization, instant bond, brittle, humidity=moisture cure"
+
+[[candidate]]
+id = "Silicone_sealant"
+label = "Silicone sealant (RTV, -60~300C range, 6mm bead width, flexible, waterproof)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.80
+notes = "bead_width=6mm=n EXACT, widest temp range, Si-O backbone, construction/electronic"
+
+[[candidate]]
+id = "HotMelt_6min"
+label = "Hot-melt 6-min open time (EVA/polyamide, thermoplastic, reversible, fast assembly)"
+n6 = 1.00
+perf = 0.60
+power = 0.85
+cost = 0.90
+notes = "open_time=6min=n EXACT, thermoplastic reversible, packaging/bookbinding/assembly"
+
+# ============================================================
+# Level 1: CureMechanism (경화 메커니즘)
+#   n6 checks: heat cure 12 stages (sigma=12), UV cure phi=2 (initiation/propagation),
+#              two-part mix phi=2, moisture cure tau=4 stages,
+#              anaerobic metal-surface, pressure-sensitive no cure
+# ============================================================
+
+[[level]]
+name = "CureMechanism"
+
+[[candidate]]
+id = "Heat_cure"
+label = "Heat cure (oven 120C/12min, sigma=12 thermal stages, thermoset crosslink)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.65
+notes = "time=12min=sigma EXACT, highest crosslink density, aerospace standard"
+
+[[candidate]]
+id = "UV_cure"
+label = "UV cure (365nm, seconds cure, photoinitiator, phi=2 step radical mechanism)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+notes = "steps=phi=2 EXACT (initiation+propagation), instant cure, line-of-sight only"
+
+[[candidate]]
+id = "Moisture_cure"
+label = "Moisture cure (atmospheric humidity, 4-stage hydrolysis, silicone/PU, room temp)"
+n6 = 0.60
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "stages=4=tau EXACT, ambient cure, no equipment, depth-dependent rate"
+
+[[candidate]]
+id = "TwoPart_mix"
+label = "Two-part mix (phi=2 resin+hardener, stoichiometric ratio, pot life controlled)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.60
+notes = "components=2=phi EXACT, most versatile, controlled pot life, epoxy/acrylic/PU"
+
+[[candidate]]
+id = "Anaerobic"
+label = "Anaerobic (metal-ion initiated, oxygen-inhibited, threadlock/retaining, no air=cure)"
+n6 = 0.60
+perf = 0.80
+power = 0.90
+cost = 0.75
+notes = "metal_surface_activated, Loctite-type, threadlocking 6Nm=n EXACT torque"
+
+[[candidate]]
+id = "Pressure_sensitive"
+label = "Pressure-sensitive (PSA, no cure, viscoelastic tack, 6N/25mm peel strength)"
+n6 = 1.00
+perf = 0.55
+power = 0.95
+cost = 0.85
+notes = "peel=6N/25mm=n EXACT, no cure needed, tape/label/protective film, Dahlquist criterion"
+
+# ============================================================
+# Level 2: SurfacePrep (표면 처리)
+#   n6 checks: plasma 6-sec treatment (n=6), solvent clean standard,
+#              abrasion mechanical, primer coat, corona discharge,
+#              laser texture pattern
+# ============================================================
+
+[[level]]
+name = "SurfacePrep"
+
+[[candidate]]
+id = "Solvent_clean"
+label = "Solvent clean (IPA/acetone wipe, degreasing, simplest prep, baseline)"
+n6 = 0.60
+perf = 0.60
+power = 0.90
+cost = 0.95
+notes = "baseline preparation, removes oils/contaminants, necessary but not sufficient alone"
+
+[[candidate]]
+id = "Abrasion"
+label = "Abrasion (sandblast/grit 60-mesh, mechanical key, surface area increase)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "grit=60=sigma*sopfr EXACT, mechanical interlocking, roughness Ra 6um=n"
+
+[[candidate]]
+id = "Plasma_treat_6sec"
+label = "Plasma treatment 6-sec (atmospheric/vacuum, surface energy boost, n=6 EXACT time)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.50
+notes = "treatment=6sec=n EXACT, surface energy >72dyne=sigma*n EXACT, best for polymers"
+
+[[candidate]]
+id = "Primer_coat"
+label = "Primer coat (coupling agent, silane/chromate, chemical bridge, adhesion promoter)"
+n6 = 0.60
+perf = 0.85
+power = 0.70
+cost = 0.65
+notes = "bifunctional molecule, chemical bridge substrate-adhesive, 2-layer=phi system"
+
+[[candidate]]
+id = "Corona_discharge"
+label = "Corona discharge (air plasma, inline roll-to-roll, film treatment, 12kV=sigma)"
+n6 = 0.80
+perf = 0.80
+power = 0.60
+cost = 0.70
+notes = "voltage=12kV=sigma EXACT, inline process, polymer film surface activation"
+
+[[candidate]]
+id = "Laser_texture"
+label = "Laser texture (pulsed laser, micro-pattern 6um pitch, controlled roughness)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.35
+notes = "pitch=6um=n EXACT, precise pattern, reproducible, micro-mechanical interlock"
+
+# ============================================================
+# Level 3: JointDesign (접합 설계)
+#   n6 checks: scarf 6-degree angle (n=6), spot-bond 12-point (sigma=12),
+#              lap-shear standard, butt-joint simple,
+#              T-joint structural, film adhesive continuous
+# ============================================================
+
+[[level]]
+name = "JointDesign"
+
+[[candidate]]
+id = "Lap_shear"
+label = "Lap shear (ASTM D1002, 12.5mm overlap, most common test/design, shear load)"
+n6 = 0.80
+perf = 0.80
+power = 0.80
+cost = 0.90
+notes = "overlap=12.5mm~sigma EXACT, industry standard, peel stress at edges"
+
+[[candidate]]
+id = "Butt_joint"
+label = "Butt joint (tensile load, uniform stress, alignment critical, brittle adhesives)"
+n6 = 0.60
+perf = 0.65
+power = 0.85
+cost = 0.90
+notes = "simplest geometry, pure tension, alignment-sensitive, flatness critical"
+
+[[candidate]]
+id = "Scarf_6degree"
+label = "Scarf joint 6-degree (n=6 angle, composite repair, near-uniform stress, flush surface)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.45
+notes = "angle=6deg=n EXACT, aerospace composite repair standard, minimal stress concentration"
+
+[[candidate]]
+id = "T_joint"
+label = "T-joint structural (fillet bond, 90-degree intersection, stiffener attachment)"
+n6 = 0.60
+perf = 0.75
+power = 0.75
+cost = 0.70
+notes = "perpendicular intersection, fillet radius critical, stiffener/rib attachment"
+
+[[candidate]]
+id = "SpotBond_12point"
+label = "Spot bond 12-point (sigma=12 bond points, pattern bonding, compliance designed)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+notes = "points=12=sigma EXACT, discrete bond pattern, thermal compliance, panel assembly"
+
+[[candidate]]
+id = "Film_adhesive"
+label = "Film adhesive (supported/unsupported, 6mil thickness, uniform bondline, prepreg-like)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.55
+notes = "thickness=6mil=n EXACT, pre-measured uniform bondline, aerospace/electronics"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: aerospace panel bonding, automotive BIW,
+#              electronics die-attach, medical device assembly,
+#              construction anchor, packaging seal
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Aerospace_panel"
+label = "Aerospace panel (CFRP-CFRP bond, 12MPa=sigma requirement, fatigue resistant)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.25
+notes = "strength=12MPa=sigma EXACT, composite fuselage, NDI inspection, A380/787 structures"
+
+[[candidate]]
+id = "Automotive_body"
+label = "Automotive body (BIW hem-flange, 6m bondline per door, crash-tough, spot-weld replace)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+notes = "bondline=6m=n EXACT per door panel, weld-bond hybrid, multi-material joining"
+
+[[candidate]]
+id = "Electronics_die"
+label = "Electronics die-attach (Ag-epoxy, thermal interface, 6W/mK conductivity, chip bonding)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+notes = "thermal=6W/mK=n EXACT, die-to-substrate, underfill, BGA rework"
+
+[[candidate]]
+id = "Medical_device"
+label = "Medical device (biocompatible, ISO 10993, UV/cyanoacrylate, catheter/sensor assembly)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.50
+notes = "biocompatible, sterilization resistant, USP Class VI, disposable/implantable"
+
+[[candidate]]
+id = "Construction_anchor"
+label = "Construction anchor (chemical anchor bolt, 12kN=sigma pull-out, concrete/masonry)"
+n6 = 0.80
+perf = 0.80
+power = 0.80
+cost = 0.80
+notes = "pull_out=12kN=sigma EXACT, epoxy/vinyl ester cartridge, rebar post-install"
+
+[[candidate]]
+id = "Packaging_seal"
+label = "Packaging seal (hot-melt/PSA, 6N peel seal, tamper-evident, food-safe, high speed)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+notes = "peel=6N=n EXACT, easy-open to hermetic, food/pharma, 1000 packs/min"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Epoxy structural pairs with heat cure or two-part mix
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Epoxy_structural"
+then_level = 1
+then_ids = "Heat_cure,TwoPart_mix"
+
+# Cyanoacrylate is moisture-cure initiated
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cyanoacrylate"
+then_level = 1
+then_ids = "Moisture_cure,Anaerobic"
+
+# Silicone sealant pairs with moisture cure (RTV)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Silicone_sealant"
+then_level = 1
+then_ids = "Moisture_cure,UV_cure"
+
+# Hot-melt needs no chemical cure — pressure-sensitive family
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HotMelt_6min"
+then_level = 1
+then_ids = "Pressure_sensitive,Heat_cure"
+
+# Aerospace application pairs with scarf joint and film adhesive
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Aerospace_panel"
+then_level = 3
+then_ids = "Scarf_6degree,Film_adhesive"
+
+# Aerospace application pairs with plasma or laser surface prep
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Aerospace_panel"
+then_level = 2
+then_ids = "Plasma_treat_6sec,Laser_texture"
+
+# Electronics die-attach pairs with UV cure and epoxy
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Electronics_die"
+then_level = 0
+then_ids = "Epoxy_structural,Silicone_sealant"
+
+# Packaging seal pairs with hot-melt and pressure-sensitive
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Packaging_seal"
+then_level = 0
+then_ids = "HotMelt_6min,Acrylic_fast"
+
+# Laser texture pairs with high-precision joint designs
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Laser_texture"
+then_level = 3
+then_ids = "Scarf_6degree,SpotBond_12point"
+
+# Construction anchor pairs with two-part mix and abrasion prep
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Construction_anchor"
+then_level = 1
+then_ids = "TwoPart_mix,Anaerobic"

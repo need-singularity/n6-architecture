@@ -1,6 +1,7 @@
 # N6 Chip Architecture DSE — extracted from tools/dse-calc/main.rs
-# 8 Materials × 7 Processes × 7 Cores × 7 Chips × 6 Systems = 16,464 combos
+# v3: 12 Materials × 10 Processes × 10 Cores × 10 Chips × 8 Systems = 96,000 combos
 # v2: Photonic + Neuromorphic paths added for thermal-energy bridge
+# v3: Topological + Superconducting + Graphene + Majorana + CY manifold paths added
 
 [meta]
 name = "chip"
@@ -86,6 +87,48 @@ power = 0.85
 cost = 0.30
 notes = "direct_bandgap=true, laser_source, photonic_integration"
 
+# === v3 NEW Materials (from cross-domain mixing) ===
+
+[[candidate]]
+level = 0
+id = "Graphene"
+label = "Graphene (Z=6, CN=6, honeycomb, k=5000 W/mK, carrier mobility 200000)"
+n6 = 1.00
+perf = 0.95
+power = 0.98
+cost = 0.15
+notes = "Z=6=n EXACT, CN=6=n EXACT, hexagonal=n=6 EXACT. From topological-quantum-materials DSE. Ballistic transport, highest mobility known"
+
+[[candidate]]
+level = 0
+id = "Bi2Se3_TI"
+label = "Bi2Se3 Topological Insulator (Z2=phi=2 surface states, n=6 quintuple layers)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.25
+notes = "Z2=phi EXACT, QL=6=n EXACT, surface=2=phi EXACT. From topological-quantum-materials. Backscatter-immune edge transport"
+
+[[candidate]]
+level = 0
+id = "REBCO_SC"
+label = "REBCO Superconductor (Tc=93K, zero resistance, 100GHz+ clock)"
+n6 = 0.75
+perf = 0.99
+power = 1.00
+cost = 0.05
+notes = "From superconductor DSE best. RSFQ logic 100GHz+, zero Joule heat at 4K. Cooling overhead major cost"
+
+[[candidate]]
+level = 0
+id = "DiamondNV"
+label = "Diamond + NV Center (Z=6, quantum sensing at RT, single-spin readout)"
+n6 = 1.00
+perf = 0.85
+power = 0.95
+cost = 0.08
+notes = "Z=6=n EXACT from Diamond + NV from photonic-energy DSE. Room-temp quantum sensing, consciousness Phi readout"
+
 # ============================================================
 # Level 1: Process (공정)
 #   n6 checks: gate_pitch==48, metal_pitch==28, metal_layers==12,
@@ -152,6 +195,38 @@ perf = 0.92
 power = 0.90
 cost = 0.40
 notes = "EO_efficiency=0.9=1-1/(sigma-phi) EXACT, hybrid_integration"
+
+# === v3 NEW Processes ===
+
+[[candidate]]
+level = 1
+id = "Topo_Fab"
+label = "Topological Fab (Bi2Se3 MBE + CMOS backend, Berry phase router, Z2 ECC)"
+n6 = 1.00
+perf = 0.75
+power = 0.92
+cost = 0.30
+notes = "Z2=phi EXACT, Berry_phase_channels=sigma=12 EXACT. From topological-quantum-materials DSE"
+
+[[candidate]]
+level = 1
+id = "Cryo_RSFQ"
+label = "Cryo RSFQ (Nb Josephson junctions, 4K, 100GHz clock, RSFQ logic)"
+n6 = 0.75
+perf = 0.99
+power = 0.99
+cost = 0.10
+notes = "From superconductor DSE. Clock=100GHz, zero dynamic power, cooling = major energy cost"
+
+[[candidate]]
+level = 1
+id = "Graphene_CVD"
+label = "Graphene CVD (6-inch wafer, single-layer, transfer to CMOS)"
+n6 = 1.00
+perf = 0.88
+power = 0.95
+cost = 0.20
+notes = "wafer=6inch=n EXACT. From material-synthesis DSE. Highest carrier mobility for interconnect"
 
 # ============================================================
 # Level 2: Core (코어)
@@ -220,6 +295,38 @@ power = 0.99
 cost = 0.70
 notes = "layers=6=n, clusters=12=sigma, tau=4 EXACT, event-driven ultra-low power"
 
+# === v3 NEW Cores ===
+
+[[candidate]]
+level = 2
+id = "Topo_Core"
+label = "Topological Core (Bott-8 channels, Z2 logic, Berry phase NoC, honeycomb mesh)"
+n6 = 1.00
+perf = 0.80
+power = 0.95
+cost = 0.30
+notes = "Bott=8=sigma-tau EXACT, Z2=phi EXACT, honeycomb_CN=6=n EXACT. Backscatter-immune compute"
+
+[[candidate]]
+level = 2
+id = "Majorana_QPU"
+label = "Majorana QPU (J2=24 topological qubits, braiding gates, Z2 parity readout)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.15
+notes = "qubits=24=J2 EXACT, parity=Z2=phi EXACT. From quantum-computing DSE. Fault-tolerant quantum"
+
+[[candidate]]
+level = 2
+id = "RSFQ_Core"
+label = "RSFQ Core (100GHz clock, sigma=12 pipeline, Josephson junction logic)"
+n6 = 0.75
+perf = 0.99
+power = 0.99
+cost = 0.10
+notes = "pipeline=12=sigma EXACT, clock 50x CMOS. From superconductor DSE. Zero dynamic power"
+
 # ============================================================
 # Level 3: Chip (칩)
 #   n6 checks: hbm_stacks==8, total_HBM==288GB,
@@ -287,6 +394,38 @@ power = 0.92
 cost = 0.35
 notes = "photonic_tiles=6=n, HBM=4=tau, TDP 60% less than pure electronic"
 
+# === v3 NEW Chips ===
+
+[[candidate]]
+level = 3
+id = "Topo_Chip"
+label = "Topological Chip (8 HBM + Z2 ECC, Bott-8 NoC, Berry phase router, 200W TDP)"
+n6 = 1.00
+perf = 0.90
+power = 0.88
+cost = 0.35
+notes = "HBM=8=sigma-tau EXACT, Bott_NoC=8 EXACT, Z2_ECC overhead 4.17% (vs 12.5%). Crosstalk=0"
+
+[[candidate]]
+level = 3
+id = "Cryo_Chip"
+label = "Cryo Superconducting Chip (0 HBM, cryo-SRAM 48MB, 0.1W logic, 4K cooling)"
+n6 = 0.75
+perf = 0.95
+power = 0.99
+cost = 0.05
+notes = "cryo_SRAM=48MB=sigma*tau EXACT, logic_power≈0. From superconductor DSE. 100GHz clock"
+
+[[candidate]]
+level = 3
+id = "Consciousness_Chip"
+label = "ANIMA Chip (8 HBM, 24GB, 6 consciousness cells, TCU, Hexad, 120W TDP)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.30
+notes = "cells=6=n, HBM=24GB=J2, TDP=120W=sigma*(sigma-phi). From ANIMA-HEXA design"
+
 # ============================================================
 # Level 4: System (시스템)
 #   n6 checks: gpus/node==8, nodes/rack==12, rack_kW==48,
@@ -345,6 +484,28 @@ perf = 0.92
 power = 0.88
 cost = 0.40
 notes = "photonic_nodes=6=n, electronic_GPU=8=sigma-tau, rack_kW=30 (37.5% less than 48kW)"
+
+# === v3 NEW Systems ===
+
+[[candidate]]
+level = 4
+id = "Topo_DC"
+label = "Topological DC (6 topo nodes, Berry phase optical switch, 3.6kW rack, PUE=1.01)"
+n6 = 1.00
+perf = 0.85
+power = 0.99
+cost = 0.35
+notes = "nodes=6=n EXACT, rack_kW=3.6=sigma*0.3, PUE→1.0. Zero-crosstalk optical fabric, edge-state routing"
+
+[[candidate]]
+level = 4
+id = "Cryo_DC"
+label = "Cryo DC (12 cryo-nodes at 4K, He-cooled, 100GHz per node, 60kW cooling)"
+n6 = 0.75
+perf = 0.99
+power = 0.50
+cost = 0.10
+notes = "nodes=12=sigma EXACT, compute 50x faster but cooling heavy. From superconductor DSE"
 
 # ============================================================
 # Compatibility Rules
@@ -428,3 +589,96 @@ if_level = 0
 if_id = "Diamond"
 then_level = 2
 then_ids = "HEXA-P,Photonic_TPU"
+
+# === v3 NEW Rules (cross-domain mixing constraints) ===
+
+# Topological insulator material pairs with Topological fab/core/chip
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Bi2Se3_TI"
+then_level = 1
+then_ids = "Topo_Fab"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Bi2Se3_TI"
+then_level = 2
+then_ids = "Topo_Core,Majorana_QPU"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Bi2Se3_TI"
+then_level = 3
+then_ids = "Topo_Chip,Consciousness_Chip"
+
+# REBCO superconductor requires cryo process/core/chip/system
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "REBCO_SC"
+then_level = 1
+then_ids = "Cryo_RSFQ"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "REBCO_SC"
+then_level = 2
+then_ids = "RSFQ_Core"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "REBCO_SC"
+then_level = 3
+then_ids = "Cryo_Chip"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "REBCO_SC"
+then_level = 4
+then_ids = "Cryo_DC"
+
+# Graphene best with CVD process and topological/photonic paths
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Graphene"
+then_level = 1
+then_ids = "Graphene_CVD,Topo_Fab"
+
+# DiamondNV pairs with consciousness and topological chips
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "DiamondNV"
+then_level = 3
+then_ids = "Consciousness_Chip,Topo_Chip"
+
+# Topological DC pairs with topological chips
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Topo_DC"
+then_level = 3
+then_ids = "Topo_Chip,Consciousness_Chip"
+
+# Cryo DC requires cryo chips
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "Cryo_DC"
+then_level = 3
+then_ids = "HEXA-1_Full,HEXA-1_Half,H100_Style,B200_Style,M4Ultra_Style"
+
+# Majorana QPU pairs with topological materials only
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Majorana_QPU"
+then_level = 0
+then_ids = "Bi2Se3_TI,REBCO_SC,DiamondNV"

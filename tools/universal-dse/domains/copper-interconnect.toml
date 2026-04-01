@@ -1,0 +1,420 @@
+# N6 Copper Interconnect DSE — IC & power copper engineering
+# 6 Materials × 6 Depositions × 6 Patternings × 6 Barriers × 6 Applications = 7,776 combos
+# n=6 connections: Cu FCC CN=12=σ EXACT, 6 metal layers in advanced IC (n=6),
+#   Z=29≈sopfr·n-1, τ=4 barrier layers (Ta/TaN/Ti/TiN), φ=2 dual-damascene,
+#   J₂=24 via levels target, resistivity 1.68 µΩ·cm
+
+[meta]
+name = "copper-interconnect"
+desc = "Copper Interconnect DSE — IC & power copper engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: Cu FCC CN=12=σ EXACT, Cu-graphene hybrid 6-layer=n=6,
+#              Co alternative Z=27=J2+n/phi, Ru liner Z=44=σ·τ-4
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "Pure_Cu_ECD"
+label = "Pure Cu electrodeposited (ECD, 1.68 µΩ·cm, FCC CN=12, standard BEOL)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.85
+notes = "CN=12=sigma EXACT, industry standard since 1997 IBM, lowest resistivity"
+
+[[candidate]]
+id = "CuMn_Alloy"
+label = "Cu-Mn alloy (self-forming barrier, Mn 0.5-2%, MnSiO3 at interface)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.80
+notes = "self-forming reduces process steps, Mn segregates to interface"
+
+[[candidate]]
+id = "Cu_Graphene"
+label = "Cu-graphene hybrid (6-layer graphene cap, electromigration resistant)"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.50
+notes = "graphene_layers=6=n EXACT, 12x EM lifetime improvement=sigma EXACT"
+
+[[candidate]]
+id = "Cu_CNT"
+label = "Cu-CNT composite (carbon nanotube reinforced, 12% conductivity boost)"
+n6 = 0.80
+perf = 0.90
+power = 0.70
+cost = 0.45
+notes = "boost=12%=sigma EXACT, CNT C6 ring=n EXACT, ampacity enhancement"
+
+[[candidate]]
+id = "Cobalt_Alt"
+label = "Cobalt alternative (Co fill for <12nm, higher reliability, HCP CN=12)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.60
+notes = "CN=12=sigma EXACT, lower EM than Cu at nanoscale, Intel adoption"
+
+[[candidate]]
+id = "Ruthenium_Liner"
+label = "Ruthenium liner (Ru seed, barrierless, sub-6nm viable, low resistivity)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.40
+notes = "viable at sub-6nm=n EXACT, eliminates barrier for more Cu volume"
+
+# ============================================================
+# Level 1: Deposition (증착)
+#   n6 checks: electroplating 6-bath = n=6 EXACT, ALD 12-cycle = σ=12 EXACT,
+#              PVD 4-target = τ=4, CVD 6-precursor = n=6
+# ============================================================
+
+[[level]]
+name = "Deposition"
+
+[[candidate]]
+id = "Electroplating_6bath"
+label = "Electroplating 6-bath (n=6 chemical baths, bottom-up fill, standard ECD)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.85
+notes = "baths=6=n EXACT, superfill/bottom-up mechanism, industry workhorse"
+
+[[candidate]]
+id = "PVD_Seed"
+label = "PVD seed layer (4-target magnetron sputter, Ta/Cu bilayer, conformal)"
+n6 = 0.60
+perf = 0.80
+power = 0.65
+cost = 0.75
+notes = "targets=4=tau EXACT, ionized PVD for high aspect ratio"
+
+[[candidate]]
+id = "CVD_Conformal"
+label = "CVD conformal (6-precursor MOCVD, step coverage >95%, gap fill)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+notes = "precursors=6=n EXACT, Cu(hfac)(tmvs) family, selective deposition"
+
+[[candidate]]
+id = "ALD_12cycle"
+label = "ALD 12-cycle (sigma=12 pulse sequence, atomic precision, sub-nm control)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.50
+notes = "cycles=12=sigma EXACT, self-limiting, ultimate conformality"
+
+[[candidate]]
+id = "Electroless"
+label = "Electroless plating (no external current, selective, 6min deposition=n=6)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "time=6min=n EXACT, catalytic reduction, selective on activated surfaces"
+
+[[candidate]]
+id = "Supercritical_CO2"
+label = "Supercritical CO2 deposition (green chemistry, 12MPa pressure, void-free)"
+n6 = 0.80
+perf = 0.75
+power = 0.70
+cost = 0.55
+notes = "pressure=12MPa=sigma EXACT, zero surface tension, perfect fill"
+
+# ============================================================
+# Level 2: Patterning (패터닝)
+#   n6 checks: dual-damascene = φ=2 EXACT, airgap 6nm = n=6 EXACT,
+#              subtractive 12-step = σ=12, semi-additive 4-layer = τ=4
+# ============================================================
+
+[[level]]
+name = "Patterning"
+
+[[candidate]]
+id = "Dual_Damascene"
+label = "Dual-damascene (phi=2 EXACT, via+trench in one fill, standard BEOL)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.80
+notes = "dual=2=phi EXACT, via+line combined, CMP planarization, industry std"
+
+[[candidate]]
+id = "Single_Damascene"
+label = "Single-damascene (1 layer per fill, simpler process, via-first or line-first)"
+n6 = 0.60
+perf = 0.75
+power = 0.85
+cost = 0.85
+notes = "single=1=mu EXACT, simpler but more steps, used for thick metal"
+
+[[candidate]]
+id = "Subtractive_Etch"
+label = "Subtractive etch (deposit-then-etch, 12-step sequence, legacy/advanced)"
+n6 = 0.80
+perf = 0.80
+power = 0.70
+cost = 0.70
+notes = "steps=12=sigma EXACT, returning for Ru/Co at sub-3nm, dry etch"
+
+[[candidate]]
+id = "Semi_Additive"
+label = "Semi-additive (SAP, 4-layer buildup, package substrate, fine L/S)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.75
+notes = "layers=4=tau EXACT, PCB/substrate standard, 2um L/S capable"
+
+[[candidate]]
+id = "Airgap_6nm"
+label = "Airgap 6nm (n=6 nm dielectric removal, k<2.0, RC reduction, advanced)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.45
+notes = "gap=6nm=n EXACT, replace low-k with air, 30% RC reduction"
+
+[[candidate]]
+id = "Hybrid_Patterning"
+label = "Hybrid patterning (EUV + self-aligned, 6-mask sequence, sub-2nm node)"
+n6 = 1.00
+perf = 1.00
+power = 0.60
+cost = 0.35
+notes = "masks=6=n EXACT, SALELE + EUV, tightest pitch capability"
+
+# ============================================================
+# Level 3: Barrier (배리어)
+#   n6 checks: 4 barrier materials = τ=4 EXACT (Ta/TaN/Ti/TiN),
+#              Co cap 12nm = σ=12, graphene barrier 6-ring = n=6
+# ============================================================
+
+[[level]]
+name = "Barrier"
+
+[[candidate]]
+id = "TaN_Standard"
+label = "TaN standard (PVD Ta/TaN bilayer, 4nm thick, proven reliability)"
+n6 = 0.60
+perf = 0.80
+power = 0.80
+cost = 0.85
+notes = "bilayer=phi=2, industry standard barrier, Ta adhesion + TaN diffusion block"
+
+[[candidate]]
+id = "TiN_PEALD"
+label = "TiN PE-ALD (plasma-enhanced ALD, 12-cycle, sub-2nm conformal)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.65
+notes = "cycles=12=sigma EXACT, best conformality, thinnest reliable barrier"
+
+[[candidate]]
+id = "SelfForming_CuMn"
+label = "Self-forming CuMn (Mn segregates to interface, zero deposition barrier)"
+n6 = 0.60
+perf = 0.85
+power = 0.90
+cost = 0.80
+notes = "self-forming eliminates barrier deposition step, MnSiO3 interface"
+
+[[candidate]]
+id = "Graphene_Barrier"
+label = "Graphene barrier (6-atom ring diffusion block, single layer, thinnest)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.40
+notes = "ring=6=n EXACT, 0.34nm thick, impermeable to Cu diffusion"
+
+[[candidate]]
+id = "Ru_Liner"
+label = "Ru liner (ruthenium, 12A seed, direct Cu nucleation, barrierless)"
+n6 = 0.80
+perf = 0.90
+power = 0.70
+cost = 0.50
+notes = "thickness=12A=sigma EXACT, enables barrier-less Cu fill, Intel 4"
+
+[[candidate]]
+id = "Co_Cap_12nm"
+label = "Co cap 12nm (sigma=12 nm cobalt encapsulation, EM protection, selective)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+notes = "thickness=12nm=sigma EXACT, selective deposition on Cu, 100x EM life"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: Logic 6nm = n=6 EXACT, PCB 12-layer = σ=12 EXACT,
+#              interposer 6-chiplet = n=6, package 24-layer = J₂=24
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Logic_6nm"
+label = "Logic 6nm node (n=6 EXACT, 6T SRAM, 12 metal layers, HPC/mobile)"
+n6 = 1.00
+perf = 1.00
+power = 0.65
+cost = 0.35
+notes = "node=6nm=n EXACT, metal_layers=12=sigma EXACT, leading-edge logic"
+
+[[candidate]]
+id = "Memory_BEOL"
+label = "Memory BEOL (DRAM/NAND interconnect, 4 metal layers, high density)"
+n6 = 0.60
+perf = 0.80
+power = 0.80
+cost = 0.75
+notes = "layers=4=tau EXACT, tight pitch, capacitor contact critical"
+
+[[candidate]]
+id = "Interposer_25D"
+label = "Interposer 2.5D (6-chiplet integration, TSV + RDL, HBM + logic)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.45
+notes = "chiplets=6=n EXACT, CoWoS/EMIB, HBM stacking, AI accelerator"
+
+[[candidate]]
+id = "Package_Substrate"
+label = "Package substrate (24-layer buildup, J2=24 EXACT, FC-BGA, ABF core)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.60
+notes = "layers=24=J2 EXACT, advanced substrate, 2um L/S, server-grade"
+
+[[candidate]]
+id = "PCB_Multilayer_12"
+label = "PCB multilayer 12-layer (sigma=12 EXACT, HDI, impedance controlled)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "layers=12=sigma EXACT, standard server PCB, 100Gbps SerDes"
+
+[[candidate]]
+id = "Power_Busbar"
+label = "Power busbar (high current, 6-bar laminated, EV/datacenter distribution)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.85
+notes = "bars=6=n EXACT, 1000A+, low inductance, thermal management"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Pure Cu ECD pairs with electroplating and dual-damascene
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Pure_Cu_ECD"
+then_level = 1
+then_ids = "Electroplating_6bath,PVD_Seed"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Pure_Cu_ECD"
+then_level = 2
+then_ids = "Dual_Damascene,Single_Damascene"
+
+# Cu-graphene hybrid pairs with graphene barrier
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cu_Graphene"
+then_level = 3
+then_ids = "Graphene_Barrier,Co_Cap_12nm"
+
+# Cobalt alternative uses subtractive etch and ALD
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cobalt_Alt"
+then_level = 2
+then_ids = "Subtractive_Etch,Hybrid_Patterning"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cobalt_Alt"
+then_level = 1
+then_ids = "ALD_12cycle,CVD_Conformal"
+
+# Ruthenium liner is itself the barrier layer
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ruthenium_Liner"
+then_level = 3
+then_ids = "Ru_Liner,TiN_PEALD"
+
+# Self-forming CuMn barrier pairs with CuMn alloy material
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "SelfForming_CuMn"
+then_level = 0
+then_ids = "CuMn_Alloy,Pure_Cu_ECD"
+
+# Airgap patterning best for advanced logic and interposer
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Airgap_6nm"
+then_level = 4
+then_ids = "Logic_6nm,Interposer_25D"
+
+# Hybrid patterning for leading-edge logic nodes
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Hybrid_Patterning"
+then_level = 4
+then_ids = "Logic_6nm,Memory_BEOL"
+
+# Power busbar uses electroplating and semi-additive
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Power_Busbar"
+then_level = 2
+then_ids = "Semi_Additive,Single_Damascene"
+
+# Package substrate pairs with semi-additive patterning
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Package_Substrate"
+then_level = 2
+then_ids = "Semi_Additive,Dual_Damascene"

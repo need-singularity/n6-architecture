@@ -1,0 +1,376 @@
+# =============================================================
+# Bridge Engineering DSE Domain Definition
+# Bridge structural design architecture
+# n=6: 6 bridge types (n=6 EXACT: beam/arch/truss/suspension/
+#       cable-stayed/cantilever), sigma=12 span ratio L/D,
+#       tau=4 load cases (dead/live/wind/seismic),
+#       phi=2 dual-deck, J2=24 m standard span module
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "bridge-engineering"
+desc = "Bridge Structural Design DSE (structure-type/material/foundation/load-design/construction)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: StructureType (6 candidates)
+# ============================================================
+
+[[level]]
+name = "StructureType"
+
+[[candidate]]
+level = 0
+id = "Beam-24m"
+label = "Beam Bridge J2=24m span module (simple, precast girder, highway)"
+n6 = 0.85
+perf = 0.65
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Arch-6Rib"
+label = "Arch Bridge 6-rib (n=6 EXACT ribs, compression dominant, aesthetic)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Truss-12Panel"
+label = "Truss Bridge sigma=12 panels (triangulated, medium span, rail)"
+n6 = 0.90
+perf = 0.78
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Suspension-Main"
+label = "Suspension Bridge (phi=2 EXACT main cables, long span, iconic)"
+n6 = 0.90
+perf = 0.95
+power = 0.50
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "CableStayed-6"
+label = "Cable-Stayed 6-stay plane (n=6 EXACT stay groups, modern, medium-long)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Cantilever-Dual"
+label = "Cantilever Bridge phi=2 arms (balanced, heavy rail, deep girder)"
+n6 = 0.85
+perf = 0.82
+power = 0.70
+cost = 0.55
+
+# ============================================================
+# Level 1: Material (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 1
+id = "ReinforcedConc"
+label = "Reinforced Concrete (6-bar=n bundle, standard, durable)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "PrestressedConc"
+label = "Prestressed Concrete (12-strand=sigma tendon, long span, low deflection)"
+n6 = 0.90
+perf = 0.85
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "StructuralSteel"
+label = "Structural Steel (A572 Gr.50, 6-face=n H-section, light, fast erect)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "SteelConc-Composite"
+label = "Steel-Concrete Composite (phi=2 EXACT materials, hybrid deck, optimal)"
+n6 = 0.90
+perf = 0.90
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "UHPC"
+label = "Ultra-High Performance Concrete (sigma=12x normal strength, thin members)"
+n6 = 0.85
+perf = 0.92
+power = 0.65
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "FRP-Composite"
+label = "FRP Composite (6-layer=n laminate, corrosion-free, lightweight)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.40
+
+# ============================================================
+# Level 2: Foundation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level = 2
+id = "PileCap-6Pile"
+label = "Pile Cap 6-pile group (n=6 EXACT piles, standard deep foundation)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Caisson-12m"
+label = "Caisson sigma=12m diameter (open/pneumatic, deep water, rock socket)"
+n6 = 0.90
+perf = 0.90
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "SpreadFooting"
+label = "Spread Footing (shallow, 4=tau corner bearing pads, good soil)"
+n6 = 0.75
+perf = 0.60
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "DrilledShaft-24m"
+label = "Drilled Shaft J2=24m deep (large diameter, bridge pier, friction+end)"
+n6 = 0.85
+perf = 0.85
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "CofferDam"
+label = "Cofferdam (phi=2 EXACT wall sheets, dewatered, river pier construction)"
+n6 = 0.80
+perf = 0.75
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Micropile-6Group"
+label = "Micropile 6-group (n=6 EXACT piles, retrofit, limited access)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.65
+
+# ============================================================
+# Level 3: LoadDesign (6 candidates)
+# ============================================================
+
+[[level]]
+name = "LoadDesign"
+
+[[candidate]]
+level = 3
+id = "LRFD-4Case"
+label = "LRFD tau=4 load cases (dead/live/wind/seismic, AASHTO standard)"
+n6 = 0.85
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "SeismicIso-6"
+label = "Seismic Isolation 6-bearing (n=6 EXACT isolators, earthquake zone)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "WindAero-12"
+label = "Aerodynamic Design sigma=12 m/s design wind (flutter analysis, long span)"
+n6 = 0.85
+perf = 0.92
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "FatigueDesign"
+label = "Fatigue Design (phi=2M cycle life, steel detail categories, rail)"
+n6 = 0.80
+perf = 0.82
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "MovableLoad-24t"
+label = "Movable Load J2=24 ton axle (heavy haul, special vehicle, permit)"
+n6 = 0.85
+perf = 0.78
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "SHM-6Sensor"
+label = "Structural Health Monitoring 6-sensor (n=6 EXACT sensor nodes, smart)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.45
+
+# ============================================================
+# Level 4: Construction (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Construction"
+
+[[candidate]]
+level = 4
+id = "SegmentalErect"
+label = "Segmental Erection (6m=n segment length, balanced cantilever)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "IncrementalLaunch"
+label = "Incremental Launch (12m=sigma push length, viaduct, repetitive)"
+n6 = 0.90
+perf = 0.82
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "CastInPlace"
+label = "Cast-in-Place (falsework, 24m=J2 span, conventional, flexible)"
+n6 = 0.85
+perf = 0.70
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "PrecastLifted"
+label = "Precast Girder Lift (6-girder=n per span, crane erected, fast)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "CableSpin"
+label = "Aerial Cable Spinning (phi=2 EXACT cables, suspension main cable)"
+n6 = 0.85
+perf = 0.90
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "FloatIn-Heavy"
+label = "Float-In Heavy Lift (barge transport, 4=tau tidal window, marine)"
+n6 = 0.80
+perf = 0.88
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Suspension bridge requires cable spinning construction
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Suspension-Main"
+then_level = 4
+then_ids = ["CableSpin"]
+
+# Beam bridge excluded from cable spinning (no cables)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Beam-24m"
+then_level = 4
+then_ids = ["CableSpin"]
+
+# Truss bridge excluded from cable spinning
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Truss-12Panel"
+then_level = 4
+then_ids = ["CableSpin"]
+
+# Spread footing excluded from deep water/suspension foundations
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "SpreadFooting"
+then_level = 0
+then_ids = ["Suspension-Main"]
+
+# FRP composite excluded from heavy rail fatigue design
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "FRP-Composite"
+then_level = 3
+then_ids = ["FatigueDesign", "MovableLoad-24t"]
+
+# Micropile excluded from large suspension/cable-stayed piers
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Micropile-6Group"
+then_level = 0
+then_ids = ["Suspension-Main"]

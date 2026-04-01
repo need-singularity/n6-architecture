@@ -1,0 +1,393 @@
+# =============================================================
+# HEXA-TURB DSE Domain Definition
+# n=6: 6 turbine stages, sigma=12 blade rows per stage pair,
+#       tau=4 turbine types, phi=2 dual-fuel, J2=24 MW class
+# BT-62 (60Hz=sigma*sopfr), BT-38 (H2 LHV=120)
+# Total combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "turbine-generator"
+desc = "Power Generation Turbine DSE (n=6 stages, BT-38/62/68)"
+levels = ["TurbineType", "BladeDesign", "Generator", "Control", "Application"]
+vision = "n=6 stage turbine -- sigma=12 blade rows, tau=4 types (gas/steam/hydro/wind), phi=2 dual-fuel, J2=24 MW class"
+
+[scoring]
+n6    = 0.35
+perf  = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: TurbineType (터빈 종류)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "TurbineType"
+
+[[candidate]]
+level  = 0
+id     = "GasTurbine"
+label  = "Industrial Gas Turbine"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 compressor stages EXACT, sigma=12 blade rows (stator+rotor), >40% efficiency"
+
+[[candidate]]
+level  = 0
+id     = "SteamTurbine"
+label  = "Steam Turbine (Rankine cycle)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.60
+notes  = "n=6 LP stages EXACT, sigma=12 total stages HP+IP+LP"
+
+[[candidate]]
+level  = 0
+id     = "CombinedCycle"
+label  = "Combined Cycle (gas + steam)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.48
+notes  = "phi=2 cycle types EXACT (Brayton+Rankine), >60% efficiency"
+
+[[candidate]]
+level  = 0
+id     = "HydroTurbine"
+label  = "Hydraulic Turbine (Francis/Kaplan)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.80
+cost   = 0.70
+notes  = "tau=4 turbine variants (Francis/Kaplan/Pelton/Bulb), >90% efficiency"
+
+[[candidate]]
+level  = 0
+id     = "WindTurbine"
+label  = "Wind Turbine (HAWT)"
+n6     = 0.67
+perf   = 0.82
+power  = 0.75
+cost   = 0.65
+notes  = "3 blades = n/phi, tau=4 wind class IEC ratings"
+
+[[candidate]]
+level  = 0
+id     = "MicroTurbine"
+label  = "Microturbine (distributed gen)"
+n6     = 0.83
+perf   = 0.78
+power  = 0.70
+cost   = 0.72
+notes  = "J2=24 kW class, n=6 radial stages, high-speed generator"
+
+# =============================================================
+# Level 1: BladeDesign (블레이드 설계)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "BladeDesign"
+
+[[candidate]]
+level  = 1
+id     = "ConventionalCast"
+label  = "Conventional Cast Blade (Ni-superalloy)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.72
+notes  = "Investment casting, sigma=12 cooling channels"
+
+[[candidate]]
+level  = 1
+id     = "SingleCrystal"
+label  = "Single-Crystal CMSX Blade"
+n6     = 0.83
+perf   = 0.92
+power  = 0.55
+cost   = 0.42
+notes  = "SC superalloy, n=6 crystal orientation optimization"
+
+[[candidate]]
+level  = 1
+id     = "CMC_Blade"
+label  = "Ceramic Matrix Composite (CMC)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.35
+notes  = "SiC/SiC CMC, n=6 fiber layup angles, 1500C+ capable"
+
+[[candidate]]
+level  = 1
+id     = "TBC_Coated"
+label  = "Thermal Barrier Coated (TBC)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "YSZ coating, tau=4 layer structure (bond/TGO/YSZ/top)"
+
+[[candidate]]
+level  = 1
+id     = "3D_Printed"
+label  = "Additive Manufactured (3D printed)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.58
+cost   = 0.50
+notes  = "DMLS/EBM, n=6 internal cooling geometries EXACT, topology-optimized"
+
+[[candidate]]
+level  = 1
+id     = "CompositeFan"
+label  = "Carbon-Fiber Composite Fan Blade"
+n6     = 1.00
+perf   = 0.87
+power  = 0.65
+cost   = 0.60
+notes  = "CFRP layup, BT-27 C6 carbon backbone, n=6 ply orientations"
+
+# =============================================================
+# Level 2: Generator (발전기)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Generator"
+
+[[candidate]]
+level  = 2
+id     = "SyncGen"
+label  = "Synchronous Generator (wound rotor)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.72
+notes  = "n=6 pole pairs (12 poles), 60Hz at 600RPM (BT-62)"
+
+[[candidate]]
+level  = 2
+id     = "PMSG"
+label  = "Permanent Magnet Synchronous Generator"
+n6     = 0.83
+perf   = 0.92
+power  = 0.60
+cost   = 0.50
+notes  = "NdFeB magnets, sigma=12 pole segments, high efficiency"
+
+[[candidate]]
+level  = 2
+id     = "InductionGen"
+label  = "Induction Generator (DFIG)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.68
+cost   = 0.70
+notes  = "phi=2 stator/rotor circuits, wind turbine standard"
+
+[[candidate]]
+level  = 2
+id     = "Supercond"
+label  = "Superconducting Generator"
+n6     = 0.83
+perf   = 0.95
+power  = 0.45
+cost   = 0.30
+notes  = "HTS coils, J2=24 MW class target, sigma=12 kA current"
+
+[[candidate]]
+level  = 2
+id     = "AxialFlux"
+label  = "Axial Flux Generator"
+n6     = 1.00
+perf   = 0.88
+power  = 0.62
+cost   = 0.55
+notes  = "n=6 stator segments EXACT, compact, high torque density"
+
+[[candidate]]
+level  = 2
+id     = "HighSpeedPMG"
+label  = "High-Speed PM Generator (100k+ RPM)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.48
+notes  = "Microturbine direct-drive, tau=4 pole, carbon-fiber sleeve rotor"
+
+# =============================================================
+# Level 3: Control (제어 시스템)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Control"
+
+[[candidate]]
+level  = 3
+id     = "DCS"
+label  = "Distributed Control System (DCS)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.70
+cost   = 0.68
+notes  = "Standard plant DCS, n=6 control loops (speed/load/temp/press/vibr/emiss)"
+
+[[candidate]]
+level  = 3
+id     = "DigitalTwin"
+label  = "Digital Twin + Predictive Control"
+n6     = 1.00
+perf   = 0.93
+power  = 0.50
+cost   = 0.45
+notes  = "Real-time digital twin, n=6 physics models EXACT, predictive maintenance"
+
+[[candidate]]
+level  = 3
+id     = "MPC"
+label  = "Model Predictive Control (MPC)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.52
+notes  = "Multi-variable MPC, sigma=12 step horizon, constraint optimization"
+
+[[candidate]]
+level  = 3
+id     = "FuzzyPID"
+label  = "Fuzzy Logic + PID Hybrid"
+n6     = 0.67
+perf   = 0.82
+power  = 0.72
+cost   = 0.70
+notes  = "Fuzzy-PID cascade, tau=4 tuning parameters per loop"
+
+[[candidate]]
+level  = 3
+id     = "AIGrid"
+label  = "AI Grid-Responsive Control"
+n6     = 1.00
+perf   = 0.92
+power  = 0.48
+cost   = 0.42
+notes  = "RL-based grid balancing, n=6 demand signals EXACT, BT-62 freq sync"
+
+[[candidate]]
+level  = 3
+id     = "FailSafe"
+label  = "Triple-Redundant Safety Control"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "TMR (2-of-3) voting, n/phi=3 redundant channels, SIL-3 certified"
+
+# =============================================================
+# Level 4: Application (적용 분야)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "BaseLoad"
+label  = "Baseload Power Plant (>100 MW)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.55
+notes  = "Combined cycle baseload, sigma*sopfr=60 Hz grid sync (BT-62)"
+
+[[candidate]]
+level  = 4
+id     = "Peaker"
+label  = "Peaking / Fast-Start Plant"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.68
+notes  = "Aeroderivative gas turbine, tau=4 minute start, grid stabilizer"
+
+[[candidate]]
+level  = 4
+id     = "CHP"
+label  = "Combined Heat & Power (CHP)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.72
+cost   = 0.70
+notes  = "phi=2 energy outputs EXACT (electric + thermal), >85% total efficiency"
+
+[[candidate]]
+level  = 4
+id     = "Offshore"
+label  = "Offshore Wind / Marine"
+n6     = 0.67
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "Offshore HAWT, J2=24 MW class target, HVDC transmission"
+
+[[candidate]]
+level  = 4
+id     = "HydroPower"
+label  = "Hydropower Dam / Run-of-River"
+n6     = 0.83
+perf   = 0.90
+power  = 0.82
+cost   = 0.75
+notes  = "Francis/Kaplan hydro, >90% efficiency, sigma=12 unit plant"
+
+[[candidate]]
+level  = 4
+id     = "DistribMicro"
+label  = "Distributed Microgrid Generation"
+n6     = 0.83
+perf   = 0.80
+power  = 0.68
+cost   = 0.65
+notes  = "J2=24 MW campus microgrid, n=6 distributed units, island-capable"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Wind turbine requires composite fan blades
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "WindTurbine"
+then_level = 1
+then_ids   = "CompositeFan,3D_Printed"
+
+# Wind turbine requires induction or PMSG generator
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "WindTurbine"
+then_level = 2
+then_ids   = "InductionGen,PMSG"
+
+# Hydro turbine limited to sync or axial flux generator
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "HydroTurbine"
+then_level = 2
+then_ids   = "SyncGen,AxialFlux"
+
+# Microturbine requires high-speed generator
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "MicroTurbine"
+then_level = 2
+then_ids   = "HighSpeedPMG,PMSG"
+
+# CMC blades only for gas/combined cycle (high temp)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "CMC_Blade"
+then_level = 0
+then_ids   = "GasTurbine,CombinedCycle"

@@ -1,0 +1,359 @@
+# =============================================================
+# N6 E-Ink Display DSE Domain Definition
+# Electrophoretic electronic paper technology
+# n=6: 6 pigment particle types (n=6), sigma=12 V driving voltage,
+#   tau=4 grayscale waveform phases, phi=2 bistable states (black/white),
+#   J2=24 ppi target density, 6-color ACeP system (n=6 EXACT)
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "e-ink-display"
+desc = "E-Ink Display Architecture DSE (particle/encapsulation/driving/backplane/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: ParticleType (6 candidates)
+# ============================================================
+
+[[level]]
+name = "ParticleType"
+
+[[candidate]]
+level = 0
+id = "TiO2-Carbon"
+label = "TiO2/Carbon Black dual (classic B/W, phi=2 bistable, mature)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "CMY-Pigment"
+label = "CMY Subtractive Pigment (3 color layers, tau=4 phase drive, print-like)"
+n6 = 0.85
+perf = 0.78
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "ACeP-6Color"
+label = "ACeP 6-Color Particle (n=6 pigment types EXACT, full gamut, gallery)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Spectra-3100"
+label = "E Ink Spectra 3100 (4 particle colors, tau=4 waveform phases, signage)"
+n6 = 0.90
+perf = 0.80
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "QR-LPD"
+label = "QR-LPD Cholesteric (liquid crystal droplet, sigma=12 V drive, reflective)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "ElectroWetting"
+label = "Electrowetting Pigment (oil/water, 6 um gap EXACT, video-speed capable)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.40
+
+# ============================================================
+# Level 1: Encapsulation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Encapsulation"
+
+[[candidate]]
+level = 1
+id = "Microcapsule"
+label = "Microcapsule (classic E Ink, 6 um wall thickness, proven at scale)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Microcup"
+label = "Microcup (SiPix/CLEARink, 6-sided honeycomb cell, sealed structure)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Open-Cell"
+label = "Open Cell (no encapsulation, direct particle flow, fast but leaky)"
+n6 = 0.70
+perf = 0.90
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Polymer-Wall"
+label = "Polymer Dispersed (PDLC wall, sigma=12 um pitch, flexible)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Dual-Hemisphere"
+label = "Dual Hemisphere Janus (phi=2 pole particle, self-rotating, low voltage)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Nanofiber-Matrix"
+label = "Nanofiber Matrix (electrospun scaffold, 6 nm fiber, next-gen contrast)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.35
+
+# ============================================================
+# Level 2: Driving (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Driving"
+
+[[candidate]]
+level = 2
+id = "Global-Update"
+label = "Global Update (full refresh, tau=4 waveform phases, flicker visible)"
+n6 = 0.90
+perf = 0.60
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+level = 2
+id = "Partial-Update"
+label = "Partial Update (region refresh, 6 zone partition, reduced flicker)"
+n6 = 1.00
+perf = 0.75
+power = 0.82
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "A2-Fast"
+label = "A2 Fast Mode (binary only, phi=2 states, <100ms, animation capable)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "DU4-Grayscale"
+label = "DU4 Direct Update (tau=4 gray levels per pass, balanced speed/quality)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "REAGL"
+label = "REAGL Regal (ghost reduction, sigma=12 V bipolar pulse, clean image)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Dithered-Video"
+label = "Dithered Video Mode (J₂=24 fps target, Floyd-Steinberg, n=6 bit depth)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.50
+
+# ============================================================
+# Level 3: Backplane (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Backplane"
+
+[[candidate]]
+level = 3
+id = "a-Si-TFT"
+label = "a-Si TFT (amorphous silicon, Gen 6 glass, low cost, standard)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "IGZO-TFT"
+label = "IGZO TFT (oxide semiconductor, 6x mobility vs a-Si, low leakage)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "OTFT"
+label = "Organic TFT (printed, 6 layer stack, flexible, roll-to-roll compatible)"
+n6 = 1.00
+perf = 0.65
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Flex-PI"
+label = "Flexible Polyimide (bendable, 6 um substrate, wearable e-paper)"
+n6 = 1.00
+perf = 0.75
+power = 0.82
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Steel-Foil"
+label = "Steel Foil Substrate (robust, sigma=12 um TFT layer, outdoor signage)"
+n6 = 1.00
+perf = 0.72
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Glass-Free-Direct"
+label = "Glass-Free Direct Drive (segmented, no TFT, 6 segment groups, ultra low cost)"
+n6 = 1.00
+perf = 0.55
+power = 0.92
+cost = 0.95
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "E-Reader"
+label = "E-Reader (6 inch diagonal EXACT, J₂=24 gray levels, Kindle class)"
+n6 = 1.00
+perf = 0.85
+power = 0.95
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Smart-Label"
+label = "Smart Label ESL (electronic shelf label, phi=2 state, retail pricing)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+level = 4
+id = "Digital-Signage"
+label = "Digital Signage (large format, sigma=12 tile array, public display)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "E-Note"
+label = "E-Note Tablet (pen input, sigma=12 ms latency, J₂=24 pressure levels)"
+n6 = 1.00
+perf = 0.88
+power = 0.88
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Wearable-Band"
+label = "Wearable Band (curved, phi=2 bistable always-on, n=6 cm band width)"
+n6 = 1.00
+perf = 0.72
+power = 0.92
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Architectural"
+label = "Architectural Surface (wall/window, 6-color ACeP, ambient powered)"
+n6 = 1.00
+perf = 0.78
+power = 0.60
+cost = 0.35
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Global update only for simple applications
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Global-Update"
+then_level = 4
+then_ids = ["E-Reader", "Smart-Label", "Architectural"]
+
+# Glass-free direct drive only for simple displays
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Glass-Free-Direct"
+then_level = 4
+then_ids = ["Smart-Label", "Wearable-Band"]
+
+# Dithered video mode requires fast backplane
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Dithered-Video"
+then_level = 3
+then_ids = ["IGZO-TFT", "Flex-PI"]
+
+# Open cell encapsulation excluded from wearable (leak risk)
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Open-Cell"
+then_level = 4
+then_ids = ["Wearable-Band", "E-Reader"]

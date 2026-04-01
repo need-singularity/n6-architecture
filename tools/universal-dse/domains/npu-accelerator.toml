@@ -1,0 +1,399 @@
+# =============================================================
+# N6 NPU/AI Accelerator DSE — Neural processing units
+# n=6: sigma-tau=8 bit inference (INT8), sigma=12 tensor cores,
+#       J2=24 PE rows, tau=4 dataflow dimensions, phi=2 sparsity (2:4),
+#       6-stage pipeline (n=6)
+# BT-28 (Computing ladder), BT-58 (sigma-tau=8 universal), BT-59 (8-layer AI stack)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "npu-accelerator"
+desc = "NPU/AI Accelerator DSE (BT-28/58/59, sigma-tau=8 INT8, sigma=12 cores, J2=24 PE)"
+levels = ["Dataflow", "Precision", "Memory", "Interconnect", "Workload"]
+vision = "Ultimate NPU — sigma-tau=8 bit precision, sigma=12 tensor cores, n=6 pipeline, all n=6 aligned"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Dataflow — 6 candidates
+#   n6: sigma=12 systolic, n=6 spatial PEs, tau=4 dataflow dims
+# =============================================================
+[[level]]
+name = "Dataflow"
+
+[[candidate]]
+level = 0
+id    = "Output_Stationary"
+label = "Output-Stationary (accumulate in place, minimize output writes)"
+n6    = 0.60
+perf  = 0.75
+power = 0.70
+cost  = 0.75
+notes = "ShiDianNao style, good for small filters, conv-optimized"
+
+[[candidate]]
+level = 0
+id    = "Weight_Stationary"
+label = "Weight-Stationary (weights fixed, activations stream through)"
+n6    = 0.60
+perf  = 0.80
+power = 0.65
+cost  = 0.70
+notes = "TPU v1 style, reduces weight memory reads, FC-layer optimal"
+
+[[candidate]]
+level = 0
+id    = "Row_Stationary"
+label = "Row-Stationary (Eyeriss, 12 PE clusters, minimal data movement)"
+n6    = 1.00
+perf  = 0.85
+power = 0.80
+cost  = 0.65
+notes = "clusters=12=sigma EXACT, best energy efficiency, Eyeriss v2"
+
+[[candidate]]
+level = 0
+id    = "Systolic_12x12"
+label = "Systolic 12x12 Array (sigma=12 rows, sigma=12 cols, TPU-class)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.50
+notes = "dim=12=sigma EXACT, 144=sigma^2 PEs, Google TPU architecture"
+
+[[candidate]]
+level = 0
+id    = "Spatial_6PE"
+label = "Spatial 6-PE (n=6 processing elements, flexible mapping)"
+n6    = 1.00
+perf  = 0.70
+power = 0.85
+cost  = 0.80
+notes = "PEs=6=n EXACT, CGRA-style, multi-workload adaptable"
+
+[[candidate]]
+level = 0
+id    = "Reconfigurable"
+label = "Reconfigurable Dataflow (6-mode config, runtime adaptable)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.55
+notes = "modes=6=n EXACT, morph between stationary types, SambaNova/Groq"
+
+# =============================================================
+# Level 1: Precision — 6 candidates
+#   n6: sigma-tau=8 (INT8), tau=4 (INT4), phi=2 (mixed-2bit)
+# =============================================================
+[[level]]
+name = "Precision"
+
+[[candidate]]
+level = 1
+id    = "INT8"
+label = "INT8 (sigma-tau=8 bits, universal inference standard)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.80
+notes = "bits=8=sigma-tau EXACT, ONNX/TensorRT standard, 99%+ accuracy"
+
+[[candidate]]
+level = 1
+id    = "INT4"
+label = "INT4 (tau=4 bits, aggressive quantization, edge deploy)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.90
+notes = "bits=4=tau EXACT, GPTQ/AWQ quantization, 2x INT8 throughput"
+
+[[candidate]]
+level = 1
+id    = "FP16"
+label = "FP16 (16-bit float, training-grade, IEEE 754 half)"
+n6    = 0.60
+perf  = 0.90
+power = 0.55
+cost  = 0.60
+notes = "16=2^tau bits, standard training precision, GPU native"
+
+[[candidate]]
+level = 1
+id    = "BF16"
+label = "BF16 (Brain Float 16, 8-bit exponent, training optimized)"
+n6    = 1.00
+perf  = 0.88
+power = 0.60
+cost  = 0.65
+notes = "exponent=8=sigma-tau EXACT, Google TPU/NVIDIA native, stable training"
+
+[[candidate]]
+level = 1
+id    = "FP8"
+label = "FP8 (8-bit float, E4M3/E5M2, next-gen training+inference)"
+n6    = 1.00
+perf  = 0.92
+power = 0.75
+cost  = 0.70
+notes = "bits=8=sigma-tau EXACT, H100/MI300 native, 2x FP16 throughput"
+
+[[candidate]]
+level = 1
+id    = "Mixed_2bit"
+label = "Mixed 2-bit (phi=2 bit base, sparse+dense hybrid quantization)"
+n6    = 1.00
+perf  = 0.55
+power = 0.95
+cost  = 0.95
+notes = "bits=2=phi EXACT, BitNet/1.58-bit class, extreme edge efficiency"
+
+# =============================================================
+# Level 2: Memory — 6 candidates
+#   n6: n=6 SRAM banks, sigma=12 HBM stacks, J2=24 MB on-chip
+# =============================================================
+[[level]]
+name = "Memory"
+
+[[candidate]]
+level = 2
+id    = "SRAM_6bank"
+label = "SRAM 6-Bank (n=6 banks, sub-ns access, scratchpad)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.40
+notes = "banks=6=n EXACT, register file + L1 scratchpad, lowest latency"
+
+[[candidate]]
+level = 2
+id    = "HBM_12hi"
+label = "HBM 12-Hi (sigma=12 stacks, 1.2 TB/s, AI training class)"
+n6    = 1.00
+perf  = 0.95
+power = 0.45
+cost  = 0.25
+notes = "stacks=12=sigma EXACT, BW=1.2TB/s, H100/MI300 class"
+
+[[candidate]]
+level = 2
+id    = "OnChip_24MB"
+label = "On-Chip 24MB (J2=24 MB global buffer, weight caching)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.45
+notes = "capacity=24MB=J2 EXACT, Cerebras-style large SRAM, no off-chip"
+
+[[candidate]]
+level = 2
+id    = "eDRAM"
+label = "eDRAM (embedded DRAM, 6 MB per tile, high density cache)"
+n6    = 1.00
+perf  = 0.75
+power = 0.65
+cost  = 0.60
+notes = "per_tile=6MB=n EXACT, IBM z-series style, density/speed balance"
+
+[[candidate]]
+level = 2
+id    = "ReRAM_CIM"
+label = "ReRAM CIM (compute-in-memory, 6x6 crossbar, analog MAC)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.50
+notes = "crossbar=6x6=n^2 EXACT, weight-in-memory, O(1) multiply"
+
+[[candidate]]
+level = 2
+id    = "Unified_Cache"
+label = "Unified Cache (12 MB shared L2, 6 partitions, coherent)"
+n6    = 1.00
+perf  = 0.80
+power = 0.60
+cost  = 0.55
+notes = "size=12MB=sigma EXACT, partitions=6=n EXACT, multi-core shared"
+
+# =============================================================
+# Level 3: Interconnect — 6 candidates
+#   n6: n=6 mesh, sigma=12 ring nodes, tau=4 tree levels
+# =============================================================
+[[level]]
+name = "Interconnect"
+
+[[candidate]]
+level = 3
+id    = "Mesh_6x6"
+label = "Mesh 6x6 (n=6 rows x n=6 cols, 2D grid, scalable)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.70
+notes = "dim=6=n EXACT, 36 nodes, Tenstorrent/Cerebras style"
+
+[[candidate]]
+level = 3
+id    = "Ring_12node"
+label = "Ring 12-Node (sigma=12 nodes, bidirectional, low latency)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.80
+notes = "nodes=12=sigma EXACT, Intel ring bus style, simple routing"
+
+[[candidate]]
+level = 3
+id    = "Tree_4level"
+label = "Tree 4-Level (tau=4 hierarchy levels, H-tree reduction)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.75
+notes = "levels=4=tau EXACT, logarithmic latency, good for reduce ops"
+
+[[candidate]]
+level = 3
+id    = "NoC_Butterfly"
+label = "NoC Butterfly (6-port switches, log-connected, high BW)"
+n6    = 1.00
+perf  = 0.85
+power = 0.55
+cost  = 0.55
+notes = "ports=6=n EXACT, non-blocking, HPC interconnect topology"
+
+[[candidate]]
+level = 3
+id    = "Crossbar"
+label = "Crossbar (12x12 full connectivity, non-blocking, broadcast)"
+n6    = 1.00
+perf  = 0.95
+power = 0.45
+cost  = 0.40
+notes = "dim=12=sigma EXACT, O(1) latency, area O(N^2), small scale"
+
+[[candidate]]
+level = 3
+id    = "Optical_Link"
+label = "Optical Link (6 wavelengths, 12 Tbps, chip-to-chip photonic)"
+n6    = 1.00
+perf  = 1.00
+power = 0.80
+cost  = 0.25
+notes = "wavelengths=6=n EXACT, BW=12Tbps=sigma EXACT, future multi-die"
+
+# =============================================================
+# Level 4: Workload — 6 candidates
+#   n6: n=6 heads (transformer), sigma=12 layers, tau=4 dim
+# =============================================================
+[[level]]
+name = "Workload"
+
+[[candidate]]
+level = 4
+id    = "CNN_Inference"
+label = "CNN Inference (12 conv layers, 6 pooling stages, vision)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.80
+notes = "conv=12=sigma EXACT, pool=6=n EXACT, ResNet/EfficientNet class"
+
+[[candidate]]
+level = 4
+id    = "Transformer_6head"
+label = "Transformer 6-Head (n=6 attention heads, 12 layers, LLM)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.50
+notes = "heads=6=n EXACT, layers=12=sigma EXACT, BERT-base / GPT class"
+
+[[candidate]]
+level = 4
+id    = "GNN_Graph"
+label = "GNN Graph (6-hop aggregation, 12 hidden channels, sparse)"
+n6    = 1.00
+perf  = 0.65
+power = 0.70
+cost  = 0.70
+notes = "hops=6=n EXACT, channels=12=sigma EXACT, molecular/social graphs"
+
+[[candidate]]
+level = 4
+id    = "Diffusion_Model"
+label = "Diffusion Model (6 denoising scales, 12 U-Net blocks)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.55
+notes = "scales=6=n EXACT, blocks=12=sigma EXACT, Stable Diffusion/DALL-E"
+
+[[candidate]]
+level = 4
+id    = "Sparse_MoE"
+label = "Sparse MoE (6 active experts, 12 total experts, routing)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.60
+notes = "active=6=n EXACT, total=12=sigma EXACT, Mixtral/GShard class"
+
+[[candidate]]
+level = 4
+id    = "Edge_TinyML"
+label = "Edge TinyML (6 operator types, 48 KB model, microcontroller)"
+n6    = 1.00
+perf  = 0.40
+power = 0.95
+cost  = 0.95
+notes = "ops=6=n EXACT, model=48KB=sigma*tau EXACT, Cortex-M/RISC-V edge"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Systolic arrays pair naturally with HBM for AI training
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "Systolic_12x12"
+then_level = 2
+then_ids  = "HBM_12hi,OnChip_24MB"
+
+# ReRAM CIM pairs with crossbar or spatial dataflow
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "ReRAM_CIM"
+then_level = 0
+then_ids  = "Spatial_6PE,Reconfigurable"
+
+# Edge TinyML needs low-power memory and precision
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Edge_TinyML"
+then_level = 1
+then_ids  = "INT4,Mixed_2bit"
+
+# Transformer workloads need high bandwidth interconnect
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Transformer_6head"
+then_level = 3
+then_ids  = "Crossbar,NoC_Butterfly,Optical_Link"
+
+# Sparse MoE needs flexible routing interconnect
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Sparse_MoE"
+then_level = 3
+then_ids  = "Mesh_6x6,NoC_Butterfly"

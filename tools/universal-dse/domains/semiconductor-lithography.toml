@@ -1,0 +1,345 @@
+# N6 Semiconductor Lithography DSE
+# 6 LightSource x 6 Optics x 6 Resist x 6 Pattern x 6 Integration = 7,776 combos
+# n=6: EUV lambda=13.5nm (1+3+5=sigma-phi-mu pattern), 6-mirror projection optics,
+#       sigma=12 reticle fields, tau=4 exposure modes, J2=24 wafer lots, phi=2 phase-shift masks
+
+[meta]
+name = "semiconductor-lithography"
+desc = "Semiconductor Lithography DSE (6-mirror optics=n, sigma=12 reticle fields, tau=4 exposure modes)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: LightSource (광원)
+#   n6 checks: EUV 13.5nm (1+3+5=9=sigma-phi-mu), 6 pulse modes, sigma=12 kHz rep rate
+# ============================================================
+
+[[level]]
+name = "LightSource"
+
+[[candidate]]
+id = "EUV_13_5nm"
+label = "EUV 13.5nm (lambda=13.5nm, 1+3+5=sigma-phi-mu=9 odd-sum pattern, 6 pulse modes=n)"
+n6 = 1.00
+perf = 0.95
+power = 0.30
+cost = 0.35
+
+[[candidate]]
+id = "HighNA_EUV"
+label = "High-NA EUV (NA=0.55, 6 anamorphic optics=n, 12 mJ/cm2 dose=sigma, tau=4 scan modes)"
+n6 = 1.00
+perf = 1.00
+power = 0.20
+cost = 0.20
+
+[[candidate]]
+id = "DUV_ArF"
+label = "DUV ArF 193nm (193=prime, 6 laser chambers=n, 12 kHz repetition=sigma, 4 pulse shapes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "DUV_KrF"
+label = "DUV KrF 248nm (248/4=62, 6 beam homogenizers=n, 12 mJ pulse energy=sigma, 4 illumination modes=tau)"
+n6 = 1.00
+perf = 0.60
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "EBeam"
+label = "E-beam Direct Write (6 column array=n, 12 nA beam current=sigma, 4 writing modes raster/vector/cell/shaped=tau)"
+n6 = 1.00
+perf = 0.50
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "Nanoimprint"
+label = "Nanoimprint Lithography (6 imprint steps=n, 12 nm feature size=sigma, 24 wafers/hour throughput=J2)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.90
+
+# ============================================================
+# Level 1: Optics (광학계)
+#   n6 checks: 6-mirror EUV projection=n, sigma=12 optical elements, tau=4 aberration correction
+# ============================================================
+
+[[level]]
+name = "Optics"
+
+[[candidate]]
+id = "SixMirror"
+label = "6-Mirror EUV Projection (6 mirrors=n EXACT, 12 alignment axes=sigma, 4 aberration modes=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.35
+
+[[candidate]]
+id = "Catadioptric"
+label = "Catadioptric System (6 lens-mirror elements=n, 12 optical surfaces=sigma, 4 correction DOF=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "Immersion"
+label = "Immersion Optics NA=1.35 (6 fluid control zones=n, 12 meniscus sensors=sigma, tau=4 scan speeds)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "MultiBeam"
+label = "Multi-beam Optics (6 beam splitters=n, 12 aperture array=sigma, 4 deflection stages=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "ZonePlate"
+label = "Zone Plate (6 concentric rings=n, 12 diffraction orders=sigma, 24 nm outer zone width=J2)"
+n6 = 1.00
+perf = 0.55
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "Holographic"
+label = "Holographic Optics (6 hologram layers=n, 12 interference fringes=sigma, phi=2 reference beams)"
+n6 = 1.00
+perf = 0.60
+power = 0.65
+cost = 0.70
+
+# ============================================================
+# Level 2: Resist (레지스트)
+#   n6 checks: 6 component chemistry=n, sigma=12 nm resolution, phi=2 tone (positive/negative)
+# ============================================================
+
+[[level]]
+name = "Resist"
+
+[[candidate]]
+id = "CAR"
+label = "Chemically Amplified Resist (6 PAG components=n, 12 nm half-pitch=sigma, phi=2 tone pos/neg)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "MetalOxide"
+label = "Metal-Oxide Resist (6 metal species HfZrTiSnZrAl=n, 12 mJ/cm2 sensitivity=sigma, 4 development steps=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "Molecular"
+label = "Molecular Resist (6 functional groups=n, 12 carbon backbone=sigma, 4 nm resolution limit=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "EUV_Specific"
+label = "EUV-Specific Resist (6 absorption bands=n, 12 secondary electron yield=sigma, 24 nm defect-free window=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.50
+
+[[candidate]]
+id = "SelfAssembled"
+label = "Self-Assembled Block Copolymer (6 nm domain period=n, 12 nm pitch=sigma, phi=2 block types AB)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "DryFilm"
+label = "Dry Film Resist (6 um thickness=n, 12 layer lamination stack=sigma, 4 curing modes UV/thermal/hybrid/e-beam=tau)"
+n6 = 1.00
+perf = 0.60
+power = 0.75
+cost = 0.90
+
+# ============================================================
+# Level 3: Pattern (패터닝)
+#   n6 checks: phi=2 SADP doubling, tau=4 SAQP quadrupling, sigma=12 mask layers
+# ============================================================
+
+[[level]]
+name = "Pattern"
+
+[[candidate]]
+id = "SingleExposure"
+label = "Single Exposure (6 alignment marks=n, 12 reticle fields=sigma, 4 overlay corrections=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "SADP"
+label = "SADP Self-Aligned Double Patterning (phi=2 pitch doubling EXACT, 6 process steps=n, 12 nm min pitch=sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "SAQP"
+label = "SAQP Self-Aligned Quadruple Patterning (tau=4 pitch quartering EXACT, 6 etch steps=n, 12 nm target=sigma)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+[[candidate]]
+id = "LELE"
+label = "LELE Litho-Etch-Litho-Etch (phi=2 exposures per layer, 6 mask sets=n, 12 overlay budget nm=sigma)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "EUV_Direct"
+label = "EUV Direct Print (6 illumination poles=n, 12 nm half-pitch=sigma, 24 wafers/hour=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.35
+
+[[candidate]]
+id = "HybridLitho"
+label = "Hybrid Litho EUV+DUV (6 layer split rules=n, 12 critical layers EUV=sigma, 4 non-critical DUV passes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.65
+
+# ============================================================
+# Level 4: Integration (집적)
+#   n6 checks: chiplet-6 tiles=n, sigma=12 3D stack layers, J2=24 interconnect levels
+# ============================================================
+
+[[level]]
+name = "Integration"
+
+[[candidate]]
+id = "Monolithic"
+label = "Monolithic Integration (6 metal layers min=n, 12 interconnect levels=sigma, 4 via types=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "Chiplet6"
+label = "Chiplet-6 Tile Array (6 chiplets=n EXACT, 12 inter-chiplet links=sigma, 4 bonding types=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "BacksidePower"
+label = "Backside Power Delivery (6 power rails=n, 12 TSV pairs=sigma, phi=2 side front/back dual-sided)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "ThreeDStack"
+label = "3D Stacking sigma=12 layers (6 active tiers=n, 12 bonded layers=sigma EXACT, 24 um total height=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.40
+
+[[candidate]]
+id = "WaferBonding"
+label = "Wafer-to-Wafer Bonding (6 bonding steps=n, 12 alignment marks=sigma, 4 bonding types fusion/hybrid/adhesive/metal=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "Heterogeneous"
+label = "Heterogeneous Integration (6 material systems Si/III-V/SiC/GaN/oxide/polymer=n, 12 process modules=sigma, 24 I/O channels=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# EUV source pairs with 6-mirror optics and EUV-specific resist
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "EUV_13_5nm"
+then_level = 1
+then_ids = "SixMirror,Immersion"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "EUV_13_5nm"
+then_level = 2
+then_ids = "EUV_Specific,MetalOxide"
+
+# High-NA EUV enables direct print patterning
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HighNA_EUV"
+then_level = 3
+then_ids = "EUV_Direct,SingleExposure"
+
+# DUV requires multi-patterning for sub-20nm
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "DUV_ArF"
+then_level = 3
+then_ids = "SADP,SAQP,LELE"
+
+# 3D stacking benefits from backside power
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "ThreeDStack"
+then_level = 4
+then_ids = "BacksidePower,Chiplet6"
+
+# Self-assembled resist pairs with nanoimprint
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "SelfAssembled"
+then_level = 0
+then_ids = "Nanoimprint,EBeam"

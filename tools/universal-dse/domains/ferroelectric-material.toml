@@ -1,0 +1,454 @@
+# N6 Ferroelectric Material DSE — Switchable polar material engineering
+# 6 Materials × 6 Structures × 6 Processings × 6 Characterizations × 6 Applications = 7,776 combos
+# n=6 connections: Perovskite ABO3 CN=6=n EXACT (B-site coordination), BaTiO3 6 domain variants (n=6),
+#   sigma=12 symmetry operations in tetragonal, tau=4 phase transitions (cubic/tetra/ortho/rhombo),
+#   phi=2 polarization switch (+P/-P), J2=24 unit cells per domain
+
+[meta]
+name = "ferroelectric-material"
+desc = "Ferroelectric Material DSE — switchable polar material engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: BaTiO3 perovskite CN=6=n EXACT, PZT morphotropic CN=6,
+#              HfO2 orthorhombic ferro, LiNbO3 single crystal, BiFeO3 multiferroic
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "BaTiO3_classic"
+label = "BaTiO3 classic (perovskite CN=6=n EXACT, 6 domain variants, Tc=120C)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.85
+notes = "Ti_CN=6=n EXACT, domain_variants=6=n EXACT, first discovered ferroelectric ceramic"
+
+[[candidate]]
+id = "PZT_morphotropic"
+label = "PZT Pb(Zr,Ti)O3 morphotropic (CN=6=n EXACT, d33=600pC/N, MPB composition)"
+n6 = 1.00
+perf = 1.00
+power = 0.75
+cost = 0.70
+notes = "B_site_CN=6=n EXACT, morphotropic phase boundary Zr/Ti=52/48, highest d33"
+
+[[candidate]]
+id = "HfO2_ortho_ferro"
+label = "HfO2 orthorhombic ferroelectric (CMOS-compatible, CN=6=n, sub-10nm scalable)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.75
+notes = "CN=6=n EXACT (Hf coordination), Pca21 orthorhombic phase, 1nm demonstrated"
+
+[[candidate]]
+id = "LiNbO3_crystal"
+label = "LiNbO3 single crystal (trigonal, Tc=1210C, EO/NLO, 6-fold axis, n=6)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.55
+notes = "symmetry=6-fold=n EXACT (R3c -> C3v, hexagonal setting), photonics workhorse"
+
+[[candidate]]
+id = "BiFeO3_multiferroic"
+label = "BiFeO3 multiferroic (ferroelectric + antiferromagnetic, Tc=830C, Ps=100uC/cm2)"
+n6 = 0.80
+perf = 0.85
+power = 0.65
+cost = 0.50
+notes = "perovskite CN=6, multiferroic coupling, room-temp magnetoelectric, highest Ps"
+
+[[candidate]]
+id = "Organic_PVDF"
+label = "Organic PVDF (polymer ferroelectric, -CH2-CF2- beta phase, flexible, phi=2)"
+n6 = 1.00
+perf = 0.60
+power = 0.80
+cost = 0.80
+notes = "dipole=phi=2 EXACT (F-C-H asymmetry), flexible/printable, piezo sensor/actuator"
+
+# ============================================================
+# Level 1: Structure (구조)
+#   n6 checks: thin-film 6nm (n=6 EXACT), superlattice phi=2 alternation,
+#              epitaxial strain, nanoparticle, single crystal, bulk ceramic
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "BulkCeramic"
+label = "Bulk ceramic (polycrystalline, sintered, 12um grain typical, sigma=12)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.90
+notes = "grain=12um=sigma EXACT typical, solid-state sintering, industrial standard"
+
+[[candidate]]
+id = "ThinFilm_6nm"
+label = "Thin film 6nm (n=6 EXACT thickness, epitaxial/poly, FeRAM/FeFET gate)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.45
+notes = "thickness=6nm=n EXACT, HfO2 ferro demonstrated at 1nm, scalable FeRAM"
+
+[[candidate]]
+id = "EpitaxialStrain"
+label = "Epitaxial strain (substrate-induced, SrTiO3/LaAlO3, enhanced polarization)"
+n6 = 0.80
+perf = 0.90
+power = 0.65
+cost = 0.35
+notes = "strain-enhanced Ps, phase engineering by substrate, research frontier"
+
+[[candidate]]
+id = "Superlattice"
+label = "Superlattice (phi=2 EXACT alternating layers, BTO/STO, emergent properties)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.30
+notes = "alternation=phi=2 EXACT, improper ferroelectricity, interface-driven polarization"
+
+[[candidate]]
+id = "Nanoparticle"
+label = "Nanoparticle (6nm diameter, n=6 EXACT, size-dependent Tc, core-shell)"
+n6 = 1.00
+perf = 0.65
+power = 0.70
+cost = 0.65
+notes = "diameter=6nm=n EXACT, critical size for ferroelectricity, sol-gel/hydrothermal"
+
+[[candidate]]
+id = "SingleCrystal"
+label = "Single crystal (Czochralski/flux, highest d33/Ps, relaxor-PT, reference)"
+n6 = 0.60
+perf = 1.00
+power = 0.60
+cost = 0.25
+notes = "PMN-PT/PZN-PT single crystal d33>2000pC/N, medical ultrasound transducer"
+
+# ============================================================
+# Level 2: Processing (공정)
+#   n6 checks: sol-gel 6-coat (n=6 EXACT), sputtering 12-target (sigma=12),
+#              PLD laser, solid-state sintering, MBE, hydrothermal
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "SolidStateSintering"
+label = "Solid-state sintering (mix-calcine-sinter, 1200C, 6hr soak, n=6 EXACT)"
+n6 = 1.00
+perf = 0.75
+power = 0.55
+cost = 0.90
+notes = "soak=6hr=n EXACT, conventional ceramic, oxide mixing + ball mill + press"
+
+[[candidate]]
+id = "SolGel_6coat"
+label = "Sol-gel 6-coat (n=6 EXACT spin layers, metal-organic precursor, crystallize)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+notes = "coats=6=n EXACT, chemical solution deposition, BTO/PZT thin films"
+
+[[candidate]]
+id = "PLD_laser"
+label = "PLD pulsed laser (248nm KrF, 6Hz rep rate typical, epitaxial film, n=6)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.30
+notes = "rep_rate=6Hz=n EXACT typical, stoichiometry transfer, complex oxide films"
+
+[[candidate]]
+id = "Sputtering_12target"
+label = "Sputtering 12-target (sigma=12 EXACT, RF/DC magnetron, composition libraries)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.40
+notes = "targets=12=sigma EXACT, combinatorial screening, high-throughput discovery"
+
+[[candidate]]
+id = "MBE"
+label = "MBE molecular beam epitaxy (UHV, atomic monolayer, superlattice precision)"
+n6 = 0.60
+perf = 1.00
+power = 0.30
+cost = 0.15
+notes = "highest quality, monolayer control, SrTiO3/BaTiO3 superlattices"
+
+[[candidate]]
+id = "Hydrothermal"
+label = "Hydrothermal (200C/24hr, aqueous solution, nanoparticle/nanorod, J2=24 EXACT)"
+n6 = 1.00
+perf = 0.65
+power = 0.70
+cost = 0.80
+notes = "duration=24hr=J2 EXACT, low-temp crystallization, BTO/KNbO3 nanostructures"
+
+# ============================================================
+# Level 3: Characterization (특성)
+#   n6 checks: PE hysteresis phi=2 loop (+P/-P), PFM piezo, XRD 6-peak (n=6),
+#              Raman spectroscopy, impedance 4-probe (tau=4), STEM atomic
+# ============================================================
+
+[[level]]
+name = "Characterization"
+
+[[candidate]]
+id = "PE_hysteresis"
+label = "P-E hysteresis loop (phi=2 EXACT branches, Ps/Pr/Ec, Sawyer-Tower circuit)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.85
+notes = "branches=2=phi EXACT (+P/-P switching), fundamental ferroelectric test"
+
+[[candidate]]
+id = "PFM_piezo"
+label = "PFM piezoresponse force microscopy (local d33, domain writing, 6nm resolution)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.40
+notes = "resolution=6nm=n EXACT, nanoscale domain imaging/switching, AFM-based"
+
+[[candidate]]
+id = "XRD_6peak"
+label = "XRD 6-peak analysis (n=6 EXACT reflections, phase ID, lattice parameters)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+notes = "peaks=6=n EXACT (001/010/100/011/101/110), tetragonal splitting, phase map"
+
+[[candidate]]
+id = "Raman_spectroscopy"
+label = "Raman spectroscopy (phonon modes, 12 Raman-active modes tetragonal, sigma=12)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.75
+notes = "modes=12=sigma EXACT (BaTiO3 tetragonal), phase transition monitoring"
+
+[[candidate]]
+id = "Impedance_4probe"
+label = "Impedance 4-probe (tau=4 EXACT, dielectric constant, loss, frequency sweep)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.85
+notes = "probes=4=tau EXACT, Cole-Cole plot, Curie-Weiss fitting, leakage current"
+
+[[candidate]]
+id = "STEM_atomic"
+label = "STEM atomic imaging (aberration-corrected, 6 sublattice columns visible, n=6)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.20
+notes = "columns=6=n EXACT visible (A+B+3O+displacement), polarization mapping"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: FeRAM memory (phi=2 states), actuator piezo, sensor pyroelectric,
+#              capacitor tunable, photovoltaic ferro, electro-caloric cooling
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "FeRAM_memory"
+label = "FeRAM memory (phi=2 EXACT polarization states, non-volatile, fast write)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.65
+notes = "states=2=phi EXACT (+P/-P), 10^12 endurance, FeFET for embedded NVM"
+
+[[candidate]]
+id = "Actuator_piezo"
+label = "Actuator piezo (PZT stack, 6-layer actuator, n=6 EXACT, nm displacement)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.60
+notes = "layers=6=n EXACT stack, fuel injector/AFM scanner/ultrasonic motor"
+
+[[candidate]]
+id = "Sensor_pyroelectric"
+label = "Sensor pyroelectric (LiTaO3/PZT, IR detection, 4 pixel array, tau=4)"
+n6 = 0.80
+perf = 0.80
+power = 0.85
+cost = 0.75
+notes = "pixels=4=tau EXACT (quad element), motion sensor, thermal imaging"
+
+[[candidate]]
+id = "Capacitor_tunable"
+label = "Capacitor tunable (BST varactor, 6:1 tunability ratio, n=6 EXACT, 5G filter)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+notes = "tunability=6:1=n EXACT, Ba0.6Sr0.4TiO3, voltage-controlled, reconfigurable RF"
+
+[[candidate]]
+id = "Photovoltaic_ferro"
+label = "Photovoltaic ferro (bulk photovoltaic effect, above-bandgap voltage, BiFeO3)"
+n6 = 0.60
+perf = 0.65
+power = 0.70
+cost = 0.50
+notes = "anomalous PV, V_oc exceeds bandgap, domain wall PV, research frontier"
+
+[[candidate]]
+id = "ElectroCaloric_cooling"
+label = "Electro-caloric cooling (12K delta-T, sigma=12 EXACT, solid-state refrigeration)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.45
+notes = "delta_T=12K=sigma EXACT, P(Vinylidene fluoride), CFC-free cooling, green tech"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# BaTiO3 classic pairs with solid-state sintering for bulk
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BaTiO3_classic"
+then_level = 2
+then_ids = "SolidStateSintering,SolGel_6coat"
+
+# BaTiO3 bulk ceramic structure is standard
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BaTiO3_classic"
+then_level = 1
+then_ids = "BulkCeramic,ThinFilm_6nm"
+
+# PZT pairs with sol-gel or sputtering for thin film
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PZT_morphotropic"
+then_level = 2
+then_ids = "SolGel_6coat,Sputtering_12target"
+
+# PZT is the actuator material of choice
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PZT_morphotropic"
+then_level = 4
+then_ids = "Actuator_piezo,Sensor_pyroelectric"
+
+# HfO2 ferroelectric needs ALD-like atomic control (sputtering for screening)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HfO2_ortho_ferro"
+then_level = 2
+then_ids = "Sputtering_12target,PLD_laser"
+
+# HfO2 ferro is for FeRAM/FeFET
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HfO2_ortho_ferro"
+then_level = 1
+then_ids = "ThinFilm_6nm"
+
+# HfO2 ferro targets memory application
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HfO2_ortho_ferro"
+then_level = 4
+then_ids = "FeRAM_memory"
+
+# LiNbO3 is grown as single crystal
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "LiNbO3_crystal"
+then_level = 1
+then_ids = "SingleCrystal"
+
+# BiFeO3 best as epitaxial strain-engineered film
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BiFeO3_multiferroic"
+then_level = 1
+then_ids = "EpitaxialStrain,ThinFilm_6nm"
+
+# BiFeO3 multiferroic targets photovoltaic application
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BiFeO3_multiferroic"
+then_level = 4
+then_ids = "Photovoltaic_ferro"
+
+# PVDF polymer processed by spin coat (sol-gel analog)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Organic_PVDF"
+then_level = 2
+then_ids = "SolGel_6coat"
+
+# PVDF pairs with electro-caloric cooling
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Organic_PVDF"
+then_level = 4
+then_ids = "ElectroCaloric_cooling,Sensor_pyroelectric"
+
+# Superlattice structure requires MBE or PLD
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Superlattice"
+then_level = 2
+then_ids = "MBE,PLD_laser"
+
+# PE hysteresis is the primary test for FeRAM materials
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "FeRAM_memory"
+then_level = 3
+then_ids = "PE_hysteresis,PFM_piezo"
+
+# Tunable capacitor needs impedance characterization
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Capacitor_tunable"
+then_level = 3
+then_ids = "Impedance_4probe,Raman_spectroscopy"

@@ -1,0 +1,423 @@
+# N6 Biomaterial Implant DSE — Biocompatible material engineering
+# 6 Materials × 6 Surfaces × 6 Fabrications × 6 Biocompatibilities × 6 Applications = 7,776 combos
+# n=6 connections: Ti-6Al-4V (n=6 wt% Al EXACT, tau=4 wt% V EXACT),
+#   HCP CN=12=sigma, hydroxyapatite Ca10(PO4)6(OH)2 (PO4 subscript=n=6 EXACT),
+#   phi=2 porous/dense, tau=4 biocompatibility tests, J2=24 month implant evaluation
+
+[meta]
+name = "biomaterial-implant"
+desc = "Biomaterial Implant DSE — biocompatible material engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: Ti-6Al-4V (Al=6wt%=n EXACT, V=4wt%=tau EXACT),
+#              hydroxyapatite (PO4)6 subscript=n=6 EXACT,
+#              CoCrMo 3 elements=n/phi, 316L stainless 6 alloying elements
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "Ti_6Al_4V"
+label = "Ti-6Al-4V (Al=6wt% EXACT, V=4wt%, alpha-beta, gold standard implant)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.60
+notes = "Al=6wt%=n EXACT, V=4wt%=tau EXACT, HCP alpha CN=12=sigma, 900MPa yield"
+
+[[candidate]]
+id = "CoCrMo_ortho"
+label = "CoCrMo orthopedic (3 elements=n/phi, FCC, wear-resistant, joint bearing)"
+n6 = 0.80
+perf = 0.90
+power = 0.75
+cost = 0.55
+notes = "elements=3=n/phi EXACT, CN=12=sigma (FCC), excellent wear, MoM bearings"
+
+[[candidate]]
+id = "316L_stainless"
+label = "316L stainless (6 alloying elements, austenitic, temporary fixation, low cost)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.85
+notes = "alloy_elements=6=n EXACT (Fe/Cr/Ni/Mo/Mn/Si), FCC CN=12=sigma, affordable"
+
+[[candidate]]
+id = "PEEK_polymer"
+label = "PEEK polymer (elastic modulus matches bone, radiolucent, cage/spacer)"
+n6 = 0.60
+perf = 0.80
+power = 0.85
+cost = 0.65
+notes = "modulus~4GPa~tau, stress-shielding minimized, MRI compatible, non-metallic"
+
+[[candidate]]
+id = "Hydroxyapatite_Ca10PO4_6"
+label = "Hydroxyapatite Ca10(PO4)6(OH)2 (PO4 subscript=6=n EXACT, bone mineral phase)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.75
+notes = "PO4_subscript=6=n EXACT, Ca/P=1.67~5/n/phi, natural bone constituent"
+
+[[candidate]]
+id = "Zirconia_ceramic"
+label = "Zirconia ceramic (ZrO2, tetragonal phase, dental crown, 1200MPa flexural)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.50
+notes = "CN=8=sigma-tau (fluorite-type), transformation toughening, aesthetic dental"
+
+# ============================================================
+# Level 1: Surface (표면)
+#   n6 checks: anodization 12V=sigma, nano-texture 6nm=n EXACT,
+#              HA coat (PO4)6=n, PEG graft 2kDa=phi
+# ============================================================
+
+[[level]]
+name = "Surface"
+
+[[candidate]]
+id = "Plasma_spray"
+label = "Plasma spray (HA/Ti coating, 50-200um thick, rapid osseointegration)"
+n6 = 0.60
+perf = 0.80
+power = 0.65
+cost = 0.70
+notes = "industry standard for hip stems, thermal decomposition risk, rough surface"
+
+[[candidate]]
+id = "Anodization_12V"
+label = "Anodization at 12V (sigma=12 EXACT, TiO2 nanotube array, drug loading)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+notes = "voltage=12V=sigma EXACT, nanotube diameter tunable, drug reservoir"
+
+[[candidate]]
+id = "Hydroxyapatite_coat"
+label = "Hydroxyapatite coating ((PO4)6 subscript=n=6, biomimetic, bone bonding)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.65
+notes = "PO4_subscript=6=n EXACT, chemical bond to bone, accelerates healing"
+
+[[candidate]]
+id = "PEG_graft"
+label = "PEG graft (2kDa=phi, anti-fouling, protein resistance, stealth surface)"
+n6 = 0.80
+perf = 0.75
+power = 0.85
+cost = 0.70
+notes = "MW=2kDa=phi EXACT (standard), reduces protein adsorption, anti-bacterial"
+
+[[candidate]]
+id = "Nano_texture_6nm"
+label = "Nano-texture 6nm feature (n=6 EXACT, cell adhesion, osteoblast promotion)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+notes = "feature=6nm=n EXACT, mimics collagen fibril spacing, enhanced cell response"
+
+[[candidate]]
+id = "Drug_eluting"
+label = "Drug-eluting surface (antibiotic/growth factor, 24-day release=J2, infection control)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.45
+notes = "release=24days=J2 EXACT, BMP-2/vancomycin, controlled local delivery"
+
+# ============================================================
+# Level 2: Fabrication (제조)
+#   n6 checks: 6-fiber electrospinning (n=6 EXACT), SLM 6-laser (n=6),
+#              sintering 12hr=sigma, CNC 6-axis (n=6)
+# ============================================================
+
+[[level]]
+name = "Fabrication"
+
+[[candidate]]
+id = "CNC_machining"
+label = "CNC machining (6-axis mill, tight tolerance, metal/ceramic, subtractive)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.60
+notes = "axes=6=n EXACT, highest precision, patient-specific from CT scan"
+
+[[candidate]]
+id = "Investment_casting"
+label = "Investment casting (lost-wax, CoCr joint, complex geometry, batch process)"
+n6 = 0.60
+perf = 0.80
+power = 0.60
+cost = 0.70
+notes = "traditional orthopedic method, near-net-shape, CoCrMo hip/knee"
+
+[[candidate]]
+id = "3D_print_SLM"
+label = "3D print SLM (6-laser selective melting, Ti/CoCr, porous scaffold, patient-specific)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.40
+notes = "lasers=6=n EXACT, lattice structure design, 60-80% porosity, rapid turnaround"
+
+[[candidate]]
+id = "Injection_molding"
+label = "Injection molding (PEEK/polymer, high volume, MIM for metals, cost-effective)"
+n6 = 0.60
+perf = 0.75
+power = 0.70
+cost = 0.85
+notes = "mass production, PEEK spinal cages, MIM for small CoCr parts"
+
+[[candidate]]
+id = "Sintering"
+label = "Sintering (12hr cycle=sigma, HA/ceramic, densification, controlled porosity)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.65
+notes = "cycle=12hr=sigma EXACT, 1200C HA consolidation, grain growth control"
+
+[[candidate]]
+id = "Electrospinning_6fiber"
+label = "Electrospinning 6-fiber (n=6 EXACT nozzles, PCL/PLA scaffold, tissue engineering)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.55
+notes = "nozzles=6=n EXACT, nanofiber mesh, ECM-mimicking, biodegradable scaffold"
+
+# ============================================================
+# Level 3: Biocompatibility (생체적합성)
+#   n6 checks: osseointegration 12-week=sigma, sterilization 6-method=n EXACT,
+#              ISO 10993 tau=4 primary tests, J2=24-month long-term evaluation
+# ============================================================
+
+[[level]]
+name = "Biocompatibility"
+
+[[candidate]]
+id = "Cytotoxicity"
+label = "Cytotoxicity (ISO 10993-5, MTT/XTT assay, 24hr exposure=J2, cell viability >70%)"
+n6 = 0.80
+perf = 0.70
+power = 0.90
+cost = 0.90
+notes = "exposure=24hr=J2 EXACT, first gate, in-vitro, all materials must pass"
+
+[[candidate]]
+id = "Hemocompatibility"
+label = "Hemocompatibility (ISO 10993-4, hemolysis <2%=phi, platelet adhesion, thrombosis)"
+n6 = 0.80
+perf = 0.75
+power = 0.85
+cost = 0.80
+notes = "hemolysis_threshold=2%=phi EXACT, blood-contact devices, stent/valve critical"
+
+[[candidate]]
+id = "Osseointegration_12week"
+label = "Osseointegration 12-week (sigma=12 EXACT, bone-implant contact, histomorphometry)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.60
+notes = "weeks=12=sigma EXACT, gold standard timeline, BIC% measurement, in-vivo"
+
+[[candidate]]
+id = "Degradation_rate"
+label = "Degradation rate (Mg/Fe absorbable, 6-month target=n, controlled resorption)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+notes = "target=6months=n EXACT, match bone healing rate, no 2nd surgery removal"
+
+[[candidate]]
+id = "Immune_response"
+label = "Immune response (macrophage polarization, M1/M2=phi=2 balance, inflammation)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "M1_M2=phi=2 EXACT phenotypes, foreign body response, fibrous capsule"
+
+[[candidate]]
+id = "Sterilization_6method"
+label = "Sterilization 6-method validation (n=6 EXACT: EtO/gamma/e-beam/steam/plasma/UV)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.50
+notes = "methods=6=n EXACT, material-specific validation, FDA/ISO 11135/11137"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: hip joint 6-component system (n=6: stem/head/liner/cup/screw/cement),
+#              dental 12mm length=sigma, spinal 6-level fusion (n=6),
+#              stent 24-month follow-up=J2
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Hip_joint"
+label = "Hip joint (6-component system: stem/head/liner/cup/screw/cement, n=6 EXACT)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.55
+notes = "components=6=n EXACT, most common arthroplasty, 15-25yr survivorship"
+
+[[candidate]]
+id = "Knee_replacement"
+label = "Knee replacement (femoral/tibial/patellar, CoCr+UHMWPE, 12-year followup=sigma)"
+n6 = 0.80
+perf = 0.90
+power = 0.70
+cost = 0.50
+notes = "followup=12yr=sigma EXACT, bearing couple optimization, kinematics"
+
+[[candidate]]
+id = "Dental_implant"
+label = "Dental implant (Ti 12mm length=sigma, self-tapping, sandblasted+acid-etched)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "length=12mm=sigma EXACT, 97% success rate, osseointegrated fixture"
+
+[[candidate]]
+id = "Spinal_cage"
+label = "Spinal cage (6-level fusion=n EXACT, PEEK/Ti, interbody, lordosis restoration)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.50
+notes = "levels=6=n EXACT (max fusion), anterior/posterior/lateral approach"
+
+[[candidate]]
+id = "Cardiac_stent"
+label = "Cardiac stent (CoCr/drug-eluting, 24-month DAPT=J2, restenosis prevention)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+notes = "DAPT=24months=J2 EXACT, DES revolution, biodegradable next-gen"
+
+[[candidate]]
+id = "Cranial_plate"
+label = "Cranial plate (Ti mesh/PEEK, 6-point fixation=n EXACT, cranioplasty, CT-guided)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.45
+notes = "fixation_points=6=n EXACT, patient-specific 3D-printed, trauma/tumor"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Ti-6Al-4V is the gold standard for load-bearing implants
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ti_6Al_4V"
+then_level = 4
+then_ids = "Hip_joint,Dental_implant,Spinal_cage"
+
+# Ti-6Al-4V pairs well with anodization and nano-texture surfaces
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ti_6Al_4V"
+then_level = 1
+then_ids = "Anodization_12V,Nano_texture_6nm,Hydroxyapatite_coat"
+
+# CoCrMo for joint bearing surfaces
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CoCrMo_ortho"
+then_level = 4
+then_ids = "Hip_joint,Knee_replacement"
+
+# CoCrMo typically investment cast or CNC
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CoCrMo_ortho"
+then_level = 2
+then_ids = "Investment_casting,CNC_machining"
+
+# PEEK for spinal applications, injection molded
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PEEK_polymer"
+then_level = 4
+then_ids = "Spinal_cage,Cranial_plate"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PEEK_polymer"
+then_level = 2
+then_ids = "Injection_molding,CNC_machining"
+
+# Hydroxyapatite coating enables osseointegration
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Hydroxyapatite_coat"
+then_level = 3
+then_ids = "Osseointegration_12week,Immune_response"
+
+# 3D print SLM for patient-specific and porous designs
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "3D_print_SLM"
+then_level = 4
+then_ids = "Cranial_plate,Spinal_cage,Hip_joint"
+
+# Cardiac stent needs hemocompatibility
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Cardiac_stent"
+then_level = 3
+then_ids = "Hemocompatibility,Degradation_rate"
+
+# Drug-eluting surface pairs with cardiac stent and dental
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Drug_eluting"
+then_level = 4
+then_ids = "Cardiac_stent,Dental_implant"
+
+# Electrospinning scaffold for tissue engineering with degradation
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Electrospinning_6fiber"
+then_level = 3
+then_ids = "Degradation_rate,Immune_response"

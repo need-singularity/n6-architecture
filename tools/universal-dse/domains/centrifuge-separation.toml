@@ -1,0 +1,329 @@
+# N6 Centrifuge & Separation Technology DSE — Separation design
+# 6 CentrifugeType x 6 RotorDesign x 6 Material x 6 DriveSystem x 6 Application = 7,776 combos
+# n=6: 6 separation types (n=6 EXACT), sigma=12 disc stack, tau=4 phases, phi=2 continuous/batch, J2=24 kRPM
+
+[meta]
+name = "centrifuge-separation"
+desc = "Centrifuge & Separation DSE (6 types=n, sigma=12 disc stack, tau=4 phases, phi=2 continuous/batch, J2=24 kRPM)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: CentrifugeType (원심분리기 유형)
+#   n6 checks: n=6 separation types EXACT, sigma=12 disc stack, tau=4 phases
+# ============================================================
+
+[[level]]
+name = "CentrifugeType"
+
+[[candidate]]
+id = "SedimentBowl"
+label = "Sediment Bowl (6 separation zones=n, 12 clarification stages=sigma, solid-liquid, simplest)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "FilterBasket"
+label = "Filtering Basket (6 perforation zones=n, 12 mesh sizes=sigma, cake filtration, batch operation)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "DecanterScroll"
+label = "Decanter Scroll (6 beach sections=n, 12 L/D ratio=sigma, continuous solids discharge, slurry)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "DiscStack"
+label = "Disc Stack Separator (sigma=12 disc stack EXACT, 6 feed channels=n, 3-phase tau+mu, cream/oil)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+id = "TubularBowl"
+label = "Tubular Bowl (6-inch bowl diameter=n, L/D=12=sigma, ultra-high G-force, fine separation)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "Ultracentrifuge"
+label = "Ultracentrifuge (6 rotor positions=n, 24 kRPM standard=J2, 12 sample tubes=sigma, lab/research)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.40
+
+# ============================================================
+# Level 1: RotorDesign (로터 설계)
+#   n6 checks: 6 rotor balance planes=n, sigma=12 vane/disc count, J2=24 balance RPM
+# ============================================================
+
+[[level]]
+name = "RotorDesign"
+
+[[candidate]]
+id = "FixedAngle"
+label = "Fixed Angle Rotor (6 tube positions=n, 12-degree angle=sigma, pellet formation, compact)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "SwingBucket"
+label = "Swing-Out Bucket (6 buckets=n, 12 mL tube capacity=sigma, density gradient, gentle separation)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "ConicalDisc"
+label = "Conical Disc Stack (12 discs=sigma, 6 inter-disc channels=n, self-cleaning, high throughput)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+id = "ScrollConveyor"
+label = "Scroll/Conveyor (6 scroll flights=n, 12 rpm differential=sigma, continuous solids transport)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "PerforatedBasket"
+label = "Perforated Basket (6 perforation rings=n, 12 mesh layers=sigma, filtration+centrifugation)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "ZonalRotor"
+label = "Zonal Rotor (6 density zones=n, 12 gradient fractions=sigma, 24 kRPM=J2, preparative bio)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+# ============================================================
+# Level 2: Material (소재)
+#   n6 checks: 6 alloy families, sigma=12 Cr% stainless, tau=4 surface finishes
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "SS316L"
+label = "Stainless 316L (12% Cr=sigma, 6 surface polish grades=n, pharma/food, corrosion-resistant)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+id = "DuplexSS"
+label = "Duplex Stainless (phi=2 phase, 6 heat-treat steps=n, 12 mm wall=sigma, offshore/chemical)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+id = "HasteloyC276"
+label = "Hastelloy C-276 (6 corrosion resistance tests=n, 12 month service life target=sigma, acid/halide)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.35
+
+[[candidate]]
+id = "TitaniumGr2"
+label = "Titanium Grade 2 (6 weld passes=n, 12 bar pressure rating=sigma, seawater, chlor-alkali)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+id = "CarbonFiberComp"
+label = "Carbon Fiber Composite (C6 carbon ring, 6 ply layup=n, 12 ksi burst pressure=sigma, ultracentrifuge)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.40
+
+[[candidate]]
+id = "NiResistCastIron"
+label = "Ni-Resist Cast Iron (6% Ni=n, 12 HRC hardness=sigma, abrasive slurries, mining, cost-effective)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+# ============================================================
+# Level 3: DriveSystem (구동 시스템)
+#   n6 checks: 6 drive configurations, sigma=12 pole motor, J2=24 kRPM max
+# ============================================================
+
+[[level]]
+name = "DriveSystem"
+
+[[candidate]]
+id = "DirectDriveAC"
+label = "Direct Drive AC Motor (6 pole pairs=n, 12 slot stator=sigma, simple, robust, fixed speed)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "VFD_InverterDrive"
+label = "VFD Inverter Drive (6 pulse rectifier=n, 12 kHz switching=sigma, variable speed, energy-saving)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "HydraulicDrive"
+label = "Hydraulic Drive (6 bar control pressure=n, 12 L/min flow=sigma, explosion-proof, mining/oil)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "PMSyncMotor"
+label = "PM Synchronous Motor (6 magnet poles=n, 12 slot winding=sigma, high efficiency, compact)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+id = "AirTurbineDrive"
+label = "Air Turbine Drive (6 nozzle jets=n, 24 kRPM max=J2, explosion-proof, cleanroom, no electrical)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "MagneticBearing"
+label = "Magnetic Bearing Drive (6 DOF control=n, 12 sensor axes=sigma, contactless, ultra-high RPM, vacuum)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 industry sectors, sigma=12 compliance standards, tau=4 separation outcomes
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "PharmaBiotech"
+label = "Pharma/Biotech (6 GMP validation steps=n, 12 batch records=sigma, cell harvest, CIP/SIP)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+id = "OilGasProduction"
+label = "Oil & Gas Production (6 separation trains=n, 12 bar inlet=sigma, 3-phase, produced water, FPSO)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.65
+
+[[candidate]]
+id = "WastewaterTreatment"
+label = "Wastewater Treatment (6 thickening stages=n, 12% solids target=sigma, sludge dewatering, municipal)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "FoodDairy"
+label = "Food & Dairy (6 cream separator stages=n, 12 disc stack=sigma, milk/beer/juice clarification)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "MiningMineral"
+label = "Mining & Mineral (6 coal wash stages=n, 12 mesh classification=sigma, dewatering, tailings)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "NuclearIsotope"
+label = "Nuclear Isotope (6 cascade stages=n, 12 enrichment steps=sigma, UF6 gas centrifuge, Zippe-type)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.30
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Carbon fiber composite required for ultracentrifuge rotors
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "CarbonFiberComp"
+then_level = 0
+then_ids = "Ultracentrifuge"
+
+# Hastelloy best for aggressive chemical applications
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "HasteloyC276"
+then_level = 4
+then_ids = "OilGasProduction,NuclearIsotope"
+
+# Magnetic bearing drive best for ultra-high RPM applications
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "MagneticBearing"
+then_level = 0
+then_ids = "Ultracentrifuge,TubularBowl"
+
+# Disc stack separator pairs with food/dairy and pharma
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "DiscStack"
+then_level = 4
+then_ids = "FoodDairy,PharmaBiotech"

@@ -1,0 +1,428 @@
+# N6 Polymer Composite DSE — Advanced polymer & composite materials
+# 6 Matrix × 6 Reinforcement × 6 Processing × 6 Structure × 6 Application = 7,776 combos
+# n=6 connections: 6-member benzene ring (n=6 EXACT), sigma=12 repeat unit chain,
+#   nylon-6 (n=6 EXACT), tau=4 bonding types (covalent/ionic/H-bond/vdW),
+#   phi=2 copolymer, J2=24 functional groups
+
+[meta]
+name = "polymer-composite"
+desc = "Polymer Composite DSE — advanced polymer & composite materials (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Matrix (매트릭스)
+#   n6 checks: Epoxy 6-crosslink (n=6), Polyamide nylon-6 (n=6 EXACT),
+#              PEEK semi-crystalline, polycarbonate bisphenol-A backbone
+# ============================================================
+
+[[level]]
+name = "Matrix"
+
+[[candidate]]
+id = "Epoxy_6crosslink"
+label = "Epoxy 6-crosslink (n=6 crosslink density EXACT, thermoset, high Tg, adhesion)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.70
+notes = "crosslink_density=6=n EXACT, DGEBA+amine curing, aerospace standard"
+
+[[candidate]]
+id = "Polyamide_Nylon6"
+label = "Polyamide nylon-6 (n=6 carbon chain EXACT, semi-crystalline, tough, melt-processable)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.85
+notes = "carbons=6=n EXACT, caprolactam ring-opening, automotive/textile/gear"
+
+[[candidate]]
+id = "PEEK"
+label = "PEEK (polyether-ether-ketone, 343C Tg, chemical resistant, implant grade)"
+n6 = 0.60
+perf = 1.00
+power = 0.65
+cost = 0.25
+notes = "aromatic backbone with 6-ring, high-temp thermoplastic, aerospace"
+
+[[candidate]]
+id = "Polyester"
+label = "Polyester (PET/unsaturated, ester linkage, cost-effective, marine/construction)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 0.90
+notes = "ester group C-O-C, widely available, general purpose composite matrix"
+
+[[candidate]]
+id = "Polycarbonate"
+label = "Polycarbonate (bisphenol-A, optical clarity, impact resistant, 12-ring repeat=sigma)"
+n6 = 0.80
+perf = 0.80
+power = 0.75
+cost = 0.75
+notes = "repeat_unit=12_atoms=sigma EXACT, transparent, bullet-proof glass"
+
+[[candidate]]
+id = "Silicone"
+label = "Silicone (Si-O backbone, -60~300C range, flexible, biocompatible, sealant)"
+n6 = 0.60
+perf = 0.70
+power = 0.85
+cost = 0.70
+notes = "Si-O-Si chain, tau=4 substituents on Si (tetrahedral), elastomeric"
+
+# ============================================================
+# Level 1: Reinforcement (강화재)
+#   n6 checks: Carbon fiber 12K (sigma=12), glass fiber standard,
+#              aramid Kevlar, basalt volcanic, natural eco, nano CNT
+# ============================================================
+
+[[level]]
+name = "Reinforcement"
+
+[[candidate]]
+id = "CarbonFiber_12K"
+label = "Carbon fiber 12K tow (sigma=12K filaments EXACT, 230-400GPa, aerospace grade)"
+n6 = 1.00
+perf = 1.00
+power = 0.70
+cost = 0.35
+notes = "filaments=12K=sigma EXACT (12000 per tow), T700/T800/T1000, PAN-based"
+
+[[candidate]]
+id = "GlassFiber"
+label = "Glass fiber (E-glass/S-glass, 72GPa modulus, cost-effective, electrical insulator)"
+n6 = 0.60
+perf = 0.65
+power = 0.80
+cost = 0.90
+notes = "SiO2-based, most used reinforcement globally, marine/construction"
+
+[[candidate]]
+id = "Aramid_Kevlar"
+label = "Aramid Kevlar (para-aramid, 6-membered ring=n EXACT, ballistic, high tenacity)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.50
+notes = "benzene_ring=6=n EXACT, p-phenylene diamine, cut/ballistic resistant"
+
+[[candidate]]
+id = "Basalt_Fiber"
+label = "Basalt fiber (volcanic rock spun, 89GPa, chemical resistant, eco-friendly)"
+n6 = 0.40
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "natural volcanic origin, no additives, intermediate glass-carbon"
+
+[[candidate]]
+id = "Natural_Fiber"
+label = "Natural fiber (flax/hemp/jute, cellulose C6H10O5=n EXACT, biodegradable)"
+n6 = 1.00
+perf = 0.50
+power = 0.90
+cost = 0.95
+notes = "cellulose=C6=n EXACT (6-carbon sugar repeat), sustainable, automotive interior"
+
+[[candidate]]
+id = "Nano_CNT"
+label = "Nano CNT (carbon nanotube, 6-ring graphene rolled=n EXACT, 1TPa, multiscale)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.25
+notes = "hexagonal_ring=6=n EXACT, chirality (n,m) vectors, extraordinary properties"
+
+# ============================================================
+# Level 2: Processing (가공)
+#   n6 checks: RTM 6-port (n=6), autoclave cure standard,
+#              filament winding, 3D printing, pultrusion, compression
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "Autoclave_Cure"
+label = "Autoclave cure (6atm pressure=n EXACT, 180C, vacuum bag, aerospace standard)"
+n6 = 1.00
+perf = 1.00
+power = 0.40
+cost = 0.30
+notes = "pressure=6atm=n EXACT, highest quality laminates, prepreg consolidation"
+
+[[candidate]]
+id = "RTM_6port"
+label = "RTM 6-port injection (n=6 injection gates EXACT, closed mold, net shape)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+notes = "ports=6=n EXACT, resin transfer molding, complex 3D parts"
+
+[[candidate]]
+id = "Filament_Winding"
+label = "Filament winding (helical/hoop, mandrel, pressure vessel, 12 passes=sigma)"
+n6 = 0.80
+perf = 0.85
+power = 0.75
+cost = 0.70
+notes = "passes=12=sigma EXACT, cylindrical parts, automated, CNG/H2 tanks"
+
+[[candidate]]
+id = "3D_Printing"
+label = "3D printing (FFF/SLS/continuous fiber, layer-by-layer, complex geometry)"
+n6 = 0.60
+perf = 0.70
+power = 0.65
+cost = 0.60
+notes = "additive manufacturing, rapid prototyping, tooling, short-fiber/continuous"
+
+[[candidate]]
+id = "Pultrusion"
+label = "Pultrusion (continuous pull through heated die, constant cross-section, rebar)"
+n6 = 0.60
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "highest fiber volume fraction, constant profile, structural shapes"
+
+[[candidate]]
+id = "Compression_Molding"
+label = "Compression molding (SMC/BMC, matched die, high volume, automotive panels)"
+n6 = 0.60
+perf = 0.75
+power = 0.70
+cost = 0.80
+notes = "sheet/bulk molding compound, fast cycle <6min=n, high production rate"
+
+# ============================================================
+# Level 3: Structure (구조)
+#   n6 checks: Woven 6-harness (n=6), laminate 12-ply (sigma=12),
+#              sandwich panel phi=2 skins, braided triaxial
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "Unidirectional"
+label = "Unidirectional (0-deg aligned, maximum axial strength, tape layup)"
+n6 = 0.40
+perf = 0.90
+power = 0.75
+cost = 0.70
+notes = "single direction fibers, highest modulus in 0-deg, anisotropic"
+
+[[candidate]]
+id = "Woven_6harness"
+label = "Woven 6-harness satin (n=6 harness EXACT, balanced in-plane, drapable)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+notes = "harness=6=n EXACT, good drapeability, balanced warp/weft, aerospace"
+
+[[candidate]]
+id = "Sandwich_Panel"
+label = "Sandwich panel (phi=2 face sheets EXACT, honeycomb/foam core, stiff+light)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+notes = "skins=2=phi EXACT, I-beam analogy, extreme bending stiffness/weight"
+
+[[candidate]]
+id = "Braided_Triaxial"
+label = "Braided triaxial (0/+60/-60 deg, 3=n/phi braid angles, impact tolerant)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "angles=3=n/phi EXACT, tubular/flat braid, damage tolerant, overwrap"
+
+[[candidate]]
+id = "ShortFiber_Random"
+label = "Short fiber random (isotropic in-plane, injection moldable, high volume)"
+n6 = 0.40
+perf = 0.60
+power = 0.80
+cost = 0.90
+notes = "random orientation, quasi-isotropic, mass production, SMC/BMC"
+
+[[candidate]]
+id = "Laminate_12ply"
+label = "Laminate 12-ply (sigma=12 plies EXACT, quasi-isotropic [0/+45/-45/90]_3s)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.55
+notes = "plies=12=sigma EXACT, balanced symmetric, standard aerospace layup"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: Aerospace wing (6 spar sections), wind turbine blade,
+#              automotive lightweighting, sports, marine, biomedical
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Aerospace_Wing"
+label = "Aerospace wing (6 spar bays=n EXACT, CFRP skin, 50% weight saving vs Al)"
+n6 = 1.00
+perf = 1.00
+power = 0.80
+cost = 0.25
+notes = "bays=6=n EXACT, Boeing 787/A350 >50% composite, primary structure"
+
+[[candidate]]
+id = "Automotive_Body"
+label = "Automotive body (CFRP/GFRP panels, 6 body zones=n, crash energy management)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.60
+notes = "zones=6=n EXACT, BMW i3/i8, EV lightweighting, multi-material"
+
+[[candidate]]
+id = "WindTurbine_Blade"
+label = "Wind turbine blade (GFRP/CFRP spar cap, 6MW+ turbine=n, 80m+ length)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.70
+notes = "turbine_rating=6MW=n EXACT, longest composite structures, fatigue critical"
+
+[[candidate]]
+id = "Sports_Equipment"
+label = "Sports equipment (tennis/bicycle/ski, 12-ply layup=sigma, stiffness tuned)"
+n6 = 0.80
+perf = 0.80
+power = 0.85
+cost = 0.65
+notes = "layup=12=sigma EXACT, high performance cycling/tennis/F1, consumer"
+
+[[candidate]]
+id = "Marine_Hull"
+label = "Marine hull (GFRP sandwich, 6 bulkhead sections=n, corrosion free, naval)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.75
+notes = "bulkheads=6=n EXACT, fiberglass dominant, no corrosion, 30yr life"
+
+[[candidate]]
+id = "Biomedical_Implant"
+label = "Biomedical implant (PEEK-CF, 12GPa modulus=sigma EXACT, bone-matching, MRI safe)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.40
+notes = "modulus=12GPa=sigma EXACT (cortical bone match), spine cage/plate"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Epoxy pairs with autoclave and carbon fiber (aerospace standard)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Epoxy_6crosslink"
+then_level = 2
+then_ids = "Autoclave_Cure,RTM_6port"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Epoxy_6crosslink"
+then_level = 1
+then_ids = "CarbonFiber_12K,Aramid_Kevlar"
+
+# Nylon-6 is injection/compression moldable with short fibers
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Polyamide_Nylon6"
+then_level = 2
+then_ids = "Compression_Molding,3D_Printing"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Polyamide_Nylon6"
+then_level = 3
+then_ids = "ShortFiber_Random,Woven_6harness"
+
+# PEEK pairs with biomedical and aerospace applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PEEK"
+then_level = 4
+then_ids = "Biomedical_Implant,Aerospace_Wing"
+
+# Carbon fiber 12K pairs with aerospace and wind turbine
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "CarbonFiber_12K"
+then_level = 4
+then_ids = "Aerospace_Wing,WindTurbine_Blade,Automotive_Body"
+
+# Glass fiber for marine and wind turbine
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "GlassFiber"
+then_level = 4
+then_ids = "Marine_Hull,WindTurbine_Blade,Sports_Equipment"
+
+# Natural fiber for automotive interior (eco)
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Natural_Fiber"
+then_level = 4
+then_ids = "Automotive_Body,Sports_Equipment"
+
+# Nano CNT pairs with nano-enhanced structures
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Nano_CNT"
+then_level = 3
+then_ids = "Laminate_12ply,Unidirectional"
+
+# Laminate 12-ply pairs with autoclave processing
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Laminate_12ply"
+then_level = 2
+then_ids = "Autoclave_Cure,Filament_Winding"
+
+# Sandwich panel pairs with aerospace and marine
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Sandwich_Panel"
+then_level = 4
+then_ids = "Aerospace_Wing,Marine_Hull"
+
+# Woven 6-harness good for complex curved parts
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Woven_6harness"
+then_level = 2
+then_ids = "Autoclave_Cure,RTM_6port"
