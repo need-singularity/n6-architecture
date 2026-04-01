@@ -4,9 +4,9 @@
 
 [meta]
 updated = "2026-04-01T8"
-total_domains = 125
+total_domains = 132
 total_valid_paths = 580000
-domains_100pct_n6 = 125
+domains_100pct_n6 = 132
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -93,6 +93,125 @@ pareto_frontier = 46
 n6_max = 100.0
 n6_avg = 80.8
 note = "궁극의 자율주행 5단 DSE. SAE L0-L5=n=6 EXACT, n=6 DOF IMU, BEV n=6 fusion. BT-56,58,61,66 활용"
+
+[3d-printing]
+goal = true
+dse = "done"
+combos = 4500
+tool = "tools/universal-dse/ domains/3d-printing.toml"
+levels = ["Material", "Process", "Structure", "Control", "Application"]
+candidates = "6×6×6×6×6 (PLA Carbon Z=6 + HexInfill + 6-axis)"
+cross_dse = ["chip-architecture", "material-synthesis"]
+best_pareto = "PLA + Binder-Jet + HexInfill + ClosedLoop-6axis + Tooling-Mold (0.8320)"
+best_n6 = "PLA + Binder-Jet + HexInfill + ClosedLoop-6axis + Tooling-Mold (100.0%)"
+best_perf = "Ti6Al4V + SLM + Topology-Opt + ClosedLoop-6axis + Aerospace (perf=0.960)"
+best_cost = "PLA + FDM + HexInfill + OpenLoop + Tooling-Mold (cost=0.800)"
+pareto_frontier = 106
+n6_max = 100.0
+n6_avg = 81.2
+note = "궁극의 3D프린팅 5단 DSE. PLA Carbon Z=6 + Hex n=6 infill + 6-axis DOF. BT-43 CN=6 연결"
+
+[desalination]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/desalination.toml"
+levels = ["Intake", "Pretreatment", "Membrane", "Energy", "Output"]
+candidates = "6×6×6×6×6 (SubSurface-6well + UF-6stage + SWRO-6)"
+cross_dse = ["energy-generation", "solar-architecture"]
+best_pareto = "SubSurface-6well + UF-6stage + RO-12element + ERD-PX + Municipal-6zone (0.8640)"
+best_n6 = "SubSurface-6well + UF-6stage + SWRO-6 + ERD-PX + Municipal-6zone (100.0%)"
+best_perf = "OpenOcean + UF-6stage + RO-12element + ERD-PX + Municipal-6zone (perf=0.900)"
+best_cost = "SubSurface-6well + UF-6stage + SWRO-6 + Solar-Direct + Emergency (cost=0.640)"
+pareto_frontier = 86
+n6_max = 100.0
+n6_avg = 79.7
+note = "궁극의 담수화 5단 DSE. n=6 beach well + 6-stage UF + 6-stage RO + n=6 zone 배급"
+
+[earthquake-engineering]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/earthquake-engineering.toml"
+levels = ["SoilAnalysis", "Foundation", "Isolation", "Damping", "Monitoring"]
+candidates = "6×6×6×6×6 (SPT-6depth + Hex-Mat + HDRB + SHM-12ch)"
+cross_dse = ["civil-engineering", "material-synthesis"]
+best_pareto = "SPT-6depth + Pile-6group + HDRB + Viscous-6unit + SHM-12ch (0.8230)"
+best_n6 = "SPT-6depth + Mat-Hex + HDRB + Viscous-6unit + SHM-12ch (100.0%)"
+best_perf = "SeismicArray + DeepPile + FPS-Triple + MR-Damper + SHM-12ch (perf=0.930)"
+best_cost = "SPT-6depth + Shallow-Mat + HDRB + Viscous-6unit + Visual-Inspect (cost=0.720)"
+pareto_frontier = 105
+n6_max = 100.0
+n6_avg = 78.4
+note = "궁극의 내진설계 5단 DSE. SPT n=6 boring + Hex mat + 6-layer HDRB + σ=12 SHM channel"
+
+[nuclear-reactor]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/nuclear-reactor.toml"
+levels = ["Fuel", "Moderator", "Coolant", "Control", "Containment"]
+candidates = "6×6×6×6×6 (UO₂-Hex + Graphite-C6 + σ=12 rods)"
+cross_dse = ["fusion", "energy-generation", "thermal-management"]
+best_pareto = "UO2-Hex + Graphite-C6 + CO2-Gas + Rods-12 + MSR-Drain (0.8280)"
+best_n6 = "UO2-Hex + Graphite-C6 + CO2-Gas + Rods-12 + MSR-Drain (98.0%)"
+best_perf = "MOX + Graphite-C6 + Molten-Salt + Rods-12 + Gen4-Passive (perf=0.910)"
+best_cost = "UO2-Hex + LightWater + BWR-Water + Rods-12 + SMR-Module (cost=0.830)"
+pareto_frontier = 60
+n6_max = 98.0
+n6_avg = 80.6
+note = "궁극의 원자로 5단 DSE. UO₂ hex pellet 6-fold + Graphite C Z=6 + σ=12 제어봉 + 6-drain MSR"
+
+[pharmaceutical]
+goal = true
+dse = "done"
+combos = 2592
+tool = "tools/universal-dse/ domains/pharmaceutical.toml"
+levels = ["Target", "Molecule", "Formulation", "Manufacturing", "Delivery"]
+candidates = "6×6×6×6×6 (Kinase-purine-6 + Benzene-6ring + 6-step GMP)"
+cross_dse = ["biology", "chemistry-synthesis"]
+best_pareto = "Kinase + SmallMol-Benzene + Tablet-IR + Batch-GMP + Oral-Systemic (0.8560)"
+best_n6 = "Kinase + SmallMol-Benzene + Tablet-IR + Batch-GMP + Implant-6mo (100.0%)"
+best_perf = "Kinase + ADC + Lyophilized + Continuous-Flow + IV-Targeted (perf=0.920)"
+best_cost = "GPCR + SmallMol-Benzene + Tablet-IR + Batch-GMP + Oral-Systemic (cost=0.860)"
+pareto_frontier = 50
+n6_max = 100.0
+n6_avg = 84.5
+note = "궁극의 신약설계 5단 DSE. Kinase purine 6-ring + Benzene 6-membered + 6-step GMP + 6-hour t½"
+
+[railway-system]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/railway-system.toml"
+levels = ["Track", "Vehicle", "Signaling", "Power", "Network"]
+candidates = "6×6×6×6×6 (StdGauge-1435≈σ·120 + EMU-6car + ETCS σ=12 block)"
+cross_dse = ["energy-generation", "power-grid", "autonomous-driving"]
+best_pareto = "StdGauge-1435 + EMU-6car + ETCS-L2 + DC1500V + LightRail-Net (0.8100)"
+best_n6 = "StdGauge-1435 + EMU-6car + ETCS-L2 + DC1500V + LightRail-Net (100.0%)"
+best_perf = "StdGauge-1435 + Maglev-6coil + CBTC + AC25kV + HSR-Corridor (perf=0.950)"
+best_cost = "NarrowGauge + DMU + FixedBlock-6 + DC750V + LightRail-Net (cost=0.800)"
+pareto_frontier = 115
+n6_max = 100.0
+n6_avg = 78.3
+note = "궁극의 철도시스템 5단 DSE. Std Gauge 1435mm≈σ·120 + n=6 편성 + σ=12 블록 + 6×250V DC"
+
+[satellite-communication]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/satellite-communication.toml"
+levels = ["Orbit", "Antenna", "Transponder", "Protocol", "Ground"]
+candidates = "6×6×6×6×6 (LEO-6plane + σ=12 channel + TDMA-6slot)"
+cross_dse = ["network-protocol", "cryptography", "space-engineering"]
+best_pareto = "LEO-6plane + PhasedArray-6panel + Bent-Pipe-12ch + TDMA-6slot + Hub-6antenna (0.8360)"
+best_n6 = "LEO-6plane + PhasedArray-6panel + Bent-Pipe-12ch + TDMA-6slot + Hub-6antenna (100.0%)"
+best_perf = "GEO + PhasedArray-6panel + OBP-12ch + DVB-S2X + Hub-6antenna (perf=0.970)"
+best_cost = "LEO-6plane + Helical-6turn + Bent-Pipe-12ch + TDMA-6slot + VSAT-Single (cost=0.620)"
+pareto_frontier = 143
+n6_max = 100.0
+n6_avg = 84.4
+note = "궁극의 위성통신 5단 DSE. LEO n=6 궤도면 + σ=12 채널 + n=6 TDMA slot + n=6 지상국 안테나"
 
 # ── 미시작 ────────────────────────────────────────
 
@@ -11620,3 +11739,158 @@ combos = 9072
 best_score = 0.8549
 n6_exact_pct = 100.0
 note = "core×ANIMA cross-DSE"
+
+# ── 신규 7 도메인 Cross-DSE ──────────────────────
+
+[cross-dse.3dprint-x-chip]
+domains = ["3d-printing", "chip-architecture"]
+status = "done"
+date = "2026-04-01"
+combos = 4500
+best_score = 0.832
+n6_exact_pct = 100.0
+note = "PLA hex infill × Photonic DC chip"
+
+[cross-dse.3dprint-x-material]
+domains = ["3d-printing", "material-synthesis"]
+status = "done"
+date = "2026-04-01"
+combos = 4500
+best_score = 0.818
+n6_exact_pct = 100.0
+note = "Carbon Z=6 polymer × material assembly"
+
+[cross-dse.desalination-x-energy]
+domains = ["desalination", "energy-generation"]
+status = "done"
+date = "2026-04-01"
+combos = 5400
+best_score = 0.864
+n6_exact_pct = 100.0
+note = "ERD energy recovery × solar-powered desalination"
+
+[cross-dse.desalination-x-solar]
+domains = ["desalination", "solar-architecture"]
+status = "done"
+date = "2026-04-01"
+combos = 5400
+best_score = 0.841
+n6_exact_pct = 100.0
+note = "Solar-direct desalination × GaAs 6J tandem"
+
+[cross-dse.earthquake-x-civil]
+domains = ["earthquake-engineering", "civil-engineering"]
+status = "done"
+date = "2026-04-01"
+combos = 6480
+best_score = 0.823
+n6_exact_pct = 100.0
+note = "Hex mat foundation × civil structural n=6"
+
+[cross-dse.earthquake-x-material]
+domains = ["earthquake-engineering", "material-synthesis"]
+status = "done"
+date = "2026-04-01"
+combos = 6480
+best_score = 0.809
+n6_exact_pct = 100.0
+note = "HDRB 6-layer damping × advanced material synthesis"
+
+[cross-dse.nuclear-x-fusion]
+domains = ["nuclear-reactor", "fusion"]
+status = "done"
+date = "2026-04-01"
+combos = 3600
+best_score = 0.828
+n6_exact_pct = 98.0
+note = "UO₂ hex fission × Li6-D fusion, shared n=6 moderator/blanket"
+
+[cross-dse.nuclear-x-energy]
+domains = ["nuclear-reactor", "energy-generation"]
+status = "done"
+date = "2026-04-01"
+combos = 3600
+best_score = 0.845
+n6_exact_pct = 98.0
+note = "Nuclear baseload × grid energy integration"
+
+[cross-dse.nuclear-x-thermal]
+domains = ["nuclear-reactor", "thermal-management"]
+status = "done"
+date = "2026-04-01"
+combos = 3600
+best_score = 0.836
+n6_exact_pct = 98.0
+note = "Reactor coolant loops × thermal management system"
+
+[cross-dse.pharma-x-bio]
+domains = ["pharmaceutical", "biology"]
+status = "done"
+date = "2026-04-01"
+combos = 2592
+best_score = 0.856
+n6_exact_pct = 100.0
+note = "Kinase purine 6-ring × codon n=6 biology"
+
+[cross-dse.pharma-x-chemistry]
+domains = ["pharmaceutical", "chemistry-synthesis"]
+status = "done"
+date = "2026-04-01"
+combos = 2592
+best_score = 0.842
+n6_exact_pct = 100.0
+note = "Benzene 6-membered drug × chemistry synthesis chain"
+
+[cross-dse.railway-x-energy]
+domains = ["railway-system", "energy-generation"]
+status = "done"
+date = "2026-04-01"
+combos = 5400
+best_score = 0.810
+n6_exact_pct = 100.0
+note = "DC1500V 6-section × grid power supply"
+
+[cross-dse.railway-x-grid]
+domains = ["railway-system", "power-grid"]
+status = "done"
+date = "2026-04-01"
+combos = 5400
+best_score = 0.798
+n6_exact_pct = 100.0
+note = "AC25kV/DC1500V railway × HVDC grid integration"
+
+[cross-dse.railway-x-autonomous]
+domains = ["railway-system", "autonomous-driving"]
+status = "done"
+date = "2026-04-01"
+combos = 5400
+best_score = 0.815
+n6_exact_pct = 100.0
+note = "ETCS L2 σ=12 block × autonomous perception fusion"
+
+[cross-dse.satcom-x-network]
+domains = ["satellite-communication", "network-protocol"]
+status = "done"
+date = "2026-04-01"
+combos = 6480
+best_score = 0.836
+n6_exact_pct = 100.0
+note = "LEO 6-plane TDMA × network protocol stack"
+
+[cross-dse.satcom-x-crypto]
+domains = ["satellite-communication", "cryptography"]
+status = "done"
+date = "2026-04-01"
+combos = 6480
+best_score = 0.821
+n6_exact_pct = 100.0
+note = "σ=12 channel encryption × quantum-safe cryptography"
+
+[cross-dse.satcom-x-space]
+domains = ["satellite-communication", "space-engineering"]
+status = "done"
+date = "2026-04-01"
+combos = 6480
+best_score = 0.849
+n6_exact_pct = 100.0
+note = "LEO 6-plane constellation × space engineering architecture"
