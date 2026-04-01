@@ -1,0 +1,337 @@
+# N6 Thermal Storage DSE — Thermal energy storage
+# 6 Medium x 6 Container x 6 HeatExchanger x 6 Control x 6 Application = 7,776 combos
+# n=6: 6 storage media types, sigma=12 temperature zones, phase change
+
+[meta]
+name = "thermal-storage"
+desc = "Thermal Storage DSE (6 media types, sigma=12 temperature zones, phase change latent heat)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Medium (축열재)
+#   n6 checks: 6 storage media types, sigma=12 temp zones, tau=4 phase states
+# ============================================================
+
+[[level]]
+name = "Medium"
+
+[[candidate]]
+id = "MoltenSalt"
+label = "Molten Salt (6 salt compositions=n, 12 temp zones 200-800C=sigma, 4 thermal cycles=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "PCM_Paraffin"
+label = "PCM Paraffin (6 melting points=n, 12 encapsulation layers=sigma, 4 phase transitions=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "ConcreteTES"
+label = "Concrete TES (6 aggregate types=n, 12 embedded pipes=sigma, 4 concrete grades=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+id = "SandBattery"
+label = "Sand Battery (6 sand grades=n, 12 heating zones=sigma, 4 insulation layers=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "IceStorage"
+label = "Ice Storage (6 ice banks=n, 12h charge/discharge cycle=sigma, 4 glycol concentrations=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "ThermochemTCES"
+label = "Thermochemical TCES (6 reaction pairs=n, 12x energy density vs sensible=sigma, 24h storage=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+# ============================================================
+# Level 1: Container (용기)
+#   n6 checks: 6 container geometries, sigma=12 insulation layers, tau=4 pressure ratings
+# ============================================================
+
+[[level]]
+name = "Container"
+
+[[candidate]]
+id = "SteelTank"
+label = "Steel Tank (6 tank sizes=n, 12 insulation cm=sigma, 4 pressure ratings=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "UndergroundPit"
+label = "Underground Pit (6 excavation depths=n, 12 liner layers=sigma, 4 geological formations=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+id = "ModularBlock"
+label = "Modular Block (6 stackable units=n, 12 connection ports=sigma, 4 thermal conductivities=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "VacuumInsulated"
+label = "Vacuum Insulated Vessel (6 shell layers=n, 12 mbar vacuum level=sigma, 4 getter types=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "BoreholeArray"
+label = "Borehole TES Array (6 borehole clusters=n, 12 m depth per bore=sigma, 4 soil types=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+id = "CeramicShell"
+label = "Ceramic Shell (6 ceramic compositions=n, 12 mm wall thickness=sigma, 4 coating types=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+# ============================================================
+# Level 2: HeatExchanger (열교환기)
+#   n6 checks: 6 HX types, sigma=12 tube passes, tau=4 flow arrangements
+# ============================================================
+
+[[level]]
+name = "HeatExchanger"
+
+[[candidate]]
+id = "ShellTube"
+label = "Shell-and-Tube (6 baffle configurations=n, 12 tube passes=sigma, 4 flow arrangements=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "PlateHX"
+label = "Plate Heat Exchanger (6 plate patterns=n, 12 channel pairs=sigma, 4 gasket materials=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "FinTubeHX"
+label = "Finned Tube (6 fin geometries=n, 12 fins per inch=sigma, 4 tube materials=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "CoilInTank"
+label = "Coil-in-Tank (6 coil circuits=n, 12 coil turns=sigma, 4 flow rates=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "DirectContact"
+label = "Direct Contact HX (6 spray nozzles=n, 12 contact stages=sigma, 4 flow countercurrent=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "MicroChannelHX"
+label = "Microchannel HX (6 layer stacks=n, 12 um channel width=sigma, 24 parallel channels=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+# ============================================================
+# Level 3: Control (제어)
+#   n6 checks: 6 control loops, sigma=12 sensors, tau=4 operating modes
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+id = "PID_Classic"
+label = "PID Control (6 PID loops=n, 12 sensor inputs=sigma, 4 setpoint modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "MPC_Predictive"
+label = "Model Predictive Control (6 prediction horizons=n, 12 state variables=sigma, 4 constraint sets=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "FuzzyLogic"
+label = "Fuzzy Logic Control (6 fuzzy sets=n, 12 rule bases=sigma, 4 defuzzification methods=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "RLAgent"
+label = "RL Agent Control (6 action space dims=n, 12 reward signals=sigma, 4 policy networks=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+[[candidate]]
+id = "ThermoclineTrack"
+label = "Thermocline Tracking (6 temp probe depths=n, 12 thermocline positions=sigma, 4 charge strategies=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "GridResponsive"
+label = "Grid-Responsive Control (6 demand response modes=n, 12 price signals=sigma, 24h scheduling=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.65
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 application sectors, sigma=12 use cases, tau=4 scale tiers
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "CSP_Storage"
+label = "CSP Plant Storage (6 solar field zones=n, 12h storage capacity=sigma, 4 turbine modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "DistrictHeat"
+label = "District Heating (6 distribution zones=n, 12 subscriber substations=sigma, 4 seasonal modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "IndustrialWaste"
+label = "Industrial Waste Heat (6 process heat streams=n, 12 recovery exchangers=sigma, 4 temp tiers=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "BuildingHVAC"
+label = "Building HVAC TES (6 zone controllers=n, 12h night charging=sigma, 4 comfort setpoints=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "PowerToHeat"
+label = "Power-to-Heat (6 resistive heater banks=n, 12 MW capacity=sigma, 4 grid flexibility modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.65
+
+[[candidate]]
+id = "CarnotBattery"
+label = "Carnot Battery (6 HP+TES+ORC stages=n, 12h roundtrip=sigma, 24 MWh capacity=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Molten salt requires ceramic shell or steel tank
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "MoltenSalt"
+then_level = 1
+then_ids = "SteelTank,CeramicShell"
+
+# Ice storage for building HVAC applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "IceStorage"
+then_level = 4
+then_ids = "BuildingHVAC,DistrictHeat"
+
+# Thermochemical needs microchannel HX for high transfer
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ThermochemTCES"
+then_level = 2
+then_ids = "MicroChannelHX,DirectContact"
+
+# CSP storage best with molten salt medium
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "CSP_Storage"
+then_level = 0
+then_ids = "MoltenSalt,ThermochemTCES"
+
+# Carnot battery uses MPC predictive control
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "CarnotBattery"
+then_level = 3
+then_ids = "MPC_Predictive,RLAgent"
