@@ -934,6 +934,19 @@ Diamond NV-center(C Z=6) 양자 센서가 ppq 수준 CO2 검출을 가능하게 
 
 ---
 
+## Verification Status
+
+이 문서의 주장에 대한 독립 검증 결과 ([verification.md](verification.md)):
+
+| 가설 | 주장 | 등급 | 비고 |
+|------|------|------|------|
+| H-CC-46 | 6 sensor types | CLOSE | 실제 3-8종. 6은 합리적 범위 |
+| H-CC-56 | RISC-V N6 6-stage | WEAK | Pipeline 단계 수는 μarch 선택. 5-7 일반적 |
+
+**정직 요약**: Level 3은 BT-56/59 칩 설계 프레임워크에 기반. 센서 수, 파이프라인 단계는 설계 범위 내이나 물리 필연은 아님. 양자센서는 TRL 1-2.
+
+---
+
 ## 17. Links
 
 - [goal.md](goal.md) — 8단 아키텍처 로드맵

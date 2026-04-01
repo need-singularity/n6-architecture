@@ -45,13 +45,13 @@
 
 ---
 
-### H-CC-03: [C6mim] Ionic Liquid CO2 Solubility Enhancement
+### H-CC-03: [C6mim] Ionic Liquid CO2 Solubility Enhancement — **RETIRED**
 
 **Category**: 소재
 **n=6 Connection**: 1-hexyl-3-methylimidazolium [C6mim] has alkyl chain length = 6 = n EXACT. CO2 solubility enhancement ratio vs non-C6 IL ~ n/tau = 1.5.
-**Prediction**: [C6mim][Tf2N] CO2 solubility at 1 bar/298K = 1.5 times (n/tau) that of [C2mim][Tf2N] and [C4mim][Tf2N]. Expected value: ~0.15 mol fraction vs ~0.10 for C2/C4 analogues.
-**Verification**: Measure CO2 absorption isotherms in [CXmim][Tf2N] series (X=2,4,6,8,10) at 298K/1 bar. Plot solubility vs chain length. Confirm C6 is local maximum and ratio to C2/C4 ~ 1.5.
-**Grade**: UNVERIFIED
+**Prediction**: ~~[C6mim][Tf2N] CO2 solubility at 1 bar/298K = 1.5 times (n/tau) that of [C2mim][Tf2N] and [C4mim][Tf2N].~~
+**RETIRED**: CO2 solubility in [CXmim][Tf2N] increases monotonically with alkyl chain length (C2 < C4 < C6 < C8 < C10). C6 is NOT a local maximum. Longer chains dissolve more CO2 due to increased hydrophobicity and free volume. The n=6 connection is coincidental.
+**Grade**: FAIL — RETIRED
 **Related BT**: BT-27 (Carbon-6 chain)
 
 ---
@@ -135,13 +135,13 @@
 
 ## Category 2: 공정 n=6 (H-CC-11 ~ H-CC-20)
 
-### H-CC-11: TSA Optimal Cycle = 6 Stages
+### H-CC-11: TSA Cycle Operational Phases = 6
 
 **Category**: 공정
-**n=6 Connection**: Temperature Swing Adsorption optimal cycle has exactly 6 stages = n EXACT: (1) adsorb, (2) heat, (3) desorb, (4) cool, (5) purge, (6) reset. Fewer stages waste energy; more stages add complexity without benefit.
-**Prediction**: 6-stage TSA achieves > 95% CO2 recovery and > 95% purity simultaneously. 4-stage TSA (tau): recovery drops to < 85%. 8-stage (sigma-tau): marginal improvement < 2% but CAPEX increases 30%.
-**Verification**: Model and experimentally test 4, 5, 6, 7, 8-stage TSA cycles on identical MOF-74 bed. Measure recovery, purity, energy per mol CO2, and cycle time. Confirm 6-stage Pareto optimality.
-**Grade**: UNVERIFIED
+**n=6 Connection**: Temperature Swing Adsorption has 2 primary stages (adsorb/desorb), but the full operational cycle has 6 sub-phases: (1) adsorb, (2) heat, (3) desorb, (4) purge, (5) cool, (6) reset. This is a phase decomposition, not 6 independent stages.
+**Prediction**: ~~6-stage TSA achieves > 95% CO2 recovery.~~ Corrected: Climeworks commercial DAC uses a simple 2-stage cycle (adsorb at ambient, heat-desorb under vacuum). The 6 operational sub-phases exist within those 2 stages, but "6-stage" overstates the independence of these steps.
+**Verification**: Climeworks (Orca/Mammoth) confirmed as 2-stage. Industrial TSA uses 3-4 steps. 6 as operational phase count is defensible but WEAK.
+**Grade**: WEAK (corrected from FAIL)
 **Related BT**: BT-94 (CO2 capture energy n=6 law)
 
 ---
@@ -157,35 +157,33 @@
 
 ---
 
-### H-CC-13: MECS Electrochemical Optimal Cell Stack = 6
+### H-CC-13: MECS Electrochemical Cell Stack = 6 (Design Choice)
 
 **Category**: 공정
-**n=6 Connection**: Moisture-Enhanced CO2 Sorbent or electrochemical pH-swing optimal cell stack = 6 = n EXACT. Voltage per cell ~ 1V = R(6). Total stack voltage = 6V = n.
-**Prediction**: 6-cell electrochemical stack achieves CO2 separation at 40 kJ/mol (phi * W_min). Below 6 cells: insufficient pH swing. Above 6: ohmic losses dominate. Energy efficiency peaks at 50% (sopfr/sigma-phi) for the 6-cell configuration.
-**Verification**: Build electrochemical pH-swing cells in series (2, 4, 6, 8, 10 cells). Measure CO2 capture rate, energy consumption per mol, and Faradaic efficiency. Plot efficiency vs cell count.
-**Grade**: UNVERIFIED
+**n=6 Connection**: Electrochemical pH-swing cell stack = 6 = n. Voltage per cell ~ 1V = R(6). Total stack voltage = 6V = n.
+**Prediction**: ~~6-cell stack achieves optimal CO2 separation.~~ Corrected: Cell count is equipment-dependent and determined by voltage requirements and manufacturing constraints. 6 is a possible design choice, not a physical optimum. No evidence for 6-cell preference in electrochemical literature.
+**Verification**: Stack sizing depends on target voltage, current density, and manufacturing. No fundamental reason for 6.
+**Grade**: WEAK (corrected from FAIL — design choice, not physics)
 **Related BT**: BT-94, BT-95 (Carbon Cycle n=6 loop)
 
 ---
 
-### H-CC-14: Membrane Cascade Optimal Stage Count = 6
+### H-CC-14: Membrane Cascade Optimal Stage Count = 6 — **RETIRED**
 
 **Category**: 공정
-**n=6 Connection**: For 99.9% CO2 purity from 420 ppm feed, the optimal membrane cascade = 6 stages = n EXACT. Each stage enriches by approximately one order of magnitude: 420ppm -> 4200ppm -> 4.2% -> 42% -> 99% -> 99.9% -> 99.99%.
-**Prediction**: 6-stage membrane cascade achieves 99.9% purity at minimum total membrane area. 4 stages (tau): max purity 99%. 5 stages (sopfr): 99.5%. 6 stages (n): 99.9%. 7+ stages: diminishing returns < 0.05%/stage.
-**Verification**: Model multi-stage membrane cascade using validated transport equations (solution-diffusion). Optimize each stage cut and recycle. Plot purity vs stage count and total area vs stage count.
-**Grade**: UNVERIFIED
+**n=6 Connection**: ~~For 99.9% CO2 purity from 420 ppm feed, the optimal membrane cascade = 6 stages.~~
+**RETIRED**: Peer-reviewed membrane literature consistently shows 2-3 stages as optimal. Post-combustion (10-15% CO2): 2-3 stages [Merkel et al., J Membr Sci 2010]. Biogas (40% CO2): 2 stages [Scholz et al., 2013]. The energy penalty of recompression makes >3 stages counterproductive for nearly all CO2 concentrations. 6 stages has never been proposed as optimal.
+**Grade**: FAIL — RETIRED
 **Related BT**: BT-94
 
 ---
 
-### H-CC-15: Cryogenic Separation Optimal Temperature = -48C
+### H-CC-15: Cryogenic Separation Optimal Temperature = -48C — **RETIRED**
 
 **Category**: 공정
-**n=6 Connection**: Optimal cryogenic CO2 desublimation temperature = -48C = -(sigma * tau) EXACT. At this temperature, CO2 forms dry ice while N2/O2 remain gaseous, maximizing phase separation efficiency.
-**Prediction**: CO2 frost point at 420 ppm partial pressure in air occurs at -48 +/- 3 C. Cryogenic capture efficiency at -48C exceeds 95%. At -40C: efficiency drops to ~80%. At -60C: marginal gain < 2% but energy cost increases 40%.
-**Verification**: Calculate CO2 vapor-solid equilibrium at 420 ppm using Antoine equation. Experimentally verify frost point in a controlled cryogenic chamber with flue gas simulant. Measure capture efficiency vs temperature.
-**Grade**: UNVERIFIED
+**n=6 Connection**: ~~Optimal cryogenic CO2 desublimation temperature = -48C = -(sigma * tau) EXACT.~~
+**RETIRED**: CO2 sublimation/desublimation occurs at -78.5C at 1 atm. At -48C, CO2 is still entirely gaseous at atmospheric pressure. You need at least -78.5C for solid CO2 formation at 1 atm, or significantly elevated pressure for -48C liquefaction. This is a basic phase diagram error.
+**Grade**: FAIL — RETIRED
 **Related BT**: BT-94
 
 ---
@@ -258,13 +256,13 @@
 
 ---
 
-### H-CC-22: Packed Bed Optimal Tube Count = 6
+### H-CC-22: Packed Bed Tube Count = 6 (Design Choice)
 
 **Category**: 반응기
-**n=6 Connection**: Optimal number of parallel tubes in a multi-tubular packed bed reactor = 6 = n EXACT. This balances heat transfer uniformity (more tubes = better) with manifold complexity (fewer = simpler).
-**Prediction**: 6-tube packed bed achieves < 5C temperature variation across all tubes during TSA cycle. 3-tube: 12C variation. 12-tube (sigma): 2C variation but 3x manifold cost. 6-tube is Pareto optimal for cost-performance.
-**Verification**: Build and test multi-tubular reactors with 3, 6, 9, 12 tubes (identical tube diameter, total sorbent mass). Map temperature profiles during 100 TSA cycles. Plot thermal uniformity and total cost vs tube count.
-**Grade**: UNVERIFIED
+**n=6 Connection**: Parallel tubes in a multi-tubular packed bed reactor = 6 = n.
+**Prediction**: ~~6-tube packed bed is Pareto optimal.~~ Corrected: Tube count is determined by throughput requirements and heat transfer design, not any fundamental constant. 6 is a modular design choice. No peer-reviewed evidence supports 6-tube as universally optimal.
+**Verification**: Tube count scales with plant throughput. No basis for 6 as a preferred configuration.
+**Grade**: WEAK (corrected from FAIL — design choice, not physics)
 **Related BT**: BT-94
 
 ---
@@ -280,24 +278,23 @@
 
 ---
 
-### H-CC-24: Rotating Wheel Optimal Sector Count = 6 (Climeworks Pattern)
+### H-CC-24: Rotating Wheel Sector Count = 6 (Corrected)
 
 **Category**: 반응기
-**n=6 Connection**: Rotating wheel DAC contactor (Climeworks-type) divides into 6 sectors = n EXACT: 2 adsorbing + 2 desorbing + 1 heating + 1 cooling. The 6-sector design maximizes duty cycle.
-**Prediction**: 6-sector rotating wheel achieves 83% duty cycle (sopfr/n = 5/6) with continuous CO2 output. 4-sector (tau): 50% duty. 8-sector (sigma-tau): 87% duty but phi times mechanical complexity. Climeworks Gen2 converges to 6 sectors.
-**Verification**: Examine Climeworks patent filings and technical publications for sector count. Build lab-scale rotating contactor with 4, 6, 8 sectors. Measure capture rate, energy efficiency, and mechanical reliability over 1000 rotations.
-**Grade**: UNVERIFIED
+**n=6 Connection**: Rotating wheel DAC contactor divides into 6 sectors = n.
+**Prediction**: ~~Climeworks-type rotating wheel uses 6 sectors.~~ Corrected: Climeworks uses fixed modular boxes, NOT rotary wheels. Svante and other companies use rotary systems, but sector count varies by design and is proprietary. The original hypothesis mischaracterized the technology.
+**Verification**: Climeworks technology is well-documented as fixed modular (Gebald et al., ES&T 2011; patents WO2014170184). Svante uses rotary but sector count is proprietary.
+**Grade**: WEAK (corrected from FAIL — technology mischaracterized, but rotary designs exist elsewhere)
 **Related BT**: BT-94, BT-95
 
 ---
 
-### H-CC-25: Hollow Fiber Optimal Outer Diameter = 6mm
+### H-CC-25: Hollow Fiber Optimal Outer Diameter = 6mm — **RETIRED**
 
 **Category**: 반응기
-**n=6 Connection**: Hollow fiber sorbent module optimal fiber OD = 6 mm = n EXACT. This balances gas permeation rate (favors thin fibers) with manufacturing robustness and pressure tolerance (favors thick).
-**Prediction**: Hollow fiber sorbent modules at OD=6mm achieve maximum volumetric productivity (ton CO2/m3/day). At OD=3mm: fragile, high breakage rate (>5%). At OD=12mm (sigma): low surface-to-volume ratio, 40% less productive. At 6mm: optimal.
-**Verification**: Fabricate sorbent-loaded hollow fibers at OD = 3, 4, 5, 6, 7, 8, 12 mm. Assemble identical module volumes. Run TSA cycles for 1000 hours. Measure productivity, breakage rate, and pressure drop.
-**Grade**: UNVERIFIED
+**n=6 Connection**: ~~Hollow fiber sorbent module optimal fiber OD = 6 mm = n EXACT.~~
+**RETIRED**: Standard hollow fiber membrane OD is 0.2-1.0 mm. 6mm is catastrophically wrong -- fibers that large would have terrible surface-to-volume ratio, defeating the entire purpose of hollow fiber geometry. This is a factual error off by an order of magnitude.
+**Grade**: FAIL — RETIRED
 **Related BT**: BT-94
 
 ---
@@ -436,13 +433,12 @@
 
 ---
 
-### H-CC-38: CO2 Critical Temperature n=6 Encoding
+### H-CC-38: CO2 Critical Temperature n=6 Encoding — **HONEST FAIL**
 
 **Category**: 열역학
-**n=6 Connection**: CO2 critical temperature T_c = 304.13 K ~ sigma^2/sopfr + n = 144/5 + 6 = 28.8 + 6 = 34.8... Alternative: T_c = 304 ~ 300 + tau = 304 (0.04% error). The proximity to 300K (room temp) makes supercritical CO2 transport practical.
-**Prediction**: CO2 critical temperature encodes n=6 arithmetic: 304.13 K = 300 + tau + 0.13, where 300 = sigma * (sigma + sigma + mu) / mu = trivial, but tau = 4 correction is EXACT to 0.04%.
-**Verification**: Verify NIST CO2 critical point data. Test multiple n=6 arithmetic expressions. Compute best-fit residual. Compare with random number baseline (falsifiability z-score).
-**Grade**: UNVERIFIED
+**n=6 Connection**: CO2 critical temperature T_c = 304.13 K. Attempted n=6 expressions all require non-standard combinations.
+**Prediction**: ~~304.13 K = 300 + tau + 0.13 encodes n=6 arithmetic.~~ HONEST FAIL: No clean n=6 expression produces 304. Any "match" requires inventing ad-hoc combinations. This is an honest failure of the n=6 framework for CO2 critical temperature.
+**Grade**: FAIL — HONEST FAIL (n=6 framework does not apply to this constant)
 **Related BT**: BT-94
 
 ---

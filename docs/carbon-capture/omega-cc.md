@@ -28,6 +28,15 @@
 
 ---
 
+> **WARNING: Technology Readiness Level: TRL -1 (Thought Experiment / Science Fiction)**
+> Level 7은 현재 물리학을 초월하는 궁극적 사고실험.
+> Dyson Swarm, 블랙홀 엔진, Maxwell Demon은 물리법칙 내에서 이론적으로 가능하나,
+> 실현에 필요한 기술은 Kardashev Type I-II 문명 수준 (현재 ~0.73).
+> 이 문서의 "가설"은 과학적 가설이 아닌 "what if" 사고실험으로 읽어야 함.
+> n=6 연결은 수학적 일관성 탐색 목적이며, 실증적 예측이 아님.
+
+---
+
 ## Table of Contents
 
 1. [Executive Summary](#1-executive-summary)
@@ -978,6 +987,16 @@ Dyson Swarm의 항성 에너지(10^26 W)를 활용한 행성 대기 처리,
   │    → n=6 is the THREAD that connects atoms to cosmos           │
   └─────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Verification Status
+
+모든 관련 가설이 UNVERIFIABLE.
+
+**정직 요약**: Level 7 전체가 사고실험/SF. 현재 물리학 내에서 이론적으로 가능한 것(Dyson Swarm, Landauer limit)과 새로운 물리가 필요한 것(시공간 봉인, 우주상수 조율)을 구분해야 함. Penrose process 효율 29%(Kerr BH max), 문서의 42%는 과장 → 수정 필요.
+
+**수정 사항**: Penrose process 최대 효율 29.3% (not 42%). 42%는 multiple orbit extraction의 이론적 상한이나 실현 불가.
 
 ---
 

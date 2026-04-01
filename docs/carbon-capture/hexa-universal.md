@@ -28,6 +28,14 @@
 
 ---
 
+> **WARNING: Technology Readiness Level: TRL 0 (Speculative Engineering)**
+> Level 6은 현존 기술로 달성 불가능한 행성 스케일 공학 사고실험.
+> 100 Gt/yr 포집은 현재 전 세계 DAC 용량(~0.01 Mt/yr)의 10^7배.
+> 6 위도대 배치는 지구물리학적으로 타당하나, 에너지 요구량이 현재 세계 에너지의 수배.
+> 이 문서는 "만약 에너지가 무제한이라면" 이라는 가정 하의 설계 탐색.
+
+---
+
 ## Table of Contents
 
 1. [Executive Summary](#1-executive-summary)
@@ -853,6 +861,14 @@
   │    → Clearly detectable within 1 month of operation            │
   └─────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Verification Status
+
+모든 관련 가설이 UNVERIFIABLE (현존 기술로 검증 불가).
+
+**정직 요약**: Level 6 전체가 사고실험. 100 Gt/yr은 현재 전 세계 DAC(~0.01 Mt/yr)의 10^7배. 6 위도대 배치는 지구물리학적으로 합리적이나, 에너지 요구량이 현재 세계 1차 에너지의 2-5배. "만약 핵융합 에너지가 무제한이라면"이라는 가정이 전제.
 
 ---
 

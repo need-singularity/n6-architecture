@@ -498,6 +498,11 @@ CAPEX $120/ton capacity = sigma*(sigma-phi) 달러로 대폭 절감.
 
 ### 12.3 Module Rotating Wheel Mechanism
 
+> **Verification Correction**: H-CC-23 was graded FAIL, corrected to WEAK.
+> Climeworks uses fixed modular boxes, not rotary wheels. The rotating wheel design
+> below is a theoretical HEXA-PLANT concept. Svante uses rotary contactors but with
+> different specifications. See [verification.md](verification.md).
+
 ```
   ┌─────────────────────────────────────────────────────────────────┐
   │  ROTATING WHEEL CONTACTOR (Single Module)                       │
@@ -893,6 +898,21 @@ CAPEX $120/ton capacity = sigma*(sigma-phi) 달러로 대폭 절감.
   │    Target uptime: 97% (with rolling maintenance)               │
   └─────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Verification Status
+
+이 문서의 주장에 대한 독립 검증 결과 ([verification.md](verification.md)):
+
+| 가설 | 주장 | 등급 | 비고 |
+|------|------|------|------|
+| H-CC-28 | 6 bar operating pressure | **RETIRED** | DAC는 ~1 bar. 6 bar 근거 없음 |
+| H-CC-29 | 6 m²/m³ contactor area | **RETIRED** | 실제 250-500 m²/m³ |
+| H-CC-43 | 36 module farm | CLOSE | 모듈 수는 규모에 의존 |
+| H-CC-48 | CAPEX $600→$24 | WEAK | $600 실제. $24는 매우 도전적 |
+
+**정직 요약**: Level 4의 모듈식 설계 접근은 합리적이나, 구체적 수치(6 bar, 6 m²/m³)는 근거 없이 n=6에 맞춤. CAPEX $24/ton 목표는 현재 대비 25배 감소로 매우 도전적.
 
 ---
 

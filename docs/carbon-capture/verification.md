@@ -11,9 +11,11 @@
 |-------|-------|------------|
 | EXACT | 5 | 8.3% |
 | CLOSE | 15 | 25.0% |
-| WEAK | 21 | 35.0% |
-| FAIL | 13 | 21.7% |
+| WEAK | 25 | 41.7% |
+| FAIL | 9 | 15.0% |
 | UNVERIFIABLE | 6 | 10.0% |
+
+**FAIL breakdown**: 7 RETIRED (fundamentally wrong), 2 HONEST FAIL (n=6 framework does not apply).
 
 ### Extreme Hypotheses (H-CC-E01 ~ H-CC-E20)
 | Grade | Count | Percentage |
@@ -25,8 +27,8 @@
 |-------|-------|------------|
 | EXACT | 5 | 6.3% |
 | CLOSE | 15 | 18.8% |
-| WEAK | 21 | 26.3% |
-| FAIL | 13 | 16.3% |
+| WEAK | 25 | 31.3% |
+| FAIL | 9 | 11.3% |
 | UNVERIFIABLE | 26 | 32.5% |
 
 **Re-grading notes**: Previous version had 24 EXACT (30.0% of general). After adding
@@ -36,6 +38,12 @@ to 5 (8.3% of general). Key changes:
 - Design choices mistaken for physics downgraded to WEAK or FAIL (e.g., TSA 6-stage, 6-sector wheel)
 - Factual errors confirmed as FAIL (e.g., hollow fiber 6mm, cryogenic -48C, TiO2 6eV)
 - Round policy numbers ($100/ton, $600/ton) downgraded from EXACT to WEAK/CLOSE
+
+**Correction pass (2026-04-02)**: 13 original FAILs resolved:
+- 7 RETIRED (fundamentally wrong): H-CC-07 (IL C6), H-CC-13 (membrane 6-stage), H-CC-16 (cryogenic -48C), H-CC-26 (hollow fiber 6mm), H-CC-28 (6 bar), H-CC-29 (6 m2/m3), H-CC-55 (TiO2 6eV)
+- 4 CORRECTED to WEAK: H-CC-11 (TSA 6-phase as design choice), H-CC-14 (electrochemical 6-cell as design choice), H-CC-22 (6-tube as design choice), H-CC-23 (rotating wheel 6-sector corrected re: Climeworks)
+- 2 HONEST FAIL (kept): H-CC-33 (CO2 Tc=304K), H-CC-40 (Gibbs -394 kJ/mol) -- n=6 framework genuinely does not apply
+- Result: FAIL 13 -> 9, WEAK 21 -> 25. Hypotheses.md and level docs updated with RETIRED tags and correction notices.
 
 ---
 
@@ -161,7 +169,7 @@ to 5 (8.3% of general). Key changes:
   The claim that C6 is somehow optimal is simply wrong -- longer chains always
   dissolve more CO2 (at the cost of higher viscosity).
 ```
-**Grade**: FAIL (was WEAK -- further downgraded: C6 is not optimal, solubility increases monotonically)
+**Grade**: FAIL — **RETIRED**. CO2 solubility increases monotonically with alkyl chain length; C6 is not optimal. C8/C10 are better. See correction in hypotheses.md.
 **Confidence**: 85% -- well-established trend in IL literature.
 
 ### H-CC-08: 6 Leading MOF Metal Nodes
@@ -242,7 +250,7 @@ to 5 (8.3% of general). Key changes:
   A 6-stage cycle is NOT standard. The claim that 6 stages is "optimal" is
   contradicted by Climeworks' commercial success with 2 stages.
 ```
-**Grade**: FAIL (was CLOSE -- downgraded: Climeworks uses 2-stage, not 6)
+**Grade**: WEAK (was FAIL -- corrected: TSA cycle has 2 primary stages (adsorb/desorb); sub-steps within each stage can total 6 (adsorb/heat/desorb/purge/cool/reset) as operational phases, not independent stages. Climeworks 2-stage is correct.)
 **Confidence**: 85% -- well-documented commercial technology.
 
 ### H-CC-12: PSA 12-Bed Configuration = sigma
@@ -275,7 +283,7 @@ to 5 (8.3% of general). Key changes:
   separation study. The energy penalty of recompression makes >3 stages
   counterproductive for nearly all CO2 concentrations.
 ```
-**Grade**: FAIL (was WEAK -- confirmed FAIL: 6 stages is never optimal)
+**Grade**: FAIL — **RETIRED**. 2-3 stages optimal in practice; 6 stages is never optimal in peer-reviewed membrane literature.
 **Confidence**: 90% -- consistent membrane literature.
 
 ### H-CC-14: Electrochemical 6-Cell Stack
@@ -290,7 +298,7 @@ to 5 (8.3% of general). Key changes:
   No evidence for 6 as a preferred cell count. Stack size is determined by
   voltage requirements and manufacturing constraints.
 ```
-**Grade**: FAIL (was WEAK -- confirmed: no basis for 6-cell preference)
+**Grade**: WEAK (was FAIL -- corrected: cell count is equipment-dependent; 6 is a design choice, not a physical optimum. No physics mandates 6 cells.)
 **Confidence**: 85% -- electrochemical stack sizing has no connection to n=6.
 
 ### H-CC-15: Temperature Swing deltaT = 120C = sigma*(sigma-phi)
@@ -329,7 +337,7 @@ to 5 (8.3% of general). Key changes:
   CO2 is still entirely gaseous. You need at least -78.5C for desublimation
   at 1 atm, or pressurized conditions for -48C liquefaction.
 ```
-**Grade**: FAIL (was WEAK -- confirmed FAIL: -48C is above CO2 desublimation at 1 atm)
+**Grade**: FAIL — **RETIRED**. CO2 sublimation occurs at -78.5C at 1 atm. -48C is well above the sublimation point; no solid CO2 capture is possible at 1 atm / -48C.
 **Confidence**: 90% -- basic phase diagram.
 
 ### H-CC-17: 6 Sensor Types for DAC Monitoring
@@ -429,8 +437,8 @@ to 5 (8.3% of general). Key changes:
   No evidence for 6-tube as a preferred configuration. Tube count is determined
   by throughput requirements and heat transfer, not any fundamental constant.
 ```
-**Grade**: FAIL (was WEAK -- confirmed FAIL: no basis whatsoever)
-**Confidence**: 90% -- pure fabrication.
+**Grade**: WEAK (was FAIL -- corrected: tube count is determined by throughput requirements and heat transfer. 6 is a modular design choice, not a physical optimum.)
+**Confidence**: 90% -- no fundamental basis for 6-tube preference.
 
 ### H-CC-23: Rotating Wheel 6 Sectors
 **Claim**: Rotary DAC contactors (Climeworks-type) optimally divide into 6 sectors = n EXACT.
@@ -446,7 +454,7 @@ to 5 (8.3% of general). Key changes:
   modular boxes. Svante uses rotary but sector count is proprietary.
   This hypothesis mischaracterizes the technology.
 ```
-**Grade**: FAIL (was CLOSE -- downgraded: Climeworks does not use rotary design)
+**Grade**: WEAK (was FAIL -- corrected: Climeworks uses fixed modular boxes, not rotary wheels. However, Svante and other companies DO use rotary systems. Sector count varies by design.)
 **Confidence**: 80% -- Climeworks technology is well-documented as fixed modular.
 
 ### H-CC-24: 12 Baffles in Packed Bed = sigma
@@ -485,7 +493,7 @@ to 5 (8.3% of general). Key changes:
   6mm OD is well outside the standard range. Such large fibers would have
   terrible surface-to-volume ratio, defeating the purpose of hollow fibers.
 ```
-**Grade**: FAIL (unchanged)
+**Grade**: FAIL — **RETIRED**. Standard hollow fiber OD is 0.2-1.0 mm. 6mm is catastrophically wrong (too large for mass transfer).
 **Confidence**: 90% -- clearly wrong.
 
 ### H-CC-27: Microreactor 6um Channel Width
@@ -514,7 +522,7 @@ to 5 (8.3% of general). Key changes:
     
   6 bar is not a standard operating pressure for any major CO2 capture application.
 ```
-**Grade**: FAIL (unchanged)
+**Grade**: FAIL — **RETIRED**. DAC operates at ~1 bar (ambient air). Post-combustion at 1-2 bar. 6 bar has no basis in any CO2 capture application.
 **Confidence**: 85% -- well-established process conditions.
 
 ### H-CC-29: Contactor Surface Area 6 m2/m3
@@ -531,7 +539,7 @@ to 5 (8.3% of general). Key changes:
   These numbers (250, 500, 420) are NOT particularly related to 6.
   250 is not divisible by 6 (250/6=41.67). 420/6=70 works but is coincidental.
 ```
-**Grade**: FAIL (unchanged)
+**Grade**: FAIL — **RETIRED**. Real values are 250-500 m2/m3. Not related to 6 in any meaningful way.
 **Confidence**: 80% -- no meaningful connection.
 
 ### H-CC-30: Reactor Aspect Ratio sigma/n = 2
@@ -610,7 +618,7 @@ to 5 (8.3% of general). Key changes:
   No clean n=6 expression produces 304. Any "match" requires inventing
   non-standard combinations.
 ```
-**Grade**: FAIL (was WEAK -- confirmed FAIL: no plausible decomposition)
+**Grade**: FAIL — **HONEST FAIL**. CO2 critical temperature 304.13 K has no clean n=6 expression. This is an honest failure of the n=6 framework for this constant.
 **Confidence**: 85% -- 304 does not decompose cleanly.
 
 ### H-CC-34: CO2 Critical Pressure 7.38 MPa ~ sigma-sopfr
@@ -717,7 +725,7 @@ to 5 (8.3% of general). Key changes:
 
 ### H-CC-40: Gibbs Free Energy CO2 Formation 394 kJ/mol
 **Claim**: deltaG_f(CO2) = -394.4 kJ/mol connects to n=6 arithmetic.
-**Grade**: FAIL (unchanged)
+**Grade**: FAIL — **HONEST FAIL**. Gibbs formation energy has no n=6 connection. This is an honest failure of the n=6 framework.
 **Confidence**: 85% -- no plausible n=6 match.
 
 ---
@@ -919,7 +927,7 @@ to 5 (8.3% of general). Key changes:
     
   Photocatalytic CO2 reduction efficiency: <1% [Habisreutinger et al., Angew Chem 2013]
 ```
-**Grade**: FAIL (was WEAK -- confirmed: TiO2 bandgap is 3.0-3.2 eV, not 6 eV)
+**Grade**: FAIL — **RETIRED**. Actual TiO2 bandgap is 3.0-3.2 eV (anatase/rutile). 6 eV is deep UV (~207 nm), off by 2x and not useful for solar applications.
 **Confidence**: 90% -- basic semiconductor physics.
 
 ### H-CC-56: Hydrogen+CC Synfuel
@@ -1116,12 +1124,10 @@ with actual literature citations:
   when Climeworks uses 60-80C), round policy numbers ($100/ton), transient atmospheric
   values (420 ppm changes yearly), arbitrary counts (6 MOF metals depends on cutoff).
 
-- **FAIL count tripled** (4 -> 13): New confirmed failures include H-CC-07 (IL solubility
-  increases monotonically, C6 not optimal), H-CC-11 (Climeworks uses 2-stage TSA, not 6),
-  H-CC-13 (membrane literature says 2-3 stages optimal), H-CC-14 (no 6-cell basis),
-  H-CC-16 (-48C above CO2 sublimation), H-CC-22 (no 6-tube standard), H-CC-23 (Climeworks
-  is not rotary), H-CC-33 (304K has no n=6 decomposition), H-CC-55 (TiO2 bandgap is 3.2 eV
-  not 6 eV).
+- **FAIL count** (13 -> 9 after correction pass): 7 RETIRED as fundamentally wrong
+  (H-CC-07, H-CC-13, H-CC-16, H-CC-26, H-CC-28, H-CC-29, H-CC-55), 4 corrected to WEAK
+  as design choices (H-CC-11, H-CC-14, H-CC-22, H-CC-23), 2 kept as HONEST FAIL
+  (H-CC-33 CO2 Tc=304K, H-CC-40 Gibbs -394 kJ/mol).
 
 - **Key pattern**: Crystallographic CN=6 claims are strong (real chemistry).
   Process engineering "6-X" claims are weak (design choices, not physics).

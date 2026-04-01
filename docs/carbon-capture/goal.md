@@ -784,6 +784,19 @@
 
 ---
 
+## DSE Results Summary
+
+전수탐색 결과: [dse-results.md](dse-results.md)
+
+- 1,360,800 유효 조합 탐색 (6^8에서 규칙 필터링 후)
+- 54개 Pareto 비지배 해 --- **전부 n6=100%**
+- 최적 경로: Zeolite-6A → MECS → Honeycomb → Analog ASIC → CCS Hub → Graphene → Crustal → Maxwell Demon
+- Cross-DSE 12도메인 완료, MOF 최강 파트너
+
+민감도 분석: **Process(L1)가 가장 중요** --- 공정 선택이 전체 성능을 좌우
+
+---
+
 ## TECS-L Connection
 
 ```
