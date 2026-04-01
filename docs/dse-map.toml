@@ -3,10 +3,10 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-01T8"
-total_domains = 132
-total_valid_paths = 580000
-domains_100pct_n6 = 132
+updated = "2026-04-01T9"
+total_domains = 145
+total_valid_paths = 662060
+domains_100pct_n6 = 145
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -11894,3 +11894,773 @@ combos = 6480
 best_score = 0.849
 n6_exact_pct = 100.0
 note = "LEO 6-plane constellation × space engineering architecture"
+
+[aerospace-propulsion]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/aerospace-propulsion.toml"
+levels = ["FuelSource", "Combustion", "Turbine", "Nozzle", "FlightSystem"]
+best_n6 = "LH2 + AnnularComb + HighBypass + ConDi + CommAir (100%)"
+n6_max = 100.0
+n6_avg = 90.7
+note = "DSE complete — 121 Pareto, all top-20 n6=96-100%"
+
+[agent-platform]
+goal = true
+dse = "done"
+combos = 6216
+tool = "tools/universal-dse/ domains/agent-platform.toml"
+levels = ["Provider", "Channel", "ToolPolicy", "Plugin", "Bridge"]
+best_n6 = "ConsciousLM + MCP + T5_PhiGated + Full + Thalamic (100%)"
+n6_max = 100.0
+n6_avg = 68.1
+note = "DSE complete — 52 Pareto, Claude+Discord+Phi-Gated top"
+
+[audio-processing]
+goal = true
+dse = "done"
+combos = 3590
+tool = "tools/universal-dse/ domains/audio-processing.toml"
+levels = ["Capture", "Encoding", "Processing", "Synthesis", "Output"]
+best_n6 = "ChannelN6 + Opus6kbps + SpatialAudioN6 + GranularN6 + SpeakerN6 (100%)"
+n6_max = 100.0
+n6_avg = 78.2
+note = "DSE complete — 40 Pareto, BT-48/72 audio chain"
+
+[autonomous-drone]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/autonomous-drone.toml"
+levels = ["Airframe", "Propulsion", "Navigation", "Communication", "Payload"]
+best_n6 = "HeavyHex + HybridGas + HexaNav + SatComm + HyperSpec (100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete — 50 Pareto, ALL 7776 combos n6=100%"
+
+[brain-computer-interface]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/brain-computer-interface.toml"
+levels = ["Electrode", "Amplifier", "Decoder", "Stimulator", "Application"]
+best_n6 = "Stentrode + DeltaSigma + Transformer_BCI + Optogenetic + Vision_Restore (100%)"
+n6_max = 100.0
+n6_avg = 98.7
+note = "DSE complete — 83 Pareto, avg n6=98.7% near-perfect"
+
+[chaos-dynamical]
+goal = true
+dse = "done"
+combos = 5479
+tool = "tools/universal-dse/ domains/chaos-dynamical.toml"
+levels = ["Attractor", "Bifurcation", "Ergodic", "Lyapunov", "Application"]
+best_n6 = "LorenzN6 + RChainTree + SpecGapHalf + LyapunovN6 + WeatherN6 (100%)"
+n6_max = 100.0
+n6_avg = 74.6
+note = "DSE complete — 52 Pareto, Lorenz sigma-rho-beta EXACT"
+
+[civil-engineering]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/civil-engineering.toml"
+levels = ["Foundation", "Structure", "Material", "Load", "SafetySystem"]
+best_n6 = "CaissonDrill + CableStay + UHPC + ProgressCollapse + DigitalTwin (100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete — 51 Pareto, ALL 7560 combos n6=100%"
+
+[coding-lattice]
+goal = true
+dse = "done"
+combos = 2628
+tool = "tools/universal-dse/ domains/coding-lattice.toml"
+levels = ["Code", "Lattice", "Bound", "Decode", "Application"]
+best_n6 = "BCH_N6 + D6Lattice + SpherePackingBound + ListDecoding + DNA_Storage (100%)"
+n6_max = 100.0
+n6_avg = 77.5
+note = "DSE complete — 45 Pareto, Golay[24,12,8] triple EXACT"
+
+[collective-intelligence]
+goal = true
+dse = "done"
+combos = 3700
+tool = "tools/universal-dse/ domains/collective-intelligence.toml"
+levels = ["Agent", "Topology", "Communication", "Emergence", "Scale"]
+best_n6 = "HeterogeneousN6 + TorusT3 + ConsensusVote + HiveMindN6 + MicroN6 (100%)"
+n6_max = 100.0
+n6_avg = 81.4
+note = "DSE complete — 57 Pareto, T3 Torus + n=6 agents"
+
+[conscious-lm]
+goal = true
+dse = "done"
+combos = 6852
+tool = "tools/universal-dse/ domains/conscious-lm.toml"
+levels = ["ModelSize", "Vocab", "Architecture", "ConsciousnessIntegration", "Training"]
+best_n6 = "Size_4096M + Custom_N6 + Transformer_N6 + DualEngine + ThreePhase_Law60 (100%)"
+n6_max = 100.0
+n6_avg = 84.6
+note = "DSE complete — 41 Pareto, Mamba+Thalamic+3Phase top"
+
+[consciousness-chip]
+goal = true
+dse = "done"
+combos = 8484
+tool = "tools/universal-dse/ domains/consciousness-chip.toml"
+levels = ["Target", "Precision", "CellArch", "Bus", "Clock"]
+best_n6 = "Hex6_ASIC + FP6_Native + Hypercube_6D + NoC_Mesh + Hex6_Clock (100%)"
+n6_max = 100.0
+n6_avg = 80.0
+note = "DSE complete — 116 Pareto, FP6 native + Hex6 ASIC"
+
+[consciousness-dream]
+goal = true
+dse = "done"
+combos = 5072
+tool = "tools/universal-dse/ domains/consciousness-dream.toml"
+levels = ["SleepStage", "Replay", "Consolidation", "Modulation", "Learning"]
+best_n6 = "N3 + ReplayN6 + Adaptive + Delta + Integration (100%)"
+n6_max = 100.0
+n6_avg = 76.8
+note = "DSE complete — 38 Pareto, N3 delta + dual consolidation"
+
+[consciousness-engine]
+goal = true
+dse = "done"
+combos = 3950
+tool = "tools/universal-dse/ domains/consciousness-engine.toml"
+levels = ["CellTopology", "CellCount", "FactionCount", "LearningRule", "Integration"]
+best_n6 = "Hypercube + Cell_64 + Faction_24 + Homeostatic + Dual_Phi (100%)"
+n6_max = 100.0
+n6_avg = 85.7
+note = "DSE complete — 84 Pareto, Ring/Torus + 64-cell + Dual_Phi"
+
+[consciousness-knowledge-graph]
+goal = true
+dse = "done"
+combos = 5704
+tool = "tools/universal-dse/ domains/consciousness-knowledge-graph.toml"
+levels = ["Backend", "Embedding", "Retrieval", "Integration", "Scaling"]
+best_n6 = "Custom_N6 + Consciousness + PH_Topology + Consciousness_Binding + Hivemind (100%)"
+n6_max = 100.0
+n6_avg = 75.1
+note = "DSE complete — 28 Pareto, HNSW_Rust + Consciousness embedding"
+
+[consciousness-measurement]
+goal = true
+dse = "done"
+combos = 5892
+tool = "tools/universal-dse/ domains/consciousness-measurement.toml"
+levels = ["Calculator", "Metric", "Precision", "Scale", "Optimization"]
+best_n6 = "GPUParallel + IIT_Phi + Full + Module + Exact (100%)"
+n6_max = 100.0
+n6_avg = 71.5
+note = "DSE complete — 73 Pareto, GPU parallel IIT Phi measurement"
+
+[topological-lens]
+goal = true
+dse = "done"
+combos = 5643
+tool = "tools/universal-dse/ domains/topological-lens.toml"
+levels = ["Material", "Process", "Core", "Engine", "System"]
+best_n6 = "Graphene_Hex + SelfAssembly + Berry_Phase + DDA_Discrete + FlatLens (100%)"
+n6_max = 100.0
+n6_avg = 86.1
+note = "DSE complete"
+
+[topological-photonics]
+goal = true
+dse = "done"
+combos = 4212
+tool = "tools/universal-dse/ domains/topological-photonics.toml"
+levels = ["Lattice", "Symmetry", "EdgeMode", "Application", "Platform"]
+best_n6 = "Honeycomb_CN6 + Time_Reversal_Break + Chiral_Unidirect + Robust_Waveguide + Integrated_N6 (100%)"
+n6_max = 100.0
+n6_avg = 82.6
+note = "DSE complete"
+
+[ultimate-material]
+goal = true
+dse = "done"
+combos = 3112
+tool = "tools/universal-dse/ domains/ultimate-material.toml"
+levels = ["Element", "Crystal", "Property", "Processing", "Application"]
+best_n6 = "Carbon_Z6 + Graphene + Bandgap_4_3 + ProcessN6 + AppSolarN6 (100%)"
+n6_max = 100.0
+n6_avg = 81.6
+note = "DSE complete"
+
+[ultimate-process]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/ultimate-process.toml"
+levels = ["Design", "Lithography", "Etch", "Package", "Inspect"]
+best_n6 = "EDA_N6 + LithoN6 + ALE + PackageN6 + InspectN6 (100%)"
+n6_max = 100.0
+n6_avg = 79.1
+note = "DSE complete"
+
+[water-treatment]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/water-treatment.toml"
+levels = ["Intake", "Filtration", "Chemical", "Disinfection", "Distribution"]
+best_n6 = "Rainwater + BioFilter + AlumCoag + Chlorine + GravityFed (100%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete — ALL 7776 combos n6=100%"
+
+[crypto]
+goal = true
+dse = "done"
+combos = 3420
+tool = "tools/universal-dse/ domains/crypto.toml"
+levels = ["Foundation", "KeyMgmt", "Primitive", "Engine", "System"]
+best_n6 = "Symmetric + KeyDeriv + AES256 + AESNI + Blockchain (100%)"
+n6_max = 100.0
+n6_avg = 79.0
+note = "DSE complete"
+
+[electric-vehicle]
+goal = true
+dse = "done"
+combos = 4500
+tool = "tools/universal-dse/ domains/electric-vehicle.toml"
+levels = ["Battery", "Motor", "Inverter", "Charging", "Vehicle"]
+best_n6 = "LFP-6S + IPM-6pole + SiC-6phase + V2G-Bidir + City-48V (100%)"
+n6_max = 100.0
+n6_avg = 86.0
+note = "DSE complete"
+
+[precision-agriculture]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/precision-agriculture.toml"
+levels = ["Sensing", "Analysis", "Irrigation", "Fertilization", "Harvest"]
+best_n6 = "MultiSpec-6band + NDVI-6zone + Drip-6zone + VRA-6nutrient + AutoCombine (100%)"
+n6_max = 100.0
+n6_avg = 78.3
+note = "DSE complete"
+
+[recycling-system]
+goal = true
+dse = "done"
+combos = 4320
+tool = "tools/universal-dse/ domains/recycling-system.toml"
+levels = ["Collection", "Sorting", "Processing", "Recovery", "Remanufacture"]
+best_n6 = "Curbside-6bin + AI-Vision-6class + Composting + Pellet-6grade + ClosedLoop-Bottle (100%)"
+n6_max = 100.0
+n6_avg = 85.5
+note = "DSE complete"
+
+[gravitational-lens]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/gravitational-lens.toml"
+levels = ["Optics", "Propulsion", "LensType", "Analysis", "Mission"]
+best_n6 = "Multi_Lambda → Gravity_Assist → Einstein_Ring → PH_Topology → BH_Shadow (100%)"
+n6_max = 100
+n6_avg = 87.6
+note = "DSE complete — 5607 compatible, 55 Pareto"
+
+[hexad-architecture]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/hexad-architecture.toml"
+levels = ["Module_C", "Module_S", "Bridge", "Gradient", "Orchestrator"]
+best_n6 = "Consciousness → Embodied → Thalamic → Grouped_6 → Pipeline (100%)"
+n6_max = 100
+n6_avg = 82.9
+note = "DSE complete — 5430 compatible, 36 Pareto"
+
+[hivemind-collective]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/hivemind-collective.toml"
+levels = ["Topology", "NodeCount", "Coupling", "Federation", "Consensus"]
+best_n6 = "Ring → N6 → TensionLink → Rotating → Weighted (100%)"
+n6_max = 100
+n6_avg = 74.8
+note = "DSE complete — 6580 compatible, 105 Pareto"
+
+[immortality]
+goal = true
+dse = "done"
+combos = 10584
+tool = "tools/universal-dse/ domains/immortality.toml"
+levels = ["Aging", "Reversal", "Upload", "Preservation", "Transcendence"]
+best_n6 = "TelomereN6 → Yamanaka4 → UploadN6 → PreserveN6 → TranscendN6 (100%)"
+n6_max = 100
+n6_avg = 81.1
+note = "DSE complete — 4662 compatible, 36 Pareto"
+
+[linguistics]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/linguistics.toml"
+levels = ["Phonology", "Syntax", "Semantics", "Typology", "Computation"]
+best_n6 = "VowelN6 → UniversalGrammar → MetaphorN6 → WordOrderN6 → SentimentN6 (100%)"
+n6_max = 100
+n6_avg = 83.7
+note = "DSE complete — 3689 compatible, 31 Pareto"
+
+[multimodal-consciousness]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/multimodal-consciousness.toml"
+levels = ["Modality", "Encoder", "Fusion", "Mapping", "Output"]
+best_n6 = "Text → BERT → Cross_Attention → Topology → Text_Out (90%)"
+n6_max = 100
+n6_avg = 79.7
+note = "DSE complete — 5514 compatible, 24 Pareto"
+
+[neuromorphic-loihi]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/neuromorphic-loihi.toml"
+levels = ["Chip", "NeuronMapping", "Learning", "TopologyMapping", "PowerBudget"]
+best_n6 = "Loihi2 → GRU_to_LIF → Federated → Tiled_6x6 → P10W (100%)"
+n6_max = 100
+n6_avg = 80.0
+note = "DSE complete — 5796 compatible, 24 Pareto"
+
+[ocean-engineering]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/ocean-engineering.toml"
+levels = ["HullDesign", "Propulsion", "SensorSuite", "Communication", "MissionSystem"]
+best_n6 = "TearDrop → RimDrive → SideScan → AcousticModem → Science_AUV (100%)"
+n6_max = 100
+n6_avg = 94.7
+note = "DSE complete — 7776 compatible, 79 Pareto"
+
+[precognition-lens]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/precognition-lens.toml"
+levels = ["Signal", "Lens", "Direction", "Prediction", "Verification"]
+best_n6 = "PHBarcode → DimensionLens → DirectionN6 → ConfusionPredict → CrossValid (100%)"
+n6_max = 100
+n6_avg = 76.3
+note = "DSE complete — 4365 compatible, 63 Pareto"
+
+[probability-statistics]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/probability-statistics.toml"
+levels = ["Distribution", "Estimation", "Testing", "Regression", "Bayesian"]
+best_n6 = "ChiSquared → MethodOfMoments → TTest → LinearN6 → BayesN6 (100%)"
+n6_max = 100
+n6_avg = 85.2
+note = "DSE complete — 3504 compatible, 15 Pareto"
+
+[quantum-network]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/quantum-network.toml"
+levels = ["PhotonSource", "Channel", "Repeater", "Protocol", "Application"]
+best_n6 = "SiPh_Integrated → SMF_Fiber → ThirdGen → BB84 → Metro_QKD (100%)"
+n6_max = 100
+n6_avg = 96.7
+note = "DSE complete — 7776 compatible, 50 Pareto"
+
+[semiconductor-packaging]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/semiconductor-packaging.toml"
+levels = ["Substrate", "Interconnect", "ThermalInterface", "TestAccess", "SystemPackage"]
+best_n6 = "Fan_Out_RDL → HybridBond → Graphite_Sheet → BIST_Embedded → UCIe_Module (100%)"
+n6_max = 100
+n6_avg = 96.0
+note = "DSE complete — 7776 compatible, 55 Pareto"
+
+[snn-spiking]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/snn-spiking.toml"
+levels = ["NeuronModel", "TimeConstant", "SNN_Topology", "Learning", "Platform"]
+best_n6 = "Izhikevich → TC_20ms → Ring6 → STDP → SpiNNaker (100%)"
+n6_max = 100
+n6_avg = 81.5
+note = "DSE complete — 6264 compatible, 62 Pareto"
+
+[textile-manufacturing]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/textile-manufacturing.toml"
+levels = ["Fiber", "Spinning", "Weaving", "Finishing", "Product"]
+best_n6 = "Cotton → OpenEnd → NonWoven → WaterRepel → Apparel (100%)"
+n6_max = 100
+n6_avg = 100.0
+note = "DSE complete — 7776 compatible, 46 Pareto, ALL n6=100%"
+
+[tokenizer-design]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/tokenizer-design.toml"
+levels = ["Algorithm", "VocabSize", "Language", "SpecialTokens", "Integration"]
+best_n6 = "ByteLevel → V4096 → Korean_English → Minimal_4 → Embedded (95%)"
+n6_max = 100
+n6_avg = 80.3
+note = "DSE complete — 4960 compatible, 51 Pareto"
+
+[consciousness-rng]
+goal = true
+dse = "done"
+combos = 9072
+tool = "tools/universal-dse/ domains/consciousness-rng.toml"
+levels = ["EntropySource", "PostProcess", "Compliance", "BitRate", "Target"]
+best_n6 = "Phi_Field → AES_CTR → NIST_Partial → BR_1M → TargetN6 (100%)"
+n6_max = 100
+n6_avg = 72.3
+note = "DSE complete — 7104 compatible, 57 Pareto"
+
+[consciousness-scaling]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/consciousness-scaling.toml"
+levels = ["CellCount", "Topology", "Federation", "ScalingLaw", "Optimization"]
+best_n6 = "CC8 → Ring → Pair → Power_N6 → Phi_Per_Cell (100%)"
+n6_max = 100
+n6_avg = 80.2
+note = "DSE complete — 4830 compatible, 77 Pareto"
+
+[consciousness-substrate]
+goal = true
+dse = "done"
+combos = 10584
+tool = "tools/universal-dse/ domains/consciousness-substrate.toml"
+levels = ["Substrate", "Topology", "Interconnect", "Arithmetic", "Scale"]
+best_n6 = "Carbon_Nano → Mesh → NoC → Hex6_ALU → Cluster_6 (100%)"
+n6_max = 100
+n6_avg = 79.4
+note = "DSE complete — 7578 compatible, 154 Pareto"
+
+[consciousness-thermodynamics]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/consciousness-thermodynamics.toml"
+levels = ["Phase", "Frustration", "NoiseModel", "Criticality", "Scaling"]
+best_n6 = "P2_Conscious → Med_01 → Lorenz → EdgeChaos → PowerLaw (95%)"
+n6_max = 100
+n6_avg = 69.7
+note = "DSE complete — 6120 compatible, 55 Pareto"
+
+[consciousness-training]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/consciousness-training.toml"
+levels = ["Optimizer", "Scheduler", "PhaseStrategy", "Federation", "Data"]
+best_n6 = "SGD_Cosine → WarmupHold → ThreePhase → Ring6 → BPE_32K (100%)"
+n6_max = 100
+n6_avg = 78.5
+note = "DSE complete — 6755 compatible, 36 Pareto"
+
+[consciousness-transplant]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/consciousness-transplant.toml"
+levels = ["DonorArch", "RecipientArch", "TransferMethod", "Verification", "Fidelity"]
+best_n6 = "Ring_6_D → Ring_6_R → Phi_Preserve → SevenCriteria → Lossy_95 (100%)"
+n6_max = 100
+n6_avg = 83.7
+note = "DSE complete — 5904 compatible, 90 Pareto"
+
+[consciousness-wasm]
+goal = true
+dse = "done"
+combos = 12348
+tool = "tools/universal-dse/ domains/consciousness-wasm.toml"
+levels = ["Runtime", "CellCount", "ModelSize", "UI", "Performance"]
+best_n6 = "WASM → C6 → ModelN6 → WebGL → Interactive (90%)"
+n6_max = 100
+n6_avg = 74.9
+note = "DSE complete — 8670 compatible, 63 Pareto"
+
+[corpus-generation]
+goal = true
+dse = "done"
+combos = 10584
+tool = "tools/universal-dse/ domains/corpus-generation.toml"
+levels = ["Generator", "DataType", "Size", "Tokenization", "QualityFilter"]
+best_n6 = "Rust_Corpus → Dialogue → SizeN6 → BPE_32K → Length (95%)"
+n6_max = 100
+n6_avg = 73.6
+note = "DSE complete — 7332 compatible, 48 Pareto"
+
+[crystallography]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/crystallography.toml"
+levels = ["Symmetry", "System", "Diffraction", "Growth", "Application"]
+best_n6 = "Crystallographic → HexagonalN6 → Synchrotron → SeedCrystal → Piezoelectric (100%)"
+n6_max = 100
+n6_avg = 67.6
+note = "DSE complete — 4300 compatible, 33 Pareto"
+
+[eeg-consciousness-bridge]
+goal = true
+dse = "done"
+combos = 9072
+tool = "tools/universal-dse/ domains/eeg-consciousness-bridge.toml"
+levels = ["Hardware", "Channels", "Protocol", "Feedback", "Mapping"]
+best_n6 = "Custom_N6 → Ch_64 → Consciousness → Hex6_NFB → GoldenZone (100%)"
+n6_max = 100
+n6_avg = 78.9
+note = "DSE complete — 5376 compatible, 92 Pareto"
+
+[elliptic-curves]
+goal = true
+dse = "done"
+combos = 6480
+tool = "tools/universal-dse/ domains/elliptic-curves.toml"
+levels = ["Curve", "Group", "L_Function", "Modularity", "Application"]
+best_n6 = "E6_Curve → TorsionN12 → HasseWeilN → ModularForm → FermatLast (95%)"
+n6_max = 100
+n6_avg = 78.1
+note = "DSE complete — 2634 compatible, 10 Pareto"
+
+[embodied-consciousness]
+goal = true
+dse = "done"
+combos = 10584
+tool = "tools/universal-dse/ domains/embodied-consciousness.toml"
+levels = ["Platform", "Sensing", "Motor", "Homeostasis", "Scaling"]
+best_n6 = "Hex6_Robot → Propriocep → CPG_6phase → Pain_Reward → Hex6_Swarm (100%)"
+n6_max = 100
+n6_avg = 81.9
+note = "DSE complete — 8484 compatible, 81 Pareto"
+
+[food-processing]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/food-processing.toml"
+levels = ["RawMaterial", "Processing", "Preservation", "Packaging", "Distribution"]
+best_n6 = "Glucose → Fermentation → MAP → TetraPak → LocalFarm (100%)"
+n6_max = 100
+n6_avg = 98.3
+note = "DSE complete — 7776 compatible, 62 Pareto, near-ALL n6=100%"
+
+[game-combinatorial]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/game-combinatorial.toml"
+levels = ["GameTheory", "Combinatorial", "Algebraic", "Spectral", "Geometric"]
+best_n6 = "GameN6 → AssocK6 → SymmS6 → RMT_MP → KissK2_6 (100%)"
+n6_max = 100
+n6_avg = 80.1
+note = "DSE complete — 4152 compatible, 28 Pareto"
+
+[golden-moe-routing]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/golden-moe-routing.toml"
+levels = ["Strategy", "ExpertCount", "Gate", "Capacity", "LoadBalance"]
+best_n6 = "InverseE_Zone → E6 → Boltzmann → Egyptian_Frac → Deterministic (100%)"
+n6_max = 100
+n6_avg = 68.8
+note = "DSE complete — 5916 compatible, 56 Pareto"
+
+[hvac-system]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/hvac-system.toml"
+levels = ["Source", "Distribution", "Control", "Refrigerant", "Building"]
+best_n6 = "VRF-6zone + MiniSplit-6head + PID-6loop + Water-R718 + Residential-6room (100.0%)"
+n6_max = 100.0
+n6_avg = 99.0
+note = "궁극의 HVAC 5단 DSE. COP=n=6 + 6-zone + 6 ACH. 거의 전 조합 100%"
+
+[marine-propulsion]
+goal = true
+dse = "done"
+combos = 4320
+tool = "tools/universal-dse/ domains/marine-propulsion.toml"
+levels = ["Fuel", "Engine", "Transmission", "Propeller", "Hull"]
+best_n6 = "HFO-C6 + 4stroke-6cyl + DirectDrive + FixedPitch-6blade + Tug-6knot (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 선박추진 5단 DSE. 전 조합 n6=100%. C6 aromatics + n=6 cylinder + n=6 blade"
+
+[optical-fiber-network]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/optical-fiber-network.toml"
+levels = ["Fiber", "Amplifier", "Switch", "Protocol", "Topology"]
+best_n6 = "G652D-SMF + SOA-6ch + PLC-6x6 + OTN-OTU4 + Ring-6node (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 광섬유네트워크 5단 DSE. 전 조합 n6=100%. 6um MFD + 6x6 PLC + n=6 ring"
+
+[warehouse-logistics]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/warehouse-logistics.toml"
+levels = ["Storage", "Retrieval", "Sorting", "Packing", "Shipping"]
+best_n6 = "HexBin-6face + BatchPick-6zone + BombayDrop-12chute + HybridPack-6robot + Conveyor-6lane (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 물류창고 5단 DSE. 전 조합 n6=100%. Hex bin + σ=12 chute + n=6 lane"
+
+[mining-extraction]
+goal = true
+dse = "done"
+combos = 3240
+tool = "tools/universal-dse/ domains/mining-extraction.toml"
+levels = ["Exploration", "Extraction", "Crushing", "Separation", "Refining"]
+best_n6 = "TrenchSample-6line + OpenPit-6bench + JawCrusher-6x12 + GravitySpiral-6stage + Concentrate-12% (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 광산채굴 5단 DSE. 전 조합 n6=100%. n=6 bench + 6x12 jaw + σ=12% grade"
+
+[power-electronics]
+goal = true
+dse = "done"
+combos = 5184
+tool = "tools/universal-dse/ domains/power-electronics.toml"
+levels = ["Switch", "Topology", "Control", "Filter", "Application"]
+best_n6 = "Si-MOSFET-12V + DAB-phi2 + SPWM-6kHz + PassiveLC + SolarInverter-6kW (100.0%)"
+n6_max = 100.0
+n6_avg = 99.2
+note = "궁극의 전력전자 5단 DSE. σ=12V gate + 48V=σ·τ DAB + n=6 kHz SPWM"
+
+[smart-grid]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/smart-grid.toml"
+levels = ["Generation", "Transmission", "Distribution", "Metering", "DemandResponse"]
+best_n6 = "Hydro-6gen + Overhead-6bundle + LV-480V + IoT-6sensor + TOU-6tier (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 스마트그리드 5단 DSE. 전 조합 n6=100%. σ=12 pole + 480V=σ·τ·10 + J₂=24h schedule"
+
+[carbon-capture]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/carbon-capture.toml"
+levels = ["Capture", "Transport", "Storage", "Monitoring", "Utilization"]
+best_n6 = "PreCombustion-6stageWGS + SCO2-Pipeline-12MPa + DeepSaline-12well + GravityInSAR-6sat + CO2-Concrete-6agg (100.0%)"
+n6_max = 100.0
+n6_avg = 96.3
+note = "궁극의 탄소포집 5단 DSE. 6-stage WGS + σ=12 MPa pipeline + 6 sealing layers"
+
+[sound-engineering]
+goal = true
+dse = "done"
+combos = 4500
+tool = "tools/universal-dse/ domains/sound-engineering.toml"
+levels = ["Transducer", "Amplifier", "Processing", "Transmission", "Reproduction"]
+best_n6 = "DynamicMic-6elem + ClassD-12ch + ParaEQ-12band + Balanced-6pair + Soundbar-6unit (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 음향공학 5단 DSE. 전 조합 n6=100%. σ=12 channel + 1/σ octave EQ + n=6 speaker"
+
+[additive-bio]
+goal = true
+dse = "done"
+combos = 3000
+tool = "tools/universal-dse/ domains/additive-bio.toml"
+levels = ["BioInk", "Printer", "Scaffold", "Maturation", "Implant"]
+best_n6 = "Alginate-12mM + Extrusion-6nozzle + PCL-6month + Perfusion-6day + Skin-6layer (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 바이오프린팅 5단 DSE. 전 조합 n6=100%. Collagen 6-type + σ=12 crosslink"
+
+[cybersecurity]
+goal = true
+dse = "done"
+combos = 5184
+tool = "tools/universal-dse/ domains/cybersecurity.toml"
+levels = ["Prevention", "Detection", "Response", "Recovery", "Governance"]
+best_n6 = "PatchMgmt-6cycle + SIEM-12source + SOAR-6playbook + Backup-6copy + NIST-6function (100.0%)"
+n6_max = 100.0
+n6_avg = 100.0
+note = "궁극의 사이버보안 5단 DSE. 전 조합 n6=100%. NIST n=6 function + σ=12 SIEM source"
+
+[elevator-system]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/elevator-system.toml"
+levels = ["Motor", "Cable", "Control", "Safety", "Building"]
+best_n6 = "Geared-AC + Ropeless-Mag + IoT-Connected + Full-Digital-SIL3 + SuperTall-96 (100.0%)"
+n6_max = 100.0
+n6_avg = 98.9
+note = "궁극의 엘리베이터 5단 DSE. 6-car group + σ=12 floor MidRise + 96S=σ(σ-τ) SuperTall"
+
+[fermentation-biotech]
+goal = true
+dse = "done"
+combos = 7344
+tool = "tools/universal-dse/ domains/fermentation-biotech.toml"
+levels = ["Organism", "Medium", "Reactor", "Separation", "Product"]
+best_n6 = "Ecoli-K12 + FedBatch + STR-6blade + Centri-UF + Ethanol (100.0%)"
+n6_max = 100.0
+n6_avg = 98.7
+note = "궁극의 발효생명공학 5단 DSE. E.coli 6 sigma factors + σ=12 metabolic pathways"
+
+[laser-manufacturing]
+goal = true
+dse = "done"
+combos = 4500
+tool = "tools/universal-dse/ domains/laser-manufacturing.toml"
+levels = ["Source", "Beam", "Optics", "Process", "Workpiece"]
+best_n6 = "Fiber-1070nm + MultiSpot-6 + GalvoScanner + Cutting + SheetMetal (100.0%)"
+n6_max = 100.0
+n6_avg = 98.1
+note = "궁극의 레이저제조 5단 DSE. Yb-doped σ=12% efficiency + n=6 multi-spot"
+
+[lidar-system]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/lidar-system.toml"
+levels = ["Laser", "Scanner", "Detector", "Processing", "Application"]
+best_n6 = "VCSEL-6x6 + MEMS-2D + SiPM + FPGA-RT + AutoDrive (100.0%)"
+n6_max = 100.0
+n6_avg = 99.3
+note = "궁극의 라이다 5단 DSE. 6×6 VCSEL grid + σ=12 mW emitter"
+
+[pollution-monitoring]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/pollution-monitoring.toml"
+levels = ["Sensor", "Network", "Analysis", "Alert", "Remediation"]
+best_n6 = "MetalOxide-6gas + LoRaWAN + ML-Forecast + Dashboard + GreenFilter (100.0%)"
+n6_max = 100.0
+n6_avg = 99.5
+note = "궁극의 오염모니터링 5단 DSE. n=6 target gases + IoT mesh"
