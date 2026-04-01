@@ -83,8 +83,10 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   # Cross-domain
   breakthrough-theorems.md (BT-1~84, 84 theorems spanning 3-8 domains each)
   cross-domain-resonance-2026-03-31.md (formula reuse matrix)
-  # Battery Architecture (NEW — 소재→공정→코어→칩→시스템→차세대→극한→궁극)
+  # Battery Architecture (소재→공정→코어→칩→시스템→차세대→극한→궁극)
   battery-architecture/ (8 levels: HEXA-CELL/ELECTRODE/CORE/CHIP/PACK+GRID/SOLID/NUCLEAR/OMEGA-E)
+  # Solar Architecture (소재→공정→코어→칩→시스템, DSE 1,584 조합)
+  solar-architecture/ (5 levels: HEXA-ABSORB/PROCESS/JUNCTION/POWER/ARRAY)
   # Total: 1350+ hypotheses, 630+ EXACT, 650+ atlas entries, 84 BTs
 ```
 
@@ -97,6 +99,7 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 - `tools/energy-calc/`    — Solar/Battery/Hydrogen/IEEE519 energy verification
 - `tools/gut-calc-rust/`  — GUT parameter brute-force search
 - `tools/dse-calc/`       — 소재×공정×코어×칩×시스템 DSE 전수 조합 탐색 + Pareto frontier
+- `tools/solar-dse/`      — 태양전지 DSE 전수 탐색 (1,584 조합, BT-30/63 기반)
 
 ## Calculator Rules (Shared)
 **새 계산기 개발시 성능 문제 예상되면 반드시 Rust 우선.**
@@ -269,8 +272,9 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - 결과: Pareto 테이블 + 최적 경로 + n=6 EXACT 비율
 
   적용 도메인:
-    - chip-architecture: 소재×공정×코어×칩×시스템
-    - battery-architecture: 소재×공정×코어×칩×시스템
+    - chip-architecture: 소재×공정×코어×칩×시스템 (3,000 조합)
+    - battery-architecture: 소재×공정×코어×칩×시스템 (1,908 조합)
+    - solar-architecture: 소재×공정×코어×칩×시스템 (1,584 조합)
     - 각 도메인별 후보군은 해당 goal.md에 정의
     - 새 궁극 도메인 추가 시 → goal.md + DSE 탐색 + dse-map.toml 갱신
 
