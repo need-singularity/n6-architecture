@@ -47,6 +47,24 @@ best_n6 = "77.8% (14/18)"
 best_residential = "GaAs + HJT + CPV + DC-Optimizer + HC-120"
 cross_dse = ["battery-architecture", "chip-architecture", "energy-generation", "power-grid"]
 
+[energy-architecture]
+goal = true
+dse = "done"
+combos = 10225
+tool = "tools/dse-calc/energy_main.rs"
+domains = ["fusion", "solar", "battery", "grid"]
+levels_per_domain = 5
+domain_combos = 2400
+cross_dse_combos = 625
+cross_dse = ["chip-architecture", "battery-architecture", "solar-architecture"]
+best_fusion = "Li6-D + Tokamak-12 + HTS-12T + Egyptian-Hybrid + Central-GW (0.818, 4/5 EXACT)"
+best_solar = "GaAs + Tandem + 144-half + String-Inverter + CPV (0.802, 5/5 EXACT)"
+best_battery = "Li-Metal + Solid-State + 6S-Module + 192S-800V + EV-400V (0.990, 5/5 EXACT)"
+best_grid = "HTS-YBCO + MMC-Multilevel + Oil-Immersed + UHVDC-1100kV + Supergrid (0.922, 5/5 EXACT)"
+ultimate_score = 0.883
+ultimate_n6 = "19/20 (95.0%)"
+note = "궁극의 에너지 = 4도메인 통합 Cross-DSE. BT-27,30,43,57,60,62,63,68,80-84 활용"
+
 # ── 미시작 ────────────────────────────────────────
 
 [quantum-computing]
@@ -55,34 +73,73 @@ dse = "none"
 cross_dse = ["chip-architecture", "superconductor"]
 
 [fusion]
-goal = false
-dse = "none"
-cross_dse = ["superconductor", "plasma-physics"]
+goal = true
+dse = "done"
+combos = 2400
+tool = "tools/dse-calc/energy_main.rs"
+cross_dse = ["superconductor", "plasma-physics", "energy-architecture"]
+best_pareto = "Li6-D + Tokamak-12 + HTS-12T + Egyptian-Hybrid + Central-GW (0.818)"
+n6_max = 100.0
 
 [superconductor]
-goal = false
-dse = "none"
-cross_dse = ["chip-architecture", "fusion"]
+goal = true
+dse = "done"
+combos = 28800
+valid = 7651
+tool = "tools/sc-dse/"
+levels = ["Material", "Process", "Wire", "Magnet", "Cooling", "System"]
+cross_dse = ["chip-architecture", "fusion", "power-grid"]
+best_pareto = "REBCO + PIT + FlatTape2G + Hybrid_LH + Hybrid_4K20K + FusionMagnet (62.50)"
+best_n6 = "REBCO + PIT + Round + SMES + LHe_4K + QuantumChip (100%)"
+best_fusion_30T = "REBCO + PIT + FlatTape2G + Hybrid_LH + Hybrid_4K20K + FusionMagnet (45T, 100%)"
+n6_max = 100.0
+n6_avg = 85.9
+fusion_30T_combos = 1020
+note = "궁극의 초전도체 6단 DSE. 30T+ 핵융합 1,020 경로"
 
 [energy-generation]
-goal = false
-dse = "none"
-cross_dse = ["battery-architecture", "power-grid"]
+goal = true
+dse = "done"
+combos = 2400
+tool = "tools/dse-calc/energy_main.rs"
+cross_dse = ["battery-architecture", "power-grid", "energy-architecture"]
+note = "solar DSE within energy-architecture"
 
 [power-grid]
-goal = false
-dse = "none"
-cross_dse = ["battery-architecture", "energy-generation"]
+goal = true
+dse = "done"
+combos = 2400
+tool = "tools/dse-calc/energy_main.rs"
+cross_dse = ["battery-architecture", "energy-generation", "energy-architecture"]
+best_pareto = "HTS-YBCO + MMC + Oil-Immersed + UHVDC-1100kV + Supergrid (0.922)"
+n6_max = 100.0
 
 [robotics]
 goal = false
 dse = "none"
 cross_dse = ["chip-architecture", "learning-algorithm"]
 
+[programming-language]
+goal = true
+dse = "done"
+combos = 7560
+valid = 5016
+tool = "tools/lang-dse/"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+cross_dse = ["chip-architecture", "compiler-os", "software-design", "learning-algorithm"]
+best_pareto = "MultiParadigm + JIT_Adaptive + Full_N6 + N6AgentChain + FullStack (0.7448)"
+best_n6 = "MetaLang + LLVM_Native + Full_N6 + N6AgentChain + FullStack (90.0%, 18/20)"
+best_perf = "MetaLang + LLVM_Native + Sopfr5Err + N6AgentChain + FullStack (98.0%)"
+best_prac = "EffectType + WASM_Transp + Sopfr5Err + MambaSSM + CloudNativ (72.0%)"
+best_innov = "DependentType + WASM_Transp + Sopfr5Err + FormalVerify + FormalEco (75.0%)"
+n6_max = 90.0
+n6_avg = 64.6
+note = "궁극의 프로그래밍언어 5단 DSE. BT-50,52,56,58,65,67 활용. 언어+AI코드생성 통합"
+
 [compiler-os]
 goal = false
 dse = "none"
-cross_dse = ["chip-architecture"]
+cross_dse = ["chip-architecture", "programming-language"]
 
 [network-protocol]
 goal = false
@@ -139,6 +196,14 @@ goal = false
 dse = "none"
 cross_dse = ["chip-architecture", "robotics"]
 
+[material-synthesis]
+goal = true
+dse = "wip"
+combos = 3600
+tool = "tools/material-dse/"
+levels = ["Element", "Process", "Assembler", "Control", "Factory", "Transmute", "Universal", "OMEGA-M"]
+cross_dse = ["chip-architecture", "battery-architecture", "superconductor", "biology"]
+
 # ── Cross-DSE 결과 ────────────────────────────────
 
 [cross-dse.chip-x-battery]
@@ -157,18 +222,38 @@ note = "초전도 로직 연계"
 
 [cross-dse.battery-x-grid]
 domains = ["battery-architecture", "power-grid"]
-status = "none"
-note = "ESS 통합 아키텍처"
+status = "done"
+note = "energy-architecture Cross-DSE에서 통합 탐색 완료"
 
 [cross-dse.battery-x-energy]
 domains = ["battery-architecture", "energy-generation"]
-status = "none"
-note = "발전-저장 체인"
+status = "done"
+note = "energy-architecture Cross-DSE에서 통합 탐색 완료"
+
+[cross-dse.fusion-x-grid]
+domains = ["fusion", "power-grid"]
+status = "done"
+note = "energy-architecture Cross-DSE에서 통합 탐색 완료"
+
+[cross-dse.fusion-x-solar-x-battery-x-grid]
+domains = ["fusion", "solar-architecture", "battery-architecture", "power-grid"]
+status = "done"
+combos = 625
+ultimate_score = 0.883
+ultimate_n6 = "19/20 (95.0%)"
+note = "궁극의 에너지 4도메인 Cross-DSE 완료"
 
 [cross-dse.fusion-x-superconductor]
 domains = ["fusion", "superconductor"]
-status = "none"
-note = "토카막 자석 최적화"
+status = "done"
+combos = 1075200
+valid = 454656
+fusion_30T = 417792
+tool = "tools/sc-dse/cross_fusion.rs"
+best_pareto = "Li6-D + Tokamak-12 + Egyptian-Hybrid + Distributed-100 | REBCO + PIT + Rutherford + Hybrid-LH + NoInsul_20K (81.85)"
+best_n6 = "Li6-D + ST-Compact + TEG-17 | Nb3Sn + Bronze + Rutherford + CS-6 + LHe_4K (84.0%)"
+q_gain_max = "14.1× vs ITER 12T"
+note = "9차원 Cross-DSE 완료. 30T+ 91.9% 달성. REBCO+Rutherford+Hybrid-LH 압도적"
 
 [cross-dse.chip-x-display]
 domains = ["chip-architecture", "display-audio"]
@@ -194,3 +279,18 @@ note = "MPPT/인버터 SoC + 태양전지 최적화"
 domains = ["solar-architecture", "power-grid"]
 status = "none"
 note = "분산발전→그리드 연계 최적화"
+
+[cross-dse.material-x-chip]
+domains = ["material-synthesis", "chip-architecture"]
+status = "none"
+note = "반도체 소재 최적화"
+
+[cross-dse.material-x-battery]
+domains = ["material-synthesis", "battery-architecture"]
+status = "none"
+note = "전극/전해질 소재 합성"
+
+[cross-dse.material-x-superconductor]
+domains = ["material-synthesis", "superconductor"]
+status = "none"
+note = "초전도체 소재 합성"
