@@ -1,0 +1,333 @@
+# Battery Architecture DSE — extracted from tools/battery-dse/main.rs
+# All scores normalized to 0.0-1.0
+
+[meta]
+name = "battery"
+desc = "Battery Architecture DSE (BT-43/57/80-84)"
+
+[scoring]
+n6 = 0.20
+perf = 0.25
+power = 0.15
+cost = 0.15
+
+# ============================================================
+# Level 0: Material (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 0
+id = "LFP"
+label = "LiFePO4 (CN=6, 170 Wh/kg, 4000 cycles)"
+n6 = 1.00
+perf = 0.34
+power = 0.95
+cost = 0.69
+
+[[candidate]]
+level = 0
+id = "NMC811"
+label = "NMC811 (CN=6, 280 Wh/kg, 1000 cycles)"
+n6 = 0.75
+perf = 0.56
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "NCA"
+label = "NCA (CN=6, 260 Wh/kg, 1500 cycles)"
+n6 = 0.75
+perf = 0.52
+power = 0.72
+cost = 0.47
+
+[[candidate]]
+level = 0
+id = "LCO"
+label = "LiCoO2 (CN=6, 200 Wh/kg, 500 cycles)"
+n6 = 1.00
+perf = 0.40
+power = 0.65
+cost = 0.38
+
+[[candidate]]
+level = 0
+id = "Na-ion"
+label = "Na-ion (CN=6, 140 Wh/kg, 3000 cycles)"
+n6 = 0.75
+perf = 0.28
+power = 0.92
+cost = 1.00
+
+[[candidate]]
+level = 0
+id = "Li-S"
+label = "Li-S (CN=8, 500 Wh/kg, 300 cycles)"
+n6 = 0.83
+perf = 1.00
+power = 0.50
+cost = 0.82
+
+# ============================================================
+# Level 1: Process / Electrode (5 candidates)
+# ============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+level = 1
+id = "Graphite-Wet"
+label = "Graphite Wet Coating (1.0x, maturity 1.00)"
+n6 = 1.00
+perf = 0.33
+power = 1.00
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "SiC-10-Wet"
+label = "Si/C 10% Wet (1.5x, maturity 0.85)"
+n6 = 0.50
+perf = 0.50
+power = 0.85
+cost = 0.57
+
+[[candidate]]
+level = 1
+id = "SiC-20-Dry"
+label = "Si/C 20% Dry (2.0x, maturity 0.55)"
+n6 = 0.50
+perf = 0.67
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Si-SSB"
+label = "Si Solid-State (3.0x, maturity 0.25)"
+n6 = 1.00
+perf = 1.00
+power = 0.25
+cost = 0.29
+
+[[candidate]]
+level = 1
+id = "Na-HardCarbon"
+label = "Na Hard Carbon (0.8x, maturity 0.70)"
+n6 = 0.50
+perf = 0.27
+power = 0.70
+cost = 1.00
+
+# ============================================================
+# Level 2: Core / Cell Form Factor (5 candidates)
+# ============================================================
+
+[[level]]
+name = "Core"
+
+[[candidate]]
+level = 2
+id = "18650"
+label = "18650 Cylindrical (1.00x, thermal 0.85)"
+n6 = 0.67
+perf = 0.77
+power = 0.85
+cost = 1.00
+
+[[candidate]]
+level = 2
+id = "21700"
+label = "21700 Cylindrical (1.15x, thermal 0.82)"
+n6 = 0.33
+perf = 0.88
+power = 0.82
+cost = 0.92
+
+[[candidate]]
+level = 2
+id = "4680"
+label = "4680 Cylindrical (1.30x, thermal 0.70)"
+n6 = 0.33
+perf = 1.00
+power = 0.70
+cost = 0.86
+
+[[candidate]]
+level = 2
+id = "Prismatic"
+label = "Prismatic (1.10x, thermal 0.75)"
+n6 = 0.33
+perf = 0.85
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "Pouch"
+label = "Pouch (1.25x, thermal 0.65)"
+n6 = 0.33
+perf = 0.96
+power = 0.65
+cost = 0.71
+
+# ============================================================
+# Level 3: BMS / Chip (5 candidates)
+# ============================================================
+
+[[level]]
+name = "BMS"
+
+[[candidate]]
+level = 3
+id = "Discrete-6ch"
+label = "Discrete 6ch 12-bit (accuracy 0.85)"
+n6 = 0.75
+perf = 0.85
+power = 0.50
+cost = 0.67
+
+[[candidate]]
+level = 3
+id = "Integrated-12ch"
+label = "Integrated 12ch 12-bit (accuracy 0.92)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.33
+
+[[candidate]]
+level = 3
+id = "Wireless-12ch"
+label = "Wireless 12ch 12-bit (accuracy 0.90)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.22
+
+[[candidate]]
+level = 3
+id = "AI-BMS-12ch"
+label = "AI BMS 12ch 16-bit (accuracy 0.96)"
+n6 = 0.75
+perf = 0.96
+power = 1.00
+cost = 0.18
+
+[[candidate]]
+level = 3
+id = "Minimal-4ch"
+label = "Minimal 4ch 10-bit (accuracy 0.78)"
+n6 = 0.50
+perf = 0.78
+power = 0.35
+cost = 1.00
+
+# ============================================================
+# Level 4: System (5 candidates)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+level = 4
+id = "48V-ESS"
+label = "48V ESS (24 cells, scalability 0.70)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "400V-EV"
+label = "400V EV (96 cells, scalability 0.80)"
+n6 = 0.75
+perf = 0.80
+power = 0.40
+cost = 0.41
+
+[[candidate]]
+level = 4
+id = "800V-EV"
+label = "800V EV (192 cells, scalability 0.85)"
+n6 = 0.75
+perf = 0.85
+power = 0.40
+cost = 0.32
+
+[[candidate]]
+level = 4
+id = "Grid-MW"
+label = "Grid MW (3456 cells, scalability 1.00)"
+n6 = 0.75
+perf = 1.00
+power = 1.00
+cost = 0.18
+
+[[candidate]]
+level = 4
+id = "DC-Micro"
+label = "DC Microgrid (24 cells, scalability 0.55)"
+n6 = 1.00
+perf = 0.55
+power = 0.75
+cost = 1.00
+
+# ============================================================
+# Compatibility Rules (from is_compatible function)
+# ============================================================
+
+# Na-ion requires Na-HardCarbon anode
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Na-ion"
+then_level = 1
+then_ids = ["Na-HardCarbon"]
+
+# Na-HardCarbon requires Na-ion material (reverse constraint)
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Na-HardCarbon"
+then_level = 0
+then_ids = ["Na-ion"]
+
+# Li-S requires Si-SSB process
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Li-S"
+then_level = 1
+then_ids = ["Si-SSB"]
+
+# Si-SSB incompatible with Na-ion
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Si-SSB"
+then_level = 0
+then_ids = ["Na-ion"]
+
+# Minimal-4ch BMS excluded from high-voltage systems
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Minimal-4ch"
+then_level = 4
+then_ids = ["400V-EV", "800V-EV", "Grid-MW"]
+
+# 18650 excluded from 800V EV
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "18650"
+then_level = 4
+then_ids = ["800V-EV"]

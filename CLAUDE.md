@@ -100,6 +100,7 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 - `tools/gut-calc-rust/`  — GUT parameter brute-force search
 - `tools/dse-calc/`       — 소재×공정×코어×칩×시스템 DSE 전수 조합 탐색 + Pareto frontier
 - `tools/solar-dse/`      — 태양전지 DSE 전수 탐색 (1,584 조합, BT-30/63 기반)
+- `tools/universal-dse/`  — **공용 DSE 탐색기** (TOML 도메인 정의 → 전수 탐색 + Pareto + Cross-DSE)
 
 ## Calculator Rules (Shared)
 **새 계산기 개발시 성능 문제 예상되면 반드시 Rust 우선.**
@@ -269,14 +270,25 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   구현:
     - 조합 >10K → Rust (tools/dse-calc/)
     - 조합 <10K → Python (experiments/)
+    - **공용 DSE**: tools/universal-dse/ (TOML 도메인 파일 → 전수 탐색)
     - 결과: Pareto 테이블 + 최적 경로 + n=6 EXACT 비율
+
+  공용 DSE 탐색기 (tools/universal-dse/):
+    - 단일 도메인: universal-dse domains/chip.toml
+    - Cross-DSE:   universal-dse domains/chip.toml domains/battery.toml
+    - 새 도메인 추가 = TOML 파일 1개만 작성 (Rust 재컴파일 불필요)
+    - TOML 형식: [meta] + [scoring] + [[level]] + [[candidate]] + [[rule]]
+    - 도메인 파일: tools/universal-dse/domains/*.toml
 
   적용 도메인:
     - chip-architecture: 소재×공정×코어×칩×시스템 (3,000 조합)
     - battery-architecture: 소재×공정×코어×칩×시스템 (1,908 조합)
     - solar-architecture: 소재×공정×코어×칩×시스템 (1,584 조합)
-    - 각 도메인별 후보군은 해당 goal.md에 정의
-    - 새 궁극 도메인 추가 시 → goal.md + DSE 탐색 + dse-map.toml 갱신
+    - material-synthesis: 원소×공정×조립×제어×공장 (3,600 조합)
+    - fusion: 연료×가둠×가열×블랭킷×발전소 (TOML 정의 완료)
+    - superconductor: 소재×공정×형태×응용×시스템 (TOML 정의 완료)
+    - 각 도메인별 후보군은 해당 goal.md + domains/*.toml에 정의
+    - 새 궁극 도메인 추가 시 → goal.md + TOML + DSE 탐색 + dse-map.toml 갱신
 
   DSE 지도 파일: docs/dse-map.toml (TOML — Rust/Python 양쪽 파싱 가능)
     - 전체 DSE 현황 추적 (도메인별 상태/결과/Cross-DSE 여부)

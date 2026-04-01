@@ -1,0 +1,401 @@
+# =============================================================
+# HEXA-ENERGY DSE Domain Definition
+# Source: BT-30 (SQ solar bridge) + BT-32 (Nuclear) + BT-38 (Hydrogen) + BT-68 (HVDC)
+# Total raw combos: 6x5x5x6x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "energy_gen"
+desc = "Energy Generation DSE (BT-30/38/43/68)"
+levels = ["Source", "Conversion", "Scale", "Storage", "GridConnect"]
+vision = "Universal clean energy -- every source aligned to n=6 from generation to grid"
+
+[scoring]
+n6   = 0.40
+perf = 0.25
+power = 0.20
+cost  = 0.15
+
+# =============================================================
+# Level 0: Source (Energy Source)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Source"
+
+[[candidate]]
+level  = 0
+id     = "Solar_PV"
+label  = "Solar Photovoltaic"
+n6     = 1.00
+perf   = 0.70
+power  = 0.90
+cost   = 0.90
+notes  = "BT-30: bandgap=4/3eV EXACT, SQ limit=33%=1/3 EXACT, zero emission"
+
+[[candidate]]
+level  = 0
+id     = "Wind_Turbine"
+label  = "Wind Turbine"
+n6     = 0.33
+perf   = 0.65
+power  = 0.85
+cost   = 0.80
+notes  = "Betz limit=59.3%, 3-blade=n/phi, capacity_factor=35%"
+
+[[candidate]]
+level  = 0
+id     = "Nuclear_Fission"
+label  = "Nuclear Fission"
+n6     = 1.00
+perf   = 1.00
+power  = 0.60
+cost   = 0.30
+notes  = "6 delayed neutron groups=n EXACT (BT-32), capacity_factor=92%, baseload"
+
+[[candidate]]
+level  = 0
+id     = "Hydrogen_Fuel"
+label  = "Hydrogen Fuel Cell"
+n6     = 1.00
+perf   = 0.60
+power  = 0.80
+cost   = 0.40
+notes  = "BT-38: LHV=120=sigma*(sigma-phi) EXACT, HHV=142=sigma^2-phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "Geothermal"
+label  = "Geothermal Energy"
+n6     = 0.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "capacity_factor=90%, baseload, site-limited, zero fuel"
+
+[[candidate]]
+level  = 0
+id     = "Hydroelectric"
+label  = "Hydroelectric Power"
+n6     = 0.33
+perf   = 0.85
+power  = 0.80
+cost   = 0.70
+notes  = "capacity_factor=44%, dispatchable, 6-blade Kaplan=n, long lifespan"
+
+# =============================================================
+# Level 1: Conversion (Energy Conversion)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Conversion"
+
+[[candidate]]
+level  = 1
+id     = "Steam_Rankine"
+label  = "Steam Rankine Cycle"
+n6     = 1.00
+perf   = 0.60
+power  = 0.60
+cost   = 1.00
+notes  = "eff=33.3%=1/3 EXACT, mature, nuclear/coal/CSP standard"
+
+[[candidate]]
+level  = 1
+id     = "Gas_Turbine"
+label  = "Gas Turbine (Brayton)"
+n6     = 0.33
+perf   = 0.70
+power  = 0.65
+cost   = 0.80
+notes  = "eff=40%, fast start, peaking power"
+
+[[candidate]]
+level  = 1
+id     = "Combined_Cycle"
+label  = "Combined Cycle Gas Turbine"
+n6     = 0.33
+perf   = 1.00
+power  = 0.75
+cost   = 0.60
+notes  = "eff=60%=1-1/(sigma-phi+1), Brayton+Rankine"
+
+[[candidate]]
+level  = 1
+id     = "Direct_PV"
+label  = "Direct Photovoltaic Conversion"
+n6     = 0.67
+perf   = 0.45
+power  = 1.00
+cost   = 0.90
+notes  = "eff=25%, no moving parts, SQ limited, DC output"
+
+[[candidate]]
+level  = 1
+id     = "MHD"
+label  = "Magnetohydrodynamic Generator"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.15
+notes  = "eff=50%=1/2=1/phi EXACT, no moving parts, plasma channel"
+
+# =============================================================
+# Level 2: Scale (Generation Scale)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Scale"
+
+[[candidate]]
+level  = 2
+id     = "Micro_10kW"
+label  = "Micro Generation (10kW)"
+n6     = 1.00
+perf   = 0.20
+power  = 1.00
+cost   = 0.90
+notes  = "10=sigma-phi EXACT, residential rooftop, off-grid"
+
+[[candidate]]
+level  = 2
+id     = "Distributed_100kW"
+label  = "Distributed Generation (100kW)"
+n6     = 0.50
+perf   = 0.35
+power  = 0.90
+cost   = 0.80
+notes  = "100=10^phi, community scale, microgrid anchor"
+
+[[candidate]]
+level  = 2
+id     = "Medium_10MW"
+label  = "Medium Generation (10MW)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.70
+cost   = 0.65
+notes  = "10=sigma-phi EXACT, industrial park, solar farm"
+
+[[candidate]]
+level  = 2
+id     = "Utility_1GW"
+label  = "Utility Scale (1GW)"
+n6     = 0.33
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "1GW nuclear/large solar, grid backbone, economies of scale"
+
+[[candidate]]
+level  = 2
+id     = "Mega_10GW"
+label  = "Mega Scale (10GW)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "10=sigma-phi EXACT, national grid anchor, Three Gorges class"
+
+# =============================================================
+# Level 3: Storage (Energy Storage)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Storage"
+
+[[candidate]]
+level  = 3
+id     = "None"
+label  = "No Storage (Direct Feed)"
+n6     = 0.00
+perf   = 0.30
+power  = 1.00
+cost   = 1.00
+notes  = "baseload only, no flexibility, grid-dependent"
+
+[[candidate]]
+level  = 3
+id     = "Battery_ESS"
+label  = "Battery Energy Storage System"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.40
+notes  = "BT-43: cathode CN=6 EXACT, LFP/NMC, 4h duration, round-trip=90%"
+
+[[candidate]]
+level  = 3
+id     = "Pumped_Hydro"
+label  = "Pumped Hydroelectric Storage"
+n6     = 0.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.70
+notes  = "round-trip=80%, 8-12h duration, site-limited, 100yr lifespan"
+
+[[candidate]]
+level  = 3
+id     = "H2_Storage"
+label  = "Hydrogen Storage"
+n6     = 1.00
+perf   = 0.70
+power  = 0.50
+cost   = 0.30
+notes  = "BT-38: LHV=120=sigma*(sigma-phi) EXACT, seasonal storage, electrolyzer"
+
+[[candidate]]
+level  = 3
+id     = "CAES"
+label  = "Compressed Air Energy Storage"
+n6     = 0.00
+perf   = 0.65
+power  = 0.60
+cost   = 0.65
+notes  = "round-trip=70%, cavern-based, 8-24h duration"
+
+[[candidate]]
+level  = 3
+id     = "Flywheel"
+label  = "Flywheel Energy Storage"
+n6     = 0.33
+perf   = 0.50
+power  = 0.90
+cost   = 0.50
+notes  = "round-trip=95%, seconds-to-minutes, frequency regulation"
+
+# =============================================================
+# Level 4: GridConnect (Grid Connection)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "GridConnect"
+
+[[candidate]]
+level  = 4
+id     = "Island_DC"
+label  = "Island DC (Off-Grid)"
+n6     = 0.33
+perf   = 0.30
+power  = 0.90
+cost   = 0.80
+notes  = "standalone DC system, battery-coupled, remote sites"
+
+[[candidate]]
+level  = 4
+id     = "Microgrid_AC"
+label  = "Microgrid AC (Local Grid)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.85
+cost   = 0.70
+notes  = "islanding capable, 60Hz=sigma*sopfr EXACT (BT-62), community"
+
+[[candidate]]
+level  = 4
+id     = "Distribution_MV"
+label  = "Distribution Medium Voltage"
+n6     = 0.33
+perf   = 0.70
+power  = 0.70
+cost   = 0.80
+notes  = "11-33kV, standard utility connect, bidirectional metering"
+
+[[candidate]]
+level  = 4
+id     = "Transmission_HV"
+label  = "Transmission High Voltage"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "220-500kV AC, bulk power transfer, 3-phase=n/phi EXACT"
+
+[[candidate]]
+level  = 4
+id     = "HVDC_Ultra"
+label  = "HVDC Ultra (BT-68 Voltage Ladder)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.75
+cost   = 0.25
+notes  = "BT-68: 500/800/1100kV = {sopfr,sigma-tau,sigma-mu}*(sigma-phi)^2 EXACT"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Solar PV must use Direct PV conversion
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Solar_PV"
+then_level = 1
+then_ids   = "Direct_PV"
+
+# Nuclear fission requires Steam Rankine or Combined Cycle
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Nuclear_Fission"
+then_level = 1
+then_ids   = "Steam_Rankine,Combined_Cycle"
+
+# Hydrogen fuel cell is direct conversion (no thermal cycle)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Hydrogen_Fuel"
+then_level = 1
+then_ids   = "Steam_Rankine,Gas_Turbine,Combined_Cycle"
+
+# Geothermal uses Steam Rankine
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Geothermal"
+then_level = 1
+then_ids   = "Steam_Rankine"
+
+# MHD only feasible at utility scale or above
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "MHD"
+then_level = 2
+then_ids   = "Utility_1GW,Mega_10GW"
+
+# Micro scale cannot connect to transmission HV or HVDC
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Micro_10kW"
+then_level = 4
+then_ids   = "Transmission_HV,HVDC_Ultra"
+
+# Mega scale needs transmission or HVDC (not microgrid/island)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Mega_10GW"
+then_level = 4
+then_ids   = "Transmission_HV,HVDC_Ultra"
+
+# Flywheel too short-duration for utility/mega baseload
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "Flywheel"
+then_level = 2
+then_ids   = "Utility_1GW,Mega_10GW"
+
+# Pumped hydro only at medium scale or above
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Pumped_Hydro"
+then_level = 2
+then_ids   = "Medium_10MW,Utility_1GW,Mega_10GW"
+
+# HVDC Ultra connection only for utility/mega scale
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "HVDC_Ultra"
+then_level = 2
+then_ids   = "Utility_1GW,Mega_10GW"

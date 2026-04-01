@@ -1,0 +1,403 @@
+# =============================================================
+# HEXA-SOLAR DSE Domain Definition
+# Source: tools/solar-dse/main.rs
+# BT-30 (SQ solar bridge) + BT-63 (Solar panel cell ladder)
+# Total raw combos: 6x6x5x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "solar"
+desc = "Solar Architecture DSE (BT-30/63)"
+levels = ["Absorber", "Process", "Junction", "PowerElec", "Module"]
+vision = "Zero electricity bill -- one roof powers home + car"
+
+[scoring]
+n6   = 0.40
+perf = 0.25
+power = 0.15
+cost  = 0.10
+maturity = 0.10
+
+# =============================================================
+# Level 0: Absorber (Material)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Absorber"
+
+[[candidate]]
+level  = 0
+id     = "c-Si"
+label  = "Crystalline Silicon"
+n6     = 0.33
+perf   = 0.85
+power  = 0.95
+cost   = 1.00
+notes  = "bandgap=1.12eV, Z=14=sigma+phi, theor_eff=29%, maturity=100"
+
+[[candidate]]
+level  = 0
+id     = "Perovskite"
+label  = "Perovskite (ABX3)"
+n6     = 0.67
+perf   = 0.97
+power  = 0.30
+cost   = 1.00
+notes  = "bandgap=1.55eV near 4/3=1.333, Z=82, theor_eff=33%=1/3 EXACT, maturity=40"
+
+[[candidate]]
+level  = 0
+id     = "GaAs"
+label  = "Gallium Arsenide"
+n6     = 1.00
+perf   = 1.00
+power  = 0.90
+cost   = 0.00
+notes  = "bandgap=1.42eV~4/3 EXACT, Z=31, theor_eff=34%~1/3 EXACT, maturity=90"
+
+[[candidate]]
+level  = 0
+id     = "CIGS"
+label  = "Cu(In,Ga)Se2 Thin-Film"
+n6     = 0.33
+perf   = 0.82
+power  = 0.70
+cost   = 0.75
+notes  = "bandgap=1.15eV, Z=29, theor_eff=28%, maturity=75"
+
+[[candidate]]
+level  = 0
+id     = "CdTe"
+label  = "Cadmium Telluride"
+n6     = 0.67
+perf   = 0.94
+power  = 0.80
+cost   = 0.75
+notes  = "bandgap=1.45eV~4/3, Z=48=sigma*tau, theor_eff=32%, maturity=85"
+
+[[candidate]]
+level  = 0
+id     = "OPV"
+label  = "Organic Photovoltaic"
+n6     = 0.33
+perf   = 0.53
+power  = 0.20
+cost   = 1.00
+notes  = "bandgap=1.40eV, Z=6=n EXACT, theor_eff=18%, maturity=30"
+
+# =============================================================
+# Level 1: Process (Cell Process)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "Al-BSF"
+label  = "Aluminum Back Surface Field"
+n6     = 0.67
+perf   = 0.75
+power  = 0.56
+cost   = 1.00
+notes  = "eff=20.0%, passiv=1, temp_coeff=450, maturity=100"
+
+[[candidate]]
+level  = 1
+id     = "PERC"
+label  = "Passivated Emitter Rear Cell"
+n6     = 1.00
+perf   = 0.87
+power  = 0.56
+cost   = 0.75
+notes  = "eff=23.0%, passiv=2=phi EXACT, temp_coeff=400 EXACT, maturity=95"
+
+[[candidate]]
+level  = 1
+id     = "TOPCon"
+label  = "Tunnel Oxide Passivated Contact"
+n6     = 0.33
+perf   = 0.96
+power  = 0.56
+cost   = 0.50
+notes  = "eff=25.5%, passiv=3, temp_coeff=350, maturity=80"
+
+[[candidate]]
+level  = 1
+id     = "HJT"
+label  = "Heterojunction Technology"
+n6     = 1.00
+perf   = 0.98
+power  = 0.78
+cost   = 0.50
+notes  = "eff=26.0%, passiv=4=tau EXACT, temp_coeff=280 EXACT, maturity=65"
+
+[[candidate]]
+level  = 1
+id     = "IBC"
+label  = "Interdigitated Back Contact"
+n6     = 0.67
+perf   = 1.00
+power  = 0.56
+cost   = 0.25
+notes  = "eff=26.5%, passiv=4=tau EXACT, temp_coeff=320, maturity=55"
+
+[[candidate]]
+level  = 1
+id     = "Perov-Print"
+label  = "Perovskite Printing"
+n6     = 1.00
+perf   = 0.83
+power  = 0.67
+cost   = 1.00
+notes  = "eff=22.0%, passiv=2=phi EXACT, temp_coeff=300 EXACT, maturity=25"
+
+# =============================================================
+# Level 2: Junction (Core Structure)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Junction"
+
+[[candidate]]
+level  = 2
+id     = "Single-1J"
+label  = "Single Junction"
+n6     = 0.50
+perf   = 0.56
+power  = 0.70
+cost   = 1.00
+notes  = "junctions=1=mu EXACT, limit=33.7% (SQ 1/3 EXACT), record=26.8%"
+
+[[candidate]]
+level  = 2
+id     = "Tandem-2J"
+label  = "Tandem (2-Junction)"
+n6     = 0.25
+perf   = 0.71
+power  = 0.70
+cost   = 0.50
+notes  = "junctions=2=phi EXACT, limit=45.7%, record=33.9%"
+
+[[candidate]]
+level  = 2
+id     = "Triple-3J"
+label  = "Triple Junction"
+n6     = 0.25
+perf   = 0.82
+power  = 0.70
+cost   = 0.25
+notes  = "junctions=3=n/phi EXACT, limit=51.8%, record=39.2%"
+
+[[candidate]]
+level  = 2
+id     = "CPV"
+label  = "Concentrated Photovoltaic (3J)"
+n6     = 0.50
+perf   = 1.00
+power  = 0.70
+cost   = 0.00
+notes  = "junctions=3=n/phi EXACT, concentration=true, limit=47.0%, record=47.6%"
+
+[[candidate]]
+level  = 2
+id     = "Bifacial"
+label  = "Bifacial (phi=2 sides)"
+n6     = 0.50
+perf   = 0.57
+power  = 0.80
+cost   = 0.75
+notes  = "junctions=1=mu EXACT, bifacial=phi sides EXACT, limit=33.7%, record=27.0%"
+
+# =============================================================
+# Level 3: PowerElec (Power Electronics / Chip)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "PowerElec"
+
+[[candidate]]
+level  = 3
+id     = "String-Inv"
+label  = "String Inverter"
+n6     = 0.67
+perf   = 0.83
+power  = 0.70
+cost   = 0.75
+notes  = "conv_eff=97.5% EXACT, mppt=2=phi EXACT, no monitoring"
+
+[[candidate]]
+level  = 3
+id     = "Micro-Inv"
+label  = "Micro Inverter"
+n6     = 0.67
+perf   = 0.76
+power  = 0.90
+cost   = 0.25
+notes  = "conv_eff=96.5%, mppt=1=mu EXACT, monitoring=true"
+
+[[candidate]]
+level  = 3
+id     = "DC-Optimizer"
+label  = "DC Power Optimizer"
+n6     = 1.00
+perf   = 1.00
+power  = 0.90
+cost   = 0.50
+notes  = "conv_eff=99.0% EXACT, mppt=1=mu EXACT, monitoring=true"
+
+[[candidate]]
+level  = 3
+id     = "Hybrid-Inv"
+label  = "Hybrid Inverter (+ Battery)"
+n6     = 0.67
+perf   = 0.79
+power  = 0.90
+cost   = 0.25
+notes  = "conv_eff=97.0%, mppt=2=phi EXACT, monitoring=true"
+
+[[candidate]]
+level  = 3
+id     = "SiC-Central"
+label  = "SiC Central Inverter"
+n6     = 1.00
+perf   = 0.97
+power  = 0.70
+cost   = 0.00
+notes  = "conv_eff=98.5% EXACT, mppt=12=sigma EXACT, no monitoring"
+
+# =============================================================
+# Level 4: Module (System / Array)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Module"
+
+[[candidate]]
+level  = 4
+id     = "Res-60"
+label  = "Residential 60-cell (300W)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.79
+cost   = 0.80
+notes  = "cells=60=sigma*sopfr EXACT, 300W, lifespan=25=J2+mu EXACT, roof=90"
+
+[[candidate]]
+level  = 4
+id     = "Com-72"
+label  = "Commercial 72-cell (400W)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.79
+cost   = 0.70
+notes  = "cells=72=sigma*n EXACT, 400W, lifespan=25=J2+mu EXACT, roof=80"
+
+[[candidate]]
+level  = 4
+id     = "HC-120"
+label  = "Half-Cut 120-cell (400W)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.95
+cost   = 0.80
+notes  = "cells=120=sigma*(sigma-phi) EXACT, 400W, lifespan=30=sopfr*n EXACT, roof=90"
+
+[[candidate]]
+level  = 4
+id     = "HC-144"
+label  = "Half-Cut 144-cell (500W)"
+n6     = 0.80
+perf   = 1.00
+power  = 0.95
+cost   = 0.70
+notes  = "cells=144=sigma^2 EXACT, 500W, lifespan=30=sopfr*n EXACT, roof=75"
+
+[[candidate]]
+level  = 4
+id     = "BIPV"
+label  = "Building-Integrated PV (48-cell, 250W)"
+n6     = 1.00
+perf   = 0.50
+power  = 0.95
+cost   = 0.90
+notes  = "cells=48=sigma*tau EXACT, 250W, lifespan=30=sopfr*n EXACT, roof=100"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Perovskite only with Perov-Print or HJT
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Perovskite"
+then_level = 1
+then_ids   = "Perov-Print,HJT"
+
+# Perov-Print only with Perovskite
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Perov-Print"
+then_level = 0
+then_ids   = "Perovskite"
+
+# GaAs only with CPV or Triple-3J (too expensive for flat panel)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "GaAs"
+then_level = 2
+then_ids   = "CPV,Triple-3J"
+
+# OPV only with Single-1J or Bifacial
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "OPV"
+then_level = 2
+then_ids   = "Single-1J,Bifacial"
+
+# CPV only with GaAs
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "CPV"
+then_level = 0
+then_ids   = "GaAs"
+
+# CIGS: no IBC process
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "CIGS"
+then_level = 1
+then_ids   = "IBC"
+
+# CdTe: no IBC process
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "CdTe"
+then_level = 1
+then_ids   = "IBC"
+
+# OPV: only Al-BSF or Perov-Print process
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "OPV"
+then_level = 1
+then_ids   = "Al-BSF,Perov-Print"
+
+# Micro-Inv impractical for large commercial HC-144
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "Micro-Inv"
+then_level = 4
+then_ids   = "HC-144"
+
+# SiC-Central overkill for residential / BIPV
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "SiC-Central"
+then_level = 4
+then_ids   = "Res-60,BIPV"
