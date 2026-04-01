@@ -152,7 +152,7 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   solar-architecture/ (5 levels: HEXA-ABSORB/PROCESS/JUNCTION/POWER/ARRAY)
   # Material Synthesis (소재→공정→조립기→제어→시스템→변환→만능→궁극, DSE 3,600 조합)
   material-synthesis/ (8 levels: HEXA-ELEMENT/PROCESS/ASSEMBLER/CONTROL/FACTORY/TRANSMUTE/UNIVERSAL/OMEGA-M)
-  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 93 BTs
+  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 102 BTs
 ```
 
 ## Rust Tools
@@ -241,7 +241,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (93 total, BT-1~93)
+## Breakthrough Theorems (102 total, BT-1~102)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -318,6 +318,14 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-91: Z2 위상 ECC J₂ 절약 (SECDED→Z2: savings=σ·J₂/σ=J₂=24 GB, identity) ⭐⭐
   BT-92: Bott 활성 채널 = sopfr (KO 비자명=5=sopfr, 자명=3=n/φ, 5/8≈1-1/e) ⭐⭐⭐
   BT-93: Carbon Z=6 칩 소재 보편성 (Diamond/Graphene/SiC=Z=6 전 도메인 1위, 8/10 Cross-DSE) ⭐⭐⭐
+
+  # Fusion Alien-Level (BT-97~102)
+  BT-97: Weinberg angle sin²θ_W = 3/13 = (n/φ)/(σ+μ), 0.19% 일치, D 풍부도→핵융합 연료 결정 ⭐⭐
+  BT-98: D-T 바리온 수 = sopfr(6) = 2+3 = 5, 6의 소인수 = 핵융합 최적 연료 ⭐⭐⭐
+  BT-99: Tokamak q=1 = 완전수 진약수 역수합 1/2+1/3+1/6=1, 위상적 동치 ⭐⭐⭐
+  BT-100: CNO 촉매 A = σ+{0,μ,φ,n/φ} = σ+진약수, 전환 온도 17MK=σ+sopfr ⭐⭐⭐
+  BT-101: 광합성 포도당 C₆H₁₂O₆ 총 24원자=J₂, 양자수율 8=σ-τ, 9/9 EXACT ⭐⭐⭐
+  BT-102: 자기 재결합 속도 0.1=1/(σ-φ), BT-64 핵융합 확장, MRX/태양/자기권 EXACT ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙

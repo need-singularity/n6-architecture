@@ -1,17 +1,33 @@
 # =============================================================
-# HEXA-FUSION DSE Domain Definition
+# HEXA-FUSION DSE Domain Definition (Upgraded)
 # Source: docs/fusion/goal.md + tools/fusion-calc/main.rs
+#         docs/fusion/alien-level-discoveries.md (15 discoveries)
 # BT-27 (Carbon-6 energy chain) + BT-38 (Hydrogen quadruplet)
+# BT-62 (Grid frequency 60Hz=sigma*sopfr)
+# BT-64 (1/(sigma-phi)=0.1 reconnection rate — Discovery 13)
+# BT-74 (95/5 cross-domain resonance)
 # H-FU-1 (D-T nucleon sopfr=5), H-FU-30 (Li-6 isotope n=6)
 # H-FU-9 (optimal T_i=14keV=sigma+phi), H-FU-48 (p-B11 3 alphas)
-# Total raw combos: 5x6x6x5x5 = 4,500 (pre-filter)
+#
+# Alien-Level Discoveries incorporated:
+#   D1:  BCS-Plasma sigma=12 duality
+#   D5:  D-T baryon conservation = sopfr(6)=5
+#   D8:  CNO cycle catalysts A = sigma+{0,mu,phi,n/phi}
+#   D9:  Lawson triple product Q=10=sigma-phi
+#   D10: Photosynthesis-Fusion mirror (glucose J_2=24 atoms)
+#   D12: Fe-56 perfect number chain P_1->P_2->sigma(P_2)
+#   D13: Magnetic reconnection rate = 1/(sigma-phi)=0.1
+#   D14: BBN H:He ratio Y_p=1/tau=1/4
+#   D15: Plasma crystal hexagonal symmetry K_2=6=n
+#
+# Total raw combos: 7x7x7x6x6 = 12,348 (pre-filter)
 # =============================================================
 
 [meta]
 name = "fusion"
-desc = "Nuclear Fusion Architecture DSE (BT-27/38, 60 H-FU)"
+desc = "Nuclear Fusion Architecture DSE (BT-27/38/62/64/74, 60 H-FU + 15 alien discoveries)"
 levels = ["Fuel", "Confinement", "Heating", "Blanket", "Plant"]
-vision = "Baseload fusion power -- limitless clean energy from seawater"
+vision = "Baseload fusion power -- limitless clean energy from seawater, n=6 from baryon conservation to grid"
 
 [scoring]
 n6   = 0.35
@@ -20,10 +36,13 @@ power = 0.20
 cost  = 0.15
 
 # =============================================================
-# Level 0: Fuel  -- 5 candidates
+# Level 0: Fuel  -- 7 candidates
 #   n6 checks: nucleon sum == sopfr(6)=5, branch count,
 #              reaction products, aneutronic fraction
 #   D=A2=phi, T=A3=n/phi, He3=A3, B11=A11=sigma-mu
+#   Discovery 5: D-T baryon conservation = sopfr(6) = 5 EXACT
+#   Discovery 8: CNO catalysts A = sigma + {0,mu,phi,n/phi}
+#   Discovery 12: Fe-56 chain P_1->P_2->sigma(P_2)
 # =============================================================
 [[level]]
 name = "Fuel"
@@ -36,7 +55,7 @@ n6     = 0.95
 perf   = 0.95
 power  = 0.80
 cost   = 0.70
-notes  = "D=phi=2 + T=n/phi=3 = sopfr=5 EXACT, Q=17.6MeV, T_opt=14keV=sigma+phi, Lawson easiest"
+notes  = "D=phi=2 + T=n/phi=3 = sopfr=5 EXACT (D5: baryon conservation), Q=17.6MeV, T_opt=14keV=sigma+phi, Q_ratio=10=sigma-phi (D9), Lawson easiest"
 
 [[candidate]]
 level  = 0
@@ -76,7 +95,7 @@ n6     = 0.80
 perf   = 0.30
 power  = 0.95
 cost   = 0.50
-notes  = "3 alphas -> sigma=12 nucleons EXACT (H-FU-48), B=11=sigma-mu, aneutronic, T_i~200keV"
+notes  = "3 alphas -> sigma=12 nucleons EXACT (H-FU-48), B=11=sigma-mu, aneutronic, T_i~200keV, CNO bridge: C-12(=sigma) catalyzes stellar p-B11 path (D8)"
 
 [[candidate]]
 level  = 0
@@ -88,10 +107,23 @@ power  = 0.70
 cost   = 0.85
 notes  = "D-D + secondary D-T/D-He3, combines phi=2 branches, effective Q~8MeV"
 
+# --- New: CNO-bridged aneutronic candidate (Discovery 8) ---
+[[candidate]]
+level  = 0
+id     = "pB11_CNO"
+label  = "p-B11 with CNO Catalyst Assist"
+n6     = 0.90
+perf   = 0.35
+power  = 0.95
+cost   = 0.40
+notes  = "CNO catalysts A={sigma,sigma+mu,sigma+phi,sigma+n/phi} bridge stellar->terrestrial p-B11 (D8), C-12 seed enhances cross-section at T_CNO=17MK=sigma+sopfr, 3 alphas=sigma nucleons, fully aneutronic"
+
 # =============================================================
-# Level 1: Confinement  -- 6 candidates
+# Level 1: Confinement  -- 7 candidates
 #   n6 checks: TF coils (n,sigma,sigma+n), aspect ratio (n/phi=3),
 #              q95, kappa, field periods (sopfr=5)
+#   Discovery 6: Torus q=1 = sum(1/d, d|6, d<6) topological identity
+#   Discovery 15: Plasma crystal K_2=6=n hexagonal symmetry
 # =============================================================
 [[level]]
 name = "Confinement"
@@ -104,7 +136,7 @@ n6     = 0.90
 perf   = 0.95
 power  = 0.70
 cost   = 0.60
-notes  = "q95~n/phi=3, A~n/phi=3, PF=n=6 (ITER), kappa~1.8, TRL=7, highest Q achieved"
+notes  = "q95~n/phi=3, A~n/phi=3, PF=n=6 (ITER), kappa~1.8, TRL=7, highest Q achieved, q=1 topological identity (D6)"
 
 [[candidate]]
 level  = 1
@@ -114,7 +146,7 @@ n6     = 1.00
 perf   = 0.95
 power  = 0.70
 cost   = 0.55
-notes  = "TF_coils=18=3n EXACT, PF_coils=6=n EXACT, A=3=n/phi EXACT, q95=3=n/phi EXACT, sigma=12 sectors, ITER-class"
+notes  = "TF_coils=18=3n EXACT, PF_coils=6=n EXACT, A=3=n/phi EXACT, q95=3=n/phi EXACT, sigma=12 sectors, q=1 topological identity (D6), ITER-class"
 
 [[candidate]]
 level  = 1
@@ -167,10 +199,12 @@ cost   = 0.60
 notes  = "TAE C-2W, compact toroid, no central solenoid, good for p-B11, TRL=3"
 
 # =============================================================
-# Level 2: Heating  -- 6 candidates
+# Level 2: Heating  -- 7 candidates
 #   n6 checks: NBI 120keV=sigma*(sigma-phi)=sigma*10,
 #              3 main methods=n/phi (H-FU-17 CLOSE),
 #              ECRH 170GHz, ICRH 40-80MHz, LHCD 5GHz=sopfr
+#   Discovery 13: reconnection rate 0.1=1/(sigma-phi) governs
+#                 fast heating onset via magnetic reconnection
 # =============================================================
 [[level]]
 name = "Heating"
@@ -243,13 +277,16 @@ n6     = 1.00
 perf   = 0.90
 power  = 0.65
 cost   = 0.45
-notes  = "methods=3=n/phi EXACT (NBI+ECRH+ICRH), total_power=24MW=J2 EXACT, 120keV=sigma*(sigma-phi) NBI, synergistic"
+notes  = "methods=3=n/phi EXACT (NBI+ECRH+ICRH), total_power=24MW=J2 EXACT, 120keV=sigma*(sigma-phi) NBI, reconnection onset at 0.1*v_A=1/(sigma-phi) (D13), synergistic"
 
 # =============================================================
-# Level 3: Blanket  -- 5 candidates
+# Level 3: Blanket  -- 6 candidates
 #   n6 checks: Li-6 isotope A=6=n EXACT (H-FU-30),
 #              TBR>1=mu target, Li enrichment,
 #              breeding reactions phi=2 (Li-6 + Li-7)
+#   Discovery 10: Photosynthesis-Fusion mirror — Li-6 breed
+#                 closes the n=6 fuel cycle from star to plant
+#   Discovery 14: BBN Y_p=1/tau=1/4 sets initial H:He ratio
 # =============================================================
 [[level]]
 name = "Blanket"
@@ -312,13 +349,15 @@ n6     = 1.00
 perf   = 0.90
 power  = 0.85
 cost   = 0.45
-notes  = "Li-6_A=6=n EXACT, TBR=7/6~1.17, breeding_rxns=2=phi EXACT (Li-6+Li-7), enrichment=90%=n*(sigma+n/phi), SiC/FW"
+notes  = "Li-6_A=6=n EXACT, TBR=7/6~1.17, breeding_rxns=2=phi EXACT (Li-6+Li-7), enrichment=90%=n*(sigma+n/phi), SiC/FW, BBN Y_p=1/tau sets initial fuel ratio (D14)"
 
 # =============================================================
-# Level 4: Plant (Balance of Plant)  -- 5 candidates
+# Level 4: Plant (Balance of Plant)  -- 6 candidates
 #   n6 checks: thermal efficiency, cycle temperature,
 #              grid output (60Hz=sigma*sopfr BT-62),
 #              power conversion stages
+#   Discovery 12: Fe-56 chain ends at sigma(P_2)=56 -- binding
+#                 energy maximum determines thermal source T
 # =============================================================
 [[level]]
 name = "Plant"
@@ -381,7 +420,7 @@ n6     = 1.00
 perf   = 0.92
 power  = 0.85
 cost   = 0.50
-notes  = "stages=6=n EXACT, eta=50%=sigma/J2 EXACT, T_out=600C=sigma*sopfr*sigma CLOSE, grid=60Hz=sigma*sopfr (BT-62)"
+notes  = "stages=6=n EXACT, eta=50%=sigma/J2 EXACT, T_out=600C=sigma*sopfr*sigma CLOSE, grid=60Hz=sigma*sopfr (BT-62), Fe-56 B/A=8.79MeV max sets thermal source (D12)"
 
 # =============================================================
 # Compatibility Rules
@@ -534,3 +573,89 @@ if_level = 0
 if_id    = "pB11"
 then_level = 4
 then_ids = "Direct_MHD"
+
+# ── Alien-level discovery rules (D1~D15) ──
+
+# pB11_CNO requires FRC or MCF_Compact (CNO-assisted needs high-T, compact geometry)
+[[rule]]
+type     = "require"
+if_level = 0
+if_id    = "pB11_CNO"
+then_level = 1
+then_ids = "FRC,MCF_Compact"
+
+# pB11_CNO prefers Direct MHD (aneutronic charged-particle output)
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "pB11_CNO"
+then_level = 4
+then_ids = "Direct_MHD,Brayton_SCO2"
+
+# pB11_CNO prefers NBI heating (high-energy injection for CNO cross-section)
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "pB11_CNO"
+then_level = 2
+then_ids = "NBI,N6_TriHeat"
+
+# Ohmic insufficient for CNO-assisted fuel (needs T_CNO~17MK)
+[[rule]]
+type     = "exclude"
+if_level = 2
+if_id    = "Ohmic"
+then_level = 0
+then_ids = "pB11_CNO"
+
+# N6 Tokamak pairs best with N6 Triple Heating and N6 Li-6 Blanket
+# (D6: topological q=1 identity + D5: baryon conservation chain)
+[[rule]]
+type     = "prefer"
+if_level = 1
+if_id    = "Tokamak_N6"
+then_level = 2
+then_ids = "N6_TriHeat,NBI,ECRH,ICRH"
+
+[[rule]]
+type     = "prefer"
+if_level = 1
+if_id    = "Tokamak_N6"
+then_level = 3
+then_ids = "N6_Li6_Blanket,SiC_LiPb"
+
+# N6 Brayton cycle prefers N6 Li-6 Blanket for high T_out
+# (D12: Fe-56 binding energy max -> optimal thermal conversion)
+[[rule]]
+type     = "prefer"
+if_level = 4
+if_id    = "N6_Brayton6"
+then_level = 3
+then_ids = "N6_Li6_Blanket,SiC_LiPb"
+
+# DT_Li6 complete fuel cycle prefers N6 Li-6 Blanket
+# (closed n=6 breeding cycle: D5 baryon + D14 BBN ratio)
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "DT_Li6"
+then_level = 3
+then_ids = "N6_Li6_Blanket"
+
+# DT_Li6 prefers tokamak configurations (highest TRL for breeding)
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "DT_Li6"
+then_level = 1
+then_ids = "Tokamak,Tokamak_N6"
+
+# ── Reconnection rate constraint (D13: 0.1 = 1/(sigma-phi)) ──
+# N6 Triple Heating with reconnection-aware power delivery
+# prefers tokamak/stellarator (magnetic reconnection most relevant)
+[[rule]]
+type     = "prefer"
+if_level = 2
+if_id    = "N6_TriHeat"
+then_level = 1
+then_ids = "Tokamak,Tokamak_N6,Stellarator"
