@@ -1,0 +1,357 @@
+# =============================================================
+# Prosthetics DSE Domain Definition
+# Artificial limbs & implants — socket to power system
+# n=6: 6 DOF hand, σ=12 EMG channels, τ=4 grip patterns
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "prosthetics"
+desc = "Prosthetics Architecture DSE (socket/actuator/sensor/control/power)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Socket (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Socket"
+
+[[candidate]]
+level = 0
+id = "PTB-Socket"
+label = "PTB Socket (patellar tendon bearing, 6-point pressure, transtibial)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "TSB-Liner"
+label = "TSB Total Surface (silicone liner, σ=12 contact zones, comfort)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Osseointegrated"
+label = "Osseointegrated Implant (direct bone anchor, 6mm titanium rod)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "3D-Printed"
+label = "3D-Printed Custom Socket (scan-to-print, n=6 material zones)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Subischial"
+label = "Subischial Socket (narrow ML, 6-wall design, transfemoral)"
+n6 = 1.00
+perf = 0.78
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "Vacuum-Elevated"
+label = "Vacuum Elevated Socket (active suction, σ=12 inHg, secure)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.55
+
+# ============================================================
+# Level 1: Actuator (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Actuator"
+
+[[candidate]]
+level = 1
+id = "DC-Servo"
+label = "DC Servo Motor (n=6 DOF, brushless, standard myoelectric)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Pneumatic-Muscle"
+label = "Pneumatic Artificial Muscle (McKibben, 6 actuators, compliant)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "SMA-Wire"
+label = "Shape Memory Alloy Wire (NiTi, σ=12 wires, silent, lightweight)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Hydraulic-Micro"
+label = "Micro-Hydraulic (oil, 6-cylinder manifold, high force)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Piezo-Ultrasonic"
+label = "Piezoelectric Ultrasonic Motor (compact, n=6 stages, precise)"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "Series-Elastic"
+label = "Series Elastic Actuator (spring+motor, 6 Nm/rad, bio-mimetic)"
+n6 = 1.00
+perf = 0.88
+power = 0.68
+cost = 0.55
+
+# ============================================================
+# Level 2: Sensor (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level = 2
+id = "Surface-EMG"
+label = "Surface EMG (σ=12 channels, non-invasive, standard)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Implanted-EMG"
+label = "Implanted EMG (intramuscular, 6 electrodes, TMR compatible)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "Force-Torque"
+label = "Force/Torque Sensor (6-axis F/T, grip feedback, dexterous)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "IMU-6axis"
+label = "IMU 6-Axis (3-accel+3-gyro=n=6, orientation tracking)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Tactile-Array"
+label = "Tactile Sensor Array (σ=12 taxels/finger, pressure map)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Neural-Interface"
+label = "Neural Interface (cortical/PNS, 6 DOF decode, brain control)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.25
+
+# ============================================================
+# Level 3: Control (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 3
+id = "Threshold-Switch"
+label = "Threshold Switch Control (on/off, τ=4 grip patterns, simple)"
+n6 = 0.85
+perf = 0.55
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+level = 3
+id = "Pattern-Recognition"
+label = "Pattern Recognition (ML classifier, 6 gesture classes, real-time)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Proportional"
+label = "Proportional EMG Control (amplitude mapping, n=6 DOF, analog)"
+n6 = 1.00
+perf = 0.75
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Neural-Decode"
+label = "Neural Decode (deep learning, σ=12 intent classes, cortical)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.30
+
+[[candidate]]
+level = 3
+id = "Impedance-Control"
+label = "Impedance Control (variable stiffness, 6 compliance levels, natural)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Shared-Autonomy"
+label = "Shared Autonomy (AI+user intent, 6 auto-grasp modes, hybrid)"
+n6 = 1.00
+perf = 0.90
+power = 0.68
+cost = 0.45
+
+# ============================================================
+# Level 4: Power (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Power"
+
+[[candidate]]
+level = 4
+id = "LiPo-Single"
+label = "LiPo Battery (single cell, 6Wh, σ=12hr life, standard)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "LiPo-Dual"
+label = "LiPo Dual Cell (φ=2 cells, σ=12Wh, hot-swap, extended)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Solid-State-Battery"
+label = "Solid State Battery (ceramic, n=6 stacked cells, safe)"
+n6 = 1.00
+perf = 0.88
+power = 0.88
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Energy-Harvest"
+label = "Energy Harvesting (piezo+thermal, 6 generators, self-charge)"
+n6 = 1.00
+perf = 0.65
+power = 0.92
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Supercapacitor"
+label = "Supercapacitor Hybrid (rapid charge, τ=4s burst, σ=12F)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Wireless-Power"
+label = "Wireless Inductive Power (Qi-based, n=6W transfer, implant-safe)"
+n6 = 1.00
+perf = 0.72
+power = 0.70
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Neural interface requires neural decode control
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Neural-Interface"
+then_level = 3
+then_ids = ["Neural-Decode"]
+
+# Osseointegrated socket needed for implanted EMG
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Implanted-EMG"
+then_level = 0
+then_ids = ["Osseointegrated"]
+
+# Threshold switch only with simple actuators
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Threshold-Switch"
+then_level = 1
+then_ids = ["DC-Servo", "Pneumatic-Muscle"]
+
+# Wireless power for implant-based systems
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Wireless-Power"
+then_level = 0
+then_ids = ["Osseointegrated"]
