@@ -12,10 +12,15 @@ cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 [chip-architecture]
 goal = true
 dse = "done"
-combos = 3125
+combos = 3000
 tool = "tools/dse-calc/"
 levels = ["HEXA-1", "PIM", "3D", "Photon", "Wafer", "Super", "OMEGA"]
-cross_dse = ["battery-architecture"]
+cross_dse = ["battery-architecture", "solar-architecture"]
+best_pareto = "Si + TSMC_N2 + HEXA-P + HEXA-1_Half + DGX_Style (86.38)"
+best_n6 = "Diamond + TSMC_N2 + HEXA-P + HEXA-1_Full + SuperPOD_72 (100%)"
+best_perf = "GaN + Intel_18A + RISC-V + H100_Style + Edge_Compact"
+n6_max = 100.0
+n6_avg = 47.8
 
 [battery-architecture]
 goal = true
@@ -23,7 +28,24 @@ dse = "done"
 combos = 1908
 tool = "tools/battery-dse/"
 levels = ["Cell", "Electrode", "Core", "Chip", "Pack+Grid", "Solid", "Nuclear", "OMEGA-E"]
-cross_dse = ["chip-architecture", "power-grid", "energy-generation"]
+cross_dse = ["chip-architecture", "power-grid", "energy-generation", "solar-architecture"]
+best_pareto = "LFP + Graphite-Wet + 18650 + Discrete-6ch + DC-Micro (0.6944)"
+best_n6 = "LCO + Si-SSB + 18650 + Wireless-12ch + 48V-ESS (94.1%)"
+best_perf = "Li-S + Si-SSB + 4680 + AI-BMS + Grid-MW (1950 Wh/kg)"
+best_cost = "Na-ion + Na-HC + 18650 + Minimal-4ch + DC-Micro ($2.00)"
+n6_max = 94.1
+n6_avg = 76.3
+
+[solar-architecture]
+goal = true
+dse = "done"
+combos = 1584
+tool = "tools/solar-dse/"
+levels = ["HEXA-ABSORB", "HEXA-PROCESS", "HEXA-JUNCTION", "HEXA-POWER", "HEXA-ARRAY"]
+best_pareto = "GaAs + HJT + CPV + DC-Optimizer + HC-120 (0.7403)"
+best_n6 = "77.8% (14/18)"
+best_residential = "GaAs + HJT + CPV + DC-Optimizer + HC-120"
+cross_dse = ["battery-architecture", "chip-architecture", "energy-generation", "power-grid"]
 
 # ── 미시작 ────────────────────────────────────────
 
@@ -121,8 +143,12 @@ cross_dse = ["chip-architecture", "robotics"]
 
 [cross-dse.chip-x-battery]
 domains = ["chip-architecture", "battery-architecture"]
-status = "none"
-note = "BT-84 삼중수렴 관련"
+status = "done"
+bridge = "48V = σ·τ (배터리 DC ↔ 칩 rack bus)"
+chip_path = "Si + TSMC_N2 + HEXA-P + HEXA-1_Half + DGX (82.6%)"
+battery_path = "LFP + Graphite + 18650 + 6ch-BMS + DC-Micro (88.2%)"
+combined_n6 = 85.4
+note = "BT-84 삼중수렴: 96=σ(σ-τ) Tesla/GPT-3/Gaudi2, PUE=σ/(σ-φ)=1.2"
 
 [cross-dse.chip-x-quantum]
 domains = ["chip-architecture", "quantum-computing"]
@@ -153,3 +179,18 @@ note = "SoC 미디어 최적화"
 domains = ["chip-architecture", "energy-generation"]
 status = "none"
 note = "전력공급 최적화"
+
+[cross-dse.solar-x-battery]
+domains = ["solar-architecture", "battery-architecture"]
+status = "none"
+note = "태양광 발전→배터리 저장 통합 자급자족 시스템"
+
+[cross-dse.solar-x-chip]
+domains = ["solar-architecture", "chip-architecture"]
+status = "none"
+note = "MPPT/인버터 SoC + 태양전지 최적화"
+
+[cross-dse.solar-x-grid]
+domains = ["solar-architecture", "power-grid"]
+status = "none"
+note = "분산발전→그리드 연계 최적화"
