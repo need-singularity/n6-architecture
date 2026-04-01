@@ -3,7 +3,10 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-01T2"
+updated = "2026-04-01T3"
+total_domains = 89
+total_valid_paths = 365000
+domains_100pct_n6 = 33
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -1564,35 +1567,60 @@ n6_avg = 72.0
 
 [noncommutative-geometry]
 goal = true
-dse = "wip"
+dse = "done"
+combos = 6480
+valid = 2360
 tool = "tools/universal-dse/ domains/noncommutative-geometry.toml"
 levels = ["Algebra", "Spectral", "GaugeGroup", "Particle", "Unification"]
-note = "Connes KO-dim 6 = P₁, 표준모형 유도"
+best_pareto = "AF_Standard + DiracOp + SU3xSU2xU1 + GaugeBosonN12 + KODim6 (0.7990)"
+best_n6 = "AF_Standard + DiracOp + SU3xSU2xU1 + GaugeBosonN12 + KODim6 (100.0%)"
+n6_max = 100.0
+note = "Connes KO-dim 6 = P₁, 표준모형 유도 — PROVEN"
 
 [topological-quantum-materials]
 goal = true
-dse = "wip"
+dse = "done"
+combos = 6480
+valid = 2269
 tool = "tools/universal-dse/ domains/topological-quantum-materials.toml"
 levels = ["Classification", "Material", "Surface", "Transport", "Device"]
-note = "Z₂ 위상절연체 + 마요라나 + 그래핀 C Z=6"
+best_pareto = "Z2_Topological + Graphene + DiracCone + QAHE + SpintronicDev (0.7835)"
+best_n6 = "Z2_Topological + Graphene + DiracCone + QAHE + SpintronicDev (92.0%)"
+n6_max = 92.0
+note = "Z₂ 위상절연체 + 그래핀 C Z=6 + 마요라나"
 
 [statistical-mechanics]
 goal = true
-dse = "wip"
+dse = "done"
+combos = 6480
+valid = 3605
 tool = "tools/universal-dse/ domains/statistical-mechanics.toml"
 levels = ["Model", "Method", "Phase", "Critical", "Application"]
-note = "6-vertex 모형 n=6 + ln(4/3) Golden Zone"
+best_pareto = "IsingModel + ExactSolution + OrderDisorder + UniversalityClass + MagneticMaterial (0.7690)"
+best_n6 = "SixVertex + ExactSolution + OrderDisorder + UniversalityClass + MagneticMaterial (91.0%)"
+n6_max = 91.0
+note = "6-vertex 모형 n=6 EXACT + ln(4/3) Golden Zone"
 
 [music-notation]
 goal = true
-dse = "wip"
+dse = "done"
+combos = 6480
+valid = 3564
 tool = "tools/universal-dse/ domains/music-notation.toml"
 levels = ["Staff", "Clef", "NoteValue", "Dynamics", "Layout"]
-note = "오선 sopfr=5 + 음자리표 tau=4 + 음표 n=6"
+best_pareto = "FiveLineStaff + MainClefsTau + BasicNotes6 + DynamicLevels6 + Braille (0.8950)"
+best_n6 = "FiveLineStaff + MainClefsTau + BasicNotes6 + DynamicLevels6 + Braille (100.0%)"
+n6_max = 100.0
+note = "오선 sopfr=5 + 음자리표 tau=4 + 음표 n=6 — 전체 최고 Pareto 0.895!"
 
 [deep-evolution]
 goal = true
-dse = "wip"
+dse = "done"
+combos = 6480
+valid = 3380
 tool = "tools/universal-dse/ domains/deep-evolution.toml"
 levels = ["Genome", "Regulation", "Development", "Ecology", "Macroscale"]
-note = "텔로미어 6bp + 5왕국 + 6대멸종"
+best_pareto = "TelomereN6 + PromoterN6 + BodyPlanN6 + KingdomN5 + CambrianExplosion (0.8770)"
+best_n6 = "TelomereN6 + PromoterN6 + BodyPlanN6 + KingdomN5 + CambrianExplosion (100.0%)"
+n6_max = 100.0
+note = "텔로미어 6bp + 체제 n=6 + 5왕국 + 캄브리아 대폭발"
