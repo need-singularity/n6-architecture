@@ -68,9 +68,22 @@ note = "궁극의 에너지 = 4도메인 통합 Cross-DSE. BT-27,30,43,57,60,62,
 # ── 미시작 ────────────────────────────────────────
 
 [quantum-computing]
-goal = false
-dse = "none"
+goal = true
+dse = "done"
+combos = 4500
+valid = 2596
+tool = "tools/universal-dse/ domains/quantum.toml"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
 cross_dse = ["chip-architecture", "superconductor"]
+best_pareto = "NeutralAtom + Surface + Clifford_N6 + Grover + Modular (0.7496)"
+best_n6 = "TopologicalQ + Surface + FaultTol + Grover + Modular (100.0%)"
+best_perf = "SC_Transmon + Surface + Clifford_N6 + Shor + Dilution (perf=0.900)"
+best_power = "Photonic + NoEC + Variational + VQE_Chem + RoomTemp (power=0.790)"
+best_cost = "SpinQubit + NoEC + Variational + VQE_Chem + RoomTemp (cost=0.630)"
+pareto_frontier = 79
+n6_max = 100.0
+n6_avg = 77.7
+note = "궁극의 양자컴퓨터 5단 DSE. BT-49,37,58 활용. Clifford σ=12 + Surface n=6 stabilizer"
 
 [fusion]
 goal = true
@@ -278,8 +291,17 @@ note = "BT-84 삼중수렴: 96=σ(σ-τ) Tesla/GPT-3/Gaudi2, PUE=σ/(σ-φ)=1.2"
 
 [cross-dse.chip-x-quantum]
 domains = ["chip-architecture", "quantum-computing"]
-status = "none"
-note = "초전도 로직 연계"
+status = "done"
+tool = "tools/universal-dse/"
+best = "TopologicalQ + Diamond (100.0% n6, score 0.8496)"
+note = "Topological qubit + Diamond HEXA-P — 100% n6 EXACT. Cryo CMOS σ-τ=8 채널 연결"
+
+[cross-dse.quantum-x-sc]
+domains = ["quantum-computing", "superconductor"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "TopologicalQ + REBCO (86.0% n6, score 0.7783)"
+note = "Topological qubit + REBCO 초전도체 — Cooper pair φ=2 + n=6 anyon braiding"
 
 [cross-dse.battery-x-grid]
 domains = ["battery-architecture", "power-grid"]

@@ -1,0 +1,369 @@
+# =============================================================
+# 궁극의 양자컴퓨터 DSE Domain Definition
+# BT-49 (Pure Math kissing number) + BT-37 (Semiconductor pitch)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "quantum"
+desc = "Quantum Computing Architecture DSE (BT-49/37)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "Fault-tolerant quantum computer -- n=6 qubit topology solves nature"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (큐비트 기술)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "SC_Transmon"
+label  = "Superconducting Transmon"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "IBM/Google, J2=24 level transitions, sigma=12 coupling modes"
+
+[[candidate]]
+level  = 0
+id     = "TrappedIon"
+label  = "Trapped Ion"
+n6     = 0.67
+perf   = 0.85
+power  = 0.60
+cost   = 0.35
+notes  = "IonQ, n=6 motional modes, 99.9% 2Q gate fidelity"
+
+[[candidate]]
+level  = 0
+id     = "Photonic"
+label  = "Photonic Qubit"
+n6     = 0.50
+perf   = 0.70
+power  = 0.80
+cost   = 0.50
+notes  = "Xanadu, phi=2 polarization states, room-temp operation"
+
+[[candidate]]
+level  = 0
+id     = "TopologicalQ"
+label  = "Topological (Majorana)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.70
+cost   = 0.30
+notes  = "Microsoft, n=6 anyon braiding paths, topological protection"
+
+[[candidate]]
+level  = 0
+id     = "NeutralAtom"
+label  = "Neutral Atom Array"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.45
+notes  = "Atom Computing, sigma-tau=8 qubit zones, 1000+ qubit scalable"
+
+[[candidate]]
+level  = 0
+id     = "SpinQubit"
+label  = "Semiconductor Spin"
+n6     = 0.67
+perf   = 0.75
+power  = 0.55
+cost   = 0.55
+notes  = "Intel, Si-based, phi=2 spin states, CMOS compatible"
+
+# =============================================================
+# Level 1: Process (에러 보정)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "Surface"
+label  = "Surface Code"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "d=sigma-sopfr=7 code distance, n=6 stabilizers per plaquette"
+
+[[candidate]]
+level  = 1
+id     = "Color"
+label  = "Color Code"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "tau=4 color types, transversal Clifford gates"
+
+[[candidate]]
+level  = 1
+id     = "LDPC"
+label  = "qLDPC Code"
+n6     = 0.67
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "Asymptotically good, n=6 check weight, low overhead"
+
+[[candidate]]
+level  = 1
+id     = "Bosonic"
+label  = "Bosonic/Cat Code"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.55
+notes  = "Continuous variable, Kerr-cat encoding, hardware efficient"
+
+[[candidate]]
+level  = 1
+id     = "NoEC"
+label  = "No Error Correction (NISQ)"
+n6     = 0.33
+perf   = 0.50
+power  = 0.90
+cost   = 0.80
+notes  = "Near-term noisy devices, 100-1000 physical qubits"
+
+# =============================================================
+# Level 2: Core (게이트/회로 코어)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "Clifford_N6"
+label  = "Clifford+T Gate Set"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "sigma=12 Clifford generators, T-count optimization, universal"
+
+[[candidate]]
+level  = 2
+id     = "Variational"
+label  = "Variational (VQE/QAOA)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "p=n=6 circuit layers, n/phi=3 parameter groups"
+
+[[candidate]]
+level  = 2
+id     = "Measurement"
+label  = "Measurement-Based (MBQC)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.65
+cost   = 0.45
+notes  = "Cluster state, sigma-tau=8 qubit graph degree"
+
+[[candidate]]
+level  = 2
+id     = "Adiabatic"
+label  = "Adiabatic/Annealing"
+n6     = 0.50
+perf   = 0.65
+power  = 0.75
+cost   = 0.55
+notes  = "D-Wave style, slow adiabatic evolution, optimization focus"
+
+[[candidate]]
+level  = 2
+id     = "Hybrid_QC"
+label  = "Hybrid Quantum-Classical"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "QPU+CPU co-processing, phi=2 compute domains"
+
+[[candidate]]
+level  = 2
+id     = "FaultTol"
+label  = "Fault-Tolerant Universal"
+n6     = 1.00
+perf   = 0.60
+power  = 0.40
+cost   = 0.25
+notes  = "Full error correction overhead, long-term goal, universal gates"
+
+# =============================================================
+# Level 3: Engine (알고리즘 엔진)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "Shor"
+label  = "Shor's Factoring"
+n6     = 0.67
+perf   = 0.90
+power  = 0.40
+cost   = 0.30
+notes  = "O(n^3) gates, n=6 qubit registers, RSA breaking"
+
+[[candidate]]
+level  = 3
+id     = "Grover"
+label  = "Grover's Search"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "sqrt(N) speedup, pi/4~R(6)/tau iterations per oracle"
+
+[[candidate]]
+level  = 3
+id     = "VQE_Chem"
+label  = "VQE for Chemistry"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "n=6 electron orbitals, molecular simulation, NISQ-friendly"
+
+[[candidate]]
+level  = 3
+id     = "QSVM"
+label  = "Quantum ML (QML)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "sigma-tau=8 feature maps, quantum kernel methods"
+
+[[candidate]]
+level  = 3
+id     = "QSimulate"
+label  = "Quantum Simulation"
+n6     = 0.83
+perf   = 0.88
+power  = 0.55
+cost   = 0.40
+notes  = "Hamiltonian sigma=12 terms, condensed matter/chemistry"
+
+# =============================================================
+# Level 4: System (시스템 통합)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "Dilution"
+label  = "Dilution Refrigerator"
+n6     = 0.83
+perf   = 0.90
+power  = 0.30
+cost   = 0.25
+notes  = "10mK base, sigma-phi=10 cooling stages, SC/spin qubits"
+
+[[candidate]]
+level  = 4
+id     = "RoomTemp"
+label  = "Room-Temp System"
+n6     = 0.50
+perf   = 0.60
+power  = 0.90
+cost   = 0.70
+notes  = "Photonic/trapped ion at RT, no cryogenics needed"
+
+[[candidate]]
+level  = 4
+id     = "CloudQPU"
+label  = "Cloud Quantum (IBM/AWS)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "Remote access, API-based, shared infrastructure"
+
+[[candidate]]
+level  = 4
+id     = "Modular"
+label  = "Modular Quantum Network"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.35
+notes  = "n=6 QPU modules linked, quantum interconnect, scalable"
+
+[[candidate]]
+level  = 4
+id     = "Cryo_CMOS"
+label  = "Cryogenic CMOS Control"
+n6     = 0.83
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "sigma-tau=8 control channels per qubit, co-integrated"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# TopologicalQ requires Surface or Color code (topological protection)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "TopologicalQ"
+then_level = 1
+then_ids   = "Surface,Color"
+
+# NoEC only with Variational or Hybrid_QC (NISQ algorithms)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "NoEC"
+then_level = 2
+then_ids   = "Variational,Hybrid_QC"
+
+# FaultTol requires Surface or Color or LDPC
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "FaultTol"
+then_level = 1
+then_ids   = "Surface,Color,LDPC"
+
+# Photonic requires RoomTemp or CloudQPU (no dilution needed)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Photonic"
+then_level = 4
+then_ids   = "Dilution"
+
+# Shor requires FaultTol or Clifford_N6 (needs deep circuits)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Shor"
+then_level = 2
+then_ids   = "FaultTol,Clifford_N6"
+
+# Adiabatic incompatible with Surface code (different paradigm)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Adiabatic"
+then_level = 1
+then_ids   = "Surface,Color"
