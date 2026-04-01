@@ -1,0 +1,572 @@
+{
+  "date": "2026-04-02",
+  "protocol": "Blind domain verification (Experiment 4)",
+  "vocabulary_size": 56,
+  "vocabulary_integers_1_1000": 40,
+  "domains": {
+    "Plumbing/HVAC": {
+      "total": 10,
+      "exact": 6,
+      "close": 2,
+      "no_match": 2,
+      "exact_rate": 60.0
+    },
+    "Typography/Printing": {
+      "total": 10,
+      "exact": 7,
+      "close": 1,
+      "no_match": 2,
+      "exact_rate": 70.0
+    },
+    "Sports/Olympics": {
+      "total": 10,
+      "exact": 6,
+      "close": 2,
+      "no_match": 2,
+      "exact_rate": 60.0
+    },
+    "Cooking/Food Science": {
+      "total": 10,
+      "exact": 5,
+      "close": 4,
+      "no_match": 1,
+      "exact_rate": 50.0
+    },
+    "Textiles/Fashion": {
+      "total": 10,
+      "exact": 7,
+      "close": 0,
+      "no_match": 3,
+      "exact_rate": 70.0
+    }
+  },
+  "overall": {
+    "total": 50,
+    "exact": 31,
+    "close": 9,
+    "no_match": 10,
+    "exact_rate_pct": 62.0
+  },
+  "comparison": {
+    "original_exact_rate_pct": 58.0,
+    "blind_exact_rate_pct": 62.0,
+    "difference_pct": 4.0
+  },
+  "statistics": {
+    "base_rate_uniform_pct": 4.0,
+    "base_rate_weighted_pct": 53.5,
+    "z_score": 1.2,
+    "significance": "NOT SIGNIFICANT (z < 1.65, p > 0.05)"
+  },
+  "bias_analysis": {
+    "small_integer_matches_1_24": 22,
+    "medium_matches_25_100": 7,
+    "large_matches_gt100": 2,
+    "power_of_2_matches": 7,
+    "multiple_of_12_matches": 10,
+    "depth_0_matches": 5,
+    "depth_1_matches": 26
+  },
+  "all_results": [
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "NPS standard sizes count (common)",
+      "value": 12,
+      "source": "ASME B36.10M",
+      "grade": "EXACT",
+      "n6_match": 12,
+      "expression": "n+n",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "Standard copper tube type L OD 1/2 inch",
+      "value": 0.625,
+      "source": "ASTM B88",
+      "grade": "NO_MATCH",
+      "n6_match": 0.8,
+      "expression": "tau/sopfr",
+      "error_pct": 21.875000000000007
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "HVAC duct common sizes count",
+      "value": 10,
+      "source": "SMACNA HVAC Duct Construction Standards",
+      "grade": "EXACT",
+      "n6_match": 10,
+      "expression": "n+tau",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "Standard pipe thread TPI for 1 inch",
+      "value": 11.5,
+      "source": "ASME B1.20.1 (NPT)",
+      "grade": "CLOSE",
+      "n6_match": 12,
+      "expression": "n+n",
+      "error_pct": 4.166666666666666
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "Refrigerant R-410A operating pressure (high side)",
+      "value": 400,
+      "source": "ASHRAE Handbook",
+      "grade": "NO_MATCH",
+      "n6_match": 576,
+      "expression": "J2*J2",
+      "error_pct": 30.555555555555557
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "Water supply pressure (residential typical)",
+      "value": 60,
+      "source": "IPC/UPC plumbing codes",
+      "grade": "EXACT",
+      "n6_match": 60,
+      "expression": "sigma*sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "Standard bathtub capacity",
+      "value": 60,
+      "source": "Plumbing industry standard",
+      "grade": "EXACT",
+      "n6_match": 60,
+      "expression": "sigma*sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "HVAC filter MERV rating count",
+      "value": 16,
+      "source": "ASHRAE 52.2",
+      "grade": "EXACT",
+      "n6_match": 16,
+      "expression": "phi^tau",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "PVC Schedule 40 pipe max temp (F)",
+      "value": 140,
+      "source": "ASTM D1785",
+      "grade": "CLOSE",
+      "n6_match": 144,
+      "expression": "n*J2",
+      "error_pct": 2.7777777777777777
+    },
+    {
+      "domain": "Plumbing/HVAC",
+      "parameter": "Standard water heater temp setting (F)",
+      "value": 120,
+      "source": "DOE/CPSC recommendation",
+      "grade": "EXACT",
+      "n6_match": 120,
+      "expression": "sopfr*J2",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "Points per inch",
+      "value": 72,
+      "source": "PostScript/Adobe standard",
+      "grade": "EXACT",
+      "n6_match": 72,
+      "expression": "n*sigma",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "Standard body text size (pt)",
+      "value": 12,
+      "source": "Typography convention",
+      "grade": "EXACT",
+      "n6_match": 12,
+      "expression": "n+n",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "Pixels per inch (standard screen)",
+      "value": 96,
+      "source": "Windows/CSS default",
+      "grade": "EXACT",
+      "n6_match": 96,
+      "expression": "tau*J2",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "CMYK color channels",
+      "value": 4,
+      "source": "ISO 12647",
+      "grade": "EXACT",
+      "n6_match": 4,
+      "expression": "tau",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "RGB color depth (bits per channel)",
+      "value": 8,
+      "source": "sRGB IEC 61966-2-1",
+      "grade": "EXACT",
+      "n6_match": 8,
+      "expression": "n+phi",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "ISO A-series sheet count (A0-A10)",
+      "value": 11,
+      "source": "ISO 216",
+      "grade": "EXACT",
+      "n6_match": 11,
+      "expression": "n+sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "A4 width (mm)",
+      "value": 210,
+      "source": "ISO 216",
+      "grade": "NO_MATCH",
+      "n6_match": 256,
+      "expression": "tau^tau",
+      "error_pct": 17.96875
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "A4 height (mm)",
+      "value": 297,
+      "source": "ISO 216",
+      "grade": "CLOSE",
+      "n6_match": 288,
+      "expression": "sigma*J2",
+      "error_pct": 3.125
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "US Letter width (inches)",
+      "value": 8.5,
+      "source": "ANSI/ASME Y14.1",
+      "grade": "NO_MATCH",
+      "n6_match": 9,
+      "expression": "tau+sopfr",
+      "error_pct": 5.555555555555555
+    },
+    {
+      "domain": "Typography/Printing",
+      "parameter": "Pantone basic color count",
+      "value": 18,
+      "source": "Pantone Matching System",
+      "grade": "EXACT",
+      "n6_match": 18,
+      "expression": "J2-n",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Olympic rings count",
+      "value": 5,
+      "source": "IOC Olympic Charter",
+      "grade": "EXACT",
+      "n6_match": 5,
+      "expression": "n-mu",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Soccer field length (m, FIFA)",
+      "value": 105,
+      "source": "FIFA Laws of the Game",
+      "grade": "NO_MATCH",
+      "n6_match": 96,
+      "expression": "tau*J2",
+      "error_pct": 9.375
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Soccer players per team",
+      "value": 11,
+      "source": "FIFA Laws of the Game",
+      "grade": "EXACT",
+      "n6_match": 11,
+      "expression": "n+sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Basketball court length (ft)",
+      "value": 94,
+      "source": "NBA/FIBA",
+      "grade": "CLOSE",
+      "n6_match": 96,
+      "expression": "tau*J2",
+      "error_pct": 2.083333333333333
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Tennis Grand Slam events",
+      "value": 4,
+      "source": "ITF",
+      "grade": "EXACT",
+      "n6_match": 4,
+      "expression": "tau",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Track 400m lanes",
+      "value": 8,
+      "source": "World Athletics",
+      "grade": "EXACT",
+      "n6_match": 8,
+      "expression": "n+phi",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Olympic swimming pool length (m)",
+      "value": 50,
+      "source": "FINA/World Aquatics",
+      "grade": "CLOSE",
+      "n6_match": 48,
+      "expression": "J2+J2",
+      "error_pct": 4.166666666666666
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Baseball innings",
+      "value": 9,
+      "source": "MLB Official Rules",
+      "grade": "EXACT",
+      "n6_match": 9,
+      "expression": "tau+sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Marathon distance (km, approx)",
+      "value": 42,
+      "source": "IAAF",
+      "grade": "NO_MATCH",
+      "n6_match": 48,
+      "expression": "J2+J2",
+      "error_pct": 12.5
+    },
+    {
+      "domain": "Sports/Olympics",
+      "parameter": "Football (American) players on field",
+      "value": 11,
+      "source": "NFL Rules",
+      "grade": "EXACT",
+      "n6_match": 11,
+      "expression": "n+sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Water boiling point (C)",
+      "value": 100,
+      "source": "Physics",
+      "grade": "CLOSE",
+      "n6_match": 96,
+      "expression": "tau*J2",
+      "error_pct": 4.166666666666666
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Maillard reaction onset (C)",
+      "value": 140,
+      "source": "Food science (McGee, On Food and Cooking)",
+      "grade": "CLOSE",
+      "n6_match": 144,
+      "expression": "n*J2",
+      "error_pct": 2.7777777777777777
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Bread flour protein % (typical)",
+      "value": 12,
+      "source": "AACC International",
+      "grade": "EXACT",
+      "n6_match": 12,
+      "expression": "n+n",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Pasteurization temp milk (C)",
+      "value": 72,
+      "source": "FDA 21 CFR 131 (HTST)",
+      "grade": "EXACT",
+      "n6_match": 72,
+      "expression": "n*sigma",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Neutral pH",
+      "value": 7,
+      "source": "Chemistry",
+      "grade": "EXACT",
+      "n6_match": 7,
+      "expression": "n+mu",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Bakers percentage water (typical %)",
+      "value": 65,
+      "source": "Bread baking standard",
+      "grade": "CLOSE",
+      "n6_match": 64,
+      "expression": "phi^n",
+      "error_pct": 1.5625
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Safe internal temp chicken (F)",
+      "value": 165,
+      "source": "USDA FSIS",
+      "grade": "NO_MATCH",
+      "n6_match": 144,
+      "expression": "n*J2",
+      "error_pct": 14.583333333333334
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Freezing point water (F)",
+      "value": 32,
+      "source": "Physics",
+      "grade": "EXACT",
+      "n6_match": 32,
+      "expression": "phi^sopfr",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Sugar types in cooking",
+      "value": 6,
+      "source": "Culinary science",
+      "grade": "EXACT",
+      "n6_match": 6,
+      "expression": "n",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Cooking/Food Science",
+      "parameter": "Smoke point butter (C)",
+      "value": 150,
+      "source": "Food science references",
+      "grade": "CLOSE",
+      "n6_match": 144,
+      "expression": "n*J2",
+      "error_pct": 4.166666666666666
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Standard thread count (percale min)",
+      "value": 200,
+      "source": "Textile industry",
+      "grade": "NO_MATCH",
+      "n6_match": 256,
+      "expression": "tau^tau",
+      "error_pct": 21.875
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Denier standard for stockings",
+      "value": 15,
+      "source": "Hosiery industry",
+      "grade": "NO_MATCH",
+      "n6_match": 16,
+      "expression": "phi^tau",
+      "error_pct": 6.25
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Sewing machine stitch types (ASTM)",
+      "value": 6,
+      "source": "ASTM D6193 / ISO 4915",
+      "grade": "EXACT",
+      "n6_match": 6,
+      "expression": "n",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "US women's dress size range count",
+      "value": 13,
+      "source": "ASTM D5585",
+      "grade": "EXACT",
+      "n6_match": 13,
+      "expression": "sigma+mu",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Shoe size increment (US, half sizes)",
+      "value": 0.5,
+      "source": "Brannock device standard",
+      "grade": "EXACT",
+      "n6_match": 0.5,
+      "expression": "mu/phi",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Warp and weft (loom directions)",
+      "value": 2,
+      "source": "Weaving fundamentals",
+      "grade": "EXACT",
+      "n6_match": 2,
+      "expression": "phi",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Standard seam allowance (inches)",
+      "value": 0.625,
+      "source": "Sewing pattern industry (5/8 inch)",
+      "grade": "NO_MATCH",
+      "n6_match": 0.8,
+      "expression": "tau/sopfr",
+      "error_pct": 21.875000000000007
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Fabric weight GSM (standard shirting)",
+      "value": 120,
+      "source": "Textile industry",
+      "grade": "EXACT",
+      "n6_match": 120,
+      "expression": "sopfr*J2",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Needle size range (Singer universal)",
+      "value": 5,
+      "source": "Singer/Schmetz",
+      "grade": "EXACT",
+      "n6_match": 5,
+      "expression": "n-mu",
+      "error_pct": 0.0
+    },
+    {
+      "domain": "Textiles/Fashion",
+      "parameter": "Ring spinning spindle speed (rpm, thousands)",
+      "value": 25,
+      "source": "Textile engineering",
+      "grade": "EXACT",
+      "n6_match": 25,
+      "expression": "J2+mu",
+      "error_pct": 0.0
+    }
+  ]
+}
