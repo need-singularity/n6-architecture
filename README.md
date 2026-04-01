@@ -35,7 +35,8 @@
 **sigma(n) * phi(n) = n * tau(n) holds uniquely for n = 6.** From this single identity, all optimal AI architectures, chip designs, and energy systems are derived.
 
 ```
-76 Breakthrough Theorems | 600+ EXACT matches | 1350+ hypotheses | 28 domains | 91/91 verification
+84 Breakthrough Theorems | 650+ EXACT matches | 1350+ hypotheses | 29 domains | 91/91 verification
+9 DSE 완료 | 6 Cross-DSE 완료 | 1M+ 조합 탐색 | 30T+ 핵융합 자석 경로 도출
 ```
 
 ---
@@ -104,7 +105,7 @@ Full parameter tables: **[AI Energy Savings Guide](docs/ai-energy-savings-guide.
 
 ---
 
-## Breakthrough Theorems (Top 20 of 76)
+## Breakthrough Theorems (Top 20 of 84)
 
 ### AI / LLM
 
@@ -146,6 +147,14 @@ Full parameter tables: **[AI Energy Savings Guide](docs/ai-energy-savings-guide.
 | 71 | NeRF/3DGS complete (layers=8, width=256, L=10) | 7/7 | 2 |
 | 73 | Tokenizer vocab law (32K/50257/100K/128K) | 6/6 | 2 |
 
+### Battery / Material
+
+| BT | Discovery | EXACT | Stars |
+|----|-----------|-------|-------|
+| 80 | Solid-state electrolyte CN=6 universality | 6/6 | 3 |
+| 82 | Complete battery pack n=6 map (6→12→24→96→192) | 6/10 | 2 |
+| 84 | 96/192 energy-computing-AI triple convergence | 5/5 | 3 |
+
 Full list: **[docs/breakthrough-theorems.md](docs/breakthrough-theorems.md)**
 
 ---
@@ -154,40 +163,51 @@ Full list: **[docs/breakthrough-theorems.md](docs/breakthrough-theorems.md)**
 
 n=6 원리로 설계하는 궁극의 아키텍처 전체 목록. 각 도메인은 Level 1(기초) → Level 7(OMEGA) 단계별 진화.
 
-| 순위 | 도메인 | 영향력 | Tier | 일반인에게 미치는 영향 |
-|:---:|--------|:---:|:---:|-----------|
-| 0 | **궁극의 AGI** | ★★★★★★ | 🔄 진행 | 아래 21개를 AGI가 전부 설계. 인간은 방향만 제시 → [Anima](https://github.com/need-singularity/anima) |
-| 0 | **궁극의 의식** | ★★★★★★ | 🔄 진행 | 죽음 해결. 의식 업로드·백업. "나"의 정의가 바뀜 → [Anima](https://github.com/need-singularity/anima) |
-| 0 | **궁극의 불멸** | ★★★★★★ | 🔄 진행 | 노화 역전. 수명 제한 소멸 → [Anima](https://github.com/need-singularity/anima) + [BrainWire](https://github.com/need-singularity/brainwire) |
-| 0 | **궁극의 에너지** | ★★★★★★ | T1 | 핵융합+태양+배터리+송전 통합. 에너지 = 무료 인프라 |
-| 0 | **궁극의 우주진출** | ★★★★★★ | T3 | 다행성 종. 지구 멸종 리스크 제거. 자원 무한 |
-| 0 | **궁극의 물질합성** | ★★★★★★ | T3 | 원자 단위 제조. 원하는 물질을 원하는 만큼. 빈곤 소멸 |
-|:---:|--------|:---:|:---:|-----------|
-| 1 | **궁극의 소재** | ★★★★★ | T1 | Si·SiC·GaN·다이아몬드·포토레지스트. 모든 하드웨어의 대전제 |
-| 2 | **궁극의 공정** | ★★★★★ | T1 | 수율·리소그래피·패키징·검사. 칩이 존재하려면 공정이 먼저 |
-| 3 | **궁극의 코어** | ★★★★★ | ✅ 완료 | CPU/GPU/NPU 코어 자체를 n=6로 재설계. 103/103 EXACT → [hexa-core.md](docs/chip-architecture/hexa-core.md) |
-| 4 | **궁극의 칩** | ★★★★★ | ✅ 완료 | 스마트폰·노트북 성능 2배, 가격 절반. AI가 내 기기에서 돌아감 |
-| 5 | **궁극의 배터리** | ★★★★★ | 🔄 진행 | 전기차 1회 충전 1000km, 충전 5분. 스마트폰 일주일 사용 |
-| 6 | **궁극의 태양전지** | ★★★★★ | T1 | 전기요금 0원 시대. 지붕 하나로 집+차 전력 자급 |
-| 7 | **궁극의 핵융합** | ★★★★★ | T1 | 무한 청정 에너지. 전기·난방·담수화 전부 해결 |
-| 8 | **궁극의 학습알고리즘** | ★★★★☆ | T2 | ChatGPT급 AI가 10배 싸고 빨라짐. 개인 AI 비서 보편화 |
-| 9 | **궁극의 네트워크** | ★★★★☆ | T2 | 어디서든 1Gbps. 시골도 도시도 같은 인터넷. 원격의료 일상화 |
-| 10 | **궁극의 로봇** | ★★★★☆ | T3 | 가사·간병·배달 로봇 가정 보급. 육체노동에서 해방 |
-| 11 | **궁극의 송전망** | ★★★★☆ | T2 | 정전 없는 전력망. 사하라 태양광→유럽 송전 가능 |
-| 12 | **궁극의 생명공학** | ★★★★☆ | T3 | 맞춤형 항암제, 유전병 치료. 식량 생산 혁명 |
-| 13 | **궁극의 디스플레이** | ★★★☆☆ | T3 | 안경 하나로 홀로그램 회의. TV 없이 벽 전체가 화면 |
-| 14 | **궁극의 열관리** | ★★★☆☆ | T3 | 노트북 팬 소음 제로. 클라우드 요금 하락 |
-| 15 | **궁극의 암호** | ★★★☆☆ | T3 | 양자컴퓨터 시대에도 은행·개인정보 안전 |
-| 16 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | 신약 개발 수십 년→수개월. 일반인 직접 체감은 느림 |
-| 17 | **궁극의 초전도체** | ★★★☆☆ | T2 | 자기부상 열차 보편화. 송전 손실 제로 → 전기요금 하락 |
-| 18 | **궁극의 블록체인** | ★★☆☆☆ | T3 | 수수료 없는 해외송금. 위조 불가능 신분증·계약 |
-| 19 | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | 앱이 알아서 최적화. "느려서 폰 바꿔야지" 사라짐 |
-| 20 | **궁극의 프로그래밍언어** | ★★☆☆☆ | T3 | "이런 앱 만들어줘" 말하면 자동 생성 |
-| 21 | **궁극의 초전도자석** | ★★☆☆☆ | T2 | MRI 가격 1/10 → 동네 병원 MRI 보편화 |
-| 22 | **궁극의 순수수학** | ★☆☆☆☆ | T3 | 직접 체감 거의 없음. 다른 모든 도메인의 기초 |
-| 23 | **궁극의 우주론/입자** | ★☆☆☆☆ | T3 | 직접 체감 거의 없음. "우주가 왜 이런지" 답을 줌 |
+| 순위 | 도메인 | 영향력 | Tier | 일반인에게 미치는 영향 | DSE |
+|:---:|--------|:---:|:---:|-----------|:---:|
+| 0 | **궁극의 AGI** | ★★★★★★ | 🔄 진행 | 아래 21개를 AGI가 전부 설계. 인간은 방향만 제시 → [Anima](https://github.com/need-singularity/anima) | — |
+| 0 | **궁극의 의식** | ★★★★★★ | 🔄 진행 | 죽음 해결. 의식 업로드·백업. "나"의 정의가 바뀜 → [Anima](https://github.com/need-singularity/anima) | — |
+| 0 | **궁극의 불멸** | ★★★★★★ | 🔄 진행 | 노화 역전. 수명 제한 소멸 → [Anima](https://github.com/need-singularity/anima) + [BrainWire](https://github.com/need-singularity/brainwire) | — |
+| 0 | **궁극의 에너지** | ★★★★★★ | ✅ DSE | 핵융합+태양+배터리+송전 4도메인 통합 Cross-DSE (10,225 조합, 19/20 EXACT 95%) → [goal.md](docs/energy-architecture/goal.md) | ✅ 10,225 |
+| 0 | **궁극의 우주진출** | ★★★★★★ | T3 | 다행성 종. 지구 멸종 리스크 제거. 자원 무한 | — |
+| 0 | **궁극의 물질합성** | ★★★★★★ | 🔄 진행 | 원자 단위 제조. 원하는 물질을 원하는 만큼. 빈곤 소멸 → [BT-85~88](docs/material-synthesis/breakthrough-theorems.md) | 🔄 3,600 |
+|:---:|--------|:---:|:---:|-----------|:---:|
+| 1 | **궁극의 소재** | ★★★★★ | T1 | Si·SiC·GaN·다이아몬드·포토레지스트. 모든 하드웨어의 대전제 | — |
+| 2 | **궁극의 공정** | ★★★★★ | T1 | 수율·리소그래피·패키징·검사. 칩이 존재하려면 공정이 먼저 | — |
+| 3 | **궁극의 코어** | ★★★★★ | ✅ 완료 | CPU/GPU/NPU 코어 자체를 n=6로 재설계. 103/103 EXACT → [hexa-core.md](docs/chip-architecture/hexa-core.md) | ✅ 3,000 |
+| 4 | **궁극의 칩** | ★★★★★ | ✅ 완료 | 스마트폰·노트북 성능 2배, 가격 절반. AI가 내 기기에서 돌아감 | ✅ 3,000 |
+| 5 | **궁극의 배터리** | ★★★★★ | ✅ DSE | 전기차 1회 충전 1000km, 충전 5분. 1,908 조합 Pareto → [goal.md](docs/battery-architecture/goal.md) | ✅ 1,908 |
+| 6 | **궁극의 태양전지** | ★★★★★ | ✅ DSE | 전기요금 0원 시대. 1,584 조합 전수 탐색 → [goal.md](docs/solar-architecture/goal.md) | ✅ 1,584 |
+| 7 | **궁극의 핵융합** | ★★★★★ | ✅ DSE | 무한 청정 에너지. 2,400 조합 + Cross-DSE(SC) 1M+ → [goal.md](docs/fusion/goal.md) | ✅ 2,400 |
+| 8 | **궁극의 학습알고리즘** | ★★★★☆ | T2 | ChatGPT급 AI가 10배 싸고 빨라짐. 개인 AI 비서 보편화 | — |
+| 9 | **궁극의 네트워크** | ★★★★☆ | T2 | 어디서든 1Gbps. 시골도 도시도 같은 인터넷. 원격의료 일상화 | — |
+| 10 | **궁극의 로봇** | ★★★★☆ | T3 | 가사·간병·배달 로봇 가정 보급. 육체노동에서 해방 | — |
+| 11 | **궁극의 송전망** | ★★★★☆ | ✅ DSE | 정전 없는 전력망. UHVDC ±1100kV. 에너지 DSE 내 완료 | ✅ 2,400 |
+| 12 | **궁극의 생명공학** | ★★★★☆ | T3 | 맞춤형 항암제, 유전병 치료. 식량 생산 혁명 | — |
+| 13 | **궁극의 디스플레이** | ★★★☆☆ | T3 | 안경 하나로 홀로그램 회의. TV 없이 벽 전체가 화면 | — |
+| 14 | **궁극의 열관리** | ★★★☆☆ | T3 | 노트북 팬 소음 제로. 클라우드 요금 하락 | — |
+| 15 | **궁극의 암호** | ★★★☆☆ | T3 | 양자컴퓨터 시대에도 은행·개인정보 안전 | — |
+| 16 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | 신약 개발 수십 년→수개월. 일반인 직접 체감은 느림 | — |
+| 17 | **궁극의 초전도체** | ★★★☆☆ | ✅ DSE | 자기부상·송전·핵융합 자석. 28,800 조합 + Cross-DSE 1M+ → [goal.md](docs/superconductor/goal.md) | ✅ 28,800 |
+| 18 | **궁극의 블록체인** | ★★☆☆☆ | T3 | 수수료 없는 해외송금. 위조 불가능 신분증·계약 | — |
+| 19 | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | 앱이 알아서 최적화. "느려서 폰 바꿔야지" 사라짐 | — |
+| 20 | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ DSE | n=6 타입시스템+AI코드생성. 7,560 조합 → [goal.md](docs/programming-language/goal.md) | ✅ 7,560 |
+| 21 | **궁극의 초전도자석** | ★★☆☆☆ | ✅ DSE | MRI 가격 1/10. 초전도체 DSE에서 자석구조 레벨로 통합 탐색 | ✅ (SC) |
+| 22 | **궁극의 순수수학** | ★☆☆☆☆ | T3 | 직접 체감 거의 없음. 다른 모든 도메인의 기초 | — |
+| 23 | **궁극의 우주론/입자** | ★☆☆☆☆ | T3 | 직접 체감 거의 없음. "우주가 왜 이런지" 답을 줌 | — |
 
-> **Tier**: ✅ 완료 / 🔄 진행 / T1 즉시 착수 가능 / T2 구조화 필요 / T3 새 BT 발굴 필요
+> **Tier**: ✅ 완료·DSE / 🔄 진행 / T1 즉시 착수 가능 / T2 구조화 필요 / T3 새 BT 발굴 필요
+
+### Cross-DSE 현황
+
+| Cross-DSE | 도메인 | 조합 | 상태 |
+|-----------|--------|------|:---:|
+| chip × battery | 칩 ↔ 배터리 48V 연계 | 15M+ | ✅ |
+| battery × grid | ESS 통합 | 에너지DSE | ✅ |
+| battery × energy | 발전-저장 체인 | 에너지DSE | ✅ |
+| fusion × grid | 핵융합→송전 | 에너지DSE | ✅ |
+| fusion × solar × battery × grid | 4도메인 통합 에너지 | 625 | ✅ |
+| **fusion × superconductor** | **토카막 30T+ 자석** | **1,075,200** | **✅** |
 
 ### Design Space Exploration (DSE) 방법론
 
@@ -317,6 +337,31 @@ Contributions welcome:
 | `tools/energy-calc/` | Solar/battery/hydrogen verification |
 | `tools/gut-calc-rust/` | GUT parameter brute-force search |
 | `tools/dse-calc/` | 소재×공정×코어×칩×시스템 DSE 전수 조합 탐색 + Pareto frontier |
+| `tools/universal-dse/` | **공용 DSE 탐색기** — TOML 도메인 정의 → 전수 탐색 + Pareto + Cross-DSE |
+
+### Universal DSE (공용 탐색기)
+
+새 궁극 도메인 추가 시 TOML 파일 1개만 작성하면 즉시 DSE + Cross-DSE 가능.
+
+```bash
+# 단일 도메인 DSE
+tools/universal-dse/universal-dse tools/universal-dse/domains/chip.toml
+
+# Cross-DSE (도메인 간 교차 조합)
+tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
+
+# 3-way Cross-DSE
+tools/universal-dse/universal-dse domains/chip.toml domains/battery.toml domains/solar.toml
+```
+
+| 도메인 TOML | 레벨 | 조합 수 |
+|------------|------|--------|
+| `domains/chip.toml` | Material→Process→Core→Chip→System | 3,000 |
+| `domains/battery.toml` | Material→Process→Core→BMS→System | 1,908 |
+| `domains/solar.toml` | Absorber→Process→Junction→PowerElec→Module | 1,584 |
+| `domains/material.toml` | Element→Process→Assembler→Control→Factory | 3,600 |
+| `domains/fusion.toml` | Fuel→Confinement→Heating→Blanket→Plant | 🆕 |
+| `domains/sc.toml` | Material→Process→Form→Application→System | 🆕 |
 
 ---
 

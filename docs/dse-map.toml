@@ -124,16 +124,17 @@ goal = true
 dse = "done"
 combos = 7560
 valid = 5016
-tool = "tools/lang-dse/"
+tool = "tools/universal-dse/ domains/programming-language.toml"
 levels = ["Foundation", "Process", "Core", "Engine", "System"]
 cross_dse = ["chip-architecture", "compiler-os", "software-design", "learning-algorithm"]
-best_pareto = "MultiParadigm + JIT_Adaptive + Full_N6 + N6AgentChain + FullStack (0.7448)"
-best_n6 = "MetaLang + LLVM_Native + Full_N6 + N6AgentChain + FullStack (90.0%, 18/20)"
-best_perf = "MetaLang + LLVM_Native + Sopfr5Err + N6AgentChain + FullStack (98.0%)"
-best_prac = "EffectType + WASM_Transp + Sopfr5Err + MambaSSM + CloudNativ (72.0%)"
-best_innov = "DependentType + WASM_Transp + Sopfr5Err + FormalVerify + FormalEco (75.0%)"
-n6_max = 90.0
-n6_avg = 64.6
+best_pareto = "MetaLang + LLVM_Native + Full_N6 + N6AgentChain + FullStack (0.7743)"
+best_n6 = "MultiParadigm + N6VM + Full_N6 + N6AgentChain + FormalEco (96.0%)"
+best_perf = "MetaLang + LLVM_Native + Sopfr5Err + N6AgentChain + FullStack (0.960)"
+best_power = "EffectType + WASM_Transp + Sopfr5Err + MambaSSM + EdgeEmbed (0.692)"
+best_cost = "DependentType + N6VM + Sopfr5Err + FormalVerify + FormalEco (0.510)"
+pareto_frontier = 243
+n6_max = 96.0
+n6_avg = 77.5
 note = "궁극의 프로그래밍언어 5단 DSE. BT-50,52,56,58,65,67 활용. 언어+AI코드생성 통합"
 
 [compiler-os]

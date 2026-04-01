@@ -1,0 +1,407 @@
+# =============================================================
+# HEXA-LANG DSE Domain Definition
+# 궁극의 프로그래밍언어 — n=6 기반 언어 + AI 코드 생성 통합
+# BT-50 (IEEE 754 ladder) + BT-52 (Compiler 6-phase) + BT-56 (Complete LLM)
+# Total raw combos: 6x6x7x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "programming-language"
+desc = "Ultimate Programming Language DSE (BT-50/52/56/58/65/67)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "Say 'build this app' and it auto-generates -- n=6 AI-first language"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (Type System + Paradigm Model) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "MultiParadigm"
+label  = "6 Paradigms First-Class (H-PL-4)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.58
+cost   = 0.40
+notes  = "paradigms=6=n EXACT, type_layers=4=tau EXACT, safety=80, express=95, learn=4"
+
+[[candidate]]
+level  = 0
+id     = "MetaLang"
+label  = "6 Paradigms as DSL Generators"
+n6     = 1.00
+perf   = 1.00
+power  = 0.53
+cost   = 0.41
+notes  = "paradigms=6=n EXACT, type_layers=5=sopfr EXACT, safety=85, express=100, learn=5"
+
+[[candidate]]
+level  = 0
+id     = "AIAdaptive"
+label  = "Intent-to-Paradigm Auto-Selection"
+n6     = 0.75
+perf   = 0.90
+power  = 0.63
+cost   = 0.39
+notes  = "paradigms=6=n EXACT, type_layers=3, safety=75, express=90, learn=3"
+
+[[candidate]]
+level  = 0
+id     = "DependentType"
+label  = "Dependent Types (Lean/Idris)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.38
+cost   = 0.50
+notes  = "paradigms=4=tau, type_layers=6=n EXACT, safety=100, express=85, learn=5"
+
+[[candidate]]
+level  = 0
+id     = "LinearType"
+label  = "Linear Types (Rust Ownership Generalized)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.48
+cost   = 0.35
+notes  = "paradigms=3, type_layers=4=tau EXACT, safety=95, express=75, learn=4"
+
+[[candidate]]
+level  = 0
+id     = "EffectType"
+label  = "Effect Types (Koka/Eff)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.63
+cost   = 0.43
+notes  = "paradigms=5=sopfr EXACT, type_layers=4=tau EXACT, safety=90, express=80, learn=3"
+
+# =============================================================
+# Level 1: Process (Compiler + Execution Model) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "LLVM_Native"
+label  = "LLVM Native Backend"
+n6     = 1.00
+perf   = 1.00
+power  = 0.53
+cost   = 0.40
+notes  = "pipeline=6=n EXACT, opt_levels=4=tau EXACT, compile=60, runtime=100, platform=70"
+
+[[candidate]]
+level  = 1
+id     = "N6VM"
+label  = "N6 Virtual Machine (sigma=12 opcode groups)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.63
+cost   = 0.45
+notes  = "pipeline=6=n EXACT, opt_levels=3, compile=80, runtime=75, platform=90"
+
+[[candidate]]
+level  = 1
+id     = "WASM_Transp"
+label  = "WebAssembly Transpiler"
+n6     = 0.75
+perf   = 0.65
+power  = 0.73
+cost   = 0.40
+notes  = "pipeline=5=sopfr EXACT, opt_levels=3, compile=85, runtime=65, platform=100"
+
+[[candidate]]
+level  = 1
+id     = "MultBackend"
+label  = "Multi-Backend (LLVM+VM+WASM)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.58
+cost   = 0.40
+notes  = "pipeline=8, opt_levels=4=tau EXACT, compile=40, runtime=95, platform=100"
+
+[[candidate]]
+level  = 1
+id     = "JIT_Adaptive"
+label  = "JIT Profile-Guided Optimization"
+n6     = 1.00
+perf   = 0.90
+power  = 0.58
+cost   = 0.40
+notes  = "pipeline=6=n EXACT, opt_levels=4=tau EXACT, compile=70, runtime=90, platform=80"
+
+[[candidate]]
+level  = 1
+id     = "InterpAOT"
+label  = "Interpreter+AOT Hybrid (phi=2 modes)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.68
+cost   = 0.35
+notes  = "pipeline=4=tau, opt_levels=2=phi, compile=90, runtime=80, platform=85"
+
+# =============================================================
+# Level 2: Core (Language Core Design) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "Minimal8"
+label  = "sigma-tau=8 Primitive Types Focus"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "types=8=sigma-tau EXACT, kw_groups=6=n EXACT, ops=24=J2 EXACT, grammar=6=n EXACT, errors=5=sopfr EXACT, vis=4=tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "Sigma12"
+label  = "sigma=12 Keyword Groups Focus"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "types=8=sigma-tau EXACT, kw_groups=12=sigma EXACT, ops=24=J2 EXACT, grammar=6=n EXACT, errors=5=sopfr EXACT, vis=4=tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "J2_24Op"
+label  = "J2=24 Operators Focus"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "types=8=sigma-tau EXACT, kw_groups=8=sigma-tau EXACT, ops=24=J2 EXACT, grammar=6=n EXACT, errors=5=sopfr EXACT, vis=4=tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "N6Grammar"
+label  = "n=6 Grammar Hierarchy Focus"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.45
+notes  = "types=6=n, kw_groups=6=n EXACT, ops=12=sigma, grammar=6=n EXACT, errors=6=n EXACT, vis=4=tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "EgyptMem"
+label  = "Egyptian Fraction Memory (1/2+1/3+1/6=1)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.60
+cost   = 0.40
+notes  = "types=8=sigma-tau EXACT, kw_groups=8, ops=18, grammar=6=n EXACT, errors=5=sopfr EXACT, vis=3"
+
+[[candidate]]
+level  = 2
+id     = "Sopfr5Err"
+label  = "sopfr=5 Error Categories Focus"
+n6     = 0.50
+perf   = 0.90
+power  = 0.75
+cost   = 0.55
+notes  = "types=10, kw_groups=8, ops=20, grammar=5=sopfr, errors=5=sopfr EXACT, vis=4=tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "Full_N6"
+label  = "Complete n=6 Alignment (8+12+24+6+5+4)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "types=8=sigma-tau EXACT, kw_groups=12=sigma EXACT, ops=24=J2 EXACT, grammar=6=n EXACT, errors=5=sopfr EXACT, vis=4=tau EXACT"
+
+# =============================================================
+# Level 3: Engine (AI Code Generation Engine) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "BT56_LLM"
+label  = "BT-56 Dedicated Code LLM (d=4096,L=32)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.60
+cost   = 0.35
+notes  = "params=7B, stages=1=mu EXACT, verify=60, gen_quality=90, latency=3, multimodal=false"
+
+[[candidate]]
+level  = 3
+id     = "N6AgentChain"
+label  = "n=6 Stage Agent Pipeline"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.40
+notes  = "params=3B, stages=6=n EXACT, verify=80, gen_quality=95, latency=4, multimodal=false"
+
+[[candidate]]
+level  = 3
+id     = "FormalVerify"
+label  = "AI + Theorem Prover Integration"
+n6     = 0.67
+perf   = 0.75
+power  = 0.40
+cost   = 0.50
+notes  = "params=5B, stages=3=n/phi EXACT, verify=100, gen_quality=75, latency=5, multimodal=false"
+
+[[candidate]]
+level  = 3
+id     = "EgyptianMoE"
+label  = "Egyptian 1/2+1/3+1/6 Expert Routing (BT-67)"
+n6     = 0.67
+perf   = 0.92
+power  = 0.55
+cost   = 0.35
+notes  = "params=10B, stages=2=phi EXACT, verify=65, gen_quality=92, latency=3, multimodal=false"
+
+[[candidate]]
+level  = 3
+id     = "MambaSSM"
+label  = "BT-65 Mamba Architecture (d_state=2^tau)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.65
+cost   = 0.40
+notes  = "params=4B, stages=1=mu EXACT, verify=55, gen_quality=85, latency=2, multimodal=false"
+
+[[candidate]]
+level  = 3
+id     = "MultiModal"
+label  = "Multimodal Intent Parser (sigma-tau=8 inputs)"
+n6     = 0.33
+perf   = 0.88
+power  = 0.50
+cost   = 0.30
+notes  = "params=8B, stages=4=tau EXACT, verify=60, gen_quality=88, latency=4, multimodal=true"
+
+# =============================================================
+# Level 4: System (Integrated Environment) -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "IDE_Integ"
+label  = "IDE Integration (LSP+DAP sigma=12 features)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "ide_features=95, cloud=false, edge=false, fullstack=false, formal=false, dev_prod=85"
+
+[[candidate]]
+level  = 4
+id     = "CloudNativ"
+label  = "Cloud-Native Serverless"
+n6     = 0.60
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "ide_features=70, cloud=true, edge=false, fullstack=true, formal=false, dev_prod=80"
+
+[[candidate]]
+level  = 4
+id     = "EdgeEmbed"
+label  = "Edge/Embedded Lightweight Runtime"
+n6     = 0.40
+perf   = 0.60
+power  = 0.70
+cost   = 0.50
+notes  = "ide_features=50, cloud=false, edge=true, fullstack=false, formal=false, dev_prod=60"
+
+[[candidate]]
+level  = 4
+id     = "FullStack"
+label  = "Full-Stack Auto-Generation (DB+API+UI)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "ide_features=80, cloud=true, edge=false, fullstack=true, formal=false, dev_prod=95"
+
+[[candidate]]
+level  = 4
+id     = "FormalEco"
+label  = "Formal Verification Ecosystem"
+n6     = 0.80
+perf   = 0.70
+power  = 0.50
+cost   = 0.55
+notes  = "ide_features=75, cloud=false, edge=false, fullstack=false, formal=true, dev_prod=70"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DependentType and LinearType incompatible with InterpAOT (too complex)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "DependentType"
+then_level = 1
+then_ids   = "InterpAOT"
+
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "LinearType"
+then_level = 1
+then_ids   = "InterpAOT"
+
+# EgyptMem only with N6VM or MultBackend (needs custom memory model)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "EgyptMem"
+then_level = 1
+then_ids   = "N6VM,MultBackend"
+
+# FormalVerify requires FormalEco or IDE_Integ (needs proof integration)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "FormalVerify"
+then_level = 4
+then_ids   = "FormalEco,IDE_Integ"
+
+# MambaSSM incompatible with FormalVerify (SSM can't do formal proofs)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "MambaSSM"
+then_level = 3
+then_ids   = "FormalVerify"
+
+# EdgeEmbed incompatible with MultBackend (too heavyweight)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "EdgeEmbed"
+then_level = 1
+then_ids   = "MultBackend"
+
+# MultiModal requires CloudNativ or FullStack (needs cloud resources)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "MultiModal"
+then_level = 4
+then_ids   = "CloudNativ,FullStack"

@@ -1,0 +1,278 @@
+[meta]
+name = "material"
+desc = "Material Synthesis DSE"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ==============================================================
+# Level 1: Element (소재) — 5 candidates
+# ==============================================================
+
+[[level]]
+name = "Element"
+
+[[candidate]]
+level = "Element"
+id = "E1"
+label = "Carbon_Z6"
+n6 = 1.0
+perf = 0.95
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = "Element"
+id = "E2"
+label = "Silicon_Z14"
+n6 = 0.7
+perf = 0.85
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+level = "Element"
+id = "E3"
+label = "TransitionMetal"
+n6 = 0.8
+perf = 0.80
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = "Element"
+id = "E4"
+label = "NobleMetal"
+n6 = 0.6
+perf = 0.90
+power = 0.60
+cost = 0.20
+
+[[candidate]]
+level = "Element"
+id = "E5"
+label = "Ceramic"
+n6 = 0.5
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+# ==============================================================
+# Level 2: Process (공정) — 6 candidates
+# ==============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+level = "Process"
+id = "P1"
+label = "ALD"
+n6 = 0.9
+perf = 0.90
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = "Process"
+id = "P2"
+label = "MBE"
+n6 = 0.7
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = "Process"
+id = "P3"
+label = "CVD"
+n6 = 0.6
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+level = "Process"
+id = "P4"
+label = "Mechanosynthesis"
+n6 = 0.8
+perf = 0.98
+power = 0.60
+cost = 0.30
+
+[[candidate]]
+level = "Process"
+id = "P5"
+label = "Electrochemistry"
+n6 = 0.7
+perf = 0.75
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = "Process"
+id = "P6"
+label = "SelfAssembly"
+n6 = 1.0
+perf = 0.85
+power = 0.90
+cost = 0.70
+
+# ==============================================================
+# Level 3: Assembler (조립기) — 6 candidates
+# ==============================================================
+
+[[level]]
+name = "Assembler"
+
+[[candidate]]
+level = "Assembler"
+id = "A1"
+label = "STM_tip"
+n6 = 0.8
+perf = 0.95
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = "Assembler"
+id = "A2"
+label = "MolecularAsm"
+n6 = 0.9
+perf = 0.98
+power = 0.70
+cost = 0.25
+
+[[candidate]]
+level = "Assembler"
+id = "A3"
+label = "DNA_origami"
+n6 = 1.0
+perf = 0.80
+power = 0.90
+cost = 0.60
+
+[[candidate]]
+level = "Assembler"
+id = "A4"
+label = "OpticalTweezer"
+n6 = 0.6
+perf = 0.85
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = "Assembler"
+id = "A5"
+label = "FocusedIonBeam"
+n6 = 0.5
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+level = "Assembler"
+id = "A6"
+label = "NanobotSwarm"
+n6 = 0.7
+perf = 0.92
+power = 0.75
+cost = 0.35
+
+# ==============================================================
+# Level 4: Control (제어) — 4 candidates
+# ==============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = "Control"
+id = "C1"
+label = "ClassicalPID"
+n6 = 0.5
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = "Control"
+id = "C2"
+label = "QuantumSensing"
+n6 = 0.9
+perf = 0.95
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = "Control"
+id = "C3"
+label = "AI_ML_Control"
+n6 = 0.7
+perf = 0.90
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = "Control"
+id = "C4"
+label = "HybridQC"
+n6 = 0.8
+perf = 0.98
+power = 0.70
+cost = 0.50
+
+# ==============================================================
+# Level 5: Factory (시스템) — 5 candidates
+# ==============================================================
+
+[[level]]
+name = "Factory"
+
+[[candidate]]
+level = "Factory"
+id = "F1"
+label = "SingleStation"
+n6 = 0.4
+perf = 0.50
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+level = "Factory"
+id = "F2"
+label = "ParallelArray"
+n6 = 0.6
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = "Factory"
+id = "F3"
+label = "ConvergentAsm"
+n6 = 0.8
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = "Factory"
+id = "F4"
+label = "DistribSwarm"
+n6 = 0.7
+perf = 0.85
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = "Factory"
+id = "F5"
+label = "SelfReplicating"
+n6 = 1.0
+perf = 0.99
+power = 0.65
+cost = 0.30
