@@ -1,0 +1,357 @@
+# =============================================================
+# Corrosion Protection DSE Domain Definition
+# Anti-corrosion engineering — material to maintenance
+# n=6: Fe²⁺/Fe³⁺ → 6e transfer, σ=12 potential points, galvanic series
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "corrosion-protection"
+desc = "Corrosion Protection Architecture DSE (material/coating/cathodic/monitoring/maintenance)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 0
+id = "Carbon-Steel"
+label = "Carbon Steel (Fe+C, 6e anodic dissolution, standard structural)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.95
+
+[[candidate]]
+level = 0
+id = "Stainless-316"
+label = "Stainless Steel 316L (Cr+Mo+Ni, σ=12% Cr passive film, marine)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Duplex-SS"
+label = "Duplex Stainless (φ=2 phase, 6% Mo max, oil&gas)"
+n6 = 1.00
+perf = 0.92
+power = 0.82
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Aluminum-6xxx"
+label = "Aluminum 6xxx Series (Al-Mg-Si, n=6 series, lightweight)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Titanium-Gr5"
+label = "Titanium Grade 5 (Ti-6Al-4V, 6% Al, aerospace, inert)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "CuNi-90-10"
+label = "Copper-Nickel 90/10 (marine, 6 m/s flow tolerance, biofouling resist)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.50
+
+# ============================================================
+# Level 1: Coating (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Coating"
+
+[[candidate]]
+level = 1
+id = "Epoxy-Primer"
+label = "Epoxy Primer (zinc-rich, 6 mil DFT, standard anticorrosion)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Hot-Dip-Galv"
+label = "Hot-Dip Galvanizing (Zn sacrifice, σ=12 year life, structural)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Thermal-Spray"
+label = "Thermal Spray (Zn/Al arc, 6-pass application, heavy duty)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "FBE"
+label = "Fusion Bonded Epoxy (pipeline, 6mm radius min, single coat)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Ceramic-Coat"
+label = "Ceramic Coating (Al₂O₃/ZrO₂, σ=12 mil, high-temp, abrasion)"
+n6 = 1.00
+perf = 0.92
+power = 0.75
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Self-Healing"
+label = "Self-Healing Coating (microcapsule, n=6 healing cycles, autonomous)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.35
+
+# ============================================================
+# Level 2: Cathodic (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Cathodic"
+
+[[candidate]]
+level = 2
+id = "Sacrificial-Zn"
+label = "Sacrificial Zinc Anode (Zn→Zn²⁺+2e, n=6 anodes/section, passive)"
+n6 = 1.00
+perf = 0.78
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Sacrificial-Mg"
+label = "Sacrificial Magnesium (Mg→Mg²⁺+2e, 6V driving potential, soil/water)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Impressed-Current"
+label = "Impressed Current CP (ICCP, σ=12V rectifier, long-range, pipeline)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Hybrid-CP"
+label = "Hybrid CP (sacrificial+impressed, 6-zone adaptive, optimized)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Anodic-Protect"
+label = "Anodic Protection (passivation, 6mA/cm² current, acid tanks)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "None-Coating-Only"
+label = "No Cathodic Protection (coating-only strategy, n=6 inspection/yr)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 0.90
+
+# ============================================================
+# Level 3: Monitoring (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Monitoring"
+
+[[candidate]]
+level = 3
+id = "Coupon-Manual"
+label = "Corrosion Coupon (weight loss, 6-month exposure, manual)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "LPR-Probe"
+label = "LPR Probe (linear polarization, 6-electrode, real-time rate)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "UT-Thickness"
+label = "Ultrasonic Thickness (wall loss, σ=12 measurement grid, NDT)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Wireless-IoT"
+label = "Wireless IoT Sensor (6-axis corrosion sensor, cloud dashboard)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "ER-Probe"
+label = "Electrical Resistance Probe (metal loss, n=6 elements, continuous)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "AI-Digital-Twin"
+label = "AI Digital Twin (predictive model, 6 failure modes, lifecycle)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.40
+
+# ============================================================
+# Level 4: Maintenance (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Maintenance"
+
+[[candidate]]
+level = 4
+id = "Periodic-Repaint"
+label = "Periodic Repaint (6-year cycle, brush/spray, standard)"
+n6 = 1.00
+perf = 0.72
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Condition-Based"
+label = "Condition-Based Maintenance (σ=12 month inspection, data-driven)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Predictive"
+label = "Predictive Maintenance (AI forecast, 6 risk tiers, proactive)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Cathodic-Monitor"
+label = "CP Monitoring & Adjust (potential survey, n=6 rectifier zones, tuned)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Replace-Module"
+label = "Modular Replacement (swap section, 6m pipe segments, fast repair)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Design-Life"
+label = "Design for Life (over-engineer, σ·τ=48 year design, zero maintenance)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.35
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Carbon steel requires cathodic protection (not coating-only for harsh)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Carbon-Steel"
+then_level = 1
+then_ids = ["Epoxy-Primer", "Hot-Dip-Galv", "Thermal-Spray", "FBE"]
+
+# Titanium does not need cathodic protection
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Titanium-Gr5"
+then_level = 2
+then_ids = ["None-Coating-Only"]
+
+# AI digital twin requires wireless IoT or LPR data source
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "AI-Digital-Twin"
+then_level = 4
+then_ids = ["Predictive", "Condition-Based"]
+
+# Anodic protection only for stainless or duplex
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Anodic-Protect"
+then_level = 0
+then_ids = ["Stainless-316", "Duplex-SS"]

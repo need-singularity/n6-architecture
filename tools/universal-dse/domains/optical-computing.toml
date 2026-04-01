@@ -1,0 +1,357 @@
+# =============================================================
+# Optical Computing DSE Domain Definition
+# All-optical computation — gate to programming model
+# n=6: n=6 optical modes, σ=12 wavelength channels, Mach-Zehnder σ=12 ports
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "optical-computing"
+desc = "Optical Computing Architecture DSE (gate/interconnect/memory/architecture/programming)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Gate (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Gate"
+
+[[candidate]]
+level = 0
+id = "MZI-Gate"
+label = "Mach-Zehnder Interferometer (σ=12 port mesh, universal unitary)"
+n6 = 1.00
+perf = 0.90
+power = 0.82
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "MicroRing"
+label = "Micro-Ring Resonator (add-drop, n=6 coupled rings, wavelength switch)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "SOA-Gate"
+label = "SOA Nonlinear Gate (semiconductor optical amp, 6 XOR/AND, fast)"
+n6 = 1.00
+perf = 0.82
+power = 0.68
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Photonic-Crystal"
+label = "Photonic Crystal Gate (slow light, 6-fold lattice symmetry, compact)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Diffractive-D2NN"
+label = "Diffractive Neural Network (D2NN, 6 layers, passive, light-speed)"
+n6 = 1.00
+perf = 0.78
+power = 0.95
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "Plasmonic"
+label = "Plasmonic Gate (metal-dielectric, σ=12nm gap, nanoscale, fast)"
+n6 = 1.00
+perf = 0.80
+power = 0.72
+cost = 0.35
+
+# ============================================================
+# Level 1: Interconnect (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Interconnect"
+
+[[candidate]]
+level = 1
+id = "WDM-Bus"
+label = "WDM Optical Bus (σ=12 wavelength channels, high bandwidth)"
+n6 = 1.00
+perf = 0.92
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Si-Waveguide"
+label = "Silicon Waveguide (SOI, n=6 routing layers, CMOS compatible)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Free-Space"
+label = "Free-Space Optics (lens array, 6×6 spatial channels, parallel)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Fiber-Array"
+label = "Fiber Array Interconnect (MCF, n=6 core fiber, long-range)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Photonic-Crossbar"
+label = "Photonic Crossbar (MZI mesh, σ=12×12 switch, non-blocking)"
+n6 = 1.00
+perf = 0.93
+power = 0.75
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "SiN-Waveguide"
+label = "Silicon Nitride Waveguide (low loss, 6dB/m, wideband)"
+n6 = 1.00
+perf = 0.86
+power = 0.88
+cost = 0.58
+
+# ============================================================
+# Level 2: Memory (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Memory"
+
+[[candidate]]
+level = 2
+id = "PCM-Photonic"
+label = "Phase-Change Photonic (GST, n=6 bit levels, non-volatile)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Optical-Delay"
+label = "Optical Delay Line (fiber loop, σ=12 slot buffer, volatile)"
+n6 = 1.00
+perf = 0.75
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "MicroRing-Mem"
+label = "Micro-Ring Memory (bistable, 6-ring bank, fast switch)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Slow-Light"
+label = "Slow Light Buffer (EIT/CROW, 6-stage cascade, tunable delay)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Holographic"
+label = "Holographic Memory (3D crystal, σ·τ=48 page multiplexing, massive)"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Opto-Electronic"
+label = "Opto-Electronic SRAM (hybrid, 6T cell + photodetector, bridge)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+
+# ============================================================
+# Level 3: Architecture (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Architecture"
+
+[[candidate]]
+level = 3
+id = "MVM-Accelerator"
+label = "Matrix-Vector Multiply (MZI mesh, σ=12×12, AI inference)"
+n6 = 1.00
+perf = 0.92
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Reservoir-ORC"
+label = "Optical Reservoir Computing (n=6 virtual nodes, temporal, RNN)"
+n6 = 1.00
+perf = 0.82
+power = 0.88
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Ising-Machine"
+label = "Coherent Ising Machine (OPO, 6-bit coupling, optimization)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "CNN-Photonic"
+label = "Photonic CNN (MRR weights, 6 conv layers, image recognition)"
+n6 = 1.00
+perf = 0.90
+power = 0.82
+cost = 0.48
+
+[[candidate]]
+level = 3
+id = "FPGA-Photonic"
+label = "Photonic FPGA (reconfigurable MZI, σ=12 logic blocks, general)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.42
+
+[[candidate]]
+level = 3
+id = "Quantum-Linear"
+label = "Linear Optical Quantum (boson sampling, n=6 photon, quantum)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.30
+
+# ============================================================
+# Level 4: Programming (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Programming"
+
+[[candidate]]
+level = 4
+id = "PyTorch-Optic"
+label = "PyTorch Photonic (auto-diff, 6 layer API, ML framework)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "HDL-Photonic"
+label = "Photonic HDL (Verilog-style, σ=12 component library, circuit design)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Compiler-MZI"
+label = "MZI Mesh Compiler (unitary decomposition, n=6 optimization passes)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Analog-SDK"
+label = "Analog Photonic SDK (weight programming, 6-bit DAC, inference)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Quantum-Strawberry"
+label = "Strawberry Fields (quantum photonic, 6 qumode, Xanadu framework)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Domain-Specific"
+label = "Domain-Specific Language (custom, 6 primitive ops, optimization)"
+n6 = 1.00
+perf = 0.86
+power = 0.76
+cost = 0.58
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Free-space interconnect requires diffractive gates
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Free-Space"
+then_level = 0
+then_ids = ["Diffractive-D2NN", "SOA-Gate"]
+
+# Quantum linear requires quantum programming
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Quantum-Linear"
+then_level = 4
+then_ids = ["Quantum-Strawberry"]
+
+# Holographic memory only for specialized architectures
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Holographic"
+then_level = 3
+then_ids = ["Ising-Machine", "Reservoir-ORC"]
+
+# Plasmonic gate needs silicon waveguide or SiN
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Plasmonic"
+then_level = 1
+then_ids = ["Si-Waveguide", "SiN-Waveguide"]
