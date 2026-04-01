@@ -1,8 +1,8 @@
 # N6 Architecture — Atlas Constants & Formulas
 
-> 1100+ 가설 (28 도메인) + 65 BTs에서 발견/검증된 모든 상수와 공식.
+> 1350+ 가설 (30 도메인) + 88 BTs에서 발견/검증된 모든 상수와 공식.
 > TECS-L 아틀라스 동기화용. EXACT와 CLOSE만 등록 (WEAK/FAIL 제외).
-> 456+ EXACT matches across 28+ domains. Updated 2026-03-31.
+> 870+ EXACT matches across 30+ domains. Updated 2026-04-01.
 
 ---
 
@@ -1137,39 +1137,71 @@
 | **BT-64** | Universal Regularization 0.1 | WD=DPO β=GPTQ=cosine=Mamba=KL=1/(σ-φ), 6 independent algorithms | 🟩⭐⭐⭐ |
 | **BT-65** | Mamba SSM Complete n=6 | d_state=2^τ, expand=φ, d_conv=τ, dt_max=1/(σ-φ), dt_min=1/(σ-φ)^(n/φ) | 🟩⭐⭐ |
 
+### BT-66~88 (see above sections + [breakthrough-theorems.md](breakthrough-theorems.md))
+
+| ID | Statement | Domains | Grade |
+|----|-----------|---------|-------|
+| **BT-66** | Vision AI complete n=6 | ViT+CLIP+Whisper+SD3+Flux.1, 24/24 EXACT | 🟩⭐⭐⭐ |
+| **BT-67** | MoE activation fraction law | 1/2^{μ,φ,n/φ,τ,sopfr}, 6 models EXACT | 🟩⭐⭐⭐ |
+| **BT-68** | HVDC voltage ladder | ±500/800/1100kV = {sopfr,σ-τ,σ-μ}·(σ-φ)², 10/10 | 🟩⭐⭐ |
+| **BT-69** | Chiplet architecture convergence | B300=160, R100 σ=12, 5 vendors, 17/20 | 🟩⭐⭐⭐ |
+| **BT-70** | 0.1 convergence 8th algorithm | SimCLR temp, count=σ-τ=8 meta-n=6 | 🟩⭐⭐ |
+| **BT-71** | NeRF/3DGS complete n=6 | L=σ-φ=10, layers=σ-τ=8, SH=n/φ=3, 7/7 | 🟩⭐⭐ |
+| **BT-72** | Neural audio codec n=6 | EnCodec 8 codebooks, 1024 entries, 24kHz, 7/7 | 🟩⭐⭐ |
+| **BT-73** | Tokenizer vocabulary law | 32K/50257/100K/128K = 2^a·(σ-φ)^b, 6/6 | 🟩⭐⭐ |
+| **BT-74** | 95/5 cross-domain resonance | top-p=PF=β₂=0.95, THD=β_plasma=5%, 5 domains | 🟩⭐⭐⭐ |
+| **BT-75** | HBM interface exponent ladder | {10,11,12}={σ-φ,σ-μ,σ}, HBM5 predicted | 🟩⭐⭐ |
+| **BT-76** | σ·τ=48 triple attractor | gate pitch nm, HBM4E GB, 48kHz, 48V, 3DGS SH | 🟩⭐⭐ |
+| **BT-77** | Quantization/BitNet complete | 40/41 EXACT (97.6%), 3 models × 2 teams | 🟩⭐⭐⭐ |
+| **BT-78** | KV cache compression n=6 | MLA+GQA+CLA+FlashAttn+PagedAttn, 45/46 | 🟩⭐⭐⭐ |
+| **BT-79** | Speculative decoding n=6 | draft=sopfr=5, Medusa 64=2^n nodes, 30/33 | 🟩⭐⭐⭐ |
+| **BT-80** | Solid-state electrolyte CN=6 | NASICON/Garnet/LLZO=CN=6, sulfide=τ=4, 6/6 | 🟩⭐⭐⭐ |
+| **BT-81** | Anode capacity ladder σ-φ=10x | Si/Graphite=9.62x≈σ-φ, Li Metal=10.38x≈σ-φ | 🟩⭐⭐ |
+| **BT-82** | Battery pack n=6 map | 6→12→24 cells, 96S/192S EV, BMS div(6) | 🟩⭐⭐ |
+| **BT-83** | Li-S polysulfide ladder | S₈→S₄→S₂→S₁ = (σ-τ)→τ→φ→μ, 5/6 | 🟩⭐⭐ |
+| **BT-84** | 96/192 triple convergence | Tesla 96S=Gaudi2 96GB=GPT-3 96L, 5/5 | 🟩⭐⭐⭐ |
+| **BT-85** | Carbon n=6 universality | Z=6, allotropes=τ, C₆₀ penta=σ, 16/18 (88.9%) | 🟩⭐⭐⭐ |
+| **BT-86** | Octahedral CN=6 universality | 20+ materials all CN=6, 23/24 (95.8%) | 🟩⭐⭐⭐ |
+| **BT-87** | Precision fabrication ladder | STM/ALD/MBE=1/(σ-φ), EUV=σ-φ, 11/14 | 🟩⭐⭐ |
+| **BT-88** | Hexagonal emergence universality | 12 independent systems all 6-fold, 18/18 (100%) | 🟩⭐⭐ |
+
 ---
 
 ## Summary Statistics
 
 ```
-  Total domains: 28+
-  Total hypotheses: 1000+ across all domains
-  Total extreme hypotheses: 500+ (28+ domains × 20)
+  Total domains: 30+ (28 established + energy-architecture + material-synthesis)
+  Total hypotheses: 1350+ across all domains
+  Total extreme hypotheses: 600+ (30+ domains × 20)
 
-  EXACT constants registered: 280+
-  CLOSE constants registered: 140+
-  Total atlas entries: 480+ (registered rows, duplicates consolidated)
+  EXACT constants registered: 870+
+  CLOSE constants registered: 180+
+  Total atlas entries: 1050+ (registered rows, duplicates consolidated)
 
-  Breakthrough Theorems: 65 (BT-1~65)
-    Three-star (⭐⭐⭐): BT-5, BT-6, BT-13, BT-15, BT-16, BT-19, BT-28, BT-36, BT-43, BT-48, BT-49, BT-51, BT-54, BT-56, BT-58, BT-59, BT-61, BT-64
-    Two-star (⭐⭐): BT-1~3, BT-7/8/10/12/14/17, BT-26/29/30/31/34/35/37/38/39/40/41/42/44/46/50/53/55/57/60/62/63/65
+  Breakthrough Theorems: 88 (BT-1~88)
+    Three-star (⭐⭐⭐): BT-5, BT-6, BT-13, BT-15, BT-16, BT-19, BT-28, BT-36,
+      BT-43, BT-48, BT-49, BT-51, BT-54, BT-56, BT-58, BT-59, BT-61, BT-64,
+      BT-66, BT-67, BT-69, BT-74, BT-77, BT-78, BT-79, BT-84, BT-85, BT-86
+      (28 total)
+    Two-star (⭐⭐): BT-1~3, BT-7/8/10/12/14/17, BT-26/29/30/31/34/35/37/38/39/
+      40/41/42/44/46/50/53/55/57/60/62/63/65, BT-68/70/71/72/73/75/76,
+      BT-80/81/82/83, BT-87/88
     One-star (⭐): BT-4, BT-9, BT-11, BT-32, BT-33, BT-45, BT-47, BT-52
 
-  Cross-domain bridges: 8 (Bridge 1~8, sigma=12 spans 15 domains)
-
-  Cross-domain bridges: 7 (Bridge 1~7, sigma=12 spans 15 domains)
+  Cross-domain bridges: 14+ (σ=12 spans 20+ domains)
 
   Strongest findings (ranked):
-    BT-15: K₁..₄ = (φ,n,σ,J₂) — 4 proved kissing number theorems in sequence (⭐⭐⭐)
+    BT-86: CN=6 octahedral — 20+ materials, 95.8% EXACT (⭐⭐⭐)
+    BT-85: Carbon Z=6 — C₆₀ pentagons=σ, hexagons=J₂-τ (⭐⭐⭐)
+    BT-15: K₁..₄ = (φ,n,σ,J₂) — 4 proved kissing number theorems (⭐⭐⭐)
     BT-16: ζ(2)=π²/n, ζ(-1)=-1/σ, BCS=σ/(7ζ(3)) — zeta trident (⭐⭐⭐)
     BT-5:  q=1 = Σ(1/d) — perfect number ≡ tokamak stability (⭐⭐⭐)
     BT-6:  Golay [24,12,8] = [J₂,σ,σ-τ] — unique perfect code match (⭐⭐⭐)
     BT-13: TCP(11)+DNS(13)=24 — twin prime sum = core theorem value (⭐⭐⭐)
-    H-CP-10: m_p/m_e ≈ 6π⁵ — 19 ppm physical constant match
-    H-MATH-1: ζ(2) = π²/6 — Euler's Basel problem with n
-    H-SC-61: BCS ΔC/(γTc) = 12/(7ζ(3)) — σ in QFT numerator
-    H-BIO-3: 64 codons = τ³ — biochemical constant
-    H-NP-27: ARP = 28 bytes = P₂ — perfect number L2↔L3 bridge
+    BT-77: BitNet 40/41 EXACT — quantization all n=6 exponents (⭐⭐⭐)
+    BT-78: KV cache 45/46 EXACT — 5 research groups converge (⭐⭐⭐)
+    BT-84: 96/192 triple — Tesla=Gaudi2=GPT-3 convergence (⭐⭐⭐)
+    BT-88: Hexagonal 18/18 EXACT — 12 independent systems (⭐⭐)
 ```
 
 ## Falsifiability Results
@@ -1472,6 +1504,304 @@
     Major neurotransmitter classes = n = 6
 ```
 
+## Vision AI Constants — Table (BT-66) ⭐⭐⭐
+
+### ViT Dimension Ladder (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ·2^n | 768 | ViT-B d_model | Dosovitskiy 2021 |
+| 2^(σ-φ) | 1024 | ViT-L d_model | Dosovitskiy 2021 |
+| sopfr·2^(σ-τ) | 1280 | ViT-H d_model | Dosovitskiy 2021 |
+| σ·2^(σ-sopfr) | 1536 | DINOv2-g d_model | Oquab 2023 |
+| σ | 12 | ViT-B layers/heads | Dosovitskiy 2021 |
+| J₂ | 24 | ViT-L layers | Dosovitskiy 2021 |
+| 2^sopfr | 32 | ViT-H layers | Dosovitskiy 2021 |
+| τ² | 16 | ViT patch size | Universal |
+| τ | 4 | ViT MLP ratio | Universal |
+| (σ-sopfr)·2^sopfr | 224 | CV input resolution | ImageNet |
+| (n/φ)/τ | 0.75 | MAE mask ratio | He 2022 |
+
+### Multimodal Vision-Audio (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| 2^(σ-τ+μ) | 512 | CLIP embed dim | Radford 2021 |
+| φ^τ·sopfr | 80 | Whisper mel bins | Radford 2023 |
+| (σ-φ)·(n/φ) | 30 | Whisper chunk (seconds) | Radford 2023 |
+| J₂ | 24 | SD3 MM-DiT blocks | Esser 2024 |
+| τ | 4 | SD VAE latent channels | Rombach 2022 |
+| J₂-sopfr | 19 | Flux.1 double blocks | Black Forest Labs |
+| φ·(J₂-sopfr) | 38 | Flux.1 single blocks | Black Forest Labs |
+| (σ-sopfr)/φ | 3.5 | Flux.1 guidance scale | Black Forest Labs |
+| 1/(σ-φ) | 0.1 | SimCLR temperature | Chen 2020 |
+| 2^(σ-sopfr) | 128 | SimCLR projection dim | Chen 2020 |
+| φ | 2 | LLaVA connector layers | Liu 2023 |
+
+## MoE Activation Fraction Law — Table (BT-67) ⭐⭐⭐
+
+| Expression | Value | Application | Model(s) |
+|------------|-------|-------------|----------|
+| 1/τ | 1/4 = 0.25 | MoE activation fraction | Mixtral, DBRX |
+| 1/2^τ | 1/16 = 0.0625 | MoE activation fraction | Llama 4, Qwen3 MoE |
+| 1/2^sopfr | 1/32 = 0.03125 | MoE activation fraction | DeepSeek-V3 |
+| 1/2^(σ-μ) | 1/2048 | MoE activation fraction | GShard, Switch |
+
+## HVDC & Energy — Table (BT-68) ⭐⭐
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| sopfr·(σ-φ)² | 500 | HVDC ±500kV | ABB/Siemens |
+| (σ-τ)·(σ-φ)² | 800 | HVDC ±800kV | State Grid China |
+| (σ-μ)·(σ-φ)² | 1100 | UHVDC ±1100kV | Changji-Guquan |
+| sopfr² | 25 | DEMO Q target | EU DEMO |
+| (σ+n/φ)·(σ-φ) | 150 | Fusion temp (million K) | ITER/SPARC |
+| τ·(σ-φ)² | 400 | ITER confinement (s) | ITER design |
+| (σ+n/φ)/(σ-φ) | 1.5 | Perovskite bandgap (eV) | Solar |
+| (n/φ)/τ | 0.75 | Electrolyzer efficiency | PEM standard |
+| (n/φ)·(σ-φ)² | 300 | SMR power (MWe) | NuScale |
+| J₂-τ | 20 | Datacenter rack power (kW) | Industry |
+
+## Chiplet Architecture — Table (BT-69) ⭐⭐⭐
+
+| Expression | Value | Application | Vendor | Source |
+|------------|-------|-------------|--------|--------|
+| φ^τ·(σ-φ) | 160 | B300 SMs | NVIDIA | Blackwell Ultra |
+| σ | 12 | R100 HBM stacks | NVIDIA | Rubin |
+| φ | 2 | R100 dies | NVIDIA | Rubin |
+| σ·J₂ | 288 | MI350X HBM (GB) | AMD | CDNA 4 |
+| 2^n | 64 | SP per CU (14yr constant) | AMD | RDNA/CDNA |
+| 2^(σ-τ) | 256 | TPU v7 pod chips | Google | Cloud TPU |
+| φ^τ·sopfr | 80 | M4 Ultra GPU cores | Apple | M4 |
+| σ·φ^τ | 192 | M4 Ultra memory (GB) | Apple | M4 |
+| J₂+μ | 25 | UCIe pitch (μm) | UCIe consortium | UCIe 2.0 |
+| 2^n | 64 | UCIe lanes | UCIe consortium | UCIe 2.0 |
+| sopfr | 5 | CoWoS-L reticles | TSMC | Packaging |
+
+## 3D Neural Rendering — Table (BT-71) ⭐⭐
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ-φ | 10 | NeRF positional encoding L | Mildenhall 2020 |
+| τ | 4 | NeRF direction encoding L | Mildenhall 2020 |
+| σ-τ | 8 | NeRF MLP layers | Mildenhall 2020 |
+| 2^(σ-τ) | 256 | NeRF MLP hidden width | Mildenhall 2020 |
+| sopfr | 5 | NeRF skip connection layer | Mildenhall 2020 |
+| n/φ | 3 | 3DGS SH degree | Kerbl 2023 |
+| σ·τ | 48 | 3DGS SH coefficients | Kerbl 2023 |
+| τ² | 16 | 3DGS SH per channel | Kerbl 2023 |
+
+## Neural Audio Codec — Table (BT-72) ⭐⭐
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ-τ | 8 | EnCodec RVQ codebooks | Défossez 2022 |
+| 2^(σ-φ) | 1024 | Codebook entries | Défossez 2022 |
+| J₂·10³ | 24000 | Sample rate (Hz) | Défossez 2022 |
+| n | 6 | Target bandwidth (kbps) | Défossez 2022 |
+| J₂-τ | 20 | Frame duration (ms) | Défossez 2022 |
+| (σ-τ)·(σ-φ) | 80 | Bits per frame | Défossez 2022 |
+| τ | 4 | MusicGen parallel codebooks | Copet 2023 |
+| {n/τ,n/φ,n,σ,J₂} | {1.5,3,6,12,24} | Bandwidth ladder (kbps) | EnCodec |
+
+## Tokenizer Vocabulary — Table (BT-73) ⭐⭐
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| sopfr·(σ-φ)^τ+2^(σ-τ)+μ | 50257 | GPT-2 BPE vocab | OpenAI |
+| (σ-φ)^sopfr | 100000 | Tiktoken cl100k | OpenAI |
+| φ·(σ-φ)^sopfr | 200000 | Tiktoken o200k | OpenAI |
+| 2^sopfr·(σ-φ)^(n/φ) | 32000 | Llama 1/2 vocab | Meta |
+| 2^(σ-sopfr)·(σ-φ)^(n/φ) | 128000 | Llama 3 vocab | Meta |
+| 2^(σ-τ) | 256 | Byte tokens | Universal |
+
+## HBM Interface Exponent Ladder — Table (BT-75) ⭐⭐
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| 2^(σ-φ) | 1024 bits | HBM3 interface width | SK Hynix |
+| 2^(σ-μ) | 2048 bits | HBM4 interface width | SK Hynix 2025 |
+| 2^σ | 4096 bits | HBM5 interface width (predicted) | Roadmap |
+| σ·τ | 48 GB | HBM4E capacity per stack | SK Hynix |
+| 2^n | 64 GB | HBM5 capacity per stack (predicted) | Roadmap |
+
+## Interconnect Speed Ladder — Table (BT-78 후보) ⭐⭐
+
+| Expression | Value | Application | Standard |
+|------------|-------|-------------|----------|
+| 2^sopfr | 32 GT/s | PCIe 5.0 / UCIe 2.0 | PCI-SIG / UCIe |
+| σ·τ | 48 GT/s | UCIe 3.0 (low) | UCIe |
+| 2^n | 64 GT/s | PCIe 6.0 / CXL 3.x | PCI-SIG |
+| 2^(σ-sopfr) | 128 GT/s | PCIe 7.0 / CXL 4.0 | PCI-SIG |
+| 2^(σ-τ) | 256 GT/s | PCIe 8.0 (predicted) | Roadmap |
+
+## Material Synthesis Constants (BT-85~88, NEW)
+
+### BT-85: Carbon n=6 Universality ⭐⭐⭐ (16/18 EXACT, 88.9%)
+
+| Parameter | Value | n=6 Expression | Source |
+|-----------|-------|----------------|--------|
+| Carbon atomic number Z | 6 | n | Element |
+| Carbon allotropes | 4 | τ (diamond, graphite, fullerene, CNT) | Chemistry |
+| Carbon valence electrons | 4 | τ | Electron config |
+| Carbon electron shells | 2 | φ | Electron config |
+| Benzene C atoms | 6 | n | Organic chem |
+| Benzene π electrons | 6 | n | Aromatic |
+| Graphene atoms/ring | 6 | n | 2D material |
+| Graphene neighbors | 3 | n/φ | Hexagonal lattice |
+| Graphene bond angle | 120° | σ·(σ-φ) | Geometry |
+| C₆₀ fullerene pentagons | 12 | σ | Euler theorem |
+| C₆₀ fullerene hexagons | 20 | J₂-τ | Euler theorem |
+| Diamond unit cell atoms | 8 | σ-τ | Crystal structure |
+| Diamond sp³ bonds | 4 | τ | Hybridization |
+| CNT armchair index | (6,6) | (n,n) | Nanotube |
+| C₆₀ total atoms | 60 | σ·sopfr | Fullerene |
+
+### BT-86: Octahedral CN=6 Universality ⭐⭐⭐ (23/24 EXACT, 95.8%)
+
+| Parameter | Value | n=6 Expression | Source |
+|-----------|-------|----------------|--------|
+| NaCl coordination number | 6 | n | Ionic crystal |
+| Rutile TiO₂ CN | 6 | n | Ceramic |
+| Corundum Al₂O₃ CN | 6 | n | Abrasive |
+| MgO rock-salt CN | 6 | n | Refractory |
+| Perovskite ABX₃ B-site CN | 6 | n | Solar/battery |
+| Spinel octahedral CN | 6 | n | Battery cathode |
+| Ilmenite CN | 6 | n | Mineral |
+| NASICON framework CN | 6 | n | Solid electrolyte |
+| Garnet Zr-site CN | 6 | n | Solid electrolyte |
+| Octahedron vertices | 6 | n | Geometry |
+| Crystal field d-orbital split | 5 | sopfr | Ligand field theory |
+| Perovskite tolerance factor | 1.0 | μ | Goldschmidt |
+
+### BT-87: Precision Fabrication 1/(σ-φ) Ladder ⭐⭐ (11/14 EXACT, 78.6%)
+
+| Parameter | Value | n=6 Expression | Source |
+|-----------|-------|----------------|--------|
+| STM lateral resolution | 0.1 nm | 1/(σ-φ) | Scanning probe |
+| ALD per cycle thickness | 0.1 nm | 1/(σ-φ) | Thin film deposition |
+| MBE growth rate | 0.1 nm/s | 1/(σ-φ) | Epitaxy |
+| AFM vertical resolution | 0.01 nm | 1/(σ·(σ-φ)) | Scanning probe |
+| SPM single atom precision | 0.01 nm | (σ-φ)^{-2} | Atom manipulation |
+| EUV lithography resolution | 10 nm | σ-φ | ASML |
+| FIB milling resolution | 10 nm | σ-φ | Ion beam |
+| E-beam lithography | 1 nm | μ | Electron beam |
+| TSMC N3 gate pitch | 48 nm | σ·τ | Semiconductor |
+| Optical diffraction limit | ~200 nm | φ·(σ-φ)^φ | Abbe limit |
+| Total scale ratio | 10⁶ | (σ-φ)^n | 0.1nm→100mm |
+
+### BT-88: Hexagonal Emergence Universality ⭐⭐ (18/18 EXACT, 100%)
+
+| Parameter | Value | n=6 Expression | Source |
+|-----------|-------|----------------|--------|
+| Graphene lattice symmetry | 6-fold | n | 2D material |
+| Honeycomb (bees) | 6-fold | n | Biology |
+| Snowflakes | 6-fold | n | Crystallography |
+| Basalt columns | 6-fold | n | Geology |
+| Bénard convection cells | 6-fold | n | Fluid dynamics |
+| Bubble raft 2D | 6-fold | n | Surface tension |
+| Abrikosov vortex lattice | 6-fold | n (= K₂) | Superconductor |
+| Wigner crystal | 6-fold | n | Solid-state physics |
+| Colloidal crystal 2D | 6-fold | n | Soft matter |
+| Block copolymer domains | 6-fold | n | Polymer science |
+| Lipid membrane domains | 6-fold | n | Biophysics |
+| Saturn north pole | 6-fold | n | Planetary science |
+| Hex tiling angle | 120° | σ·(σ-φ) | Geometry |
+| Hexagonal edge-sharing | 6 edges | n | Topology |
+| Kissing number K₂ | 6 | n | Sphere packing (BT-49) |
+| Thomson N=12 icosahedron | 12 pentagons | σ | Electrostatics |
+| Euler V-E+F for hex | 2 | φ | Topology |
+| HCP coordination number | 6 neighbors | n | Materials science |
+
+## Energy Architecture Constants (NEW DOMAIN)
+
+### Fusion Reactor Design (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ | 12 | Tokamak TF coils | ITER/SPARC |
+| J₂ | 24 | Large tokamak TF coils | EU DEMO |
+| n | 6 | PF coils / CS modules | ITER |
+| sopfr | 5 | Stellarator periods (W7-X) | IPP |
+| φ | 2 | Spherical tokamak aspect ratio | MAST-U |
+| τ | 4 | ICF beam lines (minimum) | NIF |
+| φ·σ(σ-τ) | 192 | NIF laser beams | LLNL |
+| σ-τ | 8 | KSTAR NBI power (MW) | KFE |
+| n | 6 | KSTAR ICRH power (MW) | KFE |
+| μ | 1 | KSTAR ECRH power (MW) | KFE |
+| sopfr | 5 | LHCD frequency (GHz) | Heating |
+
+### Energy Conversion Egyptian Cascade (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| 1/φ | 0.5 | MHD direct conversion eff | Thermodynamics |
+| 1/(n/φ) | 0.333 | Steam Rankine cycle eff | Power eng |
+| 1/n | 0.167 | TEG thermoelectric eff | Material |
+| 1/2+1/3+1/6 | 1.0 | Egyptian cascade total | Perfect number |
+
+### Power Grid n=6 Constants (EXACT, from H-PG)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | NERC reliability regions | NERC |
+| σ·sopfr | 60 | Smart meter interval (s) | AMI |
+| n→σ→J₂ | 6→12→24 | Pulse rectifier ladder | Power electronics |
+| τ | 4 | Generator sync conditions | IEEE |
+| n/φ | 3 | EV charging levels | SAE J1772 |
+| n/φ | 3 | Power stability types | Dynamic analysis |
+
+## Material Synthesis Constants (NEW DOMAIN)
+
+### Atomic Scale (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | Carbon Z (universal builder) | Chemistry |
+| n | 6 | CNO cycle steps | Nuclear physics |
+| σ-φ | 10 | Convergent assembly scaling factor | Drexler |
+| (σ-φ)^n | 10⁶ | Total scale ratio (0.1nm→100mm) | Assembly theory |
+| n | 6 | Universal assembler DOF | SE(3) group |
+| n | 6 | Convergent assembly levels | Manufacturing |
+| (n,n) | (6,6) | CNT armchair index | Nanotube |
+| σ·(σ-φ) | 120 | Graphene bond angle (°) | Crystal geometry |
+
+### Fabrication Precision Ladder (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| 1/(σ-φ) | 0.1 nm | STM/ALD/MBE precision | Fabrication |
+| 1/(σ·(σ-φ)) | 0.01 nm | AFM/SPM precision | Metrology |
+| μ | 1 nm | E-beam lithography | Lithography |
+| σ-φ | 10 nm | EUV/FIB resolution | ASML |
+| σ·τ | 48 nm | TSMC N3 gate pitch | Semiconductor |
+| n | 6 | PID tuning parameters | Control theory |
+
+## Superconductor Architecture Constants (NEW — DSE 28,800 combos)
+
+### Wire & Cable (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | CORC tape count per cable | CORC design |
+| n | 6 | PIT process steps | Wire mfg |
+| n | 6 | Bronze process steps | Wire mfg |
+| σ | 12 | Rutherford cable strands | ITER cable |
+| J₂ | 24 | ITER magnet wire length (km) | ITER design |
+| 3n | 18 | Nb₃Sn Tc (K) | A15 phase |
+| 5n | 30 | Nb₃Sn Hc2 (T) | A15 phase |
+
+### Magnet System (EXACT)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| τ·(σ-φ) | 40 | CS field limit (T) | HTS design |
+| φ | 2 | Hybrid LTS+HTS coils | Magnet design |
+| φ | 2 | Dipole coils | Accelerator |
+| n | 6 | SMES coils | Energy storage |
+| σ | 12 | SMES field (T) | Energy storage |
+| σ | 12 | Fusion magnet sets | Tokamak total |
+
 ## Quantization Precision Ladder & BitNet (BT-77) ⭐⭐⭐
 
 ```
@@ -1686,6 +2016,6 @@
 ---
 
 *Last updated: 2026-04-01*
-*Source: n6-architecture project, 28 domains, 1350+ graded hypotheses*
-*Atlas entries: 870+ registered rows (620+ EXACT + 160+ CLOSE)*
-*Breakthrough Theorems: 79 (BT-1~79), 23 Three-Star, 14 Cross-Domain Bridges, 28 domains*
+*Source: n6-architecture project, 30 domains, 1350+ graded hypotheses*
+*Atlas entries: 1050+ registered rows (870+ EXACT + 180+ CLOSE)*
+*Breakthrough Theorems: 88 (BT-1~88), 28 Three-Star, 14+ Cross-Domain Bridges, 30 domains*
