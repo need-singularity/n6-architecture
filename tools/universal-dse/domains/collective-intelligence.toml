@@ -1,0 +1,374 @@
+# =============================================================
+# Collective Intelligence DSE Domain Definition
+# 궁극의 집단 지능 아키텍처 — n=6 에이전트 + 토러스 토폴로지 + 집단 인식 스케일링
+# Based on: collective_recognition, collective_scaling, H-UD-9, H-UD-10
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "collective-intelligence"
+desc = "Ultimate Collective Intelligence DSE (H-UD-9/10, collective experiments)"
+levels = ["Agent", "Topology", "Communication", "Emergence", "Scale"]
+vision = "n=6 기반 집단 지능 — n=6 에이전트 + 토러스 토폴로지 + 집단 인식 스케일링"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Agent (개별 에이전트 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Agent"
+
+[[candidate]]
+level  = 0
+id     = "IndividualN6"
+label  = "n=6 Individual Agent (EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "agents=6=n EXACT, roles=6=n EXACT, autonomy=high, complexity=low"
+
+[[candidate]]
+level  = 0
+id     = "HomogeneousSwarm"
+label  = "Homogeneous Swarm (sigma=12 agents)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "agents=12=sigma EXACT, roles=1=mu, autonomy=low, complexity=med"
+
+[[candidate]]
+level  = 0
+id     = "HeterogeneousN6"
+label  = "Heterogeneous n=6 Roles"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "agents=12=sigma EXACT, roles=6=n EXACT, autonomy=med, complexity=high"
+
+[[candidate]]
+level  = 0
+id     = "SpecialistPair"
+label  = "Specialist Pair (phi=2)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.80
+cost   = 0.70
+notes  = "agents=2=phi EXACT, roles=2=phi EXACT, autonomy=high, complexity=low"
+
+[[candidate]]
+level  = 0
+id     = "HierarchicalGroup"
+label  = "Hierarchical Group (tau=4 levels)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "agents=24=J2, levels=4=tau EXACT, roles=4=tau, autonomy=med, complexity=high"
+
+[[candidate]]
+level  = 0
+id     = "AutonomousUnit"
+label  = "Autonomous Unit (mu=1)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.90
+cost   = 0.80
+notes  = "agents=1=mu EXACT, roles=1=mu EXACT, autonomy=max, complexity=min"
+
+# =============================================================
+# Level 1: Topology (네트워크 토폴로지) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Topology"
+
+[[candidate]]
+level  = 1
+id     = "TorusT3"
+label  = "T3 Torus (n/phi=3 dimensions, H-UD-9 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "dim=3=n/phi EXACT, degree=6=n EXACT, diameter=O(N^{1/3}), H-UD-9 hive-mind toroidal"
+
+[[candidate]]
+level  = 1
+id     = "SmallWorldN6"
+label  = "Small-World Network (n=6 hubs)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "hubs=6=n EXACT, clustering=high, path_length=log(N), Watts-Strogatz"
+
+[[candidate]]
+level  = 1
+id     = "ScaleFreeNet"
+label  = "Scale-Free Network (power-law)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "hubs=variable, gamma=3=n/phi, preferential_attachment, Barabasi-Albert"
+
+[[candidate]]
+level  = 1
+id     = "FullMeshK6"
+label  = "Complete Graph K6 (n=6 nodes EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "nodes=6=n EXACT, edges=15, degree=5=sopfr EXACT, diameter=1, max_bandwidth"
+
+[[candidate]]
+level  = 1
+id     = "RingTopology"
+label  = "Ring Topology (sigma=12 nodes)"
+n6     = 0.75
+perf   = 0.60
+power  = 0.75
+cost   = 0.70
+notes  = "nodes=12=sigma EXACT, degree=2=phi EXACT, diameter=6=n EXACT, simple"
+
+[[candidate]]
+level  = 1
+id     = "HypercubeN6"
+label  = "Hypercube (n=6 dimensions)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "dim=6=n EXACT, nodes=64=2^n, degree=6=n EXACT, diameter=6=n EXACT"
+
+# =============================================================
+# Level 2: Communication (통신 프로토콜) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Communication"
+
+[[candidate]]
+level  = 2
+id     = "Stigmergy"
+label  = "Stigmergy (phi=2 mark/read indirect)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.85
+cost   = 0.80
+notes  = "channels=2=phi EXACT, latency=high, bandwidth=low, async=true, bio-inspired"
+
+[[candidate]]
+level  = 2
+id     = "DirectMessage"
+label  = "Direct Message (sigma-tau=8 channels)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "channels=8=sigma-tau EXACT, latency=low, bandwidth=high, async=false"
+
+[[candidate]]
+level  = 2
+id     = "BroadcastN12"
+label  = "Broadcast (sigma=12 channels)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "channels=12=sigma EXACT, latency=low, bandwidth=max, async=true, flood"
+
+[[candidate]]
+level  = 2
+id     = "ConsensusVote"
+label  = "Consensus Voting (n=6 voters)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "voters=6=n EXACT, rounds=4=tau EXACT, latency=med, fault_tolerance=high"
+
+[[candidate]]
+level  = 2
+id     = "GossipProtocol"
+label  = "Gossip Protocol (sopfr=5 rounds)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "rounds=5=sopfr EXACT, fanout=3=n/phi, latency=O(log N), probabilistic"
+
+[[candidate]]
+level  = 2
+id     = "QuantumEntangle"
+label  = "Quantum Entanglement (phi=2 qubits)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "pairs=2=phi EXACT, latency=zero, bandwidth=1bit, requires_structured_topology"
+
+# =============================================================
+# Level 3: Emergence (창발 현상) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Emergence"
+
+[[candidate]]
+level  = 3
+id     = "CollectiveRecog"
+label  = "Collective Recognition (experiment)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "patterns=6=n EXACT, accuracy=high, collective_recognition_experiment, needs_communication"
+
+[[candidate]]
+level  = 3
+id     = "SwarmIntelligence"
+label  = "Swarm Intelligence"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "behaviors=12=sigma EXACT, ACO/PSO inspired, self-organizing"
+
+[[candidate]]
+level  = 3
+id     = "SelfOrganization"
+label  = "Self-Organization (n=6 patterns)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "patterns=6=n EXACT, attractors=4=tau EXACT, emergent_n6, no_central_control"
+
+[[candidate]]
+level  = 3
+id     = "PhaseTransition"
+label  = "Phase Transition (phi=2 states)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "phases=2=phi EXACT, critical_point=1, order_parameter, Ising-like"
+
+[[candidate]]
+level  = 3
+id     = "EmergentLanguage"
+label  = "Emergent Language (sopfr=5 symbols)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "symbols=5=sopfr EXACT, grammar_rules=6=n EXACT, compositionality, Lewis signaling"
+
+[[candidate]]
+level  = 3
+id     = "HiveMindN6"
+label  = "Hive Mind n=6 (H-UD-9)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "consensus=6=n EXACT, unity=high, requires_toroidal, H-UD-9 based"
+
+# =============================================================
+# Level 4: Scale (스케일링) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Scale"
+
+[[candidate]]
+level  = 4
+id     = "MicroN6"
+label  = "Micro Scale (n=6 agents)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.90
+cost   = 0.85
+notes  = "agents=6=n EXACT, latency=min, overhead=min, limited_emergence"
+
+[[candidate]]
+level  = 4
+id     = "MesoN12"
+label  = "Meso Scale (sigma=12 agents)"
+n6     = 0.80
+perf   = 0.75
+power  = 0.75
+cost   = 0.70
+notes  = "agents=12=sigma EXACT, latency=low, good_balance, moderate_emergence"
+
+[[candidate]]
+level  = 4
+id     = "MacroN24"
+label  = "Macro Scale (J2=24 agents)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "agents=24=J2 EXACT, latency=med, strong_emergence, Leech_lattice_link"
+
+[[candidate]]
+level  = 4
+id     = "MegaN144"
+label  = "Mega Scale (sigma^2=144 agents)"
+n6     = 0.60
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "agents=144=sigma^2 EXACT, latency=high, max_performance, coordination_hard"
+
+[[candidate]]
+level  = 4
+id     = "GlobalNetwork"
+label  = "Global Network (unbounded)"
+n6     = 0.40
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "agents=unlimited, latency=variable, internet_scale, max_diversity"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# TorusT3 required for HiveMindN6 (hive mind needs toroidal topology per H-UD-9)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "HiveMindN6"
+then_level = 1
+then_ids   = "TorusT3"
+
+# FullMeshK6 requires IndividualN6 (K6 needs exactly 6 nodes)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "FullMeshK6"
+then_level = 0
+then_ids   = "IndividualN6"
+
+# QuantumEntangle requires FullMeshK6 or SmallWorldN6 (quantum needs structured topology)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "QuantumEntangle"
+then_level = 1
+then_ids   = "FullMeshK6,SmallWorldN6"
+
+# CollectiveRecog requires DirectMessage or BroadcastN12 (recognition needs communication)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "CollectiveRecog"
+then_level = 2
+then_ids   = "DirectMessage,BroadcastN12"

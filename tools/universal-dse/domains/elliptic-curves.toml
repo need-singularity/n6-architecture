@@ -1,0 +1,383 @@
+# =============================================================
+# Elliptic Curves DSE Domain Definition
+# 궁극의 타원곡선 아키텍처 — BSD 추측 + E6 + 모듈러 형식
+# n=6 constants: sigma=12, tau=4, phi=2, sopfr=5, J2=24, mu=1
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "elliptic-curves"
+desc = "Ultimate Elliptic Curves DSE — BSD + E6 Curves + Modular Forms"
+levels = ["Curve", "Group", "L_Function", "Modularity", "Application"]
+vision = "n=6 based elliptic curves -- BSD conjecture + E6 curves + modular forms"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Curve (타원곡선 정의) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Curve"
+
+[[candidate]]
+level  = 0
+id     = "E6_Curve"
+label  = "E6 Elliptic Curve y^2=x^3-x (rank~n=6)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "conductor related to n=6, rank target=n=6, CM discriminant, foundational"
+
+[[candidate]]
+level  = 0
+id     = "WeierstrassN3"
+label  = "Weierstrass Form (n/phi=3 coefficients)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.65
+cost   = 0.55
+notes  = "coefficients a1..a6, short form uses n/phi=3 EXACT, universal representation"
+
+[[candidate]]
+level  = 0
+id     = "MordellN6"
+label  = "Mordell Curve y^2=x^3+n=6"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "constant=6=n EXACT, integer solutions, Diophantine, historical"
+
+[[candidate]]
+level  = 0
+id     = "EdwardsN2"
+label  = "Edwards Curve (phi=2 symmetry)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "symmetry_axes=2=phi EXACT, fast addition, complete law, crypto-friendly"
+
+[[candidate]]
+level  = 0
+id     = "MontgomeryN2"
+label  = "Montgomery Curve (phi=2 parameters)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "params=2=phi EXACT (A,B), efficient scalar mult, Curve25519 basis"
+
+[[candidate]]
+level  = 0
+id     = "SupersingularN12"
+label  = "Supersingular Curves (sigma=12 isomorphism classes)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "isogeny_classes~sigma=12 EXACT, SIDH/SIKE basis, endomorphism ring=quaternion"
+
+# =============================================================
+# Level 1: Group (군 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Group"
+
+[[candidate]]
+level  = 1
+id     = "TorsionN12"
+label  = "Torsion Group (Mazur: max sigma=12)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "max_order=12=sigma EXACT (Mazur theorem), Z/mZ for m<=12, foundational"
+
+[[candidate]]
+level  = 1
+id     = "RankN6"
+label  = "Rank n=6 Generators (Mordell-Weil)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "rank=6=n EXACT target, generators via descent, BSD connection"
+
+[[candidate]]
+level  = 1
+id     = "HeightPairing"
+label  = "Height Pairing (phi=2 bilinear)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "bilinear=2=phi EXACT inputs, Neron-Tate height, regulator computation"
+
+[[candidate]]
+level  = 1
+id     = "SelmerGroup"
+label  = "Selmer Group (sopfr=5 cohomology)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "descent_steps=5=sopfr EXACT, upper bound on rank, computable"
+
+[[candidate]]
+level  = 1
+id     = "TateShafarevich"
+label  = "Tate-Shafarevich Group (obstruction)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "conjecturally finite, BSD order term, deep arithmetic invariant"
+
+[[candidate]]
+level  = 1
+id     = "EndomorphismRing"
+label  = "Endomorphism Ring (tau=4 types)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "ring_types=4=tau EXACT (Z,order,maximal,quaternion), CM theory, isogeny"
+
+# =============================================================
+# Level 2: L_Function (L-함수) -- 6 candidates
+# =============================================================
+[[level]]
+name = "L_Function"
+
+[[candidate]]
+level  = 2
+id     = "HasseWeilN6"
+label  = "Hasse-Weil L-function (n=6 Euler factors)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "euler_product over primes, degree=2=phi EXACT, conductor, analytic continuation"
+
+[[candidate]]
+level  = 2
+id     = "BSD_Conjecture"
+label  = "BSD Conjecture (rank = L-function zero order)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "Millennium Problem, rank=ord_{s=1} L(E,s), regulator*Sha*Omega*prod_c"
+
+[[candidate]]
+level  = 2
+id     = "AnalyticRank"
+label  = "Analytic Rank Computation"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "numerical L-function evaluation, zero detection, Dokchitser algorithm"
+
+[[candidate]]
+level  = 2
+id     = "SpecialValues"
+label  = "Special Values L(E,1)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "BSD leading term, period integral, algebraic part, rational structure"
+
+[[candidate]]
+level  = 2
+id     = "FunctionalEq"
+label  = "Functional Equation (phi=2 symmetry)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "s<->2-s reflection=phi EXACT, root number epsilon=+/-1, parity of rank"
+
+[[candidate]]
+level  = 2
+id     = "TwistsN6"
+label  = "Quadratic Twists (n=6 family)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "twist_family_size=6=n EXACT, rank distribution, Goldfeld conjecture"
+
+# =============================================================
+# Level 3: Modularity (모듈러성) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Modularity"
+
+[[candidate]]
+level  = 3
+id     = "TaniyamaShimura"
+label  = "Taniyama-Shimura Theorem (proved)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.65
+cost   = 0.55
+notes  = "every E/Q is modular, Wiles+Taylor, Fermat follows, cornerstone"
+
+[[candidate]]
+level  = 3
+id     = "ModularFormN12"
+label  = "Modular Forms weight sigma=12"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "weight=12=sigma EXACT (Ramanujan Delta), dim formula, q-expansion"
+
+[[candidate]]
+level  = 3
+id     = "HeckeOperator"
+label  = "Hecke Operators (sopfr=5 eigenforms)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "eigenform_basis=5=sopfr EXACT levels, T_p action, eigenvalues=a_p"
+
+[[candidate]]
+level  = 3
+id     = "EichlerShimura"
+label  = "Eichler-Shimura Relation"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "a_p = p+1-#E(F_p), connects modular to arithmetic, trace of Frobenius"
+
+[[candidate]]
+level  = 3
+id     = "GaloisRepN2"
+label  = "Galois Representation (phi=2 dimensional)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "dim=2=phi EXACT, l-adic, Tate module, Serre conjecture link"
+
+[[candidate]]
+level  = 3
+id     = "SatoTateN6"
+label  = "Sato-Tate Distribution (n=6 family)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "a_p distribution over primes, proved for non-CM, semicircle law, n=6 test curves"
+
+# =============================================================
+# Level 4: Application (응용) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "CryptoECC"
+label  = "Elliptic Curve Cryptography (sigma-tau=8 security)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.50
+notes  = "security_levels={128,192,256}=2^{sigma-tau-1..}, ECDSA/ECDH, TLS foundation"
+
+[[candidate]]
+level  = 4
+id     = "FactorizationECM"
+label  = "ECM Integer Factorization"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "subexponential, Lenstra algorithm, practical for medium factors"
+
+[[candidate]]
+level  = 4
+id     = "FermatLastThm"
+label  = "Fermat Last Theorem (proved via modularity)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.65
+cost   = 0.55
+notes  = "x^n+y^n=z^n no solution n>=3, Wiles 1995, Frey-Ribet-Wiles chain"
+
+[[candidate]]
+level  = 4
+id     = "DiophantineN6"
+label  = "Diophantine Equations (n=6 variables)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "variables=6=n EXACT, rational points, Hasse principle, local-global"
+
+[[candidate]]
+level  = 4
+id     = "StringTheoryEC"
+label  = "String Theory Elliptic Curves (Calabi-Yau)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "CY fiber=elliptic, moduli space, F-theory compactification, physics link"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# BSD_Conjecture requires RankN6 (BSD connects rank to L-function)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "BSD_Conjecture"
+then_level = 1
+then_ids   = "RankN6"
+
+# FermatLastThm requires E6_Curve or WeierstrassN3 (needs elliptic curve)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "FermatLastThm"
+then_level = 0
+then_ids   = "E6_Curve,WeierstrassN3"
+
+# StringTheoryEC requires SupersingularN12 or E6_Curve (needs special curves)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "StringTheoryEC"
+then_level = 0
+then_ids   = "SupersingularN12,E6_Curve"
+
+# LeechN24 would require Golay24 but that's cross-domain (coding-lattice)
+# CryptoECC prefers EdwardsN2 or MontgomeryN2 (efficient curves)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "CryptoECC"
+then_level = 0
+then_ids   = "EdwardsN2,MontgomeryN2,SupersingularN12"
+
+# DiophantineN6 requires RankN6 (rational points via Mordell-Weil)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "DiophantineN6"
+then_level = 1
+then_ids   = "RankN6"
