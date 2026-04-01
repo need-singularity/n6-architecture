@@ -309,3 +309,66 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "E1 + REBCO (85.0% n6, score 0.8135)"
 note = "물질합성 → REBCO 초전도체 소재"
+
+# ── Programming Language Cross-DSE ────────────────
+
+[cross-dse.lang-x-chip]
+domains = ["programming-language", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + Diamond (98.0% n6, score 0.8654)"
+note = "MetaLang LLVM → Diamond HEXA-P — 언어 컴파일러가 칩 아키텍처 직접 타겟"
+
+[cross-dse.lang-x-solar]
+domains = ["programming-language", "solar-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + GaAs (93.0% n6, score 0.8398)"
+note = "MetaLang → GaAs CPV MPPT 제어 — 언어 수준 전력 최적화"
+
+[cross-dse.lang-x-battery]
+domains = ["programming-language", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + LFP (94.7% n6, score 0.8169)"
+note = "MetaLang → LFP BMS 12ch 제어 — n=6 기반 배터리 관리 언어"
+
+[cross-dse.lang-x-sc]
+domains = ["programming-language", "superconductor"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + REBCO (84.0% n6, score 0.7941)"
+note = "MetaLang → REBCO 초전도 제어 시스템 — Cooper pair phi=2 연결"
+
+[cross-dse.lang-x-material]
+domains = ["programming-language", "material-synthesis"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + E1/Carbon_Z6 (97.0% n6, score 0.8470)"
+note = "MetaLang → Carbon Z=6 자기조립 제어 — 언어×물질 최고 n6 97%"
+
+[cross-dse.lang-x-energy]
+domains = ["programming-language", "energy-generation"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + Nuclear (98.0% n6, score 0.8268)"
+note = "MetaLang → 원자력 제어 시스템 — 안전 검증 언어"
+
+[cross-dse.lang-x-fusion]
+domains = ["programming-language", "fusion"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + DT (90.5% n6, score 0.8223)"
+note = "MetaLang → DT 핵융합 플라즈마 제어 — 실시간 MHD 시뮬레이션 언어"
+
+[cross-dse.lang-x-grid]
+domains = ["programming-language", "power-grid"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + HTS_YBCO (98.0% n6, score 0.8638)"
+note = "MetaLang → HTS 초전도 송전망 SCADA — 그리드 안정성 DSL"
+
+[cross-dse.lang-x-compiler]
+domains = ["programming-language", "compiler-os"]
+status = "none"
+note = "compiler-os DSE 미완료 — BT-52 6단계 파이프라인 연결 대기"
