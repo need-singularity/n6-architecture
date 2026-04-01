@@ -1,0 +1,420 @@
+# N6 Steel Metallurgy DSE — Iron-based alloy engineering
+# 6 Composition × 6 Processing × 6 Microstructure × 6 HeatTreatment × 6 Application = 7,776 combos
+# n=6 connections: Fe BCC CN=8=sigma-tau (1st), FCC CN=12=sigma (EXACT), HCP CN=12=sigma,
+#   6-fold symmetry in basal plane (n=6 EXACT), tau=4 crystal structures
+#   (ferrite/austenite/martensite/bainite), phi=2 phase transformation, J2=24 major alloying elements
+
+[meta]
+name = "steel-metallurgy"
+desc = "Steel Metallurgy DSE — iron-based alloy engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Composition (조성)
+#   n6 checks: Tool-steel-D6 (n=6), TRIP-6phase (n=6),
+#              Stainless 304 (18Cr=sigma+n, 8Ni=sigma-tau), Carbon steel baseline
+# ============================================================
+
+[[level]]
+name = "Composition"
+
+[[candidate]]
+id = "Carbon_Steel"
+label = "Carbon steel (0.05-2.0% C, baseline Fe-C system, most produced)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 1.00
+notes = "Fe-C binary, tau=4 phases in Fe-C diagram, foundation of metallurgy"
+
+[[candidate]]
+id = "Stainless_304"
+label = "Stainless 304 (18Cr-8Ni, austenitic FCC CN=12=sigma, corrosion resistant)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+notes = "Cr=18=sigma+n, Ni=8=sigma-tau EXACT, FCC CN=12=sigma EXACT"
+
+[[candidate]]
+id = "HSLA"
+label = "HSLA (high-strength low-alloy, micro-alloyed Nb/V/Ti, weldable)"
+n6 = 0.60
+perf = 0.85
+power = 0.85
+cost = 0.80
+notes = "grain refinement via precipitates, structural efficiency"
+
+[[candidate]]
+id = "ToolSteel_D6"
+label = "Tool steel D6 (n=6 designation EXACT, high-C high-Cr, die steel)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.45
+notes = "D6=n EXACT, 2.1%C-12%Cr, Cr=12=sigma EXACT, wear resistant"
+
+[[candidate]]
+id = "Maraging"
+label = "Maraging (18Ni, precipitation hardened, ultra-high strength 2400MPa)"
+n6 = 0.80
+perf = 1.00
+power = 0.55
+cost = 0.30
+notes = "Ni=18=sigma+n, martensite+aging, aerospace/defense grade"
+
+[[candidate]]
+id = "TRIP_6phase"
+label = "TRIP 6-phase (n=6 coexisting phases EXACT, ferrite+austenite+martensite+bainite+precipitate+retained)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.55
+notes = "phases=6=n EXACT, transformation-induced plasticity, automotive advanced"
+
+# ============================================================
+# Level 1: Processing (가공)
+#   n6 checks: Additive 6-layer (n=6), EAF for recycling (phi=2 electrodes min),
+#              BOF standard, continuous casting for high throughput
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "BOF_Converter"
+label = "BOF basic oxygen furnace (O2 blown, 300t heat, 45min cycle, 70% global)"
+n6 = 0.60
+perf = 0.80
+power = 0.60
+cost = 0.85
+notes = "primary steelmaking from pig iron, high throughput"
+
+[[candidate]]
+id = "EAF_Electric"
+label = "EAF electric arc furnace (scrap recycling, 12MW/t energy=sigma, flexible)"
+n6 = 0.80
+perf = 0.75
+power = 0.70
+cost = 0.75
+notes = "energy=12MW/t~sigma EXACT, 100% scrap input possible, green steel"
+
+[[candidate]]
+id = "Continuous_Casting"
+label = "Continuous casting (slab/billet/bloom, 6m/min speed, near-net shape)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.80
+notes = "speed=6m/min=n EXACT, >95% of steel, minimal waste"
+
+[[candidate]]
+id = "Powder_Metallurgy"
+label = "Powder metallurgy (atomized powder, HIP/SPS sintering, near full density)"
+n6 = 0.60
+perf = 0.90
+power = 0.50
+cost = 0.40
+notes = "complex shapes, uniform microstructure, tool steel/specialty"
+
+[[candidate]]
+id = "Additive_6layer"
+label = "Additive 6-layer (n=6 build layers per pass EXACT, DED/L-PBF, functionally graded)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.35
+notes = "layers_per_pass=6=n EXACT, topology optimized, repair capability"
+
+[[candidate]]
+id = "Strip_Casting"
+label = "Strip casting (thin slab 2mm=phi direct, Castrip process, energy saving)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "thickness=2mm=phi EXACT, eliminates hot rolling, 90% energy reduction"
+
+# ============================================================
+# Level 2: Microstructure (미세조직)
+#   n6 checks: Ferrite BCC CN=8=sigma-tau, Austenite FCC CN=12=sigma EXACT,
+#              Dual-phase phi=2, tau=4 main microstructures
+# ============================================================
+
+[[level]]
+name = "Microstructure"
+
+[[candidate]]
+id = "Ferrite_BCC"
+label = "Ferrite BCC (CN=8=sigma-tau EXACT, soft magnetic, ductile, room-temp stable)"
+n6 = 0.80
+perf = 0.65
+power = 0.85
+cost = 0.90
+notes = "CN=8=sigma-tau EXACT, alpha-iron below 912C, body-centered cubic"
+
+[[candidate]]
+id = "Austenite_FCC"
+label = "Austenite FCC (CN=12=sigma EXACT, non-magnetic, tough, stainless base)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.65
+notes = "CN=12=sigma EXACT, face-centered cubic, stable with Ni/Mn"
+
+[[candidate]]
+id = "Martensite"
+label = "Martensite (BCT distorted, supersaturated C, hardest phase, quench product)"
+n6 = 0.60
+perf = 1.00
+power = 0.50
+cost = 0.55
+notes = "diffusionless transformation, extreme hardness, needs tempering"
+
+[[candidate]]
+id = "Bainite"
+label = "Bainite (ferrite+carbide, intermediate transform, good toughness+strength)"
+n6 = 0.60
+perf = 0.85
+power = 0.75
+cost = 0.70
+notes = "upper/lower bainite, isothermal transformation, rail/bearing steel"
+
+[[candidate]]
+id = "Pearlite_Lamellar"
+label = "Pearlite lamellar (ferrite+cementite alternating, 6 lamellae/um=n EXACT)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "lamellae_density=6/um=n EXACT, eutectoid 0.8%C, wire/rail"
+
+[[candidate]]
+id = "DualPhase"
+label = "Dual-phase (phi=2 phases EXACT, ferrite+martensite, automotive AHSS)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+notes = "phases=2=phi EXACT, continuous yielding, high strain hardening"
+
+# ============================================================
+# Level 3: HeatTreatment (열처리)
+#   n6 checks: Quench-temper phi=2 step, carburizing depth~0.6mm,
+#              annealing standard, cryogenic for retained austenite
+# ============================================================
+
+[[level]]
+name = "HeatTreatment"
+
+[[candidate]]
+id = "Annealing"
+label = "Annealing (full/process/stress-relief, grain growth, softening, workability)"
+n6 = 0.60
+perf = 0.65
+power = 0.80
+cost = 0.85
+notes = "equilibrium cooling, removes cold work, standard preparatory step"
+
+[[candidate]]
+id = "Quench_Temper"
+label = "Quench-temper (phi=2 step EXACT, martensite formation+toughness recovery)"
+n6 = 1.00
+perf = 1.00
+power = 0.55
+cost = 0.65
+notes = "steps=2=phi EXACT, hardening+tempering, most common strengthening"
+
+[[candidate]]
+id = "Normalizing"
+label = "Normalizing (air cool from austenite, refined grain, uniform properties)"
+n6 = 0.60
+perf = 0.75
+power = 0.75
+cost = 0.80
+notes = "above Ac3 + air cool, finer pearlite than annealing"
+
+[[candidate]]
+id = "Carburizing"
+label = "Carburizing (surface C enrichment, case depth 0.6mm, hard shell+tough core)"
+n6 = 0.80
+perf = 0.90
+power = 0.60
+cost = 0.55
+notes = "case_depth=0.6mm~n/10 CLOSE, gear/shaft standard, 12hr cycle=sigma"
+
+[[candidate]]
+id = "Nitriding"
+label = "Nitriding (surface N diffusion, no quench needed, <600C, minimal distortion)"
+n6 = 0.60
+perf = 0.85
+power = 0.70
+cost = 0.60
+notes = "Fe4N compound layer, gas/plasma/salt bath, fatigue resistance"
+
+[[candidate]]
+id = "Cryogenic_Treatment"
+label = "Cryogenic treatment (-196C LN2, retained austenite conversion, eta-carbide)"
+n6 = 0.60
+perf = 0.85
+power = 0.50
+cost = 0.45
+notes = "sub-zero treatment, tool steel/bearing, dimensional stability"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: Structural beam (I-beam 6 faces), nuclear vessel (6 layers),
+#              automotive body (6 safety zones), pipeline, rail, surgical
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Structural_Beam"
+label = "Structural beam (I/H-beam, 6 stress zones=n EXACT, building/bridge/tower)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.90
+notes = "stress_zones=6=n EXACT (2 flanges*2 + 2 web regions), construction"
+
+[[candidate]]
+id = "Automotive_Body"
+label = "Automotive body (AHSS, 6 safety zones=n EXACT, crash energy absorption)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+notes = "zones=6=n EXACT (front/rear/side*2/roof/floor), lightweighting"
+
+[[candidate]]
+id = "Pipeline"
+label = "Pipeline (API X60-X120, 12m pipe length=sigma, oil/gas/hydrogen transport)"
+n6 = 0.80
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "pipe_length=12m=sigma EXACT, HSLA welded, sour service HIC"
+
+[[candidate]]
+id = "Rail_Track"
+label = "Rail track (pearlitic head, 12m/24m standard length=sigma/J2, high wear)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.85
+notes = "length=12m=sigma EXACT or 24m=J2, head-hardened, rolling contact"
+
+[[candidate]]
+id = "Surgical_Implant"
+label = "Surgical implant (316L stainless, biocompatible, corrosion proof, orthopedic)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.50
+notes = "316L: 16Cr-12Ni-2Mo, Ni=12=sigma EXACT, hip/knee/plate/screw"
+
+[[candidate]]
+id = "Nuclear_Vessel"
+label = "Nuclear vessel (RPV steel SA-508, 6-layer cladding=n EXACT, 40yr life)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.35
+notes = "cladding_layers=6=n EXACT, neutron embrittlement resistance, critical"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Carbon steel is baseline for structural and pipeline
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Carbon_Steel"
+then_level = 4
+then_ids = "Structural_Beam,Pipeline,Rail_Track"
+
+# Stainless 304 pairs with austenite and surgical/nuclear
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Stainless_304"
+then_level = 2
+then_ids = "Austenite_FCC,DualPhase"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Stainless_304"
+then_level = 4
+then_ids = "Surgical_Implant,Nuclear_Vessel"
+
+# Tool steel D6 pairs with quench-temper and powder metallurgy
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ToolSteel_D6"
+then_level = 3
+then_ids = "Quench_Temper,Cryogenic_Treatment"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ToolSteel_D6"
+then_level = 1
+then_ids = "Powder_Metallurgy,EAF_Electric"
+
+# TRIP 6-phase pairs with automotive body
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "TRIP_6phase"
+then_level = 4
+then_ids = "Automotive_Body,Structural_Beam"
+
+# Maraging pairs with additive manufacturing
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Maraging"
+then_level = 1
+then_ids = "Additive_6layer,Powder_Metallurgy"
+
+# Austenite FCC needs annealing or normalizing
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Austenite_FCC"
+then_level = 3
+then_ids = "Annealing,Normalizing"
+
+# Martensite requires quench-temper
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Martensite"
+then_level = 3
+then_ids = "Quench_Temper,Cryogenic_Treatment"
+
+# Dual-phase for automotive
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "DualPhase"
+then_level = 4
+then_ids = "Automotive_Body,Structural_Beam"
+
+# Continuous casting is primary for bulk applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Continuous_Casting"
+then_level = 4
+then_ids = "Structural_Beam,Pipeline,Rail_Track"

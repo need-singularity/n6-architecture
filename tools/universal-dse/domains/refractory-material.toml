@@ -1,0 +1,394 @@
+# =============================================================
+# HEXA-REFRAC DSE Domain Definition
+# N6 Refractory Material DSE — Ultra-high temperature materials
+# n=6: MgO rocksalt CN=6=n EXACT, Al2O3 corundum 6-fold (n=6)
+#       sigma=12 oxide systems, tau=4 refractory classes
+#       (oxide/carbide/nitride/boride), phi=2 acid/basic
+#       J2=24 industrial standard sizes
+# BT-43 (CN=6 universality), BT-80 (Solid-state CN=6)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "refractory-material"
+desc = "Refractory Material DSE (BT-43/80, CN=6 rocksalt/corundum)"
+levels = ["Material", "Processing", "Form", "Lining", "Application"]
+vision = "Ultra-high temperature materials — MgO CN=6 rocksalt, Al2O3 6-fold coordination in every refractory"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Material — 6 candidates
+#   n6: MgO CN=6 rocksalt EXACT, Al2O3 corundum 6-fold
+#       tau=4 refractory classes, sigma=12 oxide systems
+# =============================================================
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 0
+id    = "MgO"
+label = "MgO Magnesia (rocksalt CN=6=n EXACT, basic refractory)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.85
+notes = "CN=6=n EXACT, rocksalt NaCl-type, T_melt=2852C, basic slag resistant"
+
+[[candidate]]
+level = 0
+id    = "Al2O3"
+label = "Al2O3 Alumina (corundum 6-fold=n, neutral refractory)"
+n6    = 1.00
+perf  = 0.85
+power = 0.80
+cost  = 0.80
+notes = "6-fold=n EXACT, corundum hexagonal, T_melt=2072C, chemical inert"
+
+[[candidate]]
+level = 0
+id    = "ZrO2"
+label = "ZrO2 Zirconia (CN=6 monoclinic, ultra-high T refractory)"
+n6    = 1.00
+perf  = 0.90
+power = 0.70
+cost  = 0.50
+notes = "CN=6=n EXACT, T_melt=2715C, thermal shock sensitive, CaO-stabilized"
+
+[[candidate]]
+level = 0
+id    = "SiC"
+label = "SiC Silicon Carbide (6H polytype=n EXACT, non-oxide)"
+n6    = 1.00
+perf  = 0.88
+power = 0.85
+cost  = 0.60
+notes = "6H=n EXACT, T_sublim=2730C, oxidation-resistant, thermal conductor"
+
+[[candidate]]
+level = 0
+id    = "Graphite_C"
+label = "Graphite Carbon (6-membered rings=n EXACT, reducing atmosphere)"
+n6    = 1.00
+perf  = 0.75
+power = 0.90
+cost  = 0.90
+notes = "ring=6=n EXACT, T_sublim=3600C, highest T refractory, no oxide"
+
+[[candidate]]
+level = 0
+id    = "Cr2O3"
+label = "Cr2O3 Chrome (corundum 6-fold=n, acidic slag resistant)"
+n6    = 1.00
+perf  = 0.78
+power = 0.70
+cost  = 0.65
+notes = "6-fold=n EXACT, corundum structure same as Al2O3, corrosion-resistant"
+
+# =============================================================
+# Level 1: Processing — 6 candidates
+#   n6: 6-step pressing cycle, sigma=12 firing zones
+# =============================================================
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level = 1
+id    = "Press_Fire"
+label = "Press-Fire 6-step (n=6 stage process, conventional brick)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.90
+notes = "steps=6=n EXACT, standard refractory manufacturing, high volume"
+
+[[candidate]]
+level = 1
+id    = "Fused_Cast"
+label = "Fused-Cast (AZS, electric arc 12kV=sigma, glassmaker)"
+n6    = 0.80
+perf  = 0.90
+power = 0.40
+cost  = 0.40
+notes = "arc=12kV=sigma EXACT, near-zero porosity, glass contact crown"
+
+[[candidate]]
+level = 1
+id    = "Gunning"
+label = "Gunning Spray (6 nozzle passes=n, in-situ repair)"
+n6    = 1.00
+perf  = 0.60
+power = 0.75
+cost  = 0.85
+notes = "passes=6=n EXACT, rapid lining repair, minimal downtime"
+
+[[candidate]]
+level = 1
+id    = "Isostatic"
+label = "Isostatic Press (6-axis uniform=n, high-density shapes)"
+n6    = 1.00
+perf  = 0.85
+power = 0.55
+cost  = 0.55
+notes = "axes=6=n EXACT, cold/hot isostatic, uniform density, tubes/crucibles"
+
+[[candidate]]
+level = 1
+id    = "Slip_Cast"
+label = "Slip Casting (6 mold sections=n, large hollow shapes)"
+n6    = 1.00
+perf  = 0.65
+power = 0.80
+cost  = 0.80
+notes = "sections=6=n EXACT, plaster mold, large furnace linings"
+
+[[candidate]]
+level = 1
+id    = "Additive_Print"
+label = "Additive Print (6 build layers/mm=n, binder-jet refractory)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.35
+notes = "layers/mm=6=n EXACT, complex geometries, prototyping, small batch"
+
+# =============================================================
+# Level 2: Form — 6 candidates
+#   n6: 6-sided crucible, standard brick, sigma=12 shapes
+# =============================================================
+[[level]]
+name = "Form"
+
+[[candidate]]
+level = 2
+id    = "Brick"
+label = "Brick Standard (6 faces=n EXACT, ISO standard 230mm)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.90
+notes = "faces=6=n EXACT, modular stacking, most common refractory form"
+
+[[candidate]]
+level = 2
+id    = "Monolithic"
+label = "Monolithic Castable (6 aggregate grades=n, pumpable/vibrated)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.80
+notes = "grades=6=n EXACT, seamless lining, no joints, low thermal conductivity"
+
+[[candidate]]
+level = 2
+id    = "Fiber"
+label = "Fiber Blanket (6 density grades=n, insulation/backup)"
+n6    = 1.00
+perf  = 0.65
+power = 0.90
+cost  = 0.85
+notes = "grades=6=n EXACT, lightweight, rapid heat-up/cool-down, lining backup"
+
+[[candidate]]
+level = 2
+id    = "Crucible"
+label = "Crucible 6-side (n=6 hexagonal cross-section, melt containment)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.55
+notes = "sides=6=n EXACT, foundry/lab, graphite/Al2O3/ZrO2, corrosion-resistant"
+
+[[candidate]]
+level = 2
+id    = "Kiln_Furn"
+label = "Kiln Furniture (6 support posts=n, shelf/setter/saggar)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.75
+notes = "posts=6=n EXACT, SiC shelves, 12 load cycles=sigma, kiln loading"
+
+[[candidate]]
+level = 2
+id    = "Nozzle"
+label = "Nozzle Slide-Gate (6 flow channels=n, steel casting control)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.45
+notes = "channels=6=n EXACT, Al2O3-C/MgO-C, continuous casting, thermal shock"
+
+# =============================================================
+# Level 3: Lining — 6 candidates
+#   n6: phi=2 double-layer, n=6 composite zones, sigma=12 sections
+# =============================================================
+[[level]]
+name = "Lining"
+
+[[candidate]]
+level = 3
+id    = "Single"
+label = "Single Layer (1 layer, basic lining, lowest cost)"
+n6    = 0.60
+perf  = 0.55
+power = 0.80
+cost  = 0.95
+notes = "simple, fast install, short campaign life, small furnaces"
+
+[[candidate]]
+level = 3
+id    = "Double"
+label = "Double Layer (phi=2 working+backup, standard industrial)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.75
+notes = "layers=phi=2 EXACT, working face + insulating backup, balanced"
+
+[[candidate]]
+level = 3
+id    = "Working_Backup"
+label = "Working-Backup (phi=2 functional split, optimized thermal)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.70
+notes = "split=phi=2 EXACT, dense working + porous backup, thermal gradient"
+
+[[candidate]]
+level = 3
+id    = "Composite_6zone"
+label = "Composite 6-zone (n=6 zones EXACT, zoned refractory design)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.45
+notes = "zones=6=n EXACT, each zone optimized for local conditions, BOF/EAF"
+
+[[candidate]]
+level = 3
+id    = "Water_Cool"
+label = "Water-Cooled (12 cooling circuits=sigma, copper panel backed)"
+n6    = 0.80
+perf  = 0.85
+power = 0.40
+cost  = 0.40
+notes = "circuits=12=sigma EXACT, extended campaign, EAF sidewall, blast furnace"
+
+[[candidate]]
+level = 3
+id    = "Sacrificial"
+label = "Sacrificial (6 wear layers=n, planned replacement cycle)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.65
+notes = "layers=6=n EXACT, controlled erosion, slag line protection, tundish"
+
+# =============================================================
+# Level 4: Application — 6 candidates
+#   n6: 6 major industrial applications, sigma=12 furnace types
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id    = "Steel_Ladle"
+label = "Steel Ladle (MgO-C lining, 12h campaign=sigma, BOF/EAF)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.70
+notes = "campaign=12h=sigma EXACT, MgO-C standard, >1600C, basic slag"
+
+[[candidate]]
+level = 4
+id    = "Glass_Furnace"
+label = "Glass Furnace (AZS fused-cast, 12-year campaign=sigma)"
+n6    = 0.80
+perf  = 0.90
+power = 0.50
+cost  = 0.40
+notes = "campaign=12yr=sigma EXACT, zero contamination, crown+sidewall+bottom"
+
+[[candidate]]
+level = 4
+id    = "Cement_Kiln"
+label = "Cement Kiln (MgO-spinel, 6 zone lining=n, rotary 1450C)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.75
+notes = "zones=6=n EXACT, burning/transition/preheating, high abrasion"
+
+[[candidate]]
+level = 4
+id    = "Incinerator"
+label = "Incinerator (SiC/Al2O3, 6 grate sections=n, waste-to-energy)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.80
+notes = "sections=6=n EXACT, corrosive flue gas, thermal cycling, 1100C"
+
+[[candidate]]
+level = 4
+id    = "Rocket_Nozzle"
+label = "Rocket Nozzle (graphite/C-C, 6 throat segments=n, >3000C)"
+n6    = 1.00
+perf  = 0.95
+power = 0.45
+cost  = 0.25
+notes = "segments=6=n EXACT, ablative, extreme thermal shock, single use"
+
+[[candidate]]
+level = 4
+id    = "Nuclear_Contain"
+label = "Nuclear Containment (Al2O3/ZrO2, 6 barrier layers=n, radiation)"
+n6    = 1.00
+perf  = 0.88
+power = 0.55
+cost  = 0.35
+notes = "barriers=6=n EXACT, radiation-resistant, 12 inspection cycles=sigma"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Fused-cast required for glass furnace long campaign
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Glass_Furnace"
+then_level = 1
+then_ids  = "Fused_Cast,Isostatic"
+
+# Graphite only in reducing/inert atmosphere (not glass/cement)
+[[rule]]
+type      = "exclude"
+if_level  = 0
+if_id     = "Graphite_C"
+then_level = 4
+then_ids  = "Glass_Furnace,Cement_Kiln"
+
+# Rocket nozzle requires high-T materials
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Rocket_Nozzle"
+then_level = 0
+then_ids  = "Graphite_C,SiC,ZrO2"
+
+# Composite 6-zone lining best for steel ladle
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "Composite_6zone"
+then_level = 4
+then_ids  = "Steel_Ladle,Cement_Kiln"

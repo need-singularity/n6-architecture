@@ -1,0 +1,414 @@
+# N6 Carbon Nanotube DSE — 1D carbon nanomaterial engineering
+# 6 Types × 6 Syntheses × 6 Chiralities × 6 Functionalizations × 6 Applications = 7,776 combos
+# n=6 connections: 6-atom carbon ring (n=6 EXACT), armchair (6,6) chirality (n,n EXACT),
+#   sigma=12 C-C bonds per unit cell, tau=4 types (SWCNT/DWCNT/MWCNT/bundle),
+#   phi=2 metallic/semiconductor, J2=24 van Hove singularities
+
+[meta]
+name = "carbon-nanotube"
+desc = "Carbon Nanotube DSE — 1D carbon nanomaterial engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Type (종류)
+#   n6 checks: MWCNT 6-wall (n=6), DWCNT 2-wall (phi=2),
+#              SWCNT single wall = mu=1, bundle 12-tube (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Type"
+
+[[candidate]]
+id = "SWCNT_single"
+label = "SWCNT single-wall (1 wall, 0.4-2nm diameter, highest aspect ratio, quantum wire)"
+n6 = 0.60
+perf = 1.00
+power = 0.70
+cost = 0.40
+notes = "wall=1=mu EXACT, purest 1D system, ballistic transport at 6um length"
+
+[[candidate]]
+id = "DWCNT_double"
+label = "DWCNT double-wall (phi=2 concentric walls, inner protected, stable chirality)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.45
+notes = "walls=2=phi EXACT, inner tube shielded, inter-wall coupling"
+
+[[candidate]]
+id = "MWCNT_6wall"
+label = "MWCNT 6-wall (n=6 concentric shells, 6-12nm OD, robust, high current)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.70
+notes = "walls=6=n EXACT, OD=6-12nm (n to sigma), current >10^9 A/cm2"
+
+[[candidate]]
+id = "Bundle_rope"
+label = "Bundle rope (12-tube hexagonal packing, sigma=12, macroscopic fiber)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "tubes=12=sigma EXACT hexagonal close-pack, CNT fiber/yarn"
+
+[[candidate]]
+id = "Peapod_C60"
+label = "Peapod C60@CNT (C60 fullerene inside SWCNT, 1D crystal, nano-reactor)"
+n6 = 0.80
+perf = 0.75
+power = 0.60
+cost = 0.30
+notes = "C60 has 12=sigma pentagons EXACT, encapsulated molecular array"
+
+[[candidate]]
+id = "Scroll_nanoscroll"
+label = "Scroll nanoscroll (rolled graphene sheet, tunable diameter, open ends)"
+n6 = 0.60
+perf = 0.65
+power = 0.70
+cost = 0.55
+notes = "continuous spiral, adjustable interlayer spacing, intercalation host"
+
+# ============================================================
+# Level 1: Synthesis (합성)
+#   n6 checks: CVD 6-zone (n=6), arc discharge 4-param (tau=4),
+#              laser ablation 2-pulse (phi=2), HiPco 12atm (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Synthesis"
+
+[[candidate]]
+id = "CVD_6zone"
+label = "CVD 6-zone furnace (n=6 temperature zones, Fe/Co/Ni catalyst, scalable)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+notes = "zones=6=n EXACT, most scalable, chirality control emerging"
+
+[[candidate]]
+id = "ArcDischarge"
+label = "Arc discharge (4-param: current/voltage/pressure/gap, graphite anode, MWCNT)"
+n6 = 0.80
+perf = 0.75
+power = 0.35
+cost = 0.60
+notes = "params=4=tau EXACT, original Iijima method, high crystallinity"
+
+[[candidate]]
+id = "LaserAblation"
+label = "Laser ablation (2-pulse Nd:YAG, phi=2 wavelength, high-quality SWCNT)"
+n6 = 1.00
+perf = 0.90
+power = 0.30
+cost = 0.35
+notes = "pulses=2=phi EXACT, Smalley method, narrow diameter distribution"
+
+[[candidate]]
+id = "HiPco"
+label = "HiPco high-pressure CO (12atm CO disproportionation, Fe(CO)5 catalyst)"
+n6 = 1.00
+perf = 0.80
+power = 0.45
+cost = 0.55
+notes = "pressure=12atm=sigma EXACT, continuous flow, small diameter SWCNT"
+
+[[candidate]]
+id = "CoMoCAT"
+label = "CoMoCAT (Co-Mo bimetallic, SiO2 support, (6,5) chirality enriched)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.65
+notes = "target_chirality=(6,5) n=6 EXACT, highest single-chirality yield"
+
+[[candidate]]
+id = "FlameSynthesis"
+label = "Flame synthesis (6-parameter: fuel/O2/flow/height/catalyst/quench, continuous)"
+n6 = 1.00
+perf = 0.60
+power = 0.65
+cost = 0.85
+notes = "params=6=n EXACT, cheapest route, industrial scale potential"
+
+# ============================================================
+# Level 2: Chirality (카이랄성)
+#   n6 checks: armchair (6,6) metallic (n=6 EXACT), zigzag (12,0) (sigma=12),
+#              chiral (6,4) mixed, random distribution
+# ============================================================
+
+[[level]]
+name = "Chirality"
+
+[[candidate]]
+id = "Armchair_6_6"
+label = "Armchair (6,6) metallic (n=6 EXACT, zero bandgap, ballistic conductor)"
+n6 = 1.00
+perf = 1.00
+power = 0.65
+cost = 0.30
+notes = "(n,m)=(6,6) EXACT, always metallic, 12 C atoms/cell=sigma EXACT"
+
+[[candidate]]
+id = "Zigzag_12_0"
+label = "Zigzag (12,0) semiconductor (sigma=12, 0.8eV gap, field-emission tip)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.35
+notes = "(n,0)=(12,0) sigma=12 EXACT, semiconductor, 24 atoms/cell=J2 EXACT"
+
+[[candidate]]
+id = "Chiral_6_4"
+label = "Chiral (6,4) semiconductor (n=6, 1.4eV gap, photoluminescent, NIR emitter)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.40
+notes = "n=6 EXACT in (6,4), diameter=0.69nm, strong PL emission at 880nm"
+
+[[candidate]]
+id = "Random_mixed"
+label = "Random mixed chirality (1/3 metallic, 2/3 semiconductor, as-grown typical)"
+n6 = 0.60
+perf = 0.55
+power = 0.80
+cost = 0.90
+notes = "metallic_fraction=1/3=1/n*phi, default unsorted, cheapest"
+
+[[candidate]]
+id = "Sorted_single"
+label = "Sorted single chirality (DGU/gel chromatography, >99% purity, research grade)"
+n6 = 0.80
+perf = 0.95
+power = 0.50
+cost = 0.20
+notes = "post-growth separation, 6-step DGU process=n EXACT, highest uniformity"
+
+[[candidate]]
+id = "NearArmchair"
+label = "Near-armchair family (n-m=0,1,2, metallic-enriched, high conductivity)"
+n6 = 0.80
+perf = 0.90
+power = 0.60
+cost = 0.35
+notes = "n-m<=2=phi EXACT, metallic enriched, good for interconnect"
+
+# ============================================================
+# Level 3: Functionalization (기능화)
+#   n6 checks: pristine sp2 (6-ring intact), covalent 4-bonds (tau=4),
+#              N-doped 6-member pyridinic ring (n=6), endohedral 12-atom fill (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Functionalization"
+
+[[candidate]]
+id = "Pristine"
+label = "Pristine (unmodified sp2, maximum conductivity, hydrophobic, bundling tendency)"
+n6 = 1.00
+perf = 1.00
+power = 0.60
+cost = 0.70
+notes = "6-atom rings intact=n EXACT, intrinsic properties preserved"
+
+[[candidate]]
+id = "Covalent_COOH"
+label = "Covalent -COOH (acid oxidation, 4 functional groups per 100C, water-soluble)"
+n6 = 0.80
+perf = 0.65
+power = 0.80
+cost = 0.75
+notes = "groups_per_100C=4=tau EXACT, breaks sp2, enables bioconjugation"
+
+[[candidate]]
+id = "Noncovalent_surfactant"
+label = "Noncovalent surfactant (SDS/SDBS wrapping, pi-pi stacking, dispersion)"
+n6 = 0.60
+perf = 0.75
+power = 0.85
+cost = 0.80
+notes = "SDS C12=sigma carbon tail EXACT, preserves electronic structure"
+
+[[candidate]]
+id = "Doped_N"
+label = "N-doped (pyridinic/graphitic N in 6-ring, n-type, enhanced catalysis)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.50
+notes = "N in 6-ring=n EXACT, n-type doping, ORR catalyst, 3 bonding configs"
+
+[[candidate]]
+id = "Doped_B"
+label = "B-doped (substitutional B in 6-ring, p-type, enhanced sensing)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.50
+notes = "B in 6-ring=n EXACT, p-type doping, complementary to N-doping"
+
+[[candidate]]
+id = "Endohedral_filling"
+label = "Endohedral filling (molecules/atoms inside tube, nano-reactor, 12A pore fill)"
+n6 = 0.80
+perf = 0.70
+power = 0.55
+cost = 0.30
+notes = "pore~12A=sigma EXACT for (6,6), confined chemistry, drug delivery"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: transistor 6nm channel (n=6), sensor 6-channel (n=6),
+#              interconnect via 12nm pitch (sigma=12), composite 24vol% (J2=24)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Transistor_FET"
+label = "Transistor CNTFET (6nm gate, sub-10nm channel, beyond-Si, IBM/TSMC roadmap)"
+n6 = 1.00
+perf = 1.00
+power = 0.75
+cost = 0.25
+notes = "gate=6nm=n EXACT, outperforms Si at sub-7nm, IRDS 2030 target"
+
+[[candidate]]
+id = "Interconnect_via"
+label = "Interconnect via (12nm pitch, Cu replacement, electromigration-immune, 10^9 A/cm2)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.35
+notes = "pitch=12nm=sigma EXACT, current density 1000x Cu, no electromigration"
+
+[[candidate]]
+id = "Composite_filler"
+label = "Composite filler (24vol% in polymer, 6x strength gain, conductive, EMI shield)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.65
+notes = "loading=24vol%=J2 EXACT, strength_gain=6x=n EXACT, multifunctional"
+
+[[candidate]]
+id = "Sensor_6ch"
+label = "Sensor 6-channel array (n=6 analytes, ppb detection, gas/bio/strain/pH/temp/humidity)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.70
+notes = "channels=6=n EXACT, electronic nose, functionalized array"
+
+[[candidate]]
+id = "EnergyStorage"
+label = "Energy storage (supercapacitor electrode, 12F/g CNT forest, Li-S host)"
+n6 = 0.80
+perf = 0.75
+power = 0.80
+cost = 0.55
+notes = "capacitance~12F/g=sigma, vertical forest, high surface area"
+
+[[candidate]]
+id = "Biomedical_delivery"
+label = "Biomedical delivery (drug carrier, 6-payload capacity, NIR photothermal, imaging)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.40
+notes = "payloads=6=n EXACT, NIR window, theranostic, targeted delivery"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Armchair (6,6) metallic is ideal for interconnect and transistor
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Armchair_6_6"
+then_level = 4
+then_ids = "Interconnect_via,Transistor_FET"
+
+# Zigzag (12,0) semiconductor pairs with transistor and sensor
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Zigzag_12_0"
+then_level = 4
+then_ids = "Transistor_FET,Sensor_6ch"
+
+# CoMoCAT synthesis targets specific chiralities for electronics
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "CoMoCAT"
+then_level = 2
+then_ids = "Chiral_6_4,Sorted_single"
+
+# SWCNT pairs best with CVD and laser ablation
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SWCNT_single"
+then_level = 1
+then_ids = "CVD_6zone,LaserAblation,CoMoCAT"
+
+# MWCNT 6-wall pairs with arc discharge and flame synthesis
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "MWCNT_6wall"
+then_level = 1
+then_ids = "ArcDischarge,CVD_6zone"
+
+# Pristine functionalization best for electronic applications
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Pristine"
+then_level = 4
+then_ids = "Transistor_FET,Interconnect_via"
+
+# COOH functionalization enables biomedical and sensor
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Covalent_COOH"
+then_level = 4
+then_ids = "Biomedical_delivery,Sensor_6ch"
+
+# N-doped pairs with energy storage (ORR catalyst)
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Doped_N"
+then_level = 4
+then_ids = "EnergyStorage,Sensor_6ch"
+
+# Bundle rope is best for composite filler applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Bundle_rope"
+then_level = 4
+then_ids = "Composite_filler,EnergyStorage"
+
+# Peapod C60 pairs with endohedral filling functionalization
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Peapod_C60"
+then_level = 3
+then_ids = "Endohedral_filling,Pristine"

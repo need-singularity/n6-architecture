@@ -1,0 +1,338 @@
+# N6 PET Imaging DSE — Positron emission tomography
+# 6 Scintillator x 6 Photodetector x 6 Electronics x 6 Reconstruction x 6 Isotope = 7,776 combos
+# n=6: 6 scintillator ring layers (n=6), sigma=12 ns coincidence window, tau=4 isotopes (F-18/C-11/N-13/O-15),
+#       phi=2 annihilation photon pair (511keV each), J2=24 detector blocks per ring, 6mm spatial resolution
+
+[meta]
+name = "pet-imaging"
+desc = "PET Imaging DSE (n=6 ring layers, sigma=12 ns coincidence, phi=2 annihilation photons, 6mm resolution)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Scintillator (신틸레이터)
+#   n6 checks: n=6 ring layers, J2=24 detector blocks per ring, sigma=12 mm crystal length
+# ============================================================
+
+[[level]]
+name = "Scintillator"
+
+[[candidate]]
+id = "BGO"
+label = "BGO Bismuth Germanate (6 ring layers=n, 12 mm crystal length=sigma, 4 block configurations=tau)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "LSO"
+label = "LSO Lutetium Oxyorthosilicate (6 crystal sub-rings=n, 12 ns decay time=sigma, 24 blocks per ring=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "LYSO"
+label = "LYSO Lu-Y Oxyorthosilicate (6 crystal sizes=n, 12 mm detection depth=sigma, 4 dopant levels=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "LaBr3"
+label = "LaBr3 Lanthanum Bromide (6 encapsulation designs=n, 12 % energy resolution=sigma, 4 growth methods=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.50
+
+[[candidate]]
+id = "GaggCe"
+label = "GAGG:Ce Garnet (6 composite layers=n, 12 mm optimized length=sigma, 24 pixel array elements=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "Plastic_TOF"
+label = "Plastic Scintillator TOF (6 layer stacks=n, 12 cm axial coverage=sigma, 4 wavelength shifters=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.80
+
+# ============================================================
+# Level 1: Photodetector (광검출기)
+#   n6 checks: sigma=12 dynode stages (PMT), n=6 SiPM pixel groups, J2=24 readout channels
+# ============================================================
+
+[[level]]
+name = "Photodetector"
+
+[[candidate]]
+id = "PMT_Standard"
+label = "PMT Standard Photomultiplier (sigma=12 dynode stages=EXACT, 6 anode groups=n, 4 gain settings=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "PS_PMT"
+label = "Position-Sensitive PMT (6 quadrant anodes=n, 12 position channels=sigma, 24 crystal coupling=J2)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "SiPM_Analog"
+label = "Analog SiPM Array (6 pixel groups=n, 12 um microcell pitch=sigma, 4 bias voltage tiers=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "SiPM_Digital"
+label = "Digital SiPM dSiPM (6 SPAD clusters=n, 12 bit TDC resolution=sigma, 4 dark count suppression=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.45
+
+[[candidate]]
+id = "APD_Array"
+label = "APD Avalanche Photodiode (6 APD segments=n, 12 mm active area=sigma, 4 gain regions=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "SiPM_Cryo"
+label = "Cryogenic SiPM (6 cooling stages=n, 12 K operating temperature=sigma, 24 ultra-low-noise channels=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.40
+
+# ============================================================
+# Level 2: Electronics (전자장치)
+#   n6 checks: sigma=12 ns coincidence window, phi=2 photon pair detection, n=6 ASIC channels
+# ============================================================
+
+[[level]]
+name = "Electronics"
+
+[[candidate]]
+id = "Analog_Shaper"
+label = "Analog Pulse Shaper (6 shaping time constants=n, 12 ns coincidence window=sigma, 4 threshold levels=tau)"
+n6 = 1.00
+perf = 0.60
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "FPGA_Coincidence"
+label = "FPGA Coincidence Engine (6 FPGA pipeline stages=n, 12 ns timing resolution=sigma, 24 LOR buffers=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "ASIC_TOF"
+label = "ASIC Time-of-Flight (6 channel ASIC=n, 12 ps timing jitter=sigma, phi=2 coincidence pair=EXACT)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "Waveform_Digitizer"
+label = "Waveform Digitizer (6 GS/s sampling=n, 12 bit ADC resolution=sigma, 4 trigger modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "DeadTimeFree"
+label = "Dead-Time-Free Counting (6 buffer stages=n, 12 Mcps max count rate=sigma, 4 pile-up rejection modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "AI_EventFilter"
+label = "AI Event Classification (6 DNN classifier layers=n, 12 event features=sigma, 4 scatter rejection models=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+# ============================================================
+# Level 3: Reconstruction (재구성)
+#   n6 checks: n=6 mm spatial resolution, sigma=12 subset iterations (OSEM), J2=24 angular views
+# ============================================================
+
+[[level]]
+name = "Reconstruction"
+
+[[candidate]]
+id = "FBP_2D"
+label = "2D Filtered Back Projection (6 mm resolution=n=EXACT, 12 angular subsets=sigma, 4 filter cutoffs=tau)"
+n6 = 1.00
+perf = 0.55
+power = 0.85
+cost = 0.95
+
+[[candidate]]
+id = "OSEM"
+label = "OSEM Ordered Subsets EM (6 iterations=n, 12 subsets=sigma=EXACT, 24 angular views=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "TOF_OSEM"
+label = "TOF-OSEM Time-of-Flight (6 TOF bins=n, 12 subsets=sigma, 4 timing kernel widths=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "PSF_Modeling"
+label = "PSF+Resolution Modeling (6 point spread functions=n, 12 deconvolution iterations=sigma, 4 detector models=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "DL_PET_Recon"
+label = "Deep Learning PET Recon (6 U-Net depth levels=n, 12 training datasets=sigma, 4 dose reduction factors=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.50
+
+[[candidate]]
+id = "Kinetic_4D"
+label = "4D Kinetic Modeling (6 compartment parameters=n, 12 time frames=sigma, 24 voxel-wise maps=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+# ============================================================
+# Level 4: Isotope (동위원소)
+#   n6 checks: tau=4 standard isotopes (F-18/C-11/N-13/O-15), phi=2 photon pair, n=6 production routes
+# ============================================================
+
+[[level]]
+name = "Isotope"
+
+[[candidate]]
+id = "F18_FDG"
+label = "F-18 FDG (tau isotope #1, 6 synthesis routes=n, 12 Ci batch yield=sigma, phi=2 photon pair=EXACT)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "C11_Acetate"
+label = "C-11 Acetate (tau isotope #2, 6 labeling positions=n, 12 min half-life=sigma, 4 metabolic targets=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "N13_Ammonia"
+label = "N-13 Ammonia (tau isotope #3, 6 production parameters=n, 12 mL injection volume=sigma, 4 perfusion protocols=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "O15_Water"
+label = "O-15 Water (tau isotope #4, 6 bolus protocols=n, 12 s scan window=sigma, phi=2 min half-life=EXACT)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+id = "Ga68_DOTATATE"
+label = "Ga-68 DOTATATE (6 chelator variants=n, 12 peptide conjugates=sigma, 24 receptor subtypes=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "Cu64_Theranostic"
+label = "Cu-64 Theranostic (6 bifunctional chelators=n, 12.7 hr half-life ~sigma, 4 therapy/imaging modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# BGO crystals work well with PMT (traditional pairing)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BGO"
+then_level = 1
+then_ids = "PMT_Standard,PS_PMT"
+
+# LSO/LYSO best with SiPM for TOF-PET
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "LSO"
+then_level = 1
+then_ids = "SiPM_Digital,SiPM_Analog"
+
+# Digital SiPM pairs with ASIC TOF electronics
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "SiPM_Digital"
+then_level = 2
+then_ids = "ASIC_TOF,DeadTimeFree"
+
+# TOF reconstruction needs TOF-capable electronics
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "TOF_OSEM"
+then_level = 2
+then_ids = "ASIC_TOF,FPGA_Coincidence"
+
+# Short half-life isotopes (O-15, C-11) need fast reconstruction
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "O15_Water"
+then_level = 3
+then_ids = "DL_PET_Recon,TOF_OSEM"

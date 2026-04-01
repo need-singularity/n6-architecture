@@ -1,0 +1,346 @@
+# N6 Surgical Robot System DSE — Robotic surgery platforms
+# 6 Manipulator x 6 Sensing x 6 Control x 6 Interface x 6 Platform = 7,776 combos
+# n=6: 6DOF (n=6 degrees of freedom), sigma=12 joint sensors, tau=4 operation modes
+#       (manual/tele/semi/auto), phi=2 master-slave, J2=24 tool tips
+
+[meta]
+name = "surgical-robot"
+desc = "Surgical Robot System DSE (6DOF=n, sigma=12 sensors, phi=2 master-slave, J2=24 tools)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Manipulator (매니퓰레이터)
+#   n6 checks: n=6 DOF, sigma=12 joint sensors, 6-leg Stewart platform
+# ============================================================
+
+[[level]]
+name = "Manipulator"
+
+[[candidate]]
+id = "Serial_6DOF"
+label = "6DOF Serial Manipulator (n=6 DOF=EXACT, 12 joint encoders=sigma, 4 workspace zones=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "Stewart_6leg"
+label = "Parallel Stewart Platform (6 legs=n=EXACT, 12 position sensors=sigma, 4 payload classes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "Continuum_Flex"
+label = "Continuum Flexible Robot (6 bending sections=n, 12 tendon cables=sigma, 4 stiffness modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+id = "Micro_Robot"
+label = "Micro-Scale Robot (6 actuation channels=n, 12 um precision=sigma, 4 locomotion modes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.45
+
+[[candidate]]
+id = "Hybrid_6axis"
+label = "Hybrid 6-Axis System (6 hybrid joints=n=EXACT, 12 torque sensors=sigma, 24 tool positions=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "Snake_Articulated"
+label = "Snake Articulated Robot (6 articulated segments=n, 12 mm diameter=sigma, 4 bend directions=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.60
+
+# ============================================================
+# Level 1: Sensing (센싱)
+#   n6 checks: 6-axis force sensor, sigma=12 haptic channels, phi=2 stereo vision
+# ============================================================
+
+[[level]]
+name = "Sensing"
+
+[[candidate]]
+id = "Force_6axis"
+label = "6-Axis Force/Torque Sensor (n=6 axes=EXACT, 12 bit resolution=sigma, 4 force ranges=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "Vision_Stereo"
+label = "Stereo Vision System (phi=2 cameras=EXACT, 6 depth ranges=n, 12 fps processing=sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "Haptic_12ch"
+label = "12-Channel Haptic Feedback (sigma=12 channels=EXACT, 6 vibrotactile motors=n, 4 feedback modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "Ultrasound"
+label = "Intraoperative Ultrasound (6 transducer elements=n, 12 MHz frequency=sigma, 4 imaging depths=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.65
+
+[[candidate]]
+id = "CT_Fluoro"
+label = "CT Fluoroscopy Guidance (6 rotation angles=n, 12 slice acquisition=sigma, 4 dose protocols=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.40
+cost = 0.50
+
+[[candidate]]
+id = "EM_Tracking"
+label = "Electromagnetic Tracking (6 DOF tracking=n=EXACT, 12 sensor coils=sigma, 24 update rate kHz=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.70
+
+# ============================================================
+# Level 2: Control (제어)
+#   n6 checks: n=6 cooperative modes, phi=2 bilateral, tau=4 autonomy levels
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+id = "Impedance"
+label = "Impedance Control (6 stiffness parameters=n, 12 Hz bandwidth=sigma, 4 compliance modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "Admittance"
+label = "Admittance Control (6 damping coefficients=n, 12 force threshold levels=sigma, 4 assist modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "Bilateral_Tele"
+label = "Bilateral Teleoperation (phi=2 master-slave=EXACT, 6 scaling ratios=n, 12 ms latency budget=sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "AI_Autonomous"
+label = "AI Autonomous Control (6 decision layers=n, 12 safety constraints=sigma, 4 autonomy levels=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "Shared_Control"
+label = "Shared Control Human-Robot (6 authority levels=n, 12 task primitives=sigma, 4 handoff modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "Cooperative_6mode"
+label = "Cooperative 6-Mode System (n=6 modes=EXACT: manual/tele/semi/auto/shared/supervised, 12 transitions=sigma)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+# ============================================================
+# Level 3: Interface (인터페이스)
+#   n6 checks: 6 interface types, sigma=12 display channels, phi=2 hand controllers
+# ============================================================
+
+[[level]]
+name = "Interface"
+
+[[candidate]]
+id = "Console_Master"
+label = "Surgeon Console Master (6 ergonomic adjustments=n, 12 display feeds=sigma, 4 viewing modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "VR_Immersive"
+label = "VR Immersive Display (6 DOF head tracking=n, 12 K resolution=sigma, 4 rendering modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "Haptic_Glove"
+label = "Haptic Glove Interface (6 finger channels=n, 12 force feedback actuators=sigma, 4 grasp patterns=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "Voice_Command"
+label = "Voice Command Control (6 command categories=n, 12 language models=sigma, 4 confirmation levels=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "Eye_Tracking"
+label = "Eye Tracking Interface (6 gaze zones=n, 12 ms response time=sigma, 4 selection methods=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "Brain_Interface"
+label = "Brain-Computer Interface (6 EEG electrode groups=n, 12 neural channels=sigma, 24 Hz decode rate=J2)"
+n6 = 1.00
+perf = 0.70
+power = 0.45
+cost = 0.35
+
+# ============================================================
+# Level 4: Platform (플랫폼)
+#   n6 checks: 6 platform types, sigma=12 instrument ports, J2=24 tool tips
+# ============================================================
+
+[[level]]
+name = "Platform"
+
+[[candidate]]
+id = "DaVinci_Type"
+label = "Da Vinci-Type Multi-Arm (6 instrument channels=n, 12 joint DOF total=sigma, 24 tool tips=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "Single_Port"
+label = "Single-Port Access (6 internal DOF=n, 12 mm trocar diameter=sigma, 4 articulation modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "Micro_Surgery"
+label = "Microsurgery Platform (6 tremor filter axes=n, 12 um positioning accuracy=sigma, 4 magnification levels=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+id = "Orthopedic"
+label = "Orthopedic Bone Robot (6 cutting planes=n, 12 registration markers=sigma, 4 implant templates=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "Cardiac"
+label = "Cardiac Surgery Platform (6 motion compensation axes=n, 12 ECG trigger phases=sigma, 4 stabilization modes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.45
+
+[[candidate]]
+id = "Neurosurgery"
+label = "Neurosurgery Platform (6 cranial approach angles=n, 12 electrode channels=sigma, 24 brain mapping points=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Micro-robots need EM tracking for localization
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Micro_Robot"
+then_level = 1
+then_ids = "EM_Tracking,Ultrasound"
+
+# Bilateral teleoperation needs haptic feedback
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Bilateral_Tele"
+then_level = 1
+then_ids = "Haptic_12ch,Force_6axis"
+
+# AI autonomous control benefits from multi-modal sensing
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "AI_Autonomous"
+then_level = 1
+then_ids = "Vision_Stereo,Force_6axis"
+
+# VR immersive interface best for teleoperation
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "VR_Immersive"
+then_level = 2
+then_ids = "Bilateral_Tele,Shared_Control"
+
+# Continuum flexible robots best for single-port access
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Continuum_Flex"
+then_level = 4
+then_ids = "Single_Port,Cardiac"
+
+# Snake articulated robots ideal for neurosurgery
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Snake_Articulated"
+then_level = 4
+then_ids = "Neurosurgery,Single_Port"

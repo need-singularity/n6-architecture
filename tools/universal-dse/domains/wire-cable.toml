@@ -1,0 +1,329 @@
+# N6 Wire & Cable Engineering DSE — Cable design
+# 6 ConductorType x 6 Insulation x 6 Shielding x 6 Construction x 6 Application = 7,776 combos
+# n=6: 6-wire strand (1+6 construction), sigma=12 AWG, tau=4 insulation types, phi=2 twisted pair, J2=24V low-voltage
+
+[meta]
+name = "wire-cable"
+desc = "Wire & Cable Engineering DSE (6-wire strand=n, 12 AWG=sigma, tau=4 insulation, phi=2 twisted pair, J2=24V)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: ConductorType (도체 유형)
+#   n6 checks: 6-wire strand=n, sigma=12 AWG, phi=2 bimetallic
+# ============================================================
+
+[[level]]
+name = "ConductorType"
+
+[[candidate]]
+id = "CopperSolid"
+label = "Solid Copper (6 temper grades=n, 12 AWG standard=sigma, ETP C11000, highest conductivity)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+id = "CopperStranded"
+label = "Stranded Copper (1+6 hex strand=n EXACT, 12 AWG equivalent=sigma, flexible, Class B/C)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+id = "TinnedCopper"
+label = "Tinned Copper (6 micron tin coating=n, 12 AWG=sigma, solder-friendly, corrosion-resistant)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+id = "AluminumAAC"
+label = "Aluminum AAC (6 strand layers=n, 12mm diameter class=sigma, lightweight, overhead power)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "CCA_Bimetal"
+label = "Copper-Clad Aluminum (phi=2 bimetal, 6 cladding ratios=n, 12 AWG=sigma, cost-effective)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "SilverPlated"
+label = "Silver-Plated Copper (6 micron Ag layer=n, 12 GHz rated=sigma, high-frequency, aerospace)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Level 1: Insulation (절연)
+#   n6 checks: tau=4 main insulation families, 6 temperature classes, sigma=12 voltage ratings
+# ============================================================
+
+[[level]]
+name = "Insulation"
+
+[[candidate]]
+id = "PVC"
+label = "PVC Insulation (6 color codes=n, 12 voltage classes kV=sigma, 4 temperature ratings=tau, general)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.95
+
+[[candidate]]
+id = "XLPE"
+label = "XLPE Cross-Linked PE (6 crosslink density grades=n, 12 kV rated=sigma, underground power)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "Rubber_EPR"
+label = "EPR Rubber (6 elastomer blends=n, 12 kV medium voltage=sigma, flexible, mining/portable)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "MineralMI"
+label = "Mineral Insulated (6 MgO layers=n, 12mm OD standard=sigma, fire-rated, nuclear/tunnel)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "PTFE_Teflon"
+label = "PTFE/Teflon (6 layer wraps=n, 12 GHz signal rated=sigma, -200~+260C, aerospace/military)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+id = "SiliconeRubber"
+label = "Silicone Rubber (6 shore hardness grades=n, 12 month UV stability=sigma, flexible, high-temp)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.60
+
+# ============================================================
+# Level 2: Shielding (차폐)
+#   n6 checks: 6 shield configurations, sigma=12 dB coverage target, phi=2 dual-shield
+# ============================================================
+
+[[level]]
+name = "Shielding"
+
+[[candidate]]
+id = "Unshielded"
+label = "Unshielded (6 pair twist rates=n, no shield, cost-effective, low-EMI environments)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+id = "BraidShield"
+label = "Braided Copper Shield (6 picks/inch=n, 12 carrier braid=sigma, 85-95% coverage, flexible)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "FoilShield"
+label = "Aluminum Foil Shield (6 micron foil=n, 12 mm overlap=sigma, 100% coverage, lightweight)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+id = "DualFoilBraid"
+label = "Dual Foil+Braid (phi=2 shield layers, 6 micron foil=n, 12 carrier braid=sigma, high EMC)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+id = "SpiralServe"
+label = "Spiral Serve Shield (6 wire serve=n, 12 degree lay angle=sigma, flexible, instrument cable)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "TripleShield"
+label = "Triple Shield (Foil+Braid+Foil, 6 dB additional isolation=n, 120 dB total=sigma*10, coax RF)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.40
+
+# ============================================================
+# Level 3: Construction (구조)
+#   n6 checks: 6 core arrangements, phi=2 twisted pair, J2=24 conductors/cable
+# ============================================================
+
+[[level]]
+name = "Construction"
+
+[[candidate]]
+id = "TwistedPair"
+label = "Twisted Pair (phi=2 conductor pair, 6 twist/m=n, 12 pair cable=sigma, data/telecom)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+id = "CoaxialRG"
+label = "Coaxial RG-6 (6mm diameter=n, 12 GHz bandwidth=sigma, center+shield, RF/video)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "MultiCoreRound"
+label = "Multi-Core Round (6 cores hex pattern=n, 12 mm OD=sigma, 24 conductors=J2, industrial)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "FlatRibbon"
+label = "Flat Ribbon (6 conductor pitch=n, 12 wire ribbon=sigma, IDC termination, electronics)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "ArmoredSWA"
+label = "Steel Wire Armored SWA (6 armor wires=n, 12mm armor pitch=sigma, direct burial, heavy duty)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "FiberOpticHybrid"
+label = "Fiber-Copper Hybrid (6 fibers + 6 conductors=n+n, 12 mm cable OD=sigma, smart grid/SCADA)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.45
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 industry sectors, J2=24V low-voltage, sigma=12 kV medium-voltage
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "BuildingWiring"
+label = "Building Wiring (6 circuit groups=n, 12 AWG branch=sigma, 24V control=J2, NEC/IEC)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "PowerDistribution"
+label = "Power Distribution (6 feeder cables=n, 12 kV primary=sigma, utility/substation, XLPE)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "DataCenter"
+label = "Data Center (6 Cat6A runs=n, 12 fiber trunk=sigma, 24 port patch panel=J2, TIA-942)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+id = "IndustrialAutomation"
+label = "Industrial Automation (6 axis robot cable=n, 12M flex cycles=sigma, drag chain, PROFINET)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "SubseaMarine"
+label = "Subsea Marine (6 layer construction=n, 12 km reach=sigma, umbilical, wet-mate connector)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+id = "AerospaceHarness"
+label = "Aerospace Harness (6 wire bundles=n, 12 breakout points=sigma, MIL-W-22759, EWIS)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# PTFE insulation required for aerospace harness
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "PTFE_Teflon"
+then_level = 4
+then_ids = "AerospaceHarness"
+
+# Mineral insulated not suitable for flexible applications
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "MineralMI"
+then_level = 4
+then_ids = "IndustrialAutomation"
+
+# Triple shield best for data center and aerospace
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "TripleShield"
+then_level = 4
+then_ids = "DataCenter,AerospaceHarness"
+
+# Armored SWA construction best for subsea and power distribution
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "ArmoredSWA"
+then_level = 4
+then_ids = "SubseaMarine,PowerDistribution"

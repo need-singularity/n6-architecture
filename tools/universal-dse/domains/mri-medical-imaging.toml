@@ -1,0 +1,338 @@
+# N6 MRI Medical Imaging DSE — Magnetic resonance imaging systems
+# 6 Magnet x 6 Gradient x 6 RF_Coil x 6 Sequence x 6 Reconstruction = 7,776 combos
+# n=6: J2=24 gradient coil pairs, sigma=12 receive channels, sigma-tau=8 echo trains,
+#       tau=4 contrast modes (T1/T2/PD/DWI), phi=2 phase encoding, 6-axis shim coils
+
+[meta]
+name = "mri-medical-imaging"
+desc = "MRI Medical Imaging DSE (J2=24 gradient coils, sigma=12 channels, 6-axis shim coils)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Magnet (자석)
+#   n6 checks: 6 magnet types, sigma=12 T target for HTS, tau=4 field strengths
+# ============================================================
+
+[[level]]
+name = "Magnet"
+
+[[candidate]]
+id = "SC_1_5T"
+label = "1.5T Superconducting (6 shim coils=n, 12 km wire length=sigma, 4 He cooling stages=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "SC_3T"
+label = "3T Superconducting Standard (6 shim axes=n, 12 ppm homogeneity=sigma, 4 gradient axes+B0=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "UHF_7T"
+label = "7T Ultra-High Field (6 transmit channels=n, 12 RF shimming modes=sigma, 4 SAR limits=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.40
+
+[[candidate]]
+id = "LowField_055T"
+label = "0.55T Low-Field (6 permanent magnet segments=n, 12 kg reduced weight=sigma, 4 imaging modes=tau)"
+n6 = 1.00
+perf = 0.55
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+id = "Halbach_Portable"
+label = "Halbach Portable Array (6 ring segments=n, 12 cm bore diameter=sigma, 4 field orientations=tau)"
+n6 = 1.00
+perf = 0.45
+power = 0.95
+cost = 0.85
+
+[[candidate]]
+id = "HTS_12T"
+label = "HTS 12T Research (sigma=12 T field=EXACT, 6 HTS tape layers=n, 24 coil sections=J2)"
+n6 = 1.00
+perf = 1.00
+power = 0.25
+cost = 0.25
+
+# ============================================================
+# Level 1: Gradient (경사 자기장)
+#   n6 checks: J2=24 gradient coil pairs, sigma=12 slew rate tiers, 6-axis encoding
+# ============================================================
+
+[[level]]
+name = "Gradient"
+
+[[candidate]]
+id = "Standard_40mT"
+label = "Standard 40mT/m (6 coil pairs per axis=n, 12 slew tiers=sigma, 4 duty cycle modes=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "HighPerf_80mT"
+label = "High-Performance 80mT/m (6 cooling zones=n, 12 active shielding layers=sigma, 4 linearity grades=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "Planar_6axis"
+label = "Planar 6-Axis Gradient (n=6 EXACT axes, 12 planar elements=sigma, 24 independent channels=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "Insert_Gradient"
+label = "Insert Gradient Head-Only (6 winding layers=n, 12 cm inner diameter=sigma, 4 target regions=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "Spiral_12ch"
+label = "Spiral 12-Channel (sigma=12 channels=EXACT, 6 spiral arms=n, 4 rotation orders=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "Matrix_24ch"
+label = "Matrix 24-Channel (J2=24 channels=EXACT, 6 encoding groups=n, 12 shim harmonics=sigma)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.40
+
+# ============================================================
+# Level 2: RF Coil (RF 코일)
+#   n6 checks: sigma=12 receive channels, J2=24 head array, n=6 body channels
+# ============================================================
+
+[[level]]
+name = "RF_Coil"
+
+[[candidate]]
+id = "Birdcage"
+label = "Birdcage Volume Coil (6 rung pairs=n, 12 capacitor positions=sigma, 4 tuning modes=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "Phased_12ch"
+label = "12-Channel Phased Array (sigma=12 elements=EXACT, 6 overlap zones=n, 4 decoupling modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "Head_24ch"
+label = "24-Channel Head Coil (J2=24 elements=EXACT, 6 coil rings=n, 12 preamp channels=sigma)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "Body_6ch"
+label = "6-Channel Body Coil (n=6 elements=EXACT, 12 combined sensitivity=sigma, 4 flex positions=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "Surface_Loop"
+label = "Surface Loop Coil (6 loop diameters=n, 12 cm max FOV=sigma, 4 depth penetrations=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "Dipole_Array"
+label = "Dipole Antenna Array (6 dipole elements=n, 12 impedance matching=sigma, 24 cm penetration depth=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.50
+
+# ============================================================
+# Level 3: Sequence (시퀀스)
+#   n6 checks: sigma-tau=8 echo trains, tau=4 contrast modes, n=6 echo EPI
+# ============================================================
+
+[[level]]
+name = "Sequence"
+
+[[candidate]]
+id = "SpinEcho"
+label = "Spin Echo SE (6 echo spacings=n, 12 slice interleaving=sigma, 4 contrast weightings T1/T2/PD/DWI=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "GRE"
+label = "Gradient Recalled Echo (6 flip angle presets=n, 12 TE options=sigma, 4 spoiling methods=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "EPI_6echo"
+label = "EPI 6-Echo Train (n=6 echoes=EXACT, 12 k-space segments=sigma, 4 diffusion directions=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.65
+
+[[candidate]]
+id = "MPRAGE"
+label = "MPRAGE 3D (6 inversion times=n, 12 partitions per slab=sigma, 4 GRAPPA acceleration=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "bSSFP"
+label = "Balanced SSFP (6 phase cycling steps=n, 12 TR/TE ratios=sigma, 4 band suppression modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "UTE_ZTE"
+label = "UTE/ZTE Ultrashort (6 radial spokes per group=n, 12 us TE=sigma, 4 trajectory types=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.60
+
+# ============================================================
+# Level 4: Reconstruction (재구성)
+#   n6 checks: phi=2 SENSE acceleration, n=6 subspace dimensions, sigma=12 coil combine
+# ============================================================
+
+[[level]]
+name = "Reconstruction"
+
+[[candidate]]
+id = "IFFT"
+label = "Standard IFFT (6 zero-fill factors=n, 12 coil combination=sigma, 4 filter windows=tau)"
+n6 = 1.00
+perf = 0.65
+power = 0.85
+cost = 0.95
+
+[[candidate]]
+id = "GRAPPA"
+label = "GRAPPA Parallel (6 ACS calibration sizes=n, 12 kernel points=sigma, 4 acceleration factors=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "SENSE_phi2"
+label = "SENSE phi=2 Acceleration (phi=2 fold=EXACT, 6 regularization levels=n, 12 sensitivity maps=sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "CompressedSensing"
+label = "Compressed Sensing (6 sparsity transforms=n, 12 iterations=sigma, 4 undersampling patterns=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "AI_Recon"
+label = "AI Deep Learning Recon (6 network architectures=n, 12 training datasets=sigma, 4 inference modes=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.50
+
+[[candidate]]
+id = "Subspace_6D"
+label = "Subspace 6D Reconstruction (n=6 subspace dims=EXACT, 12 temporal basis=sigma, 24 parameter maps=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# UHF 7T needs dipole antenna arrays or high-channel coils
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "UHF_7T"
+then_level = 2
+then_ids = "Dipole_Array,Head_24ch"
+
+# HTS 12T research magnet needs matrix gradient
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HTS_12T"
+then_level = 1
+then_ids = "Matrix_24ch,HighPerf_80mT"
+
+# EPI 6-echo best with high-performance gradients
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "EPI_6echo"
+then_level = 1
+then_ids = "HighPerf_80mT,Matrix_24ch"
+
+# AI reconstruction needs high-channel coil data
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "AI_Recon"
+then_level = 2
+then_ids = "Head_24ch,Phased_12ch"
+
+# Portable Halbach works best with low-complexity sequences
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Halbach_Portable"
+then_level = 3
+then_ids = "SpinEcho,GRE"

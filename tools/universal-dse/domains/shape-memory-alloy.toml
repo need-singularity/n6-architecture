@@ -1,0 +1,415 @@
+# N6 Shape Memory Alloy DSE — Phase-transforming smart materials
+# 6 Alloys × 6 Processings × 6 Transformations × 6 Actuators × 6 Applications = 7,776 combos
+# n=6 connections: NiTi B2 austenite CN=8=sigma-tau -> B19' martensite,
+#   tau=4 transformation states (austenite/R-phase/martensite/detwinned),
+#   phi=2 one-way/two-way memory, n=6 variants in martensite,
+#   sigma=12 slip systems, J2=24 habit plane variants
+
+[meta]
+name = "shape-memory-alloy"
+desc = "Shape Memory Alloy DSE — phase-transforming smart materials (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Alloy (합금)
+#   n6 checks: NiTi equiatomic phi=2 elements, CuAlNi 3=n/phi elements,
+#              NiMnGa Heusler 4=tau sublattice, NiTiHf 6at% Hf (n=6)
+# ============================================================
+
+[[level]]
+name = "Alloy"
+
+[[candidate]]
+id = "NiTi_equiatomic"
+label = "NiTi equiatomic (50/50 at%, B2->B19', Af=-20~110C, 8% strain, benchmark)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.75
+notes = "elements=2=phi EXACT, CN=8=sigma-tau EXACT in B2, 6% recoverable strain"
+
+[[candidate]]
+id = "NiTiCu"
+label = "NiTiCu (Cu substitution, narrow hysteresis 6C, stable cycling, actuator ideal)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+notes = "hysteresis=6C=n EXACT, elements=3=n/phi, fatigue-resistant"
+
+[[candidate]]
+id = "NiTiHf_hightemp"
+label = "NiTiHf high-temperature (6at% Hf, Af>200C, aerospace/automotive, precipitate)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.40
+notes = "Hf_content=6at%=n EXACT, high-temp SMA, H-phase precipitate strengthened"
+
+[[candidate]]
+id = "CuAlNi"
+label = "CuAlNi (Cu-based, 3 elements, low cost, beta1->gamma1/beta1', large crystal)"
+n6 = 0.80
+perf = 0.65
+power = 0.85
+cost = 0.90
+notes = "elements=3=n/phi EXACT, Cu-based lower cost, brittle polycrystal, 4% strain"
+
+[[candidate]]
+id = "FeNiCoAlTi"
+label = "FeNiCoAlTi (Fe-based, 5 elements, superelastic, low cost, wide hysteresis)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 0.85
+notes = "Fe-based=cheapest SMA, superelastic at RT, elements=5=sopfr EXACT"
+
+[[candidate]]
+id = "NiMnGa_magnetic"
+label = "Magnetic NiMnGa (Heusler L21, tau=4 sublattice, 6% MFIS, ms response)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.35
+notes = "sublattice=4=tau EXACT, MFIS=6%=n EXACT, fastest SMA actuation"
+
+# ============================================================
+# Level 1: Processing (가공)
+#   n6 checks: vacuum melt 6-cycle remelting (n=6), SLM 12-layer repeat (sigma=12),
+#              wire drawing phi=2 die passes, powder metallurgy 4-step (tau=4)
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "VacuumMelt"
+label = "Vacuum induction melting (6-cycle remelting, VIM/VAR, ingot, composition control)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+notes = "remelts=6=n EXACT, standard NiTi production, purity critical"
+
+[[candidate]]
+id = "PowderMetallurgy"
+label = "Powder metallurgy (4-step: atomize/compact/sinter/HIP, near-net-shape, porous)"
+n6 = 0.80
+perf = 0.70
+power = 0.65
+cost = 0.70
+notes = "steps=4=tau EXACT, porous SMA for biomedical, complex geometry"
+
+[[candidate]]
+id = "Additive_SLM"
+label = "Additive SLM (12-layer repeat unit, laser PBF, complex geometry, functionally graded)"
+n6 = 1.00
+perf = 0.80
+power = 0.40
+cost = 0.35
+notes = "repeat=12=sigma EXACT layers per parameter set, design freedom"
+
+[[candidate]]
+id = "WireDrawing"
+label = "Wire drawing (phi=2 die passes per reduction, cold work, training, spring coil)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.80
+notes = "passes=2=phi EXACT per step, 0.1-2mm diameter, most common actuator form"
+
+[[candidate]]
+id = "ThinFilmSputter"
+label = "Thin film sputtering (6-target co-sputter, MEMS scale, composition gradient)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.40
+notes = "targets=6=n EXACT, SMA-on-chip, micro-actuator, combinatorial screening"
+
+[[candidate]]
+id = "SingleCrystal"
+label = "Single crystal growth (Bridgman/Czochralski, 12mm/hr pull rate, max strain)"
+n6 = 1.00
+perf = 1.00
+power = 0.30
+cost = 0.20
+notes = "pull_rate=12mm/hr=sigma EXACT, highest recoverable strain, research grade"
+
+# ============================================================
+# Level 2: Transformation (변태)
+#   n6 checks: thermal 6-cycle training (n=6), two-way phi=2 directions,
+#              R-phase 4-variant (tau=4), superelastic 12% strain (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Transformation"
+
+[[candidate]]
+id = "Thermal_6cycle"
+label = "Thermal 6-cycle training (n=6 heat/cool cycles, one-way SME, stabilized)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.85
+notes = "cycles=6=n EXACT, standard thermomechanical training, shape setting"
+
+[[candidate]]
+id = "Superelastic"
+label = "Superelastic (stress-induced martensite, 12% recoverable strain, isothermal)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.60
+notes = "strain=12%=sigma EXACT (single crystal), Clausius-Clapeyron slope"
+
+[[candidate]]
+id = "MagneticField"
+label = "Magnetic field-induced (NiMnGa, 6% MFIS, <1ms response, no heating needed)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.30
+notes = "MFIS=6%=n EXACT, fastest actuation, requires strong field ~1T"
+
+[[candidate]]
+id = "StressInduced"
+label = "Stress-induced martensite (mechanical loading, pseudoelastic, damping, seismic)"
+n6 = 0.60
+perf = 0.80
+power = 0.85
+cost = 0.75
+notes = "energy dissipation=equivalent viscous damping 6%=n, flag-shaped hysteresis"
+
+[[candidate]]
+id = "RPhase"
+label = "R-phase transformation (4-variant R-phase, small hysteresis 2C, low fatigue)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.80
+notes = "variants=4=tau EXACT, hysteresis=2C=phi EXACT, 10^7 cycle life"
+
+[[candidate]]
+id = "TwoWay"
+label = "Two-way SME (phi=2 memorized shapes, hot+cold shape, trained, no bias spring)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.50
+notes = "directions=2=phi EXACT, intrinsic two-way from dislocation arrays"
+
+# ============================================================
+# Level 3: Actuator (구동기)
+#   n6 checks: wire linear 6mm stroke (n=6), spring coil 12 turns (sigma=12),
+#              bimorph phi=2 layers, MEMS 6-beam array (n=6)
+# ============================================================
+
+[[level]]
+name = "Actuator"
+
+[[candidate]]
+id = "Wire_linear"
+label = "Wire linear actuator (6mm stroke per 100mm, 4% strain, 150MPa, Joule heating)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.90
+notes = "stroke_ratio=6%=n EXACT, simplest form, direct electrical activation"
+
+[[candidate]]
+id = "Spring_coil"
+label = "Spring coil actuator (12 active turns, compression/extension, large displacement)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.80
+notes = "turns=12=sigma EXACT, displacement amplification, rotary capable"
+
+[[candidate]]
+id = "Tube_rotary"
+label = "Tube rotary actuator (torque tube, 6-degree rotation per cycle, torsional mode)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.55
+notes = "rotation=6deg=n EXACT per cycle, Boeing VGC demonstrator, aero"
+
+[[candidate]]
+id = "Film_bimorph"
+label = "Film bimorph (phi=2 layers SMA+elastic, bending mode, micro-mirror, micro-valve)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.50
+notes = "layers=2=phi EXACT, curvature actuator, large angular displacement"
+
+[[candidate]]
+id = "Composite_embedded"
+label = "Composite embedded (SMA wires in polymer/ceramic matrix, 24vol% optimal, smart skin)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.40
+notes = "vol%=24=J2 EXACT, morphing wing, vibration control, self-healing"
+
+[[candidate]]
+id = "MicroActuator_MEMS"
+label = "Micro-actuator MEMS (6-beam array, thin film SMA, microfluidic valve, micro-gripper)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.35
+notes = "beams=6=n EXACT, on-chip integration, batch fabrication, mN force"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: stent 6mm diameter (n=6), morph wing 12-rib (sigma=12),
+#              seismic damper 24-bar (J2=24), eyeglass 2-state (phi=2)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Biomedical_stent"
+label = "Biomedical stent (6mm diameter, NiTi superelastic, self-expanding, FDA approved)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.60
+notes = "diameter=6mm=n EXACT, body temp Af, crush recovery, $4B market"
+
+[[candidate]]
+id = "Aerospace_morph"
+label = "Aerospace morphing (12-rib adaptive wing, variable geometry chevron, NASA/Boeing)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.25
+notes = "ribs=12=sigma EXACT, noise reduction chevron, fuel saving 3-5%"
+
+[[candidate]]
+id = "Automotive_clutch"
+label = "Automotive clutch/valve (SMA spring actuator, 6-position selector, thermal switch)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+notes = "positions=6=n EXACT, replaces solenoid, silent, weight saving"
+
+[[candidate]]
+id = "Robotics_muscle"
+label = "Robotics artificial muscle (SMA wire bundle, 6-DOF joint, bio-inspired, soft robot)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.50
+notes = "DOF=6=n EXACT, antagonistic pair, high force/weight, compliant"
+
+[[candidate]]
+id = "Seismic_damper"
+label = "Seismic damper (24-bar brace system, flag-shaped hysteresis, re-centering, bridge)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.45
+notes = "bars=24=J2 EXACT, energy dissipation + re-centering, resilient design"
+
+[[candidate]]
+id = "Eyeglass_frame"
+label = "Eyeglass frame (superelastic NiTi, 2-state flex/rigid, crush-proof, comfort fit)"
+n6 = 0.80
+perf = 0.70
+power = 0.95
+cost = 0.85
+notes = "states=2=phi EXACT, consumer product, largest SMA volume market"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# NiTi equiatomic is the standard for biomedical stent
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "NiTi_equiatomic"
+then_level = 4
+then_ids = "Biomedical_stent,Eyeglass_frame"
+
+# NiTiHf high-temp alloy pairs with aerospace and automotive
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "NiTiHf_hightemp"
+then_level = 4
+then_ids = "Aerospace_morph,Automotive_clutch"
+
+# NiMnGa magnetic requires magnetic field transformation
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "NiMnGa_magnetic"
+then_level = 2
+then_ids = "MagneticField,TwoWay"
+
+# Single crystal processing pairs with superelastic transformation
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "SingleCrystal"
+then_level = 2
+then_ids = "Superelastic,MagneticField"
+
+# Wire drawing pairs with wire linear actuator and spring coil
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "WireDrawing"
+then_level = 3
+then_ids = "Wire_linear,Spring_coil"
+
+# Thin film sputtering pairs with micro-actuator MEMS and bimorph
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "ThinFilmSputter"
+then_level = 3
+then_ids = "MicroActuator_MEMS,Film_bimorph"
+
+# Superelastic transformation pairs with stent and seismic applications
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Superelastic"
+then_level = 4
+then_ids = "Biomedical_stent,Seismic_damper"
+
+# Two-way SME pairs with robotics muscle (no bias spring needed)
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "TwoWay"
+then_level = 4
+then_ids = "Robotics_muscle,Aerospace_morph"
+
+# CuAlNi is low-cost, pairs with seismic damper (large volume)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CuAlNi"
+then_level = 4
+then_ids = "Seismic_damper,Automotive_clutch"
+
+# Additive SLM pairs with composite embedded for complex geometry
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Additive_SLM"
+then_level = 3
+then_ids = "Composite_embedded,MicroActuator_MEMS"

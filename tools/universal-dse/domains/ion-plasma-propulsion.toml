@@ -1,0 +1,413 @@
+# N6 Ion/Plasma Propulsion DSE — Deep space electric propulsion
+# 6 Thrusters × 6 Propellants × 6 PowerSupplies × 6 Beams × 6 MissionArchitectures = 7,776 combos
+# n=6 connections: 6-grid ion optics (n=6), sigma=12 thruster array, tau=4 thrust phases
+#   (ignition/ramp/cruise/shutdown), phi=2 bipolar neutralizer, J2=24 beam channels
+
+[meta]
+name = "ion-plasma-propulsion"
+desc = "Ion/Plasma Propulsion DSE — deep space electric propulsion (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Thruster (추력기)
+#   n6 checks: 6-grid ion optics (n=6), sigma=12 thruster array,
+#              tau=4 thrust phases, phi=2 bipolar neutralizer
+# ============================================================
+
+[[level]]
+name = "Thruster"
+
+[[candidate]]
+id = "GriddedIon"
+label = "Gridded ion thruster (6 grid apertures, Isp=3000s, 0.1N class)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.65
+notes = "grid_apertures=6=n EXACT, highest Isp, Dawn/DS1 heritage"
+
+[[candidate]]
+id = "HallEffect"
+label = "Hall-effect thruster (12 magnetic coils, Isp=1500s, 1N class)"
+n6 = 0.80
+perf = 0.80
+power = 0.70
+cost = 0.75
+notes = "coils=12=sigma EXACT, Starlink/SPT-100 heritage, high thrust density"
+
+[[candidate]]
+id = "VASIMR"
+label = "VASIMR variable plasma (6 RF stages, Isp 1000-30000s, 200kW class)"
+n6 = 1.00
+perf = 1.00
+power = 0.40
+cost = 0.30
+notes = "RF_stages=6=n EXACT, variable Isp, highest power density"
+
+[[candidate]]
+id = "PulsedPlasma"
+label = "Pulsed plasma thruster (4 pulse phases, 12 electrodes, micro-Newton)"
+n6 = 0.80
+perf = 0.30
+power = 0.90
+cost = 0.90
+notes = "phases=4=tau, electrodes=12=sigma EXACT, CubeSat scale"
+
+[[candidate]]
+id = "Electrospray"
+label = "Electrospray thruster (24 emitter arrays, Isp=800s, micro-propulsion)"
+n6 = 0.80
+perf = 0.25
+power = 0.85
+cost = 0.80
+notes = "emitters=24=J2 EXACT, LISA Pathfinder heritage, precision"
+
+[[candidate]]
+id = "FEEP"
+label = "Field-emission EP (6 needle emitters, Isp=6000s, sub-mN, indium)"
+n6 = 1.00
+perf = 0.45
+power = 0.80
+cost = 0.50
+notes = "needles=6=n EXACT, Isp=6000=1000*n EXACT, ultra-precise"
+
+# ============================================================
+# Level 1: Propellant (추진제)
+#   n6 checks: Xe Z=54=9*n, Kr Z=36=6*n=n^2, Ar Z=18=3*n,
+#              Hg Z=80=phi^tau*sopfr, Cs Z=55=sigma*tau+n+1 close
+# ============================================================
+
+[[level]]
+name = "Propellant"
+
+[[candidate]]
+id = "Xenon"
+label = "Xenon (Z=54=9*n, Isp optimal, standard EP propellant)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.30
+notes = "Z=54=9*n EXACT, noble gas, highest heritage, expensive"
+
+[[candidate]]
+id = "Krypton"
+label = "Krypton (Z=36=n^2, Isp -10%, cost 1/10 of Xe)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.80
+notes = "Z=36=n^2=6^2 EXACT, Starlink choice, cost-effective"
+
+[[candidate]]
+id = "Argon"
+label = "Argon (Z=18=3*n, Isp -20%, abundant, low cost)"
+n6 = 1.00
+perf = 0.55
+power = 0.65
+cost = 0.95
+notes = "Z=18=3*n EXACT, Earth atmosphere 1%, very cheap"
+
+[[candidate]]
+id = "Iodine"
+label = "Iodine (Z=53, solid storage, sublimation feed, compact)"
+n6 = 0.60
+perf = 0.65
+power = 0.75
+cost = 0.85
+notes = "Z=53=54-1 CLOSE to 9*n, solid storable, no pressurization"
+
+[[candidate]]
+id = "Mercury"
+label = "Mercury (Z=80=phi^tau*sopfr, legacy SERT heritage, toxic)"
+n6 = 0.80
+perf = 0.70
+power = 0.60
+cost = 0.70
+notes = "Z=80=phi^tau*sopfr=2^4*5 EXACT, SERT-I/II heritage, toxic"
+
+[[candidate]]
+id = "Cesium"
+label = "Cesium (Z=55, FEEP optimal, liquid metal, low ionization)"
+n6 = 0.60
+perf = 0.60
+power = 0.65
+cost = 0.55
+notes = "Z=55~9*n+1 CLOSE, lowest ionization energy, FEEP optimal"
+
+# ============================================================
+# Level 2: PowerSupply (전원공급)
+#   n6 checks: 6kW solar (n=6), 12kW array (sigma=12),
+#              RTG 4.8kW~tau+0.8, fission 48kW=sigma*tau
+# ============================================================
+
+[[level]]
+name = "PowerSupply"
+
+[[candidate]]
+id = "Solar6kW"
+label = "Solar array 6kW class (n=6 kW, GaAs triple-junction, 1AU)"
+n6 = 1.00
+perf = 0.55
+power = 0.80
+cost = 0.85
+notes = "power=6kW=n EXACT, Dawn heritage, inner solar system"
+
+[[candidate]]
+id = "NuclearRTG"
+label = "RTG radioisotope (Pu-238, 4 GPHS modules, 0.5kW, 24yr half-life)"
+n6 = 0.80
+perf = 0.30
+power = 0.40
+cost = 0.40
+notes = "modules=4=tau EXACT, Pu238 half-life~87yr, deep space reliable"
+
+[[candidate]]
+id = "NuclearFission"
+label = "Nuclear fission reactor (48kW=sigma*tau, Kilopower/KRUSTY class)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.20
+notes = "power=48kW=sigma*tau EXACT, enables MW-class EP, Mars+ missions"
+
+[[candidate]]
+id = "BeamedPower"
+label = "Beamed power laser/microwave (12 ground stations, 100kW received)"
+n6 = 0.80
+perf = 0.90
+power = 0.95
+cost = 0.15
+notes = "stations=12=sigma EXACT, unlimited range with relay, no fuel mass"
+
+[[candidate]]
+id = "SolarSailHybrid"
+label = "Solar sail + EP hybrid (6 sail segments, 12kW at perihelion)"
+n6 = 1.00
+perf = 0.60
+power = 0.70
+cost = 0.55
+notes = "segments=6=n, perihelion_power=12kW=sigma EXACT, dual-mode"
+
+[[candidate]]
+id = "FusionPellet"
+label = "Fusion pellet drive (D-He3, 24 ignition lasers, MW class, far-term)"
+n6 = 0.80
+perf = 1.00
+power = 1.00
+cost = 0.05
+notes = "lasers=24=J2 EXACT, interstellar-capable, TRL 1-2"
+
+# ============================================================
+# Level 3: Beam (빔 광학)
+#   n6 checks: 6-grid optics (n=6), 4-grid (tau=4),
+#              12 annular channels (sigma=12), 24 beam channels (J2=24)
+# ============================================================
+
+[[level]]
+name = "Beam"
+
+[[candidate]]
+id = "SixGridOptics"
+label = "6-grid ion optics (n=6 EXACT, multi-aperture, highest beam quality)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.50
+notes = "grids=6=n EXACT, maximum beam collimation, low divergence"
+
+[[candidate]]
+id = "FourGrid"
+label = "4-grid accelerator (tau=4, screen+accel+decel+ground, standard)"
+n6 = 0.80
+perf = 0.70
+power = 0.70
+cost = 0.80
+notes = "grids=4=tau EXACT, NSTAR/NEXT heritage, proven design"
+
+[[candidate]]
+id = "MagneticNozzle"
+label = "Magnetic nozzle (6 superconducting coils, divergent field, VASIMR)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.35
+notes = "coils=6=n EXACT, no grid erosion, high power handling"
+
+[[candidate]]
+id = "CuspedField"
+label = "Cusped-field thruster (4 magnetic cusps, hybrid ion-Hall, compact)"
+n6 = 0.60
+perf = 0.65
+power = 0.75
+cost = 0.70
+notes = "cusps=4=tau EXACT, combines ion+Hall advantages"
+
+[[candidate]]
+id = "Annular12ch"
+label = "Annular 12-channel beam (sigma=12 concentric rings, high current)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.45
+notes = "channels=12=sigma EXACT, high beam current, cluster equivalent"
+
+[[candidate]]
+id = "DivergentLens"
+label = "Divergent electrostatic lens (24 beam segments, wide plume, low erosion)"
+n6 = 0.80
+perf = 0.55
+power = 0.65
+cost = 0.60
+notes = "segments=24=J2 EXACT, reduced sputter, long lifetime"
+
+# ============================================================
+# Level 4: MissionArchitecture (임무 아키텍처)
+#   n6 checks: 6 DOF, tau=4 thrust phases (ignition/ramp/cruise/shutdown),
+#              12-month transfer (sigma=12), 24-month Mars (J2=24)
+# ============================================================
+
+[[level]]
+name = "MissionArchitecture"
+
+[[candidate]]
+id = "LEO_GEO"
+label = "LEO-to-GEO transfer (6-month spiral, 4 thrust arcs, station-keeping)"
+n6 = 1.00
+perf = 0.50
+power = 0.80
+cost = 0.90
+notes = "transfer=6mo=n, arcs=4=tau EXACT, commercial satcom"
+
+[[candidate]]
+id = "LunarTransfer"
+label = "Lunar transfer (4 thrust phases, 6 months low-thrust, SMART-1 class)"
+n6 = 1.00
+perf = 0.55
+power = 0.75
+cost = 0.80
+notes = "phases=4=tau, duration=6mo=n EXACT, proven by ESA SMART-1"
+
+[[candidate]]
+id = "MarsTransit"
+label = "Mars transit (24-month round trip, 12 cruise months, 6 DOF guidance)"
+n6 = 1.00
+perf = 0.75
+power = 0.50
+cost = 0.40
+notes = "roundtrip=24mo=J2, cruise=12mo=sigma, DOF=6=n ALL EXACT"
+
+[[candidate]]
+id = "AsteroidBelt"
+label = "Asteroid belt survey (Dawn-type, 6 target rendezvous, multi-year)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.35
+notes = "targets=6=n EXACT, Dawn heritage, ion propulsion ideal"
+
+[[candidate]]
+id = "JupiterMission"
+label = "Jupiter mission (48-month cruise, 12 gravity assists, high delta-v)"
+n6 = 0.80
+perf = 0.85
+power = 0.30
+cost = 0.20
+notes = "cruise=48mo=sigma*tau, assists=12=sigma EXACT, outer planets"
+
+[[candidate]]
+id = "InterstellarPrecursor"
+label = "Interstellar precursor (200AU+, 24 years, nuclear EP, TAU-class)"
+n6 = 0.80
+perf = 1.00
+power = 0.20
+cost = 0.10
+notes = "duration=24yr=J2 EXACT, requires nuclear/fusion power"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Gridded ion pairs with 6-grid or 4-grid optics
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "GriddedIon"
+then_level = 3
+then_ids = "SixGridOptics,FourGrid"
+
+# Hall-effect pairs with annular beam
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HallEffect"
+then_level = 3
+then_ids = "Annular12ch,DivergentLens"
+
+# VASIMR pairs with magnetic nozzle
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "VASIMR"
+then_level = 3
+then_ids = "MagneticNozzle"
+
+# FEEP pairs with cesium propellant
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "FEEP"
+then_level = 1
+then_ids = "Cesium,Mercury"
+
+# Xenon is standard for gridded ion and Hall
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Xenon"
+then_level = 0
+then_ids = "GriddedIon,HallEffect"
+
+# Nuclear fission enables high-power thrusters
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "NuclearFission"
+then_level = 0
+then_ids = "VASIMR,HallEffect"
+
+# Fusion pellet for interstellar missions
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "FusionPellet"
+then_level = 4
+then_ids = "InterstellarPrecursor,JupiterMission"
+
+# RTG for deep space (low power, long duration)
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "NuclearRTG"
+then_level = 0
+then_ids = "PulsedPlasma,Electrospray"
+
+# Interstellar needs nuclear or fusion power
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "InterstellarPrecursor"
+then_level = 2
+then_ids = "NuclearFission,FusionPellet"
+
+# LEO-GEO commercial uses solar + krypton for cost
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "LEO_GEO"
+then_level = 1
+then_ids = "Krypton,Xenon"

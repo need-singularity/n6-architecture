@@ -1,0 +1,414 @@
+# N6 Hydrogel DSE — Water-swollen polymer network engineering
+# 6 Polymers x 6 Crosslinks x 6 StimuliResponses x 6 Processings x 6 Applications = 7,776 combos
+# n=6 connections: 6 crosslink types (chemical/physical/ionic/H-bond/hydrophobic/enzymatic = n=6 EXACT),
+#   sigma=12 swelling ratio target, tau=4 stimuli-responsive triggers (temp/pH/light/electric),
+#   phi=2 sol-gel transition, J2=24 hour sustained release
+
+[meta]
+name = "hydrogel"
+desc = "Hydrogel DSE — water-swollen polymer network engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Polymer (고분자)
+#   n6 checks: PEG MW 6kDa common (n=6), alginate G-block 6-fold (n=6),
+#              PNIPAm LCST=32C~(sopfr*n+phi), HA MW~1200kDa~sigma*100
+# ============================================================
+
+[[level]]
+name = "Polymer"
+
+[[candidate]]
+id = "PEG"
+label = "PEG polyethylene glycol (6kDa MW common, bioinert, FDA-approved, hydrophilic)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.85
+notes = "MW=6kDa=n EXACT, gold standard biomaterial, PEGylation platform"
+
+[[candidate]]
+id = "PHEMA"
+label = "PHEMA poly(2-hydroxyethyl methacrylate) (contact lens origin, 40% water, tough)"
+n6 = 0.60
+perf = 0.75
+power = 0.80
+cost = 0.80
+notes = "Wichterle 1960, first synthetic hydrogel, optical clarity"
+
+[[candidate]]
+id = "Alginate"
+label = "Alginate natural (G-block 6-fold coordination with Ca2+, seaweed-derived)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.90
+notes = "G-block=6-fold=n EXACT, egg-box Ca2+ crosslink, biocompatible"
+
+[[candidate]]
+id = "Collagen"
+label = "Collagen bio (triple helix, Gly-X-Y repeat, 12 types common, ECM mimic)"
+n6 = 0.80
+perf = 0.85
+power = 0.90
+cost = 0.50
+notes = "types=12=sigma EXACT, native tissue component, cell-adhesive"
+
+[[candidate]]
+id = "PNIPAm"
+label = "PNIPAm thermoresponsive (LCST=32C, sharp sol-gel transition, smart gel)"
+n6 = 0.80
+perf = 0.90
+power = 0.70
+cost = 0.70
+notes = "sol-gel=phi=2 states EXACT, most studied thermoresponsive polymer"
+
+[[candidate]]
+id = "Hyaluronic_Acid"
+label = "Hyaluronic acid (disaccharide repeat, 6-member sugar rings, viscoelastic)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.55
+notes = "sugar_ring=6=n EXACT, native ECM glycosaminoglycan, injectable"
+
+# ============================================================
+# Level 1: Crosslink (가교)
+#   n6 checks: 6 crosslink types total (n=6 EXACT), Ca2+ valence=2=phi,
+#              double network=2=phi, click chemistry 6-atom triazole ring (n=6)
+# ============================================================
+
+[[level]]
+name = "Crosslink"
+
+[[candidate]]
+id = "Chemical_Covalent"
+label = "Chemical covalent (permanent bond, glutaraldehyde/EDC, stable network)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.75
+notes = "irreversible, strongest crosslink, precise mesh size control"
+
+[[candidate]]
+id = "Physical_Entangle"
+label = "Physical entanglement (reversible, chain interpenetration, self-healing)"
+n6 = 0.60
+perf = 0.60
+power = 0.90
+cost = 0.95
+notes = "no crosslinker needed, dynamic network, shear-thinning"
+
+[[candidate]]
+id = "Ionic_Ca2p"
+label = "Ionic Ca2+ (phi=2 valence divalent crosslink, alginate egg-box, instant gel)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.90
+notes = "valence=2=phi EXACT, rapid gelation, mild conditions, biocompatible"
+
+[[candidate]]
+id = "Photo_Crosslink"
+label = "Photo-crosslink (UV/visible light, spatial control, LAP/Irgacure initiator)"
+n6 = 0.60
+perf = 0.90
+power = 0.65
+cost = 0.60
+notes = "light-patternable, 3D printing compatible, on-demand gelation"
+
+[[candidate]]
+id = "Click_Chemistry"
+label = "Click chemistry (6-atom triazole ring product, bioorthogonal, quantitative)"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.50
+notes = "triazole=6-atom=n EXACT, CuAAC/SPAAC, Nobel 2022, modular"
+
+[[candidate]]
+id = "Double_Network"
+label = "Double network (phi=2 interpenetrating networks, ultra-tough, cartilage-like)"
+n6 = 1.00
+perf = 1.00
+power = 0.70
+cost = 0.55
+notes = "networks=2=phi EXACT, Gong 2003, fracture energy 1000x single network"
+
+# ============================================================
+# Level 2: StimuliResponse (자극 응답)
+#   n6 checks: multi-stimuli 6-trigger (n=6 EXACT), tau=4 primary triggers,
+#              pH range 6-8 physiological (n=6 center), thermo LCST±6C window
+# ============================================================
+
+[[level]]
+name = "StimuliResponse"
+
+[[candidate]]
+id = "Thermo_Responsive"
+label = "Thermoresponsive (LCST/UCST transition, volume change 12x, drug trigger)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+notes = "volume_change=12x=sigma EXACT, PNIPAm LCST=32C, body-temp triggered"
+
+[[candidate]]
+id = "pH_Sensitive"
+label = "pH-sensitive (ionizable groups, swelling at pH=6-8, tumor/GI targeting)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.85
+notes = "center_pH=6=n EXACT, carboxyl/amine pKa-driven, oral delivery"
+
+[[candidate]]
+id = "Photo_Responsive"
+label = "Photo-responsive (azobenzene/spiropyran, light-triggered release, remote)"
+n6 = 0.60
+perf = 0.90
+power = 0.60
+cost = 0.50
+notes = "non-invasive trigger, wavelength-selective, spatial control"
+
+[[candidate]]
+id = "Electro_Responsive"
+label = "Electro-responsive (polyelectrolyte, voltage-driven bending, actuator)"
+n6 = 0.60
+perf = 0.75
+power = 0.55
+cost = 0.60
+notes = "soft actuator, artificial muscle, controllable deformation"
+
+[[candidate]]
+id = "Enzyme_Degrade"
+label = "Enzyme-degradable (MMP/hyaluronidase cleavable, cell-responsive, tissue)"
+n6 = 0.60
+perf = 0.80
+power = 0.90
+cost = 0.55
+notes = "bioresponsive degradation, cell-mediated remodeling, tissue engineering"
+
+[[candidate]]
+id = "Multi_Stimuli_6trigger"
+label = "Multi-stimuli 6-trigger (temp+pH+light+electric+enzyme+redox = n=6 inputs)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.30
+notes = "triggers=6=n EXACT, logic-gate hydrogel, programmable response"
+
+# ============================================================
+# Level 3: Processing (가공)
+#   n6 checks: 3D bioprinting 6-layer (n=6 EXACT), freeze-thaw 2-cycle (phi=2),
+#              microfluidic 6-channel (n=6), injection 12-gauge needle (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "Free_Radical_Polymerization"
+label = "Free-radical polymerization (APS/TEMED initiator, bulk gel, simple scalable)"
+n6 = 0.60
+perf = 0.70
+power = 0.85
+cost = 0.95
+notes = "most common method, exothermic, broad MW distribution"
+
+[[candidate]]
+id = "Bioprinting_6layer"
+label = "3D bioprinting 6-layer (n=6 layers, extrusion/inkjet, cell-laden construct)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.40
+notes = "layers=6=n EXACT, patient-specific geometry, tissue engineering"
+
+[[candidate]]
+id = "Microfluidic"
+label = "Microfluidic (6-channel droplet generator, monodisperse microgels, high-throughput)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.50
+notes = "channels=6=n EXACT, uniform size distribution, encapsulation"
+
+[[candidate]]
+id = "Electrospinning"
+label = "Electrospinning (nanofiber hydrogel mat, 12kV voltage, high surface area)"
+n6 = 0.80
+perf = 0.80
+power = 0.60
+cost = 0.55
+notes = "voltage=12kV=sigma EXACT, nanofiber scaffold, wound dressing"
+
+[[candidate]]
+id = "Freeze_Thaw_2cycle"
+label = "Freeze-thaw phi=2 cycle (PVA cryogel, physical crosslink, no chemicals)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+notes = "cycles=2=phi EXACT (minimum for stable gel), green process, tough"
+
+[[candidate]]
+id = "Injection_Forming"
+label = "Injection forming (12-gauge needle, in-situ gelation, minimally invasive)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+notes = "gauge=12=sigma EXACT, shear-thinning + self-healing, clinical"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: drug delivery 12hr (sigma=12), wound 6-layer dressing (n=6),
+#              tissue scaffold 6mm thickness (n=6), contact lens 12hr wear (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Drug_Delivery_12hr"
+label = "Drug delivery 12hr (sigma=12 hour sustained release, controlled diffusion)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "release=12hr=sigma EXACT, zero-order kinetics target, oral/injectable"
+
+[[candidate]]
+id = "Wound_Dressing"
+label = "Wound dressing (6-layer composite, moist healing, antimicrobial, breathable)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "layers=6=n EXACT, moisture balance, debridement, hemostatic"
+
+[[candidate]]
+id = "Tissue_Scaffold"
+label = "Tissue scaffold (6mm construct thickness, cell-laden, vascularized, 3D)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.40
+notes = "thickness=6mm=n EXACT, diffusion limit overcome, organ engineering"
+
+[[candidate]]
+id = "Contact_Lens"
+label = "Contact lens (12hr extended wear, oxygen permeable, comfort, anti-dry)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.85
+notes = "wear=12hr=sigma EXACT, silicone hydrogel, Dk/t>100, daily disposable"
+
+[[candidate]]
+id = "Biosensor"
+label = "Biosensor (glucose/lactate, 6min response time, wearable, sweat analysis)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+notes = "response=6min=n EXACT, continuous monitoring, point-of-care"
+
+[[candidate]]
+id = "Agriculture_Water_Retention"
+label = "Agriculture water retention (12x water absorption, slow release, soil amendment)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.90
+notes = "absorption=12x=sigma EXACT, superabsorbent polymer, drought resistance"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# PEG pairs best with click chemistry or photo crosslink
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PEG"
+then_level = 1
+then_ids = "Click_Chemistry,Photo_Crosslink"
+
+# Alginate requires ionic Ca2+ crosslink
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Alginate"
+then_level = 1
+then_ids = "Ionic_Ca2p,Physical_Entangle"
+
+# Collagen pairs with chemical crosslink for stability
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Collagen"
+then_level = 1
+then_ids = "Chemical_Covalent,Click_Chemistry"
+
+# PNIPAm is inherently thermoresponsive
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PNIPAm"
+then_level = 2
+then_ids = "Thermo_Responsive,Multi_Stimuli_6trigger"
+
+# Hyaluronic acid pairs with enzyme-degradable and tissue applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Hyaluronic_Acid"
+then_level = 2
+then_ids = "Enzyme_Degrade,pH_Sensitive"
+
+# Double network pairs with tissue scaffold (cartilage-like toughness)
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Double_Network"
+then_level = 4
+then_ids = "Tissue_Scaffold,Wound_Dressing"
+
+# Photo crosslink pairs with 3D bioprinting
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Photo_Crosslink"
+then_level = 3
+then_ids = "Bioprinting_6layer,Microfluidic"
+
+# Freeze-thaw pairs with agriculture (bulk, low-cost)
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Freeze_Thaw_2cycle"
+then_level = 4
+then_ids = "Agriculture_Water_Retention,Wound_Dressing"
+
+# Bioprinting pairs with tissue scaffold and drug delivery
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Bioprinting_6layer"
+then_level = 4
+then_ids = "Tissue_Scaffold,Drug_Delivery_12hr"
+
+# PHEMA classic contact lens material
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "PHEMA"
+then_level = 4
+then_ids = "Contact_Lens,Biosensor"

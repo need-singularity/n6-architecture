@@ -1,0 +1,338 @@
+# N6 Conveyor System DSE — Material handling conveyor
+# 6 ConveyorType x 6 DriveSystem x 6 BeltMaterial x 6 Control x 6 Application = 7,776 combos
+# n=6: 6 conveyor types (belt/roller/chain/screw/pneumatic/vibrating), sigma=12 m/s max speed
+# tau=4 drive positions, phi=2 forward/reverse, J2=24 inch belt width
+
+[meta]
+name = "conveyor-system"
+desc = "Conveyor System DSE (6 conveyor types=n, sigma=12 m/s speed, J2=24 inch belt width)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: ConveyorType (컨베이어 유형)
+#   n6 checks: 6 types=n, sigma=12 m/s max, tau=4 drive positions, phi=2 forward/reverse
+# ============================================================
+
+[[level]]
+name = "ConveyorType"
+
+[[candidate]]
+id = "Belt"
+label = "Belt Conveyor (6 belt plies=n, 12 m/s max speed=sigma, 2 forward/reverse=phi, 24in width=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "Roller"
+label = "Roller Conveyor (6 roller zones=n, 12 rollers per meter=sigma, 4 drive positions=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "Chain"
+label = "Chain Conveyor (6 chain strands=n, 12 m/s max=sigma, 4 sprocket configs=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "Screw"
+label = "Screw Conveyor (6 flight segments=n, 12 inch screw diameter=sigma, 2 CW/CCW=phi)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "Pneumatic"
+label = "Pneumatic Conveyor (6 blow/suction points=n, 12 bar air pressure=sigma, 24 inch pipe=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.45
+cost = 0.65
+
+[[candidate]]
+id = "Vibrating"
+label = "Vibrating Conveyor (6 vibration modes=n, 12 Hz frequency=sigma, 4 amplitude settings=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.80
+
+# ============================================================
+# Level 1: DriveSystem (구동 시스템)
+#   n6 checks: 6 drive types, sigma=12 kW motor, tau=4 gear ratios
+# ============================================================
+
+[[level]]
+name = "DriveSystem"
+
+[[candidate]]
+id = "ACMotor"
+label = "AC Induction Motor (6 pole configs=n, 12 kW rated=sigma, 4 speed ranges=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+id = "ServoMotor"
+label = "Servo Motor (6 axis control=n, 12 Nm torque=sigma, 24 bit encoder=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+id = "VFDrive"
+label = "Variable Frequency Drive (6 frequency bands=n, 12 kW capacity=sigma, 4 V/f profiles=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "DirectDrive"
+label = "Direct Drive Torque Motor (6 stator segments=n, 12 pole pairs=sigma, 2 rotation=phi)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+id = "Hydraulic"
+label = "Hydraulic Drive (6 cylinder bores=n, 12 bar pressure=sigma, 4 valve configs=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.70
+
+[[candidate]]
+id = "LinearMotor"
+label = "Linear Motor (6 magnet arrays=n, 12 m/s linear speed=sigma, 24 mm air gap=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.45
+
+# ============================================================
+# Level 2: BeltMaterial (벨트/표면 소재)
+#   n6 checks: 6 material families, sigma=12 month wear life, tau=4 surface treatments
+# ============================================================
+
+[[level]]
+name = "BeltMaterial"
+
+[[candidate]]
+id = "Rubber"
+label = "Natural Rubber (C6-isoprene base, 6 durometer grades=n, 12 month life=sigma)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+id = "PVC"
+label = "PVC Belt (6 thickness grades=n, 12 month service=sigma, 4 surface textures=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "Polyurethane"
+label = "Polyurethane (6 hardness grades=n, 12 mm thickness=sigma, 2 smooth/textured=phi)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "StainlessSteel"
+label = "Stainless Steel Mesh (6 mesh sizes=n, 12 gauge wire=sigma, 4 alloy grades=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "ModularPlastic"
+label = "Modular Plastic (6 hinge types=n, 12 mm pitch=sigma, 24 inch module width=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "Kevlar"
+label = "Kevlar Reinforced (6 aramid layers=n, 12x tensile strength=sigma, 4 weave patterns=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 3: Control (제어)
+#   n6 checks: 6 control modes, sigma=12 sensors, tau=4 feedback loops
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+id = "OnOff"
+label = "On/Off Basic (6 zone switches=n, 12 limit sensors=sigma, 4 safety interlocks=tau)"
+n6 = 1.00
+perf = 0.60
+power = 0.80
+cost = 0.95
+
+[[candidate]]
+id = "SpeedControl"
+label = "Speed Control (6 speed setpoints=n, 12 encoder pulses=sigma, 4 PID loops=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "TrackingVision"
+label = "Vision Tracking (6 camera stations=n, 12 fps capture=sigma, 24 object classes=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "WeightFeedback"
+label = "Weighing Feedback (6 load cells=n, 12 kg resolution=sigma, 4 belt scales=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "PLCNetwork"
+label = "PLC Networked (6 PLC nodes=n, 12 I/O channels=sigma, 24 ms scan cycle=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "AIPredict"
+label = "AI Predictive Maintenance (6 vibration sensors=n, 12 analytics models=sigma, 24h prediction=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.50
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 industry sectors, sigma=12 throughput metrics, J2=24h operation
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Mining"
+label = "Mining Bulk Handling (6 ore grades=n, 12 km belt length=sigma, 24h operation=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.70
+
+[[candidate]]
+id = "FoodProcess"
+label = "Food Processing (6 HACCP zones=n, 12 hygiene checkpoints=sigma, 4 wash cycles=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "Automotive"
+label = "Automotive Assembly (6 workstations=n, 12 takt time sec=sigma, 24 vehicles/shift=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "Logistics"
+label = "Logistics Sorting (6 sort lanes=n, 12000 parcels/hr=sigma*10^3, 24h hub operation=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "Pharma"
+label = "Pharmaceutical (6 cleanroom zones=n, 12 GMP parameters=sigma, 4 batch modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "Airport"
+label = "Airport Baggage (6 terminal belts=n, 12 screening stations=sigma, 24h international=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.65
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Pneumatic conveyor requires VFD or servo drive
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Pneumatic"
+then_level = 1
+then_ids = "VFDrive,ServoMotor"
+
+# Stainless steel belt required for food and pharma
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "StainlessSteel"
+then_level = 4
+then_ids = "FoodProcess,Pharma"
+
+# Vision tracking best for logistics and automotive
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "TrackingVision"
+then_level = 4
+then_ids = "Logistics,Automotive"
+
+# Mining application requires rubber or kevlar belt
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Mining"
+then_level = 2
+then_ids = "Rubber,Kevlar"
+
+# Linear motor drive pairs with airport or logistics application
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "LinearMotor"
+then_level = 4
+then_ids = "Airport,Logistics"

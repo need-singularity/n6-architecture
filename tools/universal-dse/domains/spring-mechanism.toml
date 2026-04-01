@@ -1,0 +1,329 @@
+# N6 Spring & Elastic Mechanism DSE — Spring design
+# 6 SpringType x 6 Material x 6 Manufacturing x 6 Design x 6 Application = 7,776 combos
+# n=6: 6 active coils (n=6 EXACT), sigma=12 spring index D/d, tau=4 spring types, phi=2 dual-rate, J2=24mm free length
+
+[meta]
+name = "spring-mechanism"
+desc = "Spring & Elastic Mechanism DSE (6 active coils=n, sigma=12 spring index, tau=4 types, phi=2 dual-rate, J2=24mm free length)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: SpringType (스프링 유형)
+#   n6 checks: 6 active coils=n, sigma=12 spring index, tau=4 basic types
+# ============================================================
+
+[[level]]
+name = "SpringType"
+
+[[candidate]]
+id = "Compression"
+label = "Compression Spring (6 active coils=n, spring index D/d=12=sigma, cylindrical helix)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "Extension"
+label = "Extension Spring (6 active coils=n, 12 hook configurations=sigma, initial tension phi=2 modes)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "Torsion"
+label = "Torsion Spring (6 active coils=n, 12-degree deflection steps=sigma, 4 leg configurations=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "LeafSpring"
+label = "Leaf Spring (6 leaves stacked=n, 12mm eye-to-eye ratio=sigma, 4 mounting types=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+id = "BellevilleDisc"
+label = "Belleville Disc (6 disc stack=n, h/t ratio=phi=2, 12 load stages=sigma, 24mm OD standard=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+id = "WaveSpring"
+label = "Wave Spring (6 waves per turn=n, 12mm height=sigma, 4 turn configurations=tau, compact)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+# ============================================================
+# Level 1: Material (소재)
+#   n6 checks: 6 spring alloy families, sigma=12 temper grades, tau=4 surface treatments
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "MusicWire"
+label = "Music Wire ASTM A228 (C6 carbon chain, 6 diameter groups=n, 12 tensile grades=sigma)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "ChromeVanadium"
+label = "Chrome Vanadium ASTM A231 (6 Cr-V ratios=n, 12 heat-treat temps=sigma, fatigue-resistant)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "StainlessSS302"
+label = "Stainless 302/304 (6 cold-draw passes=n, 12 surface finishes=sigma, corrosion-resistant)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+id = "InconelX750"
+label = "Inconel X-750 (6 precipitation stages=n, 12 aging hours=sigma, high-temp to 700C)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+id = "PhosphorBronze"
+label = "Phosphor Bronze (6% Sn content~n, 12 temper grades=sigma, electrical+spring, non-magnetic)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+id = "TitaniumTi6Al4V"
+label = "Ti-6Al-4V (6% Al=n, 4% V=tau, 12 beta-anneal cycles=sigma, lightweight high-strength)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+# ============================================================
+# Level 2: Manufacturing (제조)
+#   n6 checks: 6 coiling passes, sigma=12 tempering stages, tau=4 QC checkpoints
+# ============================================================
+
+[[level]]
+name = "Manufacturing"
+
+[[candidate]]
+id = "ColdCoil"
+label = "Cold Coiling (6 forming passes=n, 12 mandrel sizes=sigma, ambient temperature, high volume)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "HotCoil"
+label = "Hot Coiling (6 heating zones=n, 12mm+ wire diameter=sigma, large springs, oil-quench)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "CNCCoil"
+label = "CNC Spring Forming (6-axis CNC=n, 12 tool stations=sigma, complex geometries, high precision)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+id = "Stamping"
+label = "Progressive Stamping (6-station die=n, 12 strokes/sec=sigma, flat springs/clips, mass production)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.95
+
+[[candidate]]
+id = "LaserCut"
+label = "Laser Cut Spring (6 beam paths=n, 12 kW power levels=sigma, disc/wave springs, tight tolerance)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "Electroform"
+label = "Electroforming (6 micro-layers=n, 12 bath chemistry steps=sigma, micro-springs, MEMS)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.40
+
+# ============================================================
+# Level 3: Design (설계)
+#   n6 checks: 6 design parameters, sigma=12 spring index optimal, J2=24mm free length
+# ============================================================
+
+[[level]]
+name = "Design"
+
+[[candidate]]
+id = "LinearRate"
+label = "Linear Rate (6 active coils=n, constant pitch, spring index=12=sigma, Wahl factor correction)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "DualRate"
+label = "Dual-Rate Progressive (phi=2 rate zones, 6 coils per zone=n, 12mm transition=sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+id = "VariablePitch"
+label = "Variable Pitch (6 pitch zones=n, 12mm max pitch=sigma, progressive rate, shock absorber)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "NestedConcentric"
+label = "Nested Concentric (phi=2 nested springs, 6 coils each=n, 24mm combined length=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+id = "BarrelConical"
+label = "Barrel/Conical Shape (6 active coils=n, 12 taper ratio=sigma, anti-surge, compact solid height)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "MiniatureHex"
+label = "Miniature Hex Array (6 micro-springs in hex pattern=n, 12 preload levels=sigma, MEMS/actuator)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 industry sectors, sigma=12 standards, tau=4 certification levels
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "AutomotiveSusp"
+label = "Automotive Suspension (6 spring points/axle=n, 12 damper stages=sigma, ride+handling)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "AerospaceActuator"
+label = "Aerospace Actuator (6 redundancy springs=n, 12 certification tests=sigma, flight-critical)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+id = "MedicalDevice"
+label = "Medical Device (6 biocompat grades=n, 12 sterilization cycles=sigma, stent/catheter/implant)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+id = "ElectronicsContact"
+label = "Electronics Contact (6 pin array=n, 12 insertion cycles K=sigma, pogo/leaf, BeCu connector)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "IndustrialValve"
+label = "Industrial Valve (6 valve spring sets=n, 12 bar pressure=sigma, safety relief, high-cycle)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "PrecisionClock"
+label = "Precision Clock/Watch (6 hairspring turns=n, 12 beat/sec escapement=sigma, horology)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Inconel best for aerospace high-temperature applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "InconelX750"
+then_level = 4
+then_ids = "AerospaceActuator"
+
+# Electroforming best for miniature/MEMS designs
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Electroform"
+then_level = 3
+then_ids = "MiniatureHex"
+
+# Leaf springs not suitable for precision clock applications
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "LeafSpring"
+then_level = 4
+then_ids = "PrecisionClock,ElectronicsContact"
+
+# Ti-6Al-4V pairs well with medical and aerospace
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "TitaniumTi6Al4V"
+then_level = 4
+then_ids = "AerospaceActuator,MedicalDevice"

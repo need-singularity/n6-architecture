@@ -1,0 +1,338 @@
+# N6 Reactor Vessel DSE — Chemical & process reactor
+# 6 ReactorType x 6 CatalystSystem x 6 HeatTransfer x 6 Mixing x 6 Application = 7,776 combos
+# n=6: 6 reactor types (CSTR/PFR/batch/fluidized-bed/fixed-bed/membrane), sigma=12 atm operating pressure
+# tau=4 reaction types (catalytic/thermal/photo/electro), phi=2 exo/endothermic, J2=24 hour residence
+
+[meta]
+name = "reactor-vessel"
+desc = "Reactor Vessel DSE (6 reactor types=n, sigma=12 atm pressure, J2=24h residence)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: ReactorType (반응기 유형)
+#   n6 checks: 6 types=n, sigma=12 atm, tau=4 reaction types, phi=2 exo/endo
+# ============================================================
+
+[[level]]
+name = "ReactorType"
+
+[[candidate]]
+id = "CSTR"
+label = "CSTR Continuous Stirred (6 impeller zones=n, 12 atm max=sigma, 4 feed points=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "PFR"
+label = "Plug Flow Reactor (6 tube passes=n, 12 atm pressure=sigma, 24h residence=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "Batch"
+label = "Batch Reactor (6 batch cycles/day=n, 12 atm rated=sigma, 4 heating phases=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.90
+
+[[candidate]]
+id = "FluidBed"
+label = "Fluidized Bed (6 distributor zones=n, 12 atm freeboard=sigma, 2 dense/dilute phases=phi)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "FixedBed"
+label = "Fixed Bed (6 catalyst layers=n, 12 atm operating=sigma, 4 radial flow zones=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "MembraneReactor"
+label = "Membrane Reactor (6 membrane tubes=n, 12 atm transmembrane=sigma, 2 permeate/retentate=phi)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+# ============================================================
+# Level 1: CatalystSystem (촉매 시스템)
+#   n6 checks: 6 catalyst families, sigma=12 month lifetime, tau=4 regeneration cycles
+# ============================================================
+
+[[level]]
+name = "CatalystSystem"
+
+[[candidate]]
+id = "HeteroMetal"
+label = "Heterogeneous Metal (6 metal sites=n, 12 month life=sigma, 4 regen cycles=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "Zeolite"
+label = "Zeolite Molecular Sieve (6 ring channels=n, 12 angstrom pore=sigma, Si/Al ratio=4=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "Enzyme"
+label = "Enzyme Biocatalyst (6 enzyme classes=n, 12h half-life=sigma, 4 immobilization methods=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+id = "HomoComplex"
+label = "Homogeneous Complex (6 ligand types=n, 12 oxidation states=sigma, 2 chiral forms=phi)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+id = "PhotoCat"
+label = "Photocatalyst TiO2 (6 bandgap ranges=n, 12 nm particle size=sigma, 24h UV cycle=J2)"
+n6 = 1.00
+perf = 0.75
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "ElectroCat"
+label = "Electrocatalyst (6 electrode materials=n, 12V cell voltage=sigma, 4 current densities=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.45
+cost = 0.55
+
+# ============================================================
+# Level 2: HeatTransfer (열 전달)
+#   n6 checks: 6 heat exchange modes, sigma=12 MW thermal duty, phi=2 heating/cooling
+# ============================================================
+
+[[level]]
+name = "HeatTransfer"
+
+[[candidate]]
+id = "JacketCool"
+label = "Jacket Cooling/Heating (6 jacket zones=n, 12 MW capacity=sigma, 2 heat/cool=phi)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "InternalCoil"
+label = "Internal Coil (6 coil passes=n, 12 m2 area=sigma, 4 coil materials=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "ExternalHX"
+label = "External Heat Exchanger (6 shell passes=n, 12 MW duty=sigma, 24 tubes/pass=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "Autothermal"
+label = "Autothermal (6 heat recovery zones=n, 12 atm adiabatic=sigma, 2 exo+endo coupled=phi)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.65
+
+[[candidate]]
+id = "MicrowaveHeat"
+label = "Microwave Heating (6 magnetron units=n, 12 kW per unit=sigma, 4 frequency bands=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "PlasmaAssist"
+label = "Plasma-Assisted (6 electrode pairs=n, 12 kV discharge=sigma, 24 kHz frequency=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.40
+
+# ============================================================
+# Level 3: Mixing (혼합)
+#   n6 checks: 6 mixing methods, sigma=12 impeller types, tau=4 baffles
+# ============================================================
+
+[[level]]
+name = "Mixing"
+
+[[candidate]]
+id = "MechAgitator"
+label = "Mechanical Agitator (6 impeller blades=n, 12 rpm ranges=sigma, 4 baffle plates=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.85
+
+[[candidate]]
+id = "StaticMixer"
+label = "Static Mixer (6 element sets=n, 12 mixing elements=sigma, 2 split/recombine=phi)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "JetMixer"
+label = "Jet Mixer (6 nozzle ports=n, 12 bar jet pressure=sigma, 4 injection angles=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.75
+
+[[candidate]]
+id = "GasSparger"
+label = "Gas Sparger (6 sparger rings=n, 12 mm orifice=sigma, 24 Nm3/h flow=J2)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "Ultrasonic"
+label = "Ultrasonic Mixing (6 transducer arrays=n, 12 kW power=sigma, 24 kHz frequency=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "MicrofluidicMix"
+label = "Microfluidic Mixer (6 channel layers=n, 12 um channel width=sigma, 4 mixing geometries=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.45
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 application sectors, sigma=12 product specs, J2=24h production
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "PetroRefining"
+label = "Petroleum Refining (6 product streams=n, 12 atm FCC=sigma, 24h continuous=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "Polymerization"
+label = "Polymerization (6 monomer feeds=n, 12 MW distribution=sigma, 4 chain mechanisms=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "PharmaAPI"
+label = "Pharma API Synthesis (6 synthesis steps=n, 12 quality attributes=sigma, 4 GMP phases=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "H2Production"
+label = "Hydrogen Production (6 reformer tubes=n, 12 atm steam=sigma, 24h on-stream=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "WasteToEnergy"
+label = "Waste-to-Energy (6 feed categories=n, 12 MJ/kg calorific=sigma, 4 gasifier zones=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "CO2Capture"
+label = "CO2 Capture (6 absorber stages=n, 12 atm regeneration=sigma, 24 tonne/day=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.40
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Membrane reactor pairs with enzyme or electrocatalyst
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "MembraneReactor"
+then_level = 1
+then_ids = "Enzyme,ElectroCat"
+
+# Fluidized bed requires gas sparger or jet mixer
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "FluidBed"
+then_level = 3
+then_ids = "GasSparger,JetMixer"
+
+# Photocatalyst best with microwave or plasma heat transfer
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "PhotoCat"
+then_level = 2
+then_ids = "MicrowaveHeat,PlasmaAssist"
+
+# Autothermal heat transfer best for H2 production or waste-to-energy
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Autothermal"
+then_level = 4
+then_ids = "H2Production,WasteToEnergy"
+
+# Microfluidic mixing pairs with pharma API or polymerization
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "MicrofluidicMix"
+then_level = 4
+then_ids = "PharmaAPI,Polymerization"

@@ -1,0 +1,360 @@
+# =============================================================
+# N6 Hyperloop Transport DSE Domain Definition
+# Vacuum tube high-speed transit architecture
+# n=6: 6 tube sections per segment (n=6), sigma=12 pod spacing km,
+#       tau=4 vacuum grades (atmospheric/partial/near/ultra),
+#       phi=2 bidirectional tube, J2=24 passengers per pod,
+#       6DOF pod stability
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "hyperloop-transport"
+desc = "Hyperloop Transport Architecture DSE (tube/propulsion/levitation/vacuum/station)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: TubeStructure (6 candidates)
+# ============================================================
+
+[[level]]
+name = "TubeStructure"
+
+[[candidate]]
+level = 0
+id = "Steel-6section"
+label = "Steel Tube 6-section Segment (n=6 sections, 3.3m ID, welded)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "CFRP-Composite"
+label = "CFRP Composite Tube (lightweight, φ=2 inner/outer shell, high strength)"
+n6 = 0.70
+perf = 0.95
+power = 0.70
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Concrete-Encased"
+label = "Concrete-Encased Steel (σ=12m span pylons, elevated, durable)"
+n6 = 0.90
+perf = 0.70
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Dual-Bore"
+label = "Dual-Bore Tube (φ=2 bidirectional, separate tunnels, safety)"
+n6 = 0.85
+perf = 0.80
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Underground-Tunnel"
+label = "Underground Tunnel Bore (TBM-cut, 6m diameter=n, deep alignment)"
+n6 = 0.95
+perf = 0.65
+power = 0.75
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Elevated-Truss"
+label = "Elevated Truss (modular truss, 24m=J2 span, rapid deploy)"
+n6 = 0.80
+perf = 0.60
+power = 0.80
+cost = 0.75
+
+# ============================================================
+# Level 1: Propulsion (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Propulsion"
+
+[[candidate]]
+level = 1
+id = "LIM-6phase"
+label = "Linear Induction Motor 6-phase (n=6 phase, distributed stator)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "LSM-SC"
+label = "Linear Synchronous Motor SC (superconducting, 12=sigma coils/section)"
+n6 = 0.90
+perf = 1.00
+power = 0.55
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "Axial-Flux"
+label = "Axial Flux Motor (compact, onboard, 6-pole rotor)"
+n6 = 0.85
+perf = 0.75
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Air-Compressor"
+label = "Air Compressor Thrust (Kantrowitz limit bypass, onboard compressor)"
+n6 = 0.50
+perf = 0.65
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Plasma-Drive"
+label = "Plasma Cathode Drive (ionized residual gas, τ=4 stage acceleration)"
+n6 = 0.65
+perf = 0.90
+power = 0.40
+cost = 0.25
+
+[[candidate]]
+level = 1
+id = "Hybrid-LIM-LSM"
+label = "Hybrid LIM+LSM (LIM urban, LSM intercity, φ=2 dual-mode)"
+n6 = 0.80
+perf = 0.85
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 2: Levitation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Levitation"
+
+[[candidate]]
+level = 2
+id = "EDS-SC"
+label = "EDS Superconducting (repulsive, 6-coil array=n, passive guideway)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.30
+
+[[candidate]]
+level = 2
+id = "EMS-Active"
+label = "EMS Active Electromagnetic (attractive, 12=sigma sensor points, servo)"
+n6 = 0.90
+perf = 0.80
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Halbach-PM"
+label = "Halbach Permanent Magnet Array (passive, 6-magnet period=n, no power)"
+n6 = 0.95
+perf = 0.75
+power = 1.00
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Air-Bearing"
+label = "Air Bearing Skid (compressed air film, low speed, simple)"
+n6 = 0.45
+perf = 0.50
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "HTS-Bulk"
+label = "HTS Bulk Levitation (flux pinning, τ=4 YBCO blocks, self-stable)"
+n6 = 0.75
+perf = 0.90
+power = 0.75
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "Inductrack-6"
+label = "Inductrack Passive (6-Halbach wavelength=n, aluminum track, speed-dep)"
+n6 = 0.85
+perf = 0.70
+power = 0.90
+cost = 0.70
+
+# ============================================================
+# Level 3: VacuumSystem (6 candidates)
+# ============================================================
+
+[[level]]
+name = "VacuumSystem"
+
+[[candidate]]
+level = 3
+id = "UltraHigh-Vacuum"
+label = "Ultra-High Vacuum <1Pa (near-space, max speed, τ=4th grade)"
+n6 = 0.80
+perf = 1.00
+power = 0.30
+cost = 0.20
+
+[[candidate]]
+level = 3
+id = "Near-Vacuum"
+label = "Near Vacuum 10-100Pa (6 pump stations/segment=n, balanced)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Partial-Vacuum"
+label = "Partial Vacuum 1-10kPa (reduced drag 90%, simpler seals)"
+n6 = 0.70
+perf = 0.70
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Staged-Cascade"
+label = "Staged Cascade Pumping (τ=4 stages: rough/turbo/cryo/ion)"
+n6 = 0.85
+perf = 0.85
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Cryo-Panel"
+label = "Cryogenic Panel Array (12=sigma cryo panels/km, passive after cool)"
+n6 = 0.90
+perf = 0.80
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "Scroll-Redundant"
+label = "Scroll Pump Redundant (6 scroll pumps/station=n, N+1 failover)"
+n6 = 0.95
+perf = 0.65
+power = 0.70
+cost = 0.75
+
+# ============================================================
+# Level 4: StationDesign (6 candidates)
+# ============================================================
+
+[[level]]
+name = "StationDesign"
+
+[[candidate]]
+level = 4
+id = "Airlock-6bay"
+label = "Airlock 6-Bay Station (n=6 airlocks, parallel boarding, 24=J2 pax/pod)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Continuous-Flow"
+label = "Continuous Flow Station (no stop, moving platform, max throughput)"
+n6 = 0.60
+perf = 1.00
+power = 0.50
+cost = 0.25
+
+[[candidate]]
+level = 4
+id = "Hub-Terminal"
+label = "Hub Terminal (12=sigma gates, multimodal, airport-style)"
+n6 = 0.90
+perf = 0.85
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Underground-Compact"
+label = "Underground Compact (urban core, 6-level=n vertical, small footprint)"
+n6 = 0.95
+perf = 0.70
+power = 0.70
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Surface-Modular"
+label = "Surface Modular (prefab, φ=2 arrival/departure split, suburban)"
+n6 = 0.75
+perf = 0.60
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Freight-Pod-Bay"
+label = "Freight Pod Bay (cargo variant, 6-ton pod capacity=n, automated)"
+n6 = 0.85
+perf = 0.55
+power = 0.75
+cost = 0.70
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Air bearing only works with partial vacuum (needs air)
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Air-Bearing"
+then_level = 3
+then_ids = ["Partial-Vacuum"]
+
+# Plasma drive requires near or ultra-high vacuum
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Plasma-Drive"
+then_level = 3
+then_ids = ["Partial-Vacuum", "Scroll-Redundant"]
+
+# Superconducting levitation excluded from air bearing station (thermal conflict)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "EDS-SC"
+then_level = 3
+then_ids = ["Partial-Vacuum"]
+
+# Continuous flow station excluded from underground compact (space constraint)
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "Continuous-Flow"
+then_level = 0
+then_ids = ["Underground-Tunnel"]

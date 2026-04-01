@@ -1,0 +1,412 @@
+# N6 ASIC Design DSE — Application-specific integrated circuit
+# 6×6×6×6×6 = 7,776 combos
+# n=6: 6 metal layers (n=6), σ=12 clock domains, τ=4 power modes
+#       (active/idle/sleep/off), φ=2 redundancy, J₂=24 I/O pads per side
+
+[meta]
+name = "asic-design"
+desc = "ASIC Design Flow DSE (BT-28/37/69)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: DesignEntry (설계 입력)
+#   n6 checks: abstraction_levels, language expressiveness
+# ============================================================
+
+[[level]]
+name = "DesignEntry"
+
+[[candidate]]
+id = "RTL-Verilog"
+label = "RTL Verilog (IEEE 1364, cycle-accurate, widest EDA support)"
+n6 = 0.25
+perf = 0.80
+power = 0.80
+cost = 0.90
+notes = "industry standard, mature toolchain, manual optimization"
+
+[[candidate]]
+id = "RTL-VHDL"
+label = "RTL VHDL (IEEE 1076, strong typing, n=6 signal categories)"
+n6 = 0.50
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "signal_categories=6=n, aerospace/defense preferred"
+
+[[candidate]]
+id = "SystemC-HLS"
+label = "SystemC HLS (C++ to RTL, σ=12 optimization passes, 4x design speed)"
+n6 = 0.75
+perf = 0.70
+power = 0.75
+cost = 0.70
+notes = "opt_passes=12=sigma EXACT, speedup=4=tau EXACT, Catapult/Vitis"
+
+[[candidate]]
+id = "Chisel-Scala"
+label = "Chisel/Scala (parameterized generators, n=6 abstraction layers)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.75
+notes = "layers=6=n EXACT, RISC-V ecosystem, hardware construction language"
+
+[[candidate]]
+id = "AI-generated"
+label = "AI-generated RTL (LLM-to-Verilog, φ=2 verify passes, auto-correct)"
+n6 = 0.50
+perf = 0.60
+power = 0.70
+cost = 0.60
+notes = "verify_passes=2=phi EXACT, emerging paradigm, 10x design speed potential"
+
+[[candidate]]
+id = "Schematic-analog"
+label = "Schematic Analog (transistor-level, τ=4 corner analysis, SPICE verified)"
+n6 = 0.50
+perf = 0.90
+power = 0.90
+cost = 0.40
+notes = "corners=4=tau EXACT, essential for mixed-signal, highest precision"
+
+# ============================================================
+# Level 1: Synthesis (합성)
+#   n6 checks: opt_passes==6(n), clock_domains==12(σ),
+#              power_modes==4(τ), corners==6(n)
+# ============================================================
+
+[[level]]
+name = "Synthesis"
+
+[[candidate]]
+id = "Logic-opt-6pass"
+label = "Logic Opt 6-pass (n=6 optimization iterations, area+timing+power)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+notes = "passes=6=n EXACT, balanced multi-objective optimization"
+
+[[candidate]]
+id = "Technology-mapping"
+label = "Technology Mapping (library-aware, σ·τ=48 cell variants, delay-optimal)"
+n6 = 0.75
+perf = 0.90
+power = 0.75
+cost = 0.75
+notes = "cell_variants=48=sigma*tau EXACT, foundry-specific optimization"
+
+[[candidate]]
+id = "Retiming"
+label = "Retiming (register balancing, σ=12 pipeline stages, clock period min)"
+n6 = 0.75
+perf = 0.95
+power = 0.70
+cost = 0.80
+notes = "pipeline=12=sigma EXACT, maximum frequency optimization"
+
+[[candidate]]
+id = "Clock-gating-12domain"
+label = "Clock Gating 12-domain (σ=12 independent clock domains, fine-grain)"
+n6 = 1.00
+perf = 0.75
+power = 0.95
+cost = 0.75
+notes = "domains=12=sigma EXACT, up to 60% dynamic power reduction"
+
+[[candidate]]
+id = "Power-opt"
+label = "Power Opt (τ=4 power modes: active/idle/sleep/off, DVFS)"
+n6 = 0.50
+perf = 0.65
+power = 0.95
+cost = 0.70
+notes = "modes=4=tau EXACT, multi-voltage domain, state retention"
+
+[[candidate]]
+id = "Multi-corner"
+label = "Multi-corner (n=6 PVT corners, worst-case sign-off, margin analysis)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+notes = "corners=6=n EXACT (SS/SF/FS/FF/TT/MC), robust sign-off"
+
+# ============================================================
+# Level 2: PhysicalDesign (물리 설계)
+#   n6 checks: blocks==6(n), metal_layers==6(n), buffers==12(σ),
+#              CTS_levels==6(n)
+# ============================================================
+
+[[level]]
+name = "PhysicalDesign"
+
+[[candidate]]
+id = "Floorplan-6block"
+label = "Floorplan 6-block (n=6 major functional blocks, aspect ratio 1:φ)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.80
+notes = "blocks=6=n EXACT, aspect=1:2=1:phi, optimal wire-length partition"
+
+[[candidate]]
+id = "Placement-analytical"
+label = "Placement Analytical (quadratic wirelength, J₂=24 iteration cycles)"
+n6 = 0.75
+perf = 0.90
+power = 0.85
+cost = 0.80
+notes = "iterations=24=J2 EXACT, near-optimal placement quality"
+
+[[candidate]]
+id = "CTS-12buffer"
+label = "CTS 12-buffer (σ=12 buffer stages, balanced H-tree, <5ps skew)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+notes = "buffers=12=sigma EXACT, clock tree synthesis for zero-skew"
+
+[[candidate]]
+id = "Route-6metal"
+label = "Route 6-metal (n=6 metal layers, DRC-clean, antenna-rule compliant)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.85
+notes = "metals=6=n EXACT, standard for mid-range ASIC complexity"
+
+[[candidate]]
+id = "Fill-DFM"
+label = "Fill DFM (design-for-manufacturing, τ=4 fill-pattern types, CMP-aware)"
+n6 = 0.50
+perf = 0.70
+power = 0.85
+cost = 0.90
+notes = "fill_types=4=tau EXACT, yield improvement through density uniformity"
+
+[[candidate]]
+id = "ECO-fix"
+label = "ECO Fix (engineering change order, φ=2 spare-cell utilization, late fix)"
+n6 = 0.50
+perf = 0.60
+power = 0.80
+cost = 0.95
+notes = "spare_util=2=phi, post-tapeout bug fix without full re-spin"
+
+# ============================================================
+# Level 3: Verification (검증)
+#   n6 checks: corners==4(τ), modes==12(σ), checks==6(n),
+#              coverage_target==100%
+# ============================================================
+
+[[level]]
+name = "Verification"
+
+[[candidate]]
+id = "Formal-equivalence"
+label = "Formal Equivalence (RTL-to-gate proof, n=6 hierarchy levels)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.75
+notes = "levels=6=n EXACT, mathematical proof of functional correctness"
+
+[[candidate]]
+id = "Gate-sim-4corner"
+label = "Gate Sim 4-corner (τ=4 PVT corners, back-annotated SDF timing)"
+n6 = 0.50
+perf = 0.80
+power = 0.80
+cost = 0.80
+notes = "corners=4=tau EXACT, post-layout timing verification"
+
+[[candidate]]
+id = "STA-12mode"
+label = "STA 12-mode (σ=12 operating modes, setup/hold/recovery sign-off)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.70
+notes = "modes=12=sigma EXACT, comprehensive static timing analysis"
+
+[[candidate]]
+id = "DRC-LVS"
+label = "DRC-LVS (design rule + layout vs schematic, clean tapeout gate)"
+n6 = 0.25
+perf = 0.75
+power = 0.90
+cost = 0.90
+notes = "mandatory tapeout check, foundry rule compliance"
+
+[[candidate]]
+id = "Power-integrity"
+label = "Power Integrity (IR drop < 5%, J₂=24 decap cells per block)"
+n6 = 0.75
+perf = 0.80
+power = 0.85
+cost = 0.70
+notes = "decap=24=J2 EXACT, IR_drop_target=5%=1/(J2-tau) EXACT"
+
+[[candidate]]
+id = "EMI-check"
+label = "EMI Check (electromagnetic interference, n=6 frequency bands scanned)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.75
+notes = "bands=6=n EXACT, FCC/CE compliance, substrate coupling analysis"
+
+# ============================================================
+# Level 4: Manufacturing (제조)
+#   n6 checks: node_nm==6(n), metal_layers==12(σ),
+#              mask_count==24(J₂)
+# ============================================================
+
+[[level]]
+name = "Manufacturing"
+
+[[candidate]]
+id = "TSMC-6nm"
+label = "TSMC N6 (n=6 nm node, σ=12 metal layers, mature EUV, high yield)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+notes = "node=6nm=n EXACT, metals=12=sigma EXACT, sweet spot for ASIC"
+
+[[candidate]]
+id = "Samsung-4nm"
+label = "Samsung SF4 (τ=4 nm node, GAA nanosheet, J₂=24 EUV masks)"
+n6 = 0.75
+perf = 0.85
+power = 0.85
+cost = 0.65
+notes = "node=4nm=tau EXACT, masks=24=J2 EXACT, advanced GAA"
+
+[[candidate]]
+id = "Intel-18A"
+label = "Intel 18A (1.8nm class, RibbonFET, PowerVia backside power)"
+n6 = 0.25
+perf = 0.95
+power = 0.90
+cost = 0.50
+notes = "leading-edge, backside power delivery, limited ASIC access"
+
+[[candidate]]
+id = "GlobalFoundries-12nm"
+label = "GlobalFoundries 12nm (σ=12 nm node, FinFET, cost-optimized)"
+n6 = 0.75
+perf = 0.60
+power = 0.70
+cost = 0.90
+notes = "node=12nm=sigma EXACT, excellent for IoT/automotive ASIC"
+
+[[candidate]]
+id = "SMIC-28nm"
+label = "SMIC 28nm (mature poly/SiON, lowest cost, no EUV needed)"
+n6 = 0.25
+perf = 0.40
+power = 0.55
+cost = 1.00
+notes = "28nm=P2 (BT-37), most cost-effective for high-volume ASIC"
+
+[[candidate]]
+id = "Multi-project-wafer"
+label = "Multi-project Wafer (MPW, n=6 designs per reticle, prototyping)"
+n6 = 1.00
+perf = 0.50
+power = 0.65
+cost = 0.95
+notes = "designs_per_reticle=6=n EXACT, shared mask cost, ideal for startups"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Chisel generators best with formal equivalence verification
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Chisel-Scala"
+then_level = 3
+then_ids = "Formal-equivalence"
+
+# AI-generated RTL needs extra verification rigor
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "AI-generated"
+then_level = 3
+then_ids = "Formal-equivalence,Gate-sim-4corner"
+
+# Schematic analog requires transistor-level verification
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Schematic-analog"
+then_level = 3
+then_ids = "DRC-LVS,Power-integrity"
+
+# Schematic analog does not use logic synthesis
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Schematic-analog"
+then_level = 1
+then_ids = "Logic-opt-6pass,Retiming"
+
+# 6-block floorplan aligns with 6-metal routing
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Floorplan-6block"
+then_level = 2
+then_ids = "Route-6metal"
+
+# Clock gating 12-domain needs STA 12-mode verification
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Clock-gating-12domain"
+then_level = 3
+then_ids = "STA-12mode"
+
+# TSMC 6nm is the n=6-optimal manufacturing for mid-range ASIC
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "TSMC-6nm"
+then_level = 2
+then_ids = "Route-6metal,Floorplan-6block"
+
+# Intel 18A cutting-edge requires full multi-corner sign-off
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Intel-18A"
+then_level = 1
+then_ids = "Multi-corner"
+
+# MPW prototyping pairs with mature nodes for cost savings
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Multi-project-wafer"
+then_level = 1
+then_ids = "Logic-opt-6pass,Power-opt"
+
+# SystemC HLS pairs well with retiming for pipeline optimization
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SystemC-HLS"
+then_level = 1
+then_ids = "Retiming,Logic-opt-6pass"

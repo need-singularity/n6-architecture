@@ -1,0 +1,329 @@
+# N6 Electronic Warfare Systems DSE
+# 6 Receiver x 6 Jammer x 6 Antenna x 6 Processing x 6 Platform = 7,776 combos
+# n=6: 6 EW bands (HF/VHF/UHF/L/S/C), sigma=12 GHz bandwidth, tau=4 EW functions (ESM/ECM/ECCM/ELINT), phi=2 active/passive, J2=24 antenna elements
+
+[meta]
+name = "electronic-warfare"
+desc = "Electronic Warfare Systems DSE (n=6 EW bands, sigma=12 GHz BW, tau=4 EW functions, J2=24 elements)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Receiver (수신기)
+#   n6 checks: 6 bands=n, sigma=12 GHz instantaneous BW, tau=4 detection modes
+# ============================================================
+
+[[level]]
+name = "Receiver"
+
+[[candidate]]
+id = "Channelized"
+label = "Channelized Receiver (6 sub-bands=n, 12 GHz total BW=sigma, parallel processing)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.50
+
+[[candidate]]
+id = "Superheterodyne"
+label = "Superheterodyne Receiver (6 IF stages=n, 12 dB NF=sigma, 4 frequency conversions=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "CrystalVideo"
+label = "Crystal Video Detector (6 diode arrays=n, 12 GHz coverage=sigma, instantaneous wideband)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "Bragg"
+label = "Acousto-Optic Bragg Cell (6 crystal channels=n, 12 GHz bandwidth=sigma, photonic processing)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+id = "DigitalRx"
+label = "Digital Wideband Receiver (6 ADC channels=n, 12 bit resolution=sigma, 24 Gsps=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.40
+
+[[candidate]]
+id = "Compressive"
+label = "Compressive Sensing Receiver (6 measurement bases=n, 12 GHz sparse BW=sigma, sub-Nyquist)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+
+# ============================================================
+# Level 1: Jammer (재머)
+#   n6 checks: 6 jamming modes=n, sigma=12 simultaneous targets, phi=2 active/passive
+# ============================================================
+
+[[level]]
+name = "Jammer"
+
+[[candidate]]
+id = "Noise"
+label = "Noise Jammer (6 noise bands=n, 12 dBW ERP=sigma, barrage/spot modes)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.80
+
+[[candidate]]
+id = "DRFM"
+label = "DRFM Repeater (6 coherent channels=n, 12 false targets=sigma, 4 deception modes=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.40
+
+[[candidate]]
+id = "Reactive"
+label = "Reactive Jammer (6 threat libraries=n, 12 ms response time=sigma, automatic technique select)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "CrossEye"
+label = "Cross-Eye Jammer (phi=2 antenna pair, 6 frequency bands=n, 12 dB J/S ratio=sigma)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+[[candidate]]
+id = "Expendable"
+label = "Expendable Decoy (6 decoy types=n, 12 launch tubes=sigma, chaff/flare/towed)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+id = "CyberEW"
+label = "Cyber-Electromagnetic (6 attack vectors=n, 12 protocol exploits=sigma, 4 kill chain stages=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.35
+cost = 0.35
+
+# ============================================================
+# Level 2: Antenna (안테나)
+#   n6 checks: J2=24 elements, 6 sub-arrays=n, sigma=12 beam positions
+# ============================================================
+
+[[level]]
+name = "Antenna"
+
+[[candidate]]
+id = "AESA"
+label = "AESA Phased Array (24 elements=J2, 6 sub-arrays=n, 12 simultaneous beams=sigma)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.40
+
+[[candidate]]
+id = "SpiralBroad"
+label = "Spiral Broadband (6 spiral arms=n, 12 GHz BW=sigma, phi=2 circular polarization)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "HornArray"
+label = "Horn Antenna Array (6 horn elements=n, 12 dBi gain=sigma, 4 polarization modes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "LogPeriodic"
+label = "Log-Periodic Dipole (6 element groups=n, 12 frequency octaves=sigma, wideband)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "Conformal"
+label = "Conformal Array (6 facets=n, 12 elements/facet=sigma, platform-integrated)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "MetaSurface"
+label = "Metasurface Antenna (6 meta-cells=n, 24 reconfigurable elements=J2, beam steering)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.50
+
+# ============================================================
+# Level 3: Processing (신호 처리)
+#   n6 checks: 6 processing cores=n, 12 TOPS throughput=sigma, tau=4 classification stages
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "FPGA"
+label = "FPGA Signal Processor (6 FPGA cores=n, 12 TOPS=sigma, reconfigurable)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "GPU_EW"
+label = "GPU Acceleration (6 GPU modules=n, 12 TFLOPS=sigma, 24 GB HBM=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "DSP_Array"
+label = "DSP Array Processor (6 DSP chips=n, 12 parallel pipelines=sigma, deterministic latency)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "AI_ML"
+label = "AI/ML Classifier (6 neural networks=n, 12 threat classes=sigma, 4 confidence levels=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.45
+
+[[candidate]]
+id = "Quantum_EW"
+label = "Quantum Signal Processor (6 qubits=n, 12 entangled pairs=sigma, spectrum sensing)"
+n6 = 1.00
+perf = 0.90
+power = 0.35
+cost = 0.30
+
+[[candidate]]
+id = "HybridProc"
+label = "Hybrid FPGA+GPU (6 processing nodes=n, 12 data links=sigma, adaptive partitioning)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+# ============================================================
+# Level 4: Platform (플랫폼)
+#   n6 checks: 6 platform types=n, sigma=12 operating hours, 24h mission endurance=J2
+# ============================================================
+
+[[level]]
+name = "Platform"
+
+[[candidate]]
+id = "Fighter"
+label = "Fighter Aircraft (6 EW stations=n, 12 hr sortie cycle=sigma, air superiority)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.35
+
+[[candidate]]
+id = "UAV_EW"
+label = "EW UAV (6 payload bays=n, 24h endurance=J2, standoff jamming)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "GroundVehicle"
+label = "Ground Vehicle EW (6 antenna masts=n, 12 ton payload=sigma, mobile)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "NavalShip"
+label = "Naval Ship EW Suite (6 topside arrays=n, 12 threat sectors=sigma, 4 warfare areas=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "Manpack"
+label = "Man-Portable EW (6 kg weight=n, 12 hr battery=sigma, 4 operating modes=tau)"
+n6 = 1.00
+perf = 0.65
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "Satellite"
+label = "Space-Based EW (6 orbital planes=n, 12 satellite constellation=sigma, global coverage)"
+n6 = 1.00
+perf = 0.90
+power = 0.30
+cost = 0.25
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# DRFM requires digital or hybrid processing
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "DRFM"
+then_level = 3
+then_ids = "FPGA,HybridProc,GPU_EW"
+
+# Satellite platform needs conformal or metasurface antenna
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Satellite"
+then_level = 2
+then_ids = "Conformal,MetaSurface"
+
+# Man-portable cannot support AESA (power/weight)
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "Manpack"
+then_level = 2
+then_ids = "AESA"
+
+# Cyber-EW pairs with AI/ML processing
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "CyberEW"
+then_level = 3
+then_ids = "AI_ML,HybridProc"

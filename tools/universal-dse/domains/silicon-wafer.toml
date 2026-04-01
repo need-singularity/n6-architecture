@@ -1,0 +1,414 @@
+# N6 Silicon Wafer Material DSE — Semiconductor substrate engineering
+# 6 CrystalGrowth × 6 WaferSpec × 6 Doping × 6 SurfaceTreatment × 6 Application = 7,776 combos
+# n=6 connections: Si diamond cubic CN=4=tau nearest neighbor, 12=sigma second-nearest neighbor,
+#   crystal orientation (100)/(110)/(111) = n/n / (sigma-phi)*(sigma-mu) / 3 Miller,
+#   sigma=12 inch (300mm) wafer standard, phi=2 double-side polished, J2=24 defects/cm2 target
+
+[meta]
+name = "silicon-wafer"
+desc = "Silicon Wafer Material DSE — semiconductor substrate engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: CrystalGrowth (결정성장)
+#   n6 checks: Epitaxial 6-layer (n=6), SOI bonded (phi=2),
+#              CZ standard for 12-inch (sigma=12), FZ highest purity
+# ============================================================
+
+[[level]]
+name = "CrystalGrowth"
+
+[[candidate]]
+id = "CZ_Czochralski"
+label = "CZ Czochralski (standard pull method, 300mm/12-inch, >90% market share)"
+n6 = 0.80
+perf = 0.80
+power = 0.60
+cost = 0.85
+notes = "produces sigma=12 inch wafers EXACT, dominant industrial method"
+
+[[candidate]]
+id = "FZ_FloatZone"
+label = "FZ Float Zone (no crucible contact, ultra-high purity, high resistivity)"
+n6 = 0.60
+perf = 1.00
+power = 0.50
+cost = 0.40
+notes = "highest purity Si, power device substrate, limited to 200mm"
+
+[[candidate]]
+id = "MCZ_MagneticCZ"
+label = "MCZ Magnetic Czochralski (B-field suppressed convection, low oxygen)"
+n6 = 0.80
+perf = 0.90
+power = 0.55
+cost = 0.70
+notes = "magnetic field controls melt flow, 12-inch compatible=sigma EXACT"
+
+[[candidate]]
+id = "EFG_Ribbon"
+label = "EFG Ribbon (edge-defined film-fed growth, thin Si sheet, low waste)"
+n6 = 0.40
+perf = 0.50
+power = 0.80
+cost = 0.90
+notes = "continuous ribbon, multicrystalline, mainly solar grade"
+
+[[candidate]]
+id = "Epitaxial_6layer"
+label = "Epitaxial 6-layer (n=6 epitaxial Si layers, graded doping, CMOS stack)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.35
+notes = "layers=6=n EXACT, graded epi for advanced CMOS/BiCMOS"
+
+[[candidate]]
+id = "SOI_Bonded"
+label = "SOI bonded (phi=2 wafer bonding, buried oxide, reduced parasitics)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.30
+notes = "bonding=phi=2 wafers EXACT, FD-SOI for low power, Smart Cut"
+
+# ============================================================
+# Level 1: WaferSpec (웨이퍼 사양)
+#   n6 checks: 300mm=12inch=sigma EXACT, 150mm=6inch=n EXACT,
+#              200mm=8inch=sigma-tau, double-side polish=phi=2
+# ============================================================
+
+[[level]]
+name = "WaferSpec"
+
+[[candidate]]
+id = "200mm_8inch"
+label = "200mm 8-inch (sigma-tau=8 inch, mature node, analog/power IC)"
+n6 = 0.80
+perf = 0.70
+power = 0.75
+cost = 0.85
+notes = "diameter=8=sigma-tau EXACT, still >30% of global capacity"
+
+[[candidate]]
+id = "300mm_12inch"
+label = "300mm 12-inch (sigma=12 inch EXACT, leading-edge logic/memory)"
+n6 = 1.00
+perf = 1.00
+power = 0.65
+cost = 0.60
+notes = "diameter=12=sigma EXACT, standard for sub-10nm nodes"
+
+[[candidate]]
+id = "450mm_18inch"
+label = "450mm 18-inch (next-gen, 2.25x die area, consortium R&D)"
+n6 = 0.60
+perf = 0.85
+power = 0.50
+cost = 0.25
+notes = "diameter=18=3*n CLOSE, delayed adoption, cost barrier"
+
+[[candidate]]
+id = "150mm_6inch"
+label = "150mm 6-inch (n=6 inch EXACT, SiC/GaN/MEMS/compound semi)"
+n6 = 1.00
+perf = 0.60
+power = 0.80
+cost = 0.90
+notes = "diameter=6=n EXACT, standard for wide-bandgap semiconductors"
+
+[[candidate]]
+id = "DoubleSidePolish"
+label = "Double-side polished (phi=2 sides, lithography flatness, immersion)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.55
+notes = "polished_sides=2=phi EXACT, required for EUV-grade wafers"
+
+[[candidate]]
+id = "UltraFlat"
+label = "Ultra-flat (<0.1um TTV, GBIR <0.5um, EUV-critical, advanced packaging)"
+n6 = 0.60
+perf = 0.90
+power = 0.75
+cost = 0.40
+notes = "extreme flatness for multi-patterning, bonding yield"
+
+# ============================================================
+# Level 2: Doping (도핑)
+#   n6 checks: Co-doped 6-species (n=6), standard dopants map to
+#              group III (B) and group V (P, As, Sb) periodic positions
+# ============================================================
+
+[[level]]
+name = "Doping"
+
+[[candidate]]
+id = "Boron_p_type"
+label = "Boron p-type (group III, standard CMOS p-well, 10^14-10^18 cm-3)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.90
+notes = "B atomic number 5=sopfr, most common p-type dopant"
+
+[[candidate]]
+id = "Phosphorus_n_type"
+label = "Phosphorus n-type (group V, standard CMOS n-well, diffusion fast)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.90
+notes = "P atomic number 15=sigma+n/phi, standard n-type dopant"
+
+[[candidate]]
+id = "Arsenic_n_plus"
+label = "Arsenic n+ (heavy, low diffusion, shallow junction, source/drain)"
+n6 = 0.60
+perf = 0.90
+power = 0.75
+cost = 0.75
+notes = "As used for precise shallow junctions in advanced nodes"
+
+[[candidate]]
+id = "Antimony_n"
+label = "Antimony n-type (lowest diffusion, buried layer, epitaxial substrate)"
+n6 = 0.60
+perf = 0.80
+power = 0.70
+cost = 0.70
+notes = "Sb minimal autodoping, ideal for epi buried layers"
+
+[[candidate]]
+id = "Intrinsic_undoped"
+label = "Intrinsic undoped (>10K ohm-cm, FZ-grade, detector/sensor substrate)"
+n6 = 0.40
+perf = 0.75
+power = 0.90
+cost = 0.50
+notes = "purest form, for radiation detectors, high-voltage devices"
+
+[[candidate]]
+id = "CoDoped_6species"
+label = "Co-doped 6-species (n=6 dopant elements, graded multi-junction, advanced)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.30
+notes = "species=6=n EXACT, complex doping for tandem/multi-junction devices"
+
+# ============================================================
+# Level 3: SurfaceTreatment (표면처리)
+#   n6 checks: RCA clean 6-step (n=6 EXACT), Gettering 12-cycle (sigma=12),
+#              oxide passivation standard, CMP for planarization
+# ============================================================
+
+[[level]]
+name = "SurfaceTreatment"
+
+[[candidate]]
+id = "RCA_Clean_6step"
+label = "RCA clean 6-step (n=6 steps EXACT, SC1+SC2+HF+rinse, industry standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.80
+notes = "steps=6=n EXACT, removes organic/metallic/oxide contaminants"
+
+[[candidate]]
+id = "CMP_Polish"
+label = "CMP chemical-mechanical polish (planarization, sub-nm roughness)"
+n6 = 0.60
+perf = 0.90
+power = 0.65
+cost = 0.70
+notes = "slurry+pad mechanical removal, critical for multi-layer lithography"
+
+[[candidate]]
+id = "Oxide_Passivation"
+label = "Oxide passivation (SiO2 thermal growth, interface trap density <10^10)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.85
+notes = "SiO2/Si interface quality defines MOSFET performance"
+
+[[candidate]]
+id = "Hydrogen_Terminate"
+label = "Hydrogen-terminated (HF last, hydrophobic, atomically smooth, bonding-ready)"
+n6 = 0.60
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "H-passivated surface stable in air for hours, wafer bonding prep"
+
+[[candidate]]
+id = "Ozone_Clean"
+label = "Ozone clean (UV/O3, dry process, organic removal, green chemistry)"
+n6 = 0.40
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "chemical-free organic removal, environmentally friendly"
+
+[[candidate]]
+id = "Gettering_12cycle"
+label = "Gettering 12-cycle (sigma=12 thermal cycles, metal impurity removal)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.60
+notes = "cycles=12=sigma EXACT, intrinsic+extrinsic gettering, yield boost"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: Logic CPU (core counts often multiples of 6),
+#              DRAM (6F2 cell), Power device, MEMS, Photovoltaic, RF
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Logic_CPU"
+label = "Logic CPU (sub-3nm FinFET/GAA, 12-metal layers=sigma, high performance)"
+n6 = 0.80
+perf = 1.00
+power = 0.60
+cost = 0.40
+notes = "metal_layers=12=sigma EXACT, most demanding wafer specs"
+
+[[candidate]]
+id = "Memory_DRAM"
+label = "Memory DRAM (6F2 cell area=n EXACT, capacitor-over-bitline, high density)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+notes = "cell=6F2=n EXACT, standard DRAM cell architecture"
+
+[[candidate]]
+id = "Power_Device"
+label = "Power device (IGBT/MOSFET, 200mm FZ, high voltage >1200V, EV/grid)"
+n6 = 0.60
+perf = 0.80
+power = 0.85
+cost = 0.75
+notes = "thick wafer, high purity FZ, automotive/industrial power"
+
+[[candidate]]
+id = "MEMS_Sensor"
+label = "MEMS sensor (6-axis IMU=n EXACT, bulk/surface micromachining, IoT)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.80
+notes = "axes=6=n EXACT (3 accel+3 gyro), SOI substrate preferred"
+
+[[candidate]]
+id = "Photovoltaic"
+label = "Photovoltaic (6-inch mono-Si cell, SHJ/TOPCon, >26% efficiency)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.85
+notes = "wafer=6inch=n EXACT (legacy), moving to M10/M12 format"
+
+[[candidate]]
+id = "RF_Analog"
+label = "RF analog (high-resistivity Si, SOI, 5G mmWave, low substrate loss)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "HR-SOI for RF, trap-rich layer, filter/PA integration"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# CZ is standard for 300mm/12-inch wafers
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CZ_Czochralski"
+then_level = 1
+then_ids = "300mm_12inch,DoubleSidePolish"
+
+# FZ pairs with power devices and intrinsic doping
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "FZ_FloatZone"
+then_level = 2
+then_ids = "Intrinsic_undoped,Phosphorus_n_type"
+
+# FZ primarily used for power devices
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "FZ_FloatZone"
+then_level = 4
+then_ids = "Power_Device,RF_Analog"
+
+# SOI bonded pairs with logic CPU and RF
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SOI_Bonded"
+then_level = 4
+then_ids = "Logic_CPU,RF_Analog,MEMS_Sensor"
+
+# Epitaxial 6-layer for advanced CMOS logic
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Epitaxial_6layer"
+then_level = 4
+then_ids = "Logic_CPU,Memory_DRAM"
+
+# EFG ribbon mainly for solar
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "EFG_Ribbon"
+then_level = 4
+then_ids = "Photovoltaic"
+
+# 300mm wafers need CMP and RCA clean
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "300mm_12inch"
+then_level = 3
+then_ids = "CMP_Polish,RCA_Clean_6step"
+
+# 150mm/6-inch pairs with compound semi applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "150mm_6inch"
+then_level = 4
+then_ids = "Power_Device,Photovoltaic"
+
+# DRAM needs specific doping and surface treatment
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Memory_DRAM"
+then_level = 2
+then_ids = "Boron_p_type,Phosphorus_n_type"
+
+# MEMS sensors prefer SOI substrate
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "MEMS_Sensor"
+then_level = 0
+then_ids = "SOI_Bonded,CZ_Czochralski"
