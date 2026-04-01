@@ -448,11 +448,19 @@ note = "궁극의 농업/식량 5단 DSE. BT-27 6CO₂+6H₂O→C₆H₁₂O₆ 
 
 [material-synthesis]
 goal = true
-dse = "wip"
+dse = "done"
 combos = 3600
+valid = 3600
 tool = "tools/material-dse/"
 levels = ["Element", "Process", "Assembler", "Control", "Factory", "Transmute", "Universal", "OMEGA-M"]
 cross_dse = ["chip-architecture", "battery-architecture", "superconductor", "biology"]
+best_pareto = "Carbon_Z6 + SelfAssembly + DNA_origami + QuantumSensing + SelfReplicating (79.60)"
+best_n6 = "E1 + P6 + A3 + C2 + F5 (98.0%)"
+best_perf = "E1 + P4 + A2 + C4 + F5 (perf=0.976)"
+pareto_frontier = 115
+n6_max = 98.0
+n6_avg = 73.6
+note = "궁극의 물질합성 5단 DSE. Carbon Z=6 EXACT + DNA 자기조립 + 양자센싱 + 자기복제. BT-85~88 활용"
 
 # ── Cross-DSE 결과 ────────────────────────────────
 
@@ -806,6 +814,24 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "ECG + Diamond (100.0% n6, score 0.8823)"
 note = "ECG sigma=12 + Diamond HEXA-P — 의료기기×칩 100% n6 EXACT. RealTime+Electrode+ImageAI+PointOfCare"
+
+# ── Biology Cross-DSE (cosmology-particle) ────────────────
+
+[cross-dse.bio-x-cosmo]
+domains = ["biology", "cosmology-particle"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Genomics + PerfNum (97.0% n6, score 0.8516)"
+note = "Genomics+Bioreactor+GeneCircuit+AlphaFold+BioMfg × PerfNum+N6_Gauge+SM_3Gen+Mass_6pi5+Inflation — BT-51 codon chain × BT-49 kissing chain 교차"
+
+# ── Pure Mathematics Cross-DSE ────────────────
+
+[cross-dse.math-x-cosmo]
+domains = ["pure-mathematics", "cosmology-particle"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "LT + PerfNum (93.5% n6, score 0.8630)"
+note = "LT+J₂(6)=24+DIM+LATTICE × PerfNum+N6_Gauge+Mass_6pi5+Inflation — Leech lattice×우주론 최적. ζ(2)=π²/6 + string 10D 연결"
 
 # ── Agriculture Cross-DSE ────────────────
 
