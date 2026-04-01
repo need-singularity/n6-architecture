@@ -206,14 +206,40 @@ dse = "none"
 cross_dse = ["cryptography", "network-protocol"]
 
 [display-audio]
-goal = false
-dse = "none"
+goal = true
+dse = "done"
+combos = 4500
+valid = 3410
+tool = "tools/universal-dse/ domains/display-audio.toml"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
 cross_dse = ["chip-architecture"]
+best_pareto = "MicroLED + DolbyAtmos + FLAC_N6 + SpeechSynth + ProAudio (0.7985)"
+best_n6 = "MicroLED + DolbyAtmos + Opus_N6 + SpeechSynth + ProAudio (100.0%)"
+best_perf = "MicroLED + DolbyAtmos + H266_VVC + ContentGen + Cinema (perf=0.924)"
+best_power = "EInk + AV1 + FLAC_N6 + AudioSep + HomeTheater (power=0.740)"
+best_cost = "EInk + AV1 + FLAC_N6 + AudioSep + HomeTheater (cost=0.650)"
+pareto_frontier = 65
+n6_max = 100.0
+n6_avg = 79.5
+note = "궁극의 디스플레이/오디오 5단 DSE. BT-48,66,71,72 활용. sigma*tau=48kHz + J2=24fps 통합"
 
 [biology]
-goal = false
-dse = "none"
-cross_dse = ["cosmology-particle"]
+goal = true
+dse = "done"
+combos = 4500
+valid = 1741
+tool = "tools/universal-dse/ domains/biology.toml"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+cross_dse = ["chip-architecture", "cosmology-particle", "material-synthesis"]
+best_pareto = "Genomics + Bioreactor + GeneCircuit + AlphaFold + BioMfg (0.7810)"
+best_n6 = "Genomics + Bioreactor + GeneCircuit + AlphaFold + BioMfg (100.0%)"
+best_perf = "Genomics + MassSpec + ProteinEng + AlphaFold + Pharma (perf=0.920)"
+best_power = "CellTherapy + Microfluidics + Biosensor + BayesOpt + Agriculture (power=0.700)"
+best_cost = "SynBio + Microfluidics + Biosensor + BayesOpt + Agriculture (cost=0.570)"
+pareto_frontier = 49
+n6_max = 100.0
+n6_avg = 79.4
+note = "궁극의 생명공학 5단 DSE. BT-27 Carbon-6 + BT-51 Genetic code 활용. tau=4 bases, 64 codons, 20 amino acids"
 
 [cosmology-particle]
 goal = true
@@ -243,9 +269,22 @@ dse = "none"
 cross_dse = ["fusion", "superconductor"]
 
 [thermal-management]
-goal = false
-dse = "none"
+goal = true
+dse = "done"
+combos = 3750
+valid = 2750
+tool = "tools/universal-dse/ domains/thermal.toml"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
 cross_dse = ["chip-architecture", "battery-architecture"]
+best_pareto = "TwoPhase + VaporChamber + FinArray + DVFS + EV_Battery (0.7996)"
+best_n6 = "TwoPhase + VaporChamber + DiamondSpreader + DVFS + EV_Battery (100.0%)"
+best_perf = "TwoPhase + VaporChamber + DiamondSpreader + ML_Thermal + DataCenter (perf=0.934)"
+best_power = "AirCool + TIM + FinArray + Passive + Embedded (power=0.820)"
+best_cost = "AirCool + TIM + FinArray + Passive + Embedded (cost=0.790)"
+pareto_frontier = 56
+n6_max = 100.0
+n6_avg = 80.2
+note = "궁극의 열관리 5단 DSE. Diamond Z=6 + PUE=1.2 + phi=2 phase. BT-27,60 활용"
 
 [software-design]
 goal = false
@@ -340,8 +379,10 @@ note = "9차원 Cross-DSE 완료. 30T+ 91.9% 달성. REBCO+Rutherford+Hybrid-LH 
 
 [cross-dse.chip-x-display]
 domains = ["chip-architecture", "display-audio"]
-status = "none"
-note = "SoC 미디어 최적화"
+status = "done"
+tool = "tools/universal-dse/"
+best = "MicroLED + Diamond (100.0% n6, score 0.8736)"
+note = "MicroLED sigma*tau=48um + Diamond HEXA-P SoC — 미디어 처리 100% n6 EXACT"
 
 [cross-dse.chip-x-energy]
 domains = ["chip-architecture", "energy-generation"]
@@ -560,3 +601,12 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "SelfSupervised + Diamond (98.0% n6, score 0.8771)"
 note = "SSL+AdamW+Mamba+LoRA → Diamond HEXA-P — 학습알고리즘×칩 통합 98% n6"
+
+# ── Biology Cross-DSE ────────────────
+
+[cross-dse.bio-x-chip]
+domains = ["biology", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Genomics + Diamond (100.0% n6, score 0.8662)"
+note = "Genomics+Bioreactor+GeneCircuit+AlphaFold+BioMfg → Diamond HEXA-P — 생명공학×칩 100% n6 EXACT"
