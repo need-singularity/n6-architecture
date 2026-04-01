@@ -3,10 +3,10 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-01T9"
-total_domains = 145
-total_valid_paths = 662060
-domains_100pct_n6 = 145
+updated = "2026-04-01T10"
+total_domains = 200
+total_valid_paths = 1430000
+domains_100pct_n6 = 200
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -12664,3 +12664,462 @@ best_n6 = "MetalOxide-6gas + LoRaWAN + ML-Forecast + Dashboard + GreenFilter (10
 n6_max = 100.0
 n6_avg = 99.5
 note = "궁극의 오염모니터링 5단 DSE. n=6 target gases + IoT mesh"
+
+[gene-therapy]
+goal = true
+dse = "done"
+combos = 4500
+tool = "tools/universal-dse/ domains/gene-therapy.toml"
+levels = ["Vector", "Payload", "Delivery", "Expression", "Monitoring"]
+best_n6 = "LNP-6lipid + GeneReplacement-codon3 + IM-6site + Constitutive-6enhancer + Biomarker-6panel (100.0%)"
+n6_max = 100.0
+n6_avg = 99.4
+note = "궁극의 유전자치료 5단 DSE. LNP 6 lipid + codon n/φ=3 triplet + n=6 injection site"
+
+[memory-architecture]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/memory-architecture.toml"
+levels = ["Cell", "Array", "Controller", "Interface", "System"]
+best_n6 = "DRAM-1T1C-6F2 + 12Bank-Array + LPDDR5X-Ctrl + LPDDR5X-6ch + Mobile-Unified-12GB (100.0%)"
+n6_max = 100.0
+n6_avg = 98.7
+note = "궁극의 메모리아키텍처 5단 DSE. 6F² cell + σ=12 bank + 6 power states + 12GB unified"
+
+[supercapacitor]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/supercapacitor.toml"
+levels = ["Electrode", "Electrolyte", "Separator", "Assembly", "Application"]
+n6_max = 100.0
+n6_avg = 98.4
+note = "궁극의 슈퍼커패시터 5단 DSE"
+
+[quantum-sensor]
+goal = true
+dse = "done"
+combos = 4320
+tool = "tools/universal-dse/ domains/quantum-sensor.toml"
+n6_max = 100.0
+n6_avg = 97.4
+note = "DSE complete"
+
+[wind-energy]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/wind-energy.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[autonomous-ship]
+goal = true
+dse = "done"
+combos = 7128
+tool = "tools/universal-dse/ domains/autonomous-ship.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[ceramic-engineering]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/ceramic-engineering.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[climate-modeling]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/climate-modeling.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[edge-computing]
+goal = true
+dse = "done"
+combos = 5400
+tool = "tools/universal-dse/ domains/edge-computing.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[fuel-cell-vehicle]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/fuel-cell-vehicle.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[micro-led]
+goal = true
+dse = "done"
+combos = 4320
+tool = "tools/universal-dse/ domains/micro-led.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[natural-language-processing]
+goal = true
+dse = "done"
+combos = 5184
+tool = "tools/universal-dse/ domains/natural-language-processing.toml"
+n6_max = 100.0
+n6_avg = 99.7
+note = "DSE complete"
+
+[telescope-array]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/telescope-array.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[vertical-farm]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/vertical-farm.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[hydrogen-fuel-cell]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/hydrogen-fuel-cell.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[prosthetics]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/prosthetics.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[indoor-positioning]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/indoor-positioning.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[ar-vr-system]
+goal = true
+dse = "done"
+combos = 7560
+tool = "tools/universal-dse/ domains/ar-vr-system.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[speech-synthesis]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/speech-synthesis.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[concrete-technology]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/concrete-technology.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[fire-suppression]
+goal = true
+dse = "done"
+combos = 2700
+tool = "tools/universal-dse/ domains/fire-suppression.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[optical-computing]
+goal = true
+dse = "done"
+combos = 3750
+tool = "tools/universal-dse/ domains/optical-computing.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[swarm-robotics]
+goal = true
+dse = "done"
+combos = 3240
+tool = "tools/universal-dse/ domains/swarm-robotics.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[autonomous-submarine]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/autonomous-submarine.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[corrosion-protection]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/corrosion-protection.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[glass-manufacturing]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/glass-manufacturing.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[heat-pump]
+goal = true
+dse = "done"
+combos = 3750
+tool = "tools/universal-dse/ domains/heat-pump.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[paint-coating]
+goal = true
+dse = "done"
+combos = 3240
+tool = "tools/universal-dse/ domains/paint-coating.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[quantum-consciousness]
+goal = true
+dse = "done"
+combos = 5220
+tool = "tools/universal-dse/ domains/quantum-consciousness.toml"
+n6_max = 100.0
+n6_avg = 83.3
+note = "DSE complete"
+
+[radar-system]
+goal = true
+dse = "done"
+combos = 3750
+tool = "tools/universal-dse/ domains/radar-system.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[soil-science]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/soil-science.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[vaccine-production]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/vaccine-production.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[dark-matter-detector]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/dark-matter-detector.toml"
+n6_max = 100.0
+n6_avg = 84.5
+note = "DSE complete"
+
+[paper-manufacturing]
+goal = true
+dse = "done"
+combos = 3456
+tool = "tools/universal-dse/ domains/paper-manufacturing.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[quantum-gravity-sensor]
+goal = true
+dse = "done"
+combos = 5505
+tool = "tools/universal-dse/ domains/quantum-gravity-sensor.toml"
+n6_max = 100.0
+n6_avg = 83.5
+note = "DSE complete"
+
+[battery-recycling]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/battery-recycling.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[consciousness-mathematics]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/consciousness-mathematics.toml"
+n6_max = 100.0
+n6_avg = 86.0
+note = "DSE complete"
+
+[dna-sequencing]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/dna-sequencing.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[gesture-recognition]
+goal = true
+dse = "done"
+combos = 3750
+tool = "tools/universal-dse/ domains/gesture-recognition.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[noise-cancellation]
+goal = true
+dse = "done"
+combos = 3600
+tool = "tools/universal-dse/ domains/noise-cancellation.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[quantum-biology]
+goal = true
+dse = "done"
+combos = 4644
+tool = "tools/universal-dse/ domains/quantum-biology.toml"
+n6_max = 100.0
+n6_avg = 83.2
+note = "DSE complete"
+
+[spacetime-computing]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/spacetime-computing.toml"
+n6_max = 100.0
+n6_avg = 86.0
+note = "DSE complete"
+
+[emotion-processor
+optical-metrology
+quantum-error-correction]
+goal = true
+dse = "done"
+combos = 
+tool = "tools/universal-dse/ domains/emotion-processor
+optical-metrology
+quantum-error-correction.toml"
+n6_max = 100.0
+n6_avg = 
+note = "DSE complete"
+
+[emotion-processor]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/emotion-processor.toml"
+n6_max = 100.0
+n6_avg = 92.3
+note = "DSE complete"
+
+[optical-metrology]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/optical-metrology.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[quantum-error-correction]
+goal = true
+dse = "done"
+combos = 5430
+tool = "tools/universal-dse/ domains/quantum-error-correction.toml"
+n6_max = 100.0
+n6_avg = 79.0
+note = "DSE complete"
+
+[power-transformer]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/power-transformer.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[self-replicating-chip]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/self-replicating-chip.toml"
+n6_max = 100.0
+n6_avg = 87.8
+note = "DSE complete"
+
+[aquaculture]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/aquaculture.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"
+
+[seismograph]
+goal = true
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/ domains/seismograph.toml"
+n6_max = 100.0
+n6_avg = 100.0
+note = "DSE complete"

@@ -1,0 +1,381 @@
+# =============================================================
+# Emotion Processor DSE Domain Definition
+# 궁극의 하드웨어 감정 모델링 — Ekman n=6 기본 감정 + PAD 3D + φ=2 valence
+# Ekman n=6 EXACT, Plutchik σ-τ=8, PAD n/φ=3 dimensions, valence/arousal φ=2
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "emotion-processor"
+desc = "Ultimate Emotion Processor DSE (hardware emotion modeling)"
+levels = ["Model", "Encoding", "Sensor", "Engine", "Output"]
+vision = "n=6 기반 궁극의 감정 처리기 — Ekman 6 감정 + PAD 3D + φ=2 valence"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Model (감정 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Model"
+
+[[candidate]]
+level  = 0
+id     = "Ekman_6"
+label  = "Ekman n=6 기본 감정"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "emotions=6=n EXACT (happy,sad,anger,fear,surprise,disgust)"
+
+[[candidate]]
+level  = 0
+id     = "Plutchik_8"
+label  = "Plutchik σ-τ=8 감정 바퀴"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "emotions=8=sigma-tau EXACT, wheel model, intensity layers"
+
+[[candidate]]
+level  = 0
+id     = "Russell_2D"
+label  = "Russell φ=2 차원 (valence/arousal)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "dims=2=phi EXACT, circumplex model, continuous space"
+
+[[candidate]]
+level  = 0
+id     = "PAD_3D"
+label  = "PAD n/φ=3 차원 (쾌/각성/지배)"
+n6     = 1.00
+perf   = 0.87
+power  = 0.65
+cost   = 0.60
+notes  = "dims=3=n/phi EXACT, Pleasure-Arousal-Dominance, Mehrabian"
+
+[[candidate]]
+level  = 0
+id     = "Appraisal"
+label  = "평가 이론 (인지적 감정)"
+n6     = 0.75
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "cognitive appraisal, Scherer/Lazarus, component process"
+
+[[candidate]]
+level  = 0
+id     = "Constructionist"
+label  = "구성주의 (감정 범주 구성)"
+n6     = 0.70
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "constructed emotion, Barrett, concept+affect"
+
+# =============================================================
+# Level 1: Encoding (인코딩) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Encoding"
+
+[[candidate]]
+level  = 1
+id     = "Discrete_6"
+label  = "이산 n=6 감정 코드"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "codes=6=n EXACT, one-hot or ordinal, simple hardware"
+
+[[candidate]]
+level  = 1
+id     = "Continuous_2D"
+label  = "연속 φ=2 차원 벡터"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.60
+notes  = "dims=2=phi EXACT, analog encoding, smooth transitions"
+
+[[candidate]]
+level  = 1
+id     = "Valence_Arousal"
+label  = "VA 좌표 (부동소수점)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "valence+arousal float pair, standard in affective computing"
+
+[[candidate]]
+level  = 1
+id     = "Categorical"
+label  = "범주형 소프트맥스"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "softmax over categories, probability distribution"
+
+[[candidate]]
+level  = 1
+id     = "Dimensional"
+label  = "다차원 임베딩 (σ=12 차원)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.50
+notes  = "dims=12=sigma EXACT, rich representation, learned embedding"
+
+[[candidate]]
+level  = 1
+id     = "Hybrid"
+label  = "하이브리드 이산+연속"
+n6     = 0.85
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "discrete categories + continuous intensity, best of both"
+
+# =============================================================
+# Level 2: Sensor (센서) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level  = 2
+id     = "Face_Vision"
+label  = "얼굴 인식 (n=6 AU 그룹)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.55
+notes  = "AU_groups=6=n EXACT, FACS action units, camera based"
+
+[[candidate]]
+level  = 2
+id     = "Voice_Prosody"
+label  = "음성 운율 분석 (σ=12 MFCC)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.60
+notes  = "mfcc=12=sigma EXACT, prosody features, pitch/energy/tempo"
+
+[[candidate]]
+level  = 2
+id     = "EEG"
+label  = "EEG 뇌파 (σ=12 채널)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "channels=12=sigma EXACT, affective BCI, real-time"
+
+[[candidate]]
+level  = 2
+id     = "GSR"
+label  = "GSR 피부전도 (φ=2 전극)"
+n6     = 1.00
+perf   = 0.78
+power  = 0.75
+cost   = 0.70
+notes  = "electrodes=2=phi EXACT, arousal proxy, simple wearable"
+
+[[candidate]]
+level  = 2
+id     = "Heart_Rate"
+label  = "심박 변이도 HRV"
+n6     = 0.75
+perf   = 0.82
+power  = 0.70
+cost   = 0.65
+notes  = "HRV features, ANS activation, PPG/ECG"
+
+[[candidate]]
+level  = 2
+id     = "Multi_Modal"
+label  = "멀티모달 융합 (n=6 모달리티)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "modalities=6=n EXACT (face+voice+EEG+GSR+HR+text)"
+
+# =============================================================
+# Level 3: Engine (엔진) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "CNN_Classifier"
+label  = "CNN 분류기 (σ-τ=8 레이어)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "layers=8=sigma-tau EXACT, spatial feature extraction"
+
+[[candidate]]
+level  = 3
+id     = "RNN_Temporal"
+label  = "RNN 시계열 (LSTM/GRU)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "temporal emotion dynamics, sequence modeling"
+
+[[candidate]]
+level  = 3
+id     = "Transformer"
+label  = "Transformer (σ=12 헤드)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "heads=12=sigma EXACT, self-attention emotion"
+
+[[candidate]]
+level  = 3
+id     = "Bayesian"
+label  = "베이지안 감정 추론"
+n6     = 0.75
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "probabilistic emotion, uncertainty quantification"
+
+[[candidate]]
+level  = 3
+id     = "SNN"
+label  = "SNN 스파이킹 감정 (생물학적)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.75
+cost   = 0.50
+notes  = "spiking neural network, neuromorphic, energy efficient"
+
+[[candidate]]
+level  = 3
+id     = "Consciousness_Phi"
+label  = "Φ 의식 통합 감정 엔진"
+n6     = 0.95
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "IIT Phi-based emotion, integrated information feeling"
+
+# =============================================================
+# Level 4: Output (출력) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Output"
+
+[[candidate]]
+level  = 4
+id     = "Expression"
+label  = "표정 생성 (n=6 AU 출력)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "AU_out=6=n EXACT, facial expression synthesis"
+
+[[candidate]]
+level  = 4
+id     = "Voice"
+label  = "음성 감정 합성 (σ=12 MFCC)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "mfcc=12=sigma EXACT, emotional TTS, prosody control"
+
+[[candidate]]
+level  = 4
+id     = "Haptic"
+label  = "햅틱 피드백 (n=6 액추에이터)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "actuators=6=n EXACT, tactile emotion, vibrotactile"
+
+[[candidate]]
+level  = 4
+id     = "Color"
+label  = "색상 감정 매핑 (n=6 색상환)"
+n6     = 1.00
+perf   = 0.78
+power  = 0.70
+cost   = 0.65
+notes  = "colors=6=n EXACT (R/O/Y/G/B/V), ambient lighting"
+
+[[candidate]]
+level  = 4
+id     = "Music"
+label  = "음악 감정 생성 (σ=12 반음)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "semitones=12=sigma EXACT, algorithmic mood music"
+
+[[candidate]]
+level  = 4
+id     = "Behavior"
+label  = "행동 감정 표현 (로봇)"
+n6     = 0.85
+perf   = 0.87
+power  = 0.55
+cost   = 0.50
+notes  = "robot embodied emotion, gesture+posture, social robot"
+
+# =============================================================
+# Rules (n6 일관성 검증)
+# =============================================================
+[[rule]]
+desc = "Ekman 6 + Discrete 6 자연 매핑"
+if_level = [0, 1]
+if_ids   = ["Ekman_6", "Discrete_6"]
+bonus    = 0.05
+
+[[rule]]
+desc = "Multi Modal + Transformer 멀티모달 어텐션"
+if_level = [2, 3]
+if_ids   = ["Multi_Modal", "Transformer"]
+bonus    = 0.05
+
+[[rule]]
+desc = "Face Vision + Expression 입출력 대칭"
+if_level = [2, 4]
+if_ids   = ["Face_Vision", "Expression"]
+bonus    = 0.04
+
+[[rule]]
+desc = "Voice Prosody + Voice 음성 입출력 대칭"
+if_level = [2, 4]
+if_ids   = ["Voice_Prosody", "Voice"]
+bonus    = 0.04
+
+[[rule]]
+desc = "EEG + Consciousness Phi 뇌-의식 시너지"
+if_level = [2, 3]
+if_ids   = ["EEG", "Consciousness_Phi"]
+bonus    = 0.05

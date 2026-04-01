@@ -1,0 +1,329 @@
+# N6 Power Transformer DSE — HV power transformers
+# 6 Core x 6 Winding x 6 Insulation x 6 Cooling x 6 Protection = 7,776 combos
+# n=6: 6 core geometries, sigma=12 winding layers, 3-phase=n/phi
+
+[meta]
+name = "power-transformer"
+desc = "Power Transformer DSE (6 core geometries, sigma=12 winding layers, 3-phase=n/phi)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Core (철심)
+#   n6 checks: 6 core geometries, sigma=12 lamination layers, tau=4 steel grades
+# ============================================================
+
+[[level]]
+name = "Core"
+
+[[candidate]]
+id = "GrainOriented"
+label = "Grain-Oriented Si Steel (6 core limbs max=n, 12 lamination stacks=sigma, 4 GO grades=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "AmorphousMetal"
+label = "Amorphous Metal Core (6 winding windows=n, 12 ribbon layers=sigma, 4 annealing temps=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+id = "NanocrystalCore"
+label = "Nanocrystalline Core (6 crystal orientations=n, 12 nm grain size=sigma, 4 coating types=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+id = "FerriteCeramic"
+label = "Ferrite Ceramic (6 Mn-Zn compositions=n, 12 sintering temps x100C=sigma, 4 geometries=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "ShellType"
+label = "Shell-Type Core (6 surrounding limbs=n, 12 yoke sections=sigma, 3 phase columns=n/phi)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "WoundCore"
+label = "Wound Core (6 strip widths=n, 12 turn layers=sigma, 4 core diameters=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.85
+
+# ============================================================
+# Level 1: Winding (권선)
+#   n6 checks: sigma=12 winding layers, n/phi=3 phase windings, tau=4 tap positions
+# ============================================================
+
+[[level]]
+name = "Winding"
+
+[[candidate]]
+id = "LayerWinding"
+label = "Layer Winding (6 conductor types=n, 12 layers per coil=sigma, 3 phase windings=n/phi)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "DiscWinding"
+label = "Disc Winding (6 disc sections=n, 12 discs per limb=sigma, 4 transposition types=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "HelicalWinding"
+label = "Helical Winding (6 helix layers=n, 12 turns per helix=sigma, 4 conductor sizes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "FoilWinding"
+label = "Foil Winding (6 foil sheets=n, 12 um thickness=sigma, 4 interleaving methods=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+id = "CTC_Conductor"
+label = "CTC Continuously Transposed (6 strand groups=n, 12 sub-conductors=sigma, 24 transpositions=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "HTS_Winding"
+label = "HTS Superconducting (6 tape layers=n, 12K operating temp=sigma, 4 cooling stages=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.40
+
+# ============================================================
+# Level 2: Insulation (절연)
+#   n6 checks: 6 insulation classes, sigma=12 kV/mm strength, tau=4 barrier types
+# ============================================================
+
+[[level]]
+name = "Insulation"
+
+[[candidate]]
+id = "OilPaper"
+label = "Oil-Impregnated Paper (6 paper layers=n, 12 kV/mm strength=sigma, 4 oil types=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "EsterFluid"
+label = "Natural Ester Fluid (6 biodegradable esters=n, 12 kV BDV=sigma, 4 viscosity grades=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "SF6_Gas"
+label = "SF6 Gas Insulation (6 pressure levels=n, 12 bar max=sigma, 4 gas mixtures=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "EpoxyResin"
+label = "Epoxy Resin Cast (6 resin formulations=n, 12 hour cure=sigma, 4 filler types=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+id = "NomexAramid"
+label = "Nomex Aramid Paper (6 thickness grades=n, 12 kV/mm dielectric=sigma, 4 thermal classes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.65
+
+[[candidate]]
+id = "HybridInsul"
+label = "Hybrid Nano-Insulation (6 nanoparticle types=n, 12% loading=sigma, 24 kV class=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.50
+
+# ============================================================
+# Level 3: Cooling (냉각)
+#   n6 checks: 6 cooling modes, sigma=12 radiator banks, tau=4 pump stages
+# ============================================================
+
+[[level]]
+name = "Cooling"
+
+[[candidate]]
+id = "ONAN"
+label = "ONAN Natural Cooling (6 radiator fins=n, 12 oil circulation paths=sigma, 4 temperature zones=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "ONAF"
+label = "ONAF Fan Cooling (6 fan banks=n, 12 fan stages=sigma, 4 temperature thresholds=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "OFAF"
+label = "OFAF Forced Cooling (6 oil pumps=n, 12 radiator groups=sigma, 4 flow control valves=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "ODAF"
+label = "ODAF Directed Cooling (6 directed flow guides=n, 12 oil channels=sigma, 4 winding zones=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "WaterCooled"
+label = "Water-Cooled (6 heat exchangers=n, 12 L/min flow rate=sigma, 4 cooling circuits=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "PhaseCoolant"
+label = "Phase-Change Coolant (6 evaporator zones=n, 12 condenser tubes=sigma, 24h thermal cycle=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+
+# ============================================================
+# Level 4: Protection (보호)
+#   n6 checks: 6 protection relays, sigma=12 alarm zones, tau=4 trip levels
+# ============================================================
+
+[[level]]
+name = "Protection"
+
+[[candidate]]
+id = "BuchholzRelay"
+label = "Buchholz Relay (6 gas detection chambers=n, 12 alarm thresholds=sigma, 4 trip levels=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+id = "DiffProtection"
+label = "Differential Protection (6 CT inputs=n, 12% slope setting=sigma, 4 harmonic restraints=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "DGA_Monitor"
+label = "DGA Online Monitor (6 fault gas types=n, 12 dissolved gases=sigma, 4 detection methods=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "SurgeArrester"
+label = "Surge Arrester (6 energy classes=n, 12 kV MCOV=sigma, 4 discharge current levels=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "TempFiber"
+label = "Fiber Optic Temperature (6 sensing points=n, 12 fiber channels=sigma, 24h continuous=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "AIDigitalTwin"
+label = "AI Digital Twin (6 ML models=n, 12 sensor inputs=sigma, 4 failure prediction modes=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# HTS winding requires water or phase-change cooling
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "HTS_Winding"
+then_level = 3
+then_ids = "WaterCooled,PhaseCoolant"
+
+# Amorphous core pairs best with epoxy resin (dry type)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "AmorphousMetal"
+then_level = 2
+then_ids = "EpoxyResin,NomexAramid"
+
+# Oil-paper insulation needs Buchholz and DGA protection
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "OilPaper"
+then_level = 4
+then_ids = "BuchholzRelay,DGA_Monitor"
+
+# ODAF cooling requires CTC or disc winding for directed flow
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "ODAF"
+then_level = 1
+then_ids = "CTC_Conductor,DiscWinding"

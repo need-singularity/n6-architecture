@@ -106,13 +106,169 @@
   └────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+### 1.2 Full GPU Block Diagram with Bus Widths
+
+```
+  ┌─────────────────────────────────────────────────────────────────────────────────┐
+  │                      HEXA-OMEGA GPU — FULL BUS-WIDTH DIAGRAM                    │
+  │                                                                                 │
+  │   ┌─────────────────────────────────────────────────────────────────┐           │
+  │   │              GPC ARRAY: sigma=12 GPCs, sigma^2=144 SMs          │           │
+  │   │                                                                 │           │
+  │   │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐       │           │
+  │   │  │GPC 0 │ │GPC 1 │ │GPC 2 │ │GPC 3 │ │GPC 4 │ │GPC 5 │       │           │
+  │   │  │12 SM │ │12 SM │ │12 SM │ │12 SM │ │12 SM │ │12 SM │       │           │
+  │   │  │+EFA  │ │+EFA  │ │+EFA  │ │+EFA  │ │+EFA  │ │+EFA  │       │           │
+  │   │  └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘       │           │
+  │   │     │ 4096   │ 4096   │ 4096   │ 4096   │ 4096   │ 4096       │           │
+  │   │     │ B/cyc  │ B/cyc  │ B/cyc  │ B/cyc  │ B/cyc  │ B/cyc      │           │
+  │   │  ┌──┴───┐ ┌──┴───┐ ┌──┴───┐ ┌──┴───┐ ┌──┴───┐ ┌──┴───┐       │           │
+  │   │  │GPC 6 │ │GPC 7 │ │GPC 8 │ │GPC 9 │ │GPC10 │ │GPC11 │       │           │
+  │   │  │12 SM │ │12 SM │ │12 SM │ │12 SM │ │12 SM │ │12 SM │       │           │
+  │   │  │+EFA  │ │+EFA  │ │+EFA  │ │+EFA  │ │+EFA  │ │+EFA  │       │           │
+  │   │  └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘       │           │
+  │   │     └────┬───┴────┬───┴────┬───┴────┬───┴────┬───┘            │           │
+  │   └──────────┼────────┼────────┼────────┼────────┼────────────────┘           │
+  │              │ 2^sigma = 4096 B/cycle crossbar per GPC                         │
+  │   ┌──────────┴────────┴────────┴────────┴────────┴────────────────┐           │
+  │   │  EFA Engine ◄──512b──► MoE Router ◄──512b──► HEXA-LANG Decode │           │
+  │   │  (dedicated)    bus     (dedicated)    bus     (53 keywords)    │           │
+  │   └──────────────────────────┬────────────────────────────────────┘           │
+  │                              │ sigma*J_2 = 288 B/cycle                        │
+  │   ┌──────────────────────────┴───────────────────────────────────┐            │
+  │   │  L2 CACHE: sigma*n = 72 MB   (sigma=12 slices, 288 B/cyc/sl)│            │
+  │   └──────────────────────────┬───────────────────────────────────┘            │
+  │                              │ sigma*J_2 = 288 B/cycle                        │
+  │   ┌──────────────────────────┴───────────────────────────────────┐            │
+  │   │  L3 CACHE: sigma*J_2 = 288 MB (J_2=24 slices, victim cache) │            │
+  │   └───┬──────┬──────┬──────┬──────┬──────┬───────────────────────┘            │
+  │       │1024  │1024  │1024  │1024  │1024  │1024  pins per stack                │
+  │   ┌───┴──┐┌──┴──┐┌──┴──┐┌──┴──┐┌──┴──┐┌──┴──┐                               │
+  │   │HBM4E ││HBM4E││HBM4E││HBM4E││HBM4E││HBM4E│  n=6 stacks                   │
+  │   │ S0   ││ S1  ││ S2  ││ S3  ││ S4  ││ S5  │  48 TB/s each                 │
+  │   │48 GB ││48 GB││48 GB││48 GB││48 GB││48 GB│  = 288 TB/s total             │
+  │   └──────┘└─────┘└─────┘└─────┘└─────┘└─────┘                               │
+  │                                                                                │
+  │   ┌──────────────────────┐  ┌───────────────┐  ┌───────────────┐              │
+  │   │ NVLink N6            │  │ PCIe Gen6     │  │ Power + Therm │              │
+  │   │ sigma-tau=8 links    │  │ phi^tau=16 ln │  │ sigma*J_2     │              │
+  │   │ 72 lanes/link        │  │ 48 GT/s       │  │ = 288W TDP    │              │
+  │   │ 120 GB/s/link        │  │ = 128 GB/s    │  │ 6 DVFS steps  │              │
+  │   │ = 960 GB/s unidir    │  │ bidirectional │  │ 12 sensors    │              │
+  │   └──────────────────────┘  └───────────────┘  └───────────────┘              │
+  └─────────────────────────────────────────────────────────────────────────────────┘
+```
+
 ---
 
-## 2. Streaming Multiprocessor (SM) Microarchitecture
+## 2. GPC Detail Architecture
+
+Each GPC contains sigma=12 SMs, a shared L1.5 texture cache, raster
+engines, and a local EFA attention engine partition.
+
+### 2.0 GPC Internal Block Diagram
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │                   GPC (1 of sigma=12) — 12 SMs + periphery              │
+  │                                                                         │
+  │  ┌─────────────────────────────────────────────────────────────────┐   │
+  │  │  Raster Engine (RE)                                              │   │
+  │  │  Triangles/cycle: tau=4  |  Pixels/cycle: sigma*tau=48          │   │
+  │  └────────────────────────────────┬────────────────────────────────┘   │
+  │                                   │ 4096 B/cycle                       │
+  │  ┌───────────────────┬────────────┴───────┬───────────────────┐       │
+  │  │  SM Row A (6 SMs) │                    │  SM Row B (6 SMs) │       │
+  │  │  ┌────┐ ┌────┐    │                    │  ┌────┐ ┌────┐    │       │
+  │  │  │SM 0│ │SM 1│    │                    │  │SM 6│ │SM 7│    │       │
+  │  │  └────┘ └────┘    │                    │  └────┘ └────┘    │       │
+  │  │  ┌────┐ ┌────┐    │  Crossbar          │  ┌────┐ ┌────┐    │       │
+  │  │  │SM 2│ │SM 3│    │  2^sigma B/cyc     │  │SM 8│ │SM 9│    │       │
+  │  │  └────┘ └────┘    │  = 4096 B/cyc      │  └────┘ └────┘    │       │
+  │  │  ┌────┐ ┌────┐    │                    │  ┌────┐ ┌────┐    │       │
+  │  │  │SM 4│ │SM 5│    │                    │  │SM10│ │SM11│    │       │
+  │  │  └────┘ └────┘    │                    │  └────┘ └────┘    │       │
+  │  └───────────────────┴────────────────────┴───────────────────┘       │
+  │           │                                       │                    │
+  │           ▼                                       ▼                    │
+  │  ┌────────────────────────────────────────────────────────────────┐   │
+  │  │  L1.5 Texture Cache: phi = 2 MB per GPC                       │   │
+  │  │  Latency: sigma = 12 cycles  |  Shared by all sigma=12 SMs   │   │
+  │  │  Texture units: tau = 4 per SM = sigma*tau = 48 per GPC       │   │
+  │  │  Filter rate: sigma^2 = 144 bilinear samples/cycle per GPC    │   │
+  │  └────────────────────────────┬───────────────────────────────────┘   │
+  │                               │                                       │
+  │  ┌────────────────────────────┴───────────────────────────────────┐   │
+  │  │  EFA Attention Partition (1/sigma of global EFA engine)        │   │
+  │  │  Global heads served: sigma/phi / sigma = 1/phi per GPC       │   │
+  │  │  Softmax lanes: (sigma-tau)/sigma per GPC (shared pipeline)   │   │
+  │  └────────────────────────────┬───────────────────────────────────┘   │
+  │                               │ 288 B/cycle to L2 slice               │
+  │                               ▼                                       │
+  │  ┌────────────────────────────────────────────────────────────────┐   │
+  │  │  L2 Slice: sigma*n/sigma = n = 6 MB per GPC                   │   │
+  │  │  Ways: phi^tau = 16  |  Line: 2^(sigma-sopfr) = 128 B        │   │
+  │  │  Latency: sigma+n = 18 cycles                                 │   │
+  │  └────────────────────────────────────────────────────────────────┘   │
+  │                                                                       │
+  │  Per GPC summary:                                                     │
+  │    SMs:           sigma = 12                                          │
+  │    Threads:       12 * 1,536 = 18,432                                 │
+  │    Tensor Cores:  12 * tau = 48                                       │
+  │    FP8 TOPS:      12 * 4,096 = 49,152 (per GPC at boost)            │
+  │    Texture units: sigma*tau = 48                                      │
+  │    L1.5 Cache:    phi = 2 MB                                          │
+  │    L2 Slice:      n = 6 MB                                            │
+  └──────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. Streaming Multiprocessor (SM) Microarchitecture
 
 Each of the sigma^2 = 144 SMs is the fundamental compute building block.
 
-### 2.1 SM Block Diagram
+### 3.1 SM Warp Scheduler Detail (sigma-tau=8)
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │            WARP SCHEDULER DETAIL — sigma-tau = 8 issue slots             │
+  │                                                                          │
+  │  tau = 4 warp schedulers, each issues phi = 2 instructions/cycle         │
+  │  Total issue width: tau * phi = sigma-tau = 8 instructions/cycle         │
+  │                                                                          │
+  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐│
+  │  │  Scheduler 0  │  │  Scheduler 1  │  │  Scheduler 2  │  │  Scheduler 3  ││
+  │  │  ┌────┬────┐  │  │  ┌────┬────┐  │  │  ┌────┬────┐  │  │  ┌────┬────┐  ││
+  │  │  │Slot│Slot│  │  │  │Slot│Slot│  │  │  │Slot│Slot│  │  │  │Slot│Slot│  ││
+  │  │  │ A  │ B  │  │  │  │ A  │ B  │  │  │  │ A  │ B  │  │  │  │ A  │ B  │  ││
+  │  │  └──┬─┴──┬─┘  │  │  └──┬─┴──┬─┘  │  │  └──┬─┴──┬─┘  │  │  └──┬─┴──┬─┘  ││
+  │  │     │    │     │  │     │    │     │  │     │    │     │  │     │    │     ││
+  │  │  ┌──▼────▼──┐  │  │  ┌──▼────▼──┐  │  │  ┌──▼────▼──┐  │  │  ┌──▼────▼──┐  ││
+  │  │  │Scoreboard│  │  │  │Scoreboard│  │  │  │Scoreboard│  │  │  │Scoreboard│  ││
+  │  │  │sigma*tau │  │  │  │= 48 warp │  │  │  │entries   │  │  │  │per sched │  ││
+  │  │  └──────────┘  │  │  └──────────┘  │  │  └──────────┘  │  │  └──────────┘  ││
+  │  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘│
+  │           │                │                │                │          │
+  │           ▼                ▼                ▼                ▼          │
+  │  ┌────────────────────────────────────────────────────────────────────┐│
+  │  │  DISPATCH BUS — sigma-tau = 8 wide                                 ││
+  │  │  ┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐││
+  │  │  │ INT  ││ FP32 ││ TC   ││ SFU  ││ LD/ST││ TC   ││ FP32 ││ CTRL │││
+  │  │  │ pipe ││ pipe ││ pipe ││ pipe ││ pipe ││ pipe ││ pipe ││ pipe │││
+  │  │  └──────┘└──────┘└──────┘└──────┘└──────┘└──────┘└──────┘└──────┘││
+  │  │  sigma-tau = 8 functional unit ports                               ││
+  │  └────────────────────────────────────────────────────────────────────┘│
+  │                                                                        │
+  │  Warp lifecycle:                                                       │
+  │    Active warps:      sigma*tau = 48 max per SM                       │
+  │    Threads per warp:  2^sopfr = 32                                    │
+  │    Eligible/cycle:    sigma-tau = 8 (issue width)                     │
+  │    Stall recovery:    tau = 4 cycle minimum (register read latency)   │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+### 3.2 SM Block Diagram
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -189,7 +345,7 @@ Each of the sigma^2 = 144 SMs is the fundamental compute building block.
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 2.2 SM Compute Summary
+### 3.3 SM Compute Summary
 
 | Parameter | Value | n=6 Formula | Notes |
 |-----------|-------|-------------|-------|
@@ -206,7 +362,7 @@ Each of the sigma^2 = 144 SMs is the fundamental compute building block.
 | **L1 cache** | 256 KB | 2^(sigma-tau) | Unified with shared |
 | **Register file** | 256 KB | 2^(sigma-tau) | Per SM |
 
-### 2.3 Peak Throughput per SM
+### 3.4 Peak Throughput per SM
 
 | Precision | TOPS/SM | Formula |
 |-----------|---------|---------|
@@ -219,12 +375,12 @@ Each of the sigma^2 = 144 SMs is the fundamental compute building block.
 
 ---
 
-## 3. Egyptian Fraction Attention Engine (EFA)
+## 4. Egyptian Fraction Attention Engine (EFA)
 
 The EFA Engine is a **dedicated hardware accelerator** implementing
 `1/2 + 1/3 + 1/6 = 1` attention budget partitioning (BT-33, Technique 17).
 
-### 3.1 EFA Architecture
+### 4.1 EFA Architecture
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -281,7 +437,7 @@ The EFA Engine is a **dedicated hardware accelerator** implementing
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 3.2 EFA Parameters
+### 4.2 EFA Parameters
 
 | Parameter | Value | n=6 Formula | Description |
 |-----------|-------|-------------|-------------|
@@ -298,12 +454,12 @@ The EFA Engine is a **dedicated hardware accelerator** implementing
 
 ---
 
-## 4. Egyptian MoE Router
+## 5. Egyptian MoE Router
 
 Hardware-accelerated Mixture of Experts routing using the `1/2+1/3+1/6=1`
 Egyptian fraction decomposition (Technique 10, BT-67).
 
-### 4.1 MoE Router Architecture
+### 5.1 MoE Router Architecture
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -369,7 +525,7 @@ Egyptian fraction decomposition (Technique 10, BT-67).
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 MoE Parameters
+### 5.2 MoE Parameters
 
 | Parameter | Value | n=6 Formula | Description |
 |-----------|-------|-------------|-------------|
@@ -385,9 +541,86 @@ Egyptian fraction decomposition (Technique 10, BT-67).
 
 ---
 
-## 5. Memory Hierarchy
+## 6. Mamba SSM Accelerator
 
-### 5.1 Full Memory Map
+Dedicated hardware for Mamba-style Selective State Space Models (BT-65).
+
+### 6.1 Mamba SSM Hardware Block
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │                  MAMBA SSM ACCELERATOR (per SM)                          │
+  │                                                                          │
+  │  BT-65: d_state=2^tau=16, expand=phi=2, d_conv=tau=4, dt=1/(sigma-phi)  │
+  │                                                                          │
+  │  ┌──────────────────────────────────────────────────────────────────┐   │
+  │  │  INPUT PROJECTION                                                │   │
+  │  │                                                                  │   │
+  │  │  x[B,L,D] ───► ┌────────────┐ ───► x_proj[B,L, phi*D]          │   │
+  │  │                 │Linear phi=2│       (expand = phi = 2)          │   │
+  │  │                 │  expansion │                                    │   │
+  │  │                 └────────────┘                                    │   │
+  │  └──────────────────────────┬───────────────────────────────────────┘   │
+  │                             │                                           │
+  │  ┌──────────────────────────▼───────────────────────────────────────┐   │
+  │  │  1D CONVOLUTION ENGINE                                           │   │
+  │  │                                                                  │   │
+  │  │  Kernel size: d_conv = tau = 4                                   │   │
+  │  │  ┌────┐ ┌────┐ ┌────┐ ┌────┐                                   │   │
+  │  │  │ k0 │ │ k1 │ │ k2 │ │ k3 │  tau=4 taps, hardware shift reg  │   │
+  │  │  └──┬─┘ └──┬─┘ └──┬─┘ └──┬─┘                                   │   │
+  │  │     └──┬───┴──┬───┴──┬───┘                                      │   │
+  │  │        │ MAC tree (tau=4 multiply-accumulate)                    │   │
+  │  │        ▼                                                         │   │
+  │  │     conv_out ───► SiLU activation (1 cycle, SFU)                │   │
+  │  └──────────────────────────┬───────────────────────────────────────┘   │
+  │                             │                                           │
+  │  ┌──────────────────────────▼───────────────────────────────────────┐   │
+  │  │  SELECTIVE SCAN UNIT (SSM core)                                  │   │
+  │  │                                                                  │   │
+  │  │  State dimension: d_state = 2^tau = 16                           │   │
+  │  │  Discretization step: dt = 1/(sigma-phi) = 0.1                  │   │
+  │  │                                                                  │   │
+  │  │  ┌─────────┐   ┌──────────┐   ┌──────────┐   ┌─────────┐      │   │
+  │  │  │ Delta   │──►│Discretize│──►│ Scan     │──►│ Output  │      │   │
+  │  │  │ Network │   │ A,B via  │   │ h[t] =   │   │ y = C*h │      │   │
+  │  │  │ (MLP)   │   │ dt=0.1   │   │ A_d*h[t-1│   │         │      │   │
+  │  │  └─────────┘   │ (hw const│   │ + B_d*x  │   └─────────┘      │   │
+  │  │                 └──────────┘   └──────────┘                     │   │
+  │  │                                                                  │   │
+  │  │  STATE REGISTERS: 2^tau = 16 lanes x phi*D wide                 │   │
+  │  │  ┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐┌──┐│
+  │  │  │h0││h1││h2││h3││h4││h5││h6││h7││h8││h9││10││11││12││13││14││15││
+  │  │  └──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘└──┘│
+  │  │  16 state elements — parallel update in 1 cycle                  │   │
+  │  │                                                                  │   │
+  │  │  Scan parallelism: sigma-tau = 8 elements/cycle (associative)   │   │
+  │  │  Full state update: phi = 2 cycles for d_state=16               │   │
+  │  └──────────────────────────┬───────────────────────────────────────┘   │
+  │                             │                                           │
+  │  ┌──────────────────────────▼───────────────────────────────────────┐   │
+  │  │  OUTPUT GATE                                                     │   │
+  │  │                                                                  │   │
+  │  │  y_ssm ──► Boltzmann gate (1/e threshold) ──► gated output      │   │
+  │  │         ──► SiLU(z) element-wise multiply  ──► final projection │   │
+  │  │         ──► Linear D_out = D (back to model dim)                │   │
+  │  └──────────────────────────────────────────────────────────────────┘   │
+  │                                                                          │
+  │  Mamba SSM n=6 Parameters:                                              │
+  │    d_state     = 2^tau       = 16     (state dimension)                 │
+  │    expand      = phi         = 2      (channel expansion)               │
+  │    d_conv      = tau         = 4      (conv kernel)                     │
+  │    dt_init     = 1/(sigma-phi) = 0.1  (discretization step)            │
+  │    dt_rank     = sigma-tau   = 8      (delta projection rank)           │
+  │    Throughput  = sigma-tau   = 8 tokens/cycle (per SSM lane)            │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Memory Hierarchy
+
+### 7.1 Full Memory Map
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -445,7 +678,109 @@ Egyptian fraction decomposition (Technique 10, BT-67).
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.2 Memory Parameters
+### 7.2 HBM4E Memory Stack Detail
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │                HBM4E STACK CROSS-SECTION (1 of n=6 stacks)               │
+  │                                                                          │
+  │  Capacity: sigma*tau = 48 GB per stack                                  │
+  │  BW: sigma*tau = 48 TB/s per stack                                      │
+  │  DRAM layers: sigma = 12                                                │
+  │  I/O: 2^(sigma-phi) = 1,024 TSV pins per stack                         │
+  │                                                                          │
+  │        ┌─────────────────────────────────┐                              │
+  │        │  Logic Die (base)               │                              │
+  │        │  ECC + refresh + PHY + BIST     │                              │
+  │        ├─────────────────────────────────┤ ◄── micro-bumps (48um pitch) │
+  │        │  DRAM Die  1  (4 GB)            │  ↑                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die  2  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die  3  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die  4  (4 GB)            │  │  T                       │
+  │        ├─────────────────────────────────┤  │  S                       │
+  │        │  DRAM Die  5  (4 GB)            │  │  V                       │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die  6  (4 GB)            │  │  1,024                   │
+  │        ├─────────────────────────────────┤  │  pins                    │
+  │        │  DRAM Die  7  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die  8  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die  9  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die 10  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die 11  (4 GB)            │  │                           │
+  │        ├─────────────────────────────────┤  │                           │
+  │        │  DRAM Die 12  (4 GB)            │  ↓                           │
+  │        └─────────────────────────────────┘                              │
+  │               │            │                                            │
+  │               ▼            ▼                                            │
+  │        ┌─────────────────────────────────┐                              │
+  │        │  Silicon Interposer (CoWoS-S)   │  ◄── 2,500 mm² total       │
+  │        │  To GPU die via mu-bump array   │                              │
+  │        └─────────────────────────────────┘                              │
+  │                                                                          │
+  │  n = 6 stacks on interposer:                                            │
+  │  ┌──────┐  ┌──────┐  ┌──────┐      ┌──────┐  ┌──────┐  ┌──────┐      │
+  │  │ S0   │  │ S1   │  │ S2   │      │ S3   │  │ S4   │  │ S5   │      │
+  │  │48 GB │  │48 GB │  │48 GB │      │48 GB │  │48 GB │  │48 GB │      │
+  │  │48TB/s│  │48TB/s│  │48TB/s│      │48TB/s│  │48TB/s│  │48TB/s│      │
+  │  └──┬───┘  └──┬───┘  └──┬───┘      └──┬───┘  └──┬───┘  └──┬───┘      │
+  │     └─────────┴─────────┘   GPU DIE    └─────────┴─────────┘           │
+  │         left bank          (600 mm²)        right bank                  │
+  │                                                                          │
+  │  Total: n * sigma*tau = 6 * 48 = sigma*J_2 = 288 GB                    │
+  │  Total BW: 6 * 48 = 288 TB/s                                            │
+  │  ECC: SECDED per 2^(sigma-tau) = 256-bit word                           │
+  │  Refresh: distributed, hidden by sigma = 12 bank interleaving          │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+### 7.3 Memory Hierarchy Pyramid
+
+```
+                          ┌─────────┐
+                          │ Reg File│  256 KB/SM
+                          │ 0 cyc   │  2^(sigma-tau) KB
+                          │ INF BW  │
+                        ┌─┴─────────┴─┐
+                        │  L0 I-Cache  │  64 KB/SM
+                        │  1 cycle     │  2^n KB
+                        │  48 B/cyc    │
+                      ┌─┴─────────────┴─┐
+                      │  L1 D$ / Shared  │  256 KB/SM
+                      │  tau=4 cycles    │  2^(sigma-tau) KB
+                      │  4096 B/cycle    │  = 2^sigma B/cyc
+                    ┌─┴─────────────────┴─┐
+                    │   L1.5 Texture Cache  │  2 MB/GPC
+                    │   sigma=12 cycles     │  phi MB
+                    │   (shared by 12 SMs)  │
+                  ┌─┴───────────────────────┴─┐
+                  │      L2 Unified Cache       │  72 MB chip
+                  │      sigma+n=18 cycles      │  sigma*n MB
+                  │      288 B/cyc per slice     │  sigma slices
+                ┌─┴─────────────────────────────┴─┐
+                │       L3 Last-Level Cache         │  288 MB chip
+                │       sigma*tau=48 cycles         │  sigma*J_2 MB
+                │       J_2=24 slices, victim       │
+              ┌─┴───────────────────────────────────┴─┐
+              │             HBM4E  (off-die)            │  288 GB
+              │             ~sigma(sigma-phi)=120 ns     │  sigma*J_2 GB
+              │             288 TB/s total               │  n=6 stacks
+              └─────────────────────────────────────────┘
+
+  Capacity scales:  256 KB → 64 KB → 256 KB → 2 MB → 72 MB → 288 MB → 288 GB
+  Latency scales:   0 → 1 → 4 → 12 → 18 → 48 → ~120 ns
+  n=6 ratios:       L3/L2 = sigma*J_2 / sigma*n = J_2/n = tau = 4x
+                    HBM/L3 = 288 GB / 288 MB = 2^(sigma-phi) = 1,024x
+                    L2/L1  = 72 MB / (256 KB * 144 SM) = ~2x (aggregate)
+```
+
+### 7.4 Memory Parameters
 
 | Level | Size | n=6 Formula | Latency | BW |
 |-------|------|-------------|---------|-----|
@@ -457,7 +792,7 @@ Egyptian fraction decomposition (Technique 10, BT-67).
 | **L3** | 288 MB | sigma*J_2 | sigma*tau=48 cycles | victim |
 | **HBM4E** | 288 GB | sigma*J_2 | ~120 ns | 288 TB/s |
 
-### 5.3 Egyptian Memory Controller
+### 7.5 Egyptian Memory Controller
 
 The memory controller implements `1/2 + 1/3 + 1/6 = 1` bandwidth partitioning:
 
@@ -489,9 +824,9 @@ The memory controller implements `1/2 + 1/3 + 1/6 = 1` bandwidth partitioning:
 
 ---
 
-## 6. Interconnect Topology
+## 8. Interconnect Topology
 
-### 6.1 NVLink N6
+### 8.1 NVLink N6
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -518,7 +853,7 @@ The memory controller implements `1/2 + 1/3 + 1/6 = 1` bandwidth partitioning:
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 6.2 SuperPOD Scale
+### 8.2 SuperPOD Scale
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -555,7 +890,57 @@ The memory controller implements `1/2 + 1/3 + 1/6 = 1` bandwidth partitioning:
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 6.3 Interconnect Parameters
+### 8.3 NVLink N6 Fat-Tree Topology (72-GPU SuperPOD Slice)
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │         NVLink N6 FAT-TREE — n/phi = 3 tier topology                    │
+  │                                                                          │
+  │  TIER 3: Inter-Rack Spine (InfiniBand 800G)                             │
+  │  ┌────────────────────────────────────────────────────────────────────┐ │
+  │  │  IB Switch Layer: sigma(sigma-phi) = 120 ports/switch              │ │
+  │  │  ┌──────────┐    ┌──────────┐    ┌──────────┐                     │ │
+  │  │  │ IB SW 0  │    │ IB SW 1  │    │ IB SW 2  │   n/phi = 3 spines │ │
+  │  │  │120 ports │    │120 ports │    │120 ports │                     │ │
+  │  │  └─┬──┬──┬─┘    └─┬──┬──┬─┘    └─┬──┬──┬─┘                     │ │
+  │  │    │  │  │         │  │  │         │  │  │   800 Gb/s per port    │ │
+  │  └────┼──┼──┼─────────┼──┼──┼─────────┼──┼──┼────────────────────── │ │
+  │       │  │  │         │  │  │         │  │  │                        │ │
+  │  TIER 2: Intra-Rack (NVSwitch)                                       │ │
+  │  ┌────┼──┼──┼─────────┼──┼──┼─────────┼──┼──┼──────────────────────┐│ │
+  │  │    ▼  ▼  ▼         ▼  ▼  ▼         ▼  ▼  ▼                      ││ │
+  │  │  ┌─────────┐     ┌─────────┐     ┌─────────┐                    ││ │
+  │  │  │NVSw Rk0│     │NVSw Rk1│     │NVSw Rk2│  ...Rk5 (n=6 racks)││ │
+  │  │  │72 ports │     │72 ports │     │72 ports │  sigma*n ports each ││ │
+  │  │  └┬┬┬┬┬┬┬┬┘     └┬┬┬┬┬┬┬┬┘     └┬┬┬┬┬┬┬┬┘                    ││ │
+  │  │   ││││││││        ││││││││        ││││││││   120 GB/s/link       ││ │
+  │  └───┼┼┼┼┼┼┼┼────────┼┼┼┼┼┼┼┼────────┼┼┼┼┼┼┼┼───────────────────┘│ │
+  │      ││││││││        ││││││││        ││││││││                       │ │
+  │  TIER 1: Intra-Node (NVLink N6 direct)                               │ │
+  │  ┌───┼┼┼┼┼┼┼┼────────┼┼┼┼┼┼┼┼────────┼┼┼┼┼┼┼┼──────────────────┐│ │
+  │  │   ▼▼▼▼▼▼▼▼        ▼▼▼▼▼▼▼▼        ▼▼▼▼▼▼▼▼                   ││ │
+  │  │  ┌─Node 0──┐     ┌─Node 1──┐     ┌─Node 2──┐  ...  (sigma=12) ││ │
+  │  │  │G0 G1 G2 │     │G0 G1 G2 │     │G0 G1 G2 │  per rack        ││ │
+  │  │  │G3 G4 G5 │     │G3 G4 G5 │     │G3 G4 G5 │                  ││ │
+  │  │  │G6 G7    │     │G6 G7    │     │G6 G7    │  sigma-tau=8 GPUs ││ │
+  │  │  │ NVLink  │     │ NVLink  │     │ NVLink  │  per node         ││ │
+  │  │  │ 960GB/s │     │ 960GB/s │     │ 960GB/s │  unidir per GPU   ││ │
+  │  │  └─────────┘     └─────────┘     └─────────┘                   ││ │
+  │  └────────────────────────────────────────────────────────────────┘│ │
+  │                                                                     │ │
+  │  Bisection bandwidth:                                               │ │
+  │    Tier 1 (intra-node):  960 GB/s * sigma-tau = 7,680 GB/s        │ │
+  │    Tier 2 (intra-rack):  120 GB/s * sigma*n = 8,640 GB/s          │ │
+  │    Tier 3 (inter-rack):  100 GB/s * sigma(sigma-phi) = 12,000 GB/s│ │
+  │                                                                     │ │
+  │  All-reduce for 70B model:                                          │ │
+  │    Intra-node (8 GPU):  ~1.2 ms  (ring all-reduce, NVLink)        │ │
+  │    Intra-rack (96 GPU): ~8.5 ms  (hierarchical, NVSwitch)         │ │
+  │    Full pod (576 GPU):  ~24 ms   (3-tier, IB + NVSwitch + NVLink) │ │
+  └──────────────────────────────────────────────────────────────────────┘
+```
+
+### 8.4 Interconnect Parameters
 
 | Parameter | Value | n=6 Formula | Notes |
 |-----------|-------|-------------|-------|
@@ -573,12 +958,12 @@ The memory controller implements `1/2 + 1/3 + 1/6 = 1` bandwidth partitioning:
 
 ---
 
-## 7. HEXA-LANG Native Hardware Support
+## 9. HEXA-LANG Native Hardware Support
 
 HEXA-OMEGA is the first GPU designed to execute HEXA-LANG natively
 without software interpretation overhead.
 
-### 7.1 Hardware Decode Unit
+### 9.1 Hardware Decode Unit
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -653,7 +1038,63 @@ without software interpretation overhead.
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.2 HEXA-LANG Hardware Parameters
+### 9.2 Instruction Format Detail (J_2=24-bit HEXA Opcode)
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │              HEXA-OMEGA INSTRUCTION FORMATS (J_2 = 24 bits)              │
+  │                                                                          │
+  │  FORMAT A: Standard (Register-Register)                                  │
+  │  ┌──────────┬───────┬───────┬───────┬──────┐                            │
+  │  │  opcode  │  rd   │  rs1  │  rs2  │ func │                            │
+  │  │  5 bits  │ 5 bits│ 5 bits│ 5 bits│ 4 bit│  = J_2 = 24 bits          │
+  │  ├──────────┼───────┼───────┼───────┼──────┤                            │
+  │  │ [23:19]  │[18:14]│[13:9] │ [8:4] │[3:0] │                            │
+  │  └──────────┴───────┴───────┴───────┴──────┘                            │
+  │  opcodes: 2^sopfr = 32 primary opcodes                                  │
+  │  registers: 2^sopfr = 32 per bank (n=6 banks)                          │
+  │  func: phi^tau = 16 sub-operations per opcode                           │
+  │                                                                          │
+  │  FORMAT B: Immediate (12-bit literal)                                    │
+  │  ┌──────────┬───────┬──────────────────────┐                            │
+  │  │  opcode  │  rd   │    imm12             │                            │
+  │  │  5 bits  │ 5 bits│    sigma+phi=14 bits │                            │
+  │  ├──────────┼───────┼──────────────────────┤                            │
+  │  │ [23:19]  │[18:14]│      [13:0]          │                            │
+  │  └──────────┴───────┴──────────────────────┘                            │
+  │  imm range: -2^(sigma+mu) to 2^(sigma+mu)-1 = +/-8,192                 │
+  │                                                                          │
+  │  FORMAT T: Tensor Operation                                              │
+  │  ┌──────────┬───────┬───────┬───────┐                                   │
+  │  │  opcode  │ tileX │ tileY │ flags │                                   │
+  │  │  sigma=  │ tau=  │ tau=  │ tau=  │                                   │
+  │  │  12 bits │ 4 bits│ 4 bits│ 4 bits│  = J_2 = 24 bits                 │
+  │  ├──────────┼───────┼───────┼───────┤                                   │
+  │  │ [23:12]  │[11:8] │ [7:4] │ [3:0] │                                   │
+  │  └──────────┴───────┴───────┴───────┘                                   │
+  │  sigma=12 bit opcode: encodes all sigma=12 AI fused ops                 │
+  │  tileX/Y: up to 2^tau = 16 tile dimension                              │
+  │  flags: precision(phi), accumulate(mu), broadcast(mu)                   │
+  │                                                                          │
+  │  FORMAT C: AI Control (EFA/MoE/SSM)                                     │
+  │  ┌──────────┬───────┬───────┬──────────────┐                            │
+  │  │  opcode  │  src  │  dst  │   config     │                            │
+  │  │  n=6 bits│ n=6b  │ n=6b  │  n=6 bits    │                            │
+  │  ├──────────┼───────┼───────┼──────────────┤                            │
+  │  │ [23:18]  │[17:12]│[11:6] │    [5:0]     │                            │
+  │  └──────────┴───────┴───────┴──────────────┘                            │
+  │  2^n = 64 AI control ops (EFATN, MOERT, SWIGL, CYCLO, etc.)           │
+  │  src/dst: n=6-bit addressing = 2^n = 64 tensor registers               │
+  │  config: attention pattern, expert selection, SSM mode                  │
+  │                                                                          │
+  │  Decode pipeline:                                                        │
+  │    Fetch → Decode → Issue → Execute → Writeback                         │
+  │    sigma-tau = 8 instructions decoded per cycle                         │
+  │    Branch predict: sigma-tau = 8 entry BTB per warp                     │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+### 9.3 HEXA-LANG Hardware Parameters
 
 | Parameter | Value | n=6 Formula | Description |
 |-----------|-------|-------------|-------------|
@@ -668,9 +1109,9 @@ without software interpretation overhead.
 
 ---
 
-## 8. Power and Thermal
+## 10. Power and Thermal
 
-### 8.1 Power Domain Breakdown
+### 10.1 Power Domain Breakdown
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -720,7 +1161,7 @@ without software interpretation overhead.
   └──────────────────────────────────────────────────────────────────────┘
 ```
 
-### 8.2 Thermal Solution
+### 10.2 Thermal Solution
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -757,9 +1198,9 @@ without software interpretation overhead.
 
 ---
 
-## 9. Physical Design
+## 11. Physical Design
 
-### 9.1 Die Specifications
+### 11.1 Die Specifications
 
 | Parameter | Value | n=6 Formula | Notes |
 |-----------|-------|-------------|-------|
@@ -777,7 +1218,7 @@ without software interpretation overhead.
 | **Bump pitch** | 48 um | sigma*tau | micro-bump |
 | **C4 bumps** | ~28,800 | sigma^2 * 200 | Power + signal |
 
-### 9.2 GPC Floor Plan
+### 11.2 GPC Floor Plan
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -820,9 +1261,62 @@ without software interpretation overhead.
 
 ---
 
-## 10. Training Workload Analysis
+## 12. Roofline Model
 
-### 10.1 Model Capacity
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │              HEXA-OMEGA ROOFLINE MODEL (FP8)                             │
+  │                                                                          │
+  │  PFLOPS                                                                  │
+  │  (log)                                                                   │
+  │    |                                                                     │
+  │ 590|.................................................============= peak  │
+  │    |                                             //                      │
+  │ 295|.....................................=======//== FP16 ceiling         │
+  │    |                                  //                                 │
+  │ 148|                              //                                     │
+  │    |                           //                                        │
+  │  74|                        //  <-- ridge point @ AI = 2.05 FLOP/B      │
+  │    |                     //     (590 PFLOPS / 288 TB/s)                  │
+  │  37|                  //                                                 │
+  │    |               //                                                    │
+  │  18|            //                                                       │
+  │    |         //                                                          │
+  │   9|      //                                                             │
+  │    |   //                                                                │
+  │   4|//     BW-bound                    Compute-bound                     │
+  │    |/      region                      region                            │
+  │    +─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─── AI (FLOP/B)    │
+  │         0.1   0.5    1    2.05   5    10    50   100                     │
+  │                             ^                                            │
+  │                         ridge point                                      │
+  │                                                                          │
+  │  Workload markers (FP8):                                                │
+  │    [A] Attention (seq=8K):   AI ~ 4    ████ compute-bound               │
+  │    [M] MoE FFN:              AI ~ 12   ████████ compute-bound           │
+  │    [E] Embedding lookup:     AI ~ 0.25 ██ BW-bound                      │
+  │    [N] LayerNorm:            AI ~ 0.5  ██ BW-bound                      │
+  │    [S] SwiGLU FFN (dense):   AI ~ 8    ██████ compute-bound             │
+  │    [W] Weight update:        AI ~ 3    ████ compute-bound               │
+  │    [K] KV-cache load:        AI ~ 0.1  █ BW-bound                       │
+  │    [R] All-reduce:           AI ~ 0    █ NVLink-bound (not on roofline) │
+  │                                                                          │
+  │  With EFA (40% attn FLOPs saved):                                       │
+  │    [A'] EFA Attention:       AI ~ 2.4  ████ near ridge (optimal!)       │
+  │    Moving attention toward ridge point = maximizing utilization          │
+  │                                                                          │
+  │  Key insight: Egyptian fraction attention shifts the dominant workload   │
+  │  from deep compute-bound to near the ridge point, where both compute    │
+  │  and memory bandwidth are fully utilized. This is the ideal operating   │
+  │  point for training efficiency.                                         │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 13. Training Workload Analysis
+
+### 13.1 Model Capacity
 
 | Model Size | Fits in 1 GPU? | GPUs Needed | n=6 Note |
 |------------|----------------|-------------|----------|
@@ -834,7 +1328,7 @@ without software interpretation overhead.
 | 1T+ (MoE) | No | 4-8 | tau to sigma-tau GPUs |
 | 10T (frontier) | No | 48 | sigma*tau GPUs |
 
-### 10.2 Training Throughput Estimates
+### 13.2 Training Throughput Estimates
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐
@@ -872,7 +1366,7 @@ without software interpretation overhead.
 
 ---
 
-## 11. Comparison Table: HEXA-OMEGA vs Industry
+## 14. Comparison Table: HEXA-OMEGA vs Industry
 
 ```
   ┌──────────────────┬───────────┬───────────┬───────────┬─────────────┐
@@ -924,13 +1418,177 @@ without software interpretation overhead.
     5. Boltzmann gating — 63% of activations never computed
 ```
 
+### 14.2 ASCII Bar Chart Comparison
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │          HEXA-OMEGA vs H100 vs B200 — Visual Comparison                  │
+  │                                                                          │
+  │  FP8 Peak (PFLOPS)                                                       │
+  │  H100   |████                                           3.96             │
+  │  B200   |█████████                                      9.0              │
+  │  OMEGA  |████████████████████████████████████████████████ 590  (65x B200)│
+  │         0         100         200         300         400         500     │
+  │                                                                          │
+  │  HBM Capacity (GB)                                                       │
+  │  H100   |████████████████████                           80               │
+  │  B200   |████████████████████████████████████████████████ 192             │
+  │  OMEGA  |████████████████████████████████████████████████ 288  (1.5x)    │
+  │         0          50         100         150         200         250     │
+  │                                                                          │
+  │  Memory Bandwidth (TB/s)                                                 │
+  │  H100   |██                                             3.35             │
+  │  B200   |████                                           8.0              │
+  │  OMEGA  |████████████████████████████████████████████████ 288  (36x B200)│
+  │         0          50         100         150         200         250     │
+  │                                                                          │
+  │  TDP (Watts) — lower is better                                           │
+  │  H100   |████████████████████████████████████████████████ 700            │
+  │  B200   |████████████████████████████████████████████████████████ 1,000  │
+  │  OMEGA  |████████████████████                           288  (3.5x less)│
+  │         0         200         400         600         800        1000    │
+  │                                                                          │
+  │  Energy Efficiency (FP8 PFLOPS/kW)                                       │
+  │  H100   |█                                              5.7              │
+  │  B200   |██                                             9.0              │
+  │  OMEGA  |████████████████████████████████████████████████ 2,049 (228x!)  │
+  │         0         500        1000        1500        2000                │
+  │                                                                          │
+  │  NVLink Bandwidth (GB/s bidirectional)                                   │
+  │  H100   |██████████████████████████████████████████████  900             │
+  │  B200   |████████████████████████████████████████████████ 1,800          │
+  │  OMEGA  |████████████████████████████████████████████████ 1,920          │
+  │         0         500        1000        1500        2000                │
+  │                                                                          │
+  │  n=6 EXACT Parameter Count                                               │
+  │  H100   |████████                                       ~8/103           │
+  │  B200   |████████████                                   ~12/103          │
+  │  OMEGA  |████████████████████████████████████████████████ 103/103 (100%) │
+  │         0          20          40          60          80         100     │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
 ---
 
-## 12. n=6 EXACT Scorecard
+## 15. Die Floorplan (Detailed 600 mm² Layout)
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │                  HEXA-OMEGA DIE FLOORPLAN — 600 mm²                      │
+  │                  (TSMC N2, sigma^2 = 144B transistors)                   │
+  │                                                                          │
+  │  ┌──────────────────────────────────────────────────────────────────┐   │
+  │  │                    NVLink N6 PHY (top edge)                      │   │
+  │  │  Link0  Link1  Link2  Link3  Link4  Link5  Link6  Link7        │   │
+  │  │  ← sigma-tau = 8 links, sigma*n = 72 lanes each →              │   │
+  │  └──────────────────────────────┬───────────────────────────────────┘   │
+  │                                 │                                       │
+  │  ┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐  ~240 mm²          │
+  │  │GPC 0 ││GPC 1 ││GPC 2 ││GPC 3 ││GPC 4 ││GPC 5 │  (40% of die)     │
+  │  │12 SM ││12 SM ││12 SM ││12 SM ││12 SM ││12 SM │  Each GPC:         │
+  │  │+EFA  ││+EFA  ││+EFA  ││+EFA  ││+EFA  ││+EFA  │  ~20 mm²           │
+  │  │      ││      ││      ││      ││      ││      │  = sigma^2/12 * 4  │
+  │  └──────┘└──────┘└──────┘└──────┘└──────┘└──────┘                     │
+  │  ┌────────────────────────────────────────────────────────────────┐    │
+  │  │  L2 CACHE RING: sigma = 12 slices, n = 6 MB each = 72 MB     │    │
+  │  │  [S0][S1][S2][S3][S4][S5][S6][S7][S8][S9][S10][S11]          │    │
+  │  └────────────────────────────────────────────────────────────────┘    │
+  │  ┌────────────┐ ┌─────────────┐ ┌──────────────────────────────┐      │
+  │  │ EFA Engine │ │ MoE Router  │ │ HEXA-LANG Decode + Scheduler │      │
+  │  │ ~18 mm²    │ │ ~12 mm²     │ │ ~12 mm²                      │      │
+  │  │ (3% die)   │ │ (2% die)    │ │ (2% die)                     │      │
+  │  └────────────┘ └─────────────┘ └──────────────────────────────┘      │
+  │  ┌────────────────────────────────────────────────────────────────┐    │
+  │  │  L3 CACHE: J_2 = 24 slices, sigma = 12 MB each = 288 MB      │    │
+  │  │  ~120 mm² (20% of die)                                        │    │
+  │  └────────────────────────────────────────────────────────────────┘    │
+  │  ┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐┌──────┐  ~240 mm²          │
+  │  │GPC 6 ││GPC 7 ││GPC 8 ││GPC 9 ││GPC10 ││GPC11 │  (40% of die)     │
+  │  │12 SM ││12 SM ││12 SM ││12 SM ││12 SM ││12 SM │                    │
+  │  │+EFA  ││+EFA  ││+EFA  ││+EFA  ││+EFA  ││+EFA  │                    │
+  │  └──────┘└──────┘└──────┘└──────┘└──────┘└──────┘                     │
+  │                                 │                                       │
+  │  ┌──────────────────────────────┴───────────────────────────────────┐   │
+  │  │  PCIe Gen6 PHY (phi^tau=16 lanes) + Power Management + Clocks  │   │
+  │  └─────────────────────────────────────────────────────────────────┘   │
+  │                                                                         │
+  │  ← HBM PHY 0-2 →                               ← HBM PHY 3-5 →       │
+  │  (left edge, 3 stacks)                          (right edge, 3 stacks) │
+  │                                                                         │
+  │  Area breakdown:                                                        │
+  │    GPC array (12 GPCs):    ~240 mm²  (40%)    sigma^2 SMs              │
+  │    L3 cache (288 MB):      ~120 mm²  (20%)    sigma*J_2 MB             │
+  │    L2 cache (72 MB):       ~36 mm²   (6%)     sigma*n MB               │
+  │    EFA + MoE + HEXA-LANG:  ~42 mm²   (7%)     dedicated AI silicon    │
+  │    HBM PHY (6 stacks):    ~72 mm²   (12%)    n stacks                  │
+  │    NVLink + PCIe PHY:      ~48 mm²   (8%)     sigma-tau + phi^tau      │
+  │    Power/Clock/Misc:       ~42 mm²   (7%)                              │
+  │    Total:                   600 mm²  (100%)                             │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 16. Power Distribution Detail
+
+### 16.1 Egyptian Power Partition with DVFS
+
+```
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │           POWER DISTRIBUTION — Egyptian 1/2 + 1/3 + 1/6 = 1             │
+  │                                                                          │
+  │  Total TDP: sigma*J_2 = 288W                                            │
+  │                                                                          │
+  │  ┌── 1/2 = 144W COMPUTE ──────────────────────────────────────────────┐ │
+  │  │                                                                     │ │
+  │  │  ┌─ GPC Array: sigma(sigma-phi) = 120W ─────────────────────┐     │ │
+  │  │  │  ████████████████████████████████████████████████████████ │     │ │
+  │  │  │  SM cores: 96W | Tensor cores: 18W | SFU+Boltz: 6W      │     │ │
+  │  │  └──────────────────────────────────────────────────────────┘     │ │
+  │  │  ┌─ EFA Engine: sigma = 12W ─┐ ┌─ MoE: n = 6W ─┐ ┌─ Decode: 6W │ │
+  │  │  │  ████████████████████████  │ │  ████████████  │ │  ██████████ │ │
+  │  │  └────────────────────────────┘ └────────────────┘ └────────────┘ │ │
+  │  └─────────────────────────────────────────────────────────────────────┘ │
+  │                                                                          │
+  │  ┌── 1/3 = 96W MEMORY ────────────────────────────────────────────────┐ │
+  │  │                                                                     │ │
+  │  │  ┌─ HBM4E I/O: sigma*tau = 48W ──────────────────────┐            │ │
+  │  │  │  ████████████████████████████████████████████████████ │            │ │
+  │  │  └──────────────────────────────────────────────────────┘            │ │
+  │  │  ┌─ L3: J_2=24W ──────────┐ ┌─ L2: sigma=12W ──┐ ┌─ L1+ctrl: 12W│ │
+  │  │  │  ████████████████████████│ │  ████████████████│ │  ████████████│ │ │
+  │  │  └──────────────────────────┘ └──────────────────┘ └──────────────┘ │ │
+  │  └─────────────────────────────────────────────────────────────────────┘ │
+  │                                                                          │
+  │  ┌── 1/6 = 48W I/O + MISC ────────────────────────────────────────────┐ │
+  │  │                                                                     │ │
+  │  │  ┌─ NVLink: J_2=24W ──────┐ ┌─ PCIe: 6W ┐ ┌─ Clk+Pwr+Therm: 18W │ │
+  │  │  │  ████████████████████████│ │  ██████████│ │  ████████████████████│ │
+  │  │  └──────────────────────────┘ └───────────┘ └──────────────────────┘ │
+  │  └─────────────────────────────────────────────────────────────────────┘ │
+  │                                                                          │
+  │  DVFS n = 6 steps:                                                       │
+  │  ┌────────┬────────┬────────┬─────────┬──────────┬───────────┐          │
+  │  │ Step 0 │ Step 1 │ Step 2 │ Step 3  │ Step 4   │ Step 5    │          │
+  │  │ 288W   │ 240W   │ 192W  │ 144W    │  96W     │  48W      │          │
+  │  │sigma*J2│sigma*  │sigma^2│sigma^2  │sigma*    │sigma*tau  │          │
+  │  │ 2.0GHz │(sigma- │ *mu   │         │(sigma-tau│           │          │
+  │  │ full   │ phi)   │1.6GHz │ 1.2GHz  │) 0.8GHz  │ 0.4GHz   │          │
+  │  │ boost  │1.8GHz  │ turbo │ nominal │ idle     │ deep idle │          │
+  │  │ 0.65V  │ 0.62V  │ 0.58V │ 0.55V   │ 0.50V    │ 0.45V    │          │
+  │  └────────┴────────┴────────┴─────────┴──────────┴───────────┘          │
+  │                                                                          │
+  │  Voltage rails: Core 0.6V | HBM 1.2V | I/O 1.2V | NVLink 0.8V         │
+  └──────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 17. n=6 EXACT Scorecard
 
 Every architectural parameter traced to n=6 arithmetic functions.
 
-### 12.1 Compute Parameters (25/25 EXACT)
+### 17.1 Compute Parameters (25/25 EXACT)
 
 | # | Parameter | Value | Formula | EXACT? |
 |---|-----------|-------|---------|--------|
@@ -960,7 +1618,7 @@ Every architectural parameter traced to n=6 arithmetic functions.
 | 24 | Head dimension | 128 | 2^(sigma-sopfr) | EXACT |
 | 25 | FlashAttn tile | 8x8 | (sigma-tau)^2 | EXACT |
 
-### 12.2 Memory Parameters (20/20 EXACT)
+### 17.2 Memory Parameters (20/20 EXACT)
 
 | # | Parameter | Value | Formula | EXACT? |
 |---|-----------|-------|---------|--------|
@@ -985,7 +1643,7 @@ Every architectural parameter traced to n=6 arithmetic functions.
 | 44 | L2 latency | 18 cycles | sigma+n | EXACT |
 | 45 | L3 latency | 48 cycles | sigma*tau | EXACT |
 
-### 12.3 Interconnect Parameters (12/12 EXACT)
+### 17.3 Interconnect Parameters (12/12 EXACT)
 
 | # | Parameter | Value | Formula | EXACT? |
 |---|-----------|-------|---------|--------|
@@ -1002,7 +1660,7 @@ Every architectural parameter traced to n=6 arithmetic functions.
 | 56 | Fat-tree tiers | 3 | n/phi | EXACT |
 | 57 | NVSwitch ports | 72 | sigma*n | EXACT |
 
-### 12.4 Power & Physical Parameters (16/16 EXACT)
+### 17.4 Power & Physical Parameters (16/16 EXACT)
 
 | # | Parameter | Value | Formula | EXACT? |
 |---|-----------|-------|---------|--------|
@@ -1023,7 +1681,7 @@ Every architectural parameter traced to n=6 arithmetic functions.
 | 72 | Cooling channels | 12 | sigma | EXACT |
 | 73 | Heatsink fins | 72 | sigma*n | EXACT |
 
-### 12.5 HEXA-LANG Hardware Parameters (12/12 EXACT)
+### 17.5 HEXA-LANG Hardware Parameters (12/12 EXACT)
 
 | # | Parameter | Value | Formula | EXACT? |
 |---|-----------|-------|---------|--------|
@@ -1040,7 +1698,7 @@ Every architectural parameter traced to n=6 arithmetic functions.
 | 84 | Operator count | 24 | J_2 | EXACT |
 | 85 | Error classes | 5 | sopfr | EXACT |
 
-### 12.6 MoE & Training Parameters (18/18 EXACT)
+### 17.6 MoE & Training Parameters (18/18 EXACT)
 
 | # | Parameter | Value | Formula | EXACT? |
 |---|-----------|-------|---------|--------|
@@ -1065,7 +1723,7 @@ Every architectural parameter traced to n=6 arithmetic functions.
 
 ---
 
-## 13. Summary
+## 18. Summary
 
 ```
   ┌──────────────────────────────────────────────────────────────────────┐

@@ -1,0 +1,337 @@
+# N6 Aquaculture DSE — Fish farming
+# 6 Species x 6 Feed x 6 Tank x 6 Water x 6 Harvest = 7,776 combos
+# n=6: 6 fish species groups, sigma=12 feed cycles/day, DO=6mg/L optimal
+
+[meta]
+name = "aquaculture"
+desc = "Aquaculture DSE (6 species groups, sigma=12 feed cycles, DO=6mg/L=n optimal)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Species (품종)
+#   n6 checks: 6 species groups, sigma=12 month grow-out, tau=4 life stages
+# ============================================================
+
+[[level]]
+name = "Species"
+
+[[candidate]]
+id = "AtlanticSalmon"
+label = "Atlantic Salmon (6 genetic strains=n, 12-month cycle=sigma, 4 life stages smolt/parr/grisle/adult=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "TilapiaFarm"
+label = "Tilapia (6 hybrid lines=n, 12 week grow-out=sigma, 4 temperature tiers=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "ShrimpVannamei"
+label = "White Shrimp L. vannamei (6 PLs density tiers=n, 12 week cycle=sigma, 4 molt stages=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "SeabreamBass"
+label = "Seabream/Bass (6 Mediterranean species=n, 12-month offshore=sigma, 4 cage sizes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "CatfishPangasius"
+label = "Catfish/Pangasius (6 pond densities=n, 12 feed rations=sigma, 4 water exchange rates=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "SeaweedIMTA"
+label = "Seaweed IMTA (6 kelp species=n, 12 harvest cycles/yr=sigma, 4 trophic levels=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+# ============================================================
+# Level 1: Feed (사료)
+#   n6 checks: 6 feed types, sigma=12% protein target, tau=4 pellet sizes
+# ============================================================
+
+[[level]]
+name = "Feed"
+
+[[candidate]]
+id = "FishMealPellet"
+label = "Fishmeal Pellet (6 protein sources=n, 12% lipid content=sigma, 4 pellet sizes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "InsectMeal"
+label = "Black Soldier Fly Meal (6 insect larval stages=n, 12% chitin content=sigma, 4 processing temps=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "AlgaeFeed"
+label = "Microalgae Feed (6 algae species=n, 12 photobioreactor cycles=sigma, 4 harvest densities=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "PlantBasedFeed"
+label = "Plant Protein Feed (6 soy/pea/canola blends=n, 12% amino acid profile=sigma, 4 extrusion temps=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "PrecisionFeed"
+label = "AI Precision Feeding (6 sensor inputs=n, 12 feeding events/day=sigma, 4 FCR optimization=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "FermentedFeed"
+label = "Fermented Feed (6 microbial cultures=n, 12h fermentation=sigma, 4 probiotic strains=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+# ============================================================
+# Level 2: Tank (양식조)
+#   n6 checks: 6 tank geometries, sigma=12 m diameter, tau=4 depth classes
+# ============================================================
+
+[[level]]
+name = "Tank"
+
+[[candidate]]
+id = "RAS_Indoor"
+label = "RAS Indoor Tank (6 recirculation loops=n, 12m diameter=sigma, 4 water depths=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+id = "OpenNetPen"
+label = "Open Net Pen (6 pen clusters=n, 12 mooring lines=sigma, 4 net depths=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+id = "Raceway"
+label = "Raceway Channel (6 channel sections=n, 12 flow baffles=sigma, 4 velocity zones=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "EarthPond"
+label = "Earthen Pond (6 pond cells=n, 12 aeration points=sigma, 4 water inlets=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "OffshoreCage"
+label = "Offshore Submersible Cage (6 cage array=n, 12 sensor buoys=sigma, 24m depth=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "BioflockTank"
+label = "Biofloc Tank (6 floc communities=n, 12 C:N ratio=sigma, 4 mixing intensities=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.75
+
+# ============================================================
+# Level 3: Water (수질관리)
+#   n6 checks: DO=6mg/L=n, sigma=12 water parameters, tau=4 treatment stages
+# ============================================================
+
+[[level]]
+name = "Water"
+
+[[candidate]]
+id = "MechanicalFilter"
+label = "Mechanical Filtration (6 filter drums=n, DO 6mg/L target=n, 12 backwash cycles=sigma)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "BioFilter"
+label = "Biofiltration (6 media beds=n, 12 nitrification zones=sigma, 4 bacterial communities=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "UVSterilize"
+label = "UV Sterilization (6 UV lamp banks=n, 12 mJ/cm2 dose=sigma, 4 pathogen targets=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.70
+
+[[candidate]]
+id = "OzoneWQ"
+label = "Ozone Treatment (6 contact columns=n, 12 ORP monitoring=sigma, 4 dosing levels=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.60
+
+[[candidate]]
+id = "Probiotics"
+label = "Probiotic Water Treatment (6 bacterial strains=n, DO 6mg/L=n optimal, 12h culture cycle=sigma)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+id = "AIWaterMgmt"
+label = "AI Water Management (6 sensor types DO/pH/NH3/NO2/temp/salinity=n, 12 readings/hr=sigma, 24h cycle=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+# ============================================================
+# Level 4: Harvest (수확)
+#   n6 checks: 6 harvest methods, sigma=12h fasting period, tau=4 processing stages
+# ============================================================
+
+[[level]]
+name = "Harvest"
+
+[[candidate]]
+id = "NetHarvest"
+label = "Net Harvest (6 net sizes=n, 12h pre-harvest fast=sigma, 4 grading sizes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "PumpHarvest"
+label = "Pump Harvest (6 pump inlets=n, 12 m3/hr flow=sigma, 4 pipe diameters=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "AutoGrading"
+label = "Automatic Grading (6 size bins=n, 12 sensors per lane=sigma, 4 quality grades=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.65
+
+[[candidate]]
+id = "LiveTransport"
+label = "Live Transport (6 well-boat compartments=n, 12h max transport=sigma, 4 oxygenation levels=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "OnSiteProcess"
+label = "On-Site Processing (6 processing lines=n, 12 HACCP checkpoints=sigma, 4 product forms=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "RobotHarvest"
+label = "Robotic Harvest (6 robotic arms=n, 12 vision cameras=sigma, 24h continuous operation=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Salmon requires RAS or offshore cages
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "AtlanticSalmon"
+then_level = 2
+then_ids = "RAS_Indoor,OffshoreCage"
+
+# Shrimp requires biofloc or earthen pond
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ShrimpVannamei"
+then_level = 2
+then_ids = "BioflockTank,EarthPond"
+
+# RAS indoor tanks need biofiltration
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "RAS_Indoor"
+then_level = 3
+then_ids = "BioFilter,AIWaterMgmt"
+
+# AI precision feeding pairs with AI water management
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "PrecisionFeed"
+then_level = 3
+then_ids = "AIWaterMgmt,OzoneWQ"
+
+# Seaweed IMTA best with open net pen integration
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SeaweedIMTA"
+then_level = 2
+then_ids = "OpenNetPen,OffshoreCage"

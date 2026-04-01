@@ -1,389 +1,383 @@
-# N6 Quantum Network DSE — Quantum internet / communication
-# 6 PhotonSources × 6 Channels × 6 Repeaters × 6 Protocols × 6 Applications = 7,776 combos
-# n=6 connections: phi=2 entangled pair, n=6 Bell states, sigma=12 multiplexed channels,
-#   tau=4 qubit types, J2=24 time bins, QKD key rate in n6 multiples
+# =============================================================
+# QUANTUM-NETWORK DSE Domain Definition
+# 양자 인터넷 — BB84 τ=4, E91 φ=2, n=6 노드 네트워크
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
 
 [meta]
 name = "quantum-network"
-desc = "Quantum Network DSE — quantum internet from photon source to application (n=6 universality)"
+desc = "Quantum Network/Internet — BB84 tau=4 states, E91 phi=2 Bell pair, n=6 node mesh"
+levels = ["Channel", "Protocol", "Repeater", "Node", "Application"]
+vision = "n=6 양자 인터넷 — BB84 τ=4 상태 + σ=12 파장 WDM + n=6 노드 메시"
 
 [scoring]
-n6 = 0.35
+n6   = 0.35
 perf = 0.25
 power = 0.20
-cost = 0.20
+cost  = 0.20
 
-# ============================================================
-# Level 0: PhotonSource (광자원)
-#   n6 checks: phi=2 entangled pair, n=6 emission modes,
-#              sigma=12 wavelength channels, tau=4 polarization states
-# ============================================================
-
-[[level]]
-name = "PhotonSource"
-
-[[candidate]]
-id = "SPDC_Crystal"
-label = "SPDC crystal (2 entangled photons, 6 phase-matching modes, 12 wavelengths)"
-n6 = 1.00
-perf = 0.75
-power = 0.70
-cost = 0.70
-notes = "pairs=2=phi, modes=6=n, wavelengths=12=sigma ALL EXACT"
-
-[[candidate]]
-id = "QDot_Source"
-label = "Quantum dot source (6 dot array, 12 emission lines, on-demand)"
-n6 = 1.00
-perf = 0.85
-power = 0.80
-cost = 0.45
-notes = "dots=6=n, lines=12=sigma EXACT, deterministic emission"
-
-[[candidate]]
-id = "NV_Diamond"
-label = "NV center diamond (6 NV sites, 4 spin states, 12 spectral lines)"
-n6 = 1.00
-perf = 0.70
-power = 0.65
-cost = 0.35
-notes = "sites=6=n, spins=4=tau, lines=12=sigma ALL EXACT"
-
-[[candidate]]
-id = "AtomicEnsemble"
-label = "Atomic ensemble (6 hyperfine levels, 12 Zeeman substates)"
-n6 = 1.00
-perf = 0.65
-power = 0.55
-cost = 0.40
-notes = "levels=6=n, substates=12=sigma EXACT"
-
-[[candidate]]
-id = "SiPh_Integrated"
-label = "Si photonic integrated source (6 ring resonators, 12 WDM channels)"
-n6 = 1.00
-perf = 0.80
-power = 0.85
-cost = 0.55
-notes = "rings=6=n, WDM=12=sigma EXACT, chip-scale"
-
-[[candidate]]
-id = "Squeezed_Light"
-label = "Squeezed light source (6 dB squeezing, 12 temporal modes, Gaussian)"
-n6 = 0.80
-perf = 0.60
-power = 0.60
-cost = 0.30
-notes = "squeezing=6dB=n, modes=12=sigma EXACT"
-
-# ============================================================
-# Level 1: Channel (채널)
-#   n6 checks: sigma=12 fiber channels, n=6 spatial modes,
-#              tau=4 channel types, 48km metro range=sigma*tau
-# ============================================================
-
+# =============================================================
+# Level 0: Channel (통신 채널) -- 6 candidates
+# =============================================================
 [[level]]
 name = "Channel"
 
 [[candidate]]
-id = "SMF_Fiber"
-label = "Single-mode fiber (12 WDM channels, 48km metro span, 0.2dB/km)"
-n6 = 1.00
-perf = 0.80
-power = 0.85
-cost = 0.80
-notes = "WDM=12=sigma, span=48km=sigma*tau EXACT"
+level  = 0
+id     = "Fiber_Telecom"
+label  = "광섬유 텔레콤 (sigma=12 채널 WDM)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "WDM_channels=12=sigma EXACT, 1550nm telecom band, lowest loss ~0.2dB/km"
 
 [[candidate]]
-id = "MCF_Fiber"
-label = "Multi-core fiber (6 cores, 12 modes/core, 4 cladding layers)"
-n6 = 1.00
-perf = 0.90
-power = 0.80
-cost = 0.50
-notes = "cores=6=n, modes=12=sigma, layers=4=tau ALL EXACT"
+level  = 0
+id     = "Free_Space"
+label  = "자유공간 (phi=2 편광 기저)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "bases=2=phi EXACT, atmospheric channel, line-of-sight, daylight QKD"
 
 [[candidate]]
-id = "Free_Space"
-label = "Free-space optical (6 apertures, 12km range, 4 adaptive optics modes)"
-n6 = 1.00
-perf = 0.70
-power = 0.60
-cost = 0.65
-notes = "apertures=6=n, range=12km=sigma, AO=4=tau ALL EXACT"
+level  = 0
+id     = "Satellite"
+label  = "위성 (n=6 궤도면)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "planes=6=n EXACT, LEO constellation, Micius heritage, global coverage"
 
 [[candidate]]
-id = "Satellite_QKD"
-label = "Satellite QKD link (12 ground stations, 6 orbital planes, LEO)"
-n6 = 1.00
-perf = 0.85
-power = 0.40
-cost = 0.20
-notes = "stations=12=sigma, planes=6=n EXACT, global coverage"
+level  = 0
+id     = "Underwater"
+label  = "수중 (n/phi=3 파장대)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.50
+cost   = 0.40
+notes  = "bands=3=n/phi EXACT (blue/green/UV), submarine QKD, short range"
 
 [[candidate]]
-id = "Underwater_Q"
-label = "Underwater quantum channel (6 wavelengths, 48m depth, blue-green)"
-n6 = 0.80
-perf = 0.40
-power = 0.50
-cost = 0.35
-notes = "wavelengths=6=n, depth=48m=sigma*tau EXACT"
+level  = 0
+id     = "Underground"
+label  = "지하 (tau=4 릴레이 스테이션)"
+n6     = 1.00
+perf   = 0.65
+power  = 0.55
+cost   = 0.45
+notes  = "relays=4=tau EXACT, fiber in tunnel/mine, secure infrastructure"
 
 [[candidate]]
-id = "Hollow_Core"
-label = "Hollow-core fiber (6 anti-resonant tubes, 12 THz bandwidth, low latency)"
-n6 = 1.00
-perf = 0.95
-power = 0.90
-cost = 0.35
-notes = "tubes=6=n, bandwidth=12THz=sigma EXACT, near vacuum speed"
+level  = 0
+id     = "Hybrid"
+label  = "하이브리드 채널 (phi=2 경로 다중화)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "paths=2=phi EXACT, fiber+free-space, redundancy, urban deployment"
 
-# ============================================================
-# Level 2: Repeater (중계기)
-#   n6 checks: n=6 quantum memory slots, sigma=12 Bell measurement stations,
-#              tau=4 purification rounds, J2=24 qubit buffer
-# ============================================================
-
-[[level]]
-name = "Repeater"
-
-[[candidate]]
-id = "FirstGen"
-label = "1st-gen repeater (6 memory qubits, 12 BSM stations, 4 purification rounds)"
-n6 = 1.00
-perf = 0.60
-power = 0.55
-cost = 0.60
-notes = "memory=6=n, BSM=12=sigma, purification=4=tau ALL EXACT"
-
-[[candidate]]
-id = "SecondGen"
-label = "2nd-gen repeater (6 logical qubits, 12 error-correction cycles, QEC)"
-n6 = 1.00
-perf = 0.80
-power = 0.50
-cost = 0.35
-notes = "qubits=6=n, cycles=12=sigma EXACT, fault-tolerant"
-
-[[candidate]]
-id = "ThirdGen"
-label = "3rd-gen repeater (6 quantum gates, 24 qubit buffer, all-photonic)"
-n6 = 1.00
-perf = 0.95
-power = 0.85
-cost = 0.20
-notes = "gates=6=n, buffer=24=J2 EXACT, no quantum memory needed"
-
-[[candidate]]
-id = "TrustedNode"
-label = "Trusted node relay (12 key buffers, 4 authentication layers, classical)"
-n6 = 0.60
-perf = 0.70
-power = 0.75
-cost = 0.85
-notes = "buffers=12=sigma, auth=4=tau EXACT, not fully quantum"
-
-[[candidate]]
-id = "AtomicMemory"
-label = "Atomic memory repeater (6 atomic ensembles, 12 storage modes, 4ms coherence)"
-n6 = 1.00
-perf = 0.75
-power = 0.60
-cost = 0.40
-notes = "ensembles=6=n, modes=12=sigma, coherence=4ms=tau ALL EXACT"
-
-[[candidate]]
-id = "Multiplexed"
-label = "Multiplexed repeater (12 temporal modes, 6 spectral bins, 24 total channels)"
-n6 = 1.00
-perf = 0.85
-power = 0.65
-cost = 0.45
-notes = "temporal=12=sigma, spectral=6=n, total=24=J2 ALL EXACT"
-
-# ============================================================
-# Level 3: Protocol (프로토콜)
-#   n6 checks: phi=2 basis choices (BB84), n=6 decoy states,
-#              sigma=12 key generation rounds, tau=4 protocol phases
-# ============================================================
-
+# =============================================================
+# Level 1: Protocol (양자 프로토콜) -- 6 candidates
+# =============================================================
 [[level]]
 name = "Protocol"
 
 [[candidate]]
-id = "BB84"
-label = "BB84 QKD (2 bases, 4 states, 6 decoy intensities, standard)"
-n6 = 1.00
-perf = 0.70
-power = 0.80
-cost = 0.90
-notes = "bases=2=phi, states=4=tau, decoys=6=n ALL EXACT"
+level  = 1
+id     = "BB84"
+label  = "BB84 (tau=4 상태 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "states=4=tau EXACT, bases=2=phi EXACT, Bennett-Brassard 1984, most deployed"
 
 [[candidate]]
-id = "E91"
-label = "E91 entanglement-based (2 entangled particles, 6 measurement angles)"
-n6 = 1.00
-perf = 0.80
-power = 0.70
-cost = 0.50
-notes = "particles=2=phi, angles=6=n EXACT, Bell inequality verified"
+level  = 1
+id     = "E91"
+label  = "E91 (phi=2 벨 쌍 EXACT)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "Bell_pairs=2 parties=phi EXACT, Ekert 1991, device-independent security"
 
 [[candidate]]
-id = "CV_QKD"
-label = "CV-QKD (continuous variable, 12 modulation levels, 4 homodyne modes)"
-n6 = 0.80
-perf = 0.75
-power = 0.85
-cost = 0.70
-notes = "levels=12=sigma, modes=4=tau EXACT"
+level  = 1
+id     = "MDI_QKD"
+label  = "MDI-QKD (n/phi=3 파티 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "parties=3=n/phi EXACT (Alice+Bob+Charlie), measurement-device-independent"
 
 [[candidate]]
-id = "MDI_QKD"
-label = "MDI-QKD (measurement-device-independent, 6 time bins, 12 detectors)"
-n6 = 1.00
-perf = 0.85
-power = 0.65
-cost = 0.40
-notes = "bins=6=n, detectors=12=sigma EXACT, side-channel immune"
+level  = 1
+id     = "Twin_Field"
+label  = "트윈필드 QKD (sqrt 거리 스케일링)"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "sqrt rate scaling, 600+km achieved, single-photon interference"
 
 [[candidate]]
-id = "TF_QKD"
-label = "Twin-field QKD (2 sources, 6 phase slices, 12 interference patterns)"
-n6 = 1.00
-perf = 0.90
-power = 0.60
-cost = 0.35
-notes = "sources=2=phi, slices=6=n, patterns=12=sigma ALL EXACT"
+level  = 1
+id     = "CV_QKD"
+label  = "연속변수 QKD (phi=2 쿼드러처)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "quadratures=2=phi EXACT, homodyne/heterodyne, standard telecom components"
 
 [[candidate]]
-id = "QDS"
-label = "Quantum digital signature (6 signature bits, 4 verification rounds, 12 recipients)"
-n6 = 1.00
-perf = 0.65
-power = 0.70
-cost = 0.55
-notes = "bits=6=n, rounds=4=tau, recipients=12=sigma ALL EXACT"
+level  = 1
+id     = "Entanglement_Distill"
+label  = "얽힘 증류 (n=6 벨 쌍 배치)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "batch=6=n EXACT, purification, high-fidelity entanglement from noisy pairs"
 
-# ============================================================
-# Level 4: Application (응용)
-#   n6 checks: n=6 network nodes, sigma=12 user endpoints,
-#              tau=4 service tiers, J2=24 secure channels
-# ============================================================
+# =============================================================
+# Level 2: Repeater (양자 중계기) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Repeater"
 
+[[candidate]]
+level  = 2
+id     = "None"
+label  = "중계기 없음 (직접 전송)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.90
+cost   = 0.90
+notes  = "direct transmission, limited to ~100km fiber, simplest deployment"
+
+[[candidate]]
+level  = 2
+id     = "First_Gen"
+label  = "1세대 중계기 (헤럴딩)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "heralded entanglement, quantum memory required, 1000km possible"
+
+[[candidate]]
+level  = 2
+id     = "Second_Gen"
+label  = "2세대 중계기 (QEC 보조)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "error correction enhanced, higher rate, deterministic operation"
+
+[[candidate]]
+level  = 2
+id     = "Third_Gen"
+label  = "3세대 중계기 (완전 QEC, n/phi=3 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "gen=3=n/phi EXACT, full fault-tolerant, loss + error correction, ultimate"
+
+[[candidate]]
+level  = 2
+id     = "All_Photonic"
+label  = "전광 중계기 (GHZ n=6 리소스)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "GHZ_size=6=n EXACT, no quantum memory needed, graph state resource"
+
+[[candidate]]
+level  = 2
+id     = "Quantum_Memory"
+label  = "양자 메모리 중계기 (sigma=12 ms 저장)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "storage=12ms=sigma EXACT, rare earth / atomic ensemble, synchronization"
+
+# =============================================================
+# Level 3: Node (양자 노드) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Node"
+
+[[candidate]]
+level  = 3
+id     = "Trap_Ion"
+label  = "포획 이온 노드 (sigma=12 이온)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "ions=12=sigma EXACT, photon-ion entanglement, QuTech/Oxford"
+
+[[candidate]]
+level  = 3
+id     = "NV_Diamond"
+label  = "NV 다이아몬드 노드 (C Z=6 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "carbon_Z=6=n EXACT, spin-photon interface, room temp memory, Delft"
+
+[[candidate]]
+level  = 3
+id     = "Quantum_Dot"
+label  = "양자점 노드 (phi=2 스핀 EXACT)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "spin=2=phi EXACT, semiconductor, CMOS compatible, photon emission"
+
+[[candidate]]
+level  = 3
+id     = "Cold_Atom"
+label  = "냉각 원자 앙상블 (n=6 에너지 레벨)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.45
+cost   = 0.45
+notes  = "levels=6=n EXACT, DLCZ protocol, collective enhancement"
+
+[[candidate]]
+level  = 3
+id     = "SC_Qubit"
+label  = "초전도 큐비트 노드 (transmon)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.40
+cost   = 0.45
+notes  = "microwave-to-optical conversion needed, highest local gate fidelity"
+
+[[candidate]]
+level  = 3
+id     = "Photonic"
+label  = "광자 프로세싱 노드 (tau=4 모드)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "modes=4=tau EXACT, linear optics, measurement-based, native photonic"
+
+# =============================================================
+# Level 4: Application (응용) -- 6 candidates
+# =============================================================
 [[level]]
 name = "Application"
 
 [[candidate]]
-id = "Metro_QKD"
-label = "Metro QKD network (6 nodes, 12 endpoints, 24 secure links)"
-n6 = 1.00
-perf = 0.75
-power = 0.70
-cost = 0.70
-notes = "nodes=6=n, endpoints=12=sigma, links=24=J2 ALL EXACT"
+level  = 4
+id     = "QKD_Key"
+label  = "양자 키 분배 (sigma-tau=8 비트 블록)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "block=8=sigma-tau EXACT, commercial available, point-to-point"
 
 [[candidate]]
-id = "QCloud"
-label = "Quantum cloud computing (6 QPU access points, 12 user channels)"
-n6 = 1.00
-perf = 0.85
-power = 0.55
-cost = 0.40
-notes = "access=6=n, channels=12=sigma EXACT"
+level  = 4
+id     = "Blind_Quantum"
+label  = "블라인드 양자 컴퓨팅 (위임)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "delegated computation, client privacy, universal blind QC"
 
 [[candidate]]
-id = "QSensor_Net"
-label = "Distributed quantum sensing (6 sensors, 4 entangled groups, 12 measurements)"
-n6 = 1.00
-perf = 0.80
-power = 0.65
-cost = 0.45
-notes = "sensors=6=n, groups=4=tau, measurements=12=sigma ALL EXACT"
+level  = 4
+id     = "Distributed_QC"
+label  = "분산 양자 컴퓨팅 (n=6 노드 클러스터)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "nodes=6=n EXACT, distributed quantum processing, modular scalability"
 
 [[candidate]]
-id = "Blind_QC"
-label = "Blind quantum computing (6 computation rounds, 12 trap qubits, private)"
-n6 = 1.00
-perf = 0.70
-power = 0.60
-cost = 0.35
-notes = "rounds=6=n, traps=12=sigma EXACT, delegated + private"
+level  = 4
+id     = "Clock_Sync"
+label  = "양자 시계 동기화 (sigma=12 자릿수)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "precision=12=sigma EXACT digits, entangled clock network, 10^-18"
 
 [[candidate]]
-id = "Q_Voting"
-label = "Quantum voting (6 voters, 4 ballot phases, 12 verification checks)"
-n6 = 1.00
-perf = 0.55
-power = 0.75
-cost = 0.60
-notes = "voters=6=n, phases=4=tau, checks=12=sigma ALL EXACT"
+level  = 4
+id     = "Sensor_Network"
+label  = "양자 센서 네트워크 (n=6 노드)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "nodes=6=n EXACT, distributed sensing, Heisenberg-limited, multi-parameter"
 
 [[candidate]]
-id = "Q_Internet"
-label = "Full quantum internet (6 backbone nodes, 48 edge nodes, 12 services)"
-n6 = 1.00
-perf = 1.00
-power = 0.45
-cost = 0.15
-notes = "backbone=6=n, edge=48=sigma*tau, services=12=sigma ALL EXACT"
+level  = 4
+id     = "Quantum_Internet"
+label  = "양자 인터넷 (sigma=12 라우터 홉)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.45
+cost   = 0.35
+notes  = "hops=12=sigma EXACT, full quantum internet stack, end-to-end entanglement"
 
-# ============================================================
+# =============================================================
 # Compatibility Rules
-# ============================================================
+# =============================================================
 
-# SPDC crystal is the standard for E91 protocol
+# Satellite channel requires Free_Space compatible protocol (not CV_QKD)
 [[rule]]
-type = "prefer"
-if_level = 0
-if_id = "SPDC_Crystal"
-then_level = 3
-then_ids = "E91,TF_QKD"
-
-# Satellite QKD channel needs trusted node or 2nd-gen repeater
-[[rule]]
-type = "prefer"
-if_level = 1
-if_id = "Satellite_QKD"
-then_level = 2
-then_ids = "TrustedNode,SecondGen"
-
-# Si photonic source pairs with hollow-core fiber
-[[rule]]
-type = "prefer"
-if_level = 0
-if_id = "SiPh_Integrated"
+type       = "exclude"
+if_level   = 0
+if_id      = "Satellite"
 then_level = 1
-then_ids = "Hollow_Core,SMF_Fiber"
+then_ids   = "CV_QKD"
 
-# 3rd-gen repeater pairs with all-photonic sources
+# None repeater incompatible with Distributed_QC (needs multi-hop)
 [[rule]]
-type = "prefer"
-if_level = 2
-if_id = "ThirdGen"
-then_level = 0
-then_ids = "SiPh_Integrated,QDot_Source"
-
-# Full quantum internet needs 2nd or 3rd gen repeaters
-[[rule]]
-type = "prefer"
-if_level = 4
-if_id = "Q_Internet"
-then_level = 2
-then_ids = "SecondGen,ThirdGen"
-
-# Underwater quantum channel pairs with quantum sensing
-[[rule]]
-type = "prefer"
-if_level = 1
-if_id = "Underwater_Q"
+type       = "exclude"
+if_level   = 2
+if_id      = "None"
 then_level = 4
-then_ids = "QSensor_Net"
+then_ids   = "Distributed_QC,Quantum_Internet"
 
-# MDI-QKD protocol works best with multi-core fiber
+# All_Photonic repeater requires Photonic node
 [[rule]]
-type = "prefer"
-if_level = 3
-if_id = "MDI_QKD"
-then_level = 1
-then_ids = "MCF_Fiber,Hollow_Core"
+type       = "require"
+if_level   = 2
+if_id      = "All_Photonic"
+then_level = 3
+then_ids   = "Photonic,Quantum_Dot"
+
+# Underwater channel requires short-range protocols
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Underwater"
+then_level = 2
+then_ids   = "None,First_Gen"
