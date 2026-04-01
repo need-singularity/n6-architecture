@@ -123,6 +123,15 @@ KNOWN_IDENTITIES = [
         "desc": "sigma(n) = 2*n  (definition of perfect number)",
         "fn":   lambda n, T: T['sigma'][n] == 2 * n,
     },
+    {
+        "id":   11,
+        "name": "sopfr(phi(n)) = omega(n)  (composition identity)",
+        "desc": "sopfr(phi(n)) = omega(n)  -- unique composition, verified to 50,000",
+        "fn":   lambda n, T: (
+            T['phi'][n] >= 2 and T['phi'][n] < len(T['sopfr']) and
+            T['sopfr'][T['phi'][n]] == T['omega'][n]
+        ),
+    },
 ]
 
 
