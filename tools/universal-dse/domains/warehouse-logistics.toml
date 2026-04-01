@@ -1,0 +1,345 @@
+# Warehouse Logistics DSE — Automated warehousing architecture
+# n=6: 6-axis robot, sigma=12 conveyor zones, hexagonal bin layout
+
+[meta]
+name = "warehouse-logistics"
+desc = "Automated Warehouse DSE (6-axis robot, sigma=12 zones, hex bins)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Storage — Inventory holding
+# ============================================================
+
+[[level]]
+name = "Storage"
+
+[[candidate]]
+level = 0
+id = "HexBin-6face"
+label = "Hexagonal bin n=6 face honeycomb racking"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "AS-RS-12level"
+label = "AS/RS sigma=12 level automated storage"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Shuttle-6aisle"
+label = "Shuttle system n=6 aisle (multi-deep)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Carousel-6pod"
+label = "Vertical carousel n=6 pod cluster"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "AMR-Fleet-12"
+label = "AMR fleet sigma=12 mobile shelves"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Cube-6x6x6"
+label = "Cube storage 6x6x6=216 bins (n^3=216)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.55
+
+# ============================================================
+# Level 1: Retrieval — Picking systems
+# ============================================================
+
+[[level]]
+name = "Retrieval"
+
+[[candidate]]
+level = 1
+id = "Robot-6axis"
+label = "6-axis robot arm (n=6 DOF, 12=sigma picks/min)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "GTP-6station"
+label = "Goods-to-person n=6 pick station"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "PickWall-12slot"
+label = "Pick-to-light wall sigma=12 slot zones"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "AGV-Guided"
+label = "AGV guided retrieval (tau=4 wheel drive, 6 routes)"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "VisionPick-6cam"
+label = "Vision-guided picking n=6 camera array"
+n6 = 1.00
+perf = 0.92
+power = 0.68
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "HumanAssist-6zone"
+label = "Human-assisted n=6 zone batch picking"
+n6 = 1.00
+perf = 0.70
+power = 0.95
+cost = 0.85
+
+# ============================================================
+# Level 2: Sorting — Classification & routing
+# ============================================================
+
+[[level]]
+name = "Sorting"
+
+[[candidate]]
+level = 2
+id = "CrossBelt-12dest"
+label = "Cross-belt sorter sigma=12 destinations"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "TiltTray-6lane"
+label = "Tilt-tray sorter n=6 lane output"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "BombayDrop-12chute"
+label = "Bombay drop sigma=12 chute (gravity-fed)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "RobotSort-6arm"
+label = "Robot sort n=6 arm parallel (delta robots)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "SlidingShoe-12way"
+label = "Sliding shoe sigma=12 way divert"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "AI-Vision-Sort"
+label = "AI vision sorting (6=n class categories, 12=sigma items/sec)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.30
+
+# ============================================================
+# Level 3: Packing — Order assembly
+# ============================================================
+
+[[level]]
+name = "Packing"
+
+[[candidate]]
+level = 3
+id = "AutoBox-6size"
+label = "Auto-boxing n=6 box size templates"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "RoboPack-6axis"
+label = "Robotic packing n=6 axis palletizer"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "FitToSize"
+label = "Fit-to-size packaging (sigma=12 carton variants)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Manual-6station"
+label = "Manual pack n=6 station (ergonomic layout)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "Pouch-Auto"
+label = "Auto-pouch system (6=n pouch sizes, 48=sigma*tau/hr)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Hybrid-6cell"
+label = "Hybrid pack cell n=6 robot+human collaborative"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+
+# ============================================================
+# Level 4: Shipping — Dispatch & delivery
+# ============================================================
+
+[[level]]
+name = "Shipping"
+
+[[candidate]]
+level = 4
+id = "SortWall-12dock"
+label = "Sort wall sigma=12 loading dock"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "CrossDock-6bay"
+label = "Cross-dock n=6 bay (zero-inventory transfer)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "LastMile-6route"
+label = "Last-mile n=6 route optimization (delivery fleet)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "AutoLoad-6truck"
+label = "Auto-loading n=6 truck/trailer bays"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Drone-12unit"
+label = "Drone fleet sigma=12 unit last-mile"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "Conveyor-6merge"
+label = "Conveyor merge n=6 lane to shipping"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.75
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Cube storage requires robotic retrieval
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Cube-6x6x6"
+then_level = 1
+then_ids = ["Robot-6axis", "VisionPick-6cam"]
+
+# Human-assisted picking incompatible with drone shipping
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "HumanAssist-6zone"
+then_level = 4
+then_ids = ["Drone-12unit"]
+
+# Manual packing only with sort wall or conveyor shipping
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Manual-6station"
+then_level = 4
+then_ids = ["SortWall-12dock", "Conveyor-6merge"]

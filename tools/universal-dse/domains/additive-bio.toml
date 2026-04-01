@@ -1,0 +1,361 @@
+# Additive Bio DSE — Bioprinting & tissue engineering architecture
+# n=6: 6 tissue layers (skin), Carbon Z=6 scaffold, sigma=12 growth factors
+
+[meta]
+name = "additive-bio"
+desc = "Bioprinting & Tissue Engineering DSE (6 layers, C Z=6, sigma=12 GF)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: BioInk — Printable biomaterial
+# ============================================================
+
+[[level]]
+name = "BioInk"
+
+[[candidate]]
+level = 0
+id = "Collagen-6type"
+label = "Collagen n=6 type blend (type I-VI, C=Z=6 backbone)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "GelMA-6pct"
+label = "GelMA n=6% concentration (photo-crosslink, C=Z=6 methacrylate)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "Alginate-12mM"
+label = "Alginate sigma=12 mM CaCl2 crosslink (seaweed-derived)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Fibrin-6mg"
+label = "Fibrinogen n=6 mg/mL (native ECM, rapid gelation)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Silk-6kDa"
+label = "Silk fibroin n=6 repeat unit (beta-sheet, high strength)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "dECM-6tissue"
+label = "Decellularized ECM n=6 tissue source (organ-specific)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.30
+
+# ============================================================
+# Level 1: Printer — Deposition system
+# ============================================================
+
+[[level]]
+name = "Printer"
+
+[[candidate]]
+level = 1
+id = "Extrusion-6nozzle"
+label = "Extrusion bioprinter n=6 nozzle (multi-material)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Inkjet-12pL"
+label = "Inkjet bioprinter sigma=12 pL droplet (high resolution)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "LIFT-6pulse"
+label = "Laser-induced forward transfer n=6 pulse mode"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "DLP-6layer"
+label = "DLP stereolithography n=6 um layer (photo-crosslink)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Volumetric-12sec"
+label = "Volumetric bioprinter sigma=12 sec print (tomographic)"
+n6 = 1.00
+perf = 0.95
+power = 0.72
+cost = 0.25
+
+[[candidate]]
+level = 1
+id = "Electrospray-6kV"
+label = "Electrospray n=6 kV (cell-laden fiber, high viability)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.55
+
+# ============================================================
+# Level 2: Scaffold — Structural support
+# ============================================================
+
+[[level]]
+name = "Scaffold"
+
+[[candidate]]
+level = 2
+id = "PCL-6month"
+label = "PCL scaffold n=6 month degradation (C=Z=6 polymer)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "PLGA-6ratio"
+label = "PLGA n=6:4 ratio (tunable C=Z=6 degradation)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "HA-Ceramic-6pore"
+label = "Hydroxyapatite ceramic n=6 pore size category (bone)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Graphene-C6"
+label = "Graphene scaffold (C=Z=6, hexagonal n=6 ring, conductive)"
+n6 = 1.00
+perf = 0.92
+power = 0.75
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "Hydrogel-12kPa"
+label = "PEG hydrogel sigma=12 kPa stiffness (tunable ECM mimic)"
+n6 = 1.00
+perf = 0.86
+power = 0.88
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Decellular-6organ"
+label = "Decellularized organ scaffold n=6 type (native architecture)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.25
+
+# ============================================================
+# Level 3: Maturation — Bioreactor & conditioning
+# ============================================================
+
+[[level]]
+name = "Maturation"
+
+[[candidate]]
+level = 3
+id = "Perfusion-6day"
+label = "Perfusion bioreactor n=6 day initial maturation"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Mechanical-12cycle"
+label = "Mechanical stimulation sigma=12 cycle/min (tissue conditioning)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Electrical-6V"
+label = "Electrical stimulation n=6 V/cm (cardiac/neural pacing)"
+n6 = 1.00
+perf = 0.92
+power = 0.72
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "GrowthFactor-12"
+label = "Growth factor cocktail sigma=12 factors (differentiation)"
+n6 = 1.00
+perf = 0.95
+power = 0.68
+cost = 0.30
+
+[[candidate]]
+level = 3
+id = "Hypoxia-6pct"
+label = "Hypoxia chamber n=6% O2 (stem cell niche mimic)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "CocultureSix"
+label = "Co-culture n=6 cell type (organoid complexity)"
+n6 = 1.00
+perf = 0.93
+power = 0.65
+cost = 0.35
+
+# ============================================================
+# Level 4: Implant — Clinical application
+# ============================================================
+
+[[level]]
+name = "Implant"
+
+[[candidate]]
+level = 4
+id = "Skin-6layer"
+label = "Skin graft n=6 layer (epidermis to hypodermis)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Cartilage-12mm"
+label = "Cartilage implant sigma=12 mm diameter (knee/joint)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Bone-6cm"
+label = "Bone graft n=6 cm segment (critical defect)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Vascular-6mm"
+label = "Vascular graft n=6 mm diameter (bypass, TEBV)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Organoid-6type"
+label = "Organoid model n=6 type (liver/kidney/brain/lung/heart/gut)"
+n6 = 1.00
+perf = 0.95
+power = 0.78
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Neural-12ch"
+label = "Neural interface sigma=12 channel (bioelectric implant)"
+n6 = 1.00
+perf = 0.93
+power = 0.65
+cost = 0.25
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Graphene scaffold requires electrical stimulation maturation
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Graphene-C6"
+then_level = 3
+then_ids = ["Electrical-6V", "Mechanical-12cycle"]
+
+# dECM bioink pairs with decellularized scaffold
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "dECM-6tissue"
+then_level = 2
+then_ids = ["Decellular-6organ", "Hydrogel-12kPa"]
+
+# Volumetric printer needs photo-crosslinkable inks
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Volumetric-12sec"
+then_level = 0
+then_ids = ["GelMA-6pct", "Silk-6kDa"]
+
+# Neural implant requires electrical stimulation
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Neural-12ch"
+then_level = 3
+then_ids = ["Electrical-6V"]
+
+# HA ceramic scaffold only for bone implants
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "HA-Ceramic-6pore"
+then_level = 4
+then_ids = ["Bone-6cm"]

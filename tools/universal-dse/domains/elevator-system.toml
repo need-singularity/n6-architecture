@@ -1,0 +1,357 @@
+# =============================================================
+# Elevator System DSE Domain Definition
+# Vertical transport — motor to building integration
+# n=6: 6 passengers standard, σ=12 floors/zone, τ=4 door phases
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "elevator-system"
+desc = "Vertical Transport Architecture DSE (motor/cable/control/safety/building)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Motor (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Motor"
+
+[[candidate]]
+level = 0
+id = "Gearless-PM"
+label = "Gearless PM Motor (permanent magnet, 6-pole pairs, energy efficient)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Geared-AC"
+label = "Geared AC Induction (worm gear, 6:1 ratio, low-rise)"
+n6 = 1.00
+perf = 0.65
+power = 0.60
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Linear-Motor"
+label = "Linear Motor (ropeless, σ=12 coil segments, multi-cab)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "Hydraulic"
+label = "Hydraulic Drive (piston, τ=4 stage cylinder, low-rise)"
+n6 = 0.85
+perf = 0.55
+power = 0.45
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Regen-PMSM"
+label = "Regenerative PMSM (energy recovery, n=6 phase, green)"
+n6 = 1.00
+perf = 0.88
+power = 0.95
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Disc-Motor"
+label = "Disc/Axial Flux Motor (compact, 12-slot=σ stator, machine-room-less)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.60
+
+# ============================================================
+# Level 1: Cable (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Cable"
+
+[[candidate]]
+level = 1
+id = "Steel-Wire-6"
+label = "Steel Wire Rope (6-strand standard, n=6 core, proven)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "Carbon-Belt"
+label = "Carbon Fiber Belt (lightweight, 12x=σ longer life, KONE UltraRope)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Aramid-Rope"
+label = "Aramid Coated Rope (high strength, 6 strand braided)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Chain-Drive"
+label = "Chain Drive (roller, 6-link pitch, freight elevators)"
+n6 = 1.00
+perf = 0.60
+power = 0.55
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Ropeless-Mag"
+label = "Ropeless Magnetic (linear guide, no cable, σ=12 segments)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.20
+
+[[candidate]]
+level = 1
+id = "Hybrid-Steel-Poly"
+label = "Hybrid Steel-Polymer (composite, φ=2 material layers, balanced)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+# ============================================================
+# Level 2: Control (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 2
+id = "Simplex"
+label = "Simplex Control (single car, 6-floor zone, basic)"
+n6 = 1.00
+perf = 0.50
+power = 0.80
+cost = 0.95
+
+[[candidate]]
+level = 2
+id = "Group-6car"
+label = "Group Control n=6 Cars (dispatching, σ=12 floor zone)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "AI-Predictive"
+label = "AI Predictive (traffic learning, 6 traffic patterns, smart)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Destination-Dispatch"
+label = "Destination Dispatch (hall selection, τ=4 phase grouping)"
+n6 = 0.85
+perf = 0.90
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "IoT-Connected"
+label = "IoT Cloud Connected (remote monitoring, σ=12 sensor feeds)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "DualDeck"
+label = "Double Deck Control (φ=2 cabs, 12=σ stops/cycle, high-rise)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.35
+
+# ============================================================
+# Level 3: Safety (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Safety"
+
+[[candidate]]
+level = 3
+id = "Mechanical-Brake"
+label = "Mechanical Safety Brake (fail-safe, 6 spring pack, standard)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "Progressive-Gov"
+label = "Progressive Safety Gear (governor, τ=4 decel phases, smooth)"
+n6 = 0.85
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Mag-Eddy-Brake"
+label = "Magnetic Eddy Brake (contactless, σ=12 pole pairs, no wear)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Rope-Brake"
+label = "Rope Gripper Brake (n=6 grip points, overspeed protection)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Buffer-Absorber"
+label = "Pit Buffer/Absorber (hydraulic, 6-stage energy absorption)"
+n6 = 1.00
+perf = 0.75
+power = 0.88
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Full-Digital-SIL3"
+label = "Full Digital SIL-3 (redundant CPU, n=6 safety loops, EN81)"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.40
+
+# ============================================================
+# Level 4: Building (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Building"
+
+[[candidate]]
+level = 4
+id = "LowRise-6"
+label = "Low-Rise n=6 Floors (residential, single car, basic)"
+n6 = 1.00
+perf = 0.55
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+level = 4
+id = "MidRise-12"
+label = "Mid-Rise σ=12 Floors (commercial, 2-car group, standard)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "HighRise-48"
+label = "High-Rise σ·τ=48 Floors (sky lobby, express+local zones)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "SuperTall-96"
+label = "Supertall σ(σ-τ)=96 Floors (double deck, 6 sky lobbies)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.25
+
+[[candidate]]
+level = 4
+id = "Hospital"
+label = "Hospital/Medical (bed-size, 6 priority levels, EN81-76)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Freight"
+label = "Freight/Industrial (heavy load, 6-ton capacity, wide door)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.70
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Hydraulic only for low-rise buildings
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Hydraulic"
+then_level = 4
+then_ids = ["LowRise-6", "Freight"]
+
+# Linear motor requires ropeless magnetic
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Linear-Motor"
+then_level = 1
+then_ids = ["Ropeless-Mag"]
+
+# Double deck control requires high-rise or supertall
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "DualDeck"
+then_level = 4
+then_ids = ["HighRise-48", "SuperTall-96"]
+
+# Chain drive only for freight
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Chain-Drive"
+then_level = 4
+then_ids = ["Freight"]
