@@ -316,6 +316,7 @@ Contributions welcome:
 | `tools/gpu-arch-calc/` | GPU/HBM architecture verification |
 | `tools/energy-calc/` | Solar/battery/hydrogen verification |
 | `tools/gut-calc-rust/` | GUT parameter brute-force search |
+| `tools/dse-calc/` | 소재×공정×코어×칩×시스템 DSE 전수 조합 탐색 + Pareto frontier |
 
 ---
 
