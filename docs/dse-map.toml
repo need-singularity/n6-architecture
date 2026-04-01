@@ -240,9 +240,22 @@ dse = "none"
 cross_dse = ["compiler-os"]
 
 [learning-algorithm]
-goal = false
-dse = "none"
+goal = true
+dse = "done"
+combos = 5400
+valid = 4059
+tool = "tools/universal-dse/ domains/learning-algorithm.toml"
+levels = ["Foundation", "Optimizer", "ArchCore", "EffEngine", "DeploySystem"]
 cross_dse = ["chip-architecture", "robotics"]
+best_pareto = "SelfSupervised + AdamW_BT54 + MambaSSM + LoRA_N6 + OnDevice (0.8200)"
+best_n6 = "SelfSupervised + AdamW_BT54 + MambaSSM + LoRA_N6 + OnDevice (96.0%)"
+best_perf = "SelfSupervised + AdamW_BT54 + Transformer_N6 + EFA_17Tech + DGX_Cluster (perf=0.980)"
+best_power = "NeuroSymbolic + SGD_Cosine + MambaSSM + LoRA_N6 + Edge_N6 (power=0.770)"
+best_cost = "SupervisedDL + SGD_Cosine + GraphNeural + Quantize_N6 + OnDevice (cost=0.660)"
+pareto_frontier = 90
+n6_max = 96.0
+n6_avg = 79.5
+note = "궁극의 학습알고리즘 5단 DSE. BT-54/56/58/65/67 활용. AdamW+Mamba+LoRA 압도적"
 
 [material-synthesis]
 goal = true
@@ -516,3 +529,12 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "Mesh_N6 + Diamond (98.3% n6, score 0.8735)"
 note = "N6 Mesh + Diamond HEXA-P — SRv6 n=6 + Z=6 칩 융합, BBR sigma-tau=8 최적화"
+
+# ── Learning-Algorithm Cross-DSE ────────────────
+
+[cross-dse.learn-x-chip]
+domains = ["learning-algorithm", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "SelfSupervised + Diamond (98.0% n6, score 0.8771)"
+note = "SSL+AdamW+Mamba+LoRA → Diamond HEXA-P — 학습알고리즘×칩 통합 98% n6"

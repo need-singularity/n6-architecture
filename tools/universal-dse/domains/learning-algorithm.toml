@@ -1,0 +1,363 @@
+# =============================================================
+# HEXA-LEARN DSE Domain Definition
+# 궁극의 학습알고리즘 — BT-26,33,46,54,56,58,61,64,65,67 기반
+# Total raw combos: 6x6x6x5x5 = 5,400 (pre-filter)
+# =============================================================
+
+[meta]
+name = "learning-algorithm"
+desc = "Learning Algorithm DSE (BT-54/56/58/65/67)"
+levels = ["Foundation", "Optimizer", "ArchCore", "EffEngine", "DeploySystem"]
+vision = "n=6 산술로 패러다임부터 서빙까지 관통하는 궁극의 학습알고리즘"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (학습 패러다임)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "SupervisedDL"
+label  = "Supervised Deep Learning"
+n6     = 0.67
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "Standard DL, sigma-tau=8 layers typical, backprop"
+
+[[candidate]]
+level  = 0
+id     = "SelfSupervised"
+label  = "Self-Supervised (BERT/GPT)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.50
+cost   = 0.40
+notes  = "BT-56 complete n=6 LLM, phi=2 predict/mask ratio"
+
+[[candidate]]
+level  = 0
+id     = "ReinforcementL"
+label  = "Reinforcement Learning"
+n6     = 0.67
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "n=6 state-action, tau=4 Bellman components"
+
+[[candidate]]
+level  = 0
+id     = "MetaLearning"
+label  = "Meta-Learning (MAML/Reptile)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "sopfr=5 inner steps, phi=2 inner/outer loop"
+
+[[candidate]]
+level  = 0
+id     = "NeuroSymbolic"
+label  = "Neuro-Symbolic Integration"
+n6     = 0.83
+perf   = 0.75
+power  = 0.65
+cost   = 0.50
+notes  = "n=6 reasoning layers, tau=4 logic types"
+
+[[candidate]]
+level  = 0
+id     = "EnergyBased"
+label  = "Energy-Based Models (Boltzmann)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.70
+cost   = 0.55
+notes  = "BT-46 1/e gate, Leech J2=24 energy surface"
+
+# =============================================================
+# Level 1: Optimizer (최적화 알고리즘)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimizer"
+
+[[candidate]]
+level  = 1
+id     = "AdamW_BT54"
+label  = "AdamW BT-54 Quintuplet"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "beta1=0.9,beta2=0.95,eps=1e-8,lambda=0.1,clip=1 ALL n=6 EXACT"
+
+[[candidate]]
+level  = 1
+id     = "SGD_Cosine"
+label  = "SGD + Cosine Annealing"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "Carmichael lambda(6)=2 cycle"
+
+[[candidate]]
+level  = 1
+id     = "LAMB_Large"
+label  = "LAMB Large Batch"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "batch 2^sigma=4096"
+
+[[candidate]]
+level  = 1
+id     = "Shampoo"
+label  = "Shampoo 2nd-Order"
+n6     = 0.33
+perf   = 0.80
+power  = 0.50
+cost   = 0.35
+notes  = "Expensive preconditioner"
+
+[[candidate]]
+level  = 1
+id     = "Lion"
+label  = "Lion Sign-Momentum"
+n6     = 0.67
+perf   = 0.88
+power  = 0.65
+cost   = 0.55
+notes  = "beta1=0.9=1-1/(sigma-phi), beta2=0.99"
+
+[[candidate]]
+level  = 1
+id     = "Muon"
+label  = "Muon (2025 SOTA)"
+n6     = 0.50
+perf   = 0.92
+power  = 0.55
+cost   = 0.45
+notes  = "Orthogonal momentum"
+
+# =============================================================
+# Level 2: ArchCore (아키텍처 코어)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "ArchCore"
+
+[[candidate]]
+level  = 2
+id     = "Transformer_N6"
+label  = "BT-56 Complete Transformer"
+n6     = 1.00
+perf   = 1.00
+power  = 0.50
+cost   = 0.40
+notes  = "d=4096,L=32,d_h=128,KV=8 ALL n=6 EXACT"
+
+[[candidate]]
+level  = 2
+id     = "MambaSSM"
+label  = "BT-65 Mamba SSM"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.50
+notes  = "d_state=2^tau=16,expand=phi=2,d_conv=tau=4 ALL EXACT"
+
+[[candidate]]
+level  = 2
+id     = "EgyptianMoE"
+label  = "BT-67 Egyptian MoE"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "1/2+1/3+1/6=1 expert routing, top-k=phi=2"
+
+[[candidate]]
+level  = 2
+id     = "GraphNeural"
+label  = "Graph Neural Network"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "Message passing, n=6 layers"
+
+[[candidate]]
+level  = 2
+id     = "DiffusionNet"
+label  = "BT-61 Diffusion Model"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "T=1000,beta=1e-4~0.02,DDIM=50,CFG=7.5 9/9 EXACT"
+
+[[candidate]]
+level  = 2
+id     = "HybridArch"
+label  = "Transformer+Mamba Hybrid"
+n6     = 0.83
+perf   = 0.95
+power  = 0.60
+cost   = 0.45
+notes  = "Alternating layers, 2^sopfr=32 total"
+
+# =============================================================
+# Level 3: EffEngine (학습 효율 엔진)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "EffEngine"
+
+[[candidate]]
+level  = 3
+id     = "EFA_17Tech"
+label  = "17 N6 Techniques Suite"
+n6     = 1.00
+perf   = 0.95
+power  = 0.80
+cost   = 0.60
+notes  = "All 17 techniques: cyclotomic+FFT+Egyptian+Boltzmann+Mertens"
+
+[[candidate]]
+level  = 3
+id     = "LoRA_N6"
+label  = "LoRA rank=sigma-tau=8"
+n6     = 1.00
+perf   = 0.85
+power  = 0.90
+cost   = 0.80
+notes  = "BT-58 rank=8, alpha=2r=16, EXACT"
+
+[[candidate]]
+level  = 3
+id     = "Distillation"
+label  = "Knowledge Distillation"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "Teacher-student, phi=2 models"
+
+[[candidate]]
+level  = 3
+id     = "Pruning_N6"
+label  = "Dedekind Head Pruning"
+n6     = 1.00
+perf   = 0.82
+power  = 0.85
+cost   = 0.75
+notes  = "psi(6)=sigma=12 heads, prune to sigma-tau=8"
+
+[[candidate]]
+level  = 3
+id     = "Quantize_N6"
+label  = "FP8/FP16 BT-45 Quantization"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.80
+notes  = "FP8/FP16=phi=2, precision ladder"
+
+# =============================================================
+# Level 4: DeploySystem (배포/서빙 시스템)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "DeploySystem"
+
+[[candidate]]
+level  = 4
+id     = "DGX_Cluster"
+label  = "DGX-style sigma-tau=8 GPU cluster"
+n6     = 0.80
+perf   = 1.00
+power  = 0.40
+cost   = 0.20
+notes  = "8 GPUs per node, BT-28 computing arch"
+
+[[candidate]]
+level  = 4
+id     = "Edge_N6"
+label  = "Edge inference (mobile/IoT)"
+n6     = 0.60
+perf   = 0.60
+power  = 0.90
+cost   = 0.80
+notes  = "tau=4 bit quantized, on-device"
+
+[[candidate]]
+level  = 4
+id     = "Cloud_Serve"
+label  = "Cloud serving (auto-scale)"
+n6     = 0.60
+perf   = 0.90
+power  = 0.50
+cost   = 0.50
+notes  = "Standard cloud infra"
+
+[[candidate]]
+level  = 4
+id     = "Federated"
+label  = "Federated Learning"
+n6     = 0.80
+perf   = 0.75
+power  = 0.80
+cost   = 0.70
+notes  = "n=6 aggregation rounds"
+
+[[candidate]]
+level  = 4
+id     = "OnDevice"
+label  = "On-device training + serve"
+n6     = 0.80
+perf   = 0.70
+power  = 0.85
+cost   = 0.85
+notes  = "Personal AI, sigma-tau=8 bit models"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# EnergyBased only with Shampoo or AdamW (needs 2nd-order info)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "EnergyBased"
+then_level = 1
+then_ids   = "AdamW_BT54,Shampoo"
+
+# ReinforcementL incompatible with LoRA (RL doesn't fine-tune)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "ReinforcementL"
+then_level = 3
+then_ids   = "LoRA_N6"
+
+# DiffusionNet requires AdamW, Lion, or Muon (as optimizer)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "DiffusionNet"
+then_level = 1
+then_ids   = "AdamW_BT54,Lion,Muon"
+
+# Edge can't run full EFA 17 techniques suite
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Edge_N6"
+then_level = 3
+then_ids   = "EFA_17Tech"
