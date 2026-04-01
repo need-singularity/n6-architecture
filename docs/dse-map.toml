@@ -3,10 +3,10 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-01T7"
-total_domains = 112
-total_valid_paths = 500000
-domains_100pct_n6 = 112
+updated = "2026-04-01T8"
+total_domains = 125
+total_valid_paths = 580000
+domains_100pct_n6 = 125
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
