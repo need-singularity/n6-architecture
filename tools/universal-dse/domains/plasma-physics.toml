@@ -1,0 +1,452 @@
+# =============================================================
+# HEXA-PLASMA DSE Domain Definition
+# Source: docs/plasma-physics/goal.md + hypotheses H-PP-1~20, H-PP-61~80
+# BT-74 (95/5 resonance, beta_plasma=5%)
+# BT-5 (q=1 Egyptian), BT-4 (dangerous q from div(6))
+# H-PP-1 (tau=4 states), H-PP-7 (q,A,delta), H-PP-12 (3 heating)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "plasma-physics"
+desc = "Plasma Physics Architecture DSE (BT-74/5/4, 20 H-PP + 20 extreme)"
+levels = ["Source", "Confinement", "Heating", "Control", "Application"]
+vision = "Plasma mastery -- n=6 governs the fourth state of matter"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Source (Plasma Configuration)  -- 6 candidates
+#   n6 checks: symmetry, q-profile, aspect ratio=sigma/tau=3,
+#              field periods (sopfr=5 for stellarator),
+#              tau=4 states of matter
+# =============================================================
+[[level]]
+name = "Source"
+
+[[candidate]]
+level  = 0
+id     = "Tokamak"
+label  = "Tokamak (axisymmetric torus)"
+n6     = 0.95
+perf   = 0.95
+power  = 0.65
+cost   = 0.55
+notes  = "A=sigma/tau=3 EXACT, q95>phi=2, PF=n=6, delta=1/3 EXACT, TRL=7, highest Q achieved"
+
+[[candidate]]
+level  = 0
+id     = "Stellarator"
+label  = "Stellarator (3D equilibrium)"
+n6     = 0.85
+perf   = 0.75
+power  = 0.75
+cost   = 0.40
+notes  = "W7-X periods=sopfr=5 EXACT, steady-state, no disruptions, complex coils, TRL=5"
+
+[[candidate]]
+level  = 0
+id     = "RFP"
+label  = "Reversed Field Pinch"
+n6     = 0.60
+perf   = 0.45
+power  = 0.60
+cost   = 0.65
+notes  = "self-organized q~0 profile, ohmic heating dominant, RFX-mod, TRL=3"
+
+[[candidate]]
+level  = 0
+id     = "Spheromak"
+label  = "Spheromak (compact toroid)"
+n6     = 0.55
+perf   = 0.40
+power  = 0.65
+cost   = 0.70
+notes  = "no external TF coils, helicity injection, SSPX, TRL=2"
+
+[[candidate]]
+level  = 0
+id     = "FRC"
+label  = "Field-Reversed Configuration"
+n6     = 0.65
+perf   = 0.55
+power  = 0.70
+cost   = 0.60
+notes  = "TAE C-2W, compact, high beta, no central solenoid, good for p-B11, TRL=3"
+
+[[candidate]]
+level  = 0
+id     = "Z_Pinch"
+label  = "Z-Pinch (pulsed linear)"
+n6     = 0.40
+perf   = 0.30
+power  = 0.50
+cost   = 0.75
+notes  = "Zap Energy, simple geometry, sausage/kink instabilities, TRL=2"
+
+# =============================================================
+# Level 1: Confinement (Operating Mode)  -- 6 candidates
+#   n6 checks: confinement modes=phi+mu=3, H-factor,
+#              ELM types, pedestal structure, beta_N
+# =============================================================
+[[level]]
+name = "Confinement"
+
+[[candidate]]
+level  = 1
+id     = "H_mode"
+label  = "H-mode (High confinement)"
+n6     = 0.90
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "H-factor~2=phi EXACT, edge transport barrier, ELMs, discovered 1982 ASDEX"
+
+[[candidate]]
+level  = 1
+id     = "I_mode"
+label  = "I-mode (Improved)"
+n6     = 0.85
+perf   = 0.80
+power  = 0.75
+cost   = 0.55
+notes  = "Energy barrier without particle barrier, no large ELMs, Alcator C-Mod discovery"
+
+[[candidate]]
+level  = 1
+id     = "QH_mode"
+label  = "QH-mode (Quiescent H-mode)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "ELM-free H-mode, edge harmonic oscillation, DIII-D, broadband MHD replaces ELMs"
+
+[[candidate]]
+level  = 1
+id     = "Hybrid"
+label  = "Hybrid Scenario"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "q_min~1=R(6) EXACT, flat q-profile, good beta_N~3=n/phi, ITER baseline alternative"
+
+[[candidate]]
+level  = 1
+id     = "AT"
+label  = "Advanced Tokamak (steady-state)"
+n6     = 0.70
+perf   = 0.80
+power  = 0.80
+cost   = 0.40
+notes  = "high bootstrap fraction, reversed shear, non-inductive, ITER advanced scenario"
+
+[[candidate]]
+level  = 1
+id     = "Ohmic_L"
+label  = "Ohmic/L-mode (low confinement)"
+n6     = 0.50
+perf   = 0.40
+power  = 0.85
+cost   = 0.90
+notes  = "baseline, no external heating needed, H-factor=1=R(6), simple operation"
+
+# =============================================================
+# Level 2: Heating (Plasma Heating & Current Drive)  -- 6 candidates
+#   n6 checks: 3 main methods=n/phi EXACT (H-PP-12),
+#              NBI 120keV=sigma*(sigma-phi), LHCD 5GHz=sopfr,
+#              ECRH 2nd harmonic=phi
+# =============================================================
+[[level]]
+name = "Heating"
+
+[[candidate]]
+level  = 2
+id     = "NBI"
+label  = "Neutral Beam Injection"
+n6     = 0.80
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "120keV=sigma*(sigma-phi) CLOSE, core fueling+heating, ITER 33MW, rotation drive"
+
+[[candidate]]
+level  = 2
+id     = "ECRH"
+label  = "Electron Cyclotron Resonance Heating"
+n6     = 0.70
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "170GHz, 2nd harmonic=phi=2, localized deposition, NTM stabilization, TRL=7"
+
+[[candidate]]
+level  = 2
+id     = "ICRH"
+label  = "Ion Cyclotron Resonance Heating"
+n6     = 0.65
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "40-80MHz, direct ion heating, minority scheme, 3He minority for D-T"
+
+[[candidate]]
+level  = 2
+id     = "LHCD"
+label  = "Lower Hybrid Current Drive"
+n6     = 0.85
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "5GHz=sopfr EXACT, best CD efficiency, edge current profile control"
+
+[[candidate]]
+level  = 2
+id     = "Ohmic"
+label  = "Ohmic Heating"
+n6     = 0.50
+perf   = 0.35
+power  = 0.90
+cost   = 0.95
+notes  = "free with plasma current, limited to ~2keV=phi, pulsed, simplest heating"
+
+[[candidate]]
+level  = 2
+id     = "Alfven"
+label  = "Alfven Wave Heating"
+n6     = 0.55
+perf   = 0.50
+power  = 0.55
+cost   = 0.35
+notes  = "TAE/BAE coupling, alpha particle channeling, advanced concept, TRL=2"
+
+# =============================================================
+# Level 3: Control (MHD Stability & Control)  -- 6 candidates
+#   n6 checks: dangerous q-surfaces from div(6)={1,2,3,6},
+#              n=1 RWM, m/n=2/1 NTM, ELM control,
+#              disruption prediction, feedback systems
+# =============================================================
+[[level]]
+name = "Control"
+
+[[candidate]]
+level  = 3
+id     = "MHD_Feedback"
+label  = "Active MHD Feedback Control"
+n6     = 0.85
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "Real-time feedback for n=1,2,3 modes (div(6)), sensor+actuator loop, DIII-D proven"
+
+[[candidate]]
+level  = 3
+id     = "NTM_ECCD"
+label  = "NTM Stabilization (ECCD)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "ECRH at q=3/2 surface (div(6) ratio), localized current drive, ITER baseline"
+
+[[candidate]]
+level  = 3
+id     = "RWM_Active"
+label  = "Resistive Wall Mode Control"
+n6     = 0.70
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "n=1 RWM=mu EXACT, saddle coils, needed for high-beta AT scenarios"
+
+[[candidate]]
+level  = 3
+id     = "ELM_Pellet"
+label  = "ELM Pace-Making (Pellet Injection)"
+n6     = 0.65
+perf   = 0.70
+power  = 0.70
+cost   = 0.65
+notes  = "pellet frequency control, ELM size reduction, ITER ELM mitigation strategy"
+
+[[candidate]]
+level  = 3
+id     = "Disruption_ML"
+label  = "Disruption Prediction (ML-based)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.55
+notes  = "AI/ML disruption avoidance, FREIA/DECAF systems, >95% accuracy (BT-74 resonance)"
+
+[[candidate]]
+level  = 3
+id     = "RMP_ELM"
+label  = "Resonant Magnetic Perturbation (RMP)"
+n6     = 0.90
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "n=1,2,3 RMP coils (div(6)), ELM suppression, KSTAR/DIII-D proven, ITER planned"
+
+# =============================================================
+# Level 4: Application (Target System)  -- 5 candidates
+#   n6 checks: Q=10=n+tau (ITER), Q>50 for DEMO,
+#              grid output 60Hz=sigma*sopfr (BT-62)
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "ITER_Burn"
+label  = "ITER-class Burning Plasma"
+n6     = 0.90
+perf   = 0.90
+power  = 0.50
+cost   = 0.30
+notes  = "Q=10=n+tau CLOSE, 500MW fusion, 400s burn, TF=18=3n, first burning plasma"
+
+[[candidate]]
+level  = 4
+id     = "DEMO_Steady"
+label  = "DEMO Steady-State Power Plant"
+n6     = 0.80
+perf   = 0.95
+power  = 0.75
+cost   = 0.35
+notes  = "1-2GW thermal, Q>30, continuous operation, grid 60Hz=sigma*sopfr (BT-62)"
+
+[[candidate]]
+level  = 4
+id     = "Compact_Pilot"
+label  = "Compact Fusion Pilot (CFS/TAE)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.80
+cost   = 0.60
+notes  = "ARC/SPARC class, <3m major radius, HTS magnets, Q~10, private sector"
+
+[[candidate]]
+level  = 4
+id     = "Space_Prop"
+label  = "Space Propulsion (fusion drive)"
+n6     = 0.55
+perf   = 0.50
+power  = 0.40
+cost   = 0.20
+notes  = "Direct Fusion Drive, FRC-based, specific impulse >10^4s, Mars mission, TRL=1"
+
+[[candidate]]
+level  = 4
+id     = "Industrial"
+label  = "Industrial Plasma Processing"
+n6     = 0.60
+perf   = 0.65
+power  = 0.85
+cost   = 0.80
+notes  = "Etching/deposition, plasma torch, sterilization, 1-10kW scale, non-fusion"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Z-Pinch only works with Ohmic or Alfven heating
+[[rule]]
+type     = "require"
+if_level = 0
+if_id    = "Z_Pinch"
+then_level = 2
+then_ids = "Ohmic,Alfven"
+
+# FRC/Spheromak exclude ITER-class (incompatible scale)
+[[rule]]
+type     = "exclude"
+if_level = 0
+if_id    = "FRC"
+then_level = 4
+then_ids = "ITER_Burn"
+
+[[rule]]
+type     = "exclude"
+if_level = 0
+if_id    = "Spheromak"
+then_level = 4
+then_ids = "ITER_Burn,DEMO_Steady"
+
+# Space propulsion excludes Tokamak (too massive)
+[[rule]]
+type     = "exclude"
+if_level = 4
+if_id    = "Space_Prop"
+then_level = 0
+then_ids = "Tokamak,RFP"
+
+# QH-mode requires Tokamak or Stellarator
+[[rule]]
+type     = "require"
+if_level = 1
+if_id    = "QH_mode"
+then_level = 0
+then_ids = "Tokamak,Stellarator"
+
+# Disruption prediction mainly for Tokamak/RFP
+[[rule]]
+type     = "prefer"
+if_level = 3
+if_id    = "Disruption_ML"
+then_level = 0
+then_ids = "Tokamak,RFP"
+
+# Stellarator prefers ECRH (steady-state compatible)
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "Stellarator"
+then_level = 2
+then_ids = "ECRH,NBI"
+
+# Tokamak + NBI/ECRH best combination
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "Tokamak"
+then_level = 2
+then_ids = "NBI,ECRH,LHCD,ICRH"
+
+# RMP is the premier ELM control -- prefers H-mode
+[[rule]]
+type     = "prefer"
+if_level = 3
+if_id    = "RMP_ELM"
+then_level = 1
+then_ids = "H_mode,Hybrid"
+
+# Advanced Tokamak needs active MHD/RWM control
+[[rule]]
+type     = "prefer"
+if_level = 1
+if_id    = "AT"
+then_level = 3
+then_ids = "MHD_Feedback,RWM_Active"
+
+# ITER scenario prefers NBI + MHD feedback
+[[rule]]
+type     = "prefer"
+if_level = 4
+if_id    = "ITER_Burn"
+then_level = 2
+then_ids = "NBI,ECRH,ICRH"
+
+# FRC pairs with NBI (TAE approach)
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "FRC"
+then_level = 2
+then_ids = "NBI,Alfven"

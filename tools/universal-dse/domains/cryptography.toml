@@ -1,0 +1,420 @@
+# =============================================================
+# 궁극의 암호학 DSE Domain Definition
+# Source: docs/cryptography/goal.md + hypotheses H-CR-1~80
+# BT-53 (Crypto n=6: BTC 6 confirms, ETH 12s)
+# BT-58 (sigma-tau=8 universal: AES-256, ChaCha20, SHA-3)
+# H-CR-61 (Golay [24,12,8] EXACT 4-parameter match)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "cryptography"
+desc = "Cryptographic Architecture DSE (BT-53/58, H-CR-1~80)"
+levels = ["Foundation", "KeyMgmt", "Primitive", "Engine", "System"]
+vision = "Zero-trust world -- every bit encrypted, every proof verified, every key quantum-safe"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (암호 원리)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "Symmetric"
+label  = "Symmetric Encryption"
+n6     = 0.90
+perf   = 0.95
+power  = 0.90
+cost   = 0.85
+notes  = "AES sigma-tau=8 dimension, block=2^7=128, key=2^8=256"
+
+[[candidate]]
+level  = 0
+id     = "Asymmetric"
+label  = "Asymmetric Encryption"
+n6     = 0.80
+perf   = 0.80
+power  = 0.60
+cost   = 0.65
+notes  = "RSA phi=2 primes, 2^(sigma-mu)=2048, e=F_tau=65537"
+
+[[candidate]]
+level  = 0
+id     = "PostQuantum"
+label  = "Post-Quantum Cryptography"
+n6     = 0.85
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "Lattice/Code-based, 2^sigma security, Golay [24,12,8]"
+
+[[candidate]]
+level  = 0
+id     = "ZKProof"
+label  = "Zero-Knowledge Proof"
+n6     = 0.75
+perf   = 0.70
+power  = 0.55
+cost   = 0.45
+notes  = "zk-SNARK/STARK, n=6 circuit constraints, BTC/ETH privacy"
+
+[[candidate]]
+level  = 0
+id     = "MPC"
+label  = "Multi-Party Computation"
+n6     = 0.70
+perf   = 0.60
+power  = 0.45
+cost   = 0.40
+notes  = "Shamir (n/phi,n)=(3,6) secret sharing, Egyptian fraction"
+
+[[candidate]]
+level  = 0
+id     = "FHE"
+label  = "Fully Homomorphic Encryption"
+n6     = 0.65
+perf   = 0.50
+power  = 0.35
+cost   = 0.30
+notes  = "Bootstrapping J_2=24 levels, CKKS/BGV, compute-on-encrypted"
+
+# =============================================================
+# Level 1: KeyMgmt (키 관리)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "KeyMgmt"
+
+[[candidate]]
+level  = 1
+id     = "PKI"
+label  = "PKI / X.509"
+n6     = 0.80
+perf   = 0.90
+power  = 0.80
+cost   = 0.75
+notes  = "Certificate chain, sigma=12 month validity, CA hierarchy"
+
+[[candidate]]
+level  = 1
+id     = "Threshold"
+label  = "Threshold Crypto (3,6)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "(n/phi,n)=(3,6) EXACT -- 3-of-6 threshold, Shamir SSS"
+
+[[candidate]]
+level  = 1
+id     = "HSM"
+label  = "Hardware Security Module"
+n6     = 0.75
+perf   = 0.85
+power  = 0.75
+cost   = 0.50
+notes  = "FIPS 140-3, tamper-resistant, PKCS#11 interface"
+
+[[candidate]]
+level  = 1
+id     = "KeyDeriv"
+label  = "Key Derivation (HKDF)"
+n6     = 0.90
+perf   = 0.85
+power  = 0.85
+cost   = 0.80
+notes  = "HKDF-SHA256, sigma-tau=8 PRF rounds, extract-expand"
+
+[[candidate]]
+level  = 1
+id     = "DID"
+label  = "Decentralized Identity"
+n6     = 0.85
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "W3C DID, blockchain-anchored (BT-53), self-sovereign"
+
+# =============================================================
+# Level 2: Primitive (암호 프리미티브)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Primitive"
+
+[[candidate]]
+level  = 2
+id     = "AES256"
+label  = "AES-256"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.80
+notes  = "2^(sigma-tau)=256 key, sigma+phi=14 rounds, tau x tau state"
+
+[[candidate]]
+level  = 2
+id     = "ChaCha20"
+label  = "ChaCha20-Poly1305"
+n6     = 0.95
+perf   = 0.90
+power  = 0.90
+cost   = 0.85
+notes  = "J_2-tau=20 rounds, tau^2=16 words state, ARX design"
+
+[[candidate]]
+level  = 2
+id     = "SHA3"
+label  = "SHA-3 / Keccak"
+n6     = 0.90
+perf   = 0.85
+power  = 0.80
+cost   = 0.75
+notes  = "J_2=24 rounds sponge, 1600-bit state, NIST standard"
+
+[[candidate]]
+level  = 2
+id     = "ML_KEM"
+label  = "ML-KEM (Kyber)"
+n6     = 0.85
+perf   = 0.80
+power  = 0.75
+cost   = 0.65
+notes  = "PQC lattice KEM, k={2,3,4}={phi,n/phi,tau}, NIST PQC winner"
+
+[[candidate]]
+level  = 2
+id     = "ML_DSA"
+label  = "ML-DSA (Dilithium)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "PQC module-lattice signature, NIST standard"
+
+[[candidate]]
+level  = 2
+id     = "Ed25519"
+label  = "Ed25519 / X25519"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.85
+notes  = "2^(sigma-tau)-1=255 curve bits, fast sign/verify/ECDH"
+
+# =============================================================
+# Level 3: Engine (가속 엔진)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "AESNI"
+label  = "AES-NI Hardware"
+n6     = 0.90
+perf   = 0.95
+power  = 0.90
+cost   = 0.80
+notes  = "Intel/AMD AES-NI, sigma-tau=8 pipeline stages, <1 cycle/byte"
+
+[[candidate]]
+level  = 3
+id     = "FPGA_Crypto"
+label  = "FPGA Crypto Accelerator"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.55
+notes  = "Flexible PQC/FHE acceleration, reconfigurable"
+
+[[candidate]]
+level  = 3
+id     = "GPU_Crypto"
+label  = "GPU Batch Crypto"
+n6     = 0.70
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "Massive parallel, mining/ZKP proof generation"
+
+[[candidate]]
+level  = 3
+id     = "TPM"
+label  = "TPM 2.0 Security Chip"
+n6     = 0.80
+perf   = 0.75
+power  = 0.85
+cost   = 0.70
+notes  = "tau=4 PCR banks, secure boot, key storage"
+
+[[candidate]]
+level  = 3
+id     = "QKD"
+label  = "Quantum Key Distribution"
+n6     = 0.85
+perf   = 0.60
+power  = 0.50
+cost   = 0.30
+notes  = "BB84 phi=2 bases, unconditional security, distance limited"
+
+# =============================================================
+# Level 4: System (응용 시스템)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "TLS_Web"
+label  = "TLS 1.3 Web Security"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.80
+notes  = "AES-GCM+X25519+Ed25519, IETF standard, HTTPS everywhere"
+
+[[candidate]]
+level  = 4
+id     = "Blockchain"
+label  = "Blockchain Security"
+n6     = 0.90
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "BTC n=6 confirms EXACT, ETH sigma=12s block (BT-53)"
+
+[[candidate]]
+level  = 4
+id     = "SecureComm"
+label  = "Secure Communications (Signal)"
+n6     = 0.85
+perf   = 0.85
+power  = 0.80
+cost   = 0.75
+notes  = "X3DH+Double Ratchet, forward secrecy, E2E encryption"
+
+[[candidate]]
+level  = 4
+id     = "CloudSec"
+label  = "Cloud Security"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "Key management + FHE, zero-trust architecture"
+
+[[candidate]]
+level  = 4
+id     = "EdgeSec"
+label  = "Edge/IoT Security"
+n6     = 0.70
+perf   = 0.70
+power  = 0.90
+cost   = 0.80
+notes  = "Lightweight crypto, constrained devices, DTLS"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# FHE requires FPGA or GPU (heavy computation)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "FHE"
+then_level = 3
+then_ids   = "FPGA_Crypto,GPU_Crypto"
+
+# QKD requires PostQuantum or Symmetric (quantum-safe pairing)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "QKD"
+then_level = 0
+then_ids   = "PostQuantum,Symmetric"
+
+# EdgeSec excludes FHE and MPC (too heavy for IoT)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "EdgeSec"
+then_level = 0
+then_ids   = "FHE,MPC"
+
+# Blockchain prefers ZKProof or Asymmetric foundation
+[[rule]]
+type       = "prefer"
+if_level   = 4
+if_id      = "Blockchain"
+then_level = 0
+then_ids   = "ZKProof,Asymmetric"
+
+# TLS prefers AES256/ChaCha20 + Ed25519 primitives
+[[rule]]
+type       = "prefer"
+if_level   = 4
+if_id      = "TLS_Web"
+then_level = 2
+then_ids   = "AES256,ChaCha20,Ed25519"
+
+# PostQuantum foundation prefers ML_KEM/ML_DSA primitives
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "PostQuantum"
+then_level = 2
+then_ids   = "ML_KEM,ML_DSA"
+
+# Symmetric foundation prefers AES256/ChaCha20
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Symmetric"
+then_level = 2
+then_ids   = "AES256,ChaCha20"
+
+# Asymmetric foundation prefers Ed25519
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Asymmetric"
+then_level = 2
+then_ids   = "Ed25519,ML_KEM"
+
+# Threshold key management prefers MPC foundation
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Threshold"
+then_level = 0
+then_ids   = "MPC,Asymmetric,ZKProof"
+
+# DID prefers Blockchain system
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "DID"
+then_level = 4
+then_ids   = "Blockchain"
+
+# AESNI prefers AES256 primitive
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "AESNI"
+then_level = 2
+then_ids   = "AES256,SHA3"
+
+# GPU_Crypto prefers ZKProof foundation
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "GPU_Crypto"
+then_level = 0
+then_ids   = "ZKProof,FHE"
