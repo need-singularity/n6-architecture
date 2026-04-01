@@ -914,3 +914,685 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "LT + LFP (93.2% n6, score 0.8291)"
 note = "격자론 × LFP — CN=6 cathode BT-43 + Leech lattice dimension BT-49"
+
+# ── Physics/Energy Cross-DSE (2026-04-01) ────────────────
+
+[cross-dse.fusion-x-battery]
+domains = ["fusion", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "DT + LFP (89.2% n6, score 0.8116)"
+note = "DT fusion × LFP battery — 핵융합 에너지 저장 통합, BT-27 Carbon-6 chain 연결"
+
+[cross-dse.plasma-x-thermal]
+domains = ["plasma-physics", "thermal-management"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Tokamak + TwoPhase (93.0% n6, score 0.8210)"
+note = "Tokamak H-mode × TwoPhase cooling — 플라즈마 열제어 통합, sigma=12 fins/cm"
+
+[cross-dse.plasma-x-chip]
+domains = ["plasma-physics", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Tokamak + Diamond (93.0% n6, score 0.8506)"
+note = "Tokamak × Diamond HEXA-P — 플라즈마 진단 칩 통합, 144 SM + q>2 안정성"
+
+[cross-dse.thermal-x-solar]
+domains = ["thermal-management", "solar-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "TwoPhase + GaAs (95.0% n6, score 0.8480)"
+note = "TwoPhase cooling × GaAs CPV — 태양전지 열관리, SQ bandgap 4/3eV BT-30"
+
+[cross-dse.thermal-x-fusion]
+domains = ["thermal-management", "fusion"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "TwoPhase + DT (92.5% n6, score 0.8305)"
+note = "TwoPhase cooling × DT fusion — 핵융합 열관리 통합, SiC/LiPb blanket 연결"
+
+[cross-dse.energy-x-chip]
+domains = ["energy-generation", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Nuclear + Diamond (100.0% n6, score 0.8646)"
+note = "Nuclear fission × Diamond HEXA-P — 에너지×칩 100% n6 EXACT, BT-36 체인 완성"
+
+[cross-dse.grid-x-chip]
+domains = ["power-grid", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "HTS_YBCO + Diamond (100.0% n6, score 0.9016)"
+note = "HTS YBCO superconducting grid × Diamond HEXA-P — 100% n6, 최고 score 0.9016"
+
+[cross-dse.fusion-x-chip]
+domains = ["fusion", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "DT + Diamond (92.5% n6, score 0.8601)"
+note = "DT fusion × Diamond HEXA-P — 핵융합 제어 칩 통합, 144 SM + Lawson criterion"
+
+# ── Science/Infrastructure Cross-DSE (2026-04-01) ────────────────
+
+[cross-dse.bio-x-agriculture]
+domains = ["biology", "agriculture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Genomics + CRISPR_Crop (100.0% n6, score 0.8239)"
+note = "Genomics+Bioreactor+GeneCircuit+AlphaFold+BioMfg × CRISPR+Precision+Drone+PlantVision+SmartFarm — BT-27 C₆H₁₂O₆ + BT-51 genetic code 완전 교차"
+
+[cross-dse.space-x-fusion]
+domains = ["space-engineering", "fusion"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "NuclearThermal + DT (92.5% n6, score 0.8145)"
+note = "NTP Z=6 Carbon × DT D+T=sopfr=5 — 우주 핵열추진×핵융합 에너지원 통합. Kepler n=6 궤도 + Tokamak-12"
+
+[cross-dse.space-x-battery]
+domains = ["space-engineering", "battery-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "NuclearThermal + LFP (96.7% n6, score 0.8091)"
+note = "NTP × LFP 12ch BMS — 우주 전력저장×추진 통합. CN=6 cathode + Carbon Z=6 구조체"
+
+[cross-dse.space-x-solar]
+domains = ["space-engineering", "solar-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "NuclearThermal + GaAs (95.0% n6, score 0.8320)"
+note = "NTP × GaAs CPV — 우주 태양전지×추진 통합. SQ 4/3 bandgap + Kepler n=6 궤도요소. IonDrive+GaAs도 93.3%"
+
+[cross-dse.medical-x-biology]
+domains = ["medical-device", "biology"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "ECG + Genomics (100.0% n6, score 0.8453)"
+note = "ECG sigma=12 leads × Genomics+GeneCircuit+AlphaFold — 의료진단×생명공학 통합 100% n6 EXACT. 정밀의료 최적경로"
+
+[cross-dse.autonomous-x-battery]
+domains = ["autonomous", "battery"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "IMU_GP + LFP (96.7% n6, score 0.8179)"
+note = "자율주행 IMU/GPS 센서 × LFP 배터리 — 96.7% n6 EXACT, 48V ESS 통합"
+
+[cross-dse.autonomous-x-learning-algorithm]
+domains = ["autonomous", "learning-algorithm"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "IMU_GP + SelfSu (98.0% n6, score 0.8403)"
+note = "자율주행 × 자기지도학습 — 98.0% n6 EXACT, Mamba SSM + LoRA rank=8 통합"
+
+[cross-dse.autonomous-x-network]
+domains = ["autonomous", "network"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "IMU_GP + Mesh_N (98.3% n6, score 0.8367)"
+note = "자율주행 × Mesh N6 네트워크 — 98.3% n6 EXACT, V2X SRv6 통신 통합"
+
+[cross-dse.medical-x-battery]
+domains = ["medical", "battery"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "ECG + LFP (96.7% n6, score 0.8338)"
+note = "의료 ECG × LFP 배터리 — 96.7% n6 EXACT, 의료기기 전원 12ch BMS 통합"
+
+[cross-dse.medical-x-learning-algorithm]
+domains = ["medical", "learning-algorithm"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "ECG + SelfSu (98.0% n6, score 0.8562)"
+note = "의료 ECG × 자기지도학습 — 98.0% n6 EXACT, 최고 score 0.8562, 의료 AI 진단 통합"
+
+[cross-dse.agriculture-x-solar]
+domains = ["agriculture", "solar"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CRISPR + GaAs (95.0% n6, score 0.8353)"
+note = "농업 CRISPR × GaAs 태양전지 — 95.0% n6 EXACT, 스마트팜 에너지 자급 통합"
+
+[cross-dse.agriculture-x-battery]
+domains = ["agriculture", "battery"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CRISPR + LFP (96.7% n6, score 0.8124)"
+note = "농업 CRISPR × LFP 배터리 — 96.7% n6 EXACT, 농업 드론/IoT 전원 통합"
+
+[cross-dse.agriculture-x-learning-algorithm]
+domains = ["agriculture", "learning-algorithm"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CRISPR + SelfSu (98.0% n6, score 0.8348)"
+note = "농업 CRISPR × 자기지도학습 — 98.0% n6 EXACT, 작물 표현형 예측 AI 통합"
+
+# ── 2026-04-01 대탐색: 62개 신규 도메인 ──────────────────
+
+[pkg-manager]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4190
+tool = "tools/universal-dse/ domains/pkg-manager.toml"
+levels = ["Registry", "Resolver", "Builder", "Security", "Distribution"]
+best_pareto = "GitBased + VersionSemantic + IncrementalN6 + SBOM_N6 + Mirror_N6 (0.7510)"
+best_n6 = "FederatedN6 + SAT_N6 + IncrementalN6 + SBOM_N6 + Mirror_N6 (100.0%)"
+n6_max = 100.0
+n6_avg = 76.4
+
+[debugger]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4929
+tool = "tools/universal-dse/ domains/debugger.toml"
+levels = ["Instrumentation", "Analysis", "Visualization", "Automation", "Integration"]
+best_pareto = "HWCounter + Statistical + TreeMap + DeltaDebug + LSP_Debug (0.7784)"
+best_n6 = "HWCounter + Performance + TreeMap + TimeTravelN6 + LSP_Debug (93.2%)"
+n6_max = 93.2
+n6_avg = 72.8
+
+[lsp-ide]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4142
+tool = "tools/universal-dse/ domains/lsp-ide.toml"
+levels = ["Protocol", "Analysis", "Completion", "Refactoring", "Ecosystem"]
+best_pareto = "ExtendedLSP + IncrementalAST + ContextAware + QuickFix + PluginArch (0.8167)"
+best_n6 = "ExtendedLSP + FlowSensitive + ContextAware + StructuralEdit + PluginArch (100.0%)"
+n6_max = 100.0
+n6_avg = 77.6
+
+[runtime-gc]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3846
+tool = "tools/universal-dse/ domains/runtime-gc.toml"
+levels = ["Memory", "GC", "Concurrency", "Optimization", "Runtime"]
+best_pareto = "RegionBased + GenerationalGC + StructuredConc + TieredJIT + MinimalRT (0.8209)"
+best_n6 = "EgyptianAlloc + RegionalGC + StructuredConc + TieredJIT + FullStackRT (100.0%)"
+n6_max = 100.0
+n6_avg = 79.3
+
+[test-framework]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3590
+tool = "tools/universal-dse/ domains/test-framework.toml"
+levels = ["Structure", "Runner", "Coverage", "Generator", "Report"]
+best_pareto = "PropertyBased + ParallelN6 + LineBranch + CombinTest + HTMLDash (0.7660)"
+best_n6 = "FuzzDriven + DistributedRun + MutationTest + FaultModel + TrendAnalysis (100.0%)"
+n6_max = 100.0
+n6_avg = 77.1
+
+[hdl]
+goal = true
+dse = "done"
+combos = 7560
+valid = 5237
+tool = "tools/universal-dse/ domains/hdl.toml"
+levels = ["Abstraction", "Synthesis", "Verification", "Simulation", "Ecosystem"]
+best_pareto = "ChiselDSL + ASIC_Flow + AITestGen + EventDriven + IPReuse (0.7640)"
+best_n6 = "ChiselDSL + ASIC_Flow + AITestGen + EventDriven + IPReuse (95.0%)"
+n6_max = 95.0
+n6_avg = 71.3
+
+[gpu-lang]
+goal = true
+dse = "done"
+combos = 7560
+valid = 5082
+tool = "tools/universal-dse/ domains/gpu-lang.toml"
+levels = ["Memory", "Execution", "Kernel", "Optimization", "Framework"]
+best_pareto = "ExplicitMem + SIMD_Wave + SPIRV_IL + AutoTune + CUDA_Eco (0.7847)"
+best_n6 = "ExplicitMem + SIMD_Wave + SPIRV_IL + AutoTune + CUDA_Eco (95.0%)"
+n6_max = 95.0
+n6_avg = 82.5
+
+[embedded-lang]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4140
+tool = "tools/universal-dse/ domains/embedded-lang.toml"
+levels = ["Resource", "Safety", "Peripheral", "Realtime", "Platform"]
+best_pareto = "BoundedHeap + MISRA_Full + HAL_Generic + PriorityInherit + RISCV_Embed (0.7510)"
+best_n6 = "BoundedHeap + MISRA_Full + HAL_Generic + PriorityInherit + RISCV_Embed (95.0%)"
+n6_max = 95.0
+n6_avg = 78.2
+
+[robot-hardware]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4698
+tool = "tools/universal-dse/ domains/robot-hardware.toml"
+levels = ["Structure", "Actuator", "Sensor", "Control", "Integration"]
+best_pareto = "Manipulator + BLDC_Gear + IMU_6Axis + InverseDyn + ROS2_Native (0.8030)"
+best_n6 = "Manipulator + BLDC_Gear + IMU_6Axis + InverseDyn + ROS2_Native (100.0%)"
+n6_max = 100.0
+n6_avg = 78.2
+
+[anima-consciousness]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3579
+tool = "tools/universal-dse/ domains/anima-consciousness.toml"
+levels = ["Substrate", "Engine", "Lens", "Map", "Emergence"]
+best_pareto = "NeuralField + EgyptianEngine + SEDI_4Lens + PhaseMap + SelfOrg (0.7900)"
+best_n6 = "NeuralField + EgyptianEngine + SEDI_4Lens + PhaseMap + SelfOrg (100.0%)"
+n6_max = 100.0
+n6_avg = 82.9
+
+[consciousness-comm]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3532
+tool = "tools/universal-dse/ domains/consciousness-comm.toml"
+levels = ["Channel", "Binding", "Synchronization", "Transmission", "Network"]
+best_pareto = "Sopfr5Channel + Tau4Phase + Kuramoto_N6 + CompressedSense + ScaleFreeNet (0.7585)"
+best_n6 = "Sopfr5Channel + Tau4Phase + Kuramoto_N6 + CompressedSense + FullMeshN6 (96.0%)"
+n6_max = 96.0
+n6_avg = 79.0
+
+[consciousness-hardware]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4575
+tool = "tools/universal-dse/ domains/consciousness-hardware.toml"
+levels = ["Substrate", "Dynamics", "Integration", "Continuity", "Scale"]
+best_pareto = "Neuromorphic + ChaoticOscillator + HebbianLearning + BackgroundProcess + ClusterN6 (0.8011)"
+best_n6 = "Neuromorphic + ChaoticOscillator + HebbianLearning + ConsciousnessBuffer + ClusterN6 (100.0%)"
+n6_max = 100.0
+n6_avg = 83.4
+
+[telepathy-system]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3330
+tool = "tools/universal-dse/ domains/telepathy-system.toml"
+levels = ["Perception", "Encoding", "Alignment", "Transmission", "Decoding"]
+best_pareto = "SharedReality + CompressedPacket + ArchInvariant + CompressedStructure + EmotionDecoder (0.8265)"
+best_n6 = "SharedReality + CompressedPacket + ArchInvariant + CompressedStructure + EmotionDecoder (100.0%)"
+n6_max = 100.0
+n6_avg = 87.1
+
+[optics-telescope]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4341
+tool = "tools/universal-dse/ domains/optics-telescope.toml"
+levels = ["LensType", "OpticalDesign", "Detection", "Analysis", "Observatory"]
+best_pareto = "DiffractLens + CookeN6 + CMOS_Fast + RFilterSpec + GroundAdapt (0.7706)"
+best_n6 = "GravLens + SegmentMirror + IFU_Spectro + RFilterSpec + MultiMessngr (100.0%)"
+n6_max = 100.0
+n6_avg = 85.4
+
+[sedi-universe]
+goal = true
+dse = "done"
+combos = 7776
+valid = 4884
+tool = "tools/universal-dse/ domains/sedi-universe.toml"
+levels = ["Particle", "Nuclear", "Stellar", "Galactic", "Cosmological"]
+best_pareto = "LeptonN6 + Carbon6 + StellarNucl + CosmicWeb + LCDM_6Param (0.8035)"
+best_n6 = "GaugeSigma12 + BBN_Eta + StellarNucl + CosmicWeb + NeutrinoOsc (100.0%)"
+n6_max = 100.0
+n6_avg = 84.0
+
+[physics-fundamental]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4348
+tool = "tools/universal-dse/ domains/physics-fundamental.toml"
+levels = ["Framework", "Symmetry", "Interaction", "Observable", "Experiment"]
+best_pareto = "QFT_Standard + SU3xSU2xU1 + StrongQCD + CosmicParam + CMB_Satellite (0.7665)"
+best_n6 = "QFT_Standard + SU3xSU2xU1 + StrongQCD + CosmicParam + CMB_Satellite (96.0%)"
+n6_max = 96.0
+n6_avg = 75.0
+
+[chemistry-synthesis]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4374
+tool = "tools/universal-dse/ domains/chemistry-synthesis.toml"
+levels = ["Element", "Bond", "Reaction", "Catalyst", "Application"]
+best_pareto = "Carbon_Z6 + IonicCrystal + Photochemistry + EnzymeBio + FoodChem (0.7936)"
+best_n6 = "Carbon_Z6 + IonicCrystal + Photochemistry + EnzymeBio + FoodChem (96.6%)"
+n6_max = 96.6
+n6_avg = 78.0
+
+[biology-systems]
+goal = true
+dse = "done"
+combos = 7560
+valid = 3915
+tool = "tools/universal-dse/ domains/biology-systems.toml"
+levels = ["Genetic", "Protein", "Cell", "Organism", "Ecosystem"]
+best_pareto = "DNA_Tau4 + FoldingN4 + MetabolismEF + CirculatoryN4 + CarbonCycle (0.8280)"
+best_n6 = "DNA_Tau4 + FoldingN4 + MetabolismEF + CirculatoryN4 + CarbonCycle (100.0%)"
+n6_max = 100.0
+n6_avg = 95.5
+
+[neuroscience]
+goal = true
+dse = "done"
+combos = 7560
+valid = 3414
+tool = "tools/universal-dse/ domains/neuroscience.toml"
+levels = ["Neuron", "Circuit", "Region", "Cognition", "Interface"]
+best_pareto = "DendriteTree + Recurrent + CerebellumN3 + MemoryN4 + NonInvasiveEEG (0.8160)"
+best_n6 = "DendriteTree + Recurrent + CerebellumN3 + MemoryN4 + NonInvasiveEEG (100.0%)"
+n6_max = 100.0
+n6_avg = 90.5
+
+[topology]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4560
+tool = "tools/universal-dse/ domains/topology.toml"
+levels = ["Space", "Invariant", "Homology", "Application", "Computation"]
+best_pareto = "TorusT6 + BottPeriodicity + DeRhamCohom + KnotTheory + Ripser (0.7810)"
+best_n6 = "TorusT6 + BottPeriodicity + DeRhamCohom + KnotTheory + Ripser (100.0%)"
+n6_max = 100.0
+n6_avg = 83.3
+
+[black-hole]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3092
+tool = "tools/universal-dse/ domains/black-hole.toml"
+levels = ["Formation", "Geometry", "Thermodynamics", "Information", "Observation"]
+best_pareto = "Intermediate + KerrNewman + BlackHoleThermo4 + IslandFormula + EHTImaging (0.7400)"
+best_n6 = "Intermediate + KerrNewman + BlackHoleThermo4 + IslandFormula + EHTImaging (95.0%)"
+n6_max = 95.0
+n6_avg = 79.3
+
+[evolutionary-biology]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3775
+tool = "tools/universal-dse/ domains/evolutionary-biology.toml"
+levels = ["Mutation", "Selection", "Speciation", "Phylogeny", "MacroEvolution"]
+best_pareto = "ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + MassExtinction (0.7800)"
+best_n6 = "ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + MassExtinction (94.0%)"
+n6_max = 94.0
+n6_avg = 82.4
+
+[fluid-condensed]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3999
+tool = "tools/universal-dse/ domains/fluid-condensed.toml"
+levels = ["FluidBase", "Turbulence", "CrystalStructure", "QuantumPhase", "Application"]
+best_pareto = "NavierStokes + CascadeN6 + GrapheneC6 + QHE_Integer + AerodynamicsN6 (0.7515)"
+best_n6 = "NavierStokes + CascadeN6 + GrapheneC6 + QHE_Integer + AerodynamicsN6 (96.0%)"
+n6_max = 96.0
+n6_avg = 78.0
+
+[music-theory]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4332
+tool = "tools/universal-dse/ domains/music-theory.toml"
+levels = ["PitchSystem", "Harmony", "Rhythm", "Form", "Technology"]
+best_pareto = "ChromaticN12 + TriadN3 + Meter44 + TwelveBarBlues + BitDepth24 (0.8450)"
+best_n6 = "ChromaticN12 + TriadN3 + Meter44 + TwelveBarBlues + BitDepth24 (100.0%)"
+n6_max = 100.0
+n6_avg = 93.0
+
+[quantum-computing]
+goal = true
+dse = "done"
+combos = 7560
+valid = 4000
+tool = "tools/universal-dse/ domains/quantum-computing.toml"
+levels = ["Qubit", "Gate", "Code", "Algorithm", "Hardware"]
+best_pareto = "SuperconductN6 + NativeGate + Code642 + Grover + IBM_Eagle (0.7620)"
+best_n6 = "SuperconductN6 + NativeGate + Code642 + Grover + IBM_Eagle (95.0%)"
+n6_max = 95.0
+n6_avg = 82.5
+
+[category-ancient]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3520
+tool = "tools/universal-dse/ domains/category-ancient.toml"
+levels = ["Foundation", "Structure", "Functor", "Application", "Heritage"]
+best_pareto = "Grothendieck6 + GroupS6 + AdjointPair + InformationTheory + HexagonalNature (0.7708)"
+best_n6 = "Grothendieck6 + GroupS6 + AdjointPair + InformationTheory + HexagonalNature (93.2%)"
+n6_max = 93.2
+n6_avg = 79.7
+
+[biophysics]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3172
+tool = "tools/universal-dse/ domains/biophysics.toml"
+levels = ["Molecular", "Membrane", "Force", "Imaging", "Systems"]
+best_pareto = "WaterHexamer + IonChannel_N6 + ElasticNetwork + FluorescenceN6 + CircadianClock (0.7806)"
+best_n6 = "WaterHexamer + IonChannel_N6 + ElasticNetwork + FluorescenceN6 + CircadianClock (96.6%)"
+n6_max = 96.6
+n6_avg = 72.9
+
+[economics]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3900
+tool = "tools/universal-dse/ domains/economics.toml"
+levels = ["Market", "Agent", "Cycle", "Network", "Policy"]
+best_pareto = "ParetoN6 + TeamN6 + DebtCycleN6 + TradeNetworkN6 + MonetaryN6 (0.7820)"
+best_n6 = "ParetoN6 + TeamN6 + DebtCycleN6 + TradeNetworkN6 + MonetaryN6 (100.0%)"
+n6_max = 100.0
+n6_avg = 79.0
+
+[simulation-hypothesis]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4050
+tool = "tools/universal-dse/ domains/simulation-hypothesis.toml"
+levels = ["Constants", "Grid", "Quantum", "Optimization", "Evidence"]
+best_pareto = "GoldenZoneConst + DiscreteSpacetime + QuantumNativeOps + ResourceAlloc + SimSignature (0.7710)"
+best_n6 = "GoldenZoneConst + DiscreteSpacetime + QuantumNativeOps + ResourceAlloc + SimSignature (100.0%)"
+n6_max = 100.0
+n6_avg = 81.0
+
+[ai-alignment]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4125
+tool = "tools/universal-dse/ domains/ai-alignment.toml"
+levels = ["Objective", "Monitoring", "Alignment", "Safety", "Governance"]
+best_pareto = "ConstitutionalAI + AnomalyDetect + Corrigibility + ShutdownSafe + MultiStakeholder (0.7705)"
+best_n6 = "ConstitutionalAI + AnomalyDetect + Corrigibility + ShutdownSafe + MultiStakeholder (100.0%)"
+n6_max = 100.0
+n6_avg = 83.4
+
+[nuclear-structure]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3582
+tool = "tools/universal-dse/ domains/nuclear-structure.toml"
+levels = ["Nucleon", "Shell", "Force", "Clustering", "Synthesis"]
+best_pareto = "IsospinN2 + MagicNumbers + YukawaPion + AlphaCluster + BBN_Primordial (0.7795)"
+best_n6 = "IsospinN2 + MagicNumbers + YukawaPion + AlphaCluster + BBN_Primordial (100.0%)"
+n6_max = 100.0
+n6_avg = 79.6
+
+[information-theory]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3925
+tool = "tools/universal-dse/ domains/information-theory.toml"
+levels = ["Source", "Channel", "Coding", "Complexity", "Application"]
+best_pareto = "ShannonEntropy + BSC_Channel + PolarCode + DescriptionLength + DataCompression (0.8020)"
+best_n6 = "ShannonEntropy + BSC_Channel + PolarCode + DescriptionLength + DataCompression (95.0%)"
+n6_max = 95.0
+n6_avg = 80.0
+
+[animalm-pipeline]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4296
+tool = "tools/universal-dse/ domains/animalm-pipeline.toml"
+levels = ["Input", "Router", "Expert", "Tension", "Feedback"]
+best_pareto = "TokenEmbed + EgyptianRouter + Egyptian_236 + PureRepulsion + ClosedLoop (0.7890)"
+best_n6 = "TokenEmbed + EgyptianRouter + Egyptian_236 + PureRepulsion + ClosedLoop (100.0%)"
+n6_max = 100.0
+n6_avg = 85.0
+
+[golden-zone-training]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3280
+tool = "tools/universal-dse/ domains/golden-zone-training.toml"
+levels = ["Architecture", "Training", "Optimization", "Evaluation", "Deployment"]
+best_pareto = "PhiBottleneck + EntropyEarlyStop + GradientClipR1 + RScoreMetric + DistillN6 (0.8535)"
+best_n6 = "PhiBottleneck + EntropyEarlyStop + GradientClipR1 + RScoreMetric + DistillN6 (100.0%)"
+n6_max = 100.0
+n6_avg = 92.5
+
+[eeg-bci]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3916
+tool = "tools/universal-dse/ domains/eeg-bci.toml"
+levels = ["Electrode", "Signal", "Feature", "Decoder", "Application"]
+best_pareto = "MobileN6 + FFT_N6 + BandPower5 + CNN_Decoder + SleepStaging (0.8395)"
+best_n6 = "MobileN6 + FFT_N6 + BandPower5 + CNN_Decoder + EmotionDetect (100.0%)"
+n6_max = 100.0
+n6_avg = 80.3
+
+[dna-folding]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3750
+tool = "tools/universal-dse/ domains/dna-folding.toml"
+levels = ["Sequence", "Structure", "Folding", "Chromatin", "Function"]
+best_pareto = "DNA_4Base + DoubleHelix + Solenoid + Histone4 + GeneExpression (0.8275)"
+best_n6 = "DNA_4Base + DoubleHelix + Solenoid + Histone4 + GeneExpression (100.0%)"
+n6_max = 100.0
+n6_avg = 88.0
+
+[hair-regeneration]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3300
+tool = "tools/universal-dse/ domains/hair-regeneration.toml"
+levels = ["Follicle", "Signaling", "Therapy", "Delivery", "Outcome"]
+best_pareto = "HairCycleTau4 + WntPathway + Microneedling + LightTherapy + CycleRestoration (0.7445)"
+best_n6 = "HairCycleTau4 + WntPathway + Microneedling + LightTherapy + CycleRestoration (85.0%)"
+n6_max = 85.0
+n6_avg = 65.0
+
+[wave-theory]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3480
+tool = "tools/universal-dse/ domains/wave-theory.toml"
+levels = ["Source", "Propagation", "Interference", "Resonance", "Application"]
+best_pareto = "HarmonicOscN6 + DiffractiveWave + Constructive + FourierN6 + Telecom (0.7710)"
+best_n6 = "HarmonicOscN6 + DiffractiveWave + Constructive + FourierN6 + MusicAcoustics (90.0%)"
+n6_max = 90.0
+n6_avg = 75.0
+
+[industry-architecture]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3505
+tool = "tools/universal-dse/ domains/industry-architecture.toml"
+levels = ["DataModel", "Processing", "Storage", "Interface", "Industry"]
+best_pareto = "RelationalN6 + BatchN6 + CacheN4 + RESTN6 + Manufacturing (0.7505)"
+best_n6 = "StreamN6 + MicroserviceN6 + DistributedN6 + RESTN6 + SmartCity (96.0%)"
+n6_max = 96.0
+n6_avg = 76.0
+
+[number-theory-deep]
+goal = true
+dse = "done"
+combos = 6480
+valid = 4140
+tool = "tools/universal-dse/ domains/number-theory-deep.toml"
+levels = ["Arithmetic", "Analytic", "Algebraic", "Combinatorial", "Application"]
+best_pareto = "SigmaPhiNTau + BaselProblem + CyclotomicField + RamseyN6 + Cryptography (0.7505)"
+best_n6 = "SigmaPhiNTau + BaselProblem + CyclotomicField + RamseyN6 + Cryptography (91.0%)"
+n6_max = 91.0
+n6_avg = 78.0
+
+[geoscience]
+goal = true
+dse = "done"
+combos = 6480
+valid = 3444
+tool = "tools/universal-dse/ domains/geoscience.toml"
+levels = ["Crystal", "Layer", "Cycle", "Hazard", "Climate"]
+best_pareto = "GraphiteLayer + CrustOceanCont + CarbonCycleN6 + Earthquake + GreenhouseN6 (0.7760)"
+best_n6 = "GraphiteLayer + CrustOceanCont + CarbonCycleN6 + Earthquake + GreenhouseN6 (90.0%)"
+n6_max = 90.0
+n6_avg = 72.0
+
+# ── 미완료 DSE (TOML 생성됨, 실행 대기) ──────────────────
+
+[noncommutative-geometry]
+goal = true
+dse = "wip"
+tool = "tools/universal-dse/ domains/noncommutative-geometry.toml"
+levels = ["Algebra", "Spectral", "GaugeGroup", "Particle", "Unification"]
+note = "Connes KO-dim 6 = P₁, 표준모형 유도"
+
+[topological-quantum-materials]
+goal = true
+dse = "wip"
+tool = "tools/universal-dse/ domains/topological-quantum-materials.toml"
+levels = ["Classification", "Material", "Surface", "Transport", "Device"]
+note = "Z₂ 위상절연체 + 마요라나 + 그래핀 C Z=6"
+
+[statistical-mechanics]
+goal = true
+dse = "wip"
+tool = "tools/universal-dse/ domains/statistical-mechanics.toml"
+levels = ["Model", "Method", "Phase", "Critical", "Application"]
+note = "6-vertex 모형 n=6 + ln(4/3) Golden Zone"
+
+[music-notation]
+goal = true
+dse = "wip"
+tool = "tools/universal-dse/ domains/music-notation.toml"
+levels = ["Staff", "Clef", "NoteValue", "Dynamics", "Layout"]
+note = "오선 sopfr=5 + 음자리표 tau=4 + 음표 n=6"
+
+[deep-evolution]
+goal = true
+dse = "wip"
+tool = "tools/universal-dse/ domains/deep-evolution.toml"
+levels = ["Genome", "Regulation", "Development", "Ecology", "Macroscale"]
+note = "텔로미어 6bp + 5왕국 + 6대멸종"
