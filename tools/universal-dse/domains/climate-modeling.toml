@@ -1,0 +1,357 @@
+# =============================================================
+# Climate Modeling DSE Domain Definition
+# Earth system simulation — atmosphere to coupling
+# n=6: 6 atmospheric layers, σ=12 month cycle, τ=4 seasons
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "climate-modeling"
+desc = "Climate Modeling Architecture DSE (atmosphere/ocean/land/ice/coupling)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Atmosphere (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Atmosphere"
+
+[[candidate]]
+level = 0
+id = "Spectral-T6"
+label = "Spectral T6 (n=6 wave truncation, analytic, global circulation)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Finite-Volume"
+label = "Finite Volume (cubed-sphere, 6 faces, conservation, GFDL)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Spectral-Element"
+label = "Spectral Element (high-order, σ=12 GLL nodes, CAM-SE)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Icosahedral"
+label = "Icosahedral Grid (12=σ pentagons, uniform, ICON/MPAS)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "AI-Emulator"
+label = "AI Weather Emulator (GraphCast, 6-hour step, GPU fast)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "LES-Regional"
+label = "Large Eddy Simulation (regional, 6 km resolution, convection)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.30
+
+# ============================================================
+# Level 1: Ocean (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Ocean"
+
+[[candidate]]
+level = 1
+id = "Z-Coord"
+label = "Z-Coordinate (fixed depth, 6 major layers, simple, MOM6)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Sigma-Coord"
+label = "Sigma-Coordinate (terrain-following, σ=12 levels coastal, ROMS)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Isopycnal"
+label = "Isopycnal (density layers, 6 water masses, HYCOM)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Hybrid-Vertical"
+label = "Hybrid Vertical (mixed z+sigma+isopycnal, n=6 transition zones)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Unstructured"
+label = "Unstructured Mesh (FESOM, 6-node elements, multi-resolution)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "AI-Ocean"
+label = "AI Ocean Model (neural ODE, σ=12 month training window, fast)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.65
+
+# ============================================================
+# Level 2: Land (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Land"
+
+[[candidate]]
+level = 2
+id = "Bucket-Simple"
+label = "Bucket Model (single layer, 6 soil types, fast, screening)"
+n6 = 1.00
+perf = 0.55
+power = 0.95
+cost = 0.95
+
+[[candidate]]
+level = 2
+id = "CLM"
+label = "Community Land Model (12=σ PFTs, full biogeochemistry, CESM)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "JULES"
+label = "JULES (n=6 soil layers, UK Met Office, carbon+nitrogen cycle)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Dynamic-Veg"
+label = "Dynamic Vegetation (LPJ-GUESS, 6 biome types, feedback)"
+n6 = 1.00
+perf = 0.88
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Urban-Canopy"
+label = "Urban Canopy Model (building, 6 surface types, heat island)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Hydrology"
+label = "Full Hydrology (river routing, 6 basin classes, flood risk)"
+n6 = 1.00
+perf = 0.82
+power = 0.58
+cost = 0.55
+
+# ============================================================
+# Level 3: Ice (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Ice"
+
+[[candidate]]
+level = 3
+id = "Thermo-Only"
+label = "Thermodynamic Only (simple melt/freeze, 6 ice categories, fast)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "EVP"
+label = "Elastic-Viscous-Plastic (EVP rheology, 6 thickness bins, CICE)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "DEM-Floe"
+label = "Discrete Element Floe (individual floes, 6 size classes, MIZ)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Ice-Sheet"
+label = "Ice Sheet Dynamics (Stokes flow, σ=12 vertical layers, PISM)"
+n6 = 1.00
+perf = 0.88
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Snow-Model"
+label = "Multi-Layer Snow (6 snow layers, metamorphism, albedo feedback)"
+n6 = 1.00
+perf = 0.82
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Permafrost"
+label = "Permafrost Module (Carbon Z=6 release, τ=4 thaw stages, methane)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.50
+
+# ============================================================
+# Level 4: Coupling (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Coupling"
+
+[[candidate]]
+level = 4
+id = "Sequential"
+label = "Sequential Coupling (6-hour exchange, simple, stable, CMIP5)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "Concurrent"
+label = "Concurrent Coupling (simultaneous, σ=12 min timestep, CESM)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "OASIS-MCT"
+label = "OASIS-MCT Coupler (standard, 6 flux fields, interoperable)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "ESMF"
+label = "ESMF Framework (component, σ=12 regrid methods, NOAA/NASA)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "AI-Hybrid"
+label = "AI-Hybrid Coupling (ML parameterization, 6 sub-grid schemes)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Digital-Twin"
+label = "Digital Twin Earth (NVIDIA/Destination Earth, n=6 km global)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.25
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# LES regional too expensive for full coupling
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "LES-Regional"
+then_level = 4
+then_ids = ["Digital-Twin", "AI-Hybrid"]
+
+# Simple bucket land excludes advanced coupling
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Bucket-Simple"
+then_level = 4
+then_ids = ["Digital-Twin"]
+
+# DEM floe model requires fine ocean resolution
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "DEM-Floe"
+then_level = 1
+then_ids = ["Unstructured", "Hybrid-Vertical"]
+
+# AI emulator atmosphere pairs best with AI coupling
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "AI-Emulator"
+then_level = 4
+then_ids = ["AI-Hybrid", "Digital-Twin"]

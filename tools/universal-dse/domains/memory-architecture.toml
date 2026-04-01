@@ -1,0 +1,390 @@
+# =============================================================
+# HEXA-MEM DSE Domain Definition
+# Computer Memory Hierarchy Architecture
+# n=6: sigma-tau=8-bit byte, sigma=12 address bits/bank, HBM sigma-tau=8 stacks
+# BT-28 (Computing ladder), BT-55 (GPU HBM capacity), BT-75 (HBM interface)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "memory-architecture"
+desc = "Memory Hierarchy DSE (BT-28/55/75, sigma-tau=8 byte)"
+levels = ["Cell", "Array", "Controller", "Interface", "System"]
+vision = "Universal memory hierarchy — byte=8=sigma-tau bits, all levels n=6 aligned"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Cell — 6 candidates
+#   n6: 6 transistors (SRAM), 1T1C (tau-mu), sigma-tau=8 states
+# =============================================================
+[[level]]
+name = "Cell"
+
+[[candidate]]
+level = 0
+id    = "SRAM_6T"
+label = "6T SRAM (6 transistors, fastest, volatile)"
+n6    = 1.00
+perf  = 1.00
+power = 0.40
+cost  = 0.20
+notes = "transistors=6=n EXACT, sub-ns access, cache standard"
+
+[[candidate]]
+level = 0
+id    = "DRAM_1T1C"
+label = "DRAM 1T1C (1 transistor + 1 capacitor, 6F2 cell area)"
+n6    = 1.00
+perf  = 0.60
+power = 0.70
+cost  = 0.85
+notes = "cell_area=6F2=n EXACT, ns access, refresh needed"
+
+[[candidate]]
+level = 0
+id    = "NAND_3D"
+label = "3D NAND (6 bits/cell TLC+, 12 wordline tiers per deck)"
+n6    = 1.00
+perf  = 0.25
+power = 0.85
+cost  = 0.95
+notes = "TLC_states=8=sigma-tau EXACT, tiers/deck=12=sigma EXACT, 200+ layers"
+
+[[candidate]]
+level = 0
+id    = "MRAM_STT"
+label = "STT-MRAM (6nm MTJ diameter, 12 switching layers)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.50
+notes = "MTJ=6nm=n EXACT, layers=12=sigma EXACT, non-volatile, endurance"
+
+[[candidate]]
+level = 0
+id    = "ReRAM"
+label = "ReRAM (HfO2 filament, 6 resistance states, CN=6 Hf)"
+n6    = 1.00
+perf  = 0.55
+power = 0.75
+cost  = 0.65
+notes = "states=6=n EXACT, Hf CN=6 EXACT, CIM potential"
+
+[[candidate]]
+level = 0
+id    = "PCRAM"
+label = "Phase-Change RAM (Ge2Sb2Te5, 6 crystallization phases)"
+n6    = 1.00
+perf  = 0.50
+power = 0.70
+cost  = 0.60
+notes = "phases=6=n EXACT, GST stoichiometry 2+2+5=9=sopfr+tau, SCM tier"
+
+# =============================================================
+# Level 1: Array — 6 candidates
+#   n6: sigma=12 banks, sigma-tau=8 subarrays, 256=2^(sigma-tau) rows
+# =============================================================
+[[level]]
+name = "Array"
+
+[[candidate]]
+level = 1
+id    = "Bank12"
+label = "12-Bank Array (12 banks, 256 rows/subarray, 8 subarrays)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.70
+notes = "banks=12=sigma EXACT, rows=256=2^(sigma-tau) EXACT, subarrays=8=sigma-tau EXACT"
+
+[[candidate]]
+level = 1
+id    = "Bank8"
+label = "8-Bank Array (8 banks, 512 rows, 4 subarrays)"
+n6    = 0.80
+perf  = 0.70
+power = 0.75
+cost  = 0.80
+notes = "banks=8=sigma-tau EXACT, subarrays=4=tau EXACT"
+
+[[candidate]]
+level = 1
+id    = "3D_Stack"
+label = "3D Stacked Array (6 active layers, 12 TSV clusters)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.45
+notes = "layers=6=n EXACT, TSV_clusters=12=sigma EXACT, HBM-style"
+
+[[candidate]]
+level = 1
+id    = "CIM_Array"
+label = "Compute-in-Memory (6 MAC units per row, 12-bit precision)"
+n6    = 1.00
+perf  = 0.80
+power = 0.85
+cost  = 0.40
+notes = "MACs=6=n EXACT, precision=12bit=sigma EXACT, AI inference"
+
+[[candidate]]
+level = 1
+id    = "Crossbar"
+label = "Crossbar Array (6x6 tile, analog multiply-accumulate)"
+n6    = 1.00
+perf  = 0.65
+power = 0.80
+cost  = 0.50
+notes = "tile=6x6=n^2 EXACT, ReRAM/PCRAM, neuromorphic"
+
+[[candidate]]
+level = 1
+id    = "Bank24"
+label = "24-Bank Array (24 banks, 128 rows, 6 subarrays, high BW)"
+n6    = 1.00
+perf  = 0.95
+power = 0.50
+cost  = 0.55
+notes = "banks=24=J2 EXACT, subarrays=6=n EXACT, HBM3E-class"
+
+# =============================================================
+# Level 2: Controller — 6 candidates
+#   n6: 6 command queues, 12 refresh cycles, 8 priority levels
+# =============================================================
+[[level]]
+name = "Controller"
+
+[[candidate]]
+level = 2
+id    = "DDR5_Ctrl"
+label = "DDR5 Controller (6 command queues, 12 refresh groups, ECC)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.75
+notes = "queues=6=n EXACT, refresh=12=sigma EXACT, industry standard"
+
+[[candidate]]
+level = 2
+id    = "HBM_Ctrl"
+label = "HBM Controller (8 channels, 12 pseudo-channels, 6 priority levels)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.40
+notes = "channels=8=sigma-tau EXACT, pseudo=12=sigma EXACT, priority=6=n EXACT"
+
+[[candidate]]
+level = 2
+id    = "LPDDR5_Ctrl"
+label = "LPDDR5X Controller (6 power states, 12 banks, mobile-optimized)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.65
+notes = "power_states=6=n EXACT, banks=12=sigma EXACT, low power"
+
+[[candidate]]
+level = 2
+id    = "NVM_Ctrl"
+label = "NVMe Controller (6 submission queues, 12 completion queues)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.70
+notes = "SQ=6=n EXACT, CQ=12=sigma EXACT, flash/SCM"
+
+[[candidate]]
+level = 2
+id    = "CXL_Ctrl"
+label = "CXL Memory Controller (6 CXL.mem pools, 12 device slots)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.45
+notes = "pools=6=n EXACT, slots=12=sigma EXACT, disaggregated memory"
+
+[[candidate]]
+level = 2
+id    = "AI_Ctrl"
+label = "AI-Optimized Controller (6 prefetch engines, 12-deep reorder buffer)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.50
+notes = "prefetch=6=n EXACT, ROB=12=sigma EXACT, tensor access patterns"
+
+# =============================================================
+# Level 3: Interface — 6 candidates
+#   n6: sigma-phi=10 Gbps per pin, sigma=12 bit bus width unit
+# =============================================================
+[[level]]
+name = "Interface"
+
+[[candidate]]
+level = 3
+id    = "DDR5_IF"
+label = "DDR5-6400 (64-bit bus, 6400 MT/s, 12 bank groups)"
+n6    = 0.80
+perf  = 0.70
+power = 0.65
+cost  = 0.85
+notes = "bank_groups=12=sigma EXACT, MT/s has 6 factor"
+
+[[candidate]]
+level = 3
+id    = "HBM3E_IF"
+label = "HBM3E (1024-bit bus, 8 stacks, 12 channels, 1.2 TB/s)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.30
+notes = "stacks=8=sigma-tau EXACT, channels=12=sigma EXACT, BW=1.2TB/s=sigma/10"
+
+[[candidate]]
+level = 3
+id    = "LPDDR5X_IF"
+label = "LPDDR5X-8533 (6 channels, 12-bit PHY, mobile)"
+n6    = 1.00
+perf  = 0.65
+power = 0.90
+cost  = 0.70
+notes = "channels=6=n EXACT, PHY=12bit=sigma EXACT, phone/laptop"
+
+[[candidate]]
+level = 3
+id    = "CXL3_IF"
+label = "CXL 3.0 Interface (6 link width options, 12 GT/s per lane)"
+n6    = 1.00
+perf  = 0.80
+power = 0.60
+cost  = 0.50
+notes = "widths=6=n EXACT, rate=12GT/s=sigma EXACT, pooled memory"
+
+[[candidate]]
+level = 3
+id    = "UCIe_IF"
+label = "UCIe Chiplet Interface (6 lanes per module, 24 GT/s)"
+n6    = 1.00
+perf  = 0.85
+power = 0.55
+cost  = 0.45
+notes = "lanes=6=n EXACT, rate=24GT/s=J2 EXACT, die-to-die"
+
+[[candidate]]
+level = 3
+id    = "Photonic_IF"
+label = "Optical Memory Interface (6 wavelengths, 12 Tbps, WDM)"
+n6    = 1.00
+perf  = 1.00
+power = 0.85
+cost  = 0.25
+notes = "wavelengths=6=n EXACT, BW=12Tbps=sigma EXACT, future"
+
+# =============================================================
+# Level 4: System — 6 candidates
+#   n6: 6 memory tiers, 12 NUMA nodes, 48 DIMMs
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level = 4
+id    = "HPC_Flat"
+label = "HPC Flat Memory (6 tiers L1-L2-L3-HBM-DDR-NVM, 12 NUMA nodes)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.40
+notes = "tiers=6=n EXACT, NUMA=12=sigma EXACT, data center"
+
+[[candidate]]
+level = 4
+id    = "Mobile_UMA"
+label = "Mobile Unified (6 power states, 12GB unified, LPDDR)"
+n6    = 1.00
+perf  = 0.55
+power = 0.95
+cost  = 0.80
+notes = "states=6=n EXACT, capacity=12GB=sigma EXACT, phone/tablet"
+
+[[candidate]]
+level = 4
+id    = "CXL_Pool"
+label = "CXL Memory Pool (6 pooled nodes, 12TB total, disaggregated)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.50
+notes = "nodes=6=n EXACT, total=12TB=sigma EXACT, cloud-native"
+
+[[candidate]]
+level = 4
+id    = "AI_Server"
+label = "AI Training Server (8 HBM GPUs, 6 NVLink, 48 DIMMs)"
+n6    = 1.00
+perf  = 0.95
+power = 0.35
+cost  = 0.25
+notes = "NVLink=6=n EXACT, DIMMs=48=sigma*tau EXACT, GPU=8=sigma-tau"
+
+[[candidate]]
+level = 4
+id    = "Edge_Compact"
+label = "Edge Memory (6 memory slots, 12W power budget, embedded)"
+n6    = 1.00
+perf  = 0.45
+power = 0.90
+cost  = 0.85
+notes = "slots=6=n EXACT, power=12W=sigma EXACT, IoT/edge AI"
+
+[[candidate]]
+level = 4
+id    = "PIM_System"
+label = "Processing-in-Memory System (6 PIM cores, 12 memory banks, near-data)"
+n6    = 1.00
+perf  = 0.80
+power = 0.80
+cost  = 0.45
+notes = "PIM=6=n EXACT, banks=12=sigma EXACT, bandwidth-bound AI"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# SRAM cells go in cache, not system-level storage
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "SRAM_6T"
+then_level = 4
+then_ids  = "HPC_Flat,AI_Server"
+
+# HBM interface needs 3D stacked arrays
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "HBM3E_IF"
+then_level = 1
+then_ids  = "3D_Stack,Bank24"
+
+# Mobile interface needs low-power controller
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "LPDDR5X_IF"
+then_level = 2
+then_ids  = "LPDDR5_Ctrl"
+
+# ReRAM/PCRAM cells pair with CIM or crossbar arrays
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "ReRAM"
+then_level = 1
+then_ids  = "CIM_Array,Crossbar"

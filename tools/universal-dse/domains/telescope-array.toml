@@ -1,0 +1,357 @@
+# =============================================================
+# Telescope Array DSE Domain Definition
+# Radio/optical telescope arrays — antenna to science pipeline
+# n=6: 6 antenna stations minimum, σ=12 baselines, J₂=24 channels
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "telescope-array"
+desc = "Telescope Array Architecture DSE (antenna/correlator/backend/pipeline/science)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Antenna (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Antenna"
+
+[[candidate]]
+level = 0
+id = "Parabolic-Dish"
+label = "Parabolic Dish (σ=12m diameter, steerable, standard radio)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Phased-Array"
+label = "Phased Array (n=6 subarrays, σ=12 elements/row, electronic steering)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Dipole-Station"
+label = "Dipole Antenna Station (6-element crossed dipole, low-freq SKA)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Segmented-Mirror"
+label = "Segmented Mirror (hexagonal segments, 6-fold symmetry, optical)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Cylindrical"
+label = "Cylindrical Reflector (CHIME-style, 6 cylinders, transit survey)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Sparse-Aperture"
+label = "Sparse Aperture Array (n=6 stations, max baseline, VLBI)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+# ============================================================
+# Level 1: Correlator (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Correlator"
+
+[[candidate]]
+level = 1
+id = "FX-Correlator"
+label = "FX Correlator (FFT-first, J₂=24 channels, standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "XF-Correlator"
+label = "XF Correlator (cross-first, σ=12 baselines, legacy)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "GPU-Correlator"
+label = "GPU-based Correlator (CUDA/OpenCL, σ·τ=48 parallel streams)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "FPGA-Correlator"
+label = "FPGA Correlator (real-time, n=6 pipeline stages, low latency)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Optical-Combiner"
+label = "Optical Beam Combiner (6-telescope, interferometric, CHARA)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Software-Correlator"
+label = "Software Correlator (distributed, σ=12 CPU nodes, flexible)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.75
+
+# ============================================================
+# Level 2: Backend (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Backend"
+
+[[candidate]]
+level = 2
+id = "Spectrometer"
+label = "Digital Spectrometer (σ·τ=48k channels, polyphase filterbank)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Pulsar-Timer"
+label = "Pulsar Timing Backend (n=6 dedispersion stages, coherent)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "VLBI-Recorder"
+label = "VLBI Recorder (σ=12 Gbps recording, Mark6, timestamp)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Transient-Buffer"
+label = "Transient Buffer (FRB detection, 6ms window, real-time trigger)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Imaging-Processor"
+label = "Imaging Processor (visibility→image, J₂=24 CLEAN iterations)"
+n6 = 1.00
+perf = 0.86
+power = 0.68
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Beamformer"
+label = "Beamformer (tied-array, n=6 beams, multibeam survey)"
+n6 = 1.00
+perf = 0.84
+power = 0.72
+cost = 0.65
+
+# ============================================================
+# Level 3: Pipeline (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Pipeline"
+
+[[candidate]]
+level = 3
+id = "CASA-Pipeline"
+label = "CASA Pipeline (standard radio, 6-stage calibration, NRAO)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "RealTime-ML"
+label = "Real-Time ML Pipeline (CNN classifier, 6 transient classes)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Batch-HPC"
+label = "Batch HPC Pipeline (cluster, σ=12 node parallel, offline)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Cloud-Scalable"
+label = "Cloud Pipeline (AWS/GCP, auto-scale, 6 processing stages)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Edge-Processing"
+label = "Edge Processing (on-site, n=6 filter stages, bandwidth reduction)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Citizen-Science"
+label = "Citizen Science (distributed, BOINC-style, σ=12 work units)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+
+# ============================================================
+# Level 4: Science (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Science"
+
+[[candidate]]
+level = 4
+id = "Cosmology-21cm"
+label = "21cm Cosmology (EoR, σ=12 redshift bins, dark ages)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Pulsar-Timing"
+label = "Pulsar Timing Array (GW detection, n=6 millisecond pulsars)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Exoplanet"
+label = "Exoplanet Direct Imaging (nulling, 6 baseline combos, habitable zone)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Transient-Survey"
+label = "Transient Survey (FRB/GRB, J₂=24hr cadence, all-sky)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Solar-Imaging"
+label = "Solar Radio Imaging (heliophysics, σ=12 freq bands, space weather)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "VLBI-Astrometry"
+label = "VLBI Astrometry (sub-mas, 6 station network, reference frame)"
+n6 = 1.00
+perf = 0.86
+power = 0.72
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Optical beam combiner requires segmented mirror antennas
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Optical-Combiner"
+then_level = 0
+then_ids = ["Segmented-Mirror"]
+
+# VLBI recorder requires sparse aperture or parabolic dish
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "VLBI-Recorder"
+then_level = 0
+then_ids = ["Sparse-Aperture", "Parabolic-Dish"]
+
+# Pulsar timing backend for pulsar science
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Pulsar-Timer"
+then_level = 4
+then_ids = ["Pulsar-Timing", "Transient-Survey"]
+
+# Citizen science only with batch/cloud pipeline
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Citizen-Science"
+then_level = 4
+then_ids = ["Pulsar-Timing", "Transient-Survey", "Cosmology-21cm"]

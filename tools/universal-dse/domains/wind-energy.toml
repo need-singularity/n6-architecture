@@ -1,0 +1,390 @@
+# =============================================================
+# HEXA-WIND DSE Domain Definition
+# Wind Turbine Systems
+# n=6: n/phi=3 blades, 6-pole generator, sigma=12 turbines/row
+# BT-62 (Grid frequency), BT-63 (Panel cell ladder)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "wind-energy"
+desc = "Wind Turbine System DSE (BT-62, n/phi=3 blades, 6-pole)"
+levels = ["Blade", "Generator", "Tower", "Grid", "Farm"]
+vision = "Optimal wind harvesting — 3 blades, 6-pole generator, 12 turbines/row"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Blade — 6 candidates
+#   n6: n/phi=3 blades, 6 airfoil sections, sigma=12 control zones
+# =============================================================
+[[level]]
+name = "Blade"
+
+[[candidate]]
+level = 0
+id    = "GFRP_3B"
+label = "GFRP 3-Blade (3 blades, 6 airfoil sections, 80m span)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.85
+notes = "blades=3=n/phi EXACT, sections=6=n EXACT, glass fiber"
+
+[[candidate]]
+level = 0
+id    = "CFRP_3B"
+label = "CFRP 3-Blade (3 blades, 6 spar caps, 120m span)"
+n6    = 1.00
+perf  = 0.90
+power = 0.80
+cost  = 0.50
+notes = "blades=3=n/phi EXACT, spars=6=n EXACT, carbon fiber, offshore"
+
+[[candidate]]
+level = 0
+id    = "Hybrid_3B"
+label = "Hybrid GFRP+CFRP (3 blades, 12 laminate layers, 100m)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.65
+notes = "blades=3=n/phi EXACT, laminates=12=sigma EXACT, cost-optimized"
+
+[[candidate]]
+level = 0
+id    = "Smart_3B"
+label = "Smart Blade (3 blades, 6 trailing-edge flaps, active control)"
+n6    = 1.00
+perf  = 0.92
+power = 0.85
+cost  = 0.40
+notes = "blades=3=n/phi EXACT, flaps=6=n EXACT, load reduction"
+
+[[candidate]]
+level = 0
+id    = "Segmented_3B"
+label = "Segmented Blade (3 blades, 6 segments/blade, bolted joints)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.70
+notes = "blades=3=n/phi EXACT, segments=6=n EXACT, transport-friendly"
+
+[[candidate]]
+level = 0
+id    = "Recycl_3B"
+label = "Recyclable Thermoplastic (3 blades, 6 resin zones, Elium)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.75
+notes = "blades=3=n/phi EXACT, zones=6=n EXACT, end-of-life recyclable"
+
+# =============================================================
+# Level 1: Generator — 6 candidates
+#   n6: 6-pole, 12 coil sets, sigma*tau=48 slots
+# =============================================================
+[[level]]
+name = "Generator"
+
+[[candidate]]
+level = 1
+id    = "DFIG_6P"
+label = "DFIG 6-Pole (6 poles, 12 stator coils, 48 slots)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.80
+notes = "poles=6=n EXACT, coils=12=sigma EXACT, slots=48=sigma*tau EXACT"
+
+[[candidate]]
+level = 1
+id    = "PMSG_6P"
+label = "PMSG Direct-Drive (6 pole pairs, 12 phase groups, NdFeB)"
+n6    = 1.00
+perf  = 0.90
+power = 0.85
+cost  = 0.55
+notes = "pole_pairs=6=n EXACT, groups=12=sigma EXACT, no gearbox"
+
+[[candidate]]
+level = 1
+id    = "SCSG"
+label = "Superconducting Generator (6 HTS coils, 12T field)"
+n6    = 1.00
+perf  = 0.95
+power = 0.90
+cost  = 0.25
+notes = "coils=6=n EXACT, field=12T=sigma EXACT, compact + lightweight"
+
+[[candidate]]
+level = 1
+id    = "EESG_6P"
+label = "Electrically Excited SG (6 poles, 12 excitation windings)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.85
+notes = "poles=6=n EXACT, windings=12=sigma EXACT, no rare earth"
+
+[[candidate]]
+level = 1
+id    = "SRG"
+label = "Switched Reluctance (6 stator poles, 4 rotor poles=tau)"
+n6    = 1.00
+perf  = 0.60
+power = 0.60
+cost  = 0.90
+notes = "stator=6=n EXACT, rotor=4=tau EXACT, simple + robust"
+
+[[candidate]]
+level = 1
+id    = "MedSpeed"
+label = "Medium-Speed PMG (6 pole pairs, 2-stage gearbox=phi)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.70
+notes = "pole_pairs=6=n EXACT, gear_stages=2=phi EXACT, balanced"
+
+# =============================================================
+# Level 2: Tower — 6 candidates
+#   n6: 6 tower sections, 12 bolt flanges, 120m hub height
+# =============================================================
+[[level]]
+name = "Tower"
+
+[[candidate]]
+level = 2
+id    = "Steel_Tube"
+label = "Steel Tubular (6 sections, 12 bolt flanges, 120m)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.80
+notes = "sections=6=n EXACT, flanges=12=sigma EXACT, hub=120m=sigma*(sigma-phi)"
+
+[[candidate]]
+level = 2
+id    = "Concrete_Hyb"
+label = "Concrete-Steel Hybrid (6 concrete segments, 12 tendons, 140m)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.65
+notes = "segments=6=n EXACT, tendons=12=sigma EXACT, taller reach"
+
+[[candidate]]
+level = 2
+id    = "Lattice"
+label = "Lattice Tower (6 leg segments, 12 cross-braces, 100m)"
+n6    = 1.00
+perf  = 0.65
+power = 0.65
+cost  = 0.85
+notes = "legs=6=n EXACT, braces=12=sigma EXACT, material-efficient"
+
+[[candidate]]
+level = 2
+id    = "Floating_Semi"
+label = "Floating Semisubmersible (6 mooring lines, 3 columns=n/phi)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.40
+notes = "moorings=6=n EXACT, columns=3=n/phi EXACT, deep offshore"
+
+[[candidate]]
+level = 2
+id    = "Monopile"
+label = "Monopile Foundation (6m diameter, 12 transition piece bolts)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.70
+notes = "diameter=6m=n EXACT, bolts=12=sigma EXACT, shallow offshore"
+
+[[candidate]]
+level = 2
+id    = "Jacket"
+label = "Jacket Foundation (6 legs, 12 braces, 4 levels=tau)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.55
+notes = "legs=6=n EXACT, braces=12=sigma EXACT, levels=4=tau EXACT"
+
+# =============================================================
+# Level 3: Grid — 6 candidates
+#   n6: 60Hz=sigma*sopfr, 6 protection relays, 12 MVA transformer
+# =============================================================
+[[level]]
+name = "Grid"
+
+[[candidate]]
+level = 3
+id    = "AC_66kV"
+label = "AC 66kV Collection (6 feeders, 12 MVA transformer)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.80
+notes = "feeders=6=n EXACT, MVA=12=sigma EXACT, onshore standard"
+
+[[candidate]]
+level = 3
+id    = "HVDC_VSC"
+label = "HVDC-VSC Export (6 converter modules, 12 pulse bridge)"
+n6    = 1.00
+perf  = 0.90
+power = 0.85
+cost  = 0.45
+notes = "modules=6=n EXACT, pulse=12=sigma EXACT, long-distance offshore"
+
+[[candidate]]
+level = 3
+id    = "AC_33kV"
+label = "AC 33kV Array (6 turbines/string, 12 strings, standard)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.85
+notes = "turbines/string=6=n EXACT, strings=12=sigma EXACT, proven"
+
+[[candidate]]
+level = 3
+id    = "DC_Collect"
+label = "DC Collection Grid (6 DC/DC converters, 48V bus=sigma*tau)"
+n6    = 1.00
+perf  = 0.80
+power = 0.80
+cost  = 0.50
+notes = "converters=6=n EXACT, bus=48V=sigma*tau EXACT, future"
+
+[[candidate]]
+level = 3
+id    = "Battery_Hyb"
+label = "Battery Hybrid Grid (6 battery modules, 12 MWh storage)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.55
+notes = "modules=6=n EXACT, storage=12MWh=sigma EXACT, dispatchable"
+
+[[candidate]]
+level = 3
+id    = "H2_Electro"
+label = "Hydrogen Electrolyzer (6 cell stacks, 12 MW capacity)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.45
+notes = "stacks=6=n EXACT, capacity=12MW=sigma EXACT, green H2"
+
+# =============================================================
+# Level 4: Farm — 6 candidates
+#   n6: sigma=12 turbines/row, 6 rows, 48 total possible
+# =============================================================
+[[level]]
+name = "Farm"
+
+[[candidate]]
+level = 4
+id    = "Onshore_72"
+label = "Onshore Farm 72 MW (12 turbines/row, 6 rows, 6 MW each)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.85
+notes = "turbines/row=12=sigma EXACT, rows=6=n EXACT, each=6MW=n EXACT"
+
+[[candidate]]
+level = 4
+id    = "Offshore_Fix"
+label = "Fixed Offshore 144 MW (12 turbines/row, 12 rows, 12 MW each)"
+n6    = 1.00
+perf  = 0.85
+power = 0.85
+cost  = 0.55
+notes = "turbines=12=sigma, rows=12=sigma, each=12MW=sigma, total=144=sigma^2"
+
+[[candidate]]
+level = 4
+id    = "Offshore_Float"
+label = "Floating Offshore 72 MW (6 turbines/line, 12 lines, 12 MW each)"
+n6    = 1.00
+perf  = 0.90
+power = 0.80
+cost  = 0.35
+notes = "turbines/line=6=n EXACT, lines=12=sigma EXACT, deep water"
+
+[[candidate]]
+level = 4
+id    = "Hybrid_Solar"
+label = "Wind+Solar Hybrid Farm (6 wind + 6 solar arrays, 24 MW total)"
+n6    = 1.00
+perf  = 0.80
+power = 0.85
+cost  = 0.60
+notes = "wind=6=n EXACT, solar=6=n EXACT, total=24MW=J2 EXACT"
+
+[[candidate]]
+level = 4
+id    = "Distributed"
+label = "Distributed Wind (6 community clusters, 12 turbines total)"
+n6    = 1.00
+perf  = 0.55
+power = 0.75
+cost  = 0.80
+notes = "clusters=6=n EXACT, turbines=12=sigma EXACT, local grid"
+
+[[candidate]]
+level = 4
+id    = "GW_Scale"
+label = "GW-Scale Hub (6 substations, 12 export cables, 1.2 GW)"
+n6    = 1.00
+perf  = 0.95
+power = 0.90
+cost  = 0.30
+notes = "substations=6=n EXACT, cables=12=sigma EXACT, 1.2GW=sigma/10 EXACT"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# CFRP blades for offshore
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "CFRP_3B"
+then_level = 2
+then_ids  = "Floating_Semi,Monopile,Jacket"
+
+# Floating foundation needs HVDC export
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "Floating_Semi"
+then_level = 3
+then_ids  = "HVDC_VSC,DC_Collect"
+
+# Superconducting generator too expensive for onshore distributed
+[[rule]]
+type      = "exclude"
+if_level  = 1
+if_id     = "SCSG"
+then_level = 4
+then_ids  = "Distributed"
+
+# Direct-drive PMSG pairs with offshore farms
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "PMSG_6P"
+then_level = 4
+then_ids  = "Offshore_Fix,Offshore_Float,GW_Scale"
