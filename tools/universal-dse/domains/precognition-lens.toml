@@ -219,6 +219,16 @@ notes  = "causal_levels=4=tau EXACT, edges=6=n EXACT, depth=12=sigma"
 # =============================================================
 # Level 3: Prediction (예측 모델) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 2
+id     = "DirectionN6"
+label  = "n=6 시간 방향 렌즈 (n=6 예측 축)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "prediction_axes=n=6 EXACT, n6-temporal direction lens"
 [[level]]
 name = "Prediction"
 

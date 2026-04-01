@@ -42,6 +42,16 @@ notes = "R(6)=1. σ(n)·φ(n)=n·τ(n) iff n=6. 3 independent proofs. Project co
 
 [[candidate]]
 level = 0
+id    = "N6_Unified"
+label = "n=6 Unified Origin (R(6)=1 + Egyptian + Leech J2=24 + S6 outer)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.95
+notes = "R(6)=1 EXACT, 1/2+1/3+1/6=1 EXACT, J2=24 Leech EXACT, Out(S6)=Z/2Z unique EXACT, 4 converging proofs"
+
+[[candidate]]
+level = 0
 id    = "Egyptian"
 label = "Egyptian Fraction 1/2+1/3+1/6=1"
 n6    = 0.90
@@ -128,6 +138,16 @@ perf  = 0.90
 power = 0.50
 cost  = 0.90
 notes = "σ→(σ-τ)+(n/φ)+μ = 8+3+1=12. Self-consistent. H-CP-5,11 EXACT/CLOSE"
+
+[[candidate]]
+level = 1
+id    = "N6_GaugeComplete"
+label = "n=6 Complete Gauge (sigma=12 generators, rank=tau=4, E6 rank=n=6)"
+n6    = 1.00
+perf  = 0.92
+power = 0.50
+cost  = 0.92
+notes = "generators=12=sigma EXACT, decomp=(sigma-tau)+(n/phi)+mu=8+3+1 EXACT, rank=4=tau EXACT, E6_rank=6=n EXACT"
 
 [[candidate]]
 level = 1
@@ -268,6 +288,16 @@ power = 0.20
 cost  = 0.60
 notes = "Quarks/leptons composed of n=6 preons. Rishon model variant. Unconfirmed"
 
+[[candidate]]
+level = 2
+id    = "N6_MatterMap"
+label = "n=6 Complete Matter Map (6Q+6L=12=sigma, 3 gen=n/phi, 15/gen)"
+n6    = 1.00
+perf  = 0.95
+power = 0.70
+cost  = 0.90
+notes = "quarks=6=n EXACT, leptons=6=n EXACT, total=12=sigma EXACT, gen=3=n/phi EXACT, per_gen=15=sigma+n/phi, DOF=90=n*15"
+
 # =============================================================
 # Level 3: Constant Architecture -- 8 candidates
 #   Which dimensionless constant patterns connect to n=6
@@ -286,6 +316,16 @@ perf  = 0.95
 power = 0.80
 cost  = 0.85
 notes = "Strongest single match. 2-param formula, dimensionless. H-CP-7 EXACT"
+
+[[candidate]]
+level = 3
+id    = "N6_ConstQuad"
+label = "n=6 Constant Quadruplet (6pi5 + 27/28 + 3/13 + mu_pair, 4=tau matches)"
+n6    = 1.00
+perf  = 0.95
+power = 0.85
+cost  = 0.90
+notes = "matches=4=tau EXACT (m_p/m_e+n_s+sin2theta_W+mu_moments), avg_err<0.1%, all n=6 arithmetic only"
 
 [[candidate]]
 level = 3
@@ -445,6 +485,16 @@ perf  = 0.50
 power = 0.85
 cost  = 0.65
 notes = "New particle searches. SUSY/preon confirmation or exclusion. Post-LHC era"
+
+[[candidate]]
+level = 4
+id    = "N6_MultiProbe"
+label = "n=6 Multi-Probe Verification (n/phi=3 pillars: CMB+Neutrino+Collider)"
+n6    = 1.00
+perf  = 0.92
+power = 0.95
+cost  = 0.75
+notes = "probes=3=n/phi EXACT (CMB+nu+collider), tests=12=sigma EXACT, predictions=6=n falsifiable, eta~6e-10=n*10^{-(sigma-phi)}"
 
 # =============================================================
 # Compatibility Rules

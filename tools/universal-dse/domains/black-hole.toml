@@ -284,6 +284,16 @@ notes  = "microstate_types=sopfr=5 EXACT, no singularity, string theory"
 # =============================================================
 # Level 4: Observation (관측) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "QuantumExtremalN6"
+label  = "양자 극값면 n=6 엔트로피 채널 (n=6 정보 모드)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "info_modes=n=6 EXACT, quantum extremal surface, information recovery"
 [[level]]
 name = "Observation"
 

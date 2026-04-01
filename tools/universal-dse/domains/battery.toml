@@ -176,6 +176,15 @@ perf = 0.96
 power = 0.65
 cost = 0.71
 
+[[candidate]]
+level = 2
+id = "Hex6_Prismatic"
+label = "Hexagonal 6-face Prismatic (BT-43 CN=6 cell geometry, σ=12 tab spacing)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.68
+
 # ============================================================
 # Level 3: BMS / Chip (5 candidates)
 # ============================================================

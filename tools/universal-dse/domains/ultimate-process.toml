@@ -152,6 +152,16 @@ notes  = "current=5nA=sopfr EXACT, mask writing, R&D prototyping, multi-beam"
 # =============================================================
 # Level 2: Etch (식각/증착) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 1
+id     = "LithoN6"
+label  = "n=6 EUV 노광 스텝 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "exposure_steps=n=6 EXACT, n6-step EUV lithography"
 [[level]]
 name = "Etch"
 
@@ -284,6 +294,16 @@ notes  = "layers=12=sigma EXACT, BT-75 HBM interface, TSV, 1.2TB/s, AI memory wa
 # =============================================================
 # Level 4: Inspect (검사) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "PackageN6"
+label  = "sigma=12 다이 패키징 (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "die_count=sigma=12 EXACT, n6-die advanced packaging"
 [[level]]
 name = "Inspect"
 
@@ -342,6 +362,16 @@ notes  = "tests=4=tau EXACT (HTOL/ESD/EM/TDDB), JEDEC standard, lifetime predict
 # =============================================================
 
 # HighNA_EUV requires EUV_13_5nm base technology
+
+[[candidate]]
+level  = 4
+id     = "InspectN6"
+label  = "n=6 시그마 수율 검사 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "sigma_quality=n=6 EXACT, n6-sigma yield inspection"
 [[rule]]
 type       = "require"
 if_level   = 1

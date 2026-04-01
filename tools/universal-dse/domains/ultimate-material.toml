@@ -284,6 +284,16 @@ notes  = "cycle=2=phi EXACT (dose/purge), atomic layer control, conformal coatin
 # =============================================================
 # Level 4: Application (응용) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "ProcessN6"
+label  = "n=6 CVD 파라미터 공정 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "cvd_params=n=6 EXACT, n6-parameter CVD processing"
 [[level]]
 name = "Application"
 
@@ -342,6 +352,16 @@ notes  = "topological insulator, 2D heterostructure, qubit material, frontier"
 # =============================================================
 
 # Graphene requires Carbon_Z6
+
+[[candidate]]
+level  = 4
+id     = "AppSolarN6"
+label  = "sigma*phi=24 효율 태양전지 응용 (J2=24 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "efficiency_factor=J2=24 EXACT, n6-solar cell application"
 [[rule]]
 type       = "require"
 if_level   = 1

@@ -291,6 +291,16 @@ power  = 0.50
 cost   = 0.35
 notes  = "sigma-tau=8 descriptors EXACT, ML-guided discovery, GNoME-style"
 
+[[candidate]]
+level  = 3
+id     = "OctahedralCN6"
+label  = "팔면체 CN=6 촉매 (n=6 배위수 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.50
+notes  = "CN=6=n EXACT, d_orbitals_split=2=phi (eg+t2g), ligand_field_stabilization, octahedral_geometry, BT-43_universality"
+
 # =============================================================
 # Level 4: Application (응용) -- 5 candidates
 # =============================================================

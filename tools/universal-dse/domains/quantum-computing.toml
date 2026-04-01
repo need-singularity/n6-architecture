@@ -347,6 +347,16 @@ power  = 0.60
 cost   = 0.35
 notes  = "topological protection, Majorana zero modes, lowest error rate potential"
 
+[[candidate]]
+level  = 4
+id     = "N6_Modular"
+label  = "n=6 모듈형 양자 프로세서 (6 큐비트 모듈, σ=12 inter-module link)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "module_size=6=n EXACT, inter_links=12=sigma EXACT, module_stages=4=tau EXACT, scalable lattice surgery"
+
 # =============================================================
 # Compatibility Rules
 # =============================================================

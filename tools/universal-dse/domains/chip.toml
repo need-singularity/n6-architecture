@@ -1,5 +1,6 @@
 # N6 Chip Architecture DSE — extracted from tools/dse-calc/main.rs
-# 6 Materials × 5 Processes × 5 Cores × 5 Chips × 4 Systems = 3,000 combos
+# 8 Materials × 7 Processes × 7 Cores × 7 Chips × 6 Systems = 16,464 combos
+# v2: Photonic + Neuromorphic paths added for thermal-energy bridge
 
 [meta]
 name = "chip"
@@ -67,6 +68,24 @@ perf = 0.55
 power = 0.38
 cost = 0.75
 
+[[candidate]]
+id = "SiPhotonic"
+label = "Silicon Photonics (Z=14, waveguide 6um core, 1550nm C-band)"
+n6 = 1.00
+perf = 0.85
+power = 0.95
+cost = 0.45
+notes = "waveguide_core=6um=n EXACT, WDM=12ch=sigma EXACT, near-zero Joule heat"
+
+[[candidate]]
+id = "InP"
+label = "Indium Phosphide (Z=49, direct bandgap, optical gain medium)"
+n6 = 0.50
+perf = 0.90
+power = 0.85
+cost = 0.30
+notes = "direct_bandgap=true, laser_source, photonic_integration"
+
 # ============================================================
 # Level 1: Process (공정)
 #   n6 checks: gate_pitch==48, metal_pitch==28, metal_layers==12,
@@ -115,6 +134,24 @@ n6 = 0.40
 perf = 1.00
 power = 0.90
 cost = 0.60
+
+[[candidate]]
+id = "Photonic_Fab"
+label = "Photonic Fab (MZI sigma=12 ports, ring n=6 modes, 200mm SiPh, 90% yield)"
+n6 = 1.00
+perf = 0.80
+power = 0.95
+cost = 0.55
+notes = "MZI_ports=12=sigma EXACT, ring_modes=6=n EXACT, near-zero heat, CMOS-compatible"
+
+[[candidate]]
+id = "Hybrid_EO"
+label = "Hybrid Electro-Optic (LiNbO3 modulator + Si CMOS, E-O eff 90%)"
+n6 = 0.80
+perf = 0.92
+power = 0.90
+cost = 0.40
+notes = "EO_efficiency=0.9=1-1/(sigma-phi) EXACT, hybrid_integration"
 
 # ============================================================
 # Level 2: Core (코어)
@@ -165,6 +202,24 @@ perf = 0.25
 power = 0.85
 cost = 0.90
 
+[[candidate]]
+id = "Photonic_TPU"
+label = "Photonic TPU (6 MZI mesh layers, 12 wavelength channels, 24 ring resonators)"
+n6 = 1.00
+perf = 0.85
+power = 0.98
+cost = 0.35
+notes = "MZI_layers=6=n, WDM=12=sigma, rings=24=J2 ALL EXACT, near-zero TDP for compute"
+
+[[candidate]]
+id = "Neuromorphic"
+label = "Neuromorphic SNN (6 spiking layers, 12 neuron clusters, tau=4 time constants)"
+n6 = 1.00
+perf = 0.45
+power = 0.99
+cost = 0.70
+notes = "layers=6=n, clusters=12=sigma, tau=4 EXACT, event-driven ultra-low power"
+
 # ============================================================
 # Level 3: Chip (칩)
 #   n6 checks: hbm_stacks==8, total_HBM==288GB,
@@ -214,6 +269,24 @@ perf = 0.10
 power = 0.95
 cost = 0.90
 
+[[candidate]]
+id = "Photonic_Chip"
+label = "Photonic Chip (0 HBM, optical memory, 30W TDP, 300mm2, 6 photonic tiles)"
+n6 = 1.00
+perf = 0.70
+power = 0.99
+cost = 0.40
+notes = "TDP=30W=1/10 electronic=1/(sigma-phi) EXACT, tiles=6=n EXACT, near-zero Joule heat"
+
+[[candidate]]
+id = "Hybrid_EP"
+label = "Hybrid Electro-Photonic (4 HBM + 6 photonic tiles, 120W TDP, 500mm2)"
+n6 = 0.80
+perf = 0.85
+power = 0.92
+cost = 0.35
+notes = "photonic_tiles=6=n, HBM=4=tau, TDP 60% less than pure electronic"
+
 # ============================================================
 # Level 4: System (시스템)
 #   n6 checks: gpus/node==8, nodes/rack==12, rack_kW==48,
@@ -254,6 +327,24 @@ n6 = 0.00
 perf = 0.30
 power = 1.00
 cost = 0.90
+
+[[candidate]]
+id = "Photonic_DC"
+label = "Photonic DC (6 photonic nodes, 12 optical switches, 4.8kW rack, PUE=1.02)"
+n6 = 1.00
+perf = 0.80
+power = 0.98
+cost = 0.45
+notes = "nodes=6=n, switches=12=sigma, rack_kW=4.8=48/sigma-phi EXACT, PUE->1.0 (no cooling needed)"
+
+[[candidate]]
+id = "Hybrid_DC"
+label = "Hybrid DC (8 GPU + 6 photonic/node, 12 node/rack, 30kW, PUE=1.1)"
+n6 = 0.80
+perf = 0.92
+power = 0.88
+cost = 0.40
+notes = "photonic_nodes=6=n, electronic_GPU=8=sigma-tau, rack_kW=30 (37.5% less than 48kW)"
 
 # ============================================================
 # Compatibility Rules
@@ -298,3 +389,42 @@ if_level = 1
 if_id = "TSMC_N2"
 then_level = 3
 then_ids = "HEXA-1_Full,B200_Style"
+
+# Photonic Fab naturally pairs with Photonic cores and chips
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Photonic_Fab"
+then_level = 2
+then_ids = "Photonic_TPU"
+
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Photonic_Fab"
+then_level = 3
+then_ids = "Photonic_Chip,Hybrid_EP"
+
+# SiPhotonic material best with Photonic Fab or Hybrid_EO process
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SiPhotonic"
+then_level = 1
+then_ids = "Photonic_Fab,Hybrid_EO"
+
+# Photonic DC pairs with Photonic chips
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Photonic_DC"
+then_level = 3
+then_ids = "Photonic_Chip,Hybrid_EP"
+
+# Diamond also excellent for photonic (NV centers)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Diamond"
+then_level = 2
+then_ids = "HEXA-P,Photonic_TPU"

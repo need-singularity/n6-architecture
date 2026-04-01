@@ -218,6 +218,16 @@ notes  = "brain-to-brain, quantum coherence hypothesis, ultimate goal, speculati
 # =============================================================
 # Level 3: Preservation (보존) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 2
+id     = "UploadN6"
+label  = "n=6 뇌 영역 업로드 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "brain_regions=n=6 EXACT, n6-region brain upload scanning"
 [[level]]
 name = "Preservation"
 
@@ -284,6 +294,16 @@ notes  = "states=2=phi EXACT (coherent/decoherent), quantum brain state preserva
 # =============================================================
 # Level 4: Transcendence (초월) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "PreserveN6"
+label  = "n=6 줄기세포 계통 보존 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "lineages=n=6 EXACT, n6-lineage organ preservation"
 [[level]]
 name = "Transcendence"
 
@@ -342,6 +362,16 @@ notes  = "hive mind, collective consciousness, shared experience, Omega Point"
 # =============================================================
 
 # ConsciousnessTransfer requires Connectome (need brain map first)
+
+[[candidate]]
+level  = 4
+id     = "TranscendN6"
+label  = "n=6 인터페이스 초월 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "interfaces=n=6 EXACT, n6-interface transcendence system"
 [[rule]]
 type       = "require"
 if_level   = 2

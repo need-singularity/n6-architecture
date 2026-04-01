@@ -217,6 +217,16 @@ notes  = "depths=5=sopfr EXACT (0.25/0.5/1.0/1.5/2.0mm), collagen_induction=true
 # =============================================================
 # Level 3: Delivery (전달 시스템) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 2
+id     = "TherapyN6"
+label  = "n=6 성장인자 칵테일 치료 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "growth_factors=n=6 EXACT, n6-factor hair regeneration therapy"
 [[level]]
 name = "Delivery"
 
@@ -283,6 +293,16 @@ notes  = "wavelengths=2=phi EXACT (red_660nm/NIR_850nm), photobiomodulation=true
 # =============================================================
 # Level 4: Outcome (치료 결과) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "DeliveryN6"
+label  = "n=6 약물전달 경로 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "delivery_routes=n=6 EXACT, n6-route drug delivery system"
 [[level]]
 name = "Outcome"
 
@@ -341,6 +361,16 @@ notes  = "de_novo_follicle=true, permanent=true, holy_grail=true"
 # =============================================================
 
 # DHT_Androgen required for Finasteride
+
+[[candidate]]
+level  = 4
+id     = "OutcomeN6"
+label  = "n=6 평가지표 복원 결과 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "metrics=n=6 EXACT, n6-metric hair restoration outcome"
 [[rule]]
 type       = "require"
 if_level   = 2

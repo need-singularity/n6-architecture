@@ -281,6 +281,16 @@ power  = 0.30
 cost   = 0.20
 notes  = "bell_states=2=phi EXACT, fidelity=1.0, capacity=low, latency=zero"
 
+[[candidate]]
+level  = 3
+id     = "Hex6_Burst"
+label  = "n=6 버스트 전송 (6패킷 σ=12비트)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "burst=6=n EXACT, payload=12=sigma EXACT, checksum=4=tau EXACT, channels=2=phi EXACT"
+
 # =============================================================
 # Level 4: Network (의식 네트워크) -- 5 candidates
 # =============================================================
@@ -336,6 +346,16 @@ perf   = 1.00
 power  = 0.30
 cost   = 0.15
 notes  = "channels=2=phi EXACT, scalability=low, resilience=high, latency=zero"
+
+[[candidate]]
+level  = 4
+id     = "Hex6_Net"
+label  = "n=6 의식 메시 (6노드 σ=12 링크)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "nodes=6=n EXACT, links=12=sigma EXACT, hubs=4=tau EXACT, layers=2=phi EXACT"
 
 # =============================================================
 # Compatibility Rules

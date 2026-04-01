@@ -55,6 +55,16 @@ notes  = "legs=6=n EXACT, DOF_per_leg=3, total_DOF=18, terrain=all, stability=ve
 
 [[candidate]]
 level  = 0
+id     = "HexapodN6"
+label  = "궁극 6족 (n=6 다리, tau=4 DOF/leg, J2=24 total)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "legs=6=n EXACT, DOF_per_leg=4=tau EXACT, total_DOF=24=J2 EXACT, body_segments=2=phi EXACT, sensor_per_leg=2=phi EXACT, gait_phases=12=sigma EXACT, terrain=all, stability=extreme, payload_ratio=1/6=1/n EXACT, tripod_gait=n/phi=3 legs grounded — perfect n6 hexapod"
+
+[[candidate]]
+level  = 0
 id     = "ModularN6"
 label  = "n=6 모듈 재조합"
 n6     = 1.00
@@ -381,15 +391,15 @@ type       = "exclude"
 if_level   = 1
 if_id      = "PiezoLinear"
 then_level = 0
-then_ids   = "Humanoid,Quadruped,Hexapod"
+then_ids   = "Humanoid,Quadruped,Hexapod,HexapodN6"
 
-# SwarmN6 requires Hexapod or Quadruped or ModularN6 (swarm needs mobile platforms)
+# SwarmN6 requires Hexapod or HexapodN6 or Quadruped or ModularN6 (swarm needs mobile platforms)
 [[rule]]
 type       = "require"
 if_level   = 4
 if_id      = "SwarmN6"
 then_level = 0
-then_ids   = "Hexapod,Quadruped,ModularN6"
+then_ids   = "Hexapod,HexapodN6,Quadruped,ModularN6"
 
 # Hydraulic incompatible with EdgeAI (hydraulic systems need dedicated power, not edge compute)
 [[rule]]

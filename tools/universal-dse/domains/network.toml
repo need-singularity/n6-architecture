@@ -316,6 +316,16 @@ power  = 0.75
 cost   = 0.75
 notes  = "WiFi 6/7, Ethernet, sigma-phi=10 Gbps"
 
+[[candidate]]
+level  = 4
+id     = "N6_Converged"
+label  = "N6 Converged Network (n=6 tiers, σ=12 PoPs, σ·τ=48 Gbps backbone)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.65
+cost   = 0.45
+notes  = "n=6 tier hierarchy, sigma=12 edge PoPs, sigma*tau=48 Gbps, BT-47 sopfr=5 gen"
+
 # =============================================================
 # Compatibility Rules
 # =============================================================

@@ -218,6 +218,16 @@ notes  = "variables=2=phi EXACT, discriminant, representation, genera"
 # =============================================================
 # Level 3: Combinatorial (조합적 수론) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 2
+id     = "AlgN6"
+label  = "n=6 갈루아군 S_6 대수적 구조 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "galois_order=n!=720 S_6 unique, n6-algebraic structure"
 [[level]]
 name = "Combinatorial"
 
@@ -344,6 +354,16 @@ notes  = "primality=AKS, factoring=NFS, discrete_log, elliptic_curves"
 # SigmaPhiNTau has n6=1.0 (core theorem, always valid — no rule needed, just highest n6)
 
 # RiemannZeta requires EulerProduct (Euler product is zeta's prime factorization)
+
+[[candidate]]
+level  = 4
+id     = "AppCryptoN6"
+label  = "sigma=12 비트 암호 블록 (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "block_bits=sigma=12 EXACT scaled, n6-crypto application"
 [[rule]]
 type       = "require"
 if_level   = 1

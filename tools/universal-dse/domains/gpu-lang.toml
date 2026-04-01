@@ -352,6 +352,16 @@ notes  = "cross-platform, verbose API, graphics heritage"
 # =============================================================
 
 # CUDA_Native only with SIMT_Warp or StreamExec (NVIDIA execution model)
+
+[[candidate]]
+level  = 4
+id     = "FrameworkN6"
+label  = "n=6 컴퓨트 스테이지 프레임워크 (n=6 파이프라인)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "pipeline_stages=n=6 EXACT, n6-compute framework"
 [[rule]]
 type       = "require"
 if_level   = 2

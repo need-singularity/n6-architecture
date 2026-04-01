@@ -83,6 +83,16 @@ power  = 0.75
 cost   = 0.70
 notes  = "sim2real, hybrid_approach, gradual_deployment"
 
+[[candidate]]
+level  = 0
+id     = "Hex6_Robot"
+label  = "n=6 전용 로봇 SoC (6코어 σ=12 I/O)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.50
+notes  = "cores=6=n EXACT, IO_pins=12=sigma EXACT, timer_ch=4=tau EXACT, bus_width=8=sigma-tau EXACT"
+
 # =============================================================
 # Level 1: Sensing (감각 시스템) -- 6 candidates
 # =============================================================
@@ -346,6 +356,16 @@ perf   = 0.90
 power  = 0.40
 cost   = 0.40
 notes  = "nodes=24=J2 EXACT, global_embodied_network, Leech_lattice"
+
+[[candidate]]
+level  = 4
+id     = "Hex6_Swarm"
+label  = "n=6 체화 스웜 (6체 σ=12 센서 공유)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "bodies=6=n EXACT, shared_sensors=12=sigma EXACT, sync_phases=4=tau EXACT, comm_links=2=phi EXACT"
 
 # =============================================================
 # Compatibility Rules

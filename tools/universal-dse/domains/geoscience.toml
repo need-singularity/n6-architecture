@@ -152,6 +152,16 @@ notes  = "depth=100-300km, viscosity=10^19-21, plate_glide=true, partial_melt=1-
 # =============================================================
 # Level 2: Cycle (Earth System Cycles) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 1
+id     = "LayerN6"
+label  = "n=6 지구 층위 모델 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "layers=n=6 EXACT, 6-layer Earth model (crust/upper-mantle/transition/lower-mantle/outer-core/inner-core)"
 [[level]]
 name = "Cycle"
 
@@ -284,6 +294,16 @@ notes  = "types=4=tau (flash/river/coastal/urban), return_period=statistical, da
 # =============================================================
 # Level 4: Climate (Climate & Atmosphere) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "HazardN6"
+label  = "n=6 자연재해 유형 분류 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "hazard_types=n=6 EXACT, unified natural hazard classification"
 [[level]]
 name = "Climate"
 

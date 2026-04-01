@@ -46,6 +46,15 @@ power = 0.60
 cost = 0.85
 
 [[candidate]]
+id = "N6_MgB2_Hex"
+label = "MgB2 Hexagonal (n=6 symmetry, phi=2 bands, tau=4 phonons)"
+n6 = 1.00
+perf = 0.60
+power = 0.65
+cost = 0.85
+notes = "hex_symm=6=n EXACT, bands=2=phi EXACT (sigma/pi), phonon_modes=4=tau EXACT, Tc=39K, cheap"
+
+[[candidate]]
 id = "NbTi"
 label = "NbTi (Tc=9.3K~sigma-n/phi, BCC, workhorse LTS)"
 n6 = 0.55
@@ -125,6 +134,15 @@ perf = 0.50
 power = 0.80
 cost = 0.90
 
+[[candidate]]
+id = "N6_IBAD_RCE"
+label = "IBAD+RCE 6-layer deposition (n=6 buffer layers, REBCO scale-up)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.55
+notes = "layers=6=n EXACT, steps=12=sigma per layer EXACT, substrate+buffer+seed+REBCO+Ag+Cu architecture"
+
 # ============================================================
 # Level 2: Form (형태)
 #   n6 checks: conductor geometry, current paths
@@ -181,6 +199,15 @@ perf = 0.88
 power = 0.82
 cost = 0.50
 
+[[candidate]]
+id = "N6_HexWire"
+label = "Hexagonal 6-filament wire (n=6 filaments, sigma=12 twist pitch)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+notes = "filaments=6=n EXACT, twist_pitch_mm=12=sigma EXACT, Cu:SC_ratio=phi=2 EXACT, hexagonal cross-section"
+
 # ============================================================
 # Level 3: Application (응용)
 #   n6 checks: ITER TF=18=3n, PF=6=n, magnet types=3=n/phi
@@ -204,6 +231,15 @@ n6 = 0.95
 perf = 0.95
 power = 0.60
 cost = 0.25
+
+[[candidate]]
+id = "N6_Fusion_Magnet"
+label = "n=6 Fusion Magnet (TF=18=3n, PF=6=n, CS=6=n, B=12T=sigma)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.25
+notes = "TF=18=3n EXACT, PF=6=n EXACT, CS=6=n EXACT, B=12T=sigma EXACT, all magnet counts div(6)"
 
 [[candidate]]
 id = "SMES"
@@ -276,6 +312,15 @@ n6 = 0.75
 perf = 0.90
 power = 0.65
 cost = 0.45
+
+[[candidate]]
+id = "N6_Cryo4K"
+label = "n=6 Cryogenic System (T=4K=tau, stages=n/phi=3, shields=phi=2)"
+n6 = 1.00
+perf = 0.92
+power = 0.50
+cost = 0.40
+notes = "T_op=4K=tau EXACT, cooling_stages=3=n/phi EXACT (300K->77K->20K->4K), thermal_shields=2=phi EXACT"
 
 [[candidate]]
 id = "RoomTemp"

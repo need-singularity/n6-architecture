@@ -342,6 +342,16 @@ notes  = "THz detector, bolometer, photon counting, surface states"
 # =============================================================
 
 # Z2_Topological requires DiracCone (Z2 insulator has Dirac surface state)
+
+[[candidate]]
+level  = 4
+id     = "DeviceN6"
+label  = "n=6 큐비트 토폴로지컬 소자 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "qubit_types=n=6 EXACT, n6-topological quantum device"
 [[rule]]
 type       = "require"
 if_level   = 0

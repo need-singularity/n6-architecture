@@ -151,6 +151,16 @@ notes  = "modes=12=sigma EXACT, nodes_antinodes=true, resonant_cavity=true"
 # =============================================================
 # Level 2: Interference (간섭 현상) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 1
+id     = "PropagN6"
+label  = "n=6 파동 모드 전파 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "wave_modes=n=6 EXACT, n6-mode wave propagation"
 [[level]]
 name = "Interference"
 
@@ -217,6 +227,16 @@ notes  = "dimensions=3=n/phi, reference+object=2=phi, hologram=true"
 # =============================================================
 # Level 3: Resonance (공명 현상) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 2
+id     = "InterferN6"
+label  = "n=6 간섭 패턴 (n=6 빔 간섭)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "beam_count=n=6 EXACT, n6-beam interference pattern"
 [[level]]
 name = "Resonance"
 
@@ -341,6 +361,16 @@ notes  = "semitones=12=sigma EXACT, octave=2=phi EXACT, temperament=equal"
 # =============================================================
 
 # StringVibration requires HarmonicSeries
+
+[[candidate]]
+level  = 4
+id     = "AcousticsN6"
+label  = "sigma=12 반음계 음향 응용 (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "semitones=sigma=12 EXACT, n6-chromatic acoustics application"
 [[rule]]
 type       = "require"
 if_level   = 0

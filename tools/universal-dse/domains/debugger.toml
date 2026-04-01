@@ -162,6 +162,16 @@ notes  = "quantiles=5=sopfr EXACT, sampling=adaptive, CI=95%, overhead=low"
 # =============================================================
 # Level 2: Visualization (시각화) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 1
+id     = "AnalysisN6"
+label  = "n=6 분석 차원 프로파일링 (n=6 메트릭)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "metrics=n=6 EXACT, n6-dimensional profiling analysis"
 [[level]]
 name = "Visualization"
 
@@ -294,6 +304,16 @@ notes  = "model=ml, accuracy=80%, preemptive=true, false_positive=low"
 # =============================================================
 # Level 4: Integration (통합) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "AutoN6"
+label  = "n=6 단계 자동 디버깅 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "steps=n=6 EXACT, n6-stage automated debugging"
 [[level]]
 name = "Integration"
 
@@ -352,6 +372,16 @@ notes  = "users=multi, shared_state=true, voice=optional, replay=true"
 # =============================================================
 
 # DynamicInject too heavy for FlameGraph tau=4 aggregation (needs richer viz)
+
+[[candidate]]
+level  = 4
+id     = "IntegN6"
+label  = "n=6 프로토콜 통합 (n=6 인터페이스)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "interfaces=n=6 EXACT, n6-protocol integration layer"
 [[rule]]
 type       = "exclude"
 if_level   = 0
@@ -365,7 +395,7 @@ type       = "require"
 if_level   = 0
 if_id      = "HWCounter"
 then_level = 1
-then_ids   = "Performance,Statistical"
+then_ids   = "Performance,Statistical,AnalysisN6"
 
 # MemoryLeak requires TreeMap or DAGView (memory needs spatial viz)
 [[rule]]

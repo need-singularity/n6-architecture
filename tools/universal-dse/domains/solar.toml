@@ -206,6 +206,16 @@ power  = 0.80
 cost   = 0.75
 notes  = "junctions=1=mu EXACT, bifacial=phi sides EXACT, limit=33.7%, record=27.0%"
 
+[[candidate]]
+level  = 2
+id     = "N6_Tandem_6J"
+label  = "6-Junction Tandem (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.60
+cost   = 0.00
+notes  = "junctions=6=n EXACT, subcell_bandgaps=[0.7,1.0,1.33,1.65,1.95,2.4]eV covering 4/3 EXACT, limit=55.4% (6J thermodynamic), record=47.1% (NREL 6J), concentration_factor=sigma*tau=48x, layers=12=sigma EXACT, tunnel_junctions=5=sopfr EXACT — ultimate multi-junction"
+
 # =============================================================
 # Level 3: PowerElec (Power Electronics / Chip)  -- 5 candidates
 # =============================================================
@@ -338,13 +348,13 @@ if_id      = "Perov-Print"
 then_level = 0
 then_ids   = "Perovskite"
 
-# GaAs only with CPV or Triple-3J (too expensive for flat panel)
+# GaAs only with CPV, Triple-3J, or N6_Tandem_6J (too expensive for flat panel)
 [[rule]]
 type       = "require"
 if_level   = 0
 if_id      = "GaAs"
 then_level = 2
-then_ids   = "CPV,Triple-3J"
+then_ids   = "CPV,Triple-3J,N6_Tandem_6J"
 
 # OPV only with Single-1J or Bifacial
 [[rule]]
@@ -385,6 +395,22 @@ if_level   = 0
 if_id      = "OPV"
 then_level = 1
 then_ids   = "Al-BSF,Perov-Print"
+
+# N6_Tandem_6J only with GaAs (only III-V can do 6-junction)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "N6_Tandem_6J"
+then_level = 0
+then_ids   = "GaAs"
+
+# N6_Tandem_6J only with SiC-Central or DC-Optimizer (needs high-end power electronics)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "N6_Tandem_6J"
+then_level = 3
+then_ids   = "SiC-Central,DC-Optimizer"
 
 # Micro-Inv impractical for large commercial HC-144
 [[rule]]

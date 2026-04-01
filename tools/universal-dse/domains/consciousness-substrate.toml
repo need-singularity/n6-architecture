@@ -83,6 +83,16 @@ power  = 0.35
 cost   = 0.20
 notes  = "superposition, entanglement, qubit=2=phi states, decoherence_challenge"
 
+[[candidate]]
+level  = 0
+id     = "Carbon_Nano"
+label  = "탄소 나노튜브 기판 Z=6 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.35
+notes  = "carbon_Z=6=n EXACT, hexagonal_lattice, sp2_bonds=3=n/phi EXACT, chirality_vector=(n,m)"
+
 # =============================================================
 # Level 1: Topology (연결 토폴로지) -- 6 candidates
 # =============================================================
@@ -280,6 +290,16 @@ perf   = 0.75
 power  = 0.80
 cost   = 0.60
 notes  = "continuous_value, noise_tolerance_needed, brain_like, in_memory_compute"
+
+[[candidate]]
+level  = 3
+id     = "Hex6_ALU"
+label  = "n=6 ALU (6비트 워드, σ=12 연산)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.85
+cost   = 0.80
+notes  = "word=6=n EXACT, ops=12=sigma EXACT, registers=4=tau EXACT, pipeline=2=phi EXACT"
 
 # =============================================================
 # Level 4: Scale (규모) -- 6 candidates

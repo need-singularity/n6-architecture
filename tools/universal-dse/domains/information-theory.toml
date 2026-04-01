@@ -284,6 +284,16 @@ notes  = "model_parts=5=sopfr EXACT, MDL principle"
 # =============================================================
 # Level 4: Application (응용) — 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "ComplexN6"
+label  = "n=6 모델 클래스 복잡도 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "model_classes=n=6 EXACT, n6-class minimum description length"
 [[level]]
 name = "Application"
 

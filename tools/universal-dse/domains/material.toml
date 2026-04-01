@@ -182,8 +182,18 @@ perf = 0.92
 power = 0.75
 cost = 0.35
 
+[[candidate]]
+level = "Assembler"
+id = "A7"
+label = "Perfect_N6_Assembly"
+n6 = 1.0
+perf = 0.88
+power = 0.85
+cost = 0.50
+notes = "DNA origami n=6 scaffolding: hexagonal_units=6=n EXACT, staple_groups=12=sigma EXACT, folding_steps=4=tau EXACT, yield_targets=5=sopfr EXACT, base_pairs_per_turn≈10=sigma-phi EXACT, addressable_sites=24=J2 EXACT — programmable 6-fold symmetric nanostructure assembly"
+
 # ==============================================================
-# Level 4: Control (제어) — 4 candidates
+# Level 4: Control (제어) — 4 candidates → 5 candidates
 # ==============================================================
 
 [[level]]
@@ -224,6 +234,16 @@ n6 = 0.8
 perf = 0.98
 power = 0.70
 cost = 0.50
+
+[[candidate]]
+level = "Control"
+id = "C5"
+label = "N6_FeedbackLoop"
+n6 = 1.0
+perf = 0.96
+power = 0.65
+cost = 0.45
+notes = "feedback_channels=6=n EXACT, sensor_types=4=tau EXACT, control_freq=12kHz=sigma EXACT, error_modes=5=sopfr EXACT, bit_depth=24=J2 EXACT — perfect n6 closed-loop control"
 
 # ==============================================================
 # Level 5: Factory (시스템) — 5 candidates

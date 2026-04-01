@@ -352,6 +352,16 @@ notes  = "sigma-tau=8 detection channels, direct detection, null results so far"
 # =============================================================
 
 # StringM_Theory requires E6_GUT or SO10_Spinor (needs GUT gauge group)
+
+[[candidate]]
+level  = 4
+id     = "ExperimentN6"
+label  = "sigma=12 검출기 채널 실험 (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "detector_channels=sigma=12 EXACT, n6-aligned fundamental physics experiment"
 [[rule]]
 type       = "require"
 if_level   = 0

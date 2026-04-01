@@ -93,6 +93,16 @@ power  = 0.45
 cost   = 0.55
 notes  = "paradigms=4=tau, type_layers=6=n EXACT, safety=100, express=70, learn=6, quantum_code=[[6,4,2]]"
 
+[[candidate]]
+level  = 0
+id     = "N6_Complete_Lang"
+label  = "N6 Complete Type System (ALL n6 features unified)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.55
+cost   = 0.45
+notes  = "paradigms=6=n EXACT (FP+OOP+Logic+Reactive+Effect+Meta), type_layers=6=n EXACT (value+linear+dependent+effect+quantum+meta), safety=100, express=98, learn=5=sopfr EXACT, type_classes=12=sigma EXACT, inference_modes=4=tau EXACT, error_categories=5=sopfr EXACT, ownership_modes=2=phi EXACT, total_features=24=J2 EXACT — complete n6 type-theoretic foundation"
+
 # =============================================================
 # Level 1: Process (Compiler + Execution Model) -- 7 candidates
 # =============================================================

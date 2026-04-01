@@ -215,6 +215,16 @@ power  = 0.60
 cost   = 0.50
 notes  = "pathways=5=sopfr EXACT, sensor_types=4=tau EXACT, response_steps=6=n EXACT"
 
+[[candidate]]
+level  = 2
+id     = "Hexagonal_Muscle"
+label  = "육각 근육 격자 (n=6 대칭 수축)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "hexagonal_symmetry=6=n EXACT, myosin_heads=12=sigma EXACT, actin_monomers_per_turn=24=J2, force_states=4=tau EXACT"
+
 # =============================================================
 # Level 3: Imaging (생체 영상) -- 6 candidates
 # =============================================================

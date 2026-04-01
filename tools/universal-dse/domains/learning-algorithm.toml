@@ -326,6 +326,16 @@ power  = 0.85
 cost   = 0.85
 notes  = "Personal AI, sigma-tau=8 bit models"
 
+[[candidate]]
+level  = 4
+id     = "Photonic_DC_N6"
+label  = "Photonic DC (6 nodes, 12 switches, 4.8kW rack, PUE=1.02)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.95
+cost   = 0.35
+notes  = "nodes=6=n, switches=12=sigma, rack_kW=4.8=sigma*tau/(sigma-phi), PUE=1+1/(sigma*tau)=1.02, BT-89 photonic-energy bridge"
+
 # =============================================================
 # Compatibility Rules
 # =============================================================

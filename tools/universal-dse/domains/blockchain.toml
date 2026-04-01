@@ -224,6 +224,16 @@ power  = 0.60
 cost   = 0.55
 notes  = "RISC Zero, universal ZK prover, ISA-level proving"
 
+[[candidate]]
+level  = 2
+id     = "N6_VM"
+label  = "N6 VM (2^(σ-τ)=256-bit word, 2^σ=4096 memory pages, σ=12 opcodes, n=6 registers)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.68
+cost   = 0.60
+notes  = "2^(sigma-tau)=256 bit word EXACT, 2^sigma=4096 pages EXACT, sigma=12 core opcodes, n=6 register file"
+
 # =============================================================
 # Level 3: Scaling (확장성 엔진)  -- 5 candidates
 #   n6 checks: 64 shards=2^n (H-BC-19), 7-day challenge=σ-sopfr (H-BC-47),
@@ -340,6 +350,16 @@ perf   = 0.85
 power  = 0.70
 cost   = 0.55
 notes  = "Securities, real estate, carbon credits on-chain"
+
+[[candidate]]
+level  = 4
+id     = "N6_DeFi"
+label  = "N6 DeFi Protocol (n=6 pool types, σ=12 fee tiers, τ=4 oracle sources, J₂=24hr epoch)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.72
+cost   = 0.62
+notes  = "n=6 pool types EXACT, sigma=12 fee tiers, tau=4 oracles, J2=24hr settlement epoch, BT-53"
 
 # =============================================================
 # Compatibility Rules

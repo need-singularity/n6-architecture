@@ -83,6 +83,16 @@ power  = 0.75
 cost   = 0.70
 notes  = "open_ISA, custom_extensions, n6_instruction_set, flexible"
 
+[[candidate]]
+level  = 0
+id     = "Hex6_ASIC"
+label  = "n=6 전용 ASIC (6코어 σ=12 파이프라인)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.40
+notes  = "cores=6=n EXACT, pipeline_stages=12=sigma EXACT, ALU_width=8=sigma-tau EXACT, J2=24_threads"
+
 # =============================================================
 # Level 1: Precision (연산 정밀도) -- 6 candidates
 # =============================================================
@@ -148,6 +158,16 @@ perf   = 0.80
 power  = 0.85
 cost   = 0.55
 notes  = "compute_in_memory, continuous, noise_tolerant, emerging"
+
+[[candidate]]
+level  = 1
+id     = "FP6_Native"
+label  = "FP6 네이티브 6비트 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.90
+cost   = 0.85
+notes  = "bits=6=n EXACT, mantissa=3=n/phi EXACT, exponent=2=phi EXACT, ultra_low_power"
 
 # =============================================================
 # Level 2: CellArch (셀 아키텍처) -- 6 candidates
@@ -346,6 +366,16 @@ perf   = 0.85
 power  = 0.80
 cost   = 0.60
 notes  = "dynamic_voltage_frequency, workload_adaptive, energy_proportional"
+
+[[candidate]]
+level  = 4
+id     = "Hex6_Clock"
+label  = "n=6 분할 클럭 (6위상 σ=12 배수)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.60
+notes  = "phases=6=n EXACT, base_freq_mul=12=sigma EXACT, dividers=2=phi EXACT, cycle=tau=4_stages"
 
 # =============================================================
 # Compatibility Rules

@@ -284,6 +284,16 @@ notes  = "sign_classes=2=phi EXACT (positive=chaos, negative=stable)"
 # =============================================================
 # Level 4: Application (응용) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "LyapunovN6"
+label  = "리아프노프 n=6 차원 임베딩 (n=6 위상공간)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "embedding_dim=n=6 EXACT, Takens theorem, phase space reconstruction"
 [[level]]
 name = "Application"
 
@@ -342,6 +352,16 @@ notes  = "control_params=2=phi EXACT, stabilize UPO, tau=4 convergence steps"
 # =============================================================
 
 # LorenzN6 has period-doubling route to chaos
+
+[[candidate]]
+level  = 4
+id     = "WeatherN6"
+label  = "기상 카오스 n=6 변수 앙상블 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "ensemble_vars=n=6 EXACT, weather prediction, Lorenz system"
 [[rule]]
 type       = "require"
 if_level   = 0

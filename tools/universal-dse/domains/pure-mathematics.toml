@@ -317,6 +317,16 @@ power  = 0.60
 cost   = 0.95
 notes  = "Factorization/partition: 1/2+1/3+1/6=1, 6=1+2+3=1×2×3, unit fractions"
 
+[[candidate]]
+level  = 2
+id     = "UNIQUE"
+label  = "Uniqueness"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.95
+notes  = "n=6 unique: R(6)=1 EXACT, Out(S_6)=Z/2Z unique, 1+2+3=6=1*2*3 unique, sigma*phi=n*tau iff n=6"
+
 # =============================================================
 # Level 3: Proof (증명 도구)  -- 7 candidates
 # =============================================================
@@ -393,6 +403,16 @@ power  = 0.55
 cost   = 0.80
 notes  = "Generating functions, Ramsey, pigeonhole, bijective proofs"
 
+[[candidate]]
+level  = 3
+id     = "N6_EXHAUST"
+label  = "Exhaustive n=6 Verification (sigma*phi=n*tau proof method)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.90
+cost   = 0.95
+notes  = "3 independent proofs for R(n)=1 iff n=6, case-split at p^k, verified to 10^8, CAS-certified"
+
 # =============================================================
 # Level 4: Bridge (Cross-domain 연결)  -- 7 candidates
 # =============================================================
@@ -468,6 +488,16 @@ perf   = 0.55
 power  = 0.70
 cost   = 0.75
 notes  = "BT-48. σ=12 semitones, J₂=24 fps/bits, σ·τ=48kHz audio"
+
+[[candidate]]
+level  = 4
+id     = "N6_OMNI"
+label  = "n=6 Omni-Bridge (sopfr=5 domains converge: Physics+AI+Energy+Bio+Cosmo)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.95
+cost   = 0.85
+notes  = "domains=5=sopfr EXACT, BTs_spanned=12=sigma EXACT (BT-33/36/43/48/49/51/54/56/58/62/64/76), cross_verified=true"
 
 # =============================================================
 # Compatibility Rules

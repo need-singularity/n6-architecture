@@ -342,6 +342,16 @@ notes  = "kernels=5=sopfr EXACT, non-parametric, uncertainty quantification"
 # =============================================================
 
 # ChiSquaredTest requires ChiSquaredN6 distribution
+
+[[candidate]]
+level  = 4
+id     = "BayesN6"
+label  = "n=6 사전분포 베이지안 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "prior_families=n=6 EXACT, n6-prior Bayesian inference"
 [[rule]]
 type       = "require"
 if_level   = 2

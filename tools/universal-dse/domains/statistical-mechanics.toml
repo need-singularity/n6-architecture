@@ -284,6 +284,16 @@ notes  = "upper_critical_dim, marginal operators, d=4 Ising"
 # =============================================================
 # Level 4: Application (Applied domain) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "CriticalN6"
+label  = "n=6 보편성 클래스 임계현상 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "universality_classes=n=6 EXACT, n6-universality critical phenomena"
 [[level]]
 name = "Application"
 
@@ -342,6 +352,16 @@ notes  = "minority game, herding, fat tails, criticality, econophysics"
 # =============================================================
 
 # ExactSolution requires SixVertex or IsingModel (exactly solvable models)
+
+[[candidate]]
+level  = 4
+id     = "MagnetN6"
+label  = "sigma=12 자성 대칭군 응용 (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "symmetry_groups=sigma=12 EXACT, n6-magnetic material application"
 [[rule]]
 type       = "require"
 if_level   = 1

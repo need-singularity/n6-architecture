@@ -342,6 +342,16 @@ notes  = "signal processing optimized, narrow domain, legacy"
 # =============================================================
 
 # BareLoop incompatible with RTOS features — no OS to inherit priority
+
+[[candidate]]
+level  = 4
+id     = "PlatformN6"
+label  = "n=6 ISA 확장 임베디드 플랫폼 (n=6 레지스터 뱅크)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "reg_banks=n=6 EXACT, n6-ISA embedded platform"
 [[rule]]
 type       = "exclude"
 if_level   = 3

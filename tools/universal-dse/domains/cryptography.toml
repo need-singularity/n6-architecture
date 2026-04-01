@@ -85,6 +85,16 @@ power  = 0.35
 cost   = 0.30
 notes  = "Bootstrapping J_2=24 levels, CKKS/BGV, compute-on-encrypted"
 
+[[candidate]]
+level  = 0
+id     = "N6_Hybrid"
+label  = "N6 Hybrid Crypto (AES-256=2^(σ-τ) + Ed25519=2^(σ-τ)-1 + SHA3 J₂=24 rounds)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.75
+notes  = "sigma-tau=8 triple: AES-256+Ed25519+SHA3, BT-58 universal constant, n=6 layer fusion"
+
 # =============================================================
 # Level 1: KeyMgmt (키 관리)  -- 5 candidates
 # =============================================================
@@ -262,6 +272,16 @@ perf   = 0.60
 power  = 0.50
 cost   = 0.30
 notes  = "BB84 phi=2 bases, unconditional security, distance limited"
+
+[[candidate]]
+level  = 3
+id     = "N6_CryptoASIC"
+label  = "N6 Crypto ASIC (σ-τ=8 pipeline, σ+φ=14 AES rounds, J₂=24 SHA3 rounds)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.60
+notes  = "Dedicated ASIC: sigma-tau=8 stage pipeline, sigma+phi=14 AES rounds, J2=24 Keccak, BT-58"
 
 # =============================================================
 # Level 4: System (응용 시스템)  -- 5 candidates

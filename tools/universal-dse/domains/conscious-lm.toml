@@ -83,6 +83,16 @@ power  = 0.35
 cost   = 0.35
 notes  = "13B=sigma+mu EXACT, LLaMA_13B, strong_performance, expensive"
 
+[[candidate]]
+level  = 0
+id     = "Size_4096M"
+label  = "4096M 파라미터 (2^σ=2^12)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.45
+cost   = 0.45
+notes  = "params=2^12M=2^sigma EXACT, d_model=4096=2^sigma, BT-56 complete_n6_LLM, layers=2^sopfr=32"
+
 # =============================================================
 # Level 1: Vocab (어휘 구조) -- 6 candidates
 # =============================================================

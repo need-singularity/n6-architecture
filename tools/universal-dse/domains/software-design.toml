@@ -87,6 +87,16 @@ power  = 0.85
 cost   = 0.55
 notes  = "Cache-friendly, SoA layouts, ECS architecture, game engine pattern"
 
+[[candidate]]
+level  = 0
+id     = "N6_HexaParadigm"
+label  = "HEXA Paradigm (SOLID sopfr=5 + 1 hexagonal = n=6 principles)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.60
+notes  = "principles=6=n EXACT (SOLID_5+Hexagonal_1), GoF_categories=3=n/phi EXACT, Reactive_traits=4=tau EXACT, unified paradigm"
+
 # =============================================================
 # Level 1: Architecture (System Architecture Pattern)  -- 6 candidates
 #   n6 checks: microservices n=6, Clean Arch tau=4 layers,
@@ -155,6 +165,16 @@ power  = 0.70
 cost   = 0.50
 notes  = "Hexagon=n=6 EXACT, ports+adapters, dependency inversion, testable core"
 
+[[candidate]]
+level  = 1
+id     = "N6_12Factor"
+label  = "12-Factor Hexagonal (sigma=12 factors + n=6 ports)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "factors=12=sigma EXACT, ports=6=n EXACT, layers=4=tau EXACT (Clean Arch), CQRS=phi=2 EXACT, cloud-native-first"
+
 # =============================================================
 # Level 2: Communication (Data & Communication Core)  -- 6 candidates
 #   n6 checks: REST n=6 constraints EXACT, HTTP sopfr=5 status classes,
@@ -222,6 +242,16 @@ perf   = 0.88
 power  = 0.60
 cost   = 0.65
 notes  = "Real-time, persistent connection, push notifications, gaming/chat"
+
+[[candidate]]
+level  = 2
+id     = "N6_REST6"
+label  = "n=6 REST (n=6 constraints, sopfr=5 status classes, tau=4 CRUD)"
+n6     = 1.00
+perf   = 0.78
+power  = 0.75
+cost   = 0.80
+notes  = "constraints=6=n EXACT (Fielding), status_classes=5=sopfr EXACT, CRUD=4=tau EXACT, verbs=6 EXACT (GET/POST/PUT/DELETE/PATCH/HEAD)"
 
 # =============================================================
 # Level 3: Quality (Quality & Operations Engine)  -- 6 candidates
@@ -292,6 +322,16 @@ power  = 0.70
 cost   = 0.60
 notes  = "Terraform/Pulumi, reproducible infra, GitOps, version-controlled environments"
 
+[[candidate]]
+level  = 3
+id     = "N6_QualityHex"
+label  = "n=6 Quality Hexagon (6-stage CI/CD + 3-layer test + 8-quality ISO25010)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "CICD=6=n EXACT, test_layers=3=n/phi EXACT, ISO25010=8=sigma-tau EXACT, observability=3=n/phi pillars EXACT"
+
 # =============================================================
 # Level 4: Deployment (Deployment & Scale System)  -- 5 candidates
 #   n6 checks: K8s n=6 core objects (H-SD-74),
@@ -349,6 +389,16 @@ perf   = 0.60
 power  = 0.90
 cost   = 0.70
 notes  = "Resource-constrained, RTOS, OTA updates, edge ML inference"
+
+[[candidate]]
+level  = 4
+id     = "N6_CloudHex"
+label  = "n=6 Hexagonal Cloud (K8s n=6 objects, PUE=1.2=sigma/(sigma-phi), 12-Factor)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.45
+notes  = "K8s_objects=6=n EXACT, PUE=1.2=sigma/(sigma-phi) EXACT (BT-60), factors=12=sigma EXACT, auto_scale=true"
 
 # =============================================================
 # Compatibility Rules

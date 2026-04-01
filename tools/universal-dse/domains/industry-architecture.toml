@@ -218,6 +218,16 @@ notes  = "block_sizes=8=sigma-tau EXACT, IOPS=high, latency=low, sequential=fast
 # =============================================================
 # Level 3: Interface (인터페이스 계층) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 2
+id     = "StorageN6"
+label  = "n=6 캐시 계층 저장소 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "cache_levels=n=6 EXACT, n6-tier storage hierarchy"
 [[level]]
 name = "Interface"
 
@@ -342,6 +352,16 @@ notes  = "infra_layers=12=sigma EXACT, IoT=massive, realtime=true, sustainabilit
 # =============================================================
 
 # CQRS requires EventSourcing (CQRS often paired with event sourcing)
+
+[[candidate]]
+level  = 4
+id     = "IndustryN6"
+label  = "J2=24 공정 스테이지 산업 (J2=24 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "stages=J2=24 EXACT, n6-aligned industrial process"
 [[rule]]
 type       = "require"
 if_level   = 1

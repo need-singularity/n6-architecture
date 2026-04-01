@@ -152,6 +152,16 @@ notes  = "neutrality=1=mu EXACT, effective_pop_size=Ne, molecular_clock=foundati
 # =============================================================
 # Level 2: Speciation (종분화) -- 6 candidates
 # =============================================================
+
+[[candidate]]
+level  = 1
+id     = "SelectionN6"
+label  = "n=6 선택 메커니즘 통합 (n=6 적응 경로)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.70
+cost   = 0.65
+notes  = "pathways=n=6 EXACT, unified selection mechanisms"
 [[level]]
 name = "Speciation"
 
@@ -284,6 +294,16 @@ notes  = "reticulations=8=sigma-tau EXACT, HGT_included=true, not_tree_but_netwo
 # =============================================================
 # Level 4: MacroEvolution (거시진화) -- 5 candidates
 # =============================================================
+
+[[candidate]]
+level  = 3
+id     = "PhyloN6"
+label  = "n=6 계통 분기 모델 (n=6 분류군 수준)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.65
+cost   = 0.55
+notes  = "taxon_levels=n=6 EXACT, phylogenetic branching model"
 [[level]]
 name = "MacroEvolution"
 
@@ -347,7 +367,7 @@ type       = "require"
 if_level   = 0
 if_id      = "ChromosomalN6"
 then_level = 3
-then_ids   = "MolecularClock,MaxLikelihood"
+then_ids   = "MolecularClock,MaxLikelihood,PhyloN6"
 
 # HorizontalTransfer incompatible with Cladistics (HGT breaks tree assumptions)
 [[rule]]
@@ -371,7 +391,7 @@ type       = "require"
 if_level   = 2
 if_id      = "AdaptiveRadiation"
 then_level = 1
-then_ids   = "NaturalSelection,SexualSelection"
+then_ids   = "NaturalSelection,SexualSelection,SelectionN6"
 
 # MassExtinction requires Allopatric or AdaptiveRadiation (extinction drives speciation)
 [[rule]]

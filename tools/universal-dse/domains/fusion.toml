@@ -40,6 +40,16 @@ notes  = "D=phi=2 + T=n/phi=3 = sopfr=5 EXACT, Q=17.6MeV, T_opt=14keV=sigma+phi,
 
 [[candidate]]
 level  = 0
+id     = "DT_Li6"
+label  = "D-T + Li-6 Breeding (complete n=6 fuel cycle)"
+n6     = 1.00
+perf   = 0.93
+power  = 0.80
+cost   = 0.65
+notes  = "D=phi=2+T=n/phi=3=sopfr=5 EXACT, Li-6 A=6=n EXACT, breeding_rxns=phi=2 EXACT, closed cycle"
+
+[[candidate]]
+level  = 0
 id     = "DD"
 label  = "Deuterium-Deuterium"
 n6     = 0.75
@@ -95,6 +105,16 @@ perf   = 0.95
 power  = 0.70
 cost   = 0.60
 notes  = "q95~n/phi=3, A~n/phi=3, PF=n=6 (ITER), kappa~1.8, TRL=7, highest Q achieved"
+
+[[candidate]]
+level  = 1
+id     = "Tokamak_N6"
+label  = "n=6 Tokamak (TF=18=3n, PF=6=n, A=3=n/phi)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.70
+cost   = 0.55
+notes  = "TF_coils=18=3n EXACT, PF_coils=6=n EXACT, A=3=n/phi EXACT, q95=3=n/phi EXACT, sigma=12 sectors, ITER-class"
 
 [[candidate]]
 level  = 1
@@ -215,6 +235,16 @@ power  = 0.20
 cost   = 0.20
 notes  = "NIF 1.8MJ UV, high peak power, low wall-plug efficiency ~1%, rep-rate limited"
 
+[[candidate]]
+level  = 2
+id     = "N6_TriHeat"
+label  = "n=6 Triple Heating (n/phi=3 methods simultaneous)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.45
+notes  = "methods=3=n/phi EXACT (NBI+ECRH+ICRH), total_power=24MW=J2 EXACT, 120keV=sigma*(sigma-phi) NBI, synergistic"
+
 # =============================================================
 # Level 3: Blanket  -- 5 candidates
 #   n6 checks: Li-6 isotope A=6=n EXACT (H-FU-30),
@@ -274,6 +304,16 @@ power  = 0.65
 cost   = 0.40
 notes  = "V-alloy structure + liquid Li, T_out~600C, low activation, aggressive R&D needed"
 
+[[candidate]]
+level  = 3
+id     = "N6_Li6_Blanket"
+label  = "n=6 Li-6 Breeding Blanket (A=6=n, TBR=1+1/n=7/6, phi=2 breeding rxns)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.45
+notes  = "Li-6_A=6=n EXACT, TBR=7/6~1.17, breeding_rxns=2=phi EXACT (Li-6+Li-7), enrichment=90%=n*(sigma+n/phi), SiC/FW"
+
 # =============================================================
 # Level 4: Plant (Balance of Plant)  -- 5 candidates
 #   n6 checks: thermal efficiency, cycle temperature,
@@ -332,6 +372,16 @@ perf   = 0.55
 power  = 0.70
 cost   = 0.70
 notes  = "small fusion pilot <50MW, ORC or simple Rankine, factory-built, TAE/CFS vision"
+
+[[candidate]]
+level  = 4
+id     = "N6_Brayton6"
+label  = "n=6 Brayton Cycle (n=6 stages, eta=sigma/J2=50%)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.50
+notes  = "stages=6=n EXACT, eta=50%=sigma/J2 EXACT, T_out=600C=sigma*sopfr*sigma CLOSE, grid=60Hz=sigma*sopfr (BT-62)"
 
 # =============================================================
 # Compatibility Rules
