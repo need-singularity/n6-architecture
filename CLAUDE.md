@@ -89,7 +89,7 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   solar-architecture/ (5 levels: HEXA-ABSORB/PROCESS/JUNCTION/POWER/ARRAY)
   # Material Synthesis (소재→공정→조립기→제어→시스템→변환→만능→궁극, DSE 3,600 조합)
   material-synthesis/ (8 levels: HEXA-ELEMENT/PROCESS/ASSEMBLER/CONTROL/FACTORY/TRANSMUTE/UNIVERSAL/OMEGA-M)
-  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 92 BTs
+  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 93 BTs
 ```
 
 ## Rust Tools
@@ -178,7 +178,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (92 total, BT-1~92)
+## Breakthrough Theorems (93 total, BT-1~93)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -254,6 +254,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-90: SM = φ×K₆ 접촉수 정리 (σ²=144=φ×72, GPU=6D sphere packing, 6/6 EXACT) ⭐⭐⭐
   BT-91: Z2 위상 ECC J₂ 절약 (SECDED→Z2: savings=σ·J₂/σ=J₂=24 GB, identity) ⭐⭐
   BT-92: Bott 활성 채널 = sopfr (KO 비자명=5=sopfr, 자명=3=n/φ, 5/8≈1-1/e) ⭐⭐⭐
+  BT-93: Carbon Z=6 칩 소재 보편성 (Diamond/Graphene/SiC=Z=6 전 도메인 1위, 8/10 Cross-DSE) ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙
