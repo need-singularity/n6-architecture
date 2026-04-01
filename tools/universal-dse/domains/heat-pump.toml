@@ -1,0 +1,357 @@
+# =============================================================
+# Heat Pump DSE Domain Definition
+# Heat pump systems — compressor to installation
+# n=6: COP=6 target, τ=4 thermodynamic stages, σ=12 zones
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "heat-pump"
+desc = "Heat Pump System Architecture DSE (compressor/heat-exchanger/refrigerant/control/installation)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Compressor (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Compressor"
+
+[[candidate]]
+level = 0
+id = "Scroll"
+label = "Scroll Compressor (orbiting spiral, n=6 bar discharge, quiet, residential)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Rotary"
+label = "Rotary Compressor (rolling piston, 6 cc displacement, compact, mini-split)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Screw"
+label = "Screw Compressor (twin helical, σ=12 lobes total, commercial chiller)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Centrifugal"
+label = "Centrifugal Compressor (impeller, 6 stage turbo, district heating)"
+n6 = 1.00
+perf = 0.92
+power = 0.68
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Inverter-DC"
+label = "Inverter DC (variable speed, COP=6 at part load, energy star)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Linear"
+label = "Linear Compressor (piston, n=6 mm stroke, oil-free, LG)"
+n6 = 1.00
+perf = 0.82
+power = 0.88
+cost = 0.50
+
+# ============================================================
+# Level 1: HeatExchanger (6 candidates)
+# ============================================================
+
+[[level]]
+name = "HeatExchanger"
+
+[[candidate]]
+level = 1
+id = "Fin-Tube"
+label = "Fin-Tube (copper/aluminum, n=6 rows, air-source standard)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Microchannel"
+label = "Microchannel (flat tube, σ=12 ports/tube, compact, 30% less charge)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Plate-HX"
+label = "Plate Heat Exchanger (brazed, 6 mm channel, water-source, compact)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Shell-Tube"
+label = "Shell & Tube (large capacity, n=6 passes, chiller/industrial)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Ground-Loop"
+label = "Ground Loop HDPE (horizontal/vertical, 6 bore holes, geothermal)"
+n6 = 1.00
+perf = 0.85
+power = 0.88
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "PCM-Storage"
+label = "PCM Thermal Storage (phase change, σ=12 hour shift, demand response)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.45
+
+# ============================================================
+# Level 2: Refrigerant (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Refrigerant"
+
+[[candidate]]
+level = 2
+id = "R410A"
+label = "R-410A (HFC blend, 6 bar suction, standard AC, phasing out)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "R32"
+label = "R-32 (HFC, GWP=675, n=6 bar suction, Daikin transition)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "R290-Propane"
+label = "R-290 Propane (natural, GWP=3, 6 g charge limit, A3 flammable)"
+n6 = 1.00
+perf = 0.88
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "CO2-R744"
+label = "CO₂ R-744 (transcritical, GWP=1, σ=12 MPa high-side, eco)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "R1234yf"
+label = "R-1234yf (HFO, GWP<1, n=6 bar, automotive AC replacement)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "R717-Ammonia"
+label = "R-717 Ammonia (natural, COP=6 achievable, industrial, toxic)"
+n6 = 1.00
+perf = 0.92
+power = 0.85
+cost = 0.70
+
+# ============================================================
+# Level 3: Control (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 3
+id = "On-Off"
+label = "On/Off Thermostat (simple, n=6°C deadband, basic residential)"
+n6 = 1.00
+perf = 0.55
+power = 0.65
+cost = 0.95
+
+[[candidate]]
+level = 3
+id = "PID-Inverter"
+label = "PID Inverter Control (variable speed, ±0.6°C accuracy, standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "AI-Predictive"
+label = "AI Predictive (weather forecast, σ=12 sensor inputs, learning)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Demand-Response"
+label = "Demand Response (grid-interactive, 6 kW shed capability, smart)"
+n6 = 1.00
+perf = 0.88
+power = 0.88
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Multi-Zone"
+label = "Multi-Zone VRF (σ=12 indoor units, individual control, commercial)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Cascade"
+label = "Cascade Controller (dual-stage, τ=4 operating modes, extreme climate)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.60
+
+# ============================================================
+# Level 4: Installation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Installation"
+
+[[candidate]]
+level = 4
+id = "Residential-Split"
+label = "Residential Split (outdoor+indoor, 6 kW capacity, standard)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "Ducted"
+label = "Ducted Central (forced air, σ=12 duct zones, whole-house)"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Geothermal"
+label = "Geothermal Ground-Source (n=6 bore @ 100m, COP=6, premium)"
+n6 = 1.00
+perf = 0.95
+power = 0.92
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "District"
+label = "District Heat Network (central plant, σ·τ=48 MW, city-scale)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "WSHP"
+label = "Water-Source HP (loop, n=6 units/building, commercial)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Portable"
+label = "Portable / Window (plug-in, 6000 BTU, rental/temporary)"
+n6 = 1.00
+perf = 0.60
+power = 0.70
+cost = 0.92
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Centrifugal only for large installations
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Centrifugal"
+then_level = 4
+then_ids = ["District", "WSHP"]
+
+# Ground loop requires geothermal installation
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Ground-Loop"
+then_level = 4
+then_ids = ["Geothermal"]
+
+# Ammonia only for industrial/district (toxic)
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "R717-Ammonia"
+then_level = 4
+then_ids = ["District", "WSHP"]
+
+# On-Off control only for simple installations
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "On-Off"
+then_level = 4
+then_ids = ["Residential-Split", "Portable"]

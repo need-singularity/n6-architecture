@@ -1,0 +1,357 @@
+# =============================================================
+# Autonomous Submarine (AUV) DSE Domain Definition
+# AUV systems — hull to mission
+# n=6: 6 DOF, σ=12 sonar beams, depth 6000m class
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "autonomous-submarine"
+desc = "AUV System Architecture DSE (hull/propulsion/sonar/navigation/mission)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Hull (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Hull"
+
+[[candidate]]
+level = 0
+id = "Titanium-Pressure"
+label = "Titanium Pressure Hull (Ti-6Al-4V, 6000m depth rated, deep ocean)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "Aluminum-6061"
+label = "Aluminum 6061-T6 (n=6 series alloy, 600m rated, standard AUV)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Carbon-Fiber"
+label = "Carbon Fiber Composite (6K tow weave, lightweight, 2000m class)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Steel-HY80"
+label = "Steel HY-80 (military grade, n=6 cm wall, 500m standard sub)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Glass-Sphere"
+label = "Glass Sphere (borosilicate, σ=12 sphere cluster, hadal zone 11km)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Ceramic-SiC"
+label = "Ceramic SiC Hull (silicon carbide, 6 GPa strength, experimental)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.30
+
+# ============================================================
+# Level 1: Propulsion (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Propulsion"
+
+[[candidate]]
+level = 1
+id = "Brushless-DC"
+label = "Brushless DC Thruster (permanent magnet, n=6 pole, standard AUV)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Rim-Driven"
+label = "Rim-Driven Thruster (hubless, σ=12 blade tips, quiet, low drag)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Bio-Inspired"
+label = "Bio-Inspired Fin (undulating, 6 fin segments, maneuverable)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Pump-Jet"
+label = "Pump-Jet (ducted rotor, n=6 stator vanes, low noise, military)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Glider-Buoyancy"
+label = "Buoyancy Engine (oil-bladder, 6 cc displacement, glider, months-long)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "MHD"
+label = "Magnetohydrodynamic (no moving parts, σ=12 electrode pairs, silent)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.25
+
+# ============================================================
+# Level 2: Sonar (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Sonar"
+
+[[candidate]]
+level = 2
+id = "Side-Scan"
+label = "Side-Scan Sonar (seafloor imaging, σ=12 beam array, survey)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Multibeam"
+label = "Multibeam Echo Sounder (σ·σ=144 beams, bathymetry, mapping)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Forward-Look"
+label = "Forward-Looking Sonar (obstacle avoidance, 6 kHz freq, real-time)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Sub-Bottom"
+label = "Sub-Bottom Profiler (sediment penetration, n=6 m depth, geology)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Synthetic-Aperture"
+label = "Synthetic Aperture Sonar (SAS, σ=12 cm resolution, mine hunting)"
+n6 = 1.00
+perf = 0.95
+power = 0.58
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "ADCP"
+label = "ADCP (acoustic Doppler, n=6 depth bins, current profiling)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.75
+
+# ============================================================
+# Level 3: Navigation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Navigation"
+
+[[candidate]]
+level = 3
+id = "INS-FOG"
+label = "INS Fiber-Optic Gyro (6 DOF IMU, 0.1°/hr drift, standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "DVL-Aided"
+label = "DVL-Aided INS (bottom-track, n=6 knot max, terrain-relative)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "USBL"
+label = "USBL Acoustic Positioning (ship-linked, σ=12 kHz beacon, tracked)"
+n6 = 1.00
+perf = 0.82
+power = 0.68
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "SLAM-Sonar"
+label = "Sonar SLAM (simultaneous localization, 6 feature classes, autonomous)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Terrain-Match"
+label = "Terrain Matching (bathymetric map, n=6 m grid, submarine GPS)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Quantum-INS"
+label = "Quantum INS (cold-atom accelerometer, σ=12 axis, drift-free, future)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.25
+
+# ============================================================
+# Level 4: Mission (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Mission"
+
+[[candidate]]
+level = 4
+id = "Ocean-Survey"
+label = "Ocean Survey (bathymetry/habitat, 6 sensor payload, science)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Mine-Counter"
+label = "Mine Countermeasure (detect/classify, σ=12 target capacity, naval)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Pipeline-Inspect"
+label = "Pipeline Inspection (oil/gas, n=6 km range, visual+CP sensor)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Under-Ice"
+label = "Under-Ice Exploration (Arctic, 6 month deployment, climate)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Deep-Hadal"
+label = "Deep/Hadal Zone (6000m+ depth, n=6 sample collection, Challenger)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "Swarm-Recon"
+label = "Swarm Reconnaissance (coordinated, n=6 vehicle formation, ISR)"
+n6 = 1.00
+perf = 0.78
+power = 0.72
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Deep hadal missions require titanium, glass, or ceramic hull
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Deep-Hadal"
+then_level = 0
+then_ids = ["Titanium-Pressure", "Glass-Sphere", "Ceramic-SiC"]
+
+# Buoyancy glider only for survey or under-ice
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Glider-Buoyancy"
+then_level = 4
+then_ids = ["Ocean-Survey", "Under-Ice"]
+
+# MHD propulsion requires steel or titanium hull (magnetic shielding)
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "MHD"
+then_level = 0
+then_ids = ["Titanium-Pressure", "Steel-HY80"]
+
+# SAS sonar requires stable navigation
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Synthetic-Aperture"
+then_level = 3
+then_ids = ["INS-FOG", "DVL-Aided", "Quantum-INS"]

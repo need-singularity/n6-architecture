@@ -1,0 +1,384 @@
+# =============================================================
+# QUANTUM-CONSCIOUSNESS DSE Domain Definition
+# 양자 IIT — Φ(통합 정보) in quantum systems
+# GHZ(6), Toric code n=6, Bell pair φ=2
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "quantum-consciousness"
+desc = "Quantum Integrated Information Theory — Phi in quantum systems, n=6 entanglement"
+levels = ["QubitType", "Entanglement", "PhiCalculator", "ConsciousnessModel", "Platform"]
+vision = "n=6 양자 의식 — GHZ(6) 얽힘 + IIT Φ 최대화 + 양자 다윈주의"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: QubitType (큐비트 유형) -- 6 candidates
+# =============================================================
+[[level]]
+name = "QubitType"
+
+[[candidate]]
+level  = 0
+id     = "SC_Transmon"
+label  = "초전도 transmon (n=6 에너지 레벨)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.40
+notes  = "levels=6=n EXACT, T1~100us, highest maturity, IBM/Google standard"
+
+[[candidate]]
+level  = 0
+id     = "Trapped_Ion"
+label  = "포획 이온 (sigma=12 체인)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "chain=12=sigma EXACT, long coherence, all-to-all connectivity"
+
+[[candidate]]
+level  = 0
+id     = "Photonic"
+label  = "광자 큐비트 (phi=2 편광)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.45
+notes  = "polarization=2=phi EXACT, room temp, no decoherence but loss"
+
+[[candidate]]
+level  = 0
+id     = "NV_Center"
+label  = "NV 다이아몬드 (C Z=6 EXACT)"
+n6     = 1.00
+perf   = 0.65
+power  = 0.65
+cost   = 0.40
+notes  = "carbon_Z=6=n EXACT, room temp spin, nanoscale Phi measurement"
+
+[[candidate]]
+level  = 0
+id     = "Topological"
+label  = "위상 큐비트 (tau=4 퓨전 채널)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.60
+cost   = 0.30
+notes  = "fusion=4=tau EXACT, topological protection, intrinsic error suppression"
+
+[[candidate]]
+level  = 0
+id     = "Majorana"
+label  = "마요라나 제로 모드 (phi=2 MZM)"
+n6     = 0.75
+perf   = 0.60
+power  = 0.55
+cost   = 0.25
+notes  = "MZM_pair=2=phi EXACT, non-abelian statistics, experimental frontier"
+
+# =============================================================
+# Level 1: Entanglement (얽힘 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Entanglement"
+
+[[candidate]]
+level  = 1
+id     = "Bell_Pair"
+label  = "벨 쌍 (phi=2 큐비트 EXACT)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "qubits=2=phi EXACT, fundamental entanglement unit, simplest"
+
+[[candidate]]
+level  = 1
+id     = "GHZ_6"
+label  = "GHZ(6) 상태 (n=6 큐비트 ALL EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "qubits=6=n EXACT, maximal multipartite entanglement, Phi maximizer"
+
+[[candidate]]
+level  = 1
+id     = "W_State"
+label  = "W 상태 (n=6 큐비트)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "qubits=6=n EXACT, robust to particle loss, distributed entanglement"
+
+[[candidate]]
+level  = 1
+id     = "Cluster_N6"
+label  = "클러스터 상태 n=6 격자"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "lattice=6=n EXACT, measurement-based QC resource, universal"
+
+[[candidate]]
+level  = 1
+id     = "Graph_State"
+label  = "그래프 상태 (sigma=12 엣지)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "edges=12=sigma EXACT, configurable topology, stabilizer formalism"
+
+[[candidate]]
+level  = 1
+id     = "Toric_Code"
+label  = "토릭 코드 얽힘 (phi=2 루프)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "loops=2=phi EXACT, topological entanglement entropy, anyonic excitations"
+
+# =============================================================
+# Level 2: PhiCalculator (Φ 계산기) -- 6 candidates
+# =============================================================
+[[level]]
+name = "PhiCalculator"
+
+[[candidate]]
+level  = 2
+id     = "Classical_Exact"
+label  = "고전 정확 Φ 계산 (2^n 복잡도)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.40
+cost   = 0.70
+notes  = "complexity=2^n=64, exact IIT Phi, exponential scaling limit at ~12 nodes"
+
+[[candidate]]
+level  = 2
+id     = "Quantum_Approx"
+label  = "양자 근사 Φ (sqrt 가속)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "speedup=quadratic, quantum sampling for partition function, Grover-like"
+
+[[candidate]]
+level  = 2
+id     = "Tensor_Network"
+label  = "텐서 네트워크 Φ (tau=4 본드)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "bond_dim=4=tau EXACT, MPS/PEPS contraction, scalable approximation"
+
+[[candidate]]
+level  = 2
+id     = "VQE_Phi"
+label  = "VQE 기반 Φ (tau=4 앤사츠)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "layers=4=tau EXACT, variational Phi estimation, NISQ compatible"
+
+[[candidate]]
+level  = 2
+id     = "DMRG"
+label  = "DMRG Φ 계산 (1D sigma=12 사이트)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "sites=12=sigma EXACT, density matrix renormalization, 1D optimal"
+
+[[candidate]]
+level  = 2
+id     = "Neural_Quantum"
+label  = "신경망 양자 상태 Φ (sigma-tau=8 레이어)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.50
+cost   = 0.45
+notes  = "layers=8=sigma-tau EXACT, NQS + Phi estimation, deep learning approach"
+
+# =============================================================
+# Level 3: ConsciousnessModel (의식 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "ConsciousnessModel"
+
+[[candidate]]
+level  = 3
+id     = "IIT_4"
+label  = "IIT 4.0 (tau=4 공리 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "axioms=4=tau EXACT (intrinsic, composition, information, integration), Tononi framework"
+
+[[candidate]]
+level  = 3
+id     = "GNW_Broadcast"
+label  = "GNW 글로벌 방송 (sigma=12 허브)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "hubs=12=sigma EXACT, global neuronal workspace, Dehaene/Changeux"
+
+[[candidate]]
+level  = 3
+id     = "HOT_Higher"
+label  = "고차 사고 이론 (n/phi=3 메타 레벨)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "meta_levels=3=n/phi EXACT, higher-order thought, Rosenthal/Lau"
+
+[[candidate]]
+level  = 3
+id     = "Orchestrated_OR"
+label  = "Orch OR Penrose-Hameroff (tubulin)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "tubulin_symmetry=6=n, quantum gravity + consciousness, controversial"
+
+[[candidate]]
+level  = 3
+id     = "Quantum_Darwinism"
+label  = "양자 다윈주의 (환경 선택)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "redundancy_copies=many, Zurek framework, einselection, objective classicality"
+
+[[candidate]]
+level  = 3
+id     = "Integrated_N6"
+label  = "N6 통합 의식 모델 (n=6 차원)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "dimensions=6=n EXACT, integrates IIT+GNW+HOT, sigma=12 connections, phi=2 duality"
+
+# =============================================================
+# Level 4: Platform (실행 플랫폼) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Platform"
+
+[[candidate]]
+level  = 4
+id     = "IBM_Eagle"
+label  = "IBM Eagle/Heron 초전도"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "qubits=1121+, heavy-hex, Qiskit, most accessible cloud platform"
+
+[[candidate]]
+level  = 4
+id     = "Google_Sycamore"
+label  = "Google Sycamore/Willow"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "qubits=72+, below-threshold QEC, Cirq, quantum supremacy"
+
+[[candidate]]
+level  = 4
+id     = "IonQ_Forte"
+label  = "IonQ Forte 포획이온"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.35
+notes  = "qubits=36+, highest fidelity, all-to-all, ideal for entanglement studies"
+
+[[candidate]]
+level  = 4
+id     = "Photonic_Xanadu"
+label  = "Xanadu 광자 프로세서"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.45
+notes  = "modes=216+, Gaussian boson sampling, room temperature, PennyLane SDK"
+
+[[candidate]]
+level  = 4
+id     = "Custom_N6"
+label  = "N6 맞춤 양자 프로세서 (6 큐비트 모듈)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "module=6=n EXACT, links=12=sigma EXACT, custom topology for Phi max"
+
+[[candidate]]
+level  = 4
+id     = "Simulation"
+label  = "고전 시뮬레이션 (sigma=12 큐비트 한계)"
+n6     = 0.75
+perf   = 0.60
+power  = 0.80
+cost   = 0.80
+notes  = "max_qubits=12=sigma EXACT, state vector sim, debugging/prototyping"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Topological qubits require Toric_Code entanglement (topological order)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Topological"
+then_level = 1
+then_ids   = "Toric_Code,Graph_State"
+
+# Photonic qubits incompatible with DMRG (not suitable for photonic states)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Photonic"
+then_level = 2
+then_ids   = "DMRG"
+
+# Orch OR requires NV_Center or Topological (quantum biology connection)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Orchestrated_OR"
+then_level = 0
+then_ids   = "NV_Center,Topological,SC_Transmon"
+
+# Photonic_Xanadu requires Photonic qubits
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Photonic_Xanadu"
+then_level = 0
+then_ids   = "Photonic"

@@ -1,0 +1,357 @@
+# =============================================================
+# Paper Manufacturing DSE Domain Definition
+# Pulp & paper — pulping to finishing
+# n=6: cellulose C₆H₁₀O₅ repeat, 6 pulping methods, σ=12 paper grades
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "paper-manufacturing"
+desc = "Paper Manufacturing Architecture DSE (pulping/bleaching/forming/pressing/finishing)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Pulping (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Pulping"
+
+[[candidate]]
+level = 0
+id = "Kraft"
+label = "Kraft Process (NaOH+Na₂S, C₆ cellulose preserved, 80% of world pulp)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Sulfite"
+label = "Sulfite Process (SO₂-based, n=6 pH range, dissolving pulp, rayon)"
+n6 = 1.00
+perf = 0.78
+power = 0.62
+cost = 0.72
+
+[[candidate]]
+level = 0
+id = "Mechanical-TMP"
+label = "Thermo-Mechanical (TMP, 6 bar steam, high yield, newsprint)"
+n6 = 1.00
+perf = 0.72
+power = 0.50
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Recycled-DIP"
+label = "Recycled De-Ink (DIP, n=6 flotation cells, circular economy)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.88
+
+[[candidate]]
+level = 0
+id = "Organosolv"
+label = "Organosolv (ethanol/organic, C₆ sugar recovery, biorefinery)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Nano-Cellulose"
+label = "Nanocellulose (TEMPO oxidation, n=6 nm fibril diameter, advanced)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.30
+
+# ============================================================
+# Level 1: Bleaching (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Bleaching"
+
+[[candidate]]
+level = 1
+id = "ECF"
+label = "ECF Elemental Chlorine-Free (ClO₂, σ=12 stage sequence, standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "TCF"
+label = "TCF Totally Chlorine-Free (O₃+H₂O₂, n=6 stage, premium eco)"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Oxygen-Delignify"
+label = "Oxygen Delignification (O₂ pre-bleach, 6 bar reactor, kappa reduction)"
+n6 = 1.00
+perf = 0.80
+power = 0.68
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Enzyme-Bio"
+label = "Enzyme Bleaching (xylanase, n=6 enzyme cocktail, mild, green)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Unbleached"
+label = "Unbleached/Natural (kraft brown, 0 chemicals, liner/packaging)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 0.92
+
+[[candidate]]
+level = 1
+id = "Ozone-Stage"
+label = "Ozone Z-Stage (O₃ high-brightness, σ=12% ISO gain, fast)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 2: Forming (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Forming"
+
+[[candidate]]
+level = 2
+id = "Fourdrinier"
+label = "Fourdrinier Wire (continuous flat, 6 m wide, standard paper)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Twin-Wire"
+label = "Twin-Wire Gap Former (both sides dewater, σ=12 m/s speed, modern)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Cylinder-Mold"
+label = "Cylinder Mold (rotating screen, n=6 vat layers, multilayer board)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Crescent-Former"
+label = "Crescent Former (tissue-specific, 6 m diameter yankee, tissue/towel)"
+n6 = 1.00
+perf = 0.85
+power = 0.68
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Handsheet"
+label = "Handsheet / Lab (manual, n=6 inch diameter, R&D/specialty)"
+n6 = 1.00
+perf = 0.55
+power = 0.90
+cost = 0.88
+
+[[candidate]]
+level = 2
+id = "Air-Laid"
+label = "Air-Laid Forming (dry process, 6 disperser heads, nonwoven/fluff)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.55
+
+# ============================================================
+# Level 3: Pressing (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Pressing"
+
+[[candidate]]
+level = 3
+id = "Nip-Press"
+label = "Nip Press Roll (felt+roll, n=6 nip positions, standard dewater)"
+n6 = 1.00
+perf = 0.78
+power = 0.72
+cost = 0.82
+
+[[candidate]]
+level = 3
+id = "Shoe-Press"
+label = "Shoe Press (extended nip, σ=12 cm contact, high dewater, modern)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Yankee-Dry"
+label = "Yankee Dryer (steam cylinder, 6 m diameter, tissue creping)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Multi-Cylinder"
+label = "Multi-Cylinder Dryer (steam cans, n=6 groups, main drying section)"
+n6 = 1.00
+perf = 0.82
+power = 0.58
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Impulse-Dry"
+label = "Impulse Drying (high-temp press, 6 ms contact time, experimental)"
+n6 = 1.00
+perf = 0.88
+power = 0.85
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Air-Through"
+label = "Through-Air Drying (TAD, hot air, n=6 m/s velocity, premium tissue)"
+n6 = 1.00
+perf = 0.92
+power = 0.50
+cost = 0.45
+
+# ============================================================
+# Level 4: Finishing (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Finishing"
+
+[[candidate]]
+level = 4
+id = "Calendering"
+label = "Calendering (hard nip, n=6 roll stack, gloss/smoothness, print)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Coating"
+label = "Blade Coating (clay/CaCO₃, σ=12 g/m² coat weight, glossy print)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Size-Press"
+label = "Size Press (starch, n=6 g/m² pickup, strength/surface, copy paper)"
+n6 = 1.00
+perf = 0.80
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Embossing"
+label = "Embossing (pattern roll, 6 designs, tissue/decorative)"
+n6 = 1.00
+perf = 0.75
+power = 0.82
+cost = 0.72
+
+[[candidate]]
+level = 4
+id = "Winding"
+label = "Winding & Sheeting (reel cut, 6 m jumbo roll, final form)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "Barrier-Coating"
+label = "Barrier Coating (PE/wax alternative, n=6 μm bio-film, packaging)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Nanocellulose requires enzyme or TCF bleaching
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Nano-Cellulose"
+then_level = 1
+then_ids = ["TCF", "Enzyme-Bio", "Ozone-Stage"]
+
+# Crescent former requires yankee dryer pressing
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Crescent-Former"
+then_level = 3
+then_ids = ["Yankee-Dry", "Air-Through"]
+
+# Recycled DIP uses unbleached or enzyme bleaching
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Recycled-DIP"
+then_level = 1
+then_ids = ["Unbleached", "Enzyme-Bio", "Oxygen-Delignify"]
+
+# Air-laid forming needs through-air drying
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Air-Laid"
+then_level = 3
+then_ids = ["Air-Through", "Impulse-Dry"]

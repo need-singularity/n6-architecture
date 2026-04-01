@@ -1,0 +1,383 @@
+# =============================================================
+# QUANTUM-GRAVITY-SENSOR DSE Domain Definition
+# 양자 중력 측정 칩 — ISCO=6M, atom interferometry
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "quantum-gravity-sensor"
+desc = "Quantum Gravity Sensor — atom interferometry, ISCO=6M, sigma-phi=10 sensitivity"
+levels = ["Sensor", "Source", "Measurement", "Processing", "Application"]
+vision = "n=6 기반 궁극의 양자 중력 센서 — ISCO=6M + σ-φ=10 감도 밴드"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Sensor (센서 유형) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level  = 0
+id     = "Atom_Interferometer"
+label  = "원자 간섭계 (tau=4 빔 분할)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "beam_splits=4=tau EXACT, highest sensitivity, cold atom standard"
+
+[[candidate]]
+level  = 0
+id     = "MEMS_Gravimeter"
+label  = "MEMS 중력계 (sigma-tau=8 kHz 공진)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.80
+cost   = 0.75
+notes  = "resonance=8kHz=sigma-tau EXACT, compact, low power, commercial"
+
+[[candidate]]
+level  = 0
+id     = "Superconducting"
+label  = "초전도 중력계 (n=6 SQUID 루프)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "SQUID_loops=6=n EXACT, ultra-low noise, cryogenic requirement"
+
+[[candidate]]
+level  = 0
+id     = "Optical_Clock"
+label  = "광격자 시계 (sigma=12 격자 사이트)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.45
+cost   = 0.30
+notes  = "sites=12=sigma EXACT, 10^-18 precision, gravitational redshift"
+
+[[candidate]]
+level  = 0
+id     = "Torsion_Balance"
+label  = "비틀림 저울 (phi=2 진자)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.85
+cost   = 0.60
+notes  = "pendula=2=phi EXACT, Cavendish tradition, G measurement"
+
+[[candidate]]
+level  = 0
+id     = "Quantum_Magnetometer"
+label  = "양자 자기계 (n=6 NV 앙상블)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.50
+notes  = "NV_ensemble=6=n EXACT, magnetic gradient → gravity, room temp"
+
+# =============================================================
+# Level 1: Source (원자/입자 소스) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Source"
+
+[[candidate]]
+level  = 1
+id     = "Cold_Atom_Rb"
+label  = "냉각 Rb 원자 (Z=37, sopfr+J2+sigma)"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.55
+notes  = "Rb-87 standard, D2 line 780nm, most mature cold atom platform"
+
+[[candidate]]
+level  = 1
+id     = "Cold_Atom_Cs"
+label  = "냉각 Cs 원자 (Z=55, sigma*tau+sopfr+phi)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "Cs-133 frequency standard, 9.2GHz clock, SI second definition"
+
+[[candidate]]
+level  = 1
+id     = "BEC"
+label  = "보스-아인슈타인 응축체 (n=6 스핀)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.35
+cost   = 0.30
+notes  = "spin_states=6 possible, ultra-cold, coherent matter wave, highest sensitivity"
+
+[[candidate]]
+level  = 1
+id     = "Ion_Trap"
+label  = "이온 트랩 (sigma=12 이온 체인)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "chain=12=sigma EXACT, long coherence, precision spectroscopy"
+
+[[candidate]]
+level  = 1
+id     = "NV_Diamond"
+label  = "NV 다이아몬드 (C Z=6 EXACT)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.70
+cost   = 0.45
+notes  = "carbon_Z=6=n EXACT, room temp, nanoscale, magnetic sensing"
+
+[[candidate]]
+level  = 1
+id     = "Photon"
+label  = "광자 소스 (phi=2 편광)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.75
+cost   = 0.55
+notes  = "polarization=2=phi EXACT, fiber-compatible, free-space propagation"
+
+# =============================================================
+# Level 2: Measurement (측정 방식) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Measurement"
+
+[[candidate]]
+level  = 2
+id     = "Phase_Shift"
+label  = "위상 이동 (2*pi/n=6 분해능)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "resolution=2pi/6 EXACT, Mach-Zehnder type, standard interferometry"
+
+[[candidate]]
+level  = 2
+id     = "Frequency"
+label  = "주파수 측정 (sigma=12 자릿수 정밀도)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "digits=12=sigma EXACT, 10^-12 fractional accuracy, clock comparison"
+
+[[candidate]]
+level  = 2
+id     = "Acceleration"
+label  = "가속도 (g≈σ-φ=10 m/s²)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "g=9.81≈sigma-phi=10 CLOSE, direct gravity measurement, micro-Gal"
+
+[[candidate]]
+level  = 2
+id     = "Gradient"
+label  = "중력 구배 (phi=2 센서 차동)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "sensors=2=phi EXACT, gradiometer, common-mode rejection"
+
+[[candidate]]
+level  = 2
+id     = "Curvature"
+label  = "곡률 (n=6 텐서 성분)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "independent_components=6 in 3D EXACT, Riemann tensor, GR precision"
+
+[[candidate]]
+level  = 2
+id     = "Entangled"
+label  = "얽힘 측정 (GHZ n=6 큐비트)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "qubits=6=n EXACT, Heisenberg limit, sqrt(N) beyond SQL"
+
+# =============================================================
+# Level 3: Processing (신호 처리) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level  = 3
+id     = "FPGA_Realtime"
+label  = "FPGA 실시간 처리 (sigma-tau=8 병렬)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "parallel=8=sigma-tau EXACT, low latency, deterministic, field deployable"
+
+[[candidate]]
+level  = 3
+id     = "Classical_DSP"
+label  = "고전 DSP (sopfr=5 필터 단계)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "stages=5=sopfr EXACT, proven algorithms, low cost, standard signal processing"
+
+[[candidate]]
+level  = 3
+id     = "Quantum_Error_Correct"
+label  = "양자 오류 정정 (phi=2 신드롬)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "syndrome_bits=2=phi EXACT, quantum-enhanced measurement, fault tolerant"
+
+[[candidate]]
+level  = 3
+id     = "Kalman_N6"
+label  = "N6 칼만 필터 (n=6 상태 벡터)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "state_dim=6=n EXACT, optimal linear estimation, sensor fusion"
+
+[[candidate]]
+level  = 3
+id     = "Neural_Filter"
+label  = "신경망 필터 (sigma-tau=8 레이어)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "layers=8=sigma-tau EXACT, nonlinear noise suppression, adaptive"
+
+[[candidate]]
+level  = 3
+id     = "Bayesian"
+label  = "베이지안 추론 (tau=4 사후 업데이트)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "updates=4=tau EXACT, posterior estimation, prior knowledge integration"
+
+# =============================================================
+# Level 4: Application (응용 분야) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Navigation"
+label  = "양자 관성항법 (n=6 자유도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "DOF=6=n EXACT, GPS-denied, submarine/underground, 3 accel + 3 gyro"
+
+[[candidate]]
+level  = 4
+id     = "Geology"
+label  = "지질 탐사 (sigma=12 km 심도)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "depth=12km=sigma EXACT, mineral/oil exploration, underground mapping"
+
+[[candidate]]
+level  = 4
+id     = "Dark_Matter"
+label  = "암흑물질 탐지 (sopfr=5 sigma 목표)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.45
+cost   = 0.35
+notes  = "target=5sigma=sopfr EXACT, ultra-light DM, axion search, fundamental"
+
+[[candidate]]
+level  = 4
+id     = "Gravitational_Wave"
+label  = "중력파 검출 (phi=2 간섭 팔)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.40
+cost   = 0.30
+notes  = "arms=2=phi EXACT, LIGO-like, tabletop GW detector, quantum squeezed"
+
+[[candidate]]
+level  = 4
+id     = "Geodesy"
+label  = "측지학 (sigma-phi=10 cm 정밀도)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "precision=10cm=sigma-phi EXACT, geoid mapping, sea level monitoring"
+
+[[candidate]]
+level  = 4
+id     = "Fundamental_Physics"
+label  = "기초물리 (ISCO=6M, n=6)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.45
+cost   = 0.35
+notes  = "ISCO=6M=n EXACT, equivalence principle test, G measurement, fifth force"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# BEC source requires Atom_Interferometer or Superconducting sensor (ultra-cold)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "BEC"
+then_level = 0
+then_ids   = "Atom_Interferometer,Superconducting"
+
+# Optical_Clock sensor requires Frequency measurement
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Optical_Clock"
+then_level = 2
+then_ids   = "Frequency,Phase_Shift"
+
+# Entangled measurement incompatible with Classical_DSP processing
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Entangled"
+then_level = 3
+then_ids   = "Classical_DSP"
+
+# Dark_Matter application requires high-sensitivity sensors
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Dark_Matter"
+then_level = 0
+then_ids   = "Atom_Interferometer,Superconducting,Optical_Clock"
