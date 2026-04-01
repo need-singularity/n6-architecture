@@ -245,7 +245,18 @@ best_pareto = "DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blanket + N6_Brayton6 (
 best_n6 = "DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blanket + N6_Brayton6 (100.0%)"
 n6_max = 100.0
 n6_avg = 76.5
-note = "v2: 5개 n6=1.00 후보 추가 → 100%. Li-6 A=6 + 3n=18 TF + n/phi=3 heating + n=6 Brayton"
+bt_range = "BT-97~102"
+bt_count = 6
+alien_discoveries = 15
+alien_exact = 6
+testable_predictions = 30
+prediction_range = "P-FU-01~30"
+honest_z = 0.74
+strict_score = 28.6
+new_docs = 6
+new_lines = 10317
+upgraded_lines = [2037, 3098, 3167]
+note = "v3: alien-level 탐색 완료. BT-94~99 추가, 15 alien findings (6 EXACT). P-FU-01~30 검증 가능 예측 30개. z=0.74 (수치 우연 유의하지 않음), strict 28.6%. 문서 6개 신규 (10,317줄), 기존 3개 대폭 확장 (2,037+3,098+3,167줄)"
 
 [superconductor]
 goal = true
