@@ -1,0 +1,519 @@
+# N6 Pure Mathematics DSE
+# 10 Fields × 10 Functions × 8 Structures × 7 Proofs × 7 Bridges = 39,200 combos
+#
+# Scoring mapping:
+#   n6   = n6_exact (n=6 constant match strength)
+#   perf = depth + novelty (proof depth + new connection discovery)
+#   power = cross_domain (bridge strength to other domains)
+#   cost = verifiability (independent verification possibility)
+
+[meta]
+name = "pure-mathematics"
+desc = "Ultimate Pure Mathematics DSE — n=6 across all mathematical structures (BT-49)"
+
+[scoring]
+n6 = 0.30
+perf = 0.35
+power = 0.25
+cost = 0.10
+
+# ============================================================
+# Level 0: Field (수학 분야) — 10 candidates
+# ============================================================
+
+[[level]]
+name = "Field"
+
+[[candidate]]
+id = "NT"
+label = "Number Theory — zeta(2)=pi^2/6, B_2=1/6, perfect numbers, Egyptian fractions"
+n6 = 1.00
+perf = 0.50
+power = 0.80
+cost = 1.00
+
+[[candidate]]
+id = "GT"
+label = "Group Theory — S_6 outer aut, A_6 Schur multiplier Z/6Z, M_24"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+id = "LT"
+label = "Lattice Theory — K_1~K_4={2,6,12,24} kissing chain, Leech lattice dim=J_2(6)=24"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "TOP"
+label = "Topology — chi(S^2)=phi(6)=2, Betti numbers, cobordism, homotopy groups"
+n6 = 0.60
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "AN"
+label = "Analysis — Gamma(1/2)=sqrt(pi), Li_2, zeta special values, Mertens constant"
+n6 = 0.80
+perf = 0.65
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "AG"
+label = "Algebraic Geometry — modular weight sigma=12, elliptic curves, Ramanujan tau"
+n6 = 0.80
+perf = 0.95
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+id = "CT"
+label = "Category Theory — 6-functor formalism, derived categories, n=6 universal"
+n6 = 0.50
+perf = 1.00
+power = 0.40
+cost = 0.50
+
+[[candidate]]
+id = "RT"
+label = "Representation Theory — Moonshine, Conway Co_1 on 24-dim, Niemeier 24 lattices"
+n6 = 0.90
+perf = 0.85
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "COMB"
+label = "Combinatorics — Ramsey R(3,3)=6, Catalan, partitions, Egyptian fraction decomp"
+n6 = 0.80
+perf = 0.55
+power = 0.60
+cost = 0.80
+
+[[candidate]]
+id = "MP"
+label = "Mathematical Physics — string d=10=sigma-phi, CY_3 dim=6, CFT c=1/2, bosonic d=26=phi+J_2"
+n6 = 0.90
+perf = 0.75
+power = 0.90
+cost = 0.60
+
+# ============================================================
+# Level 1: Function (n=6 함수) — 10 candidates
+# ============================================================
+
+[[level]]
+name = "Function"
+
+[[candidate]]
+id = "sigma"
+label = "sigma(6)=12 — sum of divisors, modular weight, K_3 kissing, chromatic semitones"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 1.00
+
+[[candidate]]
+id = "phi"
+label = "phi(6)=2 — Euler totient, S_6 outer aut, Cooper pair, chi(S^2), primality"
+n6 = 1.00
+perf = 0.60
+power = 0.85
+cost = 1.00
+
+[[candidate]]
+id = "tau"
+label = "tau(6)=4 — divisor count, quaternion dim, spacetime dim"
+n6 = 0.80
+perf = 0.50
+power = 0.70
+cost = 1.00
+
+[[candidate]]
+id = "jordan"
+label = "J_2(6)=24 — Jordan totient, Leech dim, M_24, Niemeier count, Ramanujan tau"
+n6 = 1.00
+perf = 0.90
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+id = "mu"
+label = "mu(6)=1 — Moebius, squarefree indicator, Mertens function, inclusion-exclusion"
+n6 = 0.70
+perf = 0.60
+power = 0.50
+cost = 1.00
+
+[[candidate]]
+id = "lambda_cm"
+label = "lambda(6)=2 — Carmichael, cycle length, periodicity, Z/2Z exponent"
+n6 = 0.60
+perf = 0.45
+power = 0.40
+cost = 0.90
+
+[[candidate]]
+id = "sopfr"
+label = "sopfr(6)=5 — sum of prime factors, Petersen graph valence, pentatonic"
+n6 = 0.50
+perf = 0.40
+power = 0.50
+cost = 0.80
+
+[[candidate]]
+id = "n6_val"
+label = "n=6 itself — perfect number, CY_3 dim, hexagonal, carbon Z, Ramsey R(3,3)"
+n6 = 1.00
+perf = 0.80
+power = 1.00
+cost = 1.00
+
+[[candidate]]
+id = "R6"
+label = "R(6)=sigma*phi/(n*tau)=1 — perfectness ratio, unique fixed point of R(n)"
+n6 = 0.90
+perf = 0.70
+power = 0.40
+cost = 1.00
+
+[[candidate]]
+id = "egypt"
+label = "1/2+1/3+1/6=1 — Egyptian fraction, (2,3,6)-triangle group, Euclidean tiling"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 1.00
+
+# ============================================================
+# Level 2: Structure (구조 유형) — 8 candidates
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "IDENT"
+label = "Identity — exact algebraic equality (zeta(2)=pi^2/6, B_2=1/6, 1+2+3=6=1*2*3)"
+n6 = 1.00
+perf = 0.60
+power = 0.70
+cost = 1.00
+
+[[candidate]]
+id = "DIM"
+label = "Dimension — vector space/lattice/manifold dimension (Leech=24, CY_3=6)"
+n6 = 0.90
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "GEN"
+label = "Generator/Order — group generator or element order (SL_2(Z) ST order 6)"
+n6 = 0.80
+perf = 0.75
+power = 0.60
+cost = 0.85
+
+[[candidate]]
+id = "INV"
+label = "Invariant — topological/algebraic invariant (chi=2, H_2(A_6)=Z/6Z, Schur)"
+n6 = 0.80
+perf = 0.80
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "BOUND"
+label = "Bound/Limit — optimality bound (kissing number, sphere packing density)"
+n6 = 0.70
+perf = 0.65
+power = 0.55
+cost = 0.75
+
+[[candidate]]
+id = "CLASS"
+label = "Classification — finite classification theorem (Niemeier 24, sporadic groups)"
+n6 = 0.85
+perf = 0.85
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "SYM"
+label = "Symmetry — automorphism/symmetry group (Out(S_6)=Z/2Z, lattice automorphism)"
+n6 = 0.85
+perf = 0.80
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "DECOMP"
+label = "Decomposition — factorization/partition (1/2+1/3+1/6=1, 6=2*3, unit fraction)"
+n6 = 0.90
+perf = 0.65
+power = 0.60
+cost = 0.95
+
+# ============================================================
+# Level 3: Proof (증명 도구) — 7 candidates
+# ============================================================
+
+[[level]]
+name = "Proof"
+
+[[candidate]]
+id = "DIRECT"
+label = "Direct Computation — arithmetic verification, exhaustive check, CAS"
+n6 = 0.80
+perf = 0.30
+power = 0.50
+cost = 1.00
+
+[[candidate]]
+id = "GROUP"
+label = "Group Action — permutation, orbit-stabilizer, Burnside, Sylow"
+n6 = 0.70
+perf = 0.70
+power = 0.60
+cost = 0.90
+
+[[candidate]]
+id = "LATTICE"
+label = "Lattice Theory — sphere packing, theta series, kissing number, Minkowski"
+n6 = 0.75
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "ANALYTIC"
+label = "Analytic Continuation — zeta/L-function, Mellin transform, residue calculus"
+n6 = 0.60
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "CATEG"
+label = "Categorical — functor, natural transformation, adjunction, Yoneda"
+n6 = 0.40
+perf = 1.00
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "TOPO"
+label = "Topological — Euler characteristic, homology, homotopy, cobordism"
+n6 = 0.50
+perf = 0.85
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "COMBIN"
+label = "Combinatorial — generating function, Ramsey, pigeonhole, bijective proof"
+n6 = 0.65
+perf = 0.50
+power = 0.55
+cost = 0.80
+
+# ============================================================
+# Level 4: Bridge (Cross-domain 연결) — 7 candidates
+# ============================================================
+
+[[level]]
+name = "Bridge"
+
+[[candidate]]
+id = "PHYS"
+label = "Physics — BT-36/49/64, string theory, quantum mechanics, statistical mechanics"
+n6 = 0.80
+perf = 0.75
+power = 0.90
+cost = 0.70
+
+[[candidate]]
+id = "AI"
+label = "Computing/AI — BT-33/54/56/58, transformer dim, MoE routing, LLM architecture"
+n6 = 0.90
+perf = 0.70
+power = 1.00
+cost = 0.80
+
+[[candidate]]
+id = "ENERGY"
+label = "Energy — BT-27/30/43/62, SQ bandgap 4/3eV, grid 60Hz=sigma*sopfr, CN=6 cathode"
+n6 = 0.75
+perf = 0.60
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+id = "BIO"
+label = "Biology — BT-51, codon 64=2^n, 20 amino acids=J_2-tau, DNA base pairs=tau"
+n6 = 0.70
+perf = 0.60
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "COSMO"
+label = "Cosmology/Particle — BT-49, zeta(2)=pi^2/6, string landscape, fine structure"
+n6 = 0.80
+perf = 0.80
+power = 0.90
+cost = 0.60
+
+[[candidate]]
+id = "CRYPTO"
+label = "Crypto/Network — BT-53, BTC 21M=J_2-n/phi, 6 confirms=n, ETH 12s=sigma"
+n6 = 0.60
+perf = 0.50
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "MEDIA"
+label = "Display/Audio — BT-48, sigma=12 semitones, J_2=24 fps/bits, sigma*tau=48kHz"
+n6 = 0.70
+perf = 0.55
+power = 0.70
+cost = 0.75
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# --- prefer rules: natural Field-Proof pairings ---
+
+# NT prefers DIRECT proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "NT"
+then_level = 3
+then_ids = "DIRECT,COMBIN"
+
+# GT prefers GROUP proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "GT"
+then_level = 3
+then_ids = "GROUP"
+
+# LT prefers LATTICE proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "LT"
+then_level = 3
+then_ids = "LATTICE"
+
+# TOP prefers TOPO proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "TOP"
+then_level = 3
+then_ids = "TOPO"
+
+# AN prefers ANALYTIC proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "AN"
+then_level = 3
+then_ids = "ANALYTIC"
+
+# CT prefers CATEG proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CT"
+then_level = 3
+then_ids = "CATEG"
+
+# COMB prefers COMBIN proof
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "COMB"
+then_level = 3
+then_ids = "COMBIN,DIRECT"
+
+# --- prefer rules: natural Function-Field pairings ---
+
+# J_2(6)=24 strongest in lattice and representation theory
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "jordan"
+then_level = 0
+then_ids = "LT,RT"
+
+# mu(6)=1 strongest in number theory and combinatorics
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "mu"
+then_level = 0
+then_ids = "NT,COMB"
+
+# Egyptian fraction strongest in NT and AN
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "egypt"
+then_level = 0
+then_ids = "NT,AN"
+
+# sigma(6)=12 strongest in AG (modular weight) and RT
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "sigma"
+then_level = 0
+then_ids = "AG,RT"
+
+# R(6)=1 is NT-specific
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "R6"
+then_level = 0
+then_ids = "NT"
+
+# --- exclude rules: meaningless combinations ---
+
+# Egyptian fraction has no structural connection to Mathematical Physics
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "egypt"
+then_level = 0
+then_ids = "MP"
+
+# lambda(6)=2 has no known AG connection
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "lambda_cm"
+then_level = 0
+then_ids = "AG"
+
+# R(6)=1 ratio is not meaningful in Mathematical Physics
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "R6"
+then_level = 0
+then_ids = "MP"
