@@ -632,3 +632,12 @@ status = "done"
 tool = "tools/universal-dse/"
 best = "TwoPhase + Diamond (100.0% n6, score 0.8736)"
 note = "TwoPhase+VaporChamber+DiamondSpreader+DVFS+EV_Battery → Diamond HEXA-P — 열관리×칩 100% n6 EXACT"
+
+# ── Cryptography Cross-DSE ────────────────
+
+[cross-dse.crypto-x-chip]
+domains = ["cryptography", "chip-architecture"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "Symmetric + Diamond (98.3% n6, score 0.8804)"
+note = "AES256+AESNI → Diamond HEXA-P — AES-NI HW accel + Z=6 칩, sigma-tau=8 key size"
