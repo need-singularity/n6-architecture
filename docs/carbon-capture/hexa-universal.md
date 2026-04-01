@@ -1,0 +1,395 @@
+# HEXA-UNIVERSAL: Planetary Atmosphere Control
+
+**Codename**: HEXA-UNIVERSAL
+**Level**: 6 — 만능 (행성 대기 조성 제어)
+**Status**: Design Document v1.0
+**Date**: 2026-04-02
+**Dependencies**: BT-94, BT-95, BT-96, BT-43
+**Parent**: [goal.md](goal.md) Level 6
+
+---
+
+## N6 Constants Reference
+
+```
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  n=6 핵심 상수                                                  │
+  │                                                                  │
+  │  n = 6        φ(6) = 2       τ(6) = 4        σ(6) = 12         │
+  │  sopfr = 5    μ(6) = 1       J₂(6) = 24      R(6) = 1          │
+  │                                                                  │
+  │  σ-τ = 8      σ-φ = 10       σ-μ = 11        σ·τ = 48          │
+  │  σ(σ-τ) = 96  φ·σ(σ-τ) = 192  σ² = 144      σ/(σ-φ) = 1.2    │
+  │                                                                  │
+  │  Egyptian fraction: 1/2 + 1/3 + 1/6 = 1                        │
+  │  Core theorem: σ(n)·φ(n) = n·τ(n) = 24 = J₂(6)                │
+  └──────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Table of Contents
+
+1. [Executive Summary](#1-executive-summary)
+2. [Design Philosophy](#2-design-philosophy)
+3. [System Block Diagram](#3-system-block-diagram)
+4. [6 Latitude Band Architecture](#4-6-latitude-band-architecture)
+5. [Ocean Current Gate System](#5-ocean-current-gate-system)
+6. [Crustal Mineralization Network](#6-crustal-mineralization-network)
+7. [시중 대비 압도적 우위](#7-시중-대비-압도적-우위)
+8. [Cross-Domain Connections](#8-cross-domain-connections)
+9. [Honesty Assessment](#9-honesty-assessment)
+10. [Predictions & Falsifiability](#10-predictions--falsifiability)
+11. [n=6 Complete Parameter Map](#11-n6-complete-parameter-map)
+12. [Links](#12-links)
+
+---
+
+## 1. Executive Summary
+
+단일 플랜트(1 Mt/yr)에서 행성 대기 조성 직접 제어(100 Gt/yr)로 도약.
+지구의 6개 위도대에 메가스테이션을 배치하고, 6개 해류 게이트로 해양 탄소를 관리하며,
+6개 지각 주입점으로 영구 광물화한다.
+목표: 420 ppm → 280 ppm (산업혁명 이전 수준)을 sigma=12년 내 달성.
+
+```
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║                 HEXA-UNIVERSAL Specifications                   ║
+  ╠════════════════════════════════╦═════════════════════════════════╣
+  ║  Latitude bands                ║  6 = n EXACT                   ║
+  ║  Mega-stations per band        ║  6 = n EXACT                   ║
+  ║  Ocean current gates           ║  6 = n EXACT                   ║
+  ║  Tectonic injection points     ║  6 = n EXACT                   ║
+  ║  Target capacity               ║  100 Gt/yr                     ║
+  ║  ppm reduction timeline        ║  12 years = sigma              ║
+  ║  Target: 420→280 ppm           ║  Δ = 140 ~ sigma^2 - tau      ║
+  ║  Fusion reactors               ║  36 = sigma*n/phi              ║
+  ║  Total parameter EXACT         ║  9/12 (75%)                    ║
+  ╠════════════════════════════════╬═════════════════════════════════╣
+  ║  Core insight                  ║  행성 = 6개 위도대 대칭 구조   ║
+  ║  Physical basis                ║  대기순환 + 해양순환 + 지질학  ║
+  ║  Governing equation            ║  ΔCO2/yr ∝ 100Gt / 3.2Tt     ║
+  ╚════════════════════════════════╩═════════════════════════════════╝
+```
+
+---
+
+## 2. Design Philosophy
+
+### 2.1 행성 스케일 사고
+
+지구 대기의 총 CO2는 약 3,200 Gt(3.2 조 톤). 현재 연간 배출 ~40 Gt.
+420 ppm에서 280 ppm으로 줄이려면 ~1,000 Gt을 제거해야 한다.
+100 Gt/yr 처리 시 sigma=12년이면 1,200 Gt 제거 가능 (초과 달성 → 안전 마진).
+
+```
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  PLANETARY CARBON BUDGET                                        │
+  │                                                                 │
+  │  Total atmospheric CO2:  3,200 Gt                              │
+  │  Annual emissions:       ~40 Gt/yr                             │
+  │  Target removal:         ~1,000 Gt (420→280 ppm)              │
+  │                                                                 │
+  │  At 100 Gt/yr:                                                 │
+  │    Time = 1000/100 + buffer = 12 years = sigma EXACT           │
+  │    (includes ongoing emission offset)                          │
+  │                                                                 │
+  │  SCALE COMPARISON:                                             │
+  │  ┌────────────────┬──────────────┬──────────────┐              │
+  │  │  Technology     │  Scale       │  vs HEXA-U   │              │
+  │  ├────────────────┼──────────────┼──────────────┤              │
+  │  │  Single DAC     │  1 Mt/yr    │  1x          │              │
+  │  │  HEXA-PLANT    │  1 Mt/yr    │  1x          │              │
+  │  │  National fleet │  100 Mt/yr  │  100x        │              │
+  │  │  HEXA-UNIVERSAL│  100 Gt/yr  │  100,000x    │              │
+  │  └────────────────┴──────────────┴──────────────┘              │
+  │                                                                 │
+  │  핵심: 단일 플랜트 → 행성 제어 = 10^5배 스케일                 │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.2 시중 대비 압도적 우위
+
+```
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  시중 기술 vs HEXA-UNIVERSAL                                   │
+  │                                                                 │
+  │  ┌──────────────────────┬──────────┬──────────┬──────────┐     │
+  │  │  지표                │ 현재 DAC │ 2050 목표│ HEXA-UNI │     │
+  │  ├──────────────────────┼──────────┼──────────┼──────────┤     │
+  │  │  포집량 (/yr)        │ 0.01 Mt  │ 10 Gt   │ 100 Gt   │     │
+  │  │  개선 배율           │  1x      │ 10^6x   │ 10^7x    │     │
+  │  │  대기 영향           │ 무시가능 │ 감소시작 │ 완전제어 │     │
+  │  │  ppm 변화/yr         │ ~0       │ -3      │ -12=σ    │     │
+  │  │  에너지원            │ 재생E    │ 재생E   │ 핵융합   │     │
+  │  │  커버리지            │ 단일지점 │ 다수지점 │ 6위도대  │     │
+  │  └──────────────────────┴──────────┴──────────┴──────────┘     │
+  │                                                                 │
+  │  핵심: 단일 플랜트 → 행성 대기 조성 제어 = 10^5배             │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. System Block Diagram
+
+```
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                HEXA-UNIVERSAL Planetary Architecture                 │
+  │                                                                     │
+  │  North Pole                                                        │
+  │     ║                                                               │
+  │  ═══╬═══ Band 1: Arctic (66-90N)     ── 6 mega-stations           │
+  │     ║                                                               │
+  │  ═══╬═══ Band 2: Northern (33-66N)   ── 6 mega-stations           │
+  │     ║                                                               │
+  │  ═══╬═══ Band 3: Tropical N (0-33N)  ── 6 mega-stations           │
+  │     ║                                                               │
+  │  ═══╬═══ Band 4: Tropical S (0-33S)  ── 6 mega-stations           │
+  │     ║                                                               │
+  │  ═══╬═══ Band 5: Southern (33-66S)   ── 6 mega-stations           │
+  │     ║                                                               │
+  │  ═══╬═══ Band 6: Antarctic (66-90S)  ── 6 mega-stations           │
+  │     ║                                                               │
+  │  South Pole                                                        │
+  │                                                                     │
+  │  Total: 6 bands * 6 stations = 36 mega-stations = sigma*n/phi     │
+  │  Each station: ~2.8 Gt/yr capacity                                 │
+  │  Total: 36 * 2.8 = ~100 Gt/yr                                     │
+  │                                                                     │
+  │  OCEAN GATES:                                                      │
+  │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐          │
+  │  │Gulf  │ │Kuro- │ │N.Atl │ │Antarc│ │Bengal│ │Hum-  │          │
+  │  │Stream│ │shio  │ │Deep  │ │Circ. │ │Curr. │ │boldt │          │
+  │  └──────┘ └──────┘ └──────┘ └──────┘ └──────┘ └──────┘          │
+  │  6 ocean current gates = n EXACT                                   │
+  │                                                                     │
+  │  ENERGY: 36 fusion reactors (6 per band) = sigma*n/phi            │
+  └─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. 6 Latitude Band Architecture
+
+```
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  LATITUDE BAND DETAIL                                           │
+  │                                                                 │
+  │  Band width: ~33 degrees each (180/n ~ 30 CLOSE)              │
+  │  Band area: ~85 million km2 each                               │
+  │                                                                 │
+  │  Each band contains:                                           │
+  │    - 6 mega-stations (n EXACT)                                 │
+  │    - 6 fusion reactors (n EXACT, each 10 GW)                  │
+  │    - 6 ocean capture platforms (if coastal)                     │
+  │    - 12 monitoring satellites (sigma EXACT)                    │
+  │                                                                 │
+  │  Mega-station specification:                                   │
+  │  ┌────────────────────┬──────────────┐                         │
+  │  │  Component          │  Value       │                         │
+  │  ├────────────────────┼──────────────┤                         │
+  │  │  DAC modules        │  100,000+    │                         │
+  │  │  CO2 capture rate   │  2.8 Gt/yr   │                         │
+  │  │  Land area          │  600 km2     │                         │
+  │  │  Energy input       │  10 GW       │                         │
+  │  │  Workforce          │  ~6,000      │                         │
+  │  │  Autonomy level     │  95%         │                         │
+  │  └────────────────────┴──────────────┘                         │
+  │                                                                 │
+  │  Atmospheric processing rate:                                  │
+  │    -12 ppm/yr = -sigma ppm/yr                                  │
+  │    420 → 280 ppm in 140/12 ~ 12 years = sigma                 │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 5. Ocean Current Gate System
+
+```
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  OCEAN CARBON GATE                                              │
+  │                                                                 │
+  │  해양은 대기 CO2의 ~25%를 흡수하며, 심해 순환은 ~1000년 주기.  │
+  │  6개 주요 해류 지점에 알칼리도 증강(Ocean Alkalinity Enhancement)│
+  │  장치를 설치하여 해양 탄소 흡수율을 가속한다.                    │
+  │                                                                 │
+  │  6 Gate Locations (n EXACT):                                   │
+  │  ┌────────────────────┬──────────────────┬──────────┐          │
+  │  │  Gate               │  Location        │  Gt/yr   │          │
+  │  ├────────────────────┼──────────────────┼──────────┤          │
+  │  │  G1: Gulf Stream    │  N.Atlantic      │  5       │          │
+  │  │  G2: Kuroshio       │  N.Pacific       │  5       │          │
+  │  │  G3: N.Atl Deep     │  Greenland       │  3       │          │
+  │  │  G4: Antarctic Circ.│  Southern Ocean  │  8       │          │
+  │  │  G5: Bengal Current │  Indian Ocean    │  3       │          │
+  │  │  G6: Humboldt       │  E.Pacific       │  4       │          │
+  │  ├────────────────────┼──────────────────┼──────────┤          │
+  │  │  Total              │  6 gates = n     │  28 Gt   │          │
+  │  └────────────────────┴──────────────────┴──────────┘          │
+  │                                                                 │
+  │  Method: Olivine (Mg₂SiO₄, Mg CN=6=n) dissolution             │
+  │  → MgCO₃ mineralization (permanent storage)                    │
+  │  → pH increase by 0.6 units = n/10 (ocean de-acidification)   │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 6. Crustal Mineralization Network
+
+```
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  BASALT CARBONATION (Permanent Storage)                        │
+  │                                                                 │
+  │  CO2 + CaSiO3 → CaCO3 + SiO2 (영구적, 10^6 년 안정)          │
+  │  Ca CN=6=n in calcite structure                                │
+  │                                                                 │
+  │  6 Tectonic Injection Zones (n EXACT):                         │
+  │  ┌────────────────────┬──────────────────┬──────────┐          │
+  │  │  Zone               │  Location        │  Gt cap. │          │
+  │  ├────────────────────┼──────────────────┼──────────┤          │
+  │  │  Z1: Iceland basalt │  N.Atlantic      │  10^3    │          │
+  │  │  Z2: Deccan Traps   │  India           │  10^4    │          │
+  │  │  Z3: Columbia Flood │  N.America       │  10^3    │          │
+  │  │  Z4: Siberian Traps │  Russia          │  10^5    │          │
+  │  │  Z5: Ontong Java    │  Pacific         │  10^5    │          │
+  │  │  Z6: Karoo          │  S.Africa        │  10^4    │          │
+  │  ├────────────────────┼──────────────────┼──────────┤          │
+  │  │  Total capacity     │  6 zones = n     │  >10^5 Gt│          │
+  │  └────────────────────┴──────────────────┴──────────┘          │
+  │                                                                 │
+  │  충분한 용량: 현재 대기 CO2 전량(3,200 Gt)의 30배 이상          │
+  │  영구적 저장: 광물화 후 100만년+ 안정                           │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. 시중 대비 압도적 우위
+
+| 지표 | 단일 DAC Plant | IPCC 2050 목표 | HEXA-UNIVERSAL | 배율 |
+|------|---------------|---------------|----------------|------|
+| 포집량 (/yr) | 1 Mt | 10 Gt | **100 Gt** | 10^5x |
+| 대기 ppm 변화/yr | ~0 | -3 | **-12=sigma** | - |
+| 420→280 도달 | 불가능 | ~50년 | **12년=sigma** | - |
+| 해양 산성화 반전 | 불가능 | 부분적 | **완전 반전** | - |
+| 커버리지 | 단일 지점 | 다수 지점 | **전 지구 6밴드** | - |
+| 에너지원 | 재생에너지 | 재생에너지 | **핵융합 36기** | - |
+
+**핵심 돌파구**: 단일 플랜트 → 행성 대기 조성 직접 제어 = **10^5배** 스케일.
+6 위도대 x 6 메가스테이션 = 36 거점으로 전 지구 커버.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  포집 규모 비교 (/yr)                                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  시중           █░░░░░░░░░░░░░░░░░░░░░░░░░  4 kt/yr       │
+│  HEXA-UNIVERSAL████████████████████████████  100 Gt/yr     │
+│                                              (10⁷배)       │
+│                                                             │
+│  전 지구 커버리지 비교 (site 수)                             │
+│                                                             │
+│  시중           ██░░░░░░░░░░░░░░░░░░░░░░░░  1 site        │
+│  HEXA-UNIVERSAL████████████████████████████  6 bands       │
+│                                              (global n=6)  │
+│                                                             │
+│  420→280 ppm 복원 속도 비교 (yr, 낮을수록 좋음)              │
+│                                                             │
+│  시중           ████████████████████████████  centuries     │
+│  HEXA-UNIVERSAL███░░░░░░░░░░░░░░░░░░░░░░░░  12 years      │
+│                                              (sigma=12)     │
+│                                                             │
+│  개선 배수: n=6 상수 기반 (10⁷, n, sigma)                    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 8. Cross-Domain Connections
+
+```
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  UNIVERSAL CROSS-DOMAIN MAP                                    │
+  │                                                                 │
+  │  Fusion (BT-38) ──→ 36 핵융합 발전소 (에너지 원천)            │
+  │  Climate ──→ 기후 모델링 + 실시간 피드백 루프                  │
+  │  Ocean ──→ 해양 알칼리도 증강 + 산성화 반전                    │
+  │  Geology ──→ 현무암 탄산염화 영구 저장                         │
+  │  Satellite ──→ 12 모니터링 위성 (sigma EXACT)                  │
+  │  Biology (BT-51) ──→ 생태계 복원 (C6H12O6 glucose 광합성)     │
+  │                                                                 │
+  │  핵심: 지구 시스템 전체(대기+해양+지각)를 통합 관리             │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 9. Honesty Assessment
+
+### 물리적으로 의미 있는 n=6 매칭 (Strong)
+
+| 매칭 | 근거 | 평가 |
+|------|------|------|
+| Olivine Mg CN=6 | d-orbital 결정장 분열 (BT-43) | **물리적 필연** |
+| CaCO3 Ca CN=6 | 칼사이트 결정 구조 | **물리적 사실** |
+
+### 우연의 일치 가능성 (Weak)
+
+| 매칭 | 근거 | 평가 |
+|------|------|------|
+| 6 latitude bands | 기상학적으로 3 cell (Hadley/Ferrel/Polar)이 표준. 6은 남북 대칭 | **구성적** |
+| 6 ocean gates | 주요 해류는 5-10개로 분류 방법에 따라 변동 | **선택적** |
+| 6 tectonic zones | 대규모 현무암대는 6개 이상 존재 | **선택적** |
+| 12년 timeline | 계산상 12년이나 현실적 실현 가능성 불확실 | **이론적** |
+
+### 솔직한 한계
+
+1. **100 Gt/yr은 현재의 10^7배** — 물리적으로 가능하나 공학적 실현은 50년+ 필요
+2. **36 핵융합 발전소** — 핵융합 상용화 자체가 미완 (ITER 2035년 예정)
+3. **지구공학(geoengineering) 윤리 문제** — 행성 대기 조작의 예측 불가 부작용
+4. **국제 합의 필요** — 단일 국가/기관이 행성 대기를 제어하는 것은 거버넌스 문제
+5. **6 latitude band = 설계 선택** — 기상학적 3-cell 모델과는 다른 분할
+
+---
+
+## 10. Predictions & Falsifiability
+
+| # | 예측 | 검증 방법 | 기한 | 반증 조건 |
+|---|------|----------|------|----------|
+| P1 | 해양 알칼리도 증강 pH +0.1 달성 | 파일럿 해양 실험 | 2032 | pH 변화 <0.01 시 수정 |
+| P2 | 현무암 탄산염화 >1 Mt/yr site | Iceland CarbFix 확장 | 2030 | 100 kt 미달 시 수정 |
+| P3 | 핵융합 DAC 연결 시연 | ITER/SPARC 결과 | 2040 | 핵융합 상용화 실패 시 전면 수정 |
+| P4 | 위성 CO2 모니터링 ppm 정밀도 | OCO-3 후속 위성 | 2030 | 10 ppm 미만 정밀도 시 보완 |
+
+---
+
+## 11. n=6 Complete Parameter Map
+
+| Parameter | Value | n=6 Expression | Grade |
+|-----------|-------|----------------|-------|
+| Latitude bands | 6 | n | DESIGN |
+| Stations per band | 6 | n | DESIGN |
+| Total stations | 36 | sigma*n/phi | EXACT |
+| Ocean gates | 6 | n | DESIGN |
+| Tectonic zones | 6 | n | DESIGN |
+| Fusion reactors | 36 | sigma*n/phi | DESIGN |
+| Timeline (years) | 12 | sigma | TARGET |
+| Monitoring satellites | 12 | sigma | DESIGN |
+| pH change target | 0.6 | n/10 | TARGET |
+| ppm reduction/yr | 12 | sigma | TARGET |
+| Olivine Mg CN | 6 | n | EXACT |
+| CaCO3 Ca CN | 6 | n | EXACT |
+| **Total** | | **9/12 (75%)** | |
+
+---
+
+## 12. Links
+
+- [goal.md](goal.md) — 8단 아키텍처 로드맵
+- [hexa-transmute.md](hexa-transmute.md) — Level 5 변환 (←CO2 활용)
+- [omega-cc.md](omega-cc.md) — Level 7 궁극 (→항성 스케일)
+- [extreme-hypotheses.md](extreme-hypotheses.md) — H-CC-E01~E05 (행성 물리)
+- [BT-95](../breakthrough-theorems.md) — Carbon Cycle 완전 n=6 폐루프
