@@ -200,3 +200,22 @@
 
 **Standout**: H-PG-62 (6-pulse 정류기), H-PG-77 (6→12→24 펄스 사슬), H-PG-68 (THD 5% = sopfr)
 **Cross-domain**: 전력전자 ↔ 토카막(6-fold symmetry), 주파수 60Hz ↔ Ethereum 12초(σ)
+
+---
+
+## v2 승격 내역 (2026-04-02)
+
+다음 극한 가설이 hypotheses.md v2 메인 가설로 승격됨:
+- **H-PG-62** → H-PG-1 (6-pulse rectifier)
+- **H-PG-63** → H-PG-2 (12-pulse HVDC)
+- **H-PG-68** → H-PG-12 (THD 5%)
+- **H-PG-72** → H-PG-20 (EV charging 3 levels)
+- **H-PG-73** → H-PG-15 (stability 3 types)
+- **H-PG-74** → H-PG-16 (sync 4 conditions)
+- **H-PG-76** → H-PG-14 (frequency response 4 stages)
+- **H-PG-77** → H-PG-13 (pulse chain 6→12→24)
+- **H-PG-79** → H-PG-19 (4 electricity markets)
+
+BT 기반 신규 추가:
+- **BT-68** → H-PG-7,8,9 (HVDC voltage ladder ±500/800/1100kV)
+- **BT-60** → H-PG-10,11 (DC voltage chain, PUE 1.2)

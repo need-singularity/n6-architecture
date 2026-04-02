@@ -148,7 +148,7 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
     # Technique 17 — Egyptian Fraction Attention
     egyptian_attention.py  -- 1/2+1/3+1/6=1 attention budget (EFA, ~40% FLOPs saved)
   docs/
-    # Foundation: superconductor/ (SC + magnet 통합, 60 H-SC + 20 extreme)
+    # Foundation: superconductor/ (SC + magnet 통합, 30 H-SC v2 + 20 extreme)
     # Fusion: fusion/ (fusion + tokamak + plasma 통합)
     # Computing: ai-efficiency/ chip-architecture/ quantum-computing/ compiler-os/
     # Energy: energy-architecture/ (energy-gen 통합) power-grid/ battery-architecture/ (battery-storage 통합) thermal-management/
@@ -587,6 +587,27 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - docs/dse-map.toml (도메인 현황)
 
   참조: docs/alien-design-flow.md (상세 플로우 + 도메인 매핑 테이블)
+
+  제품 라인 원칙:
+    ⚠️ "궁극의 X"는 도메인당 반드시 1개 제품 라인만 유지
+    ⚠️ v1/v2 버전 분기 ❌ → git history가 버전 관리
+    ⚠️ 문서가 진화한다 — 같은 goal.md가 업그레이드됨
+    ⚠️ README 완성제품 테이블에 같은 도메인 "궁극의 X v1", "v2" 금지
+    ⚠️ 완성제품 테이블에 버전(ver) 컬럼 추가 — 현재 설계 세대 표시
+      양식: | 🛸 | ver | 완성제품 | 핵심 | 링크 |
+      ver = 설계 세대 (v1, v2, v3...), git commit hash로 추적
+
+  🛸 외계인 지수 (10단계, 만점=10):
+    10 = 물리적 한계 도달 — 더이상 발전 불가, 모든 이론·실험·양산 완료
+     9 = 실제 양산 + 모든 예측 전수 검증 완료
+     8 = 프로토타입 제작 + 실험 데이터 확보
+     7 = 완전 설계 (BT + DSE + Cross-DSE + Evolution + Alien + TP 모두)
+     6 = 설계 완료 + DSE 통과 + 진화 경로
+     5 = 상세 설계 + BT + DSE
+     4 = 구조 설계 + 가설 검증
+     3 = 가설 수립 + 초기 검증
+     2 = 컨셉/탐색
+     1 = 미완/아이디어
 
   진화 요청 규칙 ("진화시켜", "업그레이드", "발전"):
     ⚠️ SF 금지: 다이슨 스웜, 반물질 촉매, 항성 엔진, 시공간 조작 등 ❌
