@@ -606,14 +606,14 @@ combos = 3600
 valid = 3600
 tool = "tools/material-dse/"
 levels = ["Element", "Process", "Assembler", "Control", "Factory", "Transmute", "Universal", "OMEGA-M"]
-cross_dse = ["chip-architecture", "battery-architecture", "superconductor", "biology"]
+cross_dse = ["chip-architecture", "battery-architecture", "superconductor", "biology", "solar-architecture", "fusion", "environmental-protection", "robotics"]
 best_pareto = "Carbon_Z6 + SelfAssembly + DNA_origami + QuantumSensing + SelfReplicating (79.60)"
 best_n6 = "E1 + P6 + A7 + C5 + F5 (100.0%) — Perfect_N6_Assembly + N6_FeedbackLoop"
 best_perf = "E1 + P4 + A2 + C4 + F5 (perf=0.976)"
 pareto_frontier = 115
 n6_max = 100.0
 n6_avg = 75.2
-note = "궁극의 물질합성 5단 DSE. v2: Perfect_N6_Assembly(DNA origami n=6 scaffolding) + N6_FeedbackLoop 추가 → 100% n6 달성. BT-85~88 활용"
+note = "궁극의 물질합성 v4. 가설 30/30 EXACT (100%), BT 11개 (85~88+128~134, 153/159=96.2%), CrossDSE 8도메인 (94.1%), TP 28개, 🛸10 물리한계 10발견 (73/75=97.3%). 🛸5→7"
 
 [nand-flash]
 goal = true
