@@ -1,10 +1,15 @@
+pub mod anima_lenses;
 pub mod consensus;
 pub mod core_lenses;
+pub mod cross_lenses;
 pub mod domain_combos;
 pub mod lens_trait;
 pub mod lenses;
+pub mod n6_lenses;
 pub mod registry;
+pub mod sedi_lenses;
 pub mod shared_data;
+pub mod tecs_lenses;
 pub mod tier;
 
 use std::collections::HashMap;

@@ -36,12 +36,30 @@ pub struct LensRegistry {
 }
 
 impl LensRegistry {
-    /// Create a new registry pre-populated with the 22 Core lenses.
+    /// Create a new registry pre-populated with the 22 Core lenses,
+    /// 58 n6-industry lenses, 40 cross-project lenses, 103 TECS-L math
+    /// lenses, 88 Anima consciousness lenses, and 100 SEDI signal lenses
+    /// (411 total).
     pub fn new() -> Self {
         let mut reg = LensRegistry {
             entries: HashMap::new(),
         };
         for entry in super::core_lenses::core_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
+        for entry in super::n6_lenses::n6_industry_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
+        for entry in super::cross_lenses::cross_project_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
+        for entry in super::tecs_lenses::tecs_math_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
+        for entry in super::anima_lenses::anima_consciousness_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
+        for entry in super::sedi_lenses::sedi_signal_lens_entries() {
             reg.entries.insert(entry.name.clone(), entry);
         }
         reg

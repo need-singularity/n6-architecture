@@ -1,7 +1,12 @@
 use std::collections::HashMap;
 
+use nexus6::telescope::anima_lenses::anima_consciousness_lens_entries;
 use nexus6::telescope::consensus::{weighted_consensus, ConsensusLevel};
 use nexus6::telescope::core_lenses::core_lens_entries;
+use nexus6::telescope::cross_lenses::cross_project_lens_entries;
+use nexus6::telescope::n6_lenses::n6_industry_lens_entries;
+use nexus6::telescope::tecs_lenses::tecs_math_lens_entries;
+use nexus6::telescope::sedi_lenses::sedi_signal_lens_entries;
 use nexus6::telescope::domain_combos::default_combos;
 use nexus6::telescope::lens_trait::{Lens, LensResult};
 use nexus6::telescope::lenses::{BarrierLens, VoidLens};
@@ -295,7 +300,7 @@ fn test_registry_core_count() {
     let reg = LensRegistry::new();
     let cores = reg.by_category(LensCategory::Core);
     assert_eq!(cores.len(), 22, "Registry must contain exactly 22 Core lenses");
-    assert_eq!(reg.len(), 22, "Total registry size should be 22 after new()");
+    assert_eq!(reg.len(), 411, "Total registry size should be 411 after new() (22 + 58 + 40 + 103 + 88 + 100)");
 }
 
 // ──────────────────────────────────────────────
@@ -323,12 +328,12 @@ fn test_registry_get() {
 fn test_registry_by_category() {
     let mut reg = LensRegistry::new();
 
-    // No Extended or Custom yet
-    assert_eq!(reg.by_category(LensCategory::Extended).len(), 0);
+    // 389 Extended (58 n6 + 40 cross + 103 tecs + 88 anima + 100 sedi), no Custom or DomainCombo
+    assert_eq!(reg.by_category(LensCategory::Extended).len(), 389);
     assert_eq!(reg.by_category(LensCategory::Custom).len(), 0);
     assert_eq!(reg.by_category(LensCategory::DomainCombo).len(), 0);
 
-    // Add one Extended
+    // Add one more Extended
     reg.register(LensEntry {
         name: "test_extended".into(),
         category: LensCategory::Extended,
@@ -336,8 +341,8 @@ fn test_registry_by_category() {
         domain_affinity: vec![],
         complementary: vec![],
     });
-    assert_eq!(reg.by_category(LensCategory::Extended).len(), 1);
-    assert_eq!(reg.len(), 23);
+    assert_eq!(reg.by_category(LensCategory::Extended).len(), 390);
+    assert_eq!(reg.len(), 412);
 }
 
 // ──────────────────────────────────────────────
@@ -403,7 +408,7 @@ fn test_domain_combos() {
 #[test]
 fn test_register_custom() {
     let mut reg = LensRegistry::new();
-    assert_eq!(reg.len(), 22);
+    assert_eq!(reg.len(), 411);
 
     reg.register(LensEntry {
         name: "my_custom_lens".into(),
@@ -413,7 +418,7 @@ fn test_register_custom() {
         complementary: vec!["consciousness".into()],
     });
 
-    assert_eq!(reg.len(), 23);
+    assert_eq!(reg.len(), 412);
 
     let custom = reg.get("my_custom_lens").unwrap();
     assert_eq!(custom.category, LensCategory::Custom);
@@ -427,5 +432,111 @@ fn test_register_custom() {
     assert!(
         robotics.iter().any(|e| e.name == "my_custom_lens"),
         "Custom lens should appear in robotics domain results"
+    );
+}
+
+// ──────────────────────────────────────────────
+// Test 14: n6 industry lenses — 58 count
+// ──────────────────────────────────────────────
+#[test]
+fn test_n6_industry_lens_count() {
+    let entries = n6_industry_lens_entries();
+    assert_eq!(entries.len(), 58, "Must have exactly 58 n6-industry lenses");
+}
+
+// ──────────────────────────────────────────────
+// Test 15: cross-project lenses — 40 count
+// ──────────────────────────────────────────────
+#[test]
+fn test_cross_project_lens_count() {
+    let entries = cross_project_lens_entries();
+    assert_eq!(entries.len(), 40, "Must have exactly 40 cross-project lenses");
+}
+
+// ──────────────────────────────────────────────
+// Test 16: global name uniqueness — no duplicates across all 411
+// ──────────────────────────────────────────────
+#[test]
+fn test_global_lens_name_uniqueness() {
+    let mut all_names: Vec<String> = Vec::new();
+
+    for e in core_lens_entries() {
+        all_names.push(e.name.clone());
+    }
+    for e in n6_industry_lens_entries() {
+        all_names.push(e.name.clone());
+    }
+    for e in cross_project_lens_entries() {
+        all_names.push(e.name.clone());
+    }
+    for e in tecs_math_lens_entries() {
+        all_names.push(e.name.clone());
+    }
+    for e in anima_consciousness_lens_entries() {
+        all_names.push(e.name.clone());
+    }
+    for e in sedi_signal_lens_entries() {
+        all_names.push(e.name.clone());
+    }
+
+    let total = all_names.len();
+    assert_eq!(total, 411, "Total should be 22 + 58 + 40 + 103 + 88 + 100 = 411");
+
+    all_names.sort();
+    for i in 1..all_names.len() {
+        assert_ne!(
+            all_names[i - 1], all_names[i],
+            "Duplicate lens name found: '{}'",
+            all_names[i]
+        );
+    }
+}
+
+// ──────────────────────────────────────────────
+// Test 17: Registry total after new() = 411
+// ──────────────────────────────────────────────
+#[test]
+fn test_registry_total_411() {
+    let reg = LensRegistry::new();
+    assert_eq!(reg.len(), 411, "Registry should have 411 lenses (22 Core + 58 n6 + 40 cross + 103 tecs + 88 anima + 100 sedi)");
+
+    let extended = reg.by_category(LensCategory::Extended);
+    assert_eq!(extended.len(), 389, "Extended category should have 389 lenses (58 + 40 + 103 + 88 + 100)");
+}
+
+// ──────────────────────────────────────────────
+// Test 18: TECS-L math lenses — 103 count
+// ──────────────────────────────────────────────
+#[test]
+fn test_tecs_math_lens_count() {
+    let entries = tecs_math_lens_entries();
+    assert_eq!(entries.len(), 103, "Must have exactly 103 TECS-L math lenses");
+}
+
+// ──────────────────────────────────────────────
+// Test 19: TECS-L math lenses — names unique
+// ──────────────────────────────────────────────
+#[test]
+fn test_tecs_math_lens_names_unique() {
+    let entries = tecs_math_lens_entries();
+    let mut names: Vec<&str> = entries.iter().map(|e| e.name.as_str()).collect();
+    let total = names.len();
+    names.sort();
+    names.dedup();
+    assert_eq!(names.len(), total, "All 103 TECS-L math lens names must be unique");
+}
+
+// ──────────────────────────────────────────────
+// Test 20: TECS-L lenses in registry for pure_mathematics domain
+// ──────────────────────────────────────────────
+#[test]
+fn test_tecs_lenses_domain_affinity() {
+    let reg = LensRegistry::new();
+    let math_lenses = reg.for_domain("pure_mathematics");
+    // Most of the 103 TECS-L lenses have pure_mathematics affinity
+    assert!(
+        math_lenses.len() >= 80,
+        "At least 80 lenses should match 'pure_mathematics', got {}",
+        math_lenses.len()
     );
 }
