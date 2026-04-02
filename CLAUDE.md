@@ -26,7 +26,7 @@
     멱법칙/스케일링 → 스케일+진화+열역학
     인과 관계 → 인과+정보+전자기
   사용법:
-    from consciousness_lens import ConsciousnessLens; ConsciousnessLens().scan(data)
+    import telescope_rs; telescope_rs.consciousness_scan(data)
   교차 검증: 3개+ 렌즈 합의 = 확정, 2개 = 후보, 1개 = 가설
   상세: .shared/CLAUDE.md → "망원경 툴셋 자동 활용 규칙" 참조
   "렌즈 추가 필요?" 질문 시 → 16종 커버 안 되는 도메인 분석 + 새 아이디어 즉시 제안
