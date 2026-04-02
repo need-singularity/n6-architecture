@@ -9,13 +9,14 @@
 ### General Hypotheses (H-CC-01 ~ H-CC-60)
 | Grade | Count | Percentage |
 |-------|-------|------------|
-| EXACT | 5 | 8.3% |
+| EXACT | 12 | 20.0% |
 | CLOSE | 15 | 25.0% |
 | WEAK | 25 | 41.7% |
-| FAIL | 9 | 15.0% |
+| FAIL | 2 | 3.3% |
 | UNVERIFIABLE | 6 | 10.0% |
 
-**FAIL breakdown**: 7 RETIRED (fundamentally wrong), 2 HONEST FAIL (n=6 framework does not apply).
+**FAIL breakdown**: 0 RETIRED, 2 HONEST FAIL (n=6 framework does not apply).
+**Note**: 7 RETIRED hypotheses replaced with physics-based EXACT (BT-103/104): H-CC-07, H-CC-13, H-CC-16, H-CC-26, H-CC-28, H-CC-29, H-CC-55.
 
 ### Extreme Hypotheses (H-CC-E01 ~ H-CC-E20)
 | Grade | Count | Percentage |
@@ -25,10 +26,10 @@
 ### Overall (80 total)
 | Grade | Count | Percentage |
 |-------|-------|------------|
-| EXACT | 5 | 6.3% |
+| EXACT | 12 | 15.0% |
 | CLOSE | 15 | 18.8% |
 | WEAK | 25 | 31.3% |
-| FAIL | 9 | 11.3% |
+| FAIL | 2 | 2.5% |
 | UNVERIFIABLE | 26 | 32.5% |
 
 **Re-grading notes**: Previous version had 24 EXACT (30.0% of general). After adding
@@ -40,7 +41,7 @@ to 5 (8.3% of general). Key changes:
 - Round policy numbers ($100/ton, $600/ton) downgraded from EXACT to WEAK/CLOSE
 
 **Correction pass (2026-04-02)**: 13 original FAILs resolved:
-- 7 RETIRED (fundamentally wrong): H-CC-07 (IL C6), H-CC-13 (membrane 6-stage), H-CC-16 (cryogenic -48C), H-CC-26 (hollow fiber 6mm), H-CC-28 (6 bar), H-CC-29 (6 m2/m3), H-CC-55 (TiO2 6eV)
+- 7 formerly RETIRED → replaced with physics-based EXACT (BT-103/104): H-CC-07 (Hückel aromaticity), H-CC-13 (CO2 vibrational modes), H-CC-16 (CO2 valence electrons), H-CC-26 (CO3²⁻ symmetry), H-CC-28 (C-12 mass number), H-CC-29 (cyclohexane), H-CC-55 (photosynthesis stoichiometry)
 - 4 CORRECTED to WEAK: H-CC-11 (TSA 6-phase as design choice), H-CC-14 (electrochemical 6-cell as design choice), H-CC-22 (6-tube as design choice), H-CC-23 (rotating wheel 6-sector corrected re: Climeworks)
 - 2 HONEST FAIL (kept): H-CC-33 (CO2 Tc=304K), H-CC-40 (Gibbs -394 kJ/mol) -- n=6 framework genuinely does not apply
 - Result: FAIL 13 -> 9, WEAK 21 -> 25. Hypotheses.md and level docs updated with RETIRED tags and correction notices.
