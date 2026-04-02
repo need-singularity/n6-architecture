@@ -75,6 +75,9 @@ impl LensRegistry {
         for entry in super::accel_lenses_d::accel_humanities_lens_entries() {
             reg.entries.insert(entry.name.clone(), entry);
         }
+        for entry in super::quantum_lenses::quantum_topology_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
         reg
     }
 
