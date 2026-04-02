@@ -1,0 +1,378 @@
+# =============================================================
+# ROBO DSE Domain Definition
+# Robotics & Embodied Intelligence
+# 6-DOF arms, hexapod (n=6 legs), Stewart platform (6 actuators)
+# Total raw combos: 6x6x5x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "robotics"
+desc = "Robotics & Embodiment Architecture DSE (6-DOF, hexapod, σ=12 servos)"
+levels = ["Foundation", "Actuation", "Core", "Engine", "System"]
+vision = "n=6 embodied intelligence -- 6-DOF manipulation to full-body autonomy"
+
+[scoring]
+n6   = 0.30
+perf = 0.30
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (로봇 형태)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "Hexapod"
+label  = "Hexapod Walker (6 legs)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "n=6 legs, most stable walking gait, tripod alternation (n/phi=3+3)"
+
+[[candidate]]
+level  = 0
+id     = "6DOF_Arm"
+label  = "6-DOF Industrial Arm"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "n=6 DOF = full SE(3) workspace, standard industrial manipulator"
+
+[[candidate]]
+level  = 0
+id     = "StewartPlatform"
+label  = "Stewart Platform (6 actuators)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 linear actuators, parallel kinematics, flight sim/surgery"
+
+[[candidate]]
+level  = 0
+id     = "Quadruped"
+label  = "Quadruped Walker (4 legs)"
+n6     = 0.67
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "tau(6)=4 legs, Spot/ANYmal, dynamic walking"
+
+[[candidate]]
+level  = 0
+id     = "Humanoid"
+label  = "Humanoid Biped"
+n6     = 0.83
+perf   = 0.75
+power  = 0.40
+cost   = 0.30
+notes  = "sigma=12 servos per arm, J2=24 total upper-body DOF, human-like"
+
+[[candidate]]
+level  = 0
+id     = "Wheeled"
+label  = "Wheeled Mobile Robot"
+n6     = 0.33
+perf   = 0.92
+power  = 0.75
+cost   = 0.70
+notes  = "phi=2 drive wheels + casters, simple but no n=6 structure"
+
+# =============================================================
+# Level 1: Actuation (구동 기술)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Actuation"
+
+[[candidate]]
+level  = 1
+id     = "ServoArray12"
+label  = "12-Servo Array (σ=12)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "sigma(6)=12 servo motors, humanoid arm standard"
+
+[[candidate]]
+level  = 1
+id     = "HydraulicHex"
+label  = "Hydraulic 6-Actuator"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.35
+notes  = "n=6 hydraulic cylinders, heavy-duty Stewart/excavator"
+
+[[candidate]]
+level  = 1
+id     = "PneumaticSoft"
+label  = "Pneumatic Soft Actuator"
+n6     = 0.50
+perf   = 0.65
+power  = 0.70
+cost   = 0.60
+notes  = "Soft robotics, phi=2 inflation states, compliant grasp"
+
+[[candidate]]
+level  = 1
+id     = "PiezoMEMS"
+label  = "Piezoelectric MEMS"
+n6     = 0.67
+perf   = 0.75
+power  = 0.80
+cost   = 0.45
+notes  = "Micro-actuation, n/phi=3 axis, high precision sub-micron"
+
+[[candidate]]
+level  = 1
+id     = "SEA"
+label  = "Series Elastic Actuator"
+n6     = 0.67
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "Compliant, force-controlled, tau=4 impedance params (K,B,M,ref)"
+
+[[candidate]]
+level  = 1
+id     = "DirectDrive"
+label  = "Direct Drive Motor"
+n6     = 0.50
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "No gearbox, high bandwidth, phi=2 pole pairs min"
+
+# =============================================================
+# Level 2: Core (제어 코어)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "InverseKin6"
+label  = "6-DOF Inverse Kinematics"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 joint solution, closed-form for 6R manipulator, real-time"
+
+[[candidate]]
+level  = 2
+id     = "GaitGen"
+label  = "Hexapod Gait Generator"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "Tripod gait: n/phi=3 legs swing, n/phi=3 stance, CPG-based"
+
+[[candidate]]
+level  = 2
+id     = "ImpedanceCtrl"
+label  = "Impedance Control"
+n6     = 0.67
+perf   = 0.82
+power  = 0.70
+cost   = 0.60
+notes  = "tau=4 params (stiffness, damping, mass, ref), compliant interaction"
+
+[[candidate]]
+level  = 2
+id     = "SensorFusion6"
+label  = "6-Axis Sensor Fusion"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "n=6 axes (3 accel + 3 gyro), IMU Kalman filter, SE(3) state"
+
+[[candidate]]
+level  = 2
+id     = "ForceCtrl"
+label  = "6-Axis Force/Torque Control"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "n=6 force/torque components (Fx,Fy,Fz,Tx,Ty,Tz), wrench space"
+
+# =============================================================
+# Level 3: Engine (지능 엔진)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "SLAM"
+label  = "SLAM Navigation"
+n6     = 0.67
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "Simultaneous localization + mapping, n=6 DOF pose estimation"
+
+[[candidate]]
+level  = 3
+id     = "MotionPlan"
+label  = "Motion Planning (RRT/PRM)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "C-space dim=n=6, RRT* for 6-DOF collision-free paths"
+
+[[candidate]]
+level  = 3
+id     = "ReinforceLoco"
+label  = "RL Locomotion Policy"
+n6     = 0.83
+perf   = 0.82
+power  = 0.50
+cost   = 0.45
+notes  = "PPO/SAC for hexapod, n=6 leg action space, sim-to-real"
+
+[[candidate]]
+level  = 3
+id     = "GraspNet"
+label  = "Grasp Pose Network"
+n6     = 0.83
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "n=6 DOF grasp pose (x,y,z,roll,pitch,yaw), contact planning"
+
+[[candidate]]
+level  = 3
+id     = "VisionTransformer"
+label  = "Vision-Language Planner"
+n6     = 0.50
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "VLM for task planning, multimodal perception+action"
+
+# =============================================================
+# Level 4: System (시스템 통합)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "IndustrialCell"
+label  = "6-DOF Industrial Cell"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "n=6 DOF arm + conveyor + vision, manufacturing automation"
+
+[[candidate]]
+level  = 4
+id     = "HexapodExplorer"
+label  = "Hexapod Exploration Platform"
+n6     = 1.00
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "n=6 leg all-terrain, SLAM + autonomy, disaster/planetary"
+
+[[candidate]]
+level  = 4
+id     = "SurgicalRobot"
+label  = "Surgical Robot (da Vinci style)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.50
+cost   = 0.30
+notes  = "sigma=12 DOF (n=6 per arm × phi=2 arms), sub-mm precision"
+
+[[candidate]]
+level  = 4
+id     = "HumanoidAssist"
+label  = "Humanoid Service Robot"
+n6     = 0.83
+perf   = 0.78
+power  = 0.45
+cost   = 0.35
+notes  = "J2=24 DOF upper body, sigma=12 per arm, human interaction"
+
+[[candidate]]
+level  = 4
+id     = "SwarmRobots"
+label  = "Swarm Robot Fleet"
+n6     = 0.67
+perf   = 0.80
+power  = 0.70
+cost   = 0.55
+notes  = "n=6 robot sub-group, emergent behavior, warehouse/agriculture"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# GaitGen core requires Hexapod foundation
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "GaitGen"
+then_level = 0
+then_ids   = "Hexapod"
+
+# InverseKin6 core requires 6DOF_Arm or StewartPlatform foundation
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "InverseKin6"
+then_level = 0
+then_ids   = "6DOF_Arm,StewartPlatform,Humanoid"
+
+# HydraulicHex actuation excludes PiezoMEMS-scale cores
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "HydraulicHex"
+then_level = 0
+then_ids   = "Wheeled"
+
+# ReinforceLoco engine requires GaitGen or ImpedanceCtrl core
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "ReinforceLoco"
+then_level = 2
+then_ids   = "GaitGen,ImpedanceCtrl"
+
+# SurgicalRobot system requires ForceCtrl or ImpedanceCtrl core
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "SurgicalRobot"
+then_level = 2
+then_ids   = "ForceCtrl,ImpedanceCtrl"
+
+# HexapodExplorer system requires Hexapod foundation
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "HexapodExplorer"
+then_level = 0
+then_ids   = "Hexapod"
+
+# PneumaticSoft not suitable for industrial precision
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "PneumaticSoft"
+then_level = 4
+then_ids   = "IndustrialCell,SurgicalRobot"
