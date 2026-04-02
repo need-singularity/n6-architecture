@@ -122,7 +122,7 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
 Full proof: docs/theorem-r1-uniqueness.md
 Falsifiability: z=0.74 (numerical matching NOT significant vs random)
 
-## Docs Structure (28 domains) — ALL have extreme-hypotheses.md
+## Docs Structure (35 domains) — ALL have extreme-hypotheses.md
 ```
   # Physics (4 domains × 80 hypotheses each + extreme)
   superconductor/ fusion/ superconducting-magnet/ tokamak-structure/
@@ -475,7 +475,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - ~/Dev/TECS-L/calc/ (검증 스크립트)
 
   n6 연결:
-    - tools/universal-dse/domains/*.toml (307 DSE)
+    - tools/universal-dse/domains/*.toml (305 DSE)
     - docs/atlas-constants.md (1,100+ 상수)
     - tools/*-calc, *-dse (Rust 계산기 29+)
     - docs/dse-map.toml (도메인 현황)
