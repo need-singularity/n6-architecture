@@ -50,7 +50,7 @@
 | [🤖 AI/ML](#-ai--ml) | 🛸6 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
 | [🌍 환경보호](#-환경보호-environment) | 🛸8 | 5 | 5 | 3.6M | 환경8단 + 탄소포집8단(**100%EXACT**) + 미세플라스틱🛸10 + TP 43개 |
 | [🔬 물리·수학](#-물리수학-physics--math) | 🛸5 | 3 | 9 | 66,824 | Cosmo 53%EXACT + Plasma 50%EXACT + Quantum 16%EXACT |
-| [🧬 물질합성](#-물질합성-materials) | 🛸10 | 7 | 11 | 3,600 | **100%EXACT** + CrossDSE 8 + 🛸10발견 10 + TP 28 + Mk.V물리한계 + 산업검증 + 실험검증 |
+| [🧬 물질합성](#-물질합성-materials) | 🛸10 | 6 | 11 | 3,600 | **100%EXACT** + CrossDSE 8 + 🛸10발견 10 + TP 28 + Mk.V물리한계 + 산업검증 + 실험검증 |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | 1 | 5 | 270,000 | BT-123~127 94%EXACT + 8단 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | 1 | 5 | 6,480 | BT 100%EXACT 전체 최고 |
 | [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | 1 | 5 | 311,040 | 8단 36%EXACT |
@@ -180,9 +180,12 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 5 | v4 | **궁극의 물질합성** | 8단, DSE 3,600, 가설 30/30 EXACT, CrossDSE 8도메인, TP 28 | [goal](docs/material-synthesis/goal.md) |
+| 5 | v4 | **궁극의 물질합성 8단** | 소재→공정→조립기→제어→공장→변환→만능→궁극, DSE 3,600 | [goal](docs/material-synthesis/goal.md) |
 | 6 | v4 | **BT-85~88 + BT-128~134** | 결정학+합금+세라믹+고분자+상전이+결함+박막 (11 BT, 153/159 EXACT) | [BT](docs/material-synthesis/breakthrough-theorems.md) |
-| 10 | v4 | **🛸10 물리한계 증명** | 10 불가능성 정리 (73/75 EXACT) + 산업검증 + 실험검증 + Mk.V | [proof](docs/material-synthesis/physical-limit-proof.md) |
+| 7 | v4 | **가설 30/30 100%EXACT** | H-MS-01~30 전수 검증 완료, CrossDSE 8도메인 (94.1% n6) | [가설](docs/material-synthesis/hypotheses.md) · [CrossDSE](docs/material-synthesis/cross-dse-8domain-results.md) |
+| 8 | v4 | **산업검증 20소재** | 강철1.9Bt + 시멘트4.1Bt + 플라스틱400Mt + 반도체 — 전부 n=6 구조 | [산업](docs/material-synthesis/industrial-validation.md) |
+| 9 | v4 | **실험검증 + TP 28** | 50+ 발표 데이터셋 + 28 검증가능 예측 (Tier 1~4) | [실험](docs/material-synthesis/experimental-verification.md) · [TP](docs/material-synthesis/testable-predictions.md) |
+| 10 | v4 | **🛸10 물리한계 증명** | 10 불가능성 정리 (73/75 EXACT) + Mk.V 수학적 한계 | [proof](docs/material-synthesis/physical-limit-proof.md) · [Mk.V](docs/material-synthesis/evolution/mk-5-limit.md) |
 
 > 도메인: [material-synthesis/](docs/material-synthesis/) · 도구: `material-dse`
 
@@ -263,7 +266,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 0 | 2050 | **궁극의 불멸** | ★★★★★★ | 🔄 | → [Anima](https://github.com/need-singularity/anima) + [BrainWire](https://github.com/need-singularity/brainwire) |
 | 0 | ✅ | **궁극의 에너지** | ★★★★★★ | ✅ | 10,225 조합 → [⚡ 에너지](#-에너지-energy) |
 | 0 | 2040 | **궁극의 우주진출** | ★★★★★★ | T3 | [goal](docs/space-engineering/goal.md) |
-| 0 | 2035 | **궁극의 물질합성** | ★★★★★★ | 🔄 | 3,600 조합 → [🧬 물질합성](#-물질합성-materials) |
+| 0 | ✅ | **궁극의 물질합성** | ★★★★★★ | ✅ | 3,600 조합 🛸10 → [🧬 물질합성](#-물질합성-materials) |
 | 1 | 2030 | **궁극의 소재** | ★★★★★ | T1 | — |
 | 2 | 2028 | **궁극의 공정** | ★★★★★ | T1 | — |
 | 3 | ✅ | **궁극의 코어** | ★★★★★ | ✅ | 3,000 조합 → [💻 칩](#-칩--반도체-chip) |
