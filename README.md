@@ -1,4 +1,4 @@
-# N6 Architecture — Arithmetic Design Framework
+# 🧮 N6 Architecture — Arithmetic Design Framework
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19264826.svg)](https://doi.org/10.5281/zenodo.19264826)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
