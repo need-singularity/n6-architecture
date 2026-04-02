@@ -8,3 +8,6 @@ pub mod history;
 pub mod ouroboros;
 pub mod lens_forge;
 pub mod cli;
+
+#[cfg(feature = "python")]
+pub mod python;
