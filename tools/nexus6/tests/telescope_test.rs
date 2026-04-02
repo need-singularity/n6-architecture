@@ -304,7 +304,7 @@ fn test_registry_core_count() {
     let reg = LensRegistry::new();
     let cores = reg.by_category(LensCategory::Core);
     assert_eq!(cores.len(), 22, "Registry must contain exactly 22 Core lenses");
-    assert_eq!(reg.len(), 824, "Total registry size should be 824 after new()");
+    assert_eq!(reg.len(), 964, "Total registry size should be 964 after new()");
 }
 
 // ──────────────────────────────────────────────
@@ -332,8 +332,8 @@ fn test_registry_get() {
 fn test_registry_by_category() {
     let mut reg = LensRegistry::new();
 
-    // 802 Extended, no Custom or DomainCombo
-    assert_eq!(reg.by_category(LensCategory::Extended).len(), 802);
+    // 942 Extended, no Custom or DomainCombo
+    assert_eq!(reg.by_category(LensCategory::Extended).len(), 942);
     assert_eq!(reg.by_category(LensCategory::Custom).len(), 0);
     assert_eq!(reg.by_category(LensCategory::DomainCombo).len(), 0);
 
@@ -345,8 +345,8 @@ fn test_registry_by_category() {
         domain_affinity: vec![],
         complementary: vec![],
     });
-    assert_eq!(reg.by_category(LensCategory::Extended).len(), 803);
-    assert_eq!(reg.len(), 825);
+    assert_eq!(reg.by_category(LensCategory::Extended).len(), 943);
+    assert_eq!(reg.len(), 965);
 }
 
 // ──────────────────────────────────────────────
@@ -412,7 +412,7 @@ fn test_domain_combos() {
 #[test]
 fn test_register_custom() {
     let mut reg = LensRegistry::new();
-    assert_eq!(reg.len(), 824);
+    assert_eq!(reg.len(), 964);
 
     reg.register(LensEntry {
         name: "my_custom_lens".into(),
@@ -422,7 +422,7 @@ fn test_register_custom() {
         complementary: vec!["consciousness".into()],
     });
 
-    assert_eq!(reg.len(), 825);
+    assert_eq!(reg.len(), 965);
 
     let custom = reg.get("my_custom_lens").unwrap();
     assert_eq!(custom.category, LensCategory::Custom);
@@ -497,9 +497,12 @@ fn test_global_lens_name_uniqueness() {
     for e in nexus6::telescope::quantum_lenses::quantum_topology_lens_entries() {
         all_names.push(e.name.clone());
     }
+    for e in nexus6::telescope::physics_deep_lenses::physics_deep_lens_entries() {
+        all_names.push(e.name.clone());
+    }
 
     let total = all_names.len();
-    assert_eq!(total, 824, "Total should be 22+58+75+103+88+100+58+57+55+63+38 = 824");
+    assert_eq!(total, 964, "Total = 22+58+75+103+88+100+58+57+55+63+236+49 = 964");
 
     all_names.sort();
     for i in 1..all_names.len() {
@@ -517,10 +520,10 @@ fn test_global_lens_name_uniqueness() {
 #[test]
 fn test_registry_total_411() {
     let reg = LensRegistry::new();
-    assert_eq!(reg.len(), 824, "Registry should have 824 lenses total");
+    assert_eq!(reg.len(), 964, "Registry should have 964 lenses total");
 
     let extended = reg.by_category(LensCategory::Extended);
-    assert_eq!(extended.len(), 802, "Extended category should have 802 lenses");
+    assert_eq!(extended.len(), 942, "Extended category should have 942 lenses");
 }
 
 // ──────────────────────────────────────────────

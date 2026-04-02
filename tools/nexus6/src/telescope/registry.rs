@@ -40,7 +40,8 @@ impl LensRegistry {
     /// 58 n6-industry lenses, 40 cross-project lenses, 103 TECS-L math
     /// lenses, 88 Anima consciousness lenses, 100 SEDI signal lenses,
     /// 58 accel ML lenses, 57 accel physics/neuro lenses, 55 accel
-    /// engineering lenses, and 63 accel humanities lenses (644 total).
+    /// engineering lenses, 63 accel humanities lenses, and 49 physics-deep
+    /// lenses (693 total).
     pub fn new() -> Self {
         let mut reg = LensRegistry {
             entries: HashMap::new(),
@@ -76,6 +77,9 @@ impl LensRegistry {
             reg.entries.insert(entry.name.clone(), entry);
         }
         for entry in super::quantum_lenses::quantum_topology_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
+        for entry in super::physics_deep_lenses::physics_deep_lens_entries() {
             reg.entries.insert(entry.name.clone(), entry);
         }
         reg
