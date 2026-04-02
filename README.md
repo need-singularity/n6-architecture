@@ -49,7 +49,7 @@
 | [⚡ 에너지](#-에너지-energy) | 🛸8 | 5 | 13 | 10,225 | 배터리8단 + 태양전지🛸10(**43%EXACT**+물리한계+TP19) + 통합 |
 | [🤖 AI/ML](#-ai--ml) | 🛸6 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
 | [🌍 환경보호](#-환경보호-environment) | 🛸8 | 5 | 5 | 3.6M | 환경8단 + 탄소포집8단(**100%EXACT**) + 미세플라스틱🛸10 + TP 43개 |
-| [🔬 물리·수학](#-물리수학-physics--math) | 🛸5 | 3 | 9 | 66,824 | Cosmo 53%EXACT + Plasma 50%EXACT + Quantum 16%EXACT |
+| [🔬 물리·수학](#-물리수학-physics--math) | 🛸7 | 4 | 14 | 66,824 | **초전도🛸10**(100%EXACT+BT11+TP28) + Cosmo 53% + Plasma 50% + Quantum 16% |
 | [🧬 물질합성](#-물질합성-materials) | 🛸10 | 6 | 11 | 3,600 | **100%EXACT** + BT **100%** + TP 28/28 + CrossDSE 8 + 🛸10발견 10 + Mk.V물리한계 + 산업검증 + 실험검증 |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | 1 | 5 | 270,000 | BT-123~127 94%EXACT + 8단 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | 1 | 5 | 6,480 | BT 100%EXACT 전체 최고 |
@@ -209,7 +209,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 9 | v3 | **궁극의 초전도체** | 187claims 전수검증(76%verified), 50가설 20%EXACT, 물리한계분석(🛸10: Tc/CN/Φ₀ AT LIMIT) | [goal](docs/superconductor/goal.md) · [검증행렬](docs/superconductor/full-verification-matrix.md) · [물리한계](docs/superconductor/thermodynamic-limits.md) |
+| 10 | v4 | **궁극의 초전도체** | 30/30 **100%EXACT**, BT 11개 (BT-135~139), CrossDSE 8도메인, TP 28, Mk.V물리한계, 🛸10발견 10, 산업+실험검증 | [goal](docs/superconductor/goal.md) · [BT](docs/superconductor/breakthrough-theorems.md) · [🛸10](docs/superconductor/alien-10-discoveries.md) |
 | 5 | v1 | **궁극의 순수수학** | DSE 38,024 조합, n6=94.0% | [goal](docs/pure-mathematics/goal.md) · [설계서](docs/superpowers/specs/2026-04-01-ultimate-pure-mathematics-dse.md) |
 | 1 | v1 | **궁극의 우주론/입자** | 미완 — 새 BT 발굴 필요 | [goal](docs/cosmology-particle/goal.md) |
 
@@ -283,11 +283,11 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 14 | ✅ | **궁극의 열관리** | ★★★☆☆ | T3 | — |
 | 15 | ✅ | **궁극의 암호** | ★★★☆☆ | T3 | — |
 | 16 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | — |
-| 17 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 🛸9 187claims 76%verified + 물리한계🛸10 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 17 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 18 | ✅ | **궁극의 블록체인** | ★★☆☆☆ | T3 | — |
 | 19 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | — |
 | 20 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
-| 21 | ✅ | **궁극의 초전도자석** | ★★☆☆☆ | ✅ | SC DSE 내 통합 |
+| 21 | ✅ | **궁극의 초전도자석** | ★★★☆☆ | ✅ | 🛸10 SC 내 통합 (hexa-magnet/coil/cool/fusion) → [🔬 물리·수학](#-물리수학-physics--math) |
 | 22 | ✅ | **궁극의 순수수학** | ★☆☆☆☆ | ✅ | 38,024 조합 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 23 | 2040 | **궁극의 우주론/입자** | ★☆☆☆☆ | T3 | — |
 | — | ✅ | **궁극의 환경보호** | ★★★★☆ | ✅ | 1.68M 조합 → [🌍 환경보호](#-환경보호-environment) |

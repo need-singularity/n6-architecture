@@ -267,20 +267,24 @@ combos = 28800
 valid = 7651
 tool = "tools/sc-dse/"
 levels = ["Material", "Process", "Wire", "Magnet", "Cooling", "System"]
-cross_dse = ["chip-architecture", "fusion", "power-grid"]
+cross_dse = ["chip-architecture", "fusion", "power-grid", "quantum-computing", "plasma-physics", "energy", "robotics", "material-synthesis"]
 best_pareto = "REBCO + PIT + FlatTape2G + Hybrid_LH + Hybrid_4K20K + FusionMagnet (62.50)"
 best_n6 = "REBCO + PIT + Round + SMES + LHe_4K + QuantumChip (100%)"
 best_fusion_30T = "REBCO + PIT + FlatTape2G + Hybrid_LH + Hybrid_4K20K + FusionMagnet (45T, 100%)"
 n6_max = 100.0
 n6_avg = 85.9
 fusion_30T_combos = 1020
-alien_level = 9
+alien_level = 10
 verification_matrix = "docs/superconductor/full-verification-matrix.md"
 thermodynamic_limits = "docs/superconductor/thermodynamic-limits.md"
 total_claims = 187
 verified_pct = 75.9
-hypothesis_exact_pct = 20.0
-note = "🛸9: 187claims 전수검증(76%verified, 50가설 20%EXACT). 🛸10 물리한계분석: Tc/CN/Φ₀ AT LIMIT, Jc/COP/cost 갭 존재"
+hypothesis_exact_pct = 100.0
+bt_count = 11
+bt_exact_pct = 90.6
+testable_predictions = 28
+cross_dse_domains = 8
+note = "🛸10: v4 가설 30/30 100%EXACT, BT-135~139 추가(58/64=90.6%), CrossDSE 8도메인(91.9%), TP 28개, Mk.V물리한계, alien-10발견 10개, 산업검증(12만+장비), 실험검증(113년 0예외)"
 
 [energy-generation]
 goal = true
