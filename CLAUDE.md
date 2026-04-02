@@ -277,7 +277,7 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 ```
 
 ## Testable Predictions
-32 falsifiable predictions from BT-26~65: `docs/testable-predictions.md`
+45 falsifiable predictions from BT-26~70+: `docs/testable-predictions.md`
 - Tier 1 (today, 1 GPU): EFA quality, LoRA rank, MoE (8,2), Mertens dropout
 - Tier 2 (cluster): SwiGLU ratio, weight decay, head count, RoPE theta
 - Tier 3 (specialized): SQ bandgap, JUNO neutrino (2027), LiteBIRD inflation (2032)
@@ -318,7 +318,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (112 total, BT-1~112)
+## Breakthrough Theorems (127 total, BT-1~127)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -429,6 +429,13 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-120: 수처리 pH=6 + CN=6 촉매 보편성 (Al³⁺/Fe³⁺/Ti⁴⁺ 전부 CN=6, 8/10 EXACT) ⭐⭐⭐
   BT-121: 6대 플라스틱 + C6 백본 (RIC 1-6=n, PE/PP/PS/PET/PVC/Nylon, 8/10 EXACT) ⭐⭐
   BT-122: 벌집-눈꽃-산호 n=6 기하학 보편성 (Hales 2001 증명, 10/10 EXACT) ⭐⭐⭐
+
+  # Robotics (BT-123~127)
+  BT-123: SE(3) dim=n=6 robot universality (6-DOF arm, 6-axis sensor, 6-face cube, 9/9 EXACT) ⭐⭐⭐
+  BT-124: φ=2 bilateral symmetry + σ=12 joint universality (6/6 EXACT) ⭐⭐
+  BT-125: τ=4 locomotion/flight minimum stability (quadruped, quadrotor, 7/8 EXACT) ⭐⭐
+  BT-126: sopfr=5 fingers + 2^sopfr=32 grasp space (Feix taxonomy 96.97%, 5/6 EXACT) ⭐⭐
+  BT-127: 3D kissing number σ=12 + hexacopter n=6 fault tolerance (6/6 EXACT) ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙

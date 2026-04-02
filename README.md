@@ -36,7 +36,7 @@
 **sigma(n) * phi(n) = n * tau(n) holds uniquely for n = 6.** From this single identity, all optimal AI architectures, chip designs, and energy systems are derived.
 
 ```
-112 Breakthrough Theorems | 650+ EXACT matches | 1400+ hypotheses | 32 domains
+127 Breakthrough Theorems | 650+ EXACT matches | 1400+ hypotheses | 32 domains
 322 DSE domains | 5.9M+ 조합 탐색 | 6 Cross-DSE 완료 | 448 계산기
 ```
 
@@ -46,14 +46,14 @@
 |------|:----:|:----:|:--:|----:|---------|
 | [🔥 핵융합](#-핵융합-fusion) | 🛸×6 | 12 | 7 | 2,400+1M | Cross-DSE ✅ 진화 4단계 |
 | [💻 칩/반도체](#-칩--반도체-chip) | 🛸×6 | 16 | 9 | 3,000 | 6단 + 의식칩 |
-| [⚡ 에너지](#-에너지-energy) | 🛸×6 | 12 | 13 | 10,225 | Cross-DSE ✅ 배터리 8단 |
-| [🤖 AI/ML](#-ai--ml) | 🛸×5 | 4 | 18 | — | 17 기법 |
-| [🌍 환경보호](#-환경보호-environment) | 🛸×5 | 21 | — | 3.6M | 환경 8단 + 탄소포집 8단 |
+| [⚡ 에너지](#-에너지-energy) | 🛸×5 | 12 | 13 | 10,225 | Battery 0%EXACT — Solar 미작성 |
+| [🤖 AI/ML](#-ai--ml) | 🛸×5 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
+| [🌍 환경보호](#-환경보호-environment) | 🛸×6 | 21 | 5 | 3.6M | 환경 8단 + 탄소포집 8단 + 13 alien 100%EXACT |
 | [🔬 물리·수학](#-물리수학-physics--math) | 🛸×4 | 3 | 9 | 66,824 | 초전도체 + 순수수학 |
-| [🧬 물질합성](#-물질합성-materials) | 🛸×3 | 2 | 4 | 3,600 | |
-| [🤖 로봇](#-로봇-robotics) | 🛸×2 | 1 | — | 22,500 | |
-| [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸×2 | 1 | — | 5,016 | n6=96% |
-| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸×1 | 0 | 5 | — | 미완 |
+| [🧬 물질합성](#-물질합성-materials) | 🛸×4 | 2 | 4 | 3,600 | 4Mk + alien 98%EXACT + 14 TOML |
+| [🤖 로봇](#-로봇-robotics) | 🛸×4 | 1 | 5 | 270,000 | BT-123~127 94%EXACT + 8단 |
+| [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸×5 | 1 | 5 | 6,480 | BT 100%EXACT 전체 최고 |
+| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸×5 | 8 | 5 | 311,040 | 7hexa+omega 40/40 레벨EXACT |
 
 > **섹션 🛸**: 완성제품 + BT + DSE + Cross-DSE + 진화 + 발견 종합. **개별 🛸**: 6=검증완료·실전투입 / 5=설계완료·DSE통과 / 4=상세설계 / 3=구조설계 / 2=컨셉 / 1=미완·SF. 만점 = n = 6
 
@@ -165,7 +165,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # ⚡ 에너지 (Energy)
 
-> 🛸🛸🛸🛸🛸🛸 **6/6** | 완성 12개 | BT 13개 | DSE 10,225 | Cross-DSE ✅ | 배터리 8단 + 태양전지 + 송전 통합
+> 🛸🛸🛸🛸🛸 **5/6** | 완성 12개 | BT 13개 | DSE 10,225 | Cross-DSE ✅ | 배터리 8단 + 태양전지 + 송전 통합 | ⚠️ Battery 0%EXACT, Solar hypotheses 미작성
 
 ### 배터리 아키텍처 — 8단
 
@@ -195,7 +195,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🌍 환경보호 (Environment)
 
-> 🛸🛸🛸🛸🛸 **5/6** | 완성 21개 | DSE 3.6M | 진화 4단계 | 발견 ✅ | 환경 8단 + 탄소포집 8단
+> 🛸🛸🛸🛸🛸🛸 **6/6** | 완성 21개 | BT 5개 | DSE 3.6M | 진화 4단계 | 발견 13개(100%EXACT) | 환경 8단 + 탄소포집 8단
 
 ### 환경보호 아키텍처 — 8단
 
@@ -234,7 +234,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🧬 물질합성 (Materials)
 
-> 🛸🛸🛸 **3/6** | 완성 2개 | BT 4개 | DSE 3,600 | 원자 단위 제조
+> 🛸🛸🛸🛸 **4/6** | 완성 2개 | BT 4개 (91.9%EXACT) | DSE 3,600 | 4Mk 진화 | alien 49/50(98%EXACT) | 14 DSE TOML
 
 | 🛸 | 완성제품 | 핵심 | 링크 |
 |:--:|---------|------|------|
@@ -247,11 +247,11 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🤖 로봇 (Robotics)
 
-> 🛸🛸 **2/6** | 완성 1개 | DSE 22,500 | Humanoid J₂=24DOF + HEXA-1 + Egyptian 제어
+> 🛸🛸🛸🛸 **4/6** | 완성 1개 | BT 5개 (94.3%EXACT) | DSE 270,000 | 8단 체인 | SE(3)=n=6 필연
 
 | 🛸 | 완성제품 | 핵심 | 링크 |
 |:--:|---------|------|------|
-| 3 | **궁극의 로봇** | 6단 DSE, 22,500 조합 | [goal](docs/robotics/goal.md) |
+| 4 | **궁극의 로봇** | 8단 DSE, 270,000 조합, BT-123~127 | [goal](docs/robotics/goal.md) |
 
 > 도메인: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `robot-dse`
 
@@ -273,7 +273,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 💬 소프트웨어·인프라 (Software & Infra)
 
-> 🛸🛸 **2/6** | 완성 1개 | DSE 5,016 | 프로그래밍언어 n6=96% + 블록체인/암호/네트워크
+> 🛸🛸🛸🛸🛸 **5/6** | 완성 1개 | BT 5개 (100%EXACT — 전체 최고) | DSE 6,480 | BT-113~117 61/61 EXACT
 
 | 🛸 | 완성제품 | 핵심 | 링크 |
 |:--:|---------|------|------|
@@ -285,13 +285,20 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 📺 디스플레이·오디오 (Display & Audio)
 
-> 🛸 **1/6** | 완성 0개 | BT 5개 | σ=12 반음, J₂=24 fps/bits, σ·τ=48kHz
+> 🛸🛸🛸🛸🛸 **5/6** | 완성 8개 | BT 5개 | DSE 311,040 | 8단 체인 | 40/40 레벨 EXACT | 8 Testable Predictions
 
 | 🛸 | 완성제품 | 핵심 | 링크 |
 |:--:|---------|------|------|
-| 1 | **궁극의 디스플레이** | 미완 — 새 BT 발굴 필요 | [goal](docs/display-audio/goal.md) |
+| 5 | **HEXA-PIXEL** | Lv1: 소재 (n/φ=3 RGB, σ=12bit) | [설계](docs/display-audio/hexa-pixel.md) |
+| 5 | **HEXA-PANEL** | Lv2: 패널 (σ²=144 PPI, J₂=24fps) | [설계](docs/display-audio/hexa-panel.md) |
+| 5 | **HEXA-DRIVER** | Lv3: 드라이버 (σ·τ=48kHz DAC) | [설계](docs/display-audio/hexa-driver.md) |
+| 5 | **HEXA-PROCESSOR** | Lv4: 프로세서 (σ-τ=8 코덱북) | [설계](docs/display-audio/hexa-processor.md) |
+| 5 | **HEXA-DISPLAY** | Lv5: 통합 시스템 (J₂=24fps) | [설계](docs/display-audio/hexa-display.md) |
+| 3 | **HEXA-HOLOGRAPHIC** | Lv6: 홀로그램 (n=6 라이트필드) | [설계](docs/display-audio/hexa-hologram.md) |
+| 2 | **HEXA-NEURAL** | Lv7: 뇌파 인터페이스 | [설계](docs/display-audio/hexa-neural-display.md) |
+| 1 | **OMEGA-DA** | Lv8: 궁극의 디스플레이 | [설계](docs/display-audio/omega-da.md) |
 
-> 도메인: [display-audio/](docs/display-audio/)
+> 도메인: [display-audio/](docs/display-audio/) · BT-48, 71, 72, 108
 
 ---
 
@@ -330,17 +337,17 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 7 | 2035 | **궁극의 핵융합** | ★★★★★ | ✅ | 2,400 조합 → [🔥 핵융합](#-핵융합-fusion) |
 | 8 | ✅ | **궁극의 학습알고리즘** | ★★★★☆ | T2 | — |
 | 9 | 2030 | **궁극의 네트워크** | ★★★★☆ | T2 | — |
-| 10 | 2030 | **궁극의 로봇** | ★★★★☆ | ✅ | 22,500 조합 → [🤖 로봇](#-로봇-robotics) |
+| 10 | 2030 | **궁극의 로봇** | ★★★★☆ | ✅ | 270,000 조합 → [🤖 로봇](#-로봇-robotics) |
 | 11 | ✅ | **궁극의 송전망** | ★★★★☆ | ✅ | [⚡ 에너지](#-에너지-energy) |
 | 12 | 2035 | **궁극의 생명공학** | ★★★★☆ | T3 | [biology/](docs/biology/) |
-| 13 | 2030 | **궁극의 디스플레이** | ★★★☆☆ | T3 | [📺 디스플레이](#-디스플레이오디오-display--audio) |
+| 13 | 2030 | **궁극의 디스플레이** | ★★★☆☆ | ✅ | 311,040 조합 → [📺 디스플레이](#-디스플레이오디오-display--audio) |
 | 14 | ✅ | **궁극의 열관리** | ★★★☆☆ | T3 | — |
 | 15 | ✅ | **궁극의 암호** | ★★★☆☆ | T3 | — |
 | 16 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | — |
 | 17 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 28,800 조합 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 18 | ✅ | **궁극의 블록체인** | ★★☆☆☆ | T3 | — |
 | 19 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | — |
-| 20 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ | 5,016 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
+| 20 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
 | 21 | ✅ | **궁극의 초전도자석** | ★★☆☆☆ | ✅ | SC DSE 내 통합 |
 | 22 | ✅ | **궁극의 순수수학** | ★☆☆☆☆ | ✅ | 38,024 조합 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 23 | 2040 | **궁극의 우주론/입자** | ★☆☆☆☆ | T3 | — |
@@ -360,11 +367,11 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 항목 | 링크 |
 |------|------|
 | **n=6 상수표** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
-| **112 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
+| **127 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
 | **700+ Atlas Constants** | [docs/atlas-constants.md](docs/atlas-constants.md) |
 | **45 Testable Predictions** | [docs/testable-predictions.md](docs/testable-predictions.md) |
 | **DSE Map** | [docs/dse-map.toml](docs/dse-map.toml) |
-| **305 DSE Domains** | [docs/dse-domains.md](docs/dse-domains.md) |
+| **322 DSE Domains** | [docs/dse-domains.md](docs/dse-domains.md) |
 | **Cross-Domain Resonance** | [docs/cross-domain-resonance-2026-03-31.md](docs/cross-domain-resonance-2026-03-31.md) |
 | **Core Theorem Proof** | [docs/theorem-r1-uniqueness.md](docs/theorem-r1-uniqueness.md) |
 | **448 Calculators** | [docs/calculator-registry.md](docs/calculator-registry.md) |
