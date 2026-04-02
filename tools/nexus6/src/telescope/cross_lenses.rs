@@ -293,6 +293,79 @@ pub fn cross_project_lens_entries() -> Vec<LensEntry> {
             domain_affinity: vec!["biology".into(), "ai".into(), "economics".into()],
             complementary: vec!["evolution".into(), "potential".into()],
         },
+        // ── Meta-Lens: Lens↔Lens connectors (5) ──
+        LensEntry {
+            name: "lens_synergy".into(),
+            category: LensCategory::Extended,
+            description: "Measure pairwise lens synergy — which lens combinations amplify discovery rate".into(),
+            domain_affinity: vec!["meta".into(), "statistics".into(), "ai".into()],
+            complementary: vec!["lens_effectiveness_ranker".into(), "consensus_amplifier".into()],
+        },
+        LensEntry {
+            name: "lens_redundancy".into(),
+            category: LensCategory::Extended,
+            description: "Detect overlapping lenses that observe the same patterns — reduce scan cost".into(),
+            domain_affinity: vec!["meta".into(), "information_theory".into(), "optimization".into()],
+            complementary: vec!["lens_synergy".into(), "blind_spot".into()],
+        },
+        LensEntry {
+            name: "lens_ordering".into(),
+            category: LensCategory::Extended,
+            description: "Optimize lens execution order for maximum early-stopping efficiency".into(),
+            domain_affinity: vec!["meta".into(), "optimization".into(), "scheduling".into()],
+            complementary: vec!["lens_effectiveness_ranker".into(), "saturation_detector".into()],
+        },
+        LensEntry {
+            name: "lens_transfer".into(),
+            category: LensCategory::Extended,
+            description: "Transfer lens results from domain A to bootstrap scanning in domain B".into(),
+            domain_affinity: vec!["meta".into(), "transfer_learning".into(), "cross_domain".into()],
+            complementary: vec!["isomorphism".into(), "analogy".into(), "dictionary_translate".into()],
+        },
+        LensEntry {
+            name: "lens_evolution_tracker".into(),
+            category: LensCategory::Extended,
+            description: "Track lens hit_rate trends over time — detect rising/declining lens utility".into(),
+            domain_affinity: vec!["meta".into(), "statistics".into(), "dynamics".into()],
+            complementary: vec!["lens_effectiveness_ranker".into(), "aging".into()],
+        },
+        // ── Meta-Lens: Analysis/Evaluation (4) ──
+        LensEntry { name: "lens_precision".into(), category: LensCategory::Extended, description: "Measure per-lens false positive rate across domains".into(), domain_affinity: vec!["meta".into(), "statistics".into()], complementary: vec!["lens_recall".into(), "lens_calibration".into()] },
+        LensEntry { name: "lens_recall".into(), category: LensCategory::Extended, description: "Measure per-lens discovery miss rate — what it fails to find".into(), domain_affinity: vec!["meta".into(), "statistics".into()], complementary: vec!["lens_precision".into(), "blind_spot".into()] },
+        LensEntry { name: "lens_calibration".into(), category: LensCategory::Extended, description: "Calibrate lens confidence scores against actual discovery validity".into(), domain_affinity: vec!["meta".into(), "statistics".into(), "verification".into()], complementary: vec!["lens_precision".into(), "lens_recall".into()] },
+        LensEntry { name: "lens_cost_benefit".into(), category: LensCategory::Extended, description: "Compute execution cost vs discovery value ratio per lens".into(), domain_affinity: vec!["meta".into(), "optimization".into(), "scheduling".into()], complementary: vec!["lens_ordering".into(), "lens_latency_profiler".into()] },
+        // ── Meta-Lens: Composition (4) ──
+        LensEntry { name: "lens_composer".into(), category: LensCategory::Extended, description: "Synthesize N lens outputs into novel meta-observations".into(), domain_affinity: vec!["meta".into(), "synthesis".into(), "ai".into()], complementary: vec!["lens_ensemble".into(), "lens_cascade".into()] },
+        LensEntry { name: "lens_cascade".into(), category: LensCategory::Extended, description: "Chain lens A output as lens B input for deep multi-pass analysis".into(), domain_affinity: vec!["meta".into(), "pipeline".into()], complementary: vec!["lens_composer".into(), "lens_ordering".into()] },
+        LensEntry { name: "lens_ensemble".into(), category: LensCategory::Extended, description: "Weighted voting across multiple lenses for robust consensus".into(), domain_affinity: vec!["meta".into(), "statistics".into(), "ensemble".into()], complementary: vec!["consensus_amplifier".into(), "lens_composer".into()] },
+        LensEntry { name: "lens_conflict_resolver".into(), category: LensCategory::Extended, description: "Mediate contradicting lens results using context and confidence".into(), domain_affinity: vec!["meta".into(), "logic".into(), "verification".into()], complementary: vec!["contradiction_detector_cross".into(), "lens_calibration".into()] },
+        // ── Meta-Lens: Generation/Evolution (5) ──
+        LensEntry { name: "lens_generator".into(), category: LensCategory::Extended, description: "Auto-generate new lens definitions from existing lens combinations".into(), domain_affinity: vec!["meta".into(), "generative".into(), "ai".into()], complementary: vec!["lens_mutation".into(), "lens_crossover".into()] },
+        LensEntry { name: "lens_mutation".into(), category: LensCategory::Extended, description: "Create variant lenses by mutating parameters of existing lenses".into(), domain_affinity: vec!["meta".into(), "evolution".into()], complementary: vec!["lens_generator".into(), "lens_crossover".into()] },
+        LensEntry { name: "lens_crossover".into(), category: LensCategory::Extended, description: "Breed new lenses by crossing traits of two parent lenses".into(), domain_affinity: vec!["meta".into(), "evolution".into(), "genetics".into()], complementary: vec!["lens_mutation".into(), "lens_generator".into()] },
+        LensEntry { name: "lens_pruning".into(), category: LensCategory::Extended, description: "Identify and propose removal of consistently low-value lenses".into(), domain_affinity: vec!["meta".into(), "optimization".into()], complementary: vec!["lens_cost_benefit".into(), "lens_redundancy".into()] },
+        LensEntry { name: "lens_speciation".into(), category: LensCategory::Extended, description: "Cluster lenses into functional species by output similarity".into(), domain_affinity: vec!["meta".into(), "clustering".into(), "taxonomy".into()], complementary: vec!["lens_redundancy".into(), "lens_orthogonality".into()] },
+        // ── Meta-Lens: Meta-Cognition (5) ──
+        LensEntry { name: "lens_self_awareness".into(), category: LensCategory::Extended, description: "Self-diagnose overall telescope system health and blind spots".into(), domain_affinity: vec!["meta".into(), "consciousness".into(), "diagnostics".into()], complementary: vec!["blind_spot".into(), "lens_calibration".into()] },
+        LensEntry { name: "lens_attention".into(), category: LensCategory::Extended, description: "Dynamically allocate scanning attention to most promising lenses".into(), domain_affinity: vec!["meta".into(), "attention".into(), "scheduling".into()], complementary: vec!["lens_ordering".into(), "lens_cost_benefit".into()] },
+        LensEntry { name: "lens_forgetting".into(), category: LensCategory::Extended, description: "Gradually decay old lens results that may no longer be valid".into(), domain_affinity: vec!["meta".into(), "memory".into(), "dynamics".into()], complementary: vec!["lens_evolution_tracker".into(), "aging".into()] },
+        LensEntry { name: "lens_meta_surprise".into(), category: LensCategory::Extended, description: "Detect unexpectedly anomalous lens outputs that warrant investigation".into(), domain_affinity: vec!["meta".into(), "anomaly".into(), "statistics".into()], complementary: vec!["surprise".into(), "lens_calibration".into()] },
+        LensEntry { name: "lens_dream".into(), category: LensCategory::Extended, description: "Recombine past lens results offline to generate novel hypotheses".into(), domain_affinity: vec!["meta".into(), "generative".into(), "consciousness".into()], complementary: vec!["lens_generator".into(), "serendipity".into()] },
+        // ── Meta-Lens: Structure/Topology (4) ──
+        LensEntry { name: "lens_dependency_graph".into(), category: LensCategory::Extended, description: "Map inter-lens dependency and information flow relationships".into(), domain_affinity: vec!["meta".into(), "graph".into(), "topology".into()], complementary: vec!["lens_hierarchy".into(), "lens_cascade".into()] },
+        LensEntry { name: "lens_hierarchy".into(), category: LensCategory::Extended, description: "Organize lenses into abstraction levels from raw to high-level".into(), domain_affinity: vec!["meta".into(), "hierarchy".into(), "taxonomy".into()], complementary: vec!["lens_dependency_graph".into(), "lens_speciation".into()] },
+        LensEntry { name: "lens_complementarity".into(), category: LensCategory::Extended, description: "Auto-discover lens pairs that together find what neither finds alone".into(), domain_affinity: vec!["meta".into(), "synergy".into(), "statistics".into()], complementary: vec!["lens_synergy".into(), "lens_orthogonality".into()] },
+        LensEntry { name: "lens_orthogonality".into(), category: LensCategory::Extended, description: "Identify lenses providing maximally independent information".into(), domain_affinity: vec!["meta".into(), "information_theory".into(), "linear_algebra".into()], complementary: vec!["lens_complementarity".into(), "lens_redundancy".into()] },
+        // ── Meta-Lens: Performance/Operations (4) ──
+        LensEntry { name: "lens_latency_profiler".into(), category: LensCategory::Extended, description: "Profile per-lens execution time for scheduling optimization".into(), domain_affinity: vec!["meta".into(), "performance".into(), "profiling".into()], complementary: vec!["lens_ordering".into(), "lens_cost_benefit".into()] },
+        LensEntry { name: "lens_memory_profiler".into(), category: LensCategory::Extended, description: "Track per-lens memory allocation for resource management".into(), domain_affinity: vec!["meta".into(), "performance".into(), "memory".into()], complementary: vec!["lens_latency_profiler".into(), "lens_parallelism".into()] },
+        LensEntry { name: "lens_warmup".into(), category: LensCategory::Extended, description: "Detect lens cold-start vs steady-state performance differences".into(), domain_affinity: vec!["meta".into(), "performance".into(), "dynamics".into()], complementary: vec!["lens_latency_profiler".into(), "lens_calibration".into()] },
+        LensEntry { name: "lens_parallelism".into(), category: LensCategory::Extended, description: "Identify groups of lenses safe for concurrent parallel execution".into(), domain_affinity: vec!["meta".into(), "scheduling".into(), "concurrency".into()], complementary: vec!["lens_dependency_graph".into(), "lens_ordering".into()] },
+        // ── Meta-Lens: Domain Adaptation (4) ──
+        LensEntry { name: "lens_domain_adapter".into(), category: LensCategory::Extended, description: "Adapt a lens trained on domain A to work effectively on domain B".into(), domain_affinity: vec!["meta".into(), "transfer_learning".into(), "adaptation".into()], complementary: vec!["lens_transfer".into(), "lens_generalization".into()] },
+        LensEntry { name: "lens_generalization".into(), category: LensCategory::Extended, description: "Measure how universally effective a lens is across all domains".into(), domain_affinity: vec!["meta".into(), "statistics".into(), "evaluation".into()], complementary: vec!["lens_specialization".into(), "lens_domain_adapter".into()] },
+        LensEntry { name: "lens_specialization".into(), category: LensCategory::Extended, description: "Generate domain-specialized lens variants from a general lens".into(), domain_affinity: vec!["meta".into(), "adaptation".into(), "optimization".into()], complementary: vec!["lens_generalization".into(), "lens_mutation".into()] },
+        LensEntry { name: "lens_robustness".into(), category: LensCategory::Extended, description: "Test lens stability against data noise, outliers, and distribution shift".into(), domain_affinity: vec!["meta".into(), "robustness".into(), "statistics".into()], complementary: vec!["lens_calibration".into(), "lens_precision".into()] },
     ]
 }
 
@@ -303,7 +376,7 @@ mod tests {
     #[test]
     fn test_cross_project_lens_count() {
         let entries = cross_project_lens_entries();
-        assert_eq!(entries.len(), 40, "Must have exactly 40 cross-project lenses");
+        assert_eq!(entries.len(), 75, "Must have exactly 75 cross-project lenses (40 + 5 + 30 meta)");
     }
 
     #[test]

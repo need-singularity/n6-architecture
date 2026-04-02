@@ -1,3 +1,7 @@
+pub mod accel_lenses_a;
+pub mod accel_lenses_b;
+pub mod accel_lenses_c;
+pub mod accel_lenses_d;
 pub mod anima_lenses;
 pub mod consensus;
 pub mod core_lenses;
