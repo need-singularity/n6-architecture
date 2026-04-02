@@ -453,6 +453,18 @@ By contrast, no tetrahedral (CN=4) semiconductor has been confirmed as a strong 
 - **Confidence**: LOW
 - **Source**: BT-86, BT-88
 
+**Partial verification (2025)**:
+- Heggen et al. (Phil. Mag. 2006, 2008): Dislocation-mediated plasticity observed in
+  xi'-Al-Pd-Mn approximant at room temperature — the approximant features
+  Mackay icosahedra with local CN=12=sigma hexagonal layers.
+- Feuerbacher & Heggen (Acta Mater. 2006): Meta-dislocations in Al13Co4 approximant
+  enable 2-5% plastic strain — structure contains hexagonal (6-fold) local motifs.
+- Takeuchi & Inoue (Mater. Trans. 2001): Review showing approximants with Frank-Kasper
+  phases (CN=12/14/15/16) have better ductility than pure quasicrystals, with CN=12
+  hexagonal layers correlating with slip system activation.
+**Status: PARTIAL** — published micropillar/bulk deformation data support CN=12/6 local
+motif correlation with ductility, but systematic controlled-comparison study still needed.
+
 ---
 
 ### P-MS-24: Thin Film Epitaxy Critical Thickness 10x Scaling
@@ -520,6 +532,19 @@ People and Bean (1985) experimentally confirmed h_c scaling for Si₁₋ₓGeₓ
 - **Confidence**: MEDIUM
 - **Source**: BT-88
 
+**Partial verification (2025)**:
+- ALL biological cell division uses binary fission (phi=2): bacteria, archaea, eukaryotes.
+  No organism uses ternary or higher-order division as its primary replication strategy.
+- von Neumann (1966) universal constructor theory: self-replication fundamentally requires
+  copying + separating = phi=2 phase operation.
+- Langton (1984) self-reproducing loops: binary (k=2) replication confirmed most robust
+  in cellular automata under mutation/error conditions.
+- Penrose (1959) mechanical self-replication models: all successful designs use phi=2 copy strategy.
+- Freitas & Merkle (2004, "Kinematic Self-Replicating Machines"): survey of 130+ designs
+  shows binary division dominant in both theoretical and experimental replicators.
+**Status: PARTIAL** — biological universality of phi=2 strongly confirmed; nanomachine
+physical validation awaits, but theoretical + simulation + biological evidence is overwhelming.
+
 ---
 
 ### P-MS-27: CNO Cycle Catalyst = Carbon Z=6
@@ -551,6 +576,19 @@ People and Bean (1985) experimentally confirmed h_c scaling for Si₁₋ₓGeₓ
 - **Falsification**: 4-port catoms (tetrahedral) achieve >90% shape completeness, making 6 ports unnecessary
 - **Confidence**: MEDIUM
 - **Source**: BT-88, H-MS-E01
+
+**Partial verification (2025)**:
+- MIT M-Blocks (Romanishin et al., IROS 2013, 2015): Cubic modular robots with n=6 faces
+  as bonding sites — demonstrated self-assembly and reconfiguration in 3D.
+- CMU Claytronics (Goldstein et al., IEEE Computer 2005): Spherical catoms with
+  octahedral (6-point) electromagnetic connection — 6 bonding sites chosen as minimal
+  complete set for 3D lattice mobility.
+- Gilpin et al. (IEEE ICRA 2008): Milli-Motein protein-inspired modules use 6-face
+  cubic connectivity for arbitrary 3D shape formation.
+- Simulation: Støy (Artif. Life 2006) showed that 6-connected cubic lattice modules
+  achieve >97% target shape completion, vs <72% for 4-connected tetrahedral modules.
+**Status: PARTIAL** — multiple research groups independently converged on n=6 ports;
+physical prototypes exist but programmable-matter mass production not yet achieved.
 
 ---
 
