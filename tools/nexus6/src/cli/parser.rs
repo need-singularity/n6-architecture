@@ -27,6 +27,11 @@ pub enum CliCommand {
         max_cycles: usize,
         seeds: Vec<String>,
     },
+    Auto {
+        domain: String,
+        max_meta_cycles: usize,
+        max_ouroboros_cycles: usize,
+    },
     Lenses {
         category: Option<LensFilter>,
     },
@@ -66,6 +71,7 @@ pub fn parse_args(args: &[String]) -> Result<CliCommand, String> {
         "history" => parse_history(rest),
         "recommend" => parse_recommend(rest),
         "evolve" => parse_evolve(rest),
+        "auto" => parse_auto(rest),
         "lenses" => parse_lenses(rest),
         "dashboard" => Ok(CliCommand::Dashboard),
         "help" | "--help" | "-h" => Ok(CliCommand::Help),
@@ -240,6 +246,49 @@ fn parse_evolve(args: &[String]) -> Result<CliCommand, String> {
         domain,
         max_cycles,
         seeds,
+    })
+}
+
+fn parse_auto(args: &[String]) -> Result<CliCommand, String> {
+    if args.is_empty() {
+        return Err("auto requires a <domain> argument".to_string());
+    }
+    let domain = args[0].clone();
+    let mut max_meta_cycles: usize = 6;       // n=6 default
+    let mut max_ouroboros_cycles: usize = 6;   // n=6 default
+
+    let mut i = 1;
+    while i < args.len() {
+        match args[i].as_str() {
+            "--meta-cycles" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--meta-cycles requires a number".to_string());
+                }
+                max_meta_cycles = args[i]
+                    .parse()
+                    .map_err(|_| format!("--meta-cycles: '{}' is not a valid number", args[i]))?;
+            }
+            "--ouroboros-cycles" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--ouroboros-cycles requires a number".to_string());
+                }
+                max_ouroboros_cycles = args[i]
+                    .parse()
+                    .map_err(|_| format!("--ouroboros-cycles: '{}' is not a valid number", args[i]))?;
+            }
+            other => {
+                return Err(format!("auto: unknown option '{}'", other));
+            }
+        }
+        i += 1;
+    }
+
+    Ok(CliCommand::Auto {
+        domain,
+        max_meta_cycles,
+        max_ouroboros_cycles,
     })
 }
 
@@ -443,5 +492,36 @@ mod tests {
     #[test]
     fn test_verify_bad_number() {
         assert!(parse_args(&args("nexus6 verify abc")).is_err());
+    }
+
+    #[test]
+    fn test_parse_auto_default() {
+        let cmd = parse_args(&args("nexus6 auto physics")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Auto {
+                domain: "physics".to_string(),
+                max_meta_cycles: 6,
+                max_ouroboros_cycles: 6,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_auto_with_options() {
+        let cmd = parse_args(&args("nexus6 auto biology --meta-cycles 3 --ouroboros-cycles 12")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Auto {
+                domain: "biology".to_string(),
+                max_meta_cycles: 3,
+                max_ouroboros_cycles: 12,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_auto_missing_domain() {
+        assert!(parse_args(&args("nexus6 auto")).is_err());
     }
 }

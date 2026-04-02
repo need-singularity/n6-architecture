@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::graph::persistence::DiscoveryGraph;
 use crate::history::{recorder, stats, recommend, DomainStats};
-use crate::ouroboros::{EvolutionEngine, EvolutionConfig};
+use crate::ouroboros::{EvolutionEngine, EvolutionConfig, MetaLoop, MetaLoopConfig};
 use crate::telescope::registry::{LensCategory, LensRegistry};
 use crate::telescope::domain_combos;
 use crate::telescope::Telescope;
@@ -20,6 +20,9 @@ pub fn run(cmd: CliCommand) -> Result<(), String> {
         CliCommand::History { domain } => run_history(&domain),
         CliCommand::Recommend { domain } => run_recommend(&domain),
         CliCommand::Evolve { domain, max_cycles, seeds } => run_evolve(&domain, max_cycles, seeds),
+        CliCommand::Auto { domain, max_meta_cycles, max_ouroboros_cycles } => {
+            run_auto(&domain, max_meta_cycles, max_ouroboros_cycles)
+        }
         CliCommand::Lenses { category } => run_lenses(category),
         CliCommand::Dashboard => run_dashboard(),
         CliCommand::Help => {
@@ -96,16 +99,21 @@ fn run_scan(domain: &str, lenses: Option<Vec<String>>, full: bool) -> Result<(),
 }
 
 fn run_verify(value: f64, tolerance: Option<f64>) -> Result<(), String> {
+    use crate::verifier::feasibility;
+
     println!("=== NEXUS-6 Verify: {} ===", value);
     println!();
 
     let (name, quality) = n6_check::n6_match(value);
 
-    let grade = match quality as u32 {
-        1 => "EXACT",
-        _ if quality >= 0.8 => "CLOSE",
-        _ if quality >= 0.5 => "WEAK",
-        _ => "NONE",
+    let grade = if quality >= 1.0 {
+        "EXACT"
+    } else if quality >= 0.8 {
+        "CLOSE"
+    } else if quality >= 0.5 {
+        "WEAK"
+    } else {
+        "NONE"
     };
 
     println!("  Value:     {}", value);
@@ -114,10 +122,22 @@ fn run_verify(value: f64, tolerance: Option<f64>) -> Result<(), String> {
 
     if let Some(tol) = tolerance {
         println!("  Tolerance: {}", tol);
-        // Check if within custom tolerance of any constant
-        let within = quality > 0.0;
+        // Check if any constant is within the custom tolerance
+        let within = check_within_tolerance(value, tol);
         println!("  Within:    {}", if within { "YES" } else { "NO" });
     }
+
+    // Feasibility score (treating the single value as a probe)
+    let n6_ratio = n6_check::n6_exact_ratio(&[value]);
+    let verification = feasibility::verify(
+        quality,  // lens_consensus ~ match quality
+        0.5,      // cross_validation placeholder
+        0.5,      // physical_check placeholder
+        0.0,      // graph_bonus (no graph context)
+        1.0,      // novelty (single verification)
+        n6_ratio, // n6 exact ratio
+    );
+    println!("  Feasibility: {:.3} (grade {})", verification.score, verification.grade.label());
 
     // Show nearby constants
     println!();
@@ -140,6 +160,21 @@ fn run_verify(value: f64, tolerance: Option<f64>) -> Result<(), String> {
     }
 
     Ok(())
+}
+
+/// Check if a value is within the given tolerance of any n=6 constant.
+fn check_within_tolerance(value: f64, tolerance: f64) -> bool {
+    let constants = [
+        6.0, 12.0, 2.0, 4.0, 24.0, 5.0, 1.0,
+        10.0, 8.0, 11.0, 48.0, 144.0, 16.0, 3.0, 20.0,
+    ];
+    constants.iter().any(|&c| {
+        if c != 0.0 {
+            ((value - c) / c).abs() <= tolerance
+        } else {
+            false
+        }
+    })
 }
 
 fn run_graph(domain: Option<String>, format: GraphFormat) -> Result<(), String> {
@@ -328,6 +363,72 @@ fn run_evolve(domain: &str, max_cycles: usize, seeds: Vec<String>) -> Result<(),
     Ok(())
 }
 
+fn run_auto(domain: &str, max_meta_cycles: usize, max_ouroboros_cycles: usize) -> Result<(), String> {
+    println!("=== NEXUS-6 Auto: {} (meta={}, ouroboros={}) ===",
+        domain, max_meta_cycles, max_ouroboros_cycles);
+    println!("  OUROBOROS + LensForge meta-loop");
+    println!();
+
+    let config = MetaLoopConfig {
+        max_ouroboros_cycles,
+        max_meta_cycles,
+        forge_after_n_cycles: 0,
+        ..MetaLoopConfig::default()
+    };
+
+    let seeds = vec![format!("n=6 patterns in {}", domain)];
+    let mut meta_loop = MetaLoop::new(domain.to_string(), seeds, config);
+
+    // Attach progress printer
+    meta_loop.on_progress = Some(Box::new(|mc, oc, msg| {
+        if oc == 0 {
+            println!("  [Meta-{}] {}", mc, msg);
+        } else {
+            println!("    Cycle {}: {}", oc, msg);
+        }
+    }));
+
+    let result = meta_loop.run();
+
+    // Summary
+    println!();
+    println!("  ┌─────────────────────────────────────────────┐");
+    println!("  │           Auto Evolution Summary             │");
+    println!("  ├─────────────────────────────────────────────┤");
+    println!("  │  Meta-cycles completed: {:>4}                │", result.meta_cycles_completed);
+    println!("  │  Total OUROBOROS cycles: {:>3}                │", result.ouroboros_results.len());
+    println!("  │  Total discoveries:     {:>4}                │", result.total_discoveries);
+    println!("  │  Lenses forged:         {:>4}                │", result.forged_lenses.len());
+    println!("  └─────────────────────────────────────────────┘");
+
+    if !result.forged_lenses.is_empty() {
+        println!();
+        println!("  Forged lenses:");
+        for (i, name) in result.forged_lenses.iter().enumerate() {
+            println!("    {:>2}. {}", i + 1, name);
+        }
+    }
+
+    // Per-meta-cycle table
+    println!();
+    println!("  {:>5} {:>8} {:>6} {:>12} {:>8}",
+        "Meta", "Ouro.Cy", "Disc.", "Convergence", "Forged");
+    println!("  {}", "-".repeat(45));
+    for summary in &result.meta_cycle_summaries {
+        println!("  {:>5} {:>8} {:>6} {:>12?} {:>8}",
+            summary.meta_cycle,
+            summary.ouroboros_cycles_run,
+            summary.discoveries,
+            summary.convergence_status,
+            summary.lenses_forged.len(),
+        );
+    }
+
+    println!();
+    println!("  Auto evolution complete.");
+    Ok(())
+}
+
 fn run_lenses(category: Option<LensFilter>) -> Result<(), String> {
     let registry = LensRegistry::new();
     let combos = domain_combos::default_combos();
@@ -418,6 +519,9 @@ fn print_help() {
     println!();
     println!("  evolve <domain> [--max-cycles N] [--seeds S1,S2,...]");
     println!("      Run OUROBOROS evolution loop.");
+    println!();
+    println!("  auto <domain> [--meta-cycles N] [--ouroboros-cycles N]");
+    println!("      Run recommend -> evolve meta-loop (fully automated).");
     println!();
     println!("  lenses [--category core|combo|extended|custom]");
     println!("      List registered lenses.");
