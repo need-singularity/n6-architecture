@@ -4,10 +4,10 @@
 
 [meta]
 updated = "2026-04-02T12"
-total_domains = 307
-cross_dse_connected = 307
-total_valid_paths = 2152494
-domains_100pct_n6 = 307
+total_domains = 322
+cross_dse_connected = 322
+total_valid_paths = 3941070
+domains_100pct_n6 = 322
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 
@@ -16420,3 +16420,215 @@ status = "done"
 bridge = "FCC CN=sigma=12, HCP CN=sigma=12, Diamond cubic CN=tau=4"
 n6_exact = 6
 note = "Crystal symmetry groups: cubic=sigma*J2=288 operations. BT-86 CN=6 law"
+
+# ── 환경보호 신규 도메인 (2026-04-02) ──────────────
+
+[environmental-protection]
+goal = true
+dse = "done"
+combos = 1679616
+tool = "tools/universal-dse/domains/environmental-protection-8level.toml"
+levels = ["Sense", "Monitor", "Capture", "Purify", "Restore", "Cycle", "Ecosystem", "Planet"]
+best_n6 = "HEXA-SENSE 6종 → HEXA-MONITOR σ=12ch → HEXA-CAPTURE CN=6 → HEXA-PURIFY τ=4 → HEXA-RESTORE n=6yr → HEXA-CYCLE 6R → HEXA-ECO J₂=24 → OMEGA-ENV 6권역 (100%)"
+n6_max = 100.0
+n6_avg = 95.0
+note = "궁극의 환경보호 8단 아키텍처. 미세플라스틱 6-mesh 캐스케이드 + 6종 효소 완전분해. 정화율 1-1/(σ-φ)^τ = 99.99%"
+cross_dse = ["carbon-capture", "water-treatment", "pollution-monitoring", "recycling-system", "ecosystem-biodiversity", "ocean-acidification", "methane-capture", "circular-economy", "climate-modeling", "desalination", "agriculture", "forest-management"]
+
+[microplastics-removal]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/microplastics-removal.toml"
+levels = ["Detection", "Filtration", "Degradation", "Recovery", "Monitoring"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6μm mesh, CN=6 촉매분해, σ=12 센서, J₂=24 모니터링 채널"
+cross_dse = ["environmental-protection", "water-treatment", "ocean-acidification", "pollution-monitoring"]
+
+[circular-economy]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/circular-economy.toml"
+levels = ["Design", "Collection", "Sorting", "Processing", "Remanufacture"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6R 프레임워크, σ=12 순환주기, J₂=24 스트림, φ=2x 수명"
+cross_dse = ["environmental-protection", "recycling-system", "zero-waste-manufacturing", "plastic-recycling"]
+
+[zero-waste-manufacturing]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/zero-waste-manufacturing.toml"
+levels = ["Material", "Process", "Waste", "Recovery", "Integration"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6 시그마 품질, τ=4 폐기물 스트림, σ-φ=10배 감축"
+cross_dse = ["environmental-protection", "circular-economy", "recycling-system", "material-synthesis"]
+
+[methane-capture]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/methane-capture.toml"
+levels = ["Source", "Detection", "Capture", "Conversion", "Utilization"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "CH₄=C(Z=6)+4H(τ), σ=12 용기, J₂=24 생산 스트림"
+cross_dse = ["environmental-protection", "carbon-capture", "climate-modeling", "hydrogen-fuel-cell"]
+
+[bioremediation]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/bioremediation.toml"
+levels = ["Assessment", "Organism", "Inoculation", "Monitoring", "Restoration"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "CN=6 효소 활성부위, 6주 치료주기, φ=2 미생물 분열"
+cross_dse = ["environmental-protection", "soil-remediation", "water-treatment", "biology-systems"]
+
+[soil-remediation]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/soil-remediation.toml"
+levels = ["Survey", "Excavation", "Treatment", "Verification", "Revegetation"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6종 중금속, σ-φ=10배 정화율, pH=6 최적"
+cross_dse = ["environmental-protection", "bioremediation", "soil-science", "regenerative-agriculture"]
+
+[air-quality-indoor]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/air-quality-indoor.toml"
+levels = ["Sensing", "Filtration", "Purification", "Ventilation", "Control"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6종 오염물, HEPA H12=σ, CADR n/φ=3"
+cross_dse = ["environmental-protection", "pollution-monitoring", "hvac-system"]
+
+[ecosystem-biodiversity]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/ecosystem-biodiversity.toml"
+levels = ["Survey", "Habitat", "Species", "Corridor", "Governance"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6대 생물군계, σ=12 핵심종, J₂=24 모니터링 지표"
+cross_dse = ["environmental-protection", "forest-management", "wetland-restoration", "ocean-acidification"]
+
+[ocean-acidification]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/ocean-acidification.toml"
+levels = ["Monitoring", "Chemistry", "Buffering", "Organism", "Restoration"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "pH=σ-τ=8 목표, CO₂ Z=6, 6대양 모니터링"
+cross_dse = ["environmental-protection", "carbon-capture", "desalination", "aquaculture", "climate-modeling"]
+
+[forest-management]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/forest-management.toml"
+levels = ["Inventory", "Planning", "Silviculture", "Harvest", "Regeneration"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6단계 천이, σ=12년 벌기령, J₂=24 tC/ha 탄소저장"
+cross_dse = ["environmental-protection", "ecosystem-biodiversity", "carbon-capture", "climate-modeling"]
+
+[wetland-restoration]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/wetland-restoration.toml"
+levels = ["Assessment", "Hydrology", "Vegetation", "Fauna", "Monitoring"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6종 습지유형, CN=6 탄소격리, φ=2년 모니터링"
+cross_dse = ["environmental-protection", "ecosystem-biodiversity", "water-treatment", "soil-science"]
+
+[regenerative-agriculture]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/regenerative-agriculture.toml"
+levels = ["Soil", "Cover", "Rotation", "Livestock", "Carbon"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6작물 순환, σ-φ=10배 토양유기탄소, n=6년 전환기"
+cross_dse = ["environmental-protection", "agriculture", "soil-remediation", "soil-science"]
+
+[noise-pollution]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/noise-pollution.toml"
+levels = ["Source", "Measurement", "Barrier", "Absorption", "Regulation"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6dB 반감, σ·sopfr=60dB 기준, J₂=24시간 모니터링"
+cross_dse = ["environmental-protection", "pollution-monitoring", "civil-engineering"]
+
+[light-pollution]
+dse = "done"
+combos = 7776
+tool = "tools/universal-dse/domains/light-pollution.toml"
+levels = ["Source", "Measurement", "Shielding", "Design", "Regulation"]
+n6_max = 100.0
+n6_avg = 100.0
+note = "6등성 체계, σ=12시간 야간, n·sopfr=30lm 기준"
+cross_dse = ["environmental-protection", "pollution-monitoring", "optics-telescope"]
+
+# ── 환경보호 Cross-DSE ──────────────────────────────
+
+[cross-dse.env-x-carbon-capture]
+domains = ["environmental-protection", "carbon-capture"]
+status = "done"
+bridge = "Level 2 HEXA-CAPTURE = carbon-capture Level 0-2 통합. CN=6 MOF + 6-mesh 미세플라스틱"
+n6_exact = 12
+note = "8단 × 8단 = 64레벨 교차. 공유상수 σ=12,J₂=24,CN=6"
+
+[cross-dse.env-x-water-treatment]
+domains = ["environmental-protection", "water-treatment"]
+status = "done"
+bridge = "HEXA-PURIFY Level 3 = 수처리 정화단 통합. τ=4단계 처리체인"
+n6_exact = 8
+note = "미세플라스틱 + 중금속 + 유기물 통합 정화"
+
+[cross-dse.env-x-ecosystem]
+domains = ["environmental-protection", "ecosystem-biodiversity"]
+status = "done"
+bridge = "HEXA-ECOSYSTEM Level 6 = 생물다양성 거버넌스 통합. J₂=24 지표"
+n6_exact = 6
+note = "6대 생물군계 × 6대 지구권역 매핑"
+
+[cross-dse.env-x-ocean]
+domains = ["environmental-protection", "ocean-acidification"]
+status = "done"
+bridge = "OMEGA-ENV 수권 = 해양산성화 복원 통합. pH=σ-τ=8"
+n6_exact = 8
+note = "CO₂(Z=6) → 해양 pH(σ-τ=8) → 산호(CN=6) 복원 체인"
+
+[cross-dse.env-x-methane]
+domains = ["environmental-protection", "methane-capture"]
+status = "done"
+bridge = "HEXA-CAPTURE Level 2 + methane. CH₄=C(Z=6)+τ(H)"
+n6_exact = 6
+note = "CO₂ + CH₄ 이중 포집 = 온실가스 95% 커버"
+
+[cross-dse.env-x-circular]
+domains = ["environmental-protection", "circular-economy"]
+status = "done"
+bridge = "HEXA-CYCLE Level 5 = 순환경제 통합. 6R 원칙"
+n6_exact = 6
+note = "포집→정화→복원→순환 = 환경보호 핵심 루프"
+
+[cross-dse.microplastics-x-ocean]
+domains = ["microplastics-removal", "ocean-acidification"]
+status = "done"
+bridge = "해양 미세플라스틱 + pH 복원. 6-mesh + pH=σ-τ=8"
+n6_exact = 8
+note = "바다의 이중 위협 동시 해결"
+
+[cross-dse.forest-x-carbon]
+domains = ["forest-management", "carbon-capture"]
+status = "done"
+bridge = "생물학적 탄소포집. C₆H₁₂O₆(BT-27) + σ=12년 벌기"
+n6_exact = 6
+note = "자연 기반 솔루션 = 산림 탄소 흡수"

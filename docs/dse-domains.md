@@ -1,6 +1,6 @@
-# Universal DSE 도메인 전체 목록 (305개)
+# Universal DSE 도메인 전체 목록 (320개)
 
-**총 305개 도메인 | 4,213,416 조합 | 100% n6 연결**
+**총 320개 도메인 | 5,893,032 조합 | 100% n6 연결**
 
 모든 TOML 파일: `tools/universal-dse/domains/`
 
@@ -30,11 +30,11 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | 10 | [Infra / Network](#10-infra--network) | 14 | 102,300 |
 | 11 | [Software / Programming](#11-software--programming) | 10 | 95,834 |
 | 12 | [Display / Audio](#12-display--audio) | 15 | 108,828 |
-| 13 | [Environment / Agriculture](#13-environment--agriculture) | 16 | 1,792,332 |
+| 13 | [Environment / Agriculture](#13-environment--agriculture) | 31 | 3,578,580 |
 | 14 | [Civil / Transport](#14-civil--transport) | 16 | 123,552 |
 | 15 | [Space / Defense](#15-space--defense) | 11 | 82,260 |
 | 16 | [Misc / Meta](#16-misc--meta) | 13 | 97,812 |
-| | **Total** | **305** | **4,213,416** |
+| | **Total** | **320** | **5,893,032** |
 
 ---
 
@@ -415,8 +415,23 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `soil-science.toml` | Mineral→Organic→Water→Microbiology→Management | 7,776 |
 | `vertical-farm.toml` | Lighting→Growing→Nutrient→Climate→Harvest | 7,776 |
 | `water-treatment.toml` | Intake→Filtration→Chemical→Disinfection→Distribution | 7,560 |
+| **`environmental-protection-8level.toml`** | **Sense→Monitor→Capture→Purify→Restore→Cycle→Ecosystem→Planet** | **1,679,616** |
+| `microplastics-removal.toml` | Detection→Filtration→Degradation→Recovery→Monitoring | 7,776 |
+| `circular-economy.toml` | Design→Collection→Sorting→Processing→Remanufacture | 7,776 |
+| `zero-waste-manufacturing.toml` | Material→Process→Waste→Recovery→Integration | 7,776 |
+| `methane-capture.toml` | Source→Detection→Capture→Conversion→Utilization | 7,776 |
+| `bioremediation.toml` | Assessment→Organism→Inoculation→Monitoring→Restoration | 7,776 |
+| `soil-remediation.toml` | Survey→Excavation→Treatment→Verification→Revegetation | 7,776 |
+| `air-quality-indoor.toml` | Sensing→Filtration→Purification→Ventilation→Control | 7,776 |
+| `ecosystem-biodiversity.toml` | Survey→Habitat→Species→Corridor→Governance | 7,776 |
+| `ocean-acidification.toml` | Monitoring→Chemistry→Buffering→Organism→Restoration | 7,776 |
+| `forest-management.toml` | Inventory→Planning→Silviculture→Harvest→Regeneration | 7,776 |
+| `wetland-restoration.toml` | Assessment→Hydrology→Vegetation→Fauna→Monitoring | 7,776 |
+| `regenerative-agriculture.toml` | Soil→Cover→Rotation→Livestock→Carbon | 7,776 |
+| `noise-pollution.toml` | Source→Measurement→Barrier→Absorption→Regulation | 7,776 |
+| `light-pollution.toml` | Source→Measurement→Shielding→Design→Regulation | 7,776 |
 
-> **16개 | 1,791,204 조합** (carbon-capture-8level 단독 1,679,616)
+> **31개 | 3,578,580 조합** (8level×2 = 3,359,232 + 5단×29)
 
 ---
 

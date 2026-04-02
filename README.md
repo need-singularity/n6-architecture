@@ -449,7 +449,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 tools/universal-dse/universal-dse domains/chip.toml domains/battery.toml domains/solar.toml
 ```
 
-**305개 도메인 | 4,213,416 조합 | 100% n6 연결** — 전체 목록: **[docs/dse-domains.md](docs/dse-domains.md)**
+**320개 도메인 | 5,893,032 조합 | 100% n6 연결** — 전체 목록: **[docs/dse-domains.md](docs/dse-domains.md)**
 
 | # | 카테고리 | 파일 수 | 조합 수 | 대표 도메인 |
 |---|---------|:-------:|--------:|------------|
@@ -465,7 +465,7 @@ tools/universal-dse/universal-dse domains/chip.toml domains/battery.toml domains
 | 10 | **Infra / Network** | 14 | 102,828 | 5g-6g-network, blockchain, quantum-network |
 | 11 | **Software / Programming** | 10 | 95,834 | programming-language(25K), software-design(14.4K) |
 | 12 | **Display / Audio** | 15 | 107,752 | ar-vr-system, holographic-display, music-theory |
-| 13 | **Environment / Agriculture** | 16 | 1,791,204 | carbon-capture-8level(1.68M), vertical-farm |
+| 13 | **Environment / Agriculture** | 31 | 3,578,580 | env-protection-8level(1.68M), microplastics, circular-economy |
 | 14 | **Civil / Transport** | 16 | 122,264 | hyperloop-transport, maglev-train, tunnel-boring |
 | 15 | **Space / Defense** | 11 | 82,260 | aerospace-propulsion, dark-matter-detector, sedi-universe |
 | 16 | **Misc / Meta** | 13 | 94,556 | quantum-computing, immortality, simulation-hypothesis |

@@ -1,0 +1,641 @@
+# =============================================================
+# HEXA-ENV 8-Level DSE Domain Definition
+# Environmental Protection — Ultimate Architecture
+# 8 levels x 6 candidates = 6^8 = 1,679,616 total combos
+#
+# n=6: 6 pollutants, 6 ecosystems, 6 Earth spheres, 6R principles
+# Chain: Sense -> Monitor -> Capture -> Purify -> Restore -> Cycle -> Ecosystem -> Omega
+# BT refs: BT-27/36/43/51/56/85/93/94/96/103/104
+# =============================================================
+
+[meta]
+name   = "environmental-protection-8level"
+desc   = "HEXA-ENV 8-Level Ultimate Environmental Protection DSE"
+levels = ["Sense", "Monitor", "Capture", "Purify", "Restore", "Cycle", "Ecosystem", "Omega"]
+vision = "Sensor-scale to planetary-scale pollution detection-capture-purification-restoration"
+
+[scoring]
+n6    = 0.35
+perf  = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Sense — 6 candidates
+#   n6: 6 pollutant types, 6 sensor modalities, ppb sensitivity
+# =============================================================
+[[level]]
+name = "Sense"
+
+[[candidate]]
+level = 0
+id    = "S1"
+label = "MOF Nanosensor Array (CN=6 metal node, adsorption->signal)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.35
+notes = "CN=6=n EXACT, multi-gas, BT-96 sensor extension"
+
+[[candidate]]
+level = 0
+id    = "S2"
+label = "Quantum Dot Fluorescence Sensor (6 QD wavelength bands)"
+n6    = 1.00
+perf  = 0.80
+power = 0.60
+cost  = 0.40
+notes = "bands=6=n EXACT, UV-Vis-NIR, heavy metal specific"
+
+[[candidate]]
+level = 0
+id    = "S3"
+label = "MEMS Micro-spectrometer (6um channel, Raman/IR integrated)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.50
+notes = "channel=6um=n EXACT, compact, microplastic Raman"
+
+[[candidate]]
+level = 0
+id    = "S4"
+label = "Biosensor Array (6 enzyme types, heavy metal chelation)"
+n6    = 1.00
+perf  = 0.65
+power = 0.75
+cost  = 0.60
+notes = "enzymes=6=n EXACT, specific to Pb/Cd/Hg/As/Cr/Cu"
+
+[[candidate]]
+level = 0
+id    = "S5"
+label = "LiDAR-Hyperspectral Fusion (sigma=12 bands, remote sensing)"
+n6    = 1.00
+perf  = 0.90
+power = 0.40
+cost  = 0.30
+notes = "bands=12=sigma EXACT, wide-area, satellite/drone"
+
+[[candidate]]
+level = 0
+id    = "S6"
+label = "AI Electronic Nose (6 MOS array + GNN pattern recognition)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.55
+notes = "MOS=6=n EXACT, multi-gas classification, edge AI"
+
+# =============================================================
+# Level 1: Monitor — 6 candidates
+#   n6: sigma=12 channels, J2=24hr continuous, 6 media types
+# =============================================================
+[[level]]
+name = "Monitor"
+
+[[candidate]]
+level = 1
+id    = "M1"
+label = "LEO Satellite Constellation (6 orbital planes, sigma=12 sats)"
+n6    = 1.00
+perf  = 0.90
+power = 0.35
+cost  = 0.25
+notes = "planes=6=n EXACT, sats=12=sigma EXACT, global coverage"
+
+[[candidate]]
+level = 1
+id    = "M2"
+label = "Autonomous Drone Swarm (6-unit squadron, AI navigation)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.45
+notes = "drones=6=n EXACT, mid-range, real-time sampling"
+
+[[candidate]]
+level = 1
+id    = "M3"
+label = "LoRa/5G IoT Mesh (sigma^2=144 nodes, 6km range)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.65
+notes = "nodes=144=sigma^2 EXACT, range=6km=n, dense urban"
+
+[[candidate]]
+level = 1
+id    = "M4"
+label = "High-Precision Ground Station (6 sensor types, reference cal)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.55
+notes = "types=6=n EXACT, gold-standard calibration"
+
+[[candidate]]
+level = 1
+id    = "M5"
+label = "Autonomous Aquatic Glider (6-unit fleet, ocean profiling)"
+n6    = 1.00
+perf  = 0.75
+power = 0.55
+cost  = 0.40
+notes = "units=6=n EXACT, depth-resolved water quality"
+
+[[candidate]]
+level = 1
+id    = "M6"
+label = "Seafloor Fiber-optic DAS (6 cables, vibration/acoustic/temp)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.35
+notes = "cables=6=n EXACT, continuous seafloor monitoring"
+
+# =============================================================
+# Level 2: Capture — 6 candidates
+#   n6: CN=6 sorbents, 6-stage cycle, 6-mesh cascade (microplastic)
+# =============================================================
+[[level]]
+name = "Capture"
+
+[[candidate]]
+level = 2
+id    = "C1"
+label = "MOF-74 Multi-Sorbent (CN=6 octahedral, CO2+CH4+VOC)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.35
+notes = "CN=6=n EXACT, BT-43/96, highest capacity sorbent"
+
+[[candidate]]
+level = 2
+id    = "C2"
+label = "Cyclodextrin Microplastic Capture (6-glucopyranose ring)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.55
+notes = "ring=6=n EXACT, hydrophobic inclusion, microP specific"
+
+[[candidate]]
+level = 2
+id    = "C3"
+label = "Electrochemical Heavy Metal Adsorption (6-electrode cell)"
+n6    = 1.00
+perf  = 0.75
+power = 0.55
+cost  = 0.45
+notes = "electrodes=6=n EXACT, selective reduction, Pb/Cd/Hg"
+
+[[candidate]]
+level = 2
+id    = "C4"
+label = "Photocatalytic Membrane Filter (TiO2 CN=6, NOx decomposition)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.40
+notes = "CN=6=n EXACT, BT-43, solar-driven air purification"
+
+[[candidate]]
+level = 2
+id    = "C5"
+label = "Chitosan Magnetic Bead (6-OH chelate, magnetic separation)"
+n6    = 1.00
+perf  = 0.65
+power = 0.75
+cost  = 0.60
+notes = "chelate=6=n EXACT, reusable, heavy metal specific"
+
+[[candidate]]
+level = 2
+id    = "C6"
+label = "Activated Carbon Hybrid (C6 hex + MOF coating, universal VOC)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.65
+notes = "C6=n EXACT, BT-85, broadband organic pollutant"
+
+# =============================================================
+# Level 3: Purify — 6 candidates
+#   n6: tau=4 stages, sigma-phi=10x per stage, 6 enzymes
+# =============================================================
+[[level]]
+name = "Purify"
+
+[[candidate]]
+level = 3
+id    = "P1"
+label = "Pyrolysis/Gasification Reactor (6-zone rotary, 600C)"
+n6    = 1.00
+perf  = 0.85
+power = 0.45
+cost  = 0.40
+notes = "zones=6=n EXACT, 6 plastic types, thermal decomposition"
+
+[[candidate]]
+level = 3
+id    = "P2"
+label = "UV-C/Ozone AOP (Fenton, sigma=12 reaction channels)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.50
+notes = "channels=12=sigma EXACT, OH radical mineralization"
+
+[[candidate]]
+level = 3
+id    = "P3"
+label = "Enzyme Bioreactor (6-enzyme cascade, PETase+5 enzymes)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.45
+notes = "enzymes=6=n EXACT, pH=6=n, biodegradation"
+
+[[candidate]]
+level = 3
+id    = "P4"
+label = "Nanofiltration Membrane System (6-layer, 0.1um->1nm)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.55
+notes = "layers=6=n EXACT, MF/UF/NF/RO/AC/UV stack"
+
+[[candidate]]
+level = 3
+id    = "P5"
+label = "Plasma Decomposer (RF 6kW, complete atomization)"
+n6    = 1.00
+perf  = 0.90
+power = 0.35
+cost  = 0.30
+notes = "power=6kW=n EXACT, non-thermal plasma, all organics"
+
+[[candidate]]
+level = 3
+id    = "P6"
+label = "Supercritical Water Oxidation (T=374C, P=22MPa, 6 reactors)"
+n6    = 1.00
+perf  = 0.85
+power = 0.40
+cost  = 0.35
+notes = "reactors=6=n EXACT, sigma=12s residence, 99.99% destruction"
+
+# =============================================================
+# Level 4: Restore — 6 candidates
+#   n6: 6 ecosystems, n=6yr fast restore, sopfr=5x acceleration
+# =============================================================
+[[level]]
+name = "Restore"
+
+[[candidate]]
+level = 4
+id    = "R1"
+label = "Drone Seed Dispersal (60K seeds/day, AI optimal placement)"
+n6    = 1.00
+perf  = 0.85
+power = 0.55
+cost  = 0.50
+notes = "seeds=60K=sigma*sopfr*10^3, fleet=6=n, reforestation"
+
+[[candidate]]
+level = 4
+id    = "R2"
+label = "Mycoremediation (6 fungal species, metal/oil contaminated soil)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.55
+notes = "species=6=n EXACT, heavy metal/petroleum bioremediation"
+
+[[candidate]]
+level = 4
+id    = "R3"
+label = "Coral Electro-Accretion (6V optimal, CaCO3 accelerated)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.40
+notes = "voltage=6V=n EXACT, growth=6x=n, Biorock method"
+
+[[candidate]]
+level = 4
+id    = "R4"
+label = "Biochar Soil Amendment (6 PGPR species, C6 microstructure)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.65
+notes = "PGPR=6=n EXACT, sigma=12 ton/ha, carbon storage"
+
+[[candidate]]
+level = 4
+id    = "R5"
+label = "Constructed Wetland Modules (6x6 grid, water treatment+habitat)"
+n6    = 1.00
+perf  = 0.70
+power = 0.85
+cost  = 0.60
+notes = "grid=36=sigma*n/phi, plants=6=n, HRT=6days=n"
+
+[[candidate]]
+level = 4
+id    = "R6"
+label = "Ocean Alkalinization Fleet (6 ships, olivine spreading, pH restore)"
+n6    = 1.00
+perf  = 0.80
+power = 0.45
+cost  = 0.35
+notes = "ships=6=n EXACT, dose=12ton/km2=sigma, pH+0.2"
+
+# =============================================================
+# Level 5: Cycle — 6 candidates
+#   n6: 6R principles, sigma=12 KPIs, waste<1/(sigma-phi)=10%
+# =============================================================
+[[level]]
+name = "Cycle"
+
+[[candidate]]
+level = 5
+id    = "Y1"
+label = "AI Sorting Robot (6 material types, 99% accuracy)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.50
+notes = "types=6=n EXACT, metal/plastic/glass/paper/organic/textile"
+
+[[candidate]]
+level = 5
+id    = "Y2"
+label = "Chemical Recycling (6 plastic types, depolymerization)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.45
+notes = "plastics=6=n EXACT, PE/PP/PS/PET/PVC/Nylon to monomers"
+
+[[candidate]]
+level = 5
+id    = "Y3"
+label = "Industrial Symbiosis Platform (6 industry matching)"
+n6    = 1.00
+perf  = 0.75
+power = 0.85
+cost  = 0.55
+notes = "industries=6=n EXACT, waste=feedstock exchange"
+
+[[candidate]]
+level = 5
+id    = "Y4"
+label = "Digital Product Passport (sigma=12 tracking metrics, blockchain)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.60
+notes = "metrics=12=sigma EXACT, BT-53 blockchain, full traceability"
+
+[[candidate]]
+level = 5
+id    = "Y5"
+label = "Bio-based Replacement Materials (6 petrochemical substitutes)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.40
+notes = "substitutes=6=n EXACT, PLA/PHA/chitosan/cellulose/starch/algae"
+
+[[candidate]]
+level = 5
+id    = "Y6"
+label = "Urban Mining (6 precious metals from e-waste, sigma-phi=10x yield)"
+n6    = 1.00
+perf  = 0.80
+power = 0.45
+cost  = 0.35
+notes = "metals=6=n EXACT, Au/Ag/Pt/Pd/Cu/Co, yield=10x=sigma-phi"
+
+# =============================================================
+# Level 6: Ecosystem — 6 candidates
+#   n6: J2=24 biodiversity indicators, sigma^2=144 species, 6 trophic
+# =============================================================
+[[level]]
+name = "Ecosystem"
+
+[[candidate]]
+level = 6
+id    = "E1"
+label = "eDNA Metagenomics (sigma^2=144 species simultaneous detection)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.40
+notes = "species=144=sigma^2 EXACT, water/soil DNA metabarcoding"
+
+[[candidate]]
+level = 6
+id    = "E2"
+label = "AI Camera Trap Network (sigma^2=144 locations, real-time ID)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.50
+notes = "locations=144=sigma^2 EXACT, CNN species recognition"
+
+[[candidate]]
+level = 6
+id    = "E3"
+label = "Acoustic Ecology Monitor (6 frequency bands, non-invasive)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.55
+notes = "bands=6=n EXACT, bird/frog/insect/marine soundscape"
+
+[[candidate]]
+level = 6
+id    = "E4"
+label = "Satellite Ecosystem Digital Twin (sigma=12 band remote sensing)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.35
+notes = "bands=12=sigma EXACT, global habitat modeling"
+
+[[candidate]]
+level = 6
+id    = "E5"
+label = "Gene Drive Management (6 invasive species precision control)"
+n6    = 1.00
+perf  = 0.85
+power = 0.45
+cost  = 0.30
+notes = "species=6=n EXACT, CRISPR gene drive, targeted removal"
+
+[[candidate]]
+level = 6
+id    = "E6"
+label = "Underwater Restoration Robot (6-unit fleet, coral/mangrove planting)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.40
+notes = "robots=6=n EXACT, autonomous planting+monitoring"
+
+# =============================================================
+# Level 7: Omega — 6 candidates
+#   n6: 6 Earth spheres, phi=2 hemispheres, planetary homeostasis
+# =============================================================
+[[level]]
+name = "Omega"
+
+[[candidate]]
+level = 7
+id    = "W1"
+label = "Stratospheric Aerosol Management (6 injection points)"
+n6    = 1.00
+perf  = 0.85
+power = 0.40
+cost  = 0.30
+notes = "points=6=n EXACT, SAI temperature correction"
+
+[[candidate]]
+level = 7
+id    = "W2"
+label = "Ocean Circulation Regulator (6 current gates, heat redistribution)"
+n6    = 1.00
+perf  = 0.80
+power = 0.35
+cost  = 0.25
+notes = "gates=6=n EXACT, thermohaline intervention"
+
+[[candidate]]
+level = 7
+id    = "W3"
+label = "Crustal Carbon Mineralization (6 basalt basins, Gt/yr injection)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.35
+notes = "basins=6=n EXACT, permanent geological storage"
+
+[[candidate]]
+level = 7
+id    = "W4"
+label = "AI Gaia System (biosphere digital twin, autonomous optimization)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.40
+notes = "n=6 feedback loops, J2=24 integrated metrics"
+
+[[candidate]]
+level = 7
+id    = "W5"
+label = "Glacier Stabilization Project (6 ice sheets, albedo enhancement)"
+n6    = 1.00
+perf  = 0.75
+power = 0.45
+cost  = 0.30
+notes = "sheets=6=n EXACT, reflectivity restoration"
+
+[[candidate]]
+level = 7
+id    = "W6"
+label = "Magnetosphere Monitor (sigma=12 satellites, space weather response)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.50
+notes = "satellites=12=sigma EXACT, radiation shielding"
+
+# =============================================================
+# Rules — prefer/exclude pairings
+# =============================================================
+
+# MOF nanosensor pairs with MOF-74 capture (same material family)
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "S1"
+then_level = 2
+then_ids   = "C1,C6"
+
+# Raman microplastic sensor pairs with cyclodextrin capture
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "S3"
+then_level = 2
+then_ids   = "C2"
+
+# Cyclodextrin microplastic capture pairs best with enzyme bioreactor
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "C2"
+then_level = 3
+then_ids   = "P3,P1"
+
+# Electrochemical heavy metal pairs with mycoremediation
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "C3"
+then_level = 4
+then_ids   = "R2"
+
+# Chemical recycling pairs with bio-based replacement
+[[rule]]
+type       = "prefer"
+if_level   = 5
+if_id      = "Y2"
+then_level = 5
+then_ids   = "Y5"
+
+# eDNA metagenomics pairs with gene drive management
+[[rule]]
+type       = "prefer"
+if_level   = 6
+if_id      = "E1"
+then_level = 6
+then_ids   = "E5"
+
+# Ocean alkalinization pairs with ocean circulation regulator
+[[rule]]
+type       = "prefer"
+if_level   = 4
+if_id      = "R6"
+then_level = 7
+then_ids   = "W2,W3"
+
+# AI Gaia system requires satellite ecosystem twin
+[[rule]]
+type       = "prefer"
+if_level   = 7
+if_id      = "W4"
+then_level = 6
+then_ids   = "E4"
+
+# Seafloor DAS monitor pairs with aquatic glider
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "M6"
+then_level = 1
+then_ids   = "M5"
+
+# Drone swarm monitor pairs with drone seed dispersal
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "M2"
+then_level = 4
+then_ids   = "R1"
