@@ -384,15 +384,12 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - TOML 형식: [meta] + [scoring] + [[level]] + [[candidate]] + [[rule]]
     - 도메인 파일: tools/universal-dse/domains/*.toml
 
-  적용 도메인:
-    - chip-architecture: 소재×공정×코어×칩×시스템 (3,000 조합)
-    - battery-architecture: 소재×공정×코어×칩×시스템 (1,908 조합)
-    - solar-architecture: 소재×공정×코어×칩×시스템 (1,584 조합)
-    - material-synthesis: 소재×공정×조립기×제어×시스템 (3,600 조합)
-    - material-synthesis: 원소×공정×조립×제어×공장 (3,600 조합)
-    - fusion: 연료×가둠×가열×블랭킷×발전소 (TOML 정의 완료)
-    - superconductor: 소재×공정×형태×응용×시스템 (TOML 정의 완료)
-    - programming-language: Foundation×Process×Core×Engine×System (5,016 조합)
+  적용 도메인 (305개 TOML, 16 카테고리, 4,213,416 조합):
+    - 전체 목록: docs/dse-domains.md (카테고리별 분류 + 레벨 체인 + 조합 수)
+    - AI/ML(14), Consciousness(23), Semiconductor(25), Energy(24)
+    - SC/Plasma(2), Bio/Medical(26), Physics/Math(24), Robot(7)
+    - Manufacturing(65), Infra/Network(14), Software(10), Display/Audio(15)
+    - Environment(16), Civil/Transport(16), Space/Defense(11), Misc(13)
     - 각 도메인별 후보군은 해당 goal.md + domains/*.toml에 정의
     - 새 궁극 도메인 추가 시 → goal.md + TOML + DSE 탐색 + dse-map.toml 갱신
 
