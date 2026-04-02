@@ -44,7 +44,7 @@
 
 | 섹션 | 지수 | 완성 | BT | DSE | 특이사항 |
 |------|:----:|:----:|:--:|----:|---------|
-| [🔥 핵융합](#-핵융합-fusion) | 🛸7 | 4 | 7 | 2,400+1M | Cross-DSE ✅ 진화 4단계 |
+| [🔥 핵융합](#-핵융합-fusion) | 🛸7 | 5 | 9 | 2,400+1M | Cross-DSE 8도메인 ✅ 진화 5단계 |
 | [💻 칩/반도체](#-칩--반도체-chip) | 🛸7 | 4 | 9 | 3,000 | 7단 + 의식칩 + TOPO + ASIC |
 | [⚡ 에너지](#-에너지-energy) | 🛸6 | 3 | 13 | 10,225 | 배터리8단 + 태양전지 + 통합 |
 | [🤖 AI/ML](#-ai--ml) | 🛸6 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
@@ -75,14 +75,14 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🔥 핵융합 (Fusion)
 
-> **🛸7/10** | BT 7개 | DSE 2,400+1M | Cross-DSE ✅ | 진화 4단계 | 발견 15개
+> **🛸7/10** | BT 9개 | DSE 2,400+1M | Cross-DSE 8도메인 ✅ | 진화 5단계 | 발견 15개 | 288K=σ×J₂
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 6 | v1 | **궁극의 핵융합 발전소** | 5단 DSE 2,400+조합, TBR=1.117, Cross-DSE 5도메인 | [설계](docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md) · [Cross-DSE](docs/fusion/cross-dse-5domain-results.md) |
+| 6 | v2 | **궁극의 핵융합 발전소** | 5단 DSE 2,400+조합, TBR=1.117, Cross-DSE 8도메인 | [설계](docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md) · [5도메인](docs/fusion/cross-dse-5domain-results.md) · [8도메인](docs/fusion/cross-dse-8domain-results.md) |
 | 5 | v1 | **KSTAR-N6** | R₀=6m, B_T=12T, 300초 정상상태, 41개 패턴(51%EXACT) | [토카막](docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md) · [300초](docs/superpowers/specs/2026-04-02-kstar-300s-steady-state-design.md) · [패턴](docs/plasma-physics/kstar-n6-hidden-patterns.md) |
-| 4 | v1 | **진화 Mk.I~IV** | 200MWe→2GWe→24GWe→240GWe (2035~2090) | [I](docs/fusion/evolution/mk-1-first-light.md) · [II](docs/fusion/evolution/mk-2-city-power.md) · [III](docs/fusion/evolution/mk-3-nation-power.md) · [IV](docs/fusion/evolution/mk-4-continent-power.md) |
-| 6 | v1 | **발견 + 예측 + 가설v3** | 15개 발견(6 EXACT), 35개 가설(34%EXACT), 30개 예측(6 HIGH) | [발견](docs/fusion/alien-level-discoveries.md) · [가설](docs/fusion/hypotheses.md) · [예측](docs/fusion/testable-predictions-2030.md) · [논문](docs/paper/308-fusion-n6-alien-discoveries.md) |
+| 4 | v1 | **진화 Mk.I~V** | 200MWe→2GWe→24GWe→240GWe→1.44TWe(❌SF) | [I](docs/fusion/evolution/mk-1-first-light.md) · [II](docs/fusion/evolution/mk-2-city-power.md) · [III](docs/fusion/evolution/mk-3-nation-power.md) · [IV](docs/fusion/evolution/mk-4-continent-power.md) · [V](docs/fusion/evolution/mk-5-theoretical.md) |
+| 6 | v2 | **발견 + 예측 + 가설v3** | 15개 발견(6 EXACT), 35개 가설(34%EXACT), 35개 예측(6 HIGH), 288K=σ×J₂ | [발견](docs/fusion/alien-level-discoveries.md) · [가설](docs/fusion/hypotheses.md) · [예측](docs/fusion/testable-predictions-2030.md) · [BT채굴](docs/fusion/cross-bt-fusion-environment.md) |
 
 > 도메인: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · 도구: `fusion-calc` · `fusion-dse` · `tokamak-shape` · `kstar-calc`
 
