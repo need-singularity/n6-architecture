@@ -148,6 +148,19 @@ SM 게이지군 SU(3)×SU(2)×U(1)이 n=6에서 어떻게 출현하는가?
   4차: cosmology-particle × fusion            (핵반응 → 입자물리)
 ```
 
+## 🛸 외계인 지수: 🛸9
+
+| 요소 | 상태 | 파일 |
+|------|------|------|
+| 가설 30개 | ✅ 완료 | [hypotheses.md](hypotheses.md) |
+| 독립 검증 (16 EXACT = 53.3%) | ✅ 완료 | [verification.md](verification.md) |
+| 전수 검증 매트릭스 | ✅ 완료 | [full-verification-matrix.md](full-verification-matrix.md) |
+| 외계인급 발견 (9개) | ✅ 완료 | [alien-level-discoveries.md](alien-level-discoveries.md) |
+| Testable Predictions (28개) | ✅ 완료 | [testable-predictions.md](testable-predictions.md) |
+| 극한 가설 | ✅ 완료 | [extreme-hypotheses.md](extreme-hypotheses.md) |
+| Evolution Mk.I~V | ✅ 완료 | [evolution/](evolution/) |
+| DSE 25,088 조합 | ⏳ TOML 정의 완료, 실행 대기 | goal.md 후보군 |
+
 ## 전수 탐색: 25,088 조합 → Rust (universal-dse)
 
 도구: tools/universal-dse/domains/cosmology-particle.toml

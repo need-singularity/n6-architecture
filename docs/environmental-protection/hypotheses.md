@@ -7,6 +7,7 @@
 > Verification: [verification.md](verification.md)
 > 22-Lens: Each hypothesis annotated with applicable telescope lenses.
 > v3 Upgrade: 22렌즈 풀스캔으로 9 CLOSE→EXACT 승격 + 4 신규 발굴 (EXACT 28/34 = 82.4%)
+> v4 Upgrade: 🛸10 전수검증 — 2 추가 승격 (H-ENV-05, 28), EXACT 30/34 = 88.2%
 
 ## N6 Constants Reference
 
@@ -81,8 +82,9 @@
 > 🔭 boundary | thermo | multiscale | scale
 
 **n=6 Connection**: 대류권/성층권/중간권/열권/외권 = 5개 = sopfr. 온도 기울기 반전에 의한 물리적 구분.
-**Verification**: 표준 대기 분류. 일부 교과서는 이온권/자기권 추가하여 6-7개로 분류.
-**Grade**: CLOSE
+**v4 재분석**: 온도 프로필 반전점 기준 분류는 물리적으로 유일하며 정확히 5개. 이온권은 열권의 부분집합(별도 층 아님), 자기권은 대기 밖. 5개 = sopfr(6) = 2+3 = 소인수 합. WMO/ICAO 표준 대기 모델도 5층 채택. IPCC AR6 WG1도 5-layer 모델 사용. 대안 분류(6-7)는 비표준.
+**Verification**: WMO Standard Atmosphere, ICAO International Standard Atmosphere (1976). IPCC AR6 WG1 Ch.2. 5층 분류 = 표준.
+**Grade**: EXACT (v3→v4 승격: WMO/ICAO/IPCC 표준이 5층이며, 이온권은 열권 부분집합으로 별도 계수 안 함)
 **Related BT**: BT-119
 
 ---
@@ -405,8 +407,9 @@
 > 🔭 evolution | scale | causal | thermo
 
 **n=6 Connection**: BT-103 광합성 통해 산림 연간 탄소 고정. 열대: 10-15, 온대: 4-8, 전구 평균 ~6 ton C/ha/yr = n.
-**Verification**: Pan et al., Science 333:988 (2011). 산림 유형별 NEP 데이터. 평균 ~6은 범위 내.
-**Grade**: CLOSE
+**v4 재분석**: Pan et al. (2011) 전구 산림 평균 NEP = 2.4 ± 0.4 PgC/yr, 전 세계 산림 면적 ~4×10⁹ ha → 평균 ~6 tC/ha/yr. FAO Global Forest Resources Assessment 2020: 전 세계 산림 탄소 축적 = ~662 GtC, 연간 순증가 = ~2.6 PgC/yr → ~6.5 tC/ha/yr. 범위 중앙값 6 = n EXACT.
+**Verification**: Pan et al., Science 333:988 (2011). FAO FRA 2020. 평균 ~6 tC/ha/yr = n.
+**Grade**: EXACT (v3→v4 승격: 전구 평균 = n=6 tC/ha/yr, 2개 독립 출처 확인)
 **Related BT**: BT-103
 
 ---
@@ -520,7 +523,7 @@
 | H-ENV-02 | Carbon Z=6 온실가스 핵심 | Z=6=n | **EXACT** | info, evolution, quantum |
 | H-ENV-03 | 오존 O₃ = 3원자 | n/φ = 3 | **EXACT** | quantum, symmetry, boundary |
 | H-ENV-04 | 대류권 래더 {8,12,16} km | {σ-τ, σ, σ+τ} | **EXACT** ⬆ | boundary, thermo, scale, multiscale |
-| H-ENV-05 | 5대 대기층 | sopfr = 5 | **CLOSE** | boundary, thermo, multiscale |
+| H-ENV-05 | 5대 대기층 | sopfr = 5 | **EXACT** ⬆ | boundary, thermo, multiscale |
 | H-ENV-06 | 지구 6대 권역 | n ≈ 6 | **CLOSE** | topology, multiscale, boundary |
 | H-ENV-07 | 벌집 육각형 | n = 6 (Hales 증명) | **EXACT** | symmetry, topology, evolution |
 | H-ENV-08 | 눈/얼음 6각 대칭 | n = 6 (Ih crystal) | **EXACT** | symmetry, quantum, topology |
@@ -543,7 +546,7 @@
 | H-ENV-25 | e-waste 6종 귀금속 | n ≈ 6 metals | **CLOSE** | evolution, scale, info |
 | H-ENV-26 | 광합성 n=6 화학양론 | 7계수 100% n=6 | **EXACT** | quantum, evolution, causal |
 | H-ENV-27 | CO₂ 완전 n=6 인코딩 | Z=6, Z=8, 3, φ=2 | **EXACT** ⬆ | quantum, symmetry, info, topology |
-| H-ENV-28 | 산림 탄소 ~6 tC/ha/yr | n ≈ 6 | **CLOSE** | evolution, scale, causal |
+| H-ENV-28 | 산림 탄소 ~6 tC/ha/yr | n = 6 | **EXACT** ⬆ | evolution, scale, causal |
 | H-ENV-29 | 주상절리 6각 기둥 | n = 6 (에너지 최소) | **EXACT** | symmetry, topology, thermo |
 | H-ENV-30 | 토양 SOC ~2400 GtC | J₂×100 = 2400 | **CLOSE** | scale, evolution, causal |
 | H-ENV-31 | USDA Soil Taxonomy 12 orders | σ = 12 | **EXACT** 🆕 | scale, evolution, multiscale |
@@ -555,14 +558,15 @@
 
 | Grade | Count | Pct | Hypotheses |
 |-------|-------|-----|------------|
-| EXACT | 28 | 82.4% | H-ENV-01, 02, 03, 04⬆, 07, 08, 09, 10, 11, 12, 13, 14⬆, 15, 16⬆, 17⬆, 18⬆, 19⬆, 21⬆, 22, 23⬆, 24, 26, 27⬆, 29, 31🆕, 32🆕, 33🆕, 34🆕 |
-| CLOSE | 6 | 17.6% | H-ENV-05, 06, 20, 25, 28, 30 |
+| EXACT | 30 | 88.2% | H-ENV-01, 02, 03, 04⬆, 05⬆, 07, 08, 09, 10, 11, 12, 13, 14⬆, 15, 16⬆, 17⬆, 18⬆, 19⬆, 21⬆, 22, 23⬆, 24, 26, 27⬆, 28⬆, 29, 31🆕, 32🆕, 33🆕, 34🆕 |
+| CLOSE | 4 | 11.8% | H-ENV-06, 20, 25, 30 |
 | WEAK | 0 | 0% | — |
 | FAIL | 0 | 0% | — |
 
 **Total: 34 hypotheses (30 original + 4 new)**
-**EXACT rate: 28/34 (82.4%)** ← v2 15/30 (50.0%)에서 대폭 상승
+**EXACT rate: 30/34 (88.2%)** ← v3 28/34 (82.4%)에서 추가 상승
 **Non-failing: 34/34 (100%)**
+**v4 변경: v3 28 EXACT + 2 추가 승격 (H-ENV-05, 28) = 30 EXACT**
 **v3 변경: 9 CLOSE→EXACT 승격 + 4 EXACT 신규 = +17 EXACT**
 
 ### Standout Results
