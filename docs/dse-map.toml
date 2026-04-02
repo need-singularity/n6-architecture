@@ -274,7 +274,13 @@ best_fusion_30T = "REBCO + PIT + FlatTape2G + Hybrid_LH + Hybrid_4K20K + FusionM
 n6_max = 100.0
 n6_avg = 85.9
 fusion_30T_combos = 1020
-note = "궁극의 초전도체 6단 DSE. 30T+ 핵융합 1,020 경로"
+alien_level = 9
+verification_matrix = "docs/superconductor/full-verification-matrix.md"
+thermodynamic_limits = "docs/superconductor/thermodynamic-limits.md"
+total_claims = 187
+verified_pct = 75.9
+hypothesis_exact_pct = 20.0
+note = "🛸9: 187claims 전수검증(76%verified, 50가설 20%EXACT). 🛸10 물리한계분석: Tc/CN/Φ₀ AT LIMIT, Jc/COP/cost 갭 존재"
 
 [energy-generation]
 goal = true

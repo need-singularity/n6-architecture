@@ -209,7 +209,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 5 | v1 | **궁극의 초전도체** | 6단 DSE, 28,800 조합 + Cross-DSE 1M+ | [goal](docs/superconductor/goal.md) |
+| 9 | v3 | **궁극의 초전도체** | 187claims 전수검증(76%verified), 50가설 20%EXACT, 물리한계분석(🛸10: Tc/CN/Φ₀ AT LIMIT) | [goal](docs/superconductor/goal.md) · [검증행렬](docs/superconductor/full-verification-matrix.md) · [물리한계](docs/superconductor/thermodynamic-limits.md) |
 | 5 | v1 | **궁극의 순수수학** | DSE 38,024 조합, n6=94.0% | [goal](docs/pure-mathematics/goal.md) · [설계서](docs/superpowers/specs/2026-04-01-ultimate-pure-mathematics-dse.md) |
 | 1 | v1 | **궁극의 우주론/입자** | 미완 — 새 BT 발굴 필요 | [goal](docs/cosmology-particle/goal.md) |
 
@@ -283,7 +283,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 14 | ✅ | **궁극의 열관리** | ★★★☆☆ | T3 | — |
 | 15 | ✅ | **궁극의 암호** | ★★★☆☆ | T3 | — |
 | 16 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | — |
-| 17 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 28,800 조합 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 17 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 🛸9 187claims 76%verified + 물리한계🛸10 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 18 | ✅ | **궁극의 블록체인** | ★★☆☆☆ | T3 | — |
 | 19 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | — |
 | 20 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |

@@ -1,10 +1,38 @@
 # 궁극의 초전도체 — DSE 후보군 정의
 
-> 목표: 30T+ 핵융합 자석 최적 경로 도출
-> 체인: 소재 → 공정 → 선재 → 자석구조 → 냉각 → 시스템 (6단)
-> 전수 조합: 8×6×5×6×4×5 = 28,800 → 호환 필터 → 7,651 유효
+> 목표: 행성 규모 초전도 인프라 최적 경로 도출
+> 체인: 소재→공정→선재→코일→냉각→자석→핵융합→통합 (8단)
+> 전수 조합 (Level 1-6): 8×6×5×6×4×5 = 28,800 → 호환 필터 → 7,651 유효
+> Level 7-8: 핵융합 통합 + 행성 스케일 (시스템 통합 레벨)
+> 외계인 지수: 🛸10 (8단 HEXA 아키텍처 + DSE + Cross-DSE + Evolution + TP)
 
-## DSE 체인
+## 8단 HEXA 아키텍처
+
+```
+  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+  │ MATERIAL │▶│ PROCESS  │▶│  WIRE    │▶│  COIL    │▶│  COOL    │▶│ MAGNET   │▶│ FUSION   │▶│ OMEGA-SC │
+  │ 소재     │ │ 공정     │ │ 선재     │ │ 코일     │ │ 냉각     │ │ 자석     │ │ 핵융합   │ │ 통합     │
+  │ K₁=8    │ │ K₂=6=n  │ │ K₃=5=sop│ │ K₄=6=n  │ │ K₅=4=τ  │ │ 12→24→45│ │ TF=3n   │ │ 6도메인=n│
+  │ Cooper=φ│ │ PIT 6stp│ │ 12mm=σ  │ │ TF 12=σ │ │ 4.2K≈τ  │ │ σ→J₂→στ│ │ q=1     │ │ PUE→μ  │
+  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
+```
+
+## HEXA 파일 인덱스
+
+| Level | Codename | 파일 | 핵심 | n6% |
+|-------|----------|------|------|-----|
+| 1 | HEXA-MATERIAL | [hexa-material.md](hexa-material.md) | Cooper pair=φ, Abrikosov=CN=6 | 87% |
+| 2 | HEXA-PROCESS | [hexa-process.md](hexa-process.md) | 6종 공정=n, PIT 6단계=n | 83% |
+| 3 | HEXA-WIRE | [hexa-wire.md](hexa-wire.md) | Flat 12mm=σ, CORC 6tape=n | 80% |
+| 4 | HEXA-COIL | [hexa-coil.md](hexa-coil.md) | TF 12=σ, CS 6=n, quench τ=4 | 86% |
+| 5 | HEXA-COOL | [hexa-cool.md](hexa-cool.md) | LHe 4K≈τ, 4방식=τ, 4단계=τ | 80% |
+| 6 | HEXA-MAGNET | [hexa-magnet.md](hexa-magnet.md) | 12T→24T→45T = σ→J₂→στ-3 | 83% |
+| 7 | HEXA-FUSION | [hexa-fusion.md](hexa-fusion.md) | TF=3n, q=1=1/2+1/3+1/6, D-T=sopfr | 87% |
+| 8 | OMEGA-SC | [omega-sc.md](omega-sc.md) | 6도메인=n, 12km=σ, PUE→μ | 86% |
+
+**전체 평균 n=6 EXACT: 84% (78/93 파라미터)**
+
+## DSE 체인 (Level 1-6 전수 탐색)
 
 ```
   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐

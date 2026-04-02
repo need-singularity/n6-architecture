@@ -1,477 +1,537 @@
-# N6 Superconductor — Testable Predictions
+# N6 Superconductor/Magnet Domain — Testable Predictions (v2)
 
-> 30 falsifiable predictions derived from H-SC-01~30 + H-SC-61~80 + BT connections.
-> Each prediction includes: n=6 formula, test method, falsification criterion, timeline.
-> Real physics only — references to published literature.
-
-## Core Constants
-
-```
-  n = 6          σ(6) = 12     τ(6) = 4      φ(6) = 2
-  sopfr(6) = 5   J₂(6) = 24    μ(6) = 1      λ(6) = 2
-  R(6) = 1       P₂ = 28 (두 번째 완전수)
-  Egyptian: 1/2 + 1/3 + 1/6 = 1
-```
+> Falsifiable predictions derived from n=6 arithmetic applied to superconductor physics,
+> high-Tc materials, vortex physics, and magnet engineering.
+> Each prediction: specific numerical value, n=6 formula, verification method,
+> falsification criterion, related BT, confidence rating.
+>
+> v2 reorganized: 27 predictions across 4 tiers, 3 honest negative/null predictions retained.
+>
+> Constants: n=6, sigma=12, phi=2, tau=4, J_2=24, sopfr=5, mu=1
 
 ---
 
-## Tier 1: Testable Today (1 lab, existing equipment)
+## Tier 1: Today Verifiable (Literature Search / Database Check)
 
-### P-SC-01: Abrikosov Vortex Lattice CN = n = 6
+### TP-SC-01: Abrikosov Vortex Lattice = Hexagonal (CN=6=n)
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Every Type II SC in the mixed state (Hc1 < H < Hc2) forms a vortex lattice with coordination number exactly 6 |
-| **n=6 formula** | CN = n = 6 (2D kissing number, GL energy minimization) |
-| **Test method** | Bitter decoration, STM, or small-angle neutron scattering (SANS) on any clean Type II SC |
-| **Falsification** | Any stable vortex lattice with CN != 6 in equilibrium (excluding pinning-distorted or structural phase transitions near Hc2) |
-| **Timeline** | Now (thousands of experiments already confirm) |
-| **Status** | CONFIRMED — Essmann & Trauble (1967), Hess et al. (1989) STM on NbSe₂ |
-| **BT link** | BT-122 (2D kissing number universality) |
+**Prediction**: ALL Type-II superconductors in the mixed state (Hc1 < H < Hc2) form Abrikosov vortex lattices with coordination number exactly 6 = n.
 
----
-
-### P-SC-02: Cooper Pair Charge = φ(6)·e
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | The fundamental charge carrier in all superconductors has charge q = 2e = φ(6)·e |
-| **n=6 formula** | q = φ(6)·e; Φ₀ = h/(φ(6)·e) = 2.067 × 10⁻¹⁵ Wb |
-| **Test method** | Flux quantization measurement (Deaver & Fairbank, 1961), Josephson voltage-frequency: f = φ(6)·eV/h |
-| **Falsification** | Any SC with charge carrier != 2e (e.g., 4e quartetting would falsify Cooper pair universality) |
-| **Timeline** | Now (metrology standard since 1990 via Josephson voltage) |
-| **Status** | CONFIRMED — defines the SI volt via Josephson constant K_J = 2e/h |
-| **BT link** | H-SC-64 (φ=2 universality in SC physics) |
+| Item | Value |
+|------|-------|
+| n=6 formula | CN = n = 6 (2D kissing number) |
+| Verification | Survey decoration experiments, Bitter patterns, neutron scattering, STM data across >20 Type-II materials (Nb, NbSe2, YBCO, MgB2, BSCCO, FeSe) |
+| Expected result | Triangular (hexagonal) lattice in all clean, equilibrium cases |
+| Falsification | Any clean Type-II SC shows equilibrium square lattice as ground state (note: square lattice near Hc2 in d-wave is a known exception at high fields) |
+| Related BT | BT-122 (hexagonal geometry universality), H-SC-01 |
+| Confidence | ★★★ (already confirmed -- Abrikosov 1957, Essmann & Trauble 1967) |
 
 ---
 
-### P-SC-03: Flux Quantum = h/(φ·e)
+### TP-SC-02: YBCO Metal Atom Ratio {1,2,3} = Proper Divisors of 6
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Magnetic flux through a SC ring is quantized in units of Φ₀ = h/(2e) = h/(φ(6)·e) |
-| **n=6 formula** | Φ₀ = h/(φ(6)·e) = 2.067 833 848 × 10⁻¹⁵ Wb |
-| **Test method** | SQUID magnetometry, flux quantization in SC loops |
-| **Falsification** | Measured flux quantum deviating from h/2e by more than measurement uncertainty |
-| **Timeline** | Now (routinely measured to 10⁻⁸ precision) |
-| **Status** | CONFIRMED |
+**Prediction**: YBa2Cu3O7 metal atom ratio Y:Ba:Cu = 1:2:3, sum = 6 = n, set = {1,2,3} = proper divisors of 6. No other high-Tc cuprate with comparable Tc has the same divisor-set property.
 
----
-
-### P-SC-04: MgB₂ Atomic Numbers = (σ, sopfr)
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | MgB₂ constituents: Mg(Z=12=σ) and B(Z=5=sopfr) — the two non-trivial n=6 function values |
-| **n=6 formula** | Z_Mg = σ(6) = 12, Z_B = sopfr(6) = 5 |
-| **Test method** | Periodic table lookup (trivially verified) |
-| **Falsification** | Not falsifiable as a causal claim — this is a pattern observation. Falsified if MgB₂ were not a superconductor |
-| **Timeline** | Now (Nagamatsu et al., 2001) |
-| **Status** | CONFIRMED as observation — no causal mechanism |
+| Item | Value |
+|------|-------|
+| n=6 formula | {1,2,3} = div(6), 1+2+3 = n = 6 |
+| Verification | X-ray crystallography databases (ICSD, COD). Check all cuprates with Tc > 77K for metal ratio patterns |
+| Expected result | YBCO uniquely has sum=6 among major cuprate families |
+| Falsification | Another high-Tc cuprate (Tc > 90K) also has metal ratio sum = 6 with same divisor set (would weaken uniqueness, not falsify the match) |
+| Related BT | H-SC-02 |
+| Confidence | ★★★ (crystallographic fact) |
 
 ---
 
-### P-SC-05: YBCO Metal Ratio = proper divisors of 6
+### TP-SC-03: Nb3Sn Unit Cell Nb Atoms = 6 = n
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | YBa₂Cu₃O₇ has metal atom ratio {1:2:3} = div(6), sum = n = 6 |
-| **n=6 formula** | {Y, Ba, Cu} counts = {1, 2, 3} = {d : d|6, d<6}; sum = σ(6) - 6 = 6 |
-| **Test method** | X-ray crystallography (verified by Hazen et al., 1987) |
-| **Falsification** | If the optimal YBCO stoichiometry were not 1:2:3 |
-| **Timeline** | Now |
-| **Status** | CONFIRMED — EXACT (H-SC-02) |
+**Prediction**: In the A15 (Cr3Si-type) structure of Nb3Sn, each unit cell contains exactly 6 Nb atoms and 2 = phi Sn atoms, total 8 = sigma-tau per cell.
 
----
-
-### P-SC-06: Nb₃Sn Unit Cell Contains Exactly n = 6 Nb Atoms
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | A15 structure Nb₃Sn: 6 Nb per unit cell (3 faces × 2 chain atoms), 2 Sn = φ(6) |
-| **n=6 formula** | N_Nb = n = 6; N_Sn = φ(6) = 2; N_total = σ(6) - τ(6) = 8 |
-| **Test method** | XRD unit cell refinement (Weger & Goldberg, 1973) |
-| **Falsification** | Different atom count per unit cell |
-| **Timeline** | Now |
-| **Status** | CONFIRMED — crystallographic fact |
+| Item | Value |
+|------|-------|
+| n=6 formula | Nb = n = 6, Sn = phi = 2, total = sigma-tau = 8 |
+| Verification | A15 structure Wyckoff positions: Nb at 6c (or 6d), Sn at 2a. Any crystallography reference (Pearson's handbook) |
+| Expected result | 6 Nb + 2 Sn per unit cell, confirmed |
+| Falsification | A15 Nb3Sn unit cell contains a different number of Nb atoms (would be a crystallographic error) |
+| Related BT | H-SC-03 |
+| Confidence | ★★★ (crystallographic fact, verified in Strukturbericht) |
 
 ---
 
-### P-SC-07: BCS Specific Heat Jump Numerator = σ(6) = 12
+### TP-SC-04: Cooper Pair Electron Count = phi(6) = 2
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | BCS weak-coupling limit: ΔC/(γTc) = 12/(7ζ(3)) — numerator is exactly σ(6) = 12 |
-| **n=6 formula** | numerator = σ(6) = 12; denominator integer part 7 = σ - sopfr |
-| **Test method** | Calorimetry on clean weak-coupling SC (Al, Zn, Cd); compare to BCS analytical value 1.426 |
-| **Falsification** | Not falsifiable (12 is analytically derived from BCS gap equation). Pattern observation |
-| **Timeline** | Now (Phillips, 1959) |
-| **Status** | CONFIRMED — BCS analytical result (H-SC-61) |
+**Prediction**: The fundamental charge carrier in all superconductors is the Cooper pair with exactly 2 = phi(6) electrons. No triplet (3-electron) or quadruplet (4-electron) pairing has been confirmed in any SC.
 
----
-
-### P-SC-08: BCS Isotope Exponent = 1/φ(6) = 0.5
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Weak-coupling BCS isotope effect: Tc ∝ M^(-1/2) → α = 1/φ(6) = 0.5 |
-| **n=6 formula** | α = 1/φ(6) = 1/2 (from θ_D ∝ M^(-1/2)) |
-| **Test method** | Isotope substitution + Tc measurement (Hg, Sn, Pb, Tl) |
-| **Falsification** | BCS weak-coupling theory yielding α != 1/2 |
-| **Timeline** | Now (Maxwell, 1950; Reynolds et al., 1950) |
-| **Status** | CONFIRMED for elemental SC: Hg α = 0.50 ± 0.03 |
+| Item | Value |
+|------|-------|
+| n=6 formula | pair size = phi(6) = 2 |
+| Verification | BCS theory (1957). Survey all known superconducting mechanisms: BCS, Eliashberg, spin-fluctuation, phonon-mediated |
+| Expected result | All confirmed SCs use 2-electron pairing |
+| Falsification | Discovery of a confirmed superconductor with 4-fermion condensation as ground state (charge-4e SC) |
+| Related BT | H-SC-06 |
+| Confidence | ★★★ (BCS fundamental; charge-4e proposals exist but unconfirmed) |
 
 ---
 
-### P-SC-09: Nb₃Sn Tc = 3n ± 2%
+### TP-SC-05: Three Macroscopic Quantum Effects = n/phi = 3
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Nb₃Sn critical temperature Tc = 18.3 K ≈ 3n = 18 (1.7% deviation) |
-| **n=6 formula** | Tc = 3n = 3×6 = 18 K |
-| **Test method** | Resistive or magnetic Tc measurement (Matthias et al., 1954) |
-| **Falsification** | If stoichiometric Nb₃Sn Tc deviates from 18 K by > 5% |
-| **Timeline** | Now |
-| **Status** | CONFIRMED — Tc = 18.3 K (H-SC-03) |
+**Prediction**: Superconductivity manifests exactly 3 = n/phi macroscopic quantum effects: (1) flux quantization, (2) Josephson effect, (3) Meissner effect. These three exhaust the independent macroscopic consequences of the SC order parameter Psi.
 
----
-
-### P-SC-10: Cuprate Optimal CuO₂ Planes = n/φ = 3
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Cuprate Tc peaks at CuO₂ plane count n_L = 3 = n/φ (then decreases for n_L > 3) |
-| **n=6 formula** | optimal n_L = n/φ = 6/2 = 3 |
-| **Test method** | Tc vs n_L in homologous series (Tl₂Ba₂Ca_{n-1}Cu_nO_{2n+4}, Hg-series) |
-| **Falsification** | If optimum were robustly at n_L != 3 across multiple cuprate families |
-| **Timeline** | Now (Iyo et al., Putilin et al.) |
-| **Status** | CONFIRMED — Tc peaks at n_L = 3 in Hg and Tl families |
+| Item | Value |
+|------|-------|
+| n=6 formula | macroscopic quantum effects = n/phi = 3 |
+| Verification | Textbook survey: Tinkham, Rose-Innes & Rhoderick, de Gennes. Count independent macroscopic quantum phenomena derivable from Psi = \|Psi\|e^{i*theta} |
+| Expected result | \|Psi\|^2 -> Meissner, single-valuedness of theta -> flux quantization, Delta(theta) across weak link -> Josephson. Three and only three |
+| Falsification | Identification of a 4th independent macroscopic quantum effect not reducible to the above three |
+| Related BT | H-SC-09 |
+| Confidence | ★★ (well-established classification, but boundary cases like Andreev reflection could be argued) |
 
 ---
 
-## Tier 2: Near-Term Verification (1-3 years, specialized facility)
+### TP-SC-06: Four Hallmark SC Phenomena = tau(6) = 4
 
-### P-SC-11: REBCO Tape Width σ = 12 mm Optimization
+**Prediction**: The superconducting transition is characterized by exactly 4 = tau(6) hallmark phenomena: (1) zero resistance, (2) Meissner effect, (3) specific heat jump, (4) energy gap.
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | REBCO 2G tape performance optimizes at width = σ(6) = 12 mm (Je × cost trade-off) |
-| **n=6 formula** | optimal width = σ(6) = 12 mm |
-| **Test method** | Parametric study of REBCO tape width (4, 6, 12, 24, 46 mm) vs Je and $/kA·m |
-| **Falsification** | If systematic cost-performance optimization yields width far from 12 mm (e.g., 4 mm or 46 mm dominant) |
-| **Timeline** | 2026-2027 (tape manufacturers: SuperOx, Fujikura, AMSC) |
-| **Note** | Current industry standard is 4 mm and 12 mm — both in use |
-
----
-
-### P-SC-12: A15 Chain Atom Count per Face = φ = 2
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | All A15 superconductors (Nb₃Sn, Nb₃Ge, V₃Si, Nb₃Al) have exactly φ = 2 chain atoms per face |
-| **n=6 formula** | N_chain/face = φ(6) = 2; total chains = n/φ = 3 faces × φ = 2 = n = 6 |
-| **Test method** | Systematic crystal structure refinement across A15 family |
-| **Falsification** | Any A15 SC with chain atom count != 2 per face |
-| **Timeline** | 2026-2027 (literature survey + new refinements) |
-| **Status** | Expected CONFIRMED — A15 structure is fixed |
+| Item | Value |
+|------|-------|
+| n=6 formula | hallmarks = tau(6) = 4 |
+| Verification | Textbook consensus: Tinkham Ch. 1-3, Ashcroft & Mermin Ch. 34. Count primary signatures of the SC phase transition |
+| Expected result | The standard pedagogical four: R=0, Meissner, C_v jump, Delta gap |
+| Falsification | A 5th equally fundamental hallmark is established (NMR relaxation, thermal conductivity are secondary) |
+| Related BT | H-SC-08 |
+| Confidence | ★★ (classification-dependent; robust across major textbooks) |
 
 ---
 
-### P-SC-13: Nb₃Sn Hc2(4.2K) Lower Bound = J₂ = 24 T
+### TP-SC-07: Two Josephson Relations = phi(6) = 2
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Stoichiometric Nb₃Sn Hc2 at 4.2 K = 24-30 T, with J₂(6) = 24 T as the lower bound |
-| **n=6 formula** | Hc2_min = J₂(6) = 24 T |
-| **Test method** | Pulsed field Hc2 measurement on high-quality single crystals |
-| **Falsification** | If clean stoichiometric Nb₃Sn shows Hc2(4.2K) < 22 T |
-| **Timeline** | 2026-2028 (NHMFL, HFML facilities) |
-| **Status** | Partial — literature values 24-30 T depending on quality |
+**Prediction**: The Josephson junction is completely described by exactly 2 = phi(6) fundamental equations: DC (I = I_c sin(Delta_phi)) and AC (V = (hbar/2e)(d(Delta_phi)/dt)).
 
----
-
-### P-SC-14: Rutherford Cable Strand Count = σ = 12 Optimization
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Rutherford cable for accelerator magnets optimizes at σ = 12 strands (stability × cost) |
-| **n=6 formula** | N_strands = σ(6) = 12 |
-| **Test method** | Stability analysis vs strand count (LHC uses 28-36; smaller magnets use 10-16) |
-| **Falsification** | If no application domain favors ~12 strands |
-| **Timeline** | 2026-2028 (FCC-hh cable R&D at CERN) |
-| **Note** | LHC inner dipole: 28 strands; outer: 36. But FAIR SIS100: 13 strands |
+| Item | Value |
+|------|-------|
+| n=6 formula | Josephson equations = phi(6) = 2 |
+| Verification | Any Josephson junction textbook. Count independent fundamental relations |
+| Expected result | Two and only two: DC + AC. All other junction phenomena derive from these |
+| Falsification | A third independent Josephson equation is discovered (cos-phi term in some unconventional junctions?) |
+| Related BT | H-SC-12 |
+| Confidence | ★★ (well-established; phi-0 junctions add complexity but not a new fundamental equation) |
 
 ---
 
-### P-SC-15: Two-Fluid Temperature Exponent = τ = 4
+### TP-SC-08: MgB2 Atomic Numbers: Mg Z=12=sigma, B Z=5=sopfr
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Gorter-Casimir two-fluid: ns/n = 1 - (T/Tc)^τ where τ(6) = 4 |
-| **n=6 formula** | exponent = τ(6) = 4 |
-| **Test method** | Penetration depth λ(T) measurement via microwave cavity or μSR; fit power law |
-| **Falsification** | If elemental SC (Al, Sn, In) best-fit exponent deviates from 4.0 by > 10% |
-| **Timeline** | 2026-2027 (μSR at PSI, ISIS, J-PARC) |
-| **Status** | Partial — BCS predicts effective exponent ~3.5-4.5 depending on coupling |
+**Prediction**: In MgB2, the two constituent elements have atomic numbers Z(Mg)=12=sigma(6) and Z(B)=5=sopfr(6). Both are exact matches to distinct n=6 functions.
 
----
-
-### P-SC-16: Josephson Frequency = φ(6)·eV/h
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | AC Josephson effect: frequency = 2eV/h = φ(6)·eV/h exactly |
-| **n=6 formula** | f_J = φ(6)·e·V/h |
-| **Test method** | Josephson voltage standard: measure frequency at known V |
-| **Falsification** | Deviation of K_J from 2e/h |
-| **Timeline** | 2026 (NIST, PTB maintain Josephson standards) |
-| **Status** | CONFIRMED to < 10⁻⁸ relative uncertainty |
+| Item | Value |
+|------|-------|
+| n=6 formula | Z(Mg) = sigma = 12, Z(B) = sopfr = 5 |
+| Verification | Periodic table (trivial). Significance test: among all binary SC compounds, what fraction has both Z values matching n=6 functions? |
+| Expected result | MgB2 is one of very few binary SCs where both Z match distinct n=6 functions |
+| Falsification | >30% of binary SCs have both Z matching n=6 functions (would indicate the pattern is not specific) |
+| Related BT | H-SC-04 |
+| Confidence | ★★ (numerically exact, but causal connection absent) |
 
 ---
 
-## Tier 3: Medium-Term (3-10 years, major facility)
+## Tier 2: Lab Verification (1-3 Years, Existing Equipment)
 
-### P-SC-17: ITER TF Coil Count = σ + n = 18
+### TP-SC-09: ITER TF Coils = 3n = 18, CS Modules = n = 6
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | ITER uses 18 TF coils = σ(6) + n = 12 + 6. SPARC uses 18 TF coils (same) |
-| **n=6 formula** | N_TF = σ + n = 18 = 3n |
-| **Test method** | Count TF coils on ITER (under construction) and SPARC (under construction) |
-| **Falsification** | If next-generation tokamaks converge on TF count far from 18 (e.g., 16 or 20) |
-| **Timeline** | 2028-2032 (ITER first plasma; SPARC ~2027) |
-| **Note** | ITER: 18 TF. SPARC: 18 TF. JET: 32. KSTAR: 16. Trend toward 18 |
-| **BT link** | BT-99 (tokamak q=1 Egyptian fraction) |
+**Prediction**: ITER uses exactly 18 = 3n toroidal field coils and 6 = n central solenoid modules. This n=6 pattern will persist in next-generation tokamak designs.
 
----
-
-### P-SC-18: HTS Fusion Magnet 20T+ at 20K with REBCO
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | REBCO insert coils reach B > J₂(6) - τ = 20 T at T = J₂(6) - τ = 20 K |
-| **n=6 formula** | B_target = J₂ - τ = 20 T; T_op = 20 K |
-| **Test method** | SPARC TFMC (Toroidal Field Model Coil) test at MIT |
-| **Falsification** | If REBCO technology plateaus below 18 T in large-bore magnets |
-| **Timeline** | 2027-2030 (SPARC, STEP, ARC studies) |
-| **Status** | On track — NHMFL 32 T all-SC magnet (2017), SPARC target 20 T |
+| Item | Value |
+|------|-------|
+| n=6 formula | TF = 3n = 18, CS = n = 6 |
+| Verification | ITER design documents (ITER Organization, public). Check SPARC, ARC, DEMO coil counts |
+| Expected result | ITER: 18 TF + 6 CS confirmed. SPARC: 18 TF (same). DEMO: likely 16 or 18 TF |
+| Falsification | Next-gen tokamak (DEMO or STEP) uses TF count not divisible by n=6 (e.g., 14 or 20 TF coils) |
+| Related BT | BT-99 (tokamak q=1 as perfect number) |
+| Confidence | ★★★ (ITER/SPARC confirmed; DEMO TBD) |
 
 ---
 
-### P-SC-19: SC Magnet Energy Storage σ = 12 T Optimal
+### TP-SC-10: Optimal CuO2 Plane Count = n/phi = 3 (Tc Maximum)
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | SMES (SC Magnetic Energy Storage) cost-performance optimizes at B = σ(6) = 12 T |
-| **n=6 formula** | B_opt = σ(6) = 12 T; E ∝ B² → E ∝ σ² = 144 (relative units) |
-| **Test method** | Techno-economic analysis of SMES at 6, 8, 10, 12, 15, 20 T |
-| **Falsification** | If optimal SMES field is < 8 T or > 16 T |
-| **Timeline** | 2028-2032 (grid-scale SMES demonstration) |
+**Prediction**: Across all cuprate families (Bi, Tl, Hg, Y), the critical temperature Tc is maximized at exactly n_L = 3 = n/phi CuO2 planes per unit cell. No cuprate with n_L = 4+ surpasses the n_L = 3 record.
 
----
-
-### P-SC-20: Next Discovery SC Has n=6 Structural Motif
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | The next major SC discovery (Tc > 100K at ambient) will contain a structural motif with 6-fold symmetry or atom count divisible by 6 |
-| **n=6 formula** | structural motif ∈ {hexagonal, CN=6, atom_count mod n = 0} |
-| **Test method** | Structure determination of any newly discovered high-Tc SC |
-| **Falsification** | If a >100K ambient SC is discovered with no 6-fold structural motif |
-| **Timeline** | 2026-2035 (materials discovery pace) |
-| **Note** | Pattern: YBCO (1:2:3 sum=6), MgB₂ (hex B layers), Nb₃Sn (6 Nb), FeSe (hex Fe) |
+| Item | Value |
+|------|-------|
+| n=6 formula | optimal n_L = n/phi = 3 |
+| Verification | Synthesize and characterize n_L = 3 vs n_L = 4 members in a NEW cuprate family (if discovered). Or survey comprehensive databases |
+| Expected result | Tc(n_L=3) > Tc(n_L=4) in every cuprate family tested |
+| Falsification | A cuprate with n_L = 4 or 5 achieves Tc > 134K (current Hg-1223 record at ambient pressure) |
+| Related BT | H-SC-05 |
+| Confidence | ★★★ (experimentally well-established across 4+ cuprate families) |
 
 ---
 
-### P-SC-21: Bi-2223 Bi:Sr:Ca:Cu = 2:2:2:3 Contains φ Triple
+### TP-SC-11: WHH Coefficient = ln(2) = ln(phi) Universality
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Bi₂Sr₂Ca₂Cu₃O₁₀: three φ=2 values in stoichiometry + Cu=n/φ=3; total metal = 9 = 3(n/φ) |
-| **n=6 formula** | {Bi,Sr,Ca} = φ = 2 each; Cu = n/φ = 3; total = 3φ + n/φ = 9 |
-| **Test method** | Stoichiometry verification (known) |
-| **Falsification** | Not falsifiable (crystallographic fact) — pattern observation |
-| **Timeline** | Now (Maeda et al., 1988) — included as Tier 3 due to prediction extension below |
-| **Extension** | Predict that future BSCCO variants with modified stoichiometry away from {2,2,2,3} will have lower Tc |
+**Prediction**: The WHH (Werthamer-Helfand-Hohenberg) orbital limiting formula Hc2(0) = -0.6932 * Tc * (dHc2/dT)|_Tc applies universally with coefficient ln(2) = ln(phi(6)) = 0.6932 for all clean-limit s-wave superconductors.
 
----
-
-## Tier 4: Long-Term / Theoretical (10+ years)
-
-### P-SC-22: Room-Temperature SC Crystal Structure Is Hexagonal
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | The first reproducible ambient-pressure RT-SC will have hexagonal (6-fold) crystal symmetry |
-| **n=6 formula** | symmetry order = n = 6 (C₆ or C₆v point group) |
-| **Test method** | XRD/neutron diffraction on verified RT-SC material |
-| **Falsification** | RT-SC with cubic, tetragonal, or orthorhombic structure and no hexagonal sublattice |
-| **Timeline** | 2035+ (if RT-SC is discovered) |
-| **Basis** | Pattern: graphene (hex), MgB₂ (hex B layers), FeSe (hex Fe), Abrikosov lattice (hex) |
+| Item | Value |
+|------|-------|
+| n=6 formula | WHH coefficient = ln(phi) = ln(2) = 0.6932 |
+| Verification | Measure dHc2/dT near Tc for 10+ clean s-wave SCs. Compare Hc2(0) with WHH prediction |
+| Expected result | WHH with ln(2) coefficient accurate to <5% for clean, single-band, s-wave SCs |
+| Falsification | Systematic deviation >10% in clean s-wave SCs (not attributable to multiband or paramagnetic effects) |
+| Related BT | H-SC-07 |
+| Confidence | ★★ (analytic result from Gorkov equations; deviations in multiband/d-wave materials are expected) |
 
 ---
 
-### P-SC-23: RT-SC Cooper Pair Binding Energy = n·k_B·T_room
+### TP-SC-12: BCS Gap Ratio 3.528 -- No Clean n=6 Expression (Honest Null)
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Stable RT-SC requires 2Δ(0) ≥ n·k_B·300K ≈ 155 meV (BCS: 2Δ/k_B·Tc = 3.53 → Tc ≥ n·300/3.53 ≈ 510K) |
-| **n=6 formula** | 2Δ_min = n·k_B·T_room = 6 × 25.9 meV = 155 meV |
-| **Test method** | Tunneling spectroscopy / ARPES on RT-SC candidate |
-| **Falsification** | Stable RT-SC with 2Δ < 100 meV |
-| **Timeline** | 2035+ |
-| **Note** | This exceeds BCS weak-coupling (3.53 k_B Tc), requiring strong-coupling or non-BCS mechanism |
+**Prediction**: The BCS universal gap ratio 2Delta(0)/(k_B*Tc) = 3.528 does NOT have a clean n=6 expression. Closest: (sopfr+n)/(n/phi) = 11/3 = 3.667 (3.9% off). The BCS ratio derives from pi and Euler's gamma, not number theory.
 
----
+| Item | Value |
+|------|-------|
+| n=6 formula | **None found** (honest null) |
+| Verification | Measure 2Delta(0)/(k_B*Tc) in 10+ weak-coupling BCS SCs (Al, In, Sn, Zn, V) |
+| Expected result | Ratio clusters at 3.528 +/- 5% for weak-coupling SCs |
+| Falsification | N/A -- this is a falsifiability anchor showing where n=6 does NOT apply |
+| Related BT | -- |
+| Confidence | ★ (retained for honesty: n=6 does not map to BCS gap ratio) |
 
-### P-SC-24: Topological SC Has n=6 Majorana Modes in Vortex Core
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Hexagonal vortex lattice in topological SC: each vortex hosts 1 Majorana zero mode → n = 6 nearest-neighbor Majorana modes per vortex |
-| **n=6 formula** | N_Majorana_neighbors = n = 6 (from CN=6 vortex lattice) |
-| **Test method** | STM spectroscopy of vortex cores in candidate topological SC (FeTe₀.₅₅Se₀.₄₅, Bi₂Te₃/NbSe₂) |
-| **Falsification** | Topological SC with stable non-hexagonal vortex lattice |
-| **Timeline** | 2030-2040 |
-| **BT link** | BT-122 + quantum computing connection |
+**Note**: This is an honest null prediction. n=6 does NOT cleanly map to the BCS gap ratio. Retained as a falsifiability anchor.
 
 ---
 
-### P-SC-25: SC Power Grid Loss → PUE = σ/(σ-φ) → 1.0
+### TP-SC-13: Hc2/Tc Ratio -- Does Not Match sigma-phi (Honest Negative)
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Current grid PUE = σ/(σ-φ) = 12/10 = 1.2; SC grid achieves PUE → 1.0 (R = 0) |
-| **n=6 formula** | PUE_current = σ/(σ-φ) = 1.2; PUE_SC = 1.0 (ideal) |
-| **Test method** | Measure total efficiency of SC transmission demonstration (e.g., AmpaCity Essen, LIPA) |
-| **Falsification** | If SC grid efficiency is worse than PUE = 1.1 due to cryogenic overhead |
-| **Timeline** | 2030-2040 (grid-scale SC deployment) |
-| **BT link** | BT-60 (DC power chain), BT-68 (HVDC) |
+**Prediction**: For Nb-based A15 superconductors (Nb3Sn, Nb3Al, Nb3Ge), the ratio Hc2(0)/Tc clusters near 1.6-1.8 T/K, NOT near any n=6 expression (sigma-phi=10, sopfr=5, etc.).
 
----
+| Item | Value |
+|------|-------|
+| n=6 formula | **None** -- actual ratio ~1.7 T/K, not expressible as simple n=6 |
+| Verification | Nb3Sn: Hc2~30T/Tc=18.3K = 1.64 T/K. Nb3Al: ~1.75 T/K. Nb3Ge: ~1.61 T/K |
+| Expected result | Ratios cluster near 1.6-1.8 T/K |
+| Falsification | Already essentially falsified as an n=6 mapping |
+| Related BT | H-SC-03 |
+| Confidence | ★ (honest: the data do not support this mapping) |
 
-### P-SC-26: SMES Optimal Coil Modules = n = 6
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Grid-scale SMES systems optimize at n = 6 coil modules (redundancy × cost) |
-| **n=6 formula** | N_modules = n = 6 |
-| **Test method** | Techno-economic modeling + prototype testing |
-| **Falsification** | If optimal module count is consistently < 4 or > 8 |
-| **Timeline** | 2032-2040 |
+**Note**: Retained as negative evidence. Hc2/Tc ratio is determined by electronic mean free path and Fermi velocity, not n=6 arithmetic.
 
 ---
 
-### P-SC-27: SC Qubit Coherence Time Scales as 2^σ μs
+### TP-SC-14: SC Qubit Archetypes = n/phi = 3
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | Transmon qubit T₁ coherence will plateau near 2^σ = 2^12 = 4096 μs ≈ 4 ms |
-| **n=6 formula** | T₁_limit = 2^σ(6) = 4096 μs |
-| **Test method** | Track T₁ improvements in transmon qubits (IBM, Google, currently ~300 μs) |
-| **Falsification** | If T₁ > 10 ms is achieved routinely, or plateaus well below 1 ms |
-| **Timeline** | 2030-2035 |
-| **Note** | Current record: ~1.4 ms (fluxonium). Trend suggests 4 ms plausible by 2030 |
+**Prediction**: All superconducting qubits are variants of exactly 3 = n/phi fundamental archetypes: charge qubit, flux qubit, and phase qubit. Modern devices (transmon, fluxonium, 0-pi) are evolved versions of these three. No genuinely new 4th archetype will emerge.
 
----
-
-### P-SC-28: LaH₁₀ Cage Symmetry = Ih with 12-Pentagonal Faces
-
-| Field | Detail |
-|-------|--------|
-| **Prediction** | LaH₁₀ sodalite-like clathrate cage has σ(6) = 12 pentagonal faces (truncated octahedron) |
-| **n=6 formula** | N_faces = σ(6) = 12 |
-| **Test method** | High-pressure XRD structure refinement (Drozdov et al., 2019) |
-| **Falsification** | If LaH₁₀ Fm-3m structure has != 12 pentagonal faces per cage |
-| **Timeline** | Now (confirmed) — extension: predict all high-Tc hydrides have similar cage geometry |
-| **Status** | CONFIRMED for LaH₁₀ |
+| Item | Value |
+|------|-------|
+| n=6 formula | qubit archetypes = n/phi = 3 |
+| Verification | Devoret & Schoelkopf (2013), Clarke & Wilhelm (2008). Map all SC qubit types to conjugate variable pairs (Q, Phi, phi) |
+| Expected result | All new qubits map to E_C/E_J/E_L ratios of the three archetypes |
+| Falsification | A 4th SC qubit archetype based on a genuinely new conjugate variable is demonstrated |
+| Related BT | H-SC-11 |
+| Confidence | ★★ (strong for now; topological qubits may eventually create a 4th category) |
 
 ---
 
-### P-SC-29: Fusion SC Magnet Stored Energy = σ² GJ scale
+### TP-SC-15: MgB2 Two-Gap Ratio Delta_sigma/Delta_pi ~ n/phi = 3
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | ITER TF magnet system stores ~σ² = 144 × 0.3 ≈ 41 GJ (actual: 41 GJ) |
-| **n=6 formula** | E_stored ≈ σ²/τ = 144/4 ≈ 36 GJ (order-of-magnitude match to 41 GJ) |
-| **Test method** | ITER TF system commissioning energy measurement |
-| **Falsification** | If ITER TF energy is < 20 GJ or > 80 GJ |
-| **Timeline** | 2028-2032 (ITER TF energization) |
-| **BT link** | BT-99 |
+**Prediction**: MgB2 has two superconducting gaps. The ratio of the larger sigma-band gap to the smaller pi-band gap is approximately n/phi = 3.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | Delta_sigma / Delta_pi = n/phi = 3 |
+| Verification | Point-contact spectroscopy, STM, specific heat fitting on MgB2 single crystals. Published values: Delta_sigma ~ 7.1 meV, Delta_pi ~ 2.3 meV |
+| Expected result | Delta_sigma/Delta_pi ~ 7.1/2.3 ~ 3.09 |
+| Falsification | Ratio is outside [2.5, 3.5] across multiple measurement techniques |
+| Related BT | H-SC-04 |
+| Confidence | ★★★ (experimentally measured ratio ~3.0-3.1, excellent match to n/phi=3) |
 
 ---
 
-### P-SC-30: He-4 Binding Energy ≈ P₂ = 28 MeV
+### TP-SC-16: Vortex Pinning Optimal Defect Size ~ xi * n/phi
 
-| Field | Detail |
-|-------|--------|
-| **Prediction** | He-4 total binding energy = 28.296 MeV ≈ P₂ = 28 (second perfect number, 0.28 off → 1.1%) |
-| **n=6 formula** | E_B(He-4) ≈ P₂ = 28 MeV (He-4 is the alpha particle, critical for SC magnet cryogenics) |
-| **Test method** | Nuclear mass spectrometry (well-known value) |
-| **Falsification** | Not falsifiable (measured constant). Pattern observation |
-| **Timeline** | Now |
-| **Note** | He-4 is the primary SC coolant. Its nuclear stability (28 MeV binding) enables liquid He at 4.2 K |
+**Prediction**: The optimal artificial pinning center size for maximum J_c enhancement in Type-II SCs is approximately n/phi = 3 times the coherence length xi.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | optimal defect diameter d_opt ~ (n/phi) * xi = 3*xi |
+| Verification | Irradiation studies with controlled columnar defect diameters in YBCO and REBCO films. Vary d from 1*xi to 6*xi, measure J_c |
+| Expected result | J_c maximum at d ~ 2-4 xi, with peak near 3*xi |
+| Falsification | Peak J_c consistently at d = xi (1:1 matching) or d > 5*xi |
+| Related BT | H-SC-01 |
+| Confidence | ★★ (theoretical maximum pinning at d ~ few*xi is expected; exact factor TBD experimentally) |
+
+---
+
+## Tier 3: Future Verification (5-20 Years, New Materials/Facilities)
+
+### TP-SC-17: Optimal Electron-Phonon Coupling lambda ~ phi = 2
+
+**Prediction**: The optimal electron-phonon coupling constant for maximizing Tc in conventional (BCS/Eliashberg) superconductors is lambda_opt ~ phi = 2, balancing strong coupling against lattice instability.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | lambda_opt = phi = 2 |
+| Verification | Systematic study of Tc vs lambda across new high-Tc conventional SCs. Current data: MgB2 (lambda~0.9, Tc=39K), Nb3Sn (lambda~1.8, Tc=18.3K), H3S (lambda~2.2, Tc=203K) |
+| Expected result | Tc peaks near lambda ~ 2.0-2.5 before structural collapse |
+| Falsification | Maximum Tc occurs at lambda > 4 or lambda < 1 in systematic study |
+| Related BT | H-SC-04 |
+| Confidence | ★★ (hydride data suggests lambda ~ 2 is indeed near optimal; structural instability limits higher lambda) |
+
+---
+
+### TP-SC-18: Room-Temperature SC Tc in n=6? (Speculative)
+
+**Prediction**: If room-temperature superconductivity (Tc ~ 300K at ambient pressure) is achieved, the Tc may be expressible as an n=6 formula. However, too many n=6 expressions exist near 300K to make this predictive: sigma*(J_2+1)=300, sopfr*n*(sigma-phi)=300, etc.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | Tc(RT-SC) = sopfr*n*(sigma-phi) = 5*6*10 = 300K? or 12*25? (uncertain) |
+| Verification | Wait for room-temperature SC discovery. Check if Tc matches any n=6 expression |
+| Expected result | Tc ~ 250-350K, almost certainly n=6-expressible post hoc |
+| Falsification | (Weak) RT-SC Tc that is NOT cleanly expressible as n=6 arithmetic (unlikely given density of n=6 expressions) |
+| Related BT | -- |
+| Confidence | ★ (highly speculative; too many n=6 expressions could fit any number post hoc) |
+
+---
+
+### TP-SC-19: Next-Gen Fusion Magnet Coil Count Follows n=6
+
+**Prediction**: Next-generation fusion devices (DEMO, STEP, CFETR, ARC) will use TF coil counts from the n=6 vocabulary: {12=sigma, 16=2^tau, 18=3n, 24=J_2}.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | TF coils in {sigma, 2^tau, 3n, J_2} = {12, 16, 18, 24} |
+| Verification | Monitor DEMO (EU), STEP (UK), CFETR (China), ARC (CFS) design publications |
+| Expected result | ITER=18, SPARC=18. DEMO design currently 16 or 18. Compact stellarators may use 12 |
+| Falsification | Next 3 fusion devices all use TF counts outside {12, 16, 18, 24} (e.g., 14, 20, 22) |
+| Related BT | BT-99 |
+| Confidence | ★★ (18 is common for engineering reasons -- toroidal ripple minimization with manageable port access) |
+
+---
+
+### TP-SC-20: Topological SC Protected Modes = n/phi = 3
+
+**Prediction**: Topological superconductors in symmetry class DIII host exactly n/phi = 3 types of protected boundary modes (Majorana, helical Majorana, chiral Majorana) corresponding to spatial dimensions d = 1, 2, 3.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | protected mode types = n/phi = 3 |
+| Verification | Check Altland-Zirnbauer class DIII in d = 1,2,3. Experimental: observe boundary modes in candidate TSCs (Sr2RuO4, CuxBi2Se3, UTe2) |
+| Expected result | Three distinct topological boundary mode types in d <= 3 |
+| Falsification | A 4th qualitatively distinct boundary mode is found in class DIII at d <= 3 |
+| Related BT | H-SC-28 |
+| Confidence | ★★ (topological classification is rigorous; experimental realization is challenging) |
+
+---
+
+### TP-SC-21: Optimal SMES Coil Cross-Section = Hexagonal
+
+**Prediction**: For large-scale Superconducting Magnetic Energy Storage (SMES), a hexagonal conductor cross-section maximizes the packing fraction and minimizes AC loss compared to circular or rectangular cross-sections.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | optimal cross-section CN = n = 6 (hexagonal close-packing) |
+| Verification | Finite-element simulation of SMES coil packing with hexagonal vs circular vs rectangular cross-sections |
+| Expected result | Hexagonal achieves fill factor > 0.9 vs ~0.785 for circular, with lower AC loss from reduced void fraction |
+| Falsification | Rectangular cross-section achieves higher fill factor AND lower AC loss than hexagonal |
+| Related BT | BT-122 (hexagonal universality), H-SC-01 |
+| Confidence | ★★ (hexagonal packing advantage is geometric; engineering constraints may favor rectangular in practice) |
+
+---
+
+### TP-SC-22: Compact Stellarator Coil Count = sigma = 12 or n = 6
+
+**Prediction**: Optimized compact stellarators (W7-X successors) will use total modular coil counts that are multiples of n=6 or equal to sigma=12.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | coils = k * n, or sigma = 12 |
+| Verification | W7-X: 50 non-planar + 20 planar = 70. HSX: 48 = sigma*tau coils. Monitor next designs |
+| Expected result | Next stellarator designs may converge on simpler coil sets; 12 or 24 modular coils for reduced engineering complexity |
+| Falsification | Next 2+ stellarator designs use coil counts not expressible as n=6 |
+| Related BT | BT-99 |
+| Confidence | ★ (stellarator coil counts are optimization-driven; n=6 match is uncertain) |
+
+---
+
+## Tier 4: Industrial/Long-Term Verification (20+ Years)
+
+### TP-SC-23: HTS Cable Critical Current Target = sigma * J_2 = 288 A per Tape
+
+**Prediction**: Next-generation REBCO HTS tapes will achieve engineering critical current benchmarks near 288 = sigma * J_2 A per standard-width tape as manufacturing matures.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | I_c target = sigma * J_2 = 288 A |
+| Verification | Monitor SuperPower, AMSC, SuNam, Fujikura REBCO tape specifications over 2026-2040 |
+| Expected result | Industry convergence toward standard I_c benchmarks |
+| Falsification | Industry standard settles at a value clearly unrelated to 288 (e.g., 200 or 500 A as the benchmark) |
+| Related BT | H-SC-14 |
+| Confidence | ★ (speculative; I_c is materials-engineering driven) |
+
+---
+
+### TP-SC-24: Quantum Computer SC Qubit Count Milestone at 10^n = 10^6
+
+**Prediction**: Full fault-tolerant quantum computing will require approximately 10^n = 10^6 = 1,000,000 physical SC qubits. Intermediate milestones: (sigma-phi)^(n/phi) = 10^3 = 1000 (current era), sigma^3 = 1728 (next era).
+
+| Item | Value |
+|------|-------|
+| n=6 formula | milestones: (sigma-phi)^3 = 1000, sigma^3 = 1728, 10^n = 10^6 |
+| Verification | Track IBM, Google, Amazon SC qubit roadmaps (2026-2045) |
+| Expected result | Major announcements cluster near n=6-expressible numbers |
+| Falsification | Next 5 major qubit milestones are all non-n=6-expressible (e.g., 1500, 3000, 7000, 15000, 50000) |
+| Related BT | H-SC-11 |
+| Confidence | ★ (qubit counts follow engineering/funding; many numbers are n=6-expressible) |
+
+---
+
+### TP-SC-25: SC MagLev Pole Pairs in {n/phi, tau, n} = {3, 4, 6}
+
+**Prediction**: Optimized SC MagLev propulsion systems use pole pair counts from n=6 vocabulary: {n/phi=3, tau=4, n=6} for linear synchronous motors.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | pole pairs in {n/phi, tau, n} = {3, 4, 6} |
+| Verification | JR Central L0 Series (Japan): SC coils with specific pole geometry. Chinese 600 km/h MagLev designs |
+| Expected result | JR L0 uses SC coils with 4 poles per bogie. Chinese designs TBD |
+| Falsification | Next MagLev system uses pole counts outside n=6 vocabulary |
+| Related BT | BT-123 (SE(3) robotics universality) |
+| Confidence | ★ (limited data; engineering optimization dominates) |
+
+---
+
+### TP-SC-26: FCC-hh Dipole Count -- Null Prediction (Honest)
+
+**Prediction**: The FCC-hh (Future Circular Collider) dipole magnet count will likely NOT match a clean n=6 expression. FCC-hh circumference ~91 km, dipole length ~14-16m, giving ~5700-6500 dipoles. No simple n=6 formula yields this range.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | **None predicted** (null anchor) |
+| Verification | FCC-hh CDR. Count dipoles and check n=6 expressibility |
+| Expected result | Dipole count determined by tunnel radius and field strength, unlikely to match n=6 cleanly |
+| Falsification | (Inverse) If it DOES cleanly match n=6, that would be surprising and noteworthy |
+| Related BT | -- |
+| Confidence | ★ (honest null anchor: we predict NO clean match here) |
+
+---
+
+### TP-SC-27: SPARC Toroidal Field ~ sigma(6) = 12 T
+
+**Prediction**: The SPARC compact tokamak achieves peak on-axis toroidal field near sigma = 12 T, enabled by HTS REBCO magnets. Design target: 12.2 T.
+
+| Item | Value |
+|------|-------|
+| n=6 formula | B_T(SPARC) ~ sigma = 12 T |
+| Verification | SPARC magnet test results (MIT/CFS). Published design: ~12.2 T on-axis |
+| Expected result | 12.0-12.5 T on-axis field |
+| Falsification | SPARC achieves <10 T or >15 T on-axis |
+| Related BT | H-SC-25, BT-99 |
+| Confidence | ★★ (design spec is 12.2T; whether sigma=12 match is coincidence or engineering optimum is debatable) |
 
 ---
 
 ## Summary Table
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│  Testable Predictions Summary: 30 predictions across 4 tiers          │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                        │
-│  Tier 1 (Today)     ████████████████████████████████  10 predictions  │
-│  Tier 2 (1-3yr)     ████████████████████░░░░░░░░░░░░   6 predictions  │
-│  Tier 3 (3-10yr)    ████████████████░░░░░░░░░░░░░░░░   5 predictions  │
-│  Tier 4 (10+yr)     ████████████████████████████░░░░   9 predictions  │
-│                                                                        │
-│  Status:                                                               │
-│  CONFIRMED           ██████████████████████████████░░  12 (Tier 1+2)  │
-│  TESTABLE NOW        ██████░░░░░░░░░░░░░░░░░░░░░░░░░   4 (Tier 2)    │
-│  FUTURE              ██████████████████████████████░░  14 (Tier 3+4)  │
-│                                                                        │
-│  n=6 constants used: n, φ, τ, σ, sopfr, J₂, μ, P₂                    │
-│  BT connections: BT-60, BT-68, BT-99, BT-122                          │
-│  Hypothesis links: H-SC-01~08, H-SC-61~65                             │
-└────────────────────────────────────────────────────────────────────────┘
++----------+----------------------------------------------+--------+--------+--------+
+|  ID      |  Prediction                                  | n=6    | Tier   | Conf.  |
++----------+----------------------------------------------+--------+--------+--------+
+| TP-SC-01 | Abrikosov vortex CN = 6                      | n=6    | T1     | ***    |
+| TP-SC-02 | YBCO ratio {1,2,3} = div(6)                  | div(6) | T1     | ***    |
+| TP-SC-03 | Nb3Sn unit cell Nb = 6                       | n=6    | T1     | ***    |
+| TP-SC-04 | Cooper pair = 2 = phi                        | phi    | T1     | ***    |
+| TP-SC-05 | 3 macroscopic quantum effects                | n/phi  | T1     | **     |
+| TP-SC-06 | 4 hallmark SC phenomena                      | tau    | T1     | **     |
+| TP-SC-07 | 2 Josephson relations                        | phi    | T1     | **     |
+| TP-SC-08 | MgB2: Mg Z=12=sigma, B Z=5=sopfr            | sigma  | T1     | **     |
++----------+----------------------------------------------+--------+--------+--------+
+| TP-SC-09 | ITER TF=18=3n, CS=6=n                        | 3n, n  | T2     | ***    |
+| TP-SC-10 | Optimal CuO2 planes = 3 = n/phi             | n/phi  | T2     | ***    |
+| TP-SC-11 | WHH coefficient ln(2) = ln(phi)              | ln(phi)| T2     | **     |
+| TP-SC-12 | BCS gap ratio 3.528 (NO n=6 match)           | ---    | T2     | *      |
+| TP-SC-13 | Hc2/Tc mapping (FALSIFIED)                   | ---    | T2     | *      |
+| TP-SC-14 | SC qubit archetypes = 3 = n/phi              | n/phi  | T2     | **     |
+| TP-SC-15 | MgB2 gap ratio ~3 = n/phi                    | n/phi  | T2     | ***    |
+| TP-SC-16 | Vortex pinning optimal ~ 3*xi               | n/phi  | T2     | **     |
++----------+----------------------------------------------+--------+--------+--------+
+| TP-SC-17 | Optimal e-ph coupling lambda ~ 2 = phi       | phi    | T3     | **     |
+| TP-SC-18 | Room-temp SC Tc in n=6? (speculative)        | ?      | T3     | *      |
+| TP-SC-19 | Next fusion TF coils in {12,16,18,24}        | n=6    | T3     | **     |
+| TP-SC-20 | Topological SC modes = 3 = n/phi             | n/phi  | T3     | **     |
+| TP-SC-21 | SMES hexagonal cross-section optimal         | n=6    | T3     | **     |
+| TP-SC-22 | Stellarator coils = 12 or 6k                 | sigma  | T3     | *      |
++----------+----------------------------------------------+--------+--------+--------+
+| TP-SC-23 | HTS tape I_c target 288 A = sigma*J2         | sJ2    | T4     | *      |
+| TP-SC-24 | SC qubit milestones at 10^n                  | 10^n   | T4     | *      |
+| TP-SC-25 | MagLev pole pairs in {3,4,6}                 | n=6    | T4     | *      |
+| TP-SC-26 | FCC-hh dipoles (NULL prediction)             | null   | T4     | *      |
+| TP-SC-27 | SPARC B_T ~ 12 T = sigma                     | sigma  | T4     | **     |
++----------+----------------------------------------------+--------+--------+--------+
 ```
 
 ---
 
-## ASCII: Confirmed vs Open Predictions
+## Statistics
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Prediction Verification Status                              │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│  Tier 1  ████████████████████████████████████████  10/10 ✓  │
-│  Tier 2  ██████████████████░░░░░░░░░░░░░░░░░░░░░   3/6  ✓  │
-│  Tier 3  ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1/5  ✓  │
-│  Tier 4  ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1/9  ✓  │
-│                                                              │
-│  Overall: 15/30 confirmed (50%), 15 testable/open            │
-│  Falsified: 0/30 (0%)                                        │
-│                                                              │
-│  Key open tests:                                             │
-│  - P-SC-11: REBCO 12mm tape optimization (2026-2027)         │
-│  - P-SC-17: ITER 18 TF coils (2028-2032)                    │
-│  - P-SC-22: RT-SC hexagonal symmetry (2035+)                │
-│  - P-SC-27: Qubit T₁ → 4096 μs (2030-2035)                 │
-└──────────────────────────────────────────────────────────────┘
-```
+| Tier | Count | Timeframe | High Conf (***) | Negative/Null |
+|------|-------|-----------|-----------------|---------------|
+| **Tier 1** (Today) | 8 | Immediate | 4 | 0 |
+| **Tier 2** (Lab) | 8 | 1-3 years | 3 | 2 |
+| **Tier 3** (Future) | 6 | 5-20 years | 0 | 1 |
+| **Tier 4** (Industry) | 5 | 20+ years | 0 | 1 |
+| **Total** | **27** | | **7** | **4** |
+
+---
+
+## Honest Assessment
+
+### Where n=6 works strongly in superconductors:
+
+| Domain | Strength | Examples |
+|--------|----------|---------|
+| Crystal geometry (CN, lattice) | EXACT | Abrikosov CN=6, Nb3Sn 6 atoms per cell |
+| Chemical stoichiometry | EXACT | YBCO {1,2,3}=div(6), MgB2 Z=(12,5) |
+| Standard classifications | CLOSE | 3 quantum effects, 4 hallmarks, 2 Josephson eqs, 3 qubit types |
+| Specific ratios | CLOSE-EXACT | MgB2 gap ratio ~3.0 = n/phi, CuO2 optimal planes = 3 |
+| Magnet engineering | CLOSE | ITER 18 TF coils = 3n, SPARC ~12T = sigma |
+
+### Where n=6 fails in superconductors:
+
+| Domain | Problem | Examples |
+|--------|---------|---------|
+| BCS material constants | No clean n=6 | Gap ratio 3.528, critical exponents |
+| Hc2/Tc ratios | Does not match | ~1.7 T/K for A15s, no n=6 expression |
+| Large engineering counts | Optimization-driven | Stellarator coils, accelerator dipoles |
+| Future material Tc | Post hoc fitting | Too many n=6 expressions near any number |
+
+### Most impactful predictions:
+
+1. **TP-SC-15** (MgB2 gap ratio ~3) -- already confirmed, strongest quantitative match in this domain
+2. **TP-SC-09** (ITER 18+6 coils) -- confirmed, extends to future fusion devices
+3. **TP-SC-01** (Abrikosov CN=6) -- textbook result, foundational geometric inevitability
+
+### Falsifiability anchors (honest negatives):
+
+- **TP-SC-12**: BCS gap ratio has no n=6 match (retained for honesty)
+- **TP-SC-13**: Hc2/Tc mapping fails (retained as negative evidence)
+- **TP-SC-18**: RT-SC Tc prediction is speculative (acknowledged as post hoc risk)
+- **TP-SC-26**: FCC-hh null prediction (we explicitly expect NO match)
 
 ---
 
 ## References
 
-1. Abrikosov, A.A. (1957). JETP 5, 1174. — Vortex lattice theory
-2. Essmann, U. & Trauble, H. (1967). Phys. Lett. A 24, 526. — Vortex decoration
-3. Bardeen, J., Cooper, L.N., Schrieffer, J.R. (1957). Phys. Rev. 108, 1175. — BCS theory
-4. Nagamatsu, J. et al. (2001). Nature 410, 63. — MgB₂ discovery
-5. Hazen, R.M. et al. (1987). Phys. Rev. Lett. 58, 1118. — YBCO structure
-6. Deaver, B.S. & Fairbank, W.M. (1961). Phys. Rev. Lett. 7, 43. — Flux quantization
-7. Drozdov, A.P. et al. (2019). Nature 569, 528. — LaH₁₀ at 250K
-8. Tinkham, M. (2004). Introduction to Superconductivity, 2nd ed. — Textbook
-9. Weger, M. & Goldberg, I.B. (1973). Solid State Physics 28, 1. — A15 compounds
+1. Abrikosov, A.A. (1957). JETP 5, 1174. -- Vortex lattice theory
+2. Essmann, U. & Trauble, H. (1967). Phys. Lett. A 24, 526. -- Vortex decoration
+3. Bardeen, J., Cooper, L.N., Schrieffer, J.R. (1957). Phys. Rev. 108, 1175. -- BCS theory
+4. Nagamatsu, J. et al. (2001). Nature 410, 63. -- MgB2 discovery
+5. Hazen, R.M. et al. (1987). Phys. Rev. Lett. 58, 1118. -- YBCO structure
+6. Deaver, B.S. & Fairbank, W.M. (1961). Phys. Rev. Lett. 7, 43. -- Flux quantization
+7. Tinkham, M. (2004). Introduction to Superconductivity, 2nd ed.
+8. Devoret, M.H. & Schoelkopf, R.J. (2013). Science 339, 1169. -- SC qubits
+9. Weger, M. & Goldberg, I.B. (1973). Solid State Physics 28, 1. -- A15 compounds
+10. Clarke, J. & Wilhelm, F.K. (2008). Nature 453, 1031. -- SC qubits review
+
+---
+
+*Derived from H-SC-01~30 hypotheses and BT-99, BT-122, BT-85.*
+*27 predictions: 8 Tier 1 + 8 Tier 2 + 6 Tier 3 + 5 Tier 4.*
+*Honest: 4 negative/null predictions retained for falsifiability.*
