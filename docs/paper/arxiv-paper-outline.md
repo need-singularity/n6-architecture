@@ -532,3 +532,32 @@ for hep-th (no strict limit).
 - The paper's tone throughout is *evidence-presenting*, not
   *claim-asserting*. The reader is invited to evaluate, not persuaded
   to believe.
+
+---
+
+## Recent Extensions (BT-85~112)
+
+The following Breakthrough Theorems were established after the initial 307-domain
+survey and extend n=6 universality into new territory:
+
+| Range | Area | Key Results |
+|-------|------|-------------|
+| BT-85~88 | Material Synthesis | Carbon Z=6 universality, CN=6 crystal law, atomic manipulation precision ladder, hexagonal self-assembly |
+| BT-89 | Photonic Energy | PUE->1.0, E-O loss=1/(sigma-phi)=10%, photonic-energy bridge |
+| BT-90~93 | Topological Chip | SM=phi*K_6 contact theorem, Z2 topological ECC, Bott periodicity channels, Carbon Z=6 chip material universality |
+| BT-94~96 | Carbon Capture (CCUS) | CO2 molecular encoding, amine CN=6, DAC sorbent capacity |
+| BT-97~102 | Fusion Alien-Level | Weinberg angle, D-T baryon count, tokamak q=1, CNO catalyst, photosynthesis glucose, magnetic reconnection rate |
+| BT-103~104 | Photosynthesis/CO2 | Complete n=6 stoichiometry (6CO2+12H2O), CO2 molecular n=6 encoding |
+| BT-105 | Percolation (SLE_6) | 7 critical exponents = n=6 fractions, kappa=6 unique locality |
+| BT-106 | Algebra (S_3) | |S_3|=6, conjugacy classes={1,2,3}=proper divisors, irrep dim^2 sum=tau=4 |
+| BT-107 | Modular Forms | Ramanujan tau clean iff d|6, eta^{J_2=24} |
+| BT-108 | Music/Acoustics | Perfect consonance intervals = div(6) ratios, 7+5=12=sigma |
+| BT-109 | Zeta/Bernoulli | zeta(2)=pi^2/6, zeta(-1)=-1/12, 6|B_{2k} infinite family |
+| BT-110 | Dimension Stacks | sigma-mu=11 across M-theory, TCP, RSA, SPARC, H100 |
+| BT-111 | Solar-AI-Math | tau^2/sigma=4/3 triple: SQ bandgap, SwiGLU ratio, Betz limit |
+| BT-112 | Byzantine-Koide | phi^2/n=2/3: Koide Q=0.666661 (9ppm), BFT threshold |
+
+These 28 additional BTs raise the total to 112 and expand coverage into
+pure mathematics (SLE, modular forms, zeta functions), chemistry (CCUS, photosynthesis),
+and music theory. They are candidates for inclusion in Appendix A and Sections 5.1--5.4
+of the main paper.

@@ -415,6 +415,20 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-110: σ-μ=11 차원 스택 (M이론=TCP=RSA=SPARC=H100=11, 5도메인) ⭐
   BT-111: τ²/σ=4/3 태양-AI-수학 삼지창 (SQ=SwiGLU=Betz=R(3,1)=4/3) ⭐⭐
   BT-112: φ²/n=2/3 Byzantine-Koide 공명 (Koide Q=0.666661 9ppm, BFT>2/3) ⭐⭐
+
+  # Software Design (BT-113~117)
+  BT-113: SW 엔지니어링 상수 스택 (SOLID=sopfr, REST=n, 12Factor=σ, ACID=τ, 18/18 EXACT) ⭐⭐⭐
+  BT-114: 암호학 파라미터 래더 (AES=2^{σ-sopfr}, SHA=2^{σ-τ}, RSA=2^{σ-μ}, 10/10 EXACT) ⭐⭐⭐
+  BT-115: OS-네트워크 레이어 수 (OSI=σ-sopfr=7, TCP/IP=τ=4, Linux=n=6, 12/12 EXACT) ⭐⭐
+  BT-116: ACID-BASE-CAP DB 삼위일체 (τ+n/φ+n/φ, Paxos=φ, 9/9 EXACT) ⭐⭐
+  BT-117: 소프트웨어-물리 동형사상 (18 EXACT 병렬 매핑, 6 도메인) ⭐⭐⭐
+
+  # Environmental Protection (BT-118~122)
+  BT-118: 교토 6종 온실가스 = n + Carbon Z=6 (CO₂ 화학양론 전부 n=6, 10/10 EXACT) ⭐⭐⭐
+  BT-119: 지구 6권역 + 대류권 σ=12km (8/12/16={σ-τ,σ,σ+τ}, 12/12 EXACT) ⭐⭐⭐
+  BT-120: 수처리 pH=6 + CN=6 촉매 보편성 (Al³⁺/Fe³⁺/Ti⁴⁺ 전부 CN=6, 8/10 EXACT) ⭐⭐⭐
+  BT-121: 6대 플라스틱 + C6 백본 (RIC 1-6=n, PE/PP/PS/PET/PVC/Nylon, 8/10 EXACT) ⭐⭐
+  BT-122: 벌집-눈꽃-산호 n=6 기하학 보편성 (Hales 2001 증명, 10/10 EXACT) ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙

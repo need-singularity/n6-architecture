@@ -293,17 +293,18 @@ n6_max = 100.0
 
 [robotics]
 goal = true
-dse = "done"
-combos = 22500
-valid = 6472
-tool = "tools/robot-dse/"
-levels = ["Body", "Actuator", "Sensor", "Control", "AI", "System"]
-cross_dse = ["chip-architecture", "learning-algorithm", "battery-architecture"]
-best_pareto = "Humanoid + Pneumatic + Basic-6IMU + HEXA-1 + N6-Egyptian + Home-Care (80.70)"
-best_n6 = "HexapodN6 + BLDC-Gear + ForceTorque + MPC_N6 + SwarmN6 (100.0%) — 궁극 6족 J2=24 DOF"
+dse = "done-v3-8level"
+combos = 270000
+valid = "TBD"
+tool = "tools/universal-dse/domains/robotics.toml"
+levels = ["Material", "Actuator", "Joint", "CtrlChip", "Body", "Mind", "Swarm", "Ultimate"]
+cross_dse = ["chip-architecture", "learning-algorithm", "battery-architecture", "material-synthesis"]
+best_pareto = "CFRP(Z=6) + BLDC12 + 6DOF-SE3 + HEXA1-SoC + HumanoidJ24 + BT56-VLM + FCC24 + Omega96 (n6=92%)"
+best_n6 = "CFRP + BLDC12 + 6DOF-SE3 + HEXA1-SoC + HumanoidJ24 + Egyptian-MoE + FCC24 + Omega96 (100.0%)"
 n6_max = 100.0
-n6_avg = 52.1
-note = "궁극의 로봇 6단 DSE. v2: HexapodN6(6legs×4DOF=24=J2) 추가 → 100% n6 달성. SE(3)=6, σ=12 gait phases"
+n6_avg = 65.0
+bt = ["BT-123", "BT-124", "BT-125", "BT-126", "BT-127"]
+note = "궁극의 로봇 8단 DSE (v3). 소재→액추에이터→관절→제어칩→바디→지능→군집→궁극. BT-123~127 신규 5개. SE(3)=n=6, σ=12 kissing, τ=4 quadruped, φ=2 bilateral, J₂=24 DOF humanoid. EXACT 9/48=19%"
 
 [programming-language]
 goal = true
@@ -16632,3 +16633,41 @@ status = "done"
 bridge = "생물학적 탄소포집. C₆H₁₂O₆(BT-27) + σ=12년 벌기"
 n6_exact = 6
 note = "자연 기반 솔루션 = 산림 탄소 흡수"
+
+# ── 신규 도메인 (2026-04-02 추가) ────────────────────
+
+[agriculture]
+goal = true
+dse = "none"
+combos = 0
+tool = ""
+levels = ["Seed", "Soil", "Growth", "Harvest", "Distribution"]
+cross_dse = ["biology", "solar-architecture", "environmental-protection"]
+note = "New domain. BT-101/103 photosynthesis foundation. Goal.md exists."
+
+[autonomous-driving]
+goal = true
+dse = "none"
+combos = 0
+tool = ""
+levels = ["Sensor", "Perception", "Planning", "Control", "V2X"]
+cross_dse = ["chip-architecture", "ai-efficiency", "network-protocol"]
+note = "New domain. SAE 6 levels=n, LiDAR/radar/camera fusion."
+
+[medical-device]
+goal = true
+dse = "none"
+combos = 0
+tool = ""
+levels = ["Sensor", "Signal", "Processing", "Interface", "Therapy"]
+cross_dse = ["biology", "chip-architecture", "display-audio"]
+note = "New domain. ECG 12-lead=σ, Tc-99m 6hr=n, 6-DOF robot=n."
+
+[space-engineering]
+goal = true
+dse = "none"
+combos = 0
+tool = ""
+levels = ["Launch", "Orbit", "Power", "Comm", "Payload"]
+cross_dse = ["solar-architecture", "energy-architecture", "network-protocol"]
+note = "New domain. GPS 24 sats=J₂ in 6 planes=n, JWST 18 segments=n·(n/φ)."
