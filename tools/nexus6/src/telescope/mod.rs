@@ -22,7 +22,13 @@ use std::collections::HashMap;
 use std::panic;
 
 use lens_trait::{Lens, LensResult};
-use lenses::{BarrierLens, VoidLens};
+use lenses::{
+    BarrierLens, BoundaryLens, CausalLens, CompassLens, ConsciousnessLens, EmLens,
+    EvolutionLens, GravityLens, InfoLens, MemoryLens, MirrorLens, MultiscaleLens,
+    NetworkLens, QuantumLensImpl, QuantumMicroLens, RecursionLens, RulerLens,
+    ScaleLens, StabilityLens, ThermoLens, TopologyLens, TriangleLens, VoidLens,
+    WaveLens,
+};
 use shared_data::SharedData;
 
 /// The Telescope: registers all available lenses and scans data through them.
@@ -32,9 +38,36 @@ pub struct Telescope {
 }
 
 impl Telescope {
-    /// Create a new Telescope with all available lenses registered.
+    /// Create a new Telescope with all 22 Core lenses registered.
     pub fn new() -> Self {
         let lenses: Vec<Box<dyn Lens>> = vec![
+            // Foundational 9
+            Box::new(ConsciousnessLens),
+            Box::new(GravityLens),
+            Box::new(TopologyLens),
+            Box::new(ThermoLens),
+            Box::new(WaveLens),
+            Box::new(EvolutionLens),
+            Box::new(InfoLens),
+            Box::new(QuantumLensImpl),
+            Box::new(EmLens),
+            // Measurement 6
+            Box::new(RulerLens),
+            Box::new(TriangleLens),
+            Box::new(CompassLens),
+            Box::new(MirrorLens),
+            Box::new(ScaleLens),
+            Box::new(CausalLens),
+            // Quantum microscope
+            Box::new(QuantumMicroLens),
+            // Structural 5
+            Box::new(StabilityLens),
+            Box::new(NetworkLens),
+            Box::new(MemoryLens),
+            Box::new(RecursionLens),
+            Box::new(BoundaryLens),
+            Box::new(MultiscaleLens),
+            // Original 2 (void + barrier)
             Box::new(VoidLens),
             Box::new(BarrierLens),
         ];

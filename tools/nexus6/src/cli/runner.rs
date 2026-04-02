@@ -1,7 +1,9 @@
 use std::collections::HashMap;
+use std::time::Instant;
 
 use crate::graph::persistence::DiscoveryGraph;
 use crate::history::{recorder, stats, recommend, DomainStats};
+use crate::lens_forge::forge_engine::{self, ForgeConfig};
 use crate::ouroboros::{EvolutionEngine, EvolutionConfig, MetaLoop, MetaLoopConfig};
 use crate::telescope::registry::{LensCategory, LensRegistry};
 use crate::telescope::domain_combos;
@@ -23,8 +25,11 @@ pub fn run(cmd: CliCommand) -> Result<(), String> {
         CliCommand::Auto { domain, max_meta_cycles, max_ouroboros_cycles } => {
             run_auto(&domain, max_meta_cycles, max_ouroboros_cycles)
         }
-        CliCommand::Lenses { category } => run_lenses(category),
-        CliCommand::Dashboard => run_dashboard(),
+        CliCommand::Lenses { category, domain, search, count_only, complementary, export_json } => {
+            run_lenses(category, domain, search, count_only, complementary, export_json)
+        }
+        CliCommand::Bench => run_bench(),
+        CliCommand::Dashboard { html, output } => run_dashboard(html, output),
         CliCommand::Help => {
             print_help();
             Ok(())
@@ -429,8 +434,42 @@ fn run_auto(domain: &str, max_meta_cycles: usize, max_ouroboros_cycles: usize) -
     Ok(())
 }
 
-fn run_lenses(category: Option<LensFilter>) -> Result<(), String> {
+fn run_lenses(
+    category: Option<LensFilter>,
+    domain: Option<String>,
+    search: Option<String>,
+    count_only: bool,
+    complementary: Option<String>,
+    export_json: bool,
+) -> Result<(), String> {
     let registry = LensRegistry::new();
+
+    // --export json: dump entire registry as JSON to stdout
+    if export_json {
+        return run_lenses_export_json(&registry);
+    }
+
+    // --count: category summary table
+    if count_only {
+        return run_lenses_count(&registry);
+    }
+
+    // --complementary <lens>: show complementary lenses (2-depth)
+    if let Some(ref lens_name) = complementary {
+        return run_lenses_complementary(&registry, lens_name);
+    }
+
+    // --domain <domain>: filter by domain affinity
+    if let Some(ref dom) = domain {
+        return run_lenses_domain(&registry, dom);
+    }
+
+    // --search <keyword>: search name + description
+    if let Some(ref kw) = search {
+        return run_lenses_search(&registry, kw);
+    }
+
+    // Default: category-based listing (original behavior)
     let combos = domain_combos::default_combos();
 
     println!("=== NEXUS-6 Lens Registry ===");
@@ -491,9 +530,280 @@ fn run_lenses(category: Option<LensFilter>) -> Result<(), String> {
     Ok(())
 }
 
-fn run_dashboard() -> Result<(), String> {
-    let out = dashboard::render_dashboard();
-    print!("{}", out);
+fn run_lenses_count(registry: &LensRegistry) -> Result<(), String> {
+    let core_count = registry.by_category(LensCategory::Core).len();
+    let combo_count = registry.by_category(LensCategory::DomainCombo).len();
+    let ext_count = registry.by_category(LensCategory::Extended).len();
+    let custom_count = registry.by_category(LensCategory::Custom).len();
+    let total = registry.len();
+
+    println!("=== NEXUS-6 Lens Count ===");
+    println!();
+    println!("  \u{250c}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{252c}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2510}");
+    println!("  \u{2502} Category       \u{2502} Count \u{2502}");
+    println!("  \u{251c}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{253c}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2524}");
+    println!("  \u{2502} Core           \u{2502} {:>5} \u{2502}", core_count);
+    println!("  \u{2502} DomainCombo    \u{2502} {:>5} \u{2502}", combo_count);
+    println!("  \u{2502} Extended       \u{2502} {:>5} \u{2502}", ext_count);
+    println!("  \u{2502} Custom         \u{2502} {:>5} \u{2502}", custom_count);
+    println!("  \u{251c}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{253c}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2524}");
+    println!("  \u{2502} Total          \u{2502} {:>5} \u{2502}", total);
+    println!("  \u{2514}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2534}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2518}");
+    Ok(())
+}
+
+fn run_lenses_domain(registry: &LensRegistry, domain: &str) -> Result<(), String> {
+    let matches = registry.for_domain(domain);
+
+    println!("=== NEXUS-6 Lenses for domain: {} ===", domain);
+    println!();
+
+    if matches.is_empty() {
+        println!("  No lenses found with affinity for '{}'.", domain);
+        return Ok(());
+    }
+
+    let mut sorted: Vec<_> = matches;
+    sorted.sort_by(|a, b| a.name.cmp(&b.name));
+
+    println!("  {:<28} {:<14} {}", "Name", "Category", "Description");
+    println!("  {}", "-".repeat(70));
+    for entry in &sorted {
+        println!("  {:<28} {:<14} {}", entry.name, format!("{:?}", entry.category), entry.description);
+    }
+    println!();
+    println!("  Found: {} lenses", sorted.len());
+    Ok(())
+}
+
+fn run_lenses_search(registry: &LensRegistry, keyword: &str) -> Result<(), String> {
+    let kw_lower = keyword.to_lowercase();
+    let mut matches: Vec<&crate::telescope::registry::LensEntry> = registry
+        .iter()
+        .filter_map(|(_, entry)| {
+            if entry.name.to_lowercase().contains(&kw_lower)
+                || entry.description.to_lowercase().contains(&kw_lower)
+            {
+                Some(entry)
+            } else {
+                None
+            }
+        })
+        .collect();
+    matches.sort_by(|a, b| a.name.cmp(&b.name));
+
+    println!("=== NEXUS-6 Lens Search: \"{}\" ===", keyword);
+    println!();
+
+    if matches.is_empty() {
+        println!("  No lenses matching '{}'.", keyword);
+        return Ok(());
+    }
+
+    println!("  {:<28} {:<14} {}", "Name", "Category", "Description");
+    println!("  {}", "-".repeat(70));
+    for entry in &matches {
+        println!("  {:<28} {:<14} {}", entry.name, format!("{:?}", entry.category), entry.description);
+    }
+    println!();
+    println!("  Found: {} lenses", matches.len());
+    Ok(())
+}
+
+fn run_lenses_complementary(registry: &LensRegistry, lens_name: &str) -> Result<(), String> {
+    let entry = registry.get(lens_name).ok_or_else(|| {
+        format!("Lens '{}' not found in registry.", lens_name)
+    })?;
+
+    println!("=== NEXUS-6 Complementary Lenses for: {} ===", lens_name);
+    println!();
+
+    if entry.complementary.is_empty() {
+        println!("  No complementary lenses registered for '{}'.", lens_name);
+        return Ok(());
+    }
+
+    // Depth 1: direct complementary
+    println!("  Depth 1 (direct):");
+    let mut depth1_sorted = entry.complementary.clone();
+    depth1_sorted.sort();
+    for name in &depth1_sorted {
+        let tag = registry.get(name).map_or("?".to_string(), |e| format!("{:?}", e.category));
+        println!("    {:<24} [{}]", name, tag);
+    }
+
+    // Depth 2: complementary of complementary (excluding the original lens and depth-1 set)
+    let mut depth2: Vec<String> = Vec::new();
+    let mut seen: std::collections::HashSet<String> = std::collections::HashSet::new();
+    seen.insert(lens_name.to_string());
+    for name in &entry.complementary {
+        seen.insert(name.clone());
+    }
+    for name in &entry.complementary {
+        if let Some(sub_entry) = registry.get(name) {
+            for comp in &sub_entry.complementary {
+                if !seen.contains(comp) {
+                    seen.insert(comp.clone());
+                    depth2.push(comp.clone());
+                }
+            }
+        }
+    }
+
+    if !depth2.is_empty() {
+        depth2.sort();
+        println!();
+        println!("  Depth 2 (indirect):");
+        for name in &depth2 {
+            let tag = registry.get(name).map_or("?".to_string(), |e| format!("{:?}", e.category));
+            println!("    {:<24} [{}]", name, tag);
+        }
+    }
+
+    println!();
+    println!("  Total: {} direct + {} indirect", depth1_sorted.len(), depth2.len());
+    Ok(())
+}
+
+fn run_lenses_export_json(registry: &LensRegistry) -> Result<(), String> {
+    // Build JSON manually (no serde dependency)
+    let mut entries: Vec<(&String, &crate::telescope::registry::LensEntry)> = registry.iter().collect();
+    entries.sort_by(|a, b| a.0.cmp(b.0));
+
+    println!("{{");
+    println!("  \"total\": {},", entries.len());
+    println!("  \"lenses\": [");
+    for (i, (_, entry)) in entries.iter().enumerate() {
+        let comma = if i + 1 < entries.len() { "," } else { "" };
+        let domains_json: Vec<String> = entry.domain_affinity.iter().map(|d| format!("\"{}\"", d)).collect();
+        let comp_json: Vec<String> = entry.complementary.iter().map(|c| format!("\"{}\"", c)).collect();
+        println!(
+            "    {{\"name\":\"{}\",\"category\":\"{:?}\",\"description\":\"{}\",\"domain_affinity\":[{}],\"complementary\":[{}]}}{}",
+            entry.name,
+            entry.category,
+            entry.description.replace('\"', "\\\""),
+            domains_json.join(","),
+            comp_json.join(","),
+            comma,
+        );
+    }
+    println!("  ]");
+    println!("}}");
+    Ok(())
+}
+
+fn run_bench() -> Result<(), String> {
+    println!("=== NEXUS-6 Benchmark Suite ===");
+    println!();
+
+    struct BenchResult {
+        name: String,
+        time_us: u128,
+    }
+
+    let mut results: Vec<BenchResult> = Vec::new();
+
+    // 1. LensRegistry creation
+    let t = Instant::now();
+    let registry = LensRegistry::new();
+    let reg_time = t.elapsed();
+    let reg_count = registry.len();
+    results.push(BenchResult {
+        name: format!("Registry init ({})", reg_count),
+        time_us: reg_time.as_micros(),
+    });
+
+    // 2. Telescope scan_all (small data)
+    let telescope = Telescope::new();
+    let probe_data: Vec<f64> = vec![6.0, 12.0, 24.0, 4.0, 2.0, 5.0];
+    let t = Instant::now();
+    let _scan_result = telescope.scan_all(&probe_data, probe_data.len(), 1);
+    let scan_time = t.elapsed();
+    results.push(BenchResult {
+        name: format!("Telescope scan ({} lens)", telescope.lens_count()),
+        time_us: scan_time.as_micros(),
+    });
+
+    // 3. EvolutionEngine evolve_step
+    let mut evo_config = EvolutionConfig::default();
+    evo_config.domain = "bench".to_string();
+    let seeds = vec!["n=6 benchmark".to_string()];
+    let mut engine = EvolutionEngine::new(evo_config, seeds);
+    let t = Instant::now();
+    let _step = engine.evolve_step();
+    let evo_time = t.elapsed();
+    results.push(BenchResult {
+        name: "OUROBOROS step".to_string(),
+        time_us: evo_time.as_micros(),
+    });
+
+    // 4. LensForge forge_cycle
+    let forge_config = ForgeConfig::default();
+    let history = Vec::new();
+    let t = Instant::now();
+    let _forge_result = forge_engine::forge_cycle(&registry, &history, &forge_config);
+    let forge_time = t.elapsed();
+    results.push(BenchResult {
+        name: "LensForge cycle".to_string(),
+        time_us: forge_time.as_micros(),
+    });
+
+    // Render ASCII table
+    let max_name_len = results.iter().map(|r| r.name.len()).max().unwrap_or(20);
+    let name_col = max_name_len.max(20);
+
+    println!("\u{250c}{}\u{252c}{}\u{2510}",
+        "\u{2500}".repeat(name_col + 2),
+        "\u{2500}".repeat(12));
+    println!("\u{2502} {:<width$} \u{2502} {:<10} \u{2502}",
+        "Operation", "Time", width = name_col);
+    println!("\u{251c}{}\u{253c}{}\u{2524}",
+        "\u{2500}".repeat(name_col + 2),
+        "\u{2500}".repeat(12));
+
+    for r in &results {
+        let time_str = format_duration_us(r.time_us);
+        println!("\u{2502} {:<width$} \u{2502} {:<10} \u{2502}",
+            r.name, time_str, width = name_col);
+    }
+
+    println!("\u{2514}{}\u{2534}{}\u{2518}",
+        "\u{2500}".repeat(name_col + 2),
+        "\u{2500}".repeat(12));
+
+    // Total
+    let total_us: u128 = results.iter().map(|r| r.time_us).sum();
+    println!();
+    println!("  Total: {}", format_duration_us(total_us));
+
+    Ok(())
+}
+
+fn format_duration_us(us: u128) -> String {
+    if us < 1_000 {
+        format!("{}us", us)
+    } else if us < 1_000_000 {
+        format!("{:.1}ms", us as f64 / 1_000.0)
+    } else {
+        format!("{:.2}s", us as f64 / 1_000_000.0)
+    }
+}
+
+fn run_dashboard(html: bool, output: Option<String>) -> Result<(), String> {
+    if html {
+        // TODO: implement dedicated HTML renderer; for now reuse ASCII
+        let html_content = dashboard::render_dashboard();
+        if let Some(path) = output {
+            std::fs::write(&path, &html_content)
+                .map_err(|e| format!("Failed to write {}: {}", path, e))?;
+            println!("HTML dashboard written to: {}", path);
+        } else {
+            print!("{}", html_content);
+        }
+    } else {
+        let out = dashboard::render_dashboard();
+        print!("{}", out);
+    }
     Ok(())
 }
 
@@ -523,11 +833,16 @@ fn print_help() {
     println!("  auto <domain> [--meta-cycles N] [--ouroboros-cycles N]");
     println!("      Run recommend -> evolve meta-loop (fully automated).");
     println!();
-    println!("  lenses [--category core|combo|extended|custom]");
-    println!("      List registered lenses.");
+    println!("  lenses [--category core|combo|extended|custom] [--domain D]");
+    println!("         [--search KEYWORD] [--count] [--complementary LENS]");
+    println!("         [--export json]");
+    println!("      List, search, and inspect registered lenses.");
     println!();
-    println!("  dashboard");
-    println!("      Show ASCII dashboard with engine status.");
+    println!("  bench");
+    println!("      Run benchmark suite (registry, telescope, OUROBOROS, forge).");
+    println!();
+    println!("  dashboard [--html] [--output FILE]");
+    println!("      Show ASCII dashboard (default) or generate HTML dashboard.");
     println!();
     println!("  help");
     println!("      Show this help message.");

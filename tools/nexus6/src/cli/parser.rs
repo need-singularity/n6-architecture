@@ -34,8 +34,17 @@ pub enum CliCommand {
     },
     Lenses {
         category: Option<LensFilter>,
+        domain: Option<String>,
+        search: Option<String>,
+        count_only: bool,
+        complementary: Option<String>,
+        export_json: bool,
     },
-    Dashboard,
+    Bench,
+    Dashboard {
+        html: bool,
+        output: Option<String>,
+    },
     Help,
 }
 
@@ -73,7 +82,8 @@ pub fn parse_args(args: &[String]) -> Result<CliCommand, String> {
         "evolve" => parse_evolve(rest),
         "auto" => parse_auto(rest),
         "lenses" => parse_lenses(rest),
-        "dashboard" => Ok(CliCommand::Dashboard),
+        "bench" => Ok(CliCommand::Bench),
+        "dashboard" => parse_dashboard(rest),
         "help" | "--help" | "-h" => Ok(CliCommand::Help),
         other => Err(format!("Unknown command: '{}'. Run 'nexus6 help' for usage.", other)),
     }
@@ -294,6 +304,11 @@ fn parse_auto(args: &[String]) -> Result<CliCommand, String> {
 
 fn parse_lenses(args: &[String]) -> Result<CliCommand, String> {
     let mut category: Option<LensFilter> = None;
+    let mut domain: Option<String> = None;
+    let mut search: Option<String> = None;
+    let mut count_only = false;
+    let mut complementary: Option<String> = None;
+    let mut export_json = false;
 
     let mut i = 0;
     while i < args.len() {
@@ -316,6 +331,42 @@ fn parse_lenses(args: &[String]) -> Result<CliCommand, String> {
                     }
                 });
             }
+            "--domain" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--domain requires a domain name".to_string());
+                }
+                domain = Some(args[i].clone());
+            }
+            "--search" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--search requires a keyword".to_string());
+                }
+                search = Some(args[i].clone());
+            }
+            "--count" => {
+                count_only = true;
+            }
+            "--complementary" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--complementary requires a lens name".to_string());
+                }
+                complementary = Some(args[i].clone());
+            }
+            "--export" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--export requires a format (json)".to_string());
+                }
+                match args[i].as_str() {
+                    "json" => { export_json = true; }
+                    other => {
+                        return Err(format!("--export: unknown format '{}' (use json)", other));
+                    }
+                }
+            }
             other => {
                 return Err(format!("lenses: unknown option '{}'", other));
             }
@@ -323,7 +374,34 @@ fn parse_lenses(args: &[String]) -> Result<CliCommand, String> {
         i += 1;
     }
 
-    Ok(CliCommand::Lenses { category })
+    Ok(CliCommand::Lenses { category, domain, search, count_only, complementary, export_json })
+}
+
+fn parse_dashboard(args: &[String]) -> Result<CliCommand, String> {
+    let mut html = false;
+    let mut output: Option<String> = None;
+
+    let mut i = 0;
+    while i < args.len() {
+        match args[i].as_str() {
+            "--html" => {
+                html = true;
+            }
+            "--output" | "-o" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--output requires a file path".to_string());
+                }
+                output = Some(args[i].clone());
+            }
+            other => {
+                return Err(format!("dashboard: unknown option '{}'", other));
+            }
+        }
+        i += 1;
+    }
+
+    Ok(CliCommand::Dashboard { html, output })
 }
 
 #[cfg(test)]
@@ -395,7 +473,31 @@ mod tests {
     fn test_parse_dashboard() {
         assert_eq!(
             parse_args(&args("nexus6 dashboard")).unwrap(),
-            CliCommand::Dashboard
+            CliCommand::Dashboard { html: false, output: None }
+        );
+    }
+
+    #[test]
+    fn test_parse_dashboard_html() {
+        assert_eq!(
+            parse_args(&args("nexus6 dashboard --html")).unwrap(),
+            CliCommand::Dashboard { html: true, output: None }
+        );
+    }
+
+    #[test]
+    fn test_parse_dashboard_html_output() {
+        assert_eq!(
+            parse_args(&args("nexus6 dashboard --html --output report.html")).unwrap(),
+            CliCommand::Dashboard { html: true, output: Some("report.html".to_string()) }
+        );
+    }
+
+    #[test]
+    fn test_parse_bench() {
+        assert_eq!(
+            parse_args(&args("nexus6 bench")).unwrap(),
+            CliCommand::Bench
         );
     }
 
@@ -432,6 +534,11 @@ mod tests {
             cmd,
             CliCommand::Lenses {
                 category: Some(LensFilter::Core),
+                domain: None,
+                search: None,
+                count_only: false,
+                complementary: None,
+                export_json: false,
             }
         );
     }
@@ -441,7 +548,94 @@ mod tests {
         let cmd = parse_args(&args("nexus6 lenses")).unwrap();
         assert_eq!(
             cmd,
-            CliCommand::Lenses { category: None }
+            CliCommand::Lenses {
+                category: None,
+                domain: None,
+                search: None,
+                count_only: false,
+                complementary: None,
+                export_json: false,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_lenses_search() {
+        let cmd = parse_args(&args("nexus6 lenses --search quantum")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Lenses {
+                category: None,
+                domain: None,
+                search: Some("quantum".to_string()),
+                count_only: false,
+                complementary: None,
+                export_json: false,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_lenses_domain() {
+        let cmd = parse_args(&args("nexus6 lenses --domain physics")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Lenses {
+                category: None,
+                domain: Some("physics".to_string()),
+                search: None,
+                count_only: false,
+                complementary: None,
+                export_json: false,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_lenses_count() {
+        let cmd = parse_args(&args("nexus6 lenses --count")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Lenses {
+                category: None,
+                domain: None,
+                search: None,
+                count_only: true,
+                complementary: None,
+                export_json: false,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_lenses_complementary() {
+        let cmd = parse_args(&args("nexus6 lenses --complementary wave")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Lenses {
+                category: None,
+                domain: None,
+                search: None,
+                count_only: false,
+                complementary: Some("wave".to_string()),
+                export_json: false,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_lenses_export() {
+        let cmd = parse_args(&args("nexus6 lenses --export json")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Lenses {
+                category: None,
+                domain: None,
+                search: None,
+                count_only: false,
+                complementary: None,
+                export_json: true,
+            }
         );
     }
 

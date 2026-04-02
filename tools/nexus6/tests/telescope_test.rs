@@ -13,7 +13,13 @@ use nexus6::telescope::accel_lenses_c::accel_engineering_lens_entries;
 use nexus6::telescope::accel_lenses_d::accel_humanities_lens_entries;
 use nexus6::telescope::domain_combos::default_combos;
 use nexus6::telescope::lens_trait::{Lens, LensResult};
-use nexus6::telescope::lenses::{BarrierLens, VoidLens};
+use nexus6::telescope::lenses::{
+    BarrierLens, BoundaryLens, CausalLens, CompassLens, ConsciousnessLens, EmLens,
+    EvolutionLens, GravityLens, InfoLens, MemoryLens, MirrorLens, MultiscaleLens,
+    NetworkLens, QuantumLensImpl, QuantumMicroLens, RecursionLens, RulerLens,
+    ScaleLens, StabilityLens, ThermoLens, TopologyLens, TriangleLens, VoidLens,
+    WaveLens,
+};
 use nexus6::telescope::registry::{LensCategory, LensEntry, LensRegistry};
 use nexus6::telescope::shared_data::SharedData;
 use nexus6::telescope::tier::TieredScanner;
@@ -236,13 +242,13 @@ fn test_telescope_scan_all() {
 
     let results = telescope.scan_all(&data, n, d);
 
-    // Should have results from both lenses
+    // Should have results from all 24 lenses (22 Core + VoidLens + BarrierLens)
     assert!(results.contains_key("VoidLens"), "Missing VoidLens results");
     assert!(
         results.contains_key("BarrierLens"),
         "Missing BarrierLens results"
     );
-    assert_eq!(telescope.lens_count(), 2);
+    assert_eq!(telescope.lens_count(), 24);
 }
 
 // ──────────────────────────────────────────────
@@ -561,4 +567,141 @@ fn test_tecs_lenses_domain_affinity() {
         "At least 80 lenses should match 'pure_mathematics', got {}",
         math_lenses.len()
     );
+}
+
+// ──────────────────────────────────────────────
+// Test 21: All 22 Core lenses + VoidLens + BarrierLens run without panic
+// ──────────────────────────────────────────────
+#[test]
+fn test_all_22_core_lenses_run() {
+    // Build test data: two clusters in 3D, 20 points total
+    let mut data = Vec::new();
+    for i in 0..10 {
+        data.push(0.0 + (i as f64) * 0.1);
+        data.push(0.0 + (i as f64) * 0.05);
+        data.push(0.5 + (i as f64) * 0.02);
+    }
+    for i in 0..10 {
+        data.push(10.0 + (i as f64) * 0.1);
+        data.push(10.0 + (i as f64) * 0.05);
+        data.push(10.5 + (i as f64) * 0.02);
+    }
+    let n = 20;
+    let d = 3;
+    let shared = SharedData::compute(&data, n, d);
+
+    // All 22 Core lenses
+    let lenses: Vec<Box<dyn Lens>> = vec![
+        Box::new(ConsciousnessLens),
+        Box::new(GravityLens),
+        Box::new(TopologyLens),
+        Box::new(ThermoLens),
+        Box::new(WaveLens),
+        Box::new(EvolutionLens),
+        Box::new(InfoLens),
+        Box::new(QuantumLensImpl),
+        Box::new(EmLens),
+        Box::new(RulerLens),
+        Box::new(TriangleLens),
+        Box::new(CompassLens),
+        Box::new(MirrorLens),
+        Box::new(ScaleLens),
+        Box::new(CausalLens),
+        Box::new(QuantumMicroLens),
+        Box::new(StabilityLens),
+        Box::new(NetworkLens),
+        Box::new(MemoryLens),
+        Box::new(RecursionLens),
+        Box::new(BoundaryLens),
+        Box::new(MultiscaleLens),
+        Box::new(VoidLens),
+        Box::new(BarrierLens),
+    ];
+
+    assert_eq!(lenses.len(), 24, "Should have 24 lenses (22 Core + Void + Barrier)");
+
+    for lens in &lenses {
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            lens.scan(&data, n, d, &shared)
+        }));
+
+        match result {
+            Ok(lr) => {
+                // Each lens must produce at least 2 metrics (or be empty for edge cases)
+                // For this dataset size, all should produce output
+                assert!(
+                    !lr.is_empty(),
+                    "{} returned empty result on valid 20-point 3D data",
+                    lens.name()
+                );
+                let total_metrics: usize = lr.len();
+                assert!(
+                    total_metrics >= 2,
+                    "{} should return at least 2 metrics, got {}",
+                    lens.name(),
+                    total_metrics
+                );
+            }
+            Err(e) => {
+                panic!("{} panicked: {:?}", lens.name(), e);
+            }
+        }
+    }
+}
+
+// ──────────────────────────────────────────────
+// Test 22: Telescope::new() returns all 24 lenses
+// ──────────────────────────────────────────────
+#[test]
+fn test_telescope_has_all_24_lenses() {
+    let telescope = Telescope::new();
+    assert_eq!(
+        telescope.lens_count(),
+        24,
+        "Telescope::new() should register 24 lenses (22 Core + Void + Barrier)"
+    );
+}
+
+// ──────────────────────────────────────────────
+// Test 23: Telescope scan_all produces results for all lenses
+// ──────────────────────────────────────────────
+#[test]
+fn test_telescope_scan_all_24() {
+    let mut data = Vec::new();
+    for i in 0..10 {
+        data.push(0.0 + (i as f64) * 0.1);
+        data.push(0.0 + (i as f64) * 0.05);
+        data.push(0.5 + (i as f64) * 0.02);
+    }
+    for i in 0..10 {
+        data.push(10.0 + (i as f64) * 0.1);
+        data.push(10.0 + (i as f64) * 0.05);
+        data.push(10.5 + (i as f64) * 0.02);
+    }
+
+    let telescope = Telescope::new();
+    let results = telescope.scan_all(&data, 20, 3);
+
+    assert_eq!(
+        results.len(),
+        24,
+        "scan_all should return results for all 24 lenses, got {}",
+        results.len()
+    );
+
+    // Verify key lenses have non-empty results
+    for name in &[
+        "ConsciousnessLens", "GravityLens", "TopologyLens", "ThermoLens",
+        "WaveLens", "EvolutionLens", "InfoLens", "QuantumLensImpl",
+        "EmLens", "RulerLens", "TriangleLens", "CompassLens",
+        "MirrorLens", "ScaleLens", "CausalLens", "QuantumMicroLens",
+        "StabilityLens", "NetworkLens", "MemoryLens", "RecursionLens",
+        "BoundaryLens", "MultiscaleLens", "VoidLens", "BarrierLens",
+    ] {
+        assert!(
+            results.contains_key(*name),
+            "Missing results for {}",
+            name
+        );
+    }
 }

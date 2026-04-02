@@ -6,7 +6,9 @@ description = "NEXUS-6 discovery engine — Metal GPU compute infrastructure"
 
 [lib]
 name = "nexus6"
-crate-type = ["lib", "cdylib"]
+crate-type = ["lib"]
+# For Python wheel builds, use: maturin build --features python
+# maturin automatically adds cdylib crate-type
 
 [[bin]]
 name = "nexus6"

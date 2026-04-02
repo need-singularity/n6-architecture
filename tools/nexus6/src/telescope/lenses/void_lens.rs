@@ -26,23 +26,11 @@ impl Lens for VoidLens {
             return HashMap::new();
         }
 
-        let k = ((n as f64).sqrt().ceil() as usize).max(1).min(n - 1);
+        let k = shared.knn_k;
 
-        // Compute k-NN density for each point
+        // Use pre-computed k-NN density from SharedData (backed by gpu::fallback)
         let densities: Vec<f64> = (0..n)
-            .map(|i| {
-                let mut dists: Vec<f64> = (0..n)
-                    .filter(|&j| j != i)
-                    .map(|j| shared.dist(i, j))
-                    .collect();
-                dists.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
-                let knn_dist = dists[k.min(dists.len()) - 1];
-                if knn_dist > 0.0 {
-                    1.0 / knn_dist
-                } else {
-                    f64::MAX
-                }
-            })
+            .map(|i| shared.knn_density(i))
             .collect();
 
         let mean_density = densities.iter().sum::<f64>() / n as f64;
@@ -54,17 +42,10 @@ impl Lens for VoidLens {
 
         for i in 0..n {
             if densities[i] < threshold {
-                // Check if surrounded by higher-density points
-                let mut neighbor_dists: Vec<(usize, f64)> = (0..n)
-                    .filter(|&j| j != i)
-                    .map(|j| (j, shared.dist(i, j)))
-                    .collect();
-                neighbor_dists
-                    .sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap_or(std::cmp::Ordering::Equal));
-
-                let nearest_k = neighbor_dists.iter().take(k);
+                // Use pre-computed KNN indices from SharedData (gpu::fallback backed)
+                let neighbors = shared.knn(i);
                 let avg_neighbor_density: f64 =
-                    nearest_k.map(|(j, _)| densities[*j]).sum::<f64>() / k as f64;
+                    neighbors.iter().map(|&j| densities[j as usize]).sum::<f64>() / k as f64;
 
                 // Void = low density center with high density surroundings
                 if avg_neighbor_density > mean_density {
