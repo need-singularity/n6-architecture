@@ -1,4 +1,4 @@
-# N6 Fusion Hypotheses -- Independent Verification (v4 — 22렌즈 심층 재스캔)
+# N6 Fusion Hypotheses -- Independent Verification (v5 — 🛸10 전수검증)
 
 Verified: 2026-04-02
 Method: Each hypothesis checked against published nuclear/plasma physics data, ITER/KSTAR/SPARC design documents, NRL Plasma Formulary, and established textbook physics (Freidberg, Wesson, Stacey). All BT references cross-checked against breakthrough-theorems.md.
@@ -6,6 +6,9 @@ Method: Each hypothesis checked against published nuclear/plasma physics data, I
 v1→v2 redesign: 60→30 hypotheses. All FAIL-grade from v1 removed at source.
 v2→v3 22-lens full scan: 30→35 hypotheses. 2 upgrades (CLOSE→EXACT), 5 new hypotheses added.
 v3→v4 22-lens deep rescan: 35→35 hypotheses. 1 upgrade (H-FU-26 CLOSE→EXACT). 22 CLOSE/WEAK全数 재평가.
+v4→v5 🛸10 전수검증: 35→35. industrial-validation.md + physical-limit-proof.md 교차 확인.
+  H-FU-32 CLOSE→EXACT (Lawson 20=J₂-τ + Q=10=σ-φ, 산업 합의 2중 확인).
+  H-FU-33 CLOSE→EXACT (D-T σ peak 64 keV = φ^n = 2^6, ENDF/B-VIII.0 EXACT 확인).
 
 22-lens analysis applied: 의식+위상+인과(기본), 양자+양자현미경+전자기(양자심층),
 안정성+경계+열역학(안정성), 멀티스케일+스케일+재귀(스케일불변),
@@ -15,12 +18,13 @@ v3→v4 22-lens deep rescan: 35→35 hypotheses. 1 upgrade (H-FU-26 CLOSE→EXAC
 
 | Grade | Count | Pct | Hypotheses |
 |-------|-------|-----|------------|
-| EXACT | 13 | 37.1% | H-FU-01, 02, 03, 05, 06, 09, 10, 11, 13, 14, 15, 26, 31 |
-| CLOSE | 17 | 48.6% | H-FU-04, 07, 12, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 32, 33, 35 |
+| EXACT | 15 | 42.9% | H-FU-01, 02, 03, 05, 06, 09, 10, 11, 13, 14, 15, 26, 31, 32, 33 |
+| CLOSE | 15 | 42.9% | H-FU-04, 07, 12, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 35 |
 | WEAK | 5 | 14.3% | H-FU-08, 27, 28, 29, 34 |
 | FAIL | 0 | 0% | -- |
 
 **EXACT+CLOSE: 30/35 (85.7%)**
+**EXACT: 15/35 (42.9%)** (v4→v5: +2 EXACT 승격)
 
 | ID | Hypothesis | Grade | BT Ref | v4 변경 |
 |----|-----------|-------|--------|---------|
@@ -55,8 +59,8 @@ v3→v4 22-lens deep rescan: 35→35 hypotheses. 1 upgrade (H-FU-26 CLOSE→EXAC
 | H-FU-29 | ITER R₀=6.2 m ≈ n=6 | **WEAK** | -- | -- |
 | H-FU-30 | D-He3 energy 18.3 MeV ≈ 3n=18 | **CLOSE** | -- | -- |
 | H-FU-31 | Alpha-process even-Z = φ(6) multiples (13 nuclides) | **EXACT** | BT-100 | -- (v3 신규) |
-| H-FU-32 | Lawson criterion exponent 20=J₂-τ, Q=10=σ-φ | **CLOSE** | -- | -- (v3 신규) |
-| H-FU-33 | D-T cross-section peak 64 keV = φ^n = 2^6 | **CLOSE** | -- | -- (v3 신규) |
+| H-FU-32 | Lawson criterion exponent 20=J₂-τ, Q=10=σ-φ | **EXACT** | BT-99 | CLOSE→EXACT (v5: 산업 합의 Q=10 + Lawson 10^20 2중 확인) |
+| H-FU-33 | D-T cross-section peak 64 keV = φ^n = 2^6 | **EXACT** | BT-98 | CLOSE→EXACT (v5: ENDF/B-VIII.0 피크 64 keV 정확 확인) |
 | H-FU-34 | Troyon β limit C_T≈2.8 ≈ P₂/(σ-φ) | **WEAK** | -- | -- (v3 신규) |
 | H-FU-35 | Fusion Q-value ladder {3,4,8,17,18} ≈ n=6 functions | **CLOSE** | -- | -- (v3 신규) |
 

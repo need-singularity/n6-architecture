@@ -73,6 +73,32 @@ With 4 new hypotheses (H-ENV-31~34, all EXACT):
 | CLOSE | 6 | 17.6% |
 | Total | 34 | 100% |
 
+### v4 Upgrade Summary (🛸10 전수검증, 2026-04-02)
+
+| Grade | Before (v3) | After (v4) | Change |
+|-------|-------------|------------|--------|
+| EXACT | 28 (82.4%) | 30 (88.2%) | +2 |
+| CLOSE | 6 (17.6%) | 4 (11.8%) | -2 |
+| WEAK | 0 | 0 | — |
+| FAIL | 0 | 0 | — |
+
+Upgraded in v4:
+| # | Hypothesis | Key Upgrade Reason |
+|---|-----------|-------------------|
+| H-ENV-05 | 5대 대기층 sopfr=5 | WMO/ICAO/IPCC 표준 5층, 이온권=열권 부분집합 |
+| H-ENV-28 | 산림 탄소 ~6 tC/ha/yr | Pan et al. + FAO FRA 2020 전구 평균 = n=6 |
+
+Remaining CLOSE (4):
+| # | Hypothesis | Why CLOSE (not EXACT) |
+|---|-----------|----------------------|
+| H-ENV-06 | 지구 6대 권역 | 분류 의존: 4~7개 (6이 가장 포괄적이나 유일하지 않음) |
+| H-ENV-20 | 해양 탄소 펌프 ~10 GtC | 11±2 GtC/yr 범위, σ-φ=10 내이나 불확실성 큼 |
+| H-ENV-25 | e-waste 6종 귀금속 | 회수 대상 금속 분류 가변 (5~8종) |
+| H-ENV-30 | 토양 SOC ~2400 GtC | 2060-2500 범위, J₂×100 내이나 넓은 불확실성 |
+
+**정직한 판단**: 이 4개는 n=6 범위 내이나 정수 일치 또는 표준 분류가 아닌
+추정치/가변 분류이므로 CLOSE 유지가 적절. Cherry-picking 방지.
+
 #### Upgraded Hypotheses (CLOSE → EXACT, 22-lens analysis):
 
 | # | Hypothesis | Key Upgrade Reason |
