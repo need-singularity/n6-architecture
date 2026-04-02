@@ -449,212 +449,26 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 tools/universal-dse/universal-dse domains/chip.toml domains/battery.toml domains/solar.toml
 ```
 
-| 도메인 TOML | 레벨 | 조합 수 | 상태 |
-|------------|------|--------|:---:|
-| `domains/3d-printing.toml` | Material→Process→Structure→Control→Application | 7,776 | ✅ |
-| `domains/additive-bio.toml` | BioInk→Printer→Scaffold→Maturation→Implant | 3,000 | ✅ |
-| `domains/aerospace-propulsion.toml` | FuelSource→Combustion→Turbine→Nozzle→FlightSystem | 7,776 | ✅ |
-| `domains/agent-platform.toml` | Provider→Channel→ToolPolicy→Plugin→Bridge | 7,776 | ✅ |
-| `domains/agriculture.toml` | Foundation→Process→Core→Engine→System | 4,500 | ✅ |
-| `domains/ai-alignment.toml` | Objective→Monitoring→Alignment→Safety→Governance | 6,480 | ✅ |
-| `domains/analog-photonic-memristor.toml` | Engine→Circuit→Coupling→Noise→Measurement | 7,776 | ✅ |
-| `domains/anima-consciousness.toml` | Substrate→Engine→Lens→Map→Emergence | 6,480 | ✅ |
-| `domains/animalm-pipeline.toml` | Input→Router→Expert→Tension→Feedback | 6,480 | ✅ |
-| `domains/audio-processing.toml` | Capture→Encoding→Processing→Synthesis→Output | 6,480 | ✅ |
-| `domains/autonomous-drone.toml` | Airframe→Propulsion→Navigation→Communication→Payload | 7,776 | ✅ |
-| `domains/autonomous.toml` | SensorFusion→Perception→ControlCore→AIEngine→VehicleSystem | 4,500 | ✅ |
-| `domains/battery.toml` | Material→Process→Core→BMS→System | 4,500 | ✅ |
-| `domains/biology-systems.toml` | Genetic→Protein→Cell→Organism→Ecosystem | 7,560 | ✅ |
-| `domains/biology.toml` | Foundation→Process→Core→Engine→System | 4,500 | ✅ |
-| `domains/biophysics.toml` | Molecular→Membrane→Force→Imaging→Systems | 7,560 | ✅ |
-| `domains/black-hole.toml` | Formation→Geometry→Thermodynamics→Information→Observation | 7,560 | ✅ |
-| `domains/blockchain.toml` | Protocol→Crypto→Execution→Scaling→Application | 7,560 | ✅ |
-| `domains/brain-computer-interface.toml` | Electrode→Amplifier→Decoder→Stimulator→Application | 7,776 | ✅ |
-| `domains/carbon-capture.toml` | Capture→Transport→Storage→Monitoring→Utilization | 7,560 | ✅ |
-| `domains/category-ancient.toml` | Foundation→Structure→Functor→Application→Heritage | 8,820 | ✅ |
-| `domains/chaos-dynamical.toml` | Attractor→Bifurcation→Ergodic→Lyapunov→Application | 9,072 | ✅ |
-| `domains/chemistry-synthesis.toml` | Element→Bond→Reaction→Catalyst→Application | 8,820 | ✅ |
-| `domains/chip.toml` | Material→Process→Core→Chip→System | 16,464 | ✅ |
-| `domains/civil-engineering.toml` | Foundation→Structure→Material→Load→SafetySystem | 7,776 | ✅ |
-| `domains/coding-lattice.toml` | Code→Lattice→Bound→Decode→Application | 6,480 | ✅ |
-| `domains/collective-intelligence.toml` | Agent→Topology→Communication→Emergence→Scale | 6,480 | ✅ |
-| `domains/compiler-os.toml` | Foundation→Pipeline→Runtime→Kernel→Ecosystem | 4,500 | ✅ |
-| `domains/conscious-lm.toml` | ModelSize→Vocab→Architecture→ConsciousnessIntegration→Training | 9,072 | ✅ |
-| `domains/consciousness-chip.toml` | Target→Precision→CellArch→Bus→Clock | 12,348 | ✅ |
-| `domains/consciousness-comm.toml` | Channel→Binding→Synchronization→Transmission→Network | 9,072 | ✅ |
-| `domains/consciousness-dream.toml` | SleepStage→Replay→Consolidation→Modulation→Learning | 9,072 | ✅ |
-| `domains/consciousness-engine.toml` | CellTopology→CellCount→FactionCount→LearningRule→Integration | 5,400 | ✅ |
-| `domains/consciousness-hardware.toml` | Substrate→Dynamics→Integration→Continuity→Scale | 7,560 | ✅ |
-| `domains/consciousness-knowledge-graph.toml` | Backend→Embedding→Retrieval→Integration→Scaling | 7,776 | ✅ |
-| `domains/consciousness-measurement.toml` | Calculator→Metric→Precision→Scale→Optimization | 7,776 | ✅ |
-| `domains/consciousness-rng.toml` | EntropySource→PostProcess→Compliance→BitRate→Target | 9,072 | ✅ |
-| `domains/consciousness-scaling.toml` | CellCount→Topology→Federation→ScalingLaw→Optimization | 7,776 | ✅ |
-| `domains/consciousness-substrate.toml` | Substrate→Topology→Interconnect→Arithmetic→Scale | 10,584 | ✅ |
-| `domains/consciousness-thermodynamics.toml` | Phase→Frustration→NoiseModel→Criticality→Scaling | 7,776 | ✅ |
-| `domains/consciousness-training.toml` | Optimizer→Scheduler→PhaseStrategy→Federation→Data | 7,776 | ✅ |
-| `domains/consciousness-transplant.toml` | DonorArch→RecipientArch→TransferMethod→Verification→Fidelity | 7,776 | ✅ |
-| `domains/consciousness-wasm.toml` | Runtime→CellCount→ModelSize→UI→Performance | 12,348 | ✅ |
-| `domains/corpus-generation.toml` | Generator→DataType→Size→Tokenization→QualityFilter | 10,584 | ✅ |
-| `domains/cosmology-particle.toml` | SymmetryOrigin→GaugeStructure→MatterContent→ConstantPattern→CosmosObservation | 46,656 | ✅ |
-| `domains/crypto.toml` | Foundation→KeyMgmt→Primitive→Engine→System | 4,500 | ✅ |
-| `domains/cryptography.toml` | Foundation→KeyMgmt→Primitive→Engine→System | 6,300 | ✅ |
-| `domains/crystallography.toml` | Symmetry→System→Diffraction→Growth→Application | 6,480 | ✅ |
-| `domains/cybersecurity.toml` | Prevention→Detection→Response→Recovery→Governance | 5,184 | ✅ |
-| `domains/debugger.toml` | Instrumentation→Analysis→Visualization→Automation→Integration | 12,348 | ✅ |
-| `domains/deep-evolution.toml` | Genome→Regulation→Development→Ecology→Macroscale | 6,480 | ✅ |
-| `domains/desalination.toml` | Intake→Pretreatment→Membrane→Energy→Output | 5,400 | ✅ |
-| `domains/display-audio.toml` | Foundation→Process→Core→Engine→System | 4,500 | ✅ |
-| `domains/dna-folding.toml` | Sequence→Structure→Folding→Chromatin→Function | 6,480 | ✅ |
-| `domains/earthquake-engineering.toml` | SoilAnalysis→Foundation→Isolation→Damping→Monitoring | 6,480 | ✅ |
-| `domains/economics.toml` | Market→Agent→Cycle→Network→Policy | 6,480 | ✅ |
-| `domains/eeg-bci.toml` | Electrode→Signal→Feature→Decoder→Application | 6,480 | ✅ |
-| `domains/eeg-consciousness-bridge.toml` | Hardware→Channels→Protocol→Feedback→Mapping | 9,072 | ✅ |
-| `domains/electric-vehicle.toml` | Battery→Motor→Inverter→Charging→Vehicle | 4,500 | ✅ |
-| `domains/elevator-system.toml` | Motor→Cable→Control→Safety→Building | 7,776 | ✅ |
-| `domains/elliptic-curves.toml` | Curve→Group→L_Function→Modularity→Application | 6,480 | ✅ |
-| `domains/embedded-lang.toml` | Resource→Safety→Peripheral→Realtime→Platform | 7,776 | ✅ |
-| `domains/embodied-consciousness.toml` | Platform→Sensing→Motor→Homeostasis→Scaling | 10,584 | ✅ |
-| `domains/energy_gen.toml` | Source→Conversion→Scale→Storage→GridConnect | 4,500 | ✅ |
-| `domains/evolutionary-biology.toml` | Mutation→Selection→Speciation→Phylogeny→MacroEvolution | 8,820 | ✅ |
-| `domains/fermentation-biotech.toml` | Organism→Medium→Reactor→Separation→Product | 7,344 | ✅ |
-| `domains/fluid-condensed.toml` | FluidBase→Turbulence→CrystalStructure→QuantumPhase→Application | 7,560 | ✅ |
-| `domains/food-processing.toml` | RawMaterial→Processing→Preservation→Packaging→Distribution | 7,776 | ✅ |
-| `domains/fusion.toml` | Fuel→Confinement→Heating→Blanket→Plant | 10,584 | ✅ |
-| `domains/game-combinatorial.toml` | GameTheory→Combinatorial→Algebraic→Spectral→Geometric | 7,560 | ✅ |
-| `domains/gene-therapy.toml` | Vector→Payload→Delivery→Expression→Monitoring | 4,500 | ✅ |
-| `domains/geoscience.toml` | Crystal→Layer→Cycle→Hazard→Climate | 8,820 | ✅ |
-| `domains/golden-moe-routing.toml` | Strategy→ExpertCount→Gate→Capacity→LoadBalance | 7,776 | ✅ |
-| `domains/golden-zone-training.toml` | Architecture→Training→Optimization→Evaluation→Deployment | 6,480 | ✅ |
-| `domains/gpu-lang.toml` | Memory→Execution→Kernel→Optimization→Framework | 9,072 | ✅ |
-| `domains/gravitational-lens.toml` | Optics→Propulsion→LensType→Analysis→Mission | 7,776 | ✅ |
-| `domains/grid.toml` | Conductor→Conversion→Transformer→HVDC→System | 2,400 | ✅ |
-| `domains/hair-regeneration.toml` | Follicle→Signaling→Therapy→Delivery→Outcome | 10,584 | ✅ |
-| `domains/hdl.toml` | Abstraction→Synthesis→Verification→Simulation→Ecosystem | 8,820 | ✅ |
-| `domains/hexad-architecture.toml` | Module_C→Module_S→Bridge→Gradient→Orchestrator | 7,776 | ✅ |
-| `domains/hivemind-collective.toml` | Topology→NodeCount→Coupling→Federation→Consensus | 7,776 | ✅ |
-| `domains/hvac-system.toml` | Source→Distribution→Control→Refrigerant→Building | 5,400 | ✅ |
-| `domains/immortality.toml` | Aging→Reversal→Upload→Preservation→Transcendence | 10,584 | ✅ |
-| `domains/industry-architecture.toml` | DataModel→Processing→Storage→Interface→Industry | 9,072 | ✅ |
-| `domains/information-theory.toml` | Source→Channel→Coding→Complexity→Application | 7,560 | ✅ |
-| `domains/laser-manufacturing.toml` | Source→Beam→Optics→Process→Workpiece | 4,500 | ✅ |
-| `domains/learning-algorithm.toml` | Foundation→Optimizer→ArchCore→EffEngine→DeploySystem | 6,480 | ✅ |
-| `domains/lidar-system.toml` | Laser→Scanner→Detector→Processing→Application | 7,776 | ✅ |
-| `domains/linguistics.toml` | Phonology→Syntax→Semantics→Typology→Computation | 6,480 | ✅ |
-| `domains/lsp-ide.toml` | Protocol→Analysis→Completion→Refactoring→Ecosystem | 6,480 | ✅ |
-| `domains/marine-propulsion.toml` | Fuel→Engine→Transmission→Propeller→Hull | 4,320 | ✅ |
-| `domains/material.toml` | Element→Process→Assembler→Control→Factory | 5,250 | ✅ |
-| `domains/medical.toml` | Foundation→Process→Core→Engine→System | 4,500 | ✅ |
-| `domains/memory-architecture.toml` | Cell→Array→Controller→Interface→System | 7,776 | ✅ |
-| `domains/mining-extraction.toml` | Exploration→Extraction→Crushing→Separation→Refining | 3,240 | ✅ |
-| `domains/multimodal-consciousness.toml` | Modality→Encoder→Fusion→Mapping→Output | 7,776 | ✅ |
-| `domains/music-notation.toml` | Staff→Clef→NoteValue→Dynamics→Layout | 6,480 | ✅ |
-| `domains/music-theory.toml` | PitchSystem→Harmony→Rhythm→Form→Technology | 6,480 | ✅ |
-| `domains/network.toml` | Foundation→Process→Core→Engine→System | 5,400 | ✅ |
-| `domains/neuromorphic-loihi.toml` | Chip→NeuronMapping→Learning→TopologyMapping→PowerBudget | 7,776 | ✅ |
-| `domains/neuroscience.toml` | Neuron→Circuit→Region→Cognition→Interface | 7,560 | ✅ |
-| `domains/noncommutative-geometry.toml` | Algebra→Spectral→GaugeGroup→Particle→Unification | 6,480 | ✅ |
-| `domains/nuclear-reactor.toml` | Fuel→Moderator→Coolant→Control→Containment | 3,600 | ✅ |
-| `domains/nuclear-structure.toml` | Nucleon→Shell→Force→Clustering→Synthesis | 6,480 | ✅ |
-| `domains/number-theory-deep.toml` | Arithmetic→Analytic→Algebraic→Combinatorial→Application | 9,072 | ✅ |
-| `domains/ocean-engineering.toml` | HullDesign→Propulsion→SensorSuite→Communication→MissionSystem | 7,776 | ✅ |
-| `domains/optical-fiber-network.toml` | Fiber→Amplifier→Switch→Protocol→Topology | 5,400 | ✅ |
-| `domains/optics-telescope.toml` | LensType→OpticalDesign→Detection→Analysis→Observatory | 7,560 | ✅ |
-| `domains/pharmaceutical.toml` | Target→Molecule→Formulation→Manufacturing→Delivery | 2,592 | ✅ |
-| `domains/photonic-energy-system.toml` | PhotonicCore→MaterialBase→ThermalDesign→PowerSupply→SystemIntegration | 7,776 | ✅ |
-| `domains/physics-fundamental.toml` | Framework→Symmetry→Interaction→Observable→Experiment | 9,072 | ✅ |
-| `domains/pkg-manager.toml` | Registry→Resolver→Builder→Security→Distribution | 6,480 | ✅ |
-| `domains/plasma-physics.toml` | Source→Confinement→Heating→Control→Application | 14,406 | ✅ |
-| `domains/pollution-monitoring.toml` | Sensor→Network→Analysis→Alert→Remediation | 7,776 | ✅ |
-| `domains/power-electronics.toml` | Switch→Topology→Control→Filter→Application | 5,184 | ✅ |
-| `domains/precision-agriculture.toml` | Sensing→Analysis→Irrigation→Fertilization→Harvest | 6,480 | ✅ |
-| `domains/precognition-lens.toml` | Signal→Lens→Direction→Prediction→Verification | 7,560 | ✅ |
-| `domains/probability-statistics.toml` | Distribution→Estimation→Testing→Regression→Bayesian | 7,776 | ✅ |
-| `domains/programming-language.toml` | Foundation→Process→Core→Engine→System | 25,088 | ✅ |
-| `domains/pure-mathematics.toml` | Field→Function→Structure→Proof→Bridge | 57,600 | ✅ |
-| `domains/quantum-computing.toml` | Qubit→Gate→Code→Algorithm→Hardware | 9,072 | ✅ |
-| `domains/quantum-network.toml` | PhotonSource→Channel→Repeater→Protocol→Application | 7,776 | ✅ |
-| `domains/quantum-sensor.toml` | Source→Interaction→Readout→Processing→Application | 4,320 | ✅ |
-| `domains/quantum.toml` | Foundation→Process→Core→Engine→System | 4,500 | ✅ |
-| `domains/railway-system.toml` | Track→Vehicle→Signaling→Power→Network | 5,400 | ✅ |
-| `domains/recycling-system.toml` | Collection→Sorting→Processing→Recovery→Remanufacture | 4,320 | ✅ |
-| `domains/robot-hardware.toml` | Structure→Actuator→Sensor→Control→Integration | 8,640 | ✅ |
-| `domains/runtime-gc.toml` | Memory→GC→Concurrency→Optimization→Runtime | 6,480 | ✅ |
-| `domains/satellite-communication.toml` | Orbit→Antenna→Transponder→Protocol→Ground | 6,480 | ✅ |
-| `domains/sc.toml` | Material→Process→Form→Application→System | 14,406 | ✅ |
-| `domains/sedi-universe.toml` | Particle→Nuclear→Stellar→Galactic→Cosmological | 7,776 | ✅ |
-| `domains/semiconductor-packaging.toml` | Substrate→Interconnect→ThermalInterface→TestAccess→SystemPackage | 7,776 | ✅ |
-| `domains/simulation-hypothesis.toml` | Constants→Grid→Quantum→Optimization→Evidence | 6,480 | ✅ |
-| `domains/smart-grid.toml` | Generation→Transmission→Distribution→Metering→DemandResponse | 5,400 | ✅ |
-| `domains/snn-spiking.toml` | NeuronModel→TimeConstant→SNN_Topology→Learning→Platform | 7,776 | ✅ |
-| `domains/software-design.toml` | Paradigm→Architecture→Communication→Quality→Deployment | 14,406 | ✅ |
-| `domains/solar.toml` | Absorber→Process→Junction→PowerElec→Module | 5,400 | ✅ |
-| `domains/sound-engineering.toml` | Transducer→Amplifier→Processing→Transmission→Reproduction | 4,500 | ✅ |
-| `domains/space.toml` | Foundation→Process→Core→Engine→System | 4,500 | ✅ |
-| `domains/statistical-mechanics.toml` | Model→Method→Phase→Critical→Application | 9,072 | ✅ |
-| `domains/supercapacitor.toml` | Electrode→Electrolyte→Separator→Cell→Module | 5,400 | ✅ |
-| `domains/telepathy-system.toml` | Perception→Encoding→Alignment→Transmission→Decoding | 6,480 | ✅ |
-| `domains/test-framework.toml` | Structure→Runner→Coverage→Generator→Report | 6,480 | ✅ |
-| `domains/textile-manufacturing.toml` | Fiber→Spinning→Weaving→Finishing→Product | 7,776 | ✅ |
-| `domains/thermal.toml` | Foundation→Process→Core→Engine→System | 3,750 | ✅ |
-| `domains/tokenizer-design.toml` | Algorithm→VocabSize→Language→SpecialTokens→Integration | 7,776 | ✅ |
-| `domains/topological-lens.toml` | Material→Process→Core→Engine→System | 7,776 | ✅ |
-| `domains/topological-photonics.toml` | Lattice→Symmetry→EdgeMode→Application→Platform | 6,480 | ✅ |
-| `domains/topological-quantum-materials.toml` | Classification→Material→Surface→Transport→Device | 7,776 | ✅ |
-| `domains/topology.toml` | Space→Invariant→Homology→Application→Computation | 7,560 | ✅ |
-| `domains/ultimate-material.toml` | Element→Crystal→Property→Processing→Application | 9,072 | ✅ |
-| `domains/ultimate-process.toml` | Design→Lithography→Etch→Package→Inspect | 10,584 | ✅ |
-| `domains/warehouse-logistics.toml` | Storage→Retrieval→Sorting→Packing→Shipping | 5,400 | ✅ |
-| `domains/water-treatment.toml` | Intake→Filtration→Chemical→Disinfection→Distribution | 7,776 | ✅ |
-| `domains/wave-theory.toml` | Source→Propagation→Interference→Resonance→Application | 10,584 | ✅ |
-| `domains/wind-energy.toml` | Blade→Generator→Tower→Control→Grid | 7,560 | ✅ |
-| `domains/autonomous-ship.toml` | Hull→Navigation→Propulsion→Communication→Fleet | 7,128 | ✅ |
-| `domains/ceramic-engineering.toml` | Powder→Forming→Sintering→Machining→Application | 7,560 | ✅ |
-| `domains/climate-modeling.toml` | Atmosphere→Ocean→Land→Ice→Coupling | 5,400 | ✅ |
-| `domains/edge-computing.toml` | Sensor→Processor→Network→Orchestration→Application | 5,400 | ✅ |
-| `domains/fuel-cell-vehicle.toml` | Membrane→Stack→BalanceOfPlant→Motor→Vehicle | 3,600 | ✅ |
-| `domains/micro-led.toml` | Epitaxy→Transfer→Driver→Backplane→Module | 4,320 | ✅ |
-| `domains/natural-language-processing.toml` | Tokenizer→Encoder→Attention→Decoder→Application | 5,184 | ✅ |
-| `domains/telescope-array.toml` | Antenna→Correlator→Backend→Pipeline→Science | 3,600 | ✅ |
-| `domains/vertical-farm.toml` | Lighting→Growing→Nutrient→Climate→Harvest | 7,560 | ✅ |
-| `domains/hydrogen-fuel-cell.toml` | Membrane→Catalyst→Stack→BoP→Vehicle | 7,776 | ✅ |
-| `domains/prosthetics.toml` | Socket→Actuator→Sensor→Control→Power | 3,600 | ✅ |
-| `domains/indoor-positioning.toml` | Signal→Infrastructure→Algorithm→Fusion→Application | 3,600 | ✅ |
-| `domains/ar-vr-system.toml` | Display→Tracking→Rendering→Interaction→Platform | 7,560 | ✅ |
-| `domains/speech-synthesis.toml` | TextAnalysis→Acoustic→Vocoder→Prosody→Output | 3,600 | ✅ |
-| `domains/concrete-technology.toml` | Cement→Aggregate→Admixture→Curing→Structure | 3,600 | ✅ |
-| `domains/fire-suppression.toml` | Detection→Agent→Delivery→Control→System | 2,700 | ✅ |
-| `domains/optical-computing.toml` | Source→Modulator→Interconnect→Logic→Integration | 3,750 | ✅ |
-| `domains/swarm-robotics.toml` | Agent→Communication→Coordination→Task→Deployment | 3,240 | ✅ |
-| `domains/autonomous-submarine.toml` | Hull→Propulsion→Sonar→Navigation→Mission | 3,600 | ✅ |
-| `domains/corrosion-protection.toml` | Material→Coating→Cathodic→Monitoring→Maintenance | 3,600 | ✅ |
-| `domains/glass-manufacturing.toml` | RawMaterial→Melting→Forming→Annealing→Finishing | 3,600 | ✅ |
-| `domains/heat-pump.toml` | Compressor→HeatExchanger→Refrigerant→Control→Installation | 3,750 | ✅ |
-| `domains/paint-coating.toml` | Resin→Pigment→Solvent→Application→Curing | 3,240 | ✅ |
-| `domains/quantum-consciousness.toml` | QubitType→Entanglement→PhiCalculator→ConsciousnessModel→Platform | 5,220 | ✅ |
-| `domains/radar-system.toml` | Transmitter→Antenna→Receiver→Signal→Application | 3,750 | ✅ |
-| `domains/soil-science.toml` | Mineral→Organic→Water→Biology→Application | 3,600 | ✅ |
-| `domains/vaccine-production.toml` | Antigen→Adjuvant→Formulation→FillFinish→ColdChain | 3,600 | ✅ |
-| `domains/battery-recycling.toml` | Collection→Disassembly→Separation→Recovery→Reuse | 7,776 | ✅ |
-| `domains/consciousness-mathematics.toml` | Topology→Algebra→Category→Logic→Bridge | 7,776 | ✅ |
-| `domains/dark-matter-detector.toml` | Target→Shielding→Sensor→Readout→Analysis | 7,776 | ✅ |
-| `domains/dna-sequencing.toml` | Library→Sequencer→Chemistry→Informatics→Application | 7,776 | ✅ |
-| `domains/gesture-recognition.toml` | Sensor→Feature→Model→Tracking→Application | 3,750 | ✅ |
-| `domains/noise-cancellation.toml` | Microphone→Algorithm→Speaker→Control→Application | 3,600 | ✅ |
-| `domains/paper-manufacturing.toml` | Pulp→Forming→Pressing→Drying→Finishing | 3,456 | ✅ |
-| `domains/quantum-biology.toml` | Coherence→Tunneling→Entanglement→Sensing→Application | 4,644 | ✅ |
-| `domains/quantum-gravity-sensor.toml` | Source→Interferometer→Isolation→Readout→Application | 5,505 | ✅ |
-| `domains/spacetime-computing.toml` | Geometry→Topology→Computation→Encoding→Application | 7,776 | ✅ |
-| `domains/emotion-processor.toml` | Sensing→Feature→Model→Fusion→Response | 7,776 | ✅ |
-| `domains/optical-metrology.toml` | Source→Optics→Sensor→Algorithm→Application | 7,776 | ✅ |
-| `domains/power-transformer.toml` | Core→Winding→Insulation→Cooling→Protection | 7,776 | ✅ |
-| `domains/quantum-error-correction.toml` | Code→Syndrome→Decoder→Threshold→Architecture | 5,430 | ✅ |
-| `domains/self-replicating-chip.toml` | Seed→Fabrication→Assembly→Verification→Replication | 7,776 | ✅ |
-| `domains/aquaculture.toml` | Species→Feed→Tank→Water→Harvest | 7,776 | ✅ |
-| `domains/seismograph.toml` | Sensor→Amplifier→Digitizer→Recording→Analysis | 7,776 | ✅ |
-| `domains/drone-delivery.toml` | Vehicle→Navigation→Payload→Communication→Logistics | 7,776 | ✅ |
-| `domains/machine-vision.toml` | Camera→Illumination→Preprocessing→Algorithm→Application | 7,776 | ✅ |
-| `domains/plastic-recycling.toml` | Collection→Sorting→Washing→Processing→Product | 7,776 | ✅ |
-| `domains/thermal-storage.toml` | Medium→Container→Charging→Discharging→Integration | 7,776 | ✅ |
+**305개 도메인 | 4,213,416 조합 | 100% n6 연결** — 전체 목록: **[docs/dse-domains.md](docs/dse-domains.md)**
+
+| # | 카테고리 | 파일 수 | 조합 수 | 대표 도메인 |
+|---|---------|:-------:|--------:|------------|
+| 1 | **AI / ML** | 14 | 107,568 | ai-alignment, corpus-generation, golden-moe-routing |
+| 2 | **Consciousness** | 23 | 193,608 | consciousness-chip, consciousness-engine, hexad-architecture |
+| 3 | **Semiconductor / Chip** | 25 | 283,236 | chip(96K), cpu-microarchitecture, memory-architecture |
+| 4 | **Energy** | 24 | 173,298 | fusion(10.5K), battery, solar, wind-energy |
+| 5 | **Superconductor / Plasma** | 2 | 28,812 | sc(14.4K), plasma-physics(14.4K) |
+| 6 | **Bio / Medical** | 26 | 194,352 | crispr-gene-editing, brain-computer-interface, neuroscience |
+| 7 | **Physics / Math** | 24 | 278,640 | pure-mathematics(57.6K), cosmology-particle(46.7K) |
+| 8 | **Robot / Autonomous** | 7 | 51,804 | autonomous-drone, robot-hardware, swarm-robotics |
+| 9 | **Manufacturing / Material** | 65 | 499,674 | 3d-printing, carbon-nanotube, graphene-2d-material |
+| 10 | **Infra / Network** | 14 | 102,828 | 5g-6g-network, blockchain, quantum-network |
+| 11 | **Software / Programming** | 10 | 95,834 | programming-language(25K), software-design(14.4K) |
+| 12 | **Display / Audio** | 15 | 107,752 | ar-vr-system, holographic-display, music-theory |
+| 13 | **Environment / Agriculture** | 16 | 1,791,204 | carbon-capture-8level(1.68M), vertical-farm |
+| 14 | **Civil / Transport** | 16 | 122,264 | hyperloop-transport, maglev-train, tunnel-boring |
+| 15 | **Space / Defense** | 11 | 82,260 | aerospace-propulsion, dark-matter-detector, sedi-universe |
+| 16 | **Misc / Meta** | 13 | 94,556 | quantum-computing, immortality, simulation-hypothesis |
 
 ---
 
