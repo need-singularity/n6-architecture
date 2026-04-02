@@ -49,11 +49,11 @@
 | [⚡ 에너지](#-에너지-energy) | 🛸6 | 3 | 13 | 10,225 | 배터리8단 + 태양전지 + 통합 |
 | [🤖 AI/ML](#-ai--ml) | 🛸6 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
 | [🌍 환경보호](#-환경보호-environment) | 🛸7 | 3 | 5 | 3.6M | 환경8단 + 탄소포집8단 + 진화 |
-| [🔬 물리·수학](#-물리수학-physics--math) | 🛸4 | 3 | 9 | 66,824 | 초전도체 + 순수수학 |
-| [🧬 물질합성](#-물질합성-materials) | 🛸5 | 2 | 4 | 3,600 | 4Mk + alien 98%EXACT + 14 TOML |
+| [🔬 물리·수학](#-물리수학-physics--math) | 🛸5 | 3 | 9 | 66,824 | Cosmo 53%EXACT + Plasma 50%EXACT + Quantum 13%EXACT |
+| [🧬 물질합성](#-물질합성-materials) | 🛸5 | 2 | 4 | 3,600 | 60%EXACT + 14 TOML |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | 1 | 5 | 270,000 | BT-123~127 94%EXACT + 8단 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | 1 | 5 | 6,480 | BT 100%EXACT 전체 최고 |
-| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | 1 | 5 | 311,040 | 8단 40/40 레벨EXACT |
+| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | 1 | 5 | 311,040 | 8단 37%EXACT |
 
 > **🛸 등급 (10단계)**: 10=물리적 한계·발전 불가 / 9=실제 양산+예측 전수 검증 / 8=프로토타입+실험 데이터 / 7=완전 설계(BT+DSE+CrossDSE+Evolution+Alien+TP) / 6=설계완료+DSE+진화 / 5=상세설계+BT+DSE / 4=구조설계+가설검증 / 3=가설수립+초기검증 / 2=컨셉 / 1=미완
 
@@ -173,7 +173,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🧬 물질합성 (Materials)
 
-> **🛸5/10** | BT 4개 (91.9%EXACT) | DSE 3,600 | alien 98%EXACT | 14 TOML
+> **🛸5/10** | BT 4개 | DSE 3,600 | 60%EXACT | 14 TOML
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -198,7 +198,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🔬 물리·수학 (Physics & Math)
 
-> **🛸4/10** | BT 9개 | DSE 66,824 | 초전도체 + 순수수학 + 우주론
+> **🛸5/10** | BT 9개 | DSE 66,824 | Cosmo 53%EXACT + Plasma 50%EXACT + Quantum 13%EXACT
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -224,7 +224,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 📺 디스플레이·오디오 (Display & Audio)
 
-> **🛸5/10** | BT 5개 | DSE 311,040 | 8단 | 40/40 레벨EXACT
+> **🛸5/10** | BT 5개 | DSE 311,040 | 8단 | 37%EXACT
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
