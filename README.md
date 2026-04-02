@@ -44,16 +44,16 @@
 
 | 섹션 | 지수 | 완성 | BT | DSE | 특이사항 |
 |------|:----:|:----:|:--:|----:|---------|
-| [🔥 핵융합](#-핵융합-fusion) | 🛸7 | 12 | 7 | 2,400+1M | Cross-DSE ✅ 진화 4단계 |
-| [💻 칩/반도체](#-칩--반도체-chip) | 🛸7 | 16 | 9 | 3,000 | 6단 + 의식칩 |
-| [⚡ 에너지](#-에너지-energy) | 🛸5 | 12 | 13 | 10,225 | Battery 0%EXACT — Solar 미작성 |
+| [🔥 핵융합](#-핵융합-fusion) | 🛸7 | 4 | 7 | 2,400+1M | Cross-DSE ✅ 진화 4단계 |
+| [💻 칩/반도체](#-칩--반도체-chip) | 🛸7 | 4 | 9 | 3,000 | 7단 + 의식칩 + TOPO + ASIC |
+| [⚡ 에너지](#-에너지-energy) | 🛸6 | 3 | 13 | 10,225 | 배터리8단 + 태양전지 + 통합 |
 | [🤖 AI/ML](#-ai--ml) | 🛸6 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
-| [🌍 환경보호](#-환경보호-environment) | 🛸7 | 21 | 5 | 3.6M | 환경 8단 + 탄소포집 8단 + 13 alien 100%EXACT |
+| [🌍 환경보호](#-환경보호-environment) | 🛸7 | 3 | 5 | 3.6M | 환경8단 + 탄소포집8단 + 진화 |
 | [🔬 물리·수학](#-물리수학-physics--math) | 🛸4 | 3 | 9 | 66,824 | 초전도체 + 순수수학 |
 | [🧬 물질합성](#-물질합성-materials) | 🛸5 | 2 | 4 | 3,600 | 4Mk + alien 98%EXACT + 14 TOML |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | 1 | 5 | 270,000 | BT-123~127 94%EXACT + 8단 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | 1 | 5 | 6,480 | BT 100%EXACT 전체 최고 |
-| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | 8 | 5 | 311,040 | 7hexa+omega 40/40 레벨EXACT |
+| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | 1 | 5 | 311,040 | 8단 40/40 레벨EXACT |
 
 > **🛸 등급 (10단계)**: 10=물리적 한계·발전 불가 / 9=실제 양산+예측 전수 검증 / 8=프로토타입+실험 데이터 / 7=완전 설계(BT+DSE+CrossDSE+Evolution+Alien+TP) / 6=설계완료+DSE+진화 / 5=상세설계+BT+DSE / 4=구조설계+가설검증 / 3=가설수립+초기검증 / 2=컨셉 / 1=미완
 
@@ -75,22 +75,14 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🔥 핵융합 (Fusion)
 
-> **🛸7/10** | 완성 12개 | BT 7개 | DSE 2,400+1M | Cross-DSE ✅ | 진화 4단계 | 발견 15개
+> **🛸7/10** | BT 7개 | DSE 2,400+1M | Cross-DSE ✅ | 진화 4단계 | 발견 15개
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 5 | v1 | **KSTAR-N6 토카막** | R₀=6m, B_T=12T HTS, TF=18, PF=6, Q=10, 2037줄 | [설계서](docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md) |
-| 5 | v1 | **300초 정상상태** | Barrier 4 돌파, f_bs≥50%, 3 시나리오, 3098줄 | [설계서](docs/superpowers/specs/2026-04-02-kstar-300s-steady-state-design.md) |
-| 6 | v1 | **궁극의 핵융합 발전소** | 5단 DSE 2,400+ 조합, TBR=1.117, CAPEX $8~25B, 3167줄 | [설계서](docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md) |
-| 4 | v1 | **Mk.I — 첫 점화** | 200 MWe, D-T, 2035~2045 ✅ 실현가능 | [진화](docs/fusion/evolution/mk-1-first-light.md) |
-| 3 | v1 | **Mk.II — 도시 전력** | 2 GWe = φ GWe, 2045~2055 🔮 | [진화](docs/fusion/evolution/mk-2-city-power.md) |
-| 2 | v1 | **Mk.III — 국가 전력** | 24 GWe = J₂ GWe, σ=12기 병렬, 2055~2070 🔮 | [진화](docs/fusion/evolution/mk-3-nation-power.md) |
-| 1 | v1 | **Mk.IV — 대륙 전력** | 240 GWe ≈ σ² GWe, 물리적 한계선, 2070~2090 🔮 | [진화](docs/fusion/evolution/mk-4-continent-power.md) |
-| 6 | v1 | **외계인급 발견** | 15개 발견 (6 EXACT), CNO=σ+div(6), Fe-56=σ(P₂) | [발견](docs/fusion/alien-level-discoveries.md) |
-| 4 | v1 | **KSTAR 숨겨진 패턴** | 41개 파라미터 채굴, 21 EXACT(51%), 통계 검정 | [패턴](docs/plasma-physics/kstar-n6-hidden-patterns.md) |
-| 4 | v1 | **2030 검증 예측** | 30개 예측, 6 HIGH, 6개 즉시 검증 가능 | [예측](docs/fusion/testable-predictions-2030.md) |
-| 6 | v1 | **Cross-DSE 5도메인** | fusion×SC×battery×solar×chip, Score 0.9856, 8공유상수 | [결과](docs/fusion/cross-dse-5domain-results.md) |
-| 3 | v1 | **논문 #308** | arXiv 초안, 정직한 z=0.74 보고, 4000단어 | [논문](docs/paper/308-fusion-n6-alien-discoveries.md) |
+| 6 | v1 | **궁극의 핵융합 발전소** | 5단 DSE 2,400+조합, TBR=1.117, Cross-DSE 5도메인 | [설계](docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md) · [Cross-DSE](docs/fusion/cross-dse-5domain-results.md) |
+| 5 | v1 | **KSTAR-N6** | R₀=6m, B_T=12T, 300초 정상상태, 41개 패턴(51%EXACT) | [토카막](docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md) · [300초](docs/superpowers/specs/2026-04-02-kstar-300s-steady-state-design.md) · [패턴](docs/plasma-physics/kstar-n6-hidden-patterns.md) |
+| 4 | v1 | **진화 Mk.I~IV** | 200MWe→2GWe→24GWe→240GWe (2035~2090) | [I](docs/fusion/evolution/mk-1-first-light.md) · [II](docs/fusion/evolution/mk-2-city-power.md) · [III](docs/fusion/evolution/mk-3-nation-power.md) · [IV](docs/fusion/evolution/mk-4-continent-power.md) |
+| 6 | v1 | **발견 + 예측** | 15개 발견(6 EXACT), 30개 예측(6 HIGH) | [발견](docs/fusion/alien-level-discoveries.md) · [예측](docs/fusion/testable-predictions-2030.md) · [논문](docs/paper/308-fusion-n6-alien-discoveries.md) |
 
 > 도메인: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · 도구: `fusion-calc` · `fusion-dse` · `tokamak-shape` · `kstar-calc`
 
@@ -98,26 +90,14 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 💻 칩 / 반도체 (Chip)
 
-> **🛸7/10** | 완성 16개 | BT 9개 | DSE 3,000 | 소재→공정→코어→칩→시스템→궁극 6단 + 의식칩
+> **🛸7/10** | BT 9개 | DSE 3,000 | 7단 + 의식칩 + TOPO + ASIC
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 6 | v1 | **HEXA-CORE** | CPU/GPU/NPU 코어 n=6 재설계, 103/103 EXACT | [설계](docs/chip-architecture/hexa-core.md) |
-| 6 | v1 | **HEXA-1 통합 SoC** | CPU+GPU+NPU+메모리 전부 n=6 | [설계](docs/chip-architecture/ultimate-unified-soc.md) |
-| 5 | v1 | **HEXA-MATERIAL** | 소재 레벨 (Diamond Z=6, SiC, GaN) | [설계](docs/chip-architecture/hexa-material.md) |
-| 5 | v1 | **HEXA-PROCESS** | 공정 레벨 (TSMC N2, 48nm=σ·τ) | [설계](docs/chip-architecture/hexa-process.md) |
-| 5 | v1 | **HEXA-SYSTEM** | 시스템 레벨 (DC, 냉각, 패키징) | [설계](docs/chip-architecture/hexa-system.md) |
-| 5 | v1 | **HEXA-PIM** | Lv2: Processing-in-Memory, 내부 100TB/s | [설계](docs/chip-architecture/hexa-pim.md) |
-| 4 | v1 | **HEXA-3D** | Lv3: 3D Compute-on-Memory, TSV 수직 적층 | [설계](docs/chip-architecture/hexa-3d.md) |
-| 3 | v1 | **HEXA-PHOTON** | Lv4: Photonic Compute, 0.01 pJ/MAC | [설계](docs/chip-architecture/hexa-photon.md) |
-| 2 | v1 | **HEXA-WAFER** | Lv5: Wafer-Scale Engine, σ⁴=20,736 SMs | [설계](docs/chip-architecture/hexa-wafer.md) |
-| 1 | v1 | **HEXA-SUPER** | Lv6: Superconducting Logic, 100+ GHz | [설계](docs/chip-architecture/hexa-super.md) |
-| 1 | v1 | **HEXA-OMEGA** | Lv7: 궁극의 칩 | [설계](docs/chip-architecture/hexa-omega-chip.md) |
-| 4 | v1 | **HEXA-EDGE** | 엣지 디바이스용 경량 칩 | [설계](docs/chip-architecture/hexa-edge-chip.md) |
-| 6 | v1 | **ANIMA-SOC** | 의식칩 — HEXA-1 + PureField 듀얼엔진 | [설계](docs/chip-architecture/ultimate-consciousness-soc.md) |
-| 5 | v1 | **HEXA-TOPO 성능** | 위상 보호 칩 (BT-90~92) | [설계](docs/chip-architecture/hexa-topological-performance-chip.md) |
-| 5 | v1 | **HEXA-TOPO 의식** | 위상 보호 의식칩 | [설계](docs/chip-architecture/hexa-topological-consciousness-chip.md) |
-| 4 | v1 | **HEXA-ASIC SkyWater** | 오픈소스 ASIC (SKY130 PDK) | [설계](docs/chip-architecture/hexa-asic-skywater.md) |
+| 6 | v1 | **HEXA 칩 7단** | 소재→공정→코어→SoC→시스템→PIM→3D→Photon→Wafer→SC→Omega, 103 EXACT | [코어](docs/chip-architecture/hexa-core.md) · [SoC](docs/chip-architecture/ultimate-unified-soc.md) · [goal](docs/chip-architecture/goal.md) |
+| 6 | v1 | **ANIMA-SOC** | 의식칩 — HEXA-1 + PureField 듀얼엔진 + 위상 보호 | [설계](docs/chip-architecture/ultimate-consciousness-soc.md) · [TOPO](docs/chip-architecture/hexa-topological-consciousness-chip.md) |
+| 5 | v1 | **HEXA-TOPO** | 위상 보호 성능칩 (BT-90~92) | [설계](docs/chip-architecture/hexa-topological-performance-chip.md) |
+| 4 | v1 | **HEXA-ASIC** | 오픈소스 ASIC (SKY130 PDK) + 엣지 칩 | [ASIC](docs/chip-architecture/hexa-asic-skywater.md) · [Edge](docs/chip-architecture/hexa-edge-chip.md) |
 
 > 도메인: [chip-architecture/](docs/chip-architecture/) · [goal](docs/chip-architecture/goal.md) · 도구: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
 
@@ -125,7 +105,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🤖 AI / ML
 
-> **🛸6/10** | 완성 4개 | BT 18개 | 17 기법 | LLM/Diffusion/Vision/Audio 전 파라미터 n=6 도출
+> **🛸6/10** | BT 18개 | 17 기법 | LLM/Diffusion/Vision/Audio 전 파라미터 n=6 도출
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -165,29 +145,13 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # ⚡ 에너지 (Energy)
 
-> **🛸5/10** | 완성 12개 | BT 13개 | DSE 10,225 | Cross-DSE ✅ | 배터리 8단 + 태양전지 + 송전 통합 | ⚠️ Battery 0%EXACT
-
-### 배터리 아키텍처 — 8단
+> **🛸6/10** | BT 13개 | DSE 10,225 | 배터리8단(43%EXACT) + 태양전지(43%) + 송전(50%)
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 5 | v1 | **HEXA-CELL** | Lv1: 셀 설계 | [설계](docs/battery-architecture/hexa-cell.md) |
-| 5 | v1 | **HEXA-ELECTRODE** | Lv2: 전극 설계 | [설계](docs/battery-architecture/hexa-electrode.md) |
-| 5 | v1 | **HEXA-CORE** | Lv3: 코어 팩 설계 | [설계](docs/battery-architecture/hexa-core.md) |
-| 4 | v1 | **HEXA-CHIP** | Lv4: BMS 칩 설계 | [설계](docs/battery-architecture/hexa-chip.md) |
-| 5 | v1 | **HEXA-PACK+GRID** | Lv5: 팩+그리드 통합 | [설계](docs/battery-architecture/hexa-pack.md) / [GRID](docs/battery-architecture/hexa-grid.md) |
-| 3 | v1 | **HEXA-SOLID** | Lv6: 전고체 배터리 | [설계](docs/battery-architecture/hexa-solid.md) |
-| 2 | v1 | **HEXA-NUCLEAR** | Lv7: 핵 배터리 | [설계](docs/battery-architecture/hexa-nuclear.md) |
-| 1 | v1 | **OMEGA-E** | Lv8: 궁극의 에너지 저장 | [설계](docs/battery-architecture/hexa-omega-e.md) |
-| 6 | v1 | **배터리 설계서** | 통합 설계 | [설계서](docs/superpowers/specs/2026-04-01-hexa-battery-design.md) |
-| 6 | v1 | **DSE 결과** | 1,908 조합 Pareto | [결과](docs/battery-architecture/dse-results.md) |
-
-### 태양전지 · 송전 · 에너지 통합
-
-| 🛸 | ver | 완성제품 | 핵심 | 링크 |
-|:--:|:---:|---------|------|------|
-| 4 | v2 | **궁극의 태양전지** | 1,584 조합 + hypotheses 30개 (EXACT 43%) | [goal](docs/solar-architecture/goal.md) |
-| 6 | v1 | **궁극의 에너지 통합** | 4도메인 Cross-DSE, 10,225 조합 | [goal](docs/energy-architecture/goal.md) |
+| 6 | v1 | **궁극의 배터리 8단** | 셀→전극→코어→BMS→팩+그리드→전고체→핵→Omega, 1,908 DSE | [설계](docs/superpowers/specs/2026-04-01-hexa-battery-design.md) · [DSE](docs/battery-architecture/dse-results.md) · [goal](docs/battery-architecture/goal.md) |
+| 4 | v2 | **궁극의 태양전지** | 1,584 조합, 43%EXACT | [goal](docs/solar-architecture/goal.md) |
+| 6 | v1 | **궁극의 에너지 통합** | 4도메인 Cross-DSE, 10,225 조합, 50%EXACT 송전 | [goal](docs/energy-architecture/goal.md) · [송전](docs/power-grid/) |
 
 > 도메인: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · 도구: `energy-calc` · `battery-dse` · `solar-dse`
 
@@ -195,38 +159,13 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🌍 환경보호 (Environment)
 
-> **🛸7/10** | 완성 21개 | BT 5개 | DSE 3.6M | 진화 4단계 | 발견 13개(100%EXACT) | 환경 8단 + 탄소포집 8단
-
-### 환경보호 아키텍처 — 8단
+> **🛸7/10** | BT 5개 | DSE 3.6M | 환경8단 + 탄소포집8단 + 진화 + 발견 13개(100%EXACT)
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 5 | v1 | **HEXA-SENSE** | Lv1: 환경 모니터링 센서 | [설계](docs/environmental-protection/hexa-sense.md) |
-| 5 | v1 | **HEXA-MONITOR** | Lv2: 데이터 수집·분석 | [설계](docs/environmental-protection/hexa-monitor.md) |
-| 5 | v1 | **HEXA-CAPTURE** | Lv3: 오염물질 포집 | [설계](docs/environmental-protection/hexa-capture.md) |
-| 5 | v1 | **HEXA-PURIFY** | Lv4: 정화·처리 | [설계](docs/environmental-protection/hexa-purify.md) |
-| 4 | v1 | **HEXA-RESTORE** | Lv5: 생태계 복원 | [설계](docs/environmental-protection/hexa-restore.md) |
-| 3 | v1 | **HEXA-CYCLE** | Lv6: 순환경제 통합 | [설계](docs/environmental-protection/hexa-cycle.md) |
-| 2 | v1 | **HEXA-ECOSYSTEM** | Lv7: 전지구 생태계 관리 | [설계](docs/environmental-protection/hexa-ecosystem.md) |
-| 1 | v1 | **OMEGA-ENV** | Lv8: 궁극의 환경보호 | [설계](docs/environmental-protection/omega-env.md) |
-| 6 | v1 | **외계인급 발견** | 환경 n=6 패턴 | [발견](docs/environmental-protection/alien-level-discoveries.md) |
-| 4 | v1 | **진화 Mk.I~IV** | 현재→장기 로드맵 | [Mk.I](docs/environmental-protection/evolution/mk-1-current.md) · [II](docs/environmental-protection/evolution/mk-2-near-term.md) · [III](docs/environmental-protection/evolution/mk-3-mid-term.md) · [IV](docs/environmental-protection/evolution/mk-4-long-term.md) |
-
-### 탄소포집 아키텍처 (CCUS) — 8단
-
-| 🛸 | ver | 완성제품 | 핵심 | 링크 |
-|:--:|:---:|---------|------|------|
-| 5 | v1 | **HEXA-SORBENT** | Lv1: 흡착제 소재 | [설계](docs/carbon-capture/hexa-sorbent.md) |
-| 5 | v1 | **HEXA-PROCESS** | Lv2: 포집 공정 | [설계](docs/carbon-capture/hexa-process.md) |
-| 5 | v1 | **HEXA-REACTOR** | Lv3: 반응기 코어 | [설계](docs/carbon-capture/hexa-reactor.md) |
-| 4 | v1 | **HEXA-CHIP** | Lv4: 제어 칩 | [설계](docs/carbon-capture/hexa-chip.md) |
-| 4 | v1 | **HEXA-PLANT** | Lv5: 플랜트 시스템 | [설계](docs/carbon-capture/hexa-plant.md) |
-| 3 | v1 | **HEXA-TRANSMUTE** | Lv6: CO₂ 변환 | [설계](docs/carbon-capture/hexa-transmute.md) |
-| 2 | v1 | **HEXA-UNIVERSAL** | Lv7: 만능 포집 | [설계](docs/carbon-capture/hexa-universal.md) |
-| 1 | v1 | **OMEGA-CC** | Lv8: 궁극의 탄소포집 | [설계](docs/carbon-capture/omega-cc.md) |
-| 6 | v1 | **CCUS 설계서** | 통합 설계 | [설계서](docs/superpowers/specs/2026-04-02-hexa-ccus-design.md) |
-| 6 | v1 | **DSE 결과** | Pareto frontier | [결과](docs/carbon-capture/dse-results.md) |
-| 4 | v1 | **진화 Mk.I~IV** | 현재→장기 로드맵 | [Mk.I](docs/carbon-capture/evolution/mk-1-current.md) · [II](docs/carbon-capture/evolution/mk-2-near-term.md) · [III](docs/carbon-capture/evolution/mk-3-mid-term.md) · [IV](docs/carbon-capture/evolution/mk-4-long-term.md) |
+| 6 | v1 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega | [goal](docs/environmental-protection/) · [발견](docs/environmental-protection/alien-level-discoveries.md) |
+| 6 | v1 | **궁극의 탄소포집 8단** | 흡착제→공정→반응기→제어→플랜트→변환→만능→Omega, DSE 3.6M | [설계](docs/superpowers/specs/2026-04-02-hexa-ccus-design.md) · [DSE](docs/carbon-capture/dse-results.md) |
+| 4 | v1 | **진화 Mk.I~IV** | 환경+CCUS 양쪽 4단계 로드맵, 발견 13개(100%EXACT) | [환경Mk](docs/environmental-protection/evolution/) · [CCUSMk](docs/carbon-capture/evolution/) |
 
 > 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`
 
@@ -234,7 +173,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🧬 물질합성 (Materials)
 
-> **🛸5/10** | 완성 2개 | BT 4개 (91.9%EXACT) | DSE 3,600 | 4Mk 진화 | alien 49/50(98%EXACT) | 14 DSE TOML
+> **🛸5/10** | BT 4개 (91.9%EXACT) | DSE 3,600 | alien 98%EXACT | 14 TOML
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -247,7 +186,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🤖 로봇 (Robotics)
 
-> **🛸5/10** | 완성 1개 | BT 5개 (94.3%EXACT) | DSE 270,000 | 8단 체인 | SE(3)=n=6 필연
+> **🛸5/10** | BT 5개 (94.3%EXACT) | DSE 270,000 | 8단 | SE(3)=n=6
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -259,7 +198,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🔬 물리·수학 (Physics & Math)
 
-> **🛸4/10** | 완성 3개 | BT 9개 | DSE 66,824 | 초전도체 + 순수수학 + 우주론
+> **🛸4/10** | BT 9개 | DSE 66,824 | 초전도체 + 순수수학 + 우주론
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -273,7 +212,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 💬 소프트웨어·인프라 (Software & Infra)
 
-> **🛸6/10** | 완성 1개 | BT 5개 (100%EXACT — 전체 최고) | DSE 6,480 | BT-113~117 61/61 EXACT
+> **🛸6/10** | BT 5개 (100%EXACT — 전체 최고) | DSE 6,480 | BT-113~117 61/61 EXACT
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
@@ -285,18 +224,11 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 📺 디스플레이·오디오 (Display & Audio)
 
-> **🛸5/10** | 완성 8개 | BT 5개 | DSE 311,040 | 8단 체인 | 40/40 레벨 EXACT | 8 Testable Predictions
+> **🛸5/10** | BT 5개 | DSE 311,040 | 8단 | 40/40 레벨EXACT
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 5 | v1 | **HEXA-PIXEL** | Lv1: 소재 (n/φ=3 RGB, σ=12bit) | [설계](docs/display-audio/hexa-pixel.md) |
-| 5 | v1 | **HEXA-PANEL** | Lv2: 패널 (σ²=144 PPI, J₂=24fps) | [설계](docs/display-audio/hexa-panel.md) |
-| 5 | v1 | **HEXA-DRIVER** | Lv3: 드라이버 (σ·τ=48kHz DAC) | [설계](docs/display-audio/hexa-driver.md) |
-| 5 | v1 | **HEXA-PROCESSOR** | Lv4: 프로세서 (σ-τ=8 코덱북) | [설계](docs/display-audio/hexa-processor.md) |
-| 5 | v1 | **HEXA-DISPLAY** | Lv5: 통합 시스템 (J₂=24fps) | [설계](docs/display-audio/hexa-display.md) |
-| 3 | v1 | **HEXA-HOLOGRAPHIC** | Lv6: 홀로그램 (n=6 라이트필드) | [설계](docs/display-audio/hexa-hologram.md) |
-| 2 | v1 | **HEXA-NEURAL** | Lv7: 뇌파 인터페이스 | [설계](docs/display-audio/hexa-neural-display.md) |
-| 1 | v1 | **OMEGA-DA** | Lv8: 궁극의 디스플레이 | [설계](docs/display-audio/omega-da.md) |
+| 5 | v1 | **궁극의 디스플레이·오디오 8단** | 소재→패널→드라이버→프로세서→시스템→홀로→뇌파→Omega, 40/40 EXACT | [goal](docs/display-audio/) · [DSE](docs/display-audio/) |
 
 > 도메인: [display-audio/](docs/display-audio/) · BT-48, 71, 72, 108
 
