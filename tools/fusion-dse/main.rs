@@ -21,16 +21,30 @@ const N6_BASE: &[u64] = &[1, 2, 3, 4, 5, 6, 12, 24];
 
 fn is_n6_base(v: u64) -> bool { N6_BASE.contains(&v) }
 
-fn is_n6_derived(v: u64) -> bool {
-    if is_n6_base(v) { return true; }
+fn build_n6_derived_set() -> Vec<u64> {
+    let mut set = Vec::new();
     for &a in N6_BASE {
+        if !set.contains(&a) { set.push(a); }
         for &b in N6_BASE {
-            if a + b == v || a * b == v { return true; }
-            if a > b && a - b == v { return true; }
-            if b > 0 && a % b == 0 && a / b == v { return true; }
+            for v in &[a + b, a * b] {
+                if !set.contains(v) { set.push(*v); }
+            }
+            if a > b { let v = a - b; if !set.contains(&v) { set.push(v); } }
+            if b > 0 && a % b == 0 { let v = a / b; if !set.contains(&v) { set.push(v); } }
         }
     }
-    false
+    set.sort();
+    set
+}
+
+static mut N6_DERIVED_SET: Option<Vec<u64>> = None;
+
+fn init_n6_derived() {
+    unsafe { N6_DERIVED_SET = Some(build_n6_derived_set()); }
+}
+
+fn is_n6_derived(v: u64) -> bool {
+    unsafe { N6_DERIVED_SET.as_ref().unwrap().contains(&v) }
 }
 
 fn pad(s: &str, width: usize) -> String {
@@ -419,6 +433,8 @@ fn topk_insert(results: &mut Vec<DseResult>, entry: DseResult, cap: usize) {
 const TOP_K: usize = 200; // keep top 200, display top 20
 
 fn main() {
+    init_n6_derived();
+
     let total_combos: usize =
         SCHEMES.len() * SUPERCONDUCTORS.len() * BLANKETS.len() * STRUCTURALS.len()
         * HEATINGS.len() * CONFINEMENTS.len() * FUELS.len()
@@ -470,15 +486,49 @@ fn main() {
     // Per-scheme best
     let mut scheme_best: Vec<Option<DseResult>> = (0..SCHEMES.len()).map(|_| None).collect();
 
+    // Precompute per-level n6 contributions to enable upper-bound pruning.
+    // Max possible n6_exact from Level 5 inner loops (qt, pc, tbr, gr) = 4 out of 4 checks
+    // Max Q_gain = 100, max TRL = 100, max LCOE = 100, max T_comm = 100
+    // Upper-bound Pareto for pruning: assume all remaining axes score maximum.
+
+    let max_q_gain_possible: f64 = 100.0;
+    let max_trl_possible: f64 = 100.0;
+    let max_lcoe_possible: f64 = 100.0;
+    let max_t_comm_possible: f64 = 100.0;
+
     for (si, sch) in SCHEMES.iter().enumerate() {
+        // Precompute Level 1 n6 partial
+        let mut l1_exact: u64 = 0;
+        if sch.pf_coils == N { l1_exact += 1; }
+        if sch.cs_modules == N { l1_exact += 1; }
+        let l1_t_comm = t_comm_score(sch);
+
         for sc in SUPERCONDUCTORS {
+            // Level 2 partial: SC B_max
+            let l2_sc_exact: u64 = if is_n6_derived(sc.b_max_t) { 1 } else { 0 };
+
             for bl in BLANKETS {
+                let l2_bl_exact: u64 = if is_n6_base(bl.coolant_types) { 1 } else { 0 };
+
                 for st in STRUCTURALS {
                     for ht in HEATINGS {
+                        let l3_ht_exact: u64 = if is_n6_base(ht.typical_mw) { 1 } else { 0 };
+
                         for conf in CONFINEMENTS {
                             for fuel in FUELS {
+                                let l3_fuel_exact: u64 = if is_n6_base(fuel.d_mass) { 1 } else { 0 };
+                                let l3_neut_exact: u64 = if fuel.neutron_fraction_pct == PHI.pow(TAU as u32) * SOPFR { 1 } else { 0 };
+
+                                // Partial n6 from levels 1-3 (7 checks out of 15 total)
+                                let partial_exact_1_3 = l1_exact + l2_sc_exact + l2_bl_exact
+                                    + l3_ht_exact + l3_fuel_exact + l3_neut_exact;
+
                                 for tf in TF_CONFIGS {
+                                    let l4_tf_exact: u64 = if is_n6_base(tf.coil_count) { 1 } else { 0 };
+
                                     for geo in GEOMETRIES {
+                                        let l4_geo_exact: u64 = if geo.aspect_ratio_10x == (N / PHI) * 10 { 1 } else { 0 };
+
                                         for bf in BFIELDS {
                                             if !is_compatible(sc, bf, conf, fuel) {
                                                 skipped += QTARGETS.len() as u64
@@ -487,21 +537,60 @@ fn main() {
                                                     * GRIDS.len() as u64;
                                                 continue;
                                             }
+
+                                            let l4_bf_exact: u64 = if bf.bt_t == SIGMA { 1 } else { 0 };
+
+                                            // Partial n6 from levels 1-4 (minus qt which is inner)
+                                            let partial_exact_1_4_no_qt = partial_exact_1_3
+                                                + l4_tf_exact + l4_geo_exact + l4_bf_exact;
+
+                                            // Upper bound: remaining 4 checks (qt, pc eff, tbr, grid) all EXACT
+                                            let max_remaining_exact: u64 = 4;
+                                            let n6_total: u64 = 15;
+                                            let upper_n6_pct = ((partial_exact_1_4_no_qt + 1 + max_remaining_exact) as f64)
+                                                / (n6_total as f64) * 100.0;
+                                            let upper_pareto = upper_n6_pct * 0.35
+                                                + max_q_gain_possible * 0.25
+                                                + max_trl_possible * 0.20
+                                                + max_lcoe_possible * 0.12
+                                                + max_t_comm_possible * 0.08;
+
+                                            // Prune if upper bound can't beat current worst in top-K
+                                            let min_topk = if results.len() >= TOP_K {
+                                                results.last().unwrap().pareto_score
+                                            } else {
+                                                0.0
+                                            };
+                                            if results.len() >= TOP_K && upper_pareto < min_topk {
+                                                let inner_count = QTARGETS.len() as u64
+                                                    * POWER_CONVERSIONS.len() as u64
+                                                    * TBR_STRATEGIES.len() as u64
+                                                    * GRIDS.len() as u64;
+                                                skipped += inner_count;
+                                                continue;
+                                            }
+
                                             for qt in QTARGETS {
+                                                let l4_qt_exact: u64 = if qt.q_value == SOPFR * PHI { 1 } else { 0 };
+                                                let q_gain = q_gain_score(sch, qt, fuel);
+
                                                 for pc in POWER_CONVERSIONS {
+                                                    let l5_pc_exact: u64 = if pc.efficiency_pct == 100 / (N / PHI) { 1 } else { 0 };
+                                                    let trl = trl_score(sch, pc);
+                                                    let lcoe = lcoe_score(sch, fuel, sc, pc);
+
                                                     for tbr in TBR_STRATEGIES {
+                                                        let l5_tbr_exact: u64 = if tbr.tbr_100x == SIGMA * 10 { 1 } else { 0 };
+
                                                         for gr in GRIDS {
                                                             evaluated += 1;
 
-                                                            let (n6_exact, n6_total) = count_n6_exact(
-                                                                sch, sc, bl, st, ht, conf, fuel,
-                                                                tf, geo, bf, qt, pc, tbr, gr,
-                                                            );
+                                                            let l5_gr_exact: u64 = if gr.freq_hz == SIGMA * SOPFR || gr.freq_hz == SOPFR * (SIGMA - PHI) { 1 } else { 0 };
+
+                                                            let n6_exact = partial_exact_1_4_no_qt
+                                                                + l4_qt_exact + l5_pc_exact + l5_tbr_exact + l5_gr_exact;
                                                             let n6_pct = (n6_exact as f64) / (n6_total as f64) * 100.0;
-                                                            let q_gain = q_gain_score(sch, qt, fuel);
-                                                            let trl = trl_score(sch, pc);
-                                                            let lcoe = lcoe_score(sch, fuel, sc, pc);
-                                                            let t_comm = t_comm_score(sch);
+                                                            let t_comm = l1_t_comm;
 
                                                             let pareto_score =
                                                                 n6_pct * 0.35

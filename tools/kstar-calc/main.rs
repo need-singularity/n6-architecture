@@ -93,7 +93,7 @@ impl KstarHeating {
             ("Total", total, n6_match(total)),
         ];
 
-        for (name, val, n6) in checks {
+        for (name, val, n6) in &checks {
             let (marker, expr) = match n6 {
                 Some(e) => ("✅", format!("= {}", e)),
                 None => ("❌", "-".into()),
