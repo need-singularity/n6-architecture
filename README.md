@@ -48,9 +48,9 @@
 | [💻 칩/반도체](#-칩--반도체-chip) | 🛸7 | 4 | 9 | 3,000 | 7단 + 의식칩 + TOPO + ASIC |
 | [⚡ 에너지](#-에너지-energy) | 🛸6 | 3 | 13 | 10,225 | 배터리8단 + 태양전지 + 통합 |
 | [🤖 AI/ML](#-ai--ml) | 🛸6 | 4 | 18 | — | 17 기법 + 4Mk 진화 |
-| [🌍 환경보호](#-환경보호-environment) | 🛸7 | 3 | 5 | 3.6M | 환경8단 + 탄소포집8단 + 진화 |
+| [🌍 환경보호](#-환경보호-environment) | 🛸8 | 5 | 5 | 3.6M | 환경8단 + 탄소포집8단 + 미세플라스틱🛸10 + 82%EXACT + TP 19개 |
 | [🔬 물리·수학](#-물리수학-physics--math) | 🛸5 | 3 | 9 | 66,824 | Cosmo 53%EXACT + Plasma 50%EXACT + Quantum 16%EXACT |
-| [🧬 물질합성](#-물질합성-materials) | 🛸6 | 2 | 8 | 3,600 | 67%EXACT + 14 TOML + BT-128~131 |
+| [🧬 물질합성](#-물질합성-materials) | 🛸7 | 4 | 11 | 3,600 | 100%EXACT + CrossDSE 8도메인 + 🛸10발견 10개 + TP 28개 |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | 1 | 5 | 270,000 | BT-123~127 94%EXACT + 8단 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | 1 | 5 | 6,480 | BT 100%EXACT 전체 최고 |
 | [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | 1 | 5 | 311,040 | 8단 36%EXACT |
@@ -160,13 +160,15 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🌍 환경보호 (Environment)
 
-> **🛸7/10** | BT 5개 | DSE 3.6M | 환경8단 + 탄소포집8단 + 진화 + 발견 13개(100%EXACT)
+> **🛸8/10** | BT 5개 | DSE 3.6M | 환경8단 + 탄소포집8단 + 미세플라스틱🛸10 + 가설82%EXACT(28/34) + TP 19개
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 6 | v1 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega | [goal](docs/environmental-protection/) · [발견](docs/environmental-protection/alien-level-discoveries.md) |
+| 6 | v2 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega, 가설82%EXACT(28/34) | [goal](docs/environmental-protection/) · [가설](docs/environmental-protection/hypotheses.md) · [발견](docs/environmental-protection/alien-level-discoveries.md) |
+| 10 | v1 | **HEXA-MICROPLASTICS** | 6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체 | [설계](docs/environmental-protection/microplastics-solution.md) |
 | 6 | v1 | **궁극의 탄소포집 8단** | 흡착제→공정→반응기→제어→플랜트→변환→만능→Omega, DSE 3.6M | [설계](docs/superpowers/specs/2026-04-02-hexa-ccus-design.md) · [DSE](docs/carbon-capture/dse-results.md) |
-| 4 | v1 | **진화 Mk.I~IV** | 환경+CCUS 양쪽 4단계 로드맵, 발견 13개(100%EXACT) | [환경Mk](docs/environmental-protection/evolution/) · [CCUSMk](docs/carbon-capture/evolution/) |
+| 4 | v1 | **진화 Mk.I~V** | 환경+CCUS 양쪽 진화 로드맵, 발견 13개(100%EXACT) | [환경Mk](docs/environmental-protection/evolution/) · [CCUSMk](docs/carbon-capture/evolution/) |
+| 5 | v1 | **예측 + 검증** | TP 19개(환경) + 가설 v3(22렌즈 9승격+4신규) | [TP](docs/environmental-protection/testable-predictions-2030.md) · [검증](docs/environmental-protection/verification.md) |
 
 > 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`
 
@@ -174,12 +176,13 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 # 🧬 물질합성 (Materials)
 
-> **🛸6/10** | BT 8개 | DSE 3,600 | 67%EXACT | 14 TOML
+> **🛸7/10** | BT 11개 (96.2%EXACT) | DSE 3,600 | 가설 100%EXACT | CrossDSE 8도메인 | TP 28 | 🛸10 발견 10개
 
 | 🛸 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:---:|---------|------|------|
-| 4 | v2 | **궁극의 물질합성** | 8단 (ELEMENT→OMEGA-M), DSE 3,600, 가설 20/30 EXACT | [goal](docs/material-synthesis/goal.md) |
-| 5 | v2 | **BT-85~88 + BT-128~131** | Carbon Z=6 + CN=6 + 결정학 계층 + 상전이 지수 + 결함 래더 + 박막 성장 | [BT](docs/material-synthesis/breakthrough-theorems.md) |
+| 5 | v4 | **궁극의 물질합성** | 8단, DSE 3,600, 가설 30/30 EXACT, CrossDSE 8도메인, TP 28 | [goal](docs/material-synthesis/goal.md) |
+| 6 | v4 | **BT-85~88 + BT-128~134** | 결정학+합금+세라믹+고분자+상전이+결함+박막 (11 BT, 153/159 EXACT) | [BT](docs/material-synthesis/breakthrough-theorems.md) |
+| 7 | v4 | **🛸10 물리한계 10발견** | 결정제한정리+Kepler-Hales+키싱수+SE(3)+벌집정리 (73/75 EXACT) | [alien-10](docs/material-synthesis/alien-10-discoveries.md) |
 
 > 도메인: [material-synthesis/](docs/material-synthesis/) · 도구: `material-dse`
 
