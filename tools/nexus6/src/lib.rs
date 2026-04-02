@@ -6,3 +6,4 @@ pub mod graph;
 pub mod telescope;
 pub mod history;
 pub mod ouroboros;
+pub mod cli;
