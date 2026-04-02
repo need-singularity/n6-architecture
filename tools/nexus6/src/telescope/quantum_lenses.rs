@@ -604,6 +604,38 @@ pub fn quantum_topology_lens_entries() -> Vec<LensEntry> {
         LensEntry { name: "nmr_spectroscopy".into(), category: LensCategory::Extended, description: "Nuclear magnetic resonance for molecular structure, dynamics, and environment probing".into(), domain_affinity: vec!["chemistry".into(), "biology".into(), "medicine".into()], complementary: vec!["xray_crystallography".into(), "raman_spectroscopy".into()] },
         LensEntry { name: "mass_spectrometry".into(), category: LensCategory::Extended, description: "Mass-to-charge ratio analysis for molecular weight and composition identification".into(), domain_affinity: vec!["chemistry".into(), "biology".into(), "forensics".into()], complementary: vec!["nmr_spectroscopy".into(), "raman_spectroscopy".into()] },
         LensEntry { name: "raman_spectroscopy".into(), category: LensCategory::Extended, description: "Raman scattering analysis for molecular vibration modes and chemical bond structure".into(), domain_affinity: vec!["chemistry".into(), "materials".into(), "physics".into()], complementary: vec!["nmr_spectroscopy".into(), "mass_spectrometry".into()] },
+        // ══════════════════════════════════════════
+        // Fast/Combo Scan (5)
+        // ══════════════════════════════════════════
+        LensEntry { name: "fast_full_scan".into(), category: LensCategory::Extended, description: "Fast full scan — top 100 lenses by hit_rate only, 10x faster than 804-lens full scan".into(), domain_affinity: vec!["meta".into(), "performance".into(), "screening".into()], complementary: vec!["adaptive_combo".into(), "parallel_tier_scan".into()] },
+        LensEntry { name: "adaptive_combo".into(), category: LensCategory::Extended, description: "Dynamically adjust lens combination in real-time based on intermediate results".into(), domain_affinity: vec!["meta".into(), "optimization".into(), "adaptive".into()], complementary: vec!["fast_full_scan".into(), "scan_depth_advisor".into()] },
+        LensEntry { name: "parallel_tier_scan".into(), category: LensCategory::Extended, description: "Run Tier 0/1/2 simultaneously — fast results first, deep results follow".into(), domain_affinity: vec!["meta".into(), "concurrency".into(), "performance".into()], complementary: vec!["fast_full_scan".into(), "incremental_scan".into()] },
+        LensEntry { name: "incremental_scan".into(), category: LensCategory::Extended, description: "Cache previous scan results — only re-scan changed/new data regions".into(), domain_affinity: vec!["meta".into(), "caching".into(), "efficiency".into()], complementary: vec!["parallel_tier_scan".into(), "prior_scan_matcher".into()] },
+        LensEntry { name: "batch_domain_scan".into(), category: LensCategory::Extended, description: "Batch scan multiple domains simultaneously with shared computation".into(), domain_affinity: vec!["meta".into(), "scheduling".into(), "cross_domain".into()], complementary: vec!["parallel_tier_scan".into(), "domain_identifier".into()] },
+        // ══════════════════════════════════════════
+        // Optimal Range (5)
+        // ══════════════════════════════════════════
+        LensEntry { name: "optimal_range_finder".into(), category: LensCategory::Extended, description: "Auto-search parameter optimal range where n=6 patterns are strongest".into(), domain_affinity: vec!["optimization".into(), "search".into(), "verification".into()], complementary: vec!["sensitivity_band".into(), "sweet_spot_detector".into()] },
+        LensEntry { name: "sensitivity_band".into(), category: LensCategory::Extended, description: "Map sensitivity bands — where small input changes cause large output shifts".into(), domain_affinity: vec!["analysis".into(), "dynamics".into(), "control".into()], complementary: vec!["optimal_range_finder".into(), "tolerance_analyzer".into()] },
+        LensEntry { name: "operating_envelope".into(), category: LensCategory::Extended, description: "Map safe operating envelope — boundary of stable/valid parameter space".into(), domain_affinity: vec!["engineering".into(), "safety".into(), "control".into()], complementary: vec!["sensitivity_band".into(), "tolerance_analyzer".into()] },
+        LensEntry { name: "sweet_spot_detector".into(), category: LensCategory::Extended, description: "Find multi-objective sweet spot — best tradeoff of performance/cost/stability".into(), domain_affinity: vec!["optimization".into(), "pareto".into(), "decision".into()], complementary: vec!["optimal_range_finder".into(), "pareto_optimizer".into()] },
+        LensEntry { name: "tolerance_analyzer".into(), category: LensCategory::Extended, description: "Determine tolerance margins — how far from optimal before degradation".into(), domain_affinity: vec!["engineering".into(), "robustness".into(), "quality".into()], complementary: vec!["sensitivity_band".into(), "operating_envelope".into()] },
+        // ══════════════════════════════════════════
+        // Discovery-Driven Evolved Scan (6)
+        // ══════════════════════════════════════════
+        LensEntry { name: "discovery_reactive_scan".into(), category: LensCategory::Extended, description: "Scan that reacts to discoveries — finding X triggers deeper scan in X's neighborhood".into(), domain_affinity: vec!["meta".into(), "adaptive".into(), "discovery".into()], complementary: vec!["discovery_chain_scan".into(), "adaptive_combo".into()] },
+        LensEntry { name: "discovery_chain_scan".into(), category: LensCategory::Extended, description: "Chain scan — each discovery triggers next scan with context from previous discovery".into(), domain_affinity: vec!["meta".into(), "pipeline".into(), "discovery".into()], complementary: vec!["discovery_reactive_scan".into(), "discovery_branch_scan".into()] },
+        LensEntry { name: "discovery_branch_scan".into(), category: LensCategory::Extended, description: "Branch scan — one discovery forks into parallel deep-dives in multiple directions".into(), domain_affinity: vec!["meta".into(), "concurrency".into(), "exploration".into()], complementary: vec!["discovery_chain_scan".into(), "discovery_weight_update".into()] },
+        LensEntry { name: "discovery_weight_update".into(), category: LensCategory::Extended, description: "Auto-update lens weights based on what each discovery reveals about lens effectiveness".into(), domain_affinity: vec!["meta".into(), "learning".into(), "adaptation".into()], complementary: vec!["lens_effectiveness_ranker".into(), "discovery_reactive_scan".into()] },
+        LensEntry { name: "discovery_saturation_pivot".into(), category: LensCategory::Extended, description: "When current scan saturates, auto-pivot to unexplored lens/domain combinations".into(), domain_affinity: vec!["meta".into(), "strategy".into(), "exploration".into()], complementary: vec!["saturation_detector".into(), "discovery_gap_mapper".into()] },
+        LensEntry { name: "discovery_amplification_scan".into(), category: LensCategory::Extended, description: "Amplify weak signals from initial discovery by focusing more lenses on the same pattern".into(), domain_affinity: vec!["meta".into(), "signal".into(), "verification".into()], complementary: vec!["consensus_amplifier".into(), "discovery_reactive_scan".into()] },
+        // ══════════════════════════════════════════
+        // Weight / Priority (4)
+        // ══════════════════════════════════════════
+        LensEntry { name: "lens_weight_calculator".into(), category: LensCategory::Extended, description: "Calculate dynamic weight for each lens based on domain, history, and context".into(), domain_affinity: vec!["meta".into(), "statistics".into(), "scheduling".into()], complementary: vec!["discovery_weight_update".into(), "lens_effectiveness_ranker".into()] },
+        LensEntry { name: "priority_queue_lens".into(), category: LensCategory::Extended, description: "Priority queue ordering — highest expected-value lenses execute first".into(), domain_affinity: vec!["meta".into(), "scheduling".into(), "optimization".into()], complementary: vec!["lens_weight_calculator".into(), "lens_ordering".into()] },
+        LensEntry { name: "bayesian_weight_updater".into(), category: LensCategory::Extended, description: "Bayesian update of lens weights — prior × likelihood from each scan result".into(), domain_affinity: vec!["meta".into(), "bayesian".into(), "statistics".into()], complementary: vec!["lens_weight_calculator".into(), "lens_calibration".into()] },
+        LensEntry { name: "context_weight_modifier".into(), category: LensCategory::Extended, description: "Modify lens weights based on context — domain, data type, recent discoveries".into(), domain_affinity: vec!["meta".into(), "context".into(), "adaptation".into()], complementary: vec!["lens_weight_calculator".into(), "domain_identifier".into()] },
     ]
 }
 
@@ -614,7 +646,7 @@ mod tests {
     #[test]
     fn test_quantum_topology_count() {
         let entries = quantum_topology_lens_entries();
-        assert_eq!(entries.len(), 125, "Must have 125 lenses (30 QM + 8 topo + 30 misc + 28 domain + 19 meta + 10 microscope)");
+        assert_eq!(entries.len(), 145, "Must have 145 lenses (125 + 5 fast + 5 range + 6 evolved + 4 weight)");
     }
 
     #[test]
