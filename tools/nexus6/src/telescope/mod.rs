@@ -10,6 +10,7 @@ pub mod domain_combos;
 pub mod lens_trait;
 pub mod lenses;
 pub mod n6_lenses;
+pub mod quantum_lenses;
 pub mod registry;
 pub mod sedi_lenses;
 pub mod shared_data;
