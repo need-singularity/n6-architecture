@@ -166,9 +166,9 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 |:--:|:---:|---------|------|------|
 | 6 | v2 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega, 가설82%EXACT(28/34) | [goal](docs/environmental-protection/) · [가설](docs/environmental-protection/hypotheses.md) · [발견](docs/environmental-protection/alien-level-discoveries.md) |
 | 10 | v1 | **HEXA-MICROPLASTICS** | 6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체 | [설계](docs/environmental-protection/microplastics-solution.md) |
-| 6 | v1 | **궁극의 탄소포집 8단** | 흡착제→공정→반응기→제어→플랜트→변환→만능→Omega, DSE 3.6M | [설계](docs/superpowers/specs/2026-04-02-hexa-ccus-design.md) · [DSE](docs/carbon-capture/dse-results.md) |
+| 8 | v4 | **궁극의 탄소포집 8단** | 흡착제→공정→반응기→제어→플랜트→변환→만능→Omega, **30/30=100%EXACT**, DSE 3.6M, 53/54 실험검증 | [goal](docs/carbon-capture/goal.md) · [가설](docs/carbon-capture/hypotheses.md) · [DSE](docs/carbon-capture/dse-results.md) · [검증](docs/carbon-capture/experimental-validation.md) |
 | 4 | v1 | **진화 Mk.I~V** | 환경+CCUS 양쪽 진화 로드맵, 발견 13개(100%EXACT) | [환경Mk](docs/environmental-protection/evolution/) · [CCUSMk](docs/carbon-capture/evolution/) |
-| 5 | v1 | **예측 + 검증** | TP 19개(환경) + 가설 v3(22렌즈 9승격+4신규) | [TP](docs/environmental-protection/testable-predictions-2030.md) · [검증](docs/environmental-protection/verification.md) |
+| 5 | v2 | **예측 + 검증** | TP 19개(환경) + **TP 24개(CCUS)** + 가설 v4(100%EXACT) | [환경TP](docs/environmental-protection/testable-predictions-2030.md) · [CCUS TP](docs/carbon-capture/testable-predictions.md) · [검증](docs/carbon-capture/verification.md) |
 
 > 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`
 
