@@ -50,3 +50,4 @@ calc
 # TECS-L .shared symlink
 .shared
 model_utils.py
+tecsrs
