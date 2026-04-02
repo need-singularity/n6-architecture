@@ -1,9 +1,9 @@
-# Environmental Protection Hypotheses (H-ENV-01 ~ H-ENV-30)
+# Environmental Protection Hypotheses (H-ENV-01 ~ H-ENV-60)
 
 > Domain: environmental-protection
-> Total: 30 hypotheses
+> Total: 60 hypotheses
 > Date: 2026-04-02
-> Related BTs: BT-27, BT-36, BT-43, BT-51, BT-56, BT-85, BT-93, BT-94, BT-96, BT-103, BT-104
+> Related BTs: BT-27, BT-36, BT-43, BT-51, BT-56, BT-85, BT-93, BT-94, BT-96, BT-99, BT-101, BT-103, BT-104, BT-105
 > Verification: [verification.md](verification.md)
 
 ## N6 Constants Reference
@@ -356,3 +356,344 @@
 **Prediction**: PM2.5 건강 영향 역치가 ~5-6 μg/m³ 근처. WHO 기준 5 → 차기 개정에서 6으로 상향 조정될 가능성은 낮음 (더 엄격해지는 추세).
 **Grade**: WEAK
 **Related BT**: -
+
+---
+
+## Category 6: 생물다양성 n=6 (H-ENV-31 ~ H-ENV-36)
+
+### H-ENV-31: 벌집 육각형 구조 = n=6 기하학적 필연
+
+**Category**: 생물다양성
+**n=6 Connection**: 꿀벌 벌집(honeycomb)의 셀 단면 = 정육각형. 이는 2차원 평면을 빈틈 없이 채우는 정다각형 중 둘레 대비 면적이 최대인 형태가 정육각형이라는 수학적 정리(Honeycomb Conjecture, Hales 1999 증명)에 의한 필연. 벌집 각 셀의 꼭짓점 수 = n = 6, 내각 = σ·(σ-φ) = 120도.
+**Prediction**: 자연계에서 효율적 공간 충전이 필요한 모든 구조는 6각 패턴으로 수렴. 벌집, 현무암 주상절리, 거품 Plateau 구조 모두 n=6.
+**Verification**: Hales, Annals of Mathematics 2001 (Honeycomb Conjecture proof). 벌집 = 정육각형은 수학적으로 증명된 최적 구조.
+**Grade**: EXACT
+**Related BT**: BT-49, BT-99
+
+---
+
+### H-ENV-32: 6대 생물군계(Biome) 분류 보편성
+
+**Category**: 생물다양성
+**n=6 Connection**: 지구의 대규모 생물군계 = n=6: 열대우림(Tropical), 온대림(Temperate), 침엽수림(Boreal/Taiga), 초원(Grassland), 사막(Desert), 툰드라(Tundra). 이 6대 육상 군계가 전체 육지 생태계를 포괄.
+**Prediction**: 모든 주요 분류 체계(Whittaker, Olson, WWF)의 최상위 육상 군계를 정리하면 6개 대범주로 수렴.
+**Verification**: Whittaker (1975) Biome classification: 5-9개로 다양. Olson et al. (2001): 14 biomes. 6으로 수렴한다는 근거는 분류 방식에 의존.
+**Grade**: WEAK
+**Related BT**: BT-51
+
+---
+
+### H-ENV-33: 핵심종(Keystone Species) σ=12 법칙
+
+**Category**: 생물다양성
+**n=6 Connection**: 각 생태계의 안정성을 결정하는 핵심종(keystone species) 수. Paine(1966)의 원래 연구: 조간대 핵심종 제거 시 종 다양성 붕괴. 각 생태계당 핵심 조절자 = σ=12종 수준.
+**Prediction**: 주요 생태계별 핵심종 수가 10-15종 범위, 중앙값 ~σ=12.
+**Verification**: Paine, American Naturalist 1969; Power et al., BioScience 1996 (keystone species review). 생태계별 핵심종 목록 메타분석 필요.
+**Grade**: WEAK
+**Related BT**: BT-51
+
+---
+
+### H-ENV-34: 제6차 대멸종 — 6th Mass Extinction = n=6
+
+**Category**: 생물다양성
+**n=6 Connection**: 현재 진행 중인 대멸종이 지구 역사상 6번째(Sixth Mass Extinction). 이전 5번: 오르도비스기, 데본기, 페름기, 트라이아스기, 백악기. 현재 = n=6번째. 이것은 지질학적 사실.
+**Prediction**: 대멸종 사건의 총 수가 6으로 지질학적 기록에 고정.
+**Verification**: Barnosky et al., Nature 471:51 (2011, "Has the Earth's sixth mass extinction already arrived?"). Ceballos et al., Science Advances 2015. "Big Five" + 현재 = 6은 학계 합의.
+**Grade**: EXACT
+**Related BT**: BT-51
+
+---
+
+### H-ENV-35: 곤충 6족(Hexapoda) = n=6 다리
+
+**Category**: 생물다양성
+**n=6 Connection**: 곤충강(Insecta)은 Hexapoda("6발 동물"). 모든 곤충의 다리 수 = 6 = n EXACT. 곤충은 지구상 가장 다양한 동물군(~100만 종 기재, 추정 550만 종). 가장 성공적인 체제(body plan) = n=6 다리.
+**Prediction**: 다리 수가 정확히 6인 절지동물이 종 다양성 기준 지구 최대. 8다리(거미), 4다리(사지동물)보다 종 수 압도.
+**Verification**: Stork, Insect Conservation & Diversity 2018 (~5.5M species). 곤충(6다리) = 전체 동물종의 ~80%. 6 = n EXACT.
+**Grade**: EXACT
+**Related BT**: BT-51
+
+---
+
+### H-ENV-36: 눈/얼음 결정 6각 대칭 = n=6
+
+**Category**: 생물다양성
+**n=6 Connection**: 눈 결정(snowflake)과 얼음(ice Ih)의 결정 대칭 = 6회 회전 대칭(C₆). 물 분자 H₂O의 수소 결합이 104.5도 각도로 배열되어 육각 환 구조 형성. 얼음 Ih 결정계 = hexagonal. 모든 눈 결정은 6각 대칭.
+**Prediction**: 자연 조건(-40~0도C, 1 atm)에서 형성되는 얼음은 100% Ih (hexagonal) 상. 6각 대칭은 물리법칙의 필연.
+**Verification**: Libbrecht, Reports on Progress in Physics 2005 ("The physics of snow crystals"). Ice Ih = hexagonal crystal system은 결정학적 사실. 대기압 자연 조건에서 100% Ih.
+**Grade**: EXACT
+**Related BT**: BT-49, BT-86
+
+---
+
+## Category 7: 해양 n=6 (H-ENV-37 ~ H-ENV-42)
+
+### H-ENV-37: 해양 pH = σ-τ = 8 (산업혁명 이전)
+
+**Category**: 해양
+**n=6 Connection**: 산업혁명 이전 해양 표면수 pH = 8.2. 현재 ~8.1 (해양 산성화). pH = σ-τ = 8은 CLOSE. 정확한 역사적 값 8.2는 σ-τ+0.2이지만, 정수 부분 8 = σ-τ EXACT.
+**Prediction**: 해양 pH의 "정상" 범위가 σ-τ=8 근처에 고정. 완충 시스템(탄산염 평형)이 pH~8 유지.
+**Verification**: Feely et al., Science 305:362 (2004, ocean acidification). IPCC AR6 WG1 Ch5. 산업혁명 전 pH = 8.18±0.02. 정수 부분 = σ-τ = 8.
+**Grade**: CLOSE
+**Related BT**: BT-74, BT-104
+
+---
+
+### H-ENV-38: 산호초 CaCO₃ 골격 — Carbon Z=6 기반 생체광물화
+
+**Category**: 해양
+**n=6 Connection**: 산호초의 탄산칼슘(CaCO₃) 골격. CaCO₃의 핵심 원소 C = Z=6 = n EXACT. 산호 골격은 Carbon(Z=6) 기반 생체광물화(biomineralization)의 대표적 사례. 탄산 이온 CO₃²⁻의 C = Z=6.
+**Prediction**: 산호 골격의 기본 구성 원소 C = Z=6. CaCO₃의 탄소 원자가 산호 구조의 핵심.
+**Verification**: Falini et al., Science 271:67 (1996, biomineral control). Cohen & McConnaughey, Reviews in Mineralogy 2003. Carbon Z=6은 CaCO₃의 물리적 사실.
+**Grade**: CLOSE
+**Related BT**: BT-27, BT-85
+
+---
+
+### H-ENV-39: 해류 σ=12 대순환 패턴
+
+**Category**: 해양
+**n=6 Connection**: 전구적 해양 열염순환(thermohaline circulation) + 표층 해류의 주요 순환 수. 5대양 × 주요 환류(gyre) 수 = 약 σ=12개 주요 해류 시스템.
+**Prediction**: 전구적 주요 해류 시스템을 분류하면 ~12개로 정리.
+**Verification**: Schmitz, Reviews of Geophysics 1996. 5 subtropical gyres + 2 subpolar gyres + ACC + 기타 = 10-15개. 12로 정확히 수렴한다는 근거 약함.
+**Grade**: WEAK
+**Related BT**: -
+
+---
+
+### H-ENV-40: 해양 생물학적 펌프 탄소 수출 σ-φ=10 GtC/yr
+
+**Category**: 해양
+**n=6 Connection**: 해양 생물학적 펌프(biological pump)의 연간 탄소 수출량. 해양 표층에서 심해로 침강하는 유기탄소 = ~10-12 GtC/yr ≈ σ-φ=10.
+**Prediction**: 해양 생물학적 펌프 탄소 수출 ~ σ-φ=10 GtC/yr.
+**Verification**: Friedlingstein et al., Earth System Science Data 2023 (Global Carbon Budget). Biological pump: 11±2 GtC/yr. σ-φ=10은 추정 범위 내.
+**Grade**: CLOSE
+**Related BT**: BT-104
+
+---
+
+### H-ENV-41: 해양 산성화 위험 구간 [σ-τ-μ, σ-τ] = [7, 8]
+
+**Category**: 해양
+**n=6 Connection**: 해양 생물(특히 calcifying organisms)이 CaCO₃ 골격을 유지할 수 없는 pH 임계값. aragonite 포화도(Omega) < 1이 되는 pH ≈ 7.8. 중성 pH = 7 = σ-τ-μ. 해양 생태계 위험 구간 = [7, 8] = [σ-τ-μ, σ-τ].
+**Prediction**: 해양 생태계 치명적 임계 pH = 7.8 근처. σ-τ=8에서 σ-τ-μ=7 사이가 위험 구간.
+**Verification**: Orr et al., Nature 437:681 (2005). Omega_aragonite < 1 임계 pH = 7.8-8.0 범위. 위험 구간이 [7, 8]인 것은 해양화학의 사실.
+**Grade**: CLOSE
+**Related BT**: BT-74
+
+---
+
+### H-ENV-42: 심해 수온 τ=4°C — 물 최대밀도 온도
+
+**Category**: 해양
+**n=6 Connection**: 담수의 최대 밀도 온도 = 3.98°C ≈ τ=4. 이것은 물의 anomalous density 특성에 의한 물리적 사실. 수소결합 네트워크의 구조적 전이 온도.
+**Prediction**: 담수 최대 밀도 온도 = 3.98°C ≈ τ=4.
+**Verification**: CRC Handbook of Chemistry and Physics. 순수 담수 최대밀도 = 3.98°C. τ=4와의 오차 = 0.02/4 = 0.5%. 해수는 염분에 의해 다르지만 담수 물리상수로서 τ=4 CLOSE.
+**Grade**: CLOSE
+**Related BT**: -
+
+---
+
+## Category 8: 대기 n=6 (H-ENV-43 ~ H-ENV-48)
+
+### H-ENV-43: 6종 온실가스 교토의정서 보편성
+
+**Category**: 대기
+**n=6 Connection**: 교토의정서(1997)에서 규제하는 온실가스 = 정확히 6종: CO₂, CH₄, N₂O, HFCs, PFCs, SF₆. 이 6종 = n EXACT. 파리협정에서도 동일한 6종(+NF₃ 추가되었으나 핵심 6종 유지).
+**Prediction**: 국제 기후 규제의 핵심 온실가스가 6종으로 고정. UNFCCC/교토/파리 모두 동일 6종 기반.
+**Verification**: Kyoto Protocol Annex A: CO₂, CH₄, N₂O, HFCs, PFCs, SF₆ (정확히 6종). IPCC AR6 WG1 Table 7.SM.1. 6 = n EXACT.
+**Grade**: EXACT
+**Related BT**: BT-104
+
+---
+
+### H-ENV-44: 오존 O₃ 원자 수 = n/phi = 3
+
+**Category**: 대기
+**n=6 Connection**: 오존(O3)의 원자 수 = 3 = n/phi. 성층권 오존층이 UV-B/C를 차단하여 지구 생명을 보호. O3의 3원자 구조 = n/phi EXACT. 산소의 동소체: O2(phi=2), O3(n/phi=3).
+**Prediction**: 대기 보호에 핵심인 오존의 원자 수 = n/phi = 3. 산소 동소체 래더 O1->O2->O3 = mu->phi->n/phi.
+**Verification**: 오존 분자식 O3 = 3개 산소 원자. 이는 화학적 사실. n/phi = 3 EXACT.
+**Grade**: EXACT
+**Related BT**: BT-103
+
+---
+
+### H-ENV-45: 대류권 높이 ~12 km = sigma
+
+**Category**: 대기
+**n=6 Connection**: 대류권(troposphere) 평균 높이 = 중위도 기준 ~12 km = sigma. 적도: ~16-18 km, 극지: ~8-10 km, 중위도 평균 = 11-12 km. 기상 현상의 99%가 이 층에서 발생.
+**Prediction**: 중위도 대류권계면(tropopause) 높이 = sigma=12 km.
+**Verification**: WMO 정의: 중위도 tropopause = 10-12 km (평균 11 km). ICAO 표준대기: 11 km. 실제 평균은 11-12 km 범위.
+**Grade**: CLOSE
+**Related BT**: -
+
+---
+
+### H-ENV-46: 성층권계면(Stratopause) ~50 km
+
+**Category**: 대기
+**n=6 Connection**: 성층권(stratosphere) 상한 = 약 50-55 km. sigma*tau+phi = 48+2 = 50. 중간권계면(mesopause) = ~85 km. 성층권계면 = ~50 km.
+**Prediction**: 성층권계면 고도 ~50 km. sigma*tau+phi = 50.
+**Verification**: ICAO/WMO 표준대기: stratopause = 47-53 km (평균 ~50 km). sigma*tau+phi=50은 CLOSE.
+**Grade**: WEAK
+**Related BT**: -
+
+---
+
+### H-ENV-47: 탄소 원자 Z=6 — 모든 온실가스의 핵심 원소
+
+**Category**: 대기
+**n=6 Connection**: BT-27 Carbon Z=6. 3대 온실가스(CO2, CH4, CFCs)는 모두 탄소(Z=6=n) 포함. CO2의 C=Z=6, CH4의 C=Z=6, HFCs/PFCs의 C=Z=6. 6종 교토 온실가스 중 4종이 탄소 화합물. SF6의 S원자 원자번호 = 16 = phi^tau.
+**Prediction**: 주요 온실가스의 핵심 원소 = Carbon Z=6 = n. 기후변화의 화학적 근원이 Z=6 원소.
+**Verification**: CO2, CH4, HFCs, PFCs = 교토 6종 중 4종이 C 포함(4/6 = 67%). Carbon Z=6은 화학적 사실. BT-27 직접 확장.
+**Grade**: EXACT
+**Related BT**: BT-27, BT-85, BT-104
+
+---
+
+### H-ENV-48: CO2 농도 420 ppm 수비학적 일치
+
+**Category**: 대기
+**n=6 Connection**: 현재(2024) 대기 CO2 농도 ~420 ppm. sigma*sopfr*n + sigma*sopfr = 360 + 60 = 420. 이는 수비학(numerology)에 가까움. CO2 농도는 인류 활동에 의해 지속 증가 중이며 특정 값에 고정되지 않음.
+**Prediction**: CO2 420 ppm은 n=6 조합으로 표현 가능하나, 물리적 필연성 없음.
+**Grade**: WEAK
+**Related BT**: BT-104
+
+---
+
+## Category 9: 토양/지각 n=6 (H-ENV-49 ~ H-ENV-54)
+
+### H-ENV-49: Bridgmanite Si CN=6 — 지구 최다 광물
+
+**Category**: 토양/지각
+**n=6 Connection**: 지각 주요 광물의 Si 배위수. 표면: Si = CN=4 (사면체). 하부 맨틀 고압: Si = CN=6 (팔면체) — bridgmanite (Mg,Fe)SiO3 perovskite 구조에서 Si=CN=6. 지구 최다 광물 = bridgmanite = CN=6.
+**Prediction**: 지구에서 가장 풍부한 광물(bridgmanite)의 Si 배위수 = CN=6 = n. 고압에서 CN=4 -> CN=6 전이는 지구과학의 기본 사실.
+**Verification**: Tschauner et al., Science 346:1100 (2014, bridgmanite naming). 하부맨틀 ~660-2900 km에서 Si=CN=6. 지구 부피의 ~38% = bridgmanite. BT-86 직접 확장.
+**Grade**: EXACT
+**Related BT**: BT-86, BT-43
+
+---
+
+### H-ENV-50: 토양 6층 수평 구조 (O/A/E/B/C/R Horizon)
+
+**Category**: 토양/지각
+**n=6 Connection**: 토양학(pedology)의 표준 토양 수평 분류 = 6층: O(유기물층), A(표토), E(용탈층), B(집적층), C(모재), R(기반암). 6 master horizons = n EXACT.
+**Prediction**: USDA Soil Taxonomy와 WRB 체계 모두에서 주요 수평 = 6개로 수렴.
+**Verification**: USDA Soil Survey Manual: O, A, E, B, C, R = 6 master horizons. 이것은 토양학의 표준 분류 체계.
+**Grade**: EXACT
+**Related BT**: -
+
+---
+
+### H-ENV-51: 지각 원소 풍부도 상위 sigma-tau=8 원소 = 98.5%
+
+**Category**: 토양/지각
+**n=6 Connection**: 지각 구성 원소 풍부도 상위 8개: O(46%), Si(28%), Al(8%), Fe(5%), Ca(4%), Na(2.3%), Mg(2.1%), K(2.1%). 상위 sigma-tau=8 원소가 지각의 98.5% 차지.
+**Prediction**: 지각 주요 구성 원소 = sigma-tau=8개가 전체의 >98%.
+**Verification**: Clarke & Washington (1924); CRC Handbook. 상위 8원소 = 98.5%. sigma-tau=8 EXACT.
+**Grade**: CLOSE
+**Related BT**: BT-58
+
+---
+
+### H-ENV-52: 토양 유기탄소 저장 ~2400 Gt C (0-2m) = J2*100
+
+**Category**: 토양/지각
+**n=6 Connection**: 전구 토양 유기탄소(SOC) 총량. 상위 1m: ~1500 GtC. 상위 2m: ~2400 GtC = J2*100 = 2400.
+**Prediction**: 전구 토양 유기탄소(0-2m) = 2400 GtC = J2*100.
+**Verification**: Batjes, European J. Soil Science 2014: SOC 0-2m = 2060-2500 GtC (중앙값 ~2400). Scharlemann et al., Carbon Management 2014: ~2500 GtC. J2*100 = 2400은 추정 범위 내.
+**Grade**: CLOSE
+**Related BT**: BT-27
+
+---
+
+### H-ENV-53: 규산염 풍화 — Carbon Z=6 지질학적 순환
+
+**Category**: 토양/지각
+**n=6 Connection**: 규산염 풍화 반응: CaSiO3 + CO2 -> CaCO3 + SiO2. 이 반응이 지질학적 시간 규모에서 CO2 조절. 핵심 원소 C = Z=6 = n. 탄산칼슘 침전을 통한 C 격리.
+**Prediction**: 규산염 풍화의 핵심 = C(Z=6) 순환. 탄산칼슘 침전을 통한 C 격리.
+**Verification**: Berner, American J. Science 1983 (BLAG model); Walker et al., JGR 1981. Carbon Z=6의 지질학적 순환은 사실.
+**Grade**: CLOSE
+**Related BT**: BT-27, BT-85
+
+---
+
+### H-ENV-54: 점토 광물 6각 판상 구조
+
+**Category**: 토양/지각
+**n=6 Connection**: 점토 광물(kaolinite, montmorillonite 등)의 기본 구조 = SiO4 사면체가 6각 환(hexagonal ring)으로 연결된 판상 구조. 실리카 시트의 기본 단위 = Si2O5 6각 환, 각 환에 6개 사면체.
+**Prediction**: 점토 광물의 실리카 시트가 6각 환 구조 = n=6.
+**Verification**: Bailey, Crystal Structures of Clay Minerals (1988). 점토 실리카 시트 = hexagonal arrangement of SiO4 tetrahedra는 결정학적 사실. 각 환에 6개 Si 원자.
+**Grade**: EXACT
+**Related BT**: BT-86, BT-49
+
+---
+
+## Category 10: 수자원 n=6 (H-ENV-55 ~ H-ENV-58)
+
+### H-ENV-55: 얼음 Ih 수소결합 6각 환 = n=6
+
+**Category**: 수자원
+**n=6 Connection**: 얼음 Ih(일상적 얼음)의 결정 구조에서 각 물 분자는 4개의 수소결합(CN=tau=4)을 형성하고, 이들이 모여 6각 환(hexagonal ring)을 구성. 각 6각 환에 6개 물 분자 = n EXACT. 이것이 눈 결정의 6각 대칭의 분자적 기원.
+**Prediction**: 얼음 Ih의 기본 구조 단위 = 6-membered H2O ring. 각 환에 정확히 n=6 물 분자.
+**Verification**: Pauling, JACS 57:2680 (1935, ice residual entropy); Petrenko & Whitworth, Physics of Ice (1999). 얼음 Ih = hexagonal ice, 6-membered rings는 결정학적 사실.
+**Grade**: EXACT
+**Related BT**: BT-86, BT-49
+
+---
+
+### H-ENV-56: 물 결합각 104.5 deg = 정사면체각 - sopfr
+
+**Category**: 수자원
+**n=6 Connection**: H2O 결합각 = 104.5 deg. 정사면체각 = 109.5 deg. 차이 = 5.0 deg = sopfr. 이것은 비공유 전자쌍 2개(= phi)의 반발로 인한 각도 감소.
+**Prediction**: H2O 결합각 = 정사면체각 - sopfr = 109.5 - 5.0 = 104.5 deg.
+**Verification**: NIST: H2O bond angle = 104.52 deg. 정사면체각 = 109.47 deg. 차이 = 4.95 deg. sopfr=5와의 오차 = 0.05/5 = 1%.
+**Grade**: CLOSE
+**Related BT**: -
+
+---
+
+### H-ENV-57: 수문 순환 n=6 단계
+
+**Category**: 수자원
+**n=6 Connection**: 수문 순환(hydrological cycle)의 주요 단계: 증발(Evaporation) -> 응결(Condensation) -> 강수(Precipitation) -> 침투(Infiltration) -> 유출(Runoff) -> 저류(Storage). 6단계 = n.
+**Prediction**: 수문 순환을 분류하면 6대 과정으로 정리.
+**Verification**: 수문학 교과서(Chow et al., Applied Hydrology 1988). 분류 방식에 따라 4-8단계로 다양. 6이 표준이라는 합의는 없음.
+**Grade**: WEAK
+**Related BT**: -
+
+---
+
+### H-ENV-58: 지구 담수 비율 ~3% = n/phi
+
+**Category**: 수자원
+**n=6 Connection**: 지구 전체 물 중 담수(freshwater) 비율 = 약 2.5-3%. n/phi = 6/2 = 3 = 3%에 근접.
+**Prediction**: 지구 담수 비율 ~ n/phi = 3%.
+**Verification**: Shiklomanov, World Water Resources (1993): 담수 = 2.5%. USGS: ~3% (넓은 정의). 2.5-3% 범위에서 n/phi=3은 상한.
+**Grade**: CLOSE
+**Related BT**: -
+
+---
+
+## Category 11: 행성 규모 (H-ENV-59 ~ H-ENV-60)
+
+### H-ENV-59: Gaia 되먹임 ~10 조절 메커니즘 = sigma-phi
+
+**Category**: 행성
+**n=6 Connection**: Gaia 가설(Lovelock 1979)의 행성 규모 항상성 메커니즘. 주요 되먹임 루프: 규산염 풍화, 해양 DMS, 알베도, 탄소 순환, 질소 순환, 인 순환, 수문 순환, 화산, 판구조, 생물학적 펌프. ~sigma-phi=10개 주요 피드백.
+**Prediction**: 지구 시스템 주요 항상성 피드백 루프 = ~10개 = sigma-phi.
+**Verification**: Lovelock & Margulis, Tellus 1974. Kump et al., The Earth System (2004). 피드백 루프 수는 정의에 따라 다양. 10개는 합리적 수준이나 EXACT 근거는 약함.
+**Grade**: WEAK
+**Related BT**: BT-36
+
+---
+
+### H-ENV-60: 지구 6대 권역 — 암권/수권/대기권/생물권/빙권/자기권
+
+**Category**: 행성
+**n=6 Connection**: 지구 시스템 과학의 주요 권역 분류: 암권(Lithosphere), 수권(Hydrosphere), 대기권(Atmosphere), 생물권(Biosphere), 빙권(Cryosphere), 자기권(Magnetosphere). 6대 권역 = n.
+**Prediction**: 지구 시스템을 구성하는 주요 "sphere" = 6개로 분류.
+**Verification**: NASA Earth Science: 5 spheres (Geo/Hydro/Atmo/Bio/Cryo). 자기권 포함 시 6. 분류 방식에 따라 4-6개. 표준 5개에 자기권 추가로 6.
+**Grade**: WEAK
+**Related BT**: BT-36
