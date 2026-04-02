@@ -30,7 +30,7 @@ struct Constant {
 
 #[derive(Clone)]
 struct Discovery {
-    operator: u8,         // 0=COLLISION, 1=INVERSE, 2=COMPOSE
+    operator: u8,         // 0=COLLISION, 1=INVERSE, 2=COMPOSE, 3=ANOMALY, 4=SYMMETRY, 5=REDTEAM
     score: f64,
     description: String,
     domain_bits: u16,     // bitmask of 9 categories
@@ -40,7 +40,7 @@ struct Discovery {
     novelty: f64,
 }
 
-const OP_NAMES: [&str; 3] = ["COLLISION", "INVERSE", "COMPOSE"];
+const OP_NAMES: [&str; 6] = ["COLLISION", "INVERSE", "COMPOSE", "ANOMALY", "SYMMETRY", "REDTEAM"];
 
 // ── Base Constants (n=6 arithmetic) ──────────────────────────────
 
@@ -718,6 +718,279 @@ fn op_compose(et: &ExprTable, idx: &ExprIndex, targets: &[EngTarget], known_bts:
     discoveries
 }
 
+// ── ANOMALY Operator ────────────────────────────────────────────
+// For each atlas constant: if no depth-2 n6 expression matches within 1%,
+// it's an "honest failure". If one matches but the constant was scored low
+// (appears in only 1 domain category), it's an "upgrade candidate".
+
+fn op_anomaly(constants: &[Constant], et: &ExprTable, idx: &ExprIndex) -> Vec<Discovery> {
+    let mut discoveries = Vec::new();
+    let mut match_buf: Vec<(u32, f64)> = Vec::with_capacity(32);
+
+    for c in constants {
+        if c.value.abs() < 1e-15 || c.value.is_nan() || c.value.is_infinite() { continue; }
+
+        // Compute category bits for this constant
+        let mut cat_bits: u16 = 0;
+        for d in &c.domains {
+            cat_bits |= categorize_bit(d);
+        }
+        let n_cats = count_bits(cat_bits);
+
+        // Check if a depth-2 n6 expression matches within 1%
+        idx.find_within(c.value, 0.01, &et.values, &mut match_buf);
+
+        if match_buf.is_empty() {
+            // No n6 expression matches → honest failure
+            let score = 0.3; // moderate interest
+            discoveries.push(Discovery {
+                operator: 3,
+                score,
+                description: format!(
+                    "HONEST-FAIL: '{}' = {:.6} has NO n6 expression within 1% (domains: {})",
+                    c.expr, c.value, c.domains.join(", ")
+                ),
+                domain_bits: cat_bits,
+                formula: c.expr.clone(),
+                diversity: diversity_from_bits(cat_bits),
+                precision: 0.0,
+                novelty: 1.0,
+            });
+        } else if n_cats <= 1 {
+            // Has n6 match but scored low (single domain category) → upgrade candidate
+            match_buf.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
+            let best_idx = match_buf[0].0 as usize;
+            let best_err = match_buf[0].1;
+            let best_expr = &et.texts[best_idx];
+            let prec = 1.0 - best_err;
+            let score = 0.5 * prec; // higher if precision is good
+
+            discoveries.push(Discovery {
+                operator: 3,
+                score,
+                description: format!(
+                    "UPGRADE: '{}' = {:.6} matches n6 '{}' (err={:.4}%) but only in [{}] — search other domains",
+                    c.expr, c.value, best_expr, best_err * 100.0, c.domains.join(", ")
+                ),
+                domain_bits: cat_bits,
+                formula: format!("{} ≈ {}", c.expr, best_expr),
+                diversity: diversity_from_bits(cat_bits),
+                precision: prec,
+                novelty: 0.8,
+            });
+        }
+    }
+
+    // Sort: upgrade candidates first (higher score), then honest failures
+    discoveries.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+    discoveries.truncate(30); // keep top 30 anomalies
+    discoveries
+}
+
+// ── SYMMETRY Operator ───────────────────────────────────────────
+// Group BTs by formula template (structure ignoring specific constants).
+// Find templates with gaps: present in domains A,B but missing from C.
+
+fn extract_template(formula: &str) -> String {
+    // Normalize formula to a structural template:
+    // Replace specific n6 constant names with placeholder "X"
+    let mut t = formula.to_string();
+    // Replace known constant names (longest first to avoid partial matches)
+    for name in &["sopfr", "J₂", "σ", "τ", "φ", "μ", "n"] {
+        t = t.replace(name, "X");
+    }
+    // Replace numbers with "#"
+    let mut result = String::with_capacity(t.len());
+    let mut in_num = false;
+    for ch in t.chars() {
+        if ch.is_ascii_digit() || ch == '.' {
+            if !in_num { result.push('#'); in_num = true; }
+        } else {
+            in_num = false;
+            result.push(ch);
+        }
+    }
+    result
+}
+
+fn op_symmetry(constants: &[Constant]) -> Vec<Discovery> {
+    // Build template → list of (expr, domains, bt_refs) groups
+    let mut template_map: HashMap<String, Vec<(String, u16, Vec<String>)>> = HashMap::new();
+
+    for c in constants {
+        let tmpl = extract_template(&c.expr);
+        if tmpl.is_empty() || tmpl == "X" || tmpl == "#" { continue; }
+
+        let mut cat_bits: u16 = 0;
+        for d in &c.domains {
+            cat_bits |= categorize_bit(d);
+        }
+
+        template_map.entry(tmpl).or_default().push((
+            c.expr.clone(),
+            cat_bits,
+            c.bt_refs.clone(),
+        ));
+    }
+
+    let mut discoveries = Vec::new();
+
+    // For each template, compute the union of all domain categories it covers
+    // Then find templates that are "incomplete" — present in some categories but missing from others
+    for (tmpl, entries) in &template_map {
+        if entries.len() < 2 { continue; } // need at least 2 instances to detect pattern
+
+        let mut union_bits: u16 = 0;
+        let mut exprs: Vec<&str> = Vec::new();
+        let mut bt_count = 0;
+
+        for (expr, bits, bts) in entries {
+            union_bits |= bits;
+            exprs.push(expr);
+            bt_count += bts.len();
+        }
+
+        let covered = count_bits(union_bits);
+        if covered < 2 { continue; } // at least 2 categories covered
+
+        // Find missing categories (present in project but not in this template)
+        let all_cats: u16 = 0x1FF; // 9 categories
+        let missing_bits = all_cats & !union_bits;
+        let missing_count = count_bits(missing_bits);
+
+        if missing_count == 0 || missing_count > 6 { continue; } // fully covered or too sparse
+
+        let covered_names = cat_bits_to_names(union_bits);
+        let missing_names = cat_bits_to_names(missing_bits);
+
+        // Score: more covered categories + fewer missing = higher confidence of gap
+        let score = (covered as f64 / 9.0) * (1.0 - missing_count as f64 / 9.0);
+        if score < 0.1 { continue; }
+
+        let sample_exprs: String = exprs.iter().take(3).copied().collect::<Vec<_>>().join(", ");
+
+        discoveries.push(Discovery {
+            operator: 4,
+            score,
+            description: format!(
+                "Template '{}' ({} BTs) covers [{}] but MISSING from [{}] — examples: {}",
+                tmpl, bt_count, covered_names.join(","), missing_names.join(","), sample_exprs
+            ),
+            domain_bits: union_bits,
+            formula: tmpl.clone(),
+            diversity: diversity_from_bits(union_bits),
+            precision: 1.0,
+            novelty: if bt_count > 0 { 0.5 } else { 1.0 },
+        });
+    }
+
+    discoveries.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+    discoveries.truncate(20); // keep top 20 symmetry gaps
+    discoveries
+}
+
+// ── REDTEAM Operator ────────────────────────────────────────────
+// Compute a "suspicion score" for each discovery. Positive = suspicious,
+// negative = survives adversarial scrutiny.
+
+fn suspicion_score(value: f64, formula: &str, domain_bits: u16, precision: f64) -> (i32, Vec<&'static str>) {
+    let mut score: i32 = 0;
+    let mut reasons: Vec<&'static str> = Vec::new();
+
+    // +2 if value is a power of 2
+    if value > 0.0 && value == value.floor() {
+        let log2 = value.log2();
+        if (log2 - log2.round()).abs() < 1e-9 {
+            score += 2;
+            reasons.push("+2:power-of-2");
+        }
+    }
+
+    // +1 if value < 24 (small integer bias)
+    if value.abs() < 24.0 && value == value.floor() && value.abs() >= 1.0 {
+        score += 1;
+        reasons.push("+1:small-int(<24)");
+    }
+
+    // +1 if depth-2 formula (contains only 1 operation beyond base)
+    let op_count = formula.chars().filter(|&c| c == '+' || c == '-' || c == '·' || c == '/' || c == '^').count();
+    if op_count <= 1 && !formula.contains('(') {
+        score += 1;
+        reasons.push("+1:depth<=1");
+    }
+
+    // -2 if value is irrational/non-round
+    if value != value.floor() && (value * 1000.0).round() != (value * 1000.0) {
+        score -= 2;
+        reasons.push("-2:irrational");
+    }
+
+    // -2 if appears in 3+ unrelated domain categories
+    if count_bits(domain_bits) >= 3 {
+        score -= 2;
+        reasons.push("-2:3+domains");
+    }
+
+    // -1 if precision < 0.1%
+    if precision > 0.999 {
+        score -= 1;
+        reasons.push("-1:precision<0.1%");
+    }
+
+    (score, reasons)
+}
+
+fn op_redteam(all_discoveries: &[Discovery]) -> Vec<Discovery> {
+    let mut results = Vec::new();
+
+    for d in all_discoveries {
+        // Parse the value from formula/description
+        let value = extract_value_from_desc(&d.description);
+        let (susp, reasons) = suspicion_score(value, &d.formula, d.domain_bits, d.precision);
+
+        let verdict = if susp < 0 { "SURVIVES" } else if susp == 0 { "NEUTRAL" } else { "SUSPICIOUS" };
+        let reason_str = reasons.join(", ");
+
+        // Score for ranking: suspicious ones get higher scores (they need attention)
+        let rt_score = if susp > 0 {
+            susp as f64 * 0.2 // suspicious = interesting to report
+        } else {
+            (-susp) as f64 * 0.15 // survivors are also interesting
+        };
+
+        results.push(Discovery {
+            operator: 5,
+            score: rt_score,
+            description: format!(
+                "{} (susp={}): {} | {}",
+                verdict, susp, d.description.chars().take(60).collect::<String>(), reason_str
+            ),
+            domain_bits: d.domain_bits,
+            formula: d.formula.clone(),
+            diversity: d.diversity,
+            precision: d.precision,
+            novelty: if susp < 0 { 1.0 } else { 0.0 }, // survivors are novel
+        });
+    }
+
+    results.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+    results.truncate(25); // top 25 red-team results
+    results
+}
+
+/// Extract a numeric value from discovery description (best-effort)
+fn extract_value_from_desc(desc: &str) -> f64 {
+    // Look for patterns like "= 144.0", "Value 120.000000", etc.
+    for token in desc.split_whitespace() {
+        let clean = token.trim_matches(|c: char| !c.is_ascii_digit() && c != '.' && c != '-');
+        if clean.is_empty() { continue; }
+        if let Ok(v) = clean.parse::<f64>() {
+            if v.abs() > 0.001 && v.is_finite() { return v; }
+        }
+    }
+    0.0
+}
+
 // ── Known BT Values ─────────────────────────────────────────────
 
 fn known_bt_values() -> Vec<String> {
@@ -792,28 +1065,75 @@ fn save_cache(path: &str, hash: u64, discoveries: &[Discovery]) {
 fn print_text(discoveries: &[Discovery], total_exprs: usize, total_matches: usize, elapsed_us: u128) {
     let ms = elapsed_us / 1000;
     let frac = (elapsed_us % 1000) / 100;
+
+    // Count per operator
+    let mut op_counts = [0usize; 6];
+    for d in discoveries {
+        if (d.operator as usize) < 6 { op_counts[d.operator as usize] += 1; }
+    }
+
     println!("╔══════════════════════════════════════════════════════════════════╗");
-    println!("║           N6 Discovery Engine v2 — Results                      ║");
+    println!("║           N6 Discovery Engine v3 — Results                      ║");
     println!("╠══════════════════════════════════════════════════════════════════╣");
     println!("║  Expressions enumerated: {:>8}                               ║", total_exprs);
     println!("║  Discoveries found:      {:>8}                               ║", total_matches);
     println!("║  Time elapsed:         {:>3}.{} ms                              ║", ms, frac);
+    println!("╠══════════════════════════════════════════════════════════════════╣");
+    for i in 0..6 {
+        println!("║    {:<9}: {:>4}                                                ║", OP_NAMES[i], op_counts[i]);
+    }
     println!("╚══════════════════════════════════════════════════════════════════╝");
     println!();
 
-    println!("Top 50 Discoveries (ranked by score):");
-    println!("{:<4} {:<9} {:<6} {:<5} {:<5} {:<5} {}", "#", "Operator", "Score", "Div", "Prec", "Nov", "Description");
-    println!("{}", "-".repeat(120));
+    println!("Top 60 Discoveries (ranked by score):");
+    println!("{:<4} {:<10} {:<6} {:<5} {:<5} {:<5} {}", "#", "Operator", "Score", "Div", "Prec", "Nov", "Description");
+    println!("{}", "-".repeat(130));
 
-    for (i, d) in discoveries.iter().take(50).enumerate() {
+    for (i, d) in discoveries.iter().take(60).enumerate() {
+        let op_name = if (d.operator as usize) < 6 { OP_NAMES[d.operator as usize] } else { "???" };
         let desc_trunc = if d.description.chars().count() > 80 {
             let s: String = d.description.chars().take(77).collect();
             format!("{}...", s)
         } else {
             d.description.clone()
         };
-        println!("{:<4} {:<9} {:<6.3} {:<5.2} {:<5.2} {:<5.2} {}",
-            i + 1, OP_NAMES[d.operator as usize], d.score, d.diversity, d.precision, d.novelty, desc_trunc);
+        println!("{:<4} {:<10} {:<6.3} {:<5.2} {:<5.2} {:<5.2} {}",
+            i + 1, op_name, d.score, d.diversity, d.precision, d.novelty, desc_trunc);
+    }
+
+    // Print dedicated sections for new operators
+    println!();
+    println!("═══ ANOMALY Report ═══");
+    let anomalies: Vec<&Discovery> = discoveries.iter().filter(|d| d.operator == 3).collect();
+    let upgrades: Vec<&&Discovery> = anomalies.iter().filter(|d| d.description.starts_with("UPGRADE")).collect();
+    let failures: Vec<&&Discovery> = anomalies.iter().filter(|d| d.description.starts_with("HONEST")).collect();
+    println!("  Upgrade candidates: {}  |  Honest failures: {}", upgrades.len(), failures.len());
+    for d in upgrades.iter().take(10) {
+        println!("  [UP] {}", &d.description[..d.description.len().min(120)]);
+    }
+    for d in failures.iter().take(5) {
+        println!("  [--] {}", &d.description[..d.description.len().min(120)]);
+    }
+
+    println!();
+    println!("═══ SYMMETRY Report ═══");
+    let syms: Vec<&Discovery> = discoveries.iter().filter(|d| d.operator == 4).collect();
+    println!("  Templates with gaps: {}", syms.len());
+    for d in syms.iter().take(10) {
+        println!("  [GAP] {}", &d.description[..d.description.len().min(130)]);
+    }
+
+    println!();
+    println!("═══ REDTEAM Report ═══");
+    let rts: Vec<&Discovery> = discoveries.iter().filter(|d| d.operator == 5).collect();
+    let suspicious: Vec<&&Discovery> = rts.iter().filter(|d| d.description.starts_with("SUSPICIOUS")).collect();
+    let survived: Vec<&&Discovery> = rts.iter().filter(|d| d.description.starts_with("SURVIVES")).collect();
+    println!("  Suspicious: {}  |  Survived: {}  |  Neutral: {}", suspicious.len(), survived.len(), rts.len() - suspicious.len() - survived.len());
+    for d in suspicious.iter().take(8) {
+        println!("  [!] {}", &d.description[..d.description.len().min(120)]);
+    }
+    for d in survived.iter().take(8) {
+        println!("  [OK] {}", &d.description[..d.description.len().min(120)]);
     }
 }
 
@@ -832,7 +1152,8 @@ fn print_json(discoveries: &[Discovery], total_exprs: usize, total_matches: usiz
         let domains_json: Vec<String> = domain_names.iter().map(|s| format!("\"{}\"", s)).collect();
         println!("    {{");
         println!("      \"rank\": {},", i + 1);
-        println!("      \"operator\": \"{}\",", OP_NAMES[d.operator as usize]);
+        let op_name = if (d.operator as usize) < 6 { OP_NAMES[d.operator as usize] } else { "???" };
+        println!("      \"operator\": \"{}\",", op_name);
         println!("      \"score\": {:.4},", d.score);
         println!("      \"diversity\": {:.4},", d.diversity);
         println!("      \"precision\": {:.4},", d.precision);
@@ -870,11 +1191,21 @@ impl EngineState {
         let d1 = op_collision(&self.constants);
         let d2 = op_inverse(&self.et, &self.idx, targets, &self.known_bts);
         let d3 = op_compose(&self.et, &self.idx, targets, &self.known_bts);
+        let d4 = op_anomaly(&self.constants, &self.et, &self.idx);
+        let d5 = op_symmetry(&self.constants);
 
-        let mut all: Vec<Discovery> = Vec::with_capacity(d1.len() + d2.len() + d3.len());
+        let mut all: Vec<Discovery> = Vec::with_capacity(
+            d1.len() + d2.len() + d3.len() + d4.len() + d5.len() + 25
+        );
         all.extend(d1);
         all.extend(d2);
         all.extend(d3);
+        all.extend(d4);
+        all.extend(d5);
+
+        // REDTEAM runs on all prior discoveries
+        let d6 = op_redteam(&all);
+        all.extend(d6);
 
         all.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
         all
