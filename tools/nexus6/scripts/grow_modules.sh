@@ -40,50 +40,54 @@ SIGMA_MINUS_PHI=10
 # Production:  1000+ lines, 20+ tests
 
 # ── Module purpose descriptions ──────────────────────────────────────
-declare -A MODULE_PURPOSES=(
-  [cross_intel]="Cross-project intelligence — find patterns across TECS-L repos"
-  [statistics]="Statistical significance testing, effect sizes, reproducibility"
-  [template]="Templates for experiments, lenses, and reports"
-  [versioning]="Schema versioning and migration for data formats"
-  [sandbox]="Isolated execution environment for untrusted experiments"
-  [scheduler]="Task scheduling with priority queues and dependencies"
-  [distributed]="Distributed scanning across multiple nodes"
-  [dream]="Creative hypothesis generation through random exploration"
-  [consciousness_bridge]="Bridge between NEXUS-6 analysis and Anima consciousness engine"
-  [feedback]="User feedback collection and learning from corrections"
-  [time_travel]="Snapshot and restore system state for reproducibility"
-  [pipeline]="Multi-stage data processing pipelines"
-  [event]="Event bus for inter-module communication"
-  [api]="REST API for external tool integration"
-  [nlp]="Natural language processing for hypothesis text analysis"
-  [plugin]="Plugin system for third-party extensions"
-  [multi_agent]="Multi-agent coordination for parallel discovery"
-  [autonomous]="Autonomous agent that runs growth cycles independently"
-  [ingest]="Data ingestion from various formats (JSON, CSV, text)"
-  [knowledge]="Knowledge base for storing and querying discoveries"
-  [publish]="Publishing results in various formats (markdown, LaTeX, BT)"
-  [reward]="Reward system for scoring lens and agent performance"
-  [genetic_prog]="Genetic programming for lens parameter evolution"
-  [alert]="Real-time alerting on significant discoveries or regressions"
-  [self_improve]="Self-analysis and automatic optimization"
-  [red_team]="Adversarial testing of discoveries (devil's advocate)"
-  [telescope]="Core scanning engine with 22+ lenses for pattern detection"
-  [cli]="Command-line interface for NEXUS-6 discovery engine"
-  [ouroboros]="Self-evolving discovery loop (OUROBOROS cycle)"
-  [science]="Scientific method modules: hypothesis, experiment design"
-  [auto_register]="Automatic lens registration and discovery"
-  [simulation]="Monte Carlo and deterministic simulation of systems"
-  [experiment]="Experiment execution, tracking, and result collection"
-  [calibration]="Lens calibration against known datasets"
-  [lens_forge]="Dynamic lens creation and parameter tuning"
-  [growth]="Growth tracking, benchmarking, and planning"
-  [history]="Execution history tracking and audit trail"
-  [gpu]="GPU architecture analysis and compute resource management"
-  [graph]="Graph data structures for dependency and relationship modeling"
-  [encoder]="Data encoding/decoding for compact representation"
-  [verifier]="Independent verification of discoveries and claims"
-  [materials]="Material property analysis and n=6 pattern detection"
-)
+# Module purpose descriptions (bash 3.2 compatible — no associative arrays)
+module_purpose_for() {
+  case "$1" in
+    cross_intel) echo "Cross-project intelligence — find patterns across TECS-L repos" ;;
+    statistics) echo "Statistical significance testing, effect sizes, reproducibility" ;;
+    template) echo "Templates for experiments, lenses, and reports" ;;
+    versioning) echo "Schema versioning and migration for data formats" ;;
+    sandbox) echo "Isolated execution environment for untrusted experiments" ;;
+    scheduler) echo "Task scheduling with priority queues and dependencies" ;;
+    distributed) echo "Distributed scanning across multiple nodes" ;;
+    dream) echo "Creative hypothesis generation through random exploration" ;;
+    consciousness_bridge) echo "Bridge between NEXUS-6 analysis and Anima consciousness engine" ;;
+    feedback) echo "User feedback collection and learning from corrections" ;;
+    time_travel) echo "Snapshot and restore system state for reproducibility" ;;
+    pipeline) echo "Multi-stage data processing pipelines" ;;
+    event) echo "Event bus for inter-module communication" ;;
+    api) echo "REST API for external tool integration" ;;
+    nlp) echo "Natural language processing for hypothesis text analysis" ;;
+    plugin) echo "Plugin system for third-party extensions" ;;
+    multi_agent) echo "Multi-agent coordination for parallel discovery" ;;
+    autonomous) echo "Autonomous agent that runs growth cycles independently" ;;
+    ingest) echo "Data ingestion from various formats (JSON, CSV, text)" ;;
+    knowledge) echo "Knowledge base for storing and querying discoveries" ;;
+    publish) echo "Publishing results in various formats (markdown, LaTeX, BT)" ;;
+    reward) echo "Reward system for scoring lens and agent performance" ;;
+    genetic_prog) echo "Genetic programming for lens parameter evolution" ;;
+    alert) echo "Real-time alerting on significant discoveries or regressions" ;;
+    self_improve) echo "Self-analysis and automatic optimization" ;;
+    red_team) echo "Adversarial testing of discoveries (devil's advocate)" ;;
+    telescope) echo "Core scanning engine with 22+ lenses for pattern detection" ;;
+    cli) echo "Command-line interface for NEXUS-6 discovery engine" ;;
+    ouroboros) echo "Self-evolving discovery loop (OUROBOROS cycle)" ;;
+    science) echo "Scientific method modules: hypothesis, experiment design" ;;
+    auto_register) echo "Automatic lens registration and discovery" ;;
+    simulation) echo "Monte Carlo and deterministic simulation of systems" ;;
+    experiment) echo "Experiment execution, tracking, and result collection" ;;
+    calibration) echo "Lens calibration against known datasets" ;;
+    lens_forge) echo "Dynamic lens creation and parameter tuning" ;;
+    growth) echo "Growth tracking, benchmarking, and planning" ;;
+    history) echo "Execution history tracking and audit trail" ;;
+    gpu) echo "GPU architecture analysis and compute resource management" ;;
+    graph) echo "Graph data structures for dependency and relationship modeling" ;;
+    encoder) echo "Data encoding/decoding for compact representation" ;;
+    verifier) echo "Independent verification of discoveries and claims" ;;
+    materials) echo "Material property analysis and n=6 pattern detection" ;;
+    *) echo "General NEXUS-6 module" ;;
+  esac
+}
 
 # ═══════════════════════════════════════════════════════════════════════
 # Functions
@@ -226,7 +230,8 @@ generate_prompt() {
   local target_maturity=$3
   local current_lines=${MOD_LINES[$name]}
   local current_tests=${MOD_TESTS[$name]}
-  local purpose="${MODULE_PURPOSES[$name]:-General NEXUS-6 module}"
+  local purpose
+  purpose=$(module_purpose_for "$name")
 
   local target_lines target_tests
   case "$target_maturity" in

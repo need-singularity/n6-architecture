@@ -84,16 +84,19 @@ LENS_PRIORITY=(
 )
 
 # ─── Category filters ──────────────────────────────────────────────────────────
-declare -A CATEGORY_SOURCES
-CATEGORY_SOURCES=(
-    ["n6"]="n6_lenses"
-    ["physics"]="physics_deep_lenses"
-    ["accel"]="accel_lenses_a accel_lenses_b accel_lenses_c accel_lenses_d"
-    ["cross"]="cross_lenses"
-    ["tecs"]="tecs_lenses"
-    ["anima"]="anima_lenses"
-    ["sedi"]="sedi_lenses"
-)
+# Category sources (bash 3.2 compatible — no associative arrays)
+category_source_for() {
+    case "$1" in
+        n6)      echo "n6_lenses" ;;
+        physics) echo "physics_deep_lenses" ;;
+        accel)   echo "accel_lenses_a accel_lenses_b accel_lenses_c accel_lenses_d" ;;
+        cross)   echo "cross_lenses" ;;
+        tecs)    echo "tecs_lenses" ;;
+        anima)   echo "anima_lenses" ;;
+        sedi)    echo "sedi_lenses" ;;
+        *)       echo "" ;;
+    esac
+}
 
 # ─── Parse args ─────────────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
@@ -220,7 +223,7 @@ for pname in "${LENS_PRIORITY[@]}"; do
             if [[ "$CATEGORY" != "all" ]]; then
                 # Check if this lens is in the target category source
                 found_in_cat=false
-                for src_id in ${CATEGORY_SOURCES[$CATEGORY]:-}; do
+                for src_id in $(category_source_for "$CATEGORY"); do
                     src_path="src/telescope/${src_id}.rs"
                     if [[ -f "$src_path" ]] && grep -q "\"$pname\"" "$src_path" 2>/dev/null; then
                         found_in_cat=true
