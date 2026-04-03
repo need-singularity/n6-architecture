@@ -8,7 +8,7 @@
             "type": "command",
             "command": "bash .shared/hooks/nexus6-pre-commit.sh",
             "timeout": 15,
-            "statusMessage": "🔬 NEXUS-6 pre-commit scan..."
+            "statusMessage": "🔭 NEXUS-6 커밋 스캔"
           }
         ]
       },
@@ -19,7 +19,7 @@
             "type": "command",
             "command": "bash .shared/hooks/nexus6-universal.sh",
             "timeout": 10,
-            "statusMessage": "🔬 NEXUS-6 agent context..."
+            "statusMessage": "🔭 NEXUS-6 에이전트 컨텍스트"
           }
         ]
       }
@@ -32,7 +32,7 @@
             "type": "command",
             "command": "bash .shared/hooks/nexus6-post-edit.sh",
             "timeout": 10,
-            "statusMessage": "🔬 NEXUS-6 n6_check..."
+            "statusMessage": "🔭 NEXUS-6 수치 검증"
           }
         ]
       },
@@ -43,7 +43,20 @@
             "type": "command",
             "command": "bash .shared/hooks/nexus6-post-bash.sh",
             "timeout": 15,
-            "statusMessage": "🔬 NEXUS-6 result scan..."
+            "statusMessage": "🔭 NEXUS-6 실행 결과 스캔"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .shared/hooks/growth-scan.sh",
+            "timeout": 10,
+            "statusMessage": "🔭 NEXUS-6 성장 스캔"
           }
         ]
       }
