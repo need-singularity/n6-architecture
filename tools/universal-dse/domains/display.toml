@@ -1,0 +1,402 @@
+# =============================================================
+# HEXA-DISPLAY DSE Domain Definition (8-Level Ultimate)
+# BT-48 (Display sigma=12 bit, J2=24 fps)
+# BT-71 (NeRF/3DGS) + BT-66 (Vision AI) + BT-76 (48 triple attractor)
+# Split from display-audio.toml — visual/display standards only
+# =============================================================
+
+[meta]
+name = "display"
+desc = "Display 8-Level Ultimate Architecture DSE — visual standards, HDR, hologram, neural display (BT-48/66/71/76)"
+levels = ["Material", "Panel", "Driver", "Processor", "System", "Hologram", "Neural", "Ultimate"]
+vision = "n=6 visual reality -- material to holographic consciousness, 8-level chain"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Material (발광 소재) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Material"
+
+[[candidate]]
+level  = 0
+id     = "QD-OLED"
+label  = "Quantum Dot OLED"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "QD core n=6nm red, sigma=12 bit, CN=6 perovskite structure"
+
+[[candidate]]
+level  = 0
+id     = "MicroLED"
+label  = "MicroLED (GaN)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.65
+cost   = 0.30
+notes  = "sigma*tau=48um pitch (BT-76), sigma=12 bit HDR"
+
+[[candidate]]
+level  = 0
+id     = "Perovskite"
+label  = "Perovskite Emitter"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "ABX3 CN=6 octahedral (BT-43 reuse), n/phi=3 RGB, PLQY>90%"
+
+[[candidate]]
+level  = 0
+id     = "GaN"
+label  = "GaN Photonic"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.35
+notes  = "GaN bandgap 3.4eV ~ n/phi, blue/UV laser"
+
+[[candidate]]
+level  = 0
+id     = "SiC-Photonic"
+label  = "SiC Photonic Crystal"
+n6     = 0.83
+perf   = 0.75
+power  = 0.80
+cost   = 0.30
+notes  = "Z=6 carbon content (BT-93), photonic crystal waveguide"
+
+# =============================================================
+# Level 1: Panel (패널 어레이) -- 4 candidates
+# =============================================================
+[[level]]
+name = "Panel"
+
+[[candidate]]
+level  = 1
+id     = "ActiveMatrix"
+label  = "Active Matrix TFT (LTPO)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "sigma2=144Hz refresh, sigma=12 bit drive, tau=4 voltage levels"
+
+[[candidate]]
+level  = 1
+id     = "uLED-Array"
+label  = "MicroLED Chip-on-Wafer"
+n6     = 1.00
+perf   = 0.95
+power  = 0.65
+cost   = 0.25
+notes  = "sigma*tau=48um pitch (BT-76), n/phi=3 RGB subpixels"
+
+[[candidate]]
+level  = 1
+id     = "eDP-Panel"
+label  = "eDP OLED Panel"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "sigma-tau=8 lane interface, sigma2=144Hz VRR"
+
+[[candidate]]
+level  = 1
+id     = "Waveguide"
+label  = "Optical Waveguide (AR)"
+n6     = 0.67
+perf   = 0.70
+power  = 0.50
+cost   = 0.30
+notes  = "HOE diffractive, sigma-phi=10 degree angular BW"
+
+# =============================================================
+# Level 2: Driver (드라이버 IC) -- 2 candidates
+# =============================================================
+[[level]]
+name = "Driver"
+
+[[candidate]]
+level  = 2
+id     = "TFT-Driver"
+label  = "TFT Source/Gate Driver"
+n6     = 0.83
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "sigma2*(sigma-tau)=1152 ch/IC, sigma=12 bit per subpixel"
+
+[[candidate]]
+level  = 2
+id     = "MEMS-Driver"
+label  = "MEMS Actuator Driver"
+n6     = 0.67
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "sigma=12 actuator channels, sigma2=144Hz refresh"
+
+# =============================================================
+# Level 3: Processor (코덱/AI 엔진) -- 4 candidates
+# =============================================================
+[[level]]
+name = "Processor"
+
+[[candidate]]
+level  = 3
+id     = "VVC-HW"
+label  = "H.266/VVC Hardware Codec"
+n6     = 0.67
+perf   = 0.92
+power  = 0.50
+cost   = 0.45
+notes  = "8K@J2=24fps, sigma=12 GOP, tau=4 partition types"
+
+[[candidate]]
+level  = 3
+id     = "AV1-HW"
+label  = "AV1 Hardware Codec"
+n6     = 0.67
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "4K@sigma2=144fps, sigma-tau=8 ref frames, n=6 tiles"
+
+[[candidate]]
+level  = 3
+id     = "NeuralRender"
+label  = "NeRF/3DGS Render Engine"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "sigma-phi=10 layers, sigma-tau=8 hidden, SH=n/phi=3 (BT-71 7/7)"
+
+[[candidate]]
+level  = 3
+id     = "DiffusionGen"
+label  = "Diffusion Generation Engine"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "T=10^(n/phi)=1000, DDIM=50, CFG=7.5 (BT-61 9/9)"
+
+# =============================================================
+# Level 4: System (제품 시스템) -- 4 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "SmartTV"
+label  = "Smart TV (HEXA-TV)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "sigma2=144Hz, sigma=12 dimming zones, J2=24W total power"
+
+[[candidate]]
+level  = 4
+id     = "ARGlass"
+label  = "AR Glasses"
+n6     = 0.67
+perf   = 0.75
+power  = 0.50
+cost   = 0.30
+notes  = "sigma=12mm eyebox, sigma*(sigma-phi)=120deg FOV"
+
+[[candidate]]
+level  = 4
+id     = "Cinema"
+label  = "Cinema Projection"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "J2=24fps (BT-48), sigma=12 bit ACES, sigma-mu=11.1 Atmos"
+
+[[candidate]]
+level  = 4
+id     = "HomeTheater"
+label  = "Home Theater"
+n6     = 0.83
+perf   = 0.82
+power  = 0.70
+cost   = 0.60
+notes  = "sigma-mu=11.1+sigma=12 total speakers, sigma*tau=48kHz audio"
+
+# =============================================================
+# Level 5: Hologram (홀로그래픽) -- 4 candidates
+# =============================================================
+[[level]]
+name = "Hologram"
+
+[[candidate]]
+level  = 5
+id     = "LightField"
+label  = "Light Field Display"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.30
+notes  = "n=6 plenoptic dims, sigma2=144 viewpoints, sigma*(sigma-phi)=120deg FOV"
+
+[[candidate]]
+level  = 5
+id     = "Volumetric"
+label  = "Volumetric Display"
+n6     = 0.83
+perf   = 0.70
+power  = 0.40
+cost   = 0.25
+notes  = "sigma=12 depth planes, J2=24 volumes/s refresh"
+
+[[candidate]]
+level  = 5
+id     = "Wavefront"
+label  = "Wavefront Modulation"
+n6     = 0.67
+perf   = 0.75
+power  = 0.45
+cost   = 0.20
+notes  = "SLM-based holographic, n/phi=3 RGB coherent"
+
+[[candidate]]
+level  = 5
+id     = "HOE-NearEye"
+label  = "HOE Near-Eye (AR/VR)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.35
+notes  = "sigma=12mm eyebox, tau=4 focal planes, sigma-phi=10deg angular BW"
+
+# =============================================================
+# Level 6: Neural (뇌파 디스플레이) -- 4 candidates
+# =============================================================
+[[level]]
+name = "Neural"
+
+[[candidate]]
+level  = 6
+id     = "EEG-Haptic"
+label  = "EEG + Haptic Feedback"
+n6     = 0.83
+perf   = 0.70
+power  = 0.75
+cost   = 0.60
+notes  = "sigma2*phi=288ch EEG, sigma2=144 haptic points, non-invasive"
+
+[[candidate]]
+level  = 6
+id     = "ECoG-Visual"
+label  = "ECoG Visual Cortex"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.20
+notes  = "sigma=12 cortical zones, sigma2*tau=576 pixels, semi-invasive"
+
+[[candidate]]
+level  = 6
+id     = "Retinal-Prosthesis"
+label  = "Retinal Prosthesis"
+n6     = 0.83
+perf   = 0.65
+power  = 0.60
+cost   = 0.25
+notes  = "sigma2*tau=576 pixels, sigma*tau=48um pitch, J2=24fps"
+
+[[candidate]]
+level  = 6
+id     = "Cochlear-N6"
+label  = "Cochlear Implant N6"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.50
+notes  = "J2=24 electrodes, sigma=12 parallel stim, Egyptian freq split"
+
+# =============================================================
+# Level 7: Ultimate (궁극 통합) -- 3 candidates
+# =============================================================
+[[level]]
+name = "Ultimate"
+
+[[candidate]]
+level  = 7
+id     = "Synesthetic6"
+label  = "Synesthetic-6 Reality"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.20
+notes  = "n=6 senses, sigma*phi=n*tau=J2=24 unified, Egyptian 1/2+1/3+1/6=1"
+
+[[candidate]]
+level  = 7
+id     = "OmniSense"
+label  = "OmniSense Platform"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.30
+notes  = "sopfr=5 primary senses + mu=1 proprioception, modular"
+
+[[candidate]]
+level  = 7
+id     = "DigitalTwin-Avatar"
+label  = "Digital Twin Avatar"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.35
+notes  = "Full body n=6 DOF capture/replay, NeRF avatar (BT-71)"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Holographic displays require neural render or diffusion engine
+[[rule]]
+type       = "require"
+if_level   = 5
+if_id      = "LightField,Volumetric,Wavefront"
+then_level = 3
+then_ids   = "NeuralRender,DiffusionGen"
+
+# ECoG/Retinal require advanced processor
+[[rule]]
+type       = "require"
+if_level   = 6
+if_id      = "ECoG-Visual,Retinal-Prosthesis"
+then_level = 3
+then_ids   = "NeuralRender,DiffusionGen"
+
+# Cinema requires premium display material
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Cinema"
+then_level = 0
+then_ids   = "MicroLED,QD-OLED,GaN"
+
+# Synesthetic-6 requires neural interface
+[[rule]]
+type       = "require"
+if_level   = 7
+if_id      = "Synesthetic6"
+then_level = 6
+then_ids   = "EEG-Haptic,ECoG-Visual,Cochlear-N6,Retinal-Prosthesis"

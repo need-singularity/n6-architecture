@@ -54,7 +54,8 @@
 | [🧬 물질합성](#-물질합성-materials) | 🛸10 | ✅ | **100%** | **100%** | **100%** | 28 | 10 |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | ✅ | **97.1%** | **99.1%** (6사) | 97.1% | 28 | 10 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | ✅ | **95.1%** | **98.6%** | **100%** | 28 | 10 |
-| [📺 디스플레이](#-디스플레이오디오-display--audio) | 🛸5 | ✅ | 86.0% | 81.0% (6사) | 93.9% | 28 | 15 |
+| [📺 디스플레이](#-디스플레이-display) | 🛸5 | ✅ | 86.0% | 81.0% (6사) | 93.9% | 14 | 8 |
+| [🎵 오디오](#-오디오-audio) | 🛸5 | ✅ | 86.0% | 92.6% (4사) | 90.9% | 14 | 12 |
 
 > **🛸 구현 등급** (실제 구현 수준): 10=실제 양산+전수검증 / 9=프로토타입+실험데이터 / 8=완전설계+CrossDSE / 7=상세설계+BT+DSE / 6=설계완료+DSE+진화 / 5=상세설계+BT / 4=구조설계 / 3=가설수립 / 2=컨셉 / 1=미완
 >
@@ -236,16 +237,29 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 ---
 
-# 📺 디스플레이·오디오 (Display & Audio)
+# 📺 디스플레이 (Display)
 
-> **🛸5** | ✅ | BT 5개 86%EXACT | 산업6사81% | 실험93.9% | 물리한계10 | TP28 | 발견15 | Mk.V | CrossDSE3-way 100%EXACT
+> **🛸5** | ✅ | BT 3개 (BT-48,66,71) | 산업6사81% | H-DISP 10개 | 물리한계10 | TP14 | 발견8 | Mk.V
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 5 | | v1 | **궁극의 디스플레이·오디오 8단** | 소재→패널→드라이버→프로세서→시스템→홀로→뇌파→Omega, 40/40 EXACT | [goal](docs/display-audio/) |
-| — | ✅ | v1 | **천장확인** | BT 86%EXACT + 물리한계10 + 산업6사81% + 실험93.9% + TP28 + CrossDSE 100% | [검증](docs/display-audio/full-verification-matrix.md) · [물리한계](docs/display-audio/physical-limit-proof.md) · [산업](docs/display-audio/industrial-validation.md) · [실험](docs/display-audio/experimental-verification.md) · [TP](docs/display-audio/testable-predictions.md) · [CrossDSE](docs/display-audio/cross-dse-analysis.md) |
+| 5 | | v1 | **궁극의 디스플레이 8단** | 소재→패널→드라이버→프로세서→시스템→몰입→홀로→Omega | [goal](docs/display/goal.md) |
+| — | ✅ | v1 | **천장확인** | BT 86%EXACT + 물리한계10 + 산업6사81% + 실험93.9% + TP14 | [검증](docs/display/full-verification-matrix.md) · [물리한계](docs/display/physical-limit-proof.md) · [산업](docs/display/industrial-validation.md) · [실험](docs/display/experimental-verification.md) · [TP](docs/display/testable-predictions.md) · [CrossDSE](docs/display/cross-dse-analysis.md) |
 
-> 도메인: [display-audio/](docs/display-audio/) · BT-48, 71, 72, 108, 76
+> 도메인: [display/](docs/display/) · BT-48 (J₂=24fps), BT-66 (ViT/CLIP), BT-71 (NeRF/3DGS)
+
+---
+
+# 🎵 오디오 (Audio)
+
+> **🛸5** | ✅ | BT 4개 (BT-48,72,108,76) | 산업4사92.6% | H-AUD 18개 | 물리한계8 | TP14 | 발견12 | Mk.V
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 5 | | v1 | **궁극의 오디오 7단** | 트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega | [goal](docs/audio/goal.md) |
+| — | ✅ | v1 | **천장확인** | 22/26 EXACT(84.6%) + 산업4사92.6% + 실험90.9% + TP14 | [검증](docs/audio/full-verification-matrix.md) · [물리한계](docs/audio/physical-limit-proof.md) · [산업](docs/audio/industrial-validation.md) · [실험](docs/audio/experimental-verification.md) · [TP](docs/audio/testable-predictions.md) · [CrossDSE](docs/audio/cross-dse-analysis.md) |
+
+> 도메인: [audio/](docs/audio/) · BT-48 (σ·τ=48kHz, σ=12 semitones), BT-72 (EnCodec), BT-108 (협화음), BT-76 (48 attractor)
 
 ---
 
@@ -265,7 +279,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 ---
 
-# 🗺️ 궁극의 아키텍처 로드맵 (29 Domains)
+# 🗺️ 궁극의 아키텍처 로드맵 (30 Domains)
 
 | 순위 | 실현 | 도메인 | 영향력 | Tier | DSE |
 |:---:|:---:|--------|:---:|:---:|:---:|
@@ -287,17 +301,18 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 10 | ✅ | **궁극의 로봇** | ★★★★☆ | ✅ | 🛸10 270,000 조합 → [🤖 로봇](#-로봇-robotics) |
 | 11 | ✅ | **궁극의 송전망** | ★★★★☆ | ✅ | [⚡ 에너지](#-에너지-energy) |
 | 12 | 2035 | **궁극의 생명공학** | ★★★★☆ | T3 | [biology/](docs/biology/) |
-| 13 | ✅ | **궁극의 디스플레이** | ★★★☆☆ | ✅ | 🛸10 달성 → [📺 디스플레이](#-디스플레이오디오-display--audio) |
-| 14 | ✅ | **궁극의 열관리** | ★★★☆☆ | T3 | — |
-| 15 | ✅ | **궁극의 암호** | ★★★☆☆ | T3 | — |
-| 16 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | — |
-| 17 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
-| 18 | ✅ | **궁극의 블록체인** | ★★☆☆☆ | T3 | — |
-| 19 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | — |
-| 20 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
-| 21 | ✅ | **궁극의 초전도자석** | ★★★☆☆ | ✅ | 🛸10 SC 내 통합 (hexa-magnet/coil/cool/fusion) → [🔬 물리·수학](#-물리수학-physics--math) |
-| 22 | ✅ | **궁극의 순수수학** | ★☆☆☆☆ | ✅ | 🛸10 11불가능성정리 → [🔬 물리·수학](#-물리수학-physics--math) |
-| 23 | ✅ | **궁극의 우주론/입자** | ★☆☆☆☆ | ✅ | 🛸9 53.3%EXACT+TP28 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 13 | ✅ | **궁극의 디스플레이** | ★★★☆☆ | ✅ | H-DISP 10개 → [📺 디스플레이](#-디스플레이-display) |
+| 14 | ✅ | **궁극의 오디오** | ★★★☆☆ | ✅ | H-AUD 18개 → [🎵 오디오](#-오디오-audio) |
+| 15 | ✅ | **궁극의 열관리** | ★★★☆☆ | T3 | — |
+| 16 | ✅ | **궁극의 암호** | ★★★☆☆ | T3 | — |
+| 17 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆ | T1 | — |
+| 18 | ✅ | **궁극의 초전도체** | ★★★☆☆ | ✅ | 🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 19 | ✅ | **궁극의 블록체인** | ★★☆☆☆ | T3 | — |
+| 20 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆ | T3 | — |
+| 21 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
+| 22 | ✅ | **궁극의 초전도자석** | ★★★☆☆ | ✅ | 🛸10 SC 내 통합 (hexa-magnet/coil/cool/fusion) → [🔬 물리·수학](#-물리수학-physics--math) |
+| 23 | ✅ | **궁극의 순수수학** | ★☆☆☆☆ | ✅ | 🛸10 11불가능성정리 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 24 | ✅ | **궁극의 우주론/입자** | ★☆☆☆☆ | ✅ | 🛸9 53.3%EXACT+TP28 → [🔬 물리·수학](#-물리수학-physics--math) |
 | — | ✅ | **궁극의 환경보호** | ★★★★☆ | ✅ | 1.68M 조합 → [🌍 환경보호](#-환경보호-environment) |
 | — | ✅ | **궁극의 탄소포집** | ★★★★☆ | ✅ | → [🌍 환경보호](#-환경보호-environment) |
 | — | 2030 | **궁극의 농업** | ★★★☆☆ | T3 | [goal](docs/agriculture/goal.md) |

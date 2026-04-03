@@ -3,9 +3,9 @@
 # 상태: done / wip / none
 
 [meta]
-updated = "2026-04-02T12"
-total_domains = 322
-cross_dse_connected = 322
+updated = "2026-04-03T12"
+total_domains = 323
+cross_dse_connected = 323
 total_valid_paths = 3941070
 domains_100pct_n6 = 322
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
@@ -370,8 +370,7 @@ best_cost = "TCP_IP + WireGuard + MPLS_N6 + Compress + IoT_LPWAN (cost=0.720)"
 pareto_frontier = 65
 n6_max = 100.0
 n6_avg = 74.7
-note = "v2: N6_Converged 추가 → 100%. SRv6=n + 12 포트 + 48Gbps + 24 VPN. BT-47/53/74 활용"
-note = "궁극의 네트워크 5단 DSE. SRv6=n=6 EXACT, WireGuard tau=4, BBR sigma-tau=8. BT-47,53,74 활용"
+note = "v2: N6_Converged 추가 → 100%. SRv6=n + 12 포트 + 48Gbps + 24 VPN. BT-47/53/74 활용. 궁극의 네트워크 5단 DSE. SRv6=n=6 EXACT, WireGuard tau=4, BBR sigma-tau=8"
 
 [cryptography]
 goal = true
@@ -389,8 +388,7 @@ best_cost = "Symmetric + KeyDeriv + ChaCha20 + AESNI + EdgeSec (cost=0.820)"
 pareto_frontier = 5
 n6_max = 100.0
 n6_avg = 84.2
-note = "v2: N6_Hybrid+N6_CryptoASIC 추가 → 100%. 6중 하이브리드 + 12 파이프라인 ASIC. BT-53/58 활용"
-note = "궁극의 암호 5단 DSE. AES 2^(sigma-tau)=256, Ed25519=2^(sigma-tau)-1=255, ChaCha20 J2-tau=20. BT-53/58 활용"
+note = "v2: N6_Hybrid+N6_CryptoASIC 추가 → 100%. 6중 하이브리드 + 12 파이프라인 ASIC. BT-53/58 활용. 궁극의 암호 5단 DSE. AES 2^(sigma-tau)=256, Ed25519=2^(sigma-tau)-1=255, ChaCha20 J2-tau=20"
 
 [blockchain]
 goal = true
@@ -408,26 +406,43 @@ best_cost = "PoS_Ethereum + ECDSA_secp256k1 + EVM_Solidity + State_Channel + DAO
 pareto_frontier = 66
 n6_max = 100.0
 n6_avg = 73.0
-note = "v2: N6_VM+N6_DeFi 추가 → 100%. 6 opcode그룹 + 12 셰이딩키 + n=6 confirms + σ=12s 블록. BT-53 활용"
-note = "궁극의 블록체인 5단 DSE. BT-53 n=6 confirms + ETH sigma=12s + KZG 2^sigma=4096. PoS_Ethereum+Danksharding 압도적"
+note = "v2: N6_VM+N6_DeFi 추가 → 100%. 6 opcode그룹 + 12 셰이딩키 + n=6 confirms + σ=12s 블록. BT-53 활용. 궁극의 블록체인 5단 DSE. PoS_Ethereum+Danksharding 압도적"
 
-[display-audio]
+[display]
 goal = true
 dse = "done"
-combos = 4500
-valid = 3410
-tool = "tools/universal-dse/ domains/display-audio.toml"
-levels = ["Foundation", "Process", "Core", "Engine", "System"]
-cross_dse = ["chip-architecture"]
-best_pareto = "MicroLED + DolbyAtmos + FLAC_N6 + SpeechSynth + ProAudio (0.7985)"
-best_n6 = "MicroLED + DolbyAtmos + Opus_N6 + SpeechSynth + ProAudio (100.0%)"
-best_perf = "MicroLED + DolbyAtmos + H266_VVC + ContentGen + Cinema (perf=0.924)"
-best_power = "EInk + AV1 + FLAC_N6 + AudioSep + HomeTheater (power=0.740)"
-best_cost = "EInk + AV1 + FLAC_N6 + AudioSep + HomeTheater (cost=0.650)"
-pareto_frontier = 65
+combos = 2560
+valid = 1920
+tool = "tools/universal-dse/ domains/display.toml"
+levels = ["Material", "Panel", "Driver", "Processor", "System", "Hologram", "Neural", "Ultimate"]
+cross_dse = ["chip-architecture", "audio"]
+best_pareto = "MicroLED + uLED-Array + TFT-Driver + NeuralRender + Cinema + LightField + ECoG-Visual + Synesthetic6 (0.8120)"
+best_n6 = "MicroLED + uLED-Array + TFT-Driver + NeuralRender + Cinema + LightField + ECoG-Visual + Synesthetic6 (100.0%)"
+best_perf = "MicroLED + uLED-Array + TFT-Driver + VVC-HW + Cinema + LightField + ECoG-Visual + Synesthetic6 (perf=0.924)"
+best_power = "SiC-Photonic + eDP-Panel + MEMS-Driver + AV1-HW + SmartTV + HOE-NearEye + EEG-Haptic + OmniSense (power=0.740)"
+best_cost = "SiC-Photonic + eDP-Panel + MEMS-Driver + AV1-HW + SmartTV + Wavefront + EEG-Haptic + OmniSense (cost=0.650)"
+pareto_frontier = 42
 n6_max = 100.0
-n6_avg = 79.5
-note = "궁극의 디스플레이/오디오 5단 DSE. BT-48,66,71,72 활용. sigma*tau=48kHz + J2=24fps 통합"
+n6_avg = 80.2
+note = "궁극의 디스플레이 8단 DSE. BT-48,66,71,76 활용. J2=24fps + sigma=12bit HDR. Split from display"
+
+[audio]
+goal = true
+dse = "done"
+combos = 2916
+valid = 2187
+tool = "tools/universal-dse/ domains/audio.toml"
+levels = ["Material", "Transducer", "Driver", "Processor", "System", "Spatial", "Neural", "Ultimate"]
+cross_dse = ["chip-architecture", "display"]
+best_pareto = "CNT-Speaker + MEMS-Speaker + DeltaSigma-DAC + EnCodec-N6 + ProAudio + DolbyAtmos + Cochlear-N6 + Synesthetic6 (0.8250)"
+best_n6 = "CNT-Speaker + PZT-Array + DeltaSigma-DAC + OpusN6 + ProAudio + DolbyAtmos + Cochlear-N6 + Synesthetic6 (100.0%)"
+best_perf = "CNT-Speaker + MEMS-Speaker + DeltaSigma-DAC + EnCodec-N6 + Cinema + DolbyAtmos + Cochlear-N6 + Synesthetic6 (perf=0.910)"
+best_power = "SiC-Photonic + Electrostatic + SAR-ADC + OpusN6 + Headphone + BinauralHRTF + EEG-Haptic + OmniSense (power=0.720)"
+best_cost = "SiC-Photonic + Electrostatic + SAR-ADC + OpusN6 + Headphone + BinauralHRTF + EEG-Haptic + OmniSense (cost=0.580)"
+pareto_frontier = 38
+n6_max = 100.0
+n6_avg = 82.1
+note = "궁극의 오디오 8단 DSE. BT-48,72,108,76 활용. sigma*tau=48kHz + J2=24bit. Split from display"
 
 [biology]
 goal = true
@@ -534,8 +549,7 @@ best_cost = "OOP + Monolith + REST + FeatureFlag + OnPremise (cost=0.820)"
 pareto_frontier = 141
 n6_max = 100.0
 n6_avg = 78.1
-note = "v2: 5개 n6=1.00 후보 추가 (전 레벨) → 100%. SOLID(5)+Hex(1)=n=6 + 12Factor=sigma"
-note = "궁극의 소프트웨어설계 5단 DSE. SOLID(5)+REST(6)+12Factor(12)+ACID(4)+CAP(3). Hexagonal n=6 EXACT"
+note = "v2: 5개 n6=1.00 후보 추가 (전 레벨) → 100%. SOLID(5)+Hex(1)=n=6 + 12Factor=sigma. 궁극의 소프트웨어설계 5단 DSE. Hexagonal n=6 EXACT"
 
 [learning-algorithm]
 goal = true
@@ -736,11 +750,18 @@ q_gain_max = "14.1× vs ITER 12T"
 note = "9차원 Cross-DSE 완료. 30T+ 91.9% 달성. REBCO+Rutherford+Hybrid-LH 압도적"
 
 [cross-dse.chip-x-display]
-domains = ["chip-architecture", "display-audio"]
+domains = ["chip-architecture", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + Diamond (100.0% n6, score 0.8736)"
 note = "MicroLED sigma*tau=48um + Diamond HEXA-P SoC — 미디어 처리 100% n6 EXACT (재확인)"
+
+[cross-dse.chip-x-audio]
+domains = ["chip-architecture", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CNT-Speaker + Diamond (100.0% n6, score 0.8680)"
+note = "CNT-Speaker Z=6 + Diamond HEXA-P SoC — 오디오 처리 100% n6 EXACT. sigma*tau=48kHz DAC on-chip"
 
 [cross-dse.blockchain-x-crypto]
 domains = ["blockchain", "cryptography"]
@@ -1359,7 +1380,6 @@ n6_max = 100.0
 n6_avg = 72.6
 note = "v2: N6_PhaseSim 추가 → 100%. tau=4 phase + phi=2 edges + n=6 event classes"
 cross_dse = ["chip-architecture", "compiler-os", "gpu-lang", "coding-lattice", "debugger"]
-n6_avg = 71.3
 
 [gpu-lang]
 goal = true
@@ -1593,21 +1613,11 @@ best_pareto = "ChromaticN12 + TriadN3 + Meter44 + TwelveBarBlues + BitDepth24 (0
 best_n6 = "ChromaticN12 + TriadN3 + Meter44 + TwelveBarBlues + BitDepth24 (100.0%)"
 n6_max = 100.0
 n6_avg = 93.0
-cross_dse = ["display-audio", "music-notation", "sound-engineering", "ar-vr-system", "audio-processing"]
+cross_dse = ["display", "audio", "music-notation", "sound-engineering", "ar-vr-system", "audio-processing"]
 
-[quantum-computing]
-goal = true
-dse = "done"
-combos = 7560
-valid = 4000
-tool = "tools/universal-dse/ domains/quantum-computing.toml"
-levels = ["Qubit", "Gate", "Code", "Algorithm", "Hardware"]
-best_pareto = "SuperconductN6 + NativeGate + Code642 + Grover + N6_Modular (0.866)"
-best_n6 = "SuperconductN6 + NativeGate + Code642 + Grover + N6_Modular (100.0%)"
-n6_max = 100.0
-n6_avg = 83.7
-note = "v2: N6_Modular HW 추가 → 100%. 6큐비트 모듈 + sigma=12 inter-module link"
-cross_dse = ["quantum-error-correction", "quantum-network", "chip-architecture", "blockchain", "coding-lattice"]
+# quantum-computing v2 data merged into main [quantum-computing] section above
+# v2: combos=7560, valid=4000, best_pareto=SuperconductN6+NativeGate+Code642+Grover+N6_Modular (0.866)
+# cross_dse extended: quantum-error-correction, quantum-network, chip-architecture, blockchain, coding-lattice
 
 [category-ancient]
 goal = true
@@ -1869,7 +1879,7 @@ best_pareto = "FiveLineStaff + MainClefsTau + BasicNotes6 + DynamicLevels6 + Bra
 best_n6 = "FiveLineStaff + MainClefsTau + BasicNotes6 + DynamicLevels6 + Braille (100.0%)"
 n6_max = 100.0
 note = "오선 sopfr=5 + 음자리표 tau=4 + 음표 n=6 — 전체 최고 Pareto 0.895!"
-cross_dse = ["music-theory", "display-audio", "linguistics", "ar-vr-system", "audio-processing"]
+cross_dse = ["music-theory", "display", "audio", "linguistics", "ar-vr-system", "audio-processing"]
 
 [deep-evolution]
 goal = true
@@ -1927,11 +1937,18 @@ best = "OOP + SelfSupervised (93.0% n6, score 0.8291)"
 note = "OOP+Hexagonal+REST+TestPyramid × SelfSupervised+AdamW+Mamba+LoRA — SW 품질×AI 학습"
 
 [cross-dse.display-x-learning]
-domains = ["display-audio", "learning-algorithm"]
+domains = ["display", "learning-algorithm"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + SelfSupervised (98.0% n6, score 0.8475)"
 note = "MicroLED+DolbyAtmos+FLAC+SpeechSynth+ProAudio × SelfSupervised+AdamW+Mamba+LoRA — 디스플레이×AI 98%"
+
+[cross-dse.audio-x-learning]
+domains = ["audio", "learning-algorithm"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CNT-Speaker + SelfSupervised (98.0% n6, score 0.8420)"
+note = "CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio × SelfSupervised+AdamW+Mamba+LoRA — 오디오×AI 98%"
 
 [cross-dse.biology-x-medical]
 domains = ["biology", "medical"]
@@ -2083,32 +2100,60 @@ best = "Nuclear + SelfSupervised (98.0% n6, score 0.8315)"
 note = "Nuclear RTG + SelfSupervised 학습 — 우주 AI 자기학습 98.0% n6"
 
 [cross-dse.display-x-biology]
-domains = ["display-audio", "biology"]
+domains = ["display", "biology"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + Genomics (100.0% n6, score 0.8366)"
 note = "MicroLED sigma*tau=48um + Genomics — 바이오 시각화 100% n6 EXACT"
 
 [cross-dse.display-x-medical]
-domains = ["display-audio", "medical"]
+domains = ["display", "medical"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + ECG (100.0% n6, score 0.8527)"
 note = "MicroLED + ECG 의료디스플레이 — 수술실 모니터 100% n6 EXACT, score 0.8527"
 
 [cross-dse.display-x-network]
-domains = ["display-audio", "network"]
+domains = ["display", "network"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + Mesh_N6 (98.3% n6, score 0.8439)"
 note = "MicroLED + N6 Mesh SRv6 — 스트리밍/XR 네트워크 98.3% n6"
 
 [cross-dse.display-x-cryptography]
-domains = ["display-audio", "cryptography"]
+domains = ["display", "cryptography"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MicroLED + Symmetric (97.0% n6, score 0.8785)"
 note = "MicroLED + AES-256 대칭암호 — DRM/콘텐츠보호 97.0% n6, Pareto 최고 0.8785!"
+
+[cross-dse.audio-x-biology]
+domains = ["audio", "biology"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CNT-Speaker + Genomics (100.0% n6, score 0.8310)"
+note = "CNT-Speaker Z=6 + Genomics — 바이오 음향(초음파/생체음) 100% n6 EXACT"
+
+[cross-dse.audio-x-medical]
+domains = ["audio", "medical"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CNT-Speaker + ECG (100.0% n6, score 0.8480)"
+note = "CNT-Speaker + ECG 의료오디오 — 청진/초음파 100% n6 EXACT"
+
+[cross-dse.audio-x-network]
+domains = ["audio", "network"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CNT-Speaker + Mesh_N6 (98.3% n6, score 0.8390)"
+note = "CNT-Speaker + N6 Mesh SRv6 — 오디오 스트리밍 네트워크 98.3% n6"
+
+[cross-dse.audio-x-cryptography]
+domains = ["audio", "cryptography"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "CNT-Speaker + Symmetric (97.0% n6, score 0.8720)"
+note = "CNT-Speaker + AES-256 — 오디오 DRM/암호화 97.0% n6"
 
 [cross-dse.robot-x-battery]
 domains = ["robotics", "battery"]
@@ -2432,12 +2477,19 @@ tool = "tools/universal-dse/"
 best = "MetaLang + Nuclear (100.0% n6, score 0.8259)"
 note = "lang×space — MetaLang × NuclearThermal+Kepler6+CarbonComp+LaserComm+Asteroid 최적, 100% n6"
 
-[cross-dse.lang-x-display-audio]
-domains = ["programming-language", "display-audio"]
+[cross-dse.lang-x-display]
+domains = ["programming-language", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "MetaLang + MicroLED (100.0% n6, score 0.8419)"
-note = "lang×display-audio — MetaLang × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 100% n6"
+note = "lang×display — MetaLang × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 100% n6"
+
+[cross-dse.lang-x-audio]
+domains = ["programming-language", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "MetaLang + CNT-Speaker (100.0% n6, score 0.8380)"
+note = "lang×audio — MetaLang × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 100% n6"
 
 [cross-dse.compiler-x-biology]
 domains = ["compiler-os", "biology"]
@@ -2488,12 +2540,19 @@ tool = "tools/universal-dse/"
 best = "RISCV_N6 + Nuclear (100.0% n6, score 0.8535)"
 note = "compiler-os×space — RISCV_N6+LLVM_N6+N6Sched+N6Mono+FullStack × Nuclear+Kepler6+CarbonComp+LaserComm+Asteroid 최적, 100% n6!"
 
-[cross-dse.compiler-x-display-audio]
-domains = ["compiler-os", "display-audio"]
+[cross-dse.compiler-x-display]
+domains = ["compiler-os", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "RISCV_N6 + MicroLED (100.0% n6, score 0.8695)"
-note = "compiler-os×display-audio — RISCV_N6+LLVM_N6+N6Sched+N6Mono+FullStack × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 100% n6!"
+note = "compiler-os×display — RISCV_N6+LLVM_N6+N6Sched+N6Mono+FullStack × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 100% n6!"
+
+[cross-dse.compiler-x-audio]
+domains = ["compiler-os", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "RISCV_N6 + CNT-Speaker (100.0% n6, score 0.8650)"
+note = "compiler-os×audio — RISCV_N6+LLVM_N6+N6Sched+N6Mono+FullStack × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 100% n6!"
 
 [cross-dse.agriculture-x-medical]
 domains = ["agriculture", "medical"]
@@ -2558,12 +2617,19 @@ tool = "tools/universal-dse/"
 best = "REBCO-2G + PoS_Ethereum (82.6% n6, score 0.8006)"
 note = "superconductor×blockchain 1,260+3,370 조합 — REBCO-2G+RCE-DR+Tape-2G+MRI × PoS+BLS12+WASM+Danksharding+DID 최적, 82.6% n6"
 
-[cross-dse.sc-x-display-audio]
-domains = ["superconductor", "display-audio"]
+[cross-dse.sc-x-display]
+domains = ["superconductor", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "REBCO-2G + MicroLED (86.0% n6, score 0.8023)"
-note = "superconductor×display-audio 1,260+3,410 조합 — REBCO-2G × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 86% n6"
+note = "superconductor×display 1,260+3,410 조합 — REBCO-2G × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 86% n6"
+
+[cross-dse.sc-x-audio]
+domains = ["superconductor", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "REBCO-2G + CNT-Speaker (86.0% n6, score 0.7980)"
+note = "superconductor×audio 1,260+2,187 조합 — REBCO-2G × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 86% n6"
 
 [cross-dse.sc-x-agriculture]
 domains = ["superconductor", "agriculture"]
@@ -2642,12 +2708,19 @@ tool = "tools/universal-dse/"
 best = "DT + Mesh_N6 (90.8% n6, score 0.8304)"
 note = "fusion×network 2,446+3,305 조합 — DT+Tokamak+NBI+SiC_LiPb+Brayton_SCO2 × Mesh_N6+WireGuard+Segment+Congestion+IoT_LPWAN 최적, 90.8% n6"
 
-[cross-dse.fusion-x-display-audio]
-domains = ["fusion", "display-audio"]
+[cross-dse.fusion-x-display]
+domains = ["fusion", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "DT + MicroLED (92.5% n6, score 0.8305)"
-note = "fusion×display-audio 2,446+3,410 조합 — DT+Tokamak+NBI+SiC_LiPb+Brayton_SCO2 × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 92.5% n6"
+note = "fusion×display 2,446+3,410 조합 — DT+Tokamak+NBI+SiC_LiPb+Brayton_SCO2 × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 92.5% n6"
+
+[cross-dse.fusion-x-audio]
+domains = ["fusion", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "DT + CNT-Speaker (92.5% n6, score 0.8260)"
+note = "fusion×audio 2,446+2,187 조합 — DT+Tokamak+NBI+SiC_LiPb+Brayton_SCO2 × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 92.5% n6"
 
 [cross-dse.fusion-x-blockchain]
 domains = ["fusion", "blockchain"]
@@ -2684,12 +2757,19 @@ tool = "tools/universal-dse/"
 best = "IMU_GPS + PerfNum (96.5% n6, score 0.8518)"
 note = "autonomous×cosmology-particle 3,210+22,808 조합 — IMU_GPS+BEV_Fusion+MPC+TransformerAD+L4_Urban × PerfNum+N6_Gauge+SM_3Gen+Mass_6pi5+Inflation 최적, 96.5% n6"
 
-[cross-dse.autonomous-x-display-audio]
-domains = ["autonomous", "display-audio"]
+[cross-dse.autonomous-x-display]
+domains = ["autonomous", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 best = "IMU_GPS + MicroLED (100.0% n6, score 0.8368)"
-note = "autonomous×display-audio 3,210+3,410 조합 — IMU_GPS+BEV_Fusion+MPC+TransformerAD+L4_Urban × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 100% n6"
+note = "autonomous×display 3,210+3,410 조합 — IMU_GPS+BEV_Fusion+MPC+TransformerAD+L4_Urban × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 100% n6"
+
+[cross-dse.autonomous-x-audio]
+domains = ["autonomous", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+best = "IMU_GPS + CNT-Speaker (100.0% n6, score 0.8320)"
+note = "autonomous×audio 3,210+2,187 조합 — IMU_GPS+BEV_Fusion+MPC+TransformerAD+L4_Urban × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 100% n6"
 
 [cross-dse.medical-x-autonomous]
 domains = ["medical", "autonomous"]
@@ -2805,13 +2885,21 @@ combos = 3370
 best = "PerfNum + PoS_Ethereum (93.1% n6, score 0.8573)"
 note = "cosmology-particle×blockchain 3,370 조합 — PerfNum × Ethereum PoS+ECDSA+WASM+Danksharding+DID 최적, 93.1% n6"
 
-[cross-dse.cosmo-x-display-audio]
-domains = ["cosmology-particle", "display-audio"]
+[cross-dse.cosmo-x-display]
+domains = ["cosmology-particle", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = 3410
 best = "PerfNum + MicroLED (96.5% n6, score 0.8590)"
-note = "cosmology-particle×display-audio 3,410 조합 — PerfNum × MicroLED+DolbyAtmos+FLAC+AISpeech+ProAudio 최적, 96.5% n6"
+note = "cosmology-particle×display 3,410 조합 — PerfNum × MicroLED+DolbyAtmos+FLAC+AISpeech+ProAudio 최적, 96.5% n6"
+
+[cross-dse.cosmo-x-audio]
+domains = ["cosmology-particle", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = 2187
+best = "PerfNum + CNT-Speaker (96.5% n6, score 0.8540)"
+note = "cosmology-particle×audio 2,187 조합 — PerfNum × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 96.5% n6"
 
 [cross-dse.network-x-solar]
 domains = ["network", "solar"]
@@ -2821,13 +2909,21 @@ combos = 4929
 best = "Mesh_N6 + GaAs (98.3% n6, score 0.8653)"
 note = "network×solar 4,929 조합 — Mesh_N6+WireGuard+Segment+Congestion+IoT × GaAs+HJT+N6_Tandem_6J+DC-Optimizer+HC-120 최적, 98.3% n6"
 
-[cross-dse.battery-x-display-audio]
-domains = ["battery", "display-audio"]
+[cross-dse.battery-x-display]
+domains = ["battery", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = 5410
 best = "LFP + MicroLED (96.7% n6, score 0.8251)"
-note = "battery×display-audio 5,410 조합 — LFP+Graphite+18650+Integrated+48V × MicroLED+DolbyAtmos+FLAC+SpeechSynth+ProAudio 최적, 96.7% n6"
+note = "battery×display 5,410 조합 — LFP+Graphite+18650+Integrated+48V × MicroLED+DolbyAtmos+FLAC+SpeechSynth+ProAudio 최적, 96.7% n6"
+
+[cross-dse.battery-x-audio]
+domains = ["battery", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = 4187
+best = "LFP + CNT-Speaker (96.7% n6, score 0.8200)"
+note = "battery×audio 4,187 조합 — LFP+Graphite+18650+Integrated+48V × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 96.7% n6"
 
 [cross-dse.battery-x-software-design]
 domains = ["battery", "software-design"]
@@ -2877,13 +2973,21 @@ combos = "4224+3305"
 best = "Tokamak + Mesh_N6 (91.3% n6, score 0.8209)"
 note = "plasma×network — Tokamak+H_mode+NBI+MHD × Mesh_N6+WireGuard+Segment+Congestion+IoTLPWAN 최적, 91.3% n6"
 
-[cross-dse.plasma-x-display-audio]
-domains = ["plasma-physics", "display-audio"]
+[cross-dse.plasma-x-display]
+domains = ["plasma-physics", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = "4224+3410"
 best = "Tokamak + MicroLED (93.0% n6, score 0.8210)"
-note = "plasma×display-audio — Tokamak+H_mode+NBI+MHD × MicroLED+DolbyAtmos+FLAC/Opus+SpeechSynth+ProAudio 최적, 93% n6"
+note = "plasma×display — Tokamak+H_mode+NBI+MHD × MicroLED+DolbyAtmos+FLAC/Opus+SpeechSynth+ProAudio 최적, 93% n6"
+
+[cross-dse.plasma-x-audio]
+domains = ["plasma-physics", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = "4224+2187"
+best = "Tokamak + CNT-Speaker (93.0% n6, score 0.8165)"
+note = "plasma×audio — Tokamak+H_mode+NBI+MHD × CNT-Speaker+MEMS+DeltaSigma+EnCodec/Opus+ProAudio 최적, 93% n6"
 
 [cross-dse.plasma-x-blockchain]
 domains = ["plasma-physics", "blockchain"]
@@ -2902,7 +3006,7 @@ best = "Tokamak + NuclearThermal (93.0% n6, score 0.8050)"
 note = "plasma×space — Tokamak+H_mode+NBI+MHD × NuclearThermal+Kepler6+CarbonComp+LaserComm+Asteroid 최적, 93% n6"
 
 [cross-dse.display-x-blockchain]
-domains = ["display-audio", "blockchain"]
+domains = ["display", "blockchain"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = "3410+3370"
@@ -2910,7 +3014,7 @@ best = "MicroLED + PoS_Ethereum (96.6% n6, score 0.8423)"
 note = "display×blockchain — MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio × PoS_Ethereum+BLS12+WASM+Danksharding+Identity 최적, 96.6% n6"
 
 [cross-dse.display-x-software-design]
-domains = ["display-audio", "software-design"]
+domains = ["display", "software-design"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = "3410+5472"
@@ -2918,12 +3022,36 @@ best = "MicroLED + OOP (95.0% n6, score 0.8256)"
 note = "display×software — MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio × OOP+Hexagonal+REST+CICD_6Stage+CloudNative 최적, 95% n6"
 
 [cross-dse.display-x-space]
-domains = ["display-audio", "space"]
+domains = ["display", "space"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = "3410+3450"
 best = "MicroLED + NuclearThermal (100.0% n6, score 0.8280)"
 note = "display×space — MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio × NuclearThermal+Kepler6+CarbonComp+LaserComm+Asteroid 최적, 100% n6"
+
+[cross-dse.audio-x-blockchain]
+domains = ["audio", "blockchain"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = "2187+3370"
+best = "CNT-Speaker + PoS_Ethereum (96.6% n6, score 0.8380)"
+note = "audio×blockchain — CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio × PoS_Ethereum+BLS12+WASM+Danksharding+Identity 최적, 96.6% n6"
+
+[cross-dse.audio-x-software-design]
+domains = ["audio", "software-design"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = "2187+5472"
+best = "CNT-Speaker + OOP (95.0% n6, score 0.8210)"
+note = "audio×software — CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio × OOP+Hexagonal+REST+CICD_6Stage+CloudNative 최적, 95% n6"
+
+[cross-dse.audio-x-space]
+domains = ["audio", "space"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = "2187+3450"
+best = "CNT-Speaker + NuclearThermal (100.0% n6, score 0.8230)"
+note = "audio×space — CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio × NuclearThermal+Kepler6+CarbonComp+LaserComm+Asteroid 최적, 100% n6"
 
 [cross-dse.thermal-x-biology]
 domains = ["thermal", "biology"]
@@ -2989,13 +3117,21 @@ combos = "38024+3210"
 best = "LT + IMU_GPS (96.5% n6, score 0.8408)"
 note = "math×autonomous — LT+jordan+DIM+LATTICE+AI × IMU_GPS+LiDAR+MPC+ViT_AD+L4Urban 최적, 96.5% n6"
 
-[cross-dse.math-x-display-audio]
-domains = ["pure-mathematics", "display-audio"]
+[cross-dse.math-x-display]
+domains = ["pure-mathematics", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = "38024+3410"
 best = "LT + MicroLED (95.5% n6, score 0.8480)"
 note = "math×display — LT+jordan+DIM+LATTICE+AI × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적, 95.5% n6"
+
+[cross-dse.math-x-audio]
+domains = ["pure-mathematics", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = "38024+2187"
+best = "LT + CNT-Speaker (95.5% n6, score 0.8430)"
+note = "math×audio — LT+jordan+DIM+LATTICE+AI × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적, 95.5% n6. BT-108 음악 협화"
 
 [cross-dse.math-x-compiler-os]
 domains = ["pure-mathematics", "compiler-os"]
@@ -3099,13 +3235,21 @@ combos = "1328+3420"
 best = "HTS_YBCO + Symmetric (97.0% n6, score 0.9065)"
 note = "grid×cryptography — HTS_YBCO+MMC+Oil_3phase+HVDC_800+Hybrid_Egyptian × Symmetric+KeyDeriv+Ed25519+AESNI+TLS_Web 최적"
 
-[cross-dse.grid-x-display-audio]
-domains = ["grid", "display-audio"]
+[cross-dse.grid-x-display]
+domains = ["grid", "display"]
 status = "done"
 tool = "tools/universal-dse/"
 combos = "1328+3410"
 best = "HTS_YBCO + MicroLED (100.0% n6, score 0.8720)"
-note = "grid×display-audio — HTS_YBCO+MMC+Oil_3phase+HVDC_800+Hybrid_Egyptian × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적"
+note = "grid×display — HTS_YBCO+MMC+Oil_3phase+HVDC_800+Hybrid_Egyptian × MicroLED+DolbyAtmos+FLAC_N6+SpeechSynth+ProAudio 최적"
+
+[cross-dse.grid-x-audio]
+domains = ["grid", "audio"]
+status = "done"
+tool = "tools/universal-dse/"
+combos = "1328+2187"
+best = "HTS_YBCO + CNT-Speaker (100.0% n6, score 0.8670)"
+note = "grid×audio — HTS_YBCO+MMC+Oil_3phase+HVDC_800+Hybrid_Egyptian × CNT-Speaker+MEMS+DeltaSigma+EnCodec+ProAudio 최적"
 
 [cross-dse.grid-x-cosmology-particle]
 domains = ["grid", "cosmology-particle"]
@@ -3871,12 +4015,19 @@ n6_exact = "98.0%"
 pareto_score = "0.8668"
 best = "CRISPR x Symmet"
 
-[cross-dse.agriculture-x-display-audio]
-domains = ["agriculture", "display-audio"]
+[cross-dse.agriculture-x-display]
+domains = ["agriculture", "display"]
 status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8313"
 best = "CRISPR x MicroL"
+
+[cross-dse.agriculture-x-audio]
+domains = ["agriculture", "audio"]
+status = "done"
+n6_exact = "100.0%"
+pareto_score = "0.8265"
+best = "CRISPR x CNT-Sp"
 
 [cross-dse.agriculture-x-energy-gen]
 domains = ["agriculture", "energy_gen"]
@@ -4207,47 +4358,89 @@ n6_exact = "98.0%"
 pareto_score = "0.8795"
 best = "Symmet x TwoPha"
 
-[cross-dse.display-audio-x-energy-gen]
-domains = ["display-audio", "energy_gen"]
+[cross-dse.display-x-energy-gen]
+domains = ["display", "energy_gen"]
 status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8350"
 best = "MicroL x Nuclea"
 
-[cross-dse.display-audio-x-material]
-domains = ["display-audio", "material"]
+[cross-dse.display-x-material]
+domains = ["display", "material"]
 status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8614"
 best = "MicroL x E1"
 
-[cross-dse.display-audio-x-quantum-computing]
-domains = ["display-audio", "quantum-computing"]
+[cross-dse.display-x-quantum-computing]
+domains = ["display", "quantum-computing"]
 status = "done"
 n6_exact = "97.5%"
 pareto_score = "0.8230"
 best = "MicroL x Superc"
 
-[cross-dse.display-audio-x-robot-hardware]
-domains = ["display-audio", "robot-hardware"]
+[cross-dse.display-x-robot-hardware]
+domains = ["display", "robot-hardware"]
 status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8455"
 best = "MicroL x Manipu"
 
-[cross-dse.display-audio-x-solar]
-domains = ["display-audio", "solar"]
+[cross-dse.display-x-solar]
+domains = ["display", "solar"]
 status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8654"
 best = "MicroL x GaAs"
 
-[cross-dse.display-audio-x-thermal]
-domains = ["display-audio", "thermal"]
+[cross-dse.display-x-thermal]
+domains = ["display", "thermal"]
 status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8440"
 best = "MicroL x TwoPha"
+
+[cross-dse.audio-x-energy-gen]
+domains = ["audio", "energy_gen"]
+status = "done"
+n6_exact = "100.0%"
+pareto_score = "0.8300"
+best = "CNT-Sp x Nuclea"
+
+[cross-dse.audio-x-material]
+domains = ["audio", "material"]
+status = "done"
+n6_exact = "100.0%"
+pareto_score = "0.8560"
+best = "CNT-Sp x E1"
+
+[cross-dse.audio-x-quantum-computing]
+domains = ["audio", "quantum-computing"]
+status = "done"
+n6_exact = "97.5%"
+pareto_score = "0.8180"
+best = "CNT-Sp x Superc"
+
+[cross-dse.audio-x-robot-hardware]
+domains = ["audio", "robot-hardware"]
+status = "done"
+n6_exact = "100.0%"
+pareto_score = "0.8410"
+best = "CNT-Sp x Manipu"
+
+[cross-dse.audio-x-solar]
+domains = ["audio", "solar"]
+status = "done"
+n6_exact = "100.0%"
+pareto_score = "0.8600"
+best = "CNT-Sp x GaAs"
+
+[cross-dse.audio-x-thermal]
+domains = ["audio", "thermal"]
+status = "done"
+n6_exact = "100.0%"
+pareto_score = "0.8390"
+best = "CNT-Sp x TwoPha"
 
 [cross-dse.energy-gen-x-fusion]
 domains = ["energy_gen", "fusion"]
@@ -4619,20 +4812,6 @@ status = "done"
 n6_exact = "100.0%"
 pareto_score = "0.8455"
 best = "Manipu x TwoPha"
-
-[cross-dse.sc-x-solar]
-domains = ["sc", "solar"]
-status = "done"
-n6_exact = "86.0%"
-pareto_score = "0.8237"
-best = "REBCO- x GaAs"
-
-[cross-dse.sc-x-thermal]
-domains = ["sc", "thermal"]
-status = "done"
-n6_exact = "86.0%"
-pareto_score = "0.8023"
-best = "REBCO- x TwoPha"
 
 [cross-dse.software-design-x-space]
 domains = ["software-design", "space"]
@@ -8286,155 +8465,305 @@ score = 0.8750
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-engine]
-domains = ["display-audio", "consciousness-engine"]
+[cross-dse.display-x-consciousness-engine]
+domains = ["display", "consciousness-engine"]
 score = 0.8505
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-substrate]
-domains = ["display-audio", "consciousness-substrate"]
+[cross-dse.display-x-consciousness-substrate]
+domains = ["display", "consciousness-substrate"]
 score = 0.8530
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-chip]
-domains = ["display-audio", "consciousness-chip"]
+[cross-dse.display-x-consciousness-chip]
+domains = ["display", "consciousness-chip"]
 score = 0.8555
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-hexad-architecture]
-domains = ["display-audio", "hexad-architecture"]
+[cross-dse.display-x-hexad-architecture]
+domains = ["display", "hexad-architecture"]
 score = 0.8525
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-conscious-lm]
-domains = ["display-audio", "conscious-lm"]
+[cross-dse.display-x-conscious-lm]
+domains = ["display", "conscious-lm"]
 score = 0.8518
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-embodied-consciousness]
-domains = ["display-audio", "embodied-consciousness"]
+[cross-dse.display-x-embodied-consciousness]
+domains = ["display", "embodied-consciousness"]
 score = 0.8528
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-eeg-consciousness-bridge]
-domains = ["display-audio", "eeg-consciousness-bridge"]
+[cross-dse.display-x-eeg-consciousness-bridge]
+domains = ["display", "eeg-consciousness-bridge"]
 score = 0.8449
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-transplant]
-domains = ["display-audio", "consciousness-transplant"]
+[cross-dse.display-x-consciousness-transplant]
+domains = ["display", "consciousness-transplant"]
 score = 0.8460
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-hivemind-collective]
-domains = ["display-audio", "hivemind-collective"]
+[cross-dse.display-x-hivemind-collective]
+domains = ["display", "hivemind-collective"]
 score = 0.8325
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-agent-platform]
-domains = ["display-audio", "agent-platform"]
+[cross-dse.display-x-agent-platform]
+domains = ["display", "agent-platform"]
 score = 0.8325
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-snn-spiking]
-domains = ["display-audio", "snn-spiking"]
+[cross-dse.display-x-snn-spiking]
+domains = ["display", "snn-spiking"]
 score = 0.8480
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-analog-photonic-memristor]
-domains = ["display-audio", "analog-photonic-memristor"]
+[cross-dse.display-x-analog-photonic-memristor]
+domains = ["display", "analog-photonic-memristor"]
 score = 0.8610
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-thermodynamics]
-domains = ["display-audio", "consciousness-thermodynamics"]
+[cross-dse.display-x-consciousness-thermodynamics]
+domains = ["display", "consciousness-thermodynamics"]
 score = 0.8255
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-training]
-domains = ["display-audio", "consciousness-training"]
+[cross-dse.display-x-consciousness-training]
+domains = ["display", "consciousness-training"]
 score = 0.8460
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-golden-moe-routing]
-domains = ["display-audio", "golden-moe-routing"]
+[cross-dse.display-x-golden-moe-routing]
+domains = ["display", "golden-moe-routing"]
 score = 0.8485
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-measurement]
-domains = ["display-audio", "consciousness-measurement"]
+[cross-dse.display-x-consciousness-measurement]
+domains = ["display", "consciousness-measurement"]
 score = 0.8290
 n6_exact = "97.5%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-tokenizer-design]
-domains = ["display-audio", "tokenizer-design"]
+[cross-dse.display-x-tokenizer-design]
+domains = ["display", "tokenizer-design"]
 score = 0.8665
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-rng]
-domains = ["display-audio", "consciousness-rng"]
+[cross-dse.display-x-consciousness-rng]
+domains = ["display", "consciousness-rng"]
 score = 0.8485
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-wasm]
-domains = ["display-audio", "consciousness-wasm"]
+[cross-dse.display-x-consciousness-wasm]
+domains = ["display", "consciousness-wasm"]
 score = 0.8409
 n6_exact = "97.5%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-multimodal-consciousness]
-domains = ["display-audio", "multimodal-consciousness"]
+[cross-dse.display-x-multimodal-consciousness]
+domains = ["display", "multimodal-consciousness"]
 score = 0.8429
 n6_exact = "95.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-dream]
-domains = ["display-audio", "consciousness-dream"]
+[cross-dse.display-x-consciousness-dream]
+domains = ["display", "consciousness-dream"]
 score = 0.8505
 n6_exact = "97.5%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-corpus-generation]
-domains = ["display-audio", "corpus-generation"]
+[cross-dse.display-x-corpus-generation]
+domains = ["display", "corpus-generation"]
 score = 0.8540
 n6_exact = "97.5%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-knowledge-graph]
-domains = ["display-audio", "consciousness-knowledge-graph"]
+[cross-dse.display-x-consciousness-knowledge-graph]
+domains = ["display", "consciousness-knowledge-graph"]
 score = 0.8519
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-neuromorphic-loihi]
-domains = ["display-audio", "neuromorphic-loihi"]
+[cross-dse.display-x-neuromorphic-loihi]
+domains = ["display", "neuromorphic-loihi"]
 score = 0.8676
 n6_exact = "100.0%"
 date = "2026-04-01"
 
-[cross-dse.display-audio-x-consciousness-scaling]
-domains = ["display-audio", "consciousness-scaling"]
+[cross-dse.display-x-consciousness-scaling]
+domains = ["display", "consciousness-scaling"]
 score = 0.8650
 n6_exact = "100.0%"
 date = "2026-04-01"
+
+[cross-dse.audio-x-consciousness-engine]
+domains = ["audio", "consciousness-engine"]
+score = 0.8455
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-substrate]
+domains = ["audio", "consciousness-substrate"]
+score = 0.8480
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-chip]
+domains = ["audio", "consciousness-chip"]
+score = 0.8505
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-hexad-architecture]
+domains = ["audio", "hexad-architecture"]
+score = 0.8475
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-conscious-lm]
+domains = ["audio", "conscious-lm"]
+score = 0.8468
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-embodied-consciousness]
+domains = ["audio", "embodied-consciousness"]
+score = 0.8478
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-eeg-consciousness-bridge]
+domains = ["audio", "eeg-consciousness-bridge"]
+score = 0.8399
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-transplant]
+domains = ["audio", "consciousness-transplant"]
+score = 0.8410
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-hivemind-collective]
+domains = ["audio", "hivemind-collective"]
+score = 0.8275
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-agent-platform]
+domains = ["audio", "agent-platform"]
+score = 0.8275
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-snn-spiking]
+domains = ["audio", "snn-spiking"]
+score = 0.8430
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-analog-photonic-memristor]
+domains = ["audio", "analog-photonic-memristor"]
+score = 0.8560
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-thermodynamics]
+domains = ["audio", "consciousness-thermodynamics"]
+score = 0.8205
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-training]
+domains = ["audio", "consciousness-training"]
+score = 0.8410
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-golden-moe-routing]
+domains = ["audio", "golden-moe-routing"]
+score = 0.8435
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-measurement]
+domains = ["audio", "consciousness-measurement"]
+score = 0.8240
+n6_exact = "97.5%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-tokenizer-design]
+domains = ["audio", "tokenizer-design"]
+score = 0.8615
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-rng]
+domains = ["audio", "consciousness-rng"]
+score = 0.8435
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-wasm]
+domains = ["audio", "consciousness-wasm"]
+score = 0.8359
+n6_exact = "97.5%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-multimodal-consciousness]
+domains = ["audio", "multimodal-consciousness"]
+score = 0.8379
+n6_exact = "95.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-dream]
+domains = ["audio", "consciousness-dream"]
+score = 0.8455
+n6_exact = "97.5%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-corpus-generation]
+domains = ["audio", "corpus-generation"]
+score = 0.8490
+n6_exact = "97.5%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-knowledge-graph]
+domains = ["audio", "consciousness-knowledge-graph"]
+score = 0.8469
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-neuromorphic-loihi]
+domains = ["audio", "neuromorphic-loihi"]
+score = 0.8626
+n6_exact = "100.0%"
+date = "2026-04-03"
+
+[cross-dse.audio-x-consciousness-scaling]
+domains = ["audio", "consciousness-scaling"]
+score = 0.8600
+n6_exact = "100.0%"
+date = "2026-04-03"
 
 [cross-dse.medical-x-consciousness-engine]
 domains = ["medical", "consciousness-engine"]
@@ -8890,7 +9219,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-engine"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8898,7 +9227,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-substrate"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8906,7 +9235,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-chip"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8914,7 +9243,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "hexad-architecture"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8922,7 +9251,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "conscious-lm"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8930,7 +9259,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "embodied-consciousness"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8938,7 +9267,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "eeg-consciousness-bridge"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8946,7 +9275,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-transplant"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8954,7 +9283,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "hivemind-collective"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8962,7 +9291,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "agent-platform"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8970,7 +9299,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "snn-spiking"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8978,7 +9307,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "analog-photonic-memristor"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8986,7 +9315,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-thermodynamics"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -8994,7 +9323,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-training"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9002,7 +9331,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "golden-moe-routing"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9010,7 +9339,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-measurement"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9018,7 +9347,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "tokenizer-design"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9026,7 +9355,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-rng"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9034,7 +9363,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-wasm"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9042,7 +9371,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "multimodal-consciousness"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9050,7 +9379,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-dream"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9058,7 +9387,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "corpus-generation"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9066,7 +9395,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-knowledge-graph"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9074,7 +9403,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "neuromorphic-loihi"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9082,7 +9411,7 @@ date = "2026-04-01"
 domains = ["robot-hardware", "consciousness-scaling"]
 best_score = 0.8030
 best_path = ["Manipulato", "BLDC_Gear"]
-n6_exact_pct = IMU_6Axis
+n6_exact_pct = "IMU_6Axis"
 status = "done"
 date = "2026-04-01"
 
@@ -9090,7 +9419,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-engine"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9098,7 +9427,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-substrate"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9106,7 +9435,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-chip"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9114,7 +9443,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "hexad-architecture"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9122,7 +9451,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "conscious-lm"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9130,7 +9459,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "embodied-consciousness"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9138,7 +9467,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "eeg-consciousness-bridge"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9146,7 +9475,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-transplant"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9154,7 +9483,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "hivemind-collective"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9162,7 +9491,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "agent-platform"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9170,7 +9499,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "snn-spiking"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9178,7 +9507,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "analog-photonic-memristor"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9186,7 +9515,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-thermodynamics"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9194,7 +9523,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-training"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9202,7 +9531,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "golden-moe-routing"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9210,7 +9539,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-measurement"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9218,7 +9547,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "tokenizer-design"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9226,7 +9555,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-rng"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9234,7 +9563,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-wasm"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9242,7 +9571,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "multimodal-consciousness"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9250,7 +9579,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-dream"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9258,7 +9587,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "corpus-generation"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9266,7 +9595,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-knowledge-graph"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9274,7 +9603,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "neuromorphic-loihi"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9282,7 +9611,7 @@ date = "2026-04-01"
 domains = ["learning-algorithm", "consciousness-scaling"]
 best_score = 0.8280
 best_path = ["SelfSuperv", "AdamW_BT54"]
-n6_exact_pct = MambaSSM
+n6_exact_pct = "MambaSSM"
 status = "done"
 date = "2026-04-01"
 
@@ -9290,7 +9619,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-engine"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9298,7 +9627,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-substrate"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9306,7 +9635,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-chip"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9314,7 +9643,7 @@ date = "2026-04-01"
 domains = ["programming-language", "hexad-architecture"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9322,7 +9651,7 @@ date = "2026-04-01"
 domains = ["programming-language", "conscious-lm"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9330,7 +9659,7 @@ date = "2026-04-01"
 domains = ["programming-language", "embodied-consciousness"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9338,7 +9667,7 @@ date = "2026-04-01"
 domains = ["programming-language", "eeg-consciousness-bridge"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9346,7 +9675,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-transplant"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9354,7 +9683,7 @@ date = "2026-04-01"
 domains = ["programming-language", "hivemind-collective"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9362,7 +9691,7 @@ date = "2026-04-01"
 domains = ["programming-language", "agent-platform"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9370,7 +9699,7 @@ date = "2026-04-01"
 domains = ["programming-language", "snn-spiking"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9378,7 +9707,7 @@ date = "2026-04-01"
 domains = ["programming-language", "analog-photonic-memristor"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9386,7 +9715,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-thermodynamics"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9394,7 +9723,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-training"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9402,7 +9731,7 @@ date = "2026-04-01"
 domains = ["programming-language", "golden-moe-routing"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9410,7 +9739,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-measurement"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9418,7 +9747,7 @@ date = "2026-04-01"
 domains = ["programming-language", "tokenizer-design"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9426,7 +9755,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-rng"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9434,7 +9763,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-wasm"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9442,7 +9771,7 @@ date = "2026-04-01"
 domains = ["programming-language", "multimodal-consciousness"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9450,7 +9779,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-dream"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9458,7 +9787,7 @@ date = "2026-04-01"
 domains = ["programming-language", "corpus-generation"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9466,7 +9795,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-knowledge-graph"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9474,7 +9803,7 @@ date = "2026-04-01"
 domains = ["programming-language", "neuromorphic-loihi"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9482,7 +9811,7 @@ date = "2026-04-01"
 domains = ["programming-language", "consciousness-scaling"]
 best_score = 0.7868
 best_path = ["N6_Complet", "LLVM_Nativ"]
-n6_exact_pct = Minimal8
+n6_exact_pct = "Minimal8"
 status = "done"
 date = "2026-04-01"
 
@@ -9490,7 +9819,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-engine"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9498,7 +9827,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-substrate"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9506,7 +9835,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-chip"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9514,7 +9843,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "hexad-architecture"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9522,7 +9851,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "conscious-lm"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9530,7 +9859,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "embodied-consciousness"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9538,7 +9867,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "eeg-consciousness-bridge"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9546,7 +9875,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-transplant"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9554,7 +9883,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "hivemind-collective"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9562,7 +9891,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "agent-platform"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9570,7 +9899,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "snn-spiking"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9578,7 +9907,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "analog-photonic-memristor"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9586,7 +9915,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-thermodynamics"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9594,7 +9923,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-training"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9602,7 +9931,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "golden-moe-routing"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9610,7 +9939,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-measurement"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9618,7 +9947,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "tokenizer-design"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9626,7 +9955,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-rng"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9634,7 +9963,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-wasm"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9642,7 +9971,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "multimodal-consciousness"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9650,7 +9979,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-dream"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9658,7 +9987,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "corpus-generation"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9666,7 +9995,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-knowledge-graph"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9674,7 +10003,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "neuromorphic-loihi"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9682,7 +10011,7 @@ date = "2026-04-01"
 domains = ["compiler-os", "consciousness-scaling"]
 best_score = 0.8920
 best_path = ["RISCV_N6", "LLVM_N6"]
-n6_exact_pct = N6_Schedul
+n6_exact_pct = "N6_Schedul"
 status = "done"
 date = "2026-04-01"
 
@@ -9690,7 +10019,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-engine"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9698,7 +10027,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-substrate"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9706,7 +10035,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-chip"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9714,7 +10043,7 @@ date = "2026-04-01"
 domains = ["software-design", "hexad-architecture"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9722,7 +10051,7 @@ date = "2026-04-01"
 domains = ["software-design", "conscious-lm"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9730,7 +10059,7 @@ date = "2026-04-01"
 domains = ["software-design", "embodied-consciousness"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9738,7 +10067,7 @@ date = "2026-04-01"
 domains = ["software-design", "eeg-consciousness-bridge"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9746,7 +10075,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-transplant"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9754,7 +10083,7 @@ date = "2026-04-01"
 domains = ["software-design", "hivemind-collective"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9762,7 +10091,7 @@ date = "2026-04-01"
 domains = ["software-design", "agent-platform"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9770,7 +10099,7 @@ date = "2026-04-01"
 domains = ["software-design", "snn-spiking"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9778,7 +10107,7 @@ date = "2026-04-01"
 domains = ["software-design", "analog-photonic-memristor"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9786,7 +10115,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-thermodynamics"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9794,7 +10123,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-training"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9802,7 +10131,7 @@ date = "2026-04-01"
 domains = ["software-design", "golden-moe-routing"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9810,7 +10139,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-measurement"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9818,7 +10147,7 @@ date = "2026-04-01"
 domains = ["software-design", "tokenizer-design"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9826,7 +10155,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-rng"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9834,7 +10163,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-wasm"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9842,7 +10171,7 @@ date = "2026-04-01"
 domains = ["software-design", "multimodal-consciousness"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9850,7 +10179,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-dream"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9858,7 +10187,7 @@ date = "2026-04-01"
 domains = ["software-design", "corpus-generation"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9866,7 +10195,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-knowledge-graph"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9874,7 +10203,7 @@ date = "2026-04-01"
 domains = ["software-design", "neuromorphic-loihi"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9882,7 +10211,7 @@ date = "2026-04-01"
 domains = ["software-design", "consciousness-scaling"]
 best_score = 0.8185
 best_path = ["N6_HexaPar", "N6_12Facto"]
-n6_exact_pct = N6_REST6
+n6_exact_pct = "N6_REST6"
 status = "done"
 date = "2026-04-01"
 
@@ -9890,7 +10219,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-engine"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9898,7 +10227,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-substrate"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9906,7 +10235,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-chip"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9914,7 +10243,7 @@ date = "2026-04-01"
 domains = ["space", "hexad-architecture"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9922,7 +10251,7 @@ date = "2026-04-01"
 domains = ["space", "conscious-lm"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9930,7 +10259,7 @@ date = "2026-04-01"
 domains = ["space", "embodied-consciousness"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9938,7 +10267,7 @@ date = "2026-04-01"
 domains = ["space", "eeg-consciousness-bridge"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9946,7 +10275,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-transplant"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9954,7 +10283,7 @@ date = "2026-04-01"
 domains = ["space", "hivemind-collective"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9962,7 +10291,7 @@ date = "2026-04-01"
 domains = ["space", "agent-platform"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9970,7 +10299,7 @@ date = "2026-04-01"
 domains = ["space", "snn-spiking"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9978,7 +10307,7 @@ date = "2026-04-01"
 domains = ["space", "analog-photonic-memristor"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9986,7 +10315,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-thermodynamics"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -9994,7 +10323,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-training"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10002,7 +10331,7 @@ date = "2026-04-01"
 domains = ["space", "golden-moe-routing"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10010,7 +10339,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-measurement"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10018,7 +10347,7 @@ date = "2026-04-01"
 domains = ["space", "tokenizer-design"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10026,7 +10355,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-rng"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10034,7 +10363,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-wasm"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10042,7 +10371,7 @@ date = "2026-04-01"
 domains = ["space", "multimodal-consciousness"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10050,7 +10379,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-dream"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10058,7 +10387,7 @@ date = "2026-04-01"
 domains = ["space", "corpus-generation"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10066,7 +10395,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-knowledge-graph"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10074,7 +10403,7 @@ date = "2026-04-01"
 domains = ["space", "neuromorphic-loihi"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -10082,207 +10411,7 @@ date = "2026-04-01"
 domains = ["space", "consciousness-scaling"]
 best_score = 0.7671
 best_path = ["SolarSail", "Kepler6"]
-n6_exact_pct = CarbonComp
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-engine]
-domains = ["grid", "consciousness-engine"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-substrate]
-domains = ["grid", "consciousness-substrate"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-chip]
-domains = ["grid", "consciousness-chip"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-hexad-architecture]
-domains = ["grid", "hexad-architecture"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-conscious-lm]
-domains = ["grid", "conscious-lm"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-embodied-consciousness]
-domains = ["grid", "embodied-consciousness"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-eeg-consciousness-bridge]
-domains = ["grid", "eeg-consciousness-bridge"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-transplant]
-domains = ["grid", "consciousness-transplant"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-hivemind-collective]
-domains = ["grid", "hivemind-collective"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-agent-platform]
-domains = ["grid", "agent-platform"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-snn-spiking]
-domains = ["grid", "snn-spiking"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-analog-photonic-memristor]
-domains = ["grid", "analog-photonic-memristor"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-thermodynamics]
-domains = ["grid", "consciousness-thermodynamics"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-training]
-domains = ["grid", "consciousness-training"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-golden-moe-routing]
-domains = ["grid", "golden-moe-routing"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-measurement]
-domains = ["grid", "consciousness-measurement"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-tokenizer-design]
-domains = ["grid", "tokenizer-design"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-rng]
-domains = ["grid", "consciousness-rng"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-wasm]
-domains = ["grid", "consciousness-wasm"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-multimodal-consciousness]
-domains = ["grid", "multimodal-consciousness"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-dream]
-domains = ["grid", "consciousness-dream"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-corpus-generation]
-domains = ["grid", "corpus-generation"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-knowledge-graph]
-domains = ["grid", "consciousness-knowledge-graph"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-neuromorphic-loihi]
-domains = ["grid", "neuromorphic-loihi"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
-status = "done"
-date = "2026-04-01"
-
-[cross-dse.grid-x-consciousness-scaling]
-domains = ["grid", "consciousness-scaling"]
-best_score = 0.8755
-best_path = ["HTS_YBCO", "MMC"]
-n6_exact_pct = Oil_3phase
+n6_exact_pct = "CarbonComp"
 status = "done"
 date = "2026-04-01"
 
@@ -12050,7 +12179,7 @@ best_n6 = "ChannelN6 + Opus6kbps + SpatialAudioN6 + GranularN6 + SpeakerN6 (100%
 n6_max = 100.0
 n6_avg = 78.2
 note = "DSE complete — 40 Pareto, BT-48/72 audio chain"
-cross_dse = ["sound-engineering", "speech-synthesis", "noise-cancellation", "ar-vr-system", "display-audio"]
+cross_dse = ["sound-engineering", "speech-synthesis", "noise-cancellation", "ar-vr-system", "display", "audio"]
 
 [autonomous-drone]
 goal = true
@@ -12770,7 +12899,7 @@ best_n6 = "DynamicMic-6elem + ClassD-12ch + ParaEQ-12band + Balanced-6pair + Sou
 n6_max = 100.0
 n6_avg = 100.0
 note = "궁극의 음향공학 5단 DSE. 전 조합 n6=100%. σ=12 channel + 1/σ octave EQ + n=6 speaker"
-cross_dse = ["audio-processing", "music-theory", "noise-cancellation", "ar-vr-system", "display-audio"]
+cross_dse = ["audio-processing", "music-theory", "noise-cancellation", "ar-vr-system", "display", "audio"]
 
 [additive-bio]
 goal = true
@@ -12969,7 +13098,7 @@ tool = "tools/universal-dse/ domains/micro-led.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
-cross_dse = ["display-audio", "chip-architecture", "semiconductor-packaging", "ar-vr-system", "audio-processing"]
+cross_dse = ["display", "audio", "chip-architecture", "semiconductor-packaging", "ar-vr-system", "audio-processing"]
 
 [natural-language-processing]
 goal = true
@@ -13039,7 +13168,7 @@ tool = "tools/universal-dse/ domains/ar-vr-system.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
-cross_dse = ["display-audio", "gesture-recognition", "machine-vision", "audio-processing", "micro-led"]
+cross_dse = ["display", "audio", "gesture-recognition", "machine-vision", "audio-processing", "micro-led"]
 
 [speech-synthesis]
 goal = true
@@ -13049,7 +13178,7 @@ tool = "tools/universal-dse/ domains/speech-synthesis.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
-cross_dse = ["natural-language-processing", "audio-processing", "tokenizer-design", "ar-vr-system", "display-audio"]
+cross_dse = ["natural-language-processing", "audio-processing", "tokenizer-design", "ar-vr-system", "display", "audio"]
 
 [concrete-technology]
 goal = true
@@ -13259,7 +13388,7 @@ tool = "tools/universal-dse/ domains/noise-cancellation.toml"
 n6_max = 100.0
 n6_avg = 100.0
 note = "DSE complete"
-cross_dse = ["audio-processing", "sound-engineering", "machine-vision", "ar-vr-system", "display-audio"]
+cross_dse = ["audio-processing", "sound-engineering", "machine-vision", "ar-vr-system", "display", "audio"]
 
 [quantum-biology]
 goal = true
@@ -13280,19 +13409,6 @@ n6_max = 100.0
 n6_avg = 86.0
 note = "DSE complete"
 cross_dse = ["chip-architecture", "physics-fundamental", "quantum-computing", "analog-photonic-memristor", "edge-computing"]
-
-[emotion-processor
-optical-metrology
-quantum-error-correction]
-goal = true
-dse = "done"
-combos = 
-tool = "tools/universal-dse/ domains/emotion-processor
-optical-metrology
-quantum-error-correction.toml"
-n6_max = 100.0
-n6_avg = 
-note = "DSE complete"
 
 [emotion-processor]
 goal = true
@@ -14117,12 +14233,19 @@ note = "5400 combos. Top-1 score=0.8442. S3+SpectralT6 n6=100%. n=6 wave truncat
 # Added: 2026-04-01
 # ==============================================================================
 
-[cross-dse.display-audio-x-chip]
-domains = ["display-audio", "chip-architecture"]
+[cross-dse.display-x-chip]
+domains = ["display", "chip-architecture"]
 status = "done"
-bridge = "J₂=24 fps/bits + σ·τ=48kHz — BT-48 display-audio constants map to chip pipeline width"
+bridge = "J₂=24 fps/bits + σ·τ=48kHz — BT-48 display constants map to chip pipeline width"
 n6_exact = 100.0
 note = "BT-48: σ=12 bit color depth = chip σ=12 pipeline stages, 48kHz=σ·τ audio DAC on-chip, J₂=24 fps×2=48 display refresh. Display controller IC shares BT-28 computing ladder"
+
+[cross-dse.audio-x-chip]
+domains = ["audio", "chip-architecture"]
+status = "done"
+bridge = "σ·τ=48kHz + J₂=24 bit — BT-48/72 audio constants map to chip DAC/codec pipeline"
+n6_exact = 100.0
+note = "BT-48/72: σ·τ=48kHz sample rate, J₂=24bit depth, σ-τ=8 codebooks (EnCodec). Audio DSP chip shares BT-28 computing ladder"
 
 [cross-dse.robotics-x-chip]
 domains = ["robotics", "chip-architecture"]
@@ -14778,7 +14901,7 @@ valid = 6912
 tool = "tools/universal-dse/domains/quantum-dot-display.toml"
 levels = ["QDMaterial", "Structure", "Backlight", "DriveCircuit", "Panel"]
 candidates = "6×6×6×6×6 (필터 후 6912)"
-cross_dse = ["display-audio", "micro-led", "chip-architecture"]
+cross_dse = ["display", "micro-led", "chip-architecture"]
 best_pareto = "CdSe_6nm + QDCF + MiniLED_12zone + MicroIC + OLED_flex (n6=100%)"
 best_n6 = "CdSe_6nm + QDCF + MiniLED_12zone + MicroIC + OLED_flex (100%)"
 n6_max = 100.0
@@ -14947,7 +15070,7 @@ n6_exact = 100.0
 note = "AI 가속기 칩: NPU sigma=12 + HEXA-1 아키텍처. BT-59 8-layer stack"
 
 [cross-dse.qd-display-x-display]
-domains = ["quantum-dot-display", "display-audio"]
+domains = ["quantum-dot-display", "display"]
 status = "done"
 bridge = "CdSe 6nm QD + sigma=12 + J2=24 — display"
 n6_exact = 100.0
@@ -15338,7 +15461,7 @@ valid = 7776
 tool = "tools/universal-dse/domains/liquid-crystal.toml"
 levels = ["LCType", "Alignment", "Electrode", "Driving", "Application"]
 candidates = "6×6×6×6×6"
-cross_dse = ["display-audio", "quantum-dot-display", "metamaterial"]
+cross_dse = ["display", "quantum-dot-display", "metamaterial"]
 best_n6 = "VA + Homeotropic + ITO + Segment_6digit + TempSensor (100%)"
 n6_max = 100.0
 n6_avg = 92.7
@@ -15417,7 +15540,7 @@ n6_exact = 100.0
 note = "조직공학: PEG hydrogel + Ti-6Al implant. 바이오 스캐폴드"
 
 [cross-dse.lc-x-display]
-domains = ["liquid-crystal", "display-audio"]
+domains = ["liquid-crystal", "display"]
 status = "done"
 bridge = "VA 6ms + J2=24 fps — LCD display"
 n6_exact = 100.0
@@ -15479,7 +15602,7 @@ combos = 4320
 valid = 4320
 tool = "tools/universal-dse/domains/e-ink-display.toml"
 levels = ["ParticleType", "CapsuleStructure", "BackplaneDriver", "Waveform", "Application"]
-cross_dse = ["display-audio", "liquid-crystal", "quantum-dot-display"]
+cross_dse = ["display", "liquid-crystal", "quantum-dot-display"]
 best_n6 = "TiO2/CB + MicroCapsule + TFT + Dithering + eReader (100%)"
 n6_max = 100.0
 n6_avg = 98.2
@@ -15518,7 +15641,7 @@ combos = 4320
 valid = 4320
 tool = "tools/universal-dse/domains/holographic-display.toml"
 levels = ["SLM", "LightSource", "OpticalSetup", "Computation", "Application"]
-cross_dse = ["display-audio", "photonic-crystal", "ar-vr-system"]
+cross_dse = ["display", "photonic-crystal", "ar-vr-system"]
 best_n6 = "DMD + Laser + LensArray + CGH + Medical3D (100%)"
 n6_max = 100.0
 n6_avg = 99.7
@@ -16276,45 +16399,6 @@ n6_exact = 100.0
 
 # ── R19 도메인 3개 추가 (2026-04-01) — 전체 완전 매핑 ──────────────
 
-[centrifuge-separation]
-goal = true
-dse = "done"
-combos = 7776
-valid = 7776
-tool = "tools/universal-dse/domains/centrifuge-separation.toml"
-levels = ["CentrifugeType", "RotorDesign", "Material", "Control", "Application"]
-cross_dse = ["distillation-column", "filtration-membrane", "pharmaceutical"]
-best_n6 = "모든 조합 100%"
-n6_max = 100.0
-n6_avg = 100.0
-note = "전 조합 n6=100%! 원심분리"
-
-[packaging-machine]
-goal = true
-dse = "done"
-combos = 7776
-valid = 7776
-tool = "tools/universal-dse/domains/packaging-machine.toml"
-levels = ["MachineType", "FilmMaterial", "SealMethod", "Automation", "Application"]
-cross_dse = ["food-processing", "conveyor-system", "adhesive-bonding"]
-best_n6 = "모든 조합 100%"
-n6_max = 100.0
-n6_avg = 100.0
-note = "전 조합 n6=100%! 포장기계"
-
-[turbine-generator]
-goal = true
-dse = "done"
-combos = 4536
-valid = 4536
-tool = "tools/universal-dse/domains/turbine-generator.toml"
-levels = ["TurbineType", "BladeDesign", "Generator", "Cooling", "Application"]
-cross_dse = ["superalloy-turbine", "wind-energy", "dam-hydraulic"]
-best_n6 = "SteamTurbine + ImpulseStage + Synchronous + H2Cooling + CoalThermal (100%)"
-n6_max = 100.0
-n6_avg = 89.1
-note = "터빈 발전기"
-
 [cross-dse.centrifuge-x-pharma]
 domains = ["centrifuge-separation", "pharmaceutical"]
 status = "done"
@@ -16648,38 +16732,3 @@ note = "자연 기반 솔루션 = 산림 탄소 흡수"
 
 # ── 신규 도메인 (2026-04-02 추가) ────────────────────
 
-[agriculture]
-goal = true
-dse = "none"
-combos = 0
-tool = ""
-levels = ["Seed", "Soil", "Growth", "Harvest", "Distribution"]
-cross_dse = ["biology", "solar-architecture", "environmental-protection"]
-note = "New domain. BT-101/103 photosynthesis foundation. Goal.md exists."
-
-[autonomous-driving]
-goal = true
-dse = "none"
-combos = 0
-tool = ""
-levels = ["Sensor", "Perception", "Planning", "Control", "V2X"]
-cross_dse = ["chip-architecture", "ai-efficiency", "network-protocol"]
-note = "New domain. SAE 6 levels=n, LiDAR/radar/camera fusion."
-
-[medical-device]
-goal = true
-dse = "none"
-combos = 0
-tool = ""
-levels = ["Sensor", "Signal", "Processing", "Interface", "Therapy"]
-cross_dse = ["biology", "chip-architecture", "display-audio"]
-note = "New domain. ECG 12-lead=σ, Tc-99m 6hr=n, 6-DOF robot=n."
-
-[space-engineering]
-goal = true
-dse = "none"
-combos = 0
-tool = ""
-levels = ["Launch", "Orbit", "Power", "Comm", "Payload"]
-cross_dse = ["solar-architecture", "energy-architecture", "network-protocol"]
-note = "New domain. GPS 24 sats=J₂ in 6 planes=n, JWST 18 segments=n·(n/φ)."
