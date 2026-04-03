@@ -25,9 +25,9 @@ use lens_trait::{Lens, LensResult};
 use lenses::{
     BarrierLens, BoundaryLens, CausalLens, CompassLens, ConsciousnessLens, EmLens,
     EvolutionLens, GravityLens, InfoLens, MemoryLens, MirrorLens, MultiscaleLens,
-    NetworkLens, QuantumLensImpl, QuantumMicroLens, RecursionLens, RulerLens,
-    ScaleLens, StabilityLens, ThermoLens, TopologyLens, TriangleLens, VoidLens,
-    WaveLens,
+    NetworkLens, QuantumLensImpl, QuantumMicroLens, RecursionLens, RenormalizationLens,
+    RulerLens, ScaleLens, StabilityLens, ThermoLens, TopologyLens, TriangleLens,
+    VoidLens, WaveLens,
 };
 use shared_data::SharedData;
 
@@ -67,6 +67,7 @@ impl Telescope {
             Box::new(RecursionLens),
             Box::new(BoundaryLens),
             Box::new(MultiscaleLens),
+            Box::new(RenormalizationLens),
             // Original 2 (void + barrier)
             Box::new(VoidLens),
             Box::new(BarrierLens),
