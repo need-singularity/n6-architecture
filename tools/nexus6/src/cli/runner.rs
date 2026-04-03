@@ -53,7 +53,7 @@ pub fn run(cmd: CliCommand) -> Result<(), String> {
         CliCommand::Cycle { experiment_type, target } => {
             run_cycle(&experiment_type, &target)
         }
-        CliCommand::Ingest { sources, verbose } => run_ingest(sources, verbose),
+        CliCommand::Ingest { sources, config, verbose } => run_ingest(sources, config, verbose),
         CliCommand::Bench => run_bench(),
         CliCommand::Dashboard { html, output } => run_dashboard(html, output),
         CliCommand::Help => {
@@ -756,7 +756,7 @@ fn run_experiment(mode: ExperimentMode, target: &str, intensity: f64, duration: 
     Ok(())
 }
 
-fn run_ingest(sources: Vec<String>, verbose: bool) -> Result<(), String> {
+fn run_ingest(sources: Vec<String>, config_path: Option<String>, verbose: bool) -> Result<(), String> {
     use crate::ingest::crawler;
     use std::path::PathBuf;
     use std::time::Instant;
@@ -764,10 +764,8 @@ fn run_ingest(sources: Vec<String>, verbose: bool) -> Result<(), String> {
     println!("=== NEXUS-6 Ingest: Multi-Project Crawler ===");
     println!();
 
-    let config = if sources.is_empty() {
-        println!("  Using default project sources...");
-        crawler::default_config()
-    } else {
+    let config = if !sources.is_empty() {
+        // Explicit --source overrides everything.
         let default_exts = vec![
             "toml".to_string(), "md".to_string(), "py".to_string(),
             "json".to_string(), "csv".to_string(), "txt".to_string(),
@@ -789,6 +787,22 @@ fn run_ingest(sources: Vec<String>, verbose: bool) -> Result<(), String> {
             })
             .collect();
         crawler::CrawlConfig { sources: project_sources }
+    } else {
+        // Try JSON config: explicit --config path, then default location, then hardcoded fallback.
+        let json_path = config_path.unwrap_or_else(|| "shared/projects.json".to_string());
+        match crawler::load_from_json(&json_path) {
+            Ok(cfg) => {
+                println!("  Loaded {} projects from {}", cfg.sources.len(), json_path);
+                cfg
+            }
+            Err(e) => {
+                if verbose {
+                    println!("  Note: could not load '{}': {}", json_path, e);
+                }
+                println!("  Using hardcoded fallback sources...");
+                crawler::default_config()
+            }
+        }
     };
 
     for src in &config.sources {
@@ -1247,9 +1261,11 @@ fn print_help() {
     println!("      Full science cycle: predict -> simulate -> experiment ->");
     println!("      compare -> reproduce -> publish.");
     println!();
-    println!("  ingest [--source PATH]... [--verbose]");
+    println!("  ingest [--config PATH] [--source PATH]... [--verbose]");
     println!("      Crawl project directories for data files (toml/md/py/json/csv).");
-    println!("      Without --source, uses default n6/TECS-L/anima sources.");
+    println!("      Default: loads shared/projects.json (6 projects).");
+    println!("      --config PATH  use a custom projects.json file.");
+    println!("      --source PATH  override with explicit paths (skips JSON config).");
     println!();
     println!("  bench");
     println!("      Run benchmark suite (registry, telescope, OUROBOROS, forge).");

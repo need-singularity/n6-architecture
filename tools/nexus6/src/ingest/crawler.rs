@@ -2,8 +2,11 @@
 /// and routes them to the appropriate parser (json, csv, text/md, toml, py).
 ///
 /// No hardcoded paths: all sources come from `CrawlConfig`.
+/// Preferred: load from `shared/projects.json` via `load_from_json()`.
 
 use std::path::{Path, PathBuf};
+
+use serde::Deserialize;
 
 use super::csv_reader;
 use super::json_reader;
@@ -325,6 +328,78 @@ pub fn crawl(config: &CrawlConfig) -> IngestResult {
     }
 }
 
+// ---------------------------------------------------------------------------
+// JSON config loading (shared/projects.json)
+// ---------------------------------------------------------------------------
+
+/// Raw JSON schema for `shared/projects.json`.
+#[derive(Deserialize)]
+struct ProjectsFile {
+    #[allow(dead_code)]
+    version: u32,
+    base_path: String,
+    projects: Vec<ProjectEntry>,
+}
+
+#[derive(Deserialize)]
+struct ProjectEntry {
+    #[allow(dead_code)]
+    id: String,
+    path: String,
+    domain: String,
+    scan_patterns: Vec<String>,
+    // remaining fields are optional / unused for crawling
+}
+
+/// Extract unique file extensions from glob-style scan patterns.
+///
+/// E.g. `["**/*.py", "docs/**/*.md"]` → `["py", "md"]`.
+fn extensions_from_patterns(patterns: &[String]) -> Vec<String> {
+    let mut exts = Vec::new();
+    for pat in patterns {
+        if let Some(dot_pos) = pat.rfind('.') {
+            let ext = &pat[dot_pos + 1..];
+            if !ext.is_empty() && !exts.iter().any(|e: &String| e == ext) {
+                exts.push(ext.to_string());
+            }
+        }
+    }
+    exts
+}
+
+/// Load a `CrawlConfig` from a `projects.json` file.
+///
+/// The JSON must have `base_path` and a `projects` array.  Each project's
+/// absolute path is `base_path / project.path`, and its extensions are
+/// derived from `scan_patterns`.
+pub fn load_from_json(path: &str) -> Result<CrawlConfig, String> {
+    let content = std::fs::read_to_string(path)
+        .map_err(|e| format!("Failed to read '{}': {}", path, e))?;
+    load_from_json_str(&content)
+}
+
+/// Parse a `CrawlConfig` from a JSON string (useful for testing).
+pub fn load_from_json_str(json: &str) -> Result<CrawlConfig, String> {
+    let file: ProjectsFile =
+        serde_json::from_str(json).map_err(|e| format!("Invalid projects JSON: {}", e))?;
+
+    let base = PathBuf::from(&file.base_path);
+    let sources = file
+        .projects
+        .iter()
+        .map(|p| {
+            let exts = extensions_from_patterns(&p.scan_patterns);
+            ProjectSource {
+                path: base.join(&p.path),
+                domain: p.domain.clone(),
+                extensions: exts,
+            }
+        })
+        .collect();
+
+    Ok(CrawlConfig { sources })
+}
+
 /// Build the default `CrawlConfig` for the three known projects.
 ///
 /// Returns `None` for paths that do not resolve. Callers can override
@@ -469,6 +544,68 @@ mod tests {
 
         // Cleanup
         let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn test_extensions_from_patterns() {
+        let pats = vec![
+            "**/*.py".to_string(),
+            "docs/**/*.md".to_string(),
+            "**/*.py".to_string(), // duplicate
+        ];
+        let exts = extensions_from_patterns(&pats);
+        assert_eq!(exts, vec!["py".to_string(), "md".to_string()]);
+    }
+
+    #[test]
+    fn test_extensions_from_patterns_empty() {
+        let exts = extensions_from_patterns(&[]);
+        assert!(exts.is_empty());
+    }
+
+    #[test]
+    fn test_load_from_json_str_basic() {
+        let json = r#"{
+            "version": 1,
+            "base_path": "/tmp/test",
+            "projects": [
+                {
+                    "id": "alpha",
+                    "path": "alpha-proj",
+                    "domain": "math",
+                    "scan_patterns": ["**/*.py", "docs/**/*.md"]
+                },
+                {
+                    "id": "beta",
+                    "path": "beta-proj",
+                    "domain": "physics",
+                    "scan_patterns": ["**/*.json", "**/*.csv", "**/*.toml"]
+                }
+            ]
+        }"#;
+
+        let config = load_from_json_str(json).unwrap();
+        assert_eq!(config.sources.len(), 2);
+
+        assert_eq!(config.sources[0].domain, "math");
+        assert_eq!(config.sources[0].path, PathBuf::from("/tmp/test/alpha-proj"));
+        assert_eq!(config.sources[0].extensions, vec!["py", "md"]);
+
+        assert_eq!(config.sources[1].domain, "physics");
+        assert_eq!(config.sources[1].path, PathBuf::from("/tmp/test/beta-proj"));
+        assert_eq!(config.sources[1].extensions, vec!["json", "csv", "toml"]);
+    }
+
+    #[test]
+    fn test_load_from_json_str_invalid() {
+        let result = load_from_json_str("not json");
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_load_from_json_file_not_found() {
+        let result = load_from_json("/nonexistent/projects.json");
+        assert!(result.is_err());
     }
 
     #[test]

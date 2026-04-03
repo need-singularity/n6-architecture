@@ -48,6 +48,7 @@ pub enum CliCommand {
     },
     Ingest {
         sources: Vec<String>,
+        config: Option<String>,
         verbose: bool,
     },
     Bench,
@@ -623,6 +624,7 @@ fn parse_publish(args: &[String]) -> Result<CliCommand, String> {
 
 fn parse_ingest(args: &[String]) -> Result<CliCommand, String> {
     let mut sources: Vec<String> = Vec::new();
+    let mut config: Option<String> = None;
     let mut verbose = false;
 
     let mut i = 0;
@@ -635,6 +637,13 @@ fn parse_ingest(args: &[String]) -> Result<CliCommand, String> {
                 }
                 sources.push(args[i].clone());
             }
+            "--config" | "-c" => {
+                i += 1;
+                if i >= args.len() {
+                    return Err("--config requires a path".to_string());
+                }
+                config = Some(args[i].clone());
+            }
             "--verbose" | "-v" => {
                 verbose = true;
             }
@@ -645,7 +654,7 @@ fn parse_ingest(args: &[String]) -> Result<CliCommand, String> {
         i += 1;
     }
 
-    Ok(CliCommand::Ingest { sources, verbose })
+    Ok(CliCommand::Ingest { sources, config, verbose })
 }
 
 fn parse_cycle(args: &[String]) -> Result<CliCommand, String> {
@@ -934,6 +943,7 @@ mod tests {
             cmd,
             CliCommand::Ingest {
                 sources: vec![],
+                config: None,
                 verbose: false,
             }
         );
@@ -946,7 +956,21 @@ mod tests {
             cmd,
             CliCommand::Ingest {
                 sources: vec!["/tmp/proj1".to_string(), "/tmp/proj2".to_string()],
+                config: None,
                 verbose: true,
+            }
+        );
+    }
+
+    #[test]
+    fn test_parse_ingest_with_config() {
+        let cmd = parse_args(&args("nexus6 ingest --config /tmp/projects.json")).unwrap();
+        assert_eq!(
+            cmd,
+            CliCommand::Ingest {
+                sources: vec![],
+                config: Some("/tmp/projects.json".to_string()),
+                verbose: false,
             }
         );
     }
