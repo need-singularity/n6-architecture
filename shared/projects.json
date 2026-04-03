@@ -8,7 +8,10 @@
       "path": "TECS-L",
       "domain": "mathematics",
       "description": "Perfect number 6 → universal rules. 150 characterizations + 8 Major Discoveries",
-      "scan_patterns": ["**/*.py", "docs/**/*.md"],
+      "scan_patterns": [
+        "**/*.py",
+        "docs/**/*.md"
+      ],
       "key_files": [
         "physics_constant_engine.py",
         "math/identity_finder.py",
@@ -19,7 +22,8 @@
       "stats": {
         "characterizations": 150,
         "major_discoveries": 8,
-        "tools": 44
+        "tools": 156,
+        "hypotheses": 1665
       }
     },
     {
@@ -28,7 +32,12 @@
       "path": "anima",
       "domain": "consciousness",
       "description": "Consciousness implementation. PureField + Hexad 6-module + 179 laws + 10 Meta Laws",
-      "scan_patterns": ["**/*.py", "**/*.json", "config/**/*.json", "data/**/*.json"],
+      "scan_patterns": [
+        "**/*.py",
+        "**/*.json",
+        "config/**/*.json",
+        "data/**/*.json"
+      ],
       "key_files": [
         "hexad/constants.py",
         "config/consciousness_laws.json",
@@ -36,8 +45,9 @@
         "experiments/discover_laws_*.py"
       ],
       "stats": {
-        "laws": 179,
-        "meta_laws": 10,
+        "laws": 1030,
+        "meta_laws": 20,
+        "topo_laws": 7,
         "hexad_modules": 6
       }
     },
@@ -47,7 +57,11 @@
       "path": "n6-architecture",
       "domain": "architecture",
       "description": "Architecture from perfect number 6. 16 AI techniques + semiconductor + network/crypto/OS/display",
-      "scan_patterns": ["docs/**/*.toml", "docs/**/*.md", "tools/**/*.py"],
+      "scan_patterns": [
+        "docs/**/*.toml",
+        "docs/**/*.md",
+        "tools/**/*.py"
+      ],
       "key_files": [
         "docs/dse-map.toml",
         "docs/atlas-constants.md",
@@ -57,7 +71,7 @@
       "stats": {
         "ai_techniques": 16,
         "dse_domains": 323,
-        "dse_paths": 3900000
+        "nexus6_tests": 1116
       }
     },
     {
@@ -66,7 +80,10 @@
       "path": "sedi",
       "domain": "signal",
       "description": "Search for Extra-Dimensional Intelligence. n=6 signal patterns + 77 data sources",
-      "scan_patterns": ["sedi/**/*.py", "data/**/*.json"],
+      "scan_patterns": [
+        "sedi/**/*.py",
+        "data/**/*.json"
+      ],
       "key_files": [
         "sedi/constants.py",
         "data/sedi-grades.json",
@@ -85,7 +102,10 @@
       "path": "brainwire",
       "domain": "neuroscience",
       "description": "Brain interface for consciousness engineering. BCI + therapeutic stimulation + PureField",
-      "scan_patterns": ["brainwire/**/*.py", "docs/**/*.md"],
+      "scan_patterns": [
+        "brainwire/**/*.py",
+        "docs/**/*.md"
+      ],
       "key_files": [
         "brainwire/engine/*.py",
         "brainwire/hardware/*.py",
@@ -102,7 +122,11 @@
       "path": "hexa-lang",
       "domain": "language",
       "description": "The Perfect Number Programming Language. 53 keywords, 24 operators, 8 primitives, 6-phase pipeline",
-      "scan_patterns": ["src/**/*.rs", "hexa/**/*.hexa", "examples/**/*.hexa"],
+      "scan_patterns": [
+        "src/**/*.rs",
+        "hexa/**/*.hexa",
+        "examples/**/*.hexa"
+      ],
       "key_files": [
         "src/lexer.rs",
         "src/compiler.rs",
