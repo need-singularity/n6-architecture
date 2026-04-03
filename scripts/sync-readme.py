@@ -9,6 +9,15 @@ Usage:
 데이터 원본: shared/readme-data.json (유일한 SSOT)
 마커 형식:   <!-- AUTO:SECTION:START --> ... <!-- AUTO:SECTION:END -->
 직접 편집:   마커 밖의 내용은 건드리지 않음
+
+마커 종류:
+  AUTO:BADGE           — DSE/NEXUS-6 뱃지
+  AUTO:STATS           — 통계 블록
+  AUTO:ALIEN_INDEX     — 외계인 지수 테이블
+  AUTO:ROADMAP         — 로드맵 테이블
+  AUTO:REFERENCE       — 참조 테이블
+  AUTO:SUMMARY_<id>    — 도메인별 요약 blockquote
+  AUTO:FOOTER_<id>     — 도메인별 풋터 링크
 """
 
 import json
@@ -31,13 +40,22 @@ def load_data() -> dict:
         return json.load(f)
 
 
+def _find_domain(data: dict, domain_id: str) -> dict:
+    for d in data["domains"]:
+        if d["id"] == domain_id:
+            return d
+    return None
+
+
+# ─── Global generators ───
+
+
 def gen_badge(data: dict) -> str:
     s = data["stats"]
-    lines = [
+    return "\n".join([
         f'[![DSE](https://img.shields.io/badge/DSE-{s["dse_domains"]}%20domains-blue.svg)](docs/dse-map.toml)',
         f'[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-{s["nexus6_tests"]}%20tests-green.svg)](tools/nexus6/)',
-    ]
-    return "\n".join(lines)
+    ])
 
 
 def gen_stats(data: dict) -> str:
@@ -52,6 +70,35 @@ def gen_stats(data: dict) -> str:
     )
 
 
+def _fmt_pct(val) -> str:
+    if val is None:
+        return ""
+    if isinstance(val, str):
+        return f"{val}%"
+    if isinstance(val, (int, float)):
+        # 100.0 → "100%", 82.2 → "82.2%"
+        return f"{val:g}%"
+    return str(val)
+
+
+def _fmt_industry(d: dict) -> str:
+    parts = []
+    if d.get("industry_pct") is not None:
+        parts.append(f'{d["industry_pct"]:g}%' if isinstance(d["industry_pct"], (int, float)) else str(d["industry_pct"]) + "%")
+    if d.get("industry_detail"):
+        parts.append(f'({d["industry_detail"]})')
+    return " ".join(parts) if parts else "—"
+
+
+def _fmt_experiment(d: dict) -> str:
+    parts = []
+    if d.get("experiment_pct") is not None:
+        parts.append(f'{d["experiment_pct"]:g}%' if isinstance(d["experiment_pct"], (int, float)) else str(d["experiment_pct"]) + "%")
+    if d.get("experiment_detail"):
+        parts.append(d["experiment_detail"])
+    return " ".join(parts) if parts else "—"
+
+
 def gen_alien_index(data: dict) -> str:
     header = (
         "| 섹션 | 🛸 구현 | 천장확인 | BT검증 | 산업검증 | 실험검증 | TP | 발견 |\n"
@@ -59,35 +106,16 @@ def gen_alien_index(data: dict) -> str:
     )
     rows = []
     for d in data["domains"]:
-        if d["id"] == "safety":
-            continue  # 아직 외계인 지수 테이블에 넣기엔 이름
         anchor = d["anchor"]
         section = f'[{d["emoji"]} {d["name"]}](#{anchor})'
         alien = f'🛸{d["alien"]}'
         ceiling = "✅" if d["ceiling"] else "❌"
-        bt = f'{d["bt_exact_pct"]}%' if d["bt_exact_pct"] is not None else "—"
-
-        # industry
-        ind_parts = []
-        if d["industry_pct"] is not None:
-            ind_parts.append(f'{d["industry_pct"]}%')
-        if d["industry_detail"]:
-            ind_parts.append(f'({d["industry_detail"]})')
-        industry = " ".join(ind_parts) if ind_parts else "—"
-
-        # experiment
-        exp_parts = []
-        if d["experiment_pct"] is not None:
-            exp_parts.append(f'{d["experiment_pct"]}%')
-        if d["experiment_detail"]:
-            exp_parts.append(d["experiment_detail"])
-        experiment = " ".join(exp_parts) if exp_parts else "—"
-
+        bt = _fmt_pct(d["bt_exact_pct"]) or "—"
+        industry = _fmt_industry(d)
+        experiment = _fmt_experiment(d)
         tp = str(d["tp"])
         disc = str(d["discoveries"])
-
         rows.append(f"| {section} | {alien} | {ceiling} | {bt} | {industry} | {experiment} | {tp} | {disc} |")
-
     return header + "\n" + "\n".join(rows)
 
 
@@ -102,13 +130,10 @@ def gen_roadmap(data: dict) -> str:
     )
     rows = []
     for r in data["roadmap"]:
-        rank = str(r["rank"])
-        year = str(r["year"])
-        name = f'**{r["name"]}**'
-        impact = _impact_stars(r["impact"])
-        tier = str(r["tier"])
-        dse = str(r["dse"])
-        rows.append(f"| {rank} | {year} | {name} | {impact} | {tier} | {dse} |")
+        rows.append(
+            f'| {r["rank"]} | {r["year"]} | **{r["name"]}** '
+            f'| {_impact_stars(r["impact"])} | {r["tier"]} | {r["dse"]} |'
+        )
     return header + "\n" + "\n".join(rows)
 
 
@@ -130,7 +155,92 @@ def gen_reference(data: dict) -> str:
     )
 
 
-GENERATORS = {
+# ─── Per-domain generators ───
+
+
+def gen_summary(data: dict, domain_id: str) -> str:
+    """도메인 요약 blockquote 생성. 모든 수치를 JSON에서 가져옴."""
+    d = _find_domain(data, domain_id)
+    if d is None:
+        return f"> (unknown domain: {domain_id})"
+
+    parts = [f'**🛸{d["alien"]}**']
+
+    if d["ceiling"]:
+        parts.append("✅")
+
+    # BT
+    bt_str = f'BT {d["bt_count"]}개' if d.get("bt_count") else ""
+    if d.get("bt_exact_pct") is not None:
+        pct = d["bt_exact_pct"]
+        pct_s = f"{pct:g}" if isinstance(pct, (int, float)) else str(pct)
+        bt_str += f" {pct_s}%EXACT" if bt_str else f"BT {pct_s}%EXACT"
+    if bt_str:
+        parts.append(bt_str)
+
+    # DSE
+    if d.get("dse_count"):
+        parts.append(f'DSE {d["dse_count"]}')
+
+    # Industry
+    ind = _fmt_industry(d)
+    if ind != "—":
+        parts.append(f"산업{ind}")
+
+    # Experiment
+    exp = _fmt_experiment(d)
+    if exp != "—":
+        parts.append(f"실험{exp}")
+
+    # Physical limits
+    if d.get("physical_limits"):
+        parts.append(f'물리한계{d["physical_limits"]}')
+
+    # TP
+    parts.append(f'TP{d["tp"]}')
+
+    # Discoveries
+    if d.get("discoveries") and str(d["discoveries"]) != "0":
+        parts.append(f'발견{d["discoveries"]}')
+
+    # Extras
+    for ex in d.get("extras", []):
+        parts.append(ex)
+
+    return "> " + " | ".join(parts)
+
+
+def gen_footer(data: dict, domain_id: str) -> str:
+    """도메인 풋터 링크 생성."""
+    d = _find_domain(data, domain_id)
+    if d is None:
+        return f"> (unknown domain: {domain_id})"
+
+    parts = []
+
+    # Doc links
+    doc_links = []
+    for doc in d.get("docs", []):
+        name = doc.rstrip("/")
+        doc_links.append(f"[{doc}](docs/{doc})")
+    if doc_links:
+        parts.append("도메인: " + " · ".join(doc_links))
+
+    # Tool links
+    tool_links = [f"`{t}`" for t in d.get("tools", [])]
+    if tool_links:
+        parts.append("도구: " + " · ".join(tool_links))
+
+    # Footer extra
+    if d.get("footer_extra"):
+        parts.append(d["footer_extra"])
+
+    return "> " + " · ".join(parts)
+
+
+# ─── Dispatch ───
+
+GLOBAL_GENERATORS = {
     "BADGE": gen_badge,
     "STATS": gen_stats,
     "ALIEN_INDEX": gen_alien_index,
@@ -139,18 +249,37 @@ GENERATORS = {
 }
 
 
+def resolve_generator(section: str, data: dict) -> str:
+    """섹션 이름에서 적절한 생성기를 찾아 실행."""
+    if section in GLOBAL_GENERATORS:
+        return GLOBAL_GENERATORS[section](data)
+
+    if section.startswith("SUMMARY_"):
+        domain_id = section[8:]  # len("SUMMARY_") == 8
+        return gen_summary(data, domain_id)
+
+    if section.startswith("FOOTER_"):
+        domain_id = section[7:]  # len("FOOTER_") == 7
+        return gen_footer(data, domain_id)
+
+    return None  # unknown → skip
+
+
 def sync(readme_text: str, data: dict) -> str:
     def replacer(m):
         start_tag = m.group(1)
         section = m.group(2)
         end_tag = m.group(3)
-        gen = GENERATORS.get(section)
-        if gen is None:
-            return m.group(0)  # 알 수 없는 섹션은 건드리지 않음
-        content = gen(data)
+        content = resolve_generator(section, data)
+        if content is None:
+            return m.group(0)
         return f"{start_tag}\n{content}\n{end_tag}"
 
     return MARKER_RE.sub(replacer, readme_text)
+
+
+def _list_markers(text: str) -> list:
+    return [m[1] for m in MARKER_RE.findall(text)]
 
 
 def main():
@@ -171,24 +300,21 @@ def main():
         return 1
 
     if dry_run:
-        # 변경된 마커 섹션만 표시
-        old_sections = {m[1]: m[0] for m in MARKER_RE.findall(old_text)}
-        new_sections = {m[1]: m[0] for m in MARKER_RE.findall(new_text)}
-        for section in GENERATORS:
-            if old_sections.get(section) != new_sections.get(section):
-                print(f"  → AUTO:{section} changed")
+        markers = _list_markers(old_text)
+        old_by_section = {}
+        for m in MARKER_RE.finditer(old_text):
+            old_by_section[m.group(2)] = m.group(0)
+        for m in MARKER_RE.finditer(new_text):
+            sec = m.group(2)
+            if old_by_section.get(sec) != m.group(0):
+                print(f"  → AUTO:{sec} changed")
         return 0
 
     README_PATH.write_text(new_text)
-    print(f"✅ README.md synced from {DATA_PATH.name}")
-
-    # 마커별 상태
-    for section in GENERATORS:
-        marker = f"<!-- AUTO:{section}:START -->"
-        if marker in old_text:
-            print(f"  ✓ AUTO:{section}")
-        else:
-            print(f"  ⚠ AUTO:{section} — marker not found in README.md (add it manually)")
+    markers = _list_markers(new_text)
+    print(f"✅ README.md synced from {DATA_PATH.name} ({len(markers)} markers)")
+    for sec in markers:
+        print(f"  ✓ AUTO:{sec}")
 
     return 0
 
