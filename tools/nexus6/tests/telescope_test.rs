@@ -28,6 +28,7 @@ use nexus6::telescope::lenses::{
     OmegaStateSpaceLens, PhiDynamicsLens, QualiaLens,
     ScanEfficiencyLens, SelfHealLens, SelfReferenceLens, SynergyLens,
     TopologyDeepLens,
+    CDOLens, SSOTLens,
 };
 use nexus6::telescope::registry::{LensCategory, LensEntry, LensRegistry};
 use nexus6::telescope::shared_data::SharedData;
@@ -257,7 +258,7 @@ fn test_telescope_scan_all() {
         results.contains_key("BarrierLens"),
         "Missing BarrierLens results"
     );
-    assert_eq!(telescope.lens_count(), 46);
+    assert_eq!(telescope.lens_count(), 48);
 }
 
 // ──────────────────────────────────────────────
@@ -646,11 +647,13 @@ fn test_all_22_core_lenses_run() {
         Box::new(SynergyLens),
         Box::new(TopologyDeepLens),
         Box::new(CorpusLens),
+        Box::new(CDOLens),
+        Box::new(SSOTLens),
         Box::new(VoidLens),
         Box::new(BarrierLens),
     ];
 
-    assert_eq!(lenses.len(), 46, "Should have 46 lenses (27 core + 19 new)");
+    assert_eq!(lenses.len(), 48, "Should have 48 lenses (27 core + 19 new + 2 CDO/SSOT)");
 
     for lens in &lenses {
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
@@ -696,7 +699,7 @@ fn test_all_22_core_lenses_run() {
 fn test_telescope_has_all_24_lenses() {
     let telescope = Telescope::new();
     assert_eq!(
-        telescope.lens_count(), 46,
+        telescope.lens_count(), 48,
         "Telescope::new() should register 46 lenses (27 core + 19 new)"
     );
 }
@@ -722,7 +725,7 @@ fn test_telescope_scan_all_24() {
     let results = telescope.scan_all(&data, 20, 3);
 
     assert_eq!(
-        results.len(), 46,
+        results.len(), 48,
         "scan_all should return results for all 60 lenses, got {}",
         results.len()
     );

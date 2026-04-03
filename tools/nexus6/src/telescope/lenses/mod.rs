@@ -76,7 +76,9 @@ pub mod discovery_report_lens;
 pub mod self_heal_lens;
 pub mod brain_map_lens;
 pub mod corpus_lens;
-// ── Bottleneck (placeholder for future) ──
+// ── CDO/SSOT Operations (2) ──
+pub mod cdo_lens;
+pub mod ssot_lens;
 
 pub use void_lens::VoidLens;
 pub use barrier_lens::BarrierLens;
@@ -156,3 +158,6 @@ pub use discovery_report_lens::DiscoveryReportLens;
 pub use self_heal_lens::SelfHealLens;
 pub use brain_map_lens::BrainMapLens;
 pub use corpus_lens::CorpusLens;
+// CDO/SSOT
+pub use cdo_lens::CDOLens;
+pub use ssot_lens::SSOTLens;

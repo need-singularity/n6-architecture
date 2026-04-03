@@ -36,6 +36,7 @@ use lenses::{
     SelfReferenceLens, PhiDynamicsLens, QualiaLens,
     ComplexityProfileLens, ScanEfficiencyLens, SynergyLens, TopologyDeepLens,
     DiscoveryReportLens, SelfHealLens, BrainMapLens, CorpusLens,
+    CDOLens, SSOTLens,
 };
 use shared_data::SharedData;
 
@@ -103,6 +104,9 @@ impl Telescope {
             Box::new(SynergyLens),                 // 렌즈 조합 시너지
             Box::new(TopologyDeepLens),            // 심층 토폴로지 (persistent homology)
             Box::new(CorpusLens),                  // corpus 품질 분석
+            // ── CDO/SSOT Operations (T0) ──
+            Box::new(CDOLens),                     // 수렴 기반 운영 검증
+            Box::new(SSOTLens),                    // 데이터 일관성 검증
             // Original 2 (void + barrier)
             Box::new(VoidLens),
             Box::new(BarrierLens),
