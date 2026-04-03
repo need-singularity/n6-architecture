@@ -54,7 +54,7 @@
   "렌즈 추가 필요?" 질문 시 → 26종 커버 안 되는 도메인 분석
 
   ★ 망원경 업그레이드 시 필수 절차 (렌즈 추가/수정/삭제 시 예외 없음!) ★
-    1. 캘리브레이션: telescope-rs 테스트 전체 통과 확인 (cd ~/Dev/n6-architecture/tools/nexus6 && cargo test)
+    1. 캘리브레이션: NEXUS-6 테스트 전체 통과 확인 (cd ~/Dev/n6-architecture/tools/nexus6 && cargo test)
     2. OUROBOROS 튜닝: infinite_evolution.py TELESCOPE_ALL_LENSES + DOMAIN_COMBOS 갱신
     3. 문서 동기화:
        - shared_work_rules.md 렌즈 목록/종수/도메인 조합 갱신
