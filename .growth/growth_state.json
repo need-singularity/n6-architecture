@@ -1,0 +1,19 @@
+{
+  "repo": "n6-architecture",
+  "created": "2026-04-04T00:00:00",
+  "scan_count": 5,
+  "total_growth": 29,
+  "last_scan": "2026-04-04T08:18:53",
+  "last_delta": 7,
+  "nexus6_bonus": 1,
+  "opportunity_count": 5,
+  "high_water": {
+    "TP_PENDING": 7,
+    "EXTREME_MISSING": 6,
+    "BT_GAPS": 7,
+    "TECHNIQUE_NO_EXPERIMENT": 23,
+    "DOC_MISSING_GOAL": 2
+  },
+  "last_tick": "2026-04-04T08:18:55",
+  "infinite_cycle": 1
+}

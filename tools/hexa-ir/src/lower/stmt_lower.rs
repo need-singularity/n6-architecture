@@ -210,7 +210,16 @@ fn lower_stmt_full(
                 extra_blocks.push(then_blk);
             }
 
-            extra_blocks.push(merge_blk);
+            // Swap current block with merge block so subsequent statements
+            // (after the if/else) are emitted into the merge block
+            let prev_blk = HexaBlock {
+                id: block.id,
+                instrs: std::mem::take(&mut block.instrs),
+                successors: std::mem::take(&mut block.successors),
+            };
+            block.id = merge_id;
+            extra_blocks.push(prev_blk);
+            // merge_blk is now `block` (subsequent code goes here)
         }
 
         Stmt::While { cond, body, .. } => {

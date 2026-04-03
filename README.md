@@ -6,7 +6,7 @@
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
 [![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
-[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1116%20tests-green.svg)](tools/nexus6/)
+[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1764%20tests-green.svg)](tools/nexus6/)
 <!-- AUTO:BADGE:END -->
 
 <!-- SHARED:PROJECTS:START -->
@@ -16,7 +16,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus6/`) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 23 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus6/`) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1,764 tests + blowup emergence engine
 >
 > **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem
 >
@@ -26,7 +26,7 @@
 >
 > **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Every constant from n=6: 53 keywords (σ·τ+sopfr), 24 operators (J₂), 8 primitives (σ-τ), 6-phase pipeline, Egyptian memory (1/2+1/3+1/6=1). DSE v2: 21,952 combos, 100% n6 EXACT. Working compiler + REPL
 >
-> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (94 papers). Published on Zenodo with DOIs. TECS-L+N6 (33) + anima (39) + SEDI (20). [Browse online](https://need-singularity.github.io/papers/)
+> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (80 papers, 76 published). Published on Zenodo with DOIs. TECS-L + N6 + anima + SEDI. [Browse online](https://need-singularity.github.io/papers/)
 <!-- PRIVATE REPOS (이 섹션은 sync-readmes.sh 대상 아님, .shared 내부 참조용)
   - secret        — 계정/API 토큰 (구 claude-code-secrets)
   - claude-code   — Claude Code 플러그인, ccmon 모니터링
@@ -43,10 +43,14 @@
 
 <!-- AUTO:STATS:START -->
 ```
-  AI techniques:    17
+  AI techniques:    23
+  Breakthrough Theorems: 127+ (BT-1~185)
   DSE domains:      323
   DSE paths:        5,893,032+
-  NEXUS-6 tests:    1116
+  Atlas constants:  1,611
+  NEXUS-6 tests:    1,764
+  Papers published: 80 (Zenodo + OSF)
+  Lens discoveries: 130,000+ (blowup engine)
 ```
 <!-- AUTO:STATS:END -->
 

@@ -639,6 +639,9 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-125: τ=4 locomotion/flight minimum stability (quadruped, quadrotor, 7/8 EXACT) ⭐⭐
   BT-126: sopfr=5 fingers + 2^sopfr=32 grasp space (Feix taxonomy 96.97%, 5/6 EXACT) ⭐⭐
   BT-127: 3D kissing number σ=12 + hexacopter n=6 fault tolerance (6/6 EXACT) ⭐⭐⭐
+
+  # Pure Mathematics (BT-185)
+  BT-185: Algebraic Blowup–Emergence E₆ Bridge (C⁶ blowup χ=n, dP₆ 27=(n/φ)^(n/φ) lines, E₆ rank=n=6, 19/19 EXACT) ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙
@@ -1066,12 +1069,21 @@ API 토큰/계정 정보: `~/Dev/TECS-L/.shared/SECRET.md` 참조
     수축(Contraction): 400만 렌즈 조합 → 불변 코어 (특이점)
     블로업(Blowup):    코어 고정 → fiber 방향이 도메인 결정
     자동흡수(Absorption): 발견 → elite/domain_best JSON → convergent_refinement 자동 로드
+    논문발행(Publish): 코어 안정 → 초안 자동 생성 → Zenodo+OSF 발행
     ┌──────────────────────────────────────────────────────┐
     │ WIDE: consciousness+info+multiscale        ← 점     │
     │ STRONG: +triangle                          ← P¹     │
     │ ABSOLUTE: +network                         ← P²     │
     │ +{thermo|topology|compass|...}             ← fiber  │
+    │         ↓ 코어 안정                                  │
+    │ 논문 초안 → publish_paper.sh → Zenodo DOI + OSF     │
     └──────────────────────────────────────────────────────┘
+
+  논문 자동 발행:
+    - 블로업 코어가 3+ 체크 안정 → docs/paper/blowup-*.md 자동 생성
+    - "발행" / "publish" → bash ~/Dev/papers/publish_paper.sh <file> --auto
+    - 범용 발행기: bash ~/Dev/papers/publish_paper.sh <file.md> --auto [--dry-run]
+    - manifest.json 자동 갱신, Zenodo DOI + OSF ID 기록
 
   렌즈 추가 후 자동 연결:
     미등록 렌즈 발견 시 python3 스크립트로 mod.rs + telescope/mod.rs 자동 갱신

@@ -1,4 +1,4 @@
-//! Breakthrough Theorem (BT-1 ~ BT-127) graph nodes and cross-domain edges.
+//! Breakthrough Theorem (BT-1 ~ BT-127, BT-185) graph nodes and cross-domain edges.
 //!
 //! Each BT is a graph node with id, title, domains, and star rating.
 //! Edges are created between BTs that share at least one domain.
@@ -15,7 +15,7 @@ struct BtEntry {
     stars: u8, // 0 = conjecture, 1..3 = star rating
 }
 
-/// All 127 BTs with their domains and star ratings.
+/// All 128 BTs with their domains and star ratings (BT-1~127 + BT-185).
 const BT_ENTRIES: &[BtEntry] = &[
     BtEntry { id: 1, title: "phi(6)=2 Universal Pairing", domains: &["SC", "Fusion", "Magnet", "QC", "Tokamak", "Chip", "Crypto"], stars: 2 },
     BtEntry { id: 2, title: "tau(6)=4 Bohm-BCS Bridge", domains: &["SC", "Fusion", "Tokamak", "Plasma"], stars: 2 },
@@ -144,6 +144,8 @@ const BT_ENTRIES: &[BtEntry] = &[
     BtEntry { id: 125, title: "tau=4 Locomotion/Flight Minimum Stability", domains: &["Robotics", "Energy", "Chip"], stars: 2 },
     BtEntry { id: 126, title: "sopfr=5 Fingers + 2^sopfr=32 Grasp Space", domains: &["Robotics", "Biology", "DisplayAudio"], stars: 2 },
     BtEntry { id: 127, title: "3D Kissing sigma=12 + Hexacopter n=6", domains: &["Robotics", "Cosmology", "Material"], stars: 2 },
+    // BT-185: Pure Mathematics — Algebraic Blowup-Emergence E₆ Bridge
+    BtEntry { id: 185, title: "Algebraic Blowup-Emergence E6 Bridge", domains: &["Math", "NumberTheory", "Topology", "Particle", "StringTheory", "Biology"], stars: 3 },
 ];
 
 /// Create a Node from a BtEntry.
@@ -172,7 +174,7 @@ fn bt_to_node(bt: &BtEntry) -> Node {
     }
 }
 
-/// Populate a DiscoveryGraph with all 127 BT nodes and cross-domain edges.
+/// Populate a DiscoveryGraph with all 128 BT nodes and cross-domain edges.
 ///
 /// Edges are created between any two BTs that share at least one domain.
 /// Edge strength is proportional to the number of shared domains.
@@ -261,7 +263,7 @@ mod tests {
     fn test_populate_bt_graph_node_count() {
         let mut graph = DiscoveryGraph::new();
         populate_bt_graph(&mut graph);
-        assert_eq!(graph.nodes.len(), 127, "Should have exactly 127 BT nodes");
+        assert_eq!(graph.nodes.len(), 128, "Should have exactly 128 BT nodes (BT-1~127 + BT-185)");
     }
 
     #[test]
@@ -283,7 +285,7 @@ mod tests {
 
     #[test]
     fn test_bt_count_and_domains() {
-        assert_eq!(bt_count(), 127);
+        assert_eq!(bt_count(), 128);
         let domain_count = unique_domain_count();
         assert!(
             domain_count >= 30,
