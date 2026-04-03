@@ -12,7 +12,7 @@ use std::collections::HashMap;
 
 use crate::alert::{Alert, AlertLevel};
 use crate::calibration::{
-    calibrate_all, generate_synthetic_datasets, update_hit_rates, CalibrationReport,
+    generate_synthetic_datasets, update_hit_rates, CalibrationReport,
 };
 use crate::genetic_prog::{Chromosome, Gene, Population};
 use crate::growth::metrics::NexusMetrics;

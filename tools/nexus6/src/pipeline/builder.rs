@@ -1,6 +1,6 @@
 /// Pipeline builder utilities — template pipelines and serialization.
 
-use super::{Pipeline, PipelineBuilder, PipelineStep};
+use super::{Pipeline, PipelineBuilder};
 
 /// Create a pipeline from a list of step descriptions (simple DSL).
 ///

@@ -36,6 +36,7 @@ impl Lcg {
     }
 
     /// Advance state and return a uniform f64 in [0.0, 1.0).
+    #[allow(dead_code)]
     fn next_unit(&mut self) -> f64 {
         self.next_centered() + 0.5
     }

@@ -1,7 +1,9 @@
 use std::collections::HashMap;
 use std::time::Instant;
 
-use crate::graph::persistence::DiscoveryGraph;
+use crate::graph::persistence::{self, DiscoveryGraph};
+use crate::graph::bt_nodes;
+use crate::graph::expanded_nodes;
 use crate::history::{recorder, stats, recommend, DomainStats};
 use crate::lens_forge::forge_engine::{self, ForgeConfig};
 use crate::ouroboros::{EvolutionEngine, EvolutionConfig, MetaLoop, MetaLoopConfig};
@@ -209,49 +211,112 @@ fn check_within_tolerance(value: f64, tolerance: f64) -> bool {
 }
 
 fn run_graph(domain: Option<String>, format: GraphFormat) -> Result<(), String> {
-    let graph = DiscoveryGraph::new(); // Would load from persistence in production
+    let graph_path = persistence::default_graph_path();
+    let mut graph = DiscoveryGraph::load(&graph_path)
+        .map_err(|e| format!("Failed to load graph: {}", e))?;
+
+    // If the graph is empty, populate with BT + expanded nodes and save
+    if graph.nodes.is_empty() {
+        bt_nodes::populate_bt_graph(&mut graph);
+        expanded_nodes::populate_expanded_graph(&mut graph);
+        if let Err(e) = graph.save(&graph_path) {
+            eprintln!("  Warning: could not save graph to {}: {}", graph_path, e);
+        }
+    }
 
     println!("=== NEXUS-6 Discovery Graph ===");
+    println!("  Path:  {}", graph_path);
     println!("  Nodes: {}  Edges: {}", graph.nodes.len(), graph.edges.len());
+
+    // Show node type breakdown
+    let type_counts = graph.node_type_counts();
+    let mut type_list: Vec<_> = type_counts.iter().collect();
+    type_list.sort_by(|a, b| b.1.cmp(a.1));
+    for (ntype, count) in &type_list {
+        println!("    {}: {}", ntype, count);
+    }
 
     if let Some(ref d) = domain {
         println!("  Filter: domain={}", d);
     }
 
-    if graph.nodes.is_empty() {
+    // Filter nodes/edges by domain if specified
+    let filtered_nodes: Vec<_> = if let Some(ref d) = domain {
+        let d_lower = d.to_lowercase();
+        graph.nodes.iter()
+            .filter(|n| n.domain.to_lowercase().contains(&d_lower))
+            .collect()
+    } else {
+        graph.nodes.iter().collect()
+    };
+
+    let filtered_node_ids: std::collections::HashSet<&str> =
+        filtered_nodes.iter().map(|n| n.id.as_str()).collect();
+
+    if filtered_nodes.is_empty() {
         println!();
-        println!("  (empty graph -- run 'nexus6 evolve <domain>' to populate)");
+        println!("  (no nodes matching filter -- run 'nexus6 evolve <domain>' to populate)");
         return Ok(());
     }
 
     match format {
         GraphFormat::Ascii => {
             println!();
-            for node in &graph.nodes {
+            // Show top hubs first
+            let hubs = graph.hubs(6); // min degree = n=6
+            if !hubs.is_empty() {
+                println!("  Top hubs (degree >= 6):");
+                for hub in hubs.iter().take(12) { // show top sigma=12
+                    println!("    {} (degree={})", hub.node_id, hub.degree);
+                }
+                println!();
+            }
+
+            // Show edges for filtered nodes (limit output to avoid flood)
+            let mut edge_count = 0;
+            for node in filtered_nodes.iter().take(24) { // limit to J2=24 nodes
                 let edges_out: Vec<_> = graph.edges.iter()
-                    .filter(|e| e.from == node.id)
+                    .filter(|e| e.from == node.id && filtered_node_ids.contains(e.to.as_str()))
                     .collect();
                 if edges_out.is_empty() {
                     println!("  [{}]", node.id);
                 } else {
-                    for edge in edges_out {
+                    for edge in edges_out.iter().take(6) { // limit edges per node to n=6
                         println!("  [{}] --{:?}--> [{}]", node.id, edge.edge_type, edge.to);
+                        edge_count += 1;
                     }
                 }
+            }
+            if edge_count > 0 || filtered_nodes.len() > 24 {
+                println!();
+                println!("  (showing {} of {} nodes, use --domain to filter)",
+                    filtered_nodes.len().min(24), filtered_nodes.len());
             }
         }
         GraphFormat::Dot => {
             println!();
             println!("digraph nexus6 {{");
             println!("  rankdir=LR;");
-            for node in &graph.nodes {
-                println!("  \"{}\" [label=\"{}\"];", node.id, node.id);
+            for node in &filtered_nodes {
+                let shape = match node.node_type {
+                    crate::graph::NodeType::Bt => "box",
+                    crate::graph::NodeType::Constant => "diamond",
+                    crate::graph::NodeType::Technique => "ellipse",
+                    crate::graph::NodeType::Domain => "hexagon",
+                    crate::graph::NodeType::Experiment => "octagon",
+                    _ => "circle",
+                };
+                println!("  \"{}\" [label=\"{}\" shape={}];", node.id, node.id, shape);
             }
             for edge in &graph.edges {
-                println!(
-                    "  \"{}\" -> \"{}\" [label=\"{:?}\"];",
-                    edge.from, edge.to, edge.edge_type
-                );
+                if filtered_node_ids.contains(edge.from.as_str())
+                    && filtered_node_ids.contains(edge.to.as_str())
+                {
+                    println!(
+                        "  \"{}\" -> \"{}\" [label=\"{:?}\"];",
+                        edge.from, edge.to, edge.edge_type
+                    );
+                }
             }
             println!("}}");
         }
@@ -389,6 +454,31 @@ fn run_evolve(domain: &str, max_cycles: usize, seeds: Vec<String>) -> Result<(),
     println!();
     println!("  Final graph: {} nodes, {} edges",
         engine.graph.nodes.len(), engine.graph.edges.len());
+
+    // Persist: load existing graph, merge evolve results, add BT + expanded nodes, save
+    let graph_path = persistence::default_graph_path();
+    let mut persisted = DiscoveryGraph::load(&graph_path)
+        .unwrap_or_else(|_| DiscoveryGraph::new());
+
+    // Add BT + expanded nodes if not already present
+    if persisted.nodes.is_empty() {
+        bt_nodes::populate_bt_graph(&mut persisted);
+        expanded_nodes::populate_expanded_graph(&mut persisted);
+    }
+
+    // Merge evolution results into persisted graph
+    persisted.merge(&engine.graph);
+
+    match persisted.save(&graph_path) {
+        Ok(()) => {
+            println!("  Graph saved to {} ({} nodes, {} edges)",
+                graph_path, persisted.nodes.len(), persisted.edges.len());
+        }
+        Err(e) => {
+            eprintln!("  Warning: could not save graph: {}", e);
+        }
+    }
+
     println!("  Evolution complete.");
 
     Ok(())

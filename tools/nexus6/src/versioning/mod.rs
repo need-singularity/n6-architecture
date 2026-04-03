@@ -2,8 +2,6 @@
 /// Discovery version control — git-like versioning for discoveries.
 /// No external crates.
 
-use std::collections::HashMap;
-
 #[derive(Debug, Clone)]
 pub struct DiscoveryVersion {
     pub id: String,

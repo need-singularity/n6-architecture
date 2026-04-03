@@ -320,7 +320,7 @@ fn attack_null_hypothesis(id: &str, discovery: &str, n6_score: f64, rng: &mut Rn
     }
 }
 
-fn attack_parameter_sweep(id: &str, discovery: &str, n6_score: f64, rng: &mut Rng) -> AdversarialResult {
+fn attack_parameter_sweep(id: &str, discovery: &str, n6_score: f64, _rng: &mut Rng) -> AdversarialResult {
     // Sweep key numerical parameters +/- 20% and check stability
     let values = extract_numbers(discovery);
     if values.is_empty() {
@@ -335,7 +335,7 @@ fn attack_parameter_sweep(id: &str, discovery: &str, n6_score: f64, rng: &mut Rn
 
     let mut stable_count = 0;
     for &v in &values {
-        let (orig_name, orig_q) = n6_check::n6_match(v);
+        let (_orig_name, orig_q) = n6_check::n6_match(v);
         if orig_q < 0.5 {
             stable_count += 1; // Not an n6 match to begin with
             continue;

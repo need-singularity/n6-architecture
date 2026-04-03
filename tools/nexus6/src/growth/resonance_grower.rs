@@ -3,7 +3,7 @@
 //! Identifies domain pairs that share n=6 constants, finds unexplored pairs,
 //! and generates search plans for new resonance discoveries.
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 
 // ── n=6 constants ────────────────────────────────────────────────────
 const N: usize = 6;               // the perfect number
@@ -11,9 +11,9 @@ const SIGMA: usize = 12;          // σ(6) = sum of divisors
 const PHI: usize = 2;             // φ(6) = Euler totient
 const TAU: usize = 4;             // τ(6) = number of divisors
 const J2: usize = 24;             // J₂(6) = Jordan totient
-const SOPFR: usize = 5;           // sopfr(6) = 2+3
-const SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
-const SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
+const _SOPFR: usize = 5;           // sopfr(6) = 2+3
+const _SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
+const _SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
 
 /// Total documented domains.
 const TOTAL_DOMAINS: usize = 32;

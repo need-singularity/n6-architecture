@@ -3,17 +3,16 @@
 //! Identifies constants from BTs not yet in the atlas, finds duplicate entries,
 //! and generates plans to grow the atlas systematically.
 
-use std::collections::HashMap;
-
 // ── n=6 constants ────────────────────────────────────────────────────
-const N: usize = 6;               // the perfect number
+#[allow(unused)]
+const N: usize = 6;                 // the perfect number
 const SIGMA: usize = 12;          // σ(6) = sum of divisors
-const PHI: usize = 2;             // φ(6) = Euler totient
+const _PHI: usize = 2;             // φ(6) = Euler totient
 const TAU: usize = 4;             // τ(6) = number of divisors
-const J2: usize = 24;             // J₂(6) = Jordan totient
-const SOPFR: usize = 5;           // sopfr(6) = 2+3
-const SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
-const SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
+const _J2: usize = 24;             // J₂(6) = Jordan totient
+const _SOPFR: usize = 5;           // sopfr(6) = 2+3
+const _SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
+const _SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
 
 /// Approximate total constants in math_atlas.json.
 const KNOWN_ATLAS_CONSTANTS: usize = 1100;

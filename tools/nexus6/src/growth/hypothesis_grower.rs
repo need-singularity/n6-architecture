@@ -7,13 +7,13 @@ use std::collections::{HashMap, HashSet};
 
 // ── n=6 constants ────────────────────────────────────────────────────
 const N: usize = 6;               // the perfect number
-const SIGMA: usize = 12;          // σ(6) = sum of divisors
+const _SIGMA: usize = 12;          // σ(6) = sum of divisors
 const PHI: usize = 2;             // φ(6) = Euler totient
 const TAU: usize = 4;             // τ(6) = number of divisors
 const J2: usize = 24;             // J₂(6) = Jordan totient
-const SOPFR: usize = 5;           // sopfr(6) = 2+3
-const SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
-const SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
+const _SOPFR: usize = 5;           // sopfr(6) = 2+3
+const _SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
+const _SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
 
 /// Total known BTs as of current codebase.
 const KNOWN_BT_COUNT: usize = 127;
@@ -440,11 +440,11 @@ mod tests {
     #[test]
     fn test_n6_constants_consistency() {
         // σ·φ = n·τ (the core identity)
-        assert_eq!(SIGMA * PHI, N * TAU);
+        assert_eq!(_SIGMA * PHI, N * TAU);
         // J₂ = σ·φ = 24
-        assert_eq!(J2, SIGMA * PHI);  // J₂(6) = 24, and σ·φ = 24
-        assert_eq!(SOPFR, 2 + 3);     // sopfr(6) = 2+3 = 5
-        assert_eq!(SIGMA_MINUS_PHI, SIGMA - PHI);
-        assert_eq!(SIGMA_MINUS_TAU, SIGMA - TAU);
+        assert_eq!(J2, _SIGMA * PHI);  // J₂(6) = 24, and σ·φ = 24
+        assert_eq!(_SOPFR, 2 + 3);     // sopfr(6) = 2+3 = 5
+        assert_eq!(_SIGMA_MINUS_PHI, _SIGMA - PHI);
+        assert_eq!(_SIGMA_MINUS_TAU, _SIGMA - TAU);
     }
 }

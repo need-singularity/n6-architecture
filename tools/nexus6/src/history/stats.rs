@@ -95,3 +95,84 @@ pub fn compute_lens_affinity(records: &[ScanRecord]) -> HashMap<(String, String)
         .map(|(pair, count)| (pair, count as f64 / total as f64))
         .collect()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn make_record(domain: &str, lenses: &[&str], discoveries: &[&str]) -> ScanRecord {
+        ScanRecord {
+            id: format!("{}-scan", domain),
+            timestamp: "0".into(),
+            domain: domain.into(),
+            lenses_used: lenses.iter().map(|s| s.to_string()).collect(),
+            discoveries: discoveries.iter().map(|s| s.to_string()).collect(),
+            consensus_level: 6, // n=6
+        }
+    }
+
+    #[test]
+    fn test_domain_stats_basic() {
+        let records = vec![
+            make_record("ai", &["consciousness", "topology"], &["D-1", "D-2"]),
+            make_record("ai", &["consciousness", "wave"], &[]),
+            make_record("ai", &["topology"], &["D-3"]),
+        ];
+        let stats = compute_domain_stats(&records);
+        assert_eq!(stats.total_scans, 3);
+        assert_eq!(stats.total_discoveries, 3);
+
+        // consciousness: used 2 times, contributed in 1 scan (first)
+        let cs = stats.lens_stats.get("consciousness").unwrap();
+        assert_eq!(cs.used, 2);
+        assert_eq!(cs.contributed, 1);
+        assert!((cs.hit_rate - 0.5).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_domain_stats_empty_records() {
+        let stats = compute_domain_stats(&[]);
+        assert_eq!(stats.total_scans, 0);
+        assert_eq!(stats.total_discoveries, 0);
+        assert!(stats.lens_stats.is_empty());
+    }
+
+    #[test]
+    fn test_lens_affinity_pairs() {
+        let records = vec![
+            make_record("ai", &["A", "B", "C"], &["D-1"]),
+            make_record("ai", &["A", "B"], &["D-2"]),
+            make_record("ai", &["C"], &[]), // no discoveries, ignored
+        ];
+        let affinity = compute_lens_affinity(&records);
+        // 2 discovery records total
+        // (A,B) appears in both => 2/2 = 1.0
+        let ab = affinity.get(&("A".to_string(), "B".to_string())).copied().unwrap_or(0.0);
+        assert!((ab - 1.0).abs() < 1e-10);
+
+        // (A,C) appears in first only => 1/2 = 0.5
+        let ac = affinity.get(&("A".to_string(), "C".to_string())).copied().unwrap_or(0.0);
+        assert!((ac - 0.5).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_lens_affinity_no_discoveries() {
+        let records = vec![
+            make_record("ai", &["A", "B"], &[]),
+        ];
+        let affinity = compute_lens_affinity(&records);
+        assert!(affinity.is_empty());
+    }
+
+    #[test]
+    fn test_domain_stats_all_lenses_have_stats() {
+        // 6 records with 6 distinct lenses (n=6)
+        let lenses = ["consciousness", "topology", "causal", "wave", "thermo", "evolution"];
+        let records: Vec<ScanRecord> = lenses.iter().enumerate().map(|(i, lens)| {
+            let disc = if i < 3 { vec!["d"] } else { vec![] };
+            make_record("fusion", &[lens], &disc)
+        }).collect();
+        let stats = compute_domain_stats(&records);
+        assert_eq!(stats.lens_stats.len(), 6); // n=6 lenses tracked
+    }
+}

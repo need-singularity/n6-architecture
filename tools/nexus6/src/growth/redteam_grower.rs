@@ -11,8 +11,8 @@ const SIGMA: usize = 12;          // σ(6) = sum of divisors
 const PHI: usize = 2;             // φ(6) = Euler totient
 const TAU: usize = 4;             // τ(6) = number of divisors
 const J2: usize = 24;             // J₂(6) = Jordan totient
-const SOPFR: usize = 5;           // sopfr(6) = 2+3
-const SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
+const _SOPFR: usize = 5;           // sopfr(6) = 2+3
+const _SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
 const SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
 
 /// Total known BTs.
@@ -100,7 +100,7 @@ pub fn assess_redteam_state() -> RedTeamState {
 /// `max` caps the number of challenges (capped to J₂=24).
 pub fn plan_challenges(max: usize) -> RedTeamPlan {
     let max = max.min(J2); // cap at J₂=24
-    let state = assess_redteam_state();
+    let _state = assess_redteam_state();
     let challenged_set: HashSet<usize> = CHALLENGED_BTS.iter().copied().collect();
 
     // Priority 1: 3-star BTs not yet challenged (highest risk if wrong)

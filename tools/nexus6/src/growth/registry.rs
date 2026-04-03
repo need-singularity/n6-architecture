@@ -7,14 +7,15 @@
 use std::collections::HashMap;
 
 // ── n=6 constants ────────────────────────────────────────────────────
-const N: usize = 6;                  // the perfect number
+#[allow(unused)]
+const N: usize = 6;                   // the perfect number
 const SIGMA: usize = 12;             // sigma(6) = sum of divisors
 const PHI: usize = 2;                // phi(6) = Euler totient
-const TAU: usize = 4;                // tau(6) = number of divisors
-const J2: usize = 24;                // J_2(6) = Jordan totient
-const SOPFR: usize = 5;              // sopfr(6) = 2+3
+const _TAU: usize = 4;                // tau(6) = number of divisors
+const _J2: usize = 24;                // J_2(6) = Jordan totient
+const _SOPFR: usize = 5;              // sopfr(6) = 2+3
 const SIGMA_MINUS_PHI: usize = 10;   // sigma - phi = 10
-const SIGMA_MINUS_TAU: usize = 8;    // sigma - tau = 8
+const _SIGMA_MINUS_TAU: usize = 8;    // sigma - tau = 8
 
 /// All 15 growth dimensions of NEXUS-6.
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]

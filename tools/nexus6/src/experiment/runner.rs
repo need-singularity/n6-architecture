@@ -111,19 +111,174 @@ impl Default for ExperimentRunner {
     }
 }
 
-// ─── Probe Data Generation ───────────────────────────────────────
+// ─── Domain-Specific Probe Data ─────────────────────────────────
 
-/// Generate synthetic f64 data from a domain/target string.
-/// Uses n=6 signature values as base, with domain hash as seed.
+/// Domain-specific seed data profiles.
+/// Each domain uses characteristic values from its actual field,
+/// producing genuinely different experiment outcomes.
+///
+/// Returns (base_values, intensity_bias, variability).
+///   intensity_bias: shifts default experiment intensity per domain
+///   variability: controls hash-noise amplitude (fraction of value)
+fn domain_profile(target: &str) -> (&'static [f64], f64, f64) {
+    let t = target.to_lowercase();
+
+    // Physics / fundamental constants
+    if t.contains("physics") || t.contains("particle") || t.contains("cosmology") {
+        static P: [f64; 12] = [0.511, 105.7, 135.0, 938.3, 137.036, 0.231,
+                                91.2, 125.1, 2.725, 13.8, 1.616e-10, 6.674];
+        return (&P, 0.0, 0.05);
+    }
+
+    // Biology / genetics
+    if t.contains("biology") || t.contains("bio") || t.contains("genetic") {
+        static P: [f64; 12] = [4.0, 64.0, 20.0, 3.0, 23.0, 3.4,
+                                2.0, 10.0, 46.0, 6.0, 1.5, 30000.0];
+        return (&P, 0.1, 0.15);
+    }
+
+    // Chip architecture / semiconductor
+    if t.contains("chip") || t.contains("semiconductor") || t.contains("gpu") || t.contains("cpu") {
+        static P: [f64; 12] = [144.0, 132.0, 80.0, 192.0, 288.0, 48.0,
+                                28.0, 7.0, 5.0, 3.0, 16384.0, 1024.0];
+        return (&P, -0.1, 0.02);
+    }
+
+    // Energy / power grid / solar
+    if t.contains("energy") || t.contains("power") || t.contains("grid") || t.contains("solar") {
+        static P: [f64; 12] = [50.0, 60.0, 6.0, 12.0, 24.0, 72.0,
+                                144.0, 1.34, 1.2, 120.0, 480.0, 48.0];
+        return (&P, 0.05, 0.08);
+    }
+
+    // Battery
+    if t.contains("battery") || t.contains("cathode") || t.contains("anode") {
+        static P: [f64; 12] = [6.0, 3.6, 3.7, 4.2, 372.0, 3579.0,
+                                3860.0, 96.0, 192.0, 24.0, 12.0, 48.0];
+        return (&P, 0.15, 0.1);
+    }
+
+    // Fusion / plasma / tokamak
+    if t.contains("fusion") || t.contains("plasma") || t.contains("tokamak") {
+        static P: [f64; 12] = [17.6, 6.2, 2.0, 5.3, 10.0, 150.0,
+                                1.0e8, 3.0, 0.1, 100.0, 15.0, 1.0];
+        return (&P, 0.2, 0.12);
+    }
+
+    // Consciousness / IIT
+    if t.contains("consciousness") || t.contains("iit") || t.contains("phi") {
+        static P: [f64; 12] = [0.3, 0.8, 1.5, 3.0, 2.718, 1.618,
+                                0.618, 6.0, 12.0, 3.14159, 0.5, 1.0];
+        return (&P, 0.0, 0.2);
+    }
+
+    // Quantum computing
+    if t.contains("quantum") {
+        static P: [f64; 12] = [1000.0, 0.999, 0.9999, 100.0, 0.001, 17.0,
+                                7.0, 3.0, 72.0, 53.0, 127.0, 433.0];
+        return (&P, -0.05, 0.03);
+    }
+
+    // Superconductor
+    if t.contains("superconductor") || t.contains("magnet") {
+        static P: [f64; 12] = [39.0, 93.0, 110.0, 203.0, 250.0, 15.0,
+                                45.0, 100.0, 0.16, 0.3, 4.2, 77.0];
+        return (&P, 0.1, 0.07);
+    }
+
+    // Robotics
+    if t.contains("robot") || t.contains("robotics") {
+        static P: [f64; 12] = [6.0, 5.0, 4.0, 12.0, 32.0, 2.0,
+                                96.97, 0.1, 1000.0, 50.0, 6.0, 3.0];
+        return (&P, 0.05, 0.1);
+    }
+
+    // Blockchain / crypto
+    if t.contains("blockchain") || t.contains("crypto") || t.contains("bitcoin") {
+        static P: [f64; 12] = [21000000.0, 6.0, 10.0, 2016.0, 12.0, 32.0,
+                                256.0, 128.0, 64.0, 2048.0, 0.5, 1.0];
+        return (&P, -0.15, 0.05);
+    }
+
+    // Network / protocol
+    if t.contains("network") || t.contains("protocol") || t.contains("tcp") {
+        static P: [f64; 12] = [7.0, 4.0, 1500.0, 65535.0, 100.0, 0.5,
+                                13.0, 80.0, 443.0, 8080.0, 53.0, 22.0];
+        return (&P, 0.0, 0.06);
+    }
+
+    // Display / audio
+    if t.contains("display") || t.contains("audio") || t.contains("music") {
+        static P: [f64; 12] = [12.0, 24.0, 48000.0, 440.0, 8.0, 16.0,
+                                60.0, 120.0, 144.0, 96000.0, 44100.0, 32.0];
+        return (&P, 0.1, 0.15);
+    }
+
+    // Software design
+    if t.contains("software") || t.contains("compiler") || t.contains("os") || t.contains("programming") {
+        static P: [f64; 12] = [5.0, 6.0, 12.0, 4.0, 23.0, 11.0,
+                                9.0, 7.0, 3.0, 8.0, 256.0, 1024.0];
+        return (&P, -0.1, 0.04);
+    }
+
+    // Pure mathematics
+    if t.contains("math") || t.contains("number") || t.contains("algebra") {
+        static P: [f64; 12] = [3.14159, 2.71828, 1.61803, 1.41421, 0.57722, 0.91597,
+                                1.20206, 6.0, 28.0, 496.0, 12.0, 24.0];
+        return (&P, 0.0, 0.18);
+    }
+
+    // Environment / ecology
+    if t.contains("environment") || t.contains("ecology") || t.contains("climate") {
+        static P: [f64; 12] = [6.0, 420.0, 12.0, 7.0, 1.5, 280.0,
+                                350.0, 8.0, 14.0, 1000.0, 100.0, 36.0];
+        return (&P, 0.1, 0.12);
+    }
+
+    // Material synthesis
+    if t.contains("material") || t.contains("synthesis") {
+        static P: [f64; 12] = [6.0, 12.011, 3.567, 1.42, 348.0, 614.0,
+                                4.36, 0.154, 2.46, 120.0, 109.5, 6.0];
+        return (&P, 0.05, 0.09);
+    }
+
+    // Cryptography
+    if t.contains("cryptograph") {
+        static P: [f64; 12] = [128.0, 192.0, 256.0, 2048.0, 4096.0, 512.0,
+                                160.0, 384.0, 521.0, 32.0, 48.0, 64.0];
+        return (&P, -0.1, 0.03);
+    }
+
+    // Learning algorithm / AI training
+    if t.contains("learning") || t.contains("training") || t.contains("ai-efficiency") || t.contains("ai") {
+        static P: [f64; 12] = [0.001, 8192.0, 12.0, 96.0, 4096.0, 0.1,
+                                2000.0, 0.9, 0.95, 128.0, 32000.0, 0.288];
+        return (&P, 0.05, 0.08);
+    }
+
+    // Default: generic n=6 profile (fallback — still hash-differentiated)
+    static DEFAULT: [f64; 12] = [6.0, 12.0, 24.0, 4.0, 2.0, 5.0,
+                                  8.0, 10.0, 1.0, 3.0, 7.0, 48.0];
+    (&DEFAULT, 0.0, 0.1)
+}
+
+/// Generate domain-specific probe data from a target string.
+/// Each domain uses characteristic values reflecting its actual properties,
+/// ensuring experiments produce genuinely different patterns per domain.
 fn generate_probe_data(target: &str) -> Vec<f64> {
     let seed: u64 = target.bytes().fold(0u64, |acc, b| acc.wrapping_mul(31).wrapping_add(b as u64));
-    // n=6 base constants: 6, 12, 24, 4, 2, 5
-    let base = [6.0_f64, 12.0, 24.0, 4.0, 2.0, 5.0];
-    let mut data = Vec::with_capacity(24); // J_2 = 24
-    for i in 0..24 {
-        let b = base[i % 6];
-        let noise = ((seed.wrapping_add(i as u64) % 1000) as f64) / 10000.0;
-        data.push(b + noise);
+    let (profile, _intensity_bias, variability) = domain_profile(target);
+
+    let profile_len = profile.len();
+    let data_len = profile_len.max(24); // At least J_2=24 data points
+    let mut data = Vec::with_capacity(data_len);
+
+    for i in 0..data_len {
+        let base = profile[i % profile_len];
+        // Scale-relative noise: magnitude proportional to value scale
+        let hash_val = seed.wrapping_mul(6364136223846793005).wrapping_add((i as u64).wrapping_mul(1442695040888963407));
+        let noise_frac = ((hash_val % 10000) as f64 / 10000.0 - 0.5) * 2.0 * variability;
+        data.push(base * (1.0 + noise_frac));
     }
     data
 }
@@ -504,4 +659,82 @@ fn detect_discoveries(
     }
 
     discoveries
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_generate_probe_data_length_j2() {
+        let data = generate_probe_data("ai");
+        assert_eq!(data.len(), 24);
+    }
+
+    #[test]
+    fn test_generate_probe_data_deterministic() {
+        let d1 = generate_probe_data("fusion");
+        let d2 = generate_probe_data("fusion");
+        assert_eq!(d1, d2);
+        let d3 = generate_probe_data("chip");
+        assert_ne!(d1, d3);
+    }
+
+    #[test]
+    fn test_runner_single_experiment() {
+        let runner = ExperimentRunner::new();
+        let config = ExperimentConfig::new(ExperimentType::Reversal, "energy");
+        let result = runner.run(&config);
+        assert_eq!(result.exp_type, ExperimentType::Reversal);
+        assert!(result.breakpoint.is_none());
+    }
+
+    #[test]
+    fn test_runner_run_all_22_types() {
+        let runner = ExperimentRunner::new();
+        let results = runner.run_all("ai");
+        assert_eq!(results.len(), 22);
+    }
+
+    #[test]
+    fn test_runner_tension_has_breakpoint() {
+        let runner = ExperimentRunner::new();
+        let config = ExperimentConfig::new(ExperimentType::Tension, "chip")
+            .with_intensity(1.0)
+            .with_duration(12);
+        let result = runner.run(&config);
+        assert_eq!(result.exp_type, ExperimentType::Tension);
+        assert!(result.breakpoint.is_some());
+    }
+
+    #[test]
+    fn test_apply_reversal_preserves_length() {
+        let data = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+        let reversed = apply_reversal(&data);
+        assert_eq!(reversed.len(), 6);
+        assert_eq!(reversed, vec![6.0, 5.0, 4.0, 3.0, 2.0, 1.0]);
+    }
+
+    #[test]
+    fn test_apply_overload_replicates_n6() {
+        let data = vec![6.0, 12.0, 24.0, 4.0];
+        let overloaded = apply_overload(&data, 6);
+        assert_eq!(overloaded.len(), 24);
+    }
+
+    #[test]
+    fn test_measure_metrics_empty_data() {
+        let m = measure_metrics(&[]);
+        assert_eq!(m.phi, 0.0);
+        assert_eq!(m.entropy, 0.0);
+        assert_eq!(m.n6_score, 0.0);
+    }
+
+    #[test]
+    fn test_measure_metrics_n6_constant_data() {
+        let data = vec![6.0; 12];
+        let m = measure_metrics(&data);
+        assert_eq!(m.n6_score, 1.0);
+        assert_eq!(m.stability, 1.0);
+    }
 }

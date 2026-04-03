@@ -120,3 +120,81 @@ pub fn validate(
         recommendation,
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use super::super::candidate_gen::CandidateSource;
+    use super::super::gap_analyzer::GapReport;
+
+    fn make_candidate(name: &str, domains: &[&str], confidence: f64) -> LensCandidate {
+        LensCandidate {
+            name: name.into(),
+            description: format!("Test lens {}", name),
+            source: CandidateSource::GapFill("test".into()),
+            domain_affinity: domains.iter().map(|s| s.to_string()).collect(),
+            complementary: vec![],
+            confidence,
+        }
+    }
+
+    fn make_gap(uncovered: &[&str], weak: &[(&str, f64)]) -> GapReport {
+        GapReport {
+            uncovered_domains: uncovered.iter().map(|s| s.to_string()).collect(),
+            weak_domains: weak.iter().map(|(d, s)| (d.to_string(), *s)).collect(),
+            suggested_categories: vec![],
+        }
+    }
+
+    #[test]
+    fn test_jaccard_similarity_identical() {
+        let a = vec!["ai".to_string(), "chip".to_string()];
+        assert!((jaccard_similarity(&a, &a) - 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_jaccard_similarity_disjoint() {
+        let a = vec!["ai".to_string(), "chip".to_string()];
+        let b = vec!["energy".to_string(), "fusion".to_string()];
+        assert_eq!(jaccard_similarity(&a, &b), 0.0);
+    }
+
+    #[test]
+    fn test_jaccard_similarity_partial() {
+        let a = vec!["ai".to_string(), "chip".to_string(), "energy".to_string()];
+        let b = vec!["ai".to_string(), "fusion".to_string(), "energy".to_string()];
+        // intersection=2 (ai,energy), union=4 => 0.5
+        assert!((jaccard_similarity(&a, &b) - 0.5).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_validate_unique_and_useful() {
+        let registry = LensRegistry::new();
+        let gap = make_gap(&["consciousness"], &[]);
+        let candidate = make_candidate("n6_test_unique_lens_xyz", &["consciousness"], 0.8);
+
+        let result = validate(&candidate, &registry, &gap, 0.8);
+        assert!(result.is_unique);
+        assert!(result.is_useful);
+        assert_eq!(result.recommendation, Recommendation::Accept);
+    }
+
+    #[test]
+    fn test_validate_not_useful_no_gap_coverage() {
+        let registry = LensRegistry::new();
+        let gap = make_gap(&["consciousness"], &[]); // only consciousness is uncovered
+        // Candidate covers "zzz_nonexistent" which is not an uncovered/weak domain
+        let candidate = make_candidate("n6_test_niche_lens", &["zzz_nonexistent"], 0.5);
+
+        let result = validate(&candidate, &registry, &gap, 0.8);
+        assert!(result.is_unique);
+        assert!(!result.is_useful);
+        assert!(matches!(result.recommendation, Recommendation::Modify(_)));
+    }
+
+    #[test]
+    fn test_jaccard_empty_sets() {
+        let empty: Vec<String> = vec![];
+        assert_eq!(jaccard_similarity(&empty, &empty), 0.0);
+    }
+}

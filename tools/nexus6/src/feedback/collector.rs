@@ -1,6 +1,6 @@
 /// Feedback collector utilities — batch operations and filtering.
 
-use super::{Feedback, FeedbackCollector, FeedbackStats};
+use super::{Feedback, FeedbackCollector};
 
 impl FeedbackCollector {
     /// Record multiple feedbacks at once.

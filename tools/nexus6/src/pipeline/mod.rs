@@ -178,3 +178,99 @@ pub fn deep_exploration(domain: &str) -> Pipeline {
         .publish()
         .build(&format!("deep-exploration-{}", domain))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_pipeline_builder_fluent() {
+        let pipeline = PipelineBuilder::new()
+            .scan("ai", 1)
+            .verify(0.05)
+            .filter(0.6)
+            .register()
+            .publish()
+            .build("test-pipeline");
+
+        assert_eq!(pipeline.name, "test-pipeline");
+        assert_eq!(pipeline.len(), 5);
+        assert!(!pipeline.is_empty());
+    }
+
+    #[test]
+    fn test_pipeline_step_names() {
+        assert_eq!(
+            PipelineStep::Scan { domain: "energy".into(), tier: 6 }.name(),
+            "Scan(energy, tier=6)"
+        );
+        assert_eq!(PipelineStep::RedTeam.name(), "RedTeam");
+        assert_eq!(
+            PipelineStep::Custom { name: "n6check".into(), description: "verify".into() }.name(),
+            "Custom(n6check)"
+        );
+    }
+
+    #[test]
+    fn test_standard_discovery_pipeline() {
+        let pipeline = standard_discovery("fusion");
+        assert!(pipeline.name.contains("fusion"));
+        // Standard pipeline: scan, verify, filter, experiment, red_team, register, publish = 7
+        assert_eq!(pipeline.len(), 7);
+    }
+
+    #[test]
+    fn test_deep_exploration_pipeline() {
+        let pipeline = deep_exploration("quantum");
+        assert!(pipeline.name.contains("quantum"));
+        // Deep: scan, verify, filter, exp, exp, red_team, register, publish = 8
+        assert_eq!(pipeline.len(), 8);
+    }
+
+    #[test]
+    fn test_execute_standard_pipeline() {
+        let pipeline = standard_discovery("ai");
+        let result = execute(&pipeline);
+        assert!(result.is_complete());
+        assert_eq!(result.steps_completed, pipeline.len());
+        assert!((result.completion_ratio() - 1.0).abs() < 1e-10);
+        // Should have some discoveries after register step
+        assert!(!result.discoveries.is_empty());
+    }
+
+    #[test]
+    fn test_execute_empty_pipeline() {
+        let pipeline = PipelineBuilder::new().build("empty");
+        let result = execute(&pipeline);
+        assert!(result.is_complete());
+        assert_eq!(result.completion_ratio(), 1.0); // 0/0 = 1.0 by convention
+        assert!(result.discoveries.is_empty());
+    }
+
+    #[test]
+    fn test_dsl_builder_valid() {
+        let steps = ["scan:ai:1", "verify:0.05", "filter:0.6", "register", "publish"];
+        let pipeline = builder::from_dsl("dsl-test", &steps).unwrap();
+        assert_eq!(pipeline.len(), 5);
+        assert_eq!(pipeline.name, "dsl-test");
+    }
+
+    #[test]
+    fn test_dsl_builder_invalid_step() {
+        let steps = ["scan:ai:1", "unknown_step"];
+        let result = builder::from_dsl("bad", &steps);
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_pipeline_result_completion_ratio() {
+        let result = PipelineResult {
+            steps_completed: 3,
+            total_steps: 6, // n=6
+            discoveries: vec![],
+            filtered_out: 0,
+        };
+        assert!((result.completion_ratio() - 0.5).abs() < 1e-10);
+        assert!(!result.is_complete());
+    }
+}

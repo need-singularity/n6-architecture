@@ -3,6 +3,8 @@ pub mod node;
 pub mod edge;
 pub mod structure;
 pub mod persistence;
+pub mod bt_nodes;
+pub mod expanded_nodes;
 
 pub use node::{Node, NodeType};
 pub use edge::{Edge, EdgeType};

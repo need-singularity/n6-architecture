@@ -7,6 +7,10 @@ pub enum NodeType {
     Bt,
     Prediction,
     AccelHypothesis,
+    Constant,
+    Technique,
+    Domain,
+    Experiment,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

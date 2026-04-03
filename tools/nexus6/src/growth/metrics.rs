@@ -3,8 +3,6 @@
 //! Gathers current health metrics: module counts, lens counts, code stats,
 //! test pass rates, and a composite health score.
 
-use std::collections::HashMap;
-
 use crate::telescope::registry::LensRegistry;
 use crate::telescope::Telescope;
 

@@ -106,3 +106,65 @@ pub fn analyze_gaps(
         suggested_categories,
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::history::recorder::ScanRecord;
+
+    #[test]
+    fn test_known_domains_count_24() {
+        // 24 = J_2 known domains
+        assert_eq!(KNOWN_DOMAINS.len(), 24);
+    }
+
+    #[test]
+    fn test_gap_analysis_with_full_registry() {
+        // The default registry has many lenses, so most domains should be covered
+        let registry = LensRegistry::new();
+        let gap = analyze_gaps(&registry, &[]);
+        // With 693+ lenses, very few domains should be uncovered
+        assert!(gap.uncovered_domains.len() < 12,
+            "Expected <12 uncovered, got {}", gap.uncovered_domains.len());
+    }
+
+    #[test]
+    fn test_gap_analysis_with_scan_history() {
+        let registry = LensRegistry::new();
+        // Create scan history for "ai" domain with discoveries
+        let records: Vec<ScanRecord> = (0..12).map(|i| { // sigma=12 scans
+            ScanRecord {
+                id: format!("scan-{}", i),
+                timestamp: "0".into(),
+                domain: "ai".into(),
+                lenses_used: vec!["consciousness".into()],
+                discoveries: if i < 6 { vec!["d".into()] } else { vec![] },
+                consensus_level: 6,
+            }
+        }).collect();
+        let gap = analyze_gaps(&registry, &records);
+        // ai should not be weak since it has good hit rate (6/12 = 0.5)
+        assert!(!gap.weak_domains.iter().any(|(d, _)| d == "ai"));
+    }
+
+    #[test]
+    fn test_gap_report_sorted_deterministic() {
+        let registry = LensRegistry::new();
+        let gap1 = analyze_gaps(&registry, &[]);
+        let gap2 = analyze_gaps(&registry, &[]);
+        assert_eq!(gap1.uncovered_domains, gap2.uncovered_domains);
+        assert_eq!(gap1.suggested_categories, gap2.suggested_categories);
+    }
+
+    #[test]
+    fn test_gap_suggested_categories_match_uncovered() {
+        let registry = LensRegistry::new();
+        let gap = analyze_gaps(&registry, &[]);
+        // Each uncovered domain should have a corresponding suggested category
+        for domain in &gap.uncovered_domains {
+            let expected = format!("{}_specialist", domain);
+            assert!(gap.suggested_categories.contains(&expected),
+                "Missing suggested category for uncovered domain: {}", domain);
+        }
+    }
+}

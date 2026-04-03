@@ -25,7 +25,7 @@ pub struct PerformanceAnalysis {
 /// Analyze performance based on agent reports and registry state.
 pub fn analyze_performance(reports: &[AgentReport]) -> PerformanceAnalysis {
     let registry = LensRegistry::new();
-    let all_lens_names: Vec<String> = registry.iter().map(|(name, _)| name.clone()).collect();
+    let _all_lens_names: Vec<String> = registry.iter().map(|(name, _)| name.clone()).collect();
 
     // Track which lenses were used across all reports
     let mut used_lenses: Vec<String> = Vec::new();

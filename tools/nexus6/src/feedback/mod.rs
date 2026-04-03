@@ -215,3 +215,119 @@ impl FeedbackCollector {
 pub fn update_weights_from_feedback(feedbacks: &[Feedback]) -> Vec<(String, f64)> {
     learner::compute_weight_updates(feedbacks)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_feedback_scores() {
+        assert_eq!(Feedback::Good { discovery_id: "d1".into() }.score(), 1.0);
+        assert_eq!(Feedback::Interesting { discovery_id: "d2".into() }.score(), 0.5);
+        assert_eq!(Feedback::Irrelevant { discovery_id: "d3".into() }.score(), -0.5);
+        assert_eq!(Feedback::Bad { discovery_id: "d4".into(), reason: "wrong".into() }.score(), -1.0);
+    }
+
+    #[test]
+    fn test_feedback_type_tags() {
+        let fb = Feedback::Good { discovery_id: "x".into() };
+        assert_eq!(fb.type_tag(), "good");
+        assert_eq!(fb.discovery_id(), "x");
+    }
+
+    #[test]
+    fn test_collector_record_and_stats() {
+        let mut collector = FeedbackCollector::new("/tmp/nexus6_test_feedback.jsonl");
+        assert!(collector.is_empty());
+
+        // Record 6 feedbacks (n=6)
+        collector.record(Feedback::Good { discovery_id: "d1".into() });
+        collector.record(Feedback::Good { discovery_id: "d2".into() });
+        collector.record(Feedback::Interesting { discovery_id: "d3".into() });
+        collector.record(Feedback::Bad { discovery_id: "d4".into(), reason: "noise".into() });
+        collector.record(Feedback::Irrelevant { discovery_id: "d5".into() });
+        collector.record(Feedback::Good { discovery_id: "d6".into() });
+
+        assert_eq!(collector.len(), 6);
+
+        let stats = collector.stats();
+        assert_eq!(stats.total, 6);
+        assert_eq!(stats.good, 3);
+        assert_eq!(stats.bad, 1);
+        assert_eq!(stats.interesting, 1);
+        assert_eq!(stats.irrelevant, 1);
+        assert!((stats.good_rate - 0.5).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_collector_net_score_and_top_discoveries() {
+        let mut collector = FeedbackCollector::new("/tmp/nexus6_test_fb2.jsonl");
+
+        // Discovery d1 gets mixed feedback
+        collector.record(Feedback::Good { discovery_id: "d1".into() });
+        collector.record(Feedback::Good { discovery_id: "d1".into() });
+        collector.record(Feedback::Bad { discovery_id: "d1".into(), reason: "x".into() });
+        // d2 gets only good
+        collector.record(Feedback::Good { discovery_id: "d2".into() });
+
+        assert!((collector.net_score("d1") - 1.0).abs() < 1e-10); // +1+1-1 = 1.0
+        assert!((collector.net_score("d2") - 1.0).abs() < 1e-10);
+        assert!((collector.net_score("d_nonexistent") - 0.0).abs() < 1e-10);
+
+        let top = collector.top_discoveries(6);
+        assert!(!top.is_empty());
+    }
+
+    #[test]
+    fn test_collector_serialize_parse_roundtrip() {
+        let mut collector = FeedbackCollector::new("/tmp/nexus6_test_fb3.jsonl");
+        collector.record(Feedback::Good { discovery_id: "sigma-lens-12".into() });
+        collector.record(Feedback::Bad { discovery_id: "phi-lens-2".into(), reason: "too noisy".into() });
+
+        // Save and reload
+        collector.save();
+
+        let mut collector2 = FeedbackCollector::new("/tmp/nexus6_test_fb3.jsonl");
+        collector2.load();
+        assert_eq!(collector2.len(), 2);
+
+        let stats = collector2.stats();
+        assert_eq!(stats.good, 1);
+        assert_eq!(stats.bad, 1);
+
+        // Cleanup
+        let _ = std::fs::remove_file("/tmp/nexus6_test_fb3.jsonl");
+    }
+
+    #[test]
+    fn test_learner_weight_updates() {
+        let feedbacks = vec![
+            Feedback::Good { discovery_id: "ai-lens-1".into() },
+            Feedback::Good { discovery_id: "ai-lens-2".into() },
+            Feedback::Bad { discovery_id: "chip-lens-1".into(), reason: "noise".into() },
+        ];
+        let updates = update_weights_from_feedback(&feedbacks);
+        // "ai" should have positive delta, "chip" should have negative
+        let ai_update = updates.iter().find(|(name, _)| name == "ai");
+        let chip_update = updates.iter().find(|(name, _)| name == "chip");
+        assert!(ai_update.is_some());
+        assert!(chip_update.is_some());
+        assert!(ai_update.unwrap().1 > 0.0);
+        assert!(chip_update.unwrap().1 < 0.0);
+    }
+
+    #[test]
+    fn test_learner_apply_updates_clamp() {
+        let current = vec![
+            ("consciousness".to_string(), 1.5),
+            ("topology".to_string(), 0.1),
+        ];
+        let updates = vec![
+            ("consciousness".to_string(), 0.8),  // 1.5+0.8=2.3 -> clamp to 2.0
+            ("topology".to_string(), -0.5),       // 0.1-0.5=-0.4 -> clamp to 0.0
+        ];
+        let result = learner::apply_updates(&current, &updates);
+        assert_eq!(result[0].1, 2.0); // clamped upper
+        assert_eq!(result[1].1, 0.0); // clamped lower
+    }
+}

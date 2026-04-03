@@ -7,6 +7,20 @@ use super::edge::Edge;
 use super::node::Node;
 use super::structure::{self, ClosedLoop, Convergence, Hub};
 
+/// Default persistence path for the discovery graph: ~/.nexus6/discovery_graph.json
+pub fn default_graph_path() -> String {
+    let home = std::env::var("HOME").unwrap_or_else(|_| ".".to_string());
+    format!("{}/.nexus6/discovery_graph.json", home)
+}
+
+/// Ensure the directory for the graph file exists.
+fn ensure_parent_dir(path: &str) -> io::Result<()> {
+    if let Some(parent) = Path::new(path).parent() {
+        fs::create_dir_all(parent)?;
+    }
+    Ok(())
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct DiscoveryGraph {
     pub nodes: Vec<Node>,
@@ -43,12 +57,40 @@ impl DiscoveryGraph {
 
     /// Atomic save: write to .tmp then rename to prevent corruption.
     pub fn save(&self, path: &str) -> io::Result<()> {
+        ensure_parent_dir(path)?;
         let tmp_path = format!("{}.tmp", path);
         let json = serde_json::to_string_pretty(self)
             .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
         fs::write(&tmp_path, &json)?;
         fs::rename(&tmp_path, path)?;
         Ok(())
+    }
+
+    /// Merge another graph into this one. Deduplicates nodes by id.
+    pub fn merge(&mut self, other: &DiscoveryGraph) {
+        let existing_ids: std::collections::HashSet<String> =
+            self.nodes.iter().map(|n| n.id.clone()).collect();
+
+        for node in &other.nodes {
+            if !existing_ids.contains(&node.id) {
+                self.nodes.push(node.clone());
+            }
+        }
+
+        // Add all edges (edge dedup is less critical; duplicates are tolerable)
+        for edge in &other.edges {
+            self.edges.push(edge.clone());
+        }
+    }
+
+    /// Count of nodes by type.
+    pub fn node_type_counts(&self) -> std::collections::HashMap<String, usize> {
+        let mut counts = std::collections::HashMap::new();
+        for node in &self.nodes {
+            let key = format!("{:?}", node.node_type);
+            *counts.entry(key).or_insert(0) += 1;
+        }
+        counts
     }
 
     /// Load from file, or return empty graph if file doesn't exist.

@@ -5,8 +5,8 @@
 
 use std::time::Instant;
 
-use crate::lens_forge::forge_engine::{self, ForgeConfig, ForgeResult};
-use crate::ouroboros::engine::{CycleResult, EvolutionConfig, EvolutionEngine};
+use crate::lens_forge::forge_engine::{self, ForgeConfig};
+use crate::ouroboros::engine::{EvolutionConfig, EvolutionEngine};
 use crate::ouroboros::convergence::ConvergenceStatus;
 use crate::telescope::registry::LensRegistry;
 use crate::history::recorder::ScanRecord;

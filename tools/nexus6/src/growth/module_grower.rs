@@ -15,7 +15,7 @@ const PHI: usize = 2;             // φ(6) = Euler totient
 const TAU: usize = 4;             // τ(6) = number of divisors
 const J2: usize = 24;             // J₂(6) = Jordan totient
 const SOPFR: usize = 5;           // sopfr(6) = 2+3
-const SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
+const _SIGMA_MINUS_TAU: usize = 8; // σ-τ = 8
 const SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
 
 // ── Maturity thresholds ──────────────────────────────────────────────
@@ -1038,7 +1038,7 @@ mod tests {
     #[test]
     fn test_format_growth_plan() {
         let state = assess_module_state();
-        let plan = plan_module_upgrades(&state, SIGMA_MINUS_TAU); // σ-τ=8
+        let plan = plan_module_upgrades(&state, _SIGMA_MINUS_TAU); // σ-τ=8
         let report = format_growth_plan(&plan);
         assert!(report.contains("Module Growth Plan"), "should have title");
         assert!(report.contains("Upgrades"), "should show upgrade count");

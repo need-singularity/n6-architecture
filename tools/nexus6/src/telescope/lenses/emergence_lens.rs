@@ -24,7 +24,7 @@ impl Lens for UemergenceLens {
         "T0"
     }
 
-    fn scan(&self, data: &[f64], n: usize, d: usize, shared: &SharedData) -> LensResult {
+    fn scan(&self, _data: &[f64], n: usize, _d: usize, shared: &SharedData) -> LensResult {
         if n < 3 {
             return HashMap::new();
         }

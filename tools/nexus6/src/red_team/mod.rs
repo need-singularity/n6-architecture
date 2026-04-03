@@ -2,3 +2,5 @@
 pub mod adversary;
 pub mod falsifier;
 pub mod devil_advocate;
+pub mod stress_tests;
+pub mod boundary_probes;

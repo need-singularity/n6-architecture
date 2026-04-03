@@ -11,10 +11,10 @@ const N: usize = 6;
 const SIGMA: usize = 12;
 const PHI: usize = 2;
 const TAU: usize = 4;
-const J2: usize = 24;
+const _J2: usize = 24;
 const SOPFR: usize = 5;
 const SIGMA_MINUS_PHI: usize = 10; // σ-φ = 10
-const SIGMA_MINUS_TAU: usize = 8;  // σ-τ = 8
+const _SIGMA_MINUS_TAU: usize = 8;  // σ-τ = 8
 
 /// Project root for prompt generation.
 const NEXUS_ROOT: &str = "/Users/ghost/Dev/n6-architecture/tools/nexus6/";
@@ -1044,7 +1044,7 @@ mod tests {
         assert!(existing > 0, "should have existing capabilities");
         assert!(missing > 0, "should have missing capabilities");
         // Total should be J₂=24 capabilities
-        assert_eq!(matrix.len(), J2, "capability matrix should have J2={} entries", J2);
+        assert_eq!(matrix.len(), _J2, "capability matrix should have J2={} entries", _J2);
     }
 
     #[test]

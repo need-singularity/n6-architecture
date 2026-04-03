@@ -69,6 +69,7 @@ impl Alert {
     }
 
     /// Deduplication key: (source_lens, pattern_id).
+    #[allow(dead_code)]
     fn dedup_key(&self) -> (&str, &str) {
         (&self.source_lens, &self.pattern_id)
     }

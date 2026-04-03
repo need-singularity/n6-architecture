@@ -8,6 +8,8 @@ pub enum EdgeType {
     Merges,
     Triggers,
     Refutes,
+    Contains,
+    Uses,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

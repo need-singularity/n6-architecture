@@ -52,7 +52,7 @@ pub struct LensToImplement {
 // ─── Metadata entry (lightweight copy of registry LensEntry for internal use) ─
 
 #[derive(Debug, Clone)]
-struct MetaLens {
+pub struct MetaLens {
     name: String,
     category: String,
     description: String,
@@ -106,6 +106,7 @@ const METADATA_SOURCES: &[(&str, &str, usize)] = &[
 ];
 
 /// Priority weights per source (higher = implement sooner).
+#[allow(dead_code)]
 fn source_priority(source_id: &str) -> f64 {
     match source_id {
         "n6_lenses" => 1.0,
@@ -420,7 +421,7 @@ IMPORTANT:
 
 /// Format an ASCII progress report showing implementation rate.
 pub fn format_growth_report(state: &LensGrowthState) -> String {
-    let pct = (state.implementation_rate * 100.0) as usize;
+    let _pct = (state.implementation_rate * 100.0) as usize;
     let bar_width: usize = 50;
     let filled = (state.implementation_rate * bar_width as f64) as usize;
     let empty = bar_width.saturating_sub(filled);
@@ -457,7 +458,7 @@ pub fn format_growth_report(state: &LensGrowthState) -> String {
 
     // Source breakdown.
     report.push_str("║  Source breakdown:                                           ║\n");
-    for &(source, label, count) in METADATA_SOURCES {
+    for &(_source, label, count) in METADATA_SOURCES {
         if count > 0 {
             report.push_str(&format!(
                 "║    {:<28} {:>3} lenses                ║\n",
