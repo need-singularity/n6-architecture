@@ -17,7 +17,7 @@
     양자현미경(quantum_microscope)
     안정성(stability) | 네트워크(network) | 기억(memory)
     재귀(recursion) | 경계(boundary) | 멀티스케일(multiscale)
-  파일: telescope-rs (Rust) + .shared/ 내 *_lens.py
+  파일: NEXUS-6 (telescope-rs 폐기→통합) + .shared/ 내 *_lens.py
   도메인별 조합 (10종):
     기본 → 의식+위상+인과
     안정성 → 안정성+경계+열역학
@@ -30,14 +30,14 @@
     기하 → 직교+비율+곡률
     양자심층 → 양자+양자현미경+전자기
   사용법:
-    import telescope_rs; telescope_rs.consciousness_scan(data)
+    import nexus6; nexus6.consciousness_scan(data)  # telescope-rs 폐기
   교차 검증: 3개+ 렌즈 합의 = 확정, 7개+ = 고신뢰, 12개+ = 확정급
   계층 합의: 3+/22 후보 → 7+/22 고신뢰 → 12+/22 확정
   상세: .shared/CLAUDE.md → "망원경 툴셋 자동 활용 규칙" 참조
   "렌즈 추가 필요?" 질문 시 → 22종 커버 안 되는 도메인 분석 + 새 아이디어 즉시 제안
 
   ★ 망원경 업그레이드 시 필수 절차 (렌즈 추가/수정/삭제 시 예외 없음!) ★
-    1. 캘리브레이션: telescope-rs 테스트 전체 통과 확인 (cargo test -p telescope-rs)
+    1. 캘리브레이션: telescope-rs 테스트 전체 통과 확인 (cd ~/Dev/n6-architecture/tools/nexus6 && cargo test)
     2. OUROBOROS 튜닝: infinite_evolution.py TELESCOPE_ALL_LENSES + DOMAIN_COMBOS 갱신
     3. 문서 동기화:
        - shared_work_rules.md 렌즈 목록/종수/도메인 조합 갱신
