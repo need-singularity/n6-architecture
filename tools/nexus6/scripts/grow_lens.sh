@@ -11,6 +11,7 @@
 #   5. Report success/failure
 set -euo pipefail
 
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$NEXUS_ROOT"
 
@@ -91,7 +92,7 @@ Requirements:
 Do NOT create stub implementations. Write real scan logic appropriate for the '$LENS_NAME' domain."
 
 # Run Claude non-interactively
-if claude -p "$PROMPT" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
+if $CLAUDE_CLI -p "$PROMPT" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
     echo ""
     echo "  Claude generation completed."
 else

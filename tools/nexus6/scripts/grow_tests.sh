@@ -5,6 +5,7 @@
 # If no module_name given, auto-detects the module with fewest tests.
 set -euo pipefail
 
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$NEXUS_ROOT"
 
@@ -92,7 +93,7 @@ Requirements:
 echo "Generating tests with Claude Code CLI..."
 echo ""
 
-if claude -p "$PROMPT" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
+if $CLAUDE_CLI -p "$PROMPT" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
     echo ""
     echo "Claude generation completed."
 else

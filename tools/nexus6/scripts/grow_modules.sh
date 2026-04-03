@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 # ═══════════════════════════════════════════════════════════════════════
 # NEXUS-6 Module Growth — Auto-upgrade modules using Claude Code CLI
 # ═══════════════════════════════════════════════════════════════════════
@@ -324,7 +325,7 @@ upgrade_module() {
 
   echo "  [RUN] Invoking Claude CLI..."
   local claude_exit=0
-  claude -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>&1 | tail -20 || claude_exit=$?
+  $CLAUDE_CLI -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>&1 | tail -20 || claude_exit=$?
 
   if [ "$claude_exit" -ne 0 ]; then
     echo "  [FAIL] Claude CLI exited with code $claude_exit"

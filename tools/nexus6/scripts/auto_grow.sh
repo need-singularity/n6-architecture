@@ -11,6 +11,7 @@
 #   6. Report   — log growth metrics
 set -euo pipefail
 
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRIPT_DIR="$NEXUS_ROOT/scripts"
 LOG_FILE="$SCRIPT_DIR/growth_log.jsonl"
@@ -154,7 +155,7 @@ execute_growth_action() {
 Read the test output from 'cargo test', identify the failures, and fix them. \
 Only fix test-related issues. Do not change core logic unless a bug is obvious. \
 Run 'cargo test' to verify your fixes."
-            claude -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
+            $CLAUDE_CLI -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
             ;;
 
         fix_warnings)
@@ -162,7 +163,7 @@ Run 'cargo test' to verify your fixes."
             local prompt="In the NEXUS-6 project at $NEXUS_ROOT, fix compiler warnings. \
 Run 'cargo check 2>&1' to see warnings, then fix them (unused imports, dead code, etc.). \
 Do NOT remove any public API — only clean up warnings. Run 'cargo check' to verify."
-            claude -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
+            $CLAUDE_CLI -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
             ;;
 
         impl_lens)

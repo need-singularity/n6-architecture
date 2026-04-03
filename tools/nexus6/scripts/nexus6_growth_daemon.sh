@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 # NEXUS-6 Universal Growth Daemon
 # ================================
 # Master coordinator that cycles through ALL 15 growth dimensions,
@@ -286,13 +288,13 @@ grow_architecture() {
 grow_lenses() {
     log_info "  Action: Implement new lenses (batch of 6)"
     bash "$SCRIPT_DIR/grow_lenses.sh" --batch 6 2>/dev/null || \
-    claude -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, implement 6 new telescope lenses. Check src/telescope/lenses/ for existing lenses and src/telescope/registry.rs for registered but unimplemented lenses. For each new lens: create the .rs file implementing the Lens trait with scan() method, add n=6 constants, add 2+ tests. Register all new lenses." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, implement 6 new telescope lenses. Check src/telescope/lenses/ for existing lenses and src/telescope/registry.rs for registered but unimplemented lenses. For each new lens: create the .rs file implementing the Lens trait with scan() method, add n=6 constants, add 2+ tests. Register all new lenses." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_modules() {
     log_info "  Action: Upgrade module maturity"
-    claude -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, find the module with lowest test-to-code ratio (fewest tests per line of code). Add at least 8 (sigma-tau=8) meaningful tests to it. Each test should verify a specific behavior. Use n=6 constants in test data. Run cargo test to verify." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, find the module with lowest test-to-code ratio (fewest tests per line of code). Add at least 8 (sigma-tau=8) meaningful tests to it. Each test should verify a specific behavior. Use n=6 constants in test data. Run cargo test to verify." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
@@ -304,61 +306,61 @@ grow_tests() {
 
 grow_hypotheses() {
     log_info "  Action: Generate new breakthrough theorems"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, analyze docs/breakthrough-theorems.md and docs/atlas-constants.md. Find patterns that could lead to new breakthrough theorems (BT-128+). Generate 3 new BT candidates with n=6 expressions, cross-domain validation, and EXACT/CLOSE grades. Write them to docs/breakthrough-theorems.md." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, analyze docs/breakthrough-theorems.md and docs/atlas-constants.md. Find patterns that could lead to new breakthrough theorems (BT-128+). Generate 3 new BT candidates with n=6 expressions, cross-domain validation, and EXACT/CLOSE grades. Write them to docs/breakthrough-theorems.md." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_dse() {
     log_info "  Action: Explore unexplored DSE domain"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, check docs/dse-map.toml for unexplored DSE domains. Pick one unexplored domain, create its TOML definition in tools/universal-dse/domains/, and run the DSE exploration. Record results in docs/dse-map.toml." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, check docs/dse-map.toml for unexplored DSE domains. Pick one unexplored domain, create its TOML definition in tools/universal-dse/domains/, and run the DSE exploration. Record results in docs/dse-map.toml." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_experiments() {
     log_info "  Action: Create new experiment"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, look at experiments/ and find techniques/ that don't have corresponding experiments yet. Create a new experiment file that tests an untested technique. Run it and record results." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, look at experiments/ and find techniques/ that don't have corresponding experiments yet. Create a new experiment file that tests an untested technique. Run it and record results." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_calculators() {
     log_info "  Action: Create new calculator"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, check .shared/calc/ and tools/ for coverage gaps. Identify a domain that needs a calculator (e.g., a BT that lacks numerical verification). Create a Rust calculator in tools/ following CALCULATOR_RULES.md." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, check .shared/calc/ and tools/ for coverage gaps. Identify a domain that needs a calculator (e.g., a BT that lacks numerical verification). Create a Rust calculator in tools/ following CALCULATOR_RULES.md." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_cross_resonance() {
     log_info "  Action: Discover cross-domain resonances"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, read docs/cross-domain-resonance-2026-03-31.md and docs/atlas-constants.md. Find NEW cross-domain resonances where the same n=6 constant appears in 3+ domains but isn't documented yet. Add discoveries to the resonance file." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, read docs/cross-domain-resonance-2026-03-31.md and docs/atlas-constants.md. Find NEW cross-domain resonances where the same n=6 constant appears in 3+ domains but isn't documented yet. Add discoveries to the resonance file." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_knowledge_graph() {
     log_info "  Action: Expand knowledge graph"
-    claude -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, enhance src/graph/ by adding new discovery nodes from recent BTs (BT-118+) and experiments. Connect them via cross-domain edges. Add tests for new nodes." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, enhance src/graph/ by adding new discovery nodes from recent BTs (BT-118+) and experiments. Connect them via cross-domain edges. Add tests for new nodes." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_red_team() {
     log_info "  Action: Add adversarial challenges"
-    claude -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, enhance src/red_team/ by adding new adversarial challenges. Pick 3 BTs from docs/breakthrough-theorems.md and generate devil's advocate challenges. Implement challenge functions with tests." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, enhance src/red_team/ by adding new adversarial challenges. Pick 3 BTs from docs/breakthrough-theorems.md and generate devil's advocate challenges. Implement challenge functions with tests." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_atlas() {
     log_info "  Action: Expand math atlas"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, scan docs/ for n=6 constants that aren't in docs/atlas-constants.md yet. Add newly discovered constants with their BT references and domain tags. Then run: python3 .shared/scan_math_atlas.py --save --summary" \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, scan docs/ for n=6 constants that aren't in docs/atlas-constants.md yet. Add newly discovered constants with their BT references and domain tags. Then run: python3 .shared/scan_math_atlas.py --save --summary" \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_documentation() {
     log_info "  Action: Improve documentation"
-    claude -p "In /Users/ghost/Dev/n6-architecture/, find modules or features that lack documentation. Pick the most important undocumented feature and add clear documentation (README sections, inline comments, or doc files). Focus on tools/nexus6/ which is the most active." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/, find modules or features that lack documentation. Pick the most important undocumented feature and add clear documentation (README sections, inline comments, or doc files). Focus on tools/nexus6/ which is the most active." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 
 grow_integration() {
     log_info "  Action: Add integration tests"
-    claude -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, find two modules that should work together but have no integration tests. Create integration tests that verify cross-module functionality. Add them to a tests/ directory or as #[cfg(test)] in relevant modules." \
+    $CLAUDE_CLI -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, find two modules that should work together but have no integration tests. Create integration tests that verify cross-module functionality. Add them to a tests/ directory or as #[cfg(test)] in relevant modules." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
 

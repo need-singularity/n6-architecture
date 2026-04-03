@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-# ═══════════════════════════════════════════════════════════════════════
+
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"# ═══════════════════════════════════════════════════════════════════════
 # NEXUS-6 Architecture Growth
 # Usage: ./grow_architecture.sh [--dry-run] [--max-actions N]
 #
@@ -358,7 +359,7 @@ After changes, run: cd $NEXUS_ROOT && ~/.cargo/bin/cargo check && ~/.cargo/bin/c
 
     # Execute Claude Code CLI
     log_info "  Invoking Claude Code CLI..."
-    if claude -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
+    if $CLAUDE_CLI -p "$prompt" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
         log_info "  Claude Code CLI completed successfully."
         return 0
     else

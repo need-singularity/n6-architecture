@@ -22,6 +22,7 @@
 
 set -euo pipefail
 
+CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$NEXUS_ROOT"
 
@@ -371,7 +372,7 @@ Do NOT create stubs. Write real mathematical analysis logic."
 
     # Run Claude
     echo "  Running Claude CLI..."
-    if claude -p "$PROMPT" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
+    if $CLAUDE_CLI -p "$PROMPT" --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null; then
         echo "  Claude generation completed."
     else
         echo "  ERROR: Claude CLI failed."
