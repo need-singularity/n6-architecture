@@ -26,6 +26,8 @@
 >
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (94 papers). Published on Zenodo with DOIs. TECS-L+N6 (33) + anima (39) + SEDI (20). [Browse online](https://need-singularity.github.io/papers/)
 
+> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Central Discovery Engine & Infrastructure Hub. 130+ Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 7 repos. Auto-sync across ecosystem
+
 <!-- PRIVATE REPOS (이 섹션은 sync-readmes.sh 대상 아님, .shared 내부 참조용)
   - secret        — 계정/API 토큰 (구 claude-code-secrets)
   - claude-code   — Claude Code 플러그인, ccmon 모니터링
