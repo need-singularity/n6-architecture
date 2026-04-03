@@ -1,3 +1,4 @@
+//! Alert notification system for growth events and anomalies.
 /// Alert & Notification System — real-time alerting when telescope lenses
 /// detect significant patterns during discovery scans.
 

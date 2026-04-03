@@ -1,3 +1,4 @@
+//! Project data ingestion from TOML, Markdown, Python, JSON, CSV.
 pub mod crawler;
 pub mod csv_reader;
 pub mod json_reader;

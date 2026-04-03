@@ -1,3 +1,4 @@
+//! OUROBOROS self-evolution loop for continuous discovery.
 pub mod engine;
 pub mod mutation;
 pub mod convergence;

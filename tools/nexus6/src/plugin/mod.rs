@@ -1,3 +1,4 @@
+//! Plugin system for extending NEXUS-6 with external modules.
 /// Plugin system — discover and manage NEXUS-6 plugins via TOML manifests.
 pub mod registry;
 pub mod loader;

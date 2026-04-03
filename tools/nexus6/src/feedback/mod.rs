@@ -1,3 +1,4 @@
+//! Feedback loop for growth quality tracking and adjustment.
 /// Feedback loop — collect user feedback on discoveries to improve lens weights.
 pub mod collector;
 pub mod learner;

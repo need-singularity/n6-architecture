@@ -1,3 +1,4 @@
+//! Growth dimension tracking and optimization across 15 metrics.
 pub mod metrics;
 pub mod benchmark;
 pub mod tracker;

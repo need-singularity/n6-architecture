@@ -1,3 +1,4 @@
+//! Event system for inter-module communication and triggers.
 /// Event system — publish-subscribe event bus for NEXUS-6 discovery engine.
 pub mod bus;
 pub mod handler;

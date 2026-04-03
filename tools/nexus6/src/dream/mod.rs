@@ -1,3 +1,4 @@
+//! Speculative hypothesis generation via stochastic exploration.
 /// Dream Engine — recombines past discoveries into novel hypotheses.
 /// Uses a simple deterministic hash-based "randomness" (no external crates).
 

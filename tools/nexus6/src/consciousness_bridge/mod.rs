@@ -1,3 +1,4 @@
+//! Bridge to consciousness analysis frameworks and Phi metrics.
 /// Consciousness Bridge — connects NEXUS-6 to the anima consciousness engine.
 /// Reads anima project files (Phi values, consciousness laws) from disk.
 

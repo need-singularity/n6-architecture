@@ -1,3 +1,4 @@
+//! Reward signal computation for reinforcement-based growth.
 /// Reward / Scoring System — score lens performance and discoveries
 /// for prioritization within the NEXUS-6 discovery engine.
 

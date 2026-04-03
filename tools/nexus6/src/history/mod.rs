@@ -1,3 +1,4 @@
+//! Scan history tracking and lens performance analytics.
 pub mod recorder;
 pub mod stats;
 pub mod recommend;

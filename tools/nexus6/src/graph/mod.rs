@@ -1,3 +1,4 @@
+//! Discovery graph with BT nodes, cross-domain edges, and hubs.
 pub mod node;
 pub mod edge;
 pub mod structure;

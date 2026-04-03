@@ -1,3 +1,4 @@
+//! GPU architecture analysis and n=6 SM/HBM verification.
 pub mod buffer_pool;
 pub mod fallback;
 

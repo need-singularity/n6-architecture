@@ -1,3 +1,4 @@
+//! Version tracking for lens definitions and scan protocols.
 /// Discovery version control — git-like versioning for discoveries.
 /// No external crates.
 

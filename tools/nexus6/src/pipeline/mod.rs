@@ -1,3 +1,4 @@
+//! Data processing pipeline for scan-analyze-verify workflows.
 /// Pipeline builder — composable discovery pipelines for NEXUS-6.
 pub mod builder;
 pub mod executor;

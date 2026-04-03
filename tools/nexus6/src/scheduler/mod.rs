@@ -1,3 +1,4 @@
+//! Task scheduling for growth cycles and background jobs.
 /// Periodic task scheduler — time-based scan automation.
 /// No external crates.
 

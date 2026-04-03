@@ -1,3 +1,4 @@
+//! Distributed computing support for parallel scans.
 /// Distributed computing — domain-parallel scan scheduling across worker nodes.
 /// No external crates; pure std.
 

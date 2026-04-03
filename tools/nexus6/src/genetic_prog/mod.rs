@@ -1,3 +1,4 @@
+//! Genetic programming engine for lens evolution.
 /// Genetic Programming for Lens Evolution — use evolutionary algorithms
 /// to combine and evolve lens parameters for optimal discovery pipelines.
 ///

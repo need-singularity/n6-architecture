@@ -1,3 +1,4 @@
+//! REST API interface for external tool integration.
 /// REST API server — request routing without external crates.
 /// Only handle_request is implemented; TCP listener deferred.
 

@@ -1,3 +1,4 @@
+//! Code generation templates for lenses, tests, and experiments.
 /// Experiment template store — reusable experiment blueprints.
 /// No external crates.
 

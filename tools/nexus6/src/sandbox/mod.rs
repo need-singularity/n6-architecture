@@ -1,3 +1,4 @@
+//! Sandboxed execution environment for safe code generation.
 /// Safe experiment sandbox — copy-on-write data isolation.
 /// No external crates.
 

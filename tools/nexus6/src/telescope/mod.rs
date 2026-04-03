@@ -1,3 +1,4 @@
+//! Telescope scan engine with 1013 lenses across 22 core types.
 pub mod accel_lenses_a;
 pub mod accel_lenses_b;
 pub mod accel_lenses_c;
