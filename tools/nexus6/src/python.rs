@@ -510,6 +510,253 @@ fn auto(
 }
 
 // ---------------------------------------------------------------------------
+// PyScanResult — raw data telescope scan (telescope-rs replacement)
+// ---------------------------------------------------------------------------
+#[pyclass(name = "ScanResult")]
+#[derive(Clone)]
+struct PyScanResult {
+    #[pyo3(get)]
+    lens_count: usize,
+    #[pyo3(get)]
+    lens_names: Vec<String>,
+    /// lens_name -> metric_name -> values
+    results: HashMap<String, HashMap<String, Vec<f64>>>,
+}
+
+#[pymethods]
+impl PyScanResult {
+    /// Get results for a specific lens.
+    fn get_lens<'py>(&self, py: Python<'py>, name: &str) -> PyResult<Bound<'py, PyDict>> {
+        let dict = PyDict::new_bound(py);
+        if let Some(lr) = self.results.get(name) {
+            for (metric, values) in lr {
+                dict.set_item(metric, values.clone())?;
+            }
+        }
+        Ok(dict)
+    }
+
+    /// Get all metric names across all lenses.
+    fn all_metrics(&self) -> Vec<String> {
+        let mut metrics = std::collections::HashSet::new();
+        for lr in self.results.values() {
+            for metric in lr.keys() {
+                metrics.insert(metric.clone());
+            }
+        }
+        let mut v: Vec<String> = metrics.into_iter().collect();
+        v.sort();
+        v
+    }
+
+    /// Get results for a specific metric across all lenses.
+    fn get_metric<'py>(&self, py: Python<'py>, metric: &str) -> PyResult<Bound<'py, PyDict>> {
+        let dict = PyDict::new_bound(py);
+        for (lens_name, lr) in &self.results {
+            if let Some(values) = lr.get(metric) {
+                dict.set_item(lens_name, values.clone())?;
+            }
+        }
+        Ok(dict)
+    }
+
+    /// Count how many lenses returned non-empty results.
+    fn active_lens_count(&self) -> usize {
+        self.results.values().filter(|lr| !lr.is_empty()).count()
+    }
+
+    fn __repr__(&self) -> String {
+        let active = self.active_lens_count();
+        format!(
+            "ScanResult(lenses={}, active={}, metrics={})",
+            self.lens_count,
+            active,
+            self.all_metrics().len()
+        )
+    }
+}
+
+// ---------------------------------------------------------------------------
+// PyConsensusResult
+// ---------------------------------------------------------------------------
+#[pyclass(name = "ConsensusResult")]
+#[derive(Clone)]
+struct PyConsensusResult {
+    #[pyo3(get)]
+    pattern_id: String,
+    #[pyo3(get)]
+    agreeing_lenses: Vec<String>,
+    #[pyo3(get)]
+    weighted_score: f64,
+    #[pyo3(get)]
+    level: String,
+}
+
+#[pymethods]
+impl PyConsensusResult {
+    fn __repr__(&self) -> String {
+        format!(
+            "ConsensusResult(pattern='{}', lenses={}, score={:.2}, level='{}')",
+            self.pattern_id,
+            self.agreeing_lenses.len(),
+            self.weighted_score,
+            self.level
+        )
+    }
+}
+
+// ---------------------------------------------------------------------------
+// scan() — raw data telescope scan (telescope-rs complete replacement)
+// ---------------------------------------------------------------------------
+
+/// Scan raw data through all 25 implemented lenses (telescope-rs replacement).
+///
+/// Args:
+///   data: flat list of floats (row-major, n points × d dimensions)
+///   n: number of data points
+///   d: number of dimensions per point
+///
+/// Returns: ScanResult with per-lens results
+///
+/// Example:
+///   result = nexus6.scan([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], n=3, d=2)
+///   print(result.lens_names)
+///   print(result.get_lens("ConsciousnessLens"))
+#[pyfunction]
+fn scan(data: Vec<f64>, n: usize, d: usize) -> PyResult<PyScanResult> {
+    if data.len() != n * d {
+        return Err(pyo3::exceptions::PyValueError::new_err(format!(
+            "data length {} != n*d = {}*{} = {}",
+            data.len(), n, d, n * d
+        )));
+    }
+
+    let telescope = crate::telescope::Telescope::new();
+    let raw_results = telescope.scan_all(&data, n, d);
+
+    let lens_names: Vec<String> = raw_results.keys().cloned().collect();
+    let lens_count = telescope.lens_count();
+
+    Ok(PyScanResult {
+        lens_count,
+        lens_names,
+        results: raw_results,
+    })
+}
+
+/// Scan and compute weighted consensus across all lenses.
+///
+/// Args:
+///   data: flat list of floats (row-major)
+///   n: number of points
+///   d: dimensions per point
+///   hit_rates: optional dict of lens_name -> weight (0.0..1.0)
+///
+/// Returns: list of ConsensusResult (patterns agreed on by 3+ lenses)
+#[pyfunction]
+#[pyo3(signature = (data, n, d, hit_rates=None))]
+fn scan_consensus(
+    data: Vec<f64>,
+    n: usize,
+    d: usize,
+    hit_rates: Option<HashMap<String, f64>>,
+) -> PyResult<Vec<PyConsensusResult>> {
+    if data.len() != n * d {
+        return Err(pyo3::exceptions::PyValueError::new_err(format!(
+            "data length {} != n*d = {}",
+            data.len(), n * d
+        )));
+    }
+
+    let telescope = crate::telescope::Telescope::new();
+    let raw_results = telescope.scan_all(&data, n, d);
+    let rates = hit_rates.unwrap_or_default();
+
+    let consensus =
+        crate::telescope::consensus::weighted_consensus(&raw_results, &rates);
+
+    Ok(consensus
+        .into_iter()
+        .map(|cr| {
+            let level = match cr.level {
+                crate::telescope::consensus::ConsensusLevel::Candidate => "Candidate",
+                crate::telescope::consensus::ConsensusLevel::High => "High",
+                crate::telescope::consensus::ConsensusLevel::Confirmed => "Confirmed",
+            };
+            PyConsensusResult {
+                pattern_id: cr.pattern_id,
+                agreeing_lenses: cr.agreeing_lenses,
+                weighted_score: cr.weighted_score,
+                level: level.to_string(),
+            }
+        })
+        .collect())
+}
+
+/// Scan data through all lenses and return a comprehensive analysis dict.
+///
+/// This is the all-in-one function replacing telescope-rs's scan + consensus + n6_check.
+///
+/// Returns dict with:
+///   scan: ScanResult
+///   consensus: list of ConsensusResult
+///   n6_exact_ratio: float
+///   active_lenses: int
+///   total_lenses: int
+#[pyfunction]
+#[pyo3(signature = (data, n, d))]
+fn analyze<'py>(py: Python<'py>, data: Vec<f64>, n: usize, d: usize) -> PyResult<Bound<'py, PyDict>> {
+    if data.len() != n * d {
+        return Err(pyo3::exceptions::PyValueError::new_err(format!(
+            "data length {} != n*d = {}",
+            data.len(), n * d
+        )));
+    }
+
+    let telescope = crate::telescope::Telescope::new();
+    let raw_results = telescope.scan_all(&data, n, d);
+    let rates = HashMap::new();
+    let consensus_results = crate::telescope::consensus::weighted_consensus(&raw_results, &rates);
+    let n6_ratio = n6_check_mod::n6_exact_ratio(&data);
+
+    let lens_names: Vec<String> = raw_results.keys().cloned().collect();
+    let active = raw_results.values().filter(|lr| !lr.is_empty()).count();
+    let total = telescope.lens_count();
+
+    let scan_result = PyScanResult {
+        lens_count: total,
+        lens_names,
+        results: raw_results,
+    };
+
+    let py_consensus: Vec<PyConsensusResult> = consensus_results
+        .into_iter()
+        .map(|cr| {
+            let level = match cr.level {
+                crate::telescope::consensus::ConsensusLevel::Candidate => "Candidate",
+                crate::telescope::consensus::ConsensusLevel::High => "High",
+                crate::telescope::consensus::ConsensusLevel::Confirmed => "Confirmed",
+            };
+            PyConsensusResult {
+                pattern_id: cr.pattern_id,
+                agreeing_lenses: cr.agreeing_lenses,
+                weighted_score: cr.weighted_score,
+                level: level.to_string(),
+            }
+        })
+        .collect();
+
+    let dict = PyDict::new_bound(py);
+    dict.set_item("scan", scan_result.into_py(py))?;
+    dict.set_item("consensus", py_consensus.into_py(py))?;
+    dict.set_item("n6_exact_ratio", n6_ratio)?;
+    dict.set_item("active_lenses", active)?;
+    dict.set_item("total_lenses", total)?;
+
+    Ok(dict)
+}
+
+// ---------------------------------------------------------------------------
 // Module registration
 // ---------------------------------------------------------------------------
 
@@ -532,11 +779,20 @@ fn nexus6(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyCycleResult>()?;
     m.add_class::<PyForgeResult>()?;
     m.add_class::<PyMetaLoopResult>()?;
+    m.add_class::<PyScanResult>()?;
+    m.add_class::<PyConsensusResult>()?;
 
-    // Functions
+    // Functions — telescope-rs replacement (raw data scan)
+    m.add_function(wrap_pyfunction!(scan, m)?)?;
+    m.add_function(wrap_pyfunction!(scan_consensus, m)?)?;
+    m.add_function(wrap_pyfunction!(analyze, m)?)?;
+
+    // Functions — n6 verification
     m.add_function(wrap_pyfunction!(py_n6_check, m)?)?;
     m.add_function(wrap_pyfunction!(feasibility_score, m)?)?;
     m.add_function(wrap_pyfunction!(verify, m)?)?;
+
+    // Functions — discovery engine
     m.add_function(wrap_pyfunction!(recommend_lenses, m)?)?;
     m.add_function(wrap_pyfunction!(evolve, m)?)?;
     m.add_function(wrap_pyfunction!(forge_lenses, m)?)?;
