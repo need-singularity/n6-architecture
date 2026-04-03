@@ -12,6 +12,7 @@ use super::csv_reader;
 use super::json_reader;
 use super::md_parser;
 use super::py_parser;
+use super::rs_parser;
 use super::text_parser;
 use super::toml_parser;
 
@@ -196,6 +197,24 @@ impl FileParser for PyParserAdapter {
     }
 }
 
+/// Rust source parser — delegates to `rs_parser` for constant and enum extraction.
+struct RsParserAdapter;
+
+impl FileParser for RsParserAdapter {
+    fn extensions(&self) -> &[&str] {
+        &["rs"]
+    }
+
+    fn parse(&self, path: &Path) -> Result<(Vec<(String, f64)>, Vec<f64>), String> {
+        let path_str = path.to_string_lossy();
+        let content = std::fs::read_to_string(path)
+            .map_err(|e| format!("Failed to read '{}': {}", path_str, e))?;
+        let named = rs_parser::extract_numeric_constants(&content);
+        let raw = named.iter().map(|(_, v)| *v).collect();
+        Ok((named, raw))
+    }
+}
+
 // ---------------------------------------------------------------------------
 // Crawler implementation
 // ---------------------------------------------------------------------------
@@ -209,6 +228,7 @@ fn builtin_parsers() -> Vec<Box<dyn FileParser>> {
         Box::new(TextParser),
         Box::new(TomlParserAdapter),
         Box::new(PyParserAdapter),
+        Box::new(RsParserAdapter),
     ]
 }
 
@@ -409,6 +429,7 @@ pub fn default_config() -> CrawlConfig {
         "toml".to_string(),
         "md".to_string(),
         "py".to_string(),
+        "rs".to_string(),
         "json".to_string(),
         "csv".to_string(),
         "txt".to_string(),
@@ -477,7 +498,7 @@ mod tests {
         assert!(route_to_parser("md", &parsers).is_some());
         assert!(route_to_parser("toml", &parsers).is_some());
         assert!(route_to_parser("py", &parsers).is_some());
-        assert!(route_to_parser("rs", &parsers).is_none());
+        assert!(route_to_parser("rs", &parsers).is_some());
         assert!(route_to_parser("exe", &parsers).is_none());
     }
 
