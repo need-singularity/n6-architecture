@@ -7,11 +7,15 @@ use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use std::collections::HashMap;
 
+#[cfg(feature = "python")]
+use numpy::PyReadonlyArray2;
+
 use crate::history::recommend;
 use crate::lens_forge::forge_engine::{self, ForgeConfig};
 use crate::ouroboros::engine::{CycleResult, EvolutionConfig, EvolutionEngine};
 use crate::ouroboros::meta_loop::{MetaLoop, MetaLoopConfig};
 use crate::telescope::registry::{LensCategory, LensEntry, LensRegistry};
+use crate::telescope::shared_data;
 use crate::verifier::feasibility;
 use crate::verifier::n6_check as n6_check_mod;
 
@@ -757,6 +761,188 @@ fn analyze<'py>(py: Python<'py>, data: Vec<f64>, n: usize, d: usize) -> PyResult
 }
 
 // ---------------------------------------------------------------------------
+// Numpy-based scan functions (telescope-rs backward compatibility)
+// ---------------------------------------------------------------------------
+
+/// Helper: extract flat data + dims from PyReadonlyArray2.
+fn extract_numpy_data(data: &PyReadonlyArray2<'_, f64>) -> (Vec<f64>, usize, usize) {
+    let arr = data.as_array();
+    let (n_samples, n_features) = (arr.nrows(), arr.ncols());
+    let flat: Vec<f64> = arr.iter().copied().collect();
+    (flat, n_samples, n_features)
+}
+
+/// Scan numpy array through all lenses.
+/// Accepts 2D numpy array (n_samples x n_features).
+/// Drop-in replacement for telescope_rs.scan_all().
+#[pyfunction]
+#[pyo3(signature = (data))]
+fn scan_numpy(data: PyReadonlyArray2<'_, f64>) -> PyResult<PyScanResult> {
+    let (flat, n, d) = extract_numpy_data(&data);
+    if flat.len() != n * d {
+        return Err(pyo3::exceptions::PyValueError::new_err(
+            "data array is not contiguous"
+        ));
+    }
+
+    let telescope = crate::telescope::Telescope::new();
+    let raw_results = telescope.scan_all(&flat, n, d);
+    let lens_names: Vec<String> = raw_results.keys().cloned().collect();
+    let lens_count = telescope.lens_count();
+
+    Ok(PyScanResult {
+        lens_count,
+        lens_names,
+        results: raw_results,
+    })
+}
+
+/// Full scan returning a dict — drop-in replacement for telescope_rs.scan_all().
+/// Returns dict with lens_name -> {metric_name -> values}.
+#[pyfunction]
+#[pyo3(signature = (data))]
+fn scan_all<'py>(py: Python<'py>, data: PyReadonlyArray2<'py, f64>) -> PyResult<Bound<'py, PyDict>> {
+    let (flat, n, d) = extract_numpy_data(&data);
+
+    let telescope = crate::telescope::Telescope::new();
+    let raw_results = telescope.scan_all(&flat, n, d);
+
+    let result_dict = PyDict::new_bound(py);
+    for (lens_name, metrics) in &raw_results {
+        let lens_dict = PyDict::new_bound(py);
+        for (metric_name, values) in metrics {
+            lens_dict.set_item(metric_name, values.clone())?;
+        }
+        result_dict.set_item(lens_name, &lens_dict)?;
+    }
+
+    // Add metadata
+    result_dict.set_item("_n_lenses", telescope.lens_count())?;
+    result_dict.set_item("_n_samples", n)?;
+    result_dict.set_item("_n_features", d)?;
+
+    Ok(result_dict)
+}
+
+/// Consciousness lens scan with configurable parameters.
+/// telescope-rs backward-compatible API.
+#[pyfunction]
+#[pyo3(signature = (data, n_cells=64, n_factions=12, steps=300, coupling_alpha=0.014))]
+fn consciousness_scan(
+    data: PyReadonlyArray2<'_, f64>,
+    n_cells: usize,
+    n_factions: usize,
+    steps: usize,
+    coupling_alpha: f64,
+) -> PyResult<PyScanResult> {
+    let (flat, n, d) = extract_numpy_data(&data);
+    let _ = (n_cells, n_factions, steps, coupling_alpha); // params reserved for future parameterized lenses
+
+    let shared = crate::telescope::shared_data::SharedData::compute(&flat, n, d);
+    let lens = crate::telescope::lenses::ConsciousnessLens;
+    let lr = <crate::telescope::lenses::ConsciousnessLens as crate::telescope::lens_trait::Lens>::scan(&lens, &flat, n, d, &shared);
+
+    let mut results = HashMap::new();
+    results.insert("ConsciousnessLens".to_string(), lr);
+
+    Ok(PyScanResult {
+        lens_count: 1,
+        lens_names: vec!["ConsciousnessLens".to_string()],
+        results,
+    })
+}
+
+/// Topology lens scan. telescope-rs backward-compatible API.
+#[pyfunction]
+#[pyo3(signature = (data))]
+fn topology_scan(data: PyReadonlyArray2<'_, f64>) -> PyResult<PyScanResult> {
+    let (flat, n, d) = extract_numpy_data(&data);
+    let shared = crate::telescope::shared_data::SharedData::compute(&flat, n, d);
+    let lens = crate::telescope::lenses::TopologyLens;
+    let lr = <crate::telescope::lenses::TopologyLens as crate::telescope::lens_trait::Lens>::scan(&lens, &flat, n, d, &shared);
+
+    let mut results = HashMap::new();
+    results.insert("TopologyLens".to_string(), lr);
+
+    Ok(PyScanResult {
+        lens_count: 1,
+        lens_names: vec!["TopologyLens".to_string()],
+        results,
+    })
+}
+
+/// Causal lens scan. telescope-rs backward-compatible API.
+#[pyfunction]
+#[pyo3(signature = (data))]
+fn causal_scan(data: PyReadonlyArray2<'_, f64>) -> PyResult<PyScanResult> {
+    let (flat, n, d) = extract_numpy_data(&data);
+    let shared = crate::telescope::shared_data::SharedData::compute(&flat, n, d);
+    let lens = crate::telescope::lenses::CausalLens;
+    let lr = <crate::telescope::lenses::CausalLens as crate::telescope::lens_trait::Lens>::scan(&lens, &flat, n, d, &shared);
+
+    let mut results = HashMap::new();
+    results.insert("CausalLens".to_string(), lr);
+
+    Ok(PyScanResult {
+        lens_count: 1,
+        lens_names: vec!["CausalLens".to_string()],
+        results,
+    })
+}
+
+/// Gravity lens scan. telescope-rs backward-compatible API.
+#[pyfunction]
+#[pyo3(signature = (data))]
+fn gravity_scan(data: PyReadonlyArray2<'_, f64>) -> PyResult<PyScanResult> {
+    let (flat, n, d) = extract_numpy_data(&data);
+    let shared = crate::telescope::shared_data::SharedData::compute(&flat, n, d);
+    let lens = crate::telescope::lenses::GravityLens;
+    let lr = <crate::telescope::lenses::GravityLens as crate::telescope::lens_trait::Lens>::scan(&lens, &flat, n, d, &shared);
+
+    let mut results = HashMap::new();
+    results.insert("GravityLens".to_string(), lr);
+
+    Ok(PyScanResult {
+        lens_count: 1,
+        lens_names: vec!["GravityLens".to_string()],
+        results,
+    })
+}
+
+/// Stability lens scan. telescope-rs backward-compatible API.
+#[pyfunction]
+#[pyo3(signature = (data))]
+fn stability_scan(data: PyReadonlyArray2<'_, f64>) -> PyResult<PyScanResult> {
+    let (flat, n, d) = extract_numpy_data(&data);
+    let shared = crate::telescope::shared_data::SharedData::compute(&flat, n, d);
+    let lens = crate::telescope::lenses::StabilityLens;
+    let lr = <crate::telescope::lenses::StabilityLens as crate::telescope::lens_trait::Lens>::scan(&lens, &flat, n, d, &shared);
+
+    let mut results = HashMap::new();
+    results.insert("StabilityLens".to_string(), lr);
+
+    Ok(PyScanResult {
+        lens_count: 1,
+        lens_names: vec!["StabilityLens".to_string()],
+        results,
+    })
+}
+
+/// Fast mutual information between two 1D arrays.
+/// telescope-rs backward-compatible API.
+#[pyfunction]
+#[pyo3(signature = (a, b, n_bins=16))]
+fn fast_mutual_info(
+    a: PyReadonlyArray2<'_, f64>,
+    b: PyReadonlyArray2<'_, f64>,
+    n_bins: usize,
+) -> PyResult<f64> {
+    let a_flat: Vec<f64> = a.as_array().iter().copied().collect();
+    let b_flat: Vec<f64> = b.as_array().iter().copied().collect();
+    Ok(shared_data::mutual_info(&a_flat, &b_flat, n_bins))
+}
+
+// ---------------------------------------------------------------------------
 // Module registration
 // ---------------------------------------------------------------------------
 
@@ -782,10 +968,22 @@ fn nexus6(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyScanResult>()?;
     m.add_class::<PyConsensusResult>()?;
 
-    // Functions — telescope-rs replacement (raw data scan)
+    // Functions — telescope-rs replacement (raw data scan, flat list API)
     m.add_function(wrap_pyfunction!(scan, m)?)?;
     m.add_function(wrap_pyfunction!(scan_consensus, m)?)?;
     m.add_function(wrap_pyfunction!(analyze, m)?)?;
+
+    // Functions — numpy-based scan (telescope-rs backward compatibility)
+    m.add_function(wrap_pyfunction!(scan_numpy, m)?)?;
+    m.add_function(wrap_pyfunction!(scan_all, m)?)?;
+
+    // Functions — per-lens scans (telescope-rs backward compatibility)
+    m.add_function(wrap_pyfunction!(consciousness_scan, m)?)?;
+    m.add_function(wrap_pyfunction!(topology_scan, m)?)?;
+    m.add_function(wrap_pyfunction!(causal_scan, m)?)?;
+    m.add_function(wrap_pyfunction!(gravity_scan, m)?)?;
+    m.add_function(wrap_pyfunction!(stability_scan, m)?)?;
+    m.add_function(wrap_pyfunction!(fast_mutual_info, m)?)?;
 
     // Functions — n6 verification
     m.add_function(wrap_pyfunction!(py_n6_check, m)?)?;

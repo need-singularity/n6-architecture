@@ -797,6 +797,25 @@ All experiments must run in background. No exceptions.
   ⚠️ 세션 시작 시 데몬 미실행 감지되면 자동 시작 권장
   ⚠️ 성장 결과는 growth(nexus6): 접두사로 자동 커밋
   ⚠️ 크로스 리포 자동 시작: .shared/nexus6_ensure_running.sh (모든 TECS-L 리포에서 사용 가능)
+
+  ⚠️ NEXUS-6 소스 변경 커밋 시 자동 재빌드 + 재시작 (post-commit hook):
+     - tools/nexus6/src/ 변경 감지 → cargo build --release 자동
+     - PyO3 wheel 자동 재빌드 + pip install
+     - 데몬 PID 감지 → kill + 재시작
+     - 로그: ~/.nexus6/rebuild.log
+
+  NEXUS-6 = telescope-rs 완전통합 (단일 엔진):
+     - import nexus6 → scan/consensus/analyze/n6_check/evolve/forge 전부
+     - nexus6.scan(data, n, d) — raw 데이터 25렌즈 스캔
+     - nexus6.scan_numpy(np_array) — numpy 2D 배열 직접 입력
+     - nexus6.analyze(data, n, d) — 올인원 (스캔+합의+n6매칭)
+     - nexus6.n6_check(value) — 상수 매칭
+     - nexus6.evolve(domain) — OUROBOROS 진화
+     - 빌드: cd tools/nexus6 && ~/.cargo/bin/cargo build --release
+     - PyO3: PATH=$HOME/.cargo/bin:$PATH python3 -m maturin build --release
+
+  사용법 전체: ~/.nexus6/usage.json
+  트러블슈팅: ~/.nexus6/troubleshoot.json (자동학습, 절대규칙 10개)
 ```
 
 ## Secrets & Tokens

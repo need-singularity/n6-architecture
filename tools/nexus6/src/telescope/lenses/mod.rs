@@ -23,6 +23,7 @@ pub mod recursion_lens;
 pub mod boundary_lens;
 pub mod multiscale_lens;
 pub mod renormalization_lens;
+pub mod mi_lens;
 
 pub use void_lens::VoidLens;
 pub use barrier_lens::BarrierLens;
@@ -49,3 +50,4 @@ pub use recursion_lens::RecursionLens;
 pub use boundary_lens::BoundaryLens;
 pub use multiscale_lens::MultiscaleLens;
 pub use renormalization_lens::RenormalizationLens;
+pub use mi_lens::MiLens;

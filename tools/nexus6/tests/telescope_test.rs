@@ -248,7 +248,7 @@ fn test_telescope_scan_all() {
         results.contains_key("BarrierLens"),
         "Missing BarrierLens results"
     );
-    assert_eq!(telescope.lens_count(), 24);
+    assert_eq!(telescope.lens_count(), 26);
 }
 
 // ──────────────────────────────────────────────
@@ -618,7 +618,7 @@ fn test_all_22_core_lenses_run() {
         Box::new(BarrierLens),
     ];
 
-    assert_eq!(lenses.len(), 24, "Should have 24 lenses (22 Core + Void + Barrier)");
+    assert_eq!(lenses.len(), 24, "Should have 24 lenses (base test set, excluding Renormalization + Mi)");
 
     for lens in &lenses {
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
@@ -657,8 +657,8 @@ fn test_telescope_has_all_24_lenses() {
     let telescope = Telescope::new();
     assert_eq!(
         telescope.lens_count(),
-        24,
-        "Telescope::new() should register 24 lenses (22 Core + Void + Barrier)"
+        26,
+        "Telescope::new() should register 26 lenses (22 Core + Renormalization + Mi + Void + Barrier)"
     );
 }
 
@@ -684,8 +684,8 @@ fn test_telescope_scan_all_24() {
 
     assert_eq!(
         results.len(),
-        24,
-        "scan_all should return results for all 24 lenses, got {}",
+        26,
+        "scan_all should return results for all 26 lenses, got {}",
         results.len()
     );
 
