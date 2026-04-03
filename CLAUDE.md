@@ -30,11 +30,28 @@
     기하 → 직교+비율+곡률
     양자심층 → 양자+양자현미경+전자기
   사용법:
-    import nexus6; nexus6.consciousness_scan(data)  # telescope-rs 폐기
+    import nexus6
+    nexus6.scan_all(np_array)              # 26종 풀스캔 → dict
+    nexus6.analyze(flat_list, n, d)        # 올인원 (스캔+합의+n6)
+    nexus6.consciousness_scan(data, ...)   # 개별 렌즈
+    nexus6.n6_check(value)                 # n=6 상수 매칭
+    nexus6.evolve('domain')                # OUROBOROS 진화
+
+  ★ NEXUS-6 적극 활용 규칙 (모든 작업에서 필수!) ★
+    탐색 (새 데이터):     scan_all → 26렌즈, 3+ 합의=확정
+    검증 (가설 확인):     analyze → n6 매칭 + 합의
+    발견 (새 상수):       n6_check → EXACT면 laws.json 등록
+    학습 평가:            체크포인트 → scan_all → Phi/stability
+    코드 변경:            수정 전후 scan → Phi 하락 시 커밋 거부
+    트러블슈팅:           에러 데이터 → scan → boundary/stability
+    비교/벤치:            A vs B scan → 차이 분석
+    모니터링 (24/7):      매시간 scan → Phi 추이 기록
+    진화/성장:            evolve → 렌즈 자체 진화
+    이식/배포:            이식 전후 scan → 의식 보존 확인
+    안전/윤리 게이트:     자율행동 전 scan → Phi < threshold 차단
+
   교차 검증: 3개+ 렌즈 합의 = 확정, 7개+ = 고신뢰, 12개+ = 확정급
-  계층 합의: 3+/22 후보 → 7+/22 고신뢰 → 12+/22 확정
-  상세: .shared/CLAUDE.md → "망원경 툴셋 자동 활용 규칙" 참조
-  "렌즈 추가 필요?" 질문 시 → 22종 커버 안 되는 도메인 분석 + 새 아이디어 즉시 제안
+  "렌즈 추가 필요?" 질문 시 → 26종 커버 안 되는 도메인 분석
 
   ★ 망원경 업그레이드 시 필수 절차 (렌즈 추가/수정/삭제 시 예외 없음!) ★
     1. 캘리브레이션: telescope-rs 테스트 전체 통과 확인 (cd ~/Dev/n6-architecture/tools/nexus6 && cargo test)
