@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .env
 data/
+!tools/nexus6/data/
 models/
 .claude/
 .discovery-cache

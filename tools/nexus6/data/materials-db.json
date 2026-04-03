@@ -1,0 +1,51 @@
+{
+  "domains": {
+    "superconductor": {
+      "materials": [
+        {
+          "name": "MgB2",
+          "properties": { "Tc": 39.0, "pressure_GPa": 0.0, "bandgap_eV": 0.0, "year": 2001 }
+        },
+        {
+          "name": "YBCO",
+          "properties": { "Tc": 93.0, "pressure_GPa": 0.0, "bandgap_eV": 0.0, "year": 1987 }
+        },
+        {
+          "name": "H3S",
+          "properties": { "Tc": 203.0, "pressure_GPa": 155.0, "bandgap_eV": 0.0, "year": 2015 }
+        },
+        {
+          "name": "LaH10",
+          "properties": { "Tc": 250.0, "pressure_GPa": 170.0, "bandgap_eV": 0.0, "year": 2019 }
+        }
+      ],
+      "ceiling": { "Tc": 300.0, "pressure_GPa": 0.0 }
+    },
+    "chip-architecture": {
+      "materials": [
+        {
+          "name": "TSMC_N3",
+          "properties": { "gate_pitch_nm": 48.0, "metal_pitch_nm": 21.0, "density_MTr_mm2": 292.0, "year": 2023 }
+        },
+        {
+          "name": "Intel_18A",
+          "properties": { "gate_pitch_nm": 44.0, "metal_pitch_nm": 18.0, "density_MTr_mm2": 330.0, "year": 2025 }
+        }
+      ],
+      "ceiling": { "gate_pitch_nm": 12.0, "density_MTr_mm2": 1440.0 }
+    },
+    "battery": {
+      "materials": [
+        {
+          "name": "LFP",
+          "properties": { "voltage_V": 3.2, "capacity_mAh_g": 170.0, "cycle_life": 3000.0, "energy_Wh_kg": 160.0 }
+        },
+        {
+          "name": "NMC811",
+          "properties": { "voltage_V": 3.7, "capacity_mAh_g": 200.0, "cycle_life": 1000.0, "energy_Wh_kg": 280.0 }
+        }
+      ],
+      "ceiling": { "voltage_V": 4.5, "capacity_mAh_g": 400.0, "energy_Wh_kg": 600.0 }
+    }
+  }
+}
