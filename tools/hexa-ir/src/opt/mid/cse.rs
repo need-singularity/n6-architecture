@@ -66,16 +66,27 @@ pub fn run(func: &mut HexaFunction) {
 }
 
 /// Map HexaOp to a u8 discriminant for hashing
+/// n6: J₂=24 opcodes total, 4 groups of n=6 ops = τ·n = J₂
 fn op_discriminant(op: &HexaOp) -> u8 {
+    use crate::util::n6::{N, SIGMA};
+    // n6: 4 groups × n=6 ops = J₂=24, group base = k·N for k in 0..τ
+    const G0: u8 = 0;           // n6: group 0 base (Arithmetic)
+    const G1: u8 = N as u8;     // n6: group 1 base = n=6 (Memory)
+    const G2: u8 = SIGMA as u8; // n6: group 2 base = σ=12 (Control)
+    const G3: u8 = (SIGMA + N) as u8; // n6: group 3 base = σ+n=18 (Proof+Ownership)
     match op {
-        HexaOp::Add => 0, HexaOp::Sub => 1, HexaOp::Mul => 2,
-        HexaOp::Div => 3, HexaOp::Mod => 4, HexaOp::Neg => 5,
-        HexaOp::Load => 6, HexaOp::Store => 7, HexaOp::Alloc => 8,
-        HexaOp::Free => 9, HexaOp::Copy => 10, HexaOp::Move => 11,
-        HexaOp::Jump => 12, HexaOp::Branch => 13, HexaOp::Call => 14,
-        HexaOp::Return => 15, HexaOp::Phi => 16, HexaOp::Switch => 17,
-        HexaOp::ProofAssert => 18, HexaOp::ProofInvariant => 19,
-        HexaOp::ProofWitness => 20, HexaOp::OwnershipTransfer => 21,
-        HexaOp::BorrowCheck => 22, HexaOp::LifetimeEnd => 23,
+        // Group 0: Arithmetic (base=0, offsets 0..5)
+        HexaOp::Add => G0,     HexaOp::Sub => G0 + 1, HexaOp::Mul => G0 + 2,
+        HexaOp::Div => G0 + 3, HexaOp::Mod => G0 + 4, HexaOp::Neg => G0 + 5,
+        // Group 1: Memory (base=n=6, offsets 0..5)
+        HexaOp::Load => G1,     HexaOp::Store => G1 + 1, HexaOp::Alloc => G1 + 2,
+        HexaOp::Free => G1 + 3, HexaOp::Copy  => G1 + 4, HexaOp::Move  => G1 + 5,
+        // Group 2: Control (base=σ=12, offsets 0..5)
+        HexaOp::Jump   => G2,     HexaOp::Branch => G2 + 1, HexaOp::Call   => G2 + 2,
+        HexaOp::Return => G2 + 3, HexaOp::Phi    => G2 + 4, HexaOp::Switch => G2 + 5,
+        // Group 3: Proof+Ownership (base=σ+n=18, offsets 0..5)
+        HexaOp::ProofAssert    => G3,     HexaOp::ProofInvariant    => G3 + 1,
+        HexaOp::ProofWitness   => G3 + 2, HexaOp::OwnershipTransfer => G3 + 3,
+        HexaOp::BorrowCheck    => G3 + 4, HexaOp::LifetimeEnd       => G3 + 5, // n6: J₂-μ=23
     }
 }

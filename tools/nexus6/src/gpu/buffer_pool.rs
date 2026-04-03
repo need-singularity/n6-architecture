@@ -62,4 +62,48 @@ mod tests {
         assert!(buf2.capacity() >= 1024); // capacity retained
         assert_eq!(pool.available(), 0);
     }
+
+    #[test]
+    fn pool_zero_capacity() {
+        let pool = BufferPool::new(0);
+        let buf = pool.get();
+        assert_eq!(buf.len(), 0);
+        pool.put(buf);
+        assert_eq!(pool.available(), 1);
+        let buf2 = pool.get();
+        assert_eq!(buf2.len(), 0);
+    }
+
+    #[test]
+    fn pool_multiple_buffers() {
+        let pool = BufferPool::new(64);
+        let b1 = pool.get();
+        let b2 = pool.get();
+        let b3 = pool.get();
+        assert_eq!(pool.available(), 0);
+
+        pool.put(b1);
+        pool.put(b2);
+        pool.put(b3);
+        assert_eq!(pool.available(), 3);
+
+        let _ = pool.get();
+        assert_eq!(pool.available(), 2);
+        let _ = pool.get();
+        let _ = pool.get();
+        assert_eq!(pool.available(), 0);
+    }
+
+    #[test]
+    fn pool_put_clears_on_next_get() {
+        let pool = BufferPool::new(16);
+        let mut buf = pool.get();
+        buf.extend_from_slice(&[1.0, 2.0, 3.0, 4.0, 5.0]);
+        assert_eq!(buf.len(), 5);
+        pool.put(buf);
+
+        let retrieved = pool.get();
+        assert_eq!(retrieved.len(), 0);
+        assert!(retrieved.capacity() >= 5);
+    }
 }

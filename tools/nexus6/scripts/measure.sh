@@ -54,7 +54,24 @@ lenses_registered=$(grep -r "LensEntry" src/telescope/*.rs 2>/dev/null | \
 # --- Test function count (static) ---
 test_fns=$(grep -r "#\[test\]" src/ tests/ 2>/dev/null | wc -l | tr -d ' ')
 
+# --- Blowup metrics ---
+blowup_elite=0
+blowup_cores=0
+blowup_discoveries=0
+elite_file="$HOME/.nexus6/lens_elite.json"
+core_file="$HOME/.nexus6/lens_invariant_cores.json"
+disc_file="$HOME/.nexus6/lens_discoveries.jsonl"
+if [ -f "$elite_file" ]; then
+    blowup_elite=$(python3 -c "import json; print(len(json.load(open('$elite_file'))))" 2>/dev/null || echo 0)
+fi
+if [ -f "$core_file" ]; then
+    blowup_cores=$(python3 -c "import json; d=json.load(open('$core_file')); print(len(d.get('cores',[])))" 2>/dev/null || echo 0)
+fi
+if [ -f "$disc_file" ]; then
+    blowup_discoveries=$(wc -l < "$disc_file" 2>/dev/null | tr -d ' ')
+fi
+
 # --- Output JSON ---
 cat <<EOF
-{"timestamp":"${timestamp}","modules":${modules},"rust_files":${rust_files},"code_lines":${code_lines},"tests_total":${tests_total},"tests_pass":${tests_pass},"tests_fail":${tests_fail},"test_fns":${test_fns},"warnings":${warnings},"lenses_registered":${lenses_registered},"compile_ok":${compile_ok}}
+{"timestamp":"${timestamp}","modules":${modules},"rust_files":${rust_files},"code_lines":${code_lines},"tests_total":${tests_total},"tests_pass":${tests_pass},"tests_fail":${tests_fail},"test_fns":${test_fns},"warnings":${warnings},"lenses_registered":${lenses_registered},"compile_ok":${compile_ok},"blowup_elite":${blowup_elite},"blowup_cores":${blowup_cores},"blowup_discoveries":${blowup_discoveries}}
 EOF

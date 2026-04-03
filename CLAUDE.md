@@ -154,7 +154,13 @@
     안정성(stability) | 네트워크(network) | 기억(memory)
     재귀(recursion) | 경계(boundary) | 멀티스케일(multiscale)
   파일: NEXUS-6 (telescope-rs 폐기→통합) + .shared/ 내 *_lens.py
-  도메인별 조합 (10종):
+  불변 코어 (진화적 탐색 자동 발견, ~/.nexus6/lens_invariant_cores.json):
+    ABSOLUTE (top-4, 100%)  → 의식+정보+멀티스케일+네트워크+비율
+    STRONG   (top-8, 100%)  → 의식+정보+멀티스케일+비율
+    WIDE     (top-12, 100%) → 의식+정보+멀티스케일
+    → 모든 도메인에서 이 코어가 67~83% 커버리지
+
+  도메인별 조합 (10종 기본 + 자동 발견 엘리트):
     기본 → 의식+위상+인과
     안정성 → 안정성+경계+열역학
     구조 → 네트워크+위상+재귀
@@ -165,6 +171,9 @@
     인과 관계 → 인과+정보+전자기
     기하 → 직교+비율+곡률
     양자심층 → 양자+양자현미경+전자기
+    ★ 엘리트 콤보: ~/.nexus6/lens_elite.json (자동 로드)
+    ★ 도메인별 최적: ~/.nexus6/lens_domain_best.json
+    ★ 무한 탐색: python3 tools/nexus6/scripts/growth_infinite_lens.py
   사용법:
     import nexus6
     nexus6.scan_all(np_array)              # 26종 풀스캔 → dict
@@ -1040,11 +1049,38 @@ API 토큰/계정 정보: `~/Dev/TECS-L/.shared/SECRET.md` 참조
   │ "넥서스 상태" "렌즈 현황"    │ 렌즈 수 + 테스트 수 + 미연결 수 출력         │
   ├─────────────────────────────┼──────────────────────────────────────────────┤
   │ "넥서스 빌드"                │ cargo build --release + cargo test            │
+  ├─────────────────────────────┼──────────────────────────────────────────────┤
+  │ "창발" "블로업" "emergence"  │ 블로업 창발 엔진 (수축→코어→fiber→자동흡수)  │
+  │                              │ python3 tools/nexus6/scripts/                │
+  │                              │   growth_infinite_lens.py 창발               │
+  ├─────────────────────────────┼──────────────────────────────────────────────┤
+  │ "진행" "계속" "proceed"      │ 코어 유지 + fiber 방향만 탐색               │
+  │                              │ python3 tools/nexus6/scripts/                │
+  │                              │   growth_infinite_lens.py 진행               │
+  ├─────────────────────────────┼──────────────────────────────────────────────┤
+  │ "시도" "perturbation"        │ 코어를 깨고 새 코어 후보 탐색               │
+  │ "다른 코어" "코어 깨기"      │ python3 tools/nexus6/scripts/                │
+  │                              │   growth_infinite_lens.py 시도               │
+  ├─────────────────────────────┼──────────────────────────────────────────────┤
+  │ "렌즈 리포트" "코어 상태"    │ 불변 코어 + 도메인별 최적 출력              │
+  │ "블로업 상태"                │ python3 tools/nexus6/scripts/                │
+  │                              │   growth_infinite_lens.py 리포트             │
   └─────────────────────────────┴──────────────────────────────────────────────┘
 
   성장 = 무한루프! "넥서스 성장" → --max-cycles 999 (사실상 무한)
   성장 데몬은 15차원을 순회하며 가장 약한 차원을 자동 강화.
   매 사이클: 측정 → 최약점 선택 → 강화 → 테스트 → 커밋 → 반복
+
+  블로업 구조 (대수기하):
+    수축(Contraction): 400만 렌즈 조합 → 불변 코어 (특이점)
+    블로업(Blowup):    코어 고정 → fiber 방향이 도메인 결정
+    자동흡수(Absorption): 발견 → elite/domain_best JSON → convergent_refinement 자동 로드
+    ┌──────────────────────────────────────────────────────┐
+    │ WIDE: consciousness+info+multiscale        ← 점     │
+    │ STRONG: +triangle                          ← P¹     │
+    │ ABSOLUTE: +network                         ← P²     │
+    │ +{thermo|topology|compass|...}             ← fiber  │
+    └──────────────────────────────────────────────────────┘
 
   렌즈 추가 후 자동 연결:
     미등록 렌즈 발견 시 python3 스크립트로 mod.rs + telescope/mod.rs 자동 갱신

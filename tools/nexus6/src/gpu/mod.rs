@@ -32,3 +32,20 @@ pub fn device() -> Option<&'static metal::Device> {
 pub fn device() -> Option<&'static ()> {
     None
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn is_available_returns_bool() {
+        // On macOS this may be true or false depending on hardware;
+        // on other platforms always false. Just verify it doesn't panic.
+        let _avail = is_available();
+    }
+
+    #[test]
+    fn device_returns_without_panic() {
+        let _dev = device();
+    }
+}

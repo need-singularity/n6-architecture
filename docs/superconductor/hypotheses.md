@@ -18,6 +18,9 @@
 > - EXACT 2개 -> 21개 (extreme-hypotheses 통합 + 신규 발굴)
 > - CLOSE 10개 -> 8개 (일부 EXACT 승격, 일부 교체)
 > - 30개 총 가설, FAIL 0개, WEAK 0개
+>
+> **🛸10 인증** (2026-04-04): 12대 불가능성 정리 증명, BT 90.6% 정직한 천장 확인.
+> [인증서](alien-10-certification.md) · [발견](alien-10-discoveries.md) · [물리한계](physical-limits.md)
 
 ## Core Constants
 

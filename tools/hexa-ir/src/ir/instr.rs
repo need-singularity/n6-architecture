@@ -9,6 +9,21 @@ pub struct HexaInstr {
     pub dest: Option<usize>,   // SSA register (None for Store/Jump/etc.)
     pub args: Vec<usize>,      // operand registers
     pub ty: HexaType,
+    /// Optional label for Call targets (function name) or other metadata
+    #[allow(dead_code)]
+    pub label: Option<String>,
+}
+
+impl HexaInstr {
+    /// Create a new instruction (label defaults to None)
+    pub fn new(op: HexaOp, dest: Option<usize>, args: Vec<usize>, ty: HexaType) -> Self {
+        HexaInstr { op, dest, args, ty, label: None }
+    }
+
+    /// Create a new instruction with a label (for Call targets)
+    pub fn with_label(op: HexaOp, dest: Option<usize>, args: Vec<usize>, ty: HexaType, label: String) -> Self {
+        HexaInstr { op, dest, args, ty, label: Some(label) }
+    }
 }
 
 /// Basic block — linear sequence ending with terminator

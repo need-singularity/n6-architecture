@@ -52,6 +52,7 @@ fn lower_stmt_full(
                 dest: Some(addr),
                 args: vec![],
                 ty: var_ty.clone(),
+            label: None,
             });
 
             // If there's an initializer, lower it and store
@@ -62,6 +63,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![addr, val],
                     ty: HexaType::Void,
+            label: None,
                 });
                 // Emit ownership transfer: the value is now owned by this variable
                 super::proof_emit::emit_ownership_transfer(ctx, block, val, addr);
@@ -80,6 +82,7 @@ fn lower_stmt_full(
                             dest: None,
                             args: vec![addr, val],
                             ty: HexaType::Void,
+            label: None,
                         });
                     }
                 }
@@ -91,6 +94,7 @@ fn lower_stmt_full(
                         dest: None,
                         args: vec![addr, val],
                         ty: HexaType::Void,
+            label: None,
                     });
                 }
             }
@@ -104,6 +108,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![val],
                     ty: HexaType::Void,
+            label: None,
                 });
             } else {
                 block.instrs.push(HexaInstr {
@@ -111,6 +116,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![],
                     ty: HexaType::Void,
+            label: None,
                 });
             }
         }
@@ -149,6 +155,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![cond_reg, then_id, else_id],
                     ty: HexaType::Void,
+            label: None,
                 });
                 block.successors.push(then_id);
                 block.successors.push(else_id);
@@ -160,6 +167,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![merge_id],
                     ty: HexaType::Void,
+            label: None,
                 });
                 then_blk.successors.push(merge_id);
 
@@ -170,6 +178,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![merge_id],
                     ty: HexaType::Void,
+            label: None,
                 });
                 else_blk.successors.push(merge_id);
 
@@ -182,6 +191,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![cond_reg, then_id, merge_id],
                     ty: HexaType::Void,
+            label: None,
                 });
                 block.successors.push(then_id);
                 block.successors.push(merge_id);
@@ -193,6 +203,7 @@ fn lower_stmt_full(
                     dest: None,
                     args: vec![merge_id],
                     ty: HexaType::Void,
+            label: None,
                 });
                 then_blk.successors.push(merge_id);
 
@@ -221,11 +232,6 @@ fn lower_stmt_full(
 
             // Create exit block
             let exit_id = ctx.fresh_block();
-            let exit_blk = HexaBlock {
-                id: exit_id,
-                instrs: Vec::new(),
-                successors: Vec::new(),
-            };
 
             // Current block jumps to header
             block.instrs.push(HexaInstr {
@@ -233,8 +239,21 @@ fn lower_stmt_full(
                 dest: None,
                 args: vec![header_id],
                 ty: HexaType::Void,
+            label: None,
             });
             block.successors.push(header_id);
+
+            // Save the current block (with Jump) and replace it with the exit block.
+            // This way, any subsequent statements after the while loop are emitted
+            // into the exit block (which is now `block`).
+            let prev_blk = HexaBlock {
+                id: block.id,
+                instrs: std::mem::take(&mut block.instrs),
+                successors: std::mem::take(&mut block.successors),
+            };
+            block.id = exit_id;
+            // Push the original block content as a separate block
+            extra_blocks.push(prev_blk);
 
             // Header: evaluate condition, branch to body or exit
             let cond_reg = lower_expr(ctx, &mut header_blk, cond);
@@ -243,6 +262,7 @@ fn lower_stmt_full(
                 dest: None,
                 args: vec![cond_reg, body_id, exit_id],
                 ty: HexaType::Void,
+            label: None,
             });
             header_blk.successors.push(body_id);
             header_blk.successors.push(exit_id);
@@ -254,12 +274,14 @@ fn lower_stmt_full(
                 dest: None,
                 args: vec![header_id],
                 ty: HexaType::Void,
+            label: None,
             });
             body_blk.successors.push(header_id);
 
             extra_blocks.push(header_blk);
             extra_blocks.push(body_blk);
-            extra_blocks.push(exit_blk);
+            // Note: the exit block is now `block` itself — subsequent statements
+            // will be appended to it, so we don't push it to extra_blocks.
         }
 
         Stmt::ExprStmt { expr, .. } => {

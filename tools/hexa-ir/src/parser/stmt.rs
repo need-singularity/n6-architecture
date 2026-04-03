@@ -41,7 +41,8 @@ fn parse_let(p: &mut Parser) -> Result<Stmt, ParseError> {
     };
 
     let end = p.peek_span();
-    p.expect(&TokenKind::Semicolon)?;
+    // Optional semicolon (Go/Kotlin style): accept ; if present, but don't require it
+    p.eat(&TokenKind::Semicolon);
 
     Ok(Stmt::Let {
         name,
@@ -57,14 +58,15 @@ fn parse_return(p: &mut Parser) -> Result<Stmt, ParseError> {
     let start = p.peek_span();
     p.expect(&TokenKind::Return)?;
 
-    let value = if !p.at(&TokenKind::Semicolon) && !p.at(&TokenKind::RBrace) {
+    let value = if !p.at(&TokenKind::Semicolon) && !p.at(&TokenKind::RBrace) && !p.is_eof() {
         Some(parse_expr(p)?)
     } else {
         None
     };
 
     let end = p.peek_span();
-    p.expect(&TokenKind::Semicolon)?;
+    // Optional semicolon (Go/Kotlin style)
+    p.eat(&TokenKind::Semicolon);
 
     Ok(Stmt::Return { value, span: start.merge(end) })
 }
@@ -118,7 +120,8 @@ fn parse_assign_or_expr(p: &mut Parser) -> Result<Stmt, ParseError> {
     if p.eat(&TokenKind::Assign) {
         let value = parse_expr(p)?;
         let end = p.peek_span();
-        p.expect(&TokenKind::Semicolon)?;
+        // Optional semicolon (Go/Kotlin style)
+        p.eat(&TokenKind::Semicolon);
         Ok(Stmt::Assign {
             target: expr,
             value,
@@ -126,7 +129,8 @@ fn parse_assign_or_expr(p: &mut Parser) -> Result<Stmt, ParseError> {
         })
     } else {
         let end = p.peek_span();
-        p.expect(&TokenKind::Semicolon)?;
+        // Optional semicolon (Go/Kotlin style)
+        p.eat(&TokenKind::Semicolon);
         Ok(Stmt::ExprStmt {
             expr,
             span: start.merge(end),

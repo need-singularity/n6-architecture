@@ -36,7 +36,7 @@ impl IRBuilder {
     pub fn emit(&mut self, op: HexaOp, args: Vec<usize>, ty: HexaType) -> usize {
         let dest = self.fresh_reg();
         self.blocks[self.current_block].instrs.push(HexaInstr {
-            op, dest: Some(dest), args, ty,
+            op, dest: Some(dest), args, ty, label: None,
         });
         dest
     }
@@ -44,7 +44,7 @@ impl IRBuilder {
     /// Emit a void instruction (no result)
     pub fn emit_void(&mut self, op: HexaOp, args: Vec<usize>) {
         self.blocks[self.current_block].instrs.push(HexaInstr {
-            op, dest: None, args, ty: HexaType::Void,
+            op, dest: None, args, ty: HexaType::Void, label: None,
         });
     }
 

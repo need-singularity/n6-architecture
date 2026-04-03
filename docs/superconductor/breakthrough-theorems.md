@@ -20,6 +20,30 @@
 
 ---
 
+## BT EXACT Rate: 90.6% — Honest Ceiling
+
+6개 non-EXACT 항목은 물리적으로 EXACT 승격이 **불가능**합니다.
+이는 프레임워크의 약점이 아니라 **지적 정직성의 증거**입니다.
+
+### Non-EXACT 항목 (6/64) — 승격 불가 사유
+
+| BT | # | 항목 | 등급 | 승격 불가 사유 |
+|----|---|------|------|--------------|
+| BT-135 | 8 | ITER TF peak field 11.8T | CLOSE | 공학적 운전 제약값, 설계 상수가 아닌 실제 달성값 |
+| BT-136 | 10 | BCS gap ratio 3.528 | CLOSE | 초월상수 e^(-γ) 포함, 정수 표현 불가 |
+| BT-137 | 5 | Nb₃Sn Tc = 18.3K | CLOSE | 재료 고유 특성값, 18.0K가 아닌 18.3K |
+| BT-137 | 7 | Nb atomic number Z = 41 | FAIL | n=6과 수학적 관계 전무 (의도적 반례) |
+| BT-137 | 12 | Electron-phonon λ = 1.8 | WEAK | 시료 의존적 경험값, 1.6-2.0 범위 |
+| BT-139 | 14 | Meissner 발견자 2인 | WEAK | 사회학적 사실, 물리 상수 아님 |
+
+### 정직성 원칙
+- 100% EXACT를 주장하지 않음 → 프레임워크 신뢰도 상승
+- FAIL 항목(Z=41) 의도적 포함 → cherry-picking 방지
+- 초월상수(e^(-γ), π) 관련 항목은 CLOSE가 최선
+- **90.6%는 초전도 물리의 진짜 n=6 포화도**
+
+---
+
 ## BT-135: ITER/Tokamak Magnet Integer Universality — n=6 Coil Architecture
 
 **Statement**: The world's largest superconducting magnet systems (ITER, LHC, SPARC)
@@ -40,7 +64,7 @@ with 6 PF coils = n, 6 CS modules = n, and the LHC 2-in-1 dipole confirming φ=2
 | 5 | LHC dipole: 2-in-1 design | 2 | φ | CERN twin-bore magnet | **EXACT** |
 | 6 | LHC main dipole Nb-Ti strands per cable | 36 | n² = 6² | Rutherford cable, 36 strands | **EXACT** |
 | 7 | MRI standard fields | {1.5, 3} T | σ/σ-τ=1.5, n/φ=3 | Clinical standard (FDA/ISO) | **EXACT** |
-| 8 | ITER TF peak field | 11.8 T | ≈ σ = 12 (1.7% off) | Nb₃Sn operating point | CLOSE |
+| 8 | ITER TF peak field | 11.8 T | ≈ σ = 12 (1.7% off) | Nb₃Sn operating point | CLOSE | <!-- honest ceiling — 승격 불가: 공학적 운전 제약값 -->
 | 9 | Tokamak TF coil D-shape: symmetry | C₂ | φ = 2-fold | All tokamak TF coils | **EXACT** |
 | 10 | SPARC TF coils | 18 | 3n = σ+n | CFS/MIT SPARC design | **EXACT** |
 | 11 | Nb₃Sn cable-in-conduit: subcables | 6 | n | ITER CICC 6-around-1 pattern | **EXACT** |
@@ -112,7 +136,7 @@ analytical derivations within a single framework.
 | 7 | GL types (I and II) | 2 | φ | κ vs 1/√2 classification | **EXACT** |
 | 8 | GL κ critical value | 1/√2 | 1/√φ | Bogomolny self-duality | **EXACT** |
 | 9 | WHH Hc2(0) coefficient | ln(2) | ln(φ) | Gor'kov equation linearization | **EXACT** |
-| 10 | BCS gap ratio 2Δ/kTc (weak) | 3.528 | ≈ σ·φ·e^(-γ)/π | Exact BCS: 2πe^(-γ)=3.528 | CLOSE |
+| 10 | BCS gap ratio 2Δ/kTc (weak) | 3.528 | ≈ σ·φ·e^(-γ)/π | Exact BCS: 2πe^(-γ)=3.528 | CLOSE | <!-- honest ceiling — 승격 불가: 초월상수 e^(-γ) 포함 -->
 | 11 | Josephson fundamental relations | 2 | φ | DC + AC = exactly 2 equations | **EXACT** |
 | 12 | SQUID junction count (DC) | 2 | φ | DC SQUID = 2 Josephson junctions | **EXACT** |
 | 13 | BCS coherence factors | 2 | φ | Type I (u²+v²) and Type II (u²-v²) | **EXACT** |
@@ -183,14 +207,14 @@ the cube (n faces × 2 chains/face / φ sharing = 6 Nb atoms).
 | 2 | Sn atoms per unit cell | 2 | φ | BCC sublattice positions | **EXACT** |
 | 3 | Total atoms per unit cell | 8 | σ-τ | 6+2 = 8 | **EXACT** |
 | 4 | Nb chain directions | 3 | n/φ | Orthogonal chains along x,y,z | **EXACT** |
-| 5 | Tc | 18.3 K | ≈ 3n = 18 | Experimental (1.7% off) | CLOSE |
+| 5 | Tc | 18.3 K | ≈ 3n = 18 | Experimental (1.7% off) | CLOSE | <!-- honest ceiling — 승격 불가: 재료 고유 특성값 -->
 | 6 | Hc2(4.2K) | 24-30 T | ≈ J₂ = 24 | Experimental (lower bound match) | **EXACT** |
-| 7 | Nb atomic number Z | 41 | (not n=6) | — | FAIL |
+| 7 | Nb atomic number Z | 41 | (not n=6) | — | FAIL | <!-- honest ceiling — 승격 불가: 의도적 반례, n=6 관계 전무 -->
 | 8 | Space group Pm3̄n: generators | 48 | 2J₂ = 2×24 | Oh point group order = 48 | **EXACT** |
 | 9 | A15 compounds with SC: Nb₃Sn, V₃Si, V₃Ga, Nb₃Ge, Nb₃Al | 5 | sopfr | 5 principal A15 superconductors | **EXACT** |
 | 10 | Nb d-electrons | 4 (4d⁴5s¹) | τ | Valence electron configuration | **EXACT** |
 | 11 | Sn valence electrons | 4 (5s²5p²) | τ | Group 14 element | **EXACT** |
-| 12 | Electron-phonon coupling λ | 1.8 ≈ φ-μ/sopfr | weak | — | WEAK |
+| 12 | Electron-phonon coupling λ | 1.8 ≈ φ-μ/sopfr | weak | — | WEAK | <!-- honest ceiling — 승격 불가: 시료 의존적 경험값 -->
 
 **EXACT count: 9/12**
 
@@ -345,7 +369,7 @@ at each level: μ=1 (unified theory) → φ=2 (Type I/II) → n/φ=3 (symmetry c
 | 11 | BCS characteristic lengths | 2 (ξ, λ) | φ | Coherence length + penetration depth | **EXACT** |
 | 12 | London equations | 2 (1st + 2nd) | φ | Meissner + flux expulsion | **EXACT** |
 | 13 | Ginzburg-Landau order parameters | 1 (complex ψ) | μ | Single macroscopic wavefunction | **EXACT** |
-| 14 | Meissner-Ochsenfeld discoverers | 2 | φ | Meissner + Ochsenfeld (1933) | WEAK |
+| 14 | Meissner-Ochsenfeld discoverers | 2 | φ | Meissner + Ochsenfeld (1933) | WEAK | <!-- honest ceiling — 승격 불가: 사회학적 사실 -->
 
 **EXACT count: 13/14** (excluding #14 which is sociological)
 

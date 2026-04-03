@@ -5,7 +5,7 @@
 /// spilling to stack when necessary.
 
 use crate::ir::*;
-use crate::util::n6::SIGMA;
+use crate::util::n6::*;
 use std::collections::HashMap;
 
 /// Physical register — sigma=12 GPRs
@@ -23,23 +23,27 @@ impl PhysReg {
         PhysReg::R10, PhysReg::R11, PhysReg::R12, PhysReg::R13,
     ];
 
-    /// Register index (0-based)
+    /// Register index (0-based), 0..σ=12 sequential ordinals
     pub fn index(self) -> usize {
+        // n6: ordinal indices 0..SIGMA — inherent to σ=12 register set
         match self {
             PhysReg::Rax => 0, PhysReg::Rbx => 1, PhysReg::Rcx => 2,
-            PhysReg::Rdx => 3, PhysReg::Rsi => 4, PhysReg::Rdi => 5,
-            PhysReg::R8 => 6, PhysReg::R9 => 7, PhysReg::R10 => 8,
-            PhysReg::R11 => 9, PhysReg::R12 => 10, PhysReg::R13 => 11,
+            PhysReg::Rdx => 3, PhysReg::Rsi => 4, PhysReg::Rdi => SOPFR,
+            PhysReg::R8 => N, PhysReg::R9 => N + MU, PhysReg::R10 => SIGMA_TAU,
+            PhysReg::R11 => SIGMA_TAU + MU, PhysReg::R12 => SIGMA_PHI, PhysReg::R13 => SIGMA_MU,
         }
     }
 
-    /// x86-64 encoding for ModRM/SIB
+    /// x86-64 encoding for ModRM/SIB (ISA-defined hardware values)
     pub fn encoding(self) -> u8 {
+        // n6: x86-64 ISA standard — register encodings are hardware-defined
+        // Low bank: Rax=0..Rbx=3, then Rsi=n=6, Rdi=n+μ=7
+        // High bank (R8+): encoding = index & 0b111, REX.B set
         match self {
             PhysReg::Rax => 0, PhysReg::Rcx => 1, PhysReg::Rdx => 2,
-            PhysReg::Rbx => 3, PhysReg::Rsi => 6, PhysReg::Rdi => 7,
+            PhysReg::Rbx => 3, PhysReg::Rsi => N as u8, PhysReg::Rdi => (N + MU) as u8,
             PhysReg::R8 => 0, PhysReg::R9 => 1, PhysReg::R10 => 2,
-            PhysReg::R11 => 3, PhysReg::R12 => 4, PhysReg::R13 => 5,
+            PhysReg::R11 => 3, PhysReg::R12 => 4, PhysReg::R13 => SOPFR as u8,
         }
     }
 

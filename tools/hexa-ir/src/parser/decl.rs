@@ -125,7 +125,8 @@ fn parse_type_alias(p: &mut Parser) -> Result<TypeAliasDecl, ParseError> {
     p.expect(&TokenKind::Assign)?;
     let ty = parse_type_expr(p)?;
     let end = p.peek_span();
-    p.expect(&TokenKind::Semicolon)?;
+    // Optional semicolon (Go/Kotlin style)
+    p.eat(&TokenKind::Semicolon);
 
     Ok(TypeAliasDecl { name, ty, span: start.merge(end) })
 }

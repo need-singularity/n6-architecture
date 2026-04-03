@@ -13,10 +13,14 @@ const LC_MAIN: u32 = 0x80000028;
 
 const PAGE_SIZE: u64 = 0x4000; // 16K pages on arm64 macOS
 
+/// n6: Mach-O binary format constants (Apple ABI standard — do not change)
+const MACHO_SEG_CMD_BASE: u32 = 72;   // n6: LC_SEGMENT_64 base = σ·n=72 (binary format)
+const MACHO_SECTION_SIZE: u32 = 80;   // n6: section_64 struct = σ-τ·σ-φ=80 (binary format)
+
 fn write_seg_cmd(out: &mut Vec<u8>, name: &[u8], vmaddr: u64, vmsize: u64,
                   fileoff: u64, filesize: u64, maxprot: u32, initprot: u32,
                   nsects: u32) {
-    let cmdsize: u32 = 72 + nsects * 80;
+    let cmdsize: u32 = MACHO_SEG_CMD_BASE + nsects * MACHO_SECTION_SIZE;
     out.extend_from_slice(&LC_SEGMENT_64.to_le_bytes());
     out.extend_from_slice(&cmdsize.to_le_bytes());
     let mut segname = [0u8; 16];
@@ -59,8 +63,8 @@ pub fn write_macho(code: &[u8], text_vaddr: u64, arm64: bool) -> Vec<u8> {
 
     // Layout: header(32) + pagezero_cmd(72) + text_cmd(72+80) + main_cmd(24) + padding + code
     let header_size: u32 = 32;
-    let pagezero_cmd_size: u32 = 72;     // LC_SEGMENT_64 (no sections)
-    let text_cmd_size: u32 = 72 + 80;    // LC_SEGMENT_64 + 1 section
+    let pagezero_cmd_size: u32 = MACHO_SEG_CMD_BASE;   // n6: LC_SEGMENT_64 (no sections)
+    let text_cmd_size: u32 = MACHO_SEG_CMD_BASE + MACHO_SECTION_SIZE;  // n6: LC_SEGMENT_64 + 1 section
     let main_cmd_size: u32 = 24;         // LC_MAIN
     let ncmds: u32 = 3;
     let total_cmds_size = pagezero_cmd_size + text_cmd_size + main_cmd_size;

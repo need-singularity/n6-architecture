@@ -218,9 +218,34 @@ measure_all_dimensions() {
     cross_mod_tests=${cross_mod_tests:-0}
     integration_tests=$((integration_tests + cross_mod_tests))
 
+    # Blowup: elite combos + invariant cores + discoveries
+    local blowup_score=0
+    local blowup_elite_file="$HOME/.nexus6/lens_elite.json"
+    local blowup_core_file="$HOME/.nexus6/lens_invariant_cores.json"
+    local blowup_disc_file="$HOME/.nexus6/lens_discoveries.jsonl"
+    if [[ -f "$blowup_elite_file" ]]; then
+        local be
+        be=$(python3 -c "import json; print(len(json.load(open('$blowup_elite_file'))))" 2>/dev/null || echo 0)
+        blowup_score=$((blowup_score + be * 5))
+    fi
+    if [[ -f "$blowup_core_file" ]]; then
+        local bc
+        bc=$(python3 -c "import json; d=json.load(open('$blowup_core_file')); print(len(d.get('cores',[])))" 2>/dev/null || echo 0)
+        blowup_score=$((blowup_score + bc * 10))
+    fi
+    if [[ -f "$blowup_disc_file" ]]; then
+        local bd
+        bd=$(wc -l < "$blowup_disc_file" 2>/dev/null | tr -d ' ')
+        bd=${bd:-0}
+        # Cap discovery contribution at 40 (thousands → tens)
+        local bd_contrib=$((bd / 100))
+        [[ $bd_contrib -gt 40 ]] && bd_contrib=40
+        blowup_score=$((blowup_score + bd_contrib))
+    fi
+
     # Output JSON
     cat <<EOF
-{"timestamp":"$(date -u +%Y-%m-%dT%H:%M:%SZ)","performance":${performance},"architecture":${arch_pct},"lenses":${lenses_impl},"modules":${maturity},"tests":${test_fns},"hypotheses":${bt_count},"dse":${dse_count},"experiments":${exp_count},"calculators":${calc_count},"cross_resonance":${resonance_count},"knowledge_graph":${graph_nodes},"red_team":${red_team_count},"atlas":${atlas_count},"documentation":${doc_pct},"integration":${integration_tests},"warnings":${warnings},"code_lines":${code_lines}}
+{"timestamp":"$(date -u +%Y-%m-%dT%H:%M:%SZ)","performance":${performance},"architecture":${arch_pct},"lenses":${lenses_impl},"modules":${maturity},"tests":${test_fns},"hypotheses":${bt_count},"dse":${dse_count},"experiments":${exp_count},"calculators":${calc_count},"cross_resonance":${resonance_count},"knowledge_graph":${graph_nodes},"red_team":${red_team_count},"atlas":${atlas_count},"documentation":${doc_pct},"integration":${integration_tests},"blowup":${blowup_score},"warnings":${warnings},"code_lines":${code_lines}}
 EOF
 }
 
@@ -257,22 +282,24 @@ targets = {
     'atlas':            2000,
     'documentation':      90,
     'integration':        50,
+    'blowup':            100,
 }
 
 # Impact weights (same as registry.rs)
 weights = {
-    'tests':           0.12,
+    'tests':           0.11,
     'lenses':          0.10,
     'architecture':    0.10,
     'performance':     0.08,
     'hypotheses':      0.08,
-    'integration':     0.08,
+    'integration':     0.07,
+    'blowup':          0.07,
     'dse':             0.06,
     'knowledge_graph': 0.06,
     'red_team':        0.06,
     'cross_resonance': 0.05,
     'atlas':           0.05,
-    'experiments':      0.05,
+    'experiments':      0.04,
     'calculators':     0.04,
     'modules':         0.04,
     'documentation':   0.03,
@@ -308,6 +335,11 @@ grow_performance() {
 grow_architecture() {
     log_info "  Action: Architecture gap analysis + fix via grow_architecture.sh"
     bash "$SCRIPT_DIR/grow_architecture.sh" --max-actions 1 2>/dev/null || return 1
+}
+
+grow_blowup() {
+    log_info "  Action: Blowup lens emergence (수축→코어→fiber→자동흡수)"
+    python3 "$REPO_ROOT/tools/nexus6/scripts/growth_infinite_lens.py" 창발 --cycles 48 2>/dev/null || return 1
 }
 
 grow_lenses() {
@@ -410,6 +442,7 @@ execute_dimension_growth() {
         atlas)           grow_atlas ;;
         documentation)   grow_documentation ;;
         integration)     grow_integration ;;
+        blowup)          grow_blowup ;;
         *)
             log_warn "Unknown dimension: $dimension"
             return 1
@@ -447,6 +480,7 @@ targets = {
     'atlas':            2000,
     'documentation':      90,
     'integration':        50,
+    'blowup':            100,
 }
 
 print()

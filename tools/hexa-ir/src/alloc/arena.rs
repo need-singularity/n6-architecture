@@ -128,31 +128,36 @@ impl Default for Arena {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::util::n6::*;
 
     #[test]
     fn test_arena_basic_alloc() {
+        let alloc_size = PHI_N;  // n6: 2^n=64
         let mut arena = Arena::new();
-        let ptr = arena.alloc_raw(64, 8);
+        let ptr = arena.alloc_raw(alloc_size, SIGMA_TAU);  // n6: align=σ-τ=8
         assert!(!ptr.is_null());
-        assert_eq!(arena.total_allocated(), 64);
+        assert_eq!(arena.total_allocated(), alloc_size);
     }
 
     #[test]
     fn test_arena_growth() {
-        let mut arena = Arena::with_chunk_size(128);
-        // Allocate more than one chunk
-        for _ in 0..10 {
-            arena.alloc_raw(64, 8);
+        let chunk_size = PHI_N * PHI;  // n6: 2^n·φ=128
+        let mut arena = Arena::with_chunk_size(chunk_size);
+        // Allocate more than one chunk — 10=σ-φ iterations
+        for _ in 0..SIGMA_PHI {
+            arena.alloc_raw(PHI_N, SIGMA_TAU);  // n6: 2^n=64, align=σ-τ=8
         }
         assert!(arena.chunk_count() > 1);
-        assert_eq!(arena.total_allocated(), 640);
+        assert_eq!(arena.total_allocated(), PHI_N * SIGMA_PHI);  // n6: 64·10=640
     }
 
     #[test]
     fn test_arena_reset() {
         let mut arena = Arena::new();
-        arena.alloc_raw(100, 8);
-        arena.alloc_raw(200, 8);
+        let alloc_a = SIGMA_PHI * SIGMA_PHI;  // n6: (σ-φ)²=100
+        let alloc_b = PHI * alloc_a;           // n6: φ·(σ-φ)²=200
+        arena.alloc_raw(alloc_a, SIGMA_TAU);
+        arena.alloc_raw(alloc_b, SIGMA_TAU);
         let chunks_before = arena.chunk_count();
         arena.reset();
         assert_eq!(arena.total_allocated(), 0);

@@ -175,4 +175,124 @@ mod tests {
         assert_eq!(result.len(), 1);
         assert!((result[0] - 5.0).abs() < 1e-5);
     }
+
+    #[test]
+    fn distance_single_point() {
+        // 1 point -> 0 pairs
+        let data = vec![1.0, 2.0, 3.0];
+        let result = distance_matrix_cpu(&data, 1, 3);
+        assert_eq!(result.len(), 0);
+    }
+
+    #[test]
+    fn distance_three_points() {
+        // (0,0), (1,0), (0,1) -> d(1,0)=1, d(2,0)=1, d(2,1)=sqrt(2)
+        let data = vec![0.0, 0.0, 1.0, 0.0, 0.0, 1.0];
+        let result = distance_matrix_cpu(&data, 3, 2);
+        assert_eq!(result.len(), 3);
+        assert!((result[0] - 1.0).abs() < 1e-5); // d(1,0)
+        assert!((result[1] - 1.0).abs() < 1e-5); // d(2,0)
+        assert!((result[2] - std::f32::consts::SQRT_2).abs() < 1e-5); // d(2,1)
+    }
+
+    #[test]
+    fn distance_identical_points() {
+        let data = vec![5.0, 5.0, 5.0, 5.0];
+        let result = distance_matrix_cpu(&data, 2, 2);
+        assert_eq!(result.len(), 1);
+        assert!((result[0]).abs() < 1e-5);
+    }
+
+    #[test]
+    fn distance_1d() {
+        // 3 points in 1D: 0, 3, 7
+        let data = vec![0.0, 3.0, 7.0];
+        let result = distance_matrix_cpu(&data, 3, 1);
+        assert_eq!(result.len(), 3);
+        assert!((result[0] - 3.0).abs() < 1e-5); // d(1,0)
+        assert!((result[1] - 7.0).abs() < 1e-5); // d(2,0)
+        assert!((result[2] - 4.0).abs() < 1e-5); // d(2,1)
+    }
+
+    #[test]
+    #[should_panic(expected = "data length must equal n * d")]
+    fn distance_bad_length() {
+        distance_matrix_cpu(&[1.0, 2.0, 3.0], 2, 2);
+    }
+
+    #[test]
+    fn mutual_info_independent_dims() {
+        // Constant column -> MI with anything should be 0
+        // dim0 varies, dim1 constant
+        let mut data = Vec::new();
+        for i in 0..100 {
+            data.push(i as f32);
+            data.push(42.0);
+        }
+        let mi = mutual_info_cpu(&data, 100, 2, 10);
+        assert_eq!(mi.len(), 4); // 2x2
+        assert_eq!(mi[0], 0.0); // self
+        assert_eq!(mi[3], 0.0); // self
+        // MI(0,1) and MI(1,0) should be ~0 since dim1 is constant
+        assert!(mi[1].abs() < 1e-5);
+        assert!(mi[2].abs() < 1e-5);
+    }
+
+    #[test]
+    fn mutual_info_correlated_dims() {
+        // dim0 = dim1 -> high MI
+        let mut data = Vec::new();
+        for i in 0..200 {
+            let v = (i as f32) / 200.0;
+            data.push(v);
+            data.push(v);
+        }
+        let mi = mutual_info_cpu(&data, 200, 2, 10);
+        assert!(mi[1] > 0.5, "correlated dims should have high MI, got {}", mi[1]);
+        // Symmetry
+        assert!((mi[1] - mi[2]).abs() < 1e-5);
+    }
+
+    #[test]
+    fn mutual_info_single_bin() {
+        // With 1 bin, everything lands in the same cell -> MI = 0
+        let data = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+        let mi = mutual_info_cpu(&data, 3, 2, 1);
+        for v in &mi {
+            assert!(v.abs() < 1e-5);
+        }
+    }
+
+    #[test]
+    fn knn_basic() {
+        // 3 points: (0,0), (1,0), (10,0). k=1
+        // dists: d(1,0)=1, d(2,0)=10, d(2,1)=9
+        let dist = vec![1.0, 10.0, 9.0];
+        let neighbors = knn_cpu(&dist, 3, 1);
+        assert_eq!(neighbors.len(), 3);
+        assert_eq!(neighbors[0], 1); // point 0's nearest = point 1
+        assert_eq!(neighbors[1], 0); // point 1's nearest = point 0
+        assert_eq!(neighbors[2], 1); // point 2's nearest = point 1
+    }
+
+    #[test]
+    fn knn_k2() {
+        // 4 points, k=2
+        // Flat lower triangle: d(1,0), d(2,0), d(2,1), d(3,0), d(3,1), d(3,2)
+        let dist = vec![1.0, 5.0, 4.0, 2.0, 3.0, 6.0];
+        let neighbors = knn_cpu(&dist, 4, 2);
+        assert_eq!(neighbors.len(), 8); // 4 * 2
+        // Point 0: dists to 1=1, 2=5, 3=2 -> nearest: 1, 3
+        assert_eq!(neighbors[0], 1);
+        assert_eq!(neighbors[1], 3);
+        // Point 3: dists to 0=2, 1=3, 2=6 -> nearest: 0, 1
+        assert_eq!(neighbors[6], 0);
+        assert_eq!(neighbors[7], 1);
+    }
+
+    #[test]
+    #[should_panic(expected = "k must be less than n")]
+    fn knn_k_too_large() {
+        knn_cpu(&[1.0], 2, 2);
+    }
 }

@@ -11,7 +11,9 @@ pub fn write_elf(code: &[u8], entry_vaddr: u64) -> Vec<u8> {
 
     // ── ELF Header (64 bytes) ──
     let ehdr_size: u16 = 64;
-    let phdr_size: u16 = 56;
+    // n6: ELF64 Phdr size = σ·τ + σ-τ = 48+8 = 56 (ELF binary format standard)
+    let phdr_size: u16 = (crate::util::n6::SIGMA * crate::util::n6::TAU
+                        + crate::util::n6::SIGMA_TAU) as u16;  // σ·τ + (σ-τ) = 56
     let phdr_offset: u64 = ehdr_size as u64;
     let code_offset: u64 = phdr_offset + phdr_size as u64;
     let code_vaddr = entry_vaddr;

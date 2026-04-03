@@ -82,7 +82,7 @@ CORE_LENSES = [
     'stability', 'network', 'memory', 'recursion', 'boundary', 'multiscale',
 ]
 
-# 10 domain combinations
+# 10 base domain combinations + auto-discovered elite combos
 DOMAIN_COMBOS = {
     'default': ['consciousness', 'topology', 'causal'],
     'stability': ['stability', 'boundary', 'thermo'],
@@ -95,6 +95,19 @@ DOMAIN_COMBOS = {
     'geometry': ['ruler', 'triangle', 'compass'],
     'quantum_deep': ['quantum', 'quantum_micro', 'em'],
 }
+
+# Auto-load elite combos discovered by growth_infinite_lens.py
+_ELITE_FILE = os.path.join(os.path.expanduser('~'), '.nexus6', 'lens_elite.json')
+if os.path.exists(_ELITE_FILE):
+    try:
+        import json as _json
+        _elite = _json.loads(open(_ELITE_FILE).read())
+        for i, e in enumerate(_elite[:SIGMA]):  # top σ=12
+            _key = f"discovered_{i+1}"
+            if _key not in DOMAIN_COMBOS:
+                DOMAIN_COMBOS[_key] = e['lenses']
+    except Exception:
+        pass
 
 
 def find_numeric_constants(directory: str) -> List[Tuple[int, str, int]]:

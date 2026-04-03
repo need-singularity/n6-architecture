@@ -98,7 +98,9 @@ fn lower_fn(ctx: &mut LowerContext, f: &ast::FnDecl) -> HexaFunction {
     // Lower the function body statements
     let mut blocks = Vec::new();
     stmt_lower::lower_block(ctx, &mut entry_block, &f.body, &mut blocks);
-    blocks.insert(0, entry_block);
+    blocks.push(entry_block);
+    // Sort blocks by id so the entry block (bb0) is always first
+    blocks.sort_by_key(|b| b.id);
 
     // Determine return type
     let ret_ty = match &f.ret_ty {

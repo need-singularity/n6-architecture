@@ -21,6 +21,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![*v as usize], // encode the constant value in args[0]
                 ty: HexaType::I64,
+            label: None,
             });
             dest
         }
@@ -32,6 +33,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![],
                 ty: HexaType::F64,
+            label: None,
             });
             dest
         }
@@ -43,6 +45,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![if *v { 1 } else { 0 }],
                 ty: HexaType::Bool,
+            label: None,
             });
             dest
         }
@@ -54,6 +57,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![],
                 ty: HexaType::Str,
+            label: None,
             });
             dest
         }
@@ -67,6 +71,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![src],
                 ty: HexaType::Any, // type resolved by pass_type_inference
+                label: Some(name.clone()), // carry variable/function name for codegen
             });
             dest
         }
@@ -76,11 +81,12 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
             let r = lower_expr(ctx, block, rhs);
             let dest = ctx.fresh_reg();
             let (hexa_op, ty) = lower_binop(op);
+            let cmp_label = cmp_label(op);
             block.instrs.push(HexaInstr {
                 op: hexa_op,
                 dest: Some(dest),
                 args: vec![l, r],
-                ty,
+                ty, label: cmp_label,
             });
             dest
         }
@@ -97,11 +103,17 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![src],
                 ty: HexaType::Any,
+            label: None,
             });
             dest
         }
 
         Expr::Call { func, args, .. } => {
+            // Extract function name from callee for codegen
+            let call_name = match func.as_ref() {
+                Expr::Ident(name, _) => Some(name.clone()),
+                _ => None,
+            };
             // Lower the callee expression
             let func_reg = lower_expr(ctx, block, func);
             // Lower each argument
@@ -116,6 +128,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: arg_regs,
                 ty: HexaType::Any, // return type resolved later
+                label: call_name, // carry function name for codegen
             });
             dest
         }
@@ -129,6 +142,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![obj_reg],
                 ty: HexaType::Any,
+            label: None,
             });
             dest
         }
@@ -143,6 +157,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(addr),
                 args: vec![arr_reg, idx_reg],
                 ty: HexaType::I64,
+            label: None,
             });
             let dest = ctx.fresh_reg();
             block.instrs.push(HexaInstr {
@@ -150,6 +165,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(dest),
                 args: vec![addr],
                 ty: HexaType::Any,
+            label: None,
             });
             dest
         }
@@ -162,6 +178,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(base),
                 args: vec![fields.len()],
                 ty: HexaType::Any,
+            label: None,
             });
             for (i, (_name, val_expr)) in fields.iter().enumerate() {
                 let val_reg = lower_expr(ctx, block, val_expr);
@@ -171,12 +188,14 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                     dest: Some(field_addr),
                     args: vec![base, i], // offset by field index
                     ty: HexaType::I64,
+            label: None,
                 });
                 block.instrs.push(HexaInstr {
                     op: HexaOp::Store,
                     dest: None,
                     args: vec![field_addr, val_reg],
                     ty: HexaType::Void,
+            label: None,
                 });
             }
             base
@@ -191,6 +210,7 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 dest: Some(last_reg),
                 args: vec![],
                 ty: HexaType::Void,
+            label: None,
             });
             for stmt in &blk.stmts {
                 let r = super::stmt_lower::lower_stmt(ctx, block, stmt);
@@ -198,6 +218,19 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
             }
             last_reg
         }
+    }
+}
+
+/// Encode comparison kind in label field for codegen (Sub+Bool instructions)
+fn cmp_label(op: &BinOp) -> Option<String> {
+    match op {
+        BinOp::Eq  => Some("eq".to_string()),
+        BinOp::Neq => Some("ne".to_string()),
+        BinOp::Lt  => Some("lt".to_string()),
+        BinOp::Gt  => Some("gt".to_string()),
+        BinOp::Le  => Some("le".to_string()),
+        BinOp::Ge  => Some("ge".to_string()),
+        _ => None,
     }
 }
 

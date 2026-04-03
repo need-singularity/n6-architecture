@@ -12,6 +12,7 @@ pub fn run(func: &mut HexaFunction) {
     for block in &mut func.blocks {
         let mut load_cache: HashMap<usize, usize> = HashMap::new(); // addr -> first dest reg
         let mut dead_indices: Vec<bool> = vec![false; block.instrs.len()];
+        let mut reg_remap: HashMap<usize, usize> = HashMap::new(); // dead dest -> reuse dest
 
         for (i, instr) in block.instrs.iter().enumerate() {
             if instr.op == HexaOp::Store {
@@ -21,10 +22,25 @@ pub fn run(func: &mut HexaFunction) {
                 }
             } else if instr.op == HexaOp::Load {
                 if let Some(&addr) = instr.args.first() {
-                    if load_cache.contains_key(&addr) {
+                    if let Some(&first_dest) = load_cache.get(&addr) {
+                        // Redundant load: remap this dest to the first load's dest
+                        if let Some(dest) = instr.dest {
+                            reg_remap.insert(dest, first_dest);
+                        }
                         dead_indices[i] = true; // redundant load
                     } else if let Some(dest) = instr.dest {
                         load_cache.insert(addr, dest);
+                    }
+                }
+            }
+        }
+
+        // Rewrite all references to dead load dests to use the first load's dest
+        if !reg_remap.is_empty() {
+            for instr in &mut block.instrs {
+                for arg in &mut instr.args {
+                    if let Some(&new_reg) = reg_remap.get(arg) {
+                        *arg = new_reg;
                     }
                 }
             }

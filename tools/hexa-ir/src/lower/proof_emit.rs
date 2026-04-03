@@ -23,6 +23,7 @@ pub fn emit_ownership_transfer(
         dest: None,
         args: vec![from_reg, to_reg],
         ty: HexaType::Void,
+            label: None,
     });
     // Emit a LifetimeEnd for the source register
     block.instrs.push(HexaInstr {
@@ -30,6 +31,7 @@ pub fn emit_ownership_transfer(
         dest: None,
         args: vec![from_reg],
         ty: HexaType::Void,
+            label: None,
     });
     let _ = ctx; // ctx available for future extensions
 }
@@ -49,6 +51,7 @@ pub fn emit_borrow_check(
         dest: None,
         args: vec![reg],
         ty: HexaType::Void,
+            label: None,
     });
 }
 
@@ -68,6 +71,7 @@ pub fn emit_lifetime_end(
         dest: None,
         args: vec![reg],
         ty: HexaType::Void,
+            label: None,
     });
 }
 
@@ -85,6 +89,7 @@ pub fn emit_proof_assert(
         dest: None,
         args: vec![condition_reg],
         ty: HexaType::Void,
+            label: None,
     });
 }
 
@@ -102,6 +107,7 @@ pub fn emit_proof_invariant(
         dest: None,
         args: vec![reg],
         ty: HexaType::Void,
+            label: None,
     });
 }
 
@@ -120,5 +126,6 @@ pub fn emit_proof_witness(
         dest: None,
         args: vec![reg],
         ty: HexaType::Void,
+            label: None,
     });
 }

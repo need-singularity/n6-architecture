@@ -62,6 +62,7 @@ targets = {
     'atlas':            2000,
     'documentation':      90,
     'integration':        50,
+    'blowup':            100,
 }
 
 dim_labels = {
@@ -80,6 +81,7 @@ dim_labels = {
     'atlas':           'Atlas',
     'documentation':   'Docs',
     'integration':     'Integration',
+    'blowup':          'Blowup',
 }
 
 # Read log entries

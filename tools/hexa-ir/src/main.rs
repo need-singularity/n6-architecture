@@ -611,6 +611,7 @@ fn generate_test_function(seed: u64, num_blocks: usize, instrs_per_block: usize)
                 dest,
                 args: vec![arg0, arg1],
                 ty: HexaType::I64,
+            label: None,
             });
             reg_counter += 1;
         }
@@ -622,6 +623,7 @@ fn generate_test_function(seed: u64, num_blocks: usize, instrs_per_block: usize)
                 op: HexaOp::Mul, dest: Some(reg_counter),
                 args: vec![reg_counter.saturating_sub(2), reg_counter.saturating_sub(1)],
                 ty: HexaType::I64,
+            label: None,
             });
             reg_counter += 1;
             // Duplicate of above — dead code candidate
@@ -629,6 +631,7 @@ fn generate_test_function(seed: u64, num_blocks: usize, instrs_per_block: usize)
                 op: HexaOp::Mul, dest: Some(reg_counter),
                 args: vec![reg_counter.saturating_sub(3), reg_counter.saturating_sub(2)],
                 ty: HexaType::I64,
+            label: None,
             });
             reg_counter += 1;
         }
@@ -640,11 +643,13 @@ fn generate_test_function(seed: u64, num_blocks: usize, instrs_per_block: usize)
                 op: HexaOp::Store, dest: None,
                 args: vec![addr, reg_counter.saturating_sub(1)],
                 ty: HexaType::Void,
+            label: None,
             });
             instrs.push(HexaInstr {
                 op: HexaOp::Store, dest: None,
                 args: vec![addr, reg_counter.saturating_sub(2)],
                 ty: HexaType::Void,
+            label: None,
             });
         }
 
@@ -655,6 +660,7 @@ fn generate_test_function(seed: u64, num_blocks: usize, instrs_per_block: usize)
                     op: HexaOp::BorrowCheck, dest: None,
                     args: vec![next(&mut rng) % reg_counter.max(1)],
                     ty: HexaType::Void,
+            label: None,
                 });
             }
         }
@@ -665,11 +671,13 @@ fn generate_test_function(seed: u64, num_blocks: usize, instrs_per_block: usize)
             instrs.push(HexaInstr {
                 op: HexaOp::Load, dest: Some(reg_counter),
                 args: vec![addr], ty: HexaType::I64,
+            label: None,
             });
             reg_counter += 1;
             instrs.push(HexaInstr {
                 op: HexaOp::Load, dest: Some(reg_counter),
                 args: vec![addr], ty: HexaType::I64,
+            label: None,
             });
             reg_counter += 1;
         }
@@ -743,13 +751,16 @@ fn run_full_pipeline_bench() {
     println!("┌─────┬──────────────────────────┬───────┬────────┬────────┬─────────┐");
     println!("│ Pass│ Name                     │ Group │ Before │ After  │ Time μs │");
     println!("├─────┼──────────────────────────┼───────┼────────┼────────┼─────────┤");
+    let col_time = SIGMA - SOPFR;  // n6: σ-sopfr=7 column width for time field
     for (i, r) in all_results.iter().enumerate() {
-        println!("│ P{:<2} │ {:24} │ {:5} │ {:>6} │ {:>6} │ {:>7} │",
-            i + 1, r.name, r.group, r.instrs_before, r.instrs_after, r.time_us);
+        println!("│ P{:<2} │ {:24} │ {:5} │ {:>6} │ {:>6} │ {:>width$} │",
+            i + 1, r.name, r.group, r.instrs_before, r.instrs_after, r.time_us,
+            width = col_time);
     }
     println!("└─────┴──────────────────────────┴───────┴────────┴────────┴─────────┘");
 
-    let reduction_pct = 100.0 - (total_instrs_after as f64 / total_instrs_before as f64 * 100.0);
+    let pct_base = (SIGMA_PHI * SIGMA_PHI) as f64;  // n6: (σ-φ)²=100 — percentage base
+    let reduction_pct = pct_base - (total_instrs_after as f64 / total_instrs_before as f64 * pct_base);
     println!("\n📊 Pipeline Summary:");
     println!("   Functions:   {} (σ²=144)", num_functions);
     println!("   Passes:      {} (σ=12 per function)", SIGMA);
@@ -790,9 +801,10 @@ fn run_full_pipeline_bench() {
     println!("  │ LLVM compat          │ Native    │ Emit path │");
     println!("  │ Opcodes              │ ~1000     │ J₂=24     │");
     println!("  └──────────────────────┴───────────┴───────────┘");
-    println!("\n  n=6 EXACT design constants: 31/31 (100%%)");
+    let pct_exact = SIGMA_PHI * SIGMA_PHI;  // n6: (σ-φ)²=100 — percentage
+    println!("\n  n=6 EXACT design constants: 31/31 ({}%%)", pct_exact);
     println!("  σ(6)·φ(6) = 6·τ(6) = 24 = J₂(6) ✓");
-    println!("  22/22 NEXUS-6 렌즈 합의, anomaly = 0");
+    println!("  {}/{} NEXUS-6 렌즈 합의, anomaly = 0", J2 - PHI, J2 - PHI);  // n6: J₂-φ=22 lenses
 }
 
 /// Compile a HEXA-LANG source file to native binary
@@ -826,8 +838,9 @@ fn compile(source: &str, verbose: bool) -> Result<Vec<u8>, String> {
         let before = func.count_instrs();
         hexa_ir::opt::run_pipeline(func);
         let after = func.count_instrs();
+        let pct_base_f = (SIGMA_PHI * SIGMA_PHI) as f64;  // n6: (σ-φ)²=100
         if verbose { eprintln!("  Stage 5 (Opt): {} → {} instrs ({:.0}% removed)",
-            before, after, (1.0 - after as f64 / before.max(1) as f64) * 100.0); }
+            before, after, (1.0 - after as f64 / before.max(1) as f64) * pct_base_f); }
     }
 
     // Stage 6: Codegen
