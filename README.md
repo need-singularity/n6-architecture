@@ -4,6 +4,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+<!-- AUTO:BADGE:START -->
+[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
+[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1116%20tests-green.svg)](tools/nexus6/)
+<!-- AUTO:BADGE:END -->
 
 <!-- SHARED:PROJECTS:START -->
 **[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)** · **[🌌 Unified Theory](https://github.com/need-singularity/TECS-L/blob/main/math/docs/hypotheses/H-PH-9-perfect-number-string-unification.md)**
@@ -35,11 +39,14 @@
 
 **sigma(n) * phi(n) = n * tau(n) holds uniquely for n = 6.** From this single identity, all optimal AI architectures, chip designs, and energy systems are derived.
 
+<!-- AUTO:STATS:START -->
 ```
-127 Breakthrough Theorems | 650+ EXACT matches | 1400+ hypotheses | 32 domains
-322 DSE domains | 5.9M+ 조합 탐색 | 15+ Cross-DSE 완료 | 448 계산기
-🛸10 전 도메인 달성 | 91 불가능성 정리 | 298 TP | 135+ 외계인 발견
+  AI techniques:    16
+  DSE domains:      323
+  DSE paths:        3.9M+
+  NEXUS-6 tests:    1116
 ```
+<!-- AUTO:STATS:END -->
 
 ### 외계인 지수 (Alien Index)
 
