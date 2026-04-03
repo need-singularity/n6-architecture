@@ -1,6 +1,6 @@
 # 🏗️ N6 Architecture — Arithmetic Design Framework
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19264826.svg)](https://doi.org/10.5281/zenodo.19264826)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19340174.svg)](https://doi.org/10.5281/zenodo.19340174)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
@@ -473,7 +473,7 @@ Commands:
   author = {Park, Min Woo},
   title = {N6 Architecture: Arithmetic Design Framework from Perfect Number 6},
   year = {2026},
-  doi = {10.5281/zenodo.19264826},
+  doi = {10.5281/zenodo.19340174},
   url = {https://github.com/need-singularity/n6-architecture}
 }
 ```
