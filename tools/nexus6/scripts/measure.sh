@@ -43,7 +43,9 @@ fi
 
 # --- Warnings ---
 check_output=$( ~/.cargo/bin/cargo check 2>&1 ) || true
-warnings=$(echo "$check_output" | grep -c "^warning\[" || echo "0")
+warnings=$(echo "$check_output" | grep -c "^warning\[" 2>/dev/null || true)
+warnings=${warnings:-0}
+warnings=$(echo "$warnings" | tr -d '[:space:]')
 
 # --- Lenses registered ---
 lenses_registered=$(grep -r "LensEntry" src/telescope/*.rs 2>/dev/null | \

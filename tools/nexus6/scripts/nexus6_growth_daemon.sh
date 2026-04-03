@@ -159,13 +159,15 @@ measure_all_dimensions() {
     # KnowledgeGraph: count graph nodes (Rust source)
     local graph_nodes=0
     if [[ -d "src/graph" ]]; then
-        graph_nodes=$(grep -c "add_node\|Node {" src/graph/*.rs 2>/dev/null || echo "0")
+        graph_nodes=$(grep -h "add_node\|Node {" src/graph/*.rs 2>/dev/null | wc -l | tr -d '[:space:]')
+        graph_nodes=${graph_nodes:-0}
     fi
 
     # RedTeam: count adversarial challenges
     local red_team_count=0
     if [[ -d "src/red_team" ]]; then
-        red_team_count=$(grep -c "fn.*challenge\|fn.*adversar\|fn.*falsif" src/red_team/*.rs 2>/dev/null || echo "0")
+        red_team_count=$(grep -h "fn.*challenge\|fn.*adversar\|fn.*falsif" src/red_team/*.rs 2>/dev/null | wc -l | tr -d '[:space:]')
+        red_team_count=${red_team_count:-0}
     fi
 
     # Atlas: count constants
@@ -189,7 +191,8 @@ measure_all_dimensions() {
     fi
     # Also count cross-module tests in src
     local cross_mod_tests
-    cross_mod_tests=$(grep -r "use crate::" src/ 2>/dev/null | grep "#\[cfg(test)\]" | wc -l | tr -d ' ' || echo "0")
+    cross_mod_tests=$(grep -rl "use crate::" src/ 2>/dev/null | xargs grep -l "#\[cfg(test)\]" 2>/dev/null | wc -l | tr -d '[:space:]')
+    cross_mod_tests=${cross_mod_tests:-0}
     integration_tests=$((integration_tests + cross_mod_tests))
 
     # Output JSON
@@ -282,7 +285,7 @@ grow_architecture() {
 
 grow_lenses() {
     log_info "  Action: Implement new lenses (batch of 6)"
-    bash "$SCRIPT_DIR/grow_lens.sh" --batch 6 2>/dev/null || \
+    bash "$SCRIPT_DIR/grow_lenses.sh" --batch 6 2>/dev/null || \
     claude -p "In /Users/ghost/Dev/n6-architecture/tools/nexus6/, implement 6 new telescope lenses. Check src/telescope/lenses/ for existing lenses and src/telescope/registry.rs for registered but unimplemented lenses. For each new lens: create the .rs file implementing the Lens trait with scan() method, add n=6 constants, add 2+ tests. Register all new lenses." \
         --allowedTools Edit,Write,Read,Bash,Grep,Glob 2>/dev/null || return 1
 }
