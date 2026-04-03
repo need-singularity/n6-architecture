@@ -24,6 +24,9 @@ pub mod boundary_lens;
 pub mod multiscale_lens;
 pub mod renormalization_lens;
 pub mod mi_lens;
+pub mod bose_einstein_lens;
+pub mod speculative_decode_lens;
+pub mod flash_attention_lens_lens;
 
 pub use void_lens::VoidLens;
 pub use barrier_lens::BarrierLens;
@@ -51,3 +54,6 @@ pub use boundary_lens::BoundaryLens;
 pub use multiscale_lens::MultiscaleLens;
 pub use renormalization_lens::RenormalizationLens;
 pub use mi_lens::MiLens;
+pub use bose_einstein_lens::BoseEinsteinLens;
+pub use speculative_decode_lens::SpeculativeDecodeLens;
+pub use flash_attention_lens_lens::UflashUattentionUlensLens;
