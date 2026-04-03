@@ -1,0 +1,110 @@
+# ═══════════════════════════════════════════════════════════════
+# CDO Troubleshooting:
+#   .shared/ is a symlink to ../TECS-L/.shared/ locally.
+#   In CI, this symlink does not resolve — never rely on .shared/ contents.
+#   CDO JSON validation uses inline Python instead.
+# ═══════════════════════════════════════════════════════════════
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Job 1: Python syntax check ──────────────────────────────
+  verify-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: py_compile tools/*.py and root *.py
+        run: |
+          exitcode=0
+          for f in tools/*.py *.py; do
+            if [ -f "$f" ]; then
+              python3 -m py_compile "$f" || exitcode=1
+            fi
+          done
+          exit $exitcode
+
+  # ── Job 2: Rust cargo check + test ──────────────────────────
+  rust-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            tools/nexus6/target
+          key: cargo-${{ runner.os }}-${{ hashFiles('tools/nexus6/Cargo.lock', 'tools/nexus6/Cargo.toml') }}
+          restore-keys: |
+            cargo-${{ runner.os }}-
+
+      - name: Cargo check
+        run: cd tools/nexus6 && cargo check
+
+      - name: Cargo test
+        run: cd tools/nexus6 && cargo test
+
+  # ── Job 3: CDO JSON validation ──────────────────────────────
+  cdo-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate CDO JSON structure
+        run: |
+          python3 - <<'PYEOF'
+          import json, glob, sys
+
+          CDO_REQUIRED = {"_meta"}  # minimum CDO field
+
+          errors = []
+          json_files = glob.glob("shared/**/*.json", recursive=True) + \
+                       glob.glob("experiments/**/*.json", recursive=True)
+
+          if not json_files:
+              print("No JSON files found to validate")
+              sys.exit(0)
+
+          for path in sorted(json_files):
+              try:
+                  with open(path) as f:
+                      data = json.load(f)
+              except json.JSONDecodeError as e:
+                  errors.append(f"  INVALID JSON: {path} ({e})")
+                  continue
+
+              if not isinstance(data, dict):
+                  continue  # arrays are OK, skip CDO check
+
+              # CDO check: if file has _meta, validate its structure
+              if "_meta" in data:
+                  meta = data["_meta"]
+                  if not isinstance(meta, dict):
+                      errors.append(f"  BAD _meta (not dict): {path}")
+                  elif "description" not in meta:
+                      errors.append(f"  _meta missing 'description': {path}")
+                  print(f"  OK (CDO): {path}")
+              else:
+                  print(f"  OK (plain): {path}")
+
+          if errors:
+              print("\nCDO validation errors:")
+              for e in errors:
+                  print(e)
+              sys.exit(1)
+          else:
+              print(f"\nAll {len(json_files)} JSON files valid.")
+          PYEOF
