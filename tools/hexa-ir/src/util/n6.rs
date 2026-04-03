@@ -21,7 +21,9 @@ pub const SIGMA_SQ: usize = SIGMA * SIGMA;     // σ² = 144 (benchmark scale)
 pub const PHI_N: usize = 1 << N;               // 2^n = 64 (store addr space)
 pub const PHI_SOPFR: usize = 1 << SOPFR;       // 2^sopfr = 32 (load addr space)
 pub const SIGMA_MU: usize = SIGMA - MU;        // σ-μ = 11 (M-theory dim)
-pub const SIGMA_J2: usize = SIGMA * J2;        // σ·J₂ = 288 (extended opcode space)
+pub const SIGMA_J2: usize = SIGMA * J2;
+
+pub const NEXUS_LENSES: usize = 213;  // NEXUS-6 lens count (auto-synced)        // σ·J₂ = 288 (extended opcode space)
 
 // Block sizes for Egyptian allocator
 pub const BLOCK_LARGE: usize = 1 << SIGMA;     // 2^σ  = 4096

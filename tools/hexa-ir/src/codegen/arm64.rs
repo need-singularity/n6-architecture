@@ -16,25 +16,103 @@ pub enum Arm64Reg {
     Sp,
 }
 
-/// Select ARM64 instructions for a function (Mk.II stub)
-pub fn select_function(func: &HexaFunction, _alloc: &RegAlloc) -> Vec<u8> {
+/// Select ARM64 instructions for a function
+/// Walks HEXA-IR blocks and emits real ARM64 machine code
+pub fn select_function(func: &HexaFunction, alloc: &RegAlloc) -> Vec<u8> {
     let mut code = Vec::new();
 
-    // Prologue: stp x29, x30, [sp, #-16]!; mov x29, sp
-    code.extend_from_slice(&0xa9bf7bfdu32.to_le_bytes()); // stp x29, x30, [sp, #-16]!
-    code.extend_from_slice(&0x910003fdu32.to_le_bytes()); // mov x29, sp
+    // Minimal entry: no frame setup needed for leaf functions
 
-    // Mk.II: emit actual instructions per block
-    // For now, emit a simple return sequence based on block count
-    let total_instrs = func.count_instrs();
-    if total_instrs == 0 {
-        // mov x0, #0
-        code.extend_from_slice(&0xd2800000u32.to_le_bytes());
+    // Collect constant values from Alloc instructions (Alloc %imm = load immediate)
+    let mut reg_constants: std::collections::HashMap<usize, u64> = std::collections::HashMap::new();
+    for block in &func.blocks {
+        for instr in &block.instrs {
+            if instr.op == HexaOp::Alloc {
+                if let (Some(dest), Some(&imm)) = (instr.dest, instr.args.first()) {
+                    reg_constants.insert(dest, imm as u64);
+                }
+            }
+        }
     }
 
-    // Epilogue: ldp x29, x30, [sp], #16; ret
-    code.extend_from_slice(&0xa8c17bfdu32.to_le_bytes()); // ldp x29, x30, [sp], #16
-    code.extend_from_slice(&0xd65f03c0u32.to_le_bytes()); // ret
+    // Walk IR and emit instructions
+    for block in &func.blocks {
+        for instr in &block.instrs {
+            match instr.op {
+                HexaOp::Alloc => {
+                    // Alloc %imm → mov x<dest>, #imm
+                    if let (Some(dest), Some(&imm)) = (instr.dest, instr.args.first()) {
+                        let rd = alloc.get_phys(dest).unwrap_or(0) as u32;
+                        let imm16 = (imm as u32) & 0xFFFF;
+                        // movz x<rd>, #imm: 0xd2800000 | (imm16 << 5) | rd
+                        let movz = 0xd2800000u32 | (imm16 << 5) | rd;
+                        code.extend_from_slice(&movz.to_le_bytes());
+                    }
+                }
+                HexaOp::Return => {
+                    // Move return value to x0
+                    if let Some(&arg) = instr.args.first() {
+                        // Check if arg is a known constant
+                        if let Some(&imm) = reg_constants.get(&arg) {
+                            // mov x0, #imm directly
+                            let imm16 = (imm as u32) & 0xFFFF;
+                            let movz = 0xd2800000u32 | (imm16 << 5);
+                            code.extend_from_slice(&movz.to_le_bytes());
+                        } else {
+                            let src = alloc.get_phys(arg).unwrap_or(0) as u32;
+                            if src != 0 {
+                                // mov x0, x<src>
+                                let mov_instr = 0xaa0003e0u32 | (src << 16);
+                                code.extend_from_slice(&mov_instr.to_le_bytes());
+                            }
+                        }
+                    }
+                }
+                HexaOp::Add => {
+                    if let (Some(dest), Some(&a), Some(&b)) = (instr.dest, instr.args.get(0), instr.args.get(1)) {
+                        let rd = alloc.get_phys(dest).unwrap_or(0) as u32;
+                        let rn = alloc.get_phys(a).unwrap_or(0) as u32;
+                        let rm = alloc.get_phys(b).unwrap_or(0) as u32;
+                        // add x<rd>, x<rn>, x<rm>: 0x8b000000 | rm<<16 | rn<<5 | rd
+                        let add_instr = 0x8b000000u32 | (rm << 16) | (rn << 5) | rd;
+                        code.extend_from_slice(&add_instr.to_le_bytes());
+                    }
+                }
+                HexaOp::Sub => {
+                    if let (Some(dest), Some(&a), Some(&b)) = (instr.dest, instr.args.get(0), instr.args.get(1)) {
+                        let rd = alloc.get_phys(dest).unwrap_or(0) as u32;
+                        let rn = alloc.get_phys(a).unwrap_or(0) as u32;
+                        let rm = alloc.get_phys(b).unwrap_or(0) as u32;
+                        // sub x<rd>, x<rn>, x<rm>
+                        let sub_instr = 0xcb000000u32 | (rm << 16) | (rn << 5) | rd;
+                        code.extend_from_slice(&sub_instr.to_le_bytes());
+                    }
+                }
+                HexaOp::Mul => {
+                    if let (Some(dest), Some(&a), Some(&b)) = (instr.dest, instr.args.get(0), instr.args.get(1)) {
+                        let rd = alloc.get_phys(dest).unwrap_or(0) as u32;
+                        let rn = alloc.get_phys(a).unwrap_or(0) as u32;
+                        let rm = alloc.get_phys(b).unwrap_or(0) as u32;
+                        // mul x<rd>, x<rn>, x<rm>: madd xd, xn, xm, xzr
+                        let mul_instr = 0x9b007c00u32 | (rm << 16) | (rn << 5) | rd;
+                        code.extend_from_slice(&mul_instr.to_le_bytes());
+                    }
+                }
+                // Proof ops: zero runtime cost (erased)
+                HexaOp::ProofAssert | HexaOp::ProofInvariant | HexaOp::ProofWitness |
+                HexaOp::OwnershipTransfer | HexaOp::BorrowCheck | HexaOp::LifetimeEnd => {}
+                // Other ops: TODO for full Mk.I
+                _ => {}
+            }
+        }
+    }
+
+    // For standalone executables: exit syscall instead of ret
+    // x0 already holds return value (set by Return codegen above)
+    // mov x16, #1 (SYS_exit on macOS)
+    code.extend_from_slice(&0xd2800030u32.to_le_bytes()); // movz x16, #1
+    // svc #0x80
+    code.extend_from_slice(&0xd4001001u32.to_le_bytes()); // svc #0x80
 
     code
 }

@@ -42,6 +42,45 @@ pub fn compile_to_binary(functions: &[HexaFunction], target: Target) -> Vec<u8> 
     all_code
 }
 
+/// Compile and link to a native executable using system linker
+/// Returns the path to the output binary
+pub fn compile_and_link(functions: &[HexaFunction], target: Target, output: &str) -> Result<(), String> {
+    let mut all_code = Vec::new();
+    for func in functions {
+        let alloc = regalloc::allocate(func);
+        let mc = match &target {
+            Target::X86_64Linux | Target::X86_64MacOS => x86_64::select_function(func, &alloc),
+            Target::Arm64MacOS => arm64::select_function(func, &alloc),
+        };
+        all_code.extend_from_slice(&mc);
+    }
+
+    // Write assembly with raw bytes as .byte directives
+    let asm_path = format!("{}.s", output);
+    let mut asm = String::new();
+    asm.push_str(".global _main\n_main:\n");
+    for byte in &all_code {
+        asm.push_str(&format!("    .byte 0x{:02x}\n", byte));
+    }
+
+    std::fs::write(&asm_path, &asm).map_err(|e| format!("write asm: {}", e))?;
+
+    // Link with system cc
+    let status = std::process::Command::new("cc")
+        .args(&[&asm_path, "-o", output, "-lSystem", "-e", "_main"])
+        .status()
+        .map_err(|e| format!("cc: {}", e))?;
+
+    // Clean up asm
+    let _ = std::fs::remove_file(&asm_path);
+
+    if status.success() {
+        Ok(())
+    } else {
+        Err(format!("linker failed with {}", status))
+    }
+}
+
 /// Generate native binary from optimized IR
 pub fn generate(func: &HexaFunction, target: &Target) -> Vec<u8> {
     // Step 1: Register allocation
@@ -63,10 +102,10 @@ pub fn generate(func: &HexaFunction, target: &Target) -> Vec<u8> {
             elf::write_elf(&machine_code, 0x401000)
         }
         Target::X86_64MacOS => {
-            macho::write_macho(&machine_code, 0x100000000)
+            macho::write_macho(&machine_code, 0x100000000, false)
         }
         Target::Arm64MacOS => {
-            macho::write_macho(&machine_code, 0x100000000)
+            macho::write_macho(&machine_code, 0x100000000, true)
         }
     }
 }

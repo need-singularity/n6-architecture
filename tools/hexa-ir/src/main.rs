@@ -796,42 +796,92 @@ fn run_full_pipeline_bench() {
 }
 
 /// Compile a HEXA-LANG source file to native binary
-fn compile(source: &str) -> Result<Vec<u8>, String> {
+fn compile(source: &str, verbose: bool) -> Result<Vec<u8>, String> {
     // Stage 1: Lex
     let tokens = hexa_ir::lexer::lex(source).map_err(|e| format!("Lex errors: {:?}", e))?;
+    if verbose { eprintln!("  Stage 1 (Lex): {} tokens", tokens.len()); }
+
     // Stage 2: Parse
     let program = hexa_ir::parser::parse(tokens).map_err(|e| format!("Parse errors: {:?}", e))?;
+    if verbose { eprintln!("  Stage 2 (Parse): {} declarations", program.decls.len()); }
+
     // Stage 3: Sema
     hexa_ir::sema::analyze(&program).map_err(|e| format!("Sema errors: {:?}", e))?;
+    if verbose { eprintln!("  Stage 3 (Sema): type check passed"); }
+
     // Stage 4: Lower
     let functions = hexa_ir::lower::lower_program(&program);
+    if verbose {
+        for f in &functions {
+            eprintln!("  Stage 4 (Lower): fn {} → {} blocks, {} instrs",
+                f.name, f.blocks.len(), f.count_instrs());
+            // Print IR
+            eprintln!("{}", hexa_ir::ir::print::print_function(f));
+        }
+    }
+
     // Stage 5: Optimize (σ=12 passes)
     let mut optimized = functions;
     for func in &mut optimized {
+        let before = func.count_instrs();
         hexa_ir::opt::run_pipeline(func);
+        let after = func.count_instrs();
+        if verbose { eprintln!("  Stage 5 (Opt): {} → {} instrs ({:.0}% removed)",
+            before, after, (1.0 - after as f64 / before.max(1) as f64) * 100.0); }
     }
+
     // Stage 6: Codegen
-    let binary = hexa_ir::codegen::compile_to_binary(&optimized, hexa_ir::codegen::Target::native());
+    let target = hexa_ir::codegen::Target::native();
+    if verbose { eprintln!("  Stage 6 (Codegen): target = {:?}", target); }
+    // Return machine code + target info for the caller to link
+    let binary = hexa_ir::codegen::compile_to_binary(&optimized, target);
     Ok(binary)
 }
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    if args.len() > 1 && args[1] != "--bench" {
-        // Compile mode: hexa-ir source.hexa
-        let source = std::fs::read_to_string(&args[1])
-            .unwrap_or_else(|e| { eprintln!("Error reading {}: {}", args[1], e); std::process::exit(1); });
-        match compile(&source) {
-            Ok(binary) => {
-                let output = args[1].replace(".hexa", "");
-                std::fs::write(&output, &binary)
-                    .unwrap_or_else(|e| { eprintln!("Error writing {}: {}", output, e); std::process::exit(1); });
-                #[cfg(unix)]
-                { use std::os::unix::fs::PermissionsExt; std::fs::set_permissions(&output, std::fs::Permissions::from_mode(0o755)).ok(); }
-                println!("Compiled {} → {} ({} bytes)", args[1], output, binary.len());
+    let verbose = args.iter().any(|a| a == "-v" || a == "--verbose");
+    let source_file = args.iter().find(|a| a.ends_with(".hexa"));
+
+    if let Some(src_path) = source_file {
+        // Compile mode: hexa-ir source.hexa [-v]
+        let source = std::fs::read_to_string(src_path)
+            .unwrap_or_else(|e| { eprintln!("Error reading {}: {}", src_path, e); std::process::exit(1); });
+        // Parse + lower + optimize
+        let tokens = hexa_ir::lexer::lex(&source).unwrap_or_else(|e| { eprintln!("Lex: {:?}", e); std::process::exit(1); });
+        if verbose { eprintln!("  Stage 1 (Lex): {} tokens", tokens.len()); }
+
+        let program = hexa_ir::parser::parse(tokens).unwrap_or_else(|e| { eprintln!("Parse: {:?}", e); std::process::exit(1); });
+        if verbose { eprintln!("  Stage 2 (Parse): {} decls", program.decls.len()); }
+
+        hexa_ir::sema::analyze(&program).unwrap_or_else(|e| { eprintln!("Sema: {:?}", e); std::process::exit(1); });
+        if verbose { eprintln!("  Stage 3 (Sema): passed"); }
+
+        let mut functions = hexa_ir::lower::lower_program(&program);
+        if verbose {
+            for f in &functions {
+                eprintln!("  Stage 4 (Lower): fn {} → {} blocks, {} instrs", f.name, f.blocks.len(), f.count_instrs());
+                eprintln!("{}", hexa_ir::ir::print::print_function(f));
             }
-            Err(e) => { eprintln!("{}", e); std::process::exit(1); }
+        }
+
+        for func in &mut functions {
+            let before = func.count_instrs();
+            hexa_ir::opt::run_pipeline(func);
+            if verbose { eprintln!("  Stage 5 (Opt): {} → {} instrs", before, func.count_instrs()); }
+        }
+
+        let output = src_path.replace(".hexa", "");
+        let target = hexa_ir::codegen::Target::native();
+        if verbose { eprintln!("  Stage 6 (Codegen+Link): {:?}", target); }
+
+        match hexa_ir::codegen::compile_and_link(&functions, target, &output) {
+            Ok(()) => {
+                let size = std::fs::metadata(&output).map(|m| m.len()).unwrap_or(0);
+                println!("Compiled {} → {} ({} bytes)", src_path, output, size);
+            }
+            Err(e) => { eprintln!("Codegen error: {}", e); std::process::exit(1); }
         }
     } else {
         // Benchmark mode (default)

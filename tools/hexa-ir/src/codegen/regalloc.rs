@@ -69,6 +69,13 @@ pub struct RegAlloc {
     pub frame_size: usize,
 }
 
+impl RegAlloc {
+    /// Get physical register index for an SSA register (0 = first GPR)
+    pub fn get_phys(&self, ssa_reg: usize) -> Option<usize> {
+        self.assignments.get(&ssa_reg).map(|pr| pr.index())
+    }
+}
+
 /// Compute live intervals for all SSA registers in the function
 fn compute_live_intervals(func: &HexaFunction) -> Vec<LiveInterval> {
     let mut intervals: HashMap<usize, LiveInterval> = HashMap::new();
