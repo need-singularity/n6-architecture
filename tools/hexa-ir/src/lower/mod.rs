@@ -44,6 +44,12 @@ pub struct LowerContext {
     pub generic_fn_defs: HashMap<String, ast::FnDecl>,
     /// Already monomorphized instances
     pub mono_instances: HashMap<String, bool>,
+    /// ═══ Mk.II Vtable Infrastructure ═══
+    /// Trait definitions: trait_name -> ordered list of method names
+    pub trait_defs: HashMap<String, Vec<String>>,
+    /// Vtable entries: (trait_name, type_name) -> ordered list of mangled fn names
+    /// Each entry corresponds to a trait method in the same order as trait_defs
+    pub vtables: HashMap<(String, String), Vec<String>>,
 }
 
 impl LowerContext {
@@ -63,6 +69,8 @@ impl LowerContext {
             closure_counter: 0,
             generic_fn_defs: HashMap::new(),
             mono_instances: HashMap::new(),
+            trait_defs: HashMap::new(),
+            vtables: HashMap::new(),
         }
     }
 
@@ -158,6 +166,19 @@ impl LowerContext {
         self.closure_counter += 1;
         id
     }
+
+    /// Look up the vtable for a (trait, type) pair.
+    /// Returns the ordered list of mangled function names.
+    pub fn lookup_vtable(&self, trait_name: &str, type_name: &str) -> Option<&Vec<String>> {
+        self.vtables.get(&(trait_name.to_string(), type_name.to_string()))
+    }
+
+    /// Look up a method index in a trait's vtable.
+    /// Returns the index for vtable dispatch.
+    pub fn lookup_trait_method_index(&self, trait_name: &str, method_name: &str) -> Option<usize> {
+        self.trait_defs.get(trait_name)
+            .and_then(|methods| methods.iter().position(|m| m == method_name))
+    }
 }
 
 /// Lower an entire program to a list of IR functions
@@ -196,7 +217,29 @@ pub fn lower_program(program: &ast::Program) -> Vec<HexaFunction> {
                     );
                 }
             }
+            ast::Decl::TraitDecl(td) => {
+                let method_names: Vec<String> = td.methods.iter()
+                    .map(|m| m.name.clone())
+                    .collect();
+                ctx.trait_defs.insert(td.name.clone(), method_names);
+            }
             _ => {}
+        }
+    }
+
+    // Build vtables: for each impl block, create ordered fn pointer list
+    // matching the trait method order
+    for decl in &program.decls {
+        if let ast::Decl::ImplBlock(ib) = decl {
+            if let Some(trait_methods) = ctx.trait_defs.get(&ib.trait_name).cloned() {
+                let vtable_entries: Vec<String> = trait_methods.iter()
+                    .map(|method_name| format!("{}__{}", ib.target_type, method_name))
+                    .collect();
+                ctx.vtables.insert(
+                    (ib.trait_name.clone(), ib.target_type.clone()),
+                    vtable_entries,
+                );
+            }
         }
     }
 

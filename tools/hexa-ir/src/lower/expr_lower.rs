@@ -545,13 +545,21 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
         }
 
         Expr::Closure { params, body, .. } => {
-            // Closure lowering: allocate env struct, store captures, return env_reg
-            let param_names: Vec<&str> = params.iter().map(|(n, _)| n.as_str()).collect();
-            let captured: Vec<(String, usize)> = ctx.vars.iter()
-                .filter(|(name, _)| !param_names.contains(&name.as_str()))
-                .map(|(name, reg)| (name.clone(), *reg))
+            // ═══ Mk.II Lambda Lifting — full closure conversion ═══
+            //
+            // 1. Analyze free variables in the closure body
+            // 2. Allocate env struct, store captures
+            // 3. Lift body to a real top-level function (__closure_N)
+            // 4. Return a ClosureObj = (fn_ptr, env_ptr)
+
+            // Step 1: Analyze captures (free variables in body that exist in current scope)
+            let param_names: Vec<String> = params.iter().map(|(n, _)| n.clone()).collect();
+            let free_vars = super::closure::analyze_free_vars(body, &param_names);
+            let captured: Vec<(String, usize)> = free_vars.iter()
+                .filter_map(|name| ctx.vars.get(name).map(|reg| (name.clone(), *reg)))
                 .collect();
 
+            // Step 2: Allocate env struct and store captures
             let env_size = if captured.is_empty() { 8 } else { captured.len() * 8 };
             let env_reg = ctx.fresh_reg();
             block.instrs.push(HexaInstr {
@@ -562,7 +570,6 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
                 label: Some("closure_env".to_string()),
             });
 
-            // Store captured variables into environment
             for (i, (_cap_name, cap_reg)) in captured.iter().enumerate() {
                 if i == 0 {
                     block.instrs.push(HexaInstr {
@@ -593,23 +600,40 @@ pub fn lower_expr(ctx: &mut LowerContext, block: &mut HexaBlock, expr: &Expr) ->
             let closure_id = ctx.next_closure_id();
             let closure_fn_name = format!("__closure_{}", closure_id);
 
-            // Record closure for lambda lifting
+            // Step 3: Build CaptureInfo for the lifted function
+            let capture_infos: Vec<super::closure::CaptureInfo> = captured.iter()
+                .enumerate()
+                .map(|(i, (name, reg))| super::closure::CaptureInfo {
+                    name: name.clone(),
+                    outer_reg: *reg,
+                    capture_offset: i * 8,
+                    by_ref: false,
+                })
+                .collect();
+
+            // Step 4: Lift the closure body to a real top-level function
+            let lifted_fn = super::closure::lift_closure_to_function(
+                &closure_fn_name,
+                params,
+                body,
+                &capture_infos,
+                ctx,
+            );
+            ctx.functions.push(lifted_fn);
+
+            // Record closure IR info
             ctx.closure_fns.push(super::closure::ClosureIR {
-                captures: captured.iter().enumerate().map(|(i, (name, reg))| {
-                    super::closure::CaptureInfo {
-                        name: name.clone(), outer_reg: *reg,
-                        capture_offset: i * 8, by_ref: false,
-                    }
-                }).collect(),
+                captures: capture_infos,
                 env_reg,
                 body_fn: closure_fn_name.clone(),
             });
 
+            // Step 5: Create a ClosureObj = (fn_ptr_label, env_reg)
             let result = ctx.fresh_reg();
             block.instrs.push(HexaInstr {
                 op: HexaOp::Alloc, dest: Some(result),
                 args: vec![env_reg],
-                ty: HexaType::Fn(vec![], Box::new(HexaType::Any)),
+                ty: HexaType::ClosureObj(vec![], Box::new(HexaType::Any)),
                 label: Some(closure_fn_name),
             });
             result

@@ -747,6 +747,13 @@ fn types_compatible(expected: &HexaType, found: &HexaType) -> bool {
         (HexaType::Struct(_), HexaType::Struct(_)) => true,
         (HexaType::Enum(_), HexaType::Enum(_)) => true,
         (HexaType::Array(a, _), HexaType::Array(b, _)) => types_compatible(a, b),
+        // Trait objects are compatible with same trait
+        (HexaType::TraitObject(a), HexaType::TraitObject(b)) => a == b,
+        // Closure objects: compatible if param/return types match
+        (HexaType::ClosureObj(_, _), HexaType::ClosureObj(_, _)) => true,
+        // Fn and ClosureObj are compatible (closure implements Fn)
+        (HexaType::Fn(_, _), HexaType::ClosureObj(_, _)) => true,
+        (HexaType::ClosureObj(_, _), HexaType::Fn(_, _)) => true,
         _ => false,
     }
 }
@@ -768,6 +775,11 @@ fn hexa_type_name(ty: &HexaType) -> String {
         HexaType::Fn(params, ret) => {
             let ps: Vec<String> = params.iter().map(hexa_type_name).collect();
             format!("fn({}) -> {}", ps.join(", "), hexa_type_name(ret))
+        }
+        HexaType::TraitObject(name) => format!("dyn {}", name),
+        HexaType::ClosureObj(params, ret) => {
+            let ps: Vec<String> = params.iter().map(hexa_type_name).collect();
+            format!("closure({}) -> {}", ps.join(", "), hexa_type_name(ret))
         }
     }
 }

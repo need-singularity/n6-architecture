@@ -995,23 +995,45 @@ mod closure_tests {
     fn test_closure_lowering_creates_env() {
         let source = "fn main() -> i64 {\n    let x = 10\n    let f = |y: i64| x + y\n    return 0\n}\n";
         let funcs = compile_to_ir(source);
-        let main_fn = &funcs[0];
+        let main_fn = funcs.iter().find(|f| f.name == "main")
+            .expect("should have main function");
         let env_alloc = main_fn.blocks.iter()
             .flat_map(|b| b.instrs.iter())
             .any(|i| i.op == HexaOp::Alloc && i.label.as_deref() == Some("closure_env"));
         assert!(env_alloc, "closure should allocate an environment struct");
+
+        // Mk.II: verify that a lifted closure function was generated
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(lifted.is_some(), "closure body should be lifted to a __closure_N function");
+        let lifted_fn = lifted.unwrap();
+        // Lifted function should have env as first param + closure param
+        assert!(lifted_fn.params.len() >= 2,
+            "lifted closure should have __env + params, found {} params", lifted_fn.params.len());
+        assert_eq!(lifted_fn.params[0].0, "__env", "first param should be __env");
     }
 
     #[test]
     fn test_closure_capture_stores() {
         let source = "fn main() -> i64 {\n    let a = 5\n    let b = 10\n    let f = |x: i64| a + b + x\n    return 0\n}\n";
         let funcs = compile_to_ir(source);
-        let main_fn = &funcs[0];
+        let main_fn = funcs.iter().find(|f| f.name == "main")
+            .expect("should have main function");
         let store_count = main_fn.blocks.iter()
             .flat_map(|b| b.instrs.iter())
             .filter(|i| i.op == HexaOp::Store)
             .count();
         assert!(store_count >= 3, "should have stores for inits + captures, found {}", store_count);
+
+        // Mk.II: verify lifted function loads captures from env
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(lifted.is_some(), "should have a lifted closure function");
+        let lifted_fn = lifted.unwrap();
+        let cap_loads = lifted_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .filter(|i| i.op == HexaOp::Load
+                && i.label.as_ref().map_or(false, |l| l.starts_with("cap_")))
+            .count();
+        assert!(cap_loads >= 2, "lifted fn should load 2+ captures from env, found {}", cap_loads);
     }
 }
 
@@ -2355,7 +2377,8 @@ fn main() -> i64 {
 }
 "#;
         let funcs = compile_to_ir(source);
-        let main_fn = &funcs[0];
+        let main_fn = funcs.iter().find(|f| f.name == "main")
+            .expect("should have main function");
 
         // Should have both enum tag and closure env
         let has_tag = main_fn.blocks.iter()
@@ -2366,6 +2389,10 @@ fn main() -> i64 {
             .any(|i| i.label.as_deref() == Some("closure_env"));
         assert!(has_tag, "should have enum tag allocation");
         assert!(has_env, "should have closure environment allocation");
+
+        // Mk.II: lifted closure function should exist
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(lifted.is_some(), "closure body should be lifted to __closure_N");
     }
 }
 
@@ -2447,5 +2474,458 @@ fn main() -> i64 { return small() }
         let has_movz_sub = asm.contains("movz x16") && asm.contains("sub sp, sp, x16");
         assert!(!has_movz_sub,
             "Small frame should use stp pre-indexed, not movz+sub pattern");
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ═══ Mk.II Blowup Breakthrough Tests — Lambda Lifting + Vtable Dispatch ═══
+// ═══════════════════════════════════════════════════════════════════════════════
+
+#[cfg(test)]
+mod lambda_lifting_tests {
+    use crate::lexer;
+    use crate::parser;
+    use crate::sema;
+    use crate::lower;
+    use crate::ir::{HexaType, HexaOp};
+
+    fn compile_to_ir(source: &str) -> Vec<crate::ir::HexaFunction> {
+        let tokens = lexer::lex(source).expect("lex failed");
+        let program = parser::parse(tokens).expect("parse failed");
+        sema::analyze(&program).expect("sema failed");
+        lower::lower_program(&program)
+    }
+
+    // ── Breakthrough 1: Lambda Lifting ──
+
+    #[test]
+    fn test_lambda_lift_simple_closure() {
+        // A closure with no captures should still be lifted
+        let source = r#"
+fn main() -> i64 {
+    let f = |x: i64| x + 1
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(lifted.is_some(), "simple closure should be lambda-lifted");
+        let lifted_fn = lifted.unwrap();
+        // Should have __env + x params
+        assert_eq!(lifted_fn.params.len(), 2, "lifted fn: __env + x = 2 params");
+        assert_eq!(lifted_fn.params[0].0, "__env");
+        assert_eq!(lifted_fn.params[1].0, "x");
+        // Body should have Add and Return instructions
+        let has_add = lifted_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Add);
+        let has_ret = lifted_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Return);
+        assert!(has_add, "lifted closure body should have Add");
+        assert!(has_ret, "lifted closure body should have Return");
+    }
+
+    #[test]
+    fn test_lambda_lift_with_capture() {
+        // Closure captures 'x' from enclosing scope
+        let source = r#"
+fn main() -> i64 {
+    let x = 42
+    let f = |y: i64| x + y
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+
+        // Lifted function should exist
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"))
+            .expect("should have lifted closure");
+
+        // Should load capture 'x' from env
+        let cap_x = lifted.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .find(|i| i.op == HexaOp::Load && i.label.as_deref() == Some("cap_x"));
+        assert!(cap_x.is_some(), "lifted fn should load captured 'x' from env");
+
+        // Main should store captured value into closure env
+        let main_fn = funcs.iter().find(|f| f.name == "main").expect("main");
+        let has_env_alloc = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Alloc && i.label.as_deref() == Some("closure_env"));
+        assert!(has_env_alloc, "main should allocate closure env");
+    }
+
+    #[test]
+    fn test_lambda_lift_multi_capture() {
+        // Closure captures both 'a' and 'b'
+        let source = r#"
+fn main() -> i64 {
+    let a = 10
+    let b = 20
+    let f = |x: i64| a + b + x
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"))
+            .expect("should have lifted closure");
+
+        // Should have captures for both a and b
+        let cap_loads: Vec<_> = lifted.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .filter(|i| i.op == HexaOp::Load
+                && i.label.as_ref().map_or(false, |l| l.starts_with("cap_")))
+            .collect();
+        assert!(cap_loads.len() >= 2,
+            "should load 2+ captures from env, found {}", cap_loads.len());
+    }
+
+    #[test]
+    fn test_lambda_lift_closure_obj_type() {
+        // Verify the closure result has ClosureObj type
+        let source = r#"
+fn main() -> i64 {
+    let f = |x: i64| x + 1
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let main_fn = funcs.iter().find(|f| f.name == "main").expect("main");
+
+        // The closure result should be a ClosureObj allocation
+        let closure_alloc = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .find(|i| matches!(i.ty, HexaType::ClosureObj(_, _)));
+        assert!(closure_alloc.is_some(),
+            "closure should produce a ClosureObj-typed allocation");
+    }
+
+    #[test]
+    fn test_lambda_lift_nested_closure() {
+        // Two closures should each get their own lifted function
+        let source = r#"
+fn main() -> i64 {
+    let a = 1
+    let f = |x: i64| x + a
+    let g = |y: i64| y + a
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let closure_fns: Vec<_> = funcs.iter()
+            .filter(|f| f.name.starts_with("__closure_"))
+            .collect();
+        assert_eq!(closure_fns.len(), 2,
+            "two closures should produce two lifted functions, got {}",
+            closure_fns.len());
+        // They should have different names
+        assert_ne!(closure_fns[0].name, closure_fns[1].name);
+    }
+
+    #[test]
+    fn test_lambda_lift_codegen() {
+        // Verify ARM64 codegen handles lifted closures
+        let source = r#"
+fn main() -> i64 {
+    let x = 5
+    let f = |y: i64| x + y
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let asm = crate::codegen::arm64_asm::emit_program_asm(&funcs);
+        assert!(asm.contains("_main:"), "should have main label");
+        assert!(asm.contains("___closure_"), "should have lifted closure label in asm");
+    }
+
+    // ── Breakthrough 2: Vtable Infrastructure ──
+
+    #[test]
+    fn test_vtable_creation() {
+        let source = r#"
+trait Animal {
+    fn speak(&self) -> i64;
+    fn legs(&self) -> i64;
+}
+
+struct Dog { name: i64 }
+
+impl Animal for Dog {
+    fn speak(&self) -> i64 { return 1 }
+    fn legs(&self) -> i64 { return 4 }
+}
+
+fn main() -> i64 {
+    return 0
+}
+"#;
+        let tokens = lexer::lex(source).expect("lex");
+        let program = parser::parse(tokens).expect("parse");
+        sema::analyze(&program).expect("sema");
+
+        let mut ctx = lower::LowerContext::new();
+        // Simulate the first pass to register trait defs
+        for decl in &program.decls {
+            match decl {
+                crate::parser::ast::Decl::TraitDecl(td) => {
+                    let methods: Vec<String> = td.methods.iter().map(|m| m.name.clone()).collect();
+                    ctx.trait_defs.insert(td.name.clone(), methods);
+                }
+                crate::parser::ast::Decl::ImplBlock(ib) => {
+                    for method in &ib.methods {
+                        let mangled = format!("{}__{}", ib.target_type, method.name);
+                        ctx.method_dispatch.insert(
+                            (ib.target_type.clone(), method.name.clone()),
+                            mangled,
+                        );
+                    }
+                    if let Some(trait_methods) = ctx.trait_defs.get(&ib.trait_name).cloned() {
+                        let vtable_entries: Vec<String> = trait_methods.iter()
+                            .map(|mn| format!("{}__{}", ib.target_type, mn))
+                            .collect();
+                        ctx.vtables.insert(
+                            (ib.trait_name.clone(), ib.target_type.clone()),
+                            vtable_entries,
+                        );
+                    }
+                }
+                _ => {}
+            }
+        }
+
+        // Vtable should exist for (Animal, Dog)
+        let vtable = ctx.lookup_vtable("Animal", "Dog");
+        assert!(vtable.is_some(), "should have vtable for (Animal, Dog)");
+        let vt = vtable.unwrap();
+        assert_eq!(vt.len(), 2, "vtable should have 2 entries (speak, legs)");
+        assert_eq!(vt[0], "Dog__speak", "vtable[0] = Dog__speak");
+        assert_eq!(vt[1], "Dog__legs", "vtable[1] = Dog__legs");
+    }
+
+    #[test]
+    fn test_vtable_method_index() {
+        let source = r#"
+trait Shape {
+    fn area(&self) -> i64;
+    fn perimeter(&self) -> i64;
+    fn name(&self) -> i64;
+}
+
+struct Circle { radius: i64 }
+
+impl Shape for Circle {
+    fn area(&self) -> i64 { return 314 }
+    fn perimeter(&self) -> i64 { return 628 }
+    fn name(&self) -> i64 { return 1 }
+}
+
+fn main() -> i64 { return 0 }
+"#;
+        let funcs = compile_to_ir(source);
+
+        // Verify impl methods are lowered with mangled names
+        let area_fn = funcs.iter().find(|f| f.name == "Circle__area");
+        assert!(area_fn.is_some(), "should have Circle__area method");
+        let perim_fn = funcs.iter().find(|f| f.name == "Circle__perimeter");
+        assert!(perim_fn.is_some(), "should have Circle__perimeter method");
+        let name_fn = funcs.iter().find(|f| f.name == "Circle__name");
+        assert!(name_fn.is_some(), "should have Circle__name method");
+    }
+
+    #[test]
+    fn test_vtable_multiple_impls() {
+        // Multiple types implementing the same trait
+        let source = r#"
+trait Countable {
+    fn count(&self) -> i64;
+}
+
+struct Apples { n: i64 }
+struct Oranges { n: i64 }
+
+impl Countable for Apples {
+    fn count(&self) -> i64 { return 6 }
+}
+
+impl Countable for Oranges {
+    fn count(&self) -> i64 { return 12 }
+}
+
+fn main() -> i64 { return 0 }
+"#;
+        let funcs = compile_to_ir(source);
+
+        // Both impl methods should be lowered
+        let apple_count = funcs.iter().find(|f| f.name == "Apples__count");
+        let orange_count = funcs.iter().find(|f| f.name == "Oranges__count");
+        assert!(apple_count.is_some(), "should have Apples__count");
+        assert!(orange_count.is_some(), "should have Oranges__count");
+    }
+
+    #[test]
+    fn test_trait_object_type() {
+        // Verify TraitObject type has correct size (fat pointer = 16 bytes)
+        let trait_obj = HexaType::TraitObject("Animal".to_string());
+        assert_eq!(trait_obj.size_bytes(), 16,
+            "TraitObject should be 16 bytes (data_ptr + vtable_ptr)");
+    }
+
+    #[test]
+    fn test_closure_obj_type() {
+        // Verify ClosureObj type has correct size (fn_ptr + env_ptr = 16 bytes)
+        let closure_obj = HexaType::ClosureObj(
+            vec![HexaType::I64],
+            Box::new(HexaType::I64),
+        );
+        assert_eq!(closure_obj.size_bytes(), 16,
+            "ClosureObj should be 16 bytes (fn_ptr + env_ptr)");
+    }
+
+    // ── Integration: Lambda + Vtable + existing features ──
+
+    #[test]
+    fn test_trait_and_closure_together() {
+        let source = r#"
+trait Transformer {
+    fn transform(&self, x: i64) -> i64;
+}
+
+struct Doubler { factor: i64 }
+
+impl Transformer for Doubler {
+    fn transform(&self, x: i64) -> i64 { return x + x }
+}
+
+fn main() -> i64 {
+    let d = Doubler { factor: 2 }
+    let f = |x: i64| x + 1
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+
+        // Should have: main, Doubler__transform, __closure_0
+        let main_fn = funcs.iter().find(|f| f.name == "main");
+        let transform = funcs.iter().find(|f| f.name == "Doubler__transform");
+        let closure = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(main_fn.is_some(), "should have main");
+        assert!(transform.is_some(), "should have Doubler__transform");
+        assert!(closure.is_some(), "should have lifted closure");
+    }
+
+    #[test]
+    fn test_closure_with_struct_capture() {
+        // Closure that captures a struct variable
+        let source = r#"
+struct Point { x: i64, y: i64 }
+
+fn main() -> i64 {
+    let p = Point { x: 10, y: 20 }
+    let f = |z: i64| z + 1
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let main_fn = funcs.iter().find(|f| f.name == "main").expect("main");
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(lifted.is_some(), "closure with struct in scope should be lifted");
+
+        // Main should still have struct alloc
+        let has_struct = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| matches!(i.ty, HexaType::Struct(_)));
+        assert!(has_struct, "main should still have struct allocation");
+    }
+
+    #[test]
+    fn test_closure_with_enum_match_capture() {
+        let source = r#"
+enum Color { Red, Green, Blue }
+
+fn main() -> i64 {
+    let c = Color::Red;
+    let f = |x: i64| x + 1
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let lifted = funcs.iter().find(|f| f.name.starts_with("__closure_"));
+        assert!(lifted.is_some(), "closure alongside enum should be lifted");
+    }
+
+    #[test]
+    fn test_free_var_analysis() {
+        use crate::parser::ast::Expr;
+        use crate::lexer::Span;
+
+        // Simple ident
+        let expr = Expr::Ident("x".to_string(), Span::dummy());
+        let free = crate::lower::closure::analyze_free_vars(&expr, &[]);
+        assert_eq!(free, vec!["x"], "x should be free");
+
+        // Bound variable should not be free
+        let free2 = crate::lower::closure::analyze_free_vars(
+            &expr, &["x".to_string()]);
+        assert!(free2.is_empty(), "x should not be free when bound");
+
+        // Binary expression
+        let bin = Expr::Binary {
+            op: crate::parser::ast::BinOp::Add,
+            lhs: Box::new(Expr::Ident("a".to_string(), Span::dummy())),
+            rhs: Box::new(Expr::Ident("b".to_string(), Span::dummy())),
+            span: Span::dummy(),
+        };
+        let free3 = crate::lower::closure::analyze_free_vars(&bin, &[]);
+        assert!(free3.contains(&"a".to_string()));
+        assert!(free3.contains(&"b".to_string()));
+    }
+
+    #[test]
+    fn test_total_function_count_with_closures() {
+        // A program with N closures should have N lifted functions + regular functions
+        let source = r#"
+fn helper(x: i64) -> i64 { return x }
+
+fn main() -> i64 {
+    let a = 1
+    let f1 = |x: i64| x + a
+    let f2 = |y: i64| y + a
+    let f3 = |z: i64| z + a
+    return helper(0)
+}
+"#;
+        let funcs = compile_to_ir(source);
+        // Should have: helper, __closure_0, __closure_1, __closure_2, main
+        assert_eq!(funcs.len(), 5,
+            "should have 5 functions (helper + 3 closures + main), got {}",
+            funcs.len());
+    }
+
+    #[test]
+    fn test_vtable_full_pipeline() {
+        // Full pipeline: trait + impl + method call in codegen
+        let source = r#"
+trait Greet {
+    fn hello(&self) -> i64;
+}
+
+struct World { id: i64 }
+
+impl Greet for World {
+    fn hello(&self) -> i64 { return 42 }
+}
+
+fn main() -> i64 {
+    let w = World { id: 1 }
+    return 0
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let asm = crate::codegen::arm64_asm::emit_program_asm(&funcs);
+
+        // Both main and the impl method should appear in assembly
+        assert!(asm.contains("_main:"), "ASM should have main");
+        assert!(asm.contains("_World__hello:"), "ASM should have World__hello method");
     }
 }

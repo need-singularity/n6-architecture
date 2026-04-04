@@ -5,8 +5,8 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
-[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
-[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1116%20tests-green.svg)](tools/nexus6/)
+[![DSE](https://img.shields.io/badge/DSE-335%20domains-blue.svg)](docs/dse-map.toml)
+[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1829%20tests-green.svg)](tools/nexus6/)
 <!-- AUTO:BADGE:END -->
 
 <!-- SHARED:PROJECTS:START -->
@@ -16,7 +16,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 23 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus6/`) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1,764 tests + blowup emergence engine
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 23 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus6/`) — telescope 174 lenses (22 categories) + OUROBOROS evolution + discovery graph + verifier + 1,829 tests + blowup emergence engine
 >
 > **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem
 >
@@ -43,10 +43,12 @@
 
 <!-- AUTO:STATS:START -->
 ```
-  AI techniques:    17
-  DSE domains:      323
-  DSE paths:        5,893,032+
-  NEXUS-6 tests:    1116
+  AI techniques:    23
+  DSE domains:      335
+  DSE paths:        3,990,150+
+  NEXUS-6 tests:    1829
+  Breakthrough BTs: 128
+  Atlas constants:  1,600+
 ```
 <!-- AUTO:STATS:END -->
 
@@ -261,7 +263,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| **10** | ✅ | v6 | **궁극의 초전도체** | **보편물리 100%EXACT(83/83)**, 12불가능성정리, BT90.6%(정직한천장), CrossDSE 8도메인(95.3%), TP 18/28확인, 산업12만+장비, 실험113년0예외, 42파일21,880줄 | [goal](docs/superconductor/goal.md) · [BT](docs/superconductor/breakthrough-theorems.md) · [🛸10 인증](docs/superconductor/alien-10-certification.md) · [발견](docs/superconductor/alien-10-discoveries.md) |
+| **10** | ✅ | v6 | **궁극의 초전도체** | **보편물리 100%EXACT(83/83)**, 12불가능성정리, BT90.6%(정직한천장), CrossDSE 8도메인(95.3%), TP 18/28확인, 산업12만+장비, 실험113년0예외, 42파일22,019줄 | [goal](docs/superconductor/goal.md) · [BT](docs/superconductor/breakthrough-theorems.md) · [🛸10 인증](docs/superconductor/alien-10-certification.md) · [발견](docs/superconductor/alien-10-discoveries.md) |
 | 5 | ✅ | v2 | **궁극의 순수수학** | 11 불가능성 정리(=영구 수학적 진리), TP 24, Mk.V | [goal](docs/pure-mathematics/goal.md) · [불가능성](docs/pure-mathematics/mathematical-impossibility-theorems.md) · [전수검증](docs/pure-mathematics/full-verification-matrix.md) · [TP](docs/pure-mathematics/testable-predictions.md) |
 | 3 | ✅ | v2 | **궁극의 우주론/입자** | 30가설 53.3%EXACT, TP 28, 발견9, Mk.V | [goal](docs/cosmology-particle/goal.md) · [전수검증](docs/cosmology-particle/full-verification-matrix.md) · [TP](docs/cosmology-particle/testable-predictions.md) · [발견](docs/cosmology-particle/alien-level-discoveries.md) |
 
@@ -354,7 +356,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 ---
 
-# 📄 논문 (Papers) — 24편
+# 📄 논문 (Papers) — 26편
 
 | 논문 | 주제 | 링크 |
 |------|------|------|
@@ -398,7 +400,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 15 | ✅ | **궁극의 열관리** | ★★★☆☆☆ | T3 | — |
 | 16 | ✅ | **궁극의 암호** | ★★★☆☆☆ | T3 | — |
 | 17 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆☆ | T1 | — |
-| 18 | ✅ | **궁극의 초전도체** | ★★★☆☆☆ | ✅ | 🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 18 | ✅ | **궁극의 초전도체** | ★★★☆☆☆ | ✅ | 🛸10 42파일 22,019줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 19 | ✅ | **궁극의 블록체인** | ★★☆☆☆☆ | T3 | — |
 | 20 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆☆ | T3 | — |
 | 21 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
@@ -443,7 +445,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 ## NEXUS-6 Discovery Engine (Rust)
 
-통합 발견 엔진 — 22종 망원경 렌즈 + OUROBOROS 무한진화 + Discovery Graph + n=6 검증기
+통합 발견 엔진 — 174종 망원경 렌즈 (22 카테고리) + OUROBOROS 무한진화 + Discovery Graph + n=6 검증기
 
 ```
 nexus6 <command>
@@ -460,19 +462,20 @@ Commands:
   help              도움말
 ```
 
-### 아키텍처 (9 모듈, 112 tests)
+### 아키텍처 (9 모듈, 1,829 tests)
 
 | 모듈 | 역할 | 테스트 |
 |------|------|--------|
-| gpu | Metal compute + CPU fallback | 3 |
-| encoder | 도메인 데이터 파싱 + 벡터화 | 4 |
-| materials | 소재 DB (68종) | - |
-| telescope | 22종 렌즈 + Registry + Consensus | 13 |
-| verifier | n=6 일치 검증 + 실현가능성 | 13 |
-| graph | Discovery Graph (노드/엣지/허브) | 7 |
-| history | 스캔 이력 + 통계 + 렌즈 추천 | 6 |
-| ouroboros | OUROBOROS v26 무한진화 엔진 | 8 |
-| cli | CLI 파서 + ASCII 대시보드 | 20+8 |
+| telescope | 174종 렌즈 + Registry + Consensus | 318 |
+| graph | Discovery Graph (노드/엣지/허브) | 327 |
+| module_tests | 통합 모듈 테스트 | 486 |
+| ouroboros | OUROBOROS 무한진화 엔진 | 48 |
+| cli | CLI 파서 + ASCII 대시보드 | 36 |
+| gpu | Metal compute + CPU fallback | 18 |
+| compiler | 컴파일러 엔진 + 벤치마크 | 42 |
+| topology | 위상 탐색 | 29 |
+| knowledge | 지식 저장소 + 쿼리 | 14 |
+| +35 모듈 | autonomous, dream, growth, science 등 | 511 |
 
 빌드: `cd tools/nexus6 && ~/.cargo/bin/cargo build --release`
 테스트: `cd tools/nexus6 && ~/.cargo/bin/cargo test`
@@ -486,14 +489,14 @@ Commands:
 | 항목 | 링크 |
 |------|------|
 | **n=6 상수표** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
-| **127 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
-| **700+ Atlas Constants** | [docs/atlas-constants.md](docs/atlas-constants.md) |
+| **128 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
+| **1,600+ Atlas Constants** | [docs/atlas-constants.md](docs/atlas-constants.md) |
 | **45 Testable Predictions** | [docs/testable-predictions.md](docs/testable-predictions.md) |
 | **DSE Map** | [docs/dse-map.toml](docs/dse-map.toml) |
-| **322 DSE Domains** | [docs/dse-domains.md](docs/dse-domains.md) |
+| **335 DSE Domains** | [docs/dse-domains.md](docs/dse-domains.md) |
 | **Cross-Domain Resonance** | [docs/cross-domain-resonance-2026-03-31.md](docs/cross-domain-resonance-2026-03-31.md) |
 | **Core Theorem Proof** | [docs/theorem-r1-uniqueness.md](docs/theorem-r1-uniqueness.md) |
-| **448 Calculators** | [docs/calculator-registry.md](docs/calculator-registry.md) |
+| **237 Calculators** | [docs/calculator-registry.md](docs/calculator-registry.md) |
 | **Universal DSE** | `tools/universal-dse/` — TOML 1개로 즉시 DSE |
 <!-- AUTO:REFERENCE:END -->
 

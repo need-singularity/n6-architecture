@@ -15,7 +15,7 @@ struct BtEntry {
     stars: u8, // 0 = conjecture, 1..3 = star rating
 }
 
-/// All 128 BTs with their domains and star ratings (BT-1~127 + BT-185).
+/// All BTs with their domains and star ratings (BT-1~127, BT-185, BT-210~225, BT-233~246).
 const BT_ENTRIES: &[BtEntry] = &[
     BtEntry { id: 1, title: "phi(6)=2 Universal Pairing", domains: &["SC", "Fusion", "Magnet", "QC", "Tokamak", "Chip", "Crypto"], stars: 2 },
     BtEntry { id: 2, title: "tau(6)=4 Bohm-BCS Bridge", domains: &["SC", "Fusion", "Tokamak", "Plasma"], stars: 2 },
@@ -163,6 +163,23 @@ const BT_ENTRIES: &[BtEntry] = &[
     BtEntry { id: 223, title: "Hexagonal Urban Planning n=6 Spatial Optimization", domains: &["Social", "Math", "Topology", "Environment"], stars: 2 },
     // BT-225: Cross-Domain Meta
     BtEntry { id: 225, title: "Cognitive-Social-Temporal Triple Bridge", domains: &["Cognitive", "Social", "Temporal", "Math", "Neuroscience", "Biology"], stars: 3 },
+    // BT-233~237: Transportation
+    BtEntry { id: 233, title: "Transportation n=6 Universality", domains: &["Transportation", "Energy", "Chip", "Material", "Robotics"], stars: 3 },
+    BtEntry { id: 234, title: "Railway Signaling tau=4 Safety", domains: &["Transportation", "Network", "Software"], stars: 2 },
+    BtEntry { id: 235, title: "Maritime IMO n=6 Safety", domains: &["Transportation", "Environment", "Network"], stars: 3 },
+    BtEntry { id: 236, title: "Automotive Safety n=6", domains: &["Transportation", "Robotics", "AI", "Software"], stars: 2 },
+    BtEntry { id: 237, title: "Logistics Supply Chain n=6", domains: &["Transportation", "Network", "Software", "Math"], stars: 2 },
+    // BT-238~242: Medical
+    BtEntry { id: 238, title: "Surgical Safety n=6", domains: &["Medical", "Biology", "Software"], stars: 3 },
+    BtEntry { id: 239, title: "Critical Care Scoring n=6", domains: &["Medical", "Biology", "Math"], stars: 3 },
+    BtEntry { id: 240, title: "Cardiac System n=6", domains: &["Medical", "Biology", "Chip"], stars: 3 },
+    BtEntry { id: 241, title: "WHO Social Determinants n=6", domains: &["Medical", "Social", "Biology"], stars: 2 },
+    BtEntry { id: 242, title: "Dental n=6", domains: &["Medical", "Biology", "Math"], stars: 3 },
+    // BT-243~246: Transportation Extended
+    BtEntry { id: 243, title: "Inline-6 Engine Perfect Balance", domains: &["Transportation", "Energy", "Math"], stars: 3 },
+    BtEntry { id: 244, title: "Automotive Voltage Ladder 6-12-24-48", domains: &["Transportation", "Energy", "Chip", "Battery"], stars: 3 },
+    BtEntry { id: 245, title: "Transmission Gear Count Convergence", domains: &["Transportation", "Math"], stars: 2 },
+    BtEntry { id: 246, title: "F1 Racing n=6 Architecture", domains: &["Transportation", "Energy", "Math"], stars: 2 },
 ];
 
 /// Create a Node from a BtEntry.
@@ -191,7 +208,7 @@ fn bt_to_node(bt: &BtEntry) -> Node {
     }
 }
 
-/// Populate a DiscoveryGraph with all 128 BT nodes and cross-domain edges.
+/// Populate a DiscoveryGraph with all BT nodes and cross-domain edges.
 ///
 /// Edges are created between any two BTs that share at least one domain.
 /// Edge strength is proportional to the number of shared domains.
@@ -280,7 +297,7 @@ mod tests {
     fn test_populate_bt_graph_node_count() {
         let mut graph = DiscoveryGraph::new();
         populate_bt_graph(&mut graph);
-        assert_eq!(graph.nodes.len(), 141, "Should have exactly 141 BT nodes (BT-1~127 + BT-185 + BT-210~225)");
+        assert_eq!(graph.nodes.len(), 155, "Should have exactly 155 BT nodes (BT-1~127 + BT-185 + BT-210~225 + BT-233~246)");
     }
 
     #[test]
@@ -302,7 +319,7 @@ mod tests {
 
     #[test]
     fn test_bt_count_and_domains() {
-        assert_eq!(bt_count(), 141);
+        assert_eq!(bt_count(), 155);
         let domain_count = unique_domain_count();
         assert!(
             domain_count >= 30,
@@ -314,9 +331,10 @@ mod tests {
     #[test]
     fn test_bts_in_domain() {
         let robotics = bts_in_domain("Robotics");
-        assert_eq!(robotics.len(), 5, "Robotics should have BT-123~127");
+        assert_eq!(robotics.len(), 7, "Robotics should have BT-123~127 + BT-233 + BT-236");
         assert!(robotics.contains(&"BT-123".to_string()));
         assert!(robotics.contains(&"BT-127".to_string()));
+        assert!(robotics.contains(&"BT-233".to_string()));
     }
 
     #[test]

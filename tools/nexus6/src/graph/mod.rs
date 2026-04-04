@@ -16,6 +16,7 @@ pub mod bt118_deep_nodes;
 pub mod advanced_cross_nodes;
 pub mod bt118_bridge_nodes;
 pub mod cognitive_temporal_social_nodes;
+pub mod transport_medical_nodes;
 
 pub use node::{Node, NodeType};
 pub use edge::{Edge, EdgeType};

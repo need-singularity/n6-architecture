@@ -1,15 +1,20 @@
-/// HEXA-IR Types — σ-τ=8 primitives + τ=4 compound = σ=12 total
+/// HEXA-IR Types — σ-τ=8 primitives + n=6 compound = σ+φ=14 total
 use crate::util::n6::*;
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum HexaType {
     // Primitives (σ-τ=8)
     I64, F64, Bool, Char, Str, Byte, Void, Any,
-    // Compound (τ=4)
+    // Compound (n=6)
     Struct(Vec<HexaType>),
     Enum(Vec<HexaType>),
     Array(Box<HexaType>, usize),
     Fn(Vec<HexaType>, Box<HexaType>),
+    /// Trait object: (data_ptr, vtable_ptr) — fat pointer for dynamic dispatch
+    /// Contains the trait name for vtable resolution
+    TraitObject(String),
+    /// Closure: (fn_ptr, env_ptr) — lambda-lifted callable
+    ClosureObj(Vec<HexaType>, Box<HexaType>),
 }
 
 impl HexaType {
@@ -23,6 +28,10 @@ impl HexaType {
             HexaType::Any => SIGMA_TAU,
             HexaType::Array(inner, count) => inner.size_bytes() * count,
             HexaType::Struct(fields) => fields.iter().map(|f| f.size_bytes()).sum(),
+            // Fat pointers: data_ptr + vtable_ptr = 2 * 8 = 16 bytes
+            HexaType::TraitObject(_) => PHI_TAU,
+            // Closure object: fn_ptr + env_ptr = 2 * 8 = 16 bytes
+            HexaType::ClosureObj(_, _) => PHI_TAU,
             _ => SIGMA_TAU, // pointer-sized for Enum, Fn
         }
     }
