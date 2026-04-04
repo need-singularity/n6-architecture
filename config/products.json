@@ -70,7 +70,8 @@
               "label": "링크",
               "path": "docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md"
             }
-          ]
+          ],
+          "verify_script": "docs/fusion/verify_alien10.py"
         },
         {
           "name": "KSTAR-N6",
@@ -83,7 +84,8 @@
               "label": "링크",
               "path": "docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md"
             }
-          ]
+          ],
+          "verify_script": "docs/fusion/verify_alien10.py"
         },
         {
           "name": "진화 Mk.I~V",
@@ -96,7 +98,8 @@
               "label": "링크",
               "path": "docs/fusion/evolution/mk-1-first-light.md"
             }
-          ]
+          ],
+          "verify_script": "docs/fusion/verify_alien10.py"
         },
         {
           "name": "발견 + 예측 + 가설v5",
@@ -109,7 +112,8 @@
               "label": "링크",
               "path": "docs/fusion/alien-level-discoveries.md"
             }
-          ]
+          ],
+          "verify_script": "docs/fusion/verify_alien10.py"
         },
         {
           "name": "천장확인",
@@ -122,7 +126,8 @@
               "label": "링크",
               "path": "docs/fusion/physical-limit-proof.md"
             }
-          ]
+          ],
+          "verify_script": "docs/fusion/verify_alien10.py"
         }
       ],
       "anchor": "-핵융합-fusion",
@@ -170,7 +175,8 @@
               "label": "링크",
               "path": "docs/chip-architecture/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/chip-architecture/verify_alien10.py"
         },
         {
           "name": "ANIMA-SOC",
@@ -183,7 +189,8 @@
               "label": "링크",
               "path": "docs/chip-architecture/ultimate-consciousness-soc.md"
             }
-          ]
+          ],
+          "verify_script": "docs/chip-architecture/verify_alien10.py"
         },
         {
           "name": "HEXA-TOPO",
@@ -196,7 +203,8 @@
               "label": "링크",
               "path": "docs/chip-architecture/hexa-topological-performance-chip.md"
             }
-          ]
+          ],
+          "verify_script": "docs/chip-architecture/verify_alien10.py"
         },
         {
           "name": "HEXA-ASIC",
@@ -209,7 +217,8 @@
               "label": "링크",
               "path": "docs/chip-architecture/hexa-asic-skywater.md"
             }
-          ]
+          ],
+          "verify_script": "docs/chip-architecture/verify_alien10.py"
         },
         {
           "name": "천장확인",
@@ -222,7 +231,8 @@
               "label": "링크",
               "path": "docs/chip-architecture/full-verification-matrix.md"
             }
-          ]
+          ],
+          "verify_script": "docs/chip-architecture/verify_alien10.py"
         }
       ],
       "anchor": "-칩--반도체-chip",
@@ -235,8 +245,8 @@
       "title": "AI/ML",
       "icon": "🤖",
       "heading": "AI / ML",
-      "alien_index": 10,
-      "ceiling": true,
+      "alien_index": 9,
+      "ceiling": false,
       "bt_exact_pct": 89.7,
       "bt_count": 24,
       "industry_pct": 88.7,
@@ -259,8 +269,8 @@
       "products": [
         {
           "name": "66 Techniques",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v3",
           "description": "71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 66기법 통합문서 (Core17+BT12+Model21+Vision8+GNN4+Other4)",
           "links": [
@@ -272,8 +282,8 @@
         },
         {
           "name": "Full N6 Pipeline",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v2",
           "description": "17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증",
           "links": [
@@ -285,8 +295,8 @@
         },
         {
           "name": "N6 Inevitability Engine",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v2",
           "description": "기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS",
           "links": [
@@ -298,8 +308,8 @@
         },
         {
           "name": "AI Energy Savings Guide",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v2",
           "description": "AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS",
           "links": [
@@ -311,8 +321,8 @@
         },
         {
           "name": "Chip Architecture Guide",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v2",
           "description": "GPU SM+HBM+피치+인터커넥트 n=6 전수매핑 — 27/27 PASS",
           "links": [
@@ -324,8 +334,8 @@
         },
         {
           "name": "천장확인",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v2",
           "description": "194claims 89.7%EXACT, 산업9모델, 물리한계10, 67/67 PASS 검증",
           "links": [
@@ -381,7 +391,8 @@
               "label": "링크",
               "path": "docs/superpowers/specs/2026-04-01-hexa-battery-design.md"
             }
-          ]
+          ],
+          "verify_script": "docs/battery-architecture/verify_alien10.py"
         },
         {
           "name": "궁극의 태양전지",
@@ -394,7 +405,8 @@
               "label": "링크",
               "path": "docs/solar-architecture/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/battery-architecture/verify_alien10.py"
         },
         {
           "name": "궁극의 에너지 통합",
@@ -407,7 +419,8 @@
               "label": "링크",
               "path": "docs/energy-architecture/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/battery-architecture/verify_alien10.py"
         }
       ],
       "anchor": "-에너지-energy",
@@ -455,7 +468,8 @@
               "label": "링크",
               "path": "docs/environmental-protection/"
             }
-          ]
+          ],
+          "verify_script": "docs/environmental-protection/verify_alien10.py"
         },
         {
           "name": "HEXA-MICROPLASTICS",
@@ -468,7 +482,8 @@
               "label": "링크",
               "path": "docs/environmental-protection/microplastics-solution.md"
             }
-          ]
+          ],
+          "verify_script": "docs/environmental-protection/verify_alien10.py"
         },
         {
           "name": "궁극의 탄소포집 8단",
@@ -481,7 +496,8 @@
               "label": "링크",
               "path": "docs/carbon-capture/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/environmental-protection/verify_alien10.py"
         },
         {
           "name": "진화 Mk.I~V",
@@ -494,7 +510,8 @@
               "label": "링크",
               "path": "docs/environmental-protection/evolution/"
             }
-          ]
+          ],
+          "verify_script": "docs/environmental-protection/verify_alien10.py"
         },
         {
           "name": "예측 + 검증",
@@ -507,7 +524,8 @@
               "label": "링크",
               "path": "docs/environmental-protection/testable-predictions-2030.md"
             }
-          ]
+          ],
+          "verify_script": "docs/environmental-protection/verify_alien10.py"
         }
       ],
       "anchor": "-환경보호-environment",
@@ -553,7 +571,8 @@
               "label": "링크",
               "path": "docs/material-synthesis/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/material-synthesis/verify_alien10.py"
         },
         {
           "name": "BT-85~88 + BT-128~134",
@@ -566,7 +585,8 @@
               "label": "링크",
               "path": "docs/material-synthesis/breakthrough-theorems.md"
             }
-          ]
+          ],
+          "verify_script": "docs/material-synthesis/verify_alien10.py"
         },
         {
           "name": "가설 30/30 100%EXACT",
@@ -579,7 +599,8 @@
               "label": "링크",
               "path": "docs/material-synthesis/hypotheses.md"
             }
-          ]
+          ],
+          "verify_script": "docs/material-synthesis/verify_alien10.py"
         },
         {
           "name": "산업검증 20소재",
@@ -592,7 +613,8 @@
               "label": "링크",
               "path": "docs/material-synthesis/industrial-validation.md"
             }
-          ]
+          ],
+          "verify_script": "docs/material-synthesis/verify_alien10.py"
         },
         {
           "name": "실험검증 + TP 28/28",
@@ -605,7 +627,8 @@
               "label": "링크",
               "path": "docs/material-synthesis/experimental-verification.md"
             }
-          ]
+          ],
+          "verify_script": "docs/material-synthesis/verify_alien10.py"
         },
         {
           "name": "물리한계 증명",
@@ -618,7 +641,8 @@
               "label": "링크",
               "path": "docs/material-synthesis/physical-limit-proof.md"
             }
-          ]
+          ],
+          "verify_script": "docs/material-synthesis/verify_alien10.py"
         }
       ],
       "anchor": "-물질합성-materials",
@@ -664,7 +688,8 @@
               "label": "링크",
               "path": "docs/robotics/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/robotics/verify_alien10.py"
         },
         {
           "name": "천장확인",
@@ -677,7 +702,8 @@
               "label": "링크",
               "path": "docs/robotics/full-verification-matrix.md"
             }
-          ]
+          ],
+          "verify_script": "docs/robotics/verify_alien10.py"
         }
       ],
       "anchor": "-로봇-robotics",
@@ -729,7 +755,8 @@
               "label": "링크",
               "path": "docs/superconductor/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/pure-mathematics/verify_alien10.py"
         },
         {
           "name": "궁극의 순수수학",
@@ -742,7 +769,8 @@
               "label": "링크",
               "path": "docs/pure-mathematics/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/pure-mathematics/verify_alien10.py"
         },
         {
           "name": "궁극의 우주론/입자",
@@ -755,7 +783,8 @@
               "label": "링크",
               "path": "docs/cosmology-particle/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/pure-mathematics/verify_alien10.py"
         },
         {
           "name": "궁극의 상온 초전도체",
@@ -768,7 +797,8 @@
               "label": "링크",
               "path": "docs/room-temp-sc/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/pure-mathematics/verify_alien10.py"
         }
       ],
       "anchor": "-물리수학-physics--math",
@@ -821,7 +851,8 @@
               "label": "링크",
               "path": "docs/programming-language/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/programming-language/verify_alien10.py"
         },
         {
           "name": "천장확인",
@@ -834,7 +865,8 @@
               "label": "링크",
               "path": "docs/software-design/full-verification-matrix.md"
             }
-          ]
+          ],
+          "verify_script": "docs/programming-language/verify_alien10.py"
         }
       ],
       "anchor": "-소프트웨어인프라-software--infra",
@@ -878,7 +910,8 @@
               "label": "링크",
               "path": "docs/display/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/display/verify_alien10.py"
         },
         {
           "name": "천장확인",
@@ -891,7 +924,8 @@
               "label": "링크",
               "path": "docs/display/full-verification-matrix.md"
             }
-          ]
+          ],
+          "verify_script": "docs/display/verify_alien10.py"
         }
       ],
       "anchor": "-디스플레이-display",
@@ -934,7 +968,8 @@
               "label": "링크",
               "path": "docs/audio/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/audio/verify_alien10.py"
         },
         {
           "name": "천장확인",
@@ -947,7 +982,8 @@
               "label": "링크",
               "path": "docs/audio/full-verification-matrix.md"
             }
-          ]
+          ],
+          "verify_script": "docs/audio/verify_alien10.py"
         }
       ],
       "anchor": "-오디오-audio",
@@ -990,7 +1026,8 @@
               "label": "링크",
               "path": "docs/safety/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/safety/verify_alien10.py"
         },
         {
           "name": "가설 30+극한 20",
@@ -1003,7 +1040,8 @@
               "label": "링크",
               "path": "docs/safety/hypotheses.md"
             }
-          ]
+          ],
+          "verify_script": "docs/safety/verify_alien10.py"
         }
       ],
       "anchor": "-안전-safety",
@@ -1046,7 +1084,8 @@
               "label": "링크",
               "path": "docs/fun-car/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/fun-car/verify_alien10.py"
         }
       ],
       "anchor": "-펀카--모터스포츠-fun-car",
@@ -1059,8 +1098,8 @@
       "title": "SF/초광속추진",
       "icon": "🛸",
       "heading": "SF / 초광속 추진 (Speculative Propulsion)",
-      "alien_index": 10,
-      "ceiling": true,
+      "alien_index": 9,
+      "ceiling": false,
       "bt_exact_pct": 100,
       "bt_count": 40,
       "industry_pct": 100,
@@ -1080,8 +1119,8 @@
       "products": [
         {
           "name": "궁극의 SF 추진 (HEXA-SF)",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "워프+UFO 통합 단일문서. Part I: HEXA-WARP(60/60 EXACT, 0.1c=1/(σ-φ), Mk.I~V 통합, DSE 6⁸=1,679,616). Part II: HEXA-UFO(48/49 EXACT, Meissner 부양+Q=10 탁상핵융합, D=J₂=24m, Mach σ-φ=10, 승무원 n=6)",
           "links": [
@@ -1099,8 +1138,8 @@
       "title": "최전선/대발견",
       "icon": "🔭",
       "heading": "최전선 대발견 (RT-SC 기반 차세대 기술)",
-      "alien_index": 10,
-      "ceiling": true,
+      "alien_index": 9,
+      "ceiling": false,
       "bt_exact_pct": 99,
       "bt_count": 130,
       "industry_pct": 100,
@@ -1129,8 +1168,8 @@
       "products": [
         {
           "name": "HEXA-NEURO 뇌-기계 인터페이스",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "64/64 EXACT, σ²=144채널×1만전극=1.44M, σ-φ=10μm 해상도, τ=4kHz, BT-132/254/303",
           "links": [
@@ -1142,8 +1181,8 @@
         },
         {
           "name": "HEXA-GRAV 중력파 검출/통신",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "72/72 EXACT, J₂=24km 팔, 10⁻²⁴ strain, LIGO×σ²·(σ-φ)=1440배, Q=10¹²=10^σ",
           "links": [
@@ -1155,8 +1194,8 @@
         },
         {
           "name": "HEXA-CLOAK 투명망토/스텔스",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "59/59 EXACT, RT-SC 메타물질 n<0, σ-τ=8옥타브, σ-φ=10nm 피치, RCS감쇠 σ·J₂=288배",
           "links": [
@@ -1168,8 +1207,8 @@
         },
         {
           "name": "HEXA-DEFENSE 지구방어 시스템",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "67/67 EXACT, Δv=σ·10⁻³=0.012m/s, 탐지 σ²=144LD, J₂=24년 선제대응, 3중방어",
           "links": [
@@ -1181,8 +1220,8 @@
         },
         {
           "name": "HEXA-TELEPORT 양자얽힘 통신망",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "41/41 EXACT, 2^σ=4096 큐빗, σ²=144km/홉, 99.65% 충실도, σ·J₂=288Mbps",
           "links": [
@@ -1194,8 +1233,8 @@
         },
         {
           "name": "HEXA-HOVER 개인 호버보드",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "52/52 EXACT, σ-φ=10cm 부양, (σ-φ)²·n=600kg, σ·τ=48km/h, σ²=144km 거리",
           "links": [
@@ -1207,8 +1246,8 @@
         },
         {
           "name": "HEXA-MRAM 초전도 비휘발 메모리",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "46/46 EXACT, 조셉슨접합, τ=4ps 쓰기, 10aJ/bit, σ·J₂=288Gbit/cm², 2^σ=4096년",
           "links": [
@@ -1220,8 +1259,8 @@
         },
         {
           "name": "HEXA-SEABED 대륙간 해저 송전",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "45/45 EXACT, J₂·10³=24,000km, ±800kV, σ²·J₂=3,456GW, 0% 손실",
           "links": [
@@ -1233,8 +1272,8 @@
         },
         {
           "name": "HEXA-ACCEL 소형 입자가속기",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "48/48 EXACT, σ·J₂=288GeV, σ-φ=10m(LHC/2700), σ·τ=48T, σ²=144 센서",
           "links": [
@@ -1246,8 +1285,8 @@
         },
         {
           "name": "HEXA-WEATHER 대기 전자기 제어",
-          "ufo": 10,
-          "ceiling": true,
+          "ufo": 9,
+          "ceiling": false,
           "ver": "v1",
           "description": "51/52 EXACT (98%), σ²=144km² 어레이, 1,200GW, J₂·10=240km 반경, η=1-1/e",
           "links": [
