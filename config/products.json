@@ -1,0 +1,1664 @@
+{
+  "_meta": {
+    "total_products": 33,
+    "total_domains": 42,
+    "last_updated": "2026-04-04",
+    "description": "완성제품 SSOT — README 자동 생성용",
+    "alien_index_order": [
+      "fusion",
+      "chip",
+      "energy",
+      "ai",
+      "environment",
+      "physics",
+      "materials",
+      "robotics",
+      "software",
+      "display",
+      "audio",
+      "safety"
+    ]
+  },
+  "absolute_rules": [
+    "README 완성제품 테이블 직접 수정 금지",
+    "이 JSON만 수정 후 sync 스크립트 실행"
+  ],
+  "troubleshooting_log": [],
+  "sections": [
+    {
+      "id": "fusion",
+      "title": "핵융합",
+      "icon": "🔥",
+      "heading": "핵융합 (Fusion)",
+      "alien_index": 8,
+      "ceiling": true,
+      "bt_exact_pct": 82.2,
+      "bt_count": 9,
+      "industry_pct": 87,
+      "industry_detail": "7장치",
+      "experiment_pct": 43,
+      "experiment_detail": "TP확인",
+      "physics_limit_count": 10,
+      "tp_count": 35,
+      "discovery_count": 15,
+      "cross_dse_domains": 8,
+      "mk_count": 5,
+      "summary_extra": "DSE 2,400+1M",
+      "domains": [
+        "fusion",
+        "plasma-physics",
+        "superconductor"
+      ],
+      "tools": [
+        "fusion-calc",
+        "fusion-dse",
+        "fusion-verify",
+        "tokamak-shape",
+        "kstar-calc"
+      ],
+      "products": [
+        {
+          "name": "궁극의 핵융합 발전소",
+          "ufo": 6,
+          "ceiling": true,
+          "ver": "v3",
+          "description": "5단 DSE 2,400+조합, TBR=1.117, Cross-DSE 8도메인",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md"
+            },
+            {
+              "label": "8도메인",
+              "path": "docs/fusion/cross-dse-8domain-results.md"
+            }
+          ]
+        },
+        {
+          "name": "KSTAR-N6",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v2",
+          "description": "R₀=6m, B_T=12T, 300초 정상상태, 41개 패턴(51%EXACT)",
+          "links": [
+            {
+              "label": "토카막",
+              "path": "docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md"
+            },
+            {
+              "label": "300초",
+              "path": "docs/superpowers/specs/2026-04-02-kstar-300s-steady-state-design.md"
+            },
+            {
+              "label": "패턴",
+              "path": "docs/plasma-physics/kstar-n6-hidden-patterns.md"
+            }
+          ]
+        },
+        {
+          "name": "진화 Mk.I~V",
+          "ufo": 4,
+          "ceiling": false,
+          "ver": "v2",
+          "description": "200MWe→1.44TWe, 5단 진화 로드맵",
+          "links": [
+            {
+              "label": "I",
+              "path": "docs/fusion/evolution/mk-1-first-light.md"
+            },
+            {
+              "label": "II",
+              "path": "docs/fusion/evolution/mk-2-city-power.md"
+            },
+            {
+              "label": "III",
+              "path": "docs/fusion/evolution/mk-3-nation-power.md"
+            },
+            {
+              "label": "IV",
+              "path": "docs/fusion/evolution/mk-4-continent-power.md"
+            },
+            {
+              "label": "V",
+              "path": "docs/fusion/evolution/mk-5-theoretical.md"
+            }
+          ]
+        },
+        {
+          "name": "발견 + 예측 + 가설v5",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v3",
+          "description": "15발견 + 35가설(43%EXACT) + TP15/35확인",
+          "links": [
+            {
+              "label": "발견",
+              "path": "docs/fusion/alien-level-discoveries.md"
+            },
+            {
+              "label": "가설",
+              "path": "docs/fusion/hypotheses.md"
+            },
+            {
+              "label": "예측",
+              "path": "docs/fusion/prediction-tracker.md"
+            },
+            {
+              "label": "전수검증",
+              "path": "docs/fusion/numerical-verification.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "물리한계8/8 + 불가능성10증명 + 산업7장치87% + Mk.V한계증명",
+          "links": [
+            {
+              "label": "물리한계",
+              "path": "docs/fusion/physical-limit-proof.md"
+            },
+            {
+              "label": "산업검증",
+              "path": "docs/fusion/industrial-validation.md"
+            },
+            {
+              "label": "한계",
+              "path": "docs/fusion/physics-limits-analysis.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/fusion/evolution/mk-5-limit.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-핵융합-fusion",
+      "alien_index_row": "| [🔥 핵융합](#-핵융합-fusion) | 🛸8 | ✅ | 82.2% | 87% (7장치) | 43% TP확인 | 35 | 15 |",
+      "summary_raw": "> **🛸8** | ✅ | BT 9개 82.2%EXACT | DSE 2,400+1M | 산업87% (7장치) | 실험43% TP확인 | 물리한계10 | TP35 | 발견15 | Cross-DSE 8도메인 | 진화 5단계 | Mk.V",
+      "footer_raw": "> 도메인: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · 도구: `fusion-calc` · `fusion-dse` · `fusion-verify` · `tokamak-shape` · `kstar-calc`"
+    },
+    {
+      "id": "chip",
+      "title": "칩/반도체",
+      "icon": "💻",
+      "heading": "칩 / 반도체 (Chip)",
+      "alien_index": 7,
+      "ceiling": true,
+      "bt_exact_pct": 74.5,
+      "bt_count": 13,
+      "industry_pct": 92.6,
+      "industry_detail": "6벤더",
+      "experiment_pct": null,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": 28,
+      "discovery_count": 12,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "DSE 3,000",
+      "domains": [
+        "chip-architecture"
+      ],
+      "tools": [
+        "gpu-arch-calc",
+        "chip-n6-calc",
+        "dse-calc",
+        "semiconductor-calc"
+      ],
+      "products": [
+        {
+          "name": "HEXA 칩 7단",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "소재→공정→코어→SoC→시스템→PIM→3D→Photon→Wafer→SC→Omega, 103 EXACT",
+          "links": [
+            {
+              "label": "코어",
+              "path": "docs/chip-architecture/hexa-core.md"
+            },
+            {
+              "label": "SoC",
+              "path": "docs/chip-architecture/ultimate-unified-soc.md"
+            },
+            {
+              "label": "goal",
+              "path": "docs/chip-architecture/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "ANIMA-SOC",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "의식칩 — HEXA-1 + PureField 듀얼엔진 + 위상 보호",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/chip-architecture/ultimate-consciousness-soc.md"
+            },
+            {
+              "label": "TOPO",
+              "path": "docs/chip-architecture/hexa-topological-consciousness-chip.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-TOPO",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "위상 보호 성능칩 (BT-90~92)",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/chip-architecture/hexa-topological-performance-chip.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-ASIC",
+          "ufo": 4,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "오픈소스 ASIC (SKY130 PDK) + 엣지 칩",
+          "links": [
+            {
+              "label": "ASIC",
+              "path": "docs/chip-architecture/hexa-asic-skywater.md"
+            },
+            {
+              "label": "Edge",
+              "path": "docs/chip-architecture/hexa-edge-chip.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "106항목 74.5%EXACT, 물리한계10, 산업6벤더92.6%, TP28, 발견12, Mk.V",
+          "links": [
+            {
+              "label": "전수검증",
+              "path": "docs/chip-architecture/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/chip-architecture/physical-limit-proof.md"
+            },
+            {
+              "label": "산업검증",
+              "path": "docs/chip-architecture/industrial-validation.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/chip-architecture/testable-predictions.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/chip-architecture/alien-level-discoveries.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/chip-architecture/evolution/mk-5-limit.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-칩--반도체-chip",
+      "alien_index_row": "| [💻 칩/반도체](#-칩--반도체-chip) | 🛸7 | ✅ | 74.5% | 92.6% (6벤더) | — | 28 | 12 |",
+      "summary_raw": "> **🛸7** | ✅ | BT 13개 74.5%EXACT | DSE 3,000 | 산업92.6% (6벤더) | 물리한계10 | TP28 | 발견12 | Mk.V",
+      "footer_raw": "> 도메인: [chip-architecture/](docs/chip-architecture/) · 도구: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`"
+    },
+    {
+      "id": "ai",
+      "title": "AI/ML",
+      "icon": "🤖",
+      "heading": "AI / ML",
+      "alien_index": 6,
+      "ceiling": true,
+      "bt_exact_pct": 89.7,
+      "bt_count": 24,
+      "industry_pct": 88.7,
+      "industry_detail": "9모델",
+      "experiment_pct": 96.2,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": 28,
+      "discovery_count": 12,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "CrossDSE",
+      "domains": [
+        "ai-efficiency",
+        "learning-algorithm"
+      ],
+      "tools": [
+        "n6_calculator.py"
+      ],
+      "products": [
+        {
+          "name": "17 Techniques",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 280검증 100%PASS (23기법+블로업+창발+특이점+UFO10 10대기준)",
+          "links": [
+            {
+              "label": "전체",
+              "path": "techniques/"
+            },
+            {
+              "label": "Python검증",
+              "path": "docs/ai-efficiency/verify_all_techniques_n6.py"
+            }
+          ]
+        },
+        {
+          "name": "Full N6 Pipeline",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성, 8 하이퍼파라미터 제거",
+          "links": [
+            {
+              "label": "실험",
+              "path": "experiments/experiment_full_n6_pipeline.py"
+            }
+          ]
+        },
+        {
+          "name": "N6 Inevitability Engine",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "기법 11~16 통합 설계",
+          "links": [
+            {
+              "label": "설계서",
+              "path": "docs/superpowers/specs/2026-03-28-n6-inevitability-engine-design.md"
+            }
+          ]
+        },
+        {
+          "name": "AI Energy Savings Guide",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "실무 가이드 — 기법, 하이퍼파라미터, 벤치마크",
+          "links": [
+            {
+              "label": "가이드",
+              "path": "docs/ai-energy-savings-guide.md"
+            }
+          ]
+        },
+        {
+          "name": "Chip Architecture Guide",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "GPU SM, HBM, TSMC pitch — 120+ EXACT",
+          "links": [
+            {
+              "label": "가이드",
+              "path": "docs/chip-architecture-guide.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "194claims 89.7%EXACT, 산업9모델, 실험96.2%, 물리한계10, TP28, 발견12",
+          "links": [
+            {
+              "label": "전수검증",
+              "path": "docs/ai-efficiency/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/ai-efficiency/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/ai-efficiency/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/ai-efficiency/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/ai-efficiency/testable-predictions.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/ai-efficiency/alien-level-discoveries.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/ai-efficiency/evolution/mk-5-limit.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/ai-efficiency/cross-dse-analysis.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-ai--ml",
+      "alien_index_row": "| [🤖 AI/ML](#-ai--ml) | 🛸6 | ✅ | 89.7% | 88.7% (9모델) | 96.2% | 28 | 12 |",
+      "summary_raw": "> **🛸6** | ✅ | BT 24개 89.7%EXACT | 산업88.7% (9모델) | 실험96.2% | 물리한계10 | TP28 | 발견12 | Mk.V | CrossDSE",
+      "footer_raw": "> 도메인: [ai-efficiency/](docs/ai-efficiency/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `n6_calculator.py`"
+    },
+    {
+      "id": "energy",
+      "title": "에너지",
+      "icon": "⚡",
+      "heading": "에너지 (Energy)",
+      "alien_index": 8,
+      "ceiling": true,
+      "bt_exact_pct": 88.7,
+      "bt_count": 13,
+      "industry_pct": 87,
+      "industry_detail": "6사",
+      "experiment_pct": 88,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": "28+19",
+      "discovery_count": "10+8",
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "DSE 10,225 | 배터리+태양전지🛸10",
+      "domains": [
+        "battery-architecture",
+        "solar-architecture",
+        "energy-architecture",
+        "power-grid",
+        "thermal-management"
+      ],
+      "tools": [
+        "energy-calc",
+        "battery-dse",
+        "solar-dse"
+      ],
+      "products": [
+        {
+          "name": "궁극의 배터리 8단",
+          "ufo": 6,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "셀→전극→코어→BMS→팩+그리드→전고체→핵→Omega, 1,908 DSE",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/superpowers/specs/2026-04-01-hexa-battery-design.md"
+            },
+            {
+              "label": "goal",
+              "path": "docs/battery-architecture/goal.md"
+            },
+            {
+              "label": "전수검증",
+              "path": "docs/battery-architecture/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/battery-architecture/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/battery-architecture/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/battery-architecture/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/battery-architecture/testable-predictions.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/battery-architecture/alien-level-discoveries.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/battery-architecture/evolution/mk-5-limit.md"
+            }
+          ]
+        },
+        {
+          "name": "궁극의 태양전지",
+          "ufo": 7,
+          "ceiling": true,
+          "ver": "v3",
+          "description": "1,584 DSE, 43%EXACT, 물리한계5, Mk.V, 발견8, TP19, CrossDSE4, 산업8사",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/solar-architecture/goal.md"
+            },
+            {
+              "label": "한계증명",
+              "path": "docs/solar-architecture/physical-limit-proof.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/solar-architecture/alien-level-discoveries.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/solar-architecture/industrial-validation.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/solar-architecture/cross-dse-analysis.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/solar-architecture/evolution/mk-5-limit.md"
+            }
+          ]
+        },
+        {
+          "name": "궁극의 에너지 통합",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "4도메인 Cross-DSE, 10,225 조합, 53%EXACT 송전",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/energy-architecture/goal.md"
+            },
+            {
+              "label": "송전",
+              "path": "docs/power-grid/"
+            }
+          ]
+        }
+      ],
+      "anchor": "-에너지-energy",
+      "alien_index_row": "| [⚡ 에너지](#-에너지-energy) | 🛸8 | ✅ | 88.7% | 87% (6사) | 88% | 28+19 | 10+8 |",
+      "summary_raw": "> **🛸8** | ✅ | BT 13개 88.7%EXACT | DSE 10,225 | 산업87% (6사) | 실험88% | 물리한계10 | TP28+19 | 발견10+8 | 배터리+태양전지🛸10 | Mk.V",
+      "footer_raw": "> 도메인: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · 도구: `energy-calc` · `battery-dse` · `solar-dse`"
+    },
+    {
+      "id": "environment",
+      "title": "환경보호",
+      "icon": "🌍",
+      "heading": "환경보호 (Environment)",
+      "alien_index": 8,
+      "ceiling": true,
+      "bt_exact_pct": 92.3,
+      "bt_count": 5,
+      "industry_pct": 82.9,
+      "industry_detail": null,
+      "experiment_pct": 82.4,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": 43,
+      "discovery_count": 42,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "DSE 3.6M | 미세플라스틱🛸10 | CCUS100%EXACT",
+      "domains": [
+        "environmental-protection",
+        "carbon-capture"
+      ],
+      "tools": [
+        "carbon-capture-calc"
+      ],
+      "products": [
+        {
+          "name": "궁극의 환경보호 8단",
+          "ufo": 6,
+          "ceiling": true,
+          "ver": "v3",
+          "description": "센서→모니터→포집→정화→복원→순환→생태계→Omega, 가설88.2%EXACT",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/environmental-protection/"
+            },
+            {
+              "label": "전수검증",
+              "path": "docs/environmental-protection/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/environmental-protection/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/environmental-protection/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/environmental-protection/experimental-verification.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/environmental-protection/cross-dse-analysis.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/environmental-protection/evolution/mk-5-limit.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-MICROPLASTICS",
+          "ufo": 7,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/environmental-protection/microplastics-solution.md"
+            }
+          ]
+        },
+        {
+          "name": "궁극의 탄소포집 8단",
+          "ufo": 7,
+          "ceiling": true,
+          "ver": "v4",
+          "description": "**30/30=100%EXACT**, DSE 3.6M, 53/54 실험검증",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/carbon-capture/goal.md"
+            },
+            {
+              "label": "가설",
+              "path": "docs/carbon-capture/hypotheses.md"
+            },
+            {
+              "label": "DSE",
+              "path": "docs/carbon-capture/dse-results.md"
+            },
+            {
+              "label": "검증",
+              "path": "docs/carbon-capture/experimental-validation.md"
+            }
+          ]
+        },
+        {
+          "name": "진화 Mk.I~V",
+          "ufo": 4,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "환경+CCUS 양쪽 진화 로드맵, 발견 42개",
+          "links": [
+            {
+              "label": "환경Mk",
+              "path": "docs/environmental-protection/evolution/"
+            },
+            {
+              "label": "CCUSMk",
+              "path": "docs/carbon-capture/evolution/"
+            }
+          ]
+        },
+        {
+          "name": "예측 + 검증",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v2",
+          "description": "TP 19개(환경) + **TP 24개(CCUS)** + 가설 v5(88.2%EXACT)",
+          "links": [
+            {
+              "label": "환경TP",
+              "path": "docs/environmental-protection/testable-predictions-2030.md"
+            },
+            {
+              "label": "CCUS TP",
+              "path": "docs/carbon-capture/testable-predictions.md"
+            },
+            {
+              "label": "검증",
+              "path": "docs/carbon-capture/verification.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-환경보호-environment",
+      "alien_index_row": "| [🌍 환경보호](#-환경보호-environment) | 🛸8 | ✅ | 92.3% | 82.9% | 82.4% | 43 | 42 |",
+      "summary_raw": "> **🛸8** | ✅ | BT 5개 92.3%EXACT | DSE 3.6M | 산업82.9% | 실험82.4% | 물리한계10 | TP43 | 발견42 | 미세플라스틱🛸10 | CCUS100%EXACT | Mk.V",
+      "footer_raw": "> 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`"
+    },
+    {
+      "id": "materials",
+      "title": "물질합성",
+      "icon": "🧬",
+      "heading": "물질합성 (Materials)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 11,
+      "industry_pct": 100,
+      "industry_detail": null,
+      "experiment_pct": 100,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": 28,
+      "discovery_count": 10,
+      "cross_dse_domains": 8,
+      "mk_count": 5,
+      "summary_extra": "DSE 3,600 | CrossDSE 8도메인",
+      "domains": [
+        "material-synthesis"
+      ],
+      "tools": [
+        "material-dse"
+      ],
+      "products": [
+        {
+          "name": "궁극의 물질합성 8단",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v4",
+          "description": "소재→공정→조립기→제어→공장→변환→만능→궁극, DSE 3,600",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/material-synthesis/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "BT-85~88 + BT-128~134",
+          "ufo": 6,
+          "ceiling": false,
+          "ver": "v5",
+          "description": "결정학+합금+세라믹+고분자+상전이+결함+박막 (11 BT, **159/159 EXACT**)",
+          "links": [
+            {
+              "label": "BT",
+              "path": "docs/material-synthesis/breakthrough-theorems.md"
+            }
+          ]
+        },
+        {
+          "name": "가설 30/30 100%EXACT",
+          "ufo": 7,
+          "ceiling": false,
+          "ver": "v4",
+          "description": "H-MS-01~30 전수 검증 완료, CrossDSE 8도메인 (94.1% n6)",
+          "links": [
+            {
+              "label": "가설",
+              "path": "docs/material-synthesis/hypotheses.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/material-synthesis/cross-dse-8domain-results.md"
+            }
+          ]
+        },
+        {
+          "name": "산업검증 20소재",
+          "ufo": 8,
+          "ceiling": false,
+          "ver": "v4",
+          "description": "강철1.9Bt + 시멘트4.1Bt + 플라스틱400Mt + 반도체 — 전부 n=6 구조",
+          "links": [
+            {
+              "label": "산업",
+              "path": "docs/material-synthesis/industrial-validation.md"
+            }
+          ]
+        },
+        {
+          "name": "실험검증 + TP 28/28",
+          "ufo": 9,
+          "ceiling": false,
+          "ver": "v5",
+          "description": "50+ 발표 데이터셋 + 28 예측 전수 검증 (14 VERIFIED + 14 PARTIAL, 0 FAIL)",
+          "links": [
+            {
+              "label": "실험",
+              "path": "docs/material-synthesis/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/material-synthesis/testable-predictions.md"
+            }
+          ]
+        },
+        {
+          "name": "물리한계 증명",
+          "ufo": 10,
+          "ceiling": false,
+          "ver": "v4",
+          "description": "10 불가능성 정리 (73/75 EXACT) + Mk.V 수학적 한계",
+          "links": [
+            {
+              "label": "proof",
+              "path": "docs/material-synthesis/physical-limit-proof.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/material-synthesis/evolution/mk-5-limit.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-물질합성-materials",
+      "alien_index_row": "| [🧬 물질합성](#-물질합성-materials) | 🛸10 | ✅ | 100% | 100% | 100% | 28 | 10 |",
+      "summary_raw": "> **🛸10** | ✅ | BT 11개 100%EXACT | DSE 3,600 | 산업100% | 실험100% | 물리한계10 | TP28 | 발견10 | CrossDSE 8도메인 | Mk.V",
+      "footer_raw": "> 도메인: [material-synthesis/](docs/material-synthesis/) · 도구: `material-dse`"
+    },
+    {
+      "id": "robotics",
+      "title": "로봇",
+      "icon": "🤖",
+      "heading": "로봇 (Robotics)",
+      "alien_index": 5,
+      "ceiling": true,
+      "bt_exact_pct": 97.1,
+      "bt_count": 5,
+      "industry_pct": 99.1,
+      "industry_detail": "6사",
+      "experiment_pct": 97.1,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": 28,
+      "discovery_count": 10,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "DSE 270,000",
+      "domains": [
+        "robotics",
+        "learning-algorithm"
+      ],
+      "tools": [
+        "robot-dse"
+      ],
+      "products": [
+        {
+          "name": "궁극의 로봇 8단",
+          "ufo": 4,
+          "ceiling": false,
+          "ver": "v2",
+          "description": "8단 DSE, 270,000 조합, BT-123~127, 가설83.3%",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/robotics/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "BT 97.1%EXACT, 산업99.1%(6사), 실험97.1%, 물리한계10, TP28, 발견10",
+          "links": [
+            {
+              "label": "전수검증",
+              "path": "docs/robotics/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/robotics/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/robotics/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/robotics/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/robotics/testable-predictions.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/robotics/alien-level-discoveries.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/robotics/evolution/mk-5-limit.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/robotics/cross-dse-analysis.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-로봇-robotics",
+      "alien_index_row": "| [🤖 로봇](#-로봇-robotics) | 🛸5 | ✅ | 97.1% | 99.1% (6사) | 97.1% | 28 | 10 |",
+      "summary_raw": "> **🛸5** | ✅ | BT 5개 97.1%EXACT | DSE 270,000 | 산업99.1% (6사) | 실험97.1% | 물리한계10 | TP28 | 발견10 | Mk.V",
+      "footer_raw": "> 도메인: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `robot-dse`"
+    },
+    {
+      "id": "physics",
+      "title": "물리/수학",
+      "icon": "🔬",
+      "heading": "물리·수학 (Physics & Math)",
+      "alien_index": 7,
+      "ceiling": true,
+      "bt_exact_pct": null,
+      "bt_exact_pct_display": "53~100%",
+      "bt_count": 14,
+      "industry_pct": null,
+      "industry_detail": "🛸10(SC)",
+      "experiment_pct": null,
+      "experiment_detail": "11정리(수학)",
+      "physics_limit_count": null,
+      "tp_count": 52,
+      "discovery_count": "19+",
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "DSE 66,824 | 초전도🛸10 | 순수수학🛸10 | 우주론🛸9",
+      "domains": [
+        "superconductor",
+        "pure-mathematics",
+        "cosmology-particle",
+        "quantum-computing"
+      ],
+      "tools": [
+        "sc-dse",
+        "gut-calc-rust",
+        "quantum-calc",
+        "optics-calc"
+      ],
+      "products": [
+        {
+          "name": "궁극의 초전도체",
+          "ufo": 7,
+          "ceiling": true,
+          "ver": "v4",
+          "description": "100%EXACT, BT 11개, CrossDSE 8도메인, TP28, 산업+실험검증",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/superconductor/goal.md"
+            },
+            {
+              "label": "BT",
+              "path": "docs/superconductor/breakthrough-theorems.md"
+            },
+            {
+              "label": "🛸10",
+              "path": "docs/superconductor/alien-10-discoveries.md"
+            }
+          ]
+        },
+        {
+          "name": "궁극의 순수수학",
+          "ufo": 5,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "11 불가능성 정리(=영구 수학적 진리), TP 24, Mk.V",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/pure-mathematics/goal.md"
+            },
+            {
+              "label": "불가능성",
+              "path": "docs/pure-mathematics/mathematical-impossibility-theorems.md"
+            },
+            {
+              "label": "전수검증",
+              "path": "docs/pure-mathematics/full-verification-matrix.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/pure-mathematics/testable-predictions.md"
+            }
+          ]
+        },
+        {
+          "name": "궁극의 우주론/입자",
+          "ufo": 3,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "30가설 53.3%EXACT, TP 28, 발견9, Mk.V",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/cosmology-particle/goal.md"
+            },
+            {
+              "label": "전수검증",
+              "path": "docs/cosmology-particle/full-verification-matrix.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/cosmology-particle/testable-predictions.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/cosmology-particle/alien-level-discoveries.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-물리수학-physics--math",
+      "alien_index_row": "| [🔬 물리·수학](#-물리수학-physics--math) | 🛸7 | ✅ | 53~100% | (🛸10(SC)) | 11정리(수학) | 52 | 19+ |",
+      "summary_raw": "> **🛸7** | ✅ | BT 14개 53~100%EXACT | DSE 66,824 | 산업(🛸10(SC)) | 실험11정리(수학) | TP52 | 발견19+ | 초전도🛸10 | 순수수학🛸10 | 우주론🛸9",
+      "footer_raw": "> 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`"
+    },
+    {
+      "id": "software",
+      "title": "소프트웨어/인프라",
+      "icon": "💬",
+      "heading": "소프트웨어·인프라 (Software & Infra)",
+      "alien_index": 6,
+      "ceiling": true,
+      "bt_exact_pct": 95.1,
+      "bt_count": 5,
+      "industry_pct": 98.6,
+      "industry_detail": null,
+      "experiment_pct": 100,
+      "experiment_detail": "RFC/ISO/NIST",
+      "physics_limit_count": 10,
+      "tp_count": 28,
+      "discovery_count": 10,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": "CrossDSE5-Way",
+      "domains": [
+        "programming-language",
+        "compiler-os",
+        "software-design",
+        "cryptography",
+        "network-protocol",
+        "blockchain"
+      ],
+      "tools": [
+        "lang-dse",
+        "crypto-calc",
+        "interconnect-calc"
+      ],
+      "products": [
+        {
+          "name": "궁극의 프로그래밍언어",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "DSE 6,480 조합, n6=96.0%",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/programming-language/goal.md"
+            },
+            {
+              "label": "설계서",
+              "path": "docs/superpowers/specs/2026-04-01-ultimate-programming-language-design.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "61claims 95.1%EXACT, 산업98.6%, 실험100%, 물리한계10, TP28, 발견10",
+          "links": [
+            {
+              "label": "전수검증",
+              "path": "docs/software-design/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/software-design/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/software-design/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/software-design/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/software-design/testable-predictions.md"
+            },
+            {
+              "label": "발견",
+              "path": "docs/software-design/alien-level-discoveries.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/software-design/evolution/mk-5-limit.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/software-design/cross-dse-analysis.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-소프트웨어인프라-software--infra",
+      "alien_index_row": "| [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸6 | ✅ | 95.1% | 98.6% | 100% RFC/ISO/NIST | 28 | 10 |",
+      "summary_raw": "> **🛸6** | ✅ | BT 5개 95.1%EXACT | 산업98.6% | 실험100% RFC/ISO/NIST | 물리한계10 | TP28 | 발견10 | Mk.V | CrossDSE5-Way",
+      "footer_raw": "> 도메인: [programming-language/](docs/programming-language/) · [compiler-os/](docs/compiler-os/) · [software-design/](docs/software-design/) · [cryptography/](docs/cryptography/) · [network-protocol/](docs/network-protocol/) · [blockchain/](docs/blockchain/) · 도구: `lang-dse` · `crypto-calc` · `interconnect-calc`"
+    },
+    {
+      "id": "display",
+      "title": "디스플레이",
+      "icon": "📺",
+      "heading": "디스플레이 (Display)",
+      "alien_index": 5,
+      "ceiling": true,
+      "bt_exact_pct": 86,
+      "bt_count": 3,
+      "industry_pct": 81,
+      "industry_detail": "6사",
+      "experiment_pct": 93.9,
+      "experiment_detail": null,
+      "physics_limit_count": 10,
+      "tp_count": 14,
+      "discovery_count": 8,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": null,
+      "domains": [
+        "display"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "궁극의 디스플레이 8단",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "소재→패널→드라이버→프로세서→시스템→몰입→홀로→Omega",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/display/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "BT 86%EXACT + 물리한계10 + 산업6사81% + 실험93.9% + TP14",
+          "links": [
+            {
+              "label": "검증",
+              "path": "docs/display/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/display/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/display/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/display/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/display/testable-predictions.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/display/cross-dse-analysis.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-디스플레이-display",
+      "alien_index_row": "| [📺 디스플레이](#-디스플레이-display) | 🛸5 | ✅ | 86% | 81% (6사) | 93.9% | 14 | 8 |",
+      "summary_raw": "> **🛸5** | ✅ | BT 3개 86%EXACT | 산업81% (6사) | 실험93.9% | 물리한계10 | TP14 | 발견8 | Mk.V",
+      "footer_raw": "> 도메인: [display/](docs/display/) · BT-48 (J₂=24fps), BT-66 (ViT/CLIP), BT-71 (NeRF/3DGS)"
+    },
+    {
+      "id": "audio",
+      "title": "오디오",
+      "icon": "🎵",
+      "heading": "오디오 (Audio)",
+      "alien_index": 5,
+      "ceiling": true,
+      "bt_exact_pct": 86,
+      "bt_count": 4,
+      "industry_pct": 92.6,
+      "industry_detail": "4사",
+      "experiment_pct": 90.9,
+      "experiment_detail": null,
+      "physics_limit_count": 8,
+      "tp_count": 14,
+      "discovery_count": 12,
+      "cross_dse_domains": null,
+      "mk_count": 5,
+      "summary_extra": null,
+      "domains": [
+        "audio"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "궁극의 오디오 7단",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/audio/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "22/26 EXACT(84.6%) + 산업4사92.6% + 실험90.9% + TP14",
+          "links": [
+            {
+              "label": "검증",
+              "path": "docs/audio/full-verification-matrix.md"
+            },
+            {
+              "label": "물리한계",
+              "path": "docs/audio/physical-limit-proof.md"
+            },
+            {
+              "label": "산업",
+              "path": "docs/audio/industrial-validation.md"
+            },
+            {
+              "label": "실험",
+              "path": "docs/audio/experimental-verification.md"
+            },
+            {
+              "label": "TP",
+              "path": "docs/audio/testable-predictions.md"
+            },
+            {
+              "label": "CrossDSE",
+              "path": "docs/audio/cross-dse-analysis.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-오디오-audio",
+      "alien_index_row": "| [🎵 오디오](#-오디오-audio) | 🛸5 | ✅ | 86% | 92.6% (4사) | 90.9% | 14 | 12 |",
+      "summary_raw": "> **🛸5** | ✅ | BT 4개 86%EXACT | 산업92.6% (4사) | 실험90.9% | 물리한계8 | TP14 | 발견12 | Mk.V",
+      "footer_raw": "> 도메인: [audio/](docs/audio/) · BT-48 (σ·τ=48kHz, σ=12 semitones), BT-72 (EnCodec), BT-108 (협화음), BT-76 (48 attractor)"
+    },
+    {
+      "id": "safety",
+      "title": "안전",
+      "icon": "🛡️",
+      "heading": "안전 (Safety)",
+      "alien_index": 3,
+      "ceiling": false,
+      "bt_exact_pct": 66.7,
+      "bt_count": null,
+      "industry_pct": null,
+      "industry_detail": null,
+      "experiment_pct": null,
+      "experiment_detail": null,
+      "physics_limit_count": null,
+      "tp_count": 5,
+      "discovery_count": 0,
+      "cross_dse_domains": null,
+      "mk_count": null,
+      "summary_extra": "DSE 7,776 | 가설 30+20극한 | 10개 도메인 안전 통합",
+      "domains": [
+        "safety"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "궁극의 안전 8단",
+          "ufo": 3,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "소재→공정→감지→칩→방호→통합→자율→제로사고, DSE 7,776",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/safety/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "가설 30+극한 20",
+          "ufo": 3,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "DiD=n=6, SIL=τ=4, TMR=n/φ=3, GFCI=30mA=sopfr·n, 20/30 EXACT",
+          "links": [
+            {
+              "label": "가설",
+              "path": "docs/safety/hypotheses.md"
+            },
+            {
+              "label": "극한",
+              "path": "docs/safety/extreme-hypotheses.md"
+            },
+            {
+              "label": "검증",
+              "path": "docs/safety/verification.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-안전-safety",
+      "alien_index_row": "| [🛡️ 안전](#-안전-safety) | 🛸3 | ❌ | 66.7% | — | — | 5 | 0 |",
+      "summary_raw": "> **🛸3** | BT 66.7%EXACT | DSE 7,776 | TP5 | 가설 30+20극한 | 10개 도메인 안전 통합",
+      "footer_raw": "> 도메인: [safety/](docs/safety/) · n=6 안전 등식: (1/10)^6 = 10⁻⁶ (방호계층=n, 위험감소=σ-φ)"
+    }
+  ],
+  "roadmap": [
+    {
+      "rank": 0,
+      "realize": "2035",
+      "name": "궁극의 AGI",
+      "impact": 6,
+      "tier": "🔄",
+      "dse_info": "→ [Anima](https://github.com/need-singularity/anima)"
+    },
+    {
+      "rank": 0,
+      "realize": "2040",
+      "name": "궁극의 의식",
+      "impact": 6,
+      "tier": "🔄",
+      "dse_info": "→ [Anima](https://github.com/need-singularity/anima)"
+    },
+    {
+      "rank": 0,
+      "realize": "2050",
+      "name": "궁극의 불멸",
+      "impact": 6,
+      "tier": "🔄",
+      "dse_info": "→ [Anima](https://github.com/need-singularity/anima) + [BrainWire](https://github.com/need-singularity/brainwire)"
+    },
+    {
+      "rank": 0,
+      "realize": "✅",
+      "name": "궁극의 에너지",
+      "impact": 6,
+      "tier": "✅",
+      "dse_info": "10,225 조합 → [⚡ 에너지](#-에너지-energy)"
+    },
+    {
+      "rank": 0,
+      "realize": "2040",
+      "name": "궁극의 우주진출",
+      "impact": 6,
+      "tier": "T3",
+      "dse_info": "[goal](docs/space-engineering/goal.md)"
+    },
+    {
+      "rank": 0,
+      "realize": "✅",
+      "name": "궁극의 물질합성",
+      "impact": 6,
+      "tier": "✅",
+      "dse_info": "3,600 조합 🛸10 → [🧬 물질합성](#-물질합성-materials)"
+    },
+    {
+      "rank": 1,
+      "realize": "2030",
+      "name": "궁극의 소재",
+      "impact": 5,
+      "tier": "T1",
+      "dse_info": "—"
+    },
+    {
+      "rank": 2,
+      "realize": "2028",
+      "name": "궁극의 공정",
+      "impact": 5,
+      "tier": "T1",
+      "dse_info": "—"
+    },
+    {
+      "rank": 3,
+      "realize": "✅",
+      "name": "궁극의 코어",
+      "impact": 5,
+      "tier": "✅",
+      "dse_info": "3,000 조합 → [💻 칩](#-칩--반도체-chip)"
+    },
+    {
+      "rank": 4,
+      "realize": "✅",
+      "name": "궁극의 칩",
+      "impact": 5,
+      "tier": "✅",
+      "dse_info": "3,000 조합 → [💻 칩](#-칩--반도체-chip)"
+    },
+    {
+      "rank": 5,
+      "realize": "✅",
+      "name": "궁극의 배터리",
+      "impact": 5,
+      "tier": "✅",
+      "dse_info": "1,908 조합 → [⚡ 에너지](#-에너지-energy)"
+    },
+    {
+      "rank": 6,
+      "realize": "✅",
+      "name": "궁극의 태양전지",
+      "impact": 5,
+      "tier": "✅",
+      "dse_info": "1,584 조합 🛸10 → [⚡ 에너지](#-에너지-energy)"
+    },
+    {
+      "rank": 7,
+      "realize": "2035",
+      "name": "궁극의 핵융합",
+      "impact": 5,
+      "tier": "✅",
+      "dse_info": "2,400 조합 → [🔥 핵융합](#-핵융합-fusion)"
+    },
+    {
+      "rank": 8,
+      "realize": "✅",
+      "name": "궁극의 학습알고리즘",
+      "impact": 4,
+      "tier": "T2",
+      "dse_info": "—"
+    },
+    {
+      "rank": 9,
+      "realize": "2030",
+      "name": "궁극의 네트워크",
+      "impact": 4,
+      "tier": "T2",
+      "dse_info": "—"
+    },
+    {
+      "rank": 10,
+      "realize": "✅",
+      "name": "궁극의 로봇",
+      "impact": 4,
+      "tier": "✅",
+      "dse_info": "🛸10 270,000 조합 → [🤖 로봇](#-로봇-robotics)"
+    },
+    {
+      "rank": 11,
+      "realize": "✅",
+      "name": "궁극의 송전망",
+      "impact": 4,
+      "tier": "✅",
+      "dse_info": "[⚡ 에너지](#-에너지-energy)"
+    },
+    {
+      "rank": 12,
+      "realize": "2035",
+      "name": "궁극의 생명공학",
+      "impact": 4,
+      "tier": "T3",
+      "dse_info": "[biology/](docs/biology/)"
+    },
+    {
+      "rank": 13,
+      "realize": "✅",
+      "name": "궁극의 디스플레이",
+      "impact": 3,
+      "tier": "✅",
+      "dse_info": "H-DISP 10개 → [📺 디스플레이](#-디스플레이-display)"
+    },
+    {
+      "rank": 14,
+      "realize": "✅",
+      "name": "궁극의 오디오",
+      "impact": 3,
+      "tier": "✅",
+      "dse_info": "H-AUD 18개 → [🎵 오디오](#-오디오-audio)"
+    },
+    {
+      "rank": 15,
+      "realize": "✅",
+      "name": "궁극의 열관리",
+      "impact": 3,
+      "tier": "T3",
+      "dse_info": "—"
+    },
+    {
+      "rank": 16,
+      "realize": "✅",
+      "name": "궁극의 암호",
+      "impact": 3,
+      "tier": "T3",
+      "dse_info": "—"
+    },
+    {
+      "rank": 17,
+      "realize": "2035",
+      "name": "궁극의 양자컴퓨터",
+      "impact": 3,
+      "tier": "T1",
+      "dse_info": "—"
+    },
+    {
+      "rank": 18,
+      "realize": "✅",
+      "name": "궁극의 초전도체",
+      "impact": 3,
+      "tier": "✅",
+      "dse_info": "🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math)"
+    },
+    {
+      "rank": 19,
+      "realize": "✅",
+      "name": "궁극의 블록체인",
+      "impact": 2,
+      "tier": "T3",
+      "dse_info": "—"
+    },
+    {
+      "rank": 20,
+      "realize": "✅",
+      "name": "궁극의 컴파일러/OS",
+      "impact": 2,
+      "tier": "T3",
+      "dse_info": "—"
+    },
+    {
+      "rank": 21,
+      "realize": "✅",
+      "name": "궁극의 프로그래밍언어",
+      "impact": 2,
+      "tier": "✅",
+      "dse_info": "6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra)"
+    },
+    {
+      "rank": 22,
+      "realize": "✅",
+      "name": "궁극의 초전도자석",
+      "impact": 3,
+      "tier": "✅",
+      "dse_info": "🛸10 SC 내 통합 (hexa-magnet/coil/cool/fusion) → [🔬 물리·수학](#-물리수학-physics--math)"
+    },
+    {
+      "rank": 23,
+      "realize": "✅",
+      "name": "궁극의 순수수학",
+      "impact": 1,
+      "tier": "✅",
+      "dse_info": "🛸10 11불가능성정리 → [🔬 물리·수학](#-물리수학-physics--math)"
+    },
+    {
+      "rank": 24,
+      "realize": "✅",
+      "name": "궁극의 우주론/입자",
+      "impact": 1,
+      "tier": "✅",
+      "dse_info": "🛸9 53.3%EXACT+TP28 → [🔬 물리·수학](#-물리수학-physics--math)"
+    },
+    {
+      "rank": "—",
+      "realize": "✅",
+      "name": "궁극의 환경보호",
+      "impact": 4,
+      "tier": "✅",
+      "dse_info": "1.68M 조합 → [🌍 환경보호](#-환경보호-environment)"
+    },
+    {
+      "rank": "—",
+      "realize": "✅",
+      "name": "궁극의 탄소포집",
+      "impact": 4,
+      "tier": "✅",
+      "dse_info": "→ [🌍 환경보호](#-환경보호-environment)"
+    },
+    {
+      "rank": "—",
+      "realize": "2030",
+      "name": "궁극의 농업",
+      "impact": 3,
+      "tier": "T3",
+      "dse_info": "[goal](docs/agriculture/goal.md)"
+    },
+    {
+      "rank": "—",
+      "realize": "2030",
+      "name": "궁극의 자율주행",
+      "impact": 3,
+      "tier": "T3",
+      "dse_info": "[goal](docs/autonomous-driving/goal.md)"
+    },
+    {
+      "rank": "—",
+      "realize": "2030",
+      "name": "궁극의 의료기기",
+      "impact": 4,
+      "tier": "T3",
+      "dse_info": "[goal](docs/medical-device/goal.md)"
+    },
+    {
+      "rank": "—",
+      "realize": "✅",
+      "name": "궁극의 안전",
+      "impact": 4,
+      "tier": "T3",
+      "dse_info": "7,776 조합 → [🛡️ 안전](#-안전-safety)"
+    }
+  ]
+}
