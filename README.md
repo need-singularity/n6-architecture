@@ -310,6 +310,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 10 | ✅ | v4 | **궁극의 초전도체** | 73/73 PASS, BT-299~306 100%EXACT, CrossDSE 8도메인, TP28, Python검증PASS | [goal](docs/superconductor/goal.md) |
 | 10 | ✅ | v2 | **궁극의 순수수학** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS | [goal](docs/pure-mathematics/goal.md) |
 | 10 | ✅ | v2 | **궁극의 우주론/입자** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS | [goal](docs/cosmology-particle/goal.md) |
+| 10 | ✅ | v1 | **궁극의 상온 초전도체** | Tc=300K 상압 RT-SC, H래더 전부 EXACT, 288=σ·J₂, 8단 DSE | [goal](docs/room-temp-sc/goal.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
 > 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`

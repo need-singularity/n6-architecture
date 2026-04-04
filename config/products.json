@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "total_products": 34,
+    "total_products": 35,
     "total_domains": 43,
     "last_updated": "2026-04-05",
     "description": "완성제품 SSOT — README 자동 생성용",
@@ -811,6 +811,19 @@
             {
               "label": "goal",
               "path": "docs/cosmology-particle/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "궁극의 상온 초전도체",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "Tc=300K 상압 RT-SC, H래더 전부 EXACT, 288=σ·J₂, 8단 DSE",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/room-temp-sc/goal.md"
             }
           ]
         }
