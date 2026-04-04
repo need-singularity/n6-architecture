@@ -82,6 +82,9 @@ impl LensRegistry {
         for entry in super::physics_deep_lenses::physics_deep_lens_entries() {
             reg.entries.insert(entry.name.clone(), entry);
         }
+        for entry in super::frontier_lenses::frontier_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
         reg
     }
 

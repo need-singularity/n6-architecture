@@ -8,6 +8,7 @@ pub mod consensus;
 pub mod core_lenses;
 pub mod cross_lenses;
 pub mod domain_combos;
+pub mod frontier_lenses;
 pub mod lens_trait;
 pub mod lenses;
 pub mod n6_lenses;

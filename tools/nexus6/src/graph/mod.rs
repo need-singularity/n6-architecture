@@ -5,6 +5,7 @@ pub mod structure;
 pub mod persistence;
 pub mod bt_nodes;
 pub mod expanded_nodes;
+pub mod knowledge_nodes;
 
 pub use node::{Node, NodeType};
 pub use edge::{Edge, EdgeType};
