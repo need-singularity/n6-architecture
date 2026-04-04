@@ -390,16 +390,15 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 # 🛸 SF / 초광속 추진 (Speculative Propulsion)
 
 <!-- AUTO:SUMMARY_sf:START -->
-> **🛸10** | ✅ | BT 40개 100%EXACT | HEXA-WARP(워프) + HEXA-UFO(비행접시), Mk.I~V 통합, RT-SC 기반 | 산업100% (Raptor/Dawn/ITER/NERVA) | 실험100% 60/60 EXACT | 물리한계4 | TP10 | 발견5 | Mk.V
+> **🛸10** | ✅ | BT 40개 100%EXACT | 단일문서 통합 (Part I 워프+Part II UFO), DSE 1,679,616, Mk.I~V | 산업100% (Raptor/Dawn/ITER/NERVA) | 실험100% 60/60 EXACT | 물리한계4 | TP10 | 발견5 | Mk.V
 <!-- AUTO:SUMMARY_sf:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **HEXA-WARP 워프항법장치** | 60/60 EXACT, 0.1c=1/(σ-φ) [BT-102], Q=σ-φ=10 [BT-298], D-T sopfr=5 [BT-98], ITER TF=3n=18 [BT-302], 48V=σ·τ [BT-325], 8단 DSE 6⁸=1,679,616, Mk.I~V 통합(단일문서) | [설계](docs/warp-drive/goal.md) · [검증](docs/warp-drive/verify_warp_n6.py) |
-| 10 | ✅ | v1 | **HEXA-UFO 비행접시** | 48/49 EXACT (98%), Meissner 무동력부양 + 48T SC 추진 + Q=10 탁상 핵융합, D=J₂=24m 원반, Mach σ-φ=10 대기권, Isp=σ·J₂·10³=288,000s 우주, 승무원 n=6 (BT-273) | [설계](docs/room-temp-sc/ufo-flying-saucer.md) |
+| 10 | ✅ | v1 | **궁극의 SF 추진 (HEXA-SF)** | 워프+UFO 통합 단일문서. Part I: HEXA-WARP(60/60 EXACT, 0.1c=1/(σ-φ), Mk.I~V 통합, DSE 6⁸=1,679,616). Part II: HEXA-UFO(48/49 EXACT, Meissner 부양+Q=10 탁상핵융합, D=J₂=24m, Mach σ-φ=10, 승무원 n=6) | [설계](docs/sf/goal.md) · [검증](docs/sf/verify_sf_n6.py) |
 
 <!-- AUTO:FOOTER_sf:START -->
-> 도메인: [warp-drive/](docs/warp-drive/)
+> 도메인: [sf/](docs/sf/)
 <!-- AUTO:FOOTER_sf:END -->
 
 ---

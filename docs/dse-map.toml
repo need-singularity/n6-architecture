@@ -12336,19 +12336,19 @@ n6_avg = 90.7
 note = "DSE complete — 121 Pareto, all top-20 n6=96-100%"
 cross_dse = ["space-engineering", "fusion", "material-synthesis", "optical-metrology", "optics-telescope"]
 
-[warp-drive]
+[sf]
 goal = true
 dse = "done"
 combos = 1679616
 alien_level = 10
-tool = "tools/universal-dse/domains/warp.toml"
+tool = "tools/universal-dse/domains/sf.toml"
 levels = ["Material", "Process", "Core", "Engine", "Propellant", "Hull", "System", "Trajectory"]
 candidates = "6×6×6×6×6×6×6×6 = 6^8 (K=n perfect at every level)"
 bts = ["BT-93", "BT-98", "BT-102", "BT-122", "BT-123", "BT-130", "BT-136", "BT-174", "BT-196", "BT-231", "BT-241", "BT-270", "BT-271", "BT-275", "BT-276", "BT-292", "BT-293", "BT-298", "BT-302", "BT-325", "BT-327"]
 cross_dse = ["aerospace-propulsion", "space-engineering", "fusion", "plasma-physics", "material-synthesis", "chip-architecture", "energy-architecture", "robotics"]
 best_n6 = "Graphene + AtomAssembly + DFD_Fusion + Sigma_Tau_48_Cell + D_He3 + Graphene_Comp + Bus48V + PulsedFusion (100%)"
 best_perf = "Metamaterial + AtomAssembly + Alcubierre + J24_Nozzle + Antiproton + Meta_Hull + Sigma_Sensor + Relativistic (Mk.V SF)"
-verify_script = "docs/warp-drive/verify_warp_n6.py"
+verify_script = "docs/sf/verify_warp_n6.py"
 verify_result = "60/60 PASS (100%), 🛸10 CERTIFIED"
 n6_max = 100.0
 note = "HEXA-WARP 8단 (Mk.I–Mk.V) — 0.1c=1/(σ-φ) BT-102, Q=10=σ-φ BT-298, D-T sopfr=5 BT-98, 1.68M 조합. Python 검증 60/60 EXACT."
