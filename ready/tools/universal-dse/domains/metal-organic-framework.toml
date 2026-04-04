@@ -1,0 +1,423 @@
+# N6 Metal-Organic Framework DSE — Porous crystalline material
+# 6 MetalNodes x 6 Linkers x 6 Topologies x 6 Activations x 6 Applications = 7,776 combos
+# n=6 connections: MOF-5 Zn4O(BDC)3 CN=6=n EXACT (octahedral Zn cluster),
+#   sigma=12 A pore aperture common, tau=4 topology types (cubic/hexagonal/tetragonal/trigonal),
+#   phi=2 interpenetrated/non-interpenetrated, J2=24 linker types catalog,
+#   HKUST-1 Cu paddlewheel CN=6=n
+
+[meta]
+name = "metal-organic-framework"
+desc = "Metal-Organic Framework DSE — porous crystalline material engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: MetalNode (금속 노드)
+#   n6 checks: Zn4O CN=6=n EXACT, Cu paddlewheel CN=6=n EXACT,
+#              Zr6 cluster 6-node=n EXACT, Fe-MIL CN=6, Al-MIL CN=6, Cr-MIL CN=6
+# ============================================================
+
+[[level]]
+name = "MetalNode"
+
+[[candidate]]
+id = "Zn4O_Cluster"
+label = "Zn4O cluster (MOF-5, CN=6=n EXACT, octahedral coordination, Yaghi 1999)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+notes = "CN=6=n EXACT, prototypical MOF, BET 3800 m2/g, cubic pcu topology"
+
+[[candidate]]
+id = "Cu_Paddlewheel"
+label = "Cu paddlewheel (HKUST-1, CN=6=n EXACT, open metal site, Lewis acid)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+notes = "CN=6=n EXACT (4 carboxylate + 2 axial), catalytic site, blue crystal"
+
+[[candidate]]
+id = "Zr6_UiO"
+label = "Zr6 UiO (6-node Zr6O4(OH)4 cluster, ultra-stable, 12-connected, UiO-66)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.65
+notes = "nodes=6=n EXACT, connectivity=12=sigma EXACT, water-stable champion"
+
+[[candidate]]
+id = "Fe_MIL"
+label = "Fe-MIL series (FeIII octahedral CN=6, MIL-53/88/100, breathing, biocompat)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+notes = "CN=6=n EXACT, flexible framework breathing, drug delivery, magnetic"
+
+[[candidate]]
+id = "Al_MIL53"
+label = "Al-MIL-53 (AlIII octahedral CN=6, breathing 'wine-rack', cheap, stable)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+notes = "CN=6=n EXACT, large-pore/narrow-pore bistability, industrial CO2 capture"
+
+[[candidate]]
+id = "Cr_MIL101"
+label = "Cr-MIL-101 (CrIII octahedral CN=6, giant pore 34A, 6100 m2/g record)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.55
+notes = "CN=6=n EXACT, BET=6100 m2/g~n*1000, mesoporous cages, water harvest"
+
+# ============================================================
+# Level 1: Linker (유기 링커)
+#   n6 checks: BDC 6-atom aromatic ring (n=6), BTC 6-carboxylate oxygens (n=6),
+#              imidazolate 6-member chelate (n=6), porphyrin 24-atom macrocycle (J2=24)
+# ============================================================
+
+[[level]]
+name = "Linker"
+
+[[candidate]]
+id = "BDC_Terephthalic"
+label = "BDC terephthalic acid (6-atom benzene ring, 2-connected, MOF-5/UiO-66)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.95
+notes = "ring=6=n EXACT, cheapest linker, PET bottle recyclable, scalable"
+
+[[candidate]]
+id = "BTC_Trimesic"
+label = "BTC trimesic acid (6 carboxylate oxygens, 3-connected, HKUST-1)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.85
+notes = "carboxylate_O=6=n EXACT, triangular linker, high connectivity"
+
+[[candidate]]
+id = "NDC_Naphthalene"
+label = "NDC naphthalenedicarboxylate (extended pi-system, larger pore, luminescent)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.70
+notes = "isoreticular expansion of BDC, fluorescent MOF, larger channels"
+
+[[candidate]]
+id = "BPDC_Biphenyl"
+label = "BPDC biphenyldicarboxylate (12-atom biphenyl core, UiO-67, wide pore 12A)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+notes = "ring_atoms=12=sigma EXACT, pore=12A=sigma EXACT, catalyst encapsulation"
+
+[[candidate]]
+id = "Imidazolate_ZIF"
+label = "Imidazolate ZIF (5-member ring, zeolite topology, ZIF-8 SOD cage, gas sieve)"
+n6 = 0.80
+perf = 0.90
+power = 0.85
+cost = 0.80
+notes = "ZIF-8 aperture=3.4A~n/phi, SOD topology, exceptional chemical stability"
+
+[[candidate]]
+id = "Porphyrin_PCN"
+label = "Porphyrin PCN (24-atom macrocycle, 4 N donors, catalytic, photosensitizer)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.40
+notes = "macrocycle=24=J2 EXACT, biomimetic, photocatalysis, singlet oxygen"
+
+# ============================================================
+# Level 2: Topology (위상 구조)
+#   n6 checks: hexagonal 6-fold (n=6 EXACT), pillar-layer phi=2 components,
+#              interpenetrated 2-fold=phi, cubic pcu 6-connected (n=6)
+# ============================================================
+
+[[level]]
+name = "Topology"
+
+[[candidate]]
+id = "Cubic_pcu"
+label = "Cubic pcu (6-connected node, primitive cubic, MOF-5 archetype, isotropic)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+notes = "connectivity=6=n EXACT, most common MOF topology, 3D channels"
+
+[[candidate]]
+id = "Hexagonal_hxl"
+label = "Hexagonal hxl (6-fold rotational symmetry, honeycomb layer, 2D MOF)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.85
+notes = "symmetry=6-fold=n EXACT, layered structure, anisotropic transport"
+
+[[candidate]]
+id = "Diamond_dia"
+label = "Diamond dia (4-connected tetrahedral, interpenetration-prone, wide channels)"
+n6 = 0.60
+perf = 0.75
+power = 0.75
+cost = 0.70
+notes = "connectivity=4=tau EXACT, often multiply interpenetrated, flexible"
+
+[[candidate]]
+id = "Kagome_kgm"
+label = "Kagome kgm (corner-sharing triangles, frustrated lattice, spin-liquid host)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "triangular motif, magnetic frustration, exotic physics platform"
+
+[[candidate]]
+id = "Pillar_Layer"
+label = "Pillar-layer (phi=2 components: 2D layer + 1D pillar, tunable gallery height)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.75
+notes = "components=2=phi EXACT, mix-and-match design, flexible interlayer"
+
+[[candidate]]
+id = "Interpenetrated_2fold"
+label = "Interpenetrated 2-fold (phi=2 independent nets, reduced pore, enhanced stability)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "fold=2=phi EXACT, trade porosity for stability, selective sieving"
+
+# ============================================================
+# Level 3: Activation (활성화)
+#   n6 checks: solvent exchange 6hr soak (n=6), supercritical CO2 12MPa (sigma=12),
+#              vacuum thermal 12hr (sigma=12), flow activation 6mL/min (n=6)
+# ============================================================
+
+[[level]]
+name = "Activation"
+
+[[candidate]]
+id = "Solvent_Exchange"
+label = "Solvent exchange (6hr soak x3 cycles, DMF->MeOH->DCM, gentle activation)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.85
+notes = "soak=6hr=n EXACT, standard protocol, preserves crystallinity"
+
+[[candidate]]
+id = "Supercritical_CO2"
+label = "Supercritical CO2 (12MPa activation, zero surface tension, highest BET)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.45
+notes = "pressure=12MPa=sigma EXACT, prevents pore collapse, gold standard"
+
+[[candidate]]
+id = "Vacuum_Thermal"
+label = "Vacuum thermal (12hr at 150C under vacuum, simple equipment, routine)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.90
+notes = "duration=12hr=sigma EXACT, risk of framework collapse for sensitive MOFs"
+
+[[candidate]]
+id = "Freeze_Dry"
+label = "Freeze-dry (sublimation from frozen solvent, mild, amorphous-friendly)"
+n6 = 0.60
+perf = 0.80
+power = 0.65
+cost = 0.60
+notes = "gentle removal, preserves surface chemistry, good for bio-MOFs"
+
+[[candidate]]
+id = "Acid_Etch"
+label = "Acid etch (HCl/HF post-treatment, defect engineering, hierarchical pore)"
+n6 = 0.60
+perf = 0.85
+power = 0.55
+cost = 0.70
+notes = "controlled defect creation, mesopore generation, enhanced diffusion"
+
+[[candidate]]
+id = "Flow_Activation"
+label = "Flow activation (6mL/min continuous flow, scalable, process-intensified)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+notes = "flow=6mL/min=n EXACT, continuous processing, industrial scale-up"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: H2 storage 6wt% DOE target (n=6), CO2 capture 12mmol/g (sigma=12),
+#              catalysis 6 active sites (n=6), water harvest 24L/day/kg (J2=24)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Gas_Storage_H2"
+label = "Gas storage H2 (6wt% DOE target, 77K/100bar, cryoadsorption, fuel cell)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.55
+notes = "target=6wt%=n EXACT, DOE 2025 target, MOF-5/NU-1501 candidates"
+
+[[candidate]]
+id = "CO2_Capture"
+label = "CO2 capture (12mmol/g capacity, DAC/point-source, amine-functionalized)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.60
+notes = "capacity=12mmol/g=sigma EXACT, climate change mitigation, NOTT-400"
+
+[[candidate]]
+id = "Water_Harvest"
+label = "Water harvest (24L/day/kg in desert, RH>20%, MOF-303/801, adsorption cycle)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.50
+notes = "harvest=24L=J2 EXACT, Yaghi desert water, solar-powered cycle"
+
+[[candidate]]
+id = "Catalysis_6site"
+label = "Catalysis 6 active sites (n=6 per cage, enzyme-mimic, single-atom catalyst)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.45
+notes = "sites=6=n EXACT, confined nanoreactor, shape-selective, heterogeneous"
+
+[[candidate]]
+id = "Drug_Delivery"
+label = "Drug delivery (bio-MOF, Fe/Zr node, 12-day release, targeted therapy)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.50
+notes = "release=12day=sigma EXACT, pH-triggered, MIL-101 champion carrier"
+
+[[candidate]]
+id = "Sensor_Luminescent"
+label = "Sensor luminescent (turn-on/off fluorescence, 6ppm detection, multianalyte)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.70
+notes = "detection=6ppm=n EXACT, lanthanide/ligand emission, trace metal/VOC"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Zn4O cluster pairs with BDC for classic MOF-5
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Zn4O_Cluster"
+then_level = 1
+then_ids = "BDC_Terephthalic,NDC_Naphthalene"
+
+# Zr6 UiO cluster pairs with BDC and BPDC (UiO-66/67)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Zr6_UiO"
+then_level = 1
+then_ids = "BDC_Terephthalic,BPDC_Biphenyl"
+
+# Cu paddlewheel pairs with BTC trimesic (HKUST-1)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cu_Paddlewheel"
+then_level = 1
+then_ids = "BTC_Trimesic,Porphyrin_PCN"
+
+# Fe-MIL pairs with drug delivery and catalysis applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Fe_MIL"
+then_level = 4
+then_ids = "Drug_Delivery,Catalysis_6site"
+
+# Cr-MIL-101 pairs with water harvest and gas storage (giant pore)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cr_MIL101"
+then_level = 4
+then_ids = "Water_Harvest,Gas_Storage_H2"
+
+# Porphyrin linker best for catalysis applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Porphyrin_PCN"
+then_level = 4
+then_ids = "Catalysis_6site,Sensor_Luminescent"
+
+# Imidazolate ZIF pairs with gas storage and sensor (molecular sieve)
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Imidazolate_ZIF"
+then_level = 4
+then_ids = "Gas_Storage_H2,CO2_Capture"
+
+# Hexagonal topology suits water harvest (directional channels)
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Hexagonal_hxl"
+then_level = 4
+then_ids = "Water_Harvest,Sensor_Luminescent"
+
+# Interpenetrated topology suits gas selectivity
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Interpenetrated_2fold"
+then_level = 4
+then_ids = "CO2_Capture,Gas_Storage_H2"
+
+# Supercritical CO2 activation gives highest surface area
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Supercritical_CO2"
+then_level = 4
+then_ids = "Gas_Storage_H2,Water_Harvest"
+
+# Al-MIL-53 is cheapest, pairs with industrial CO2 capture
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Al_MIL53"
+then_level = 4
+then_ids = "CO2_Capture,Water_Harvest"

@@ -1,0 +1,361 @@
+# =============================================================
+# HEXA Material Synthesis DSE Domain Definition
+# 궁극의 물질합성 — n=6 기반 소재→공정→조립기→제어→시스템
+# BT-85 (Carbon Z=6 universality) + BT-86 (CN=6 law) +
+# BT-87 (Atomic precision n=6 ladder) + BT-88 (Hexagonal self-assembly)
+# Total raw combos: 5x6x6x4x5 = 3,600 (pre-filter)
+# =============================================================
+
+[meta]
+name = "material-synthesis"
+desc = "Ultimate Material Synthesis DSE (BT-85/86/87/88)"
+levels = ["Element", "Process", "Assembler", "Control", "Factory"]
+vision = "Atom-scale programmable matter — Carbon Z=6=n at the center"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Element (Base Material) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Element"
+
+[[candidate]]
+level  = 0
+id     = "Carbon"
+label  = "Carbon (Z=6=n, BT-85)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.70
+cost   = 0.80
+notes  = "Z=6=n EXACT, allotropes=tau=4, graphene 6-fold, BT-85"
+
+[[candidate]]
+level  = 0
+id     = "Silicon"
+label  = "Silicon (Z=14=sigma+phi)"
+n6     = 0.50
+perf   = 0.90
+power  = 0.75
+cost   = 0.85
+notes  = "diamond cubic, sigma-tau=8 atoms/cell, mature"
+
+[[candidate]]
+level  = 0
+id     = "TransitionMetal"
+label  = "Transition Metals (CN=6 octahedral, BT-86)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "CN=6=n EXACT, oxide/nitride universal, BT-86"
+
+[[candidate]]
+level  = 0
+id     = "NobleMetal"
+label  = "Noble Metals (Au/Pt/Pd, FCC CN=sigma=12)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.30
+notes  = "FCC CN=sigma=12 EXACT, catalysts, nanoparticles"
+
+[[candidate]]
+level  = 0
+id     = "Ceramic"
+label  = "Ceramics (Oxide/Nitride, CN=6 dominant)"
+n6     = 1.00
+perf   = 0.78
+power  = 0.60
+cost   = 0.70
+notes  = "CN=6=n EXACT, Al2O3/TiO2/ZrO2, BT-86"
+
+# =============================================================
+# Level 1: Process (Synthesis Method) -- 6 candidates = n
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "ALD"
+label  = "Atomic Layer Deposition (0.1nm=1/(sigma-phi))"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "precision=0.1nm=1/(sigma-phi) EXACT, cycle=tau=4 steps"
+
+[[candidate]]
+level  = 1
+id     = "MBE"
+label  = "Molecular Beam Epitaxy"
+n6     = 0.67
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "single atomic layer, lattice-matched, UHV"
+
+[[candidate]]
+level  = 1
+id     = "CVD"
+label  = "Chemical Vapor Deposition"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.70
+notes  = "graphene/CNT large-area, versatile"
+
+[[candidate]]
+level  = 1
+id     = "Mechanosynthesis"
+label  = "Mechanosynthesis (Drexler molecular machine)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.50
+cost   = 0.30
+notes  = "atomic-level build, n=6 DOF control, theoretical"
+
+[[candidate]]
+level  = 1
+id     = "Electrochemical"
+label  = "Electrochemical Synthesis"
+n6     = 0.50
+perf   = 0.80
+power  = 0.72
+cost   = 0.65
+notes  = "ion-level precision, electroplating, electrolysis"
+
+[[candidate]]
+level  = 1
+id     = "SelfAssembly"
+label  = "Self-Assembly (DNA origami, BCP, BT-88)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.55
+notes  = "n=6 hexagonal symmetry EXACT, DNA/BCP, BT-88"
+
+# =============================================================
+# Level 2: Assembler (Manipulation Unit) -- 6 candidates = n
+# =============================================================
+[[level]]
+name = "Assembler"
+
+[[candidate]]
+level  = 2
+id     = "STM_Tip"
+label  = "STM Tip (0.1nm=1/(sigma-phi) precision)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "0.1nm=1/(sigma-phi) EXACT, single atom pick-place, BT-87"
+
+[[candidate]]
+level  = 2
+id     = "MolAssembler"
+label  = "Molecular Assembler (Drexler, n=6 DOF)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.30
+notes  = "n=6 DOF EXACT, programmable molecular machine"
+
+[[candidate]]
+level  = 2
+id     = "DNA_Origami"
+label  = "DNA Origami (BT-88 hexagonal)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.75
+cost   = 0.50
+notes  = "6bp/turn~n, hexagonal lattice, nanostructures, BT-88"
+
+[[candidate]]
+level  = 2
+id     = "OpticalTweezer"
+label  = "Optical Tweezers (laser trap)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.60
+cost   = 0.55
+notes  = "micro/nano manipulation, holographic arrays"
+
+[[candidate]]
+level  = 2
+id     = "FIB"
+label  = "Focused Ion Beam (~10nm subtraction)"
+n6     = 0.33
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "Ga+ ion milling, ~10nm resolution, subtractive"
+
+[[candidate]]
+level  = 2
+id     = "NanobotSwarm"
+label  = "Nanobot Swarm (distributed, n=6 DOF)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.50
+cost   = 0.25
+notes  = "n=6 DOF EXACT, swarm intelligence, self-replicating"
+
+# =============================================================
+# Level 3: Control (Feedback System) -- 4 candidates = tau
+# =============================================================
+[[level]]
+name = "Control"
+
+[[candidate]]
+level  = 3
+id     = "Classical_PID"
+label  = "Classical PID Control (n=6 param tuning)"
+n6     = 0.67
+perf   = 0.70
+power  = 0.80
+cost   = 0.80
+notes  = "6=n parameter tuning, ms feedback, robust"
+
+[[candidate]]
+level  = 3
+id     = "QuantumSensing"
+label  = "Quantum Sensing (NV-center in diamond Z=6)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.35
+notes  = "NV-center in diamond Z=6=n EXACT, ns feedback"
+
+[[candidate]]
+level  = 3
+id     = "AI_ML"
+label  = "AI/ML Control (sigma-tau=8 layer network)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "sigma-tau=8 layers EXACT, us inference, adaptive"
+
+[[candidate]]
+level  = 3
+id     = "Hybrid"
+label  = "Hybrid Control (classical+quantum+AI)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.65
+cost   = 0.40
+notes  = "n/phi=3 subsystems EXACT, <1us loop, adaptive"
+
+# =============================================================
+# Level 4: Factory (Production Scale) -- 5 candidates = sopfr
+# =============================================================
+[[level]]
+name = "Factory"
+
+[[candidate]]
+level  = 4
+id     = "SingleStation"
+label  = "Single Station Lab (~10^6 atoms/s)"
+n6     = 0.50
+perf   = 0.50
+power  = 0.80
+cost   = 0.80
+notes  = "research scale, proof of concept"
+
+[[candidate]]
+level  = 4
+id     = "ParallelArray"
+label  = "Parallel Array (sigma=12 units, ~10^12 atoms/s)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "sigma=12 parallel units EXACT, wafer-scale throughput"
+
+[[candidate]]
+level  = 4
+id     = "ConvergentAssembly"
+label  = "Convergent Assembly (n=6 hierarchy, ~10^18 atoms/s)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.45
+notes  = "n=6 hierarchy EXACT, (sigma-phi)^n=10^6 scale factor"
+
+[[candidate]]
+level  = 4
+id     = "DistributedSwarm"
+label  = "Distributed Swarm (J2=24 nodes, ~10^24 atoms/s)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "J2=24 node cluster EXACT, distributed manufacturing"
+
+[[candidate]]
+level  = 4
+id     = "SelfReplicating"
+label  = "Self-Replicating (phi=2x per generation)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.25
+notes  = "phi=2 doubling EXACT, exponential growth, marginal cost->0"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Nanobot swarm only with Hybrid or AI/ML control
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "NanobotSwarm"
+then_level = 3
+then_ids   = "Hybrid,AI_ML"
+
+# NanobotSwarm pairs with DistributedSwarm or SelfReplicating
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "NanobotSwarm"
+then_level = 4
+then_ids   = "DistributedSwarm,SelfReplicating"
+
+# FIB only with SingleStation or ParallelArray (subtractive, slow)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "FIB"
+then_level = 4
+then_ids   = "ConvergentAssembly,DistributedSwarm,SelfReplicating"
+
+# Mechanosynthesis requires Quantum Sensing or Hybrid control
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Mechanosynthesis"
+then_level = 3
+then_ids   = "QuantumSensing,Hybrid"
+
+# SelfReplicating requires Hybrid control (safety-critical)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "SelfReplicating"
+then_level = 3
+then_ids   = "Hybrid"
+
+# Optical tweezer incompatible with ConvergentAssembly+ scale
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "OpticalTweezer"
+then_level = 4
+then_ids   = "DistributedSwarm,SelfReplicating"

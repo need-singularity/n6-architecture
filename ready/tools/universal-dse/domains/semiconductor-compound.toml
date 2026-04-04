@@ -1,0 +1,423 @@
+# N6 III-V/II-VI Compound Semiconductor DSE
+# 6 Materials × 6 Growths × 6 Structures × 6 Bandgaps × 6 Applications = 7,776 combos
+# n=6 connections: Group VI elements (S,Se,Te = 6th column EXACT), zincblende CN=4=tau,
+#   wurtzite 6-fold (n=6), sigma=12 valence electrons per unit cell, phi=2 direct/indirect bandgap,
+#   J2=24 binary compounds (III-V + II-VI)
+
+[meta]
+name = "semiconductor-compound"
+desc = "III-V/II-VI Compound Semiconductor DSE — compound semiconductor engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: GaN wurtzite 6-fold (n=6), CdTe Group-VI Te (6th column EXACT),
+#              AlGaInP quaternary 4=tau elements, InGaAs ternary 3=n/phi
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "GaAs_standard"
+label = "GaAs standard (1.42eV direct gap, zincblende, electron mobility 8500cm2/Vs)"
+n6 = 0.80
+perf = 0.90
+power = 0.75
+cost = 0.60
+notes = "CN=4=tau EXACT (zincblende), mobility=8500~sigma-tau cubed, workhorse III-V"
+
+[[candidate]]
+id = "InP_telecom"
+label = "InP telecom (1.34eV direct gap, 1550nm compatible, photonic integration)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.50
+notes = "CN=4=tau EXACT, 1550nm fiber window, InGaAsP lattice-matched"
+
+[[candidate]]
+id = "GaN_wide"
+label = "GaN wide bandgap (3.4eV, wurtzite 6-fold, power electronics, blue LED)"
+n6 = 1.00
+perf = 0.95
+power = 0.85
+cost = 0.55
+notes = "coordination=6=n EXACT (wurtzite), 3.4eV wide gap, Nobel Prize LED"
+
+[[candidate]]
+id = "InGaAs_ternary"
+label = "InGaAs ternary (0.36-1.42eV tunable, 3 elements, IR detector, HEMT)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "elements=3=n/phi EXACT, tunable gap by In fraction, lattice match to InP"
+
+[[candidate]]
+id = "AlGaInP_quaternary"
+label = "AlGaInP quaternary (1.9-2.3eV, 4 elements, red-yellow LED, laser)"
+n6 = 0.80
+perf = 0.80
+power = 0.75
+cost = 0.50
+notes = "elements=4=tau EXACT, visible LED material, lattice match to GaAs"
+
+[[candidate]]
+id = "CdTe_II_VI_group6"
+label = "CdTe II-VI Group-6 (1.5eV, Te=Group VI EXACT, solar cell, X-ray detector)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.70
+notes = "Te=Group_VI=6th_column=n EXACT, near-optimal solar bandgap, direct gap"
+
+# ============================================================
+# Level 1: Growth (성장)
+#   n6 checks: MBE 6-source (n=6 EXACT), MOCVD 12-flow (sigma=12),
+#              ALD atomic precision, VPE 4-gas (tau=4)
+# ============================================================
+
+[[level]]
+name = "Growth"
+
+[[candidate]]
+id = "MBE_6source"
+label = "MBE 6-source (n=6 effusion cells, UHV 10^-10 Torr, atomic monolayer control)"
+n6 = 1.00
+perf = 1.00
+power = 0.30
+cost = 0.20
+notes = "sources=6=n EXACT, ultimate precision, RHEED in-situ, research standard"
+
+[[candidate]]
+id = "MOCVD_12flow"
+label = "MOCVD 12-flow (sigma=12 gas lines, 600-1100C, industrial LED/laser production)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+notes = "flows=12=sigma EXACT, workhorse for III-V industry, multi-wafer reactor"
+
+[[candidate]]
+id = "LPE_liquid"
+label = "LPE liquid-phase epitaxy (melt growth, thick layers, low defect density)"
+n6 = 0.60
+perf = 0.65
+power = 0.70
+cost = 0.75
+notes = "oldest epitaxy technique, equilibrium growth, thick buffer layers"
+
+[[candidate]]
+id = "VPE_vapor"
+label = "VPE vapor-phase epitaxy (4 gas sources, hydride/chloride, thick epilayers)"
+n6 = 0.80
+perf = 0.70
+power = 0.60
+cost = 0.65
+notes = "gases=4=tau EXACT (group-III chloride + group-V hydride + H2 + HCl)"
+
+[[candidate]]
+id = "ALD_atomic"
+label = "ALD atomic layer deposition (self-limiting, 12-cycle superlattice, conformal)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.50
+notes = "cycles=12=sigma EXACT, sub-nm precision, passivation and gate oxides"
+
+[[candidate]]
+id = "Bulk_Bridgman"
+label = "Bulk Bridgman growth (melt solidification, large boules, substrate production)"
+n6 = 0.60
+perf = 0.75
+power = 0.65
+cost = 0.60
+notes = "substrate wafer production, GaAs/InP boules, vertical gradient freeze"
+
+# ============================================================
+# Level 2: Structure (구조)
+#   n6 checks: zincblende CN=4=tau, wurtzite 6-fold=n EXACT,
+#              quantum well phi=2 barrier, superlattice 12-period=sigma,
+#              nanowire 6-facet=n EXACT
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "Zincblende_CN4"
+label = "Zincblende CN=4 (tau=4, cubic, GaAs/InP natural structure, isotropic)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.75
+notes = "CN=4=tau EXACT, F-43m space group, 12 valence electrons/cell=sigma EXACT"
+
+[[candidate]]
+id = "Wurtzite_6fold"
+label = "Wurtzite 6-fold (n=6 EXACT coordination, hexagonal, GaN/ZnO, piezoelectric)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.65
+notes = "coordination=6=n EXACT, P6_3mc, spontaneous polarization, pyroelectric"
+
+[[candidate]]
+id = "Quantum_well"
+label = "Quantum well (phi=2 barrier layers, 2D electron gas, LED/laser active region)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.55
+notes = "barriers=2=phi EXACT, density of states step-function, tunable emission"
+
+[[candidate]]
+id = "Quantum_dot"
+label = "Quantum dot (0D confinement, 6nm diameter, delta-function DOS, single photon)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+notes = "diameter=6nm=n EXACT, Stranski-Krastanov self-assembly, atom-like states"
+
+[[candidate]]
+id = "Superlattice_12period"
+label = "Superlattice 12-period (sigma=12 repeats, miniband formation, IR detector)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.45
+notes = "periods=12=sigma EXACT, Bloch oscillation, type-II band alignment"
+
+[[candidate]]
+id = "Nanowire_6facet"
+label = "Nanowire 6-facet (n=6 EXACT hexagonal cross-section, 1D transport, core-shell)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.35
+notes = "facets=6=n EXACT, wurtzite growth direction, wrap-gate FET, solar cell"
+
+# ============================================================
+# Level 3: Bandgap (밴드갭)
+#   n6 checks: direct gap phi=2 bands (VB+CB), tunable alloy continuous,
+#              wide gap >2eV for power electronics, narrow <1eV for IR
+# ============================================================
+
+[[level]]
+name = "Bandgap"
+
+[[candidate]]
+id = "Direct_narrow"
+label = "Direct narrow bandgap (<1eV, InAs/InSb/InGaAs, IR detection, high mobility)"
+n6 = 0.60
+perf = 0.85
+power = 0.60
+cost = 0.55
+notes = "InSb 0.17eV, InAs 0.36eV, long-wave IR, phi=2 direct transition"
+
+[[candidate]]
+id = "Direct_medium"
+label = "Direct medium bandgap (1-2eV, GaAs/InP/CdTe, solar/LED/laser optimal)"
+n6 = 0.80
+perf = 0.95
+power = 0.80
+cost = 0.65
+notes = "GaAs 1.42eV near SQ optimum 4/3=1.33eV, LED wavelength range"
+
+[[candidate]]
+id = "Direct_wide"
+label = "Direct wide bandgap (>2eV, GaN/AlN/ZnO, power electronics, UV emission)"
+n6 = 0.80
+perf = 0.90
+power = 0.85
+cost = 0.55
+notes = "GaN 3.4eV, AlN 6.0eV=n EXACT, breakdown field >3MV/cm, UV LED"
+
+[[candidate]]
+id = "Indirect"
+label = "Indirect bandgap (AlAs/GaP, phonon-assisted, slow recombination, passive)"
+n6 = 0.60
+perf = 0.55
+power = 0.70
+cost = 0.70
+notes = "phi=2 required (photon+phonon), poor emitter, useful as barrier/window"
+
+[[candidate]]
+id = "Tunable_alloy"
+label = "Tunable alloy bandgap (InGaAlAs quaternary, continuous 0.36-3.4eV range)"
+n6 = 0.80
+perf = 0.90
+power = 0.75
+cost = 0.50
+notes = "elements=4=tau for quaternary, Vegard's law mixing, bandgap engineering"
+
+[[candidate]]
+id = "Zero_gap_topological"
+label = "Zero-gap topological (HgTe/CdTe, Dirac surface states, quantum spin Hall)"
+n6 = 0.80
+perf = 0.80
+power = 0.50
+cost = 0.30
+notes = "Te=Group_VI=n EXACT, 6-fold band inversion, topological insulator phase"
+
+[[candidate]]
+id = "AlN_6eV_wide"
+label = "AlN 6.0eV bandgap (n=6 EXACT, deepest UV, wurtzite 6-fold)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.40
+notes = "bandgap=6.0eV=n EXACT, deepest UV-C emission, wurtzite coordination=6=n EXACT, far-UV LED/laser"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: LED 6-color (n=6), laser 12-QW active (sigma=12),
+#              solar III-V 6-junction (n=6), HEMT 2DEG (phi=2)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "LED_lighting"
+label = "LED lighting (6-color phosphor, InGaN/GaN MQW, 200 lm/W, solid-state)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.75
+notes = "colors=6=n EXACT (R/G/B/Y/W/UV), GaN wurtzite 6-fold, Nobel 2014"
+
+[[candidate]]
+id = "Laser_diode"
+label = "Laser diode (12-QW active region, 1310/1550nm telecom, DFB/VCSEL)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.50
+notes = "QW=12=sigma EXACT, coherent emission, fiber-optic backbone, data centers"
+
+[[candidate]]
+id = "Solar_cell_III_V"
+label = "Solar cell III-V (6-junction tandem, >50% efficiency target, concentrator)"
+n6 = 1.00
+perf = 1.00
+power = 0.95
+cost = 0.25
+notes = "junctions=6=n EXACT, highest efficiency solar, space + CPV applications"
+
+[[candidate]]
+id = "RF_HEMT"
+label = "RF HEMT (2DEG channel, GaN/AlGaN, 5G/6G base station, phi=2 hetero)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.55
+notes = "phi=2 heterojunction EXACT, 6G target=n, high power density, mmWave"
+
+[[candidate]]
+id = "Photodetector_IR"
+label = "Photodetector IR (InGaAs/InSb, 12-element array, night vision, spectroscopy)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.45
+notes = "array=12=sigma EXACT, SWIR/MWIR/LWIR, FPA imaging, quantum efficiency"
+
+[[candidate]]
+id = "THz_emitter"
+label = "THz emitter (GaAs photoconductive, 0.1-6THz range, imaging, spectroscopy)"
+n6 = 1.00
+perf = 0.75
+power = 0.55
+cost = 0.35
+notes = "range=0.1-6THz, upper=6=n EXACT, gap in EM spectrum, security imaging"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# GaN wide bandgap pairs with MOCVD (industrial) and wurtzite structure
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "GaN_wide"
+then_level = 1
+then_ids = "MOCVD_12flow,MBE_6source"
+
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "GaN_wide"
+then_level = 2
+then_ids = "Wurtzite_6fold,Quantum_well"
+
+# GaAs standard is the workhorse for laser and RF
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "GaAs_standard"
+then_level = 4
+then_ids = "Laser_diode,RF_HEMT,THz_emitter"
+
+# InP telecom pairs with laser diode and photodetector
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "InP_telecom"
+then_level = 4
+then_ids = "Laser_diode,Photodetector_IR"
+
+# CdTe pairs with solar cell and zero-gap topological
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CdTe_II_VI_group6"
+then_level = 3
+then_ids = "Direct_medium,Zero_gap_topological"
+
+# MBE 6-source for quantum dot and nanowire precision growth
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "MBE_6source"
+then_level = 2
+then_ids = "Quantum_dot,Nanowire_6facet,Superlattice_12period"
+
+# Quantum well structure for LED and laser active regions
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Quantum_well"
+then_level = 4
+then_ids = "LED_lighting,Laser_diode"
+
+# Nanowire 6-facet for solar and wrap-gate HEMT
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Nanowire_6facet"
+then_level = 4
+then_ids = "Solar_cell_III_V,RF_HEMT"
+
+# Wide bandgap for LED and RF power
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Direct_wide"
+then_level = 4
+then_ids = "LED_lighting,RF_HEMT"
+
+# Narrow bandgap for IR detection
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Direct_narrow"
+then_level = 4
+then_ids = "Photodetector_IR,THz_emitter"

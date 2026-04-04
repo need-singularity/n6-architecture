@@ -1,0 +1,403 @@
+# =============================================================
+# N6 Temporal Architecture DSE — Time engineering from atoms to civilizations
+# n=6: σ·sopfr=60 (sexagesimal), J₂=24 (hours/day), σ=12 (months),
+#   τ=4 (seasons/leap), σ-sopfr=7 (week), n=6 (time bases),
+#   R(6)=1 (SI second), 360°=σ·sopfr·n
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "temporal-architecture"
+desc = "Temporal Architecture DSE (oscillator/process/clock-core/timing-chip/sync-system)"
+
+[scoring]
+n6 = 0.40
+perf = 0.30
+power = 0.15
+cost = 0.15
+
+# ============================================================
+# Level 0: OscillatorMaterial (6 candidates)
+# ============================================================
+
+[[level]]
+name = "OscillatorMaterial"
+
+[[candidate]]
+level = 0
+id = "Cs-133"
+label = "Cesium-133 (Z=55=sopfr·(σ-μ), SI second definition, [Xe]6s1 n=6 shell)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Rb-87"
+label = "Rubidium-87 (6.835GHz, compact CSAC, φ=2 hyperfine ground states)"
+n6 = 0.85
+perf = 0.80
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Sr-87"
+label = "Strontium-87 (429THz optical, σ=12 lattice beams in 3D, 10^-18 stability)"
+n6 = 1.00
+perf = 0.98
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Yb-171"
+label = "Ytterbium-171 (578nm clock, J₂=24hr coherence, optical lattice)"
+n6 = 1.00
+perf = 0.97
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Quartz-SiO2"
+label = "Quartz SiO₂ (Si Z=14=σ+φ, O Z=8=σ-τ, 6th overtone=n, ubiquitous)"
+n6 = 0.90
+perf = 0.55
+power = 0.95
+cost = 0.98
+
+[[candidate]]
+level = 0
+id = "Th-229"
+label = "Thorium-229 (nuclear isomer 8.338eV≈σ-τ=8, future nuclear clock, 10^-19 target)"
+n6 = 0.85
+perf = 0.99
+power = 0.30
+cost = 0.15
+
+# ============================================================
+# Level 1: OscillationProcess (5 candidates)
+# ============================================================
+
+[[level]]
+name = "OscillationProcess"
+
+[[candidate]]
+level = 1
+id = "Microwave-9GHz"
+label = "Microwave 9.192GHz (Cs hyperfine, σ·sopfr=60 base sexagesimal heritage)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Optical-429THz"
+label = "Optical 429THz (Sr/Yb lattice, σ=12 beam trap, 10^5 Q improvement)"
+n6 = 1.00
+perf = 0.98
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "MEMS-32kHz"
+label = "MEMS 32.768kHz (2^15=φ^(σ+n/φ), silicon resonator, chip-scale)"
+n6 = 0.80
+perf = 0.50
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+level = 1
+id = "Photonic-Comb"
+label = "Photonic OFC (n=6 octave span, 10^5 teeth, optical-microwave bridge)"
+n6 = 1.00
+perf = 0.96
+power = 0.45
+cost = 0.25
+
+[[candidate]]
+level = 1
+id = "Nuclear-UV"
+label = "Nuclear UV (Th-229 148.7nm≈σ²+sopfr=149, nuclear isomer excitation)"
+n6 = 0.85
+perf = 0.99
+power = 0.25
+cost = 0.10
+
+# ============================================================
+# Level 2: ClockCore (6 candidates)
+# ============================================================
+
+[[level]]
+name = "ClockCore"
+
+[[candidate]]
+level = 2
+id = "Atomic-Fountain"
+label = "Atomic Fountain (Cs/Rb, Ramsey φ=2 pulse, 10^-16 stability, NIST-F2)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Optical-Lattice"
+label = "Optical Lattice (Sr/Yb, n=6 beams 3D, 10^-18, Lamb-Dicke regime)"
+n6 = 1.00
+perf = 0.98
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 2
+id = "CSAC"
+label = "Chip-Scale Atomic Clock (Rb/Cs CPT, σ·sopfr=60mW target, 10^-11)"
+n6 = 0.90
+perf = 0.65
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Ion-Trap"
+label = "Ion Trap (Al+/Yb+, single ion, quantum logic, 10^-18 record)"
+n6 = 1.00
+perf = 0.98
+power = 0.40
+cost = 0.25
+
+[[candidate]]
+level = 2
+id = "Nuclear-Clock"
+label = "Nuclear Clock (Th-229 isomer, σ-τ=8eV, 10^-19 theoretical, future)"
+n6 = 0.85
+perf = 0.99
+power = 0.25
+cost = 0.10
+
+[[candidate]]
+level = 2
+id = "H-Maser"
+label = "Hydrogen Maser (1.420GHz, best short-term stability, VLBI/spacecraft)"
+n6 = 0.70
+perf = 0.88
+power = 0.50
+cost = 0.45
+
+# ============================================================
+# Level 3: TimingChip (5 candidates)
+# ============================================================
+
+[[level]]
+name = "TimingChip"
+
+[[candidate]]
+level = 3
+id = "CSAC-Chip"
+label = "CSAC Module (Microsemi SA.45s, σ·sopfr=60mW class, φ=2cm³ volume)"
+n6 = 0.95
+perf = 0.70
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "OCXO-6th"
+label = "OCXO 6th Overtone (n=6 harmonic, quartz, 10^-12 stability, low cost)"
+n6 = 1.00
+perf = 0.60
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "Rb-Module"
+label = "Rubidium Module (PRS10 class, 10^-12 long-term, J₂=24hr warmup)"
+n6 = 0.85
+perf = 0.80
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Optical-Chip"
+label = "Optical Clock-on-Chip (integrated photonics, OFC+cavity, 10^-15 target)"
+n6 = 0.95
+perf = 0.92
+power = 0.50
+cost = 0.25
+
+[[candidate]]
+level = 3
+id = "Quantum-Clock-Chip"
+label = "Quantum Clock Chip (ion trap on chip, 10^-17, DARPA A-PhI program)"
+n6 = 0.90
+perf = 0.95
+power = 0.35
+cost = 0.15
+
+# ============================================================
+# Level 4: SyncSystem (5 candidates)
+# ============================================================
+
+[[level]]
+name = "SyncSystem"
+
+[[candidate]]
+level = 4
+id = "GPS-Disciplined"
+label = "GPS-Disciplined Oscillator (n=6 orbital planes, J₂=24 sats, 10ns)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "PTP-Network"
+label = "PTP/IEEE1588 Network (φ^(σ-τ)=256 domains, sub-μs, σ-sopfr=7 msgs)"
+n6 = 0.90
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "WhiteRabbit"
+label = "White Rabbit (CERN, sub-ns over fiber, σ=12km range, deterministic)"
+n6 = 0.90
+perf = 0.93
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Quantum-Sync"
+label = "Quantum Synchronization (entanglement-based, Heisenberg limit, future)"
+n6 = 0.85
+perf = 0.97
+power = 0.30
+cost = 0.15
+
+[[candidate]]
+level = 4
+id = "Optical-Fiber-Sync"
+label = "Optical Fiber Link (1000km+, 10^-19 transfer, REFIMEVE+ project)"
+n6 = 0.80
+perf = 0.95
+power = 0.50
+cost = 0.35
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Optical process requires optical species (Sr/Yb)
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Optical-429THz"
+then_level = 0
+then_ids = ["Sr-87", "Yb-171"]
+
+# Nuclear UV process requires Th-229
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Nuclear-UV"
+then_level = 0
+then_ids = ["Th-229"]
+
+# Microwave process for Cs/Rb only
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Microwave-9GHz"
+then_level = 0
+then_ids = ["Cs-133", "Rb-87"]
+
+# MEMS for Quartz only
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "MEMS-32kHz"
+then_level = 0
+then_ids = ["Quartz-SiO2"]
+
+# Optical lattice core requires optical species
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Optical-Lattice"
+then_level = 0
+then_ids = ["Sr-87", "Yb-171"]
+
+# Ion trap core for Al+ or Yb
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Ion-Trap"
+then_level = 0
+then_ids = ["Yb-171"]
+
+# Nuclear clock core requires Th-229
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Nuclear-Clock"
+then_level = 0
+then_ids = ["Th-229"]
+
+# CSAC core for Cs/Rb
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "CSAC"
+then_level = 0
+then_ids = ["Cs-133", "Rb-87"]
+
+# H-Maser is standalone
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "H-Maser"
+then_level = 1
+then_ids = ["Microwave-9GHz"]
+
+# Quantum clock chip needs optical or ion trap core
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Quantum-Clock-Chip"
+then_level = 2
+then_ids = ["Ion-Trap", "Optical-Lattice"]
+
+# CSAC chip pairs with CSAC core
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "CSAC-Chip"
+then_level = 2
+then_ids = ["CSAC"]
+
+# OCXO pairs with any microwave/MEMS process
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "OCXO-6th"
+then_level = 1
+then_ids = ["Microwave-9GHz", "MEMS-32kHz"]
+
+# Quantum sync requires quantum-level clocks
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Quantum-Sync"
+then_level = 2
+then_ids = ["Optical-Lattice", "Ion-Trap", "Nuclear-Clock"]

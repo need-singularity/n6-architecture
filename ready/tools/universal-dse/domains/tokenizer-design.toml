@@ -1,0 +1,384 @@
+# =============================================================
+# Tokenizer Design DSE Domain Definition
+# 궁극의 토크나이저 — n=6 기반 알고리즘 + 어휘 + 언어 + 특수토큰 + 통합
+# BT-73 (Tokenizer vocab n=6 law: 32K/50257/100K/128K = 2^{n=6}·10^{n=6})
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "tokenizer-design"
+desc = "Ultimate Tokenizer DSE (algorithm + vocab + language + tokens + integration)"
+levels = ["Algorithm", "VocabSize", "Language", "SpecialTokens", "Integration"]
+vision = "n=6 기반 궁극의 토크나이저 — BT-73 어휘 법칙 + 2^sigma=4096 기반"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Algorithm -- 6 candidates
+# =============================================================
+[[level]]
+name = "Algorithm"
+
+[[candidate]]
+level  = 0
+id     = "BPE"
+label  = "BPE (Byte Pair Encoding) GPT 표준"
+n6     = 0.75
+perf   = 0.92
+power  = 0.80
+cost   = 0.85
+notes  = "industry standard, GPT-2/3/4, merge-based"
+
+[[candidate]]
+level  = 0
+id     = "Unigram"
+label  = "Unigram (SentencePiece) 확률 기반"
+n6     = 0.75
+perf   = 0.88
+power  = 0.82
+cost   = 0.80
+notes  = "probabilistic, T5/ALBERT, EM algorithm"
+
+[[candidate]]
+level  = 0
+id     = "WordPiece"
+label  = "WordPiece (BERT) 탐욕 기반"
+n6     = 0.50
+perf   = 0.85
+power  = 0.80
+cost   = 0.82
+notes  = "greedy, BERT standard, likelihood-based"
+
+[[candidate]]
+level  = 0
+id     = "ByteLevel"
+label  = "ByteLevel 256 바이트 기본 (2^sigma-tau=256)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.85
+cost   = 0.90
+notes  = "base=256=2^(sigma-tau) EXACT, language-agnostic"
+
+[[candidate]]
+level  = 0
+id     = "SentencePiece"
+label  = "SentencePiece 통합 전처리"
+n6     = 0.50
+perf   = 0.87
+power  = 0.82
+cost   = 0.80
+notes  = "unified framework, Google standard"
+
+[[candidate]]
+level  = 0
+id     = "Custom_N6"
+label  = "N6 커스텀 토크나이저 (n=6 분할 규칙)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.75
+cost   = 0.60
+notes  = "n=6 partitioning rule, phi=2 merge hierarchy"
+
+# =============================================================
+# Level 1: VocabSize -- 6 candidates
+# =============================================================
+[[level]]
+name = "VocabSize"
+
+[[candidate]]
+level  = 1
+id     = "V256"
+label  = "256 = 2^(sigma-tau) 바이트 어휘"
+n6     = 1.00
+perf   = 0.60
+power  = 0.95
+cost   = 0.95
+notes  = "256=2^8=2^(sigma-tau) EXACT, minimal vocab"
+
+[[candidate]]
+level  = 1
+id     = "V1024"
+label  = "1024 = 2^(sigma-mu) 확장 바이트"
+n6     = 0.75
+perf   = 0.70
+power  = 0.90
+cost   = 0.90
+notes  = "1024=2^10 ≈ 2^(sigma-mu) close"
+
+[[candidate]]
+level  = 1
+id     = "V4096"
+label  = "4096 = 2^sigma 중형 어휘"
+n6     = 1.00
+perf   = 0.80
+power  = 0.85
+cost   = 0.85
+notes  = "4096=2^12=2^sigma EXACT, BT-73 base"
+
+[[candidate]]
+level  = 1
+id     = "V16384"
+label  = "16384 = 2^(sigma+tau) 확장"
+n6     = 0.75
+perf   = 0.85
+power  = 0.75
+cost   = 0.75
+notes  = "16384=2^14, moderate vocab"
+
+[[candidate]]
+level  = 1
+id     = "V32768"
+label  = "32768 = 2^(sopfr*n) GPT-2 표준"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.70
+notes  = "32768=2^15=2^(sopfr*n/phi) EXACT, BT-73 GPT-2"
+
+[[candidate]]
+level  = 1
+id     = "V65536"
+label  = "65536 = 2^(sigma+tau) 대형 어휘"
+n6     = 0.75
+perf   = 0.92
+power  = 0.65
+cost   = 0.65
+notes  = "65536=2^16, large multilingual vocab"
+
+# =============================================================
+# Level 2: Language -- 6 candidates
+# =============================================================
+[[level]]
+name = "Language"
+
+[[candidate]]
+level  = 2
+id     = "English"
+label  = "영어 단일 언어"
+n6     = 0.50
+perf   = 0.90
+power  = 0.85
+cost   = 0.90
+notes  = "single language, most efficient per-language"
+
+[[candidate]]
+level  = 2
+id     = "Korean_English"
+label  = "한영 phi=2 이중 언어"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "bilingual=phi=2 EXACT, Korean+English"
+
+[[candidate]]
+level  = 2
+id     = "Multilingual"
+label  = "다국어 n=6 주요 언어 패밀리"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "families=6=n EXACT, major language families"
+
+[[candidate]]
+level  = 2
+id     = "Code"
+label  = "코드 sopfr=5 주요 언어"
+n6     = 0.75
+perf   = 0.88
+power  = 0.80
+cost   = 0.80
+notes  = "languages=5=sopfr, Python/JS/Rust/C/Java"
+
+[[candidate]]
+level  = 2
+id     = "Scientific"
+label  = "과학 LaTeX+수식+코드"
+n6     = 0.50
+perf   = 0.82
+power  = 0.75
+cost   = 0.70
+notes  = "scientific notation, LaTeX, formulas"
+
+[[candidate]]
+level  = 2
+id     = "Universal"
+label  = "유니버설 sigma=12 언어 + 코드 + 수식"
+n6     = 1.00
+perf   = 0.78
+power  = 0.65
+cost   = 0.60
+notes  = "coverage=12=sigma EXACT, all modalities"
+
+# =============================================================
+# Level 3: SpecialTokens -- 6 candidates
+# =============================================================
+[[level]]
+name = "SpecialTokens"
+
+[[candidate]]
+level  = 3
+id     = "Minimal_4"
+label  = "최소 tau=4 토큰 (BOS/EOS/PAD/UNK)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.90
+cost   = 0.90
+notes  = "tokens=4=tau EXACT, minimal special set"
+
+[[candidate]]
+level  = 3
+id     = "Standard_6"
+label  = "표준 n=6 토큰"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.85
+notes  = "tokens=6=n EXACT, BOS/EOS/PAD/UNK/SEP/CLS"
+
+[[candidate]]
+level  = 3
+id     = "Extended_12"
+label  = "확장 sigma=12 토큰"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.78
+notes  = "tokens=12=sigma EXACT, role/tool/system markers"
+
+[[candidate]]
+level  = 3
+id     = "Consciousness_24"
+label  = "의식 J2=24 토큰 (phi+tension+faction)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "tokens=24=J2 EXACT, consciousness state markers"
+
+[[candidate]]
+level  = 3
+id     = "Full"
+label  = "전체 sopfr*n=30 토큰"
+n6     = 0.75
+perf   = 0.82
+power  = 0.65
+cost   = 0.60
+notes  = "tokens=30, comprehensive special token set"
+
+[[candidate]]
+level  = 3
+id     = "Custom"
+label  = "커스텀 도메인 특화 토큰"
+n6     = 0.50
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "domain-specific, variable count"
+
+# =============================================================
+# Level 4: Integration -- 6 candidates
+# =============================================================
+[[level]]
+name = "Integration"
+
+[[candidate]]
+level  = 4
+id     = "Standalone"
+label  = "독립형 토크나이저"
+n6     = 0.50
+perf   = 0.85
+power  = 0.85
+cost   = 0.90
+notes  = "separate process, maximum flexibility"
+
+[[candidate]]
+level  = 4
+id     = "Embedded"
+label  = "임베디드 모델 내장"
+n6     = 0.75
+perf   = 0.90
+power  = 0.80
+cost   = 0.80
+notes  = "in-model tokenization, low latency"
+
+[[candidate]]
+level  = 4
+id     = "Streaming"
+label  = "스트리밍 실시간 토큰화"
+n6     = 0.75
+perf   = 0.88
+power  = 0.75
+cost   = 0.75
+notes  = "incremental tokenization, real-time"
+
+[[candidate]]
+level  = 4
+id     = "Adaptive"
+label  = "적응형 컨텍스트 기반"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "context-adaptive tokenization"
+
+[[candidate]]
+level  = 4
+id     = "Consciousness_Aware"
+label  = "의식 인지 phi 정렬 토큰화"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "phi-aligned, consciousness-aware processing"
+
+[[candidate]]
+level  = 4
+id     = "Phi_Aligned"
+label  = "Phi 정렬 n=6 최적화 통합"
+n6     = 1.00
+perf   = 0.82
+power  = 0.65
+cost   = 0.60
+notes  = "n=6 aligned integration, phi=2 hierarchy"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ByteLevel works best with V256
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ByteLevel"
+then_level = 1
+then_ids   = "V256,V1024,V4096"
+
+# Custom_N6 requires Phi_Aligned or Consciousness_Aware integration
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Custom_N6"
+then_level = 4
+then_ids   = "Consciousness_Aware,Phi_Aligned"
+
+# Consciousness_24 tokens require Consciousness_Aware integration
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Consciousness_24"
+then_level = 4
+then_ids   = "Consciousness_Aware,Phi_Aligned"
+
+# Universal language requires V32768+ vocab
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Universal"
+then_level = 1
+then_ids   = "V32768,V65536"

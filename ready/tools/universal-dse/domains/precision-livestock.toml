@@ -1,0 +1,337 @@
+# N6 Smart Livestock Management DSE
+# 6 Sensor x 6 Communication x 6 Analytics x 6 Automation x 6 Species = 7,776 combos
+# n=6: 6 vital signs (temp/HR/respiration/activity/rumination/position), sigma=12 month production cycle, tau=4 species (cattle/swine/poultry/sheep), phi=2 indoor/outdoor, J2=24 hour monitoring
+
+[meta]
+name = "precision-livestock"
+desc = "Smart Livestock Management DSE (n=6 vital signs, sigma=12 month cycle, tau=4 species, J2=24h monitoring)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Sensor (센서)
+#   n6 checks: 6 vital signs=n, sigma=12 sensor readings/hour, J2=24h continuous
+# ============================================================
+
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+id = "BolusSensor"
+label = "Rumen Bolus Sensor (6 vitals=n, 12 readings/hr=sigma, 24h continuous=J2, internal temp+pH)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "EarTag"
+label = "Smart Ear Tag (6 sensor axes=n, 12 month battery=sigma, accelerometer+temp+GPS)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "CollarIMU"
+label = "Collar IMU System (6 DOF motion=n, 12 behavior classes=sigma, 4 activity states=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.65
+
+[[candidate]]
+id = "LegPedometer"
+label = "Leg Pedometer (6 gait parameters=n, 12 step metrics=sigma, lameness detection)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "ThermalCam"
+label = "Thermal Camera Array (6 thermal zones=n, 12 MP resolution=sigma, non-contact fever detection)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "AcousticMic"
+label = "Acoustic Monitor (6 microphone array=n, 12 vocalization classes=sigma, 4 distress levels=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.70
+
+# ============================================================
+# Level 1: Communication (통신)
+#   n6 checks: 6 relay nodes=n, sigma=12 km range, phi=2 uplink/downlink
+# ============================================================
+
+[[level]]
+name = "Communication"
+
+[[candidate]]
+id = "LoRaWAN"
+label = "LoRaWAN Network (6 gateways=n, 12 km range=sigma, low-power wide-area)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+id = "NB_IoT"
+label = "NB-IoT Cellular (6 base stations=n, 12 km cell radius=sigma, 4 QoS classes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "BLE_Mesh"
+label = "BLE Mesh Network (6 mesh clusters=n, 12 nodes/cluster=sigma, low-energy)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+id = "WiFi_AP"
+label = "WiFi Access Points (6 APs=n, 12 channels=sigma, barn/shed coverage)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "Satellite_IoT"
+label = "Satellite IoT (6 orbital passes=n, 12 message bursts/day=sigma, remote pasture)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+id = "UWB_Loc"
+label = "UWB Localization (6 anchor nodes=n, 12 cm accuracy=sigma, indoor positioning)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.55
+
+# ============================================================
+# Level 2: Analytics (분석)
+#   n6 checks: 6 analytics modules=n, sigma=12 prediction horizons, tau=4 alert levels
+# ============================================================
+
+[[level]]
+name = "Analytics"
+
+[[candidate]]
+id = "EdgeAI"
+label = "Edge AI Gateway (6 ML models=n, 12 TOPS inference=sigma, on-farm processing)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "CloudML"
+label = "Cloud ML Platform (6 data pipelines=n, 12 hour prediction window=sigma, scalable)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "RuleEngine"
+label = "Rule-Based Engine (6 threshold rules=n, 12 condition parameters=sigma, simple/reliable)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "DigitalTwin"
+label = "Digital Twin Herd (6 physiological models=n, 12 month lifecycle=sigma, individual tracking)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.40
+
+[[candidate]]
+id = "FedLearn"
+label = "Federated Learning (6 farm nodes=n, 12 model rounds=sigma, privacy-preserving)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "VisionAI"
+label = "Computer Vision AI (6 camera feeds=n, 12 behavioral markers=sigma, 4 posture classes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.50
+
+# ============================================================
+# Level 3: Automation (자동화)
+#   n6 checks: 6 robotic actuators=n, sigma=12 daily cycles, tau=4 automation levels
+# ============================================================
+
+[[level]]
+name = "Automation"
+
+[[candidate]]
+id = "AutoFeed"
+label = "Auto Feeding System (6 feed stations=n, 12 dispensing cycles/day=sigma, precision rationing)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "RoboMilk"
+label = "Robotic Milking (6 milking robots=n, 12 cows/robot/day=sigma, voluntary milking)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.50
+
+[[candidate]]
+id = "ClimateCtrl"
+label = "Climate Controller (6 barn zones=n, 12 ventilation fans=sigma, 4 season profiles=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "ManureBot"
+label = "Manure Robot (6 cleaning paths=n, 12 cycles/day=sigma, autonomous scraper)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "SortGate"
+label = "Smart Sort Gate (6 sort pens=n, 12 sorting criteria=sigma, 4 destination groups=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "DroneHerd"
+label = "Herding Drone (6 drones/flock=n, 24h pasture coverage=J2, autonomous herding)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.55
+
+# ============================================================
+# Level 4: Species (축종)
+#   n6 checks: tau=4 main species, sigma=12 month production cycle, 6 management events=n
+# ============================================================
+
+[[level]]
+name = "Species"
+
+[[candidate]]
+id = "DairyCattle"
+label = "Dairy Cattle (6 lactation checks=n, 12 month calving interval=sigma, 24h milk/cow=J2 liters)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "BeefCattle"
+label = "Beef Cattle (6 growth stages=n, 12 month finishing=sigma, 4 quality grades=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+id = "Swine"
+label = "Swine (6 litters/sow/lifetime=n, 12 piglets/litter=sigma, 4 production phases=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "Poultry"
+label = "Poultry Layer/Broiler (6 flock rotations=n, 12 month laying cycle=sigma, 24h lighting=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "Sheep"
+label = "Sheep & Goat (6 shearing events/life=n, 12 month lambing cycle=sigma, phi=2 wool/meat)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+id = "Aquaculture"
+label = "Aquaculture (6 pond sections=n, 12 month grow-out=sigma, 4 water quality params=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Rumen bolus only for ruminants (cattle, sheep)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BolusSensor"
+then_level = 4
+then_ids = "DairyCattle,BeefCattle,Sheep"
+
+# Robotic milking only for dairy cattle
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "RoboMilk"
+then_level = 4
+then_ids = "DairyCattle"
+
+# Herding drones best for outdoor species
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "DroneHerd"
+then_level = 4
+then_ids = "BeefCattle,Sheep"
+
+# Acoustic monitoring especially effective for poultry and swine
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "AcousticMic"
+then_level = 4
+then_ids = "Poultry,Swine"
+
+# Satellite IoT for remote pasture species
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Satellite_IoT"
+then_level = 4
+then_ids = "BeefCattle,Sheep"

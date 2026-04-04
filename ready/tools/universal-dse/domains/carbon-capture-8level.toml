@@ -1,0 +1,674 @@
+# =============================================================
+# HEXA-CCUS 8-Level DSE Domain Definition
+# Carbon Capture, Utilization & Storage — Ultimate Architecture
+# 8 levels × 6 candidates = 6^8 = 1,679,616 total combos
+#
+# n=6: CO2 C=Z=6, CN=6 sorbent coordination, BT-27/43/85/93/94/95/96
+# Chain: Sorbent → Process → Reactor → Chip → Plant → Transmute → Universal → Omega
+# =============================================================
+
+[meta]
+name   = "carbon-capture-8level"
+desc   = "HEXA-CCUS 8-Level Ultimate Carbon Capture DSE (BT-27/43/85/93/94/95/96)"
+levels = ["Sorbent", "Process", "Reactor", "Chip", "Plant", "Transmute", "Universal", "Omega"]
+vision = "Atom-scale to stellar-scale CO2 capture — Carbon Z=6 full architecture"
+
+[scoring]
+n6    = 0.35
+perf  = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Sorbent — 6 candidates
+#   n6: CN=6 octahedral coordination, C6 hexagonal structures
+# =============================================================
+[[level]]
+name = "Sorbent"
+
+[[candidate]]
+level = 0
+id    = "S1"
+label = "MOF-74 (Mg, CN=6 octahedral, 8.0 mmol/g)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.35
+notes = "CN=6=n EXACT, highest capacity MOF, BT-96 flagship"
+
+[[candidate]]
+level = 0
+id    = "S2"
+label = "Amine-Grafted Silica (MCM-41, 6 sites/nm2)"
+n6    = 1.00
+perf  = 0.70
+power = 0.60
+cost  = 0.50
+notes = "sites=6=n EXACT, stable amine loading, humidity tolerant"
+
+[[candidate]]
+level = 0
+id    = "S3"
+label = "Zeolite-6A (6A pore, LTA framework)"
+n6    = 1.00
+perf  = 0.65
+power = 0.65
+cost  = 0.70
+notes = "pore=6A=n EXACT, cheapest sorbent, mature technology"
+
+[[candidate]]
+level = 0
+id    = "S4"
+label = "Ionic Liquid ([C6mim], 6-carbon chain)"
+n6    = 1.00
+perf  = 0.60
+power = 0.75
+cost  = 0.40
+notes = "chain=C6=n EXACT, negligible vapor pressure, tunable"
+
+[[candidate]]
+level = 0
+id    = "S5"
+label = "Graphene Oxide Membrane (C6 hex, 0.6nm interlayer)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.30
+notes = "C6=n EXACT, 0.6=n/10, BT-93 carbon material, selective permeation"
+
+[[candidate]]
+level = 0
+id    = "S6"
+label = "Perovskite Sorbent (BaZrO3, CN=6 octahedral)"
+n6    = 1.00
+perf  = 0.75
+power = 0.40
+cost  = 0.45
+notes = "CN=6=n EXACT, high-temperature stable, ceramic durability"
+
+# =============================================================
+# Level 1: Process — 6 candidates
+#   n6: 6-stage TSA, sigma=12 PSA beds, sigma*tau=48C cryogenic
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level = 1
+id    = "P1"
+label = "TSA 6-stage Temperature Swing (deltaT=120C=sigma*(sigma-phi))"
+n6    = 1.00
+perf  = 0.70
+power = 0.55
+cost  = 0.60
+notes = "stages=6=n EXACT, deltaT=120=sigma*(sigma-phi), proven industrial"
+
+[[candidate]]
+level = 1
+id    = "P2"
+label = "PSA 12-bed Pressure Swing (6 adsorb + 6 desorb)"
+n6    = 1.00
+perf  = 0.75
+power = 0.60
+cost  = 0.55
+notes = "beds=12=sigma EXACT, rapid cycling, continuous output"
+
+[[candidate]]
+level = 1
+id    = "P3"
+label = "MECS Electrochemical (6-cell stack, pH-swing)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.45
+notes = "cells=6=n EXACT, electricity-driven, no thermal energy needed"
+
+[[candidate]]
+level = 1
+id    = "P4"
+label = "Membrane 6-stage Separation (6 permeation steps)"
+n6    = 1.00
+perf  = 0.65
+power = 0.80
+cost  = 0.50
+notes = "stages=6=n EXACT, passive separation, low maintenance"
+
+[[candidate]]
+level = 1
+id    = "P5"
+label = "Cryogenic Distillation (-48C=sigma*tau, 6 trays)"
+n6    = 1.00
+perf  = 0.60
+power = 0.35
+cost  = 0.40
+notes = "T=-48=sigma*tau EXACT, trays=6=n, high purity output"
+
+[[candidate]]
+level = 1
+id    = "P6"
+label = "Photocatalytic Direct (TiO2, solar-driven, 6eV bandgap region)"
+n6    = 0.80
+perf  = 0.55
+power = 0.90
+cost  = 0.35
+notes = "6eV bandgap region CLOSE, zero electricity input, solar only"
+
+# =============================================================
+# Level 2: Reactor — 6 candidates
+#   n6: 6-tube, 6-zone, 6-hex honeycomb, 6-sector wheel
+# =============================================================
+[[level]]
+name = "Reactor"
+
+[[candidate]]
+level = 2
+id    = "R1"
+label = "Packed Bed (6 tubes, 12 baffles)"
+n6    = 1.00
+perf  = 0.70
+power = 0.60
+cost  = 0.65
+notes = "tubes=6=n EXACT, baffles=12=sigma EXACT, proven design"
+
+[[candidate]]
+level = 2
+id    = "R2"
+label = "Fluidized Bed (6 zones, continuous operation)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.55
+notes = "zones=6=n EXACT, excellent mass transfer, scalable"
+
+[[candidate]]
+level = 2
+id    = "R3"
+label = "Monolith Honeycomb (6-hex cell geometry)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.60
+notes = "hexagonal=6=n EXACT, low pressure drop, high surface area"
+
+[[candidate]]
+level = 2
+id    = "R4"
+label = "Rotating Wheel (6 sectors, Climeworks-type)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.50
+notes = "sectors=6=n EXACT, continuous adsorb/desorb, compact"
+
+[[candidate]]
+level = 2
+id    = "R5"
+label = "Hollow Fiber Bundle (6mm OD, 12k fibers)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.55
+notes = "OD=6mm=n EXACT, count=12k=sigma*10^3, membrane reactor"
+
+[[candidate]]
+level = 2
+id    = "R6"
+label = "Microreactor Array (6um channel, MEMS fabrication)"
+n6    = 1.00
+perf  = 0.90
+power = 0.45
+cost  = 0.30
+notes = "channel=6um=n EXACT, extreme surface/volume, lab-on-chip"
+
+# =============================================================
+# Level 3: Chip — 6 candidates
+#   n6: 6-stage pipeline, sigma=12 channels, BT-56/59
+# =============================================================
+[[level]]
+name = "Chip"
+
+[[candidate]]
+level = 3
+id    = "C1"
+label = "RISC-V N6 Controller (6-stage pipeline)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.60
+notes = "stages=6=n EXACT, BT-56 compliant, open ISA"
+
+[[candidate]]
+level = 3
+id    = "C2"
+label = "FPGA Real-time Monitor (sigma=12 channels)"
+n6    = 1.00
+perf  = 0.75
+power = 0.60
+cost  = 0.55
+notes = "channels=12=sigma EXACT, reconfigurable, parallel I/O"
+
+[[candidate]]
+level = 3
+id    = "C3"
+label = "Neuromorphic SNN Anomaly Detector (6 layers)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.45
+notes = "layers=6=n EXACT, BT-59 compliant, ultra-low power inference"
+
+[[candidate]]
+level = 3
+id    = "C4"
+label = "Analog Sensor ASIC (6 gas sensor channels)"
+n6    = 1.00
+perf  = 0.65
+power = 0.75
+cost  = 0.70
+notes = "sensors=6=n EXACT, direct analog sensing, minimal ADC"
+
+[[candidate]]
+level = 3
+id    = "C5"
+label = "Edge AI SoC (sigma-tau=8 cores, 6 AI engines)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.40
+notes = "cores=8=sigma-tau EXACT, engines=6=n EXACT, on-device ML"
+
+[[candidate]]
+level = 3
+id    = "C6"
+label = "Quantum Sensor Chip (6-qubit CO2 detector)"
+n6    = 1.00
+perf  = 0.95
+power = 0.40
+cost  = 0.20
+notes = "qubits=6=n EXACT, ppb-level sensitivity, future tech"
+
+# =============================================================
+# Level 4: Plant — 6 candidates
+#   n6: 6x6 modular, sigma=12 capture units, n=6 platforms
+# =============================================================
+[[level]]
+name = "Plant"
+
+[[candidate]]
+level = 4
+id    = "Y1"
+label = "Modular DAC Farm (6x6=36 units)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.50
+notes = "units=36=sigma*n/phi EXACT, scalable grid layout"
+
+[[candidate]]
+level = 4
+id    = "Y2"
+label = "Industrial CCS Hub (12 capture + 6 pipeline)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.60
+notes = "capture=12=sigma EXACT, pipe=6=n EXACT, point-source"
+
+[[candidate]]
+level = 4
+id    = "Y3"
+label = "Ocean Platform (6 floating platform cluster)"
+n6    = 1.00
+perf  = 0.70
+power = 0.50
+cost  = 0.40
+notes = "platforms=6=n EXACT, offshore CO2+mineral storage"
+
+[[candidate]]
+level = 4
+id    = "Y4"
+label = "Underground Geothermal Loop (6 subsurface reactors)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.45
+notes = "reactors=6=n EXACT, waste heat utilization, permanent"
+
+[[candidate]]
+level = 4
+id    = "Y5"
+label = "Mobile Capture Fleet (6 ship convoy)"
+n6    = 1.00
+perf  = 0.60
+power = 0.45
+cost  = 0.35
+notes = "ships=6=n EXACT, ocean-roaming capture, flexible deployment"
+
+[[candidate]]
+level = 4
+id    = "Y6"
+label = "Space Elevator DAC (12km tower, 6 intake levels)"
+n6    = 1.00
+perf  = 0.90
+power = 0.35
+cost  = 0.20
+notes = "height=12km=sigma EXACT, intake=6=n EXACT, stratospheric"
+
+# =============================================================
+# Level 5: Transmute — 6 candidates
+#   n6: C Z=6 transformations, C6 hexagonal products
+# =============================================================
+[[level]]
+name = "Transmute"
+
+[[candidate]]
+level = 5
+id    = "T1"
+label = "CO2-to-Diamond (C lattice, sp3 tetrahedral)"
+n6    = 1.00
+perf  = 0.90
+power = 0.30
+cost  = 0.20
+notes = "C Z=6=n EXACT, sp3 bonds=tau=4, high-value gemstone/industrial"
+
+[[candidate]]
+level = 5
+id    = "T2"
+label = "CO2-to-Graphene (C6 hexagonal continuous sheet)"
+n6    = 1.00
+perf  = 0.95
+power = 0.35
+cost  = 0.25
+notes = "C6=n EXACT, BT-93 flagship, highest value carbon allotrope"
+
+[[candidate]]
+level = 5
+id    = "T3"
+label = "CO2-to-CNT Forest (6-wall MWCNT)"
+n6    = 1.00
+perf  = 0.80
+power = 0.40
+cost  = 0.30
+notes = "walls=6=n EXACT, structural + electrical applications"
+
+[[candidate]]
+level = 5
+id    = "T4"
+label = "CO2-to-C60 Fullerene (12 pentagons, 20 hexagons)"
+n6    = 1.00
+perf  = 0.70
+power = 0.35
+cost  = 0.25
+notes = "pentagons=12=sigma EXACT, hexagons=20=J2-tau, molecular cage"
+
+[[candidate]]
+level = 5
+id    = "T5"
+label = "Nuclear Transmutation (C Z=6 -> N Z=7, CNO cycle)"
+n6    = 1.00
+perf  = 0.60
+power = 0.15
+cost  = 0.10
+notes = "C Z=6=n EXACT, nuclear-scale carbon elimination"
+
+[[candidate]]
+level = 5
+id    = "T6"
+label = "Mass-Energy Conversion (E=mc2, direct annihilation)"
+n6    = 0.60
+perf  = 0.99
+power = 0.05
+cost  = 0.05
+notes = "C mass -> pure energy, ultimate thermodynamic endpoint"
+
+# =============================================================
+# Level 6: Universal — 6 candidates
+#   n6: 6 latitude bands, 6 current gates, planetary scale
+# =============================================================
+[[level]]
+name = "Universal"
+
+[[candidate]]
+level = 6
+id    = "U1"
+label = "Jet Stream Riding (6 latitude band processors)"
+n6    = 1.00
+perf  = 0.85
+power = 0.40
+cost  = 0.30
+notes = "bands=6=n EXACT, atmospheric circulation capture"
+
+[[candidate]]
+level = 6
+id    = "U2"
+label = "Deep Ocean Full-Column (6 current gate stations)"
+n6    = 1.00
+perf  = 0.80
+power = 0.35
+cost  = 0.25
+notes = "gates=6=n EXACT, thermohaline current interception"
+
+[[candidate]]
+level = 6
+id    = "U3"
+label = "Crustal Mineralization (6 tectonic zone injection)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.35
+notes = "zones=6=n EXACT, permanent geological storage, Gt-scale"
+
+[[candidate]]
+level = 6
+id    = "U4"
+label = "Stratospheric Injection Reversal (6 deployment points)"
+n6    = 1.00
+perf  = 0.75
+power = 0.30
+cost  = 0.20
+notes = "points=6=n EXACT, high-altitude capture, solar-assisted"
+
+[[candidate]]
+level = 6
+id    = "U5"
+label = "Biosphere Super-Enhancement (C6H12O6, 12x photosynthesis)"
+n6    = 1.00
+perf  = 0.70
+power = 0.60
+cost  = 0.40
+notes = "glucose=C6=n EXACT, enhance=12=sigma, engineered biosphere"
+
+[[candidate]]
+level = 6
+id    = "U6"
+label = "Atmo-Ocean-Crust Integrated (6 subsystem fusion)"
+n6    = 1.00
+perf  = 0.95
+power = 0.45
+cost  = 0.30
+notes = "subsystems=6=n EXACT, all planetary sinks unified"
+
+# =============================================================
+# Level 7: Omega — 6 candidates
+#   n6: Dyson 6-ring, Leech J2=24, stellar/cosmic scale
+# =============================================================
+[[level]]
+name = "Omega"
+
+[[candidate]]
+level = 7
+id    = "W1"
+label = "Dyson Swarm CO2 Processor (6 ring segments)"
+n6    = 1.00
+perf  = 1.00
+power = 0.90
+cost  = 0.10
+notes = "rings=6=n EXACT, stellar energy capture, 10^20 W per ring"
+
+[[candidate]]
+level = 7
+id    = "W2"
+label = "Black Hole Penrose Engine (42% mass->energy)"
+n6    = 1.00
+perf  = 1.00
+power = 0.95
+cost  = 0.05
+notes = "Penrose 42%~sigma*n/phi CLOSE, micro-BH CO2 annihilation"
+
+[[candidate]]
+level = 7
+id    = "W3"
+label = "Spacetime Lattice Carbon Seal (6D topological defect)"
+n6    = 1.00
+perf  = 1.00
+power = 0.99
+cost  = 0.05
+notes = "6D compactification=n EXACT, permanent topological storage"
+
+[[candidate]]
+level = 7
+id    = "W4"
+label = "Leech-24 Dimensional Dump (24D -> 3D transport)"
+n6    = 1.00
+perf  = 1.00
+power = 0.95
+cost  = 0.05
+notes = "J2=24 dim EXACT, Leech lattice packing, cross-dimensional"
+
+[[candidate]]
+level = 7
+id    = "W5"
+label = "Maxwell Demon Dissociator (6 demon stations, CO2->C+O2)"
+n6    = 1.00
+perf  = 1.00
+power = 1.00
+cost  = 0.05
+notes = "stations=6=n EXACT, reverse entropy, molecular sorting"
+
+[[candidate]]
+level = 7
+id    = "W6"
+label = "Cosmological Constant Tuner (Lambda fine-adjustment)"
+n6    = 1.00
+perf  = 1.00
+power = 1.00
+cost  = 0.01
+notes = "Lambda adjustment, carbon bond energy control, standalone only"
+
+# =============================================================
+# Rules — prefer/exclude pairings (10+ rules)
+# =============================================================
+
+# MOF-74 pairs best with graphene/CNT molecular assembly
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "S1"
+then_level = 5
+then_ids   = "T2,T3"
+
+# Microreactor pairs with quantum/edge AI chip
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "R6"
+then_level = 3
+then_ids   = "C6,C5"
+
+# Photocatalytic process synergizes with space elevator / ocean platform
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "P6"
+then_level = 4
+then_ids   = "Y6,Y3"
+
+# Mobile Fleet excludes Crustal Mineralization (incompatible deployment)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Y5"
+then_level = 6
+then_ids   = "U3"
+
+# Integrated universal system requires specific omega endpoints
+[[rule]]
+type       = "prefer"
+if_level   = 6
+if_id      = "U6"
+then_level = 7
+then_ids   = "W1,W3,W5"
+
+# Graphene Oxide sorbent naturally feeds CO2-to-Graphene transmutation
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "S5"
+then_level = 5
+then_ids   = "T2"
+
+# RISC-V controller pairs with Industrial CCS Hub (reliable control)
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "C1"
+then_level = 4
+then_ids   = "Y2"
+
+# MECS electrochemical process pairs with Edge AI SoC (smart control)
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "P3"
+then_level = 3
+then_ids   = "C5"
+
+# Cosmological Constant Tuner is standalone — exclude all lower-level combos
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 0
+then_ids   = "S1,S2,S3,S4,S5,S6"
+
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 1
+then_ids   = "P1,P2,P3,P4,P5,P6"
+
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 2
+then_ids   = "R1,R2,R3,R4,R5,R6"
+
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 3
+then_ids   = "C1,C2,C3,C4,C5,C6"
+
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 4
+then_ids   = "Y1,Y2,Y3,Y4,Y5,Y6"
+
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 5
+then_ids   = "T1,T2,T3,T4,T5,T6"
+
+[[rule]]
+type       = "exclude"
+if_level   = 7
+if_id      = "W6"
+then_level = 6
+then_ids   = "U1,U2,U3,U4,U5,U6"

@@ -1,0 +1,408 @@
+# =============================================================
+# Topological Quantum Materials DSE Domain Definition
+# n=6 TQM -- Z2 topological insulator + Majorana + quantum spin Hall
+# BT-43 (CN=6) + BT-49 (Pure Math kissing) + BT-51 (Genetic code)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "topological-quantum-materials"
+desc = "Ultimate Topological Quantum Materials DSE -- Z2 + Majorana + QSHE"
+levels = ["Classification", "Material", "Surface", "Transport", "Device"]
+vision = "n=6 topological quantum materials -- Z2 insulator + Majorana + quantum spin Hall"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Classification (Topological classification) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Classification"
+
+[[candidate]]
+level  = 0
+id     = "Z2_Topological"
+label  = "Z2 topological insulator (phi=2 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "Z2_invariant=2=phi EXACT, time-reversal, Kane-Mele model"
+
+[[candidate]]
+level  = 0
+id     = "ChernInsulator"
+label  = "Chern insulator (sigma=12 Chern number lattice)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "Chern_number=integer, QAHE, broken TRS, Haldane model"
+
+[[candidate]]
+level  = 0
+id     = "QSHE"
+label  = "Quantum spin Hall effect (phi=2 spin EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "spin_channels=2=phi EXACT, helical edge, Z2 protected"
+
+[[candidate]]
+level  = 0
+id     = "WeylSemimetal"
+label  = "Weyl semimetal (tau=4 Weyl points)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "Weyl_points=pairs, chirality=2=phi, Fermi arc surface states"
+
+[[candidate]]
+level  = 0
+id     = "NodalLine"
+label  = "Nodal line semimetal"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "line_node, drumhead surface, PT symmetry protected"
+
+[[candidate]]
+level  = 0
+id     = "AxionInsulator"
+label  = "Axion insulator"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.45
+notes  = "theta=pi, quantized ME effect, higher-order topology"
+
+# =============================================================
+# Level 1: Material (Physical material) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Material"
+
+[[candidate]]
+level  = 1
+id     = "Bi2Se3"
+label  = "Bi2Se3 (prototypical 3D TI)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.60
+notes  = "bandgap=0.3eV, single Dirac cone, quintuple layer"
+
+[[candidate]]
+level  = 1
+id     = "Graphene"
+label  = "Graphene (C Z=6 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.70
+cost   = 0.65
+notes  = "Z=6=n EXACT, honeycomb, Dirac fermions, SOC gap"
+
+[[candidate]]
+level  = 1
+id     = "HgTe"
+label  = "HgTe quantum well (phi=2 QW)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "inverted_band, first experimental QSHE, critical thickness"
+
+[[candidate]]
+level  = 1
+id     = "SmB6"
+label  = "SmB6 (samarium hexaboride n=6 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "B_atoms=6=n EXACT, Kondo insulator, topological surface"
+
+[[candidate]]
+level  = 1
+id     = "MoS2"
+label  = "MoS2 (transition metal dichalcogenide)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "valley_index=2=phi, layer-dependent gap, valleytronics"
+
+[[candidate]]
+level  = 1
+id     = "NbSe2"
+label  = "NbSe2 (CDW + superconductor)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "CDW_Tc=33K, SC_Tc=7K, Ising superconductivity"
+
+# =============================================================
+# Level 2: Surface (Surface/edge state) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Surface"
+
+[[candidate]]
+level  = 2
+id     = "DiracCone"
+label  = "Dirac cone (tau=4 gamma matrices)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.55
+notes  = "gamma_dim=4=tau EXACT, linear dispersion, spin-momentum locking"
+
+[[candidate]]
+level  = 2
+id     = "SpinTexture"
+label  = "Spin texture (phi=2 helical)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "helicity=2=phi EXACT, spin-polarized ARPES, backscatter-free"
+
+[[candidate]]
+level  = 2
+id     = "MajoranaZero"
+label  = "Majorana zero mode (mu=1 self-conjugate)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "self_conjugate=1=mu EXACT, non-Abelian anyons, vortex core"
+
+[[candidate]]
+level  = 2
+id     = "HelicalEdge"
+label  = "Helical edge state (phi=2 spin-locked)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "spin_lock=2=phi EXACT, 1D channel, quantized conductance"
+
+[[candidate]]
+level  = 2
+id     = "FermiArc"
+label  = "Fermi arc (Weyl surface state)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "open contour, connects Weyl points, momentum-space topology"
+
+[[candidate]]
+level  = 2
+id     = "DrumheadSurface"
+label  = "Drumhead surface state"
+n6     = 0.50
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "flat band, high DOS, nodal line projected, correlation effects"
+
+# =============================================================
+# Level 3: Transport (Transport phenomena) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Transport"
+
+[[candidate]]
+level  = 3
+id     = "QAHE"
+label  = "Quantum anomalous Hall (mu=1 quantized EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "sigma_xy=e2/h=1=mu EXACT, no external B-field, Cr-doped TI"
+
+[[candidate]]
+level  = 3
+id     = "SpinHallN2"
+label  = "Spin Hall effect (phi=2)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "spin_current=2=phi EXACT, intrinsic+extrinsic, SOC driven"
+
+[[candidate]]
+level  = 3
+id     = "ThermalHall"
+label  = "Thermal Hall effect"
+n6     = 0.50
+perf   = 0.70
+power  = 0.60
+cost   = 0.55
+notes  = "kappa_xy quantized, phonon topology, Majorana edge"
+
+[[candidate]]
+level  = 3
+id     = "NonlocalTransport"
+label  = "Nonlocal transport"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "surface vs bulk, multi-terminal, Kondo insulator probe"
+
+[[candidate]]
+level  = 3
+id     = "ChiralAnomaly"
+label  = "Chiral anomaly"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "negative_MR, parallel E.B, Adler-Bell-Jackiw, Weyl fermions"
+
+[[candidate]]
+level  = 3
+id     = "MagnetoElectric"
+label  = "Magnetoelectric effect (phi=2 dual)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "theta_term=pi, E-B coupling, topological ME, axion field"
+
+# =============================================================
+# Level 4: Device (Application device) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Device"
+
+[[candidate]]
+level  = 4
+id     = "Majorana_Qubit"
+label  = "Majorana qubit (phi=2 topological)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "topological protection, braiding, non-Abelian, fault-tolerant"
+
+[[candidate]]
+level  = 4
+id     = "SpintronicDev"
+label  = "Spintronic device"
+n6     = 0.60
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "spin-orbit torque, MRAM, spin valve, dissipationless"
+
+[[candidate]]
+level  = 4
+id     = "ThermoelectricN6"
+label  = "Thermoelectric device (ZT enhancement)"
+n6     = 0.60
+perf   = 0.75
+power  = 0.70
+cost   = 0.50
+notes  = "surface states enhance ZT, low thermal conductivity"
+
+[[candidate]]
+level  = 4
+id     = "TopologicalLaser"
+label  = "Topological laser"
+n6     = 0.60
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "edge-mode lasing, single-mode, robust to disorder"
+
+[[candidate]]
+level  = 4
+id     = "QuantumDetector"
+label  = "Quantum detector"
+n6     = 0.60
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "THz detector, bolometer, photon counting, surface states"
+
+[[candidate]]
+level  = 4
+id     = "HexQubitDevice"
+label  = "Hexagonal qubit array (n=6 qubits per unit cell EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "qubits_per_cell=6=n EXACT, honeycomb lattice, topological protection, surface code compatible"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Z2_Topological requires DiracCone (Z2 insulator has Dirac surface state)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Z2_Topological"
+then_level = 2
+then_ids   = "DiracCone"
+
+# MajoranaZero requires Z2_Topological or ChernInsulator
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "MajoranaZero"
+then_level = 0
+then_ids   = "Z2_Topological,ChernInsulator"
+
+# SmB6 requires NonlocalTransport (Kondo insulator)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "SmB6"
+then_level = 3
+then_ids   = "NonlocalTransport"
+
+# Graphene requires QSHE or ChiralAnomaly
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Graphene"
+then_level = 0
+then_ids   = "QSHE,WeylSemimetal,Z2_Topological"
+
+# NodalLine requires FermiArc or DrumheadSurface
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "NodalLine"
+then_level = 2
+then_ids   = "FermiArc,DrumheadSurface"
+
+# Majorana_Qubit requires MajoranaZero
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Majorana_Qubit"
+then_level = 2
+then_ids   = "MajoranaZero"
+
+# AxionInsulator requires MagnetoElectric
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "AxionInsulator"
+then_level = 3
+then_ids   = "MagnetoElectric"

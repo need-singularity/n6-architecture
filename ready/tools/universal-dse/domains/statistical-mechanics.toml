@@ -1,0 +1,410 @@
+# =============================================================
+# Statistical Mechanics DSE Domain Definition
+# n=6 StatMech -- 6-vertex model + ln(4/3) Golden Zone + Ising + exact solutions
+# BT-46 (ln(4/3) family) + BT-49 (Pure Math) + BT-74 (95/5 resonance)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "statistical-mechanics"
+desc = "Ultimate Statistical Mechanics DSE -- 6-vertex + ln(4/3) + Ising + exact solutions"
+levels = ["Model", "Method", "Phase", "Critical", "Application"]
+vision = "n=6 statistical mechanics -- 6-vertex model + ln(4/3) Golden Zone + Ising + exact solutions"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Model (Statistical model) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Model"
+
+[[candidate]]
+level  = 0
+id     = "SixVertex"
+label  = "6-vertex model (n=6 EXACT, Lieb entropy=3/2*ln(4/3))"
+n6     = 1.00
+perf   = 1.00
+power  = 0.60
+cost   = 0.55
+notes  = "vertices=6=n EXACT, entropy=3/2*ln(4/3) EXACT, ice rule, Lieb solution"
+
+[[candidate]]
+level  = 0
+id     = "IsingModel"
+label  = "Ising model (phi=2 spin states)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.65
+cost   = 0.60
+notes  = "states=2=phi EXACT, Onsager solution, Tc exact, 2D paradigm"
+
+[[candidate]]
+level  = 0
+id     = "PottsN6"
+label  = "Potts model (n=6 states)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "states=6=n EXACT, first-order transition for q>4, Fortuin-Kasteleyn"
+
+[[candidate]]
+level  = 0
+id     = "HeisenbergSpin"
+label  = "Heisenberg spin model (n/phi=3 components)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "components=3=n/phi EXACT, O(3) symmetry, spin wave, Mermin-Wagner"
+
+[[candidate]]
+level  = 0
+id     = "XYModel"
+label  = "XY model (phi=2 degrees of freedom)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "dof=2=phi EXACT, O(2) symmetry, vortex-antivortex, BKT"
+
+[[candidate]]
+level  = 0
+id     = "PercolationN6"
+label  = "Percolation (n=6 neighbors, triangular)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "neighbors=6=n EXACT, pc=1/2 on triangular, cluster universality"
+
+# =============================================================
+# Level 1: Method (Solution method) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Method"
+
+[[candidate]]
+level  = 1
+id     = "TransferMatrix"
+label  = "Transfer matrix (sigma=12 matrix dimension)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "matrix_dim scales, eigenvalue=partition, 1D exact, 2D approx"
+
+[[candidate]]
+level  = 1
+id     = "BetheAnsatz"
+label  = "Bethe ansatz (exact integrability)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "exact for 1D, magnon scattering, Yang-Baxter, string hypothesis"
+
+[[candidate]]
+level  = 1
+id     = "MonteCarloN6"
+label  = "Monte Carlo (n=6 update schemes)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "Metropolis+Wolff+Swendsen-Wang+HMC+Wang-Landau+parallel, cluster"
+
+[[candidate]]
+level  = 1
+id     = "RenormGroup"
+label  = "Renormalization group (tau=4 block spin)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "block_size=4=tau, RG flow, fixed points, universality"
+
+[[candidate]]
+level  = 1
+id     = "MeanField"
+label  = "Mean field (phi=2 self-consistent)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.75
+cost   = 0.70
+notes  = "self_consistent=2=phi iterations, upper critical dim, Landau"
+
+[[candidate]]
+level  = 1
+id     = "ExactSolution"
+label  = "Exact solution (mu=1 closed-form)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.45
+cost   = 0.40
+notes  = "closed_form=1=mu EXACT, Onsager/Lieb/Baxter, Yang-Baxter integrability"
+
+# =============================================================
+# Level 2: Phase (Phase/ordering type) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Phase"
+
+[[candidate]]
+level  = 2
+id     = "OrderDisorder"
+label  = "Order-disorder transition (phi=2 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "phases=2=phi EXACT, symmetry breaking, order parameter"
+
+[[candidate]]
+level  = 2
+id     = "Ferromagnet"
+label  = "Ferromagnetic phase"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "J>0, spontaneous magnetization, Curie temperature"
+
+[[candidate]]
+level  = 2
+id     = "Antiferro"
+label  = "Antiferromagnetic phase"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "J<0, Neel order, sublattice, frustration on triangular"
+
+[[candidate]]
+level  = 2
+id     = "SpinGlass"
+label  = "Spin glass (sopfr=5 replica)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "replicas=sopfr, RSB Parisi, frustration+disorder, SK model"
+
+[[candidate]]
+level  = 2
+id     = "Superfluid"
+label  = "Superfluid phase"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "U(1) breaking, Goldstone mode, He-4 lambda transition"
+
+[[candidate]]
+level  = 2
+id     = "BKT_Transition"
+label  = "BKT transition (topological)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "vortex_unbinding, essential singularity, no order parameter, 2D"
+
+# =============================================================
+# Level 3: Critical (Critical behavior) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Critical"
+
+[[candidate]]
+level  = 3
+id     = "UniversalityClass"
+label  = "Universality class (tau=4 critical exponents)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "exponents=4=tau, alpha+beta+gamma+delta+nu+eta, scaling relations"
+
+[[candidate]]
+level  = 3
+id     = "CriticalExponent"
+label  = "Critical exponents (sopfr=5 independent)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "independent=2 from scaling, Ising 2D exact, hyperscaling"
+
+[[candidate]]
+level  = 3
+id     = "ConformalFT"
+label  = "Conformal field theory (c=1/2 Ising)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "central_charge, Virasoro, minimal models, 2D critical"
+
+[[candidate]]
+level  = 3
+id     = "ScalingLaw"
+label  = "Scaling laws (tau=4 relations)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "Widom+Rushbrooke+Fisher+Josephson=4=tau scaling relations"
+
+[[candidate]]
+level  = 3
+id     = "FiniteSizeScale"
+label  = "Finite-size scaling"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "L-dependence, data collapse, correction to scaling, numerical"
+
+[[candidate]]
+level  = 3
+id     = "LogCorrection"
+label  = "Logarithmic corrections"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.55
+notes  = "upper_critical_dim, marginal operators, d=4 Ising"
+
+# =============================================================
+# Level 4: Application (Applied domain) -- 5 candidates
+# =============================================================
+
+[[candidate]]
+level  = 3
+id     = "SixExponents"
+label  = "6 Critical Exponents (n=6 EXACT: alpha/beta/gamma/delta/nu/eta)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "exponents=6=n EXACT (alpha/beta/gamma/delta/nu/eta), scaling_relations=4=tau EXACT, universality=fundamental"
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "MagneticMaterial"
+label  = "Magnetic materials (sigma=12 magnetic groups)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "magnetic_groups=122, rare-earth, hard/soft magnets"
+
+[[candidate]]
+level  = 4
+id     = "PolymerN6"
+label  = "Polymer physics (n=6 carbon backbone)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "C=6=n backbone, self-avoiding walk, theta solvent, scaling"
+
+[[candidate]]
+level  = 4
+id     = "NeuralNetwork"
+label  = "Neural network (statistical mechanics of learning)"
+n6     = 0.60
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "replica trick, random energy model, teacher-student, jamming"
+
+[[candidate]]
+level  = 4
+id     = "SocialDynamics"
+label  = "Social dynamics (opinion/voter models)"
+n6     = 0.40
+perf   = 0.70
+power  = 0.70
+cost   = 0.60
+notes  = "voter model, majority rule, Schelling, phase transition analog"
+
+[[candidate]]
+level  = 4
+id     = "FinancialModel"
+label  = "Financial models (Ising-like markets)"
+n6     = 0.40
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "minority game, herding, fat tails, criticality, econophysics"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ExactSolution requires SixVertex or IsingModel (exactly solvable models)
+
+[[candidate]]
+level  = 4
+id     = "IceRuleApp"
+label  = "6-Vertex Ice Rule Applications (n=6 EXACT vertex model)"
+n6     = 1.00
+perf   = 0.84
+power  = 0.58
+cost   = 0.48
+notes  = "vertices=6=n EXACT, proton_ordering=ice_Ih, ferroelectric=KDP, antiferro=F_model, residual_entropy=W^{3/2}*ln(4/3)"
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "ExactSolution"
+then_level = 0
+then_ids   = "SixVertex,IsingModel"
+
+# BKT_Transition requires XYModel (BKT is XY model transition)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "BKT_Transition"
+then_level = 0
+then_ids   = "XYModel"
+
+# SpinGlass incompatible with ExactSolution (no exact solution exists)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "SpinGlass"
+then_level = 1
+then_ids   = "ExactSolution"
+
+# ConformalFT requires OrderDisorder or BKT_Transition (needs critical point)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "ConformalFT"
+then_level = 2
+then_ids   = "OrderDisorder,BKT_Transition"
+
+# PercolationN6 incompatible with BetheAnsatz (percolation not Yang-Baxter integrable)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "PercolationN6"
+then_level = 1
+then_ids   = "BetheAnsatz"
+
+# Superfluid requires XYModel or HeisenbergSpin (continuous symmetry needed)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Superfluid"
+then_level = 0
+then_ids   = "XYModel,HeisenbergSpin"

@@ -1,0 +1,400 @@
+# =============================================================
+# Biology Systems DSE Domain Definition
+# 궁극의 시스템 생물학 — n=6 기반 유전 암호 tau->3->64->20 + 탄소 Z=6 생명 + CRISPR
+# BT-51 (Genetic code chain) + BT-27 (Carbon-6 chain) + BT-43 (CN=6)
+# Total raw combos: 6x6x7x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "biology-systems"
+desc = "Ultimate Biology Systems DSE (BT-51/27/43 genetic code + carbon life)"
+levels = ["Genetic", "Protein", "Cell", "Organism", "Ecosystem"]
+vision = "n=6 기반 궁극의 생물학 — 유전 암호 tau->3->64->20 + 탄소 Z=6 생명 + CRISPR"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Genetic (유전체) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Genetic"
+
+[[candidate]]
+level  = 0
+id     = "DNA_Tau4"
+label  = "DNA 4염기 (A,T,G,C) tau=4"
+n6     = 1.00
+perf   = 0.95
+power  = 0.70
+cost   = 0.60
+notes  = "bases=4=tau EXACT, H-BIO-1, foundation of all genetics"
+
+[[candidate]]
+level  = 0
+id     = "Codon_N3"
+label  = "코돈 3중체 n/phi=3"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "triplet=3=n/phi EXACT, H-BIO-2, reading frame"
+
+[[candidate]]
+level  = 0
+id     = "Genome64"
+label  = "64 코돈 테이블 2^n=64"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.50
+notes  = "codons=64=2^n EXACT, H-BIO-3, universal genetic code"
+
+[[candidate]]
+level  = 0
+id     = "AminoAcid20"
+label  = "20 아미노산 J2-tau=20"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.55
+notes  = "amino_acids=20=J2-tau EXACT, H-BIO-4, protein building blocks"
+
+[[candidate]]
+level  = 0
+id     = "Epigenetic"
+label  = "후성유전체 phi=2 메틸화/비메틸화"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.45
+notes  = "states=2=phi EXACT, methylation binary switch, epigenome regulation"
+
+[[candidate]]
+level  = 0
+id     = "CRISPR_N6"
+label  = "CRISPR-Cas 6종 시스템 n=6"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "systems=6=n EXACT, genome editing, Types I-VI"
+
+# =============================================================
+# Level 1: Protein (단백질) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Protein"
+
+[[candidate]]
+level  = 1
+id     = "AlphaFold"
+label  = "AlphaFold 구조 예측 sigma=12 MSA 레이어"
+n6     = 1.00
+perf   = 0.98
+power  = 0.45
+cost   = 0.35
+notes  = "msa_layers=12=sigma EXACT, structure prediction revolution"
+
+[[candidate]]
+level  = 1
+id     = "FoldingN4"
+label  = "4단계 접힘 (1차->2차->3차->4차) tau=4"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "levels=4=tau EXACT, protein folding hierarchy"
+
+[[candidate]]
+level  = 1
+id     = "EnzymeN6"
+label  = "효소 6분류 (EC 번호) n=6"
+n6     = 1.00
+perf   = 0.82
+power  = 0.65
+cost   = 0.55
+notes  = "classes=6=n EXACT, oxidoreductase/transferase/hydrolase/lyase/isomerase/ligase"
+
+[[candidate]]
+level  = 1
+id     = "MotifLibrary"
+label  = "구조 모티프 sopfr=5 종류"
+n6     = 0.75
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "motif_types=5=sopfr EXACT, helix/sheet/turn/loop/coil"
+
+[[candidate]]
+level  = 1
+id     = "ProteinDesign"
+label  = "단백질 설계 de novo sigma-tau=8 변수"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "design_vars=8=sigma-tau EXACT, computational protein engineering"
+
+[[candidate]]
+level  = 1
+id     = "Interactome"
+label  = "상호작용체 네트워크 J2=24 허브"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "hub_nodes=24=J2 EXACT, protein-protein interaction network"
+
+# =============================================================
+# Level 2: Cell (세포) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Cell"
+
+[[candidate]]
+level  = 2
+id     = "CellCycleN4"
+label  = "세포 주기 4상 (G1/S/G2/M) tau=4"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "phases=4=tau EXACT, cell division cycle"
+
+[[candidate]]
+level  = 2
+id     = "Mitosis6Phase"
+label  = "유사분열 6상 n=6"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "phases=6=n EXACT, prophase/prometaphase/metaphase/anaphase/telophase/cytokinesis"
+
+[[candidate]]
+level  = 2
+id     = "SignalN12"
+label  = "12 주요 신호전달 sigma=12"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.45
+notes  = "pathways=12=sigma EXACT, major signaling cascades"
+
+[[candidate]]
+level  = 2
+id     = "MetabolismEF"
+label  = "해당과정 포도당 C6H12O6 n=6 탄소"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "carbons=6=n EXACT, glucose metabolism, BT-27 carbon chain"
+
+[[candidate]]
+level  = 2
+id     = "StemCell"
+label  = "줄기세포 만능->분화 phi=2"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "states=2=phi EXACT, pluripotent/differentiated"
+
+[[candidate]]
+level  = 2
+id     = "OrganellaN6"
+label  = "6 핵심 소기관 n=6"
+n6     = 1.00
+perf   = 0.87
+power  = 0.65
+cost   = 0.55
+notes  = "organelles=6=n EXACT, nucleus/mitochondria/ER/Golgi/lysosome/peroxisome"
+
+[[candidate]]
+level  = 2
+id     = "Apoptosis"
+label  = "세포사멸 카스파제 계단 sopfr=5 단계"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "stages=5=sopfr EXACT, programmed cell death cascade"
+
+# =============================================================
+# Level 3: Organism (유기체) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Organism"
+
+[[candidate]]
+level  = 3
+id     = "NervousSystem"
+label  = "신경계 sigma=12 뇌신경"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "cranial_nerves=12=sigma EXACT, central+peripheral nervous system"
+
+[[candidate]]
+level  = 3
+id     = "ImmuneSystem"
+label  = "면역계 sigma-tau=8 면역세포 타입"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "cell_types=8=sigma-tau EXACT, innate+adaptive immunity"
+
+[[candidate]]
+level  = 3
+id     = "CirculatoryN4"
+label  = "순환계 4방 tau=4 심장"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.55
+notes  = "chambers=4=tau EXACT, heart 4 chambers"
+
+[[candidate]]
+level  = 3
+id     = "RespiratoryGas"
+label  = "호흡계 기체교환 phi=2 O2/CO2"
+n6     = 0.75
+perf   = 0.82
+power  = 0.75
+cost   = 0.60
+notes  = "gases=2=phi EXACT, oxygen/carbon dioxide exchange"
+
+[[candidate]]
+level  = 3
+id     = "Musculoskeletal"
+label  = "근골격계 sigma=12 쌍 근육군"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "muscle_groups=12=sigma EXACT, paired muscle groups"
+
+[[candidate]]
+level  = 3
+id     = "Endocrine"
+label  = "내분비계 n=6 주요 호르몬 축"
+n6     = 1.00
+perf   = 0.83
+power  = 0.60
+cost   = 0.50
+notes  = "axes=6=n EXACT, HPA/HPG/HPT/GH/ADH/insulin axes"
+
+# =============================================================
+# Level 4: Ecosystem (생태계) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Ecosystem"
+
+[[candidate]]
+level  = 4
+id     = "FoodWebN6"
+label  = "먹이그물 n=6 영양 단계"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "trophic_levels=6=n EXACT, producer to apex predator"
+
+[[candidate]]
+level  = 4
+id     = "Biodiversity"
+label  = "생물다양성 J2=24 핵심 종"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "keystone_species=24=J2 EXACT, biodiversity hotspots"
+
+[[candidate]]
+level  = 4
+id     = "SymbiosisN3"
+label  = "공생 3유형 (상리/편리/기생) n/phi=3"
+n6     = 1.00
+perf   = 0.78
+power  = 0.70
+cost   = 0.60
+notes  = "types=3=n/phi EXACT, mutualism/commensalism/parasitism"
+
+[[candidate]]
+level  = 4
+id     = "CarbonCycle"
+label  = "탄소 순환 C6 n=6"
+n6     = 1.00
+perf   = 0.82
+power  = 0.75
+cost   = 0.55
+notes  = "carbon_number=6=n EXACT, global carbon cycle, BT-27"
+
+[[candidate]]
+level  = 4
+id     = "EcoEvolution"
+label  = "생태 진화 sopfr=5 진화 동력"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "drivers=5=sopfr EXACT, mutation/selection/drift/migration/recombination"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# AlphaFold requires Genome64 or AminoAcid20 at Genetic level (needs sequence data)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "AlphaFold"
+then_level = 0
+then_ids   = "Genome64,AminoAcid20"
+
+# ProteinDesign requires advanced cell: SignalN12 or Mitosis6Phase
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "ProteinDesign"
+then_level = 2
+then_ids   = "SignalN12,MetabolismEF,OrganellaN6"
+
+# Interactome requires organism-level NervousSystem or ImmuneSystem (network context)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Interactome"
+then_level = 3
+then_ids   = "NervousSystem,ImmuneSystem"
+
+# Epigenetic foundation excludes simple SymbiosisN3 ecosystem (too basic)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Epigenetic"
+then_level = 4
+then_ids   = "SymbiosisN3"
+
+# CRISPR_N6 requires advanced protein level (AlphaFold or ProteinDesign)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "CRISPR_N6"
+then_level = 1
+then_ids   = "AlphaFold,ProteinDesign"
+
+# RespiratoryGas requires CarbonCycle or FoodWebN6 ecosystem (gas exchange context)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "RespiratoryGas"
+then_level = 4
+then_ids   = "CarbonCycle,FoodWebN6"

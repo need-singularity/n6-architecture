@@ -1,0 +1,400 @@
+# =============================================================
+# SEDI-UNIVERSE DSE Domain Definition
+# n=6 SEDI 4-lens universe diagnostic -- particle -> nuclear -> stellar -> galactic -> cosmological
+# H-CP/H-SEDI hypotheses, BT-36/51 cross-domain, LCDM 6 parameters
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "sedi-universe"
+desc = "SEDI Universe Exploration DSE -- particle to cosmological scale unification via n=6"
+levels = ["Particle", "Nuclear", "Stellar", "Galactic", "Cosmological"]
+vision = "n=6 SEDI 4-lens universe diagnostic -- particle -> atom -> star -> galaxy -> universe"
+
+[scoring]
+n6   = 0.40
+perf = 0.25
+power = 0.15
+cost  = 0.20
+
+# =============================================================
+# Level 0: Particle (particle physics) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Particle"
+
+[[candidate]]
+level  = 0
+id     = "QuarkN6"
+label  = "n=6 Quarks (u,d,s,c,b,t = 6 flavors)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "n=6 quark flavors EXACT, color charge n/phi=3 EXACT, SU(3) gauge"
+
+[[candidate]]
+level  = 0
+id     = "LeptonN6"
+label  = "n=6 Leptons (e,mu,tau,nu_e,nu_mu,nu_tau)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "n=6 lepton species EXACT, phi=2 chiralities EXACT, weak isospin"
+
+[[candidate]]
+level  = 0
+id     = "GaugeSigma12"
+label  = "sigma=12 Gauge Bosons (8g+W+W-+Z+gamma+H)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "sigma=12 gauge+Higgs bosons EXACT, Standard Model complete force carriers"
+
+[[candidate]]
+level  = 0
+id     = "E6GUT"
+label  = "E6 Grand Unified Theory (rank n=6)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.35
+cost   = 0.30
+notes  = "E6 rank=n=6 EXACT, unifies SU(3)xSU(2)xU(1), proton decay prediction"
+
+[[candidate]]
+level  = 0
+id     = "SUSY_N6"
+label  = "N=6 Supersymmetry"
+n6     = 0.83
+perf   = 0.70
+power  = 0.30
+cost   = 0.25
+notes  = "extended SUSY N=6 aligned, superpartners, dark matter candidates"
+
+[[candidate]]
+level  = 0
+id     = "StringM"
+label  = "String/M Theory (10D+1 = sigma-mu=11)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.25
+cost   = 0.20
+notes  = "sigma-mu=11 spacetime dimensions EXACT, M-theory, compactification on Calabi-Yau"
+
+# =============================================================
+# Level 1: Nuclear (nuclear/atomic scale) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Nuclear"
+
+[[candidate]]
+level  = 1
+id     = "Carbon6"
+label  = "Carbon Z=6 (element of life)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.55
+notes  = "Z=6=n EXACT, sp3/sp2/sp hybridization, basis of organic chemistry, BT-27 C6 chain"
+
+[[candidate]]
+level  = 1
+id     = "BBN_Eta"
+label  = "BBN eta=6e-10 (baryon-to-photon ratio)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "eta=6x10^{-10} coefficient n=6 EXACT, primordial nucleosynthesis, He-4/D/Li abundances"
+
+[[candidate]]
+level  = 1
+id     = "NucShell"
+label  = "Nuclear Shell Model (magic numbers)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "magic numbers 2,8,20,28,50,82,126, tau=4 quantum numbers (n,l,j,m)"
+
+[[candidate]]
+level  = 1
+id     = "FusionDT"
+label  = "D-T Fusion (BT-38: LHV=sigma(sigma-phi)=120)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.70
+cost   = 0.35
+notes  = "LHV=120=sigma(sigma-phi) EXACT, HHV=142=sigma^2-phi, 17.6 MeV per reaction"
+
+[[candidate]]
+level  = 1
+id     = "StrongForce"
+label  = "Strong Force (alpha_s ~ 1/(sigma-tau)=1/8)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "alpha_s(Mz)=0.118~1/(sigma-tau) EXACT, QCD, asymptotic freedom, confinement"
+
+[[candidate]]
+level  = 1
+id     = "ElectroWeak"
+label  = "Electroweak Unification (sin^2(theta_W)=3/13)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "Weinberg angle, W/Z mass ratio, spontaneous symmetry breaking, Higgs mechanism"
+
+# =============================================================
+# Level 2: Stellar (stellar/plasma scale) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Stellar"
+
+[[candidate]]
+level  = 2
+id     = "MainSeq"
+label  = "Main Sequence Stars (OBAFGK+M ~ 7, but OBAFGK=n=6)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "OBAFGK=6 classic types (n=6 if excluding M), HR diagram, stellar evolution"
+
+[[candidate]]
+level  = 2
+id     = "StellarNucl"
+label  = "Stellar Nucleosynthesis (CNO cycle, C=Z6 catalyst)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "Carbon Z=n=6 catalyst EXACT, CNO cycle dominant in massive stars, pp-chain complement"
+
+[[candidate]]
+level  = 2
+id     = "Supernova"
+label  = "Supernova Type Ia (sigma=12 peak luminosity)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "sigma=12 magnitude scale, standard candle, dark energy discovery, Chandrasekhar limit"
+
+[[candidate]]
+level  = 2
+id     = "NeutronStar"
+label  = "Neutron Star (n=6 quark DOF at core)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "n=6 quark flavors at extreme density, EOS, nuclear pasta, r-process"
+
+[[candidate]]
+level  = 2
+id     = "Pulsar"
+label  = "Pulsar (phi=2 magnetic poles)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "phi=2 magnetic poles EXACT, millisecond pulsars, timing arrays, GW detection"
+
+[[candidate]]
+level  = 2
+id     = "BlackHole"
+label  = "Black Hole (BH thermodynamics, Bekenstein-Hawking)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.40
+cost   = 0.30
+notes  = "S=A/4 entropy, Kerr metric, information paradox, tau=4 BH laws of thermodynamics"
+
+# =============================================================
+# Level 3: Galactic (galaxy/large-scale structure) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Galactic"
+
+[[candidate]]
+level  = 3
+id     = "SpiralGal"
+label  = "Spiral Galaxy (phi=2 spiral arms)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "phi=2 dominant spiral arms EXACT (grand design), rotation curve, dark matter halo"
+
+[[candidate]]
+level  = 3
+id     = "GalCluster"
+label  = "Galaxy Cluster (sigma=12 Mpc scale)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "sigma=12 Mpc typical scale EXACT, ICM, gravitational lensing, mass function"
+
+[[candidate]]
+level  = 3
+id     = "DarkMatter"
+label  = "Dark Matter (sigma-tau=8 WIMP candidates)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.40
+cost   = 0.35
+notes  = "sigma-tau=8 candidate particles EXACT, 27% of universe, NFW profile, direct detection"
+
+[[candidate]]
+level  = 3
+id     = "DarkEnergy"
+label  = "Dark Energy (Omega_Lambda=0.683~ln(2))"
+n6     = 0.67
+perf   = 0.80
+power  = 0.35
+cost   = 0.30
+notes  = "Omega_Lambda=0.683~ln(2), cosmological constant, w=-1, accelerating expansion"
+
+[[candidate]]
+level  = 3
+id     = "CosmicWeb"
+label  = "Cosmic Web (n=6 filament nodes)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "n=6 filament connectivity EXACT, voids+filaments+nodes, Zel'dovich approximation"
+
+[[candidate]]
+level  = 3
+id     = "AGN_Quasar"
+label  = "AGN/Quasar (J2=24 jet variables)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "J2=24 characterizing variables EXACT, supermassive BH, accretion disk, relativistic jets"
+
+# =============================================================
+# Level 4: Cosmological -- 6 candidates
+# =============================================================
+[[level]]
+name = "Cosmological"
+
+[[candidate]]
+level  = 4
+id     = "LCDM_6Param"
+label  = "LCDM 6-Parameter Model"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "n=6 free parameters EXACT (H0,Omega_b,Omega_c,tau,n_s,A_s), Planck 2018 precision"
+
+[[candidate]]
+level  = 4
+id     = "Inflation"
+label  = "Inflation (n_s=27/28 EXACT, r~0.003)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "n_s=27/28 H-CP-84 EXACT, slow-roll, e-folds~60=sigma*sopfr, LiteBIRD 2032"
+
+[[candidate]]
+level  = 4
+id     = "CMB_Aniso"
+label  = "CMB Anisotropy (sigma=12 multipole analysis)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "sigma=12 key multipole bands EXACT, power spectrum, polarization E/B modes"
+
+[[candidate]]
+level  = 4
+id     = "GravWavePrim"
+label  = "Primordial Gravitational Waves (LiteBIRD 2032)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.35
+cost   = 0.30
+notes  = "tensor-to-scalar ratio r, B-mode polarization, inflation probe, phi=2 polarization EXACT"
+
+[[candidate]]
+level  = 4
+id     = "NeutrinoOsc"
+label  = "Neutrino Oscillation (n/phi=3 flavors, JUNO 2027)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "n/phi=3 neutrino flavors EXACT, mass hierarchy, CP violation, PMNS matrix"
+
+[[candidate]]
+level  = 4
+id     = "Multiverse"
+label  = "Multiverse / Landscape (10^500 vacua)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.20
+cost   = 0.15
+notes  = "string landscape, anthropic principle, eternal inflation, speculative but n=6 selection"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# E6GUT requires StrongForce or ElectroWeak (GUT unifies them)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "E6GUT"
+then_level = 1
+then_ids   = "StrongForce,ElectroWeak"
+
+# SUSY_N6 incompatible with BBN_Eta (SUSY modifies BBN too much without fine-tuning)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "SUSY_N6"
+then_level = 1
+then_ids   = "BBN_Eta"
+
+# StringM requires BlackHole or NeutronStar (extreme gravity needed)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "StringM"
+then_level = 2
+then_ids   = "BlackHole,NeutronStar"
+
+# FusionDT requires StellarNucl or MainSeq (fusion context)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "FusionDT"
+then_level = 2
+then_ids   = "StellarNucl,MainSeq,Supernova"
+
+# Multiverse incompatible with LCDM_6Param (LCDM is single-universe model)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Multiverse"
+then_level = 4
+then_ids   = "LCDM_6Param"
+
+# DarkMatter requires LCDM_6Param or CMB_Aniso (needs cosmological framework)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "DarkMatter"
+then_level = 4
+then_ids   = "LCDM_6Param,CMB_Aniso,Inflation"

@@ -1,0 +1,401 @@
+# N6 Wafer Fabrication DSE — Semiconductor manufacturing process
+# 6×6×6×6×6 = 7,776 combos
+# n=6: 6-step FEOL flow (oxidation/deposition/lithography/etch/doping/CMP = n=6 EXACT)
+#       sigma=12 inch wafer (300mm), tau=4 quadrant alignment,
+#       phi=2 front/back side, J2=24 mask layers
+
+[meta]
+name = "wafer-fabrication"
+desc = "Wafer Fabrication DSE — 6-step FEOL (n=6), 12-inch wafer (sigma), 24 masks (J2)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Substrate (기판)
+#   n6 checks: wafer_inch==12(sigma), polytype==6H(n), sides==2(phi)
+# ============================================================
+
+[[level]]
+name = "Substrate"
+
+[[candidate]]
+id = "Si-300mm"
+label = "Si 300mm (sigma=12 inch, CN=4=tau, Eg=1.1eV, standard)"
+n6 = 1.00
+perf = 0.60
+power = 0.50
+cost = 1.00
+notes = "wafer=12inch=sigma EXACT, most mature platform, 95%+ market share"
+
+[[candidate]]
+id = "Si-450mm"
+label = "Si 450mm (18 inch, next-gen, higher throughput, limited ecosystem)"
+n6 = 0.80
+perf = 0.80
+power = 0.50
+cost = 0.30
+notes = "18inch=n+sigma=J2-n EXACT, throughput gain ~2.25x per wafer"
+
+[[candidate]]
+id = "SiC-6H"
+label = "SiC 6H polytype (n=6 EXACT hexagonal stacking, Eg=3.0eV, k=490)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.35
+notes = "6H=n=6 EXACT polytype, wide bandgap, high thermal conductivity"
+
+[[candidate]]
+id = "GaN-on-Si"
+label = "GaN on Si (heteroepitaxial, 200mm, Eg=3.4eV, high electron mobility)"
+n6 = 0.50
+perf = 0.75
+power = 0.85
+cost = 0.55
+notes = "leverages Si infrastructure, lattice mismatch managed by buffer layers"
+
+[[candidate]]
+id = "SOI"
+label = "SOI — Silicon on Insulator (buried oxide, reduced parasitics, RF/rad-hard)"
+n6 = 0.50
+perf = 0.70
+power = 0.75
+cost = 0.60
+notes = "phi=2 active/handle wafer bonding EXACT, reduced latch-up, lower capacitance"
+
+[[candidate]]
+id = "Ge-substrate"
+label = "Germanium substrate (Z=32, CN=4=tau, Eg=0.7eV, high mobility)"
+n6 = 0.75
+perf = 0.65
+power = 0.40
+cost = 0.45
+notes = "CN=4=tau EXACT, higher hole mobility than Si, IR detector applications"
+
+# ============================================================
+# Level 1: Deposition (증착)
+#   n6 checks: chambers==6(n), cycles==12(sigma), layers==4(tau)
+# ============================================================
+
+[[level]]
+name = "Deposition"
+
+[[candidate]]
+id = "CVD-6chamber"
+label = "CVD 6-chamber cluster (n=6 EXACT chambers, SiO2/SiN/poly-Si)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.80
+notes = "chambers=6=n EXACT, workhorse deposition, high throughput"
+
+[[candidate]]
+id = "PVD-sputter"
+label = "PVD Sputtering (metal deposition, Ta/TaN barrier, Cu seed)"
+n6 = 0.25
+perf = 0.60
+power = 0.50
+cost = 0.85
+notes = "standard metal deposition, directional coverage, step coverage limited"
+
+[[candidate]]
+id = "ALD-12cycle"
+label = "ALD 12-cycle (sigma=12 EXACT monolayer cycles, sub-nm precision)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+notes = "cycles=12=sigma EXACT, angstrom-level control, conformal coating, high-k gate"
+
+[[candidate]]
+id = "ECD-electroplate"
+label = "ECD Electroplating (Cu fill, damascene, bottom-up void-free)"
+n6 = 0.25
+perf = 0.55
+power = 0.60
+cost = 0.90
+notes = "Cu interconnect standard, low cost, high fill aspect ratio"
+
+[[candidate]]
+id = "MBE-epitaxial"
+label = "MBE Epitaxial (ultra-pure, monolayer control, III-V/quantum wells)"
+n6 = 0.50
+perf = 1.00
+power = 0.65
+cost = 0.20
+notes = "highest purity, tau=4 quantum well layers typical, slow throughput"
+
+[[candidate]]
+id = "Spin-coat"
+label = "Spin Coating (photoresist, SOG, planarization, low cost)"
+n6 = 0.25
+perf = 0.40
+power = 0.80
+cost = 1.00
+notes = "simple deposition, resist/dielectric only, highest throughput"
+
+# ============================================================
+# Level 2: Lithography (리소그래피)
+#   n6 checks: wavelength=13.5nm, masks=24(J2), NA=0.55
+# ============================================================
+
+[[level]]
+name = "Lithography"
+
+[[candidate]]
+id = "EUV-13.5nm"
+label = "EUV 13.5nm (NA=0.33, 24 masks=J2 EXACT, single-expose sub-20nm)"
+n6 = 1.00
+perf = 0.90
+power = 0.30
+cost = 0.40
+notes = "masks=24=J2 EXACT, 13.5nm source, ASML NXE, 250W source power"
+
+[[candidate]]
+id = "DUV-ArF-193nm"
+label = "DUV ArF 193nm immersion (multi-patterning, mature, 7nm capable)"
+n6 = 0.25
+perf = 0.65
+power = 0.60
+cost = 0.75
+notes = "quad-patterning for sub-20nm, workhorse for non-critical layers"
+
+[[candidate]]
+id = "High-NA-EUV"
+label = "High-NA EUV (NA=0.55, anamorphic optics, sub-8nm single-expose)"
+n6 = 0.75
+perf = 1.00
+power = 0.20
+cost = 0.15
+notes = "next-gen EUV, 1.7x resolution improvement, ASML EXE:5000"
+
+[[candidate]]
+id = "Nanoimprint"
+label = "Nanoimprint Lithography (contact, 1:1 template, sub-10nm, low cost)"
+n6 = 0.50
+perf = 0.50
+power = 0.90
+cost = 0.85
+notes = "resolution~10nm=sigma-phi EXACT, 1:1=mu EXACT, no optical system, memory/3D"
+
+[[candidate]]
+id = "E-beam-direct"
+label = "E-beam Direct Write (maskless, sub-5nm, serial, R&D/prototype)"
+n6 = 0.50
+perf = 0.45
+power = 0.40
+cost = 0.60
+notes = "resolution~5nm=sopfr EXACT, maskless, extremely slow throughput, mask writing standard"
+
+[[candidate]]
+id = "DSA-self-assembly"
+label = "DSA Block Copolymer (directed self-assembly, 6nm pitch=n EXACT, parallel)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.70
+notes = "pitch=6nm=n EXACT achievable, natural periodicity, augments EUV"
+
+# ============================================================
+# Level 3: Etch (식각)
+#   n6 checks: gas_species==6(n), plasma_modes==4(tau), selectivity>12(sigma)
+# ============================================================
+
+[[level]]
+name = "Etch"
+
+[[candidate]]
+id = "RIE-6gas"
+label = "RIE 6-gas system (n=6 EXACT gas species: CF4/CHF3/O2/Ar/Cl2/HBr)"
+n6 = 1.00
+perf = 0.70
+power = 0.55
+cost = 0.80
+notes = "gases=6=n EXACT, standard anisotropic etch, gate/contact/via"
+
+[[candidate]]
+id = "ICP-plasma"
+label = "ICP High-Density Plasma (independent ion energy/density, deep etch)"
+n6 = 0.50
+perf = 0.80
+power = 0.50
+cost = 0.65
+notes = "high aspect ratio, TSV/MEMS, selectivity tunable"
+
+[[candidate]]
+id = "Wet-chemical"
+label = "Wet Chemical Etch (isotropic, HF/KOH/H2O2, batch process)"
+n6 = 0.50
+perf = 0.35
+power = 0.90
+cost = 1.00
+notes = "3 chemicals=n/phi EXACT (HF/KOH/H2O2), batch processing, isotropic"
+
+[[candidate]]
+id = "ALE-atomic-layer"
+label = "ALE Atomic Layer Etch (monolayer removal, sigma=12 cycle precision)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.30
+notes = "cycles=12=sigma EXACT per nm, angstrom-level control, GAA nanosheet critical"
+
+[[candidate]]
+id = "Cryo-etch"
+label = "Cryo Etch (-100C, passivation-free, vertical sidewalls, MEMS/TSV)"
+n6 = 0.50
+perf = 0.75
+power = 0.35
+cost = 0.50
+notes = "SF6/O2 at cryo temp, no scalloping, smooth sidewalls"
+
+[[candidate]]
+id = "Ion-mill"
+label = "Ion Milling (Ar+ physical, non-selective, MRAM/magnetic, tau=4 angles)"
+n6 = 0.75
+perf = 0.55
+power = 0.40
+cost = 0.55
+notes = "angles=4=tau EXACT multi-angle bombardment, MRAM pillar definition"
+
+# ============================================================
+# Level 4: Doping (도핑)
+#   n6 checks: species==12(sigma), energy_steps==6(n), junction_depth_nm
+# ============================================================
+
+[[level]]
+name = "Doping"
+
+[[candidate]]
+id = "Ion-implant-12species"
+label = "Ion Implant 12 species (sigma=12 EXACT: B/P/As/Sb/In/Ga/N/C/Ge/Si/F/H)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.70
+notes = "species=12=sigma EXACT, standard doping, dose/energy programmable"
+
+[[candidate]]
+id = "Plasma-doping"
+label = "Plasma Doping PLAD (conformal, 3D structures, high dose, low energy)"
+n6 = 0.50
+perf = 0.75
+power = 0.60
+cost = 0.75
+notes = "conformal for FinFET/GAA, dose uniformity on 3D, BF3/PH3"
+
+[[candidate]]
+id = "Diffusion-furnace"
+label = "Diffusion Furnace (batch, thermal drive-in, 6-zone heating=n EXACT)"
+n6 = 1.00
+perf = 0.45
+power = 0.40
+cost = 0.90
+notes = "zones=6=n EXACT, classic doping, deep junctions, batch throughput"
+
+[[candidate]]
+id = "Molecular-doping"
+label = "Molecular Monolayer Doping (self-assembled, sub-nm junction, deterministic)"
+n6 = 0.50
+perf = 0.90
+power = 0.70
+cost = 0.35
+notes = "sub-nm abruptness, minimal damage, R&D stage, single-atom precision"
+
+[[candidate]]
+id = "Laser-anneal"
+label = "Laser Spike Anneal (ms activation, minimal diffusion, USJ formation)"
+n6 = 0.50
+perf = 0.85
+power = 0.65
+cost = 0.50
+notes = "ultra-shallow junction, ms-scale heating, dopant activation >99%"
+
+[[candidate]]
+id = "In-situ-doping"
+label = "In-situ Epitaxial Doping (CVD/MBE growth + doping, tau=4 layer stack)"
+n6 = 0.75
+perf = 0.70
+power = 0.60
+cost = 0.55
+notes = "layers=4=tau EXACT (source/channel/drain/cap), abrupt profiles, SiGe:B standard"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# SiC-6H substrate pairs best with CVD and MBE deposition
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SiC-6H"
+then_level = 1
+then_ids = "CVD-6chamber,MBE-epitaxial"
+
+# GaN-on-Si needs MBE or CVD epitaxial growth
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "GaN-on-Si"
+then_level = 1
+then_ids = "MBE-epitaxial,CVD-6chamber"
+
+# High-NA EUV pairs with ALE for sub-8nm critical etch
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "High-NA-EUV"
+then_level = 3
+then_ids = "ALE-atomic-layer,RIE-6gas"
+
+# DSA self-assembly needs specific etch for pattern transfer
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "DSA-self-assembly"
+then_level = 3
+then_ids = "RIE-6gas,ALE-atomic-layer"
+
+# Si-450mm limited lithography ecosystem (no High-NA EUV yet)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Si-450mm"
+then_level = 2
+then_ids = "High-NA-EUV"
+
+# Ge-substrate needs low-temperature processing
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ge-substrate"
+then_level = 4
+then_ids = "Laser-anneal,Plasma-doping"
+
+# ALD-12cycle best for high-k gate stacks with ALE etch
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "ALD-12cycle"
+then_level = 3
+then_ids = "ALE-atomic-layer"
+
+# Ion-mill primarily for MRAM, pairs with PVD metal deposition
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Ion-mill"
+then_level = 1
+then_ids = "PVD-sputter"
+
+# In-situ doping requires MBE or CVD process
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "In-situ-doping"
+then_level = 1
+then_ids = "MBE-epitaxial,CVD-6chamber"

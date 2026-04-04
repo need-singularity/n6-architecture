@@ -1,0 +1,383 @@
+# =============================================================
+# MUSIC-NOTATION DSE Domain Definition
+# n=6 기반 음악 기보법 — 오선 sopfr=5 + 음자리표 tau=4 + 음표 n=6 종
+# Based on 80 CLEFNOTE+NOTESHAPE hypotheses in TECS-L
+# Chain: Staff -> Clef -> NoteValue -> Dynamics -> Layout
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "music-notation"
+desc = "Ultimate Music Notation DSE -- staff sopfr=5 + clef tau=4 + notes n=6"
+levels = ["Staff", "Clef", "NoteValue", "Dynamics", "Layout"]
+vision = "n=6 music notation -- FiveLineStaff sopfr=5 + tau=4 clefs + n=6 note values"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Staff (오선 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Staff"
+
+[[candidate]]
+level  = 0
+id     = "FiveLineStaff"
+label  = "5선 오선 (sopfr=5 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.80
+notes  = "lines=5=sopfr EXACT, spaces=4=tau EXACT, ledger=unlimited, standard=true"
+
+[[candidate]]
+level  = 0
+id     = "GrandStaff"
+label  = "대보표 phi=2 (높은/낮은)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.60
+cost   = 0.70
+notes  = "staves=2=phi EXACT, lines=10=sigma-phi EXACT, range=full, standard=true"
+
+[[candidate]]
+level  = 0
+id     = "TablatureN6"
+label  = "타브 기타 n=6 줄 EXACT"
+n6     = 1.00
+perf   = 0.70
+power  = 0.75
+cost   = 0.85
+notes  = "strings=6=n EXACT, frets=24=J2 EXACT, range=guitar, standard=true"
+
+[[candidate]]
+level  = 0
+id     = "PercussionStaff"
+label  = "타악기 보표 phi=2 (소리/무음)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.80
+cost   = 0.90
+notes  = "modes=2=phi EXACT, lines=5=sopfr, range=percussion, standard=true"
+
+[[candidate]]
+level  = 0
+id     = "LeadSheet"
+label  = "리드 시트 (멜로디+코드) n/phi=3 요소"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "elements=3=n/phi EXACT, lines=5=sopfr EXACT, range=melody+chord, standard=true"
+
+[[candidate]]
+level  = 0
+id     = "ModernGraphic"
+label  = "현대 그래픽 기보 tau=4 파라미터"
+n6     = 0.50
+perf   = 0.60
+power  = 0.65
+cost   = 0.60
+notes  = "params=4=tau EXACT, lines=variable, range=experimental, standard=false"
+
+# =============================================================
+# Level 1: Clef (음자리표) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Clef"
+
+[[candidate]]
+level  = 1
+id     = "MainClefsTau"
+label  = "주요 음자리표 tau=4 (높은/낮은/알토/테너) EXACT"
+n6     = 1.00
+perf   = 0.95
+power  = 0.80
+cost   = 0.85
+notes  = "clefs=4=tau EXACT, coverage=95%, standard=true, historical=true"
+
+[[candidate]]
+level  = 1
+id     = "CClefPositions"
+label  = "C음자리표 sopfr=5 위치 EXACT"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "positions=5=sopfr EXACT, flexibility=high, standard=true, historical=true"
+
+[[candidate]]
+level  = 1
+id     = "TotalClefSystem"
+label  = "전체 음자리표 n=6 시스템"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "total=6=n EXACT (treble/bass/alto/tenor/mezzo-soprano/soprano), coverage=100%"
+
+[[candidate]]
+level  = 1
+id     = "OctaveClef"
+label  = "8va/8vb 옥타브 이동 sigma-tau=8"
+n6     = 0.75
+perf   = 0.70
+power  = 0.80
+cost   = 0.85
+notes  = "variants=8=sigma-tau EXACT, range_extend=true, standard=true"
+
+[[candidate]]
+level  = 1
+id     = "PercussionClef"
+label  = "타악기 음자리표 phi=2"
+n6     = 0.50
+perf   = 0.60
+power  = 0.85
+cost   = 0.90
+notes  = "types=2=phi EXACT, range=percussion, standard=true"
+
+[[candidate]]
+level  = 1
+id     = "TabClef"
+label  = "TAB 음자리표 n=6 줄"
+n6     = 1.00
+perf   = 0.65
+power  = 0.85
+cost   = 0.90
+notes  = "strings=6=n EXACT, range=guitar/bass, standard=true"
+
+# =============================================================
+# Level 2: NoteValue (음표 값) -- 6 candidates
+# =============================================================
+[[level]]
+name = "NoteValue"
+
+[[candidate]]
+level  = 2
+id     = "BasicNotes6"
+label  = "기본 음표 n=6 (온/2분/4분/8분/16분/32분) EXACT"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.90
+notes  = "values=6=n EXACT, ratio=2=phi EXACT (each halves), standard=true"
+
+[[candidate]]
+level  = 2
+id     = "FilledNotesTau"
+label  = "채운 음표 tau=4 종 EXACT"
+n6     = 0.75
+perf   = 0.80
+power  = 0.85
+cost   = 0.90
+notes  = "filled=4=tau EXACT (4분/8분/16분/32분), head=filled, standard=true"
+
+[[candidate]]
+level  = 2
+id     = "OpenNotesPhi"
+label  = "빈 음표 phi=2 종 EXACT"
+n6     = 0.75
+perf   = 0.75
+power  = 0.90
+cost   = 0.90
+notes  = "open=2=phi EXACT (온/2분), head=open, standard=true"
+
+[[candidate]]
+level  = 2
+id     = "DottedRatio3_2"
+label  = "점음표 3:2 비율 (n/phi=3 : phi=2)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.80
+cost   = 0.85
+notes  = "ratio=3:2, multiplier=1.5=n/tau, dots=3=n/phi max, standard=true"
+
+[[candidate]]
+level  = 2
+id     = "RestValues"
+label  = "쉼표 (음표와 1:1 대응)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.85
+cost   = 0.90
+notes  = "rests=6=n (mirroring notes), silence=true, standard=true"
+
+[[candidate]]
+level  = 2
+id     = "TripletSubdiv"
+label  = "3연음 세분화 n/phi=3"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "subdivision=3=n/phi EXACT, tuplets=true, standard=true"
+
+# =============================================================
+# Level 3: Dynamics (셈여림) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Dynamics"
+
+[[candidate]]
+level  = 3
+id     = "DynamicLevels6"
+label  = "셈여림 n=6 단계 (ppp~fff)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.85
+notes  = "levels=6=n EXACT (ppp/pp/p/f/ff/fff), range=full, standard=true"
+
+[[candidate]]
+level  = 3
+id     = "Crescendo"
+label  = "크레셴도/디크레셴도 phi=2"
+n6     = 0.50
+perf   = 0.75
+power  = 0.85
+cost   = 0.90
+notes  = "directions=2=phi EXACT, gradual=true, standard=true"
+
+[[candidate]]
+level  = 3
+id     = "AccentN4"
+label  = "악센트 tau=4 종 (>, ^, sfz, fp)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.80
+cost   = 0.85
+notes  = "accents=4=tau EXACT, attack=varied, standard=true"
+
+[[candidate]]
+level  = 3
+id     = "TempoN6"
+label  = "템포 n=6 범주 (Largo~Presto)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "tempos=6=n EXACT (Largo/Adagio/Andante/Moderato/Allegro/Presto), standard=true"
+
+[[candidate]]
+level  = 3
+id     = "Articulation"
+label  = "아티큘레이션 sopfr=5 종"
+n6     = 0.75
+perf   = 0.80
+power  = 0.80
+cost   = 0.85
+notes  = "types=5=sopfr EXACT (legato/staccato/tenuto/marcato/portato), standard=true"
+
+[[candidate]]
+level  = 3
+id     = "ExpressionMark"
+label  = "표현 기호 sigma=12 종류"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "marks=12=sigma EXACT, expressive=full, standard=true"
+
+# =============================================================
+# Level 4: Layout (악보 레이아웃) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Layout"
+
+[[candidate]]
+level  = 4
+id     = "ScoreOrder"
+label  = "총보 배치 tau=4 군 (목관/금관/타악/현)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.65
+cost   = 0.70
+notes  = "groups=4=tau EXACT, parts=variable, orchestral=true, standard=true"
+
+[[candidate]]
+level  = 4
+id     = "PartsExtraction"
+label  = "파트 추출 sigma=12 파트"
+n6     = 0.80
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "parts=12=sigma EXACT, extraction=auto, standard=true"
+
+[[candidate]]
+level  = 4
+id     = "Engraving"
+label  = "활판/디지털 phi=2 아날로그/디지털"
+n6     = 0.50
+perf   = 0.80
+power  = 0.75
+cost   = 0.65
+notes  = "modes=2=phi EXACT, quality=high, standard=true"
+
+[[candidate]]
+level  = 4
+id     = "MusicXML"
+label  = "MusicXML 표준"
+n6     = 0.40
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "interchange=true, xml_based=true, universal=true, standard=true"
+
+[[candidate]]
+level  = 4
+id     = "Braille"
+label  = "점자 악보 n=6 점"
+n6     = 1.00
+perf   = 0.60
+power  = 0.85
+cost   = 0.85
+notes  = "dots=6=n EXACT, accessibility=true, braille_cell=6=n EXACT, standard=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# GrandStaff requires MainClefsTau (grand staff uses treble+bass clefs)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "GrandStaff"
+then_level = 1
+then_ids   = "MainClefsTau"
+
+# TablatureN6 requires TabClef (tab needs tab clef)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "TablatureN6"
+then_level = 1
+then_ids   = "TabClef"
+
+# FilledNotesTau incompatible with OpenNotesPhi (exclusive types at same level)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "FilledNotesTau"
+then_level = 2
+then_ids   = "OpenNotesPhi"
+
+# PercussionStaff requires PercussionClef
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "PercussionStaff"
+then_level = 1
+then_ids   = "PercussionClef"
+
+# ModernGraphic incompatible with ScoreOrder (non-standard layout)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "ModernGraphic"
+then_level = 4
+then_ids   = "ScoreOrder"

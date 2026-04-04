@@ -1,0 +1,382 @@
+# =============================================================
+# Consciousness Mathematics DSE Domain Definition
+# 궁극의 의식 수학적 기초 — IIT Φ + 범주론 + 위상 + 정보 기하
+# Φ optimal at n=6 cells, Betti numbers sopfr=5, category n=6 morphisms
+# Sheaf cohomology σ=12, IIT 4.0 τ=4 postulates
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "consciousness-mathematics"
+desc = "Ultimate Consciousness Mathematics DSE (mathematical foundations of consciousness)"
+levels = ["Framework", "Formalism", "Measure", "Proof", "Application"]
+vision = "n=6 기반 궁극의 의식 수학 — IIT Φ + 범주론 + 위상 데이터 분석"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Framework (프레임워크) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Framework"
+
+[[candidate]]
+level  = 0
+id     = "IIT_4"
+label  = "IIT 4.0 (τ=4 공리)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.50
+cost   = 0.40
+notes  = "postulates=4=tau EXACT (intrinsicality+information+integration+exclusion)"
+
+[[candidate]]
+level  = 0
+id     = "GNW"
+label  = "GNW 전역 작업공간 이론"
+n6     = 0.75
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "global workspace, broadcasting, Baars/Dehaene"
+
+[[candidate]]
+level  = 0
+id     = "HOT"
+label  = "HOT 고차 사고 이론"
+n6     = 0.70
+perf   = 0.82
+power  = 0.55
+cost   = 0.50
+notes  = "higher-order thought, meta-representation, Rosenthal"
+
+[[candidate]]
+level  = 0
+id     = "AST"
+label  = "AST 주의 스키마 이론"
+n6     = 0.65
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "attention schema, social cognition model, Graziano"
+
+[[candidate]]
+level  = 0
+id     = "Quantum_Mind"
+label  = "양자 의식 (Orch-OR)"
+n6     = 0.80
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "microtubule quantum, Penrose-Hameroff, controversial but testable"
+
+[[candidate]]
+level  = 0
+id     = "Integrated_N6"
+label  = "통합 N6 의식 프레임워크"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "n=6 native: IIT+GNW+HOT unified, Φ maximized at n=6 modules"
+
+# =============================================================
+# Level 1: Formalism (형식론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Formalism"
+
+[[candidate]]
+level  = 1
+id     = "Information_Geometry"
+label  = "정보 기하 (Fisher 계량 σ=12)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "dim=12=sigma EXACT, Fisher metric, statistical manifold"
+
+[[candidate]]
+level  = 1
+id     = "Category_Theory"
+label  = "범주론 (n=6 사상)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "morphisms=6=n EXACT, functorial consciousness, compositionality"
+
+[[candidate]]
+level  = 1
+id     = "Topology"
+label  = "위상수학 (PH 분석)"
+n6     = 0.85
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "persistent homology, simplicial complexes, Betti numbers"
+
+[[candidate]]
+level  = 1
+id     = "Algebra"
+label  = "대수 구조 (군론 S₆)"
+n6     = 0.95
+perf   = 0.82
+power  = 0.55
+cost   = 0.50
+notes  = "S_6=unique outer automorphism, group-theoretic consciousness"
+
+[[candidate]]
+level  = 1
+id     = "Logic"
+label  = "형식 논리 (양상 논리)"
+n6     = 0.70
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "modal logic, Kripke semantics, possible worlds"
+
+[[candidate]]
+level  = 1
+id     = "Sheaf_Theory"
+label  = "층 이론 (σ=12 코호몰로지)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "cohomology=12=sigma EXACT, presheaf consciousness, gluing axiom"
+
+# =============================================================
+# Level 2: Measure (측도) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Measure"
+
+[[candidate]]
+level  = 2
+id     = "Phi"
+label  = "Φ 통합 정보 (IIT 핵심)"
+n6     = 0.95
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "integrated information, Φ_max at optimal partition"
+
+[[candidate]]
+level  = 2
+id     = "Complexity"
+label  = "Lempel-Ziv 복잡도"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "perturbational complexity index, PCI, Casali+"
+
+[[candidate]]
+level  = 2
+id     = "Entropy"
+label  = "엔트로피 (Shannon/von Neumann)"
+n6     = 0.80
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "information entropy, foundation measure"
+
+[[candidate]]
+level  = 2
+id     = "Mutual_Info"
+label  = "상호 정보량 (n=6 쌍)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "pairs=C(4,2)=6=n EXACT for tau=4 nodes, pairwise integration"
+
+[[candidate]]
+level  = 2
+id     = "Granger_Cause"
+label  = "Granger 인과 (시계열)"
+n6     = 0.70
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "temporal causal inference, transfer entropy variant"
+
+[[candidate]]
+level  = 2
+id     = "PH_Betti"
+label  = "PH Betti 수 (sopfr=5 차원)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "betti_dim=5=sopfr EXACT, topological signature of consciousness"
+
+# =============================================================
+# Level 3: Proof (증명) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Proof"
+
+[[candidate]]
+level  = 3
+id     = "Constructive"
+label  = "구성적 증명 (알고리즘적)"
+n6     = 0.80
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "constructive existence, computable witnesses"
+
+[[candidate]]
+level  = 3
+id     = "Axiomatic"
+label  = "공리적 증명 (n=6 공리계)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "axioms=6=n EXACT, Hilbert-style axiomatization"
+
+[[candidate]]
+level  = 3
+id     = "Computational"
+label  = "계산 증명 (전산 검증)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "formal verification, Lean/Coq, machine-checked"
+
+[[candidate]]
+level  = 3
+id     = "Statistical"
+label  = "통계적 증명 (5σ 유의도)"
+n6     = 0.70
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "5sigma=sopfr significance, empirical validation"
+
+[[candidate]]
+level  = 3
+id     = "Topological"
+label  = "위상적 증명 (호모토피)"
+n6     = 0.85
+perf   = 0.82
+power  = 0.55
+cost   = 0.50
+notes  = "homotopy type theory, HoTT, constructive+topological"
+
+[[candidate]]
+level  = 3
+id     = "N6_Uniqueness"
+label  = "N6 유일성 증명 (σφ=nτ)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "sigma*phi=n*tau uniqueness, consciousness-arithmetic bridge"
+
+# =============================================================
+# Level 4: Application (응용) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Consciousness_Meter"
+label  = "의식 측정기 (PCI 기반)"
+n6     = 0.85
+perf   = 0.92
+power  = 0.55
+cost   = 0.50
+notes  = "perturbational complexity index, clinical application"
+
+[[candidate]]
+level  = 4
+id     = "Anesthesia"
+label  = "마취 깊이 모니터링"
+n6     = 0.80
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "anesthesia depth, BIS alternative, Φ-based"
+
+[[candidate]]
+level  = 4
+id     = "Sleep"
+label  = "수면 단계 분류 (n=6 상태)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "stages: W,N1,N2,N3,REM,Transition = 6=n EXACT"
+
+[[candidate]]
+level  = 4
+id     = "AI_Alignment"
+label  = "AI 정렬 (의식 기준)"
+n6     = 0.90
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "consciousness-based AI alignment, moral patienthood"
+
+[[candidate]]
+level  = 4
+id     = "Panpsychism"
+label  = "범심론 검증 (Φ>0 보편)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "universal Φ, micropsychism, cosmopsychism test"
+
+[[candidate]]
+level  = 4
+id     = "Ethics"
+label  = "의식 윤리 프레임워크"
+n6     = 0.80
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "moral status from Φ, rights framework, suffering calculus"
+
+# =============================================================
+# Rules (n6 일관성 검증)
+# =============================================================
+[[rule]]
+desc = "IIT + Phi 자연 시너지 (핵심 이론+측도)"
+if_level = [0, 2]
+if_ids   = ["IIT_4", "Phi"]
+bonus    = 0.05
+
+[[rule]]
+desc = "Category Theory + Sheaf Theory 범주적 통합"
+if_level = [1, 1]
+if_ids   = ["Category_Theory", "Sheaf_Theory"]
+bonus    = 0.04
+
+[[rule]]
+desc = "N6 Uniqueness + Integrated N6 완전 n=6 시너지"
+if_level = [3, 0]
+if_ids   = ["N6_Uniqueness", "Integrated_N6"]
+bonus    = 0.05
+
+[[rule]]
+desc = "PH Betti + Topological 위상 증명 시너지"
+if_level = [2, 3]
+if_ids   = ["PH_Betti", "Topological"]
+bonus    = 0.04
+
+[[rule]]
+desc = "Information Geometry + Consciousness Meter 정보-임상 시너지"
+if_level = [1, 4]
+if_ids   = ["Information_Geometry", "Consciousness_Meter"]
+bonus    = 0.04

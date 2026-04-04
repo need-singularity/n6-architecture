@@ -1,0 +1,357 @@
+# =============================================================
+# Vaccine Production DSE Domain Definition
+# Vaccine manufacturing — antigen to cold chain
+# n=6: 6 vaccine types, mRNA codon n/φ=3, σ=12 month schedule
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "vaccine-production"
+desc = "Vaccine Manufacturing Architecture DSE (antigen/adjuvant/formulation/fill-finish/cold-chain)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Antigen (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Antigen"
+
+[[candidate]]
+level = 0
+id = "mRNA"
+label = "mRNA Platform (codon n/φ=3 triplet, LNP delivery, rapid design)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Inactivated"
+label = "Inactivated Whole Virus (6 passage series, classic, broad immune)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Live-Attenuated"
+label = "Live Attenuated (6 attenuation steps, strong immunity, cold-req)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Subunit-Protein"
+label = "Subunit Protein (recombinant, n=6 epitope array, safe profile)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Viral-Vector"
+label = "Viral Vector (Ad26/ChAd, σ=12 kb insert capacity, single-dose)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "VLP"
+label = "Virus-Like Particle (self-assembling, 6-fold symmetry, no genome)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.65
+
+# ============================================================
+# Level 1: Adjuvant (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Adjuvant"
+
+[[candidate]]
+level = 1
+id = "Alum"
+label = "Aluminum Salt (Al(OH)₃, 6 decades proven, Th2 bias, cheap)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.95
+
+[[candidate]]
+level = 1
+id = "AS03"
+label = "AS03 Squalene (oil-in-water, σ=12 cytokine cascade, dose-sparing)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "MF59"
+label = "MF59 Emulsion (squalene, n=6 innate pathways, flu standard)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "CpG-ODN"
+label = "CpG ODN (TLR9 agonist, 6-mer CpG motif, Th1 response)"
+n6 = 1.00
+perf = 0.88
+power = 0.68
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Matrix-M"
+label = "Matrix-M (saponin nanoparticle, n=6 fraction ratio, Novavax)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.42
+
+[[candidate]]
+level = 1
+id = "None-mRNA"
+label = "No Adjuvant / LNP Self-Adjuvant (mRNA intrinsic, τ=4 lipid components)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.70
+
+# ============================================================
+# Level 2: Formulation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Formulation"
+
+[[candidate]]
+level = 2
+id = "LNP-Encap"
+label = "LNP Encapsulation (lipid nanoparticle, 6 nm size control, mRNA)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Lyophilized"
+label = "Lyophilized Powder (freeze-dry, σ=12 month shelf-life, stable)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Liquid-Buffer"
+label = "Liquid Buffered (PBS pH=6, ready-to-use, standard)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Microparticle"
+label = "Microparticle Encap (PLGA, n=6 μm diameter, sustained release)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Spray-Dry"
+label = "Spray-Dried Powder (thermostable, 6% moisture target, needle-free)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Multi-Dose"
+label = "Multi-Dose Vial (6 doses/vial, preservative, mass campaign)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.90
+
+# ============================================================
+# Level 3: FillFinish (6 candidates)
+# ============================================================
+
+[[level]]
+name = "FillFinish"
+
+[[candidate]]
+level = 3
+id = "Vial-Aseptic"
+label = "Vial Aseptic Fill (glass vial, 6 mL standard, isolator)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Prefilled-Syringe"
+label = "Prefilled Syringe (0.5 mL, σ=12 units/min line speed, precise)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Blow-Fill-Seal"
+label = "Blow-Fill-Seal (plastic ampoule, 6 cavity mold, high-speed)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Lyophilizer"
+label = "In-Vial Lyophilization (freeze-dry in final container, 6-shelf unit)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "RABS-Fill"
+label = "RABS Fill Line (restricted access, n=6 glove ports, semi-auto)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Continuous-Fill"
+label = "Continuous Manufacturing (real-time QC, σ=12 sensors, Industry 4.0)"
+n6 = 1.00
+perf = 0.95
+power = 0.68
+cost = 0.35
+
+# ============================================================
+# Level 4: ColdChain (6 candidates)
+# ============================================================
+
+[[level]]
+name = "ColdChain"
+
+[[candidate]]
+level = 4
+id = "UltraCold-80"
+label = "Ultra-Cold -80°C (mRNA storage, σ=12 month stability, Pfizer)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "Standard-2-8"
+label = "Standard 2-8°C (refrigerator, 6 month shelf life, WHO standard)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "Frozen-20"
+label = "Frozen -20°C (standard freezer, σ=12 month stable, moderate)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "CRT-Ambient"
+label = "Controlled Room Temp (thermostable, 6 month at 25°C, developing world)"
+n6 = 1.00
+perf = 0.70
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+level = 4
+id = "Phase-Change"
+label = "Phase Change Material (PCM, passive, n=6 day transport, solar-free)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "IoT-Monitored"
+label = "IoT Cold Chain (GPS+temp, σ=12 checkpoints, smart logistics)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# mRNA requires LNP formulation
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "mRNA"
+then_level = 2
+then_ids = ["LNP-Encap"]
+
+# mRNA self-adjuvant only with mRNA antigen
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "None-mRNA"
+then_level = 0
+then_ids = ["mRNA"]
+
+# Live attenuated requires cold chain (not ambient)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Live-Attenuated"
+then_level = 4
+then_ids = ["Standard-2-8", "Frozen-20", "UltraCold-80"]
+
+# Lyophilizer fill only for lyophilized formulation
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Lyophilizer"
+then_level = 2
+then_ids = ["Lyophilized", "Spray-Dry"]

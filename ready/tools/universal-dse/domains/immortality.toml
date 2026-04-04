@@ -1,0 +1,412 @@
+# =============================================================
+# IMMORTALITY DSE Domain Definition
+# 궁극의 불멸 아키텍처 — n=6 기반 노화 역전 + 의식 업로드 + 나노의학
+# 텔로미어 TTAGGG=6bp + Yamanaka tau=4 + 커넥톰 J2=24
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "immortality"
+desc = "Ultimate Immortality DSE — Aging Reversal + Consciousness Upload + Nanomedical Preservation"
+levels = ["Aging", "Reversal", "Upload", "Preservation", "Transcendence"]
+vision = "n=6 기반 궁극의 불멸 — 노화 역전 + 의식 업로드 + 텔로미어 n=6 + 나노의학"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Aging (노화 메커니즘) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Aging"
+
+[[candidate]]
+level  = 0
+id     = "TelomereN6"
+label  = "텔로미어 TTAGGG=6bp n=6 EXACT"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "TTAGGG=6bp=n EXACT, telomerase activation target, aging biomarker gold standard"
+
+[[candidate]]
+level  = 0
+id     = "HayflickN6"
+label  = "Hayflick 한계 ~60=sigma*sopfr 세포분열"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "limit~60=sigma*sopfr CLOSE, replicative senescence, fibroblast standard"
+
+[[candidate]]
+level  = 0
+id     = "Senescence"
+label  = "세포노화 tau=4 유형"
+n6     = 1.00
+perf   = 0.75
+power  = 0.50
+cost   = 0.55
+notes  = "types=4=tau EXACT: replicative/oncogene/stress/developmental, SASP secretome"
+
+[[candidate]]
+level  = 0
+id     = "MitochondrialDecay"
+label  = "미토콘드리아 감퇴 phi=2 ROS"
+n6     = 0.75
+perf   = 0.70
+power  = 0.65
+cost   = 0.40
+notes  = "ROS_types=2=phi EXACT (superoxide/H2O2), electron transport chain, mtDNA mutations"
+
+[[candidate]]
+level  = 0
+id     = "EpigeneticClock"
+label  = "후성유전 시계 sigma=12 마커"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "markers=12=sigma EXACT, Horvath/Hannum clock, CpG methylation, biological age"
+
+[[candidate]]
+level  = 0
+id     = "Inflammaging"
+label  = "만성 염증 sopfr=5 사이토카인"
+n6     = 0.75
+perf   = 0.65
+power  = 0.60
+cost   = 0.45
+notes  = "cytokines=5=sopfr EXACT (TNF-a/IL-6/IL-1b/CRP/NF-kB), chronic inflammation driver"
+
+# =============================================================
+# Level 1: Reversal (노화 역전) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Reversal"
+
+[[candidate]]
+level  = 1
+id     = "Yamanaka4"
+label  = "야마나카 인자 tau=4 EXACT: Oct4/Sox2/Klf4/cMyc"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "factors=4=tau EXACT, iPSC reprogramming, Nobel 2012, partial reprogramming in vivo"
+
+[[candidate]]
+level  = 1
+id     = "Senolytics"
+label  = "세놀리틱스 phi=2 선택/파괴"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "modes=2=phi EXACT (select/destroy), dasatinib+quercetin, senescent cell clearance"
+
+[[candidate]]
+level  = 1
+id     = "NAD_Boost"
+label  = "NAD+ 보충 NMN/NR"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "pathways=3, sirtuin activation, mitochondrial function, age-related decline"
+
+[[candidate]]
+level  = 1
+id     = "Rapamycin"
+label  = "라파마이신 mTOR 억제"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "mTOR_complexes=2=phi EXACT, autophagy induction, ITP lifespan extension"
+
+[[candidate]]
+level  = 1
+id     = "BloodFactors"
+label  = "혈액 인자 n=6 핵심 인자"
+n6     = 0.83
+perf   = 0.70
+power  = 0.55
+cost   = 0.50
+notes  = "factors=6=n EXACT, parabiosis, GDF11/GDF15/TIMP2/oxytocin/klotho/MANF"
+
+[[candidate]]
+level  = 1
+id     = "GeneTherapyN6"
+label  = "유전자 치료 n=6 타겟"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "targets=6=n EXACT, TERT/SIRT1/FOXO3/APOE/CETP/klotho, AAV delivery"
+
+# =============================================================
+# Level 2: Upload (의식 업로드) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Upload"
+
+[[candidate]]
+level  = 2
+id     = "BrainScan"
+label  = "뇌 스캔 sigma=12 해상도 레벨"
+n6     = 0.83
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "resolution_levels=12=sigma EXACT, fMRI/MEG/EEG/PET/NIRS to nanoscale"
+
+[[candidate]]
+level  = 2
+id     = "Connectome"
+label  = "커넥톰 매핑 J2=24 뇌영역"
+n6     = 0.83
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "regions=24=J2 EXACT, Brodmann areas grouped, synaptic connectivity matrix"
+
+[[candidate]]
+level  = 2
+id     = "Emulation"
+label  = "뉴런 에뮬레이션 sigma-tau=8 레벨"
+n6     = 0.83
+perf   = 0.75
+power  = 0.40
+cost   = 0.30
+notes  = "levels=8=sigma-tau EXACT, molecule/synapse/neuron/column/area/lobe/hemisphere/whole"
+
+[[candidate]]
+level  = 2
+id     = "GradualReplace"
+label  = "점진적 교체 phi=2 생체/실리콘"
+n6     = 0.75
+perf   = 0.70
+power  = 0.55
+cost   = 0.45
+notes  = "modes=2=phi EXACT (biological/silicon), neural lace, gradual neuron replacement"
+
+[[candidate]]
+level  = 2
+id     = "WholeBrainUpload"
+label  = "전뇌 업로드"
+n6     = 0.50
+perf   = 0.95
+power  = 0.35
+cost   = 0.25
+notes  = "complete mind transfer, requires petascale compute, identity continuity question"
+
+[[candidate]]
+level  = 2
+id     = "ConsciousnessTransfer"
+label  = "의식 전송 텔레파시"
+n6     = 0.50
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "brain-to-brain, quantum coherence hypothesis, ultimate goal, speculative"
+
+# =============================================================
+# Level 3: Preservation (보존) -- 6 candidates
+# =============================================================
+
+[[candidate]]
+level  = 2
+id     = "UploadN6"
+label  = "n=6 뇌 영역 업로드 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "brain_regions=n=6 EXACT, n6-region brain upload scanning"
+[[level]]
+name = "Preservation"
+
+[[candidate]]
+level  = 3
+id     = "Cryonics"
+label  = "극저온 보존 tau=4 단계"
+n6     = 0.83
+perf   = 0.70
+power  = 0.55
+cost   = 0.45
+notes  = "stages=4=tau EXACT (cool/perfuse/vitrify/store), Alcor/CI, -196C LN2"
+
+[[candidate]]
+level  = 3
+id     = "DigitalBackup"
+label  = "디지털 백업 sigma=12 체크포인트"
+n6     = 0.83
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "checkpoints=12=sigma EXACT, neural state snapshots, cloud redundancy"
+
+[[candidate]]
+level  = 3
+id     = "NanoRepair"
+label  = "나노 수리 n=6 나노봇 유형"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.30
+notes  = "types=6=n EXACT (repair/clean/deliver/monitor/construct/defend), molecular machines"
+
+[[candidate]]
+level  = 3
+id     = "OrganRegenN6"
+label  = "장기 재생 n=6 줄기세포 계통"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.40
+notes  = "lineages=6=n EXACT, iPSC-derived organoids, 3D bioprinting, scaffold engineering"
+
+[[candidate]]
+level  = 3
+id     = "BioBank"
+label  = "바이오뱅크 sopfr=5 보존 조건"
+n6     = 0.75
+perf   = 0.65
+power  = 0.65
+cost   = 0.55
+notes  = "conditions=5=sopfr EXACT (temp/humidity/light/O2/pH), tissue/DNA/cell banking"
+
+[[candidate]]
+level  = 3
+id     = "QuantumPreservation"
+label  = "양자 보존 phi=2 상태"
+n6     = 0.75
+perf   = 0.60
+power  = 0.35
+cost   = 0.25
+notes  = "states=2=phi EXACT (coherent/decoherent), quantum brain state preservation, speculative"
+
+# =============================================================
+# Level 4: Transcendence (초월) -- 5 candidates
+# =============================================================
+
+[[candidate]]
+level  = 3
+id     = "PreserveN6"
+label  = "n=6 줄기세포 계통 보존 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "lineages=n=6 EXACT, n6-lineage organ preservation"
+[[level]]
+name = "Transcendence"
+
+[[candidate]]
+level  = 4
+id     = "PostBiological"
+label  = "포스트생물학 mu=1 통합"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "unity=1=mu EXACT, post-biological existence, substrate-independent mind"
+
+[[candidate]]
+level  = 4
+id     = "CyberneticHybrid"
+label  = "사이보그 하이브리드 phi=2"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "modes=2=phi EXACT (bio/cyber), neural implants, prosthetic enhancement"
+
+[[candidate]]
+level  = 4
+id     = "DigitalImmortality"
+label  = "디지털 불멸"
+n6     = 0.67
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "full digital existence, infinite backup, cloud-based consciousness"
+
+[[candidate]]
+level  = 4
+id     = "MultiSubstrate"
+label  = "다중 기질 n=6 플랫폼"
+n6     = 0.83
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "platforms=6=n EXACT (bio/silicon/quantum/photonic/DNA/hybrid), substrate portability"
+
+[[candidate]]
+level  = 4
+id     = "CollectiveTranscendence"
+label  = "집단 초월"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.40
+notes  = "hive mind, collective consciousness, shared experience, Omega Point"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ConsciousnessTransfer requires Connectome (need brain map first)
+
+[[candidate]]
+level  = 4
+id     = "TranscendN6"
+label  = "n=6 인터페이스 초월 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "interfaces=n=6 EXACT, n6-interface transcendence system"
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "ConsciousnessTransfer"
+then_level = 2
+then_ids   = "Connectome"
+
+# WholeBrainUpload requires BrainScan
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "WholeBrainUpload"
+then_level = 2
+then_ids   = "BrainScan"
+
+# NanoRepair requires GeneTherapyN6 (nano repair uses gene therapy tech)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "NanoRepair"
+then_level = 1
+then_ids   = "GeneTherapyN6"
+
+# DigitalImmortality requires WholeBrainUpload or ConsciousnessTransfer
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "DigitalImmortality"
+then_level = 2
+then_ids   = "WholeBrainUpload,ConsciousnessTransfer"
+
+# PostBiological requires Emulation or WholeBrainUpload
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "PostBiological"
+then_level = 2
+then_ids   = "Emulation,WholeBrainUpload"

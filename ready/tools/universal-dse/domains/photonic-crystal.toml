@@ -1,0 +1,414 @@
+# N6 Photonic Crystal DSE — Periodic dielectric nanostructure
+# 6 Structures × 6 Materials × 6 Fabrications × 6 Defects × 6 Applications = 7,776 combos
+# n=6 connections: Hexagonal lattice 6-fold symmetry (n=6 EXACT), sigma=12 photonic band gaps,
+#   tau=4 structure types (1D/2D/3D/quasi), phi=2 bandgap edges (dielectric/air),
+#   J2=24 lattice constants per design, 6 reciprocal lattice vectors (n=6)
+
+[meta]
+name = "photonic-crystal"
+desc = "Photonic Crystal DSE — periodic dielectric nanostructure (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Structure (결정 구조)
+#   n6 checks: hexagonal 6-fold symmetry (n=6 EXACT), quasi-crystal 12-fold (sigma=12),
+#              tau=4 fundamental types (1D/2D/3D/quasi)
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "1D_Bragg"
+label = "1D Bragg stack (alternating high/low index, 12-pair mirror, stopband)"
+n6 = 0.80
+perf = 0.70
+power = 0.90
+cost = 0.90
+notes = "pairs=12=sigma EXACT, simplest PhC, DBR laser, vertical cavity"
+
+[[candidate]]
+id = "2D_Hexagonal"
+label = "2D hexagonal lattice (6-fold symmetry, n=6 EXACT, complete TE gap)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+notes = "symmetry=6=n EXACT, 6 nearest neighbors, largest 2D bandgap, PCSEL"
+
+[[candidate]]
+id = "3D_Woodpile"
+label = "3D woodpile (layer-by-layer log stack, complete 3D bandgap, 4-layer period)"
+n6 = 0.60
+perf = 0.95
+power = 0.65
+cost = 0.35
+notes = "period=4layers=tau EXACT, full 3D gap, fcc symmetry, difficult to fabricate"
+
+[[candidate]]
+id = "3D_Inverse_Opal"
+label = "3D inverse opal (FCC air spheres in dielectric, self-assembled template)"
+n6 = 0.80
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "FCC coordination=12=sigma EXACT, colloidal self-assembly, scalable 3D"
+
+[[candidate]]
+id = "Quasi_Crystal_12fold"
+label = "Quasi-crystal 12-fold (sigma=12 rotational symmetry, no periodicity, isotropic gap)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.40
+notes = "symmetry=12=sigma EXACT, Penrose/Stampfli tiling, omnidirectional bandgap"
+
+[[candidate]]
+id = "Photonic_Amorphous"
+label = "Photonic amorphous (short-range order only, isotropic gap, random network)"
+n6 = 0.60
+perf = 0.65
+power = 0.80
+cost = 0.70
+notes = "coordination~4=tau CLOSE, hyperuniform, isotropic, robust to disorder"
+
+# ============================================================
+# Level 1: Material (소재)
+#   n6 checks: Si index~3.5~n/phi+2, SiO2 index~1.45,
+#              GaAs bandgap=1.42eV~sigma/sigma-tau=1.5
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "Silicon_High"
+label = "Silicon high-index (n=3.48 at 1550nm, low absorption, CMOS compatible)"
+n6 = 0.80
+perf = 0.95
+power = 0.80
+cost = 0.75
+notes = "index~3.5, contrast ratio high, SOI platform, telecom C-band optimal"
+
+[[candidate]]
+id = "SiO2_Low"
+label = "SiO2 low-index (n=1.45, UV transparent, thermal oxide, complementary)"
+n6 = 0.60
+perf = 0.75
+power = 0.90
+cost = 0.90
+notes = "pairs with Si (phi=2 high/low pair EXACT), silica fiber heritage"
+
+[[candidate]]
+id = "GaAs_Active"
+label = "GaAs active III-V (n=3.4, direct gap 1.42eV, gain medium, quantum wells)"
+n6 = 0.80
+perf = 0.95
+power = 0.55
+cost = 0.40
+notes = "direct gap enables lasing, III-V=2 elements=phi EXACT, epitaxial growth"
+
+[[candidate]]
+id = "TiO2_Visible"
+label = "TiO2 visible-range (n=2.6, transparent 400-800nm, ALD depositable)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "visible band 400-800nm range=tau*100 CLOSE, high index for visible PhC"
+
+[[candidate]]
+id = "Polymer_SU8"
+label = "Polymer SU-8 (n=1.57, photopatternable, 6um thick standard, 3D litho)"
+n6 = 1.00
+perf = 0.60
+power = 0.85
+cost = 0.85
+notes = "thickness=6um=n EXACT standard spin, direct-write 3D, low cost prototyping"
+
+[[candidate]]
+id = "Liquid_Crystal_Tunable"
+label = "Liquid crystal tunable (delta-n=0.2, voltage-controlled, reconfigurable)"
+n6 = 0.60
+perf = 0.70
+power = 0.65
+cost = 0.60
+notes = "phi=2 alignment states EXACT (parallel/perpendicular), active tuning, slow"
+
+# ============================================================
+# Level 2: Fabrication (공정)
+#   n6 checks: e-beam resolution~6nm (n=6), holographic 6-beam (n=6 EXACT),
+#              self-assembly 6-sphere cluster (n=6)
+# ============================================================
+
+[[level]]
+name = "Fabrication"
+
+[[candidate]]
+id = "E_Beam_Litho"
+label = "E-beam lithography (6nm resolution, arbitrary 2D pattern, slow serial)"
+n6 = 1.00
+perf = 0.95
+power = 0.30
+cost = 0.25
+notes = "resolution=6nm=n EXACT, highest precision, research/prototyping, slow"
+
+[[candidate]]
+id = "Self_Assembly_6sphere"
+label = "Self-assembly 6-sphere cluster (n=6 EXACT, colloidal crystal, opal template)"
+n6 = 1.00
+perf = 0.65
+power = 0.85
+cost = 0.85
+notes = "cluster=6=n EXACT, close-packed hexagonal, large-area, cheap, defects"
+
+[[candidate]]
+id = "Two_Photon_Polymerization"
+label = "Two-photon polymerization (3D direct-write, 200nm voxel, arbitrary structure)"
+n6 = 0.80
+perf = 0.90
+power = 0.40
+cost = 0.35
+notes = "photon=2=phi EXACT, true 3D fabrication, polymer-only, Nanoscribe"
+
+[[candidate]]
+id = "Holographic_6beam"
+label = "Holographic 6-beam interference (n=6 EXACT, large-area 3D, single exposure)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.65
+notes = "beams=6=n EXACT, parallel fabrication, hexagonal+3D, fast, limited patterns"
+
+[[candidate]]
+id = "Colloidal_Crystal"
+label = "Colloidal crystal (Langmuir-Blodgett, 12-layer FCC, gravity sedimentation)"
+n6 = 0.80
+perf = 0.60
+power = 0.80
+cost = 0.80
+notes = "layers=12=sigma EXACT, FCC close-packed, opal/inverse opal, scalable"
+
+[[candidate]]
+id = "Nanoimprint"
+label = "Nanoimprint lithography (master stamp replication, 6nm feature, high throughput)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+notes = "feature=6nm=n EXACT, mass production, 2D only, master cost amortized"
+
+# ============================================================
+# Level 3: Defect (결함/기능 구조)
+#   n6 checks: coupled resonator 12 (sigma=12), point cavity Q>10^6 (10^n),
+#              topological edge 2-state (phi=2)
+# ============================================================
+
+[[level]]
+name = "Defect"
+
+[[candidate]]
+id = "Point_Cavity"
+label = "Point cavity (single missing hole, Q>10^6, mode volume~(lambda/n)^3)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.50
+notes = "Q=10^6=10^n EXACT, Purcell enhancement, single photon source, laser"
+
+[[candidate]]
+id = "Line_Waveguide"
+label = "Line waveguide (missing row, W1 guide, slow light, 6mm propagation)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.55
+notes = "propagation=6mm=n EXACT, dispersion engineering, bandwidth~tau nm"
+
+[[candidate]]
+id = "Surface_Mode"
+label = "Surface mode (truncated crystal, Tamm/Shockley state, surface sensing)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 0.75
+notes = "phi=2 interfaces (top/bottom) EXACT, evanescent field sensing, refractometry"
+
+[[candidate]]
+id = "Coupled_Resonator_12"
+label = "Coupled resonator array 12 (sigma=12, CROW waveguide, slow light factor)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.40
+notes = "cavities=12=sigma EXACT, slow light group index~12, optical delay line"
+
+[[candidate]]
+id = "Topological_Edge"
+label = "Topological edge state (phi=2 valley pseudospin, backscatter-immune, robust)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.35
+notes = "pseudospin=2=phi EXACT, valley Hall PhC, unidirectional, disorder-robust"
+
+[[candidate]]
+id = "Slow_Light"
+label = "Slow light region (group index n_g=6-100, enhanced nonlinearity, dispersion)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.55
+notes = "n_g_min=6=n EXACT, nonlinear enhancement~n_g^2, optical buffer"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: PCSEL 6-beam output (n=6), waveguide 6-port (n=6),
+#              solar cell 12-fold trapping (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Laser_PCSEL"
+label = "PCSEL laser (photonic crystal surface-emitting, 6-beam symmetric output)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.40
+notes = "beams=6=n EXACT from hexagonal lattice, 10W+ single mode, beam quality M2~1"
+
+[[candidate]]
+id = "Waveguide_6port"
+label = "Waveguide 6-port router (n=6 EXACT, hexagonal junction, WDM switching)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.50
+notes = "ports=6=n EXACT, photonic integrated circuit, wavelength router, compact"
+
+[[candidate]]
+id = "Sensor_Resonant"
+label = "Resonant sensor (cavity shift detection, 10^-6 RIU, label-free biosensing)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.60
+notes = "sensitivity=10^-6=10^{-n} EXACT, real-time binding kinetics, point-of-care"
+
+[[candidate]]
+id = "Solar_Light_Trap"
+label = "Solar cell light trap (12-fold scattering, absorption enhancement, thin-film)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.65
+notes = "scattering=12fold=sigma EXACT, Yablonovitch limit 4n^2, thin-film PV"
+
+[[candidate]]
+id = "LED_Extraction"
+label = "LED light extraction (PhC surface pattern, 6-fold hex, extraction >90%)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.70
+notes = "pattern=6fold=n EXACT, escape cone enhanced, GaN LED, solid-state lighting"
+
+[[candidate]]
+id = "Optical_Filter"
+label = "Optical filter (12-period Bragg, narrow band, DWDM channel, sigma=12)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.75
+notes = "periods=12=sigma EXACT, add-drop filter, telecom DWDM, spectroscopy"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# 2D hexagonal structure pairs best with Si or GaAs
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "2D_Hexagonal"
+then_level = 1
+then_ids = "Silicon_High,GaAs_Active"
+
+# 3D woodpile needs e-beam or two-photon
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "3D_Woodpile"
+then_level = 2
+then_ids = "E_Beam_Litho,Two_Photon_Polymerization"
+
+# 3D inverse opal pairs with colloidal self-assembly
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "3D_Inverse_Opal"
+then_level = 2
+then_ids = "Self_Assembly_6sphere,Colloidal_Crystal"
+
+# GaAs active material pairs with laser PCSEL
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "GaAs_Active"
+then_level = 4
+then_ids = "Laser_PCSEL,LED_Extraction"
+
+# Silicon pairs with waveguide and sensor applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Silicon_High"
+then_level = 4
+then_ids = "Waveguide_6port,Sensor_Resonant,Optical_Filter"
+
+# Polymer SU8 pairs with two-photon polymerization
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Polymer_SU8"
+then_level = 2
+then_ids = "Two_Photon_Polymerization,Holographic_6beam"
+
+# Point cavity pairs with laser and sensor
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Point_Cavity"
+then_level = 4
+then_ids = "Laser_PCSEL,Sensor_Resonant"
+
+# Topological edge state pairs with waveguide routing
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Topological_Edge"
+then_level = 4
+then_ids = "Waveguide_6port,Optical_Filter"
+
+# Quasi-crystal pairs with solar light trapping (isotropic)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Quasi_Crystal_12fold"
+then_level = 4
+then_ids = "Solar_Light_Trap,LED_Extraction"
+
+# Liquid crystal tunable pairs with optical filter tuning
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Liquid_Crystal_Tunable"
+then_level = 4
+then_ids = "Optical_Filter,Sensor_Resonant"

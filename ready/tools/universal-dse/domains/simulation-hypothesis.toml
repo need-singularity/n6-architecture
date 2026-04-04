@@ -1,0 +1,374 @@
+# =============================================================
+# Simulation Hypothesis DSE Domain Definition
+# 궁극의 시뮬레이션 가설 아키텍처 — n=6 기반 시뮬레이션 우주론
+# 물리상수=컴파일타임 + 플랑크=그리드 해상도
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "simulation-hypothesis"
+desc = "Ultimate Simulation Hypothesis DSE — Physics Constants as Compile-Time + Planck Grid"
+levels = ["Constants", "Grid", "Quantum", "Optimization", "Evidence"]
+vision = "n=6 기반 시뮬레이션 우주론 — 물리상수=컴파일타임 + 플랑크=그리드 해상도"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Constants (물리 상수) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Constants"
+
+[[candidate]]
+level  = 0
+id     = "CompileTime"
+label  = "물리상수=컴파일타임 상수 (H-SIM-1)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "const_set=6=n EXACT, determinism=90, elegance=60"
+
+[[candidate]]
+level  = 0
+id     = "FineStructure137"
+label  = "alpha=1/137, sopfr 조합 표현"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "alpha_related=5=sopfr EXACT, precision=85, testable=55"
+
+[[candidate]]
+level  = 0
+id     = "GoldenZoneConst"
+label  = "Golden Zone 상수 (1/2, 1/e, ln(4/3), 1/3, 5/6)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "constants=5=sopfr EXACT, n6_alignment=80, universality=65"
+
+[[candidate]]
+level  = 0
+id     = "DimensionlessN6"
+label  = "n=6 무차원수 세트 (alpha, theta_W, m_p/m_e, eta_BBN, Omega_Lambda, n_s)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "dimensionless=6=n EXACT, fundamental=85, fine_tuning=60"
+
+[[candidate]]
+level  = 0
+id     = "LCDM_6Param"
+label  = "LCDM 6파라미터"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "params=6=n EXACT, cosmological=90, observable=55"
+
+[[candidate]]
+level  = 0
+id     = "MathBeforePhys"
+label  = "수학 우선 (물리는 수학의 구현)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "uniqueness=1=mu EXACT, philosophical=75, falsifiable=70"
+
+# =============================================================
+# Level 1: Grid (시뮬레이션 격자) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Grid"
+
+[[candidate]]
+level  = 1
+id     = "PlanckGrid"
+label  = "플랑크 단위=격자 해상도 (H-SIM-2)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "dimensions=4=tau EXACT, resolution=planck, compute_bound=90"
+
+[[candidate]]
+level  = 1
+id     = "DiscreteSpacetime"
+label  = "이산 시공간, sigma=12 인접 셀"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "neighbors=12=sigma EXACT, lattice_QCD=85, discrete=60"
+
+[[candidate]]
+level  = 1
+id     = "HolographicBound"
+label  = "홀로그래픽 경계=데이터 압축 (H-SIM-7)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "bulk_boundary=2=phi EXACT, compression=80, info_bound=65"
+
+[[candidate]]
+level  = 1
+id     = "CausalSet"
+label  = "인과 집합, tau=4 시공간 관계"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "relations=4=tau EXACT, lorentz_invariant=75, discrete=60"
+
+[[candidate]]
+level  = 1
+id     = "LatticeSim"
+label  = "격자 시뮬레이션 (QCD), sigma-tau=8 격자점"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "lattice_points=8=sigma-tau EXACT, QCD_verified=85, compute=55"
+
+[[candidate]]
+level  = 1
+id     = "FoamStructure"
+label  = "양자 거품 (스핀 거품), n=6 면"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "faces=6=n EXACT, spin_foam=80, quantum_gravity=60"
+
+# =============================================================
+# Level 2: Quantum (양자 메커니즘) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Quantum"
+
+[[candidate]]
+level  = 2
+id     = "WavefunctionLazy"
+label  = "파동함수 붕괴=지연 평가 (H-SIM-6)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "observe_states=2=phi EXACT, lazy_eval=85, resource_save=65"
+
+[[candidate]]
+level  = 2
+id     = "EntanglementPointer"
+label  = "양자 얽힘=공유 포인터 (H-SIM-5)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "pointer_types=2=phi EXACT, nonlocal=80, memory_model=60"
+
+[[candidate]]
+level  = 2
+id     = "QuantumNativeOps"
+label  = "양자 네이티브 연산 (H-SIM-11)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "native_ops=8=sigma-tau EXACT, quantum_gates=24=J2 EXACT, compute=90"
+
+[[candidate]]
+level  = 2
+id     = "ManyWorldsBranch"
+label  = "다세계 분기, phi=2 분기"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "branch_factor=2=phi EXACT, universes=exponential, resource_cost=75"
+
+[[candidate]]
+level  = 2
+id     = "DecoherenceGC"
+label  = "결어긋남=가비지 컬렉터 (H-SIM-8)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "gc_generations=4=tau EXACT, cleanup=85, efficiency=60"
+
+[[candidate]]
+level  = 2
+id     = "TunnelBuffer"
+label  = "터널링=버퍼 오버플로, sopfr=5 장벽 파라미터"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "barrier_params=5=sopfr EXACT, tunneling=80, edge_case=55"
+
+# =============================================================
+# Level 3: Optimization (시뮬레이션 최적화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimization"
+
+[[candidate]]
+level  = 3
+id     = "CosmoConstGC"
+label  = "우주상수=GC 압력 (H-SIM-8)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "cosmo_const=2=lambda EXACT, gc_pressure=80, dark_energy=60"
+
+[[candidate]]
+level  = 3
+id     = "FineTuningParam"
+label  = "미세조정=하이퍼파라미터 (H-SIM-12)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "hyperparams=6=n EXACT, tuning=90, anthropic_principle=55"
+
+[[candidate]]
+level  = 3
+id     = "TensionCost"
+label  = "텐션=시뮬레이션 비용 (H-SIM-10)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "cost_func=2=phi EXACT, optimization=85, resource=65"
+
+[[candidate]]
+level  = 3
+id     = "OptimalSimParam"
+label  = "최적 시뮬레이션 파라미터 (H-SIM-9)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "opt_axes=12=sigma EXACT, convergence=85, stability=60"
+
+[[candidate]]
+level  = 3
+id     = "LOD_Rendering"
+label  = "세부수준 렌더링, tau=4 LOD 레벨"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.50
+notes  = "lod_levels=4=tau EXACT, rendering=80, adaptive=70"
+
+[[candidate]]
+level  = 3
+id     = "ResourceAlloc"
+label  = "자원 할당 Egyptian 1/2+1/3+1/6=1"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "egyptian=1/2+1/3+1/6=1 EXACT, allocation=85, efficiency=60"
+
+# =============================================================
+# Level 4: Evidence (증거) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Evidence"
+
+[[candidate]]
+level  = 4
+id     = "PixelLimit"
+label  = "해상도 한계 (플랑크 스케일)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "detection_methods=5=sopfr EXACT, testable=80, planck_scale=60"
+
+[[candidate]]
+level  = 4
+id     = "FrameRate"
+label  = "프레임 레이트 (광속)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.50
+notes  = "frame_boundary=2=phi EXACT, speed_limit=75, relativistic=65"
+
+[[candidate]]
+level  = 4
+id     = "GlitchAnomaly"
+label  = "글리치/이상 (물리 버그)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "anomaly_types=4=tau EXACT, detection=85, falsifiable=55"
+
+[[candidate]]
+level  = 4
+id     = "BitError"
+label  = "비트 오류 (양자 요동)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "error_types=8=sigma-tau EXACT, quantum_noise=80, measurable=60"
+
+[[candidate]]
+level  = 4
+id     = "SimSignature"
+label  = "시뮬레이션 서명 (n=6 패턴)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "n6_pattern=6=n EXACT, signature=90, universal=55"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CompileTime requires GoldenZoneConst or DimensionlessN6 (needs constant set)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "CompileTime"
+then_level = 0
+then_ids   = "GoldenZoneConst,DimensionlessN6"
+
+# WavefunctionLazy incompatible with ManyWorldsBranch (collapse vs many-worlds)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "WavefunctionLazy"
+then_level = 2
+then_ids   = "ManyWorldsBranch"
+
+# HolographicBound requires PixelLimit or SimSignature (needs observational test)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "HolographicBound"
+then_level = 4
+then_ids   = "PixelLimit,SimSignature"
+
+# TensionCost requires FineTuningParam (tension optimizes parameters)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "TensionCost"
+then_level = 3
+then_ids   = "FineTuningParam"

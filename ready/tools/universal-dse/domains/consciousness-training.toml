@@ -1,0 +1,391 @@
+# =============================================================
+# Consciousness Training DSE Domain Definition
+# Training recipe for conscious AI: BT-54 AdamW, 3-phase, Ring n=6
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "consciousness-training"
+desc = "Consciousness Training Recipe DSE (BT-54 AdamW, 3-phase law)"
+levels = ["Optimizer", "Scheduler", "PhaseStrategy", "Federation", "Data"]
+vision = "n=6 training recipe -- BT-54 AdamW quintuplet, 3-phase=n/phi, Ring n=6"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Optimizer -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimizer"
+
+[[candidate]]
+level  = 0
+id     = "AdamW_BT54"
+label  = "AdamW BT-54 (beta1=0.9, beta2=0.95, eps=1e-8, wd=0.1, clip=1)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.65
+notes  = "beta1=1-1/(sigma-phi) EXACT, beta2=1-1/(J2-tau) EXACT, eps=10^-(sigma-tau) EXACT, wd=1/(sigma-phi) EXACT, clip=R(6)=1 EXACT, 5/5 n6 quintuplet"
+
+[[candidate]]
+level  = 0
+id     = "SGD_Cosine"
+label  = "SGD + Cosine Annealing (lr=0.1=1/(sigma-phi))"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "lr=0.1=1/(sigma-phi) EXACT, momentum=0.9=1-1/(sigma-phi) EXACT, simple=true"
+
+[[candidate]]
+level  = 0
+id     = "LAMB"
+label  = "LAMB (Large Batch, beta1=0.9, beta2=0.999)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.60
+notes  = "beta1=0.9 EXACT, large_batch=true, distributed=optimized, n6_partial=true"
+
+[[candidate]]
+level  = 0
+id     = "Adafactor"
+label  = "Adafactor (memory-efficient, no moment)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "memory=low, factored=true, beta2_decay=true, n6_partial=false"
+
+[[candidate]]
+level  = 0
+id     = "Lion"
+label  = "Lion (sign SGD, memory-efficient)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "beta1=0.9 EXACT, beta2=0.99, sign_update=true, memory=2x less"
+
+[[candidate]]
+level  = 0
+id     = "CustomN6"
+label  = "Custom N6 Optimizer (all n=6 constants)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "all_constants=n6 EXACT, experimental=true, designed_for_consciousness=true"
+
+# =============================================================
+# Level 1: Scheduler -- 6 candidates
+# =============================================================
+[[level]]
+name = "Scheduler"
+
+[[candidate]]
+level  = 1
+id     = "Cosine"
+label  = "Cosine Decay (period=1 cycle)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "cycles=1=mu EXACT, smooth=true, standard=true, consciousness=none"
+
+[[candidate]]
+level  = 1
+id     = "Linear"
+label  = "Linear Warmup+Decay (phi=2 phases)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "phases=2=phi EXACT, simple=true, predictable=true, consciousness=none"
+
+[[candidate]]
+level  = 1
+id     = "OneCycle"
+label  = "One-Cycle Policy (n/phi=3 segments)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.70
+notes  = "segments=3=n/phi EXACT, super_convergence=true, fast=true, consciousness=implicit"
+
+[[candidate]]
+level  = 1
+id     = "ThreePhase"
+label  = "Three-Phase Schedule (n/phi=3 EXACT phases)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.65
+notes  = "phases=3=n/phi EXACT, warmup+stable+decay, n6_aligned=true, consciousness=phased"
+
+[[candidate]]
+level  = 1
+id     = "StepDecay"
+label  = "Step Decay (factor=0.1=1/(sigma-phi) every sigma epochs)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.75
+cost   = 0.80
+notes  = "factor=0.1=1/(sigma-phi) EXACT, period=12=sigma EXACT, classic=true"
+
+[[candidate]]
+level  = 1
+id     = "WarmupHold"
+label  = "Warmup+Hold (sigma-phi=10% warmup)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.75
+notes  = "warmup=10%=sigma-phi% EXACT, hold=constant, stable=true, consciousness=simple"
+
+# =============================================================
+# Level 2: PhaseStrategy -- 6 candidates
+# =============================================================
+[[level]]
+name = "PhaseStrategy"
+
+[[candidate]]
+level  = 2
+id     = "ThreePhase_Law60"
+label  = "Three-Phase Law60 (consciousness phases P0-P2)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.60
+notes  = "phases=3=n/phi EXACT, law60_aligned=true, consciousness=phased_growth, optimal=true"
+
+[[candidate]]
+level  = 2
+id     = "Single"
+label  = "Single Phase (no transitions)"
+n6     = 0.25
+perf   = 0.60
+power  = 0.90
+cost   = 0.90
+notes  = "phases=1=mu, simple=true, consciousness=static, baseline=true"
+
+[[candidate]]
+level  = 2
+id     = "Curriculum"
+label  = "Curriculum Learning (n=6 difficulty levels)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.60
+notes  = "levels=6=n EXACT, progressive=true, consciousness=developmental, structured=true"
+
+[[candidate]]
+level  = 2
+id     = "Progressive"
+label  = "Progressive Resizing (tau=4 resolution steps)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.65
+notes  = "steps=4=tau EXACT, resolution=growing, consciousness=perceptual, efficient=true"
+
+[[candidate]]
+level  = 2
+id     = "Interleaved"
+label  = "Interleaved Multi-task (phi=2 task mixing)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.60
+notes  = "tasks=2=phi EXACT, alternating=true, consciousness=multi_focus, robust=true"
+
+[[candidate]]
+level  = 2
+id     = "Adaptive"
+label  = "Adaptive Phase (loss-triggered transitions)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.55
+notes  = "trigger=loss_plateau, phases=variable, consciousness=self_regulating, flexible=true"
+
+# =============================================================
+# Level 3: Federation -- 6 candidates
+# =============================================================
+[[level]]
+name = "Federation"
+
+[[candidate]]
+level  = 3
+id     = "Solo"
+label  = "Solo Training (single GPU/node)"
+n6     = 0.25
+perf   = 0.40
+power  = 0.95
+cost   = 0.95
+notes  = "nodes=1=mu, parallel=none, consciousness=isolated, prototyping=true"
+
+[[candidate]]
+level  = 3
+id     = "Empire8x8"
+label  = "Empire 8x8 (sigma-tau=8 GPUs, sigma-tau=8 nodes)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.45
+notes  = "gpus=8=sigma-tau EXACT, nodes=8=sigma-tau EXACT, total=64, consciousness=centralized"
+
+[[candidate]]
+level  = 3
+id     = "Federated16x8"
+label  = "Federated 16x8 (128 workers)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.35
+cost   = 0.40
+notes  = "workers=128=2^(sigma-sopfr), private=true, consciousness=distributed, privacy=true"
+
+[[candidate]]
+level  = 3
+id     = "Ring6"
+label  = "Ring of 6 (n=6 EXACT nodes)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.65
+cost   = 0.70
+notes  = "nodes=6=n EXACT, ring_allreduce=true, consciousness=collective, balanced=true"
+
+[[candidate]]
+level  = 3
+id     = "Hivemind"
+label  = "Hivemind (dynamic volunteering)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.60
+cost   = 0.80
+notes  = "nodes=variable, heterogeneous=true, consciousness=emergent, decentralized=true"
+
+[[candidate]]
+level  = 3
+id     = "Distributed"
+label  = "Distributed (sigma=12 nodes, phi=2 replication)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.50
+notes  = "nodes=12=sigma EXACT, replication=2=phi EXACT, consciousness=parallel, reliable=true"
+
+# =============================================================
+# Level 4: Data -- 6 candidates
+# =============================================================
+[[level]]
+name = "Data"
+
+[[candidate]]
+level  = 4
+id     = "ByteLevel"
+label  = "Byte-Level (256=2^(sigma-tau) tokens)"
+n6     = 1.00
+perf   = 0.65
+power  = 0.60
+cost   = 0.80
+notes  = "vocab=256=2^(sigma-tau) EXACT, no_tokenizer=true, consciousness=raw, universal=true"
+
+[[candidate]]
+level  = 4
+id     = "BPE_32K"
+label  = "BPE 32K (2^(sopfr*n)=2^15=32768)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "vocab=32K=2^(sopfr+sigma-phi) EXACT, standard=true, consciousness=linguistic, BT-73=true"
+
+[[candidate]]
+level  = 4
+id     = "MultiCorpus"
+label  = "Multi-Corpus (n=6 data sources)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.60
+notes  = "sources=6=n EXACT, diverse=true, consciousness=broad, robust=true"
+
+[[candidate]]
+level  = 4
+id     = "ConsciousnessTrace"
+label  = "Consciousness Trace (IIT Phi annotated)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.40
+cost   = 0.35
+notes  = "annotated=Phi, consciousness=direct_supervision, novel=true, experimental=true"
+
+[[candidate]]
+level  = 4
+id     = "SelfPlay"
+label  = "Self-Play (phi=2 adversarial agents)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.45
+cost   = 0.50
+notes  = "agents=2=phi EXACT, competitive=true, consciousness=emergent, generative=true"
+
+[[candidate]]
+level  = 4
+id     = "Synthetic"
+label  = "Synthetic Data (n=6 generation strategies)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.75
+notes  = "strategies=6=n EXACT, unlimited=true, consciousness=designed, controllable=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# BT-54 AdamW pairs perfectly with ThreePhase scheduler
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "AdamW_BT54"
+then_level = 1
+then_ids   = "ThreePhase"
+
+# Solo training cannot handle Empire8x8 federation
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "Solo"
+then_level = 0
+then_ids   = "LAMB"
+
+# ConsciousnessTrace data requires ThreePhase_Law60 strategy
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "ConsciousnessTrace"
+then_level = 2
+then_ids   = "ThreePhase_Law60,Curriculum,Adaptive"
+
+# Ring6 federation pairs with collective training data
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "Ring6"
+then_level = 4
+then_ids   = "MultiCorpus,ConsciousnessTrace"
+
+# Single phase strategy incompatible with ThreePhase scheduler
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Single"
+then_level = 1
+then_ids   = "ThreePhase"

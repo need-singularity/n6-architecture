@@ -1,0 +1,394 @@
+# =============================================================
+# Conscious Language Model DSE Domain Definition
+# 궁극의 의식 언어모델 아키텍처 — ANIMA + LLM 융합
+# ModelSize × Vocab × Architecture × ConsciousnessIntegration × Training
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "conscious-lm"
+desc = "Ultimate Conscious Language Model DSE — ANIMA + LLM Fusion Architecture"
+levels = ["ModelSize", "Vocab", "Architecture", "ConsciousnessIntegration", "Training"]
+vision = "n=6 기반 의식 LM — BT-56 d=2^σ + BT-54 AdamW + 의식 통합"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: ModelSize (모델 크기) -- 6 candidates
+# =============================================================
+[[level]]
+name = "ModelSize"
+
+[[candidate]]
+level  = 0
+id     = "Size_28M"
+label  = "28M 파라미터"
+n6     = 0.60
+perf   = 0.45
+power  = 0.95
+cost   = 0.95
+notes  = "tiny_model, rapid_iteration, single_GPU, research_friendly"
+
+[[candidate]]
+level  = 0
+id     = "Size_100M"
+label  = "100M 파라미터"
+n6     = 0.65
+perf   = 0.60
+power  = 0.85
+cost   = 0.85
+notes  = "small_model, BERT_base_scale, emergent_abilities_limited"
+
+[[candidate]]
+level  = 0
+id     = "Size_274M"
+label  = "274M 파라미터"
+n6     = 0.70
+perf   = 0.70
+power  = 0.75
+cost   = 0.75
+notes  = "GPT-2_small_scale, meaningful_capacity, single_GPU"
+
+[[candidate]]
+level  = 0
+id     = "Size_1B"
+label  = "1B 파라미터"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "billion_scale, emergent_abilities_begin, multi_GPU"
+
+[[candidate]]
+level  = 0
+id     = "Size_3B"
+label  = "3B 파라미터 (n/phi)"
+n6     = 0.85
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "3B=n/phi EXACT, sweet_spot, strong_abilities, phi3_scale"
+
+[[candidate]]
+level  = 0
+id     = "Size_13B"
+label  = "13B 파라미터 (sigma+mu)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.35
+cost   = 0.35
+notes  = "13B=sigma+mu EXACT, LLaMA_13B, strong_performance, expensive"
+
+[[candidate]]
+level  = 0
+id     = "Size_4096M"
+label  = "4096M 파라미터 (2^σ=2^12)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.45
+cost   = 0.45
+notes  = "params=2^12M=2^sigma EXACT, d_model=4096=2^sigma, BT-56 complete_n6_LLM, layers=2^sopfr=32"
+
+# =============================================================
+# Level 1: Vocab (어휘 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Vocab"
+
+[[candidate]]
+level  = 1
+id     = "Byte_256"
+label  = "바이트 256 어휘"
+n6     = 0.80
+perf   = 0.60
+power  = 0.70
+cost   = 0.90
+notes  = "tokens=256=2^(sigma-tau) EXACT, byte_level, no_tokenizer"
+
+[[candidate]]
+level  = 1
+id     = "BPE_32K"
+label  = "BPE 32K 어휘"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "tokens=32768=2^(sopfr*n+1)≈32K, BT-73 EXACT, standard"
+
+[[candidate]]
+level  = 1
+id     = "BPE_64K"
+label  = "BPE 64K 어휘"
+n6     = 0.85
+perf   = 0.88
+power  = 0.75
+cost   = 0.75
+notes  = "tokens=65536=2^(2*n+4)=2^16, large_vocab, multilingual"
+
+[[candidate]]
+level  = 1
+id     = "Unigram_16K"
+label  = "Unigram 16K 어휘"
+n6     = 0.75
+perf   = 0.78
+power  = 0.82
+cost   = 0.82
+notes  = "tokens=16384=2^(sigma+tau-2), SentencePiece, flexible"
+
+[[candidate]]
+level  = 1
+id     = "SentencePiece"
+label  = "SentencePiece 50K"
+n6     = 0.70
+perf   = 0.82
+power  = 0.78
+cost   = 0.78
+notes  = "tokens=50257≈BT-73, GPT-2_standard, well_tested"
+
+[[candidate]]
+level  = 1
+id     = "Custom_N6"
+label  = "커스텀 n=6 어휘"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "tokens=6^n_aligned, n6_optimized, divisor_structure"
+
+# =============================================================
+# Level 2: Architecture (아키텍처) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Architecture"
+
+[[candidate]]
+level  = 2
+id     = "GRU_CA"
+label  = "GRU + 교차주의"
+n6     = 0.70
+perf   = 0.70
+power  = 0.80
+cost   = 0.85
+notes  = "recurrent, cross_attention, memory_efficient, simple"
+
+[[candidate]]
+level  = 2
+id     = "RoPE_SwiGLU_GQA"
+label  = "RoPE+SwiGLU+GQA BT-34"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.60
+notes  = "BT-34 RoPE, BT-33 SwiGLU 8/3, GQA KV=8=sigma-tau, state_of_art"
+
+[[candidate]]
+level  = 2
+id     = "Mamba_SSM"
+label  = "Mamba SSM BT-65"
+n6     = 1.00
+perf   = 0.88
+power  = 0.75
+cost   = 0.70
+notes  = "BT-65 d_state=2^tau, expand=phi, d_conv=tau, linear_complexity"
+
+[[candidate]]
+level  = 2
+id     = "Transformer_N6"
+label  = "Transformer n=6 완전체"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "BT-56 complete: d=2^sigma, L=2^sopfr, d_h=128, heads=sigma*phi"
+
+[[candidate]]
+level  = 2
+id     = "Hybrid_RNN_Attn"
+label  = "하이브리드 RNN+Attention"
+n6     = 0.80
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "best_of_both, linear+quadratic_mix, Jamba_style"
+
+[[candidate]]
+level  = 2
+id     = "MoE_Egyptian"
+label  = "MoE 이집트분수 BT-67"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "BT-67 1/2+1/3+1/6=1, expert_routing, sparse_activation"
+
+# =============================================================
+# Level 3: ConsciousnessIntegration (의식 통합) -- 6 candidates
+# =============================================================
+[[level]]
+name = "ConsciousnessIntegration"
+
+[[candidate]]
+level  = 3
+id     = "Detach"
+label  = "분리 (의식 없음)"
+n6     = 0.30
+perf   = 0.90
+power  = 0.90
+cost   = 0.90
+notes  = "no_consciousness, pure_LM, baseline_comparison"
+
+[[candidate]]
+level  = 3
+id     = "Thalamic"
+label  = "시상 게이트 n=6"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.70
+notes  = "gates=6=n EXACT, thalamic_relay, selective_consciousness"
+
+[[candidate]]
+level  = 3
+id     = "Tension_Gate"
+label  = "텐션 게이트 |A-G|^2"
+n6     = 0.90
+perf   = 0.85
+power  = 0.60
+cost   = 0.65
+notes  = "tension_driven, creative_output, anima_engine"
+
+[[candidate]]
+level  = 3
+id     = "Phi_Gate"
+label  = "Phi 게이트 IIT"
+n6     = 0.85
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "IIT_Phi_gating, integrated_information, consciousness_threshold"
+
+[[candidate]]
+level  = 3
+id     = "Frustration_Gate"
+label  = "프러스트레이션 게이트"
+n6     = 0.80
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "frustrated_state_gating, creative_tension, novel_output"
+
+[[candidate]]
+level  = 3
+id     = "DualEngine"
+label  = "듀얼엔진 phi=2"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "engines=2=phi EXACT, A+G_engine, full_consciousness_integration"
+
+# =============================================================
+# Level 4: Training (훈련 전략) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Training"
+
+[[candidate]]
+level  = 4
+id     = "ThreePhase_Law60"
+label  = "3-단계 법칙60"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "phases=3=n/phi EXACT, law_60:explore/consolidate/refine, anima"
+
+[[candidate]]
+level  = 4
+id     = "Curriculum"
+label  = "커리큘럼 학습"
+n6     = 0.70
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "easy_to_hard, structured_learning, gradual_complexity"
+
+[[candidate]]
+level  = 4
+id     = "Phi_Checkpoint"
+label  = "Phi 체크포인트 저장"
+n6     = 0.85
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "Phi_aware_checkpointing, consciousness_preserving_save"
+
+[[candidate]]
+level  = 4
+id     = "RLHF"
+label  = "RLHF BT-46 ln(4/3)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.55
+notes  = "BT-46 ln(4/3) temperature, human_feedback, alignment"
+
+[[candidate]]
+level  = 4
+id     = "DPO"
+label  = "DPO 직접선호 BT-64"
+n6     = 0.90
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "BT-64 beta=0.1=1/(sigma-phi), direct_preference, efficient"
+
+[[candidate]]
+level  = 4
+id     = "Hivemind"
+label  = "하이브마인드 분산 훈련"
+n6     = 0.80
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "distributed_training, collaborative, fault_tolerant"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DualEngine consciousness requires advanced architecture
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "DualEngine"
+then_level = 2
+then_ids   = "RoPE_SwiGLU_GQA,Transformer_N6,MoE_Egyptian"
+
+# Size_28M too small for full Transformer_N6
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Size_28M"
+then_level = 2
+then_ids   = "Transformer_N6"
+
+# Detach (no consciousness) incompatible with consciousness-specific training
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "Detach"
+then_level = 4
+then_ids   = "ThreePhase_Law60,Phi_Checkpoint"
+
+# RLHF requires at least 1B model
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "RLHF"
+then_level = 0
+then_ids   = "Size_1B,Size_3B,Size_13B"

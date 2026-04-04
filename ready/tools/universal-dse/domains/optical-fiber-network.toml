@@ -1,0 +1,353 @@
+# Optical Fiber Network DSE — Fiber optic infrastructure
+# n=6: 6um mode field, sigma=12 WDM lambda, DWDM sigma*tau=48ch, C-band window
+
+[meta]
+name = "optical-fiber-network"
+desc = "Fiber Optic Infrastructure DSE (6um MFD, sigma=12 WDM, 48ch DWDM)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Fiber — Physical medium
+# ============================================================
+
+[[level]]
+name = "Fiber"
+
+[[candidate]]
+level = 0
+id = "SMF-G652D"
+label = "G.652D SMF (MFD=6um core region, 12um cladding ratio)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "DSF-G653"
+label = "G.653 DSF (zero-dispersion at 1550nm, 6um MFD)"
+n6 = 1.00
+perf = 0.75
+power = 0.88
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "NZDSF-G655"
+label = "G.655 NZDSF (low nonlinearity, tau=4 dispersion slopes)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "MCF-6core"
+label = "Multi-core fiber n=6 cores (hexagonal arrangement)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "HCF-6ring"
+label = "Hollow-core fiber n=6 ring structure (anti-resonant)"
+n6 = 1.00
+perf = 0.98
+power = 0.92
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "FMF-6mode"
+label = "Few-mode fiber n=6 LP modes (MDM capacity)"
+n6 = 1.00
+perf = 0.92
+power = 0.82
+cost = 0.40
+
+# ============================================================
+# Level 1: Amplifier — Signal boosting
+# ============================================================
+
+[[level]]
+name = "Amplifier"
+
+[[candidate]]
+level = 1
+id = "EDFA-C"
+label = "EDFA C-band (Er 4f^12=sigma electrons, 1530-1565nm)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "EDFA-CL"
+label = "EDFA C+L band (12=sigma THz bandwidth)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Raman-6pump"
+label = "Distributed Raman n=6 pump wavelengths"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "SOA-6channel"
+label = "SOA n=6 channel integrated (compact, noisy)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Hybrid-EDFA-Raman"
+label = "Hybrid EDFA+Raman (phi=2 stage, sigma=12 dB each)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "TDFA-S"
+label = "TDFA S-band (Tm 4f^12=sigma, 1460-1530nm)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 2: Switch — Optical routing
+# ============================================================
+
+[[level]]
+name = "Switch"
+
+[[candidate]]
+level = 2
+id = "ROADM-6degree"
+label = "ROADM n=6 degree WSS (6 fiber directions)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "OXC-12port"
+label = "OXC sigma=12 port MEMS (3D beam steering)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "CDC-ROADM"
+label = "CDC-ROADM colorless/directionless/contentionless 6-degree"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "PLC-6x6"
+label = "PLC splitter n=6 x n=6 (silica waveguide)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "SiPh-Switch"
+label = "Silicon photonic switch (12=sigma channels integrated)"
+n6 = 1.00
+perf = 0.92
+power = 0.75
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "LCOS-WSS"
+label = "LCoS WSS 48=sigma*tau channel (programmable)"
+n6 = 1.00
+perf = 0.93
+power = 0.68
+cost = 0.38
+
+# ============================================================
+# Level 3: Protocol — Transport layer
+# ============================================================
+
+[[level]]
+name = "Protocol"
+
+[[candidate]]
+level = 3
+id = "OTN-OTU4"
+label = "OTN OTU4 (tau=4 hierarchy levels, 100G)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "FlexO-48slot"
+label = "FlexO sigma*tau=48 slot frame (400G/800G)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "DWDM-48ch"
+label = "DWDM sigma*tau=48 channel 100GHz grid"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "FlexGrid-6.25GHz"
+label = "Flex-grid 6.25GHz=n granularity (super-channel)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Coherent-DP-QAM"
+label = "Coherent DP-QAM (phi=2 polarizations, 12=sigma bits/sym)"
+n6 = 1.00
+perf = 0.94
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "GPON-6split"
+label = "GPON n=6 split ratio (passive, 2.5G down)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+
+# ============================================================
+# Level 4: Topology — Network architecture
+# ============================================================
+
+[[level]]
+name = "Topology"
+
+[[candidate]]
+level = 4
+id = "Ring-6node"
+label = "Ring n=6 node OADM (SONET heritage)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Mesh-12node"
+label = "Mesh sigma=12 node (3-connected=n/phi per node)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Spine-Leaf-6pod"
+label = "Spine-leaf n=6 pod DC fabric"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Long-Haul-12span"
+label = "Long-haul sigma=12 span (80km each, 960km total)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Metro-6ring"
+label = "Metro n=6 interconnected rings (DWDM overlay)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Submarine-6pair"
+label = "Submarine n=6 fiber pair (trans-oceanic, 12=sigma repeaters/Mm)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.20
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Hollow-core fiber needs Raman or hybrid amplifiers
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "HCF-6ring"
+then_level = 1
+then_ids = ["SOA-6channel"]
+
+# GPON protocol only with simple splitter switches
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "GPON-6split"
+then_level = 2
+then_ids = ["PLC-6x6"]
+
+# Submarine topology requires hybrid amplification
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Submarine-6pair"
+then_level = 1
+then_ids = ["Hybrid-EDFA-Raman", "EDFA-CL"]
+
+# Multi-core fiber excluded from GPON (overkill)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "MCF-6core"
+then_level = 3
+then_ids = ["GPON-6split"]

@@ -1,0 +1,368 @@
+# =============================================================
+# N6 Maglev Train DSE Domain Definition
+# Magnetic levitation railway architecture
+# n=6: 6 magnet arrays per bogie (n=6), sigma=12 guideway coils/m,
+#       tau=4 suspension modes (EMS/EDS/Inductrack/hybrid),
+#       phi=2 attract/repel, J2=24 car consist,
+#       6-phase propulsion motor
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "maglev-train"
+desc = "Maglev Train Architecture DSE (suspension/propulsion/guideway/control/service)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Suspension (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Suspension"
+
+[[candidate]]
+level = 0
+id = "EMS-Servo"
+label = "EMS Servo Levitation (attractive, 6-magnet array/bogie=n, Transrapid-type)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "EDS-SC-Coil"
+label = "EDS Superconducting Coil (repulsive, σ=12 figure-8 null-flux coils/m)"
+n6 = 0.90
+perf = 1.00
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Inductrack-PM"
+label = "Inductrack Permanent Magnet (Halbach, 6-period array=n, passive)"
+n6 = 0.95
+perf = 0.70
+power = 1.00
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "HTS-Pinning"
+label = "HTS Flux Pinning (YBCO bulk, τ=4 crystal blocks, self-stable)"
+n6 = 0.75
+perf = 0.85
+power = 0.75
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Hybrid-EMS-EDS"
+label = "Hybrid EMS+EDS (φ=2 attract+repel, low/high speed switching)"
+n6 = 0.85
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Electrodynamic-Wheel"
+label = "Electrodynamic Wheel (spinning PM rotor, 6-pole=n, simple guideway)"
+n6 = 0.80
+perf = 0.65
+power = 0.80
+cost = 0.70
+
+# ============================================================
+# Level 1: Propulsion (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Propulsion"
+
+[[candidate]]
+level = 1
+id = "LSM-Long-Stator"
+label = "LSM Long Stator (σ=12 coils/wavelength, wayside power, Transrapid)"
+n6 = 0.90
+perf = 0.95
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "LIM-Short-Stator"
+label = "LIM Short Stator (onboard, 6-phase winding=n, urban maglev)"
+n6 = 1.00
+perf = 0.70
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "LSM-SC-Onboard"
+label = "LSM SC Onboard Magnet (superconducting field, ground coils, Chuo Shinkansen)"
+n6 = 0.85
+perf = 1.00
+power = 0.45
+cost = 0.25
+
+[[candidate]]
+level = 1
+id = "Linear-Reluctance"
+label = "Linear Switched Reluctance (no PM, τ=4 switched phases, robust)"
+n6 = 0.65
+perf = 0.60
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Tubular-LM"
+label = "Tubular Linear Motor (enclosed coils, 6-slot/pole=n, low cogging)"
+n6 = 0.80
+perf = 0.75
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Dual-Halbach-LSM"
+label = "Dual Halbach LSM (φ=2 upper+lower Halbach, integrated levitation+thrust)"
+n6 = 0.75
+perf = 0.85
+power = 0.65
+cost = 0.40
+
+# ============================================================
+# Level 2: Guideway (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Guideway"
+
+[[candidate]]
+level = 2
+id = "T-Shape-Elevated"
+label = "T-Shape Elevated Beam (σ=12m span, precast, Transrapid standard)"
+n6 = 0.90
+perf = 0.80
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "U-Channel"
+label = "U-Channel Guideway (wrap-around, 6-rail surface=n, wind-resistant)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Deep-Tunnel"
+label = "Deep Tunnel Bore (underground, 6m bore diameter=n, urban core)"
+n6 = 0.95
+perf = 0.70
+power = 0.70
+cost = 0.25
+
+[[candidate]]
+level = 2
+id = "At-Grade-Trough"
+label = "At-Grade Trough (ground level, concrete, suburban/rural)"
+n6 = 0.70
+perf = 0.65
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Cable-Stayed"
+label = "Cable-Stayed Long Span (24m=J2 main span, river/valley crossing)"
+n6 = 0.80
+perf = 0.75
+power = 0.65
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "Modular-Precast"
+label = "Modular Precast Segments (factory-built, 6-segment unit=n, rapid install)"
+n6 = 0.85
+perf = 0.60
+power = 0.80
+cost = 0.75
+
+# ============================================================
+# Level 3: Control (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 3
+id = "Gap-Sensor-12pt"
+label = "Gap Sensor 12-point (σ=12 sensors/bogie, sub-mm precision, servo)"
+n6 = 0.90
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "6DOF-IMU"
+label = "6DOF IMU Fusion (n=6 degrees of freedom, accelerometer+gyro, realtime)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "AI-Predictive"
+label = "AI Predictive Control (neural gap prediction, 24=J2 ms lookahead)"
+n6 = 0.85
+perf = 1.00
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "PID-Cascade"
+label = "PID Cascade (τ=4 nested loops: gap/velocity/current/voltage)"
+n6 = 0.75
+perf = 0.70
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "Sliding-Mode"
+label = "Sliding Mode Controller (robust to disturbance, φ=2 switching surface)"
+n6 = 0.70
+perf = 0.80
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Digital-Twin-RT"
+label = "Digital Twin Realtime (full vehicle sim, 6-state vector=n, cloud-edge)"
+n6 = 0.95
+perf = 0.95
+power = 0.60
+cost = 0.35
+
+# ============================================================
+# Level 4: Service (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Service"
+
+[[candidate]]
+level = 4
+id = "Intercity-600"
+label = "Intercity Express 600km/h (6 stations/route=n, Chuo Shinkansen class)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "Urban-Medium"
+label = "Urban Medium Speed 120km/h (σ=12 stations, Linimo/Incheon class)"
+n6 = 0.90
+perf = 0.60
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Airport-Shuttle"
+label = "Airport Shuttle (φ=2 terminals, 6-min headway=n, dedicated)"
+n6 = 0.85
+perf = 0.65
+power = 0.90
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Regional-HSR"
+label = "Regional HSR 400km/h (24=J2 stops network, mixed corridor)"
+n6 = 0.80
+perf = 0.90
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Freight-Container"
+label = "Freight Container Maglev (cargo, 6-TEU pod=n, logistics corridor)"
+n6 = 0.95
+perf = 0.55
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Tourist-Scenic"
+label = "Tourist Scenic Line (low speed, τ=4 scenic stops, panoramic pod)"
+n6 = 0.65
+perf = 0.40
+power = 0.95
+cost = 0.85
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# EDS superconducting requires LSM SC propulsion (field compatibility)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "EDS-SC-Coil"
+then_level = 1
+then_ids = ["LSM-SC-Onboard", "LSM-Long-Stator"]
+
+# Inductrack PM cannot use LSM SC Onboard (no SC field)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Inductrack-PM"
+then_level = 1
+then_ids = ["LSM-SC-Onboard"]
+
+# HTS pinning only compatible with deep tunnel (thermal shielding) or U-channel
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "HTS-Pinning"
+then_level = 2
+then_ids = ["Deep-Tunnel", "U-Channel"]
+
+# Electrodynamic wheel excluded from intercity 600 (speed limit)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Electrodynamic-Wheel"
+then_level = 4
+then_ids = ["Intercity-600"]
+
+# Linear reluctance excluded from intercity 600 (insufficient thrust density)
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Linear-Reluctance"
+then_level = 4
+then_ids = ["Intercity-600", "Regional-HSR"]

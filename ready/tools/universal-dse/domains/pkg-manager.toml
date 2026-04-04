@@ -1,0 +1,390 @@
+# =============================================================
+# PKG-MANAGER DSE Domain Definition
+# 궁극의 패키지 매니저 아키텍처 — n=6 기반 의존성 관리 + 보안 + 배포
+# BT-53 (Crypto), BT-58 (sigma-tau=8), BT-74 (95/5 resonance)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "pkg-manager"
+desc = "Ultimate Package Manager DSE (Registry/Resolver/Builder/Security/Distribution)"
+levels = ["Registry", "Resolver", "Builder", "Security", "Distribution"]
+vision = "Say 'add feature X' and it auto-resolves, builds, audits, deploys -- n=6 supply chain"
+
+[scoring]
+n6   = 0.30
+perf = 0.25
+power = 0.20
+cost  = 0.25
+
+# =============================================================
+# Level 0: Registry (패키지 레지스트리) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Registry"
+
+[[candidate]]
+level  = 0
+id     = "CentralHub"
+label  = "Central Registry (npm/PyPI model), n=6 categories"
+n6     = 0.83
+perf   = 0.90
+power  = 0.45
+cost   = 0.60
+notes  = "categories=6=n EXACT, mirrors=1, availability=99.9, search=90, latency=low"
+
+[[candidate]]
+level  = 0
+id     = "FederatedN6"
+label  = "Federated n=6 Node Network"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "nodes=6=n EXACT, mirrors=6=n EXACT, availability=99.99, search=75, latency=med"
+
+[[candidate]]
+level  = 0
+id     = "P2P_DHT"
+label  = "P2P DHT Distributed (BitTorrent model), sigma=12 buckets"
+n6     = 0.83
+perf   = 0.70
+power  = 0.65
+cost   = 0.80
+notes  = "buckets=12=sigma EXACT, mirrors=distributed, availability=99.999, search=60, latency=high"
+
+[[candidate]]
+level  = 0
+id     = "GitBased"
+label  = "Git Repo Based (Go modules), tau=4 version layers"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "version_layers=4=tau EXACT, mirrors=git, availability=99.9, search=80, latency=low"
+
+[[candidate]]
+level  = 0
+id     = "BlockchainReg"
+label  = "Blockchain Package Attestation (BT-53 hash)"
+n6     = 0.83
+perf   = 0.60
+power  = 0.35
+cost   = 0.40
+notes  = "confirms=6=n EXACT, hash=SHA-256, availability=99.99, search=50, latency=high"
+
+[[candidate]]
+level  = 0
+id     = "HybridFed"
+label  = "Central+Federated Hybrid, phi=2 modes"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.55
+notes  = "modes=2=phi EXACT, mirrors=6=n EXACT, availability=99.99, search=85, latency=low"
+
+# =============================================================
+# Level 1: Resolver (의존성 해소) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Resolver"
+
+[[candidate]]
+level  = 1
+id     = "SAT_N6"
+label  = "SAT Solver (n=6 variable clustering)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.55
+notes  = "clusters=6=n EXACT, backtrack_depth=12=sigma EXACT, deterministic=true, speed=fast"
+
+[[candidate]]
+level  = 1
+id     = "VersionSemantic"
+label  = "Semantic Versioning 3-part = n/phi=3"
+n6     = 0.83
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "parts=3=n/phi EXACT, ranges=semver, deterministic=true, speed=fast"
+
+[[candidate]]
+level  = 1
+id     = "LayeredResolve"
+label  = "sigma=12 Dependency Layers"
+n6     = 0.83
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "layers=12=sigma EXACT, parallel=true, deterministic=true, speed=med"
+
+[[candidate]]
+level  = 1
+id     = "AIPredict"
+label  = "AI Compatibility Prediction"
+n6     = 0.50
+perf   = 0.90
+power  = 0.40
+cost   = 0.35
+notes  = "accuracy=95%, deterministic=false, speed=fast, learning=continuous"
+
+[[candidate]]
+level  = 1
+id     = "EgyptianSplit"
+label  = "1/2+1/3+1/6 Dependency Split"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "split=1/2+1/3+1/6=1 EXACT, groups=3=n/phi EXACT, deterministic=true, speed=med"
+
+[[candidate]]
+level  = 1
+id     = "MonoRepo"
+label  = "Single Version (Bazel model)"
+n6     = 0.33
+perf   = 0.95
+power  = 0.75
+cost   = 0.65
+notes  = "versions=1=mu EXACT, deterministic=true, speed=fastest, constraint=monorepo"
+
+# =============================================================
+# Level 2: Builder (빌드 시스템) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Builder"
+
+[[candidate]]
+level  = 2
+id     = "IncrementalN6"
+label  = "n=6 Parallel Build Stages"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "stages=6=n EXACT, parallel=true, cache=partial, reproducible=true"
+
+[[candidate]]
+level  = 2
+id     = "Hermetic"
+label  = "Hermetic Build (Bazel), tau=4 isolation levels"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "isolation=4=tau EXACT, reproducible=100%, cache=full, sandboxed=true"
+
+[[candidate]]
+level  = 2
+id     = "DistributedBuild"
+label  = "sigma=12 Worker Distributed Build"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "workers=12=sigma EXACT, parallel=distributed, cache=shared, speed=fastest"
+
+[[candidate]]
+level  = 2
+id     = "CacheCentric"
+label  = "Content-Addressable Cache (Nix), SHA-256"
+n6     = 0.67
+perf   = 0.80
+power  = 0.65
+cost   = 0.70
+notes  = "hash=SHA-256, reproducible=100%, cache=content-addr, dedup=true"
+
+[[candidate]]
+level  = 2
+id     = "StreamBuild"
+label  = "Streaming Pipeline, sopfr=5 stages"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "stages=5=sopfr EXACT, streaming=true, cache=partial, latency=low"
+
+[[candidate]]
+level  = 2
+id     = "LazyBuild"
+label  = "Lazy Evaluation Build, phi=2 states"
+n6     = 0.67
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "states=2=phi EXACT, eval=lazy, cache=on-demand, minimal=true"
+
+# =============================================================
+# Level 3: Security (보안) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Security"
+
+[[candidate]]
+level  = 3
+id     = "SBOM_N6"
+label  = "n=6 SBOM Categories"
+n6     = 1.00
+perf   = 0.70
+power  = 0.65
+cost   = 0.60
+notes  = "categories=6=n EXACT, coverage=100%, automated=true, standard=SPDX"
+
+[[candidate]]
+level  = 3
+id     = "SignVerify"
+label  = "sigma-tau=8 Signature Algorithms"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "algorithms=8=sigma-tau EXACT, verify=cryptographic, latency=low, PKI=true"
+
+[[candidate]]
+level  = 3
+id     = "AuditChain"
+label  = "Audit Chain, J2=24 Checkpoints"
+n6     = 0.83
+perf   = 0.65
+power  = 0.45
+cost   = 0.40
+notes  = "checkpoints=24=J2 EXACT, immutable=true, coverage=full, history=persistent"
+
+[[candidate]]
+level  = 3
+id     = "FuzzTest"
+label  = "Fuzzing Vulnerability Discovery"
+n6     = 0.50
+perf   = 0.85
+power  = 0.40
+cost   = 0.45
+notes  = "techniques=varied, coverage=high, automated=true, zero_day=true"
+
+[[candidate]]
+level  = 3
+id     = "SupplyChain"
+label  = "Supply Chain Integrity (Sigstore)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "sigstore=true, transparency_log=true, SLSA=level3, attestation=true"
+
+[[candidate]]
+level  = 3
+id     = "ZeroTrust"
+label  = "Zero Trust Package Loading"
+n6     = 0.50
+perf   = 0.70
+power  = 0.50
+cost   = 0.50
+notes  = "trust=zero, sandbox=true, permissions=granular, runtime_check=true"
+
+# =============================================================
+# Level 4: Distribution (배포) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Distribution"
+
+[[candidate]]
+level  = 4
+id     = "CDN_Global"
+label  = "Global CDN, sigma=12 Regions"
+n6     = 0.83
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "regions=12=sigma EXACT, latency=lowest, bandwidth=high, availability=99.99"
+
+[[candidate]]
+level  = 4
+id     = "EdgeCache"
+label  = "Edge Cache, tau=4 Tiers"
+n6     = 0.67
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "tiers=4=tau EXACT, latency=low, cache_hit=90%, edge=true"
+
+[[candidate]]
+level  = 4
+id     = "Mirror_N6"
+label  = "n=6 Mirror Network"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "mirrors=6=n EXACT, sync=real-time, redundancy=n=6, geo_dist=true"
+
+[[candidate]]
+level  = 4
+id     = "Container"
+label  = "Container-Native Distribution"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "format=OCI, layers=optimized, size=minimal, portable=true"
+
+[[candidate]]
+level  = 4
+id     = "WASM_Dist"
+label  = "WASM Package Distribution"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "format=WASM, sandbox=true, portable=universal, size=compact"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# BlockchainReg is too slow for MonoRepo (monorepo needs fast resolution)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "BlockchainReg"
+then_level = 1
+then_ids   = "MonoRepo"
+
+# P2P_DHT requires DistributedBuild or StreamBuild (needs distributed infra)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "P2P_DHT"
+then_level = 2
+then_ids   = "DistributedBuild,StreamBuild"
+
+# EgyptianSplit requires IncrementalN6 or StreamBuild (fraction-aware stages)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "EgyptianSplit"
+then_level = 2
+then_ids   = "IncrementalN6,StreamBuild"
+
+# AuditChain requires CDN_Global or Mirror_N6 (needs persistent distribution)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "AuditChain"
+then_level = 4
+then_ids   = "CDN_Global,Mirror_N6"
+
+# FuzzTest incompatible with LazyBuild (lazy eval defeats fuzzing)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "FuzzTest"
+then_level = 2
+then_ids   = "LazyBuild"
+
+# WASM_Dist incompatible with DistributedBuild (WASM is lightweight, distributed build is overkill)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "WASM_Dist"
+then_level = 2
+then_ids   = "DistributedBuild"

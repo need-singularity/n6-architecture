@@ -1,0 +1,392 @@
+# =============================================================
+# BIOPHYSICS DSE Domain Definition
+# 궁극의 생물물리학 — DNA 이중나선 + 단백질 접힘 + 신경 전도 + 광합성
+# BIOPHYS-001~020, BT-27 (Carbon-6), BT-43 (CN=6), BT-51 (Genetic code)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "biophysics"
+desc = "Ultimate Biophysics DSE (BIOPHYS-001~020, BT-27/43/51)"
+levels = ["Molecular", "Membrane", "Force", "Imaging", "Systems"]
+vision = "n=6 기반 궁극의 생물물리학 — DNA 이중나선 + 단백질 접힘 + 신경 전도 + 광합성"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Molecular (분자 생물물리) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Molecular"
+
+[[candidate]]
+level  = 0
+id     = "DNA_DoubleHelix"
+label  = "DNA 이중나선 (phi=2 가닥 EXACT)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "strands=2=phi EXACT, bases=4=tau EXACT, codon=3=n/phi EXACT, helix_turn=10bp~sigma-phi"
+
+[[candidate]]
+level  = 0
+id     = "ProteinFolding"
+label  = "단백질 접힘 에너지 경관 (tau=4 레벨)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "fold_levels=4=tau EXACT, aa=20=J2-tau, secondary=3=n/phi, energy_funnel=1=mu EXACT"
+
+[[candidate]]
+level  = 0
+id     = "RNA_Structure"
+label  = "RNA 구조/기능 (n/phi=3 코돈 EXACT)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "bases=4=tau EXACT, codon=3=n/phi EXACT, types=6=n EXACT (mRNA/tRNA/rRNA/snRNA/miRNA/siRNA)"
+
+[[candidate]]
+level  = 0
+id     = "Lipid_Bilayer"
+label  = "지질 이중층 (phi=2 EXACT)"
+n6     = 0.67
+perf   = 0.70
+power  = 0.65
+cost   = 0.55
+notes  = "layers=2=phi EXACT, lipid_types=4=tau EXACT, phase=2=phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "WaterHexamer"
+label  = "물 육각체 ice Ih (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "ring_size=6=n EXACT, H_bonds=4=tau EXACT, coord=4=tau EXACT, ice_sym=6=n EXACT"
+
+[[candidate]]
+level  = 0
+id     = "Enzyme_Kinetics"
+label  = "효소 반응 속도론 (n=6 Michaelis)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "classes=6=n EXACT, params=4=tau, rate_orders=2=phi EXACT"
+
+# =============================================================
+# Level 1: Membrane (생체막) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Membrane"
+
+[[candidate]]
+level  = 1
+id     = "IonChannel_N6"
+label  = "6종 이온 채널 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "channel_types=6=n EXACT, gates=4=tau EXACT, selectivity=2=phi EXACT"
+
+[[candidate]]
+level  = 1
+id     = "ActionPotential"
+label  = "활동전위 Hodgkin-Huxley (tau=4 위상)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "phases=4=tau EXACT, gates=3=n/phi (m,h,n), voltage_range=120mV~sigma*10"
+
+[[candidate]]
+level  = 1
+id     = "VesicleFusion"
+label  = "소포 융합 SNARE (n/phi=3 복합체)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "SNARE_complex=3=n/phi EXACT, steps=5=sopfr, Ca_trigger=1=mu EXACT"
+
+[[candidate]]
+level  = 1
+id     = "MembraneRaft"
+label  = "막 뗏목 lipid raft (phi=2 상분리)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.65
+cost   = 0.55
+notes  = "phases=2=phi EXACT, components=4=tau, size_nm=10~sigma-phi"
+
+[[candidate]]
+level  = 1
+id     = "Mechanosensing"
+label  = "기계감각 (sopfr=5 채널 타입)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "channel_types=5=sopfr EXACT, force_modes=2=phi EXACT, response_ms=1=mu"
+
+[[candidate]]
+level  = 1
+id     = "TransportProtein"
+label  = "수송 단백질 (sigma=12 계열)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "families=12=sigma EXACT, modes=2=phi EXACT (active/passive), substrates=6=n EXACT"
+
+# =============================================================
+# Level 2: Force (생체역학) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Force"
+
+[[candidate]]
+level  = 2
+id     = "MolecularMotor"
+label  = "분자 모터 myosin/kinesin (n=6 스텝)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "motor_types=6=n EXACT, step_nm=8=sigma-tau EXACT, ATP_cycle=4=tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "ElasticNetwork"
+label  = "탄성 네트워크 모형 (sigma=12 노드)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "nodes=12=sigma EXACT, modes=6=n EXACT, cutoff_A=8=sigma-tau EXACT"
+
+[[candidate]]
+level  = 2
+id     = "AFM_Spectroscopy"
+label  = "AFM 힘 분광학 (tau=4 힘 영역)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "force_regimes=4=tau EXACT, resolution=1=mu, cantilever_modes=2=phi EXACT"
+
+[[candidate]]
+level  = 2
+id     = "OpticalTweezer"
+label  = "광학 집게 (phi=2 빔)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "beams=2=phi EXACT, trap_axes=3=n/phi, force_pN=1=mu"
+
+[[candidate]]
+level  = 2
+id     = "Cytoskeleton"
+label  = "세포골격 3종 (n/phi=3 EXACT)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "types=3=n/phi EXACT (microtubule/actin/IF), tubulin_dim=13~sigma+mu, actin_helix=2=phi"
+
+[[candidate]]
+level  = 2
+id     = "Mechanotransduction"
+label  = "기계신호전달 (sopfr=5 경로)"
+n6     = 0.67
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "pathways=5=sopfr EXACT, sensor_types=4=tau EXACT, response_steps=6=n EXACT"
+
+[[candidate]]
+level  = 2
+id     = "Hexagonal_Muscle"
+label  = "육각 근육 격자 (n=6 대칭 수축)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "hexagonal_symmetry=6=n EXACT, myosin_heads=12=sigma EXACT, actin_monomers_per_turn=24=J2, force_states=4=tau EXACT"
+
+# =============================================================
+# Level 3: Imaging (생체 영상) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Imaging"
+
+[[candidate]]
+level  = 3
+id     = "CryoEM"
+label  = "극저온 전자현미경 (sigma=12 A 분해능)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "resolution_A=12=sigma EXACT (threshold), symmetry=6=n (C6 virus), processing=4=tau stages"
+
+[[candidate]]
+level  = 3
+id     = "FluorescenceN6"
+label  = "형광 현미경 n=6 채널"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "channels=6=n EXACT, wavelengths=4=tau bands, resolution=2=phi (diffraction limited)"
+
+[[candidate]]
+level  = 3
+id     = "MRI_Physics"
+label  = "MRI 물리학 (phi=2 스핀 EXACT)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.35
+cost   = 0.30
+notes  = "spin=2=phi EXACT (spin-1/2→2 states), contrast=4=tau (T1/T2/PD/DWI), coils=8=sigma-tau"
+
+[[candidate]]
+level  = 3
+id     = "XRayCrystal"
+label  = "X선 결정학 (tau=4 Bragg 반사)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "reflections=4=tau EXACT, symmetry_systems=7, resolution=1=mu A goal"
+
+[[candidate]]
+level  = 3
+id     = "SuperResolution"
+label  = "초해상 현미경 (sopfr=5 기법)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "techniques=5=sopfr EXACT (PALM/STORM/STED/SIM/MINFLUX), resolution_nm=10=sigma-phi"
+
+[[candidate]]
+level  = 3
+id     = "Tomography"
+label  = "단층촬영 (sigma-tau=8 투영각)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "projection_groups=8=sigma-tau EXACT, slices=12=sigma, reconstruction=4=tau methods"
+
+# =============================================================
+# Level 4: Systems (시스템 생물물리) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Systems"
+
+[[candidate]]
+level  = 4
+id     = "Photosynthesis"
+label  = "광합성 C6H12O6 (n=6 탄소 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.55
+notes  = "carbon=6=n EXACT, photosystems=2=phi EXACT, electron_chain=4=tau, ATP=12=sigma cycles"
+
+[[candidate]]
+level  = 4
+id     = "CircadianClock"
+label  = "생체시계 24시간 (J2=24 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.60
+notes  = "hours=24=J2 EXACT, core_genes=6=n EXACT, feedback_loops=2=phi EXACT"
+
+[[candidate]]
+level  = 4
+id     = "NeuralComputation"
+label  = "신경 계산 (sigma-tau=8 원시)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "primitives=8=sigma-tau EXACT, layers=6=n cortical, neurotransmitters=12=sigma major"
+
+[[candidate]]
+level  = 4
+id     = "PopulationDynamics"
+label  = "개체군 동역학 Lotka-Volterra (tau=4)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.60
+notes  = "parameters=4=tau EXACT (r,K,alpha,beta), species_types=2=phi EXACT, equilibria=4=tau"
+
+[[candidate]]
+level  = 4
+id     = "SyntheticBiology"
+label  = "합성생물학 n=6 기본 부품"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "parts=6=n EXACT, chassis=4=tau organisms, circuits=12=sigma standard"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DNA_DoubleHelix required for RNA_Structure (central dogma)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "RNA_Structure"
+then_level = 0
+then_ids   = "DNA_DoubleHelix"
+
+# WaterHexamer required for ProteinFolding (hydration is essential)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ProteinFolding"
+then_level = 0
+then_ids   = "WaterHexamer"
+
+# CryoEM requires ProteinFolding or DNA_DoubleHelix (needs molecular target)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "CryoEM"
+then_level = 0
+then_ids   = "ProteinFolding,DNA_DoubleHelix"
+
+# OpticalTweezer incompatible with XRayCrystal (different scales)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "OpticalTweezer"
+then_level = 3
+then_ids   = "XRayCrystal"
+
+# Photosynthesis requires IonChannel_N6 or MembraneRaft (membrane-based process)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Photosynthesis"
+then_level = 1
+then_ids   = "IonChannel_N6,MembraneRaft"

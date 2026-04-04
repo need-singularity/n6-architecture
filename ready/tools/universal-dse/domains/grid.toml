@@ -1,0 +1,347 @@
+# =============================================================
+# HEXA-GRID DSE Domain Definition
+# Source: BT-62 (Grid frequency pair) + BT-68 (HVDC voltage ladder)
+# Total raw combos: 6x5x5x4x4 = 2,400 (pre-filter)
+# =============================================================
+
+[meta]
+name = "grid"
+desc = "Power Grid DSE (BT-62/68)"
+levels = ["Conductor", "Conversion", "Transformer", "HVDC", "System"]
+vision = "Zero-loss supergrid -- n=6 aligned power delivery from source to load"
+
+[scoring]
+n6   = 0.40
+perf = 0.25
+power = 0.20
+cost  = 0.15
+
+# =============================================================
+# Level 0: Conductor (Transmission Medium)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Conductor"
+
+[[candidate]]
+level  = 0
+id     = "ACSR"
+label  = "Aluminum Conductor Steel Reinforced"
+n6     = 0.50
+perf   = 0.50
+power  = 0.50
+cost   = 1.00
+notes  = "loss~5%=sopfr CLOSE, Al Z=13=sigma+mu EXACT, baseline conductor"
+
+[[candidate]]
+level  = 0
+id     = "HTLS"
+label  = "High-Temperature Low-Sag Conductor"
+n6     = 0.50
+perf   = 0.70
+power  = 0.65
+cost   = 0.60
+notes  = "2x=phi EXACT capacity of ACSR, loss=3-5%=n/phi~sopfr CLOSE, high-temp alloy"
+
+[[candidate]]
+level  = 0
+id     = "HTS_YBCO"
+label  = "HTS Superconductor (YBCO)"
+n6     = 1.00
+perf   = 1.00
+power  = 1.00
+cost   = 0.10
+notes  = "zero DC resistance, Tc=93K, CN=6 perovskite EXACT, loss<0.5%"
+
+[[candidate]]
+level  = 0
+id     = "XLPE_Sub"
+label  = "XLPE Submarine Cable"
+n6     = 0.50
+perf   = 0.65
+power  = 0.70
+cost   = 0.40
+notes  = "loss=3%=n/phi EXACT, cross-linked polyethylene, subsea HVDC"
+
+[[candidate]]
+level  = 0
+id     = "GIL_SF6"
+label  = "Gas-Insulated Line (SF6)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.90
+cost   = 0.20
+notes  = "SF6=6 fluorine atoms EXACT, loss<1%, underground"
+
+[[candidate]]
+level  = 0
+id     = "MgB2_SC"
+label  = "MgB2 Superconductor"
+n6     = 0.50
+perf   = 0.95
+power  = 0.95
+cost   = 0.15
+notes  = "Tc=39K, lower cost than YBCO, loss<0.5%, Z(B)=5=sopfr"
+
+# =============================================================
+# Level 1: Conversion (Power Electronics)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Conversion"
+
+[[candidate]]
+level  = 1
+id     = "6Pulse"
+label  = "6-Pulse Thyristor Rectifier"
+n6     = 1.00
+perf   = 0.50
+power  = 0.60
+cost   = 1.00
+notes  = "pulses=6=n EXACT, THD=25%, classic LCC-HVDC"
+
+[[candidate]]
+level  = 1
+id     = "12Pulse"
+label  = "12-Pulse Thyristor Rectifier"
+n6     = 1.00
+perf   = 0.70
+power  = 0.70
+cost   = 0.80
+notes  = "pulses=12=sigma EXACT, THD=12%, two 6-pulse bridges"
+
+[[candidate]]
+level  = 1
+id     = "MMC"
+label  = "Modular Multilevel Converter"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.40
+notes  = "levels=6=n EXACT per arm, THD<2%, VSC-HVDC standard"
+
+[[candidate]]
+level  = 1
+id     = "SiC_MOSFET"
+label  = "SiC MOSFET Converter"
+n6     = 0.50
+perf   = 1.00
+power  = 0.95
+cost   = 0.30
+notes  = "SiC bandgap=3.3eV, eff=99%, switching=100kHz"
+
+[[candidate]]
+level  = 1
+id     = "GaN_HEMT"
+label  = "GaN HEMT Converter"
+n6     = 0.80
+perf   = 0.90
+power  = 0.85
+cost   = 0.35
+notes  = "GaN bandgap=3.4eV~n/phi+0.4, eff=98.5%, switching=1MHz=10^n EXACT"
+
+# =============================================================
+# Level 2: Transformer (Voltage Transform)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Transformer"
+
+[[candidate]]
+level  = 2
+id     = "Oil_3phase"
+label  = "Oil-Cooled 3-Phase Transformer"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 1.00
+notes  = "phases=3=n/phi EXACT, eff=99.5%, mature technology"
+
+[[candidate]]
+level  = 2
+id     = "Dry_3phase"
+label  = "Dry-Type 3-Phase Transformer"
+n6     = 1.00
+perf   = 0.70
+power  = 0.70
+cost   = 0.80
+notes  = "phases=3=n/phi EXACT, eff=99.0%, no fire risk"
+
+[[candidate]]
+level  = 2
+id     = "SST"
+label  = "Solid-State Transformer"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.25
+notes  = "medium-freq isolation, eff=98%, bidirectional, n6-aligned power electronics"
+
+[[candidate]]
+level  = 2
+id     = "SC_Xfmr"
+label  = "Superconducting Transformer"
+n6     = 1.00
+perf   = 1.00
+power  = 1.00
+cost   = 0.10
+notes  = "zero copper loss EXACT, eff=99.9%, cryogenic cooling"
+
+[[candidate]]
+level  = 2
+id     = "MultiWinding"
+label  = "Multi-Winding Transformer (4 windings)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.60
+notes  = "windings=4=tau EXACT, multi-output, eff=99.2%"
+
+# =============================================================
+# Level 3: HVDC (Transmission Voltage)  -- 4 candidates
+# =============================================================
+[[level]]
+name = "HVDC"
+
+[[candidate]]
+level  = 3
+id     = "HVDC_500"
+label  = "HVDC +/-500kV"
+n6     = 1.00
+perf   = 0.70
+power  = 0.80
+cost   = 0.80
+notes  = "500=sopfr*(sigma-phi)^2 EXACT, mature, 3GW capacity"
+
+[[candidate]]
+level  = 3
+id     = "HVDC_800"
+label  = "HVDC +/-800kV"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.50
+notes  = "800=(sigma-tau)*(sigma-phi)^2 EXACT, UHV standard, 8GW"
+
+[[candidate]]
+level  = 3
+id     = "HVDC_1100"
+label  = "HVDC +/-1100kV"
+n6     = 1.00
+perf   = 1.00
+power  = 0.90
+cost   = 0.25
+notes  = "1100=(sigma-mu)*(sigma-phi)^2 EXACT, world record, 12GW=sigma"
+
+[[candidate]]
+level  = 3
+id     = "MVDC_48V"
+label  = "MVDC 48V Data Center"
+n6     = 1.00
+perf   = 0.40
+power  = 0.95
+cost   = 1.00
+notes  = "48=sigma*tau EXACT, Google OCP standard, loss<1%"
+
+# =============================================================
+# Level 4: System (Grid Topology)  -- 4 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "Central_Radial"
+label  = "Central Radial Grid"
+n6     = 0.00
+perf   = 0.50
+power  = 0.50
+cost   = 1.00
+notes  = "traditional hub-spoke, single point of failure"
+
+[[candidate]]
+level  = 4
+id     = "Microgrid_24"
+label  = "Microgrid Cluster (J2=24 nodes)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.85
+cost   = 0.50
+notes  = "nodes=24=J2 EXACT, islanding capable, resilient"
+
+[[candidate]]
+level  = 4
+id     = "Supergrid"
+label  = "Continental Supergrid (sigma=12 links)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.75
+cost   = 0.20
+notes  = "links=12=sigma EXACT, continent-scale HVDC backbone"
+
+[[candidate]]
+level  = 4
+id     = "Hybrid_Egyptian"
+label  = "Hybrid Egyptian Grid (1/2+1/3+1/6=1)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.90
+cost   = 0.40
+notes  = "1/2 baseload + 1/3 renewable + 1/6 storage = 1 EXACT"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Superconducting transformers only with HTS or MgB2 conductors
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "SC_Xfmr"
+then_level = 0
+then_ids   = "HTS_YBCO,MgB2_SC"
+
+# HVDC 1100kV requires MMC or 12Pulse conversion
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "HVDC_1100"
+then_level = 1
+then_ids   = "MMC,12Pulse"
+
+# MVDC 48V only pairs with SST or SiC conversion
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "MVDC_48V"
+then_level = 1
+then_ids   = "SiC_MOSFET,GaN_HEMT"
+
+# MVDC 48V only with microgrid or central radial (not supergrid)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "MVDC_48V"
+then_level = 4
+then_ids   = "Supergrid"
+
+# Submarine cable only with HVDC systems (not MVDC)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "XLPE_Sub"
+then_level = 3
+then_ids   = "HVDC_500,HVDC_800,HVDC_1100"
+
+# 6Pulse too low quality for supergrid
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "6Pulse"
+then_level = 4
+then_ids   = "Supergrid"
+
+# GIL underground best paired with urban microgrid or central
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "GIL_SF6"
+then_level = 4
+then_ids   = "Microgrid_24,Central_Radial"

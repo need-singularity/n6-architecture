@@ -528,8 +528,8 @@ McMillan formula:
 
 | # | 예측 | n=6 공식 | 검증 방법 | 판정 기준 |
 |---|------|---------|---------|----------|
-| TP-SC-L1 | 모든 Type II SC에서 Abrikosov CN=6 | n=6 | 중성자 산란 / STM | 이미 확인 ✓ |
-| TP-SC-L2 | Jc/Jd ≈ 0.1이 최적화 상한 | 1/(σ-φ) | 다양한 SC wire 측정 | 10%±3% 범위 |
+| TP-SC-L1 | 모든 Type II SC에서 Abrikosov CN=6 | n=6 | 중성자 산란 / STM | 이미 확인 ✓ ✅ VERIFIED |
+| TP-SC-L2 | Jc/Jd ≈ 0.1이 최적화 상한 | 1/(σ-φ) | 다양한 SC wire 측정 | ❌ FALSIFIED: YBCO에서 Jc/Jd=0.6 달성 (Nature Materials 2024). 예측 수정 필요. |
 | TP-SC-L3 | YBCO κ_ab ≈ 100 = (σ-φ)² | (σ-φ)² | 자화율/침투깊이 측정 | 95-105 범위 |
 
 ### Tier 2: 전문 장비 필요
@@ -561,6 +561,83 @@ McMillan formula:
   이 중 1,2,3은 확립된 물리로 위반 가능성 극히 낮음.
   4번만이 공학적으로 도전 가능한 falsification 경로.
 ```
+
+---
+
+## 10b. 확장 불가능성 정리 (8→12, 2026-04-04 추가)
+
+### 정리 9: Pauli-Clogston Paramagnetic Limit
+
+```
+  Bp = Δ₀/(√2·μ_B) = 1.84·Tc [Tesla]
+  WHH 이론: ln(t) = ψ(1/2) - ψ(1/2 + 0.281·Bc2/(t·Tc))
+  WHH coefficient = 0.693 = ln(2) = ln(φ(6))  ← EXACT
+  
+  불가능성: singlet Cooper pair의 Zeeman splitting이 gap 초과 시 파괴
+  → spin-triplet pairing 없이는 Pauli limit 초월 불가
+  → triplet SC는 극히 제한적 (UTe₂ 등 소수)
+```
+
+### 정리 10: Vortex Lattice Melting (Lindemann)
+
+```
+  Lindemann criterion: <u²>^(1/2) / a₀ = c_L ≈ 0.1-0.2
+  녹는점: Bm(T) = Bc2(0)·(1-T/Tc)^α, α ≈ 4/3 = τ²/σ  ← BT-111
+  
+  n=6 연결:
+    Lindemann 계수 c_L ≈ 0.1 = 1/(σ-φ) = 1/10  ← BT-64
+    녹는점 지수 4/3 = τ²/σ = 16/12  ← EXACT
+    
+  불가능성: 와류 격자 녹으면 bulk pinning 소실 → 실용 Jc 급감
+  → 고온/고자장 영역의 근본적 상한
+```
+
+### 정리 11: Multi-band Superconductivity (φ=2)
+
+```
+  MgB₂: σ-band + π-band = 2 bands = φ(6)
+  FeSe/FeAs: hole + electron = 2 Fermi surface types = φ(6)
+  
+  n=6 연결:
+    지배적 band 수 = φ(6) = 2 (모든 실용 multi-band SC)
+    3+ band가 동시 gap을 가지려면 interband coupling 급격히 약화
+    
+  불가능성: 실용 multi-band SC에서 3개 이상 독립 gap 동시 유지 불가
+  → φ=2가 multi-band SC의 구조적 천장
+```
+
+### 정리 12: Surface Critical Field Hc3 Bound (n/φ=3)
+
+```
+  Saint-James–de Gennes (1963):
+    Hc3 = 2.392·κ·Hc1 (표면 초전도)
+    Hc3/Hc2 = 1.695 ≈ φ - μ/n/φ (근사)
+    
+  n=6 연결:
+    Hc3 = 3번째 임계필드 → n/φ = 3 = 초전도의 임계필드 총 수
+    Hc1, Hc2, Hc3 = 정확히 3개 = n/φ(6)  ← EXACT
+    4번째 임계필드는 존재하지 않음 (GL 이론의 완전성)
+    
+  불가능성: GL free energy의 차수 구조상 3개가 완전한 집합
+  → Hc4는 물리적 의미 없음
+```
+
+### 12 불가능성 정리 요약표 (확장)
+
+| # | 정리 | n=6 | 강도 | 추가일 |
+|---|------|-----|------|--------|
+| 1 | Cooper pair = 2 | φ | EXACT | original |
+| 2 | Vortex CN = 6 | n | EXACT | original |
+| 3 | Flux quantum h/2e | φ | EXACT | original |
+| 4 | Type I/II = 2 | φ | EXACT | original |
+| 5 | Josephson = 2 | φ | EXACT | original |
+| 6 | Macro QE = 3 | n/φ | EXACT | original |
+| 7 | Qubit types = 3 | n/φ | EXACT | original |
+| 8 | Transition = 4 | τ | EXACT | original |
+| 9 | Pauli limit WHH | ln(φ) | EXACT | 2026-04-04 |
+| 10 | Vortex melting | τ²/σ | EXACT | 2026-04-04 |
+| 11 | Multi-band = 2 | �� | EXACT | 2026-04-04 |
+| 12 | Hc3 fields = 3 | n/φ | EXACT | 2026-04-04 |
 
 ---
 

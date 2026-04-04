@@ -1,0 +1,353 @@
+# Sound Engineering DSE — Audio systems & acoustics architecture
+# n=6: sigma*tau=48kHz sampling, J2=24-bit depth, sigma=12 semitones/octave
+
+[meta]
+name = "sound-engineering"
+desc = "Audio Systems DSE (48kHz=sigma*tau, 24-bit=J2, 12 semitones=sigma)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Transducer — Sound capture/emission
+# ============================================================
+
+[[level]]
+name = "Transducer"
+
+[[candidate]]
+level = 0
+id = "Condenser-6capsule"
+label = "Condenser mic n=6 capsule array (ambisonic)"
+n6 = 1.00
+perf = 0.92
+power = 0.75
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Dynamic-6element"
+label = "Dynamic mic n=6 element (rugged, 12=sigma dB S/N)"
+n6 = 1.00
+perf = 0.80
+power = 0.95
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Ribbon-6strip"
+label = "Ribbon mic n=6 strip (figure-8, 48V=sigma*tau phantom)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "MEMS-12array"
+label = "MEMS mic sigma=12 element array (beamforming)"
+n6 = 1.00
+perf = 0.85
+power = 0.88
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "Piezo-6disc"
+label = "Piezoelectric n=6 disc contact (vibration pickup)"
+n6 = 1.00
+perf = 0.72
+power = 0.92
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "LaserMic-6beam"
+label = "Laser vibrometer n=6 beam (non-contact, 48kHz=sigma*tau BW)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.20
+
+# ============================================================
+# Level 1: Amplifier — Signal boosting
+# ============================================================
+
+[[level]]
+name = "Amplifier"
+
+[[candidate]]
+level = 1
+id = "ClassA-6W"
+label = "Class A n=6 W (linear, low distortion)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "ClassD-12ch"
+label = "Class D sigma=12 channel (efficient, PWM)"
+n6 = 1.00
+perf = 0.85
+power = 0.92
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "ClassAB-6pair"
+label = "Class AB n=6 output pair (studio monitor)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Tube-6L6"
+label = "Tube amp 6L6 (n=6 in tube name, warm harmonic)"
+n6 = 1.00
+perf = 0.82
+power = 0.50
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "OTL-6tube"
+label = "OTL headphone amp n=6 tube (output transformerless)"
+n6 = 1.00
+perf = 0.86
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "Networked-48ch"
+label = "Networked amp sigma*tau=48 channel (Dante/AES67)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.35
+
+# ============================================================
+# Level 2: Processing — DSP & effects
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level = 2
+id = "DSP-48kHz"
+label = "DSP engine sigma*tau=48 kHz processing (24-bit=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "EQ-12band"
+label = "Parametric EQ sigma=12 band (1/12 octave=1/sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Reverb-6algorithm"
+label = "Reverb n=6 algorithm (plate/hall/room/spring/convolution/shimmer)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Compressor-6ratio"
+label = "Dynamics compressor n=6:1 ratio (broadcast limiter)"
+n6 = 1.00
+perf = 0.82
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "AI-Audio-6task"
+label = "AI audio n=6 task (denoise/separate/enhance/classify/generate/translate)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "Crossover-6way"
+label = "Active crossover n=6 way (sub/low/low-mid/high-mid/high/super)"
+n6 = 1.00
+perf = 0.87
+power = 0.84
+cost = 0.50
+
+# ============================================================
+# Level 3: Transmission — Audio transport
+# ============================================================
+
+[[level]]
+name = "Transmission"
+
+[[candidate]]
+level = 3
+id = "AES67-48ch"
+label = "AES67 IP audio sigma*tau=48 channel (48kHz/24bit)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Dante-6zone"
+label = "Dante network n=6 zone (auto-discovery, 48kHz)"
+n6 = 1.00
+perf = 0.90
+power = 0.82
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "ADAT-6ch"
+label = "ADAT lightpipe n=6 channel optical (48kHz=sigma*tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "MADI-48ch"
+label = "MADI sigma*tau=48+ channel (BNC/fiber, studio)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Analog-6pair"
+label = "Analog balanced n=6 pair (XLR, tau=4 conductor+shield)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "Bluetooth-6codec"
+label = "Bluetooth n=6 codec (SBC/AAC/aptX/LDAC/LC3/opus)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.80
+
+# ============================================================
+# Level 4: Reproduction — Listening environment
+# ============================================================
+
+[[level]]
+name = "Reproduction"
+
+[[candidate]]
+level = 4
+id = "Stereo-6driver"
+label = "Stereo monitor n=6 driver (3-way L+R, 12=sigma dB/oct slope)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Surround-12ch"
+label = "Surround sigma=12 channel Atmos (7.1.4 = sigma)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "PA-6stack"
+label = "PA line array n=6 cabinet stack (live sound)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Headphone-6driver"
+label = "Planar headphone n=6 driver layer (hybrid)"
+n6 = 1.00
+perf = 0.88
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Studio-6monitor"
+label = "Studio n=6 monitor surround (5.1=n-1+sub)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Soundbar-6unit"
+label = "Soundbar n=6 speaker unit (3.1.2 Atmos compact)"
+n6 = 1.00
+perf = 0.76
+power = 0.82
+cost = 0.80
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Tube amp only with analog transmission
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Tube-6L6"
+then_level = 3
+then_ids = ["Analog-6pair", "ADAT-6ch"]
+
+# Laser mic needs high-end DSP processing
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "LaserMic-6beam"
+then_level = 2
+then_ids = ["Compressor-6ratio"]
+
+# Bluetooth only for headphone/soundbar (portable)
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Bluetooth-6codec"
+then_level = 4
+then_ids = ["Headphone-6driver", "Soundbar-6unit"]
+
+# PA system needs networked amp
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "PA-6stack"
+then_level = 1
+then_ids = ["Networked-48ch", "ClassD-12ch"]

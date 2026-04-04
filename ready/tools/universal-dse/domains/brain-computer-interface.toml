@@ -1,0 +1,397 @@
+# N6 Brain-Computer Interface DSE — BCI hardware + software
+# 6 Electrodes × 6 Amplifiers × 6 Decoders × 6 Stimulators × 6 Applications = 7,776 combos
+# n=6 connections: n=6 frequency bands (delta/theta/alpha/beta/gamma/HFO),
+#   sigma=12 channels per region, tau=4 processing stages, J2=24 bit resolution
+
+[meta]
+name = "brain-computer-interface"
+desc = "Brain-Computer Interface DSE — from electrode to application (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Electrode (전극)
+#   n6 checks: n=6 electrode materials, sigma=12 contacts per shank,
+#              tau=4 shank array, J2=24 total channels per probe
+# ============================================================
+
+[[level]]
+name = "Electrode"
+
+[[candidate]]
+id = "UtahArray"
+label = "Utah array (6x6 grid=36 electrodes, 12 contacts active, 4mm penetration)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.55
+notes = "grid=6x6=n^2, active=12=sigma EXACT, standard invasive"
+
+[[candidate]]
+id = "Neuropixels"
+label = "Neuropixels 2.0 (4 shanks, 12 recording sites/bank, 48 banks)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.35
+notes = "shanks=4=tau, sites=12=sigma, banks=48=sigma*tau ALL EXACT"
+
+[[candidate]]
+id = "ECoG_Grid"
+label = "ECoG grid (6x4=24 contacts, 12mm spacing, subdural)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.50
+notes = "contacts=24=J2, cols=6=n, rows=4=tau, spacing=12mm=sigma ALL EXACT"
+
+[[candidate]]
+id = "Flexible_Mesh"
+label = "Flexible neural mesh (6 layers, 12 electrodes/layer, graphene)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.30
+notes = "layers=6=n, electrodes=12=sigma EXACT, minimal tissue damage"
+
+[[candidate]]
+id = "DryEEG"
+label = "Dry EEG headset (12 channels, 6 frequency bands, non-invasive)"
+n6 = 1.00
+perf = 0.45
+power = 0.90
+cost = 0.95
+notes = "channels=12=sigma, bands=6=n EXACT, consumer grade"
+
+[[candidate]]
+id = "Stentrode"
+label = "Stentrode endovascular (6 sensors, 4 stent segments, 12mm vessel)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.40
+notes = "sensors=6=n, segments=4=tau, vessel=12mm=sigma ALL EXACT"
+
+# ============================================================
+# Level 1: Amplifier (증폭기)
+#   n6 checks: sigma=12 gain stages, tau=4 filter bands,
+#              n=6 noise figure (dB), J2=24 bit ADC resolution
+# ============================================================
+
+[[level]]
+name = "Amplifier"
+
+[[candidate]]
+id = "LNA_CMOS"
+label = "Low-noise CMOS amp (12 gain stages, 6nV/rtHz noise, 24-bit ADC)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+notes = "stages=12=sigma, noise=6=n, ADC=24=J2 ALL EXACT"
+
+[[candidate]]
+id = "Chopper_Amp"
+label = "Chopper-stabilized amp (6 modulation phases, 12 channels, ultra-low 1/f)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "phases=6=n, channels=12=sigma EXACT"
+
+[[candidate]]
+id = "SAR_ADC"
+label = "SAR ADC front-end (12-bit resolution, 48kSPS, 4 input mux)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+notes = "bits=12=sigma, rate=48k=sigma*tau, mux=4=tau ALL EXACT"
+
+[[candidate]]
+id = "DeltaSigma"
+label = "Delta-sigma modulator (24-bit, 6 integrator stages, 48kHz sample)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.45
+notes = "bits=24=J2, stages=6=n, sample=48kHz=sigma*tau ALL EXACT"
+
+[[candidate]]
+id = "Neural_ASIC"
+label = "Neural recording ASIC (12 AFE channels, 6 programmable gains, 4 filters)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.50
+notes = "channels=12=sigma, gains=6=n, filters=4=tau ALL EXACT"
+
+[[candidate]]
+id = "Wireless_Amp"
+label = "Wireless neural amp (6 TX channels, 12Mbps data rate, 48hr battery)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.60
+notes = "TX=6=n, rate=12Mbps=sigma, battery=48hr=sigma*tau ALL EXACT"
+
+# ============================================================
+# Level 2: Decoder (디코더)
+#   n6 checks: n=6 frequency bands decoded, sigma=12 features,
+#              tau=4 processing pipeline stages, J2=24 class output
+# ============================================================
+
+[[level]]
+name = "Decoder"
+
+[[candidate]]
+id = "Kalman_BMI"
+label = "Kalman filter BMI (6 state variables, 12 observation channels, 4 update stages)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "states=6=n, channels=12=sigma, stages=4=tau ALL EXACT"
+
+[[candidate]]
+id = "DNN_Decoder"
+label = "Deep neural decoder (6 layers, 12 features/layer, 24 output classes)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.40
+notes = "layers=6=n, features=12=sigma, classes=24=J2 ALL EXACT"
+
+[[candidate]]
+id = "SNN_Neuromorphic"
+label = "Spiking neural decoder (6 SNN layers, 4 time constants, 12 spike trains)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.45
+notes = "layers=6=n, tau=4=tau, trains=12=sigma ALL EXACT"
+
+[[candidate]]
+id = "Transformer_BCI"
+label = "Transformer BCI (6 attention heads, 12 sequence length, 48 embedding dim)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.30
+notes = "heads=6=n, seq=12=sigma, dim=48=sigma*tau ALL EXACT"
+
+[[candidate]]
+id = "CSP_Filter"
+label = "Common spatial pattern (6 frequency bands, 4 spatial filters, 12 CSP components)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+notes = "bands=6=n, filters=4=tau, CSP=12=sigma ALL EXACT"
+
+[[candidate]]
+id = "RNN_Seq"
+label = "RNN sequential decoder (6 LSTM layers, 12 hidden units, 4 output modes)"
+n6 = 0.80
+perf = 0.80
+power = 0.65
+cost = 0.55
+notes = "layers=6=n, hidden=12=sigma, modes=4=tau EXACT"
+
+# ============================================================
+# Level 3: Stimulator (자극기)
+#   n6 checks: n=6 stimulation channels, sigma=12 electrode contacts,
+#              tau=4 stimulation modes, J2=24 charge levels
+# ============================================================
+
+[[level]]
+name = "Stimulator"
+
+[[candidate]]
+id = "DBS_System"
+label = "Deep brain stimulator (6 contacts, 12 programs, 4 modes, 48uA steps)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.40
+notes = "contacts=6=n, programs=12=sigma, modes=4=tau, step=48uA=sigma*tau ALL EXACT"
+
+[[candidate]]
+id = "Cortical_Stim"
+label = "Cortical stimulator (12 electrode grid, 6 patterns, 24 charge levels)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.50
+notes = "electrodes=12=sigma, patterns=6=n, levels=24=J2 ALL EXACT"
+
+[[candidate]]
+id = "TMS_Coil"
+label = "TMS coil system (6 coil positions, 4 pulse modes, non-invasive)"
+n6 = 0.80
+perf = 0.65
+power = 0.70
+cost = 0.75
+notes = "positions=6=n, modes=4=tau EXACT, non-invasive"
+
+[[candidate]]
+id = "Optogenetic"
+label = "Optogenetic stimulator (6 LED wavelengths, 12 fiber channels, 4 power levels)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.25
+notes = "wavelengths=6=n, channels=12=sigma, levels=4=tau ALL EXACT"
+
+[[candidate]]
+id = "tDCS"
+label = "Transcranial DC stimulation (6 electrode pairs, 4 montages, 12 min session)"
+n6 = 1.00
+perf = 0.50
+power = 0.85
+cost = 0.90
+notes = "pairs=6=n, montages=4=tau, session=12min=sigma ALL EXACT"
+
+[[candidate]]
+id = "Ultrasound_FUS"
+label = "Focused ultrasound (6 transducers, 12 focal points, 48kHz center freq)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.55
+notes = "transducers=6=n, foci=12=sigma, freq=48kHz=sigma*tau ALL EXACT"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: n=6 control DOF, sigma=12 command types,
+#              tau=4 user modes, J2=24 ms latency target
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Motor_Prosthetic"
+label = "Motor prosthetic (6 DOF arm, 12 grip types, 24ms latency)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+notes = "DOF=6=n, grips=12=sigma, latency=24ms=J2 ALL EXACT"
+
+[[candidate]]
+id = "Speech_BCI"
+label = "Speech restoration (6 articulators decoded, 12 phonemes/sec, 4 language models)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.35
+notes = "articulators=6=n, rate=12=sigma, LM=4=tau ALL EXACT"
+
+[[candidate]]
+id = "Vision_Restore"
+label = "Visual cortex prosthetic (6x4=24 phosphenes, 12 brightness levels)"
+n6 = 1.00
+perf = 0.70
+power = 0.50
+cost = 0.25
+notes = "phosphenes=24=J2, cols=6=n, rows=4=tau, levels=12=sigma ALL EXACT"
+
+[[candidate]]
+id = "Neuro_Gaming"
+label = "Neurogaming headset (6 control channels, 12 actions, 48ms response)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.85
+notes = "channels=6=n, actions=12=sigma, response=48ms=sigma*tau ALL EXACT"
+
+[[candidate]]
+id = "Epilepsy_RNS"
+label = "Epilepsy RNS (6 detection channels, 4 stimulation responses, 12 seizure types)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.50
+notes = "channels=6=n, responses=4=tau, types=12=sigma ALL EXACT"
+
+[[candidate]]
+id = "Memory_Enhance"
+label = "Memory enhancement (6 hippocampal sites, 12 recall patterns, 4 encoding phases)"
+n6 = 1.00
+perf = 0.75
+power = 0.55
+cost = 0.30
+notes = "sites=6=n, patterns=12=sigma, phases=4=tau ALL EXACT"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Utah array is standard for motor prosthetic
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "UtahArray"
+then_level = 4
+then_ids = "Motor_Prosthetic,Speech_BCI"
+
+# Dry EEG headset pairs with neurogaming (consumer)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "DryEEG"
+then_level = 4
+then_ids = "Neuro_Gaming"
+
+# DBS stimulator pairs with epilepsy RNS
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "DBS_System"
+then_level = 4
+then_ids = "Epilepsy_RNS,Memory_Enhance"
+
+# Optogenetic stimulator needs flexible mesh electrodes
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Optogenetic"
+then_level = 0
+then_ids = "Flexible_Mesh,Neuropixels"
+
+# Transformer BCI decoder pairs with speech restoration
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Transformer_BCI"
+then_level = 4
+then_ids = "Speech_BCI,Motor_Prosthetic"
+
+# ECoG grid pairs with cortical stimulator
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ECoG_Grid"
+then_level = 3
+then_ids = "Cortical_Stim"
+
+# tDCS pairs with memory enhancement (non-invasive)
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "tDCS"
+then_level = 4
+then_ids = "Memory_Enhance,Neuro_Gaming"
+
+# SNN decoder pairs with neuromorphic efficiency
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "SNN_Neuromorphic"
+then_level = 1
+then_ids = "Neural_ASIC,Wireless_Amp"

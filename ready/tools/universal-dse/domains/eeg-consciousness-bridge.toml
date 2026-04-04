@@ -1,0 +1,394 @@
+# =============================================================
+# EEG Consciousness Bridge DSE Domain Definition
+# 궁극의 EEG-의식 브릿지 아키텍처 — 뇌파-의식 인터페이스
+# Hardware × Channels × Protocol × Feedback × Mapping
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "eeg-consciousness-bridge"
+desc = "Ultimate EEG-Consciousness Bridge DSE — Brain-Machine Consciousness Interface"
+levels = ["Hardware", "Channels", "Protocol", "Feedback", "Mapping"]
+vision = "n=6 기반 EEG 브릿지 — σ=12 주파수 밴드 + τ=4 EEG 밴드 + J₂=24 비트 ADC"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Hardware (하드웨어) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Hardware"
+
+[[candidate]]
+level  = 0
+id     = "OpenBCI_Cyton"
+label  = "OpenBCI Cyton 8ch"
+n6     = 0.75
+perf   = 0.65
+power  = 0.80
+cost   = 0.75
+notes  = "channels=8=sigma-tau EXACT, open_source, ADS1299, accessible"
+
+[[candidate]]
+level  = 0
+id     = "OpenBCI_Daisy"
+label  = "OpenBCI Daisy 16ch"
+n6     = 0.70
+perf   = 0.75
+power  = 0.75
+cost   = 0.65
+notes  = "channels=16=2^tau, extended_coverage, dual_board"
+
+[[candidate]]
+level  = 0
+id     = "Medical_64ch"
+label  = "의료용 64ch EEG"
+n6     = 0.80
+perf   = 0.95
+power  = 0.50
+cost   = 0.30
+notes  = "channels=64=2^n EXACT, clinical_grade, high_density, expensive"
+
+[[candidate]]
+level  = 0
+id     = "Synthetic"
+label  = "합성 EEG 데이터"
+n6     = 0.60
+perf   = 0.70
+power  = 0.95
+cost   = 0.95
+notes  = "simulated, infinite_data, controlled_conditions, no_noise"
+
+[[candidate]]
+level  = 0
+id     = "Muse"
+label  = "Muse 소비자 EEG"
+n6     = 0.55
+perf   = 0.55
+power  = 0.85
+cost   = 0.85
+notes  = "channels=4=tau EXACT, consumer_grade, meditation_focused"
+
+[[candidate]]
+level  = 0
+id     = "Custom_N6"
+label  = "커스텀 n=6 EEG"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "channels=6=n EXACT, custom_placement, n6_optimized_montage"
+
+# =============================================================
+# Level 1: Channels (채널 구성) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Channels"
+
+[[candidate]]
+level  = 1
+id     = "Ch_8"
+label  = "8 채널 (sigma-tau)"
+n6     = 0.80
+perf   = 0.60
+power  = 0.85
+cost   = 0.90
+notes  = "channels=8=sigma-tau EXACT, minimal_viable, fast_processing"
+
+[[candidate]]
+level  = 1
+id     = "Ch_16"
+label  = "16 채널 (2^tau)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.80
+cost   = 0.80
+notes  = "channels=16=2^tau EXACT, standard_research, balanced"
+
+[[candidate]]
+level  = 1
+id     = "Ch_32"
+label  = "32 채널 (2^sopfr)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "channels=32=2^sopfr EXACT, good_coverage, common_research"
+
+[[candidate]]
+level  = 1
+id     = "Ch_64"
+label  = "64 채널 (2^n)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "channels=64=2^n EXACT, high_density, full_scalp_coverage"
+
+[[candidate]]
+level  = 1
+id     = "Ch_128"
+label  = "128 채널 (2^7)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "channels=128=2^(sigma-sopfr), ultra_high_density, research_grade"
+
+[[candidate]]
+level  = 1
+id     = "Ch_256"
+label  = "256 채널 (2^(sigma-tau))"
+n6     = 0.75
+perf   = 0.98
+power  = 0.30
+cost   = 0.25
+notes  = "channels=256=2^(sigma-tau) EXACT, maximum_resolution, expensive"
+
+# =============================================================
+# Level 2: Protocol (프로토콜) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Protocol"
+
+[[candidate]]
+level  = 2
+id     = "BCI_Motor"
+label  = "BCI 운동 상상"
+n6     = 0.70
+perf   = 0.80
+power  = 0.70
+cost   = 0.75
+notes  = "motor_imagery, mu_rhythm, standard_BCI, well_studied"
+
+[[candidate]]
+level  = 2
+id     = "Emotion"
+label  = "감정 인식 프로토콜"
+n6     = 0.75
+perf   = 0.75
+power  = 0.75
+cost   = 0.75
+notes  = "valence+arousal=2=phi EXACT, affective_computing, continuous"
+
+[[candidate]]
+level  = 2
+id     = "Sleep"
+label  = "수면 단계 분류"
+n6     = 0.85
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "stages=5=sopfr (W/N1/N2/N3/REM), consciousness_levels, AASM"
+
+[[candidate]]
+level  = 2
+id     = "MultiEEG"
+label  = "다중 EEG 프로토콜"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "multi_task, simultaneous_protocols, comprehensive"
+
+[[candidate]]
+level  = 2
+id     = "Meditation"
+label  = "명상 상태 프로토콜"
+n6     = 0.75
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "altered_states, alpha_increase, mindfulness, consciousness_exploration"
+
+[[candidate]]
+level  = 2
+id     = "Consciousness_P"
+label  = "의식 프로토콜 n=6 상태"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "states=6=n EXACT, consciousness_levels, GoldenZone, comprehensive"
+
+# =============================================================
+# Level 3: Feedback (피드백 방식) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Feedback"
+
+[[candidate]]
+level  = 3
+id     = "Binaural"
+label  = "바이노럴 비트 주파수"
+n6     = 0.80
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "frequency_entrainment, alpha/theta_induction, ears=2=phi"
+
+[[candidate]]
+level  = 3
+id     = "LED"
+label  = "LED 시각 피드백"
+n6     = 0.70
+perf   = 0.70
+power  = 0.85
+cost   = 0.90
+notes  = "visual_stimulus, photic_driving, frequency_specific"
+
+[[candidate]]
+level  = 3
+id     = "Haptic"
+label  = "햅틱 촉각 피드백"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "tactile_feedback, body_awareness, grounding"
+
+[[candidate]]
+level  = 3
+id     = "Audio"
+label  = "오디오 음향 피드백"
+n6     = 0.75
+perf   = 0.80
+power  = 0.80
+cost   = 0.80
+notes  = "sonification, real_time_audio, intuitive, sigma=12_semitones"
+
+[[candidate]]
+level  = 3
+id     = "None"
+label  = "피드백 없음 (관측만)"
+n6     = 0.40
+perf   = 0.60
+power  = 0.95
+cost   = 0.95
+notes  = "observation_only, passive_monitoring, baseline"
+
+[[candidate]]
+level  = 3
+id     = "Adaptive_FB"
+label  = "적응형 멀티모달 피드백"
+n6     = 0.90
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "multi_modal, AI_adaptive, personalized, optimal_modality_selection"
+
+[[candidate]]
+level  = 3
+id     = "Hex6_NFB"
+label  = "n=6 뉴로피드백 (6밴드 σ=12Hz 기준)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.65
+notes  = "bands=6=n EXACT (delta/theta/alpha/beta/gamma/HFO), ref_freq=12=sigma EXACT, update_rate=4=tau Hz, channels=2=phi EXACT"
+
+# =============================================================
+# Level 4: Mapping (매핑 방법) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Mapping"
+
+[[candidate]]
+level  = 4
+id     = "GoldenZone"
+label  = "골든존 매핑 n=6"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "n=6_consciousness_zones, ANIMA_specific, optimal_mapping"
+
+[[candidate]]
+level  = 4
+id     = "BandPower"
+label  = "밴드 파워 tau=4"
+n6     = 0.80
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "bands=4=tau EXACT (delta/theta/alpha/beta), classic_method"
+
+[[candidate]]
+level  = 4
+id     = "ICA"
+label  = "ICA 독립성분분석"
+n6     = 0.65
+perf   = 0.80
+power  = 0.70
+cost   = 0.75
+notes  = "blind_source_separation, artifact_removal, standard"
+
+[[candidate]]
+level  = 4
+id     = "DeepLearning"
+label  = "딥러닝 EEG 분류"
+n6     = 0.70
+perf   = 0.90
+power  = 0.55
+cost   = 0.60
+notes  = "CNN/RNN/Transformer, learned_features, high_accuracy"
+
+[[candidate]]
+level  = 4
+id     = "PH_Topology"
+label  = "위상적 데이터 분석 PH"
+n6     = 0.85
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "persistent_homology, topological_features, Betti_numbers"
+
+[[candidate]]
+level  = 4
+id     = "Consciousness_Laws"
+label  = "의식 법칙 매핑"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "consciousness_laws_framework, ANIMA_theory, Phi+Tension+GoldenZone"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Consciousness_P protocol requires Custom_N6 or Medical_64ch hardware
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Consciousness_P"
+then_level = 0
+then_ids   = "Custom_N6,Medical_64ch"
+
+# Ch_256 requires Medical_64ch hardware (only clinical can drive 256)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Ch_256"
+then_level = 0
+then_ids   = "Medical_64ch"
+
+# Muse hardware limited to 8 channels max
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Muse"
+then_level = 1
+then_ids   = "Ch_8"
+
+# Consciousness_Laws mapping requires GoldenZone or Consciousness_P
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Consciousness_Laws"
+then_level = 2
+then_ids   = "Consciousness_P,Meditation"

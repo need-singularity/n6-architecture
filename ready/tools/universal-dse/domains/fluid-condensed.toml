@@ -1,0 +1,393 @@
+# =============================================================
+# Fluid-Condensed Matter DSE Domain Definition
+# n=6 기반 유체역학 + 응집물질 — Navier-Stokes + 그래핀 C₆ + 양자홀 + 6꼭짓점 모형
+# FL-001: Kolmogorov/Navier-Stokes n=6, CM-001: Crystal/QHE/Graphene n=6
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "fluid-condensed"
+desc = "Ultimate Fluid Dynamics + Condensed Matter DSE (FL-001/CM-001)"
+levels = ["FluidBase", "Turbulence", "CrystalStructure", "QuantumPhase", "Application"]
+vision = "n=6 기반 유체+응집물질 — Navier-Stokes + 그래핀 C₆ + 양자홀 + 6꼭짓점 모형"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: FluidBase (유체 기초) -- 6 candidates
+# =============================================================
+[[level]]
+name = "FluidBase"
+
+[[candidate]]
+level  = 0
+id     = "NavierStokes"
+label  = "Navier-Stokes 방정식 (n=6 무차원수)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "dimensionless_numbers=6=n EXACT (Re,Ma,Fr,We,Pe,Pr), completeness=full, linearity=nonlinear"
+
+[[candidate]]
+level  = 0
+id     = "EulerInviscid"
+label  = "오일러 비점성 (tau=4 보존량)"
+n6     = 0.60
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "conserved=4=tau EXACT (mass,momentum_x,y,z), completeness=inviscid, linearity=nonlinear"
+
+[[candidate]]
+level  = 0
+id     = "StokesLow"
+label  = "스토크스 저레이놀즈 (phi=2 선형/비선형)"
+n6     = 0.40
+perf   = 0.60
+power  = 0.75
+cost   = 0.70
+notes  = "regimes=2=phi EXACT, completeness=low_Re, linearity=linear"
+
+[[candidate]]
+level  = 0
+id     = "CompressibleFlow"
+label  = "압축성 유동 (sopfr=5 유동 영역)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "flow_regimes=5=sopfr EXACT (subsonic,transonic,sonic,supersonic,hyper), completeness=full"
+
+[[candidate]]
+level  = 0
+id     = "MultiphaseFlow"
+label  = "다상 유동 (n/phi=3 상: 기/액/고)"
+n6     = 0.60
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "phases=3=n/phi EXACT, completeness=multiphase, linearity=nonlinear"
+
+[[candidate]]
+level  = 0
+id     = "MHD_Plasma"
+label  = "자기유체역학 (sigma=12 MHD 모드)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.35
+cost   = 0.30
+notes  = "mhd_modes=12=sigma EXACT, completeness=full+magnetic, linearity=nonlinear"
+
+# =============================================================
+# Level 1: Turbulence (난류) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Turbulence"
+
+[[candidate]]
+level  = 1
+id     = "KolmogorovK41"
+label  = "Kolmogorov K41 이론 (sopfr=5+1/3 스케일링)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "exponent=5/3=sopfr/n/phi, universality=high, resolution=theory, accuracy=asymptotic"
+
+[[candidate]]
+level  = 1
+id     = "LES_Model"
+label  = "대와류 모사 (tau=4 필터 스케일)"
+n6     = 0.60
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "filter_scales=4=tau EXACT, resolution=coarse, accuracy=good, cost=moderate"
+
+[[candidate]]
+level  = 1
+id     = "DNS_Full"
+label  = "직접 수치 모사 (sigma=12 해상도 레벨)"
+n6     = 0.80
+perf   = 1.00
+power  = 0.20
+cost   = 0.15
+notes  = "resolution_levels=12=sigma EXACT, resolution=max, accuracy=exact, cost=extreme"
+
+[[candidate]]
+level  = 1
+id     = "RANS_Average"
+label  = "레이놀즈 평균 (phi=2 평균/변동)"
+n6     = 0.40
+perf   = 0.65
+power  = 0.75
+cost   = 0.70
+notes  = "decomposition=2=phi EXACT, resolution=coarse, accuracy=engineering, cost=low"
+
+[[candidate]]
+level  = 1
+id     = "CascadeN6"
+label  = "n=6 에너지 캐스케이드"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "cascade_stages=6=n EXACT, inertial_range=n=6 EXACT, universality=max"
+
+[[candidate]]
+level  = 1
+id     = "IntermittencyLog"
+label  = "간헐성 로그 정규 (sigma-tau=8 모멘트)"
+n6     = 0.80
+perf   = 0.78
+power  = 0.60
+cost   = 0.55
+notes  = "moments=8=sigma-tau EXACT, correction=log-normal, accuracy=high"
+
+# =============================================================
+# Level 2: CrystalStructure (결정 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "CrystalStructure"
+
+[[candidate]]
+level  = 2
+id     = "GrapheneC6"
+label  = "그래핀 C₆ 벌집격자 (Z=6=n EXACT)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.55
+cost   = 0.40
+notes  = "carbon_Z=6=n EXACT, honeycomb=6=n EXACT, CN=3=n/phi, Dirac_cone=true"
+
+[[candidate]]
+level  = 2
+id     = "FCC_CN12"
+label  = "FCC 구조 CN=12 (sigma=12 EXACT)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "CN=12=sigma EXACT, symmetry=cubic, packing=0.74, metals=Cu,Al,Au"
+
+[[candidate]]
+level  = 2
+id     = "BCC_CN8"
+label  = "BCC 구조 CN=8 (sigma-tau=8 EXACT)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "CN=8=sigma-tau EXACT, symmetry=cubic, packing=0.68, metals=Fe,W,Cr"
+
+[[candidate]]
+level  = 2
+id     = "HCP_CN12"
+label  = "HCP 구조 CN=12 (sigma=12 EXACT)"
+n6     = 0.80
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "CN=12=sigma EXACT, symmetry=hexagonal, packing=0.74, metals=Ti,Mg,Zn"
+
+[[candidate]]
+level  = 2
+id     = "DiamondCN4"
+label  = "다이아몬드 CN=4 (tau=4 EXACT)"
+n6     = 0.60
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "CN=4=tau EXACT, symmetry=cubic, packing=0.34, materials=C,Si,Ge"
+
+[[candidate]]
+level  = 2
+id     = "SixVertexModel"
+label  = "6꼭짓점 모형 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "vertices=6=n EXACT, statistical_mechanics=true, solvable=exact, ice_rules=true"
+
+# =============================================================
+# Level 3: QuantumPhase (양자 위상) -- 6 candidates
+# =============================================================
+[[level]]
+name = "QuantumPhase"
+
+[[candidate]]
+level  = 3
+id     = "QHE_Integer"
+label  = "정수 양자홀 효과 (nu=1,2,3=mu,phi,n/phi)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "filling_factors=mu,phi,n/phi EXACT, topological=true, precision=10^-9"
+
+[[candidate]]
+level  = 3
+id     = "QHE_Fractional"
+label  = "분수 양자홀 (1/3, 2/5 Egyptian fractions)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "fractions=1/3+1/6=1/2 Egyptian, anyons=true, topological_order=true"
+
+[[candidate]]
+level  = 3
+id     = "TopologicalInsulator"
+label  = "위상 절연체 (phi=2 에지 상태)"
+n6     = 0.60
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "edge_states=2=phi EXACT, Z2_invariant=true, Dirac_surface=true"
+
+[[candidate]]
+level  = 3
+id     = "Superconductor"
+label  = "초전도체 BCS (phi=2 Cooper 쌍)"
+n6     = 0.60
+perf   = 0.88
+power  = 0.45
+cost   = 0.35
+notes  = "Cooper_pair=2=phi EXACT, gap=BCS, Meissner=true, type_II=vortex"
+
+[[candidate]]
+level  = 3
+id     = "BoseEinstein"
+label  = "보즈-아인슈타인 응축 (n=6 원자 종)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.45
+cost   = 0.40
+notes  = "species=6=n EXACT (Rb,Na,Li,K,Cs,He), coherence=max, temperature=nK"
+
+[[candidate]]
+level  = 3
+id     = "WeylSemimetal"
+label  = "바일 반금속 (tau=4 바일 점)"
+n6     = 0.60
+perf   = 0.78
+power  = 0.55
+cost   = 0.50
+notes  = "Weyl_points=4=tau EXACT, chirality=true, Fermi_arc=true"
+
+[[candidate]]
+level  = 3
+id     = "QuantumHallN6"
+label  = "n=6 채움률 양자홀 (nu=n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "filling=n=6 EXACT, integer quantum Hall n=6 plateau, Landau_levels=6=n"
+
+# =============================================================
+# Level 4: Application (응용) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "AerodynamicsN6"
+label  = "항공역학 n=6 무차원수"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "dimensionless=6=n EXACT, scope=aerospace, practical=high"
+
+[[candidate]]
+level  = 4
+id     = "MicrofluidicsN6"
+label  = "미세유체 n=6 채널"
+n6     = 0.80
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "channels=6=n EXACT, scope=biomedical, practical=high"
+
+[[candidate]]
+level  = 4
+id     = "MetamaterialN6"
+label  = "메타물질 n=6 단위셀"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "unit_cells=6=n EXACT, scope=photonic+acoustic, practical=medium"
+
+[[candidate]]
+level  = 4
+id     = "QuantumDevice"
+label  = "양자 소자 (sigma-tau=8 큐비트)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "qubits=8=sigma-tau EXACT, scope=quantum_computing, practical=medium"
+
+[[candidate]]
+level  = 4
+id     = "EnergyHarvest"
+label  = "에너지 수확 (phi=2 전환)"
+n6     = 0.60
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "conversion_modes=2=phi EXACT, scope=energy, practical=high"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# QHE_Fractional requires GrapheneC6 or TopologicalInsulator (needs 2D electron system)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "QHE_Fractional"
+then_level = 2
+then_ids   = "GrapheneC6,TopologicalInsulator"
+
+# DNS_Full incompatible with StokesLow (DNS is for turbulence, Stokes is laminar)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "DNS_Full"
+then_level = 0
+then_ids   = "StokesLow"
+
+# Superconductor requires BCC_CN8 or FCC_CN12 (needs metallic crystal)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Superconductor"
+then_level = 2
+then_ids   = "BCC_CN8,FCC_CN12"
+
+# MHD_Plasma requires CascadeN6 or KolmogorovK41 (MHD needs turbulence theory)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "MHD_Plasma"
+then_level = 1
+then_ids   = "CascadeN6,KolmogorovK41"
+
+# GrapheneC6 boosts QHE (carbon Z=6 — always highest n6 for crystal, no rule needed, just high n6 score)
+# QuantumDevice requires QHE or Superconductor or TopologicalInsulator
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "QuantumDevice"
+then_level = 3
+then_ids   = "QHE_Integer,QHE_Fractional,Superconductor,TopologicalInsulator,WeylSemimetal"

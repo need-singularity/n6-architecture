@@ -1,0 +1,396 @@
+# =============================================================
+# DEEP-EVOLUTION DSE Domain Definition
+# n=6 기반 심층 진화 — 텔로미어 6bp + 5왕국 + 6대멸종 + DNA tau=4
+# Based on 110 EVOL hypotheses in TECS-L
+# Chain: Genome -> Regulation -> Development -> Ecology -> Macroscale
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "deep-evolution"
+desc = "Ultimate Deep Evolution DSE -- telomere 6bp + 5 kingdoms + 6 mass extinctions"
+levels = ["Genome", "Regulation", "Development", "Ecology", "Macroscale"]
+vision = "n=6 deep evolution -- TTAGGG 6bp telomere + tau=4 DNA bases + sopfr=5 kingdoms"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Genome (유전체 진화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Genome"
+
+[[candidate]]
+level  = 0
+id     = "TelomereN6"
+label  = "텔로미어 반복 TTAGGG = 6bp (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.75
+cost   = 0.80
+notes  = "repeat=6=n EXACT, bases=TTAGGG, conserved=vertebrates, aging=related"
+
+[[candidate]]
+level  = 0
+id     = "TransposonN6"
+label  = "전이 인자 n=6 계열 (LINE/SINE/DNA/LTR/Helitron/Maverick)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.70
+notes  = "families=6=n EXACT, genome_fraction=45%, mobile=true, evolution_driver=true"
+
+[[candidate]]
+level  = 0
+id     = "GeneDuplication"
+label  = "유전자 중복 phi=2 복사"
+n6     = 0.50
+perf   = 0.85
+power  = 0.80
+cost   = 0.85
+notes  = "copies=2=phi EXACT, mechanism=unequal_crossover, neofunctionalization=true"
+
+[[candidate]]
+level  = 0
+id     = "WholeGenomeDup"
+label  = "전유전체 중복 WGD phi=2"
+n6     = 0.50
+perf   = 0.95
+power  = 0.60
+cost   = 0.55
+notes  = "ploidy=2=phi EXACT, events=ancient, speciation=major, complexity_jump=true"
+
+[[candidate]]
+level  = 0
+id     = "HorizontalGeneTransfer"
+label  = "수평 유전자 전달 sigma-tau=8 메커니즘"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.75
+notes  = "mechanisms=8=sigma-tau EXACT, prokaryote=major, antibiotic_resistance=true"
+
+[[candidate]]
+level  = 0
+id     = "EpigenomeN4"
+label  = "후성유전체 tau=4 마크"
+n6     = 0.75
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "marks=4=tau EXACT (methylation/acetylation/phosphorylation/ubiquitination), heritable=partial"
+
+# =============================================================
+# Level 1: Regulation (조절 진화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Regulation"
+
+[[candidate]]
+level  = 1
+id     = "PromoterN6"
+label  = "프로모터 n=6 핵심 요소"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "elements=6=n EXACT (TATA/Inr/BRE/DPE/MTE/DCE), transcription=initiation"
+
+[[candidate]]
+level  = 1
+id     = "EnhancerSilencer"
+label  = "증강자/억제자 phi=2 EXACT"
+n6     = 0.75
+perf   = 0.80
+power  = 0.80
+cost   = 0.85
+notes  = "types=2=phi EXACT, distal_regulation=true, cis_regulatory=true"
+
+[[candidate]]
+level  = 1
+id     = "SplicingN4"
+label  = "스플라이싱 tau=4 유형"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "types=4=tau EXACT (constitutive/alternative/trans/self), proteome_diversity=true"
+
+[[candidate]]
+level  = 1
+id     = "MicroRNA"
+label  = "microRNA 조절 sigma=12 표적 그룹"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "target_groups=12=sigma EXACT, post_transcriptional=true, fine_tuning=true"
+
+[[candidate]]
+level  = 1
+id     = "CircadianReg"
+label  = "생체시계 J2=24시간 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.70
+notes  = "period=24=J2 EXACT, clock_genes=12=sigma, oscillation=autonomous"
+
+[[candidate]]
+level  = 1
+id     = "StressResponse"
+label  = "스트레스 반응 sopfr=5 경로"
+n6     = 0.75
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "pathways=5=sopfr EXACT (heat/cold/oxidative/osmotic/DNA_damage), adaptation=true"
+
+# =============================================================
+# Level 2: Development (발생 진화 Evo-Devo) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Development"
+
+[[candidate]]
+level  = 2
+id     = "HoxCluster"
+label  = "Hox 유전자 클러스터 sigma=12"
+n6     = 0.75
+perf   = 0.90
+power  = 0.70
+cost   = 0.70
+notes  = "genes=12=sigma (approximate), body_axis=true, collinearity=true, conserved=bilaterians"
+
+[[candidate]]
+level  = 2
+id     = "BodyPlanN6"
+label  = "체제 6 기본형"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.75
+notes  = "plans=6=n EXACT (radial/bilateral/segmented/limbed/cephalopod/acoelomate), phyla=diverse"
+
+[[candidate]]
+level  = 2
+id     = "MetamorphN4"
+label  = "변태 tau=4 단계"
+n6     = 0.75
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "stages=4=tau EXACT (egg/larva/pupa/adult), holometabolous=true, insects=major"
+
+[[candidate]]
+level  = 2
+id     = "GermLayerN3"
+label  = "배엽 n/phi=3 층 (외/중/내) EXACT"
+n6     = 0.75
+perf   = 0.90
+power  = 0.85
+cost   = 0.90
+notes  = "layers=3=n/phi EXACT (ectoderm/mesoderm/endoderm), triploblastic=true, universal=true"
+
+[[candidate]]
+level  = 2
+id     = "CellFateN6"
+label  = "세포운명 n=6 결정인자"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "factors=6=n EXACT, Waddington=landscape, pluripotency=true, differentiation=true"
+
+[[candidate]]
+level  = 2
+id     = "SymmetryBreaking"
+label  = "대칭 깨짐 phi=2 좌/우"
+n6     = 0.50
+perf   = 0.70
+power  = 0.85
+cost   = 0.85
+notes  = "sides=2=phi EXACT, chirality=true, Nodal_signaling=true, vertebrates=true"
+
+# =============================================================
+# Level 3: Ecology (생태 진화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Ecology"
+
+[[candidate]]
+level  = 3
+id     = "KingdomN5"
+label  = "5계 분류 sopfr=5 EXACT"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.85
+notes  = "kingdoms=5=sopfr EXACT (Animalia/Plantae/Fungi/Protista/Monera), Whittaker=1969"
+
+[[candidate]]
+level  = 3
+id     = "DomainN3"
+label  = "3역 분류 n/phi=3 EXACT"
+n6     = 0.75
+perf   = 0.90
+power  = 0.85
+cost   = 0.90
+notes  = "domains=3=n/phi EXACT (Bacteria/Archaea/Eukarya), Woese=1990, molecular=true"
+
+[[candidate]]
+level  = 3
+id     = "CoevolutionN6"
+label  = "공진화 n=6 상호작용 타입"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.75
+notes  = "types=6=n EXACT (predator-prey/parasite-host/mutualism/mimicry/pollination/seed_dispersal)"
+
+[[candidate]]
+level  = 3
+id     = "SymbiosisN3"
+label  = "공생 n/phi=3 (상리/편리/기생)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.85
+cost   = 0.85
+notes  = "types=3=n/phi EXACT (mutualism/commensalism/parasitism), ubiquitous=true"
+
+[[candidate]]
+level  = 3
+id     = "IslandBiogeography"
+label  = "섬 생물지리 phi=2 이민/절멸"
+n6     = 0.50
+perf   = 0.70
+power  = 0.80
+cost   = 0.80
+notes  = "processes=2=phi EXACT (immigration/extinction), MacArthur_Wilson=1967, equilibrium=true"
+
+[[candidate]]
+level  = 3
+id     = "BiomeN6"
+label  = "생물군계 n=6 종류"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "biomes=6=n EXACT (tundra/taiga/temperate/tropical/desert/aquatic), climate=determined"
+
+# =============================================================
+# Level 4: Macroscale (거시 진화) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Macroscale"
+
+[[candidate]]
+level  = 4
+id     = "MassExtinction6"
+label  = "6대멸종 (Big 5 + 홀로세) n=6 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.75
+notes  = "events=6=n EXACT (Ordovician/Devonian/Permian/Triassic/Cretaceous/Holocene), catastrophic=true"
+
+[[candidate]]
+level  = 4
+id     = "CambrianExplosion"
+label  = "캄브리아 대폭발 n=6 문 출현"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "major_phyla=~6, period=541Ma, innovation=body_plans, rapid=true"
+
+[[candidate]]
+level  = 4
+id     = "ConvergentEvolution"
+label  = "수렴진화 phi=2 독립기원"
+n6     = 0.50
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "origins=2=phi EXACT (independent), examples=eyes/wings/echolocation, selection=similar"
+
+[[candidate]]
+level  = 4
+id     = "EndosymbiosisN2"
+label  = "내부공생 phi=2 (미토콘드리아/엽록체)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.85
+cost   = 0.85
+notes  = "organelles=2=phi EXACT, eukaryote_origin=true, energy_revolution=true"
+
+[[candidate]]
+level  = 4
+id     = "TreeOfLifeN3"
+label  = "생명의 나무 n/phi=3 도메인"
+n6     = 0.75
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "domains=3=n/phi EXACT (Bacteria/Archaea/Eukarya), phylogenetic=true, universal=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# HoxCluster requires PromoterN6 or EnhancerSilencer (Hox regulation)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "HoxCluster"
+then_level = 1
+then_ids   = "PromoterN6,EnhancerSilencer"
+
+# GermLayerN3 required for BodyPlanN6 (body plan needs germ layers)
+# Expressed as: BodyPlanN6 requires GermLayerN3
+# Since same-level require isn't standard, we skip this or model differently
+# Instead: BodyPlanN6 requires PromoterN6 or EnhancerSilencer (developmental regulation)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "BodyPlanN6"
+then_level = 1
+then_ids   = "PromoterN6,EnhancerSilencer,MicroRNA"
+
+# MassExtinction6 requires KingdomN5 or DomainN3 (extinction requires classification)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "MassExtinction6"
+then_level = 3
+then_ids   = "KingdomN5,DomainN3"
+
+# WholeGenomeDup requires GeneDuplication (WGD is extreme gene duplication)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "WholeGenomeDup"
+then_level = 0
+then_ids   = "GeneDuplication"
+
+# CircadianReg incompatible with StressResponse at regulation level (different timescales)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "CircadianReg"
+then_level = 1
+then_ids   = "StressResponse"
+
+# SymmetryBreaking requires GermLayerN3 (laterality needs triploblastic development)
+# Cross-level: Development level 2 SymmetryBreaking requires level 2 GermLayerN3
+# Same-level rules may not work, so we use regulation requirement instead
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "SymmetryBreaking"
+then_level = 1
+then_ids   = "PromoterN6,EnhancerSilencer,SplicingN4"

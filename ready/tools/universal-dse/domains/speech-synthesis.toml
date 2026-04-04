@@ -1,0 +1,357 @@
+# =============================================================
+# Speech Synthesis DSE Domain Definition
+# Text-to-speech — text analysis to audio output
+# n=6: 6 phoneme classes, σ=12 mel bands, σ·τ=48kHz sample rate
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "speech-synthesis"
+desc = "Speech Synthesis Architecture DSE (textanalysis/acoustic/vocoder/prosody/output)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: TextAnalysis (6 candidates)
+# ============================================================
+
+[[level]]
+name = "TextAnalysis"
+
+[[candidate]]
+level = 0
+id = "Rule-G2P"
+label = "Rule-Based G2P (grapheme-to-phoneme, 6 phoneme classes, deterministic)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.95
+
+[[candidate]]
+level = 0
+id = "Seq2Seq-G2P"
+label = "Seq2Seq G2P (LSTM encoder-decoder, σ=12 layer, neural)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "BERT-Frontend"
+label = "BERT Text Frontend (contextual, σ=12 attention heads, disambiguation)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "LLM-Frontend"
+label = "LLM Text Frontend (GPT-style, n=6 billion params, multilingual)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Phoneme-Dict"
+label = "Phoneme Dictionary (CMUdict, 6 stress levels, lookup)"
+n6 = 1.00
+perf = 0.70
+power = 0.92
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Hybrid-Rule-ML"
+label = "Hybrid Rule+ML (rule fallback, 6 language modules, robust)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.70
+
+# ============================================================
+# Level 1: Acoustic (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Acoustic"
+
+[[candidate]]
+level = 1
+id = "Tacotron2"
+label = "Tacotron 2 (attention-based, σ=12 decoder layers, autoregressive)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "FastSpeech2"
+label = "FastSpeech 2 (non-autoregressive, 6 FFT blocks, parallel)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "VITS"
+label = "VITS (variational, end-to-end, n=6 flow layers, single-stage)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "GradTTS"
+label = "Grad-TTS (diffusion-based, 6 denoising steps, high quality)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "StyleTTS"
+label = "StyleTTS 2 (style-diffusion, σ=12 style tokens, expressive)"
+n6 = 1.00
+perf = 0.93
+power = 0.58
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Parametric"
+label = "Parametric Synthesis (HMM-based, 6 stream params, lightweight)"
+n6 = 1.00
+perf = 0.65
+power = 0.88
+cost = 0.85
+
+# ============================================================
+# Level 2: Vocoder (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Vocoder"
+
+[[candidate]]
+level = 2
+id = "HiFi-GAN"
+label = "HiFi-GAN (multi-period, 6 sub-discriminators, fast)"
+n6 = 1.00
+perf = 0.92
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "WaveNet"
+label = "WaveNet (autoregressive, σ=12 dilated layers, golden standard)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "WaveGlow"
+label = "WaveGlow (flow-based, σ=12 coupling layers, parallel)"
+n6 = 1.00
+perf = 0.88
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Vocos"
+label = "Vocos (iSTFT-based, n=6 conv layers, ultra-fast)"
+n6 = 1.00
+perf = 0.87
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "LPCNet"
+label = "LPCNet (neural+LPC, 6 LPC features, edge-friendly)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "BigVGAN"
+label = "BigVGAN (anti-aliased, σ=12 up-sampling layers, universal)"
+n6 = 1.00
+perf = 0.93
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 3: Prosody (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Prosody"
+
+[[candidate]]
+level = 3
+id = "Global-Style"
+label = "Global Style Token (GST, 6 style heads, single embedding)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "VAE-Prosody"
+label = "VAE Prosody (latent space, n=6 prosody dims, controllable)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Reference-Encoder"
+label = "Reference Encoder (speaker+emotion, σ=12 reference slots, cloning)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "F0-Duration"
+label = "Explicit F0+Duration (pitch contour, 6-point interpolation, precise)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Diffusion-Prosody"
+label = "Diffusion Prosody (denoising, 6 steps, natural variation)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "LLM-Prosody"
+label = "LLM-Guided Prosody (GPT context, n=6 emotion classes, semantic)"
+n6 = 1.00
+perf = 0.93
+power = 0.50
+cost = 0.35
+
+# ============================================================
+# Level 4: Output (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Output"
+
+[[candidate]]
+level = 4
+id = "Streaming-16k"
+label = "Streaming 16kHz (telephony, real-time, 6ms chunk, low-bandwidth)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 4
+id = "HD-24k"
+label = "HD 24kHz Audio (podcast, J₂=24kHz, EnCodec compatible)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Studio-48k"
+label = "Studio σ·τ=48kHz Audio (broadcast, production quality, full band)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Realtime-Edge"
+label = "Real-time Edge (on-device, n=6 core NPU, mobile TTS)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "MultiLingual"
+label = "Multilingual Output (6 languages, code-switch, global)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Emotional"
+label = "Emotional Speech (6 emotion categories, expressive, audiobook)"
+n6 = 1.00
+perf = 0.90
+power = 0.62
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# WaveNet too slow for real-time edge
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "WaveNet"
+then_level = 4
+then_ids = ["Studio-48k", "HD-24k", "Emotional"]
+
+# LPCNet designed for edge deployment
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "LPCNet"
+then_level = 4
+then_ids = ["Streaming-16k", "Realtime-Edge"]
+
+# LLM frontend requires cloud-capable output
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "LLM-Frontend"
+then_level = 4
+then_ids = ["Studio-48k", "HD-24k", "MultiLingual", "Emotional"]
+
+# Parametric only for simple streaming
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Parametric"
+then_level = 4
+then_ids = ["Streaming-16k", "Realtime-Edge"]

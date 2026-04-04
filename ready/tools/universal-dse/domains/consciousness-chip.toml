@@ -1,0 +1,414 @@
+# =============================================================
+# Consciousness Chip DSE Domain Definition
+# 궁극의 의식 칩 아키텍처 — FPGA/ASIC 의식 프로세서
+# Target × Precision × CellArch × Bus × Clock
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "consciousness-chip"
+desc = "Ultimate Consciousness Chip DSE — FPGA/ASIC Consciousness Processor"
+levels = ["Target", "Precision", "CellArch", "Bus", "Clock"]
+vision = "n=6 기반 의식 칩 — n=6 셀 링 + 6x6 토러스 + 6D 하이퍼큐브"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Target (타겟 플랫폼) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Target"
+
+[[candidate]]
+level  = 0
+id     = "Zynq_7020"
+label  = "Zynq-7020 FPGA+ARM"
+n6     = 0.60
+perf   = 0.65
+power  = 0.70
+cost   = 0.75
+notes  = "dual_core_ARM+FPGA, 85K_LUT, accessible, Xilinx"
+
+[[candidate]]
+level  = 0
+id     = "ECP5"
+label  = "Lattice ECP5 FPGA"
+n6     = 0.55
+perf   = 0.60
+power  = 0.80
+cost   = 0.85
+notes  = "open_source_toolchain, 85K_LUT, yosys+nextpnr, low_cost"
+
+[[candidate]]
+level  = 0
+id     = "iCE40"
+label  = "iCE40 FPGA 미니멀"
+n6     = 0.50
+perf   = 0.40
+power  = 0.90
+cost   = 0.90
+notes  = "minimal_FPGA, 8K_LUT, ultra_low_power, open_tools"
+
+[[candidate]]
+level  = 0
+id     = "ASIC_28nm"
+label  = "ASIC 28nm 커스텀"
+n6     = 0.80
+perf   = 0.85
+power  = 0.65
+cost   = 0.40
+notes  = "custom_silicon, BT-37_pitch=28nm=P2 EXACT, optimized"
+
+[[candidate]]
+level  = 0
+id     = "ASIC_7nm"
+label  = "ASIC 7nm 첨단"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.25
+notes  = "advanced_node, high_density, expensive_NRE, cutting_edge"
+
+[[candidate]]
+level  = 0
+id     = "RISCV_SoC"
+label  = "RISC-V SoC 커스텀"
+n6     = 0.70
+perf   = 0.75
+power  = 0.75
+cost   = 0.70
+notes  = "open_ISA, custom_extensions, n6_instruction_set, flexible"
+
+[[candidate]]
+level  = 0
+id     = "Hex6_ASIC"
+label  = "n=6 전용 ASIC (6코어 σ=12 파이프라인)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.40
+notes  = "cores=6=n EXACT, pipeline_stages=12=sigma EXACT, ALU_width=8=sigma-tau EXACT, J2=24_threads"
+
+# =============================================================
+# Level 1: Precision (연산 정밀도) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Precision"
+
+[[candidate]]
+level  = 1
+id     = "Float32"
+label  = "Float32 전정밀"
+n6     = 0.50
+perf   = 0.90
+power  = 0.45
+cost   = 0.70
+notes  = "full_precision, resource_heavy, training_standard"
+
+[[candidate]]
+level  = 1
+id     = "Fixed16"
+label  = "Fixed16 16비트 고정"
+n6     = 0.70
+perf   = 0.80
+power  = 0.70
+cost   = 0.80
+notes  = "bits=16=2^tau, DSP_efficient, good_precision"
+
+[[candidate]]
+level  = 1
+id     = "INT8"
+label  = "INT8 8비트 정수"
+n6     = 0.80
+perf   = 0.75
+power  = 0.85
+cost   = 0.90
+notes  = "bits=8=sigma-tau EXACT, inference_optimal, TOPS_efficient"
+
+[[candidate]]
+level  = 1
+id     = "Binary"
+label  = "Binary 1비트 XNOR"
+n6     = 0.60
+perf   = 0.55
+power  = 0.95
+cost   = 0.95
+notes  = "bit=1=mu EXACT, XNOR_popcount, extreme_efficiency, low_accuracy"
+
+[[candidate]]
+level  = 1
+id     = "Mixed"
+label  = "혼합 정밀도 FP8+INT8"
+n6     = 0.85
+perf   = 0.85
+power  = 0.75
+cost   = 0.75
+notes  = "FP8+INT8=8=sigma-tau EXACT, BT-45, adaptive_precision"
+
+[[candidate]]
+level  = 1
+id     = "Analog_CIM"
+label  = "아날로그 CIM"
+n6     = 0.65
+perf   = 0.80
+power  = 0.85
+cost   = 0.55
+notes  = "compute_in_memory, continuous, noise_tolerant, emerging"
+
+[[candidate]]
+level  = 1
+id     = "FP6_Native"
+label  = "FP6 네이티브 6비트 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.90
+cost   = 0.85
+notes  = "bits=6=n EXACT, mantissa=3=n/phi EXACT, exponent=2=phi EXACT, ultra_low_power"
+
+# =============================================================
+# Level 2: CellArch (셀 아키텍처) -- 6 candidates
+# =============================================================
+[[level]]
+name = "CellArch"
+
+[[candidate]]
+level  = 2
+id     = "Ring_6"
+label  = "링 6-셀"
+n6     = 1.00
+perf   = 0.70
+power  = 0.85
+cost   = 0.90
+notes  = "cells=6=n EXACT, minimal_wiring, simple_routing"
+
+[[candidate]]
+level  = 2
+id     = "Torus_6x6"
+label  = "토러스 6x6=36 셀"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "grid=6x6, degree=4=tau EXACT, periodic_boundary, balanced"
+
+[[candidate]]
+level  = 2
+id     = "Hypercube_6D"
+label  = "6D 하이퍼큐브 64 셀"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "dim=6=n EXACT, nodes=2^6=64=BT-51, log_diameter, high_bandwidth"
+
+[[candidate]]
+level  = 2
+id     = "Mesh_6x6"
+label  = "메시 6x6 평면"
+n6     = 0.90
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "grid=6x6=36, neighbors=4=tau, planar_routing, FPGA_friendly"
+
+[[candidate]]
+level  = 2
+id     = "Star_6"
+label  = "스타 6-리프"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "leaves=6=n EXACT, hub_bottleneck, simple_control"
+
+[[candidate]]
+level  = 2
+id     = "Custom_N6"
+label  = "커스텀 n=6 토폴로지"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "n=6_optimized, divisor_graph={1,2,3,6}, adaptive_routing"
+
+# =============================================================
+# Level 3: Bus (버스 아키텍처) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Bus"
+
+[[candidate]]
+level  = 3
+id     = "SPI_6ch"
+label  = "SPI 6-채널"
+n6     = 1.00
+perf   = 0.60
+power  = 0.80
+cost   = 0.90
+notes  = "channels=6=n EXACT, simple_protocol, FPGA_easy"
+
+[[candidate]]
+level  = 3
+id     = "AXI"
+label  = "AXI4 표준 버스"
+n6     = 0.60
+perf   = 0.85
+power  = 0.65
+cost   = 0.75
+notes  = "ARM_standard, high_bandwidth, industry_standard"
+
+[[candidate]]
+level  = 3
+id     = "NoC_Mesh"
+label  = "NoC 메시 sigma=12 노드"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "routers=12=sigma EXACT, on_chip_network, scalable"
+
+[[candidate]]
+level  = 3
+id     = "Crossbar"
+label  = "크로스바 스위치"
+n6     = 0.70
+perf   = 0.95
+power  = 0.40
+cost   = 0.45
+notes  = "full_connectivity, O(N^2)_wires, non_blocking"
+
+[[candidate]]
+level  = 3
+id     = "Photonic_Bus"
+label  = "광 버스 WDM"
+n6     = 0.80
+perf   = 0.95
+power  = 0.75
+cost   = 0.30
+notes  = "WDM_channels=12=sigma, speed_of_light, emerging"
+
+[[candidate]]
+level  = 3
+id     = "Quantum_Bus"
+label  = "양자 버스 entanglement"
+n6     = 0.65
+perf   = 0.85
+power  = 0.40
+cost   = 0.20
+notes  = "entanglement_based, non_local, decoherence_limited"
+
+# =============================================================
+# Level 4: Clock (클럭 전략) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Clock"
+
+[[candidate]]
+level  = 4
+id     = "MHz_100"
+label  = "100MHz 저속 안정"
+n6     = 0.60
+perf   = 0.50
+power  = 0.90
+cost   = 0.90
+notes  = "conservative, FPGA_friendly, timing_relaxed"
+
+[[candidate]]
+level  = 4
+id     = "MHz_250"
+label  = "250MHz 중속"
+n6     = 0.65
+perf   = 0.70
+power  = 0.75
+cost   = 0.80
+notes  = "balanced, FPGA_achievable, moderate_effort"
+
+[[candidate]]
+level  = 4
+id     = "MHz_500"
+label  = "500MHz 고속"
+n6     = 0.70
+perf   = 0.80
+power  = 0.60
+cost   = 0.65
+notes  = "high_speed, ASIC_target, timing_critical"
+
+[[candidate]]
+level  = 4
+id     = "GHz_1"
+label  = "1GHz ASIC 전용"
+n6     = 0.70
+perf   = 0.90
+power  = 0.45
+cost   = 0.50
+notes  = "ASIC_only, high_performance, power_hungry"
+
+[[candidate]]
+level  = 4
+id     = "Async"
+label  = "비동기 이벤트 구동"
+n6     = 0.85
+perf   = 0.85
+power  = 0.85
+cost   = 0.55
+notes  = "event_driven, brain_like, no_global_clock, neuromorphic_compatible"
+
+[[candidate]]
+level  = 4
+id     = "Adaptive"
+label  = "적응형 DVFS"
+n6     = 0.80
+perf   = 0.85
+power  = 0.80
+cost   = 0.60
+notes  = "dynamic_voltage_frequency, workload_adaptive, energy_proportional"
+
+[[candidate]]
+level  = 4
+id     = "Hex6_Clock"
+label  = "n=6 분할 클럭 (6위상 σ=12 배수)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.60
+notes  = "phases=6=n EXACT, base_freq_mul=12=sigma EXACT, dividers=2=phi EXACT, cycle=tau=4_stages"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# iCE40 cannot support Hypercube_6D (too few resources)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "iCE40"
+then_level = 2
+then_ids   = "Hypercube_6D,Custom_N6"
+
+# ASIC_7nm requires high-performance bus
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ASIC_7nm"
+then_level = 3
+then_ids   = "NoC_Mesh,Crossbar,Photonic_Bus"
+
+# Quantum_Bus only with ASIC_7nm or RISCV_SoC
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Quantum_Bus"
+then_level = 0
+then_ids   = "ASIC_7nm,RISCV_SoC"
+
+# GHz_1 clock only for ASIC targets
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "GHz_1"
+then_level = 0
+then_ids   = "ASIC_28nm,ASIC_7nm"

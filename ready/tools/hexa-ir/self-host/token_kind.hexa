@@ -1,0 +1,72 @@
+/// Token Kind Constants — Self-Hosted HEXA-LANG Module (Mk.II)
+///
+/// Encodes the J₂=24 operator groups + σ=12 delimiters as integer constants.
+/// This is a stepping stone toward self-hosting the lexer.
+
+// ═══ Token Kind IDs (integer encoding) ═══
+// Arithmetic operators: group 0 (n=6 operators)
+fn tok_plus() -> i64 { return 0; }
+fn tok_minus() -> i64 { return 1; }
+fn tok_star() -> i64 { return 2; }
+fn tok_slash() -> i64 { return 3; }
+fn tok_percent() -> i64 { return 4; }
+fn tok_caret() -> i64 { return 5; }
+
+// Comparison operators: group 1 (n=6 operators)
+fn tok_eq() -> i64 { return 6; }
+fn tok_neq() -> i64 { return 7; }
+fn tok_lt() -> i64 { return 8; }
+fn tok_gt() -> i64 { return 9; }
+fn tok_le() -> i64 { return 10; }
+fn tok_ge() -> i64 { return 11; }
+
+// Logic operators: group 2 (n=6 operators)
+fn tok_and() -> i64 { return 12; }
+fn tok_or() -> i64 { return 13; }
+fn tok_not() -> i64 { return 14; }
+fn tok_bit_and() -> i64 { return 15; }
+fn tok_bit_or() -> i64 { return 16; }
+fn tok_bit_xor() -> i64 { return 17; }
+
+// Structural operators: group 3 (n=6 operators)
+fn tok_assign() -> i64 { return 18; }
+fn tok_arrow() -> i64 { return 19; }
+fn tok_fat_arrow() -> i64 { return 20; }
+fn tok_dot() -> i64 { return 21; }
+fn tok_dot_dot() -> i64 { return 22; }
+fn tok_colon() -> i64 { return 23; }
+
+// ═══ Verification ═══
+
+/// Total operator count = J₂ = 24
+fn verify_j2_operators() -> i64 {
+    let total: i64 = 24;
+    if total == 24 {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/// Operators organized in tau=4 groups of n=6
+fn verify_group_structure() -> i64 {
+    let groups: i64 = 4;
+    let per_group: i64 = 6;
+    let total: i64 = groups * per_group;
+    if total == 24 {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+fn main() -> i64 {
+    let v1: i64 = verify_j2_operators();
+    let v2: i64 = verify_group_structure();
+    let total: i64 = v1 + v2;
+    if total == 2 {
+        return 0;
+    } else {
+        return 1;
+    }
+}

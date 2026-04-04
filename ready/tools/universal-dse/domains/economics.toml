@@ -1,0 +1,374 @@
+# =============================================================
+# Economics DSE Domain Definition
+# 궁극의 경제학/사회과학 아키텍처 — n=6 기반 경제학
+# 파레토 80/20=tau/sopfr + 6 시장 섹터 + Dunbar 수
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "economics"
+desc = "Ultimate Economics Architecture DSE — Pareto 80/20 + 6 Sectors + Dunbar"
+levels = ["Market", "Agent", "Cycle", "Network", "Policy"]
+vision = "n=6 기반 경제학 — 파레토 80/20=tau/sopfr + 6 시장 섹터 + Dunbar 수"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Market (시장 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Market"
+
+[[candidate]]
+level  = 0
+id     = "ParetoN6"
+label  = "파레토 80/20=tau(6)/sopfr(6)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "80/20=tau/sopfr, tau=4 EXACT, sopfr=5 EXACT, efficiency=90"
+
+[[candidate]]
+level  = 0
+id     = "SixSector"
+label  = "6 시장 섹터 (1차/2차/3차/금융/기술/정부)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.45
+notes  = "sectors=6=n EXACT, coverage=85, diversification=65"
+
+[[candidate]]
+level  = 0
+id     = "AuctionN4"
+label  = "4종 경매 (영국/네덜란드/봉인1가/비크리)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "auction_types=4=tau EXACT, revenue_equiv=80, mechanism_design=55"
+
+[[candidate]]
+level  = 0
+id     = "MonopolyCompetition"
+label  = "시장 구조 4종 (완전경쟁/독점/과점/독점적경쟁)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.50
+cost   = 0.45
+notes  = "structures=4=tau EXACT, equilibrium=75, welfare=50"
+
+[[candidate]]
+level  = 0
+id     = "SupplyDemand"
+label  = "수요/공급 균형"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.55
+notes  = "forces=2=phi EXACT, simplicity=70, clarity=70"
+
+[[candidate]]
+level  = 0
+id     = "GameTheoryN6"
+label  = "게임이론 6전략 (Nash/Pareto/Stackelberg/Cournot/Bertrand/Bayesian)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "strategies=6=n EXACT, equilibria=6=n EXACT, predictive=95"
+
+# =============================================================
+# Level 1: Agent (경제 주체) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Agent"
+
+[[candidate]]
+level  = 1
+id     = "DunbarN150"
+label  = "Dunbar 수 150, sigma=12 내부 그룹"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "dunbar=150~sigma*sigma+n/phi, inner_group=12=sigma EXACT, social_layers=4=tau EXACT"
+
+[[candidate]]
+level  = 1
+id     = "TeamN6"
+label  = "최적 팀 크기 n=6"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "team_size=6=n EXACT, coordination=90, productivity=65"
+
+[[candidate]]
+level  = 1
+id     = "BehavioralBias"
+label  = "행동 편향 sigma=12 주요 편향"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "biases=12=sigma EXACT, categories=4=tau EXACT, realism=80"
+
+[[candidate]]
+level  = 1
+id     = "RationalAgent"
+label  = "합리적 에이전트, phi=2 효용/비용"
+n6     = 0.50
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "utility_cost=2=phi EXACT, rationality=75, simplicity=70"
+
+[[candidate]]
+level  = 1
+id     = "BoundedRational"
+label  = "제한된 합리성, sopfr=5 인지 한계"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "cognitive_limits=5=sopfr EXACT, realism=85, complexity=60"
+
+[[candidate]]
+level  = 1
+id     = "EvolutionaryAgent"
+label  = "진화적 에이전트, tau=4 전략 갱신"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "strategy_updates=4=tau EXACT, adaptation=90, emergent=55"
+
+# =============================================================
+# Level 2: Cycle (경기 순환) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Cycle"
+
+[[candidate]]
+level  = 2
+id     = "KondratievN6"
+label  = "콘드라티예프 장파 ~60년=sigma*sopfr"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.35
+notes  = "period=60=sigma*sopfr EXACT, predictive=80, historical_fit=50"
+
+[[candidate]]
+level  = 2
+id     = "BusinessCycleN4"
+label  = "경기 4국면 (회복/확장/후퇴/침체)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "phases=4=tau EXACT, practical=85, policy_use=65"
+
+[[candidate]]
+level  = 2
+id     = "KitchinShort"
+label  = "키친 단기 파동, n/phi=3 년"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "period=3=n/phi EXACT, inventory=75, short_term=70"
+
+[[candidate]]
+level  = 2
+id     = "JuglarMedium"
+label  = "주글라 중기 파동, sigma-tau=8 년"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "period=8=sigma-tau EXACT, investment=80, medium_term=60"
+
+[[candidate]]
+level  = 2
+id     = "SchumpeterInnovation"
+label  = "슘페터 혁신 파괴, phi=2 창조/파괴"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "creative_destruction=2=phi EXACT, innovation=90, disruption=55"
+
+[[candidate]]
+level  = 2
+id     = "DebtCycleN6"
+label  = "부채 사이클, n=6 단계"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "stages=6=n EXACT, dalio_model=85, leverage=60"
+
+# =============================================================
+# Level 3: Network (경제 네트워크) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Network"
+
+[[candidate]]
+level  = 3
+id     = "TradeNetworkN6"
+label  = "무역 네트워크 n=6 허브"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "hubs=6=n EXACT, global_reach=85, resilience=55"
+
+[[candidate]]
+level  = 3
+id     = "FinancialGrid"
+label  = "금융 격자, sigma=12 시간대"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "timezones=12=sigma EXACT, 24h_coverage=24=J2 EXACT, liquidity=90"
+
+[[candidate]]
+level  = 3
+id     = "SupplyChainN5"
+label  = "공급망 sopfr=5 단계"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "stages=5=sopfr EXACT, efficiency=80, visibility=65"
+
+[[candidate]]
+level  = 3
+id     = "CryptoNetworkN6"
+label  = "암호화폐 네트워크 (BT-53), n=6 확인"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "confirms=6=n EXACT, decentralized=85, trustless=50"
+
+[[candidate]]
+level  = 3
+id     = "SocialNetSmallWorld"
+label  = "소셜 소세계, sigma-tau=8 허브"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "hub_degree=8=sigma-tau EXACT, diffusion=80, influence=55"
+
+[[candidate]]
+level  = 3
+id     = "InformationAsymmetry"
+label  = "정보 비대칭, phi=2 보유자/비보유자"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "info_split=2=phi EXACT, adverse_selection=75, moral_hazard=60"
+
+# =============================================================
+# Level 4: Policy (정책) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Policy"
+
+[[candidate]]
+level  = 4
+id     = "MonetaryN6"
+label  = "통화정책 6도구"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "tools=6=n EXACT, effectiveness=90, transmission=60"
+
+[[candidate]]
+level  = 4
+id     = "FiscalTau4"
+label  = "재정정책 4종 (세금/지출/이전/규제)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "fiscal_types=4=tau EXACT, multiplier=85, implementation=65"
+
+[[candidate]]
+level  = 4
+id     = "TradePolicy"
+label  = "무역정책, phi=2 자유/보호"
+n6     = 0.50
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "trade_regime=2=phi EXACT, simplicity=75, global_impact=70"
+
+[[candidate]]
+level  = 4
+id     = "RegulationSopfr"
+label  = "규제 sopfr=5 카테고리"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "categories=5=sopfr EXACT, compliance=80, innovation=60"
+
+[[candidate]]
+level  = 4
+id     = "WelfareN6"
+label  = "복지 6분야"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "welfare_areas=6=n EXACT, coverage=85, equity=55"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# EvolutionaryAgent requires GameTheoryN6 (evolutionary game theory)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "EvolutionaryAgent"
+then_level = 0
+then_ids   = "GameTheoryN6"
+
+# KondratievN6 requires TradeNetworkN6 or FinancialGrid (long waves need global networks)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "KondratievN6"
+then_level = 3
+then_ids   = "TradeNetworkN6,FinancialGrid"
+
+# CryptoNetworkN6 incompatible with MonopolyCompetition (decentralized vs centralized)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "CryptoNetworkN6"
+then_level = 0
+then_ids   = "MonopolyCompetition"
+
+# BoundedRational requires BehavioralBias or DunbarN150 (bounded rationality needs cognitive constraints)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "BoundedRational"
+then_level = 1
+then_ids   = "BehavioralBias,DunbarN150"

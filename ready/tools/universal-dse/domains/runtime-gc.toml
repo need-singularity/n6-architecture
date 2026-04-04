@@ -1,0 +1,390 @@
+# =============================================================
+# Runtime/GC Architecture DSE
+# 궁극의 런타임/GC — n=6 기반 메모리 + 동시성 + JIT 통합
+# Chain: Memory → GC → Concurrency → Optimization → Runtime
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "runtime-gc"
+desc = "Ultimate Runtime/GC Architecture DSE"
+levels = ["Memory", "GC", "Concurrency", "Optimization", "Runtime"]
+vision = "Zero-pause, zero-overhead runtime -- n=6 aligned memory and execution"
+
+[scoring]
+n6   = 0.30
+perf = 0.35
+power = 0.20
+cost  = 0.15
+
+# =============================================================
+# Level 0: Memory (메모리 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Memory"
+
+[[candidate]]
+level  = 0
+id     = "RegionBased"
+label  = "Region-Based Allocation (n=6 region types)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "region_types=6=n EXACT, alloc_modes=4=tau EXACT, fragmentation=low, overhead=5%"
+
+[[candidate]]
+level  = 0
+id     = "EgyptianAlloc"
+label  = "Egyptian 1/2+1/3+1/6 Memory Split"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "stack=1/2 EXACT, heap=1/3 EXACT, arena=1/6 EXACT, fragmentation=minimal, overhead=3%"
+
+[[candidate]]
+level  = 0
+id     = "ArenaPool"
+label  = "Arena Pool (sigma=12 pool sizes)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "pool_sizes=12=sigma EXACT, classes=5=sopfr EXACT, fragmentation=none, overhead=2%"
+
+[[candidate]]
+level  = 0
+id     = "OwnershipMem"
+label  = "Ownership Model (phi=2 borrow modes)"
+n6     = 0.83
+perf   = 1.00
+power  = 0.75
+cost   = 0.45
+notes  = "borrow_modes=2=phi EXACT, lifetime_depth=4=tau EXACT, fragmentation=none, overhead=0%"
+
+[[candidate]]
+level  = 0
+id     = "SlabAlloc"
+label  = "Slab Allocator (tau=4 size classes)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "size_classes=4=tau EXACT, cache_lines=8=sigma-tau EXACT, fragmentation=low, overhead=4%"
+
+[[candidate]]
+level  = 0
+id     = "BuddySystem"
+label  = "Buddy System (sigma-tau=8 levels)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.60
+cost   = 0.70
+notes  = "levels=8=sigma-tau EXACT, min_block=2^5=sopfr EXACT, fragmentation=internal, overhead=6%"
+
+# =============================================================
+# Level 1: GC (가비지 컬렉션) -- 6 candidates
+# =============================================================
+[[level]]
+name = "GC"
+
+[[candidate]]
+level  = 1
+id     = "TricolorMark"
+label  = "Tricolor Marking (n/phi=3 colors)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.60
+cost   = 0.70
+notes  = "colors=3=n/phi EXACT, phases=4=tau EXACT, pause=medium, throughput=85%"
+
+[[candidate]]
+level  = 1
+id     = "GenerationalGC"
+label  = "Generational GC (tau=4 generations)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.60
+notes  = "generations=4=tau EXACT, promotion_threshold=6=n EXACT, pause=low, throughput=90%"
+
+[[candidate]]
+level  = 1
+id     = "ConcurrentGC"
+label  = "Concurrent GC (phi=2 parallel/pause modes)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.40
+notes  = "modes=2=phi EXACT, gc_threads=8=sigma-tau EXACT, pause=sub-ms, throughput=95%"
+
+[[candidate]]
+level  = 1
+id     = "EpochGC"
+label  = "Epoch-Based Reclamation (lambda=2 epochs)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "epochs=2=lambda EXACT, hazard_ptrs=6=n EXACT, pause=none, throughput=88%"
+
+[[candidate]]
+level  = 1
+id     = "RefCounting"
+label  = "Reference Counting + Cycle Detection"
+n6     = 0.50
+perf   = 0.70
+power  = 0.75
+cost   = 0.80
+notes  = "overhead_per_op=1, cycle_detect_interval=6=n EXACT, pause=none, throughput=75%"
+
+[[candidate]]
+level  = 1
+id     = "RegionalGC"
+label  = "Regional GC (n=6 regions)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.50
+notes  = "regions=6=n EXACT, scan_groups=12=sigma EXACT, pause=low, throughput=92%"
+
+# =============================================================
+# Level 2: Concurrency (동시성 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Concurrency"
+
+[[candidate]]
+level  = 2
+id     = "ActorModel"
+label  = "Actor Model (sigma=12 message types)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "msg_types=12=sigma EXACT, mailbox_depth=24=J2 EXACT, scalability=excellent, deadlock=none"
+
+[[candidate]]
+level  = 2
+id     = "CSP_Channel"
+label  = "CSP Channels (tau=4 channel types)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.65
+notes  = "channel_types=4=tau EXACT, buffer_sizes=8=sigma-tau EXACT, scalability=good, deadlock=detectable"
+
+[[candidate]]
+level  = 2
+id     = "AsyncAwait"
+label  = "Async/Await (phi=2 states)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "states=2=phi EXACT, executor_threads=6=n EXACT, scalability=good, deadlock=possible"
+
+[[candidate]]
+level  = 2
+id     = "StructuredConc"
+label  = "Structured Concurrency (sopfr=5 scope levels)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.60
+notes  = "scope_levels=5=sopfr EXACT, nursery_depth=6=n EXACT, scalability=excellent, deadlock=impossible"
+
+[[candidate]]
+level  = 2
+id     = "STM_Atomic"
+label  = "STM Transactional Memory"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.50
+notes  = "retry_limit=6=n EXACT, conflict_resolution=2=phi EXACT, scalability=moderate, deadlock=impossible"
+
+[[candidate]]
+level  = 2
+id     = "WorkSteal"
+label  = "Work-Stealing (sigma-tau=8 queues)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "queues=8=sigma-tau EXACT, steal_strategy=2=phi EXACT, scalability=excellent, deadlock=none"
+
+# =============================================================
+# Level 3: Optimization (JIT/최적화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimization"
+
+[[candidate]]
+level  = 3
+id     = "TieredJIT"
+label  = "Tiered JIT (tau=4 tiers)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "tiers=4=tau EXACT, warmup_threshold=6=n EXACT, peak_perf=95%, compile_cost=high"
+
+[[candidate]]
+level  = 3
+id     = "ProfileGuided"
+label  = "Profile-Guided Optimization"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "profile_modes=2=phi EXACT, opt_passes=12=sigma, peak_perf=90%, compile_cost=medium"
+
+[[candidate]]
+level  = 3
+id     = "SpecDeopt"
+label  = "Speculative Opt + Deopt (phi=2 modes)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.50
+cost   = 0.45
+notes  = "modes=2=phi EXACT, guard_checks=8=sigma-tau EXACT, peak_perf=92%, compile_cost=medium"
+
+[[candidate]]
+level  = 3
+id     = "TracingJIT"
+label  = "Tracing JIT (n=6 hot loops)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "hot_loops=6=n EXACT, trace_depth=12=sigma EXACT, peak_perf=88%, compile_cost=low"
+
+[[candidate]]
+level  = 3
+id     = "AOTCompile"
+label  = "AOT Compilation"
+n6     = 0.33
+perf   = 0.85
+power  = 0.80
+cost   = 0.70
+notes  = "opt_levels=4=tau EXACT, platforms=5=sopfr, peak_perf=85%, compile_cost=none"
+
+[[candidate]]
+level  = 3
+id     = "AdaptiveOpt"
+label  = "Adaptive Optimization (sopfr=5 levels)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "levels=5=sopfr EXACT, feedback_loops=6=n EXACT, peak_perf=90%, compile_cost=medium"
+
+# =============================================================
+# Level 4: Runtime (런타임 시스템) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Runtime"
+
+[[candidate]]
+level  = 4
+id     = "MinimalRT"
+label  = "Minimal Runtime (tau=4 services)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.85
+cost   = 0.80
+notes  = "services=4=tau EXACT, binary_size=small, startup=instant, gc_needed=false"
+
+[[candidate]]
+level  = 4
+id     = "ManagedRT"
+label  = "Managed Runtime (sigma=12 services)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "services=12=sigma EXACT, binary_size=large, startup=slow, gc_needed=true"
+
+[[candidate]]
+level  = 4
+id     = "EmbeddedRT"
+label  = "Embedded Runtime (phi=2 modes)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.90
+cost   = 0.85
+notes  = "modes=2=phi EXACT, binary_size=tiny, startup=instant, gc_needed=false"
+
+[[candidate]]
+level  = 4
+id     = "CloudRT"
+label  = "Cloud-Native Runtime"
+n6     = 0.50
+perf   = 0.75
+power  = 0.40
+cost   = 0.35
+notes  = "services=8=sigma-tau EXACT, binary_size=container, startup=fast, gc_needed=true"
+
+[[candidate]]
+level  = 4
+id     = "FullStackRT"
+label  = "Full-Stack Runtime (J2=24 APIs)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "apis=24=J2 EXACT, services=6=n EXACT, binary_size=large, startup=medium, gc_needed=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# OwnershipMem excludes RefCounting (ownership = no GC overhead)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "OwnershipMem"
+then_level = 1
+then_ids   = "RefCounting,GenerationalGC,ConcurrentGC,RegionalGC"
+
+# EgyptianAlloc requires RegionalGC or GenerationalGC (structured memory needs structured GC)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "EgyptianAlloc"
+then_level = 1
+then_ids   = "RegionalGC,GenerationalGC"
+
+# STM_Atomic requires ManagedRT or FullStackRT (needs runtime support)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "STM_Atomic"
+then_level = 4
+then_ids   = "ManagedRT,FullStackRT"
+
+# AOTCompile excludes CloudRT (AOT = no dynamic loading)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "AOTCompile"
+then_level = 4
+then_ids   = "CloudRT"
+
+# MinimalRT excludes ConcurrentGC (minimal = no heavy GC)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "MinimalRT"
+then_level = 1
+then_ids   = "ConcurrentGC,RegionalGC"
+
+# EmbeddedRT excludes TieredJIT (embedded = no JIT overhead)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "EmbeddedRT"
+then_level = 3
+then_ids   = "TieredJIT,TracingJIT"

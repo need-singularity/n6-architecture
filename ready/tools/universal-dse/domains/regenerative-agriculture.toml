@@ -1,0 +1,351 @@
+# =============================================================
+# Regenerative Agriculture DSE Domain Definition
+# Soil-first farming — soil to carbon
+# n=6: 6-crop rotation, σ-φ=10x SOC gain, n=6 year transition
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "regenerative-agriculture"
+desc = "Regenerative Agriculture Architecture DSE (soil/cover/rotation/livestock/carbon)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Soil (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Soil"
+
+[[candidate]]
+level = 0
+id = "No-Till"
+label = "No-Till / Zero Tillage (n=6 year soil recovery, structure preserved)"
+n6 = 1.00
+perf = 0.85
+power = 0.88
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Biochar-Amend"
+label = "Biochar Amendment (Carbon Z=6, J₂=24 tC/ha capacity, stable 1000yr)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Compost-Tea"
+label = "Compost Tea Application (n=6 microbial guilds, liquid inoculant)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Mycorrhiza-Inoculate"
+label = "Mycorrhizal Inoculation (n=6 AMF species, phosphorus network)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Worm-Farm"
+label = "Vermicompost Integration (σ=12 worm species, humus production)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Mineral-Balance"
+label = "Mineral Balancing (σ=12 essential minerals, Albrecht method)"
+n6 = 1.00
+perf = 0.83
+power = 0.70
+cost = 0.55
+
+# ============================================================
+# Level 1: Cover (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Cover"
+
+[[candidate]]
+level = 1
+id = "Multi-Species"
+label = "Multi-Species Cover Crop (n=6 species mix, synergy blend)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Legume-Fix"
+label = "Legume N-Fixer Cover (n/φ=3 legume species, biological nitrogen)"
+n6 = 1.00
+perf = 0.85
+power = 0.88
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Living-Mulch"
+label = "Living Mulch (permanent ground cover, σ-φ=10 cm height, weed suppress)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Crimson-Roller"
+label = "Roller-Crimper Termination (n=6 mph speed, no-herbicide kill)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Winter-Hardy"
+label = "Winter Hardy Cover (σ-τ=8 month growing season, cold tolerance)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.78
+
+[[candidate]]
+level = 1
+id = "Pollinator-Strip"
+label = "Pollinator Habitat Strip (n=6 flowering species, field margin)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.82
+
+# ============================================================
+# Level 2: Rotation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Rotation"
+
+[[candidate]]
+level = 2
+id = "Six-Crop"
+label = "6-Crop Rotation (n=6 year cycle, complete nutrient balance)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Three-Field"
+label = "Three-Field System (n/φ=3 phases: crop/legume/fallow, traditional)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Silvopasture"
+label = "Silvopasture Rotation (n/φ=3 strata: tree/shrub/grass, integrated)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Relay-Crop"
+label = "Relay Cropping (φ=2 crops overlapping, continuous photosynthesis)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Perennial-Grain"
+label = "Perennial Grain Integration (Kernza/perennial wheat, no annual till)"
+n6 = 0.85
+perf = 0.80
+power = 0.88
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Agroforestry-Alley"
+label = "Alley Cropping (σ=12 m tree row spacing, crop between alleys)"
+n6 = 1.00
+perf = 0.83
+power = 0.72
+cost = 0.55
+
+# ============================================================
+# Level 3: Livestock (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Livestock"
+
+[[candidate]]
+level = 3
+id = "Mob-Grazing"
+label = "Mob Grazing (n=6 day paddock rotation, high density short duration)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Multi-Species-Graze"
+label = "Multi-Species Grazing (n=6 animal types, parasite break, forage use)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Chicken-Tractor"
+label = "Chicken Tractor Follow (σ=12 birds/unit, pest control + fertilize)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Silvopasture-Shade"
+label = "Silvopasture with Shade (n=6 tree species, animal welfare + carbon)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Cropland-Only"
+label = "Cropland Only (no livestock, τ=4 legume phases for nitrogen)"
+n6 = 0.85
+perf = 0.72
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "Insect-Farm"
+label = "Insect Protein Integration (n=6 insect species, waste-to-feed cycle)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.70
+
+# ============================================================
+# Level 4: Carbon (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Carbon"
+
+[[candidate]]
+level = 4
+id = "SOC-Measure"
+label = "Soil Organic Carbon MRV (J₂=24 sampling points/field, verified)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Carbon-Credit"
+label = "Carbon Credit Market (σ-φ=10x SOC baseline, tradeable offset)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Biochar-Sequest"
+label = "Biochar Permanent Sequestration (Carbon Z=6, σ·n=72 tC/ha max)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Ecosystem-PES"
+label = "Ecosystem Service Payment (σ=12 service indicators, multi-benefit)"
+n6 = 1.00
+perf = 0.80
+power = 0.72
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Digital-MRV"
+label = "Digital MRV Platform (AI + satellite, n=6 verification layers)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Community-Coop"
+label = "Community Cooperative Model (n=6 farm cluster, shared equipment + data)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Biochar soil amendment pairs with biochar sequestration
+[[rule]]
+type = "bonus"
+if_level = 0
+if_id = "Biochar-Amend"
+then_level = 4
+then_ids = ["Biochar-Sequest"]
+bonus = 0.15
+
+# No-till excludes relay cropping with tillage needs
+[[rule]]
+type = "bonus"
+if_level = 0
+if_id = "No-Till"
+then_level = 1
+then_ids = ["Crimson-Roller", "Living-Mulch"]
+bonus = 0.10
+
+# Mob grazing requires multi-species cover for recovery
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Mob-Grazing"
+then_level = 2
+then_ids = ["Perennial-Grain"]

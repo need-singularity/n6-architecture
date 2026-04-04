@@ -1,0 +1,367 @@
+{
+  "_meta": {
+    "name": "HEXA-LANG Knowledge Base",
+    "version": "2.0",
+    "date": "2026-04-04",
+    "source_projects": ["n6-architecture"],
+    "description": "Consolidated compiler knowledge — memories + source + singularity + blowup",
+    "loc": 13288,
+    "rs_files": 67,
+    "commits": 13,
+    "memory_files": ["memory/project_hexa_ir_mk1.md", "memory/project_hexa_coevolution.md", "memory/feedback_hexa_lang_dse_recheck.md"]
+  },
+  "architecture": {
+    "pipeline": ["lexer", "parser", "sema", "lower", "opt", "codegen"],
+    "pipeline_count": 6,
+    "pipeline_n6": "n=6 stages",
+    "dependency_order": ["util", "ir", "diag", "proof", "alloc", "lexer", "parser", "sema", "lower", "opt", "codegen"],
+    "modules": {
+      "util": {
+        "files": ["n6.rs", "intern.rs", "mod.rs"],
+        "role": "n=6 constants (SSOT), string interning, RNG"
+      },
+      "ir": {
+        "files": ["opcode.rs", "instr.rs", "types.rs", "builder.rs", "print.rs", "mod.rs"],
+        "role": "J2=24 opcodes, SSA instructions, type system"
+      },
+      "diag": {
+        "files": ["message.rs", "render.rs", "mod.rs"],
+        "role": "Diagnostic messages + terminal rendering"
+      },
+      "proof": {
+        "files": ["ownership.rs", "invariant.rs", "mod.rs"],
+        "role": "Proof obligation tracking"
+      },
+      "alloc": {
+        "files": ["arena.rs", "egyptian.rs", "mod.rs"],
+        "role": "Arena allocator + Egyptian fraction heap"
+      },
+      "lexer": {
+        "files": ["cursor.rs", "error.rs", "keyword.rs", "span.rs", "token.rs", "mod.rs"],
+        "role": "Tokenization: 20 keywords + 8 type keywords"
+      },
+      "parser": {
+        "files": ["ast.rs", "decl.rs", "error.rs", "expr.rs", "stmt.rs", "mod.rs"],
+        "role": "Recursive descent parser"
+      },
+      "sema": {
+        "files": ["resolve.rs", "typecheck.rs", "ownership.rs", "trait_impl.rs", "error.rs", "mod.rs"],
+        "role": "3-layer analysis: types + ownership + traits"
+      },
+      "lower": {
+        "files": ["expr_lower.rs", "stmt_lower.rs", "closure.rs", "pattern.rs", "proof_emit.rs", "mod.rs"],
+        "role": "AST -> HEXA-IR lowering with proof emission"
+      },
+      "opt": {
+        "files": ["front/type_infer.rs", "front/ownership_proof.rs", "front/dead_store.rs", "front/const_fold.rs", "mid/inline.rs", "mid/loop_opt.rs", "mid/cse.rs", "mid/strength.rs", "back/sink.rs", "back/coalesce.rs", "back/final_dce.rs", "back/verify.rs", "proof_info.rs", "mod.rs"],
+        "role": "sigma=12 optimization passes in n/phi=3 waves"
+      },
+      "codegen": {
+        "files": ["regalloc.rs", "x86_64.rs", "arm64.rs", "elf.rs", "macho.rs", "mod.rs"],
+        "role": "ARM64 asm (primary) + x86-64 + ELF/Mach-O"
+      }
+    },
+    "n6_constants": {
+      "opcodes": 24,
+      "opcodes_formula": "J2(6)",
+      "opcode_categories": 4,
+      "opcode_categories_formula": "tau(6)",
+      "opcodes_per_category": 6,
+      "opcodes_per_category_formula": "n",
+      "opt_passes": 12,
+      "opt_passes_formula": "sigma(6)",
+      "pass_waves": 3,
+      "pass_waves_formula": "n/phi",
+      "passes_per_wave": 4,
+      "passes_per_wave_formula": "tau(6)",
+      "primitive_types": 8,
+      "primitive_types_formula": "sigma-tau",
+      "compound_types": 4,
+      "compound_types_formula": "tau(6)",
+      "total_types": 12,
+      "total_types_formula": "sigma(6)",
+      "flow_keywords": 20,
+      "type_keywords": 8,
+      "type_keywords_formula": "sigma-tau",
+      "pipeline_stages": 6,
+      "pipeline_stages_formula": "n"
+    }
+  },
+  "instruction_set": {
+    "total": 24,
+    "categories": {
+      "arithmetic": ["Add", "Sub", "Mul", "Div", "Mod", "Neg"],
+      "memory": ["Load", "Store", "Alloc", "Free", "Copy", "Move"],
+      "control": ["Jump", "Branch", "Call", "Return", "Phi", "Switch"],
+      "proof": ["ProofAssert", "ProofInvariant", "ProofWitness", "OwnershipTransfer", "BorrowCheck", "LifetimeEnd"]
+    },
+    "comparison_vs_others": {
+      "llvm_ir": "~1000 opcodes (40x more)",
+      "wasm": "172 opcodes (7x more)",
+      "jvm": "205 opcodes (8.5x more)",
+      "hexa_ir": "24 opcodes (minimal complete)"
+    }
+  },
+  "type_system": {
+    "primitives": ["i64", "f64", "bool", "char", "str", "byte", "void", "any"],
+    "primitive_count": 8,
+    "compounds": ["Struct", "Enum", "Array", "Fn"],
+    "compound_count": 4,
+    "sizes": {
+      "i64": "8 bytes (sigma-tau)",
+      "f64": "8 bytes (sigma-tau)",
+      "bool": "1 byte (mu)",
+      "char": "4 bytes (tau, UTF-32)",
+      "str": "16 bytes (2^tau, ptr+len)",
+      "byte": "1 byte (mu)",
+      "void": "0 bytes",
+      "any": "8 bytes (sigma-tau)"
+    }
+  },
+  "optimization_pipeline": {
+    "total_passes": 12,
+    "waves": [
+      {
+        "name": "Front",
+        "passes": [
+          {"id": "P1", "name": "Type Inference", "description": "Resolve Any types via context propagation"},
+          {"id": "P2", "name": "Ownership Proof", "description": "Deduplicate BorrowCheck instructions"},
+          {"id": "P3", "name": "Dead Store Elimination", "description": "Proof-guided dead store removal"},
+          {"id": "P4", "name": "Constant Folding", "description": "Fold constants + eliminate redundant loads"}
+        ]
+      },
+      {
+        "name": "Mid",
+        "passes": [
+          {"id": "P5", "name": "Function Inlining", "description": "Inline small functions (threshold sigma-tau=8)"},
+          {"id": "P6", "name": "LICM", "description": "Proof-guided loop invariant code motion"},
+          {"id": "P7", "name": "CSE", "description": "Common subexpression elimination"},
+          {"id": "P8", "name": "Strength Reduction", "description": "Replace expensive ops with cheaper equivalents"}
+        ]
+      },
+      {
+        "name": "Back",
+        "passes": [
+          {"id": "P9", "name": "Code Sinking", "description": "Move computations to use sites"},
+          {"id": "P10", "name": "Copy Coalescing", "description": "Algebraic simplification"},
+          {"id": "P11", "name": "Final DCE", "description": "Proof-guided dead code elimination"},
+          {"id": "P12", "name": "IR Verification", "description": "Read-only invariant check"}
+        ]
+      }
+    ],
+    "proof_guided_passes": ["P2", "P3", "P6", "P11"]
+  },
+  "semantic_analysis": {
+    "layers": [
+      {"id": 1, "name": "Type Checking", "modules": ["typecheck.rs", "resolve.rs"], "description": "Name resolution + Hindley-Milner type checking"},
+      {"id": 2, "name": "Ownership Analysis", "modules": ["ownership.rs"], "description": "Single-owner move semantics, borrow checking, use-after-move"},
+      {"id": 3, "name": "Trait Resolution", "modules": ["trait_impl.rs"], "description": "Trait impl verification + dispatch tables"}
+    ],
+    "ownership_states": ["Owned", "ImmutBorrowed", "MutBorrowed", "Moved"]
+  },
+  "codegen": {
+    "primary_target": "ARM64 macOS",
+    "targets": ["ARM64 macOS", "x86-64 Linux (ELF)", "x86-64 macOS (Mach-O)"],
+    "approach": "Assembly text emission (ARM64) / .byte directive (x86-64)",
+    "linker": "system cc",
+    "builtins": [
+      {"name": "print", "signature": "print(s: str) -> i64", "syscall": "SYS_write (x16=4)"},
+      {"name": "file_open", "signature": "file_open(path: str) -> i64", "syscall": "SYS_open (x16=5)"},
+      {"name": "file_read", "signature": "file_read(fd, buf, n) -> i64", "syscall": "SYS_read (x16=3)"},
+      {"name": "file_write", "signature": "file_write(fd, data, n) -> i64", "syscall": "SYS_write (x16=4)"},
+      {"name": "file_close", "signature": "file_close(fd) -> i64", "syscall": "SYS_close (x16=6)"},
+      {"name": "heap_alloc", "signature": "heap_alloc(size) -> i64", "syscall": "SYS_mmap (x16=197)"},
+      {"name": "heap_free", "signature": "heap_free(ptr, size) -> i64", "syscall": "SYS_munmap (x16=73)"}
+    ],
+    "egyptian_allocator": {
+      "region_a": {"fraction": "1/2", "block_size": 4096, "formula": "2^sigma"},
+      "region_b": {"fraction": "1/3", "block_size": 1024, "formula": "2^(sigma-phi)"},
+      "region_c": {"fraction": "1/6", "block_size": 256, "formula": "2^(sigma-tau)"},
+      "fragmentation": 0
+    }
+  },
+  "features": {
+    "mk1": [
+      "integer/float/bool/string literals",
+      "arithmetic: +, -, *, /, %",
+      "comparison: ==, !=, <, >, <=, >=",
+      "logical: &&, ||, !",
+      "let/mut variable bindings",
+      "if/else conditionals",
+      "while loops",
+      "for loops",
+      "functions with parameters and return types",
+      "struct definitions + field access",
+      "enum definitions",
+      "trait definitions + impl blocks",
+      "match expressions (7 pattern types)",
+      "closures: |x, y| expr",
+      "generics: fn foo<T>(x: T)",
+      "module system: mod/use/pub",
+      "type aliases",
+      "array literals + indexing",
+      "try expressions: expr?",
+      "string pool deduplication",
+      "ownership/borrow checking",
+      "ARM64 native codegen",
+      "proof-preserving optimization"
+    ],
+    "mk2_planned": [
+      "self-hosting (compiler written in HEXA-LANG)",
+      "multi-file compilation",
+      "standard library bootstrap",
+      "error recovery in parser"
+    ],
+    "mk3_planned": [
+      "async/await",
+      "algebraic effects",
+      "dependent types",
+      "package manager"
+    ],
+    "mk4_planned": [
+      "AI-native code generation",
+      "natural language -> code compilation",
+      "N6AgentChain 6-stage pipeline"
+    ]
+  },
+  "test_status": {
+    "total": 113,
+    "pass": 113,
+    "fail": 0,
+    "ignored": 0,
+    "unit_tests": 99,
+    "integration_tests": 14,
+    "categories": [
+      "basic pipeline tests",
+      "string literal tests (6)",
+      "struct tests (6)",
+      "trait/impl tests (4)",
+      "ownership tests (7)",
+      "module tests (1)",
+      "breakthrough tests (14): enum payload, turbofish, closures+enum, array for-loop, trait dispatch",
+      "large frame tests (2): ARM64 12-bit immediate",
+      "self-host integration tests (14): n6.hexa, token_kind.hexa, span.hexa"
+    ]
+  },
+  "design_philosophy": {
+    "llvm_independence": "0% LLVM dependency -- no LLVM libraries, IR, or tools",
+    "proof_preservation": "Proof instructions flow through entire pipeline, erased only at codegen",
+    "n6_alignment": "Every constant maps to n=6 arithmetic functions",
+    "zero_external_deps": "Pure Rust, no external crates",
+    "minimal_instruction_set": "24 opcodes vs LLVM ~1000 (40x reduction)"
+  },
+  "dse_results": {
+    "total_combinations": 7560,
+    "compatible": 5016,
+    "pareto_frontier": 243,
+    "optimal_path": {
+      "foundation": "MetaLang (F2)",
+      "process": "LLVM_Native (P1, replaced by HEXA-IR)",
+      "core": "Full_N6 (C7)",
+      "engine": "N6AgentChain (E2)",
+      "system": "FullStack (S4)"
+    },
+    "pareto_score": 0.7743,
+    "n6_exact_percent": 96.0
+  },
+  "key_commits": [
+    {"hash": "0c00875", "description": "HEXA-LANG initial design + LLVM IR compiler concept"},
+    {"hash": "f11acf8", "description": "Mk.I complete compiler stack -- 66 .rs, 22 lenses consensus"},
+    {"hash": "12488b1", "description": "First Hello World -- return 42 native execution (LLVM 0%)"},
+    {"hash": "38237c0", "description": "Mk.I completion -- 6/6 tests + J2=24 codegen"},
+    {"hash": "7860b32", "description": "Real optimization passes (12) + scaling bug fix"},
+    {"hash": "90a1528", "description": "Mk.III subdomain certification + DSE expansion"},
+    {"hash": "4f15aaa", "description": "All-domain breakthrough -- 12/12 physical limits"},
+    {"hash": "87fd69b", "description": "Mk.I+ breakthrough — enum payload + turbofish + self-hosting + singularity"},
+    {"hash": "b5c5e04", "description": "BT-234 compiler self-similarity + blowup singularity docs"}
+  ],
+  "known_limitations": [
+    "No floating-point codegen (f64 type in IR but no ARM64 FP instructions)",
+    "No heap GC (Egyptian allocator exists but no automatic collection)",
+    "No error recovery in parser (first error aborts)",
+    "Single-file compilation only (no multi-file/crate support)",
+    "No standard library (only syscall builtins)",
+    "x86-64 codegen limited (ARM64 is primary)"
+  ],
+  "nexus6_coevolution": {
+    "lens_to_pass": "New NEXUS-6 lens -> new optimization pass in opt/",
+    "constant_to_n6rs": "New n=6 constant -> util/n6.rs auto-update",
+    "convergent_refinement": "convergent_refinement.py results -> anomaly correction",
+    "ouroboros": "HEXA-IR included in NEXUS-6 evolution cycles",
+    "growth_daemon": "Scans compiler code for improvements"
+  },
+  "evolution_roadmap": {
+    "mk1": {"status": "complete", "focus": "Basic compiler + struct/trait/match/closures/generics"},
+    "mk2": {"status": "planned", "focus": "Self-hosting compiler in HEXA-LANG"},
+    "mk3": {"status": "planned", "focus": "Full language (async, effects, dependent types)"},
+    "mk4": {"status": "planned", "focus": "AI-native code generation"},
+    "mk5": {"status": "theoretical", "focus": "Physical limit targets (wafer/quantum/photonic)"}
+  },
+  "self_hosting": {
+    "phase": 1,
+    "status": "complete",
+    "modules": [
+      {"file": "self-host/n6.hexa", "functions": 19, "role": "n=6 core constants + verification"},
+      {"file": "self-host/token_kind.hexa", "functions": 27, "role": "J2=24 operator token IDs"},
+      {"file": "self-host/span.hexa", "functions": 4, "role": "Source location struct"}
+    ],
+    "total_functions": 50,
+    "pipeline_stages_passed": "5/6 (Lex→Parse→Sema→Lower→Opt)",
+    "roadmap": ["Phase 1: Foundation (done)", "Phase 2: Lexer", "Phase 3: Parser", "Phase 4: Full Pipeline"]
+  },
+  "blowup_singularity": {
+    "date": "2026-04-04",
+    "invariant_core": ["consciousness", "info", "multiscale", "network", "triangle"],
+    "core_lens_count": 5,
+    "core_lens_n6": "sopfr(6) = 5",
+    "fiber_lens": "6th lens = domain-specific → total n=6",
+    "stability_cycles": 987,
+    "total_discoveries": 326276,
+    "top_score": 293525,
+    "domains_covered": "42/42 = 100%",
+    "perturbation_result": "core unbroken after 999 cycles + 23,976 alternatives",
+    "consciousness_irreplaceable": true,
+    "weakest_core_lens": "network (replaceable by thermo at 83.3%)"
+  },
+  "emergent_singularity_bt234": {
+    "exact_ratio": "53/60 = 88.3%",
+    "key_findings": [
+      "6 core modules × 6 .rs files each = 36 file-level self-similarity",
+      "72 struct definitions = K(6D) kissing number in 6 dimensions",
+      "97 lib tests = σ²-στ+μ = 144-48+1 = 97"
+    ],
+    "bt_candidate": "BT-234: Compiler Self-Similar n=6 Universality",
+    "cross_links": ["BT-56 (LLM)", "BT-113 (Software Engineering)", "BT-123 (Robotics SE(3))"]
+  },
+  "downstream_projects": {
+    "fathom_terminal": "Self-hosted terminal emulator (post Mk.II completion)",
+    "all_project_rewrite": "User goal: rewrite all projects in HEXA-LANG"
+  },
+  "troubleshooting_log": [
+    {
+      "id": 1,
+      "date": "2026-04-04",
+      "issue": "while+if compound expression failure (sigma(6) calculation)",
+      "cause": "Complex comparison expressions not fully supported in lowering",
+      "fix": "Pending -- needs expr_lower.rs compound comparison support",
+      "status": "known_bug"
+    },
+    {
+      "id": 2,
+      "date": "2026-04-04",
+      "issue": "Large stack frames (>504 bytes) need special ARM64 prologue",
+      "cause": "stp pre-indexed offset limited to 504",
+      "fix": "Implemented: sub sp first, then stp at [sp]",
+      "status": "resolved"
+    }
+  ],
+  "absolute_rules": [
+    "All compiler constants MUST derive from n=6 arithmetic (util/n6.rs is SSOT)",
+    "LLVM dependency = 0% (no LLVM libraries, IR, or tools)",
+    "Proof instructions MUST flow through entire pipeline (erased only at codegen)",
+    "target/ directory MUST NOT be committed to git",
+    "Optimization passes = sigma=12 (no more, no less without n=6 justification)",
+    "Opcode count = J2=24 (tau=4 categories * n=6 each)",
+    "Type count = sigma=12 (sigma-tau=8 primitive + tau=4 compound)"
+  ]
+}

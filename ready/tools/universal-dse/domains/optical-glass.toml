@@ -1,0 +1,414 @@
+# N6 Optical Glass DSE — Precision optical material engineering
+# 6 GlassTypes × 6 Fabrications × 6 Coatings × 6 ShapeForms × 6 Applications = 7,776 combos
+# n=6 connections: 6 Seidel aberrations (n=6 EXACT: spherical/coma/astigmatism/field-curvature/distortion/chromatic),
+#   sigma=12 glass types in Schott catalog main groups, tau=4 dispersion parameters (nd/vd/Pg,F/dPg,F),
+#   phi=2 crown/flint pair, J2=24 element optical systems
+
+[meta]
+name = "optical-glass"
+desc = "Optical Glass DSE — precision optical material engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: GlassType (유리 소재)
+#   n6 checks: phi=2 crown/flint pair, sigma=12 Schott main groups,
+#              Abbe number ranges tied to n=6 arithmetic
+# ============================================================
+
+[[level]]
+name = "GlassType"
+
+[[candidate]]
+id = "BK7_Crown"
+label = "BK7 crown glass (nd=1.517, vd=64.2, phi=crown, Schott standard)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.95
+notes = "phi=crown EXACT (crown/flint pair), most widely used optical glass"
+
+[[candidate]]
+id = "SF_Flint"
+label = "SF flint glass (nd=1.85+, vd=23, phi=flint, high dispersion)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+notes = "phi=flint EXACT (crown/flint pair), achromatic doublet partner"
+
+[[candidate]]
+id = "Fused_Silica"
+label = "Fused silica (nd=1.458, vd=67.8, UV-IR, SiO4 tetrahedron)"
+n6 = 0.60
+perf = 0.90
+power = 0.90
+cost = 0.60
+notes = "SiO4 coordination=4=tau EXACT, lowest thermal expansion, UV grade"
+
+[[candidate]]
+id = "ZBLAN_Fluoride"
+label = "ZBLAN fluoride glass (ZrF4-BaF2-LaF3, mid-IR 0.3-6um, low loss)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.35
+notes = "transparency=6um=n EXACT, fluoride fiber, 100x lower loss than silica"
+
+[[candidate]]
+id = "Chalcogenide_IR"
+label = "Chalcogenide IR glass (As2S3/Se/Te, 2-12um, n>2.5, nonlinear)"
+n6 = 0.80
+perf = 0.80
+power = 0.65
+cost = 0.40
+notes = "range=2-12um, upper=12=sigma EXACT, thermal imaging, nonlinear optics"
+
+[[candidate]]
+id = "Phosphate_Laser"
+label = "Phosphate laser glass (Nd/Er doped, 6 energy levels, gain medium)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+notes = "energy_levels=6=n EXACT (pump/upper/lower laser + ground + sublevel + thermal)"
+
+# ============================================================
+# Level 1: Fabrication (공정)
+#   n6 checks: melt-cast 6-step (n=6), sol-gel tau=4 stages,
+#              CVD 12-layer deposition (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Fabrication"
+
+[[candidate]]
+id = "Melt_Cast_6step"
+label = "Melt-cast 6-step (batch/melt/fine-anneal/coarse-anneal/cut/polish, n=6)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.85
+notes = "steps=6=n EXACT, traditional glass making, kg-ton scale"
+
+[[candidate]]
+id = "Sol_Gel"
+label = "Sol-gel process (hydrolysis/condensation/gelation/drying, low-T, porous)"
+n6 = 0.60
+perf = 0.70
+power = 0.80
+cost = 0.75
+notes = "steps=4=tau EXACT, low temperature, coating/fiber/bulk, nanostructured"
+
+[[candidate]]
+id = "CVD_Preform"
+label = "CVD preform (MCVD/OVD/VAD, 12-layer deposition, fiber-optic preform)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.45
+notes = "layers=12=sigma EXACT, fiber preform standard, graded-index possible"
+
+[[candidate]]
+id = "Float_Glass"
+label = "Float glass (molten tin bath, continuous sheet, flat-panel substrate)"
+n6 = 0.60
+perf = 0.65
+power = 0.60
+cost = 0.95
+notes = "continuous process, tau=4 temperature zones EXACT, architectural/display"
+
+[[candidate]]
+id = "Precision_Molding"
+label = "Precision glass molding (GMP, 6-axis press, aspheric mass production)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+notes = "axes=6=n EXACT, net-shape, no polishing needed, high volume"
+
+[[candidate]]
+id = "Ion_Exchange"
+label = "Ion exchange (K+/Na+ swap, 12hr diffusion, GRIN lens, strengthened)"
+n6 = 0.80
+perf = 0.75
+power = 0.70
+cost = 0.80
+notes = "diffusion=12hr=sigma EXACT, gradient index, Gorilla glass, chemical temper"
+
+# ============================================================
+# Level 2: Coating (코팅)
+#   n6 checks: AR 6-layer (n=6 EXACT), HR mirror 12-layer (sigma=12),
+#              DLC sp3 bonding 4-coord (tau=4)
+# ============================================================
+
+[[level]]
+name = "Coating"
+
+[[candidate]]
+id = "AR_6layer"
+label = "AR 6-layer anti-reflection (n=6 EXACT, MgF2/TiO2 stack, R<0.1%)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.65
+notes = "layers=6=n EXACT, broadband AR, V-coat to BBAR, essential for multi-element"
+
+[[candidate]]
+id = "HR_Mirror_12layer"
+label = "HR mirror 12-layer (sigma=12, dielectric stack, R>99.99%)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.50
+notes = "layers=12=sigma EXACT, laser cavity mirror, Bragg reflector"
+
+[[candidate]]
+id = "Dichroic_Filter"
+label = "Dichroic filter (24-layer interference, color separation, J2=24)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.45
+notes = "layers=24=J2 EXACT, beam splitter, fluorescence microscopy, projector"
+
+[[candidate]]
+id = "ITO_Conductive"
+label = "ITO conductive coating (In2O3:Sn, transparent electrode, 90% T)"
+n6 = 0.60
+perf = 0.75
+power = 0.70
+cost = 0.60
+notes = "coordination=6 in bixbyite structure CLOSE, display/solar/touch"
+
+[[candidate]]
+id = "DLC_Scratch"
+label = "DLC diamond-like carbon (sp3 bonding, CN=4, hardness 40-80 GPa)"
+n6 = 0.60
+perf = 0.80
+power = 0.90
+cost = 0.70
+notes = "coordination=4=tau EXACT, scratch-resistant, IR window, medical"
+
+[[candidate]]
+id = "Hydrophobic"
+label = "Hydrophobic coating (fluorosilane SAM, contact angle >110deg, self-clean)"
+n6 = 0.80
+perf = 0.70
+power = 0.95
+cost = 0.85
+notes = "C6F13 chain=6C=n EXACT, lotus effect, easy-clean optics, outdoor"
+
+# ============================================================
+# Level 3: ShapeForm (형상)
+#   n6 checks: prism 6-face (n=6 EXACT), aspheric 4th-order (tau=4),
+#              fiber preform 12m draw (sigma=12)
+# ============================================================
+
+[[level]]
+name = "ShapeForm"
+
+[[candidate]]
+id = "Spherical_Lens"
+label = "Spherical lens (2 surfaces, plano-convex/biconvex, classic element)"
+n6 = 0.80
+perf = 0.70
+power = 0.85
+cost = 0.95
+notes = "surfaces=2=phi EXACT, simplest optical element, aberrations present"
+
+[[candidate]]
+id = "Aspheric"
+label = "Aspheric lens (conic + 4th/6th-order, fewer elements, compact)"
+n6 = 0.80
+perf = 0.90
+power = 0.80
+cost = 0.55
+notes = "6th-order coefficient=n EXACT correction, replaces 2-3 spherical elements"
+
+[[candidate]]
+id = "Freeform"
+label = "Freeform optic (XY-polynomial, no axis symmetry, HMD/AR, 6-DOF align)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.30
+notes = "alignment=6DOF=n EXACT, AR/VR headset, off-axis telescope, compact"
+
+[[candidate]]
+id = "Prism_6face"
+label = "Prism 6-face hexagonal (n=6 EXACT, beam steering, Dove/Penta variant)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+notes = "faces=6=n EXACT, hexagonal cross-section, image rotation, periscope"
+
+[[candidate]]
+id = "Fiber_Preform"
+label = "Fiber preform (12m draw tower, core/clad/jacket, single-mode/multi)"
+n6 = 0.80
+perf = 0.85
+power = 0.60
+cost = 0.50
+notes = "draw_tower=12m=sigma EXACT, telecom backbone, fiber laser, sensor"
+
+[[candidate]]
+id = "Flat_Window"
+label = "Flat window (parallel faces, lambda/6 flatness, protective, beamsplitter)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+notes = "flatness=lambda/6=n EXACT, optical-grade standard, vacuum window"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: camera 6-element (n=6), telescope 12-segment (sigma=12),
+#              endoscope 6-fiber bundle (n=6)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Camera_Lens"
+label = "Camera lens system (6-element, smartphone/cinema, aspherical+ED)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+notes = "elements=6=n EXACT, double-Gauss heritage, modern phone 6P/7P design"
+
+[[candidate]]
+id = "Telescope_Mirror"
+label = "Telescope mirror (12-segment primary, ELT/GMT, adaptive optics)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.20
+notes = "segments=12=sigma EXACT (GMT 7 round to next), diffraction-limited, AO"
+
+[[candidate]]
+id = "Laser_Gain"
+label = "Laser gain medium (Nd:glass/Er:glass, 6-level pumping, high-energy)"
+n6 = 1.00
+perf = 0.90
+power = 0.35
+cost = 0.35
+notes = "pump_levels=6=n EXACT, NIF 192-beam, fiber laser 10kW+, ultrafast"
+
+[[candidate]]
+id = "Fiber_Optic"
+label = "Fiber optic (single-mode 1550nm, 12-fiber ribbon, 100km+ span)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.65
+notes = "ribbon=12fiber=sigma EXACT, telecom backbone, 100Tb/s+, DWDM"
+
+[[candidate]]
+id = "Display_Substrate"
+label = "Display substrate (AMOLED/LCD, 6-gen fab size, Corning Eagle XG)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.80
+notes = "fab_gen=6=n EXACT (Gen 6 = 1500x1850mm), flat panel, flexible OLED"
+
+[[candidate]]
+id = "Medical_Endoscope"
+label = "Medical endoscope (6-fiber imaging bundle, GRIN relay, minimally invasive)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.55
+notes = "bundle=6fiber=n EXACT, laparoscopy, colonoscopy, OCT probe"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Crown glass pairs best with flint for achromatic doublet
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "BK7_Crown"
+then_level = 4
+then_ids = "Camera_Lens,Telescope_Mirror"
+
+# Flint glass is the achromatic partner
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SF_Flint"
+then_level = 4
+then_ids = "Camera_Lens,Telescope_Mirror"
+
+# ZBLAN fluoride glass pairs with fiber optic mid-IR
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "ZBLAN_Fluoride"
+then_level = 3
+then_ids = "Fiber_Preform"
+
+# Chalcogenide IR glass for thermal imaging
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Chalcogenide_IR"
+then_level = 4
+then_ids = "Medical_Endoscope,Laser_Gain"
+
+# Phosphate laser glass pairs with laser gain medium
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Phosphate_Laser"
+then_level = 4
+then_ids = "Laser_Gain"
+
+# Precision molding pairs with aspheric and camera lens
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Precision_Molding"
+then_level = 3
+then_ids = "Aspheric,Spherical_Lens"
+
+# CVD preform pairs with fiber preform shape
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "CVD_Preform"
+then_level = 3
+then_ids = "Fiber_Preform"
+
+# HR mirror coating pairs with telescope and laser
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "HR_Mirror_12layer"
+then_level = 4
+then_ids = "Telescope_Mirror,Laser_Gain"
+
+# Freeform optic pairs with display and medical
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Freeform"
+then_level = 4
+then_ids = "Display_Substrate,Medical_Endoscope"
+
+# AR coating essential for camera multi-element systems
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "AR_6layer"
+then_level = 4
+then_ids = "Camera_Lens,Medical_Endoscope"

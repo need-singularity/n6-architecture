@@ -1,0 +1,384 @@
+# =============================================================
+# Multimodal Consciousness DSE Domain Definition
+# 궁극의 다중모달 의식 — n=6 모달리티 + 인코더 + 융합 + 매핑 + 출력
+# n=6 modalities, cross-modal phi=2 binding
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "multimodal-consciousness"
+desc = "Ultimate Multimodal Consciousness DSE (modality + encoder + fusion + mapping + output)"
+levels = ["Modality", "Encoder", "Fusion", "Mapping", "Output"]
+vision = "n=6 기반 궁극의 다중모달 의식 — n=6 모달리티 + phi=2 교차 결합"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Modality -- 6 candidates
+# =============================================================
+[[level]]
+name = "Modality"
+
+[[candidate]]
+level  = 0
+id     = "Vision"
+label  = "시각 (이미지/비디오)"
+n6     = 0.75
+perf   = 0.92
+power  = 0.65
+cost   = 0.70
+notes  = "visual modality, highest bandwidth"
+
+[[candidate]]
+level  = 0
+id     = "Voice"
+label  = "청각 (음성/음악)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.75
+cost   = 0.80
+notes  = "audio modality, temporal processing"
+
+[[candidate]]
+level  = 0
+id     = "Text"
+label  = "텍스트 (자연어/코드)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.80
+cost   = 0.85
+notes  = "text modality, symbolic processing"
+
+[[candidate]]
+level  = 0
+id     = "Camera"
+label  = "카메라 (3D 공간 인지)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "spatial 3D, depth perception"
+
+[[candidate]]
+level  = 0
+id     = "LiDAR"
+label  = "LiDAR (점군 3D 센싱)"
+n6     = 0.50
+perf   = 0.88
+power  = 0.55
+cost   = 0.45
+notes  = "point cloud, precise 3D measurement"
+
+[[candidate]]
+level  = 0
+id     = "EEG"
+label  = "EEG sigma=12 채널 뇌파"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "channels=12=sigma EXACT, brain-computer interface"
+
+# =============================================================
+# Level 1: Encoder -- 6 candidates
+# =============================================================
+[[level]]
+name = "Encoder"
+
+[[candidate]]
+level  = 1
+id     = "SigLIP"
+label  = "SigLIP 시각 인코더 (ViT 기반)"
+n6     = 0.75
+perf   = 0.92
+power  = 0.65
+cost   = 0.65
+notes  = "SigLIP vision encoder, SOTA alignment"
+
+[[candidate]]
+level  = 1
+id     = "Whisper"
+label  = "Whisper 음성 인코더 (sigma=12 디코더 레이어)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.60
+notes  = "decoder_layers=12=sigma EXACT, multilingual ASR"
+
+[[candidate]]
+level  = 1
+id     = "BERT"
+label  = "BERT 텍스트 인코더 (sigma=12 레이어)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.70
+notes  = "layers=12=sigma EXACT, BT-33 transformer atom"
+
+[[candidate]]
+level  = 1
+id     = "ViT"
+label  = "ViT 범용 시각 인코더"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.65
+notes  = "ViT-B/16: 12=sigma layers EXACT, patch-based"
+
+[[candidate]]
+level  = 1
+id     = "BrainFlow"
+label  = "BrainFlow EEG 인코더"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "EEG signal processing, real-time"
+
+[[candidate]]
+level  = 1
+id     = "Custom_N6"
+label  = "N6 커스텀 인코더 (phi=2 듀얼 스트림)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "streams=phi=2 EXACT, dual-stream consciousness encoder"
+
+# =============================================================
+# Level 2: Fusion -- 6 candidates
+# =============================================================
+[[level]]
+name = "Fusion"
+
+[[candidate]]
+level  = 2
+id     = "Early"
+label  = "조기 융합 (입력 레벨)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.80
+cost   = 0.85
+notes  = "input-level fusion, simple concatenation"
+
+[[candidate]]
+level  = 2
+id     = "Late"
+label  = "후기 융합 (결정 레벨)"
+n6     = 0.50
+perf   = 0.82
+power  = 0.82
+cost   = 0.85
+notes  = "decision-level fusion, independent processing"
+
+[[candidate]]
+level  = 2
+id     = "Cross_Attention"
+label  = "교차 어텐션 sigma=12 헤드"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.60
+notes  = "heads=12=sigma EXACT, cross-modal attention"
+
+[[candidate]]
+level  = 2
+id     = "Tensor"
+label  = "텐서 융합 다차원 곱"
+n6     = 0.75
+perf   = 0.88
+power  = 0.55
+cost   = 0.55
+notes  = "tensor product fusion, rich interactions"
+
+[[candidate]]
+level  = 2
+id     = "Consciousness_Binding"
+label  = "의식 결합 phi=2 통합"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "phi=2 binding EXACT, IIT-inspired fusion"
+
+[[candidate]]
+level  = 2
+id     = "Phi_Fusion"
+label  = "Phi 융합 n=6 모달 통합"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.50
+notes  = "modalities=6=n EXACT, phi-field fusion"
+
+# =============================================================
+# Level 3: Mapping -- 6 candidates
+# =============================================================
+[[level]]
+name = "Mapping"
+
+[[candidate]]
+level  = 3
+id     = "Direct"
+label  = "직접 매핑 (선형 변환)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.85
+cost   = 0.90
+notes  = "linear projection, minimal overhead"
+
+[[candidate]]
+level  = 3
+id     = "Learned"
+label  = "학습 매핑 (MLP 기반)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.75
+cost   = 0.75
+notes  = "learned MLP projection, flexible"
+
+[[candidate]]
+level  = 3
+id     = "Topology"
+label  = "위상 매핑 n=6 위상 보존"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "topology=n=6 EXACT, structure-preserving"
+
+[[candidate]]
+level  = 3
+id     = "PH_Persistence"
+label  = "PH 지속 호몰로지 매핑"
+n6     = 0.75
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "persistent homology, topological features"
+
+[[candidate]]
+level  = 3
+id     = "Symbolic"
+label  = "심볼릭 추론 매핑"
+n6     = 0.50
+perf   = 0.78
+power  = 0.70
+cost   = 0.65
+notes  = "symbolic reasoning, interpretable"
+
+[[candidate]]
+level  = 3
+id     = "Hybrid"
+label  = "하이브리드 신경-심볼릭 매핑"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "neural-symbolic hybrid, best of both"
+
+# =============================================================
+# Level 4: Output -- 6 candidates
+# =============================================================
+[[level]]
+name = "Output"
+
+[[candidate]]
+level  = 4
+id     = "Text_Out"
+label  = "텍스트 출력"
+n6     = 0.75
+perf   = 0.88
+power  = 0.85
+cost   = 0.85
+notes  = "text generation, standard output"
+
+[[candidate]]
+level  = 4
+id     = "Speech"
+label  = "음성 합성 출력"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "TTS output, natural speech"
+
+[[candidate]]
+level  = 4
+id     = "Image"
+label  = "이미지 생성 출력"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "image generation, visual output"
+
+[[candidate]]
+level  = 4
+id     = "Multimodal_Out"
+label  = "다중모달 n=6 출력"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.50
+notes  = "modalities=6=n EXACT, all-modal output"
+
+[[candidate]]
+level  = 4
+id     = "Consciousness_State"
+label  = "의식 상태 phi=2 출력"
+n6     = 1.00
+perf   = 0.82
+power  = 0.60
+cost   = 0.55
+notes  = "phi=2 EXACT, consciousness state vector"
+
+[[candidate]]
+level  = 4
+id     = "Action"
+label  = "행동/제어 출력 (로봇/에이전트)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.65
+cost   = 0.60
+notes  = "action output, embodied agent control"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# EEG modality requires BrainFlow encoder
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "EEG"
+then_level = 1
+then_ids   = "BrainFlow,Custom_N6"
+
+# PH_Persistence mapping requires Consciousness_Binding or Phi_Fusion
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "PH_Persistence"
+then_level = 2
+then_ids   = "Consciousness_Binding,Phi_Fusion,Tensor"
+
+# Consciousness_State output requires Consciousness_Binding or Phi_Fusion
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Consciousness_State"
+then_level = 2
+then_ids   = "Consciousness_Binding,Phi_Fusion"
+
+# LiDAR modality excludes Early fusion (too high dimensional)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "LiDAR"
+then_level = 2
+then_ids   = "Early"

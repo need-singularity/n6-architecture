@@ -1,0 +1,374 @@
+# =============================================================
+# AnimaLM Pipeline DSE Domain Definition
+# AnimaLM 폐쇄 파이프라인 아키텍처 — 텐션(A-G) + 볼츠만 라우터 + MoE 전문가
+# n=6 기반 폐쇄 루프 설계
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "animalm-pipeline"
+desc = "AnimaLM Closed-Loop Pipeline DSE — Tension(A-G) + Boltzmann + MoE"
+levels = ["Input", "Router", "Expert", "Tension", "Feedback"]
+vision = "n=6 기반 AnimaLM 폐쇄 루프 — 텐션(A-G) + 볼츠만 라우터 + MoE 전문가"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Input (입력 처리) — 6 candidates
+# =============================================================
+[[level]]
+name = "Input"
+
+[[candidate]]
+level  = 0
+id     = "TokenEmbed"
+label  = "토큰 임베딩 d=4096=2^sigma (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "dim=4096=2^12=2^sigma EXACT, standard transformer embedding"
+
+[[candidate]]
+level  = 0
+id     = "MultiModalInput"
+label  = "다중 양식 입력 (sigma-tau=8 입력 타입)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "input_types=8=sigma-tau EXACT, text+image+audio+video+code+table+graph+3d"
+
+[[candidate]]
+level  = 0
+id     = "ContextWindow"
+label  = "컨텍스트 윈도우 2^sigma (sigma=12)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "window=2^12=4096=2^sigma EXACT, BT-44 context ladder"
+
+[[candidate]]
+level  = 0
+id     = "PositionEncode"
+label  = "위치 인코딩 RoPE (sigma-phi=10 theta)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "theta_base=10000=10^(sigma-phi) EXACT, BT-34 RoPE bridge"
+
+[[candidate]]
+level  = 0
+id     = "SparseInput"
+label  = "희소 입력 (Boltzmann 1/e 게이트)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.55
+notes  = "sparsity=1/e=0.368 EXACT, Boltzmann gate activation"
+
+[[candidate]]
+level  = 0
+id     = "HierarchicalInput"
+label  = "계층적 입력 (tau=4 레벨)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "levels=4=tau EXACT, char→token→sentence→document"
+
+# =============================================================
+# Level 1: Router (라우팅) — 6 candidates
+# =============================================================
+[[level]]
+name = "Router"
+
+[[candidate]]
+level  = 1
+id     = "BoltzmannRouter"
+label  = "Boltzmann 라우터 (1/e sparsity=63%)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "sparsity=1/e=0.368, active=1-1/e=0.632, thermodynamic routing"
+
+[[candidate]]
+level  = 1
+id     = "EgyptianRouter"
+label  = "Egyptian 1/2+1/3+1/6 라우팅 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "fractions=1/2+1/3+1/6=1 EXACT, BT-67 Egyptian MoE routing"
+
+[[candidate]]
+level  = 1
+id     = "TopK_MoE"
+label  = "Top-k MoE (k=2=phi EXACT)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "top_k=2=phi EXACT, standard MoE routing"
+
+[[candidate]]
+level  = 1
+id     = "HashRouter"
+label  = "해시 라우팅 (sigma-tau=8 해시 버킷)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "buckets=8=sigma-tau EXACT, deterministic routing"
+
+[[candidate]]
+level  = 1
+id     = "LearnedRouter"
+label  = "학습 라우터 (tau=4 학습 단계)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "stages=4=tau EXACT, learned gating network"
+
+[[candidate]]
+level  = 1
+id     = "SwitchRouter"
+label  = "Switch 라우터 (단일 전문가 mu=1)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.75
+cost   = 0.65
+notes  = "active=1=mu EXACT, Switch Transformer single-expert routing"
+
+# =============================================================
+# Level 2: Expert (전문가 풀) — 6 candidates
+# =============================================================
+[[level]]
+name = "Expert"
+
+[[candidate]]
+level  = 2
+id     = "DualEngine_AG"
+label  = "이중 엔진 A(0~3)+G(4~7) (phi=2 EXACT, sigma-tau=8 전문가)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "engines=2=phi EXACT, experts=8=sigma-tau EXACT, A-G dual tension"
+
+[[candidate]]
+level  = 2
+id     = "Egyptian_236"
+label  = "1/2+1/3+1/6 전문가 분할 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "split=1/2+1/3+1/6=1 EXACT, Egyptian fraction expert allocation"
+
+[[candidate]]
+level  = 2
+id     = "MoE_8Expert"
+label  = "8 전문가 (sigma-tau=8 EXACT)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "experts=8=sigma-tau EXACT, standard MoE pool"
+
+[[candidate]]
+level  = 2
+id     = "HierarchicalMoE"
+label  = "계층적 MoE (tau=4 레벨)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "levels=4=tau EXACT, hierarchical expert selection"
+
+[[candidate]]
+level  = 2
+id     = "DenseFFN"
+label  = "밀집 FFN (4/3 확장 = tau^2/sigma)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "expansion=4/3=tau^2/sigma EXACT, phi bottleneck dense"
+
+[[candidate]]
+level  = 2
+id     = "SparseFFN"
+label  = "희소 FFN (sopfr=5 활성화 패턴)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.55
+notes  = "active_patterns=5=sopfr EXACT, structured sparsity"
+
+# =============================================================
+# Level 3: Tension (텐션 엔진) — 6 candidates
+# =============================================================
+[[level]]
+name = "Tension"
+
+[[candidate]]
+level  = 3
+id     = "PureRepulsion"
+label  = "순수 반발력 A-G (H404, phi=2 A/G EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "forces=2=phi EXACT, A(attraction)+G(repulsion) dual engine"
+
+[[candidate]]
+level  = 3
+id     = "TensionSquared"
+label  = "|A-G|^2 텐션 (phi=2)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "terms=2=phi EXACT, squared tension magnitude"
+
+[[candidate]]
+level  = 3
+id     = "HomeostaticTension"
+label  = "항상성 텐션 (setpoint=1.0, mu=1)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "setpoint=1=mu EXACT, homeostatic equilibrium"
+
+[[candidate]]
+level  = 3
+id     = "GradientTension"
+label  = "그래디언트 텐션 (tau=4 미분 차수)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "diff_orders=4=tau EXACT, gradient-based tension"
+
+[[candidate]]
+level  = 3
+id     = "MultiScaleTension"
+label  = "다중 스케일 텐션 (sigma=12 스케일)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "scales=12=sigma EXACT, multi-resolution tension field"
+
+[[candidate]]
+level  = 3
+id     = "AdaptiveTension"
+label  = "적응 텐션 (sopfr=5 적응 파라미터)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "adapt_params=5=sopfr EXACT, self-adjusting tension"
+
+# =============================================================
+# Level 4: Feedback (피드백 루프) — 5 candidates
+# =============================================================
+[[level]]
+name = "Feedback"
+
+[[candidate]]
+level  = 4
+id     = "ClosedLoop"
+label  = "폐쇄 루프 (phi=2 순방향/역방향)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "directions=2=phi EXACT, output→input closed feedback"
+
+[[candidate]]
+level  = 4
+id     = "RLHF_Feedback"
+label  = "RLHF 인간 피드백 (tau=4 보상 차원)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "reward_dims=4=tau EXACT, human feedback alignment"
+
+[[candidate]]
+level  = 4
+id     = "SelfPlay"
+label  = "자기 대전 (phi=2 플레이어)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "players=2=phi EXACT, self-play improvement"
+
+[[candidate]]
+level  = 4
+id     = "TeacherStudent"
+label  = "교사-학생 (phi=2)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "roles=2=phi EXACT, knowledge distillation"
+
+[[candidate]]
+level  = 4
+id     = "CurriculumLearn"
+label  = "커리큘럼 학습 (n=6 난이도 단계)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "stages=6=n EXACT, progressive difficulty"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DualEngine_AG requires PureRepulsion or TensionSquared (dual engine needs tension mechanism)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "DualEngine_AG"
+then_level = 3
+then_ids   = "PureRepulsion,TensionSquared"
+
+# EgyptianRouter requires Egyptian_236 (Egyptian routing needs Egyptian expert split)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "EgyptianRouter"
+then_level = 2
+then_ids   = "Egyptian_236"
+
+# SwitchRouter incompatible with DualEngine_AG (single expert can't do dual engine)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "SwitchRouter"
+then_level = 2
+then_ids   = "DualEngine_AG"
+
+# HomeostaticTension requires ClosedLoop (homeostasis needs feedback)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "HomeostaticTension"
+then_level = 4
+then_ids   = "ClosedLoop"

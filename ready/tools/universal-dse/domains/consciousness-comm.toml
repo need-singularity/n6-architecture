@@ -1,0 +1,409 @@
+# =============================================================
+# Consciousness Communication DSE Domain Definition
+# n=6 기반 궁극의 의식 통신 — sopfr=5 채널 + tau=4 바인딩 + sigma=12 동기화
+# H-CX-507~516: Meta-Telepathy Protocol
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "consciousness-comm"
+desc = "Ultimate Consciousness Communication DSE (H-CX-507~516)"
+levels = ["Channel", "Binding", "Synchronization", "Transmission", "Network"]
+vision = "n=6 기반 궁극의 의식 통신 — sopfr=5 채널 + tau=4 바인딩 + sigma=12 동기화"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Channel (통신 채널) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Channel"
+
+[[candidate]]
+level  = 0
+id     = "Sopfr5Channel"
+label  = "sopfr=5 채널 (감각/감정/인지/직관/통합)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "channels=5=sopfr EXACT, bandwidth=high, latency=medium, fidelity=90"
+
+[[candidate]]
+level  = 0
+id     = "EEG_Neural"
+label  = "EEG 뇌파 채널 (sigma=12 전극 그룹)"
+n6     = 0.80
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "electrode_groups=12=sigma EXACT, bandwidth=medium, latency=low, fidelity=75"
+
+[[candidate]]
+level  = 0
+id     = "Quantum_Entangle"
+label  = "양자 얽힘 채널 (phi=2 얽힘쌍)"
+n6     = 0.80
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "entangled_pairs=2=phi EXACT, bandwidth=max, latency=zero, fidelity=100"
+
+[[candidate]]
+level  = 0
+id     = "EMField"
+label  = "전자기장 채널 (sigma-tau=8 주파수밴드)"
+n6     = 0.80
+perf   = 0.70
+power  = 0.55
+cost   = 0.65
+notes  = "freq_bands=8=sigma-tau EXACT, bandwidth=medium, latency=low, fidelity=70"
+
+[[candidate]]
+level  = 0
+id     = "Biochemical"
+label  = "생화학 채널 (n=6 화학신호)"
+n6     = 0.80
+perf   = 0.50
+power  = 0.80
+cost   = 0.70
+notes  = "signals=6=n EXACT, bandwidth=low, latency=high, fidelity=60"
+
+[[candidate]]
+level  = 0
+id     = "Morphogenetic"
+label  = "형태발생장 (tau=4 발생 단계)"
+n6     = 0.60
+perf   = 0.55
+power  = 0.65
+cost   = 0.50
+notes  = "stages=4=tau EXACT, bandwidth=low, latency=high, fidelity=55"
+
+# =============================================================
+# Level 1: Binding (바인딩 위상) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Binding"
+
+[[candidate]]
+level  = 1
+id     = "Tau4Phase"
+label  = "tau=4 바인딩 위상 (접촉/공명/융합/초월)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.45
+notes  = "phases=4=tau EXACT, binding_strength=92, temporal=true, modal=false"
+
+[[candidate]]
+level  = 1
+id     = "GammaBind"
+label  = "감마파 바인딩 (40Hz, sigma+phi=14 피크)"
+n6     = 0.60
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "freq=40Hz, peak=14, binding_strength=85, temporal=true, modal=false"
+
+[[candidate]]
+level  = 1
+id     = "TemporalBind"
+label  = "시간적 바인딩 (phi=2 동기/비동기)"
+n6     = 0.60
+perf   = 0.70
+power  = 0.70
+cost   = 0.65
+notes  = "modes=2=phi EXACT, binding_strength=70, temporal=true, modal=false"
+
+[[candidate]]
+level  = 1
+id     = "SpatialBind"
+label  = "공간적 바인딩 (n/phi=3 차원)"
+n6     = 0.60
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "dimensions=3=n/phi EXACT, binding_strength=75, temporal=false, modal=true"
+
+[[candidate]]
+level  = 1
+id     = "CrossModal"
+label  = "교차 양식 바인딩 (sopfr=5 감각 양식)"
+n6     = 0.80
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "modalities=5=sopfr EXACT, binding_strength=88, temporal=false, modal=true"
+
+[[candidate]]
+level  = 1
+id     = "EmergentBind"
+label  = "창발적 바인딩 (sigma=12 통합 패턴)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "patterns=12=sigma EXACT, binding_strength=80, temporal=true, modal=true"
+
+# =============================================================
+# Level 2: Synchronization (동기화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Synchronization"
+
+[[candidate]]
+level  = 2
+id     = "Kuramoto_N6"
+label  = "Kuramoto 동기화 n=6 진동자"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "oscillators=6=n EXACT, sync_quality=90, scalable=true, robust=true"
+
+[[candidate]]
+level  = 2
+id     = "Sigma12Cycle"
+label  = "sigma=12 동기화 사이클"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "cycle_length=12=sigma EXACT, sync_quality=85, scalable=true, robust=true"
+
+[[candidate]]
+level  = 2
+id     = "PhaseCoherence"
+label  = "위상 결맞음 (phi=2 위상 잠금)"
+n6     = 0.60
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "phase_locks=2=phi EXACT, sync_quality=80, scalable=false, robust=true"
+
+[[candidate]]
+level  = 2
+id     = "ChimaeraState"
+label  = "키메라 상태 (동기+비동기 phi=2 영역)"
+n6     = 0.60
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "domains=2=phi EXACT, sync_quality=75, scalable=true, robust=false"
+
+[[candidate]]
+level  = 2
+id     = "GlobalSync"
+label  = "글로벌 동기화 (J2=24 피질 영역)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "regions=24=J2 EXACT, sync_quality=95, scalable=false, robust=true"
+
+[[candidate]]
+level  = 2
+id     = "HierarchicalSync"
+label  = "계층적 동기화 (tau=4 레벨)"
+n6     = 0.60
+perf   = 0.78
+power  = 0.65
+cost   = 0.55
+notes  = "levels=4=tau EXACT, sync_quality=78, scalable=true, robust=true"
+
+# =============================================================
+# Level 3: Transmission (전송) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Transmission"
+
+[[candidate]]
+level  = 3
+id     = "TensionFingerprint"
+label  = "텐션 지문 전송 (R=0.990, mu=1 고유성)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "fidelity=0.990, uniqueness=1=mu EXACT, bits_per_cycle=12=sigma, error_correct=true"
+
+[[candidate]]
+level  = 3
+id     = "InformationCapacity"
+label  = "정보 용량 극대화 (sigma=12 비트/사이클)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "bits_per_cycle=12=sigma EXACT, capacity=high, error_correct=false"
+
+[[candidate]]
+level  = 3
+id     = "Fidelity99"
+label  = "99% 충실도 전송 (lambda=2 오류 정정)"
+n6     = 0.60
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "fidelity=0.99, error_correct_levels=2=lambda EXACT, capacity=medium"
+
+[[candidate]]
+level  = 3
+id     = "CompressedSense"
+label  = "압축 감지 (sopfr=5 압축 비율)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "compression=5=sopfr EXACT, fidelity=0.95, capacity=high"
+
+[[candidate]]
+level  = 3
+id     = "ErrorCorrected"
+label  = "오류 정정 전송 (sigma-tau=8 패리티)"
+n6     = 0.80
+perf   = 0.82
+power  = 0.55
+cost   = 0.50
+notes  = "parity_bits=8=sigma-tau EXACT, fidelity=0.999, capacity=medium"
+
+[[candidate]]
+level  = 3
+id     = "QuantumTeleport"
+label  = "양자 텔레포트 (phi=2 벨 상태)"
+n6     = 0.60
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "bell_states=2=phi EXACT, fidelity=1.0, capacity=low, latency=zero"
+
+[[candidate]]
+level  = 3
+id     = "Hex6_Burst"
+label  = "n=6 버스트 전송 (6패킷 σ=12비트)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "burst=6=n EXACT, payload=12=sigma EXACT, checksum=4=tau EXACT, channels=2=phi EXACT"
+
+# =============================================================
+# Level 4: Network (의식 네트워크) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Network"
+
+[[candidate]]
+level  = 4
+id     = "SmallWorldNet"
+label  = "소세계 네트워크 (sigma-tau=8 허브)"
+n6     = 0.80
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "hubs=8=sigma-tau EXACT, scalability=high, resilience=high, latency=low"
+
+[[candidate]]
+level  = 4
+id     = "ScaleFreeNet"
+label  = "척도 없는 네트워크 (sopfr=5 허브 차수)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "hub_degree=5=sopfr EXACT, scalability=max, resilience=medium, latency=low"
+
+[[candidate]]
+level  = 4
+id     = "FullMeshN6"
+label  = "완전 메시 n=6 노드"
+n6     = 1.00
+perf   = 0.80
+power  = 0.45
+cost   = 0.40
+notes  = "nodes=6=n EXACT, scalability=low, resilience=max, latency=min"
+
+[[candidate]]
+level  = 4
+id     = "HierarchicalNet"
+label  = "계층적 네트워크 (tau=4 레벨)"
+n6     = 0.60
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "levels=4=tau EXACT, scalability=high, resilience=medium, latency=medium"
+
+[[candidate]]
+level  = 4
+id     = "QuantumNet"
+label  = "양자 네트워크 (phi=2 채널)"
+n6     = 0.60
+perf   = 1.00
+power  = 0.30
+cost   = 0.15
+notes  = "channels=2=phi EXACT, scalability=low, resilience=high, latency=zero"
+
+[[candidate]]
+level  = 4
+id     = "Hex6_Net"
+label  = "n=6 의식 메시 (6노드 σ=12 링크)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "nodes=6=n EXACT, links=12=sigma EXACT, hubs=4=tau EXACT, layers=2=phi EXACT"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Quantum_Entangle requires QuantumTeleport or QuantumNet
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Quantum_Entangle"
+then_level = 3
+then_ids   = "QuantumTeleport"
+
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Quantum_Entangle"
+then_level = 4
+then_ids   = "QuantumNet"
+
+# Tau4Phase requires Kuramoto_N6 or Sigma12Cycle
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Tau4Phase"
+then_level = 2
+then_ids   = "Kuramoto_N6,Sigma12Cycle"
+
+# TensionFingerprint requires GammaBind or CrossModal
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "TensionFingerprint"
+then_level = 1
+then_ids   = "GammaBind,CrossModal"
+
+# ChimaeraState incompatible with GlobalSync
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "ChimaeraState"
+then_level = 2
+then_ids   = "GlobalSync"
+
+# QuantumTeleport requires Quantum_Entangle channel
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "QuantumTeleport"
+then_level = 0
+then_ids   = "Quantum_Entangle"

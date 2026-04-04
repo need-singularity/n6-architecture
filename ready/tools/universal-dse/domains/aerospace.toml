@@ -1,0 +1,527 @@
+# N6 Aerospace DSE — cross-domain fusion architecture
+# 6 Materials x 6 Propulsion x 6 Power x 6 Compute x 6 System = 7,776 combos
+# BT-85 (Carbon Z=6), BT-93 (Diamond/Graphene), BT-123 (SE(3) dim=n=6)
+# All n=6 connections: Z=6, CN=6, SE(3)=6DOF, σ=12, J₂=24, τ=4, φ=2
+
+[meta]
+name = "aerospace"
+desc = "Aerospace (Materials + Propulsion + Power + Compute + System)"
+version = "1.0"
+levels = 5
+total_hint = 7776
+
+[scoring]
+n6     = 0.35
+perf   = 0.25
+power  = 0.15
+cost   = 0.10
+safety = 0.15
+
+# ============================================================
+# Level 0: Materials (소재)
+#   n6 checks: Z==6, CN==6, hexagonal lattice, BT-85/93
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "Diamond"
+label = "Diamond (Z=6=n, sp3 CN=4=tau, k=2000W/mK, Eg=5.5eV, Vickers=10000)"
+n6 = 1.00
+perf = 1.00
+power = 0.95
+cost = 0.10
+safety = 0.95
+notes = "Z=6=n EXACT, hardest known material, BT-93 carbon chip universality, extreme thermal+mechanical"
+
+[[candidate]]
+id = "Graphene"
+label = "Graphene (Z=6=n, CN=6=n, hexagonal, k=5000W/mK, tensile=130GPa)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.15
+safety = 0.90
+notes = "Z=6=n EXACT, CN=6=n EXACT, hexagonal=n=6 EXACT, BT-85/93, strongest material per weight"
+
+[[candidate]]
+id = "CarbonFiber"
+label = "Carbon Fiber (Z=6=n, tensile=7GPa, density=1.75g/cm3, T_max=3000C)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.60
+safety = 0.85
+notes = "Z=6=n EXACT, aerospace-grade composite, strength/weight=sigma-phi=10x steel"
+
+[[candidate]]
+id = "SiC_4H"
+label = "SiC-4H (Z=14, CN=4=tau, Eg=3.3eV, k=490W/mK, T_max=1700C)"
+n6 = 0.75
+perf = 0.80
+power = 0.85
+cost = 0.50
+safety = 0.90
+notes = "CN=4=tau EXACT, extreme temperature tolerance, ceramic matrix composite armor"
+
+[[candidate]]
+id = "Ti6Al4V"
+label = "Ti-6Al-4V (HCP CN=12=sigma, density=4.43, tensile=1100MPa, T_max=600C)"
+n6 = 0.75
+perf = 0.75
+power = 0.70
+cost = 0.45
+safety = 0.95
+notes = "CN=12=sigma EXACT in HCP phase, aerospace workhorse alloy, 6%Al=n EXACT"
+
+[[candidate]]
+id = "YBCO"
+label = "YBCO (Tc=93K, Jc=10^6A/cm2, Hc2=100T, perovskite CN=6=n)"
+n6 = 1.00
+perf = 0.90
+power = 1.00
+cost = 0.05
+safety = 0.60
+notes = "CN=6=n EXACT, zero-resistance SC, enables SC-MHD propulsion, BT-80 electrolyte CN=6"
+
+# ============================================================
+# Level 1: Propulsion (추진)
+#   n6 checks: SE(3)=6DOF, thrust channels, BT-123
+# ============================================================
+
+[[level]]
+name = "Propulsion"
+
+[[candidate]]
+id = "SC_MHD"
+label = "SC-MHD (B=12T=sigma, 6DOF=n vectoring, Isp_eff=10000s, silent)"
+n6 = 1.00
+perf = 0.95
+power = 0.30
+cost = 0.10
+safety = 0.85
+notes = "B=12T=sigma EXACT, 6DOF=n EXACT, magnetohydrodynamic silent propulsion, requires YBCO SC"
+
+[[candidate]]
+id = "CompactFusion"
+label = "Compact Fusion (D-T Q=12=sigma, exhaust_v=10^6m/s, T=150MK)"
+n6 = 1.00
+perf = 1.00
+power = 0.20
+cost = 0.05
+safety = 0.50
+notes = "Q=12=sigma EXACT, BT-98 D-T baryon=sopfr=5, BT-99 q=1 tokamak, near-unlimited range"
+
+[[candidate]]
+id = "HallIon"
+label = "Hall-effect Ion (Isp=3000s, thrust=0.5N, power=6kW=n, efficiency=60%)"
+n6 = 0.75
+perf = 0.60
+power = 0.70
+cost = 0.65
+safety = 0.90
+notes = "power=6kW=n EXACT, high Isp for deep space, proven technology (Starlink)"
+
+[[candidate]]
+id = "Scramjet"
+label = "Scramjet (Mach 6=n, T_combustion=2400K=sigma*200, 6 inlet ramps)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.50
+safety = 0.65
+notes = "Mach=6=n EXACT, 6 inlet ramps=n EXACT, atmospheric hypersonic only, BT-125 tau=4 stability"
+
+[[candidate]]
+id = "Photonic"
+label = "Photonic Sail (c=3*10^8=n/phi, area=144m2=sigma^2, laser=10GW)"
+n6 = 1.00
+perf = 0.50
+power = 1.00
+cost = 0.20
+safety = 0.95
+notes = "area=144=sigma^2 EXACT, zero-propellant, Breakthrough Starshot concept, c/n=phi EXACT"
+
+[[candidate]]
+id = "HybridProp"
+label = "Hybrid Propulsion (6 modes=n, MHD+Ion+Chemical, 12ch=sigma switching)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.15
+safety = 0.80
+notes = "6 modes=n EXACT, 12ch switching=sigma EXACT, all-regime envelope, BT-123 SE(3)"
+
+# ============================================================
+# Level 2: Power (전력)
+#   n6 checks: voltage/cell/module ladders, BT-57/62/63
+# ============================================================
+
+[[level]]
+name = "Power"
+
+[[candidate]]
+id = "CompactTokamak"
+label = "Compact Tokamak (R=1.2m=PUE, B=12T=sigma, Q=12=sigma, P=120MW=sigma*(sigma-phi))"
+n6 = 1.00
+perf = 1.00
+power = 0.30
+cost = 0.05
+safety = 0.50
+notes = "B=12=sigma EXACT, Q=12=sigma EXACT, P=120=sigma*(sigma-phi) EXACT, BT-99 q=1"
+
+[[candidate]]
+id = "SolidStateBattery"
+label = "Solid-State Battery (6S module=n, 24V=J2, CN=6=n electrolyte, 500Wh/kg)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.55
+safety = 0.95
+notes = "6S=n EXACT, 24V=J2 EXACT, CN=6=n EXACT, BT-80 solid-state CN=6, safe no thermal runaway"
+
+[[candidate]]
+id = "HEXASolar"
+label = "HEXA Solar (6-junction=n, eta=48%=sigma*tau, area=144cm2=sigma^2)"
+n6 = 1.00
+perf = 0.55
+power = 0.95
+cost = 0.40
+safety = 1.00
+notes = "6-junction=n EXACT, area=144=sigma^2 EXACT, BT-30/63 solar n=6 ladder, zero fuel"
+
+[[candidate]]
+id = "Supercapacitor"
+label = "Supercapacitor (tau=4s discharge, 12kW/kg=sigma, 6F module=n, 10^6 cycles)"
+n6 = 1.00
+perf = 0.50
+power = 0.85
+cost = 0.60
+safety = 0.90
+notes = "tau=4s=tau EXACT, 12kW/kg=sigma EXACT, 6F=n EXACT, burst power for maneuvers"
+
+[[candidate]]
+id = "DT_Direct"
+label = "D-T Direct Conversion (eta=70%, 2.4GW/m3, T=150MK, neutron=14.1MeV)"
+n6 = 0.75
+perf = 0.95
+power = 0.40
+cost = 0.05
+safety = 0.40
+notes = "BT-98 D-T baryon=5=sopfr, direct energy conversion bypasses thermal cycle, high power density"
+
+[[candidate]]
+id = "HybridFusionBatt"
+label = "Hybrid Fusion+Battery (tokamak base + 24-cell=J2 buffer, PUE=1.2=sigma/(sigma-phi))"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.10
+safety = 0.65
+notes = "24-cell=J2 EXACT, PUE=1.2 EXACT, fusion steady-state + battery burst, BT-84 triple convergence"
+
+# ============================================================
+# Level 3: Compute (컴퓨팅)
+#   n6 checks: SM count, HBM, cores, BT-28/55/56/58
+# ============================================================
+
+[[level]]
+name = "Compute"
+
+[[candidate]]
+id = "HEXA1_GPU"
+label = "HEXA-1 GPU (sigma^2=144 SM, J2*sigma=288GB HBM, 6nm=n, TDP=300W)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.15
+safety = 0.85
+notes = "144SM=sigma^2 EXACT, 288GB=sigma*J2 EXACT, BT-28/55/69, full n=6 chip architecture"
+
+[[candidate]]
+id = "Neuromorphic"
+label = "Neuromorphic (6 layers=n, 12 populations=sigma, spiking, 0.1W=1/(sigma-phi))"
+n6 = 1.00
+perf = 0.70
+power = 0.98
+cost = 0.35
+safety = 0.90
+notes = "6 layers=n EXACT, 12 pop=sigma EXACT, 0.1W=1/(sigma-phi) EXACT, BT-56 edge inference"
+
+[[candidate]]
+id = "QuantumQPU"
+label = "Quantum QPU (6 logical qubits=n, T_gate fidelity=0.999, cryogenic 20mK)"
+n6 = 1.00
+perf = 0.85
+power = 0.30
+cost = 0.05
+safety = 0.70
+notes = "6 logical qubits=n EXACT, quantum advantage for pathfinding/optimization, needs cryo"
+
+[[candidate]]
+id = "RISCV_6Wide"
+label = "RISC-V 6-wide (6-issue=n, 12-stage=sigma pipeline, tau=4 ALU clusters)"
+n6 = 1.00
+perf = 0.65
+power = 0.85
+cost = 0.70
+safety = 0.95
+notes = "6-issue=n EXACT, 12-stage=sigma EXACT, tau=4 ALU EXACT, open ISA, deterministic real-time"
+
+[[candidate]]
+id = "PhotonicCompute"
+label = "Photonic Compute (6 wavelengths=n, 12 channels=sigma, near-zero heat)"
+n6 = 1.00
+perf = 0.80
+power = 1.00
+cost = 0.10
+safety = 0.90
+notes = "6 WDM=n EXACT, 12ch=sigma EXACT, speed-of-light compute, BT-89 photonic bridge"
+
+[[candidate]]
+id = "HybridCompute"
+label = "Hybrid GPU+Neuromorphic+QPU (6 heterogeneous units=n, 24 TOPS/W=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.10
+safety = 0.80
+notes = "6 units=n EXACT, 24 TOPS/W=J2 EXACT, best-of-all-worlds, BT-59 8-layer AI stack"
+
+# ============================================================
+# Level 4: System Integration (시스템)
+#   n6 checks: SE(3)=6DOF, sigma/J2 subsystems, BT-123/125
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+id = "Atmospheric"
+label = "Atmospheric (6DOF=n, Mach 0-6=n envelope, ceiling=24km=J2, crew=2=phi)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.60
+safety = 0.85
+notes = "6DOF=n EXACT, Mach6=n EXACT, 24km=J2 EXACT, BT-123 SE(3), full atmospheric"
+
+[[candidate]]
+id = "SSTO"
+label = "SSTO (delta-v=12km/s=sigma, payload=6t=n, 6 engines=n, orbit insertion)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.10
+safety = 0.55
+notes = "delta-v=12=sigma EXACT, payload=6t=n EXACT, 6 engines=n EXACT, single-stage-to-orbit"
+
+[[candidate]]
+id = "DeepSpace"
+label = "Deep Space (range=12AU=sigma, cruise=10yr=sigma-phi, 6 redundant systems=n)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.05
+safety = 0.60
+notes = "12AU=sigma EXACT, 6 redundant=n EXACT, interplanetary capable, BT-123 6DOF"
+
+[[candidate]]
+id = "eVTOL"
+label = "eVTOL (6 rotors=n, 12 tilt actuators=sigma, range=120km=sigma*(sigma-phi))"
+n6 = 1.00
+perf = 0.55
+power = 0.90
+cost = 0.75
+safety = 0.90
+notes = "6 rotors=n EXACT, 12 actuators=sigma EXACT, 120km=sigma*(sigma-phi) EXACT, urban air mobility"
+
+[[candidate]]
+id = "ExtremeEnv"
+label = "Extreme Environment (T=-270~3000C, P=0~1000atm, radiation 10^6 rad, 6 shields=n)"
+n6 = 0.75
+perf = 0.80
+power = 0.60
+cost = 0.15
+safety = 1.00
+notes = "6 shield layers=n EXACT, Venus/Jupiter/deep ocean rated, BT-125 tau=4 stability"
+
+[[candidate]]
+id = "AllDomain"
+label = "All-domain (atmo+space+underwater+ground, 6 modes=n, 24 subsystems=J2)"
+n6 = 1.00
+perf = 1.00
+power = 0.30
+cost = 0.05
+safety = 0.70
+notes = "6 modes=n EXACT, 24 subsystems=J2 EXACT, true all-domain aerospace — all domain operational"
+
+# ============================================================
+# Rules: compatibility and preference constraints
+# ============================================================
+
+# YBCO requires SC-MHD or Compact Fusion (needs superconducting magnets)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "YBCO"
+then_level = 1
+then_ids = "SC_MHD,CompactFusion"
+
+# YBCO pairs with cryogenic power (Compact Tokamak)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "YBCO"
+then_level = 2
+then_ids = "CompactTokamak,HybridFusionBatt"
+
+# Scramjet is atmospheric-only, incompatible with Deep Space
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Scramjet"
+then_level = 4
+then_ids = "DeepSpace,SSTO"
+
+# eVTOL requires Solid-State Battery (safety + weight for urban ops)
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "eVTOL"
+then_level = 2
+then_ids = "SolidStateBattery,Supercapacitor"
+
+# Quantum QPU requires cryogenic environment (YBCO material or Compact Tokamak)
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "QuantumQPU"
+then_level = 0
+then_ids = "YBCO"
+
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "QuantumQPU"
+then_level = 2
+then_ids = "CompactTokamak,HybridFusionBatt"
+
+# Diamond material pairs with extreme environments
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Diamond"
+then_level = 4
+then_ids = "ExtremeEnv,AllDomain"
+
+# Photonic propulsion best for Deep Space
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Photonic"
+then_level = 4
+then_ids = "DeepSpace"
+
+# Photonic compute pairs with photonic propulsion and HEXA Solar
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "PhotonicCompute"
+then_level = 1
+then_ids = "Photonic,HybridProp"
+
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "PhotonicCompute"
+then_level = 2
+then_ids = "HEXASolar,HybridFusionBatt"
+
+# Compact Fusion propulsion pairs with fusion power
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "CompactFusion"
+then_level = 2
+then_ids = "CompactTokamak,DT_Direct,HybridFusionBatt"
+
+# HEXA-1 GPU pairs with Hybrid Fusion+Battery for sustained compute
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "HEXA1_GPU"
+then_level = 2
+then_ids = "HybridFusionBatt,CompactTokamak"
+
+# Neuromorphic ideal for eVTOL (low power, fast reaction)
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Neuromorphic"
+then_level = 4
+then_ids = "eVTOL,Atmospheric"
+
+# All-domain system prefers hybrid propulsion and hybrid compute
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "AllDomain"
+then_level = 1
+then_ids = "HybridProp,SC_MHD"
+
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "AllDomain"
+then_level = 3
+then_ids = "HybridCompute,HEXA1_GPU"
+
+# Graphene pairs well with lightweight systems
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Graphene"
+then_level = 4
+then_ids = "eVTOL,Atmospheric,SSTO"
+
+# Hall Ion engine best for Deep Space
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "HallIon"
+then_level = 4
+then_ids = "DeepSpace"
+
+# SSTO needs high-thrust propulsion (exclude low-thrust options)
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "SSTO"
+then_level = 1
+then_ids = "HallIon,Photonic"
+
+# Carbon Fiber best for atmospheric and SSTO (proven aerospace)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "CarbonFiber"
+then_level = 4
+then_ids = "Atmospheric,SSTO,eVTOL"
+
+# Ti-6Al-4V for extreme environments and SSTO (heat resistance)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Ti6Al4V"
+then_level = 4
+then_ids = "ExtremeEnv,SSTO"
+
+# RISC-V deterministic compute for safety-critical eVTOL/Atmospheric
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "RISCV_6Wide"
+then_level = 4
+then_ids = "eVTOL,Atmospheric,ExtremeEnv"

@@ -1,0 +1,374 @@
+# =============================================================
+# Nuclear Structure DSE Domain Definition
+# 핵구조 — n=6 기반 핵물리학 아키텍처
+# Carbon-12 = 3 alpha clusters, CNO cycle catalyst n=6
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "nuclear-structure"
+desc = "Ultimate Nuclear Structure DSE (BT-27/43/51)"
+levels = ["Nucleon", "Shell", "Force", "Clustering", "Synthesis"]
+vision = "Carbon-12 as the universal nuclear n=6 node -- 3 alpha clusters, CNO catalyst"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Nucleon (Quark/Hadron Structure) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Nucleon"
+
+[[candidate]]
+level  = 0
+id     = "QuarkTriplet"
+label  = "n/phi=3 Quarks per Nucleon (uud/udd)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "quarks=3=n/phi EXACT, colors=3=n/phi EXACT, flavors=6=n EXACT, generations=3=n/phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "Isospin2"
+label  = "Isospin Doublet (p,n) phi=2"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "isospin=2=phi EXACT, nucleon_types=2=phi EXACT, charge_states=2=phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "SU3_Color"
+label  = "SU(3) Color Gauge (8 gluons)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "gluons=8=sigma-tau EXACT, colors=3=n/phi EXACT, SU(3) generators=8"
+
+[[candidate]]
+level  = 0
+id     = "Pion3"
+label  = "Pion Triplet (pi+/pi-/pi0) n/phi=3"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "pion_types=3=n/phi EXACT, meson_quarks=2=phi EXACT, isospin=1=mu EXACT"
+
+[[candidate]]
+level  = 0
+id     = "Deuteron"
+label  = "Deuteron (simplest nucleus A=2=phi)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.75
+cost   = 0.65
+notes  = "nucleons=2=phi EXACT, spin=1=mu, binding=2.22MeV, isospin=0"
+
+[[candidate]]
+level  = 0
+id     = "Baryon8"
+label  = "Baryon Octet (sigma-tau=8 baryons)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "octet=8=sigma-tau EXACT, decuplet=10=sigma-phi, flavors=6=n EXACT"
+
+# =============================================================
+# Level 1: Shell (Nuclear Shell Structure) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Shell"
+
+[[candidate]]
+level  = 1
+id     = "MagicN"
+label  = "Magic Numbers (2,8,20,28,50,82,126)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.50
+notes  = "first_magic=2=phi EXACT, second=8=sigma-tau EXACT, shells=7, closed_shell_stability=max"
+
+[[candidate]]
+level  = 1
+id     = "SpinOrbit"
+label  = "Spin-Orbit Coupling (l+s splitting)"
+n6     = 0.50
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "spin_states=2=phi EXACT, orbital_quantum=integer, j_split=2j+1"
+
+[[candidate]]
+level  = 1
+id     = "Carbon12Shell"
+label  = "Carbon-12 Shell (Z=6=n EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "protons=6=n EXACT, neutrons=6=n EXACT, nucleons=12=sigma EXACT, alpha_clusters=3=n/phi EXACT"
+
+[[candidate]]
+level  = 1
+id     = "OxygenShell"
+label  = "Oxygen-16 Double Magic (Z=8,N=8)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "protons=8=sigma-tau EXACT, neutrons=8=sigma-tau EXACT, nucleons=16=2^tau"
+
+[[candidate]]
+level  = 1
+id     = "NilssonDef"
+label  = "Nilsson Deformed Shell Model"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "deformation_params=3, quadrupole=2=phi EXACT, rotation_bands=multiple"
+
+[[candidate]]
+level  = 1
+id     = "Helium4Shell"
+label  = "Helium-4 Alpha Particle (tau=4 nucleons)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "nucleons=4=tau EXACT, spin=0, isospin=0, binding_per_nucleon=7.07MeV"
+
+# =============================================================
+# Level 2: Force (Nuclear Force Model) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Force"
+
+[[candidate]]
+level  = 2
+id     = "OneBosonExch"
+label  = "One-Boson Exchange (sigma=12 NN channels)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "NN_channels=12=sigma EXACT, mesons=6=n, partial_waves=12=sigma EXACT"
+
+[[candidate]]
+level  = 2
+id     = "ChiralEFT"
+label  = "Chiral EFT (systematic N^kLO expansion)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "orders=5=sopfr, pion_mass=140MeV, cutoff_range=2, chiral_symmetry=SU(2)"
+
+[[candidate]]
+level  = 2
+id     = "ThreeBody"
+label  = "Three-Body Force (crucial for binding)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "body_count=3=n/phi EXACT, Fujita-Miyazawa, essential_for_drip_lines=true"
+
+[[candidate]]
+level  = 2
+id     = "Skyrme"
+label  = "Skyrme Energy Density Functional"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "params=12=sigma, mean_field=true, pairing=delta, computational_cost=low"
+
+[[candidate]]
+level  = 2
+id     = "Gogny"
+label  = "Gogny Finite-Range Interaction"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "ranges=2=phi EXACT, Gaussian_terms=2=phi, pairing+mean_field=unified"
+
+[[candidate]]
+level  = 2
+id     = "Lattice_QCD"
+label  = "Lattice QCD ab initio (3 colors, 6 flavors)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.35
+cost   = 0.30
+notes  = "colors=3=n/phi EXACT, flavors=6=n EXACT, lattice_spacing=a, first_principles=true"
+
+# =============================================================
+# Level 3: Clustering (Nuclear Clustering & Decay) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Clustering"
+
+[[candidate]]
+level  = 3
+id     = "AlphaCluster"
+label  = "Alpha Clustering (tau=4 nucleon cluster)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "cluster_size=4=tau EXACT, C12_alphas=3=n/phi EXACT, Hoyle_state=7.65MeV"
+
+[[candidate]]
+level  = 3
+id     = "HoyleState"
+label  = "Hoyle State (triple-alpha 0+)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "alphas=3=n/phi EXACT, energy=7.65MeV, carbon_production=essential, anthropic=true"
+
+[[candidate]]
+level  = 3
+id     = "AlphaDecay"
+label  = "Alpha Decay (tau=4 emission)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "emitted_nucleons=4=tau EXACT, tunnel_barrier=Coulomb, half_life_range=huge"
+
+[[candidate]]
+level  = 3
+id     = "BetaDecay"
+label  = "Beta Decay (phi=2 weak channels)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "channels=2=phi EXACT (beta+/beta-), neutrino_types=3=n/phi EXACT, W_boson=weak"
+
+[[candidate]]
+level  = 3
+id     = "FissionBinary"
+label  = "Binary Fission (phi=2 fragments)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "fragments=2=phi EXACT, neutrons_per_fission=2-3, energy=200MeV, chain_reaction=true"
+
+[[candidate]]
+level  = 3
+id     = "ClusterDecay"
+label  = "Heavy Cluster Emission (C-14, Ne-24)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.55
+cost   = 0.40
+notes  = "C14_emission=Z=6=n EXACT, rare_decay, branching_ratio=10^{-10}"
+
+# =============================================================
+# Level 4: Synthesis (Nucleosynthesis Pathway) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Synthesis"
+
+[[candidate]]
+level  = 4
+id     = "CNO_Cycle"
+label  = "CNO Cycle (Carbon Z=6 catalyst)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "catalyst=C12 Z=6=n EXACT, steps=6=n EXACT, net=4H->He4, T>15MK, dominant_in_massive_stars"
+
+[[candidate]]
+level  = 4
+id     = "PPChain"
+label  = "PP Chain (solar hydrogen burning)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "branches=3=n/phi EXACT, net=4H->He4, T=15MK, pp1_dominant=85%"
+
+[[candidate]]
+level  = 4
+id     = "TripleAlpha"
+label  = "Triple-Alpha Process (3 He4 -> C12)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "input_alphas=3=n/phi EXACT, product=C12 Z=6=n EXACT, Hoyle_resonance=essential"
+
+[[candidate]]
+level  = 4
+id     = "RProcess"
+label  = "r-Process (rapid neutron capture)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "site=neutron_star_merger, heavy_elements=Z>26, magic_peaks=true, gold/platinum_origin"
+
+[[candidate]]
+level  = 4
+id     = "Superheavy"
+label  = "Superheavy Island of Stability"
+n6     = 0.50
+perf   = 0.65
+power  = 0.40
+cost   = 0.35
+notes  = "predicted_magic=Z=114/120/126, island_center=Z=120-126, deformed_shells=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# AlphaCluster required for Carbon12Shell
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "AlphaCluster"
+then_level = 1
+then_ids   = "Carbon12Shell,Helium4Shell"
+
+# ChiralEFT requires ThreeBody (systematic expansion demands 3NF)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "ChiralEFT"
+then_level = 2
+then_ids   = "ThreeBody"
+
+# Superheavy requires MagicN (shell closure is essential)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Superheavy"
+then_level = 1
+then_ids   = "MagicN"
+
+# BBN/PPChain requires Isospin2 (proton-neutron distinction fundamental)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "PPChain"
+then_level = 0
+then_ids   = "Isospin2,QuarkTriplet"

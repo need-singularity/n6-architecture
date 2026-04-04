@@ -50,6 +50,15 @@ pub mod safety;
 // --- Growth engine ---
 pub mod growth;
 
+// --- Topology exploration ---
+pub mod topology_exploration;
+
+// --- Adaptive & Compiler extensions ---
+pub mod adaptive;
+pub mod compiler_bench;
+pub mod compiler_engines;
+pub mod compiler_modules;
+
 // --- Cross-module integration ---
 pub mod integration;
 

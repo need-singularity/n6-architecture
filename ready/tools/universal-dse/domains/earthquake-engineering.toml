@@ -1,0 +1,358 @@
+# =============================================================
+# Earthquake Engineering DSE Domain Definition
+# Seismic design — soil analysis to monitoring
+# n=6: 6 DOF vibration, σ=12 seismograph channels, 6 seismic zones
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "earthquake-engineering"
+desc = "Seismic Design Architecture DSE (soil/foundation/isolation/damping/monitoring)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: SoilAnalysis (6 candidates)
+# ============================================================
+
+[[level]]
+name = "SoilAnalysis"
+
+[[candidate]]
+level = 0
+id = "SPT-6depth"
+label = "SPT n=6 Depth Survey (standard penetration, 6 boring points)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "CPT-Continuous"
+label = "CPT Continuous (cone penetrometer, 12m=σ depth, high res)"
+n6 = 0.85
+perf = 0.85
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "MASW-Array"
+label = "MASW 24-Geophone (J₂=24 channel, Vs30 profile, surface wave)"
+n6 = 0.80
+perf = 0.80
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "CrossHole"
+label = "Cross-Hole Seismic (downhole Vs/Vp, 6 borehole pairs)"
+n6 = 0.90
+perf = 0.90
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Microtremor"
+label = "Microtremor H/V (ambient vibration, site period, low cost)"
+n6 = 0.60
+perf = 0.55
+power = 0.95
+cost = 0.95
+
+[[candidate]]
+level = 0
+id = "LiDAR-Fault"
+label = "LiDAR Fault Mapping (airborne, surface rupture, regional)"
+n6 = 0.65
+perf = 0.75
+power = 0.70
+cost = 0.50
+
+# ============================================================
+# Level 1: Foundation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level = 1
+id = "Mat-Hex"
+label = "Hexagonal Mat Foundation (n=6 geometry, load spreading)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Pile-6group"
+label = "Pile Group n=6 (6 piles, deep soil, friction/end bearing)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Raft-Slab"
+label = "Raft Slab (continuous, uniform settlement, moderate soil)"
+n6 = 0.65
+perf = 0.70
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Caisson-12m"
+label = "Caisson σ=12m Depth (drilled shaft, bridge/tower, deep)"
+n6 = 0.85
+perf = 0.90
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "SoilImprove"
+label = "Soil Improvement (jet grout, densification, liquefiable)"
+n6 = 0.55
+perf = 0.65
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Rocking-Fdn"
+label = "Rocking Foundation (energy dissipation, self-centering)"
+n6 = 0.75
+perf = 0.80
+power = 0.80
+cost = 0.60
+
+# ============================================================
+# Level 2: Isolation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Isolation"
+
+[[candidate]]
+level = 2
+id = "LRB"
+label = "Lead Rubber Bearing (σ=12 layer rubber, most deployed)"
+n6 = 0.90
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "FPS"
+label = "Friction Pendulum System (concave sliding, period shift)"
+n6 = 0.75
+perf = 0.90
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "HDRB"
+label = "High Damping Rubber Bearing (6-layer=n damping, simple)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "Triple-FPS"
+label = "Triple Friction Pendulum (3 sliding surfaces, adaptive)"
+n6 = 0.70
+perf = 0.95
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "NoIsolation"
+label = "No Isolation (fixed base, conventional design, low rise)"
+n6 = 0.50
+perf = 0.50
+power = 1.00
+cost = 1.00
+
+[[candidate]]
+level = 2
+id = "Hybrid-Isolator"
+label = "Hybrid Isolator (rubber+friction, 6-DOF=n protection)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 3: Damping (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Damping"
+
+[[candidate]]
+level = 3
+id = "Viscous-6unit"
+label = "Viscous Damper n=6 Units (fluid, velocity-dependent)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "BRB"
+label = "Buckling Restrained Brace (steel yielding, 12=σ braces)"
+n6 = 0.90
+perf = 0.85
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "TMD"
+label = "Tuned Mass Damper (pendulum/spring, tower/bridge, passive)"
+n6 = 0.70
+perf = 0.80
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "MR-Damper"
+label = "MR Fluid Damper (semi-active, real-time, 6-mode control)"
+n6 = 0.85
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "SMA-Brace"
+label = "Shape Memory Alloy Brace (self-centering, NiTi, resilient)"
+n6 = 0.60
+perf = 0.88
+power = 0.65
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "NoDamping"
+label = "No Added Damping (inherent structural only, budget)"
+n6 = 0.45
+perf = 0.40
+power = 1.00
+cost = 1.00
+
+# ============================================================
+# Level 4: Monitoring (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Monitoring"
+
+[[candidate]]
+level = 4
+id = "SHM-12ch"
+label = "SHM σ=12 Channel (accelerometer array, continuous)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "EEW-Network"
+label = "Early Warning Network (P-wave detect, 6-sec=n alert window)"
+n6 = 0.95
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "FiberOptic-DAS"
+label = "Fiber Optic DAS (distributed acoustic, km-scale, dense)"
+n6 = 0.75
+perf = 0.95
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "GPS-GNSS"
+label = "GNSS Displacement (cm-accuracy, permanent deformation)"
+n6 = 0.65
+perf = 0.70
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Visual-Inspect"
+label = "Visual Inspection (post-earthquake, tagging, manual)"
+n6 = 0.45
+perf = 0.45
+power = 0.95
+cost = 0.95
+
+[[candidate]]
+level = 4
+id = "Digital-Twin"
+label = "Digital Twin (6-DOF=n model, real-time FEA, predictive)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.30
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# No isolation requires no damping or basic only for low-cost buildings
+# (not a hard rule, but triple FPS excluded from visual-inspect-only)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "NoIsolation"
+then_level = 3
+then_ids = ["MR-Damper", "SMA-Brace"]
+
+# Triple FPS excluded from visual-only monitoring (needs instrumentation)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Triple-FPS"
+then_level = 4
+then_ids = ["Visual-Inspect"]
+
+# Microtremor only insufficient for pile/caisson foundations
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Microtremor"
+then_level = 1
+then_ids = ["Caisson-12m"]
+
+# Digital twin requires SHM or fiber optic (needs sensor data)
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Digital-Twin"
+then_level = 3
+then_ids = ["Viscous-6unit", "BRB", "MR-Damper", "SMA-Brace", "TMD"]

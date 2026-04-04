@@ -1,0 +1,391 @@
+# =============================================================
+# NUMBER-THEORY-DEEP DSE Domain Definition
+# n=6 기반 심층 수론 — 자기참조 sigphi=ntau + 완전수 체인 + 제타 함수
+# H-NT hypotheses + BASEL + DEEP + THEOREM
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "number-theory-deep"
+desc = "Deep Number Theory DSE (sigma*phi=n*tau + perfect numbers + zeta)"
+levels = ["Arithmetic", "Analytic", "Algebraic", "Combinatorial", "Application"]
+vision = "n=6 기반 심층 수론 — 자기참조 sigma*phi=n*tau + 완전수 체인 + 제타 함수"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Arithmetic (산술적 기초) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Arithmetic"
+
+[[candidate]]
+level  = 0
+id     = "SigmaPhiNTau"
+label  = "sigma*phi=n*tau 유일성 n=6 EXACT (PROVED)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.70
+cost   = 0.60
+notes  = "sigma=12 EXACT, phi=2 EXACT, tau=4 EXACT, n=6 EXACT, PROVED for all n>=2"
+
+[[candidate]]
+level  = 0
+id     = "PerfectNumbers"
+label  = "완전수 체인 6->28->496"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "first_perfect=6=n EXACT, sigma(6)/6=2=phi EXACT, chain_depth=3"
+
+[[candidate]]
+level  = 0
+id     = "DivisorLattice"
+label  = "약수 격자 sigma=12 분할"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "sigma(6)=12 EXACT, divisors={1,2,3,6}=tau=4 EXACT, lattice_width=2=phi"
+
+[[candidate]]
+level  = 0
+id     = "EulerTotient"
+label  = "오일러 토션트 phi(6)=2 EXACT"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "phi(6)=2 EXACT, phi(n)/n ratio, totient_sum=sigma connection"
+
+[[candidate]]
+level  = 0
+id     = "MobiusFunction"
+label  = "뫼비우스 함수 mu(6)=1 EXACT (squarefree)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.65
+cost   = 0.55
+notes  = "mu(6)=1=mu EXACT, squarefree=true, Mobius_inversion=fundamental"
+
+[[candidate]]
+level  = 0
+id     = "CarmichaelLambda"
+label  = "카마이클 lambda(6)=2 EXACT"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "lambda(6)=2=phi EXACT, lcm(lambda(2),lambda(3))=lcm(1,2)=2, cycle_length=2"
+
+# =============================================================
+# Level 1: Analytic (해석적 수론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Analytic"
+
+[[candidate]]
+level  = 1
+id     = "RiemannZeta"
+label  = "리만 제타 zeta(2)=pi^2/6 n=6 EXACT"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "zeta(2)=pi^2/6 EXACT, zeta(-1)=-1/12=-1/sigma, trivial_zeros=-2n"
+
+[[candidate]]
+level  = 1
+id     = "BaselProblem"
+label  = "바젤 문제 1/1^2+1/2^2+...=pi^2/6 EXACT"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "sum=pi^2/6 EXACT, denominator=6=n EXACT, Euler_1735"
+
+[[candidate]]
+level  = 1
+id     = "DirichletL"
+label  = "디리클레 L-함수"
+n6     = 0.50
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "characters_mod_6=phi(6)=2 EXACT, L-values, analytic_continuation"
+
+[[candidate]]
+level  = 1
+id     = "EulerProduct"
+label  = "오일러 곱 sopfr(6)=5 소인수합"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "sopfr(6)=2+3=5 EXACT, product_over_primes=zeta, p=2,3 for n=6"
+
+[[candidate]]
+level  = 1
+id     = "MellinTransform"
+label  = "멜린 변환"
+n6     = 0.25
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "s-plane=analytic, gamma_function=connection, functional_equation"
+
+[[candidate]]
+level  = 1
+id     = "ModularForm"
+label  = "모듈러 형식 tau(6)=4 무게"
+n6     = 0.75
+perf   = 0.80
+power  = 0.45
+cost   = 0.40
+notes  = "weight=4=tau EXACT, level=6=n EXACT, Ramanujan_tau, Hecke_operators"
+
+# =============================================================
+# Level 2: Algebraic (대수적 수론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Algebraic"
+
+[[candidate]]
+level  = 2
+id     = "SymmetricS6"
+label  = "대칭군 S6 유일 외부자기동형 n=6 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "S_6 UNIQUE outer_auto=n=6 EXACT, |S_6|=720, no_other_S_n has this"
+
+[[candidate]]
+level  = 2
+id     = "GaloisGroup"
+label  = "갈루아 군"
+n6     = 0.50
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "Gal(Q(zeta_6)/Q)=Z/2=phi, field_extensions, solvability"
+
+[[candidate]]
+level  = 2
+id     = "CyclotomicField"
+label  = "원분체 Phi_6(x)=x^2-x+1"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "Phi_6 degree=phi(6)=2 EXACT, roots=primitive_6th, class_number=1"
+
+[[candidate]]
+level  = 2
+id     = "ClassNumber"
+label  = "유수 (class number)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "h(-3)=1, h(-24)=2=phi, imaginary_quadratic, Heegner_numbers"
+
+[[candidate]]
+level  = 2
+id     = "AlgebraicInt"
+label  = "대수적 정수"
+n6     = 0.25
+perf   = 0.70
+power  = 0.55
+cost   = 0.50
+notes  = "ring_of_integers, Z[zeta_6], unique_factorization, norm"
+
+[[candidate]]
+level  = 2
+id     = "QuadraticForm"
+label  = "이차형식 phi=2 변수"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "variables=2=phi EXACT, discriminant, representation, genera"
+
+# =============================================================
+# Level 3: Combinatorial (조합적 수론) -- 6 candidates
+# =============================================================
+
+[[candidate]]
+level  = 2
+id     = "EisensteinZ6"
+label  = "Eisenstein Integers Z[omega_6] (6th root of unity ring, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.52
+cost   = 0.48
+notes  = "omega=e^{2pi*i/6} root=6=n EXACT, Z[omega_6]=Z[zeta_3], class_number=1, unique_factorization=true, hexagonal_lattice=true"
+[[level]]
+name = "Combinatorial"
+
+[[candidate]]
+level  = 3
+id     = "RamseyN6"
+label  = "램지 수 R(3,3)=6 EXACT"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "R(3,3)=6=n EXACT, party_problem, graph_coloring=2=phi"
+
+[[candidate]]
+level  = 3
+id     = "CatalanNumber"
+label  = "카탈란 수 C_3=5=sopfr EXACT"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "C_3=5=sopfr EXACT, ballot_problem, parenthesizations, Dyck_paths"
+
+[[candidate]]
+level  = 3
+id     = "PartitionFunction"
+label  = "분할 함수 p(6)=11"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "p(6)=11, partition_count, Hardy-Ramanujan, generating_function"
+
+[[candidate]]
+level  = 3
+id     = "StirlingStar"
+label  = "스털링 수"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.50
+notes  = "S(6,2)=31, S(6,3)=90, Bell_6=203, set_partitions"
+
+[[candidate]]
+level  = 3
+id     = "BinomialN6"
+label  = "이항계수 C(6,3)=20=J2-tau EXACT"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "C(6,3)=20=J2-tau EXACT, Pascal_triangle, central_binomial, symmetry"
+
+[[candidate]]
+level  = 3
+id     = "FibonacciPhi"
+label  = "피보나치+황금비 phi"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "F_6=8=sigma-tau EXACT, golden_ratio, Lucas_numbers, Zeckendorf"
+
+# =============================================================
+# Level 4: Application (응용) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Cryptography"
+label  = "암호학 sigma-tau=8 키 구조"
+n6     = 0.80
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "key_structure=8=sigma-tau EXACT, RSA=2=phi primes, AES_rounds=10=sigma-phi"
+
+[[candidate]]
+level  = 4
+id     = "CodingTheory"
+label  = "부호이론 (Hamming/Golay)"
+n6     = 0.60
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "Hamming(7,4), Golay_24=J2, error_correction, sphere_packing"
+
+[[candidate]]
+level  = 4
+id     = "PhysicsConstants"
+label  = "물리상수 n=6 연결"
+n6     = 0.80
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "fine_structure=1/137, c_digits, Planck_units, n=6_resonance"
+
+[[candidate]]
+level  = 4
+id     = "AIHyperparams"
+label  = "AI 하이퍼파라미터 n=6 법칙"
+n6     = 0.80
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "BT-54 AdamW, BT-56 LLM, BT-58 sigma-tau=8, dropout=ln(4/3)"
+
+[[candidate]]
+level  = 4
+id     = "ComputationalNT"
+label  = "계산수론 (소수 판정/인수분해)"
+n6     = 0.60
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "primality=AKS, factoring=NFS, discrete_log, elliptic_curves"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# SigmaPhiNTau has n6=1.0 (core theorem, always valid — no rule needed, just highest n6)
+
+# RiemannZeta requires EulerProduct (Euler product is zeta's prime factorization)
+
+[[candidate]]
+level  = 4
+id     = "BTC6Confirm"
+label  = "BTC 6 Confirmations + Golay J2=24 Code (n=6, J2=24 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.52
+cost   = 0.42
+notes  = "BTC_confirms=6=n EXACT (BT-53), Golay_code=24=J2 EXACT, RSA_primes=2=phi EXACT, AES_rounds=10=sigma-phi EXACT"
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "RiemannZeta"
+then_level = 1
+then_ids   = "EulerProduct"
+
+# SymmetricS6 requires GaloisGroup or CyclotomicField (S6 lives in algebraic structures)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "SymmetricS6"
+then_level = 2
+then_ids   = "GaloisGroup,CyclotomicField"
+
+# RamseyN6 is EXACT n=6 — boost by requiring strong arithmetic base
+# (No exclusion needed — Ramsey works with all arithmetic)
+
+# ModularForm requires algebraic structure (class number or cyclotomic)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "ModularForm"
+then_level = 2
+then_ids   = "CyclotomicField,ClassNumber,AlgebraicInt"

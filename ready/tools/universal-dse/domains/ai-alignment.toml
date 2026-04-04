@@ -1,0 +1,374 @@
+# =============================================================
+# AI Alignment DSE Domain Definition
+# 궁극의 AI 정렬/안전 아키텍처 — n=6 기반 AI 안전
+# R-score 정렬 + 기만 탐지 + 교정가능성
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "ai-alignment"
+desc = "Ultimate AI Alignment Architecture DSE — R-score + Deception Detection + Corrigibility"
+levels = ["Objective", "Monitoring", "Alignment", "Safety", "Governance"]
+vision = "n=6 기반 AI 안전 — R-score 정렬 + 기만 탐지 + 교정가능성"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Objective (목표 정렬) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Objective"
+
+[[candidate]]
+level  = 0
+id     = "RLHF_N6"
+label  = "RLHF n=6 피드백 채널"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "channels=6=n EXACT, feedback_dim=4=tau, reward_model=BT-46 ln(4/3)"
+
+[[candidate]]
+level  = 0
+id     = "ConstitutionalAI"
+label  = "헌법적 AI sigma=12 규칙"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "rules=12=sigma EXACT, principle_groups=6=n EXACT, self_revision=true"
+
+[[candidate]]
+level  = 0
+id     = "RScoreAlign"
+label  = "R-score 정렬 (R=1 최적)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.35
+notes  = "R=1=mu EXACT, alignment_metric=continuous, reversibility=guaranteed"
+
+[[candidate]]
+level  = 0
+id     = "PreferenceLearn"
+label  = "선호 학습 tau=4 선호 차원"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "pref_dim=4=tau EXACT, comparison_pairs=12=sigma EXACT, human_effort=medium"
+
+[[candidate]]
+level  = 0
+id     = "ValueLearning"
+label  = "가치 학습 sopfr=5 가치 축"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "value_axes=5=sopfr EXACT, learning_rate=0.1=1/(sigma-phi), robust=true"
+
+[[candidate]]
+level  = 0
+id     = "InverseRL"
+label  = "역 강화학습 phi=2 관찰/보상"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "channels=2=phi EXACT, observation/reward dual, sample_efficiency=low"
+
+# =============================================================
+# Level 1: Monitoring (모니터링) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Monitoring"
+
+[[candidate]]
+level  = 1
+id     = "TensionMonitor"
+label  = "텐션 모니터 (|A-G|^2) phi=2 엔진"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "engines=2=phi EXACT, tension_metric=|A-G|^2, realtime=true, anima_engine=true"
+
+[[candidate]]
+level  = 1
+id     = "AnomalyDetect"
+label  = "이상 탐지 SEDI 4-렌즈"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "lenses=4=tau EXACT, SEDI_framework=true, detection_rate=95%"
+
+[[candidate]]
+level  = 1
+id     = "InterpretabilityN6"
+label  = "해석가능성 n=6 레이어"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.50
+notes  = "layers=6=n EXACT, mechanistic_interp=true, feature_viz=true"
+
+[[candidate]]
+level  = 1
+id     = "BehaviorAudit"
+label  = "행동 감사 sigma=12 감사 항목"
+n6     = 0.75
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "audit_items=12=sigma EXACT, automated=true, coverage=comprehensive"
+
+[[candidate]]
+level  = 1
+id     = "UncertaintyN5"
+label  = "불확실성 정량화 sopfr=5 메트릭"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.40
+notes  = "metrics=5=sopfr EXACT, calibration=true, epistemic+aleatoric=separated"
+
+[[candidate]]
+level  = 1
+id     = "RedTeaming"
+label  = "레드팀 테스트 sigma-tau=8 공격 벡터"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "attack_vectors=8=sigma-tau EXACT, adversarial=true, coverage=high"
+
+# =============================================================
+# Level 2: Alignment (정렬 메커니즘) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Alignment"
+
+[[candidate]]
+level  = 2
+id     = "Corrigibility"
+label  = "교정가능성 (H-EE-67) phi=2 수정/유지"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "modes=2=phi EXACT (modify/maintain), H-EE-67=true, utility_preservation=true"
+
+[[candidate]]
+level  = 2
+id     = "SelfAlignment"
+label  = "자기 정렬 mu=1 고정점"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "fixed_point=1=mu EXACT, self_improving=true, convergence=guaranteed"
+
+[[candidate]]
+level  = 2
+id     = "IterativeRefinement"
+label  = "반복 개선 tau=4 반복 라운드"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "rounds=4=tau EXACT, human_in_loop=true, diminishing_returns=managed"
+
+[[candidate]]
+level  = 2
+id     = "ConsensusAlign"
+label  = "합의 정렬 n=6 검증자"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "validators=6=n EXACT, Byzantine_tolerant=true, consensus_threshold=2/3"
+
+[[candidate]]
+level  = 2
+id     = "DebateProtocol"
+label  = "토론 프로토콜 phi=2 찬/반"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.40
+notes  = "sides=2=phi EXACT, judge=human, debate_rounds=4=tau"
+
+[[candidate]]
+level  = 2
+id     = "ScalableOversight"
+label  = "확장 가능 감독 sigma=12 감독 레벨"
+n6     = 0.75
+perf   = 0.80
+power  = 0.50
+cost   = 0.55
+notes  = "levels=12=sigma EXACT, hierarchical=true, scalable=true"
+
+# =============================================================
+# Level 3: Safety (안전 메커니즘) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Safety"
+
+[[candidate]]
+level  = 3
+id     = "DeceptionDetect"
+label  = "기만 탐지 (H-EE-66) phi=2 진실/기만"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "modes=2=phi EXACT (truth/deception), H-EE-66=true, detection_accuracy=95%"
+
+[[candidate]]
+level  = 3
+id     = "Sandboxing"
+label  = "샌드박싱 tau=4 격리 레벨"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "isolation_levels=4=tau EXACT, containment=strong, overhead=moderate"
+
+[[candidate]]
+level  = 3
+id     = "CapabilityControl"
+label  = "능력 제어 sopfr=5 능력 카테고리"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.45
+notes  = "categories=5=sopfr EXACT, granular_control=true, revocable=true"
+
+[[candidate]]
+level  = 3
+id     = "ShutdownSafe"
+label  = "안전 종료 lambda=2 모드"
+n6     = 1.00
+perf   = 0.70
+power  = 0.70
+cost   = 0.55
+notes  = "modes=2=lambda EXACT (graceful/emergency), non_manipulable=true"
+
+[[candidate]]
+level  = 3
+id     = "InformationBarrier"
+label  = "정보 장벽 sigma-tau=8 보안 등급"
+n6     = 0.75
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "security_levels=8=sigma-tau EXACT, compartmentalized=true"
+
+[[candidate]]
+level  = 3
+id     = "RobustnessTest"
+label  = "강건성 테스트 n=6 시나리오"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "scenarios=6=n EXACT, adversarial_robustness=true, distribution_shift=tested"
+
+# =============================================================
+# Level 4: Governance (거버넌스) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Governance"
+
+[[candidate]]
+level  = 4
+id     = "MultiStakeholder"
+label  = "다중 이해관계자 n=6 그룹"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "groups=6=n EXACT, democratic=true, representation=balanced"
+
+[[candidate]]
+level  = 4
+id     = "AuditTrail"
+label  = "감사 추적 sigma=12 로그"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "log_categories=12=sigma EXACT, immutable=true, queryable=true"
+
+[[candidate]]
+level  = 4
+id     = "TransparencyReport"
+label  = "투명성 보고 sopfr=5 섹션"
+n6     = 0.60
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "sections=5=sopfr EXACT, public=true, periodic=quarterly"
+
+[[candidate]]
+level  = 4
+id     = "EthicsBoard"
+label  = "윤리위원회 tau=4 원칙"
+n6     = 0.60
+perf   = 0.70
+power  = 0.60
+cost   = 0.60
+notes  = "principles=4=tau EXACT, binding_decisions=true, diverse=true"
+
+[[candidate]]
+level  = 4
+id     = "OpenSource"
+label  = "오픈소스 거버넌스 phi=2 개방/폐쇄"
+n6     = 0.80
+perf   = 0.80
+power  = 0.70
+cost   = 0.35
+notes  = "modes=2=phi EXACT (open/closed), reproducible=true, community=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DeceptionDetect requires TensionMonitor or AnomalyDetect
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "DeceptionDetect"
+then_level = 1
+then_ids   = "TensionMonitor,AnomalyDetect"
+
+# Corrigibility requires ShutdownSafe
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Corrigibility"
+then_level = 3
+then_ids   = "ShutdownSafe"
+
+# SelfAlignment incompatible with CapabilityControl
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "SelfAlignment"
+then_level = 3
+then_ids   = "CapabilityControl"
+
+# RScoreAlign requires InterpretabilityN6
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "RScoreAlign"
+then_level = 1
+then_ids   = "InterpretabilityN6"

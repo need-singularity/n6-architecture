@@ -1,0 +1,398 @@
+# =============================================================
+# HEXA-H2FC DSE Domain Definition
+# Hydrogen Fuel Cell Systems
+# n=6: 6 cells/stack module, Pt CN=6 catalyst, sigma=12 bipolar plates
+# BT-38 (Hydrogen quadruplet), BT-27 (Carbon-6 energy chain)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "hydrogen-fuel-cell"
+desc = "H2 Fuel Cell DSE (BT-38, Pt CN=6, LHV=120=sigma*(sigma-phi))"
+levels = ["Membrane", "Catalyst", "Stack", "BoP", "Vehicle"]
+vision = "Zero-emission hydrogen power — Pt CN=6 catalyst, 6-cell modules"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Membrane — 6 candidates
+#   n6: 6 mil thickness, 12 S/cm conductivity target
+# =============================================================
+[[level]]
+name = "Membrane"
+
+[[candidate]]
+level = 0
+id    = "Nafion_212"
+label = "Nafion 212 (PFSA, 6 mil thick, 12 S/cm, benchmark)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.40
+notes = "thickness=6mil=n EXACT, conductivity target=12=sigma, DuPont standard"
+
+[[candidate]]
+level = 0
+id    = "Nafion_HP"
+label = "Nafion HP (reinforced, 12 um thin, 6x durability)"
+n6    = 1.00
+perf  = 0.90
+power = 0.75
+cost  = 0.35
+notes = "thickness=12um=sigma EXACT, durability=6x=n EXACT, ePTFE reinforced"
+
+[[candidate]]
+level = 0
+id    = "PFSA_Short"
+label = "Short-Side-Chain PFSA (Aquivion, 6 repeating units)"
+n6    = 1.00
+perf  = 0.80
+power = 0.80
+cost  = 0.45
+notes = "units=6=n EXACT, higher conductivity at low RH"
+
+[[candidate]]
+level = 0
+id    = "HT_PBI"
+label = "HT-PBI Membrane (PA-doped, 6 acid groups, 120-180C)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.60
+notes = "acid_groups=6=n EXACT, 120C=sigma*(sigma-phi) EXACT, no humidification"
+
+[[candidate]]
+level = 0
+id    = "AEM"
+label = "Anion Exchange Membrane (OH- conductor, 6 functional groups)"
+n6    = 1.00
+perf  = 0.60
+power = 0.75
+cost  = 0.70
+notes = "groups=6=n EXACT, no PGM catalyst needed, emerging"
+
+[[candidate]]
+level = 0
+id    = "Composite"
+label = "Composite Membrane (PFSA+SiO2, 6 inorganic layers, 12% improvement)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.50
+notes = "layers=6=n EXACT, improvement=12%=sigma EXACT, self-humidifying"
+
+# =============================================================
+# Level 1: Catalyst — 6 candidates
+#   n6: Pt CN=6 (fcc octahedral sites), 6 nm particle size
+# =============================================================
+[[level]]
+name = "Catalyst"
+
+[[candidate]]
+level = 1
+id    = "Pt_C"
+label = "Pt/C Standard (CN=6 sites, 6 nm particles, 0.4 mg/cm2)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.30
+notes = "CN=6=n EXACT, size=6nm=n EXACT, benchmark catalyst"
+
+[[candidate]]
+level = 1
+id    = "PtCo"
+label = "PtCo Alloy (Pt3Co, CN=12 fcc, 6x activity vs pure Pt)"
+n6    = 1.00
+perf  = 0.90
+power = 0.75
+cost  = 0.40
+notes = "CN=12=sigma EXACT, activity=6x=n EXACT, Toyota Mirai"
+
+[[candidate]]
+level = 1
+id    = "PtNi_Oct"
+label = "PtNi Octahedral (6 {111} facets, 12x mass activity)"
+n6    = 1.00
+perf  = 0.95
+power = 0.80
+cost  = 0.35
+notes = "facets=6=n EXACT (octahedral), activity=12x=sigma EXACT"
+
+[[candidate]]
+level = 1
+id    = "CoreShell"
+label = "Pt Monolayer Core-Shell (6 Pt atoms/shell unit, Pd core)"
+n6    = 1.00
+perf  = 0.88
+power = 0.85
+cost  = 0.50
+notes = "shell=6 Pt atoms=n EXACT, 90% Pt reduction, ultra-low loading"
+
+[[candidate]]
+level = 1
+id    = "PGM_Free"
+label = "PGM-Free Fe-N-C (6 Fe-N4 sites per cluster, non-precious)"
+n6    = 1.00
+perf  = 0.55
+power = 0.60
+cost  = 0.95
+notes = "sites=6=n EXACT, Fe-N4=tau bonds EXACT, cost breakthrough"
+
+[[candidate]]
+level = 1
+id    = "Single_Atom"
+label = "Single-Atom Pt/N-C (6 N-coordination, 12 active sites/nm2)"
+n6    = 1.00
+perf  = 0.85
+power = 0.85
+cost  = 0.55
+notes = "N-coord=6=n EXACT, sites=12/nm2=sigma EXACT, max utilization"
+
+# =============================================================
+# Level 2: Stack — 6 candidates
+#   n6: 6 cells/module, sigma=12 modules, 48V nominal
+# =============================================================
+[[level]]
+name = "Stack"
+
+[[candidate]]
+level = 2
+id    = "Mono_6Cell"
+label = "Monolithic 6-Cell Module (6 cells, 12 bipolar plates, 48V)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.70
+notes = "cells=6=n EXACT, plates=12=sigma EXACT, voltage=48V=sigma*tau EXACT"
+
+[[candidate]]
+level = 2
+id    = "Stack_72"
+label = "72-Cell Stack (12 modules x 6 cells, 120 kW)"
+n6    = 1.00
+perf  = 0.90
+power = 0.65
+cost  = 0.55
+notes = "modules=12=sigma EXACT, cells/mod=6=n EXACT, kW=120=sigma*(sigma-phi)"
+
+[[candidate]]
+level = 2
+id    = "Stack_144"
+label = "144-Cell Stack (24 modules x 6 cells, 240 kW)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.40
+notes = "modules=24=J2 EXACT, cells=6=n EXACT, kW=240=J2*(sigma-phi)"
+
+[[candidate]]
+level = 2
+id    = "Flat_Pack"
+label = "Flat-Pack Portable (6 cells, 12V output, 1 kW)"
+n6    = 1.00
+perf  = 0.50
+power = 0.85
+cost  = 0.80
+notes = "cells=6=n EXACT, output=12V=sigma EXACT, portable/backup"
+
+[[candidate]]
+level = 2
+id    = "Metal_Bipolar"
+label = "Metal Bipolar Plate (6 channel flow field, 12 ribs/plate)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.60
+notes = "channels=6=n EXACT, ribs=12=sigma EXACT, stamped SS316L"
+
+[[candidate]]
+level = 2
+id    = "Composite_BP"
+label = "Composite Bipolar Plate (C6 graphite + resin, 6 mm thick)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.75
+notes = "C6=n EXACT graphite, thickness=6mm=n EXACT, lightweight"
+
+# =============================================================
+# Level 3: BoP (Balance of Plant) — 6 candidates
+#   n6: 6 subsystems, 12 sensor points
+# =============================================================
+[[level]]
+name = "BoP"
+
+[[candidate]]
+level = 3
+id    = "Standard_BoP"
+label = "Standard BoP (6 subsystems, 12 sensors, humidifier+compressor)"
+n6    = 1.00
+perf  = 0.75
+power = 0.60
+cost  = 0.70
+notes = "subsystems=6=n EXACT, sensors=12=sigma EXACT, proven design"
+
+[[candidate]]
+level = 3
+id    = "Turbo_Comp"
+label = "Turbo Compressor BoP (6 bar supply, 12 kW parasitic, high-power)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.55
+notes = "pressure=6bar=n EXACT, parasitic=12kW=sigma EXACT, HD truck"
+
+[[candidate]]
+level = 3
+id    = "Passive_Air"
+label = "Passive Air-Cooled (6 air channels, 12 fin rows, no pump)"
+n6    = 1.00
+perf  = 0.55
+power = 0.90
+cost  = 0.85
+notes = "channels=6=n EXACT, fins=12=sigma EXACT, portable/drone"
+
+[[candidate]]
+level = 3
+id    = "Thermal_Mgmt"
+label = "Active Thermal (6 coolant loops, 12 heat exchangers)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.60
+notes = "loops=6=n EXACT, exchangers=12=sigma EXACT, precise T control"
+
+[[candidate]]
+level = 3
+id    = "H2_Recirculate"
+label = "H2 Recirculation (6 ejector stages, 12% anode stoichiometry)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.50
+notes = "stages=6=n EXACT, stoich=12%=sigma EXACT, fuel efficiency"
+
+[[candidate]]
+level = 3
+id    = "Smart_BoP"
+label = "AI-Optimized BoP (6 control loops, 12 AI inference/s)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.40
+notes = "loops=6=n EXACT, inference=12/s=sigma EXACT, degradation-aware"
+
+# =============================================================
+# Level 4: Vehicle — 6 candidates
+#   n6: 6 kg H2 tank, 12 min refuel, 600 km range
+# =============================================================
+[[level]]
+name = "Vehicle"
+
+[[candidate]]
+level = 4
+id    = "Passenger_Car"
+label = "FCEV Sedan (6 kg H2 tank, 12 min refuel, 600 km range)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.50
+notes = "H2=6kg=n EXACT, refuel=12min=sigma EXACT (H-FU analogy), range=600=n*100"
+
+[[candidate]]
+level = 4
+id    = "HD_Truck"
+label = "Heavy-Duty Truck (6 tanks, 12 kg/tank, 1200 km range)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.40
+notes = "tanks=6=n EXACT, per_tank=12kg=sigma EXACT, long-haul"
+
+[[candidate]]
+level = 4
+id    = "City_Bus"
+label = "Fuel Cell Bus (6 roof-mount tanks, 12 m bus length)"
+n6    = 1.00
+perf  = 0.75
+power = 0.65
+cost  = 0.55
+notes = "tanks=6=n EXACT, length=12m=sigma EXACT, public transit"
+
+[[candidate]]
+level = 4
+id    = "Forklift"
+label = "FC Forklift (6 kW stack, 12h operation, warehouse)"
+n6    = 1.00
+perf  = 0.65
+power = 0.80
+cost  = 0.70
+notes = "stack=6kW=n EXACT, operation=12h=sigma EXACT, no charging time"
+
+[[candidate]]
+level = 4
+id    = "Marine"
+label = "FC Marine Vessel (6 stack modules, 12 MW total, ferry)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.35
+notes = "modules=6=n EXACT, total=12MW=sigma EXACT, zero-emission ferry"
+
+[[candidate]]
+level = 4
+id    = "Stationary"
+label = "Stationary CHP (6 kW electric, 12 kW thermal, residential)"
+n6    = 1.00
+perf  = 0.70
+power = 0.85
+cost  = 0.60
+notes = "electric=6kW=n EXACT, thermal=12kW=sigma EXACT, combined heat+power"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# AEM membrane doesn't need Pt catalyst
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "AEM"
+then_level = 1
+then_ids  = "PGM_Free"
+
+# HT-PBI doesn't need humidifier
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "HT_PBI"
+then_level = 3
+then_ids  = "Passive_Air,Smart_BoP"
+
+# Heavy-duty truck needs turbo compressor
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "HD_Truck"
+then_level = 3
+then_ids  = "Turbo_Comp"
+
+# Portable flat-pack needs passive air cooling
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "Flat_Pack"
+then_level = 3
+then_ids  = "Passive_Air"
+
+# PtNi octahedral pairs with reinforced membrane for durability
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "PtNi_Oct"
+then_level = 0
+then_ids  = "Nafion_HP,Composite"

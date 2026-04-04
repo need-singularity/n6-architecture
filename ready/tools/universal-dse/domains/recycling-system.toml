@@ -1,0 +1,357 @@
+# =============================================================
+# Recycling System DSE Domain Definition
+# Waste processing — collection to remanufacture
+# n=6: 6 waste categories, σ=12 sorting bins, Carbon Z=6 organic recycling
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "recycling-system"
+desc = "Waste Processing Architecture DSE (collection/sorting/processing/recovery/remanufacture)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Collection (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Collection"
+
+[[candidate]]
+level = 0
+id = "Curbside-6bin"
+label = "Curbside n=6 Bin (6 waste categories, residential, standard)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Pneumatic-Tube"
+label = "Pneumatic Tube (underground, automated, urban density)"
+n6 = 0.70
+perf = 0.90
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "SmartBin-IoT"
+label = "Smart Bin IoT (fill-level sensor, 12=σ route optimization)"
+n6 = 0.90
+perf = 0.80
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "DropOff-Center"
+label = "Drop-Off Center (citizen-sorted, 12=σ categories, low cost)"
+n6 = 0.85
+perf = 0.65
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Mixed-Single"
+label = "Mixed Single-Stream (all recyclables together, convenient)"
+n6 = 0.50
+perf = 0.55
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Industrial-Bulk"
+label = "Industrial Bulk Collection (factory waste, large volume)"
+n6 = 0.60
+perf = 0.75
+power = 0.70
+cost = 0.65
+
+# ============================================================
+# Level 1: Sorting (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Sorting"
+
+[[candidate]]
+level = 1
+id = "AI-Vision-6class"
+label = "AI Vision n=6 Class Sort (deep learning, 95% accuracy)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "NIR-Spectral"
+label = "NIR Spectral Sorting (plastic ID, 12=σ polymer types)"
+n6 = 0.90
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Eddy-Current"
+label = "Eddy Current + Magnet (ferrous/non-ferrous metal separation)"
+n6 = 0.70
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Manual-Line"
+label = "Manual Sorting Line (human pickers, 6-station=n conveyor)"
+n6 = 0.80
+perf = 0.60
+power = 0.90
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Ballistic-Sep"
+label = "Ballistic Separator (2D/3D split, pre-sorting, mechanical)"
+n6 = 0.55
+perf = 0.65
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Robot-Arm-6dof"
+label = "Robot Arm n=6 DOF Pick (AI+delta robot, high speed, precise)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Level 2: Processing (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level = 2
+id = "MechRecycle"
+label = "Mechanical Recycling (shred+wash+pelletize, 6-step=n line)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "ChemRecycle"
+label = "Chemical Recycling (depolymerization, monomer recovery)"
+n6 = 0.75
+perf = 0.90
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Pyrolysis"
+label = "Pyrolysis (thermal decomposition, Carbon Z=6 char+oil+gas)"
+n6 = 0.90
+perf = 0.80
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Composting"
+label = "Composting Aerobic (6-week=n cycle, organic waste, Carbon Z=6)"
+n6 = 1.00
+perf = 0.55
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "Anaerobic-Digest"
+label = "Anaerobic Digestion (biogas CH₄, 12-day=σ retention)"
+n6 = 0.85
+perf = 0.75
+power = 0.85
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Smelting"
+label = "E-Waste Smelting (precious metal recovery, high temp)"
+n6 = 0.60
+perf = 0.85
+power = 0.40
+cost = 0.45
+
+# ============================================================
+# Level 3: Recovery (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Recovery"
+
+[[candidate]]
+level = 3
+id = "Pellet-6grade"
+label = "Pellet n=6 Grade (sorted polymer pellets, feedstock)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Metal-Refine"
+label = "Metal Refining (Al/Cu/Fe/Au recovery, 12=σ metal types)"
+n6 = 0.85
+perf = 0.90
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Biogas-CHP"
+label = "Biogas CHP (combined heat+power, 6 kWe=n modules)"
+n6 = 0.95
+perf = 0.80
+power = 0.90
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Fiber-Pulp"
+label = "Fiber Pulp Recovery (paper/cardboard, 6-wash=n deink)"
+n6 = 0.90
+perf = 0.70
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Glass-Cullet"
+label = "Glass Cullet (color-sorted, 6 color grades=n, furnace-ready)"
+n6 = 0.95
+perf = 0.65
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "RareEarth"
+label = "Rare Earth Recovery (Nd/Dy from e-waste, hydrometallurgy)"
+n6 = 0.65
+perf = 0.95
+power = 0.40
+cost = 0.30
+
+# ============================================================
+# Level 4: Remanufacture (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Remanufacture"
+
+[[candidate]]
+level = 4
+id = "ClosedLoop-Bottle"
+label = "Closed Loop Bottle-to-Bottle (PET, food-grade, 6-cycle=n life)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Downcycle-Fiber"
+label = "Downcycle to Fiber (textile/insulation, lower grade)"
+n6 = 0.60
+perf = 0.55
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "3DP-Filament"
+label = "3D Print Filament (recycled polymer to filament, circular)"
+n6 = 0.80
+perf = 0.75
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "ConstructionMat"
+label = "Construction Material (recycled aggregate, 12=σ ton blocks)"
+n6 = 0.85
+perf = 0.70
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Battery-Recycle"
+label = "Battery Cell Remanufacture (Li recovery, 6-stage=n hydromet)"
+n6 = 0.90
+perf = 0.90
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Compost-Product"
+label = "Compost Product (soil amendment, Carbon Z=6 sequestration)"
+n6 = 0.95
+perf = 0.60
+power = 0.95
+cost = 0.90
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Composting requires organic collection (not mixed single stream)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Composting"
+then_level = 0
+then_ids = ["Industrial-Bulk"]
+
+# Smelting requires eddy current sorting (metal pre-sort)
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Smelting"
+then_level = 1
+then_ids = ["Eddy-Current", "AI-Vision-6class", "Robot-Arm-6dof"]
+
+# Anaerobic digestion requires biogas CHP recovery
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Anaerobic-Digest"
+then_level = 3
+then_ids = ["Biogas-CHP"]
+
+# Rare earth recovery requires smelting process
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "RareEarth"
+then_level = 2
+then_ids = ["Smelting", "ChemRecycle"]

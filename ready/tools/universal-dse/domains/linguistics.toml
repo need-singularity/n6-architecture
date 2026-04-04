@@ -1,0 +1,377 @@
+# =============================================================
+# Linguistics DSE Domain Definition
+# 언어학/인지과학 아키텍처 — n=6 기반 언어학
+# Zipf 법칙 + 6 기본 언어 유형 + 음운 체계
+# Based on H-LING-001~015, H-ARCH-languages
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "linguistics"
+desc = "Ultimate Linguistics DSE (H-LING-001~015, Zipf/Typology/Phonology)"
+levels = ["Phonology", "Syntax", "Semantics", "Typology", "Computation"]
+vision = "n=6 기반 언어학 — Zipf 법칙 + 6 기본 언어 유형 + 음운 체계"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Phonology (음운론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Phonology"
+
+[[candidate]]
+level  = 0
+id     = "VowelN6"
+label  = "모음 6종 기본 /i,e,a,o,u,ə/ n=6 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "vowels=6=n EXACT, formants=2=phi EXACT, universal across languages"
+
+[[candidate]]
+level  = 0
+id     = "ConsonantN12"
+label  = "자음 sigma=12 조음점"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "places=12=sigma EXACT, manners=6=n EXACT, voicing=2=phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "ProsodyN4"
+label  = "운율 tau=4 성조 레벨"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "tones=4=tau EXACT, contours=6=n EXACT, stress=2=phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "SyllableN6"
+label  = "음절 구조 n=6 타입"
+n6     = 1.00
+perf   = 0.82
+power  = 0.58
+cost   = 0.48
+notes  = "types=6=n EXACT (V,CV,CVC,CVCC,CCVC,CCVCC), onset=4=tau EXACT"
+
+[[candidate]]
+level  = 0
+id     = "PhonemeInventory"
+label  = "음소 목록 sigma-tau=8 평균 구분"
+n6     = 0.75
+perf   = 0.78
+power  = 0.62
+cost   = 0.52
+notes  = "features=8=sigma-tau EXACT, categories=6=n EXACT, binary=2=phi"
+
+[[candidate]]
+level  = 0
+id     = "StressPattern"
+label  = "강세 패턴 phi=2 강/약"
+n6     = 0.50
+perf   = 0.75
+power  = 0.68
+cost   = 0.58
+notes  = "levels=2=phi EXACT, feet=4=tau EXACT, window=6=n"
+
+# =============================================================
+# Level 1: Syntax (통사론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Syntax"
+
+[[candidate]]
+level  = 1
+id     = "UniversalGrammar"
+label  = "보편문법 n=6 원리"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "principles=6=n EXACT, parameters=12=sigma EXACT, innate=true"
+
+[[candidate]]
+level  = 1
+id     = "XBarTheory"
+label  = "X-bar 이론 n/phi=3 투사 레벨"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "levels=3=n/phi EXACT, specifier=1=mu EXACT, complement=1=mu"
+
+[[candidate]]
+level  = 1
+id     = "DependencyGrammar"
+label  = "의존 문법 sopfr=5 관계 유형"
+n6     = 0.75
+perf   = 0.82
+power  = 0.58
+cost   = 0.48
+notes  = "relations=5=sopfr EXACT, depth=6=n EXACT, projective=true"
+
+[[candidate]]
+level  = 1
+id     = "ConstructionGrammar"
+label  = "구문 문법 sigma=12 구문 유형"
+n6     = 0.75
+perf   = 0.80
+power  = 0.52
+cost   = 0.42
+notes  = "constructions=12=sigma EXACT, inheritance=4=tau EXACT, usage-based=true"
+
+[[candidate]]
+level  = 1
+id     = "MinimalistProgram"
+label  = "최소주의 phi=2 Merge 연산"
+n6     = 0.75
+perf   = 0.88
+power  = 0.48
+cost   = 0.38
+notes  = "operations=2=phi EXACT (Merge+Agree), phases=4=tau EXACT, features=6=n"
+
+[[candidate]]
+level  = 1
+id     = "TreeAdjoining"
+label  = "트리 접합 문법 tau=4 연산"
+n6     = 0.75
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "operations=4=tau EXACT, tree_families=12=sigma EXACT, lexicalized=true"
+
+# =============================================================
+# Level 2: Semantics (의미론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Semantics"
+
+[[candidate]]
+level  = 2
+id     = "ConceptualN6"
+label  = "개념 n=6 원형 범주"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "categories=6=n EXACT, prototypes=12=sigma EXACT, hierarchy=4=tau"
+
+[[candidate]]
+level  = 2
+id     = "FrameSemantics"
+label  = "프레임 의미론 sigma=12 역할"
+n6     = 0.75
+perf   = 0.82
+power  = 0.52
+cost   = 0.42
+notes  = "roles=12=sigma EXACT, frames=6=n EXACT, relations=5=sopfr"
+
+[[candidate]]
+level  = 2
+id     = "CompositionSemantic"
+label  = "합성 의미론 phi=2 원리"
+n6     = 0.75
+perf   = 0.80
+power  = 0.58
+cost   = 0.48
+notes  = "principles=2=phi EXACT (compositionality+context), types=6=n EXACT"
+
+[[candidate]]
+level  = 2
+id     = "MetaphorN6"
+label  = "은유 n=6 원형 은유"
+n6     = 1.00
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "primary=6=n EXACT, mappings=12=sigma EXACT, embodied=true"
+
+[[candidate]]
+level  = 2
+id     = "WordNet"
+label  = "워드넷 sopfr=5 의미 관계"
+n6     = 0.75
+perf   = 0.75
+power  = 0.62
+cost   = 0.52
+notes  = "relations=5=sopfr EXACT (hyper/hypo/mero/holo/antonym), synsets=6=n groups"
+
+[[candidate]]
+level  = 2
+id     = "DistributionalSemantic"
+label  = "분포 의미론 sigma-tau=8 차원 축소"
+n6     = 0.75
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "dim_ratio=8=sigma-tau EXACT, window=5=sopfr EXACT, embedding=true"
+
+# =============================================================
+# Level 3: Typology (유형론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Typology"
+
+[[candidate]]
+level  = 3
+id     = "WordOrderN6"
+label  = "어순 6유형 SOV/SVO/VSO/VOS/OVS/OSV n=6 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "orders=6=n EXACT, S/O/V permutations=3!=6=n EXACT, dominant=2=phi"
+
+[[candidate]]
+level  = 3
+id     = "MorphTypeN4"
+label  = "형태 4유형 교착/굴절/고립/포합 tau=4 EXACT"
+n6     = 0.75
+perf   = 0.85
+power  = 0.58
+cost   = 0.48
+notes  = "types=4=tau EXACT, synthesis=2=phi (analytic/synthetic), index=6=n"
+
+[[candidate]]
+level  = 3
+id     = "ToneN4"
+label  = "성조 4유형 tau=4"
+n6     = 0.75
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "levels=4=tau EXACT, register=2=phi EXACT, contour=6=n patterns"
+
+[[candidate]]
+level  = 3
+id     = "CaseN6"
+label  = "격 n=6 기본격 (주/대/속/여/탈/구)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.55
+cost   = 0.45
+notes  = "cases=6=n EXACT (NOM/ACC/GEN/DAT/ABL/INS), markings=12=sigma"
+
+[[candidate]]
+level  = 3
+id     = "GrammaticalRelN6"
+label  = "문법관계 n=6 (S/A/O/IO/OBL/ADJ)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.58
+cost   = 0.48
+notes  = "relations=6=n EXACT, alignment=4=tau types, hierarchy=2=phi"
+
+[[candidate]]
+level  = 3
+id     = "ZipfLaw"
+label  = "Zipf 법칙 기울기 ≈ -1 = -mu"
+n6     = 0.75
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "exponent=-1=-mu EXACT, rank=6=n bands, frequency=12=sigma decades"
+
+# =============================================================
+# Level 4: Computation (계산 언어학) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Computation"
+
+[[candidate]]
+level  = 4
+id     = "NLP_Transformer"
+label  = "NLP 트랜스포머 sigma=12 헤드"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "heads=12=sigma EXACT, layers=6=n EXACT, d_model=512, BT-56 aligned"
+
+[[candidate]]
+level  = 4
+id     = "MachineTranslation"
+label  = "기계번역 phi=2 언어쌍"
+n6     = 0.75
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "pair=2=phi EXACT, enc_layers=6=n EXACT, dec_layers=6=n EXACT"
+
+[[candidate]]
+level  = 4
+id     = "SpeechRecognition"
+label  = "음성인식 ASR"
+n6     = 0.50
+perf   = 0.82
+power  = 0.55
+cost   = 0.45
+notes  = "features=12=sigma EXACT, frames=4=tau windows, beam=6=n"
+
+[[candidate]]
+level  = 4
+id     = "SentimentN6"
+label  = "감성분석 n=6 감정 (기쁨/슬픔/분노/공포/혐오/놀람)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.58
+cost   = 0.48
+notes  = "emotions=6=n EXACT (Ekman basic), valence=2=phi EXACT, arousal=4=tau"
+
+[[candidate]]
+level  = 4
+id     = "LanguageModel"
+label  = "언어모델 BT-56 Complete"
+n6     = 1.00
+perf   = 0.92
+power  = 0.42
+cost   = 0.32
+notes  = "d=4096=2^sigma, L=32=2^sopfr, heads=12=sigma EXACT, BT-56 complete n=6"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# UniversalGrammar requires VowelN6 or ConsonantN12 (grammar needs phonology)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "UniversalGrammar"
+then_level = 0
+then_ids   = "VowelN6,ConsonantN12"
+
+# WordOrderN6 is n6=1.0 (already set in candidate) -- no rule needed
+
+# ZipfLaw requires DistributionalSemantic
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "ZipfLaw"
+then_level = 2
+then_ids   = "DistributionalSemantic"
+
+# NLP_Transformer requires UniversalGrammar or MinimalistProgram (needs formal syntax)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "NLP_Transformer"
+then_level = 1
+then_ids   = "UniversalGrammar,MinimalistProgram"
+
+# SpeechRecognition requires ProsodyN4 or PhonemeInventory (needs phonology detail)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "SpeechRecognition"
+then_level = 0
+then_ids   = "ProsodyN4,PhonemeInventory,StressPattern"

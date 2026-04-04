@@ -1,0 +1,391 @@
+# N6 Safety DSE — Integrated Safety Architecture
+# 5 Materials x 6 Process x 6 Sensor x 5 Controller x 6 System = 5,400 combos
+# BT-43 (CN=6 cathode), BT-60 (DC power chain), BT-118~122 (environment)
+# BT-123~127 (robotics safety), H-SF-01~30, H-SFX-01~20, H-SAFE-EX-01~10
+# Core equation: (1/(sigma-phi))^n = 10^{-6} = universal safety target
+# Constants: n=6, sigma=12, phi=2, tau=4, J2=24, sopfr=5, mu=1
+
+[meta]
+name = "safety"
+desc = "Safety (Protection Material + Process + Sensor + Controller + System)"
+version = "1.0"
+levels = 5
+total_hint = 5400
+
+[scoring]
+n6     = 0.30
+perf   = 0.25
+power  = 0.10
+cost   = 0.15
+safety = 0.20
+
+# ============================================================
+# Level 0: Protection Materials (방호 소재)
+#   n6 checks: CN=6, Z=6, fire resistance, thermal limits
+#   H-SF-01 fire triangle=n/phi=3, H-SF-16 shielding=n=6
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "CeramicFireboard"
+label = "Ceramic Fireboard (Al2O3 CN=6=n, T_max=1800C, k=0.2W/mK, non-combustible)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.70
+safety = 1.00
+notes = "Al2O3 CN=6=n EXACT, Class A1 non-combustible, widely used in fire barriers, H-SF-16"
+
+[[candidate]]
+id = "AerogelInsulation"
+label = "Aerogel (SiO2 CN=4=tau, k=0.015W/mK, T_max=1200C, density=0.1g/cm3)"
+n6 = 0.75
+perf = 0.95
+power = 0.95
+cost = 0.30
+safety = 0.95
+notes = "CN=4=tau EXACT, lowest thermal conductivity solid, NASA-grade thermal protection"
+
+[[candidate]]
+id = "IntumescentCoating"
+label = "Intumescent Coating (carbon Z=6=n, expands 6x=n at 200C, 120min=sigma*10 rating)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+safety = 0.90
+notes = "Z=6=n EXACT in carbon base, expansion ratio 6x=n EXACT, passive fire protection standard"
+
+[[candidate]]
+id = "BoronCarbide"
+label = "B4C (Z=5+6, Mohs=9.5, neutron absorber, density=2.52g/cm3)"
+n6 = 0.75
+perf = 0.90
+power = 0.85
+cost = 0.40
+safety = 0.95
+notes = "Carbon Z=6=n EXACT, boron Z=5=sopfr EXACT, nuclear+ballistic shielding, BT-85/93"
+
+[[candidate]]
+id = "DiamondLikeCarbon"
+label = "DLC (Z=6=n, sp3 CN=4=tau, hardness=80GPa, k=1000W/mK, biocompatible)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.25
+safety = 0.90
+notes = "Z=6=n EXACT, CN=4=tau EXACT, extreme wear+corrosion resistance, medical implant safe"
+
+# ============================================================
+# Level 1: Safety Process Design (안전 공정 설계)
+#   n6 checks: LOPA=n=6 IPL, HAZOP guide words, SIL=tau=4
+#   H-SF-22 LOPA=n=6, H-SF-20 HAZOP, H-SFX-09 PPE=sopfr=5
+# ============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+id = "LOPA_Full"
+label = "LOPA Full (n=6 IPL layers, each 10x=(sigma-phi) risk reduction, total 10^-6)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.65
+safety = 1.00
+notes = "n=6 IPL EXACT, (sigma-phi)=10 per layer EXACT, H-SF-22, CCPS standard"
+
+[[candidate]]
+id = "HAZOP_Systematic"
+label = "HAZOP Systematic (sigma-n/phi=9 guide words, tau=4 severity levels)"
+n6 = 0.85
+perf = 0.85
+power = 0.90
+cost = 0.70
+safety = 0.95
+notes = "sigma-n/phi=9 CLOSE (7~11 range), IEC 61882 standard, H-SF-20"
+
+[[candidate]]
+id = "BowTie_Analysis"
+label = "Bow-Tie (phi=2 sides x n/phi=3 barriers = n=6 total, PFD=0.1^n=10^-6)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.75
+safety = 0.95
+notes = "n=6 total barriers EXACT, phi=2 symmetry EXACT, Shell/BP standard, H-SAFE-EX-01"
+
+[[candidate]]
+id = "FMEA_Quantitative"
+label = "FMEA (sigma-phi=10 severity scale, RPN max=(sigma-phi)^3=1000)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.80
+safety = 0.90
+notes = "sigma-phi=10 EXACT, AIAG/VDA standard, H-SAFE-EX-02"
+
+[[candidate]]
+id = "SIS_Design"
+label = "SIS Design (SIL tau=4 levels, PFD ladder (sigma-phi)^k, IEC 61511)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.50
+safety = 1.00
+notes = "SIL tau=4 EXACT, (sigma-phi) ladder EXACT, H-SF-05/H-SFX-11"
+
+[[candidate]]
+id = "ATEX_Compliance"
+label = "ATEX Zone (n=6 zones = phi x n/phi, equipment groups tau=4 categories)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.60
+safety = 0.95
+notes = "n=6 zones EXACT, IECEx standard, H-SFX-07"
+
+# ============================================================
+# Level 2: Sensor / Detection Core (센서/감지 코어)
+#   n6 checks: sigma=12 channels, n=6 detection principles
+#   H-SF-06 detection=n=6, H-SF-07 fusion=sigma=12, H-SF-08 LEL=sigma-phi=10%
+# ============================================================
+
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+id = "MultiGasSensor"
+label = "Multi-Gas (n=6 species: CO/CO2/CH4/H2/O2/VOC, LEL alarm sigma-phi=10%)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+safety = 0.95
+notes = "n=6 species EXACT, sigma-phi=10% LEL EXACT, IEC 60079-29-1, H-SF-08"
+
+[[candidate]]
+id = "ThermalImaging"
+label = "Thermal IR (sigma=12 zone coverage, resolution 384x288=sigma^2*J2*sigma^2/8)"
+n6 = 0.85
+perf = 0.95
+power = 0.60
+cost = 0.40
+safety = 0.90
+notes = "sigma=12 zone monitoring EXACT, FLIR/Hikvision standard, H-SF-07"
+
+[[candidate]]
+id = "ArcFaultDetector"
+label = "Arc Fault (tau=4 PPE categories, detection <10ms=1/(sigma-phi)/10)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.55
+safety = 0.95
+notes = "tau=4 categories EXACT, NFPA 70E, H-SF-09"
+
+[[candidate]]
+id = "VibrSeismic"
+label = "Vibration/Seismic (sigma=12 MMI scale, n=6 DOF accelerometer)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+safety = 0.85
+notes = "sigma=12 MMI EXACT, n=6 DOF EXACT, BT-123 SE(3), H-SF-29"
+
+[[candidate]]
+id = "UltrasonicNDT"
+label = "Ultrasonic NDT (tau=4 scan types: A/B/C/S, frequency 1~sigma MHz)"
+n6 = 0.75
+perf = 0.85
+power = 0.80
+cost = 0.60
+safety = 0.85
+notes = "tau=4 scan modes EXACT, industrial inspection standard"
+
+[[candidate]]
+id = "FusionSensor12ch"
+label = "12-Channel Fusion (sigma=12 independent sensors, F1 optimized, AI inference)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.30
+safety = 1.00
+notes = "sigma=12 EXACT, optimal false-positive/negative balance, H-SF-07, state-of-art"
+
+# ============================================================
+# Level 3: Safety Controller Chip (안전 제어 칩)
+#   n6 checks: TMR=n/phi=3, SIL=tau=4, ASIL=tau=4
+#   H-SF-12 TMR=n/phi=3, H-SF-05 SIL=tau=4, H-SF-28 E-stop=tau=4
+# ============================================================
+
+[[level]]
+name = "Controller"
+
+[[candidate]]
+id = "TMR_ASIC"
+label = "TMR Safety ASIC (n/phi=3 redundancy, SIL tau=4 certified, 10ms response)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.35
+safety = 1.00
+notes = "n/phi=3 TMR EXACT, SIL tau=4 EXACT, IEC 61508 SIL 4, H-SF-12"
+
+[[candidate]]
+id = "SafetyPLC"
+label = "Safety PLC (SIL tau=4, n=6 safety I/O modules, PFD<10^-4)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+safety = 0.95
+notes = "SIL tau=4 EXACT, n=6 I/O EXACT, Siemens/Rockwell standard"
+
+[[candidate]]
+id = "FPGA_Diverse"
+label = "FPGA Diverse Redundancy (phi=2 diverse channels, SIL n/phi=3)"
+n6 = 0.85
+perf = 0.90
+power = 0.65
+cost = 0.45
+safety = 0.90
+notes = "phi=2 diversity EXACT, SIL 3 standard, DO-254 DAL B"
+
+[[candidate]]
+id = "EdgeAI_Safety"
+label = "Edge AI Safety (sigma=12 inference channels, tau=4 classification, <1ms)"
+n6 = 1.00
+perf = 1.00
+power = 0.55
+cost = 0.25
+safety = 0.85
+notes = "sigma=12 channels EXACT, tau=4 risk classes EXACT, emerging technology"
+
+[[candidate]]
+id = "Lockstep_Dual"
+label = "Lockstep Dual-Core (phi=2 cores, cycle-by-cycle comparison, ASIL D=tau)"
+n6 = 0.85
+perf = 0.80
+power = 0.80
+cost = 0.70
+safety = 0.90
+notes = "phi=2 EXACT, ASIL D=tau EXACT, ISO 26262, TI/Infineon automotive"
+
+# ============================================================
+# Level 4: Integrated Safety System (통합 안전 시스템)
+#   n6 checks: DiD=n=6, fire class=n=6, GFCI=30mA=sopfr*n
+#   H-SF-11 DiD=n=6, H-SF-02 fire=n=6, H-SF-25 GFCI=sopfr*n=30
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+id = "InertGasSuppression"
+label = "Inert Gas Suppression (n=6 fire classes, sigma=12 zone coverage, <10s=sigma-phi)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.55
+safety = 0.95
+notes = "n=6 fire classes EXACT, sigma=12 zones EXACT, FM-200/Novec, H-SF-02/23"
+
+[[candidate]]
+id = "SprinklerTiered"
+label = "Sprinkler Tiered (n=6 temp grades, sigma=12 zones, NFPA 13)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.80
+safety = 0.90
+notes = "n=6 temp grades EXACT, H-SF-14, proven 100+ years"
+
+[[candidate]]
+id = "DiD_6Layer"
+label = "Defense-in-Depth 6-Layer (n=6 barriers, PFD=(1/(sigma-phi))^n=10^-6)"
+n6 = 1.00
+perf = 0.95
+power = 0.85
+cost = 0.40
+safety = 1.00
+notes = "n=6 DiD EXACT, (sigma-phi)^-n EXACT, IAEA + LOPA, H-SF-11/H-SFX-03/20"
+
+[[candidate]]
+id = "EmergencyResponse6"
+label = "6-Phase Emergency (n=6 phases: prevent/prepare/detect/respond/recover/learn)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.75
+safety = 0.90
+notes = "n=6 phases EXACT, FEMA/ISO 22320, H-SF-15"
+
+[[candidate]]
+id = "CrossDomainSafety"
+label = "Cross-Domain Integration (sigma-phi=10 domains, J2=24V SELV, sopfr*n=30mA GFCI)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.30
+safety = 0.95
+notes = "sigma-phi=10 domains EXACT, J2=24V EXACT, sopfr*n=30mA EXACT, H-SF-10/25"
+
+[[candidate]]
+id = "AutonomousSafety"
+label = "Autonomous Safety AI (sigma=12 sensor fusion, tau=4 response levels, digital twin)"
+n6 = 1.00
+perf = 1.00
+power = 0.50
+cost = 0.20
+safety = 0.95
+notes = "sigma=12 EXACT, tau=4 EXACT, predictive maintenance + real-time response"
+
+# ============================================================
+# Compatibility Rules (호환성 규칙)
+# ============================================================
+
+[[rule]]
+desc = "Nuclear applications require B4C or DLC material"
+if_level = "System"
+if_id = "DiD_6Layer"
+require_level = "Material"
+require_ids = ["BoronCarbide", "DiamondLikeCarbon", "CeramicFireboard"]
+
+[[rule]]
+desc = "TMR ASIC requires SIS or LOPA process design"
+if_level = "Controller"
+if_id = "TMR_ASIC"
+require_level = "Process"
+require_ids = ["SIS_Design", "LOPA_Full"]
+
+[[rule]]
+desc = "Autonomous Safety requires 12-channel fusion sensor"
+if_level = "System"
+if_id = "AutonomousSafety"
+require_level = "Sensor"
+require_ids = ["FusionSensor12ch", "ThermalImaging"]
+
+[[rule]]
+desc = "Edge AI controller requires multi-sensor input"
+if_level = "Controller"
+if_id = "EdgeAI_Safety"
+require_level = "Sensor"
+require_ids = ["FusionSensor12ch", "MultiGasSensor", "ThermalImaging"]
+
+[[rule]]
+desc = "ATEX process requires gas detection sensor"
+if_level = "Process"
+if_id = "ATEX_Compliance"
+require_level = "Sensor"
+require_ids = ["MultiGasSensor", "FusionSensor12ch"]
+
+[[rule]]
+desc = "Cross-domain system requires LOPA or Bow-Tie process"
+if_level = "System"
+if_id = "CrossDomainSafety"
+require_level = "Process"
+require_ids = ["LOPA_Full", "BowTie_Analysis"]

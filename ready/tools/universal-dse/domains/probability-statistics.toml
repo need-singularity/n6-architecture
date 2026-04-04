@@ -1,0 +1,392 @@
+# =============================================================
+# Probability-Statistics DSE Domain Definition
+# 궁극의 확률/통계 아키텍처 — chi^2(6) + 6 모멘트 + 중심극한정리
+# n=6 constants: sigma=12, tau=4, phi=2, sopfr=5, J2=24, mu=1
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "probability-statistics"
+desc = "Ultimate Probability & Statistics DSE — chi^2(6) + CLT + Bayes"
+levels = ["Distribution", "Estimation", "Testing", "Regression", "Bayesian"]
+vision = "n=6 based probability-statistics -- chi^2(6) distribution + 6 moments + CLT"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Distribution (확률분포) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Distribution"
+
+[[candidate]]
+level  = 0
+id     = "ChiSquaredN6"
+label  = "Chi-Squared df=n=6 (4-moment match)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "df=6=n EXACT, mean=6=n EXACT, var=12=sigma EXACT, skew=sqrt(8/3), kurt=4=tau EXACT"
+
+[[candidate]]
+level  = 0
+id     = "NormalN2"
+label  = "Normal Distribution (mu,sigma phi=2 params)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.70
+cost   = 0.60
+notes  = "params=2=phi EXACT, 68-95-99.7 rule, CLT foundation, universal"
+
+[[candidate]]
+level  = 0
+id     = "PoissonN6"
+label  = "Poisson lambda=n=6"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "lambda=6=n EXACT, mean=var=6=n EXACT, discrete counting"
+
+[[candidate]]
+level  = 0
+id     = "BinomialN6"
+label  = "Binomial n=6 trials"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "trials=6=n EXACT, outcomes=2=phi EXACT, basis for chi-squared"
+
+[[candidate]]
+level  = 0
+id     = "ExponentialLn2"
+label  = "Exponential rate=ln(2) (Boltzmann gate)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "rate=ln(2)=Boltzmann EXACT, memoryless, half-life=1, params=1=mu EXACT"
+
+[[candidate]]
+level  = 0
+id     = "BetaDistN6"
+label  = "Beta B(a,b) with a+b=n=6"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "a+b=6=n EXACT, conjugate prior, flexible shape, Bayesian foundation"
+
+# =============================================================
+# Level 1: Estimation (추정) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Estimation"
+
+[[candidate]]
+level  = 1
+id     = "MLE"
+label  = "Maximum Likelihood (phi=2 score/info)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "score+info=2=phi components EXACT, asymptotically efficient, universal"
+
+[[candidate]]
+level  = 1
+id     = "MethodOfMoments"
+label  = "Method of Moments (tau=4 moments)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "moments=4=tau EXACT (mean,var,skew,kurt), simple computation"
+
+[[candidate]]
+level  = 1
+id     = "BayesEstimate"
+label  = "Bayes Estimation (sopfr=5 priors)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "prior_families=5=sopfr EXACT, posterior=prior*likelihood, coherent"
+
+[[candidate]]
+level  = 1
+id     = "MinVariance"
+label  = "Minimum Variance Unbiased (mu=1 efficiency)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "efficiency=1=mu EXACT, Cramer-Rao bound, UMVUE"
+
+[[candidate]]
+level  = 1
+id     = "RobustEstimate"
+label  = "Robust Estimation (sigma-tau=8 breakdown)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "breakdown=1/(sigma-tau)=1/8, M-estimators, Huber, outlier-resistant"
+
+[[candidate]]
+level  = 1
+id     = "SufficientStat"
+label  = "Sufficient Statistics (n=6 dimensions)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "dim=6=n EXACT, Fisher-Neyman factorization, data reduction"
+
+# =============================================================
+# Level 2: Testing (검정) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Testing"
+
+[[candidate]]
+level  = 2
+id     = "HypothesisTestN6"
+label  = "Hypothesis Testing n=6 test types"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "test_types=6=n EXACT, alpha/beta framework, NP lemma foundation"
+
+[[candidate]]
+level  = 2
+id     = "ChiSquaredTest"
+label  = "Chi-Squared Goodness-of-Fit (n=6 categories)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "categories=6=n EXACT, df=5=sopfr EXACT, Pearson chi^2"
+
+[[candidate]]
+level  = 2
+id     = "FTest"
+label  = "F-Test (phi=2 variance ratio)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "groups=2=phi EXACT, ANOVA foundation, F=s1^2/s2^2"
+
+[[candidate]]
+level  = 2
+id     = "TTest"
+label  = "t-Test (tau=4 types: one/two/paired/Welch)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "types=4=tau EXACT, most used statistical test, Student/Welch"
+
+[[candidate]]
+level  = 2
+id     = "LikelihoodRatio"
+label  = "Likelihood Ratio Test (phi=2 hypotheses)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "hypotheses=2=phi EXACT (H0/H1), general-purpose, Wilks theorem"
+
+[[candidate]]
+level  = 2
+id     = "NonParametric"
+label  = "Non-Parametric Tests (sopfr=5 rank methods)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "rank_methods=5=sopfr EXACT, distribution-free, Wilcoxon/Mann-Whitney/KS"
+
+# =============================================================
+# Level 3: Regression (회귀) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Regression"
+
+[[candidate]]
+level  = 3
+id     = "LinearN6"
+label  = "Linear Regression n=6 predictors"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "predictors=6=n EXACT, OLS/GLS, R-squared, foundation of all regression"
+
+[[candidate]]
+level  = 3
+id     = "LogisticN2"
+label  = "Logistic Regression (phi=2 binary)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "outcomes=2=phi EXACT, sigmoid, classification foundation"
+
+[[candidate]]
+level  = 3
+id     = "ANOVA"
+label  = "ANOVA (tau=4 factors)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "factors=4=tau EXACT, F-test based, group comparison"
+
+[[candidate]]
+level  = 3
+id     = "PCA_N6"
+label  = "PCA n=6 principal components"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "components=6=n EXACT, eigenvalue decomposition, dimensionality reduction"
+
+[[candidate]]
+level  = 3
+id     = "TimeSeries"
+label  = "Time Series (sigma=12 lags)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "lags=12=sigma EXACT, ARIMA, seasonal decomposition, forecasting"
+
+[[candidate]]
+level  = 3
+id     = "SurvivalN4"
+label  = "Survival Analysis (tau=4 hazard functions)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "hazard_types=4=tau EXACT, Kaplan-Meier, Cox regression, censoring"
+
+# =============================================================
+# Level 4: Bayesian (베이지안) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Bayesian"
+
+[[candidate]]
+level  = 4
+id     = "MCMC_N6"
+label  = "MCMC n=6 chains"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "chains=6=n EXACT, Metropolis-Hastings, Gibbs, convergence diagnostics"
+
+[[candidate]]
+level  = 4
+id     = "VariationalBayes"
+label  = "Variational Bayes (phi=2 divergence)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "KL_terms=2=phi EXACT, ELBO optimization, scalable approximation"
+
+[[candidate]]
+level  = 4
+id     = "HierarchicalN4"
+label  = "Hierarchical Bayes (tau=4 levels)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "levels=4=tau EXACT, multilevel modeling, partial pooling"
+
+[[candidate]]
+level  = 4
+id     = "BayesNet"
+label  = "Bayesian Network (sigma=12 nodes)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "nodes=12=sigma EXACT, DAG structure, causal inference"
+
+[[candidate]]
+level  = 4
+id     = "GaussianProcess"
+label  = "Gaussian Process (sopfr=5 kernels)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "kernels=5=sopfr EXACT, non-parametric, uncertainty quantification"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ChiSquaredTest requires ChiSquaredN6 distribution
+
+[[candidate]]
+level  = 4
+id     = "BayesN6"
+label  = "n=6 사전분포 베이지안 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "prior_families=n=6 EXACT, n6-prior Bayesian inference"
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "ChiSquaredTest"
+then_level = 0
+then_ids   = "ChiSquaredN6"
+
+# LogisticN2 requires MLE estimation
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "LogisticN2"
+then_level = 1
+then_ids   = "MLE"
+
+# MCMC_N6 requires BayesEstimate
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "MCMC_N6"
+then_level = 1
+then_ids   = "BayesEstimate"
+
+# ANOVA requires FTest (ANOVA is based on F-test)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "ANOVA"
+then_level = 2
+then_ids   = "FTest"
+
+# HierarchicalN4 requires BayesEstimate (hierarchical needs Bayesian framework)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "HierarchicalN4"
+then_level = 1
+then_ids   = "BayesEstimate"

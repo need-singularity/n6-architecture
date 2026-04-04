@@ -1,0 +1,394 @@
+# =============================================================
+# INDUSTRY-ARCHITECTURE DSE Domain Definition
+# n=6 기반 산업 시스템 아키텍처 — 오디오/DB/암호/디스플레이/산업 패턴
+# H-ARCH hypotheses (audio, crypto, database, display, industry patterns)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "industry-architecture"
+desc = "Ultimate Industry Architecture DSE (DB/Processing/Storage/Interface/Industry)"
+levels = ["DataModel", "Processing", "Storage", "Interface", "Industry"]
+vision = "n=6 기반 산업 시스템 아키텍처 — 오디오/DB/암호/디스플레이/산업 패턴"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: DataModel (데이터 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "DataModel"
+
+[[candidate]]
+level  = 0
+id     = "RelationalN6"
+label  = "관계형 DB 정규화 n=6 정규형 (1NF~6NF EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "normal_forms=6=n EXACT, ACID=4=tau EXACT, joins=12=sigma, maturity=100"
+
+[[candidate]]
+level  = 0
+id     = "GraphDB"
+label  = "그래프 DB sigma=12 노드속성"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "node_props=12=sigma EXACT, edge_types=6=n EXACT, traversal=fast, maturity=80"
+
+[[candidate]]
+level  = 0
+id     = "KeyValue"
+label  = "KV 저장 phi=2 키/값"
+n6     = 0.50
+perf   = 1.00
+power  = 0.70
+cost   = 0.60
+notes  = "pair=2=phi EXACT, ops=4=tau EXACT (get/set/del/scan), latency=ultra_low, maturity=95"
+
+[[candidate]]
+level  = 0
+id     = "DocumentDB"
+label  = "문서 DB tau=4 CRUD"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "crud=4=tau EXACT, nesting=6=n EXACT, schema_flex=high, maturity=85"
+
+[[candidate]]
+level  = 0
+id     = "TimeSeries"
+label  = "시계열 DB sigma=12 시간 버킷"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "buckets=12=sigma EXACT, retention=4=tau tiers, aggregation=fast, maturity=75"
+
+[[candidate]]
+level  = 0
+id     = "StreamN6"
+label  = "스트림 데이터 n=6 윈도우"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "windows=6=n EXACT, partitions=12=sigma EXACT, ordering=guaranteed, maturity=70"
+
+# =============================================================
+# Level 1: Processing (처리 패턴) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level  = 1
+id     = "BatchN6"
+label  = "배치 처리 n=6 단계"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "stages=6=n EXACT, parallelism=12=sigma, latency=high, throughput=max"
+
+[[candidate]]
+level  = 1
+id     = "RealTimeStream"
+label  = "실시간 스트림 phi=2 이벤트"
+n6     = 0.50
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "event_types=2=phi EXACT (in/out), latency=ultra_low, throughput=high"
+
+[[candidate]]
+level  = 1
+id     = "MapReduce"
+label  = "맵리듀스 phi=2 map/reduce"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "phases=2=phi EXACT, shuffle=1=mu EXACT, workers=12=sigma, throughput=very_high"
+
+[[candidate]]
+level  = 1
+id     = "CQRS"
+label  = "CQRS phi=2 명령/쿼리 분리"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "sides=2=phi EXACT, projections=6=n EXACT, consistency=eventual, complexity=high"
+
+[[candidate]]
+level  = 1
+id     = "EventSourcing"
+label  = "이벤트 소싱 sopfr=5 이벤트 타입"
+n6     = 0.75
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "event_types=5=sopfr EXACT, replay=full, audit=complete, complexity=high"
+
+[[candidate]]
+level  = 1
+id     = "MicroserviceN6"
+label  = "마이크로서비스 n=6 서비스"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "services=6=n EXACT, mesh=12=sigma connections, discovery=auto, complexity=very_high"
+
+# =============================================================
+# Level 2: Storage (저장 계층) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Storage"
+
+[[candidate]]
+level  = 2
+id     = "DistributedN6"
+label  = "분산 스토리지 n=6 노드"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "nodes=6=n EXACT, quorum=4=tau, replication_factor=3, consistency=strong"
+
+[[candidate]]
+level  = 2
+id     = "Sharding12"
+label  = "샤딩 sigma=12 샤드"
+n6     = 0.75
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "shards=12=sigma EXACT, rebalance=auto, hotspot=managed, scalability=linear"
+
+[[candidate]]
+level  = 2
+id     = "Replication"
+label  = "복제 phi=2 마스터/슬레이브"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "replicas=2=phi EXACT, failover=auto, lag=low, simplicity=high"
+
+[[candidate]]
+level  = 2
+id     = "CacheN4"
+label  = "캐시 tau=4 계층 (L1/L2/disk/remote)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.55
+cost   = 0.45
+notes  = "layers=4=tau EXACT, hit_rate=95%, eviction=LRU, latency=sub_ms"
+
+[[candidate]]
+level  = 2
+id     = "ObjectStorage"
+label  = "오브젝트 스토리지 sigma-tau=8 메타필드"
+n6     = 0.75
+perf   = 0.70
+power  = 0.65
+cost   = 0.60
+notes  = "meta_fields=8=sigma-tau EXACT, durability=11_nines, latency=medium, cost=very_low"
+
+[[candidate]]
+level  = 2
+id     = "BlockStorage"
+label  = "블록 스토리지 sigma-tau=8 블록 크기"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "block_sizes=8=sigma-tau EXACT, IOPS=high, latency=low, sequential=fast"
+
+[[candidate]]
+level  = 2
+id     = "StorageN6"
+label  = "n=6 계층 저장소 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "tiers=6=n EXACT (L1/L2/L3/SSD/HDD/Archive), n6-tier storage hierarchy"
+
+# =============================================================
+# Level 3: Interface (인터페이스 계층) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Interface"
+
+[[candidate]]
+level  = 3
+id     = "RESTN6"
+label  = "REST 6 제약조건 n=6 EXACT"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "constraints=6=n EXACT (client-server/stateless/cache/uniform/layered/code-on-demand), methods=6, maturity=100"
+
+[[candidate]]
+level  = 3
+id     = "GraphQLN6"
+label  = "GraphQL n=6 타입 시스템"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "type_kinds=6=n EXACT (scalar/object/interface/union/enum/input), introspection=full, maturity=85"
+
+[[candidate]]
+level  = 3
+id     = "gRPC"
+label  = "gRPC phi=2 양방향 스트리밍"
+n6     = 0.50
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "directions=2=phi EXACT, serialization=protobuf, latency=ultra_low, maturity=90"
+
+[[candidate]]
+level  = 3
+id     = "WebSocket"
+label  = "웹소켓 phi=2 전이중"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "duplex=2=phi EXACT, persistent=true, latency=low, maturity=95"
+
+[[candidate]]
+level  = 3
+id     = "MessageQueue"
+label  = "메시지큐 sopfr=5 패턴"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "patterns=5=sopfr EXACT (pub-sub/p2p/request-reply/push-pull/router-dealer), async=true, maturity=90"
+
+[[candidate]]
+level  = 3
+id     = "APIGateway"
+label  = "API 게이트웨이 sigma=12 라우트 규칙"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "route_rules=12=sigma EXACT, auth=integrated, rate_limit=true, maturity=85"
+
+# =============================================================
+# Level 4: Industry (산업 적용) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Industry"
+
+[[candidate]]
+level  = 4
+id     = "Manufacturing"
+label  = "제조 sigma=12 공정 스테이지"
+n6     = 0.80
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "stages=12=sigma EXACT, MES=true, digital_twin=true, OEE=85%"
+
+[[candidate]]
+level  = 4
+id     = "Healthcare"
+label  = "의료 tau=4 SOAP 노트 구조"
+n6     = 0.60
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "SOAP=4=tau EXACT, HL7_FHIR=true, HIPAA=compliant, interop=high"
+
+[[candidate]]
+level  = 4
+id     = "Finance"
+label  = "금융 n=6 시장 섹터"
+n6     = 0.80
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "sectors=6=n EXACT, latency=ultra_low, compliance=full, throughput=very_high"
+
+[[candidate]]
+level  = 4
+id     = "Logistics"
+label  = "물류 sopfr=5 공급망 단계"
+n6     = 0.60
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "supply_stages=5=sopfr EXACT, tracking=realtime, optimization=AI, global=true"
+
+[[candidate]]
+level  = 4
+id     = "SmartCity"
+label  = "스마트시티 sigma=12 인프라 계층"
+n6     = 0.80
+perf   = 0.80
+power  = 0.45
+cost   = 0.35
+notes  = "infra_layers=12=sigma EXACT, IoT=massive, realtime=true, sustainability=high"
+
+[[candidate]]
+level  = 4
+id     = "IndustryN6"
+label  = "산업 4.0 n=6 계층 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "layers=6=n EXACT (device/edge/fog/cloud/AI/orchestration), J2=24 process stages, Industry_4.0_stack"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CQRS requires EventSourcing (CQRS often paired with event sourcing)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "CQRS"
+then_level = 1
+then_ids   = "EventSourcing"
+
+# RelationalN6 requires CacheN4 (relational needs caching)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "RelationalN6"
+then_level = 2
+then_ids   = "CacheN4"
+
+# DistributedN6 requires MicroserviceN6 (distributed needs microservices)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "DistributedN6"
+then_level = 1
+then_ids   = "MicroserviceN6"
+
+# gRPC requires StreamN6 or RealTimeStream (gRPC needs streaming)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "gRPC"
+then_level = 0
+then_ids   = "StreamN6,RealTimeStream"

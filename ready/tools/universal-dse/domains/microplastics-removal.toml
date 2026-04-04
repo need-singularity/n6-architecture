@@ -1,0 +1,392 @@
+# =============================================================
+# HEXA-MPR DSE Domain Definition
+# Microplastics Removal: Detection, Filtration, Degradation,
+# Recovery, Monitoring
+# n=6: nano-filter mesh 6um, CN=6 catalytic degradation,
+#       6-stage treatment pipeline, sigma=12 sensor array
+# BT-27 (Carbon-6 chain), BT-93 (Carbon Z=6 material universality)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "microplastics-removal"
+desc = "Microplastics Removal DSE (6um mesh, CN=6 catalysis, 6-stage pipeline)"
+levels = ["Detection", "Filtration", "Degradation", "Recovery", "Monitoring"]
+vision = "Zero-microplastic water — n=6 filtration-to-degradation full-cycle architecture"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Detection — 6 candidates
+#   n6: 6 size classes (5mm→10nm), sigma=12 spectral bands
+# =============================================================
+[[level]]
+name = "Detection"
+
+[[candidate]]
+level = 0
+id    = "FTIR_Micro"
+label = "FTIR Microscopy (12 spectral bands, 6 polymer ID channels)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.40
+notes = "bands=12=sigma EXACT, channels=6=n EXACT, gold standard identification"
+
+[[candidate]]
+level = 0
+id    = "Raman_Spec"
+label = "Raman Spectroscopy (6 laser wavelengths, 24 Raman shifts tracked)"
+n6    = 1.00
+perf  = 0.90
+power = 0.45
+cost  = 0.35
+notes = "wavelengths=6=n EXACT, shifts=24=J2 EXACT, non-destructive, sub-micron"
+
+[[candidate]]
+level = 0
+id    = "Nile_Red"
+label = "Nile Red Fluorescence (6 dye concentrations, 12-well plate screening)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.75
+notes = "concentrations=6=n EXACT, wells=12=sigma EXACT, rapid field screening"
+
+[[candidate]]
+level = 0
+id    = "Flow_Cyto"
+label = "Flow Cytometry (6 scatter channels, 10K particles/sec=sigma-phi*1K)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.45
+notes = "channels=6=n EXACT, throughput=10K=(sigma-phi)*1K EXACT, automated counting"
+
+[[candidate]]
+level = 0
+id    = "AI_Vision"
+label = "AI Machine Vision (n=6 CNN layers, sigma=12 feature maps, real-time)"
+n6    = 1.00
+perf  = 0.75
+power = 0.60
+cost  = 0.60
+notes = "layers=6=n EXACT, feature_maps=12=sigma EXACT, inline process monitoring"
+
+[[candidate]]
+level = 0
+id    = "Pyrolysis_GCMS"
+label = "Pyrolysis GC-MS (6 temperature ramps, 12 target compounds)"
+n6    = 1.00
+perf  = 0.95
+power = 0.35
+cost  = 0.30
+notes = "ramps=6=n EXACT, compounds=12=sigma EXACT, mass-based quantification"
+
+# =============================================================
+# Level 1: Filtration — 6 candidates
+#   n6: 6um mesh primary, sigma=12 filter stages, tau=4 backwash
+# =============================================================
+[[level]]
+name = "Filtration"
+
+[[candidate]]
+level = 1
+id    = "Membrane_UF"
+label = "Ultrafiltration Membrane (6um pre-filter, 12-stage cascade, 99.9%)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.50
+notes = "prefilter=6um=n EXACT, stages=12=sigma EXACT, high removal efficiency"
+
+[[candidate]]
+level = 1
+id    = "Sand_Bio"
+label = "Biologically Active Sand Filter (6 sand layers, 4 biofilm zones=tau)"
+n6    = 1.00
+perf  = 0.70
+power = 0.85
+cost  = 0.80
+notes = "layers=6=n EXACT, zones=4=tau EXACT, low energy, self-regenerating"
+
+[[candidate]]
+level = 1
+id    = "Electrocoag"
+label = "Electrocoagulation (6 electrode pairs, 12V DC, floc capture)"
+n6    = 1.00
+perf  = 0.75
+power = 0.50
+cost  = 0.60
+notes = "pairs=6=n EXACT, voltage=12V=sigma EXACT, destabilizes particles"
+
+[[candidate]]
+level = 1
+id    = "Magnetic_Sep"
+label = "Magnetic Nano-Separator (Fe3O4 nanoparticles, 6 Tesla field, 24 cycles)"
+n6    = 1.00
+perf  = 0.85
+power = 0.45
+cost  = 0.40
+notes = "field=6T=n EXACT, cycles=24=J2 EXACT, recoverable magnetic beads"
+
+[[candidate]]
+level = 1
+id    = "Disc_Filter"
+label = "Rotating Disc Filter (6 disc stacks, mesh 10um=sigma-phi, 4 RPM=tau)"
+n6    = 1.00
+perf  = 0.65
+power = 0.70
+cost  = 0.70
+notes = "stacks=6=n EXACT, mesh=10um=sigma-phi EXACT, RPM=4=tau EXACT"
+
+[[candidate]]
+level = 1
+id    = "Hydrocyclone"
+label = "Multi-Stage Hydrocyclone (6 cyclone stages, 12 bar inlet, 5L/s=sopfr)"
+n6    = 1.00
+perf  = 0.80
+power = 0.60
+cost  = 0.65
+notes = "stages=6=n EXACT, pressure=12bar=sigma EXACT, flow=5L/s=sopfr EXACT"
+
+# =============================================================
+# Level 2: Degradation — 6 candidates
+#   n6: CN=6 catalyst coordination, 6 radical species, tau=4 reaction phases
+# =============================================================
+[[level]]
+name = "Degradation"
+
+[[candidate]]
+level = 2
+id    = "PhotoCat_TiO2"
+label = "TiO2 Photocatalysis (CN=6 anatase, UV 6W lamp, 12hr cycle)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.60
+notes = "CN=6=n EXACT, lamp=6W=n EXACT, cycle=12hr=sigma EXACT, OH radical"
+
+[[candidate]]
+level = 2
+id    = "Fenton_Adv"
+label = "Advanced Fenton Oxidation (Fe2+ CN=6, H2O2, 6 injection points)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.55
+notes = "Fe_CN=6=n EXACT, injections=6=n EXACT, powerful OH radical generation"
+
+[[candidate]]
+level = 2
+id    = "Enzyme_Bio"
+label = "Enzymatic Biodegradation (PETase/MHETase, 6 enzyme cocktail, 24hr)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.45
+notes = "enzymes=6=n EXACT, incubation=24hr=J2 EXACT, specific to PET"
+
+[[candidate]]
+level = 2
+id    = "Ozone_AOP"
+label = "Ozone Advanced Oxidation (O3 6mg/L dose, 12 contact chambers)"
+n6    = 1.00
+perf  = 0.70
+power = 0.50
+cost  = 0.50
+notes = "dose=6mg/L=n EXACT, chambers=12=sigma EXACT, broad-spectrum degradation"
+
+[[candidate]]
+level = 2
+id    = "Plasma_Torch"
+label = "Non-Thermal Plasma (6kV discharge, tau=4 pulse stages, 95% decomposition)"
+n6    = 1.00
+perf  = 0.90
+power = 0.35
+cost  = 0.35
+notes = "voltage=6kV=n EXACT, stages=4=tau EXACT, rapid complete mineralization"
+
+[[candidate]]
+level = 2
+id    = "Supercrit_H2O"
+label = "Supercritical Water Oxidation (SCWO, 6 reactor zones, 480C=sigma*tau*10)"
+n6    = 1.00
+perf  = 0.95
+power = 0.30
+cost  = 0.30
+notes = "zones=6=n EXACT, temp=480C=sigma*tau*10 EXACT, >99.9% destruction"
+
+# =============================================================
+# Level 3: Recovery — 6 candidates
+#   n6: 6 monomer streams, sigma=12 recovery tanks, phi=2 phase separation
+# =============================================================
+[[level]]
+name = "Recovery"
+
+[[candidate]]
+level = 3
+id    = "Chemical_Recycle"
+label = "Chemical Recycling (depolymerization, 6 monomer streams, 12 tanks)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.50
+notes = "streams=6=n EXACT, tanks=12=sigma EXACT, virgin-grade monomer recovery"
+
+[[candidate]]
+level = 3
+id    = "Pyrolysis_Oil"
+label = "Pyrolysis to Oil (6 temperature zones, 480C peak=sigma*tau*10)"
+n6    = 1.00
+perf  = 0.75
+power = 0.40
+cost  = 0.55
+notes = "zones=6=n EXACT, peak_temp=480C=sigma*tau*10 EXACT, fuel-grade oil"
+
+[[candidate]]
+level = 3
+id    = "Biogas_AD"
+label = "Anaerobic Digestion (6 digester chambers, 24-day HRT=J2)"
+n6    = 1.00
+perf  = 0.60
+power = 0.75
+cost  = 0.70
+notes = "chambers=6=n EXACT, HRT=24d=J2 EXACT, biogas + digestate"
+
+[[candidate]]
+level = 3
+id    = "Carbon_Black"
+label = "Carbon Black Recovery (6 furnace stages, 1200C=sigma*100, industrial CB)"
+n6    = 1.00
+perf  = 0.70
+power = 0.35
+cost  = 0.45
+notes = "stages=6=n EXACT, temp=1200C=sigma*100 EXACT, tire/rubber applications"
+
+[[candidate]]
+level = 3
+id    = "Solvent_Extract"
+label = "Solvent Extraction (6 solvent types, phi=2 phase separation, 12 settlers)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.55
+notes = "solvents=6=n EXACT, phases=2=phi EXACT, settlers=12=sigma EXACT"
+
+[[candidate]]
+level = 3
+id    = "Cement_Kiln"
+label = "Cement Kiln Co-Processing (6 feed points, 1440C=sigma^2*10, energy recovery)"
+n6    = 0.80
+perf  = 0.65
+power = 0.60
+cost  = 0.80
+notes = "feed_points=6=n EXACT, temp=1440C~sigma^2*10, volume solution"
+
+# =============================================================
+# Level 4: Monitoring — 6 candidates
+#   n6: 6 pollutant classes, sigma=12 stations, J2=24 data channels
+# =============================================================
+[[level]]
+name = "Monitoring"
+
+[[candidate]]
+level = 4
+id    = "Real_Time_Sensor"
+label = "Real-Time Inline Sensors (6 pollutant classes, 12 sampling points)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.45
+notes = "classes=6=n EXACT, points=12=sigma EXACT, continuous feedback"
+
+[[candidate]]
+level = 4
+id    = "Satellite_Remote"
+label = "Satellite Remote Sensing (6 spectral bands, 12-day revisit, coastal)"
+n6    = 1.00
+perf  = 0.70
+power = 0.85
+cost  = 0.60
+notes = "bands=6=n EXACT, revisit=12d=sigma EXACT, large-scale ocean monitoring"
+
+[[candidate]]
+level = 4
+id    = "Citizen_Science"
+label = "Citizen Science Network (6 sampling protocols, 24 community nodes=J2)"
+n6    = 1.00
+perf  = 0.55
+power = 0.90
+cost  = 0.85
+notes = "protocols=6=n EXACT, nodes=24=J2 EXACT, distributed awareness"
+
+[[candidate]]
+level = 4
+id    = "AI_Predict"
+label = "AI Predictive Model (n=6 layers, sigma=12 input features, 4 forecast horizons=tau)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.50
+notes = "layers=6=n EXACT, features=12=sigma EXACT, horizons=4=tau EXACT"
+
+[[candidate]]
+level = 4
+id    = "eDNA_Bio"
+label = "eDNA Biomonitoring (6 target taxa, 12 PCR primers, ecosystem health)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.40
+notes = "taxa=6=n EXACT, primers=12=sigma EXACT, biodiversity impact tracking"
+
+[[candidate]]
+level = 4
+id    = "Blockchain_Track"
+label = "Blockchain Traceability (6 supply chain nodes, 24 data fields=J2, immutable)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.55
+notes = "nodes=6=n EXACT, fields=24=J2 EXACT, source-to-sink accountability"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Raman detection pairs well with photocatalytic degradation
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "Raman_Spec"
+then_level = 2
+then_ids  = "PhotoCat_TiO2,Fenton_Adv"
+
+# Magnetic separation enables easy chemical recycling
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "Magnetic_Sep"
+then_level = 3
+then_ids  = "Chemical_Recycle,Solvent_Extract"
+
+# Supercritical water oxidation is too harsh for monomer recovery
+[[rule]]
+type      = "exclude"
+if_level  = 2
+if_id     = "Supercrit_H2O"
+then_level = 3
+then_ids  = "Chemical_Recycle"
+
+# AI predictive model best with real-time inline sensors
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "AI_Predict"
+then_level = 0
+then_ids  = "AI_Vision,Flow_Cyto"

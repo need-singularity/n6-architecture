@@ -1,0 +1,357 @@
+# =============================================================
+# Satellite Communication DSE Domain Definition
+# Satcom systems — orbit to ground station
+# n=6: 6 orbital planes (GPS), σ=12 frequency bands, J₂=24 satellites/plane
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "satellite-communication"
+desc = "Satellite Communication Architecture DSE (orbit/antenna/transponder/protocol/ground)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Orbit (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Orbit"
+
+[[candidate]]
+level = 0
+id = "LEO-6plane"
+label = "LEO 6 Orbital Planes (n=6, 550km, Starlink-type)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "MEO-6plane"
+label = "MEO 6 Planes (n=6, 20200km, GPS constellation)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "GEO-Slot"
+label = "GEO Slot (35786km, fixed position, broadcast)"
+n6 = 0.60
+perf = 0.65
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "HEO-Molniya"
+label = "HEO Molniya (12-hour=σ period, high-latitude coverage)"
+n6 = 0.90
+perf = 0.70
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "LEO-Mega"
+label = "LEO Mega Constellation (24=J₂ planes, 1000+ sats, global)"
+n6 = 0.85
+perf = 1.00
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "SSO"
+label = "Sun-Synchronous (600km, Earth observation, 6-revisit days)"
+n6 = 0.80
+perf = 0.75
+power = 0.80
+cost = 0.65
+
+# ============================================================
+# Level 1: Antenna (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Antenna"
+
+[[candidate]]
+level = 1
+id = "PhasedArray-6panel"
+label = "Phased Array 6-Panel (n=6 panels, beam steering, LEO)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Parabolic-12m"
+label = "Parabolic σ=12m Dish (high gain, GEO, point-to-point)"
+n6 = 0.90
+perf = 0.85
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "HornArray"
+label = "Horn Antenna Array (12-element=σ, feed network)"
+n6 = 0.85
+perf = 0.75
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Helical-6turn"
+label = "Helical 6-Turn (n=6 turns, circular polarization, UHF)"
+n6 = 0.95
+perf = 0.60
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "FlatPanel-AESA"
+label = "Flat Panel AESA (thin, user terminal, mass-produced)"
+n6 = 0.70
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Deployable-Mesh"
+label = "Deployable Mesh (6m+ aperture, unfoldable, L/S-band)"
+n6 = 0.80
+perf = 0.70
+power = 0.90
+cost = 0.45
+
+# ============================================================
+# Level 2: Transponder (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Transponder"
+
+[[candidate]]
+level = 2
+id = "Bent-Pipe-12ch"
+label = "Bent-Pipe σ=12 Channels (transparent, frequency translation)"
+n6 = 1.00
+perf = 0.65
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Digital-OBP"
+label = "Digital On-Board Processing (routing, 6-beam switching)"
+n6 = 0.90
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Regenerative"
+label = "Regenerative (full demod/remod, inter-sat link capable)"
+n6 = 0.70
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Multi-Beam-24"
+label = "Multi-Beam J₂=24 Spot Beams (frequency reuse, HTS)"
+n6 = 0.85
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "SDR"
+label = "Software Defined Radio (reconfigurable, 6 waveforms)"
+n6 = 0.90
+perf = 0.80
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Optical-ISL"
+label = "Optical Inter-Satellite Link (laser, 6 Gbps, mesh network)"
+n6 = 0.80
+perf = 1.00
+power = 0.60
+cost = 0.35
+
+# ============================================================
+# Level 3: Protocol (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Protocol"
+
+[[candidate]]
+level = 3
+id = "DVB-S2X"
+label = "DVB-S2X (broadcast standard, 12 modulation=σ modes)"
+n6 = 0.90
+perf = 0.80
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "CCSDS"
+label = "CCSDS (space standard, 6 service classes, deep space)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "5G-NTN"
+label = "5G NTN (3GPP Rel-17, satellite-terrestrial, low latency)"
+n6 = 0.75
+perf = 0.90
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Proprietary-Mesh"
+label = "Proprietary Mesh (Starlink-type, custom MAC, laser ISL)"
+n6 = 0.60
+perf = 1.00
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "TDMA-6slot"
+label = "TDMA 6-Slot Frame (n=6 time slots, VSAT, efficient)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "DTN"
+label = "Delay-Tolerant Network (store-and-forward, deep space/LEO)"
+n6 = 0.65
+perf = 0.60
+power = 0.90
+cost = 0.80
+
+# ============================================================
+# Level 4: Ground (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Ground"
+
+[[candidate]]
+level = 4
+id = "Hub-6antenna"
+label = "Hub Station 6-Antenna (n=6 dishes, multi-orbit tracking)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "VSAT-Terminal"
+label = "VSAT Terminal (1.2m, enterprise, fixed site)"
+n6 = 0.70
+perf = 0.70
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "FlatPanel-User"
+label = "Flat Panel User Terminal (phased array, consumer LEO)"
+n6 = 0.65
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Gateway-12m"
+label = "Gateway σ=12m (high-throughput, feeder link, backbone)"
+n6 = 0.90
+perf = 0.95
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Mobile-Satphone"
+label = "Mobile Satphone (handheld, L-band, emergency)"
+n6 = 0.55
+perf = 0.50
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "Maritime-Dome"
+label = "Maritime Dome (gyro-stabilized, 6-axis tracking, ship)"
+n6 = 0.80
+perf = 0.75
+power = 0.70
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# GEO requires parabolic or deployable (high gain needed)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "GEO-Slot"
+then_level = 1
+then_ids = ["Parabolic-12m", "Deployable-Mesh"]
+
+# Optical ISL requires LEO or MEO (GEO too far for mesh)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Optical-ISL"
+then_level = 0
+then_ids = ["GEO-Slot", "HEO-Molniya"]
+
+# Mobile satphone excluded from high-throughput gateway
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "Mobile-Satphone"
+then_level = 2
+then_ids = ["Optical-ISL", "Regenerative"]
+
+# SSO orbit excluded from consumer ground (observation only)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "SSO"
+then_level = 4
+then_ids = ["FlatPanel-User", "Mobile-Satphone"]

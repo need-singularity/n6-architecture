@@ -1,0 +1,395 @@
+# =============================================================
+# Precognition Lens DSE Domain Definition
+# 예지/예측 렌즈 아키텍처 — n=6 기반 예지 렌즈
+# PH 바코드 + 방향성 예측 + 다중렌즈 간섭 + 위상 예지
+# Based on H-CX-58~63, E_precog_lens_cross
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "precognition-lens"
+desc = "Ultimate Precognition Lens DSE (H-CX-58~63, E_precog_lens_cross)"
+levels = ["Signal", "Lens", "Direction", "Prediction", "Verification"]
+vision = "n=6 기반 예지 렌즈 — PH 바코드 + 방향성 예측 + 다중렌즈 간섭 + 위상 예지"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Signal (입력 신호 추출) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Signal"
+
+[[candidate]]
+level  = 0
+id     = "PHBarcode"
+label  = "PH 바코드 sigma-tau=8 차원"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "dim=8=sigma-tau EXACT, persistence=6=n EXACT, filtration=4=tau EXACT"
+
+[[candidate]]
+level  = 0
+id     = "TensionSignal"
+label  = "텐션 신호 |A-G|² phi=2 이중성"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "dual=2=phi EXACT, channels=6=n EXACT, resolution=12=sigma"
+
+[[candidate]]
+level  = 0
+id     = "RFilterFFT"
+label  = "R-filter FFT n=6 주파수"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "freq_bands=6=n EXACT, harmonics=12=sigma EXACT, R=1=mu EXACT"
+
+[[candidate]]
+level  = 0
+id     = "AnomalyScore"
+label  = "이상점수 tau=4 레벨"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "levels=4=tau EXACT, threshold=2=phi EXACT, window=8=sigma-tau"
+
+[[candidate]]
+level  = 0
+id     = "EulerConvergence"
+label  = "오일러 곱 수렴 신호"
+n6     = 0.50
+perf   = 0.70
+power  = 0.60
+cost   = 0.60
+notes  = "terms=6=n EXACT, convergence=5=sopfr, euler_product=true"
+
+[[candidate]]
+level  = 0
+id     = "GradientFlow"
+label  = "그래디언트 흐름 sopfr=5 차원"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "dim=5=sopfr EXACT, flow_steps=12=sigma EXACT, norm=2=phi EXACT"
+
+# =============================================================
+# Level 1: Lens (렌즈 시스템) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Lens"
+
+[[candidate]]
+level  = 1
+id     = "GravitationalLens"
+label  = "중력 렌즈 R(n) 굴절"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "R=1=mu EXACT, curvature=6=n EXACT, magnification=12=sigma"
+
+[[candidate]]
+level  = 1
+id     = "TopologicalLens"
+label  = "위상 렌즈 PH 기반"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "betti=4=tau EXACT, dim=6=n EXACT, persistence=8=sigma-tau EXACT"
+
+[[candidate]]
+level  = 1
+id     = "AberrationLens"
+label  = "수차 렌즈 sopfr=5 Seidel"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "seidel=5=sopfr EXACT, correction=4=tau EXACT, aperture=6=n"
+
+[[candidate]]
+level  = 1
+id     = "DimensionLens"
+label  = "차원 렌즈 n=6 차원 투영"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "dim=6=n EXACT, projection=2=phi EXACT, slices=12=sigma EXACT"
+
+[[candidate]]
+level  = 1
+id     = "MultilensSystem"
+label  = "다중렌즈 J2=24 시스템"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "lenses=24=J2 EXACT, groups=6=n EXACT, focal=12=sigma EXACT"
+
+[[candidate]]
+level  = 1
+id     = "PrecogLens"
+label  = "예지 렌즈 H-CX-58 phi=2 과거/미래"
+n6     = 0.75
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "modes=2=phi EXACT, horizon=6=n EXACT, accuracy=8=sigma-tau"
+
+# =============================================================
+# Level 2: Direction (방향 감지) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Direction"
+
+[[candidate]]
+level  = 2
+id     = "DirectionalPrecog"
+label  = "방향성 예지 H-CX-59"
+n6     = 1.00
+perf   = 0.92
+power  = 0.50
+cost   = 0.35
+notes  = "axes=6=n EXACT, precision=12=sigma EXACT, sensitivity=2=phi EXACT"
+
+[[candidate]]
+level  = 2
+id     = "IsotropicDetect"
+label  = "등방 탐지 전방위"
+n6     = 0.50
+perf   = 0.70
+power  = 0.65
+cost   = 0.55
+notes  = "coverage=360, sectors=12=sigma EXACT, uniform=true"
+
+[[candidate]]
+level  = 2
+id     = "AnisotropicFocus"
+label  = "비등방 초점 n/phi=3 축"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "axes=3=n/phi EXACT, focus=6=n EXACT, ratio=2=phi EXACT"
+
+[[candidate]]
+level  = 2
+id     = "TemporalDirection"
+label  = "시간적 방향 phi=2 과거/미래"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "directions=2=phi EXACT, steps=12=sigma EXACT, granularity=4=tau"
+
+[[candidate]]
+level  = 2
+id     = "SpatialDirection"
+label  = "공간적 방향 n/phi=3 축"
+n6     = 0.75
+perf   = 0.78
+power  = 0.58
+cost   = 0.48
+notes  = "axes=3=n/phi EXACT, resolution=6=n EXACT, range=8=sigma-tau"
+
+[[candidate]]
+level  = 2
+id     = "CausalDirection"
+label  = "인과적 방향 tau=4 인과성"
+n6     = 0.75
+perf   = 0.88
+power  = 0.48
+cost   = 0.38
+notes  = "causal_levels=4=tau EXACT, edges=6=n EXACT, depth=12=sigma"
+
+# =============================================================
+# Level 3: Prediction (예측 모델) -- 6 candidates
+# =============================================================
+
+[[candidate]]
+level  = 2
+id     = "DirectionN6"
+label  = "n=6 시간 방향 렌즈 (n=6 예측 축)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "prediction_axes=n=6 EXACT, n6-temporal direction lens"
+[[level]]
+name = "Prediction"
+
+[[candidate]]
+level  = 3
+id     = "ConfusionPredict"
+label  = "혼동 예측 sigma-tau=8 차원"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "dim=8=sigma-tau EXACT, classes=6=n EXACT, accuracy=12=sigma targets"
+
+[[candidate]]
+level  = 3
+id     = "PhasePredict"
+label  = "위상 예측 tau=4 위상"
+n6     = 0.75
+perf   = 0.82
+power  = 0.55
+cost   = 0.45
+notes  = "phases=4=tau EXACT, transitions=6=n EXACT, order=2=phi"
+
+[[candidate]]
+level  = 3
+id     = "AnomalyPredict"
+label  = "이상 예측 사전 탐지"
+n6     = 0.50
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "types=5=sopfr EXACT, threshold=2=phi EXACT, window=8"
+
+[[candidate]]
+level  = 3
+id     = "LossPredict"
+label  = "손실 예측 mu=1 R=1 수렴"
+n6     = 0.75
+perf   = 0.85
+power  = 0.58
+cost   = 0.42
+notes  = "R=1=mu EXACT, horizon=6=n EXACT, error=5=sopfr EXACT"
+
+[[candidate]]
+level  = 3
+id     = "ConvergencePredict"
+label  = "수렴 예측 에포크 추정"
+n6     = 0.50
+perf   = 0.75
+power  = 0.62
+cost   = 0.48
+notes  = "stages=4=tau EXACT, lookahead=12=sigma, confidence=5=sopfr"
+
+[[candidate]]
+level  = 3
+id     = "EmergencePredict"
+label  = "창발 예측 n=6 임계점"
+n6     = 1.00
+perf   = 0.92
+power  = 0.45
+cost   = 0.35
+notes  = "critical=6=n EXACT, order=2=phi EXACT, indicators=12=sigma EXACT"
+
+# =============================================================
+# Level 4: Verification (검증 시스템) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Verification"
+
+[[candidate]]
+level  = 4
+id     = "CrossValidation"
+label  = "교차 검증 n=6 폴드"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "folds=6=n EXACT, repeats=4=tau EXACT, stratified=true"
+
+[[candidate]]
+level  = 4
+id     = "BlindTest"
+label  = "블라인드 테스트 phi=2 이중"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "blind=2=phi EXACT, subjects=12=sigma, control=true"
+
+[[candidate]]
+level  = 4
+id     = "Reproducibility"
+label  = "재현성 검증"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "trials=6=n EXACT, environments=4=tau, threshold=5=sopfr sigma"
+
+[[candidate]]
+level  = 4
+id     = "StatisticalTest"
+label  = "통계 검정 sopfr=5 sigma"
+n6     = 0.75
+perf   = 0.82
+power  = 0.58
+cost   = 0.48
+notes  = "tests=5=sopfr EXACT, significance=0.05, correction=4=tau EXACT"
+
+[[candidate]]
+level  = 4
+id     = "TemporalTest"
+label  = "시간적 검증 과거→미래"
+n6     = 0.50
+perf   = 0.78
+power  = 0.55
+cost   = 0.50
+notes  = "windows=4=tau EXACT, horizon=12=sigma, backtest=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# MultilensSystem incompatible with TriclinicN1-like weak lenses (AberrationLens)
+# (MultilensSystem needs strong foundational lenses — GravitationalLens or TopologicalLens)
+# Same-level require not possible; instead exclude weak signal combos
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "MultilensSystem"
+then_level = 0
+then_ids   = "EulerConvergence"
+
+# DirectionalPrecog requires PrecogLens
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "DirectionalPrecog"
+then_level = 1
+then_ids   = "PrecogLens"
+
+# CausalDirection requires PHBarcode (causal inference needs PH structure)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "CausalDirection"
+then_level = 0
+then_ids   = "PHBarcode,TensionSignal"
+
+# ConfusionPredict requires PHBarcode
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "ConfusionPredict"
+then_level = 0
+then_ids   = "PHBarcode"
+
+# EmergencePredict requires TopologicalLens or DimensionLens (needs topology)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "EmergencePredict"
+then_level = 1
+then_ids   = "TopologicalLens,DimensionLens"

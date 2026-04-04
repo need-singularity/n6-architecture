@@ -1,0 +1,395 @@
+# =============================================================
+# N6 Smart City IoT DSE — Urban intelligence infrastructure
+# 6-layer urban stack (n=6: sense/connect/compute/store/analyze/act),
+# σ=12 city districts, τ=4 data tiers (edge/fog/cloud/archive),
+# φ=2 digital twin, J₂=24 service categories
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "smart-city-iot"
+desc = "Smart City IoT Architecture DSE — n=6 urban stack, σ=12 districts, τ=4 data tiers, J₂=24 services"
+levels = ["Sensor", "Network", "Compute", "Platform", "Service"]
+vision = "n=6 urban intelligence — 6-layer stack (sense/connect/compute/store/analyze/act), φ=2 digital twin"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Sensor (센서 계층)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level  = 0
+id     = "Env_6axis"
+label  = "Environmental-6axis (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "n=6 EXACT — 6-axis environmental sensor (temp/humidity/pressure/CO2/PM2.5/UV)"
+
+[[candidate]]
+level  = 0
+id     = "TrafficCam"
+label  = "Traffic-camera (AI vision)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "AI-powered traffic camera, BT-66 Vision AI, vehicle/pedestrian detection"
+
+[[candidate]]
+level  = 0
+id     = "SmartMeter"
+label  = "Smart-meter (σ=12 channels)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.65
+notes  = "σ=12 EXACT — 12-channel smart meter (power/gas/water/solar + 8 sub-meters)"
+
+[[candidate]]
+level  = 0
+id     = "NoiseMonitor"
+label  = "Noise-monitor (acoustic)"
+n6     = 0.67
+perf   = 0.78
+power  = 0.75
+cost   = 0.70
+notes  = "Acoustic noise monitoring, BT-48 display-audio (J₂=24 bit depth)"
+
+[[candidate]]
+level  = 0
+id     = "AirQuality"
+label  = "Air-quality (multi-pollutant)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "Multi-pollutant air quality (PM2.5/PM10/O₃/NO₂/SO₂/CO = n=6 gases)"
+
+[[candidate]]
+level  = 0
+id     = "StructHealth"
+label  = "Structural-health (infrastructure)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.70
+cost   = 0.50
+notes  = "Bridge/building structural health monitoring, vibration/strain/tilt sensors"
+
+# =============================================================
+# Level 1: Network (네트워크 계층)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Network"
+
+[[candidate]]
+level  = 1
+id     = "LoRaWAN"
+label  = "LoRaWAN (long-range low-power)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.90
+cost   = 0.80
+notes  = "Long-range low-power WAN, km-scale coverage, battery-friendly"
+
+[[candidate]]
+level  = 1
+id     = "NB_IoT"
+label  = "NB-IoT (cellular LPWAN)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.85
+cost   = 0.70
+notes  = "Narrowband IoT on cellular infrastructure, licensed spectrum"
+
+[[candidate]]
+level  = 1
+id     = "5G_Massive"
+label  = "5G-massive (high bandwidth)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "5G massive MIMO, σ-φ=10 Gbps peak, ultra-low latency"
+
+[[candidate]]
+level  = 1
+id     = "WiFi6"
+label  = "WiFi-6 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.75
+notes  = "n=6 EXACT — WiFi 6 (802.11ax), OFDMA, MU-MIMO, indoor coverage"
+
+[[candidate]]
+level  = 1
+id     = "Mesh_Zigbee"
+label  = "Mesh-zigbee (self-healing)"
+n6     = 0.50
+perf   = 0.72
+power  = 0.88
+cost   = 0.80
+notes  = "Zigbee mesh network, self-healing topology, low-power sensors"
+
+[[candidate]]
+level  = 1
+id     = "FiberBackbone"
+label  = "Fiber-backbone (high capacity)"
+n6     = 0.83
+perf   = 0.98
+power  = 0.60
+cost   = 0.35
+notes  = "Fiber optic backbone, σ=12 wavelength DWDM channels, city-wide"
+
+# =============================================================
+# Level 2: Compute (연산 계층)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Compute"
+
+[[candidate]]
+level  = 2
+id     = "EdgeGateway"
+label  = "Edge-gateway (local inference)"
+n6     = 0.83
+perf   = 0.82
+power  = 0.75
+cost   = 0.70
+notes  = "Edge gateway, τ=4 data tiers start point, local preprocessing"
+
+[[candidate]]
+level  = 2
+id     = "FogNode"
+label  = "Fog-node (distributed compute)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "Fog computing node, intermediate layer, district-level aggregation"
+
+[[candidate]]
+level  = 2
+id     = "CloudCentral"
+label  = "Cloud-central (city data center)"
+n6     = 0.67
+perf   = 0.95
+power  = 0.45
+cost   = 0.50
+notes  = "Central cloud data center, BT-59 8-layer AI stack, massive analytics"
+
+[[candidate]]
+level  = 2
+id     = "GPU_Inference"
+label  = "GPU-inference (AI accelerated)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.50
+cost   = 0.40
+notes  = "GPU inference server, BT-28 computing ladder, real-time AI processing"
+
+[[candidate]]
+level  = 2
+id     = "FPGA_Realtime"
+label  = "FPGA-real-time (deterministic)"
+n6     = 0.67
+perf   = 0.88
+power  = 0.70
+cost   = 0.45
+notes  = "FPGA real-time processing, deterministic latency, traffic/safety critical"
+
+[[candidate]]
+level  = 2
+id     = "Neuromorphic"
+label  = "Neuromorphic-local (event-driven)"
+n6     = 0.50
+perf   = 0.78
+power  = 0.85
+cost   = 0.35
+notes  = "Neuromorphic local processing, event-driven, ultra-low power inference"
+
+[[candidate]]
+level  = 2
+id     = "HexaEdge_6node"
+label  = "Hexa-edge-6node (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.86
+power  = 0.68
+cost   = 0.55
+notes  = "n=6 EXACT — 6-node edge cluster (sense/preprocess/infer/aggregate/cache/relay), τ=4 data tiers, hexagonal mesh topology"
+
+# =============================================================
+# Level 3: Platform (플랫폼 계층)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Platform"
+
+[[candidate]]
+level  = 3
+id     = "DigitalTwin"
+label  = "Digital-twin-city (φ=2 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "φ=2 EXACT — digital twin (physical+virtual), city-scale simulation"
+
+[[candidate]]
+level  = 3
+id     = "OpenData"
+label  = "Open-data-portal (citizen access)"
+n6     = 0.67
+perf   = 0.82
+power  = 0.70
+cost   = 0.75
+notes  = "Open data portal, J₂=24 dataset categories, citizen transparency"
+
+[[candidate]]
+level  = 3
+id     = "GIS_12layer"
+label  = "GIS-12layer (σ=12 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "σ=12 EXACT — 12-layer GIS (terrain/buildings/roads/utilities/green/water/transit/zoning/population/emergency/sensors/services)"
+
+[[candidate]]
+level  = 3
+id     = "CommandCenter"
+label  = "Command-center (city operations)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.55
+cost   = 0.45
+notes  = "Integrated city command center, n=6 dashboard screens, real-time operations"
+
+[[candidate]]
+level  = 3
+id     = "CitizenApp"
+label  = "Citizen-app (mobile interface)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.65
+notes  = "Citizen mobile app, reporting/feedback/services, participatory governance"
+
+[[candidate]]
+level  = 3
+id     = "APIHub"
+label  = "API-hub (integration layer)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "API integration hub, n=6 protocol standards, cross-system interoperability"
+
+# =============================================================
+# Level 4: Service (서비스 계층)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Service"
+
+[[candidate]]
+level  = 4
+id     = "TrafficMgmt"
+label  = "Traffic-management (flow optimization)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "Adaptive traffic signal, congestion prediction, σ=12 intersection zones"
+
+[[candidate]]
+level  = 4
+id     = "EnergyOpt"
+label  = "Energy-optimization (grid+building)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.60
+notes  = "BT-62 grid frequency (60Hz=σ·sopfr), building energy management, n=6 zones"
+
+[[candidate]]
+level  = 4
+id     = "PublicSafety"
+label  = "Public-safety (surveillance+alert)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "Crime prediction, emergency detection, public space monitoring"
+
+[[candidate]]
+level  = 4
+id     = "WasteMgmt"
+label  = "Waste-management (smart collection)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.65
+notes  = "Smart bin sensors, route optimization, n=6 waste categories (recycle/organic/plastic/glass/metal/general)"
+
+[[candidate]]
+level  = 4
+id     = "WaterMonitor"
+label  = "Water-monitoring (quality+flow)"
+n6     = 0.83
+perf   = 0.82
+power  = 0.70
+cost   = 0.60
+notes  = "Water quality monitoring, leak detection, n=6 parameters (pH/turbidity/chlorine/flow/pressure/temp)"
+
+[[candidate]]
+level  = 4
+id     = "EmergencyResp"
+label  = "Emergency-response (disaster mgmt)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "Emergency response coordination, τ=4 alert tiers, n=6 response teams"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Neuromorphic compute only with Edge or Fog platforms (not cloud-dependent)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Neuromorphic"
+then_level = 3
+then_ids   = "CommandCenter,GIS_12layer"
+
+# LoRaWAN not suitable for Traffic camera (bandwidth too low)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "TrafficCam"
+then_level = 1
+then_ids   = "LoRaWAN,Mesh_Zigbee"
+
+# Emergency response requires high-bandwidth network (not LoRaWAN/Zigbee)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "EmergencyResp"
+then_level = 1
+then_ids   = "5G_Massive,WiFi6,FiberBackbone,NB_IoT"
+
+# Digital twin requires GPU or Cloud compute (heavy simulation)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "DigitalTwin"
+then_level = 2
+then_ids   = "CloudCentral,GPU_Inference,FogNode"

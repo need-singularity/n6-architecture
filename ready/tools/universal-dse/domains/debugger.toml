@@ -1,0 +1,410 @@
+# =============================================================
+# DEBUGGER DSE Domain Definition
+# 궁극의 디버거/프로파일러 아키텍처 — n=6 기반 계측 + 분석 + 시각화
+# BT-58 (sigma-tau=8 universal), BT-56 (Complete LLM), BT-59 (8-layer stack)
+# Total raw combos: 7x6x6x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "debugger"
+desc = "Ultimate Debugger/Profiler DSE (Instrumentation/Analysis/Visualization/Automation/Integration)"
+levels = ["Instrumentation", "Analysis", "Visualization", "Automation", "Integration"]
+vision = "Say 'why is this slow' and it auto-instruments, analyzes, visualizes, fixes -- n=6 debug intelligence"
+
+[scoring]
+n6   = 0.30
+perf = 0.30
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Instrumentation (계측) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Instrumentation"
+
+[[candidate]]
+level  = 0
+id     = "DynamicInject"
+label  = "Dynamic Binary Instrumentation (Valgrind), sigma-tau=8 probe types"
+n6     = 0.83
+perf   = 0.60
+power  = 0.40
+cost   = 0.55
+notes  = "probe_types=8=sigma-tau EXACT, overhead=high, coverage=100%, runtime=true"
+
+[[candidate]]
+level  = 0
+id     = "StaticInsert"
+label  = "Static Compile-Time Instrumentation, sopfr=5 insertion points"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "insert_points=5=sopfr EXACT, overhead=low, coverage=80%, compile_time=true"
+
+[[candidate]]
+level  = 0
+id     = "HybridTrace"
+label  = "Dynamic+Static Hybrid, phi=2 modes"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "modes=2=phi EXACT, overhead=med, coverage=95%, adaptive=true"
+
+[[candidate]]
+level  = 0
+id     = "HWCounter"
+label  = "CPU Hardware Counters (perf), n=6 event groups"
+n6     = 1.00
+perf   = 0.95
+power  = 0.75
+cost   = 0.70
+notes  = "event_groups=6=n EXACT, overhead=minimal, coverage=hw_only, precision=cycle"
+
+[[candidate]]
+level  = 0
+id     = "SamplingProf"
+label  = "Statistical Sampling, tau=4 frequency levels"
+n6     = 0.67
+perf   = 0.90
+power  = 0.70
+cost   = 0.75
+notes  = "freq_levels=4=tau EXACT, overhead=low, coverage=statistical, precision=sampling"
+
+[[candidate]]
+level  = 0
+id     = "eBPF_Probe"
+label  = "eBPF Kernel Probes, sigma=12 hook points"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "hooks=12=sigma EXACT, overhead=minimal, coverage=kernel+user, safe=true"
+
+[[candidate]]
+level  = 0
+id     = "AIGuided"
+label  = "AI-Guided Selective Instrumentation"
+n6     = 0.50
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "selection=ai, overhead=adaptive, coverage=targeted, learning=true"
+
+# =============================================================
+# Level 1: Analysis (분석) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Analysis"
+
+[[candidate]]
+level  = 1
+id     = "CallGraph"
+label  = "Call Graph Analysis, J2=24 node limit"
+n6     = 0.83
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "max_nodes=24=J2 EXACT, depth=unlimited, precision=context-sensitive"
+
+[[candidate]]
+level  = 1
+id     = "DataFlow"
+label  = "Data Flow Tracking, n=6 variable classes"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "var_classes=6=n EXACT, tracking=taint+value, precision=flow-sensitive"
+
+[[candidate]]
+level  = 1
+id     = "MemoryLeak"
+label  = "Memory Leak Detection, Egyptian memory split"
+n6     = 0.83
+perf   = 0.70
+power  = 0.50
+cost   = 0.55
+notes  = "split=1/2+1/3+1/6 EXACT, tracking=alloc+free, precision=byte-level"
+
+[[candidate]]
+level  = 1
+id     = "Concurrency"
+label  = "Concurrency Bug Detection (race/deadlock), phi=2 states"
+n6     = 0.67
+perf   = 0.65
+power  = 0.45
+cost   = 0.50
+notes  = "states=2=phi EXACT, detection=race+deadlock+livelock, overhead=high"
+
+[[candidate]]
+level  = 1
+id     = "Performance"
+label  = "Performance Bottleneck Analysis, sigma-tau=8 metrics"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "metrics=8=sigma-tau EXACT, bottleneck=auto, precision=function-level"
+
+[[candidate]]
+level  = 1
+id     = "Statistical"
+label  = "Statistical Profiling, sopfr=5 quantiles"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "quantiles=5=sopfr EXACT, sampling=adaptive, CI=95%, overhead=low"
+
+# =============================================================
+# Level 2: Visualization (시각화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Visualization"
+
+[[candidate]]
+level  = 2
+id     = "FlameGraph"
+label  = "Flame Graph, tau=4 aggregation levels"
+n6     = 0.67
+perf   = 0.90
+power  = 0.70
+cost   = 0.65
+notes  = "agg_levels=4=tau EXACT, interactive=true, drill_down=true, format=SVG"
+
+[[candidate]]
+level  = 2
+id     = "Timeline"
+label  = "Timeline View, sigma=12 tracks"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "tracks=12=sigma EXACT, zoom=true, filter=true, events=timestamped"
+
+[[candidate]]
+level  = 2
+id     = "TreeMap"
+label  = "TreeMap Memory View, n=6 depth"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "depth=6=n EXACT, interactive=true, size=proportional, color=heat"
+
+[[candidate]]
+level  = 2
+id     = "DAGView"
+label  = "DAG Dependency View, J2=24 nodes"
+n6     = 0.83
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "max_nodes=24=J2 EXACT, layout=force-directed, interactive=true"
+
+[[candidate]]
+level  = 2
+id     = "HeatMap"
+label  = "HeatMap Hotspot View"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "resolution=line-level, color=gradient, interactive=true, real_time=false"
+
+[[candidate]]
+level  = 2
+id     = "LiveDash"
+label  = "Live Dashboard, sigma-tau=8 panels"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "panels=8=sigma-tau EXACT, refresh=real-time, customizable=true, alerts=true"
+
+# =============================================================
+# Level 3: Automation (자동화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Automation"
+
+[[candidate]]
+level  = 3
+id     = "AutoBreak"
+label  = "AI Auto-Breakpoint"
+n6     = 0.50
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "ai_model=local, accuracy=85%, learning=contextual, latency=ms"
+
+[[candidate]]
+level  = 3
+id     = "RootCause"
+label  = "Automatic Root Cause Analysis"
+n6     = 0.67
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "depth=12=sigma, accuracy=90%, graph=causal, explanation=natural_lang"
+
+[[candidate]]
+level  = 3
+id     = "TimeTravelN6"
+label  = "n=6 Checkpoint Time-Travel Debugging"
+n6     = 1.00
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "checkpoints=6=n EXACT, replay=deterministic, overhead=med, storage=snapshot"
+
+[[candidate]]
+level  = 3
+id     = "DeltaDebug"
+label  = "Delta Debugging Binary Search, phi=2 split"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "split=2=phi EXACT, convergence=log(n), automated=true, minimal=true"
+
+[[candidate]]
+level  = 3
+id     = "FaultInject"
+label  = "Fault Injection Auto-Test"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.55
+notes  = "injection=chaos, coverage=fault-paths, automated=true, safe=sandboxed"
+
+[[candidate]]
+level  = 3
+id     = "PredictBug"
+label  = "Predictive Bug Detection"
+n6     = 0.50
+perf   = 0.80
+power  = 0.45
+cost   = 0.40
+notes  = "model=ml, accuracy=80%, preemptive=true, false_positive=low"
+
+# =============================================================
+# Level 4: Integration (통합) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Integration"
+
+[[candidate]]
+level  = 4
+id     = "LSP_Debug"
+label  = "LSP/DAP Integration, sigma=12 protocol features"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "protocols=12=sigma EXACT, standard=DAP, editor=any, latency=low"
+
+[[candidate]]
+level  = 4
+id     = "CI_Pipeline"
+label  = "CI/CD Pipeline Integration"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "ci=GitHub/GitLab, automated=true, reports=artifact, blocking=configurable"
+
+[[candidate]]
+level  = 4
+id     = "CloudDebug"
+label  = "Cloud Remote Debugging"
+n6     = 0.50
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "remote=true, latency=network, multi_node=true, scaling=cloud"
+
+[[candidate]]
+level  = 4
+id     = "EditorEmbed"
+label  = "Editor-Embedded Debugging"
+n6     = 0.67
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "editors=VSCode/Vim/Emacs, inline=true, latency=instant, UX=seamless"
+
+[[candidate]]
+level  = 4
+id     = "CollabDebug"
+label  = "Collaborative Debugging Session"
+n6     = 0.50
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "users=multi, shared_state=true, voice=optional, replay=true"
+
+[[candidate]]
+level  = 4
+id     = "SixLayerDebugStack"
+label  = "6-Layer Debug Integration Stack (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "layers=6=n EXACT (HW/kernel/runtime/app/network/UI), full-stack debug, sigma=12 protocol messages"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DynamicInject too heavy for FlameGraph tau=4 aggregation (needs richer viz)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "DynamicInject"
+then_level = 2
+then_ids   = "HeatMap"
+
+# HWCounter requires Performance or Statistical or DataFlow analysis (hw counters need analysis)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "HWCounter"
+then_level = 1
+then_ids   = "Performance,Statistical,DataFlow"
+
+# MemoryLeak requires TreeMap or DAGView (memory needs spatial viz)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "MemoryLeak"
+then_level = 2
+then_ids   = "TreeMap,DAGView"
+
+# TimeTravelN6 requires LSP_Debug or EditorEmbed or SixLayerDebugStack (needs interactive integration)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "TimeTravelN6"
+then_level = 4
+then_ids   = "LSP_Debug,EditorEmbed,SixLayerDebugStack"
+
+# AIGuided requires RootCause or PredictBug (AI instrumentation needs AI analysis)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "AIGuided"
+then_level = 3
+then_ids   = "RootCause,AutoBreak,PredictBug"
+
+# CloudDebug incompatible with HWCounter (can't access remote HW counters easily)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "CloudDebug"
+then_level = 0
+then_ids   = "HWCounter"

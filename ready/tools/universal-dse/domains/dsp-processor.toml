@@ -1,0 +1,410 @@
+# N6 DSP Processor DSE — Digital signal processing architecture
+# 6×6×6×6×6 = 7,776 combos
+# n=6: σ-τ=8 butterfly stages in 256-point FFT, τ=4 MAC units per cycle,
+#       φ=2 dual-MAC, σ=12 pipeline stages, n=6 execution slots (VLIW),
+#       J₂=24 DMA channels
+
+[meta]
+name = "dsp-processor"
+desc = "DSP Processor Architecture DSE (BT-48/58/72)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Architecture (아키텍처)
+#   n6 checks: exec_slots==6, issue_width==phi(2), PE_count==6
+# ============================================================
+
+[[level]]
+name = "Architecture"
+
+[[candidate]]
+id = "VLIW-6slot"
+label = "VLIW 6-slot (n=6 execution slots, static scheduling, deterministic latency)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.80
+notes = "exec_slots=6=n EXACT, classic DSP VLIW — TI C6000 lineage"
+
+[[candidate]]
+id = "Superscalar-dual"
+label = "Superscalar Dual-issue (φ=2 issue width, dynamic scheduling, OoO)"
+n6 = 0.50
+perf = 0.70
+power = 0.60
+cost = 0.70
+notes = "issue_width=2=phi EXACT, higher flexibility but less deterministic"
+
+[[candidate]]
+id = "Vector-DSP"
+label = "Vector DSP (SIMD 8-wide, σ-τ=8 lanes, packed arithmetic)"
+n6 = 0.75
+perf = 0.90
+power = 0.65
+cost = 0.75
+notes = "SIMD_width=8=sigma-tau EXACT, high throughput for block processing"
+
+[[candidate]]
+id = "Reconfigurable"
+label = "Reconfigurable (CGRA mesh, runtime-adaptable datapath)"
+n6 = 0.25
+perf = 0.80
+power = 0.55
+cost = 0.50
+notes = "flexible but area overhead, good for multi-standard baseband"
+
+[[candidate]]
+id = "Streaming"
+label = "Streaming (systolic pipeline, σ=12 stages, fixed-function accelerator)"
+n6 = 0.75
+perf = 0.95
+power = 0.80
+cost = 0.85
+notes = "pipeline_stages=12=sigma EXACT, maximum throughput for steady-state"
+
+[[candidate]]
+id = "Dataflow-6PE"
+label = "Dataflow 6-PE (n=6 processing elements, token-driven execution)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.65
+notes = "PE_count=6=n EXACT, inherent parallelism, no centralized control"
+
+# ============================================================
+# Level 1: DataPath (데이터패스)
+#   n6 checks: MAC_width==24(J₂), precision==12(σ), dual-MAC==φ(2)
+# ============================================================
+
+[[level]]
+name = "DataPath"
+
+[[candidate]]
+id = "MAC-16bit"
+label = "MAC 16-bit (16×16→32 accumulator, standard fixed-point)"
+n6 = 0.25
+perf = 0.70
+power = 0.85
+cost = 0.95
+notes = "industry standard, Q15 format, cost-effective"
+
+[[candidate]]
+id = "MAC-24bit"
+label = "MAC 24-bit (J₂=24 bit width, 24×24→48 accumulator, audio-grade)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+notes = "width=24=J2 EXACT, accumulator=48=sigma*tau EXACT, professional audio standard"
+
+[[candidate]]
+id = "Fixed-Q15"
+label = "Fixed Q15 (fractional [-1,1), τ=4 guard bits, saturation arithmetic)"
+n6 = 0.50
+perf = 0.65
+power = 0.90
+cost = 0.90
+notes = "guard_bits=4=tau EXACT, classic DSP format, overflow protection"
+
+[[candidate]]
+id = "Floating-32"
+label = "Floating 32-bit (IEEE 754 single, σ-τ=8 exponent bits)"
+n6 = 0.75
+perf = 0.85
+power = 0.50
+cost = 0.60
+notes = "exponent=8=sigma-tau EXACT, dynamic range for radar/sonar"
+
+[[candidate]]
+id = "Mixed-precision"
+label = "Mixed Precision (16/24/32 switchable, φ=2 precision modes per cycle)"
+n6 = 0.50
+perf = 0.90
+power = 0.70
+cost = 0.55
+notes = "modes=2=phi, adaptive precision per algorithm stage"
+
+[[candidate]]
+id = "Complex-multiply"
+label = "Complex Multiply (real+imag pair, τ=4 multiplies per complex MAC)"
+n6 = 0.50
+perf = 0.95
+power = 0.55
+cost = 0.65
+notes = "muls_per_cmac=4=tau EXACT, essential for FFT/baseband/radar"
+
+# ============================================================
+# Level 2: Memory (메모리)
+#   n6 checks: banks==6(n), shared_KB==12(σ), DMA_ch==24(J₂),
+#              circular_size==256(2^σ-τ)
+# ============================================================
+
+[[level]]
+name = "Memory"
+
+[[candidate]]
+id = "L1-6bank"
+label = "L1 6-bank SRAM (n=6 banks, conflict-free parallel access)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+notes = "banks=6=n EXACT, enables 6-slot VLIW conflict-free memory"
+
+[[candidate]]
+id = "L2-shared-12KB"
+label = "L2 Shared 12KB (σ=12 KB, unified data/program, 2-cycle latency)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.85
+notes = "size_KB=12=sigma EXACT, small but fast for embedded DSP"
+
+[[candidate]]
+id = "DMA-24ch"
+label = "DMA 24-channel (J₂=24 channels, scatter-gather, auto-ping-pong)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.70
+notes = "channels=24=J2 EXACT, sustained streaming I/O without CPU stall"
+
+[[candidate]]
+id = "Circular-buffer"
+label = "Circular Buffer (256-entry=2^(σ-τ), hardware modulo addressing)"
+n6 = 0.75
+perf = 0.80
+power = 0.90
+cost = 0.90
+notes = "entries=256=2^(sigma-tau) EXACT, zero-overhead FIR/IIR filter taps"
+
+[[candidate]]
+id = "Bit-reverse"
+label = "Bit-Reverse (σ-τ=8 stage address reversal, FFT reorder in hardware)"
+n6 = 0.75
+perf = 0.90
+power = 0.85
+cost = 0.85
+notes = "stages=8=sigma-tau EXACT, eliminates software FFT reordering"
+
+[[candidate]]
+id = "Stream-buffer"
+label = "Stream Buffer (FIFO τ=4 deep per port, φ=2 read/write ports)"
+n6 = 0.50
+perf = 0.75
+power = 0.90
+cost = 0.90
+notes = "depth=4=tau EXACT, ports=2=phi EXACT, minimal area streaming"
+
+# ============================================================
+# Level 3: Instruction (명령어)
+#   n6 checks: predicate_ways==6(n), SIMD_lanes==4(τ),
+#              loop_overhead==0, saturate==yes
+# ============================================================
+
+[[level]]
+name = "Instruction"
+
+[[candidate]]
+id = "Zero-overhead-loop"
+label = "Zero-overhead Loop (hardware loop counter, no branch penalty)"
+n6 = 0.50
+perf = 0.90
+power = 0.90
+cost = 0.90
+notes = "essential for DSP inner loops, eliminates branch overhead completely"
+
+[[candidate]]
+id = "Predicated-6way"
+label = "Predicated 6-way (n=6 condition registers, per-slot predication)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "predicates=6=n EXACT, enables conditional execution without branches"
+
+[[candidate]]
+id = "SIMD-4lane"
+label = "SIMD 4-lane (τ=4 parallel operations, 16-bit packed elements)"
+n6 = 0.75
+perf = 0.85
+power = 0.80
+cost = 0.85
+notes = "lanes=4=tau EXACT, quad multiply-accumulate per cycle"
+
+[[candidate]]
+id = "Saturate-arithmetic"
+label = "Saturate Arithmetic (clamp on overflow, no wrap-around, guard-bit aware)"
+n6 = 0.25
+perf = 0.70
+power = 0.95
+cost = 0.95
+notes = "mandatory for audio/control — prevents overflow artifacts"
+
+[[candidate]]
+id = "Bit-field"
+label = "Bit-field (extract/deposit/rotate, σ=12 bit positions per cycle)"
+n6 = 0.75
+perf = 0.75
+power = 0.90
+cost = 0.85
+notes = "positions=12=sigma EXACT, useful for protocol parsing and compression"
+
+[[candidate]]
+id = "Auto-increment"
+label = "Auto-increment (φ=2 address modes, post-inc/pre-dec, modulo support)"
+n6 = 0.50
+perf = 0.80
+power = 0.90
+cost = 0.90
+notes = "addr_modes=2=phi EXACT, reduces address computation overhead"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: sample_rate==48kHz(σ·τ), channels==6,
+#              sub-carriers==12(σ), filter_taps==256(2^σ-τ)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Audio-codec-48kHz"
+label = "Audio Codec 48kHz (σ·τ=48 kHz sample rate, J₂=24 bit depth, n=6 channels)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.90
+notes = "sample_rate=48kHz=sigma*tau EXACT, depth=24=J2 EXACT, channels=6=n EXACT (5.1 surround)"
+
+[[candidate]]
+id = "Radar-processing"
+label = "Radar Processing (256-pt FFT, σ-τ=8 butterfly stages, Doppler+CFAR)"
+n6 = 0.75
+perf = 0.95
+power = 0.50
+cost = 0.50
+notes = "FFT_stages=8=sigma-tau EXACT, pulse compression + target detection"
+
+[[candidate]]
+id = "Telecom-baseband"
+label = "Telecom Baseband (OFDM σ=12 sub-carriers/group, Viterbi/Turbo decode)"
+n6 = 0.75
+perf = 0.90
+power = 0.55
+cost = 0.55
+notes = "subcarrier_group=12=sigma EXACT, 5G NR / LTE modem processing"
+
+[[candidate]]
+id = "Image-filter"
+label = "Image Filter (6×6 kernel=n×n, convolution, edge detection, median)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+notes = "kernel=6x6=n*n EXACT, real-time image enhancement pipeline"
+
+[[candidate]]
+id = "Motor-control"
+label = "Motor Control (τ=4 quadrant drive, 12-pulse=σ rectifier, PID 48kHz loop)"
+n6 = 0.75
+perf = 0.75
+power = 0.85
+cost = 0.85
+notes = "quadrants=4=tau EXACT, rectifier=12=sigma EXACT, loop=48kHz=sigma*tau EXACT"
+
+[[candidate]]
+id = "Biomedical-ECG"
+label = "Biomedical ECG (σ=12 lead standard, τ=4 chamber model, 256 Hz sampling)"
+n6 = 1.00
+perf = 0.60
+power = 0.95
+cost = 0.80
+notes = "leads=12=sigma EXACT, chambers=4=tau EXACT, sampling=256=2^(sigma-tau) EXACT"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# VLIW-6slot pairs naturally with 6-bank memory for conflict-free access
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "VLIW-6slot"
+then_level = 2
+then_ids = "L1-6bank"
+
+# VLIW-6slot works best with Predicated-6way instructions
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "VLIW-6slot"
+then_level = 3
+then_ids = "Predicated-6way"
+
+# Vector-DSP requires SIMD instructions
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Vector-DSP"
+then_level = 3
+then_ids = "SIMD-4lane"
+
+# Audio codec best with 24-bit MAC and DMA streaming
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Audio-codec-48kHz"
+then_level = 1
+then_ids = "MAC-24bit"
+
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Audio-codec-48kHz"
+then_level = 2
+then_ids = "DMA-24ch,Circular-buffer"
+
+# Radar processing needs complex multiply and bit-reverse
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Radar-processing"
+then_level = 1
+then_ids = "Complex-multiply,Floating-32"
+
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Radar-processing"
+then_level = 2
+then_ids = "Bit-reverse"
+
+# Streaming architecture pairs with stream buffer memory
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Streaming"
+then_level = 2
+then_ids = "Stream-buffer,DMA-24ch"
+
+# Biomedical ECG is low-power, pairs with simple fixed-point
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Biomedical-ECG"
+then_level = 1
+then_ids = "Fixed-Q15,MAC-16bit"
+
+# Dataflow 6-PE benefits from DMA-24ch (4 channels per PE)
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Dataflow-6PE"
+then_level = 2
+then_ids = "DMA-24ch"

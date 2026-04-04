@@ -1,0 +1,353 @@
+# Heat Exchanger DSE — Thermal Exchange Equipment Architecture
+# n=6: 6 HX types, sigma=12 baffle cuts, tau=4 flow patterns, phi=2 two-fluid, J2=24 tube passes
+
+[meta]
+name = "heat-exchanger"
+desc = "Heat Exchanger Architecture DSE (n=6 HX types, sigma=12 baffles, tau=4 flows)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: HXType — Heat exchanger type
+# ============================================================
+
+[[level]]
+name = "HXType"
+
+[[candidate]]
+level = 0
+id = "ShellTube-12baffle"
+label = "Shell-and-tube sigma=12 baffle cuts (24=J2 tube passes)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Plate-6pack"
+label = "Plate HX n=6 plate packs (phi=2 fluid streams)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Finned-12fin"
+label = "Finned-tube sigma=12 fins/inch (tau=4 rows deep)"
+n6 = 1.00
+perf = 0.78
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Spiral-6turn"
+label = "Spiral HX n=6 turns (phi=2 spiral channels)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Regenerative-4phase"
+label = "Regenerative HX tau=4 thermal phases (6 storage media=n)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Microchannel-6array"
+label = "Microchannel n=6 parallel arrays (12=sigma ports per array)"
+n6 = 1.00
+perf = 0.95
+power = 0.88
+cost = 0.35
+
+# ============================================================
+# Level 1: Material — Construction material
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 1
+id = "CuNi-90-10"
+label = "Cu-Ni 90/10 alloy (Cu Z=29, Ni Z=28, sum mod 6=0)"
+n6 = 0.75
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "SS316L"
+label = "SS 316L (Cr=24=J2 wt%, Mo=phi+tau=6 wt%)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Titanium-Gr2"
+label = "Titanium Grade 2 (Ti Z=22, HCP c/a=phi approx)"
+n6 = 0.75
+perf = 0.92
+power = 0.85
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "Carbon-Steel"
+label = "Carbon steel (C Z=6=n, Fe Z=26, 6 crystal grains)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "Inconel-625"
+label = "Inconel 625 (Ni 62%=sigma*sopfr+phi, Cr 21%)"
+n6 = 0.75
+perf = 0.95
+power = 0.78
+cost = 0.25
+
+[[candidate]]
+level = 1
+id = "Graphite-SiC"
+label = "Graphite/SiC composite (C Z=6=n EXACT, hexagonal lattice)"
+n6 = 1.00
+perf = 0.80
+power = 0.92
+cost = 0.40
+
+# ============================================================
+# Level 2: FlowConfig — Flow configuration
+# ============================================================
+
+[[level]]
+name = "FlowConfig"
+
+[[candidate]]
+level = 2
+id = "Counter-2pass"
+label = "Counter-flow phi=2 pass (maximum LMTD)"
+n6 = 1.00
+perf = 0.95
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Parallel-4zone"
+label = "Parallel-flow tau=4 temperature zones"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Cross-12cell"
+label = "Cross-flow sigma=12 cell arrangement"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Mixed-6regime"
+label = "Mixed-flow n=6 flow regimes (laminar to turbulent)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "MultiPass-24"
+label = "Multi-pass J2=24 tube passes (12=sigma per shell pass)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Helical-6coil"
+label = "Helical-flow n=6 coil turns (Dean vortex enhancement)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.45
+
+# ============================================================
+# Level 3: Enhancement — Heat transfer enhancement
+# ============================================================
+
+[[level]]
+name = "Enhancement"
+
+[[candidate]]
+level = 3
+id = "Turbulator-6insert"
+label = "Turbulator n=6 inserts per tube (Re transition at 2300)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Dimple-12pattern"
+label = "Dimple-surface sigma=12 dimples per row"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Nano-TiO2"
+label = "TiO2 nanofluid (Ti Z=22, 6 vol% loading=n)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Vortex-4generator"
+label = "Vortex generator tau=4 winglet pairs per row"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Porous-6layer"
+label = "Porous media n=6 sintered layers (porosity=0.6)"
+n6 = 1.00
+perf = 0.90
+power = 0.68
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "PhaseChange-24kJ"
+label = "PCM encapsulation J2=24 kJ/kg latent heat boost"
+n6 = 1.00
+perf = 0.78
+power = 0.92
+cost = 0.35
+
+# ============================================================
+# Level 4: Application — End-use application
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "PowerPlant-6unit"
+label = "Power plant n=6 feedwater heaters (12=sigma stages)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "HVAC-12zone"
+label = "HVAC sigma=12 zone air handling (6 ACH=n)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Chemical-24stream"
+label = "Chemical process J2=24 heat streams (HENS network)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "DataCenter-6row"
+label = "Data center n=6 hot-aisle rows (PUE=1.2=sigma/(sigma-phi))"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Marine-4circuit"
+label = "Marine tau=4 seawater circuits (6 heat loads=n)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Cryo-LNG"
+label = "LNG cryogenic (boiling at -162C, 6 cold boxes=n)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.35
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Microchannel not suitable for marine (fouling)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Microchannel-6array"
+then_level = 4
+then_ids = ["Marine-4circuit"]
+
+# PCM enhancement only for HVAC and data center (thermal storage)
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "PhaseChange-24kJ"
+then_level = 4
+then_ids = ["HVAC-12zone", "DataCenter-6row"]
+
+# Graphite/SiC only for high-temperature applications
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Graphite-SiC"
+then_level = 4
+then_ids = ["PowerPlant-6unit", "Chemical-24stream", "Cryo-LNG"]
+
+# Nanofluid not practical for LNG cryogenic
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Nano-TiO2"
+then_level = 4
+then_ids = ["Cryo-LNG"]

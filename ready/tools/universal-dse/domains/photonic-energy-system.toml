@@ -1,0 +1,466 @@
+# =============================================================
+# HEXA-PHOTONIC-ENERGY Cross-DSE Domain Definition
+# Photonic Computing + Energy/Thermal Integration
+#
+# Key insight: Photonic computing generates far less heat than
+# electronic computing -- no resistive losses, no capacitive
+# charge/discharge, near-zero Joule heating in optical waveguides.
+# TDP drops from ~300W (GPU) to ~30W (photonic accelerator).
+#
+# n6 connections:
+#   Ring resonator modes = n = 6 EXACT
+#   MZI switch ports = sigma = 12 EXACT
+#   WDM channels standard = sigma = 12 EXACT
+#   Diamond NV center Z = 6 EXACT
+#   Single-mode fiber core = 6 um EXACT
+#   Photonic TDP ~1/n to 1/sigma of electronic
+#   Photonic datacenter PUE -> 1.0 (vs 1.2 electronic)
+#
+# BT links: BT-27 (Carbon/Diamond Z=6), BT-30 (SQ solar),
+#           BT-60 (DC power chain PUE), BT-63 (solar panel)
+#
+# Total raw combos: 6^5 = 7,776
+# =============================================================
+
+[meta]
+name = "photonic-energy-system"
+desc = "Photonic Computing + Energy/Thermal Cross-DSE (BT-27/30/60/63)"
+levels = ["PhotonicCore", "MaterialBase", "ThermalDesign", "PowerSupply", "SystemIntegration"]
+vision = "Light replaces electrons -- heat vanishes, efficiency approaches unity"
+
+[scoring]
+n6    = 0.30
+perf  = 0.25
+power = 0.25
+cost  = 0.20
+
+# =============================================================
+# Level 0: PhotonicCore (Photonic Computing Substrate)  -- 6 candidates
+#   n6 checks: ring modes==6, MZI ports==12, WDM channels==12
+# =============================================================
+[[level]]
+name = "PhotonicCore"
+
+[[candidate]]
+level  = 0
+id     = "RingResonator"
+label  = "Ring Resonator Array (n=6 modes, Q>10^6, 10GHz FSR)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.90
+cost   = 0.70
+notes  = "n=6 resonant modes EXACT, ultra-low loss, mature SiPh"
+
+[[candidate]]
+level  = 0
+id     = "MZI_Switch"
+label  = "MZI Switch Fabric (sigma=12 ports, 20dB extinction)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.60
+notes  = "sigma=12 port count EXACT, reconfigurable photonic routing"
+
+[[candidate]]
+level  = 0
+id     = "WDM_Engine"
+label  = "WDM Compute Engine (sigma=12 wavelength channels, C-band)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.55
+notes  = "sigma=12 channels EXACT, parallel wavelength computation"
+
+[[candidate]]
+level  = 0
+id     = "PhotonicMesh"
+label  = "Programmable Photonic Mesh (6x6 unitary, tau=4 layers)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.88
+cost   = 0.50
+notes  = "n=6 mesh dimension, tau=4 cascade depth, universal linear transform"
+
+[[candidate]]
+level  = 0
+id     = "MicroringMAC"
+label  = "Microring MAC Array (n=6 rings/neuron, 8-bit weight)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.92
+cost   = 0.45
+notes  = "n=6 rings per MAC unit EXACT, analog multiply-accumulate"
+
+[[candidate]]
+level  = 0
+id     = "PhC_Crystal"
+label  = "Photonic Crystal Engine (n/phi=3 band structure, slow light)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.85
+cost   = 0.40
+notes  = "n/phi=3 photonic bandgaps, enhanced light-matter interaction"
+
+# =============================================================
+# Level 1: MaterialBase (Optical Materials)  -- 6 candidates
+#   n6 checks: Z==6 (Diamond/Carbon), Z==14 (Si=sigma+phi)
+# =============================================================
+[[level]]
+name = "MaterialBase"
+
+[[candidate]]
+level  = 1
+id     = "SiPhotonics"
+label  = "Silicon Photonics (Z=14=sigma+phi, 1550nm, SOI platform)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.85
+cost   = 0.90
+notes  = "Z=14=sigma+phi, CMOS compatible, mature 300mm fab"
+
+[[candidate]]
+level  = 1
+id     = "LiNbO3"
+label  = "Lithium Niobate (LiNbO3, EO coeff=30pm/V, thin-film)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.75
+cost   = 0.50
+notes  = "strongest electro-optic effect, 100GHz modulators"
+
+[[candidate]]
+level  = 1
+id     = "InP_Gain"
+label  = "Indium Phosphide (InP, Z=49+15, direct bandgap, gain medium)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.65
+cost   = 0.35
+notes  = "on-chip laser/amplifier source, highest optical gain"
+
+[[candidate]]
+level  = 1
+id     = "DiamondNV"
+label  = "Diamond NV Center (Z=6=n EXACT, single photon source)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.95
+cost   = 0.15
+notes  = "Z=6=n EXACT (BT-27), quantum photonic, k=2000 W/mK thermal"
+
+[[candidate]]
+level  = 1
+id     = "SiN_Low"
+label  = "Silicon Nitride (Si3N4, ultra-low loss, 0.1dB/cm)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.90
+cost   = 0.75
+notes  = "lowest propagation loss, Kerr nonlinearity, passive photonics"
+
+[[candidate]]
+level  = 1
+id     = "Hybrid_SiInP"
+label  = "Hybrid Si+InP (heterogeneous integration, best of both)"
+n6     = 0.67
+perf   = 0.92
+power  = 0.78
+cost   = 0.45
+notes  = "Si passive + InP active, full photonic circuit capability"
+
+# =============================================================
+# Level 2: ThermalDesign (Thermal Management)  -- 6 candidates
+#   Photonic key advantage: <50W means passive cooling viable
+#   n6 checks: PUE->1.0, thermal zones, zero-cooling overhead
+# =============================================================
+[[level]]
+name = "ThermalDesign"
+
+[[candidate]]
+level  = 2
+id     = "PassiveSink"
+label  = "Passive Heat Sink Only (<50W, zero fan, zero pump)"
+n6     = 0.83
+perf   = 0.70
+power  = 1.00
+cost   = 0.95
+notes  = "photonic TDP <50W enables zero active cooling, PUE->1.0"
+
+[[candidate]]
+level  = 2
+id     = "DiamondSpread"
+label  = "Diamond Heat Spreader (Z=6=n EXACT, 2000 W/mK)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.95
+cost   = 0.20
+notes  = "Diamond Z=6=n EXACT (BT-27), best thermal conductor on Earth"
+
+[[candidate]]
+level  = 2
+id     = "GrapheneLayer"
+label  = "Graphene Thermal Layer (Z=6=n EXACT, 5000 W/mK in-plane)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.92
+cost   = 0.30
+notes  = "Carbon Z=6=n EXACT (BT-27), ultra-thin heat spreading"
+
+[[candidate]]
+level  = 2
+id     = "ThermoTuner"
+label  = "Integrated Thermo-Optic Tuner (heater reuse for stabilization)"
+n6     = 0.67
+perf   = 0.82
+power  = 0.75
+cost   = 0.65
+notes  = "waste heat from tuners reused for resonance stabilization"
+
+[[candidate]]
+level  = 2
+id     = "MicrofluidCool"
+label  = "Microfluidic Co-Cooling (n=6 um channels, on-chip)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.60
+cost   = 0.40
+notes  = "n=6 um channel width, for high-density photonic interposers"
+
+[[candidate]]
+level  = 2
+id     = "AirConvect"
+label  = "Natural Air Convection (fanless, <30W dissipation)"
+n6     = 0.50
+perf   = 0.55
+power  = 1.00
+cost   = 1.00
+notes  = "simplest thermal, viable only at lowest photonic power levels"
+
+# =============================================================
+# Level 3: PowerSupply (Energy Source)  -- 6 candidates
+#   Photonic advantage: 10-50W range opens solar/battery direct DC
+#   n6 checks: DC voltage steps, solar cell counts, battery cells
+# =============================================================
+[[level]]
+name = "PowerSupply"
+
+[[candidate]]
+level  = 3
+id     = "SolarDirectDC"
+label  = "Solar Direct DC (12V=sigma, n=6 panel cells, off-grid)"
+n6     = 1.00
+perf   = 0.65
+power  = 1.00
+cost   = 0.80
+notes  = "12V=sigma EXACT, direct solar-to-photonic, zero conversion loss"
+
+[[candidate]]
+level  = 3
+id     = "BatteryMicro"
+label  = "Battery Micro-Supply (48V=sigma*tau, 6-cell pack)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.90
+cost   = 0.75
+notes  = "48V=sigma*tau EXACT, n=6 cells EXACT, mobile/edge photonic"
+
+[[candidate]]
+level  = 3
+id     = "GridEdgeDC"
+label  = "Grid Edge DC (48V DC bus, PUE=1.0, sigma*tau=48)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.85
+cost   = 0.70
+notes  = "48V=sigma*tau EXACT, DC distribution eliminates AC/DC loss"
+
+[[candidate]]
+level  = 3
+id     = "GridStandard"
+label  = "Standard Grid AC/DC (240V AC, 12V DC rail)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.60
+cost   = 0.90
+notes  = "12V=sigma EXACT, conventional but conversion losses"
+
+[[candidate]]
+level  = 3
+id     = "HarvestPiezo"
+label  = "Energy Harvesting (piezo+thermal+RF, <5W micro-power)"
+n6     = 0.50
+perf   = 0.40
+power  = 0.95
+cost   = 0.60
+notes  = "multi-source harvesting, ultra-low-power photonic sensors"
+
+[[candidate]]
+level  = 3
+id     = "FuelCellDC"
+label  = "Hydrogen Fuel Cell DC (48V output, LHV=120=sigma*(sigma-phi))"
+n6     = 0.83
+perf   = 0.80
+power  = 0.88
+cost   = 0.40
+notes  = "LHV=120=sigma*(sigma-phi) (BT-38 EXACT), clean DC for photonic"
+
+# =============================================================
+# Level 4: SystemIntegration (Full System)  -- 6 candidates
+#   n6 checks: rack units, node counts, PUE, network tiers
+# =============================================================
+[[level]]
+name = "SystemIntegration"
+
+[[candidate]]
+level  = 4
+id     = "DC_Photonic"
+label  = "Photonic Datacenter (12 nodes/rack, PUE=1.02, <6kW/rack)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.40
+notes  = "sigma=12 nodes EXACT, n=6 kW EXACT, near-unity PUE"
+
+[[candidate]]
+level  = 4
+id     = "EdgeAI"
+label  = "Edge AI Photonic (single node, <50W, fanless, tau=4 TOPS/W)"
+n6     = 0.67
+perf   = 0.70
+power  = 0.95
+cost   = 0.75
+notes  = "tau=4 TOPS/W, passive thermal, real-time inference at edge"
+
+[[candidate]]
+level  = 4
+id     = "Telecom_OXC"
+label  = "Telecom Optical Cross-Connect (sigma=12 fiber ports, 400G)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.50
+notes  = "sigma=12 ports EXACT, all-optical switching, zero O-E-O"
+
+[[candidate]]
+level  = 4
+id     = "SensorNet"
+label  = "Photonic Sensor Network (n=6 sensing nodes, fiber Bragg)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.92
+cost   = 0.70
+notes  = "n=6 sensor nodes EXACT, distributed sensing, ultra-low power"
+
+[[candidate]]
+level  = 4
+id     = "QuantumLink"
+label  = "Quantum Photonic Interconnect (n=6 qubit channels, QKD)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.88
+cost   = 0.25
+notes  = "n=6 qubit channels EXACT, quantum key distribution"
+
+[[candidate]]
+level  = 4
+id     = "HPC_CoPackage"
+label  = "HPC Co-Packaged Photonic (sigma=12 chiplets, 100Tbps bisection)"
+n6     = 0.83
+perf   = 1.00
+power  = 0.80
+cost   = 0.30
+notes  = "sigma=12 chiplets, co-packaged optics, exascale interconnect"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Diamond NV center + photonic core = highest n6 synergy bonus
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "DiamondNV"
+then_level = 2
+then_ids   = "DiamondSpread"
+reason     = "Diamond material + Diamond thermal = Z=6 full n6 chain"
+
+# Passive cooling pairs naturally with low-power photonic cores
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "PassiveSink"
+then_level = 0
+then_ids   = "RingResonator,PhotonicMesh,PhC_Crystal"
+reason     = "passive cooling viable for <50W photonic cores"
+
+# Air convection only for edge/sensor systems (lowest power)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "AirConvect"
+then_level = 4
+then_ids   = "EdgeAI,SensorNet"
+reason     = "natural convection only sufficient for smallest systems"
+
+# Solar direct DC best paired with edge/sensor (off-grid scenarios)
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "SolarDirectDC"
+then_level = 4
+then_ids   = "EdgeAI,SensorNet"
+reason     = "solar direct DC + photonic = best power efficiency, off-grid"
+
+# Energy harvesting only for sensor networks (<5W budget)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "HarvestPiezo"
+then_level = 4
+then_ids   = "SensorNet"
+reason     = "micro-power harvesting only viable for ultra-low-power sensors"
+
+# InP gain medium requires active thermal management (laser heat)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "InP_Gain"
+then_level = 2
+then_ids   = "AirConvect"
+reason     = "InP lasers generate localized heat, need more than natural convection"
+
+# HPC co-packaged needs grid-class power (not battery/solar/harvest)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "HPC_CoPackage"
+then_level = 3
+then_ids   = "GridEdgeDC,GridStandard,FuelCellDC"
+reason     = "exascale photonic interconnect needs stable high-capacity power"
+
+# Datacenter photonic needs grid-class power
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "DC_Photonic"
+then_level = 3
+then_ids   = "GridEdgeDC,GridStandard,FuelCellDC"
+reason     = "datacenter scale requires grid or fuel cell supply"
+
+# Quantum photonic link best with Diamond NV single-photon source
+[[rule]]
+type       = "prefer"
+if_level   = 4
+if_id      = "QuantumLink"
+then_level = 1
+then_ids   = "DiamondNV"
+reason     = "Diamond NV = best single-photon source for quantum channels"
+
+# Microfluidic cooling overkill for natural-convection-level systems
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "MicrofluidCool"
+then_level = 4
+then_ids   = "SensorNet"
+reason     = "microfluidic cooling unnecessary for ultra-low-power sensor nodes"

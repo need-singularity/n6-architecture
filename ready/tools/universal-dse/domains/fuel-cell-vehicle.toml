@@ -1,0 +1,357 @@
+# =============================================================
+# Fuel Cell Vehicle DSE Domain Definition
+# Hydrogen cars — stack to drivetrain integration
+# n=6: 6-cell stack module, σ=12 bipolar plates, J₂=24V module
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "fuel-cell-vehicle"
+desc = "Hydrogen Fuel Cell Vehicle Architecture DSE (membrane/stack/balance/motor/vehicle)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Membrane (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Membrane"
+
+[[candidate]]
+level = 0
+id = "Nafion-PFSA"
+label = "Nafion PFSA Membrane (perfluorosulfonic acid, 6 SO₃H groups per chain)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "SPEEK"
+label = "SPEEK Hydrocarbon (sulfonated PEEK, σ=12% sulfonation, low-cost)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "PBI-HT"
+label = "PBI High-Temp (polybenzimidazole, 6-ring aromatic, 180°C)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Composite-PTFE"
+label = "Composite ePTFE Reinforced (Gore-Select, σ=12μm thin, durable)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "AEM"
+label = "Anion Exchange Membrane (alkaline, n=6 quaternary ammonium sites)"
+n6 = 1.00
+perf = 0.65
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Ceramic-Proton"
+label = "Ceramic Proton Conductor (BaZrO₃, perovskite CN=6, 600°C)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.40
+
+# ============================================================
+# Level 1: Stack (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Stack"
+
+[[candidate]]
+level = 1
+id = "Bipolar-Graphite"
+label = "Graphite Bipolar Plate (6-channel serpentine, standard)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Metal-Bipolar"
+label = "Stamped Metal Bipolar (SS316, σ=12 flow channels, thin)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Composite-Plate"
+label = "Composite Bipolar Plate (carbon-polymer, 6mm pitch, lightweight)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Modular-6cell"
+label = "Modular 6-Cell Stack (n=6 cells/module, J₂=24V per module)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Large-Format"
+label = "Large Format Stack (>500cm², σ·τ=48 cells, high power)"
+n6 = 1.00
+perf = 0.92
+power = 0.72
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Tubular-SOFC"
+label = "Tubular SOFC Stack (hexagonal packing, 6-tube bundle, CHP)"
+n6 = 1.00
+perf = 0.78
+power = 0.65
+cost = 0.45
+
+# ============================================================
+# Level 2: BalanceOfPlant (6 candidates)
+# ============================================================
+
+[[level]]
+name = "BalanceOfPlant"
+
+[[candidate]]
+level = 2
+id = "Air-Compressor"
+label = "Centrifugal Air Compressor (6-blade impeller, σ=12 krpm)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Scroll-Compressor"
+label = "Scroll Compressor (quiet, 6:1 pressure ratio, compact)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Humidifier-6zone"
+label = "Membrane Humidifier (6-zone humidity control, water recovery)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Thermal-6circuit"
+label = "Thermal Management (6-circuit cooling, σ=12 temp sensors)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "H2-Recirculation"
+label = "H₂ Recirculation Pump (ejector+blower, n=6 recycle ratio)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Integrated-BOP"
+label = "Integrated BOP Module (all-in-one, 6 subsystems, compact)"
+n6 = 1.00
+perf = 0.90
+power = 0.68
+cost = 0.45
+
+# ============================================================
+# Level 3: Motor (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Motor"
+
+[[candidate]]
+level = 3
+id = "PMSM-6pole"
+label = "PMSM 6-Pole Motor (permanent magnet, n=6 pole pairs, 95%η)"
+n6 = 1.00
+perf = 0.92
+power = 0.90
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Induction"
+label = "AC Induction Motor (robust, 6-phase option, low-cost)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "SRM"
+label = "Switched Reluctance (no magnets, 6/4 pole config=n/τ, reliable)"
+n6 = 1.00
+perf = 0.72
+power = 0.82
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "Axial-Flux"
+label = "Axial Flux Motor (disc type, σ=12 coils, high torque density)"
+n6 = 1.00
+perf = 0.90
+power = 0.88
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Dual-Motor"
+label = "Dual Motor AWD (φ=2 motors, front+rear, performance)"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "In-Wheel"
+label = "In-Wheel Hub Motor (direct drive, τ=4 wheel motors, agile)"
+n6 = 0.85
+perf = 0.85
+power = 0.78
+cost = 0.40
+
+# ============================================================
+# Level 4: Vehicle (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Vehicle"
+
+[[candidate]]
+level = 4
+id = "Sedan"
+label = "Sedan (Mirai-class, 6kg H₂ tank, 600km range)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "SUV"
+label = "SUV/Crossover (n=6 seat, σ=12kg H₂, family)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Heavy-Truck"
+label = "Heavy Duty Truck (σ·τ=48kg H₂, 6-axle, long haul)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Bus-Transit"
+label = "Transit Bus (σ=12m length, n=6 H₂ tanks, city route)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Light-Commercial"
+label = "Light Commercial Van (delivery, 6m³ cargo, urban)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Marine-Vessel"
+label = "Marine Vessel (ferry/tugboat, J₂=24 cell modules, maritime)"
+n6 = 1.00
+perf = 0.78
+power = 0.55
+cost = 0.35
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Ceramic proton conductor only for tubular SOFC
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Ceramic-Proton"
+then_level = 1
+then_ids = ["Tubular-SOFC"]
+
+# Tubular SOFC not suitable for vehicles needing fast startup
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Tubular-SOFC"
+then_level = 4
+then_ids = ["Marine-Vessel", "Heavy-Truck"]
+
+# In-wheel motors only for sedan/SUV (not heavy truck)
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "In-Wheel"
+then_level = 4
+then_ids = ["Sedan", "SUV", "Light-Commercial"]
+
+# Large format stack for heavy-duty applications
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Large-Format"
+then_level = 4
+then_ids = ["Heavy-Truck", "Bus-Transit", "Marine-Vessel"]

@@ -1,0 +1,357 @@
+# =============================================================
+# Quantum Sensor DSE Domain Definition
+# Quantum sensing devices — qubit to application
+# n=6: NV center in Diamond Z=6, φ=2 spin states, σ=12 measurement axes
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "quantum-sensor"
+desc = "Quantum Sensor Architecture DSE (qubit/interaction/readout/processing/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Qubit (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Qubit"
+
+[[candidate]]
+level = 0
+id = "NV-Diamond"
+label = "NV Center Diamond (Carbon Z=6, φ=2 spin states, room temp)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Trapped-Ion"
+label = "Trapped Ion (6 hyperfine levels, ultra-precise, atomic clock)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "SQUID"
+label = "SQUID (superconducting loop, φ=2 Josephson junctions, magnetic)"
+n6 = 0.85
+perf = 0.92
+power = 0.40
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Cold-Atom"
+label = "Cold Atom Ensemble (6 laser beams MOT, interferometry, gravity)"
+n6 = 1.00
+perf = 0.93
+power = 0.45
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Photon-Pair"
+label = "Entangled Photon Pair (SPDC, φ=2 correlated photons, quantum)"
+n6 = 0.85
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "SiV-Diamond"
+label = "SiV Center Diamond (Z=6 host, σ=12 GHz splitting, telecom)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.45
+
+# ============================================================
+# Level 1: Interaction (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Interaction"
+
+[[candidate]]
+level = 1
+id = "Magnetic-Field"
+label = "Magnetic Field Sensing (nT resolution, 6-axis vector, NV optimal)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Gravity"
+label = "Gravity/Acceleration (ng resolution, 6 DOF inertial, navigation)"
+n6 = 1.00
+perf = 0.88
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "Electric-Field"
+label = "Electric Field (Rydberg atoms, σ=12 GHz bandwidth, RF sensing)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Temperature"
+label = "Temperature (mK resolution, 6 nm scale, intracellular)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Rotation"
+label = "Rotation/Gyroscope (Sagnac, 6 loop paths, GPS-denied nav)"
+n6 = 1.00
+perf = 0.87
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "Time-Frequency"
+label = "Time/Frequency (10^-18 stability, 6 transition lines, clock)"
+n6 = 1.00
+perf = 0.98
+power = 0.45
+cost = 0.30
+
+# ============================================================
+# Level 2: Readout (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Readout"
+
+[[candidate]]
+level = 2
+id = "Fluorescence"
+label = "Fluorescence Detection (photon counting, 6 filter bands, NV)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Microwave"
+label = "Microwave Resonance (ODMR, σ=12 frequency sweeps, standard)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Homodyne"
+label = "Homodyne Detection (phase-sensitive, φ=2 quadratures, quantum)"
+n6 = 0.85
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Absorption"
+label = "Absorption Imaging (cold atom, 6 μm resolution, ensemble)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "SQUID-Readout"
+label = "SQUID Amplifier (flux-to-voltage, σ=12 dynamic range decades)"
+n6 = 1.00
+perf = 0.92
+power = 0.45
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Single-Photon"
+label = "Single Photon Detector (SPAD, 6 ns timing, photon number)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.55
+
+# ============================================================
+# Level 3: Processing (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level = 3
+id = "Lock-In-Amp"
+label = "Lock-In Amplifier (6 harmonic detection, noise rejection, analog)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "FPGA-Realtime"
+label = "FPGA Real-Time (σ=12 ns loop, Bayesian estimation, fast)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "ML-Inference"
+label = "ML Inference Engine (neural decode, 6-layer network, adaptive)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Quantum-Error"
+label = "Quantum Error Correction (n=6 qubit code, fault tolerant)"
+n6 = 1.00
+perf = 0.88
+power = 0.50
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "Kalman-Filter"
+label = "Kalman Filter (6 state variables, optimal estimation, navigation)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Correlation"
+label = "Cross-Correlation (τ=4 delay channels, entanglement witness)"
+n6 = 0.85
+perf = 0.82
+power = 0.72
+cost = 0.65
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "Medical-MRI"
+label = "Medical MRI (nano-diamond contrast, 6 tissue types, imaging)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Navigation"
+label = "GPS-Free Navigation (gravity+magnetic map, 6 DOF, submarine)"
+n6 = 1.00
+perf = 0.88
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Geology"
+label = "Geological Survey (gravity gradient, 6 km depth, mineral)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Dark-Matter"
+label = "Dark Matter Search (ultra-sensitive, σ=12 month run, physics)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.25
+
+[[candidate]]
+level = 4
+id = "Biomedical"
+label = "Biomedical Sensing (intracellular, 6 nm resolution, in vivo)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Comms-Security"
+label = "Quantum Communication (QKD, 6 protocol layers, secure channel)"
+n6 = 1.00
+perf = 0.87
+power = 0.60
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# SQUID requires cryogenic — exclude room-temp applications
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "SQUID"
+then_level = 4
+then_ids = ["Biomedical", "Navigation"]
+
+# Cold atoms require gravity interaction for best performance
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Cold-Atom"
+then_level = 1
+then_ids = ["Gravity", "Rotation", "Time-Frequency"]
+
+# NV Diamond optimal for magnetic and temperature sensing
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "NV-Diamond"
+then_level = 1
+then_ids = ["Magnetic-Field", "Temperature"]
+
+# Single photon detector requires photon-based qubits
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Single-Photon"
+then_level = 0
+then_ids = ["NV-Diamond", "SiV-Diamond", "Photon-Pair"]

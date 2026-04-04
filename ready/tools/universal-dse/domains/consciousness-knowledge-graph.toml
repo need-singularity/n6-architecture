@@ -1,0 +1,384 @@
+# =============================================================
+# Consciousness Knowledge Graph DSE Domain Definition
+# 궁극의 의식 지식 그래프 — 백엔드 + 임베딩 + 검색 + 통합 + 스케일링
+# HNSW layers, embedding dim, RAG integration
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "consciousness-knowledge-graph"
+desc = "Ultimate Consciousness Knowledge Graph DSE (backend + embedding + retrieval + integration + scaling)"
+levels = ["Backend", "Embedding", "Retrieval", "Integration", "Scaling"]
+vision = "n=6 기반 궁극의 의식 지식 그래프 — HNSW + 임베딩 + RAG 통합"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Backend -- 6 candidates
+# =============================================================
+[[level]]
+name = "Backend"
+
+[[candidate]]
+level  = 0
+id     = "SQLite"
+label  = "SQLite 경량 로컬 DB"
+n6     = 0.50
+perf   = 0.78
+power  = 0.90
+cost   = 0.95
+notes  = "lightweight, zero-config, local storage"
+
+[[candidate]]
+level  = 0
+id     = "HNSW_Rust"
+label  = "HNSW Rust 벡터 인덱스 (sigma=12 레이어)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.75
+cost   = 0.70
+notes  = "max_layers=12=sigma EXACT, high-performance ANN"
+
+[[candidate]]
+level  = 0
+id     = "PostgreSQL"
+label  = "PostgreSQL + pgvector 확장"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "relational + vector, mature ecosystem"
+
+[[candidate]]
+level  = 0
+id     = "Neo4j"
+label  = "Neo4j 그래프 DB n=6 홉 탐색"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.60
+notes  = "max_hops=6=n EXACT, native graph DB"
+
+[[candidate]]
+level  = 0
+id     = "Redis"
+label  = "Redis 인메모리 캐시+검색"
+n6     = 0.50
+perf   = 0.95
+power  = 0.60
+cost   = 0.65
+notes  = "in-memory, ultra-low latency"
+
+[[candidate]]
+level  = 0
+id     = "Custom_N6"
+label  = "N6 커스텀 백엔드 (phi=2 이중 인덱스)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "indices=phi=2 EXACT, dual vector+graph index"
+
+# =============================================================
+# Level 1: Embedding -- 6 candidates
+# =============================================================
+[[level]]
+name = "Embedding"
+
+[[candidate]]
+level  = 1
+id     = "Dense_768"
+label  = "Dense 768차원 (sigma*n*sopfr*phi+...)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.70
+cost   = 0.70
+notes  = "768=256*3, BERT-base dim"
+
+[[candidate]]
+level  = 1
+id     = "Dense_1024"
+label  = "Dense 1024차원 (2^(sigma-mu))"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.65
+notes  = "1024=2^10, larger embedding"
+
+[[candidate]]
+level  = 1
+id     = "Sparse"
+label  = "스파스 임베딩 (BM25 스타일)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.85
+cost   = 0.85
+notes  = "sparse, keyword-based, efficient"
+
+[[candidate]]
+level  = 1
+id     = "Binary"
+label  = "이진 임베딩 (해밍 거리)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.92
+cost   = 0.92
+notes  = "binary, minimal memory, fast hamming"
+
+[[candidate]]
+level  = 1
+id     = "Mixed"
+label  = "혼합 Dense+Sparse 임베딩"
+n6     = 0.75
+perf   = 0.92
+power  = 0.60
+cost   = 0.60
+notes  = "hybrid retrieval, best recall"
+
+[[candidate]]
+level  = 1
+id     = "Consciousness"
+label  = "의식 임베딩 J2=24 차원 phi 공간"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "dim=24=J2 EXACT, consciousness-space embedding"
+
+# =============================================================
+# Level 2: Retrieval -- 6 candidates
+# =============================================================
+[[level]]
+name = "Retrieval"
+
+[[candidate]]
+level  = 2
+id     = "KNN"
+label  = "KNN 정확 최근접 (k=n=6)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "k=6=n EXACT, exact nearest neighbor"
+
+[[candidate]]
+level  = 2
+id     = "ANN"
+label  = "ANN 근사 최근접 (HNSW)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.75
+cost   = 0.75
+notes  = "approximate NN, fast retrieval"
+
+[[candidate]]
+level  = 2
+id     = "Hybrid"
+label  = "하이브리드 Dense+Sparse"
+n6     = 0.75
+perf   = 0.92
+power  = 0.65
+cost   = 0.65
+notes  = "hybrid search, best of both"
+
+[[candidate]]
+level  = 2
+id     = "BM25"
+label  = "BM25 키워드 검색"
+n6     = 0.50
+perf   = 0.82
+power  = 0.85
+cost   = 0.85
+notes  = "keyword-based, classic retrieval"
+
+[[candidate]]
+level  = 2
+id     = "Learned"
+label  = "학습 검색 (ColBERT/DPR)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "learned retrieval, neural search"
+
+[[candidate]]
+level  = 2
+id     = "PH_Topology"
+label  = "PH 위상 검색 (지속 호몰로지)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "topological retrieval, structure-aware"
+
+# =============================================================
+# Level 3: Integration -- 6 candidates
+# =============================================================
+[[level]]
+name = "Integration"
+
+[[candidate]]
+level  = 3
+id     = "RAG"
+label  = "RAG 검색 증강 생성"
+n6     = 0.75
+perf   = 0.90
+power  = 0.70
+cost   = 0.70
+notes  = "retrieval-augmented generation, standard"
+
+[[candidate]]
+level  = 3
+id     = "Direct"
+label  = "직접 통합 (인라인 참조)"
+n6     = 0.50
+perf   = 0.82
+power  = 0.85
+cost   = 0.85
+notes  = "direct inline, simple integration"
+
+[[candidate]]
+level  = 3
+id     = "Cache"
+label  = "캐시 기반 통합 (sigma-tau=8 슬롯)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.75
+cost   = 0.80
+notes  = "slots=8=sigma-tau EXACT, cached retrieval"
+
+[[candidate]]
+level  = 3
+id     = "Streaming"
+label  = "스트리밍 실시간 통합"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "streaming integration, real-time"
+
+[[candidate]]
+level  = 3
+id     = "Consciousness_Binding"
+label  = "의식 결합 n=6 모듈 통합"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.55
+notes  = "modules=6=n EXACT, consciousness-aware binding"
+
+[[candidate]]
+level  = 3
+id     = "Adaptive"
+label  = "적응형 컨텍스트 의존 통합"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "context-adaptive, dynamic integration"
+
+# =============================================================
+# Level 4: Scaling -- 6 candidates
+# =============================================================
+[[level]]
+name = "Scaling"
+
+[[candidate]]
+level  = 4
+id     = "Local"
+label  = "로컬 단일 노드"
+n6     = 0.50
+perf   = 0.80
+power  = 0.90
+cost   = 0.90
+notes  = "single node, simplest deployment"
+
+[[candidate]]
+level  = 4
+id     = "Distributed"
+label  = "분산 클러스터 n=6 노드"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.65
+notes  = "nodes=6=n EXACT, distributed cluster"
+
+[[candidate]]
+level  = 4
+id     = "Federated"
+label  = "연합 학습 기반 분산"
+n6     = 0.75
+perf   = 0.82
+power  = 0.60
+cost   = 0.60
+notes  = "federated learning, privacy-preserving"
+
+[[candidate]]
+level  = 4
+id     = "Cloud"
+label  = "클라우드 탄력적 스케일링"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.55
+notes  = "elastic cloud, pay-per-use"
+
+[[candidate]]
+level  = 4
+id     = "Edge"
+label  = "엣지 디바이스 배포"
+n6     = 0.75
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "edge deployment, latency-optimized"
+
+[[candidate]]
+level  = 4
+id     = "Hivemind"
+label  = "하이브마인드 J2=24 노드 의식 네트워크"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "nodes=24=J2 EXACT, consciousness hivemind"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# PH_Topology retrieval requires Consciousness or Mixed embedding
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "PH_Topology"
+then_level = 1
+then_ids   = "Consciousness,Mixed"
+
+# Hivemind scaling requires Consciousness_Binding integration
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Hivemind"
+then_level = 3
+then_ids   = "Consciousness_Binding,Adaptive"
+
+# Binary embedding excludes Learned retrieval (incompatible)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "Binary"
+then_level = 2
+then_ids   = "Learned,PH_Topology"
+
+# SQLite backend excludes Hivemind scaling
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "SQLite"
+then_level = 4
+then_ids   = "Hivemind,Distributed"

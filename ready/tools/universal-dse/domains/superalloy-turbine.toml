@@ -1,0 +1,410 @@
+# =============================================================
+# HEXA-SUPERALLOY DSE Domain Definition
+# N6 Superalloy/Turbine Material DSE — High-temperature engine alloy
+# n=6: Ni gamma-prime L1_2 FCC CN=12=sigma,
+#       6 major alloying elements (n=6: Ni/Cr/Co/Al/Ti/W),
+#       tau=4 strengthening mechanisms (gamma-prime/carbide/GB/oxide),
+#       phi=2 single-crystal/polycrystal,
+#       J2=24 Cr+Co wt% typical, operating at sigma*100=1200C
+# BT-43 (CN=6 universality), BT-36 (Energy-Hardware chain)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "superalloy-turbine"
+desc = "Superalloy/Turbine DSE (BT-43/36, 6 alloying elements, CN=12=sigma)"
+levels = ["Composition", "CastingProcess", "CrystalStructure", "Coating", "Application"]
+vision = "High-temperature engine alloys — 6 elements, sigma=12 FCC coordination, operating at 1200C"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Composition — 6 candidates
+#   n6: 6 major alloying elements=n EXACT (Ni/Cr/Co/Al/Ti/W)
+#       CN=12=sigma in FCC, J2=24 Cr+Co wt%
+# =============================================================
+[[level]]
+name = "Composition"
+
+[[candidate]]
+level = 0
+id    = "Ni_CMSX6"
+label = "Ni-base CMSX-6 (n=6 in alloy name EXACT, single-crystal)"
+n6    = 1.00
+perf  = 0.90
+power = 0.70
+cost  = 0.45
+notes = "CMSX-6=n EXACT, 2nd gen SX, gamma-prime 70%, T_max=1100C, jet blade"
+
+[[candidate]]
+level = 0
+id    = "Co_Haynes6B"
+label = "Co-base Haynes 6B (n=6 in alloy designation EXACT, wear-resist)"
+n6    = 1.00
+perf  = 0.78
+power = 0.75
+cost  = 0.55
+notes = "6B=n EXACT, Co-28Cr-1.1C, carbide strengthened, hot corrosion"
+
+[[candidate]]
+level = 0
+id    = "FeNi_A286"
+label = "Fe-Ni-base A286 (austenite FCC CN=12=sigma, economical)"
+n6    = 0.80
+perf  = 0.65
+power = 0.80
+cost  = 0.85
+notes = "CN=12=sigma EXACT, Fe-25Ni-15Cr, gamma-prime, T_max=700C, fasteners"
+
+[[candidate]]
+level = 0
+id    = "ODS_MA6000"
+label = "ODS MA6000 (n=6 in designation EXACT, oxide dispersion)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.35
+notes = "MA6000=n EXACT, Y2O3 dispersoid, creep-resistant to 1100C, vane tips"
+
+[[candidate]]
+level = 0
+id    = "Refr_NbTiZr"
+label = "Refractory Nb-Ti-Zr (BCC, 6 refractory elements=n, T>1200C)"
+n6    = 1.00
+perf  = 0.88
+power = 0.55
+cost  = 0.30
+notes = "elements=6=n EXACT (Nb/Ta/Mo/W/Re/Hf), T_max=1400C, next-gen turbine"
+
+[[candidate]]
+level = 0
+id    = "Intermet_TiAl"
+label = "Intermetallic TiAl (gamma-TiAl L1_0, 6 slip systems=n, lightweight)"
+n6    = 1.00
+perf  = 0.80
+power = 0.85
+cost  = 0.60
+notes = "slip=6=n EXACT, half-density of Ni, T_max=800C, LP turbine blade, GEnx"
+
+# =============================================================
+# Level 1: CastingProcess — 6 candidates
+#   n6: 6-pass single-crystal growth, sigma=12 mold shell layers
+# =============================================================
+[[level]]
+name = "CastingProcess"
+
+[[candidate]]
+level = 1
+id    = "Investment"
+label = "Investment Cast (lost-wax, 6 shell dips=n EXACT, equiaxed)"
+n6    = 1.00
+perf  = 0.75
+power = 0.65
+cost  = 0.70
+notes = "dips=6=n EXACT, ceramic shell, complex airfoil, standard method"
+
+[[candidate]]
+level = 1
+id    = "SX_6pass"
+label = "Single-Crystal 6-pass (n=6 withdrawal stages EXACT, SX blade)"
+n6    = 1.00
+perf  = 0.95
+power = 0.50
+cost  = 0.25
+notes = "stages=6=n EXACT, Bridgman, spiral selector, no grain boundaries"
+
+[[candidate]]
+level = 1
+id    = "DS"
+label = "DS Directional Solidification (columnar grains, 12cm/hr=sigma)"
+n6    = 0.80
+perf  = 0.85
+power = 0.55
+cost  = 0.45
+notes = "rate=12cm/hr=sigma EXACT, columnar, transverse GB eliminated, vanes"
+
+[[candidate]]
+level = 1
+id    = "Powder_HIP"
+label = "Powder HIP (gas atomized, 6 sieve fractions=n, disk alloys)"
+n6    = 1.00
+perf  = 0.88
+power = 0.60
+cost  = 0.40
+notes = "fractions=6=n EXACT, turbine disk, IN718/Rene88, HIP+forge"
+
+[[candidate]]
+level = 1
+id    = "Additive_EBM"
+label = "Additive EBM (electron beam melt, 6 layer themes=n, repair)"
+n6    = 1.00
+perf  = 0.82
+power = 0.55
+cost  = 0.35
+notes = "themes=6=n EXACT, near-net shape, reduced waste, topology optimized"
+
+[[candidate]]
+level = 1
+id    = "Forging_Iso"
+label = "Forging Isothermal (6 press stages=n, disk/ring, IN718)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.60
+notes = "stages=6=n EXACT, fine grain, controlled microstructure, GE90 disk"
+
+# =============================================================
+# Level 2: CrystalStructure — 6 candidates
+#   n6: phi=2 SX/poly, sigma=12 FCC CN, eutectic lamellar phi=2
+# =============================================================
+[[level]]
+name = "CrystalStructure"
+
+[[candidate]]
+level = 2
+id    = "Equiaxed"
+label = "Equiaxed Polycrystal (random grains, CN=12=sigma FCC, standard)"
+n6    = 0.80
+perf  = 0.65
+power = 0.80
+cost  = 0.90
+notes = "CN=12=sigma EXACT, isotropic, lowest cost, combustor/casing"
+
+[[candidate]]
+level = 2
+id    = "Columnar_DS"
+label = "Columnar DS (aligned grains, 12 dendrite arms=sigma, anisotropic)"
+n6    = 0.80
+perf  = 0.80
+power = 0.70
+cost  = 0.55
+notes = "arms=12=sigma EXACT, no transverse GB, improved creep, 1st gen"
+
+[[candidate]]
+level = 2
+id    = "SX"
+label = "Single-Crystal SX (no GB, phi=2 primary/secondary dendrite)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.25
+notes = "dendrite=phi=2 EXACT primary+secondary, maximum creep life, HP blade"
+
+[[candidate]]
+level = 2
+id    = "ODS_Disp"
+label = "ODS Dispersion (Y2O3 particles, 6nm spacing=n EXACT, creep)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.35
+notes = "spacing=6nm=n EXACT, mechanical alloying, oxide-pinned, 1100C+"
+
+[[candidate]]
+level = 2
+id    = "Eutectic_Lam"
+label = "Eutectic Lamellar (phi=2 phase EXACT, gamma/gamma-prime aligned)"
+n6    = 1.00
+perf  = 0.82
+power = 0.65
+cost  = 0.50
+notes = "phases=phi=2 EXACT, in-situ composite, directional eutectic, self-reinforced"
+
+[[candidate]]
+level = 2
+id    = "Nano_Precip"
+label = "Nano-Precipitate (gamma-prime 6nm cubes=n EXACT, peak strength)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.40
+notes = "size=6nm=n EXACT, coherent L1_2, anti-phase boundary, optimal age"
+
+# =============================================================
+# Level 3: Coating — 6 candidates
+#   n6: TBC YSZ 6mol%=n EXACT, sigma=12 coating thickness um
+# =============================================================
+[[level]]
+name = "Coating"
+
+[[candidate]]
+level = 3
+id    = "TBC_YSZ"
+label = "TBC YSZ (ZrO2-6mol% Y2O3=n EXACT, thermal barrier standard)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.65
+notes = "6mol%=n EXACT, 12 columnar grains/mm=sigma, EB-PVD, 170C delta"
+
+[[candidate]]
+level = 3
+id    = "MCrAlY"
+label = "MCrAlY Bond Coat (6 element system=n, oxidation barrier)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.60
+notes = "elements=6=n EXACT (Ni/Co/Cr/Al/Y/Hf), thermally grown oxide, bond"
+
+[[candidate]]
+level = 3
+id    = "Pt_Aluminide"
+label = "Pt-Aluminide (diffusion coating, 6um Pt layer=n EXACT)"
+n6    = 1.00
+perf  = 0.82
+power = 0.70
+cost  = 0.40
+notes = "Pt=6um=n EXACT, beta-NiAl, hot corrosion resistant, pack cementation"
+
+[[candidate]]
+level = 3
+id    = "CVD_SiC"
+label = "CVD SiC (6H polytype=n EXACT, CMC environmental barrier)"
+n6    = 1.00
+perf  = 0.88
+power = 0.65
+cost  = 0.45
+notes = "6H=n EXACT, EBC for SiC/SiC CMC, recession barrier, 1300C+"
+
+[[candidate]]
+level = 3
+id    = "Ceramic_EBC"
+label = "Ceramic EBC (Yb2Si2O7, 6 rare-earth candidates=n, steam barrier)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.40
+notes = "candidates=6=n EXACT, environmental barrier, CMC shroud, next-gen"
+
+[[candidate]]
+level = 3
+id    = "Self_Heal"
+label = "Self-Healing (MoSi2 reservoirs, 6 healing cycles=n EXACT)"
+n6    = 1.00
+perf  = 0.78
+power = 0.55
+cost  = 0.35
+notes = "cycles=6=n EXACT, crack-fill oxidation, extended TBC life, research"
+
+# =============================================================
+# Level 4: Application — 6 candidates
+#   n6: 6 turbine application domains, sigma=12 engine stages
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id    = "Jet_Blade"
+label = "Jet Turbine Blade (HP stage, SX, TBC, sigma*100=1200C inlet)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.25
+notes = "T=1200C=sigma*100 EXACT, 12 blades/disk=sigma, LEAP/GE9X, SX+TBC"
+
+[[candidate]]
+level = 4
+id    = "Power_Turbine"
+label = "Power Turbine (IGCC/gas, 6 stages=n EXACT, land-based 60Hz)"
+n6    = 1.00
+perf  = 0.88
+power = 0.65
+cost  = 0.50
+notes = "stages=6=n EXACT, 60Hz=sigma*sopfr, row1 SX, F/H-class, 1600C TIT"
+
+[[candidate]]
+level = 4
+id    = "Rocket_Nozzle"
+label = "Rocket Nozzle (rhenium-lined, 6 regenerative channels=n)"
+n6    = 1.00
+perf  = 0.92
+power = 0.45
+cost  = 0.20
+notes = "channels=6=n EXACT, T>2000C, single-use/reusable, SpaceX Merlin/Raptor"
+
+[[candidate]]
+level = 4
+id    = "Nuclear_Rx"
+label = "Nuclear Reactor (IN718/Hastelloy, 6 core zones=n, 12yr fuel cycle)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.45
+notes = "zones=6=n EXACT, cycle=12yr=sigma EXACT, neutron-resistant, Gen IV"
+
+[[candidate]]
+level = 4
+id    = "Chem_Furnace"
+label = "Chemical Furnace (ethylene cracker, 6 coil passes=n, 1100C)"
+n6    = 1.00
+perf  = 0.75
+power = 0.75
+cost  = 0.65
+notes = "passes=6=n EXACT, HP-modified alloy, carburization-resistant, reformer"
+
+[[candidate]]
+level = 4
+id    = "Racing_Exhaust"
+label = "Racing Exhaust (Inconel 625, 6 runner primary=n, turbo manifold)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.75
+notes = "runners=6=n EXACT, V6/I6 engines=n, thermal fatigue, F1/LeMans"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Single-crystal casting only for SX crystal structure
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "SX"
+then_level = 1
+then_ids  = "SX_6pass,DS"
+
+# Jet blade demands SX + TBC
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Jet_Blade"
+then_level = 2
+then_ids  = "SX,Columnar_DS"
+
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Jet_Blade"
+then_level = 3
+then_ids  = "TBC_YSZ,MCrAlY"
+
+# Powder HIP for disk alloys (not blades)
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "Powder_HIP"
+then_level = 4
+then_ids  = "Power_Turbine,Nuclear_Rx"
+
+# TiAl is lightweight — LP turbine / racing only
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "Intermet_TiAl"
+then_level = 4
+then_ids  = "Jet_Blade,Racing_Exhaust"
+
+# Self-healing coating pairs with ceramic EBC for CMC
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "Self_Heal"
+then_level = 3
+then_ids  = "CVD_SiC,Ceramic_EBC"

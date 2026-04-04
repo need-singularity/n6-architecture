@@ -1,0 +1,338 @@
+# N6 Packaging Machine DSE — Packaging machinery
+# 6 MachineType x 6 SealingMethod x 6 Material x 6 Inspection x 6 Application = 7,776 combos
+# n=6: 6 packaging types (fill-seal/wrap/carton/blister/vacuum/shrink), sigma=12 packs/min throughput
+# tau=4 seal methods (heat/ultrasonic/adhesive/mechanical), phi=2 primary/secondary, J2=24 station rotary
+
+[meta]
+name = "packaging-machine"
+desc = "Packaging Machine DSE (6 packaging types=n, sigma=12 packs/min, J2=24 station rotary)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: MachineType (포장기 유형)
+#   n6 checks: 6 types=n, sigma=12 packs/min, phi=2 primary/secondary, J2=24 stations
+# ============================================================
+
+[[level]]
+name = "MachineType"
+
+[[candidate]]
+id = "FillSeal"
+label = "Form-Fill-Seal (6 forming stations=n, 12 packs/min=sigma, 2 primary/secondary=phi)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "Wrap"
+label = "Flow Wrapper (6 fold guides=n, 12 m/min film speed=sigma, 24 packs/min=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "Carton"
+label = "Carton Erector/Packer (6 carton sizes=n, 12 cartons/min=sigma, 4 fold patterns=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "Blister"
+label = "Blister Pack (6 cavity layouts=n, 12 blisters/min=sigma, 4 seal stations=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "Vacuum"
+label = "Vacuum Packer (6 vacuum chambers=n, 12 mbar absolute=sigma, 2 gas flush=phi)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.75
+
+[[candidate]]
+id = "Shrink"
+label = "Shrink Wrapper (6 heat zones=n, 12 shrink tunnels/hr=sigma, 4 temperature profiles=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.85
+
+# ============================================================
+# Level 1: SealingMethod (실링 방법)
+#   n6 checks: 6 seal methods, sigma=12 mm seal width, tau=4 seal types
+# ============================================================
+
+[[level]]
+name = "SealingMethod"
+
+[[candidate]]
+id = "HeatSeal"
+label = "Heat Seal (6 temperature zones=n, 12 mm seal width=sigma, 4 jaw profiles=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "Ultrasonic"
+label = "Ultrasonic Seal (6 horn assemblies=n, 12 kW generator=sigma, 24 kHz frequency=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "Adhesive"
+label = "Hot Melt Adhesive (6 nozzle heads=n, 12 g/min glue rate=sigma, 4 pattern modes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "Mechanical"
+label = "Mechanical Crimp (6 crimp stations=n, 12 kN force=sigma, 2 top/bottom crimp=phi)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "InductionSeal"
+label = "Induction Seal (6 coil heads=n, 12 kW induction power=sigma, 24 cap sizes=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "LaserSeal"
+label = "Laser Seal (6 laser modules=n, 12 W per module=sigma, 4 weld patterns=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.50
+
+# ============================================================
+# Level 2: Material (포장 소재)
+#   n6 checks: 6 material families, sigma=12 month shelf life, tau=4 barrier layers
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "PE_Film"
+label = "Polyethylene Film (C6-adjacent chain, 6 density grades=n, 12 um thickness=sigma)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "PET"
+label = "PET Polyester (6 crystallinity levels=n, 12 month barrier=sigma, 4 coatings=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "Aluminum"
+label = "Aluminum Foil (6 temper grades=n, 12 um gauge=sigma, 24 month shelf life=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "MultiLayer"
+label = "Multi-Layer Laminate (6 layer structure=n, 12 month barrier=sigma, 4 adhesive types=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+id = "PaperBoard"
+label = "Paperboard Carton (6 caliper grades=n, 12 pt thickness=sigma, 4 print methods=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "BioPLA"
+label = "Bio-PLA Compostable (C6H8O4 lactic base, 6 blend ratios=n, 12 month compost=sigma)"
+n6 = 1.00
+perf = 0.65
+power = 0.85
+cost = 0.70
+
+# ============================================================
+# Level 3: Inspection (검사)
+#   n6 checks: 6 inspection types, sigma=12 check parameters, tau=4 reject modes
+# ============================================================
+
+[[level]]
+name = "Inspection"
+
+[[candidate]]
+id = "VisionCheck"
+label = "Vision Inspection (6 camera stations=n, 12 defect classes=sigma, 24 fps capture=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "WeightCheck"
+label = "Checkweigher (6 load cells=n, 12 g resolution=sigma, 4 reject lanes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+id = "MetalDetect"
+label = "Metal Detector (6 sensitivity zones=n, 12 frequency bands=sigma, 2 ferrous/non=phi)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "XrayInspect"
+label = "X-ray Inspection (6 detector arrays=n, 12 keV range=sigma, 4 density thresholds=tau)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.45
+
+[[candidate]]
+id = "LeakTest"
+label = "Leak Testing (6 test chambers=n, 12 mbar vacuum=sigma, 24 sec cycle=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "LabelVerify"
+label = "Label Verification OCR (6 print zones=n, 12 barcode types=sigma, 4 language checks=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.75
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: 6 industry sectors, sigma=12 regulatory params, J2=24h production
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "FoodSnack"
+label = "Food/Snack (6 HACCP zones=n, 12 allergen controls=sigma, 24h production=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "PharmBlister"
+label = "Pharmaceutical (6 GMP zones=n, 12 CFR part 11 params=sigma, 4 validation stages=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "Beverage"
+label = "Beverage Bottling (6 fill heads=n, 12000 bottles/hr=sigma*10^3, 24h line operation=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "CosmeticCare"
+label = "Cosmetic/Personal Care (6 product forms=n, 12 fill volumes=sigma, 4 closure types=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "EcommFulfill"
+label = "E-commerce Fulfillment (6 box sizes=n, 12 SKU categories=sigma, 24h dispatch=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "Electronics"
+label = "Electronics ESD-Safe (6 ESD zones=n, 12 humidity controls=sigma, 4 cushioning levels=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.60
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Blister pack requires heat seal or ultrasonic seal
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Blister"
+then_level = 1
+then_ids = "HeatSeal,Ultrasonic"
+
+# Pharmaceutical requires X-ray inspection or vision check
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "PharmBlister"
+then_level = 3
+then_ids = "XrayInspect,VisionCheck"
+
+# Vacuum packer pairs with multi-layer or aluminum material
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Vacuum"
+then_level = 2
+then_ids = "MultiLayer,Aluminum"
+
+# Laser seal best for pharma or electronics application
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "LaserSeal"
+then_level = 4
+then_ids = "PharmBlister,Electronics"
+
+# Bio-PLA material pairs with food or cosmetic application
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "BioPLA"
+then_level = 4
+then_ids = "FoodSnack,CosmeticCare"

@@ -1,0 +1,390 @@
+# =============================================================
+# HEXA-SHIP DSE Domain Definition
+# Maritime Autonomous Systems
+# n=6: 6 collision avoidance zones, sigma=12 radar channels
+# BT-59 (8-layer AI stack), BT-74 (95/5 cross-domain)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "autonomous-ship"
+desc = "Maritime Autonomous System DSE (6 COLREG zones, sigma=12 radar)"
+levels = ["Hull", "Navigation", "Propulsion", "Communication", "Fleet"]
+vision = "Autonomous maritime — 6-zone collision avoidance, 12-channel awareness"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Hull — 6 candidates
+#   n6: 6 bulkhead compartments, 12 frame stations
+# =============================================================
+[[level]]
+name = "Hull"
+
+[[candidate]]
+level = 0
+id    = "Container"
+label = "Container Ship (6 cargo holds, 12 frame bays, 6000 TEU)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.55
+notes = "holds=6=n EXACT, bays=12=sigma EXACT, TEU=6000=n*10^3"
+
+[[candidate]]
+level = 0
+id    = "Bulk_Carrier"
+label = "Bulk Carrier (6 holds, 12 ballast tanks, Panamax)"
+n6    = 1.00
+perf  = 0.75
+power = 0.65
+cost  = 0.70
+notes = "holds=6=n EXACT, tanks=12=sigma EXACT, grain/ore"
+
+[[candidate]]
+level = 0
+id    = "Tanker"
+label = "Chemical Tanker (6 double-hull sections, 12 cargo tanks)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.50
+notes = "sections=6=n EXACT, tanks=12=sigma EXACT, IMO II"
+
+[[candidate]]
+level = 0
+id    = "RoRo"
+label = "Ro-Ro Vehicle Carrier (6 car decks, 12 ramps)"
+n6    = 1.00
+perf  = 0.70
+power = 0.60
+cost  = 0.65
+notes = "decks=6=n EXACT, ramps=12=sigma EXACT, 6000 CEU"
+
+[[candidate]]
+level = 0
+id    = "Ferry"
+label = "Autonomous Ferry (6 passenger zones, 12 safety stations)"
+n6    = 1.00
+perf  = 0.65
+power = 0.70
+cost  = 0.75
+notes = "zones=6=n EXACT, stations=12=sigma EXACT, harbor shuttle"
+
+[[candidate]]
+level = 0
+id    = "USV_Patrol"
+label = "Unmanned Surface Vehicle (6m LOA, 12 sensor mounts)"
+n6    = 1.00
+perf  = 0.60
+power = 0.85
+cost  = 0.80
+notes = "LOA=6m=n EXACT, mounts=12=sigma EXACT, patrol/survey"
+
+# =============================================================
+# Level 1: Navigation — 6 candidates
+#   n6: 6 collision avoidance zones, 12 radar channels
+# =============================================================
+[[level]]
+name = "Navigation"
+
+[[candidate]]
+level = 1
+id    = "ARPA_Radar"
+label = "ARPA + AIS Fusion (6 COLREG zones, 12 target tracks)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.80
+notes = "zones=6=n EXACT, tracks=12=sigma EXACT, IMO compliant"
+
+[[candidate]]
+level = 1
+id    = "LiDAR_360"
+label = "Maritime LiDAR 360 (6 LiDAR heads, 12 Hz scan rate)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.55
+notes = "heads=6=n EXACT, rate=12Hz=sigma EXACT, fog penetration"
+
+[[candidate]]
+level = 1
+id    = "Camera_AI"
+label = "AI Camera Array (6 cameras 360deg, 12 object classes)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.70
+notes = "cameras=6=n EXACT, classes=12=sigma EXACT, DNN detection"
+
+[[candidate]]
+level = 1
+id    = "Sensor_Fusion"
+label = "Full Sensor Fusion (6 sensor types, 12 fusion layers, redundant)"
+n6    = 1.00
+perf  = 0.95
+power = 0.50
+cost  = 0.35
+notes = "types=6=n EXACT, layers=12=sigma EXACT, radar+LiDAR+cam+AIS+sonar+GPS"
+
+[[candidate]]
+level = 1
+id    = "ECDIS_Auto"
+label = "Auto-ECDIS (6 chart layers, 12 waypoint queue, path planning)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.75
+notes = "layers=6=n EXACT, waypoints=12=sigma EXACT, electronic chart"
+
+[[candidate]]
+level = 1
+id    = "Sonar_USV"
+label = "Sonar + Underwater (6 beam channels, 12 kHz frequency)"
+n6    = 1.00
+perf  = 0.65
+power = 0.60
+cost  = 0.65
+notes = "beams=6=n EXACT, freq=12kHz=sigma EXACT, underwater obstacle"
+
+# =============================================================
+# Level 2: Propulsion — 6 candidates
+#   n6: 6-cylinder engine, 12 knots cruise, 48V DC bus
+# =============================================================
+[[level]]
+name = "Propulsion"
+
+[[candidate]]
+level = 2
+id    = "Diesel_Elec"
+label = "Diesel-Electric (6 cylinder gensets, 12 MW power, hybrid)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.75
+notes = "cylinders=6=n EXACT, power=12MW=sigma EXACT, proven"
+
+[[candidate]]
+level = 2
+id    = "LNG_Dual"
+label = "LNG Dual-Fuel (6 injectors, 12 bar fuel pressure)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.60
+notes = "injectors=6=n EXACT, pressure=12bar=sigma EXACT, low emissions"
+
+[[candidate]]
+level = 2
+id    = "Battery_Full"
+label = "Full Battery Electric (6 MWh packs, 12 knots cruise)"
+n6    = 1.00
+perf  = 0.60
+power = 0.90
+cost  = 0.50
+notes = "packs=6MWh=n EXACT, cruise=12kn=sigma EXACT, zero emission"
+
+[[candidate]]
+level = 2
+id    = "H2_Fuel_Cell"
+label = "Hydrogen Fuel Cell (6 cell stacks, 12 MW, PEM marine)"
+n6    = 1.00
+perf  = 0.75
+power = 0.85
+cost  = 0.35
+notes = "stacks=6=n EXACT, power=12MW=sigma EXACT, green hydrogen"
+
+[[candidate]]
+level = 2
+id    = "Ammonia"
+label = "Ammonia Engine (NH3, 6 cylinder, 2-stroke slow-speed)"
+n6    = 1.00
+perf  = 0.70
+power = 0.70
+cost  = 0.55
+notes = "cylinders=6=n EXACT, 2-stroke=phi EXACT, carbon-free fuel"
+
+[[candidate]]
+level = 2
+id    = "WindAssist"
+label = "Wind-Assisted + Diesel (6 Flettner rotors, 12% fuel saving)"
+n6    = 1.00
+perf  = 0.65
+power = 0.75
+cost  = 0.65
+notes = "rotors=6=n EXACT, saving=12%=sigma EXACT, retrofit"
+
+# =============================================================
+# Level 3: Communication — 6 candidates
+#   n6: 6 frequency bands, 12 data channels, 24/7 link
+# =============================================================
+[[level]]
+name = "Communication"
+
+[[candidate]]
+level = 3
+id    = "VSAT_Ka"
+label = "VSAT Ka-band (6 antenna beams, 12 Mbps uplink)"
+n6    = 1.00
+perf  = 0.80
+power = 0.60
+cost  = 0.55
+notes = "beams=6=n EXACT, uplink=12Mbps=sigma EXACT, global coverage"
+
+[[candidate]]
+level = 3
+id    = "LEO_Sat"
+label = "LEO Satellite (6 satellite links, 12 ms latency)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.40
+notes = "links=6=n EXACT, latency=12ms=sigma EXACT, Starlink maritime"
+
+[[candidate]]
+level = 3
+id    = "VHF_AIS"
+label = "VHF + AIS (6 VHF channels, 12 AIS slots/min)"
+n6    = 1.00
+perf  = 0.60
+power = 0.80
+cost  = 0.90
+notes = "channels=6=n EXACT, slots=12=sigma EXACT, SOLAS mandatory"
+
+[[candidate]]
+level = 3
+id    = "Mesh_ShipNet"
+label = "Ship-to-Ship Mesh (6 peer connections, 12 hop max)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.60
+notes = "peers=6=n EXACT, hops=12=sigma EXACT, convoy comm"
+
+[[candidate]]
+level = 3
+id    = "Cyber_Secure"
+label = "Cyber-Secure Link (6 encryption layers, 12 auth tokens)"
+n6    = 1.00
+perf  = 0.75
+power = 0.55
+cost  = 0.50
+notes = "layers=6=n EXACT, tokens=12=sigma EXACT, anti-spoofing"
+
+[[candidate]]
+level = 3
+id    = "Shore_5G"
+label = "Shore 5G Private (6 base stations, 12 GHz mmWave, coastal)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.45
+notes = "stations=6=n EXACT, freq=12GHz=sigma EXACT, port approach"
+
+# =============================================================
+# Level 4: Fleet — 6 candidates
+#   n6: 6 ships/convoy, 12 port calls, 24h schedule
+# =============================================================
+[[level]]
+name = "Fleet"
+
+[[candidate]]
+level = 4
+id    = "Convoy_6"
+label = "Autonomous Convoy (6 ships/convoy, 12 port calls/route)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.55
+notes = "ships=6=n EXACT, ports=12=sigma EXACT, leader-follower"
+
+[[candidate]]
+level = 4
+id    = "Hub_Spoke"
+label = "Hub-Spoke Fleet (6 hub ports, 12 feeder vessels)"
+n6    = 1.00
+perf  = 0.80
+power = 0.60
+cost  = 0.60
+notes = "hubs=6=n EXACT, feeders=12=sigma EXACT, network optimization"
+
+[[candidate]]
+level = 4
+id    = "Remote_Center"
+label = "Remote Operations Center (6 operators, 12 ships monitored)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.65
+notes = "operators=6=n EXACT, ships=12=sigma EXACT, shore-based control"
+
+[[candidate]]
+level = 4
+id    = "USV_Swarm"
+label = "USV Swarm (6 USVs/cluster, 12 clusters, survey/patrol)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.50
+notes = "USVs=6=n EXACT, clusters=12=sigma EXACT, coordinated"
+
+[[candidate]]
+level = 4
+id    = "Green_Route"
+label = "Green Corridor (6 emission zones, 12 route segments, IMO)"
+n6    = 1.00
+perf  = 0.80
+power = 0.85
+cost  = 0.45
+notes = "zones=6=n EXACT, segments=12=sigma EXACT, decarbonization"
+
+[[candidate]]
+level = 4
+id    = "Port_Auto"
+label = "Autonomous Port Integration (6 berths, 12 crane slots, automated)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.40
+notes = "berths=6=n EXACT, cranes=12=sigma EXACT, fully automated terminal"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# USV hull too small for diesel-electric
+[[rule]]
+type      = "exclude"
+if_level  = 0
+if_id     = "USV_Patrol"
+then_level = 2
+then_ids  = "Diesel_Elec,LNG_Dual,Ammonia"
+
+# Full battery only for short-range ferry
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "Battery_Full"
+then_level = 0
+then_ids  = "Ferry,USV_Patrol"
+
+# Full sensor fusion for large vessel autonomy
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "Sensor_Fusion"
+then_level = 4
+then_ids  = "Convoy_6,Port_Auto"
+
+# LEO satellite for deep-sea operations
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "LEO_Sat"
+then_level = 4
+then_ids  = "Convoy_6,Green_Route"

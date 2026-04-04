@@ -1,0 +1,105 @@
+{
+  "predictions": [
+    {
+      "id": "TP-PL-1",
+      "name": "J\u2082=24 Instruction Completeness",
+      "status": "PASS",
+      "detail": "actual=24, expected=24",
+      "source": "Theorem 1 (physical-limit-proofs.md)"
+    },
+    {
+      "id": "TP-PL-2",
+      "name": "\u03c3=12 Pipeline Speedup",
+      "status": "PASS",
+      "detail": "actual=8.91, min=2.0",
+      "source": "sigma_pipeline.rs benchmark"
+    },
+    {
+      "id": "TP-PL-3",
+      "name": "Egyptian Allocation Efficiency",
+      "status": "PASS",
+      "detail": "positive \u2713",
+      "source": "egyptian_alloc.rs benchmark"
+    },
+    {
+      "id": "TP-PL-4",
+      "name": "n=6 Constant Folding > 33%",
+      "status": "PASS",
+      "detail": "actual=55.20, min=33.3",
+      "source": "n6_const_fold.rs benchmark"
+    },
+    {
+      "id": "TP-PL-5",
+      "name": "\u03c3\u00b2=144 Function Processing",
+      "status": "PASS",
+      "detail": "actual=144, expected=144",
+      "source": "main.rs full pipeline benchmark"
+    },
+    {
+      "id": "TP-PL-6",
+      "name": "Overall Instruction Reduction > 0",
+      "status": "PASS",
+      "detail": "positive \u2713",
+      "source": "main.rs full pipeline benchmark"
+    },
+    {
+      "id": "TP-PL-7",
+      "name": "LLVM IR Emission",
+      "status": "PASS",
+      "detail": "positive \u2713",
+      "source": "main.rs LLVM emission path"
+    },
+    {
+      "id": "TP-PL-8",
+      "name": "Topological DCE Advantage",
+      "status": "PASS",
+      "detail": "positive \u2713",
+      "source": "topological_dce.rs benchmark"
+    },
+    {
+      "id": "TP-PL-9",
+      "name": "sopfr=5 Safety Categories",
+      "status": "PASS",
+      "detail": "actual=5, expected=5",
+      "source": "Theorem 2 (physical-limit-proofs.md)"
+    },
+    {
+      "id": "TP-PL-10",
+      "name": "Self-Hosting Bootstrap Stages",
+      "status": "PASS",
+      "detail": "actual=4, expected=4",
+      "source": "Theorem 6 (self-hosting-and-limits.md)"
+    },
+    {
+      "id": "TP-PL-11",
+      "name": "Design Constants 100% EXACT",
+      "status": "PASS",
+      "detail": "actual=1.0, expected=1.0",
+      "source": "alien_index_gate.py"
+    },
+    {
+      "id": "TP-PL-12",
+      "name": "\u03c4=4 Type Layers Decidable",
+      "status": "PASS",
+      "detail": "actual=4, expected=4",
+      "source": "Theorem 4 (physical-limit-proofs.md)"
+    }
+  ],
+  "passed": 12,
+  "total": 12,
+  "ratio": 1.0,
+  "metrics": {
+    "opcode_count": 24,
+    "functions_processed": 144,
+    "total_reduction_positive": true,
+    "egyptian_frag_advantage": true,
+    "fold_reduction_pct": 55.2,
+    "pipeline_speedup": 8.91,
+    "topo_ge_naive": true,
+    "llvm_ir_emitted": true,
+    "safety_categories": 5,
+    "bootstrap_stages": 4,
+    "n6_exact_ratio": 1.0,
+    "type_layers": 4
+  }
+}

@@ -1,0 +1,376 @@
+# =============================================================
+# Crystallography DSE Domain Definition
+# 결정학 아키텍처 — n=6 기반 결정학
+# 6방정계 + 결정제한정리 + 32점군 + 230공간군
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "crystallography"
+desc = "Ultimate Crystallography DSE (Hexagonal/Restriction Theorem/32 Point Groups)"
+levels = ["Symmetry", "System", "Diffraction", "Growth", "Application"]
+vision = "n=6 기반 결정학 — 6방정계 + 결정제한정리 + 32점군 + 230공간군"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Symmetry (대칭성) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Symmetry"
+
+[[candidate]]
+level  = 0
+id     = "PointGroupN32"
+label  = "32 점군 (crystallographic point groups)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "groups=32, orders_max=48=sigma*tau EXACT, generators=6=n"
+
+[[candidate]]
+level  = 0
+id     = "SpaceGroupN230"
+label  = "230 공간군"
+n6     = 0.50
+perf   = 0.90
+power  = 0.48
+cost   = 0.38
+notes  = "groups=230, bravais=14, systems=7, operations=6=n basic"
+
+[[candidate]]
+level  = 0
+id     = "CrystallographicRestriction"
+label  = "결정제한정리: n=1,2,3,4,6만 허용 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "allowed={1,2,3,4,6} max=6=n EXACT, phi(6)=2 EXACT, tau(6)=4 divisors"
+
+[[candidate]]
+level  = 0
+id     = "BravaisN14"
+label  = "14 브라베 격자"
+n6     = 0.50
+perf   = 0.80
+power  = 0.58
+cost   = 0.48
+notes  = "lattices=14, systems=7, centering=4=tau EXACT, dim=3=n/phi"
+
+[[candidate]]
+level  = 0
+id     = "WallpaperN17"
+label  = "17 벽지군 (2D)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.62
+cost   = 0.52
+notes  = "groups=17, max_order=6=n EXACT, rotation=6=n fold max"
+
+[[candidate]]
+level  = 0
+id     = "SymmetryOperN6"
+label  = "6 대칭 연산 (E,Cn,sigma,i,Sn,sigma_d) n=6 EXACT"
+n6     = 1.00
+perf   = 0.82
+power  = 0.55
+cost   = 0.45
+notes  = "operations=6=n EXACT, generators=2=phi EXACT, classes=4=tau"
+
+# =============================================================
+# Level 1: System (결정계) -- 6 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 1
+id     = "HexagonalN6"
+label  = "6방정계 n=6 EXACT 대칭"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "fold=6=n EXACT, axes=4 (a1,a2,a3,c), angles=120=sigma*sopfr*phi"
+
+[[candidate]]
+level  = 1
+id     = "CubicN4"
+label  = "입방정 tau=4 3-fold 축"
+n6     = 0.75
+perf   = 0.92
+power  = 0.50
+cost   = 0.40
+notes  = "3-fold=4=tau EXACT, 4-fold=3=n/phi, point_groups=5=sopfr EXACT"
+
+[[candidate]]
+level  = 1
+id     = "TetragonalN4"
+label  = "정방정 tau=4 fold"
+n6     = 0.50
+perf   = 0.82
+power  = 0.58
+cost   = 0.48
+notes  = "fold=4=tau EXACT, unique_axis=1=mu EXACT, space_groups=68"
+
+[[candidate]]
+level  = 1
+id     = "OrthorhombicN3"
+label  = "사방정 n/phi=3 축"
+n6     = 0.50
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "axes=3=n/phi EXACT, 2-fold=3, centering=4=tau EXACT"
+
+[[candidate]]
+level  = 1
+id     = "MonoclinicN2"
+label  = "단사정 phi=2 fold"
+n6     = 0.50
+perf   = 0.72
+power  = 0.65
+cost   = 0.55
+notes  = "fold=2=phi EXACT, unique_axis=1=mu EXACT, beta!=90"
+
+[[candidate]]
+level  = 1
+id     = "TriclinicN1"
+label  = "삼사정 mu=1 최소 대칭"
+n6     = 0.25
+perf   = 0.65
+power  = 0.70
+cost   = 0.60
+notes  = "fold=1=mu EXACT, point_groups=2=phi, space_groups=2=phi"
+
+# =============================================================
+# Level 2: Diffraction (회절) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Diffraction"
+
+[[candidate]]
+level  = 2
+id     = "XRayN12"
+label  = "X선 회절 sigma=12 keV 범위"
+n6     = 0.75
+perf   = 0.92
+power  = 0.50
+cost   = 0.40
+notes  = "energy=12=sigma keV EXACT, wavelength=1.54A CuKa, resolution=high"
+
+[[candidate]]
+level  = 2
+id     = "NeutronDiffraction"
+label  = "중성자 회절 (경/중원소 구별)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "wavelength=1-2A, magnetic=true, H_visible=true, isotope=2=phi"
+
+[[candidate]]
+level  = 2
+id     = "ElectronDiffraction"
+label  = "전자 회절 tau=4 전압 범위"
+n6     = 0.75
+perf   = 0.88
+power  = 0.52
+cost   = 0.42
+notes  = "voltages=4=tau EXACT (60,120,200,300kV), thin_sample=true, TEM"
+
+[[candidate]]
+level  = 2
+id     = "SynchrotronN6"
+label  = "싱크로트론 n=6 빔라인 유형"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "beamlines=6=n EXACT, energy_range=12=sigma EXACT, brilliance=max"
+
+[[candidate]]
+level  = 2
+id     = "LaueMethod"
+label  = "라우에 법 phi=2 반사 (전/역 라우에)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "modes=2=phi EXACT (forward/back), polychromatic=true, quick"
+
+[[candidate]]
+level  = 2
+id     = "PowderDiffraction"
+label  = "분말 회절 sopfr=5 피크 인덱싱"
+n6     = 0.75
+perf   = 0.80
+power  = 0.58
+cost   = 0.48
+notes  = "indices=5=sopfr EXACT parameters, Rietveld=true, quantitative=true"
+
+# =============================================================
+# Level 3: Growth (결정 성장) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Growth"
+
+[[candidate]]
+level  = 3
+id     = "MeltGrowth"
+label  = "용융 성장 Czochralski"
+n6     = 0.50
+perf   = 0.90
+power  = 0.48
+cost   = 0.40
+notes  = "rotation=6=n rpm range, pull=1=mu mm/hr, diameter=12=sigma inches max"
+
+[[candidate]]
+level  = 3
+id     = "VaporDeposition"
+label  = "기상 증착 CVD/PVD phi=2 종류"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "types=2=phi EXACT (CVD/PVD), layers=6=n EXACT, temp_zones=4=tau"
+
+[[candidate]]
+level  = 3
+id     = "SolutionGrowth"
+label  = "용액 성장 sopfr=5 용매 계열"
+n6     = 0.50
+perf   = 0.78
+power  = 0.60
+cost   = 0.50
+notes  = "solvents=5=sopfr EXACT, supersaturation=2=phi EXACT, slow"
+
+[[candidate]]
+level  = 3
+id     = "MBE"
+label  = "분자선 에피택시 sigma=12 셀"
+n6     = 1.00
+perf   = 0.92
+power  = 0.42
+cost   = 0.32
+notes  = "cells=12=sigma EXACT, pressure=UHV, growth_rate=1=mu monolayer/s"
+
+[[candidate]]
+level  = 3
+id     = "ALD"
+label  = "원자층 증착 phi=2 사이클 (precursor/purge)"
+n6     = 0.75
+perf   = 0.82
+power  = 0.58
+cost   = 0.48
+notes  = "half_cycles=2=phi EXACT, thickness=1=mu nm/cycle, conformality=100%"
+
+[[candidate]]
+level  = 3
+id     = "SeedCrystal"
+label  = "종자 결정 n=6 면 방위"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "orientations=6=n EXACT, quality=high, defect_free=true"
+
+# =============================================================
+# Level 4: Application (응용) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Semiconductor"
+label  = "반도체 Si/GaAs 결정"
+n6     = 0.75
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "materials=2=phi EXACT (Si/GaAs), wafer=12=sigma inch, diamond_cubic"
+
+[[candidate]]
+level  = 4
+id     = "Pharmaceutical"
+label  = "의약품 결정 다형체"
+n6     = 0.50
+perf   = 0.82
+power  = 0.58
+cost   = 0.48
+notes  = "polymorphs=variable, screening=6=n conditions, bioavailability=key"
+
+[[candidate]]
+level  = 4
+id     = "Protein"
+label  = "단백질 결정학 tau=4 급수"
+n6     = 0.50
+perf   = 0.88
+power  = 0.45
+cost   = 0.35
+notes  = "resolution=4=tau A typical, symmetry=6=n groups common, PDB"
+
+[[candidate]]
+level  = 4
+id     = "Piezoelectric"
+label  = "압전 결정 n=6 방향"
+n6     = 1.00
+perf   = 0.85
+power  = 0.52
+cost   = 0.42
+notes  = "directions=6=n EXACT, d33_high=true, hexagonal_preferred=true"
+
+[[candidate]]
+level  = 4
+id     = "Photonic"
+label  = "광결정 sigma=12 밴드"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "bands=12=sigma EXACT, dim=3=n/phi EXACT, bandgap=tunable"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CrystallographicRestriction is n6=1.0 (the theorem IS about n=6) -- already set
+
+# HexagonalN6 required for Piezoelectric
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Piezoelectric"
+then_level = 1
+then_ids   = "HexagonalN6"
+
+# XRayN12 requires PointGroupN32 or SpaceGroupN230 (needs symmetry for indexing)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "XRayN12"
+then_level = 0
+then_ids   = "PointGroupN32,SpaceGroupN230"
+
+# MBE requires SynchrotronN6 or ElectronDiffraction (needs in-situ monitoring)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "MBE"
+then_level = 2
+then_ids   = "SynchrotronN6,ElectronDiffraction"
+
+# TriclinicN1 incompatible with Piezoelectric (no piezo in triclinic)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "TriclinicN1"
+then_level = 4
+then_ids   = "Piezoelectric"

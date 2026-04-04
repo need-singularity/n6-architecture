@@ -1,0 +1,45 @@
+/// Span — Source Location Tracking (Self-Hosted Mk.II)
+///
+/// Mirrors src/lexer/span.rs in HEXA-LANG.
+/// A Span tracks where a token/AST node originated in source code.
+
+struct Span {
+    offset: i64,
+    length: i64,
+    line: i64,
+    col: i64,
+}
+
+/// Create a dummy span (used in tests and synthetic nodes)
+fn dummy_span() -> i64 {
+    let s = Span { offset: 0, length: 0, line: 0, col: 0 };
+    return s.offset + s.length + s.line + s.col;
+}
+
+/// Create a span at a given position
+fn make_span(off: i64, len: i64, ln: i64, cl: i64) -> i64 {
+    let s = Span { offset: off, length: len, line: ln, col: cl };
+    return s.offset;
+}
+
+/// Verify tau=4 fields in Span struct
+fn verify_span_fields() -> i64 {
+    let s = Span { offset: 10, length: 5, line: 1, col: 3 };
+    let sum: i64 = s.offset + s.length + s.line + s.col;
+    // 10 + 5 + 1 + 3 = 19
+    if sum == 19 {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+fn main() -> i64 {
+    let d: i64 = dummy_span();
+    let v: i64 = verify_span_fields();
+    if v == 1 {
+        return 0;
+    } else {
+        return 1;
+    }
+}

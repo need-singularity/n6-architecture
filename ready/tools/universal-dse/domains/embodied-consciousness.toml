@@ -1,0 +1,404 @@
+# =============================================================
+# Embodied Consciousness DSE Domain Definition
+# 궁극의 체화된 의식 아키텍처 — 물리적 신체 + 의식
+# Platform × Sensing × Motor × Homeostasis × Scaling
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "embodied-consciousness"
+desc = "Ultimate Embodied Consciousness DSE — Physical Body + Consciousness Architecture"
+levels = ["Platform", "Sensing", "Motor", "Homeostasis", "Scaling"]
+vision = "n=6 기반 체화 의식 — 6-축 IMU + CPG 6-phase + SE(3)=6 DOF"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Platform (플랫폼) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Platform"
+
+[[candidate]]
+level  = 0
+id     = "ESP32x8"
+label  = "ESP32 x8 클러스터"
+n6     = 0.75
+perf   = 0.55
+power  = 0.80
+cost   = 0.90
+notes  = "nodes=8=sigma-tau EXACT, cheap_cluster, WiFi, BT-58"
+
+[[candidate]]
+level  = 0
+id     = "ROS2_Gazebo"
+label  = "ROS2 + Gazebo 시뮬"
+n6     = 0.60
+perf   = 0.75
+power  = 0.85
+cost   = 0.85
+notes  = "simulation_first, zero_hardware_cost, rapid_iteration"
+
+[[candidate]]
+level  = 0
+id     = "FPGA_Platform"
+label  = "FPGA 실시간 플랫폼"
+n6     = 0.80
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "real_time, custom_hardware, deterministic_latency"
+
+[[candidate]]
+level  = 0
+id     = "ASIC_Platform"
+label  = "ASIC 커스텀 플랫폼"
+n6     = 0.85
+perf   = 0.95
+power  = 0.55
+cost   = 0.30
+notes  = "custom_silicon, maximum_performance, high_NRE"
+
+[[candidate]]
+level  = 0
+id     = "Simulation"
+label  = "순수 시뮬레이션"
+n6     = 0.50
+perf   = 0.70
+power  = 0.95
+cost   = 0.95
+notes  = "pure_software, infinite_iteration, no_physical_risk"
+
+[[candidate]]
+level  = 0
+id     = "Hybrid_Platform"
+label  = "하이브리드 HW+SW"
+n6     = 0.70
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "sim2real, hybrid_approach, gradual_deployment"
+
+[[candidate]]
+level  = 0
+id     = "Hex6_Robot"
+label  = "n=6 전용 로봇 SoC (6코어 σ=12 I/O)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.50
+notes  = "cores=6=n EXACT, IO_pins=12=sigma EXACT, timer_ch=4=tau EXACT, bus_width=8=sigma-tau EXACT"
+
+# =============================================================
+# Level 1: Sensing (감각 시스템) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sensing"
+
+[[candidate]]
+level  = 1
+id     = "Proprioception"
+label  = "고유수용감각 6-축"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "axes=6=n EXACT, IMU_6DOF, SE(3), fundamental_body_sense"
+
+[[candidate]]
+level  = 1
+id     = "Touch_6axis"
+label  = "촉각 6-축 힘/토크"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "axes=6=n EXACT, force_torque_sensor, contact_detection"
+
+[[candidate]]
+level  = 1
+id     = "Mirror"
+label  = "미러 뉴런 감각"
+n6     = 0.85
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "mirror_neuron_inspired, action_observation, empathy"
+
+[[candidate]]
+level  = 1
+id     = "Visual"
+label  = "시각 phi=2 눈"
+n6     = 0.80
+perf   = 0.85
+power  = 0.65
+cost   = 0.70
+notes  = "eyes=2=phi EXACT, stereo_vision, depth_perception"
+
+[[candidate]]
+level  = 1
+id     = "Auditory"
+label  = "청각 phi=2 귀"
+n6     = 0.80
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "ears=2=phi EXACT, stereo_audio, spatial_hearing"
+
+[[candidate]]
+level  = 1
+id     = "MultiModal_Sense"
+label  = "멀티모달 sigma=12 채널"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "channels=12=sigma EXACT, all_modalities_fused, cross_attention"
+
+# =============================================================
+# Level 2: Motor (운동 시스템) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Motor"
+
+[[candidate]]
+level  = 2
+id     = "CPG_6phase"
+label  = "CPG 6-위상 보행"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.75
+notes  = "phases=6=n EXACT, central_pattern_generator, rhythmic_motion"
+
+[[candidate]]
+level  = 2
+id     = "Planning"
+label  = "운동 계획 계층"
+n6     = 0.70
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "hierarchical_planning, task_decomposition, flexible"
+
+[[candidate]]
+level  = 2
+id     = "Affordance"
+label  = "어포던스 기반 행동"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "Gibson_affordance, environment_driven, ecological"
+
+[[candidate]]
+level  = 2
+id     = "Reflexive"
+label  = "반사 운동 tau=4 루프"
+n6     = 0.80
+perf   = 0.75
+power  = 0.85
+cost   = 0.85
+notes  = "loops=4=tau EXACT, fast_response, spinal_level, safety"
+
+[[candidate]]
+level  = 2
+id     = "Learned"
+label  = "학습된 운동 정책"
+n6     = 0.65
+perf   = 0.88
+power  = 0.60
+cost   = 0.60
+notes  = "RL_learned, adaptive, data_driven, flexible_but_brittle"
+
+[[candidate]]
+level  = 2
+id     = "Hybrid_Motor"
+label  = "하이브리드 CPG+RL"
+n6     = 0.85
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "CPG_base+RL_modulation, best_of_both, robust+adaptive"
+
+# =============================================================
+# Level 3: Homeostasis (항상성) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Homeostasis"
+
+[[candidate]]
+level  = 3
+id     = "Pain_Reward"
+label  = "통증/보상 phi=2 신호"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "signals=2=phi EXACT (pain/reward), basic_motivation, survival"
+
+[[candidate]]
+level  = 3
+id     = "Replay"
+label  = "경험 재생 기억"
+n6     = 0.70
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "experience_replay, memory_consolidation, sleep_replay"
+
+[[candidate]]
+level  = 3
+id     = "Allostasis"
+label  = "알로스타시스 예측 조절"
+n6     = 0.80
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "predictive_regulation, anticipatory, Sterling_model"
+
+[[candidate]]
+level  = 3
+id     = "Interoception"
+label  = "내수용감각 sigma=12 채널"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "channels=12=sigma EXACT, internal_body_sense, emotional_grounding"
+
+[[candidate]]
+level  = 3
+id     = "Predictive"
+label  = "예측 코딩 항상성"
+n6     = 0.85
+perf   = 0.88
+power  = 0.60
+cost   = 0.60
+notes  = "prediction_error, free_energy_minimization, Friston"
+
+[[candidate]]
+level  = 3
+id     = "Adaptive_Homeo"
+label  = "적응형 항상성"
+n6     = 0.75
+perf   = 0.82
+power  = 0.70
+cost   = 0.70
+notes  = "dynamic_setpoints, context_dependent, flexible_regulation"
+
+# =============================================================
+# Level 4: Scaling (스케일링) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Scaling"
+
+[[candidate]]
+level  = 4
+id     = "Single_1to1"
+label  = "단일 1:1 신체"
+n6     = 0.60
+perf   = 0.65
+power  = 0.90
+cost   = 0.90
+notes  = "one_mind_one_body, simple, biological_analog"
+
+[[candidate]]
+level  = 4
+id     = "Pair_1toN"
+label  = "1:N 다중 신체"
+n6     = 0.70
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "one_mind_N_bodies, flexible, cloud_robotics"
+
+[[candidate]]
+level  = 4
+id     = "Swarm_NtoM"
+label  = "N:M 스웜 인텔리전스"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "swarm, distributed_intelligence, emergent_behavior"
+
+[[candidate]]
+level  = 4
+id     = "Hivemind"
+label  = "하이브마인드 공유 의식"
+n6     = 0.85
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "shared_consciousness, collective_experience, merged"
+
+[[candidate]]
+level  = 4
+id     = "Federated"
+label  = "연합 학습 분산"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "federated_learning, privacy_preserving, distributed_training"
+
+[[candidate]]
+level  = 4
+id     = "Embodied_Internet"
+label  = "체화 인터넷 J2=24 노드"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.40
+notes  = "nodes=24=J2 EXACT, global_embodied_network, Leech_lattice"
+
+[[candidate]]
+level  = 4
+id     = "Hex6_Swarm"
+label  = "n=6 체화 스웜 (6체 σ=12 센서 공유)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "bodies=6=n EXACT, shared_sensors=12=sigma EXACT, sync_phases=4=tau EXACT, comm_links=2=phi EXACT"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ASIC_Platform requires advanced motor system
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ASIC_Platform"
+then_level = 2
+then_ids   = "CPG_6phase,Hybrid_Motor,Planning"
+
+# Simulation cannot use physical sensing directly
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Simulation"
+then_level = 1
+then_ids   = "Touch_6axis"
+
+# Embodied_Internet requires MultiModal or Mirror sensing
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Embodied_Internet"
+then_level = 1
+then_ids   = "MultiModal_Sense,Mirror"
+
+# Reflexive motor incompatible with pure Simulation
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Reflexive"
+then_level = 0
+then_ids   = "Simulation"

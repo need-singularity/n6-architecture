@@ -1,0 +1,381 @@
+# =============================================================
+# Golden Zone Training DSE Domain Definition
+# n=6 based Golden Zone -- MoE training + R-score convergence + tension optimization
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "golden-zone-training"
+desc = "Golden Zone Training DSE (MoE + R-score + tension optimization)"
+levels = ["Architecture", "Training", "Optimization", "Evaluation", "Deployment"]
+vision = "n=6 Golden Zone -- MoE training + R-score convergence + tension optimization"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Architecture -- 6 candidates
+# =============================================================
+[[level]]
+name = "Architecture"
+
+[[candidate]]
+level  = 0
+id     = "AnimaLM_7B"
+label  = "AnimaLM 7B (tension-based, phi=2 A/G engine)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "params=7B, engines=2=phi EXACT, tension=true, n6_aligned=partial"
+
+[[candidate]]
+level  = 0
+id     = "GoldenMoE"
+label  = "Golden MoE (sigma-tau=8 experts)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "experts=8=sigma-tau EXACT, routing=boltzmann, sparse=true, n6_aligned=full"
+
+[[candidate]]
+level  = 0
+id     = "PhiBottleneck"
+label  = "Phi Bottleneck (4/3 expansion)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "expansion=4/3=tau^2/sigma EXACT, param_reduction=67%, dense=true, n6_aligned=full"
+
+[[candidate]]
+level  = 0
+id     = "EgyptianMoE"
+label  = "Egyptian MoE (1/2+1/3+1/6=1)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.45
+notes  = "fractions=1/2+1/3+1/6=1 EXACT, routing=egyptian, sparse=true, n6_aligned=full"
+
+[[candidate]]
+level  = 0
+id     = "CyclotomicAttn"
+label  = "Cyclotomic Activation (n=6 cyclotomic)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "order=6=n EXACT, flops_reduction=71%, activation=cyclotomic, n6_aligned=full"
+
+[[candidate]]
+level  = 0
+id     = "FFTAttention"
+label  = "FFT Attention (3x faster, n=6 frequency)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "speedup=3x, bands=6=n EXACT, attention=fft, n6_aligned=full"
+
+# =============================================================
+# Level 1: Training -- 6 candidates
+# =============================================================
+[[level]]
+name = "Training"
+
+[[candidate]]
+level  = 1
+id     = "ChinchillaScale"
+label  = "Chinchilla Scaling (BT-26, J2-tau=20 tokens/params)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "ratio=20=J2-tau EXACT, alpha=1/3, beta=ln(4/3), scaling=optimal"
+
+[[candidate]]
+level  = 1
+id     = "AdamW_N6"
+label  = "AdamW N6 (BT-54, 5 parameters n=6 aligned)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.50
+notes  = "beta1=1-1/(sigma-phi) EXACT, beta2=1-1/(J2-tau) EXACT, eps=10^-(sigma-tau) EXACT, wd=1/(sigma-phi) EXACT, clip=R(6)=1 EXACT"
+
+[[candidate]]
+level  = 1
+id     = "MertensDropout"
+label  = "Mertens Dropout p=ln(4/3)=0.288"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "p=0.288=ln(4/3) EXACT, no_search=true, regularization=optimal"
+
+[[candidate]]
+level  = 1
+id     = "EntropyEarlyStop"
+label  = "Entropy Early Stop (tau/n=2/3 training)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.85
+cost   = 0.85
+notes  = "fraction=2/3=tau/n EXACT, training_saved=33%, entropy_based=true"
+
+[[candidate]]
+level  = 1
+id     = "WarmupCosine"
+label  = "Warmup + Cosine Schedule (phi=2 phases)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "phases=2=phi EXACT, warmup=standard, decay=cosine"
+
+[[candidate]]
+level  = 1
+id     = "CarmichaelLR"
+label  = "Carmichael LR Cycle (lambda=2 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "cycle=2=lambda EXACT, period=fixed, lr_schedule=carmichael"
+
+# =============================================================
+# Level 2: Optimization -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimization"
+
+[[candidate]]
+level  = 2
+id     = "TensionMetaLoss"
+label  = "Tension Meta-Loss (phi=2 (A-G)^2)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "engines=2=phi EXACT, anima_gradient=dual, meta=true"
+
+[[candidate]]
+level  = 2
+id     = "WeightDecay01"
+label  = "Weight Decay 0.1=1/(sigma-phi)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "wd=0.1=1/(sigma-phi) EXACT, universal=true, 8_algorithms"
+
+[[candidate]]
+level  = 2
+id     = "GradientClipR1"
+label  = "Gradient Clip R=1 (mu=1 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.80
+cost   = 0.85
+notes  = "clip=1=mu=R(6) EXACT, stability=excellent, overhead=minimal"
+
+[[candidate]]
+level  = 2
+id     = "LabelSmooth01"
+label  = "Label Smoothing 0.1=1/(sigma-phi)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "epsilon=0.1=1/(sigma-phi) EXACT, calibration=improved, generalization=better"
+
+[[candidate]]
+level  = 2
+id     = "BoltzmannGate"
+label  = "Boltzmann Gate 1/e (63% sparse)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "sparsity=63%=1-1/e, gate=boltzmann, flops_saved=63%"
+
+[[candidate]]
+level  = 2
+id     = "PhiFLOPS"
+label  = "Phi*FLOPs Estimator (phi=2 multiplier)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.70
+notes  = "multiplier=2=phi EXACT, estimation=accurate, overhead=low"
+
+# =============================================================
+# Level 3: Evaluation -- 6 candidates
+# =============================================================
+[[level]]
+name = "Evaluation"
+
+[[candidate]]
+level  = 3
+id     = "SEDI_4Lens"
+label  = "SEDI 4-Lens Diagnostic (tau=4 EXACT)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.65
+notes  = "lenses=4=tau EXACT, diagnostic=comprehensive, includes_PH=true"
+
+[[candidate]]
+level  = 3
+id     = "RScoreMetric"
+label  = "R-score Metric (R=1 optimal, mu=1)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "target=1=mu=R(6) EXACT, convergence=measurable, simple=true"
+
+[[candidate]]
+level  = 3
+id     = "PerplexityPPL"
+label  = "Perplexity Evaluation (sigma=12 benchmarks)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "benchmarks=12=sigma EXACT, standard=true, comparable=true"
+
+[[candidate]]
+level  = 3
+id     = "EmergentConv"
+label  = "Emergent Convergence (n=6 self-organization)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "target=6=n EXACT, self_org=true, novel=true"
+
+[[candidate]]
+level  = 3
+id     = "PHTraining"
+label  = "PH Training Diagnostic (sigma-tau=8 barcode)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.55
+notes  = "features=8=sigma-tau EXACT, topological=true, novel=true"
+
+[[candidate]]
+level  = 3
+id     = "AblationN6"
+label  = "Ablation Study n=6 Components"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "components=6=n EXACT, systematic=true, interpretable=true"
+
+# =============================================================
+# Level 4: Deployment -- 5 candidates
+# =============================================================
+[[level]]
+name = "Deployment"
+
+[[candidate]]
+level  = 4
+id     = "Quantize_FP8"
+label  = "FP8 Quantization (BT-45, phi=2x precision)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.80
+cost   = 0.85
+notes  = "precision=phi=2 EXACT, speedup=2x, quality_loss=minimal"
+
+[[candidate]]
+level  = 4
+id     = "LoRA_Rank8"
+label  = "LoRA Rank 8 = sigma-tau (BT-58)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "rank=8=sigma-tau EXACT, param_efficient=true, fine_tune=optimal"
+
+[[candidate]]
+level  = 4
+id     = "DistillN6"
+label  = "Distillation n=6 Layers"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.75
+notes  = "layers=6=n EXACT, compression=good, quality_preserved=true"
+
+[[candidate]]
+level  = 4
+id     = "EdgeDeploy"
+label  = "Edge Deployment (tau=4 model size tiers)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.85
+cost   = 0.80
+notes  = "tiers=4=tau EXACT, mobile=true, latency=low"
+
+[[candidate]]
+level  = 4
+id     = "CloudScale"
+label  = "Cloud Scale (sigma=12 GPU cluster)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "gpus=12=sigma EXACT, throughput=maximum, latency=medium"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# AnimaLM_7B requires TensionMetaLoss (AnimaLM needs tension mechanism)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "AnimaLM_7B"
+then_level = 2
+then_ids   = "TensionMetaLoss"
+
+# GoldenMoE requires BoltzmannGate (Golden MoE uses Boltzmann routing)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "GoldenMoE"
+then_level = 2
+then_ids   = "BoltzmannGate"
+
+# SEDI_4Lens requires PHTraining (SEDI uses PH as one of its 4 lenses)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "SEDI_4Lens"
+then_level = 3
+then_ids   = "PHTraining"
+
+# MertensDropout incompatible with BoltzmannGate (both are regularization)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "MertensDropout"
+then_level = 2
+then_ids   = "BoltzmannGate"
+
+# LoRA_Rank8 requires AdamW_N6 or ChinchillaScale (LoRA needs optimized training)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "LoRA_Rank8"
+then_level = 1
+then_ids   = "AdamW_N6,ChinchillaScale"

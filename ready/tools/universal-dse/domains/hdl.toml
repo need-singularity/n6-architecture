@@ -1,0 +1,410 @@
+# =============================================================
+# HDL DSE Domain Definition
+# 궁극의 하드웨어 기술 언어 — n=6 기반 HDL + AI 합성 통합
+# Chain: Abstraction → Synthesis → Verification → Simulation → Ecosystem
+# Total raw combos: 7x6x6x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "hdl"
+desc = "Ultimate Hardware Description Language DSE — n=6 aligned HDL architecture"
+levels = ["Abstraction", "Synthesis", "Verification", "Simulation", "Ecosystem"]
+vision = "Say 'build this chip' and it auto-generates verified RTL -- n=6 silicon-first language"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Abstraction (설계 추상화) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Abstraction"
+
+[[candidate]]
+level  = 0
+id     = "RTL_Classic"
+label  = "Classic RTL (Verilog/VHDL), tau=4 abstraction levels"
+n6     = 0.75
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "abs_levels=4=tau EXACT, maturity=highest, tool_support=universal, learn=hard"
+
+[[candidate]]
+level  = 0
+id     = "HLS_CStyle"
+label  = "C/C++ HLS (Vivado HLS), phi=2 SW/HW"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "domains=2=phi EXACT, maturity=high, tool_support=vendor, learn=med"
+
+[[candidate]]
+level  = 0
+id     = "ChiselDSL"
+label  = "Scala DSL (Chisel/SpinalHDL), n=6 generator types"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "gen_types=6=n EXACT, maturity=growing, tool_support=open, learn=med"
+
+[[candidate]]
+level  = 0
+id     = "PythonHDL"
+label  = "Python HDL (Amaranth/MyHDL), sopfr=5 transform passes"
+n6     = 0.75
+perf   = 0.70
+power  = 0.70
+cost   = 0.65
+notes  = "passes=5=sopfr EXACT, maturity=emerging, tool_support=open, learn=easy"
+
+[[candidate]]
+level  = 0
+id     = "BluespecBSV"
+label  = "Bluespec BSV Rule-Based, sigma-tau=8 rule types"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "rule_types=8=sigma-tau EXACT, maturity=niche, tool_support=limited, learn=hard"
+
+[[candidate]]
+level  = 0
+id     = "SystemC_TLM"
+label  = "SystemC TLM, sigma=12 abstraction levels"
+n6     = 1.00
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "abs_levels=12=sigma EXACT, maturity=high, tool_support=good, learn=hard"
+
+[[candidate]]
+level  = 0
+id     = "FormalSpec"
+label  = "Formal Spec (TLA+/Alloy), J2=24 spec properties"
+n6     = 1.00
+perf   = 0.60
+power  = 0.40
+cost   = 0.35
+notes  = "properties=24=J2 EXACT, maturity=academic, tool_support=limited, learn=hardest"
+
+# =============================================================
+# Level 1: Synthesis (합성 파이프라인) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Synthesis"
+
+[[candidate]]
+level  = 1
+id     = "ASIC_Flow"
+label  = "ASIC Synthesis (Design Compiler), n=6 stages"
+n6     = 1.00
+perf   = 1.00
+power  = 0.45
+cost   = 0.30
+notes  = "stages=6=n EXACT, quality=best, speed=slow, license=expensive"
+
+[[candidate]]
+level  = 1
+id     = "FPGA_Flow"
+label  = "FPGA Synthesis (Vivado/Quartus), tau=4 impl stages"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "stages=4=tau EXACT, quality=good, speed=med, license=vendor"
+
+[[candidate]]
+level  = 1
+id     = "OpenSource"
+label  = "Open-Source (Yosys+nextpnr), sopfr=5 passes"
+n6     = 0.75
+perf   = 0.65
+power  = 0.75
+cost   = 0.80
+notes  = "passes=5=sopfr EXACT, quality=improving, speed=fast, license=free"
+
+[[candidate]]
+level  = 1
+id     = "CloudFPGA"
+label  = "Cloud FPGA Synthesis"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "stages=3, quality=good, speed=elastic, license=pay_per_use"
+
+[[candidate]]
+level  = 1
+id     = "AIOptSynth"
+label  = "AI-Optimized Synthesis"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "stages=4, quality=ML_guided, speed=variable, license=proprietary"
+
+[[candidate]]
+level  = 1
+id     = "IncrSynth"
+label  = "Incremental Synthesis, phi=2 change modes"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "modes=2=phi EXACT, quality=preserved, speed=fast_iter, license=vendor"
+
+# =============================================================
+# Level 2: Verification (검증) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Verification"
+
+[[candidate]]
+level  = 2
+id     = "UVM_Class"
+label  = "UVM Class-Based, sigma=12 components"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "components=12=sigma EXACT, maturity=industry_std, reuse=high, setup=complex"
+
+[[candidate]]
+level  = 2
+id     = "FormalVerif"
+label  = "Formal Verification (model checking), tau=4 property types"
+n6     = 0.75
+perf   = 0.70
+power  = 0.35
+cost   = 0.30
+notes  = "prop_types=4=tau EXACT, precision=absolute, scale=limited, bugs=subtle"
+
+[[candidate]]
+level  = 2
+id     = "CosimHybrid"
+label  = "Co-simulation Hybrid, phi=2 domains"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "domains=2=phi EXACT, precision=system, scale=good, integration=complex"
+
+[[candidate]]
+level  = 2
+id     = "EmulationHW"
+label  = "HW Emulation (Palladium), sigma-tau=8 debug channels"
+n6     = 1.00
+perf   = 0.95
+power  = 0.35
+cost   = 0.20
+notes  = "channels=8=sigma-tau EXACT, precision=cycle, scale=full_chip, cost=extreme"
+
+[[candidate]]
+level  = 2
+id     = "CoverDriven"
+label  = "Coverage-Driven Verification"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "auto_close=true, precision=statistical, scale=good, setup=moderate"
+
+[[candidate]]
+level  = 2
+id     = "AITestGen"
+label  = "AI Test Vector Generation, n=6 scenarios"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "scenarios=6=n EXACT, precision=ML_guided, scale=adaptive, novelty=high"
+
+# =============================================================
+# Level 3: Simulation (시뮬레이션) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Simulation"
+
+[[candidate]]
+level  = 3
+id     = "EventDriven"
+label  = "Event-Driven (Icarus/VCS), tau=4 event types"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "events=4=tau EXACT, precision=event, speed=standard, scale=med"
+
+[[candidate]]
+level  = 3
+id     = "CycleAccurate"
+label  = "Cycle-Accurate, lambda=2 clock edges"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "edges=2=lambda EXACT, precision=cycle, speed=slow, scale=block"
+
+[[candidate]]
+level  = 3
+id     = "MixedSignal"
+label  = "Mixed-Signal (Verilog-AMS), phi=2 analog/digital"
+n6     = 0.50
+perf   = 0.75
+power  = 0.45
+cost   = 0.35
+notes  = "domains=2=phi EXACT, precision=analog+digital, speed=slowest, scale=small"
+
+[[candidate]]
+level  = 3
+id     = "FPGA_Proto"
+label  = "FPGA Prototyping"
+n6     = 0.50
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "speed=realtime, precision=cycle, scale=full_chip, turnaround=hours"
+
+[[candidate]]
+level  = 3
+id     = "CloudSim"
+label  = "Cloud Distributed Simulation"
+n6     = 0.50
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "speed=elastic, precision=event, scale=massive, latency=network"
+
+[[candidate]]
+level  = 3
+id     = "GPUAccelSim"
+label  = "GPU-Accelerated Simulation, sigma-tau=8 parallelism"
+n6     = 1.00
+perf   = 0.92
+power  = 0.45
+cost   = 0.40
+notes  = "parallel=8=sigma-tau EXACT, speed=10x, precision=event, scale=large"
+
+[[candidate]]
+level  = 3
+id     = "N6_PhaseSim"
+label  = "n=6 Phase Simulation (tau=4 phases, phi=2 edges, n=6 event classes)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "phases=4=tau EXACT, edges=2=phi per cycle EXACT, event_classes=6=n EXACT, sigma=12 pipeline stages simulated"
+
+# =============================================================
+# Level 4: Ecosystem (생태계) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Ecosystem"
+
+[[candidate]]
+level  = 4
+id     = "IPReuse"
+label  = "IP Reuse Library, n=6 IP categories"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "categories=6=n EXACT, reuse=high, quality=verified, vendor=mixed"
+
+[[candidate]]
+level  = 4
+id     = "ChipletInteg"
+label  = "Chiplet Integration (UCIe), BT-69"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "interface=UCIe, reuse=chiplet, quality=emerging, multi_vendor=true"
+
+[[candidate]]
+level  = 4
+id     = "OpenHW"
+label  = "Open-Source HW (RISC-V eco), sopfr=5 licenses"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.75
+notes  = "licenses=5=sopfr EXACT, reuse=community, quality=growing, freedom=max"
+
+[[candidate]]
+level  = 4
+id     = "EDACloud"
+label  = "EDA Cloud Platform"
+n6     = 0.50
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "elastic=true, reuse=platform, quality=vendor, scale=unlimited"
+
+[[candidate]]
+level  = 4
+id     = "FormalLib"
+label  = "Formal Verification Library"
+n6     = 0.50
+perf   = 0.65
+power  = 0.45
+cost   = 0.40
+notes  = "proofs=reusable, reuse=formal, quality=mathematical, niche=safety"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# FormalSpec abstraction requires formal verification
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "FormalSpec"
+then_level = 2
+then_ids   = "FormalVerif,AITestGen"
+
+# HLS C-style incompatible with ASIC flow (needs RTL intermediate)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "HLS_CStyle"
+then_level = 3
+then_ids   = "MixedSignal"
+
+# EmulationHW requires chiplet or EDA cloud (expensive infra)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "EmulationHW"
+then_level = 4
+then_ids   = "ChipletInteg,EDACloud"
+
+# PythonHDL incompatible with ASIC_Flow directly (maturity gap)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "PythonHDL"
+then_level = 1
+then_ids   = "ASIC_Flow"
+
+# GPU-accelerated sim requires EDA cloud or chiplet (GPU resources)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "GPUAccelSim"
+then_level = 4
+then_ids   = "EDACloud,ChipletInteg"
+
+# Open-source synthesis pairs well with open HW but exclude formal lib alone
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "OpenSource"
+then_level = 2
+then_ids   = "EmulationHW"

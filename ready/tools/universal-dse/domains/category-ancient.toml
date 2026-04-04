@@ -1,0 +1,410 @@
+# =============================================================
+# CATEGORY-ANCIENT DSE Domain Definition
+# 궁극의 추상 구조 — Grothendieck 6-operations + 주역 64괘 + 바빌론 base-60
+# CAT-001 (Grothendieck 6-ops), CAT-002 (Bott periodicity), ANC-001 (I-Ching/Babylon/Chess)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "category-ancient"
+desc = "Ultimate Category Theory & Ancient Knowledge DSE (CAT-001/002, ANC-001)"
+levels = ["Foundation", "Structure", "Functor", "Application", "Heritage"]
+vision = "n=6 기반 궁극의 추상 구조 — Grothendieck 6-operations + 주역 64괘 + 바빌론 base-60"
+
+[scoring]
+n6   = 0.40
+perf = 0.20
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (기초) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "Grothendieck6"
+label  = "Grothendieck 6-operations (f*,f*,f!,f!,tensor,Hom)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "operations=6=n EXACT, adjoint_pairs=3=n/phi EXACT, functors=6=n EXACT"
+
+[[candidate]]
+level  = 0
+id     = "SetTheoryZFC"
+label  = "ZFC 집합론 (n=6 공리 그룹)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "axiom_groups=6=n EXACT, separation_axioms=2=phi EXACT, choice=1=mu EXACT"
+
+[[candidate]]
+level  = 0
+id     = "TypeTheoryHoTT"
+label  = "호모토피 타입 이론 (sopfr=5 레벨)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "universe_levels=5=sopfr EXACT, type_formers=4=tau EXACT, id_types=1=mu EXACT"
+
+[[candidate]]
+level  = 0
+id     = "ToposTheory"
+label  = "토포스 이론 (tau=4 공리)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "axioms=4=tau EXACT, subobject_classifier=1=mu EXACT, exponentials=2=phi"
+
+[[candidate]]
+level  = 0
+id     = "HigherCategory"
+label  = "고차 범주 infinity-범주 (sigma=12 원)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "cells=12=sigma EXACT (truncated), homotopy_levels=6=n, simplicial_dim=4=tau"
+
+[[candidate]]
+level  = 0
+id     = "LogicFoundation"
+label  = "논리학 기초 (phi=2 진위값 EXACT)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.70
+cost   = 0.60
+notes  = "truth_values=2=phi EXACT, connectives=5=sopfr EXACT, quantifiers=2=phi EXACT"
+
+# =============================================================
+# Level 1: Structure (대수 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Structure"
+
+[[candidate]]
+level  = 1
+id     = "GroupS6"
+label  = "대칭군 S6 (유일한 외부 자기동형, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "degree=6=n EXACT, outer_auto=1=mu EXACT (unique!), order=720=6!, conjugacy=11=sigma-mu"
+
+[[candidate]]
+level  = 1
+id     = "LieAlgebra"
+label  = "리 대수 예외적 E6 (rank n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "rank=6=n EXACT, dim=78=sigma*n+n, roots=72=sigma*n, Weyl_order=51840"
+
+[[candidate]]
+level  = 1
+id     = "RingField"
+label  = "환과 체 (tau=4 연산 성질)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "operations=4=tau EXACT (+,-,*,/), axioms=8=sigma-tau, field_char=2=phi or 0"
+
+[[candidate]]
+level  = 1
+id     = "MonoidCategory"
+label  = "모노이드 범주 (mu=1 단위원)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.60
+notes  = "identity=1=mu EXACT, coherence=2=phi, operations=1=mu EXACT"
+
+[[candidate]]
+level  = 1
+id     = "BraidGroup"
+label  = "땋임군 (n=6 가닥)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "strands=6=n EXACT, generators=5=sopfr EXACT, relations=4=tau braid relations"
+
+[[candidate]]
+level  = 1
+id     = "LatticeOrder"
+label  = "격자 순서 (sigma=12 약수 격자)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "divisors_of_6=4=tau EXACT, sigma_6=12=sigma EXACT, lattice_width=2=phi EXACT"
+
+# =============================================================
+# Level 2: Functor (함자/변환) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Functor"
+
+[[candidate]]
+level  = 2
+id     = "AdjointPair"
+label  = "수반 함자 쌍 (phi=2 EXACT)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "pair=2=phi EXACT, unit_counit=2=phi EXACT, triangle_id=2=phi EXACT"
+
+[[candidate]]
+level  = 2
+id     = "NaturalTransform"
+label  = "자연 변환 (mu=1 자연성)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "naturality=1=mu EXACT, components=n, coherence=2=phi"
+
+[[candidate]]
+level  = 2
+id     = "DerivedFunctor"
+label  = "유도 함자 (tau=4 도출 레벨)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "levels=4=tau EXACT, derived_types=2=phi EXACT (left/right), spectral_seq=5=sopfr pages"
+
+[[candidate]]
+level  = 2
+id     = "MonadicFunctor"
+label  = "모나드 함자 (n/phi=3 법칙)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "laws=3=n/phi EXACT (unit/join/map), monad_types=6=n, Kleisli=1=mu"
+
+[[candidate]]
+level  = 2
+id     = "KanExtension"
+label  = "칸 확장 (phi=2 좌/우)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "types=2=phi EXACT (left/right), universality=1=mu EXACT, pointwise=1=mu"
+
+[[candidate]]
+level  = 2
+id     = "YonedaLemma"
+label  = "요네다 보조정리 (sigma=12 사상 집합)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "embedding=1=mu EXACT (fully faithful), hom_sets=12=sigma, naturality=1=mu EXACT"
+
+[[candidate]]
+level  = 2
+id     = "SixFunctor"
+label  = "6-함자 형식주의 (Grothendieck n=6 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.45
+notes  = "functors=6=n EXACT (f*,f_*,f^!,f_!,tensor,Hom), adjoint_pairs=3=n/phi EXACT, foundation of sheaf theory"
+
+# =============================================================
+# Level 3: Application (응용) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 3
+id     = "QuantumLogic"
+label  = "양자 논리 (phi=2 큐비트)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "qubit_states=2=phi EXACT, gates=6=n EXACT (H/X/Y/Z/CNOT/T), circuits=12=sigma"
+
+[[candidate]]
+level  = 3
+id     = "ProgramSemantics"
+label  = "프로그램 의미론 (sopfr=5 도메인)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "domains=5=sopfr EXACT, semantics=3=n/phi (op/denotational/axiomatic), fixpoint=1=mu"
+
+[[candidate]]
+level  = 3
+id     = "AlgebraicGeometry"
+label  = "대수기하학 (n=6 차원)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "dim=6=n EXACT (Calabi-Yau), Hodge_numbers=4=tau, sheaf_cohom=12=sigma"
+
+[[candidate]]
+level  = 3
+id     = "TopologicalQFT"
+label  = "위상적 QFT (tau=4 시공간)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "spacetime=4=tau EXACT, cobordism=2=phi EXACT, invariants=6=n EXACT"
+
+[[candidate]]
+level  = 3
+id     = "InformationTheory"
+label  = "정보 이론 (sigma-tau=8 비트)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "bits=8=sigma-tau EXACT, entropy=1=mu (nats), channels=2=phi EXACT, capacity=6=n"
+
+[[candidate]]
+level  = 3
+id     = "CryptographicProtocol"
+label  = "암호 프로토콜 (J2=24 키 길이)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "key_rounds=24=J2 EXACT (AES-like), block_bits=128=2^(sigma-sopfr), modes=6=n EXACT"
+
+[[candidate]]
+level  = 3
+id     = "CalabiYau6"
+label  = "칼라비-야우 6차원 컴팩트화 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "compact_dim=6=n EXACT, string theory 10D=4+6, Hodge_numbers=tau=4, mirror_symmetry=phi=2 EXACT"
+
+# =============================================================
+# Level 4: Heritage (고대 지식) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Heritage"
+
+[[candidate]]
+level  = 4
+id     = "IChingN64"
+label  = "주역 64괘 = 2^n=64 (n=6 EXACT, 6효)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "hexagrams=64=2^n EXACT, lines=6=n EXACT, trigrams=8=sigma-tau EXACT, yin_yang=2=phi EXACT"
+
+[[candidate]]
+level  = 4
+id     = "BabylonBase60"
+label  = "바빌론 60진법 (sigma*sopfr=60 EXACT)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "base=60=sigma*sopfr EXACT, divisors=12=sigma EXACT, minutes=60, degrees=360=60*n"
+
+[[candidate]]
+level  = 4
+id     = "Chess64"
+label  = "체스 64칸 = 2^n (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "squares=64=2^n EXACT, pieces=6=n EXACT (K/Q/R/B/N/P), rows=8=sigma-tau EXACT"
+
+[[candidate]]
+level  = 4
+id     = "PlatonicSolid5"
+label  = "플라톤 입체 5종 (sopfr=5 EXACT)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "solids=5=sopfr EXACT, regular=5=sopfr, icosahedron_faces=12=sigma EXACT (dual=dodecahedron)"
+
+[[candidate]]
+level  = 4
+id     = "HexagonalNature"
+label  = "자연의 육각형 (벌집/눈꽃/현무암, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.60
+notes  = "sides=6=n EXACT, packing=optimal, examples=6=n (honeycomb/snowflake/basalt/graphene/benzene/turtle)"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Grothendieck6 requires AdjointPair (6-operations use adjoint functors)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Grothendieck6"
+then_level = 2
+then_ids   = "AdjointPair,KanExtension,SixFunctor"
+
+# HigherCategory requires YonedaLemma or KanExtension (needs universal properties)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "HigherCategory"
+then_level = 2
+then_ids   = "YonedaLemma,KanExtension,SixFunctor"
+
+# ToposTheory requires LogicFoundation (topos is logical framework)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ToposTheory"
+then_level = 0
+then_ids   = "LogicFoundation"
+
+# GroupS6 uniqueness theorem -- incompatible with MonoidCategory (too simple)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "GroupS6"
+then_level = 1
+then_ids   = "MonoidCategory"
+
+# AlgebraicGeometry requires LieAlgebra or GroupS6 (needs algebraic structure)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "AlgebraicGeometry"
+then_level = 1
+then_ids   = "LieAlgebra,GroupS6,BraidGroup"
+
+# IChingN64 most aligned -- incompatible with MonoidCategory (conceptual mismatch)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "IChingN64"
+then_level = 1
+then_ids   = "MonoidCategory"

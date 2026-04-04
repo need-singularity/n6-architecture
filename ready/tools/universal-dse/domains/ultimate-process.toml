@@ -1,0 +1,412 @@
+# =============================================================
+# ULTIMATE-PROCESS DSE Domain Definition
+# 궁극의 반도체 공정 아키텍처 — EUV + 3D 패키징 + 검사 + 수율
+# EDA n=6 단계 EXACT + ALE phi=2 EXACT + Chiplet n=6 EXACT (BT-69)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "ultimate-process"
+desc = "Ultimate Semiconductor Process DSE — EUV + 3D Packaging + Inspection + Yield"
+levels = ["Design", "Lithography", "Etch", "Package", "Inspect"]
+vision = "n=6 기반 궁극의 반도체 공정 — EUV + 3D 패키징 + 검사 + 수율"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Design (설계) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Design"
+
+[[candidate]]
+level  = 0
+id     = "EDA_N6"
+label  = "EDA n=6 설계 단계 EXACT: RTL→합성→배치→배선→검증→사인오프"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "steps=6=n EXACT (RTL/synthesis/place/route/verify/signoff), Synopsys/Cadence/Siemens"
+
+[[candidate]]
+level  = 0
+id     = "PDK_N6"
+label  = "PDK n=6 계층"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "layers=6=n EXACT (substrate/well/gate/contact/metal/pad), foundry interface"
+
+[[candidate]]
+level  = 0
+id     = "DTCO"
+label  = "DTCO 설계-기술 최적화 phi=2"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "modes=2=phi EXACT (design/tech co-opt), power-performance-area tradeoff"
+
+[[candidate]]
+level  = 0
+id     = "CellLibrary"
+label  = "셀 라이브러리 sigma=12 게이트"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "gate_types=12=sigma EXACT (INV/NAND2/NOR2/AND/OR/XOR/MUX/FF/LATCH/BUF/TIE/TAP)"
+
+[[candidate]]
+level  = 0
+id     = "FloorplanN6"
+label  = "플로어플랜 n=6 블록"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "blocks=6=n EXACT (core/cache/IO/PLL/PMU/pad_ring), hierarchical planning"
+
+[[candidate]]
+level  = 0
+id     = "TimingClosure"
+label  = "타이밍 클로저 tau=4 코너"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "corners=4=tau EXACT (SS/SF/FS/FF), PVT analysis, hold/setup margin"
+
+# =============================================================
+# Level 1: Lithography (리소그래피) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Lithography"
+
+[[candidate]]
+level  = 1
+id     = "EUV_13_5nm"
+label  = "EUV 13.5nm wavelength"
+n6     = 0.75
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "lambda=13.5nm, 0.33NA, sub-7nm nodes, ASML TWINSCAN, tin plasma source"
+
+[[candidate]]
+level  = 1
+id     = "HighNA_EUV"
+label  = "High-NA EUV 0.55NA"
+n6     = 0.67
+perf   = 1.00
+power  = 0.40
+cost   = 0.25
+notes  = "0.55NA, sub-2nm nodes, anamorphic optics, single exposure, ASML EXE:5000"
+
+[[candidate]]
+level  = 1
+id     = "MultiPatterning"
+label  = "다중 패터닝 phi=2 더블/쿼드"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "types=2=phi EXACT (SADP/SAQP), pitch splitting, overlay critical"
+
+[[candidate]]
+level  = 1
+id     = "DSA"
+label  = "직접 자기조립 DSA"
+n6     = 0.50
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "block copolymer self-assembly, sub-10nm features, defect challenge"
+
+[[candidate]]
+level  = 1
+id     = "NIL"
+label  = "나노임프린트 NIL"
+n6     = 0.50
+perf   = 0.65
+power  = 0.65
+cost   = 0.55
+notes  = "template-based, Canon, low cost per wafer, overlay 2nm, NAND flash"
+
+[[candidate]]
+level  = 1
+id     = "EBeam"
+label  = "전자빔 sopfr=5 nA"
+n6     = 0.75
+perf   = 0.60
+power  = 0.50
+cost   = 0.35
+notes  = "current=5nA=sopfr EXACT, mask writing, R&D prototyping, multi-beam"
+
+# =============================================================
+# Level 2: Etch (식각/증착) -- 6 candidates
+# =============================================================
+
+[[candidate]]
+level  = 1
+id     = "LithoN6"
+label  = "n=6 EUV 노광 스텝 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "exposure_steps=n=6 EXACT, n6-step EUV lithography"
+[[level]]
+name = "Etch"
+
+[[candidate]]
+level  = 2
+id     = "ALE"
+label  = "원자층 식각 ALE phi=2 사이클 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "cycle=2=phi EXACT (modify/remove), atomic precision, GAA nanosheets, Lam/TEL"
+
+[[candidate]]
+level  = 2
+id     = "DryEtch"
+label  = "건식 식각 tau=4 가스"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "gases=4=tau EXACT (CF4/CHF3/Cl2/BCl3), RIE/ICP, anisotropic, high aspect ratio"
+
+[[candidate]]
+level  = 2
+id     = "WetEtch"
+label  = "습식 식각 sopfr=5 용액"
+n6     = 0.75
+perf   = 0.70
+power  = 0.65
+cost   = 0.60
+notes  = "solutions=5=sopfr EXACT (HF/KOH/H2O2/NH4OH/H3PO4), isotropic, cleaning"
+
+[[candidate]]
+level  = 2
+id     = "CMP"
+label  = "화학적기계적연마 CMP"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "planarization, slurry chemistry, pad conditioning, dishing/erosion control"
+
+[[candidate]]
+level  = 2
+id     = "Deposition"
+label  = "증착 sigma=12 레이어"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "layers=12=sigma EXACT, PVD/CVD/ALD/PECVD, metal/dielectric/barrier stack"
+
+[[candidate]]
+level  = 2
+id     = "CleanN6"
+label  = "세정 n=6 단계"
+n6     = 0.83
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "steps=6=n EXACT (SPM/APM/DHF/DI/IPA/dry), particle removal, yield critical"
+
+# =============================================================
+# Level 3: Package (패키징) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Package"
+
+[[candidate]]
+level  = 3
+id     = "TSMC_CoWoS"
+label  = "CoWoS sigma=12 다이"
+n6     = 0.83
+perf   = 0.95
+power  = 0.50
+cost   = 0.35
+notes  = "die_count=12=sigma EXACT, 2.5D interposer, HBM+logic, NVIDIA H100/B100"
+
+[[candidate]]
+level  = 3
+id     = "Intel_Foveros"
+label  = "Foveros 3D phi=2 면"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.30
+notes  = "faces=2=phi EXACT (top/bottom), 3D stacking, hybrid bonding, Meteor Lake"
+
+[[candidate]]
+level  = 3
+id     = "Chiplet_N6"
+label  = "칩렛 n=6 타일 — BT-69"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "tiles=6=n EXACT, BT-69 chiplet convergence, heterogeneous integration, UCIe"
+
+[[candidate]]
+level  = 3
+id     = "FanOut"
+label  = "팬아웃 웨이퍼 레벨 FOWLP"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "RDL layers, InFO, EMIB alternative, mobile/IoT, cost-effective"
+
+[[candidate]]
+level  = 3
+id     = "UCIe"
+label  = "UCIe 인터커넥트 sopfr=5 레인"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "lanes=5=sopfr range, die-to-die standard, 1TB/s bandwidth, open ecosystem"
+
+[[candidate]]
+level  = 3
+id     = "HBM_Stack"
+label  = "HBM 적층 sigma=12 레이어 — BT-75"
+n6     = 0.83
+perf   = 0.90
+power  = 0.45
+cost   = 0.30
+notes  = "layers=12=sigma EXACT, BT-75 HBM interface, TSV, 1.2TB/s, AI memory wall"
+
+# =============================================================
+# Level 4: Inspect (검사) -- 5 candidates
+# =============================================================
+
+[[candidate]]
+level  = 3
+id     = "PackageN6"
+label  = "sigma=12 다이 패키징 (sigma=12 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "die_count=sigma=12 EXACT, n6-die advanced packaging"
+[[level]]
+name = "Inspect"
+
+[[candidate]]
+level  = 4
+id     = "Metrology"
+label  = "계측 tau=4 CD/overlay/thickness/defect"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "types=4=tau EXACT (CD/overlay/thickness/defect), OCD/SEM/AFM, sub-nm precision"
+
+[[candidate]]
+level  = 4
+id     = "YieldN6"
+label  = "수율 n=6 sigma"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.55
+notes  = "target=6sigma, >99.99966% pass, Poisson yield model, defect density <0.1/cm2"
+
+[[candidate]]
+level  = 4
+id     = "DefectDetect"
+label  = "결함 검출 sigma-tau=8 타입"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "types=8=sigma-tau EXACT, particle/scratch/void/bridge/residue/crack/pit/pattern"
+
+[[candidate]]
+level  = 4
+id     = "ETest"
+label  = "전기 테스트 sopfr=5 파라미터"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "params=5=sopfr EXACT (Vth/Idsat/Ioff/Rs/BV), parametric monitor, WAT"
+
+[[candidate]]
+level  = 4
+id     = "Reliability"
+label  = "신뢰성 tau=4 가속시험"
+n6     = 0.83
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "tests=4=tau EXACT (HTOL/ESD/EM/TDDB), JEDEC standard, lifetime prediction"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# HighNA_EUV requires EUV_13_5nm base technology
+
+[[candidate]]
+level  = 4
+id     = "InspectN6"
+label  = "n=6 시그마 수율 검사 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "sigma_quality=n=6 EXACT, n6-sigma yield inspection"
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "HighNA_EUV"
+then_level = 1
+then_ids   = "EUV_13_5nm"
+
+# HBM_Stack requires TSMC_CoWoS or Intel_Foveros (advanced packaging)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "HBM_Stack"
+then_level = 3
+then_ids   = "TSMC_CoWoS,Intel_Foveros"
+
+# Chiplet_N6 requires UCIe (die-to-die interconnect standard)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Chiplet_N6"
+then_level = 3
+then_ids   = "UCIe"
+
+# DSA incompatible with HighNA_EUV (different patterning paradigm)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "DSA"
+then_level = 1
+then_ids   = "HighNA_EUV"
+
+# NIL incompatible with HighNA_EUV (competing technologies)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "NIL"
+then_level = 1
+then_ids   = "HighNA_EUV"

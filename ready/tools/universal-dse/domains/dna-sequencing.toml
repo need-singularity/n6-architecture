@@ -1,0 +1,329 @@
+# N6 DNA Sequencing DSE — Genomic sequencing technology
+# 6 Library x 6 Sequencing x 6 BaseCalling x 6 Assembly x 6 Analysis = 7,776 combos
+# n=6: tau=4 bases (ATCG), n/phi=3 codon reading frame, 6 sequencing generations
+
+[meta]
+name = "dna-sequencing"
+desc = "DNA Sequencing DSE (tau=4 bases ATCG, n/phi=3 codon, 6 sequencing generations)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Library (라이브러리 준비)
+#   n6 checks: 6 library prep methods, sigma=12 PCR cycles, tau=4 adaptor types
+# ============================================================
+
+[[level]]
+name = "Library"
+
+[[candidate]]
+id = "FragmentLib"
+label = "Fragmentation Library (6 enzyme cocktails=n, 12 PCR cycles=sigma, 4 size selections=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "AmpliconLib"
+label = "Amplicon Library (6 primer panels=n, 12 target regions=sigma, 4 multiplex pools=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "WGSLib"
+label = "Whole Genome Shotgun (6 fragmentation methods=n, 12 insert sizes=sigma, 24x coverage=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "RNASeqLib"
+label = "RNA-Seq Library (6 rRNA depletion kits=n, 12 polyA selection=sigma, 3 codon frames=n/phi)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "LongReadLib"
+label = "Long-Read Library (6 HMW extraction=n, 12kb mean length=sigma, 4 shearing methods=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "SingleCellLib"
+label = "Single-Cell Library (6 cell capture methods=n, 12 barcodes/cell=sigma, 4 amplification rounds=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.45
+cost = 0.50
+
+# ============================================================
+# Level 1: Sequencing (시퀀싱)
+#   n6 checks: 6 sequencing generations, sigma=12 flow cell lanes, tau=4 base incorporations
+# ============================================================
+
+[[level]]
+name = "Sequencing"
+
+[[candidate]]
+id = "IlluminaSBS"
+label = "Illumina SBS (6 generations=n, 12 flow cell lanes=sigma, 4 fluorescent dyes=tau for ATCG)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "NanoporeSeq"
+label = "Nanopore (6 pore types=n, 12 channels per array=sigma, 4 base current levels=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "PacBioHiFi"
+label = "PacBio HiFi (6 SMRT cells=n, 12h movie time=sigma, 4 polymerase versions=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "IonTorrent"
+label = "Ion Torrent (6 chip sizes=n, 12 pH detection layers=sigma, 4 base H+ signals=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "UltimaSeq"
+label = "Ultima Genomics (6 bead pools=n, 12 detection cycles=sigma, 4 nt incorporations=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.85
+
+[[candidate]]
+id = "ElementBio"
+label = "Element Biosciences (6 avidity sites=n, 12 rolling-circle amplicons=sigma, 24h run=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.80
+
+# ============================================================
+# Level 2: BaseCalling (베이스콜링)
+#   n6 checks: 6 ML model architectures, sigma-tau=8 bit quality, tau=4 base outputs
+# ============================================================
+
+[[level]]
+name = "BaseCalling"
+
+[[candidate]]
+id = "GuppyNN"
+label = "Guppy Neural Net (6 conv layers=n, 12 filters per layer=sigma, 4 base outputs=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.80
+
+[[candidate]]
+id = "DoradoTF"
+label = "Dorado Transformer (6 attention heads=n, 12 encoder layers=sigma, 4-base softmax=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.65
+
+[[candidate]]
+id = "DeepVariant"
+label = "DeepVariant CNN (6 image channels=n, 12 pileup features=sigma, 4 variant classes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.70
+
+[[candidate]]
+id = "BonitoLSTM"
+label = "Bonito LSTM (6 bidirectional layers=n, 12 hidden units x64=sigma, 4 CTC outputs=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "HMMClassic"
+label = "HMM BaseCaller (6 state transitions=n, 12 emission params=sigma, 4 bases=tau)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "FPGACall"
+label = "FPGA Accelerated (6 pipeline stages=n, 12 parallel streams=sigma, 24 TOPS=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.35
+cost = 0.50
+
+# ============================================================
+# Level 3: Assembly (조립)
+#   n6 checks: 6 assembly strategies, sigma=12 overlap steps, n/phi=3 frame alignment
+# ============================================================
+
+[[level]]
+name = "Assembly"
+
+[[candidate]]
+id = "DeBruijnGraph"
+label = "De Bruijn Graph (6 k-mer sizes=n, 12 graph simplification=sigma, 3 bubble resolution=n/phi)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.75
+
+[[candidate]]
+id = "OLC_Assembly"
+label = "Overlap-Layout-Consensus (6 overlap thresholds=n, 12 layout passes=sigma, 3 consensus rounds=n/phi)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.70
+
+[[candidate]]
+id = "HiCScaffold"
+label = "Hi-C Scaffolding (6 restriction enzymes=n, 12 ligation steps=sigma, 4 scaffolding phases=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "HybridAssembly"
+label = "Hybrid Assembly (6 data integration=n, 12 polishing rounds=sigma, 4 error correction=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.55
+
+[[candidate]]
+id = "RefGuided"
+label = "Reference-Guided (6 alignment tools=n, 12 mapping quality filters=sigma, 4 variant callers=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "TelomereT2T"
+label = "Telomere-to-Telomere (6 gap-filling=n, 12 centromere repeats=sigma, 24 chromosome arms=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.35
+cost = 0.45
+
+# ============================================================
+# Level 4: Analysis (분석)
+#   n6 checks: 6 analysis pipelines, sigma=12 annotation tracks, tau=4 variant types
+# ============================================================
+
+[[level]]
+name = "Analysis"
+
+[[candidate]]
+id = "VariantCall"
+label = "Variant Calling (6 caller tools=n, 12 filter criteria=sigma, 4 variant types SNV/indel/SV/CNV=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "GWASPipeline"
+label = "GWAS Pipeline (6 population strata=n, 12 covariates=sigma, 4 significance thresholds=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "Metagenomics"
+label = "Metagenomic Analysis (6 taxonomy levels=n, 12 diversity indices=sigma, 4 abundance bins=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.65
+
+[[candidate]]
+id = "Epigenomics"
+label = "Epigenomic Analysis (6 histone marks=n, 12 ChIP-seq peaks=sigma, 4 methylation states=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "ClinicalReport"
+label = "Clinical Reporting (6 pathogenicity classes=n, 12 gene panels=sigma, 4 ACMG criteria=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "AIGenomics"
+label = "AI Genomic Interpretation (6 deep learning models=n, 12 feature tracks=sigma, 24 tissue types=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.50
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Long-read library pairs best with PacBio or Nanopore
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "LongReadLib"
+then_level = 1
+then_ids = "PacBioHiFi,NanoporeSeq"
+
+# Nanopore sequencing uses Guppy/Dorado basecallers
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "NanoporeSeq"
+then_level = 2
+then_ids = "GuppyNN,DoradoTF,BonitoLSTM"
+
+# T2T assembly requires hybrid or long-read data
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "TelomereT2T"
+then_level = 0
+then_ids = "LongReadLib,WGSLib"
+
+# Clinical reporting requires robust variant calling
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "ClinicalReport"
+then_level = 3
+then_ids = "HybridAssembly,RefGuided"

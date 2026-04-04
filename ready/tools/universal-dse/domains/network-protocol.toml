@@ -1,0 +1,371 @@
+# =============================================================
+# HEXA Network Protocol DSE Domain Definition
+# 궁극의 네트워크 프로토콜 — n=6 기반 프로토콜→전송→코어→최적화→배포
+# BT-47 (Interconnect gen counts) + BT-53 (Crypto BTC/ETH) +
+# BT-74 (95/5 cross-domain resonance) + BT-115 (OSI/TCP/IP)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "network-protocol"
+desc = "Ultimate Network Protocol DSE (BT-47/53/74/115)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "Zero-latency planet — SRv6=n=6, sigma=12 routing depth"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (Protocol Paradigm) -- 6 candidates = n
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "TCP_IP"
+label  = "TCP/IP Stack (OSI sigma-sopfr=7 layers)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.80
+notes  = "OSI=sigma-sopfr=7, TCP 3-way=n/phi=3, BT-115"
+
+[[candidate]]
+level  = 0
+id     = "QUIC"
+label  = "QUIC/HTTP3 (0-RTT, stream multiplex)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.72
+cost   = 0.70
+notes  = "0-RTT, multiplexed, BT-47"
+
+[[candidate]]
+level  = 0
+id     = "NDN"
+label  = "Named Data Networking (content-centric)"
+n6     = 0.67
+perf   = 0.78
+power  = 0.68
+cost   = 0.55
+notes  = "n=6 name components, content-centric"
+
+[[candidate]]
+level  = 0
+id     = "DTN"
+label  = "Delay-Tolerant Network (store-and-forward)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.75
+cost   = 0.60
+notes  = "tau=4 hop limit, deep space / rural"
+
+[[candidate]]
+level  = 0
+id     = "Mesh_N6"
+label  = "N6 Mesh Protocol (n=6 neighbor limit)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "n=6 neighbor EXACT, sigma=12 routing table EXACT"
+
+[[candidate]]
+level  = 0
+id     = "P2P_DHT"
+label  = "P2P DHT (Kademlia k=sigma-tau=8, BT-53)"
+n6     = 0.83
+perf   = 0.82
+power  = 0.70
+cost   = 0.65
+notes  = "k=sigma-tau=8 buckets EXACT, BTC=n=6 confirms, BT-53"
+
+# =============================================================
+# Level 1: Process (Transport / Security) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "TLS13"
+label  = "TLS 1.3 (sopfr=5 cipher suites)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "1-RTT, sopfr=5 cipher suites EXACT"
+
+[[candidate]]
+level  = 1
+id     = "WireGuard"
+label  = "WireGuard VPN (tau=4 message types)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.80
+notes  = "tau=4 msg types EXACT, ~4000 LOC, minimal"
+
+[[candidate]]
+level  = 1
+id     = "DTLS"
+label  = "DTLS 1.3 (UDP datagram TLS)"
+n6     = 0.50
+perf   = 0.78
+power  = 0.72
+cost   = 0.70
+notes  = "datagram TLS for UDP, IoT"
+
+[[candidate]]
+level  = 1
+id     = "Noise_N6"
+label  = "Noise Framework N6 (n/phi=3 handshake patterns)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.75
+cost   = 0.65
+notes  = "n/phi=3 handshake patterns EXACT, composable"
+
+[[candidate]]
+level  = 1
+id     = "RDMA"
+label  = "RDMA/RoCE (zero-copy, kernel bypass)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "zero-copy, kernel bypass, datacenter only"
+
+# =============================================================
+# Level 2: Core (Network Core) -- 6 candidates = n
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "BGP_N6"
+label  = "BGP with N6 Routing (sigma-tau=8 max hops)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "AS path, sigma-tau=8 max hops EXACT"
+
+[[candidate]]
+level  = 2
+id     = "SDN"
+label  = "Software-Defined Network (n=6 layer abstraction)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.72
+cost   = 0.60
+notes  = "n=6 layer abstraction EXACT, programmable"
+
+[[candidate]]
+level  = 2
+id     = "Segment"
+label  = "Segment Routing SRv6 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.68
+cost   = 0.55
+notes  = "SRv6=n=6 EXACT! sigma=12 SID depth EXACT"
+
+[[candidate]]
+level  = 2
+id     = "MPLS_N6"
+label  = "MPLS with n=6 Labels (tau=4 exp bits)"
+n6     = 0.67
+perf   = 0.82
+power  = 0.74
+cost   = 0.65
+notes  = "tau=4 bit exp field EXACT, label switching"
+
+[[candidate]]
+level  = 2
+id     = "Intent"
+label  = "Intent-Based Networking (AI-driven)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "n=6 intent categories EXACT, AI-driven policy"
+
+[[candidate]]
+level  = 2
+id     = "Quantum"
+label  = "Quantum Network (QKD, BB84)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.50
+cost   = 0.30
+notes  = "BB84 tau=4 bases EXACT, phi=2 entangled EXACT"
+
+# =============================================================
+# Level 3: Engine (Optimization) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "Congestion"
+label  = "N6 Congestion Control (BBR sigma-tau=8 phases)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.72
+cost   = 0.65
+notes  = "BBR sigma-tau=8 phases EXACT, CUBIC tau=4 params EXACT"
+
+[[candidate]]
+level  = 3
+id     = "LoadBal"
+label  = "L4/L7 Load Balancer (n=6 replicas)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "consistent hash n=6 replicas, Maglev"
+
+[[candidate]]
+level  = 3
+id     = "CDN_N6"
+label  = "CDN with sigma=12 PoPs"
+n6     = 0.83
+perf   = 0.88
+power  = 0.65
+cost   = 0.55
+notes  = "sigma=12 edge regions EXACT"
+
+[[candidate]]
+level  = 3
+id     = "NetAI"
+label  = "AI Network Optimizer (ML routing)"
+n6     = 0.67
+perf   = 0.82
+power  = 0.68
+cost   = 0.50
+notes  = "ML-driven routing/scheduling, adaptive"
+
+[[candidate]]
+level  = 3
+id     = "Compress"
+label  = "Protocol Compression (HPACK sigma=12 groups)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "HPACK sigma=12 huffman groups EXACT, HTTP/2/3"
+
+# =============================================================
+# Level 4: System (Deployment) -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "DC_Fabric"
+label  = "Datacenter Fabric (Clos k=sigma-tau=8)"
+n6     = 0.83
+perf   = 0.92
+power  = 0.65
+cost   = 0.55
+notes  = "Clos k=sigma-tau=8 EXACT, leaf-spine"
+
+[[candidate]]
+level  = 4
+id     = "Carrier"
+label  = "Carrier/5G Core (tau=4 numerologies)"
+n6     = 0.67
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "5G NR tau=4 numerologies EXACT, mmWave"
+
+[[candidate]]
+level  = 4
+id     = "Satellite"
+label  = "LEO Satellite Mesh (Starlink-style)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.40
+notes  = "mega constellation, ISL mesh"
+
+[[candidate]]
+level  = 4
+id     = "IoT_LPWAN"
+label  = "IoT LPWAN (LoRa SF=7~sigma=12)"
+n6     = 0.83
+perf   = 0.65
+power  = 0.85
+cost   = 0.75
+notes  = "SF range (sigma-sopfr)~sigma=7~12 EXACT"
+
+[[candidate]]
+level  = 4
+id     = "HomeLAN"
+label  = "Home/Enterprise LAN (WiFi 6/7)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "WiFi 6 sigma-phi=10 Gbps, sigma=12 channels"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Quantum network requires TLS1.3 or Noise (QKD key exchange)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Quantum"
+then_level = 1
+then_ids   = "TLS13,Noise_N6"
+
+# RDMA only with DC_Fabric (requires lossless fabric)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "RDMA"
+then_level = 4
+then_ids   = "DC_Fabric"
+
+# DTN incompatible with RDMA (latency vs delay-tolerant)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "DTN"
+then_level = 1
+then_ids   = "RDMA"
+
+# Satellite incompatible with Segment Routing (no SRv6 in LEO yet)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Satellite"
+then_level = 2
+then_ids   = "Segment"
+
+# IoT_LPWAN incompatible with RDMA (bandwidth mismatch)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "IoT_LPWAN"
+then_level = 1
+then_ids   = "RDMA"
+
+# NDN pairs better with CDN (content-centric synergy)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "NDN"
+then_level = 3
+then_ids   = "CDN_N6,Compress,NetAI"

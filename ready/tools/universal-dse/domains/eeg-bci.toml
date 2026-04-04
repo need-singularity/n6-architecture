@@ -1,0 +1,384 @@
+# =============================================================
+# EEG-BCI DSE Domain Definition
+# n=6 based EEG/BCI -- 5 bands (sopfr) + 12 electrodes (sigma) + tension biomarker
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "eeg-bci"
+desc = "EEG Brain-Computer Interface DSE (n=6 bands + sigma=12 electrodes)"
+levels = ["Electrode", "Signal", "Feature", "Decoder", "Application"]
+vision = "n=6 EEG/BCI -- 5 bands (sopfr) + 12 electrodes (sigma) + tension biomarker"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Electrode -- 6 candidates
+# =============================================================
+[[level]]
+name = "Electrode"
+
+[[candidate]]
+level  = 0
+id     = "Standard1020"
+label  = "Standard 10-20 System (19 electrodes)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.80
+cost   = 0.90
+notes  = "channels=19=sigma+sopfr+phi EXACT, coverage=standard, invasive=false, comfort=high"
+
+[[candidate]]
+level  = 0
+id     = "HighDensity256"
+label  = "High-Density 256-channel"
+n6     = 1.00
+perf   = 1.00
+power  = 0.30
+cost   = 0.20
+notes  = "channels=256=2^(sigma-tau) EXACT, coverage=full, invasive=false, comfort=low"
+
+[[candidate]]
+level  = 0
+id     = "DryElectrode"
+label  = "Dry Electrode (phi=2 dry/wet)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.85
+cost   = 0.80
+notes  = "channels=16, modes=phi=2 EXACT, invasive=false, comfort=very_high"
+
+[[candidate]]
+level  = 0
+id     = "EarEEG"
+label  = "Ear EEG (phi=2 left/right)"
+n6     = 0.50
+perf   = 0.40
+power  = 0.90
+cost   = 0.70
+notes  = "channels=4=tau EXACT, sides=phi=2 EXACT, invasive=false, comfort=very_high"
+
+[[candidate]]
+level  = 0
+id     = "ImplantECoG"
+label  = "Implant ECoG (sigma=12 grid)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.20
+cost   = 0.10
+notes  = "channels=12=sigma EXACT, grid=sigma, invasive=true, comfort=none"
+
+[[candidate]]
+level  = 0
+id     = "MobileN6"
+label  = "Mobile 6-channel (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.55
+power  = 0.95
+cost   = 0.85
+notes  = "channels=6=n EXACT, coverage=minimal, invasive=false, comfort=high"
+
+# =============================================================
+# Level 1: Signal Processing -- 6 candidates
+# =============================================================
+[[level]]
+name = "Signal"
+
+[[candidate]]
+level  = 1
+id     = "FFT_N6"
+label  = "FFT n=6 frequency bands (delta/theta/alpha/beta/gamma/high-gamma)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "bands=6=n EXACT, resolution=good, realtime=true, complexity=low"
+
+[[candidate]]
+level  = 1
+id     = "Wavelet"
+label  = "Wavelet Transform (tau=4 scales)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.65
+notes  = "scales=4=tau EXACT, resolution=excellent, realtime=possible, complexity=medium"
+
+[[candidate]]
+level  = 1
+id     = "ICA_Decomp"
+label  = "ICA Independent Component Analysis (sigma=12 components)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.50
+notes  = "components=12=sigma EXACT, artifact_removal=excellent, realtime=difficult, complexity=high"
+
+[[candidate]]
+level  = 1
+id     = "CSP_Filter"
+label  = "Common Spatial Pattern (phi=2 class filter)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.70
+cost   = 0.75
+notes  = "classes=2=phi EXACT, spatial=good, realtime=true, complexity=low"
+
+[[candidate]]
+level  = 1
+id     = "AdaptiveFilter"
+label  = "Adaptive Filter (sopfr=5 parameters)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.65
+cost   = 0.70
+notes  = "params=5=sopfr EXACT, tracking=good, realtime=true, complexity=medium"
+
+[[candidate]]
+level  = 1
+id     = "HilbertPhase"
+label  = "Hilbert Phase (phi=2 phase/amplitude)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.80
+cost   = 0.80
+notes  = "outputs=2=phi EXACT, phase_info=excellent, realtime=true, complexity=low"
+
+# =============================================================
+# Level 2: Feature Extraction -- 6 candidates
+# =============================================================
+[[level]]
+name = "Feature"
+
+[[candidate]]
+level  = 2
+id     = "BandPower5"
+label  = "5-band power (delta/theta/alpha/beta/gamma)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.85
+cost   = 0.90
+notes  = "bands=5=sopfr EXACT, interpretable=true, dim=low, robust=high"
+
+[[candidate]]
+level  = 2
+id     = "PHBarcode"
+label  = "Persistent Homology Barcode (sigma-tau=8)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "features=8=sigma-tau EXACT, topological=true, dim=high, robust=very_high"
+
+[[candidate]]
+level  = 2
+id     = "TensionBiomarker"
+label  = "Tension Biomarker (PureField phi=2)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "axes=2=phi EXACT, novel=true, dim=medium, robust=medium"
+
+[[candidate]]
+level  = 2
+id     = "ERPComponent"
+label  = "ERP Components (P300/N400/N170/MMN = tau=4)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "components=4=tau EXACT, interpretable=true, dim=low, robust=high"
+
+[[candidate]]
+level  = 2
+id     = "Connectivity"
+label  = "Connectivity Metrics (sigma=12 channel pairs)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "pairs=12=sigma EXACT, network=true, dim=high, robust=medium"
+
+[[candidate]]
+level  = 2
+id     = "MicrostateTau4"
+label  = "Brain Microstates 4 types (tau=4 EXACT)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "states=4=tau EXACT, temporal=true, dim=medium, robust=high"
+
+# =============================================================
+# Level 3: Decoder -- 6 candidates
+# =============================================================
+[[level]]
+name = "Decoder"
+
+[[candidate]]
+level  = 3
+id     = "CNN_Decoder"
+label  = "CNN Decoder (sigma=12 layers)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.55
+notes  = "layers=12=sigma EXACT, spatial=excellent, temporal=weak, latency=medium"
+
+[[candidate]]
+level  = 3
+id     = "RNN_LSTM"
+label  = "LSTM Sequence (tau=4 gates EXACT)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.45
+cost   = 0.50
+notes  = "gates=4=tau EXACT, spatial=weak, temporal=excellent, latency=high"
+
+[[candidate]]
+level  = 3
+id     = "TransformerBCI"
+label  = "Transformer BCI (sigma=12 heads)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.35
+cost   = 0.40
+notes  = "heads=12=sigma EXACT, spatial=good, temporal=good, latency=high"
+
+[[candidate]]
+level  = 3
+id     = "EnsembleN6"
+label  = "Ensemble n=6 models"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.45
+notes  = "models=6=n EXACT, spatial=good, temporal=good, latency=medium"
+
+[[candidate]]
+level  = 3
+id     = "SVM_Classic"
+label  = "SVM Classic (phi=2 margin)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.85
+cost   = 0.90
+notes  = "margin=phi=2 EXACT, spatial=weak, temporal=none, latency=low"
+
+[[candidate]]
+level  = 3
+id     = "ReinforcementBCI"
+label  = "Reinforcement Learning BCI (sopfr=5 reward)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.45
+cost   = 0.50
+notes  = "rewards=5=sopfr EXACT, adaptive=excellent, temporal=good, latency=medium"
+
+# =============================================================
+# Level 4: Application -- 5 candidates
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "MotorImagery"
+label  = "Motor Imagery (phi=2 left/right)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.70
+cost   = 0.80
+notes  = "classes=2=phi EXACT, clinical=true, consumer=false, latency_req=medium"
+
+[[candidate]]
+level  = 4
+id     = "EmotionDetect"
+label  = "Emotion Detection (n=6 Ekman emotions)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.70
+notes  = "emotions=6=n EXACT, clinical=true, consumer=true, latency_req=low"
+
+[[candidate]]
+level  = 4
+id     = "AttentionMonitor"
+label  = "Attention Monitor (tau=4 attention states)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.75
+cost   = 0.75
+notes  = "states=4=tau EXACT, clinical=false, consumer=true, latency_req=low"
+
+[[candidate]]
+level  = 4
+id     = "SleepStaging"
+label  = "Sleep Staging (tau=4 stages: Wake/N1-N2/N3/REM)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.80
+cost   = 0.85
+notes  = "stages=4=tau EXACT, clinical=true, consumer=true, latency_req=none"
+
+[[candidate]]
+level  = 4
+id     = "Meditation"
+label  = "Meditation/Consciousness (sopfr=5 levels)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.70
+cost   = 0.75
+notes  = "levels=5=sopfr EXACT, clinical=false, consumer=true, latency_req=low"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ImplantECoG incompatible with DryElectrode (invasive vs non-invasive)
+# Note: they are at the same level, so we use exclude at level 0 vs level 0
+# But the rule format uses cross-level. Since both are level 0, we skip this
+# and handle it differently -- ImplantECoG is incompatible with comfort apps
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "ImplantECoG"
+then_level = 4
+then_ids   = "Meditation,AttentionMonitor"
+
+# PHBarcode requires FFT_N6 or Wavelet (PH needs frequency decomposition)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "PHBarcode"
+then_level = 1
+then_ids   = "FFT_N6,Wavelet"
+
+# TensionBiomarker requires ICA_Decomp (tension needs component separation)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "TensionBiomarker"
+then_level = 1
+then_ids   = "ICA_Decomp"
+
+# RNN_LSTM requires ERPComponent or BandPower5 (sequential features)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "RNN_LSTM"
+then_level = 2
+then_ids   = "ERPComponent,BandPower5"
+
+# EarEEG incompatible with HighDensity features (too few channels)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "EarEEG"
+then_level = 2
+then_ids   = "Connectivity,PHBarcode"

@@ -1,0 +1,357 @@
+# =============================================================
+# Precision Agriculture DSE Domain Definition
+# Smart farming tech — sensing to harvest
+# n=6: 6 spectral bands, σ=12 soil sensors, hexagonal field grid
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "precision-agriculture"
+desc = "Smart Farming Architecture DSE (sensing/analysis/irrigation/fertilization/harvest)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Sensing (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Sensing"
+
+[[candidate]]
+level = 0
+id = "MultiSpec-6band"
+label = "Multispectral n=6 Band (RGB+NIR+RedEdge+SWIR, crop health)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "HyperSpec"
+label = "Hyperspectral (200+ bands, disease detection, research)"
+n6 = 0.60
+perf = 1.00
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "SAR-Radar"
+label = "SAR Radar (all-weather, soil moisture, cloud penetrating)"
+n6 = 0.65
+perf = 0.80
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "IoT-Soil-12"
+label = "IoT Soil σ=12 Sensor Network (moisture+temp+pH+EC, ground)"
+n6 = 0.90
+perf = 0.75
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Drone-RGB"
+label = "Drone RGB Camera (low-cost, visual scouting, weekly)"
+n6 = 0.55
+perf = 0.55
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "LiDAR-Canopy"
+label = "LiDAR Canopy (3D structure, 6-return=n pulse, biomass)"
+n6 = 0.85
+perf = 0.90
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Level 1: Analysis (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Analysis"
+
+[[candidate]]
+level = 1
+id = "NDVI-6zone"
+label = "NDVI n=6 Zone Map (vegetation index, management zones)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "AI-CropModel"
+label = "AI Crop Model (deep learning, yield prediction, 12-feature=σ)"
+n6 = 0.85
+perf = 0.95
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "GIS-Prescription"
+label = "GIS Prescription Map (variable rate, soil-based zones)"
+n6 = 0.75
+perf = 0.80
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Weather-Fusion"
+label = "Weather Data Fusion (forecast+sensor, 6-day=n prediction)"
+n6 = 0.90
+perf = 0.75
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Simple-Threshold"
+label = "Simple Threshold (moisture trigger, basic automation)"
+n6 = 0.50
+perf = 0.45
+power = 0.95
+cost = 0.95
+
+[[candidate]]
+level = 1
+id = "Digital-Twin-Farm"
+label = "Digital Twin Farm (full simulation, 24=J₂ hour cycle)"
+n6 = 0.80
+perf = 1.00
+power = 0.50
+cost = 0.30
+
+# ============================================================
+# Level 2: Irrigation (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Irrigation"
+
+[[candidate]]
+level = 2
+id = "Drip-6zone"
+label = "Drip Irrigation n=6 Zone (precise, 90% efficiency, VRI)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "CenterPivot"
+label = "Center Pivot (large-scale, circular, 12 spans=σ)"
+n6 = 0.85
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "Subsurface-Drip"
+label = "Subsurface Drip (buried, minimal evaporation, permanent)"
+n6 = 0.80
+perf = 0.95
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Sprinkler-VRI"
+label = "Sprinkler Variable Rate (GPS-guided, zone control)"
+n6 = 0.70
+perf = 0.75
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Flood-Furrow"
+label = "Flood/Furrow (gravity, traditional, low-tech)"
+n6 = 0.40
+perf = 0.40
+power = 0.95
+cost = 0.95
+
+[[candidate]]
+level = 2
+id = "FogNet"
+label = "Fog Collection + Drip (arid region, passive, supplemental)"
+n6 = 0.65
+perf = 0.50
+power = 1.00
+cost = 0.60
+
+# ============================================================
+# Level 3: Fertilization (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Fertilization"
+
+[[candidate]]
+level = 3
+id = "VRA-6nutrient"
+label = "Variable Rate n=6 Nutrient (N-P-K-Ca-Mg-S, precision)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Fertigation"
+label = "Fertigation (drip-injected, 12-cycle=σ schedule, efficient)"
+n6 = 0.90
+perf = 0.85
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Broadcast"
+label = "Broadcast Spread (uniform, simple, traditional)"
+n6 = 0.50
+perf = 0.50
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "Foliar-Drone"
+label = "Foliar Spray Drone (aerial, micro-nutrient, targeted)"
+n6 = 0.75
+perf = 0.80
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Organic-Compost"
+label = "Organic Compost (soil health, Carbon Z=6, slow release)"
+n6 = 0.85
+perf = 0.60
+power = 0.95
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Biostimulant"
+label = "Biostimulant + Microbiome (6 species=n inoculant, emerging)"
+n6 = 0.90
+perf = 0.70
+power = 0.90
+cost = 0.55
+
+# ============================================================
+# Level 4: Harvest (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Harvest"
+
+[[candidate]]
+level = 4
+id = "AutoCombine"
+label = "Autonomous Combine (GPS-RTK, 6-row=n header, grain)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "RobotPicker"
+label = "Robot Picker (vision AI, 6-DOF=n arm, fruit/vegetable)"
+n6 = 0.95
+perf = 0.85
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "StripTill"
+label = "Strip-Till Harvest (conservation, 12-inch=σ rows, residue)"
+n6 = 0.80
+perf = 0.70
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Manual-Guided"
+label = "Manual Guided (operator, GPS display, traditional upgrade)"
+n6 = 0.50
+perf = 0.55
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 4
+id = "Swarm-Robot"
+label = "Swarm Robot Fleet (24=J₂ units, parallel harvest, small)"
+n6 = 0.80
+perf = 1.00
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "Selective-Harvest"
+label = "Selective Harvest (maturity sensing, 6 ripeness grades=n)"
+n6 = 0.90
+perf = 0.80
+power = 0.65
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Hyperspectral requires AI crop model (too complex for simple threshold)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "HyperSpec"
+then_level = 1
+then_ids = ["Simple-Threshold"]
+
+# Flood/furrow excluded from robot picker (incompatible field layout)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Flood-Furrow"
+then_level = 4
+then_ids = ["RobotPicker", "Swarm-Robot"]
+
+# Fertigation requires drip or subsurface drip irrigation
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Fertigation"
+then_level = 2
+then_ids = ["Drip-6zone", "Subsurface-Drip"]
+
+# Simple threshold excluded from swarm robot (needs advanced control)
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Simple-Threshold"
+then_level = 4
+then_ids = ["Swarm-Robot", "RobotPicker"]

@@ -1,0 +1,410 @@
+# =============================================================
+# ROBOT-HARDWARE DSE Domain Definition
+# 궁극의 로봇 하드웨어 아키텍처 — SE(3)=6 자유도 + σ=12 관절 + J₂=24 DOF
+# H-ROB-1~28 기반, Chain: Structure → Actuator → Sensor → Control → Integration
+# Total raw combos: 7x6x6x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "robot-hardware"
+desc = "Ultimate Robot Hardware DSE (H-ROB-1~28, SE(3)=6, sigma=12 joints, J2=24 DOF)"
+levels = ["Structure", "Actuator", "Sensor", "Control", "Integration"]
+vision = "n=6 기반 궁극의 로봇 하드웨어 — SE(3)=6 자유도 + σ=12 관절 + J₂=24 DOF"
+
+[scoring]
+n6   = 0.30
+perf = 0.30
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Structure (기구 구조) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Structure"
+
+[[candidate]]
+level  = 0
+id     = "Humanoid"
+label  = "인체형 (σ=12 주요 관절, H-ROB-1)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.30
+notes  = "joints=12=sigma EXACT, total_DOF=24=J2 EXACT, bipedal=true, dexterous=true, H-ROB-1"
+
+[[candidate]]
+level  = 0
+id     = "Quadruped"
+label  = "4족 보행 (tau=4 다리)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "legs=4=tau EXACT, DOF_per_leg=3, total_DOF=12=sigma EXACT, terrain=rough, stable=true"
+
+[[candidate]]
+level  = 0
+id     = "Hexapod"
+label  = "6족 보행 (n=6 다리, H-ROB-3)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "legs=6=n EXACT, DOF_per_leg=3, total_DOF=18, terrain=all, stability=very_high, H-ROB-3"
+
+[[candidate]]
+level  = 0
+id     = "HexapodN6"
+label  = "궁극 6족 (n=6 다리, tau=4 DOF/leg, J2=24 total)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "legs=6=n EXACT, DOF_per_leg=4=tau EXACT, total_DOF=24=J2 EXACT, body_segments=2=phi EXACT, sensor_per_leg=2=phi EXACT, gait_phases=12=sigma EXACT, terrain=all, stability=extreme, payload_ratio=1/6=1/n EXACT, tripod_gait=n/phi=3 legs grounded — perfect n6 hexapod"
+
+[[candidate]]
+level  = 0
+id     = "ModularN6"
+label  = "n=6 모듈 재조합"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "modules=6=n EXACT, reconfigurable=true, DOF_per_module=4=tau EXACT, total_DOF=24=J2 EXACT"
+
+[[candidate]]
+level  = 0
+id     = "SoftRobot"
+label  = "소프트 로봇 (sopfr=5 자유도)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.75
+cost   = 0.50
+notes  = "continuum_DOF=5=sopfr EXACT, compliant=true, safe=true, precision=low, H-ROB-7"
+
+[[candidate]]
+level  = 0
+id     = "Manipulator"
+label  = "6-DOF 매니퓰레이터 SE(3) (H-ROB-6)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.60
+notes  = "DOF=6=n EXACT (SE(3)), workspace=full, precision=high, industrial=true, H-ROB-6"
+
+[[candidate]]
+level  = 0
+id     = "Snake"
+label  = "뱀형 초다 DOF (J2=24 세그먼트)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.40
+notes  = "segments=24=J2 EXACT, DOF=24=J2 EXACT, confined_space=true, inspection=true"
+
+# =============================================================
+# Level 1: Actuator (구동기) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Actuator"
+
+[[candidate]]
+level  = 1
+id     = "BLDC_Gear"
+label  = "BLDC + 하모닉 드라이브 (sigma=12 극 쌍)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "pole_pairs=12=sigma EXACT, gear_ratio=100:1, torque=high, backdrivable=false"
+
+[[candidate]]
+level  = 1
+id     = "DirectDrive"
+label  = "직접 구동 토크 모터 (phi=2 방향)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.50
+cost   = 0.35
+notes  = "directions=2=phi EXACT, torque=very_high, backdrivable=true, bandwidth=high, expensive=true"
+
+[[candidate]]
+level  = 1
+id     = "Hydraulic"
+label  = "유압 구동 (tau=4 유압 회로)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.35
+cost   = 0.40
+notes  = "circuits=4=tau EXACT, force=extreme, power_density=highest, messy=true, heavy=true"
+
+[[candidate]]
+level  = 1
+id     = "PneumaticSoft"
+label  = "공압 소프트 (sopfr=5 챔버)"
+n6     = 0.75
+perf   = 0.60
+power  = 0.65
+cost   = 0.60
+notes  = "chambers=5=sopfr EXACT, compliant=true, safe=true, force=low, precision=low"
+
+[[candidate]]
+level  = 1
+id     = "SMA_Artificial"
+label  = "형상기억합금 인공근육 (n=6 변태 온도)"
+n6     = 0.75
+perf   = 0.55
+power  = 0.45
+cost   = 0.40
+notes  = "transition_modes=6=n EXACT, muscle_like=true, slow_response=true, lightweight=true"
+
+[[candidate]]
+level  = 1
+id     = "PiezoLinear"
+label  = "압전 리니어 (sigma-tau=8 스택)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.45
+notes  = "stack_layers=8=sigma-tau EXACT, precision=nanometer, range=small, fast=true"
+
+# =============================================================
+# Level 2: Sensor (센서) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level  = 2
+id     = "IMU_6Axis"
+label  = "6축 IMU (3가속+3자이로, n=6)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.70
+notes  = "axes=6=n EXACT, types=2=phi (accel+gyro), sample_rate=high, ubiquitous=true, H-ROB-8"
+
+[[candidate]]
+level  = 2
+id     = "ForceTorque"
+label  = "6축 힘/토크 센서 (n=6)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.50
+notes  = "axes=6=n EXACT, force_range=wide, torque_range=wide, compliance_ctrl=true, H-ROB-9"
+
+[[candidate]]
+level  = 2
+id     = "LiDAR_3D"
+label  = "3D LiDAR (sigma=12 채널)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.50
+cost   = 0.35
+notes  = "channels=12=sigma EXACT, range=100m, resolution=high, outdoor=true"
+
+[[candidate]]
+level  = 2
+id     = "VisionStereo"
+label  = "스테레오 비전 (phi=2 카메라)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "cameras=2=phi EXACT, depth=true, RGB=true, AI_ready=true, versatile=true"
+
+[[candidate]]
+level  = 2
+id     = "Tactile"
+label  = "촉각 센서 어레이 (sigma-tau=8 요소)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.45
+notes  = "elements=8=sigma-tau EXACT, pressure=true, temperature=true, slip_detection=true"
+
+[[candidate]]
+level  = 2
+id     = "ProprioReceptor"
+label  = "고유수용 감각 (tau=4 감각 타입)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.75
+cost   = 0.60
+notes  = "sense_types=4=tau EXACT (position+velocity+force+temperature), embedded=true, low_cost=true"
+
+# =============================================================
+# Level 3: Control (제어) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Control"
+
+[[candidate]]
+level  = 3
+id     = "InverseDyn"
+label  = "역동역학 제어 (n=6 DOF SE(3))"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "model_DOF=6=n EXACT (SE(3)), computed_torque=true, accuracy=high, model_dependent=true"
+
+[[candidate]]
+level  = 3
+id     = "MPC_N6"
+label  = "MPC 모델예측제어 (n=6 예측 수평)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "horizon=6=n EXACT, constraints=true, optimal=true, compute_heavy=true, H-ROB-15"
+
+[[candidate]]
+level  = 3
+id     = "RL_Policy"
+label  = "강화학습 정책 (sigma-tau=8 상태 차원)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "state_dims=8=sigma-tau EXACT, sim2real=true, adaptive=true, training_heavy=true"
+
+[[candidate]]
+level  = 3
+id     = "ImpedanceCtrl"
+label  = "임피던스 제어 (phi=2 강성/유연)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "modes=2=phi EXACT (stiff+compliant), contact_safe=true, force_control=true, simple=true"
+
+[[candidate]]
+level  = 3
+id     = "HybridForcePos"
+label  = "힘/위치 하이브리드 (phi=2 모드)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "control_modes=2=phi EXACT, task_space=6=n EXACT, assembly=true, contact=true"
+
+[[candidate]]
+level  = 3
+id     = "WholeBody"
+label  = "전신 제어 (J2=24 DOF)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "total_DOF=24=J2 EXACT, hierarchical=true, balance=true, locomotion+manipulation=true"
+
+# =============================================================
+# Level 4: Integration (시스템 통합) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Integration"
+
+[[candidate]]
+level  = 4
+id     = "ROS2_Native"
+label  = "ROS2 네이티브 (sigma=12 노드 토픽)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "node_topics=12=sigma EXACT, middleware=DDS, ecosystem=rich, industry_standard=true"
+
+[[candidate]]
+level  = 4
+id     = "EdgeAI"
+label  = "엣지 AI 추론 (tau=4 가속기)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "accelerators=4=tau EXACT, inference=realtime, onboard=true, power_efficient=true"
+
+[[candidate]]
+level  = 4
+id     = "CloudRobot"
+label  = "클라우드 오프로딩 (phi=2 로컬/클라우드)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.70
+cost   = 0.40
+notes  = "compute_split=2=phi EXACT (local+cloud), latency=variable, bandwidth_dependent=true"
+
+[[candidate]]
+level  = 4
+id     = "SwarmN6"
+label  = "n=6 에이전트 군집"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "agents=6=n EXACT, coordination=distributed, formation=6=n EXACT, scalable=true"
+
+[[candidate]]
+level  = 4
+id     = "DigitalTwin"
+label  = "디지털 트윈 통합"
+n6     = 0.50
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "mirror_fidelity=high, sim2real=bidirectional, monitoring=true, predictive_maint=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# SoftRobot requires PneumaticSoft or SMA_Artificial (needs compliant actuator)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "SoftRobot"
+then_level = 1
+then_ids   = "PneumaticSoft,SMA_Artificial"
+
+# Snake incompatible with Hydraulic (too heavy for snake robot)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Snake"
+then_level = 1
+then_ids   = "Hydraulic"
+
+# WholeBody requires Humanoid or ModularN6 (needs high-DOF structure)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "WholeBody"
+then_level = 0
+then_ids   = "Humanoid,ModularN6"
+
+# PiezoLinear incompatible with Humanoid (too small range for humanoid joints)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "PiezoLinear"
+then_level = 0
+then_ids   = "Humanoid,Quadruped,Hexapod,HexapodN6"
+
+# SwarmN6 requires Hexapod or HexapodN6 or Quadruped or ModularN6 (swarm needs mobile platforms)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "SwarmN6"
+then_level = 0
+then_ids   = "Hexapod,HexapodN6,Quadruped,ModularN6"
+
+# Hydraulic incompatible with EdgeAI (hydraulic systems need dedicated power, not edge compute)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "Hydraulic"
+then_level = 4
+then_ids   = "CloudRobot"

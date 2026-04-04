@@ -1,0 +1,410 @@
+# =============================================================
+# GPU-LANG DSE Domain Definition
+# GPU 컴퓨트 언어 아키텍처 — n=6 기반 GPU 프로그래밍 통합
+# BT-55 (HBM ladder) + BT-58 (sigma-tau=8 universal) + BT-69 (chiplet)
+# Total raw combos: 6x6x7x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "gpu-lang"
+desc = "Ultimate GPU Compute Language DSE (BT-55/58/59/69)"
+levels = ["Memory", "Execution", "Kernel", "Optimization", "Framework"]
+vision = "Unified GPU compute language where memory/execution/kernel align to n=6 constants"
+
+[scoring]
+n6   = 0.35
+perf = 0.30
+power = 0.20
+cost  = 0.15
+
+# =============================================================
+# Level 0: Memory (메모리 계층) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Memory"
+
+[[candidate]]
+level  = 0
+id     = "UnifiedMem"
+label  = "Unified Memory (CUDA Unified)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.65
+cost   = 0.50
+notes  = "phi=2 CPU/GPU EXACT, auto-migration, latency overhead, simple API"
+
+[[candidate]]
+level  = 0
+id     = "ExplicitMem"
+label  = "Explicit Transfer (CUDA Classic)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.50
+cost   = 0.40
+notes  = "tau=4 mem types (global/shared/local/const) EXACT, max control, complex API"
+
+[[candidate]]
+level  = 0
+id     = "HBM_Aware"
+label  = "HBM-Aware Allocation (BT-55)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.35
+notes  = "HBM stack sigma-tau=8 EXACT, bandwidth-optimized, hardware-specific"
+
+[[candidate]]
+level  = 0
+id     = "ScratchPad"
+label  = "Scratchpad-Centric (sigma-tau=8 banks)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "sigma-tau=8 banks EXACT, low latency, manual management"
+
+[[candidate]]
+level  = 0
+id     = "VirtualMem"
+label  = "Virtual Memory Paging"
+n6     = 0.50
+perf   = 0.60
+power  = 0.70
+cost   = 0.55
+notes  = "page levels=tau=4 EXACT, oversubscription, TLB overhead"
+
+[[candidate]]
+level  = 0
+id     = "EgyptianMem"
+label  = "1/2+1/3+1/6 Memory Split (compute/transfer/staging)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "Egyptian fraction 1/2+1/3+1/6=1 EXACT, balanced allocation, n=6 optimal"
+
+# =============================================================
+# Level 1: Execution (실행 모델) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Execution"
+
+[[candidate]]
+level  = 1
+id     = "SIMT_Warp"
+label  = "SIMT Warp (CUDA)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.50
+cost   = 0.40
+notes  = "warp=32=2^sopfr EXACT, sigma=12 warp scheduler slots, NVIDIA lock-in"
+
+[[candidate]]
+level  = 1
+id     = "SIMD_Wave"
+label  = "SIMD Wavefront (ROCm)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "sigma-tau=8 SIMD units EXACT, wavefront=64=2^n EXACT, open-source"
+
+[[candidate]]
+level  = 1
+id     = "TaskGraph"
+label  = "Task Graph (Vulkan Compute)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 queue families EXACT, explicit scheduling, cross-vendor"
+
+[[candidate]]
+level  = 1
+id     = "DataParallel"
+label  = "Data Parallel (SYCL)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "tau=4 dimensions EXACT, portable, abstraction overhead"
+
+[[candidate]]
+level  = 1
+id     = "StreamExec"
+label  = "Stream Execution (async/sync)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.45
+notes  = "phi=2 async/sync EXACT, pipelining, simple model"
+
+[[candidate]]
+level  = 1
+id     = "SubgroupOps"
+label  = "Subgroup Operations (sopfr=5 categories)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "sopfr=5 op categories EXACT, fine-grained, hardware-dependent"
+
+# =============================================================
+# Level 2: Kernel (커널 언어) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Kernel"
+
+[[candidate]]
+level  = 2
+id     = "CUDA_Native"
+label  = "CUDA C/C++ Native"
+n6     = 0.50
+perf   = 1.00
+power  = 0.45
+cost   = 0.35
+notes  = "industry standard, NVIDIA only, rich ecosystem"
+
+[[candidate]]
+level  = 2
+id     = "SPIRV_IL"
+label  = "SPIR-V IL (Vulkan/OpenCL)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "sigma=12 opcode categories EXACT, cross-vendor IL, verbose"
+
+[[candidate]]
+level  = 2
+id     = "WGSL_Web"
+label  = "WGSL (WebGPU)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.70
+cost   = 0.60
+notes  = "tau=4 type classes EXACT, web-portable, limited features"
+
+[[candidate]]
+level  = 2
+id     = "MLIR_Dialect"
+label  = "MLIR Custom Dialect"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "n=6 dialect layers EXACT, extensible, steep learning curve"
+
+[[candidate]]
+level  = 2
+id     = "MetaKernel"
+label  = "Metaprogramming Kernel"
+n6     = 0.75
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "sopfr=5 transforms EXACT, compile-time generation, complex debug"
+
+[[candidate]]
+level  = 2
+id     = "DSL_Domain"
+label  = "Domain-Specific DSL (AI/Physics/Graphics)"
+n6     = 0.50
+perf   = 0.92
+power  = 0.55
+cost   = 0.35
+notes  = "n/phi=3 domains EXACT, optimized per-domain, fragmented"
+
+[[candidate]]
+level  = 2
+id     = "HalideStyle"
+label  = "Halide Schedule/Algorithm Split"
+n6     = 0.75
+perf   = 0.88
+power  = 0.60
+cost   = 0.45
+notes  = "phi=2 split EXACT, clean separation, limited compute patterns"
+
+# =============================================================
+# Level 3: Optimization (최적화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimization"
+
+[[candidate]]
+level  = 3
+id     = "AutoTune"
+label  = "Auto-Tuning (Triton-style)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.40
+notes  = "sigma-tau=8 tuning params EXACT, automatic, search cost"
+
+[[candidate]]
+level  = 3
+id     = "Polyhedral"
+label  = "Polyhedral Optimization"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "n=6 transforms EXACT, mathematically rigorous, compile time"
+
+[[candidate]]
+level  = 3
+id     = "TileOpt"
+label  = "Tiling Optimization"
+n6     = 0.75
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "tau=4 tile levels EXACT, cache-friendly, manual tuning"
+
+[[candidate]]
+level  = 3
+id     = "FusionOpt"
+label  = "Kernel Fusion"
+n6     = 0.50
+perf   = 0.90
+power  = 0.65
+cost   = 0.45
+notes  = "phi=2 fuse/split EXACT, memory reduction, fusion analysis cost"
+
+[[candidate]]
+level  = 3
+id     = "MemCoalesce"
+label  = "Memory Coalescing Optimization"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "bandwidth-focused, hardware-specific, critical for throughput"
+
+[[candidate]]
+level  = 3
+id     = "OccupancyOpt"
+label  = "Occupancy Optimization (J2=24 register blocks)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.45
+notes  = "J2=24 register blocks EXACT, occupancy-driven, hardware-aware"
+
+# =============================================================
+# Level 4: Framework (프레임워크) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Framework"
+
+[[candidate]]
+level  = 4
+id     = "CUDA_Eco"
+label  = "CUDA Ecosystem (sigma=12 libraries)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.45
+cost   = 0.35
+notes  = "sigma=12 libraries EXACT, richest ecosystem, NVIDIA only"
+
+[[candidate]]
+level  = 4
+id     = "ROCm_Open"
+label  = "ROCm Open-Source"
+n6     = 0.50
+perf   = 0.85
+power  = 0.55
+cost   = 0.60
+notes  = "open ecosystem, growing, AMD hardware"
+
+[[candidate]]
+level  = 4
+id     = "WebGPU_Port"
+label  = "WebGPU Portable"
+n6     = 0.75
+perf   = 0.60
+power  = 0.70
+cost   = 0.65
+notes  = "tau=4 platforms EXACT, universal access, performance ceiling"
+
+[[candidate]]
+level  = 4
+id     = "OneAPI_Uni"
+label  = "oneAPI Unified"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "n=6 backends EXACT, cross-vendor, Intel-driven"
+
+[[candidate]]
+level  = 4
+id     = "Vulkan_Comp"
+label  = "Vulkan Compute"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "cross-platform, verbose API, graphics heritage"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CUDA_Native only with SIMT_Warp or StreamExec (NVIDIA execution model)
+
+[[candidate]]
+level  = 4
+id     = "FrameworkN6"
+label  = "n=6 컴퓨트 스테이지 프레임워크 (n=6 파이프라인)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "pipeline_stages=n=6 EXACT, n6-compute framework"
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "CUDA_Native"
+then_level = 1
+then_ids   = "SIMT_Warp,StreamExec"
+
+# WGSL_Web only with TaskGraph or DataParallel (web-compatible execution)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "WGSL_Web"
+then_level = 1
+then_ids   = "TaskGraph,DataParallel"
+
+# WGSL_Web requires WebGPU_Port framework
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "WGSL_Web"
+then_level = 4
+then_ids   = "WebGPU_Port"
+
+# VirtualMem incompatible with OccupancyOpt (paging kills occupancy)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "VirtualMem"
+then_level = 3
+then_ids   = "OccupancyOpt"
+
+# HBM_Aware requires CUDA_Eco or ROCm_Open (HBM-capable frameworks)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "HBM_Aware"
+then_level = 4
+then_ids   = "CUDA_Eco,ROCm_Open"
+
+# EgyptianMem incompatible with VirtualMem approach — different philosophy
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "EgyptianMem"
+then_level = 0
+then_ids   = "VirtualMem"

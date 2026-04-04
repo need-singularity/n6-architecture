@@ -1,0 +1,353 @@
+# HVAC System DSE — Heating/Ventilation/Air Conditioning Architecture
+# n=6: 6 air changes/hour, sigma=12 duct zones, R-410A components, COP ratios
+
+[meta]
+name = "hvac-system"
+desc = "HVAC Architecture DSE (6 ACH, sigma=12 zones, tau=4 seasons)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Source — Heat/Cool generation
+# ============================================================
+
+[[level]]
+name = "Source"
+
+[[candidate]]
+level = 0
+id = "VRF-6zone"
+label = "VRF 6-zone heat pump (COP=6=n, 6 indoor units)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Chiller-12ton"
+label = "Centrifugal chiller sigma=12 ton capacity (COP=6)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Geothermal-6loop"
+label = "Ground-source heat pump 6 boreholes (COP=4=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.95
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "Boiler-Gas"
+label = "Gas condensing boiler 96% eff (96=sigma*sigma-tau)"
+n6 = 0.75
+perf = 0.70
+power = 0.50
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "AirHP-Inverter"
+label = "Air-source inverter HP (COP=phi=2 to n=6 range)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "SolarThermal-6panel"
+label = "Solar thermal 6-panel array (n=6 collectors)"
+n6 = 1.00
+perf = 0.60
+power = 1.00
+cost = 0.55
+
+# ============================================================
+# Level 1: Distribution — Air/water delivery
+# ============================================================
+
+[[level]]
+name = "Distribution"
+
+[[candidate]]
+level = 1
+id = "Duct-12zone"
+label = "Ductwork sigma=12 zone VAV (12 dampers)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Hydronic-6loop"
+label = "Hydronic 6-loop radiant (n=6 circuits)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "FanCoil-12unit"
+label = "Fan coil sigma=12 units (4-pipe=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Chilled-Beam"
+label = "Active chilled beam 6 per floor (n=6 beams)"
+n6 = 1.00
+perf = 0.88
+power = 0.90
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "MiniSplit-6head"
+label = "Mini-split 6-head multi (n=6 indoor units)"
+n6 = 1.00
+perf = 0.72
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "UnderFloor-6zone"
+label = "Underfloor air 6-zone plenum (n=6 diffusers/zone)"
+n6 = 1.00
+perf = 0.82
+power = 0.88
+cost = 0.45
+
+# ============================================================
+# Level 2: Control — Automation & regulation
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 2
+id = "BAS-12point"
+label = "BAS sigma=12 control points per zone"
+n6 = 1.00
+perf = 0.92
+power = 0.85
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "PID-6loop"
+label = "PID 6-loop controller (n=6 feedback loops)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "AI-Predictive"
+label = "AI predictive control 24h=J2 lookahead"
+n6 = 1.00
+perf = 0.98
+power = 0.92
+cost = 0.30
+
+[[candidate]]
+level = 2
+id = "Thermostat-6sched"
+label = "Smart thermostat 6-schedule zones (n=6 periods)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "DDC-12IO"
+label = "DDC controller sigma=12 I/O points"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "MPC-6horizon"
+label = "Model predictive control 6h=n horizon"
+n6 = 1.00
+perf = 0.95
+power = 0.88
+cost = 0.35
+
+# ============================================================
+# Level 3: Refrigerant — Working fluid
+# ============================================================
+
+[[level]]
+name = "Refrigerant"
+
+[[candidate]]
+level = 3
+id = "R410A"
+label = "R-410A (2-component=phi blend, GWP=2088)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "R32"
+label = "R-32 (CH2F2, C=6 electrons, GWP=675)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "R290"
+label = "R-290 propane C3H8 (3=n/phi carbon chain, GWP=3)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "CO2-R744"
+label = "CO2 R-744 (C=Z=6, transcritical, GWP=1)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "R1234yf"
+label = "R-1234yf (4=tau fluorines, GWP<1)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Water-R718"
+label = "Water R-718 (6 hydrogen bonds/molecule in ice=n)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 1.00
+
+# ============================================================
+# Level 4: Building — Integration scale
+# ============================================================
+
+[[level]]
+name = "Building"
+
+[[candidate]]
+level = 4
+id = "Residential-6room"
+label = "Residential 6-room (n=6 zones, 6 ACH)"
+n6 = 1.00
+perf = 0.65
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 4
+id = "Office-12floor"
+label = "Office sigma=12 floor (12 AHUs, 48=sigma*tau occupants/floor)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Hospital-24zone"
+label = "Hospital J2=24 zone (6 ACH OR, 12 ACH ICU)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "DataCenter-48rack"
+label = "Data center sigma*tau=48 rack (PUE=1.2=sigma/(sigma-phi))"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Campus-6bldg"
+label = "Campus n=6 building district (central plant)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Warehouse-6bay"
+label = "Warehouse 6-bay (n=6 zones, destratification)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.75
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Geothermal not practical for data centers (space constraints)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Geothermal-6loop"
+then_level = 4
+then_ids = ["DataCenter-48rack"]
+
+# CO2 transcritical needs specialized distribution
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "CO2-R744"
+then_level = 1
+then_ids = ["Hydronic-6loop", "FanCoil-12unit"]
+
+# Water refrigerant only for large buildings
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Water-R718"
+then_level = 4
+then_ids = ["Residential-6room"]
+
+# Solar thermal requires hydronic or underfloor distribution
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "SolarThermal-6panel"
+then_level = 1
+then_ids = ["Hydronic-6loop", "UnderFloor-6zone"]

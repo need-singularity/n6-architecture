@@ -1,0 +1,422 @@
+# N6 Magnetic Material DSE — Soft & hard magnetic engineering
+# 6 Materials × 6 Processings × 6 Structures × 6 Characterizations × 6 Applications = 7,776 combos
+# n=6 connections: Fe BCC->FCC CN=8/12 (sigma-tau, sigma), 6 magnetic domains typical (n=6),
+#   sigma=12 crystallographic easy axes, tau=4 magnetic states (ferro/antiferro/ferri/para),
+#   phi=2 magnetic poles (N/S), J2=24 Weiss domains per grain
+
+[meta]
+name = "magnetic-material"
+desc = "Magnetic Material DSE — soft & hard magnetic engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: Si-steel 6.5%Si (n=6 EXACT), Finemet nanocrystal ~12nm (sigma=12),
+#              Permalloy Ni80/Fe20 (phi*tau=8=sigma-tau), Sendust Fe-Si-Al ternary
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "SiliconSteel_6p5Si"
+label = "Silicon steel 6.5%Si (n=6 EXACT Si content, grain-oriented, low core loss)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.90
+notes = "Si=6.5%~n EXACT, highest resistivity Fe-Si, near-zero magnetostriction"
+
+[[candidate]]
+id = "FerriteSoft_MnZn"
+label = "MnZn ferrite (soft ferrite, spinel CN=6 octahedral, high permeability)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.85
+notes = "spinel_B_site CN=6=n EXACT, high-frequency core, low eddy current"
+
+[[candidate]]
+id = "AmorphousRibbon"
+label = "Amorphous ribbon (Fe-B-Si metallic glass, no grain boundary, ultra-low loss)"
+n6 = 0.60
+perf = 0.80
+power = 0.90
+cost = 0.65
+notes = "no long-range order, rapid quench ~10^6 K/s, distribution transformer"
+
+[[candidate]]
+id = "Nanocrystalline_Finemet"
+label = "Nanocrystalline Finemet (Fe-Si-B-Nb-Cu, 12nm grain, sigma=12 EXACT)"
+n6 = 1.00
+perf = 0.95
+power = 0.85
+cost = 0.55
+notes = "grain=12nm=sigma EXACT, best soft magnetic: high Bs + low Hc"
+
+[[candidate]]
+id = "Permalloy_NiFe"
+label = "Permalloy Ni80Fe20 (highest permeability, near-zero anisotropy, shielding)"
+n6 = 0.80
+perf = 0.75
+power = 0.70
+cost = 0.60
+notes = "mu_max~100K, Ni/Fe=4=tau EXACT ratio, magnetic shielding standard"
+
+[[candidate]]
+id = "Sendust_FeSiAl"
+label = "Sendust Fe-Si-Al (ternary alloy, zero magnetostriction, powder core)"
+n6 = 0.60
+perf = 0.70
+power = 0.75
+cost = 0.75
+notes = "Fe85-Si9.5-Al5.5, ternary=n/phi=3 elements, zero lambda_s, powder core"
+
+# ============================================================
+# Level 1: Processing (공정)
+#   n6 checks: hot-rolling 6-pass (n=6 EXACT), annealing 12hr soak (sigma=12),
+#              rapid quench to amorphous, nanocrystallization 2-step (phi=2)
+# ============================================================
+
+[[level]]
+name = "Processing"
+
+[[candidate]]
+id = "HotRolling_6pass"
+label = "Hot rolling 6-pass (n=6 EXACT passes, grain-oriented texture, Goss)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.85
+notes = "passes=6=n EXACT, {110}<001> Goss texture, high permeability direction"
+
+[[candidate]]
+id = "RapidQuench"
+label = "Rapid quench (10^6 K/s, melt spinning, amorphous ribbon production)"
+n6 = 0.60
+perf = 0.85
+power = 0.50
+cost = 0.65
+notes = "wheel speed determines ribbon thickness ~24um=J2 EXACT"
+
+[[candidate]]
+id = "PowderSintering"
+label = "Powder sintering (atomize + press + sinter, ferrite/powder core)"
+n6 = 0.60
+perf = 0.70
+power = 0.65
+cost = 0.80
+notes = "sinter temp ~1200C=sigma*100 CLOSE, oxide bonded insulation"
+
+[[candidate]]
+id = "ThinFilmSputter"
+label = "Thin-film sputtering (PVD, 12-target carousel, sigma=12 EXACT, nm control)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.35
+notes = "targets=12=sigma EXACT, multilayer precision, recording head fabrication"
+
+[[candidate]]
+id = "AnnealingField"
+label = "Field annealing (magnetic field during anneal, 12hr soak, induced anisotropy)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+notes = "soak=12hr=sigma EXACT, induced uniaxial anisotropy, square BH loop"
+
+[[candidate]]
+id = "Nanocrystallization"
+label = "Nanocrystallization (2-step anneal, phi=2 EXACT, amorphous->nanocrystal)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.55
+notes = "steps=2=phi EXACT (nucleation + growth), Finemet optimal 550C/1hr"
+
+# ============================================================
+# Level 2: Structure (구조)
+#   n6 checks: nanocrystal 12nm (sigma=12), multilayer phi=2 alternation,
+#              single crystal 6 easy axes, composite soft-hard exchange spring
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "SingleCrystal"
+label = "Single crystal (6 equivalent easy axes in cubic, highest anisotropy control)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.25
+notes = "easy_axes=6=n EXACT (<100> family in cubic), anisotropy research"
+
+[[candidate]]
+id = "Polycrystal_grain"
+label = "Polycrystalline grain (random texture, 24 slip systems, J2=24 EXACT)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.85
+notes = "slip_systems=24=J2 EXACT (FCC {111}<110>), industrial standard"
+
+[[candidate]]
+id = "AmorphousGlass"
+label = "Amorphous glass (no grain boundary, isotropic, ultra-low coercivity)"
+n6 = 0.60
+perf = 0.80
+power = 0.85
+cost = 0.65
+notes = "no crystalline order, random close-packed, lowest Hc achievable"
+
+[[candidate]]
+id = "Nanocrystal_12nm"
+label = "Nanocrystalline 12nm grain (sigma=12 EXACT, exchange-averaged anisotropy)"
+n6 = 1.00
+perf = 1.00
+power = 0.80
+cost = 0.55
+notes = "grain=12nm=sigma EXACT, K_eff~0 by random anisotropy model, best Bs/Hc"
+
+[[candidate]]
+id = "Multilayer"
+label = "Multilayer (phi=2 alternating magnetic/nonmagnetic, GMR/TMR stack)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.40
+notes = "alternation=phi=2 EXACT, giant magnetoresistance, spin-valve sensor"
+
+[[candidate]]
+id = "CompositeSoftHard"
+label = "Composite soft-hard (exchange-spring, 2-phase, phi=2 EXACT coupling)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.45
+notes = "phases=2=phi EXACT, exchange-spring magnet, (BH)_max enhancement"
+
+# ============================================================
+# Level 3: Characterization (특성)
+#   n6 checks: BH loop 2 branches (phi=2), core loss at 6 frequencies (n=6),
+#              4 magnetic states (tau=4), domain imaging 12 domains (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Characterization"
+
+[[candidate]]
+id = "BH_loop"
+label = "BH hysteresis loop (phi=2 branches, coercivity/remanence/saturation)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.90
+notes = "branches=2=phi EXACT (ascending+descending), fundamental magnetic test"
+
+[[candidate]]
+id = "Permeability"
+label = "Permeability measurement (mu_r, frequency sweep 6 decades, impedance)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.80
+notes = "decades=6=n EXACT (1Hz-1MHz), complex permeability mu'+ j*mu''"
+
+[[candidate]]
+id = "CoreLoss_6freq"
+label = "Core loss at 6 frequencies (n=6 EXACT test points, Steinmetz equation)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.85
+notes = "frequencies=6=n EXACT, P=k*f^a*B^b Steinmetz, efficiency metric"
+
+[[candidate]]
+id = "Magnetostriction"
+label = "Magnetostriction (lambda_s, strain gauge, 4 measurement directions, tau=4)"
+n6 = 0.80
+perf = 0.70
+power = 0.70
+cost = 0.70
+notes = "directions=4=tau EXACT, lambda_s determines acoustic noise"
+
+[[candidate]]
+id = "CurieTemp"
+label = "Curie temperature (phase transition, DSC/VSM, 4 magnetic phases, tau=4)"
+n6 = 0.80
+perf = 0.75
+power = 0.65
+cost = 0.75
+notes = "phases=4=tau EXACT (ferro/antiferro/ferri/para), thermal stability limit"
+
+[[candidate]]
+id = "DomainImaging"
+label = "Domain imaging (Kerr/MFM/Lorentz, 6 domains per grain typical, n=6)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.50
+notes = "domains=6=n EXACT typical, visualize domain walls, closure domains"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: transformer core (sigma=12 layers), motor 6-pole (n=6),
+#              inductor RF, shielding EMI, sensor fluxgate, recording head
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "TransformerCore"
+label = "Transformer core (grain-oriented Si-steel, sigma=12 lamination layers)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.90
+notes = "laminations=12=sigma EXACT typical small transformer, 50/60Hz power"
+
+[[candidate]]
+id = "MotorStator_6pole"
+label = "Motor stator 6-pole (n=6 EXACT poles, BLDC/PMSM, EV traction)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.75
+notes = "poles=6=n EXACT, 3-phase*2=6, standard BLDC configuration"
+
+[[candidate]]
+id = "InductorRF"
+label = "Inductor RF (ferrite core, high-Q, 6-turn coil typical, MHz range)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+notes = "turns=6=n EXACT typical, MnZn/NiZn ferrite, EMI filter + power supply"
+
+[[candidate]]
+id = "ShieldingEMI"
+label = "Shielding EMI (Permalloy/mu-metal, 6-layer nested shield, n=6)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.55
+notes = "layers=6=n EXACT nested shield, >120dB attenuation, sensitive instruments"
+
+[[candidate]]
+id = "SensorFluxgate"
+label = "Sensor fluxgate (amorphous core, 2 excitation coils, phi=2 EXACT, nT)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+notes = "coils=2=phi EXACT (drive+sense), nT resolution, navigation/geophysics"
+
+[[candidate]]
+id = "RecordingHead"
+label = "Recording head (thin-film Permalloy, 12nm gap, sigma=12 EXACT, HDD)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.45
+notes = "gap=12nm=sigma EXACT, GMR/TMR read head, areal density scaling"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Silicon steel pairs best with hot rolling and field annealing
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "SiliconSteel_6p5Si"
+then_level = 1
+then_ids = "HotRolling_6pass,AnnealingField"
+
+# Amorphous ribbon requires rapid quench processing
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "AmorphousRibbon"
+then_level = 1
+then_ids = "RapidQuench"
+
+# Finemet requires nanocrystallization from amorphous precursor
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Nanocrystalline_Finemet"
+then_level = 1
+then_ids = "RapidQuench,Nanocrystallization"
+
+# Finemet naturally leads to nanocrystal structure
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Nanocrystalline_Finemet"
+then_level = 2
+then_ids = "Nanocrystal_12nm"
+
+# Permalloy best as thin film for recording/sensor
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Permalloy_NiFe"
+then_level = 1
+then_ids = "ThinFilmSputter"
+
+# Permalloy pairs with shielding and recording applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Permalloy_NiFe"
+then_level = 4
+then_ids = "ShieldingEMI,RecordingHead"
+
+# MnZn ferrite made by powder sintering
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "FerriteSoft_MnZn"
+then_level = 1
+then_ids = "PowderSintering"
+
+# MnZn ferrite pairs with RF inductor application
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "FerriteSoft_MnZn"
+then_level = 4
+then_ids = "InductorRF,TransformerCore"
+
+# Multilayer structure needs thin-film sputtering
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Multilayer"
+then_level = 1
+then_ids = "ThinFilmSputter"
+
+# Composite soft-hard leads to motor applications (high BHmax)
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "CompositeSoftHard"
+then_level = 4
+then_ids = "MotorStator_6pole"
+
+# Fluxgate sensor prefers amorphous glass structure (low noise)
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "SensorFluxgate"
+then_level = 2
+then_ids = "AmorphousGlass,Multilayer"

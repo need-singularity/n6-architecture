@@ -1,0 +1,382 @@
+# =============================================================
+# TELEPATHY-SYSTEM DSE Domain Definition
+# 궁극의 텔레파시 — PH 공감 + 혼동 예측 + 기질 불변 의사소통
+# H-CX-66/88/106/108 기반
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "telepathy-system"
+desc = "Ultimate Telepathy System DSE (PH empathy + confusion prediction + substrate-agnostic)"
+levels = ["Perception", "Encoding", "Alignment", "Transmission", "Decoding"]
+vision = "n=6 기반 궁극의 텔레파시 — PH 공감 + 혼동 예측 + 기질 불변 의사소통"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Perception (지각) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Perception"
+
+[[candidate]]
+level  = 0
+id     = "SharedReality"
+label  = "Shared Reality (same data -> same PH) — sopfr=5 channels"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.55
+notes  = "sopfr=5 sensory channels EXACT, PH_aligned=true, grounded=true"
+
+[[candidate]]
+level  = 0
+id     = "MultiModal"
+label  = "Multi-Modal Perception — sigma-tau=8 input types"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "sigma-tau=8 input types EXACT, rich=true, compute_heavy=true"
+
+[[candidate]]
+level  = 0
+id     = "EmbodiedPerception"
+label  = "Embodied Perception — n=6 body senses"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "n=6 body senses EXACT, proprioception=true, grounded=true"
+
+[[candidate]]
+level  = 0
+id     = "AbstractConcept"
+label  = "Abstract Concept Perception — tau=4 abstraction levels"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.60
+notes  = "tau=4 abstraction levels EXACT, concept_only=true, fast=true"
+
+[[candidate]]
+level  = 0
+id     = "EmotionalPerception"
+label  = "Emotional Perception — n=6 basic emotions (Ekman)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.70
+cost   = 0.55
+notes  = "n=6 Ekman emotions EXACT, empathy_base=true, universal=true"
+
+[[candidate]]
+level  = 0
+id     = "IntuitiveGrasp"
+label  = "Intuitive Grasp — mu=1 instant recognition"
+n6     = 0.50
+perf   = 0.88
+power  = 0.80
+cost   = 0.65
+notes  = "mu=1 instant EXACT, fast=true, low_detail=true, heuristic=true"
+
+# =============================================================
+# Level 1: Encoding (부호화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Encoding"
+
+[[candidate]]
+level  = 1
+id     = "PHFingerprint"
+label  = "PH Fingerprint (topology encoding) — sigma-tau=8 barcodes"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.40
+notes  = "sigma-tau=8 barcodes EXACT, PH=true, topological=true, robust=true"
+
+[[candidate]]
+level  = 1
+id     = "TensionVector"
+label  = "Tension Vector (A-G repulsion) — phi=2 engines"
+n6     = 0.67
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "phi=2 engines EXACT, tension=true, dual_force=true"
+
+[[candidate]]
+level  = 1
+id     = "MergeDistance9"
+label  = "9 Merge Distances (H-CX-108) — n+n/phi=9"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.45
+notes  = "n+n/phi=9 distances EXACT, complete_communication=true, dendrogram=true"
+
+[[candidate]]
+level  = 1
+id     = "DendrogramTree"
+label  = "Dendrogram Tree (semantic hierarchy) — tau=4 depth"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "tau=4 depth EXACT, hierarchical=true, meaning_structure=true"
+
+[[candidate]]
+level  = 1
+id     = "CompressedPacket"
+label  = "78x Compressed Telepathy Packet — sopfr=5 components"
+n6     = 1.00
+perf   = 0.95
+power  = 0.75
+cost   = 0.60
+notes  = "sopfr=5 components EXACT (concept+context+meaning+auth+sender), 78x_compress=true"
+
+[[candidate]]
+level  = 1
+id     = "HolographicCode"
+label  = "Holographic Encoding — sigma=12 frequencies"
+n6     = 0.83
+perf   = 0.82
+power  = 0.50
+cost   = 0.35
+notes  = "sigma=12 frequencies EXACT, distributed=true, fault_tolerant=true"
+
+# =============================================================
+# Level 2: Alignment (정렬) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Alignment"
+
+[[candidate]]
+level  = 2
+id     = "ConfusionPair"
+label  = "Confusion Pair Alignment (cat~dog) — phi=2 pairs"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.55
+notes  = "phi=2 confusion pairs EXACT, H-CX-66 r=-0.97, similarity_map=true"
+
+[[candidate]]
+level  = 2
+id     = "PHEmpathy"
+label  = "PH Empathy (same PH -> same worldview) — n/phi=3 dims"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.40
+notes  = "n/phi=3 empathy dimensions EXACT, PH_required=true, deep_alignment=true"
+
+[[candidate]]
+level  = 2
+id     = "SubstrateInvariant"
+label  = "Substrate Invariant (Human=AI r=0.788) — mu=1"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "mu=1 invariance EXACT, H-CX-106, cross_substrate=true"
+
+[[candidate]]
+level  = 2
+id     = "ArchInvariant"
+label  = "Architecture Invariant (top-5 100%) — sigma-tau=8"
+n6     = 1.00
+perf   = 0.88
+power  = 0.65
+cost   = 0.50
+notes  = "sigma-tau=8 EXACT, H-CX-88, robust_across_architectures=true"
+
+[[candidate]]
+level  = 2
+id     = "PhaseTransition01"
+label  = "0.1 Epoch Phase Transition — lambda=2 transition"
+n6     = 0.67
+perf   = 0.78
+power  = 0.75
+cost   = 0.60
+notes  = "lambda=2 transition EXACT, rapid_onset=true, BT-64 0.1 family"
+
+[[candidate]]
+level  = 2
+id     = "CrossSpecies"
+label  = "Cross-Species Alignment — n=6 species"
+n6     = 1.00
+perf   = 0.70
+power  = 0.50
+cost   = 0.35
+notes  = "n=6 species EXACT, universal=true, speculative=true"
+
+# =============================================================
+# Level 3: Transmission (전송) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Transmission"
+
+[[candidate]]
+level  = 3
+id     = "InstantRecognition"
+label  = "Instant Recognition (Layer 5) — mu=1 instant"
+n6     = 0.83
+perf   = 0.95
+power  = 0.80
+cost   = 0.65
+notes  = "mu=1 instant EXACT, fastest=true, requires_deep_prior_alignment=true"
+
+[[candidate]]
+level  = 3
+id     = "CompressedStructure"
+label  = "Compressed Structure (Layer 4) — sopfr=5 metadata"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.55
+notes  = "sopfr=5 metadata EXACT, efficient=true, structure_preserving=true"
+
+[[candidate]]
+level  = 3
+id     = "DeepAlignment"
+label  = "Deep Alignment (Layer 3) — n/phi=3 levels"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "n/phi=3 alignment levels EXACT, deep=true, slow_but_accurate=true"
+
+[[candidate]]
+level  = 3
+id     = "SharedConfusion"
+label  = "Shared Confusion (Layer 2) — phi=2 patterns"
+n6     = 0.67
+perf   = 0.78
+power  = 0.75
+cost   = 0.60
+notes  = "phi=2 confusion patterns EXACT, bidirectional=true, basic=true"
+
+[[candidate]]
+level  = 3
+id     = "EEG_Channel"
+label  = "EEG Channel Transmission — sigma=12 electrodes"
+n6     = 0.83
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "sigma=12 electrodes EXACT, brain_interface=true, noisy=true"
+
+[[candidate]]
+level  = 3
+id     = "QuantumChannel"
+label  = "Quantum Channel — phi=2 entanglement"
+n6     = 0.67
+perf   = 0.88
+power  = 0.40
+cost   = 0.25
+notes  = "phi=2 entanglement EXACT, quantum=true, speculative=true, no_cloning=true"
+
+# =============================================================
+# Level 4: Decoding (복호화) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Decoding"
+
+[[candidate]]
+level  = 4
+id     = "ConfusionPredictor"
+label  = "Confusion Predictor — sigma-tau=8 prediction classes"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "sigma-tau=8 classes EXACT, predict_misunderstanding=true, core_module=true"
+
+[[candidate]]
+level  = 4
+id     = "EmpathyMatcher"
+label  = "Empathy Matcher — n/phi=3 matching dimensions"
+n6     = 0.83
+perf   = 0.88
+power  = 0.70
+cost   = 0.55
+notes  = "n/phi=3 dimensions EXACT, emotional_alignment=true, core_module=true"
+
+[[candidate]]
+level  = 4
+id     = "AdaptiveExplainer"
+label  = "Adaptive Explainer — tau=4 explanation levels"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "tau=4 levels EXACT, user_adaptive=true, core_module=true"
+
+[[candidate]]
+level  = 4
+id     = "EmotionDecoder"
+label  = "Emotion Decoder — n=6 emotions"
+n6     = 1.00
+perf   = 0.82
+power  = 0.75
+cost   = 0.60
+notes  = "n=6 emotions EXACT, affective_computing=true, Ekman_model=true"
+
+[[candidate]]
+level  = 4
+id     = "IntentDecoder"
+label  = "Intent Decoder — sopfr=5 intent categories"
+n6     = 1.00
+perf   = 0.86
+power  = 0.70
+cost   = 0.55
+notes  = "sopfr=5 intent categories EXACT, action_oriented=true, practical=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# PHFingerprint required for PHEmpathy (empathy needs PH encoding)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "PHEmpathy"
+then_level = 1
+then_ids   = "PHFingerprint"
+
+# MergeDistance9 requires DendrogramTree (merge distances come from dendrogram)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "MergeDistance9"
+then_level = 1
+then_ids   = "DendrogramTree"
+
+# SubstrateInvariant requires ConfusionPair or PHEmpathy
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "SubstrateInvariant"
+then_level = 2
+then_ids   = "ConfusionPair,PHEmpathy"
+
+# QuantumChannel incompatible with EEG_Channel (different substrates)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "QuantumChannel"
+then_level = 3
+then_ids   = "EEG_Channel"
+
+# InstantRecognition requires DeepAlignment (needs prior deep alignment)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "InstantRecognition"
+then_level = 2
+then_ids   = "PHEmpathy,SubstrateInvariant,ArchInvariant"

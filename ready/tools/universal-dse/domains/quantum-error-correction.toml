@@ -1,0 +1,383 @@
+# =============================================================
+# QUANTUM-ERROR-CORRECTION DSE Domain Definition
+# 양자 오류 정정 — [[6,4,2]] 코드 EXACT, 표면 코드 d=n=6
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "quantum-error-correction"
+desc = "Quantum Error Correction — [[6,4,2]] code EXACT, surface code d=6, fault tolerance"
+levels = ["Code", "Decoder", "Threshold", "Overhead", "Architecture"]
+vision = "n=6 양자 오류 정정 — [[6,4,2]] 완전 코드 + 표면 코드 d=6 + 결함 허용"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Code (양자 코드) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Code"
+
+[[candidate]]
+level  = 0
+id     = "Surface_Code"
+label  = "표면 코드 d=n=6 (sigma=12 안정자)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "d=6=n EXACT, stabilizers=12=sigma EXACT, threshold~1%, Google/IBM standard"
+
+[[candidate]]
+level  = 0
+id     = "Color_Code"
+label  = "컬러 코드 (n/phi=3 색 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "colors=3=n/phi EXACT, transversal CCZ gate, 2D lattice, self-dual"
+
+[[candidate]]
+level  = 0
+id     = "Toric_Code"
+label  = "토릭 코드 (phi=2 루프 EXACT)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "loops=2=phi EXACT, Kitaev topological order, anyonic excitations"
+
+[[candidate]]
+level  = 0
+id     = "Steane_7"
+label  = "Steane [[7,1,3]] (P₁+1=7)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "n=7 close, k=1, d=3=n/phi, CSS code, transversal Clifford"
+
+[[candidate]]
+level  = 0
+id     = "Shor_9"
+label  = "Shor [[9,1,3]] (sopfr+tau=9)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "n=9=sopfr+tau, first QEC code, concatenated structure"
+
+[[candidate]]
+level  = 0
+id     = "N6_Code_642"
+label  = "[[6,4,2]] 코드 (n=6, k=tau=4, d=phi=2 ALL EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "n=6 EXACT, k=4=tau EXACT, d=2=phi EXACT, PERFECT n=6 quantum code"
+
+# =============================================================
+# Level 1: Decoder (디코더) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Decoder"
+
+[[candidate]]
+level  = 1
+id     = "MWPM"
+label  = "최소 무게 완전 매칭 (O(n³))"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "polynomial time, optimal for surface code, Edmonds blossom algorithm"
+
+[[candidate]]
+level  = 1
+id     = "Union_Find"
+label  = "유니온 파인드 (거의 O(n))"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "near-linear time, practical real-time, Delfosse/Nickerson"
+
+[[candidate]]
+level  = 1
+id     = "Neural"
+label  = "신경망 디코더 (sigma-tau=8 레이어)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "layers=8=sigma-tau EXACT, learned decoding, correlated errors"
+
+[[candidate]]
+level  = 1
+id     = "Tensor_Network"
+label  = "텐서 네트워크 디코더 (tau=4 본드)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "bond=4=tau EXACT, MPS contraction, near-optimal, scalable"
+
+[[candidate]]
+level  = 1
+id     = "Belief_Prop"
+label  = "믿음 전파 (sopfr=5 반복)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "iterations=5=sopfr EXACT, message passing, LDPC natural, parallelizable"
+
+[[candidate]]
+level  = 1
+id     = "Custom_N6"
+label  = "N6 맞춤 디코더 (n=6 신드롬 그룹)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.50
+notes  = "syndrome_groups=6=n EXACT, tailored for [[6,4,2]], lookup table feasible"
+
+# =============================================================
+# Level 2: Threshold (오류 임계값) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Threshold"
+
+[[candidate]]
+level  = 2
+id     = "1pct"
+label  = "1% 임계값 (표면 코드 표준)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "p_th=1%, surface code standard, most architectures achieve this"
+
+[[candidate]]
+level  = 2
+id     = "0_1pct"
+label  = "0.1% 임계값 (sigma-phi=10^-3)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "p_th=0.1%=10^{-(n/phi)}, concatenated threshold, stricter"
+
+[[candidate]]
+level  = 2
+id     = "0_01pct"
+label  = "0.01% 임계값 (10^-tau)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "p_th=10^{-4}=10^{-tau} EXACT, below threshold, logical error suppressed"
+
+[[candidate]]
+level  = 2
+id     = "Below_Threshold"
+label  = "임계값 미만 (Google 달성)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "p_physical < p_threshold, exponential error suppression, milestone"
+
+[[candidate]]
+level  = 2
+id     = "Near_Threshold"
+label  = "임계값 근접 (현재 하드웨어)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.65
+notes  = "p_physical ~ p_threshold, marginal improvement per code distance"
+
+[[candidate]]
+level  = 2
+id     = "Fault_Tolerant"
+label  = "결함 허용 (sigma=12 연쇄 억제)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "chain_length=12=sigma EXACT, cascading error blocked, full FT"
+
+# =============================================================
+# Level 3: Overhead (오버헤드) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Overhead"
+
+[[candidate]]
+level  = 3
+id     = "Physical_per_Logical"
+label  = "물리/논리 비 (2d²=72 for d=6)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "ratio=2*6^2=72=sigma*n EXACT, surface code overhead, d=6=n"
+
+[[candidate]]
+level  = 3
+id     = "Space_Time"
+label  = "시공간 오버헤드 (d³=216)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.45
+cost   = 0.40
+notes  = "volume=6^3=216=sigma*J2-n/phi, lattice surgery rounds, 3D"
+
+[[candidate]]
+level  = 3
+id     = "Magic_State"
+label  = "매직 상태 증류 (sopfr=5 라운드)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "rounds=5=sopfr EXACT, T-gate factory, 15-to-1 distillation"
+
+[[candidate]]
+level  = 3
+id     = "Syndrome_Extraction"
+label  = "신드롬 추출 (n=6 측정 큐비트)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "ancillas=6=n EXACT for [[6,4,2]], parallel extraction, fast"
+
+[[candidate]]
+level  = 3
+id     = "Ancilla"
+label  = "보조 큐비트 (phi=2 cat 상태)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "cat_qubits=2=phi EXACT, verified ancilla, flag-based FT"
+
+[[candidate]]
+level  = 3
+id     = "Transversal"
+label  = "횡단 게이트 (tau=4 Clifford)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "Clifford_generators=4=tau EXACT, inherently fault tolerant, no distillation"
+
+# =============================================================
+# Level 4: Architecture (아키텍처) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Architecture"
+
+[[candidate]]
+level  = 4
+id     = "Planar"
+label  = "평면 아키텍처 (2D 격자)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "2D nearest-neighbor, most practical, current fabrication standard"
+
+[[candidate]]
+level  = 4
+id     = "ThreeD"
+label  = "3D 아키텍처 (n/phi=3 차원 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "dimensions=3=n/phi EXACT, higher threshold, 3D gauge codes"
+
+[[candidate]]
+level  = 4
+id     = "Folded"
+label  = "접힌 아키텍처 (phi=2 층)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "layers=2=phi EXACT, folded surface code, compact layout"
+
+[[candidate]]
+level  = 4
+id     = "Modular_N6"
+label  = "N6 모듈형 (n=6 모듈, sigma=12 링크)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "modules=6=n EXACT, links=12=sigma EXACT, lattice surgery inter-module"
+
+[[candidate]]
+level  = 4
+id     = "Distributed"
+label  = "분산 아키텍처 (원격 얽힘)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.45
+cost   = 0.40
+notes  = "remote entanglement, quantum internet backbone, scalable long-term"
+
+[[candidate]]
+level  = 4
+id     = "Hybrid"
+label  = "하이브리드 (고전+양자 tau=4 레벨)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "levels=4=tau EXACT, classical preprocessing + quantum core, practical"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# N6_Code_642 best with Custom_N6 decoder
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "N6_Code_642"
+then_level = 1
+then_ids   = "Custom_N6,Tensor_Network,MWPM"
+
+# Steane_7 incompatible with Neural decoder (overkill for small code)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Steane_7"
+then_level = 1
+then_ids   = "Neural"
+
+# Distributed architecture requires Surface_Code or Toric_Code (long-range friendly)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Distributed"
+then_level = 0
+then_ids   = "Surface_Code,Toric_Code"
+
+# Transversal overhead requires Color_Code or N6_Code_642 (transversal gates)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Transversal"
+then_level = 0
+then_ids   = "Color_Code,N6_Code_642"

@@ -1,0 +1,377 @@
+# =============================================================
+# HEXA-BMS DSE Domain Definition
+# n=6: 6S cell config (n=6 EXACT), sigma=12 monitoring channels,
+#       tau=4 BMS functions, phi=2 active/passive, J2=24V nominal
+# BT-43 (CN=6 cathode), BT-57 (6->12->24 cell ladder), BT-82
+# Total combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "battery-management"
+desc = "BMS Battery Management System DSE (n=6 cell config, BT-43/57/82)"
+levels = ["Topology", "CellMonitoring", "Balancing", "StateEstimation", "Communication"]
+vision = "n=6 cell BMS -- sigma=12 channels, tau=4 functions (monitor/balance/protect/communicate), J2=24V nominal"
+
+[scoring]
+n6    = 0.35
+perf  = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Topology (BMS 토폴로지)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Topology"
+
+[[candidate]]
+level  = 0
+id     = "Centralized"
+label  = "Centralized BMS (single controller)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.80
+notes  = "Single MCU, n=6 cell groups, simple but limited scalability"
+
+[[candidate]]
+level  = 0
+id     = "Distributed"
+label  = "Distributed BMS (per-cell IC)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "n=6 slave ICs for 6S config EXACT, sigma=12 channels total"
+
+[[candidate]]
+level  = 0
+id     = "Modular"
+label  = "Modular BMS (module-level)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 cells per module EXACT, BT-57 6->12->24 cell ladder"
+
+[[candidate]]
+level  = 0
+id     = "Wireless"
+label  = "Wireless BMS (wBMS)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.50
+cost   = 0.42
+notes  = "No wiring harness, tau=4 communication slots, TI/ADI wireless"
+
+[[candidate]]
+level  = 0
+id     = "Hierarchical"
+label  = "Hierarchical Master-Slave BMS"
+n6     = 1.00
+perf   = 0.88
+power  = 0.58
+cost   = 0.60
+notes  = "Master + n=6 slave boards EXACT, sigma=12 cell monitoring total"
+
+[[candidate]]
+level  = 0
+id     = "CloudHybrid"
+label  = "Cloud-Connected Hybrid BMS"
+n6     = 0.67
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "Edge + cloud twin, J2=24 hour data sync cycle"
+
+# =============================================================
+# Level 1: CellMonitoring (셀 모니터링)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "CellMonitoring"
+
+[[candidate]]
+level  = 1
+id     = "ADC_12bit"
+label  = "12-bit ADC per Cell (sigma=12)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "sigma=12 bit resolution EXACT, standard precision"
+
+[[candidate]]
+level  = 1
+id     = "ADC_16bit"
+label  = "16-bit High-Precision ADC"
+n6     = 0.67
+perf   = 0.92
+power  = 0.60
+cost   = 0.55
+notes  = "High precision, 2^(sigma+tau)=65536 levels"
+
+[[candidate]]
+level  = 1
+id     = "EIS"
+label  = "Electrochemical Impedance Spectroscopy"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "In-situ EIS, n=6 frequency decades scanned"
+
+[[candidate]]
+level  = 1
+id     = "Coulomb"
+label  = "Coulomb Counting (current integration)"
+n6     = 0.50
+perf   = 0.78
+power  = 0.80
+cost   = 0.85
+notes  = "Simple current integration, phi=2 charge/discharge direction"
+
+[[candidate]]
+level  = 1
+id     = "TempArray"
+label  = "n=6 Thermistor Array"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.72
+notes  = "n=6 NTC thermistors per module EXACT, thermal gradient map"
+
+[[candidate]]
+level  = 1
+id     = "Multimodal"
+label  = "Multimodal Sensor Fusion"
+n6     = 1.00
+perf   = 0.93
+power  = 0.45
+cost   = 0.40
+notes  = "V+I+T+EIS+strain+gas = n=6 modalities EXACT, comprehensive"
+
+# =============================================================
+# Level 2: Balancing (셀 밸런싱)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Balancing"
+
+[[candidate]]
+level  = 2
+id     = "PassiveBleed"
+label  = "Passive Resistor Bleed"
+n6     = 0.50
+perf   = 0.70
+power  = 0.80
+cost   = 0.90
+notes  = "phi=2 on/off control, cheap but wasteful, dissipates excess"
+
+[[candidate]]
+level  = 2
+id     = "ActiveCap"
+label  = "Active Capacitor Shuttle"
+n6     = 0.83
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "Switched-capacitor, phi=2 active balance EXACT, >90% efficient"
+
+[[candidate]]
+level  = 2
+id     = "ActiveInductor"
+label  = "Active Inductor (flyback/boost)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "Inductor-based charge shuttle, tau=4 switching phases"
+
+[[candidate]]
+level  = 2
+id     = "BidirectDC"
+label  = "Bidirectional DC-DC per Cell"
+n6     = 1.00
+perf   = 0.92
+power  = 0.45
+cost   = 0.38
+notes  = "n=6 individual DC-DC converters EXACT, full independent control"
+
+[[candidate]]
+level  = 2
+id     = "TransformerBal"
+label  = "Multi-Winding Transformer Balance"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "n=6 secondary windings EXACT, simultaneous cell-to-pack balance"
+
+[[candidate]]
+level  = 2
+id     = "HybridBalance"
+label  = "Hybrid Passive+Active Balance"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.62
+notes  = "phi=2 mode switching, passive during rest, active during charge"
+
+# =============================================================
+# Level 3: StateEstimation (상태 추정)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "StateEstimation"
+
+[[candidate]]
+level  = 3
+id     = "ExtKalman"
+label  = "Extended Kalman Filter (EKF)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.70
+cost   = 0.72
+notes  = "Standard EKF SOC estimation, n=6 state variables"
+
+[[candidate]]
+level  = 3
+id     = "UnscentedKF"
+label  = "Unscented Kalman Filter (UKF)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.65
+cost   = 0.65
+notes  = "sigma=12 sigma-points (2n+1=13 or 2n=12), nonlinear SOC"
+
+[[candidate]]
+level  = 3
+id     = "NeuralSOC"
+label  = "Neural Network SOC/SOH"
+n6     = 1.00
+perf   = 0.92
+power  = 0.50
+cost   = 0.48
+notes  = "n=6 input features EXACT, LSTM/Transformer, BT-58 sigma-tau=8 layers"
+
+[[candidate]]
+level  = 3
+id     = "ParticleFilter"
+label  = "Particle Filter (PF)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.58
+notes  = "Monte Carlo, tau=4 model states, handles non-Gaussian"
+
+[[candidate]]
+level  = 3
+id     = "DualFilter"
+label  = "Dual EKF (SOC + SOH joint)"
+n6     = 1.00
+perf   = 0.93
+power  = 0.48
+cost   = 0.45
+notes  = "phi=2 dual filter EXACT, simultaneous SOC+SOH, n=6 parameters"
+
+[[candidate]]
+level  = 3
+id     = "PhysicsInformed"
+label  = "Physics-Informed Neural Network (PINN)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.45
+cost   = 0.42
+notes  = "Electrochemical model + NN hybrid, tau=4 degradation modes"
+
+# =============================================================
+# Level 4: Communication (통신)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Communication"
+
+[[candidate]]
+level  = 4
+id     = "CAN"
+label  = "CAN Bus 2.0B"
+n6     = 0.83
+perf   = 0.85
+power  = 0.75
+cost   = 0.80
+notes  = "Standard automotive, sigma-phi=10 Mbps option, reliable"
+
+[[candidate]]
+level  = 4
+id     = "CANFD"
+label  = "CAN-FD (Flexible Data Rate)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.70
+cost   = 0.72
+notes  = "sigma=12 MHz clock EXACT possible, 64-byte payload"
+
+[[candidate]]
+level  = 4
+id     = "SPI_Daisy"
+label  = "SPI Daisy-Chain (isoSPI)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.72
+cost   = 0.75
+notes  = "n=6 device daisy chain EXACT, LTC6811/ADBMS series"
+
+[[candidate]]
+level  = 4
+id     = "Wireless_BLE"
+label  = "BLE 5.0 Wireless"
+n6     = 0.67
+perf   = 0.82
+power  = 0.55
+cost   = 0.50
+notes  = "J2=24 bit advertising payload, no wiring, phi=2 central/peripheral"
+
+[[candidate]]
+level  = 4
+id     = "Ethernet"
+label  = "Automotive Ethernet (100BASE-T1)"
+n6     = 0.67
+perf   = 0.92
+power  = 0.60
+cost   = 0.55
+notes  = "High bandwidth for cloud BMS, future EV platform"
+
+[[candidate]]
+level  = 4
+id     = "UART_ModBus"
+label  = "UART / Modbus RTU"
+n6     = 0.50
+perf   = 0.78
+power  = 0.80
+cost   = 0.88
+notes  = "Simple serial, low-cost energy storage BMS, phi=2 master/slave"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Wireless BMS topology requires wireless communication
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Wireless"
+then_level = 4
+then_ids   = "Wireless_BLE"
+
+# Cloud hybrid topology requires high-bandwidth communication
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "CloudHybrid"
+then_level = 4
+then_ids   = "Ethernet,CANFD"
+
+# EIS monitoring requires advanced state estimation
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "EIS"
+then_level = 3
+then_ids   = "NeuralSOC,DualFilter,PhysicsInformed"

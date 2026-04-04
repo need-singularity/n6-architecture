@@ -1,0 +1,398 @@
+# =============================================================
+# HEXA-XR DSE Domain Definition
+# AR/VR Hardware Systems
+# n=6: 6 DoF tracking, sigma=12 IMU axes (2 controllers), J2=24 fps×2 eyes=48
+# BT-48 (Display-Audio bridge), BT-66 (Vision AI)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "ar-vr-system"
+desc = "AR/VR System DSE (BT-48/66, 6 DoF, sigma=12 IMU, J2=24 fps)"
+levels = ["Display", "Optics", "Tracking", "Compute", "Interaction"]
+vision = "Immersive reality — 6 DoF tracking, 12 sensor axes, 48 fps per eye"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Display — 6 candidates
+#   n6: sigma=12 bit color, J2=24 fps min, sigma*tau=48 fps target
+# =============================================================
+[[level]]
+name = "Display"
+
+[[candidate]]
+level = 0
+id    = "MicroOLED"
+label = "Micro-OLED (12-bit color, 6 subpixel layout, 4K per eye)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.40
+notes = "color=12bit=sigma EXACT, subpixels=6=n EXACT (RGBRGB pentile), Apple VP style"
+
+[[candidate]]
+level = 0
+id    = "LCD_Fast"
+label = "Fast LCD (120Hz=sigma*(sigma-phi), 6 ms response, 2K per eye)"
+n6    = 1.00
+perf  = 0.70
+power = 0.70
+cost  = 0.80
+notes = "rate=120Hz=sigma*(sigma-phi) EXACT, response=6ms=n EXACT, Quest style"
+
+[[candidate]]
+level = 0
+id    = "LCoS"
+label = "LCoS Reflective (12-bit phase, 6 color sequential, AR waveguide)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.55
+notes = "phase=12bit=sigma EXACT, sequential=6=n EXACT, HoloLens style"
+
+[[candidate]]
+level = 0
+id    = "MicroLED"
+label = "Micro-LED (6 um pixel pitch, 12-bit HDR, ultimate brightness)"
+n6    = 1.00
+perf  = 0.95
+power = 0.75
+cost  = 0.25
+notes = "pitch=6um=n EXACT, HDR=12bit=sigma EXACT, future premium"
+
+[[candidate]]
+level = 0
+id    = "DLP"
+label = "DLP MEMS Mirror (6 color wheel segments, 12 kHz mirror rate)"
+n6    = 1.00
+perf  = 0.65
+power = 0.55
+cost  = 0.65
+notes = "segments=6=n EXACT, rate=12kHz=sigma EXACT, projector AR"
+
+[[candidate]]
+level = 0
+id    = "Holographic"
+label = "Holographic Display (6 depth planes, 12 diffraction orders)"
+n6    = 1.00
+perf  = 0.85
+power = 0.45
+cost  = 0.20
+notes = "planes=6=n EXACT, orders=12=sigma EXACT, true 3D, research stage"
+
+# =============================================================
+# Level 1: Optics — 6 candidates
+#   n6: 6 lens elements, 12 mm eye relief
+# =============================================================
+[[level]]
+name = "Optics"
+
+[[candidate]]
+level = 1
+id    = "Pancake"
+label = "Pancake Lens (6 optical surfaces, 12 mm eye relief, compact)"
+n6    = 1.00
+perf  = 0.85
+power = 0.80
+cost  = 0.55
+notes = "surfaces=6=n EXACT, relief=12mm=sigma EXACT, 50% thinner"
+
+[[candidate]]
+level = 1
+id    = "Fresnel"
+label = "Fresnel Lens (6 groove zones, 12 cm focal length)"
+n6    = 1.00
+perf  = 0.65
+power = 0.85
+cost  = 0.90
+notes = "zones=6=n EXACT, focal=12cm=sigma EXACT, lightweight+cheap"
+
+[[candidate]]
+level = 1
+id    = "Waveguide_DOE"
+label = "DOE Waveguide (6 diffraction layers, 12 mm FoV expander)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.35
+notes = "layers=6=n EXACT, expander=12mm=sigma EXACT, AR glasses"
+
+[[candidate]]
+level = 1
+id    = "Birdbath"
+label = "Birdbath Combiner (6 coating layers, 12 mm pupil)"
+n6    = 1.00
+perf  = 0.70
+power = 0.70
+cost  = 0.60
+notes = "coatings=6=n EXACT, pupil=12mm=sigma EXACT, simple AR"
+
+[[candidate]]
+level = 1
+id    = "Varifocal"
+label = "Varifocal Lens (6 focal planes, 12 actuator elements)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.30
+notes = "planes=6=n EXACT, actuators=12=sigma EXACT, vergence-accommodation"
+
+[[candidate]]
+level = 1
+id    = "Metalens"
+label = "Metalens (6 nm nanopost, 12 phase levels, ultra-thin)"
+n6    = 1.00
+perf  = 0.75
+power = 0.90
+cost  = 0.25
+notes = "nanopost=6nm=n EXACT, phases=12=sigma EXACT, flat optics future"
+
+# =============================================================
+# Level 2: Tracking — 6 candidates
+#   n6: 6 DoF, sigma=12 IMU axes (2 controllers), tau=4 cameras
+# =============================================================
+[[level]]
+name = "Tracking"
+
+[[candidate]]
+level = 2
+id    = "InsideOut_6DoF"
+label = "Inside-Out 6DoF (6 DoF, 4 cameras=tau, 12 IMU axes)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.70
+notes = "DoF=6=n EXACT, cameras=4=tau EXACT, IMU=12=sigma EXACT, Quest style"
+
+[[candidate]]
+level = 2
+id    = "Lighthouse"
+label = "Lighthouse Tracking (6 DoF, 12 photodiodes, 2 base stations=phi)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.50
+notes = "DoF=6=n EXACT, diodes=12=sigma EXACT, bases=2=phi EXACT, sub-mm"
+
+[[candidate]]
+level = 2
+id    = "Eye_Hand"
+label = "Eye+Hand Tracking (6 eye cameras, 12 hand joints tracked)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.55
+notes = "cameras=6=n EXACT, joints=12=sigma EXACT, natural interaction"
+
+[[candidate]]
+level = 2
+id    = "SLAM_Dense"
+label = "Dense SLAM (6 keyframe buffer, 12 feature layers, real-time)"
+n6    = 1.00
+perf  = 0.80
+power = 0.50
+cost  = 0.60
+notes = "keyframes=6=n EXACT, layers=12=sigma EXACT, spatial mapping"
+
+[[candidate]]
+level = 2
+id    = "UWB_Hybrid"
+label = "UWB + IMU Hybrid (6 anchors, 12 cm accuracy, outdoor)"
+n6    = 1.00
+perf  = 0.70
+power = 0.75
+cost  = 0.65
+notes = "anchors=6=n EXACT, accuracy=12cm=sigma EXACT, location-based AR"
+
+[[candidate]]
+level = 2
+id    = "Neural_Track"
+label = "Neural Body Tracking (6 body segments, 12 joint angles)"
+n6    = 1.00
+perf  = 0.75
+power = 0.55
+cost  = 0.45
+notes = "segments=6=n EXACT, angles=12=sigma EXACT, full-body avatar"
+
+# =============================================================
+# Level 3: Compute — 6 candidates
+#   n6: 6 cores, 12 TOPS NPU, sigma-tau=8 GPU clusters
+# =============================================================
+[[level]]
+name = "Compute"
+
+[[candidate]]
+level = 3
+id    = "Mobile_SoC"
+label = "Mobile SoC (6 CPU cores, 12 TOPS NPU, 6W TDP)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.75
+notes = "cores=6=n EXACT, TOPS=12=sigma EXACT, TDP=6W=n EXACT, standalone"
+
+[[candidate]]
+level = 3
+id    = "XR_Chip"
+label = "Dedicated XR Chip (6 render pipelines, 12 shader cores)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.55
+notes = "pipelines=6=n EXACT, shaders=12=sigma EXACT, Quest Pro style"
+
+[[candidate]]
+level = 3
+id    = "PC_Tether"
+label = "PC Tethered (12 GPU cores, 6 ms motion-to-photon)"
+n6    = 1.00
+perf  = 0.95
+power = 0.30
+cost  = 0.40
+notes = "cores=12=sigma EXACT, latency=6ms=n EXACT, highest quality"
+
+[[candidate]]
+level = 3
+id    = "Cloud_Render"
+label = "Cloud Rendering (6 GPU instances, 12 ms total latency)"
+n6    = 1.00
+perf  = 0.90
+power = 0.85
+cost  = 0.35
+notes = "instances=6=n EXACT, latency=12ms=sigma EXACT, 5G streaming"
+
+[[candidate]]
+level = 3
+id    = "Foveated"
+label = "Foveated Render Engine (6 foveal zones, 12x center detail)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.60
+notes = "zones=6=n EXACT, detail=12x=sigma EXACT, 70% GPU savings"
+
+[[candidate]]
+level = 3
+id    = "NPU_Edge"
+label = "NPU Edge AI (6 AI accelerators, 48 TOPS total)"
+n6    = 1.00
+perf  = 0.75
+power = 0.65
+cost  = 0.50
+notes = "accelerators=6=n EXACT, TOPS=48=sigma*tau EXACT, on-device AI"
+
+# =============================================================
+# Level 4: Interaction — 6 candidates
+#   n6: 6 input modalities, 12 haptic actuators
+# =============================================================
+[[level]]
+name = "Interaction"
+
+[[candidate]]
+level = 4
+id    = "Controller_6DoF"
+label = "6DoF Controllers (2 controllers=phi, 6 buttons each, 12 haptic)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.70
+notes = "controllers=2=phi EXACT, buttons=6=n EXACT, haptics=12=sigma EXACT"
+
+[[candidate]]
+level = 4
+id    = "Hand_Track"
+label = "Hand Tracking Only (6 gesture types, 12 finger segments)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.90
+notes = "gestures=6=n EXACT, segments=12=sigma EXACT, controller-free"
+
+[[candidate]]
+level = 4
+id    = "Eye_Gaze"
+label = "Eye Gaze + Voice (6 gaze commands, 12 voice keywords)"
+n6    = 1.00
+perf  = 0.75
+power = 0.75
+cost  = 0.65
+notes = "commands=6=n EXACT, keywords=12=sigma EXACT, accessibility"
+
+[[candidate]]
+level = 4
+id    = "Haptic_Glove"
+label = "Haptic Gloves (6 actuators/finger, 12 force feedback zones)"
+n6    = 1.00
+perf  = 0.90
+power = 0.45
+cost  = 0.25
+notes = "actuators=6=n EXACT, zones=12=sigma EXACT, tactile immersion"
+
+[[candidate]]
+level = 4
+id    = "Full_Body"
+label = "Full-Body Haptic Suit (6 body zones, 12 vibration motors each)"
+n6    = 1.00
+perf  = 0.85
+power = 0.35
+cost  = 0.20
+notes = "zones=6=n EXACT, motors=12=sigma EXACT, total=72=sigma*n"
+
+[[candidate]]
+level = 4
+id    = "BCI_Neural"
+label = "BCI Neural Interface (6 EEG channels, 12 Hz sampling, research)"
+n6    = 1.00
+perf  = 0.60
+power = 0.55
+cost  = 0.15
+notes = "channels=6=n EXACT, sampling=12Hz=sigma EXACT, thought control"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Holographic display needs varifocal optics
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "Holographic"
+then_level = 1
+then_ids  = "Varifocal,Metalens"
+
+# Waveguide optics for AR glasses only
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "Waveguide_DOE"
+then_level = 0
+then_ids  = "LCoS,MicroLED"
+
+# Cloud rendering needs hand tracking (no wired controller)
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "Cloud_Render"
+then_level = 4
+then_ids  = "Hand_Track,Eye_Gaze"
+
+# Haptic gloves need eye+hand tracking
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Haptic_Glove"
+then_level = 2
+then_ids  = "Eye_Hand"
+
+# BCI too experimental for mobile SoC
+[[rule]]
+type      = "exclude"
+if_level  = 4
+if_id     = "BCI_Neural"
+then_level = 3
+then_ids  = "Mobile_SoC"

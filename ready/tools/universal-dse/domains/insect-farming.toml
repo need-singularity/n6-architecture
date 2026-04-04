@@ -1,0 +1,376 @@
+# =============================================================
+# HEXA-INSECT DSE Domain Definition
+# n=6: 6-legged insects (n=6 EXACT), sigma=12 gen cycles/yr,
+#       tau=4 life stages, phi=2 indoor/outdoor, J2=24h harvest
+# Total combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "insect-farming"
+desc = "Edible Insect Production DSE (n=6 hexapoda, BT-27/51)"
+levels = ["Species", "Housing", "Feeding", "Processing", "Product"]
+vision = "n=6 hexapoda-driven protein factory -- 6 legs, sigma=12 generations/yr, tau=4 life stages"
+
+[scoring]
+n6    = 0.35
+perf  = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Species (종)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Species"
+
+[[candidate]]
+level  = 0
+id     = "BSF"
+label  = "Black Soldier Fly (Hermetia illucens)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.75
+cost   = 0.80
+notes  = "n=6 legs EXACT, sigma=12 gen/yr, tau=4 stages, waste-to-protein champion"
+
+[[candidate]]
+level  = 0
+id     = "Cricket"
+label  = "House Cricket (Acheta domesticus)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.75
+notes  = "n=6 legs EXACT, 70% protein, sigma=12 weeks to harvest cycle"
+
+[[candidate]]
+level  = 0
+id     = "Mealworm"
+label  = "Yellow Mealworm (Tenebrio molitor)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.72
+cost   = 0.70
+notes  = "n=6 legs EXACT, EU novel food approved, tau=4 life stages"
+
+[[candidate]]
+level  = 0
+id     = "Silkworm"
+label  = "Silkworm (Bombyx mori)"
+n6     = 1.00
+perf   = 0.78
+power  = 0.68
+cost   = 0.65
+notes  = "n=6 legs EXACT, dual product (silk + protein), J2=24 day pupation"
+
+[[candidate]]
+level  = 0
+id     = "Locust"
+label  = "Migratory Locust (Locusta migratoria)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.65
+cost   = 0.60
+notes  = "n=6 legs EXACT, high biomass yield, phi=2 solitary/gregarious phases"
+
+[[candidate]]
+level  = 0
+id     = "PalmWeevil"
+label  = "Palm Weevil Larva (Rhynchophorus)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 legs EXACT, high fat content, traditional food source"
+
+# =============================================================
+# Level 1: Housing (사육 시설)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Housing"
+
+[[candidate]]
+level  = 1
+id     = "VerticalRack"
+label  = "Vertical Rack System (sigma=12 tiers)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "sigma=12 rack tiers EXACT, maximizes density per m^2"
+
+[[candidate]]
+level  = 1
+id     = "ContainerMod"
+label  = "Modular Container Farm"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "Shipping container modules, n=6 environment parameters"
+
+[[candidate]]
+level  = 1
+id     = "OpenShed"
+label  = "Tropical Open Shed"
+n6     = 0.50
+perf   = 0.70
+power  = 0.90
+cost   = 0.85
+notes  = "Low-tech, natural ventilation, phi=2 season dependent"
+
+[[candidate]]
+level  = 1
+id     = "ClimateRoom"
+label  = "Climate-Controlled Chamber"
+n6     = 0.83
+perf   = 0.92
+power  = 0.45
+cost   = 0.40
+notes  = "n=6 controlled parameters (temp/humid/light/CO2/airflow/NH3)"
+
+[[candidate]]
+level  = 1
+id     = "Greenhouse"
+label  = "Insect Greenhouse"
+n6     = 0.67
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "Solar-heated greenhouse, tau=4 seasonal adjustment"
+
+[[candidate]]
+level  = 1
+id     = "AutoTray"
+label  = "Automated Tray Conveyor"
+n6     = 0.83
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "J2=24 hour continuous harvest cycle, robotic tray handling"
+
+# =============================================================
+# Level 2: Feeding (사료/급이)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Feeding"
+
+[[candidate]]
+level  = 2
+id     = "OrganicWaste"
+label  = "Organic Food Waste"
+n6     = 1.00
+perf   = 0.85
+power  = 0.85
+cost   = 0.90
+notes  = "C6H12O6 glucose waste streams (BT-27), circular economy"
+
+[[candidate]]
+level  = 2
+id     = "BrewersGrain"
+label  = "Brewers Grain / Agricultural Byproduct"
+n6     = 0.83
+perf   = 0.82
+power  = 0.80
+cost   = 0.85
+notes  = "Beer/distillery byproduct, n=6 nutrient components"
+
+[[candidate]]
+level  = 2
+id     = "FormulatedDiet"
+label  = "Formulated n=6 Diet"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.55
+notes  = "n=6 macro components (protein/carb/fat/fiber/mineral/vitamin)"
+
+[[candidate]]
+level  = 2
+id     = "AlgaeSupp"
+label  = "Algae-Supplemented Feed"
+n6     = 0.83
+perf   = 0.88
+power  = 0.70
+cost   = 0.60
+notes  = "Spirulina/Chlorella supplement, 6CO2+6H2O photosynthesis link"
+
+[[candidate]]
+level  = 2
+id     = "ManureCompost"
+label  = "Manure / Compost Substrate"
+n6     = 0.67
+perf   = 0.75
+power  = 0.90
+cost   = 0.92
+notes  = "BSF-specialized, tau=4 decomposition stages"
+
+[[candidate]]
+level  = 2
+id     = "PrecisionFeed"
+label  = "AI-Optimized Precision Feeding"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "ML-driven feed optimization, sigma-tau=8 sensor inputs"
+
+# =============================================================
+# Level 3: Processing (가공)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Processing"
+
+[[candidate]]
+level  = 3
+id     = "FreezeKill"
+label  = "Freeze Kill + Dry"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.70
+notes  = "Freeze-kill then dehydrate, tau=4 steps (kill/dry/grind/pack)"
+
+[[candidate]]
+level  = 3
+id     = "BlanchDry"
+label  = "Blanch + Hot-Air Dry"
+n6     = 0.67
+perf   = 0.82
+power  = 0.55
+cost   = 0.72
+notes  = "Boiling blanch + drying, standard EU method"
+
+[[candidate]]
+level  = 3
+id     = "Fractionation"
+label  = "n=6 Fraction Separation (protein/fat/chitin/mineral/fiber/water)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.50
+notes  = "n=6 EXACT — 6 fractions (protein/fat/chitin/mineral/fiber/water), hexagonal separation pipeline"
+
+[[candidate]]
+level  = 3
+id     = "Extrusion"
+label  = "Extruded Insect Pellet"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.60
+notes  = "Twin-screw extrusion, sigma=12 barrel zones"
+
+[[candidate]]
+level  = 3
+id     = "Fermentation"
+label  = "Fermented Insect Paste"
+n6     = 0.83
+perf   = 0.78
+power  = 0.70
+cost   = 0.65
+notes  = "Lactic fermentation, tau=4 fermentation phases"
+
+[[candidate]]
+level  = 3
+id     = "Enzymatic"
+label  = "Enzymatic Hydrolysis"
+n6     = 1.00
+perf   = 0.92
+power  = 0.40
+cost   = 0.45
+notes  = "n=6 enzyme cocktail, J2=24 hour hydrolysis cycle, highest purity"
+
+# =============================================================
+# Level 4: Product (최종 제품)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Product"
+
+[[candidate]]
+level  = 4
+id     = "ProteinPowder"
+label  = "Insect Protein Powder"
+n6     = 0.83
+perf   = 0.88
+power  = 0.70
+cost   = 0.75
+notes  = "Human food supplement, n=6 essential amino acid groups"
+
+[[candidate]]
+level  = 4
+id     = "AnimalFeed"
+label  = "Livestock/Aqua Feed"
+n6     = 0.83
+perf   = 0.90
+power  = 0.75
+cost   = 0.80
+notes  = "Fish/poultry feed replacement, sigma=12 month supply chain"
+
+[[candidate]]
+level  = 4
+id     = "WholeSnack"
+label  = "Whole Roasted Snack"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "Direct consumption, n=6 leg visibility, minimal processing"
+
+[[candidate]]
+level  = 4
+id     = "ChitinBio"
+label  = "Chitin / Chitosan Biomaterial"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "Bioplastic/medical, chitin from exoskeleton"
+
+[[candidate]]
+level  = 4
+id     = "Frass"
+label  = "Insect Frass Fertilizer"
+n6     = 1.00
+perf   = 0.72
+power  = 0.85
+cost   = 0.90
+notes  = "Organic fertilizer byproduct, n=6 nutrient NPKCaMgS EXACT"
+
+[[candidate]]
+level  = 4
+id     = "OilLipid"
+label  = "Insect Oil / Lipid Extract"
+n6     = 0.67
+perf   = 0.82
+power  = 0.65
+cost   = 0.60
+notes  = "Lauric acid-rich oil, cosmetic/food use, phi=2 extraction phases"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# BSF is waste-specialist: pairs best with organic waste or manure
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "PalmWeevil"
+then_level = 1
+then_ids   = "OpenShed,Greenhouse"
+
+# Silkworm requires controlled environment
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Silkworm"
+then_level = 1
+then_ids   = "ClimateRoom,ContainerMod,Greenhouse"
+
+# Enzymatic hydrolysis only for high-value products
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Enzymatic"
+then_level = 4
+then_ids   = "ProteinPowder,ChitinBio,OilLipid"

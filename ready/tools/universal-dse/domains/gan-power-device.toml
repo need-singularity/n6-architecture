@@ -1,0 +1,426 @@
+# N6 GaN Power Device DSE — Gallium nitride electronics
+# 6×6×6×6×6 = 7,776 combos
+# n=6: 6H-GaN polytype (n=6 EXACT hexagonal stacking),
+#       sigma=12 eV direct+indirect gaps sum, tau=4 epitaxial layers (buffer/channel/barrier/cap),
+#       phi=2 normally-off enhancement, J2=24 W/mm power density target
+
+[meta]
+name = "gan-power-device"
+desc = "GaN Power Device DSE — 6H polytype (n=6), 4-layer epitaxy (tau), 24 W/mm (J2)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Device Type (소자 유형)
+#   n6 checks: polytype==6H(n), enhancement==2(phi), 2DEG mobility
+# ============================================================
+
+[[level]]
+name = "DeviceType"
+
+[[candidate]]
+id = "HEMT-lateral"
+label = "Lateral HEMT (standard GaN-on-Si, 2DEG, 650V class, mature)"
+n6 = 0.50
+perf = 0.75
+power = 0.80
+cost = 0.85
+notes = "most mature GaN device, lateral current flow, cost-effective"
+
+[[candidate]]
+id = "HEMT-vertical"
+label = "Vertical HEMT (GaN-on-GaN, 1200V+, avalanche rugged, high current)"
+n6 = 0.75
+perf = 0.90
+power = 0.85
+cost = 0.35
+notes = "vertical drift region, higher voltage, tau=4 epitaxial layers typical"
+
+[[candidate]]
+id = "MOSFET-GaN"
+label = "GaN MOSFET (MIS gate, normally-off native, threshold >2V)"
+n6 = 0.50
+perf = 0.70
+power = 0.75
+cost = 0.60
+notes = "phi=2 enhancement mode native, gate oxide reliability challenge"
+
+[[candidate]]
+id = "Diode-SBD"
+label = "GaN Schottky Barrier Diode (zero reverse recovery, freewheeling)"
+n6 = 0.25
+perf = 0.55
+power = 0.90
+cost = 0.90
+notes = "simplest device, no 2DEG needed, complementary to HEMT in half-bridge"
+
+[[candidate]]
+id = "Cascode-hybrid"
+label = "Cascode Hybrid (phi=2 EXACT: Si MOSFET + GaN JFET, normally-off)"
+n6 = 0.75
+perf = 0.80
+power = 0.70
+cost = 0.75
+notes = "devices=2=phi EXACT, gate-drive compatible with Si, EPC/Transphorm standard"
+
+[[candidate]]
+id = "Bi-directional-switch"
+label = "Bi-directional Switch (phi=2 EXACT current paths, matrix converter)"
+n6 = 0.75
+perf = 0.65
+power = 0.65
+cost = 0.55
+notes = "paths=2=phi EXACT, single-chip bidirectional, AC switch, solid-state relay"
+
+[[candidate]]
+id = "HEMT-6H-GaN"
+label = "6H-GaN HEMT (n=6 EXACT polytype, hexagonal 6-layer stacking, 1200V)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.35
+notes = "6H=n=6 EXACT polytype stacking, hexagonal symmetry, tau=4 epi layers, high-voltage rugged"
+
+# ============================================================
+# Level 1: Substrate (기판)
+#   n6 checks: polytype==6H(n), diameter_inch, thermal_conductivity
+# ============================================================
+
+[[level]]
+name = "Substrate"
+
+[[candidate]]
+id = "Si-200mm"
+label = "Si 200mm (8-inch, lowest cost, thermal mismatch, 200V-650V)"
+n6 = 0.25
+perf = 0.55
+power = 0.50
+cost = 1.00
+notes = "highest volume, CMOS fab compatible, CTE mismatch limits thickness"
+
+[[candidate]]
+id = "SiC-6H"
+label = "SiC 6H (n=6 EXACT polytype, lattice-matched, k=490 W/mK)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.40
+notes = "6H=n=6 EXACT, best lattice match to GaN, excellent thermal, military/space"
+
+[[candidate]]
+id = "GaN-native"
+label = "GaN Native (homoepitaxial, zero mismatch, highest quality, 1200V+)"
+n6 = 0.75
+perf = 1.00
+power = 0.95
+cost = 0.15
+notes = "defect density <10^4/cm2, vertical devices, very expensive, small wafers"
+
+[[candidate]]
+id = "Sapphire"
+label = "Sapphire (Al2O3, transparent, LED-heritage, poor thermal k=35)"
+n6 = 0.25
+perf = 0.40
+power = 0.30
+cost = 0.70
+notes = "LED/RF only, thermal bottleneck for power, 150mm available"
+
+[[candidate]]
+id = "Diamond-heat"
+label = "Diamond Heat Spreader (k=2000 W/mK, GaN-on-diamond, ultimate thermal)"
+n6 = 0.75
+perf = 0.95
+power = 1.00
+cost = 0.10
+notes = "Z=6=n EXACT (carbon), highest thermal conductivity known, J2=24 W/mm achievable"
+
+[[candidate]]
+id = "QST-engineered"
+label = "QST Engineered Substrate (CTE-matched poly-AlN core, low bow, 200mm)"
+n6 = 0.50
+perf = 0.70
+power = 0.75
+cost = 0.65
+notes = "Qromis QST, enables thick GaN on 200mm, reduced wafer bow"
+
+# ============================================================
+# Level 2: Epitaxy Stack (에피 구조)
+#   n6 checks: layers==4(tau), channels==6(n), 2DEG_ns, barrier_nm
+# ============================================================
+
+[[level]]
+name = "EpitaxyStack"
+
+[[candidate]]
+id = "AlGaN-GaN-standard"
+label = "AlGaN/GaN Standard (tau=4 layers: buffer/channel/barrier/cap, 25% Al)"
+n6 = 0.75
+perf = 0.70
+power = 0.70
+cost = 0.90
+notes = "layers=4=tau EXACT, ns~1e13/cm2, standard polarization-induced 2DEG"
+
+[[candidate]]
+id = "InAlN-GaN"
+label = "InAlN/GaN (lattice-matched at 17% In, highest ns~2.6e13, strain-free)"
+n6 = 0.50
+perf = 0.90
+power = 0.80
+cost = 0.50
+notes = "lattice-matched barrier, higher 2DEG density, growth control challenging"
+
+[[candidate]]
+id = "AlN-GaN-4layer"
+label = "AlN/GaN 4-layer (tau=4 EXACT: nucleation/buffer/channel/AlN-barrier)"
+n6 = 0.75
+perf = 0.85
+power = 0.85
+cost = 0.55
+notes = "layers=4=tau EXACT, ultra-thin AlN barrier, highest polarization charge"
+
+[[candidate]]
+id = "Multi-channel-6"
+label = "Multi-channel 6-layer (n=6 EXACT parallel 2DEG channels, ultra-low Ron)"
+n6 = 1.00
+perf = 1.00
+power = 0.75
+cost = 0.30
+notes = "channels=6=n EXACT, Ron reduced 6x, 24 W/mm=J2 achievable, research frontier"
+
+[[candidate]]
+id = "P-GaN-cap"
+label = "P-GaN Cap (p-type GaN gate, normally-off, threshold ~1.5V)"
+n6 = 0.50
+perf = 0.75
+power = 0.70
+cost = 0.70
+notes = "phi=2 enhancement mode, Infineon/EPC production standard, Mg-doped"
+
+[[candidate]]
+id = "ScAlN-barrier"
+label = "ScAlN Barrier (ferroelectric, highest polarization, sigma=12% Sc EXACT)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.25
+notes = "Sc%=12=sigma EXACT optimal, ns>3e13/cm2, ferroelectric switching, next-gen"
+
+# ============================================================
+# Level 3: Gate Structure (게이트 구조)
+#   n6 checks: fins==6(n), gate_length_nm, Vth, Rg
+# ============================================================
+
+[[level]]
+name = "GateStructure"
+
+[[candidate]]
+id = "Schottky-gate"
+label = "Schottky Gate (Ni/Au, normally-on, simplest, RF standard)"
+n6 = 0.25
+perf = 0.60
+power = 0.55
+cost = 0.85
+notes = "depletion-mode, requires negative gate bias, RF/microwave workhorse"
+
+[[candidate]]
+id = "p-GaN-gate"
+label = "p-GaN Gate (Mg-doped cap, normally-off, Vth=1.5V, production standard)"
+n6 = 0.50
+perf = 0.75
+power = 0.75
+cost = 0.80
+notes = "phi=2 enhancement mode, selective p-GaN removal, Infineon GaN-on-Si"
+
+[[candidate]]
+id = "MIS-gate"
+label = "MIS Gate (Al2O3/SiN dielectric, low leakage, high Vth, MOSFET-like)"
+n6 = 0.50
+perf = 0.70
+power = 0.70
+cost = 0.65
+notes = "gate dielectric by ALD, Vth stability challenge, oxide trap density"
+
+[[candidate]]
+id = "Recessed-gate"
+label = "Recessed Gate (partial AlGaN recess, normally-off, Vth>0V)"
+n6 = 0.50
+perf = 0.80
+power = 0.80
+cost = 0.55
+notes = "ALE recess + MIS, tight depth control needed, higher on-resistance"
+
+[[candidate]]
+id = "Tri-gate-6fin"
+label = "Tri-gate 6-fin (n=6 EXACT fins, 3D gate wrap, best electrostatics)"
+n6 = 1.00
+perf = 1.00
+power = 0.90
+cost = 0.35
+notes = "fins=6=n EXACT, FinFET-like 3D control, lowest leakage, Intel GaN research"
+
+[[candidate]]
+id = "Nano-channel"
+label = "Nano-channel Gate (sub-100nm channel, ballistic transport, THz potential)"
+n6 = 0.50
+perf = 0.90
+power = 0.85
+cost = 0.25
+notes = "quantum ballistic regime, T-gate, sigma=12 nm gate length target"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: voltage==48(sigma*tau), power_kW==12(sigma), freq_GHz==6(n)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Server-PSU-48V"
+label = "Server PSU 48V (sigma*tau=48 EXACT, 3kW, 98% efficiency)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "voltage=48=sigma*tau EXACT, Google/Meta 48V rack, highest volume growth"
+
+[[candidate]]
+id = "EV-charger"
+label = "EV Charger (800V bus, 350kW DC fast, bidirectional V2G)"
+n6 = 0.50
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "800V=sigma-tau cubed CLOSE, high power density, CCS/CHAdeMO"
+
+[[candidate]]
+id = "Data-center-12kW"
+label = "Data Center 12kW (sigma=12 EXACT kW per rack PSU, 48V-to-1V)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.65
+notes = "power=12kW=sigma EXACT, multi-phase buck, >97% efficiency at 12kW"
+
+[[candidate]]
+id = "Solar-inverter"
+label = "Solar Inverter (string/micro, 99%+ CEC efficiency, MPPT)"
+n6 = 0.50
+perf = 0.75
+power = 0.90
+cost = 0.70
+notes = "switching freq 100kHz+, passive size reduction, grid-tie"
+
+[[candidate]]
+id = "Motor-drive"
+label = "Motor Drive (EV traction, 400/800V, variable frequency, SiC competitor)"
+n6 = 0.50
+perf = 0.80
+power = 0.75
+cost = 0.50
+notes = "emerging GaN for <10kW motor, higher switching freq reduces magnetics"
+
+[[candidate]]
+id = "RF-6GHz"
+label = "RF Power Amp 6GHz (n=6 EXACT GHz, 5G/radar, J2=24 W/mm PAMM)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.40
+notes = "freq=6GHz=n EXACT, power_density=24W/mm=J2 EXACT, MIMO base station, defense"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Vertical HEMT requires native GaN or SiC-6H substrate
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HEMT-vertical"
+then_level = 1
+then_ids = "GaN-native,SiC-6H"
+
+# Lateral HEMT cost-optimized on Si substrate
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "HEMT-lateral"
+then_level = 1
+then_ids = "Si-200mm,QST-engineered"
+
+# Diamond substrate for highest power density RF applications
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "Diamond-heat"
+then_level = 4
+then_ids = "RF-6GHz,Data-center-12kW"
+
+# Multi-channel 6-layer needs advanced gate for channel control
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Multi-channel-6"
+then_level = 3
+then_ids = "Tri-gate-6fin,Recessed-gate"
+
+# p-GaN cap naturally pairs with p-GaN gate
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "P-GaN-cap"
+then_level = 3
+then_ids = "p-GaN-gate"
+
+# Cascode hybrid is Si-compatible, pairs with Si substrate
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cascode-hybrid"
+then_level = 1
+then_ids = "Si-200mm,QST-engineered"
+
+# Sapphire substrate only for RF and LED, not high-power
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Sapphire"
+then_level = 4
+then_ids = "EV-charger,Motor-drive"
+
+# ScAlN barrier is research frontier, pairs with tri-gate
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "ScAlN-barrier"
+then_level = 3
+then_ids = "Tri-gate-6fin,Nano-channel"
+
+# Server PSU 48V primarily lateral HEMT on Si
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "Server-PSU-48V"
+then_level = 0
+then_ids = "HEMT-lateral,Cascode-hybrid"
+
+# RF-6GHz needs high power density epitaxy
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "RF-6GHz"
+then_level = 2
+then_ids = "Multi-channel-6,ScAlN-barrier,InAlN-GaN"
+
+# Nano-channel gate for RF applications primarily
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Nano-channel"
+then_level = 4
+then_ids = "RF-6GHz"

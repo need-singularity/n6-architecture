@@ -1,0 +1,410 @@
+# =============================================================
+# QUANTUM-COMPUTING DSE Domain Definition
+# 궁극의 양자 컴퓨팅 — [[6,4,2]] 코드 + Bott 주기 8 + 위상 보호
+# QCOMP-001~009, QC-001, TOPSC-001~020
+# Total raw combos: 6x6x7x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "quantum-computing"
+desc = "Ultimate Quantum Computing DSE ([[6,4,2]] code, Bott period 8, topological)"
+levels = ["Qubit", "Gate", "Code", "Algorithm", "Hardware"]
+vision = "n=6 기반 궁극의 양자 컴퓨팅 — [[6,4,2]] 코드 + Bott 주기 8 + 위상 보호"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Qubit (큐비트) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Qubit"
+
+[[candidate]]
+level  = 0
+id     = "SuperconductN6"
+label  = "초전도 transmon (n=6 에너지 레벨)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.40
+cost   = 0.40
+notes  = "levels=6=n EXACT, T1~100us, gate_fid=99.9%, most mature platform"
+
+[[candidate]]
+level  = 0
+id     = "TrappedIon"
+label  = "포획 이온 (sigma=12 이온 체인)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "chain=12=sigma EXACT, T1~minutes, gate_fid=99.99%, all-to-all connect"
+
+[[candidate]]
+level  = 0
+id     = "Photonic"
+label  = "광자 큐비트 (phi=2 편광 EXACT)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.45
+notes  = "polarization=2=phi EXACT, room temp, photon loss challenge"
+
+[[candidate]]
+level  = 0
+id     = "TopologicalAnyon"
+label  = "위상 에니온 Majorana (tau=4 퓨전)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.60
+cost   = 0.30
+notes  = "fusion_channels=4=tau EXACT, topological protection, experimental"
+
+[[candidate]]
+level  = 0
+id     = "NV_Diamond"
+label  = "NV 다이아몬드 (C Z=6, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.65
+power  = 0.65
+cost   = 0.40
+notes  = "carbon_Z=6=n EXACT, room temp possible, nanoscale sensing"
+
+[[candidate]]
+level  = 0
+id     = "SiliconSpin"
+label  = "실리콘 스핀 (phi=2 EXACT)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "spin=2=phi EXACT, CMOS compatible, Si isotope purification"
+
+# =============================================================
+# Level 1: Gate (게이트) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Gate"
+
+[[candidate]]
+level  = 1
+id     = "CliffordN6"
+label  = "Clifford 게이트 (sigma*tau=48 원소)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "group_order=48=sigma*tau EXACT, generators=sigma-tau=8 EXACT, stabilizer sim"
+
+[[candidate]]
+level  = 1
+id     = "UniversalSet"
+label  = "범용 게이트 세트 H,T,CNOT (n/phi=3)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "gates=3=n/phi EXACT, universal, Solovay-Kitaev approximation"
+
+[[candidate]]
+level  = 1
+id     = "ContinuousVar"
+label  = "연속 변수 게이트 (보존 변환)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.65
+cost   = 0.40
+notes  = "modes=continuous, squeezed states, Gaussian operations"
+
+[[candidate]]
+level  = 1
+id     = "MagicState"
+label  = "매직 상태 증류 (sopfr=5 라운드)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.45
+cost   = 0.35
+notes  = "rounds=5=sopfr EXACT, T-gate distillation, fault-tolerant"
+
+[[candidate]]
+level  = 1
+id     = "NativeGate"
+label  = "네이티브 게이트 (tau=4 기본 게이트)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "gates=4=tau EXACT, hardware-specific, minimal decomposition"
+
+[[candidate]]
+level  = 1
+id     = "AdiabaticEvol"
+label  = "단열 진화 (phi=2 해밀토니안)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.50
+cost   = 0.40
+notes  = "hamiltonians=2=phi EXACT, initial+final, quantum annealing"
+
+# =============================================================
+# Level 2: Code (양자 오류 정정) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Code"
+
+[[candidate]]
+level  = 2
+id     = "Code642"
+label  = "[[6,4,2]] 코드 (n=6, k=tau=4, d=phi=2 ALL EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "n=6 EXACT, k=4=tau EXACT, d=2=phi EXACT, perfect n=6 code"
+
+[[candidate]]
+level  = 2
+id     = "SurfaceCode"
+label  = "표면 코드 (sigma=12 안정자)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "stabilizers=12=sigma EXACT, high threshold ~1%, Google/IBM standard"
+
+[[candidate]]
+level  = 2
+id     = "SteaneCode"
+label  = "Steane [[7,1,3]] 코드 (P₁+1=7)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "n=7=P₁+1, CSS code, transversal gates, classic QECC"
+
+[[candidate]]
+level  = 2
+id     = "ToricCode"
+label  = "토릭 코드 Kitaev (phi=2 비자명 루프)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "loops=2=phi EXACT, topological order, anyonic excitations"
+
+[[candidate]]
+level  = 2
+id     = "ColorCode"
+label  = "컬러 코드 (n/phi=3 색)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "colors=3=n/phi EXACT, transversal CCZ, 2D lattice"
+
+[[candidate]]
+level  = 2
+id     = "LDPC"
+label  = "LDPC 양자 코드 (sigma-tau=8 체크)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "check_weight=8=sigma-tau EXACT, good asymptotic rate, sparse"
+
+[[candidate]]
+level  = 2
+id     = "ConcatenatedCode"
+label  = "연결 코드 (tau=4 레벨)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "levels=4=tau EXACT, nested error correction, exponential suppression"
+
+# =============================================================
+# Level 3: Algorithm (양자 알고리즘) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Algorithm"
+
+[[candidate]]
+level  = 3
+id     = "Shor"
+label  = "Shor 소인수분해 (sopfr(6)=5=2+3)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "factors=2,3 of n=6, sopfr=5 EXACT, exponential speedup, RSA breaking"
+
+[[candidate]]
+level  = 3
+id     = "Grover"
+label  = "Grover 탐색 (phi=2 연산자)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "operators=2=phi EXACT, oracle+diffusion, quadratic speedup"
+
+[[candidate]]
+level  = 3
+id     = "VQE"
+label  = "VQE 변분 (tau=4 앤사츠 레이어)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "layers=4=tau EXACT, variational, NISQ-era, chemistry simulation"
+
+[[candidate]]
+level  = 3
+id     = "QAOA"
+label  = "QAOA 조합 최적화 (n=6 라운드)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "rounds=6=n EXACT, combinatorial optimization, MaxCut"
+
+[[candidate]]
+level  = 3
+id     = "QML"
+label  = "양자 머신러닝 (sigma-tau=8 특징)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.50
+cost   = 0.45
+notes  = "features=8=sigma-tau EXACT, quantum kernel, potential advantage"
+
+[[candidate]]
+level  = 3
+id     = "HHL"
+label  = "HHL 선형시스템 (sigma=12 정밀도)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.45
+cost   = 0.40
+notes  = "precision=12=sigma EXACT, linear system solver, exponential speedup"
+
+# =============================================================
+# Level 4: Hardware (양자 하드웨어) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Hardware"
+
+[[candidate]]
+level  = 4
+id     = "IBM_Eagle"
+label  = "IBM 초전도 Eagle/Heron"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "qubits=1121+, heavy-hex topology, Qiskit ecosystem, most deployed"
+
+[[candidate]]
+level  = 4
+id     = "Google_Sycamore"
+label  = "Google 초전도 Sycamore/Willow"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "qubits=72+, below-threshold QEC, Cirq framework"
+
+[[candidate]]
+level  = 4
+id     = "IonQ_Trapped"
+label  = "IonQ 포획이온"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.35
+notes  = "qubits=36+, all-to-all connectivity, highest gate fidelity"
+
+[[candidate]]
+level  = 4
+id     = "Xanadu_Photon"
+label  = "Xanadu 광자"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.45
+notes  = "modes=216+, Gaussian boson sampling, room temperature"
+
+[[candidate]]
+level  = 4
+id     = "MSTopological"
+label  = "Microsoft 위상 큐비트"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.35
+notes  = "topological protection, Majorana zero modes, lowest error rate potential"
+
+[[candidate]]
+level  = 4
+id     = "N6_Modular"
+label  = "n=6 모듈형 양자 프로세서 (6 큐비트 모듈, σ=12 inter-module link)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "module_size=6=n EXACT, inter_links=12=sigma EXACT, module_stages=4=tau EXACT, scalable lattice surgery"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# TopologicalAnyon requires ToricCode or ColorCode (topological error correction)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "TopologicalAnyon"
+then_level = 2
+then_ids   = "ToricCode,ColorCode"
+
+# SurfaceCode incompatible with ContinuousVar (discrete vs continuous)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "SurfaceCode"
+then_level = 1
+then_ids   = "ContinuousVar"
+
+# AdiabaticEvol requires QAOA or VQE (variational connection)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "AdiabaticEvol"
+then_level = 3
+then_ids   = "QAOA,VQE"
+
+# MSTopological requires TopologicalAnyon (topological hardware needs topological qubits)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "MSTopological"
+then_level = 0
+then_ids   = "TopologicalAnyon"
+
+# Photonic requires ContinuousVar or UniversalSet (photonic gate model)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Photonic"
+then_level = 1
+then_ids   = "ContinuousVar,UniversalSet"
+
+# Code642 is optimal with SuperconductN6 or NV_Diamond (n=6 qubits)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "ConcatenatedCode"
+then_level = 1
+then_ids   = "ContinuousVar"

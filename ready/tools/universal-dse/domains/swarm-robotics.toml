@@ -1,0 +1,365 @@
+# =============================================================
+# Swarm Robotics DSE Domain Definition
+# Multi-robot coordination — agent to environment
+# n=6: 6 robots minimum swarm, σ=12 communication channels, hex formation
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "swarm-robotics"
+desc = "Swarm Robotics Architecture DSE (agent/communication/coordination/task/environment)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Agent (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Agent"
+
+[[candidate]]
+level = 0
+id = "Wheeled-Diff"
+label = "Wheeled Differential (φ=2 wheels, 6cm radius, indoor, simple)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Quadrotor"
+label = "Quadrotor UAV (τ=4 rotors, n=6 DOF, aerial swarm)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Hexapod"
+label = "Hexapod Walker (n=6 legs, 18 DOF, rough terrain)"
+n6 = 1.00
+perf = 0.82
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Underwater-AUV"
+label = "Micro AUV (n=6 thrusters, underwater swarm, inspection)"
+n6 = 1.00
+perf = 0.80
+power = 0.58
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Soft-Robot"
+label = "Soft Robot (silicone, 6 pneumatic chambers, compliant)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Nano-Bot"
+label = "Nano-Scale Robot (MEMS, 6μm body, medical/assembly swarm)"
+n6 = 1.00
+perf = 0.65
+power = 0.70
+cost = 0.30
+
+# ============================================================
+# Level 1: Communication (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Communication"
+
+[[candidate]]
+level = 1
+id = "BLE-Mesh"
+label = "BLE 5.0 Mesh (σ=12 channels, low power, indoor)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "WiFi-Direct"
+label = "WiFi Direct (6GHz band, high bandwidth, medium range)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Infrared"
+label = "IR Communication (line-of-sight, n=6 LED array, neighbor-only)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "UWB-Ranging"
+label = "UWB (ranging+comm, 6ns pulse, cm-precision, swarm-locate)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Acoustic"
+label = "Acoustic Underwater (6kHz carrier, σ=12 baud, AUV swarm)"
+n6 = 1.00
+perf = 0.72
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Stigmergy"
+label = "Stigmergy (pheromone/marker, 6 signal types, indirect comm)"
+n6 = 1.00
+perf = 0.60
+power = 0.95
+cost = 0.92
+
+# ============================================================
+# Level 2: Coordination (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Coordination"
+
+[[candidate]]
+level = 2
+id = "Consensus"
+label = "Consensus Algorithm (average, n=6 neighbor voting, distributed)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Auction-Based"
+label = "Auction-Based Task Alloc (bid/ask, 6 task types, market)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Flocking-Reynolds"
+label = "Reynolds Flocking (3 rules, 6-neighbor radius, emergent)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "Voronoi-Partition"
+label = "Voronoi Partition (hexagonal=6-sided, coverage optimization)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "MARL"
+label = "Multi-Agent RL (deep Q, 6 agent policy, learned coordination)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Leader-Follower"
+label = "Leader-Follower (1+5=n=6 formation, hierarchical, simple)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.80
+
+# ============================================================
+# Level 3: Task (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Task"
+
+[[candidate]]
+level = 3
+id = "Area-Coverage"
+label = "Area Coverage (lawn mowing, hexagonal tiling, n=6 cells)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Search-Rescue"
+label = "Search and Rescue (6-zone partition, victim detection, emergency)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Formation-Control"
+label = "Formation Control (hex lattice, σ=12 waypoints, display/patrol)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Collective-Transport"
+label = "Collective Transport (n=6 robots, shared payload, cooperative)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Mapping-Explore"
+label = "Exploration Mapping (frontier, 6-direction movement, SLAM)"
+n6 = 1.00
+perf = 0.88
+power = 0.68
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Construction"
+label = "Swarm Construction (TERMES-style, 6 block types, building)"
+n6 = 1.00
+perf = 0.78
+power = 0.62
+cost = 0.50
+
+# ============================================================
+# Level 4: Environment (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Environment"
+
+[[candidate]]
+level = 4
+id = "Indoor-Warehouse"
+label = "Indoor Warehouse (flat, σ=12 aisle lanes, structured)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Outdoor-Field"
+label = "Outdoor Field (agriculture, 6-hectare plot, GPS available)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Urban"
+label = "Urban Environment (city, 6 block grid, dynamic obstacles)"
+n6 = 1.00
+perf = 0.82
+power = 0.68
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Underwater"
+label = "Underwater (ocean/tank, 6-axis current, 3D navigation)"
+n6 = 1.00
+perf = 0.78
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Aerial-3D"
+label = "Aerial 3D Space (open sky, n=6 DOF, drone show/survey)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Hazardous"
+label = "Hazardous Zone (nuclear/chemical, 6 safety levels, remote)"
+n6 = 1.00
+perf = 0.85
+power = 0.58
+cost = 0.40
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Underwater AUV requires acoustic communication
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Underwater-AUV"
+then_level = 1
+then_ids = ["Acoustic"]
+
+# Underwater AUV requires underwater environment
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Underwater-AUV"
+then_level = 4
+then_ids = ["Underwater"]
+
+# Quadrotor requires aerial environment
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Quadrotor"
+then_level = 4
+then_ids = ["Aerial-3D", "Outdoor-Field", "Urban"]
+
+# Stigmergy only for simple tasks
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Stigmergy"
+then_level = 2
+then_ids = ["Flocking-Reynolds", "Leader-Follower", "Consensus"]
+
+# Nano-bot requires hazardous or underwater
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Nano-Bot"
+then_level = 4
+then_ids = ["Hazardous", "Underwater"]

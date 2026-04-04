@@ -1,0 +1,386 @@
+# =============================================================
+# HEXA-MEDICAL DSE Domain Definition
+# 궁극의 의료기기 — ECG σ=12 leads + MRI + AI 진단
+# BT-58 (σ-τ=8 universal) + BT-66 (Vision AI)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "medical"
+desc = "Medical Device Architecture DSE (ECG σ=12, MRI, AI Diagnostics)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "n=6 정렬 의료기기 — ECG σ=12 리드 + AI 영상진단으로 조기발견율 극대화"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (진단 기술)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "MRI"
+label  = "Magnetic Resonance Imaging"
+n6     = 1.00
+perf   = 0.95
+power  = 0.35
+cost   = 0.25
+notes  = "sigma=12 coil channels, n=6 contrast sequences, J2=24 slices"
+
+[[candidate]]
+level  = 0
+id     = "CT"
+label  = "Computed Tomography"
+n6     = 0.83
+perf   = 0.90
+power  = 0.40
+cost   = 0.35
+notes  = "sigma-tau=8 detector rows standard, rotation speed"
+
+[[candidate]]
+level  = 0
+id     = "Ultrasound"
+label  = "Ultrasound Imaging"
+n6     = 0.83
+perf   = 0.80
+power  = 0.75
+cost   = 0.65
+notes  = "n=6 MHz frequency, tau=4 modes (B/M/D/Color)"
+
+[[candidate]]
+level  = 0
+id     = "ECG"
+label  = "Electrocardiogram"
+n6     = 1.00
+perf   = 0.85
+power  = 0.85
+cost   = 0.80
+notes  = "sigma=12 leads EXACT, n=6 limb leads EXACT"
+
+[[candidate]]
+level  = 0
+id     = "Endoscope"
+label  = "Endoscope (Fiber/Capsule)"
+n6     = 0.67
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "Fiber optic, capsule endoscopy"
+
+[[candidate]]
+level  = 0
+id     = "PET_SPECT"
+label  = "PET/SPECT Nuclear Imaging"
+n6     = 0.50
+perf   = 0.88
+power  = 0.30
+cost   = 0.20
+notes  = "Nuclear imaging, positron emission"
+
+# =============================================================
+# Level 1: Process (신호 처리)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "DICOM"
+label  = "DICOM Medical Image Standard"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "Medical image standard, sigma-tau=8 bit depth"
+
+[[candidate]]
+level  = 1
+id     = "HL7_FHIR"
+label  = "HL7 FHIR Health Data Interop"
+n6     = 0.67
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "Health data interoperability standard"
+
+[[candidate]]
+level  = 1
+id     = "Wavelet"
+label  = "Wavelet Signal Processing"
+n6     = 0.83
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "ECG denoising, n=6 decomposition levels"
+
+[[candidate]]
+level  = 1
+id     = "Compress"
+label  = "Medical Lossless Compression"
+n6     = 0.50
+perf   = 0.75
+power  = 0.75
+cost   = 0.70
+notes  = "JPEG2000 medical lossless"
+
+[[candidate]]
+level  = 1
+id     = "RealTime"
+label  = "Real-Time Signal Processing"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "Real-time processing, n=6 ms latency target"
+
+# =============================================================
+# Level 2: Core (센서/액추에이터)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "CMOS_Sensor"
+label  = "CMOS Image Sensor"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "Image sensor, sigma-tau=8 bit ADC"
+
+[[candidate]]
+level  = 2
+id     = "Piezo"
+label  = "Piezoelectric Transducer"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.55
+notes  = "n=6 piezo elements array"
+
+[[candidate]]
+level  = 2
+id     = "MEMS"
+label  = "MEMS Micro Actuator"
+n6     = 0.83
+perf   = 0.80
+power  = 0.75
+cost   = 0.60
+notes  = "Micro actuator, n=6 DOF"
+
+[[candidate]]
+level  = 2
+id     = "Electrode"
+label  = "Electrode Array (σ=12)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.80
+cost   = 0.70
+notes  = "sigma=12 electrode array (ECG EXACT)"
+
+[[candidate]]
+level  = 2
+id     = "Fiber"
+label  = "Fiber Optic Sensor"
+n6     = 0.67
+perf   = 0.78
+power  = 0.65
+cost   = 0.50
+notes  = "Fiber optic sensor"
+
+[[candidate]]
+level  = 2
+id     = "Quantum_Sensor"
+label  = "SQUID/NV-Center Quantum Sensor"
+n6     = 0.50
+perf   = 0.70
+power  = 0.45
+cost   = 0.30
+notes  = "SQUID/NV-center, quantum precision"
+
+# =============================================================
+# Level 3: Engine (AI 분석)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "MedicalLLM"
+label  = "Medical LLM (BT-56)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "BT-56 architecture for medical text, d=2^sigma"
+
+[[candidate]]
+level  = 3
+id     = "ImageAI"
+label  = "Medical Vision AI (BT-66)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.45
+notes  = "BT-66 Vision AI for radiology, ViT+CLIP sigma-tau=8"
+
+[[candidate]]
+level  = 3
+id     = "WaveformAI"
+label  = "Waveform AI (ECG/EEG)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "ECG/EEG pattern recognition, sigma=12 lead analysis"
+
+[[candidate]]
+level  = 3
+id     = "DrugAI"
+label  = "Drug Interaction AI"
+n6     = 0.67
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "Drug interaction prediction"
+
+[[candidate]]
+level  = 3
+id     = "SurgicalAI"
+label  = "Surgical Robot AI"
+n6     = 0.67
+perf   = 0.75
+power  = 0.45
+cost   = 0.35
+notes  = "Surgical robot guidance, n=6 DOF"
+
+# =============================================================
+# Level 4: System (임상 시스템)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "Hospital"
+label  = "Full Hospital Integration"
+n6     = 0.83
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "Full hospital integration"
+
+[[candidate]]
+level  = 4
+id     = "PointOfCare"
+label  = "Point-of-Care Portable"
+n6     = 1.00
+perf   = 0.80
+power  = 0.80
+cost   = 0.65
+notes  = "Portable, n=6 vital signs"
+
+[[candidate]]
+level  = 4
+id     = "Wearable"
+label  = "Wearable Continuous Monitor"
+n6     = 0.83
+perf   = 0.70
+power  = 0.85
+cost   = 0.70
+notes  = "Continuous monitoring, sigma-tau=8 sensors"
+
+[[candidate]]
+level  = 4
+id     = "Telemedicine"
+label  = "Telemedicine Remote Diagnosis"
+n6     = 0.67
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "Remote diagnosis"
+
+[[candidate]]
+level  = 4
+id     = "SurgicalSuite"
+label  = "Surgical Suite Integration"
+n6     = 0.50
+perf   = 0.88
+power  = 0.40
+cost   = 0.30
+notes  = "Operating room integration"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# MRI requires CMOS_Sensor or Quantum_Sensor
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "MRI"
+then_level = 2
+then_ids   = "CMOS_Sensor,Quantum_Sensor"
+
+# Wearable excludes MRI, CT, PET_SPECT (too large)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Wearable"
+then_level = 0
+then_ids   = "MRI,CT,PET_SPECT"
+
+# SurgicalAI requires Hospital or SurgicalSuite
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "SurgicalAI"
+then_level = 4
+then_ids   = "Hospital,SurgicalSuite"
+
+# PET_SPECT requires Hospital or SurgicalSuite (nuclear facility)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "PET_SPECT"
+then_level = 4
+then_ids   = "Hospital,SurgicalSuite"
+
+# Quantum_Sensor only with MRI or PET_SPECT (needs cryogenic)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Quantum_Sensor"
+then_level = 0
+then_ids   = "MRI,PET_SPECT"
+
+# ECG best with Electrode core
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ECG"
+then_level = 2
+then_ids   = "Electrode,MEMS,Piezo"
+
+# Endoscope requires Fiber or CMOS_Sensor
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Endoscope"
+then_level = 2
+then_ids   = "Fiber,CMOS_Sensor"
+
+# Ultrasound requires Piezo transducer
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Ultrasound"
+then_level = 2
+then_ids   = "Piezo,MEMS"

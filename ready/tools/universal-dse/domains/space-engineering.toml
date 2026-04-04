@@ -1,0 +1,371 @@
+# =============================================================
+# HEXA Space Engineering DSE Domain Definition
+# 궁극의 우주공학 — n=6 기반 추진→궤도→구조→통신→미션
+# BT-27 (Carbon-6, D-T J2=24 MeV) + BT-30 (SQ solar) +
+# BT-38 (Hydrogen quadruplet) + BT-63 (Solar panel ladder)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "space-engineering"
+desc = "Ultimate Space Engineering DSE (BT-27/30/38/63)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "Kepler n=6 orbital elements — from LEO to deep space"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (Propulsion) -- 6 candidates = n
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "ChemRocket"
+label  = "Chemical Rocket (LOX/LH2, Isp~450s)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.50
+cost   = 0.50
+notes  = "n=6 DOF rigid body, mature, high thrust"
+
+[[candidate]]
+level  = 0
+id     = "IonDrive"
+label  = "Ion Drive (Hall thruster, Isp~3000s)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.80
+cost   = 0.45
+notes  = "sigma-tau=8 kW class EXACT, high efficiency"
+
+[[candidate]]
+level  = 0
+id     = "NuclearThermal"
+label  = "Nuclear Thermal (Z=6 Carbon moderator, Isp~900s)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.40
+cost   = 0.30
+notes  = "Carbon Z=6=n moderator EXACT, NTP, high thrust+Isp"
+
+[[candidate]]
+level  = 0
+id     = "SolarSail"
+label  = "Solar Sail (phi=2 reflectivity, photon pressure)"
+n6     = 0.83
+perf   = 0.50
+power  = 0.95
+cost   = 0.60
+notes  = "phi=2 reflectivity EXACT, no propellant, inner solar"
+
+[[candidate]]
+level  = 0
+id     = "ElectricProp"
+label  = "Electric Propulsion (VASIMR variable Isp)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.70
+cost   = 0.50
+notes  = "variable Isp, versatile, crewed Mars candidate"
+
+[[candidate]]
+level  = 0
+id     = "FusionDrive"
+label  = "Fusion Drive (D-T J2=24 MeV, BT-27)"
+n6     = 1.00
+perf   = 0.60
+power  = 0.35
+cost   = 0.20
+notes  = "J2=24 MeV EXACT, ultimate propulsion, interstellar"
+
+# =============================================================
+# Level 1: Process (Orbital Mechanics / Navigation) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "Kepler6"
+label  = "Keplerian 6-Element (n=6 orbital elements EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "a,e,i,Omega,omega,nu = n=6 elements EXACT"
+
+[[candidate]]
+level  = 1
+id     = "Hohmann"
+label  = "Hohmann Transfer (phi=2 burn)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "phi=2 burn EXACT, impulsive, standard transfer"
+
+[[candidate]]
+level  = 1
+id     = "LowThrust"
+label  = "Low-Thrust Spiral (continuous)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.75
+cost   = 0.55
+notes  = "spiral trajectory, ion/electric pair"
+
+[[candidate]]
+level  = 1
+id     = "Lagrange"
+label  = "Lagrange Point (sopfr=5 points L1-L5)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.80
+cost   = 0.50
+notes  = "sopfr=5 Lagrange points EXACT, halo orbits, JWST L2"
+
+[[candidate]]
+level  = 1
+id     = "GravityAssist"
+label  = "Gravity Assist (multi-flyby)"
+n6     = 0.67
+perf   = 0.88
+power  = 0.85
+cost   = 0.70
+notes  = "free delta-V, Voyager heritage, trajectory design"
+
+# =============================================================
+# Level 2: Core (Structure / Thermal Protection) -- 6 candidates = n
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "CarbonComp"
+label  = "Carbon Composite (Z=6=n, CFRP, BT-27)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "Carbon Z=6=n EXACT, CFRP, highest strength/weight"
+
+[[candidate]]
+level  = 2
+id     = "TitaniumAlloy"
+label  = "Titanium Alloy (Ti-6Al-4V, high temp)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "Ti-6Al-4V (n=6 wt% Al), corrosion resistant"
+
+[[candidate]]
+level  = 2
+id     = "HeatShield"
+label  = "Heat Shield (PICA ablative, phi=2 layers)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "phi=2 layer shield EXACT, atmospheric entry"
+
+[[candidate]]
+level  = 2
+id     = "Inflatable"
+label  = "Inflatable Module (BEAM-style)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.70
+cost   = 0.60
+notes  = "expandable habitat, volume-efficient launch"
+
+[[candidate]]
+level  = 2
+id     = "RadShield"
+label  = "Radiation Shield (sigma=12 layer)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.55
+cost   = 0.35
+notes  = "sigma=12 layer shielding EXACT, deep space crewed"
+
+[[candidate]]
+level  = 2
+id     = "SelfHeal"
+label  = "Self-Healing Structure"
+n6     = 0.67
+perf   = 0.60
+power  = 0.65
+cost   = 0.30
+notes  = "autonomous repair, microcapsule/vascular, long-duration"
+
+# =============================================================
+# Level 3: Engine (Communication / Control) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "DeepSpace"
+label  = "Deep Space Network (sigma-tau=8 bands)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "DSN sigma-tau=8 frequency bands EXACT"
+
+[[candidate]]
+level  = 3
+id     = "LaserComm"
+label  = "Laser Comm (sigma=12 Gbps target)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.35
+notes  = "sigma=12 Gbps EXACT, LCRD/DSOC demonstrated"
+
+[[candidate]]
+level  = 3
+id     = "AutoNav"
+label  = "Autonomous Navigation (AI, n=6 sensor fusion)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.45
+notes  = "n=6 sensor fusion EXACT, autonomous ops"
+
+[[candidate]]
+level  = 3
+id     = "Relay"
+label  = "Relay Satellite Network (TDRS/Mars relay)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.70
+cost   = 0.50
+notes  = "TDRS, Mars relay orbiters, near-continuous coverage"
+
+[[candidate]]
+level  = 3
+id     = "QuantumComm"
+label  = "Quantum Communication (QKD, secure)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.45
+cost   = 0.25
+notes  = "BB84 tau=4 bases EXACT, ultimate security"
+
+# =============================================================
+# Level 4: System (Mission Type) -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "LEO_Const"
+label  = "LEO Mega-Constellation (sigma=12 orbital planes)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "sigma=12 orbital planes EXACT, J2=24 sats/plane"
+
+[[candidate]]
+level  = 4
+id     = "LunarBase"
+label  = "Lunar Base (n=6 habitat modules)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.50
+cost   = 0.35
+notes  = "n=6 habitat modules EXACT, Artemis"
+
+[[candidate]]
+level  = 4
+id     = "MarsColony"
+label  = "Mars Colony (phi=2 year synodic window)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.45
+cost   = 0.25
+notes  = "phi=2 year launch window EXACT, self-sustaining"
+
+[[candidate]]
+level  = 4
+id     = "Asteroid"
+label  = "Asteroid Mining (n=6 resource types)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.40
+notes  = "n=6 resource types EXACT, water/metal/rare-earth/..."
+
+[[candidate]]
+level  = 4
+id     = "DeepExplore"
+label  = "Deep Space / Interstellar Exploration"
+n6     = 0.50
+perf   = 0.60
+power  = 0.40
+cost   = 0.20
+notes  = "Voyager-class+, interstellar precursor, decades-long"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# FusionDrive only for Mars or Deep Explore (overkill for LEO)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "FusionDrive"
+then_level = 4
+then_ids   = "MarsColony,DeepExplore"
+
+# SolarSail cannot reach deep space (insufficient photon pressure)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "SolarSail"
+then_level = 4
+then_ids   = "DeepExplore"
+
+# Deep exploration requires LaserComm or QuantumComm
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "DeepExplore"
+then_level = 3
+then_ids   = "LaserComm,QuantumComm"
+
+# Inflatable structures not suitable for Mars surface (needs rigidity)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Inflatable"
+then_level = 4
+then_ids   = "MarsColony"
+
+# LEO constellation needs relay or laser comm (not quantum yet)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "LEO_Const"
+then_level = 3
+then_ids   = "LaserComm,Relay,DeepSpace"
+
+# NuclearThermal requires radiation shielding (crewed missions)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "NuclearThermal"
+then_level = 2
+then_ids   = "RadShield,CarbonComp"

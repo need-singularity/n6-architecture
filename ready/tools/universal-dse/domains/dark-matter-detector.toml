@@ -1,0 +1,386 @@
+# =============================================================
+# Dark Matter Detector DSE Domain Definition
+# 궁극의 암흑물질 직접 검출 칩 — n=6 기반 검출기 아키텍처
+# σ=12 PMT channels, detector mass σ·τ=48 ton, threshold σ-τ=8 keV
+# WIMP candidate σ·φ=24 GeV, n=6 shielding layers
+# Total raw combos: 7x6x6x6x6 = 9,072
+# =============================================================
+
+[meta]
+name = "dark-matter-detector"
+desc = "Ultimate Dark Matter Direct Detection Chip DSE (WIMP/axion search)"
+levels = ["Target", "Sensor", "Shielding", "Analysis", "Experiment"]
+vision = "n=6 기반 궁극의 암흑물질 검출 — σ=12 PMT, 48톤 질량, 8 keV 임계값"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Target (표적 물질) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Target"
+
+[[candidate]]
+level  = 0
+id     = "Xenon_LXe"
+label  = "액체 제논 LXe (Z=54=9·n)"
+n6     = 0.90
+perf   = 0.95
+power  = 0.60
+cost   = 0.40
+notes  = "Z=54=9n CLOSE, spin-independent leader, XENON/LZ/PandaX"
+
+[[candidate]]
+level  = 0
+id     = "Germanium"
+label  = "게르마늄 HPGe (Z=32=2^sopfr)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.55
+notes  = "Z=32=2^5, low threshold, CDMS/SuperCDMS"
+
+[[candidate]]
+level  = 0
+id     = "Silicon"
+label  = "실리콘 Si (Z=14=σ+φ)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "Z=14=sigma+phi CLOSE, CCD technology, DAMIC/SENSEI"
+
+[[candidate]]
+level  = 0
+id     = "Argon"
+label  = "액체 아르곤 LAr (Z=18=3·n)"
+n6     = 0.85
+perf   = 0.88
+power  = 0.65
+cost   = 0.60
+notes  = "Z=18=3n EXACT, pulse shape discrimination, DarkSide"
+
+[[candidate]]
+level  = 0
+id     = "CaWO4"
+label  = "CaWO4 섬광체 (phonon+photon)"
+n6     = 0.70
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "scintillating bolometer, CRESST, dual channel"
+
+[[candidate]]
+level  = 0
+id     = "Superfluid_He"
+label  = "초유체 헬륨 He (Z=2=phi)"
+n6     = 0.85
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "Z=2=phi EXACT, sub-eV threshold, quantum evaporation"
+
+[[candidate]]
+level  = 0
+id     = "Carbon_Diamond"
+label  = "다이아몬드 검출기 (Z=6=n IDENTITY)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.80
+cost   = 0.50
+notes  = "Z=6=n IDENTITY, diamond CCD for sub-GeV DM, BT-93 Carbon universality, RD42/CERN"
+
+# =============================================================
+# Level 1: Sensor (센서) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level  = 1
+id     = "PMT"
+label  = "PMT σ=12 채널 어레이"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "channels=12=sigma EXACT, proven technology, ns timing"
+
+[[candidate]]
+level  = 1
+id     = "SiPM"
+label  = "SiPM 어레이 (SPAD)"
+n6     = 0.80
+perf   = 0.92
+power  = 0.70
+cost   = 0.60
+notes  = "single photon, compact, low bias, magnetic field tolerant"
+
+[[candidate]]
+level  = 1
+id     = "TES"
+label  = "TES 초전도 전이단 센서 (eV 분해능)"
+n6     = 0.85
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "eV resolution, mK operation, phonon detection"
+
+[[candidate]]
+level  = 1
+id     = "MKID"
+label  = "MKID 운동 인덕턴스 검출기"
+n6     = 0.75
+perf   = 0.88
+power  = 0.50
+cost   = 0.45
+notes  = "kinetic inductance, multiplexing, GHz readout"
+
+[[candidate]]
+level  = 1
+id     = "CCD"
+label  = "CCD Skipper (σ-τ=8 단일전자)"
+n6     = 0.90
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "reads=8=sigma-tau EXACT, single electron counting, SENSEI"
+
+[[candidate]]
+level  = 1
+id     = "Phonon"
+label  = "포논 센서 τ=4 채널"
+n6     = 1.00
+perf   = 0.80
+power  = 0.45
+cost   = 0.40
+notes  = "channels=4=tau EXACT, athermal phonons, meV threshold"
+
+# =============================================================
+# Level 2: Shielding (차폐) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Shielding"
+
+[[candidate]]
+level  = 2
+id     = "Underground"
+label  = "지하 실험실 (σ·φ=24 km.w.e.)"
+n6     = 0.90
+perf   = 0.95
+power  = 0.50
+cost   = 0.35
+notes  = "depth~24 CLOSE, cosmic ray suppression, SNOLAB/LNGS"
+
+[[candidate]]
+level  = 2
+id     = "Water"
+label  = "수조 차폐 (σ-φ=10m)"
+n6     = 0.85
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "water_depth=10=sigma-phi CLOSE, neutron+gamma shield"
+
+[[candidate]]
+level  = 2
+id     = "Lead"
+label  = "납 차폐 (Z=82, 두께 σ=12 cm)"
+n6     = 0.90
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "thickness=12=sigma EXACT, gamma attenuation"
+
+[[candidate]]
+level  = 2
+id     = "Muon_Veto"
+label  = "뮤온 거부기 (n=6 패널)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "panels=6=n EXACT, active veto, 99.9% rejection"
+
+[[candidate]]
+level  = 2
+id     = "Active"
+label  = "능동 차폐 (다중 레이어)"
+n6     = 0.75
+perf   = 0.92
+power  = 0.45
+cost   = 0.40
+notes  = "multi-layer active monitoring, self-vetoing"
+
+[[candidate]]
+level  = 2
+id     = "Passive"
+label  = "수동 다중 차폐 (Cu+Pb+PE)"
+n6     = 0.70
+perf   = 0.82
+power  = 0.75
+cost   = 0.65
+notes  = "copper+lead+polyethylene layers, simple reliable"
+
+# =============================================================
+# Level 3: Analysis (분석) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Analysis"
+
+[[candidate]]
+level  = 3
+id     = "ML_Signal"
+label  = "ML 신호 분류 (σ-τ=8 레이어)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.55
+notes  = "layers=8=sigma-tau EXACT, deep learning signal/background"
+
+[[candidate]]
+level  = 3
+id     = "Matched_Filter"
+label  = "정합 필터 (최적 S/N)"
+n6     = 0.65
+perf   = 0.85
+power  = 0.80
+cost   = 0.75
+notes  = "optimal linear filter, template matching"
+
+[[candidate]]
+level  = 3
+id     = "Likelihood"
+label  = "우도 분석 (PLR)"
+n6     = 0.70
+perf   = 0.90
+power  = 0.70
+cost   = 0.65
+notes  = "profile likelihood ratio, XENON standard"
+
+[[candidate]]
+level  = 3
+id     = "Bayesian"
+label  = "베이지안 추론 (MCMC)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.60
+cost   = 0.55
+notes  = "posterior inference, credible intervals"
+
+[[candidate]]
+level  = 3
+id     = "Neural"
+label  = "신경망 이벤트 재구성"
+n6     = 0.80
+perf   = 0.93
+power  = 0.55
+cost   = 0.50
+notes  = "GNN/CNN event reconstruction, position+energy"
+
+[[candidate]]
+level  = 3
+id     = "PH_Topology"
+label  = "PH 위상 데이터 분석 (Betti sopfr=5)"
+n6     = 0.95
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "betti=5=sopfr EXACT, persistent homology signal topology"
+
+# =============================================================
+# Level 4: Experiment (실험) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Experiment"
+
+[[candidate]]
+level  = 4
+id     = "XENON_nT"
+label  = "XENON-nT (σ·τ=48 톤 LXe 목표)"
+n6     = 0.95
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "mass=48=sigma*tau CLOSE, leading sensitivity"
+
+[[candidate]]
+level  = 4
+id     = "LZ"
+label  = "LUX-ZEPLIN (σ-φ=10 톤)"
+n6     = 0.90
+perf   = 0.93
+power  = 0.45
+cost   = 0.35
+notes  = "mass=10=sigma-phi EXACT, SURF underground"
+
+[[candidate]]
+level  = 4
+id     = "CDMS"
+label  = "SuperCDMS (Ge/Si 볼로미터)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "low-mass WIMP, phonon+ionization, SNOLAB"
+
+[[candidate]]
+level  = 4
+id     = "CRESST"
+label  = "CRESST-III (CaWO4 극저온)"
+n6     = 0.70
+perf   = 0.80
+power  = 0.50
+cost   = 0.55
+notes  = "sub-GeV reach, cryogenic scintillating bolometer"
+
+[[candidate]]
+level  = 4
+id     = "DarkSide"
+label  = "DarkSide-20k (φ·σ-φ=20 톤 LAr)"
+n6     = 0.90
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "mass=20=J2-tau EXACT, underground argon, pulse shape"
+
+[[candidate]]
+level  = 4
+id     = "Custom_N6"
+label  = "Custom N6 검출기 (n=6 최적 설계)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.55
+cost   = 0.45
+notes  = "n=6 native: 6 target modules, 12 sensor arrays, 48T mass"
+
+# =============================================================
+# Rules (n6 일관성 검증)
+# =============================================================
+[[rule]]
+desc = "Xenon + PMT 시너지 (전통적 최적 조합)"
+if_level = [0, 1]
+if_ids   = ["Xenon_LXe", "PMT"]
+bonus    = 0.05
+
+[[rule]]
+desc = "TES + Underground 극저온 시너지"
+if_level = [1, 2]
+if_ids   = ["TES", "Underground"]
+bonus    = 0.05
+
+[[rule]]
+desc = "PH Topology + Custom N6 위상-n6 시너지"
+if_level = [3, 4]
+if_ids   = ["PH_Topology", "Custom_N6"]
+bonus    = 0.05
+
+[[rule]]
+desc = "Muon Veto + ML Signal 능동 분석 시너지"
+if_level = [2, 3]
+if_ids   = ["Muon_Veto", "ML_Signal"]
+bonus    = 0.04

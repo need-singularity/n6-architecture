@@ -1,0 +1,337 @@
+# N6 Machine Vision DSE — Industrial vision systems
+# 6 Camera x 6 Illumination x 6 Optics x 6 Algorithm x 6 Integration = 7,776 combos
+# n=6: 6 lens types, sigma=12 ROI zones, sigma-tau=8-bit grayscale
+
+[meta]
+name = "machine-vision"
+desc = "Machine Vision DSE (6 lens types, sigma=12 ROI zones, sigma-tau=8-bit grayscale)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Camera (카메라)
+#   n6 checks: 6 sensor types, sigma=12 bit depth, sigma-tau=8 MP resolution tiers
+# ============================================================
+
+[[level]]
+name = "Camera"
+
+[[candidate]]
+id = "AreaScan"
+label = "Area Scan Camera (6 sensor sizes=n, 12-bit ADC=sigma, 8 MP resolution=sigma-tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+id = "LineScan"
+label = "Line Scan Camera (6 line rates=n, 12k pixel width=sigma, 4 spectral bands=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "EventCamera"
+label = "Event Camera DVS (6 sensitivity thresholds=n, 12 us latency=sigma, 4 event polarity modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+id = "MultiSpectral"
+label = "Multispectral Camera (6 spectral channels=n, 12 filter positions=sigma, 4 imaging modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "Stereo3D"
+label = "Stereo 3D Camera (6 baseline options=n, 12 disparity levels=sigma, 4 matching algorithms=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "ThermalIR"
+label = "Thermal IR Camera (6 LWIR/MWIR bands=n, 12 um wavelength range=sigma, 4 NETD classes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.55
+
+# ============================================================
+# Level 1: Illumination (조명)
+#   n6 checks: 6 lighting types, sigma=12 LED arrays, tau=4 wavelength bands
+# ============================================================
+
+[[level]]
+name = "Illumination"
+
+[[candidate]]
+id = "RingLight"
+label = "Ring Light (6 LED segments=n, 12 brightness levels=sigma, 4 color channels RGBW=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "BackLight"
+label = "Back Light (6 diffuser grades=n, 12 uniformity zones=sigma, 4 intensity steps=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+id = "DarkField"
+label = "Dark Field Illumination (6 angle positions=n, 12 fiber guides=sigma, 4 azimuthal sectors=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "StructuredLight"
+label = "Structured Light (6 pattern projectors=n, 12 fringe frequencies=sigma, 4 phase-shift steps=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "CoaxialLight"
+label = "Coaxial Illumination (6 beam splitter types=n, 12 mm aperture=sigma, 4 reflectance modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "StrobeFlash"
+label = "High-Speed Strobe (6 flash durations=n, 12 us minimum pulse=sigma, 24 Hz trigger rate=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+# ============================================================
+# Level 2: Optics (광학계)
+#   n6 checks: 6 lens types, sigma=12 mm focal length, tau=4 magnification ranges
+# ============================================================
+
+[[level]]
+name = "Optics"
+
+[[candidate]]
+id = "FixedFocal"
+label = "Fixed Focal Lens (6 focal lengths=n, 12 mm standard=sigma, 4 f-stop settings=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "Telecentric"
+label = "Telecentric Lens (6 magnification options=n, 12 mm FOV=sigma, 4 telecentricity classes=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+id = "MacroLens"
+label = "Macro Lens (6 working distances=n, 12x max magnification=sigma, 4 DOF settings=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "ZoomLens"
+label = "Zoom Lens (6 zoom ratios=n, 12-120mm range=sigma, 4 autofocus modes=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "LiquidLens"
+label = "Liquid Lens (6 voltage levels=n, 12 ms focus speed=sigma, 4 diopter ranges=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "Pericentric"
+label = "Pericentric/360 Lens (6 view directions=n, 12 mm bore diameter=sigma, 4 inspection surfaces=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.55
+
+# ============================================================
+# Level 3: Algorithm (알고리즘)
+#   n6 checks: 6 processing pipelines, sigma=12 feature types, sigma-tau=8-bit threshold
+# ============================================================
+
+[[level]]
+name = "Algorithm"
+
+[[candidate]]
+id = "PatternMatch"
+label = "Pattern Matching (6 template levels=n, 12 rotation tolerances=sigma, 4 scale ranges=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+id = "DeepDefect"
+label = "Deep Learning Defect (6 CNN backbone choices=n, 12 defect classes=sigma, 4 confidence thresholds=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.60
+
+[[candidate]]
+id = "BlobAnalysis"
+label = "Blob Analysis (6 morphological ops=n, 12 blob features=sigma, 4 connectivity rules=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "OCR_OCV"
+label = "OCR/OCV (6 font families=n, 12 character sets=sigma, 4 verification levels=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "PointCloud3D"
+label = "3D Point Cloud (6 registration methods=n, 12 mesh decimation=sigma, 4 comparison modes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.60
+
+[[candidate]]
+id = "EdgeSubpixel"
+label = "Subpixel Edge Detection (6 edge operators=n, 12 ROI zones=sigma, 4 calibration methods=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.70
+
+# ============================================================
+# Level 4: Integration (통합)
+#   n6 checks: 6 integration levels, sigma=12 I/O channels, tau=4 communication protocols
+# ============================================================
+
+[[level]]
+name = "Integration"
+
+[[candidate]]
+id = "PLC_Inline"
+label = "PLC Inline Integration (6 PLC I/O modules=n, 12 digital channels=sigma, 4 fieldbus protocols=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "RobotGuided"
+label = "Robot-Guided Vision (6 DOF robot=n, 12 pick positions=sigma, 4 coordinate frames=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.65
+
+[[candidate]]
+id = "EdgeGPU"
+label = "Edge GPU Processing (6 TOPS tiers=n, 12 inference streams=sigma, 4 model types=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.40
+cost = 0.55
+
+[[candidate]]
+id = "CloudHybrid"
+label = "Cloud-Hybrid MES (6 cloud regions=n, 12 dashboard widgets=sigma, 4 reporting frequencies=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.50
+cost = 0.65
+
+[[candidate]]
+id = "GigEVision"
+label = "GigE Vision Standard (6 camera links=n, 12 Gbps total bandwidth=sigma, 4 trigger modes=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+id = "DigitalTwinQC"
+label = "Digital Twin QC (6 virtual models=n, 12 measurement points=sigma, 24h traceability=J2)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.55
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Line scan cameras need back light or dark field illumination
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "LineScan"
+then_level = 1
+then_ids = "BackLight,DarkField"
+
+# Telecentric lens best for subpixel edge detection
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Telecentric"
+then_level = 3
+then_ids = "EdgeSubpixel,PatternMatch"
+
+# Structured light requires 3D point cloud algorithm
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "StructuredLight"
+then_level = 3
+then_ids = "PointCloud3D,DeepDefect"
+
+# Deep learning defect detection needs Edge GPU
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "DeepDefect"
+then_level = 4
+then_ids = "EdgeGPU,CloudHybrid"
+
+# Robot-guided vision needs stereo 3D camera
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "RobotGuided"
+then_level = 0
+then_ids = "Stereo3D,AreaScan"

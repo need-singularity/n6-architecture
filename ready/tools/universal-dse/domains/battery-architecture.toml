@@ -1,0 +1,362 @@
+# =============================================================
+# HEXA Battery Architecture DSE Domain Definition
+# 궁극의 배터리 아키텍처 — n=6 기반 소재→전극→코어→칩→시스템
+# BT-27 (Carbon-6 chain) + BT-43 (CN=6 universality) +
+# BT-57 (Cell ladder) + BT-80 (SSE CN=6) + BT-82 (Pack map) +
+# BT-84 (96/192 triple convergence)
+# Total raw combos: 6x5x5x4x6 = 3,600 (pre-filter)
+# =============================================================
+
+[meta]
+name = "battery-architecture"
+desc = "Ultimate Battery Architecture DSE (BT-27/43/57/80/82/84)"
+levels = ["Material", "Electrode", "Core", "Chip", "System"]
+vision = "n=6 crystallography from atom to grid — CN=6 universal energy storage"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Material (Cathode / Anode Chemistry) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Material"
+
+[[candidate]]
+level  = 0
+id     = "LFP"
+label  = "LiFePO4 (CN=6 olivine, BT-43)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.85
+cost   = 0.90
+notes  = "CN=6=n EXACT, octahedral Fe, 3.2V, 170mAh/g, safe"
+
+[[candidate]]
+level  = 0
+id     = "NMC811"
+label  = "NMC 811 (Ni-Mn-Co, CN=6, BT-43)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "CN=6=n EXACT, n/phi=3 metals, 200mAh/g, high energy"
+
+[[candidate]]
+level  = 0
+id     = "NCA"
+label  = "NCA (Ni-Co-Al, CN=6)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.68
+cost   = 0.55
+notes  = "CN=6=n EXACT, n/phi=3 metals, Tesla chemistry"
+
+[[candidate]]
+level  = 0
+id     = "LNMO"
+label  = "LNMO Spinel (5V class, CN=6)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.72
+cost   = 0.65
+notes  = "CN=6=n EXACT, high voltage 4.7V, Co-free"
+
+[[candidate]]
+level  = 0
+id     = "LiS"
+label  = "Li-S (Sulfur cathode, BT-83)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.60
+cost   = 0.80
+notes  = "S8->S4->S2->S1=(sigma-tau)->tau->phi->mu ladder, BT-83"
+
+[[candidate]]
+level  = 0
+id     = "LiAir"
+label  = "Li-Air (O2 cathode)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.50
+cost   = 0.70
+notes  = "theoretical 3500mAh/g, sigma-phi=10x graphite, research"
+
+# =============================================================
+# Level 1: Electrode (Anode + Electrolyte) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Electrode"
+
+[[candidate]]
+level  = 1
+id     = "Graphite_LiC6"
+label  = "Graphite LiC6 (C:Li=6:1=n, BT-27)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.90
+notes  = "C:Li=6:1=n EXACT, intercalation stages=tau=4, BT-27"
+
+[[candidate]]
+level  = 1
+id     = "SiC_Blend"
+label  = "Si/C Composite (sigma-phi=10x capacity)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "Si:Graphite capacity ratio~sigma-phi=10x, BT-81"
+
+[[candidate]]
+level  = 1
+id     = "Pure_Si"
+label  = "Pure Si Anode (3579 mAh/g)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "3579/372~9.62~sigma-phi, expansion 300%, needs SSE"
+
+[[candidate]]
+level  = 1
+id     = "Li_Metal"
+label  = "Li Metal Anode (3860 mAh/g)"
+n6     = 0.67
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "3860/372~sigma-phi=10.38x, dendrite risk, needs SSE"
+
+[[candidate]]
+level  = 1
+id     = "SSE_Garnet"
+label  = "Solid-State Electrolyte (Garnet LLZO, CN=6, BT-80)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.35
+notes  = "CN=6=n EXACT, Li7La3Zr2O12, NASICON also CN=6, BT-80"
+
+# =============================================================
+# Level 2: Core (Cell Structure) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "Pouch_Cell"
+label  = "Pouch Cell (tau=4 core layers)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.75
+cost   = 0.65
+notes  = "cathode+electrolyte+separator+anode=tau=4 layers EXACT"
+
+[[candidate]]
+level  = 2
+id     = "Prismatic"
+label  = "Prismatic Cell (BYD Blade)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.80
+cost   = 0.70
+notes  = "CTP (cell-to-pack), structural integration"
+
+[[candidate]]
+level  = 2
+id     = "Cylindrical"
+label  = "Cylindrical Cell (Tesla 4680)"
+n6     = 0.83
+perf   = 0.82
+power  = 0.78
+cost   = 0.75
+notes  = "4680: diameter 46mm~sigma*tau=48, tab-less"
+
+[[candidate]]
+level  = 2
+id     = "Bipolar"
+label  = "Bipolar Stacked Cell (phi=2 electrode)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.72
+cost   = 0.50
+notes  = "phi=2 pole plate EXACT, internal series, short path"
+
+[[candidate]]
+level  = 2
+id     = "SSB_Cell"
+label  = "All-Solid-State Cell (BT-80)"
+n6     = 1.00
+perf   = 0.78
+power  = 0.70
+cost   = 0.35
+notes  = "SSE CN=6 EXACT, no liquid, no separator, BT-80"
+
+# =============================================================
+# Level 3: Chip (BMS / Management) -- 4 candidates
+# =============================================================
+[[level]]
+name = "Chip"
+
+[[candidate]]
+level  = 3
+id     = "BMS_Standard"
+label  = "Standard BMS (sigma=12 cells/IC)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "sigma=12 cells/IC EXACT, ADC sigma-tau=8 bit, tau=4 sensors"
+
+[[candidate]]
+level  = 3
+id     = "BMS_AI"
+label  = "AI-Enhanced BMS (ML SOH/SOC prediction)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.70
+cost   = 0.55
+notes  = "sigma-tau=8 layer NN EXACT, predictive maintenance"
+
+[[candidate]]
+level  = 3
+id     = "BMS_Wireless"
+label  = "Wireless BMS (wBMS, no harness)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.80
+cost   = 0.50
+notes  = "ADI wBMS, phi=2 wire reduction, BLE/UWB"
+
+[[candidate]]
+level  = 3
+id     = "BMS_Integrated"
+label  = "Cell-Integrated BMS (sensor in cell)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.82
+cost   = 0.40
+notes  = "tau=4 in-cell sensors EXACT, real-time per-cell"
+
+# =============================================================
+# Level 4: System (Pack / Grid Integration) -- 6 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "EV_96S"
+label  = "EV 96S Pack (sigma(sigma-tau)=96, BT-57)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.55
+notes  = "96S=sigma(sigma-tau) EXACT, 400V class, Tesla, BT-57/84"
+
+[[candidate]]
+level  = 4
+id     = "EV_192S"
+label  = "EV 192S Pack (phi*sigma(sigma-tau)=192, BT-57)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.45
+notes  = "192S=phi*96 EXACT, 800V class, Hyundai E-GMP, BT-57"
+
+[[candidate]]
+level  = 4
+id     = "Grid_ESS"
+label  = "Grid ESS (HVDC + J2=24 kV distribution)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.75
+cost   = 0.50
+notes  = "J2=24 kV distribution EXACT, utility-scale, BT-62"
+
+[[candidate]]
+level  = 4
+id     = "Home_ESS"
+label  = "Home ESS (48V=sigma*tau DC bus)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.60
+notes  = "48V=sigma*tau EXACT, sigma=12 cell modules, BT-60"
+
+[[candidate]]
+level  = 4
+id     = "CTP_Structural"
+label  = "Cell-to-Pack Structural (BYD/Tesla)"
+n6     = 0.67
+perf   = 0.88
+power  = 0.72
+cost   = 0.65
+notes  = "structural battery, cell IS the pack, mass saving"
+
+[[candidate]]
+level  = 4
+id     = "V2G_Bidirect"
+label  = "V2G Bidirectional (vehicle-to-grid)"
+n6     = 0.83
+perf   = 0.82
+power  = 0.78
+cost   = 0.55
+notes  = "phi=2 directional EXACT, DC chain BT-60"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Li-Air requires Li Metal anode
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "LiAir"
+then_level = 1
+then_ids   = "Li_Metal"
+
+# Li Metal / Pure Si anode requires SSE or SSB cell
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Li_Metal"
+then_level = 2
+then_ids   = "SSB_Cell,Bipolar"
+
+# SSE Garnet electrolyte pairs with SSB Cell
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "SSE_Garnet"
+then_level = 2
+then_ids   = "SSB_Cell"
+
+# Li-S incompatible with standard Graphite anode
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "LiS"
+then_level = 1
+then_ids   = "Graphite_LiC6"
+
+# 192S system needs advanced BMS
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "EV_192S"
+then_level = 3
+then_ids   = "BMS_AI,BMS_Integrated"
+
+# Grid ESS needs standard or AI BMS (scale)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Grid_ESS"
+then_level = 3
+then_ids   = "BMS_Wireless"

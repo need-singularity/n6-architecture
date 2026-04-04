@@ -1,0 +1,357 @@
+# =============================================================
+# Natural Language Processing DSE Domain Definition
+# NLP pipeline — tokenizer to application
+# n=6: BPE vocab 2^n·10^n = 64M candidates, σ=12 attention heads, BT-56 d=2^σ=4096
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "natural-language-processing"
+desc = "NLP Pipeline Architecture DSE (tokenizer/encoder/attention/decoder/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Tokenizer (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Tokenizer"
+
+[[candidate]]
+level = 0
+id = "BPE-32K"
+label = "BPE 32K (2^{sopfr}·10³, GPT-2 standard, byte-level)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "BPE-50K"
+label = "BPE 50257 (GPT-2/3 exact, ≈σ·τ·10³, legacy standard)"
+n6 = 0.90
+perf = 0.80
+power = 0.78
+cost = 0.82
+
+[[candidate]]
+level = 0
+id = "SentencePiece"
+label = "SentencePiece Unigram (32K vocab, language-agnostic, T5/mBART)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "WordPiece"
+label = "WordPiece 30K (BERT vocab, ##subword, σ=12 special tokens)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Tiktoken-100K"
+label = "Tiktoken 100K (GPT-4, 10^sopfr, cl100k_base, efficient)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Byte-256"
+label = "Byte-Level 256 (no tokenization, 2^(σ-τ)=256, universal)"
+n6 = 1.00
+perf = 0.70
+power = 0.88
+cost = 0.90
+
+# ============================================================
+# Level 1: Encoder (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Encoder"
+
+[[candidate]]
+level = 1
+id = "Transformer-12L"
+label = "Transformer σ=12 Layers (BERT-base, d=768, bidirectional)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Mamba-SSM"
+label = "Mamba SSM (d_state=2^τ=16, expand=φ=2, linear time, BT-65)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "RWKV"
+label = "RWKV Linear Attention (6-channel mix, O(n) inference, RNN-like)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "MoE-Encoder"
+label = "MoE Encoder (σ-τ=8 experts, top-φ=2 routing, BT-58 sparse)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "RetNet"
+label = "RetNet (retention, 6 decay rates, parallel+recurrent dual)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Hybrid-Attn-SSM"
+label = "Hybrid Attention+SSM (6 attn + 6 SSM layers, Jamba-style)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+# ============================================================
+# Level 2: Attention (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Attention"
+
+[[candidate]]
+level = 2
+id = "MHA-12"
+label = "Multi-Head Attention σ=12 heads (standard, d_h=64, full)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "GQA-8KV"
+label = "Grouped Query Attention (σ-τ=8 KV heads, BT-39, efficient)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Flash-Attn"
+label = "FlashAttention (tiled, σ-τ=8 tile size, O(N) memory, fast)"
+n6 = 1.00
+perf = 0.95
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Egyptian-EFA"
+label = "Egyptian Fraction Attention (1/2+1/3+1/6=1, 40% FLOPs saved)"
+n6 = 1.00
+perf = 0.88
+power = 0.90
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Sliding-Window"
+label = "Sliding Window (Mistral, 4096=2^σ window, local+global)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "Linear-Attention"
+label = "Linear Attention (kernel trick, O(n), 6 feature maps, fast)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.80
+
+# ============================================================
+# Level 3: Decoder (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Decoder"
+
+[[candidate]]
+level = 3
+id = "Autoregressive"
+label = "Autoregressive (GPT-style, 2^σ=4096 context, BT-56 d_model)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Encoder-Decoder"
+label = "Encoder-Decoder (T5-style, φ=2 stacks, seq2seq, translation)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Non-Autoregressive"
+label = "Non-Autoregressive (parallel decode, 6 refinement iterations)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Speculative-Draft"
+label = "Speculative Decoding (draft model, n=6 token lookahead, fast)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "MoE-Decoder"
+label = "MoE Decoder (Mixtral-style, σ-τ=8 experts, top-φ=2, BT-67)"
+n6 = 1.00
+perf = 0.93
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Diffusion-LM"
+label = "Diffusion Language Model (iterative denoise, 6 steps, parallel)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.55
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "Chat-Assistant"
+label = "Chat Assistant (multi-turn, 6 system prompt fields, RLHF)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Code-Gen"
+label = "Code Generation (Codex/StarCoder, 6 language families, IDE)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Translation"
+label = "Machine Translation (6 language pairs, σ=12 BLEU quality)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Summarization"
+label = "Document Summarization (6 section extraction, abstractive)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "RAG"
+label = "RAG Retrieval-Augmented (6 chunk top-k, vector DB, grounded)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Agent"
+label = "LLM Agent (tool use, 6 tool slots, function calling, agentic)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Byte-level tokenizer excluded from high-throughput apps
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Byte-256"
+then_level = 4
+then_ids = ["Chat-Assistant", "Agent"]
+
+# Encoder-decoder requires bidirectional encoder
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Encoder-Decoder"
+then_level = 1
+then_ids = ["Transformer-12L", "MoE-Encoder"]
+
+# Linear attention excluded from agent (needs full attention)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Linear-Attention"
+then_level = 4
+then_ids = ["Agent", "RAG"]
+
+# MoE decoder requires MoE-compatible encoder or hybrid
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "MoE-Decoder"
+then_level = 1
+then_ids = ["MoE-Encoder", "Hybrid-Attn-SSM"]

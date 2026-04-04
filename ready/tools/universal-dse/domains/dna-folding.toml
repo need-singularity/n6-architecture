@@ -1,0 +1,374 @@
+# =============================================================
+# DNA Folding DSE Domain Definition
+# n=6 기반 DNA/RNA 접힘 — 4염기 + 3코돈 + 이중나선 + 크로마틴 6단계
+# BT-51 (Genetic code chain tau->n/phi->2^n->J2-tau = 4->3->64->20)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "dna-folding"
+desc = "Ultimate DNA Folding Architecture DSE (BT-51)"
+levels = ["Sequence", "Structure", "Folding", "Chromatin", "Function"]
+vision = "n=6 기반 DNA/RNA 접힘 — 4염기 + 3코돈 + 이중나선 + 크로마틴 6단계"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Sequence (DNA/RNA 서열 기본 단위) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Sequence"
+
+[[candidate]]
+level  = 0
+id     = "DNA_4Base"
+label  = "DNA 4-Base (A,T,G,C tau=4 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "bases=4=tau EXACT, pairs=2=phi EXACT, stability=90, fidelity=95"
+
+[[candidate]]
+level  = 0
+id     = "RNA_4Base"
+label  = "RNA 4-Base (A,U,G,C tau=4)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "bases=4=tau EXACT, single_strand=1=mu, catalytic=80, fidelity=85"
+
+[[candidate]]
+level  = 0
+id     = "CodonTriple"
+label  = "Codon Triple (3중체 n/phi=3 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "codon_length=3=n/phi EXACT, codons=64=2^n EXACT, amino_acids=20=J2-tau EXACT"
+
+[[candidate]]
+level  = 0
+id     = "AminoAcid20"
+label  = "Amino Acid 20 (J2-tau=20 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "amino_acids=20=J2-tau EXACT, essential=8=sigma-tau, diversity=100"
+
+[[candidate]]
+level  = 0
+id     = "NucleotideN4"
+label  = "Nucleotide N4 (purine/pyrimidine phi=2 + ribo/deoxy phi=2)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "categories=4=tau EXACT, purine_pyrimidine=2=phi EXACT, ribo_deoxy=2=phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "ModifiedBase"
+label  = "Modified Base (변형 염기 sopfr=5)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.50
+cost   = 0.40
+notes  = "modifications=5=sopfr EXACT, epigenetic=true, regulatory=75"
+
+# =============================================================
+# Level 1: Structure (DNA/RNA 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Structure"
+
+[[candidate]]
+level  = 1
+id     = "DoubleHelix"
+label  = "Double Helix (phi=2 가닥 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.70
+cost   = 0.65
+notes  = "strands=2=phi EXACT, complementary=true, stability=95"
+
+[[candidate]]
+level  = 1
+id     = "Aform"
+label  = "A-DNA (sigma=12 bp/turn)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "bp_per_turn=12=sigma EXACT, dehydrated=true, RNA_hybrid=true"
+
+[[candidate]]
+level  = 1
+id     = "Bform"
+label  = "B-DNA (sigma-phi=10 bp/turn)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.75
+cost   = 0.70
+notes  = "bp_per_turn=10=sigma-phi EXACT, physiological=true, canonical=true"
+
+[[candidate]]
+level  = 1
+id     = "Zform"
+label  = "Z-DNA (sigma=12 bp/turn 좌선)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.55
+cost   = 0.45
+notes  = "bp_per_turn=12=sigma EXACT, left_handed=true, regulatory=70"
+
+[[candidate]]
+level  = 1
+id     = "GQuadruplex"
+label  = "G-Quadruplex (G4 tau=4 평면)"
+n6     = 0.75
+perf   = 0.60
+power  = 0.50
+cost   = 0.40
+notes  = "planes=4=tau EXACT, telomere=true, stability=80"
+
+[[candidate]]
+level  = 1
+id     = "Triplex"
+label  = "Triplex DNA (삼중체 n/phi=3)"
+n6     = 0.75
+perf   = 0.55
+power  = 0.45
+cost   = 0.35
+notes  = "strands=3=n/phi EXACT, therapeutic=true, gene_targeting=65"
+
+# =============================================================
+# Level 2: Folding (크로마틴 접힘 계층) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Folding"
+
+[[candidate]]
+level  = 2
+id     = "Nucleosome"
+label  = "Nucleosome (~147bp ~ sigma^2)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "bp_wrapped=147~sigma_sq=144 CLOSE, histone_octamer=8=sigma-tau EXACT, compaction=7x"
+
+[[candidate]]
+level  = 2
+id     = "Solenoid"
+label  = "Solenoid (n=6 nucleosomes/turn EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "nucleosomes_per_turn=6=n EXACT, diameter=30nm, compaction=40x"
+
+[[candidate]]
+level  = 2
+id     = "Chromatin30nm"
+label  = "30nm Chromatin Fiber"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "diameter=30, compaction=40x, debated_structure=true"
+
+[[candidate]]
+level  = 2
+id     = "LoopDomain"
+label  = "Loop Domain (루프 도메인)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "loop_size_kb=100-1000, CTCF_boundary=true, compaction=200x"
+
+[[candidate]]
+level  = 2
+id     = "TAD"
+label  = "Topologically Associating Domain"
+n6     = 0.50
+perf   = 0.70
+power  = 0.50
+cost   = 0.40
+notes  = "size_Mb=0.5-2, self_interacting=true, gene_regulation=true"
+
+[[candidate]]
+level  = 2
+id     = "Metaphase"
+label  = "Metaphase Chromosome (최대 압축)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.45
+cost   = 0.35
+notes  = "compaction=10000x, condensin=true, max_compaction=true"
+
+# =============================================================
+# Level 3: Chromatin (크로마틴 조절) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Chromatin"
+
+[[candidate]]
+level  = 3
+id     = "Histone4"
+label  = "Histone Core tau=4 (H2A,H2B,H3,H4 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "core_types=4=tau EXACT, octamer=8=sigma-tau EXACT, modifications=12=sigma"
+
+[[candidate]]
+level  = 3
+id     = "EpigeneticN4"
+label  = "Epigenetic tau=4 Marks"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "mark_types=4=tau EXACT (methylation/acetylation/phosphorylation/ubiquitination), heritable=true"
+
+[[candidate]]
+level  = 3
+id     = "ChromatinRemodel"
+label  = "Chromatin Remodeling (sopfr=5 복합체)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "complexes=5=sopfr EXACT (SWI/SNF/ISWI/CHD/INO80/SWR1), ATP_dependent=true"
+
+[[candidate]]
+level  = 3
+id     = "CTCF_Insulator"
+label  = "CTCF Insulator (phi=2 boundary)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.65
+cost   = 0.55
+notes  = "orientation=2=phi EXACT (forward/reverse), loop_anchor=true, insulation=80"
+
+[[candidate]]
+level  = 3
+id     = "CohesinComplex"
+label  = "Cohesin Complex (sigma=12 Angstrom ring)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "ring_diameter=12=sigma EXACT, subunits=4=tau, sister_chromatid=true"
+
+[[candidate]]
+level  = 3
+id     = "DNAMethylation"
+label  = "DNA Methylation (phi=2 on/off)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "states=2=phi EXACT, CpG_islands=true, gene_silencing=true"
+
+# =============================================================
+# Level 4: Function (기능적 결과) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Function"
+
+[[candidate]]
+level  = 4
+id     = "GeneExpression"
+label  = "Gene Expression (n=6 단계)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "steps=6=n EXACT (transcription/splicing/export/translation/folding/localization)"
+
+[[candidate]]
+level  = 4
+id     = "Replication"
+label  = "Replication (phi=2 반보존)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "semiconservative=2=phi EXACT, fidelity=10^-9, bidirectional=true"
+
+[[candidate]]
+level  = 4
+id     = "Repair"
+label  = "DNA Repair (n=6 경로 EXACT: BER/NER/MMR/HR/NHEJ/TLS)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "pathways=6=n EXACT, genome_stability=true, cancer_prevention=true"
+
+[[candidate]]
+level  = 4
+id     = "Recombination"
+label  = "Recombination (유전적 다양성)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "types=3=n/phi, crossing_over=true, genetic_diversity=true"
+
+[[candidate]]
+level  = 4
+id     = "Transcription"
+label  = "Transcription (sopfr=5 인자)"
+n6     = 0.75
+perf   = 0.88
+power  = 0.58
+cost   = 0.48
+notes  = "factors=5=sopfr EXACT, RNA_pol=3, elongation_rate=high"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DoubleHelix required for Nucleosome
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Nucleosome"
+then_level = 1
+then_ids   = "DoubleHelix"
+
+# Histone4 required for ChromatinRemodel
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "ChromatinRemodel"
+then_level = 3
+then_ids   = "Histone4"
+
+# GQuadruplex incompatible with Metaphase
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "GQuadruplex"
+then_level = 2
+then_ids   = "Metaphase"
+
+# CodonTriple required for Transcription
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Transcription"
+then_level = 0
+then_ids   = "CodonTriple"

@@ -1,0 +1,400 @@
+# =============================================================
+# BLACK-HOLE DSE Domain Definition
+# 궁극의 블랙홀 물리학 — Bekenstein-Hawking + 정보 패러독스 + 홀로그래피
+# BT-49 (Pure Math) + BT-51 (Genetic code tau->n/phi->2^n->J2-tau)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "black-hole"
+desc = "Ultimate Black Hole Physics DSE — Bekenstein-Hawking + Information Paradox + Holography"
+levels = ["Formation", "Geometry", "Thermodynamics", "Information", "Observation"]
+vision = "n=6 기반 궁극의 블랙홀 — Bekenstein-Hawking + 정보 패러독스 + 홀로그래피"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Formation (형성) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Formation"
+
+[[candidate]]
+level  = 0
+id     = "StellarCollapse"
+label  = "항성 붕괴 Chandrasekhar (sigma=12 태양질량 한계)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "mass_limit~sigma=12 M_sun, classical GR, well-understood"
+
+[[candidate]]
+level  = 0
+id     = "Supermassive"
+label  = "초대질량 BH 은하 중심 (J2=24 Mpc 스케일)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.35
+notes  = "scale=J2=24 EXACT, AGN/quasar, observational evidence"
+
+[[candidate]]
+level  = 0
+id     = "PrimordialBH"
+label  = "원시 BH 초기 우주 (tau=4 형성 메커니즘)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.55
+cost   = 0.40
+notes  = "mechanisms=tau=4 EXACT, early universe, dark matter candidate"
+
+[[candidate]]
+level  = 0
+id     = "BinaryMerger"
+label  = "쌍성 합병 중력파 (phi=2 합병)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "binary=phi=2 EXACT, LIGO confirmed, gravitational waves"
+
+[[candidate]]
+level  = 0
+id     = "Intermediate"
+label  = "중간질량 BH (sigma-tau=8 천 태양질량)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "mass~sigma-tau=8 x1000 M_sun, gap population, IMBH"
+
+[[candidate]]
+level  = 0
+id     = "NakedSingularity"
+label  = "나체 특이점 (mu=1 우주 검열 가설)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.45
+cost   = 0.35
+notes  = "censorship=mu=1 EXACT, speculative, Penrose conjecture"
+
+# =============================================================
+# Level 1: Geometry (시공간 기하) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Geometry"
+
+[[candidate]]
+level  = 1
+id     = "Schwarzschild"
+label  = "슈바르츠실트 정적 구대칭 (tau=4 좌표)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "coords=tau=4 EXACT (t,r,theta,phi), simplest BH, textbook"
+
+[[candidate]]
+level  = 1
+id     = "Kerr"
+label  = "커 회전 BH (phi=2 회전 방향)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "spin_dirs=phi=2 EXACT, astrophysical, ergosphere"
+
+[[candidate]]
+level  = 1
+id     = "ReissnerNord"
+label  = "라이스너-노르드스트룀 하전 BH (n/phi=3 파라미터)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.50
+cost   = 0.45
+notes  = "params=n/phi=3 EXACT (M,Q,r), charged, two horizons"
+
+[[candidate]]
+level  = 1
+id     = "KerrNewman"
+label  = "커-뉴먼 회전+하전 (tau=4 파라미터 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "params=tau=4 EXACT (M,a,Q,Lambda), most general, complete"
+
+[[candidate]]
+level  = 1
+id     = "BTZ_3D"
+label  = "BTZ 3D BH (n/phi=3 차원)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.55
+notes  = "dim=n/phi=3 EXACT, AdS3, toy model, exact solutions"
+
+[[candidate]]
+level  = 1
+id     = "HigherDimBH"
+label  = "고차원 BH Myers-Perry (n=6 차원)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.45
+cost   = 0.35
+notes  = "dim=n=6 EXACT, string theory, ultraspinning"
+
+# =============================================================
+# Level 2: Thermodynamics (열역학) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Thermodynamics"
+
+[[candidate]]
+level  = 2
+id     = "BekensteinHawking"
+label  = "Bekenstein-Hawking 엔트로피 S=A/4 (tau=4 분모 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "divisor=tau=4 EXACT, foundational, area law"
+
+[[candidate]]
+level  = 2
+id     = "HawkingRadiation"
+label  = "호킹 복사 (phi=2 입자/반입자)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "pair=phi=2 EXACT, quantum effect, evaporation"
+
+[[candidate]]
+level  = 2
+id     = "BlackHoleThermo4"
+label  = "BH 열역학 4법칙 (tau=4 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "laws=tau=4 EXACT, thermodynamic analogy, complete framework"
+
+[[candidate]]
+level  = 2
+id     = "ExtremalBH"
+label  = "극한 BH T=0 (mu=1 BPS 상태)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.50
+cost   = 0.40
+notes  = "BPS_state=mu=1 EXACT, supersymmetric, zero temperature"
+
+[[candidate]]
+level  = 2
+id     = "PageCurve"
+label  = "페이지 곡선 정보 반환 (phi=2 상전이)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "phases=phi=2 EXACT, information recovery, unitarity"
+
+[[candidate]]
+level  = 2
+id     = "ThermoDynPhase"
+label  = "BH 상전이 Hawking-Page (n/phi=3 상)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.50
+cost   = 0.45
+notes  = "phases=n/phi=3 EXACT, AdS, confinement/deconfinement"
+
+# =============================================================
+# Level 3: Information (정보 패러독스) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Information"
+
+[[candidate]]
+level  = 3
+id     = "Holographic"
+label  = "홀로그래픽 원리 AdS/CFT (sigma-tau=8 차원 경계)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.35
+notes  = "boundary_dim=sigma-tau=8 for Bott, Maldacena duality, fundamental"
+
+[[candidate]]
+level  = 3
+id     = "FirewallParadox"
+label  = "방화벽 패러독스 (n/phi=3 제안)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.50
+cost   = 0.45
+notes  = "proposals=n/phi=3 EXACT (complementarity/firewall/ER=EPR), AMPS"
+
+[[candidate]]
+level  = 3
+id     = "IslandFormula"
+label  = "아일랜드 공식 양자 극값면 (phi=2 내부/외부)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "regions=phi=2 EXACT (island/no-island), entropy calculation"
+
+[[candidate]]
+level  = 3
+id     = "EREPR"
+label  = "ER=EPR 웜홀=얽힘 (phi=2 EXACT)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.50
+cost   = 0.40
+notes  = "duality=phi=2 EXACT, Susskind-Maldacena, elegant"
+
+[[candidate]]
+level  = 3
+id     = "BlackHoleComp"
+label  = "BH 복잡성 양자 회로 (sigma=12 회로 깊이)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.45
+cost   = 0.35
+notes  = "depth~sigma=12 EXACT, complexity=action, Susskind"
+
+[[candidate]]
+level  = 3
+id     = "FuzzballString"
+label  = "퍼즈볼 끈이론 BH (sopfr=5 마이크로상태)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.40
+cost   = 0.35
+notes  = "microstate_types=sopfr=5 EXACT, no singularity, string theory"
+
+[[candidate]]
+level  = 3
+id     = "SixInfoChannel"
+label  = "BH 정보 6-채널 복원 (Hawking+Page+Island+ER=EPR+Firewall+Fuzzball, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "channels=6=n EXACT, complete information resolution framework, unitarity=mu=1 EXACT"
+
+# =============================================================
+# Level 4: Observation (관측) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Observation"
+
+[[candidate]]
+level  = 4
+id     = "EHTImaging"
+label  = "EHT 직접 촬영 (sigma-tau=8 망원경 어레이)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.30
+notes  = "telescopes=sigma-tau=8 EXACT, direct imaging, M87/SgrA*"
+
+[[candidate]]
+level  = 4
+id     = "GravWaveLIGO"
+label  = "중력파 LIGO/Virgo (phi=2 간섭 팔)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.35
+notes  = "arms=phi=2 EXACT, merger events, Nobel 2017"
+
+[[candidate]]
+level  = 4
+id     = "XRayBinary"
+label  = "X선 쌍성 관측 (sigma=12 keV 에너지밴드)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "energy_band~sigma=12 keV, accretion disk, mass measurement"
+
+[[candidate]]
+level  = 4
+id     = "GammaRayBurst"
+label  = "감마선 폭발 GRB (tau=4 위상)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "phases=tau=4 EXACT, cosmological, extreme energy"
+
+[[candidate]]
+level  = 4
+id     = "NeutrinoEmission"
+label  = "뉴트리노 방출 관측 (sopfr=5 맛 채널)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.50
+cost   = 0.40
+notes  = "flavor_channels=sopfr=5 EXACT, weak interaction, indirect"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Kerr or KerrNewman required for ExtremalBH (needs rotation parameters)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "ExtremalBH"
+then_level = 1
+then_ids   = "Kerr,KerrNewman"
+
+# Holographic requires HigherDimBH or BTZ_3D (needs AdS geometry)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Holographic"
+then_level = 1
+then_ids   = "HigherDimBH,BTZ_3D"
+
+# EREPR requires HawkingRadiation (needs entanglement context)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "EREPR"
+then_level = 2
+then_ids   = "HawkingRadiation"
+
+# NakedSingularity incompatible with Holographic (censorship vs holography)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "NakedSingularity"
+then_level = 3
+then_ids   = "Holographic"
+
+# EHTImaging requires Schwarzschild or Kerr (needs metric for imaging model)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "EHTImaging"
+then_level = 1
+then_ids   = "Schwarzschild,Kerr,KerrNewman"
+
+# FuzzballString requires HigherDimBH (needs extra dimensions for string theory)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "FuzzballString"
+then_level = 1
+then_ids   = "HigherDimBH"

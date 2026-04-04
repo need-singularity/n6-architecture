@@ -1,0 +1,398 @@
+# =============================================================
+# Noncommutative Geometry DSE Domain Definition
+# n=6 NCG -- Connes KO-dim 6 + Standard Model + Spectral Triple
+# BT-49 (Pure Math) + BT-36 (Energy-Info-Hardware-Physics chain)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "noncommutative-geometry"
+desc = "Ultimate NCG DSE -- Connes KO-dim 6 + SM gauge group + spectral triple"
+levels = ["Algebra", "Spectral", "GaugeGroup", "Particle", "Unification"]
+vision = "n=6 NCG -- Connes KO-dim 6 + standard model derivation + spectral triple"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Algebra (Non-commutative algebra choice) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Algebra"
+
+[[candidate]]
+level  = 0
+id     = "AF_Standard"
+label  = "A_F = C + H + M3(C) (Standard Model algebra, n/phi=3 summands)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "summands=3=n/phi EXACT, dim_real=32=2^sopfr, KO_dim=6=n EXACT"
+
+[[candidate]]
+level  = 0
+id     = "MatrixAlg"
+label  = "M_n(C) matrix algebra"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "matrix_size=n variable, general purpose, spectral dimension flexible"
+
+[[candidate]]
+level  = 0
+id     = "CliffordAlg"
+label  = "Clifford algebra (sigma-tau=8 generators)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "generators=8=sigma-tau EXACT, dim=2^8=256, Cl(8) Bott periodicity"
+
+[[candidate]]
+level  = 0
+id     = "VonNeumannAlg"
+label  = "Von Neumann algebra"
+n6     = 0.33
+perf   = 0.70
+power  = 0.50
+cost   = 0.60
+notes  = "type_III factor, continuous dimension, quantum field theory"
+
+[[candidate]]
+level  = 0
+id     = "GradedAlg"
+label  = "Graded algebra (tau=4 grading)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.50
+notes  = "grading=4=tau EXACT, Z/4-graded, supersymmetry connection"
+
+[[candidate]]
+level  = 0
+id     = "TensorAlg"
+label  = "Tensor algebra"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "universal property, free algebra, general construction"
+
+# =============================================================
+# Level 1: Spectral (Spectral triple tools) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Spectral"
+
+[[candidate]]
+level  = 1
+id     = "DiracOp"
+label  = "Dirac operator (tau=4 gamma matrices)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.50
+notes  = "gamma_matrices=4=tau EXACT, spinor_dim=4=tau, chirality=phi=2"
+
+[[candidate]]
+level  = 1
+id     = "SpectralAction"
+label  = "Spectral action principle"
+n6     = 0.75
+perf   = 1.00
+power  = 0.50
+cost   = 0.45
+notes  = "cutoff_function, trace_expansion, Seeley-DeWitt coefficients"
+
+[[candidate]]
+level  = 1
+id     = "HeatKernel"
+label  = "Heat kernel expansion (sopfr=5 coefficients)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "coefficients=5=sopfr EXACT, a0..a4 expansion, asymptotic"
+
+[[candidate]]
+level  = 1
+id     = "ZetaFunc"
+label  = "Zeta function regularization"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "zeta(s) spectral, dimension spectrum, meromorphic continuation"
+
+[[candidate]]
+level  = 1
+id     = "CyclicCohom"
+label  = "Cyclic cohomology"
+n6     = 0.50
+perf   = 0.75
+power  = 0.55
+cost   = 0.60
+notes  = "Connes-Chern character, pairing with K-theory, index theorem"
+
+[[candidate]]
+level  = 1
+id     = "KTheoryN8"
+label  = "K-theory (Bott periodicity sigma-tau=8)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.55
+notes  = "Bott_period=8=sigma-tau EXACT, KO(pt)=Z, classifying space"
+
+# =============================================================
+# Level 2: GaugeGroup (Gauge symmetry group) -- 6 candidates
+# =============================================================
+[[level]]
+name = "GaugeGroup"
+
+[[candidate]]
+level  = 2
+id     = "SU3xSU2xU1"
+label  = "SU(3)xSU(2)xU(1) (3+2+1=n=6 EXACT)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.60
+cost   = 0.50
+notes  = "rank_sum=6=n EXACT, generators=12=sigma EXACT, standard model"
+
+[[candidate]]
+level  = 2
+id     = "U1_EM"
+label  = "U(1) electromagnetic (mu=1)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.80
+cost   = 0.70
+notes  = "rank=1=mu EXACT, generators=1=mu, QED only"
+
+[[candidate]]
+level  = 2
+id     = "SU2_Weak"
+label  = "SU(2) weak force (phi=2)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.70
+cost   = 0.60
+notes  = "rank=1, generators=3=n/phi, isospin doublet phi=2"
+
+[[candidate]]
+level  = 2
+id     = "SU3_Color"
+label  = "SU(3) color (n/phi=3 colors)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "colors=3=n/phi EXACT, generators=8=sigma-tau, confinement"
+
+[[candidate]]
+level  = 2
+id     = "SO10"
+label  = "SO(10) grand unification (sigma-phi=10)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "dim=10=sigma-phi EXACT, spinor_rep=16, contains SM"
+
+[[candidate]]
+level  = 2
+id     = "E6_rank6"
+label  = "E6 exceptional (rank=n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "rank=6=n EXACT, dim=78, fundamental_rep=27, contains SO(10)"
+
+# =============================================================
+# Level 3: Particle (Particle content) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Particle"
+
+[[candidate]]
+level  = 3
+id     = "FermionN12"
+label  = "Fermion sigma=12 (6 quarks + 6 leptons EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.50
+notes  = "fermions=12=sigma EXACT, quarks=6=n, leptons=6=n, 3 generations"
+
+[[candidate]]
+level  = 3
+id     = "HiggsDoublet"
+label  = "Higgs doublet (phi=2 components)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "components=2=phi EXACT, VEV=246GeV, mass=125GeV, EWSB"
+
+[[candidate]]
+level  = 3
+id     = "GaugeBosonN12"
+label  = "Gauge bosons sigma=12 (8+3+1=12 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "bosons=12=sigma EXACT, gluons=8=sigma-tau, W/Z=3=n/phi, photon=1=mu"
+
+[[candidate]]
+level  = 3
+id     = "Generation3"
+label  = "3 generations (n/phi=3)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "generations=3=n/phi EXACT, CKM mixing, mass hierarchy"
+
+[[candidate]]
+level  = 3
+id     = "NeutrinoMass"
+label  = "Neutrino mass (seesaw mechanism)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.60
+notes  = "seesaw type-I, right-handed neutrinos, Majorana mass"
+
+[[candidate]]
+level  = 3
+id     = "GravityNCG"
+label  = "Gravity from NCG (spectral geometry)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.45
+cost   = 0.40
+notes  = "Einstein-Hilbert from spectral action, cosmological constant"
+
+# =============================================================
+# Level 4: Unification (Ultimate unification target) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Unification"
+
+[[candidate]]
+level  = 4
+id     = "KODim6"
+label  = "KO-dimension 6=n (PROVEN in NCG)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "KO_dim=6=n EXACT, Connes real spectral triple, orientability+Poincare"
+
+[[candidate]]
+level  = 4
+id     = "NCG_SM"
+label  = "NCG Standard Model (Connes-Chamseddine)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "full SM from spectral action, Higgs mass prediction, fermion doubling"
+
+[[candidate]]
+level  = 4
+id     = "StringNCG"
+label  = "String-NCG connection (10=tau(496) dimensions)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.40
+cost   = 0.35
+notes  = "dim=10=sigma-phi, T-duality as Morita equivalence, matrix model"
+
+[[candidate]]
+level  = 4
+id     = "LoopQuantGrav"
+label  = "Loop quantum gravity (spin network)"
+n6     = 0.33
+perf   = 0.70
+power  = 0.45
+cost   = 0.40
+notes  = "spin_foam, area quantization, spectral geometry connection"
+
+[[candidate]]
+level  = 4
+id     = "TwistorNCG"
+label  = "Twistor NCG (Penrose twistor + NCG)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.40
+cost   = 0.35
+notes  = "twistor_dim=4=tau, conformal structure, ambitwistor strings"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# AF_Standard requires SU3xSU2xU1 (SM algebra gives SM gauge group)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "AF_Standard"
+then_level = 2
+then_ids   = "SU3xSU2xU1"
+
+# KODim6 is mandatory for NCG_SM
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "NCG_SM"
+then_level = 4
+then_ids   = "KODim6"
+
+# E6_rank6 requires SO10 (E6 contains SO(10))
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "E6_rank6"
+then_level = 2
+then_ids   = "SO10"
+
+# FermionN12 requires Generation3 (12 fermions = 3 gen x 4)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "FermionN12"
+then_level = 3
+then_ids   = "Generation3"
+
+# VonNeumannAlg incompatible with KODim6 (wrong algebraic framework)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "VonNeumannAlg"
+then_level = 4
+then_ids   = "KODim6"
+
+# StringNCG requires CliffordAlg or TensorAlg (needs tensor structure)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "StringNCG"
+then_level = 0
+then_ids   = "CliffordAlg,TensorAlg"
+
+# LoopQuantGrav incompatible with SpectralAction (different quantization)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "LoopQuantGrav"
+then_level = 1
+then_ids   = "SpectralAction"

@@ -1,0 +1,402 @@
+# =============================================================
+# Evolutionary Biology DSE Domain Definition
+# 궁극의 진화생물학 — 자연선택 + 유전적 부동 + 종분화 + 생명의 나무
+# BT-51: Genetic code chain tau->n/phi->2^n->J2-tau (4->3->64->20)
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "evolutionary-biology"
+desc = "Ultimate Evolutionary Biology DSE (BT-51 genetic code chain)"
+levels = ["Mutation", "Selection", "Speciation", "Phylogeny", "MacroEvolution"]
+vision = "n=6 기반 궁극의 진화생물학 — 자연선택 + 유전적 부동 + 종분화 + 생명의 나무"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Mutation (돌연변이) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Mutation"
+
+[[candidate]]
+level  = 0
+id     = "PointMutation"
+label  = "점 돌연변이 tau=4 유형 (전이/전환/삽입/결실)"
+n6     = 0.80
+perf   = 0.70
+power  = 0.75
+cost   = 0.80
+notes  = "types=4=tau EXACT, frequency=high, reversibility=moderate"
+
+[[candidate]]
+level  = 0
+id     = "ChromosomalN6"
+label  = "염색체 돌연변이 6종 (역위/전좌/결실/중복/이배체/이수체)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "types=6=n EXACT, scope=chromosome, impact=high, detection=cytogenetic"
+
+[[candidate]]
+level  = 0
+id     = "GeneDuplication"
+label  = "유전자 중복 phi=2 복사"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "copies=2=phi EXACT, neofunctionalization=true, subfunctionalization=true"
+
+[[candidate]]
+level  = 0
+id     = "TransposableElement"
+label  = "전이 인자 (jumping gene) sopfr=5 TE 계열"
+n6     = 0.85
+perf   = 0.75
+power  = 0.55
+cost   = 0.60
+notes  = "families=5=sopfr EXACT (DNA/LTR/LINE/SINE/Helitron), genome_fraction=0.45"
+
+[[candidate]]
+level  = 0
+id     = "HorizontalTransfer"
+label  = "수평 유전자 전달 sigma-tau=8 전달 메커니즘"
+n6     = 0.90
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "mechanisms=8=sigma-tau EXACT (transformation/transduction/conjugation/GTA/nanotubes/OMV/phage/symbiosis)"
+
+[[candidate]]
+level  = 0
+id     = "EpigeneticMut"
+label  = "후성 돌연변이 (메틸화/히스톤) phi=2"
+n6     = 0.70
+perf   = 0.65
+power  = 0.80
+cost   = 0.75
+notes  = "modes=2=phi EXACT (DNA methylation/histone modification), heritable=partial"
+
+# =============================================================
+# Level 1: Selection (선택) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Selection"
+
+[[candidate]]
+level  = 1
+id     = "NaturalSelection"
+label  = "자연선택 (Darwin) tau=4 선택 유형"
+n6     = 0.80
+perf   = 0.95
+power  = 0.70
+cost   = 0.70
+notes  = "types=4=tau EXACT (directional/stabilizing/disruptive/frequency-dependent), fitness=central"
+
+[[candidate]]
+level  = 1
+id     = "SexualSelection"
+label  = "성선택 phi=2 성별"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.75
+notes  = "sexes=2=phi EXACT, modes=intersexual+intrasexual, runaway_selection=Fisher"
+
+[[candidate]]
+level  = 1
+id     = "KinSelection"
+label  = "혈연선택 (Hamilton's rule) n/phi=3 계수"
+n6     = 0.85
+perf   = 0.75
+power  = 0.60
+cost   = 0.65
+notes  = "coefficients=3=n/phi EXACT (r,B,C), Hamilton_rB>C, eusociality=explained"
+
+[[candidate]]
+level  = 1
+id     = "GroupSelection"
+label  = "집단선택 sigma=12 집단 크기"
+n6     = 0.90
+perf   = 0.70
+power  = 0.55
+cost   = 0.55
+notes  = "group_size=12=sigma EXACT, multilevel_selection=true, controversy=high"
+
+[[candidate]]
+level  = 1
+id     = "ArtificialSelect"
+label  = "인공선택 (육종) sopfr=5 선택 기준"
+n6     = 0.85
+perf   = 0.85
+power  = 0.75
+cost   = 0.50
+notes  = "criteria=5=sopfr EXACT (yield/resistance/quality/growth/adaptation), domestication=12000yr"
+
+[[candidate]]
+level  = 1
+id     = "NeutralDrift"
+label  = "중립 부동 (Kimura) mu=1 중립 비율"
+n6     = 0.70
+perf   = 0.60
+power  = 0.85
+cost   = 0.80
+notes  = "neutrality=1=mu EXACT, effective_pop_size=Ne, molecular_clock=foundation"
+
+[[candidate]]
+level  = 1
+id     = "SixSelection"
+label  = "선택의 6가지 유형 (자연/성/혈연/집단/인공/균형, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "selection_types=6=n EXACT (natural/sexual/kin/group/artificial/balancing), complete selection taxonomy"
+
+# =============================================================
+# Level 2: Speciation (종분화) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Speciation"
+
+[[candidate]]
+level  = 2
+id     = "Allopatric"
+label  = "이소적 종분화 (지리적 격리) phi=2 집단"
+n6     = 0.75
+perf   = 0.90
+power  = 0.70
+cost   = 0.70
+notes  = "populations=2=phi EXACT, barrier=geographic, evidence=strongest, Mayr_model=true"
+
+[[candidate]]
+level  = 2
+id     = "Sympatric"
+label  = "동소적 종분화 sigma-tau=8 생태적 니치"
+n6     = 0.90
+perf   = 0.80
+power  = 0.55
+cost   = 0.55
+notes  = "niches=8=sigma-tau EXACT, no_barrier=true, disruptive_selection=required"
+
+[[candidate]]
+level  = 2
+id     = "Peripatric"
+label  = "주변적 종분화 sopfr=5 건설자 크기"
+n6     = 0.85
+perf   = 0.75
+power  = 0.60
+cost   = 0.60
+notes  = "founder_size=5=sopfr EXACT, genetic_drift=strong, peripheral_isolate=true"
+
+[[candidate]]
+level  = 2
+id     = "Parapatric"
+label  = "측소적 종분화 tau=4 기울기 구간"
+n6     = 0.80
+perf   = 0.70
+power  = 0.65
+cost   = 0.65
+notes  = "gradient_zones=4=tau EXACT, cline=true, hybrid_zone=narrow"
+
+[[candidate]]
+level  = 2
+id     = "HybridSpeciation"
+label  = "잡종 종분화 phi=2 부모종"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "parents=2=phi EXACT, polyploidy=common_in_plants, hybrid_vigor=true"
+
+[[candidate]]
+level  = 2
+id     = "AdaptiveRadiation"
+label  = "적응 방산 (Darwin 핀치) n=6 종 클러스터"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "cluster=6=n EXACT, Darwin_finches=true, ecological_opportunity=key_trigger"
+
+# =============================================================
+# Level 3: Phylogeny (계통학) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Phylogeny"
+
+[[candidate]]
+level  = 3
+id     = "MolecularClock"
+label  = "분자시계 sigma=12 교정점"
+n6     = 0.90
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "calibration_points=12=sigma EXACT, Zuckerkandl_Pauling=1962, rate=substitutions/site/yr"
+
+[[candidate]]
+level  = 3
+id     = "MaxLikelihood"
+label  = "최대 가능도 계통수 sopfr=5 모델 파라미터"
+n6     = 0.85
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "model_params=5=sopfr EXACT (freq/rate/shape/invariant/topology), Felsenstein=1981"
+
+[[candidate]]
+level  = 3
+id     = "BayesianPhylo"
+label  = "베이지안 계통학 tau=4 사전 모델"
+n6     = 0.80
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "priors=4=tau EXACT (tree/branch/rate/model), MCMC=sampling, MrBayes/BEAST"
+
+[[candidate]]
+level  = 3
+id     = "Cladistics"
+label  = "분지학 (공유 파생 형질) n=6 형질 그룹"
+n6     = 0.90
+perf   = 0.75
+power  = 0.70
+cost   = 0.70
+notes  = "character_groups=6=n EXACT, synapomorphy=key, Hennig=1966, parsimony=principle"
+
+[[candidate]]
+level  = 3
+id     = "CoalescentTheory"
+label  = "합체 이론 phi=2 합체/분기"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "events=2=phi EXACT (coalescence/divergence), Kingman=1982, population_genetics"
+
+[[candidate]]
+level  = 3
+id     = "NetworkPhylo"
+label  = "네트워크 계통학 (수평전달 포함) sigma-tau=8 레티큘레이션"
+n6     = 0.90
+perf   = 0.80
+power  = 0.45
+cost   = 0.45
+notes  = "reticulations=8=sigma-tau EXACT, HGT_included=true, not_tree_but_network"
+
+[[candidate]]
+level  = 3
+id     = "SixRankTaxonomy"
+label  = "린네 6-계급 분류법 (계/문/강/목/과/속, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "ranks=6=n EXACT (Kingdom/Phylum/Class/Order/Family/Genus), Linnaeus 1735, hierarchical classification"
+
+# =============================================================
+# Level 4: MacroEvolution (거시진화) -- 5 candidates
+# =============================================================
+[[level]]
+name = "MacroEvolution"
+
+[[candidate]]
+level  = 4
+id     = "MassExtinction"
+label  = "대멸종 (Big 5) sopfr=5 EXACT"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "events=5=sopfr EXACT (Ordovician/Devonian/Permian/Triassic/Cretaceous), recovery=10Myr"
+
+[[candidate]]
+level  = 4
+id     = "CambrianExplosion"
+label  = "캄브리아 대폭발 n=6 주요 문(phylum)"
+n6     = 0.95
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "major_phyla=6=n EXACT (Arthropoda/Mollusca/Chordata/Annelida/Cnidaria/Echinodermata), 541Mya"
+
+[[candidate]]
+level  = 4
+id     = "ConvergentEvol"
+label  = "수렴 진화 phi=2 독립 기원"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "origins=2=phi EXACT (independent), eye_evolution=40+times, wings/fins/echolocation"
+
+[[candidate]]
+level  = 4
+id     = "Coevolution"
+label  = "공진화 phi=2 상호작용 종"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "species=2=phi EXACT (mutualism/parasitism/predation), Red_Queen=hypothesis"
+
+[[candidate]]
+level  = 4
+id     = "PunctEquilib"
+label  = "단속 평형 (Gould) lambda=2 모드"
+n6     = 0.80
+perf   = 0.75
+power  = 0.70
+cost   = 0.70
+notes  = "modes=2=lambda EXACT (stasis/punctuation), Gould_Eldredge=1972, fossil_record=support"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# ChromosomalN6 requires MolecularClock or MaxLikelihood (needs phylogenetic context)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "ChromosomalN6"
+then_level = 3
+then_ids   = "MolecularClock,MaxLikelihood,SixRankTaxonomy"
+
+# HorizontalTransfer incompatible with Cladistics (HGT breaks tree assumptions)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "HorizontalTransfer"
+then_level = 3
+then_ids   = "Cladistics"
+
+# NeutralDrift requires CoalescentTheory or BayesianPhylo (neutral theory uses coalescent)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "NeutralDrift"
+then_level = 3
+then_ids   = "CoalescentTheory,BayesianPhylo"
+
+# AdaptiveRadiation requires NaturalSelection or SexualSelection (adaptation needs selection)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "AdaptiveRadiation"
+then_level = 1
+then_ids   = "NaturalSelection,SexualSelection,SixSelection"
+
+# MassExtinction requires Allopatric or AdaptiveRadiation (extinction drives speciation)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "MassExtinction"
+then_level = 2
+then_ids   = "Allopatric,AdaptiveRadiation"

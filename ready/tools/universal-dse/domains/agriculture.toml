@@ -1,0 +1,346 @@
+# =============================================================
+# HEXA-AGRI DSE Domain Definition
+# BT-27 (C₆H₁₂O₆ glucose, 6CO₂+6H₂O→C₆H₁₂O₆)
+# BT-51 (genetic code τ→3→64→20) + BT-66 (Vision AI)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "agriculture"
+desc = "Agriculture/Food Architecture DSE (BT-27/51/66)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "n=6 photosynthesis-driven smart farm -- 6CO₂+6H₂O→C₆H₁₂O₆+6O₂"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (작물/유전)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "CRISPR_Crop"
+label  = "CRISPR Gene-Edited Crop"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "Gene editing, C₆H₁₂O₆ glucose (BT-27), PAM=n/phi=3"
+
+[[candidate]]
+level  = 0
+id     = "Hybrid"
+label  = "Traditional Hybrid Breeding"
+n6     = 0.67
+perf   = 0.85
+power  = 0.70
+cost   = 0.65
+notes  = "Traditional hybrid breeding, phi=2 parent lines"
+
+[[candidate]]
+level  = 0
+id     = "GMO"
+label  = "Transgenic Crops"
+n6     = 0.50
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "Transgenic crops, inserted gene cassettes"
+
+[[candidate]]
+level  = 0
+id     = "Microbiome"
+label  = "Soil/Plant Microbiome"
+n6     = 0.83
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "Soil/plant microbiome engineering, n=6 dominant phyla"
+
+[[candidate]]
+level  = 0
+id     = "CellAgri"
+label  = "Cellular Agriculture"
+n6     = 0.83
+perf   = 0.75
+power  = 0.50
+cost   = 0.35
+notes  = "Cultured meat/protein, C₆ carbon backbone scaffolds"
+
+[[candidate]]
+level  = 0
+id     = "Algae"
+label  = "Algae Photosynthesis"
+n6     = 1.00
+perf   = 0.70
+power  = 0.75
+cost   = 0.45
+notes  = "6CO₂+6H₂O→C₆H₁₂O₆+6O₂ photosynthesis EXACT (BT-27)"
+
+# =============================================================
+# Level 1: Process (재배 공정)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "Hydroponics"
+label  = "Hydroponics (Soilless)"
+n6     = 0.83
+perf   = 0.88
+power  = 0.55
+cost   = 0.45
+notes  = "Soilless culture, n=6 nutrient parameters (N,P,K,Ca,Mg,S)"
+
+[[candidate]]
+level  = 1
+id     = "Vertical"
+label  = "Vertical Farm (σ=12 layers)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "Vertical farm, σ=12 grow layers EXACT, LED spectrum control"
+
+[[candidate]]
+level  = 1
+id     = "Precision"
+label  = "Precision Agriculture"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "GPS+sensor guided, n=6 variable rate zones"
+
+[[candidate]]
+level  = 1
+id     = "Organic"
+label  = "Organic Farming"
+n6     = 0.50
+perf   = 0.70
+power  = 0.80
+cost   = 0.60
+notes  = "Chemical-free, natural pest management"
+
+[[candidate]]
+level  = 1
+id     = "Greenhouse"
+label  = "Climate-Controlled Greenhouse"
+n6     = 0.67
+perf   = 0.82
+power  = 0.65
+cost   = 0.55
+notes  = "Climate controlled, n=6 environmental parameters"
+
+# =============================================================
+# Level 2: Core (센서/제어)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "SoilSensor"
+label  = "n=6 Soil Sensor Array"
+n6     = 0.83
+perf   = 0.85
+power  = 0.75
+cost   = 0.65
+notes  = "n=6 soil parameters (pH, N, P, K, moisture, temp)"
+
+[[candidate]]
+level  = 2
+id     = "DroneMonitor"
+label  = "6-DOF Monitoring Drone"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "n=6 DOF drone, sigma-tau=8 spectral bands"
+
+[[candidate]]
+level  = 2
+id     = "AutoIrrig"
+label  = "Automated Irrigation"
+n6     = 0.83
+perf   = 0.82
+power  = 0.70
+cost   = 0.60
+notes  = "Automated irrigation, tau=4 zone scheduling"
+
+[[candidate]]
+level  = 2
+id     = "RobotHarvest"
+label  = "Harvest Robot (6-DOF)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "Harvest robot, n=6 DOF robotic arm"
+
+[[candidate]]
+level  = 2
+id     = "ClimateCtrl"
+label  = "n=6 Climate Controller"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "Temperature/humidity/CO2/light/airflow/pH = n=6 parameters"
+
+[[candidate]]
+level  = 2
+id     = "WeedDetect"
+label  = "Computer Vision Weed Detection"
+n6     = 0.67
+perf   = 0.78
+power  = 0.65
+cost   = 0.55
+notes  = "CV weed detection, BT-66 Vision AI"
+
+# =============================================================
+# Level 3: Engine (AI 엔진)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "CropPredict"
+label  = "Crop Yield Prediction ML"
+n6     = 0.83
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "Yield prediction ML, n=6 feature groups"
+
+[[candidate]]
+level  = 3
+id     = "PlantVision"
+label  = "Plant Health Vision AI"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "BT-66 Vision AI for plant disease/health detection"
+
+[[candidate]]
+level  = 3
+id     = "GenomeAI"
+label  = "Genomic Selection AI"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "Genomic selection, BT-51 genetic code (tau=4, codon=3)"
+
+[[candidate]]
+level  = 3
+id     = "SupplyChain"
+label  = "Supply Chain Optimization"
+n6     = 0.67
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "Farm-to-table optimization, logistics AI"
+
+[[candidate]]
+level  = 3
+id     = "WeatherAI"
+label  = "Agricultural Weather AI"
+n6     = 0.67
+perf   = 0.82
+power  = 0.60
+cost   = 0.50
+notes  = "Weather prediction for agriculture, n=6 climate variables"
+
+# =============================================================
+# Level 4: System (농장 시스템)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "SmartFarm"
+label  = "Integrated IoT Smart Farm"
+n6     = 1.00
+perf   = 0.88
+power  = 0.60
+cost   = 0.50
+notes  = "Integrated IoT farm, n=6 subsystems"
+
+[[candidate]]
+level  = 4
+id     = "UrbanFarm"
+label  = "Urban Vertical Farm"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "City vertical farming, sigma=12 floor stacks"
+
+[[candidate]]
+level  = 4
+id     = "AquaPonics"
+label  = "Aquaponics Symbiosis"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "Fish+plant symbiosis, n=6 nitrogen cycle steps"
+
+[[candidate]]
+level  = 4
+id     = "MegaFarm"
+label  = "Large-Scale Automated Farm"
+n6     = 0.67
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "Large-scale automated agriculture"
+
+[[candidate]]
+level  = 4
+id     = "SpaceFarm"
+label  = "Space Agriculture (ISS/Mars)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.40
+cost   = 0.25
+notes  = "ISS/Mars agriculture, closed-loop C₆H₁₂O₆ cycle"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CellAgri only with Vertical or Greenhouse process
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "CellAgri"
+then_level = 1
+then_ids   = "Vertical,Greenhouse"
+
+# SpaceFarm excludes Precision and Organic (no open field in space)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "SpaceFarm"
+then_level = 1
+then_ids   = "Precision,Organic"
+
+# Algae only with Hydroponics or Vertical (water-based)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Algae"
+then_level = 1
+then_ids   = "Hydroponics,Vertical"

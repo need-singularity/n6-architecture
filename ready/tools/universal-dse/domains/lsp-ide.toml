@@ -1,0 +1,390 @@
+# =============================================================
+# LSP/IDE Protocol Architecture DSE
+# 궁극의 LSP/IDE — n=6 기반 프로토콜 + AI 코드분석 통합
+# Chain: Protocol → Analysis → Completion → Refactoring → Ecosystem
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "lsp-ide"
+desc = "Ultimate LSP/IDE Protocol Architecture DSE"
+levels = ["Protocol", "Analysis", "Completion", "Refactoring", "Ecosystem"]
+vision = "Open file and IDE understands everything -- n=6 aligned protocol stack"
+
+[scoring]
+n6   = 0.35
+perf = 0.30
+power = 0.20
+cost  = 0.15
+
+# =============================================================
+# Level 0: Protocol (프로토콜 계층) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Protocol"
+
+[[candidate]]
+level  = 0
+id     = "LSP_Standard"
+label  = "Standard LSP 3.17 (sigma=12 method groups)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.70
+cost   = 0.80
+notes  = "method_groups=12=sigma EXACT, msg_types=6=n EXACT, latency=low, maturity=100"
+
+[[candidate]]
+level  = 0
+id     = "ExtendedLSP"
+label  = "Extended LSP + AI Methods (J2=24 methods)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.60
+notes  = "method_groups=24=J2 EXACT, msg_types=6=n EXACT, latency=medium, maturity=70"
+
+[[candidate]]
+level  = 0
+id     = "CustomBinary"
+label  = "Binary Protocol (sigma-tau=8 messages)"
+n6     = 0.83
+perf   = 1.00
+power  = 0.45
+cost   = 0.40
+notes  = "msg_types=8=sigma-tau EXACT, channels=4=tau EXACT, latency=ultralow, maturity=30"
+
+[[candidate]]
+level  = 0
+id     = "GraphQL_LSP"
+label  = "GraphQL Query Protocol"
+n6     = 0.50
+perf   = 0.70
+power  = 0.60
+cost   = 0.65
+notes  = "query_types=5=sopfr EXACT, schema_depth=4=tau EXACT, latency=medium, maturity=40"
+
+[[candidate]]
+level  = 0
+id     = "gRPC_Stream"
+label  = "gRPC Streaming (phi=2 bidirectional)"
+n6     = 0.67
+perf   = 0.95
+power  = 0.50
+cost   = 0.50
+notes  = "stream_modes=2=phi EXACT, service_groups=6=n EXACT, latency=low, maturity=60"
+
+[[candidate]]
+level  = 0
+id     = "MultiLSP"
+label  = "Multi-Server Routing (n=6 server pool)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "servers=6=n EXACT, routes=12=sigma EXACT, latency=medium, maturity=50"
+
+# =============================================================
+# Level 1: Analysis (코드 분석 엔진) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Analysis"
+
+[[candidate]]
+level  = 1
+id     = "IncrementalAST"
+label  = "Incremental AST (tree-sitter, tau=4 parse levels)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.65
+cost   = 0.75
+notes  = "parse_levels=4=tau EXACT, node_types=12=sigma EXACT, incremental=true, latency=1ms"
+
+[[candidate]]
+level  = 1
+id     = "SemanticModel"
+label  = "Semantic Model (sigma=12 symbol kinds)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.50
+cost   = 0.55
+notes  = "symbol_kinds=12=sigma EXACT, analysis_depth=5=sopfr EXACT, incremental=false, latency=100ms"
+
+[[candidate]]
+level  = 1
+id     = "LazyAnalysis"
+label  = "Lazy On-Demand Analysis (phi=2 modes)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "modes=2=phi EXACT, cache_levels=4=tau EXACT, incremental=true, latency=5ms"
+
+[[candidate]]
+level  = 1
+id     = "AIHybrid"
+label  = "AI+Rules Hybrid (sopfr=5 analysis passes)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.40
+notes  = "passes=5=sopfr EXACT, model_size=6B, rule_sets=6=n EXACT, latency=50ms"
+
+[[candidate]]
+level  = 1
+id     = "FlowSensitive"
+label  = "Flow-Sensitive Analysis (n=6 dataflow domains)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.45
+cost   = 0.50
+notes  = "domains=6=n EXACT, lattice_levels=8=sigma-tau EXACT, precision=high, latency=200ms"
+
+[[candidate]]
+level  = 1
+id     = "AbstractInterp"
+label  = "Abstract Interpretation (sigma-tau=8 lattice levels)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.40
+cost   = 0.45
+notes  = "lattice_levels=8=sigma-tau EXACT, domains=5=sopfr EXACT, precision=very_high, latency=500ms"
+
+# =============================================================
+# Level 2: Completion (자동완성 엔진) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Completion"
+
+[[candidate]]
+level  = 2
+id     = "TrieIndex"
+label  = "Trie Index (J2=24 bit hash)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.85
+notes  = "hash_bits=24=J2 EXACT, index_depth=4=tau EXACT, accuracy=75, latency=sub-ms"
+
+[[candidate]]
+level  = 2
+id     = "MLRanking"
+label  = "ML Ranking (BT-56 model architecture)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.40
+cost   = 0.35
+notes  = "model_dim=4096=2^sigma, layers=12=sigma EXACT, accuracy=95, latency=50ms"
+
+[[candidate]]
+level  = 2
+id     = "ContextAware"
+label  = "Context-Aware Completion (n=6 dimensions)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "context_dims=6=n EXACT, scope_levels=4=tau EXACT, accuracy=90, latency=10ms"
+
+[[candidate]]
+level  = 2
+id     = "SnippetGen"
+label  = "Snippet Generation (sigma=12 templates)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.65
+cost   = 0.70
+notes  = "templates=12=sigma EXACT, var_slots=5=sopfr EXACT, accuracy=80, latency=5ms"
+
+[[candidate]]
+level  = 2
+id     = "SemanticComp"
+label  = "Semantic Completion (tau=4 type inference)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.60
+notes  = "infer_levels=4=tau EXACT, type_groups=8=sigma-tau EXACT, accuracy=88, latency=20ms"
+
+[[candidate]]
+level  = 2
+id     = "CopilotInteg"
+label  = "AI Copilot Integration (sigma-tau=8 suggestions)"
+n6     = 0.67
+perf   = 1.00
+power  = 0.30
+cost   = 0.25
+notes  = "suggestions=8=sigma-tau EXACT, context_window=4096, accuracy=92, latency=200ms"
+
+# =============================================================
+# Level 3: Refactoring (리팩토링 엔진) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Refactoring"
+
+[[candidate]]
+level  = 3
+id     = "StructuralEdit"
+label  = "Structural Edit (J2=24 refactoring kinds)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "kinds=24=J2 EXACT, scope=cross-file, safety=high, latency=100ms"
+
+[[candidate]]
+level  = 3
+id     = "AIRefactor"
+label  = "AI Auto-Refactoring"
+n6     = 0.50
+perf   = 0.95
+power  = 0.35
+cost   = 0.30
+notes  = "kinds=20, scope=project-wide, safety=medium, latency=500ms"
+
+[[candidate]]
+level  = 3
+id     = "PatternBased"
+label  = "Pattern-Based (sopfr=5 pattern categories)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.70
+cost   = 0.75
+notes  = "categories=5=sopfr EXACT, patterns=12=sigma EXACT, safety=high, latency=50ms"
+
+[[candidate]]
+level  = 3
+id     = "CrossFileRef"
+label  = "Cross-File Refactoring (sigma=12 file groups)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.50
+cost   = 0.55
+notes  = "file_groups=12=sigma EXACT, rename_depth=6=n EXACT, safety=very_high, latency=200ms"
+
+[[candidate]]
+level  = 3
+id     = "SafeRefactor"
+label  = "Safe Refactoring + Auto-Verification"
+n6     = 0.67
+perf   = 0.70
+power  = 0.50
+cost   = 0.60
+notes  = "verify_modes=2=phi EXACT, test_gen=auto, safety=maximum, latency=1000ms"
+
+[[candidate]]
+level  = 3
+id     = "QuickFix"
+label  = "Quick Fix (tau=4 severity levels)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.75
+cost   = 0.80
+notes  = "severity=4=tau EXACT, fix_kinds=8=sigma-tau EXACT, safety=medium, latency=10ms"
+
+# =============================================================
+# Level 4: Ecosystem (생태계 통합) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Ecosystem"
+
+[[candidate]]
+level  = 4
+id     = "PluginArch"
+label  = "Plugin Architecture (n=6 extension points)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.70
+notes  = "ext_points=6=n EXACT, api_groups=12=sigma EXACT, openness=high, community=large"
+
+[[candidate]]
+level  = 4
+id     = "ThemeEngine"
+label  = "Theme/Visualization Engine"
+n6     = 0.50
+perf   = 0.60
+power  = 0.75
+cost   = 0.80
+notes  = "themes=24=J2 EXACT, render_modes=4=tau EXACT, customization=high"
+
+[[candidate]]
+level  = 4
+id     = "CollabEdit"
+label  = "Real-Time Collaborative Editing (CRDT)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.40
+cost   = 0.35
+notes  = "crdt_ops=8=sigma-tau EXACT, conflict_modes=2=phi EXACT, latency=realtime"
+
+[[candidate]]
+level  = 4
+id     = "ExtMarket"
+label  = "Extension Marketplace"
+n6     = 0.33
+perf   = 0.75
+power  = 0.70
+cost   = 0.50
+notes  = "categories=12=sigma EXACT, review_levels=4=tau EXACT, monetization=true"
+
+[[candidate]]
+level  = 4
+id     = "DevContainer"
+label  = "Dev Container Integration"
+n6     = 0.67
+perf   = 0.90
+power  = 0.45
+cost   = 0.40
+notes  = "container_types=6=n EXACT, env_modes=2=phi EXACT, reproducibility=100%"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CustomBinary requires specialized analysis -- not LazyAnalysis
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "CustomBinary"
+then_level = 1
+then_ids   = "LazyAnalysis"
+
+# GraphQL_LSP requires SemanticModel or AIHybrid (needs schema awareness)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "GraphQL_LSP"
+then_level = 1
+then_ids   = "SemanticModel,AIHybrid"
+
+# CopilotInteg requires DevContainer or CollabEdit (cloud infra)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "CopilotInteg"
+then_level = 4
+then_ids   = "DevContainer,CollabEdit"
+
+# AIRefactor requires MLRanking or CopilotInteg (needs AI completion)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "AIRefactor"
+then_level = 2
+then_ids   = "MLRanking,CopilotInteg"
+
+# AbstractInterp incompatible with QuickFix (too slow for quick fixes)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "AbstractInterp"
+then_level = 3
+then_ids   = "QuickFix"
+
+# ThemeEngine incompatible with CustomBinary (no visual protocol support)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "ThemeEngine"
+then_level = 0
+then_ids   = "CustomBinary"

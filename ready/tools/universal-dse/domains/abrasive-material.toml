@@ -1,0 +1,402 @@
+# =============================================================
+# HEXA-ABRASIVE DSE Domain Definition
+# N6 Abrasive Material DSE — Cutting & grinding material engineering
+# n=6: SiC 6H polytype (n=6 EXACT hexagonal stacking),
+#       corundum Al2O3 6-fold (n=6), Mohs 6=orthoclase reference,
+#       sigma=12 grit grades (coarse-to-fine),
+#       tau=4 bonding types (vitrified/resinoid/metal/electroplated),
+#       phi=2 peripheral/face grinding
+# BT-43 (CN=6 universality)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "abrasive-material"
+desc = "Abrasive Material DSE (BT-43, SiC 6H polytype, corundum 6-fold)"
+levels = ["AbrasiveGrain", "Bond", "WheelForm", "Process", "Application"]
+vision = "Cutting & grinding materials — SiC 6H stacking, Al2O3 6-fold coordination in every abrasive"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: AbrasiveGrain — 6 candidates
+#   n6: SiC 6H polytype=n EXACT, Al2O3 corundum 6-fold=n EXACT
+#       Mohs 6 reference, sigma=12 grit size grades
+# =============================================================
+[[level]]
+name = "AbrasiveGrain"
+
+[[candidate]]
+level = 0
+id    = "Al2O3_Corundum"
+label = "Al2O3 Corundum (6-fold coordination=n EXACT, Mohs 9)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.90
+notes = "6-fold=n EXACT, most common abrasive, brown/white/pink fused alumina"
+
+[[candidate]]
+level = 0
+id    = "SiC_6H"
+label = "SiC 6H Polytype (n=6 EXACT hexagonal stacking, Mohs 9.5)"
+n6    = 1.00
+perf  = 0.80
+power = 0.80
+cost  = 0.80
+notes = "6H=n EXACT, green/black SiC, harder than Al2O3, brittle fracture"
+
+[[candidate]]
+level = 0
+id    = "CBN"
+label = "CBN Cubic Boron Nitride (6-ring BN precursor=n, Mohs ~10)"
+n6    = 1.00
+perf  = 0.92
+power = 0.65
+cost  = 0.35
+notes = "BN ring=6=n EXACT, ferrous grinding, no carbon diffusion, superabrasive"
+
+[[candidate]]
+level = 0
+id    = "Diamond_Synth"
+label = "Diamond Synthetic (6 cleavage directions possible, Mohs 10)"
+n6    = 0.80
+perf  = 0.95
+power = 0.60
+cost  = 0.30
+notes = "hardest material, non-ferrous only, HPHT/CVD synthesis, 12 faces=sigma"
+
+[[candidate]]
+level = 0
+id    = "ZrAl"
+label = "Zirconia-Alumina ZA (ZrO2+Al2O3, both CN=6=n, self-sharpening)"
+n6    = 1.00
+perf  = 0.82
+power = 0.75
+cost  = 0.70
+notes = "both CN=6=n EXACT, microcrystalline, heavy stock removal, belt grinding"
+
+[[candidate]]
+level = 0
+id    = "SolGel_Cer"
+label = "Sol-Gel Ceramic (nano-Al2O3 6-fold=n, seeded gel sintered)"
+n6    = 1.00
+perf  = 0.88
+power = 0.70
+cost  = 0.55
+notes = "6-fold=n EXACT, 3M Cubitron, micro-fracture, long wheel life"
+
+# =============================================================
+# Level 1: Bond — 6 candidates
+#   n6: 6 vitrified frit components=n, tau=4 major bond types
+# =============================================================
+[[level]]
+name = "Bond"
+
+[[candidate]]
+level = 1
+id    = "Vitrified"
+label = "Vitrified Bond (6 frit components=n EXACT, glass-ceramic)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.75
+notes = "components=6=n EXACT, rigid, porous, self-dressing, precision grinding"
+
+[[candidate]]
+level = 1
+id    = "Resinoid"
+label = "Resinoid Bond (phenolic 6-membered ring=n, flexible)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.80
+notes = "ring=6=n EXACT, shock-absorbing, cut-off wheels, portable grinding"
+
+[[candidate]]
+level = 1
+id    = "Metal_Sinter"
+label = "Metal Sintered (bronze/Co matrix, 12 vol% diamond=sigma)"
+n6    = 0.80
+perf  = 0.90
+power = 0.60
+cost  = 0.45
+notes = "diamond=12%=sigma EXACT, long life, stone/concrete/ceramics cutting"
+
+[[candidate]]
+level = 1
+id    = "Electroplated"
+label = "Electroplated (single layer Ni, 6 um plating=n, highest exposure)"
+n6    = 1.00
+perf  = 0.88
+power = 0.55
+cost  = 0.50
+notes = "plating=6um=n EXACT, single layer, maximum grain protrusion, form tools"
+
+[[candidate]]
+level = 1
+id    = "Rubber"
+label = "Rubber Bond (6 vulcanization stages=n, flexible polishing)"
+n6    = 1.00
+perf  = 0.65
+power = 0.85
+cost  = 0.85
+notes = "stages=6=n EXACT, regulating wheels, fine finish, centerless grinding"
+
+[[candidate]]
+level = 1
+id    = "Shellac"
+label = "Shellac Bond (natural resin, 6 coating layers=n, cool cutting)"
+n6    = 1.00
+perf  = 0.55
+power = 0.90
+cost  = 0.70
+notes = "layers=6=n EXACT, coolest cut, cam/roll grinding, mirror finish"
+
+# =============================================================
+# Level 2: WheelForm — 6 candidates
+#   n6: 6-block segmented, sigma=12 standard wheel shapes
+# =============================================================
+[[level]]
+name = "WheelForm"
+
+[[candidate]]
+level = 2
+id    = "Straight"
+label = "Straight Wheel (Type 1, 6 standard diameters=n, universal)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.85
+notes = "diameters=6=n EXACT, most common, surface/cylindrical, 12in max=sigma"
+
+[[candidate]]
+level = 2
+id    = "Cup"
+label = "Cup Wheel (Type 6/11, 6 rim widths=n, tool grinding)"
+n6    = 1.00
+perf  = 0.75
+power = 0.70
+cost  = 0.75
+notes = "widths=6=n EXACT, face grinding, cutter sharpening, flat surfaces"
+
+[[candidate]]
+level = 2
+id    = "Segmented_6"
+label = "Segmented 6-block (n=6 segments EXACT, heavy stock removal)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.65
+notes = "segments=6=n EXACT, interrupted cut, cool grinding, large surfaces"
+
+[[candidate]]
+level = 2
+id    = "Cutoff"
+label = "Cut-off Disc (thin resinoid, 12 standard thicknesses=sigma)"
+n6    = 0.80
+perf  = 0.70
+power = 0.80
+cost  = 0.90
+notes = "thicknesses=12=sigma EXACT, parting/slotting, portable/stationary"
+
+[[candidate]]
+level = 2
+id    = "Mounted"
+label = "Mounted Point (6 standard shapes=n, die grinder, internal)"
+n6    = 1.00
+perf  = 0.65
+power = 0.75
+cost  = 0.80
+notes = "shapes=6=n EXACT, small bore, internal grinding, deburring"
+
+[[candidate]]
+level = 2
+id    = "Belt_Roll"
+label = "Belt/Roll (coated abrasive, 6 grit sequences=n, wide belt)"
+n6    = 1.00
+perf  = 0.78
+power = 0.70
+cost  = 0.75
+notes = "sequences=6=n EXACT, flexible, conformable, wood/metal finishing"
+
+# =============================================================
+# Level 3: Process — 6 candidates
+#   n6: phi=2 pass (roughing+finishing), 6-stone honing
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level = 3
+id    = "Surface"
+label = "Surface Grinding (phi=2 reciprocating passes, flat precision)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.80
+notes = "passes=phi=2 EXACT rough+finish, flatness <1um, magnetic chuck"
+
+[[candidate]]
+level = 3
+id    = "Cylindrical"
+label = "Cylindrical Grinding (6 plunge zones=n, OD/ID roundness)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.70
+notes = "zones=6=n EXACT, roundness <0.5um, between-centers, CNC traverse"
+
+[[candidate]]
+level = 3
+id    = "Centerless"
+label = "Centerless Grinding (through-feed, 6 work rest angles=n)"
+n6    = 1.00
+perf  = 0.78
+power = 0.80
+cost  = 0.85
+notes = "angles=6=n EXACT, high volume, no fixturing, bar/pin/roller"
+
+[[candidate]]
+level = 3
+id    = "Creep_Feed"
+label = "Creep-Feed Grinding (single deep pass, 6mm depth=n EXACT)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.55
+notes = "depth=6mm=n EXACT, near-net shape, turbine roots, form profiles"
+
+[[candidate]]
+level = 3
+id    = "Honing_6"
+label = "Honing 6-stone (n=6 stones EXACT, cylinder bore finishing)"
+n6    = 1.00
+perf  = 0.88
+power = 0.70
+cost  = 0.60
+notes = "stones=6=n EXACT, cross-hatch pattern, engine bore, roundness+finish"
+
+[[candidate]]
+level = 3
+id    = "Lapping"
+label = "Lapping (6 abrasive slurry grades=n, optical flat finishing)"
+n6    = 1.00
+perf  = 0.92
+power = 0.65
+cost  = 0.45
+notes = "grades=6=n EXACT, free abrasive, sub-nm Ra, gauge blocks, seals"
+
+# =============================================================
+# Level 4: Application — 6 candidates
+#   n6: 6 precision application domains
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id    = "Precision_Optics"
+label = "Precision Optics (lens/mirror polish, 6 figure stages=n)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.40
+notes = "stages=6=n EXACT, sub-nm Ra, lambda/12=sigma fraction, telescope mirrors"
+
+[[candidate]]
+level = 4
+id    = "Bearing_Race"
+label = "Bearing Race (ID/OD grinding, 6 quality grades=n, ABEC)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.70
+notes = "grades=6=n EXACT, roundness <0.1um, CBN wheels, automotive/aerospace"
+
+[[candidate]]
+level = 4
+id    = "Gear_Tooth"
+label = "Gear Tooth (profile grinding, 6 AGMA classes=n, transmission)"
+n6    = 1.00
+perf  = 0.82
+power = 0.70
+cost  = 0.65
+notes = "classes=6=n EXACT, involute profile, 12 teeth min=sigma, EV/wind"
+
+[[candidate]]
+level = 4
+id    = "Turbine_Blade"
+label = "Turbine Blade (creep-feed root form, 6 fir-tree slots=n)"
+n6    = 1.00
+perf  = 0.92
+power = 0.55
+cost  = 0.35
+notes = "slots=6=n EXACT, superalloy, CBN/diamond, aerospace critical path"
+
+[[candidate]]
+level = 4
+id    = "Wafer_Backgrind"
+label = "Wafer Back-grind (Si thinning, 6 grit sequence=n, <50um)"
+n6    = 1.00
+perf  = 0.88
+power = 0.65
+cost  = 0.50
+notes = "sequence=6=n EXACT, diamond cup wheel, 12in wafer=sigma, 3D IC"
+
+[[candidate]]
+level = 4
+id    = "Tool_Resharp"
+label = "Tool Resharpen (drill/end-mill, 6 flute geometries=n)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.85
+notes = "flutes=6=n EXACT, CBN/diamond wheels, CNC 5-axis, extend tool life"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# CBN/Diamond require vitrified or metal/electroplated bond
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "CBN"
+then_level = 1
+then_ids  = "Vitrified,Metal_Sinter,Electroplated"
+
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "Diamond_Synth"
+then_level = 1
+then_ids  = "Metal_Sinter,Electroplated,Resinoid"
+
+# Honing requires specific wheel forms (mounted/segmented)
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "Honing_6"
+then_level = 2
+then_ids  = "Mounted,Segmented_6"
+
+# Wafer backgrind requires diamond
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Wafer_Backgrind"
+then_level = 0
+then_ids  = "Diamond_Synth,SiC_6H"
+
+# Turbine blade needs superabrasive
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Turbine_Blade"
+then_level = 0
+then_ids  = "CBN,Diamond_Synth,SolGel_Cer"

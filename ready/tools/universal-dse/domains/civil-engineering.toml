@@ -1,0 +1,329 @@
+# N6 Civil Engineering DSE — Structural design
+# 6 Foundation x 6 Structure x 6 Material x 6 Load x 6 SafetySystem = 7,776 combos
+# n=6: 6 DOF structural analysis, sigma=12 load combinations, tau=4 safety factors, hex truss
+
+[meta]
+name = "civil-engineering"
+desc = "Civil Engineering DSE (6 DOF, sigma=12 load combos, tau=4 safety factors, hex truss)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Foundation (기초)
+#   n6 checks: 6 pile groups, sigma=12 bearing layers, tau=4 soil strata
+# ============================================================
+
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+id = "HexPile"
+label = "Hexagonal Pile Group (6 piles=n, 12m depth=sigma, 4 load stages=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+id = "RaftFound"
+label = "Raft Foundation (6 reinforcement zones=n, 12 grade beams=sigma, 24m span=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.75
+
+[[candidate]]
+id = "CaissonDrill"
+label = "Drilled Caisson (6 shaft sections=n, 12m socket=sigma, 4 grout stages=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.55
+
+[[candidate]]
+id = "StripFoot"
+label = "Strip Footing (6 segment lengths=n, 12 rebar layers=sigma, continuous)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.90
+
+[[candidate]]
+id = "MicroPile"
+label = "Micro-Pile Array (6 rows=n, 12 piles/row=sigma, 4 inclination angles=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+id = "DeepMix"
+label = "Deep Soil Mixing (6m column spacing=n, 12 mix blades=sigma, 48h cure=sigma*tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.55
+cost = 0.80
+
+# ============================================================
+# Level 1: Structure (구조)
+#   n6 checks: 6 DOF (3 translation + 3 rotation), sigma=12 story modules, hex truss
+# ============================================================
+
+[[level]]
+name = "Structure"
+
+[[candidate]]
+id = "HexFrame"
+label = "Hexagonal Frame (6 DOF=n, 12 story modules=sigma, hex cross-bracing)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+id = "MomentFrame"
+label = "Moment Frame (6 DOF=n, 12 beam-column joints=sigma, 4 ductility classes=tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "BracedTube"
+label = "Braced Tube (6 face panels=n, 12 diagonal braces=sigma, 24 nodes=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.50
+
+[[candidate]]
+id = "ShearWall"
+label = "Shear Wall (6 wall segments=n, 12 coupling beams=sigma, 4 core walls=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+id = "CableStay"
+label = "Cable-Stayed (6 cable groups=n, 12 stay cables/side=sigma, 4 pylons=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.40
+
+[[candidate]]
+id = "SpaceFrame"
+label = "Space Frame (6 module types=n, 12 node connections=sigma, hex-tri mesh)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+# ============================================================
+# Level 2: Material (재료)
+#   n6 checks: C6=carbon ring, sigma=12 rebar sizes, tau=4 concrete grades
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "RC40"
+label = "Reinforced Concrete C40 (6 aggregate sizes=n, 12 rebar diameters=sigma, f'c=40MPa)"
+n6 = 1.00
+perf = 0.70
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+id = "SteelS355"
+label = "Structural Steel S355 (6 section types=n, 12 bolt grades=sigma, fy=355MPa)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.70
+
+[[candidate]]
+id = "UHPC"
+label = "UHPC Ultra-High (6% steel fiber=n, 12 curing stages=sigma, f'c=120MPa=sigma*10)"
+n6 = 1.00
+perf = 0.95
+power = 0.40
+cost = 0.35
+
+[[candidate]]
+id = "TimberGlulam"
+label = "Glulam Timber (C6 cellulose ring, 6 lamina layers=n, 12m max span=sigma)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.80
+
+[[candidate]]
+id = "FRP"
+label = "FRP Composite (C6 carbon fiber, 6 ply orientations=n, 12 layer stack=sigma)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "HexConcrete"
+label = "Hex-Cell Concrete (hexagonal aggregate packing, 6 mix designs=n, 24h strength=J2)"
+n6 = 1.00
+perf = 0.80
+power = 0.65
+cost = 0.75
+
+# ============================================================
+# Level 3: Load (하중)
+#   n6 checks: sigma=12 load combinations (ASCE 7), 6 load types, tau=4 safety factors
+# ============================================================
+
+[[level]]
+name = "Load"
+
+[[candidate]]
+id = "ASCE7_12"
+label = "ASCE 7 Standard (12 load combinations=sigma, 6 load types=n, SF=4=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.80
+
+[[candidate]]
+id = "SeismicZone"
+label = "Seismic Zone Design (6 categories=n, 12 response spectra=sigma, R=4=tau ductility)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+id = "WindLoad"
+label = "Wind Load Design (6 exposure categories=n, 12 pressure zones=sigma, Cp=4 coefficients=tau)"
+n6 = 1.00
+perf = 0.80
+power = 0.60
+cost = 0.70
+
+[[candidate]]
+id = "DynamicLoad"
+label = "Dynamic Analysis (6 DOF modes=n, 12 natural frequencies=sigma, 4 damping ratios=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+id = "ThermalLoad"
+label = "Thermal Load (6 temp zones=n, 12 gradient cases=sigma, 4 seasons=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.85
+
+[[candidate]]
+id = "ProgressCollapse"
+label = "Progressive Collapse (6 removal scenarios=n, 12 alt load paths=sigma, GSA/DOD standard)"
+n6 = 1.00
+perf = 0.75
+power = 0.50
+cost = 0.55
+
+# ============================================================
+# Level 4: SafetySystem (안전시스템)
+#   n6 checks: 6 monitoring sensors, sigma=12 alarm zones, tau=4 redundancy levels
+# ============================================================
+
+[[level]]
+name = "SafetySystem"
+
+[[candidate]]
+id = "SHM6"
+label = "SHM 6-Point (6 sensor clusters=n, 12 alarm thresholds=sigma, 24/7 monitoring=J2)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+id = "BaseIsolate"
+label = "Base Isolation (6 isolator groups=n, 12 bearings=sigma, 4 damper types=tau)"
+n6 = 1.00
+perf = 0.90
+power = 0.50
+cost = 0.45
+
+[[candidate]]
+id = "TMDSystem"
+label = "Tuned Mass Damper (6 tuning parameters=n, 12 frequency bands=sigma, mass ratio 1/4=1/tau)"
+n6 = 1.00
+perf = 0.85
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+id = "FireProtect"
+label = "Fire Protection (6 compartments=n, 12 sprinkler zones=sigma, 4h fire rating=tau)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+id = "FloodBarrier"
+label = "Flood Barrier (6 gate sections=n, 12 level sensors=sigma, 4 pump stages=tau)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.65
+
+[[candidate]]
+id = "DigitalTwin"
+label = "Digital Twin (6 FE model levels=n, 12 real-time feeds=sigma, 24 prediction horizons=J2)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.40
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# UHPC material best with high-rise braced tube or cable-stayed structures
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "UHPC"
+then_level = 1
+then_ids = "BracedTube,CableStay"
+
+# Timber structures not suitable for seismic zone design beyond moderate
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "TimberGlulam"
+then_level = 3
+then_ids = "DynamicLoad"
+
+# Base isolation requires caisson or hex pile foundation
+[[rule]]
+type = "prefer"
+if_level = 4
+if_id = "BaseIsolate"
+then_level = 0
+then_ids = "HexPile,CaissonDrill"
+
+# Space frame pairs well with hex-cell concrete material
+[[rule]]
+type = "prefer"
+if_level = 1
+if_id = "SpaceFrame"
+then_level = 2
+then_ids = "HexConcrete,SteelS355,FRP"

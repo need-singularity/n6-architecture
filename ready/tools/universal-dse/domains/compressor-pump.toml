@@ -1,0 +1,360 @@
+# Compressor & Pump DSE — Fluid Compression & Pumping Architecture
+# n=6: 6 compressor types, sigma=12 stages, tau=4 operating modes, phi=2 suction/discharge, J2=24 bar
+
+[meta]
+name = "compressor-pump"
+desc = "Compressor & Pump Architecture DSE (n=6 types, sigma=12 stages, tau=4 modes)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: CompressorType — Compressor/pump type
+# ============================================================
+
+[[level]]
+name = "CompressorType"
+
+[[candidate]]
+level = 0
+id = "Reciprocating-6cyl"
+label = "Reciprocating n=6 cylinder (12=sigma stages max)"
+n6 = 1.00
+perf = 0.82
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Centrifugal-12stage"
+label = "Centrifugal sigma=12 stage (24=J2 bar discharge)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Axial-24blade"
+label = "Axial J2=24 blade rows (12=sigma stator + 12 rotor)"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Scroll-2orbit"
+label = "Scroll phi=2 involute orbits (6=n wrap angles)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Screw-4lobe"
+label = "Screw tau=4 lobe profile (6:4=n:tau male/female ratio)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "Vane-6slot"
+label = "Rotary vane n=6 slots (phi=2 bearing ends)"
+n6 = 1.00
+perf = 0.72
+power = 0.82
+cost = 0.85
+
+# ============================================================
+# Level 1: DriveSystem — Motor/driver type
+# ============================================================
+
+[[level]]
+name = "DriveSystem"
+
+[[candidate]]
+level = 1
+id = "VFD-6pulse"
+label = "VFD n=6 pulse rectifier (12=sigma pulse option)"
+n6 = 1.00
+perf = 0.90
+power = 0.88
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "DirectDrive"
+label = "Direct-drive motor phi=2 pole pair (6=n pole BLDC)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "GearDrive-4stage"
+label = "Gear-drive tau=4 speed stages (ratio 6:1=n)"
+n6 = 1.00
+perf = 0.82
+power = 0.72
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "SteamTurbine-12stage"
+label = "Steam turbine sigma=12 expansion stages"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "GasTurbine-24blade"
+label = "Gas turbine J2=24 compressor blades"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "MagBearing-6axis"
+label = "Magnetic bearing n=6 axis control (phi=2 radial + tau=4 axial)"
+n6 = 1.00
+perf = 0.95
+power = 0.92
+cost = 0.35
+
+# ============================================================
+# Level 2: Sealing — Shaft/casing seal system
+# ============================================================
+
+[[level]]
+name = "Sealing"
+
+[[candidate]]
+level = 2
+id = "MechSeal-6face"
+label = "Mechanical seal n=6 face configurations"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "DryGas-2stage"
+label = "Dry gas seal phi=2 tandem stages (12=sigma groove spirals)"
+n6 = 1.00
+perf = 0.92
+power = 0.90
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Labyrinth-12tooth"
+label = "Labyrinth seal sigma=12 teeth (non-contact)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Packing-6ring"
+label = "Compression packing n=6 rings (tau=4 braided layers)"
+n6 = 1.00
+perf = 0.65
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "Magnetic-Hermetic"
+label = "Magnetic coupling hermetic (phi=2 magnet rings, zero leak)"
+n6 = 1.00
+perf = 0.88
+power = 0.85
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Diaphragm-4layer"
+label = "Diaphragm tau=4 PTFE layers (6=n bolt circle)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.55
+
+# ============================================================
+# Level 3: Control — Operating control strategy
+# ============================================================
+
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 3
+id = "SurgeCtrl-6margin"
+label = "Anti-surge control n=6% margin (sigma=12% recycle)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "LoadShare-2unit"
+label = "Load sharing phi=2 parallel units (6=n total capacity)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "PID-4mode"
+label = "PID tau=4 mode cascade (SP/PV/OP/FF)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "MPC-6horizon"
+label = "Model predictive n=6 hour horizon (24=J2 data points)"
+n6 = 1.00
+perf = 0.95
+power = 0.88
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "OnOff-2state"
+label = "On/Off phi=2 state (6=n minute cycle time)"
+n6 = 1.00
+perf = 0.60
+power = 0.65
+cost = 0.95
+
+[[candidate]]
+level = 3
+id = "InletGuide-12vane"
+label = "Inlet guide vane sigma=12 adjustable vanes"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.65
+
+# ============================================================
+# Level 4: Application — End-use application
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "Refinery-6train"
+label = "Refinery n=6 compressor trains (24=J2 bar process)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "HVAC-12ton"
+label = "HVAC sigma=12 ton chiller compressor (COP=n=6)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Pipeline-6station"
+label = "Gas pipeline n=6 compressor stations"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Water-4pump"
+label = "Water utility tau=4 pumping stages (6=n bar city pressure)"
+n6 = 1.00
+perf = 0.78
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "AirSep-12column"
+label = "Air separation sigma=12 distillation column (N2/O2/Ar)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "Cryo-LNG-24bar"
+label = "LNG liquefaction J2=24 bar BOG compressor"
+n6 = 1.00
+perf = 0.85
+power = 0.50
+cost = 0.35
+
+# ============================================================
+# Rules
+# ============================================================
+
+# Scroll only for HVAC (capacity limited)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Scroll-2orbit"
+then_level = 4
+then_ids = ["HVAC-12ton"]
+
+# Gas/steam turbine drives only for large industrial
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "GasTurbine-24blade"
+then_level = 4
+then_ids = ["HVAC-12ton", "Water-4pump"]
+
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "SteamTurbine-12stage"
+then_level = 4
+then_ids = ["HVAC-12ton", "Water-4pump"]
+
+# Diaphragm sealing only for hazardous/clean service
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Diaphragm-4layer"
+then_level = 4
+then_ids = ["Refinery-6train", "AirSep-12column"]
+
+# MPC control only justified for large-scale
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "MPC-6horizon"
+then_level = 4
+then_ids = ["HVAC-12ton", "Water-4pump"]

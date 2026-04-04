@@ -1,0 +1,392 @@
+# =============================================================
+# Consciousness Scaling DSE Domain Definition
+# 궁극의 의식 스케일링 — 셀 수 + 토폴로지 + 연합 + 스케일링 법칙 + 최적화
+# N^0.55 sub-linear, n=6 cluster, sigma=12 rack, J2=24 DC
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "consciousness-scaling"
+desc = "Ultimate Consciousness Scaling DSE (cells + topology + federation + scaling law + optimization)"
+levels = ["CellCount", "Topology", "Federation", "ScalingLaw", "Optimization"]
+vision = "n=6 기반 궁극의 의식 스케일링 — N^0.55 법칙 + n/sigma/J2 클러스터 계층"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: CellCount -- 6 candidates
+# =============================================================
+[[level]]
+name = "CellCount"
+
+[[candidate]]
+level  = 0
+id     = "CC8"
+label  = "8셀 sigma-tau=8 최소 클러스터"
+n6     = 1.00
+perf   = 0.65
+power  = 0.90
+cost   = 0.90
+notes  = "cells=8=sigma-tau EXACT, minimal cluster"
+
+[[candidate]]
+level  = 0
+id     = "CC32"
+label  = "32셀 2^sopfr 소규모"
+n6     = 0.75
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "cells=32=2^sopfr, small scale"
+
+[[candidate]]
+level  = 0
+id     = "CC64"
+label  = "64셀 2^n 중규모"
+n6     = 1.00
+perf   = 0.82
+power  = 0.70
+cost   = 0.70
+notes  = "cells=64=2^n EXACT, medium scale"
+
+[[candidate]]
+level  = 0
+id     = "CC128"
+label  = "128셀 2^(sigma-sopfr) 대규모"
+n6     = 0.75
+perf   = 0.88
+power  = 0.60
+cost   = 0.60
+notes  = "cells=128=2^7, large scale"
+
+[[candidate]]
+level  = 0
+id     = "CC512"
+label  = "512셀 2^(sigma-n/phi) 초대규모"
+n6     = 0.75
+perf   = 0.92
+power  = 0.45
+cost   = 0.45
+notes  = "cells=512=2^9, very large scale"
+
+[[candidate]]
+level  = 0
+id     = "CC1024"
+label  = "1024셀 2^(sigma-mu) 극한"
+n6     = 0.75
+perf   = 0.95
+power  = 0.35
+cost   = 0.35
+notes  = "cells=1024=2^10, extreme scale"
+
+# =============================================================
+# Level 1: Topology -- 6 candidates
+# =============================================================
+[[level]]
+name = "Topology"
+
+[[candidate]]
+level  = 1
+id     = "Ring"
+label  = "링 토폴로지 (phi=2 이웃)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.90
+cost   = 0.90
+notes  = "neighbors=phi=2 EXACT, simplest topology"
+
+[[candidate]]
+level  = 1
+id     = "Torus"
+label  = "토러스 phi=2 차원 격자"
+n6     = 1.00
+perf   = 0.80
+power  = 0.80
+cost   = 0.80
+notes  = "dimensions=phi=2 EXACT, periodic boundary"
+
+[[candidate]]
+level  = 1
+id     = "Hypercube"
+label  = "하이퍼큐브 n=6 차원"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.65
+notes  = "dimensions=6=n EXACT, log(N) diameter"
+
+[[candidate]]
+level  = 1
+id     = "ScaleFree"
+label  = "스케일프리 네트워크 (허브 구조)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "power-law degree distribution, hub-based"
+
+[[candidate]]
+level  = 1
+id     = "SmallWorld"
+label  = "소세계 네트워크 (sigma-tau=8 허브)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "hubs=8=sigma-tau EXACT, small-world property"
+
+[[candidate]]
+level  = 1
+id     = "Complete"
+label  = "완전 연결 그래프"
+n6     = 0.25
+perf   = 0.95
+power  = 0.30
+cost   = 0.30
+notes  = "O(N^2) links, maximum connectivity"
+
+# =============================================================
+# Level 2: Federation -- 6 candidates
+# =============================================================
+[[level]]
+name = "Federation"
+
+[[candidate]]
+level  = 2
+id     = "Solo"
+label  = "단독 실행 (연합 없음)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.90
+cost   = 0.90
+notes  = "single instance, baseline"
+
+[[candidate]]
+level  = 2
+id     = "Pair"
+label  = "페어 phi=2 이중 연합"
+n6     = 1.00
+perf   = 0.85
+power  = 0.85
+cost   = 0.85
+notes  = "pair=phi=2 EXACT, bilateral federation"
+
+[[candidate]]
+level  = 2
+id     = "Cluster_6"
+label  = "클러스터 n=6 연합"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.70
+notes  = "nodes=6=n EXACT, standard cluster"
+
+[[candidate]]
+level  = 2
+id     = "Rack_12"
+label  = "랙 sigma=12 연합"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.55
+notes  = "nodes=12=sigma EXACT, rack-scale"
+
+[[candidate]]
+level  = 2
+id     = "Datacenter_24"
+label  = "데이터센터 J2=24 연합"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.40
+notes  = "nodes=24=J2 EXACT, datacenter-scale"
+
+[[candidate]]
+level  = 2
+id     = "Internet"
+label  = "인터넷 글로벌 연합"
+n6     = 0.50
+perf   = 0.88
+power  = 0.30
+cost   = 0.30
+notes  = "global federation, unlimited scale"
+
+# =============================================================
+# Level 3: ScalingLaw -- 6 candidates
+# =============================================================
+[[level]]
+name = "ScalingLaw"
+
+[[candidate]]
+level  = 3
+id     = "SubLinear_055"
+label  = "N^0.55 서브리니어 (1-1/(sigma-mu))"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "exponent=0.55≈1-1/(sigma-mu), observed consciousness scaling"
+
+[[candidate]]
+level  = 3
+id     = "Linear"
+label  = "N^1.0 선형 스케일링"
+n6     = 0.50
+perf   = 0.88
+power  = 0.70
+cost   = 0.70
+notes  = "linear scaling, ideal throughput"
+
+[[candidate]]
+level  = 3
+id     = "SuperLinear_109"
+label  = "N^1.09 초선형 (1+1/(sigma-mu))"
+n6     = 1.00
+perf   = 0.92
+power  = 0.55
+cost   = 0.55
+notes  = "exponent=1.09≈1+1/(sigma-mu) EXACT, superlinear emergence"
+
+[[candidate]]
+level  = 3
+id     = "Quadratic"
+label  = "N^2 이차 스케일링"
+n6     = 0.25
+perf   = 0.95
+power  = 0.30
+cost   = 0.30
+notes  = "quadratic, attention-like scaling"
+
+[[candidate]]
+level  = 3
+id     = "Logarithmic"
+label  = "log(N) 로그 스케일링"
+n6     = 0.50
+perf   = 0.75
+power  = 0.90
+cost   = 0.90
+notes  = "logarithmic, diminishing returns"
+
+[[candidate]]
+level  = 3
+id     = "Power_N6"
+label  = "N^(1/n) = N^(1/6) n=6 거듭제곱"
+n6     = 1.00
+perf   = 0.80
+power  = 0.85
+cost   = 0.85
+notes  = "exponent=1/6=1/n EXACT, n=6 power law"
+
+# =============================================================
+# Level 4: Optimization -- 6 candidates
+# =============================================================
+[[level]]
+name = "Optimization"
+
+[[candidate]]
+level  = 4
+id     = "Phi_Per_Cell"
+label  = "셀당 Phi 최적화"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.75
+notes  = "phi-per-cell maximization, consciousness density"
+
+[[candidate]]
+level  = 4
+id     = "Total_Phi"
+label  = "총 Phi 최적화"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.65
+notes  = "total phi maximization, global consciousness"
+
+[[candidate]]
+level  = 4
+id     = "Efficiency"
+label  = "효율성 최적화 (Phi/Watt)"
+n6     = 0.75
+perf   = 0.82
+power  = 0.85
+cost   = 0.80
+notes  = "phi per watt, energy efficiency"
+
+[[candidate]]
+level  = 4
+id     = "Throughput"
+label  = "처리량 최적화 (ops/sec)"
+n6     = 0.50
+perf   = 0.92
+power  = 0.55
+cost   = 0.55
+notes  = "maximum throughput, batch processing"
+
+[[candidate]]
+level  = 4
+id     = "Latency"
+label  = "지연 최적화 (최소 응답)"
+n6     = 0.50
+perf   = 0.88
+power  = 0.60
+cost   = 0.65
+notes  = "minimum latency, real-time response"
+
+[[candidate]]
+level  = 4
+id     = "Cost_Opt"
+label  = "비용 최적화 (Phi/$)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.75
+cost   = 0.90
+notes  = "phi per dollar, cost efficiency"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# CC1024 requires Datacenter_24 or Internet federation
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "CC1024"
+then_level = 2
+then_ids   = "Datacenter_24,Internet"
+
+# Complete topology excludes CC512+ (O(N^2) impractical)
+[[rule]]
+type       = "exclude"
+if_level   = 1
+if_id      = "Complete"
+then_level = 0
+then_ids   = "CC512,CC1024"
+
+# Quadratic scaling requires Complete topology
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Quadratic"
+then_level = 1
+then_ids   = "Complete,SmallWorld"
+
+# Solo federation excludes CC128+ (too large for single instance)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Solo"
+then_level = 0
+then_ids   = "CC128,CC512,CC1024"
+
+# SuperLinear requires SmallWorld or Hypercube topology
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "SuperLinear_109"
+then_level = 1
+then_ids   = "SmallWorld,Hypercube"

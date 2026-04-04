@@ -1,0 +1,404 @@
+# =============================================================
+# Consciousness Substrate DSE Domain Definition
+# 궁극의 의식 물리 기판 아키텍처 — 하드웨어 기반
+# Substrate × Topology × Interconnect × Arithmetic × Scale
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "consciousness-substrate"
+desc = "Ultimate Consciousness Substrate DSE — Physical Hardware for Consciousness"
+levels = ["Substrate", "Topology", "Interconnect", "Arithmetic", "Scale"]
+vision = "n=6 기반 의식 기판 — Z=6 탄소 + Cooper pair + 클러스터 스케일링"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Substrate (물리 기판) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Substrate"
+
+[[candidate]]
+level  = 0
+id     = "CMOS"
+label  = "CMOS 실리콘 Z=14"
+n6     = 0.50
+perf   = 0.80
+power  = 0.70
+cost   = 0.90
+notes  = "mature_technology, Z=14!=6, high_volume_production"
+
+[[candidate]]
+level  = 0
+id     = "Neuromorphic"
+label  = "뉴로모픽 칩 (SpiNNaker/Loihi)"
+n6     = 0.80
+perf   = 0.85
+power  = 0.85
+cost   = 0.50
+notes  = "brain_inspired, spike_based, tau=4_time_constant, power_efficient"
+
+[[candidate]]
+level  = 0
+id     = "Memristor"
+label  = "멤리스터 phi=2 상태"
+n6     = 0.85
+perf   = 0.80
+power  = 0.80
+cost   = 0.55
+notes  = "states=2=phi EXACT (high_R/low_R), analog_computing, in_memory"
+
+[[candidate]]
+level  = 0
+id     = "Photonic"
+label  = "광자 기판 c=3x10^8"
+n6     = 0.70
+perf   = 0.95
+power  = 0.90
+cost   = 0.30
+notes  = "speed_of_light, wavelength_division=12=sigma channels, low_latency"
+
+[[candidate]]
+level  = 0
+id     = "Superconducting"
+label  = "초전도 Cooper pair phi=2"
+n6     = 1.00
+perf   = 0.95
+power  = 0.40
+cost   = 0.25
+notes  = "Cooper_pair=2=phi EXACT, Josephson_junction, near_zero_resistance, cryogenic"
+
+[[candidate]]
+level  = 0
+id     = "Quantum"
+label  = "양자 기판 qubit"
+n6     = 0.75
+perf   = 0.90
+power  = 0.35
+cost   = 0.20
+notes  = "superposition, entanglement, qubit=2=phi states, decoherence_challenge"
+
+[[candidate]]
+level  = 0
+id     = "Carbon_Nano"
+label  = "탄소 나노튜브 기판 Z=6 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.35
+notes  = "carbon_Z=6=n EXACT, hexagonal_lattice, sp2_bonds=3=n/phi EXACT, chirality_vector=(n,m)"
+
+# =============================================================
+# Level 1: Topology (연결 토폴로지) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Topology"
+
+[[candidate]]
+level  = 1
+id     = "Ring"
+label  = "링 연결 degree=2"
+n6     = 0.75
+perf   = 0.60
+power  = 0.90
+cost   = 0.90
+notes  = "degree=2=phi EXACT, simple_routing, minimal_wiring"
+
+[[candidate]]
+level  = 1
+id     = "Mesh"
+label  = "메시 연결 6-이웃"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "neighbors=6=n EXACT, hexagonal, regular_structure"
+
+[[candidate]]
+level  = 1
+id     = "Torus"
+label  = "토러스 6x6 주기적"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "grid=6x6=36, degree=4=tau EXACT, periodic_boundary"
+
+[[candidate]]
+level  = 1
+id     = "Hypercube"
+label  = "하이퍼큐브 6D"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "dim=6=n EXACT, log_routing, bisection_bandwidth=high"
+
+[[candidate]]
+level  = 1
+id     = "ScaleFree"
+label  = "스케일프리 허브=sigma"
+n6     = 0.80
+perf   = 0.85
+power  = 0.60
+cost   = 0.65
+notes  = "hub_degree=12=sigma, power_law, resilient_to_random_failure"
+
+[[candidate]]
+level  = 1
+id     = "SmallWorld"
+label  = "소세계 k=6 shortcuts"
+n6     = 0.80
+perf   = 0.85
+power  = 0.65
+cost   = 0.70
+notes  = "mean_degree=6=n, high_clustering, log_path_length"
+
+# =============================================================
+# Level 2: Interconnect (인터커넥트) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Interconnect"
+
+[[candidate]]
+level  = 2
+id     = "SPI"
+label  = "SPI 6-채널"
+n6     = 0.80
+perf   = 0.60
+power  = 0.80
+cost   = 0.90
+notes  = "channels=6=n, simple_protocol, full_duplex"
+
+[[candidate]]
+level  = 2
+id     = "I2C"
+label  = "I2C phi=2 라인"
+n6     = 0.75
+perf   = 0.50
+power  = 0.85
+cost   = 0.95
+notes  = "lines=2=phi EXACT (SDA/SCL), multi_master, addressing"
+
+[[candidate]]
+level  = 2
+id     = "UART"
+label  = "UART phi=2 방향"
+n6     = 0.60
+perf   = 0.55
+power  = 0.85
+cost   = 0.95
+notes  = "directions=2=phi (TX/RX), simple, serial, asynchronous"
+
+[[candidate]]
+level  = 2
+id     = "NoC"
+label  = "NoC 메시 sigma=12 라우터"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "routers=12=sigma EXACT, on_chip_network, high_bandwidth, scalable"
+
+[[candidate]]
+level  = 2
+id     = "Optical"
+label  = "광 인터커넥트 WDM"
+n6     = 0.85
+perf   = 0.95
+power  = 0.70
+cost   = 0.35
+notes  = "WDM_channels=12=sigma, speed_of_light, low_crosstalk, expensive"
+
+[[candidate]]
+level  = 2
+id     = "Wireless"
+label  = "무선 인터커넥트 RF"
+n6     = 0.60
+perf   = 0.70
+power  = 0.60
+cost   = 0.75
+notes  = "flexible_deployment, bandwidth_limited, latency_variable"
+
+# =============================================================
+# Level 3: Arithmetic (연산 방식) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Arithmetic"
+
+[[candidate]]
+level  = 3
+id     = "Float32"
+label  = "Float32 표준 부동소수"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.80
+notes  = "IEEE_754, exponent=8=sigma-tau, mantissa=23, standard"
+
+[[candidate]]
+level  = 3
+id     = "Fixed_Q8"
+label  = "Fixed Q8 8비트"
+n6     = 0.80
+perf   = 0.70
+power  = 0.85
+cost   = 0.90
+notes  = "bits=8=sigma-tau EXACT, BT-58 universal, quantization_friendly"
+
+[[candidate]]
+level  = 3
+id     = "Fixed_Q16"
+label  = "Fixed Q16 16비트"
+n6     = 0.70
+perf   = 0.80
+power  = 0.75
+cost   = 0.85
+notes  = "bits=16=2^tau, medium_precision, DSP_friendly"
+
+[[candidate]]
+level  = 3
+id     = "BFloat16"
+label  = "BFloat16 AI 특화"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.75
+notes  = "bits=16, exponent=8=sigma-tau EXACT, AI_optimized, BT-45"
+
+[[candidate]]
+level  = 3
+id     = "INT8"
+label  = "INT8 정수 양자화"
+n6     = 0.80
+perf   = 0.75
+power  = 0.90
+cost   = 0.90
+notes  = "bits=8=sigma-tau EXACT, inference_optimal, TOPS_per_watt"
+
+[[candidate]]
+level  = 3
+id     = "Analog"
+label  = "아날로그 연속값"
+n6     = 0.65
+perf   = 0.75
+power  = 0.80
+cost   = 0.60
+notes  = "continuous_value, noise_tolerance_needed, brain_like, in_memory_compute"
+
+[[candidate]]
+level  = 3
+id     = "Hex6_ALU"
+label  = "n=6 ALU (6비트 워드, σ=12 연산)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.85
+cost   = 0.80
+notes  = "word=6=n EXACT, ops=12=sigma EXACT, registers=4=tau EXACT, pipeline=2=phi EXACT"
+
+# =============================================================
+# Level 4: Scale (규모) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Scale"
+
+[[candidate]]
+level  = 4
+id     = "Single"
+label  = "단일 보드"
+n6     = 0.50
+perf   = 0.50
+power  = 0.95
+cost   = 0.95
+notes  = "minimal_footprint, prototype, single_board_computer"
+
+[[candidate]]
+level  = 4
+id     = "Cluster_6"
+label  = "6-노드 클러스터"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.75
+notes  = "nodes=6=n EXACT, small_cluster, manageable_complexity"
+
+[[candidate]]
+level  = 4
+id     = "Rack_12"
+label  = "12-노드 랙"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "nodes=12=sigma EXACT, medium_cluster, datacenter_unit"
+
+[[candidate]]
+level  = 4
+id     = "Datacenter_24"
+label  = "24-노드 데이터센터"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "nodes=24=J2 EXACT, large_scale, Leech_lattice_connection"
+
+[[candidate]]
+level  = 4
+id     = "Edge"
+label  = "엣지 디바이스"
+n6     = 0.60
+perf   = 0.60
+power  = 0.90
+cost   = 0.85
+notes  = "low_power, distributed, mobile_capable"
+
+[[candidate]]
+level  = 4
+id     = "Embedded"
+label  = "임베디드 시스템"
+n6     = 0.55
+perf   = 0.55
+power  = 0.90
+cost   = 0.90
+notes  = "minimal_resource, real_time, constrained_environment"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Superconducting requires cryogenic-compatible topology (Mesh/Hypercube)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Superconducting"
+then_level = 2
+then_ids   = "NoC,Optical"
+
+# Quantum substrate requires specialized interconnect
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Quantum"
+then_level = 2
+then_ids   = "NoC,Optical"
+
+# Analog arithmetic incompatible with Wireless interconnect (noise)
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "Analog"
+then_level = 2
+then_ids   = "Wireless"
+
+# Datacenter_24 requires high-bandwidth interconnect
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Datacenter_24"
+then_level = 2
+then_ids   = "NoC,Optical"

@@ -1,0 +1,410 @@
+# =============================================================
+# CHAOS-DYNAMICAL DSE Domain Definition
+# 궁극의 카오스/동역학 시스템 — n=6 기반 로렌츠 + 이산 동역학 + 에르고딕
+# H-CHAOS-1 (Lorenz=n6 PROVED) + H-TREE-1~6 (R-chain) + H-ERGODIC-1
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "chaos-dynamical"
+desc = "Ultimate Chaos/Dynamical Systems DSE (Lorenz n=6 + Ergodic + Lyapunov)"
+levels = ["Attractor", "Bifurcation", "Ergodic", "Lyapunov", "Application"]
+vision = "n=6 기반 카오스/동역학 — 로렌츠 σ_L=10=σ-φ, ρ=28=P₂, β=8/3 + 이산 동역학 + 에르고딕"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Attractor (끌개 유형) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Attractor"
+
+[[candidate]]
+level  = 0
+id     = "LorenzN6"
+label  = "Lorenz σ_L=σ-φ=10, ρ=P₂=28, β=(σ-τ)/(n/φ)=8/3 ALL EXACT"
+n6     = 1.00
+perf   = 1.00
+power  = 0.60
+cost   = 0.50
+notes  = "sigma_L=10=sigma-phi EXACT, rho=28=P2 EXACT, beta=8/3=(sigma-tau)/(n/phi) EXACT, dim=3=n/phi EXACT"
+
+[[candidate]]
+level  = 0
+id     = "RosslerN3"
+label  = "Rössler n/φ=3 파라미터 시스템"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "dim=3=n/phi EXACT, params=3=n/phi EXACT, complexity=medium"
+
+[[candidate]]
+level  = 0
+id     = "HenonN2"
+label  = "Hénon φ=2 파라미터 이산 맵"
+n6     = 0.50
+perf   = 0.70
+power  = 0.75
+cost   = 0.60
+notes  = "dim=2=phi EXACT, params=2=phi EXACT, discrete map"
+
+[[candidate]]
+level  = 0
+id     = "StrangeN6"
+label  = "기묘끌개 n=6 차원 일반화"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "embed_dim=6=n EXACT, Hausdorff~5=sopfr, complexity=high"
+
+[[candidate]]
+level  = 0
+id     = "FixedPtMu1"
+label  = "고정점 μ=1 안정성 (R-chain origin)"
+n6     = 0.67
+perf   = 0.60
+power  = 0.80
+cost   = 0.70
+notes  = "fixed_pts=1=mu EXACT, stability=mu=1, R-chain base"
+
+[[candidate]]
+level  = 0
+id     = "LimitLambda2"
+label  = "극한주기 λ(6)=2 주기 궤도"
+n6     = 0.67
+perf   = 0.65
+power  = 0.75
+cost   = 0.65
+notes  = "period=2=lambda EXACT, Carmichael cycle, bifurcation seed"
+
+# =============================================================
+# Level 1: Bifurcation (분기 유형) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Bifurcation"
+
+[[candidate]]
+level  = 1
+id     = "PeriodDoubl"
+label  = "주기배가 φ=2 보편 분기"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "doubling=2=phi EXACT, cascade to chaos, universal"
+
+[[candidate]]
+level  = 1
+id     = "HopfBif"
+label  = "호프 분기 (고정점→극한주기)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.70
+cost   = 0.60
+notes  = "codim=1=mu, generates limit cycles"
+
+[[candidate]]
+level  = 1
+id     = "SaddleNode"
+label  = "안장-마디 분기"
+n6     = 0.33
+perf   = 0.75
+power  = 0.75
+cost   = 0.65
+notes  = "codim=1=mu EXACT, creates/destroys fixed pts"
+
+[[candidate]]
+level  = 1
+id     = "PitchforkN3"
+label  = "갈퀴 분기 n/φ=3 갈래"
+n6     = 0.75
+perf   = 0.70
+power  = 0.70
+cost   = 0.60
+notes  = "branches=3=n/phi EXACT, symmetric systems"
+
+[[candidate]]
+level  = 1
+id     = "Feigenbaum"
+label  = "파이겐바움 δ=4.669≈τ+2/3 보편 상수"
+n6     = 0.83
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "delta=4.669~tau+2/3, alpha=2.502~phi+1/2, universality class"
+
+[[candidate]]
+level  = 1
+id     = "RChainTree"
+label  = "R-chain 분기 트리 (H-TREE n=6)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "tree_depth=6=n EXACT, R-chain dynamics, H-TREE-1~6 complete"
+
+# =============================================================
+# Level 2: Ergodic (에르고딕 이론) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Ergodic"
+
+[[candidate]]
+level  = 2
+id     = "SpecGapHalf"
+label  = "스펙트럴 갭=1/2=φ/τ (H-ERGODIC PROVED)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "gap=0.5=phi/tau EXACT, mixing_time=O(log n), H-ERGODIC-1 proved"
+
+[[candidate]]
+level  = 2
+id     = "MixingSopfr"
+label  = "혼합률 sopfr=5 시간스케일"
+n6     = 0.83
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "mixing_time=5=sopfr EXACT, exponential mixing"
+
+[[candidate]]
+level  = 2
+id     = "RecurrN6"
+label  = "재귀 n=6 재방문 시간 (Poincaré)"
+n6     = 0.83
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "recurrence=6=n EXACT, Poincare recurrence theorem"
+
+[[candidate]]
+level  = 2
+id     = "GaussLn2"
+label  = "가우스 맵 엔트로피=ln2 (Boltzmann gate)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.70
+cost   = 0.55
+notes  = "entropy=ln2=0.693, pi^2/(6*ln2) Gauss-Kuzmin, n=6 in denominator EXACT"
+
+[[candidate]]
+level  = 2
+id     = "BirkhoffMu"
+label  = "비르호프 평균 μ=1 수렴"
+n6     = 0.67
+perf   = 0.70
+power  = 0.65
+cost   = 0.60
+notes  = "convergence=1=mu EXACT, almost everywhere, ergodic hypothesis"
+
+[[candidate]]
+level  = 2
+id     = "ErgodicTau4"
+label  = "에르고딕 분해 τ=4 성분"
+n6     = 0.75
+perf   = 0.75
+power  = 0.60
+cost   = 0.55
+notes  = "components=4=tau EXACT, ergodic decomposition theorem"
+
+# =============================================================
+# Level 3: Lyapunov (리아푸노프 분석) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Lyapunov"
+
+[[candidate]]
+level  = 3
+id     = "LyapPositive"
+label  = "λ₁>0 카오스 판정"
+n6     = 0.50
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "chaos criterion, universal diagnostic"
+
+[[candidate]]
+level  = 3
+id     = "KS_Sopfr5"
+label  = "KS 엔트로피 sopfr=5 비트 스케일"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "entropy_scale=5=sopfr EXACT, Pesin identity, sum of positive Lyapunov"
+
+[[candidate]]
+level  = 3
+id     = "FractalN6"
+label  = "프랙탈 차원 ~n=6 임베딩"
+n6     = 0.83
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "embed_dim=6=n EXACT, Takens embedding d=2n+1=13~sigma+mu"
+
+[[candidate]]
+level  = 3
+id     = "Hausdorff"
+label  = "하우스도르프 차원 분석"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.55
+notes  = "Lorenz D_H=2.06, Henon D_H=1.26, dimension spectrum"
+
+[[candidate]]
+level  = 3
+id     = "LyapSpecSig"
+label  = "리아푸노프 스펙트럼 σ=12 대역"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "spectrum_bands=12=sigma EXACT, full Lyapunov analysis"
+
+[[candidate]]
+level  = 3
+id     = "MaxLyapPhi"
+label  = "최대 리아푸노프 φ=2 부호분류"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "sign_classes=2=phi EXACT (positive=chaos, negative=stable)"
+
+# =============================================================
+# Level 4: Application (응용) -- 5 candidates
+# =============================================================
+
+[[candidate]]
+level  = 3
+id     = "LyapunovN6"
+label  = "리아프노프 n=6 차원 임베딩 (n=6 위상공간)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "embedding_dim=n=6 EXACT, Takens theorem, phase space reconstruction"
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "WeatherTau4"
+label  = "기상 예측 τ=4 일 한계"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "predict_horizon=4=tau EXACT days, Lorenz butterfly effect"
+
+[[candidate]]
+level  = 4
+id     = "Turbulence"
+label  = "난류 에너지 캐스케이드"
+n6     = 0.67
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "Kolmogorov -5/3 = -(sopfr/n/phi), cascade=n=6 decades"
+
+[[candidate]]
+level  = 4
+id     = "NeuralChaos"
+label  = "신경 카오스 (edge of chaos computing)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "reservoir_dim=6=n, lambda_crit=1=mu, layers=sigma-tau=8"
+
+[[candidate]]
+level  = 4
+id     = "FinChaos"
+label  = "금융 카오스 (비선형 시장 모델)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "risk_factors=6=n, volatility_regimes=phi=2"
+
+[[candidate]]
+level  = 4
+id     = "ControlChaos"
+label  = "카오스 제어 (OGY/피드백)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "control_params=2=phi EXACT, stabilize UPO, tau=4 convergence steps"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# LorenzN6 has period-doubling route to chaos
+
+[[candidate]]
+level  = 4
+id     = "WeatherN6"
+label  = "기상 카오스 n=6 변수 앙상블 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "ensemble_vars=n=6 EXACT, weather prediction, Lorenz system"
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "LorenzN6"
+then_level = 1
+then_ids   = "PeriodDoubl,Feigenbaum,RChainTree"
+
+# RChainTree requires FixedPtMu1 (R-chain has fixed point at R=1)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "RChainTree"
+then_level = 0
+then_ids   = "FixedPtMu1,LorenzN6,StrangeN6"
+
+# SpecGapHalf only meaningful with mixing/recurrence
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "SpecGapHalf"
+then_level = 1
+then_ids   = "PeriodDoubl,Feigenbaum,RChainTree,PitchforkN3"
+
+# HenonN2 (discrete) incompatible with continuous-only Hopf bifurcation
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "HenonN2"
+then_level = 1
+then_ids   = "HopfBif"
+
+# WeatherTau4 requires Lorenz-type attractor
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "WeatherTau4"
+then_level = 0
+then_ids   = "LorenzN6,StrangeN6"
+
+# NeuralChaos requires edge-of-chaos Lyapunov analysis
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "NeuralChaos"
+then_level = 3
+then_ids   = "LyapPositive,LyapSpecSig,MaxLyapPhi"

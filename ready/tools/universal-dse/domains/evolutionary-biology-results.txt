@@ -1,0 +1,84 @@
+
+==================================================================
+  Universal DSE -- evolutionary-biology
+  Ultimate Evolutionary Biology DSE (BT-51 genetic code chain)
+  6480 total combinations -> 3775 compatible
+  Weights: n6=35% perf=25% power=20% cost=20%
+==================================================================
+
+=== CANDIDATES ===
+
+  L1: Mutation (6)  PointMutation, ChromosomalN6, GeneDuplication, TransposableElement, HorizontalTransfer, EpigeneticMut
+  L2: Selection (6)  NaturalSelection, SexualSelection, KinSelection, GroupSelection, ArtificialSelect, NeutralDrift
+  L3: Speciation (6)  Allopatric, Sympatric, Peripatric, Parapatric, HybridSpeciation, AdaptiveRadiation
+  L4: Phylogeny (6)  MolecularClock, MaxLikelihood, BayesianPhylo, Cladistics, CoalescentTheory, NetworkPhylo
+  L5: MacroEvolution (5)  MassExtinction, CambrianExplosion, ConvergentEvol, Coevolution, PunctEquilib
+
+=== TOP 20 ===
+
+  Rank |   Mutation |  Selection | Speciation |  Phylogeny | MacroEvolu |  n6%  | Perf  | Power | Cost  | Pareto
+  ---------------------------------------------------------------------------------------------------------------------
+     1 | Chromosoma | NaturalSel | AdaptiveRa | MolecularC | MassExtinc |  94.0 | 0.900 | 0.590 | 0.540 | 0.7800
+     2 | Chromosoma | NaturalSel | AdaptiveRa | MolecularC | PunctEquil |  90.0 | 0.870 | 0.630 | 0.600 | 0.7785
+     3 | Chromosoma | NaturalSel | Allopatric | MolecularC | MassExtinc |  89.0 | 0.890 | 0.630 | 0.590 | 0.7780
+     4 | Chromosoma | NaturalSel | AdaptiveRa | MolecularC | CambrianEx |  93.0 | 0.910 | 0.580 | 0.540 | 0.7770
+     5 | Chromosoma | NaturalSel | Allopatric | MolecularC | PunctEquil |  85.0 | 0.860 | 0.670 | 0.650 | 0.7765
+     6 | PointMutat | NaturalSel | AdaptiveRa | Cladistics | MassExtinc |  90.0 | 0.850 | 0.630 | 0.610 | 0.7755
+     7 | Chromosoma | NaturalSel | Allopatric | MolecularC | CambrianEx |  88.0 | 0.900 | 0.620 | 0.590 | 0.7750
+     8 | PointMutat | NaturalSel | AdaptiveRa | MolecularC | MassExtinc |  90.0 | 0.870 | 0.620 | 0.590 | 0.7745
+     9 | PointMutat | NaturalSel | AdaptiveRa | Cladistics | PunctEquil |  86.0 | 0.820 | 0.670 | 0.670 | 0.7740
+    10 | PointMutat | NaturalSel | Allopatric | Cladistics | MassExtinc |  85.0 | 0.840 | 0.670 | 0.660 | 0.7735
+    11 | Chromosoma | NaturalSel | AdaptiveRa | MolecularC | Convergent |  89.0 | 0.880 | 0.620 | 0.590 | 0.7735
+    12 | PointMutat | NaturalSel | AdaptiveRa | MolecularC | PunctEquil |  86.0 | 0.840 | 0.660 | 0.650 | 0.7730
+    13 | Chromosoma | NaturalSel | AdaptiveRa | MaxLikelih | MassExtinc |  93.0 | 0.910 | 0.570 | 0.530 | 0.7730
+    14 | PointMutat | NaturalSel | Allopatric | MolecularC | MassExtinc |  85.0 | 0.860 | 0.660 | 0.640 | 0.7725
+    15 | PointMutat | NaturalSel | AdaptiveRa | Cladistics | CambrianEx |  89.0 | 0.860 | 0.620 | 0.610 | 0.7725
+    16 | PointMutat | NaturalSel | Allopatric | Cladistics | PunctEquil |  81.0 | 0.810 | 0.710 | 0.720 | 0.7720
+    17 | Chromosoma | NaturalSel | AdaptiveRa | MolecularC | Coevolutio |  89.0 | 0.890 | 0.610 | 0.580 | 0.7720
+    18 | Chromosoma | NaturalSel | AdaptiveRa | MaxLikelih | PunctEquil |  89.0 | 0.880 | 0.610 | 0.590 | 0.7715
+    19 | PointMutat | NaturalSel | AdaptiveRa | MolecularC | CambrianEx |  89.0 | 0.880 | 0.610 | 0.590 | 0.7715
+    20 | Chromosoma | NaturalSel | Allopatric | MolecularC | Convergent |  84.0 | 0.870 | 0.660 | 0.640 | 0.7715
+
+=== BEST BY CATEGORY ===
+
+  Best n6:    ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + MassExtinction (94.0%)
+  Best Perf:  HorizontalTransfer + NaturalSelection + AdaptiveRadiation + MaxLikelihood + CambrianExplosion (perf=0.930)
+  Best Power: EpigeneticMut + ArtificialSelect + Allopatric + Cladistics + PunctEquilib (power=0.730)
+  Best Cost:  PointMutation + SexualSelection + Allopatric + Cladistics + PunctEquilib (cost=0.730)
+
+=== PARETO FRONTIER (109 non-dominated solutions) ===
+
+   1. ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + MassExtinction | n6=94.0% perf=0.900 pow=0.590 cost=0.540
+   2. ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + PunctEquilib | n6=90.0% perf=0.870 pow=0.630 cost=0.600
+   3. ChromosomalN6 + NaturalSelection + Allopatric + MolecularClock + MassExtinction | n6=89.0% perf=0.890 pow=0.630 cost=0.590
+   4. ChromosomalN6 + NaturalSelection + AdaptiveRadiation + MolecularClock + CambrianExplosion | n6=93.0% perf=0.910 pow=0.580 cost=0.540
+   5. ChromosomalN6 + NaturalSelection + Allopatric + MolecularClock + PunctEquilib | n6=85.0% perf=0.860 pow=0.670 cost=0.650
+   6. PointMutation + NaturalSelection + AdaptiveRadiation + Cladistics + MassExtinction | n6=90.0% perf=0.850 pow=0.630 cost=0.610
+   7. ChromosomalN6 + NaturalSelection + Allopatric + MolecularClock + CambrianExplosion | n6=88.0% perf=0.900 pow=0.620 cost=0.590
+   8. PointMutation + NaturalSelection + AdaptiveRadiation + Cladistics + PunctEquilib | n6=86.0% perf=0.820 pow=0.670 cost=0.670
+   9. PointMutation + NaturalSelection + Allopatric + Cladistics + MassExtinction | n6=85.0% perf=0.840 pow=0.670 cost=0.660
+  10. PointMutation + NaturalSelection + AdaptiveRadiation + MolecularClock + PunctEquilib | n6=86.0% perf=0.840 pow=0.660 cost=0.650
+  ... +99 more
+
+=== STATISTICS ===
+
+  n6%:  max=94.0  min=73.0  avg=82.4  p50=82.0  p75=85.0  p90=87.0
+  perf: max=0.930  avg=0.811
+  combos: 3775
+
+=== OPTIMAL PATH ===
+
+  L1   Mutation: [████████████████████] n6=100%  염색체 돌연변이 6종 (역위/전좌/결실/중복/이배체/이수체)
+        |
+        v
+  L2  Selection: [████████████████░░░░] n6=80%  자연선택 (Darwin) tau=4 선택 유형
+        |
+        v
+  L3 Speciation: [████████████████████] n6=100%  적응 방산 (Darwin 핀치) n=6 종 클러스터
+        |
+        v
+  L4  Phylogeny: [██████████████████░░] n6=90%  분자시계 sigma=12 교정점
+        |
+        v
+  L5 MacroEvolution: [████████████████████] n6=100%  대멸종 (Big 5) sopfr=5 EXACT
+

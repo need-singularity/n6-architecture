@@ -1,0 +1,392 @@
+# =============================================================
+# HEXA-AQI DSE Domain Definition
+# Indoor Air Quality: Sensing, Filtration, Purification,
+# Ventilation, Control
+# n=6: 6 pollutant classes (PM/VOC/CO2/CO/O3/radon),
+#       HEPA sigma=12 grade, CADR ratio n/phi=3, J2=24hr cycle
+# BT-60 (DC power chain), BT-48 (Display-Audio sigma=12)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "air-quality-indoor"
+desc = "Indoor Air Quality DSE (6 pollutants, HEPA sigma=12, CADR n/phi=3)"
+levels = ["Sensing", "Filtration", "Purification", "Ventilation", "Control"]
+vision = "Perfect indoor air — 6-pollutant sentinel with n=6 clean air architecture"
+
+[scoring]
+n6   = 0.30
+perf = 0.30
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Sensing — 6 candidates
+#   n6: 6 pollutant classes, sigma=12 sensor nodes, J2=24 readings/hr
+# =============================================================
+[[level]]
+name = "Sensing"
+
+[[candidate]]
+level = 0
+id    = "MultiGas"
+label = "Multi-Gas Sensor Array (6 gas channels, 12 sampling points=sigma)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.55
+notes = "channels=6=n EXACT, points=12=sigma EXACT, PM/VOC/CO2/CO/O3/radon"
+
+[[candidate]]
+level = 0
+id    = "LaserPM"
+label = "Laser Particle Counter (6 size bins, 24 readings/hr=J2, PM1.0→PM10)"
+n6    = 1.00
+perf  = 0.90
+power = 0.55
+cost  = 0.50
+notes = "bins=6=n EXACT, rate=24/hr=J2 EXACT, real-time particle spectrometer"
+
+[[candidate]]
+level = 0
+id    = "MOX_VOC"
+label = "MOX Semiconductor VOC (6 TVOC bands, 12-sec response=sigma, ppb-level)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.70
+notes = "bands=6=n EXACT, response=12s=sigma EXACT, formaldehyde/benzene/toluene"
+
+[[candidate]]
+level = 0
+id    = "NDIR_CO2"
+label = "NDIR CO2 Sensor (6 calibration points, 12ppm accuracy=sigma, 0-5000ppm)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.60
+notes = "calibration=6=n EXACT, accuracy=12ppm=sigma EXACT, ventilation indicator"
+
+[[candidate]]
+level = 0
+id    = "PID_Detector"
+label = "Photo-Ionization Detector (6 UV lamp energies, 10ppb sensitivity=sigma-phi)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.40
+notes = "energies=6=n EXACT, sensitivity=10ppb=sigma-phi EXACT, industrial safety"
+
+[[candidate]]
+level = 0
+id    = "IoT_Mesh"
+label = "IoT Sensor Mesh Network (6 nodes per room=n, 12 parameters=sigma, cloud)"
+n6    = 1.00
+perf  = 0.75
+power = 0.60
+cost  = 0.55
+notes = "nodes=6=n EXACT, params=12=sigma EXACT, building-scale distributed sensing"
+
+# =============================================================
+# Level 1: Filtration — 6 candidates
+#   n6: HEPA class sigma=12 (H12), 6 filter stages, tau=4 pre-filter layers
+# =============================================================
+[[level]]
+name = "Filtration"
+
+[[candidate]]
+level = 1
+id    = "HEPA_H12"
+label = "HEPA H12 Filter (sigma=12 grade, 6 pleated layers, 99.5% @0.3um)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.60
+notes = "grade=H12=sigma EXACT, layers=6=n EXACT, medical-grade filtration"
+
+[[candidate]]
+level = 1
+id    = "HEPA_H14"
+label = "HEPA H14 Ultra (14 grade, 6 V-bank modules, 99.995% @0.3um)"
+n6    = 0.80
+perf  = 0.95
+power = 0.45
+cost  = 0.40
+notes = "modules=6=n EXACT, cleanroom standard, higher pressure drop"
+
+[[candidate]]
+level = 1
+id    = "ESP_Electro"
+label = "Electrostatic Precipitator (6 collector plates, 12kV charge=sigma, washable)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.65
+notes = "plates=6=n EXACT, voltage=12kV=sigma EXACT, low running cost"
+
+[[candidate]]
+level = 1
+id    = "Carbon_Bed"
+label = "Activated Carbon Bed (C6 hexagonal structure, 6 bed segments, VOC adsorption)"
+n6    = 1.00
+perf  = 0.75
+power = 0.75
+cost  = 0.55
+notes = "carbon=C6=n EXACT, segments=6=n EXACT, chemical/odor removal"
+
+[[candidate]]
+level = 1
+id    = "CyclonePre"
+label = "Cyclone Pre-Filter (6 cyclone tubes, tau=4 separation stages, coarse PM)"
+n6    = 1.00
+perf  = 0.65
+power = 0.80
+cost  = 0.80
+notes = "tubes=6=n EXACT, stages=4=tau EXACT, no filter media replacement"
+
+[[candidate]]
+level = 1
+id    = "NanoFiber"
+label = "Electrospun Nanofiber (6 fiber layers, 12nm average diameter=sigma, low dP)"
+n6    = 1.00
+perf  = 0.85
+power = 0.65
+cost  = 0.45
+notes = "layers=6=n EXACT, diameter=12nm=sigma EXACT, next-gen low resistance"
+
+# =============================================================
+# Level 2: Purification — 6 candidates
+#   n6: 6 purification mechanisms, CN=6 photocatalyst, sigma=12 UV intensity
+# =============================================================
+[[level]]
+name = "Purification"
+
+[[candidate]]
+level = 2
+id    = "PCO_TiO2"
+label = "Photocatalytic Oxidation (TiO2 CN=6, 6 UV-C tubes, VOC mineralization)"
+n6    = 1.00
+perf  = 0.85
+power = 0.50
+cost  = 0.50
+notes = "CN=6=n EXACT, tubes=6=n EXACT, complete VOC→CO2+H2O destruction"
+
+[[candidate]]
+level = 2
+id    = "PlasmaIon"
+label = "Cold Plasma Ionizer (6 discharge electrodes, 12 ion species=sigma)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.55
+notes = "electrodes=6=n EXACT, species=12=sigma EXACT, pathogen inactivation"
+
+[[candidate]]
+level = 2
+id    = "UVC_Germicidal"
+label = "UV-C Germicidal (254nm=sigma*J2-phi, 6 lamp banks, 12W each=sigma)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.60
+notes = "banks=6=n EXACT, power=12W=sigma EXACT, virus/bacteria 99.9% kill"
+
+[[candidate]]
+level = 2
+id    = "Bipolar_Ion"
+label = "Bipolar Ionization (phi=2 polarity, 6 ion emitter bars, in-duct)"
+n6    = 1.00
+perf  = 0.70
+power = 0.65
+cost  = 0.65
+notes = "polarity=2=phi EXACT, emitters=6=n EXACT, cluster ions attack pathogens"
+
+[[candidate]]
+level = 2
+id    = "Ozone_Low"
+label = "Controlled Ozone Treatment (O3 0.05ppm=safe, 6 emission zones, timer)"
+n6    = 1.00
+perf  = 0.65
+power = 0.70
+cost  = 0.70
+notes = "zones=6=n EXACT, strong oxidizer, must not exceed safety limits"
+
+[[candidate]]
+level = 2
+id    = "MOF_Sorbent"
+label = "MOF Adsorbent Module (CN=6 metal nodes, 6 MOF types, selective capture)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.40
+notes = "CN=6=n EXACT, types=6=n EXACT, targeted formaldehyde/NO2 capture"
+
+# =============================================================
+# Level 3: Ventilation — 6 candidates
+#   n6: 6 ACH target, sigma=12 diffuser outlets, n/phi=3 CADR ratio
+# =============================================================
+[[level]]
+name = "Ventilation"
+
+[[candidate]]
+level = 3
+id    = "ERV_System"
+label = "Energy Recovery Ventilator (6 ACH=n, 12 air channels=sigma, 80% heat recovery)"
+n6    = 1.00
+perf  = 0.90
+power = 0.65
+cost  = 0.55
+notes = "ACH=6=n EXACT, channels=12=sigma EXACT, fresh air with minimal energy loss"
+
+[[candidate]]
+level = 3
+id    = "DCV_CO2"
+label = "Demand-Controlled Ventilation (CO2-driven, 6 zone dampers=n, 12 sensors=sigma)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.60
+notes = "dampers=6=n EXACT, sensors=12=sigma EXACT, occupancy-based efficiency"
+
+[[candidate]]
+level = 3
+id    = "Displacement"
+label = "Displacement Ventilation (6 floor diffusers=n, 12C supply temp=sigma, stratified)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.50
+notes = "diffusers=6=n EXACT, supply=12C=sigma EXACT, contaminant displacement upward"
+
+[[candidate]]
+level = 3
+id    = "Personalized"
+label = "Personal Environmental Control (6 desk units=n, 4 comfort parameters=tau)"
+n6    = 1.00
+perf  = 0.75
+power = 0.75
+cost  = 0.55
+notes = "units=6=n EXACT, params=4=tau EXACT, individual thermal+air quality"
+
+[[candidate]]
+level = 3
+id    = "NatVent_Stack"
+label = "Natural Stack Ventilation (6 chimney stacks=n, 12m height=sigma, passive)"
+n6    = 1.00
+perf  = 0.65
+power = 0.95
+cost  = 0.75
+notes = "stacks=6=n EXACT, height=12m=sigma EXACT, zero-energy buoyancy-driven"
+
+[[candidate]]
+level = 3
+id    = "UVGI_InDuct"
+label = "In-Duct UVGI + Ventilation (6 UV banks=n, 12 duct sections=sigma, combined)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.50
+notes = "banks=6=n EXACT, sections=12=sigma EXACT, airborne disinfection + fresh air"
+
+# =============================================================
+# Level 4: Control — 6 candidates
+#   n6: 6 control algorithms, sigma=12 actuator outputs, J2=24hr schedule
+# =============================================================
+[[level]]
+name = "Control"
+
+[[candidate]]
+level = 4
+id    = "BMS_Integrated"
+label = "BMS Integrated Control (6 HVAC zones=n, 12 control loops=sigma, 24hr schedule=J2)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.55
+notes = "zones=6=n EXACT, loops=12=sigma EXACT, schedule=24hr=J2 EXACT"
+
+[[candidate]]
+level = 4
+id    = "AI_MPC"
+label = "AI Model Predictive Control (6 prediction horizons=n, 12 state variables=sigma)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.45
+notes = "horizons=6=n EXACT, states=12=sigma EXACT, 20% energy savings via prediction"
+
+[[candidate]]
+level = 4
+id    = "WELL_Certify"
+label = "WELL Building Standard (6 air quality features=n, 12 performance criteria=sigma)"
+n6    = 1.00
+perf  = 0.80
+power = 0.75
+cost  = 0.50
+notes = "features=6=n EXACT, criteria=12=sigma EXACT, WELL v2 Air concept"
+
+[[candidate]]
+level = 4
+id    = "Occupant_Feedback"
+label = "Occupant Feedback Loop (6 satisfaction metrics=n, 4 response actions=tau)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.70
+notes = "metrics=6=n EXACT, actions=4=tau EXACT, human-in-the-loop comfort"
+
+[[candidate]]
+level = 4
+id    = "DigitalTwin"
+label = "Digital Twin AQ Model (6 room zones=n, 24 airflow vectors=J2, CFD-based)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.45
+notes = "zones=6=n EXACT, vectors=24=J2 EXACT, virtual commissioning + optimization"
+
+[[candidate]]
+level = 4
+id    = "GreenWall_Bio"
+label = "Living Green Wall Bio-Control (6 plant species=n, 12 planters=sigma, phytoremed)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.60
+notes = "species=6=n EXACT, planters=12=sigma EXACT, natural VOC removal + humidity"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Multi-gas sensing pairs with BMS integrated control
+[[rule]]
+type      = "prefer"
+if_level  = 0
+if_id     = "MultiGas"
+then_level = 4
+then_ids  = "BMS_Integrated,AI_MPC"
+
+# HEPA H12 pairs with ERV for balanced filtration + ventilation
+[[rule]]
+type      = "prefer"
+if_level  = 1
+if_id     = "HEPA_H12"
+then_level = 3
+then_ids  = "ERV_System,DCV_CO2"
+
+# Natural ventilation incompatible with ozone treatment
+[[rule]]
+type      = "exclude"
+if_level  = 3
+if_id     = "NatVent_Stack"
+then_level = 2
+then_ids  = "Ozone_Low"
+
+# PCO purification pairs with digital twin modeling
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "PCO_TiO2"
+then_level = 4
+then_ids  = "DigitalTwin,AI_MPC"

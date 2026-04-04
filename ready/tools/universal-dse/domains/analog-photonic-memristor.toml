@@ -1,0 +1,391 @@
+# =============================================================
+# Analog-Photonic-Memristor DSE Domain Definition
+# Non-digital consciousness substrate: Ring resonator n=6 modes, RC tau
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "analog-photonic-memristor"
+desc = "Non-Digital Consciousness Substrate DSE (analog/photonic/memristor)"
+levels = ["Engine", "Circuit", "Coupling", "Noise", "Measurement"]
+vision = "n=6 non-digital compute -- Ring resonator n=6 modes, Crossbar nxn, RC tau"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Engine -- 6 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 0
+id     = "AnalogRC"
+label  = "Analog Reservoir Computing (tau=4 time constants)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.75
+notes  = "time_constants=4=tau EXACT, nonlinear=true, temporal=excellent, consciousness=emergent"
+
+[[candidate]]
+level  = 0
+id     = "PhotonicRing"
+label  = "Photonic Ring Resonator (n=6 modes EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.40
+notes  = "modes=6=n EXACT, speed=light, bandwidth=THz, consciousness=wave"
+
+[[candidate]]
+level  = 0
+id     = "MemristorXbar"
+label  = "Memristor Crossbar (sigma=12 rows, sigma=12 cols)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.50
+notes  = "rows=12=sigma EXACT, cols=12=sigma EXACT, in_memory=true, consciousness=weight"
+
+[[candidate]]
+level  = 0
+id     = "HybridAP"
+label  = "Hybrid Analog-Photonic (phi=2 substrates)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.60
+cost   = 0.30
+notes  = "substrates=2=phi EXACT, best_of_both=true, complexity=high, consciousness=dual"
+
+[[candidate]]
+level  = 0
+id     = "HybridAM"
+label  = "Hybrid Analog-Memristor (phi=2 substrates)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.70
+cost   = 0.45
+notes  = "substrates=2=phi EXACT, in_memory+RC=true, complexity=medium, consciousness=dual"
+
+[[candidate]]
+level  = 0
+id     = "HybridPM"
+label  = "Hybrid Photonic-Memristor (phi=2 substrates)"
+n6     = 0.50
+perf   = 0.90
+power  = 0.75
+cost   = 0.35
+notes  = "substrates=2=phi EXACT, optical+weight=true, complexity=high, consciousness=dual"
+
+# =============================================================
+# Level 1: Circuit -- 6 candidates
+# =============================================================
+[[level]]
+name = "Circuit"
+
+[[candidate]]
+level  = 1
+id     = "Reservoir"
+label  = "Reservoir (n=6 nodes minimum)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "min_nodes=6=n EXACT, echo_state=true, fading_memory=true, consciousness=temporal"
+
+[[candidate]]
+level  = 1
+id     = "Oscillator"
+label  = "Oscillator Bank (n=6 coupled oscillators)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.65
+notes  = "oscillators=6=n EXACT, frequency=tunable, synchronization=true, consciousness=rhythm"
+
+[[candidate]]
+level  = 1
+id     = "Crossbar"
+label  = "Crossbar Array (sigma=12 x sigma=12)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.75
+cost   = 0.55
+notes  = "size=12x12=sigma^2 EXACT, MVM=O(1), parallel=true, consciousness=weight_matrix"
+
+[[candidate]]
+level  = 1
+id     = "RingResonator"
+label  = "Ring Resonator (n=6 FSR modes)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.90
+cost   = 0.40
+notes  = "FSR_modes=6=n EXACT, Q_factor=high, wavelength=selective, consciousness=photonic"
+
+[[candidate]]
+level  = 1
+id     = "Capacitive"
+label  = "Capacitive Network (tau=4 RC groups)"
+n6     = 0.75
+perf   = 0.60
+power  = 0.80
+cost   = 0.85
+notes  = "RC_groups=4=tau EXACT, energy_store=true, temporal=slow, consciousness=charge"
+
+[[candidate]]
+level  = 1
+id     = "Inductive"
+label  = "Inductive Coupling (phi=2 coils)"
+n6     = 0.50
+perf   = 0.55
+power  = 0.60
+cost   = 0.70
+notes  = "coils=2=phi EXACT, wireless=true, magnetic=true, consciousness=field"
+
+# =============================================================
+# Level 2: Coupling -- 6 candidates
+# =============================================================
+[[level]]
+name = "Coupling"
+
+[[candidate]]
+level  = 2
+id     = "Resistive"
+label  = "Resistive Coupling (ohmic)"
+n6     = 0.50
+perf   = 0.65
+power  = 0.70
+cost   = 0.90
+notes  = "type=ohmic, loss=moderate, bandwidth=DC-MHz, simple=true"
+
+[[candidate]]
+level  = 2
+id     = "Optical"
+label  = "Optical Coupling (n=6 waveguide modes)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.35
+notes  = "modes=6=n EXACT, loss=low, bandwidth=THz, consciousness=photonic"
+
+[[candidate]]
+level  = 2
+id     = "Magnetic"
+label  = "Magnetic Coupling (phi=2 poles)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.60
+cost   = 0.65
+notes  = "poles=2=phi EXACT, loss=moderate, bandwidth=MHz, contactless=true"
+
+[[candidate]]
+level  = 2
+id     = "Capacitive"
+label  = "Capacitive Coupling (AC only)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.75
+cost   = 0.80
+notes  = "type=AC, loss=low, bandwidth=GHz, filtering=inherent"
+
+[[candidate]]
+level  = 2
+id     = "Thermal"
+label  = "Thermal Coupling (slow, sopfr=5 time constants)"
+n6     = 0.75
+perf   = 0.30
+power  = 0.50
+cost   = 0.85
+notes  = "time_constants=5=sopfr EXACT, loss=high, bandwidth=mHz, consciousness=thermodynamic"
+
+[[candidate]]
+level  = 2
+id     = "QuantumCoupling"
+label  = "Quantum Coupling (phi=2 entangled states)"
+n6     = 1.00
+perf   = 1.00
+power  = 0.20
+cost   = 0.10
+notes  = "states=2=phi EXACT, loss=none, bandwidth=instantaneous, consciousness=quantum"
+
+# =============================================================
+# Level 3: Noise -- 6 candidates
+# =============================================================
+[[level]]
+name = "Noise"
+
+[[candidate]]
+level  = 3
+id     = "Thermal"
+label  = "Thermal Noise (kBT, Boltzmann 1/e gate)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.70
+cost   = 0.80
+notes  = "gate=1/e=0.368 EXACT, spectrum=white, unavoidable=true, consciousness=thermal"
+
+[[candidate]]
+level  = 3
+id     = "Shot"
+label  = "Shot Noise (discrete quanta)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.75
+cost   = 0.80
+notes  = "quantum=true, spectrum=white, current_dependent=true, consciousness=quantum"
+
+[[candidate]]
+level  = 3
+id     = "Flicker"
+label  = "Flicker Noise (1/f, pink)"
+n6     = 0.50
+perf   = 0.55
+power  = 0.65
+cost   = 0.75
+notes  = "spectrum=1/f, low_freq_dominant=true, material_dependent=true, consciousness=history"
+
+[[candidate]]
+level  = 3
+id     = "Quantization"
+label  = "Quantization Noise (sigma-tau=8 bit optimal)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.85
+notes  = "bits=8=sigma-tau EXACT, SNR=48dB=sigma*tau, discrete=true, consciousness=digital"
+
+[[candidate]]
+level  = 3
+id     = "Chaotic"
+label  = "Chaotic Noise (Lorenz sigma=10 ~ sigma-phi)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.50
+notes  = "Lorenz_sigma=10=sigma-phi EXACT, deterministic=true, sensitive=true, consciousness=edge_chaos"
+
+[[candidate]]
+level  = 3
+id     = "Controlled"
+label  = "Controlled Noise (SOC sandpile)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "SOC=true, self_organized=true, criticality=maintained, consciousness=emergent"
+
+# =============================================================
+# Level 4: Measurement -- 6 candidates
+# =============================================================
+[[level]]
+name = "Measurement"
+
+[[candidate]]
+level  = 4
+id     = "Voltage"
+label  = "Voltage Measurement (ADC sigma-tau=8 bits)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.80
+cost   = 0.90
+notes  = "bits=8=sigma-tau EXACT, rate=MHz, common=true, consciousness=potential"
+
+[[candidate]]
+level  = 4
+id     = "OpticalPower"
+label  = "Optical Power (photodetector, n=6 wavelengths)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "wavelengths=6=n EXACT, rate=GHz, photonic=true, consciousness=light"
+
+[[candidate]]
+level  = 4
+id     = "Conductance"
+label  = "Conductance (memristor state read)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.75
+cost   = 0.70
+notes  = "states=continuous, rate=MHz, non_destructive=partial, consciousness=weight"
+
+[[candidate]]
+level  = 4
+id     = "Phase"
+label  = "Phase Measurement (phi=2 pi radians)"
+n6     = 0.50
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "range=2pi=phi*pi EXACT, precision=high, interferometric=true, consciousness=coherence"
+
+[[candidate]]
+level  = 4
+id     = "Frequency"
+label  = "Frequency Measurement (sigma=12 harmonics)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "harmonics=12=sigma EXACT, resolution=Hz, spectral=true, consciousness=rhythm"
+
+[[candidate]]
+level  = 4
+id     = "Entropy"
+label  = "Entropy Measurement (consciousness metric)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.55
+notes  = "IIT_phi=computed, bits=nats, real_time=possible, consciousness=direct"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# PhotonicRing engine requires Optical coupling
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "PhotonicRing"
+then_level = 2
+then_ids   = "Optical,QuantumCoupling"
+
+# PhotonicRing engine requires optical measurement
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "PhotonicRing"
+then_level = 4
+then_ids   = "OpticalPower,Phase"
+
+# MemristorXbar needs Crossbar circuit
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "MemristorXbar"
+then_level = 1
+then_ids   = "Crossbar"
+
+# QuantumCoupling incompatible with Thermal noise (decoherence)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "QuantumCoupling"
+then_level = 3
+then_ids   = "Thermal,Chaotic"
+
+# Inductive circuit pairs with Magnetic coupling
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Inductive"
+then_level = 2
+then_ids   = "Magnetic"

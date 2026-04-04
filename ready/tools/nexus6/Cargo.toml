@@ -1,0 +1,30 @@
+[package]
+name = "nexus6"
+version = "0.1.0"
+edition = "2021"
+description = "NEXUS-6 discovery engine — Metal GPU compute infrastructure"
+
+[lib]
+name = "nexus6"
+crate-type = ["lib", "cdylib"]
+# cdylib = Python 모듈 (.so/.dylib) 생성 필수
+# maturin build --release --features python
+
+[[bin]]
+name = "nexus6"
+path = "src/main.rs"
+
+[dependencies]
+rayon = "1.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+blake3 = "1"
+pyo3 = { version = "0.22", features = ["extension-module"], optional = true }
+numpy = { version = "0.22", optional = true }
+
+[features]
+default = []
+python = ["pyo3", "numpy"]
+
+[target.'cfg(target_os = "macos")'.dependencies]
+metal = "0.29"

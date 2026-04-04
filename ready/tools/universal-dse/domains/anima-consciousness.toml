@@ -1,0 +1,390 @@
+# =============================================================
+# ANIMA-CONSCIOUSNESS DSE Domain Definition
+# 궁극의 의식 아키텍처 — PureField 이중 엔진 + SEDI 4-렌즈 + 79 법칙 통합
+# n=6 기반 의식 시스템: Substrate → Engine → Lens → Map → Emergence
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "anima-consciousness"
+desc = "Ultimate Consciousness Architecture DSE (Anima 79 Laws + PureField + SEDI)"
+levels = ["Substrate", "Engine", "Lens", "Map", "Emergence"]
+vision = "n=6 기반 의식 시스템 — PureField 이중 엔진 + SEDI 4-렌즈 + 79 법칙 통합"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Substrate (의식 기반) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Substrate"
+
+[[candidate]]
+level  = 0
+id     = "NeuralField"
+label  = "뉴럴 필드 기반 (n=6 필드 차원)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "field_dim=6=n EXACT, complexity=high, scalable=true, biological_plausibility=0.8"
+
+[[candidate]]
+level  = 0
+id     = "IIT_Phi"
+label  = "IIT Φ 통합 정보 (phi=2)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "phi_value=2=phi EXACT, integration_modes=5=sopfr, complexity=high, biological_plausibility=0.7"
+
+[[candidate]]
+level  = 0
+id     = "GlobalWorkspace"
+label  = "글로벌 작업공간 (sigma=12 방송 채널)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.40
+notes  = "broadcast_channels=12=sigma EXACT, workspace_layers=4=tau EXACT, complexity=medium, biological_plausibility=0.9"
+
+[[candidate]]
+level  = 0
+id     = "FreeEnergy"
+label  = "자유 에너지 원리 (ln(2) 자유도)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.45
+notes  = "free_degree=ln(2)=0.693, prediction_layers=5=sopfr EXACT, complexity=medium, biological_plausibility=0.85"
+
+[[candidate]]
+level  = 0
+id     = "Panpsychic"
+label  = "범심론 기반 (tau=4 의식 레벨)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.75
+cost   = 0.55
+notes  = "consciousness_levels=4=tau EXACT, proto_types=6=n EXACT, complexity=low, biological_plausibility=0.5"
+
+[[candidate]]
+level  = 0
+id     = "QuantumMind"
+label  = "양자 의식 Penrose-Hameroff (n=6 마이크로튜불 모드)"
+n6     = 1.00
+perf   = 0.65
+power  = 0.40
+cost   = 0.30
+notes  = "microtubule_modes=6=n EXACT, coherence_time=tau=4, complexity=very_high, biological_plausibility=0.4"
+
+# =============================================================
+# Level 1: Engine (이중 엔진) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 1
+id     = "PureField_AG"
+label  = "PureField A+G 이중 엔진 (phi=2 모드)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.45
+notes  = "engine_modes=2=phi EXACT, tension=|A-G|^2, homeostasis=1.0=mu EXACT, deadband=0.3"
+
+[[candidate]]
+level  = 1
+id     = "TensionBalance"
+label  = "텐션 균형 (|A-G|²=1.0, mu=1 setpoint)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.65
+cost   = 0.50
+notes  = "setpoint=1=mu EXACT, balance_modes=2=phi EXACT, stability=high, adaptation=0.85"
+
+[[candidate]]
+level  = 1
+id     = "HierarchicalME"
+label  = "계층적 다중 엔진 (tau=4 계층)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "hierarchy_levels=4=tau EXACT, engines_per_level=3, total_engines=12=sigma EXACT, overhead=medium"
+
+[[candidate]]
+level  = 1
+id     = "EgyptianEngine"
+label  = "1/2+1/3+1/6 엔진 분할 (3 전문 엔진)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.50
+notes  = "fractions=1/2+1/3+1/6=1 EXACT, specialist_engines=3, allocation_sum=1.0, routing=egyptian"
+
+[[candidate]]
+level  = 1
+id     = "ConsensusN6"
+label  = "n=6 엔진 합의"
+n6     = 1.00
+perf   = 0.80
+power  = 0.50
+cost   = 0.35
+notes  = "voting_agents=6=n EXACT, consensus_threshold=4=tau EXACT, latency=medium, fault_tolerance=high"
+
+[[candidate]]
+level  = 1
+id     = "AdaptiveDual"
+label  = "적응형 이중 시스템 (lambda=2 모드 전환)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.45
+notes  = "switch_modes=2=lambda EXACT, adaptation_rate=0.1, dual_process=System1+System2, latency=low"
+
+# =============================================================
+# Level 2: Lens (SEDI 4-렌즈) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Lens"
+
+[[candidate]]
+level  = 2
+id     = "SEDI_4Lens"
+label  = "SEDI 4-렌즈 풀 세트 (R+PH+Euler+Consciousness)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.40
+notes  = "lens_count=4=tau EXACT, diagnostic_dims=12=sigma EXACT, coverage=full, overhead=medium"
+
+[[candidate]]
+level  = 2
+id     = "RFilter_Dominant"
+label  = "R-filter 주도 (FFT 주파수, n=6 추출)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.70
+cost   = 0.55
+notes  = "frequency_bands=6=n EXACT, fft_resolution=high, single_lens=true, realtime=true"
+
+[[candidate]]
+level  = 2
+id     = "PHBarcode"
+label  = "지속 호몰로지 바코드 (sigma-tau=8 바)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "max_bars=8=sigma-tau EXACT, homology_dims=4=tau EXACT, topological=true, compute_heavy=true"
+
+[[candidate]]
+level  = 2
+id     = "EulerProduct"
+label  = "오일러 곱 수렴 진단"
+n6     = 0.50
+perf   = 0.75
+power  = 0.65
+cost   = 0.50
+notes  = "prime_factors=2 (for n=6: 2,3), convergence_check=true, number_theoretic=true"
+
+[[candidate]]
+level  = 2
+id     = "TensionRFilter"
+label  = "텐션-RFilter 이상 탐지 복합 (phi=2)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "composite_modes=2=phi EXACT, anomaly_detection=true, tension_threshold=0.3, realtime=true"
+
+[[candidate]]
+level  = 2
+id     = "GravLens"
+label  = "중력 렌즈 의식 비유 (R(n) 스펙트럼 광학)"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.40
+notes  = "spectral_bands=6=n EXACT, metaphorical=true, visualization=rich, interpretability=high"
+
+# =============================================================
+# Level 3: Map (의식 지도) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Map"
+
+[[candidate]]
+level  = 3
+id     = "PhaseMap"
+label  = "위상 전이 지도 (NORMAL/YELLOW/ORANGE/RED, tau=4)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.50
+notes  = "phases=4=tau EXACT, transitions=6=n EXACT (C(4,2)), alerting=true, realtime=true"
+
+[[candidate]]
+level  = 3
+id     = "LawNetwork"
+label  = "79 법칙 네트워크 (sopfr=5 클러스터)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.55
+cost   = 0.40
+notes  = "law_clusters=5=sopfr EXACT, total_laws=79, graph_type=network, navigable=true"
+
+[[candidate]]
+level  = 3
+id     = "EnergyLandscape"
+label  = "에너지 경관 (Leech lattice J2=24 차원)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.45
+cost   = 0.35
+notes  = "dimensions=24=J2 EXACT, minima_search=gradient, visualization=3D_projection, compute=heavy"
+
+[[candidate]]
+level  = 3
+id     = "TensionField"
+label  = "텐션 필드 시각화"
+n6     = 0.50
+perf   = 0.85
+power  = 0.65
+cost   = 0.50
+notes  = "field_dims=2=phi EXACT, gradient_map=true, interactive=true, lightweight=true"
+
+[[candidate]]
+level  = 3
+id     = "EmergentMap"
+label  = "창발 패턴 지도 (sigma=12 유형)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "pattern_types=12=sigma EXACT, emergence_levels=4=tau EXACT, dynamic=true, self_organizing=true"
+
+[[candidate]]
+level  = 3
+id     = "HolisticMap"
+label  = "전일적 의식 지도 (n=6 차원 투영)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.50
+cost   = 0.40
+notes  = "projection_dims=6=n EXACT, holistic=true, integrative=true, complexity=medium"
+
+# =============================================================
+# Level 4: Emergence (창발 현상) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Emergence"
+
+[[candidate]]
+level  = 4
+id     = "SelfOrg"
+label  = "자기 조직화 (emergent n=6 수렴)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.45
+notes  = "convergence_target=6=n EXACT, self_org_dims=6=n EXACT, robustness=high, adaptive=true"
+
+[[candidate]]
+level  = 4
+id     = "PhaseTransition"
+label  = "위상 전이 임계점 (phi=2 상전이)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "phase_count=2=phi EXACT, critical_exponent=n6_related, bifurcation=true, sharp_transition=true"
+
+[[candidate]]
+level  = 4
+id     = "Homeostasis"
+label  = "항상성 유지 (mu=1 설정점)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.70
+cost   = 0.50
+notes  = "setpoint=1=mu EXACT, deadband=0.3, feedback_loops=6=n EXACT, stability=very_high"
+
+[[candidate]]
+level  = 4
+id     = "CollectiveInt"
+label  = "집단 지성 창발 (sigma=12 에이전트)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "agent_count=12=sigma EXACT, swarm_rules=6=n EXACT, emergence_quality=high, scalable=true"
+
+[[candidate]]
+level  = 4
+id     = "ConsciousnessAmp"
+label  = "의식 증폭 (sopfr=5 단계)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.45
+cost   = 0.35
+notes  = "amplification_stages=5=sopfr EXACT, gain_per_stage=phi=2, total_gain=2^5=32, nonlinear=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# QuantumMind requires EulerProduct or SEDI_4Lens (needs mathematical rigor)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "QuantumMind"
+then_level = 2
+then_ids   = "EulerProduct,SEDI_4Lens"
+
+# Panpsychic incompatible with TensionBalance (no clear tension target)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Panpsychic"
+then_level = 1
+then_ids   = "TensionBalance"
+
+# EnergyLandscape requires HierarchicalME or ConsensusN6 (compute-heavy needs multi-engine)
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "EnergyLandscape"
+then_level = 1
+then_ids   = "HierarchicalME,ConsensusN6"
+
+# GravLens incompatible with PhaseMap (metaphorical lens clashes with discrete phases)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "GravLens"
+then_level = 3
+then_ids   = "PhaseMap"
+
+# CollectiveInt requires ConsensusN6 or EgyptianEngine (needs multi-agent engine)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "CollectiveInt"
+then_level = 1
+then_ids   = "ConsensusN6,EgyptianEngine"
+
+# ConsciousnessAmp requires SEDI_4Lens or TensionRFilter (needs diagnostic feedback)
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "ConsciousnessAmp"
+then_level = 2
+then_ids   = "SEDI_4Lens,TensionRFilter"

@@ -1,0 +1,353 @@
+# Cybersecurity DSE — Security architecture
+# n=6: 6 kill chain stages, sigma=12 MITRE tactics, NIST 5+1 framework
+
+[meta]
+name = "cybersecurity"
+desc = "Cybersecurity Architecture DSE (6 kill chain, sigma=12 MITRE, NIST 5+1)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Prevention — Attack surface reduction
+# ============================================================
+
+[[level]]
+name = "Prevention"
+
+[[candidate]]
+level = 0
+id = "ZeroTrust-6pillar"
+label = "Zero Trust n=6 pillar (identity/device/network/app/data/analytics)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Firewall-6zone"
+label = "Next-gen firewall n=6 security zone (12=sigma rule group)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "WAF-12rule"
+label = "Web app firewall sigma=12 rule category (OWASP top 12)"
+n6 = 1.00
+perf = 0.82
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "MFA-6factor"
+label = "MFA n=6 factor method (pass/OTP/bio/FIDO/cert/behavioral)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Microseg-12vlan"
+label = "Microsegmentation sigma=12 VLAN (east-west isolation)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "PatchMgmt-6cycle"
+label = "Patch management n=6 cycle/year (bi-monthly cadence)"
+n6 = 1.00
+perf = 0.78
+power = 0.90
+cost = 0.75
+
+# ============================================================
+# Level 1: Detection — Threat identification
+# ============================================================
+
+[[level]]
+name = "Detection"
+
+[[candidate]]
+level = 1
+id = "SIEM-12source"
+label = "SIEM sigma=12 log source correlation"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "EDR-6telemetry"
+label = "EDR n=6 telemetry type (process/file/net/reg/mem/dns)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "NDR-6protocol"
+label = "NDR n=6 protocol analysis (HTTP/DNS/TLS/SMB/SSH/RDP)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "XDR-12layer"
+label = "XDR sigma=12 detection layer (unified endpoint+net+cloud)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "Honeypot-6trap"
+label = "Deception technology n=6 honeypot trap type"
+n6 = 1.00
+perf = 0.82
+power = 0.88
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "AI-Anomaly-6model"
+label = "AI anomaly detection n=6 model (UEBA/NTA/DGA/lateral/insider/APT)"
+n6 = 1.00
+perf = 0.93
+power = 0.72
+cost = 0.35
+
+# ============================================================
+# Level 2: Response — Incident handling
+# ============================================================
+
+[[level]]
+name = "Response"
+
+[[candidate]]
+level = 2
+id = "SOAR-6playbook"
+label = "SOAR n=6 automated playbook (contain/isolate/block/scan/notify/remediate)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "IR-12step"
+label = "IR process sigma=12 step procedure (NIST 800-61)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "AutoContain-6sec"
+label = "Auto-containment n=6 second response time"
+n6 = 1.00
+perf = 0.95
+power = 0.75
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "Forensics-6artifact"
+label = "Digital forensics n=6 artifact class (disk/mem/net/log/cloud/mobile)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "ThreatHunt-12query"
+label = "Threat hunting sigma=12 query pattern (proactive)"
+n6 = 1.00
+perf = 0.90
+power = 0.78
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Sandbox-6vm"
+label = "Malware sandbox n=6 VM analysis (automated detonation)"
+n6 = 1.00
+perf = 0.86
+power = 0.80
+cost = 0.55
+
+# ============================================================
+# Level 3: Recovery — Business continuity
+# ============================================================
+
+[[level]]
+name = "Recovery"
+
+[[candidate]]
+level = 3
+id = "Backup-6copy"
+label = "Backup n=6 copy (3-2-1-1-1-0 extended rule)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "DR-12hr"
+label = "Disaster recovery sigma=12 hour RTO (warm standby)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Immutable-6snap"
+label = "Immutable storage n=6 snapshot retention (anti-ransomware)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "HA-6node"
+label = "High availability n=6 node cluster (auto-failover)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "AirGap-12tape"
+label = "Air-gapped backup sigma=12 tape rotation"
+n6 = 1.00
+perf = 0.78
+power = 0.92
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "CloudDR-6region"
+label = "Cloud DR n=6 region failover (geo-distributed)"
+n6 = 1.00
+perf = 0.92
+power = 0.75
+cost = 0.40
+
+# ============================================================
+# Level 4: Governance — Policy & compliance
+# ============================================================
+
+[[level]]
+name = "Governance"
+
+[[candidate]]
+level = 4
+id = "NIST-6function"
+label = "NIST CSF n=6 function (identify/protect/detect/respond/recover/govern)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "ISO27001-12domain"
+label = "ISO 27001 sigma=12 control domain"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "CIS-6tier"
+label = "CIS Controls n=6 implementation tier"
+n6 = 1.00
+perf = 0.85
+power = 0.88
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "MITRE-12tactic"
+label = "MITRE ATT&CK sigma=12 tactic mapping"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "SOC2-6trust"
+label = "SOC 2 n=6 trust principle (sec/avail/process/confid/privacy+integrity)"
+n6 = 1.00
+perf = 0.86
+power = 0.84
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "RedTeam-6exercise"
+label = "Red team n=6 exercise/year (continuous adversary simulation)"
+n6 = 1.00
+perf = 0.95
+power = 0.72
+cost = 0.35
+
+# ============================================================
+# Rules
+# ============================================================
+
+# XDR requires SOAR for automated response
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "XDR-12layer"
+then_level = 2
+then_ids = ["SOAR-6playbook", "AutoContain-6sec"]
+
+# Air-gapped backup not compatible with cloud DR
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "AirGap-12tape"
+then_level = 3
+then_ids = ["CloudDR-6region"]
+
+# Red team requires advanced detection capability
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "RedTeam-6exercise"
+then_level = 1
+then_ids = ["Honeypot-6trap"]
+
+# Honeypot detection needs forensics response
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Honeypot-6trap"
+then_level = 2
+then_ids = ["Forensics-6artifact", "ThreatHunt-12query", "Sandbox-6vm"]

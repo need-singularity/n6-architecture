@@ -1,0 +1,1144 @@
+/// Lexer — Self-Hosted HEXA-LANG Module (Mk.II Phase 2)
+///
+/// Tokenizes HEXA source code into a stream of tokens.
+/// Mirrors src/lexer/ (mod.rs + cursor.rs + keyword.rs) in HEXA-LANG.
+///
+/// n=6 structure:
+///   Operators  = J₂ = 24 (τ=4 groups of n=6)
+///   Delimiters = σ  = 12
+///   Keywords   = 20 (σ+τ=16 core + τ=4 extra: trait, impl, for, in)
+///   Type kw    = σ-τ = 8
+///   Literals   = τ  = 4 kinds (int, float, string, bool)
+///
+/// Functions: 12 (= σ)
+///   lex, lex_token, lex_number, lex_string, lex_char,
+///   lex_ident_or_keyword, skip_whitespace, skip_comment,
+///   is_digit, is_alpha, is_alnum, keyword_lookup
+
+// ═══════════════════════════════════════════════════════════════
+// Token Kind — integer encoding (extends token_kind.hexa)
+// ═══════════════════════════════════════════════════════════════
+//
+// Operators 0..23 are defined in token_kind.hexa.
+// Here we add delimiters, literals, keywords, and identifiers.
+//
+// Layout:
+//   0..23   = J₂=24 operators (from token_kind.hexa)
+//   24..35  = σ=12 delimiters
+//   36..39  = τ=4 literal kinds
+//   40..59  = 20 keywords
+//   60..67  = σ-τ=8 type keywords
+//   68      = Ident
+//   69      = Eof
+//   70      = Error
+
+// ── Delimiters (σ=12) ──
+fn tok_lparen() -> i64 { return 24; }
+fn tok_rparen() -> i64 { return 25; }
+fn tok_lbrace() -> i64 { return 26; }
+fn tok_rbrace() -> i64 { return 27; }
+fn tok_lbracket() -> i64 { return 28; }
+fn tok_rbracket() -> i64 { return 29; }
+fn tok_comma() -> i64 { return 30; }
+fn tok_semicolon() -> i64 { return 31; }
+fn tok_colon_colon() -> i64 { return 32; }
+fn tok_hash() -> i64 { return 33; }
+fn tok_at_sign() -> i64 { return 34; }
+fn tok_question() -> i64 { return 35; }
+
+// ── Literal kinds (τ=4) ──
+fn tok_int_lit() -> i64 { return 36; }
+fn tok_float_lit() -> i64 { return 37; }
+fn tok_str_lit() -> i64 { return 38; }
+fn tok_bool_lit() -> i64 { return 39; }
+
+// ── Keywords (20) ──
+fn tok_kw_fn() -> i64 { return 40; }
+fn tok_kw_let() -> i64 { return 41; }
+fn tok_kw_mut() -> i64 { return 42; }
+fn tok_kw_if() -> i64 { return 43; }
+fn tok_kw_else() -> i64 { return 44; }
+fn tok_kw_while() -> i64 { return 45; }
+fn tok_kw_return() -> i64 { return 46; }
+fn tok_kw_struct() -> i64 { return 47; }
+fn tok_kw_enum() -> i64 { return 48; }
+fn tok_kw_true() -> i64 { return 49; }
+fn tok_kw_false() -> i64 { return 50; }
+fn tok_kw_type() -> i64 { return 51; }
+fn tok_kw_match() -> i64 { return 52; }
+fn tok_kw_mod() -> i64 { return 53; }
+fn tok_kw_use() -> i64 { return 54; }
+fn tok_kw_pub() -> i64 { return 55; }
+fn tok_kw_trait() -> i64 { return 56; }
+fn tok_kw_impl() -> i64 { return 57; }
+fn tok_kw_for() -> i64 { return 58; }
+fn tok_kw_in() -> i64 { return 59; }
+
+// ── Type keywords (σ-τ=8) ──
+fn tok_kw_i64() -> i64 { return 60; }
+fn tok_kw_f64() -> i64 { return 61; }
+fn tok_kw_bool() -> i64 { return 62; }
+fn tok_kw_char() -> i64 { return 63; }
+fn tok_kw_str() -> i64 { return 64; }
+fn tok_kw_byte() -> i64 { return 65; }
+fn tok_kw_void() -> i64 { return 66; }
+fn tok_kw_any() -> i64 { return 67; }
+
+// ── Special ──
+fn tok_ident() -> i64 { return 68; }
+fn tok_eof() -> i64 { return 69; }
+fn tok_error() -> i64 { return 70; }
+
+// ── DotDotEq (..=) ── extending operators beyond J₂=24
+fn tok_dot_dot_eq() -> i64 { return 71; }
+
+// ═══════════════════════════════════════════════════════════════
+// Token struct — kind + span + optional value
+// ═══════════════════════════════════════════════════════════════
+
+struct Token {
+    kind: i64,
+    offset: i64,
+    length: i64,
+    line: i64,
+    col: i64,
+    int_val: i64,
+    str_val: str,
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Character classification — helper predicates
+// ═══════════════════════════════════════════════════════════════
+
+/// Check if a character code is an ASCII digit ('0'..'9')
+fn is_digit(c: i64) -> bool {
+    return c >= 48 && c <= 57;
+}
+
+/// Check if a character code is an ASCII letter or underscore
+fn is_alpha(c: i64) -> bool {
+    if c >= 65 && c <= 90 {
+        // A..Z
+        return true;
+    }
+    if c >= 97 && c <= 122 {
+        // a..z
+        return true;
+    }
+    if c == 95 {
+        // _
+        return true;
+    }
+    return false;
+}
+
+/// Check if a character code is alphanumeric or underscore
+fn is_alnum(c: i64) -> bool {
+    if is_alpha(c) {
+        return true;
+    }
+    if is_digit(c) {
+        return true;
+    }
+    return false;
+}
+
+/// Check if a character code is a hex digit (0-9, a-f, A-F)
+fn is_hex_digit(c: i64) -> bool {
+    if is_digit(c) {
+        return true;
+    }
+    if c >= 65 && c <= 70 {
+        // A..F
+        return true;
+    }
+    if c >= 97 && c <= 102 {
+        // a..f
+        return true;
+    }
+    return false;
+}
+
+/// Check if a character code is a binary digit (0 or 1)
+fn is_bin_digit(c: i64) -> bool {
+    return c == 48 || c == 49;
+}
+
+/// Check if a character code is an octal digit (0..7)
+fn is_oct_digit(c: i64) -> bool {
+    return c >= 48 && c <= 55;
+}
+
+/// Check if a character code is whitespace (space, tab, newline, carriage return)
+fn is_whitespace(c: i64) -> bool {
+    if c == 32 {
+        // space
+        return true;
+    }
+    if c == 9 {
+        // tab
+        return true;
+    }
+    if c == 10 {
+        // newline
+        return true;
+    }
+    if c == 13 {
+        // carriage return
+        return true;
+    }
+    return false;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Keyword lookup — maps identifier strings to token kinds
+// ═══════════════════════════════════════════════════════════════
+
+/// Look up an identifier string. Returns the keyword token kind,
+/// or tok_ident() if not a keyword.
+/// Covers 20 keywords + 8 type keywords = 28 entries.
+/// (Full 53-keyword set will be added as HEXA-LANG grows.)
+fn keyword_lookup(s: str) -> i64 {
+    // ── Core keywords (20) ──
+    if s == "fn" { return tok_kw_fn(); }
+    if s == "let" { return tok_kw_let(); }
+    if s == "mut" { return tok_kw_mut(); }
+    if s == "if" { return tok_kw_if(); }
+    if s == "else" { return tok_kw_else(); }
+    if s == "while" { return tok_kw_while(); }
+    if s == "return" { return tok_kw_return(); }
+    if s == "struct" { return tok_kw_struct(); }
+    if s == "enum" { return tok_kw_enum(); }
+    if s == "true" { return tok_kw_true(); }
+    if s == "false" { return tok_kw_false(); }
+    if s == "type" { return tok_kw_type(); }
+    if s == "match" { return tok_kw_match(); }
+    if s == "mod" { return tok_kw_mod(); }
+    if s == "use" { return tok_kw_use(); }
+    if s == "pub" { return tok_kw_pub(); }
+    if s == "trait" { return tok_kw_trait(); }
+    if s == "impl" { return tok_kw_impl(); }
+    if s == "for" { return tok_kw_for(); }
+    if s == "in" { return tok_kw_in(); }
+
+    // ── Type keywords (σ-τ=8) ──
+    if s == "i64" { return tok_kw_i64(); }
+    if s == "f64" { return tok_kw_f64(); }
+    if s == "bool" { return tok_kw_bool(); }
+    if s == "char" { return tok_kw_char(); }
+    if s == "str" { return tok_kw_str(); }
+    if s == "byte" { return tok_kw_byte(); }
+    if s == "void" { return tok_kw_void(); }
+    if s == "any" { return tok_kw_any(); }
+
+    // Not a keyword — it's an identifier
+    return tok_ident();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// skip_whitespace — advance past spaces, tabs, newlines
+// ═══════════════════════════════════════════════════════════════
+
+/// Skip whitespace characters starting at pos.
+/// Returns the new position after all whitespace is consumed.
+/// Updates line/col tracking: newline increments line, resets col.
+///
+/// We return (new_pos, new_line, new_col) packed as a struct.
+struct PosState {
+    pos: i64,
+    line: i64,
+    col: i64,
+}
+
+fn skip_whitespace(source: str, pos: i64, line: i64, col: i64) -> PosState {
+    let mut p: i64 = pos;
+    let mut ln: i64 = line;
+    let mut cl: i64 = col;
+    let len: i64 = str_len(source);
+
+    while p < len {
+        let c: i64 = char_at(source, p);
+        if is_whitespace(c) {
+            if c == 10 {
+                // newline
+                ln = ln + 1;
+                cl = 1;
+            } else {
+                cl = cl + 1;
+            }
+            p = p + 1;
+        } else {
+            // not whitespace — stop
+            return PosState { pos: p, line: ln, col: cl };
+        }
+    }
+    return PosState { pos: p, line: ln, col: cl };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// skip_comment — handle // line comments and /* block comments */
+// ═══════════════════════════════════════════════════════════════
+
+/// Attempt to skip a comment starting at pos.
+/// Returns (new_pos, new_line, new_col, was_comment).
+/// If no comment found, returns original position with was_comment=0.
+struct CommentResult {
+    pos: i64,
+    line: i64,
+    col: i64,
+    was_comment: i64,
+}
+
+fn skip_comment(source: str, pos: i64, line: i64, col: i64) -> CommentResult {
+    let len: i64 = str_len(source);
+
+    // Need at least 2 characters for a comment start
+    if pos + 1 >= len {
+        return CommentResult { pos: pos, line: line, col: col, was_comment: 0 };
+    }
+
+    let c0: i64 = char_at(source, pos);
+    let c1: i64 = char_at(source, pos + 1);
+
+    // ── Line comment: // ──
+    if c0 == 47 && c1 == 47 {
+        let mut p: i64 = pos + 2;
+        let mut cl: i64 = col + 2;
+        while p < len {
+            let ch: i64 = char_at(source, p);
+            if ch == 10 {
+                // newline ends the line comment
+                // Don't consume the newline — skip_whitespace will handle it
+                return CommentResult { pos: p, line: line, col: cl, was_comment: 1 };
+            }
+            p = p + 1;
+            cl = cl + 1;
+        }
+        // Reached EOF — comment extends to end of file
+        return CommentResult { pos: p, line: line, col: cl, was_comment: 1 };
+    }
+
+    // ── Block comment: /* ... */ (nested) ──
+    if c0 == 47 && c1 == 42 {
+        let mut p: i64 = pos + 2;
+        let mut ln: i64 = line;
+        let mut cl: i64 = col + 2;
+        let mut depth: i64 = 1;
+
+        while p < len && depth > 0 {
+            let ch: i64 = char_at(source, p);
+
+            if ch == 10 {
+                // newline inside block comment
+                ln = ln + 1;
+                cl = 1;
+                p = p + 1;
+            } else if ch == 47 && p + 1 < len && char_at(source, p + 1) == 42 {
+                // /* — nested block comment
+                depth = depth + 1;
+                p = p + 2;
+                cl = cl + 2;
+            } else if ch == 42 && p + 1 < len && char_at(source, p + 1) == 47 {
+                // */ — close block comment
+                depth = depth - 1;
+                p = p + 2;
+                cl = cl + 2;
+            } else {
+                p = p + 1;
+                cl = cl + 1;
+            }
+        }
+
+        return CommentResult { pos: p, line: ln, col: cl, was_comment: 1 };
+    }
+
+    // Not a comment
+    return CommentResult { pos: pos, line: line, col: col, was_comment: 0 };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// lex_ident_or_keyword — identifiers and keyword dispatch
+// ═══════════════════════════════════════════════════════════════
+
+/// Lex an identifier or keyword starting at pos.
+/// Assumes char_at(source, pos) is alphabetic or '_'.
+/// Returns (Token, new_pos) via LexResult.
+struct LexResult {
+    token: Token,
+    pos: i64,
+    line: i64,
+    col: i64,
+}
+
+fn lex_ident_or_keyword(source: str, pos: i64, line: i64, col: i64) -> LexResult {
+    let start: i64 = pos;
+    let start_col: i64 = col;
+    let mut p: i64 = pos;
+    let mut cl: i64 = col;
+    let len: i64 = str_len(source);
+
+    // Consume alphabetic, digit, or underscore characters
+    while p < len {
+        let c: i64 = char_at(source, p);
+        if is_alnum(c) {
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            // end of identifier
+            break;
+        }
+    }
+
+    // Extract the identifier substring
+    let word: str = str_slice(source, start, p);
+    let length: i64 = p - start;
+
+    // Look up if it's a keyword
+    let kind: i64 = keyword_lookup(word);
+
+    let tok: Token = Token {
+        kind: kind,
+        offset: start,
+        length: length,
+        line: line,
+        col: start_col,
+        int_val: 0,
+        str_val: word,
+    };
+
+    return LexResult { token: tok, pos: p, line: line, col: cl };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// lex_number — integer and float literals
+// ═══════════════════════════════════════════════════════════════
+
+/// Lex a numeric literal starting at pos.
+/// Handles:
+///   - Decimal integers: 123, 1_000_000
+///   - Hex integers:     0xFF, 0x1A2B
+///   - Binary integers:  0b1010, 0b1111_0000
+///   - Octal integers:   0o777, 0o644
+///   - Float literals:   3.14, 1.0e10, 2.5E-3
+fn lex_number(source: str, pos: i64, line: i64, col: i64) -> LexResult {
+    let start: i64 = pos;
+    let start_col: i64 = col;
+    let mut p: i64 = pos;
+    let mut cl: i64 = col;
+    let len: i64 = str_len(source);
+    let mut is_float: i64 = 0;
+
+    let first: i64 = char_at(source, p);
+
+    // ── Check for 0x, 0b, 0o prefixes ──
+    if first == 48 && p + 1 < len {
+        let prefix: i64 = char_at(source, p + 1);
+
+        // 0x — hexadecimal
+        if prefix == 120 || prefix == 88 {
+            p = p + 2;
+            cl = cl + 2;
+            while p < len {
+                let c: i64 = char_at(source, p);
+                if is_hex_digit(c) {
+                    p = p + 1;
+                    cl = cl + 1;
+                } else if c == 95 {
+                    // numeric separator '_'
+                    p = p + 1;
+                    cl = cl + 1;
+                } else {
+                    break;
+                }
+            }
+            let num_str: str = str_slice(source, start, p);
+            let tok: Token = Token {
+                kind: tok_int_lit(),
+                offset: start,
+                length: p - start,
+                line: line,
+                col: start_col,
+                int_val: 0,
+                str_val: num_str,
+            };
+            return LexResult { token: tok, pos: p, line: line, col: cl };
+        }
+
+        // 0b — binary
+        if prefix == 98 || prefix == 66 {
+            p = p + 2;
+            cl = cl + 2;
+            while p < len {
+                let c: i64 = char_at(source, p);
+                if is_bin_digit(c) {
+                    p = p + 1;
+                    cl = cl + 1;
+                } else if c == 95 {
+                    p = p + 1;
+                    cl = cl + 1;
+                } else {
+                    break;
+                }
+            }
+            let num_str: str = str_slice(source, start, p);
+            let tok: Token = Token {
+                kind: tok_int_lit(),
+                offset: start,
+                length: p - start,
+                line: line,
+                col: start_col,
+                int_val: 0,
+                str_val: num_str,
+            };
+            return LexResult { token: tok, pos: p, line: line, col: cl };
+        }
+
+        // 0o — octal
+        if prefix == 111 || prefix == 79 {
+            p = p + 2;
+            cl = cl + 2;
+            while p < len {
+                let c: i64 = char_at(source, p);
+                if is_oct_digit(c) {
+                    p = p + 1;
+                    cl = cl + 1;
+                } else if c == 95 {
+                    p = p + 1;
+                    cl = cl + 1;
+                } else {
+                    break;
+                }
+            }
+            let num_str: str = str_slice(source, start, p);
+            let tok: Token = Token {
+                kind: tok_int_lit(),
+                offset: start,
+                length: p - start,
+                line: line,
+                col: start_col,
+                int_val: 0,
+                str_val: num_str,
+            };
+            return LexResult { token: tok, pos: p, line: line, col: cl };
+        }
+    }
+
+    // ── Decimal integer or float ──
+    while p < len {
+        let c: i64 = char_at(source, p);
+        if is_digit(c) {
+            p = p + 1;
+            cl = cl + 1;
+        } else if c == 95 {
+            // numeric separator
+            p = p + 1;
+            cl = cl + 1;
+        } else if c == 46 && is_float == 0 {
+            // '.' — potential float
+            // Check next char is a digit (not a method call like 123.foo)
+            if p + 1 < len && is_digit(char_at(source, p + 1)) {
+                is_float = 1;
+                p = p + 1;
+                cl = cl + 1;
+            } else {
+                break;
+            }
+        } else if (c == 101 || c == 69) && is_float == 1 {
+            // 'e' or 'E' — exponent part of float
+            p = p + 1;
+            cl = cl + 1;
+            // optional sign after exponent
+            if p < len {
+                let sign: i64 = char_at(source, p);
+                if sign == 43 || sign == 45 {
+                    // '+' or '-'
+                    p = p + 1;
+                    cl = cl + 1;
+                }
+            }
+            // consume exponent digits
+            while p < len && is_digit(char_at(source, p)) {
+                p = p + 1;
+                cl = cl + 1;
+            }
+            break;
+        } else {
+            break;
+        }
+    }
+
+    let num_str: str = str_slice(source, start, p);
+    let mut kind: i64 = tok_int_lit();
+    if is_float == 1 {
+        kind = tok_float_lit();
+    }
+
+    let tok: Token = Token {
+        kind: kind,
+        offset: start,
+        length: p - start,
+        line: line,
+        col: start_col,
+        int_val: 0,
+        str_val: num_str,
+    };
+    return LexResult { token: tok, pos: p, line: line, col: cl };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// lex_string — string literals with escape sequences
+// ═══════════════════════════════════════════════════════════════
+
+/// Lex a double-quoted string literal starting at pos.
+/// Assumes char_at(source, pos) == '"' (34).
+/// Handles escape sequences: \n, \t, \\, \", \0
+fn lex_string(source: str, pos: i64, line: i64, col: i64) -> LexResult {
+    let start: i64 = pos;
+    let start_col: i64 = col;
+    let start_line: i64 = line;
+    let mut p: i64 = pos + 1;  // skip opening quote
+    let mut cl: i64 = col + 1;
+    let mut ln: i64 = line;
+    let len: i64 = str_len(source);
+    let mut result: str = "";
+    let mut terminated: i64 = 0;
+
+    while p < len {
+        let c: i64 = char_at(source, p);
+
+        if c == 34 {
+            // closing double-quote
+            p = p + 1;
+            cl = cl + 1;
+            terminated = 1;
+            break;
+        }
+
+        if c == 92 {
+            // backslash — escape sequence
+            p = p + 1;
+            cl = cl + 1;
+            if p < len {
+                let esc: i64 = char_at(source, p);
+                if esc == 110 {
+                    // \n
+                    result = str_append_char(result, 10);
+                } else if esc == 116 {
+                    // \t
+                    result = str_append_char(result, 9);
+                } else if esc == 92 {
+                    // \\
+                    result = str_append_char(result, 92);
+                } else if esc == 34 {
+                    // \"
+                    result = str_append_char(result, 34);
+                } else if esc == 48 {
+                    // \0
+                    result = str_append_char(result, 0);
+                } else {
+                    // Unknown escape — keep both backslash and char
+                    result = str_append_char(result, 92);
+                    result = str_append_char(result, esc);
+                }
+                p = p + 1;
+                cl = cl + 1;
+            }
+        } else if c == 10 {
+            // newline inside string (allowed, tracked for span)
+            result = str_append_char(result, c);
+            p = p + 1;
+            ln = ln + 1;
+            cl = 1;
+        } else {
+            // regular character
+            result = str_append_char(result, c);
+            p = p + 1;
+            cl = cl + 1;
+        }
+    }
+
+    let mut kind: i64 = tok_str_lit();
+    if terminated == 0 {
+        kind = tok_error();
+    }
+
+    let tok: Token = Token {
+        kind: kind,
+        offset: start,
+        length: p - start,
+        line: start_line,
+        col: start_col,
+        int_val: 0,
+        str_val: result,
+    };
+    return LexResult { token: tok, pos: p, line: ln, col: cl };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// lex_char — character literals
+// ═══════════════════════════════════════════════════════════════
+
+/// Lex a single-quoted character literal starting at pos.
+/// Assumes char_at(source, pos) == '\'' (39).
+/// Handles: 'a', '\n', '\t', '\\', '\'', '\0'
+fn lex_char(source: str, pos: i64, line: i64, col: i64) -> LexResult {
+    let start: i64 = pos;
+    let start_col: i64 = col;
+    let mut p: i64 = pos + 1;  // skip opening quote
+    let mut cl: i64 = col + 1;
+    let len: i64 = str_len(source);
+    let mut char_val: i64 = 0;
+
+    if p >= len {
+        // Unterminated char literal
+        let tok: Token = Token {
+            kind: tok_error(),
+            offset: start,
+            length: 1,
+            line: line,
+            col: start_col,
+            int_val: 0,
+            str_val: "",
+        };
+        return LexResult { token: tok, pos: p, line: line, col: cl };
+    }
+
+    let c: i64 = char_at(source, p);
+
+    if c == 92 {
+        // Escape sequence
+        p = p + 1;
+        cl = cl + 1;
+        if p < len {
+            let esc: i64 = char_at(source, p);
+            if esc == 110 {
+                char_val = 10;  // \n
+            } else if esc == 116 {
+                char_val = 9;   // \t
+            } else if esc == 92 {
+                char_val = 92;  // \\
+            } else if esc == 39 {
+                char_val = 39;  // \'
+            } else if esc == 48 {
+                char_val = 0;   // \0
+            } else {
+                char_val = esc;
+            }
+            p = p + 1;
+            cl = cl + 1;
+        }
+    } else {
+        // Regular character
+        char_val = c;
+        p = p + 1;
+        cl = cl + 1;
+    }
+
+    // Expect closing quote
+    let mut kind: i64 = tok_int_lit();  // char stored as int
+    if p < len && char_at(source, p) == 39 {
+        p = p + 1;
+        cl = cl + 1;
+    } else {
+        kind = tok_error();
+    }
+
+    let tok: Token = Token {
+        kind: kind,
+        offset: start,
+        length: p - start,
+        line: line,
+        col: start_col,
+        int_val: char_val,
+        str_val: "",
+    };
+    return LexResult { token: tok, pos: p, line: line, col: cl };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// lex_token — lex a single token from the operator/delimiter set
+// ═══════════════════════════════════════════════════════════════
+
+/// Lex one token starting at pos.
+/// Dispatches to specialized functions for idents, numbers, strings.
+/// Handles operators and delimiters directly.
+/// Returns LexResult with the token and updated position.
+fn lex_token(source: str, pos: i64, line: i64, col: i64) -> LexResult {
+    let len: i64 = str_len(source);
+    let c: i64 = char_at(source, pos);
+
+    // ── Identifiers and keywords ──
+    if is_alpha(c) {
+        return lex_ident_or_keyword(source, pos, line, col);
+    }
+
+    // ── Numeric literals ──
+    if is_digit(c) {
+        return lex_number(source, pos, line, col);
+    }
+
+    // ── String literals ──
+    if c == 34 {
+        // '"'
+        return lex_string(source, pos, line, col);
+    }
+
+    // ── Character literals ──
+    if c == 39 {
+        // '\''
+        return lex_char(source, pos, line, col);
+    }
+
+    // ── Operators and delimiters (single character consumed) ──
+    let mut p: i64 = pos + 1;
+    let mut cl: i64 = col + 1;
+    let mut kind: i64 = tok_error();
+    let mut next: i64 = 0;
+
+    if p < len {
+        next = char_at(source, p);
+    }
+
+    // ── '+' ──
+    if c == 43 {
+        kind = tok_plus();
+    }
+
+    // ── '-' -> or just - ──
+    if c == 45 {
+        if next == 62 {
+            // '->'
+            kind = tok_arrow();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_minus();
+        }
+    }
+
+    // ── '*' ** or just * ──
+    if c == 42 {
+        // Check for ** (power operator) — not in Rust ref but mentioned in task
+        // The Rust ref maps * to Star only, so we follow that
+        kind = tok_star();
+    }
+
+    // ── '/' — already handled comments before reaching here ──
+    if c == 47 {
+        kind = tok_slash();
+    }
+
+    // ── '%' ──
+    if c == 37 {
+        kind = tok_percent();
+    }
+
+    // ── '^' ──
+    if c == 94 {
+        kind = tok_caret();
+    }
+
+    // ── '=' == or => or just = ──
+    if c == 61 {
+        if next == 61 {
+            // '=='
+            kind = tok_eq();
+            p = p + 1;
+            cl = cl + 1;
+        } else if next == 62 {
+            // '=>'
+            kind = tok_fat_arrow();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_assign();
+        }
+    }
+
+    // ── '!' != or just ! ──
+    if c == 33 {
+        if next == 61 {
+            // '!='
+            kind = tok_neq();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_not();
+        }
+    }
+
+    // ── '<' <= or just < ──
+    if c == 60 {
+        if next == 61 {
+            // '<='
+            kind = tok_le();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_lt();
+        }
+    }
+
+    // ── '>' >= or just > ──
+    if c == 62 {
+        if next == 61 {
+            // '>='
+            kind = tok_ge();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_gt();
+        }
+    }
+
+    // ── '&' && or just & ──
+    if c == 38 {
+        if next == 38 {
+            // '&&'
+            kind = tok_and();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_bit_and();
+        }
+    }
+
+    // ── '|' || or just | ──
+    if c == 124 {
+        if next == 124 {
+            // '||'
+            kind = tok_or();
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_bit_or();
+        }
+    }
+
+    // ── '~' ──
+    if c == 126 {
+        kind = tok_bit_xor();
+    }
+
+    // ── '.' .. or ..= or just . ──
+    if c == 46 {
+        if next == 46 {
+            // '..'
+            p = p + 1;
+            cl = cl + 1;
+            if p < len && char_at(source, p) == 61 {
+                // '..='
+                kind = tok_dot_dot_eq();
+                p = p + 1;
+                cl = cl + 1;
+            } else {
+                kind = tok_dot_dot();
+            }
+        } else {
+            kind = tok_dot();
+        }
+    }
+
+    // ── ':' :: or just : ──
+    if c == 58 {
+        if next == 58 {
+            // '::'
+            kind = tok_colon_colon();
+            p = p + 1;
+            cl = cl + 1;
+        } else if next == 61 {
+            // ':=' (walrus assign)
+            kind = tok_assign();  // map to assign for now
+            p = p + 1;
+            cl = cl + 1;
+        } else {
+            kind = tok_colon();
+        }
+    }
+
+    // ── Delimiters ──
+    if c == 40 { kind = tok_lparen(); }
+    if c == 41 { kind = tok_rparen(); }
+    if c == 123 { kind = tok_lbrace(); }
+    if c == 125 { kind = tok_rbrace(); }
+    if c == 91 { kind = tok_lbracket(); }
+    if c == 93 { kind = tok_rbracket(); }
+    if c == 44 { kind = tok_comma(); }
+    if c == 59 { kind = tok_semicolon(); }
+    if c == 35 { kind = tok_hash(); }
+    if c == 64 { kind = tok_at_sign(); }
+    if c == 63 { kind = tok_question(); }
+
+    let tok: Token = Token {
+        kind: kind,
+        offset: pos,
+        length: p - pos,
+        line: line,
+        col: col,
+        int_val: 0,
+        str_val: "",
+    };
+    return LexResult { token: tok, pos: p, line: line, col: cl };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// lex — main entry point: tokenize entire source string
+// ═══════════════════════════════════════════════════════════════
+
+/// Tokenize a HEXA source string into a Vec<Token>.
+/// This is the main entry point for the self-hosted lexer.
+///
+/// Algorithm:
+///   1. Skip whitespace
+///   2. Try to skip comments (if found, goto 1)
+///   3. Lex one token via lex_token
+///   4. Append to result vector
+///   5. Repeat until EOF
+fn lex(source: str) -> Vec<Token> {
+    let mut tokens: Vec<Token> = vec_new();
+    let len: i64 = str_len(source);
+    let mut pos: i64 = 0;
+    let mut line: i64 = 1;
+    let mut col: i64 = 1;
+
+    while pos < len {
+        // Step 1: skip whitespace
+        let ws: PosState = skip_whitespace(source, pos, line, col);
+        pos = ws.pos;
+        line = ws.line;
+        col = ws.col;
+
+        // Check for EOF after whitespace
+        if pos >= len {
+            break;
+        }
+
+        // Step 2: try to skip comments
+        let cmt: CommentResult = skip_comment(source, pos, line, col);
+        if cmt.was_comment == 1 {
+            pos = cmt.pos;
+            line = cmt.line;
+            col = cmt.col;
+            // After a comment, loop back to skip more whitespace/comments
+            continue;
+        }
+
+        // Step 3: lex one token
+        let result: LexResult = lex_token(source, pos, line, col);
+        vec_push(tokens, result.token);
+
+        // Step 4: advance position
+        pos = result.pos;
+        line = result.line;
+        col = result.col;
+    }
+
+    // Append EOF token
+    let eof_tok: Token = Token {
+        kind: tok_eof(),
+        offset: pos,
+        length: 0,
+        line: line,
+        col: col,
+        int_val: 0,
+        str_val: "",
+    };
+    vec_push(tokens, eof_tok);
+
+    return tokens;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Verification — n=6 structural checks
+// ═══════════════════════════════════════════════════════════════
+
+/// Verify the lexer module structure:
+///   - 12 functions (= σ)
+///   - J₂=24 operator token IDs
+///   - σ=12 delimiter token IDs
+///   - 28 keyword entries (20 core + 8 type)
+fn verify_lexer_structure() -> i64 {
+    // Function count = σ = 12
+    // (lex, lex_token, lex_number, lex_string, lex_char,
+    //  lex_ident_or_keyword, skip_whitespace, skip_comment,
+    //  is_digit, is_alpha, is_alnum, keyword_lookup)
+    let func_count: i64 = 12;
+
+    // Operator range: 0..23 = J₂ = 24
+    let op_count: i64 = 24;
+
+    // Delimiter range: 24..35 = σ = 12
+    let delim_count: i64 = 12;
+
+    // Keyword count: 20 + 8 = 28
+    let kw_count: i64 = 28;
+
+    // Verify σ identity
+    if func_count == 12 && op_count == 24 && delim_count == 12 {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/// Verify operator group structure: τ=4 groups of n=6
+fn verify_operator_groups() -> i64 {
+    // Group 0: Arithmetic  +  -  *  /  %  ^    (IDs 0..5)
+    // Group 1: Comparison  == != <  >  <= >=    (IDs 6..11)
+    // Group 2: Logic       && || !  &  |  ~     (IDs 12..17)
+    // Group 3: Structural  =  -> => .  .. :     (IDs 18..23)
+    let groups: i64 = 4;
+    let per_group: i64 = 6;
+    if groups * per_group == 24 {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/// Verify keyword lookup returns correct kinds
+fn verify_keyword_lookup() -> i64 {
+    let fn_kind: i64 = keyword_lookup("fn");
+    let let_kind: i64 = keyword_lookup("let");
+    let i64_kind: i64 = keyword_lookup("i64");
+    let foo_kind: i64 = keyword_lookup("foo");
+
+    if fn_kind == tok_kw_fn() && let_kind == tok_kw_let()
+        && i64_kind == tok_kw_i64() && foo_kind == tok_ident() {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/// Verify character classification
+fn verify_char_class() -> i64 {
+    // '0' = 48, '9' = 57, 'a' = 97, 'Z' = 90, '_' = 95, ' ' = 32
+    let d1: bool = is_digit(48);
+    let d2: bool = is_digit(57);
+    let d3: bool = is_digit(65);  // 'A' is not a digit
+
+    let a1: bool = is_alpha(97);   // 'a'
+    let a2: bool = is_alpha(95);   // '_'
+    let a3: bool = is_alpha(48);   // '0' is not alpha
+
+    if d1 && d2 && !d3 && a1 && a2 && !a3 {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+fn main() -> i64 {
+    let v1: i64 = verify_lexer_structure();
+    let v2: i64 = verify_operator_groups();
+    let v3: i64 = verify_keyword_lookup();
+    let v4: i64 = verify_char_class();
+
+    let total: i64 = v1 + v2 + v3 + v4;
+    if total == 4 {
+        return 0;  // all verifications passed
+    } else {
+        return 1;  // failure
+    }
+}

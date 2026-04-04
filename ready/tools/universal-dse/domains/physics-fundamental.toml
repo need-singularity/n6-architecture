@@ -1,0 +1,410 @@
+# =============================================================
+# Physics Fundamental DSE Domain Definition
+# 궁극의 기초 물리학 아키텍처 — 양자역학 + 상대성 + 열역학 + 통계역학 + 전자기학 + 핵물리
+# n=6 기반 물리학 통합: sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5, J2(6)=24
+# Total raw combos: 6x6x7x6x5 = 7,560 (pre-filter)
+# =============================================================
+
+[meta]
+name = "physics-fundamental"
+desc = "Ultimate Fundamental Physics DSE — QM + GR + Thermo + StatMech + EM + Nuclear"
+levels = ["Framework", "Symmetry", "Interaction", "Observable", "Experiment"]
+vision = "n=6 기반 궁극의 물리학 통합 — 양자역학 + 상대성 + 열역학 + 통계역학 + 전자기학 + 핵물리"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Framework (이론 체계) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Framework"
+
+[[candidate]]
+level  = 0
+id     = "QuantumMech"
+label  = "양자역학 (Hilbert space, n=6 양자수 세트)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "n=6 quantum number set, Hilbert space dim, Planck h, 5/6 EXACT"
+
+[[candidate]]
+level  = 0
+id     = "GeneralRel"
+label  = "일반상대성 (Riemann 텐서, tau=4 시공간)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "tau=4 spacetime dims EXACT, Einstein tensor 10=sigma-phi components, Ricci 4x4"
+
+[[candidate]]
+level  = 0
+id     = "StatMech"
+label  = "통계역학 (Boltzmann, ln(2) 자유도)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "ln(2) freedom EXACT, Boltzmann k_B, phi=2 microstate partition"
+
+[[candidate]]
+level  = 0
+id     = "QFT_Standard"
+label  = "양자장론 + 표준모형 (sigma=12 게이지 보존)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "sigma=12 gauge bosons EXACT, n=6 quarks EXACT, tau=4 forces, 4/4 EXACT"
+
+[[candidate]]
+level  = 0
+id     = "StringM_Theory"
+label  = "끈이론/M이론 (10D+1=sigma-mu=11)"
+n6     = 0.83
+perf   = 0.70
+power  = 0.40
+cost   = 0.35
+notes  = "sigma-mu=11 dims EXACT, sigma-phi=10 string dims, J2=24 compactification"
+
+[[candidate]]
+level  = 0
+id     = "ThermoDyn"
+label  = "열역학 (n=6 상전이, n=6 열역학 포텐셜)"
+n6     = 0.83
+perf   = 0.75
+power  = 0.70
+cost   = 0.60
+notes  = "n=6 thermodynamic potentials EXACT, tau=4 laws of thermodynamics"
+
+# =============================================================
+# Level 1: Symmetry (대칭 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Symmetry"
+
+[[candidate]]
+level  = 1
+id     = "SU3xSU2xU1"
+label  = "표준모형 게이지 대칭 (3+2+1=n=6)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.50
+notes  = "3+2+1=n=6 EXACT, sigma=12 generators, most experimentally verified"
+
+[[candidate]]
+level  = 1
+id     = "E6_GUT"
+label  = "E₆ 대통일 (rank 6=n)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.45
+cost   = 0.35
+notes  = "rank=6=n EXACT, 78 generators, exceptional Lie group"
+
+[[candidate]]
+level  = 1
+id     = "SO10_Spinor"
+label  = "SO(10) 스피너 표현 (sigma-phi=10)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.50
+cost   = 0.40
+notes  = "sigma-phi=10 EXACT, 16-dim spinor, proton decay prediction"
+
+[[candidate]]
+level  = 1
+id     = "Poincare"
+label  = "푸앵카레 대칭 (시공간, sigma-phi=10 생성원)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "sigma-phi=10 generators EXACT, tau=4 translations, n=6 Lorentz"
+
+[[candidate]]
+level  = 1
+id     = "Conformal"
+label  = "등각 대칭 CFT (sopfr=5 컨포멀 차원)"
+n6     = 0.67
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "sopfr=5 conformal dim, 15 generators, AdS/CFT link"
+
+[[candidate]]
+level  = 1
+id     = "SUSY_N2"
+label  = "N=2 초대칭 (phi=2)"
+n6     = 0.67
+perf   = 0.70
+power  = 0.45
+cost   = 0.35
+notes  = "phi=2 EXACT, doubles particle spectrum, Seiberg-Witten exact"
+
+# =============================================================
+# Level 2: Interaction (상호작용) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Interaction"
+
+[[candidate]]
+level  = 2
+id     = "StrongQCD"
+label  = "강한 상호작용 QCD (sigma-tau=8 글루온)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "sigma-tau=8 gluons EXACT, n=6 quarks EXACT, SU(3) color"
+
+[[candidate]]
+level  = 2
+id     = "ElectroWeak"
+label  = "전약 통합 (sin²θ_W≈3/13)"
+n6     = 0.67
+perf   = 0.90
+power  = 0.60
+cost   = 0.50
+notes  = "tau=4 gauge bosons (W+,W-,Z,gamma), phi=2 SU(2), verified at LEP"
+
+[[candidate]]
+level  = 2
+id     = "Gravity_GR"
+label  = "중력 일반상대론 (tau=4 시공간)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "tau=4 spacetime EXACT, mu=1 graviton (spin-2), tested by LIGO"
+
+[[candidate]]
+level  = 2
+id     = "Higgs_SSB"
+label  = "힉스 대칭 깨짐 (mu=1 힉스장)"
+n6     = 0.67
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "mu=1 Higgs boson EXACT, tau=4 components, 125 GeV confirmed"
+
+[[candidate]]
+level  = 2
+id     = "DarkSector"
+label  = "암흑 섹터 DM+DE (phi=2)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.40
+cost   = 0.30
+notes  = "phi=2 dark components EXACT, 95% of universe, undetected directly"
+
+[[candidate]]
+level  = 2
+id     = "NuclearForce"
+label  = "핵력 유카와 (sopfr=5 중간자 타입)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "sopfr=5 meson types, phi=2 nucleons, nuclear binding"
+
+[[candidate]]
+level  = 2
+id     = "Unification"
+label  = "대통일력 (n=6 게이지 결합)"
+n6     = 1.00
+perf   = 0.65
+power  = 0.40
+cost   = 0.30
+notes  = "n=6 gauge couplings EXACT, GUT scale 10^16 GeV, proton decay"
+
+# =============================================================
+# Level 3: Observable (관측량) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Observable"
+
+[[candidate]]
+level  = 3
+id     = "MassSpectrum"
+label  = "질량 스펙트럼 (m_p/m_e≈6pi^5)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "m_p/m_e=1836.15≈6*pi^5=1836.12, n=6 quark masses, tau=4 generations?"
+
+[[candidate]]
+level  = 3
+id     = "MixingAngles"
+label  = "혼합각 CKM+PMNS (n=6 각도)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "n=6 mixing angles (3 CKM + 3 PMNS), tau=4 CP phases"
+
+[[candidate]]
+level  = 3
+id     = "CouplingConst"
+label  = "결합 상수 (alpha=1/137, alpha_s)"
+n6     = 0.83
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "sigma-tau=8 key constants, running couplings, QED most precise"
+
+[[candidate]]
+level  = 3
+id     = "CrossSection"
+label  = "산란 단면적 (J2=24 채널)"
+n6     = 0.83
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "J2=24 scattering channels EXACT, Feynman diagrams, LHC data"
+
+[[candidate]]
+level  = 3
+id     = "DecayRate"
+label  = "붕괴율 (tau=4 붕괴 모드)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.55
+cost   = 0.45
+notes  = "tau=4 decay modes EXACT, lifetime measurements, CP violation"
+
+[[candidate]]
+level  = 3
+id     = "CosmicParam"
+label  = "우주론 파라미터 ΛCDM 6개"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.45
+notes  = "n=6 ΛCDM parameters EXACT (Ωb,Ωc,H0,ns,As,τ_reion), Planck confirmed"
+
+# =============================================================
+# Level 4: Experiment (실험 장치) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Experiment"
+
+[[candidate]]
+level  = 4
+id     = "ColliderLHC"
+label  = "입자 가속기 LHC/FCC (sigma=12 TeV)"
+n6     = 0.80
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "sigma=12 TeV design, tau=4 main detectors, highest energy frontier"
+
+[[candidate]]
+level  = 4
+id     = "NeutrinoObs"
+label  = "뉴트리노 관측소 JUNO/DUNE"
+n6     = 0.60
+perf   = 0.80
+power  = 0.60
+cost   = 0.45
+notes  = "n/phi=3 neutrino flavors, mass hierarchy, CP violation search"
+
+[[candidate]]
+level  = 4
+id     = "GravWaveDet"
+label  = "중력파 검출 LIGO/LISA (phi=2 팔)"
+n6     = 0.60
+perf   = 0.85
+power  = 0.55
+cost   = 0.40
+notes  = "phi=2 arms EXACT, tau=4 km arms, multi-messenger astronomy"
+
+[[candidate]]
+level  = 4
+id     = "CMB_Satellite"
+label  = "CMB 위성 LiteBIRD (sigma=12 주파수밴드)"
+n6     = 0.80
+perf   = 0.80
+power  = 0.65
+cost   = 0.50
+notes  = "sigma=12 frequency bands, n=6 ΛCDM params, inflation test 2032"
+
+[[candidate]]
+level  = 4
+id     = "DarkMatterDet"
+label  = "암흑물질 검출 XENON (sigma-tau=8 채널)"
+n6     = 0.60
+perf   = 0.70
+power  = 0.50
+cost   = 0.35
+notes  = "sigma-tau=8 detection channels, direct detection, null results so far"
+
+[[candidate]]
+level  = 4
+id     = "ExperimentN6"
+label  = "n=6 쿼크 생성 가속기 (n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "quarks=6=n EXACT, sigma=12 TeV energy, tau=4 main detectors, n=6 quark flavors confirmed"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# StringM_Theory requires E6_GUT or SO10_Spinor (needs GUT gauge group)
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "StringM_Theory"
+then_level = 1
+then_ids   = "E6_GUT,SO10_Spinor"
+
+# ThermoDyn incompatible with StringM_Theory (scale mismatch)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "ThermoDyn"
+then_level = 0
+then_ids   = "StringM_Theory"
+
+# Gravity_GR requires GeneralRel (needs GR framework)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Gravity_GR"
+then_level = 0
+then_ids   = "GeneralRel"
+
+# DarkSector requires CosmicParam (needs cosmological observables)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "DarkSector"
+then_level = 3
+then_ids   = "CosmicParam"
+
+# Unification requires E6_GUT or SO10_Spinor (needs GUT symmetry)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Unification"
+then_level = 1
+then_ids   = "E6_GUT,SO10_Spinor"
+
+# ColliderLHC incompatible with DarkSector alone (colliders don't detect dark matter directly)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "DarkMatterDet"
+then_level = 2
+then_ids   = "StrongQCD"

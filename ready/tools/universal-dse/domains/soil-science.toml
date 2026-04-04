@@ -1,0 +1,357 @@
+# =============================================================
+# Soil Science DSE Domain Definition
+# Soil analysis & management — mineral to application
+# n=6: 6 soil horizons (O/A/E/B/C/R), σ=12 nutrient elements, pH=6 optimal
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "soil-science"
+desc = "Soil Science Architecture DSE (mineral/organic/water/biology/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Mineral (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Mineral"
+
+[[candidate]]
+level = 0
+id = "Clay-Montmorillonite"
+label = "Montmorillonite Clay (2:1 sheet, n=6 Å interlayer, high CEC)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Kaolinite"
+label = "Kaolinite (1:1 clay, 6-ring SiO₄ sheet, low shrink-swell)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Sandy-Quartz"
+label = "Sandy Quartz (SiO₂, Si CN=τ=4, high drainage, low nutrient)"
+n6 = 1.00
+perf = 0.70
+power = 0.88
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Volcanic-Allophane"
+label = "Volcanic Allophane (amorphous, n=6 nm particle, high P-fixation)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Loam-Mixed"
+label = "Loam Mixed (sand+silt+clay balanced, σ=12 mineral species, ideal)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 0
+id = "Laterite-FeAl"
+label = "Laterite Fe/Al Oxide (tropical weathered, 6 m depth, low fertility)"
+n6 = 1.00
+perf = 0.72
+power = 0.75
+cost = 0.80
+
+# ============================================================
+# Level 1: Organic (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Organic"
+
+[[candidate]]
+level = 1
+id = "Humus"
+label = "Humus (fully decomposed, C₆ ring humic acids, stable, fertile)"
+n6 = 1.00
+perf = 0.90
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Compost"
+label = "Compost (aerobic decay, n=6 month maturation, nutrient-rich)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Peat"
+label = "Peat (anaerobic accumulation, 6 m depth, acidic, carbon store)"
+n6 = 1.00
+perf = 0.78
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Biochar"
+label = "Biochar (pyrolyzed C₆ ring, σ=12 century persistence, carbon sequester)"
+n6 = 1.00
+perf = 0.88
+power = 0.88
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "Green-Manure"
+label = "Green Manure (cover crop, n=6 species rotation, N-fixing)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Vermicompost"
+label = "Vermicompost (earthworm, 6 enzyme pathways, microbe-rich)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.60
+
+# ============================================================
+# Level 2: Water (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Water"
+
+[[candidate]]
+level = 2
+id = "Drip-Irrigation"
+label = "Drip Irrigation (precision, n=6 L/hr emitter, 90% efficiency)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Rainfed"
+label = "Rainfed Natural (precipitation, 6 wet months, no infrastructure)"
+n6 = 1.00
+perf = 0.65
+power = 0.95
+cost = 0.95
+
+[[candidate]]
+level = 2
+id = "Subsurface-Drip"
+label = "Subsurface Drip (buried, σ=12 inch depth, evaporation-free)"
+n6 = 1.00
+perf = 0.95
+power = 0.78
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Flood-Basin"
+label = "Flood/Basin (gravity, 6 ha field units, paddy rice, simple)"
+n6 = 1.00
+perf = 0.60
+power = 0.70
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "Sprinkler-Center"
+label = "Center Pivot Sprinkler (circular, n=6 tower span, large-scale)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Sensor-Smart"
+label = "Sensor-Based Smart (IoT moisture, σ=12 sensors/field, AI-scheduled)"
+n6 = 1.00
+perf = 0.90
+power = 0.82
+cost = 0.45
+
+# ============================================================
+# Level 3: Biology (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Biology"
+
+[[candidate]]
+level = 3
+id = "Mycorrhizal"
+label = "Mycorrhizal Fungi (AM/ECM, n=6 hyphal networks, P-uptake boost)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Rhizobium"
+label = "Rhizobium Inoculant (N₂ fixation, 6 nod genes, legume symbiosis)"
+n6 = 1.00
+perf = 0.88
+power = 0.88
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Trichoderma"
+label = "Trichoderma Biocontrol (antifungal, n=6 enzyme arsenal, disease suppress)"
+n6 = 1.00
+perf = 0.85
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Earthworm"
+label = "Earthworm Community (burrowing, 6 species functional groups, tilth)"
+n6 = 1.00
+perf = 0.82
+power = 0.90
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Bacillus-PGPR"
+label = "Bacillus PGPR (plant growth promoting, σ=12 metabolite types, broad)"
+n6 = 1.00
+perf = 0.87
+power = 0.80
+cost = 0.72
+
+[[candidate]]
+level = 3
+id = "Microbiome-Synth"
+label = "Synthetic Microbiome (engineered consortium, n=6 species designed)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.35
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "Broadacre-Cereal"
+label = "Broadacre Cereal (wheat/corn, 6 rotation crops, staple food)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Horticulture"
+label = "Horticulture (vegetable/fruit, σ=12 crop cycles/year, intensive)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Agroforestry"
+label = "Agroforestry (tree+crop, n=6 canopy layers, carbon+food)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Restoration"
+label = "Degraded Land Restoration (mine/desert, 6 year recovery plan)"
+n6 = 1.00
+perf = 0.78
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Vineyard"
+label = "Vineyard/Perennial (grapevine, pH=6 optimal, terroir-driven)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Carbon-Farming"
+label = "Carbon Farming (sequestration, n=6 practice credits, regenerative)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Peat only for restoration or carbon farming
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "Peat"
+then_level = 4
+then_ids = ["Restoration", "Carbon-Farming"]
+
+# Synthetic microbiome requires sensor-smart or subsurface drip
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Microbiome-Synth"
+then_level = 2
+then_ids = ["Subsurface-Drip", "Sensor-Smart", "Drip-Irrigation"]
+
+# Flood irrigation only for broadacre or restoration
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Flood-Basin"
+then_level = 4
+then_ids = ["Broadacre-Cereal", "Restoration"]
+
+# Rhizobium best with green manure or broadacre
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Rhizobium"
+then_level = 4
+then_ids = ["Broadacre-Cereal", "Agroforestry", "Carbon-Farming"]

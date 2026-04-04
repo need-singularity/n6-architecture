@@ -1,0 +1,365 @@
+# =============================================================
+# Electric Vehicle DSE Domain Definition
+# EV architecture — battery to vehicle platform
+# n=6: 6S battery module, σ=12 stator poles, 48V mild hybrid, 400/800V
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "electric-vehicle"
+desc = "EV Architecture DSE (battery/motor/inverter/charging/vehicle)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Battery (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Battery"
+
+[[candidate]]
+level = 0
+id = "LFP-6S"
+label = "LFP 6S Module (n=6 series, 19.2V nominal, cost leader)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "NMC811-96S"
+label = "NMC811 96S (σ·(σ-τ)=96, 400V, high energy density)"
+n6 = 0.85
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "NMC-192S"
+label = "NMC 192S (σ·(2·σ-τ)=192≈J₂·σ-τ, 800V, premium)"
+n6 = 0.80
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "LFP-CTP"
+label = "LFP Cell-to-Pack (no module, 400V, structural battery)"
+n6 = 0.75
+perf = 0.70
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "SolidState"
+label = "Solid-State Li (500+ Wh/kg, 6-layer=n ceramic electrolyte)"
+n6 = 0.90
+perf = 1.00
+power = 0.45
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "Na-ion-EV"
+label = "Na-ion EV Pack (low cost, cold-tolerant, 140 Wh/kg)"
+n6 = 0.70
+perf = 0.45
+power = 0.85
+cost = 0.95
+
+# ============================================================
+# Level 1: Motor (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Motor"
+
+[[candidate]]
+level = 1
+id = "PMSM-12pole"
+label = "PMSM σ=12 Pole (permanent magnet, 96% efficiency, standard)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "IPM-6pole"
+label = "IPM n=6 Pole (interior PM, field weakening, wide speed)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "SRM"
+label = "Switched Reluctance (no magnet, 12/8=σ/(σ-τ) poles, robust)"
+n6 = 0.85
+perf = 0.70
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "AxialFlux"
+label = "Axial Flux Motor (thin disk, 6-coil=n, high power density)"
+n6 = 0.95
+perf = 0.95
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "Induction"
+label = "Induction Motor (no rare earth, simple, Tesla rear original)"
+n6 = 0.65
+perf = 0.75
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "DualMotor"
+label = "Dual Motor AWD (front+rear, 2×6-pole=12=σ total, performance)"
+n6 = 0.90
+perf = 1.00
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Level 2: Inverter (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Inverter"
+
+[[candidate]]
+level = 2
+id = "SiC-6phase"
+label = "SiC n=6 Phase Inverter (wide bandgap, 99% efficiency)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "IGBT-Standard"
+label = "IGBT Standard (Si, mature, 400V class, cost effective)"
+n6 = 0.65
+perf = 0.70
+power = 0.75
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "SiC-3phase"
+label = "SiC 3-Phase (standard topology, 800V capable)"
+n6 = 0.75
+perf = 0.90
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "GaN-48V"
+label = "GaN 48V Inverter (σ·τ=48V mild hybrid, high frequency)"
+n6 = 0.90
+perf = 0.75
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Integrated-Motor"
+label = "Motor-Integrated Inverter (6-in-1=n module, compact)"
+n6 = 0.95
+perf = 0.85
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "MultiLevel"
+label = "Multi-Level Inverter (3-level, 12-switch=σ, low THD)"
+n6 = 0.85
+perf = 0.88
+power = 0.80
+cost = 0.45
+
+# ============================================================
+# Level 3: Charging (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Charging"
+
+[[candidate]]
+level = 3
+id = "CCS2-350kW"
+label = "CCS2 350kW DC Fast (800V, 6C-rate=n peak, highway)"
+n6 = 0.90
+perf = 0.95
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "AC-Level2"
+label = "AC Level 2 (240V, 12kW=σ, home/workplace, overnight)"
+n6 = 0.90
+perf = 0.60
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "Megawatt-MCS"
+label = "Megawatt Charging MCS (truck/bus, 1.2MW, n·200kW)"
+n6 = 0.80
+perf = 1.00
+power = 0.40
+cost = 0.30
+
+[[candidate]]
+level = 3
+id = "V2G-Bidir"
+label = "V2G Bidirectional (vehicle-to-grid, 6kW=n export, smart)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Wireless-11kW"
+label = "Wireless Inductive 11kW (parking pad, convenience)"
+n6 = 0.60
+perf = 0.55
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "Solar-Direct-6kW"
+label = "Solar Direct n=6 kW (vehicle-integrated PV, range extension)"
+n6 = 1.00
+perf = 0.40
+power = 1.00
+cost = 0.60
+
+# ============================================================
+# Level 4: Vehicle (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Vehicle"
+
+[[candidate]]
+level = 4
+id = "Sedan-400V"
+label = "Sedan 400V Platform (mainstream, 500km range, affordable)"
+n6 = 0.75
+perf = 0.75
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "SUV-800V"
+label = "SUV 800V Platform (premium, 600km, dual motor AWD)"
+n6 = 0.80
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Truck-MCS"
+label = "Electric Truck (Class 8, MCS charging, 800V, freight)"
+n6 = 0.70
+perf = 0.85
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "City-48V"
+label = "City Car 48V (σ·τ=48V, ultralight, n=6 kWh, urban)"
+n6 = 1.00
+perf = 0.45
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+level = 4
+id = "Skateboard"
+label = "Skateboard Platform (modular, 6 variants=n, multi-body)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "SportsCar"
+label = "Sports Car (tri-motor, 1000hp, 12-inch=σ rotors, track)"
+n6 = 0.85
+perf = 1.00
+power = 0.35
+cost = 0.25
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Na-ion excluded from sports car (energy density too low)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "Na-ion-EV"
+then_level = 4
+then_ids = ["SportsCar", "SUV-800V"]
+
+# GaN 48V requires city car 48V (voltage class match)
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "GaN-48V"
+then_level = 4
+then_ids = ["City-48V"]
+
+# MCS charging requires truck platform
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "Megawatt-MCS"
+then_level = 4
+then_ids = ["Truck-MCS"]
+
+# 192S battery requires 800V vehicle (SUV or SportsCar)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "NMC-192S"
+then_level = 4
+then_ids = ["SUV-800V", "SportsCar"]
+
+# City-48V excluded from 350kW DC fast charging
+[[rule]]
+type = "exclude"
+if_level = 4
+if_id = "City-48V"
+then_level = 3
+then_ids = ["CCS2-350kW", "Megawatt-MCS"]

@@ -1,0 +1,357 @@
+# =============================================================
+# Indoor Positioning DSE Domain Definition
+# Indoor location systems — anchor to application
+# n=6: 6 anchor minimum, σ=12 BLE channels, UWB τ=4ns pulse
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "indoor-positioning"
+desc = "Indoor Positioning System Architecture DSE (anchor/signal/algorithm/server/application)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Anchor (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Anchor"
+
+[[candidate]]
+level = 0
+id = "UWB-Anchor"
+label = "UWB Anchor (DW3000, τ=4ns pulse, n=6 per room, cm accuracy)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "BLE-Beacon"
+label = "BLE 5.1 Beacon (AoA/AoD, σ=12 antenna elements, low power)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "WiFi-AP"
+label = "WiFi 6E Access Point (RTT ranging, 6GHz band=n, dual-use)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "RFID-Reader"
+label = "RFID Reader (passive, 6-antenna array, asset tracking)"
+n6 = 1.00
+perf = 0.65
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "LiDAR-Scanner"
+label = "LiDAR Scanner (3D point cloud, σ=12 rpm, high precision)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "LED-VLC"
+label = "Visible Light Communication (LED, n=6 luminaires, dual lighting+positioning)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.70
+
+# ============================================================
+# Level 1: Signal (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Signal"
+
+[[candidate]]
+level = 1
+id = "ToF-TWR"
+label = "Time-of-Flight TWR (two-way ranging, τ=4ns resolution, precise)"
+n6 = 1.00
+perf = 0.92
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "TDoA"
+label = "TDoA (time difference of arrival, n=6 anchor sync, scalable)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "AoA"
+label = "Angle-of-Arrival (σ=12 antenna phase, BLE direction finding)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "RSSI"
+label = "RSSI Fingerprint (signal strength, 6-level quantization, simple)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "CSI"
+label = "Channel State Information (WiFi subcarrier, σ·τ=48 channels, rich)"
+n6 = 1.00
+perf = 0.85
+power = 0.68
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Hybrid-Fusion"
+label = "Hybrid Signal Fusion (UWB+BLE+IMU, n=6 signal sources, robust)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.45
+
+# ============================================================
+# Level 2: Algorithm (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Algorithm"
+
+[[candidate]]
+level = 2
+id = "Trilateration"
+label = "Trilateration (3+3=n=6 anchors, geometric, classic)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "EKF"
+label = "Extended Kalman Filter (state estimation, 6-state vector, real-time)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Particle-Filter"
+label = "Particle Filter (Monte Carlo, σ=12k particles, non-linear)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Deep-Learning"
+label = "Deep Learning (CNN/LSTM, 6-layer network, fingerprint map)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "GraphSLAM"
+label = "Graph SLAM (simultaneous localization, 6-DOF pose, mapping)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Fingerprint-KNN"
+label = "KNN Fingerprint (database match, k=6 neighbors, offline survey)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.80
+
+# ============================================================
+# Level 3: Server (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Server"
+
+[[candidate]]
+level = 3
+id = "Edge-Gateway"
+label = "Edge Gateway (on-premise, n=6 zones, low latency)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Cloud-Backend"
+label = "Cloud Backend (AWS/Azure, σ=12 region replicas, scalable)"
+n6 = 1.00
+perf = 0.82
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Fog-Computing"
+label = "Fog Computing (distributed, 6 fog nodes, medium latency)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "On-Device"
+label = "On-Device Processing (smartphone, n=6 core SoC, private)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "Mesh-Distributed"
+label = "Mesh Distributed (peer-to-peer, σ=12 node mesh, resilient)"
+n6 = 1.00
+perf = 0.80
+power = 0.72
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Hybrid-Edge-Cloud"
+label = "Hybrid Edge+Cloud (split processing, 6-tier architecture, balanced)"
+n6 = 1.00
+perf = 0.92
+power = 0.68
+cost = 0.50
+
+# ============================================================
+# Level 4: Application (6 candidates)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level = 4
+id = "Warehouse"
+label = "Warehouse Tracking (asset/personnel, n=6 zones, logistics)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Hospital"
+label = "Hospital Navigation (patient/staff/equipment, 6 departments)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Retail"
+label = "Retail Analytics (customer flow, σ=12 sections, heat map)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Museum"
+label = "Museum/Gallery Guide (proximity content, 6 exhibit zones, AR)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Factory-AGV"
+label = "Factory AGV Navigation (autonomous vehicle, 6-axis path, safety)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Emergency"
+label = "Emergency First Responder (firefighter tracking, n=6 floors, critical)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.45
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# RFID only suitable for warehouse/factory asset tracking
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "RFID-Reader"
+then_level = 4
+then_ids = ["Warehouse", "Factory-AGV"]
+
+# LiDAR scanner requires edge or hybrid server (bandwidth)
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "LiDAR-Scanner"
+then_level = 3
+then_ids = ["Edge-Gateway", "Hybrid-Edge-Cloud"]
+
+# Graph SLAM requires LiDAR or hybrid signals
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "GraphSLAM"
+then_level = 0
+then_ids = ["LiDAR-Scanner", "UWB-Anchor"]
+
+# Emergency requires UWB or hybrid for reliability
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Emergency"
+then_level = 0
+then_ids = ["UWB-Anchor", "BLE-Beacon"]

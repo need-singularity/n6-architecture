@@ -1,0 +1,467 @@
+# =============================================================
+# MUSIC-RHYTHM DSE Domain Definition
+# 박자/리듬/음악 구조의 n=6 정합 탐색
+# 12 semitones = sigma, 6/8 compound = n, 4/4 = tau
+# Guitar 6 strings, pentatonic 5 = sopfr, 24fps = J2
+# Total raw combos: 8×8×7×6×6 = 16,128
+# =============================================================
+
+[meta]
+name = "music-rhythm"
+desc = "Music & Rhythm DSE — n=6 in temporal/harmonic/structural patterns"
+levels = ["TimeSignature", "Scale", "Instrument", "Production", "Perception"]
+vision = "음악의 시간 구조(박자)와 화성 구조(음계)가 n=6 산술에 수렴하는지 탐색"
+
+[scoring]
+n6    = 0.35
+perf  = 0.25
+power = 0.25
+cost  = 0.15
+
+# =============================================================
+# Level 0: TimeSignature (박자/시간 구조) -- 8 candidates
+# =============================================================
+[[level]]
+name = "TimeSignature"
+
+[[candidate]]
+level  = 0
+id     = "TS_6_8"
+label  = "6/8 Compound Duple"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.90
+notes  = "6 eighth-notes per bar = n EXACT. Compound duple = phi groups of n/phi. Most natural compound meter."
+
+[[candidate]]
+level  = 0
+id     = "TS_4_4"
+label  = "4/4 Common Time"
+n6     = 0.80
+perf   = 1.00
+power  = 1.00
+cost   = 1.00
+notes  = "4 beats = tau(6) EXACT. Most universal meter. 80%+ of popular music."
+
+[[candidate]]
+level  = 0
+id     = "TS_3_4"
+label  = "3/4 Waltz"
+n6     = 0.80
+perf   = 0.70
+power  = 0.70
+cost   = 0.85
+notes  = "3 beats = n/phi EXACT. Triple meter. Waltz, minuet, sarabande."
+
+[[candidate]]
+level  = 0
+id     = "TS_2_4"
+label  = "2/4 March"
+n6     = 0.70
+perf   = 0.75
+power  = 0.80
+cost   = 0.90
+notes  = "2 beats = phi(6) EXACT. Simplest duple. March, polka."
+
+[[candidate]]
+level  = 0
+id     = "TS_12_8"
+label  = "12/8 Compound Quadruple"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "12 eighth-notes = sigma(6) EXACT. Blues, gospel, slow rock. tau groups of n/phi."
+
+[[candidate]]
+level  = 0
+id     = "TS_5_4"
+label  = "5/4 Asymmetric"
+n6     = 0.50
+perf   = 0.60
+power  = 0.50
+cost   = 0.60
+notes  = "5 = sopfr(6). Take Five (Brubeck). Asymmetric = 2+3 or 3+2 = phi+(n/phi)."
+
+[[candidate]]
+level  = 0
+id     = "TS_7_8"
+label  = "7/8 Aksak"
+n6     = 0.50
+perf   = 0.55
+power  = 0.45
+cost   = 0.55
+notes  = "7 = sigma-sopfr. Balkan rhythm. 2+2+3 or 3+2+2 groupings."
+
+[[candidate]]
+level  = 0
+id     = "TS_POLY_2_3"
+label  = "Polyrhythm 2:3"
+n6     = 1.00
+perf   = 0.75
+power  = 0.90
+cost   = 0.70
+notes  = "2:3 = phi:n/phi. LCM=6=n. Most fundamental polyrhythm. African, Cuban, jazz origins."
+
+# =============================================================
+# Level 1: Scale (음계 구조) -- 8 candidates
+# =============================================================
+[[level]]
+name = "Scale"
+
+[[candidate]]
+level  = 1
+id     = "SC_CHROMATIC"
+label  = "Chromatic 12-tone"
+n6     = 1.00
+perf   = 0.80
+power  = 0.90
+cost   = 0.95
+notes  = "12 semitones = sigma(6) EXACT. Equal temperament. Circle of fifths = 12 steps."
+
+[[candidate]]
+level  = 1
+id     = "SC_PENTA"
+label  = "Pentatonic 5-note"
+n6     = 0.90
+perf   = 0.85
+power  = 0.80
+cost   = 1.00
+notes  = "5 notes = sopfr(6) EXACT. Universal scale across all cultures. Oldest known."
+
+[[candidate]]
+level  = 1
+id     = "SC_DIATONIC"
+label  = "Diatonic 7-note"
+n6     = 0.70
+perf   = 0.90
+power  = 0.85
+cost   = 0.95
+notes  = "7 notes = sigma-sopfr. Major/minor scales. Western music foundation."
+
+[[candidate]]
+level  = 1
+id     = "SC_BLUES"
+label  = "Blues 6-note"
+n6     = 1.00
+perf   = 0.80
+power  = 0.85
+cost   = 0.90
+notes  = "6 notes = n EXACT (penta + blue note). 12-bar blues = sigma bars."
+
+[[candidate]]
+level  = 1
+id     = "SC_WHOLETONE"
+label  = "Whole-tone 6-note"
+n6     = 1.00
+perf   = 0.55
+power  = 0.60
+cost   = 0.80
+notes  = "6 notes = n EXACT. Symmetric division of octave into n parts. Debussy."
+
+[[candidate]]
+level  = 1
+id     = "SC_HEXATONIC"
+label  = "Hexatonic 6-note"
+n6     = 1.00
+perf   = 0.70
+power  = 0.75
+cost   = 0.85
+notes  = "6 notes = n EXACT. Augmented scale, Prometheus. Multiple hexatonic types."
+
+[[candidate]]
+level  = 1
+id     = "SC_QUARTER"
+label  = "Quarter-tone 24"
+n6     = 0.90
+perf   = 0.60
+power  = 0.50
+cost   = 0.60
+notes  = "24 quarter-tones = J2(6) EXACT. Arabic maqam, Turkish makam, microtonal."
+
+[[candidate]]
+level  = 1
+id     = "SC_JUST"
+label  = "Just Intonation Ratios"
+n6     = 0.80
+perf   = 0.75
+power  = 0.70
+cost   = 0.75
+notes  = "Perfect 5th=3:2=n/phi:phi. Perfect 4th=4:3=tau:n/phi. Octave=2:1=phi:mu."
+
+# =============================================================
+# Level 2: Instrument (악기 구조) -- 7 candidates
+# =============================================================
+[[level]]
+name = "Instrument"
+
+[[candidate]]
+level  = 2
+id     = "IN_GUITAR"
+label  = "Guitar 6-string"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.90
+notes  = "6 strings = n EXACT. 12 frets/octave = sigma. 24 frets total = J2. Standard tuning spans ~2 octaves."
+
+[[candidate]]
+level  = 2
+id     = "IN_PIANO"
+label  = "Piano 88-key"
+n6     = 0.80
+perf   = 1.00
+power  = 0.60
+cost   = 0.60
+notes  = "12 notes/octave = sigma. 7+5 key pattern = (sigma-sopfr)+sopfr. 88 keys ~= 7.33 octaves."
+
+[[candidate]]
+level  = 2
+id     = "IN_DRUMS"
+label  = "Drum Kit Standard"
+n6     = 0.70
+perf   = 0.85
+power  = 0.90
+cost   = 0.80
+notes  = "Standard kit: kick, snare, hi-hat, 2 toms, ride = 6 pieces = n. 12-inch snare = sigma."
+
+[[candidate]]
+level  = 2
+id     = "IN_VIOLIN"
+label  = "Violin 4-string"
+n6     = 0.60
+perf   = 0.90
+power  = 0.65
+cost   = 0.70
+notes  = "4 strings = tau(6). Tuned in 5ths = sopfr intervals. Orchestra section: 2 violin groups = phi."
+
+[[candidate]]
+level  = 2
+id     = "IN_VOICE"
+label  = "Human Voice"
+n6     = 0.70
+perf   = 0.95
+power  = 0.80
+cost   = 1.00
+notes  = "6 voice types (soprano-bass) = n. 2 vocal folds = phi. ~2 octave range = phi."
+
+[[candidate]]
+level  = 2
+id     = "IN_SYNTH"
+label  = "Synthesizer"
+n6     = 0.80
+perf   = 0.85
+power  = 0.90
+cost   = 0.75
+notes  = "MIDI 12 semitones = sigma. 24-bit audio = J2. 48kHz sample rate = sigma*tau*1000."
+
+[[candidate]]
+level  = 2
+id     = "IN_GAMELAN"
+label  = "Gamelan Ensemble"
+n6     = 0.80
+perf   = 0.65
+power  = 0.70
+cost   = 0.65
+notes  = "Slendro 5-tone = sopfr. Pelog 7-tone = sigma-sopfr. Cyclic time (colotomic) structure based on powers of 2."
+
+# =============================================================
+# Level 3: Production (제작/기술) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Production"
+
+[[candidate]]
+level  = 3
+id     = "PR_48KHZ"
+label  = "48kHz/24bit Audio"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "48000 = sigma*tau*1000 EXACT. 24-bit depth = J2(6) EXACT. Pro audio standard."
+
+[[candidate]]
+level  = 3
+id     = "PR_120BPM"
+label  = "120 BPM Standard"
+n6     = 0.90
+perf   = 0.85
+power  = 0.80
+cost   = 0.90
+notes  = "120 = sigma*10 = n*J2/... Most common default tempo. 2 beats/sec = phi."
+
+[[candidate]]
+level  = 3
+id     = "PR_DAW"
+label  = "DAW 12-track"
+n6     = 0.80
+perf   = 0.80
+power  = 0.75
+cost   = 0.85
+notes  = "Typical mix: 12 tracks = sigma. 4 groups (drums/bass/keys/vox) = tau. 24-bit recording = J2."
+
+[[candidate]]
+level  = 3
+id     = "PR_MIDI"
+label  = "MIDI Protocol"
+n6     = 0.80
+perf   = 0.75
+power  = 0.80
+cost   = 0.90
+notes  = "128 notes = 2^(sigma-sopfr). 12 semitones/oct = sigma. 24 MIDI clocks/quarter = J2."
+
+[[candidate]]
+level  = 3
+id     = "PR_VINYL"
+label  = "Vinyl LP 33.3 RPM"
+n6     = 0.60
+perf   = 0.60
+power  = 0.50
+cost   = 0.70
+notes  = "33.33 RPM ~= 100/n/phi. 45 RPM single. 12-inch diameter = sigma. Analog warmth."
+
+[[candidate]]
+level  = 3
+id     = "PR_STREAMING"
+label  = "Streaming 256kbps"
+n6     = 0.70
+perf   = 0.85
+power  = 0.90
+cost   = 0.95
+notes  = "256 = 2^(sigma-tau) EXACT. Spotify/YouTube standard. 44.1kHz legacy vs 48kHz(sigma*tau*1000) pro."
+
+# =============================================================
+# Level 4: Perception (인지/신경) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Perception"
+
+[[candidate]]
+level  = 4
+id     = "PE_ENTRAIN"
+label  = "Neural Entrainment"
+n6     = 0.90
+perf   = 0.80
+power  = 0.90
+cost   = 0.85
+notes  = "Brain syncs to 2Hz(phi) and 6Hz(n) rhythmic stimuli. Gamma 40Hz = sigma+J2+tau. Theta 6Hz = n."
+
+[[candidate]]
+level  = 4
+id     = "PE_GROOVE"
+label  = "Groove/Microtiming"
+n6     = 0.80
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "Swing ratio ~2:1 = phi:1. Groove quantize grid: 1/6 note = n subdivision. Microtiming ±12ms = sigma."
+
+[[candidate]]
+level  = 4
+id     = "PE_EMOTION"
+label  = "Emotional Response"
+n6     = 0.70
+perf   = 0.90
+power  = 0.85
+cost   = 0.75
+notes  = "6 basic emotions (Ekman) = n. Major/minor valence. Tempo-arousal mapping. Music therapy."
+
+[[candidate]]
+level  = 4
+id     = "PE_MEMORY"
+label  = "Musical Memory"
+n6     = 0.70
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "Miller 7±2 chunks, optimal ~6=n for melody recall. 4-bar phrase = tau. Hook length ~2 bars = phi."
+
+[[candidate]]
+level  = 4
+id     = "PE_COCHLEA"
+label  = "Cochlear Tonotopy"
+n6     = 0.80
+perf   = 0.75
+power  = 0.70
+cost   = 0.85
+notes  = "Critical bands ~24=J2(6) per Bark scale. Basilar membrane 2-octave region = phi. 12 semitone resolution = sigma."
+
+[[candidate]]
+level  = 4
+id     = "PE_DANCE"
+label  = "Dance/Motor Sync"
+n6     = 0.90
+perf   = 0.80
+power  = 0.95
+cost   = 0.80
+notes  = "6-DOF body motion = n. 2-phase gait = phi. 3-phase waltz = n/phi. Dance beats: 120BPM = sigma*10."
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# 6/8 prefers compound-friendly scales
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "TS_6_8"
+then_level = 1
+then_ids = "SC_BLUES,SC_PENTA,SC_HEXATONIC"
+
+# 12/8 prefers blues
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "TS_12_8"
+then_level = 1
+then_ids = "SC_BLUES,SC_CHROMATIC"
+
+# Polyrhythm 2:3 prefers percussion
+[[rule]]
+type     = "prefer"
+if_level = 0
+if_id    = "TS_POLY_2_3"
+then_level = 2
+then_ids = "IN_DRUMS,IN_GAMELAN"
+
+# Guitar prefers pentatonic/blues
+[[rule]]
+type     = "prefer"
+if_level = 2
+if_id    = "IN_GUITAR"
+then_level = 1
+then_ids = "SC_PENTA,SC_BLUES,SC_DIATONIC"
+
+# Gamelan uses slendro/pelog, not chromatic
+[[rule]]
+type     = "exclude"
+if_level = 2
+if_id    = "IN_GAMELAN"
+then_level = 1
+then_ids = "SC_CHROMATIC,SC_QUARTER"
+
+# Dance prefers strong meters
+[[rule]]
+type     = "prefer"
+if_level = 4
+if_id    = "PE_DANCE"
+then_level = 0
+then_ids = "TS_4_4,TS_6_8,TS_POLY_2_3"
+
+# Neural entrainment prefers repetitive meters
+[[rule]]
+type     = "prefer"
+if_level = 4
+if_id    = "PE_ENTRAIN"
+then_level = 0
+then_ids = "TS_4_4,TS_6_8,TS_12_8"
+
+# Vinyl excludes streaming tech
+[[rule]]
+type     = "exclude"
+if_level = 3
+if_id    = "PR_VINYL"
+then_level = 3
+then_ids = "PR_STREAMING"

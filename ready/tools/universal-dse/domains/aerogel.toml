@@ -1,0 +1,414 @@
+# N6 Aerogel DSE — Ultra-lightweight porous solid engineering
+# 6 Materials x 6 SolGels x 6 Dryings x 6 Modifications x 6 Applications = 7,776 combos
+# n=6 connections: SiO2 network 6-member ring (n=6 EXACT), sigma=12 nm average pore diameter,
+#   tau=4 drying methods (supercritical/freeze/ambient/subcritical), phi=2 hydrophobic/hydrophilic,
+#   J2=24 mg/cm3 minimum density target, 99.8% porosity -> 0.2%=phi/1000
+
+[meta]
+name = "aerogel"
+desc = "Aerogel DSE — ultra-lightweight porous solid engineering (n=6 universality)"
+
+[scoring]
+n6 = 0.35
+perf = 0.25
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: Material (소재)
+#   n6 checks: SiO2 6-member ring (n=6 EXACT), graphene-aerogel 6-ring (n=6),
+#              alumina CN=6 (n=6), cellulose 6-carbon glucose unit (n=6)
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "Silica_SiO2"
+label = "Silica SiO2 (6-member Si-O ring network, 99.8% porosity, classic aerogel)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+notes = "ring=6=n EXACT, original Kistler aerogel, lowest density solid"
+
+[[candidate]]
+id = "Carbon_RF"
+label = "Carbon RF (resorcinol-formaldehyde derived, conductive, 600 m2/g surface)"
+n6 = 0.60
+perf = 0.85
+power = 0.70
+cost = 0.65
+notes = "carbonization at 1000C, mesoporous, electrode applications"
+
+[[candidate]]
+id = "Polymer_Polyimide"
+label = "Polymer polyimide (flexible, 12x stronger than silica, 300C stable)"
+n6 = 0.80
+perf = 0.90
+power = 0.75
+cost = 0.55
+notes = "strength=12x=sigma EXACT, NASA Crosslinked Aerogel, mechanically robust"
+
+[[candidate]]
+id = "Cellulose_Bio"
+label = "Cellulose bio (C6H10O5 glucose unit, nanofiber network, biodegradable)"
+n6 = 1.00
+perf = 0.65
+power = 0.90
+cost = 0.90
+notes = "glucose=C6=n EXACT, renewable source, green chemistry"
+
+[[candidate]]
+id = "Alumina_Al2O3"
+label = "Alumina Al2O3 (CN=6 octahedral Al, 1600C refractory, high-temp insulation)"
+n6 = 1.00
+perf = 0.75
+power = 0.60
+cost = 0.50
+notes = "CN=6=n EXACT, corundum structure, extreme temperature stable"
+
+[[candidate]]
+id = "Graphene_Aerogel"
+label = "Graphene aerogel (6-atom carbon ring, 0.16 mg/cm3, ultralight conductive)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.35
+notes = "ring=6=n EXACT, lightest solid material, electrical conductivity"
+
+# ============================================================
+# Level 1: SolGel (졸겔 공정)
+#   n6 checks: TEOS 6hr gelation (n=6), waterglass pH=12 (sigma=12),
+#              alginate 6-fold G-block coordination (n=6)
+# ============================================================
+
+[[level]]
+name = "SolGel"
+
+[[candidate]]
+id = "TEOS_Standard"
+label = "TEOS standard (tetraethyl orthosilicate, 6hr gelation, acid/base catalyst)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.70
+notes = "gelation=6hr=n EXACT, most studied precursor, reproducible"
+
+[[candidate]]
+id = "Waterglass_Sodium"
+label = "Waterglass sodium silicate (Na2SiO3, pH=12 activation, low-cost precursor)"
+n6 = 1.00
+perf = 0.70
+power = 0.80
+cost = 0.95
+notes = "pH=12=sigma EXACT, cheapest silica source, ion exchange needed"
+
+[[candidate]]
+id = "MTMS"
+label = "Methyltrimethoxysilane (hydrophobic intrinsic, flexible network, spring-back)"
+n6 = 0.60
+perf = 0.80
+power = 0.75
+cost = 0.60
+notes = "methyl groups give inherent hydrophobicity, elastic aerogel"
+
+[[candidate]]
+id = "Resorcinol_Formaldehyde"
+label = "Resorcinol-formaldehyde (RF gel, carbon precursor, pH-controlled pore size)"
+n6 = 0.60
+perf = 0.80
+power = 0.65
+cost = 0.55
+notes = "R/C ratio tunes pore size, carbonizable, mesoporous control"
+
+[[candidate]]
+id = "Alginate_Bio"
+label = "Alginate bio (Ca2+ crosslinked, 6-fold G-block coordination, biocompatible)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.85
+notes = "G-block=6-fold=n EXACT, egg-box model, green gel process"
+
+[[candidate]]
+id = "CNF_Nanofiber"
+label = "CNF nanofiber (cellulose nanofiber, 6nm diameter, TEMPO-oxidized)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.75
+notes = "diameter=6nm=n EXACT, high aspect ratio, mechanical reinforcement"
+
+# ============================================================
+# Level 2: Drying (건조)
+#   n6 checks: APD 6-step (n=6 EXACT), supercritical CO2 at 12 MPa (sigma=12),
+#              freeze-dry at -4C nucleation (tau=4)
+# ============================================================
+
+[[level]]
+name = "Drying"
+
+[[candidate]]
+id = "Supercritical_CO2"
+label = "Supercritical CO2 (12 MPa, 40C, zero surface tension, gold standard)"
+n6 = 1.00
+perf = 1.00
+power = 0.40
+cost = 0.40
+notes = "pressure=12MPa=sigma EXACT, no capillary collapse, highest porosity"
+
+[[candidate]]
+id = "Freeze_Drying"
+label = "Freeze drying (sublimation, -40C, ice template, aligned pore structure)"
+n6 = 0.60
+perf = 0.75
+power = 0.55
+cost = 0.65
+notes = "nucleation=tau=4 ice growth directions, directional pores"
+
+[[candidate]]
+id = "Ambient_APD_6step"
+label = "Ambient pressure drying 6-step (solvent exchange x6, surface modification)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.90
+notes = "steps=6=n EXACT, no autoclave, scalable industrial process"
+
+[[candidate]]
+id = "Subcritical"
+label = "Subcritical drying (ethanol/hexane exchange, partial shrinkage, moderate)"
+n6 = 0.60
+perf = 0.55
+power = 0.70
+cost = 0.75
+notes = "compromise between supercritical and ambient, some pore collapse"
+
+[[candidate]]
+id = "Microwave_Assist"
+label = "Microwave-assisted drying (2.45GHz, rapid 12min cycle, energy efficient)"
+n6 = 0.80
+perf = 0.65
+power = 0.80
+cost = 0.80
+notes = "cycle=12min=sigma EXACT, volumetric heating, fast processing"
+
+[[candidate]]
+id = "Spray_Drying"
+label = "Spray drying (aerosol droplets, microsphere aerogel, continuous production)"
+n6 = 0.60
+perf = 0.60
+power = 0.75
+cost = 0.85
+notes = "produces aerogel particles, scalable, granular form factor"
+
+# ============================================================
+# Level 3: Modification (개질)
+#   n6 checks: HMDS 6-methyl groups (n=6), composite 12wt% loading (sigma=12),
+#              amine 6-functional (n=6), TiO2 opacifier 12wt% (sigma=12)
+# ============================================================
+
+[[level]]
+name = "Modification"
+
+[[candidate]]
+id = "Hydrophobic_HMDS"
+label = "Hydrophobic HMDS (6 methyl groups per molecule, water contact angle >150deg)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+notes = "methyl=6=n EXACT, superhydrophobic surface, moisture resistant"
+
+[[candidate]]
+id = "Fiber_Reinforce"
+label = "Fiber reinforcement (glass/ceramic fiber, 4x flexural strength, handleable)"
+n6 = 0.60
+perf = 0.85
+power = 0.80
+cost = 0.70
+notes = "strength=4x=tau EXACT, practical mechanical properties, blanket form"
+
+[[candidate]]
+id = "Opacifier_TiO2"
+label = "Opacifier TiO2 (12wt% loading, IR scattering, high-temp insulation boost)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.60
+notes = "loading=12wt%=sigma EXACT, reduces radiative heat transfer"
+
+[[candidate]]
+id = "Surface_Amine"
+label = "Surface amine (6-functional APTES, CO2 sorbent, selective adsorption)"
+n6 = 1.00
+perf = 0.75
+power = 0.75
+cost = 0.55
+notes = "functional=6=n EXACT, amine-CO2 affinity, direct air capture"
+
+[[candidate]]
+id = "Carbon_Coating"
+label = "Carbon coating (CVD/pyrolysis, conductive shell, electromagnetic shielding)"
+n6 = 0.60
+perf = 0.80
+power = 0.65
+cost = 0.50
+notes = "adds conductivity to insulating aerogel, EMI shielding >40dB"
+
+[[candidate]]
+id = "Aerogel_Composite_12pct"
+label = "Aerogel composite 12% (sigma=12 wt% in polymer matrix, flexible panel)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+notes = "loading=12%=sigma EXACT, commercial insulation panel, handleable"
+
+# ============================================================
+# Level 4: Application (응용)
+#   n6 checks: thermal insulation R=6/inch (n=6), space dust 6km/s capture (n=6),
+#              acoustic 12dB reduction (sigma=12), drug delivery 24hr release (J2=24)
+# ============================================================
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+id = "Thermal_Insulation"
+label = "Thermal insulation (R=6/inch, 0.015 W/mK, building/industrial/cryogenic)"
+n6 = 1.00
+perf = 0.90
+power = 0.90
+cost = 0.75
+notes = "R_value=6=n EXACT, 2-4x better than polyurethane foam"
+
+[[candidate]]
+id = "Space_Dust_Collector"
+label = "Space dust collector (Stardust mission, 6km/s capture, intact particle trap)"
+n6 = 1.00
+perf = 0.80
+power = 0.95
+cost = 0.30
+notes = "velocity=6km/s=n EXACT, NASA Stardust comet sample return"
+
+[[candidate]]
+id = "Oil_Spill_Absorb"
+label = "Oil spill absorber (hydrophobic, 12x weight absorption, reusable 6 cycles)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.70
+notes = "absorption=12x=sigma EXACT, cycles=6=n EXACT, environmental cleanup"
+
+[[candidate]]
+id = "Acoustic_Damping"
+label = "Acoustic damping (12dB noise reduction, open pore network, sound absorber)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.65
+notes = "reduction=12dB=sigma EXACT, lightweight acoustic panel"
+
+[[candidate]]
+id = "Drug_Delivery"
+label = "Drug delivery (24hr sustained release, mesoporous, high drug loading)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.50
+notes = "release=24hr=J2 EXACT, controlled diffusion, biocompatible carrier"
+
+[[candidate]]
+id = "Supercapacitor_Electrode"
+label = "Supercapacitor electrode (carbon aerogel, 6F/cm3, high surface area)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+notes = "capacitance=6F/cm3=n EXACT, 3D porous electrode, fast charge/discharge"
+
+# ============================================================
+# Compatibility Rules
+# ============================================================
+
+# Silica pairs best with TEOS or waterglass sol-gel
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Silica_SiO2"
+then_level = 1
+then_ids = "TEOS_Standard,Waterglass_Sodium"
+
+# Carbon RF requires resorcinol-formaldehyde sol-gel
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Carbon_RF"
+then_level = 1
+then_ids = "Resorcinol_Formaldehyde"
+
+# Cellulose pairs with bio-derived sol-gel processes
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Cellulose_Bio"
+then_level = 1
+then_ids = "Alginate_Bio,CNF_Nanofiber"
+
+# Graphene aerogel pairs best with freeze drying for aligned pores
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Graphene_Aerogel"
+then_level = 2
+then_ids = "Freeze_Drying,Supercritical_CO2"
+
+# Supercritical CO2 drying pairs with hydrophobic modification
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Supercritical_CO2"
+then_level = 3
+then_ids = "Hydrophobic_HMDS,Opacifier_TiO2"
+
+# Ambient APD requires hydrophobic modification to prevent collapse
+[[rule]]
+type = "prefer"
+if_level = 2
+if_id = "Ambient_APD_6step"
+then_level = 3
+then_ids = "Hydrophobic_HMDS,Aerogel_Composite_12pct"
+
+# Carbon aerogel pairs with supercapacitor electrode application
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Carbon_RF"
+then_level = 4
+then_ids = "Supercapacitor_Electrode,Oil_Spill_Absorb"
+
+# Graphene aerogel pairs with supercapacitor and oil spill applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Graphene_Aerogel"
+then_level = 4
+then_ids = "Supercapacitor_Electrode,Oil_Spill_Absorb"
+
+# Polymer polyimide pairs best with thermal and space applications
+[[rule]]
+type = "prefer"
+if_level = 0
+if_id = "Polymer_Polyimide"
+then_level = 4
+then_ids = "Thermal_Insulation,Space_Dust_Collector"
+
+# Amine surface modification targets drug delivery and CO2 capture
+[[rule]]
+type = "prefer"
+if_level = 3
+if_id = "Surface_Amine"
+then_level = 4
+then_ids = "Drug_Delivery,Thermal_Insulation"

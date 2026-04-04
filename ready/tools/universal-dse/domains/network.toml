@@ -1,0 +1,371 @@
+# =============================================================
+# HEXA-NETWORK DSE Domain Definition
+# BT-47 (Interconnect gen counts) + BT-53 (Crypto) + BT-74 (95/5)
+# Total raw combos: 6x5x6x5x5 = 4,500 (pre-filter)
+# =============================================================
+
+[meta]
+name = "network"
+desc = "Network Protocol Architecture DSE (BT-47/53/74)"
+levels = ["Foundation", "Process", "Core", "Engine", "System"]
+vision = "Zero-latency planet -- any device, any content, instant"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Foundation (Protocol Paradigm)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Foundation"
+
+[[candidate]]
+level  = 0
+id     = "TCP_IP"
+label  = "TCP/IP Stack"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.80
+notes  = "OSI sigma-sopfr=7 layers, TCP 3-way=n/phi, port 80=phi^tau*sopfr"
+
+[[candidate]]
+level  = 0
+id     = "QUIC"
+label  = "QUIC/HTTP3"
+n6     = 0.83
+perf   = 0.95
+power  = 0.55
+cost   = 0.60
+notes  = "0-RTT, stream multiplex, BT-47 sopfr=5 transport params"
+
+[[candidate]]
+level  = 0
+id     = "NDN"
+label  = "Named Data Networking"
+n6     = 0.67
+perf   = 0.75
+power  = 0.65
+cost   = 0.40
+notes  = "Content-centric, n=6 name components"
+
+[[candidate]]
+level  = 0
+id     = "DTN"
+label  = "Delay-Tolerant Network"
+n6     = 0.50
+perf   = 0.60
+power  = 0.80
+cost   = 0.70
+notes  = "Store-and-forward, tau=4 hop limit"
+
+[[candidate]]
+level  = 0
+id     = "Mesh_N6"
+label  = "N6 Mesh Protocol"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.50
+notes  = "n=6 neighbor limit, sigma=12 routing table entries"
+
+[[candidate]]
+level  = 0
+id     = "P2P_DHT"
+label  = "P2P Distributed Hash Table"
+n6     = 0.83
+perf   = 0.70
+power  = 0.70
+cost   = 0.75
+notes  = "Kademlia k=sigma-tau=8 buckets, BT-53 ETH 12s=sigma"
+
+# =============================================================
+# Level 1: Process (Transport/Security Layer)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "TLS13"
+label  = "TLS 1.3"
+n6     = 0.67
+perf   = 0.90
+power  = 0.55
+cost   = 0.60
+notes  = "1-RTT, sopfr=5 cipher suites"
+
+[[candidate]]
+level  = 1
+id     = "WireGuard"
+label  = "WireGuard VPN"
+n6     = 1.00
+perf   = 0.92
+power  = 0.70
+cost   = 0.75
+notes  = "Fixed tau=4 message types, minimal crypto, ~4000 LOC=tau*10^(n/phi)"
+
+[[candidate]]
+level  = 1
+id     = "DTLS"
+label  = "DTLS 1.3 (UDP)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "Datagram TLS, UDP-based"
+
+[[candidate]]
+level  = 1
+id     = "Noise_N6"
+label  = "Noise Framework N6"
+n6     = 0.83
+perf   = 0.88
+power  = 0.65
+cost   = 0.65
+notes  = "n/phi=3 handshake patterns, Curve25519"
+
+[[candidate]]
+level  = 1
+id     = "RDMA"
+label  = "RDMA/RoCE"
+n6     = 0.50
+perf   = 1.00
+power  = 0.50
+cost   = 0.30
+notes  = "Zero-copy, kernel bypass, sigma-tau=8 QP types"
+
+# =============================================================
+# Level 2: Core (Network Core)  -- 6 candidates
+# =============================================================
+[[level]]
+name = "Core"
+
+[[candidate]]
+level  = 2
+id     = "BGP_N6"
+label  = "BGP with N6 Routing"
+n6     = 0.67
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "AS path, sigma-tau=8 max hops"
+
+[[candidate]]
+level  = 2
+id     = "SDN"
+label  = "Software-Defined Network"
+n6     = 0.83
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "n=6 layer abstraction, OpenFlow"
+
+[[candidate]]
+level  = 2
+id     = "Segment"
+label  = "Segment Routing (SRv6)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.60
+cost   = 0.50
+notes  = "SRv6 = n=6 EXACT! sigma=12 SID depth, IPv6 128-bit"
+
+[[candidate]]
+level  = 2
+id     = "MPLS_N6"
+label  = "MPLS with n=6 Labels"
+n6     = 0.67
+perf   = 0.88
+power  = 0.65
+cost   = 0.55
+notes  = "tau=4 bit exp field, sigma-phi=10 label stack"
+
+[[candidate]]
+level  = 2
+id     = "Intent"
+label  = "Intent-Based Networking"
+n6     = 0.83
+perf   = 0.80
+power  = 0.70
+cost   = 0.40
+notes  = "AI-driven, n=6 intent categories"
+
+[[candidate]]
+level  = 2
+id     = "Quantum"
+label  = "Quantum Network (QKD)"
+n6     = 0.50
+perf   = 0.60
+power  = 0.50
+cost   = 0.20
+notes  = "BB84 tau=4 bases, phi=2 entangled qubits"
+
+# =============================================================
+# Level 3: Engine (Optimization Engine)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "Engine"
+
+[[candidate]]
+level  = 3
+id     = "Congestion"
+label  = "N6 Congestion Control"
+n6     = 1.00
+perf   = 0.90
+power  = 0.70
+cost   = 0.60
+notes  = "BBR sigma-tau=8 phases, CUBIC tau=4 params, BT-74 95/5"
+
+[[candidate]]
+level  = 3
+id     = "LoadBal"
+label  = "L4/L7 Load Balancer"
+n6     = 0.67
+perf   = 0.85
+power  = 0.65
+cost   = 0.55
+notes  = "Consistent hash n=6 replicas"
+
+[[candidate]]
+level  = 3
+id     = "CDN_N6"
+label  = "CDN with n=6 PoPs"
+n6     = 0.83
+perf   = 0.92
+power  = 0.60
+cost   = 0.45
+notes  = "sigma=12 edge regions, J2=24 cache layers"
+
+[[candidate]]
+level  = 3
+id     = "NetAI"
+label  = "AI Network Optimizer"
+n6     = 0.67
+perf   = 0.88
+power  = 0.55
+cost   = 0.40
+notes  = "ML-driven routing/scheduling, BT-56 n=6 LLM"
+
+[[candidate]]
+level  = 3
+id     = "Compress"
+label  = "Protocol Compression"
+n6     = 0.83
+perf   = 0.80
+power  = 0.80
+cost   = 0.70
+notes  = "HPACK sigma=12 huffman groups, QPACK"
+
+# =============================================================
+# Level 4: System (Deployment System)  -- 5 candidates
+# =============================================================
+[[level]]
+name = "System"
+
+[[candidate]]
+level  = 4
+id     = "DC_Fabric"
+label  = "Datacenter Fabric"
+n6     = 0.80
+perf   = 1.00
+power  = 0.50
+cost   = 0.30
+notes  = "Clos topology k=sigma-tau=8, fat-tree"
+
+[[candidate]]
+level  = 4
+id     = "Carrier"
+label  = "Carrier/5G Core"
+n6     = 0.67
+perf   = 0.90
+power  = 0.55
+cost   = 0.40
+notes  = "5G NR tau=4 numerologies, sigma-phi=10 Gbps"
+
+[[candidate]]
+level  = 4
+id     = "Satellite"
+label  = "LEO Satellite Mesh"
+n6     = 0.50
+perf   = 0.70
+power  = 0.70
+cost   = 0.35
+notes  = "Starlink-style constellation, ISL"
+
+[[candidate]]
+level  = 4
+id     = "IoT_LPWAN"
+label  = "IoT LPWAN (LoRa)"
+n6     = 0.83
+perf   = 0.60
+power  = 0.90
+cost   = 0.80
+notes  = "SF=sigma-sopfr=7~sigma=12 spreading, LoRaWAN"
+
+[[candidate]]
+level  = 4
+id     = "HomeLAN"
+label  = "Home/Enterprise LAN"
+n6     = 0.67
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "WiFi 6/7, Ethernet, sigma-phi=10 Gbps"
+
+[[candidate]]
+level  = 4
+id     = "N6_Converged"
+label  = "N6 Converged Network (n=6 tiers, σ=12 PoPs, σ·τ=48 Gbps backbone)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.65
+cost   = 0.45
+notes  = "n=6 tier hierarchy, sigma=12 edge PoPs, sigma*tau=48 Gbps, BT-47 sopfr=5 gen"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# Quantum network requires TLS1.3 or Noise (QKD key exchange)
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Quantum"
+then_level = 1
+then_ids   = "TLS13,Noise_N6"
+
+# RDMA only with DC_Fabric (requires lossless fabric)
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "RDMA"
+then_level = 4
+then_ids   = "DC_Fabric"
+
+# DTN incompatible with RDMA (latency vs delay-tolerant)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "DTN"
+then_level = 1
+then_ids   = "RDMA"
+
+# Satellite incompatible with Segment Routing (no SRv6 in LEO yet)
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Satellite"
+then_level = 2
+then_ids   = "Segment"
+
+# IoT_LPWAN incompatible with RDMA
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "IoT_LPWAN"
+then_level = 1
+then_ids   = "RDMA"

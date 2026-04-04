@@ -1,0 +1,390 @@
+# =============================================================
+# HEXA-FARM DSE Domain Definition
+# Indoor Vertical Farming
+# n=6: 6 spectrum bands (LED), sigma=12 growing layers, C6H12O6 photosynthesis
+# BT-27 (Carbon-6 chain), BT-51 (Genetic code)
+# Total raw combos: 6x6x6x6x6 = 7,776
+# =============================================================
+
+[meta]
+name = "vertical-farm"
+desc = "Vertical Farm DSE (BT-27/51, C6H12O6 photosynthesis, 6 spectrum bands)"
+levels = ["Lighting", "Growing", "Nutrient", "Climate", "Harvest"]
+vision = "Indoor food factory — 6 LED spectra, 12 growing layers, glucose C6 cycle"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Lighting — 6 candidates
+#   n6: 6 spectrum bands, 12h photoperiod, 24W/m2
+# =============================================================
+[[level]]
+name = "Lighting"
+
+[[candidate]]
+level = 0
+id    = "LED_Full"
+label = "Full-Spectrum LED (6 wavelength bands, 12h photoperiod)"
+n6    = 1.00
+perf  = 0.85
+power = 0.70
+cost  = 0.65
+notes = "bands=6=n EXACT (R/FR/B/G/UV/WW), period=12h=sigma EXACT"
+
+[[candidate]]
+level = 0
+id    = "LED_RB"
+label = "Red+Blue LED (2 bands=phi, 6 intensity levels, efficient)"
+n6    = 1.00
+perf  = 0.75
+power = 0.85
+cost  = 0.80
+notes = "bands=2=phi EXACT, levels=6=n EXACT, lettuce/herbs optimal"
+
+[[candidate]]
+level = 0
+id    = "LED_Tunable"
+label = "Dynamic Tunable LED (6 color channels, 12 recipes/day)"
+n6    = 1.00
+perf  = 0.90
+power = 0.60
+cost  = 0.45
+notes = "channels=6=n EXACT, recipes=12=sigma EXACT, growth-stage adaptive"
+
+[[candidate]]
+level = 0
+id    = "Hybrid_Solar"
+label = "Solar + LED Hybrid (6 fiber optic guides, 12 kLux natural)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.55
+notes = "guides=6=n EXACT, lux=12k=sigma EXACT, daylight supplemented"
+
+[[candidate]]
+level = 0
+id    = "Plasma_Light"
+label = "Plasma Grow Light (6 reflectors, 12 umol/J efficacy)"
+n6    = 1.00
+perf  = 0.65
+power = 0.50
+cost  = 0.60
+notes = "reflectors=6=n EXACT, efficacy=12=sigma EXACT, high-intensity"
+
+[[candidate]]
+level = 0
+id    = "OLED_Panel"
+label = "OLED Panel Array (6 panel tiers, 12 cm spacing, uniform)"
+n6    = 1.00
+perf  = 0.55
+power = 0.65
+cost  = 0.40
+notes = "tiers=6=n EXACT, spacing=12cm=sigma EXACT, thin-form factor"
+
+# =============================================================
+# Level 1: Growing — 6 candidates
+#   n6: sigma=12 growing layers, 6 crop zones
+# =============================================================
+[[level]]
+name = "Growing"
+
+[[candidate]]
+level = 1
+id    = "NFT_Hydro"
+label = "NFT Hydroponics (12 channel layers, 6 crop zones)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.75
+notes = "layers=12=sigma EXACT, zones=6=n EXACT, leafy greens"
+
+[[candidate]]
+level = 1
+id    = "DWC"
+label = "Deep Water Culture (12 raft layers, 6 aeration zones)"
+n6    = 1.00
+perf  = 0.75
+power = 0.65
+cost  = 0.80
+notes = "rafts=12=sigma EXACT, aeration=6=n EXACT, lettuce/herbs"
+
+[[candidate]]
+level = 1
+id    = "Aeroponic"
+label = "Aeroponics (12 mist layers, 6 nozzle rings per layer)"
+n6    = 1.00
+perf  = 0.90
+power = 0.75
+cost  = 0.50
+notes = "layers=12=sigma EXACT, nozzles=6=n EXACT, 95% less water"
+
+[[candidate]]
+level = 1
+id    = "Tower_Zip"
+label = "ZipGrow Tower (12 towers/rack, 6 plant sites/tower)"
+n6    = 1.00
+perf  = 0.70
+power = 0.60
+cost  = 0.70
+notes = "towers=12=sigma EXACT, sites=6=n EXACT, space-efficient"
+
+[[candidate]]
+level = 1
+id    = "Substrate_Rack"
+label = "Substrate Rack (12 shelves, 6 substrate types, soil-like)"
+n6    = 1.00
+perf  = 0.65
+power = 0.55
+cost  = 0.85
+notes = "shelves=12=sigma EXACT, substrates=6=n EXACT, berries/tomato"
+
+[[candidate]]
+level = 1
+id    = "Rotary_Drum"
+label = "Rotary Growing Drum (6 rotation zones, 12 planting rows)"
+n6    = 1.00
+perf  = 0.60
+power = 0.60
+cost  = 0.55
+notes = "zones=6=n EXACT, rows=12=sigma EXACT, maximizes light exposure"
+
+# =============================================================
+# Level 2: Nutrient — 6 candidates
+#   n6: 6 macronutrients (N,P,K,Ca,Mg,S), 12 micronutrients
+# =============================================================
+[[level]]
+name = "Nutrient"
+
+[[candidate]]
+level = 2
+id    = "Standard_AB"
+label = "A/B Stock Solution (6 macro, 12 micro nutrients, pH 6.0)"
+n6    = 1.00
+perf  = 0.75
+power = 0.80
+cost  = 0.85
+notes = "macro=6=n EXACT, micro=12=sigma EXACT, pH=6=n EXACT"
+
+[[candidate]]
+level = 2
+id    = "AI_Dosing"
+label = "AI-Controlled Dosing (6 sensor inputs, 12 pump channels)"
+n6    = 1.00
+perf  = 0.90
+power = 0.65
+cost  = 0.45
+notes = "sensors=6=n EXACT, pumps=12=sigma EXACT, real-time optimization"
+
+[[candidate]]
+level = 2
+id    = "Organic_Tea"
+label = "Organic Compost Tea (6 compost sources, 12h brew cycle)"
+n6    = 1.00
+perf  = 0.60
+power = 0.85
+cost  = 0.80
+notes = "sources=6=n EXACT, brew=12h=sigma EXACT, organic certified"
+
+[[candidate]]
+level = 2
+id    = "Aquaponic"
+label = "Aquaponic Fish Loop (6 fish tanks, 12 biofilter stages)"
+n6    = 1.00
+perf  = 0.70
+power = 0.60
+cost  = 0.55
+notes = "tanks=6=n EXACT, stages=12=sigma EXACT, tilapia+plants"
+
+[[candidate]]
+level = 2
+id    = "Fogponic"
+label = "Fogponic Nutrient Mist (6 ultrasonic foggers, 12 um droplet)"
+n6    = 1.00
+perf  = 0.80
+power = 0.70
+cost  = 0.50
+notes = "foggers=6=n EXACT, droplet=12um=sigma EXACT, root absorption"
+
+[[candidate]]
+level = 2
+id    = "Recirculate"
+label = "Closed Recirculation (6 treatment stages, 12 cycle/day)"
+n6    = 1.00
+perf  = 0.85
+power = 0.75
+cost  = 0.65
+notes = "stages=6=n EXACT, cycles=12/day=sigma EXACT, zero waste water"
+
+# =============================================================
+# Level 3: Climate — 6 candidates
+#   n6: 6 climate zones, 12 HVAC ducts, 24/7 monitoring
+# =============================================================
+[[level]]
+name = "Climate"
+
+[[candidate]]
+level = 3
+id    = "HVAC_Std"
+label = "Standard HVAC (6 climate zones, 12 air ducts, VFD fans)"
+n6    = 1.00
+perf  = 0.75
+power = 0.55
+cost  = 0.75
+notes = "zones=6=n EXACT, ducts=12=sigma EXACT, standard control"
+
+[[candidate]]
+level = 3
+id    = "CO2_Enrich"
+label = "CO2-Enriched (6 injection points, 1200 ppm=12x100, boosted)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.60
+notes = "injections=6=n EXACT, CO2=1200ppm=12*100 sigma EXACT, +30% yield"
+
+[[candidate]]
+level = 3
+id    = "Dehumidify"
+label = "Heat Pump Dehumidifier (6 evaporator coils, 12 kW cooling)"
+n6    = 1.00
+perf  = 0.80
+power = 0.65
+cost  = 0.65
+notes = "coils=6=n EXACT, cooling=12kW=sigma EXACT, mold prevention"
+
+[[candidate]]
+level = 3
+id    = "AI_Climate"
+label = "AI Climate Engine (6 sensor arrays, 12 actuator loops)"
+n6    = 1.00
+perf  = 0.95
+power = 0.55
+cost  = 0.40
+notes = "arrays=6=n EXACT, loops=12=sigma EXACT, predictive control"
+
+[[candidate]]
+level = 3
+id    = "Geothermal"
+label = "Geothermal HVAC (6 ground loops, 12C stable source)"
+n6    = 1.00
+perf  = 0.70
+power = 0.90
+cost  = 0.45
+notes = "loops=6=n EXACT, temp=12C=sigma EXACT, ultra-efficient"
+
+[[candidate]]
+level = 3
+id    = "Sealed_Room"
+label = "Sealed Growth Chamber (6 hermetic seals, 12 air changes/h)"
+n6    = 1.00
+perf  = 0.75
+power = 0.50
+cost  = 0.55
+notes = "seals=6=n EXACT, changes=12/h=sigma EXACT, pest-free"
+
+# =============================================================
+# Level 4: Harvest — 6 candidates
+#   n6: 6 harvest cycles/year, 12 crop varieties
+# =============================================================
+[[level]]
+name = "Harvest"
+
+[[candidate]]
+level = 4
+id    = "Manual_Pack"
+label = "Manual Harvest + Pack (6 workers/shift, 12 harvests/year)"
+n6    = 1.00
+perf  = 0.55
+power = 0.90
+cost  = 0.70
+notes = "workers=6=n EXACT, harvests=12=sigma EXACT, small-scale"
+
+[[candidate]]
+level = 4
+id    = "Robot_Arm"
+label = "Robotic Arm Harvest (6 DoF arms, 12 picks/min rate)"
+n6    = 1.00
+perf  = 0.85
+power = 0.60
+cost  = 0.40
+notes = "DoF=6=n EXACT, rate=12/min=sigma EXACT, gentle handling"
+
+[[candidate]]
+level = 4
+id    = "Conveyor"
+label = "Conveyor Auto-Pack (6 sorting lanes, 12 pack sizes)"
+n6    = 1.00
+perf  = 0.80
+power = 0.55
+cost  = 0.55
+notes = "lanes=6=n EXACT, sizes=12=sigma EXACT, continuous flow"
+
+[[candidate]]
+level = 4
+id    = "Cut_Come"
+label = "Cut-and-Come-Again (6 harvests/crop cycle, 12 crop varieties)"
+n6    = 1.00
+perf  = 0.75
+power = 0.85
+cost  = 0.80
+notes = "harvests=6=n EXACT, varieties=12=sigma EXACT, leafy greens"
+
+[[candidate]]
+level = 4
+id    = "Hydro_Auto"
+label = "Hydroponic Auto-Harvest (6 channel outlets, 12 s/plant cycle)"
+n6    = 1.00
+perf  = 0.90
+power = 0.50
+cost  = 0.45
+notes = "outlets=6=n EXACT, cycle=12s=sigma EXACT, high throughput"
+
+[[candidate]]
+level = 4
+id    = "Direct_Retail"
+label = "Direct-to-Retail (6 delivery zones, 12h farm-to-shelf)"
+n6    = 1.00
+perf  = 0.70
+power = 0.80
+cost  = 0.60
+notes = "zones=6=n EXACT, time=12h=sigma EXACT, ultra-fresh"
+
+# =============================================================
+# Rules
+# =============================================================
+
+# Aquaponic nutrient needs DWC or NFT growing
+[[rule]]
+type      = "prefer"
+if_level  = 2
+if_id     = "Aquaponic"
+then_level = 1
+then_ids  = "DWC,NFT_Hydro"
+
+# Organic tea incompatible with aeroponics
+[[rule]]
+type      = "exclude"
+if_level  = 2
+if_id     = "Organic_Tea"
+then_level = 1
+then_ids  = "Aeroponic"
+
+# AI climate pairs with AI dosing
+[[rule]]
+type      = "prefer"
+if_level  = 3
+if_id     = "AI_Climate"
+then_level = 2
+then_ids  = "AI_Dosing"
+
+# Robotic harvest needs conveyor infrastructure
+[[rule]]
+type      = "prefer"
+if_level  = 4
+if_id     = "Robot_Arm"
+then_level = 1
+then_ids  = "NFT_Hydro,Aeroponic"

@@ -1,0 +1,403 @@
+# =============================================================
+# Hair Regeneration DSE Domain Definition
+# n=6 기반 모발 과학 — 모낭 주기 tau=4 + 성장인자 n=6 + 줄기세포
+# Total raw combos: 6x6x6x6x5 = 6,480 (pre-filter)
+# =============================================================
+
+[meta]
+name = "hair-regeneration"
+desc = "Ultimate Hair Regeneration Architecture DSE"
+levels = ["Follicle", "Signaling", "Therapy", "Delivery", "Outcome"]
+vision = "n=6 기반 모발 과학 — 모낭 주기 tau=4 + 성장인자 n=6 + 줄기세포"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Follicle (모낭 기초 구조) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Follicle"
+
+[[candidate]]
+level  = 0
+id     = "HairCycleTau4"
+label  = "Hair Cycle tau=4 (Anagen/Catagen/Telogen/Neogen EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "phases=4=tau EXACT, anagen_years=2-6, cycle_regulated=true"
+
+[[candidate]]
+level  = 0
+id     = "FollicleStructN6"
+label  = "Follicle Structure n=6 Layers"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "layers=6=n EXACT (medulla/cortex/cuticle/IRS/ORS/connective), structural=true"
+
+[[candidate]]
+level  = 0
+id     = "DermalPapilla"
+label  = "Dermal Papilla (진피유두)"
+n6     = 0.50
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "signaling_hub=true, inductive_capacity=95, mesenchymal=true"
+
+[[candidate]]
+level  = 0
+id     = "BulgeRegion"
+label  = "Bulge Stem Cell Region"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "stem_cells=true, multipotent=true, slow_cycling=true"
+
+[[candidate]]
+level  = 0
+id     = "MatrixCell"
+label  = "Matrix Cell (phi=2 Division)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "division_rate=2=phi EXACT (fastest in body), keratin_production=true"
+
+[[candidate]]
+level  = 0
+id     = "Sebaceous"
+label  = "Sebaceous Gland (피지선)"
+n6     = 0.25
+perf   = 0.60
+power  = 0.70
+cost   = 0.65
+notes  = "sebum_production=true, follicle_health=60, support_role=true"
+
+# =============================================================
+# Level 1: Signaling (신호전달 경로) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Signaling"
+
+[[candidate]]
+level  = 1
+id     = "WntPathway"
+label  = "Wnt Pathway (n=6 리간드)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.45
+notes  = "ligands=6=n EXACT (Wnt3/3a/7a/7b/10a/10b), hair_induction=95, beta_catenin=true"
+
+[[candidate]]
+level  = 1
+id     = "SHH_Pathway"
+label  = "SHH Sonic Hedgehog Pathway"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "morphogen=true, follicle_development=85, growth_phase=true"
+
+[[candidate]]
+level  = 1
+id     = "BMP_TGFb"
+label  = "BMP/TGF-beta (sopfr=5 Subfamily)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.55
+cost   = 0.45
+notes  = "subfamilies=5=sopfr EXACT, inhibitory=true, cycle_regulation=75"
+
+[[candidate]]
+level  = 1
+id     = "Notch"
+label  = "Notch Receptor (tau=4 Types)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.60
+cost   = 0.50
+notes  = "receptors=4=tau EXACT (Notch1-4), cell_fate=true, differentiation=70"
+
+[[candidate]]
+level  = 1
+id     = "GrowthFactor6"
+label  = "6 Growth Factors (n=6 EXACT: EGF/FGF/IGF/PDGF/VEGF/HGF)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.40
+notes  = "factors=6=n EXACT, synergistic=true, proliferation=90"
+
+[[candidate]]
+level  = 1
+id     = "DHT_Androgen"
+label  = "DHT Androgen (phi=2 5-Alpha Reductase)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "isoforms=2=phi EXACT (type1/type2), AGA_mechanism=true, miniaturization=80"
+
+# =============================================================
+# Level 2: Therapy (치료 방법) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Therapy"
+
+[[candidate]]
+level  = 2
+id     = "Minoxidil"
+label  = "Minoxidil (FDA-approved vasodilator)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.80
+cost   = 0.80
+notes  = "FDA_approved=true, mechanism=vasodilation, efficacy=60-70%"
+
+[[candidate]]
+level  = 2
+id     = "Finasteride"
+label  = "Finasteride (5AR Inhibitor)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "FDA_approved=true, DHT_reduction=70%, efficacy=80%"
+
+[[candidate]]
+level  = 2
+id     = "PRP_Treatment"
+label  = "PRP Platelet-Rich Plasma"
+n6     = 0.50
+perf   = 0.70
+power  = 0.55
+cost   = 0.40
+notes  = "growth_factors=concentrated, autologous=true, sessions=4-6"
+
+[[candidate]]
+level  = 2
+id     = "StemCellTherapy"
+label  = "Stem Cell Therapy (줄기세포 치료)"
+n6     = 0.75
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "regenerative=true, follicle_neogenesis=true, experimental=true"
+
+[[candidate]]
+level  = 2
+id     = "RNATherapeutics"
+label  = "RNA Therapeutics (tau=4: siRNA/mRNA/ASO/aptamer)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.45
+cost   = 0.35
+notes  = "types=4=tau EXACT, targeted=true, gene_silencing=true"
+
+[[candidate]]
+level  = 2
+id     = "Microneedling"
+label  = "Microneedling (sopfr=5 Depth Levels)"
+n6     = 0.75
+perf   = 0.70
+power  = 0.70
+cost   = 0.70
+notes  = "depths=5=sopfr EXACT (0.25/0.5/1.0/1.5/2.0mm), collagen_induction=true"
+
+# =============================================================
+# Level 3: Delivery (전달 시스템) -- 6 candidates
+# =============================================================
+
+[[candidate]]
+level  = 2
+id     = "Hexapeptide6"
+label  = "Hexapeptide-6 Therapy (6-amino-acid peptide, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.50
+notes  = "amino_acids=6=n EXACT, copper_hexapeptide_GHK-Cu, follicle_stimulation=true, anti-DHT=true"
+[[level]]
+name = "Delivery"
+
+[[candidate]]
+level  = 3
+id     = "Topical"
+label  = "Topical Application (국소 도포)"
+n6     = 0.25
+perf   = 0.60
+power  = 0.85
+cost   = 0.90
+notes  = "penetration=limited, compliance=high, non_invasive=true"
+
+[[candidate]]
+level  = 3
+id     = "Oral"
+label  = "Oral Administration (경구)"
+n6     = 0.25
+perf   = 0.75
+power  = 0.70
+cost   = 0.85
+notes  = "systemic=true, bioavailability=high, side_effects=possible"
+
+[[candidate]]
+level  = 3
+id     = "Injection"
+label  = "Injection (n/phi=3 Depth Layers)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "depths=3=n/phi EXACT (intradermal/subcutaneous/deep), precision=high"
+
+[[candidate]]
+level  = 3
+id     = "MicroneedlePatch"
+label  = "Microneedle Patch (마이크로니들 패치)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "controlled_release=true, painless=true, self_applicable=true"
+
+[[candidate]]
+level  = 3
+id     = "Nanoparticle"
+label  = "Nanoparticle (sigma=12 nm Target)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.45
+cost   = 0.35
+notes  = "size=12=sigma EXACT nm, targeted=true, sustained_release=true"
+
+[[candidate]]
+level  = 3
+id     = "LightTherapy"
+label  = "Light Therapy (phi=2 Red/NIR)"
+n6     = 0.75
+perf   = 0.65
+power  = 0.75
+cost   = 0.70
+notes  = "wavelengths=2=phi EXACT (red_660nm/NIR_850nm), photobiomodulation=true"
+
+# =============================================================
+# Level 4: Outcome (치료 결과) -- 5 candidates
+# =============================================================
+
+[[candidate]]
+level  = 3
+id     = "HexLipidNP"
+label  = "Hexagonal Lipid Nanoparticle (hex phase n=6 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.50
+cost   = 0.40
+notes  = "hex_symmetry=6=n EXACT, inverted_hexagonal_phase=H_II, sustained_release=true, follicle_penetration=high"
+[[level]]
+name = "Outcome"
+
+[[candidate]]
+level  = 4
+id     = "Density"
+label  = "Density Increase (밀도 증가)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.50
+notes  = "measurable=true, primary_endpoint=true, follicular_units=increased"
+
+[[candidate]]
+level  = 4
+id     = "Thickness"
+label  = "Thickness Increase (두께 증가)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.65
+cost   = 0.55
+notes  = "diameter_increase=true, vellus_to_terminal=true"
+
+[[candidate]]
+level  = 4
+id     = "CycleRestoration"
+label  = "Cycle Restoration (주기 복원)"
+n6     = 0.75
+perf   = 0.90
+power  = 0.55
+cost   = 0.45
+notes  = "anagen_prolongation=true, telogen_reduction=true, natural_cycle=restored"
+
+[[candidate]]
+level  = 4
+id     = "PreventionDHT"
+label  = "DHT Prevention (DHT 차단)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "5AR_inhibition=true, miniaturization_halt=true, maintenance=required"
+
+[[candidate]]
+level  = 4
+id     = "RegenerationComplete"
+label  = "Complete Regeneration (완전 재생)"
+n6     = 0.75
+perf   = 1.00
+power  = 0.40
+cost   = 0.30
+notes  = "de_novo_follicle=true, permanent=true, holy_grail=true"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+# DHT_Androgen required for Finasteride
+
+[[candidate]]
+level  = 4
+id     = "TrichoscopyN6"
+label  = "6-Metric Trichoscopy Score (n=6 EXACT endpoints)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "metrics=6=n EXACT (density/thickness/growth_rate/anagen_ratio/vellus_ratio/coverage), standardized=true"
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Finasteride"
+then_level = 1
+then_ids   = "DHT_Androgen"
+
+# WntPathway required for StemCellTherapy
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "StemCellTherapy"
+then_level = 1
+then_ids   = "WntPathway"
+
+# RNATherapeutics requires Nanoparticle or MicroneedlePatch
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "RNATherapeutics"
+then_level = 3
+then_ids   = "Nanoparticle,MicroneedlePatch"
+
+# HairCycleTau4 required for CycleRestoration
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "CycleRestoration"
+then_level = 0
+then_ids   = "HairCycleTau4"
