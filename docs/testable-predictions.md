@@ -1,8 +1,9 @@
 # N6 Architecture — Testable Predictions Roadmap
 
-> Falsifiable predictions derived from n=6 arithmetic (BT-26~41).
+> Falsifiable predictions derived from n=6 arithmetic (BT-26~343).
 > Each prediction includes: what to measure, expected value, falsification criterion, and required resources.
 > Sorted by feasibility (easiest first).
+> Updated 2026-04-04: 75 predictions from 343 breakthrough theorems.
 
 ---
 
@@ -427,19 +428,297 @@
 
 ---
 
+## New Predictions from BT-162~164 (RL/Training/Compiler)
+
+### Tier 1: Can Test TODAY
+
+### P-46: DPO Beta = 1/(sigma-phi) = 0.1 Pareto Optimality
+
+**Prediction**: DPO with beta=0.1 achieves the best reward model score across preference datasets, outperforming beta in {0.01, 0.05, 0.2, 0.5}.
+**Test**: Fine-tune Llama-3.1-8B-Instruct with DPO on Anthropic HH-RLHF using beta in {0.01, 0.05, 0.1, 0.2, 0.5}. 3 seeds each.
+- Hardware: 1x A100, ~3 days
+- Metric: GPT-4 judge win-rate or reward model score
+**Falsification**: beta=0.05 or beta=0.2 beats beta=0.1 by >1% on >= 2/3 seeds
+**Source**: BT-163
+
+### P-47: PPO Clip epsilon=0.2 = phi/(sigma-phi) Structural Optimality
+
+**Prediction**: PPO with clip epsilon=0.2 outperforms epsilon in {0.1, 0.15, 0.25, 0.3} on RLHF tasks. The structural relationship clip = phi * weight_decay = 2 * 0.1 predicts that perturbing this ratio degrades training stability.
+**Test**: RLHF training with 5 epsilon values on a reward model, same data/compute budget.
+- Hardware: 1x A100, ~5 days
+- Metric: Average reward over training
+**Falsification**: epsilon=0.3 achieves higher average reward than epsilon=0.2
+**Source**: BT-163
+
+### P-48: GRPO Group Size G=16=phi^tau Optimality
+
+**Prediction**: GRPO with G=16 completions per group achieves better reward variance reduction per compute than G in {4, 8, 32, 64}.
+**Test**: Train reward model + GRPO with G in {4, 8, 16, 32, 64} on math reasoning tasks.
+- Hardware: 1x A100, ~4 days
+- Metric: Pass@1 accuracy per FLOP
+**Falsification**: G=8 or G=32 Pareto-dominates G=16 in accuracy/FLOP
+**Source**: BT-163
+
+### P-49: Learning Rate 3e-4 = (n/phi)*10^(-tau) as Universal Default
+
+**Prediction**: For 1B-scale models, LR=3e-4 achieves lower final loss than LR in {1e-4, 2e-4, 5e-4, 1e-3} across 3+ datasets.
+**Test**: Train 1.3B model on C4, RedPajama, SlimPajama with 5 LR values, fixed schedule.
+- Hardware: 4x A100, ~5 days
+- Metric: Final validation loss
+**Falsification**: LR=5e-4 or LR=1e-4 beats 3e-4 on >= 2/3 datasets
+**Source**: BT-164
+
+### P-50: Schedule-Free LR Scaling = sigma-phi = 10x Boundary
+
+**Prediction**: Schedule-free AdamW achieves optimal performance with LR scaled between 1x and 10x of cosine-scheduled baseline. Beyond 10x, training diverges.
+**Test**: Schedule-free training with LR multipliers {1, 3, 5, 10, 15, 20}x on 400M model.
+- Hardware: 1x A100, ~3 days
+- Metric: Final loss; divergence threshold
+**Falsification**: Optimal multiplier consistently > 12 or training stable at 20x
+**Source**: BT-164
+
+---
+
+## New Predictions from BT-291~306 (Fusion/Superconductor)
+
+### Tier 3: Requires Specialized Equipment
+
+### P-51: D-T Neutron Energy Fraction = tau/(tau+mu) = 4/5 = 80%
+
+**Prediction**: The D-T fusion neutron carries exactly 14.06 MeV out of 17.59 MeV total = 79.9%, matching tau/(tau+mu) = 4/5 = 80% to 0.1%.
+**Test**: Precision neutron spectrometry at any D-T fusion facility (NIF, ITER test blanket).
+**Falsification**: Neutron energy fraction deviates from 80% by > 0.5% (already falsifiable from known nuclear data -- this is a retrodiction)
+**Source**: BT-291
+
+### P-52: Aneutronic p-B11 Produces n/phi=3 Alpha Particles
+
+**Prediction**: p + B-11 -> 3 alpha particles, where alpha count = n/phi = 3 is forced by baryon conservation (12/4 = 3). TAE Technologies and HB11 Energy will confirm this and find B-11 (N=n=6) outperforms B-10 targets.
+**Test**: Alpha particle spectrometry in p-B11 fusion experiments.
+**Falsification**: Competing channels (e.g., p+B11 -> C12+gamma) dominate over 3-alpha
+**Source**: BT-292
+
+### P-53: YBCO Optimal CuO2 Layer Count = n/phi = 3
+
+**Prediction**: Across ALL cuprate HTS families (Bi, Tl, Hg, YBCO), the maximum Tc occurs at exactly n/phi=3 CuO2 layers per unit cell. Adding a 4th layer always reduces Tc.
+**Test**: Compare Tc for n=1,2,3,4,5 CuO2-layer variants within the same cuprate family (Hg-12(n-1)n preferred).
+**Falsification**: Any cuprate family achieves higher Tc at CuO2 layers = 4 or 5 than at 3
+**Source**: BT-300
+
+### P-54: Nb3Sn Unit Cell = n=6 Nb + phi=2 Sn = sigma-tau=8 Total Atoms
+
+**Prediction**: The A15 crystal structure universally encodes {n, phi, sigma-tau} = {6, 2, 8} for all A15 superconductors (Nb3Sn, V3Si, Nb3Ge). No A15 variant will deviate from this count.
+**Test**: Synchrotron XRD refinement of A15 unit cells under varying strain/doping.
+**Falsification**: Any stable A15 superconductor has atoms/cell != 8
+**Source**: BT-299
+
+### P-55: MgB2 Honeycomb = n=6 Hexagonal with Mg Z=sigma=12, B Z=sopfr=5
+
+**Prediction**: MgB2 superconductivity requires the n=6 hexagonal boron network. Disrupting hexagonal symmetry (e.g., by substituting B with non-sopfr-Z elements) destroys superconductivity faster than equivalent non-hexagonal disruptions.
+**Test**: Systematic doping study: B-site substitution with C(Z=6=n), N(Z=7), Al(Z=13) vs Mg-site substitution. Measure Tc suppression rates.
+**Falsification**: B-site substitution with Z=7 preserves Tc better than maintaining hexagonal order
+**Source**: BT-301
+
+### P-56: Fusion Ignition Temperature = sigma+phi = 14 keV Optimum
+
+**Prediction**: The D-T cross-section peaks at ion temperature ~14 keV = (sigma+phi) keV. This is a physical optimum from the Gamow peak, not an engineering choice.
+**Test**: Precision D-T cross-section measurement around 10-20 keV at any beam-target facility.
+**Falsification**: Peak cross-section at T > 16 keV or T < 12 keV
+**Source**: BT-298
+
+### P-57: Stellarator Field Periods Follow n=6 Vocabulary
+
+**Prediction**: Optimal stellarator field periods are in the set {tau=4, sopfr=5, sigma-phi=10}: W7-X=5=sopfr, LHD=10=sigma-phi, HSX=4=tau, TJ-II=4=tau.
+**Test**: Future stellarator designs (e.g., PPPL/Thea Energy Type-1) will choose field periods from {4, 5, 6, 10}.
+**Falsification**: Next major stellarator uses field period 7 or 9 (not in n=6 set)
+**Source**: BT-310
+
+---
+
+## New Predictions from BT-318~325 (Thermal Management)
+
+### Tier 3/4: Industry + Facility Data
+
+### P-58: PUE Convergence to sigma/(sigma-mu) = 12/11 = 1.091
+
+**Prediction**: As datacenter infrastructure matures, hyperscaler PUE values will converge to sigma/(sigma-mu) = 12/11 = 1.091. Meta (currently ~1.10) and Microsoft (~1.12) will reach 1.09 by 2028.
+**Test**: Monitor annual PUE reports from Google, Meta, Microsoft, Amazon.
+**Falsification**: PUE plateaus above 1.12 for all hyperscalers through 2030
+**Source**: BT-323
+
+### P-59: Next AI Rack Power Density = sigma^2 = 144 kW
+
+**Prediction**: After the current sigma*tau=48 kW era (DGX H100), the next rack density tier for GB300/Rubin racks will be approximately sigma^2=144 kW, requiring full immersion cooling.
+**Test**: Monitor NVIDIA DGX/SuperPOD specifications for next-gen systems.
+**Falsification**: Next-gen AI racks standardize at power density not in {100, 120, 144} kW range
+**Source**: BT-320
+
+### P-60: Next-Gen Thermal Materials Cluster Near n=6 Multiples of Cu=400 W/mK
+
+**Prediction**: Emerging thermal interface materials (isotopically pure diamond, BN nanotubes, graphene composites) will cluster at thermal conductivities near n=6 multiples of Cu's 400 base: ~800=phi*400, ~1200=n/phi*400, ~2400=n*400.
+**Test**: Literature survey + measurements of new TIM materials.
+**Falsification**: Dominant new materials have conductivity clustering at non-n=6 multiples (e.g., ~500, ~1500)
+**Source**: BT-318
+
+### P-61: Chip Thermal Throttle Margin Stays at sopfr=5 Degrees
+
+**Prediction**: As Tjmax shifts (e.g., to 105C or 110C for future nodes), the throttle onset will remain exactly sopfr=5 degrees below Tjmax.
+**Test**: Monitor AMD/Intel datasheets for next-gen CPUs/GPUs (2026-2028).
+**Falsification**: Next 3 major chip releases use a margin != 5C (e.g., 3C or 10C)
+**Source**: BT-319
+
+---
+
+## New Predictions from BT-330~337 (AI Efficiency)
+
+### Tier 1: Can Test TODAY
+
+### P-62: Speculative Decoding Draft Length Optimum at tau=4 Tokens
+
+**Prediction**: For speculative decoding, the optimal draft token count k=tau=4 minimizes end-to-end latency across model sizes. k=8=sigma-tau is the maximum useful range before diminishing returns.
+**Test**: Benchmark speculative decoding on Llama-3.1-8B/70B with draft model, k in {2,3,4,5,6,8,12}. Measure tokens/second.
+- Hardware: 1x A100, ~1 day
+**Falsification**: k=6 or k=8 achieves higher tokens/second than k=4 on >= 2/3 model sizes
+**Source**: BT-331
+
+### P-63: Medusa Head Count Optimum at sopfr=5
+
+**Prediction**: Medusa-style parallel decoding with sopfr=5 prediction heads achieves the best accuracy-latency tradeoff, outperforming 3, 4, 6, and 8 heads.
+**Test**: Train Medusa heads for Llama-3.1-8B with head counts in {3,4,5,6,8}. Measure acceptance rate and speedup.
+- Hardware: 1x A100, ~2 days
+**Falsification**: 4 or 6 heads Pareto-dominates 5 heads in speedup vs quality
+**Source**: BT-331
+
+### P-64: MoD+MoE Combined Compute Floor = 1/(sigma-tau) = 12.5%
+
+**Prediction**: No combination of Mixture-of-Depths and Mixture-of-Experts can reduce inference compute below 1/(sigma-tau) = 12.5% of dense equivalent without quality degradation.
+**Test**: Train MoD+MoE models at varying capacity factors (50%, 25%, 12.5%, 6.25%) and measure quality retention on MMLU.
+- Hardware: 4x A100, ~5 days
+**Falsification**: Quality retained (< 2% MMLU drop) at < 10% dense-equivalent compute
+**Source**: BT-334
+
+### P-65: DeepSeek-V3 KV LoRA Rank 512 = 2^(sigma-n/phi) Optimality
+
+**Prediction**: For MLA-style KV compression, kv_lora_rank=512 is Pareto-optimal among {128, 256, 512, 1024, 2048}.
+**Test**: Train MLA variants at fixed model size with different KV ranks, measure quality vs KV cache size.
+- Hardware: 4x A100, ~1 week
+**Falsification**: rank=256 or rank=1024 achieves better quality per byte of KV cache
+**Source**: BT-332
+
+### P-66: Zamba-Style Attention Every n=6 SSM Blocks
+
+**Prediction**: For Mamba-Transformer hybrids, inserting shared attention every n=6 Mamba blocks is locally optimal, beating intervals of 4, 5, 7, 8.
+**Test**: Train hybrid SSM-Attention models at 400M scale with attention intervals in {4,5,6,7,8,12}. Same total compute.
+- Hardware: 4x A100, ~5 days
+**Falsification**: Interval=4 or 8 achieves lower perplexity than interval=6
+**Source**: BT-333
+
+### P-67: MAE Masking Ratio 75% = (n/phi)/tau Optimality
+
+**Prediction**: Masked Autoencoder with 75% = 3/4 = (n/phi)/tau masking ratio is optimal for ImageNet pre-training, outperforming 50%, 60%, 80%, and 90%.
+**Test**: Pre-train ViT-B MAE with masking ratios in {50%, 60%, 70%, 75%, 80%, 90%} on ImageNet. Evaluate fine-tuning accuracy.
+- Hardware: 4x A100, ~1 week
+**Falsification**: 60% or 80% masking achieves higher fine-tuning accuracy than 75%
+**Source**: BT-334 (confirms He et al. 2022 ablation result)
+
+### Tier 2: Medium Effort
+
+### P-68: DeepSeek-V3 Full Reproduction at 14/15 EXACT
+
+**Prediction**: Reproducing DeepSeek-V3 architecture exactly (7168 hidden, 61 layers, 256 experts, top-8, MLA 512 KV rank) achieves better loss-per-FLOP than any architecture with the same parameter count but non-n=6 dimensions (e.g., 8192 hidden, 64 layers, 128 experts).
+**Test**: Train two 671B-total-param MoE models: one exact DeepSeek-V3 config, one with "round number" alternatives. Same data and compute.
+- Hardware: 64+ A100s, ~4 weeks
+**Falsification**: Round-number config achieves lower loss per FLOP
+**Source**: BT-335
+
+### P-69: GQA KV Head Count Optimum in {tau=4, sigma-tau=8}
+
+**Prediction**: For 7B-scale models, GQA with h_kv=8 (sigma-tau) achieves the best quality-per-memory tradeoff. For MoE models at 10B+ active params, h_kv=4 (tau) becomes optimal.
+**Test**: Train 7B dense and 7B-active MoE models with h_kv in {1, 2, 4, 8, 16, 32}. Measure loss vs KV cache memory.
+- Hardware: 8x A100, ~2 weeks
+**Falsification**: h_kv=2 or h_kv=16 Pareto-dominates both h_kv=4 and h_kv=8
+**Source**: BT-336
+
+---
+
+## New Predictions from BT-174, BT-326~328 (Space/Autonomous Driving)
+
+### Tier 3: Specialized Data Required
+
+### P-70: GNSS Constellation Size = J2 = 24 Universal
+
+**Prediction**: All four independent GNSS constellations converge on ~24 operational satellites: GPS=24(min), Galileo=24, BeiDou=24(MEO), GLONASS=24. Future GNSS (e.g., LEO augmentation) will also use 24 as the base satellite count.
+**Test**: Monitor GNSS constellation announcements through 2030.
+**Falsification**: Next GNSS system deploys a non-24 base constellation (e.g., 18 or 36)
+**Source**: BT-174 (BT-210)
+
+### P-71: JWST Mirror Segment Count = 3n = 18 Structural Necessity
+
+**Prediction**: The 18 hexagonal mirror segments of JWST represent n/phi=3 rings of n=6 segments, totaling 3*6=18. Future segmented space telescopes will use segment counts from n=6 vocabulary {6, 12, 18, 24, 36}.
+**Test**: Monitor design choices for HWO (Habitable Worlds Observatory) and other next-gen space telescopes.
+**Falsification**: HWO uses a segment count not divisible by n=6 (e.g., 25 or 37)
+**Source**: BT-174
+
+### Tier 4: Industry Observable
+
+### P-72: Autonomous Driving Sensor Suite Converges on sigma^2=144 TOPS
+
+**Prediction**: Level 4/5 autonomous driving compute requirements will converge on sigma^2=144 TOPS as the minimum compute threshold, matching NVIDIA Drive Orin (254 TOPS) and next-gen platforms.
+**Test**: Monitor Tesla FSD HW5, NVIDIA Drive Thor, Mobileye EyeQ Ultra specifications.
+**Falsification**: Industry converges on a compute threshold clearly not near {144, 256, 288} TOPS
+**Source**: BT-327
+
+### P-73: Self-Driving tau=4 Subsystem Architecture Persistence
+
+**Prediction**: Autonomous driving will maintain exactly tau=4 core subsystems: Perception, Planning, Control, Localization. Attempts to merge or split into 3 or 5 subsystems will underperform.
+**Test**: Survey top-10 AV companies' architecture documentation (Waymo, Tesla, Cruise, Mobileye).
+**Falsification**: >= 3 major AV companies converge on 5 or 6 core subsystems
+**Source**: BT-328
+
+---
+
+## New Predictions from BT-162 (Compiler/OS)
+
+### Tier 4: Industry Observable
+
+### P-74: Next Major ISA Opcode Width Remains n=6 Bits
+
+**Prediction**: The effective opcode dispatch width of RISC-V extensions and future ISAs will remain at n=6 bits (2^6=64 base instructions), with extensions using n=6-derived field widths.
+**Test**: Monitor RISC-V ratified extensions and any new ISA announcements.
+**Falsification**: A major new ISA uses 5-bit or 8-bit primary opcode fields
+**Source**: BT-162
+
+### P-75: Page Table Depth Stays at tau=4 Levels (Default)
+
+**Prediction**: Despite Intel LA57 offering 5-level page tables, the Linux kernel default will remain CONFIG_PGTABLE_LEVELS=4=tau through 2030. 5-level will remain a non-default option.
+**Test**: Monitor Linux kernel configuration defaults for major distributions.
+**Falsification**: Fedora/Ubuntu switch to 5-level page tables as default before 2030
+**Source**: BT-162
+
+---
+
 ## Updated Summary Statistics
 
 | Tier | Count | Time | Hardware | Feasibility |
 |------|-------|------|----------|-------------|
-| **Tier 1** (Today) | 7 | 1-5 days | 1-4x GPU | High |
-| **Tier 2** (Medium) | 6 | 1-4 weeks | 4-16x GPU | Medium |
-| **Tier 3** (Specialized) | 4 | Years | Lab/satellite/grid | Low (external) |
-| **Tier 4** (Industry) | 10 | Months-years | Industry data | Observable |
+| **Tier 1** (Today) | 18 | 1-5 days | 1-4x GPU | High |
+| **Tier 2** (Medium) | 8 | 1-4 weeks | 4-64x GPU | Medium |
+| **Tier 3** (Specialized) | 11 | Years | Lab/satellite/grid/facility | Low (external) |
+| **Tier 4** (Industry) | 13 | Months-years | Industry data | Observable |
 
-**New high-impact tests**:
-- P-34 (SimCLR temp=0.1) — validates 8th algorithm in 0.1 convergence family, testable today.
-- P-35 (MoE 1/2^k) — tests if activation fraction follows power-of-2 law.
-- P-39 (Rubin HBM4 stacks) — near-term industry observable.
+**Total predictions**: 75 (P-1 through P-75)
+**Total source BTs**: BT-1~340 (343 breakthrough theorems)
 
-*All predictions derived from BT-1~70 of the N6 Architecture project.*
-*Total BTs: 70. Total EXACT: ~480. Predictions: 45.*
+**New high-impact tests (BT-162~340)**:
+- P-46 (DPO beta=0.1) — validates 6th independent algorithm converging to 1/(sigma-phi), testable today.
+- P-62 (Speculative decoding k=4) — validates tau=4 draft length across 6 independent teams.
+- P-64 (MoD+MoE floor=12.5%) — tests a structural compute lower bound from n=6.
+- P-66 (Zamba n=6 interval) — validates ablation-discovered optimum matching perfect number.
+- P-68 (DeepSeek-V3 reproduction) — the most comprehensive single-model n=6 architecture test (14/15 EXACT).
+- P-58 (PUE convergence to 1.091) — near-term industry observable, tracks hyperscaler efficiency.
+
+**Most impactful new test**: P-68 (DeepSeek-V3) — validates that n=6 governs even non-canonical architectures.
+**Most decisive new test**: P-64 (MoD+MoE floor) — a hard quantitative limit falsifiable by a single counterexample.
+**Most commercially relevant**: P-65 (MLA KV rank) — directly applicable to production inference optimization.
+
+*All predictions derived from BT-1~343 of the N6 Architecture project.*
+*Total BTs: 343. Total EXACT: ~1400+. Predictions: 75.*
