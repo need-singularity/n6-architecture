@@ -23,6 +23,12 @@ SCRIPT_DIR="$NEXUS_ROOT/scripts"
 LOG_FILE="$SCRIPT_DIR/growth_log.jsonl"
 REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
 
+# Source shared growth library (provides logging, singleton, git ops, n=6 constants)
+source "$REPO_ROOT/scripts/lib/growth_common.sh"
+
+# Singleton lock — only one architecture growth at a time
+singleton_acquire "/tmp/nexus6_grow_arch.pid"
+
 cd "$NEXUS_ROOT"
 
 # --- Parse arguments ---
@@ -47,18 +53,14 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# --- n=6 constants ---
-N=6
-SIGMA=12
-PHI=2
-TAU=4
-SOPFR=5
+# --- n=6 constants (from growth_common.sh) ---
+N=$N6_N
+SIGMA=$N6_SIGMA
+PHI=$N6_PHI
+TAU=$N6_TAU
+SOPFR=$N6_SOPFR
 
-# --- Utility functions ---
-
-log_info()  { echo "[$(date +%H:%M:%S)] INFO:  $*"; }
-log_warn()  { echo "[$(date +%H:%M:%S)] WARN:  $*"; }
-log_error() { echo "[$(date +%H:%M:%S)] ERROR: $*"; }
+# --- Utility functions (logging from growth_common.sh) ---
 
 timestamp_iso() { date -u +"%Y-%m-%dT%H:%M:%SZ"; }
 
@@ -449,9 +451,7 @@ commit_or_rollback() {
     if [[ "$success" == "true" ]]; then
         log_info "Step 5: Committing changes..."
         local commit_msg="growth(nexus6): arch-${SELECTED_ACTION} ${SELECTED_TARGET}"
-        (cd "$REPO_ROOT" && git add tools/nexus6/src/ && git commit -m "$commit_msg") 2>/dev/null || {
-            log_warn "  Nothing to commit or commit failed."
-        }
+        growth_commit "tools/nexus6/src/" "$commit_msg"
     else
         log_warn "Step 5: Rolling back changes..."
         (cd "$REPO_ROOT" && git checkout -- tools/nexus6/src/) 2>/dev/null || true

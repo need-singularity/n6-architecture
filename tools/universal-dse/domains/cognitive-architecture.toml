@@ -1,0 +1,349 @@
+# =============================================================
+# HEXA-COGNI DSE Domain Definition
+# Cognitive Architecture (인지공학)
+# 핵심: 대뇌피질 n=6 층, 격자세포 n=6 육각, 뇌신경 σ=12 쌍
+# 뇌엽 τ=4, 해마 CA τ=4, 주요 신경전달물질 n=6 종
+# Total raw combos: 5x6x5x5x5 = 3,750 (pre-filter)
+# =============================================================
+
+[meta]
+name = "cognitive-architecture"
+desc = "Cognitive Architecture DSE (n=6 cortical layers, σ=12 cranial nerves, τ=4 lobes)"
+levels = ["Neuron-Material", "Synapse-Process", "Cortical-Core", "Brain-Chip", "Cognitive-System"]
+vision = "n=6 cortical architecture -- 6 layers × σ=12 connections × J₂=24 areas × τ=4 lobes"
+
+[scoring]
+n6   = 0.40
+perf = 0.25
+power = 0.20
+cost  = 0.15
+
+# =============================================================
+# Level 0: Neuron Material (뉴런 소재) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Neuron-Material"
+
+[[candidate]]
+level  = 0
+id     = "Carbon_Z6"
+label  = "Carbon-based Neural Interface (Z=6)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.50
+notes  = "Carbon Z=6=n, graphene electrodes, CNT interconnects, BT-93 Z=6 universality"
+
+[[candidate]]
+level  = 0
+id     = "Silicon"
+label  = "Silicon CMOS Neuron"
+n6     = 0.50
+perf   = 0.85
+power  = 0.60
+cost   = 0.90
+notes  = "Si Z=14, mature CMOS process, high yield, TrueNorth/Loihi basis"
+
+[[candidate]]
+level  = 0
+id     = "GaAs"
+label  = "GaAs High-Speed Neuron"
+n6     = 0.33
+perf   = 0.95
+power  = 0.40
+cost   = 0.30
+notes  = "GaAs Z=31+33, ultra-fast switching, high power consumption"
+
+[[candidate]]
+level  = 0
+id     = "Organic"
+label  = "Organic Semiconductor Neuron"
+n6     = 0.83
+perf   = 0.60
+power  = 0.85
+cost   = 0.70
+notes  = "Carbon-based organic (C₆ backbone=n), biocompatible, flexible"
+
+[[candidate]]
+level  = 0
+id     = "Diamond"
+label  = "Diamond NV-Center Neuron"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.20
+notes  = "Diamond = pure Carbon Z=6=n, NV-center quantum sensing, BT-93"
+
+# =============================================================
+# Level 1: Synapse Process (시냅스 공정) -- 6 candidates
+# =============================================================
+[[level]]
+name = "Synapse-Process"
+
+[[candidate]]
+level  = 1
+id     = "CMOS_65nm"
+label  = "CMOS 65nm Analog Synapse"
+n6     = 0.33
+perf   = 0.60
+power  = 0.70
+cost   = 0.90
+notes  = "Mature process, BrainScaleS-style analog synapse"
+
+[[candidate]]
+level  = 1
+id     = "FinFET_7nm"
+label  = "FinFET 7nm Digital Synapse"
+n6     = 0.50
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "Advanced node, Loihi 2 style, 7nm = sopfr+phi nm"
+
+[[candidate]]
+level  = 1
+id     = "Memristor"
+label  = "Memristive Synapse (σ=12 states)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.40
+notes  = "σ=12 conductance states, analog weight storage, STDP native"
+
+[[candidate]]
+level  = 1
+id     = "Photonic"
+label  = "Photonic Synapse (BT-89)"
+n6     = 0.83
+perf   = 0.95
+power  = 0.90
+cost   = 0.25
+notes  = "Photonic weight, BT-89 photonic-energy bridge, speed of light"
+
+[[candidate]]
+level  = 1
+id     = "Spintronic"
+label  = "Spintronic Synapse (MTJ)"
+n6     = 0.67
+perf   = 0.80
+power  = 0.80
+cost   = 0.45
+notes  = "Magnetic tunnel junction, non-volatile, low power"
+
+[[candidate]]
+level  = 1
+id     = "BioHybrid"
+label  = "Bio-Hybrid Synapse (living neurons)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.95
+cost   = 0.15
+notes  = "Living neuron interface, n=6 cortical layers native, ultimate biocompat"
+
+# =============================================================
+# Level 2: Cortical Core (피질 코어) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Cortical-Core"
+
+[[candidate]]
+level  = 2
+id     = "SixLayer_Column"
+label  = "6-Layer Cortical Column (n=6)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.50
+notes  = "n=6 layers = neocortex EXACT, canonical microcircuit, (sigma-phi)^tau=10^4 neurons/column"
+
+[[candidate]]
+level  = 2
+id     = "Hexagonal_Array"
+label  = "Hexagonal Array (n=6 geometry)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.85
+cost   = 0.55
+notes  = "n=6 hexagonal tiling, grid cell inspired, 6 nearest neighbors"
+
+[[candidate]]
+level  = 2
+id     = "Crossbar"
+label  = "Crossbar Array (rows × cols)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.75
+cost   = 0.80
+notes  = "Standard crossbar, sigma=12 rows typical, memristor compatible"
+
+[[candidate]]
+level  = 2
+id     = "ThreeD_Stack"
+label  = "3D-Stacked Cortical Core (n=6 layers)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.60
+cost   = 0.30
+notes  = "3D stacking of n=6 functional layers, vertical interconnect"
+
+[[candidate]]
+level  = 2
+id     = "Reservoir"
+label  = "Reservoir Computing Core"
+n6     = 0.33
+perf   = 0.70
+power  = 0.90
+cost   = 0.75
+notes  = "Echo state network / liquid state machine, random connectivity"
+
+# =============================================================
+# Level 3: Brain Chip (브레인 칩) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Brain-Chip"
+
+[[candidate]]
+level  = 3
+id     = "SpiNNaker2"
+label  = "SpiNNaker 2 (ARM-based)"
+n6     = 0.50
+perf   = 0.80
+power  = 0.60
+cost   = 0.70
+notes  = "Manchester Univ, 152 ARM cores, 1B synapses, 10W"
+
+[[candidate]]
+level  = 3
+id     = "Loihi3"
+label  = "Intel Loihi 3 (projected)"
+n6     = 0.50
+perf   = 0.85
+power  = 0.80
+cost   = 0.60
+notes  = "Intel neuromorphic, event-driven, ~1W per chip"
+
+[[candidate]]
+level  = 3
+id     = "TrueNorth2"
+label  = "IBM TrueNorth 2 (projected)"
+n6     = 0.50
+perf   = 0.75
+power  = 0.85
+cost   = 0.65
+notes  = "IBM 1M neuron architecture, 70mW original, next-gen"
+
+[[candidate]]
+level  = 3
+id     = "HEXA_COGNI"
+label  = "HEXA-COGNI (n=6 native, J₂=24 areas)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.35
+notes  = "Native n=6 cortical layers, J_2=24 Brodmann clusters, sigma^2=144M neurons, 2W"
+
+[[candidate]]
+level  = 3
+id     = "BrainScaleS3"
+label  = "BrainScaleS 3 (analog, projected)"
+n6     = 0.33
+perf   = 0.80
+power  = 0.75
+cost   = 0.50
+notes  = "Heidelberg Univ, analog acceleration 10^4x, mixed-signal"
+
+# =============================================================
+# Level 4: Cognitive System (인지 시스템) -- 5 candidates
+# =============================================================
+[[level]]
+name = "Cognitive-System"
+
+[[candidate]]
+level  = 4
+id     = "Single_Chip"
+label  = "Single-Chip Cognitive Unit"
+n6     = 0.50
+perf   = 0.60
+power  = 0.90
+cost   = 0.90
+notes  = "Monolithic, tau=4 lobes on 1 die, power-limited"
+
+[[candidate]]
+level  = 4
+id     = "MultiChip_Mesh"
+label  = "Multi-Chip Mesh (σ=12 nodes)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.60
+notes  = "sigma=12 chip mesh, sigma=12 kissing number topology (BT-127)"
+
+[[candidate]]
+level  = 4
+id     = "Wafer_Scale"
+label  = "Wafer-Scale Cognitive Engine"
+n6     = 0.67
+perf   = 0.95
+power  = 0.40
+cost   = 0.20
+notes  = "Cerebras-style wafer, massive parallelism, high power/cost"
+
+[[candidate]]
+level  = 4
+id     = "Hybrid_Bio"
+label  = "Hybrid Bio-Electronic System"
+n6     = 1.00
+perf   = 0.80
+power  = 0.95
+cost   = 0.15
+notes  = "Living neurons + electronic interface, ultimate n=6 native, (J_2-tau)=20W brain-equivalent"
+
+[[candidate]]
+level  = 4
+id     = "Cloud_Edge"
+label  = "Cloud-Edge Distributed Cognition"
+n6     = 0.50
+perf   = 0.90
+power  = 0.50
+cost   = 0.75
+notes  = "Distributed across cloud+edge, scalable, latency tradeoff"
+
+# =============================================================
+# Cross-Domain Rules (교차 도메인 규칙)
+# =============================================================
+
+[[rule]]
+type = "bonus"
+condition = "level0.n6 >= 0.8 AND level2.n6 >= 0.8"
+bonus = 0.10
+reason = "Carbon Z=6 material + 6-layer cortical core synergy"
+
+[[rule]]
+type = "bonus"
+condition = "level1.id == 'Memristor' AND level2.id == 'SixLayer_Column'"
+bonus = 0.15
+reason = "Memristive synapse (sigma=12 states) + n=6 cortical column = optimal pairing"
+
+[[rule]]
+type = "bonus"
+condition = "level3.id == 'HEXA_COGNI' AND level4.id == 'MultiChip_Mesh'"
+bonus = 0.10
+reason = "HEXA-COGNI chip + sigma=12 mesh = full n=6 cognitive system"
+
+[[rule]]
+type = "penalty"
+condition = "level0.id == 'GaAs' AND level4.id == 'Hybrid_Bio'"
+penalty = -0.20
+reason = "GaAs incompatible with bio-hybrid (toxicity, thermal)"
+
+[[rule]]
+type = "penalty"
+condition = "level2.id == 'Reservoir' AND level3.id == 'HEXA_COGNI'"
+penalty = -0.15
+reason = "Reservoir computing lacks n=6 cortical structure required by HEXA-COGNI"
+
+[[rule]]
+type = "bonus"
+condition = "level0.id == 'Carbon_Z6' AND level1.id == 'BioHybrid'"
+bonus = 0.10
+reason = "Carbon biocompatible interface + living neurons = seamless integration"

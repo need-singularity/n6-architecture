@@ -13,6 +13,11 @@ set -euo pipefail
 
 CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
+
+# Source shared growth library
+source "$REPO_ROOT/scripts/lib/growth_common.sh"
+
 cd "$NEXUS_ROOT"
 
 if [[ $# -lt 1 ]]; then

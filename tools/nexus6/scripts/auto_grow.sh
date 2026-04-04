@@ -17,6 +17,9 @@ SCRIPT_DIR="$NEXUS_ROOT/scripts"
 LOG_FILE="$SCRIPT_DIR/growth_log.jsonl"
 REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
 
+# Source shared growth library
+source "$REPO_ROOT/scripts/lib/growth_common.sh"
+
 cd "$NEXUS_ROOT"
 
 # --- Parse arguments ---
@@ -45,11 +48,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# --- Utility functions ---
-
-log_info()  { echo "[$(date +%H:%M:%S)] INFO:  $*"; }
-log_warn()  { echo "[$(date +%H:%M:%S)] WARN:  $*"; }
-log_error() { echo "[$(date +%H:%M:%S)] ERROR: $*"; }
+# --- Utility functions (logging from growth_common.sh) ---
 
 collect_metrics() {
     # Returns JSON metrics on stdout
@@ -235,6 +234,18 @@ print(json.dumps(d))
 
     # --- Step 3: Generate ---
     log_info "Step 3/6: Generating improvements..."
+
+    # Resource check before heavy operation
+    res_status=$(check_resources)
+    if [[ "$res_status" == "STOP" ]]; then
+        log_error "Resources critical ($res_status) — skipping cycle."
+        print_resources
+        continue
+    elif [[ "$res_status" != "OK" ]]; then
+        log_warn "Resource status: $res_status — proceeding with caution."
+        print_resources
+    fi
+
     gen_ok=true
     if ! execute_growth_action "$action"; then
         log_warn "Generation step failed. Skipping this cycle."
@@ -279,9 +290,7 @@ print(json.dumps(d))
 
         commit_msg="growth(nexus6): ${action_type} — cycle ${cycle}, tests ${before_tests}->${after_tests}"
 
-        (cd "$REPO_ROOT" && git add tools/nexus6/src/ && git commit -m "$commit_msg") 2>/dev/null || {
-            log_warn "Nothing to commit or commit failed."
-        }
+        growth_commit "tools/nexus6/src/" "$commit_msg"
     elif $validate_ok && $SKIP_COMMIT; then
         log_info "Step 5/6: Skipping commit (--skip-commit)"
     else

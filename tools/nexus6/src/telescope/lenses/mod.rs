@@ -166,6 +166,18 @@ pub mod latency_lens;
 pub mod register_pressure_lens;
 pub mod prefetch_lens;
 pub mod tail_call_lens;
+// ── Compiler Optimization family (L21-L31) ──
+pub mod aliasing_lens;
+pub mod cache_affinity_lens;
+pub mod const_prop_lens;
+pub mod dead_code_lens;
+pub mod escape_analysis_lens;
+pub mod generic_lens;
+pub mod hot_path_lens;
+pub mod memory_pattern_lens;
+pub mod parallelism_lens;
+pub mod semantic_lens;
+pub mod simd_opportunity_lens;
 
 pub use void_lens::VoidLens;
 pub use barrier_lens::BarrierLens;
@@ -335,3 +347,15 @@ pub use latency_lens::LatencyLens;
 pub use register_pressure_lens::RegisterPressureLens;
 pub use prefetch_lens::PrefetchLens;
 pub use tail_call_lens::TailCallLens;
+// Compiler Optimization L21-L31
+pub use aliasing_lens::AliasingLens;
+pub use cache_affinity_lens::CacheAffinityLens;
+pub use const_prop_lens::ConstPropLens;
+pub use dead_code_lens::DeadCodeLens;
+pub use escape_analysis_lens::EscapeAnalysisLens;
+pub use generic_lens::GenericLens;
+pub use hot_path_lens::HotPathLens;
+pub use memory_pattern_lens::MemoryPatternLens;
+pub use parallelism_lens::ParallelismLens;
+pub use semantic_lens::SemanticLens;
+pub use simd_opportunity_lens::SimdOpportunityLens;

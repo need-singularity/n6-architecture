@@ -240,7 +240,7 @@ dse = "done"
 combos = 2446
 tool = "tools/universal-dse/ domains/fusion.toml"
 levels = ["Fuel", "Confinement", "Heating", "Blanket", "Plant"]
-cross_dse = ["superconductor", "plasma-physics", "energy-architecture", "battery-architecture", "solar-architecture", "chip-architecture", "environmental-protection", "robotics", "material-synthesis"]
+cross_dse = ["superconductor", "plasma-physics", "energy-architecture", "battery-architecture", "solar-architecture", "chip-architecture", "environmental-protection", "robotics", "material-synthesis", "statistical-mechanics", "turbine-generator", "heat-exchanger", "topology", "chaos-dynamical", "magnetic-material", "reactor-vessel", "power-electronics", "hydrogen-fuel-cell", "refractory-material"]
 cross_dse_8domain = "docs/fusion/cross-dse-8domain-results.md"
 cross_dse_8domain_score = 0.9932
 best_pareto = "DT_Li6 + Tokamak_N6 + N6_TriHeat + N6_Li6_Blanket + N6_Brayton6 (0.920)"
@@ -16747,6 +16747,88 @@ status = "done"
 bridge = "생물학적 탄소포집. C₆H₁₂O₆(BT-27) + σ=12년 벌기"
 n6_exact = 6
 note = "자연 기반 솔루션 = 산림 탄소 흡수"
+
+# ── 핵융합 Cross-DSE 미탐색 HIGH 10개 (2026-04-04 추가) ────────────────────
+
+[cross-dse.fusion-x-statistical-mechanics]
+domains = ["fusion", "statistical-mechanics"]
+status = "proposed"
+priority = "high"
+bridge = "플라즈마 = 6D phase space (3위치+3속도 = n=6 EXACT)"
+n6_resonance = "6D Vlasov, ln(Lambda)~sigma=12, Debye number ~10^(sigma-phi)"
+note = "Vlasov 방정식 6D 위상공간 = n=6 완전 대응, 쿨롱 로그 sigma=12"
+
+[cross-dse.fusion-x-turbine-generator]
+domains = ["fusion", "turbine-generator"]
+status = "proposed"
+priority = "high"
+bridge = "핵융합 발전소 전력 출력의 핵심"
+n6_resonance = "6 stages, sigma=12 blade rows, J2=24 MW class, 60Hz=sigma*sopfr (BT-62)"
+note = "BT-62 grid frequency + J2=24 MW 급 터빈 — 핵융합→전력 변환 경로"
+
+[cross-dse.fusion-x-heat-exchanger]
+domains = ["fusion", "heat-exchanger"]
+status = "proposed"
+priority = "high"
+bridge = "Blanket-to-turbine 열 전달 병목"
+n6_resonance = "sigma=12 baffles, J2=24 tube passes, phi=2 fluid sides"
+note = "핵융합 blanket 열회수 → 터빈 열전달, sigma/J2 최적 배치"
+
+[cross-dse.fusion-x-topology]
+domains = ["fusion", "topology"]
+status = "proposed"
+priority = "high"
+bridge = "자기면 위상, q-profile, stellarator rotational transform"
+n6_resonance = "q=1=BT-99, n=6 period stellarator, Chern number"
+note = "BT-99 q=1 = 완전수 진약수 역수합 1/2+1/3+1/6=1, 위상적 동치"
+
+[cross-dse.fusion-x-chaos-dynamical]
+domains = ["fusion", "chaos-dynamical"]
+status = "proposed"
+priority = "high"
+bridge = "ELM/disruption dynamics, 플라즈마 난류"
+n6_resonance = "n=6 toroidal RMP mode (ITER 설계), strange attractor dim~6"
+note = "ITER RMP n=6 모드 = ELM 억제 최적, 이상 끌개 차원 ~6"
+
+[cross-dse.fusion-x-magnetic-material]
+domains = ["fusion", "magnetic-material"]
+status = "proposed"
+priority = "high"
+bridge = "HTS tape + 강자성 인서트 + 자석 설계"
+n6_resonance = "sigma=12T target, J2=24T peak field, BT-43 CN=6"
+note = "BT-43 CN=6 배위수 보편성 + REBCO sigma=12T 운전 자기장"
+
+[cross-dse.fusion-x-reactor-vessel]
+domains = ["fusion", "reactor-vessel"]
+status = "proposed"
+priority = "high"
+bridge = "진공용기 + 크라이오스탯 설계"
+n6_resonance = "sigma=12 toroidal sectors, n=6 VDE coils, tau=4 port types"
+note = "ITER 진공용기 sigma=12 toroidal 섹터, n=6 수직변위 억제 코일"
+
+[cross-dse.fusion-x-power-electronics]
+domains = ["fusion", "power-electronics"]
+status = "proposed"
+priority = "high"
+bridge = "RF/코일/그리드 MW급 전력변환"
+n6_resonance = "SiC Z=6, sigma=12 kHz switching, tau=4 phase legs"
+note = "SiC (C Z=6) 파워반도체 + sigma=12 kHz 스위칭 주파수"
+
+[cross-dse.fusion-x-hydrogen-fuel-cell]
+domains = ["fusion", "hydrogen-fuel-cell"]
+status = "proposed"
+priority = "high"
+bridge = "핵융합-수소 경제 연결"
+n6_resonance = "BT-38 H2 LHV=120=sigma(sigma-phi), HHV=142=sigma^2-phi"
+note = "BT-38 수소 4중주 EXACT + 핵융합 잉여전력 → 수소 생산 경로"
+
+[cross-dse.fusion-x-refractory-material]
+domains = ["fusion", "refractory-material"]
+status = "proposed"
+priority = "high"
+bridge = "플라즈마 대면 소재 (W, SiC)"
+n6_resonance = "SiC C Z=6, W tiles sigma=12 mm thickness"
+note = "SiC (C Z=6) 플라즈마 대면 소재 + W 타일 sigma=12 mm 두께"
 
 # ── 신규 도메인 (2026-04-02 추가) ────────────────────
 

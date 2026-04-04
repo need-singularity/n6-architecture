@@ -7,6 +7,11 @@ set -euo pipefail
 
 CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
+
+# Source shared growth library
+source "$REPO_ROOT/scripts/lib/growth_common.sh"
+
 cd "$NEXUS_ROOT"
 
 MODULE_NAME="${1:-}"
@@ -128,6 +133,8 @@ added=$((after_tests - before_tests))
 echo ""
 if $check_ok && $test_ok; then
     echo "SUCCESS: Added $added tests to $MODULE_NAME ($before_tests -> $after_tests)"
+    growth_commit "tools/nexus6/src/$MODULE_NAME/" \
+        "growth(nexus6): +${added} tests for $MODULE_NAME ($before_tests -> $after_tests)"
 else
     echo "FAILED: New tests did not pass verification."
     echo "Reverting changes..."

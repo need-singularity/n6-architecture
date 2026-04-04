@@ -80,6 +80,10 @@ use lenses::{
     BranchPredictLens, LoopInvariantLens, CompilerFusionLens, SpecializationLens,
     LayoutLens, PowerConsumptionLens, LatencyLens, RegisterPressureLens,
     PrefetchLens, TailCallLens,
+    // Compiler Optimization L21-L31
+    AliasingLens, CacheAffinityLens, ConstPropLens, DeadCodeLens,
+    EscapeAnalysisLens, HotPathLens, MemoryPatternLens,
+    ParallelismLens, SemanticLens, SimdOpportunityLens,
 };
 use shared_data::SharedData;
 
@@ -269,6 +273,17 @@ impl Telescope {
             Box::new(RegisterPressureLens),
             Box::new(PrefetchLens),
             Box::new(TailCallLens),
+            // ── Compiler Optimization lenses (L21-L31) ──
+            Box::new(AliasingLens),
+            Box::new(CacheAffinityLens),
+            Box::new(ConstPropLens),
+            Box::new(DeadCodeLens),
+            Box::new(EscapeAnalysisLens),
+            Box::new(HotPathLens),
+            Box::new(MemoryPatternLens),
+            Box::new(ParallelismLens),
+            Box::new(SemanticLens),
+            Box::new(SimdOpportunityLens),
         ];
         Telescope { lenses }
     }

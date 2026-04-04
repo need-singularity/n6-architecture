@@ -24,6 +24,11 @@ set -euo pipefail
 
 CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
+
+# Source shared growth library
+source "$REPO_ROOT/scripts/lib/growth_common.sh"
+
 cd "$NEXUS_ROOT"
 
 # ─── Defaults ───────────────────────────────────────────────────────────────────
@@ -414,7 +419,13 @@ Do NOT create stubs. Write real mathematical analysis logic."
     echo ""
 done
 
-# ─── Step 5: Report ────────────────────────────────────────────────────────────
+# ─── Step 5: Commit + Report ───────────────────────────────────────────────────
+if [[ "$SUCCESS_COUNT" -gt 0 ]]; then
+    log_info "Committing $SUCCESS_COUNT new lens implementation(s)..."
+    growth_commit "tools/nexus6/src/telescope/lenses/" \
+        "growth(nexus6): lens batch — ${SUCCESS_COUNT} lenses implemented"
+fi
+
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
 echo "  NEXUS-6 Lens Growth Report"

@@ -2,7 +2,7 @@
 
 > 35개 예측(P-FU-01~35)의 검증 상태를 공개 데이터 기반으로 추적한다.
 > 목표: 🛸10 = "모든 예측 전수 검증 완료"
-> 작성: 2026-04-02 (v2 — 산업검증/실험데이터 반영)
+> 작성: 2026-04-04 (v3 — P-FU-08 재정의, P-FU-30 WEAKENED, 검증 우선순위 추가)
 > 원본: `testable-predictions-2030.md`
 
 ---
@@ -10,13 +10,13 @@
 ## 검증 진행률
 
 ```
-검증 진행률: █████████████░░░░░░░ 22/35 (63%)
+검증 진행률: ██████████████░░░░░░ 23/35 (66%)
   ✅ 확인:    ███████████░░░░░░░░░ 15개 (43%)
   🔄 부분:    ████░░░░░░░░░░░░░░░░  4개 (11%)
-  ⏳ 대기:    ████████░░░░░░░░░░░░ 12개 (34%)
+  ⏳ 대기:    ███████░░░░░░░░░░░░░ 11개 (31%)
   ❌ 반증:    ░░░░░░░░░░░░░░░░░░░░  0개  (0%)
   🔮 미래:    ██░░░░░░░░░░░░░░░░░░  2개  (6%)
-  ⚠️ 약화:    ██░░░░░░░░░░░░░░░░░░  2개  (6%)
+  ⚠️ 약화:    ███░░░░░░░░░░░░░░░░░  3개  (9%)
 ```
 
 ## 검증 현황 요약
@@ -25,8 +25,8 @@
 |------|-----|------|
 | ✅ CONFIRMED | 15 | 42.9% |
 | 🔄 PARTIAL | 4 | 11.4% |
-| ⏳ PENDING | 12 | 34.3% |
-| ⚠️ WEAKENED | 2 | 5.7% |
+| ⏳ PENDING | 11 | 31.4% |
+| ⚠️ WEAKENED | 3 | 8.6% |
 | ❌ REFUTED | 0 | 0% |
 | 🔮 FUTURE | 2 | 5.7% |
 
@@ -50,7 +50,7 @@
 |----|------|------|------|----------|
 | P-FU-06 | SPARC Q>=10 at B_T~12T=sigma | 🔄 PARTIAL | HTS 20T 마그넷 실증 완료(2021). SPARC 건설 진행(2025-2026). B_T=12.2T 설계 확정. Q>=10은 D-T 운전 전까지 미검증 | 2028-2030 |
 | P-FU-07 | ITER TF 최적 마진 at 12T=sigma | ⏳ PENDING | ITER Nb3Sn TF는 11.8T 설계. 12T 마진 테스트는 first plasma(~2034) 이후. 재일정으로 지연 | 2029-2033 |
-| P-FU-08 | 최적 T_i~10 keV=sopfr*phi at D-T | ⏳ PENDING | D-T 최적 온도 ~14-20 keV 범위. 10 keV가 peak인지는 SPARC D-T 캠페인에서 검증 | 2028-2030 |
+| P-FU-08 | Minimum ignition threshold T_i = sopfr × φ = 10 keV (minimum practical ignition, not peak reactivity at ~14 keV) | ⏳ PENDING | D-T reactivity peak는 ~14 keV이므로 "optimal"이 아닌 "minimum ignition threshold"로 재정의. 10 keV는 self-heating이 시작되는 실용적 하한. SPARC D-T 캠페인에서 검증 | 2028-2030 |
 | P-FU-09 | HTS 마그넷 피로 수명 10^6=10^n 사이클 | ⏳ PENDING | CFS 양산 중이나 10^6 사이클 피로 데이터 미공개. 장기 테스트 필요 | 2027-2029 |
 
 ### 플라즈마 물리 예측 (P-FU-10~14)
@@ -97,7 +97,7 @@
 | P-FU-27 | 최적 dI/dt = 0.5 MA/s = 1/phi | ⏳ PENDING | ITER ~0.15 MA/s, KSTAR ~0.2 MA/s. 0.5 MA/s는 대형 장치에 과도 | 2027-2030 |
 | P-FU-28 | Divertor 열부하 한계 12 MW/m^2=sigma | ✅ CONFIRMED | W7-X 연속 열부하 실험 10 MW/m^2 달성. ITER 설계 10 MW/m^2 정상, 20 MW/m^2 과도. 12 MW/m^2는 정상/과도 경계 = 산업 한계 [Pitts+ 2019] | 설계 확정 |
 | P-FU-29 | 중성자 벽 부하 표준 2 MW/m^2=phi | ✅ CONFIRMED | EU-DEMO 설계 1.5-2.0 MW/m^2, ARC 설계 2.3 MW/m^2, K-DEMO 1.5 MW/m^2. 2 MW/m^2는 산업 합의 중앙값 [Zohm 2019] | 설계 확정 |
-| P-FU-30 | Pellet 주입 주파수 3 Hz/MW=n/phi | ⏳ PENDING | 스케일링 형태 불확실. n=6 연결 약함 | 2027-2029 |
+| P-FU-30 | Pellet 주입 주파수 3 Hz/MW=n/phi | ⚠️ WEAKENED | ITER baseline pellet 6Hz / 50MW = 0.12 Hz/MW로, 3 Hz/MW와 불일치. n=6 연결 약함 | 분석 완료 |
 
 ### 2026 신규 예측 (P-FU-31~35)
 
@@ -142,12 +142,13 @@
 
 ---
 
-## ⚠️ WEAKENED 상세 (2개)
+## ⚠️ WEAKENED 상세 (3개)
 
 | ID | 약화 이유 | 현재 상태 |
 |----|----------|---------|
 | P-FU-10 | ENDF 분석: 84 keV 부근 변곡 미약 | 예측 약화 — "구조"라 부르기 어려움 |
 | P-FU-25 | t_CQ/t_TQ 중앙값 ~5-6, 2 아님 | 예측 약화 — 데이터가 phi=2와 불일치 |
+| P-FU-30 | ITER baseline 6Hz/50MW=0.12 Hz/MW, 3 Hz/MW와 불일치 | 예측 약화 — n=6 연결 약함, 실측 데이터 불일치 |
 
 ---
 
@@ -180,10 +181,10 @@
 ```
   ✅ CONFIRMED 비율:  42.9% (15/35)
   ✅+🔄 비율:        54.3% (19/35)
-  ✅+🔄+⚠️:         60.0% (21/35)
+  ✅+🔄+⚠️:         62.9% (22/35)
   
   🛸10 요구: 물리 한계 + 전수 검증 → 35/35 필요
-    → 남은 12 PENDING + 2 FUTURE 중 다수가 2028-2030 SPARC/ITER 의존
+    → 남은 11 PENDING + 2 FUTURE 중 다수가 2028-2030 SPARC/ITER 의존
     
   🛸9 요구: ✅ > 90% → 32개 이상 CONFIRMED 필요 → 추가 17개 필요
   🛸8 요구: ✅+🔄 > 50% → 현재 54.3% ✅ → 🛸8 달성! ✅
@@ -224,3 +225,31 @@
 |------|------|
 | 2026-04-02 | 초기 작성. 35개 예측 전수 분류 완료 |
 | 2026-04-02 | v2: 산업검증 반영. ✅ 8→15, WEAKENED 2개 신설 |
+| 2026-04-04 | v3: P-FU-08 재정의(optimal→minimum ignition threshold), P-FU-30 WEAKENED 전환, 검증 우선순위 섹션 추가 |
+
+---
+
+## Verification Priority (2026-04 Update)
+
+### Priority 1: Immediately Verifiable (기존 DB/코드)
+- **P-FU-12**: Greenwald limit ratio — ITPA multi-machine DB 쿼리로 즉시 검증 가능
+- **P-FU-23**: ITG turbulence peak k⊥ρ_i = 1/3 — GENE/GS2 gyrokinetic benchmark 메타분석
+
+### Priority 2: 2026 Campaign (KSTAR + 기존 NTM DB)
+- **P-FU-01**: f_bs ≥ 50% — KSTAR W-divertor ITB 캠페인
+- **P-FU-03**: ECCD efficiency peak at ρ=1/3 — KSTAR ECCD power scan
+- **P-FU-13**: NTM onset at q_95=5=sopfr — DIII-D/ASDEX-U NTM DB 통계분석
+
+### Priority 3: 2027-28 (전용 실험)
+- **P-FU-02**: ELM-free record 96s or 144s — KSTAR W-divertor 장펄스
+- **P-FU-09**: HTS fatigue 10^6 cycles — CFS/SPARC 자석 인증 시험
+- **P-FU-14**: Alfven gap at q_95=5 — DIII-D/KSTAR q-scan 전용 실험
+- **P-FU-16**: SiC/SiC 12 DPA threshold — HFIR/BR2 중성자 조사
+
+### Priority 4: 2028-30 (SPARC/ITER 의존)
+- **P-FU-07**: ITER TF 12T=σ — ITER TF 코일 commissioning
+- **P-FU-08**: Minimum ignition T_i = 10 keV (재정의) — SPARC D-T 캠페인
+- **P-FU-27**: dI/dt=0.5 MA/s — SPARC ramp-up 최적화
+
+### Reclassified
+- **P-FU-30**: WEAKENED (n=6 연결 약함, 실측 데이터 불일치)

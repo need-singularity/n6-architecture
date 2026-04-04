@@ -2,26 +2,28 @@
 set -euo pipefail
 
 CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
-# NEXUS-6 Universal Growth Daemon
-# ================================
+# NEXUS-6 Universal Growth Daemon v3
+# ====================================
 # Master coordinator that cycles through ALL 15 growth dimensions,
 # picking the weakest each cycle and executing targeted growth actions.
 #
+# Now sources growth_common.sh for shared infrastructure:
+#   - Singleton enforcement (단독 실행)
+#   - Resource monitoring (CPU/MEM/DISK)
+#   - Logging, git ops, paper loop, auto domain, auto doc
+#
 # Usage: ./nexus6_growth_daemon.sh [--interval MIN] [--max-cycles N] [--dimension DIM] [--dry-run]
-#
-# Dimensions: performance, architecture, lenses, modules, tests, hypotheses,
-#             dse, experiments, calculators, cross_resonance, knowledge_graph,
-#             red_team, atlas, documentation, integration
-#
-# Safety brakes:
-#   - Stop if tests fail 3 consecutive times
-#   - Stop if --max-cycles reached
-#   - Graceful shutdown on SIGTERM/SIGINT
 
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRIPT_DIR="$NEXUS_ROOT/scripts"
 LOG_FILE="$SCRIPT_DIR/growth_log.jsonl"
 REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
+
+# ── Source shared library ───────────────────────────────────────
+COMMON_LIB="$REPO_ROOT/scripts/lib/growth_common.sh"
+if [[ -f "$COMMON_LIB" ]]; then
+    source "$COMMON_LIB"
+fi
 
 cd "$NEXUS_ROOT"
 

@@ -10,6 +10,7 @@ pub mod extended_discovery_nodes;
 pub mod recent_discoveries;
 pub mod recent_extended_nodes;
 pub mod bt185_discovery_nodes;
+pub mod math_sw_extended_nodes;
 
 pub use node::{Node, NodeType};
 pub use edge::{Edge, EdgeType};

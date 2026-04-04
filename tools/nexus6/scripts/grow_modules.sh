@@ -18,19 +18,23 @@ CLAUDE_CLI="${CLAUDE_CLI:-/Users/ghost/.local/bin/claude}"
 #   N=6, SIGMA=12, PHI=2, TAU=4, J2=24, SOPFR=5
 
 NEXUS_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_ROOT="$(cd "$NEXUS_ROOT/../.." && pwd)"
 SRC_DIR="$NEXUS_ROOT/src"
 LOG_FILE="$NEXUS_ROOT/growth_log.jsonl"
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-# ── n=6 constants ────────────────────────────────────────────────────
-N=6
-SIGMA=12
-PHI=2
-TAU=4
-J2=24
-SOPFR=5
-SIGMA_MINUS_TAU=8
-SIGMA_MINUS_PHI=10
+# Source shared growth library (provides logging, git ops, n=6 constants)
+source "$REPO_ROOT/scripts/lib/growth_common.sh"
+
+# ── n=6 constants (derived from growth_common.sh N6_* constants) ─────
+N=$N6_N
+SIGMA=$N6_SIGMA
+PHI=$N6_PHI
+TAU=$N6_TAU
+J2=$N6_J2
+SOPFR=$N6_SOPFR
+SIGMA_MINUS_TAU=$((SIGMA - TAU))
+SIGMA_MINUS_PHI=$((SIGMA - PHI))
 
 # ── Maturity thresholds ──────────────────────────────────────────────
 # Empty:       0 lines
@@ -360,6 +364,10 @@ upgrade_module() {
 
   echo "  [OK] Upgrade complete: +${lines_added} lines, +${tests_added} tests"
   log_result "$name" "$current_maturity" "$target_maturity" "SUCCESS" "$pre_lines" "$pre_tests" "$lines_added" "$tests_added"
+
+  # Commit via shared growth library
+  growth_commit "tools/nexus6/src/$name/" \
+      "growth(nexus6): module $name ${current_maturity}->${target_maturity} (+${lines_added}L, +${tests_added}T)"
   return 0
 }
 
