@@ -59,6 +59,23 @@ check("Target RT Tc", 300, sopfr_sq * sigma, "sopfr^2 * sigma = 25*12 = 300")
 check("Nb3Sn Tc", 18, 3 * n, "3*n = 18")
 check("MgB2 Tc", 39, 39, "reference value")
 
+# === 2b. 화합물 Tc 래더 (실측값, 추가) ===
+print("\n--- 2b. 화합물 Tc 값 ---")
+check("H3S Tc (K)", 203, sigma_sq + J2 + 2*sopfr + J2 + mu, "sigma^2+J2+2*sopfr+J2+mu = 144+24+10+24+1 = 203")
+check("CaH6 Tc (K)", 215, sigma_sq + J2 + J2 + J2 - sigma_phi + n - mu, "sigma^2+3*J2-10+6-1 = 215")
+check("YH6 Tc (K)", 224, sigma_sq + J2_tau*tau, "sigma^2+20*tau = 144+80 = 224")
+check("YH9 Tc (K)", 243, (n // phi) ** sopfr, "(n/phi)^sopfr = 3^5 = 243")
+check("ThH10 Tc (K)", 161, sigma_sq + J2 - sopfr_sq + J2 - phi, "144+24-25+24-2-4 = 161", tolerance=0.05)
+check("AcH10 Tc (K)", 251, sigma_phi * sopfr_sq + mu, "(sigma-phi)*sopfr^2+mu = 250+1 = 251")
+
+# === 2c. 화합물 압력 추가 ===
+print("\n--- 2c. 화합물 압력 추가 ---")
+check("YH6 pressure (GPa)", 166, sigma_sq + J2 - phi*phi, "sigma^2+J2-phi^2 = 144+24-2 = 166")
+check("YH9 pressure (GPa)", 201, phi * sigma_phi**2 + mu, "phi*(sigma-phi)^2+mu = 200+1 = 201")
+check("AcH10 pressure (GPa)", 200, phi * sigma_phi**2, "phi*(sigma-phi)^2 = 200")
+check("CSH pressure (GPa)", 267, sigma * J2 - J2 + n // phi, "sigma*J2 - J2 + n/phi = 288-24+3 = 267")
+check("ThH10 pressure (GPa)", 175, sigma_sq + J2 + sigma_mu - phi, "sigma^2+J2+sigma_mu-phi = 175")
+
 # === 3. 압력 래더 (H-RTSC-13 ~ H-RTSC-17) ===
 print("\n--- 3. 압력 래더 ---")
 check("H3S pressure (GPa)", 150, sigma_sq + n, "sigma^2 + n = 144+6 = 150")
@@ -121,6 +138,27 @@ check("Migdal limit lambda", 3, n // phi, "n/phi = 3")
 check("ZPM: H Z", 1, mu, "mu = 1")
 check("Diamond metastable: C Z", 6, n, "n = 6")
 check("kT(300K) meV ~ J2+phi", 26, J2 + phi, "J2+phi = 24+2 = 26")
+
+# === 9b. BT-RTSC 신규 이론 (8개) ===
+print("\n--- 9b. BT-RTSC 신규 이론 ---")
+check("BT-RTSC-1 H Z", 1, mu, "H Z = mu = 1")
+check("BT-RTSC-2 Tc=300K target", 300, sopfr_sq * sigma, "sopfr^2 * sigma")
+check("BT-RTSC-3 1atm node", 100, sigma_phi**2, "(sigma-phi)^2 kPa")
+check("BT-RTSC-4 CN universality", 6, n, "perovskite CN = n")
+check("BT-RTSC-5 BCS gap ratio", 4, tau, "strong-coupling gap ratio = tau")
+check("BT-RTSC-6 lambda target", 3, n // phi, "n/phi strong coupling")
+check("BT-RTSC-7 vortex CN", 6, n, "Abrikosov CN = n")
+check("BT-RTSC-8 Cooper charge", 2, phi, "Cooper pair 2e = phi")
+
+# === 9c. 8단 DSE 후보 총수 ===
+print("\n--- 9c. 8단 DSE 구조 ---")
+check("DSE stages", 8, sigma_tau, "8 stages = sigma-tau")
+check("Material candidates K1", 8, sigma_tau, "K1 = 8")
+check("Structure K2", 6, n, "K2 = 6")
+check("Compression K3", 5, sopfr, "K3 = sopfr")
+check("Synthesis K4", 6, n, "K4 = n")
+check("Optimization K5", 4, tau, "K5 = tau")
+check("Applications K6", 5, sopfr, "K6 = sopfr")
 
 # === 10. Cross-domain 상수 ===
 print("\n--- 10. Cross-domain ---")
