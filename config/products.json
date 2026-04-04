@@ -273,10 +273,6 @@
             {
               "label": "링크",
               "path": "experiments/experiment_full_n6_pipeline.py"
-            },
-            {
-              "label": "링크",
-              "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
         },
@@ -290,10 +286,6 @@
             {
               "label": "링크",
               "path": "docs/superpowers/specs/2026-03-28-n6-inevitability-engine-design.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
         },
@@ -307,10 +299,6 @@
             {
               "label": "링크",
               "path": "docs/ai-energy-savings-guide.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
         },
@@ -324,10 +312,6 @@
             {
               "label": "링크",
               "path": "docs/chip-architecture-guide.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
         },
@@ -341,10 +325,6 @@
             {
               "label": "링크",
               "path": "docs/ai-efficiency/full-verification-matrix.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
         }
@@ -393,14 +373,6 @@
             {
               "label": "링크",
               "path": "docs/superpowers/specs/2026-04-01-hexa-battery-design.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/battery-architecture/goal.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/battery-architecture/verify_alien10.py"
             }
           ]
         },
@@ -414,10 +386,6 @@
             {
               "label": "링크",
               "path": "docs/solar-architecture/goal.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/solar-architecture/verify_alien10.py"
             }
           ]
         },
@@ -431,10 +399,6 @@
             {
               "label": "링크",
               "path": "docs/energy-architecture/goal.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/energy-architecture/verify_alien10.py"
             }
           ]
         }
@@ -478,10 +442,6 @@
             {
               "label": "링크",
               "path": "docs/environmental-protection/"
-            },
-            {
-              "label": "링크",
-              "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
         },
@@ -495,10 +455,6 @@
             {
               "label": "링크",
               "path": "docs/environmental-protection/microplastics-solution.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
         },
@@ -512,10 +468,6 @@
             {
               "label": "링크",
               "path": "docs/carbon-capture/goal.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/carbon-capture/verify_alien10.py"
             }
           ]
         },
@@ -529,10 +481,6 @@
             {
               "label": "링크",
               "path": "docs/environmental-protection/evolution/"
-            },
-            {
-              "label": "링크",
-              "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
         },
@@ -546,10 +494,6 @@
             {
               "label": "링크",
               "path": "docs/environmental-protection/testable-predictions-2030.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
         }
@@ -592,10 +536,6 @@
             {
               "label": "링크",
               "path": "docs/material-synthesis/goal.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
         },
@@ -609,10 +549,6 @@
             {
               "label": "링크",
               "path": "docs/material-synthesis/breakthrough-theorems.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
         },
@@ -626,10 +562,6 @@
             {
               "label": "링크",
               "path": "docs/material-synthesis/hypotheses.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
         },
@@ -643,10 +575,6 @@
             {
               "label": "링크",
               "path": "docs/material-synthesis/industrial-validation.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
         },
@@ -660,10 +588,6 @@
             {
               "label": "링크",
               "path": "docs/material-synthesis/experimental-verification.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
         },
@@ -677,10 +601,6 @@
             {
               "label": "링크",
               "path": "docs/material-synthesis/physical-limit-proof.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
         }
@@ -1086,10 +1006,6 @@
             {
               "label": "링크",
               "path": "docs/fun-car/goal.md"
-            },
-            {
-              "label": "링크",
-              "path": "docs/fun-car/verify_alien10.py"
             }
           ]
         }

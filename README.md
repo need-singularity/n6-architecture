@@ -138,11 +138,11 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v3 | **66 Techniques** | 71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 66기법 통합문서 (Core17+BT12+Model21+Vision8+GNN4+Other4) | [링크](docs/ai-efficiency/techniques-complete.md) |
-| 10 | ✅ | v2 | **Full N6 Pipeline** | 17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증 | [링크](experiments/experiment_full_n6_pipeline.py) · [링크](docs/ai-efficiency/verify_ai_products_alien10.py) |
-| 10 | ✅ | v2 | **N6 Inevitability Engine** | 기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [링크](docs/superpowers/specs/2026-03-28-n6-inevitability-engine-design.md) · [링크](docs/ai-efficiency/verify_ai_products_alien10.py) |
-| 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS | [링크](docs/ai-energy-savings-guide.md) · [링크](docs/ai-efficiency/verify_ai_products_alien10.py) |
-| 10 | ✅ | v2 | **Chip Architecture Guide** | GPU SM+HBM+피치+인터커넥트 n=6 전수매핑 — 27/27 PASS | [링크](docs/chip-architecture-guide.md) · [링크](docs/ai-efficiency/verify_ai_products_alien10.py) |
-| 10 | ✅ | v2 | **천장확인** | 194claims 89.7%EXACT, 산업9모델, 물리한계10, 67/67 PASS 검증 | [링크](docs/ai-efficiency/full-verification-matrix.md) · [링크](docs/ai-efficiency/verify_ai_products_alien10.py) |
+| 10 | ✅ | v2 | **Full N6 Pipeline** | 17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증 | [링크](experiments/experiment_full_n6_pipeline.py) |
+| 10 | ✅ | v2 | **N6 Inevitability Engine** | 기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [링크](docs/superpowers/specs/2026-03-28-n6-inevitability-engine-design.md) |
+| 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS | [링크](docs/ai-energy-savings-guide.md) |
+| 10 | ✅ | v2 | **Chip Architecture Guide** | GPU SM+HBM+피치+인터커넥트 n=6 전수매핑 — 27/27 PASS | [링크](docs/chip-architecture-guide.md) |
+| 10 | ✅ | v2 | **천장확인** | 194claims 89.7%EXACT, 산업9모델, 물리한계10, 67/67 PASS 검증 | [링크](docs/ai-efficiency/full-verification-matrix.md) |
 
 <details>
 <summary>66 Techniques 전체 목록</summary>
@@ -232,9 +232,9 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v3 | **궁극의 배터리 8단** | 131/131 EXACT, BT-27+43+57+80+83+84, 10불가능성정리, 6대제조사, Python검증PASS | [링크](docs/superpowers/specs/2026-04-01-hexa-battery-design.md) · [링크](docs/battery-architecture/goal.md) · [링크](docs/battery-architecture/verify_alien10.py) |
-| 10 | ✅ | v4 | **궁극의 태양전지** | 78/78 EXACT, BT-30+63+62+60+74+111+161, 물리한계5, 산업8사, Python검증PASS | [링크](docs/solar-architecture/goal.md) · [링크](docs/solar-architecture/verify_alien10.py) |
-| 10 | ✅ | v2 | **궁극의 에너지 통합** | 133/133 EXACT, 19BT, 14불가능성정리, 5도메인Cross-DSE, Python검증PASS | [링크](docs/energy-architecture/goal.md) · [링크](docs/energy-architecture/verify_alien10.py) |
+| 10 | ✅ | v3 | **궁극의 배터리 8단** | 131/131 EXACT, BT-27+43+57+80+83+84, 10불가능성정리, 6대제조사, Python검증PASS | [링크](docs/superpowers/specs/2026-04-01-hexa-battery-design.md) |
+| 10 | ✅ | v4 | **궁극의 태양전지** | 78/78 EXACT, BT-30+63+62+60+74+111+161, 물리한계5, 산업8사, Python검증PASS | [링크](docs/solar-architecture/goal.md) |
+| 10 | ✅ | v2 | **궁극의 에너지 통합** | 133/133 EXACT, 19BT, 14불가능성정리, 5도메인Cross-DSE, Python검증PASS | [링크](docs/energy-architecture/goal.md) |
 
 <!-- AUTO:FOOTER_energy:START -->
 > 도메인: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · 도구: `energy-calc` · `battery-dse` · `solar-dse`
@@ -250,11 +250,11 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v4 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega, 120/120 EXACT 전수검증 | [링크](docs/environmental-protection/) · [링크](docs/environmental-protection/verify_alien10.py) |
-| 10 | ✅ | v2 | **HEXA-MICROPLASTICS** | 6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체, 전수검증 | [링크](docs/environmental-protection/microplastics-solution.md) · [링크](docs/environmental-protection/verify_alien10.py) |
-| 10 | ✅ | v5 | **궁극의 탄소포집 8단** | **30/30=100%EXACT**, DSE 3.6M, 79/79 전수검증PASS | [링크](docs/carbon-capture/goal.md) · [링크](docs/carbon-capture/verify_alien10.py) |
-| 10 | ✅ | v2 | **진화 Mk.I~V** | 환경+CCUS 양쪽 진화 로드맵, 발견 42개, 전수검증 포함 | [링크](docs/environmental-protection/evolution/) · [링크](docs/environmental-protection/verify_alien10.py) |
-| 10 | ✅ | v3 | **예측 + 검증** | TP 19개(환경) + TP 24개(CCUS) + 가설 v5(88.2%EXACT) + 전수검증 | [링크](docs/environmental-protection/testable-predictions-2030.md) · [링크](docs/environmental-protection/verify_alien10.py) |
+| 10 | ✅ | v4 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega, 120/120 EXACT 전수검증 | [링크](docs/environmental-protection/) |
+| 10 | ✅ | v2 | **HEXA-MICROPLASTICS** | 6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체, 전수검증 | [링크](docs/environmental-protection/microplastics-solution.md) |
+| 10 | ✅ | v5 | **궁극의 탄소포집 8단** | **30/30=100%EXACT**, DSE 3.6M, 79/79 전수검증PASS | [링크](docs/carbon-capture/goal.md) |
+| 10 | ✅ | v2 | **진화 Mk.I~V** | 환경+CCUS 양쪽 진화 로드맵, 발견 42개, 전수검증 포함 | [링크](docs/environmental-protection/evolution/) |
+| 10 | ✅ | v3 | **예측 + 검증** | TP 19개(환경) + TP 24개(CCUS) + 가설 v5(88.2%EXACT) + 전수검증 | [링크](docs/environmental-protection/testable-predictions-2030.md) |
 
 <!-- AUTO:FOOTER_environment:START -->
 > 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`
@@ -270,12 +270,12 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v5 | **궁극의 물질합성 8단** | 소재→공정→조립기→제어→공장→변환→만능→궁극, DSE 3,600, 229/229 EXACT | [링크](docs/material-synthesis/goal.md) · [링크](docs/material-synthesis/verify_alien10.py) |
-| 10 | ✅ | v6 | **BT-85~88 + BT-128~134** | 결정학+합금+세라믹+고분자+상전이+결함+박막 (11 BT, **159/159 EXACT**), 229/229 verify | [링크](docs/material-synthesis/breakthrough-theorems.md) · [링크](docs/material-synthesis/verify_alien10.py) |
-| 10 | ✅ | v5 | **가설 30/30 100%EXACT** | H-MS-01~30 전수 검증 완료, CrossDSE 8도메인 (94.1% n6), 229/229 verify | [링크](docs/material-synthesis/hypotheses.md) · [링크](docs/material-synthesis/verify_alien10.py) |
-| 10 | ✅ | v5 | **산업검증 20소재** | 강철1.9Bt + 시멘트4.1Bt + 플라스틱400Mt + 반도체 — 전부 n=6 구조, 229/229 verify | [링크](docs/material-synthesis/industrial-validation.md) · [링크](docs/material-synthesis/verify_alien10.py) |
-| 10 | ✅ | v6 | **실험검증 + TP 28/28** | 50+ 발표 데이터셋 + 28 예측 전수 검증 (14 VERIFIED + 14 PARTIAL, 0 FAIL), 229/229 verify | [링크](docs/material-synthesis/experimental-verification.md) · [링크](docs/material-synthesis/verify_alien10.py) |
-| 10 | ✅ | v5 | **물리한계 증명** | 10 불가능성 정리 (73/75 EXACT) + Mk.V 수학적 한계, 229/229 verify | [링크](docs/material-synthesis/physical-limit-proof.md) · [링크](docs/material-synthesis/verify_alien10.py) |
+| 10 | ✅ | v5 | **궁극의 물질합성 8단** | 소재→공정→조립기→제어→공장→변환→만능→궁극, DSE 3,600, 229/229 EXACT | [링크](docs/material-synthesis/goal.md) |
+| 10 | ✅ | v6 | **BT-85~88 + BT-128~134** | 결정학+합금+세라믹+고분자+상전이+결함+박막 (11 BT, **159/159 EXACT**), 229/229 verify | [링크](docs/material-synthesis/breakthrough-theorems.md) |
+| 10 | ✅ | v5 | **가설 30/30 100%EXACT** | H-MS-01~30 전수 검증 완료, CrossDSE 8도메인 (94.1% n6), 229/229 verify | [링크](docs/material-synthesis/hypotheses.md) |
+| 10 | ✅ | v5 | **산업검증 20소재** | 강철1.9Bt + 시멘트4.1Bt + 플라스틱400Mt + 반도체 — 전부 n=6 구조, 229/229 verify | [링크](docs/material-synthesis/industrial-validation.md) |
+| 10 | ✅ | v6 | **실험검증 + TP 28/28** | 50+ 발표 데이터셋 + 28 예측 전수 검증 (14 VERIFIED + 14 PARTIAL, 0 FAIL), 229/229 verify | [링크](docs/material-synthesis/experimental-verification.md) |
+| 10 | ✅ | v5 | **물리한계 증명** | 10 불가능성 정리 (73/75 EXACT) + Mk.V 수학적 한계, 229/229 verify | [링크](docs/material-synthesis/physical-limit-proof.md) |
 
 <!-- AUTO:FOOTER_materials:START -->
 > 도메인: [material-synthesis/](docs/material-synthesis/) · 도구: `material-dse`
