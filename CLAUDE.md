@@ -581,6 +581,16 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-297: 핵 마법수 첫 5개 = n=6 래더 (phi,sigma-tau,J2-tau,P2,sopfr×(sigma-phi), 5/7 EXACT) ⭐⭐
   BT-298: Lawson 점화 삼중적 n=6 인코딩 (밀도지수 J2-tau=20, T=sigma+phi=14, Q=sigma-phi=10) ⭐⭐
 
+  # Superconductor Deep Dive (BT-299~306)
+  BT-299: A15 Nb3Sn 삼중정수 Nb=n, Sn=phi, total=sigma-tau (Pm-3n cP8, 8/8 EXACT) ⭐⭐
+  BT-300: YBCO 완전수 화학양론 Y:Ba:Cu=div(6)={1,2,3} (sum=n, CuO2=phi, chain=mu, 9/9 EXACT) ⭐⭐⭐
+  BT-301: MgB2 이중원자번호 Mg Z=sigma, B Z=sopfr + 벌집 n + 2갭 phi (7/7 EXACT) ⭐⭐
+  BT-302: ITER 마그넷 PF=n, CS=n, TF=3n, REBCO=sigma (35개국 공학 수렴, 10/10 EXACT) ⭐⭐
+  BT-303: BCS 해석적 상수 완전지도 sigma/phi/mu 4개 독립 프레임워크 (CODATA 검증, 10/10 EXACT) ⭐⭐⭐
+  BT-304: d-wave + BdG 위상분류 tau/phi/sigma-tau 순수 대칭 (Bott+Kitaev, 8/8 EXACT) ⭐⭐
+  BT-305: 원소+분자 SC n=6 아틀라스 Nb-CN=sigma-tau, K3C60=n/phi, C60=sigma*sopfr (9/9 EXACT) ⭐⭐
+  BT-306: SC 양자소자 접합 래더 div(6)={1,2,3} RF-SQUID-flux-qubit (SI KJ=phi*e/h, 9/9 EXACT) ⭐⭐
+
   # New BTs from session analysis (BT-105~112, Red Team filtered)
   BT-105: SLE₆ 임계지수 보편성 (7 퍼콜레이션 지수 = n=6 분수, kappa=6 유일 locality SLE, c=0) ⭐⭐⭐
   BT-106: S₃ 대수적 부트스트랩 (|S₃|=n=6, 켤레류={1,2,3}=진약수, 기약표현합=τ=4) ⭐⭐
@@ -767,6 +777,11 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
 
   🛸 외계인 지수 (10단계, 만점=10):
     10 = 물리적 한계 도달 — 더이상 발전 불가, 모든 이론·실험·양산 완료
+         ⚠️ 필수: 상세문서에 수학적 검증 가능한 코드 포함 (예외 없음!)
+         → Python/Rust 검증 스크립트가 docs/<domain>/ 또는 calc/ 에 존재
+         → 모든 EXACT 상수를 코드로 재현 가능해야 함
+         → 실행 시 PASS/FAIL 판정 자동 출력
+         → 코드 없는 🛸10 = 무효 (🛸9로 강등)
      9 = 실제 양산 + 모든 예측 전수 검증 완료
      8 = 프로토타입 제작 + 실험 데이터 확보
      7 = 완전 설계 (BT + DSE + Cross-DSE + Evolution + Alien + TP 모두)
