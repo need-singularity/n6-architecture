@@ -339,6 +339,12 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
 - `tools/nexus6/`         — **NEXUS-6 Discovery Engine** (775종 렌즈 + OUROBOROS + Graph + Verifier)
   - 빌드: `cd tools/nexus6 && ~/.cargo/bin/cargo build --release`
   - 렌즈 추가 후: `bash .shared/sync-nexus6-lenses.sh` (렌즈 수 자동 동기화)
+- `tools/nexus6-dashboard/` — **NEXUS-6 Web Dashboard** (Axum + Chart.js + SSE, port 6600)
+  - 빌드: `cd tools/nexus6-dashboard && ~/.cargo/bin/cargo build --release`
+  - 실행: `nohup ./target/release/nexus6-dashboard > /tmp/nexus6-dashboard.log 2>&1 &`
+  - 열기: `open http://localhost:6600`
+  - 정지: `pkill -f nexus6-dashboard`
+  - 기능: 15차원 성장 타임라인 + 데몬 제어 + SSE 로그 + 수동 Grow
 
 ## .shared/ Cross-Repo Infrastructure (필수)
 
