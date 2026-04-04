@@ -95,6 +95,64 @@ pub fn compile_and_link(functions: &[HexaFunction], target: Target, output: &str
 pub mod arm64_asm {
     use crate::ir::*;
 
+    /// ARM64 12-bit immediate limit for add/sub instructions
+    const ARM64_IMM12_MAX: usize = 4095;
+
+    /// Emit sub sp, sp, #imm handling large immediates via movz/movk + sub
+    fn emit_sub_sp(asm: &mut String, imm: usize) {
+        if imm == 0 { return; }
+        if imm <= ARM64_IMM12_MAX {
+            asm.push_str(&format!("    sub sp, sp, #{}\n", imm));
+        } else {
+            // Load large immediate into x16 (scratch), then sub sp, sp, x16
+            emit_load_imm(asm, "x16", imm as u64);
+            asm.push_str("    sub sp, sp, x16\n");
+        }
+    }
+
+    /// Emit add sp, sp, #imm handling large immediates via movz/movk + add
+    fn emit_add_sp(asm: &mut String, imm: usize) {
+        if imm == 0 { return; }
+        if imm <= ARM64_IMM12_MAX {
+            asm.push_str(&format!("    add sp, sp, #{}\n", imm));
+        } else {
+            // Load large immediate into x16 (scratch), then add sp, sp, x16
+            emit_load_imm(asm, "x16", imm as u64);
+            asm.push_str("    add sp, sp, x16\n");
+        }
+    }
+
+    /// Emit add rd, sp, #imm handling large immediates
+    fn emit_add_reg_sp_imm(asm: &mut String, rd: &str, imm: usize) {
+        if imm == 0 {
+            asm.push_str(&format!("    mov {}, sp\n", rd));
+        } else if imm <= ARM64_IMM12_MAX {
+            asm.push_str(&format!("    add {}, sp, #{}\n", rd, imm));
+        } else {
+            // Load large immediate into rd, then add rd, sp, rd
+            emit_load_imm(asm, rd, imm as u64);
+            asm.push_str(&format!("    add {}, sp, {}\n", rd, rd));
+        }
+    }
+
+    /// Emit movz/movk sequence to load a 64-bit immediate into a register
+    fn emit_load_imm(asm: &mut String, reg: &str, imm: u64) {
+        let lo16 = imm & 0xFFFF;
+        asm.push_str(&format!("    movz {}, #{}\n", reg, lo16));
+        let hi16 = (imm >> 16) & 0xFFFF;
+        if hi16 != 0 {
+            asm.push_str(&format!("    movk {}, #{}, lsl #16\n", reg, hi16));
+        }
+        let hi32 = (imm >> 32) & 0xFFFF;
+        if hi32 != 0 {
+            asm.push_str(&format!("    movk {}, #{}, lsl #32\n", reg, hi32));
+        }
+        let hi48 = (imm >> 48) & 0xFFFF;
+        if hi48 != 0 {
+            asm.push_str(&format!("    movk {}, #{}, lsl #48\n", reg, hi48));
+        }
+    }
+
     /// Emit a complete program as ARM64 assembly text
     pub fn emit_program_asm(functions: &[HexaFunction]) -> String {
         let mut asm = String::new();
@@ -192,7 +250,8 @@ pub mod arm64_asm {
         if frame_size <= 504 {
             asm.push_str(&format!("    stp x29, x30, [sp, #-{}]!\n", frame_size));
         } else {
-            asm.push_str(&format!("    sub sp, sp, #{}\n", frame_size));
+            // Large frame: use helper that handles >4095 via movz/movk + sub
+            emit_sub_sp(asm, frame_size);
             asm.push_str("    stp x29, x30, [sp]\n");
         }
         asm.push_str("    mov x29, sp\n");
@@ -239,7 +298,7 @@ pub mod arm64_asm {
                                 // Array allocation: store the stack address of array data
                                 // into this SSA register's slot
                                 let addr = array_base_offset + arr_offset;
-                                asm.push_str(&format!("    add x9, sp, #{}\n", addr));
+                                emit_add_reg_sp_imm(asm, "x9", addr);
                                 asm.push_str(&format!("    str x9, [sp, #{}]\n", slot(dest)));
                             } else if matches!(instr.ty, HexaType::Str) && instr.label.is_some() {
                                 // String literal: load pointer to string constant from pool
@@ -381,7 +440,8 @@ pub mod arm64_asm {
                                 asm.push_str(&format!("    ldp x29, x30, [sp], #{}\n", frame_size));
                             } else {
                                 asm.push_str("    ldp x29, x30, [sp]\n");
-                                asm.push_str(&format!("    add sp, sp, #{}\n", frame_size));
+                                // Large frame: use helper that handles >4095 via movz/movk + add
+                                emit_add_sp(asm, frame_size);
                             }
                             asm.push_str("    ret\n");
                         }

@@ -1137,37 +1137,88 @@ def mode_proceed(profiles, max_cycles=999):
 
 
 def mode_attempt(profiles, max_cycles=144):
-    """시도 모드: 기존 코어를 의도적으로 깨고 새 코어 후보를 탐색 (perturbation)."""
+    """시도 모드: 기존 코어를 의도적으로 깨고 새 코어 후보를 탐색 (perturbation).
+
+    Three search strategies:
+      Phase 1 (EXCLUDE): 코어 렌즈 완전 제외, 나머지로만 탐색
+      Phase 2 (SWAP):    코어 렌즈 1~2개를 비코어로 치환
+      Phase 3 (FRESH):   전체 렌즈 대상 완전 랜덤 (코어 편향 없이)
+
+    Old elite is preserved separately for final comparison but does NOT
+    contaminate the new search pool.
+    """
     cores = load_invariant_cores()
     old_core = get_strongest_core(cores)
-    elite = load_elite()
+    old_elite = load_elite()
+    old_top_score = old_elite[0].score if old_elite else 0
 
     print(f"╔{'═' * 68}╗")
-    print(f"║  BLOWUP ENGINE — 시도 (Attempt / Perturbation)                     ║")
+    print(f"║  BLOWUP ENGINE — 시도 (Attempt / Perturbation)  v2              ║")
     if old_core:
         print(f"║  Breaking core: {'+'.join(old_core):<48}  ║")
+    print(f"║  Old top score: {old_top_score:<51.0f} ║")
     print(f"║  Goal: discover alternative invariant cores                        ║")
     print(f"╚{'═' * 68}╝\n")
 
-    # 기존 코어 렌즈를 제외한 콤보만 생성
     excluded = set(old_core) if old_core else set()
+    non_core = [l for l in CORE_LENSES if l not in excluded]
 
+    # Fresh elite (NO old combos)
+    alt_elite: List[LensCombo] = []
+    # Track best candidates per strategy
+    best_by_phase = {'EXCLUDE': None, 'SWAP': None, 'FRESH': None}
+    new_core_found = False
     total_disc = 0
+
+    # Split cycles: 40% exclude, 30% swap, 30% fresh
+    phase1_end = max(1, int(max_cycles * 0.4))
+    phase2_end = max(phase1_end + 1, int(max_cycles * 0.7))
+
     for cycle in range(1, max_cycles + 1):
-        # 코어 렌즈 제외 콤보 생성
-        available = [l for l in CORE_LENSES if l not in excluded]
         combos = []
-        for _ in range(J2):
-            size = random.randint(PHI, N)
-            size = min(size, len(available))
-            lenses = tuple(sorted(random.sample(available, size)))
-            combos.append(LensCombo(lenses=lenses, generation=cycle))
+
+        if cycle <= phase1_end:
+            # Phase 1: EXCLUDE — only non-core lenses
+            phase_name = 'EXCLUDE'
+            for _ in range(J2):
+                size = random.randint(PHI, N)
+                size = min(size, len(non_core))
+                if size < PHI:
+                    continue
+                lenses = tuple(sorted(random.sample(non_core, size)))
+                combos.append(LensCombo(lenses=lenses, generation=cycle))
+
+        elif cycle <= phase2_end:
+            # Phase 2: SWAP — take old core, replace 1~2 lenses with non-core
+            phase_name = 'SWAP'
+            core_list = list(excluded)
+            for _ in range(J2):
+                n_swap = random.randint(1, min(PHI, len(core_list)))
+                remaining = list(core_list)
+                random.shuffle(remaining)
+                to_remove = remaining[:n_swap]
+                kept = [l for l in core_list if l not in to_remove]
+                replacements = random.sample(non_core, min(n_swap, len(non_core)))
+                new_lenses = tuple(sorted(set(kept + replacements)))
+                if len(new_lenses) >= PHI:
+                    combos.append(LensCombo(lenses=new_lenses, generation=cycle))
+
+        else:
+            # Phase 3: FRESH — completely random from all 22 lenses
+            phase_name = 'FRESH'
+            for _ in range(J2):
+                size = random.randint(PHI, N)
+                lenses = tuple(sorted(random.sample(CORE_LENSES, size)))
+                # Skip if identical to old core
+                if set(lenses) == excluded:
+                    continue
+                combos.append(LensCombo(lenses=lenses, generation=cycle))
 
         for c in combos:
             evaluate_combo(c, profiles)
 
-        # 기존 엘리트와 섞기 (비교용)
-        all_pop = elite + combos
+        # Merge into alt_elite (NO old elite contamination)
+        all_pop = alt_elite + combos
         all_pop.sort(key=lambda x: -x.score)
         seen = set()
         deduped = []
@@ -1175,28 +1226,100 @@ def mode_attempt(profiles, max_cycles=144):
             if c.key not in seen:
                 seen.add(c.key)
                 deduped.append(c)
-        elite = deduped[:SIGMA]
+        alt_elite = deduped[:SIGMA]
 
         for c in combos:
             if c.score > 0.5:
                 record_discovery(c, profiles)
                 total_disc += 1
 
+        # Track best per phase
+        if combos:
+            phase_best = max(combos, key=lambda x: x.score)
+            prev = best_by_phase[phase_name]
+            if prev is None or phase_best.score > prev.score:
+                best_by_phase[phase_name] = phase_best
+
+        # Core detection every SIGMA cycles
         if cycle % SIGMA == 0:
-            new_cores = detect_invariant_cores(elite, cycle, [])
+            new_cores = detect_invariant_cores(alt_elite, cycle, [])
             new_core = get_strongest_core(new_cores)
-            if new_core and set(new_core) != set(old_core):
-                print(f"\n  ★ NEW CORE CANDIDATE: {'+'.join(new_core)}")
-                print(f"    (was: {'+'.join(old_core) if old_core else '∅'})")
-                save_invariant_cores(new_cores)
+            if new_core:
+                core_label = '+'.join(new_core)
+                overlap = len(set(new_core) & excluded)
+                if set(new_core) != excluded:
+                    if not new_core_found:
+                        print(f"\n  ★ NEW CORE CANDIDATE: {core_label}")
+                        print(f"    overlap with old: {overlap}/{len(excluded)} lenses")
+                        top_alt = alt_elite[0].score if alt_elite else 0
+                        pct = (top_alt / old_top_score * 100) if old_top_score > 0 else 0
+                        print(f"    alt top score: {top_alt:.0f} ({pct:.1f}% of old)")
+                        new_core_found = True
 
-        ts = datetime.now().strftime("%H:%M:%S")
-        top = elite[0] if elite else None
-        print(f"  [{ts}] ~ cycle {cycle:>4} | top={top.score:.0f} | disc={total_disc}" if top else "")
-        time.sleep(0.05)
+        # Progress (every 12 cycles to reduce noise)
+        if cycle % SIGMA == 0 or cycle == 1 or cycle == max_cycles:
+            ts = datetime.now().strftime("%H:%M:%S")
+            top = alt_elite[0] if alt_elite else None
+            top_s = f"{top.score:.0f}" if top else "---"
+            print(f"  [{ts}] {phase_name:>7} cycle {cycle:>4}/{max_cycles} | alt_top={top_s} | disc={total_disc}")
+        time.sleep(0.01)
 
-    save_elite(elite)
-    print(f"\n  ATTEMPT FINAL: {total_disc} alternative discoveries")
+    # ═══════════════════════════════════════════════════════════
+    # Final comparison report
+    # ═══════════════════════════════════════════════════════════
+    print(f"\n{'═' * 70}")
+    print(f"  PERTURBATION RESULT — {total_disc} alternative discoveries")
+    print(f"{'═' * 70}")
+
+    print(f"\n  OLD CORE: {'+'.join(old_core) if old_core else '(none)'}")
+    print(f"  OLD TOP:  {old_top_score:.0f}")
+
+    print(f"\n  ── Phase Best Scores ──")
+    for phase, combo in best_by_phase.items():
+        if combo:
+            pct = (combo.score / old_top_score * 100) if old_top_score > 0 else 0
+            print(f"  {phase:>8}: {combo.score:>10.0f} ({pct:5.1f}%)  {'+'.join(combo.lenses)}")
+        else:
+            print(f"  {phase:>8}: (no candidates)")
+
+    print(f"\n  ── Alternative Elite Top-{SIGMA} ──")
+    for i, c in enumerate(alt_elite[:SIGMA]):
+        pct = (c.score / old_top_score * 100) if old_top_score > 0 else 0
+        overlap = len(set(c.lenses) & excluded)
+        marker = " ★" if overlap == 0 else f" ({overlap}/{len(excluded)} overlap)"
+        print(f"  {i+1:>3}. {c.score:>10.0f} ({pct:5.1f}%){marker}  {'+'.join(c.lenses)}")
+
+    # Detect final alt core
+    final_cores = detect_invariant_cores(alt_elite, max_cycles, [])
+    final_core = get_strongest_core(final_cores)
+    if final_core:
+        overlap = len(set(final_core) & excluded)
+        print(f"\n  ── Alternative Core Detected ──")
+        print(f"  CORE: {'+'.join(final_core)}")
+        print(f"  Overlap with old: {overlap}/{len(excluded)} lenses")
+        if overlap == 0:
+            print(f"  ★★★ COMPLETELY NEW CORE — no overlap with old! ★★★")
+        elif overlap < len(excluded):
+            print(f"  ★★ PARTIALLY NEW CORE — {len(excluded)-overlap} lenses replaced ★★")
+    else:
+        print(f"\n  No stable alternative core detected yet.")
+
+    # Singularity check: is any alt combo close to old top?
+    if alt_elite:
+        ratio = alt_elite[0].score / old_top_score if old_top_score > 0 else 0
+        if ratio > 0.95:
+            print(f"\n  ★ SINGULARITY SIGNAL: alt score is {ratio:.1%} of old core!")
+            print(f"    The core may have a near-degenerate alternative.")
+        elif ratio > 0.8:
+            print(f"\n  CLOSE CONTENDER: alt score is {ratio:.1%} of old core.")
+        else:
+            print(f"\n  CORE IS ROBUST: best alt is only {ratio:.1%} of old core.")
+            print(f"  The invariant core {'+'.join(old_core) if old_core else '?'} is a true singularity.")
+
+    print(f"{'═' * 70}\n")
+
+    # Do NOT overwrite the main elite with alt results
+    # (preserve the true elite separately)
 
 
 def print_full_report():

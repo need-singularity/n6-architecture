@@ -23,6 +23,73 @@ fn emit(code: &mut Vec<u8>, instr: u32) {
     code.extend_from_slice(&instr.to_le_bytes());
 }
 
+/// ARM64 12-bit immediate limit for add/sub instructions
+const ARM64_IMM12_MAX: u32 = 4095;
+
+/// Emit sub sp, sp, #imm — handles large immediates via movz/movk + sub
+fn emit_sub_sp_bin(code: &mut Vec<u8>, imm: u32) {
+    if imm == 0 { return; }
+    if imm <= ARM64_IMM12_MAX {
+        // sub sp, sp, #imm: 0xD1000000 | imm12<<10 | 31<<5 | 31
+        emit(code, 0xd1000000u32 | (imm << 10) | (31 << 5) | 31);
+    } else {
+        // movz x16, #lo16
+        emit_load_imm_bin(code, 16, imm as u64);
+        // sub sp, sp, x16: 0xCB000000 | x16<<16 | sp<<5 | sp
+        emit(code, 0xcb000000u32 | (16 << 16) | (31 << 5) | 31);
+    }
+}
+
+/// Emit add sp, sp, #imm — handles large immediates via movz/movk + add
+fn emit_add_sp_bin(code: &mut Vec<u8>, imm: u32) {
+    if imm == 0 { return; }
+    if imm <= ARM64_IMM12_MAX {
+        // add sp, sp, #imm: 0x91000000 | imm12<<10 | 31<<5 | 31
+        emit(code, 0x91000000u32 | (imm << 10) | (31 << 5) | 31);
+    } else {
+        // movz x16, #lo16
+        emit_load_imm_bin(code, 16, imm as u64);
+        // add sp, sp, x16: 0x8B000000 | x16<<16 | sp<<5 | sp
+        emit(code, 0x8b000000u32 | (16 << 16) | (31 << 5) | 31);
+    }
+}
+
+/// Emit add rd, sp, #imm — handles large immediates
+fn emit_add_reg_sp_imm_bin(code: &mut Vec<u8>, rd: u32, imm: u32) {
+    if imm == 0 {
+        // mov rd, sp = add rd, sp, #0
+        emit(code, 0x91000000u32 | (31 << 5) | rd);
+    } else if imm <= ARM64_IMM12_MAX {
+        emit(code, 0x91000000u32 | (imm << 10) | (31 << 5) | rd);
+    } else {
+        // Load imm into rd, then add rd, sp, rd
+        emit_load_imm_bin(code, rd, imm as u64);
+        emit(code, 0x8b000000u32 | (rd << 16) | (31 << 5) | rd);
+    }
+}
+
+/// Emit movz/movk sequence to load a 64-bit immediate into register rd
+fn emit_load_imm_bin(code: &mut Vec<u8>, rd: u32, imm: u64) {
+    let lo16 = (imm & 0xFFFF) as u32;
+    // movz x<rd>, #lo16
+    emit(code, 0xd2800000u32 | (lo16 << 5) | rd);
+    let hi16 = ((imm >> 16) & 0xFFFF) as u32;
+    if hi16 != 0 {
+        // movk x<rd>, #hi16, lsl #16
+        emit(code, 0xf2a00000u32 | (hi16 << 5) | rd);
+    }
+    let hi32 = ((imm >> 32) & 0xFFFF) as u32;
+    if hi32 != 0 {
+        // movk x<rd>, #hi32, lsl #32
+        emit(code, 0xf2c00000u32 | (hi32 << 5) | rd);
+    }
+    let hi48 = ((imm >> 48) & 0xFFFF) as u32;
+    if hi48 != 0 {
+        // movk x<rd>, #hi48, lsl #48
+        emit(code, 0xf2e00000u32 | (hi48 << 5) | rd);
+    }
+}
+
 /// Select ARM64 instructions for a function
 /// Walks HEXA-IR blocks and emits real ARM64 machine code
 pub fn select_function(func: &HexaFunction, alloc: &RegAlloc) -> Vec<u8> {
@@ -48,10 +115,8 @@ pub fn select_function(func: &HexaFunction, alloc: &RegAlloc) -> Vec<u8> {
     // Align stack frame to 16 bytes (ARM64 ABI requirement)
     if stack_frame_size > 0 {
         stack_frame_size = (stack_frame_size + 15) & !15;
-        // Prologue: sub sp, sp, #frame_size
-        // 0xD1000000 | (imm12 << 10) | (31 << 5) | 31  (sub sp, sp, #imm)
-        let imm12 = stack_frame_size & 0xFFF;
-        emit(&mut code, 0xd1000000u32 | (imm12 << 10) | (31 << 5) | 31);
+        // Prologue: sub sp, sp, #frame_size (handles >4095 via movz/movk)
+        emit_sub_sp_bin(&mut code, stack_frame_size);
     }
 
     // Collect constant values from Alloc instructions (Alloc %imm = load immediate)
@@ -234,16 +299,9 @@ pub fn select_function(func: &HexaFunction, alloc: &RegAlloc) -> Vec<u8> {
                 HexaOp::Alloc => {
                     if let Some(dest) = instr.dest {
                         if let Some(&offset) = array_stack_offsets.get(&dest) {
-                            // Array allocation: x<rd> = sp + offset
+                            // Array allocation: x<rd> = sp + offset (handles >4095)
                             let rd = alloc.get_phys(dest).unwrap_or(0) as u32;
-                            if offset == 0 {
-                                // mov x<rd>, sp = add x<rd>, sp, #0
-                                emit(&mut code, 0x91000000u32 | (31 << 5) | rd);
-                            } else {
-                                // add x<rd>, sp, #offset
-                                let imm12 = (offset as u32) & 0xFFF;
-                                emit(&mut code, 0x91000000u32 | (imm12 << 10) | (31 << 5) | rd);
-                            }
+                            emit_add_reg_sp_imm_bin(&mut code, rd, offset);
                         } else if reg_constants.contains_key(&dest) {
                             // Scalar constant: only emit movz if it has a physical register
                             // (constants used only as immediates in Add/Mul don't need a register)
@@ -339,9 +397,8 @@ pub fn select_function(func: &HexaFunction, alloc: &RegAlloc) -> Vec<u8> {
                     }
                     // Epilogue: restore stack frame if arrays were allocated
                     if stack_frame_size > 0 {
-                        // add sp, sp, #frame_size
-                        let imm12 = stack_frame_size & 0xFFF;
-                        emit(&mut code, 0x91000000u32 | (imm12 << 10) | (31 << 5) | 31);
+                        // add sp, sp, #frame_size (handles >4095 via movz/movk)
+                        emit_add_sp_bin(&mut code, stack_frame_size);
                     }
                 }
                 HexaOp::Phi => {
@@ -381,8 +438,7 @@ pub fn select_function(func: &HexaFunction, alloc: &RegAlloc) -> Vec<u8> {
 
     // Epilogue: restore stack frame if arrays were allocated (for fallthrough paths)
     if stack_frame_size > 0 {
-        let imm12 = stack_frame_size & 0xFFF;
-        emit(&mut code, 0x91000000u32 | (imm12 << 10) | (31 << 5) | 31);
+        emit_add_sp_bin(&mut code, stack_frame_size);
     }
 
     // For standalone executables: exit syscall instead of ret

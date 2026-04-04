@@ -2368,3 +2368,84 @@ fn main() -> i64 {
         assert!(has_env, "should have closure environment allocation");
     }
 }
+
+#[cfg(test)]
+mod large_frame_tests {
+    use crate::lexer;
+    use crate::parser;
+    use crate::sema;
+    use crate::lower;
+    use crate::ir::*;
+
+    fn compile_to_ir(source: &str) -> Vec<HexaFunction> {
+        let tokens = lexer::lex(source).expect("lex failed");
+        let program = parser::parse(tokens).expect("parse failed");
+        sema::analyze(&program).expect("sema failed");
+        lower::lower_program(&program)
+    }
+
+    /// Test ARM64 codegen with a function that has 600+ local variables,
+    /// producing a stack frame > 4096 bytes (exceeding ARM64 12-bit immediate).
+    #[test]
+    fn test_large_stack_frame_codegen() {
+        // Generate a function with many local variables to force frame_size > 4095
+        // Each SSA slot = 8 bytes, so 600 vars = 4800+ bytes of slots
+        let mut source = String::from("fn big_frame() -> i64 {\n");
+        for i in 0..600 {
+            source.push_str(&format!("    let v{} = {}\n", i, i));
+        }
+        source.push_str("    return v599\n}\n");
+        source.push_str("fn main() -> i64 { return big_frame() }\n");
+
+        let funcs = compile_to_ir(&source);
+        let asm = crate::codegen::arm64_asm::emit_program_asm(&funcs);
+
+        // Verify no bare `sub sp, sp, #LARGE` or `add sp, sp, #LARGE` with imm > 4095
+        // Instead should use movz + sub/add sp, sp, xN pattern
+        for line in asm.lines() {
+            let trimmed = line.trim();
+            if let Some(rest) = trimmed.strip_prefix("sub sp, sp, #") {
+                if let Ok(imm) = rest.parse::<usize>() {
+                    assert!(imm <= 4095,
+                        "sub sp, sp, #{} exceeds 12-bit immediate limit (max 4095)", imm);
+                }
+            }
+            if let Some(rest) = trimmed.strip_prefix("add sp, sp, #") {
+                if let Ok(imm) = rest.parse::<usize>() {
+                    assert!(imm <= 4095,
+                        "add sp, sp, #{} exceeds 12-bit immediate limit (max 4095)", imm);
+                }
+            }
+        }
+
+        // Should use movz + sub sp, sp, x16 pattern for the large frame
+        assert!(asm.contains("sub sp, sp, x16") || asm.contains("movz x16"),
+            "Large frame should use register-based sub sp via movz+sub pattern");
+
+        // Basic sanity: should have function labels
+        assert!(asm.contains("_big_frame:"), "Should have big_frame label");
+        assert!(asm.contains("_main:"), "Should have main label");
+    }
+
+    /// Test that small frames still use the efficient immediate form
+    #[test]
+    fn test_small_stack_frame_uses_immediate() {
+        let source = r#"
+fn small() -> i64 {
+    let a = 1
+    let b = 2
+    return a + b
+}
+
+fn main() -> i64 { return small() }
+"#;
+        let funcs = compile_to_ir(source);
+        let asm = crate::codegen::arm64_asm::emit_program_asm(&funcs);
+
+        // Small frame should NOT use the movz+sub pattern
+        // (the stp pre-indexed form handles it)
+        let has_movz_sub = asm.contains("movz x16") && asm.contains("sub sp, sp, x16");
+        assert!(!has_movz_sub,
+            "Small frame should use stp pre-indexed, not movz+sub pattern");
+    }
+}
