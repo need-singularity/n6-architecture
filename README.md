@@ -395,7 +395,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **궁극의 SF 추진 (HEXA-SF)** | 워프+UFO 통합 단일문서. Part I: HEXA-WARP(60/60 EXACT, 0.1c=1/(σ-φ), Mk.I~V 통합, DSE 6⁸=1,679,616). Part II: HEXA-UFO(48/49 EXACT, Meissner 부양+Q=10 탁상핵융합, D=J₂=24m, Mach σ-φ=10, 승무원 n=6) | [설계](docs/sf/goal.md) · [검증](docs/sf/verify_sf_n6.py) |
+| 10 | ✅ | v1 | **궁극의 SF 추진 (HEXA-SF)** | 워프+UFO 통합 단일문서. Part I: HEXA-WARP(60/60 EXACT, 0.1c=1/(σ-φ), Mk.I~V 통합, DSE 6⁸=1,679,616). Part II: HEXA-UFO(48/49 EXACT, Meissner 부양+Q=10 탁상핵융합, D=J₂=24m, Mach σ-φ=10, 승무원 n=6) | [링크](docs/sf/goal.md) |
 
 <!-- AUTO:FOOTER_sf:START -->
 > 도메인: [sf/](docs/sf/)
