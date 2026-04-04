@@ -1,0 +1,333 @@
+# N6 Aviation DSE — materials + propulsion + aero + avionics + system
+# 6 Material x 6 Propulsion x 6 Aero x 5 Avionics x 5 System = 5,400 combos
+# BT-123 (SE(3)=6DOF), BT-125 (tau=4 quadrotor), BT-127 (hexacopter n=6)
+# BT-85 (Carbon Z=6 CFRP), BT-93 (Diamond/Graphene composites)
+
+[meta]
+name = "aviation"
+desc = "Aviation (Material + Propulsion + Aerodynamics + Avionics + System)"
+version = "1.0"
+levels = 5
+total_hint = 5400
+
+[scoring]
+n6     = 0.30
+perf   = 0.25
+power  = 0.15
+cost   = 0.15
+safety = 0.15
+
+# ============================================================
+# Level 0: Material (항공 소재)
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "CFRP"
+label = "Carbon Fiber RP (Z=6=n, tensile=3.5GPa, density=1.6, -60% weight)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.40
+safety = 0.90
+notes = "Z=6=n EXACT, BT-85 carbon universality, Boeing 787=50% CFRP"
+
+[[candidate]]
+id = "Ti6Al4V"
+label = "Ti-6Al-4V (6%Al=n, HCP CN=12=sigma, tensile=1100MPa)"
+n6 = 0.85
+perf = 0.85
+power = 0.70
+cost = 0.45
+safety = 0.95
+notes = "6%Al=n EXACT, CN=12=sigma, aerospace workhorse alloy"
+
+[[candidate]]
+id = "Al_2024"
+label = "Al-2024 (Cu 4%=tau, FCC CN=12=sigma, density=2.78)"
+n6 = 0.75
+perf = 0.75
+power = 0.80
+cost = 0.70
+safety = 0.85
+notes = "CN=12=sigma EXACT, Cu=tau=4%, classic fuselage alloy"
+
+[[candidate]]
+id = "Graphene_Coat"
+label = "Graphene Coating (Z=6=n, CN=6=n, hexagonal lattice)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.25
+safety = 0.80
+notes = "Z=6=n EXACT, CN=6=n EXACT, anti-icing + lightning protection"
+
+[[candidate]]
+id = "Ceramic_CMC"
+label = "SiC Ceramic Matrix Composite (CN=4=tau, T_max=1600C)"
+n6 = 0.75
+perf = 0.95
+power = 0.85
+cost = 0.30
+safety = 0.85
+notes = "CN=4=tau EXACT, jet engine hot section, next-gen turbine blades"
+
+[[candidate]]
+id = "Ni_Superalloy"
+label = "Nickel Superalloy CMSX-4 (FCC CN=12=sigma, T=1100C creep)"
+n6 = 0.70
+perf = 0.90
+power = 0.65
+cost = 0.35
+safety = 0.90
+notes = "CN=12=sigma, single-crystal turbine blade standard"
+
+# ============================================================
+# Level 1: Propulsion (추진 시스템)
+# ============================================================
+
+[[level]]
+name = "Propulsion"
+
+[[candidate]]
+id = "Turbofan_12"
+label = "High-BPR Turbofan (sigma=12 stage compressor, BPR=12)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.65
+safety = 0.95
+notes = "sigma=12 compressor stages, sigma=12 bypass ratio, LEAP/GE9X class"
+
+[[candidate]]
+id = "Electric_6motor"
+label = "Distributed Electric Propulsion (n=6 motors, BPR→infinity)"
+n6 = 1.00
+perf = 0.70
+power = 0.90
+cost = 0.40
+safety = 0.85
+notes = "n=6 motor array, zero emission, eVTOL/regional"
+
+[[candidate]]
+id = "Hydrogen_FC"
+label = "Hydrogen Fuel Cell (LHV=120=sigma*(sigma-phi), phi=2 electrode)"
+n6 = 0.85
+perf = 0.75
+power = 0.80
+cost = 0.35
+safety = 0.75
+notes = "LHV=120 MJ/kg = sigma*(sigma-phi), BT-38, zero CO2"
+
+[[candidate]]
+id = "SAF_Bio"
+label = "Sustainable Aviation Fuel (C6 bio-origin, -80% lifecycle CO2)"
+n6 = 0.80
+perf = 0.80
+power = 0.75
+cost = 0.50
+safety = 0.90
+notes = "C6 sugar fermentation pathway, drop-in replacement"
+
+[[candidate]]
+id = "Open_Rotor"
+label = "Open Rotor/Propfan (tau=4 blades x phi=2 rows = sigma-tau)"
+n6 = 0.75
+perf = 0.85
+power = 0.85
+cost = 0.45
+safety = 0.80
+notes = "tau*phi=8=sigma-tau blade count, -20% fuel vs turbofan"
+
+[[candidate]]
+id = "Scramjet"
+label = "Scramjet (Mach 5=sopfr, no moving parts, hypersonic)"
+n6 = 0.70
+perf = 0.95
+power = 0.50
+cost = 0.20
+safety = 0.60
+notes = "Mach sopfr=5 design point, air-breathing hypersonic"
+
+# ============================================================
+# Level 2: Aerodynamics (공기역학 설계)
+# ============================================================
+
+[[level]]
+name = "Aerodynamics"
+
+[[candidate]]
+id = "Laminar_Flow"
+label = "Natural Laminar Flow Wing (Re_crit at n=6 order, -12% drag)"
+n6 = 0.85
+perf = 0.90
+power = 0.85
+cost = 0.50
+safety = 0.90
+notes = "sigma=12% drag reduction, laminar run to mid-chord"
+
+[[candidate]]
+id = "BWB"
+label = "Blended Wing Body (sigma=12 control surfaces, L/D=24=J₂)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.30
+safety = 0.80
+notes = "J₂=24 L/D ratio target, sigma=12 distributed controls"
+
+[[candidate]]
+id = "Hex_Winglet"
+label = "Hexagonal Winglet (n=6 facet, -6% induced drag)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+safety = 0.90
+notes = "n=6 facet geometry, n=6% drag reduction, retrofit"
+
+[[candidate]]
+id = "Morphing_Wing"
+label = "Morphing Wing (n=6 actuator zones, adaptive camber)"
+n6 = 0.90
+perf = 0.85
+power = 0.75
+cost = 0.35
+safety = 0.75
+notes = "n=6 independent morphing sections along span"
+
+[[candidate]]
+id = "VortexGen"
+label = "Vortex Generator Array (tau=4 per chord, delta-wing)"
+n6 = 0.70
+perf = 0.75
+power = 0.80
+cost = 0.80
+safety = 0.90
+notes = "tau=4 VG per chord section, stall delay"
+
+[[candidate]]
+id = "Supercritical"
+label = "Supercritical Airfoil (M_crit=0.85, t/c=12%=sigma)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.70
+safety = 0.90
+notes = "t/c=sigma=12%, standard transonic airfoil"
+
+# ============================================================
+# Level 3: Avionics (항전 시스템)
+# ============================================================
+
+[[level]]
+name = "Avionics"
+
+[[candidate]]
+id = "FBW_6axis"
+label = "Fly-By-Wire (n=6 DOF control, triple-redundant)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.50
+safety = 1.00
+notes = "n=6 DOF, BT-123 SE(3), A320/787/F-35 standard"
+
+[[candidate]]
+id = "GlassCockpit_6"
+label = "Glass Cockpit (n=6 primary displays, MFD + PFD)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.55
+safety = 0.95
+notes = "n=6 display panels (2 PFD + 2 ND + 2 EICAS = 6)"
+
+[[candidate]]
+id = "TCAS_12nm"
+label = "TCAS II (sigma=12 nm surveillance range, tau=4 RA types)"
+n6 = 0.85
+perf = 0.85
+power = 0.80
+cost = 0.60
+safety = 1.00
+notes = "sigma=12 nm range, tau=4 resolution advisory types"
+
+[[candidate]]
+id = "IRS_6DOF"
+label = "Inertial Reference System (n=6 DOF, sigma-phi=10 Hz update)"
+n6 = 0.90
+perf = 0.90
+power = 0.75
+cost = 0.45
+safety = 0.95
+notes = "n=6 DOF measurement, sigma-phi=10 Hz rate"
+
+[[candidate]]
+id = "Autopilot_AI"
+label = "AI Autopilot (sigma=12 sensor fusion, J₂=24 flight modes)"
+n6 = 0.90
+perf = 0.95
+power = 0.70
+cost = 0.35
+safety = 0.90
+notes = "sigma=12 sensor inputs, J₂=24 discrete flight modes"
+
+# ============================================================
+# Level 4: System (통합 항공기)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+id = "NarrowBody_6"
+label = "Narrow-Body 6-Abreast (n=6 seats/row, 180 pax = sigma*sopfr*n/phi)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+safety = 0.95
+notes = "n=6 abreast, A320/737 class, 80%+ of global fleet"
+
+[[candidate]]
+id = "eVTOL_Hex"
+label = "eVTOL Hexacopter (n=6 rotors, BT-127 fault tolerance)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.50
+safety = 0.90
+notes = "n=6 rotors, BT-127 sigma=12 kissing, urban air mobility"
+
+[[candidate]]
+id = "WideBody_12"
+label = "Wide-Body (sigma=12 abreast possible, J₂=24h range)"
+n6 = 0.85
+perf = 0.90
+power = 0.70
+cost = 0.60
+safety = 0.95
+notes = "sigma=12 seats in some configs, J₂=24h ultra-long range"
+
+[[candidate]]
+id = "Supersonic_Biz"
+label = "Supersonic Business Jet (Mach phi=2, n=6 pax quiet cabin)"
+n6 = 0.80
+perf = 0.90
+power = 0.50
+cost = 0.25
+safety = 0.80
+notes = "Mach phi=2, n=6 passenger cabin, low boom"
+
+[[candidate]]
+id = "Cargo_Drone"
+label = "Autonomous Cargo Drone (n=6 DOF, tau=4 payload bays)"
+n6 = 0.85
+perf = 0.80
+power = 0.85
+cost = 0.55
+safety = 0.85
+notes = "n=6 DOF autonomous, tau=4 modular cargo bays"

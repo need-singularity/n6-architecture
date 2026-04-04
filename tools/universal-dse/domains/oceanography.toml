@@ -1,0 +1,333 @@
+# N6 Oceanography DSE — ocean sensing + modeling + energy + ecology + system
+# 6 Sensing x 6 Modeling x 6 Energy x 5 Ecology x 5 System = 5,400 combos
+# BT-119 (6 spheres), BT-122 (hexacoral), BT-118 (CO2), BT-120 (CN=6 catalyst)
+# n=6 connections: 6 major ions, 6 gyres, 12 Beaufort, 24h tidal cycle, J₂=24
+
+[meta]
+name = "oceanography"
+desc = "Oceanography (Sensing + Modeling + Energy + Ecology + System)"
+version = "1.0"
+levels = 5
+total_hint = 5400
+
+[scoring]
+n6     = 0.35
+perf   = 0.25
+power  = 0.15
+cost   = 0.10
+safety = 0.15
+
+# ============================================================
+# Level 0: Sensing (해양 관측)
+# ============================================================
+
+[[level]]
+name = "Sensing"
+
+[[candidate]]
+id = "Argo6"
+label = "Argo Float Array (6-sensor suite, 2000m depth, global 3000+ floats)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+safety = 0.95
+notes = "n=6 sensor suite (T,S,P,O2,pH,Chl), BT-119 6-sphere coverage"
+
+[[candidate]]
+id = "Satellite_SAR"
+label = "SAR Satellite (sigma=12 bands, 10m resolution, all-weather)"
+n6 = 0.85
+perf = 0.95
+power = 0.70
+cost = 0.40
+safety = 0.90
+notes = "sigma=12 spectral bands, global coverage, Sentinel-1/SWOT"
+
+[[candidate]]
+id = "AUV_Hex"
+label = "Hexapod AUV (6 thrusters, 6-DOF, 6000m depth rating)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.30
+safety = 0.80
+notes = "n=6 thrusters, n=6 DOF, n=6 km depth = triple n=6 EXACT"
+
+[[candidate]]
+id = "Sonar_12ch"
+label = "Multibeam Sonar (sigma=12 channel array, 150dB SL)"
+n6 = 0.85
+perf = 0.90
+power = 0.65
+cost = 0.50
+safety = 0.90
+notes = "sigma=12 channels, swath coverage, bathymetry"
+
+[[candidate]]
+id = "Buoy_Network"
+label = "DART Buoy Network (tau=4 sensor types, 24h reporting = J₂)"
+n6 = 0.75
+perf = 0.80
+power = 0.85
+cost = 0.70
+safety = 0.95
+notes = "tau=4 sensors, J₂=24h cycle, tsunami early warning"
+
+[[candidate]]
+id = "Glider_Fleet"
+label = "Ocean Glider Fleet (phi=2 wing, 6-month endurance = n)"
+n6 = 0.80
+perf = 0.75
+power = 0.90
+cost = 0.65
+safety = 0.85
+notes = "phi=2 wing design, n=6 month mission duration"
+
+# ============================================================
+# Level 1: Modeling (해양 모델링)
+# ============================================================
+
+[[level]]
+name = "Modeling"
+
+[[candidate]]
+id = "GCM_12layer"
+label = "Ocean GCM (sigma=12 vertical layers, 0.1-degree resolution)"
+n6 = 0.85
+perf = 0.90
+power = 0.50
+cost = 0.40
+safety = 0.90
+notes = "sigma=12 vertical layers, eddy-resolving, NEMO/MOM6"
+
+[[candidate]]
+id = "AI_Transformer"
+label = "AI Ocean Transformer (sigma=12 attention heads, J₂=24 features)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.50
+safety = 0.85
+notes = "sigma=12 heads, J₂=24 features, BT-33 transformer atom"
+
+[[candidate]]
+id = "WaveModel"
+label = "Spectral Wave Model (n=6 directional bins, 24 freq bins = J₂)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.60
+safety = 0.90
+notes = "n=6 directions, J₂=24 frequencies, WAVEWATCH III"
+
+[[candidate]]
+id = "Biogeochem"
+label = "Biogeochemical Model (n=6 nutrient tracers, 12 ecosystem vars)"
+n6 = 1.00
+perf = 0.80
+power = 0.55
+cost = 0.50
+safety = 0.85
+notes = "n=6 tracers (N,P,Si,Fe,C,O), sigma=12 ecosystem variables"
+
+[[candidate]]
+id = "DataAssim"
+label = "4D-Var Assimilation (tau=4 dimensional, 6h window = n)"
+n6 = 0.85
+perf = 0.90
+power = 0.45
+cost = 0.35
+safety = 0.90
+notes = "tau=4 dimensions (x,y,z,t), n=6 hour assimilation window"
+
+[[candidate]]
+id = "Coupled_ESM"
+label = "Earth System Model (n=6 coupled components, century-scale)"
+n6 = 1.00
+perf = 0.85
+power = 0.30
+cost = 0.25
+safety = 0.90
+notes = "n=6 components (atm+ocean+ice+land+bio+chem), BT-119"
+
+# ============================================================
+# Level 2: Energy (해양 에너지)
+# ============================================================
+
+[[level]]
+name = "Energy"
+
+[[candidate]]
+id = "Tidal_6turbine"
+label = "Tidal Array (n=6 turbine cluster, 12MW = sigma)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.40
+safety = 0.80
+notes = "n=6 turbines, sigma=12 MW capacity, tidal predictability"
+
+[[candidate]]
+id = "Wave_OWC"
+label = "Oscillating Water Column (phi=2 phase, 24h optimal = J₂)"
+n6 = 0.75
+perf = 0.70
+power = 0.75
+cost = 0.45
+safety = 0.85
+notes = "phi=2 phase oscillation, J₂=24h tidal cycle"
+
+[[candidate]]
+id = "OTEC"
+label = "Ocean Thermal Energy Conversion (deltaT=24C = J₂, tropical)"
+n6 = 0.85
+perf = 0.75
+power = 0.65
+cost = 0.30
+safety = 0.80
+notes = "J₂=24 degree temperature differential, continuous baseload"
+
+[[candidate]]
+id = "Offshore_Wind"
+label = "Floating Offshore Wind (n=6 MW turbine, sigma=12 rpm)"
+n6 = 0.85
+perf = 0.90
+power = 0.85
+cost = 0.50
+safety = 0.75
+notes = "n=6 MW class, sigma=12 rpm nominal, spar/semi-sub"
+
+[[candidate]]
+id = "Salinity_Gradient"
+label = "Pressure Retarded Osmosis (sopfr=5 bar osmotic, 6 modules)"
+n6 = 0.80
+perf = 0.60
+power = 0.70
+cost = 0.35
+safety = 0.85
+notes = "sopfr=5 bar typical osmotic pressure, n=6 module stack"
+
+[[candidate]]
+id = "Current_Turbine"
+label = "Deep Current Turbine (tau=4 blade, 6-knot = n current)"
+n6 = 0.85
+perf = 0.65
+power = 0.75
+cost = 0.35
+safety = 0.80
+notes = "tau=4 blades, n=6 knot design current, Gulf Stream"
+
+# ============================================================
+# Level 3: Ecology (해양 생태)
+# ============================================================
+
+[[level]]
+name = "Ecology"
+
+[[candidate]]
+id = "CoralHex"
+label = "Hexacoral Reef Monitoring (n=6 fold symmetry, 6 indicator species)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.50
+safety = 0.95
+notes = "n=6 hexacoral symmetry, BT-122, reef health = 6 indicators"
+
+[[candidate]]
+id = "Fishery_TAC"
+label = "Fishery TAC Management (n=6 stock zones, sigma=12 month cycle)"
+n6 = 0.85
+perf = 0.75
+power = 0.90
+cost = 0.70
+safety = 0.90
+notes = "n=6 management zones, sigma=12 month assessment cycle"
+
+[[candidate]]
+id = "Plankton_AI"
+label = "AI Plankton Classifier (J₂=24 classes, sigma=12 features)"
+n6 = 0.90
+perf = 0.90
+power = 0.70
+cost = 0.50
+safety = 0.85
+notes = "J₂=24 phyto/zooplankton classes, sigma=12 morphological features"
+
+[[candidate]]
+id = "MPA_Network"
+label = "Marine Protected Area Network (n=6 IUCN categories)"
+n6 = 1.00
+perf = 0.80
+power = 0.95
+cost = 0.60
+safety = 1.00
+notes = "IUCN MPA categories I-VI = n=6, connectivity-optimized"
+
+[[candidate]]
+id = "Carbon_Sink"
+label = "Blue Carbon Sequestration (6 ecosystem types, BT-118)"
+n6 = 0.85
+perf = 0.70
+power = 0.85
+cost = 0.45
+safety = 0.90
+notes = "n=6 blue carbon ecosystems (mangrove, seagrass, salt marsh, kelp, coral, phytoplankton)"
+
+# ============================================================
+# Level 4: System (통합 시스템)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+id = "SmartOcean"
+label = "Smart Ocean Network (n=6 data layers, 24/7 = J₂)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.40
+safety = 0.90
+notes = "n=6 data layers (physical, chemical, biological, geological, atmospheric, human)"
+
+[[candidate]]
+id = "DigitalTwin"
+label = "Ocean Digital Twin (sigma=12 coupled models, real-time)"
+n6 = 0.85
+perf = 0.95
+power = 0.50
+cost = 0.30
+safety = 0.90
+notes = "sigma=12 model components, EU Digital Twin Ocean project"
+
+[[candidate]]
+id = "Coastal_6zone"
+label = "Coastal Management (n=6 zone classification, ICZM)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.60
+safety = 0.95
+notes = "n=6 coastal zones (offshore, nearshore, beach, dune, hinterland, upland)"
+
+[[candidate]]
+id = "Arctic_Monitor"
+label = "Arctic Monitoring Platform (tau=4 season cycle, 6-sensor)"
+n6 = 0.80
+perf = 0.80
+power = 0.65
+cost = 0.35
+safety = 0.85
+notes = "tau=4 seasonal phases, n=6 sensor suite, ice-capable"
+
+[[candidate]]
+id = "Tsunami_Early"
+label = "Tsunami Early Warning (n=6 min alert, 12-station = sigma)"
+n6 = 0.85
+perf = 0.90
+power = 0.80
+cost = 0.55
+safety = 1.00
+notes = "n=6 minute warning target, sigma=12 station minimum network"
