@@ -1,0 +1,362 @@
+# N6 Motorcycle DSE — HEXA-BIKE ultimate architecture
+# 6 Materials x 5 Process x 6 Engine x 5 ECU x 6 System = 5,400 combos
+# BT-287 (I6 balance), BT-289 (6-gear), BT-290 (MotoGP), BT-123 (SE(3))
+# BT-271 (Ti-6Al-4V), BT-277 (transport), BT-288 (voltage), BT-327/328 (sensor)
+
+[meta]
+name = "motorcycle"
+desc = "Ultimate Motorcycle (Material + Process + Engine + ECU + System)"
+version = "1.0"
+levels = 5
+total_hint = 5400
+
+[scoring]
+n6     = 0.30
+perf   = 0.25
+weight = 0.20
+cost   = 0.10
+safety = 0.15
+
+# ============================================================
+# Level 0: Materials (소재)
+#   n6 checks: Ti Z=22 6%Al 4%V, Carbon Z=6, BT-271/85/93
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+id = "Ti-6Al-4V"
+label = "Ti-6Al-4V (6%Al+4%V = n+tau, BT-271, tensile=1000MPa, rho=4.43)"
+n6 = 1.00
+perf = 0.95
+weight = 0.85
+cost = 0.20
+safety = 0.95
+notes = "Ti-6Al-4V = n=6 Al + tau=4 V EXACT, BT-271, aerospace grade frame"
+
+[[candidate]]
+id = "CFRP"
+label = "CFRP (Z=6=n, tensile=2000MPa, rho=1.6, BT-85/93 carbon)"
+n6 = 1.00
+perf = 0.90
+weight = 1.00
+cost = 0.15
+safety = 0.85
+notes = "Carbon Z=6=n EXACT, BT-85/93, lightest structural option"
+
+[[candidate]]
+id = "Al7075-T6"
+label = "Al7075-T6 (T6=n heat treatment, tensile=570MPa, rho=2.81)"
+n6 = 0.80
+perf = 0.80
+weight = 0.90
+cost = 0.60
+safety = 0.85
+notes = "T6 treatment = n=6, standard swingarm material"
+
+[[candidate]]
+id = "CrMo-Steel"
+label = "CrMo Steel 4130 (tensile=670MPa, rho=7.85, classic)"
+n6 = 0.40
+perf = 0.70
+weight = 0.40
+cost = 0.90
+safety = 0.90
+notes = "Traditional trellis frame material, heavy but cheap"
+
+[[candidate]]
+id = "Magnesium"
+label = "Magnesium AZ91 (rho=1.81, lightest structural metal)"
+n6 = 0.50
+perf = 0.60
+weight = 0.95
+cost = 0.40
+safety = 0.60
+notes = "Engine cases and covers, corrosion issues"
+
+[[candidate]]
+id = "Diamond-Coating"
+label = "Diamond DLC (Z=6=n, friction=0.1, hardness=10000HV)"
+n6 = 1.00
+perf = 0.85
+weight = 0.70
+cost = 0.10
+safety = 0.95
+notes = "Z=6=n EXACT, BT-93, surface coating for critical parts"
+
+# ============================================================
+# Level 1: Process (공정)
+# ============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+id = "CNC-5axis"
+label = "5-axis CNC (sopfr=5 axes, precision=0.01mm)"
+n6 = 1.00
+perf = 1.00
+weight = 0.80
+cost = 0.30
+safety = 0.95
+notes = "sopfr=5 axis EXACT, highest precision machining"
+
+[[candidate]]
+id = "Die-Cast"
+label = "Die Casting (mass production, cost efficient)"
+n6 = 0.50
+perf = 0.70
+weight = 0.70
+cost = 0.90
+safety = 0.80
+notes = "Engine cases, standard process"
+
+[[candidate]]
+id = "Forging"
+label = "Forging (grain flow, strongest)"
+n6 = 0.60
+perf = 0.95
+weight = 0.75
+cost = 0.40
+safety = 0.95
+notes = "Crankshaft, connecting rods, critical parts"
+
+[[candidate]]
+id = "3D-Print"
+label = "Additive Manufacturing (complex geometry, Ti/Inconel)"
+n6 = 0.70
+perf = 0.85
+weight = 0.90
+cost = 0.20
+safety = 0.80
+notes = "Exhaust manifolds, brackets, rapid prototyping"
+
+[[candidate]]
+id = "Autoclave"
+label = "Autoclave CFRP (6-ply layup = n=6, aerospace quality)"
+n6 = 1.00
+perf = 0.90
+weight = 1.00
+cost = 0.15
+safety = 0.90
+notes = "n=6 ply layup EXACT, carbon fiber frame construction"
+
+# ============================================================
+# Level 2: Engine Core (코어)
+# ============================================================
+
+[[level]]
+name = "Engine"
+
+[[candidate]]
+id = "I6"
+label = "Inline-6 (n=6 cyl, perfect balance BT-287, 24v=J2)"
+n6 = 1.00
+perf = 0.95
+weight = 0.60
+cost = 0.30
+safety = 0.95
+notes = "n=6 EXACT, perfect primary+secondary balance, J2=24 valves, BT-287"
+
+[[candidate]]
+id = "V4"
+label = "V4 (tau=4 cyl, Ducati Panigale style, 16v=phi^tau)"
+n6 = 0.90
+perf = 1.00
+weight = 0.80
+cost = 0.40
+safety = 0.90
+notes = "tau=4 EXACT, phi^tau=16 valves EXACT, compact+powerful"
+
+[[candidate]]
+id = "I4"
+label = "Inline-4 (tau=4 cyl, most common sportbike, 16v)"
+n6 = 0.85
+perf = 0.95
+weight = 0.85
+cost = 0.70
+safety = 0.90
+notes = "tau=4 EXACT, phi^tau=16 valves, high-revving"
+
+[[candidate]]
+id = "V-Twin"
+label = "V-Twin (phi=2 cyl, Ducati/H-D tradition)"
+n6 = 0.70
+perf = 0.80
+weight = 0.90
+cost = 0.80
+safety = 0.90
+notes = "phi=2 EXACT, character+torque, 90deg L-twin"
+
+[[candidate]]
+id = "Triple"
+label = "Triple (n/phi=3 cyl, Triumph specialty)"
+n6 = 0.80
+perf = 0.85
+weight = 0.85
+cost = 0.60
+safety = 0.90
+notes = "n/phi=3 EXACT, balance of torque+revs"
+
+[[candidate]]
+id = "EV-Motor"
+label = "EV Motor (phi=2 phase, sigma^2=144kW peak)"
+n6 = 0.95
+perf = 0.90
+weight = 0.80
+cost = 0.50
+safety = 0.95
+notes = "phi=2 EXACT, instant torque, zero emission"
+
+# ============================================================
+# Level 3: ECU/Electronics (칩)
+# ============================================================
+
+[[level]]
+name = "ECU"
+
+[[candidate]]
+id = "ECU-12ch"
+label = "ECU sigma=12ch (IMU n=6, TC sigma-phi=10, J2=24 logger)"
+n6 = 1.00
+perf = 1.00
+weight = 0.90
+cost = 0.30
+safety = 1.00
+notes = "sigma=12 EXACT, n=6 IMU EXACT, J2=24 logger EXACT, full suite"
+
+[[candidate]]
+id = "ECU-8ch"
+label = "ECU sigma-tau=8ch (basic IMU, TC/ABS)"
+n6 = 0.80
+perf = 0.80
+weight = 0.95
+cost = 0.60
+safety = 0.85
+notes = "sigma-tau=8 EXACT, standard sportbike ECU"
+
+[[candidate]]
+id = "ECU-6ch"
+label = "ECU n=6ch (IMU + basic TC)"
+n6 = 0.90
+perf = 0.60
+weight = 0.95
+cost = 0.70
+safety = 0.70
+notes = "n=6 EXACT, mid-range electronics"
+
+[[candidate]]
+id = "Basic-ECU"
+label = "Basic ECU (fuel injection only)"
+n6 = 0.30
+perf = 0.40
+weight = 1.00
+cost = 0.90
+safety = 0.50
+notes = "Minimal electronics, commuter bikes"
+
+[[candidate]]
+id = "AI-ECU"
+label = "AI ECU (sigma^2=144 TOPS, Level 3 autonomy)"
+n6 = 0.95
+perf = 0.95
+weight = 0.80
+cost = 0.10
+safety = 0.95
+notes = "sigma^2=144 EXACT, future autonomous motorcycle"
+
+# ============================================================
+# Level 4: System (시스템/동력원)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+id = "ICE-Sport"
+label = "ICE Sport (n=6 gear, sigma=12 compression, track-ready)"
+n6 = 0.90
+perf = 1.00
+weight = 0.75
+cost = 0.60
+safety = 0.80
+notes = "n=6 gear EXACT, sigma=12 compression EXACT, pure performance"
+
+[[candidate]]
+id = "EV-48V"
+label = "EV 48V (sigma*tau=48V, J2=24kWh, phi=2 motor)"
+n6 = 1.00
+perf = 0.80
+weight = 0.70
+cost = 0.40
+safety = 0.95
+notes = "sigma*tau=48 EXACT, J2=24 kWh EXACT, BT-288"
+
+[[candidate]]
+id = "Hybrid"
+label = "Hybrid (phi=2 powerplant, ICE+EV, sigma^2=144hp total)"
+n6 = 0.90
+perf = 0.90
+weight = 0.60
+cost = 0.30
+safety = 0.90
+notes = "phi=2 EXACT, sigma^2=144 total EXACT, best of both"
+
+[[candidate]]
+id = "Hydrogen"
+label = "Hydrogen FC (LHV=sigma*(sigma-phi)=120 MJ/kg)"
+n6 = 0.85
+perf = 0.70
+weight = 0.50
+cost = 0.15
+safety = 0.70
+notes = "sigma*(sigma-phi)=120 EXACT, BT-38, zero emission"
+
+[[candidate]]
+id = "EV-400V"
+label = "EV 400V (tau*(sigma-phi)^phi=400V, Energica class)"
+n6 = 0.95
+perf = 0.95
+weight = 0.65
+cost = 0.25
+safety = 0.90
+notes = "tau*(sigma-phi)^phi=400 EXACT, high performance EV"
+
+[[candidate]]
+id = "Solar-Hybrid"
+label = "Solar-Hybrid (EV + solar auxiliary, touring)"
+n6 = 0.70
+perf = 0.50
+weight = 0.55
+cost = 0.20
+safety = 0.85
+notes = "Experimental, solar panels on fairing, range extension"
+
+# ============================================================
+# Rules (n6 scoring bonuses)
+# ============================================================
+
+[[rule]]
+name = "Ti-6Al-4V + I6 synergy"
+condition = "Material==Ti-6Al-4V AND Engine==I6"
+bonus = 0.10
+notes = "Both n=6 aligned: Ti(6%Al+4%V) + I6(6cyl), BT-271+287"
+
+[[rule]]
+name = "Full n6 electronics"
+condition = "ECU==ECU-12ch"
+bonus = 0.05
+notes = "sigma=12ch enables all n=6 electronic features"
+
+[[rule]]
+name = "EV voltage alignment"
+condition = "System==EV-48V AND ECU==ECU-12ch"
+bonus = 0.05
+notes = "sigma*tau=48V + sigma=12ch = full n6 EV integration"
+
+[[rule]]
+name = "Carbon frame + autoclave"
+condition = "Material==CFRP AND Process==Autoclave"
+bonus = 0.08
+notes = "Z=6 carbon + n=6 ply layup = optimal lightweight"

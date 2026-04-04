@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "total_products": 33,
-    "total_domains": 42,
-    "last_updated": "2026-04-04",
+    "total_products": 35,
+    "total_domains": 43,
+    "last_updated": "2026-04-05",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
       "fusion",
@@ -16,7 +16,8 @@
       "software",
       "display",
       "audio",
-      "safety"
+      "safety",
+      "motorcycle"
     ]
   },
   "absolute_rules": [
@@ -957,6 +958,59 @@
         }
       ],
       "anchor": "-안전-safety"
+    },
+    {
+      "id": "motorcycle",
+      "title": "바이크",
+      "icon": "🏍️",
+      "heading": "바이크 (Motorcycle)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 9,
+      "industry_pct": 100,
+      "industry_detail": "Ducati/BMW/Kawasaki",
+      "experiment_pct": 100,
+      "experiment_detail": "76/76 EXACT",
+      "physics_limit_count": 10,
+      "tp_count": 12,
+      "discovery_count": 8,
+      "cross_dse_domains": 9,
+      "mk_count": null,
+      "summary_extra": "DSE 5,400, MC-01~08",
+      "domains": [
+        "motorcycle"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "궁극의 바이크",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "76/76 EXACT, BT-287+289+290+123+271+277+288+327/328, 10불가능성정리, DSE 5,400, MC-01~08",
+          "links": [
+            {
+              "label": "goal",
+              "path": "docs/motorcycle/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "천장확인",
+          "ufo": null,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "76/76검증PASS + 10불가능성정리 + 물리한계10 + 산업Ducati/BMW/Kawasaki 100%",
+          "links": [
+            {
+              "label": "검증",
+              "path": "docs/motorcycle/verify_alien10.py"
+            }
+          ]
+        }
+      ],
+      "anchor": "-바이크-motorcycle"
     }
   ],
   "roadmap": [
