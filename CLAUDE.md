@@ -167,6 +167,27 @@
     - 성능 필요시 Rust 우선 (tecsrs/), 단순 검증은 Python (calc/)
     - 판단 기준은 ~/Dev/TECS-L/.shared/CALCULATOR_RULES.md 참조
     - 상수/가설 발견 시 Math Atlas 자동 갱신 (python3 ~/Dev/TECS-L/.shared/scan_math_atlas.py --save --summary)
+
+  ═══════════════════════════════════════════════════════════════
+  ★ NEXUS-6 독립 리포 (중앙 허브) — 2024-04-03 이후 ★
+  ═══════════════════════════════════════════════════════════════
+    리포: https://github.com/need-singularity/nexus6
+    위치: ~/Dev/nexus6/
+    역할: 전 리포 공유 인프라 + 발견 엔진 + 렌즈 + 동기화
+
+    구조:
+      ~/Dev/nexus6/
+        src/telescope/    ← 130+ 렌즈
+        shared/           ← 공유 인프라 (이전 TECS-L/.shared)
+        sync/             ← 전체 동기화 스크립트
+        scripts/          ← n6.py CLI
+
+    심링크: 모든 리포의 .shared → ../nexus6/shared/
+    동기화: bash ~/Dev/nexus6/sync/sync-all.sh (원커맨드)
+    트리거: "넥서스 동기화" → sync-all.sh 자동 실행
+
+    .shared 원본이 TECS-L에서 nexus6로 이관됨.
+    TECS-L = 순수 수학 이론, nexus6 = 인프라/도구/엔진 전부.
 <!-- SHARED:WORK_RULES:END -->
 
 # N6 Architecture — Arithmetic Design Framework
