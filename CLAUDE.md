@@ -479,7 +479,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (127 total, BT-1~127)
+## Breakthrough Theorems (159 total, BT-1~159)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
