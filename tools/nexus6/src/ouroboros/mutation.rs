@@ -142,11 +142,16 @@ fn apply_scale_hint(_base: &str, const_name: &str, value: f64) -> String {
 }
 
 /// Truncate a string to max_len characters, appending "..." if truncated.
+/// UTF-8 safe: truncates at char boundary, not byte boundary.
 fn truncate(s: &str, max_len: usize) -> String {
     if s.len() <= max_len {
         s.to_string()
     } else {
-        format!("{}...", &s[..max_len])
+        let mut end = max_len;
+        while end > 0 && !s.is_char_boundary(end) {
+            end -= 1;
+        }
+        format!("{}...", &s[..end])
     }
 }
 

@@ -1,7 +1,9 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::path::PathBuf;
 
 /// Category of a lens in the registry.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum LensCategory {
     /// The 22 foundational lenses from the telescope specification.
     Core,
@@ -14,7 +16,7 @@ pub enum LensCategory {
 }
 
 /// Metadata entry for a single lens in the registry.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LensEntry {
     pub name: String,
     pub category: LensCategory,
@@ -85,7 +87,56 @@ impl LensRegistry {
         for entry in super::frontier_lenses::frontier_lens_entries() {
             reg.entries.insert(entry.name.clone(), entry);
         }
+        // Auto-load persisted custom lenses from disk (if present).
+        let _ = reg.load_custom();
         reg
+    }
+
+    /// Path to the persisted custom lens file: ~/.nexus6/custom_lenses.json
+    pub fn custom_lens_path() -> Option<PathBuf> {
+        let home = std::env::var("HOME").ok()?;
+        Some(PathBuf::from(home).join(".nexus6").join("custom_lenses.json"))
+    }
+
+    /// Load custom lenses from `~/.nexus6/custom_lenses.json` into the registry.
+    /// Returns the number of entries loaded. Missing file is not an error.
+    pub fn load_custom(&mut self) -> std::io::Result<usize> {
+        let path = match Self::custom_lens_path() {
+            Some(p) => p,
+            None => return Ok(0),
+        };
+        if !path.exists() {
+            return Ok(0);
+        }
+        let data = std::fs::read_to_string(&path)?;
+        let entries: Vec<LensEntry> = serde_json::from_str(&data)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?;
+        let count = entries.len();
+        for e in entries {
+            self.entries.insert(e.name.clone(), e);
+        }
+        Ok(count)
+    }
+
+    /// Save all Custom-category lenses to `~/.nexus6/custom_lenses.json`.
+    /// Creates the ~/.nexus6 directory if needed. Returns number saved.
+    pub fn save_custom(&self) -> std::io::Result<usize> {
+        let path = match Self::custom_lens_path() {
+            Some(p) => p,
+            None => return Ok(0),
+        };
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+        let custom: Vec<&LensEntry> = self
+            .entries
+            .values()
+            .filter(|e| e.category == LensCategory::Custom)
+            .collect();
+        let json = serde_json::to_string_pretty(&custom)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?;
+        std::fs::write(&path, json)?;
+        Ok(custom.len())
     }
 
     /// Register a new lens entry. Overwrites if name already exists.

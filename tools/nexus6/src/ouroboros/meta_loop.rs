@@ -213,6 +213,14 @@ impl MetaLoop {
             }
         }
 
+        // Persist forged custom lenses to disk (~/.nexus6/custom_lenses.json)
+        if !all_forged_lenses.is_empty() {
+            match registry.save_custom() {
+                Ok(n) => self.report(0, 0, &format!("Persisted {} custom lenses to ~/.nexus6/custom_lenses.json", n)),
+                Err(e) => self.report(0, 0, &format!("Warning: failed to persist custom lenses: {}", e)),
+            }
+        }
+
         MetaLoopResult {
             ouroboros_results: all_ouroboros_results,
             forged_lenses: all_forged_lenses,
