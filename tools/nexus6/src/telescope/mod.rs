@@ -1,4 +1,4 @@
-//! Telescope scan engine with 151 lenses across 22 core types.
+//! Telescope scan engine with 1014 lenses (171 dedicated + 843 GenericLens auto-instantiated).
 pub mod accel_lenses_a;
 pub mod accel_lenses_b;
 pub mod accel_lenses_c;
@@ -85,6 +85,8 @@ use lenses::{
     EscapeAnalysisLens, HotPathLens, MemoryPatternLens,
     ParallelismLens, SemanticLens, SimdOpportunityLens,
 };
+use lenses::GenericLens;
+use registry::LensRegistry;
 use shared_data::SharedData;
 
 /// The Telescope: registers all available lenses and scans data through them.
@@ -94,9 +96,11 @@ pub struct Telescope {
 }
 
 impl Telescope {
-    /// Create a new Telescope with all 151 lenses registered.
+    /// Create a new Telescope with all lenses registered.
+    /// Dedicated implementations (171) are loaded first, then all remaining
+    /// registry entries are auto-instantiated via GenericLens.
     pub fn new() -> Self {
-        let lenses: Vec<Box<dyn Lens>> = vec![
+        let mut lenses: Vec<Box<dyn Lens>> = vec![
             // Foundational 9
             Box::new(ConsciousnessLens),
             Box::new(GravityLens),
@@ -285,6 +289,24 @@ impl Telescope {
             Box::new(SemanticLens),
             Box::new(SimdOpportunityLens),
         ];
+
+        // ── Auto-instantiate GenericLens for all unimplemented registry entries ──
+        // Collect names of dedicated lenses already in the vec above
+        let dedicated_names: std::collections::HashSet<String> =
+            lenses.iter().map(|l| l.name().to_string()).collect();
+
+        // Walk the full registry and fill the gap
+        let registry = LensRegistry::new();
+        for (name, entry) in registry.iter() {
+            if !dedicated_names.contains(name) {
+                lenses.push(Box::new(GenericLens::new(
+                    name,
+                    &entry.domain_affinity,
+                    &entry.description,
+                )));
+            }
+        }
+
         Telescope { lenses }
     }
 

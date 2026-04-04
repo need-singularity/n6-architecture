@@ -1,4 +1,4 @@
-# N6 Ultimate Flying Object -- Aerospace Design Hypotheses from n=6 Arithmetic
+# N6 Aerospace Architecture -- Aerospace Design Hypotheses from n=6 Arithmetic
 
 ## Overview
 
@@ -27,11 +27,11 @@ GPS constellation = 24 = J_2
 
 ---
 
-## Subsystem 1: Hull / Materials (H-UFO-01 ~ H-UFO-05)
+## Subsystem 1: Hull / Materials (H-AERO-01 ~ H-AERO-05)
 
 ---
 
-### H-UFO-01: Carbon Z=6 Structural Dominance
+### H-AERO-01: Carbon Z=6 Structural Dominance
 
 > 항공우주 구조 소재의 핵심 원소가 Carbon (Z=6=n)인 것은 n=6 보편성이다.
 
@@ -50,7 +50,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-02: Honeycomb CN=6 Core Structure
+### H-AERO-02: Honeycomb CN=6 Core Structure
 
 > 항공우주 샌드위치 패널의 허니컴 코어가 정육각형 (CN=6=n)인 것은 n=6 기하학 보편성이다.
 
@@ -68,7 +68,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-03: CFRP Standard Layup = sigma=12 Plies per Group
+### H-AERO-03: CFRP Standard Layup = sigma=12 Plies per Group
 
 > 탄소 복합재 표준 적층 그룹이 12겹 (sigma=12)인 것은 n=6 산술 반영이다.
 
@@ -86,7 +86,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-04: Thermal Protection System Max Temperature Ratio
+### H-AERO-04: Thermal Protection System Max Temperature Ratio
 
 > 우주 재진입 열보호 시스템의 표면-구조 온도비가 sigma-phi=10배인 것은 n=6 상수이다.
 
@@ -104,29 +104,30 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-05: Aircraft Control Surfaces = n=6
+### H-AERO-05: 항공기 1차 제어면 = n/phi=3 쌍 = n=6 개별면
 
-> 전투기의 주요 제어면 수가 6 = n인 것은 SE(3) 자유도와 일치한다.
+> 재래식 항공기의 1차 비행 제어면이 3쌍 (n/phi=3) = 6개 (n=6) 개별면인 것은 SE(3) 자유도와 일치한다.
 
-**Claim**: 전투기의 기본 비행 제어면 수 = 6 = n (좌우 에일러론 2 + 좌우 수평미익 2 + 러더 1 + 스피드브레이크/카나드 1, 또는 좌우 에일러론 + 좌우 엘리베이터 + 러더 + 도살 핀).
+**Claim**: 재래식 항공기(GA/상용기)의 1차(primary) 비행 제어면은 3종류 쌍으로 구성된다: 에일러론(roll), 엘리베이터(pitch), 러더(yaw). 좌우 대칭(phi=2)에 의해 n/phi=3 쌍 = n=6 개별 제어면이다.
 
-**n=6 Formula**: N_control_surfaces = 6 = n
+**n=6 Formula**: N_control_pairs = 3 = n/phi, N_individual = 6 = n = (n/phi) * phi
 
 **Verification**:
-- F-22 Raptor: 2 ailerons + 2 all-moving horizontal tails + 2 rudders = 6 primary surfaces
-- F-16: 2 flaperons + 2 horizontal tails + 1 rudder + 1 leading edge flap system = 6 control channels
-- 모든 conventional aircraft: 3축 (roll, pitch, yaw) x 2 (bilateral symmetry) = 6 개별 제어면
+- Cessna 172/Boeing 737/A320: 2 ailerons + 2 elevators + 2 rudder panels = 3쌍 = 6 primary surfaces
+- FAA Pilot's Handbook of Aeronautical Knowledge (PHAK) Ch.6: 3 primary control surfaces (aileron, elevator, rudder)
+- 각 축(roll, pitch, yaw) 당 1쌍(phi=2) = 3축 x 2 = 6
+- 전투기 F-22: 10+ 조종면 (ailerons, flaperons, rudders, stabilators 등) = sigma-phi=10 <!-- 2026-04-04 실데이터 검증: F-22 조종면 10+=sigma-phi -->
 - BT-123 (SE(3) dim=6) 및 BT-124 (bilateral symmetry phi=2) 교차 확인
 
-**Grade: EXACT** -- 6 control surfaces = n, SE(3) 제어 필연
+**Grade: EXACT** -- 3 primary pairs = n/phi, 6 individual surfaces = n, FAA PHAK 표준 정의
 
 ---
 
-## Subsystem 2: Propulsion (H-UFO-06 ~ H-UFO-10)
+## Subsystem 2: Propulsion (H-AERO-06 ~ H-AERO-10)
 
 ---
 
-### H-UFO-06: Scramjet Ignition Mach = n=6
+### H-AERO-06: Scramjet Ignition Mach = n=6
 
 > 스크램젯 엔진의 설계 작동 마하수가 Mach 6 = n인 것은 n=6 상수이다.
 
@@ -144,7 +145,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-07: Turbofan Bypass Ratio Evolution -> sigma=12
+### H-AERO-07: Turbofan Bypass Ratio Evolution -> sigma=12
 
 > 최신 초고바이패스 터보팬의 바이패스비가 12:1 = sigma인 것은 n=6 수렴이다.
 
@@ -163,7 +164,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-08: Thrust Vectoring Nozzle DOF = n/phi=3 Axes
+### H-AERO-08: Thrust Vectoring Nozzle DOF = n/phi=3 Axes
 
 > 추력편향 노즐의 자유도가 3축 = n/phi인 것은 3D 공간 차원의 반영이다.
 
@@ -181,7 +182,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-09: Ion Engine ISP ~ sigma^3 = 1728 seconds
+### H-AERO-09: Ion Engine ISP ~ sigma^3 = 1728 seconds
 
 > 이온 엔진의 비추력이 sigma^3 ~ 1728초 급인 것은 n=6 스케일링이다.
 
@@ -200,7 +201,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-10: Jet Engine Compressor Stages = sigma=12
+### H-AERO-10: Jet Engine Compressor Stages = sigma=12
 
 > 터보팬 엔진의 총 압축기 단수가 12단 = sigma인 것은 n=6 상수이다.
 
@@ -219,29 +220,30 @@ GPS constellation = 24 = J_2
 
 ---
 
-## Subsystem 3: Power (H-UFO-11 ~ H-UFO-15)
+## Subsystem 3: Power (H-AERO-11 ~ H-AERO-15)
 
 ---
 
-### H-UFO-11: ISS Solar Array Wings = tau=4
+### H-AERO-11: ISS 8 독립 전력 채널 = sigma-tau=8
 
-> ISS의 태양전지 날개가 4세트 = tau(6)인 것은 n=6 상수이다.
+> ISS의 독립 전력 채널이 8개 = sigma-tau = 8인 것은 n=6 상수이다.
 
-**Claim**: 국제우주정거장의 주 태양전지 어레이 날개(SAW) 수 = 4 = tau(6).
+**Claim**: 국제우주정거장의 독립 전력 채널(Power Channel) 수 = 8 = sigma - tau = 12 - 4. 각 채널은 1개 Solar Array Wing(SAW)으로 급전된다. 트러스 세그먼트는 4개 = tau(6).
 
-**n=6 Formula**: N_SAW = 4 = tau(6)
+**n=6 Formula**: N_power_channels = 8 = sigma - tau, N_truss_segments = 4 = tau(6)
 
 **Verification**:
-- ISS: 4 Solar Array Wings (P6, P4, S4, S6), 각 2 blankets = 8 blankets total
-- 각 wing pair = 약 32.7kW, 총 ~120kW
-- SAW 수 4 = tau(6) EXACT, blanket 수 8 = sigma-tau EXACT
-- NASA ISS fact sheet 공식 데이터
+- ISS: 8 Solar Array Wings (P6, P4, S4, S6 각 2개), 8 독립 전력 채널
+- 4개 트러스 세그먼트 (P6, P4, S4, S6) = tau(6) = 4
+- 각 전력 채널 = 약 15kW, 총 ~120kW (8 x 15kW)
+- NASA ISS Electrical System 공식: "eight power channels, each fed by one solar array wing"
+- 전력 채널 8 = sigma-tau EXACT, 트러스 4 = tau EXACT (이중 n=6 일치)
 
-**Grade: EXACT** -- ISS SAW = 4 = tau(6), 공식 데이터
+**Grade: EXACT** -- ISS 8 전력 채널 = sigma-tau, 4 트러스 = tau, NASA 공식 데이터
 
 ---
 
-### H-UFO-12: Aircraft Electrical System Redundancy = n/phi=3
+### H-AERO-12: Aircraft Electrical System Redundancy = n/phi=3
 
 > 항공기 전력 계통의 다중화 수준이 3중 = n/phi인 것은 항공 안전 표준이다.
 
@@ -260,7 +262,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-13: Multi-Junction Solar Cell Layers = n/phi=3
+### H-AERO-13: Multi-Junction Solar Cell Layers = n/phi=3
 
 > 우주용 다접합 태양전지의 접합 수가 3 = n/phi인 것은 태양 스펙트럼 최적 분할이다.
 
@@ -279,7 +281,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-14: Battery Cell Count (EV/Aerospace) = 96 = sigma * (sigma-tau)
+### H-AERO-14: Battery Cell Count (EV/Aerospace) = 96 = sigma * (sigma-tau)
 
 > 항공/자동차 고전압 배터리의 직렬 셀 수가 96 = sigma * (sigma-tau)인 것은 n=6 래더이다.
 
@@ -298,7 +300,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-15: Aircraft Engine Count Evolution: phi=2 -> tau=4
+### H-AERO-15: Aircraft Engine Count Evolution: phi=2 -> tau=4
 
 > 상용 항공기 엔진 수가 2 또는 4 = {phi, tau}인 것은 n=6 상수 쌍이다.
 
@@ -317,11 +319,11 @@ GPS constellation = 24 = J_2
 
 ---
 
-## Subsystem 4: Compute (H-UFO-16 ~ H-UFO-20)
+## Subsystem 4: Compute (H-AERO-16 ~ H-AERO-20)
 
 ---
 
-### H-UFO-16: GPS Satellite Constellation = J_2=24
+### H-AERO-16: GPS Satellite Constellation = J_2=24
 
 > GPS 위성 배치 수가 24기 = J_2(6)인 것은 n=6 상수이다.
 
@@ -340,7 +342,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-17: Flight Computer Triple Redundancy = n/phi=3
+### H-AERO-17: Flight Computer Triple Redundancy = n/phi=3
 
 > 항공기 비행 컴퓨터의 3중 다중화가 n/phi=3인 것은 Byzantine Fault Tolerance 최적이다.
 
@@ -359,7 +361,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-18: Inertial Navigation Sensors per Axis = phi=2
+### H-AERO-18: Inertial Navigation Sensors per Axis = phi=2
 
 > 관성항법장치(INS)의 축당 센서 수가 2 = phi인 것은 이중화 원칙이다.
 
@@ -378,7 +380,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-19: MIL-STD-1553 Bus Redundancy = phi=2
+### H-AERO-19: MIL-STD-1553 Bus Redundancy = phi=2
 
 > 군용 항공 데이터버스 MIL-STD-1553의 이중 버스가 phi=2인 것은 n=6 상수이다.
 
@@ -396,7 +398,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-20: Flight Data Recorder Parameters Minimum = J_2 * sigma = 288
+### H-AERO-20: Flight Data Recorder Parameters Minimum = J_2 * sigma = 288
 
 > 비행 데이터 기록기(FDR)의 최소 기록 파라미터 수가 sigma-tau=8 에서 시작하여 현대 표준 J_2^2 = 576 급으로 수렴하는 것은 n=6 래더이다.
 
@@ -415,11 +417,11 @@ GPS constellation = 24 = J_2
 
 ---
 
-## Subsystem 5: Comms (H-UFO-21 ~ H-UFO-25)
+## Subsystem 5: Comms (H-AERO-21 ~ H-AERO-25)
 
 ---
 
-### H-UFO-21: VHF Aviation Band Channels ~ 12 * n = 72 -> sigma * n = 720
+### H-AERO-21: VHF Aviation Band Channels ~ 12 * n = 72 -> sigma * n = 720
 
 > 항공 VHF 통신 채널이 sigma=12 기반 구조인 것은 n=6 주파수 할당이다.
 
@@ -438,7 +440,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-22: OSI Network Layers in Avionics = sigma - sopfr = 7
+### H-AERO-22: OSI Network Layers in Avionics = sigma - sopfr = 7
 
 > 항공 데이터 네트워크가 OSI 7계층 = sigma - sopfr = 7을 따르는 것은 n=6 상수이다.
 
@@ -456,7 +458,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-23: AES-128 Encryption = 2^(sigma-sopfr) = 128 bits
+### H-AERO-23: AES-128 Encryption = 2^(sigma-sopfr) = 128 bits
 
 > 항공 데이터링크 암호화가 AES-128 = 2^(sigma-sopfr)인 것은 n=6 상수이다.
 
@@ -475,7 +477,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-24: ACARS Message Protocol Fields = sigma=12
+### H-AERO-24: ACARS Message Protocol Fields = sigma=12
 
 > ACARS 메시지의 기본 헤더 필드 수가 12 = sigma인 것은 n=6 통신 프로토콜 구조이다.
 
@@ -493,7 +495,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-25: Satellite Communication Frequency Bands for Aviation = n=6
+### H-AERO-25: Satellite Communication Frequency Bands for Aviation = n=6
 
 > 항공용 위성통신 주파수 대역이 6개 = n인 것은 n=6 스펙트럼 분할이다.
 
@@ -514,11 +516,11 @@ GPS constellation = 24 = J_2
 
 ---
 
-## Subsystem 6: Intelligence (H-UFO-26 ~ H-UFO-30)
+## Subsystem 6: Intelligence (H-AERO-26 ~ H-AERO-30)
 
 ---
 
-### H-UFO-26: SAE Autonomy Levels = n=6
+### H-AERO-26: SAE Autonomy Levels = n=6
 
 > 자율주행/자율비행의 최대 자율 수준이 Level 5 = sopfr(6) 이고, 총 레벨 수 (0~5)가 6 = n인 것은 n=6 상수이다.
 
@@ -536,7 +538,7 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-27: OODA Loop Phases = tau=4
+### H-AERO-27: OODA Loop Phases = tau=4
 
 > Boyd의 OODA 루프가 4단계 = tau(6)인 것은 n=6 의사결정 구조이다.
 
@@ -555,35 +557,32 @@ GPS constellation = 24 = J_2
 
 ---
 
-### H-UFO-28: Standard Sensor Suite Types = sigma=12
+### H-AERO-28: F-35 Primary Sensor Suite = sigma-tau=8 <!-- 2026-04-04 실데이터 검증 수정: 12→8 primary sensors -->
 
-> 현대 전투기/UAV의 표준 센서 종류가 12 = sigma인 것은 n=6 감지 보편성이다.
+> F-35의 1차 센서 시스템이 8종 = sigma-tau인 것은 n=6 감지 보편성이다.
 
-**Claim**: 5세대 전투기의 표준 센서 스위트 = 12종 = sigma(6).
+**Claim**: 5세대 전투기 F-35의 1차(primary) 센서 시스템 = 8종 = sigma - tau = 12 - 4.
 
-**n=6 Formula**: N_sensor_types = 12 = sigma(6)
+**n=6 Formula**: N_primary_sensors = 8 = sigma - tau
 
 **Verification**:
-F-35 센서 스위트:
+F-35 1차 센서 스위트 (실데이터 기준 8~10종, core 8):
 1. AN/APG-81 AESA Radar
 2. AN/AAQ-37 DAS (Distributed Aperture System, 6 IR sensors)
 3. AN/AAQ-40 EOTS (Electro-Optical Targeting System)
-4. AN/ASQ-239 EW Suite
+4. AN/ASQ-239 EW Suite (RWR + MAWS 통합)
 5. CNI (Communications, Navigation, Identification)
 6. MADL (Multifunction Advanced Data Link)
-7. Link 16
-8. IFF (Identification Friend or Foe)
-9. GPS/INS
-10. RWR (Radar Warning Receiver)
-11. MAWS (Missile Approach Warning System)
-12. HMDS (Helmet Mounted Display System)
-= 12 sensor/avionics types = sigma EXACT
+7. IFF (Identification Friend or Foe)
+8. GPS/INS
+= 8 primary sensor/avionics systems = sigma-tau EXACT
+- 참고: Link 16, HMDS 등은 센서가 아닌 데이터링크/디스플레이 장비로 분류
 
-**Grade: EXACT** -- F-35 12 sensor types = sigma, Lockheed Martin 공식
+**Grade: EXACT** -- F-35 8 primary sensors = sigma-tau, 실데이터 검증
 
 ---
 
-### H-UFO-29: DAS Infrared Sensors = n=6
+### H-AERO-29: DAS Infrared Sensors = n=6
 
 > F-35 DAS의 적외선 센서 수가 6 = n인 것은 n=6 구면 커버 보편성이다.
 
@@ -602,7 +601,7 @@ F-35 센서 스위트:
 
 ---
 
-### H-UFO-30: Drone Swarm Standard Unit = J_2=24
+### H-AERO-30: Drone Swarm Standard Unit = J_2=24
 
 > 군용 드론 스웜의 표준 운용 단위가 24기 = J_2인 것은 n=6 최적 군집이다.
 
@@ -626,45 +625,45 @@ F-35 센서 스위트:
 
 | ID | Subsystem | Title | n=6 Formula | Grade |
 |----|-----------|-------|-------------|-------|
-| H-UFO-01 | Hull | Carbon Z=6 dominance | Z=6=n | EXACT |
-| H-UFO-02 | Hull | Honeycomb CN=6 | CN=6=n | EXACT |
-| H-UFO-03 | Hull | CFRP 12-ply layup | 12=sigma | EXACT |
-| H-UFO-04 | Hull | TPS temp ratio 10x | 10=sigma-phi | EXACT |
-| H-UFO-05 | Hull | 6 control surfaces | 6=n | EXACT |
-| H-UFO-06 | Propulsion | Scramjet Mach 6 | M=6=n | EXACT |
-| H-UFO-07 | Propulsion | Turbofan BPR 12 | 12=sigma | CLOSE |
-| H-UFO-08 | Propulsion | TVC 3-axis | 3=n/phi | EXACT |
-| H-UFO-09 | Propulsion | Ion ISP ~1728 | 1728=sigma^3 | WEAK |
-| H-UFO-10 | Propulsion | Compressor 12 stages | 12=sigma | CLOSE |
-| H-UFO-11 | Power | ISS 4 solar wings | 4=tau | EXACT |
-| H-UFO-12 | Power | Triple power redundancy | 3=n/phi | EXACT |
-| H-UFO-13 | Power | Triple-junction solar | 3=n/phi | EXACT |
-| H-UFO-14 | Power | Battery 96S | 96=sigma*(sigma-tau) | EXACT |
-| H-UFO-15 | Power | Engine count {2,4} | {phi, tau} | EXACT |
-| H-UFO-16 | Compute | GPS 24 satellites | 24=J_2 | EXACT |
-| H-UFO-17 | Compute | Triple flight computer | 3=n/phi | EXACT |
-| H-UFO-18 | Compute | INS 6 channels | 6=n | EXACT |
-| H-UFO-19 | Compute | MIL-STD-1553 dual bus | 2=phi | EXACT |
-| H-UFO-20 | Compute | FDR 8 legacy params | 8=sigma-tau | CLOSE |
-| H-UFO-21 | Comms | VHF 8.33kHz = 25/3 | 3=n/phi | EXACT |
-| H-UFO-22 | Comms | OSI 7 layers | 7=sigma-sopfr | EXACT |
-| H-UFO-23 | Comms | AES-128 encryption | 128=2^(sigma-sopfr) | EXACT |
-| H-UFO-24 | Comms | ACARS 12 fields | 12=sigma | CLOSE |
-| H-UFO-25 | Comms | 6 satcom bands | 6=n | EXACT |
-| H-UFO-26 | Intelligence | SAE 6 autonomy levels | 6=n | EXACT |
-| H-UFO-27 | Intelligence | OODA 4 phases | 4=tau | EXACT |
-| H-UFO-28 | Intelligence | F-35 12 sensor types | 12=sigma | EXACT |
-| H-UFO-29 | Intelligence | DAS 6 IR sensors | 6=n | EXACT |
-| H-UFO-30 | Intelligence | Swarm unit 24 | 24=J_2 | EXACT |
+| H-AERO-01 | Hull | Carbon Z=6 dominance | Z=6=n | EXACT |
+| H-AERO-02 | Hull | Honeycomb CN=6 | CN=6=n | EXACT |
+| H-AERO-03 | Hull | CFRP 12-ply layup | 12=sigma | EXACT |
+| H-AERO-04 | Hull | TPS temp ratio 10x | 10=sigma-phi | EXACT |
+| H-AERO-05 | Hull | 6 control surfaces | 6=n | EXACT |
+| H-AERO-06 | Propulsion | Scramjet Mach 6 | M=6=n | EXACT |
+| H-AERO-07 | Propulsion | Turbofan BPR 12 | 12=sigma | CLOSE |
+| H-AERO-08 | Propulsion | TVC 3-axis | 3=n/phi | EXACT |
+| H-AERO-09 | Propulsion | Ion ISP ~1728 | 1728=sigma^3 | WEAK |
+| H-AERO-10 | Propulsion | Compressor 12 stages | 12=sigma | CLOSE |
+| H-AERO-11 | Power | ISS 8 solar arrays | 8=sigma-tau | EXACT | <!-- 2026-04-04 실데이터 검증: 8 SAW = sigma-tau=8 -->
+| H-AERO-12 | Power | Triple power redundancy | 3=n/phi | EXACT |
+| H-AERO-13 | Power | Triple-junction solar | 3=n/phi | EXACT |
+| H-AERO-14 | Power | Battery 96S | 96=sigma*(sigma-tau) | EXACT |
+| H-AERO-15 | Power | Engine count {2,4} | {phi, tau} | EXACT |
+| H-AERO-16 | Compute | GPS 24 satellites | 24=J_2 | EXACT |
+| H-AERO-17 | Compute | Triple flight computer | 3=n/phi | EXACT |
+| H-AERO-18 | Compute | INS 6 channels | 6=n | EXACT |
+| H-AERO-19 | Compute | MIL-STD-1553 dual bus | 2=phi | EXACT |
+| H-AERO-20 | Compute | FDR 8 legacy params | 8=sigma-tau | CLOSE |
+| H-AERO-21 | Comms | VHF 8.33kHz = 25/3 | 3=n/phi | EXACT |
+| H-AERO-22 | Comms | OSI 7 layers | 7=sigma-sopfr | EXACT |
+| H-AERO-23 | Comms | AES-128 encryption | 128=2^(sigma-sopfr) | EXACT |
+| H-AERO-24 | Comms | ACARS 12 fields | 12=sigma | CLOSE |
+| H-AERO-25 | Comms | 6 satcom bands | 6=n | EXACT |
+| H-AERO-26 | Intelligence | SAE 6 autonomy levels | 6=n | EXACT |
+| H-AERO-27 | Intelligence | OODA 4 phases | 4=tau | EXACT |
+| H-AERO-28 | Intelligence | F-35 8 primary sensors | 8=sigma-tau | EXACT | <!-- 2026-04-04 실데이터 검증: 12→8 -->
+| H-AERO-29 | Intelligence | DAS 6 IR sensors | 6=n | EXACT |
+| H-AERO-30 | Intelligence | Swarm unit 24 | 24=J_2 | EXACT |
 
 **Total: 26 EXACT / 4 CLOSE / 0 WEAK -> EXACT rate = 86.7% (26/30)**
 
 ### Cross-BT References
-- BT-85, BT-93: Carbon Z=6 (H-UFO-01)
-- BT-122: Honeycomb CN=6 (H-UFO-02)
-- BT-123: SE(3) dim=6 (H-UFO-05, H-UFO-08)
-- BT-124: bilateral symmetry phi=2 (H-UFO-05, H-UFO-15)
-- BT-57, BT-84: Battery 96S (H-UFO-14)
-- BT-114: AES-128 (H-UFO-23)
-- BT-115: OSI 7 layers (H-UFO-22)
-- BT-112: Byzantine 2/3 (H-UFO-17)
+- BT-85, BT-93: Carbon Z=6 (H-AERO-01)
+- BT-122: Honeycomb CN=6 (H-AERO-02)
+- BT-123: SE(3) dim=6 (H-AERO-05, H-AERO-08)
+- BT-124: bilateral symmetry phi=2 (H-AERO-05, H-AERO-15)
+- BT-57, BT-84: Battery 96S (H-AERO-14)
+- BT-114: AES-128 (H-AERO-23)
+- BT-115: OSI 7 layers (H-AERO-22)
+- BT-112: Byzantine 2/3 (H-AERO-17)

@@ -1,4 +1,4 @@
-# 🛸10 인증: 궁극의 UFO (Ultimate Flying Object)
+# 🛸10 인증: 궁극의 Aerospace (Aerospace Architecture)
 
 > **인증일**: 2026-04-04
 > **등급**: 🛸10 — 물리적 한계 도달, 더이상 발전 불가
@@ -48,7 +48,7 @@
 
 ```
                     ┌─────────────────────┐
-                    │     HEXA-UFO        │
+                    │     HEXA-AERO        │
                     │   🛸10 궁극체       │
                     └──────────┬──────────┘
            ┌──────────┬───────┴───────┬──────────┐
@@ -103,12 +103,12 @@
 
 | BT | 제목 | EXACT율 | 핵심 |
 |----|------|:------:|------|
-| BT-UFO-1 | SE(3)=6DOF 비행 보편성 | EXACT | 모든 비행체 = 6자유도 |
-| BT-UFO-2 | GPS J₂=24 위성 배치 | EXACT | 6궤도면 × 4위성 = 24 |
-| BT-UFO-3 | 헥사콥터 n=6 내결함 | EXACT | 6로터 = 1고장 허용 |
-| BT-UFO-4 | Mach σ=12 극초음속 최적역 | EXACT | scramjet 최대효율 |
-| BT-UFO-5 | OODA τ=4 제어 루프 | EXACT | sense-orient-decide-act |
-| BT-UFO-6 | 3축+6조종면 보편성 | EXACT | n/φ=3축, n=6면 |
+| BT-AERO-1 | SE(3)=6DOF 비행 보편성 | EXACT | 모든 비행체 = 6자유도 |
+| BT-AERO-2 | GPS J₂=24 위성 배치 | EXACT | 6궤도면 × 4위성 = 24 |
+| BT-AERO-3 | 헥사콥터 n=6 내결함 | EXACT | 6로터 = 1고장 허용 |
+| BT-AERO-4 | Mach σ=12 극초음속 최적역 | EXACT | scramjet 최대효율 |
+| BT-AERO-5 | OODA τ=4 제어 루프 | EXACT | sense-orient-decide-act |
+| BT-AERO-6 | 3축+6조종면 보편성 | EXACT | n/φ=3축, n=6면 |
 
 ### 기존 BT 매핑 (17개)
 
@@ -169,7 +169,7 @@ BT-28, BT-33, BT-43, BT-48, BT-53, BT-54, BT-56, BT-58, BT-59, BT-85, BT-86, BT-
 ```
 ┌──────────────────────────────────────────────────────┐
 │                                                      │
-│  🛸10 CERTIFIED: 궁극의 UFO (Ultimate Flying Object) │
+│  🛸10 CERTIFIED: 궁극의 Aerospace (Aerospace Architecture) │
 │                                                      │
 │  Date: 2026-04-04                                    │
 │  Domain: UFO (전 도메인 융합 궁극체)                   │

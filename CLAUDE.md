@@ -642,6 +642,18 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
 
   # Pure Mathematics (BT-185)
   BT-185: Algebraic Blowup–Emergence E₆ Bridge (C⁶ blowup χ=n, dP₆ 27=(n/φ)^(n/φ) lines, E₆ rank=n=6, 19/19 EXACT) ⭐⭐⭐
+
+  # Cognitive Architecture (BT-210~211)
+  BT-210: 대뇌피질 6층 = n 보편성 (Brodmann 1909, 격자세포 육각형, 뇌신경 σ=12, EEG n=6밴드, 10/10 EXACT) ⭐⭐⭐
+  BT-211: 격자세포 육각 = 완전수 공간 충전 (Moser Nobel 2014, Hales 2001, K₂=n=6, 7/7 EXACT) ⭐⭐
+
+  # Temporal Architecture (BT-212~213)
+  BT-212: 60진법 = σ·sopfr 보편 시간 단위 (24h=J₂, 12월=σ, 360°=σ·sopfr·n, τ(60)=σ=12, 10/10 EXACT) ⭐⭐⭐
+  BT-213: GPS 궤도면 n=6 최적 배치 (J₂=24 위성, τ=4/면, σ=12h 주기, 7/7 EXACT) ⭐⭐
+
+  # Social Architecture (BT-214~215)
+  BT-214: Six Degrees = n 사회 위상 정리 (Milgram, Dunbar σ²+n=150, 배심원 σ=12, Christaller 육각형, 10/10 EXACT) ⭐⭐⭐
+  BT-215: Dunbar σ²+n=150 인지-사회 브릿지 (n=6 피질→n=6 사회위상, 계층비 n/φ=3, 7/7 EXACT) ⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙

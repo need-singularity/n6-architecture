@@ -16830,5 +16830,29 @@ bridge = "플라즈마 대면 소재 (W, SiC)"
 n6_resonance = "SiC C Z=6, W tiles sigma=12 mm thickness"
 note = "SiC (C Z=6) 플라즈마 대면 소재 + W 타일 sigma=12 mm 두께"
 
+[ufo]
+name = "UFO (Ultimate Flying Object)"
+status = "complete"
+alien_index = 10
+toml = "tools/universal-dse/domains/ufo.toml"
+combinations = 7776
+valid = 6912
+pareto = 107
+n6_exact_max = 100.0
+n6_exact_avg = 95.8
+cross_dse = ["material-synthesis", "superconductor", "energy-architecture", "battery-architecture", "fusion", "chip-architecture", "ai-efficiency", "software-design", "robotics", "environmental-protection", "solar-architecture", "display", "audio"]
+cross_dse_count = 13
+best_path = "Diamond + Scramjet + SolidStateBattery + RISC-V_6Wide + Atmospheric"
+bt_count = 23
+bt_exact_pct = 95.7
+hypotheses = 30
+hypotheses_exact = 17
+impossibility_theorems = 12
+tp_count = 28
+evolution_stages = 5
+industrial_hours = "50M+"
+experimental_years = 121
+date = "2026-04-04"
+
 # ── 신규 도메인 (2026-04-02 추가) ────────────────────
 

@@ -12,6 +12,9 @@ pub mod recent_extended_nodes;
 pub mod bt185_discovery_nodes;
 pub mod math_sw_extended_nodes;
 pub mod cross_cluster_nodes;
+pub mod bt118_deep_nodes;
+pub mod advanced_cross_nodes;
+pub mod bt118_bridge_nodes;
 
 pub use node::{Node, NodeType};
 pub use edge::{Edge, EdgeType};
