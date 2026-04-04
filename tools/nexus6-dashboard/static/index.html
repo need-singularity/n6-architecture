@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>NEXUS-6 Growth Monitor</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; color: #c9d1d9; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; }
+  .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #21262d; }
+  .header h1 { font-size: 18px; color: #58a6ff; }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .controls button:hover { background: #30363d; }
+  .controls button.active { background: #238636; border-color: #2ea043; color: #fff; }
+  .controls button.danger { background: #da3633; border-color: #f85149; color: #fff; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .status-dot.on { background: #3fb950; }
+  .status-dot.off { background: #f85149; }
+  .chart-section { padding: 16px 24px; border-bottom: 1px solid #21262d; }
+  .chart-section canvas { width: 100% !important; height: 300px !important; }
+  .table-section { padding: 16px 24px; border-bottom: 1px solid #21262d; max-height: 300px; overflow-y: auto; }
+  .table-section h2 { font-size: 14px; margin-bottom: 8px; color: #8b949e; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; color: #8b949e; font-weight: normal; padding: 6px 8px; border-bottom: 1px solid #21262d; }
+  td { padding: 6px 8px; border-bottom: 1px solid #161b22; }
+  td.dim { color: #58a6ff; }
+  .log-section { padding: 16px 24px; }
+  .log-section h2 { font-size: 14px; margin-bottom: 8px; color: #8b949e; display: flex; justify-content: space-between; }
+  .log-box { background: #010409; border: 1px solid #21262d; border-radius: 6px; padding: 12px; height: 200px; overflow-y: auto; font-size: 12px; line-height: 1.6; }
+  .log-box .log-line { color: #7ee787; }
+  .log-box .log-info { color: #8b949e; }
+  .log-box .log-error { color: #f85149; }
+  .grow-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 24px; z-index: 100; }
+  .grow-modal.show { display: block; }
+  .grow-modal h3 { margin-bottom: 12px; color: #58a6ff; }
+  .grow-modal button { margin: 4px; padding: 8px 16px; background: #21262d; border: 1px solid #30363d; color: #c9d1d9; border-radius: 4px; cursor: pointer; }
+  .grow-modal button:hover { background: #30363d; }
+  .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
+  .overlay.show { display: block; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1><span class="status-dot off" id="statusDot"></span> NEXUS-6 Growth Monitor</h1>
+  <div class="controls">
+    <button id="btnStart" class="active" onclick="daemonStart()">Start</button>
+    <button id="btnStop" class="danger" onclick="daemonStop()">Stop</button>
+    <button onclick="showGrowModal()">Grow</button>
+  </div>
+</div>
+<div class="chart-section">
+  <canvas id="timelineChart"></canvas>
+</div>
+<div class="table-section">
+  <h2>Dimensions</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Dimension</th><th>Current</th><th>Target</th><th>%</th></tr></thead>
+    <tbody id="dimTable"></tbody>
+  </table>
+</div>
+<div class="table-section">
+  <h2>Recent Growth Events</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Dimension</th><th>Detail</th></tr></thead>
+    <tbody id="recentTable"></tbody>
+  </table>
+</div>
+<div class="log-section">
+  <h2>
+    <span>Live Log</span>
+    <span>
+      <button onclick="clearLog()" style="font-size:12px;padding:2px 8px;background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:4px;cursor:pointer;">Clear</button>
+      <button id="btnPause" onclick="togglePause()" style="font-size:12px;padding:2px 8px;background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:4px;cursor:pointer;">Pause</button>
+    </span>
+  </h2>
+  <div class="log-box" id="logBox"></div>
+</div>
+<div class="overlay" id="overlay" onclick="hideGrowModal()"></div>
+<div class="grow-modal" id="growModal">
+  <h3>Manual Grow</h3>
+  <div id="growButtons"></div>
+</div>
+<script>
+const DIMS = ['performance','architecture','lenses','modules','tests','hypotheses','dse','experiments','calculators','cross_resonance','knowledge_graph','red_team','atlas','documentation','integration'];
+let chart = null;
+let paused = false;
+
+function initChart() {
+  const ctx = document.getElementById('timelineChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: [], datasets: [] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#8b949e', font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+        y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' }, title: { display: true, text: '% of target', color: '#8b949e' } }
+      }
+    }
+  });
+}
+
+async function fetchDimensions() {
+  try {
+    const res = await fetch('/api/dimensions');
+    const dims = await res.json();
+    const sorted = [...dims].sort((a, b) => a.pct - b.pct);
+    const tbody = document.getElementById('dimTable');
+    tbody.innerHTML = sorted.map(d => `<tr>
+      <td>${new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</td>
+      <td class="dim">${d.label}</td>
+      <td>${typeof d.current==='number'?d.current.toLocaleString():d.current}</td>
+      <td>${d.target.toLocaleString()}</td>
+      <td style="color:${d.pct>=100?'#3fb950':d.pct>=80?'#d29922':'#f85149'}">${d.pct.toFixed(1)}%</td>
+    </tr>`).join('');
+    if (chart) {
+      const now = new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      chart.data.labels.push(now);
+      if (chart.data.labels.length > 60) chart.data.labels.shift();
+      if (chart.data.datasets.length === 0) {
+        dims.forEach(d => {
+          chart.data.datasets.push({ label: d.label, borderColor: d.color, backgroundColor: 'transparent', data: [d.pct], tension: 0.3, pointRadius: 0, borderWidth: 1.5 });
+        });
+      } else {
+        dims.forEach((d, i) => {
+          if (chart.data.datasets[i]) {
+            chart.data.datasets[i].data.push(d.pct);
+            if (chart.data.datasets[i].data.length > 60) chart.data.datasets[i].data.shift();
+          }
+        });
+      }
+      chart.update('none');
+    }
+  } catch (e) { console.error('fetchDimensions:', e); }
+}
+
+function connectSSE() {
+  const evtSource = new EventSource('/api/logs/stream');
+  evtSource.onmessage = (event) => {
+    if (paused) return;
+    const box = document.getElementById('logBox');
+    event.data.split('\n').filter(l => l.trim()).forEach(line => {
+      const div = document.createElement('div');
+      div.className = line.includes('ERROR') ? 'log-error' : line.includes('INFO') ? 'log-line' : 'log-info';
+      div.textContent = line;
+      box.appendChild(div);
+    });
+    box.scrollTop = box.scrollHeight;
+    while (box.children.length > 500) box.removeChild(box.firstChild);
+  };
+}
+
+async function daemonStart() { await fetch('/api/daemon/start',{method:'POST'}); checkStatus(); }
+async function daemonStop() { await fetch('/api/daemon/stop',{method:'POST'}); checkStatus(); }
+async function checkStatus() {
+  try {
+    const res = await fetch('/api/daemon/status');
+    const data = await res.json();
+    document.getElementById('statusDot').className = 'status-dot '+(data.running?'on':'off');
+  } catch(e) {}
+}
+
+function showGrowModal() {
+  document.getElementById('growButtons').innerHTML = DIMS.map(d => `<button onclick="triggerGrow('${d}')">${d}</button>`).join('');
+  document.getElementById('growModal').classList.add('show');
+  document.getElementById('overlay').classList.add('show');
+}
+function hideGrowModal() {
+  document.getElementById('growModal').classList.remove('show');
+  document.getElementById('overlay').classList.remove('show');
+}
+async function triggerGrow(dim) { hideGrowModal(); await fetch(`/api/grow/${dim}`,{method:'POST'}); }
+
+async function fetchRecent() {
+  try {
+    const res = await fetch('/api/recent');
+    const events = await res.json();
+    const tbody = document.getElementById('recentTable');
+    tbody.innerHTML = events.slice(0, 20).map(e => `<tr>
+      <td>${e.time || '-'}</td>
+      <td class="dim">${e.dimension}</td>
+      <td>${e.detail}</td>
+    </tr>`).join('');
+  } catch(e) {}
+}
+
+function clearLog() { document.getElementById('logBox').innerHTML = ''; }
+function togglePause() { paused = !paused; document.getElementById('btnPause').textContent = paused ? 'Resume' : 'Pause'; }
+
+window.addEventListener('DOMContentLoaded', () => {
+  initChart(); fetchDimensions(); fetchRecent(); checkStatus(); connectSSE();
+  setInterval(fetchDimensions, 10000);
+  setInterval(fetchRecent, 30000);
+  setInterval(checkStatus, 30000);
+});
+</script>
+</body>
+</html>
