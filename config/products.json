@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "total_products": 35,
-    "total_domains": 43,
+    "total_products": 46,
+    "total_domains": 14,
     "last_updated": "2026-04-05",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
@@ -1011,6 +1011,50 @@
         }
       ],
       "anchor": "-바이크-motorcycle"
+    },
+    {
+      "id": "fun-car",
+      "title": "펀카/모터스포츠",
+      "icon": "🏎️",
+      "heading": "펀카 / 모터스포츠 (Fun Car)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 11,
+      "industry_pct": 100,
+      "industry_detail": "GT3 RS/F1/McLaren",
+      "experiment_pct": 100,
+      "experiment_detail": "133/133 EXACT",
+      "physics_limit_count": 8,
+      "tp_count": 6,
+      "discovery_count": 1,
+      "cross_dse_domains": 3,
+      "mk_count": null,
+      "summary_extra": "DSE 155,520조합, 16카테고리100%",
+      "domains": [
+        "fun-car"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "궁극의 펀카",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "133/133 EXACT, BT-287/289/290/288/277/280/206/271/153, 16카테고리 n=6 100%, DSE 155,520, flat-6+7DCT+Ti-6Al-4V",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/fun-car/goal.md"
+            },
+            {
+              "label": "검증",
+              "path": "docs/fun-car/verify_alien10.py"
+            }
+          ]
+        }
+      ],
+      "anchor": "-펀카--모터스포츠-fun-car"
     }
   ],
   "roadmap": [
@@ -1301,6 +1345,14 @@
       "impact": 4,
       "tier": "T3",
       "dse_info": "7,776 조합 → [🛡️ 안전](#-안전-safety)"
+    },
+    {
+      "rank": "—",
+      "realize": "✅",
+      "name": "궁극의 펀카",
+      "impact": 3,
+      "tier": "✅",
+      "dse_info": "155,520 조합 🛸10 → [🏎️ 펀카](#-펀카--모터스포츠-fun-car)"
     }
   ]
 }

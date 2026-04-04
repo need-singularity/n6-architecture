@@ -1,0 +1,420 @@
+# =============================================================
+# Fun Car DSE Domain Definition
+# Performance driving machine — material to track system
+# n=6: flat-6 engine, 6-speed manual, 6 aero elements, 6-pot brakes
+# Total raw combos: 6x5x6x4x6x4x3x3 = 155,520 (pre-filter)
+# =============================================================
+
+[meta]
+name = "fun-car"
+desc = "HEXA-FUNCAR Architecture DSE (material/process/powertrain/chassis/aero/electronics/track/system)"
+
+[scoring]
+n6 = 0.30
+perf = 0.30
+power = 0.15
+cost = 0.25
+
+# ============================================================
+# Level 0: Material (6 candidates = n)
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 0
+id = "Ti6Al4V"
+label = "Ti-6Al-4V (n%Al+τ%V=σ-φ=10%, BT-271 aerospace alloy)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.30
+
+[[candidate]]
+level = 0
+id = "CFRP"
+label = "CFRP (Carbon Z=6, BT-85 monocoque)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.25
+
+[[candidate]]
+level = 0
+id = "Al7075"
+label = "Al 7075-T6 (Zn=n%, suspension arms)"
+n6 = 0.80
+perf = 0.80
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "MgForged"
+label = "Forged Magnesium (Mg Z=σ=12, wheels)"
+n6 = 0.90
+perf = 0.85
+power = 0.85
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "SiCCeramic"
+label = "SiC Ceramic (Si Z=14=σ+φ, PCCB brake disc)"
+n6 = 0.80
+perf = 0.90
+power = 0.75
+cost = 0.20
+
+[[candidate]]
+level = 0
+id = "HSLA"
+label = "High-Strength Low-Alloy Steel (Fe Z=J₂+φ=26, roll cage)"
+n6 = 0.70
+perf = 0.75
+power = 0.65
+cost = 0.85
+
+# ============================================================
+# Level 1: Process (5 candidates = sopfr)
+# ============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+level = 1
+id = "Autoclave"
+label = "CFRP Autoclave (cure 180°C=σ²+φ·n/φ)"
+n6 = 0.90
+perf = 0.95
+power = 0.50
+cost = 0.30
+
+[[candidate]]
+level = 1
+id = "5AxisCNC"
+label = "5-Axis CNC (sopfr=5 axes, Ti machining)"
+n6 = 1.00
+perf = 0.90
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "PrecisionCast"
+label = "Precision Casting (Al/Mg, 0.1mm=1/(σ-φ) tolerance)"
+n6 = 0.85
+perf = 0.80
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "RobotWeld"
+label = "Robot Welding (SE(3)=n=6 DOF, BT-123)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "PaintCoat"
+label = "Paint/Coating (n/φ=3 layers: primer/base/clear)"
+n6 = 0.90
+perf = 0.70
+power = 0.80
+cost = 0.70
+
+# ============================================================
+# Level 2: Powertrain (6 candidates = n)
+# ============================================================
+
+[[level]]
+name = "Powertrain"
+
+[[candidate]]
+level = 2
+id = "Flat6NA"
+label = "Flat-6 NA 525PS (n=6 cyl, J₂=24 valves, 9000rpm)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Flat6Turbo"
+label = "Flat-6 Twin-Turbo (n=6 cyl, φ=2 turbos, 600PS+)"
+n6 = 0.95
+perf = 0.98
+power = 0.40
+cost = 0.35
+
+[[candidate]]
+level = 2
+id = "V6Turbo"
+label = "V6 Twin-Turbo (n=6 cyl, F1-derived)"
+n6 = 0.90
+perf = 0.92
+power = 0.45
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "I6"
+label = "Inline-6 (n=6 cyl, BT-287 perfect balance)"
+n6 = 1.00
+perf = 0.88
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Hybrid6"
+label = "Hybrid-6 (n=6 cyl + e-motor, mild HEV σ·τ=48V)"
+n6 = 0.90
+perf = 0.90
+power = 0.60
+cost = 0.30
+
+[[candidate]]
+level = 2
+id = "EV"
+label = "EV (σ-τ=8 pole motor, BT-153 architecture)"
+n6 = 0.80
+perf = 0.85
+power = 0.75
+cost = 0.35
+
+# ============================================================
+# Level 3: Chassis (4 candidates = τ)
+# ============================================================
+
+[[level]]
+name = "Chassis"
+
+[[candidate]]
+level = 3
+id = "MidRWD"
+label = "Mid-engine RWD (optimal weight distribution, GT3 RS)"
+n6 = 0.90
+perf = 0.95
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "MidAWD"
+label = "Mid-engine AWD (all-weather performance)"
+n6 = 0.85
+perf = 0.92
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "RearRWD"
+label = "Rear-engine RWD (911 tradition, unique dynamics)"
+n6 = 0.85
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "FrontMid"
+label = "Front-mid RWD (long hood, perfect 50/50)"
+n6 = 0.80
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+# ============================================================
+# Level 4: Aerodynamics (6 candidates = n)
+# ============================================================
+
+[[level]]
+name = "Aerodynamics"
+
+[[candidate]]
+level = 4
+id = "GTWing"
+label = "GT Wing (fixed, max downforce, n=6 diffuser channels)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "SwanNeck"
+label = "Swan Neck Wing (clean underside, efficient)"
+n6 = 0.90
+perf = 0.90
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "ActiveAero"
+label = "Active Aero (DRS φ=2 positions, variable)"
+n6 = 0.95
+perf = 0.92
+power = 0.55
+cost = 0.30
+
+[[candidate]]
+level = 4
+id = "GroundEffect"
+label = "Ground Effect (Venturi tunnels, F1-derived)"
+n6 = 0.85
+perf = 0.98
+power = 0.50
+cost = 0.25
+
+[[candidate]]
+level = 4
+id = "PassiveAero"
+label = "Passive Aero (splitter + diffuser only, street legal)"
+n6 = 0.80
+perf = 0.75
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "DRSSystem"
+label = "DRS System (Porsche-style active wing element)"
+n6 = 0.95
+perf = 0.88
+power = 0.60
+cost = 0.40
+
+# ============================================================
+# Level 5: Electronics (4 candidates = τ)
+# ============================================================
+
+[[level]]
+name = "Electronics"
+
+[[candidate]]
+level = 5
+id = "Basic"
+label = "Basic (CAN σ-τ=8B, ABS τ=4ch, ESC n=6 sensor)"
+n6 = 0.90
+perf = 0.70
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 5
+id = "Sport"
+label = "Sport (+ TC σ-φ=10 levels, data logger)"
+n6 = 0.95
+perf = 0.85
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 5
+id = "Race"
+label = "Race (+ telemetry J₂=24ch, ECU σ²=144 inputs)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 5
+id = "FullTelemetry"
+label = "Full Telemetry (+ 120Hz GPS, predictive analytics)"
+n6 = 0.95
+perf = 0.98
+power = 0.55
+cost = 0.25
+
+# ============================================================
+# Level 6: Track Spec (3 candidates = n/φ)
+# ============================================================
+
+[[level]]
+name = "TrackSpec"
+
+[[candidate]]
+level = 6
+id = "StreetLegal"
+label = "Street Legal (road-homologated, comfort retained)"
+n6 = 0.80
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 6
+id = "ClubSport"
+label = "Club Sport (roll cage, harness, fire extinguisher)"
+n6 = 0.90
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 6
+id = "FullHomologation"
+label = "Full Homologation (GT3/GT4 class race-ready)"
+n6 = 0.95
+perf = 0.98
+power = 0.50
+cost = 0.25
+
+# ============================================================
+# Level 7: System Integration (3 candidates = n/φ)
+# ============================================================
+
+[[level]]
+name = "SystemIntegration"
+
+[[candidate]]
+level = 7
+id = "PureICE"
+label = "Pure ICE (σ=12V only, lightest weight)"
+n6 = 0.90
+perf = 0.90
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 7
+id = "MildHEV"
+label = "Mild HEV (σ·τ=48V, e-boost, BT-288)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 7
+id = "FullHEV"
+label = "Full HEV (τ·(σ-φ)²=400V, P2 hybrid)"
+n6 = 0.85
+perf = 0.95
+power = 0.55
+cost = 0.35
+
+# ============================================================
+# Rules (constraints)
+# ============================================================
+
+[[rule]]
+type = "require"
+condition = "level2.id in [Flat6NA, Flat6Turbo, I6]"
+reason = "Fun car must have 6-cylinder engine (n=6)"
+
+[[rule]]
+type = "prefer"
+condition = "level0.n6 >= 0.90"
+bonus = 0.05
+reason = "Prefer n=6 aligned materials"

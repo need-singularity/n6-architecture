@@ -443,6 +443,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | — | 2030 | **궁극의 자율주행** | ★★★☆☆☆ | T3 | [goal](docs/autonomous-driving/goal.md) |
 | — | 2030 | **궁극의 의료기기** | ★★★★☆☆ | T3 | [goal](docs/medical-device/goal.md) |
 | — | ✅ | **궁극의 안전** | ★★★★☆☆ | T3 | 7,776 조합 → [🛡️ 안전](#-안전-safety) |
+| — | ✅ | **궁극의 펀카** | ★★★☆☆☆ | ✅ | 155,520 조합 🛸10 → [🏎️ 펀카](#-펀카--모터스포츠-fun-car) |
 <!-- AUTO:ROADMAP:END -->
 
 > **실현**: ✅ = 현재 기술로 실현가능 / 20XX = 예상 실현 연도
