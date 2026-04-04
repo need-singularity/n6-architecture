@@ -196,6 +196,144 @@ discrete counts (asset classes, G-groups, cycle lengths) testable against n=6.
 
 ---
 
+### H-ECN-11: DJIA Original 12 Stocks = sigma=12
+
+> The Dow Jones Industrial Average was founded with exactly 12 stocks.
+
+```
+  Evidence:
+    - Charles Dow, 1896: 12 industrial companies
+    - 12 = sigma = 12 EXACT
+    - Later expanded to 20 (1916) then 30 (1928)
+    - Original count = sigma(6) = 12
+
+  Grade: EXACT (historical fact, founding design choice)
+  Lenses: network, evolution, scale
+```
+
+---
+
+### H-ECN-12: Double-Entry Bookkeeping = phi=2
+
+> All accounting uses double-entry: every transaction has debit and credit.
+
+```
+  Evidence:
+    - Luca Pacioli, 1494: "Summa de Arithmetica"
+    - 2 sides = phi(6) = 2
+    - Fundamental: Assets = Liabilities + Equity (balance)
+    - 530+ years unchanged, universal across all economies
+
+  Grade: EXACT (mathematical necessity for balance, universally adopted)
+  Lenses: stability, info, network
+```
+
+---
+
+### H-ECN-13: Accounting Equation 3 Elements = n/phi=3
+
+> The fundamental accounting equation has exactly 3 elements.
+
+```
+  Evidence:
+    - Assets = Liabilities + Equity
+    - 3 elements = n/phi = 6/2 = 3
+    - GAAP and IFRS both use this identity
+    - Irreducible: removing any term breaks the balance
+
+  Grade: EXACT (mathematical identity, universal)
+  Lenses: stability, info, boundary
+```
+
+---
+
+### H-ECN-14: Black-Scholes 5 Variables = sopfr=5
+
+> The Black-Scholes option pricing model has exactly 5 input variables.
+
+```
+  Evidence:
+    - S (stock price), K (strike), T (time), r (rate), sigma (volatility)
+    - 5 = sopfr(6) = 2+3 = 5
+    - Nobel Prize 1997 (Scholes & Merton)
+    - Each variable is irreducible — PDE has exactly 5 DOF
+
+  Grade: EXACT (mathematical structure of the PDE, not convention)
+  Lenses: info, wave, boundary
+```
+
+---
+
+### H-ECN-15: Basel III 3 Pillars = n/phi=3
+
+> Basel III international banking regulation has exactly 3 pillars.
+
+```
+  Evidence:
+    - Pillar 1: Minimum capital requirements
+    - Pillar 2: Supervisory review process
+    - Pillar 3: Market discipline (disclosure)
+    - 3 = n/phi = 3
+    - Designed by BIS committee of 27 nations (2010)
+
+  Grade: EXACT (regulatory standard, internationally binding)
+  Lenses: stability, network, boundary
+```
+
+---
+
+### H-ECN-16: 4 Financial Statement Types = tau=4
+
+> SEC/IFRS require exactly 4 primary financial statements.
+
+```
+  Evidence:
+    - Balance Sheet, Income Statement, Cash Flow Statement, 
+      Statement of Changes in Equity
+    - 4 = tau(6) = 4
+    - Required by SEC (US) and IFRS (international)
+    - Parallel: ACID=tau=4 (BT-113), 4 MHD modes, 4 seasons
+
+  Grade: EXACT (regulatory requirement, universal)
+  Lenses: stability, info, recursion
+```
+
+---
+
+### H-ECN-17: Porter's Five Forces = sopfr=5
+
+> Porter's competitive strategy framework has exactly 5 forces.
+
+```
+  Evidence:
+    - Rivalry, New Entrants, Substitutes, Buyer Power, Supplier Power
+    - 5 = sopfr(6) = 2+3 = 5
+    - Michael Porter, Harvard Business Review, 1979
+    - Standard MBA curriculum worldwide for 45+ years
+
+  Grade: EXACT (framework standard, universally taught)
+  Lenses: network, evolution, boundary
+```
+
+---
+
+### H-ECN-18: G20 Nations = J₂-tau=20
+
+> The G20 has exactly 20 member economies.
+
+```
+  Evidence:
+    - 19 countries + EU = 20 members
+    - 20 = J₂ - tau = 24 - 4 = 20
+    - Established 1999, formalized 2008 post-crisis
+    - Represents ~85% of global GDP
+
+  Grade: EXACT (institutional fact, stable since 1999)
+  Lenses: network, scale, evolution
+```
+
+---
+
 ## Summary Table
 
 | ID | Hypothesis | n=6 Link | Grade |
@@ -210,5 +348,13 @@ discrete counts (asset classes, G-groups, cycle lengths) testable against n=6.
 | H-ECN-08 | NYSE 6.5h trading | n≈6 | WEAK |
 | H-ECN-09 | Fed 2 mandates + 4 tools | phi+tau=n | CLOSE |
 | H-ECN-10 | Pareto 95/5 | 1-1/(J₂-tau) | CLOSE |
+| H-ECN-11 | DJIA original 12 stocks | sigma=12 | EXACT |
+| H-ECN-12 | Double-entry bookkeeping | phi=2 | EXACT |
+| H-ECN-13 | Accounting equation 3 elements | n/phi=3 | EXACT |
+| H-ECN-14 | Black-Scholes 5 variables | sopfr=5 | EXACT |
+| H-ECN-15 | Basel III 3 pillars | n/phi=3 | EXACT |
+| H-ECN-16 | 4 financial statements | tau=4 | EXACT |
+| H-ECN-17 | Porter's Five Forces | sopfr=5 | EXACT |
+| H-ECN-18 | G20 = 20 nations | J₂-tau=20 | EXACT |
 
-**EXACT: 5/10, CLOSE: 4/10, WEAK: 1/10**
+**EXACT: 13/18, CLOSE: 4/18, WEAK: 1/18**

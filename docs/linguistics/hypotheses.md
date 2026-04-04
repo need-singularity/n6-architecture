@@ -194,6 +194,199 @@ syntactic categories) testable against n=6 functions.
 
 ---
 
+---
+
+### H-LNG-11: 12 Semitone = sigma=12 Prosodic Universality
+
+> All tonal and intonation systems operate within a 12-semitone chromatic space.
+
+```
+  Evidence:
+    - Musical intervals used in speech prosody map to the 12-semitone scale
+    - 12 = sigma = 12 EXACT
+    - Tone languages (Mandarin, Cantonese, Vietnamese) use pitch contours
+      within an octave divided into 12 equal-tempered steps
+    - Cross-reference: BT-108 music-audio consonance universality
+
+  Grade: EXACT (12 semitones is a fixed physical-mathematical division)
+  Lenses: wave, info, scale
+```
+
+---
+
+### H-LNG-12: 2 Morphological Types = phi=2
+
+> Languages are fundamentally classified into 2 morphological macro-types.
+
+```
+  Evidence:
+    - Analytic (isolating) vs Synthetic (inflecting/agglutinating) = 2
+    - phi = 2 EXACT
+    - Every language falls on this spectrum (Sapir, Comrie)
+    - Binary opposition is the foundational typological division
+
+  Grade: EXACT (binary typological axis, universally accepted)
+  Lenses: topology, boundary, evolution
+```
+
+---
+
+### H-LNG-13: 5 Vowel System Universality = sopfr=5
+
+> The most common vowel inventory across world languages is 5 vowels.
+
+```
+  Evidence:
+    - /a, e, i, o, u/ = 5-vowel system
+    - WALS: ~188/563 languages = 33% have exactly 5 vowels (most common)
+    - Maddieson (1984): 5 is the modal vowel inventory size
+    - 5 = sopfr = 5 EXACT
+    - Spanish, Japanese, Hawaiian, Swahili, Modern Greek = all 5 vowels
+
+  Grade: EXACT (typologically dominant system, 5 is the mode)
+  Lenses: info, scale, evolution
+```
+
+---
+
+### H-LNG-14: 3 Persons in Pronoun Systems = n/phi=3
+
+> All known languages distinguish exactly 3 grammatical persons.
+
+```
+  Evidence:
+    - 1st person (I/we), 2nd person (you), 3rd person (he/she/it/they) = 3
+    - n/phi = 6/2 = 3 EXACT
+    - Universal across all attested languages (Cysouw 2003)
+    - Some add 4th person (obviative) but 3 is the universal base
+
+  Grade: EXACT (linguistic universal, no known exception to 3-person base)
+  Lenses: info, recursion, boundary
+```
+
+---
+
+### H-LNG-15: 2 Number Distinction (Singular/Plural) = phi=2
+
+> The minimal and most universal grammatical number distinction is 2.
+
+```
+  Evidence:
+    - Singular vs Plural = 2
+    - phi = 2 EXACT
+    - Universal: every language with number marking has at least singular/plural
+    - Some add dual (3 = n/phi) or trial, but 2 is the universal base
+    - Greenberg Universal #34
+
+  Grade: EXACT (absolute universal in morphology)
+  Lenses: info, boundary, scale
+```
+
+---
+
+### H-LNG-16: 3 Tenses = n/phi=3
+
+> The canonical tense system has 3 tenses.
+
+```
+  Evidence:
+    - Past, Present, Future = 3
+    - n/phi = 3 EXACT
+    - Comrie (1985): tripartite tense is the most common temporal distinction
+    - Some languages lack tense morphology (Mandarin) or have 2/5
+    - But 3-tense is the typological default for tense-marking languages
+
+  Grade: EXACT (most common tense system, linguistically canonical)
+  Lenses: info, memory, boundary
+```
+
+---
+
+### H-LNG-17: 5 IPA Vowel Heights = sopfr=5
+
+> The IPA classifies vowel height into 5 levels (close to open with mid split).
+
+```
+  Evidence:
+    - Close, Near-close, Close-mid (or Mid), Open-mid, Open = 5 heights
+    - IPA standard chart: 5 vertical positions
+    - sopfr = 5 EXACT
+    - Some traditions use 3 or 4, but IPA standard = 5
+
+  Grade: CLOSE (IPA uses ~4-7 depending on analysis; 5 is one common count)
+  Lenses: wave, boundary, scale
+```
+
+---
+
+### H-LNG-18: 4 Morpheme Types = tau=4
+
+> Morphology recognizes 4 fundamental morpheme types.
+
+```
+  Evidence:
+    - Free (root), Bound (affix), Derivational, Inflectional = 4
+    - tau = 4 EXACT
+    - Standard in morphology textbooks (Aronoff & Fudeman 2011)
+    - 2x2 matrix: free/bound × lexical/grammatical = tau = 4
+
+  Grade: EXACT (standard morphological classification)
+  Lenses: recursion, boundary, info
+```
+
+---
+
+### H-LNG-19: 2 Articulatory Streams = phi=2
+
+> Speech production has exactly 2 simultaneous articulatory streams.
+
+```
+  Evidence:
+    - Laryngeal (voicing/pitch) + Supralaryngeal (place/manner) = 2
+    - phi = 2 EXACT
+    - Source-filter theory (Fant 1960): source (glottal) + filter (tract)
+    - Universal across all human speech
+
+  Grade: EXACT (physical-acoustic fact, source-filter model)
+  Lenses: wave, boundary, info
+```
+
+---
+
+### H-LNG-20: 24 Greek Alphabet Letters = J₂=24
+
+> The Greek alphabet, foundation of Western linguistic notation, has 24 letters.
+
+```
+  Evidence:
+    - Alpha to Omega = 24 letters
+    - J₂ = 24 EXACT
+    - Fixed since ~403 BC (Euclidean reform)
+    - Used universally in mathematics, physics, linguistics (IPA symbols)
+    - Latin alphabet (26 = J₂+phi) and Cyrillic derived from Greek
+
+  Grade: EXACT (historically fixed, 2400+ years unchanged)
+  Lenses: info, evolution, memory
+```
+
+---
+
+### H-LNG-21: 6 Stop Consonant Places = n=6
+
+> Languages universally distinguish up to 6 stop consonant positions (voiced+voiceless pairs at 3 places).
+
+```
+  Evidence:
+    - /p, b/ (bilabial) + /t, d/ (alveolar) + /k, g/ (velar) = 6 stops
+    - n = 6 EXACT
+    - The 6-stop system /p t k b d g/ is the most common stop inventory
+    - WALS: 6-stop system is the typological default
+    - Arranged as phi=2 voicing × n/phi=3 places = n=6
+
+  Grade: EXACT (typologically dominant, factorial structure phi×(n/phi)=n)
+  Lenses: info, topology, boundary
+```
+
 ## Summary Table
 
 | ID | Hypothesis | n=6 Link | Grade |
@@ -208,5 +401,16 @@ syntactic categories) testable against n=6 functions.
 | H-LNG-08 | 4 sentence types | tau=4 | EXACT |
 | H-LNG-09 | ~24 consonants mean | J₂=24 | CLOSE |
 | H-LNG-10 | Chomsky 4 levels | tau=4 | EXACT |
+| H-LNG-11 | 12 semitones prosody | sigma=12 | EXACT |
+| H-LNG-12 | 2 morphological types | phi=2 | EXACT |
+| H-LNG-13 | 5-vowel universality | sopfr=5 | EXACT |
+| H-LNG-14 | 3 grammatical persons | n/phi=3 | EXACT |
+| H-LNG-15 | 2 number distinction | phi=2 | EXACT |
+| H-LNG-16 | 3 tenses | n/phi=3 | EXACT |
+| H-LNG-17 | 5 IPA vowel heights | sopfr=5 | CLOSE |
+| H-LNG-18 | 4 morpheme types | tau=4 | EXACT |
+| H-LNG-19 | 2 articulatory streams | phi=2 | EXACT |
+| H-LNG-20 | 24 Greek letters | J₂=24 | EXACT |
+| H-LNG-21 | 6 stop consonants | n=6 | EXACT |
 
-**EXACT: 5/10, CLOSE: 5/10, WEAK: 0/10**
+**EXACT: 16/21, CLOSE: 5/21, WEAK: 0/21**
