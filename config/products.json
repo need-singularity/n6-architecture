@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "total_products": 35,
-    "total_domains": 43,
+    "total_products": 36,
+    "total_domains": 44,
     "last_updated": "2026-04-05",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
@@ -16,7 +16,8 @@
       "software",
       "display",
       "audio",
-      "safety"
+      "safety",
+      "sf"
     ]
   },
   "absolute_rules": [
@@ -1094,6 +1095,70 @@
         }
       ],
       "anchor": "-펀카--모터스포츠-fun-car"
+    },
+    {
+      "id": "sf",
+      "title": "SF/초광속추진",
+      "icon": "🛸",
+      "heading": "SF / 초광속 추진 (Speculative Propulsion)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 21,
+      "industry_pct": 100,
+      "industry_detail": "Raptor/Dawn/ITER/NERVA",
+      "experiment_pct": 100,
+      "experiment_detail": "60/60 EXACT",
+      "physics_limit_count": 4,
+      "tp_count": 10,
+      "discovery_count": 5,
+      "cross_dse_domains": 8,
+      "mk_count": 5,
+      "summary_extra": "DSE 1,679,616조합, Mk.I~V 진화 (Mk.V=SF사고실험❌)",
+      "domains": [
+        "warp-drive"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "HEXA-WARP 워프항법장치",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "60/60 EXACT, 0.1c=1/(σ-φ) [BT-102], Q=σ-φ=10 [BT-298], D-T sopfr=5 [BT-98], ITER TF=3n=18 [BT-302], 48V=σ·τ [BT-325], 8단 DSE 6⁸=1,679,616, Mk.I화학→Mk.V Alcubierre(SF)",
+          "links": [
+            {
+              "label": "설계",
+              "path": "docs/warp-drive/goal.md"
+            },
+            {
+              "label": "검증",
+              "path": "docs/warp-drive/verify_warp_n6.py"
+            },
+            {
+              "label": "Mk.I",
+              "path": "docs/warp-drive/evolution/mk-1-current.md"
+            },
+            {
+              "label": "Mk.II",
+              "path": "docs/warp-drive/evolution/mk-2-near-term.md"
+            },
+            {
+              "label": "Mk.III",
+              "path": "docs/warp-drive/evolution/mk-3-mid-term.md"
+            },
+            {
+              "label": "Mk.IV",
+              "path": "docs/warp-drive/evolution/mk-4-long-term.md"
+            },
+            {
+              "label": "Mk.V(SF)",
+              "path": "docs/warp-drive/evolution/mk-5-theoretical.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-sf--초광속-추진-speculative-propulsion"
     }
   ],
   "roadmap": [
@@ -1392,6 +1457,14 @@
       "impact": 3,
       "tier": "✅",
       "dse_info": "155,520 조합 🛸10 → [🏎️ 펀카](#-펀카--모터스포츠-fun-car)"
+    },
+    {
+      "rank": 30,
+      "realize": "2045~2125",
+      "name": "HEXA-WARP 워프항법장치",
+      "impact": 10,
+      "tier": "🔮",
+      "dse_info": "Mk.III 0.1c 핵융합 DFD → Mk.V Alcubierre(SF)"
     }
   ]
 }
