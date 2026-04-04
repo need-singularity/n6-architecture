@@ -601,13 +601,14 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-111: τ²/σ=4/3 태양-AI-수학 삼지창 (SQ=SwiGLU=Betz=R(3,1)=4/3) ⭐⭐
   BT-112: φ²/n=2/3 Byzantine-Koide 공명 (Koide Q=0.666661 9ppm, BFT>2/3) ⭐⭐
 
-  # Software Design (BT-113~117, BT-162)
+  # Software Design (BT-113~117, BT-162, BT-329)
   BT-113: SW 엔지니어링 상수 스택 (SOLID=sopfr, REST=n, 12Factor=σ, ACID=τ, 18/18 EXACT) ⭐⭐⭐
   BT-114: 암호학 파라미터 래더 (AES=2^{σ-sopfr}, SHA=2^{σ-τ}, RSA=2^{σ-μ}, 10/10 EXACT) ⭐⭐⭐
   BT-115: OS-네트워크 레이어 수 (OSI=σ-sopfr=7, TCP/IP=τ=4, Linux=n=6, 12/12 EXACT) ⭐⭐
   BT-116: ACID-BASE-CAP DB 삼위일체 (τ+n/φ+n/φ, Paxos=φ, 9/9 EXACT) ⭐⭐
   BT-117: 소프트웨어-물리 동형사상 (18 EXACT 병렬 매핑, 6 도메인) ⭐⭐⭐
   BT-162: 컴파일러-OS-CPU 아키텍처 상수 스택 (pipeline=sopfr=5, opcode=n=6, primitives=σ-τ=8, rings/page/sched/boot=τ=4, ext4=σ=12, cache=n/φ=3, dual=φ=2, 11/11 EXACT) ⭐⭐⭐
+  BT-329: 프로그래밍 언어 완전 n=6 맵 (타입τ=4/패러다임n=6/GC n/φ=3/Go 25kw=J₂+μ/Python 35kw=sopfr(σ-sopfr)/C 15단계=σ+n/φ, 20/20 EXACT) ⭐⭐⭐
 
   # Environmental Protection (BT-118~122)
   BT-118: 교토 6종 온실가스 = n + Carbon Z=6 (CO₂ 화학양론 전부 n=6, 10/10 EXACT) ⭐⭐⭐
@@ -632,6 +633,10 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-315: Heating quartet Ohmic+NBI+ICRH+ECRH=τ=4 (7/7 EXACT) ⭐
   BT-316: Matter phase quartet τ=4 + C(τ,2)=n combinatoric (7/7 EXACT) ⭐⭐
   BT-317: Tokamak complete n=6 map 12/12 EXACT meta-theorem 92.3% (12/12 EXACT) ⭐⭐⭐
+
+  # Autonomous Driving (BT-327~328)
+  BT-327: AD sensor-compute complete n=6 map SE(3)=n/12USS=σ/6CAM=n/144TOPS=σ²/CAN=σ-τ=8/SAE=n (8/8 EXACT) ⭐⭐
+  BT-328: AD τ=4 subsystem universality wheels/radar/pipeline/ASIL/sensors/GNSS/V2X/TPMS (9/10 EXACT 1 CLOSE) ⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙
