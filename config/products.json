@@ -124,7 +124,10 @@
           ]
         }
       ],
-      "anchor": "-핵융합-fusion"
+      "anchor": "-핵융합-fusion",
+      "verify_scripts": [
+        "docs/fusion/verify_alien10.py"
+      ]
     },
     {
       "id": "chip",
@@ -221,7 +224,10 @@
           ]
         }
       ],
-      "anchor": "-칩--반도체-chip"
+      "anchor": "-칩--반도체-chip",
+      "verify_scripts": [
+        "docs/chip-architecture/verify_alien10.py"
+      ]
     },
     {
       "id": "ai",
@@ -403,7 +409,12 @@
           ]
         }
       ],
-      "anchor": "-에너지-energy"
+      "anchor": "-에너지-energy",
+      "verify_scripts": [
+        "docs/battery-architecture/verify_alien10.py",
+        "docs/solar-architecture/verify_alien10.py",
+        "docs/energy-architecture/verify_alien10.py"
+      ]
     },
     {
       "id": "environment",
@@ -498,7 +509,11 @@
           ]
         }
       ],
-      "anchor": "-환경보호-environment"
+      "anchor": "-환경보호-environment",
+      "verify_scripts": [
+        "docs/environmental-protection/verify_alien10.py",
+        "docs/carbon-capture/verify_alien10.py"
+      ]
     },
     {
       "id": "materials",
@@ -605,7 +620,10 @@
           ]
         }
       ],
-      "anchor": "-물질합성-materials"
+      "anchor": "-물질합성-materials",
+      "verify_scripts": [
+        "docs/material-synthesis/verify_alien10.py"
+      ]
     },
     {
       "id": "robotics",
@@ -661,7 +679,10 @@
           ]
         }
       ],
-      "anchor": "-로봇-robotics"
+      "anchor": "-로봇-robotics",
+      "verify_scripts": [
+        "docs/robotics/verify_alien10.py"
+      ]
     },
     {
       "id": "physics",
@@ -749,7 +770,11 @@
           ]
         }
       ],
-      "anchor": "-물리수학-physics--math"
+      "anchor": "-물리수학-physics--math",
+      "verify_scripts": [
+        "docs/pure-mathematics/verify_alien10.py",
+        "docs/cosmology-particle/verify_alien10.py"
+      ]
     },
     {
       "id": "software",
@@ -811,7 +836,11 @@
           ]
         }
       ],
-      "anchor": "-소프트웨어인프라-software--infra"
+      "anchor": "-소프트웨어인프라-software--infra",
+      "verify_scripts": [
+        "docs/programming-language/verify_alien10.py",
+        "docs/software-design/verify_alien10.py"
+      ]
     },
     {
       "id": "display",
@@ -864,7 +893,10 @@
           ]
         }
       ],
-      "anchor": "-디스플레이-display"
+      "anchor": "-디스플레이-display",
+      "verify_scripts": [
+        "docs/display/verify_alien10.py"
+      ]
     },
     {
       "id": "audio",
@@ -917,7 +949,10 @@
           ]
         }
       ],
-      "anchor": "-오디오-audio"
+      "anchor": "-오디오-audio",
+      "verify_scripts": [
+        "docs/audio/verify_alien10.py"
+      ]
     },
     {
       "id": "safety",
@@ -970,7 +1005,10 @@
           ]
         }
       ],
-      "anchor": "-안전-safety"
+      "anchor": "-안전-safety",
+      "verify_scripts": [
+        "docs/safety/verify_alien10.py"
+      ]
     },
     {
       "id": "fun-car",
@@ -1010,7 +1048,10 @@
           ]
         }
       ],
-      "anchor": "-펀카--모터스포츠-fun-car"
+      "anchor": "-펀카--모터스포츠-fun-car",
+      "verify_scripts": [
+        "docs/fun-car/verify_alien10.py"
+      ]
     },
     {
       "id": "sf",
