@@ -441,7 +441,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `noise-pollution.toml` | Source→Measurement→Barrier→Absorption→Regulation | 7,776 |
 | `light-pollution.toml` | Source→Measurement→Shielding→Design→Regulation | 7,776 |
 
-> **31개 | 3,578,580 조합** (8level×2 = 3,359,232 + 5단×29)
+> **31개 | 3,581,460 조합** (8level×2 = 3,359,232 + 5단×29)
 
 ---
 
@@ -461,12 +461,14 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `maglev-train.toml` | Levitation→Propulsion→Guidance→Power→Track | 7,776 |
 | `marine-propulsion.toml` | Fuel→Engine→Transmission→Propeller→Hull | 4,320 |
 | `ocean-engineering.toml` | HullDesign→Propulsion→SensorSuite→Communication→MissionSystem | 7,776 |
+| `performance-vehicle.toml` | Material→Process→Powertrain→Chassis→System | 7,776 |
 | `railway-system.toml` | Track→Vehicle→Signaling→Power→Network | 5,400 |
+| `safety.toml` | Material→Process→Sensor→Controller→System | 5,400 |
 | `tunnel-boring.toml` | Machine→Cutterhead→Lining→Guidance→Ground | 7,776 |
 | `urban-transit-rail.toml` | VehicleType→Propulsion→Signaling→Infrastructure→Operation | 7,776 |
 | `warehouse-logistics.toml` | Storage→Retrieval→Sorting→Packing→Shipping | 7,776 |
 
-> **16개 | 122,264 조합**
+> **18개 | 137,592 조합**
 
 ---
 
@@ -474,6 +476,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 
 | 도메인 TOML | 레벨 | 조합 수 |
 |---|---|---:|
+| `aerospace.toml` | Material→Propulsion→Power→Compute→System | 7,776 |
 | `aerospace-propulsion.toml` | FuelSource→Combustion→Turbine→Nozzle→FlightSystem | 7,560 |
 | `armor-ballistic.toml` | ArmorMaterial→Configuration→Threat→Manufacturing→Application | 7,560 |
 | `atomic-clock.toml` | AtomSpecies→CoolingMethod→Interrogation→Oscillator→Application | 7,776 |
@@ -485,8 +488,9 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `sedi-universe.toml` | Particle→Nuclear→Stellar→Galactic→Cosmological | 7,776 |
 | `seismograph.toml` | Sensor→Amplifier→Digitizer→Processing→Network | 7,560 |
 | `space.toml` | Foundation→Process→Core→Engine→System | 4,500 |
+| `space-engineering.toml` | Foundation→Process→Core→Engine→System | 4,500 |
 
-> **11개 | 82,260 조합**
+> **13개 | 95,832 조합**
 
 ---
 
