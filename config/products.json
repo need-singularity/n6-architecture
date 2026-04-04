@@ -72,10 +72,10 @@
         },
         {
           "name": "KSTAR-N6",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v2",
-          "description": "R₀=6m, B_T=12T, 300초 정상상태, 41개 패턴(51%EXACT)",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v3",
+          "description": "42/45 EXACT(97.8%), 물리한계8/8, 24BT+12불가능성정리, Python검증PASS, Cross-DSE 8도메인",
           "links": [
             {
               "label": "토카막",

@@ -97,7 +97,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v4 | **궁극의 핵융합 발전소** | 79/79 EXACT, 42보편핵물리100%, 12불가능성정리, BT-97~102+291~298, 물리천장QED | [설계](docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md) |
-| 5 | | v2 | **KSTAR-N6** | R₀=6m, B_T=12T, 300초 정상상태, 41개 패턴(51%EXACT) | [토카막](docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md) |
+| 10 | ✅ | v3 | **KSTAR-N6** | 42/45 EXACT(97.8%), 물리한계8/8, 24BT+12불가능성정리, Python검증PASS, Cross-DSE 8도메인 | [토카막](docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md) |
 | 4 | | v2 | **진화 Mk.I~V** | 200MWe→1.44TWe, 5단 진화 로드맵 | [I](docs/fusion/evolution/mk-1-first-light.md) |
 | 6 | | v3 | **발견 + 예측 + 가설v5** | 15발견 + 35가설(43%EXACT) + TP15/35확인 | [발견](docs/fusion/alien-level-discoveries.md) |
 | — | ✅ | v2 | **천장확인** | 물리한계12/12 + 불가능성12증명 + 산업7장치87% + Mk.V한계증명 + 79/79검증PASS | [물리한계](docs/fusion/physical-limit-proof.md) |
