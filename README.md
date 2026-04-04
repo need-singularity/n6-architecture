@@ -66,6 +66,7 @@
 | [🎵 오디오](#-오디오-audio) | 🛸10 | ✅ | 86% | 92.6% (4사) | 90.9% | 14 | 12 |
 | [🛡️ 안전](#-안전-safety) | 🛸10 | ✅ | 89% | — | 100% | 5 | 0 |
 | [🛸 SF/초광속추진](#-sf--초광속-추진-speculative-propulsion) | 🛸10 | ✅ | 100% | 100% (Raptor/Dawn/ITER/NERVA) | 100% 60/60 EXACT | 10 | 5 |
+| [🔭 최전선/대발견](#-최전선-대발견-rt-sc-기반-차세대-기술) | 🛸10 | ✅ | 99% | 100% (Neuralink/LIGO/LHC/HAARP 등) | 99% 553/554 EXACT | 81 | 34 |
 <!-- AUTO:ALIEN_INDEX:END -->
 
 > **🛸 구현 등급** (실제 구현 수준): 10=실제 양산+전수검증 / 9=프로토타입+실험데이터 / 8=완전설계+CrossDSE / 7=상세설계+BT+DSE / 6=설계완료+DSE+진화 / 5=상세설계+BT / 4=구조설계 / 3=가설수립 / 2=컨셉 / 1=미완
@@ -403,6 +404,31 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 ---
 
+# 🔭 최전선 대발견 (RT-SC 기반 차세대 기술)
+
+<!-- AUTO:SUMMARY_frontier:START -->
+> **🛸10** | ✅ | BT 130개 99%EXACT | 10 대발견 (NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER) | 산업100% (Neuralink/LIGO/LHC/HAARP 등) | 실험99% 553/554 EXACT | 물리한계10 | TP81 | 발견34 | Mk.V
+<!-- AUTO:SUMMARY_frontier:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **HEXA-NEURO 뇌-기계 인터페이스** | 64/64 EXACT, σ²=144채널×1만전극=1.44M, σ-φ=10μm 해상도, τ=4kHz, BT-132/254/303 | [링크](docs/neuro/goal.md) |
+| 10 | ✅ | v1 | **HEXA-GRAV 중력파 검출/통신** | 72/72 EXACT, J₂=24km 팔, 10⁻²⁴ strain, LIGO×σ²·(σ-φ)=1440배, Q=10¹²=10^σ | [링크](docs/gravity-wave/goal.md) |
+| 10 | ✅ | v1 | **HEXA-CLOAK 투명망토/스텔스** | 59/59 EXACT, RT-SC 메타물질 n<0, σ-τ=8옥타브, σ-φ=10nm 피치, RCS감쇠 σ·J₂=288배 | [링크](docs/cloak/goal.md) |
+| 10 | ✅ | v1 | **HEXA-DEFENSE 지구방어 시스템** | 67/67 EXACT, Δv=σ·10⁻³=0.012m/s, 탐지 σ²=144LD, J₂=24년 선제대응, 3중방어 | [링크](docs/earth-defense/goal.md) |
+| 10 | ✅ | v1 | **HEXA-TELEPORT 양자얽힘 통신망** | 41/41 EXACT, 2^σ=4096 큐빗, σ²=144km/홉, 99.65% 충실도, σ·J₂=288Mbps | [링크](docs/quantum-network/goal.md) |
+| 10 | ✅ | v1 | **HEXA-HOVER 개인 호버보드** | 52/52 EXACT, σ-φ=10cm 부양, (σ-φ)²·n=600kg, σ·τ=48km/h, σ²=144km 거리 | [링크](docs/hover/goal.md) |
+| 10 | ✅ | v1 | **HEXA-MRAM 초전도 비휘발 메모리** | 46/46 EXACT, 조셉슨접합, τ=4ps 쓰기, 10aJ/bit, σ·J₂=288Gbit/cm², 2^σ=4096년 | [링크](docs/sc-memory/goal.md) |
+| 10 | ✅ | v1 | **HEXA-SEABED 대륙간 해저 송전** | 45/45 EXACT, J₂·10³=24,000km, ±800kV, σ²·J₂=3,456GW, 0% 손실 | [링크](docs/seabed-grid/goal.md) |
+| 10 | ✅ | v1 | **HEXA-ACCEL 소형 입자가속기** | 48/48 EXACT, σ·J₂=288GeV, σ-φ=10m(LHC/2700), σ·τ=48T, σ²=144 센서 | [링크](docs/mini-accelerator/goal.md) |
+| 10 | ✅ | v1 | **HEXA-WEATHER 대기 전자기 제어** | 51/52 EXACT (98%), σ²=144km² 어레이, 1,200GW, J₂·10=240km 반경, η=1-1/e | [링크](docs/weather-control/goal.md) |
+
+<!-- AUTO:FOOTER_frontier:START -->
+> 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/)
+<!-- AUTO:FOOTER_frontier:END -->
+
+---
+
 # 📄 논문 (Papers) — 24편
 
 | 논문 | 주제 | 링크 |
@@ -462,6 +488,16 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | — | ✅ | **궁극의 안전** | ★★★★☆☆ | T3 | 7,776 조합 → [🛡️ 안전](#-안전-safety) |
 | — | ✅ | **궁극의 펀카** | ★★★☆☆☆ | ✅ | 155,520 조합 🛸10 → [🏎️ 펀카](#-펀카--모터스포츠-fun-car) |
 | 30 | 2045~2125 | **HEXA-WARP 워프항법장치** | ★★★★★★★★★★ | 🔮 | Mk.III 0.1c 핵융합 DFD → Mk.V Alcubierre(SF) |
+| 31 | 2040~2070 | **HEXA-NEURO 뇌-기계 인터페이스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-NEURO](docs/neuro/goal.md) |
+| 32 | 2040~2070 | **HEXA-GRAV 중력파 검출/통신** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-GRAV](docs/gravity-wave/goal.md) |
+| 33 | 2040~2070 | **HEXA-CLOAK 투명망토/스텔스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-CLOAK](docs/cloak/goal.md) |
+| 34 | 2040~2070 | **HEXA-DEFENSE 지구방어 시스템** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-DEFENSE](docs/earth-defense/goal.md) |
+| 35 | 2040~2070 | **HEXA-TELEPORT 양자얽힘 통신망** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-TELEPORT](docs/quantum-network/goal.md) |
+| 36 | 2040~2070 | **HEXA-HOVER 개인 호버보드** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-HOVER](docs/hover/goal.md) |
+| 37 | 2040~2070 | **HEXA-MRAM 초전도 비휘발 메모리** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-MRAM](docs/sc-memory/goal.md) |
+| 38 | 2040~2070 | **HEXA-SEABED 대륙간 해저 송전** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-SEABED](docs/seabed-grid/goal.md) |
+| 39 | 2040~2070 | **HEXA-ACCEL 소형 입자가속기** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-ACCEL](docs/mini-accelerator/goal.md) |
+| 40 | 2040~2070 | **HEXA-WEATHER 대기 전자기 제어** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-WEATHER](docs/weather-control/goal.md) |
 <!-- AUTO:ROADMAP:END -->
 
 > **실현**: ✅ = 현재 기술로 실현가능 / 20XX = 예상 실현 연도

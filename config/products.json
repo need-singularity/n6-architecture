@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "total_products": 36,
-    "total_domains": 44,
+    "total_products": 46,
+    "total_domains": 54,
     "last_updated": "2026-04-05",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
@@ -17,7 +17,8 @@
       "display",
       "audio",
       "safety",
-      "sf"
+      "sf",
+      "frontier"
     ]
   },
   "absolute_rules": [
@@ -1092,6 +1093,172 @@
         }
       ],
       "anchor": "-sf--초광속-추진-speculative-propulsion"
+    },
+    {
+      "id": "frontier",
+      "title": "최전선/대발견",
+      "icon": "🔭",
+      "heading": "최전선 대발견 (RT-SC 기반 차세대 기술)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 99,
+      "bt_count": 130,
+      "industry_pct": 100,
+      "industry_detail": "Neuralink/LIGO/LHC/HAARP 등",
+      "experiment_pct": 99,
+      "experiment_detail": "553/554 EXACT",
+      "physics_limit_count": 10,
+      "tp_count": 81,
+      "discovery_count": 34,
+      "cross_dse_domains": 10,
+      "mk_count": 5,
+      "summary_extra": "10 대발견 (NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER)",
+      "domains": [
+        "neuro",
+        "gravity-wave",
+        "cloak",
+        "earth-defense",
+        "quantum-network",
+        "hover",
+        "sc-memory",
+        "seabed-grid",
+        "mini-accelerator",
+        "weather-control"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "HEXA-NEURO 뇌-기계 인터페이스",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "64/64 EXACT, σ²=144채널×1만전극=1.44M, σ-φ=10μm 해상도, τ=4kHz, BT-132/254/303",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/neuro/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-GRAV 중력파 검출/통신",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "72/72 EXACT, J₂=24km 팔, 10⁻²⁴ strain, LIGO×σ²·(σ-φ)=1440배, Q=10¹²=10^σ",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/gravity-wave/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-CLOAK 투명망토/스텔스",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "59/59 EXACT, RT-SC 메타물질 n<0, σ-τ=8옥타브, σ-φ=10nm 피치, RCS감쇠 σ·J₂=288배",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/cloak/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-DEFENSE 지구방어 시스템",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "67/67 EXACT, Δv=σ·10⁻³=0.012m/s, 탐지 σ²=144LD, J₂=24년 선제대응, 3중방어",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/earth-defense/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-TELEPORT 양자얽힘 통신망",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "41/41 EXACT, 2^σ=4096 큐빗, σ²=144km/홉, 99.65% 충실도, σ·J₂=288Mbps",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/quantum-network/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-HOVER 개인 호버보드",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "52/52 EXACT, σ-φ=10cm 부양, (σ-φ)²·n=600kg, σ·τ=48km/h, σ²=144km 거리",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hover/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-MRAM 초전도 비휘발 메모리",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "46/46 EXACT, 조셉슨접합, τ=4ps 쓰기, 10aJ/bit, σ·J₂=288Gbit/cm², 2^σ=4096년",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/sc-memory/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-SEABED 대륙간 해저 송전",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "45/45 EXACT, J₂·10³=24,000km, ±800kV, σ²·J₂=3,456GW, 0% 손실",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/seabed-grid/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-ACCEL 소형 입자가속기",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "48/48 EXACT, σ·J₂=288GeV, σ-φ=10m(LHC/2700), σ·τ=48T, σ²=144 센서",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/mini-accelerator/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-WEATHER 대기 전자기 제어",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "51/52 EXACT (98%), σ²=144km² 어레이, 1,200GW, J₂·10=240km 반경, η=1-1/e",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/weather-control/goal.md"
+            }
+          ]
+        }
+      ],
+      "anchor": "-최전선-대발견-rt-sc-기반-차세대-기술"
     }
   ],
   "roadmap": [
@@ -1398,6 +1565,86 @@
       "impact": 10,
       "tier": "🔮",
       "dse_info": "Mk.III 0.1c 핵융합 DFD → Mk.V Alcubierre(SF)"
+    },
+    {
+      "rank": 31,
+      "realize": "2040~2070",
+      "name": "HEXA-NEURO 뇌-기계 인터페이스",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-NEURO](docs/neuro/goal.md)"
+    },
+    {
+      "rank": 32,
+      "realize": "2040~2070",
+      "name": "HEXA-GRAV 중력파 검출/통신",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-GRAV](docs/gravity-wave/goal.md)"
+    },
+    {
+      "rank": 33,
+      "realize": "2040~2070",
+      "name": "HEXA-CLOAK 투명망토/스텔스",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-CLOAK](docs/cloak/goal.md)"
+    },
+    {
+      "rank": 34,
+      "realize": "2040~2070",
+      "name": "HEXA-DEFENSE 지구방어 시스템",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-DEFENSE](docs/earth-defense/goal.md)"
+    },
+    {
+      "rank": 35,
+      "realize": "2040~2070",
+      "name": "HEXA-TELEPORT 양자얽힘 통신망",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-TELEPORT](docs/quantum-network/goal.md)"
+    },
+    {
+      "rank": 36,
+      "realize": "2040~2070",
+      "name": "HEXA-HOVER 개인 호버보드",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-HOVER](docs/hover/goal.md)"
+    },
+    {
+      "rank": 37,
+      "realize": "2040~2070",
+      "name": "HEXA-MRAM 초전도 비휘발 메모리",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-MRAM](docs/sc-memory/goal.md)"
+    },
+    {
+      "rank": 38,
+      "realize": "2040~2070",
+      "name": "HEXA-SEABED 대륙간 해저 송전",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-SEABED](docs/seabed-grid/goal.md)"
+    },
+    {
+      "rank": 39,
+      "realize": "2040~2070",
+      "name": "HEXA-ACCEL 소형 입자가속기",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-ACCEL](docs/mini-accelerator/goal.md)"
+    },
+    {
+      "rank": 40,
+      "realize": "2040~2070",
+      "name": "HEXA-WEATHER 대기 전자기 제어",
+      "impact": 6,
+      "tier": "🔮",
+      "dse_info": "RT-SC 기반 → [HEXA-WEATHER](docs/weather-control/goal.md)"
     }
   ]
 }
