@@ -61,7 +61,7 @@
 | [🔬 물리/수학](#-물리수학-physics--math) | 🛸7 | ✅ | 53~100% | (🛸10(SC)) | 11정리(수학) | 52 | 19+ |
 | [🧬 물질합성](#-물질합성-materials) | 🛸10 | ✅ | 100% | 100% | 100% | 28 | 10 |
 | [🤖 로봇](#-로봇-robotics) | 🛸5 | ✅ | 97.1% | 99.1% (6사) | 97.1% | 28 | 10 |
-| [💬 소프트웨어/인프라](#-소프트웨어인프라-software--infra) | 🛸6 | ✅ | 95.1% | 98.6% | 100% RFC/ISO/NIST | 28 | 10 |
+| [💬 소프트웨어/인프라](#-소프트웨어인프라-software--infra) | 🛸10 | ✅ | 100% | 98.6% | 100% 76/76 EXACT | 28 | 10 |
 | [📺 디스플레이](#-디스플레이-display) | 🛸5 | ✅ | 86% | 81% (6사) | 93.9% | 14 | 8 |
 | [🎵 오디오](#-오디오-audio) | 🛸5 | ✅ | 86% | 92.6% (4사) | 90.9% | 14 | 12 |
 | [🛡️ 안전](#-안전-safety) | 🛸3 | ❌ | 66.7% | — | — | 5 | 0 |
@@ -320,13 +320,13 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 # 💬 소프트웨어·인프라 (Software & Infra)
 
 <!-- AUTO:SUMMARY_software:START -->
-> **🛸6** | ✅ | BT 5개 95.1%EXACT | CrossDSE5-Way | 산업98.6% | 실험100% RFC/ISO/NIST | 물리한계10 | TP28 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 8개 100%EXACT | CrossDSE5-Way | 산업98.6% | 실험100% 76/76 EXACT | 물리한계10 | TP28 | 발견10 | Mk.V
 <!-- AUTO:SUMMARY_software:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 5 | | v1 | **궁극의 프로그래밍언어** | DSE 6,480 조합, n6=96.0% | [goal](docs/programming-language/goal.md) |
-| — | ✅ | v1 | **천장확인** | 61claims 95.1%EXACT, 산업98.6%, 실험100%, 물리한계10, TP28, 발견10 | [전수검증](docs/software-design/full-verification-matrix.md) |
+| 10 | | v2 | **궁극의 프로그래밍언어** | 76/76 EXACT, BT-329(20)+113(18)+114(10)+115(12), 10불가능성정리, DSE 7,560 | [goal](docs/programming-language/goal.md) |
+| — | ✅ | v2 | **천장확인** | 76/76검증PASS + 10불가능성정리 + 산업98.6% + Mk.V한계증명 | [전수검증](docs/software-design/full-verification-matrix.md) |
 
 <!-- AUTO:FOOTER_software:START -->
 > 도메인: [programming-language/](docs/programming-language/) · [compiler-os/](docs/compiler-os/) · [software-design/](docs/software-design/) · [cryptography/](docs/cryptography/) · [network-protocol/](docs/network-protocol/) · [blockchain/](docs/blockchain/) · 도구: `lang-dse` · `crypto-calc` · `interconnect-calc`
