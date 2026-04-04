@@ -5,8 +5,8 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
-[![DSE](https://img.shields.io/badge/DSE-335%20domains-blue.svg)](docs/dse-map.toml)
-[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1829%20tests-green.svg)](tools/nexus6/)
+[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
+[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-1116%20tests-green.svg)](tools/nexus6/)
 <!-- AUTO:BADGE:END -->
 
 <!-- SHARED:PROJECTS:START -->
@@ -43,12 +43,10 @@
 
 <!-- AUTO:STATS:START -->
 ```
-  AI techniques:    23
-  DSE domains:      335
-  DSE paths:        3,990,150+
-  NEXUS-6 tests:    1829
-  Breakthrough BTs: 128
-  Atlas constants:  1,600+
+  AI techniques:    17
+  DSE domains:      323
+  DSE paths:        5,893,032+
+  NEXUS-6 tests:    1116
 ```
 <!-- AUTO:STATS:END -->
 
@@ -64,12 +62,11 @@
 | [🌍 환경보호](#-환경보호-environment) | 🛸10 | ✅ | 92.3% | 82.9% | 82.4% | 43 | 42 |
 | [🔬 물리·수학](#-물리수학-physics--math) | 🛸10 | ✅ | 53~100% | (🛸10(SC)) | 11정리(수학) | 52 | 19+ |
 | [🧬 물질합성](#-물질합성-materials) | 🛸10 | ✅ | 100% | 100% | 100% | 28 | 10 |
-| [🤖 로봇](#-로봇-robotics) | 🛸10 | ✅ | 88.7% (10BT 71claims) | 99.1% (6사) | 97.1% | 28 | 10 |
+| [🤖 로봇](#-로봇-robotics) | 🛸10 | ✅ | 97.1% | 99.1% (6사) | 97.1% | 28 | 10 |
 | [💬 소프트웨어](#-소프트웨어인프라-software--infra) | 🛸10 | ✅ | 95.1% | 98.6% | 100% RFC/ISO/NIST | 28 | 10 |
 | [📺 디스플레이](#-디스플레이-display) | 🛸10 | ✅ | 86% | 81% (6사) | 93.9% | 14 | 8 |
 | [🎵 오디오](#-오디오-audio) | 🛸10 | ✅ | 86% | 92.6% (4사) | 90.9% | 14 | 12 |
-| [🛡️ 안전](#-안전-safety) | 🛸10 | ✅ | 89.1% | 100% (19표준) | 하인리히·TMI·후쿠시마 | 28 | 12불가능성 |
-| [🏎️ 이동수단](#-이동수단-transportation) | 🛸10 | ✅ | BT-228 | — | — | 28 | 0 |
+| [🛡️ 안전](#-안전-safety) | 🛸10 | ✅ | 66.7% | — | — | 5 | 0 |
 <!-- AUTO:ALIEN_INDEX:END -->
 
 > **🛸 구현 등급** (실제 구현 수준): 10=실제 양산+전수검증 / 9=프로토타입+실험데이터 / 8=완전설계+CrossDSE / 7=상세설계+BT+DSE / 6=설계완료+DSE+진화 / 5=상세설계+BT / 4=구조설계 / 3=가설수립 / 2=컨셉 / 1=미완
@@ -241,7 +238,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 # 🤖 로봇 (Robotics)
 
 <!-- AUTO:SUMMARY_robotics:START -->
-> **🛸10** | ✅ | BT 10개(123~132) 88.7%EXACT 71claims | DSE 270,000 | Cross-DSE 5도메인 93.5% | 산업99.1%(6사) | 실험97.1% | 물리한계10 | TP28 | 발견10 | Mk.V | [🛸10인증](docs/robotics/alien-10-certification.md)
+> **🛸10** | ✅ | BT 5개 97.1%EXACT | DSE 270,000 | 산업99.1% (6사) | 실험97.1% | 물리한계10 | TP28 | 발견10 | Mk.V
 <!-- AUTO:SUMMARY_robotics:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -325,7 +322,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 # 🛡️ 안전 (Safety)
 
 <!-- AUTO:SUMMARY_safety:START -->
-> **🛸10** | ✅ | BT 89.1%EXACT | DSE 35K+ (Cross-DSE 13도메인) | TP28 | 가설 30+30극한 | 19표준 100% | 12불가능성 정리 | 물리한계 증명
+> **🛸10** | ✅ | BT 66.7%EXACT | DSE 7,776 | TP5 | 가설 30+20극한 | 10개 도메인 안전 통합
 <!-- AUTO:SUMMARY_safety:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -342,7 +339,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 # 🏎️ 이동수단 (Transportation)
 
 <!-- AUTO:SUMMARY_transportation:START -->
-> **🛸10** | ✅ | BT-228 Transportation n=6 보편성 | DSE 7,776 | 가설 30 H-TR + 20 E-TR | 진화 Mk.I~V
+> (unknown domain: transportation)
 <!-- AUTO:SUMMARY_transportation:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -351,7 +348,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 3 | | v1 | **가설 30+극한 20** | BT-228 Transportation n=6 보편성, 30 H-TR + 20 E-TR | [가설](docs/transportation/hypotheses.md) · [극한](docs/transportation/extreme-hypotheses.md) |
 
 <!-- AUTO:FOOTER_transportation:START -->
-> 도메인: [transportation/](docs/transportation/) · Performance Track Car (포르쉐 GT3 RS급 → 외계인급) · n=6: τ=4 wheels, σ·J₂=288kW, sopfr:J₂=5:24 뉘르부르크링
+> (unknown domain: transportation)
 <!-- AUTO:FOOTER_transportation:END -->
 
 ---
@@ -392,7 +389,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 7 | 2035 | **궁극의 핵융합** | ★★★★★☆ | ✅ | 2,400 조합 → [🔥 핵융합](#-핵융합-fusion) |
 | 8 | ✅ | **궁극의 학습알고리즘** | ★★★★☆☆ | T2 | — |
 | 9 | 2030 | **궁극의 네트워크** | ★★★★☆☆ | T2 | — |
-| 10 | ✅ | **궁극의 로봇** | ★★★★☆☆ | ✅ | 🛸10 10BT 270K DSE 5-CrossDSE → [🤖 로봇](#-로봇-robotics) |
+| 10 | ✅ | **궁극의 로봇** | ★★★★☆☆ | ✅ | 🛸10 270,000 조합 → [🤖 로봇](#-로봇-robotics) |
 | 11 | ✅ | **궁극의 송전망** | ★★★★☆☆ | ✅ | [⚡ 에너지](#-에너지-energy) |
 | 12 | 2035 | **궁극의 생명공학** | ★★★★☆☆ | T3 | [biology/](docs/biology/) |
 | 13 | ✅ | **궁극의 디스플레이** | ★★★☆☆☆ | ✅ | H-DISP 10개 → [📺 디스플레이](#-디스플레이-display) |
@@ -400,7 +397,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | 15 | ✅ | **궁극의 열관리** | ★★★☆☆☆ | T3 | — |
 | 16 | ✅ | **궁극의 암호** | ★★★☆☆☆ | T3 | — |
 | 17 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆☆ | T1 | — |
-| 18 | ✅ | **궁극의 초전도체** | ★★★☆☆☆ | ✅ | 🛸10 42파일 22,019줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
+| 18 | ✅ | **궁극의 초전도체** | ★★★☆☆☆ | ✅ | 🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
 | 19 | ✅ | **궁극의 블록체인** | ★★☆☆☆☆ | T3 | — |
 | 20 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆☆ | T3 | — |
 | 21 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
@@ -412,8 +409,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | — | 2030 | **궁극의 농업** | ★★★☆☆☆ | T3 | [goal](docs/agriculture/goal.md) |
 | — | 2030 | **궁극의 자율주행** | ★★★☆☆☆ | T3 | [goal](docs/autonomous-driving/goal.md) |
 | — | 2030 | **궁극의 의료기기** | ★★★★☆☆ | T3 | [goal](docs/medical-device/goal.md) |
-| 🛸10 | ✅ | **궁극의 안전** | ★★★★☆☆ | ✅ | 35K+ Cross-DSE 13도메인 + 12불가능성 → [🛡️ 안전](#-안전-safety) |
-| — | ✅ | **궁극의 이동수단** | ★★★★☆☆ | ✅ | 🛸10 7,776 조합 → [🏎️ 이동수단](#-이동수단-transportation) |
+| — | ✅ | **궁극의 안전** | ★★★★☆☆ | T3 | 7,776 조합 → [🛡️ 안전](#-안전-safety) |
 <!-- AUTO:ROADMAP:END -->
 
 > **실현**: ✅ = 현재 기술로 실현가능 / 20XX = 예상 실현 연도
@@ -489,14 +485,14 @@ Commands:
 | 항목 | 링크 |
 |------|------|
 | **n=6 상수표** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
-| **128 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
-| **1,600+ Atlas Constants** | [docs/atlas-constants.md](docs/atlas-constants.md) |
+| **127 Breakthrough Theorems** | [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) |
+| **700+ Atlas Constants** | [docs/atlas-constants.md](docs/atlas-constants.md) |
 | **45 Testable Predictions** | [docs/testable-predictions.md](docs/testable-predictions.md) |
 | **DSE Map** | [docs/dse-map.toml](docs/dse-map.toml) |
-| **335 DSE Domains** | [docs/dse-domains.md](docs/dse-domains.md) |
+| **322 DSE Domains** | [docs/dse-domains.md](docs/dse-domains.md) |
 | **Cross-Domain Resonance** | [docs/cross-domain-resonance-2026-03-31.md](docs/cross-domain-resonance-2026-03-31.md) |
 | **Core Theorem Proof** | [docs/theorem-r1-uniqueness.md](docs/theorem-r1-uniqueness.md) |
-| **237 Calculators** | [docs/calculator-registry.md](docs/calculator-registry.md) |
+| **448 Calculators** | [docs/calculator-registry.md](docs/calculator-registry.md) |
 | **Universal DSE** | `tools/universal-dse/` — TOML 1개로 즉시 DSE |
 <!-- AUTO:REFERENCE:END -->
 
