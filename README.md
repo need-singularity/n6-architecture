@@ -387,6 +387,22 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 ---
 
+# 🛸 SF / 초광속 추진 (Speculative Propulsion)
+
+<!-- AUTO:SUMMARY_sf:START -->
+> **🛸10** | ✅ | BT 21개 100%EXACT | DSE 1,679,616조합, Mk.I~V 진화 (Mk.V=SF사고실험❌) | 산업100% (Raptor/Dawn/ITER/NERVA) | 실험100% 60/60 EXACT | 물리한계4 | TP10 | 발견5 | Mk.V
+<!-- AUTO:SUMMARY_sf:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **HEXA-WARP 워프항법장치** | 60/60 EXACT, 0.1c=1/(σ-φ) [BT-102], Q=σ-φ=10 [BT-298], D-T sopfr=5 [BT-98], ITER TF=3n=18 [BT-302], 48V=σ·τ [BT-325], 8단 DSE 6⁸=1,679,616, Mk.I화학→Mk.V Alcubierre(SF) | [설계](docs/warp-drive/goal.md) · [검증](docs/warp-drive/verify_warp_n6.py) · [Mk.I](docs/warp-drive/evolution/mk-1-current.md) · [Mk.II](docs/warp-drive/evolution/mk-2-near-term.md) · [Mk.III](docs/warp-drive/evolution/mk-3-mid-term.md) · [Mk.IV](docs/warp-drive/evolution/mk-4-long-term.md) · [Mk.V(SF)](docs/warp-drive/evolution/mk-5-theoretical.md) |
+
+<!-- AUTO:FOOTER_sf:START -->
+> 도메인: [warp-drive/](docs/warp-drive/)
+<!-- AUTO:FOOTER_sf:END -->
+
+---
+
 # 📄 논문 (Papers) — 24편
 
 | 논문 | 주제 | 링크 |
