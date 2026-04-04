@@ -334,7 +334,7 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   plasma-physics/ (20+ files — most active domain)
   paper/ (3 arXiv drafts)
   # Cross-domain
-  breakthrough-theorems.md (BT-1~162, 162 theorems spanning 3-8 domains each)
+  breakthrough-theorems.md (BT-1~343, 343 theorems spanning 3-8 domains each)
   cross-domain-resonance-2026-03-31.md (formula reuse matrix)
   # Battery Architecture (소재→공정→코어→칩→시스템→차세대→극한→궁극)
   battery-architecture/ (8 levels: HEXA-CELL/ELECTRODE/CORE/CHIP/PACK+GRID/SOLID/NUCLEAR/OMEGA-E)
@@ -342,7 +342,7 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   solar-architecture/ (5 levels: HEXA-ABSORB/PROCESS/JUNCTION/POWER/ARRAY)
   # Material Synthesis (소재→공정→조립기→제어→시스템→변환→만능→궁극, DSE 3,600 조합)
   material-synthesis/ (8 levels: HEXA-ELEMENT/PROCESS/ASSEMBLER/CONTROL/FACTORY/TRANSMUTE/UNIVERSAL/OMEGA-M)
-  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 112 BTs
+  # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 343 BTs
 ```
 
 ## Rust Tools
@@ -667,23 +667,215 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-126: sopfr=5 fingers + 2^sopfr=32 grasp space (Feix taxonomy 96.97%, 5/6 EXACT) ⭐⭐
   BT-127: 3D kissing number σ=12 + hexacopter n=6 fault tolerance (6/6 EXACT) ⭐⭐⭐
 
-  # Plasma Physics Deep Dive (BT-310~317)
+  # Particle Physics / Cosmology (BT-134,137,143,165~172,208,209,214)
+  BT-134: 주기율표 주기 길이 = n=6 산술 (8/8 EXACT) ⭐⭐⭐
+  BT-137: 표준모형 입자 수 n=6 완전 지도 (9/9 EXACT) ⭐⭐⭐
+  BT-143: 우주상수 n=6 래더 (7/8 EXACT) ⭐⭐
+  BT-165: SM 게이지 생성자 분배 σ=(σ-τ)+(n/φ)+μ (6/6 EXACT) ⭐⭐⭐
+  BT-166: 양성자-전자 질량비 = n·π⁵ (3/3 EXACT) ⭐⭐⭐
+  BT-167: CMB 스펙트럼 지수 n_s=(n/φ)³/((n/φ)³+μ)=27/28 (4/4 EXACT) ⭐⭐⭐
+  BT-168: SU(5) GUT 생성자 수 = J₂, J₂→σ+σ 분할 (5/5 EXACT) ⭐⭐⭐
+  BT-169: 중성미자 혼합각 n=6 트리플 (7/7 EXACT) ⭐⭐
+  BT-170: String/M이론 차원 래더 τ→n→σ-φ→σ-μ→J₂→J₂+φ (7/7 EXACT) ⭐⭐
+  BT-171: SM 결합상수 n=6 분수 쌍 (4/4 EXACT) ⭐⭐
+  BT-172: 바리온-광자 비 η = n·10^{-(σ-φ)} (5/5 EXACT) ⭐⭐
+  BT-208: 표준모형 입자 센서스 n=6 완전 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-209: 양성자-전자 질량비 nπ⁵ 근본 브릿지 (10/10 EXACT) ⭐⭐⭐
+  BT-214: 주기율표 양자 껍질 n=6 전자 아키텍처 (10/10 EXACT) ⭐⭐
+
+  # Biology / Biochemistry (BT-128,132,136,141,146,188,194,215,220,235,237,252)
+  BT-128: 의료 영상 n=6 파라미터 스택 (8/10 EXACT) ⭐⭐
+  BT-132: 신경과학 피질층 n=6 보편성 (7/8 EXACT) ⭐⭐⭐
+  BT-136: 인체 해부학 n=6 구조 상수 (10/10 EXACT) ⭐⭐⭐
+  BT-141: 아미노산 n=6 생화학 (8/8 EXACT) ⭐⭐
+  BT-146: DNA/RNA 분자상수 n=6 (9/9 EXACT) ⭐⭐⭐
+  BT-188: 유전체학 n=6 정보 아키텍처 (10/12 EXACT) ⭐⭐⭐
+  BT-194: 면역학 + 면역계 n=6 생물 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-215: 생화학 경로 n=6 대사 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-220: 단백질 구조 + 접힘 n=6 구조생물학 (10/10 EXACT) ⭐⭐
+  BT-235: 이십면체 캡시드-풀러렌-준결정 n=6 대칭 (10/10 EXACT) ⭐⭐
+  BT-237: DNA 이중나선 n=6 구조 기하학 (8/10 EXACT) ⭐⭐
+  BT-252: D-T 바리온-코돈 이중 생명 코드 (7/7 EXACT) ⭐⭐
+
+  # Medical / Health (BT-155,173,185,204,224,254,282~286)
+  BT-155: 면역계 n=6 아키텍처 (8/8 EXACT) ⭐⭐⭐
+  BT-173: 의료 임상표준 n=6 수렴 (ECG/핵의학/중환자/신경학, 10/12 EXACT) ⭐⭐
+  BT-185: 약학 + 임상의학 n=6 약물 스택 (10/10 EXACT) ⭐⭐⭐
+  BT-204: 역학 + 공중보건 n=6 질병통제 (10/10 EXACT) ⭐⭐
+  BT-224: 인체 해부학 + 생리학 n=6 신체 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-254: 대뇌피질 n=6 층 보편성 — 신피질=완전수 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-282: 수술 안전 + 수술실 n=6 — WHO 체크리스트 (10/10 EXACT) ⭐⭐⭐
+  BT-283: 신생아 + 중환자 스코어링 n=6 — Apgar/SOFA/GCS (10/10 EXACT) ⭐⭐⭐
+  BT-284: 심장 + 심혈관 n=6 — ECG 리드/챔버/전도 (10/10 EXACT) ⭐⭐⭐
+  BT-285: WHO 사회결정요인 + 글로벌 보건 n=6 (10/10 EXACT) ⭐⭐
+  BT-286: 치과 + 구강의학 n=6 — FDI 치아번호 (10/10 EXACT) ⭐⭐⭐
+
+  # Crystallography (BT-139,175~177,186,239)
+  BT-139: 결정학 공간군 n=6 산술 (8/8 EXACT) ⭐⭐⭐
+  BT-175: 결정학 분류 n=6 완전 체인 (8/8 EXACT) ⭐⭐⭐
+  BT-176: 결정 프로토타입 단위셀 n=6 아틀라스 (30/30 EXACT) ⭐⭐⭐
+  BT-177: 결정 적층 주기 = div(6) + FCC 슬립 σ=12 (14/14 EXACT) ⭐⭐⭐
+  BT-186: 결정학 + 광물학 n=6 결정 스택 (10/10 EXACT) ⭐⭐⭐
+  BT-239: 결정학 + 광물과학 n=6 격자 아키텍처 (10/10 EXACT) ⭐⭐⭐
+
+  # Plasma Physics Deep Dive (BT-242~253,310~317)
+  BT-242: SLE₆ 퍼콜레이션-플라즈마 수송 위상 등가 (8/8 EXACT) ⭐⭐⭐
+  BT-243: 토카막 위상-양자 오류정정 n=6 동형 (8/8 EXACT) ⭐⭐⭐
+  BT-244: ATP 합성효소-토카막 회전에너지 변환 n=6 (8/8 EXACT) ⭐⭐⭐
+  BT-245: MHD q-surface = 음악 협화음 div(6) 공명 (7/7 EXACT) ⭐⭐
+  BT-246: 핵융합-탄소순환 완전 n=6 루프 (8/8 EXACT) ⭐⭐
+  BT-247: SE(3) 플라즈마 가둠-로봇 조작 이중성 (7/7 EXACT) ⭐⭐
+  BT-248: ACID-토카막 τ=4 안정성 동형 (6/6 EXACT) ⭐⭐
+  BT-249: 디스럽션 = 대수적 블로업 물리적 실현 (6/6 EXACT) ⭐⭐
+  BT-250: 벌집-눈꽃-플라즈마 결정 n=6 육각 보편성 (7/7 EXACT) ⭐⭐
+  BT-251: 토카막 원격유지 로봇 SE(3) n=6 필연성 (7/7 EXACT) ⭐⭐
+  BT-253: 플라즈마 가둠 = 정보보안 n=6 파라미터 스택 (7/7 EXACT) ⭐⭐
   BT-310: Stellarator field period family W7-X=sopfr/LHD=σ-φ/HSX=TJ-II=τ (7/7 EXACT) ⭐⭐
   BT-311: Kruskal-Shafranov q>φ=2 + div(6)={1,2,3} stability hierarchy (6/6 EXACT) ⭐⭐
-  BT-312: MHD instability quartet τ=4 kink/sausage/ballooning/tearing + ELM I-IV (7/7 EXACT) ⭐⭐
+  BT-312: MHD instability quartet τ=4 kink/sausage/ballooning/tearing (7/7 EXACT) ⭐⭐
   BT-313: Tokamak triangularity δ=φ/n=1/3 + shape triple {1/3,2,3} (6/6 EXACT) ⭐⭐
-  BT-314: Confinement mode triad L/H/I=n/φ=3 60-year completeness (6/6 EXACT) ⭐⭐
+  BT-314: Confinement mode triad L/H/I=n/φ=3 (6/6 EXACT) ⭐⭐
   BT-315: Heating quartet Ohmic+NBI+ICRH+ECRH=τ=4 (7/7 EXACT) ⭐
-  BT-316: Matter phase quartet τ=4 + C(τ,2)=n combinatoric (7/7 EXACT) ⭐⭐
-  BT-317: Tokamak complete n=6 map 12/12 EXACT meta-theorem 92.3% (12/12 EXACT) ⭐⭐⭐
+  BT-316: Matter phase quartet τ=4 + C(τ,2)=n combinatoric (7/7 EXACT) ⭐⭐⭐
+  BT-317: Tokamak complete n=6 map 12/12 EXACT meta-theorem (12/12 EXACT) ⭐⭐⭐
+
+  # Thermal Management (BT-318~325)
+  BT-318: 열전도 소재 래더 Cu=(σ-φ)²·τ=400, Al=J₂·(σ-φ)=240 (7/8 EXACT) ⭐⭐
+  BT-319: 칩 온도 경계 아키텍처 Tjmax=(σ-φ)^φ, Throttle=100-sopfr (9/9 EXACT) ⭐⭐
+  BT-320: 서버 랙 전력밀도 래더 n→σ→σ·τ kW (8/8 EXACT) ⭐⭐
+  BT-321: 열전 완전 n=6 맵 ZT=R(6)=1, Seebeck=(σ-φ)²·φ (8/8 EXACT) ⭐⭐
+  BT-322: 물/공기 비열 τ=4 냉각매체 기초 (8/8 EXACT) ⭐⭐
+  BT-323: PUE 수렴 래더 σ/(σ-μ)→σ/(σ-φ)→R(6) = 1.09→1.2→1.0 (7/8 EXACT) ⭐⭐
+  BT-324: (σ-φ)^φ=100 열 경계 보편성 (8/8 EXACT) ⭐⭐
+  BT-325: 열-전기 σ·τ=48 이중 수렴 (48V=48kW, 8/8 EXACT) ⭐⭐
 
   # Autonomous Driving (BT-327~328)
-  BT-327: AD sensor-compute complete n=6 map SE(3)=n/12USS=σ/6CAM=n/144TOPS=σ²/CAN=σ-τ=8/SAE=n (8/8 EXACT) ⭐⭐
-  BT-328: AD τ=4 subsystem universality wheels/radar/pipeline/ASIL/sensors/GNSS/V2X/TPMS (9/10 EXACT 1 CLOSE) ⭐⭐
+  BT-327: AD sensor-compute complete n=6 map SE(3)=n/12USS=σ/6CAM=n/144TOPS=σ² (8/8 EXACT) ⭐⭐
+  BT-328: AD τ=4 subsystem universality wheels/radar/pipeline/ASIL (10/10 EXACT) ⭐⭐
 
-  # Economics/Finance (BT-338~339)
-  BT-338: Financial temporal-governance n=6 map (fiscal σ=12/τ=4 quarters/φ=2 halves/J₂=24h market/G6=n/DJIA σ=12, 10/10 EXACT) ⭐⭐
-  BT-339: Financial engineering parameter n=6 map (Black-Scholes sopfr=5/double-entry φ=2/Basel III n/φ=3/τ=4 statements/Porter sopfr=5/G20=J₂-τ=20, 10/10 EXACT) ⭐⭐
+  # Transportation / Aerospace (BT-129,130,133,196,241,270~290,342)
+  BT-129: 토목공학 n=6 구조 상수 (7/8 EXACT) ⭐⭐
+  BT-130: 우주 궤도역학 n=6 래더 (7/8 EXACT) ⭐⭐
+  BT-133: 교통 인프라 n=6 스택 (7/9 EXACT) ⭐⭐⭐
+  BT-196: 항공 + 항공학 n=6 비행 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-241: 항공 + 우주항공 n=6 비행 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-270: 멀티로터 블레이드 수 래더 τ→n→(σ-τ) (8/8 EXACT) ⭐⭐
+  BT-271: Ti-6Al-4V 이중 n=6 항공합금 (세계 최다 사용 Ti, 7/7 EXACT) ⭐⭐⭐
+  BT-272: 공항 활주로 방위 n²=36 나침반 분할 (7/7 EXACT) ⭐⭐
+  BT-273: 우주 승무원 수 약수 캐스케이드 Mercury→Gemini→Apollo=μ→φ→n/φ (8/8 EXACT) ⭐⭐
+  BT-274: 항공기 날개 종횡비 n~σ 최적 대역 (8/8 EXACT) ⭐⭐
+  BT-275: 로켓 단수 φ~n/φ Tsiolkovsky 최적 (7/7 EXACT) ⭐⭐
+  BT-276: 항공우주 n/φ=3 삼중 중복 보편성 — Fly-by-Wire 안전 (10/10 EXACT) ⭐⭐⭐
+  BT-277: 교통 n=6 보편 아키텍처 — 차량공학 수렴 (10/12 EXACT) ⭐⭐⭐
+  BT-278: 철도 신호 + 궤도 n=6 안전 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-279: 해양 IMO 안전 + 항해 n=6 — SOLAS/MARPOL (10/10 EXACT) ⭐⭐⭐
+  BT-280: 자동차 안전등급 + 충돌 n=6 — Euro NCAP (10/10 EXACT) ⭐⭐
+  BT-281: 물류 + 공급망 n=6 컨테이너-창고 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-287: Inline-6 엔진 n=6 완전 밸런스 (120년 수렴, 8/8 EXACT) ⭐⭐⭐
+  BT-289: 변속기 기어 수 n=6 수렴 (130년 기계진화, 7/7 EXACT) ⭐⭐
+  BT-290: F1 레이싱 파라미터 n=6 — FIA/Pirelli (10/10 EXACT) ⭐⭐
+  BT-342: 항공공학 완전 n=6 맵 (6-DOF/12km/METAR 8 Oktas, 9/14 EXACT) ⭐⭐
+
+  # Space Systems (BT-174,210,231,257)
+  BT-174: 우주시스템 하드웨어 n=6 완전 맵 (GNSS J₂=24 + JWST + ISS, 10/10 EXACT) ⭐⭐⭐
+  BT-210: GNSS J₂=24 4개국 위성배치 수렴 (10/10 EXACT) ⭐⭐
+  BT-231: 태양계 + 천체역학 n=6 궤도 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-257: GPS 궤도면 n=6 최적 배치 (7/7 EXACT) ⭐⭐⭐
+
+  # Manufacturing / Quality (BT-131,236)
+  BT-131: 제조 품질 n=6 표준 스택 (8/8 EXACT) ⭐⭐⭐
+  BT-236: 품질 + 운영관리 n=6 프로세스 아키텍처 (10/10 EXACT) ⭐⭐
+
+  # Cognitive / Social / Psychology (BT-184,223,255,258~269)
+  BT-184: 교육 + 인지과학 n=6 학습 스택 (10/10 EXACT) ⭐⭐⭐
+  BT-223: 심리학 + 인지과학 n=6 마인드 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-255: 격자 세포 육각형 = 완전수 공간 채움 (7/7 EXACT) ⭐⭐⭐
+  BT-258: 6단계 분리 = n 사회 위상 (10/10 EXACT) ⭐⭐⭐
+  BT-259: Dunbar σ²+n=150 인지 한계 (7/7 EXACT) ⭐⭐
+  BT-260: 셀룰러 오토마타 2^(σ-τ)=256 규칙 공간 (10/10 EXACT) ⭐⭐⭐
+  BT-261: 보편 측정 척도 n=6 — 200년 자연 평가 수렴 (10/10 EXACT) ⭐⭐
+  BT-263: 작업 기억 τ±μ=4±1 인지 채널 용량 — Miller/Cowan/Baddeley (10/10 EXACT) ⭐⭐⭐
+  BT-264: 도덕 기반 n=6 보편 윤리 — Haidt/Schwartz/Kohlberg (9/10 EXACT) ⭐⭐
+  BT-265: 일주기-주기-연주기 τ·(σ-sopfr)·σ 생물 리듬 스택 (9/9 EXACT) ⭐⭐⭐
+  BT-266: 컴파일러-피질 동형 τ=4 처리 단계 (10/10 EXACT) ⭐⭐⭐
+  BT-269: 인지-사회-시간 삼중 브릿지 — Dunbar×Circadian×Hierarchy n=6 통합 (8/8 EXACT) ⭐⭐⭐
+
+  # Calendar / Time / Geography (BT-138,154,182,191,233,256,268)
+  BT-138: 달력 + 시간 n=6 보편성 (10/10 EXACT) ⭐⭐⭐
+  BT-154: 지도 + 지리학 n=6 상수 (8/8 EXACT) ⭐⭐⭐
+  BT-182: 달력 + 시간관리 n=6 시간 스택 (10/10 EXACT) ⭐⭐⭐
+  BT-191: 지도학 + 측지학 n=6 좌표 보편성 (9/10 EXACT) ⭐⭐
+  BT-256: 60진법 60=σ·sopfr 보편 시간 단위 (10/10 EXACT) ⭐⭐⭐
+  BT-268: 원자시계 Cs-133 초미세 = 9,192,631,770 Hz (7/7 EXACT) ⭐⭐
+
+  # Thermodynamics (BT-149,193,199)
+  BT-149: 열역학 법칙 + 상수 n=6 (8/8 EXACT) ⭐⭐
+  BT-193: 고전 열역학 n=6 완전 스택 (10/10 EXACT) ⭐⭐⭐
+  BT-199: 유체역학 + 난류 n=6 완전 아키텍처 (10/10 EXACT) ⭐⭐⭐
+
+  # Display / Music / Audio / Optics (BT-135,145,157,189,190,217,222,226)
+  BT-135: 음악 스케일 n=6 보편성 (10/10 EXACT) ⭐⭐⭐
+  BT-145: 전자기 스펙트럼 대역 n=6 분할 (8/8 EXACT) ⭐⭐⭐
+  BT-157: 색채론 n=6 프레임워크 (8/8 EXACT) ⭐⭐
+  BT-189: 광학 + 포토닉스 n=6 스펙트럼 스택 (9/10 EXACT) ⭐⭐
+  BT-190: 음향악기 n=6 공명 아키텍처 (9/10 EXACT) ⭐⭐
+  BT-217: 색채과학 + 시각인지 n=6 색 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-222: 사진 + 이미징 센서 n=6 광학 캡처 (10/10 EXACT) ⭐⭐
+  BT-226: 타이포그래피 + 조판 n=6 인쇄 아키텍처 (10/10 EXACT) ⭐⭐
+
+  # Quantum Computing Hardware (BT-195)
+  BT-195: 양자 컴퓨팅 하드웨어 n=6 완전 아키텍처 (10/11 EXACT) ⭐⭐⭐
+
+  # Earth / Climate / Ocean (BT-156,203,213,218,343)
+  BT-156: 화산 + 지진 n=6 스케일 상수 (8/8 EXACT) ⭐⭐
+  BT-203: 지진학 + 지구물리 n=6 지구 동역학 (10/10 EXACT) ⭐⭐⭐
+  BT-213: 해양학 + 해양과학 n=6 수권 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-218: 기상학 + 기후과학 n=6 대기 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-343: 해양학 수권 완전 n=6 맵 (6 이온/5 대양/pH 8/Beaufort 12, 9/17 EXACT) ⭐⭐
+
+  # Ecology / Agriculture / Food (BT-150,192,198,225,341)
+  BT-150: 농업 + 식품 n=6 상수 (8/8 EXACT) ⭐⭐⭐
+  BT-192: 요리과학 + 식품화학 n=6 구조 스택 (8/10 EXACT) ⭐⭐
+  BT-198: 농학 + 식물학 n=6 성장 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-225: 생태학 + 생물다양성 n=6 생명 분류 (10/10 EXACT) ⭐⭐
+  BT-341: 식품과학 완전 n=6 영양-안전-화학 맵 (9/14 EXACT) ⭐⭐
+
+  # Telecommunications / Network / Linguistics (BT-181,197,340)
+  BT-181: 통신 n=6 스펙트럼 스택 (9/10 EXACT) ⭐⭐⭐
+  BT-197: 언어학 + 통신 시스템 n=6 정보 스택 (10/10 EXACT) ⭐⭐⭐
+  BT-340: 언어학 완전 n=6 아키텍처 (음운/문법/유형/통계 = div(6), 16/16 EXACT) ⭐⭐
+
+  # Control Theory / Automation (BT-187)
+  BT-187: 제어이론 + 자동화 n=6 피드백 스택 (9/10 EXACT) ⭐⭐
+
+  # Games / Sports (BT-144,148,152,158,200,202,212)
+  BT-144: 체스 + 게임이론 n=6 상수 (8/8 EXACT) ⭐⭐
+  BT-148: 올림픽 + 스포츠 n=6 구조 (10/10 EXACT) ⭐⭐
+  BT-152: 감각 + 인지 n=6 상수 (8/9 EXACT) ⭐⭐
+  BT-158: 무술 + 격투 n=6 상수 (7/8 EXACT) ⭐⭐
+  BT-200: 게임이론 + 사회선택 n=6 결정 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-202: 경쟁 스포츠 + 게임 n=6 보편 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-212: 고전 게임 + 조합전략 n=6 보드 아키텍처 (10/10 EXACT) ⭐⭐⭐
+
+  # Governance / Safety / Urban (BT-160,221,227,228,267)
+  BT-160: 안전공학 n=6 보편성 (20/20 EXACT) ⭐⭐
+  BT-221: 일주기 + 수면 생리학 n=6 시간생물학 (10/10 EXACT) ⭐⭐
+  BT-227: 글로벌 식별 코드 n=6 인코딩 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-228: 국제 거버넌스 n=6 제도 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-267: 육각형 도시계획 n=6 — Christaller/Losch/벌집 (8/8 EXACT) ⭐⭐
+
+  # Classical Mechanics / Accelerator (BT-201,238)
+  BT-201: 고전역학 n=6 위상공간 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-238: 입자 가속기 n=6 공학 아키텍처 (8/10 EXACT) ⭐⭐
+
+  # Economics / Finance (BT-147,183,338,339)
+  BT-147: 금융시장 n=6 상수 (8/8 EXACT) ⭐⭐
+  BT-183: 금융공학 n=6 리스크 아키텍처 (9/10 EXACT) ⭐⭐
+  BT-338: Financial temporal-governance n=6 map (fiscal σ=12/τ=4/J₂=24h, 10/10 EXACT) ⭐⭐
+  BT-339: Financial engineering parameter n=6 map (Black-Scholes/Basel/Porter, 10/10 EXACT) ⭐⭐
+
+  # Graph Theory (BT-151)
+  BT-151: 그래프 이론 n=6 구조 정리 (8/8 EXACT) ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙
