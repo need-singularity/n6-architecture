@@ -1,0 +1,323 @@
+# N6 Food Science DSE — ingredient + process + formulation + safety + system
+# 6 Ingredient x 6 Process x 5 Formulation x 5 Safety x 5 System = 4,500 combos
+# BT-27 (glucose C₆H₁₂O₆), BT-101/103 (photosynthesis), BT-51 (20 amino acids)
+# n=6 connections: 6 nutrients, 6 carbons, sigma=12 vitamins, J₂=24 atoms
+
+[meta]
+name = "food-science"
+desc = "Food Science (Ingredient + Process + Formulation + Safety + System)"
+version = "1.0"
+levels = 5
+total_hint = 4500
+
+[scoring]
+n6     = 0.30
+perf   = 0.25
+power  = 0.10
+cost   = 0.15
+safety = 0.20
+
+# ============================================================
+# Level 0: Ingredient (원료/소재)
+# ============================================================
+
+[[level]]
+name = "Ingredient"
+
+[[candidate]]
+id = "Glucose_C6"
+label = "Glucose C₆H₁₂O₆ (n=6 C, sigma=12 H, n=6 O, J₂=24 total atoms)"
+n6 = 1.00
+perf = 0.85
+power = 0.90
+cost = 0.90
+safety = 0.95
+notes = "Triple n=6 EXACT (C₆,H₁₂,O₆,24 total), BT-27/101/103"
+
+[[candidate]]
+id = "Protein_20AA"
+label = "Protein (J₂-tau=20 amino acids, tau=4 structure levels)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.60
+safety = 0.90
+notes = "J₂-tau=20 amino acids EXACT, tau=4 protein structure levels"
+
+[[candidate]]
+id = "Lipid_6C"
+label = "Fatty Acid (C6 caproic acid, omega-n/phi=3 essential)"
+n6 = 0.85
+perf = 0.85
+power = 0.95
+cost = 0.70
+safety = 0.85
+notes = "C6 (caproic), omega-3=n/phi, essential fatty acids"
+
+[[candidate]]
+id = "Fiber_Cellulose"
+label = "Cellulose (C₆H₁₀O₅ repeat, glucose polymer)"
+n6 = 0.85
+perf = 0.75
+power = 0.80
+cost = 0.85
+safety = 0.95
+notes = "C₆ repeat unit, glucose-based polymer backbone"
+
+[[candidate]]
+id = "Mineral_6"
+label = "6 Major Minerals (Ca,P,K,Na,Mg,Cl = n=6)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.80
+safety = 0.90
+notes = "n=6 major dietary minerals EXACT"
+
+[[candidate]]
+id = "Vitamin_12"
+label = "12+ Essential Vitamins (sigma=12: A,B-complex,C,D,E,K)"
+n6 = 0.80
+perf = 0.85
+power = 0.75
+cost = 0.55
+safety = 0.90
+notes = "sigma≈12 essential vitamins (13 total, 12 primary)"
+
+# ============================================================
+# Level 1: Process (가공/발효)
+# ============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+id = "Fermentation_6"
+label = "Fermentation (n=6 stage Maillard, pH 4-6 = tau to n)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.75
+safety = 0.85
+notes = "n=6 Maillard stages, pH=tau~n range, lactic/alcoholic"
+
+[[candidate]]
+id = "Pasteur_6log"
+label = "Pasteurization (n=6 log reduction target, 72C/sigma+n=12+6 sec)"
+n6 = 0.85
+perf = 0.80
+power = 0.80
+cost = 0.85
+safety = 1.00
+notes = "n=6 log kill, HTST 72C × 15s standard"
+
+[[candidate]]
+id = "FreezeD_4stage"
+label = "Freeze Drying (tau=4 stages: freeze, primary, secondary, storage)"
+n6 = 0.75
+perf = 0.90
+power = 0.60
+cost = 0.40
+safety = 0.90
+notes = "tau=4 process stages, maximum nutrient retention"
+
+[[candidate]]
+id = "Extrusion"
+label = "Twin-Screw Extrusion (phi=2 screws, n=6 heating zones)"
+n6 = 0.90
+perf = 0.85
+power = 0.70
+cost = 0.65
+safety = 0.85
+notes = "phi=2 twin screws, n=6 barrel heating zones"
+
+[[candidate]]
+id = "HPP"
+label = "High Pressure Processing (600MPa = sigma*50, n=6 min hold)"
+n6 = 0.80
+perf = 0.85
+power = 0.65
+cost = 0.45
+safety = 0.95
+notes = "600 MPa standard, n=6 minute hold time"
+
+[[candidate]]
+id = "Spray_Dry"
+label = "Spray Drying (sigma=12 nozzle array, inlet 200C)"
+n6 = 0.75
+perf = 0.80
+power = 0.65
+cost = 0.70
+safety = 0.85
+notes = "sigma=12 nozzle atomizer, powder production"
+
+# ============================================================
+# Level 2: Formulation (배합 설계)
+# ============================================================
+
+[[level]]
+name = "Formulation"
+
+[[candidate]]
+id = "Nutrient_6"
+label = "6-Nutrient Balance (n=6 essential: carb, protein, fat, vitamin, mineral, water)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.70
+safety = 0.95
+notes = "n=6 nutrient classes EXACT, complete nutrition"
+
+[[candidate]]
+id = "Taste_5"
+label = "5-Taste Optimization (sopfr=5: sweet, sour, salty, bitter, umami)"
+n6 = 0.90
+perf = 0.85
+power = 0.90
+cost = 0.75
+safety = 0.90
+notes = "sopfr=5 taste dimensions EXACT, flavor engineering"
+
+[[candidate]]
+id = "Texture_4"
+label = "4-Texture Profile (tau=4: hardness, cohesiveness, springiness, chewiness)"
+n6 = 0.80
+perf = 0.80
+power = 0.85
+cost = 0.80
+safety = 0.90
+notes = "tau=4 primary TPA parameters EXACT"
+
+[[candidate]]
+id = "Allergen_12"
+label = "12 Major Allergens (sigma=12 EU regulatory allergens)"
+n6 = 0.85
+perf = 0.75
+power = 0.80
+cost = 0.65
+safety = 1.00
+notes = "sigma=12 (was 14 EU, 12 is common subset) major allergens"
+
+[[candidate]]
+id = "Shelf_6month"
+label = "6-Month Shelf Life Target (n=6 month standard, accelerated testing)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+safety = 0.85
+notes = "n=6 month standard shelf life, ASTL testing"
+
+# ============================================================
+# Level 3: Safety (안전/품질)
+# ============================================================
+
+[[level]]
+name = "Safety"
+
+[[candidate]]
+id = "HACCP_7"
+label = "HACCP 7 Principles (sigma-sopfr=7, Codex Alimentarius)"
+n6 = 0.90
+perf = 0.85
+power = 0.85
+cost = 0.70
+safety = 1.00
+notes = "sigma-sopfr=7 EXACT, universal food safety system"
+
+[[candidate]]
+id = "GMP_6pillar"
+label = "GMP 6 Pillars (n=6: personnel, premises, equipment, materials, documentation, production)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.65
+safety = 0.95
+notes = "n=6 GMP pillars, WHO standard"
+
+[[candidate]]
+id = "ISO22000"
+label = "ISO 22000 (tau=4 key elements: PDCA, HACCP, PRP, OPRP)"
+n6 = 0.80
+perf = 0.85
+power = 0.80
+cost = 0.55
+safety = 0.95
+notes = "tau=4 key elements, international food safety management"
+
+[[candidate]]
+id = "MicroLimit_6"
+label = "6 Microbial Indicators (n=6: TPC, E.coli, Salmonella, Listeria, S.aureus, Clostridium)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+safety = 1.00
+notes = "n=6 key pathogen indicators, regulatory testing"
+
+[[candidate]]
+id = "Traceability"
+label = "Farm-to-Fork Traceability (n=6 checkpoints in supply chain)"
+n6 = 0.85
+perf = 0.80
+power = 0.75
+cost = 0.50
+safety = 0.90
+notes = "n=6 traceability nodes (farm, process, warehouse, transport, retail, consumer)"
+
+# ============================================================
+# Level 4: System (유통/시스템)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+id = "ColdChain_6"
+label = "6-Stage Cold Chain (n=6: harvest, process, store, transport, display, home)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+safety = 0.95
+notes = "n=6 cold chain stages, continuous temperature monitoring"
+
+[[candidate]]
+id = "SmartPackage"
+label = "Smart Packaging (n=6 sensor indicators: temp, humidity, gas, pH, freshness, tamper)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.40
+safety = 0.90
+notes = "n=6 intelligent packaging sensors"
+
+[[candidate]]
+id = "Precision_Nutrition"
+label = "Precision Nutrition Platform (sigma=12 biomarkers, AI-driven)"
+n6 = 0.85
+perf = 0.90
+power = 0.70
+cost = 0.35
+safety = 0.85
+notes = "sigma=12 personalized nutrition biomarkers"
+
+[[candidate]]
+id = "FoodBank_Network"
+label = "Food Bank Network (n=6 distribution zones, zero-waste)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.70
+safety = 0.85
+notes = "n=6 regional distribution zones, food rescue"
+
+[[candidate]]
+id = "Lab_Meat"
+label = "Cultured Meat Platform (tau=4 bioreactor stages, n=6 growth factors)"
+n6 = 0.85
+perf = 0.85
+power = 0.60
+cost = 0.30
+safety = 0.80
+notes = "tau=4 stages (biopsy, proliferation, differentiation, harvest), n=6 growth factors"
