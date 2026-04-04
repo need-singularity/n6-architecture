@@ -107,8 +107,10 @@ fn parse_toml(content: &str) -> Domain {
         // Section headers
         if line == "[[level]]" {
             // Flush pending candidate
-            if has_cand && !levels.is_empty() {
-                levels.last_mut().unwrap().candidates.push(cur_cand.clone());
+            if has_cand {
+                if let Some(last) = levels.last_mut() {
+                    last.candidates.push(cur_cand.clone());
+                }
                 has_cand = false;
             }
             if has_rule {
@@ -120,8 +122,10 @@ fn parse_toml(content: &str) -> Domain {
             continue;
         }
         if line == "[[candidate]]" {
-            if has_cand && !levels.is_empty() {
-                levels.last_mut().unwrap().candidates.push(cur_cand.clone());
+            if has_cand {
+                if let Some(last) = levels.last_mut() {
+                    last.candidates.push(cur_cand.clone());
+                }
             }
             cur_cand = Candidate {
                 id: String::new(), label: String::new(),
@@ -132,8 +136,10 @@ fn parse_toml(content: &str) -> Domain {
             continue;
         }
         if line == "[[rule]]" {
-            if has_cand && !levels.is_empty() {
-                levels.last_mut().unwrap().candidates.push(cur_cand.clone());
+            if has_cand {
+                if let Some(last) = levels.last_mut() {
+                    last.candidates.push(cur_cand.clone());
+                }
                 has_cand = false;
             }
             if has_rule {
@@ -206,8 +212,10 @@ fn parse_toml(content: &str) -> Domain {
     }
 
     // Flush remaining
-    if has_cand && !levels.is_empty() {
-        levels.last_mut().unwrap().candidates.push(cur_cand);
+    if has_cand {
+        if let Some(last) = levels.last_mut() {
+            last.candidates.push(cur_cand);
+        }
     }
     if has_rule {
         rules.push(cur_rule);
@@ -306,7 +314,7 @@ fn enumerate(domain: &Domain) -> Vec<Combo> {
         }
     }
 
-    results.sort_by(|a, b| b.pareto_score.partial_cmp(&a.pareto_score).unwrap());
+    results.sort_by(|a, b| b.pareto_score.partial_cmp(&a.pareto_score).unwrap_or(std::cmp::Ordering::Equal));
     results
 }
 
@@ -418,24 +426,28 @@ fn print_best_by_category(domain: &Domain, combos: &[Combo]) {
     println!("=== BEST BY CATEGORY ===\n");
 
     // Best n6
-    let best_n6 = combos.iter().max_by(|a, b|
-        a.n6_avg.partial_cmp(&b.n6_avg).unwrap()).unwrap();
-    println!("  Best n6:    {} ({:.1}%)", combo_path(domain, best_n6), best_n6.n6_avg * 100.0);
+    if let Some(best_n6) = combos.iter().max_by(|a, b|
+        a.n6_avg.partial_cmp(&b.n6_avg).unwrap_or(std::cmp::Ordering::Equal)) {
+        println!("  Best n6:    {} ({:.1}%)", combo_path(domain, best_n6), best_n6.n6_avg * 100.0);
+    }
 
     // Best perf
-    let best_perf = combos.iter().max_by(|a, b|
-        a.perf_avg.partial_cmp(&b.perf_avg).unwrap()).unwrap();
-    println!("  Best Perf:  {} (perf={:.3})", combo_path(domain, best_perf), best_perf.perf_avg);
+    if let Some(best_perf) = combos.iter().max_by(|a, b|
+        a.perf_avg.partial_cmp(&b.perf_avg).unwrap_or(std::cmp::Ordering::Equal)) {
+        println!("  Best Perf:  {} (perf={:.3})", combo_path(domain, best_perf), best_perf.perf_avg);
+    }
 
     // Best power
-    let best_pow = combos.iter().max_by(|a, b|
-        a.power_avg.partial_cmp(&b.power_avg).unwrap()).unwrap();
-    println!("  Best Power: {} (power={:.3})", combo_path(domain, best_pow), best_pow.power_avg);
+    if let Some(best_pow) = combos.iter().max_by(|a, b|
+        a.power_avg.partial_cmp(&b.power_avg).unwrap_or(std::cmp::Ordering::Equal)) {
+        println!("  Best Power: {} (power={:.3})", combo_path(domain, best_pow), best_pow.power_avg);
+    }
 
     // Best cost
-    let best_cost = combos.iter().max_by(|a, b|
-        a.cost_avg.partial_cmp(&b.cost_avg).unwrap()).unwrap();
-    println!("  Best Cost:  {} (cost={:.3})", combo_path(domain, best_cost), best_cost.cost_avg);
+    if let Some(best_cost) = combos.iter().max_by(|a, b|
+        a.cost_avg.partial_cmp(&b.cost_avg).unwrap_or(std::cmp::Ordering::Equal)) {
+        println!("  Best Cost:  {} (cost={:.3})", combo_path(domain, best_cost), best_cost.cost_avg);
+    }
 
     println!();
 }
@@ -472,7 +484,7 @@ fn print_stats(combos: &[Combo]) {
 
     // Percentiles
     let mut sorted_n6 = n6_vals.clone();
-    sorted_n6.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    sorted_n6.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     let p50 = sorted_n6[sorted_n6.len() / 2];
     let p75 = sorted_n6[sorted_n6.len() * 3 / 4];
     let p90 = sorted_n6[sorted_n6.len() * 9 / 10];
@@ -543,7 +555,7 @@ fn cross_dse(domains: &[Domain], top_k: usize) {
                     }
                 }
 
-                cross_results.sort_by(|a, b| b.6.partial_cmp(&a.6).unwrap());
+                cross_results.sort_by(|a, b| b.6.partial_cmp(&a.6).unwrap_or(std::cmp::Ordering::Equal));
 
                 let show = std::cmp::min(10, cross_results.len());
                 println!("  {:>4} | {:>6} | {:>6} | {:>5} | {:>5} | {:>5} | {:>5} | {:>6}",

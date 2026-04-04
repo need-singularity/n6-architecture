@@ -283,8 +283,20 @@ fn main() {
                     eprintln!("  Example: chip-power-calc custom 150 200");
                     std::process::exit(1);
                 }
-                let tdp: f64 = args[2].parse().expect("TDP must be a number");
-                let die: f64 = args[3].parse().expect("DIE_MM2 must be a number");
+                let tdp: f64 = match args[2].parse() {
+                    Ok(v) => v,
+                    Err(_) => {
+                        eprintln!("Error: TDP must be a number, got '{}'", args[2]);
+                        std::process::exit(1);
+                    }
+                };
+                let die: f64 = match args[3].parse() {
+                    Ok(v) => v,
+                    Err(_) => {
+                        eprintln!("Error: DIE_MM2 must be a number, got '{}'", args[3]);
+                        std::process::exit(1);
+                    }
+                };
                 simulate(&Chip::custom(tdp, die));
             }
             other => {
