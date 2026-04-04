@@ -179,5 +179,7 @@ fn make_result(cycle: usize, discoveries: usize) -> CycleResult {
         graph_nodes: cycle * 2,
         graph_edges: cycle,
         verification_score: 0.5,
+        lens_candidates_found: 0,
+        lenses_evolved: 0,
     }
 }

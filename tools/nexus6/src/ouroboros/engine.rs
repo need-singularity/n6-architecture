@@ -23,6 +23,8 @@ pub struct CycleResult {
     pub graph_nodes: usize,
     pub graph_edges: usize,
     pub verification_score: f64,
+    pub lens_candidates_found: usize,
+    pub lenses_evolved: usize,
 }
 
 /// Configuration for the evolution engine.
@@ -243,6 +245,8 @@ impl EvolutionEngine {
             graph_nodes: self.graph.nodes.len(),
             graph_edges: self.graph.edges.len(),
             verification_score: avg_score,
+            lens_candidates_found: 0,
+            lenses_evolved: 0,
         };
 
         self.history.push(result.clone());

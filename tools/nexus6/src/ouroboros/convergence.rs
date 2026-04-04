@@ -120,6 +120,8 @@ mod tests {
             graph_nodes: 0,
             graph_edges: 0,
             verification_score: 0.0,
+            lens_candidates_found: 0,
+            lenses_evolved: 0,
         }
     }
 
