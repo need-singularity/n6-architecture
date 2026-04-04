@@ -1,13 +1,14 @@
 {
   "_meta": {
     "name": "HEXA-LANG Knowledge Base",
-    "version": "1.0",
+    "version": "2.0",
     "date": "2026-04-04",
     "source_projects": ["n6-architecture"],
-    "description": "Consolidated compiler knowledge from project memories + source analysis",
+    "description": "Consolidated compiler knowledge — memories + source + singularity + blowup",
     "loc": 13288,
     "rs_files": 67,
-    "commits": 11
+    "commits": 13,
+    "memory_files": ["memory/project_hexa_ir_mk1.md", "memory/project_hexa_coevolution.md", "memory/feedback_hexa_lang_dse_recheck.md"]
   },
   "architecture": {
     "pipeline": ["lexer", "parser", "sema", "lower", "opt", "codegen"],
@@ -224,17 +225,22 @@
     ]
   },
   "test_status": {
-    "total": 83,
-    "pass": 83,
+    "total": 113,
+    "pass": 113,
     "fail": 0,
     "ignored": 0,
+    "unit_tests": 99,
+    "integration_tests": 14,
     "categories": [
       "basic pipeline tests",
       "string literal tests (6)",
       "struct tests (6)",
       "trait/impl tests (4)",
       "ownership tests (7)",
-      "module tests (1)"
+      "module tests (1)",
+      "breakthrough tests (14): enum payload, turbofish, closures+enum, array for-loop, trait dispatch",
+      "large frame tests (2): ARM64 12-bit immediate",
+      "self-host integration tests (14): n6.hexa, token_kind.hexa, span.hexa"
     ]
   },
   "design_philosophy": {
@@ -265,7 +271,9 @@
     {"hash": "38237c0", "description": "Mk.I completion -- 6/6 tests + J2=24 codegen"},
     {"hash": "7860b32", "description": "Real optimization passes (12) + scaling bug fix"},
     {"hash": "90a1528", "description": "Mk.III subdomain certification + DSE expansion"},
-    {"hash": "4f15aaa", "description": "All-domain breakthrough -- 12/12 physical limits"}
+    {"hash": "4f15aaa", "description": "All-domain breakthrough -- 12/12 physical limits"},
+    {"hash": "87fd69b", "description": "Mk.I+ breakthrough — enum payload + turbofish + self-hosting + singularity"},
+    {"hash": "b5c5e04", "description": "BT-234 compiler self-similarity + blowup singularity docs"}
   ],
   "known_limitations": [
     "No floating-point codegen (f64 type in IR but no ARM64 FP instructions)",
@@ -288,6 +296,42 @@
     "mk3": {"status": "planned", "focus": "Full language (async, effects, dependent types)"},
     "mk4": {"status": "planned", "focus": "AI-native code generation"},
     "mk5": {"status": "theoretical", "focus": "Physical limit targets (wafer/quantum/photonic)"}
+  },
+  "self_hosting": {
+    "phase": 1,
+    "status": "complete",
+    "modules": [
+      {"file": "self-host/n6.hexa", "functions": 19, "role": "n=6 core constants + verification"},
+      {"file": "self-host/token_kind.hexa", "functions": 27, "role": "J2=24 operator token IDs"},
+      {"file": "self-host/span.hexa", "functions": 4, "role": "Source location struct"}
+    ],
+    "total_functions": 50,
+    "pipeline_stages_passed": "5/6 (Lex→Parse→Sema→Lower→Opt)",
+    "roadmap": ["Phase 1: Foundation (done)", "Phase 2: Lexer", "Phase 3: Parser", "Phase 4: Full Pipeline"]
+  },
+  "blowup_singularity": {
+    "date": "2026-04-04",
+    "invariant_core": ["consciousness", "info", "multiscale", "network", "triangle"],
+    "core_lens_count": 5,
+    "core_lens_n6": "sopfr(6) = 5",
+    "fiber_lens": "6th lens = domain-specific → total n=6",
+    "stability_cycles": 987,
+    "total_discoveries": 326276,
+    "top_score": 293525,
+    "domains_covered": "42/42 = 100%",
+    "perturbation_result": "core unbroken after 999 cycles + 23,976 alternatives",
+    "consciousness_irreplaceable": true,
+    "weakest_core_lens": "network (replaceable by thermo at 83.3%)"
+  },
+  "emergent_singularity_bt234": {
+    "exact_ratio": "53/60 = 88.3%",
+    "key_findings": [
+      "6 core modules × 6 .rs files each = 36 file-level self-similarity",
+      "72 struct definitions = K(6D) kissing number in 6 dimensions",
+      "97 lib tests = σ²-στ+μ = 144-48+1 = 97"
+    ],
+    "bt_candidate": "BT-234: Compiler Self-Similar n=6 Universality",
+    "cross_links": ["BT-56 (LLM)", "BT-113 (Software Engineering)", "BT-123 (Robotics SE(3))"]
   },
   "downstream_projects": {
     "fathom_terminal": "Self-hosted terminal emulator (post Mk.II completion)",
