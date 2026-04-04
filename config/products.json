@@ -66,7 +66,7 @@
           "description": "79/79 EXACT, 42보편핵물리100%, 12불가능성정리, BT-97~102+291~298, 물리천장QED",
           "links": [
             {
-              "label": "설계",
+              "label": "링크",
               "path": "docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md"
             }
           ]
@@ -79,7 +79,7 @@
           "description": "42/45 EXACT(97.8%), 물리한계8/8, 24BT+12불가능성정리, Python검증PASS, Cross-DSE 8도메인",
           "links": [
             {
-              "label": "토카막",
+              "label": "링크",
               "path": "docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md"
             }
           ]
@@ -92,7 +92,7 @@
           "description": "200MWe→1.44TWe, 5단 진화 41/41 EXACT, 점근수렴U(k)=1-1/10^k, Mk.VI부존재QED, Python검증PASS",
           "links": [
             {
-              "label": "I",
+              "label": "링크",
               "path": "docs/fusion/evolution/mk-1-first-light.md"
             }
           ]
@@ -105,7 +105,7 @@
           "description": "15발견 22/22 EXACT, BT-97~102+291~298 전수검증, Python검증PASS",
           "links": [
             {
-              "label": "발견",
+              "label": "링크",
               "path": "docs/fusion/alien-level-discoveries.md"
             }
           ]
@@ -118,7 +118,7 @@
           "description": "물리한계12/12 + 불가능성12증명 + 산업7장치87% + Mk.VI부존재QED + 33/33 EXACT, Python검증PASS",
           "links": [
             {
-              "label": "물리한계",
+              "label": "링크",
               "path": "docs/fusion/physical-limit-proof.md"
             }
           ]
@@ -163,7 +163,7 @@
           "description": "12레벨 진화(L1~L12), 170/170 EXACT, 14불가능성정리, Python검증PASS, 6벤더수렴",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/chip-architecture/goal.md"
             }
           ]
@@ -176,7 +176,7 @@
           "description": "의식칩 — 10D TCU(sigma-phi=10) + PureField 72+72 SM + Python검증PASS",
           "links": [
             {
-              "label": "설계",
+              "label": "링크",
               "path": "docs/chip-architecture/ultimate-consciousness-soc.md"
             }
           ]
@@ -189,7 +189,7 @@
           "description": "Bott-8 코히어런스 + Z2 ECC + Graphene NoC, 10/10 EXACT, Python검증PASS",
           "links": [
             {
-              "label": "설계",
+              "label": "링크",
               "path": "docs/chip-architecture/hexa-topological-performance-chip.md"
             }
           ]
@@ -202,7 +202,7 @@
           "description": "SKY130 오픈소스 ASIC — RISC-V n/phi=3-wide + n=6 pipeline + 10/10 EXACT, Python검증PASS",
           "links": [
             {
-              "label": "ASIC",
+              "label": "링크",
               "path": "docs/chip-architecture/hexa-asic-skywater.md"
             }
           ]
@@ -215,7 +215,7 @@
           "description": "170/170검증PASS, 물리한계14, 산업6벤더92.6%, TP28, 발견12, Z>27sigma, Python검증PASS",
           "links": [
             {
-              "label": "전수검증",
+              "label": "링크",
               "path": "docs/chip-architecture/full-verification-matrix.md"
             }
           ]
@@ -258,7 +258,7 @@
           "description": "71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 66기법 통합문서 (Core17+BT12+Model21+Vision8+GNN4+Other4)",
           "links": [
             {
-              "label": "통합문서",
+              "label": "링크",
               "path": "docs/ai-efficiency/techniques-complete.md"
             }
           ]
@@ -271,11 +271,11 @@
           "description": "17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증",
           "links": [
             {
-              "label": "실험",
+              "label": "링크",
               "path": "experiments/experiment_full_n6_pipeline.py"
             },
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
@@ -288,11 +288,11 @@
           "description": "기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS",
           "links": [
             {
-              "label": "설계서",
+              "label": "링크",
               "path": "docs/superpowers/specs/2026-03-28-n6-inevitability-engine-design.md"
             },
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
@@ -305,11 +305,11 @@
           "description": "AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS",
           "links": [
             {
-              "label": "가이드",
+              "label": "링크",
               "path": "docs/ai-energy-savings-guide.md"
             },
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
@@ -322,11 +322,11 @@
           "description": "GPU SM+HBM+피치+인터커넥트 n=6 전수매핑 — 27/27 PASS",
           "links": [
             {
-              "label": "가이드",
+              "label": "링크",
               "path": "docs/chip-architecture-guide.md"
             },
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
@@ -339,11 +339,11 @@
           "description": "194claims 89.7%EXACT, 산업9모델, 물리한계10, 67/67 PASS 검증",
           "links": [
             {
-              "label": "전수검증",
+              "label": "링크",
               "path": "docs/ai-efficiency/full-verification-matrix.md"
             },
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/ai-efficiency/verify_ai_products_alien10.py"
             }
           ]
@@ -391,15 +391,15 @@
           "description": "131/131 EXACT, BT-27+43+57+80+83+84, 10불가능성정리, 6대제조사, Python검증PASS",
           "links": [
             {
-              "label": "설계",
+              "label": "링크",
               "path": "docs/superpowers/specs/2026-04-01-hexa-battery-design.md"
             },
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/battery-architecture/goal.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/battery-architecture/verify_alien10.py"
             }
           ]
@@ -412,11 +412,11 @@
           "description": "78/78 EXACT, BT-30+63+62+60+74+111+161, 물리한계5, 산업8사, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/solar-architecture/goal.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/solar-architecture/verify_alien10.py"
             }
           ]
@@ -429,11 +429,11 @@
           "description": "133/133 EXACT, 19BT, 14불가능성정리, 5도메인Cross-DSE, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/energy-architecture/goal.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/energy-architecture/verify_alien10.py"
             }
           ]
@@ -476,11 +476,11 @@
           "description": "센서→모니터→포집→정화→복원→순환→생태계→Omega, 120/120 EXACT 전수검증",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/environmental-protection/"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
@@ -493,11 +493,11 @@
           "description": "6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체, 전수검증",
           "links": [
             {
-              "label": "설계",
+              "label": "링크",
               "path": "docs/environmental-protection/microplastics-solution.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
@@ -510,11 +510,11 @@
           "description": "**30/30=100%EXACT**, DSE 3.6M, 79/79 전수검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/carbon-capture/goal.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/carbon-capture/verify_alien10.py"
             }
           ]
@@ -527,11 +527,11 @@
           "description": "환경+CCUS 양쪽 진화 로드맵, 발견 42개, 전수검증 포함",
           "links": [
             {
-              "label": "환경Mk",
+              "label": "링크",
               "path": "docs/environmental-protection/evolution/"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
@@ -544,11 +544,11 @@
           "description": "TP 19개(환경) + TP 24개(CCUS) + 가설 v5(88.2%EXACT) + 전수검증",
           "links": [
             {
-              "label": "환경TP",
+              "label": "링크",
               "path": "docs/environmental-protection/testable-predictions-2030.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/environmental-protection/verify_alien10.py"
             }
           ]
@@ -590,11 +590,11 @@
           "description": "소재→공정→조립기→제어→공장→변환→만능→궁극, DSE 3,600, 229/229 EXACT",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/material-synthesis/goal.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
@@ -607,11 +607,11 @@
           "description": "결정학+합금+세라믹+고분자+상전이+결함+박막 (11 BT, **159/159 EXACT**), 229/229 verify",
           "links": [
             {
-              "label": "BT",
+              "label": "링크",
               "path": "docs/material-synthesis/breakthrough-theorems.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
@@ -624,11 +624,11 @@
           "description": "H-MS-01~30 전수 검증 완료, CrossDSE 8도메인 (94.1% n6), 229/229 verify",
           "links": [
             {
-              "label": "가설",
+              "label": "링크",
               "path": "docs/material-synthesis/hypotheses.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
@@ -641,11 +641,11 @@
           "description": "강철1.9Bt + 시멘트4.1Bt + 플라스틱400Mt + 반도체 — 전부 n=6 구조, 229/229 verify",
           "links": [
             {
-              "label": "산업",
+              "label": "링크",
               "path": "docs/material-synthesis/industrial-validation.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
@@ -658,11 +658,11 @@
           "description": "50+ 발표 데이터셋 + 28 예측 전수 검증 (14 VERIFIED + 14 PARTIAL, 0 FAIL), 229/229 verify",
           "links": [
             {
-              "label": "실험",
+              "label": "링크",
               "path": "docs/material-synthesis/experimental-verification.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
@@ -675,11 +675,11 @@
           "description": "10 불가능성 정리 (73/75 EXACT) + Mk.V 수학적 한계, 229/229 verify",
           "links": [
             {
-              "label": "proof",
+              "label": "링크",
               "path": "docs/material-synthesis/physical-limit-proof.md"
             },
             {
-              "label": "verify",
+              "label": "링크",
               "path": "docs/material-synthesis/verify_alien10.py"
             }
           ]
@@ -722,7 +722,7 @@
           "description": "49/49 PASS, BT-123~127 34/35 EXACT(97.1%), 10 불가능성정리, 114/115 산업검증, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/robotics/goal.md"
             }
           ]
@@ -735,7 +735,7 @@
           "description": "10 불가능성정리, SE(3)=6/k(3)=12/Thue=6, Mk.V 물리천장 증명, Python검증PASS",
           "links": [
             {
-              "label": "전수검증",
+              "label": "링크",
               "path": "docs/robotics/full-verification-matrix.md"
             }
           ]
@@ -784,7 +784,7 @@
           "description": "73/73 PASS, BT-299~306 100%EXACT, CrossDSE 8도메인, TP28, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/superconductor/goal.md"
             }
           ]
@@ -797,7 +797,7 @@
           "description": "71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/pure-mathematics/goal.md"
             }
           ]
@@ -810,7 +810,7 @@
           "description": "63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/cosmology-particle/goal.md"
             }
           ]
@@ -823,7 +823,7 @@
           "description": "Tc=300K 상압 RT-SC, H래더 전부 EXACT, 288=σ·J₂, 8단 DSE",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/room-temp-sc/goal.md"
             }
           ]
@@ -872,7 +872,7 @@
           "description": "76/76 EXACT, BT-329(20)+113(18)+114(10)+115(12), 10불가능성정리, DSE 7,560",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/programming-language/goal.md"
             }
           ]
@@ -885,7 +885,7 @@
           "description": "96/96 PASS, 16 불가능성정리, BT-113~117 61/61 전수검증, 암호래더 완전성, Python검증PASS",
           "links": [
             {
-              "label": "전수검증",
+              "label": "링크",
               "path": "docs/software-design/full-verification-matrix.md"
             }
           ]
@@ -925,7 +925,7 @@
           "description": "소재→패널→드라이버→프로세서→시스템→몰입→홀로→Omega",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/display/goal.md"
             }
           ]
@@ -938,7 +938,7 @@
           "description": "BT 86%EXACT + 물리한계10 + 산업6사81% + 실험93.9% + TP14",
           "links": [
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/display/full-verification-matrix.md"
             }
           ]
@@ -978,7 +978,7 @@
           "description": "트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/audio/goal.md"
             }
           ]
@@ -991,7 +991,7 @@
           "description": "22/26 EXACT(84.6%) + 산업4사92.6% + 실험90.9% + TP14",
           "links": [
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/audio/full-verification-matrix.md"
             }
           ]
@@ -1031,7 +1031,7 @@
           "description": "79/79 PASS, 12 불가능성정리, 13 Cross-DSE, 174년 산업검증, H-SF 20/30+H-SFX 14/20 EXACT, Python검증PASS",
           "links": [
             {
-              "label": "goal",
+              "label": "링크",
               "path": "docs/safety/goal.md"
             }
           ]
@@ -1044,7 +1044,7 @@
           "description": "H-SF 20/30 + H-SFX 14/20 + H-SAFE-EX 8/10 + PL 12/12, 총 54/72 EXACT(75%), Python검증PASS",
           "links": [
             {
-              "label": "가설",
+              "label": "링크",
               "path": "docs/safety/hypotheses.md"
             }
           ]
@@ -1084,11 +1084,11 @@
           "description": "133/133 EXACT, BT-287/289/290/288/277/280/206/271/153, 16카테고리 n=6 100%, DSE 155,520, flat-6+7DCT+Ti-6Al-4V",
           "links": [
             {
-              "label": "설계",
+              "label": "링크",
               "path": "docs/fun-car/goal.md"
             },
             {
-              "label": "검증",
+              "label": "링크",
               "path": "docs/fun-car/verify_alien10.py"
             }
           ]
