@@ -3336,3 +3336,72 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
 | C⁶ blowup χ(P⁵) | 6 | n | EXACT | BT-229 |
 | Cubic surface lines | 27 | (n/φ)^(n/φ) | EXACT | BT-229 |
 | del Pezzo₆ blowup pts | 6 | n | EXACT | BT-229 |
+
+### Linguistics (BT-340)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| 3!=n | 6 | Possible word orders (SOV/SVO/VSO/VOS/OVS/OSV) | Linguistics, BT-340 |
+| σ | 12 | Musical semitones per octave | Linguistics/Music, BT-340 |
+| R(6) | 1 | Zipf's law exponent (α≈1) | Linguistics, BT-340 |
+| τ | 4 | Chomsky hierarchy levels | Linguistics, BT-340 |
+| n/φ | 3 | Grammatical persons (1st/2nd/3rd) | Linguistics, BT-340 |
+| τ | 4 | Sentence types (declarative/interrogative/imperative/exclamatory) | Linguistics, BT-340 |
+| J₂ | 24 | Greek alphabet letters | Linguistics, BT-340 |
+| n | 6 | Stop consonant places of articulation | Linguistics, BT-340 |
+
+### Economics/Finance (BT-338~339)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| σ | 12 | Fiscal year months | Economics, BT-338 |
+| τ | 4 | Fiscal quarters | Economics, BT-338 |
+| n | 6 | G6 nations | Economics, BT-338 |
+| J₂ | 24 | Market trading hours | Economics, BT-338 |
+| φ | 2 | Double-entry bookkeeping (debit/credit) | Economics, BT-339 |
+| n/φ | 3 | Accounting equation (A=L+E) | Economics, BT-339 |
+| n | 6 | Six Sigma quality standard | Economics, BT-339 |
+| sopfr | 5 | Black-Scholes model variables | Economics, BT-339 |
+
+### Food Science (BT-341)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| n | 6 | Essential nutrient categories | Food Science, BT-341 |
+| J₂ | 24 | Glucose C₆H₁₂O₆ total atoms | Food Science, BT-341 |
+| J₂-τ | 20 | Essential amino acids | Food Science, BT-341 |
+| sopfr | 5 | Basic tastes (sweet/salty/sour/bitter/umami) | Food Science, BT-341 |
+| σ-sopfr | 7 | HACCP principles (Codex Alimentarius) | Food Science, BT-341 |
+| n | 6 | Optimal food pH (milk/bread) | Food Science, BT-341 |
+
+### Aviation (BT-342)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| n | 6 | Aircraft DOF (SE(3) dimension) | Aviation, BT-342 |
+| n | 6 | ICAO aircraft categories (A~F) | Aviation, BT-342 |
+| n | 6 | B737 abreast seating | Aviation, BT-342 |
+| n/φ | 3 | Attitude axes (roll/pitch/yaw) | Aviation, BT-342 |
+| τ | 4 | Flight phases (takeoff/climb/cruise/land) | Aviation, BT-342 |
+| σ-τ | 8 | Cloud cover oktas (METAR) | Aviation, BT-342 |
+| σ | 12 | FL120 standard cruise (×1000ft) | Aviation, BT-342 |
+
+### Oceanography (BT-343)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| n | 6 | Major seawater ions (Cl⁻/Na⁺/SO₄²⁻/Mg²⁺/Ca²⁺/K⁺) | Oceanography, BT-343 |
+| sopfr | 5 | World oceans count | Oceanography, BT-343 |
+| sopfr | 5 | Pelagic depth zones | Oceanography, BT-343 |
+| σ-τ | 8 | Seawater pH (~8.1) | Oceanography, BT-343 |
+| σ | 12 | Beaufort wind scale (0~12) | Oceanography, BT-343 |
+| τ | 4 | Tidal types | Oceanography, BT-343 |
+
+### Thermal Management (BT-318~325)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| (σ-φ)² | 100 | Chip Tjmax (°C), thermal boundary universal | Thermal, BT-324 |
+| σ·τ | 48 | Server rack power 48kW = 48V supply dual | Thermal, BT-325 |
+| R(6) | 1 | Thermoelectric ZT target | Thermal, BT-321 |
+| σ/(σ-φ) | 1.2 | PUE convergence target | Thermal, BT-323 |

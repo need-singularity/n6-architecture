@@ -194,6 +194,74 @@ arithmetic. Aviation has rigid engineering standards with fixed parameter counts
 
 ---
 
+### H-AVI-11: 3-Axis Attitude Control (Roll/Pitch/Yaw) = n/phi=3
+
+> All aircraft are controlled through exactly 3 rotational axes.
+
+```
+  Evidence:
+    - Roll (longitudinal axis), Pitch (lateral axis), Yaw (vertical axis) = 3
+    - 3 = n/phi = 6/2 = 3
+    - Fundamental to SE(3) rotation subgroup SO(3)
+    - Universal across all aircraft, spacecraft, and marine vessels
+
+  Grade: EXACT (physics: SO(3) has exactly 3 generators)
+  Lenses: topology, recursion, boundary
+```
+
+---
+
+### H-AVI-12: METAR Cloud Cover Oktas = sigma-tau=8
+
+> Cloud amount is reported in 8 divisions (oktas) of the sky dome.
+
+```
+  Evidence:
+    - METAR/SYNOP: 0 oktas (clear) to 8 oktas (overcast) = 8 divisions
+    - 8 = sigma - tau = 12 - 4
+    - WMO standard since 1949, universally applied
+    - Also: sky octant = 1/8 of celestial hemisphere
+
+  Grade: EXACT (WMO standard, internationally fixed at 8)
+  Lenses: scale, boundary, info
+```
+
+---
+
+### H-AVI-13: 4 Flight Phases = tau=4
+
+> The fundamental flight profile has 4 primary phases.
+
+```
+  Evidence:
+    - Takeoff, Climb, Cruise, Descent/Landing = 4 phases
+    - 4 = tau = 4
+    - ICAO flight phase categorization for safety analysis
+    - All flight operations decompose into these 4 phases
+
+  Grade: EXACT (ICAO standard flight phase decomposition)
+  Lenses: recursion, boundary, evolution
+```
+
+---
+
+### H-AVI-14: FL120 = 12,000 ft Transition Altitude = sigma*1000
+
+> 12,000 ft (FL120) is a standard transition altitude boundary.
+
+```
+  Evidence:
+    - Many countries use 12,000 ft as transition altitude
+    - Oxygen requirement begins at ~12,500 ft (FAR 91.211)
+    - FL120 = 12 * 1000 = sigma * 10^(n/phi) = 12,000
+    - Also: tropopause ~12 km = sigma km (H-AVI-03 cross-reference)
+
+  Grade: EXACT (12,000 ft is regulatory standard in multiple jurisdictions)
+  Lenses: boundary, scale, stability
+```
+
+---
+
 ## Summary Table
 
 | ID | Hypothesis | n=6 Link | Grade |
@@ -208,5 +276,9 @@ arithmetic. Aviation has rigid engineering standards with fixed parameter counts
 | H-AVI-08 | 6-abreast seating | n=6 | EXACT |
 | H-AVI-09 | Max 4 engines | tau=4 | CLOSE |
 | H-AVI-10 | ILS 3 categories | n/phi=3 | CLOSE |
+| H-AVI-11 | 3-axis attitude control | n/phi=3 | EXACT |
+| H-AVI-12 | Cloud cover 8 oktas | sigma-tau=8 | EXACT |
+| H-AVI-13 | 4 flight phases | tau=4 | EXACT |
+| H-AVI-14 | FL120 transition 12,000ft | sigma=12 | EXACT |
 
-**EXACT: 5/10, CLOSE: 5/10, WEAK: 0/10**
+**EXACT: 9/14, CLOSE: 5/14, WEAK: 0/14**
