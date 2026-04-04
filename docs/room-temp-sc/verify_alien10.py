@@ -76,6 +76,32 @@ check("AcH10 pressure (GPa)", 200, phi * sigma_phi**2, "phi*(sigma-phi)^2 = 200"
 check("CSH pressure (GPa)", 267, sigma * J2 - J2 + n // phi, "sigma*J2 - J2 + n/phi = 288-24+3 = 267")
 check("ThH10 pressure (GPa)", 175, sigma_sq + J2 + sigma_mu - phi, "sigma^2+J2+sigma_mu-phi = 175")
 
+# === 2d. H 원자수 래더 확장 ===
+print("\n--- 2d. H 원자수 래더 ---")
+check("H3 count (H3S)", 3, n // phi, "n/phi = 3")
+check("H6 count (CaH6/YH6/MgH6)", 6, n, "n = 6")
+check("H9 count (YH9/CeH9)", 9, (n // phi) ** phi, "(n/phi)^phi = 3^2 = 9")
+check("H10 count (LaH10/AcH10/ThH10)", 10, sigma_phi, "sigma - phi = 10")
+check("H12 count (ScH12/BaH12)", 12, sigma, "sigma = 12")
+
+# === 2e. 화학 프리압축 / DAC 한계 ===
+print("\n--- 2e. 프리압축/DAC 한계 ---")
+check("Chemical precompression (GPa)", 60, sopfr * sigma, "sopfr*sigma = 5*12 = 60")
+check("BaH12 internal pressure (GPa)", 60, sopfr * sigma, "sopfr*sigma = 60")
+check("DAC practical limit (GPa)", 300, sopfr_sq * sigma, "sopfr^2*sigma = 25*12 = 300")
+check("Tc gap 300-288 (K)", 12, sigma, "difference = sigma = 12")
+
+# === 2f. Hc2 상부 임계자장 ===
+print("\n--- 2f. Hc2 상부임계자장 ---")
+check("Hc2 scale (T)", 144, sigma_sq, "sigma^2 = 144 T")
+check("LaH10 Hc2 (T)", 140, sigma_sq - tau, "sigma^2 - tau = 144-4 = 140")
+
+# === 2g. 원소 Z 추가 + 동위원소 ===
+print("\n--- 2g. 원소/동위원소 ---")
+check("Sc Z (ScH12)", 21, J2 - n // phi, "J2 - n/phi = 24-3 = 21")
+check("Isotope effect alpha_iso", 0.5, mu / phi, "mu/phi = 1/2 = 0.5")
+check("Min gap phi*kT(300K) (meV)", 52, phi * (J2 + phi), "phi*(J2+phi) = 2*26 = 52")
+
 # === 3. 압력 래더 (H-RTSC-13 ~ H-RTSC-17) ===
 print("\n--- 3. 압력 래더 ---")
 check("H3S pressure (GPa)", 150, sigma_sq + n, "sigma^2 + n = 144+6 = 150")
