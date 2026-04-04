@@ -136,7 +136,7 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **17 Techniques** | 71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 280검증 100%PASS (23기법+블로업+창발+특이점+UFO10 10대기준) | [전체](techniques/) · [Python검증](docs/ai-efficiency/verify_all_techniques_n6.py) |
+| 10 | ✅ | v3 | **66 Techniques** | 71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 280검증 100%PASS + 43신규기법 (LLM/MoE/Vision/Audio/Graph/PostTransformer) | [전체](techniques/) · [Python검증](docs/ai-efficiency/verify_all_techniques_n6.py) |
 | 5 | | v1 | **Full N6 Pipeline** | 17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성, 8 하이퍼파라미터 제거 | [실험](experiments/experiment_full_n6_pipeline.py) |
 | 5 | | v1 | **N6 Inevitability Engine** | 기법 11~16 통합 설계 | [설계서](docs/superpowers/specs/2026-03-28-n6-inevitability-engine-design.md) |
 | 6 | | v1 | **AI Energy Savings Guide** | 실무 가이드 — 기법, 하이퍼파라미터, 벤치마크 | [가이드](docs/ai-energy-savings-guide.md) |
@@ -144,27 +144,76 @@ python3 experiments/verify_bt66_76.py     # 91/91 verification
 | — | ✅ | v1 | **천장확인** | 194claims 89.7%EXACT, 산업9모델, 실험96.2%, 물리한계10, TP28, 발견12 | [전수검증](docs/ai-efficiency/full-verification-matrix.md) · [물리한계](docs/ai-efficiency/physical-limit-proof.md) · [산업](docs/ai-efficiency/industrial-validation.md) · [실험](docs/ai-efficiency/experimental-verification.md) · [TP](docs/ai-efficiency/testable-predictions.md) · [발견](docs/ai-efficiency/alien-level-discoveries.md) · [Mk.V](docs/ai-efficiency/evolution/mk-5-limit.md) · [CrossDSE](docs/ai-efficiency/cross-dse-analysis.md) |
 
 <details>
-<summary>17 Techniques 목록</summary>
+<summary>66 Techniques 전체 목록</summary>
 
-| # | Technique | Effect | File |
-|---|-----------|--------|------|
-| 1 | Cyclotomic Activation | 71% FLOPs reduction | `techniques/phi6simple.py` |
-| 2 | HCN Dimensions | 10-20% param reduction | `techniques/hcn_dimensions.py` |
-| 3 | Phi Bottleneck | 67% param reduction | `techniques/phi_bottleneck.py` |
-| 4 | Phi MoE | 65% active params | `techniques/phi_moe.py` |
-| 5 | Entropy Early Stop | 33% training time saved | `techniques/entropy_early_stop.py` |
-| 6 | R-filter Phase | Phase detection | `techniques/rfilter_phase.py` |
-| 7 | Takens Dim6 | Loss curve diagnostic | `techniques/takens_dim6.py` |
-| 8 | FFT Attention | 3x faster, +0.55% acc | `techniques/fft_mix_attention.py` |
-| 9 | ZetaLn2 Activation | 2.6x better than GELU | `techniques/zetaln2_activation.py` |
-| 10 | Egyptian MoE | 1/2+1/3+1/6 routing | `techniques/egyptian_moe.py` |
-| 11 | Dedekind Head | 25% attention reduction | `techniques/dedekind_head.py` |
-| 12 | Jordan-Leech MoE | J2=24 expert capacity | `techniques/jordan_leech_moe.py` |
-| 13 | Mobius Sparse | 97% loss reduction | `techniques/mobius_sparse.py` |
-| 14 | Carmichael LR | 11% loss reduction | `techniques/carmichael_lr.py` |
-| 15 | Boltzmann Gate | 63% sparsity | `techniques/boltzmann_gate.py` |
-| 16 | Mertens Dropout | p=0.288, zero tuning | `techniques/mertens_dropout.py` |
-| 17 | Egyptian Attention | 40% FLOPs saved | `techniques/egyptian_attention.py` |
+| # | Category | Technique | Key | File |
+|---|----------|-----------|-----|------|
+| 1 | Activation | Cyclotomic Phi6 | 71% FLOPs↓ | `phi6simple.py` |
+| 2 | Dimension | HCN Tensor Alignment | 10-20% param↓ | `hcn_dimensions.py` |
+| 3 | FFN | Phi Bottleneck 4/3x | 67% param↓ | `phi_bottleneck.py` |
+| 4 | MoE | Phi MoE J2=24 | 65% active | `phi_moe.py` |
+| 5 | Training | Entropy Early Stop | 33% time↓ | `entropy_early_stop.py` |
+| 6 | Diagnostic | R-filter Phase | Phase detection | `rfilter_phase.py` |
+| 7 | Diagnostic | Takens dim=6 | Loss embedding | `takens_dim6.py` |
+| 8 | Attention | FFT Mix Attention | 3x faster | `fft_mix_attention.py` |
+| 9 | Activation | ZetaLn2 | 2.6x vs GELU | `zetaln2_activation.py` |
+| 10 | MoE | Egyptian MoE | 1/2+1/3+1/6 | `egyptian_moe.py` |
+| 11 | Pruning | Dedekind Head | psi=sigma=12 | `dedekind_head.py` |
+| 12 | MoE | Jordan-Leech | J2=24 experts | `jordan_leech_moe.py` |
+| 13 | Sparse | Mobius Sparse | mu=1 squarefree | `mobius_sparse.py` |
+| 14 | Schedule | Carmichael LR | lambda=2 cycle | `carmichael_lr.py` |
+| 15 | Sparsity | Boltzmann Gate | 63% sparse | `boltzmann_gate.py` |
+| 16 | Regularize | Mertens Dropout | p=ln(4/3) | `mertens_dropout.py` |
+| 17 | Attention | Egyptian Attention | 40% FLOPs↓ | `egyptian_attention.py` |
+| 18 | Normalize | Radical Norm | rad(6)=6 groups | `radical_norm.py` |
+| 19 | MoE | Partition Routing | p(6)=11 templates | `partition_routing.py` |
+| 20 | Attention | Fibonacci Stride | F(6)=8, O(n log n) | `fibonacci_stride.py` |
+| 21 | Attention | Egyptian Linear | O(n) 3-band | `egyptian_linear_attention.py` |
+| 22 | Training | Predictive EarlyStop | 3 predictors | `predictive_early_stop.py` |
+| 23 | Attention | Constant-Time Stride | O(1) per query | `constant_time_stride.py` |
+| 24 | Optimizer | AdamW Quintuplet | BT-54, 5-tuple | `adamw_quintuplet.py` |
+| 25 | Scaling | Chinchilla | J2-tau=20 ratio | `chinchilla_scaling.py` |
+| 26 | Schedule | LR Schedule n=6 | BT-164, 3e-4 | `lr_schedule_n6.py` |
+| 27 | Architecture | Complete LLM n=6 | BT-56, 15 params | `complete_llm_n6.py` |
+| 28 | Inference | Inference Scaling | BT-42, top-p=0.95 | `inference_scaling.py` |
+| 29 | Tokenizer | BPE Vocab 32K | BT-73, 3 vocabs | `bpe_vocab_32k.py` |
+| 30 | Context | Context Window Ladder | BT-44, 10→13 | `context_window_ladder.py` |
+| 31 | Vision | ViT Patch n=6 | BT-66, patch=16 | `vit_patch_n6.py` |
+| 32 | Vision | MAE 75% Masking | mask=3/4 | `mae_masking.py` |
+| 33 | Audio | Whisper Ladder | 4→6→12→24→32 | `whisper_ladder.py` |
+| 34 | Diffusion | SD3 MM-DiT | J2=24 blocks | `sd3_mmdit.py` |
+| 35 | Diffusion | Rectified Flow | 50 steps | `rectified_flow.py` |
+| 36 | Graph | GAT Heads | sigma-tau=8 | `gat_heads.py` |
+| 37 | Graph | GCN Depth | phi=2 optimal | `gcn_depth.py` |
+| 38 | Graph | GraphSAGE Sampling | [25,10] | `graphsage_sampling.py` |
+| 39 | Graph | GIN Isomorphism | dim=64, L=5 | `gin_isomorphism.py` |
+| 40 | Detection | FPN Pyramid | sopfr=5 levels | `fpn_pyramid.py` |
+| 41 | Detection | DETR Queries | 100=(σ-φ)^φ | `detr_queries.py` |
+| 42 | Detection | YOLO NMS | IoU=1/phi=0.5 | `yolo_nms.py` |
+| 43 | Contrastive | SimCLR Temperature | 0.1=1/(σ-φ) | `simclr_temperature.py` |
+| 44 | Contrastive | MoCo Queue | 2^16=2^(φ^τ) | `moco_queue.py` |
+| 45 | Alignment | DPO Beta | beta=0.1 | `dpo_beta.py` |
+| 46 | Alignment | Constitutional AI | n/phi=3 rounds | `constitutional_ai.py` |
+| 47 | MoE | DeepSeek MoE | 8/256=1/2^sopfr | `deepseek_moe.py` |
+| 48 | MoE | Mixtral 8x22B | (σ-τ)×(J2-φ) | `mixtral_moe.py` |
+| 49 | MoE | GShard/Switch | 2^(σ-μ)=2048 | `gshard_switch.py` |
+| 50 | MoE | Activation Fraction | BT-67, 1/2^k | `moe_activation_fraction.py` |
+| 51 | KV Cache | DeepSeek MLA | 2^9 latent | `deepseek_mla_compression.py` |
+| 52 | KV Cache | GQA Grouping | KV=8 heads | `gqa_grouping.py` |
+| 53 | Attention | ALiBi Biases | exp=σ-τ=8 | `alibi_attention.py` |
+| 54 | Inference | Speculative Decoding | k=tau=4 | `speculative_decoding.py` |
+| 55 | Inference | Medusa Heads | {2,3,4,5} | `medusa_heads.py` |
+| 56 | Inference | LayerSkip | exit/tau=4 | `layer_skip.py` |
+| 57 | Inference | Lookahead Decoding | W=n=6 | `lookahead_decoding.py` |
+| 58 | Inference | StreamingLLM | sink=tau=4 | `streaming_llm.py` |
+| 59 | Routing | Mixture of Depths | C=1/phi=0.5 | `mixture_of_depths.py` |
+| 60 | Context | Ring Attention | N={8,32,256} | `ring_attention.py` |
+| 61 | Context | YaRN RoPE Scaling | 10^k scale | `yarn_rope_scaling.py` |
+| 62 | Post-Transformer | Mamba-2 SSM | d_state=64 | `mamba2_ssm.py` |
+| 63 | Post-Transformer | Jamba Hybrid | 7:1 ratio | `jamba_hybrid.py` |
+| 64 | Post-Transformer | Zamba Shared Attn | period=n=6 | `zamba_shared_attention.py` |
+| 65 | Post-Transformer | Griffin RG-LRU | c=σ-τ=8 | `griffin_rglru.py` |
+| 66 | Post-Transformer | RecurrentGemma | heads=σ-φ=10 | `recurrent_gemma.py` |
 
 </details>
 
