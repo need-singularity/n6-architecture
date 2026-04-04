@@ -30,19 +30,21 @@ fn parse_expr_bp(p: &mut Parser, min_bp: u8, no_struct: bool) -> Result<Expr, Pa
     let mut lhs = parse_prefix_inner(p, no_struct)?;
 
     loop {
-        // Check for postfix operations: call, field, index
-        lhs = match p.peek() {
-            TokenKind::LParen => parse_call(p, lhs)?,
-            TokenKind::Dot => parse_field_access(p, lhs)?,
-            TokenKind::LBracket => parse_index(p, lhs)?,
-            TokenKind::Question => {
-                let q_span = p.peek_span();
-                p.advance();
-                let span = lhs.span().merge(q_span);
-                Expr::TryExpr { expr: Box::new(lhs), span }
-            }
-            _ => lhs,
-        };
+        // Postfix operators (inner loop consumes all before checking infix)
+        loop {
+            lhs = match p.peek() {
+                TokenKind::LParen => parse_call(p, lhs)?,
+                TokenKind::Dot => parse_field_access(p, lhs)?,
+                TokenKind::LBracket => parse_index(p, lhs)?,
+                TokenKind::Question => {
+                    let q_span = p.peek_span();
+                    p.advance();
+                    let span = lhs.span().merge(q_span);
+                    Expr::TryExpr { expr: Box::new(lhs), span }
+                }
+                _ => break,
+            };
+        }
 
         // Infix binary operators
         let (op, l_bp, r_bp) = match infix_binding_power(p.peek()) {
@@ -522,6 +524,7 @@ fn infix_binding_power(kind: &TokenKind) -> Option<(BinOp, u8, u8)> {
         TokenKind::Caret   => Some((BinOp::Pow, BP_POW_L, BP_POW_R)),
         // Range
         TokenKind::DotDot  => Some((BinOp::Range, 0, 1)),
+        TokenKind::DotDotEq => Some((BinOp::RangeInclusive, 0, 1)),
         _ => None,
     }
 }

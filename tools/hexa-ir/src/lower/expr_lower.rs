@@ -1027,6 +1027,6 @@ fn lower_binop(op: &BinOp) -> (HexaOp, HexaType) {
         BinOp::And | BinOp::BitAnd => (HexaOp::Mul, HexaType::Bool),
         BinOp::Or | BinOp::BitOr => (HexaOp::Add, HexaType::Bool),
         BinOp::BitXor => (HexaOp::Sub, HexaType::I64),
-        BinOp::Range => (HexaOp::Sub, HexaType::I64), // Mk.I: range as difference
+        BinOp::Range | BinOp::RangeInclusive => (HexaOp::Sub, HexaType::I64), // Mk.I: range as difference
     }
 }

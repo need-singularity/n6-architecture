@@ -314,6 +314,225 @@ fn lower_stmt_full(
             // will be appended to it, so we don't push it to extra_blocks.
         }
 
+        Stmt::ForLoop { var, iterable, body, .. } => {
+            // Desugar for-loop to while using existing J₂=24 opcodes.
+            // Range:  for i in start..end    => counter=start; while counter<end { ... counter+=1 }
+            // Array:  for item in arr        => idx=0; while idx<len { item=arr[idx]; ... idx+=1 }
+
+            match iterable {
+                crate::parser::ast::Expr::Binary { op, lhs, rhs, .. }
+                    if matches!(op, crate::parser::ast::BinOp::Range | crate::parser::ast::BinOp::RangeInclusive) =>
+                {
+                    let is_inclusive = matches!(op, crate::parser::ast::BinOp::RangeInclusive);
+
+                    // Allocate counter variable
+                    let counter_addr = ctx.fresh_reg();
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Alloc, dest: Some(counter_addr),
+                        args: vec![], ty: HexaType::I64, label: None,
+                    });
+                    let start_val = lower_expr(ctx, block, lhs);
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Store, dest: None,
+                        args: vec![counter_addr, start_val], ty: HexaType::Void, label: None,
+                    });
+                    let end_val = lower_expr(ctx, block, rhs);
+
+                    // Create header, body, exit blocks
+                    let header_id = ctx.fresh_block();
+                    let mut header_blk = HexaBlock { id: header_id, instrs: Vec::new(), successors: Vec::new() };
+                    let body_id = ctx.fresh_block();
+                    let mut body_blk = HexaBlock { id: body_id, instrs: Vec::new(), successors: Vec::new() };
+                    let exit_id = ctx.fresh_block();
+
+                    // Current block -> header
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Jump, dest: None,
+                        args: vec![header_id], ty: HexaType::Void, label: None,
+                    });
+                    block.successors.push(header_id);
+
+                    let prev_blk = HexaBlock {
+                        id: block.id,
+                        instrs: std::mem::take(&mut block.instrs),
+                        successors: std::mem::take(&mut block.successors),
+                    };
+                    block.id = exit_id;
+                    extra_blocks.push(prev_blk);
+
+                    // Header: compare counter with end (Sub+Bool+"lt"/"le")
+                    let cur_val = ctx.fresh_reg();
+                    header_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(cur_val),
+                        args: vec![counter_addr], ty: HexaType::I64, label: None,
+                    });
+                    let cmp_reg = ctx.fresh_reg();
+                    header_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Sub, dest: Some(cmp_reg),
+                        args: vec![cur_val, end_val], ty: HexaType::Bool,
+                        label: Some(if is_inclusive { "le" } else { "lt" }.to_string()),
+                    });
+                    header_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Branch, dest: None,
+                        args: vec![cmp_reg, body_id, exit_id], ty: HexaType::Void, label: None,
+                    });
+                    header_blk.successors.push(body_id);
+                    header_blk.successors.push(exit_id);
+
+                    // Body: bind loop variable
+                    let body_cur = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(body_cur),
+                        args: vec![counter_addr], ty: HexaType::I64, label: None,
+                    });
+                    ctx.bind_var(var, body_cur);
+
+                    lower_block(ctx, &mut body_blk, body, extra_blocks);
+
+                    // Increment: counter = counter + 1
+                    let inc_cur = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(inc_cur),
+                        args: vec![counter_addr], ty: HexaType::I64, label: None,
+                    });
+                    let one_reg = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Alloc, dest: Some(one_reg),
+                        args: vec![1], ty: HexaType::I64, label: None,
+                    });
+                    let next_val = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Add, dest: Some(next_val),
+                        args: vec![inc_cur, one_reg], ty: HexaType::I64, label: None,
+                    });
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Store, dest: None,
+                        args: vec![counter_addr, next_val], ty: HexaType::Void, label: None,
+                    });
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Jump, dest: None,
+                        args: vec![header_id], ty: HexaType::Void, label: None,
+                    });
+                    body_blk.successors.push(header_id);
+
+                    extra_blocks.push(header_blk);
+                    extra_blocks.push(body_blk);
+                }
+                _ => {
+                    // Array iteration: for item in arr { body }
+                    let arr_base = lower_expr(ctx, block, iterable);
+
+                    // idx = 0
+                    let idx_addr = ctx.fresh_reg();
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Alloc, dest: Some(idx_addr),
+                        args: vec![], ty: HexaType::I64, label: None,
+                    });
+                    let zero_reg = ctx.fresh_reg();
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Alloc, dest: Some(zero_reg),
+                        args: vec![0], ty: HexaType::I64, label: None,
+                    });
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Store, dest: None,
+                        args: vec![idx_addr, zero_reg], ty: HexaType::Void, label: None,
+                    });
+
+                    // Array length via Copy with "array_len" label
+                    let len_reg = ctx.fresh_reg();
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Copy, dest: Some(len_reg),
+                        args: vec![arr_base], ty: HexaType::I64,
+                        label: Some("array_len".to_string()),
+                    });
+
+                    let header_id = ctx.fresh_block();
+                    let mut header_blk = HexaBlock { id: header_id, instrs: Vec::new(), successors: Vec::new() };
+                    let body_id = ctx.fresh_block();
+                    let mut body_blk = HexaBlock { id: body_id, instrs: Vec::new(), successors: Vec::new() };
+                    let exit_id = ctx.fresh_block();
+
+                    block.instrs.push(HexaInstr {
+                        op: HexaOp::Jump, dest: None,
+                        args: vec![header_id], ty: HexaType::Void, label: None,
+                    });
+                    block.successors.push(header_id);
+
+                    let prev_blk = HexaBlock {
+                        id: block.id,
+                        instrs: std::mem::take(&mut block.instrs),
+                        successors: std::mem::take(&mut block.successors),
+                    };
+                    block.id = exit_id;
+                    extra_blocks.push(prev_blk);
+
+                    // Header: idx < len
+                    let cur_idx = ctx.fresh_reg();
+                    header_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(cur_idx),
+                        args: vec![idx_addr], ty: HexaType::I64, label: None,
+                    });
+                    let cmp_reg = ctx.fresh_reg();
+                    header_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Sub, dest: Some(cmp_reg),
+                        args: vec![cur_idx, len_reg], ty: HexaType::Bool,
+                        label: Some("lt".to_string()),
+                    });
+                    header_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Branch, dest: None,
+                        args: vec![cmp_reg, body_id, exit_id], ty: HexaType::Void, label: None,
+                    });
+                    header_blk.successors.push(body_id);
+                    header_blk.successors.push(exit_id);
+
+                    // Body: load arr[idx]
+                    let body_idx = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(body_idx),
+                        args: vec![idx_addr], ty: HexaType::I64, label: None,
+                    });
+                    let elem_reg = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(elem_reg),
+                        args: vec![arr_base, body_idx], ty: HexaType::I64,
+                        label: Some("array_element".to_string()),
+                    });
+                    ctx.bind_var(var, elem_reg);
+
+                    lower_block(ctx, &mut body_blk, body, extra_blocks);
+
+                    // Increment idx
+                    let inc_idx = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Load, dest: Some(inc_idx),
+                        args: vec![idx_addr], ty: HexaType::I64, label: None,
+                    });
+                    let one_reg = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Alloc, dest: Some(one_reg),
+                        args: vec![1], ty: HexaType::I64, label: None,
+                    });
+                    let next_idx = ctx.fresh_reg();
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Add, dest: Some(next_idx),
+                        args: vec![inc_idx, one_reg], ty: HexaType::I64, label: None,
+                    });
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Store, dest: None,
+                        args: vec![idx_addr, next_idx], ty: HexaType::Void, label: None,
+                    });
+                    body_blk.instrs.push(HexaInstr {
+                        op: HexaOp::Jump, dest: None,
+                        args: vec![header_id], ty: HexaType::Void, label: None,
+                    });
+                    body_blk.successors.push(header_id);
+
+                    extra_blocks.push(header_blk);
+                    extra_blocks.push(body_blk);
+                }
+            }
+        }
+
         Stmt::ExprStmt { expr, .. } => {
             // Lower the expression; discard result
             let _reg = lower_expr(ctx, block, expr);

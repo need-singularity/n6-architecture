@@ -36,6 +36,14 @@ pub struct LowerContext {
     pub pending_blocks: Vec<HexaBlock>,
     /// Method dispatch: (type_name, method_name) -> mangled function name
     pub method_dispatch: HashMap<(String, String), String>,
+    /// Closure IR info collected during lowering (for lambda lifting)
+    pub closure_fns: Vec<closure::ClosureIR>,
+    /// Counter for generating unique closure function names
+    closure_counter: usize,
+    /// Generic function definitions for monomorphization
+    pub generic_fn_defs: HashMap<String, ast::FnDecl>,
+    /// Already monomorphized instances
+    pub mono_instances: HashMap<String, bool>,
 }
 
 impl LowerContext {
@@ -51,6 +59,10 @@ impl LowerContext {
             enum_defs: HashMap::new(),
             pending_blocks: Vec::new(),
             method_dispatch: HashMap::new(),
+            closure_fns: Vec::new(),
+            closure_counter: 0,
+            generic_fn_defs: HashMap::new(),
+            mono_instances: HashMap::new(),
         }
     }
 
@@ -139,6 +151,13 @@ impl LowerContext {
         }
         None
     }
+
+    /// Get next unique closure ID
+    pub fn next_closure_id(&mut self) -> usize {
+        let id = self.closure_counter;
+        self.closure_counter += 1;
+        id
+    }
 }
 
 /// Lower an entire program to a list of IR functions
@@ -181,12 +200,23 @@ pub fn lower_program(program: &ast::Program) -> Vec<HexaFunction> {
         }
     }
 
+    // Collect generic function definitions
+    for decl in &program.decls {
+        if let ast::Decl::FnDecl(f) = decl {
+            if !f.type_params.is_empty() {
+                ctx.generic_fn_defs.insert(f.name.clone(), f.clone());
+            }
+        }
+    }
+
     // Second pass: lower function bodies
     for decl in &program.decls {
         match decl {
             ast::Decl::FnDecl(f) => {
-                let func = lower_fn(&mut ctx, f);
-                ctx.functions.push(func);
+                if f.type_params.is_empty() {
+                    let func = lower_fn(&mut ctx, f);
+                    ctx.functions.push(func);
+                }
             }
             ast::Decl::ModuleDecl(m) => {
                 lower_module_fns(&mut ctx, &m.name, &m.decls);
@@ -204,6 +234,16 @@ pub fn lower_program(program: &ast::Program) -> Vec<HexaFunction> {
             _ => {}
         }
     }
+    // Monomorphize generic functions (type params erased to Any)
+    let generic_defs: Vec<ast::FnDecl> = ctx.generic_fn_defs.values().cloned().collect();
+    for gf in &generic_defs {
+        if !ctx.mono_instances.contains_key(&gf.name) {
+            let func = lower_fn(&mut ctx, gf);
+            ctx.functions.push(func);
+            ctx.mono_instances.insert(gf.name.clone(), true);
+        }
+    }
+
     ctx.functions
 }
 

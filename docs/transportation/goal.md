@@ -374,9 +374,9 @@
 
 ---
 
-## 7. 새 BT 후보: BT-228 — Transportation n=6 보편성 정리
+## 7. BT-233 — Transportation n=6 보편성 정리 (정식 등록 완료)
 
-### BT-228: 자동차 파라미터 n=6 보편성 (Vehicle Architecture n=6 Universality)
+### BT-233: 자동차 파라미터 n=6 보편성 (Vehicle Architecture n=6 Universality)
 
 > **주장**: 자동차 설계의 핵심 파라미터가 n=6 산술함수로 수렴한다.
 
@@ -499,6 +499,33 @@
   최적: CFRP + 오토클레이브 + 인휠×4 + 모노코크 + 864V유냉
         → n=6 EXACT 85%+ / P/W=1.0 / 5:24 / $144K
 ```
+
+---
+
+## 11. DSE 전수탐색 결과
+
+**탐색**: 7,776 총 조합 → 6,480 유효 (83.3%) → 72 Pareto
+
+### 최적 경로 Top 5
+
+| Rank | 소재 | 공정 | 파워트레인 | 섀시 | 시스템 | n6% | Score |
+|------|------|------|-----------|------|--------|-----|-------|
+| 1 | CFRP-Z6 | AFP-N6 | Axial-Flux-4 | Monocoque-C6 | Track-Pure | 98% | 0.869 |
+| 2 | CFRP-Z6 | AFP-N6 | Axial-Flux-4 | Monocoque-C6 | Street-Legal | 98% | 0.866 |
+| 3 | CFRP-Z6 | AFP-N6 | InWheel-4x288 | Monocoque-C6 | Track-Pure | 100% | 0.865 |
+| **4** | **CFRP-Z6** | **AFP-N6** | **InWheel-4x288** | **Monocoque-C6** | **Street-Legal** | **100%** | **0.863** |
+| 5 | CFRP-Z6 | Forged-Carbon | Axial-Flux-4 | Monocoque-C6 | Track-Pure | 93% | 0.858 |
+
+### HEXA-FUNCAR 채택 경로: Rank #4 (100% n6 EXACT)
+- **소재**: CFRP-Z6 (Carbon Z=6, BT-93)
+- **공정**: AFP-N6 (n=6 방향 자동 섬유 배치)
+- **파워트레인**: InWheel-4x288 (τ=4 인휠 × σ·J₂=288kW)
+- **섀시**: Monocoque-C6 (풀카본 모노코크)
+- **시스템**: Street-Legal (도로등록 가능, GT3 RS급)
+
+> Rank 1 대비 -0.75% score 차이로 100% n=6 일관성 달성. 트레이드오프 최적.
+
+상세: [DSE 전수탐색 결과](dse-results.md)
 
 ---
 

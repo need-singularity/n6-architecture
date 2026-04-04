@@ -123,9 +123,9 @@ impl Parser {
                 TokenKind::RBrace => return,
                 TokenKind::Fn | TokenKind::Let | TokenKind::Struct |
                 TokenKind::Enum | TokenKind::Return | TokenKind::If |
-                TokenKind::While | TokenKind::Type | TokenKind::Match |
-                TokenKind::Mod | TokenKind::Use | TokenKind::Pub |
-                TokenKind::Trait | TokenKind::Impl => return,
+                TokenKind::While | TokenKind::For | TokenKind::Type |
+                TokenKind::Match | TokenKind::Mod | TokenKind::Use |
+                TokenKind::Pub | TokenKind::Trait | TokenKind::Impl => return,
                 _ => { self.advance(); }
             }
         }

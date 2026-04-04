@@ -1,6 +1,6 @@
-/// Statement parser — n=6 statement kinds
+/// Statement parser — n+μ=7 statement kinds
 ///
-/// Parses: let, assign, return, if, while, expr-stmt
+/// Parses: let, assign, return, if, while, for, expr-stmt
 
 use crate::lexer::{TokenKind, Span};
 use super::ast::*;
@@ -14,6 +14,7 @@ pub fn parse_stmt(p: &mut Parser) -> Result<Stmt, ParseError> {
         TokenKind::Return => parse_return(p),
         TokenKind::If => parse_if(p),
         TokenKind::While => parse_while(p),
+        TokenKind::For => parse_for(p),
         _ => parse_assign_or_expr(p),
     }
 }
@@ -108,6 +109,29 @@ fn parse_while(p: &mut Parser) -> Result<Stmt, ParseError> {
     Ok(Stmt::While {
         span: start.merge(body.span),
         cond,
+        body,
+    })
+}
+
+/// `for var in iterable { block }`
+///
+/// Supports two forms:
+///   - Range:  `for i in 0..10 { }` or `for i in 0..=9 { }`
+///   - Array:  `for item in array { }`
+fn parse_for(p: &mut Parser) -> Result<Stmt, ParseError> {
+    let start = p.peek_span();
+    p.expect(&TokenKind::For)?;
+
+    let (var, _) = p.expect_ident()?;
+    p.expect(&TokenKind::In)?;
+
+    let iterable = parse_expr_no_struct(p)?;
+    let body = parse_block(p)?;
+
+    Ok(Stmt::ForLoop {
+        span: start.merge(body.span),
+        var,
+        iterable,
         body,
     })
 }

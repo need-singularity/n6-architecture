@@ -9,10 +9,16 @@
 |------|------|
 | Core Hypotheses | 30 (H-SF-01 ~ H-SF-30) |
 | Extreme Hypotheses | 20 (H-SFX-01 ~ H-SFX-20) |
-| EXACT rate (core) | 20/30 = 66.7% |
+| Extended Extreme | 10 (H-SAFE-EX-01 ~ H-SAFE-EX-10) |
+| Total Hypotheses | 60 |
+| EXACT rate (total) | 42/60 = 70.0% |
 | Evolution levels | 8 (소재→궁극) |
+| DSE combinations | 5,400 (5×6×6×5×6) |
 | Cross-domain coverage | 10 domains |
+| Industry standards | 19 (IEC/ISO/NFPA/IAEA/OSHA/ICRP/ICAO) |
+| Testable Predictions | 28 (Tier 1~4) |
 | Related BTs | BT-43, BT-60, BT-80~84, BT-118~122, BT-123~127 |
+| 🛸 Rating | **🛸6** (설계 완료 + DSE 통과 + 진화 경로) |
 
 ## Key Discoveries
 
@@ -36,7 +42,12 @@
 |------|------------|
 | [goal.md](goal.md) | 8단계 진화 래더 + DSE 후보군 + Cross-domain 커버리지 |
 | [hypotheses.md](hypotheses.md) | 30 core hypotheses (8 Tiers) |
-| [extreme-hypotheses.md](extreme-hypotheses.md) | 20 extreme hypotheses |
+| [extreme-hypotheses.md](extreme-hypotheses.md) | 30 extreme hypotheses (H-SFX-01~20 + H-SAFE-EX-01~10) |
+| [verification.md](verification.md) | 전수 검증 매트릭스 + DSE + ASCII 구조도 |
+| [full-verification-matrix.md](full-verification-matrix.md) | 물리한계 12정리 + 산업표준 15+ |
+| [testable-predictions.md](testable-predictions.md) | 28 TP (Tier 1~4) |
+| [alien-10-certification.md](alien-10-certification.md) | 🛸10 인증 체크리스트 |
+| [evolution/](evolution/) | Mk.I~V 진화 경로 (5 문서) |
 
 ## n=6 Safety Equation
 

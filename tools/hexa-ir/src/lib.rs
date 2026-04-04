@@ -1491,3 +1491,192 @@ fn main() -> i64 {
         assert!(perim_call, "main should call Square__perimeter");
     }
 }
+
+#[cfg(test)]
+mod for_loop_tests {
+    use crate::lexer;
+    use crate::parser;
+    use crate::sema;
+    use crate::lower;
+    use crate::ir::HexaOp;
+    use crate::parser::ast::{Stmt, Expr, BinOp};
+
+    fn compile_to_ir(source: &str) -> Vec<crate::ir::HexaFunction> {
+        let tokens = lexer::lex(source).expect("lex failed");
+        let program = parser::parse(tokens).expect("parse failed");
+        sema::analyze(&program).expect("sema failed");
+        lower::lower_program(&program)
+    }
+
+    /// Test 1: Parse `for i in 0..10 { }` — range-based for loop
+    #[test]
+    fn test_for_range_parse() {
+        let source = r#"
+fn main() -> i64 {
+    let mut sum = 0
+    for i in 0..10 {
+        sum = sum + i
+    }
+    return sum
+}
+"#;
+        let tokens = lexer::lex(source).expect("lex failed");
+        let program = parser::parse(tokens).expect("parse failed");
+
+        let main_fn = match &program.decls[0] {
+            crate::parser::ast::Decl::FnDecl(f) => f,
+            _ => panic!("expected FnDecl"),
+        };
+
+        // Find ForLoop statement
+        let has_for = main_fn.body.stmts.iter().any(|s| {
+            if let Stmt::ForLoop { var, iterable, .. } = s {
+                var == "i" && matches!(iterable, Expr::Binary { op: BinOp::Range, .. })
+            } else {
+                false
+            }
+        });
+        assert!(has_for, "should have ForLoop with range iterable");
+    }
+
+    /// Test 2: Parse `for item in arr { }` — array iteration
+    #[test]
+    fn test_for_array_parse() {
+        let source = r#"
+fn main() -> i64 {
+    let arr = [10, 20, 30]
+    let mut total = 0
+    for item in arr {
+        total = total + item
+    }
+    return total
+}
+"#;
+        let tokens = lexer::lex(source).expect("lex failed");
+        let program = parser::parse(tokens).expect("parse failed");
+
+        let main_fn = match &program.decls[0] {
+            crate::parser::ast::Decl::FnDecl(f) => f,
+            _ => panic!("expected FnDecl"),
+        };
+
+        let has_for = main_fn.body.stmts.iter().any(|s| {
+            if let Stmt::ForLoop { var, iterable, .. } = s {
+                var == "item" && matches!(iterable, Expr::Ident(name, _) if name == "arr")
+            } else {
+                false
+            }
+        });
+        assert!(has_for, "should have ForLoop with array variable");
+    }
+
+    /// Test 3: For loop lowering creates header + body + exit blocks (desugared to while)
+    #[test]
+    fn test_for_range_lowering_creates_blocks() {
+        let source = r#"
+fn main() -> i64 {
+    let mut sum = 0
+    for i in 0..6 {
+        sum = sum + i
+    }
+    return sum
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let main_fn = funcs.iter().find(|f| f.name == "main").expect("main");
+
+        // For-loop desugars to while: should have 4+ blocks
+        // (entry, header, body, exit)
+        assert!(main_fn.blocks.len() >= 4,
+            "for-range should desugar to 4+ blocks (entry+header+body+exit), got {}",
+            main_fn.blocks.len());
+
+        // Should have a Branch instruction (from header)
+        let has_branch = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Branch);
+        assert!(has_branch, "desugared for should have Branch (from loop header)");
+
+        // Should have comparison with "lt" label (Sub + Bool + "lt")
+        let has_lt_cmp = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Sub && i.label.as_deref() == Some("lt"));
+        assert!(has_lt_cmp, "desugared for 0..6 should have Sub with 'lt' label for comparison");
+
+        // Should have Add instruction (for counter increment)
+        let has_add = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Add);
+        assert!(has_add, "desugared for should have Add for counter increment");
+    }
+
+    /// Test 4: For loop inclusive range and sema type checking
+    #[test]
+    fn test_for_inclusive_range_sema_and_lower() {
+        let source = r#"
+fn main() -> i64 {
+    let mut product = 1
+    for i in 1..=6 {
+        product = product * i
+    }
+    return product
+}
+"#;
+        // Sema should accept this (loop var 'i' is i64 inferred from range)
+        let tokens = lexer::lex(source).expect("lex failed");
+        let program = parser::parse(tokens).expect("parse failed");
+        sema::analyze(&program).expect("sema should accept for-in with inclusive range");
+
+        let funcs = compile_to_ir(source);
+        let main_fn = funcs.iter().find(|f| f.name == "main").expect("main");
+
+        // Inclusive range uses "le" label
+        let has_le_cmp = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Sub && i.label.as_deref() == Some("le"));
+        assert!(has_le_cmp, "desugared for 1..=6 should have Sub with 'le' label for <= comparison");
+    }
+
+    /// Test 5: Array for-loop lowering produces array_len + array_element loads
+    #[test]
+    fn test_for_array_lowering() {
+        let source = r#"
+fn main() -> i64 {
+    let data = [1, 2, 3, 4, 5, 6]
+    let mut sum = 0
+    for x in data {
+        sum = sum + x
+    }
+    return sum
+}
+"#;
+        let funcs = compile_to_ir(source);
+        let main_fn = funcs.iter().find(|f| f.name == "main").expect("main");
+
+        // Should have "array_len" Copy instruction
+        let has_array_len = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Copy && i.label.as_deref() == Some("array_len"));
+        assert!(has_array_len, "array for-loop should emit Copy with 'array_len' label");
+
+        // Should have "array_element" Load instruction
+        let has_array_elem = main_fn.blocks.iter()
+            .flat_map(|b| b.instrs.iter())
+            .any(|i| i.op == HexaOp::Load && i.label.as_deref() == Some("array_element"));
+        assert!(has_array_elem, "array for-loop should emit Load with 'array_element' label");
+
+        // Should have 4+ blocks like range for
+        assert!(main_fn.blocks.len() >= 4,
+            "array for-loop should desugar to 4+ blocks, got {}",
+            main_fn.blocks.len());
+    }
+
+    /// Test 6: DotDotEq lexer token
+    #[test]
+    fn test_dotdoteq_token() {
+        let source = "fn main() -> i64 { for i in 0..=5 { } return 0 }";
+        let tokens = lexer::lex(source).expect("lex failed");
+        let has_dotdoteq = tokens.iter().any(|t| t.kind == crate::lexer::TokenKind::DotDotEq);
+        assert!(has_dotdoteq, "lexer should produce DotDotEq token for ..=");
+    }
+}

@@ -37,6 +37,7 @@ pub enum TokenKind {
     Trait,
     Impl,
     For,
+    In,
 
     // ── Type keywords (sigma-tau=8) ──
     KwI64,
@@ -78,6 +79,7 @@ pub enum TokenKind {
     FatArrow,   // =>
     Dot,        // .
     DotDot,     // ..
+    DotDotEq,   // ..=
     Colon,      // :
 
     // ── Delimiters (sigma=12) ──

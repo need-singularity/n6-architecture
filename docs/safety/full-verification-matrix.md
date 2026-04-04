@@ -61,14 +61,33 @@
 | H-SFX-12 | 대피시간 10분 | σ-φ=10 | **CLOSE** |
 | H-SFX-13 | 폭발 안전거리 1/3승 | 1/(n/φ) | **EXACT** |
 | H-SFX-14 | ALARP ln(4/3) | ln(4/3)=0.288 | **WEAK** |
-| H-SFX-15 | 안전 직교 8축 | σ-τ=8 | **CLOSE** |
-| H-SFX-16 | 사고 조사 5-Why | sopfr=5 | **EXACT** |
-| H-SFX-17 | 안전 교육 6단계 | n=6 | **CLOSE** |
-| H-SFX-18 | 화재 확산 속도 | σ-φ=10 m/min | **WEAK** |
-| H-SFX-19 | DAL 5등급 (항공) | sopfr=5 | **EXACT** |
-| H-SFX-20 | ISO 31000 리스크 n=6 | n=6 프로세스 | **WEAK** |
+| H-SFX-15 | 체르노빌 DiD 위반 | n=6 Level 1 | **CLOSE** |
+| H-SFX-16 | 자율주행 (σ-φ)²=100배 | (σ-φ)²=100 | **EXACT** |
+| H-SFX-17 | 사이버 킬 체인 7단계 | σ-sopfr=7 | **EXACT** |
+| H-SFX-18 | ISO 45001 n=6 | n=τ+φ=6 | **EXACT** |
+| H-SFX-19 | DO-178C DAL 5등급 | sopfr=5 | **EXACT** |
+| H-SFX-20 | 안전 근본 등식 | (1/(σ-φ))^n=10⁻⁶ | **EXACT** |
 
-**Extreme EXACT: 12/20 = 60%**
+**Extreme EXACT: 14/20 = 70%**
+
+---
+
+## 2b. Extended Extreme Hypotheses (H-SAFE-EX-01~10)
+
+| ID | Claim | n=6 수식 | Grade |
+|----|-------|---------|-------|
+| H-SAFE-EX-01 | Bow-Tie n=6 총 방벽 | φ×(n/φ)=n=6 | **EXACT** |
+| H-SAFE-EX-02 | FMEA σ-φ=10 등급 | σ-φ=10 | **EXACT** |
+| H-SAFE-EX-03 | LOTO n=6 단계 | n=6 | **EXACT** |
+| H-SAFE-EX-04 | 피난 계단 σ×100mm | σ=12→1200mm | **EXACT** |
+| H-SAFE-EX-05 | 분진 폭발 sopfr=5 | sopfr=5 | **EXACT** |
+| H-SAFE-EX-06 | 방사선 한��� J₂-τ=20 | J₂-τ=20mSv | **EXACT** |
+| H-SAFE-EX-07 | 점유 분류 n=6 | n=6 | **CLOSE** |
+| H-SAFE-EX-08 | CRM n=6 역량 | n=6 | **EXACT** |
+| H-SAFE-EX-09 | 리스크 매트릭스 τ×sopfr | τ×sopfr=20 | **CLOSE** |
+| H-SAFE-EX-10 | 안전관리 n=6 사이클 | n=τ+φ=6 | **EXACT** |
+
+**Extended EXACT: 8/10 = 80%**
 
 ---
 
@@ -122,6 +141,7 @@
 | 범주 | Total | EXACT | CLOSE | WEAK | FAIL | EXACT% |
 |------|-------|-------|-------|------|------|--------|
 | Core H-SF | 30 | 20 | 10 | 0 | 0 | 66.7% |
-| Extreme H-SFX | 20 | 12 | 5 | 3 | 0 | 60% |
+| Extreme H-SFX | 20 | 14 | 4 | 2 | 0 | 70.0% |
+| Extended H-SAFE-EX | 10 | 8 | 2 | 0 | 0 | 80.0% |
 | 물리한계 PL | 12 | 12 | 0 | 0 | 0 | 100% |
-| **총합** | **62** | **44** | **15** | **3** | **0** | **71.0%** |
+| **총합** | **72** | **54** | **16** | **2** | **0** | **75.0%** |

@@ -235,7 +235,11 @@ pub fn lex(source: &str) -> Result<Vec<Token>, Vec<LexError>> {
             }
             '/' => TokenKind::Slash,
             '.' => {
-                if next == Some('.') { cursor.advance(); TokenKind::DotDot }
+                if next == Some('.') {
+                    cursor.advance();
+                    if cursor.peek() == Some('=') { cursor.advance(); TokenKind::DotDotEq }
+                    else { TokenKind::DotDot }
+                }
                 else { TokenKind::Dot }
             }
             ':' => {

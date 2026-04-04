@@ -150,6 +150,13 @@ pub enum Stmt {
         body: Block,
         span: Span,
     },
+    /// `for var in iterable { body }` — desugared to while during lowering
+    ForLoop {
+        var: String,
+        iterable: Expr,
+        body: Block,
+        span: Span,
+    },
     ExprStmt {
         expr: Expr,
         span: Span,
@@ -322,6 +329,7 @@ pub enum BinOp {
     And, Or, BitAnd, BitOr, BitXor,
     // Range
     Range,
+    RangeInclusive,
 }
 
 // ── Unary operators ──

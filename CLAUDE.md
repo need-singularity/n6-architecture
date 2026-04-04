@@ -360,7 +360,7 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
 Full proof: docs/theorem-r1-uniqueness.md
 Falsifiability: z=0.74 (numerical matching NOT significant vs random)
 
-## Docs Structure (32 domains) — ALL have extreme-hypotheses.md
+## Docs Structure (33 domains) — ALL have extreme-hypotheses.md
 ```
   # Physics (통합 완료)
   superconductor/ (+ magnet 병합) fusion/ (+ tokamak 병합) plasma-physics/
@@ -390,6 +390,8 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   solar-architecture/ (5 levels: HEXA-ABSORB/PROCESS/JUNCTION/POWER/ARRAY)
   # Material Synthesis (소재→공정→조립기→제어→시스템→변환→만능→궁극, DSE 3,600 조합)
   material-synthesis/ (8 levels: HEXA-ELEMENT/PROCESS/ASSEMBLER/CONTROL/FACTORY/TRANSMUTE/UNIVERSAL/OMEGA-M)
+  # Transportation (NEW)
+  transportation/ (30 H-TR + 20 E-TR + goal + DSE + evolution)
   # Total: 1400+ hypotheses, 640+ EXACT, 650+ atlas entries, 112 BTs
 ```
 
@@ -521,7 +523,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (127 total, BT-1~127)
+## Breakthrough Theorems (128 total, BT-1~233)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -667,6 +669,9 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   # Social Architecture (BT-214~215)
   BT-214: Six Degrees = n 사회 위상 정리 (Milgram, Dunbar σ²+n=150, 배심원 σ=12, Christaller 육각형, 10/10 EXACT) ⭐⭐⭐
   BT-215: Dunbar σ²+n=150 인지-사회 브릿지 (n=6 피질→n=6 사회위상, 계층비 n/φ=3, 7/7 EXACT) ⭐⭐
+
+  # Transportation (BT-233)
+  BT-233: Transportation n=6 보편성 (12극=σ, 3상=n/φ, 96S/192S, τ=4 인휠, SE(3)=n DOF, Z=6 카본, 10/12 EXACT) ⭐⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙

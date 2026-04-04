@@ -15,10 +15,28 @@ pub mod error;
 
 pub use error::SemaError;
 
-use crate::parser::ast::Program;
+use crate::parser::ast::{Program, TypeExpr};
 use typecheck::TypeChecker;
 use ownership::OwnershipChecker;
 use trait_impl::TraitResolver;
+
+/// Convert a TypeExpr to a simple string name (duplicated from typecheck for mod-level use)
+fn type_expr_to_name(te: &TypeExpr) -> String {
+    match te {
+        TypeExpr::Named(name, _) => name.clone(),
+        TypeExpr::Array(inner, size, _) => format!("[{}; {}]", type_expr_to_name(inner), size),
+        TypeExpr::Fn(params, ret, _) => {
+            let ps: Vec<String> = params.iter().map(type_expr_to_name).collect();
+            format!("fn({}) -> {}", ps.join(", "), type_expr_to_name(ret))
+        }
+        TypeExpr::TypeParam(name, _) => name.clone(),
+    }
+}
+
+/// Check if a type name represents a Copy type
+fn is_copy_type_name(name: &str) -> bool {
+    matches!(name, "i64" | "f64" | "bool" | "char" | "byte" | "void" | "any")
+}
 
 /// Run all semantic analysis passes on a parsed program.
 /// Returns Ok(()) if the program is semantically valid,
@@ -37,8 +55,10 @@ pub fn analyze(program: &Program) -> Result<(), Vec<SemaError>> {
         match decl {
             crate::parser::ast::Decl::FnDecl(f) => {
                 let mut oc = OwnershipChecker::new();
-                for (pname, _) in &f.params {
-                    oc.define(pname, f.span);
+                for (pname, pty) in &f.params {
+                    let ty_name = type_expr_to_name(pty);
+                    let is_copy = is_copy_type_name(&ty_name);
+                    oc.define_with_info(pname, f.span, false, is_copy);
                 }
                 let mut errs = oc.check_block(&f.body);
                 all_errors.append(&mut errs);
@@ -69,8 +89,10 @@ fn check_module_ownership(decls: &[crate::parser::ast::Decl], errors: &mut Vec<S
         match decl {
             crate::parser::ast::Decl::FnDecl(f) => {
                 let mut oc = OwnershipChecker::new();
-                for (pname, _) in &f.params {
-                    oc.define(pname, f.span);
+                for (pname, pty) in &f.params {
+                    let ty_name = type_expr_to_name(pty);
+                    let is_copy = is_copy_type_name(&ty_name);
+                    oc.define_with_info(pname, f.span, false, is_copy);
                 }
                 let mut errs = oc.check_block(&f.body);
                 errors.append(&mut errs);

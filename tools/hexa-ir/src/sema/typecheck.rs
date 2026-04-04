@@ -353,7 +353,17 @@ impl TypeChecker {
             }
             Stmt::Return { value, span } => {
                 if let Some(expr) = value {
-                    let _ = self.check_expr(expr)?;
+                    let ret_ty = self.check_expr(expr)?;
+                    // Verify return type matches declared function return type
+                    if let Some(ref expected) = self.current_ret_ty {
+                        if !types_compatible(expected, &ret_ty) {
+                            return Err(SemaError::TypeError {
+                                span: *span,
+                                expected: hexa_type_name(expected),
+                                found: hexa_type_name(&ret_ty),
+                            });
+                        }
+                    }
                 }
                 Ok(())
             }
@@ -390,6 +400,25 @@ impl TypeChecker {
                     });
                 }
                 self.resolver.push_scope();
+                for s in &body.stmts {
+                    self.check_stmt(s)?;
+                }
+                self.resolver.pop_scope();
+                Ok(())
+            }
+            Stmt::ForLoop { var, iterable, body, span } => {
+                let iter_ty = self.check_expr(iterable)?;
+                let var_ty_name = match &iter_ty {
+                    HexaType::Array(inner, _) => hexa_type_name(inner),
+                    _ => "i64".to_string(),
+                };
+                self.resolver.push_scope();
+                self.resolver.define(VarInfo {
+                    name: var.clone(),
+                    ty_name: var_ty_name,
+                    mutable: false,
+                    defined_at: *span,
+                })?;
                 for s in &body.stmts {
                     self.check_stmt(s)?;
                 }
@@ -459,7 +488,7 @@ impl TypeChecker {
                     BinOp::Le | BinOp::Ge => Ok(HexaType::Bool),
                     BinOp::And | BinOp::Or => Ok(HexaType::Bool),
                     BinOp::BitAnd | BinOp::BitOr | BinOp::BitXor => Ok(HexaType::I64),
-                    BinOp::Range => Ok(HexaType::Any), // Range type TBD in Mk.II
+                    BinOp::Range | BinOp::RangeInclusive => Ok(HexaType::Any), // Range type TBD in Mk.II
                 }
             }
             Expr::Unary { op, operand, span } => {
@@ -479,12 +508,25 @@ impl TypeChecker {
                 }
             }
             Expr::Call { func, args, span } => {
-                // For Mk.I: just check args, return Any (full overload resolution in Mk.II)
-                let _ = self.check_expr(func)?;
+                let func_ty = self.check_expr(func)?;
                 for arg in args {
                     let _ = self.check_expr(arg)?;
                 }
-                Ok(HexaType::Any)
+                // Resolve return type from function signature
+                match &func_ty {
+                    HexaType::Fn(_, ret) => Ok(*ret.clone()),
+                    _ => {
+                        // Try to resolve from function name in resolver
+                        if let Expr::Ident(fname, fspan) = func.as_ref() {
+                            if let Ok(info) = self.resolver.lookup(fname, *fspan) {
+                                if let Some(ret_str) = info.ty_name.strip_prefix("fn -> ") {
+                                    return Ok(resolve_type_name(ret_str));
+                                }
+                            }
+                        }
+                        Ok(HexaType::Any)
+                    }
+                }
             }
             Expr::Field { obj, name, span } => {
                 let obj_ty = self.check_expr(obj)?;
@@ -557,22 +599,10 @@ impl TypeChecker {
                 let _ = self.check_expr(scrutinee)?;
                 // Check each arm body
                 for arm in arms {
-                    // For variant patterns with bindings, push a scope
                     self.resolver.push_scope();
-                    if let crate::parser::ast::Pattern::Variant { bindings, span, .. } = &arm.pattern {
-                        for binding in bindings {
-                            let bname = match binding {
-                                crate::parser::ast::Pattern::Binding(n, _) => n.clone(),
-                                crate::parser::ast::Pattern::Wildcard(_) => continue,
-                                _ => format!("{:?}", binding),
-                            };
-                            let _ = self.resolver.define(VarInfo {
-                                name: bname,
-                                ty_name: "any".to_string(),
-                                mutable: false,
-                                defined_at: *span,
-                            });
-                        }
+                    self.define_pattern_bindings(&arm.pattern)?;
+                    if let crate::parser::ast::Pattern::Guard { condition, .. } = &arm.pattern {
+                        let _ = self.check_expr(condition)?;
                     }
                     let _ = self.check_expr(&arm.body)?;
                     self.resolver.pop_scope();
@@ -621,6 +651,50 @@ impl TypeChecker {
             }
         }
     }
+
+    /// Recursively define pattern bindings in the current scope
+    fn define_pattern_bindings(&mut self, pattern: &crate::parser::ast::Pattern) -> Result<(), SemaError> {
+        use crate::parser::ast::Pattern;
+        match pattern {
+            Pattern::Wildcard(_) | Pattern::Literal(_, _) => Ok(()),
+            Pattern::Binding(name, span) => {
+                self.resolver.define(VarInfo {
+                    name: name.clone(),
+                    ty_name: "any".to_string(),
+                    mutable: false,
+                    defined_at: *span,
+                })?;
+                Ok(())
+            }
+            Pattern::Variant { bindings, .. } => {
+                for sub in bindings { self.define_pattern_bindings(sub)?; }
+                Ok(())
+            }
+            Pattern::StructDestructure { fields, span, .. } => {
+                for (field_name, sub_pat) in fields {
+                    if let Some(pat) = sub_pat {
+                        self.define_pattern_bindings(pat)?;
+                    } else {
+                        self.resolver.define(VarInfo {
+                            name: field_name.clone(),
+                            ty_name: "any".to_string(),
+                            mutable: false,
+                            defined_at: *span,
+                        })?;
+                    }
+                }
+                Ok(())
+            }
+            Pattern::Tuple { elements, .. } => {
+                for elem in elements { self.define_pattern_bindings(elem)?; }
+                Ok(())
+            }
+            Pattern::Guard { pattern: inner, .. } => {
+                self.define_pattern_bindings(inner)
+            }
+        }
+    }
+
 }
 
 // ── Helpers ──
@@ -650,6 +724,30 @@ fn resolve_type_name(name: &str) -> HexaType {
         "void" => HexaType::Void,
         "any" => HexaType::Any,
         _ => HexaType::Any, // User-defined types resolve to Any in Mk.I
+    }
+}
+
+/// Check if two types are compatible (for assignment / return checking).
+/// Any is compatible with everything (dynamic typing fallback for Mk.I).
+fn types_compatible(expected: &HexaType, found: &HexaType) -> bool {
+    if matches!(expected, HexaType::Any) || matches!(found, HexaType::Any) {
+        return true;
+    }
+    match (expected, found) {
+        (HexaType::I64, HexaType::I64) => true,
+        (HexaType::F64, HexaType::F64) => true,
+        (HexaType::Bool, HexaType::Bool) => true,
+        (HexaType::Char, HexaType::Char) => true,
+        (HexaType::Str, HexaType::Str) => true,
+        (HexaType::Byte, HexaType::Byte) => true,
+        (HexaType::Void, HexaType::Void) => true,
+        // Numeric coercion: i64 and f64 are compatible
+        (HexaType::I64, HexaType::F64) | (HexaType::F64, HexaType::I64) => true,
+        // Struct/Enum/Array/Fn: structural check deferred to Mk.II
+        (HexaType::Struct(_), HexaType::Struct(_)) => true,
+        (HexaType::Enum(_), HexaType::Enum(_)) => true,
+        (HexaType::Array(a, _), HexaType::Array(b, _)) => types_compatible(a, b),
+        _ => false,
     }
 }
 
