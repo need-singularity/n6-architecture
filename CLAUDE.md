@@ -479,9 +479,9 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (162 total, BT-1~162)
+## Breakthrough Theorems (343 total, BT-1~343)
 ```
-  # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
+  # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70~76,163,164,330~337)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
   BT-31: MoE top-k vocabulary {μ,φ,n,σ-τ}={1,2,6,8}
   BT-33: Transformer σ=12 atom (BERT/GPT-3 dimensions, SwiGLU 8/3)
@@ -507,11 +507,18 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-75: HBM interface exponent ladder ({10,11,12}={σ-φ,σ-μ,σ}, HBM5 predicted) ⭐⭐
   BT-76: σ·τ=48 triple attractor (gate pitch nm, HBM4E GB, 48kHz, 48V, 3DGS SH) ⭐⭐
 
-  # Learning Algorithm (BT-163~164)
-  BT-163: RL/Alignment 학습 파라미터 스택 (PPO clip=φ/(σ-φ)=0.2, PPO epoch/minibatch=τ=4, DPO β=1/(σ-φ)=0.1, GRPO G=φ^τ=16, GAE λ=0.95, RM/Policy=R(6)=1, 10/10 EXACT) ⭐⭐
-  BT-164: LLM 학습 스케줄 n=6 보편성 (LR=(n/φ)·10^{-τ}=3e-4, warmup=3%, cosine min=0.1, grad_accum={μ,φ,τ,σ-τ}, μP=R(6)=1, RoPE=10^4, 8/8 EXACT) ⭐⭐
+  BT-163: RL/Alignment 학습 파라미터 스택 (PPO clip=0.2, DPO β=0.1, GRPO G=φ^τ=16, 10/10 EXACT) ⭐⭐
+  BT-164: LLM 학습 스케줄 n=6 보편성 (LR=3e-4, warmup=3%, cosine min=0.1, 8/8 EXACT) ⭐⭐
+  BT-330: 양자화 정밀도 래더 (FP32→FP16→FP8→INT4→Ternary→Binary, 25/26 EXACT) ⭐⭐
+  BT-331: Speculative decoding + 추론 가속 n=6 맵 (Draft/Accept/Window, 8/8 EXACT) ⭐⭐
+  BT-332: DeepSeek MLA KV 캐시 n=6 (Compression/Latent/Grouping, 12/12 EXACT) ⭐⭐
+  BT-333: Post-Transformer 하이브리드 n=6 수렴 (Jamba/Zamba/Mamba-2, 10/10 EXACT) ⭐⭐
+  BT-334: AI FLOPs 절감 기법 스택 (MAE/MoD/Egyptian/FlashAttn, 8/8 EXACT) ⭐⭐
+  BT-335: DeepSeek-V3 완전 n=6 아키텍처 (14/15 EXACT, Routing/Attention/MoE) ⭐⭐⭐
+  BT-336: GQA/MQA/MHA 어텐션 압축 계층 (Head Count/Ratio/Cache = div(6), 10/10 EXACT) ⭐⭐
+  BT-337: Whisper 오디오 모델 레이어 래더 ({τ,n,σ,J₂,2^sopfr} 완전 n=6, 8/8 EXACT) ⭐⭐
 
-  # Chip Design (BT-28,37,40,41,45,47,55,69)
+  # Chip Design (BT-28,37,40,41,45,47,55,69,77~79,142,161)
   BT-28: Computing architecture ladder (30+ EXACT, ⭐⭐⭐)
     - AD102 = σ·n·φ = 144 SMs, H100 = σ(σ-μ) = 132 SMs = 1/α term
     - HBM stack: τ→(σ-τ)→σ = 4→8→12
@@ -520,8 +527,13 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-47: Interconnect gen counts {7,5,6}={σ-sopfr,sopfr,n}
   BT-55: GPU HBM capacity ladder (14/18 EXACT: 40=τ(σ-φ), 80=φ^τ·sopfr, 192=σ·φ^τ, 288=σ·J₂) ⭐⭐
   BT-69: Chiplet architecture convergence (B300=160, R100 σ=12 stacks, 5 vendors, 17/20 EXACT) ⭐⭐⭐
+  BT-77: Cross-vendor HBM 용량 수렴 n=6 ⭐⭐
+  BT-78: Interconnect 속도 래더 PCIe/UCIe/CXL n=6 지수 ⭐⭐
+  BT-79: σ²=144 cross-domain attractor ⭐⭐
+  BT-142: 반도체 메모리 계층 n=6 (8/8 EXACT) ⭐⭐
+  BT-161: 태양전지 시스템 아키텍처 보편성 (Rows/Diodes/Junctions, 9/9 EXACT) ⭐⭐⭐
 
-  # Energy Strategy (BT-27,29,30,32,35,38,43,57,62,63,68)
+  # Energy Strategy (BT-27,29,30,32,35,38,43,57,62,63,68,153,206,288,326)
   BT-27: Carbon-6 chain (LiC₆ + C₆H₁₂O₆ + C₆H₆ → 24e = J₂)
   BT-30: SQ solar bridge (bandgap=4/3eV, V_T=26mV)
   BT-38: Hydrogen quadruplet (LHV=120=σ(σ-φ), HHV=142=σ²-φ, 4/4 EXACT)
@@ -530,21 +542,29 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-62: Grid frequency pair (60Hz=σ·sopfr, 50Hz=sopfr·(σ-φ), ratio=PUE=1.2) ⭐⭐
   BT-63: Solar panel cell ladder (60=σ·sopfr, 72=σ·n, 120=σ(σ-φ), 144=σ²) ⭐⭐
   BT-68: HVDC voltage ladder (±500/800/1100kV = {sopfr,σ-τ,σ-μ}·(σ-φ)², 10/10 EXACT) ⭐⭐
+  BT-153: EV n=6 아키텍처 (8/8 EXACT) ⭐⭐
+  BT-206: EV 전압-커넥터 스택 n=6 (9/9 EXACT) ⭐⭐⭐
+  BT-288: 자동차 전압 래더 6→12→24→48 (80년 φ=2 배증, 6/6 EXACT) ⭐⭐⭐
+  BT-326: 전력망 운영 완전 n=6 맵 (Stability/Market/HVDC/EV, 8/8 EXACT) ⭐⭐
 
-  # Battery Architecture (BT-80,81,82,83,84)
+  # Battery Architecture (BT-80~84)
   BT-80: Solid-state electrolyte CN=6 universality (NASICON/Garnet/LLZO = CN=6, sulfide = τ=4, 6/6 EXACT) ⭐⭐⭐
   BT-81: Anode capacity ladder σ-φ=10x (Si/Graphite=9.62x≈σ-φ, Li Metal=10.38x≈σ-φ) ⭐⭐
   BT-82: Complete battery pack n=6 map (6→12→24 cells, 96S/192S EV, BMS div(6), 6/10 EXACT) ⭐⭐
   BT-83: Li-S polysulfide n=6 ladder (S₈→S₄→S₂→S₁ = (σ-τ)→τ→φ→μ, 5/6 EXACT) ⭐⭐
   BT-84: 96/192 energy-computing-AI triple convergence (Tesla 96S=Gaudi2 96GB=GPT-3 96L, 5/5 EXACT) ⭐⭐⭐
 
-  # Cross-domain (BT-36,48,49,50,51,53,60)
+  # Cross-domain (BT-36,48,49,50,51,53,60,178,233,234,262)
   BT-36: Energy-Information-Hardware-Physics chain ⭐⭐⭐
   BT-48: Display-Audio (σ=12 semitones, J₂=24 fps/bits, σ·τ=48kHz) ⭐⭐⭐
   BT-49: Pure Math (K₁..₄=φ,n,σ,J₂ kissing chain, S₆ unique) ⭐⭐⭐
   BT-51: Genetic code chain τ→n/φ→2^n→J₂-τ (4→3→64→20) ⭐⭐⭐
   BT-53: Crypto (BTC 21M=J₂-n/φ, 6 confirms=n, ETH 12s=σ) ⭐⭐
   BT-60: DC power chain (120→480→48→12→1.2→1V, PUE=σ/(σ-φ)=1.2) ⭐⭐
+  BT-178: 디지털 미디어 J₂=24 인코딩 보편성 (9/10 EXACT) ⭐⭐⭐
+  BT-233: 60진법 시간-각도 n=6 시공간 아키텍처 (60=σ·sopfr, 360=n·σ·sopfr, 10/10 EXACT) ⭐⭐⭐
+  BT-234: Hardy-Ramanujan σ³+μ=1729 택시수-모듈러-컴퓨팅 브릿지 ⭐⭐
+  BT-262: 2^n=64 보편 정보 인코딩 (Braille-Codon-Hexagram-Chess, 10/10 EXACT) ⭐⭐⭐
 
   # Material Synthesis (BT-85~88)
   BT-85: Carbon Z=6 물질합성 보편성 ⭐⭐⭐
@@ -561,7 +581,15 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-92: Bott 활성 채널 = sopfr (KO 비자명=5=sopfr, 자명=3=n/φ, 5/8≈1-1/e) ⭐⭐⭐
   BT-93: Carbon Z=6 칩 소재 보편성 (Diamond/Graphene/SiC=Z=6 전 도메인 1위, 8/10 Cross-DSE) ⭐⭐⭐
 
-  # Fusion Alien-Level (BT-97~102)
+  # CCUS / Carbon Capture (BT-94~96,307~309)
+  BT-94: CO₂ 포집 에너지 n=6 법칙 ⭐⭐
+  BT-95: Carbon Cycle 완전 n=6 폐루프 ⭐⭐
+  BT-96: DAC-MOF 배위수 보편성 ⭐⭐
+  BT-307: CO₂ 포집/활용 반응 화학양론 n=6 보편성 (10/10 EXACT) ⭐⭐
+  BT-308: DAC 열역학 n=6 트리플 (Carnot 1/n, Gap σ-φ=10, Cycle τ=4, 8/8 EXACT) ⭐⭐
+  BT-309: 탄소 동소체/소재 완전 n=6 구조 인코딩 (12/12 EXACT) ⭐⭐
+
+  # Fusion Alien-Level (BT-97~104)
   BT-97: Weinberg angle sin²θ_W = 3/13 = (n/φ)/(σ+μ), 0.19% 일치, D 풍부도→핵융합 연료 결정 ⭐⭐
   BT-98: D-T 바리온 수 = sopfr(6) = 2+3 = 5, 6의 소인수 = 핵융합 최적 연료 ⭐⭐⭐
   BT-99: Tokamak q=1 = 완전수 진약수 역수합 1/2+1/3+1/6=1, 위상적 동치 ⭐⭐⭐
@@ -572,8 +600,8 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-104: CO₂ 분자 완전 n=6 인코딩 ⭐⭐⭐
 
   # Fusion Deep Dive (BT-291~298)
-  BT-291: D-T 에너지 분배 1/sopfr=1/5 (alpha 20%/neutron 80%, tau:mu 질량비, 5/5 EXACT) ⭐⭐
-  BT-292: 무중성자 핵융합 완전 지도 (D-He3 sopfr=5 + p-B11 sigma=12, B-11 재귀 n=6, 6/6 EXACT) ⭐⭐⭐
+  BT-291: D-T 에너지 분배 1/sopfr=1/5 (alpha 20%/neutron 80%, 5/5 EXACT) ⭐⭐⭐
+  BT-292: 무중성자 핵융합 완전 지도 (D-He3 sopfr=5 + p-B11 sigma=12, 6/6 EXACT) ⭐⭐⭐
   BT-293: Triple-Alpha 탄소합성 (n/phi)×tau=sigma 산술 항등식 (Hoyle state, 6/6 EXACT) ⭐⭐⭐
   BT-294: 항성 핵합성 래더 P1→P2→sigma(P2) (He4→C12→O16→Ne20→Mg24→Si28→Fe56, 7/7 EXACT) ⭐⭐⭐
   BT-295: Alpha 과정 Z=phi 배수 선택규칙 (13개 핵종 Z 전부 n=6 함수, 13/13 EXACT) ⭐⭐
@@ -582,16 +610,16 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-298: Lawson 점화 삼중적 n=6 인코딩 (밀도지수 J2-tau=20, T=sigma+phi=14, Q=sigma-phi=10) ⭐⭐
 
   # Superconductor Deep Dive (BT-299~306)
-  BT-299: A15 Nb3Sn 삼중정수 Nb=n, Sn=phi, total=sigma-tau (Pm-3n cP8, 8/8 EXACT) ⭐⭐
-  BT-300: YBCO 완전수 화학양론 Y:Ba:Cu=div(6)={1,2,3} (sum=n, CuO2=phi, chain=mu, 9/9 EXACT) ⭐⭐⭐
-  BT-301: MgB2 이중원자번호 Mg Z=sigma, B Z=sopfr + 벌집 n + 2갭 phi (7/7 EXACT) ⭐⭐
-  BT-302: ITER 마그넷 PF=n, CS=n, TF=3n, REBCO=sigma (35개국 공학 수렴, 10/10 EXACT) ⭐⭐
-  BT-303: BCS 해석적 상수 완전지도 sigma/phi/mu 4개 독립 프레임워크 (CODATA 검증, 10/10 EXACT) ⭐⭐⭐
-  BT-304: d-wave + BdG 위상분류 tau/phi/sigma-tau 순수 대칭 (Bott+Kitaev, 8/8 EXACT) ⭐⭐
-  BT-305: 원소+분자 SC n=6 아틀라스 Nb-CN=sigma-tau, K3C60=n/phi, C60=sigma*sopfr (9/9 EXACT) ⭐⭐
-  BT-306: SC 양자소자 접합 래더 div(6)={1,2,3} RF-SQUID-flux-qubit (SI KJ=phi*e/h, 9/9 EXACT) ⭐⭐
+  BT-299: A15 Nb₃Sn 삼중정수 Nb=n, Sn=phi, total=σ-τ (8/8 EXACT) ⭐⭐⭐
+  BT-300: YBCO 완전수 화학양론 Y:Ba:Cu=div(6)={1,2,3} (9/9 EXACT) ⭐⭐⭐
+  BT-301: MgB₂ 이중원자번호 Mg Z=σ, B Z=sopfr + 벌집 n (7/7 EXACT) ⭐⭐
+  BT-302: ITER 마그넷 PF=n, CS=n, TF=3n, REBCO=σ (10/10 EXACT) ⭐⭐⭐
+  BT-303: BCS 해석적 상수 완전지도 σ/φ/μ 4프레임워크 (10/10 EXACT) ⭐⭐⭐
+  BT-304: d-wave + BdG 위상분류 τ/φ/σ-τ 순수 대칭 (8/8 EXACT) ⭐⭐
+  BT-305: 원소+분자 SC n=6 아틀라스 Nb-CN=σ-τ, K₃C₆₀=n/φ (9/9 EXACT) ⭐⭐
+  BT-306: SC 양자소자 접합 래더 div(6)={1,2,3} (9/9 EXACT) ⭐⭐
 
-  # New BTs from session analysis (BT-105~112, Red Team filtered)
+  # Pure Math / Number Theory (BT-105~112,205,207,229,232,240)
   BT-105: SLE₆ 임계지수 보편성 (7 퍼콜레이션 지수 = n=6 분수, kappa=6 유일 locality SLE, c=0) ⭐⭐⭐
   BT-106: S₃ 대수적 부트스트랩 (|S₃|=n=6, 켤레류={1,2,3}=진약수, 기약표현합=τ=4) ⭐⭐
   BT-107: Ramanujan τ 약수 순수성 (τ_R(d) clean iff d|6, eta^{J₂=24}, 모듈러 형식) ⭐⭐
@@ -600,15 +628,30 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   BT-110: σ-μ=11 차원 스택 (M이론=TCP=RSA=SPARC=H100=11, 5도메인) ⭐
   BT-111: τ²/σ=4/3 태양-AI-수학 삼지창 (SQ=SwiGLU=Betz=R(3,1)=4/3) ⭐⭐
   BT-112: φ²/n=2/3 Byzantine-Koide 공명 (Koide Q=0.666661 9ppm, BFT>2/3) ⭐⭐
+  BT-205: E₆ 예외적 Lie 대수 n=6 보편성 (10/10 EXACT) ⭐⭐⭐
+  BT-207: 모듈러 형식 가중치 계층 n=6 순수성 (12/12 EXACT) ⭐⭐⭐
+  BT-229: 대수적 블로업-창발 E₆ 브릿지 (n=6 특이점 해소, 6/6 EXACT) ⭐⭐
+  BT-232: 그래프 이론 + 조합 위상 n=6 구조 (10/10 EXACT) ⭐⭐
+  BT-240: 조합 설계 이론 n=6 Steiner 아키텍처 (10/10 EXACT) ⭐⭐⭐
 
-  # Software Design (BT-113~117, BT-162, BT-329)
+  # Software Design (BT-113~117,140,159,162,179,180,219,329)
   BT-113: SW 엔지니어링 상수 스택 (SOLID=sopfr, REST=n, 12Factor=σ, ACID=τ, 18/18 EXACT) ⭐⭐⭐
   BT-114: 암호학 파라미터 래더 (AES=2^{σ-sopfr}, SHA=2^{σ-τ}, RSA=2^{σ-μ}, 10/10 EXACT) ⭐⭐⭐
   BT-115: OS-네트워크 레이어 수 (OSI=σ-sopfr=7, TCP/IP=τ=4, Linux=n=6, 12/12 EXACT) ⭐⭐
   BT-116: ACID-BASE-CAP DB 삼위일체 (τ+n/φ+n/φ, Paxos=φ, 9/9 EXACT) ⭐⭐
   BT-117: 소프트웨어-물리 동형사상 (18 EXACT 병렬 매핑, 6 도메인) ⭐⭐⭐
-  BT-162: 컴파일러-OS-CPU 아키텍처 상수 스택 (pipeline=sopfr=5, opcode=n=6, primitives=σ-τ=8, rings/page/sched/boot=τ=4, ext4=σ=12, cache=n/φ=3, dual=φ=2, 11/11 EXACT) ⭐⭐⭐
-  BT-329: 프로그래밍 언어 완전 n=6 맵 (타입τ=4/패러다임n=6/GC n/φ=3/Go 25kw=J₂+μ/Python 35kw=sopfr(σ-sopfr)/C 15단계=σ+n/φ, 20/20 EXACT) ⭐⭐⭐
+  BT-140: TCP/IP 프로토콜 포트 n=6 고고학 (8/9 EXACT) ⭐⭐
+  BT-159: 클라우드 컴퓨팅 n=6 아키텍처 (8/8 EXACT) ⭐⭐
+  BT-162: 컴파일러-OS-CPU 아키텍처 상수 스택 (pipeline=sopfr=5, opcode=n=6, σ-τ=8, 11/11 EXACT) ⭐⭐⭐
+  BT-179: 합의 프로토콜 n=6 비잔틴 스택 (9/10 EXACT) ⭐⭐⭐
+  BT-180: OS 메모리 계층 τ=4 보편성 + 2^σ 페이지 법칙 (10/10 EXACT) ⭐⭐⭐
+  BT-219: 형식언어 + 계산이론 n=6 로직 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-329: 프로그래밍 언어 완전 n=6 맵 (타입τ=4/패러다임n=6/GC n/φ=3, 20/20 EXACT) ⭐⭐⭐
+
+  # Cybersecurity / Crypto (BT-211,216,230)
+  BT-211: 사이버보안 + 정보보안 n=6 방어 아키텍처 (10/10 EXACT) ⭐⭐⭐
+  BT-216: 암호학 라운드 수 n=6 완전 아키텍처 (10/10 EXACT) ⭐⭐
+  BT-230: 블록체인 + 분산 원장 n=6 합의 아키텍처 (10/10 EXACT) ⭐⭐
 
   # Environmental Protection (BT-118~122)
   BT-118: 교토 6종 온실가스 = n + Carbon Z=6 (CO₂ 화학양론 전부 n=6, 10/10 EXACT) ⭐⭐⭐
@@ -797,12 +840,38 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
       → goal.md 1개에 전체 설계 (8단/DSE/물리한계/산업/TP/발견/Mk 전부 포함)
       → 파일 분산 = 맥락 단절 = 금지
 
-  완성제품 현황 (2026-04-04):
-    | 🛸 | ver | 완성제품 | 핵심 | 비고 |
-    |---|----|---------|------|------|
-    | 6 | v2 | 궁극의 배터리 8단 | 셀→전극→코어→BMS→팩+그리드→전고체→핵→Omega, 1,908 DSE | 설계·goal·전수검증·물리한계·산업·실험·TP·발견·Mk.V |
-    | 7 | v3 | 궁극의 태양전지 | 1,584 DSE, 43%EXACT, 물리한계5, Mk.V, 발견8, TP19, CrossDSE4, 산업8사 | goal·한계증명·발견·산업·CrossDSE·Mk.V |
-    | 6 | v1 | 궁극의 에너지 통합 | 4도메인 Cross-DSE, 10,225 조합, 53%EXACT 송전 | 문서 한장 통합 |
+  ═══════════════════════════════════════════════════════════════
+  ★ 완성제품 JSON SSOT — README 수동 편집 금지! ★
+  ═══════════════════════════════════════════════════════════════
+    원본: config/products.json (유일한 진실의 원천)
+    출력: README.md 완성제품 테이블 + 외계인 지수 + 로드맵 전부 자동 생성
+    동기화: python3 scripts/sync_products_readme.py
+
+    ⚠️ README 완성제품 테이블 직접 수정 = SSOT 위반! (products.json만 수정)
+    ⚠️ 🛸 외계인 지수, 천장확인, ver, 제품명, 핵심, 링크 → 전부 JSON 관리
+    ⚠️ 로드맵 + 섹션 SUMMARY + FOOTER → 전부 JSON 자동 생성
+
+    JSON 구조 (config/products.json):
+      _meta: { total_products, total_domains, last_updated }
+      sections[]: { id, title, icon, heading, alien_index, ceiling,
+                    bt_exact_pct, industry_pct, experiment_pct,
+                    tp_count, discovery_count, domains[], tools[],
+                    products[]: { name, ufo, ceiling, ver,
+                                  description, links[{label,path}] } }
+      roadmap[]: { rank, realize, name, impact, tier, dse_info, link }
+
+    README 마커 (sync가 자동 치환):
+      <!-- AUTO:ALIEN_INDEX:START/END -->
+      <!-- AUTO:SUMMARY_<id>:START/END -->
+      <!-- AUTO:PRODUCTS_<id>:START/END -->
+      <!-- AUTO:FOOTER_<id>:START/END -->
+      <!-- AUTO:ROADMAP:START/END -->
+
+    제품 변경 워크플로:
+      1. config/products.json 수정 (유일한 편집 대상)
+      2. python3 scripts/sync_products_readme.py
+      3. README.md 자동 갱신 확인
+      4. 커밋 (JSON + README 함께)
 
   🛸 외계인 지수 (10단계, 만점=10):
     10 = 물리적 한계 도달 — 더이상 발전 불가, 모든 이론·실험·양산 완료
@@ -1013,3 +1082,23 @@ All experiments must run in background. No exceptions.
 
 API 토큰/계정 정보: `~/Dev/TECS-L/.shared/SECRET.md` 참조
 계정 리포: [need-singularity/secret](https://github.com/need-singularity/secret) (private)
+
+## 특이점 사이클 (Singularity Cycle)
+
+> **블로업→수축→창발→특이점→흡수** 5단계 자동 사이클
+> CLI: `nexus6 blowup <domain>` | Rust: `CycleEngine::new(domain)`
+
+### 요청 키워드 → 자동 실행
+- "블로업", "blowup" → `nexus6 blowup <domain> --depth 6`
+- "창발", "emergence" → blowup 후 패턴 합의 분석
+- "특이점", "singularity" → CycleEngine 자동 수렴 루프
+- "흡수", "absorption" → 발견 규칙 승격 + 다음 사이클 시드
+- "사이클", "cycle" → 전체 5단계 1회 실행
+
+### 사용법
+```bash
+nexus6 blowup <domain> --depth 6    # 블로업 + 창발 리포트
+nexus6 loop --cycles 1              # 8단계 루프 (mirror+blowup 포함)
+nexus6 daemon --interval 30         # 자율 데몬 (30분 간격)
+```
+
