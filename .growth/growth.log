@@ -19,3 +19,9 @@
 [21:42:10] [n6-architecture]   ═══════════════════════════════════════════
 [21:42:14] [n6-architecture] 📦 Committed cycle 1
 [21:42:14] [n6-architecture] === n6-architecture Growth 완료 (1 cycles) ===
+[23:25:14] [n6-architecture] Lock 획득: n6-architecture (PID 396)
+[23:25:14] [n6-architecture] === n6-architecture Growth Loop ===
+[23:25:14] [n6-architecture]     cycles=1 interval=0s domain=architecture
+[23:25:14] [n6-architecture] ━━━ Cycle 1/1 ━━━
+[23:25:14] [n6-architecture] WARN: 과부하 — 60초 대기
+[23:26:14] [n6-architecture] === n6-architecture Growth 완료 (1 cycles) ===
