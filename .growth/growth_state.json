@@ -21,8 +21,8 @@
   "meta_recursion": {
     "level": 3,
     "cycle": 6,
-    "convergence_rate": 39,
+    "convergence_rate": 37,
     "connected_repos": 9,
-    "engine_functions": 56
+    "engine_functions": 57
   }
 }

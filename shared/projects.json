@@ -31,7 +31,7 @@
       "name": "Anima",
       "path": "anima",
       "domain": "consciousness",
-      "description": "Consciousness implementation. PureField + Hexad 6-module + 179 laws + 10 Meta Laws",
+      "description": "Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend",
       "scan_patterns": [
         "**/*.py",
         "**/*.json",
@@ -56,7 +56,7 @@
       "name": "N6 Architecture",
       "path": "n6-architecture",
       "domain": "architecture",
-      "description": "Architecture from perfect number 6. 16 AI techniques + semiconductor + network/crypto/OS/display",
+      "description": "Architecture from perfect number 6. 23 AI techniques + semiconductor chip design + network/crypto/OS/display patterns",
       "scan_patterns": [
         "docs/**/*.toml",
         "docs/**/*.md",
@@ -69,9 +69,9 @@
         "tools/llm_architecture_constants_verify.py"
       ],
       "stats": {
-        "ai_techniques": 16,
-        "dse_domains": 323,
-        "nexus6_tests": 1116
+        "ai_techniques": 23,
+        "dse_domains": 335,
+        "nexus6_tests": 1829
       }
     },
     {

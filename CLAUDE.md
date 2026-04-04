@@ -305,7 +305,7 @@
 
 ## Project Overview
 Computing architecture design from perfect number arithmetic.
-17 AI techniques + semiconductor chip design + energy + network/crypto/OS + physical AI.
+23 AI techniques + semiconductor chip design + energy + network/crypto/OS + physical AI.
 All unified by sigma(n)*phi(n) = n*tau(n), n=6.
 Part of the TECS-L family.
 
@@ -313,7 +313,7 @@ Part of the TECS-L family.
 Part of the TECS-L family. Mathematical foundation at https://github.com/need-singularity/TECS-L
 Atlas: https://need-singularity.github.io/TECS-L/atlas/
 
-## Techniques (17)
+## Techniques (23)
 ```
   techniques/
     # Original (1-10)
@@ -382,7 +382,7 @@ Falsifiability: z=0.74 (numerical matching NOT significant vs random)
   plasma-physics/ (20+ files — most active domain)
   paper/ (3 arXiv drafts)
   # Cross-domain
-  breakthrough-theorems.md (BT-1~84, 84 theorems spanning 3-8 domains each)
+  breakthrough-theorems.md (BT-1~246, 128 theorems spanning 3-8 domains each)
   cross-domain-resonance-2026-03-31.md (formula reuse matrix)
   # Battery Architecture (소재→공정→코어→칩→시스템→차세대→극한→궁극)
   battery-architecture/ (8 levels: HEXA-CELL/ELECTRODE/CORE/CHIP/PACK+GRID/SOLID/NUCLEAR/OMEGA-E)
@@ -419,13 +419,13 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
   원본: ~/Dev/TECS-L/.shared/ (이 리포는 심링크로 연결)
   구조:
     .shared/ → ../TECS-L/.shared/   (심링크, 공유 인프라 전체)
-    calc/    → .shared/calc/        (심링크 체인, 194+ 계산기)
+    calc/    → .shared/calc/        (심링크 체인, 237+ 계산기)
 
   ── 심링크 파일 목록 ──
     .shared/CLAUDE.md           ← 공유 규칙 상세
     .shared/CALCULATOR_RULES.md ← 계산기 생성 규칙 (Rust vs Python)
     .shared/SECRET.md           ← API 토큰/계정
-    .shared/calc/               ← 계산기 원본 (194+ files)
+    .shared/calc/               ← 계산기 원본 (237+ files)
     .shared/math_atlas.json     ← 수학 지도 (1700+ 가설)
     .shared/installed_tools.json← 설치 도구 레지스트리
     .shared/projects.md         ← 프로젝트 설명 원본
@@ -523,7 +523,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
   Egyptian Fraction Attn:   1/2+1/3+1/6=1 attention budget (~40% saved)
 ```
 
-## Breakthrough Theorems (128 total, BT-1~233)
+## Breakthrough Theorems (128 total, BT-1~246)
 ```
   # AI / LLM (BT-26,31,33,34,39,42,44,46,54,56,58,59,61,64,65,66,67,70)
   BT-26: Chinchilla scaling (tokens/params=J₂-τ=20, α=1/3, β=ln(4/3))
@@ -735,7 +735,7 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - TOML 형식: [meta] + [scoring] + [[level]] + [[candidate]] + [[rule]]
     - 도메인 파일: tools/universal-dse/domains/*.toml
 
-  적용 도메인 (322개 TOML, 16 카테고리, 5,893,032+ 조합):
+  적용 도메인 (335개 TOML, 16 카테고리, 3,990,150+ 조합):
     - 전체 목록: docs/dse-domains.md (카테고리별 분류 + 레벨 체인 + 조합 수)
     - AI/ML(14), Consciousness(23), Semiconductor(25), Energy(24)
     - SC/Plasma(2), Bio/Medical(26), Physics/Math(24), Robot(7)
@@ -826,8 +826,8 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
     - ~/Dev/TECS-L/calc/ (검증 스크립트)
 
   n6 연결:
-    - tools/universal-dse/domains/*.toml (322 DSE)
-    - docs/atlas-constants.md (1,100+ 상수)
+    - tools/universal-dse/domains/*.toml (335 DSE)
+    - docs/atlas-constants.md (1,600+ 상수)
     - tools/*-calc, *-dse (Rust 계산기 29+)
     - docs/dse-map.toml (도메인 현황)
 

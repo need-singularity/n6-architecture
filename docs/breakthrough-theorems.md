@@ -1,4 +1,4 @@
-# N6 Architecture — Breakthrough Theorems (BT-1 through BT-225)
+# N6 Architecture — Breakthrough Theorems (BT-1 through BT-246)
 
 > Cross-domain bridges where n=6 arithmetic unifies independent fields.
 > Each theorem requires **minimum 3 domains** with independently verifiable evidence.

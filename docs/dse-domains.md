@@ -1,6 +1,6 @@
-# Universal DSE 도메인 전체 목록 (320개)
+# Universal DSE 도메인 전체 목록 (335개)
 
-**총 320개 도메인 | 5,893,032 조합 | 100% n6 연결**
+**총 335개 도메인 | 6,405,710 조합 | 100% n6 연결**
 
 모든 TOML 파일: `tools/universal-dse/domains/`
 
@@ -18,23 +18,23 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 
 | # | 카테고리 | 파일 수 | 조합 수 |
 |---|---------|:-------:|--------:|
-| 1 | [AI / ML](#1-ai--ml) | 14 | 107,568 |
-| 2 | [Consciousness](#2-consciousness) | 23 | 193,608 |
-| 3 | [Semiconductor / Chip](#3-semiconductor--chip) | 25 | 283,236 |
-| 4 | [Energy](#4-energy) | 24 | 173,298 |
-| 5 | [Superconductor / Plasma](#5-superconductor--plasma) | 2 | 28,126 |
-| 6 | [Bio / Medical](#6-bio--medical) | 26 | 194,544 |
+| 1 | [AI / ML](#1-ai--ml) | 14 | 107,784 |
+| 2 | [Consciousness](#2-consciousness) | 24 | 197,358 |
+| 3 | [Semiconductor / Chip](#3-semiconductor--chip) | 26 | 292,740 |
+| 4 | [Energy](#4-energy) | 26 | 182,262 |
+| 5 | [Superconductor / Plasma](#5-superconductor--plasma) | 2 | 28,812 |
+| 6 | [Bio / Medical](#6-bio--medical) | 26 | 196,488 |
 | 7 | [Physics / Math](#7-physics--math) | 24 | 278,640 |
-| 8 | [Robot / Autonomous](#8-robot--autonomous) | 7 | 51,804 |
-| 9 | [Manufacturing / Material](#9-manufacturing--material) | 65 | 499,674 |
-| 10 | [Infra / Network](#10-infra--network) | 14 | 102,300 |
+| 8 | [Robot / Autonomous](#8-robot--autonomous) | 8 | 322,020 |
+| 9 | [Manufacturing / Material](#9-manufacturing--material) | 66 | 509,322 |
+| 10 | [Infra / Network](#10-infra--network) | 15 | 107,316 |
 | 11 | [Software / Programming](#11-software--programming) | 10 | 95,834 |
-| 12 | [Display / Audio](#12-display--audio) | 15 | 108,828 |
-| 13 | [Environment / Agriculture](#13-environment--agriculture) | 31 | 3,578,580 |
-| 14 | [Civil / Transport](#14-civil--transport) | 16 | 123,552 |
-| 15 | [Space / Defense](#15-space--defense) | 11 | 82,260 |
-| 16 | [Misc / Meta](#16-misc--meta) | 13 | 97,812 |
-| | **Total** | **320** | **5,893,032** |
+| 12 | [Display / Audio](#12-display--audio) | 17 | 166,188 |
+| 13 | [Environment / Agriculture](#13-environment--agriculture) | 31 | 3,581,460 |
+| 14 | [Civil / Transport](#14-civil--transport) | 18 | 137,592 |
+| 15 | [Space / Defense](#15-space--defense) | 13 | 95,832 |
+| 16 | [Misc / Meta](#16-misc--meta) | 15 | 106,062 |
+| | **Total** | **335** | **6,405,710** |
 
 ---
 
@@ -87,9 +87,10 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `hivemind-collective.toml` | Topology→NodeCount→Coupling→Federation→Consensus | 7,776 |
 | `multimodal-consciousness.toml` | Modality→Encoder→Fusion→Mapping→Output | 7,776 |
 | `quantum-consciousness.toml` | Substrate→Coherence→Binding→Measurement→Scale | 7,776 |
+| `cognitive-architecture.toml` | Neuron-Material→Synapse-Process→Cortical-Core→Brain-Chip→Cognitive-System | 3,750 |
 | `telepathy-system.toml` | Perception→Encoding→Alignment→Transmission→Decoding | 6,480 |
 
-> **23개 | 193,608 조합**
+> **24개 | 197,358 조합**
 
 ---
 
@@ -121,9 +122,10 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `semiconductor-packaging.toml` | Substrate→Interconnect→ThermalInterface→TestAccess→SystemPackage | 7,776 |
 | `silicon-wafer.toml` | Crystal→Slicing→Polishing→Epitaxy→Inspection | 7,560 |
 | `soc-integration.toml` | CPU→Accelerator→Interconnect→Memory→Power | 7,560 |
+| `chip-architecture.toml` | Material→Process→Core→Chip→System | 6,480 |
 | `wafer-fabrication.toml` | Substrate→Deposition→Lithography→Etch→Doping | 7,560 |
 
-> **25개 | 283,236 조합**
+> **26개 | 292,740 조합**
 
 ---
 
@@ -154,9 +156,11 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `thermoelectric-material.toml` | Material→Fabrication→Module→System→Application | 7,776 |
 | `turbine-generator.toml` | Turbine→Generator→Bearing→Control→Grid | 7,776 |
 | `wind-energy.toml` | Blade→Generator→Tower→Grid→Farm | 7,776 |
+| `battery-architecture.toml` | Material→Electrode→Core→Chip→System | 3,600 |
+| `power-grid.toml` | Generation→Conversion→Transmission→Distribution→Consumption | 4,500 |
 | `wire-cable.toml` | ConductorType→Insulation→Shielding→Construction→Application | 7,560 |
 
-> **24개 | 173,298 조합**
+> **26개 | 182,262 조합**
 
 ---
 
@@ -168,6 +172,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `sc.toml` | Material→Process→Form→Application→System | 14,406 |
 
 > **2개 | 28,812 조합**
+
 
 ---
 
@@ -202,7 +207,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `surgical-robot.toml` | Arm→Instrument→Vision→Control→Integration | 7,560 |
 | `vaccine-production.toml` | Antigen→Adjuvant→Formulation→FillFinish→ColdChain | 7,776 |
 
-> **26개 | 194,352 조합**
+> **26개 | 196,488 조합**
 
 ---
 
@@ -249,9 +254,10 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `autonomous-submarine.toml` | Hull→Propulsion→Sonar→Navigation→Mission | 7,776 |
 | `drone-delivery.toml` | Vehicle→Navigation→Payload→Infrastructure→Fleet | 7,560 |
 | `robot-hardware.toml` | Structure→Actuator→Sensor→Control→Integration | 8,640 |
+| `robotics.toml` | Material→Actuator→Joint→CtrlChip→Body→Mind→Swarm→Ultimate | 270,000 |
 | `swarm-robotics.toml` | Agent→Communication→Coordination→Task→Deployment | 7,776 |
 
-> **7개 | 51,804 조합**
+> **8개 | 322,020 조합**
 
 ---
 
@@ -291,6 +297,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `magnetic-material.toml` | Material→Processing→Magnetization→Characterization→Application | 7,560 |
 | `mass-spectrometry.toml` | Ionization→Analyzer→Detector→DataProcessing→Application | 7,776 |
 | `material.toml` | Element→Process→Assembler→Control→Factory | 5,250 |
+| `material-synthesis.toml` | Element→Process→Assembler→Control→Factory | 3,600 |
 | `mems-sensor.toml` | SensingElement→Transduction→Fabrication→Packaging→Application | 7,776 |
 | `metal-organic-framework.toml` | Metal→Linker→Topology→Activation→Application | 7,560 |
 | `metamaterial.toml` | Unit→Array→Tuning→Fabrication→Application | 7,776 |
@@ -325,7 +332,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `valve-actuator.toml` | ValveType→Actuator→Material→SizingMethod→Application | 7,776 |
 | `welding-technology.toml` | Process→Filler→Shielding→JointDesign→Application | 7,776 |
 
-> **65개 | 499,674 조합**
+> **66개 | 509,322 조합**
 
 ---
 
@@ -341,6 +348,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `edge-computing.toml` | Hardware→Network→Orchestration→Application→Security | 7,776 |
 | `indoor-positioning.toml` | Technology→Infrastructure→Algorithm→Fusion→Application | 7,776 |
 | `network.toml` | Foundation→Process→Core→Engine→System | 5,400 |
+| `network-protocol.toml` | Foundation→Process→Core→Engine→System | 4,500 |
 | `optical-fiber-network.toml` | Fiber→Amplifier→Switch→Protocol→Topology | 5,400 |
 | `quantum-network.toml` | PhotonSource→Channel→Repeater→Protocol→Application | 7,776 |
 | `radar-system.toml` | Transmitter→Antenna→Receiver→Processing→Application | 7,776 |
@@ -348,7 +356,7 @@ tools/universal-dse/universal-dse domains/fusion.toml domains/sc.toml
 | `smart-city-iot.toml` | Sensor→Network→Platform→Analytics→Service | 9,072 |
 | `underwater-acoustic.toml` | Transducer→Modulation→Channel→Network→Platform | 7,776 |
 
-> **14개 | 102,828 조합**
+> **15개 | 107,316 조합**
 
 ---
 

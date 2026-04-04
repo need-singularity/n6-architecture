@@ -61,7 +61,7 @@ fn test_cluster_entry_counts() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// BT node count (141 = 128 original + 13 new)
+// BT node count (155 = 128 original + 13 CTS + 14 TRM)
 // ═══════════════════════════════════════════════════════════════
 
 #[test]
@@ -69,7 +69,7 @@ fn test_bt_count_with_new_bts() {
     let mut g = DiscoveryGraph::new();
     populate_bt_graph(&mut g);
     let bt_nodes: Vec<_> = g.nodes.iter().filter(|n| matches!(n.node_type, NodeType::Bt)).collect();
-    assert_eq!(bt_nodes.len(), 141, "141 BT nodes (128 + 13 new BT-210~225)");
+    assert_eq!(bt_nodes.len(), 155, "155 BT nodes (128 + 13 CTS + 14 TRM)");
 
     // Verify specific new BTs exist
     for id in &[210, 211, 212, 213, 214, 215, 219, 220, 221, 222, 223, 224, 225] {

@@ -2,12 +2,12 @@
 
 **Goal**: HEXA-LANG compiles itself — the compiler is written in its own language.
 
-## Status: Phase 1 Complete (Foundation)
+## Status: Phase 2 In Progress (Lexer)
 
 | Phase | Description | Status | .hexa Modules | Tests |
 |-------|------------|--------|---------------|-------|
 | 1 | Constants + Data Structures | DONE | 3 | 14 |
-| 2 | Lexer Self-Hosting | TODO | 0 | 0 |
+| 2 | Lexer Self-Hosting | IN PROGRESS | 1 | 4 |
 | 3 | Parser Self-Hosting | TODO | 0 | 0 |
 | 4 | Full Pipeline Self-Hosting | TODO | 0 | 0 |
 
@@ -57,7 +57,7 @@ All self-hosted modules verify n=6 identities at compile time:
 - Pipeline stages verified: 5/6 (Lex, Parse, Sema, Lower, Opt)
   - Stage 6 (Codegen) has ARM64 immediate range bug for large stack frames (tracked)
 
-## Phase 2: Lexer Self-Hosting (NEXT)
+## Phase 2: Lexer Self-Hosting (IN PROGRESS)
 
 ### Prerequisites
 - [ ] String comparison (`==` on str type)
@@ -65,19 +65,68 @@ All self-hosted modules verify n=6 identities at compile time:
 - [ ] Array/slice indexing
 - [ ] While-loop-based string scanning
 
-### Modules to Create
+### Modules Created
 ```
 self-host/
-  cursor.hexa       — Character cursor (position tracking)
-  keyword.hexa      — Keyword lookup (σ=12 keywords match)
-  lexer.hexa        — Main lexer (tokenize source string)
+  lexer.hexa        — Unified lexer module (cursor + keyword + tokenizer)
+                       All-in-one: 12 core functions (= σ)
 ```
 
-### Language Features Needed
-1. **String indexing**: `s[i]` to get character at position
-2. **Character comparison**: `c == '/'` for token dispatch
-3. **Mutable variables in loops**: `while i < len { i = i + 1; }`
-4. **Function calls with string args**: `lookup_keyword(ident)`
+**Design decision**: Instead of 3 separate files (cursor.hexa, keyword.hexa, lexer.hexa),
+the lexer is a single unified module. The cursor logic is inlined (position state passed
+as parameters), keyword lookup is a function within the module, and all 12 core lexer
+functions live together. This avoids cross-module imports which aren't yet supported.
+
+### Functions (σ=12 core + helpers)
+
+| # | Function | Description |
+|---|----------|-------------|
+| 1 | `lex(source)` | Main entry: tokenize entire source |
+| 2 | `lex_token(source, pos, line, col)` | Lex one token |
+| 3 | `lex_number(source, pos, line, col)` | Int/float literals (dec, hex, bin, oct) |
+| 4 | `lex_string(source, pos, line, col)` | String literals with escapes |
+| 5 | `lex_char(source, pos, line, col)` | Character literals |
+| 6 | `lex_ident_or_keyword(source, pos, line, col)` | Identifiers + keyword dispatch |
+| 7 | `skip_whitespace(source, pos, line, col)` | Skip spaces/tabs/newlines |
+| 8 | `skip_comment(source, pos, line, col)` | // and /* */ comments (nested) |
+| 9 | `is_digit(c)` | ASCII digit check |
+| 10 | `is_alpha(c)` | ASCII letter or underscore check |
+| 11 | `is_alnum(c)` | Alphanumeric or underscore check |
+| 12 | `keyword_lookup(s)` | Match 28 keywords (20 core + 8 type) |
+
+### Token Coverage
+
+| Category | Count | IDs |
+|----------|-------|-----|
+| Operators | J₂=24 | 0..23 (from token_kind.hexa) |
+| Delimiters | σ=12 | 24..35 |
+| Literals | τ=4 | 36..39 |
+| Keywords | 20 | 40..59 |
+| Type keywords | σ-τ=8 | 60..67 |
+| Ident/EOF/Error | 3 | 68..70 |
+| DotDotEq (..=) | 1 | 71 |
+
+### Handles
+- All J₂=24 operators including multi-char: `==`, `!=`, `<=`, `>=`, `&&`, `||`, `..`, `..=`, `->`, `=>`, `::`
+- Integer literals: decimal, 0x hex, 0b binary, 0o octal, with `_` separators
+- Float literals: decimal point + optional `e`/`E` exponent with sign
+- String literals: `\n`, `\t`, `\\`, `\"`, `\0` escape sequences
+- Character literals: `'a'`, `'\n'`, `'\0'`, etc.
+- Comments: `//` line comments and `/* */` nested block comments
+- Proper span tracking (line, col) through all constructs
+
+### Verification (τ=4 tests)
+1. Lexer structure: σ=12 functions, J₂=24 ops, σ=12 delims
+2. Operator groups: τ=4 groups of n=6
+3. Keyword lookup: correct kind mapping
+4. Character classification: digit/alpha/alnum predicates
+
+### Language Features Used
+1. **String builtins**: `str_len()`, `char_at()`, `str_slice()`, `str_append_char()`
+2. **Character comparison**: integer-based (char codes)
+3. **Mutable variables in loops**: `while p < len { p = p + 1; }`
+4. **Structs for multiple returns**: `PosState`, `CommentResult`, `LexResult`
+5. **Vec<Token>**: `vec_new()`, `vec_push()`
 
 ## Phase 3: Parser Self-Hosting
 
