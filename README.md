@@ -85,42 +85,8 @@
 > **두 축은 독립** — alien_index=제품 성숙도, closure_grade=n=6 수학적 닫힘 품질.
 
 <!-- AUTO:ALIEN_INDEX:START -->
-| 섹션 | 🛸 구현 | 닫힘 | 천장확인 | BT검증 | 산업검증 | 실험검증 | TP | 발견 |
-|------|:------:|:---:|:------:|:------:|:-------:|:-------:|:--:|:----:|
-| [🔥 핵융합](#-핵융합-fusion) | 🛸7 | 🛸11 | ✅ | 100% | 87% (7장치) | 100% 79/79 EXACT | 35 | 15 |
-| [💻 칩/반도체](#-칩--반도체-chip) | 🛸10 | 🛸11 | ❌ | 100% | 92.6% (6벤더) | 100% 170/170 EXACT | 28 | 12 |
-| [⚡ 에너지](#-에너지-energy) | 🛸8 | 9 | ❌ | 88.7% | 87% (6사) | 88% | 28+19 | 10+8 |
-| [🤖 AI/ML](#-ai--ml) | 🛸8 | 🛸11 | ❌ | 89.7% | 88.7% (9모델) | 96.2% | 28 | 12 |
-| [🌍 환경보호](#-환경보호-environment) | 🛸9 | 9 | ❌ | 92.3% | 82.9% | 100% 120/120+79/79 EXACT | 43 | 42 |
-| [🔬 물리/수학](#-물리수학-physics--math) | 🛸8 | 6 | ❌ | 53~100% | (🛸10(SC)) | 11정리(수학) | 52 | 19+ |
-| [🧬 물질합성](#-물질합성-materials) | 🛸7 | 🛸11 | ✅ | 100% | 100% | 100% | 28 | 10 |
-| [🤖 로봇](#-로봇-robotics) | 🛸7 | ⭐10 | ✅ | 97% | 99.1% (6사) | 100% | 28 | 10 |
-| [💬 소프트웨어/인프라](#-소프트웨어인프라-software--infra) | 🛸10 | ⭐10 | ❌ | 100% | 98.6% | 100% 76/76 EXACT | 28 | 10 |
-| [📺 디스플레이](#-디스플레이-display) | 🛸8 | 9 | ❌ | 86% | 81% (6사) | 93.9% | 14 | 8 |
-| [🎵 오디오](#-오디오-audio) | 🛸8 | 9 | ❌ | 86% | 92.6% (4사) | 90.9% | 14 | 12 |
-| [🛡️ 안전](#-안전-safety) | 🛸8 | 9 | ❌ | 89% | — | 100% | 5 | 0 |
-| [🛸 SF/초광속추진](#-sf--초광속-추진-speculative-propulsion) | 🛸10 | 🛸11 | ❌ | 100% | 100% (Raptor/Dawn/ITER/NERVA) | 100% 60/60 EXACT | 10 | 5 |
-| [🔭 최전선/대발견](#-최전선-대발견-rt-sc-기반-차세대-기술) | 🛸10 | 🛸11 | ❌ | 99% | 100% (Neuralink/LIGO/LHC/HAARP 등) | 99% 1039/1041 EXACT | 163 | 71 |
 <!-- AUTO:ALIEN_INDEX:END -->
 
-> **🛸 구현 등급** (실제 구현 수준): 10=실제 양산+전수검증 / 9=프로토타입+실험데이터 / 8=완전설계+CrossDSE / 7=상세설계+BT+DSE / 6=설계완료+DSE+진화 / 5=상세설계+BT / 4=구조설계 / 3=가설수립 / 2=컨셉 / 1=미완
->
-> **천장확인 등급** (물리한계 증명): ✅=불가능성 정리+Mk.V 물리한계 완료 / ❌=미완
-
-| What | Savings | How |
-|------|---------|-----|
-| **Training compute** | **50-60%** | Cyclotomic activation (71% FLOPs), entropy early stop (33% time) |
-| **Inference speed** | **3x faster** | FFT attention, Egyptian fraction attention (40% FLOPs) |
-| **Model size** | **50-70%** | Phi bottleneck (67% params), Boltzmann gate (63% sparsity) |
-| **Hyperparameter tuning** | **Eliminated** | All optimal values derived from n=6 constants |
-| **Full pipeline (17 combined)** | **50.1% params, 50.3% FLOPs** | [All 17 techniques end-to-end](experiments/experiment_full_n6_pipeline.py) |
-
-```bash
-git clone https://github.com/need-singularity/n6-architecture.git && cd n6-architecture
-python3 techniques/phi6simple.py          # 71% FLOPs reduction
-python3 techniques/fft_mix_attention.py   # 3x faster attention
-python3 experiments/verify_bt66_76.py     # 91/91 verification
-```
 
 ---
 
