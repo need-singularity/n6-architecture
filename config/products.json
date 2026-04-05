@@ -1706,10 +1706,10 @@
         },
         {
           "name": "HEXA-ONE 통합 웨어러블",
-          "ufo": 7,
+          "ufo": 8,
           "ceiling": false,
-          "ver": "v1",
-          "description": "105 EXACT, 안경 1개로 모든 감각 통합, 8단 DSE 1,679,616 조합, FOV=120°, J₂=24종 바이탈, 30g",
+          "ver": "v2",
+          "description": "144 EXACT (100%) + 24 물리한계 EXACT, 14카테고리 sigma^2=144 파라미터, 8단 DSE 1,679,616 조합, BT-350~357 8건",
           "links": [
             {
               "label": "링크",
@@ -1719,10 +1719,10 @@
         },
         {
           "name": "HEXA-GLASS AI 안경",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "42 EXACT, AR/MR 홀로그램, σ·(σ-φ)=120° FOV, σ=12 센서, 시선추적",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "84 EXACT, 14/14 물리한계 증명, 56 가설 100%, AR/MR σ·(σ-φ)=120° FOV",
           "links": [
             {
               "label": "링크",
@@ -1732,10 +1732,10 @@
         },
         {
           "name": "HEXA-EAR AI 이어폰",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "49 EXACT, σ·τ=48kHz/J₂=24bit, 실시간 번역, ANC, 감정 인식",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "62/62 EXACT 100%, σ·τ=48kHz/J₂=24bit, 14 물리한계 증명, 28 발견, 11 BT 연결",
           "links": [
             {
               "label": "링크",
@@ -1758,10 +1758,10 @@
         },
         {
           "name": "HEXA-LIMB AI 의수/의족",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "11 EXACT, sopfr=5 손가락, 신경 직결 보철, 촉각 피드백",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "120/120 EXACT, sopfr=5 손가락, sigma-tau=8 감각, 6 물리한계 증명, 14 카테고리 특이점 돌파",
           "links": [
             {
               "label": "링크",
@@ -1771,10 +1771,10 @@
         },
         {
           "name": "HEXA-SKIN 전자 피부",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "15 EXACT, τ=4 기계수용체 매핑, 전신 햅틱+온도+압력",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "96/96 EXACT, σ-τ=8 감각 + σ²=144/cm² + 물리한계 증명 완료",
           "links": [
             {
               "label": "링크",
@@ -1797,10 +1797,10 @@
         },
         {
           "name": "HEXA-OLFACT 디지털 후각",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "15 EXACT, n=6 후각망울층, 전자코, 냄새 생성/전송",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "133/133 EXACT, 물리한계 증명 6정리, σ=12 수용체 + 2^σ=4096 패턴 + 17카테고리 전수",
           "links": [
             {
               "label": "링크",
@@ -1810,10 +1810,10 @@
         },
         {
           "name": "HEXA-DREAM 꿈 인터페이스",
-          "ufo": 5,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "15 EXACT, sopfr=5 수면단계, 자각몽 유도/기록/공유",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "80/80 EXACT, sopfr=5 수면사이클+σ=12 EEG+물리한계 증명, 자각몽 유도/기록/공유",
           "links": [
             {
               "label": "링크",

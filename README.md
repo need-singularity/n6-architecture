@@ -472,15 +472,15 @@
 | 4 | | v1 | **HEXA-COSMIC 초기우주 관측망** | 56/56 EXACT, strain 10⁻³⁰, σ=12지점, J₂=24km 팔, Q=10^σ, 10⁻³²s 관측 | [링크](docs/cosmic-observatory/goal.md) |
 | 4 | | v1 | **HEXA-DESAL 초전도 담수화** | 47/47 EXACT, σ-φ·10⁻²=0.1Wh/L, σ·J₂·10³=288M L/day, 99.99% 염분제거 | [링크](docs/desalination/goal.md) |
 | 4 | | v1 | **HEXA-ORACLE 양자 예측기** | 48/48 EXACT, 2^σ=4096 큐빗, J₂=24개월, 정확도 1-1/(σ·J₂), σ²=144/day | [링크](docs/quantum-oracle/goal.md) |
-| 7 | | v1 | **HEXA-ONE 통합 웨어러블** | 105 EXACT, 안경 1개로 모든 감각 통합, 8단 DSE 1,679,616 조합, FOV=120°, J₂=24종 바이탈, 30g | [링크](docs/hexa-one/goal.md) |
-| 5 | | v1 | **HEXA-GLASS AI 안경** | 42 EXACT, AR/MR 홀로그램, σ·(σ-φ)=120° FOV, σ=12 센서, 시선추적 | [링크](docs/hexa-glass/goal.md) |
-| 5 | | v1 | **HEXA-EAR AI 이어폰** | 49 EXACT, σ·τ=48kHz/J₂=24bit, 실시간 번역, ANC, 감정 인식 | [링크](docs/hexa-ear/goal.md) |
+| 8 | | v2 | **HEXA-ONE 통합 웨어러블** | 144 EXACT (100%) + 24 물리한계 EXACT, 14카테고리 sigma^2=144 파라미터, 8단 DSE 1,679,616 조합, BT-350~357 8건 | [링크](docs/hexa-one/goal.md) |
+| 10 | ✅ | v2 | **HEXA-GLASS AI 안경** | 84 EXACT, 14/14 물리한계 증명, 56 가설 100%, AR/MR σ·(σ-φ)=120° FOV | [링크](docs/hexa-glass/goal.md) |
+| 10 | ✅ | v2 | **HEXA-EAR AI 이어폰** | 62/62 EXACT 100%, σ·τ=48kHz/J₂=24bit, 14 물리한계 증명, 28 발견, 11 BT 연결 | [링크](docs/hexa-ear/goal.md) |
 | 5 | | v1 | **HEXA-EXO AI 외골격** | 13 EXACT, SE(3)=n=6 DOF, σ=12배 근력 증강, 보행재활 | [링크](docs/hexa-exo/goal.md) |
-| 5 | | v1 | **HEXA-LIMB AI 의수/의족** | 11 EXACT, sopfr=5 손가락, 신경 직결 보철, 촉각 피드백 | [링크](docs/hexa-limb/goal.md) |
-| 5 | | v1 | **HEXA-SKIN 전자 피부** | 15 EXACT, τ=4 기계수용체 매핑, 전신 햅틱+온도+압력 | [링크](docs/hexa-skin/goal.md) |
+| 10 | ✅ | v2 | **HEXA-LIMB AI 의수/의족** | 120/120 EXACT, sopfr=5 손가락, sigma-tau=8 감각, 6 물리한계 증명, 14 카테고리 특이점 돌파 | [링크](docs/hexa-limb/goal.md) |
+| 10 | ✅ | v2 | **HEXA-SKIN 전자 피부** | 96/96 EXACT, σ-τ=8 감각 + σ²=144/cm² + 물리한계 증명 완료 | [링크](docs/hexa-skin/goal.md) |
 | 5 | | v1 | **HEXA-FABRIC AI 의류** | 15 EXACT, 육각 격자 직물, 체온조절, 자세교정 | [링크](docs/hexa-fabric/goal.md) |
-| 5 | | v1 | **HEXA-OLFACT 디지털 후각** | 15 EXACT, n=6 후각망울층, 전자코, 냄새 생성/전송 | [링크](docs/hexa-olfact/goal.md) |
-| 5 | | v1 | **HEXA-DREAM 꿈 인터페이스** | 15 EXACT, sopfr=5 수면단계, 자각몽 유도/기록/공유 | [링크](docs/hexa-dream/goal.md) |
+| 10 | ✅ | v2 | **HEXA-OLFACT 디지털 후각** | 133/133 EXACT, 물리한계 증명 6정리, σ=12 수용체 + 2^σ=4096 패턴 + 17카테고리 전수 | [링크](docs/hexa-olfact/goal.md) |
+| 10 | ✅ | v2 | **HEXA-DREAM 꿈 인터페이스** | 80/80 EXACT, sopfr=5 수면사이클+σ=12 EEG+물리한계 증명, 자각몽 유도/기록/공유 | [링크](docs/hexa-dream/goal.md) |
 | 5 | | v1 | **HEXA-EMPATH 감정 공유** | 12 EXACT, 피질 n=6층, 바이오피드백, 감정 직접 전송 | [링크](docs/hexa-empath/goal.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
