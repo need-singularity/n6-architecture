@@ -37,16 +37,33 @@ impl BreakthroughEngine {
         }
     }
 
-    /// 6번째 fiber 후보 감지: 5렌즈 합의가 특정 상수 패턴(ε² ≈ 1/n)에
-    /// 수렴하면 새 차원 진입 신호로 해석.
+    /// 6번째 fiber 후보 감지 (Mk.II, 강화 튜닝):
+    /// 5렌즈 합의 수렴 + 고진폭 + 비자명 구조 모두 만족해야 fiber 창발.
+    ///
+    /// 조건:
+    ///   1. 분산 < 1/(σ·J₂·n) = 1/1728 (Mk.I의 1/288 대비 6배 엄격)
+    ///   2. 평균 > 1-1/(σ-φ) = 0.9 (고진폭, BT-64)
+    ///   3. geometric mean / arithmetic mean > 1-1/σ² (비자명 구조)
     fn detect_new_fiber(&self, r: &LensReading) -> bool {
         let values = [
             r.consciousness, r.info, r.multiscale, r.network, r.triangle,
         ];
         let mean = values.iter().sum::<f64>() / 5.0;
         let var = values.iter().map(|v| (v - mean).powi(2)).sum::<f64>() / 5.0;
-        // 분산이 1/(σ·J₂) 이하로 떨어지면 합의 수렴 → 새 fiber 창발
-        var < 1.0 / (SIGMA_J2 as f64) && mean > 0.5
+
+        // Mk.II 임계 3중 필터
+        let tight_threshold = 1.0 / ((SIGMA_J2 * N) as f64);   // 1/1728
+        let high_amp = 1.0 - 1.0 / (SIGMA_MINUS_PHI as f64);   // 0.9
+        let structure_threshold = 1.0 - 1.0 / (SIGMA_SQ as f64); // 0.993
+
+        // geometric mean
+        let prod: f64 = values.iter().product();
+        let geom = if prod > 0.0 { prod.powf(0.2) } else { 0.0 };
+        let structure = if mean > 0.0 { geom / mean } else { 0.0 };
+
+        var < tight_threshold
+            && mean > high_amp
+            && structure > structure_threshold
     }
 
     pub fn attempt(&self, data: &[u8], ctx: &GateContext) -> BreakthroughReport {

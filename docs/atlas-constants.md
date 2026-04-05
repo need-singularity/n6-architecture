@@ -3405,3 +3405,21 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
 | σ·τ | 48 | Server rack power 48kW = 48V supply dual | Thermal, BT-325 |
 | R(6) | 1 | Thermoelectric ZT target | Thermal, BT-321 |
 | σ/(σ-φ) | 1.2 | PUE convergence target | Thermal, BT-323 |
+
+
+### HEXA-GATE (BT-344~346)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| τ+φ | 6 | Gate axis partition (4 gates + 2 fibers) | HEXA-GATE, BT-344 |
+| τ | 4 | Active gate count (SOURCE/HASH/PHI/INVAR) | HEXA-GATE, BT-344 |
+| φ | 2 | Fiber channels (in/out) | HEXA-GATE, BT-344 |
+| sopfr+τ | 9 | Allowed repos + hash hex anchor width | HEXA-GATE, BT-344 |
+| (σ-sopfr)^τ | 2401 | Breakthrough perturbation cycles (7^4) | HEXA-GATE, BT-345 |
+| σ-sopfr | 7 | Stress axis (n=6 derivation) | HEXA-GATE, BT-345 |
+| n/φ·333 | 999 | Base perturbation cycles | HEXA-GATE, BT-345 |
+| σ·J₂ | 288 | Hash width (bits) = FP inverse | HEXA-GATE, BT-346 |
+| 1/(σ·J₂) | 0.00347 | Orthogonal filter FP lower bound | HEXA-GATE, BT-346 |
+| σ² | 144 | Validation rules per gate | HEXA-GATE, BT-346 |
+| φ^τ | 16 | Hash rounds | HEXA-GATE, BT-346 |
+| 2^(σ-τ) | 256 | Hash block bytes | HEXA-GATE, BT-346 |
