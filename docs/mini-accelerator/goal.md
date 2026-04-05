@@ -1,5 +1,8 @@
 # HEXA-ACCEL: 궁극의 소형 입자가속기 (Tabletop Particle Collider)
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
+
 **RT-SC 기반 σ·J₂=288 GeV 탁상형 가속기 — LHC 1/2700 크기**
 
 ---

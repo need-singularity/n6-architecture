@@ -1,5 +1,8 @@
 # 궁극의 경제학 (Ultimate Economics) -- Consolidated Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: G6=n, 24h시장=J₂, 12개월=sigma, Black-Scholes 5변수=sopfr -- 경제 체계의 n=6
 

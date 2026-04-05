@@ -1,5 +1,8 @@
 # N6 Biology -- Unified Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 7 (bt_exact_pct 기반 추정).
+
 **Vision**: n=6 생명공학 아키텍처 -- 유전자 코드의 n=6 구조에서 바이오제조까지 완전 통합
 **Alien Level**: 10/10 (물리적 한계 도달 -- 유전 코드 동결, 효소 확산한계, 광합성 천장)
 **BT**: BT-27(Carbon-6 chain), BT-51(Genetic code), BT-101(Photosynthesis), BT-103(Stoichiometry), BT-104(CO2), BT-122(Honeycomb)

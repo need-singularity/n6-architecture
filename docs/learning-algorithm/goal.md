@@ -1,5 +1,8 @@
 # HEXA-LEARN — 궁극의 학습 알고리즘 아키텍처
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 **비전**: n=6 산술로 패러다임부터 서빙까지 관통하는 학습 시스템. 하이퍼파라미터 탐색 0회.
 **핵심**: BT-54(AdamW 5중주) + BT-58(sigma-tau=8) + BT-64(0.1 정규화) + BT-163/164(RL+Schedule)
 

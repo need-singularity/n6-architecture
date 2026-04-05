@@ -1,5 +1,8 @@
 # N6 Material Synthesis --- 궁극의 물질합성 아키텍처 (통합 문서)
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
+
 **궁극적 목표: n=6 산술로 원자 스케일부터 범용 합성기까지 관통하는 물질합성 아키텍처**
 **Alien Index: 10/10 --- 물리적 한계 도달 (수학 정리로 증명)**
 **BT: BT-85~88, BT-93 | EXACT: 30/30 가설 100%, 39/48 검증매트릭스 81.3% | DSE: 3,600 조합**

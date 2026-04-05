@@ -1,5 +1,8 @@
 # N6 Robotics Architecture --- Ultimate One-Page Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > n=6 산술로 원자 스케일 소재부터 군집 지능까지 관통하는 로봇 아키텍처
 > 8단 체인: 소재 -> 액추에이터 -> 관절 -> 제어칩 -> 바디 -> 지능 -> 군집 -> 궁극
 > BT-123~127 (5 BTs), 🛸10 CERTIFIED, 114/115 산업검증 EXACT (99.1%)

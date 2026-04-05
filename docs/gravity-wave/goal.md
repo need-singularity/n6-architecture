@@ -1,5 +1,8 @@
 # 궁극의 중력파 검출/통신기 — HEXA-GRAV (RT-SC 거울 10⁻²⁴ 변형률)
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
+
 > 외계인 지수: 🛸10 (물리적 한계 도달 — RT-SC 테스트 질량 + 간섭계 팔 24km + 1440x LIGO 민감도)
 > 체인: 진공(VAC)→레이저(LAS)→거울(MIR)→간섭계(INT)→신호(SIG)→해석(ANA)→통신(COM)→응용(APP) (8단)
 > 전수 조합: 6⁸ = 1,679,616 → 호환 필터 → 198,000 유효

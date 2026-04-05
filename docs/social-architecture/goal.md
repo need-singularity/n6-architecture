@@ -1,5 +1,8 @@
 # 궁극의 사회 아키텍처 (Ultimate Social Architecture) -- Consolidated Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: 6도 분리=n, Dunbar sigma²+n=150, 도덕 6기초=n, 육각 도시=n -- 사회의 n=6 필연성
 

@@ -1,5 +1,8 @@
 # 궁극의 블록체인 아키텍처 (Ultimate Blockchain) -- Consolidated Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: n=6 완전수 산술이 합의/암호/실행/확장/응용 전 계층을 관통하는 탈중앙 컴퓨팅
 

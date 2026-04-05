@@ -1,5 +1,8 @@
 # HEXA-DISPLAY --- N6 Display Ultimate Architecture (8-Level)
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
+
 **n=6 산술 기반, 소재(QD/uLED) ~ 홀로그래픽 ~ 뇌-시각 인터페이스까지 관통하는 8단 디스플레이 아키텍처**
 **BT-48 (J2=24fps, sigma=12-bit) + BT-66 (Vision AI) + BT-71 (NeRF/3DGS) + BT-76 (sigma*tau=48)**
 **Alien Level: 10 | EXACT: 49/49 (100%) across 8 levels | DSE: 49,152 combos | BT Claims: 13/14 EXACT (92.9%)**

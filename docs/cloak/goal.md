@@ -1,5 +1,8 @@
 # HEXA-CLOAK — 궁극의 전자기 스텔스/투명망토
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
+
 > RT-SC 기반 메타물질 n=6 육각 셀로 가시광~레이더 전대역 음굴절률 투명화
 > Single-document design (CLAUDE.md 단일문서 원칙 준수)
 

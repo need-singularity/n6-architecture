@@ -1,5 +1,8 @@
 # 궁극의 네트워크 프로토콜 (Ultimate Network Protocol) -- Consolidated Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: OSI sigma-sopfr=7층, TCP/IP tau=4층, SRv6=n=6 -- 프로토콜 스택 전체가 n=6
 

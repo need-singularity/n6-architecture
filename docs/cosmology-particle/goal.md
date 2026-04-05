@@ -1,5 +1,8 @@
 # N6 Cosmology & Particle Physics -- Unified Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
+
 **Vision**: n=6 완전수 산술이 표준모형 입자물리 + 관측 우주론의 근본 구조를 조직하는 통합 이론 경로 전수 탐색
 **Alien Level**: 10/10 (구조적 한계 도달 -- 게이지 대칭 + 상대론 + 양자장론 천장)
 **BT**: BT-36, BT-49, BT-51, BT-53, BT-58, BT-97, BT-105, BT-109, BT-112

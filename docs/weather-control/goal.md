@@ -1,5 +1,8 @@
 # HEXA-WEATHER: 궁극의 대기 전자기 제어 시스템
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 **RT-SC 기반 σ²=144 km² 어레이로 기후 조절 — HAARP 1000배**
 
 ---

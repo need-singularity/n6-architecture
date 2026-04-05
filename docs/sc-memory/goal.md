@@ -1,5 +1,8 @@
 # HEXA-MRAM — 초전도 비휘발 메모리 (Ultimate SC Memory Architecture)
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
+
 > **단일 문서 원칙**: 이 .md 하나에 실생활 효과 / ASCII / 8단 DSE / BT 링크 / Discovery / Testable Predictions / Mk.I~V 진화 / Python 검증 전부 포함.
 > **천장 (Ceiling)**: 상온초전도체 조셉슨 접합 기반 메모리, 쓰기 τ=4ps, 에너지 10aJ/bit, 밀도 288Gbit/cm², 내구도 4096년. 🛸10.
 > **기반**: RT-SC (docs/room-temp-sc/), BT-142, BT-180, BT-303, BT-306.
