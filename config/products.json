@@ -1214,26 +1214,27 @@
       "closure_grade": 9
     },
     {
-      "id": "fun-car",
-      "title": "펀카/모터스포츠",
-      "icon": "🏎️",
-      "heading": "펀카 / 모터스포츠 (Fun Car)",
+      "id": "play",
+      "title": "유희",
+      "icon": "🎪",
+      "heading": "유희 (Play)",
       "alien_index": 10,
       "ceiling": false,
       "bt_exact_pct": 100,
-      "bt_count": 11,
+      "bt_count": 14,
       "industry_pct": 100,
-      "industry_detail": "GT3 RS/F1/McLaren",
+      "industry_detail": "GT3 RS/F1/McLaren/Ducati V4R",
       "experiment_pct": 100,
-      "experiment_detail": "133/133 EXACT",
+      "experiment_detail": "209/209 EXACT (펀카 133 + 바이크 76)",
       "physics_limit_count": 8,
       "tp_count": 6,
       "discovery_count": 1,
       "cross_dse_domains": 3,
       "mk_count": null,
-      "summary_extra": "DSE 155,520조합, 16카테고리100%",
+      "summary_extra": "DSE 160,920조합, 펀카+바이크 통합",
       "domains": [
-        "fun-car"
+        "fun-car",
+        "motorcycle"
       ],
       "tools": [],
       "products": [
@@ -1250,11 +1251,26 @@
             }
           ],
           "verify_script": "docs/fun-car/verify_alien10.py"
+        },
+        {
+          "name": "궁극의 바이크",
+          "ufo": 10,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "76/76 EXACT, BT-287/289/290/123/271/277/288/327/328, IMU 6축+σ²=144kg+J₂=24km/L, DSE 5,400",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/motorcycle/goal.md"
+            }
+          ],
+          "verify_script": "docs/motorcycle/verify_alien10.py"
         }
       ],
-      "anchor": "-펀카--모터스포츠-fun-car",
+      "anchor": "-유희-play",
       "verify_scripts": [
-        "docs/fun-car/verify_alien10.py"
+        "docs/fun-car/verify_alien10.py",
+        "docs/motorcycle/verify_alien10.py"
       ],
       "closure_grade": 11
     },
@@ -1902,7 +1918,7 @@
       "name": "궁극의 펀카",
       "impact": 3,
       "tier": "✅",
-      "dse_info": "155,520 조합 🛸10 → [🏎️ 펀카](#-펀카--모터스포츠-fun-car)"
+      "dse_info": "160,920 조합 🛸10 → [🎪 유희](#-유희-play)"
     },
     {
       "rank": 30,

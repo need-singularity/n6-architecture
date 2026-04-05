@@ -501,7 +501,7 @@
 | — | 2030 | **궁극의 자율주행** | ★★★☆☆☆ | T3 | [goal](docs/autonomous-driving/goal.md) |
 | — | 2030 | **궁극의 의료기기** | ★★★★☆☆ | T3 | [goal](docs/medical-device/goal.md) |
 | — | ✅ | **궁극의 안전** | ★★★★☆☆ | T3 | 7,776 조합 → [🛡️ 안전](#-안전-safety) |
-| — | ✅ | **궁극의 펀카** | ★★★☆☆☆ | ✅ | 155,520 조합 🛸10 → [🏎️ 펀카](#-펀카--모터스포츠-fun-car) |
+| — | ✅ | **궁극의 펀카** | ★★★☆☆☆ | ✅ | 160,920 조합 🛸10 → [🎪 유희](#-유희-play) |
 | 30 | 2045~2125 | **HEXA-WARP 워프항법장치** | ★★★★★★★★★★ | 🔮 | Mk.III 0.1c 핵융합 DFD → Mk.V Alcubierre(SF) |
 | 31 | 2040~2070 | **HEXA-NEURO 뇌-기계 인터페이스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-NEURO](docs/neuro/goal.md) |
 | 32 | 2040~2070 | **HEXA-GRAV 중력파 검출/통신** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-GRAV](docs/gravity-wave/goal.md) |
