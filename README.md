@@ -415,12 +415,12 @@
 # 🚀 우주항공 (Aerospace)
 
 <!-- AUTO:SUMMARY_aerospace:START -->
-> **🛸10** | BT 38개 100%EXACT | 142/156 EXACT, Egyptian 3+2+1=n, GN&C 12/12 완벽, 방사선 래더, 304L/Ti-6Al-4V n=6 조성 | 산업100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | 실험100% 150/150 EXACT (100%) — 18 서브시스템 전체 완벽 (불일치 5건 삭제, 9건 승격) | 물리한계14 | TP6 | 발견8 | Mk.V
+> **🛸10** | BT 38개 100%EXACT | 150/150 EXACT, Egyptian 3+2+1=n, GN&C 12/12, ECLSS 14/14, ISRU 13/13, 방사선 래더, 304L/Ti-6Al-4V n=6 | 산업100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | 실험100% 150/150 EXACT (100%) — 18 서브시스템 전체 완벽 | 물리한계14 | TP6 | 발견8 | Mk.V
 <!-- AUTO:SUMMARY_aerospace:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | | v1 | **궁극의 재사용 발사체 (HEXA-STARSHIP)** | 150/150 EXACT (100%), 38 BT, 18 서브시스템 전체 완벽, Egyptian 3+2+1=n, Isp 384s=σ·2^sopfr, 1000회=(σ-φ)³, $12/kg=σ, Mars 12인 180일, GN&C 12/12, ECLSS 14/14, ISRU 13/13, 방사선 래더, MOXIE n=6, 304L Cr=3n/Ni=σ-τ | [링크](docs/hexa-starship/goal.md) |
+| 10 | | v2 | **궁극의 재사용 발사체 (HEXA-STARSHIP)** | 150/150 EXACT (100%), 38 BT, 18 서브시스템, Egyptian 3+2+1=n, Isp 384s=σ·2^sopfr, 1000회=(σ-φ)³, $12/kg=σ, Mars 12인 180일, GN&C 12/12, ECLSS 14/14, ISRU 13/13 | [링크](docs/hexa-starship/goal.md) |
 
 <!-- AUTO:FOOTER_aerospace:START -->
 > 도메인: [hexa-starship/](docs/hexa-starship/) · [aerospace/](docs/aerospace/) · [space-engineering/](docs/space-engineering/)
