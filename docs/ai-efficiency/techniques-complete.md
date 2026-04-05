@@ -1,24 +1,24 @@
 # N6 AI/ML Techniques — Complete Catalog (66 Techniques)
 
-> 66 techniques, all derived from the arithmetic identity sigma(n)*phi(n) = n*tau(n) iff n=6
+> 66개 기법, 모두 sigma(n)*phi(n) = n*tau(n) iff n=6 산술에서 도출
 >
 > Core constants: n=6, sigma=12, tau=4, phi=2, sopfr=5, mu=1, J2=24, R(6)=1
 
 ---
 
-## How This Technology Changes Your Life
+## 이 기술이 당신의 삶을 바꾸는 방법
 
-Do you know how much electricity a single ChatGPT query consumes? About 10x a Google search. As AI grows more convenient, power consumption and cost explode. These 66 techniques make AI faster, cheaper, and run on far less energy.
+ChatGPT 한 번 질문할 때 전기가 얼마나 드는지 아시나요? 구글 검색의 10배입니다. AI가 편리해질수록 전력 소비와 비용은 폭발적으로 늘어납니다. 이 66가지 기법은 AI를 더 빠르고, 더 싸고, 더 적은 에너지로 돌아가게 만듭니다.
 
-| Impact Area | Today | After HEXA | Tangible Change |
+| 효과 | 현재 | HEXA 적용 후 | 체감 변화 |
 |------|------|-------------|----------|
-| AI model training electricity cost | 1,000 GPUs × 3 months ≈ $400K | Same performance in 33% of the time → ≈ $130K | Startups can train their own AI models |
-| Smartphone AI battery | Voice assistant drains 15% battery per hour | 71% compute reduction → only 5% drain per hour | All-day AI assistant without battery worries |
-| AI service subscription fees | ChatGPT Plus $20/mo, enterprise $60+/mo | 40–67% server-cost savings → downward price pressure | Era of high-performance AI subscriptions under $10/mo |
-| AI carbon footprint | One GPT-4 training run = annual emissions of 120 cars | 33% less training time + 71% less compute = 76% carbon reduction | AI advances without destroying the environment |
-| SMB AI adoption | Building your own AI = hundreds of thousands in GPU infrastructure | 67% parameter reduction → runs on commodity servers | Neighborhood clinics and small shops can run custom AI |
-| AI response latency | 10–30 second wait for long-document summarization | FFT attention 3x speedup → 3–10 seconds | Instant conversational response, no workflow interruption |
-| AI hyperparameter tuning | Specialist ML engineers needed for weeks of experiments | Optimal values mathematically fixed by n=6 constants → no tuning | Domain experts (not just developers) can build AI models |
+| AI 모델 학습 전기료 | GPU 1,000장 × 3개월 = 약 5억원 | 동일 성능을 33% 시간에 달성 → 약 1.7억원 | 스타트업도 자체 AI 모델 학습 가능 |
+| 스마트폰 AI 배터리 | 음성비서 1시간 사용 시 배터리 15% 소모 | 71% 연산 절감 → 동일 사용 시 5% 소모 | 하루 종일 AI 비서 써도 배터리 걱정 없음 |
+| AI 서비스 월 구독료 | ChatGPT Plus 월 $20, 기업용 월 $60+ | 서버 비용 40~67% 절감 → 가격 인하 압력 | 월 $10 이하 고성능 AI 구독 시대 |
+| AI 탄소 발자국 | GPT-4 학습 1회 = 자동차 120대의 연간 배출량 | 학습 시간 33% + 연산 71% 절감 = 탄소 76% 감소 | AI 발전이 환경 파괴 없이 진행 |
+| 중소기업 AI 도입 | 자체 AI 구축 = 최소 수억원 GPU 인프라 | 파라미터 67% 절감 → 일반 서버로 운영 가능 | 동네 병원, 소규모 쇼핑몰도 맞춤 AI 운영 |
+| AI 응답 속도 | 긴 문서 요약에 10~30초 대기 | FFT 어텐션 3배 가속 → 3~10초 | 대화하듯 즉각 응답, 업무 흐름 끊기지 않음 |
+| AI 하이퍼파라미터 튜닝 | 전문 ML 엔지니어가 수주간 실험 필요 | n=6 상수로 최적값 수학적 결정 → 튜닝 불필요 | 개발자가 아닌 도메인 전문가도 AI 모델 구축 |
 
 ---
 
