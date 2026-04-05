@@ -86,6 +86,17 @@
       ]
     }
   },
+  "closure_grade_12_log_2026-04-05": {
+    "basis": "docs/hypotheses/grade-12-evidence.md",
+    "constants": ["sigma-tau=8", "1/(sigma-phi)=0.1", "J_2=24", "sigma-phi=10"],
+    "criterion": "3+ independent domains with same role confirmed",
+    "changes": [
+      {"section": "fusion", "from": 11, "to": 12, "reason": "sigma-phi=10 (ITER Q=10), J_2=24 (Nb3Sn Hc2), plasma 0.1 reconnection"},
+      {"section": "chip", "from": 11, "to": 12, "reason": "sigma-tau=8 (6 sub-domains), J_2=24 (ECC), sigma-phi=10 (HBM exponent)"},
+      {"section": "ai", "from": 11, "to": 12, "reason": "all 4 constants present (sigma-tau 6x, 0.1 8x, J_2 2x, sigma-phi 4x)"},
+      {"section": "frontier", "from": 11, "to": 12, "reason": "meta-section covering all cross-domain constants, 250 BTs"}
+    ]
+  },
   "absolute_rules": [
     "README 완성제품 테이블 직접 수정 금지",
     "이 JSON만 수정 후 sync 스크립트 실행"
@@ -199,7 +210,7 @@
       "verify_scripts": [
         "docs/fusion/verify_alien10.py"
       ],
-      "closure_grade": 11
+      "closure_grade": 12
     },
     {
       "id": "chip",
@@ -305,7 +316,7 @@
       "verify_scripts": [
         "docs/chip-architecture/verify_alien10.py"
       ],
-      "closure_grade": 11
+      "closure_grade": 12
     },
     {
       "id": "ai",
@@ -414,7 +425,7 @@
         }
       ],
       "anchor": "-ai--ml",
-      "closure_grade": 11
+      "closure_grade": 12
     },
     {
       "id": "energy",
@@ -1578,7 +1589,7 @@
         }
       ],
       "anchor": "-최전선-대발견-rt-sc-기반-차세대-기술",
-      "closure_grade": 11
+      "closure_grade": 12
     }
   ],
   "roadmap": [

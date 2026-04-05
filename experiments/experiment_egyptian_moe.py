@@ -49,7 +49,7 @@ def make_spiral(n_samples=2000, n_classes=N, noise=0.3):
     y = np.concatenate(y_list).astype(np.int64)
     # Project to higher dim
     proj = np.random.randn(2, 64).astype(np.float32) * 0.3
-    X_proj = X @ proj + np.random.randn(n_samples, 64).astype(np.float32) * 0.1
+    X_proj = X @ proj + np.random.randn(X.shape[0], 64).astype(np.float32) * 0.1
     return X_proj, y
 
 
