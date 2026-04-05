@@ -108,6 +108,24 @@ class LoRALinear(nn.Module):
         self.lora_A = nn.Parameter(torch.randn(in_features, r) * 0.01)
         self.lora_B = nn.Parameter(torch.zeros(r, out_features))
 
+    @property
+    def weight(self):
+        """Expose underlying weight for nn.MultiheadAttention compatibility."""
+        return self.linear.weight
+
+    @property
+    def bias(self):
+        """Expose underlying bias for nn.MultiheadAttention compatibility."""
+        return self.linear.bias
+
+    @property
+    def in_features(self):
+        return self.linear.in_features
+
+    @property
+    def out_features(self):
+        return self.linear.out_features
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         base = self.linear(x)
         lora = (x @ self.lora_A @ self.lora_B) * self.scaling

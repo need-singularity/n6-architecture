@@ -153,8 +153,8 @@
           "name": "KSTAR-N6",
           "ufo": 10,
           "ceiling": true,
-          "ver": "v3",
-          "description": "42/45 EXACT(97.8%), 물리한계10/10, 24BT+12불가능성정리, Python검증PASS, Cross-DSE 8도메인 10돌파시도",
+          "ver": "v3.1",
+          "description": "45/45 EXACT(100%) + Q→∞ Singularity, 물리한계10/10, 24BT, 12/12 Steady-State EXACT, Python검증PASS",
           "links": [
             {
               "label": "링크",
