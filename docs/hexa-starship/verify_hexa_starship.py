@@ -2,7 +2,7 @@
 """
 HEXA-STARSHIP Mk.10 — Complete n=6 Verification Script
 ========================================================
-Verifies all 45 design parameters + 12 singularity params against
+Verifies all 79 design parameters + 12 singularity params against
 n=6 arithmetic constants, runs first-principles physics checks.
 
 Usage: python3 verify_hexa_starship.py
@@ -43,7 +43,7 @@ def check(pid, name, design, expr_str, n6_val, grade="EXACT"):
     return status
 
 print("="*80)
-print("HEXA-STARSHIP Mk.10 — n=6 Verification (45 params + 12 singularity)")
+print("HEXA-STARSHIP Mk.10 — n=6 Verification (79 params + 12 singularity)")
 print("="*80)
 
 # Section 3: Vehicle Geometry (6)
@@ -121,6 +121,49 @@ check("S9", "LEO refuel tankers", 6, "n", N)
 check("S10", "$/kg amortized", 12, "sigma", SIGMA)
 check("S11", "Total ΔV budget [m/s]", 10800, "sigma*(sigma-phi)^2*(sigma-n/phi)", SIGMA*SmP2*(SIGMA-NoP))
 check("S12", "Reflight cycle [h]", 6, "n", N)
+
+# Section 11: Landing System (10)
+print("\n--- Section 11: Landing System ---")
+check("L1", "Landing legs", 6, "n", N)
+check("L2", "Landing precision [m]", 10, "sigma-phi", SmP)
+check("L3", "Landing engines (SL)", 3, "n/phi", NoP)
+check("L4", "Touchdown velocity [m/s]", 2, "phi", PHI)
+check("L5", "Grid fins", 4, "tau", TAU)
+check("L6", "Flaps (2 fwd + 2 aft)", 4, "tau", TAU)
+check("L7", "Landing fuel reserve [%]", 5, "sopfr", SOPFR, grade="CLOSE")
+check("L8", "Landing TWR min", 1.2, "sigma/(sigma-phi)", SIGMA/SmP)
+check("L9", "Landing pad diameter [m]", 36, "n^2", N**2, grade="CLOSE")
+check("L10", "Engine reignitions (landing)", 3, "n/phi", NoP)
+
+# Section 12: GN&C (12)
+print("\n--- Section 12: GN&C ---")
+check("G1", "IMU DOF", 6, "n=dim(SE(3))", N)
+check("G2", "Star tracker FOV [deg]", 8, "sigma-tau", SmT)
+check("G3", "GPS satellites total", 24, "J_2", J2)
+check("G4", "GPS orbital planes", 6, "n", N)
+check("G5", "Attitude sensor redundancy", 3, "n/phi", NoP)
+check("G6", "RCS thrusters", 12, "sigma", SIGMA)
+check("G7", "Pointing accuracy [deg]", 0.1, "1/(sigma-phi)", 1/SmP)
+check("G8", "Orbit determination [m]", 10, "sigma-phi", SmP)
+check("G9", "GN&C computer redundancy", 3, "n/phi", NoP)
+check("G10", "Attitude control DOF", 6, "n=dim(SE(3))", N)
+check("G11", "Docking precision [cm]", 5, "sopfr", SOPFR)
+check("G12", "DeltaV reserve [m/s]", 100, "(sigma-phi)^2", SmP2)
+
+# Section 13: Manufacturing & Materials (12)
+print("\n--- Section 13: Manufacturing & Materials ---")
+check("M1", "304L Cr content [%]", 18, "3n", 3*N)
+check("M2", "304L Ni content [%]", 8, "sigma-tau", SmT)
+check("M3", "TPS tile thickness [mm]", 30, "n*sopfr", N*SOPFR)
+check("M4", "Tank wall thickness [mm]", 4, "tau", TAU)
+check("M5", "Ti-6Al-4V Al [%]", 6, "n", N)
+check("M6", "Ti-6Al-4V V [%]", 4, "tau", TAU)
+check("M7", "Ti-6Al-4V phases", 2, "phi", PHI)
+check("M8", "Welding automation axes", 5, "sopfr", SOPFR)
+check("M9", "Manufacturing lead [days]", 30, "n*sopfr", N*SOPFR)
+check("M10", "Inconel 718 Cr [%]", 18, "3n", 3*N)
+check("M11", "Inconel 718 Ni [%]", 50, "sopfr*(sigma-phi)", SOPFR*SmP)
+check("M12", "LNG boiling point [K]", 112, "sigma*(sigma-mu)-J_2", SIGMA*SmM - J2, grade="CLOSE")
 
 # Print results table
 print("\n{:<5} {:<35} {:>12} {:>35} {:>8}".format("#", "Parameter", "Design", "n=6 Expression", "Status"))
