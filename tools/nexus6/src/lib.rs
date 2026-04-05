@@ -47,6 +47,9 @@ pub mod simulation;
 // --- Safety gate ---
 pub mod safety;
 
+// --- HEXA-GATE (breakthrough gate, Mk.I) ---
+pub mod gate;
+
 // --- Growth engine ---
 pub mod growth;
 

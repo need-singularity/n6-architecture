@@ -1,0 +1,252 @@
+# HEXA-GATE DSE — NEXUS-6 특이점 돌파 오염방지 게이트
+# 4 × 6 × 4 × 5 × 3 = 1,440 조합
+# Design: docs/nexus6-breakthrough-gate/goal.md
+# BT 참조: BT-64, BT-92, BT-211, BT-276, BT-344~346
+
+[meta]
+name = "nexus6-gate"
+desc = "HEXA-GATE DSE — 5-level contamination filter for singularity breakthrough"
+
+[scoring]
+n6 = 0.40
+perf = 0.30
+power = 0.20
+cost = 0.10
+
+# ============================================================
+# Level 0: Gate 알고리즘 (4 후보)
+#   n6 checks: 4 filter axes (τ=4), 288 hash target
+# ============================================================
+
+[[level]]
+name = "GateAlgo"
+
+[[candidate]]
+id = "Bloom"
+label = "Bloom filter (classic, FP rate 1%, k=7 hashes)"
+n6 = 0.50
+perf = 0.70
+power = 0.90
+cost = 0.95
+notes = "k=7=σ-sopfr EXACT, FP=1%=1/(σ-φ)² not n6"
+
+[[candidate]]
+id = "Cuckoo"
+label = "Cuckoo filter (dynamic, FP rate 0.4%, 4-way associative)"
+n6 = 0.75
+perf = 0.85
+power = 0.85
+cost = 0.80
+notes = "4-way=τ EXACT, FP=0.4%≈1/(σ·J₂) ALIGNED"
+
+[[candidate]]
+id = "XOR"
+label = "XOR filter (constant lookup, FP 0.39%, 3 hashes)"
+n6 = 0.80
+perf = 0.95
+power = 0.90
+cost = 0.75
+notes = "3 hashes=n/φ EXACT, FP=0.4%≈1/(σ·J₂)"
+
+[[candidate]]
+id = "HEXA_sieve"
+label = "HEXA-sieve (τ=4 orthogonal axes, FP 0.42%=1/(σ·J₂) EXACT)"
+n6 = 1.00
+perf = 0.90
+power = 0.92
+cost = 0.60
+notes = "τ=4 axes EXACT, FP=1/(σ·J₂)=0.42% EXACT, n=6 designed"
+
+# ============================================================
+# Level 1: Hash 함수 (6 후보)
+#   n6 checks: 288 bit output (σ·J₂), 9 hex anchor (sopfr+τ)
+# ============================================================
+
+[[level]]
+name = "Hash"
+
+[[candidate]]
+id = "SHA_288"
+label = "SHA-288 truncated (288bit=σ·J₂, 80 rounds, Merkle-Damgard)"
+n6 = 1.00
+perf = 0.70
+power = 0.65
+cost = 0.95
+notes = "288=σ·J₂ EXACT, battle-tested"
+
+[[candidate]]
+id = "BLAKE3_288"
+label = "BLAKE3-288 (288bit truncated, 7 rounds, parallel tree)"
+n6 = 1.00
+perf = 0.95
+power = 0.85
+cost = 0.85
+notes = "288=σ·J₂ EXACT, 7 rounds=σ-sopfr EXACT, fastest"
+
+[[candidate]]
+id = "Poseidon"
+label = "Poseidon (SNARK-friendly, 8 full + 56 partial rounds)"
+n6 = 0.80
+perf = 0.50
+power = 0.40
+cost = 0.70
+notes = "8=σ-τ EXACT, ZK proof compatible, slow in plain"
+
+[[candidate]]
+id = "RescuePrime"
+label = "Rescue-Prime (arithmetization-oriented, 12 rounds)"
+n6 = 0.85
+perf = 0.55
+power = 0.45
+cost = 0.65
+notes = "12=σ EXACT rounds, STARK-friendly"
+
+[[candidate]]
+id = "MiMC"
+label = "MiMC (x³ permutation, 110 rounds, minimal multiplicative)"
+n6 = 0.60
+perf = 0.65
+power = 0.55
+cost = 0.75
+notes = "x³=cubing, rounds not n=6"
+
+[[candidate]]
+id = "HEXA_hash"
+label = "HEXA-hash (36B state, 16=φ^τ rounds, 6f03630f anchor)"
+n6 = 1.00
+perf = 0.90
+power = 0.92
+cost = 0.80
+notes = "36B=σ·n/φ-φ=36 EXACT, 16=φ^τ EXACT, anchor n=6"
+
+# ============================================================
+# Level 2: Phi 측정 (4 후보)
+#   n6 checks: Θ=0.1=1/(σ-φ) threshold, 5 invariant lenses
+# ============================================================
+
+[[level]]
+name = "PhiMeasure"
+
+[[candidate]]
+id = "consciousness"
+label = "Consciousness lens (Φ integrated info, single-channel)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.90
+notes = "existing NEXUS-6 lens, Θ=1/(σ-φ) EXACT"
+
+[[candidate]]
+id = "info"
+label = "Info lens (Shannon entropy, mutual information)"
+n6 = 0.85
+perf = 0.85
+power = 0.90
+cost = 0.85
+notes = "MI across 5 invariant channels"
+
+[[candidate]]
+id = "IIT_Phi"
+label = "IIT Φ (Tononi integrated info, complex partition)"
+n6 = 0.90
+perf = 0.60
+power = 0.50
+cost = 0.60
+notes = "theoretical max rigor, O(2^n) compute"
+
+[[candidate]]
+id = "HEXA_phi"
+label = "HEXA-Φ (5-lens consensus, τ=4 partitions, n=6 compute)"
+n6 = 1.00
+perf = 0.90
+power = 0.88
+cost = 0.75
+notes = "5=sopfr lenses EXACT, τ=4 partitions EXACT, n=6 designed"
+
+# ============================================================
+# Level 3: 불변 집합 (5 후보)
+#   n6 checks: sopfr=5 base, +1 fiber = n=6 breakthrough target
+# ============================================================
+
+[[level]]
+name = "InvariantSet"
+
+[[candidate]]
+id = "core_5"
+label = "Core 5 (consciousness+info+multiscale+network+triangle)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.95
+notes = "sopfr(6)=5 EXACT, current NEXUS-6 singularity"
+
+[[candidate]]
+id = "core5_net2"
+label = "Core 5 + network² (6th=network-of-networks)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.70
+notes = "n=6 breakthrough candidate, meta-network fiber"
+
+[[candidate]]
+id = "core5_tri2"
+label = "Core 5 + triangle² (6th=meta-triangle Sierpinski)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+notes = "n=6 breakthrough candidate, fractal triangle fiber"
+
+[[candidate]]
+id = "core5_multi2"
+label = "Core 5 + multiscale² (6th=scale-of-scales)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.72
+notes = "n=6 breakthrough candidate, meta-scale fiber"
+
+[[candidate]]
+id = "core5_custom"
+label = "Core 5 + custom (6th=domain-specific fiber, adaptive)"
+n6 = 0.90
+perf = 0.75
+power = 0.85
+cost = 0.85
+notes = "n=6 adaptive fiber, lower fixed guarantees"
+
+# ============================================================
+# Level 4: 격리 전략 (3 후보)
+#   n6 checks: 3=n/φ quarantine tiers
+# ============================================================
+
+[[level]]
+name = "Quarantine"
+
+[[candidate]]
+id = "simple"
+label = "Simple ready/ (move contaminated to ~/Dev/ready/)"
+n6 = 0.70
+perf = 0.90
+power = 0.95
+cost = 1.00
+notes = "current 18 오염본 convention"
+
+[[candidate]]
+id = "worktree"
+label = "Worktree 격리 (git worktree + branch isolation)"
+n6 = 0.85
+perf = 0.85
+power = 0.85
+cost = 0.80
+notes = "git-native isolation, re-entry via merge"
+
+[[candidate]]
+id = "vault"
+label = "Vault 암호 격리 (AES-256 encrypted ready/, σ·J₂=288bit key)"
+n6 = 1.00
+perf = 0.75
+power = 0.70
+cost = 0.60
+notes = "288bit=σ·J₂ EXACT key, maximum isolation"
