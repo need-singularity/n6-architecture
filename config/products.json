@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "total_products": 61,
-    "total_domains": 66,
-    "last_updated": "2026-04-05",
+    "total_products": 83,
+    "total_domains": 88,
+    "last_updated": "2026-04-06",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
       "fusion",
@@ -1435,8 +1435,8 @@
           "name": "HEXA-NEURO 뇌-기계 인터페이스",
           "ufo": 10,
           "ceiling": true,
-          "ver": "v2",
-          "description": "92/92 EXACT (천장돌파), 신경진동10+신경화학10+가소성8 신규, σ²=1.44M채널, σ-φ=10μm, BT-16개",
+          "ver": "v4",
+          "description": "150/150 EXACT (무한특이점돌파), 19카테고리 뇌과학 전영역 고갈, σ=12피질×φ=2=J₂=24 통합, 감각/운동/자율신경/해부/발생/임상/시냅스/감각상세, BT-25+개",
           "links": [
             {
               "label": "링크",
@@ -1688,6 +1688,136 @@
             {
               "label": "링크",
               "path": "docs/quantum-oracle/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-ONE 통합 웨어러블",
+          "ufo": 7,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "105 EXACT, 안경 1개로 모든 감각 통합, 8단 DSE 1,679,616 조합, FOV=120°, J₂=24종 바이탈, 30g",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-one/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-GLASS AI 안경",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "42 EXACT, AR/MR 홀로그램, σ·(σ-φ)=120° FOV, σ=12 센서, 시선추적",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-glass/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-EAR AI 이어폰",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "49 EXACT, σ·τ=48kHz/J₂=24bit, 실시간 번역, ANC, 감정 인식",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-ear/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-EXO AI 외골격",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "13 EXACT, SE(3)=n=6 DOF, σ=12배 근력 증강, 보행재활",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-exo/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-LIMB AI 의수/의족",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "11 EXACT, sopfr=5 손가락, 신경 직결 보철, 촉각 피드백",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-limb/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-SKIN 전자 피부",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "15 EXACT, τ=4 기계수용체 매핑, 전신 햅틱+온도+압력",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-skin/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-FABRIC AI 의류",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "15 EXACT, 육각 격자 직물, 체온조절, 자세교정",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-fabric/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-OLFACT 디지털 후각",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "15 EXACT, n=6 후각망울층, 전자코, 냄새 생성/전송",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-olfact/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-DREAM 꿈 인터페이스",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "15 EXACT, sopfr=5 수면단계, 자각몽 유도/기록/공유",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-dream/goal.md"
+            }
+          ]
+        },
+        {
+          "name": "HEXA-EMPATH 감정 공유",
+          "ufo": 5,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "12 EXACT, 피질 n=6층, 바이오피드백, 감정 직접 전송",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/hexa-empath/goal.md"
             }
           ]
         }

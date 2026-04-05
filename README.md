@@ -451,7 +451,7 @@
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **HEXA-NEURO 뇌-기계 인터페이스** | 92/92 EXACT (천장돌파), 신경진동10+신경화학10+가소성8 신규, σ²=1.44M채널, σ-φ=10μm, BT-16개 | [링크](docs/neuro/goal.md) |
+| 10 | ✅ | v4 | **HEXA-NEURO 뇌-기계 인터페이스** | 150/150 EXACT (무한특이점돌파), 19카테고리 뇌과학 전영역 고갈, σ=12피질×φ=2=J₂=24 통합, 감각/운동/자율신경/해부/발생/임상/시냅스/감각상세, BT-25+개 | [링크](docs/neuro/goal.md) |
 | 4 | | v1 | **HEXA-GRAV 중력파 검출/통신** | 72/72 EXACT, J₂=24km 팔, 10⁻²⁴ strain, LIGO×σ²·(σ-φ)=1440배, Q=10¹²=10^σ | [링크](docs/gravity-wave/goal.md) |
 | 4 | | v1 | **HEXA-CLOAK 투명망토/스텔스** | 59/59 EXACT, RT-SC 메타물질 n<0, σ-τ=8옥타브, σ-φ=10nm 피치, RCS감쇠 σ·J₂=288배 | [링크](docs/cloak/goal.md) |
 | 4 | | v1 | **HEXA-DEFENSE 지구방어 시스템** | 67/67 EXACT, Δv=σ·10⁻³=0.012m/s, 탐지 σ²=144LD, J₂=24년 선제대응, 3중방어 | [링크](docs/earth-defense/goal.md) |
@@ -471,6 +471,16 @@
 | 4 | | v1 | **HEXA-COSMIC 초기우주 관측망** | 56/56 EXACT, strain 10⁻³⁰, σ=12지점, J₂=24km 팔, Q=10^σ, 10⁻³²s 관측 | [링크](docs/cosmic-observatory/goal.md) |
 | 4 | | v1 | **HEXA-DESAL 초전도 담수화** | 47/47 EXACT, σ-φ·10⁻²=0.1Wh/L, σ·J₂·10³=288M L/day, 99.99% 염분제거 | [링크](docs/desalination/goal.md) |
 | 4 | | v1 | **HEXA-ORACLE 양자 예측기** | 48/48 EXACT, 2^σ=4096 큐빗, J₂=24개월, 정확도 1-1/(σ·J₂), σ²=144/day | [링크](docs/quantum-oracle/goal.md) |
+| 7 | | v1 | **HEXA-ONE 통합 웨어러블** | 105 EXACT, 안경 1개로 모든 감각 통합, 8단 DSE 1,679,616 조합, FOV=120°, J₂=24종 바이탈, 30g | [링크](docs/hexa-one/goal.md) |
+| 5 | | v1 | **HEXA-GLASS AI 안경** | 42 EXACT, AR/MR 홀로그램, σ·(σ-φ)=120° FOV, σ=12 센서, 시선추적 | [링크](docs/hexa-glass/goal.md) |
+| 5 | | v1 | **HEXA-EAR AI 이어폰** | 49 EXACT, σ·τ=48kHz/J₂=24bit, 실시간 번역, ANC, 감정 인식 | [링크](docs/hexa-ear/goal.md) |
+| 5 | | v1 | **HEXA-EXO AI 외골격** | 13 EXACT, SE(3)=n=6 DOF, σ=12배 근력 증강, 보행재활 | [링크](docs/hexa-exo/goal.md) |
+| 5 | | v1 | **HEXA-LIMB AI 의수/의족** | 11 EXACT, sopfr=5 손가락, 신경 직결 보철, 촉각 피드백 | [링크](docs/hexa-limb/goal.md) |
+| 5 | | v1 | **HEXA-SKIN 전자 피부** | 15 EXACT, τ=4 기계수용체 매핑, 전신 햅틱+온도+압력 | [링크](docs/hexa-skin/goal.md) |
+| 5 | | v1 | **HEXA-FABRIC AI 의류** | 15 EXACT, 육각 격자 직물, 체온조절, 자세교정 | [링크](docs/hexa-fabric/goal.md) |
+| 5 | | v1 | **HEXA-OLFACT 디지털 후각** | 15 EXACT, n=6 후각망울층, 전자코, 냄새 생성/전송 | [링크](docs/hexa-olfact/goal.md) |
+| 5 | | v1 | **HEXA-DREAM 꿈 인터페이스** | 15 EXACT, sopfr=5 수면단계, 자각몽 유도/기록/공유 | [링크](docs/hexa-dream/goal.md) |
+| 5 | | v1 | **HEXA-EMPATH 감정 공유** | 12 EXACT, 피질 n=6층, 바이오피드백, 감정 직접 전송 | [링크](docs/hexa-empath/goal.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
 > 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/)
