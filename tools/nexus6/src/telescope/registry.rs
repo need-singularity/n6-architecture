@@ -120,6 +120,13 @@ impl LensRegistry {
 
     /// Save all Custom-category lenses to `~/.nexus6/custom_lenses.json`.
     /// Creates the ~/.nexus6 directory if needed. Returns number saved.
+    ///
+    /// 병렬 안전성(race-safe):
+    ///   1. 디스크에서 기존 custom 렌즈를 다시 읽는다
+    ///   2. 메모리의 custom 렌즈와 이름-기반 union으로 병합 (메모리 우선)
+    ///   3. 임시 파일에 쓰고 atomic rename (read-during-write 방지)
+    /// 서로 다른 렌즈를 단조한 두 프로세스가 동시에 save_custom을 호출해도
+    /// 둘 다 보존된다.
     pub fn save_custom(&self) -> std::io::Result<usize> {
         let path = match Self::custom_lens_path() {
             Some(p) => p,
@@ -128,15 +135,38 @@ impl LensRegistry {
         if let Some(parent) = path.parent() {
             std::fs::create_dir_all(parent)?;
         }
-        let custom: Vec<&LensEntry> = self
+
+        // 1. 메모리의 custom 렌즈 수집
+        let mut merged: std::collections::BTreeMap<String, LensEntry> = self
             .entries
             .values()
             .filter(|e| e.category == LensCategory::Custom)
+            .map(|e| (e.name.clone(), e.clone()))
             .collect();
-        let json = serde_json::to_string_pretty(&custom)
+
+        // 2. 디스크에서 기존 custom 렌즈 병합 (메모리에 없는 것만 추가)
+        if path.exists() {
+            if let Ok(data) = std::fs::read_to_string(&path) {
+                if let Ok(disk_entries) = serde_json::from_str::<Vec<LensEntry>>(&data) {
+                    for e in disk_entries {
+                        merged.entry(e.name.clone()).or_insert(e);
+                    }
+                }
+            }
+        }
+
+        let final_list: Vec<&LensEntry> = merged.values().collect();
+        let json = serde_json::to_string_pretty(&final_list)
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?;
-        std::fs::write(&path, json)?;
-        Ok(custom.len())
+
+        // 3. Atomic write: 임시 파일 → rename
+        let tmp_path = path.with_extension(format!(
+            "json.tmp.{}",
+            std::process::id()
+        ));
+        std::fs::write(&tmp_path, json)?;
+        std::fs::rename(&tmp_path, &path)?;
+        Ok(final_list.len())
     }
 
     /// Register a new lens entry. Overwrites if name already exists.
