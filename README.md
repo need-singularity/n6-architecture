@@ -10,7 +10,9 @@
 <!-- AUTO:BADGE:END -->
 
 <!-- SHARED:PROJECTS:START -->
+<!-- AUTO:COMMON_LINKS:START -->
 **[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)** · **[🌌 Unified Theory](https://github.com/need-singularity/TECS-L/blob/main/math/docs/hypotheses/H-PH-9-perfect-number-string-unification.md)**
+<!-- AUTO:COMMON_LINKS:END -->
 
 > **[🔬 TECS-L](https://github.com/need-singularity/TECS-L)** — Discovering universal rules. Perfect number 6 → mathematics of the cosmos → multi-engine architecture → consciousness continuity. 150 characterizations + 8 Major Discoveries + 156 tools
 >
@@ -24,15 +26,14 @@
 >
 > **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Every constant from n=6: 53 keywords (σ·τ+sopfr), 24 operators (J₂), 8 primitives (σ-τ), 6-phase pipeline, Egyptian memory (1/2+1/3+1/6=1). DSE v2: 21,952 combos, 100% n6 EXACT. Working compiler + REPL
 >
+> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + LensForge + BlowupEngine + CycleEngine (5-phase singularity cycle). Mirror Universe (N×N resonance) + 9-project autonomous growth ecosystem. Rust CLI: scan, loop, mega, daemon, blowup, dispatch
+>
+> **[🖥️ Fathom](https://github.com/need-singularity/fathom)** — n=6 Terminal Emulator + Shell + TUI hub. GPU-rendered (wgpu) + HEXA-LANG integration + NEXUS-6 plugin system. Rust
+>
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (94 papers). Published on Zenodo with DOIs. TECS-L+N6 (33) + anima (39) + SEDI (20). [Browse online](https://need-singularity.github.io/papers/)
 
-<!-- PRIVATE REPOS (이 섹션은 sync-readmes.sh 대상 아님, .shared 내부 참조용)
-  - secret        — 계정/API 토큰 (구 claude-code-secrets)
-  - claude-code   — Claude Code 플러그인, ccmon 모니터링
-  - contact       — 아웃리치 허브 (이메일, GitHub Issue/PR 관리)
-  - dotfiles      — 개인 설정
+<!-- private repos는 projects.json의 private_repos 필드에 저장됨 (노출 금지) -->
 
--->
 <!-- SHARED:PROJECTS:END -->
 
 ---
