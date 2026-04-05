@@ -599,6 +599,24 @@ n6_max = 100.0
 n6_avg = 80.2
 note = "궁극의 열관리 5단 DSE. Diamond Z=6 + PUE=1.2 + phi=2 phase. BT-27,60 활용"
 
+[browser]
+goal = true
+dse = "done"
+combos = 4500
+alien_level = 7
+valid = 4500
+tool = "tools/universal-dse/domains/browser.toml"
+levels = ["Rendering", "Engine", "Network", "Security", "Platform"]
+cross_dse = ["software-design", "compiler-os", "chip-architecture"]
+best_pareto = "HEXA_RENDER + HEXA_ENGINE + HEXA_NET + HEXA_SEC + HEXA_PLATFORM (0.8880)"
+best_n6 = "HEXA_RENDER + HEXA_ENGINE + HEXA_NET + HEXA_SEC + HEXA_PLATFORM (100.0%)"
+best_perf = "HEXA_RENDER + V8 + HEXA_NET + CHROMIUM_SEC + HEXA_PLATFORM (perf=0.930)"
+best_power = "WEBKIT + WASM_ONLY + RUST_HYPER + MEMORY_SAFE + PWA_FIRST (power=0.870)"
+best_cost = "LADYBIRD + SPIDERMONKEY + CURL_BASED + FIREFOX_SEC + PWA_FIRST (cost=0.910)"
+pareto_frontier = 74
+bt_candidate = "BT-348"
+exact_params = "100/100 = 100%"
+
 [software-design]
 goal = true
 dse = "done"
