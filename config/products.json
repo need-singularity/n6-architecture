@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "total_products": 58,
+    "total_products": 59,
     "total_domains": 64,
     "last_updated": "2026-04-05",
     "description": "완성제품 SSOT — README 자동 생성용",
@@ -489,6 +489,19 @@
             }
           ],
           "verify_script": "docs/battery-architecture/verify_alien10.py"
+        },
+        {
+          "name": "궁극의 데이터센터 원자로",
+          "ufo": 7,
+          "ceiling": 10,
+          "ver": "v1",
+          "description": "10돌파 95/96 EXACT — TRISO(sopfr=5)+He(φ=2)+sCO₂(σ·τ=48%)+n=6모듈",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/smr-datacenter/goal.md"
+            }
+          ]
         }
       ],
       "anchor": "-에너지-energy",

@@ -48,6 +48,7 @@ tools/vendor-compare-calc/vendor-compare-calc
 tools/nexus6/target/
 tools/nexus6/nexus6
 tools/nexus6/scripts/growth_log.jsonl
+.growth/
 
 # TECS-L calc symlink
 calc

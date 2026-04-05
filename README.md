@@ -236,6 +236,7 @@
 | 8 | | v3 | **궁극의 배터리 8단** | 131/131 EXACT, BT-27+43+57+80+83+84, 10불가능성정리, 6대제조사, Python검증PASS | [링크](docs/superpowers/specs/2026-04-01-hexa-battery-design.md) |
 | 7 | | v4 | **궁극의 태양전지** | 78/78 EXACT, BT-30+63+62+60+74+111+161, 물리한계5, 산업8사, Python검증PASS | [링크](docs/solar-architecture/goal.md) |
 | 5 | | v2 | **궁극의 에너지 통합** | 133/133 EXACT, 19BT, 14불가능성정리, 5도메인Cross-DSE, Python검증PASS | [링크](docs/energy-architecture/goal.md) |
+| 7 | ✅ | v1 | **궁극의 데이터센터 원자로** | 10돌파 95/96 EXACT — TRISO(sopfr=5)+He(φ=2)+sCO₂(σ·τ=48%)+n=6모듈 | [링크](docs/smr-datacenter/goal.md) |
 
 <!-- AUTO:FOOTER_energy:START -->
 > 도메인: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · 도구: `energy-calc` · `battery-dse` · `solar-dse`
