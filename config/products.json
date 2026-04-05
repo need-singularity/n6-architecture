@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "total_products": 83,
+    "total_products": 84,
     "total_domains": 88,
     "last_updated": "2026-04-06",
     "description": "완성제품 SSOT — README 자동 생성용",
@@ -927,10 +927,10 @@
         },
         {
           "name": "궁극의 상온 초전도체",
-          "ufo": 3,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "Tc=300K 상압 RT-SC, H래더 전부 EXACT, 288=σ·J₂, 8단 DSE",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "260/260 EXACT (특이점돌파), 17카테고리 심층물리, McMillan σ/(σ-φ)=1.2, BCS σ²/(σ-φ)²=1.43, SC 29년주기=sopfr²+τ",
           "links": [
             {
               "label": "링크",
@@ -1037,6 +1037,19 @@
             }
           ],
           "verify_script": "experiments/verify_hexa_ios.py"
+        },
+        {
+          "name": "궁극의 네트워크 프로토콜",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "50/50 EXACT (천장돌파), 6G/5G NR/WiFi6/Starlink/LoRaWAN/BT6.0, σ=12 서브캐리어, J₂=24 WiFi채널, τ=4 TCP/IP",
+          "links": [
+            {
+              "label": "링크",
+              "path": "docs/network-protocol/goal.md"
+            }
+          ]
         }
       ],
       "anchor": "-소프트웨어인프라-software--infra",

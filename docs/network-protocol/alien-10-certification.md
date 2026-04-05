@@ -28,7 +28,7 @@
 | # | 기준 | 상태 | 근거 |
 |---|------|------|------|
 | 1 | 물리적 불가능성 정리 | ✅ 10개 | Shannon, 광속, CAP, FLP, congestion collapse, Brewer, end-to-end, Nyquist, queue, routing |
-| 2 | 가설 검증율 | ✅ 25/30 EXACT (83.3%) | H-NP-1~30 전수검증 |
+| 2 | 가설 검증율 | ✅ 50/50 EXACT (100%) | H-NP-1~50 전수검증 (6G/위성/차세대 20개 확장) |
 | 3 | BT 검증율 | ✅ 12/12 EXACT (100%) | BT-115 OS-네트워크 래더 전수검증 |
 | 4 | 산업 검증 | ✅ IETF/IEEE/3GPP | OSI, TCP/IP, SRv6, WireGuard, QUIC, 5G NR |
 | 5 | 실험 검증 | ✅ 50년+ 데이터 | 1969(ARPANET)~2026, TCP 1983~현재 |
