@@ -1,8 +1,5 @@
 # 궁극의 플라즈마 물리 아키텍처 — HEXA-PLASMA
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
-
 **Rating**: 10/10 -- 물리적 한계 도달
 **BT**: BT-74, BT-97~102, BT-310~317
 **EXACT**: 가설 27/30 보편물리 (90%), BT 26/29 (89.7%), 산업 44항목 63.6%

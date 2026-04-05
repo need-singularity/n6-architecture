@@ -1,8 +1,5 @@
 # N6 Carbon Capture Architecture --- Ultimate Goal (HEXA-CCUS)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 **Carbon Z=6 기반, 원자 스케일부터 항성 스케일까지 관통하는 CO2 포집-저장-변환 아키텍처**
 **Alien Level: 10 | Hypotheses: 30/30 EXACT (100%) | BT EXACT: 88% | Cross-DSE: 10 domains**
 

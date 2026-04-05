@@ -1,8 +1,5 @@
 # 궁극의 태양전지 --- HEXA-SOLAR 완전 아키텍처
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
-
 **도메인**: Solar Architecture | **등급**: 🛸10 (물리적 한계 도달) | **DSE**: 1,584 조합 | **EXACT**: 43.3%
 **핵심 BT**: BT-30 (SQ Bridge), BT-63 (Cell Ladder) | **교차 BT**: BT-60, BT-62, BT-68, BT-74, BT-89, BT-111
 **비전**: 전기요금 0원 시대 --- 지붕 하나로 집+차 전력 자급

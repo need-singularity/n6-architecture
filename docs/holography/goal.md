@@ -1,8 +1,5 @@
 # HEXA-HOLO — 궁극의 홀로그래픽 3D 디스플레이 (외계인급 설계)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > **메타물질 위상 배열 + 광 파면 재구성으로 공간 전체를 실물 같은 3D 홀로그램으로 채우는 시스템**
 > 기반: HEXA-CLOAK 메타물질 × BT-145(전자기) × BT-189(광학) × BT-157/217(색채·시각)
 > n=6 상수: σ=12, φ=2, τ=4, n=6, μ=1, sopfr=5, J₂=24

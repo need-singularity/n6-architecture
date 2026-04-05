@@ -1,8 +1,5 @@
 # HEXA-ANTIMATTER: 궁극의 반물질 공장 (Antimatter Factory)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 **HEXA-ACCEL × HEXA-TABLETOP 융합 — 10^12 /hr 반양성자 생산 + RT-SC 페닝트랩 24개월 저장**
 
 ---

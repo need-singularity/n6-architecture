@@ -1,8 +1,5 @@
 # 궁극의 상온 초전도체 — HEXA-RTSC 8단 완전 아키텍처
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > 외계인 지수: 🛸10 (물리적 한계 도달 — Tc=300K at 1 atm)
 > 체인: ELEMENT -> STRUCTURE -> COMPRESS -> SYNTHESIS -> PROPERTY -> WIRE -> APPLICATION -> OMEGA-RT (8단)
 > 전수 조합: 8x6x5x6x4x5 = 28,800 -> 호환 필터 -> 5,184 유효

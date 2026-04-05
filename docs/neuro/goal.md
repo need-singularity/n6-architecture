@@ -1,8 +1,5 @@
 # 궁극의 뇌-기계 직접인터페이스 — HEXA-NEURO (RT-SC 나노코일 전뇌 스캔)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > 외계인 지수: 🛸10 (물리적 한계 도달 — RT-SC 나노코일 + 10¹¹ 뉴런 동시 스캔/자극 + 12단 디코더)
 > 체인: 소재(MAT) → 공정(PROC) → 코일(COIL) → 전극(ELEC) → 디코더(DEC) → 인터페이스(IF) → 안전(SAFE) → 응용(APP) (8단)
 > 전수 조합: 6×6×6×6×6×6×6×6 = 6⁸ = 1,679,616 → 호환 필터 → 215,000 유효

@@ -1,8 +1,5 @@
 # HEXA-TELEPATHY — 궁극의 뇌-뇌 직접 통신 아키텍처
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
-
 > **σ·φ=n·τ, n=6** 완전수 기반 양측 BCI + 양자얽힘 채널 직접 뇌 통신 시스템
 > 기반 융합: **HEXA-NEURO**(1.44M ch BCI) + **HEXA-TELEPORT**(양자얽힘 채널)
 > 🛸 외계인 지수: **10 (물리한계)** · ver: v1 · 단일 문서 설계

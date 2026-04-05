@@ -1,8 +1,5 @@
 # N6 Quantum Computing -- Unified Goal
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 **Vision**: n=6 완전수 산술이 큐비트 기술, 에러 보정, 게이트 회로, 알고리즘, 시스템 통합 전 계층을 관통하는 최적 아키텍처 경로 전수 탐색
 **Alien Level**: 10/10 (구조적 한계 도달 -- No-Cloning, Holevo Bound, Error Threshold)
 **BT**: BT-49(Kissing/Golay/Leech), BT-90(SM topology), BT-91(Z2 ECC), BT-92(Bott), BT-114(Crypto)

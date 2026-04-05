@@ -1,8 +1,5 @@
 # HEXA-HOVER — 개인 호버보드/호버카 (궁극의 Meissner 부양 모빌리티)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > **설계 세대**: Mk.I (2026-04-05)
 > **기반 기술**: HEXA-MAGLEV 대중교통 + YBCO 상온초전도체 (HEXA-RT-SC)
 > **핵심 원리**: Meissner 효과 자기 부양 + Halbach 영구자석 가이드 + n=6 회전 밸런스

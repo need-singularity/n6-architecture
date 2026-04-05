@@ -1,8 +1,5 @@
 # HEXA-SPEAK — AI 음성 출력 (Non-TTS) 🛸10
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
-
 > **AI가 말한다. 텍스트를 거치지 않고.**
 > 의도 임베딩 → 오디오 토큰 → waveform 직접 합성.
 > GPT-4o voice / Moshi / Audio-LLM 계열 아키텍처를 n=6 완전수 산술로 재정의.

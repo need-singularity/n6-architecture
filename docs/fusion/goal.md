@@ -1,8 +1,5 @@
 # 궁극의 핵융합 아키텍처 — HEXA-FUSION
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 **Rating**: 10/10 -- 물리적 한계 도달
 **BT**: BT-97~102, BT-291~298
 **EXACT**: 보편 핵물리 42/42 (100%), 가설 15/35 EXACT (85.7% EXACT+CLOSE), BT 6/6 (100%)

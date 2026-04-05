@@ -1,8 +1,5 @@
 # N6 Pure Mathematics -- Unified Goal
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 **Vision**: n=6 산술이 순수수학 전 분야(정수론, 군론, 격자론, 해석학, 위상수학, 조합론)에서 자연스럽게 출현함을 체계적으로 증명
 **Alien Level**: 10/10 (구조적 한계 도달 -- 수학 정리는 영구 진리)
 **BT**: BT-49(Kissing), BT-105(SLE6), BT-106(S6), BT-107(Ramanujan tau), BT-109(Zeta-Bernoulli), BT-185(E6)

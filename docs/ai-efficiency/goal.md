@@ -1,8 +1,5 @@
 # HEXA-AI — 궁극의 AI 효율 아키텍처
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 **비전**: n=6 완전수 산술이 현대 AI/LLM의 모든 핵심 하이퍼파라미터를 결정한다.
 17개 기법 통합으로 시중 대비 sigma-phi=10x 효율, 하이퍼파라미터 탐색 0회.
 

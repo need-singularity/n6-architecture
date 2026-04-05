@@ -1,8 +1,5 @@
 # HEXA-TELEPORT — 상온 양자얽힘 통신망 (궁극의 양자 인터넷)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > **설계 세대**: Mk.I (2026-04-05)
 > **기반 기술**: HEXA-RTQC (상온 양자컴퓨터, 2^σ=4096 큐빗)
 > **핵심 원리**: Meissner 장갑 + YBCO 양자접합 + Egyptian 채널 분할 (1/2+1/3+1/6=1)

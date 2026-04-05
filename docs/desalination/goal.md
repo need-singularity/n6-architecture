@@ -1,8 +1,5 @@
 # HEXA-DESAL — 초전도 해수 담수화 (Ultimate SC Desalination)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 > **단일 문서 원칙**: 실생활 효과 / ASCII / 8단 DSE / BT 링크 / Discovery / Testable Predictions / Mk.I~V 진화 / Python 검증 전부 단일 .md.
 > **천장 (Ceiling)**: RT-SC 전기투석 + 역삼투 하이브리드, 에너지 0.1 Wh/L = (σ-φ)·10⁻²Wh/L, 생산 288 M L/day/모듈 = σ·J₂·10³, 염분제거 99.99% = 1-1/10^τ. 🛸10.
 > **기반**: HEXA-SEABED (전력공급), HEXA-MRAM (제어 효율), RT-SC 전기투석. BT-120/213/68/321/199.

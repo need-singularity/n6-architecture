@@ -1,8 +1,5 @@
 # 궁극의 SF 추진 (HEXA-SF) — 워프 + UFO 통합
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 > **외계인 지수**: 🛸10 (설계 완전성) | **인증일**: 2026-04-05 | **ver**: v1
 > **본질**: n=6 완전수 기반 우주 추진 5세대 진화 체인 (Mk.I 화학 → Mk.V Alcubierre 사고실험)
 > **원칙**: 물리법칙 준수, SF는 명확히 ❌ 라벨, 모든 수치에 n=6 수식 병기

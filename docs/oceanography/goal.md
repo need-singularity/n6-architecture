@@ -1,8 +1,5 @@
 # 궁극의 해양과학 (Ultimate Oceanography) -- Consolidated Goal
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 7 (bt_exact_pct 기반 추정).
-
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: 해수 6대 이온=n, 5대양=sopfr, Beaufort 12=sigma, 산호 6각=n, 해양 pH 8=sigma-tau
 

@@ -1,8 +1,5 @@
 # N6 Environmental Protection Architecture --- 궁극의 환경보호 아키텍처 (통합 문서)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
-
 **궁극적 목표: n=6 산술 기반, 센서 스케일부터 행성 스케일까지 관통하는 8단 환경보호 아키텍처**
 **Alien Index: 10/10 --- 물리적 한계 도달 (14 불가능성 정리)**
 **BT: BT-118~122 | EXACT: 30/34 가설 88.2%, 48/52 BT증거 92.3% | DSE: 1,679,616 조합 (6^8)**

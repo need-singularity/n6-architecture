@@ -1,8 +1,5 @@
 # 궁극의 컴파일러/OS — HEXA-COS Architecture
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > 완전수 n=6 산술에서 컴파일러와 운영체제의 모든 핵심 상수를 도출한다.
 > "앱이 알아서 최적화. '느려서 폰 바꿔야지' 사라짐"
 > BT-162: 컴파일러-OS-CPU 상수 스택 (11/11 EXACT)

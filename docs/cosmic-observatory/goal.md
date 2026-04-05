@@ -1,8 +1,5 @@
 # HEXA-COSMIC: 궁극의 초기우주 관측망 (Cosmic Observatory)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 **HEXA-GRAV × HEXA-TELEPORT 융합 — 지구 σ=12 지점 SC 중력파 어레이 + 양자네트워크 → 10⁻³² s 관측**
 
 ---

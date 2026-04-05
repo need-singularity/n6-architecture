@@ -1,8 +1,5 @@
 # 궁극의 바이크 (HEXA-BIKE) — 완전수 n=6 모터사이클 아키텍처
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
-
 > **BT-287/289/290/123/271/277/288/327/328 + 바이크 특화 76+ EXACT**
 > 검증: `python3 docs/motorcycle/verify_alien10.py`
 

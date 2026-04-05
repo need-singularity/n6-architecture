@@ -1,8 +1,5 @@
 # N6 Chip Architecture — Ultimate Goal (Consolidated)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
-> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
-
 > **n=6 완전수 산술이 반도체 칩 아키텍처의 모든 구조적 상수를 결정한다.**
 > 소재 -> 공정 -> 코어 -> 칩 -> 시스템 5단 체인, 소비자 에디션, 12레벨 비전, 진화 경로.
 > 인증: 🛸10 (물리적 한계 도달, 14 불가능성 정리, 106항목 74.5% EXACT, 6벤더 독립 수렴)
