@@ -124,7 +124,7 @@ impl Lens for DeadCodeLens {
         // --- Branch liveness: fraction of data on "live" paths ---
         // Points with high KNN density are on live paths; isolated points are dead branches
         let mut densities: Vec<f64> = (0..max_n).map(|i| shared.knn_density(i)).collect();
-        densities.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        densities.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         // Median density as threshold
         let median_density = if densities.is_empty() { 0.0 }
             else { densities[densities.len() / 2] };
@@ -135,7 +135,7 @@ impl Lens for DeadCodeLens {
         // Sort dimensions by variance; count how many are needed for 95% of total variance
         let total_var: f64 = dim_variances.iter().sum();
         let mut sorted_vars: Vec<f64> = dim_variances.clone();
-        sorted_vars.sort_by(|a, b| b.partial_cmp(a).unwrap());
+        sorted_vars.sort_by(|a, b| b.partial_cmp(a).unwrap_or(std::cmp::Ordering::Equal));
 
         let effective_d = if total_var < 1e-12 { 1.0 } else {
             let mut cumulative = 0.0f64;

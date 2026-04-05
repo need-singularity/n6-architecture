@@ -105,7 +105,7 @@ fn compute_phi(shared: &SharedData, max_n: usize, threshold_mult: f64) -> f64 {
         }
     }
     if dists.is_empty() { return 0.0; }
-    dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+    dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     let threshold = dists[dists.len() / 2] * threshold_mult;
 
     let mut connected = 0u64;
@@ -131,7 +131,7 @@ fn compute_phi_subset(shared: &SharedData, start: usize, end: usize) -> f64 {
         }
     }
     if dists.is_empty() { return 0.0; }
-    dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+    dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     let median = dists[dists.len() / 2];
     if median < 1e-15 { return 1.0; }
     let connected = dists.iter().filter(|&&d| d < median).count();

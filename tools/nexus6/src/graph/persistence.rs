@@ -55,18 +55,32 @@ impl DiscoveryGraph {
         structure::find_convergences(&self.edges)
     }
 
-    /// Atomic save: write to .tmp then rename to prevent corruption.
+    /// Atomic save with merge-on-write (race-safe for parallel processes).
+    ///
+    /// 병렬 프로세스가 동일 경로에 쓰는 경우를 처리:
+    ///   1. 디스크의 기존 그래프를 재로드
+    ///   2. 자신의 그래프와 merge (노드 id 중복 제거)
+    ///   3. PID-tagged 임시 파일(.tmp.<PID>)에 쓰고 atomic rename
+    /// 다른 프로세스의 노드가 덮어씌워지거나 rename race가 발생하지 않음.
     pub fn save(&self, path: &str) -> io::Result<()> {
         ensure_parent_dir(path)?;
-        let tmp_path = format!("{}.tmp", path);
-        let json = serde_json::to_string_pretty(self)
+
+        // 1. 디스크에서 기존 그래프 재로드 + merge
+        let mut merged = Self::load(path)?;
+        merged.merge(self);
+
+        // 2. PID-tagged 임시 파일로 atomic write
+        let tmp_path = format!("{}.tmp.{}", path, std::process::id());
+        let json = serde_json::to_string_pretty(&merged)
             .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
         fs::write(&tmp_path, &json)?;
         fs::rename(&tmp_path, path)?;
         Ok(())
     }
 
-    /// Merge another graph into this one. Deduplicates nodes by id.
+    /// Merge another graph into this one. Deduplicates nodes by id AND
+    /// edges by (from, to, edge_type, bidirectional) tuple.
+    /// Edge dedup is required for race-safe save() to avoid double-counting.
     pub fn merge(&mut self, other: &DiscoveryGraph) {
         let existing_ids: std::collections::HashSet<String> =
             self.nodes.iter().map(|n| n.id.clone()).collect();
@@ -77,9 +91,23 @@ impl DiscoveryGraph {
             }
         }
 
-        // Add all edges (edge dedup is less critical; duplicates are tolerable)
+        // Dedupe edges by (from, to, edge_type, bidirectional).
+        // Strength is intentionally excluded — same relationship with different
+        // strength is still the same edge.
+        let edge_key = |e: &Edge| -> (String, String, String, bool) {
+            (
+                e.from.clone(),
+                e.to.clone(),
+                format!("{:?}", e.edge_type),
+                e.bidirectional,
+            )
+        };
+        let existing_edges: std::collections::HashSet<_> =
+            self.edges.iter().map(edge_key).collect();
         for edge in &other.edges {
-            self.edges.push(edge.clone());
+            if !existing_edges.contains(&edge_key(edge)) {
+                self.edges.push(edge.clone());
+            }
         }
     }
 

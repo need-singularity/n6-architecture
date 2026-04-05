@@ -54,7 +54,7 @@ impl Lens for LensDiscoveryLens {
 
         let scores = [clustering_score, temporal_score, spectral_score, topological_score, statistical_score];
         let best_idx = scores.iter().enumerate()
-            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap_or(std::cmp::Ordering::Equal))
             .map(|(i, _)| i).unwrap_or(0);
         let best_val = scores[best_idx];
         let sum_scores: f64 = scores.iter().sum();

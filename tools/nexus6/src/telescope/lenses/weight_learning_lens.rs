@@ -90,7 +90,7 @@ impl Lens for WeightLearningLens {
 
         // Top constant index
         let top_idx = constant_weights.iter().enumerate()
-            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap_or(std::cmp::Ordering::Equal))
             .map(|(i, _)| i).unwrap_or(0);
 
         // Estimated optimal learning rate: based on data scale and curvature

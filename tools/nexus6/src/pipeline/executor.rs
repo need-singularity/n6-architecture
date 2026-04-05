@@ -46,7 +46,7 @@ pub fn execute_pipeline(pipeline: &Pipeline) -> PipelineResult {
             PipelineStep::RedTeam => {
                 // Red team challenge: remove weakest 1/6 (n=6)
                 if pool.len() > 6 {
-                    pool.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
+                    pool.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap_or(std::cmp::Ordering::Equal));
                     let cut = pool.len() / 6;
                     let removed: Vec<_> = pool.drain(..cut).collect();
                     filtered_out += removed.len();

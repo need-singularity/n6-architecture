@@ -115,7 +115,7 @@ impl Lens for HotPathLens {
 
         // Hotspot indices (top 10%)
         let mut indexed: Vec<(usize, f64)> = heat.iter().copied().enumerate().collect();
-        indexed.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+        indexed.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
         let top_k = (max_n / 10).max(1).min(20);
         let hotspot_indices: Vec<f64> = indexed[..top_k].iter().map(|(i, _)| *i as f64).collect();
 
@@ -156,7 +156,7 @@ impl Lens for HotPathLens {
 
         // Gini coefficient of heat distribution
         let mut sorted_heat = heat.clone();
-        sorted_heat.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        sorted_heat.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let total = sorted_heat.iter().sum::<f64>();
         let gini = if total > 1e-12 {
             let n_f = max_n as f64;

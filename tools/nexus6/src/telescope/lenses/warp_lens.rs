@@ -39,7 +39,7 @@ impl Lens for WarpLens {
             i += step;
         }
         if global_dists.is_empty() { return HashMap::new(); }
-        global_dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+        global_dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let global_median = global_dists[global_dists.len() / 2];
         if global_median < 1e-15 { return HashMap::new(); }
 

@@ -21,7 +21,7 @@ impl Lens for ModuleDiscoveryLens {
                 dists.push(shared.dist(i, j));
             }
         }
-        dists.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        dists.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let threshold = dists.get(dists.len() / 3).copied().unwrap_or(1.0);
 
         // Greedy clustering: assign points to modules by proximity

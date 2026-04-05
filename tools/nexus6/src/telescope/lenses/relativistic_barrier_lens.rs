@@ -58,7 +58,7 @@ impl Lens for RelativisticBarrierLens {
             }
             if gradients.is_empty() { continue; }
 
-            gradients.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+            gradients.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             let median_grad = gradients[gradients.len() / 2];
             let max_grad = gradients[gradients.len() - 1];
 

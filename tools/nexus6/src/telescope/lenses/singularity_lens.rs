@@ -21,7 +21,7 @@ impl Lens for SingularityLens {
         let mean_density = densities.iter().sum::<f64>() / max_n as f64;
         let median_density = {
             let mut sorted = densities.clone();
-            sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
+            sorted.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             sorted[max_n / 2]
         };
 
@@ -53,7 +53,7 @@ impl Lens for SingularityLens {
 
         // Resolution limit: smallest distinct distance between consecutive sorted points
         let mut sorted_sig = signal.clone();
-        sorted_sig.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        sorted_sig.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let mut min_gap = f64::MAX;
         for i in 1..sorted_sig.len() {
             let gap = sorted_sig[i] - sorted_sig[i - 1];

@@ -35,7 +35,7 @@ impl Lens for LoRALens {
         // 1. Estimate effective rank via variance decomposition
         // Sort variances descending (proxy for eigenvalues of covariance)
         let mut sorted_vars = vars.clone();
-        sorted_vars.sort_by(|a, b| b.partial_cmp(a).unwrap());
+        sorted_vars.sort_by(|a, b| b.partial_cmp(a).unwrap_or(std::cmp::Ordering::Equal));
 
         let total_var: f64 = sorted_vars.iter().sum();
         if total_var < 1e-15 {

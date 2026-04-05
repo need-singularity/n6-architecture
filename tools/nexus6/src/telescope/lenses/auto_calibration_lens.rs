@@ -52,7 +52,7 @@ impl Lens for AutoCalibrationLens {
                 dists.push(shared.dist(i, j));
             }
         }
-        dists.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        dists.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let optimal_threshold = dists.get(dists.len() / 2).copied().unwrap_or(1.0);
 
         // Signal-to-noise ratio

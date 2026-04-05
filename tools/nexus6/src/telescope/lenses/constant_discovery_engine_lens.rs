@@ -88,7 +88,7 @@ impl Lens for ConstantDiscoveryEngineLens {
         }
 
         // Sort by precision (lowest error first)
-        discoveries.sort_by(|a, b| a.3.partial_cmp(&b.3).unwrap());
+        discoveries.sort_by(|a, b| a.3.partial_cmp(&b.3).unwrap_or(std::cmp::Ordering::Equal));
 
         // 3. Debit/Credit transformation (대차변환)
         let mut debit_credit_balance = Vec::new();

@@ -134,7 +134,7 @@ impl Lens for SemanticLens {
         let scores = [reduction_score, scan_score, stencil_score, matmul_score, gather_scatter_score];
         let dominant = scores.iter()
             .enumerate()
-            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap_or(std::cmp::Ordering::Equal))
             .map(|(i, _)| i)
             .unwrap_or(0);
 

@@ -31,7 +31,7 @@ impl Lens for EventHorizonLens {
             }
             r2.sqrt()
         }).collect();
-        radii.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        radii.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
 
         let median_r = radii[max_n / 2];
 

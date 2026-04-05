@@ -115,7 +115,7 @@ impl Lens for ParallelismLens {
         let mut ordered: Vec<(f64, usize)> = (0..max_n)
             .map(|i| (data[i * d], i))
             .collect();
-        ordered.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+        ordered.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap_or(std::cmp::Ordering::Equal));
 
         // Find the longest chain where consecutive points are dependent
         let mut max_chain = 1usize;

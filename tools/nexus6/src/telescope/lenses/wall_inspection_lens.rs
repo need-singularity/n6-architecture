@@ -35,7 +35,7 @@ impl Lens for WallInspectionLens {
         let mut densities: Vec<(usize, f64)> = (0..max_n)
             .map(|i| (i, shared.knn_density(i)))
             .collect();
-        densities.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
+        densities.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap_or(std::cmp::Ordering::Equal));
 
         let median_density = densities[densities.len() / 2].1;
         let low_threshold = median_density * 0.2;
@@ -150,7 +150,7 @@ impl Lens for WallInspectionLens {
         };
         if !global_dists.is_empty() {
             let mut sorted_dists = global_dists.clone();
-            sorted_dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+            sorted_dists.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             let far_threshold = sorted_dists[sorted_dists.len() * 3 / 4];
 
             // Check far points that share KNN neighbors (manifold fold)

@@ -346,7 +346,7 @@ fn run_history(domain: &str) -> Result<(), String> {
 
     // Lens stats table
     let mut lens_list: Vec<_> = domain_stats.lens_stats.iter().collect();
-    lens_list.sort_by(|a, b| b.1.hit_rate.partial_cmp(&a.1.hit_rate).unwrap());
+    lens_list.sort_by(|a, b| b.1.hit_rate.partial_cmp(&a.1.hit_rate).unwrap_or(std::cmp::Ordering::Equal));
 
     println!("  Lens Performance:");
     println!("  {:<20} {:>5} {:>5} {:>8}", "Lens", "Used", "Hits", "HitRate");

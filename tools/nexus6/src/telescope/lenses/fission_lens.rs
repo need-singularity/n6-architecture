@@ -38,11 +38,11 @@ impl Lens for FissionLens {
         let mut densities: Vec<(usize, f64)> = (0..max_n)
             .map(|i| (i, shared.knn_density(i)))
             .collect();
-        densities.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap()); // descending
+        densities.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal)); // descending
 
         let median_density = {
             let mut d: Vec<f64> = densities.iter().map(|x| x.1).collect();
-            d.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+            d.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             d[d.len() / 2]
         };
 

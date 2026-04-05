@@ -37,7 +37,7 @@ impl Lens for WormholeLens {
         }
         if all_dists.is_empty() { return HashMap::new(); }
 
-        all_dists.sort_by(|a, b| a.2.partial_cmp(&b.2).unwrap());
+        all_dists.sort_by(|a, b| a.2.partial_cmp(&b.2).unwrap_or(std::cmp::Ordering::Equal));
         let median_dist = all_dists[all_dists.len() / 2].2;
         if median_dist < 1e-15 { return HashMap::new(); }
 

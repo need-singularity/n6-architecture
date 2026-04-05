@@ -24,7 +24,7 @@ impl Lens for EngineDiscoveryLens {
                 dists.push(shared.dist(i, j));
             }
         }
-        dists.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        dists.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let dist_spread = if let (Some(&lo), Some(&hi)) = (dists.first(), dists.last()) {
             if hi > 1e-12 { (hi - lo) / hi } else { 0.0 }
         } else { 0.0 };
@@ -61,8 +61,9 @@ impl Lens for EngineDiscoveryLens {
             dist_entropy / (dist_entropy + 1.0),    // stochastic: high entropy
             density_var / (density_var + 0.1),      // combinatorial: clustered
         ];
+        // NaN-safe comparison: NaN 값이 scores에 포함되어도 panic하지 않음
         let best_idx = scores.iter().enumerate()
-            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
+            .max_by(|a, b| a.1.partial_cmp(b.1).unwrap_or(std::cmp::Ordering::Equal))
             .map(|(i, _)| i).unwrap_or(0);
 
         // Convergence estimate: based on smoothness and dimensionality

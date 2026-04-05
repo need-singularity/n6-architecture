@@ -70,7 +70,7 @@ impl Lens for OverfittingLens {
         let mut memorized = 0u32;
         let median_density = {
             let mut densities: Vec<f64> = (0..max_n).map(|i| shared.knn_density(i)).collect();
-            densities.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+            densities.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             densities[densities.len() / 2]
         };
         let mem_threshold = if median_density > 0.0 { 1.0 / median_density * 0.01 } else { 1e-10 };

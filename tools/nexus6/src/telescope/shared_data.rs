@@ -129,7 +129,7 @@ pub fn knn_indices_from_data(data: &[f64], n_samples: usize, n_features: usize, 
                 .collect();
             let nth = k.min(dists.len().saturating_sub(1));
             dists.select_nth_unstable_by(nth, |a, b| {
-                a.0.partial_cmp(&b.0).unwrap()
+                a.0.partial_cmp(&b.0).unwrap_or(std::cmp::Ordering::Equal)
             });
             dists[..k].iter().map(|&(_, j)| j).collect()
         })

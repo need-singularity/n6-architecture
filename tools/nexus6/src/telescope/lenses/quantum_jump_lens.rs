@@ -40,7 +40,7 @@ impl Lens for QuantumJumpLens {
         if deltas.is_empty() { return HashMap::new(); }
 
         let mut sorted_deltas = deltas.clone();
-        sorted_deltas.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+        sorted_deltas.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let median_delta = sorted_deltas[sorted_deltas.len() / 2];
         let jump_threshold = (median_delta * 3.0).max(1e-12);
 
@@ -137,7 +137,7 @@ impl Lens for QuantumJumpLens {
 fn count_distinct_states(values: &[f64], tolerance: f64) -> usize {
     if values.is_empty() { return 0; }
     let mut sorted = values.to_vec();
-    sorted.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+    sorted.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
 
     let mut count = 1;
     let mut last = sorted[0];

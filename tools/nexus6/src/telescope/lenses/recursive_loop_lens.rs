@@ -32,7 +32,7 @@ impl Lens for RecursiveLoopLens {
         for depth in 1..max_depth {
             // Compute "density of density" — rank-based transformation
             let mut sorted = prev.clone();
-            sorted.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+            sorted.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
             let median = sorted[sorted.len() / 2];
             let next: Vec<f64> = prev.iter()
                 .map(|&v| if median > 1e-15 { v / median } else { 1.0 })

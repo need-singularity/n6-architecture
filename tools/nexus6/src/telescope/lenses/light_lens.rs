@@ -65,7 +65,7 @@ impl Lens for LightLens {
             data[i * d..(i * d + d)].iter().map(|x| x * x).sum::<f64>().sqrt()
         }).collect();
         let mut sorted_int = intensities.clone();
-        sorted_int.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        sorted_int.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
         let median_int = sorted_int[max_n / 2];
         let shadow_threshold = median_int * 0.3;
         let shadow_count = intensities.iter().filter(|&&x| x < shadow_threshold).count();
