@@ -315,7 +315,7 @@
 | 10 | | v4 | **궁극의 초전도체** | 73/73 PASS, BT-299~306 100%EXACT, CrossDSE 8도메인, TP28, Python검증PASS | [링크](docs/superconductor/goal.md) |
 | 5 | | v2 | **궁극의 순수수학** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS | [링크](docs/pure-mathematics/goal.md) |
 | 5 | | v2 | **궁극의 우주론/입자** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS | [링크](docs/cosmology-particle/goal.md) |
-| 10 | ✅ | v2 | **궁극의 상온 초전도체** | 260/260 EXACT (특이점돌파), 17카테고리 심층물리, McMillan σ/(σ-φ)=1.2, BCS σ²/(σ-φ)²=1.43, SC 29년주기=sopfr²+τ | [링크](docs/room-temp-sc/goal.md) |
+| 10 | ✅ | v3 | **궁극의 상온 초전도체** | 150/150 EXACT (천장돌파), 17카테고리, 전원소Z EXACT(Sc/Y/La/Ac/Th), H3S Tc=203=(σ-φ)²φ+n/φ, CSH 267GPa=σJ₂-J₂+n/φ, McMillan 1.2=σ/(σ-φ), BCS 1.43=sopfr·τ/(σ+φ) | [링크](docs/room-temp-sc/goal.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
 > 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`

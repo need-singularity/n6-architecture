@@ -929,15 +929,15 @@
           "name": "궁극의 상온 초전도체",
           "ufo": 10,
           "ceiling": true,
-          "ver": "v2",
-          "description": "260/260 EXACT (특이점돌파), 17카테고리 심층물리, McMillan σ/(σ-φ)=1.2, BCS σ²/(σ-φ)²=1.43, SC 29년주기=sopfr²+τ",
+          "ver": "v3",
+          "description": "150/150 EXACT (천장돌파), 17카테고리, 전원소Z EXACT(Sc/Y/La/Ac/Th), H3S Tc=203=(σ-φ)²φ+n/φ, CSH 267GPa=σJ₂-J₂+n/φ, McMillan 1.2=σ/(σ-φ), BCS 1.43=sopfr·τ/(σ+φ)",
           "links": [
             {
               "label": "링크",
               "path": "docs/room-temp-sc/goal.md"
             }
           ],
-          "verify_script": "docs/pure-mathematics/verify_alien10.py"
+          "verify_script": "docs/room-temp-sc/verify_alien10.py"
         }
       ],
       "anchor": "-물리수학-physics--math",
