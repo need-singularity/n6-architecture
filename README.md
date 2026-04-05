@@ -393,6 +393,23 @@
 
 ---
 
+# 🎪 유희 (Play)
+
+<!-- AUTO:SUMMARY_play:START -->
+> **🛸10** | BT 14개 100%EXACT | DSE 160,920조합, 펀카+바이크 통합 | 산업100% (GT3 RS/F1/McLaren/Ducati V4R) | 실험100% 209/209 EXACT (펀카 133 + 바이크 76) | 물리한계8 | TP6 | 발견1
+<!-- AUTO:SUMMARY_play:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | | v1 | **궁극의 펀카** | 133/133 EXACT, BT-287/289/290/288/277/280/206/271/153, 16카테고리 n=6 100%, DSE 155,520, flat-6+7DCT+Ti-6Al-4V | [링크](docs/fun-car/goal.md) |
+| 10 | | v1 | **궁극의 바이크** | 76/76 EXACT, BT-287/289/290/123/271/277/288/327/328, IMU 6축+σ²=144kg+J₂=24km/L, DSE 5,400 | [링크](docs/motorcycle/goal.md) |
+
+<!-- AUTO:FOOTER_play:START -->
+> 도메인: [fun-car/](docs/fun-car/) · [motorcycle/](docs/motorcycle/)
+<!-- AUTO:FOOTER_play:END -->
+
+---
+
 # 🛸 SF / 초광속 추진 (Speculative Propulsion)
 
 <!-- AUTO:SUMMARY_sf:START -->
