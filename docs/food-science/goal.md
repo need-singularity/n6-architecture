@@ -1,5 +1,8 @@
 # 궁극의 식품과학 (Ultimate Food Science) -- Consolidated Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: 6대 영양소=n, 포도당 C₆H₁₂O₆(n,sigma,J₂), 5미각=sopfr, HACCP 7=sigma-sopfr
 

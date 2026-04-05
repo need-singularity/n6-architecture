@@ -1,5 +1,8 @@
 # HEXA-FUNCAR -- 궁극의 Transportation (Consolidated Goal)
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: 인휠모터 sigma*J₂=288kW, 카본 Z=6 모노코크, 6DOF=n, 3상 n/phi -- 운송 n=6 필연
 

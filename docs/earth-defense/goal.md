@@ -1,5 +1,8 @@
 # HEXA-DEFENSE — 궁극의 지구방어 시스템
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
+
 > RT-SC 추진기 + 지진파 반사기로 소행성 궤도변경 + 슈퍼지진 + 초화산 대응
 > Single-document design (CLAUDE.md 단일문서 원칙 준수)
 

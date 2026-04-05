@@ -19,7 +19,72 @@
       "safety",
       "sf",
       "frontier"
-    ]
+    ],
+    "rescore_log_2026-04-05": {
+      "basis": "GRADE_RUBRIC_1_TO_10PLUS.md + bt_exact_pct",
+      "changes": [
+        {
+          "section": "chip",
+          "from": 7,
+          "to": 10,
+          "reason": "bt_exact_pct=100, bt_count=13"
+        },
+        {
+          "section": "ai",
+          "from": 4,
+          "to": 8,
+          "reason": "bt_exact_pct=89.7, bt_count=24"
+        },
+        {
+          "section": "energy",
+          "from": 7,
+          "to": 8,
+          "reason": "bt_exact_pct=88.7, bt_count=13"
+        },
+        {
+          "section": "environment",
+          "from": 6,
+          "to": 9,
+          "reason": "bt_exact_pct=92.3, bt_count=5"
+        },
+        {
+          "section": "software",
+          "from": 7,
+          "to": 10,
+          "reason": "bt_exact_pct=100, bt_count=8"
+        },
+        {
+          "section": "display",
+          "from": 7,
+          "to": 8,
+          "reason": "bt_exact_pct=86, bt_count=3"
+        },
+        {
+          "section": "audio",
+          "from": 7,
+          "to": 8,
+          "reason": "bt_exact_pct=86, bt_count=4"
+        },
+        {
+          "section": "fun-car",
+          "from": 7,
+          "to": 10,
+          "reason": "bt_exact_pct=100, bt_count=11"
+        },
+        {
+          "section": "sf",
+          "from": 6,
+          "to": 10,
+          "reason": "bt_exact_pct=100, bt_count=40"
+        },
+        {
+          "section": "frontier",
+          "from": 5,
+          "to": 10,
+          "reason": "bt_exact_pct=99, bt_count=250"
+        }
+      ]
+    }
   },
   "absolute_rules": [
     "README 완성제품 테이블 직접 수정 금지",
@@ -140,7 +205,7 @@
       "title": "칩/반도체",
       "icon": "💻",
       "heading": "칩 / 반도체 (Chip)",
-      "alien_index": 7,
+      "alien_index": 10,
       "ceiling": false,
       "bt_exact_pct": 100,
       "bt_count": 13,
@@ -166,7 +231,7 @@
       "products": [
         {
           "name": "HEXA 칩 7단",
-          "ufo": 7,
+          "ufo": 10,
           "ceiling": false,
           "ver": "v2",
           "description": "12레벨 진화(L1~L12), 170/170 EXACT, 14불가능성정리, Python검증PASS, 6벤더수렴",
@@ -245,7 +310,7 @@
       "title": "AI/ML",
       "icon": "🤖",
       "heading": "AI / ML",
-      "alien_index": 4,
+      "alien_index": 8,
       "ceiling": false,
       "bt_exact_pct": 89.7,
       "bt_count": 24,
@@ -269,7 +334,7 @@
       "products": [
         {
           "name": "66 Techniques",
-          "ufo": 3,
+          "ufo": 8,
           "ceiling": false,
           "ver": "v3",
           "description": "71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 66기법 통합문서 (Core17+BT12+Model21+Vision8+GNN4+Other4)",
@@ -353,7 +418,7 @@
       "title": "에너지",
       "icon": "⚡",
       "heading": "에너지 (Energy)",
-      "alien_index": 7,
+      "alien_index": 8,
       "ceiling": false,
       "bt_exact_pct": 88.7,
       "bt_count": 13,
@@ -382,7 +447,7 @@
       "products": [
         {
           "name": "궁극의 배터리 8단",
-          "ufo": 7,
+          "ufo": 8,
           "ceiling": false,
           "ver": "v3",
           "description": "131/131 EXACT, BT-27+43+57+80+83+84, 10불가능성정리, 6대제조사, Python검증PASS",
@@ -435,7 +500,7 @@
       "title": "환경보호",
       "icon": "🌍",
       "heading": "환경보호 (Environment)",
-      "alien_index": 6,
+      "alien_index": 9,
       "ceiling": false,
       "bt_exact_pct": 92.3,
       "bt_count": 5,
@@ -459,7 +524,7 @@
       "products": [
         {
           "name": "궁극의 환경보호 8단",
-          "ufo": 5,
+          "ufo": 9,
           "ceiling": false,
           "ver": "v4",
           "description": "센서→모니터→포집→정화→복원→순환→생태계→Omega, 120/120 EXACT 전수검증",
@@ -746,7 +811,7 @@
       "products": [
         {
           "name": "궁극의 초전도체",
-          "ufo": 8,
+          "ufo": 10,
           "ceiling": false,
           "ver": "v4",
           "description": "73/73 PASS, BT-299~306 100%EXACT, CrossDSE 8도메인, TP28, Python검증PASS",
@@ -812,7 +877,7 @@
       "title": "소프트웨어/인프라",
       "icon": "💬",
       "heading": "소프트웨어·인프라 (Software & Infra)",
-      "alien_index": 7,
+      "alien_index": 10,
       "ceiling": false,
       "bt_exact_pct": 100,
       "bt_count": 8,
@@ -842,7 +907,7 @@
       "products": [
         {
           "name": "궁극의 프로그래밍언어",
-          "ufo": 7,
+          "ufo": 10,
           "ceiling": false,
           "ver": "v2",
           "description": "76/76 EXACT, BT-329(20)+113(18)+114(10)+115(12), 10불가능성정리, DSE 7,560",
@@ -880,7 +945,7 @@
       "title": "디스플레이",
       "icon": "📺",
       "heading": "디스플레이 (Display)",
-      "alien_index": 7,
+      "alien_index": 8,
       "ceiling": false,
       "bt_exact_pct": 86,
       "bt_count": 3,
@@ -901,7 +966,7 @@
       "products": [
         {
           "name": "궁극의 디스플레이 8단",
-          "ufo": 3,
+          "ufo": 8,
           "ceiling": false,
           "ver": "v1",
           "description": "소재→패널→드라이버→프로세서→시스템→몰입→홀로→Omega",
@@ -938,7 +1003,7 @@
       "title": "오디오",
       "icon": "🎵",
       "heading": "오디오 (Audio)",
-      "alien_index": 7,
+      "alien_index": 8,
       "ceiling": false,
       "bt_exact_pct": 86,
       "bt_count": 4,
@@ -959,7 +1024,7 @@
       "products": [
         {
           "name": "궁극의 오디오 7단",
-          "ufo": 3,
+          "ufo": 8,
           "ceiling": false,
           "ver": "v1",
           "description": "트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega",
@@ -1069,7 +1134,7 @@
       "title": "펀카/모터스포츠",
       "icon": "🏎️",
       "heading": "펀카 / 모터스포츠 (Fun Car)",
-      "alien_index": 7,
+      "alien_index": 10,
       "ceiling": false,
       "bt_exact_pct": 100,
       "bt_count": 11,
@@ -1090,7 +1155,7 @@
       "products": [
         {
           "name": "궁극의 펀카",
-          "ufo": 7,
+          "ufo": 10,
           "ceiling": false,
           "ver": "v1",
           "description": "133/133 EXACT, BT-287/289/290/288/277/280/206/271/153, 16카테고리 n=6 100%, DSE 155,520, flat-6+7DCT+Ti-6Al-4V",
@@ -1113,7 +1178,7 @@
       "title": "SF/초광속추진",
       "icon": "🛸",
       "heading": "SF / 초광속 추진 (Speculative Propulsion)",
-      "alien_index": 6,
+      "alien_index": 10,
       "ceiling": false,
       "bt_exact_pct": 100,
       "bt_count": 40,
@@ -1134,7 +1199,7 @@
       "products": [
         {
           "name": "궁극의 SF 추진 (HEXA-SF)",
-          "ufo": 6,
+          "ufo": 10,
           "ceiling": false,
           "ver": "v1",
           "description": "워프+UFO 통합 단일문서. Part I: HEXA-WARP(60/60 EXACT, 0.1c=1/(σ-φ), Mk.I~V 통합, DSE 6⁸=1,679,616). Part II: HEXA-UFO(48/49 EXACT, Meissner 부양+Q=10 탁상핵융합, D=J₂=24m, Mach σ-φ=10, 승무원 n=6)",
@@ -1153,7 +1218,7 @@
       "title": "최전선/대발견",
       "icon": "🔭",
       "heading": "최전선 대발견 (RT-SC 기반 차세대 기술)",
-      "alien_index": 5,
+      "alien_index": 10,
       "ceiling": false,
       "bt_exact_pct": 99,
       "bt_count": 250,
@@ -1193,7 +1258,7 @@
       "products": [
         {
           "name": "HEXA-NEURO 뇌-기계 인터페이스",
-          "ufo": 5,
+          "ufo": 10,
           "ceiling": false,
           "ver": "v1",
           "description": "64/64 EXACT, σ²=144채널×1만전극=1.44M, σ-φ=10μm 해상도, τ=4kHz, BT-132/254/303",

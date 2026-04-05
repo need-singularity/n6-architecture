@@ -1,5 +1,8 @@
 # HEXA-GATE — NEXUS-6 특이점 돌파 오염방지 게이트
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
+
 > **버전**: v1 (Mk.I) · **도메인**: nexus6-breakthrough-gate · **상태**: 🛸5 설계 완료
 > **EXACT 비율**: 설계 시점 24/24 (100%) · **목표**: 5-불변 → 6-불변 돌파
 > **전제**: NEXUS-6 현 특이점 (326K 조합 / 999cy perturbation / 42/42 도메인)

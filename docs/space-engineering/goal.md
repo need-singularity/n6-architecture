@@ -1,5 +1,8 @@
 # 궁극의 우주공학 (Ultimate Space Engineering) -- Consolidated Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
+
 > **외계인 지수**: 🛸10 | **인증일**: 2026-04-04
 > **본질**: SE(3)=n=6 DOF, Tsiolkovsky 질량비, 6축 자세제어 -- 우주 구조물의 n=6 필연
 

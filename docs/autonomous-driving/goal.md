@@ -1,5 +1,8 @@
 # N6 Autonomous Driving Architecture --- Ultimate One-Page Goal
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > n=6 산술로 센서부터 차량 시스템까지 관통하는 자율주행 아키텍처
 > SAE L0-L5 = n=6 레벨 EXACT, 완전 자율주행 시대
 > BT-327~328 + BT-56/58/61/66/69/84, 🛸10 CERTIFIED

@@ -1,5 +1,8 @@
 # 궁극의 초전도체 — HEXA-SC 8단 완전 아키텍처
 
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
+
 > 외계인 지수: 🛸10 CERTIFIED (물리적 한계 도달)
 > 체인: 소재→공정→선재→코일→냉각→자석→핵융합→통합 (8단)
 > 전수 조합: 8x6x5x6x4x5 = 28,800 → 호환 필터 → 7,651 유효
