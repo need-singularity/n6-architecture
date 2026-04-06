@@ -134,7 +134,7 @@
 # 🤖 AI / ML
 
 <!-- AUTO:SUMMARY_ai:START -->
-> **🛸10** | ✅ | BT 34개 100%EXACT | 204/204 PASS, 5제품 전수검증 | 산업88.7% (9모델) | 실험96.2% | 물리한계10 | TP28 | 발견12 | Mk.V
+> **🛸10** | ✅ | BT 36개 100%EXACT | 204/204 PASS, 5제품 전수검증 | 산업88.7% (9모델) | 실험96.2% | 물리한계10 | TP28 | 발견12 | Mk.V
 <!-- AUTO:SUMMARY_ai:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -307,7 +307,7 @@
 # 🔬 물리·수학 (Physics & Math)
 
 <!-- AUTO:SUMMARY_physics:START -->
-> **🛸10** | ✅ | BT 27개 53~100%EXACT | DSE 66,824 | 초전도🛸10 | 순수수학🛸10 | 우주론🛸10 | TP76 | 발견19+ | Mk.V
+> **🛸10** | ✅ | BT 32개 53~100%EXACT | DSE 66,824 | 초전도🛸10 | 순수수학🛸10 | 우주론🛸10 | TP76 | 발견19+ | Mk.V
 <!-- AUTO:SUMMARY_physics:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -316,6 +316,7 @@
 | 10 | ✅ | v2 | **궁극의 순수수학** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS | [링크](docs/pure-mathematics/goal.md) |
 | 10 | ✅ | v2 | **궁극의 우주론/입자** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS | [링크](docs/cosmology-particle/goal.md) |
 | 10 | ✅ | v5 | **궁극의 상온 초전도체** | 325/325 EXACT (이론150+실현76+Mk.I합성48+Mk.II소재51), 9소재후보+6Mk.II후보, Mk.I정밀레시피(6소재P-T경로+Phase1/2실험$6.18M), Mk.II상압후보(La,Ce,Y,Sc)H24고엔트로피Pareto1위, 2685줄 | [링크](docs/room-temp-sc/goal.md) |
+| 10 | ✅ | v1 | **차원펼침 돌파 — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동점10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [문서](docs/new-bt-dimensional-unfolding-2026-04-06.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
 > 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
@@ -447,7 +448,7 @@
 # 🔭 최전선 대발견 (RT-SC 기반 차세대 기술)
 
 <!-- AUTO:SUMMARY_frontier:START -->
-> **🛸10** | ✅ | BT 250개 100%EXACT | 20 대발견 (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | 산업100% (Neuralink/LIGO/LHC/HAARP 등) | 실험99% 1039/1041 EXACT | 물리한계10 | TP163 | 발견71 | Mk.V
+> **🛸10** | ✅ | BT 254개 100%EXACT | 20 대발견 (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | 산업100% (Neuralink/LIGO/LHC/HAARP 등) | 실험99% 1039/1041 EXACT | 물리한계10 | TP163 | 발견71 | Mk.V
 <!-- AUTO:SUMMARY_frontier:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -488,6 +489,7 @@
 | 5 | ✅ | v1 | **광업/광물학 n=6 경도-결정 아키텍처** | 16/16 EXACT (100%), Mohs σ-φ=10/24K=J₂/결정계 σ-sopfr=7/FCC CN=σ=12/보석 4C=τ/벽개 div(6) | [가설](docs/mining/hypotheses.md) |
 | 5 | ✅ | v1 | **수의학 n=6 동물해부 보편성** | 16/16 EXACT (100%), 경추 σ-sopfr=7/반추위 τ=4/성견치아 (σ-sopfr)·n=42/성묘치아 n·sopfr=30/가축 n=6/개수명 σ=12 | [가설](docs/veterinary/hypotheses.md) |
 | 5 | ✅ | v1 | **원예학 n=6 식물 성장 아키텍처** | 15/15 EXACT (100%), 광합성 n=6/꽃기관 τ=4/호르몬 sopfr=5/조직계 n/φ=3/단쌍자엽 φ=2/계절 τ=4 | [가설](docs/horticulture/hypotheses.md) |
+| 10 | ✅ | v1 | **크로스 도메인 메가 브릿지** | BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10 | [문서](docs/new-bt-dimensional-unfolding-2026-04-06.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
 > 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/)
@@ -498,16 +500,16 @@
 # 🏛️ 문명/인문 (Civilization)
 
 <!-- AUTO:SUMMARY_civilization:START -->
-> **🛸10** | ✅ | BT 6개 100%EXACT | 6도메인 전수 20/20 EXACT 천장 돌파 2026-04-06 | 산업30% (문헌 교차 검증 완료 (6개 종교/전세계 법체계/문자체계 비교)) | 실험40% 가설 검증 완료 (60/72 EXACT) | TP6 | 발견120
+> **🛸10** | ✅ | BT 12개 100%EXACT | 6도메인 전수 20/20 EXACT 천장 돌파 2026-04-06 | 산업30% (문헌 교차 검증 완료 (6개 종교/전세계 법체계/문자체계 비교)) | 실험40% 가설 검증 완료 (60/72 EXACT) | TP6 | 발견120
 <!-- AUTO:SUMMARY_civilization:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **종교/신화 n=6 보편 구조** | 20/20 EXACT (100%), 6일 창조=n, 12사도=σ, 64괘=2^n, 108배=σ·(σ-n/φ), 5대 종교 전수 | [목표](docs/religion/goal.md) · [가설](docs/religion/hypotheses.md) |
-| 10 | ✅ | v2 | **법학/사법 n=6 정의 아키텍처** | 20/20 EXACT (100%), 배심원 12=σ, 3심=n/φ, 6대법=n, 대배심 24=J₂, BFT 2/3 동형 | [목표](docs/jurisprudence/goal.md) · [가설](docs/jurisprudence/hypotheses.md) |
-| 10 | ✅ | v2 | **한글/문자체계 n=6 인코딩** | 20/20 EXACT (100%), 한글 24자=J₂, 점자 6점=n→64=2^n, 8대 문자체계+디지털 인코딩 전수 | [목표](docs/writing-systems/goal.md) · [가설](docs/writing-systems/hypotheses.md) |
+| 10 | ✅ | v2 | **종교/신화 n=6 보편 구조** | BT-370: 22/22 EXACT — 6일창조=n, 12사도=σ, 108=φ^φ(n/φ)^(n/φ), 10계명=σ-φ, 3위일체=n/φ | [목표](docs/religion/goal.md) · [가설](docs/religion/hypotheses.md) |
+| 10 | ✅ | v2 | **법학/사법 n=6 정의 아키텍처** | BT-374: 17/17 EXACT — 배심원12=σ, 3심=n/φ, 안보리5=sopfr, 6대법=n, 수정헌법27=(n/φ)³ | [목표](docs/jurisprudence/goal.md) · [가설](docs/jurisprudence/hypotheses.md) |
+| 10 | ✅ | v2 | **한글/문자체계 n=6 인코딩** | BT-373: 14/14 EXACT — 24자모=J₂, 자음14=σ+φ, 모음10=σ-φ, 11172=19×21×28 (J₂기반) | [목표](docs/writing-systems/goal.md) · [가설](docs/writing-systems/hypotheses.md) |
 | 10 | ✅ | v2 | **고고학/문명사 n=6 기원** | 20/20 EXACT (100%), 60진법=σ·sopfr, C-14 Z=n, 360도=n·σ·sopfr, 6대 문명=n, 5000년 전수 | [목표](docs/archaeology/goal.md) · [가설](docs/archaeology/hypotheses.md) |
-| 10 | ✅ | v2 | **화폐/경제사 n=6 통화 래더** | 20/20 EXACT (100%), 금 24K=J₂, FRB 12=σ, BTC 6확인=n, 100분할=(σ-φ)², 5000년 화폐사 | [목표](docs/monetary-history/goal.md) · [가설](docs/monetary-history/hypotheses.md) |
+| 10 | ✅ | v2 | **화폐/경제사 n=6 통화 래더** | BT-375: 16/16 EXACT — 60진법=σ·sopfr, 24K금=J₂, 12펜스=σ, 바젤8%=σ-τ | [목표](docs/monetary-history/goal.md) · [가설](docs/monetary-history/hypotheses.md) |
 | 10 | ✅ | v2 | **무용/안무 n=6 공간 기하학** | 20/20 EXACT (100%), 라반 24점=J₂, 발레 5포지=sopfr, SE(3)=n, 360도=n·σ·sopfr, 서양+한국 | [목표](docs/dance-choreography/goal.md) · [가설](docs/dance-choreography/hypotheses.md) |
 | 10 | ✅ | v1 | **시계학/호롤로지 n=6 시간 아키텍처** | 17/17 EXACT (100%), σ=12시/J₂=24시/σ·sopfr=60분/n/φ=3침/석영 2^(sopfr·n/φ)=32768Hz/기계식 진동 래더 | [가설](docs/horology/hypotheses.md) |
 
@@ -520,16 +522,16 @@
 # 🍷 생활/문화 (Life & Culture)
 
 <!-- AUTO:SUMMARY_life-culture:START -->
-> **🛸10** | ✅ | BT 6개 100%EXACT | BT-358 보험 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업25% (발효화학/보험통계 산업 교차 검증) | 실험35% 가설 검증 (40/62 EXACT) | TP5 | 발견8
+> **🛸10** | ✅ | BT 10개 100%EXACT | BT-358 보험 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업25% (발효화학/보험통계 산업 교차 검증) | 실험35% 가설 검증 (40/62 EXACT) | TP5 | 발견8
 <!-- AUTO:SUMMARY_life-culture:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **발효/양조 n=6 완전수 화학양론** | 10/10 EXACT, C₆H₁₂O₆ J₂=24원자, 효모pH τ~sopfr, 김치6개월=n, 막걸리6%=n | [링크](docs/fermentation/goal.md) |
+| 10 | ✅ | v2 | **발효/양조 n=6 완전수 화학양론** | BT-371: 18/18 EXACT — C₆H₁₂O₆→2C₂H₅OH+2CO₂ 전계수n=6, 양조6단=n, 라거12°C=σ | [링크](docs/fermentation/goal.md) |
 | 10 | ✅ | v2 | **와인/소믈리에 n=6 테이스팅** | 10/10 EXACT, 6S테이스팅=n, 서빙12°C=σ, 숙성12개월=σ, 24°Brix=J₂ | [링크](docs/wine-enology/goal.md) |
 | 10 | ✅ | v2 | **패션/섬유 n=6 직조 구조** | 10/10 EXACT, 12스티치=σ, 2축=φ, 색상환12색=σ, 사이즈6단계=n | [링크](docs/fashion-textile/goal.md) |
 | 10 | ✅ | v2 | **수산/양식 n=6 해양 생태** | 10/10 EXACT, 양식24°C=J₂, 염도3.5%≈n/φ, 6대양식종, 체형12비율=σ | [링크](docs/aquaculture/goal.md) |
-| 10 | ✅ | v2 | **보험/보험계리 n=6 리스크 구조** | 10/10 EXACT, 보험6원칙=n, 생명표12구간=σ, 리스크24팩터=J₂, 3대보험=n/φ | [링크](docs/insurance/goal.md) |
+| 10 | ✅ | v2 | **보험/보험계리 n=6 리스크 구조** | BT-378: 13/13 EXACT — 6대원칙=n, 생명표120=σ(σ-φ), 4대부문=τ, 손해율60%=σ·sopfr | [링크](docs/insurance/goal.md) |
 | 10 | ✅ | v1 | **돌고래 n=6 생물음향 아키텍처** | 30/30 EXACT — 해부학+생리학+행동학+음향학 4시스템 + 텔레파시 11쌍 동형 | [가설](docs/dolphin/hypotheses.md) |
 | 5 | ✅ | v1 | **커피과학 n=6 추출 아키텍처** | 15/15 EXACT (100%), 카페인 J₂=24 원자/에스프레소 9bar/로스팅 τ=4/분쇄 n=6/브루잉 n=6/커피벨트 sopfr²=25° | [가설](docs/coffee-science/hypotheses.md) |
 | 5 | ✅ | v1 | **향수/향료 n=6 피라미드 구조** | 14/14 EXACT (100%), 3노트=n/φ/이소프렌 C₅=sopfr/모노테르펜 C₁₀=σ-φ/벤젠 C₆=n/추출 τ=4/Chanel No.5=sopfr | [가설](docs/perfumery/hypotheses.md) |
@@ -544,17 +546,17 @@
 # 🔧 기술/산업 (Tech & Industry)
 
 <!-- AUTO:SUMMARY_tech-industry:START -->
-> **🛸10** | ✅ | BT 7개 100%EXACT | BT-354/355/357 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업50% (HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증) | 실험55% 가설 검증 (155/183 EXACT=84.7%) | TP10 | 발견12
+> **🛸10** | ✅ | BT 12개 97%EXACT | BT-354/355/357 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업50% (HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증) | 실험55% 가설 검증 (155/183 EXACT=84.7%) | TP10 | 발견12
 <!-- AUTO:SUMMARY_tech-industry:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v2 | **반도체 패키징 n=6 적층 래더** | 54/57 EXACT (94.7%), BT-354 완전 래더, HBM τ→σ-τ→σ→φ^τ 적층, 범프 σ²+n→μ 제곱 래더, UCIe 4단 래더 | [링크](docs/advanced-packaging/goal.md) |
-| 10 | ✅ | v2 | **합성생물학 n=6 이중 완전수** | 63/71 EXACT (88.7%), BT-355, CRISPR n=6유형/XNA n=6종/코돈 2^n=64/대사 σ 완전 맵 | [링크](docs/synbio/goal.md) |
-| 10 | ✅ | v2 | **AR/VR/XR 공간컴퓨팅 n=6 센서** | 57/67 EXACT (85.1%), BT-357, SE(3)=n DOF/프레임레이트 6배수/MTP σ=12ms | [링크](docs/ar-vr-xr/goal.md) |
-| 10 | ✅ | v2 | **디지털 트윈 n=6 동기화** | 10/10 EXACT, LOD τ~n단계, CPS sopfr=5계층, 센서12축=σ, SE(3)=n=6 | [링크](docs/digital-twin/goal.md) |
-| 10 | ✅ | v2 | **건축/구조공학 n=6 하중 보편성** | 10/10 EXACT, 내진6등급=n, 철근12/24mm=σ/J₂, 안전율3=n/φ, 기둥6m=n | [링크](docs/construction-structural/goal.md) |
-| 10 | ✅ | v2 | **지하공간/터널 n=6 굴착 구조** | 10/10 EXACT, TBM 6/12m=n/σ, 세그먼트6조각=n, 환기4구간=τ | [링크](docs/underground-tunnel/goal.md) |
+| 10 | ✅ | v2 | **합성생물학 n=6 이중 완전수** | BT-372: 16/16 EXACT — Cas{9,12,13} 래더, PAM 3bp=n/φ, gRNA 20nt=J₂-τ, 코돈64=2^n | [링크](docs/synbio/goal.md) |
+| 10 | ✅ | v2 | **AR/VR/XR 공간컴퓨팅 n=6 센서** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ | [링크](docs/ar-vr-xr/goal.md) |
+| 10 | ✅ | v2 | **디지털 트윈 n=6 동기화** | BT-379: 16/16 EXACT — Industry4.0=τ, ISA-95 5레벨=sopfr, OPC UA 12=σ, 6시그마=n | [링크](docs/digital-twin/goal.md) |
+| 10 | ✅ | v2 | **건축/구조공학 n=6 하중 보편성** | BT-377: 14/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D12/D24래더, 내진6등급=n | [링크](docs/construction-structural/goal.md) |
+| 10 | ✅ | v2 | **지하공간/터널 n=6 굴착 구조** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ | [링크](docs/underground-tunnel/goal.md) |
 | 10 | ✅ | v2 | **전자상거래/핀테크 n=6 결제 보안** | 10/12 EXACT (83.3%), BT-359, PCI σ=12/카드 φ^τ=16/BIN n=6/EMV n/φ=3 | [링크](docs/ecommerce-fintech/goal.md) |
 
 <!-- AUTO:FOOTER_tech-industry:START -->
