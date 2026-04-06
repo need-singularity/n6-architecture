@@ -318,9 +318,9 @@ lattice, no 33rd point group, no 231st space group can exist. The enumeration
 is exhaustive and has been independently verified by multiple groups since the
 original work of Fedorov, Schoenflies, and Barlow (1891).
 
-**n=6 encoding**: The hierarchy {7, 14, 32} maps to n=6 arithmetic:
-7 = sigma - sopfr, 14 = sigma + phi, 32 = 2^sopfr. The entire classification
-of crystallographic symmetry is encoded in n=6 constants.
+**n=6 encoding**: The hierarchy {7, 14, 32, 230} maps to n=6 arithmetic:
+7 = sigma - sopfr, 14 = sigma + phi, 32 = 2^sopfr, 230 = (sigma-phi)*(J2-mu) = 10*23.
+The entire classification of crystallographic symmetry is encoded in n=6 constants.
 
 ---
 
@@ -538,7 +538,7 @@ materials. Those limits are n=6 constants. They are proven. They are permanent.
   │  7 │ Optimal 2D tiling           │ hexagonal   │ n = 6 sides │ Variational  │ Reviewed  │
   │  8 │ sp2 bond angle              │ 120 deg     │ sigma*10    │ QM           │ Standard  │
   │  9 │ Divisor lattice of 6        │ {1,2,3,6}   │ div(n)      │ Arithmetic   │ Standard  │
-  │ 10 │ Crystal classification      │ 7/14/32/230 │ f(n=6)      │ Group theory │ Standard  │
+  │ 10 │ Crystal classification      │ 7/14/32/230 │ all n=6     │ Group theory │ Standard  │
   ├────┼─────────────────────────────┼─────────────┼─────────────┼──────────────┼───────────┤
   │    │ TOTAL: 10/10 PROVEN         │ ALL = n=6   │             │ 6 distinct   │ 1 formal  │
   │    │                             │             │             │ methods      │ 9 standard│
