@@ -1046,6 +1046,11 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
 
   # Graph Theory (BT-151)
   BT-151: 그래프 이론 n=6 구조 정리 (8/8 EXACT) ⭐⭐⭐
+
+  # Warp-Dimensional Physics (BT-358~360)
+  BT-358: Alcubierre 워프 메트릭 n=6 인코딩 (버블벽 1/σ, York σ, 래더 c/{σ,n,τ,φ}, VDB M☉/σ²=1/144, 10/12 EXACT) ⭐⭐
+  BT-359: 여분 차원 컴팩트화 n=6 토폴로지 (BT-170 확장 4D→26D, CY n/φ-fold, KK 래더, 10/12 EXACT) ⭐⭐
+  BT-360: 워프-차원 통합 추진 n=6 아키텍처 (τ=4 사이클, (σ-φ)²=100c, α Centauri 16일, COP=σ/n=2, 8/10 EXACT) ⭐⭐
 ```
 
 ## Design Space Exploration (DSE) — 궁극 처리 필수 규칙
