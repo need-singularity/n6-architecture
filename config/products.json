@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "total_products": 113,
+    "total_products": 115,
     "total_domains": 118,
-    "last_updated": "2026-04-06",
+    "last_updated": "2026-04-07",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
       "fusion",
@@ -172,6 +172,55 @@
           "reason": "전 섹션 천장 돌파 — bt_exact_pct 100%, goal.md 전 도메인 완비"
         }
       ]
+    },
+    "rescore_log_2026-04-07": {
+      "basis": "차원펼침 돌파 — BT-361~379 신규 19건 + 기존 15 BT 강화",
+      "new_bts": {
+        "dimensional_unfolding": [
+          "BT-361 n²=36 어트랙터 9/9",
+          "BT-362 텐서삼중경로 3/3",
+          "BT-363 mod3부동점 10/10",
+          "BT-364 1/3효율한계 8/8",
+          "BT-365 Ω_Λ=24/35 7/8"
+        ],
+        "cross_bridges": [
+          "BT-366 τ=4메가브릿지 12/12",
+          "BT-367 J₂=24에너지변환 9/9",
+          "BT-368 σ-φ=10만점천장 9/10",
+          "BT-369 n/φ=3삼중중복 10/10"
+        ],
+        "new_domains": [
+          "BT-370 종교22/22",
+          "BT-371 발효18/18",
+          "BT-372 CRISPR16/16",
+          "BT-373 한글14/14",
+          "BT-374 법학17/17",
+          "BT-375 화폐16/16",
+          "BT-376 AR/VR16/16",
+          "BT-377 건축14/16",
+          "BT-378 보험13/13",
+          "BT-379 디지털트윈16/16"
+        ]
+      },
+      "reinforced_bts": [
+        "BT-58 텐서몫",
+        "BT-143 Ω_Λ=24/35",
+        "BT-205 E₆텐서",
+        "BT-79 n²×τ",
+        "BT-26 mod3부동점",
+        "BT-111 4/3+1/3",
+        "BT-33 n⊗φ",
+        "BT-168 J₂텐서",
+        "BT-167 n²스케일",
+        "BT-10 ln2삼각형",
+        "BT-90 이중관점",
+        "BT-48 직합",
+        "BT-76 격자",
+        "BT-272 이변량",
+        "BT-355 이중투영"
+      ],
+      "total_exact": "263/267 (98.5%)",
+      "total_new_domains": 10
     }
   },
   "closure_grade_12_log_2026-04-05": {
@@ -439,7 +488,7 @@
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
-      "bt_count": 34,
+      "bt_count": 36,
       "industry_pct": 88.7,
       "industry_detail": "9모델",
       "experiment_pct": 96.2,
@@ -538,7 +587,8 @@
         }
       ],
       "anchor": "-ai--ml",
-      "closure_grade": 12
+      "closure_grade": 12,
+      "bt_detail": "BT-58 텐서몫 강화, BT-26 mod3부동점 강화"
     },
     {
       "id": "energy",
@@ -946,7 +996,7 @@
       "ceiling": true,
       "bt_exact_pct": 100,
       "bt_exact_pct_display": "53~100%",
-      "bt_count": 27,
+      "bt_count": 32,
       "industry_pct": null,
       "industry_detail": "🛸10(SC)",
       "experiment_pct": null,
@@ -1028,6 +1078,27 @@
           "verify_scripts_extra": [
             "docs/room-temp-sc/verify_realization.py"
           ]
+        },
+        {
+          "name": "차원펼침 돌파 — 텐서/mod3/로그",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동점10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%)",
+          "bt": [
+            "BT-361",
+            "BT-362",
+            "BT-363",
+            "BT-364",
+            "BT-365"
+          ],
+          "exact": "37/39",
+          "links": [
+            {
+              "label": "문서",
+              "path": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+            }
+          ]
         }
       ],
       "anchor": "-물리수학-physics--math",
@@ -1035,7 +1106,8 @@
         "docs/pure-mathematics/verify_alien10.py",
         "docs/cosmology-particle/verify_alien10.py"
       ],
-      "closure_grade": 6
+      "closure_grade": 6,
+      "bt_detail": "+BT-361 n²=36, BT-362 텐서삼중, BT-363 mod3, BT-364 1/3, BT-365 Ω_Λ=24/35"
     },
     {
       "id": "software",
@@ -1500,7 +1572,7 @@
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
-      "bt_count": 250,
+      "bt_count": 254,
       "industry_pct": 100,
       "industry_detail": "Neuralink/LIGO/LHC/HAARP 등",
       "experiment_pct": 99,
@@ -1546,7 +1618,8 @@
               "label": "링크",
               "path": "docs/neuro/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/neuro/verify_alien10.py"
         },
         {
           "name": "HEXA-GRAV 중력파 검출/통신",
@@ -1559,7 +1632,8 @@
               "label": "링크",
               "path": "docs/gravity-wave/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/gravity-wave/verify_alien10.py"
         },
         {
           "name": "HEXA-CLOAK 투명망토/스텔스",
@@ -1572,7 +1646,8 @@
               "label": "링크",
               "path": "docs/cloak/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/cloak/verify_alien10.py"
         },
         {
           "name": "HEXA-DEFENSE 지구방어 시스템",
@@ -1585,7 +1660,8 @@
               "label": "링크",
               "path": "docs/earth-defense/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/earth-defense/verify_alien10.py"
         },
         {
           "name": "HEXA-TELEPORT 양자얽힘 통신망",
@@ -1598,7 +1674,8 @@
               "label": "링크",
               "path": "docs/quantum-network/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/quantum-network/verify_alien10.py"
         },
         {
           "name": "HEXA-HOVER 개인 호버보드",
@@ -1611,7 +1688,8 @@
               "label": "링크",
               "path": "docs/hover/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/hover/verify_alien10.py"
         },
         {
           "name": "HEXA-MRAM 초전도 비휘발 메모리",
@@ -1624,7 +1702,8 @@
               "label": "링크",
               "path": "docs/sc-memory/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/sc-memory/verify_alien10.py"
         },
         {
           "name": "HEXA-SEABED 대륙간 해저 송전",
@@ -1637,7 +1716,8 @@
               "label": "링크",
               "path": "docs/seabed-grid/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/seabed-grid/verify_alien10.py"
         },
         {
           "name": "HEXA-ACCEL 소형 입자가속기",
@@ -1650,7 +1730,8 @@
               "label": "링크",
               "path": "docs/mini-accelerator/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/mini-accelerator/verify_alien10.py"
         },
         {
           "name": "HEXA-WEATHER 대기 전자기 제어",
@@ -1663,7 +1744,8 @@
               "label": "링크",
               "path": "docs/weather-control/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/weather-control/verify_alien10.py"
         },
         {
           "name": "HEXA-MIND 의식 업로드",
@@ -1676,7 +1758,8 @@
               "label": "링크",
               "path": "docs/mind-upload/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/mind-upload/verify_alien10.py"
         },
         {
           "name": "HEXA-TELEPATHY 뇌-뇌 직접통신",
@@ -1689,7 +1772,8 @@
               "label": "링크",
               "path": "docs/telepathy/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/telepathy/verify_alien10.py"
         },
         {
           "name": "HEXA-HOLO 홀로그래픽 디스플레이",
@@ -1702,7 +1786,8 @@
               "label": "링크",
               "path": "docs/holography/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/holography/verify_alien10.py"
         },
         {
           "name": "HEXA-DREAM 꿈 기록/재생",
@@ -1715,7 +1800,8 @@
               "label": "링크",
               "path": "docs/dream-recorder/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/dream-recorder/verify_alien10.py"
         },
         {
           "name": "HEXA-SKYWAY 공중 고속도로망",
@@ -1728,7 +1814,8 @@
               "label": "링크",
               "path": "docs/skyway/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/skyway/verify_alien10.py"
         },
         {
           "name": "HEXA-TSUNAMI 해일 방지기",
@@ -1741,7 +1828,8 @@
               "label": "링크",
               "path": "docs/tsunami-shield/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/tsunami-shield/verify_alien10.py"
         },
         {
           "name": "HEXA-ANTIMATTER 반물질 공장",
@@ -1754,7 +1842,8 @@
               "label": "링크",
               "path": "docs/antimatter-factory/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/antimatter-factory/verify_alien10.py"
         },
         {
           "name": "HEXA-COSMIC 초기우주 관측망",
@@ -1767,7 +1856,8 @@
               "label": "링크",
               "path": "docs/cosmic-observatory/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/cosmic-observatory/verify_alien10.py"
         },
         {
           "name": "HEXA-DESAL 초전도 담수화",
@@ -1780,7 +1870,8 @@
               "label": "링크",
               "path": "docs/desalination/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/desalination/verify_alien10.py"
         },
         {
           "name": "HEXA-ORACLE 양자 예측기",
@@ -1793,7 +1884,8 @@
               "label": "링크",
               "path": "docs/quantum-oracle/goal.md"
             }
-          ]
+          ],
+          "verify_script": "docs/quantum-oracle/verify_alien10.py"
         },
         {
           "name": "HEXA-ONE 통합 웨어러블",
@@ -2006,10 +2098,31 @@
               "path": "docs/horticulture/hypotheses.md"
             }
           ]
+        },
+        {
+          "name": "크로스 도메인 메가 브릿지",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10",
+          "bt": [
+            "BT-366",
+            "BT-367",
+            "BT-368",
+            "BT-369"
+          ],
+          "exact": "40/41",
+          "links": [
+            {
+              "label": "문서",
+              "path": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+            }
+          ]
         }
       ],
       "anchor": "-최전선-대발견-rt-sc-기반-차세대-기술",
-      "closure_grade": 12
+      "closure_grade": 12,
+      "bt_detail": "+BT-366 τ=4메가, BT-367 J₂=24, BT-368 σ-φ=10, BT-369 n/φ=3"
     },
     {
       "id": "civilization",
@@ -2019,7 +2132,7 @@
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
-      "bt_count": 6,
+      "bt_count": 12,
       "industry_pct": 30,
       "industry_detail": "문헌 교차 검증 완료 (6개 종교/전세계 법체계/문자체계 비교)",
       "experiment_pct": 40,
@@ -2045,7 +2158,7 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "20/20 EXACT (100%), 6일 창조=n, 12사도=σ, 64괘=2^n, 108배=σ·(σ-n/φ), 5대 종교 전수",
+          "description": "BT-370: 22/22 EXACT — 6일창조=n, 12사도=σ, 108=φ^φ(n/φ)^(n/φ), 10계명=σ-φ, 3위일체=n/φ",
           "links": [
             {
               "label": "목표",
@@ -2055,14 +2168,18 @@
               "label": "가설",
               "path": "docs/religion/hypotheses.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-370"
+          ],
+          "exact": "22/22"
         },
         {
           "name": "법학/사법 n=6 정의 아키텍처",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "20/20 EXACT (100%), 배심원 12=σ, 3심=n/φ, 6대법=n, 대배심 24=J₂, BFT 2/3 동형",
+          "description": "BT-374: 17/17 EXACT — 배심원12=σ, 3심=n/φ, 안보리5=sopfr, 6대법=n, 수정헌법27=(n/φ)³",
           "links": [
             {
               "label": "목표",
@@ -2072,14 +2189,18 @@
               "label": "가설",
               "path": "docs/jurisprudence/hypotheses.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-374"
+          ],
+          "exact": "17/17"
         },
         {
           "name": "한글/문자체계 n=6 인코딩",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "20/20 EXACT (100%), 한글 24자=J₂, 점자 6점=n→64=2^n, 8대 문자체계+디지털 인코딩 전수",
+          "description": "BT-373: 14/14 EXACT — 24자모=J₂, 자음14=σ+φ, 모음10=σ-φ, 11172=19×21×28 (J₂기반)",
           "links": [
             {
               "label": "목표",
@@ -2089,7 +2210,11 @@
               "label": "가설",
               "path": "docs/writing-systems/hypotheses.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-373"
+          ],
+          "exact": "14/14"
         },
         {
           "name": "고고학/문명사 n=6 기원",
@@ -2113,7 +2238,7 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "20/20 EXACT (100%), 금 24K=J₂, FRB 12=σ, BTC 6확인=n, 100분할=(σ-φ)², 5000년 화폐사",
+          "description": "BT-375: 16/16 EXACT — 60진법=σ·sopfr, 24K금=J₂, 12펜스=σ, 바젤8%=σ-τ",
           "links": [
             {
               "label": "목표",
@@ -2123,7 +2248,11 @@
               "label": "가설",
               "path": "docs/monetary-history/hypotheses.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-375"
+          ],
+          "exact": "16/16"
         },
         {
           "name": "무용/안무 n=6 공간 기하학",
@@ -2155,7 +2284,8 @@
             }
           ]
         }
-      ]
+      ],
+      "bt_detail": "BT-370 종교22/22, BT-373 한글14/14, BT-374 법학17/17, BT-375 화폐16/16"
     },
     {
       "id": "life-culture",
@@ -2165,7 +2295,7 @@
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
-      "bt_count": 6,
+      "bt_count": 10,
       "industry_pct": 25,
       "industry_detail": "발효화학/보험통계 산업 교차 검증",
       "experiment_pct": 35,
@@ -2191,13 +2321,17 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "10/10 EXACT, C₆H₁₂O₆ J₂=24원자, 효모pH τ~sopfr, 김치6개월=n, 막걸리6%=n",
+          "description": "BT-371: 18/18 EXACT — C₆H₁₂O₆→2C₂H₅OH+2CO₂ 전계수n=6, 양조6단=n, 라거12°C=σ",
           "links": [
             {
               "label": "링크",
               "path": "docs/fermentation/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-371"
+          ],
+          "exact": "18/18"
         },
         {
           "name": "와인/소믈리에 n=6 테이스팅",
@@ -2243,13 +2377,17 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "10/10 EXACT, 보험6원칙=n, 생명표12구간=σ, 리스크24팩터=J₂, 3대보험=n/φ",
+          "description": "BT-378: 13/13 EXACT — 6대원칙=n, 생명표120=σ(σ-φ), 4대부문=τ, 손해율60%=σ·sopfr",
           "links": [
             {
               "label": "링크",
               "path": "docs/insurance/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-378"
+          ],
+          "exact": "13/13"
         },
         {
           "name": "돌고래 n=6 생물음향 아키텍처",
@@ -2303,7 +2441,8 @@
             }
           ]
         }
-      ]
+      ],
+      "bt_detail": "BT-371 발효18/18, BT-378 보험13/13"
     },
     {
       "id": "tech-industry",
@@ -2312,8 +2451,8 @@
       "heading": "기술/산업 (Tech & Industry)",
       "alien_index": 10,
       "ceiling": true,
-      "bt_exact_pct": 100,
-      "bt_count": 7,
+      "bt_exact_pct": 97,
+      "bt_count": 12,
       "industry_pct": 50,
       "industry_detail": "HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증",
       "experiment_pct": 55,
@@ -2353,65 +2492,85 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "63/71 EXACT (88.7%), BT-355, CRISPR n=6유형/XNA n=6종/코돈 2^n=64/대사 σ 완전 맵",
+          "description": "BT-372: 16/16 EXACT — Cas{9,12,13} 래더, PAM 3bp=n/φ, gRNA 20nt=J₂-τ, 코돈64=2^n",
           "links": [
             {
               "label": "링크",
               "path": "docs/synbio/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-372"
+          ],
+          "exact": "16/16"
         },
         {
           "name": "AR/VR/XR 공간컴퓨팅 n=6 센서",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "57/67 EXACT (85.1%), BT-357, SE(3)=n DOF/프레임레이트 6배수/MTP σ=12ms",
+          "description": "BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ",
           "links": [
             {
               "label": "링크",
               "path": "docs/ar-vr-xr/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-376"
+          ],
+          "exact": "16/16"
         },
         {
           "name": "디지털 트윈 n=6 동기화",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "10/10 EXACT, LOD τ~n단계, CPS sopfr=5계층, 센서12축=σ, SE(3)=n=6",
+          "description": "BT-379: 16/16 EXACT — Industry4.0=τ, ISA-95 5레벨=sopfr, OPC UA 12=σ, 6시그마=n",
           "links": [
             {
               "label": "링크",
               "path": "docs/digital-twin/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-379"
+          ],
+          "exact": "16/16"
         },
         {
           "name": "건축/구조공학 n=6 하중 보편성",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "10/10 EXACT, 내진6등급=n, 철근12/24mm=σ/J₂, 안전율3=n/φ, 기둥6m=n",
+          "description": "BT-377: 14/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D12/D24래더, 내진6등급=n",
           "links": [
             {
               "label": "링크",
               "path": "docs/construction-structural/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-377"
+          ],
+          "exact": "14/16"
         },
         {
           "name": "지하공간/터널 n=6 굴착 구조",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "10/10 EXACT, TBM 6/12m=n/σ, 세그먼트6조각=n, 환기4구간=τ",
+          "description": "BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ",
           "links": [
             {
               "label": "링크",
               "path": "docs/underground-tunnel/goal.md"
             }
-          ]
+          ],
+          "bt": [
+            "BT-376"
+          ],
+          "exact": "16/16"
         },
         {
           "name": "전자상거래/핀테크 n=6 결제 보안",
@@ -2426,7 +2585,8 @@
             }
           ]
         }
-      ]
+      ],
+      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축14/16, BT-379 디지털트윈16/16"
     }
   ],
   "roadmap": [

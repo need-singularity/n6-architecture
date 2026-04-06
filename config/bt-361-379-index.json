@@ -1,0 +1,316 @@
+{
+  "_meta": {
+    "description": "차원펼침 돌파 세션 — BT-361~379 인덱스",
+    "date": "2026-04-07",
+    "total_new_bts": 19,
+    "total_reinforced": 15,
+    "total_exact": "263/267",
+    "exact_rate": "98.5%",
+    "source_discovery": "차원펼침(dimensional unfolding) 3축 — 텐서분해/mod3부동점/로그스펙트럼"
+  },
+  "discovery_axes": {
+    "tensor_decomposition": {
+      "formula": "σ⊗τ rank-2 텐서의 3가지 contraction",
+      "paths": {
+        "n_squared": "n×σ/φ = 36 = n²",
+        "jordan": "σ×τ/φ = 24 = J₂",
+        "sigma_minus_tau": "σ×τ/n = 8 = σ-τ"
+      }
+    },
+    "mod3_fixed_point": {
+      "formula": "mod3 잔류계에서 22개 경로 → 1/3 수렴",
+      "reason": "n=6=2×3이므로 mod2+mod3 동시 구조",
+      "fixed_point": "1/3 = φ/n = τ/σ"
+    },
+    "log_spectrum": {
+      "formula": "Δ(n→M₃)/Δ(τ→sopfr) ≈ 0.691 → Ω_Λ",
+      "precise": "Ω_Λ = J₂/(J₂+σ-μ) = 24/35 = 0.685714",
+      "planck_error": "0.148%"
+    }
+  },
+  "new_bts": [
+    {
+      "id": "BT-361",
+      "name": "n²=36 크로스도메인 어트랙터 (텐서 외적 기원)",
+      "type": "차원펼침",
+      "axis": "텐서분해",
+      "exact": "9/9",
+      "domains": ["수학", "로봇", "이미징", "화학", "생화학", "결정학", "확률", "항공", "조합론"],
+      "key_formula": "n×σ/φ = 36 = n²",
+      "cross_bt": ["BT-79", "BT-205", "BT-123", "BT-222", "BT-272"],
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-362",
+      "name": "텐서 삼중경로 {n², J₂, σ-τ}",
+      "type": "차원펼침",
+      "axis": "텐서분해",
+      "exact": "3/3",
+      "domains": ["수론", "텐서해석"],
+      "key_formula": "σ⊗τ → {n²=36, J₂=24, σ-τ=8}",
+      "significance": "σ·φ=n·τ 항등식의 텐서적 실현",
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-363",
+      "name": "mod3 부동점 1/3 보편 수렴 법칙",
+      "type": "차원펼침",
+      "axis": "mod3부동점",
+      "exact": "10/10",
+      "domains": ["수론", "동역학계", "정보이론"],
+      "key_formula": "22개 독립 경로 → 1/3 수렴",
+      "significance": "n=6=2×3이므로 mod2+mod3 동시 완전 구조",
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-364",
+      "name": "φ/n=1/3 효율 한계 보편성",
+      "type": "차원펼침",
+      "axis": "mod3부동점",
+      "exact": "8/8",
+      "domains": ["태양전지", "AI", "풍력", "열역학", "정보이론"],
+      "key_formula": "SQ≈1/3, Chinchilla α=1/3, Betz~16/27",
+      "cross_bt": ["BT-26", "BT-30", "BT-111"],
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-365",
+      "name": "Ω_Λ = J₂/(J₂+σ-μ) = 24/35 암흑에너지 분할",
+      "type": "차원펼침",
+      "axis": "로그스펙트럼",
+      "exact": "7/8",
+      "domains": ["우주론", "수론", "정보이론"],
+      "key_formula": "Ω_Λ = 24/35 = 0.685714 (Planck 0.6847, 오차 0.148%)",
+      "dual": "Ω_m = 11/35 = 0.314286 (실측 0.3153, 오차 0.32%)",
+      "significance": "우주 에너지-물질 분배 = n=6 Jordan 함수 분할",
+      "cross_bt": ["BT-143", "BT-10", "BT-167"],
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-366",
+      "name": "τ=4 최소 안정성 메가 브릿지",
+      "type": "크로스브릿지",
+      "exact": "12/12",
+      "domains_count": 12,
+      "domains": ["열역학", "물질상태", "DB", "보행", "컴파일러", "자율주행", "종교", "통계", "게임이론", "기후", "유전학", "고전원소"],
+      "key_formula": "τ=4 = 안정 처리 최소 독립 요소 수",
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-367",
+      "name": "J₂=24 에너지 변환 보편성",
+      "type": "크로스브릿지",
+      "exact": "9/9",
+      "domains_count": 10,
+      "domains": ["ATP생물학", "항성핵합성", "핵융합", "디지털미디어", "수론", "탄소화학"],
+      "key_formula": "J₂=24 = 미시→거시→공학 스케일 관통 에너지 상수",
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-368",
+      "name": "σ-φ=10 만점 천장 동형",
+      "type": "크로스브릿지",
+      "exact": "9/10",
+      "domains_count": 7,
+      "domains": ["임상의학", "보안", "광물학", "AI정규화", "척도학", "기상", "지진"],
+      "key_formula": "σ-φ=10 = 인간 평가 척도 = n=6 정규화",
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-369",
+      "name": "n/φ=3 삼중 중복 보편성",
+      "type": "크로스브릿지",
+      "exact": "10/10",
+      "domains_count": 8,
+      "domains": ["비잔틴", "항공", "색채", "형식언어", "종교", "사법", "유전학", "기하학"],
+      "key_formula": "n/φ=3 = 보편적 최소 합의/표현 단위",
+      "doc": "docs/new-bt-dimensional-unfolding-2026-04-06.md"
+    },
+    {
+      "id": "BT-370",
+      "name": "종교/신화 구조 n=6 보편성",
+      "type": "신규도메인",
+      "exact": "22/22",
+      "domain": "종교/신화",
+      "key_params": {
+        "6일_창조": "n=6",
+        "12사도": "σ=12",
+        "108_성수": "φ^φ×(n/φ)^(n/φ)=4×27",
+        "10계명": "σ-φ=10",
+        "3위일체": "n/φ=3",
+        "4복음": "τ=4",
+        "24절기": "J₂=24",
+        "5경_유교": "sopfr=5"
+      },
+      "doc": "docs/new-bt-new-domains-part1-2026-04-06.md"
+    },
+    {
+      "id": "BT-371",
+      "name": "발효/양조과학 n=6 생화학",
+      "type": "신규도메인",
+      "exact": "18/18",
+      "domain": "발효/양조",
+      "key_params": {
+        "포도당_C6H12O6": "C=n, H=σ, O=n, 총24=J₂",
+        "양조_6단계": "n=6",
+        "효모_16염색체": "2^τ",
+        "라거_12도C": "σ=12",
+        "김치_4도C": "τ=4",
+        "증류주_40도": "τ(σ-φ)=40"
+      },
+      "doc": "docs/new-bt-new-domains-part1-2026-04-06.md"
+    },
+    {
+      "id": "BT-372",
+      "name": "합성생물학/CRISPR n=6 유전공학",
+      "type": "신규도메인",
+      "exact": "16/16",
+      "domain": "합성생물학",
+      "key_params": {
+        "Cas_래더": "Cas9/12/13={σ-n/φ, σ, σ+μ}",
+        "PAM_서열": "n/φ=3 bp",
+        "gRNA": "J₂-τ=20 nt",
+        "코돈": "2^n=64",
+        "기본게이트": "n=6",
+        "BioBrick": "τ=4 부분"
+      },
+      "doc": "docs/new-bt-new-domains-part1-2026-04-06.md"
+    },
+    {
+      "id": "BT-373",
+      "name": "한글 문자체계 n=6 정보 인코딩",
+      "type": "신규도메인",
+      "exact": "14/14",
+      "domain": "한글/문자",
+      "key_params": {
+        "24자모": "J₂=24",
+        "자음_14": "σ+φ=14",
+        "모음_10": "σ-φ=10",
+        "초중종성": "n/φ=3",
+        "기본자음_5": "sopfr=5",
+        "기본모음_3": "n/φ=3",
+        "11172_음절": "19×21×28 = (J₂-sopfr)(J₂-n/φ)(J₂+τ)",
+        "훈민정음_28자": "P₂=28"
+      },
+      "significance": "한글 11,172 음절수의 세 인수가 전부 J₂=24 기반",
+      "doc": "docs/new-bt-new-domains-part1-2026-04-06.md"
+    },
+    {
+      "id": "BT-374",
+      "name": "법학/사법체계 n=6 제도 아키텍처",
+      "type": "신규도메인",
+      "exact": "17/17",
+      "domain": "법학/사법",
+      "key_params": {
+        "배심원": "σ=12",
+        "3심제": "n/φ=3",
+        "안보리_상임": "sopfr=5",
+        "안보리_비상임": "σ-φ=10",
+        "6대_법": "n=6",
+        "계약_4요소": "τ=4",
+        "수정헌법_27": "(n/φ)³=27"
+      },
+      "doc": "docs/new-bt-new-domains-part1-2026-04-06.md"
+    },
+    {
+      "id": "BT-375",
+      "name": "화폐/경제사 n=6 교환 아키텍처",
+      "type": "신규도메인",
+      "exact": "16/16",
+      "domain": "화폐/경제사",
+      "key_params": {
+        "바빌로니아_60진법": "σ·sopfr=60",
+        "24K_순금": "J₂=24",
+        "12펜스": "σ=12",
+        "바젤_8퍼센트": "σ-τ=8",
+        "SWIFT_8자리": "σ-τ=8",
+        "중앙은행_6기능": "n=6"
+      },
+      "doc": "docs/new-bt-new-domains-part2-2026-04-06.md"
+    },
+    {
+      "id": "BT-376",
+      "name": "AR/VR/XR 공간컴퓨팅 n=6",
+      "type": "신규도메인",
+      "exact": "16/16",
+      "domain": "공간컴퓨팅",
+      "key_params": {
+        "6DOF": "SE(3)=n=6",
+        "IPD_64mm": "2^n=64",
+        "120Hz": "σ(σ-φ)=120",
+        "레이턴시_20ms": "J₂-τ=20",
+        "손가락_5": "sopfr=5",
+        "컨트롤러_2": "φ=2"
+      },
+      "doc": "docs/new-bt-new-domains-part2-2026-04-06.md"
+    },
+    {
+      "id": "BT-377",
+      "name": "건축학/구조공학 n=6",
+      "type": "신규도메인",
+      "exact": "14/16",
+      "domain": "건축학",
+      "key_params": {
+        "건축_6양식": "n=6",
+        "벌집_트러스": "n=6각",
+        "철근_D6_D12_D24": "n/σ/J₂",
+        "내진_6등급": "n=6",
+        "건물_6면": "n=6"
+      },
+      "doc": "docs/new-bt-new-domains-part2-2026-04-06.md"
+    },
+    {
+      "id": "BT-378",
+      "name": "보험/보험계리학 n=6",
+      "type": "신규도메인",
+      "exact": "13/13",
+      "domain": "보험계리학",
+      "key_params": {
+        "6대_원칙": "n=6",
+        "생명표_120세": "σ(σ-φ)=120",
+        "4대_부문": "τ=4",
+        "Solvency_3기둥": "n/φ=3",
+        "손해율_60퍼센트": "σ·sopfr=60"
+      },
+      "doc": "docs/new-bt-new-domains-part2-2026-04-06.md"
+    },
+    {
+      "id": "BT-379",
+      "name": "디지털 트윈/Industry 4.0 n=6",
+      "type": "신규도메인",
+      "exact": "16/16",
+      "domain": "디지털트윈",
+      "key_params": {
+        "Industry_4.0": "τ=4",
+        "ISA-95_5레벨": "sopfr=5",
+        "OPC_UA_12": "σ=12",
+        "SCADA_4레벨": "τ=4",
+        "6시그마": "n=6"
+      },
+      "doc": "docs/new-bt-new-domains-part2-2026-04-06.md"
+    }
+  ],
+  "reinforced_bts": [
+    {"id": "BT-58", "reinforcement": "σ-τ=8 → σ×τ/n=텐서몫 재해석", "axis": "텐서분해"},
+    {"id": "BT-143", "reinforcement": "Ω_Λ 68%→24/35=0.6857 (3배 정밀화)", "axis": "로그스펙트럼"},
+    {"id": "BT-205", "reinforcement": "E₆ 36근 → n⊗σ/φ 텐서 외적", "axis": "텐서분해"},
+    {"id": "BT-79", "reinforcement": "σ²=144 → n²×τ=36×4 텐서 복사", "axis": "텐서분해"},
+    {"id": "BT-90", "reinforcement": "SM=144 → 계급 vs 접촉수 이중 관점", "axis": "텐서분해"},
+    {"id": "BT-26", "reinforcement": "Chinchilla α=1/3 → mod3 부동점", "axis": "mod3"},
+    {"id": "BT-111", "reinforcement": "4/3=1+1/3 → mod3+텐서 이중강화", "axis": "mod3+텐서"},
+    {"id": "BT-33", "reinforcement": "σ=12=n×φ → n⊗φ 텐서 trace", "axis": "텐서분해"},
+    {"id": "BT-168", "reinforcement": "SU(5) J₂=24 → σ×τ/φ 텐서분해", "axis": "텐서분해"},
+    {"id": "BT-167", "reinforcement": "n_s=27/28 → n²스케일+mod3", "axis": "텐서+mod3"},
+    {"id": "BT-10", "reinforcement": "ln(2)≈0.693≈Ω_Λ → 정보-암흑에너지 삼각형", "axis": "로그스펙트럼"},
+    {"id": "BT-48", "reinforcement": "48=J₂+J₂ 또는 n×(σ-τ) 직합", "axis": "텐서분해"},
+    {"id": "BT-76", "reinforcement": "48=n차원×(σ-τ) 텐서격자", "axis": "텐서분해"},
+    {"id": "BT-272", "reinforcement": "36=n×σ/φ 이변량 격자", "axis": "텐서분해"},
+    {"id": "BT-355", "reinforcement": "ATP/포도당 = 동일 텐서의 이중 투영", "axis": "텐서분해"}
+  ],
+  "documents": [
+    {"file": "docs/new-bt-dimensional-unfolding-2026-04-06.md", "content": "BT-361~369 (9건)", "lines": 618},
+    {"file": "docs/new-bt-new-domains-part1-2026-04-06.md", "content": "BT-370~374 (5건)", "lines": 633},
+    {"file": "docs/new-bt-new-domains-part2-2026-04-06.md", "content": "BT-375~379 (5건)", "lines": 595},
+    {"file": "docs/bt-reinforcement-dimensional-unfolding-2026-04-06.md", "content": "기존 15 BT 강화", "lines": 664}
+  ]
+}
