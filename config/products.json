@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "total_products": 119,
+    "total_products": 120,
     "total_domains": 118,
     "last_updated": "2026-04-07",
     "description": "완성제품 SSOT — README 자동 생성용",
@@ -1368,7 +1368,7 @@
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
-      "bt_count": 6,
+      "bt_count": 8,
       "industry_pct": 92.6,
       "industry_detail": "4사",
       "experiment_pct": 90.9,
@@ -1425,6 +1425,27 @@
             }
           ],
           "verify_script": "docs/hexa-speak/verify_alien10.py"
+        },
+        {
+          "name": "HEXA-EAR Ultimate",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "궁극의 이어폰 8단 설계 — DLC+그래핀/8way 하이브리드/48dB ANC/6ms BLE/HRTF 144방향, 65/65 EXACT",
+          "links": [
+            {
+              "label": "문서",
+              "path": "docs/audio/hexa-ear-ultimate.md"
+            },
+            {
+              "label": "HW맵",
+              "path": "docs/audio/bt-402-earphone-hardware.md"
+            },
+            {
+              "label": "SW맵",
+              "path": "docs/audio/bt-403-earphone-software.md"
+            }
+          ]
         }
       ],
       "anchor": "-오디오-audio",
@@ -1432,7 +1453,8 @@
         "docs/audio/verify_alien10.py",
         "docs/hexa-speak/verify_alien10.py"
       ],
-      "closure_grade": 9
+      "closure_grade": 9,
+      "bt_detail": "BT-48/72/76/108 + BT-402(HW 115/117) + BT-403(SW 53/62)"
     },
     {
       "id": "safety",

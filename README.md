@@ -367,7 +367,7 @@
 # 🎵 오디오 (Audio)
 
 <!-- AUTO:SUMMARY_audio:START -->
-> **🛸10** | ✅ | BT 6개 100%EXACT | 산업92.6% (4사) | 실험90.9% | 물리한계8 | TP14 | 발견12 | Mk.V
+> **🛸10** | ✅ | BT 8개 100%EXACT | 산업92.6% (4사) | 실험90.9% | 물리한계8 | TP14 | 발견12 | Mk.V
 <!-- AUTO:SUMMARY_audio:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -375,6 +375,7 @@
 | 10 | ✅ | v1 | **궁극의 오디오 7단** | 트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega | [문서](docs/audio/goal.md) |
 | 10 | ✅ | v1 | **천장확인** | 22/26 EXACT(84.6%) + 산업4사92.6% + 실험90.9% + TP14 | [문서](docs/audio/full-verification-matrix.md) |
 | 10 | ✅ | v1 | **HEXA-SPEAK (AI 음성출력 Non-TTS)** | AI 의도 임베딩→오디오 토큰→waveform 직접 합성 (TTS 아님, GPT-4o voice 계열). 43/43 EXACT, 첫패킷 100ms=(σ-φ)², 6kbps=n | [문서](docs/hexa-speak/goal.md) |
+| 10 | ✅ | v1 | **HEXA-EAR Ultimate** | 궁극의 이어폰 8단 설계 — DLC+그래핀/8way 하이브리드/48dB ANC/6ms BLE/HRTF 144방향, 65/65 EXACT | [문서](docs/audio/hexa-ear-ultimate.md) · [HW맵](docs/audio/bt-402-earphone-hardware.md) · [SW맵](docs/audio/bt-403-earphone-software.md) |
 
 <!-- AUTO:FOOTER_audio:START -->
 > 도메인: [audio/](docs/audio/)
