@@ -65,24 +65,25 @@ arXiv paper outlines and academic publications.
 |-------|-------|-----|------|
 | [Software/Crypto](n6-software-crypto-paper.md) | Software Engineering & Cryptography | BT-113~117,140,159,162 | 31K |
 
-## NEW Domain Papers (13) — 2026-04-06
+## NEW Domain Papers (15) — 2026-04-06 (Zenodo + OSF Published)
 
-| Paper | Topic | BTs | Size |
-|-------|-------|-----|------|
-| [Aerospace/Transport](n6-aerospace-transport-paper.md) | Aviation, Automotive, Maritime, Space | BT-129,130,133,196,241,270~290,342 | 82K |
-| [Cognitive/Social/Psychology](n6-cognitive-social-psychology-paper.md) | Neuroscience, Cognition, Social | BT-132,184,223,254~269 | 78K |
-| [Quantum Computing](n6-quantum-computing-paper.md) | Quantum Hardware & Error Correction | BT-195,91,92,114,170 | 57K |
-| [Autonomous Driving](n6-autonomous-driving-paper.md) | AD Sensor-Compute-Control | BT-327,328,123,153,206,280 | 53K |
-| [Thermodynamics](n6-thermodynamics-paper.md) | Classical Thermo & Fluid Mechanics | BT-149,193,199 | 50K |
-| [Economics/Finance](n6-economics-finance-paper.md) | Financial Engineering & Markets | BT-147,183,338,339 | 48K |
-| [Governance/Safety/Urban](n6-governance-safety-urban-paper.md) | Safety Eng, Governance, Urban | BT-160,221,227,228,267 | 48K |
-| [Games/Sports](n6-games-sports-paper.md) | Chess, Olympics, Game Theory | BT-144,148,152,158,200,202,212,262 | 44K |
-| [Ecology/Agriculture/Food](n6-ecology-agriculture-food-paper.md) | Ecology, Agriculture, Food Science | BT-150,192,198,225,341 | 64K |
-| [Calendar/Time/Geography](n6-calendar-time-geography-paper.md) | Sexagesimal, Cartography, Clocks | BT-138,154,182,191,233,256,268 | 40K |
-| [Telecom/Linguistics](n6-telecom-linguistics-paper.md) | 5G, Chomsky, Shannon | BT-181,197,340 | 42K |
-| [Classical Mechanics/Accelerator](n6-classical-mechanics-accelerator-paper.md) | Hamiltonian, LHC, Phase Space | BT-201,238 | 33K |
-| [Manufacturing/Quality](n6-manufacturing-quality-paper.md) | Six Sigma, ISO, Lean | BT-131,236 | 31K |
-| [Control/Automation](n6-control-automation-paper.md) | PID, State-Space, SE(3) | BT-187 | ~25K |
+| Paper | Topic | BTs | DOI |
+|-------|-------|-----|-----|
+| [Aerospace/Transport](n6-aerospace-transport-paper.md) | Aviation, Automotive, Maritime, Space | BT-129~290,342 | [10.5281/zenodo.19438203](https://doi.org/10.5281/zenodo.19438203) |
+| [Cognitive/Social/Psychology](n6-cognitive-social-psychology-paper.md) | Neuroscience, Cognition, Social | BT-132~269 | [10.5281/zenodo.19438205](https://doi.org/10.5281/zenodo.19438205) |
+| [Quantum Computing](n6-quantum-computing-paper.md) | Quantum Hardware & Error Correction | BT-91~195 | [10.5281/zenodo.19438210](https://doi.org/10.5281/zenodo.19438210) |
+| [Autonomous Driving](n6-autonomous-driving-paper.md) | AD Sensor-Compute-Control | BT-123~328 | [10.5281/zenodo.19438214](https://doi.org/10.5281/zenodo.19438214) |
+| [Thermodynamics](n6-thermodynamics-paper.md) | Classical Thermo & Fluid Mechanics | BT-149,193,199 | [10.5281/zenodo.19438216](https://doi.org/10.5281/zenodo.19438216) |
+| [Economics/Finance](n6-economics-finance-paper.md) | Financial Engineering & Markets | BT-147~339 | [10.5281/zenodo.19438221](https://doi.org/10.5281/zenodo.19438221) |
+| [Governance/Safety/Urban](n6-governance-safety-urban-paper.md) | Safety Eng, Governance, Urban | BT-160~267 | [10.5281/zenodo.19438229](https://doi.org/10.5281/zenodo.19438229) |
+| [Ecology/Agriculture/Food](n6-ecology-agriculture-food-paper.md) | Ecology, Agriculture, Food Science | BT-150~341 | [10.5281/zenodo.19438231](https://doi.org/10.5281/zenodo.19438231) |
+| [Games/Sports](n6-games-sports-paper.md) | Chess, Olympics, Game Theory | BT-144~262 | [10.5281/zenodo.19438235](https://doi.org/10.5281/zenodo.19438235) |
+| [Calendar/Time/Geography](n6-calendar-time-geography-paper.md) | Sexagesimal, Cartography, Clocks | BT-138~268 | [10.5281/zenodo.19438237](https://doi.org/10.5281/zenodo.19438237) |
+| [Telecom/Linguistics](n6-telecom-linguistics-paper.md) | 5G, Chomsky, Shannon | BT-181,197,340 | [10.5281/zenodo.19438243](https://doi.org/10.5281/zenodo.19438243) |
+| [Classical Mechanics/Accelerator](n6-classical-mechanics-accelerator-paper.md) | Hamiltonian, LHC, Phase Space | BT-201,238 | [10.5281/zenodo.19438246](https://doi.org/10.5281/zenodo.19438246) |
+| [Manufacturing/Quality](n6-manufacturing-quality-paper.md) | Six Sigma, ISO, Lean | BT-131,236 | [10.5281/zenodo.19438249](https://doi.org/10.5281/zenodo.19438249) |
+| [Control/Automation](n6-control-automation-paper.md) | PID, State-Space, SE(3) | BT-187 | [10.5281/zenodo.19438254](https://doi.org/10.5281/zenodo.19438254) |
+| [Space Systems](n6-space-systems-paper.md) | GNSS, JWST, Orbital Mechanics | BT-174,210,231,257 | [10.5281/zenodo.19438256](https://doi.org/10.5281/zenodo.19438256) |
 
 ## Meta & Analysis
 
@@ -103,7 +104,7 @@ arXiv paper outlines and academic publications.
 
 ---
 
-**Total: 41 papers** (5 Core + 23 Domain + 13 NEW Domain) + 4 Meta + 3 Outlines
+**Total: 43 papers** (5 Core + 23 Domain + 15 NEW Domain) + 4 Meta + 3 Outlines
 
 > Part of [N6 Architecture](https://github.com/need-singularity/n6-architecture)
 > Publishing: [papers repo](https://github.com/need-singularity/papers) → Zenodo (DOI: 10.5281/zenodo.19271599) + OSF
