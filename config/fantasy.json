@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "total_domains": 2,
+    "total_hypotheses": 60,
+    "total_exact": 16,
+    "exact_pct": 26.7,
+    "last_updated": "2026-04-06",
+    "description": "판타지 도메인 SSOT — docs/fantasy/README.md 자동 생성용",
+    "warning": "이 섹션은 신화/판타지 탐색입니다. 공학적 설계 대상이 아닙니다."
+  },
+  "domains": [
+    {
+      "id": "vampire",
+      "name": "뱀파이어 (Vampire)",
+      "hypotheses": 30,
+      "exact": 12,
+      "close": 10,
+      "weak": 8,
+      "exact_pct": 40.0,
+      "categories": [
+        "혈액 생화학 (Blood Biochemistry)",
+        "신화 구조 (Mythological Architecture)",
+        "흡혈 생태학 (Hematophagous Ecology)",
+        "영구동토층 + 고대바이러스 (Permafrost & Ancient Viruses)",
+        "뱀파이어 질병/의학 (Vampire Medicine)",
+        "야행성 생물학 (Nocturnal Biology)"
+      ],
+      "key_exact": [
+        "헤모글로빈 τ=4 서브유닛 + Fe 배위수 n=6",
+        "포르피린 합성 σ-τ=8 효소",
+        "뱀파이어 박쥐 n/φ=3 종",
+        "모기 침 n=6 바늘 구조",
+        "거머리 턱 n/φ=3",
+        "이십면체 캡시드 σ=12 꼭짓점",
+        "T-number 기본 단위 60=σ·sopfr",
+        "포르피리아 σ-τ=8 유형",
+        "XP σ-τ=8 상보군",
+        "야행성 σ=12 시간",
+        "6-4PP UV 광산물 (n-τ 직접 매핑)",
+        "멜라닌 φ=2 유형"
+      ],
+      "bt_cross": ["BT-51", "BT-101", "BT-122", "BT-146", "BT-194", "BT-235", "BT-262", "BT-265"],
+      "docs": [
+        {"label": "Part 1", "path": "docs/vampire/hypotheses.md"},
+        {"label": "Part 2", "path": "docs/vampire/hypotheses-part2.md"}
+      ]
+    },
+    {
+      "id": "dragon",
+      "name": "용 (Dragon)",
+      "hypotheses": 30,
+      "exact": 4,
+      "close": 13,
+      "weak": 13,
+      "exact_pct": 13.3,
+      "categories": [
+        "용의 위상 구조 (Dragon Topology)",
+        "신화 아키텍처 (Dragon Mythology Architecture)",
+        "생물학적 근거 (Dragon Biology)",
+        "화염 화학 + 비행 역학 (Dragon Fire & Flight)",
+        "프랙탈 + 수학 위상 (Dragon Fractals & Math Topology)",
+        "천문/지리/문화 (Dragon in Stars & Culture)"
+      ],
+      "key_exact": [
+        "드래곤 커브 하우스도르프 차원 d_H=φ=2",
+        "드래곤 커브 n=6 반복 = 2^n=64 (BT-262 교차)",
+        "Koch 눈꽃 n/φ·τ^k 반복 체계",
+        "Sierpinski/Menger 프랙탈 n=6 래더"
+      ],
+      "bt_cross": ["BT-111", "BT-122", "BT-123", "BT-138", "BT-233", "BT-262", "BT-274", "BT-323"],
+      "docs": [
+        {"label": "Part 1", "path": "docs/dragon/hypotheses.md"},
+        {"label": "Part 2", "path": "docs/dragon/hypotheses-part2.md"}
+      ]
+    }
+  ]
+}

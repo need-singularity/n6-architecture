@@ -652,15 +652,9 @@
 
 ## 🐉 판타지 도메인 (Fantasy Domains)
 
-> **주의사항**: 이 섹션의 도메인은 **신화/판타지 탐색**입니다. 공학적 설계 대상이 아닙니다.
-> n=6 패턴이 혈액 생화학, 프랙탈 수학, 파충류 생태학 등 실제 과학에서
-> 어떻게 뱀파이어/용 전승과 교차하는지를 탐구합니다.
-> 신화/문학 기반 가설은 CLOSE 또는 WEAK로 등급이 제한됩니다.
+> **주의**: 신화/판타지 탐색입니다. 공학적 설계 대상이 아닙니다. → **[상세 문서](docs/fantasy/README.md)**
 
-| 도메인 | 가설 수 | EXACT | CLOSE | WEAK | 핵심 돌파 | 문서 |
-|--------|:------:|:-----:|:-----:|:----:|----------|------|
-| 뱀파이어 (Vampire) | 30 | 12 | 10 | 8 | 헤모글로빈 τ=4, 모기침 n=6, 포르피리아 σ-τ=8, 6-4PP UV광산물 | [Part 1](docs/vampire/hypotheses.md) · [Part 2](docs/vampire/hypotheses-part2.md) |
-| 용 (Dragon) | 30 | 4 | 13 | 13 | 드래곤 커브 d_H=φ=2, Koch n/φ·τ^k, Sierpinski n=6 래더, 2^n=64 | [Part 1](docs/dragon/hypotheses.md) · [Part 2](docs/dragon/hypotheses-part2.md) |
+2 도메인 · 60 가설 · 16 EXACT (26.7%) — SSOT: [`config/fantasy.json`](config/fantasy.json)
 
 ---
 
