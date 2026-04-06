@@ -650,10 +650,21 @@
 
 ---
 
-## 🐉 판타지 도메인 (Fantasy Domains)
+# 🐉 판타지 (Fantasy)
 
+<!-- AUTO:SUMMARY_fantasy:START -->
 > [!WARNING]
-> 신화/판타지 탐색입니다. 공학적 설계 대상이 아닙니다. · 2 도메인 · 60 가설 · 16 EXACT (26.7%) → **[상세 문서](docs/fantasy/README.md)**
+> 신화/판타지 탐색 — 공학적 설계 대상 아님 · 2 도메인 · 60 가설 · 16 EXACT (26.7%) · BT 교차 16
+<!-- AUTO:SUMMARY_fantasy:END -->
+
+| 🧛 | 가설 | EXACT% | 완성제품 | 핵심 | 링크 |
+|:--:|:----:|:------:|---------|------|------|
+| 🧛 | 30 | 40.0% | **뱀파이어 (Vampire)** | 헤모글로빈 τ=4, 모기침 n=6, 포르피리아 σ-τ=8, 6-4PP UV, 영구동토층 고대바이러스 | [가설](docs/vampire/hypotheses.md) |
+| 🐲 | 30 | 13.3% | **용 (Dragon)** | 드래곤 커브 d_H=φ=2, Koch n/φ·τ^k, Sierpinski n=6 래더, 2^n=64, 위상 topology | [가설](docs/dragon/hypotheses.md) |
+
+<!-- AUTO:FOOTER_fantasy:START -->
+> 도메인: [vampire/](docs/vampire/) · [dragon/](docs/dragon/) · 상세: [판타지 README](docs/fantasy/README.md) · SSOT: [`config/fantasy.json`](config/fantasy.json)
+<!-- AUTO:FOOTER_fantasy:END -->
 
 ---
 
