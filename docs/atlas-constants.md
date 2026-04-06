@@ -3450,3 +3450,28 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
 | n·σ·sopfr | 360 | Total plant output (MWe, VOYGR-6) | Nuclear SMR, BT-349 |
 | sopfr | 5 | HALEU enrichment boundary (% U-235) | Nuclear fuel, BT-349 |
 | J₂-τ | 20 | Spent fuel minimum cooling time (years) | Nuclear waste, BT-349 |
+
+### Simulation Theory (BT-371)
+
+| Expression | Value | Application | Domain |
+|------------|-------|-------------|--------|
+| -(σ-τ) | -8 | Planck mass exponent (10⁻⁸ kg) | Simulation Theory, BT-371 |
+| -(sopfr·(σ-sopfr)) | -35 | Planck length exponent (10⁻³⁵ m) | Simulation Theory, BT-371 |
+| -(τ·(σ-μ)) | -44 | Planck time exponent (10⁻⁴⁴ s) | Simulation Theory, BT-371 |
+| φ^sopfr | 32 | Planck temperature exponent (10³² K) | Simulation Theory, BT-371 |
+| -(n·(n/φ)) | -18 | Planck charge exponent (10⁻¹⁸ C) | Simulation Theory, BT-371 |
+| σ²-n-μ | 137 | Planck exponent sum ≈ 1/α (fine-structure) | Simulation Theory, BT-371 |
+| σ·(σ-φ) | 120 | Lloyd universe max ops exponent (10¹²⁰) | Simulation Theory, BT-371 |
+| (σ-τ)·(σ-φ) | 80 | Observable universe particle exponent (10⁸⁰) | Simulation Theory, BT-371 |
+| (σ-φ)·(σ-n/φ) | 90 | Universe information bits exponent (10⁹⁰) | Simulation Theory, BT-371 |
+| n/φ | 3 | Conway GoL birth condition (B3) | Simulation Theory, BT-371 |
+| σ-τ | 8 | Conway GoL Moore neighborhood size | Simulation Theory, BT-371 |
+| (σ-μ)·(σ-φ) | 110 | Wolfram Rule 110 (Turing-complete CA) | Simulation Theory, BT-371 |
+| J₂-τ | 20 | Wheeler "20 Questions" (It from Bit) | Simulation Theory, BT-371 |
+| n | 6 | Frustum clipping planes (3D rendering) | Simulation Theory, BT-371 |
+| n | 6 | Simulation architecture meta-layers | Simulation Theory, BT-371 |
+| n | 6 | Natural resolution hierarchy levels | Simulation Theory, BT-371 |
+| τ | 4 | Bekenstein-Hawking area factor S=A/(4l_P²) | Simulation Theory, BT-371 |
+| n/φ | 3 | Bostrom trilemma propositions | Simulation Theory, BT-371 |
+| n/φ | 3 | Universal quantum gate set size {H,T,CNOT} | Simulation Theory, BT-371 |
+| τ | 4 | Wolfram CA behavior classes | Simulation Theory, BT-371 |

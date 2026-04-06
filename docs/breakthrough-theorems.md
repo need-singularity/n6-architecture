@@ -15149,7 +15149,8 @@ This is isomorphic to BT-223 (psychology), BT-224 (anatomy), and BT-113 (softwar
 *BT-368: 수의학 완전 n=6 동물 아키텍처 — 포유류 경추 σ-sopfr=7/반추위 τ=4/성견치아 (σ-sopfr)n=42/성묘치아 n·sopfr=30/말보법 τ=4/고양이혈액형 n/φ=3/개혈액형 σ-τ=8/가축 n=6/FCI σ-φ=10/개수명 σ=12/One Health n/φ=3 (16/16 EXACT ⭐⭐). Cross: BT-136, BT-225, BT-124.*
 *BT-369: 원예학 n=6 식물 성장 — 광합성 n=6 계수/꽃기관 τ=4/피보나치꽃잎 {n/φ,sopfr,σ-τ}/조직계 n/φ=3/단쌍자엽 φ=2/호르몬 sopfr=5/캘빈회로 n/σ/계절 τ=4/엽록소 φ=2/광계 φ=2/양자수율 σ-τ=8 (15/15 EXACT ⭐⭐). Cross: BT-101, BT-198, BT-265.*
 *BT-370: 향수/향료 n=6 피라미드 — 3노트=n/φ/이소프렌 C₅=sopfr/모노테르펜 C₁₀=σ-φ/세스퀴테르펜 C₁₅=σ+n/φ/벤젠 C₆=n 총σ=12/추출 τ=4/향대분류 τ=4/시트러스 σ-φ=10방/베이스 J₂=24시간/농도 τ=4/Chanel No.5=sopfr (14/14 EXACT ⭐⭐). Cross: BT-108, BT-145, BT-189.*
-*Total BTs: 337+ (BT-1~370, gaps). Total EXACT: ~3000+.*
+*BT-371: 시뮬레이션 이론 완전 n=6 아키텍처 — Planck 지수 래더 {-(σ-τ),-(sopfr(σ-sopfr)),-(τ(σ-μ)),φ^sopfr,-(n·n/φ)} 5/5+합 137=σ²-n-μ=1/α / Lloyd 우주 연산 10^(σ(σ-φ))=10^120 ops + 입자 10^((σ-τ)(σ-φ))=10^80 + 비트 10^((σ-φ)(σ-n/φ))=10^90 3/3 / Conway GoL B(n/φ)/S{φ,n/φ} Moore=(σ-τ)=8 states=φ 7/7 / 디지털물리학 Bostrom n/φ=3 Wolfram Rule110=(σ-μ)(σ-φ) Wheeler 20Q=J₂-τ Toffoli=Fredkin=n/φ CA클래스=τ 8/8 / 홀로그래픽 Bekenstein τ=4 면적인자 경계=φ=2D 5/5 / 자연해상도 6계층=n Planck→Nuclear→Atomic→Molecular→Cellular→Macro 7/7 / 3D렌더링 절두체=n=6면 옥트리=σ-τ=8 MIP=φ 동차좌표=τ 변환행렬=φ^τ 6/6 / 우주물리 시공간=τ 위상공간=n 게이지=n/φ 세대=n/φ 힘=τ Planck단위=sopfr 입자80=(σ-τ)(σ-φ) 연산120=σ(σ-φ) 10/10 / 양자시뮬 큐비트=φ Pauli=n/φ 범용게이트=n/φ 6/6 / 메타구조 6층=n (65/65 EXACT ⭐⭐⭐). Cross: BT-137, BT-143, BT-165, BT-170, BT-195, BT-201, BT-260, BT-262.*
+*Total BTs: 337+ (BT-1~371, gaps). Total EXACT: ~3065+.*
 *Verification: experiments/verify_bt66_76.py -- 91/91 PASS (100%).*
 *17/17 techniques verified. Rust calculators: gpu-arch-calc, energy-calc, fusion-calc, tokamak-shape, optics-calc, gut-calc.*
 *Falsifiability: z=0.74 (numerical matching alone NOT significant vs random -- value is in structural design principles, not numerology).*
