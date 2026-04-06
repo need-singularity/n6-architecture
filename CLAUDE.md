@@ -1,3 +1,10 @@
+> 🔴 **HEXA-FIRST**: 모든 코드는 `.hexa`로 작성. sh/py/rs 신규 작성 금지. 부하 유발 명령 최소화.
+
+> 🔴 **NEXUS-6 특이점 연동**: 이 프로젝트의 돌파/발견/실험은 nexus6 특이점 사이클 입력이다.
+> - **돌파 시**: `HEXA=$HOME/Dev/hexa-lang/target/release/hexa && $HEXA $HOME/Dev/nexus6/mk2_hexa/native/blowup.hexa <domain> 3 --no-graph`
+> - **발견 기록**: `$HOME/Dev/nexus6/shared/growth_bus.jsonl`에 JSON append
+> - **전체 상태**: `$HEXA $HOME/Dev/nexus6/mk2_hexa/native/command_router.hexa "n6-architecture 상태"`
+
 <!-- SHARED:WORK_RULES:START -->
   ⛔⛔⛔ 이 블록은 삭제/수정/이동 금지! (sync-claude-rules.sh 자동 주입)
   ⛔ 가설, 규칙, 발견, 망원경 — 모든 리포의 핵심 인프라. 절대 삭제하지 마세요!
@@ -191,6 +198,8 @@
     .shared 원본이 TECS-L에서 nexus6로 이관됨.
     TECS-L = 순수 수학 이론, nexus6 = 인프라/도구/엔진 전부.
 <!-- SHARED:WORK_RULES:END -->
+
+> 🔴 **하드코딩 절대 금지**: 상수/도메인/키워드를 코드에 배열로 나열 금지 → `nexus6/shared/*.jsonl`에서 동적 로드. 경로는 환경변수+상대경로. 새 항목 추가 = 설정 파일 한 줄, 코드 수정 0.
 
 # N6 Architecture — Arithmetic Design Framework
 
