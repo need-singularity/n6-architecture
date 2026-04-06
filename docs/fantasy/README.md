@@ -29,7 +29,7 @@
 <!-- AUTO:PRODUCTS_vampire:START -->
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 4 | n/a | v2 | **뱀파이어 과학** | 12/30 EXACT (40%), 6카테고리, 혈액생화학+바이러스+질병+야행성, BT 8개 교차 | [Part 1](../vampire/hypotheses.md) · [Part 2](../vampire/hypotheses-part2.md) |
+| 4 | n/a | v2 | **뱀파이어 과학** | 12/30 EXACT (40%), 6카테고리, 혈액생화학+바이러스+질병+야행성, BT 8개 교차 | [문서](../vampire/hypotheses.md) |
 <!-- AUTO:PRODUCTS_vampire:END -->
 
 | # | 카테고리 | 가설 수 | EXACT | 핵심 |
@@ -62,7 +62,7 @@
 </details>
 
 <!-- AUTO:FOOTER_vampire:START -->
-> 문서: [Part 1](../vampire/hypotheses.md) · [Part 2](../vampire/hypotheses-part2.md) · BT 교차: BT-51, BT-101, BT-122, BT-146, BT-194, BT-235, BT-262, BT-265
+> 문서: [문서](../vampire/hypotheses.md) · BT 교차: BT-51, BT-101, BT-122, BT-146, BT-194, BT-235, BT-262, BT-265
 <!-- AUTO:FOOTER_vampire:END -->
 
 ---
@@ -76,7 +76,7 @@
 <!-- AUTO:PRODUCTS_dragon:START -->
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 3 | n/a | v2 | **용 과학** | 4/30 EXACT (13.3%), 6카테고리, 프랙탈수학+위상+생태, BT 8개 교차 | [Part 1](../dragon/hypotheses.md) · [Part 2](../dragon/hypotheses-part2.md) |
+| 3 | n/a | v2 | **용 과학** | 4/30 EXACT (13.3%), 6카테고리, 프랙탈수학+위상+생태, BT 8개 교차 | [문서](../dragon/hypotheses.md) |
 <!-- AUTO:PRODUCTS_dragon:END -->
 
 | # | 카테고리 | 가설 수 | EXACT | 핵심 |
@@ -101,5 +101,5 @@
 </details>
 
 <!-- AUTO:FOOTER_dragon:START -->
-> 문서: [Part 1](../dragon/hypotheses.md) · [Part 2](../dragon/hypotheses-part2.md) · BT 교차: BT-111, BT-122, BT-123, BT-138, BT-233, BT-262, BT-274, BT-323
+> 문서: [문서](../dragon/hypotheses.md) · BT 교차: BT-111, BT-122, BT-123, BT-138, BT-233, BT-262, BT-274, BT-323
 <!-- AUTO:FOOTER_dragon:END -->

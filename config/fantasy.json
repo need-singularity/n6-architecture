@@ -48,8 +48,7 @@
       ],
       "bt_cross": ["BT-51", "BT-101", "BT-122", "BT-146", "BT-194", "BT-235", "BT-262", "BT-265"],
       "links": [
-        {"label": "Part 1", "path": "docs/vampire/hypotheses.md"},
-        {"label": "Part 2", "path": "docs/vampire/hypotheses-part2.md"}
+        {"label": "문서", "path": "docs/vampire/hypotheses.md"}
       ]
     },
     {
@@ -81,8 +80,7 @@
       ],
       "bt_cross": ["BT-111", "BT-122", "BT-123", "BT-138", "BT-233", "BT-262", "BT-274", "BT-323"],
       "links": [
-        {"label": "Part 1", "path": "docs/dragon/hypotheses.md"},
-        {"label": "Part 2", "path": "docs/dragon/hypotheses-part2.md"}
+        {"label": "문서", "path": "docs/dragon/hypotheses.md"}
       ]
     }
   ]
