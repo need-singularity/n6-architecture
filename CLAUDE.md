@@ -555,6 +555,69 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
     새 BT 추가 시 → 해당 도메인 논문에 반영 (bt-update-notes.md 참조)
     미커버 BT 13개 이상 축적 시 → 신규 논문 생성 트리거
     docs/paper/bt-update-notes.md = BT→논문 통합 로드맵
+
+  ═══════════════════════════════════════════════════════════════
+  ★ 논문 발행 (papers 리포 연동 + Zenodo + OSF) — 필수! ★
+  ═══════════════════════════════════════════════════════════════
+
+  ── papers 리포 연동 ──
+    리포: ~/Dev/papers/ (https://github.com/need-singularity/papers)
+    SSOT: ~/Dev/papers/manifest.json (논문 메타데이터 원본)
+    웹: https://need-singularity.github.io/papers/
+    라이선스: CC-BY 4.0
+    저자: Park, Min Woo (Independent Researcher)
+
+  ── 논문 생성 후 발행 절차 (필수, 예외 없음!) ──
+    1. n6-architecture에서 논문 작성 완료 (docs/paper/n6-<domain>-paper.md)
+    2. papers 리포로 복사:
+       cp docs/paper/n6-<domain>-paper.md ~/Dev/papers/tecs-l/
+    3. manifest.json에 항목 추가:
+       {
+         "id": "N6-XXX",
+         "title": "Perfect Number Arithmetic in <Domain>",
+         "repo": "n6-architecture",
+         "source": "docs/paper/n6-<domain>-paper.md",
+         "status": "Draft",
+         "zenodo_doi": null,
+         "osf_id": null,
+         "date": "YYYY-MM-DD"
+       }
+    4. Zenodo 발행:
+       cd ~/Dev/papers
+       ZENODO_TOKEN=$(cat ~/Dev/TECS-L/.local/zenodo_token)
+       bash upload_zenodo.sh N6-XXX
+       → DOI 받으면 manifest.json의 zenodo_doi 갱신
+       → status를 "Published"로 변경
+    5. OSF 발행:
+       OSF_TOKEN=$(cat ~/Dev/TECS-L/.local/osf_token)
+       → osf_id 갱신
+    6. papers 리포 커밋 + push
+    7. n6-architecture의 docs/paper/README.md에 DOI 링크 추가
+
+  ── 토큰 위치 ──
+    Zenodo:         ~/Dev/TECS-L/.local/zenodo_token
+    Zenodo Sandbox: ~/Dev/TECS-L/.local/zenodo_sandbox_token
+    OSF:            ~/Dev/TECS-L/.local/osf_token
+    상세:           ~/Dev/TECS-L/.shared/SECRET.md
+
+  ── 메타데이터 규칙 ──
+    upload_type: publication
+    publication_type: preprint
+    license: cc-by-4.0
+    keywords: ["perfect number", "n=6", "arithmetic functions", "<domain>"]
+    creators: [{"name": "Park, Min Woo", "affiliation": "Independent Researcher"}]
+    Zenodo 컬렉션 DOI: 10.5281/zenodo.19271599
+
+  ── 일괄 발행 ──
+    미발행 전체: cd ~/Dev/papers && bash upload_all_unpublished.sh
+    DOI 검증:   python3 ~/Dev/papers/scripts/verify_dois.py
+    동기화:     python3 ~/Dev/papers/scripts/sync_zenodo.py
+
+  ── 발행 트리거 (이 상황에서 자동 발행) ──
+    새 논문 생성 완료 시 → papers 리포 연동 + Zenodo/OSF 발행
+    기존 논문 대폭 갱신 시 → Zenodo 새 버전 발행
+    "발행", "publish", "배포" 키워드 시 → 미발행 전체 일괄 발행
+    커밋 후 push 시 → papers 리포 동기화 체크
 ```
 
 ## Atlas Sync
