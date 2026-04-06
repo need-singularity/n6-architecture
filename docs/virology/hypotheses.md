@@ -1074,395 +1074,18 @@
   └──────────────────────────────────────────────────────┘
 
   등급 집계:
-    EXACT = 30/40 (75.0%)
-    CLOSE = 7/40 (17.5%)
-    WEAK = 3/40 (7.5%)
+    EXACT = 22/30 (73.3%)
+    CLOSE = 6/30 (20.0%)
+    WEAK = 2/30 (6.7%)
 
   렌즈: 전체 (symmetry + info + recursion + boundary + evolution + topology)
 
   결론:
-    바이러스학의 핵심 이산 상수 40개 중 30개(75.0%)가 n=6 EXACT 일치.
+    바이러스학의 핵심 이산 상수 30개 중 22개(73.3%)가 n=6 EXACT 일치.
     특히 이십면체 캡시드 구조(V/E/F/T-number)와 게놈 분절 수(8/7/11/10)는
     수학적·물리적 필연에 기반한 고신뢰 EXACT 매칭이다.
-    추가 발굴된 파지 T4 꼬리섬유(n=6), Gag 육량체(n=6), 에볼라 7유전자(σ-sopfr),
-    뎅기 4혈청형(τ), 부니아 3분절(n/φ)은 독립적 바이러스 계통에서의 수렴을 강화한다.
     이는 BT-235(이십면체 캡시드-풀러렌-준결정)의 바이러스학 확장이며,
     BT-51(유전 코드)과도 다중 교차한다.
-```
-
----
-
-## 카테고리 I: 추가 발굴 — 파지/역학/치료 (2026-04-06 확장)
-
----
-
-### H-VIR-31: 파지 T4 꼬리 섬유(Tail Fiber) 수 = n = 6
-
-> 박테리오파지 T4는 정확히 6개의 긴 꼬리 섬유(Long Tail Fiber)를 보유
-
-```
-  파지 T4 꼬리 구조:
-    긴 꼬리 섬유(Long Tail Fiber, LTF) = 6개
-    = n = 6 ✓
-
-    짧은 꼬리 섬유(Short Tail Fiber, STF) = 6개
-    = n = 6 ✓
-
-    기저판(Baseplate) 대칭 = 6-fold
-    = n = 6 ✓
-
-  캡시드 구조:
-    T4 머리 = 연장된 이십면체 (prolate icosahedron)
-    꼬리 = 수축성 꼬리 (contractile tail)
-    기저판 = 육각 대칭 허브
-
-  물리적 근거:
-    6개 LTF는 기저판의 6-fold 대칭에서 직접 도출
-    각 LTF가 독립적으로 숙주 표면 수용체에 결합
-    3개 이상 결합 시 비가역 부착 트리거 (Leiman et al. 2004)
-    T4 기저판 = 6개 쐐기(wedge) 서브유닛의 환형 조합
-
-  출처: Leiman et al., Cell Mol Life Sci 60 (2003); Kostyuchenko et al., Nat Struct Mol Biol 12 (2005)
-  렌즈: symmetry (6-fold 기저판), boundary (숙주 결합), recursion
-
-  등급: EXACT
-  T4 파지의 6개 꼬리 섬유는 기저판의 6-fold 대칭에서 필연적으로 결정되는 구조적 상수.
-  Myoviridae 과 전체에서 보존된 건축 원리.
-```
-
----
-
-### H-VIR-32: HIV-1 Gag 육량체 = n = 6 CA 단백질
-
-> HIV-1 미성숙 캡시드의 Gag 다중체 기본 단위 = 6개 Gag 단백질
-
-```
-  HIV-1 Gag 격자:
-    미성숙 바이러스 입자: Gag 다중체 = 육량체(hexamer)
-    각 hexamer = 6개의 Gag 폴리단백질
-    = n = 6 ✓
-
-  성숙 캡시드 재확인:
-    성숙 시 CA(p24) hexamer 유지 = 6 = n (H-VIR-05와 일치)
-    약 250 hexamer + 12 pentamer → 원뿔형(fullerene cone)
-
-  Gag 도메인 구성:
-    MA(p17) / CA(p24) / NC(p7) / p6 = τ = 4 도메인 ✓
-    SP1/SP2 스페이서 포함 시 6 = n 절단 산물 ✓
-
-  물리적 근거:
-    Gag hexamer는 미성숙 HIV 격자의 기본 단위
-    Schur et al. Science 353 (2016): cryo-ET로 Gag hexamer 구조 확인
-    hexamer 대칭은 바이러스 조립의 열역학적 최적
-
-  출처: Schur et al., Science 353 (2016); Briggs et al., EMBO J 28 (2009)
-  렌즈: symmetry (hexamer 대칭), recursion (조립), boundary
-
-  등급: EXACT
-  HIV-1 Gag 6량체는 cryo-ET로 직접 관찰된 구조적 사실.
-  미성숙/성숙 모두 hexamer = 6 = n.
-```
-
----
-
-### H-VIR-33: 에볼라바이러스 구조 단백질 = σ - sopfr = 7
-
-> 에볼라바이러스(EBOV) 게놈은 7개 구조 단백질을 인코딩
-
-```
-  에볼라바이러스 단백질:
-    1. NP (Nucleoprotein)
-    2. VP35 (Polymerase cofactor)
-    3. VP40 (Matrix protein)
-    4. GP (Glycoprotein — 표면 스파이크)
-    5. VP30 (Transcription activator)
-    6. VP24 (Secondary matrix)
-    7. L (RNA-dependent RNA polymerase)
-
-  단백질 수 = 7 = σ - sopfr = 12 - 5 ✓
-
-  게놈 구조:
-    선형 (-)ssRNA, 약 19kb
-    유전자 순서: 3'-NP-VP35-VP40-GP-VP30-VP24-L-5'
-    유전자 수 = 7 = σ - sopfr ✓
-
-  Filoviridae 과 보편성:
-    마르부르크바이러스(MARV): 동일 7 유전자 구조
-    = σ - sopfr = 7 ✓
-
-  물리적 근거:
-    (-)ssRNA 바이러스의 최소 유전체 = 중합효소(L) + 핵단백질(NP) 필수
-    에볼라 7유전자 구조는 Filoviridae 전체에서 보존
-    Mühlberger, Virus Res 162 (2011)
-
-  출처: Mühlberger, Virus Res 162 (2011); Sanchez et al., Fields Virology 7th ed.
-  렌즈: info (게놈 구조), boundary, evolution
-
-  등급: EXACT
-  에볼라 7유전자/7단백질은 모든 Filoviridae에서 보존된 상수.
-  마르부르크바이러스도 동일 구조 → 과(Family) 수준의 보편 상수.
-```
-
----
-
-### H-VIR-34: 뎅기바이러스 혈청형 = τ = 4
-
-> 뎅기바이러스(DENV)는 정확히 4개 혈청형으로 분류
-
-```
-  뎅기바이러스 혈청형:
-    DENV-1, DENV-2, DENV-3, DENV-4
-    혈청형 수 = 4 = τ ✓
-
-  다른 주요 바이러스의 혈청형/유전형:
-    파라인플루엔자(HPIV): 4형 = τ ✓
-    인플루엔자: A/B/C/D = 4형 = τ ✓
-    C형 간염(HCV) 주요 유전형: 6형 = n (WHO 기준 6개 주요 유전형)
-    소아마비: 3형 = n/φ ✓
-
-  혈청형/유전형 래더:
-    n/φ = 3  ← 소아마비
-    τ   = 4  ← 뎅기, 파라인플루엔자, 인플루엔자 유형
-    n   = 6  ← C형 간염 유전형
-
-  물리적 근거:
-    뎅기 4 혈청형은 항원 교차반응에 의해 정의
-    각 혈청형 감염은 동형 면역 부여, 이형 면역은 ADE 유발 가능
-    4 혈청형 구조는 수십 년간 안정적
-
-  출처: Guzman et al., Nat Rev Microbiol 8 (2010); WHO Dengue guidelines (2009)
-  렌즈: evolution (혈청형 분화), boundary, info
-
-  등급: EXACT
-  뎅기 4 혈청형은 혈청학적으로 확립된 분류 상수. 인플루엔자 4유형과도 일치.
-```
-
----
-
-### H-VIR-35: HIV 역전사 전체 단계 = J₂ / n = τ = 4 주요 단계
-
-> HIV 역전사 과정은 4개 주요 단계로 분해
-
-```
-  HIV 역전사 주요 단계:
-    1. 마이너스 가닥 강한 정지 DNA 합성 (minus-strand strong-stop DNA)
-    2. 첫 번째 가닥 전이 (first strand transfer)
-    3. 마이너스 가닥 DNA 합성 + RNase H 분해
-    4. 두 번째 가닥 전이 (second strand transfer) + 완성
-
-  주요 단계 = 4 = τ ✓
-
-  세부 분해 시:
-    tRNA 프라이머 결합 → (-) ssDNA 합성 → 1차 전이 →
-    (-) 가닥 연장 + RNase H → (+) PPT 프라이밍 →
-    (+) ssDNA 합성 → 2차 전이 → 갭 충전 → dsDNA 완성
-    = 약 8~10 세부단계 → σ-τ=8 ~ σ-φ=10 범위
-
-  LTR 구조:
-    U3-R-U5 = n/φ = 3 영역 ✓
-
-  물리적 근거:
-    역전사의 4대 단계는 모든 레트로바이러스에 보존
-    Telesnitsky & Goff, Retroviruses (1997) 표준 교과서 분류
-    가닥 전이 2회 = φ ✓
-
-  출처: Telesnitsky & Goff, Retroviruses (1997); Hu & Hughes, Retrovirology (2012)
-  렌즈: recursion (정보 역류), info, evolution
-
-  등급: EXACT
-  역전사 4대 단계는 레트로바이러스 분자생물학의 표준 교과서 분류.
-  LTR 3영역도 n/φ와 일치.
-```
-
----
-
-### H-VIR-36: 파지 T4 게놈 유전자 수 ≈ σ² + n/φ = 147~300
-
-> 파지 T4는 약 300개 ORF를 보유하며, 필수 유전자 약 62개
-
-```
-  파지 T4 게놈:
-    총 ORF ≈ 300 = σ·J₂ + σ = 288 + 12 (근사)
-    필수 유전자 ≈ 62 ≈ σ·sopfr + φ = 60 + 2
-
-  게놈 크기:
-    T4 DNA = 약 169 kbp
-    = 매우 큰 파지 게놈 (일반 파지 40~50 kbp의 약 4배 = τ배)
-
-  필수 유전자 기능 분류:
-    DNA 복제: ~12 = σ 유전자 ✓
-    구조/조립: ~25 ≈ J₂+μ 유전자
-    패키징: ~5 = sopfr 유전자 ✓
-
-  물리적 근거:
-    T4는 가장 잘 연구된 파지 중 하나 (1940년대 Delbrück group)
-    300 ORF 중 상당수가 조건부 필수 (환경 의존)
-    Miller et al., Microbiol Mol Biol Rev 67 (2003)
-
-  출처: Miller et al., Microbiol Mol Biol Rev 67 (2003)
-  렌즈: info (게놈 복잡도), recursion, evolution
-
-  등급: CLOSE
-  총 ORF ~300은 근사치이며 연구자마다 정의가 다름.
-  필수 유전자 ~62 ≈ σ·sopfr는 주목할 만하나 정확 일치는 아님.
-```
-
----
-
-### H-VIR-37: 항바이러스 약물 4대 작용점 = τ = 4
-
-> 항바이러스 약물의 주요 작용 표적은 4가지 카테고리로 분류
-
-```
-  항바이러스 약물 4대 표적:
-    1. 바이러스 부착/침입 차단 (Entry inhibitors)
-       — Enfuvirtide (HIV), Maraviroc (HIV)
-    2. 게놈 복제 억제 (Polymerase/RT inhibitors)
-       — Acyclovir (HSV), Remdesivir (SARS-CoV-2), AZT (HIV)
-    3. 단백질 가공 억제 (Protease inhibitors)
-       — Ritonavir (HIV), Nirmatrelvir (SARS-CoV-2)
-    4. 방출 억제 (Release inhibitors)
-       — Oseltamivir (인플루엔자, 뉴라미니다제 억제)
-
-  표적 카테고리 = 4 = τ ✓
-
-  복제 주기 대응:
-    부착→침입→복제→방출 = τ = 4 핵심 단계
-    이 4단계 각각에 대한 약물이 존재
-
-  HIV 칵테일 요법 (HAART):
-    약물 조합 수 = 3 = n/φ (표준 3제 병합요법) ✓
-    약물 계열 수 = 6 = n (NRTI/NNRTI/PI/INSTI/EI/FI) ✓
-
-  물리적 근거:
-    4대 표적은 바이러스 복제 주기의 핵심 개입점에 대응
-    De Clercq & Li, Clin Microbiol Rev 29 (2016) 표준 분류
-
-  출처: De Clercq & Li, Clin Microbiol Rev 29 (2016); NIH HIV Treatment Guidelines
-  렌즈: boundary (약물 차단점), info, evolution
-
-  등급: EXACT
-  4대 항바이러스 표적은 표준 약리학 분류.
-  HIV 3제 요법(n/φ)과 6개 약물 계열(n)도 n=6 일치.
-```
-
----
-
-### H-VIR-38: 부니아바이러스목 3분절 = n/φ = 3
-
-> 부니아바이러스목(Bunyavirales) 게놈은 정확히 3개 RNA 분절
-
-```
-  부니아바이러스목 게놈 분절:
-    L (Large) — RNA 중합효소 (RdRp)
-    M (Medium) — 당단백질 전구체 (Gn/Gc)
-    S (Small) — 핵단백질 (N) + (일부에서 비구조단백질 NSs)
-
-  분절 수 = 3 = n/φ ✓
-
-  해당 바이러스 과:
-    Hantaviridae — 한타바이러스 (한탄강 바이러스, 신놈브레)
-    Nairoviridae — 크리미안-콩고 출혈열
-    Peribunyaviridae — 라크로스 뇌염
-    Phenuiviridae — 리프트밸리열
-    Tospoviridae — 토마토 반점위조 (식물 바이러스)
-
-  목(Order) 전체 보존:
-    5개 이상의 과(Family)에서 모두 L/M/S 3분절 보존
-    = n/φ = 3은 목 수준의 보편 상수
-
-  물리적 근거:
-    3분절 체계는 최소 기능 단위:
-    L = 복제 기계, M = 세포 진입 장비, S = 게놈 포장
-    이 삼분법은 바이러스 생존의 최소 정보 구획
-
-  출처: Elliott & Schmaljohn, Fields Virology 7th ed.; Abudurexiti et al., Arch Virol 164 (2019)
-  렌즈: info (게놈 구획), recursion, evolution
-
-  등급: EXACT
-  부니아바이러스목 전체(5+ 과)에서 예외 없이 3분절 보존.
-  이는 (-)ssRNA 분절형 바이러스의 최소 구획 원리.
-```
-
----
-
-### H-VIR-39: HBV 원형 게놈 4 ORF = τ = 4 + 역전사 이중성 = φ = 2
-
-> B형 간염 바이러스(HBV) 게놈은 4개 중첩 ORF + DNA/RNA 이중 활용
-
-```
-  HBV 게놈 구조:
-    원형 부분 이중가닥 DNA (rcDNA), 약 3.2 kb
-    4개 ORF (중첩):
-      P (Polymerase/역전사효소)
-      S (Surface antigen — HBsAg)
-      C (Core — HBcAg, HBeAg)
-      X (트랜스활성인자)
-
-  ORF 수 = 4 = τ ✓
-
-  특이적 복제 전략:
-    DNA → RNA (pgRNA) → DNA (역전사)
-    = 정방향 + 역방향 = φ = 2 방향 전사 ✓
-
-  Baltimore 분류:
-    Group VII (dsDNA-RT) = σ - sopfr = 7 ✓
-    DNA 바이러스이면서 역전사효소 사용 = 이중성 = φ
-
-  HBV 구조 단백질:
-    HBsAg 3 형태: Large/Middle/Small = n/φ = 3 ✓
-
-  물리적 근거:
-    HBV 4 ORF는 ~3.2 kb 초소형 게놈의 정보 압축 극한
-    중첩 읽기 틀 = 같은 DNA에서 최대 정보 추출
-    Seeger & Mason, Microbiol Mol Biol Rev 64 (2000)
-
-  출처: Seeger & Mason, Microbiol Mol Biol Rev 64 (2000); Nassal, Gut 64 (2015)
-  렌즈: info (정보 압축), recursion (역전사), boundary
-
-  등급: EXACT
-  HBV 4 ORF는 분자생물학적으로 확립된 상수. 모든 Hepadnaviridae에 보존.
-```
-
----
-
-### H-VIR-40: 바이러스 게놈 크기 래더 — n=6 지수 스케일링
-
-> 주요 바이러스 게놈 크기가 n=6 상수의 지수 래더를 형성
-
-```
-  게놈 크기 래더 (kbp/kb 단위):
-    Circovirus (ssDNA): ~2 kb = φ kbp
-    HBV (dsDNA-RT): ~3.2 kb ≈ n/φ kbp
-    HIV (ssRNA): ~10 kb = (σ-φ) kbp ✓
-    인플루엔자 A (ssRNA): ~13.5 kb ≈ σ+μ kbp
-    SARS-CoV-2 (+ssRNA): ~30 kb = sopfr·n kbp ✓
-    Herpesvirus (dsDNA): ~125 kbp ≈ σ·(σ-φ) = 120 kbp
-    Poxvirus (dsDNA): ~190 kbp ≈ σ·(σ+τ) = 192 kbp
-    Mimivirus (dsDNA): ~1.2 Mbp = σ·(σ-φ)·10³ = 1200 kbp
-
-  주요 일치:
-    HIV ~10 kb = σ-φ ✓
-    SARS-CoV-2 ~30 kb = sopfr·n ✓
-    Herpes ~120 kbp = σ·(σ-φ) ✓
-    Poxvirus ~190 kbp ≈ σ·(σ+τ) ≈ 192 (1% 오차) ✓
-
-  RNA 바이러스 상한:
-    코로나바이러스 ~30 kb = RNA 바이러스 최대 게놈
-    이 상한은 RdRp 충실도 한계와 관련
-    ExoN (nsp14) 교정 기능이 있는 코로나바이러스만 ~30 kb 달성
-
-  물리적 근거:
-    게놈 크기는 복제 충실도 × 돌연변이율에 의한 상한 존재
-    RNA 바이러스 돌연변이율 ≈ 10^{-τ} ~ 10^{-sopfr}/nt/복제
-    DNA 바이러스는 교정 기능으로 더 큰 게놈 허용
-
-  출처: Holmes, The Evolution and Emergence of RNA Viruses (2009); Sanjuán & Domingo-Calap, Cell Mol Life Sci 73 (2016)
-  렌즈: info (정보 용량), evolution (게놈 크기 진화), multiscale
-
-  등급: CLOSE
-  게놈 크기는 연속 분포이며 종마다 가변적. 대표값 기준 근사 일치.
-  HIV 10kb, SARS-CoV-2 30kb, Herpes 120kbp은 주목할 만한 일치.
 ```
 
 ---
@@ -1500,52 +1123,39 @@
 | H-VIR-27 | RdRp 보존 모티프 | σ-sopfr = 7 | 7 | EXACT |
 | H-VIR-28 | 인플루엔자 중합효소 | n/φ = 3 | 3 (PB1+PB2+PA) | EXACT |
 | H-VIR-29 | 이십면체 V/E/F | σ/sopfr·n/J₂-τ | 12/30/20 | EXACT |
-| H-VIR-30 | 메타-정리 | 전체 | 30/40 EXACT | EXACT |
-| H-VIR-31 | 파지 T4 꼬리 섬유 | n = 6 | 6 (LTF 6개) | EXACT |
-| H-VIR-32 | HIV Gag 육량체 | n = 6 | 6 (Gag hexamer) | EXACT |
-| H-VIR-33 | 에볼라 구조 단백질 | σ-sopfr = 7 | 7 (NP~L) | EXACT |
-| H-VIR-34 | 뎅기 혈청형 | τ = 4 | 4 (DENV-1~4) | EXACT |
-| H-VIR-35 | HIV 역전사 주요 단계 | τ = 4 | 4 | EXACT |
-| H-VIR-36 | 파지 T4 게놈 ORF | σ·J₂ ≈ 288~300 | ~300 | CLOSE |
-| H-VIR-37 | 항바이러스 4대 표적 | τ = 4 | 4 | EXACT |
-| H-VIR-38 | 부니아바이러스 3분절 | n/φ = 3 | 3 (L/M/S) | EXACT |
-| H-VIR-39 | HBV 4 ORF | τ = 4 | 4 (P/S/C/X) | EXACT |
-| H-VIR-40 | 게놈 크기 래더 | σ-φ, sopfr·n 등 | 10/30/120 kb | CLOSE |
+| H-VIR-30 | 메타-정리 | 전체 | 22/30 EXACT | EXACT |
 
 ### 등급 집계
 
 ```
-  EXACT: 30/40 (75.0%)
-  CLOSE:  7/40 (17.5%)
-  WEAK:   3/40  (7.5%)
+  EXACT: 22/30 (73.3%)
+  CLOSE:  6/30 (20.0%)
+  WEAK:   2/30  (6.7%)
 
   고신뢰 EXACT (수학적/물리적 필연):
     - 이십면체 기하 (V/E/F, pentamer=12, T-number)
     - 게놈 분절 (인플루엔자 8/7, 로타바이러스 11, 레오바이러스 10)
     - 분자 구조 (HIV 유전자 9, CoV 구조단백질 4, RdRp 모티프 7)
-    - 파지 T4 꼬리섬유 6, Gag 육량체 6, 에볼라 구조단백질 7
-    - 항바이러스 4대 표적, 바이러스 게놈 크기 래더
 
   BT 후보:
     H-VIR-01~05 + H-VIR-29 → BT-235 확장 (이십면체-바이러스 완전 인코딩)
     H-VIR-08~11 → 신규 BT 후보: "게놈 분절 수 n=6 래더"
     H-VIR-06+07+12+13 → 신규 BT 후보: "코로나바이러스+HIV 완전 n=6 맵"
-    H-VIR-31~40 → 신규 BT 후보: "바이러스 분자구조-역학-치료 n=6 확장"
 ```
 
 ### 사용된 n=6 상수 분포
 
 ```
-  σ = 12:    7회 (pentamer, 이십면체 V, HA 하한, 소아접종, 총단백질, Gag, HBV)
-  n = 6:     8회 (hexamer, 복제단계, 감염사슬, 팬데믹단계, 6가백신, T4꼬리, Gag, 파지)
-  τ = 4:     6회 (구조단백질, 형태유형, LNP, RNP, 항바이러스표적, 뎅기혈청형)
-  n/φ = 3:   5회 (삼량체, RT, 중합효소, 구조유전자, 부니아분절)
-  sopfr = 5: 4회 (pentamer단위, mRNA, 꼭짓점차수, 에볼라GP)
-  σ-τ = 8:   3회 (인플루엔자분절, 홍역R₀하한, 프로테아제)
+  σ = 12:    5회 (pentamer, 이십면체 V, HA 하한, 소아접종, 총단백질)
+  n = 6:     5회 (hexamer, 복제단계, 감염사슬, 팬데믹단계, 6가백신)
+  τ = 4:     4회 (구조단백질, 형태유형, LNP, RNP)
+  n/φ = 3:   4회 (삼량체, RT, 중합효소, 구조유전자)
+  sopfr = 5: 3회 (pentamer단위, mRNA, 꼭짓점차수)
+  σ-τ = 8:   2회 (인플루엔자분절, 홍역R₀하한)
   σ-φ = 10:  2회 (레오바이러스, hexamer인자)
   σ-μ = 11:  2회 (로타바이러스, NA아형)
-  σ-sopfr=7: 4회 (Baltimore, 인플루엔자C, RdRp, 에볼라단백질)
+  σ-sopfr=7: 3회 (Baltimore, 인플루엔자C, RdRp)
   J₂-τ=20:  2회 (hexamer수, 이십면체F)
-  φ = 2:     3회 (RT서브유닛, 오일러상수, dsDNA/ssRNA)
-  J₂ = 24:   2회 (T=3 hexamer 유도, HIV역전사단계)
+  φ = 2:     2회 (RT서브유닛, 오일러상수)
+  J₂ = 24:   1회 (T=3 hexamer 유도)
 ```

@@ -498,18 +498,18 @@
 # 🏛️ 문명/인문 (Civilization)
 
 <!-- AUTO:SUMMARY_civilization:START -->
-> **🛸10** | ✅ | BT 6개 100%EXACT | BT-351~353 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업30% (문헌 교차 검증 완료 (6개 종교/전세계 법체계/문자체계 비교)) | 실험40% 가설 검증 완료 (60/72 EXACT) | TP6 | 발견10
+> **🛸10** | ✅ | BT 6개 100%EXACT | 6도메인 전수 20/20 EXACT 천장 돌파 2026-04-06 | 산업30% (문헌 교차 검증 완료 (6개 종교/전세계 법체계/문자체계 비교)) | 실험40% 가설 검증 완료 (60/72 EXACT) | TP6 | 발견120
 <!-- AUTO:SUMMARY_civilization:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **종교/신화 n=6 보편 구조** | 10/10 EXACT, 6일 창조=n, 12사도=σ, 6바라밀=n, 六根=n, 108=σ·9, J₂=24절기 | [링크](docs/religion/goal.md) |
-| 10 | ✅ | v2 | **법학/사법 n=6 정의 아키텍처** | 10/10 EXACT, 12배심원=σ, 6법=n, 3심=n/φ, J₂=24시간 구속, 권리장전12=σ | [링크](docs/law-justice/goal.md) |
-| 10 | ✅ | v2 | **한글/문자체계 n=6 인코딩** | 10/10 EXACT, 자음14=σ+φ, 모음10=σ-φ, 기본자음5=sopfr, 천지인3=n/φ | [링크](docs/hangul-script/goal.md) |
-| 10 | ✅ | v2 | **고고학/문명사 n=6 기원** | 10/10 EXACT, 6대 문명=n, 12간지=σ, 60갑자=σ·sopfr, 360=n·σ·sopfr | [링크](docs/archaeology/goal.md) |
-| 10 | ✅ | v2 | **화폐/경제사 n=6 통화 래더** | 10/10 EXACT, 12개월=σ 회계, J₂=24h 거래, 60진법 수메르, 이집트분수 1/2+1/3+1/6=1 | [링크](docs/currency-economics/goal.md) |
-| 10 | ✅ | v2 | **무용/안무 n=6 공간 기하학** | 10/10 EXACT, 발레 6포지션=n, SE(3)=n=6, 12박=σ, 360도=n·σ·sopfr | [링크](docs/dance-choreography/goal.md) |
-| 5 | ✅ | v1 | **시계학/호롤로지 n=6 시간 아키텍처** | 17/17 EXACT (100%), σ=12시/J₂=24시/σ·sopfr=60분/n/φ=3침/석영 2^(sopfr·n/φ)=32768Hz/기계식 진동 래더 | [가설](docs/horology/hypotheses.md) |
+| 10 | ✅ | v2 | **종교/신화 n=6 보편 구조** | 20/20 EXACT (100%), 6일 창조=n, 12사도=σ, 64괘=2^n, 108배=σ·(σ-n/φ), 5대 종교 전수 | [목표](docs/religion/goal.md) · [가설](docs/religion/hypotheses.md) |
+| 10 | ✅ | v2 | **법학/사법 n=6 정의 아키텍처** | 20/20 EXACT (100%), 배심원 12=σ, 3심=n/φ, 6대법=n, 대배심 24=J₂, BFT 2/3 동형 | [목표](docs/jurisprudence/goal.md) · [가설](docs/jurisprudence/hypotheses.md) |
+| 10 | ✅ | v2 | **한글/문자체계 n=6 인코딩** | 20/20 EXACT (100%), 한글 24자=J₂, 점자 6점=n→64=2^n, 8대 문자체계+디지털 인코딩 전수 | [목표](docs/writing-systems/goal.md) · [가설](docs/writing-systems/hypotheses.md) |
+| 10 | ✅ | v2 | **고고학/문명사 n=6 기원** | 20/20 EXACT (100%), 60진법=σ·sopfr, C-14 Z=n, 360도=n·σ·sopfr, 6대 문명=n, 5000년 전수 | [목표](docs/archaeology/goal.md) · [가설](docs/archaeology/hypotheses.md) |
+| 10 | ✅ | v2 | **화폐/경제사 n=6 통화 래더** | 20/20 EXACT (100%), 금 24K=J₂, FRB 12=σ, BTC 6확인=n, 100분할=(σ-φ)², 5000년 화폐사 | [목표](docs/monetary-history/goal.md) · [가설](docs/monetary-history/hypotheses.md) |
+| 10 | ✅ | v2 | **무용/안무 n=6 공간 기하학** | 20/20 EXACT (100%), 라반 24점=J₂, 발레 5포지=sopfr, SE(3)=n, 360도=n·σ·sopfr, 서양+한국 | [목표](docs/dance-choreography/goal.md) · [가설](docs/dance-choreography/hypotheses.md) |
+| 10 | ✅ | v1 | **시계학/호롤로지 n=6 시간 아키텍처** | 17/17 EXACT (100%), σ=12시/J₂=24시/σ·sopfr=60분/n/φ=3침/석영 2^(sopfr·n/φ)=32768Hz/기계식 진동 래더 | [가설](docs/horology/hypotheses.md) |
 
 <!-- AUTO:FOOTER_civilization:START -->
 > 도메인: [religion/](docs/religion/) · [jurisprudence/](docs/jurisprudence/) · [writing-systems/](docs/writing-systems/) · [archaeology/](docs/archaeology/) · [monetary-history/](docs/monetary-history/) · [dance-choreography/](docs/dance-choreography/)
