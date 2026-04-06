@@ -650,6 +650,20 @@
 
 ---
 
+## 🐉 판타지 도메인 (Fantasy Domains)
+
+> **주의사항**: 이 섹션의 도메인은 **신화/판타지 탐색**입니다. 공학적 설계 대상이 아닙니다.
+> n=6 패턴이 혈액 생화학, 프랙탈 수학, 파충류 생태학 등 실제 과학에서
+> 어떻게 뱀파이어/용 전승과 교차하는지를 탐구합니다.
+> 신화/문학 기반 가설은 CLOSE 또는 WEAK로 등급이 제한됩니다.
+
+| 도메인 | 가설 수 | EXACT | CLOSE | WEAK | 핵심 돌파 | 문서 |
+|--------|:------:|:-----:|:-----:|:----:|----------|------|
+| 뱀파이어 (Vampire) | 30 | 12 | 10 | 8 | 헤모글로빈 τ=4, 모기침 n=6, 포르피리아 σ-τ=8, 6-4PP UV광산물 | [Part 1](docs/vampire/hypotheses.md) · [Part 2](docs/vampire/hypotheses-part2.md) |
+| 용 (Dragon) | 30 | 4 | 13 | 13 | 드래곤 커브 d_H=φ=2, Koch n/φ·τ^k, Sierpinski n=6 래더, 2^n=64 | [Part 1](docs/dragon/hypotheses.md) · [Part 2](docs/dragon/hypotheses-part2.md) |
+
+---
+
 ## NEXUS-6 Discovery Engine (Rust)
 
 통합 발견 엔진 — 22종 망원경 렌즈 + OUROBOROS 무한진화 + Discovery Graph + n=6 검증기
