@@ -2406,3 +2406,1732 @@ hexa> ╔═══════════════════════�
 
 
 === gap_finder verified ===
+HEXA-LANG v0.1.0 -- The Perfect Number Language
+sigma(n)*phi(n) = n*tau(n) iff n = 6
+Type :quit to exit, :help for help
+
+hexa> ╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — DFS 위상변환 탐색 (depth=2)             ║
+╚══════════════════════════════════════════════════════════╝
+
+기저: n=6, σ=12, φ=2, τ=4, sopfr=5, M3=7
+연산: +, -, *, /
+
+─── Depth 1 ───
+  ★ n+phi               = 8  [EXACT phi*tau=8]
+  · n-phi               = 4  [=tau]
+  · n*phi               = 12  [=sigma]
+  ★ n/phi               = 3  [EXACT n/phi=3]
+  · n-tau               = 2  [=phi]
+  ★ n*tau               = 24  [EXACT J2=24]
+  · sigma-n             = 6  [=n]
+  · sigma/n             = 2  [=phi]
+  ★ sigma*phi           = 24  [EXACT J2=24]
+  · sigma/phi           = 6  [=n]
+  ★ sigma-tau           = 8  [EXACT phi*tau=8]
+  ★ sigma*tau           = 48  [EXACT sigma*tau=48]
+  ★ sigma/tau           = 3  [EXACT n/phi=3]
+  · sigma-sopfr         = 7  [=M3]
+  · sigma-M3            = 5  [=sopfr]
+  ★ phi+n               = 8  [EXACT phi*tau=8]
+  · phi*n               = 12  [=sigma]
+  · phi/n               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ phi*sigma           = 24  [EXACT J2=24]
+  · phi+tau             = 6  [=n]
+  ★ phi*tau             = 8  [EXACT phi*tau=8]
+  · phi+sopfr           = 7  [=M3]
+  ★ tau*n               = 24  [EXACT J2=24]
+  ★ tau*sigma           = 48  [EXACT sigma*tau=48]
+  · tau/sigma           = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  · tau+phi             = 6  [=n]
+  · tau-phi             = 2  [=phi]
+  ★ tau*phi             = 8  [EXACT phi*tau=8]
+  · tau/phi             = 2  [=phi]
+  ★ tau*M3              = 28  [EXACT P2=28]
+  · sopfr+phi           = 7  [=M3]
+  ★ sopfr-phi           = 3  [EXACT n/phi=3]
+  · sopfr+M3            = 12  [=sigma]
+  · M3-phi              = 5  [=sopfr]
+  ★ M3-tau              = 3  [EXACT n/phi=3]
+  ★ M3*tau              = 28  [EXACT P2=28]
+  · M3+sopfr            = 12  [=sigma]
+  · M3-sopfr            = 2  [=phi]
+
+─── Depth 2 (중간결과 OP 기저) ───
+  ★ (n+sigma)+n                 = 24  [EXACT J2=24]
+  ★ (n+sigma)/n                 = 3  [EXACT n/phi=3]
+  ★ (n+sigma)*phi               = 36  [EXACT n^2=36]
+  ★ (n*sigma)/phi               = 36  [EXACT n^2=36]
+  ★ (n/sigma)*n                 = 3  [EXACT n/phi=3]
+  ★ (n+phi)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (n+phi)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (n-phi)*n                   = 24  [EXACT J2=24]
+  ★ (n-phi)*sigma               = 48  [EXACT sigma*tau=48]
+  · (n-phi)/sigma               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-phi)*phi                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)+tau                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)*M3                  = 28  [EXACT P2=28]
+  ★ (n*phi)+sigma               = 24  [EXACT J2=24]
+  ★ (n*phi)*phi                 = 24  [EXACT J2=24]
+  ★ (n*phi)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*phi)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (n*phi)/tau                 = 3  [EXACT n/phi=3]
+  ★ (n/phi)*sigma               = 36  [EXACT n^2=36]
+  ★ (n/phi)+sopfr               = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-M3                  = 3  [EXACT n/phi=3]
+  ★ (n-tau)+n                   = 8  [EXACT phi*tau=8]
+  · (n-tau)/n                   = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-tau)*sigma               = 24  [EXACT J2=24]
+  ★ (n-tau)*tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*tau)+sigma               = 36  [EXACT n^2=36]
+  ★ (n*tau)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (n*tau)+tau                 = 28  [EXACT P2=28]
+  ★ (n/tau)*phi                 = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+phi               = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+M3                = 8  [EXACT phi*tau=8]
+  ★ (n*sopfr)+n                 = 36  [EXACT n^2=36]
+  ★ (n*sopfr)-n                 = 24  [EXACT J2=24]
+  ★ (n*sopfr)-phi               = 28  [EXACT P2=28]
+  ★ (n+M3)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (n-M3)+tau                  = 3  [EXACT n/phi=3]
+  ★ (n*M3)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (n*M3)-n                    = 36  [EXACT n^2=36]
+  ★ (sigma+n)+n                 = 24  [EXACT J2=24]
+  ★ (sigma+n)/n                 = 3  [EXACT n/phi=3]
+  ★ (sigma+n)*phi               = 36  [EXACT n^2=36]
+  ★ (sigma-n)*n                 = 36  [EXACT n^2=36]
+  ★ (sigma-n)+phi               = 8  [EXACT phi*tau=8]
+  ★ (sigma-n)/phi               = 3  [EXACT n/phi=3]
+  ★ (sigma-n)*tau               = 24  [EXACT J2=24]
+  ★ (sigma*n)/phi               = 36  [EXACT n^2=36]
+  ★ (sigma/n)+n                 = 8  [EXACT phi*tau=8]
+  · (sigma/n)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (sigma/n)*sigma             = 24  [EXACT J2=24]
+  ★ (sigma/n)*tau               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)-n               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)*phi             = 28  [EXACT P2=28]
+  ★ (sigma-phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sigma*phi)+sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*phi)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (sigma*phi)+tau             = 28  [EXACT P2=28]
+  ★ (sigma/phi)*n               = 36  [EXACT n^2=36]
+  ★ (sigma/phi)+phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma/phi)/phi             = 3  [EXACT n/phi=3]
+  ★ (sigma/phi)*tau             = 24  [EXACT J2=24]
+  ★ (sigma+tau)+sigma           = 28  [EXACT P2=28]
+  ★ (sigma+tau)/phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-tau)*n               = 48  [EXACT sigma*tau=48]
+  ★ (sigma-tau)-sopfr           = 3  [EXACT n/phi=3]
+  ★ (sigma*tau)/n               = 8  [EXACT phi*tau=8]
+  ★ (sigma*tau)-sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*tau)/phi             = 24  [EXACT J2=24]
+  ★ (sigma/tau)*sigma           = 36  [EXACT n^2=36]
+  ★ (sigma/tau)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sigma+sopfr)+M3            = 24  [EXACT J2=24]
+  ★ (sigma-sopfr)-tau           = 3  [EXACT n/phi=3]
+  ★ (sigma-sopfr)*tau           = 28  [EXACT P2=28]
+  ★ (sigma*sopfr)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sigma*sopfr)*sigma         = 720  [EXACT 6!=720]
+  ★ (sigma+M3)+sopfr            = 24  [EXACT J2=24]
+  ★ (sigma-M3)-phi              = 3  [EXACT n/phi=3]
+  ★ (phi+n)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (phi+n)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (phi-n)+sigma               = 8  [EXACT phi*tau=8]
+  ★ (phi-n)+M3                  = 3  [EXACT n/phi=3]
+  ★ (phi*n)+sigma               = 24  [EXACT J2=24]
+  ★ (phi*n)*phi                 = 24  [EXACT J2=24]
+  ★ (phi*n)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (phi*n)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*n)/tau                 = 3  [EXACT n/phi=3]
+  ★ (phi+sigma)-n               = 8  [EXACT phi*tau=8]
+  ★ (phi+sigma)*phi             = 28  [EXACT P2=28]
+  ★ (phi*sigma)+sigma           = 36  [EXACT n^2=36]
+  ★ (phi*sigma)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (phi*sigma)+tau             = 28  [EXACT P2=28]
+  · (phi/sigma)*phi             = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (phi+tau)*n                 = 36  [EXACT n^2=36]
+  ★ (phi+tau)+phi               = 8  [EXACT phi*tau=8]
+  ★ (phi+tau)/phi               = 3  [EXACT n/phi=3]
+  ★ (phi+tau)*tau               = 24  [EXACT J2=24]
+  ★ (phi-tau)+sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi*tau)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*tau)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi/tau)*n                 = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)-tau             = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)*tau             = 28  [EXACT P2=28]
+  ★ (phi-sopfr)+n               = 3  [EXACT n/phi=3]
+  ★ (phi*sopfr)-phi             = 8  [EXACT phi*tau=8]
+  ★ (phi*sopfr)-M3              = 3  [EXACT n/phi=3]
+  ★ (phi+M3)-n                  = 3  [EXACT n/phi=3]
+  ★ (phi+M3)*tau                = 36  [EXACT n^2=36]
+  ★ (phi*M3)-n                  = 8  [EXACT phi*tau=8]
+  ★ (phi*M3)*phi                = 28  [EXACT P2=28]
+  ★ (tau+n)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (tau+n)-M3                  = 3  [EXACT n/phi=3]
+  ★ (tau-n)+sopfr               = 3  [EXACT n/phi=3]
+  ★ (tau*n)+sigma               = 36  [EXACT n^2=36]
+  ★ (tau*n)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*n)+tau                 = 28  [EXACT P2=28]
+  ★ (tau/n)*sigma               = 8  [EXACT phi*tau=8]
+  · (tau/n)/phi                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau+sigma)+sigma           = 28  [EXACT P2=28]
+  ★ (tau+sigma)/phi             = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)/n               = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)-sigma           = 36  [EXACT n^2=36]
+  ★ (tau*sigma)/phi             = 24  [EXACT J2=24]
+  ★ (tau+phi)*n                 = 36  [EXACT n^2=36]
+  ★ (tau+phi)+phi               = 8  [EXACT phi*tau=8]
+  ★ (tau+phi)/phi               = 3  [EXACT n/phi=3]
+  ★ (tau+phi)*tau               = 24  [EXACT J2=24]
+  ★ (tau-phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau-phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau-phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau-phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau*phi)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*phi)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (tau/phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau/phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau/phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau/phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau+sopfr)-n               = 3  [EXACT n/phi=3]
+  ★ (tau+sopfr)*tau             = 36  [EXACT n^2=36]
+  ★ (tau-sopfr)+tau             = 3  [EXACT n/phi=3]
+  ★ (tau*sopfr)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (tau*sopfr)+tau             = 24  [EXACT J2=24]
+  ★ (tau-M3)+n                  = 3  [EXACT n/phi=3]
+  ★ (tau*M3)-tau                = 24  [EXACT J2=24]
+  ★ (sopfr-n)+tau               = 3  [EXACT n/phi=3]
+  ★ (sopfr*n)+n                 = 36  [EXACT n^2=36]
+  ★ (sopfr*n)-n                 = 24  [EXACT J2=24]
+  ★ (sopfr*n)-phi               = 28  [EXACT P2=28]
+  ★ (sopfr+sigma)+M3            = 24  [EXACT J2=24]
+  ★ (sopfr*sigma)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sopfr*sigma)*sigma         = 720  [EXACT 6!=720]
+  ★ (sopfr+phi)-tau             = 3  [EXACT n/phi=3]
+  ★ (sopfr+phi)*tau             = 28  [EXACT P2=28]
+  ★ (sopfr-phi)*sigma           = 36  [EXACT n^2=36]
+  ★ (sopfr-phi)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)-n               = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)*tau             = 36  [EXACT n^2=36]
+  ★ (sopfr-tau)+phi             = 3  [EXACT n/phi=3]
+  ★ (sopfr-tau)+M3              = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)+tau             = 24  [EXACT J2=24]
+  · (sopfr/tau)/tau             = 0.3125  [NEAR omega_m=0.3153 err=0.8880431335236361%]
+  ★ (sopfr+M3)+sigma            = 24  [EXACT J2=24]
+  ★ (sopfr+M3)*phi              = 24  [EXACT J2=24]
+  ★ (sopfr+M3)-tau              = 8  [EXACT phi*tau=8]
+  ★ (sopfr+M3)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (sopfr+M3)/tau              = 3  [EXACT n/phi=3]
+  ★ (sopfr-M3)+sopfr            = 3  [EXACT n/phi=3]
+  ★ (sopfr*M3)-M3               = 28  [EXACT P2=28]
+  ★ (M3+n)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (M3-n)+phi                  = 3  [EXACT n/phi=3]
+  ★ (M3-n)+M3                   = 8  [EXACT phi*tau=8]
+  ★ (M3*n)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (M3*n)-n                    = 36  [EXACT n^2=36]
+  ★ (M3+sigma)+sopfr            = 24  [EXACT J2=24]
+  ★ (M3+phi)-n                  = 3  [EXACT n/phi=3]
+  ★ (M3+phi)*tau                = 36  [EXACT n^2=36]
+  ★ (M3-phi)-phi                = 3  [EXACT n/phi=3]
+  ★ (M3*phi)-n                  = 8  [EXACT phi*tau=8]
+  ★ (M3*phi)*phi                = 28  [EXACT P2=28]
+  ★ (M3-tau)*sigma              = 36  [EXACT n^2=36]
+  ★ (M3-tau)+sopfr              = 8  [EXACT phi*tau=8]
+  ★ (M3*tau)-tau                = 24  [EXACT J2=24]
+  ★ (M3+sopfr)+sigma            = 24  [EXACT J2=24]
+  ★ (M3+sopfr)*phi              = 24  [EXACT J2=24]
+  ★ (M3+sopfr)-tau              = 8  [EXACT phi*tau=8]
+  ★ (M3+sopfr)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (M3+sopfr)/tau              = 3  [EXACT n/phi=3]
+  ★ (M3-sopfr)+n                = 8  [EXACT phi*tau=8]
+  · (M3-sopfr)/n                = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (M3-sopfr)*sigma            = 24  [EXACT J2=24]
+  ★ (M3-sopfr)*tau              = 8  [EXACT phi*tau=8]
+  ★ (M3*sopfr)-M3               = 28  [EXACT P2=28]
+
+─── DFS 요약 ───
+  탐색 경로: 3000
+  EXACT 매칭: 203
+  NEAR 매칭:  30
+
+
+=== gap_finder verified ===
+╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — 빈공간 × 위상변환 교차 (Bridge)           ║
+╚══════════════════════════════════════════════════════════╝
+
+빈 공간 상수 33건:
+  phi = 2
+  mu = 1
+  P1 = 2
+  sigma-tau = 8
+  tau+phi = 6
+  omega_m = 0.3153
+  omega_lambda = 0.6847
+  meta_fp = 0.3333
+  transcendence = 0.3333
+  geometric_pi = 3.14159
+  geometric_e = 2.71828
+  geometric_sqrt2 = 1.41421
+  quantum_h = 0
+  quantum_hbar = 0
+  consciousness_phi_iit = 3
+  consciousness_alpha = 0.014
+  biological_golden = 1.618
+  cosmological_H0 = 67.4
+  cosmological_T_cmb = 2.725
+  information_ln2 = 0.6931
+  thermodynamic_kB_eV = 0.00008617
+  topological_euler = 2.71828
+  algebraic_sqrt3 = 1.73205
+  algebraic_sqrt5 = 2.23607
+  geometric (값 미등록)
+  quantum (값 미등록)
+  consciousness (값 미등록)
+  biological (값 미등록)
+  cosmological (값 미등록)
+  information (값 미등록)
+  thermodynamic (값 미등록)
+  topological (값 미등록)
+  algebraic (값 미등록)
+
+─── 위상변환으로 빈 공간 도달 경로 탐색 ───
+
+  ★ EXACT  n+phi = 8  →  sigma-tau = 8
+  ★ EXACT  n/phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  n-tau = 2  →  phi = 2
+  ★ EXACT  n-tau = 2  →  P1 = 2
+  ★ EXACT  n-sopfr = 1  →  mu = 1
+  ★ EXACT  sigma-n = 6  →  tau+phi = 6
+  ★ EXACT  sigma/n = 2  →  phi = 2
+  ★ EXACT  sigma/n = 2  →  P1 = 2
+  ★ EXACT  sigma/phi = 6  →  tau+phi = 6
+  ★ EXACT  sigma-tau = 8  →  sigma-tau = 8
+  ★ EXACT  sigma/tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  phi+n = 8  →  sigma-tau = 8
+  · NEAR   phi/n = 0.3333333333333333  →  meta_fp = 0.3333  (err=0.0100010001000089%)
+  · NEAR   phi/n = 0.3333333333333333  →  transcendence = 0.3333  (err=0.0100010001000089%)
+  ★ EXACT  phi+tau = 6  →  tau+phi = 6
+  ★ EXACT  phi*tau = 8  →  sigma-tau = 8
+  · NEAR   tau/sigma = 0.3333333333333333  →  meta_fp = 0.3333  (err=0.0100010001000089%)
+  · NEAR   tau/sigma = 0.3333333333333333  →  transcendence = 0.3333  (err=0.0100010001000089%)
+  ★ EXACT  tau+phi = 6  →  tau+phi = 6
+  ★ EXACT  tau-phi = 2  →  phi = 2
+  ★ EXACT  tau-phi = 2  →  P1 = 2
+  ★ EXACT  tau*phi = 8  →  sigma-tau = 8
+  ★ EXACT  tau/phi = 2  →  phi = 2
+  ★ EXACT  tau/phi = 2  →  P1 = 2
+  ★ EXACT  sopfr-phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  sopfr-tau = 1  →  mu = 1
+  ★ EXACT  M3-n = 1  →  mu = 1
+  ★ EXACT  M3-tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  M3-sopfr = 2  →  phi = 2
+  ★ EXACT  M3-sopfr = 2  →  P1 = 2
+
+─── Depth-2 경로 ───
+  ★ EXACT  (n+sigma)/n = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n+sigma)-sigma = 6  →  tau+phi = 6
+  ★ EXACT  (n-sigma)+sigma = 6  →  tau+phi = 6
+  ★ EXACT  (n-sigma)+M3 = 1  →  mu = 1
+  ★ EXACT  (n*sigma)/sigma = 6  →  tau+phi = 6
+  · NEAR   (n*sigma)-tau = 68  →  cosmological_H0 = 67.4  (err=0.8902077151335227%)
+  · NEAR   (n*sigma)-sopfr = 67  →  cosmological_H0 = 67.4  (err=0.5934718100890292%)
+  ★ EXACT  (n/sigma)*n = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n/sigma)*sigma = 6  →  tau+phi = 6
+  ★ EXACT  (n/sigma)*phi = 1  →  mu = 1
+  ★ EXACT  (n/sigma)*tau = 2  →  phi = 2
+  ★ EXACT  (n/sigma)*tau = 2  →  P1 = 2
+  ★ EXACT  (n+phi)-n = 2  →  phi = 2
+  ★ EXACT  (n+phi)-n = 2  →  P1 = 2
+  ★ EXACT  (n+phi)-phi = 6  →  tau+phi = 6
+  ★ EXACT  (n+phi)/tau = 2  →  phi = 2
+  ★ EXACT  (n+phi)/tau = 2  →  P1 = 2
+  ★ EXACT  (n+phi)-sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n+phi)-M3 = 1  →  mu = 1
+  ★ EXACT  (n-phi)+phi = 6  →  tau+phi = 6
+  ★ EXACT  (n-phi)-phi = 2  →  phi = 2
+  ★ EXACT  (n-phi)-phi = 2  →  P1 = 2
+  ★ EXACT  (n-phi)*phi = 8  →  sigma-tau = 8
+  ★ EXACT  (n-phi)/phi = 2  →  phi = 2
+  ★ EXACT  (n-phi)/phi = 2  →  P1 = 2
+  ★ EXACT  (n-phi)+tau = 8  →  sigma-tau = 8
+  ★ EXACT  (n-phi)/tau = 1  →  mu = 1
+  ★ EXACT  (n*phi)-n = 6  →  tau+phi = 6
+  ★ EXACT  (n*phi)/n = 2  →  phi = 2
+  ★ EXACT  (n*phi)/n = 2  →  P1 = 2
+  ★ EXACT  (n*phi)/sigma = 1  →  mu = 1
+  ★ EXACT  (n*phi)/phi = 6  →  tau+phi = 6
+  ★ EXACT  (n*phi)-tau = 8  →  sigma-tau = 8
+  ★ EXACT  (n*phi)/tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n/phi)-phi = 1  →  mu = 1
+  ★ EXACT  (n/phi)*phi = 6  →  tau+phi = 6
+  ★ EXACT  (n/phi)+sopfr = 8  →  sigma-tau = 8
+  ★ EXACT  (n+tau)-phi = 8  →  sigma-tau = 8
+  ★ EXACT  (n+tau)-tau = 6  →  tau+phi = 6
+  ★ EXACT  (n+tau)/sopfr = 2  →  phi = 2
+  ★ EXACT  (n+tau)/sopfr = 2  →  P1 = 2
+  ★ EXACT  (n+tau)-M3 = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n-tau)+n = 8  →  sigma-tau = 8
+  ★ EXACT  (n-tau)/phi = 1  →  mu = 1
+  ★ EXACT  (n-tau)+tau = 6  →  tau+phi = 6
+  ★ EXACT  (n-tau)*tau = 8  →  sigma-tau = 8
+  ★ EXACT  (n*tau)/sigma = 2  →  phi = 2
+  ★ EXACT  (n*tau)/sigma = 2  →  P1 = 2
+  ★ EXACT  (n*tau)/tau = 6  →  tau+phi = 6
+  ★ EXACT  (n/tau)*phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n/tau)*tau = 6  →  tau+phi = 6
+  · NEAR   (n+sopfr)/tau = 2.75  →  cosmological_T_cmb = 2.725  (err=0.9174311926605472%)
+  ★ EXACT  (n+sopfr)-sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (n-sopfr)*n = 6  →  tau+phi = 6
+  ★ EXACT  (n-sopfr)+phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n-sopfr)*phi = 2  →  phi = 2
+  ★ EXACT  (n-sopfr)*phi = 2  →  P1 = 2
+  ★ EXACT  (n-sopfr)+sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (n-sopfr)+M3 = 8  →  sigma-tau = 8
+  ★ EXACT  (n*sopfr)/sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (n/sopfr)*sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (n+M3)-sigma = 1  →  mu = 1
+  ★ EXACT  (n+M3)-sopfr = 8  →  sigma-tau = 8
+  ★ EXACT  (n+M3)-M3 = 6  →  tau+phi = 6
+  ★ EXACT  (n-M3)+phi = 1  →  mu = 1
+  ★ EXACT  (n-M3)+tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (n-M3)+M3 = 6  →  tau+phi = 6
+  ★ EXACT  (n*M3)/M3 = 6  →  tau+phi = 6
+  ★ EXACT  (n/M3)*M3 = 6  →  tau+phi = 6
+  ★ EXACT  (sigma+n)/n = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma+n)-sigma = 6  →  tau+phi = 6
+  ★ EXACT  (sigma-n)/n = 1  →  mu = 1
+  ★ EXACT  (sigma-n)+phi = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma-n)/phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma-n)-tau = 2  →  phi = 2
+  ★ EXACT  (sigma-n)-tau = 2  →  P1 = 2
+  ★ EXACT  (sigma-n)-sopfr = 1  →  mu = 1
+  ★ EXACT  (sigma*n)/sigma = 6  →  tau+phi = 6
+  · NEAR   (sigma*n)-tau = 68  →  cosmological_H0 = 67.4  (err=0.8902077151335227%)
+  · NEAR   (sigma*n)-sopfr = 67  →  cosmological_H0 = 67.4  (err=0.5934718100890292%)
+  ★ EXACT  (sigma/n)+n = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma/n)/phi = 1  →  mu = 1
+  ★ EXACT  (sigma/n)+tau = 6  →  tau+phi = 6
+  ★ EXACT  (sigma/n)*tau = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma+phi)-n = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma+phi)-sigma = 2  →  phi = 2
+  ★ EXACT  (sigma+phi)-sigma = 2  →  P1 = 2
+  ★ EXACT  (sigma+phi)/M3 = 2  →  phi = 2
+  ★ EXACT  (sigma+phi)/M3 = 2  →  P1 = 2
+  ★ EXACT  (sigma-phi)-phi = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma-phi)-tau = 6  →  tau+phi = 6
+  ★ EXACT  (sigma-phi)/sopfr = 2  →  phi = 2
+  ★ EXACT  (sigma-phi)/sopfr = 2  →  P1 = 2
+  ★ EXACT  (sigma-phi)-M3 = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma*phi)/sigma = 2  →  phi = 2
+  ★ EXACT  (sigma*phi)/sigma = 2  →  P1 = 2
+  ★ EXACT  (sigma*phi)/tau = 6  →  tau+phi = 6
+  ★ EXACT  (sigma/phi)/n = 1  →  mu = 1
+  ★ EXACT  (sigma/phi)+phi = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma/phi)/phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma/phi)-tau = 2  →  phi = 2
+  ★ EXACT  (sigma/phi)-tau = 2  →  P1 = 2
+  ★ EXACT  (sigma/phi)-sopfr = 1  →  mu = 1
+  ★ EXACT  (sigma+tau)/phi = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma-tau)-n = 2  →  phi = 2
+  ★ EXACT  (sigma-tau)-n = 2  →  P1 = 2
+  ★ EXACT  (sigma-tau)-phi = 6  →  tau+phi = 6
+  ★ EXACT  (sigma-tau)/tau = 2  →  phi = 2
+  ★ EXACT  (sigma-tau)/tau = 2  →  P1 = 2
+  ★ EXACT  (sigma-tau)-sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma-tau)-M3 = 1  →  mu = 1
+  ★ EXACT  (sigma*tau)/n = 8  →  sigma-tau = 8
+  ★ EXACT  (sigma/tau)-phi = 1  →  mu = 1
+  ★ EXACT  (sigma/tau)*phi = 6  →  tau+phi = 6
+  ★ EXACT  (sigma/tau)+sopfr = 8  →  sigma-tau = 8
+  · NEAR   (sigma+sopfr)/sigma = 1.4166666666666667  →  geometric_sqrt2 = 1.41421  (err=0.17371300349076682%)
+  · NEAR   (sigma+sopfr)*tau = 68  →  cosmological_H0 = 67.4  (err=0.8902077151335227%)
+  ★ EXACT  (sigma-sopfr)-n = 1  →  mu = 1
+  ★ EXACT  (sigma-sopfr)-tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma-sopfr)-sopfr = 2  →  phi = 2
+  ★ EXACT  (sigma-sopfr)-sopfr = 2  →  P1 = 2
+  ★ EXACT  (sigma-sopfr)/M3 = 1  →  mu = 1
+  · NEAR   (sigma*sopfr)+M3 = 67  →  cosmological_H0 = 67.4  (err=0.5934718100890292%)
+  · NEAR   (sigma+M3)/n = 3.1666666666666665  →  geometric_pi = 3.14159  (err=0.798215765477565%)
+  · NEAR   (sigma+M3)/M3 = 2.7142857142857144  →  geometric_e = 2.71828  (err=0.14694165848571952%)
+  · NEAR   (sigma+M3)/M3 = 2.7142857142857144  →  cosmological_T_cmb = 2.725  (err=0.3931847968545202%)
+  · NEAR   (sigma+M3)/M3 = 2.7142857142857144  →  topological_euler = 2.71828  (err=0.14694165848571952%)
+  ★ EXACT  (sigma-M3)-phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sigma-M3)-tau = 1  →  mu = 1
+  ★ EXACT  (sigma-M3)/sopfr = 1  →  mu = 1
+  ★ EXACT  (phi+n)-n = 2  →  phi = 2
+  ★ EXACT  (phi+n)-n = 2  →  P1 = 2
+  ★ EXACT  (phi+n)-phi = 6  →  tau+phi = 6
+  ★ EXACT  (phi+n)/tau = 2  →  phi = 2
+  ★ EXACT  (phi+n)/tau = 2  →  P1 = 2
+  ★ EXACT  (phi+n)-sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi+n)-M3 = 1  →  mu = 1
+  ★ EXACT  (phi-n)+n = 2  →  phi = 2
+  ★ EXACT  (phi-n)+n = 2  →  P1 = 2
+  ★ EXACT  (phi-n)+sigma = 8  →  sigma-tau = 8
+  ★ EXACT  (phi-n)+sopfr = 1  →  mu = 1
+  ★ EXACT  (phi-n)+M3 = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi*n)-n = 6  →  tau+phi = 6
+  ★ EXACT  (phi*n)/n = 2  →  phi = 2
+  ★ EXACT  (phi*n)/n = 2  →  P1 = 2
+  ★ EXACT  (phi*n)/sigma = 1  →  mu = 1
+  ★ EXACT  (phi*n)/phi = 6  →  tau+phi = 6
+  ★ EXACT  (phi*n)-tau = 8  →  sigma-tau = 8
+  ★ EXACT  (phi*n)/tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi/n)*n = 2  →  phi = 2
+  ★ EXACT  (phi/n)*n = 2  →  P1 = 2
+  ★ EXACT  (phi+sigma)-n = 8  →  sigma-tau = 8
+  ★ EXACT  (phi+sigma)-sigma = 2  →  phi = 2
+  ★ EXACT  (phi+sigma)-sigma = 2  →  P1 = 2
+  ★ EXACT  (phi+sigma)/M3 = 2  →  phi = 2
+  ★ EXACT  (phi+sigma)/M3 = 2  →  P1 = 2
+  ★ EXACT  (phi-sigma)+sigma = 2  →  phi = 2
+  ★ EXACT  (phi-sigma)+sigma = 2  →  P1 = 2
+  ★ EXACT  (phi*sigma)/sigma = 2  →  phi = 2
+  ★ EXACT  (phi*sigma)/sigma = 2  →  P1 = 2
+  ★ EXACT  (phi*sigma)/tau = 6  →  tau+phi = 6
+  ★ EXACT  (phi/sigma)*n = 1  →  mu = 1
+  ★ EXACT  (phi/sigma)*sigma = 2  →  phi = 2
+  ★ EXACT  (phi/sigma)*sigma = 2  →  P1 = 2
+  ★ EXACT  (phi+tau)/n = 1  →  mu = 1
+  ★ EXACT  (phi+tau)+phi = 8  →  sigma-tau = 8
+  ★ EXACT  (phi+tau)/phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi+tau)-tau = 2  →  phi = 2
+  ★ EXACT  (phi+tau)-tau = 2  →  P1 = 2
+  ★ EXACT  (phi+tau)-sopfr = 1  →  mu = 1
+  ★ EXACT  (phi-tau)+tau = 2  →  phi = 2
+  ★ EXACT  (phi-tau)+tau = 2  →  P1 = 2
+  ★ EXACT  (phi-tau)+sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi*tau)-n = 2  →  phi = 2
+  ★ EXACT  (phi*tau)-n = 2  →  P1 = 2
+  ★ EXACT  (phi*tau)-phi = 6  →  tau+phi = 6
+  ★ EXACT  (phi*tau)/tau = 2  →  phi = 2
+  ★ EXACT  (phi*tau)/tau = 2  →  P1 = 2
+  ★ EXACT  (phi*tau)-sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi*tau)-M3 = 1  →  mu = 1
+  ★ EXACT  (phi/tau)*n = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi/tau)*sigma = 6  →  tau+phi = 6
+  ★ EXACT  (phi/tau)*phi = 1  →  mu = 1
+  ★ EXACT  (phi/tau)*tau = 2  →  phi = 2
+  ★ EXACT  (phi/tau)*tau = 2  →  P1 = 2
+  ★ EXACT  (phi+sopfr)-n = 1  →  mu = 1
+  ★ EXACT  (phi+sopfr)-tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi+sopfr)-sopfr = 2  →  phi = 2
+  ★ EXACT  (phi+sopfr)-sopfr = 2  →  P1 = 2
+  ★ EXACT  (phi+sopfr)/M3 = 1  →  mu = 1
+  ★ EXACT  (phi-sopfr)+n = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi-sopfr)+tau = 1  →  mu = 1
+  ★ EXACT  (phi-sopfr)+sopfr = 2  →  phi = 2
+  ★ EXACT  (phi-sopfr)+sopfr = 2  →  P1 = 2
+  ★ EXACT  (phi*sopfr)-phi = 8  →  sigma-tau = 8
+  ★ EXACT  (phi*sopfr)-tau = 6  →  tau+phi = 6
+  ★ EXACT  (phi*sopfr)/sopfr = 2  →  phi = 2
+  ★ EXACT  (phi*sopfr)/sopfr = 2  →  P1 = 2
+  ★ EXACT  (phi*sopfr)-M3 = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (phi/sopfr)*sopfr = 2  →  phi = 2
+  ★ EXACT  (phi/sopfr)*sopfr = 2  →  P1 = 2
+  ★ EXACT  (phi+M3)-n = 3  →  consciousness_phi_iit = 3
+  · NEAR   (phi+M3)/tau = 2.25  →  algebraic_sqrt5 = 2.23607  (err=0.6229679750634024%)
+  ★ EXACT  (phi+M3)-M3 = 2  →  phi = 2
+  ★ EXACT  (phi+M3)-M3 = 2  →  P1 = 2
+  ★ EXACT  (phi-M3)+n = 1  →  mu = 1
+  ★ EXACT  (phi-M3)+M3 = 2  →  phi = 2
+  ★ EXACT  (phi-M3)+M3 = 2  →  P1 = 2
+  ★ EXACT  (phi*M3)-n = 8  →  sigma-tau = 8
+  ★ EXACT  (phi*M3)-sigma = 2  →  phi = 2
+  ★ EXACT  (phi*M3)-sigma = 2  →  P1 = 2
+  ★ EXACT  (phi*M3)/M3 = 2  →  phi = 2
+  ★ EXACT  (phi*M3)/M3 = 2  →  P1 = 2
+  ★ EXACT  (phi/M3)*M3 = 2  →  phi = 2
+  ★ EXACT  (phi/M3)*M3 = 2  →  P1 = 2
+  ★ EXACT  (tau+n)-phi = 8  →  sigma-tau = 8
+  ★ EXACT  (tau+n)-tau = 6  →  tau+phi = 6
+  ★ EXACT  (tau+n)/sopfr = 2  →  phi = 2
+  ★ EXACT  (tau+n)/sopfr = 2  →  P1 = 2
+  ★ EXACT  (tau+n)-M3 = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (tau-n)+tau = 2  →  phi = 2
+  ★ EXACT  (tau-n)+tau = 2  →  P1 = 2
+  ★ EXACT  (tau-n)+sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (tau*n)/sigma = 2  →  phi = 2
+  ★ EXACT  (tau*n)/sigma = 2  →  P1 = 2
+  ★ EXACT  (tau*n)/tau = 6  →  tau+phi = 6
+  ★ EXACT  (tau/n)*sigma = 8  →  sigma-tau = 8
+  ★ EXACT  (tau+sigma)/phi = 8  →  sigma-tau = 8
+  ★ EXACT  (tau*sigma)/n = 8  →  sigma-tau = 8
+  ★ EXACT  (tau/sigma)*n = 2  →  phi = 2
+  ★ EXACT  (tau/sigma)*n = 2  →  P1 = 2
+  ★ EXACT  (tau+phi)/n = 1  →  mu = 1
+  ★ EXACT  (tau+phi)+phi = 8  →  sigma-tau = 8
+  ★ EXACT  (tau+phi)/phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (tau+phi)-tau = 2  →  phi = 2
+  ★ EXACT  (tau+phi)-tau = 2  →  P1 = 2
+  ★ EXACT  (tau+phi)-sopfr = 1  →  mu = 1
+  ★ EXACT  (tau-phi)+n = 8  →  sigma-tau = 8
+  ★ EXACT  (tau-phi)/phi = 1  →  mu = 1
+  ★ EXACT  (tau-phi)+tau = 6  →  tau+phi = 6
+  ★ EXACT  (tau-phi)*tau = 8  →  sigma-tau = 8
+  ★ EXACT  (tau*phi)-n = 2  →  phi = 2
+  ★ EXACT  (tau*phi)-n = 2  →  P1 = 2
+  ★ EXACT  (tau*phi)-phi = 6  →  tau+phi = 6
+  ★ EXACT  (tau*phi)/tau = 2  →  phi = 2
+  ★ EXACT  (tau*phi)/tau = 2  →  P1 = 2
+  ★ EXACT  (tau*phi)-sopfr = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (tau*phi)-M3 = 1  →  mu = 1
+  ★ EXACT  (tau/phi)+n = 8  →  sigma-tau = 8
+  ★ EXACT  (tau/phi)/phi = 1  →  mu = 1
+  ★ EXACT  (tau/phi)+tau = 6  →  tau+phi = 6
+  ★ EXACT  (tau/phi)*tau = 8  →  sigma-tau = 8
+  ★ EXACT  (tau+sopfr)-n = 3  →  consciousness_phi_iit = 3
+  · NEAR   (tau+sopfr)/tau = 2.25  →  algebraic_sqrt5 = 2.23607  (err=0.6229679750634024%)
+  ★ EXACT  (tau+sopfr)-M3 = 2  →  phi = 2
+  ★ EXACT  (tau+sopfr)-M3 = 2  →  P1 = 2
+  ★ EXACT  (tau-sopfr)+phi = 1  →  mu = 1
+  ★ EXACT  (tau-sopfr)+tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (tau-sopfr)+M3 = 6  →  tau+phi = 6
+  ★ EXACT  (tau*sopfr)-sigma = 8  →  sigma-tau = 8
+  · NEAR   (tau+M3)/tau = 2.75  →  cosmological_T_cmb = 2.725  (err=0.9174311926605472%)
+  ★ EXACT  (tau+M3)-sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (tau-M3)+n = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (tau-M3)+tau = 1  →  mu = 1
+  ★ EXACT  (tau-M3)+sopfr = 2  →  phi = 2
+  ★ EXACT  (tau-M3)+sopfr = 2  →  P1 = 2
+  · NEAR   (sopfr+n)/tau = 2.75  →  cosmological_T_cmb = 2.725  (err=0.9174311926605472%)
+  ★ EXACT  (sopfr+n)-sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr-n)+phi = 1  →  mu = 1
+  ★ EXACT  (sopfr-n)+tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sopfr-n)+M3 = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr*n)/sopfr = 6  →  tau+phi = 6
+  · NEAR   (sopfr+sigma)/sigma = 1.4166666666666667  →  geometric_sqrt2 = 1.41421  (err=0.17371300349076682%)
+  · NEAR   (sopfr+sigma)*tau = 68  →  cosmological_H0 = 67.4  (err=0.8902077151335227%)
+  · NEAR   (sopfr*sigma)+M3 = 67  →  cosmological_H0 = 67.4  (err=0.5934718100890292%)
+  ★ EXACT  (sopfr+phi)-n = 1  →  mu = 1
+  ★ EXACT  (sopfr+phi)-tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sopfr+phi)-sopfr = 2  →  phi = 2
+  ★ EXACT  (sopfr+phi)-sopfr = 2  →  P1 = 2
+  ★ EXACT  (sopfr+phi)/M3 = 1  →  mu = 1
+  ★ EXACT  (sopfr-phi)-phi = 1  →  mu = 1
+  ★ EXACT  (sopfr-phi)*phi = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr-phi)+sopfr = 8  →  sigma-tau = 8
+  ★ EXACT  (sopfr*phi)-phi = 8  →  sigma-tau = 8
+  ★ EXACT  (sopfr*phi)-tau = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr*phi)/sopfr = 2  →  phi = 2
+  ★ EXACT  (sopfr*phi)/sopfr = 2  →  P1 = 2
+  ★ EXACT  (sopfr*phi)-M3 = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sopfr+tau)-n = 3  →  consciousness_phi_iit = 3
+  · NEAR   (sopfr+tau)/tau = 2.25  →  algebraic_sqrt5 = 2.23607  (err=0.6229679750634024%)
+  ★ EXACT  (sopfr+tau)-M3 = 2  →  phi = 2
+  ★ EXACT  (sopfr+tau)-M3 = 2  →  P1 = 2
+  ★ EXACT  (sopfr-tau)*n = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr-tau)+phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sopfr-tau)*phi = 2  →  phi = 2
+  ★ EXACT  (sopfr-tau)*phi = 2  →  P1 = 2
+  ★ EXACT  (sopfr-tau)+sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr-tau)+M3 = 8  →  sigma-tau = 8
+  ★ EXACT  (sopfr*tau)-sigma = 8  →  sigma-tau = 8
+  ★ EXACT  (sopfr+M3)-n = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr+M3)/n = 2  →  phi = 2
+  ★ EXACT  (sopfr+M3)/n = 2  →  P1 = 2
+  ★ EXACT  (sopfr+M3)/sigma = 1  →  mu = 1
+  ★ EXACT  (sopfr+M3)/phi = 6  →  tau+phi = 6
+  ★ EXACT  (sopfr+M3)-tau = 8  →  sigma-tau = 8
+  ★ EXACT  (sopfr+M3)/tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (sopfr-M3)+tau = 2  →  phi = 2
+  ★ EXACT  (sopfr-M3)+tau = 2  →  P1 = 2
+  ★ EXACT  (sopfr-M3)+sopfr = 3  →  consciousness_phi_iit = 3
+  · NEAR   (sopfr/M3)+phi = 2.7142857142857144  →  geometric_e = 2.71828  (err=0.14694165848571952%)
+  · NEAR   (sopfr/M3)+phi = 2.7142857142857144  →  cosmological_T_cmb = 2.725  (err=0.3931847968545202%)
+  · NEAR   (sopfr/M3)+phi = 2.7142857142857144  →  topological_euler = 2.71828  (err=0.14694165848571952%)
+  ★ EXACT  (M3+n)-sigma = 1  →  mu = 1
+  ★ EXACT  (M3+n)-sopfr = 8  →  sigma-tau = 8
+  ★ EXACT  (M3+n)-M3 = 6  →  tau+phi = 6
+  ★ EXACT  (M3-n)*n = 6  →  tau+phi = 6
+  ★ EXACT  (M3-n)+phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (M3-n)*phi = 2  →  phi = 2
+  ★ EXACT  (M3-n)*phi = 2  →  P1 = 2
+  ★ EXACT  (M3-n)+sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (M3-n)+M3 = 8  →  sigma-tau = 8
+  ★ EXACT  (M3*n)/M3 = 6  →  tau+phi = 6
+  · NEAR   (M3/n)+phi = 3.166666666666667  →  geometric_pi = 3.14159  (err=0.7982157654775792%)
+  · NEAR   (M3+sigma)/n = 3.1666666666666665  →  geometric_pi = 3.14159  (err=0.798215765477565%)
+  · NEAR   (M3+sigma)/M3 = 2.7142857142857144  →  geometric_e = 2.71828  (err=0.14694165848571952%)
+  · NEAR   (M3+sigma)/M3 = 2.7142857142857144  →  cosmological_T_cmb = 2.725  (err=0.3931847968545202%)
+  · NEAR   (M3+sigma)/M3 = 2.7142857142857144  →  topological_euler = 2.71828  (err=0.14694165848571952%)
+  ★ EXACT  (M3-sigma)+n = 1  →  mu = 1
+  ★ EXACT  (M3-sigma)+M3 = 2  →  phi = 2
+  ★ EXACT  (M3-sigma)+M3 = 2  →  P1 = 2
+  ★ EXACT  (M3+phi)-n = 3  →  consciousness_phi_iit = 3
+  · NEAR   (M3+phi)/tau = 2.25  →  algebraic_sqrt5 = 2.23607  (err=0.6229679750634024%)
+  ★ EXACT  (M3+phi)-M3 = 2  →  phi = 2
+  ★ EXACT  (M3+phi)-M3 = 2  →  P1 = 2
+  ★ EXACT  (M3-phi)-phi = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (M3-phi)-tau = 1  →  mu = 1
+  ★ EXACT  (M3-phi)/sopfr = 1  →  mu = 1
+  ★ EXACT  (M3*phi)-n = 8  →  sigma-tau = 8
+  ★ EXACT  (M3*phi)-sigma = 2  →  phi = 2
+  ★ EXACT  (M3*phi)-sigma = 2  →  P1 = 2
+  ★ EXACT  (M3*phi)/M3 = 2  →  phi = 2
+  ★ EXACT  (M3*phi)/M3 = 2  →  P1 = 2
+  · NEAR   (M3+tau)/tau = 2.75  →  cosmological_T_cmb = 2.725  (err=0.9174311926605472%)
+  ★ EXACT  (M3+tau)-sopfr = 6  →  tau+phi = 6
+  ★ EXACT  (M3-tau)-phi = 1  →  mu = 1
+  ★ EXACT  (M3-tau)*phi = 6  →  tau+phi = 6
+  ★ EXACT  (M3-tau)+sopfr = 8  →  sigma-tau = 8
+  ★ EXACT  (M3+sopfr)-n = 6  →  tau+phi = 6
+  ★ EXACT  (M3+sopfr)/n = 2  →  phi = 2
+  ★ EXACT  (M3+sopfr)/n = 2  →  P1 = 2
+  ★ EXACT  (M3+sopfr)/sigma = 1  →  mu = 1
+  ★ EXACT  (M3+sopfr)/phi = 6  →  tau+phi = 6
+  ★ EXACT  (M3+sopfr)-tau = 8  →  sigma-tau = 8
+  ★ EXACT  (M3+sopfr)/tau = 3  →  consciousness_phi_iit = 3
+  ★ EXACT  (M3-sopfr)+n = 8  →  sigma-tau = 8
+  ★ EXACT  (M3-sopfr)/phi = 1  →  mu = 1
+  ★ EXACT  (M3-sopfr)+tau = 6  →  tau+phi = 6
+  ★ EXACT  (M3-sopfr)*tau = 8  →  sigma-tau = 8
+
+─── Bridge 요약 ───
+  빈 공간: 33건
+  도달 경로: 388건
+
+
+=== gap_finder verified ===
+HEXA-LANG v0.1.0 -- The Perfect Number Language
+sigma(n)*phi(n) = n*tau(n) iff n = 6
+Type :quit to exit, :help for help
+
+hexa> ╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — DFS 위상변환 탐색 (depth=2)             ║
+╚══════════════════════════════════════════════════════════╝
+
+기저: n=6, σ=12, φ=2, τ=4, sopfr=5, M3=7
+연산: +, -, *, /
+
+─── Depth 1 ───
+  ★ n+phi               = 8  [EXACT phi*tau=8]
+  · n-phi               = 4  [=tau]
+  · n*phi               = 12  [=sigma]
+  ★ n/phi               = 3  [EXACT n/phi=3]
+  · n-tau               = 2  [=phi]
+  ★ n*tau               = 24  [EXACT J2=24]
+  · sigma-n             = 6  [=n]
+  · sigma/n             = 2  [=phi]
+  ★ sigma*phi           = 24  [EXACT J2=24]
+  · sigma/phi           = 6  [=n]
+  ★ sigma-tau           = 8  [EXACT phi*tau=8]
+  ★ sigma*tau           = 48  [EXACT sigma*tau=48]
+  ★ sigma/tau           = 3  [EXACT n/phi=3]
+  · sigma-sopfr         = 7  [=M3]
+  · sigma-M3            = 5  [=sopfr]
+  ★ phi+n               = 8  [EXACT phi*tau=8]
+  · phi*n               = 12  [=sigma]
+  · phi/n               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ phi*sigma           = 24  [EXACT J2=24]
+  · phi+tau             = 6  [=n]
+  ★ phi*tau             = 8  [EXACT phi*tau=8]
+  · phi+sopfr           = 7  [=M3]
+  ★ tau*n               = 24  [EXACT J2=24]
+  ★ tau*sigma           = 48  [EXACT sigma*tau=48]
+  · tau/sigma           = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  · tau+phi             = 6  [=n]
+  · tau-phi             = 2  [=phi]
+  ★ tau*phi             = 8  [EXACT phi*tau=8]
+  · tau/phi             = 2  [=phi]
+  ★ tau*M3              = 28  [EXACT P2=28]
+  · sopfr+phi           = 7  [=M3]
+  ★ sopfr-phi           = 3  [EXACT n/phi=3]
+  · sopfr+M3            = 12  [=sigma]
+  · M3-phi              = 5  [=sopfr]
+  ★ M3-tau              = 3  [EXACT n/phi=3]
+  ★ M3*tau              = 28  [EXACT P2=28]
+  · M3+sopfr            = 12  [=sigma]
+  · M3-sopfr            = 2  [=phi]
+
+─── Depth 2 (중간결과 OP 기저) ───
+  ★ (n+sigma)+n                 = 24  [EXACT J2=24]
+  ★ (n+sigma)/n                 = 3  [EXACT n/phi=3]
+  ★ (n+sigma)*phi               = 36  [EXACT n^2=36]
+  ★ (n*sigma)/phi               = 36  [EXACT n^2=36]
+  ★ (n/sigma)*n                 = 3  [EXACT n/phi=3]
+  ★ (n+phi)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (n+phi)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (n-phi)*n                   = 24  [EXACT J2=24]
+  ★ (n-phi)*sigma               = 48  [EXACT sigma*tau=48]
+  · (n-phi)/sigma               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-phi)*phi                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)+tau                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)*M3                  = 28  [EXACT P2=28]
+  ★ (n*phi)+sigma               = 24  [EXACT J2=24]
+  ★ (n*phi)*phi                 = 24  [EXACT J2=24]
+  ★ (n*phi)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*phi)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (n*phi)/tau                 = 3  [EXACT n/phi=3]
+  ★ (n/phi)*sigma               = 36  [EXACT n^2=36]
+  ★ (n/phi)+sopfr               = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-M3                  = 3  [EXACT n/phi=3]
+  ★ (n-tau)+n                   = 8  [EXACT phi*tau=8]
+  · (n-tau)/n                   = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-tau)*sigma               = 24  [EXACT J2=24]
+  ★ (n-tau)*tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*tau)+sigma               = 36  [EXACT n^2=36]
+  ★ (n*tau)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (n*tau)+tau                 = 28  [EXACT P2=28]
+  ★ (n/tau)*phi                 = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+phi               = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+M3                = 8  [EXACT phi*tau=8]
+  ★ (n*sopfr)+n                 = 36  [EXACT n^2=36]
+  ★ (n*sopfr)-n                 = 24  [EXACT J2=24]
+  ★ (n*sopfr)-phi               = 28  [EXACT P2=28]
+  ★ (n+M3)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (n-M3)+tau                  = 3  [EXACT n/phi=3]
+  ★ (n*M3)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (n*M3)-n                    = 36  [EXACT n^2=36]
+  ★ (sigma+n)+n                 = 24  [EXACT J2=24]
+  ★ (sigma+n)/n                 = 3  [EXACT n/phi=3]
+  ★ (sigma+n)*phi               = 36  [EXACT n^2=36]
+  ★ (sigma-n)*n                 = 36  [EXACT n^2=36]
+  ★ (sigma-n)+phi               = 8  [EXACT phi*tau=8]
+  ★ (sigma-n)/phi               = 3  [EXACT n/phi=3]
+  ★ (sigma-n)*tau               = 24  [EXACT J2=24]
+  ★ (sigma*n)/phi               = 36  [EXACT n^2=36]
+  ★ (sigma/n)+n                 = 8  [EXACT phi*tau=8]
+  · (sigma/n)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (sigma/n)*sigma             = 24  [EXACT J2=24]
+  ★ (sigma/n)*tau               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)-n               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)*phi             = 28  [EXACT P2=28]
+  ★ (sigma-phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sigma*phi)+sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*phi)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (sigma*phi)+tau             = 28  [EXACT P2=28]
+  ★ (sigma/phi)*n               = 36  [EXACT n^2=36]
+  ★ (sigma/phi)+phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma/phi)/phi             = 3  [EXACT n/phi=3]
+  ★ (sigma/phi)*tau             = 24  [EXACT J2=24]
+  ★ (sigma+tau)+sigma           = 28  [EXACT P2=28]
+  ★ (sigma+tau)/phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-tau)*n               = 48  [EXACT sigma*tau=48]
+  ★ (sigma-tau)-sopfr           = 3  [EXACT n/phi=3]
+  ★ (sigma*tau)/n               = 8  [EXACT phi*tau=8]
+  ★ (sigma*tau)-sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*tau)/phi             = 24  [EXACT J2=24]
+  ★ (sigma/tau)*sigma           = 36  [EXACT n^2=36]
+  ★ (sigma/tau)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sigma+sopfr)+M3            = 24  [EXACT J2=24]
+  ★ (sigma-sopfr)-tau           = 3  [EXACT n/phi=3]
+  ★ (sigma-sopfr)*tau           = 28  [EXACT P2=28]
+  ★ (sigma*sopfr)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sigma*sopfr)*sigma         = 720  [EXACT 6!=720]
+  ★ (sigma+M3)+sopfr            = 24  [EXACT J2=24]
+  ★ (sigma-M3)-phi              = 3  [EXACT n/phi=3]
+  ★ (phi+n)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (phi+n)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (phi-n)+sigma               = 8  [EXACT phi*tau=8]
+  ★ (phi-n)+M3                  = 3  [EXACT n/phi=3]
+  ★ (phi*n)+sigma               = 24  [EXACT J2=24]
+  ★ (phi*n)*phi                 = 24  [EXACT J2=24]
+  ★ (phi*n)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (phi*n)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*n)/tau                 = 3  [EXACT n/phi=3]
+  ★ (phi+sigma)-n               = 8  [EXACT phi*tau=8]
+  ★ (phi+sigma)*phi             = 28  [EXACT P2=28]
+  ★ (phi*sigma)+sigma           = 36  [EXACT n^2=36]
+  ★ (phi*sigma)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (phi*sigma)+tau             = 28  [EXACT P2=28]
+  · (phi/sigma)*phi             = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (phi+tau)*n                 = 36  [EXACT n^2=36]
+  ★ (phi+tau)+phi               = 8  [EXACT phi*tau=8]
+  ★ (phi+tau)/phi               = 3  [EXACT n/phi=3]
+  ★ (phi+tau)*tau               = 24  [EXACT J2=24]
+  ★ (phi-tau)+sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi*tau)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*tau)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi/tau)*n                 = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)-tau             = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)*tau             = 28  [EXACT P2=28]
+  ★ (phi-sopfr)+n               = 3  [EXACT n/phi=3]
+  ★ (phi*sopfr)-phi             = 8  [EXACT phi*tau=8]
+  ★ (phi*sopfr)-M3              = 3  [EXACT n/phi=3]
+  ★ (phi+M3)-n                  = 3  [EXACT n/phi=3]
+  ★ (phi+M3)*tau                = 36  [EXACT n^2=36]
+  ★ (phi*M3)-n                  = 8  [EXACT phi*tau=8]
+  ★ (phi*M3)*phi                = 28  [EXACT P2=28]
+  ★ (tau+n)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (tau+n)-M3                  = 3  [EXACT n/phi=3]
+  ★ (tau-n)+sopfr               = 3  [EXACT n/phi=3]
+  ★ (tau*n)+sigma               = 36  [EXACT n^2=36]
+  ★ (tau*n)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*n)+tau                 = 28  [EXACT P2=28]
+  ★ (tau/n)*sigma               = 8  [EXACT phi*tau=8]
+  · (tau/n)/phi                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau+sigma)+sigma           = 28  [EXACT P2=28]
+  ★ (tau+sigma)/phi             = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)/n               = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)-sigma           = 36  [EXACT n^2=36]
+  ★ (tau*sigma)/phi             = 24  [EXACT J2=24]
+  ★ (tau+phi)*n                 = 36  [EXACT n^2=36]
+  ★ (tau+phi)+phi               = 8  [EXACT phi*tau=8]
+  ★ (tau+phi)/phi               = 3  [EXACT n/phi=3]
+  ★ (tau+phi)*tau               = 24  [EXACT J2=24]
+  ★ (tau-phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau-phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau-phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau-phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau*phi)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*phi)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (tau/phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau/phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau/phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau/phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau+sopfr)-n               = 3  [EXACT n/phi=3]
+  ★ (tau+sopfr)*tau             = 36  [EXACT n^2=36]
+  ★ (tau-sopfr)+tau             = 3  [EXACT n/phi=3]
+  ★ (tau*sopfr)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (tau*sopfr)+tau             = 24  [EXACT J2=24]
+  ★ (tau-M3)+n                  = 3  [EXACT n/phi=3]
+  ★ (tau*M3)-tau                = 24  [EXACT J2=24]
+  ★ (sopfr-n)+tau               = 3  [EXACT n/phi=3]
+  ★ (sopfr*n)+n                 = 36  [EXACT n^2=36]
+  ★ (sopfr*n)-n                 = 24  [EXACT J2=24]
+  ★ (sopfr*n)-phi               = 28  [EXACT P2=28]
+  ★ (sopfr+sigma)+M3            = 24  [EXACT J2=24]
+  ★ (sopfr*sigma)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sopfr*sigma)*sigma         = 720  [EXACT 6!=720]
+  ★ (sopfr+phi)-tau             = 3  [EXACT n/phi=3]
+  ★ (sopfr+phi)*tau             = 28  [EXACT P2=28]
+  ★ (sopfr-phi)*sigma           = 36  [EXACT n^2=36]
+  ★ (sopfr-phi)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)-n               = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)*tau             = 36  [EXACT n^2=36]
+  ★ (sopfr-tau)+phi             = 3  [EXACT n/phi=3]
+  ★ (sopfr-tau)+M3              = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)+tau             = 24  [EXACT J2=24]
+  · (sopfr/tau)/tau             = 0.3125  [NEAR omega_m=0.3153 err=0.8880431335236361%]
+  ★ (sopfr+M3)+sigma            = 24  [EXACT J2=24]
+  ★ (sopfr+M3)*phi              = 24  [EXACT J2=24]
+  ★ (sopfr+M3)-tau              = 8  [EXACT phi*tau=8]
+  ★ (sopfr+M3)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (sopfr+M3)/tau              = 3  [EXACT n/phi=3]
+  ★ (sopfr-M3)+sopfr            = 3  [EXACT n/phi=3]
+  ★ (sopfr*M3)-M3               = 28  [EXACT P2=28]
+  ★ (M3+n)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (M3-n)+phi                  = 3  [EXACT n/phi=3]
+  ★ (M3-n)+M3                   = 8  [EXACT phi*tau=8]
+  ★ (M3*n)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (M3*n)-n                    = 36  [EXACT n^2=36]
+  ★ (M3+sigma)+sopfr            = 24  [EXACT J2=24]
+  ★ (M3+phi)-n                  = 3  [EXACT n/phi=3]
+  ★ (M3+phi)*tau                = 36  [EXACT n^2=36]
+  ★ (M3-phi)-phi                = 3  [EXACT n/phi=3]
+  ★ (M3*phi)-n                  = 8  [EXACT phi*tau=8]
+  ★ (M3*phi)*phi                = 28  [EXACT P2=28]
+  ★ (M3-tau)*sigma              = 36  [EXACT n^2=36]
+  ★ (M3-tau)+sopfr              = 8  [EXACT phi*tau=8]
+  ★ (M3*tau)-tau                = 24  [EXACT J2=24]
+  ★ (M3+sopfr)+sigma            = 24  [EXACT J2=24]
+  ★ (M3+sopfr)*phi              = 24  [EXACT J2=24]
+  ★ (M3+sopfr)-tau              = 8  [EXACT phi*tau=8]
+  ★ (M3+sopfr)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (M3+sopfr)/tau              = 3  [EXACT n/phi=3]
+  ★ (M3-sopfr)+n                = 8  [EXACT phi*tau=8]
+  · (M3-sopfr)/n                = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (M3-sopfr)*sigma            = 24  [EXACT J2=24]
+  ★ (M3-sopfr)*tau              = 8  [EXACT phi*tau=8]
+  ★ (M3*sopfr)-M3               = 28  [EXACT P2=28]
+
+─── DFS 요약 ───
+  탐색 경로: 3000
+  EXACT 매칭: 203
+  NEAR 매칭:  30
+
+
+=== gap_finder verified ===
+╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — 빈공간 × 위상변환 교차 (Bridge)           ║
+╚══════════════════════════════════════════════════════════╝
+
+HEXA-LANG v0.1.0 -- The Perfect Number Language
+sigma(n)*phi(n) = n*tau(n) iff n = 6
+Type :quit to exit, :help for help
+
+hexa> ╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — DFS 위상변환 탐색 (depth=2)             ║
+╚══════════════════════════════════════════════════════════╝
+
+기저: n=6, σ=12, φ=2, τ=4, sopfr=5, M3=7
+연산: +, -, *, /
+
+─── Depth 1 ───
+  ★ n+phi               = 8  [EXACT phi*tau=8]
+  · n-phi               = 4  [=tau]
+  · n*phi               = 12  [=sigma]
+  ★ n/phi               = 3  [EXACT n/phi=3]
+  · n-tau               = 2  [=phi]
+  ★ n*tau               = 24  [EXACT J2=24]
+  · sigma-n             = 6  [=n]
+  · sigma/n             = 2  [=phi]
+  ★ sigma*phi           = 24  [EXACT J2=24]
+  · sigma/phi           = 6  [=n]
+  ★ sigma-tau           = 8  [EXACT phi*tau=8]
+  ★ sigma*tau           = 48  [EXACT sigma*tau=48]
+  ★ sigma/tau           = 3  [EXACT n/phi=3]
+  · sigma-sopfr         = 7  [=M3]
+  · sigma-M3            = 5  [=sopfr]
+  ★ phi+n               = 8  [EXACT phi*tau=8]
+  · phi*n               = 12  [=sigma]
+  · phi/n               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ phi*sigma           = 24  [EXACT J2=24]
+  · phi+tau             = 6  [=n]
+  ★ phi*tau             = 8  [EXACT phi*tau=8]
+  · phi+sopfr           = 7  [=M3]
+  ★ tau*n               = 24  [EXACT J2=24]
+  ★ tau*sigma           = 48  [EXACT sigma*tau=48]
+  · tau/sigma           = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  · tau+phi             = 6  [=n]
+  · tau-phi             = 2  [=phi]
+  ★ tau*phi             = 8  [EXACT phi*tau=8]
+  · tau/phi             = 2  [=phi]
+  ★ tau*M3              = 28  [EXACT P2=28]
+  · sopfr+phi           = 7  [=M3]
+  ★ sopfr-phi           = 3  [EXACT n/phi=3]
+  · sopfr+M3            = 12  [=sigma]
+  · M3-phi              = 5  [=sopfr]
+  ★ M3-tau              = 3  [EXACT n/phi=3]
+  ★ M3*tau              = 28  [EXACT P2=28]
+  · M3+sopfr            = 12  [=sigma]
+  · M3-sopfr            = 2  [=phi]
+
+─── Depth 2 (중간결과 OP 기저) ───
+  ★ (n+sigma)+n                 = 24  [EXACT J2=24]
+  ★ (n+sigma)/n                 = 3  [EXACT n/phi=3]
+  ★ (n+sigma)*phi               = 36  [EXACT n^2=36]
+  ★ (n*sigma)/phi               = 36  [EXACT n^2=36]
+  ★ (n/sigma)*n                 = 3  [EXACT n/phi=3]
+  ★ (n+phi)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (n+phi)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (n-phi)*n                   = 24  [EXACT J2=24]
+  ★ (n-phi)*sigma               = 48  [EXACT sigma*tau=48]
+  · (n-phi)/sigma               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-phi)*phi                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)+tau                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)*M3                  = 28  [EXACT P2=28]
+  ★ (n*phi)+sigma               = 24  [EXACT J2=24]
+  ★ (n*phi)*phi                 = 24  [EXACT J2=24]
+  ★ (n*phi)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*phi)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (n*phi)/tau                 = 3  [EXACT n/phi=3]
+  ★ (n/phi)*sigma               = 36  [EXACT n^2=36]
+  ★ (n/phi)+sopfr               = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-M3                  = 3  [EXACT n/phi=3]
+  ★ (n-tau)+n                   = 8  [EXACT phi*tau=8]
+  · (n-tau)/n                   = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-tau)*sigma               = 24  [EXACT J2=24]
+  ★ (n-tau)*tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*tau)+sigma               = 36  [EXACT n^2=36]
+  ★ (n*tau)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (n*tau)+tau                 = 28  [EXACT P2=28]
+  ★ (n/tau)*phi                 = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+phi               = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+M3                = 8  [EXACT phi*tau=8]
+  ★ (n*sopfr)+n                 = 36  [EXACT n^2=36]
+  ★ (n*sopfr)-n                 = 24  [EXACT J2=24]
+  ★ (n*sopfr)-phi               = 28  [EXACT P2=28]
+  ★ (n+M3)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (n-M3)+tau                  = 3  [EXACT n/phi=3]
+  ★ (n*M3)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (n*M3)-n                    = 36  [EXACT n^2=36]
+  ★ (sigma+n)+n                 = 24  [EXACT J2=24]
+  ★ (sigma+n)/n                 = 3  [EXACT n/phi=3]
+  ★ (sigma+n)*phi               = 36  [EXACT n^2=36]
+  ★ (sigma-n)*n                 = 36  [EXACT n^2=36]
+  ★ (sigma-n)+phi               = 8  [EXACT phi*tau=8]
+  ★ (sigma-n)/phi               = 3  [EXACT n/phi=3]
+  ★ (sigma-n)*tau               = 24  [EXACT J2=24]
+  ★ (sigma*n)/phi               = 36  [EXACT n^2=36]
+  ★ (sigma/n)+n                 = 8  [EXACT phi*tau=8]
+  · (sigma/n)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (sigma/n)*sigma             = 24  [EXACT J2=24]
+  ★ (sigma/n)*tau               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)-n               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)*phi             = 28  [EXACT P2=28]
+  ★ (sigma-phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sigma*phi)+sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*phi)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (sigma*phi)+tau             = 28  [EXACT P2=28]
+  ★ (sigma/phi)*n               = 36  [EXACT n^2=36]
+  ★ (sigma/phi)+phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma/phi)/phi             = 3  [EXACT n/phi=3]
+  ★ (sigma/phi)*tau             = 24  [EXACT J2=24]
+  ★ (sigma+tau)+sigma           = 28  [EXACT P2=28]
+  ★ (sigma+tau)/phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-tau)*n               = 48  [EXACT sigma*tau=48]
+  ★ (sigma-tau)-sopfr           = 3  [EXACT n/phi=3]
+  ★ (sigma*tau)/n               = 8  [EXACT phi*tau=8]
+  ★ (sigma*tau)-sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*tau)/phi             = 24  [EXACT J2=24]
+  ★ (sigma/tau)*sigma           = 36  [EXACT n^2=36]
+  ★ (sigma/tau)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sigma+sopfr)+M3            = 24  [EXACT J2=24]
+  ★ (sigma-sopfr)-tau           = 3  [EXACT n/phi=3]
+  ★ (sigma-sopfr)*tau           = 28  [EXACT P2=28]
+  ★ (sigma*sopfr)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sigma*sopfr)*sigma         = 720  [EXACT 6!=720]
+  ★ (sigma+M3)+sopfr            = 24  [EXACT J2=24]
+  ★ (sigma-M3)-phi              = 3  [EXACT n/phi=3]
+  ★ (phi+n)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (phi+n)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (phi-n)+sigma               = 8  [EXACT phi*tau=8]
+  ★ (phi-n)+M3                  = 3  [EXACT n/phi=3]
+  ★ (phi*n)+sigma               = 24  [EXACT J2=24]
+  ★ (phi*n)*phi                 = 24  [EXACT J2=24]
+  ★ (phi*n)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (phi*n)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*n)/tau                 = 3  [EXACT n/phi=3]
+  ★ (phi+sigma)-n               = 8  [EXACT phi*tau=8]
+  ★ (phi+sigma)*phi             = 28  [EXACT P2=28]
+  ★ (phi*sigma)+sigma           = 36  [EXACT n^2=36]
+  ★ (phi*sigma)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (phi*sigma)+tau             = 28  [EXACT P2=28]
+  · (phi/sigma)*phi             = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (phi+tau)*n                 = 36  [EXACT n^2=36]
+  ★ (phi+tau)+phi               = 8  [EXACT phi*tau=8]
+  ★ (phi+tau)/phi               = 3  [EXACT n/phi=3]
+  ★ (phi+tau)*tau               = 24  [EXACT J2=24]
+  ★ (phi-tau)+sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi*tau)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*tau)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi/tau)*n                 = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)-tau             = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)*tau             = 28  [EXACT P2=28]
+  ★ (phi-sopfr)+n               = 3  [EXACT n/phi=3]
+  ★ (phi*sopfr)-phi             = 8  [EXACT phi*tau=8]
+  ★ (phi*sopfr)-M3              = 3  [EXACT n/phi=3]
+  ★ (phi+M3)-n                  = 3  [EXACT n/phi=3]
+  ★ (phi+M3)*tau                = 36  [EXACT n^2=36]
+  ★ (phi*M3)-n                  = 8  [EXACT phi*tau=8]
+  ★ (phi*M3)*phi                = 28  [EXACT P2=28]
+  ★ (tau+n)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (tau+n)-M3                  = 3  [EXACT n/phi=3]
+  ★ (tau-n)+sopfr               = 3  [EXACT n/phi=3]
+  ★ (tau*n)+sigma               = 36  [EXACT n^2=36]
+  ★ (tau*n)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*n)+tau                 = 28  [EXACT P2=28]
+  ★ (tau/n)*sigma               = 8  [EXACT phi*tau=8]
+  · (tau/n)/phi                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau+sigma)+sigma           = 28  [EXACT P2=28]
+  ★ (tau+sigma)/phi             = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)/n               = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)-sigma           = 36  [EXACT n^2=36]
+  ★ (tau*sigma)/phi             = 24  [EXACT J2=24]
+  ★ (tau+phi)*n                 = 36  [EXACT n^2=36]
+  ★ (tau+phi)+phi               = 8  [EXACT phi*tau=8]
+  ★ (tau+phi)/phi               = 3  [EXACT n/phi=3]
+  ★ (tau+phi)*tau               = 24  [EXACT J2=24]
+  ★ (tau-phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau-phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau-phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau-phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau*phi)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*phi)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (tau/phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau/phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau/phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau/phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau+sopfr)-n               = 3  [EXACT n/phi=3]
+  ★ (tau+sopfr)*tau             = 36  [EXACT n^2=36]
+  ★ (tau-sopfr)+tau             = 3  [EXACT n/phi=3]
+  ★ (tau*sopfr)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (tau*sopfr)+tau             = 24  [EXACT J2=24]
+  ★ (tau-M3)+n                  = 3  [EXACT n/phi=3]
+  ★ (tau*M3)-tau                = 24  [EXACT J2=24]
+  ★ (sopfr-n)+tau               = 3  [EXACT n/phi=3]
+  ★ (sopfr*n)+n                 = 36  [EXACT n^2=36]
+  ★ (sopfr*n)-n                 = 24  [EXACT J2=24]
+  ★ (sopfr*n)-phi               = 28  [EXACT P2=28]
+  ★ (sopfr+sigma)+M3            = 24  [EXACT J2=24]
+  ★ (sopfr*sigma)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sopfr*sigma)*sigma         = 720  [EXACT 6!=720]
+  ★ (sopfr+phi)-tau             = 3  [EXACT n/phi=3]
+  ★ (sopfr+phi)*tau             = 28  [EXACT P2=28]
+  ★ (sopfr-phi)*sigma           = 36  [EXACT n^2=36]
+  ★ (sopfr-phi)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)-n               = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)*tau             = 36  [EXACT n^2=36]
+  ★ (sopfr-tau)+phi             = 3  [EXACT n/phi=3]
+  ★ (sopfr-tau)+M3              = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)+tau             = 24  [EXACT J2=24]
+  · (sopfr/tau)/tau             = 0.3125  [NEAR omega_m=0.3153 err=0.8880431335236361%]
+  ★ (sopfr+M3)+sigma            = 24  [EXACT J2=24]
+  ★ (sopfr+M3)*phi              = 24  [EXACT J2=24]
+  ★ (sopfr+M3)-tau              = 8  [EXACT phi*tau=8]
+  ★ (sopfr+M3)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (sopfr+M3)/tau              = 3  [EXACT n/phi=3]
+  ★ (sopfr-M3)+sopfr            = 3  [EXACT n/phi=3]
+  ★ (sopfr*M3)-M3               = 28  [EXACT P2=28]
+  ★ (M3+n)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (M3-n)+phi                  = 3  [EXACT n/phi=3]
+  ★ (M3-n)+M3                   = 8  [EXACT phi*tau=8]
+  ★ (M3*n)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (M3*n)-n                    = 36  [EXACT n^2=36]
+  ★ (M3+sigma)+sopfr            = 24  [EXACT J2=24]
+  ★ (M3+phi)-n                  = 3  [EXACT n/phi=3]
+  ★ (M3+phi)*tau                = 36  [EXACT n^2=36]
+  ★ (M3-phi)-phi                = 3  [EXACT n/phi=3]
+  ★ (M3*phi)-n                  = 8  [EXACT phi*tau=8]
+  ★ (M3*phi)*phi                = 28  [EXACT P2=28]
+  ★ (M3-tau)*sigma              = 36  [EXACT n^2=36]
+  ★ (M3-tau)+sopfr              = 8  [EXACT phi*tau=8]
+  ★ (M3*tau)-tau                = 24  [EXACT J2=24]
+  ★ (M3+sopfr)+sigma            = 24  [EXACT J2=24]
+  ★ (M3+sopfr)*phi              = 24  [EXACT J2=24]
+  ★ (M3+sopfr)-tau              = 8  [EXACT phi*tau=8]
+  ★ (M3+sopfr)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (M3+sopfr)/tau              = 3  [EXACT n/phi=3]
+  ★ (M3-sopfr)+n                = 8  [EXACT phi*tau=8]
+  · (M3-sopfr)/n                = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (M3-sopfr)*sigma            = 24  [EXACT J2=24]
+  ★ (M3-sopfr)*tau              = 8  [EXACT phi*tau=8]
+  ★ (M3*sopfr)-M3               = 28  [EXACT P2=28]
+
+─── DFS 요약 ───
+  탐색 경로: 3000
+  EXACT 매칭: 203
+  NEAR 매칭:  30
+
+
+=== gap_finder verified ===
+╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — 빈공간 × 위상변환 교차 (Bridge)           ║
+╚══════════════════════════════════════════════════════════╝
+
+HEXA-LANG v0.1.0 -- The Perfect Number Language
+sigma(n)*phi(n) = n*tau(n) iff n = 6
+Type :quit to exit, :help for help
+
+hexa> HEXA-LANG v0.1.0 -- The Perfect Number Language
+sigma(n)*phi(n) = n*tau(n) iff n = 6
+Type :quit to exit, :help for help
+
+hexa> ╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — DFS 위상변환 탐색 (depth=2)             ║
+╚══════════════════════════════════════════════════════════╝
+
+기저: n=6, σ=12, φ=2, τ=4, sopfr=5, M3=7
+연산: +, -, *, /
+
+─── Depth 1 ───
+  ★ n+phi               = 8  [EXACT phi*tau=8]
+  · n-phi               = 4  [=tau]
+  · n*phi               = 12  [=sigma]
+  ★ n/phi               = 3  [EXACT n/phi=3]
+  · n-tau               = 2  [=phi]
+  ★ n*tau               = 24  [EXACT J2=24]
+  · sigma-n             = 6  [=n]
+  · sigma/n             = 2  [=phi]
+  ★ sigma*phi           = 24  [EXACT J2=24]
+  · sigma/phi           = 6  [=n]
+  ★ sigma-tau           = 8  [EXACT phi*tau=8]
+  ★ sigma*tau           = 48  [EXACT sigma*tau=48]
+  ★ sigma/tau           = 3  [EXACT n/phi=3]
+  · sigma-sopfr         = 7  [=M3]
+  · sigma-M3            = 5  [=sopfr]
+  ★ phi+n               = 8  [EXACT phi*tau=8]
+  · phi*n               = 12  [=sigma]
+  · phi/n               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ phi*sigma           = 24  [EXACT J2=24]
+  · phi+tau             = 6  [=n]
+  ★ phi*tau             = 8  [EXACT phi*tau=8]
+  · phi+sopfr           = 7  [=M3]
+  ★ tau*n               = 24  [EXACT J2=24]
+  ★ tau*sigma           = 48  [EXACT sigma*tau=48]
+  · tau/sigma           = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  · tau+phi             = 6  [=n]
+  · tau-phi             = 2  [=phi]
+  ★ tau*phi             = 8  [EXACT phi*tau=8]
+  · tau/phi             = 2  [=phi]
+  ★ tau*M3              = 28  [EXACT P2=28]
+  · sopfr+phi           = 7  [=M3]
+  ★ sopfr-phi           = 3  [EXACT n/phi=3]
+  · sopfr+M3            = 12  [=sigma]
+  · M3-phi              = 5  [=sopfr]
+  ★ M3-tau              = 3  [EXACT n/phi=3]
+  ★ M3*tau              = 28  [EXACT P2=28]
+  · M3+sopfr            = 12  [=sigma]
+  · M3-sopfr            = 2  [=phi]
+
+─── Depth 2 (중간결과 OP 기저) ───
+  ★ (n+sigma)+n                 = 24  [EXACT J2=24]
+  ★ (n+sigma)/n                 = 3  [EXACT n/phi=3]
+  ★ (n+sigma)*phi               = 36  [EXACT n^2=36]
+╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — DFS 위상변환 탐색 (depth=2)             ║
+╚══════════════════════════════════════════════════════════╝
+
+기저: n=6, σ=12, φ=2, τ=4, sopfr=5, M3=7
+연산: +, -, *, /
+
+─── Depth 1 ───
+  ★ n+phi               = 8  [EXACT phi*tau=8]
+  · n-phi               = 4  [=tau]
+  · n*phi               = 12  [=sigma]
+  ★ n/phi               = 3  [EXACT n/phi=3]
+  · n-tau               = 2  [=phi]
+  ★ n*tau               = 24  [EXACT J2=24]
+  · sigma-n             = 6  [=n]
+  · sigma/n             = 2  [=phi]
+  ★ sigma*phi           = 24  [EXACT J2=24]
+  · sigma/phi           = 6  [=n]
+  ★ sigma-tau           = 8  [EXACT phi*tau=8]
+  ★ sigma*tau           = 48  [EXACT sigma*tau=48]
+  ★ sigma/tau           = 3  [EXACT n/phi=3]
+  · sigma-sopfr         = 7  [=M3]
+  · sigma-M3            = 5  [=sopfr]
+  ★ phi+n               = 8  [EXACT phi*tau=8]
+  · phi*n               = 12  [=sigma]
+  · phi/n               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ phi*sigma           = 24  [EXACT J2=24]
+  · phi+tau             = 6  [=n]
+  ★ phi*tau             = 8  [EXACT phi*tau=8]
+  · phi+sopfr           = 7  [=M3]
+  ★ tau*n               = 24  [EXACT J2=24]
+  ★ tau*sigma           = 48  [EXACT sigma*tau=48]
+  · tau/sigma           = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  · tau+phi             = 6  [=n]
+  · tau-phi             = 2  [=phi]
+  ★ tau*phi             = 8  [EXACT phi*tau=8]
+  · tau/phi             = 2  [=phi]
+  ★ tau*M3              = 28  [EXACT P2=28]
+  · sopfr+phi           = 7  [=M3]
+  ★ sopfr-phi           = 3  [EXACT n/phi=3]
+  · sopfr+M3            = 12  [=sigma]
+  · M3-phi              = 5  [=sopfr]
+  ★ M3-tau              = 3  [EXACT n/phi=3]
+  ★ M3*tau              = 28  [EXACT P2=28]
+  ★ (n*sigma)/phi               = 36  [EXACT n^2=36]
+  · M3+sopfr            = 12  [=sigma]
+  · M3-sopfr            = 2  [=phi]
+
+─── Depth 2 (중간결과 OP 기저) ───
+  ★ (n+sigma)+n                 = 24  [EXACT J2=24]
+  ★ (n+sigma)/n                 = 3  [EXACT n/phi=3]
+  ★ (n/sigma)*n                 = 3  [EXACT n/phi=3]
+  ★ (n+sigma)*phi               = 36  [EXACT n^2=36]
+  ★ (n+phi)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (n+phi)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (n*sigma)/phi               = 36  [EXACT n^2=36]
+  ★ (n-phi)*n                   = 24  [EXACT J2=24]
+  ★ (n-phi)*sigma               = 48  [EXACT sigma*tau=48]
+  · (n-phi)/sigma               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-phi)*phi                 = 8  [EXACT phi*tau=8]
+  ★ (n/sigma)*n                 = 3  [EXACT n/phi=3]
+  ★ (n-phi)+tau                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)*M3                  = 28  [EXACT P2=28]
+  ★ (n*phi)+sigma               = 24  [EXACT J2=24]
+  ★ (n*phi)*phi                 = 24  [EXACT J2=24]
+  ★ (n*phi)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (n+phi)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (n*phi)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (n*phi)/tau                 = 3  [EXACT n/phi=3]
+  ★ (n+phi)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (n/phi)*sigma               = 36  [EXACT n^2=36]
+  ★ (n-phi)*n                   = 24  [EXACT J2=24]
+  ★ (n/phi)+sopfr               = 8  [EXACT phi*tau=8]
+  ★ (n-phi)*sigma               = 48  [EXACT sigma*tau=48]
+  · (n-phi)/sigma               = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-phi)*phi                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)+tau                 = 8  [EXACT phi*tau=8]
+  ★ (n+tau)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (n-phi)*M3                  = 28  [EXACT P2=28]
+  ★ (n*phi)+sigma               = 24  [EXACT J2=24]
+  ★ (n*phi)*phi                 = 24  [EXACT J2=24]
+  ★ (n*phi)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*phi)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (n*phi)/tau                 = 3  [EXACT n/phi=3]
+  ★ (n+tau)-M3                  = 3  [EXACT n/phi=3]
+  ★ (n-tau)+n                   = 8  [EXACT phi*tau=8]
+  · (n-tau)/n                   = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-tau)*sigma               = 24  [EXACT J2=24]
+  ★ (n-tau)*tau                 = 8  [EXACT phi*tau=8]
+  ★ (n/phi)*sigma               = 36  [EXACT n^2=36]
+  ★ (n*tau)+sigma               = 36  [EXACT n^2=36]
+  ★ (n/phi)+sopfr               = 8  [EXACT phi*tau=8]
+  ★ (n*tau)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (n*tau)+tau                 = 28  [EXACT P2=28]
+  ★ (n+tau)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (n/tau)*phi                 = 3  [EXACT n/phi=3]
+  ★ (n+tau)-M3                  = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+phi               = 3  [EXACT n/phi=3]
+  ★ (n-tau)+n                   = 8  [EXACT phi*tau=8]
+  · (n-tau)/n                   = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (n-tau)*sigma               = 24  [EXACT J2=24]
+  ★ (n-sopfr)+M3                = 8  [EXACT phi*tau=8]
+  ★ (n*sopfr)+n                 = 36  [EXACT n^2=36]
+  ★ (n*sopfr)-n                 = 24  [EXACT J2=24]
+  ★ (n-tau)*tau                 = 8  [EXACT phi*tau=8]
+  ★ (n*sopfr)-phi               = 28  [EXACT P2=28]
+  ★ (n*tau)+sigma               = 36  [EXACT n^2=36]
+  ★ (n*tau)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (n*tau)+tau                 = 28  [EXACT P2=28]
+  ★ (n/tau)*phi                 = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+phi               = 3  [EXACT n/phi=3]
+  ★ (n-sopfr)+M3                = 8  [EXACT phi*tau=8]
+  ★ (n+M3)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (n*sopfr)+n                 = 36  [EXACT n^2=36]
+  ★ (n*sopfr)-n                 = 24  [EXACT J2=24]
+  ★ (n*sopfr)-phi               = 28  [EXACT P2=28]
+  ★ (n-M3)+tau                  = 3  [EXACT n/phi=3]
+  ★ (n*M3)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (n*M3)-n                    = 36  [EXACT n^2=36]
+  ★ (n+M3)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (sigma+n)+n                 = 24  [EXACT J2=24]
+  ★ (sigma+n)/n                 = 3  [EXACT n/phi=3]
+  ★ (n-M3)+tau                  = 3  [EXACT n/phi=3]
+  ★ (sigma+n)*phi               = 36  [EXACT n^2=36]
+  ★ (n*M3)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (n*M3)-n                    = 36  [EXACT n^2=36]
+  ★ (sigma-n)*n                 = 36  [EXACT n^2=36]
+  ★ (sigma-n)+phi               = 8  [EXACT phi*tau=8]
+  ★ (sigma-n)/phi               = 3  [EXACT n/phi=3]
+  ★ (sigma-n)*tau               = 24  [EXACT J2=24]
+  ★ (sigma*n)/phi               = 36  [EXACT n^2=36]
+  ★ (sigma+n)+n                 = 24  [EXACT J2=24]
+  ★ (sigma+n)/n                 = 3  [EXACT n/phi=3]
+  ★ (sigma+n)*phi               = 36  [EXACT n^2=36]
+  ★ (sigma/n)+n                 = 8  [EXACT phi*tau=8]
+  · (sigma/n)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (sigma/n)*sigma             = 24  [EXACT J2=24]
+  ★ (sigma-n)*n                 = 36  [EXACT n^2=36]
+  ★ (sigma/n)*tau               = 8  [EXACT phi*tau=8]
+  ★ (sigma-n)+phi               = 8  [EXACT phi*tau=8]
+  ★ (sigma-n)/phi               = 3  [EXACT n/phi=3]
+  ★ (sigma-n)*tau               = 24  [EXACT J2=24]
+  ★ (sigma+phi)-n               = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)*phi             = 28  [EXACT P2=28]
+  ★ (sigma*n)/phi               = 36  [EXACT n^2=36]
+  ★ (sigma/n)+n                 = 8  [EXACT phi*tau=8]
+  · (sigma/n)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (sigma/n)*sigma             = 24  [EXACT J2=24]
+  ★ (sigma-phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sigma*phi)+sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*phi)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (sigma*phi)+tau             = 28  [EXACT P2=28]
+  ★ (sigma/n)*tau               = 8  [EXACT phi*tau=8]
+  ★ (sigma/phi)*n               = 36  [EXACT n^2=36]
+  ★ (sigma+phi)-n               = 8  [EXACT phi*tau=8]
+  ★ (sigma/phi)+phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma+phi)*phi             = 28  [EXACT P2=28]
+  ★ (sigma/phi)/phi             = 3  [EXACT n/phi=3]
+  ★ (sigma/phi)*tau             = 24  [EXACT J2=24]
+  ★ (sigma+tau)+sigma           = 28  [EXACT P2=28]
+  ★ (sigma-phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma+tau)/phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sigma*phi)+sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*phi)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (sigma-tau)*n               = 48  [EXACT sigma*tau=48]
+  ★ (sigma*phi)+tau             = 28  [EXACT P2=28]
+  ★ (sigma/phi)*n               = 36  [EXACT n^2=36]
+  ★ (sigma/phi)+phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma-tau)-sopfr           = 3  [EXACT n/phi=3]
+  ★ (sigma*tau)/n               = 8  [EXACT phi*tau=8]
+  ★ (sigma*tau)-sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*tau)/phi             = 24  [EXACT J2=24]
+  ★ (sigma/phi)/phi             = 3  [EXACT n/phi=3]
+  ★ (sigma/phi)*tau             = 24  [EXACT J2=24]
+  ★ (sigma/tau)*sigma           = 36  [EXACT n^2=36]
+  ★ (sigma/tau)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sigma+tau)+sigma           = 28  [EXACT P2=28]
+  ★ (sigma+tau)/phi             = 8  [EXACT phi*tau=8]
+  ★ (sigma+sopfr)+M3            = 24  [EXACT J2=24]
+  ★ (sigma-tau)*n               = 48  [EXACT sigma*tau=48]
+  ★ (sigma-sopfr)-tau           = 3  [EXACT n/phi=3]
+  ★ (sigma-sopfr)*tau           = 28  [EXACT P2=28]
+  ★ (sigma-tau)-sopfr           = 3  [EXACT n/phi=3]
+  ★ (sigma*tau)/n               = 8  [EXACT phi*tau=8]
+  ★ (sigma*sopfr)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sigma*sopfr)*sigma         = 720  [EXACT 6!=720]
+  ★ (sigma*tau)-sigma           = 36  [EXACT n^2=36]
+  ★ (sigma*tau)/phi             = 24  [EXACT J2=24]
+  ★ (sigma/tau)*sigma           = 36  [EXACT n^2=36]
+  ★ (sigma/tau)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sigma+M3)+sopfr            = 24  [EXACT J2=24]
+  ★ (sigma+sopfr)+M3            = 24  [EXACT J2=24]
+  ★ (sigma-sopfr)-tau           = 3  [EXACT n/phi=3]
+  ★ (sigma-sopfr)*tau           = 28  [EXACT P2=28]
+  ★ (sigma-M3)-phi              = 3  [EXACT n/phi=3]
+  ★ (sigma*sopfr)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sigma*sopfr)*sigma         = 720  [EXACT 6!=720]
+  ★ (sigma+M3)+sopfr            = 24  [EXACT J2=24]
+  ★ (sigma-M3)-phi              = 3  [EXACT n/phi=3]
+  ★ (phi+n)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (phi+n)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (phi-n)+sigma               = 8  [EXACT phi*tau=8]
+  ★ (phi+n)*n                   = 48  [EXACT sigma*tau=48]
+  ★ (phi-n)+M3                  = 3  [EXACT n/phi=3]
+  ★ (phi+n)-sopfr               = 3  [EXACT n/phi=3]
+  ★ (phi*n)+sigma               = 24  [EXACT J2=24]
+  ★ (phi*n)*phi                 = 24  [EXACT J2=24]
+  ★ (phi*n)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (phi*n)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (phi-n)+sigma               = 8  [EXACT phi*tau=8]
+  ★ (phi*n)/tau                 = 3  [EXACT n/phi=3]
+  ★ (phi-n)+M3                  = 3  [EXACT n/phi=3]
+  ★ (phi*n)+sigma               = 24  [EXACT J2=24]
+  ★ (phi*n)*phi                 = 24  [EXACT J2=24]
+  ★ (phi*n)-tau                 = 8  [EXACT phi*tau=8]
+  ★ (phi+sigma)-n               = 8  [EXACT phi*tau=8]
+  ★ (phi*n)*tau                 = 48  [EXACT sigma*tau=48]
+  ★ (phi*n)/tau                 = 3  [EXACT n/phi=3]
+  ★ (phi+sigma)*phi             = 28  [EXACT P2=28]
+  ★ (phi*sigma)+sigma           = 36  [EXACT n^2=36]
+  ★ (phi*sigma)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (phi*sigma)+tau             = 28  [EXACT P2=28]
+  ★ (phi+sigma)-n               = 8  [EXACT phi*tau=8]
+  ★ (phi+sigma)*phi             = 28  [EXACT P2=28]
+  · (phi/sigma)*phi             = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (phi+tau)*n                 = 36  [EXACT n^2=36]
+  ★ (phi+tau)+phi               = 8  [EXACT phi*tau=8]
+  ★ (phi+tau)/phi               = 3  [EXACT n/phi=3]
+  ★ (phi+tau)*tau               = 24  [EXACT J2=24]
+  ★ (phi*sigma)+sigma           = 36  [EXACT n^2=36]
+  ★ (phi*sigma)*phi             = 48  [EXACT sigma*tau=48]
+  ★ (phi-tau)+sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi*sigma)+tau             = 28  [EXACT P2=28]
+  ★ (phi*tau)*n                 = 48  [EXACT sigma*tau=48]
+  · (phi/sigma)*phi             = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (phi*tau)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi+tau)*n                 = 36  [EXACT n^2=36]
+  ★ (phi/tau)*n                 = 3  [EXACT n/phi=3]
+  ★ (phi+tau)+phi               = 8  [EXACT phi*tau=8]
+  ★ (phi+tau)/phi               = 3  [EXACT n/phi=3]
+  ★ (phi+tau)*tau               = 24  [EXACT J2=24]
+  ★ (phi-tau)+sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)-tau             = 3  [EXACT n/phi=3]
+  ★ (phi*tau)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (phi+sopfr)*tau             = 28  [EXACT P2=28]
+  ★ (phi*tau)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (phi/tau)*n                 = 3  [EXACT n/phi=3]
+  ★ (phi-sopfr)+n               = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)-tau             = 3  [EXACT n/phi=3]
+  ★ (phi+sopfr)*tau             = 28  [EXACT P2=28]
+  ★ (phi-sopfr)+n               = 3  [EXACT n/phi=3]
+  ★ (phi*sopfr)-phi             = 8  [EXACT phi*tau=8]
+  ★ (phi*sopfr)-M3              = 3  [EXACT n/phi=3]
+  ★ (phi*sopfr)-phi             = 8  [EXACT phi*tau=8]
+  ★ (phi*sopfr)-M3              = 3  [EXACT n/phi=3]
+  ★ (phi+M3)-n                  = 3  [EXACT n/phi=3]
+  ★ (phi+M3)*tau                = 36  [EXACT n^2=36]
+  ★ (phi+M3)-n                  = 3  [EXACT n/phi=3]
+  ★ (phi+M3)*tau                = 36  [EXACT n^2=36]
+  ★ (phi*M3)-n                  = 8  [EXACT phi*tau=8]
+  ★ (phi*M3)*phi                = 28  [EXACT P2=28]
+  ★ (phi*M3)-n                  = 8  [EXACT phi*tau=8]
+  ★ (phi*M3)*phi                = 28  [EXACT P2=28]
+  ★ (tau+n)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (tau+n)-M3                  = 3  [EXACT n/phi=3]
+  ★ (tau-n)+sopfr               = 3  [EXACT n/phi=3]
+  ★ (tau*n)+sigma               = 36  [EXACT n^2=36]
+  ★ (tau*n)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (tau+n)-phi                 = 8  [EXACT phi*tau=8]
+  ★ (tau*n)+tau                 = 28  [EXACT P2=28]
+  ★ (tau+n)-M3                  = 3  [EXACT n/phi=3]
+  ★ (tau/n)*sigma               = 8  [EXACT phi*tau=8]
+  · (tau/n)/phi                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau-n)+sopfr               = 3  [EXACT n/phi=3]
+  ★ (tau+sigma)+sigma           = 28  [EXACT P2=28]
+  ★ (tau*n)+sigma               = 36  [EXACT n^2=36]
+  ★ (tau*n)*phi                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*n)+tau                 = 28  [EXACT P2=28]
+  ★ (tau+sigma)/phi             = 8  [EXACT phi*tau=8]
+  ★ (tau/n)*sigma               = 8  [EXACT phi*tau=8]
+  · (tau/n)/phi                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau*sigma)/n               = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)-sigma           = 36  [EXACT n^2=36]
+  ★ (tau+sigma)+sigma           = 28  [EXACT P2=28]
+  ★ (tau*sigma)/phi             = 24  [EXACT J2=24]
+  ★ (tau+sigma)/phi             = 8  [EXACT phi*tau=8]
+  ★ (tau+phi)*n                 = 36  [EXACT n^2=36]
+  ★ (tau+phi)+phi               = 8  [EXACT phi*tau=8]
+  ★ (tau+phi)/phi               = 3  [EXACT n/phi=3]
+  ★ (tau+phi)*tau               = 24  [EXACT J2=24]
+  ★ (tau*sigma)/n               = 8  [EXACT phi*tau=8]
+  ★ (tau*sigma)-sigma           = 36  [EXACT n^2=36]
+  ★ (tau*sigma)/phi             = 24  [EXACT J2=24]
+  ★ (tau-phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau-phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau-phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau-phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau*phi)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*phi)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (tau/phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau/phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau/phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau/phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau+sopfr)-n               = 3  [EXACT n/phi=3]
+  ★ (tau+phi)*n                 = 36  [EXACT n^2=36]
+  ★ (tau+phi)+phi               = 8  [EXACT phi*tau=8]
+  ★ (tau+phi)/phi               = 3  [EXACT n/phi=3]
+  ★ (tau+sopfr)*tau             = 36  [EXACT n^2=36]
+  ★ (tau+phi)*tau               = 24  [EXACT J2=24]
+  ★ (tau-phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau-phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau-phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau-sopfr)+tau             = 3  [EXACT n/phi=3]
+  ★ (tau-phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau*phi)*n                 = 48  [EXACT sigma*tau=48]
+  ★ (tau*sopfr)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (tau*phi)-sopfr             = 3  [EXACT n/phi=3]
+  ★ (tau*sopfr)+tau             = 24  [EXACT J2=24]
+  ★ (tau/phi)+n                 = 8  [EXACT phi*tau=8]
+  · (tau/phi)/n                 = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (tau/phi)*sigma             = 24  [EXACT J2=24]
+  ★ (tau/phi)*tau               = 8  [EXACT phi*tau=8]
+  ★ (tau+sopfr)-n               = 3  [EXACT n/phi=3]
+  ★ (tau+sopfr)*tau             = 36  [EXACT n^2=36]
+  ★ (tau-sopfr)+tau             = 3  [EXACT n/phi=3]
+  ★ (tau*sopfr)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (tau-M3)+n                  = 3  [EXACT n/phi=3]
+  ★ (tau*sopfr)+tau             = 24  [EXACT J2=24]
+  ★ (tau*M3)-tau                = 24  [EXACT J2=24]
+  ★ (tau-M3)+n                  = 3  [EXACT n/phi=3]
+  ★ (tau*M3)-tau                = 24  [EXACT J2=24]
+  ★ (sopfr-n)+tau               = 3  [EXACT n/phi=3]
+  ★ (sopfr*n)+n                 = 36  [EXACT n^2=36]
+  ★ (sopfr*n)-n                 = 24  [EXACT J2=24]
+  ★ (sopfr*n)-phi               = 28  [EXACT P2=28]
+  ★ (sopfr-n)+tau               = 3  [EXACT n/phi=3]
+  ★ (sopfr+sigma)+M3            = 24  [EXACT J2=24]
+  ★ (sopfr*n)+n                 = 36  [EXACT n^2=36]
+  ★ (sopfr*n)-n                 = 24  [EXACT J2=24]
+  ★ (sopfr*n)-phi               = 28  [EXACT P2=28]
+  ★ (sopfr*sigma)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sopfr*sigma)*sigma         = 720  [EXACT 6!=720]
+  ★ (sopfr+sigma)+M3            = 24  [EXACT J2=24]
+  ★ (sopfr*sigma)-sigma         = 48  [EXACT sigma*tau=48]
+  ★ (sopfr*sigma)*sigma         = 720  [EXACT 6!=720]
+  ★ (sopfr+phi)-tau             = 3  [EXACT n/phi=3]
+  ★ (sopfr+phi)*tau             = 28  [EXACT P2=28]
+  ★ (sopfr-phi)*sigma           = 36  [EXACT n^2=36]
+  ★ (sopfr-phi)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sopfr+phi)-tau             = 3  [EXACT n/phi=3]
+  ★ (sopfr+phi)*tau             = 28  [EXACT P2=28]
+  ★ (sopfr*phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sopfr-phi)*sigma           = 36  [EXACT n^2=36]
+  ★ (sopfr-phi)+sopfr           = 8  [EXACT phi*tau=8]
+  ★ (sopfr+tau)-n               = 3  [EXACT n/phi=3]
+  ★ (sopfr+tau)*tau             = 36  [EXACT n^2=36]
+  ★ (sopfr*phi)-phi             = 8  [EXACT phi*tau=8]
+  ★ (sopfr*phi)-M3              = 3  [EXACT n/phi=3]
+  ★ (sopfr-tau)+phi             = 3  [EXACT n/phi=3]
+  ★ (sopfr-tau)+M3              = 8  [EXACT phi*tau=8]
+  ★ (sopfr+tau)-n               = 3  [EXACT n/phi=3]
+  ★ (sopfr*tau)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)+tau             = 24  [EXACT J2=24]
+  ★ (sopfr+tau)*tau             = 36  [EXACT n^2=36]
+  · (sopfr/tau)/tau             = 0.3125  [NEAR omega_m=0.3153 err=0.8880431335236361%]
+  ★ (sopfr-tau)+phi             = 3  [EXACT n/phi=3]
+  ★ (sopfr+M3)+sigma            = 24  [EXACT J2=24]
+  ★ (sopfr-tau)+M3              = 8  [EXACT phi*tau=8]
+  ★ (sopfr*tau)-sigma           = 8  [EXACT phi*tau=8]
+  ★ (sopfr+M3)*phi              = 24  [EXACT J2=24]
+  ★ (sopfr+M3)-tau              = 8  [EXACT phi*tau=8]
+  ★ (sopfr+M3)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (sopfr+M3)/tau              = 3  [EXACT n/phi=3]
+  ★ (sopfr*tau)+tau             = 24  [EXACT J2=24]
+  ★ (sopfr-M3)+sopfr            = 3  [EXACT n/phi=3]
+  · (sopfr/tau)/tau             = 0.3125  [NEAR omega_m=0.3153 err=0.8880431335236361%]
+  ★ (sopfr*M3)-M3               = 28  [EXACT P2=28]
+  ★ (sopfr+M3)+sigma            = 24  [EXACT J2=24]
+  ★ (sopfr+M3)*phi              = 24  [EXACT J2=24]
+  ★ (sopfr+M3)-tau              = 8  [EXACT phi*tau=8]
+  ★ (sopfr+M3)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (sopfr+M3)/tau              = 3  [EXACT n/phi=3]
+  ★ (M3+n)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (M3-n)+phi                  = 3  [EXACT n/phi=3]
+  ★ (sopfr-M3)+sopfr            = 3  [EXACT n/phi=3]
+  ★ (M3-n)+M3                   = 8  [EXACT phi*tau=8]
+  ★ (sopfr*M3)-M3               = 28  [EXACT P2=28]
+  ★ (M3+n)-sopfr                = 8  [EXACT phi*tau=8]
+  ★ (M3*n)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (M3*n)-n                    = 36  [EXACT n^2=36]
+  ★ (M3-n)+phi                  = 3  [EXACT n/phi=3]
+  ★ (M3-n)+M3                   = 8  [EXACT phi*tau=8]
+  ★ (M3*n)+n                    = 48  [EXACT sigma*tau=48]
+  ★ (M3*n)-n                    = 36  [EXACT n^2=36]
+  ★ (M3+sigma)+sopfr            = 24  [EXACT J2=24]
+  ★ (M3+sigma)+sopfr            = 24  [EXACT J2=24]
+  ★ (M3+phi)-n                  = 3  [EXACT n/phi=3]
+  ★ (M3+phi)*tau                = 36  [EXACT n^2=36]
+  ★ (M3-phi)-phi                = 3  [EXACT n/phi=3]
+  ★ (M3+phi)-n                  = 3  [EXACT n/phi=3]
+  ★ (M3*phi)-n                  = 8  [EXACT phi*tau=8]
+  ★ (M3*phi)*phi                = 28  [EXACT P2=28]
+  ★ (M3+phi)*tau                = 36  [EXACT n^2=36]
+  ★ (M3-phi)-phi                = 3  [EXACT n/phi=3]
+  ★ (M3*phi)-n                  = 8  [EXACT phi*tau=8]
+  ★ (M3*phi)*phi                = 28  [EXACT P2=28]
+  ★ (M3-tau)*sigma              = 36  [EXACT n^2=36]
+  ★ (M3-tau)+sopfr              = 8  [EXACT phi*tau=8]
+  ★ (M3*tau)-tau                = 24  [EXACT J2=24]
+  ★ (M3-tau)*sigma              = 36  [EXACT n^2=36]
+  ★ (M3-tau)+sopfr              = 8  [EXACT phi*tau=8]
+  ★ (M3*tau)-tau                = 24  [EXACT J2=24]
+  ★ (M3+sopfr)+sigma            = 24  [EXACT J2=24]
+  ★ (M3+sopfr)*phi              = 24  [EXACT J2=24]
+  ★ (M3+sopfr)-tau              = 8  [EXACT phi*tau=8]
+  ★ (M3+sopfr)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (M3+sopfr)/tau              = 3  [EXACT n/phi=3]
+  ★ (M3-sopfr)+n                = 8  [EXACT phi*tau=8]
+  ★ (M3+sopfr)+sigma            = 24  [EXACT J2=24]
+  ★ (M3+sopfr)*phi              = 24  [EXACT J2=24]
+  ★ (M3+sopfr)-tau              = 8  [EXACT phi*tau=8]
+  ★ (M3+sopfr)*tau              = 48  [EXACT sigma*tau=48]
+  ★ (M3+sopfr)/tau              = 3  [EXACT n/phi=3]
+  · (M3-sopfr)/n                = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (M3-sopfr)*sigma            = 24  [EXACT J2=24]
+  ★ (M3-sopfr)+n                = 8  [EXACT phi*tau=8]
+  · (M3-sopfr)/n                = 0.3333333333333333  [NEAR meta_fp=0.3333 err=0.0100010001000089%]
+  ★ (M3-sopfr)*sigma            = 24  [EXACT J2=24]
+  ★ (M3-sopfr)*tau              = 8  [EXACT phi*tau=8]
+  ★ (M3-sopfr)*tau              = 8  [EXACT phi*tau=8]
+  ★ (M3*sopfr)-M3               = 28  [EXACT P2=28]
+  ★ (M3*sopfr)-M3               = 28  [EXACT P2=28]
+
+─── DFS 요약 ───
+  탐색 경로: 3000
+  EXACT 매칭: 203
+  NEAR 매칭:  30
+
+
+─── DFS 요약 ───
+  탐색 경로: 3000
+  EXACT 매칭: 203
+  NEAR 매칭:  30
+
+
+=== gap_finder verified ===
+
+=== gap_finder verified ===
+╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — 빈공간 × 위상변환 교차 (Bridge)           ║
+╚══════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════╗
+║  GAP FINDER — 빈공간 × 위상변환 교차 (Bridge)           ║
+╚══════════════════════════════════════════════════════════╝
+
