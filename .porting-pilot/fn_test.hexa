@@ -1,0 +1,18 @@
+// Probe: fn definition + params + return + recursion
+fn add(a, b) {
+    return a + b
+}
+
+fn fact(n) {
+    if n <= 1 { return 1 }
+    return n * fact(n - 1)
+}
+
+fn section(title) {
+    println("=== " + title + " ===")
+}
+
+section("fn smoke")
+println("add(3,4) =", add(3, 4))
+println("fact(5) =", fact(5))
+println("fact(10) =", fact(10))

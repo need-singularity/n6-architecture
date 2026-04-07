@@ -139,6 +139,36 @@ for (name, dim, val, expr) in &reps { ... }
 **영향:** Rust에서 흔한 패턴
 **필요:** dot-method 또는 함수형으로 통일 정책
 
+### B-19. Float 나눗셈이 정수 나눗셈으로 변환 (CRITICAL)
+
+**증상:** `let z = 12.0 / 4.0; println(z)` → `1` (정수 나눗셈 결과). 마땅히 `3.0`.
+**검증 (Pilot 2nd-file probe):**
+```
+F1: 12.0 / 4.0 = 1
+F5: pct(102.0, 100.0) = 0     // (102.0 - 100.0) / 100.0 * 100.0
+```
+**영향:** 모든 물리/엔지니어링 calc (energy-calc, fusion-calc, optics-calc, chip-power-calc, consciousness-calc, semiconductor-calc 등) — 정수만 다루는 gut-calc 외 거의 전부
+**필요:** float literal 정확히 분기, float `/` 연산자가 HexaVal float division 사용
+
+### B-20. Float `abs()` runtime tag mismatch (CRITICAL)
+
+**증상:** `abs(-3.5)` → `4615063718147915776` (float bit pattern을 int로 해석한 값)
+**검증:** `abs(-3.5) = 4615063718147915776` ← `-3.5`의 IEEE 754 비트를 int64로 본 값
+**영향:** `check()` 류 헬퍼(`(measured - predicted).abs()`)를 사용하는 모든 calc
+**필요:** runtime `hexa_abs`가 HexaTag 분기 (TAG_FLOAT면 fabs, TAG_INT면 llabs)
+
+### B-21. `String.repeat(n)` 미지원
+
+**증상:** `"=".repeat(20)` → C 코드에 `/* Call */` 빈 자리만 emit, 컴파일 실패
+**영향:** L2 calc 다수 (`section()` 헬퍼에서 구분선 출력)
+**필요:** codegen에서 `.repeat(n)` 메서드 → `hexa_str_repeat(s, n)` 호출
+
+### B-22. Bool `to_string` 출력이 `0/1` (minor)
+
+**증상:** `println("a && b =", false)` → `a && b = 0`. Rust는 `false`/`true` 문자열.
+**영향:** G3 byte-perfect에 영향 (Rust calc 다수가 `{:?}` 또는 `{}` 로 bool 출력)
+**필요:** `to_string`에서 TAG_BOOL → `"true"`/`"false"`
+
 ### B-11. 빌드 산출물 cleanup / 출력 경로
 
 **증상:** `.c` 중간 파일이 소스 옆에 남음. `-I` 플래그가 `ready/self` 상대경로로 하드코딩 → cwd 의존
