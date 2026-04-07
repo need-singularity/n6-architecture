@@ -104,6 +104,41 @@ error: use of undeclared identifier 'ranks'
 **영향:** 루프 안에서 외부 변수 사용 불가 → 사실상 모든 비자명 프로그램 불가능
 **필요:** codegen_c2의 블록 스코프 처리 — 루프 본문 C 블록이 외부 식별자를 볼 수 있게 emit
 
+### B-14. 임베디드 변수 치환 (HIGH IMPACT)
+
+**증상:** Rust `println!("  J₂(6) = σ·φ = n·τ = {j2}");` 같은 brace 안 식별자 직접 치환 등가 부재
+**영향:** L2 calc의 거의 모든 println이 이 형태. 우회는 string concat으로 가능하나 가독성/정확도 모두 손해
+**필요:** `format!("text {var}")` 또는 `println!("text {var}")` 처럼 식별자 직접 임베드
+
+### B-15. 튜플 배열 + 구조분해 for-in (HIGH IMPACT)
+
+**증상:** Rust
+```rust
+let reps = [("5̄", 5, sopfr, "sopfr(6)"), ("10", 10, sigma-phi, "σ-φ"), ...];
+for (name, dim, val, expr) in &reps { ... }
+```
+등가 미확인. parallel array(N개)로 우회 가능하나 calc 1개당 4~6배 줄수 증가
+**영향:** L2 calc PART 3/4/5/6 같은 표 출력 패턴 (gut-calc만 4회)
+**필요:** 튜플 리터럴 + for-in 구조분해
+
+### B-16. if-as-expression in argument position
+
+**증상:** `let mark = if matched { "✓" } else { "✗" };` 또는 `println!("{}", if x { ... } else { ... })` 미확인
+**영향:** L2 calc 다수
+**필요:** if 식이 값 반환
+
+### B-17. `mut` 변수 + 복합 대입 (`+=` `-=` 등)
+
+**증상:** `let mut total = 0; total += count;` 미확인 (`matches = matches + 1`로 우회는 가능)
+**영향:** 카운터·누산기 사용 코드
+**필요:** `+=` `-=` `*=` 토큰 또는 명시적 reassignment 안정성
+
+### B-18. 메서드 호출 syntax (`.len()`, `.iter()` 등)
+
+**증상:** `checks.len()` 같은 dot-method 호출 미확인 (`len(checks)` 함수형으로 우회 가능)
+**영향:** Rust에서 흔한 패턴
+**필요:** dot-method 또는 함수형으로 통일 정책
+
 ### B-11. 빌드 산출물 cleanup / 출력 경로
 
 **증상:** `.c` 중간 파일이 소스 옆에 남음. `-I` 플래그가 `ready/self` 상대경로로 하드코딩 → cwd 의존
@@ -114,9 +149,10 @@ error: use of undeclared identifier 'ranks'
 
 | 우선 | 차단 항목 | 해소되면 가능해지는 것 |
 |---|---|---|
-| **P-1** | **B-12, B-13** | **모든 비자명 프로그램** (루프+배열) |
-| **P0** | B-1, B-2, B-11 | 기본 sweep 진입 |
-| **P0** | B-3, B-4 | L2 sweep 가능 |
+| **P-1** | ~~B-12, B-13~~ ✅해소 | — |
+| **P0** | ~~B-1, B-2~~ ✅해소, B-11 | 기본 sweep 진입 |
+| **P0** | B-3a/b/c, B-4(부분), **B-14, B-15** | L2 sweep 효율적 진입 |
+| P1 | B-16, B-17, B-18 | L2 직역 품질 |
 | P1 | B-5, B-6 | L2 품질 유지 |
 | P1 | B-7, B-8, B-9 | L1 sweep 가능 |
 | P2 | B-10 | L3/L4 — 별도 결정 사안 |
