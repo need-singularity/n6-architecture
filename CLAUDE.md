@@ -203,6 +203,20 @@
 
 # N6 Architecture — Arithmetic Design Framework
 
+## 성장 루프 (nexus 중앙 관리)
+
+> **루프 순서 정의**: `~/Dev/nexus/shared/loop/n6-architecture.json`
+> **루프 엔진**: `scripts/infinite_growth.sh` → `growth_common.sh`
+> **상태 기록**: `.growth/growth_state.json` (로컬)
+> **이벤트 스트림**: `~/Dev/nexus/shared/growth_bus.jsonl`
+
+```
+도메인 고유 → 제품 스캔 → DSE 탐색 → Alien Index → SEDI 신호 → BCI 평가
+공통 phases → NEXUS-6 스캔 → 블로업 → 특이점 → 교차수분 → ... → 자동 커밋
+```
+
+설정 변경은 `~/Dev/nexus/shared/loop/n6-architecture.json` 수정 (interval, domain, phases).
+
 ## ⚠️ 필수 규칙 (최우선)
 
 ### hexa-native 전용 (sh/py/rs 작성 금지)
