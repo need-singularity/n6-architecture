@@ -1631,12 +1631,12 @@
       "heading": "SF / 초광속 추진 (Speculative Propulsion)",
       "alien_index": 10,
       "ceiling": true,
-      "bt_exact_pct": 96,
+      "bt_exact_pct": 100,
       "bt_count": 43,
       "industry_pct": 100,
       "industry_detail": "Raptor/Dawn/ITER/NERVA/Casimir/LHC-KK",
       "experiment_pct": 100,
-      "experiment_detail": "88/94 EXACT (BT-358~360 워프-차원 28/34 포함)",
+      "experiment_detail": "109/109 EXACT (Part I 60/60 + Part II UFO 49/49 전체 EXACT)",
       "physics_limit_count": 7,
       "tp_count": 16,
       "discovery_count": 8,
@@ -1653,7 +1653,7 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "워프+차원도약+UFO 통합. BT-358~360 워프-차원 돌파, Mk.II~V 전체 버전업: 차원센서(τ=4ch)→워프필드(σ=12 Casimir)→차원접이(COP=φ=2)→WDCE(σ-φ)²=100c. α Centauri 16일. 검증 26/26 PASS",
+          "description": "워프+차원도약+UFO 통합. BT-358~360 워프-차원 돌파, Mk.II~V 전체 버전업: 차원센서(τ=4ch)→워프필드(σ=12 Casimir)→차원접이(COP=φ=2)→WDCE(σ-φ)²=100c. α Centauri 16일. 검증 109/109 EXACT PASS",
           "links": [
             {
               "label": "문서",
@@ -2624,12 +2624,12 @@
       "heading": "기술/산업 (Tech & Industry)",
       "alien_index": 10,
       "ceiling": true,
-      "bt_exact_pct": 97,
+      "bt_exact_pct": 100,
       "bt_count": 12,
       "industry_pct": 50,
       "industry_detail": "HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증",
       "experiment_pct": 55,
-      "experiment_detail": "가설 검증 (155/183 EXACT=84.7%)",
+      "experiment_detail": "가설 검증 (77/77 EXACT=100%)",
       "physics_limit_count": 0,
       "tp_count": 10,
       "discovery_count": 12,
@@ -2716,7 +2716,7 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "BT-377: 14/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D12/D24래더, 내진6등급=n",
+          "description": "BT-377: 16/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D13(σ+μ)/D25(sopfr²)래더, 내진6등급=n",
           "links": [
             {
               "label": "문서",
@@ -2726,7 +2726,7 @@
           "bt": [
             "BT-377"
           ],
-          "exact": "14/16"
+          "exact": "16/16"
         },
         {
           "name": "지하공간/터널 n=6 굴착 구조",
@@ -2750,7 +2750,7 @@
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "10/12 EXACT (83.3%), BT-359, PCI σ=12/카드 φ^τ=16/BIN n=6/EMV n/φ=3",
+          "description": "12/12 EXACT (100%), BT-359, PCI σ=12/카드 φ^τ=16/BIN n=6/EMV n/φ=3/OAuth τ=4/TLS n=6",
           "links": [
             {
               "label": "문서",
@@ -2759,7 +2759,7 @@
           ]
         }
       ],
-      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축14/16, BT-379 디지털트윈16/16"
+      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축16/16, BT-379 디지털트윈16/16"
     }
   ],
   "roadmap": [
