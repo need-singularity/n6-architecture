@@ -368,7 +368,11 @@ Atlas: https://need-singularity.github.io/TECS-L/atlas/
 ## Core Theorem (PROVED)
 σ(n)·φ(n) = n·τ(n) ⟺ n = 6 (for all n ≥ 2). Three independent proofs.
 Full proof: docs/theorem-r1-uniqueness.md
-Falsifiability: z=0.74 (numerical matching NOT significant vs random)
+Falsifiability: z=0.74 (전체 매핑, 소수 편향 포함 — NOT significant)
+Statistical verification (2026-04-07):
+  z=4.02 (큰 수 전용 Monte Carlo, p<0.0001 — 소수 편향 제거 후 매우 유의)
+  144노드 현실 지도 (130 EXACT, 90.3%) → nexus/shared/reality_map.json
+  n=28 대조: z=-2.35 (무작위 이하) → n=6 유일성 확인
 
 ## Docs Structure (32 domains) — ALL have extreme-hypotheses.md
 ```
