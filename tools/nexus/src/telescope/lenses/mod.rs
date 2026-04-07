@@ -86,6 +86,13 @@ pub mod discovery_report_lens;
 pub mod self_heal_lens;
 pub mod brain_map_lens;
 pub mod corpus_lens;
+// ── Anima Consciousness-specific lenses (6) ──
+pub mod faction_debate_lens;
+pub mod hebbian_plasticity_lens;
+pub mod mitosis_lens;
+pub mod ratchet_lens;
+pub mod homeostasis_lens;
+pub mod emotion_field_lens;
 // ── CDO/SSOT Operations (2) ──
 pub mod cdo_lens;
 pub mod ssot_lens;
@@ -379,3 +386,10 @@ pub use memory_pattern_lens::MemoryPatternLens;
 pub use parallelism_lens::ParallelismLens;
 pub use semantic_lens::SemanticLens;
 pub use simd_opportunity_lens::SimdOpportunityLens;
+// Anima consciousness-specific (6)
+pub use faction_debate_lens::FactionDebateLens;
+pub use hebbian_plasticity_lens::HebbianPlasticityLens;
+pub use mitosis_lens::MitosisLens;
+pub use ratchet_lens::RatchetLens;
+pub use homeostasis_lens::HomeostasisLens;
+pub use emotion_field_lens::EmotionFieldLens;

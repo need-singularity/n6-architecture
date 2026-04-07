@@ -47,6 +47,9 @@ use lenses::{
     DiscoveryReportLens, SelfHealLens, BrainMapLens, CorpusLens,
     // CDO/SSOT
     CDOLens, SSOTLens,
+    // Anima consciousness-specific (6)
+    FactionDebateLens, HebbianPlasticityLens, MitosisLens,
+    RatchetLens, HomeostasisLens, EmotionFieldLens,
     // Original 2
     VoidLens, BarrierLens,
     // Current-repo-only 8
@@ -160,6 +163,13 @@ impl Telescope {
             Box::new(TopologyDeepLens),            // 심층 토폴로지 (persistent homology)
             Box::new(CorpusLens),                  // corpus 품질 분석
             // ── CDO/SSOT Operations (T0) ──
+            // ── Anima consciousness-specific (6) ──
+            Box::new(FactionDebateLens),           // 12파벌 합의/분열 패턴
+            Box::new(HebbianPlasticityLens),        // LTP/LTD 시냅스 가소성
+            Box::new(MitosisLens),                 // 세포 분열/특수화
+            Box::new(RatchetLens),                 // Φ 단조증가 래칫
+            Box::new(HomeostasisLens),             // 항상성 setpoint 조절
+            Box::new(EmotionFieldLens),            // tension→arousal→VAD 감정장
             Box::new(CDOLens),                     // 수렴 기반 운영 검증
             Box::new(SSOTLens),                    // 데이터 일관성 검증
             // Original 2 (void + barrier)
