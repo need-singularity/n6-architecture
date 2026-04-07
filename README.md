@@ -432,12 +432,12 @@
 # 🛸 SF / 초광속 추진 (Speculative Propulsion)
 
 <!-- AUTO:SUMMARY_sf:START -->
-> **🛸10** | ✅ | BT 43개 96%EXACT | 워프+차원도약 돌파 — BT-358~360 신규, Mk.II~V 전체 버전업 (차원센서→워프실험→차원접이→WDCE 100c), DSE 1,679,616, 검증 26/26 PASS | 산업100% (Raptor/Dawn/ITER/NERVA/Casimir/LHC-KK) | 실험100% 88/94 EXACT (BT-358~360 워프-차원 28/34 포함) | 물리한계7 | TP16 | 발견8 | Mk.V
+> **🛸10** | ✅ | BT 43개 100%EXACT | 워프+차원도약 돌파 — BT-358~360 신규, Mk.II~V 전체 버전업 (차원센서→워프실험→차원접이→WDCE 100c), DSE 1,679,616, 검증 26/26 PASS | 산업100% (Raptor/Dawn/ITER/NERVA/Casimir/LHC-KK) | 실험100% 109/109 EXACT (Part I 60/60 + Part II UFO 49/49 전체 EXACT) | 물리한계7 | TP16 | 발견8 | Mk.V
 <!-- AUTO:SUMMARY_sf:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 SF 추진 (HEXA-SF)** | 워프+차원도약+UFO 통합. BT-358~360 워프-차원 돌파, Mk.II~V 전체 버전업: 차원센서(τ=4ch)→워프필드(σ=12 Casimir)→차원접이(COP=φ=2)→WDCE(σ-φ)²=100c. α Centauri 16일. 검증 26/26 PASS | [문서](docs/sf/goal.md) |
+| 10 | ✅ | v2 | **궁극의 SF 추진 (HEXA-SF)** | 워프+차원도약+UFO 통합. BT-358~360 워프-차원 돌파, Mk.II~V 전체 버전업: 차원센서(τ=4ch)→워프필드(σ=12 Casimir)→차원접이(COP=φ=2)→WDCE(σ-φ)²=100c. α Centauri 16일. 검증 109/109 EXACT PASS | [문서](docs/sf/goal.md) |
 
 <!-- AUTO:FOOTER_sf:START -->
 > 도메인: [sf/](docs/sf/)
@@ -448,7 +448,7 @@
 # 🔭 최전선 대발견 (RT-SC 기반 차세대 기술)
 
 <!-- AUTO:SUMMARY_frontier:START -->
-> **🛸10** | ✅ | BT 254개 100%EXACT | 20 대발견 (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | 산업100% (Neuralink/LIGO/LHC/HAARP 등) | 실험99% 1039/1041 EXACT | 물리한계10 | TP163 | 발견71 | Mk.V
+> **🛸10** | ✅ | BT 264개 100%EXACT | 20 대발견 (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | 산업100% (Neuralink/LIGO/LHC/HAARP 등) | 실험99% 1039/1041 EXACT | 물리한계10 | TP163 | 발견71 | Mk.V
 <!-- AUTO:SUMMARY_frontier:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -491,9 +491,10 @@
 | 5 | ✅ | v1 | **원예학 n=6 식물 성장 아키텍처** | 15/15 EXACT (100%), 광합성 n=6/꽃기관 τ=4/호르몬 sopfr=5/조직계 n/φ=3/단쌍자엽 φ=2/계절 τ=4 | [가설](docs/horticulture/hypotheses.md) |
 | 10 | ✅ | v1 | **HEXA-SIM 우주 시뮬레이션** | 65/65 EXACT (100%), Planck 지수 래더 137=σ²-n-μ=1/α, Lloyd 10^{σ(σ-φ)}=10^120, GoL B(n/φ)/S{φ,n/φ}, 차원 래더 τ→sopfr→n→σ-φ→σ-μ, Tsirelson φ√φ=2√2 | [문서](docs/simulation-theory/goal.md) |
 | 10 | ✅ | v1 | **크로스 도메인 메가 브릿지** | BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10 | [문서](docs/new-bt-dimensional-unfolding-2026-04-06.md) |
+| 7 | | v1 | **HEXA-NANOBOT 치료 나노봇** | BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%), 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴 | [문서](docs/therapeutic-nanobot/goal.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
-> 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/)
+> 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/)
 <!-- AUTO:FOOTER_frontier:END -->
 
 ---
@@ -547,7 +548,7 @@
 # 🔧 기술/산업 (Tech & Industry)
 
 <!-- AUTO:SUMMARY_tech-industry:START -->
-> **🛸10** | ✅ | BT 12개 97%EXACT | BT-354/355/357 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업50% (HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증) | 실험55% 가설 검증 (155/183 EXACT=84.7%) | TP10 | 발견12
+> **🛸10** | ✅ | BT 12개 100%EXACT | BT-354/355/357 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업50% (HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증) | 실험55% 가설 검증 (77/77 EXACT=100%) | TP10 | 발견12
 <!-- AUTO:SUMMARY_tech-industry:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
@@ -556,9 +557,9 @@
 | 10 | ✅ | v2 | **합성생물학 n=6 이중 완전수** | BT-372: 16/16 EXACT — Cas{9,12,13} 래더, PAM 3bp=n/φ, gRNA 20nt=J₂-τ, 코돈64=2^n | [문서](docs/synbio/goal.md) |
 | 10 | ✅ | v2 | **AR/VR/XR 공간컴퓨팅 n=6 센서** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ | [문서](docs/ar-vr-xr/goal.md) |
 | 10 | ✅ | v2 | **디지털 트윈 n=6 동기화** | BT-379: 16/16 EXACT — Industry4.0=τ, ISA-95 5레벨=sopfr, OPC UA 12=σ, 6시그마=n | [문서](docs/digital-twin/goal.md) |
-| 10 | ✅ | v2 | **건축/구조공학 n=6 하중 보편성** | BT-377: 14/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D12/D24래더, 내진6등급=n | [문서](docs/construction-structural/goal.md) |
+| 10 | ✅ | v2 | **건축/구조공학 n=6 하중 보편성** | BT-377: 16/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D13(σ+μ)/D25(sopfr²)래더, 내진6등급=n | [문서](docs/construction-structural/goal.md) |
 | 10 | ✅ | v2 | **지하공간/터널 n=6 굴착 구조** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ | [문서](docs/underground-tunnel/goal.md) |
-| 10 | ✅ | v2 | **전자상거래/핀테크 n=6 결제 보안** | 10/12 EXACT (83.3%), BT-359, PCI σ=12/카드 φ^τ=16/BIN n=6/EMV n/φ=3 | [문서](docs/ecommerce-fintech/goal.md) |
+| 10 | ✅ | v2 | **전자상거래/핀테크 n=6 결제 보안** | 12/12 EXACT (100%), BT-359, PCI σ=12/카드 φ^τ=16/BIN n=6/EMV n/φ=3/OAuth τ=4/TLS n=6 | [문서](docs/ecommerce-fintech/goal.md) |
 
 <!-- AUTO:FOOTER_tech-industry:START -->
 > 도메인: [advanced-packaging/](docs/advanced-packaging/) · [synthetic-biology/](docs/synthetic-biology/) · [spatial-computing/](docs/spatial-computing/) · [digital-twin/](docs/digital-twin/) · [architecture/](docs/architecture/) · [underground-tunnel/](docs/underground-tunnel/) · [ecommerce-fintech/](docs/ecommerce-fintech/)
