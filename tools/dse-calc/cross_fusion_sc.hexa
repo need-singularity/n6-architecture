@@ -1,0 +1,811 @@
+// =====================================================================
+// N6 Cross-DSE: FUSION x SUPERCONDUCTOR
+// Tokamak magnet optimization -- 30T+ fusion pathway search
+// =====================================================================
+// Run: hexa tools/dse-calc/cross_fusion_sc.hexa
+// =====================================================================
+
+// -- N6 constants --
+let N = 6
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+
+// =====================================================================
+// Helpers
+// =====================================================================
+
+fn pad_r(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  r
+}
+
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn min_val(a, b) {
+  if a < b { a } else { b }
+}
+
+fn max_val(a, b) {
+  if a > b { a } else { b }
+}
+
+fn repeat_str(ch, n) {
+  let mut r = ""
+  let mut i = 0
+  while i < n {
+    r = r + ch
+    i = i + 1
+  }
+  r
+}
+
+fn fmt_score(v) {
+  let whole = round(v * 10000)
+  let int_part = round((whole - round(whole % 10000)) / 10000)
+  let frac = round(whole % 10000)
+  let fs = to_string(frac)
+  let mut pad_fs = fs
+  while len(pad_fs) < 4 {
+    pad_fs = "0" + pad_fs
+  }
+  to_string(int_part) + "." + pad_fs
+}
+
+fn fmt_1f(v) {
+  let whole = round(v * 10)
+  let int_part = round((whole - round(whole % 10)) / 10)
+  let frac = round(abs(whole) % 10)
+  to_string(int_part) + "." + to_string(frac)
+}
+
+fn fmt_2f(v) {
+  let whole = round(v * 100)
+  let int_part = round((whole - round(whole % 100)) / 100)
+  let frac = round(whole % 100)
+  let fs = to_string(frac)
+  let mut pad_fs = fs
+  while len(pad_fs) < 2 {
+    pad_fs = "0" + pad_fs
+  }
+  to_string(int_part) + "." + pad_fs
+}
+
+// =====================================================================
+// Fusion candidate data (parallel arrays)
+// =====================================================================
+// L1: Materials
+let fu_m_id    = ["FU-M1", "FU-M2", "FU-M3", "FU-M4", "FU-M5", "FU-M6"]
+let fu_m_name  = ["D-T Standard", "D-D Proton", "D-He3 Aneutronic", "p-B11 Clean", "Li6-D Hybrid", "Cat-DD Catalyzed"]
+let fu_m_n6    = [1, 1, 0, 0, 1, 0]
+let fu_m_pa    = [17.6, 3.27, 18.3, 8.7, 22.4, 7.2]
+let fu_m_pb    = [5.0, 4.0, 17.0, 9.0, 22.0, 7.0]
+let fu_m_count = 6
+
+// L2: Confinements
+let fu_p_id     = ["FU-P1", "FU-P2", "FU-P3", "FU-P4", "FU-P5"]
+let fu_p_name   = ["Tokamak-12", "Tokamak-24", "Stellarator-5", "Spherical Tokamak", "ICF"]
+let fu_p_n6     = [1, 1, 1, 1, 1]
+let fu_p_pa     = [12.0, 24.0, 5.0, 2.0, 4.0]
+let fu_p_pb     = [1.5, 0.5, 0.8, 2.0, 0.0]
+let fu_p_coils  = [12, 24, 5, 2, 0]
+let fu_p_tok    = [1, 1, 0, 1, 0]
+let fu_p_count  = 5
+
+// L3: Cores
+let fu_c_id     = ["FU-C1", "FU-C2", "FU-C3", "FU-C4", "FU-C5"]
+let fu_c_name   = ["HTS High-Field", "Low-Field Large", "Compact ST", "Laser ICF", "Magnetized Target"]
+let fu_c_n6     = [1, 1, 1, 0, 1]
+let fu_c_field  = [12.0, 6.0, 3.0, 0.0, 4.0]
+let fu_c_hts    = [1, 0, 1, 0, 1]
+let fu_c_count  = 5
+
+// L4: Conversions
+let fu_s_id    = ["FU-S1", "FU-S2", "FU-S3", "FU-S4"]
+let fu_s_name  = ["Steam Rankine", "Direct MHD", "TEG Thermoelectric", "Egyptian Hybrid"]
+let fu_s_n6    = [1, 1, 1, 1]
+let fu_s_pa    = [0.333, 0.500, 0.167, 0.833]
+let fu_s_pb    = [0.7, 0.4, 0.9, 0.2]
+let fu_s_count = 4
+
+// L5: Grids
+let fu_g_id    = ["FU-G1", "FU-G2", "FU-G3", "FU-G4"]
+let fu_g_name  = ["Central GW", "Distributed 100MW", "Micro-fusion 10MW", "Fission-Fusion 500MW"]
+let fu_g_n6    = [0, 1, 1, 1]
+let fu_g_pa    = [1000.0, 100.0, 10.0, 500.0]
+let fu_g_pb    = [0.3, 0.6, 0.8, 0.5]
+let fu_g_count = 4
+
+// =====================================================================
+// Superconductor candidate data (parallel arrays)
+// =====================================================================
+// L1: Materials
+let sc_m_id      = ["SC-M1", "SC-M2", "SC-M3", "SC-M4", "SC-M5", "SC-M6", "SC-M7", "SC-M8"]
+let sc_m_name    = ["NbTi", "Nb3Sn", "MgB2", "REBCO", "Bi2223", "BSCCO2212", "FeSe", "LaH10"]
+let sc_m_type    = ["LTS", "LTS", "MTS", "HTS", "HTS", "HTS", "HTS", "RoomT"]
+let sc_m_tc      = [9.0, 18.0, 39.0, 93.0, 110.0, 85.0, 37.0, 260.0]
+let sc_m_hc2     = [15.0, 30.0, 16.0, 120.0, 50.0, 100.0, 50.0, 200.0]
+let sc_m_atoms   = [2, 6, 3, 6, 8, 7, 2, 11]
+let sc_m_n6      = [0, 1, 1, 1, 0, 0, 0, 0]
+let sc_m_count   = 8
+
+// L2: Processes
+let sc_p_id    = ["SC-P1", "SC-P2", "SC-P3", "SC-P4", "SC-P5", "SC-P6"]
+let sc_p_name  = ["PIT", "MOCVD", "MOD_RABiTS", "Bronze", "RCE_DR", "DAC_CVD"]
+let sc_p_steps = [6, 5, 4, 6, 5, 4]
+let sc_p_temp  = [700, 800, 500, 700, 800, 0]
+let sc_p_n6    = [1, 1, 1, 1, 1, 1]
+let sc_p_count = 6
+
+// L3: Wires
+let sc_w_id      = ["SC-W1", "SC-W2", "SC-W3", "SC-W4", "SC-W5"]
+let sc_w_name    = ["Round", "FlatTape2G", "Rutherford", "CORC", "ThinFilm"]
+let sc_w_strands = [1, 1, 12, 6, 1]
+let sc_w_je      = [1.0, 1.5, 1.2, 1.4, 2.0]
+let sc_w_n6      = [0, 1, 1, 1, 0]
+let sc_w_count   = 5
+
+// L4: Magnets
+let sc_mg_id     = ["SC-MG1", "SC-MG2", "SC-MG3", "SC-MG4", "SC-MG5", "SC-MG6"]
+let sc_mg_name   = ["Solenoid_TF", "Solenoid_CS", "Toroidal_D", "Hybrid_LH", "Dipole", "SMES"]
+let sc_mg_coils  = [12, 6, 12, 2, 2, 6]
+let sc_mg_flim   = [35.0, 40.0, 30.0, 45.0, 20.0, 12.0]
+let sc_mg_fus    = [1, 1, 1, 1, 0, 0]
+let sc_mg_n6     = [1, 1, 1, 1, 1, 1]
+let sc_mg_count  = 6
+
+// L5: Coolings
+let sc_cl_id    = ["SC-CL1", "SC-CL2", "SC-CL3", "SC-CL4"]
+let sc_cl_name  = ["LHe_4K", "NoInsul_20K", "CryoCooler", "Hybrid_4K20K"]
+let sc_cl_temp  = [4.2, 20.0, 20.0, 4.2]
+let sc_cl_pwr   = [50.0, 20.0, 15.0, 35.0]
+let sc_cl_n6    = [1, 0, 0, 1]
+let sc_cl_count = 4
+
+// L6: Systems
+let sc_sy_id    = ["SC-SY1", "SC-SY2", "SC-SY3", "SC-SY4", "SC-SY5"]
+let sc_sy_name  = ["PowerTransmit", "Maglev", "FusionMagnet", "QuantumChip", "EnergyGrid"]
+let sc_sy_mf    = [0.0, 5.0, 20.0, 0.0, 5.0]
+let sc_sy_coils = [1, 6, 12, 1, 6]
+let sc_sy_fus   = [0, 0, 1, 0, 0]
+let sc_sy_n6    = [0, 0, 1, 0, 0]
+let sc_sy_count = 5
+
+// =====================================================================
+// Phase 1a: Fusion DSE
+// =====================================================================
+
+let mut fr_i0 = []
+let mut fr_i1 = []
+let mut fr_i2 = []
+let mut fr_i3 = []
+let mut fr_i4 = []
+let mut fr_n6 = []
+let mut fr_score = []
+let mut fr_energy = []
+let mut fr_eff = []
+let mut fr_power = []
+let mut fr_coils = []
+let mut fr_tok = []
+let mut fr_field = []
+let mut fr_hts = []
+let mut fr_egypt = []
+let mut fr_count = 0
+
+let max_perf_fu = 22.4 * 0.833 * 1000.0
+
+let mut i0 = 0
+while i0 < fu_m_count {
+  let mut i1 = 0
+  while i1 < fu_p_count {
+    let mut i2 = 0
+    while i2 < fu_c_count {
+      let mut i3 = 0
+      while i3 < fu_s_count {
+        let mut i4 = 0
+        while i4 < fu_g_count {
+          let n6c = fu_m_n6[i0] + fu_p_n6[i1] + fu_c_n6[i2] + fu_s_n6[i3] + fu_g_n6[i4]
+          let n6_score = n6c / 5.0 * 0.40
+
+          let raw_perf = fu_m_pa[i0] * fu_s_pa[i3] * fu_g_pa[i4]
+          let perf = min_val(raw_perf / max_perf_fu, 1.0) * 0.30
+
+          let eff_val = min_val(fu_s_pa[i3], 1.0) * 0.20
+
+          let cost_raw = 1.0 - (fu_m_pb[i0] * 0.02 + fu_s_pb[i3] * 0.5 + fu_g_pb[i4] * 0.48)
+          let cost = max_val(min_val(cost_raw, 1.0), 0.0) * 0.10
+
+          let score = n6_score + perf + eff_val + cost
+
+          let mut is_egypt = 0
+          if i3 == 3 {
+            is_egypt = 1
+          }
+
+          fr_i0 = fr_i0 + [i0]
+          fr_i1 = fr_i1 + [i1]
+          fr_i2 = fr_i2 + [i2]
+          fr_i3 = fr_i3 + [i3]
+          fr_i4 = fr_i4 + [i4]
+          fr_n6 = fr_n6 + [n6c]
+          fr_score = fr_score + [score]
+          fr_energy = fr_energy + [fu_m_pa[i0]]
+          fr_eff = fr_eff + [fu_s_pa[i3]]
+          fr_power = fr_power + [fu_g_pa[i4]]
+          fr_coils = fr_coils + [fu_p_coils[i1]]
+          fr_tok = fr_tok + [fu_p_tok[i1]]
+          fr_field = fr_field + [fu_c_field[i2]]
+          fr_hts = fr_hts + [fu_c_hts[i2]]
+          fr_egypt = fr_egypt + [is_egypt]
+          fr_count = fr_count + 1
+
+          i4 = i4 + 1
+        }
+        i3 = i3 + 1
+      }
+      i2 = i2 + 1
+    }
+    i1 = i1 + 1
+  }
+  i0 = i0 + 1
+}
+
+// Sort fusion results descending by score (selection sort on index array)
+let mut fu_si = []
+let mut fi = 0
+while fi < fr_count {
+  fu_si = fu_si + [fi]
+  fi = fi + 1
+}
+
+fi = 0
+while fi < fr_count - 1 {
+  let mut best = fi
+  let mut fj = fi + 1
+  while fj < fr_count {
+    if fr_score[fu_si[fj]] > fr_score[fu_si[best]] {
+      best = fj
+    }
+    fj = fj + 1
+  }
+  if best != fi {
+    let tmp = fu_si[fi]
+    fu_si[fi] = fu_si[best]
+    fu_si[best] = tmp
+  }
+  fi = fi + 1
+}
+
+// =====================================================================
+// Phase 1b: Superconductor DSE (fusion-compatible filter)
+// =====================================================================
+
+fn sc_mat_cost(idx) {
+  let t = sc_m_type[idx]
+  if t == "LTS" { 1.0 }
+  else { if t == "MTS" { 2.0 }
+  else { if t == "RoomT" { 5.0 }
+  else { 3.0 } } }
+}
+
+// SC result arrays
+let mut sr_i0 = []
+let mut sr_i1 = []
+let mut sr_i2 = []
+let mut sr_i3 = []
+let mut sr_i4 = []
+let mut sr_i5 = []
+let mut sr_n6 = []
+let mut sr_score = []
+let mut sr_fach = []
+let mut sr_tc = []
+let mut sr_hc2 = []
+let mut sr_fus = []
+let mut sr_mcoils = []
+let mut sr_flim = []
+let mut sr_pwr = []
+let mut sr_count = 0
+
+// Run fusion-compatible SC DSE
+let mut si0 = 0
+while si0 < sc_m_count {
+  let mut si1 = 0
+  while si1 < sc_p_count {
+    let mut si2 = 0
+    while si2 < sc_w_count {
+      let mut si3 = 0
+      while si3 < sc_mg_count {
+        if sc_mg_fus[si3] == 1 {
+          let mut si4 = 0
+          while si4 < sc_cl_count {
+            let mut si5 = 0
+            while si5 < sc_sy_count {
+              if sc_sy_fus[si5] == 1 {
+                let n6c = sc_m_n6[si0] + sc_p_n6[si1] + sc_w_n6[si2] + sc_mg_n6[si3] + sc_cl_n6[si4] + sc_sy_n6[si5]
+                let field_ach = min_val(sc_m_hc2[si0] * sc_w_je[si2] * 0.3, sc_mg_flim[si3])
+
+                let n6s = n6c / 6.0 * 0.35
+                let fs = min_val(field_ach / 45.0, 1.0) * 0.30
+                let es = max_val(1.0 - sc_cl_pwr[si4] / 50.0, 0.0) * 0.20
+                let mc = sc_mat_cost(si0)
+                let cs = max_val(1.0 - mc / 5.0, 0.0) * 0.15
+                let sc_score = n6s + fs + es + cs
+
+                let mut is_fus = 0
+                if sc_mg_fus[si3] == 1 {
+                  if sc_sy_fus[si5] == 1 {
+                    is_fus = 1
+                  }
+                }
+
+                sr_i0 = sr_i0 + [si0]
+                sr_i1 = sr_i1 + [si1]
+                sr_i2 = sr_i2 + [si2]
+                sr_i3 = sr_i3 + [si3]
+                sr_i4 = sr_i4 + [si4]
+                sr_i5 = sr_i5 + [si5]
+                sr_n6 = sr_n6 + [n6c]
+                sr_score = sr_score + [sc_score]
+                sr_fach = sr_fach + [field_ach]
+                sr_tc = sr_tc + [sc_m_tc[si0]]
+                sr_hc2 = sr_hc2 + [sc_m_hc2[si0]]
+                sr_fus = sr_fus + [is_fus]
+                sr_mcoils = sr_mcoils + [sc_mg_coils[si3]]
+                sr_flim = sr_flim + [sc_mg_flim[si3]]
+                sr_pwr = sr_pwr + [sc_cl_pwr[si4]]
+                sr_count = sr_count + 1
+              }
+              si5 = si5 + 1
+            }
+            si4 = si4 + 1
+          }
+        }
+        si3 = si3 + 1
+      }
+      si2 = si2 + 1
+    }
+    si1 = si1 + 1
+  }
+  si0 = si0 + 1
+}
+
+// Sort SC filtered results
+let mut sc_si = []
+let mut si = 0
+while si < sr_count {
+  sc_si = sc_si + [si]
+  si = si + 1
+}
+
+si = 0
+while si < sr_count - 1 {
+  let mut best = si
+  let mut sj = si + 1
+  while sj < sr_count {
+    if sr_score[sc_si[sj]] > sr_score[sc_si[best]] {
+      best = sj
+    }
+    sj = sj + 1
+  }
+  if best != si {
+    let tmp = sc_si[si]
+    sc_si[si] = sc_si[best]
+    sc_si[best] = tmp
+  }
+  si = si + 1
+}
+
+// Count full SC (no fusion filter) for reference
+let mut sc_all_count = 0
+let mut ai0 = 0
+while ai0 < sc_m_count {
+  let mut ai1 = 0
+  while ai1 < sc_p_count {
+    let mut ai2 = 0
+    while ai2 < sc_w_count {
+      let mut ai3 = 0
+      while ai3 < sc_mg_count {
+        let mut ai4 = 0
+        while ai4 < sc_cl_count {
+          let mut ai5 = 0
+          while ai5 < sc_sy_count {
+            sc_all_count = sc_all_count + 1
+            ai5 = ai5 + 1
+          }
+          ai4 = ai4 + 1
+        }
+        ai3 = ai3 + 1
+      }
+      ai2 = ai2 + 1
+    }
+    ai1 = ai1 + 1
+  }
+  ai0 = ai0 + 1
+}
+
+// =====================================================================
+// Phase 2+3: Cross-DSE with compatibility filter
+// =====================================================================
+
+let fu_top = 50
+let sc_top = 50
+let fu_lim = min_val(fu_top, fr_count)
+let sc_lim = min_val(sc_top, sr_count)
+
+let mut cr_fur = []
+let mut cr_scr = []
+let mut cr_fus = []
+let mut cr_scs = []
+let mut cr_bb = []
+let mut cr_xs = []
+let mut cr_fa = []
+let mut cr_n6t = []
+let mut cr_count = 0
+
+let mut cfi = 0
+while cfi < fu_lim {
+  let fidx = fu_si[cfi]
+  let mut csi = 0
+  while csi < sc_lim {
+    let sidx = sc_si[csi]
+
+    let mut compat = 1
+
+    // Rule 1: HTS fusion core requires HTS material (Tc >= 37K)
+    if fr_hts[fidx] == 1 {
+      if sr_tc[sidx] < 37.0 {
+        compat = 0
+      }
+    }
+
+    // Rule 2+3: Tokamak requires fusion magnets
+    if compat == 1 {
+      if fr_tok[fidx] == 1 {
+        if sr_fus[sidx] == 0 {
+          compat = 0
+        }
+      }
+    }
+
+    // Rule 4: SC must deliver what fusion needs
+    if compat == 1 {
+      if sr_flim[sidx] < fr_field[fidx] {
+        compat = 0
+      }
+    }
+
+    // Rule 5: High-field fusion needs high Hc2
+    if compat == 1 {
+      if fr_field[fidx] > 12.0 {
+        if sr_hc2[sidx] < fr_field[fidx] * 2.0 {
+          compat = 0
+        }
+      }
+    }
+
+    if compat == 1 {
+      let mut bonus = 0.0
+
+      if fr_coils[fidx] > 0 {
+        if fr_coils[fidx] == sr_mcoils[sidx] {
+          bonus = bonus + 0.2
+        }
+      }
+
+      if sr_fach[sidx] >= 30.0 {
+        bonus = bonus + 0.2
+      }
+
+      let fu_pct = fr_n6[fidx] / 5.0
+      let sc_pct = sr_n6[sidx] / 6.0
+      if fu_pct >= 0.8 {
+        if sc_pct >= 0.8 {
+          bonus = bonus + 0.2
+        }
+      }
+
+      if fr_egypt[fidx] == 1 {
+        bonus = bonus + 0.2
+      }
+
+      let total_n6 = fr_n6[fidx] + sr_n6[sidx]
+      if total_n6 >= 9 {
+        bonus = bonus + 0.2
+      }
+
+      bonus = min_val(bonus, 1.0)
+
+      let cross_score = fr_score[fidx] * 0.45 + sr_score[sidx] * 0.35 + bonus * 0.20
+
+      cr_fur = cr_fur + [cfi]
+      cr_scr = cr_scr + [csi]
+      cr_fus = cr_fus + [fr_score[fidx]]
+      cr_scs = cr_scs + [sr_score[sidx]]
+      cr_bb = cr_bb + [bonus]
+      cr_xs = cr_xs + [cross_score]
+      cr_fa = cr_fa + [sr_fach[sidx]]
+      cr_n6t = cr_n6t + [total_n6]
+      cr_count = cr_count + 1
+    }
+
+    csi = csi + 1
+  }
+  cfi = cfi + 1
+}
+
+// Sort cross results
+let mut cr_si = []
+let mut ci = 0
+while ci < cr_count {
+  cr_si = cr_si + [ci]
+  ci = ci + 1
+}
+
+ci = 0
+while ci < cr_count - 1 {
+  let mut best = ci
+  let mut cj = ci + 1
+  while cj < cr_count {
+    if cr_xs[cr_si[cj]] > cr_xs[cr_si[best]] {
+      best = cj
+    }
+    cj = cj + 1
+  }
+  if best != ci {
+    let tmp = cr_si[ci]
+    cr_si[ci] = cr_si[best]
+    cr_si[best] = tmp
+  }
+  ci = ci + 1
+}
+
+// =====================================================================
+// Output
+// =====================================================================
+
+println("")
+println(repeat_str("=", 67))
+println("  N6 Cross-DSE: FUSION x SUPERCONDUCTOR")
+println("  sigma(n)*phi(n) = n*tau(n), n=6")
+println("  30T+ Tokamak Magnet Optimization")
+println(repeat_str("=", 67))
+
+// -- Phase 1a --
+println("")
+println(format("=== Phase 1a: Fusion Domain ({} combos) ===", to_string(fr_count)))
+println("")
+println("  Top 10:")
+println(format("  | {} | {} | {} | {} | {} | {} | {} | {} |", pad_l("Rank", 4), pad_l("L1 Material", 14), pad_l("L2 Confine", 14), pad_l("L3 Core", 14), pad_l("L4 Convert", 14), pad_l("L5 Grid", 16), pad_l("n6", 3), pad_l("Score", 6)))
+println("  |------|----------------|----------------|----------------|----------------|------------------|-----|--------|")
+
+let mut ri = 0
+while ri < 10 {
+  let idx = fu_si[ri]
+  println(format("  | {} | {} | {} | {} | {} | {} | {}/{} | {} |", pad_l(to_string(ri + 1), 4), pad_l(fu_m_name[fr_i0[idx]], 14), pad_l(fu_p_name[fr_i1[idx]], 14), pad_l(fu_c_name[fr_i2[idx]], 14), pad_l(fu_s_name[fr_i3[idx]], 14), pad_l(fu_g_name[fr_i4[idx]], 16), pad_l(to_string(fr_n6[idx]), 1), to_string(5), pad_l(fmt_score(fr_score[idx]), 6)))
+  ri = ri + 1
+}
+
+// Fusion stats
+let mut fu_5of5 = 0
+let mut fu_4of5 = 0
+let mut fsi = 0
+while fsi < fr_count {
+  if fr_n6[fsi] == 5 {
+    fu_5of5 = fu_5of5 + 1
+  }
+  if fr_n6[fsi] >= 4 {
+    fu_4of5 = fu_4of5 + 1
+  }
+  fsi = fsi + 1
+}
+
+println("")
+println(format("  n6 stats: 5/5 EXACT = {}, >=4/5 = {} ({}%)", to_string(fu_5of5), to_string(fu_4of5), fmt_1f(fu_4of5 / fr_count * 100.0)))
+
+// -- Phase 1b --
+println("")
+println(format("=== Phase 1b: Superconductor Domain (fusion-compatible: {} combos) ===", to_string(sr_count)))
+println("")
+println("  Top 10:")
+println(format("  | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} |", pad_l("Rank", 4), pad_l("L1 Mat", 8), pad_l("L2 Proc", 9), pad_l("L3 Wire", 10), pad_l("L4 Magnet", 11), pad_l("L5 Cooling", 12), pad_l("L6 System", 12), pad_l("n6", 3), pad_l("Score", 6), pad_l("Field", 7)))
+println("  |------|----------|-----------|------------|-------------|--------------|--------------|-----|--------|---------|")
+
+ri = 0
+while ri < 10 {
+  let idx = sc_si[ri]
+  println(format("  | {} | {} | {} | {} | {} | {} | {} | {}/{} | {} | {}T |", pad_l(to_string(ri + 1), 4), pad_l(sc_m_name[sr_i0[idx]], 8), pad_l(sc_p_name[sr_i1[idx]], 9), pad_l(sc_w_name[sr_i2[idx]], 10), pad_l(sc_mg_name[sr_i3[idx]], 11), pad_l(sc_cl_name[sr_i4[idx]], 12), pad_l(sc_sy_name[sr_i5[idx]], 12), pad_l(to_string(sr_n6[idx]), 1), to_string(6), pad_l(fmt_score(sr_score[idx]), 6), pad_l(fmt_1f(sr_fach[idx]), 5)))
+  ri = ri + 1
+}
+
+// SC stats
+let mut sc_6of6 = 0
+let mut sc_5of6 = 0
+let mut ssi = 0
+while ssi < sr_count {
+  if sr_n6[ssi] == 6 {
+    sc_6of6 = sc_6of6 + 1
+  }
+  if sr_n6[ssi] >= 5 {
+    sc_5of6 = sc_5of6 + 1
+  }
+  ssi = ssi + 1
+}
+
+println("")
+println(format("  n6 stats: 6/6 EXACT = {}, >=5/6 = {} ({}%)", to_string(sc_6of6), to_string(sc_5of6), fmt_1f(sc_5of6 / sr_count * 100.0)))
+println(format("  (Full SC domain: {} total combos, filtered to {} fusion-compatible)", to_string(sc_all_count), to_string(sr_count)))
+
+// -- Phase 2+3 --
+println("")
+println("=== Phase 2+3: Cross-DSE Bridge (top50 x top50 = 2,500 attempted) ===")
+println(format("  Compatible pairs: {}", to_string(cr_count)))
+println("")
+println("  Top 10 Cross-DSE:")
+
+println(format("  | {} | {} | {} | {} | {} | {} | {} |", pad_l("Rank", 4), pad_l("Fusion Path", 38), pad_l("SC Path", 46), pad_l("Bridge", 6), pad_l("n6", 5), pad_l("Score", 7), pad_l("Field", 7)))
+println("  |------|----------------------------------------|------------------------------------------------|--------|-------|---------|---------|")
+
+ri = 0
+while ri < 10 {
+  if ri < cr_count {
+    let cidx = cr_si[ri]
+    let f_rank = cr_fur[cidx]
+    let s_rank = cr_scr[cidx]
+    let fidx = fu_si[f_rank]
+    let sidx = sc_si[s_rank]
+
+    let fu_path = format("{} > {} > {} > {} > {}", fu_m_id[fr_i0[fidx]], fu_p_id[fr_i1[fidx]], fu_c_id[fr_i2[fidx]], fu_s_id[fr_i3[fidx]], fu_g_id[fr_i4[fidx]])
+    let sc_path = format("{} > {} > {} > {} > {} > {}", sc_m_id[sr_i0[sidx]], sc_p_id[sr_i1[sidx]], sc_w_id[sr_i2[sidx]], sc_mg_id[sr_i3[sidx]], sc_cl_id[sr_i4[sidx]], sc_sy_id[sr_i5[sidx]])
+
+    println(format("  | {} | {} | {} | {} | {}/11 | {} | {}T |", pad_l(to_string(ri + 1), 4), pad_l(fu_path, 38), pad_l(sc_path, 46), pad_l(fmt_2f(cr_bb[cidx]), 6), pad_l(to_string(cr_n6t[cidx]), 2), pad_l(fmt_score(cr_xs[cidx]), 7), pad_l(fmt_1f(cr_fa[cidx]), 5)))
+  }
+  ri = ri + 1
+}
+
+// Cross n6 stats (top-20)
+if cr_count > 0 {
+  let mut avg_sum = 0.0
+  let mut max_n6 = 0
+  let mut ti = 0
+  let top20 = min_val(20, cr_count)
+  while ti < top20 {
+    let cidx = cr_si[ti]
+    avg_sum = avg_sum + cr_n6t[cidx]
+    if cr_n6t[cidx] > max_n6 {
+      max_n6 = cr_n6t[cidx]
+    }
+    ti = ti + 1
+  }
+  let avg_n6 = avg_sum / top20
+  println("")
+  println(format("  Cross n6 stats (top-20): avg={}/11, max={}/11", fmt_1f(avg_n6), to_string(max_n6)))
+}
+
+// =====================================================================
+// Phase 4: ULTIMATE WINNER
+// =====================================================================
+
+if cr_count > 0 {
+  let w_cidx = cr_si[0]
+  let w_frank = cr_fur[w_cidx]
+  let w_srank = cr_scr[w_cidx]
+  let w_fidx = fu_si[w_frank]
+  let w_sidx = sc_si[w_srank]
+
+  println("")
+  println(repeat_str("=", 67))
+  println("  ULTIMATE FUSION-SC WINNER")
+  println(repeat_str("=", 67))
+
+  // Fusion detail
+  println("")
+  println(format("  +--- FUSION (score={}, n6={}/5) ------+", fmt_score(fr_score[w_fidx]), to_string(fr_n6[w_fidx])))
+  println(format("  | L1 Material:  {} ({})", fu_m_name[fr_i0[w_fidx]], fu_m_id[fr_i0[w_fidx]]))
+  println(format("  |   energy = {} MeV, n6_exact = {}", fmt_1f(fr_energy[w_fidx]), to_string(fu_m_n6[fr_i0[w_fidx]] == 1)))
+  println(format("  | L2 Confine:   {} ({})", fu_p_name[fr_i1[w_fidx]], fu_p_id[fr_i1[w_fidx]]))
+  println(format("  |   coils = {}, tokamak = {}, n6_exact = {}", to_string(fr_coils[w_fidx]), to_string(fr_tok[w_fidx] == 1), to_string(fu_p_n6[fr_i1[w_fidx]] == 1)))
+  println(format("  | L3 Core:      {} ({})", fu_c_name[fr_i2[w_fidx]], fu_c_id[fr_i2[w_fidx]]))
+  println(format("  |   field = {}T, uses_hts = {}, n6_exact = {}", fmt_1f(fr_field[w_fidx]), to_string(fr_hts[w_fidx] == 1), to_string(fu_c_n6[fr_i2[w_fidx]] == 1)))
+  println(format("  | L4 Convert:   {} ({})", fu_s_name[fr_i3[w_fidx]], fu_s_id[fr_i3[w_fidx]]))
+  println(format("  |   efficiency = {}%, n6_exact = {}", fmt_1f(fr_eff[w_fidx] * 100.0), to_string(fu_s_n6[fr_i3[w_fidx]] == 1)))
+  println(format("  | L5 Grid:      {} ({})", fu_g_name[fr_i4[w_fidx]], fu_g_id[fr_i4[w_fidx]]))
+  println(format("  |   power = {} MW, n6_exact = {}", to_string(round(fr_power[w_fidx])), to_string(fu_g_n6[fr_i4[w_fidx]] == 1)))
+  println("  +-----------------------------------------+")
+
+  // SC detail
+  println("")
+  println(format("  +--- SUPERCONDUCTOR (score={}, n6={}/6) ---+", fmt_score(sr_score[w_sidx]), to_string(sr_n6[w_sidx])))
+  println(format("  | L1 Material:  {} ({})", sc_m_name[sr_i0[w_sidx]], sc_m_id[sr_i0[w_sidx]]))
+  println(format("  |   type = {}, Tc = {}K, Hc2 = {}T, atoms = {}, n6 = {}", sc_m_type[sr_i0[w_sidx]], to_string(round(sr_tc[w_sidx])), to_string(round(sr_hc2[w_sidx])), to_string(sc_m_atoms[sr_i0[w_sidx]]), to_string(sc_m_n6[sr_i0[w_sidx]] == 1)))
+  println(format("  | L2 Process:   {} ({})", sc_p_name[sr_i1[w_sidx]], sc_p_id[sr_i1[w_sidx]]))
+  println(format("  |   steps = {}, temp = {}C, n6 = {}", to_string(sc_p_steps[sr_i1[w_sidx]]), to_string(sc_p_temp[sr_i1[w_sidx]]), to_string(sc_p_n6[sr_i1[w_sidx]] == 1)))
+  println(format("  | L3 Wire:      {} ({})", sc_w_name[sr_i2[w_sidx]], sc_w_id[sr_i2[w_sidx]]))
+  println(format("  |   strands = {}, je_factor = {}, n6 = {}", to_string(sc_w_strands[sr_i2[w_sidx]]), fmt_1f(sc_w_je[sr_i2[w_sidx]]), to_string(sc_w_n6[sr_i2[w_sidx]] == 1)))
+  println(format("  | L4 Magnet:    {} ({})", sc_mg_name[sr_i3[w_sidx]], sc_mg_id[sr_i3[w_sidx]]))
+  println(format("  |   coils = {}, field_limit = {}T, fusion = {}, n6 = {}", to_string(sc_mg_coils[sr_i3[w_sidx]]), to_string(round(sr_flim[w_sidx])), to_string(sc_mg_fus[sr_i3[w_sidx]] == 1), to_string(sc_mg_n6[sr_i3[w_sidx]] == 1)))
+  println(format("  | L5 Cooling:   {} ({})", sc_cl_name[sr_i4[w_sidx]], sc_cl_id[sr_i4[w_sidx]]))
+  println(format("  |   temp = {}K, power = {} W/m, n6 = {}", fmt_1f(sc_cl_temp[sr_i4[w_sidx]]), to_string(round(sr_pwr[w_sidx])), to_string(sc_cl_n6[sr_i4[w_sidx]] == 1)))
+  println(format("  | L6 System:    {} ({})", sc_sy_name[sr_i5[w_sidx]], sc_sy_id[sr_i5[w_sidx]]))
+  println(format("  |   coil_sets = {}, for_fusion = {}, n6 = {}", to_string(sc_sy_coils[sr_i5[w_sidx]]), to_string(sc_sy_fus[sr_i5[w_sidx]] == 1), to_string(sc_sy_n6[sr_i5[w_sidx]] == 1)))
+  println("  +---------------------------------------------+")
+
+  // Bridge
+  println("")
+  println("  +--- BRIDGE PARAMETERS -------------------------+")
+  let mut coil_match_str = "NO"
+  if fr_coils[w_fidx] > 0 {
+    if fr_coils[w_fidx] == sr_mcoils[w_sidx] {
+      coil_match_str = "YES"
+    }
+  }
+  println(format("  | Coil match:   fusion {} == SC {} ? {}", to_string(fr_coils[w_fidx]), to_string(sr_mcoils[w_sidx]), coil_match_str))
+  println(format("  | Field:        fusion needs {}T, SC delivers {}T", fmt_1f(fr_field[w_fidx]), fmt_1f(sr_fach[w_sidx])))
+  let mut t30_str = "FAIL"
+  if sr_fach[w_sidx] >= 30.0 {
+    t30_str = "PASS"
+  }
+  println(format("  | 30T+ check:   {} (next-gen tokamak)", t30_str))
+  let mut eg_str = "NO"
+  if fr_egypt[w_fidx] == 1 {
+    eg_str = "YES"
+  }
+  println(format("  | Egyptian:     {} (1/2+1/3+1/6 conversion)", eg_str))
+  println(format("  | Bridge bonus: {}", fmt_2f(cr_bb[w_cidx])))
+  println(format("  | Cross score:  {}", fmt_score(cr_xs[w_cidx])))
+  println(format("  | n6 EXACT:     {}/11 ({}%)", to_string(cr_n6t[w_cidx]), fmt_1f(cr_n6t[w_cidx] / 11.0 * 100.0)))
+  println("  +-------------------------------------------------+")
+
+  // Architecture diagram
+  println("")
+  println("  +--- ARCHITECTURE DIAGRAM -----------------------------------------------+")
+  println("  |                                                                        |")
+  println("  |  FUSION                          SUPERCONDUCTOR                        |")
+  println("  |  ======                          ==============                        |")
+  println(format("  |  L1 {}               L1 {} (Tc={}K)              |", pad_l(fu_m_name[fr_i0[w_fidx]], 16), pad_l(sc_m_name[sr_i0[w_sidx]], 10), to_string(round(sr_tc[w_sidx]))))
+  println("  |       |                                |                               |")
+  println(format("  |  L2 {}               L2 {}                         |", pad_l(fu_p_name[fr_i1[w_fidx]], 16), pad_l(sc_p_name[sr_i1[w_sidx]], 10)))
+  println("  |       |                                |                               |")
+  println(format("  |  L3 {} ---{}T--> L3 {} (je={}x)             |", pad_l(fu_c_name[fr_i2[w_fidx]], 16), to_string(round(fr_field[w_fidx])), pad_l(sc_w_name[sr_i2[w_sidx]], 10), fmt_1f(sc_w_je[sr_i2[w_sidx]])))
+  println("  |       |                ^               |                               |")
+  println(format("  |  L4 {}  |          L4 {} ({}T limit)         |", pad_l(fu_s_name[fr_i3[w_fidx]], 16), pad_l(sc_mg_name[sr_i3[w_sidx]], 11), to_string(round(sr_flim[w_sidx]))))
+  println("  |       |              BRIDGE            |                               |")
+  println(format("  |  L5 {} ({}MW)  L5 {} ({}K)              |", pad_l(fu_g_name[fr_i4[w_fidx]], 16), to_string(round(fr_power[w_fidx])), pad_l(sc_cl_name[sr_i4[w_sidx]], 12), fmt_1f(sc_cl_temp[sr_i4[w_sidx]])))
+  println("  |                                        |                               |")
+  println(format("  |                                   L6 {} (sigma=12)          |", pad_l(sc_sy_name[sr_i5[w_sidx]], 12)))
+  println("  |                                                                        |")
+  println("  |  sigma(6)*phi(6) = 6*tau(6) = 24 = J_2(6)                             |")
+  println("  +------------------------------------------------------------------------+")
+}
+
+// -- Summary --
+println("")
+println(repeat_str("=", 67))
+println("  SUMMARY")
+println(repeat_str("=", 67))
+println(format("  Fusion domain:     {} combinations explored", to_string(fr_count)))
+println(format("  SC domain (full):  {} combinations", to_string(sc_all_count)))
+println(format("  SC fusion-compat:  {} combinations", to_string(sr_count)))
+println(format("  Cross-DSE pairs:   {} compatible / 2,500 attempted", to_string(cr_count)))
+if cr_count > 0 {
+  let w0 = cr_si[0]
+  println(format("  Best cross score:  {}", fmt_score(cr_xs[w0])))
+  println(format("  Best field:        {}T", fmt_1f(cr_fa[w0])))
+  println(format("  Best n6 EXACT:     {}/11 ({}%)", to_string(cr_n6t[w0]), fmt_1f(cr_n6t[w0] / 11.0 * 100.0)))
+}
+
+println("")
+println("  n=6: sigma(6)*phi(6) = 12*2 = 24 = 6*4 = n*tau(6)")
+println("  The unique solution. QED.")
+println("")
