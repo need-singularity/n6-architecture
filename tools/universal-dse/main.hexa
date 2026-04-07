@@ -402,18 +402,20 @@ fn is_compat(indices) {
               ri = g_r_count + 1
             }
           }
-          if g_r_type[ri] == "exclude" {
-            let id_list = split(g_r_then_ids[ri], ",")
-            let mut found = false
-            let mut k = 0
-            while k < len(id_list) {
-              if trim(id_list[k]) == then_id {
-                found = true
+          if ri < g_r_count {
+            if g_r_type[ri] == "exclude" {
+              let id_list = split(g_r_then_ids[ri], ",")
+              let mut found = false
+              let mut k = 0
+              while k < len(id_list) {
+                if trim(id_list[k]) == then_id {
+                  found = true
+                }
+                k = k + 1
               }
-              k = k + 1
-            }
-            if found {
-              ri = g_r_count + 1
+              if found {
+                ri = g_r_count + 1
+              }
             }
           }
         }
