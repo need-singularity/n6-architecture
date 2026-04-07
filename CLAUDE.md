@@ -549,13 +549,52 @@ Build with `~/.cargo/bin/rustc file.rs -o output` (no cargo). Located in tools/:
       논문 마지막에 ```python 블록으로 모든 EXACT 상수를 검증하는 코드 포함
       실행 시 PASS/FAIL 자동 판정 출력
       검증코드 없는 논문 = 미완성 (커밋 전 반드시 추가)
+
+      🚫 동어반복 검증 절대 금지 (PreToolUse hook이 자동 차단함):
+        ❌ 금지: sigma = 12; assert 12 == sigma  ← 하드코딩끼리 비교 = 검증 아님
+        ❌ 금지: check("months", 12, sigma) where sigma=12  ← 동어반복
+        ❌ 금지: print만 하고 실제 계산 없는 코드
+
+      ✅ 올바른 검증 = 정의에서 도출:
+        1. n6 상수를 수학 정의로 직접 계산
+        2. 또는 독립 라이브러리(sympy 등)로 교차검증
+        3. 가능하면 실제 데이터/논문 수치와 대조
+
       양식:
         ```python
         # 검증코드 — n6-<domain>-paper.md
-        from fractions import Fraction
+        # ── n6 상수를 정의에서 직접 도출 (하드코딩 금지!) ──
+        def sigma(n): return sum(d for d in range(1, n+1) if n % d == 0)
+        def tau(n):   return sum(1 for d in range(1, n+1) if n % d == 0)
+        def phi(n):   return sum(1 for k in range(1, n+1) if __import__('math').gcd(k, n) == 1)
+        def sopfr(n):
+            s, d = 0, 2
+            while d * d <= n:
+                while n % d == 0: s += d; n //= d
+                d += 1
+            if n > 1: s += n
+            return s
+        def jordan(n, k=2):
+            result = n ** k
+            d = 2
+            while d * d <= n:
+                if n % d == 0:
+                    result = result * (1 - 1 / d**k)
+                    while n % d == 0: n //= d
+                d += 1
+            if n > 1: result = result * (1 - 1 / n**k)
+            return int(result)
+
+        # ── 상수 도출 검증 ──
+        assert sigma(6) == 12   # σ(6) = 1+2+3+6
+        assert tau(6) == 4      # τ(6) = |{1,2,3,6}|
+        assert phi(6) == 2      # φ(6) = |{1,5}|
+        assert sopfr(6) == 5    # sopfr(6) = 2+3
+        assert jordan(6) == 24  # J₂(6)
+
+        # ── BT 파라미터 검증 (도출된 상수 사용) ──
         results = []
-        # ... 각 BT 파라미터 검증 ...
-        results.append(("BT-XXX 파라미터명", 실제값, 기대값, 실제값==기대값))
+        results.append(("BT-XXX 파라미터명", 실측값, sigma(6), 실측값 == sigma(6)))
         passed = sum(1 for r in results if r[3])
         print(f"검증 결과: {passed}/{len(results)} PASS")
         for r in results:
@@ -1277,6 +1316,8 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py
          → 모든 EXACT 상수를 코드로 재현 가능해야 함
          → 실행 시 PASS/FAIL 판정 자동 출력
          → 코드 없는 🛸10 = 무효 (🛸9로 강등)
+         → 🚫 동어반복 금지: sigma=12 하드코딩 후 12==sigma는 검증 아님
+         → 반드시 def sigma(n): sum(d for d in range(1,n+1) if n%d==0) 등 정의에서 도출
      9 = 실제 양산 + 모든 예측 전수 검증 완료
      8 = 프로토타입 제작 + 실험 데이터 확보
      7 = 완전 설계 (BT + DSE + Cross-DSE + Evolution + Alien + TP 모두)
