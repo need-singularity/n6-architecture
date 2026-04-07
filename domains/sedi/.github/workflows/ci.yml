@@ -1,0 +1,139 @@
+# -----------------------------------------------------------------
+# SEDI CI — Troubleshooting
+# -----------------------------------------------------------------
+# Q: cdo-validate fails with "parse error"?
+#    A: A JSON file has syntax errors. Check the file listed in output.
+#       Fix the JSON, push again.
+#
+# Q: cdo-validate warns "no _meta field"?
+#    A: A config JSON is missing CDO structure. Add _meta with
+#       description, updated, schema_version fields.
+#       See .shared/convergence_ops.json for the schema.
+#
+# Q: .shared/ symlink not found in CI?
+#    A: .shared/ is a symlink to ../TECS-L/.shared/ which doesn't
+#       exist in CI. CDO validation uses inline Python, not the
+#       symlink. Do NOT add .shared/ checkout to CI.
+#
+# 2026-04-03: cdo-validate FileNotFoundError on data/sedi-grades.json
+#   원인: data/sedi-grades.json이 심링크 → CI에서 실제 파일 없음
+#   해결: os.walk 결과에서 broken symlink 스킵 (islink + not exists)
+# -----------------------------------------------------------------
+
+name: SEDI CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  rust-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build all tools
+        run: cd tools && cargo build --release
+      - name: Run discovery-engine
+        run: tools/target/release/sedi-discovery-engine --json > /dev/null
+      - name: Run formula-miner
+        run: timeout 30 tools/target/release/sedi-formula-miner > /dev/null || true
+      - name: Run signal-analyzer
+        run: tools/target/release/sedi-signal-analyzer --json > /dev/null
+
+  python-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Python syntax
+        run: python3 -m py_compile sedi/cli.py && python3 -m py_compile sedi/receiver.py && python3 -m py_compile sedi/tecs.py
+      - name: Run grader
+        run: python3 scripts/auto_grade_n6.py || true
+      - name: Run temporal health
+        run: python3 scripts/temporal_health.py || true
+      - name: Run self-improve
+        run: python3 scripts/self_improve.py || true
+
+  graph-builder:
+    runs-on: ubuntu-latest
+    needs: rust-build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build and run graph-builder
+        run: |
+          cd tools && cargo build --release -p sedi-graph-builder
+          ./target/release/sedi-graph-builder --stats --dir ../docs/hypotheses
+
+  cdo-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: CDO JSON schema validation
+        run: |
+          cat > /tmp/validate_cdo.py << 'PYEOF'
+          import json, os, sys
+          SKIP_DIRS = {'.git', 'node_modules', 'target', '__pycache__', '.local', 'venv', '.venv'}
+          SKIP_FILES = {'package.json', 'package-lock.json', 'tsconfig.json',
+                        'Cargo.lock', '.claude/settings.local.json'}
+          ok, warn, fail = [], [], []
+          for root, dirs, files in os.walk('.'):
+              dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+              for f in sorted(files):
+                  if not f.endswith('.json'):
+                      continue
+                  rel = os.path.relpath(os.path.join(root, f), '.')
+                  if any(rel.endswith(s) for s in SKIP_FILES):
+                      continue
+                  if '.claude/' in rel:
+                      continue
+                  path = os.path.join(root, f)
+                  if os.path.islink(path) and not os.path.exists(path):
+                      continue  # skip broken symlinks (e.g. .shared/ refs)
+                  try:
+                      with open(path) as fh:
+                          data = json.load(fh)
+                  except (FileNotFoundError, json.JSONDecodeError, UnicodeDecodeError) as e:
+                      fail.append((rel, f'parse error: {e}'))
+                      continue
+                  if not isinstance(data, dict):
+                      continue
+                  if '_meta' in data:
+                      meta = data['_meta']
+                      missing = [k for k in ('description', 'updated', 'schema_version')
+                                 if k not in meta]
+                      if missing:
+                          warn.append((rel, f'_meta missing fields: {missing}'))
+                      else:
+                          ok.append(rel)
+                  else:
+                      warn.append((rel, 'no _meta field'))
+          total = len(ok) + len(warn) + len(fail)
+          print(f'CDO JSON Validation: .')
+          print(f'  OK: {len(ok)}  Warn: {len(warn)}  Fail: {len(fail)}  Total: {total}')
+          if ok:
+              print('\n[OK] CDO compliant:')
+              for f in ok:
+                  print(f'  {f}')
+          if warn:
+              print('\n[WARN] Missing CDO structure:')
+              for f, msg in warn:
+                  print(f'  {f}: {msg}')
+          if fail:
+              print('\n[FAIL] Broken JSON:')
+              for f, msg in fail:
+                  print(f'  {f}: {msg}')
+          convergence = len(ok) / total * 100 if total > 0 else 100
+          print(f'\nConvergence: {convergence:.0f}% ({len(ok)}/{total})')
+          if fail:
+              sys.exit(1)
+          PYEOF
+          python3 /tmp/validate_cdo.py

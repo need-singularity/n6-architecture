@@ -1,0 +1,37 @@
+{
+    "_meta": {
+        "description": "Zenodo metadata for SEDI publication",
+        "updated": "2026-04-03",
+        "schema_version": "1.0"
+    },
+    "title": "SEDI: Search for Extra-Dimensional Intelligence \u2014 n=6 Arithmetic Patterns in Particle Physics",
+    "description": "Systematic analysis of particle physics data using the arithmetic of perfect number 6. Fisher-combined 5.26\u03c3 significance from independent findings: QCD resonance ladder (\u03c1\u00d74=J/\u03c8\u00d73=\u03a5, 3.8\u03c3), Higgs decay branching ratios (H\u2192bb\u0304=7/12, H\u2192\u03c4\u03c4=1/16), and quark-lepton mass bridge ((charm-up)/12=muon, 3.4\u03c3). Includes 29 testable predictions for LHC, LiteBIRD, and Hyper-Kamiokande. All code open-source with Monte Carlo validation.",
+    "upload_type": "software",
+    "publication_type": "workingpaper",
+    "creators": [
+        {
+            "name": "need-singularity",
+            "affiliation": "Independent Researcher"
+        }
+    ],
+    "keywords": [
+        "particle physics",
+        "number theory",
+        "perfect numbers",
+        "Standard Model",
+        "signal detection",
+        "Monte Carlo",
+        "QCD resonances",
+        "Higgs boson",
+        "divisor functions"
+    ],
+    "license": "MIT",
+    "related_identifiers": [
+        {
+            "identifier": "https://github.com/need-singularity/TECS-L",
+            "relation": "isSupplementTo",
+            "scheme": "url"
+        }
+    ],
+    "notes": "Companion software to TECS-L mathematical framework. Contact: nerve011235@gmail.com"
+}

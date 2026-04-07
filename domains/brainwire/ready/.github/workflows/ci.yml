@@ -1,0 +1,100 @@
+# brainwire CI — Convergence-Driven Operations (CDO)
+#
+# Troubleshooting:
+#   - HW-dependent tests skipped: test_eeg_feedback.py, test_hardware.py
+#     plus -k "not eeg and not brainflow and not serial"
+#   - py_compile verifies syntax without importing (no deps needed)
+#   - CDO validate_cdo.py: exit 1 only on broken JSON, warnings are OK
+#
+# 2026-04-03: pip install -e ".[dev]" 실패
+#   원인: setuptools flat-layout가 joywire, brainwire, calculator 3개 패키지 발견
+#   해결: editable install 대신 직접 의존성 설치 (pytest pyyaml numpy scipy)
+#   규칙: pyproject.toml에 [tool.setuptools.packages.find] include 추가 전까지 유지
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify-syntax:
+    name: Verify Python Syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: py_compile brainwire/ package
+        run: |
+          python -m py_compile brainwire/__init__.py
+          find brainwire -name '*.py' -print0 | xargs -0 -n1 python -m py_compile
+
+  python-tests:
+    name: Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      # [중요] pip install -e . 실패: flat-layout에서 multiple packages 감지
+      # pyproject.toml에 packages.find.include 설정 전까지 직접 설치
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest pyyaml numpy scipy
+
+      - name: Run tests
+        env:
+          PYTHONPATH: .
+        run: |
+          pytest tests/ -v \
+            --ignore=tests/test_eeg_feedback.py \
+            --ignore=tests/test_hardware.py \
+            -k "not eeg and not brainflow and not serial"
+
+  cdo-validate:
+    name: CDO JSON Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate CDO JSON schemas
+        run: |
+          python3 -c "
+          import json, os, sys
+          SKIP = {'.git', 'target', '__pycache__', 'node_modules', 'venv', '.venv', '.claude'}
+          ok = warn = fail = 0
+          for root, dirs, files in os.walk('.'):
+              dirs[:] = [d for d in dirs if d not in SKIP]
+              for f in files:
+                  if not f.endswith('.json'): continue
+                  path = os.path.join(root, f)
+                  try:
+                      with open(path) as fh:
+                          data = json.load(fh)
+                  except (json.JSONDecodeError, UnicodeDecodeError) as e:
+                      print(f'FAIL  {path}: {e}')
+                      fail += 1
+                      continue
+                  if not isinstance(data, dict): continue
+                  if '_meta' in data: ok += 1
+                  else:
+                      print(f'WARN  {path}: missing _meta')
+                      warn += 1
+          print(f'\nCDO: {ok} ok, {warn} warn, {fail} fail')
+          if fail: sys.exit(1)
+          "

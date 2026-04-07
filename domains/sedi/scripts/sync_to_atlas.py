@@ -1,1 +1,0 @@
-../../.shared/sync_to_atlas.py

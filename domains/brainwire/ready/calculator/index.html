@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrainWire THC Variable Calculator</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-card: #141414;
+    --bg-card-hover: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --accent: #00ff88;
+    --accent-dim: #00cc6a;
+    --yellow: #ffcc00;
+    --red: #ff4444;
+    --green: #00ff88;
+  }
+
+  html { font-size: 14px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #111 0%, var(--bg) 100%);
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  header h1 .emoji { font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; }
+
+  header p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+
+  .presets {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .preset-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.15s;
+  }
+
+  .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .preset-btn.active { border-color: var(--accent); background: #00ff8812; color: var(--accent); }
+
+  .preset-btn .tier-price {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .preset-btn:hover .tier-price,
+  .preset-btn.active .tier-price { color: var(--accent-dim); }
+
+  .main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .panel-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .group-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--yellow);
+    margin: 1rem 0 0.5rem;
+    padding-left: 2px;
+  }
+
+  .group-title:first-of-type { margin-top: 0.25rem; }
+
+  .slider-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 50px;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .slider-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+
+  .slider-val {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Results panel */
+  .result-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 55px 55px;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .result-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .bar-container {
+    height: 18px;
+    background: #1e1e1e;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.2s, background-color 0.2s;
+    min-width: 2px;
+  }
+
+  .bar-target {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: rgba(255,255,255,0.4);
+  }
+
+  .result-current {
+    text-align: right;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .result-target {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .color-green { color: var(--green); }
+  .color-yellow { color: var(--yellow); }
+  .color-red { color: var(--red); }
+  .bar-green { background: linear-gradient(90deg, #00aa55, var(--green)); }
+  .bar-yellow { background: linear-gradient(90deg, #cc9900, var(--yellow)); }
+  .bar-red { background: linear-gradient(90deg, #aa2222, var(--red)); }
+
+  /* Summary footer */
+  .summary {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem 1.5rem;
+  }
+
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .summary-item {
+    text-align: center;
+  }
+
+  .summary-item .label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+  }
+
+  .summary-item .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .summary-item .value.score-good { color: var(--green); }
+  .summary-item .value.score-mid { color: var(--yellow); }
+  .summary-item .value.score-bad { color: var(--red); }
+
+  .tier-badge {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .tier-1 { background: #00ff8820; color: var(--green); border: 1px solid var(--green); }
+  .tier-2 { background: #ffcc0020; color: var(--yellow); border: 1px solid var(--yellow); }
+  .tier-3 { background: #ff444420; color: var(--red); border: 1px solid var(--red); }
+
+  .cost-breakdown {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    transition: all 0.15s;
+  }
+
+  .reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* Mobile */
+  @media (max-width: 860px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .slider-row { grid-template-columns: 1fr 50px 45px; }
+    .result-row { grid-template-columns: 75px 1fr 48px 48px; }
+    header h1 { font-size: 1.2rem; }
+  }
+
+  @media (max-width: 500px) {
+    html { font-size: 13px; }
+    .presets { gap: 0.4rem; }
+    .preset-btn { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+    .summary-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="emoji">&#x1F9E0;&#x26A1;</span> BrainWire THC Variable Calculator</h1>
+  <p>12-variable transfer function simulator &mdash; real-time neuromodulation parameter tuning</p>
+</header>
+
+<div class="presets">
+  <button class="preset-btn" onclick="applyPreset('low')">
+    Tier 1: Low Budget
+    <span class="tier-price">~$95</span>
+  </button>
+  <button class="preset-btn" onclick="applyPreset('mid')">
+    Tier 2: Mid Budget
+    <span class="tier-price">~$525</span>
+  </button>
+  <button class="preset-btn" onclick="applyPreset('high')">
+    Tier 3: Full Stack
+    <span class="tier-price">~$8,500</span>
+  </button>
+  <button class="reset-btn" onclick="resetAll()">Reset All</button>
+</div>
+
+<div class="main-layout">
+  <!-- LEFT: Sliders -->
+  <div class="panel" id="sliders-panel">
+    <div class="panel-title">Hardware Parameters</div>
+    <!-- Built by JS -->
+  </div>
+
+  <!-- RIGHT: Results -->
+  <div class="panel" id="results-panel">
+    <div class="panel-title">THC Achievement (12 Variables)</div>
+    <div id="results-container"></div>
+  </div>
+</div>
+
+<div class="summary">
+  <div class="summary-card">
+    <div class="summary-item">
+      <div class="label">Overall Score</div>
+      <div class="value" id="overall-score">0%</div>
+    </div>
+    <div class="summary-item">
+      <div class="label">Variables Hit (>=100%)</div>
+      <div class="value" id="vars-hit">0 / 12</div>
+    </div>
+    <div class="summary-item">
+      <div class="label">Estimated Cost</div>
+      <div class="value" id="cost-display">$0</div>
+      <div class="cost-breakdown" id="cost-breakdown"></div>
+    </div>
+    <div class="summary-item">
+      <div class="label">Budget Tier</div>
+      <div id="tier-display"><span class="tier-badge tier-1">--</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ── Parameter definitions ──
+const PARAMS = [
+  // Electrical
+  { id: "tDCS_anode",       label: "tDCS anode mA",        group: "electrical", min: 0, max: 2,  step: 0.1  },
+  { id: "tDCS_cathode_Fz",  label: "tDCS cathode Fz mA",   group: "electrical", min: 0, max: 2,  step: 0.1  },
+  { id: "tDCS_cathode_F4",  label: "tDCS cathode F4 mA",   group: "electrical", min: 0, max: 2,  step: 0.1  },
+  { id: "tDCS_anode_V1",    label: "tDCS anode V1 mA",     group: "electrical", min: 0, max: 2,  step: 0.1  },
+  { id: "taVNS",            label: "taVNS mA",             group: "electrical", min: 0, max: 0.5, step: 0.05 },
+  { id: "TENS_low",         label: "TENS low-freq",        group: "electrical", min: 0, max: 1,   step: 0.1  },
+  { id: "TMS_theta",        label: "TMS theta (6Hz)",      group: "electrical", min: 0, max: 1,   step: 0.1  },
+  { id: "TMS_1Hz",          label: "TMS 1Hz",              group: "electrical", min: 0, max: 1,   step: 0.1  },
+  { id: "TMS_40Hz",         label: "TMS 40Hz",             group: "electrical", min: 0, max: 1,   step: 0.1  },
+  { id: "tACS_6Hz",         label: "tACS 6Hz mA",          group: "electrical", min: 0, max: 2,   step: 0.1  },
+  // Sensory
+  { id: "LED_40Hz",         label: "LED 40Hz",             group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  { id: "audio_40Hz",       label: "Audio 40Hz",           group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  { id: "binaural_6Hz",     label: "Binaural 6Hz",         group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  { id: "vibro_40Hz",       label: "Vibro 40Hz",           group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  { id: "vibro_general",    label: "Vibro general",        group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  { id: "noise_level",      label: "Noise level",          group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  { id: "music",            label: "Music pleasure",       group: "sensory",    min: 0, max: 1,   step: 0.1  },
+  // Thermal/Pressure
+  { id: "heat_degC",        label: "Heat \u0394T (\u00b0C)",  group: "thermal",    min: 0, max: 5,   step: 0.5  },
+  { id: "weight_kgm2",      label: "Weight (kg/m\u00b2)",     group: "thermal",    min: 0, max: 15,  step: 1    },
+  { id: "alpha_ent",        label: "Alpha entrainment",    group: "thermal",    min: 0, max: 1,   step: 0.1  },
+];
+
+const GROUP_LABELS = {
+  electrical: "\u26A1 \uC804\uAE30\uC790\uADF9 (Electrical)",
+  sensory:    "\uD83D\uDD0A \uAC10\uAC01\uC790\uADF9 (Sensory)",
+  thermal:    "\uD83C\uDF21\uFE0F \uC5F4/\uC555\uB825 (Thermal/Pressure)",
+};
+
+// THC targets
+const THC_TARGET = {
+  DA: 2.5, eCB: 3.0, "5HT": 1.5, GABA: 1.8, NE: 0.4,
+  Theta: 2.5, Alpha: 0.5, Gamma: 1.8, PFC: 0.5,
+  Sensory: 2.0, Body: 2.5, Coherence: 2.0,
+};
+
+const THC_LABELS = {
+  DA: "DA (\uB3C4\uD30C\uBBFC)",
+  eCB: "eCB (\uCE78\uB098\uBE44)",
+  "5HT": "5-HT (\uC138\uB85C\uD1A0\uB2CC)",
+  GABA: "GABA",
+  NE: "NE (\uB178\uB974\uC5D0\uD53C)",
+  Theta: "Theta (\uC138\uD0C0\uD30C)",
+  Alpha: "Alpha (\uC54C\uD30C\uD30C)",
+  Gamma: "Gamma (\uAC10\uB9C8\uD30C)",
+  PFC: "PFC (\uC804\uB450\uC5FD\u2193)",
+  Sensory: "Sensory (\uAC10\uAC01\u2191)",
+  Body: "Body (\uC2E0\uCCB4\uAC10)",
+  Coherence: "Coherence (\uB3D9\uAE30\uD654)",
+};
+
+// State
+const state = {};
+PARAMS.forEach(p => state[p.id] = 0);
+
+// ── Build UI ──
+function buildSliders() {
+  const container = document.getElementById("sliders-panel");
+  const groups = ["electrical", "sensory", "thermal"];
+
+  groups.forEach(g => {
+    const title = document.createElement("div");
+    title.className = "group-title";
+    title.textContent = GROUP_LABELS[g];
+    container.appendChild(title);
+
+    PARAMS.filter(p => p.group === g).forEach(p => {
+      const row = document.createElement("div");
+      row.className = "slider-row";
+      row.innerHTML = `
+        <label class="slider-label" title="${p.label}">${p.label}</label>
+        <input type="range" id="slider-${p.id}" min="${p.min}" max="${p.max}" step="${p.step}" value="0">
+        <span class="slider-val" id="val-${p.id}">0</span>
+      `;
+      container.appendChild(row);
+
+      const slider = row.querySelector("input");
+      const valSpan = row.querySelector(".slider-val");
+
+      slider.addEventListener("input", () => {
+        const v = parseFloat(slider.value);
+        state[p.id] = v;
+        valSpan.textContent = formatVal(v, p.step);
+        update();
+        clearActivePreset();
+      });
+    });
+  });
+}
+
+function buildResults() {
+  const container = document.getElementById("results-container");
+  const keys = Object.keys(THC_TARGET);
+  keys.forEach(k => {
+    const row = document.createElement("div");
+    row.className = "result-row";
+    row.id = `row-${k}`;
+    row.innerHTML = `
+      <span class="result-label">${THC_LABELS[k]}</span>
+      <div class="bar-container">
+        <div class="bar-fill" id="bar-${k}"></div>
+        <div class="bar-target" id="target-${k}"></div>
+      </div>
+      <span class="result-current" id="cur-${k}">1.00</span>
+      <span class="result-target">/ ${THC_TARGET[k].toFixed(1)}</span>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function formatVal(v, step) {
+  if (step >= 1) return v.toFixed(0);
+  if (step >= 0.1) return v.toFixed(1);
+  return v.toFixed(2);
+}
+
+// ── Transfer functions ──
+function compute() {
+  const s = state;
+  // tDCS_mA uses anode as the primary current
+  const tDCS_mA = s.tDCS_anode;
+  const VNS_mA = s.taVNS;
+  const gamma_avg = (s.LED_40Hz + s.audio_40Hz + s.vibro_40Hz) / 3;
+
+  const result = {};
+  result.DA       = 1 + 0.25 * tDCS_mA + 0.80 * VNS_mA + 1.50 * s.music;
+  result.eCB      = 1 + 0.80 * s.TENS_low + 0.30 * s.heat_degC + 0.60 * VNS_mA + 0.50 * s.vibro_general;
+  result["5HT"]   = 1 + 1.20 * VNS_mA + 0.15 * tDCS_mA;
+  result.GABA     = 1 + 0.20 * tDCS_mA + 0.03 * s.weight_kgm2 + 0.30 * s.alpha_ent;
+  result.NE       = Math.max(0.01, 1 - 1.50 * VNS_mA);
+  result.Theta    = 1 + 0.80 * s.TMS_theta + 0.40 * s.binaural_6Hz + 0.35 * s.tACS_6Hz;
+  result.Alpha    = Math.max(0.01, 1 - 0.20 * s.tDCS_cathode_Fz - 0.25 * s.TMS_1Hz);
+  result.Gamma    = 1 + 0.30 * s.LED_40Hz + 0.25 * s.audio_40Hz + 0.20 * s.vibro_40Hz;
+  result.PFC      = Math.max(0.01, 1 - 0.20 * s.tDCS_cathode_F4 - 0.25 * s.TMS_1Hz);
+  result.Sensory  = 1 + 0.15 * s.tDCS_anode_V1 + 0.40 * s.noise_level + 0.20 * s.LED_40Hz;
+  result.Body     = 1 + 0.80 * s.TENS_low + 0.30 * s.heat_degC + 0.50 * s.vibro_general;
+  result.Coherence = 1 + 0.30 * gamma_avg + 0.40 * s.TMS_40Hz + 0.20 * gamma_avg;
+  return result;
+}
+
+function estimateCost() {
+  const s = state;
+  let cost = 0;
+  const items = [];
+
+  const tDCS_used = s.tDCS_anode > 0 || s.tDCS_cathode_Fz > 0 || s.tDCS_cathode_F4 > 0 || s.tDCS_anode_V1 > 0;
+  if (tDCS_used) { cost += 30; items.push("tDCS $30"); }
+
+  if (s.taVNS > 0) { cost += 100; items.push("taVNS $100"); }
+  if (s.TENS_low > 0) { cost += 25; items.push("TENS $25"); }
+
+  const TMS_used = s.TMS_theta > 0 || s.TMS_1Hz > 0 || s.TMS_40Hz > 0;
+  if (TMS_used) { cost += 5000; items.push("TMS $5,000"); }
+
+  if (s.tACS_6Hz > 0) { cost += 80; items.push("tACS $80"); }
+
+  const LED_used = s.LED_40Hz > 0;
+  if (LED_used) { cost += 15; items.push("LED+Arduino $15"); }
+
+  const vibro_used = s.vibro_40Hz > 0 || s.vibro_general > 0;
+  if (vibro_used) { cost += 5; items.push("Vibro $5"); }
+
+  if (s.heat_degC > 0) { cost += 20; items.push("Heated pad $20"); }
+  if (s.weight_kgm2 > 0) { cost += 40; items.push("Weighted blanket $40"); }
+
+  return { cost, items };
+}
+
+// ── Update display ──
+function update() {
+  const result = compute();
+  const keys = Object.keys(THC_TARGET);
+  let totalPct = 0;
+  let hitCount = 0;
+
+  keys.forEach(k => {
+    const current = result[k];
+    const target = THC_TARGET[k];
+    const pct = (current / target) * 100;
+    totalPct += Math.min(pct, 100);
+    if (pct >= 100) hitCount++;
+
+    const bar = document.getElementById(`bar-${k}`);
+    const cur = document.getElementById(`cur-${k}`);
+    const targetLine = document.getElementById(`target-${k}`);
+
+    // Bar width: cap display at 120% for visual
+    const barWidth = Math.min(pct, 120);
+    bar.style.width = barWidth + "%";
+
+    // Color
+    let colorClass;
+    if (pct >= 100) colorClass = "green";
+    else if (pct >= 80) colorClass = "yellow";
+    else colorClass = "red";
+
+    bar.className = `bar-fill bar-${colorClass}`;
+    cur.className = `result-current color-${colorClass}`;
+    cur.textContent = current.toFixed(2);
+
+    // Target line position: at 100% of target within bar
+    // Bar represents 0 to max(current, target)*1.2 conceptually,
+    // but simpler: target line at (100/120)*100 = 83.3% if bar can go to 120%
+    targetLine.style.left = (100 / 1.2) + "%";
+  });
+
+  // Overall score
+  const overallPct = totalPct / keys.length;
+  const scoreEl = document.getElementById("overall-score");
+  scoreEl.textContent = overallPct.toFixed(1) + "%";
+  scoreEl.className = "value " + (overallPct >= 90 ? "score-good" : overallPct >= 70 ? "score-mid" : "score-bad");
+
+  // Vars hit
+  const varsEl = document.getElementById("vars-hit");
+  varsEl.textContent = `${hitCount} / 12`;
+  varsEl.className = "value " + (hitCount >= 10 ? "score-good" : hitCount >= 6 ? "score-mid" : "score-bad");
+
+  // Cost
+  const { cost, items } = estimateCost();
+  const costEl = document.getElementById("cost-display");
+  costEl.textContent = "$" + cost.toLocaleString();
+
+  const breakdownEl = document.getElementById("cost-breakdown");
+  breakdownEl.textContent = items.length ? items.join(" + ") : "No hardware selected";
+
+  // Tier
+  const tierEl = document.getElementById("tier-display");
+  let tierClass, tierText;
+  if (cost <= 200) { tierClass = "tier-1"; tierText = "Tier 1 (Low)"; }
+  else if (cost <= 1000) { tierClass = "tier-2"; tierText = "Tier 2 (Mid)"; }
+  else { tierClass = "tier-3"; tierText = "Tier 3 (High)"; }
+  tierEl.innerHTML = `<span class="tier-badge ${tierClass}">${tierText}</span>`;
+}
+
+// ── Presets ──
+const PRESETS = {
+  low: {
+    // tDCS + TENS + LED + vibro + heat + blanket + music + alpha + noise
+    tDCS_anode: 2.0, tDCS_cathode_Fz: 2.0, tDCS_cathode_F4: 2.0, tDCS_anode_V1: 2.0,
+    taVNS: 0, TENS_low: 1.0, TMS_theta: 0, TMS_1Hz: 0, TMS_40Hz: 0, tACS_6Hz: 0,
+    LED_40Hz: 1.0, audio_40Hz: 1.0, binaural_6Hz: 1.0, vibro_40Hz: 1.0, vibro_general: 1.0,
+    noise_level: 1.0, music: 1.0, heat_degC: 5.0, weight_kgm2: 10, alpha_ent: 1.0,
+  },
+  mid: {
+    // + taVNS + tACS
+    tDCS_anode: 2.0, tDCS_cathode_Fz: 2.0, tDCS_cathode_F4: 2.0, tDCS_anode_V1: 2.0,
+    taVNS: 0.5, TENS_low: 1.0, TMS_theta: 0, TMS_1Hz: 0, TMS_40Hz: 0, tACS_6Hz: 2.0,
+    LED_40Hz: 1.0, audio_40Hz: 1.0, binaural_6Hz: 1.0, vibro_40Hz: 1.0, vibro_general: 1.0,
+    noise_level: 1.0, music: 1.0, heat_degC: 5.0, weight_kgm2: 10, alpha_ent: 1.0,
+  },
+  high: {
+    // + TMS everything
+    tDCS_anode: 2.0, tDCS_cathode_Fz: 2.0, tDCS_cathode_F4: 2.0, tDCS_anode_V1: 2.0,
+    taVNS: 0.5, TENS_low: 1.0, TMS_theta: 1.0, TMS_1Hz: 1.0, TMS_40Hz: 1.0, tACS_6Hz: 2.0,
+    LED_40Hz: 1.0, audio_40Hz: 1.0, binaural_6Hz: 1.0, vibro_40Hz: 1.0, vibro_general: 1.0,
+    noise_level: 1.0, music: 1.0, heat_degC: 5.0, weight_kgm2: 15, alpha_ent: 1.0,
+  },
+};
+
+function applyPreset(tier) {
+  const preset = PRESETS[tier];
+  PARAMS.forEach(p => {
+    const val = preset[p.id] !== undefined ? preset[p.id] : 0;
+    state[p.id] = val;
+    const slider = document.getElementById(`slider-${p.id}`);
+    slider.value = val;
+    document.getElementById(`val-${p.id}`).textContent = formatVal(val, p.step);
+  });
+
+  document.querySelectorAll(".preset-btn").forEach(btn => btn.classList.remove("active"));
+  const btns = document.querySelectorAll(".preset-btn");
+  const idx = { low: 0, mid: 1, high: 2 }[tier];
+  if (btns[idx]) btns[idx].classList.add("active");
+
+  update();
+}
+
+function clearActivePreset() {
+  document.querySelectorAll(".preset-btn").forEach(btn => btn.classList.remove("active"));
+}
+
+function resetAll() {
+  PARAMS.forEach(p => {
+    state[p.id] = 0;
+    const slider = document.getElementById(`slider-${p.id}`);
+    slider.value = 0;
+    document.getElementById(`val-${p.id}`).textContent = formatVal(0, p.step);
+  });
+  clearActivePreset();
+  update();
+}
+
+// ── Init ──
+buildSliders();
+buildResults();
+update();
+</script>
+</body>
+</html>

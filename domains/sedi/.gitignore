@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.eggs/
+sedi_alerts.jsonl
+*.hdf5
+*.h5
+.env
+
+# Rust build artifacts
+tools/*/target/
+tools/target/
+
+sedi-core/target/
+
+# Large SETI data files
+data/seti/breakthrough_listen/*.fil
+data/seti/breakthrough_listen/*.fits
+
+
+# TECS-L calc symlink
+calc
+# TECS-L .shared symlink
+.shared
+tecsrs

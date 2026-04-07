@@ -1,1 +1,0 @@
-../calc/perfect_number_generalizer.py
