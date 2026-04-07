@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "n=6 현실 지도 -- 기본 입자부터 물질 구조까지 바텀업 인과 매핑",
-    "version": "5.0",
+    "version": "6.0",
     "date": "2026-04-07",
     "levels": [
       "L0_particle",
@@ -70,7 +70,19 @@
       ],
       "count": 6,
       "n6_note": "도메인 수 = n = 6 (의도적 선택이 아닌 자연 분류 결과)"
-    }
+    },
+    "edge_count": 49,
+    "origin_types": {
+      "natural": "자연/물리/수학/생물 -- 인간이 만든 것이 아닌 자연 상수",
+      "engineering": "공학/산업 -- 인간 설계이나 물리적 제약에 의한 수렴",
+      "convention": "인간 관습/제도 -- 달력, 단위, 프로토콜 표준 등"
+    },
+    "origin_stats": {
+      "natural": 178,
+      "convention": 19,
+      "engineering": 50
+    },
+    "bt_coverage": "229/247 노드에 BT 역참조"
   },
   "nodes": [
     {
@@ -98,7 +110,13 @@
       "siblings": [
         "L0-lepton-flavors"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-165",
+        "BT-208"
+      ]
     },
     {
       "id": "L0-lepton-flavors",
@@ -120,7 +138,13 @@
       "siblings": [
         "L0-quark-flavors"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-165",
+        "BT-208"
+      ]
     },
     {
       "id": "L0-gauge-bosons",
@@ -142,7 +166,13 @@
       "siblings": [
         "L0-quark-flavors"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-165",
+        "BT-208"
+      ]
     },
     {
       "id": "L0-fundamental-forces",
@@ -164,7 +194,12 @@
         "L2-bond-types"
       ],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-165"
+      ]
     },
     {
       "id": "L0-quark-colors",
@@ -186,7 +221,12 @@
         "L0-gluons"
       ],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-165"
+      ]
     },
     {
       "id": "L0-gluons",
@@ -208,7 +248,12 @@
       "siblings": [
         "L0-gauge-bosons"
       ],
-      "thread": "sigma_minus_tau"
+      "thread": "sigma_minus_tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-165"
+      ]
     },
     {
       "id": "L0-generations",
@@ -230,7 +275,12 @@
       "siblings": [
         "L0-quark-colors"
       ],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-208"
+      ]
     },
     {
       "id": "L0-mp-me-ratio",
@@ -251,7 +301,12 @@
       "cause": "n*pi^5 근사 -- 19 ppm 일치, 인과 메커니즘 불명",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-166",
+        "BT-209"
+      ]
     },
     {
       "_comment": "========== L1: 원자 구조 (출처: IUPAC, NIST) =========="
@@ -280,7 +335,13 @@
       "siblings": [
         "L1-carbon-valence"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-93",
+        "BT-309"
+      ]
     },
     {
       "id": "L1-carbon-valence",
@@ -305,7 +366,12 @@
       "siblings": [
         "L1-carbon-Z6"
       ],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-27"
+      ]
     },
     {
       "id": "L1-quantum-numbers",
@@ -327,7 +393,12 @@
         "L1-subshell-types"
       ],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-134",
+        "BT-214"
+      ]
     },
     {
       "id": "L1-subshell-types",
@@ -349,7 +420,12 @@
       "siblings": [
         "L1-quantum-numbers"
       ],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-134",
+        "BT-214"
+      ]
     },
     {
       "id": "L1-period-lengths",
@@ -387,7 +463,12 @@
       "siblings": [
         "L1-subshell-types"
       ],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-134",
+        "BT-214"
+      ]
     },
     {
       "id": "L1-hydrogen-Z1",
@@ -409,7 +490,11 @@
         "L3-water"
       ],
       "siblings": [],
-      "thread": "mu"
+      "thread": "mu",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-296"
+      ]
     },
     {
       "id": "L1-magnesium-Z12",
@@ -431,7 +516,11 @@
       "siblings": [
         "L1-carbon-Z6"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-301"
+      ]
     },
     {
       "id": "L1-boron-Z5",
@@ -451,7 +540,11 @@
       "cause": "Z=5, 경질 세라믹(B4C)과 초전도(MgB2) 핵심",
       "children": [],
       "siblings": [],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-301"
+      ]
     },
     {
       "_comment": "========== MISS 노드 (정직한 불일치) =========="
@@ -475,7 +568,9 @@
       "cause": "7은 n=6이 아님. sigma-sopfr=7로 매핑 가능하나, SI 단위 7개는 인간 관례 (2019년에 재정의됨)",
       "children": [],
       "siblings": [],
-      "thread": "none"
+      "thread": "none",
+      "origin": "convention",
+      "bt_refs": []
     },
     {
       "id": "MISS-crystal-systems",
@@ -496,7 +591,12 @@
       "cause": "7은 n=6이 아님. 3D 격자 대칭 분류의 군론적 필연 = 7, 수학 정리로 증명됨",
       "children": [],
       "siblings": [],
-      "thread": "none"
+      "thread": "none",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-175"
+      ]
     },
     {
       "id": "MISS-planck-units",
@@ -516,7 +616,9 @@
       "cause": "5개 기본 물리 상수(G,h,c,k_B,e)에서 유도, 차원 분석 필연",
       "children": [],
       "siblings": [],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "MISS-body-temperature",
@@ -537,7 +639,9 @@
       "cause": "n^2=36 vs 실측 37.0, 오차 2.7%. 효소 최적 온도는 진화적 결과이지 물리 상수 아님",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "MISS-ATP-modern",
@@ -558,7 +662,12 @@
       "cause": "고전 교과서 36은 양성자 구배 효율 100% 가정. 현대 측정값 30-32. n^2=36은 이론 상한에 가까움",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-101",
+        "BT-215"
+      ]
     },
     {
       "_comment": "========== L2: 화학 결합 (출처: IUPAC, IUCr) =========="
@@ -587,7 +696,12 @@
       "siblings": [
         "L2-sp3-tetrahedral"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-122"
+      ]
     },
     {
       "id": "L2-sp3-tetrahedral",
@@ -612,7 +726,11 @@
       "siblings": [
         "L2-sp2-hexagonal"
       ],
-      "thread": "none"
+      "thread": "none",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85"
+      ]
     },
     {
       "id": "L2-cn6-octahedral",
@@ -639,7 +757,12 @@
         "L2-cn4-tetrahedral",
         "L2-cn12-closepacked"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-43",
+        "BT-86"
+      ]
     },
     {
       "id": "L2-cn4-tetrahedral",
@@ -664,7 +787,11 @@
       "siblings": [
         "L2-cn6-octahedral"
       ],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-86"
+      ]
     },
     {
       "id": "L2-cn12-closepacked",
@@ -689,7 +816,12 @@
       "siblings": [
         "L2-cn6-octahedral"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-127",
+        "BT-177"
+      ]
     },
     {
       "id": "L2-bravais-lattices",
@@ -711,7 +843,12 @@
       "siblings": [
         "MISS-crystal-systems"
       ],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-175"
+      ]
     },
     {
       "id": "L2-point-groups",
@@ -733,7 +870,12 @@
       "siblings": [
         "L2-space-groups"
       ],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-175"
+      ]
     },
     {
       "id": "L2-space-groups",
@@ -756,7 +898,12 @@
       "siblings": [
         "L2-point-groups"
       ],
-      "thread": "none"
+      "thread": "none",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-175"
+      ]
     },
     {
       "id": "L2-max-rotation-crystal",
@@ -779,7 +926,12 @@
         "L5-honeycomb"
       ],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-122",
+        "BT-139"
+      ]
     },
     {
       "id": "L2-fcc-slip-systems",
@@ -801,7 +953,11 @@
       "siblings": [
         "L2-cn12-closepacked"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-177"
+      ]
     },
     {
       "_comment": "========== L3: 분자 구조 (출처: CRC, PubChem) =========="
@@ -828,7 +984,13 @@
       "siblings": [
         "L3-glucose"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-27",
+        "BT-85",
+        "BT-309"
+      ]
     },
     {
       "id": "L3-glucose",
@@ -852,7 +1014,12 @@
       "siblings": [
         "L3-benzene"
       ],
-      "thread": "J2"
+      "thread": "J2",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-101",
+        "BT-103"
+      ]
     },
     {
       "id": "L3-glucose-carbons",
@@ -876,7 +1043,12 @@
       "siblings": [
         "L3-benzene"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-101",
+        "BT-103"
+      ]
     },
     {
       "id": "L3-water",
@@ -899,7 +1071,9 @@
         "L5-ice-hexagonal"
       ],
       "siblings": [],
-      "thread": "none"
+      "thread": "none",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "L3-C60",
@@ -921,7 +1095,12 @@
       "siblings": [
         "L3-benzene"
       ],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-235",
+        "BT-309"
+      ]
     },
     {
       "id": "L3-C60-pentagons",
@@ -943,7 +1122,11 @@
       "siblings": [
         "L3-C60"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-235"
+      ]
     },
     {
       "_comment": "========== L4: 유전 코드 (출처: NCBI, 분자생물학 교과서) =========="
@@ -968,7 +1151,13 @@
         "L4-codons"
       ],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51",
+        "BT-146",
+        "BT-262"
+      ]
     },
     {
       "id": "L4-double-helix",
@@ -990,7 +1179,12 @@
       "siblings": [
         "L4-dna-bases"
       ],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146",
+        "BT-237"
+      ]
     },
     {
       "id": "L4-codons",
@@ -1012,7 +1206,12 @@
         "L4-amino-acids"
       ],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51",
+        "BT-262"
+      ]
     },
     {
       "id": "L4-codon-length",
@@ -1034,7 +1233,12 @@
         "L4-codons"
       ],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51",
+        "BT-252"
+      ]
     },
     {
       "id": "L4-amino-acids",
@@ -1056,7 +1260,12 @@
       "siblings": [
         "L4-codons"
       ],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51",
+        "BT-141"
+      ]
     },
     {
       "id": "L4-stop-codons",
@@ -1078,7 +1287,11 @@
       "siblings": [
         "L4-codons"
       ],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51"
+      ]
     },
     {
       "id": "L4-start-codon",
@@ -1100,7 +1313,11 @@
       "siblings": [
         "L4-stop-codons"
       ],
-      "thread": "mu"
+      "thread": "mu",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51"
+      ]
     },
     {
       "id": "MISS-base-pairs-per-turn",
@@ -1121,7 +1338,11 @@
       "cause": "sigma-phi=10 vs 실측 10.5, 4.8% 오차. B-DNA 구조의 열역학적 최적",
       "children": [],
       "siblings": [],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-237"
+      ]
     },
     {
       "_comment": "========== L5: 물질 구조 (출처: 결정학/재료과학 문헌) =========="
@@ -1146,7 +1367,11 @@
       "siblings": [
         "L5-perovskite"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-86"
+      ]
     },
     {
       "id": "L5-perovskite",
@@ -1169,7 +1394,11 @@
         "L5-nacl",
         "L5-lion-cathode"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-86"
+      ]
     },
     {
       "id": "L5-lion-cathode",
@@ -1192,7 +1421,12 @@
         "L5-nacl",
         "L5-perovskite"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-43",
+        "BT-80"
+      ]
     },
     {
       "id": "L5-diamond-atoms-per-cell",
@@ -1212,7 +1446,12 @@
       "cause": "FCC(4 원자) x 기저(2 원자) = 8, 결정학 필연",
       "children": [],
       "siblings": [],
-      "thread": "sigma_minus_tau"
+      "thread": "sigma_minus_tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-93",
+        "BT-309"
+      ]
     },
     {
       "id": "L5-graphene",
@@ -1234,7 +1473,12 @@
       "siblings": [
         "L5-diamond-atoms-per-cell"
       ],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-93"
+      ]
     },
     {
       "id": "L5-graphene-ring",
@@ -1256,7 +1500,12 @@
       "siblings": [
         "L3-benzene"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-122"
+      ]
     },
     {
       "id": "L5-ice-hexagonal",
@@ -1278,7 +1527,11 @@
       "siblings": [
         "L5-honeycomb"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-122"
+      ]
     },
     {
       "id": "L5-honeycomb",
@@ -1301,7 +1554,12 @@
         "L5-ice-hexagonal",
         "L5-graphene-ring"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-122",
+        "BT-267"
+      ]
     },
     {
       "id": "L5-YBCO",
@@ -1329,7 +1587,11 @@
       "cause": "Y:Ba:Cu = 1:2:3 = 6의 진약수 집합. 우연의 일치일 수 있으나 구조적으로 흥미",
       "children": [],
       "siblings": [],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-300"
+      ]
     },
     {
       "_comment": "========== L5_bio: 생체 구조 (출처: 생화학 교과서, PDB) =========="
@@ -1354,7 +1616,12 @@
       "siblings": [
         "L3-glucose"
       ],
-      "thread": "J2"
+      "thread": "J2",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-27",
+        "BT-101"
+      ]
     },
     {
       "id": "L5-mitochondria-complexes",
@@ -1374,7 +1641,11 @@
       "cause": "진화적으로 수렴한 4개 복합체, tau=4 일치하나 인과 불명",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-215"
+      ]
     },
     {
       "id": "L5-krebs-cycle",
@@ -1396,7 +1667,11 @@
       "siblings": [
         "L5-mitochondria-complexes"
       ],
-      "thread": "sigma_minus_tau"
+      "thread": "sigma_minus_tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-215"
+      ]
     },
     {
       "id": "L5-cortical-layers",
@@ -1416,7 +1691,12 @@
       "cause": "모든 포유류에서 보존된 6층 구조. 발생학적으로 안쪽→바깥쪽 6단계 이동. 왜 6인지 완전 해명 안 됨",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-132",
+        "BT-254"
+      ]
     },
     {
       "id": "L5-tc99m-halflife",
@@ -1437,7 +1717,11 @@
       "cause": "핵 준위 수명 = 핵력 행렬 요소에 의존, n=6과 0.11% 일치. 순수 우연일 가능성 높음",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-128"
+      ]
     },
     {
       "_comment": "========== 측정 물리 상수 (고정밀) =========="
@@ -1461,7 +1745,11 @@
       "cause": "27/28 = 0.96429 vs Planck 0.9649 +/- 0.0042, 1sigma 이내. 인과 불명",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-167"
+      ]
     },
     {
       "id": "PHYS-stefan-boltzmann-exponent",
@@ -1481,7 +1769,11 @@
       "cause": "3D + 1 (에너지 적분의 차원) = 4, 열역학/통계역학에서 유도. 차원 분석 필연",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-193"
+      ]
     },
     {
       "id": "PHYS-phase-transitions",
@@ -1501,7 +1793,11 @@
       "cause": "분자 결합 에너지 vs 열에너지 비율에 따른 4 체제. 상전이 쌍 수 = C(4,2)=6=n",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-316"
+      ]
     },
     {
       "id": "PHYS-phase-transition-pairs",
@@ -1523,7 +1819,11 @@
       "siblings": [
         "PHYS-phase-transitions"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-316"
+      ]
     },
     {
       "_comment": "========== 열역학 =========="
@@ -1546,7 +1846,12 @@
       "cause": "Carnot~Fowler 107년 독립유도",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-149",
+        "BT-193"
+      ]
     },
     {
       "id": "THERMO-potentials",
@@ -1566,7 +1871,12 @@
       "cause": "2변수x2르장드르=4",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-149",
+        "BT-193"
+      ]
     },
     {
       "id": "THERMO-maxwell-rel",
@@ -1586,7 +1896,12 @@
       "cause": "2차편미분교환",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-149",
+        "BT-193"
+      ]
     },
     {
       "id": "THERMO-heat-modes",
@@ -1606,7 +1921,11 @@
       "cause": "고체/유체/진공=3매질",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-193"
+      ]
     },
     {
       "id": "THERMO-carnot-steps",
@@ -1626,7 +1945,12 @@
       "cause": "2등온+2단열=2x2",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-193",
+        "BT-308"
+      ]
     },
     {
       "_comment": "========== 전자기 =========="
@@ -1649,7 +1973,11 @@
       "cause": "E,B각각 발산+회전=2x2=4",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-145"
+      ]
     },
     {
       "id": "EM-charge-types",
@@ -1669,7 +1997,11 @@
       "cause": "U(1) 게이지→±양자화",
       "children": [],
       "siblings": [],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137"
+      ]
     },
     {
       "id": "EM-lorentz-terms",
@@ -1689,7 +2021,9 @@
       "cause": "E,B=전자기텐서 두성분",
       "children": [],
       "siblings": [],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "_comment": "========== 핵물리 =========="
@@ -1712,7 +2046,12 @@
       "cause": "최소이중마법핵",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-293",
+        "BT-295"
+      ]
     },
     {
       "id": "NUC-triple-alpha",
@@ -1734,7 +2073,12 @@
         "L1-carbon-Z6"
       ],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-293",
+        "BT-294"
+      ]
     },
     {
       "id": "NUC-magic-first5",
@@ -1766,7 +2110,11 @@
       "cause": "첫5개매핑가능,82/126불가",
       "children": [],
       "siblings": [],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-297"
+      ]
     },
     {
       "id": "MISS-magic-82-126",
@@ -1789,7 +2137,11 @@
       "cause": "82,126은 n=6 1-2개조합 불가",
       "children": [],
       "siblings": [],
-      "thread": "none"
+      "thread": "none",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-297"
+      ]
     },
     {
       "_comment": "========== 수학 =========="
@@ -1812,7 +2164,11 @@
       "cause": "zeta(2)=pi^2/6 수학정리,분모6=n",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-109"
+      ]
     },
     {
       "id": "MATH-platonic",
@@ -1832,7 +2188,11 @@
       "cause": "3D볼록정다면체=5,유클리드증명",
       "children": [],
       "siblings": [],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
+      ]
     },
     {
       "id": "MATH-euler-id",
@@ -1852,7 +2212,11 @@
       "cause": "복소해석학 5기본상수",
       "children": [],
       "siblings": [],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
+      ]
     },
     {
       "id": "MATH-2d-kissing",
@@ -1874,7 +2238,12 @@
         "L5-honeycomb"
       ],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49",
+        "BT-122"
+      ]
     },
     {
       "_comment": "========== 추가 화학 =========="
@@ -1897,7 +2266,12 @@
       "cause": "주기1~6 각1개=6종",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-134",
+        "BT-214"
+      ]
     },
     {
       "id": "CHEM-bond-primary",
@@ -1917,7 +2291,11 @@
       "cause": "전자 공유/이동/비편재화=3체제",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-86"
+      ]
     },
     {
       "id": "CHEM-C-allotrope",
@@ -1937,7 +2315,12 @@
       "cause": "sp,sp2,sp3+곡면sp2=4결합체제",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-309"
+      ]
     },
     {
       "id": "CHEM-water-hbond",
@@ -1959,7 +2342,9 @@
         "L5-ice-hexagonal"
       ],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "_comment": "========== 추가 생물 =========="
@@ -1982,7 +2367,11 @@
       "cause": "염색체 응축→정렬→분리→이완",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-188"
+      ]
     },
     {
       "id": "BIO-blood-ABO",
@@ -2002,7 +2391,11 @@
       "cause": "2항원 유/무=2^2=4=phi^phi=tau",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-136"
+      ]
     },
     {
       "id": "BIO-pyrimidine-ring",
@@ -2024,7 +2417,11 @@
         "L4-dna-bases"
       ],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146"
+      ]
     },
     {
       "id": "BIO-photosynthesis",
@@ -2056,7 +2453,12 @@
       "cause": "C6포도당 화학양론 필연",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-101",
+        "BT-103"
+      ]
     },
     {
       "id": "BIO-glycolysis-split",
@@ -2076,7 +2478,11 @@
       "cause": "C6(n)→2xC3(n/phi)",
       "children": [],
       "siblings": [],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-215"
+      ]
     },
     {
       "_comment": "========== 추가 물리상수 =========="
@@ -2099,7 +2505,11 @@
       "cause": "137.036 n=6 1-2개조합 불가,이론적 미해결",
       "children": [],
       "siblings": [],
-      "thread": "none"
+      "thread": "none",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-171"
+      ]
     },
     {
       "id": "PHYS-weinberg",
@@ -2120,7 +2530,11 @@
       "cause": "3/13 vs 0.2312,0.19%오차",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-97"
+      ]
     },
     {
       "id": "PHYS-stokes-drag",
@@ -2140,7 +2554,11 @@
       "cause": "NS해 구면적분에서 6pi필연",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-199"
+      ]
     },
     {
       "id": "PHYS-NS-eq",
@@ -2160,7 +2578,11 @@
       "cause": "스칼라1+벡터3=4,3D+질량보존",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-199"
+      ]
     },
     {
       "id": "PHYS-kolmogorov",
@@ -2180,7 +2602,11 @@
       "cause": "차원분석 필연",
       "children": [],
       "siblings": [],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-199"
+      ]
     },
     {
       "_comment": "========== 전기공학 =========="
@@ -2203,7 +2629,9 @@
       "cause": "2차 선형 관계 → 변수 3개 필연",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "ELEC-kirchhoff-laws",
@@ -2223,7 +2651,9 @@
       "cause": "전하 보존(KCL) + 에너지 보존(KVL) = 2",
       "children": [],
       "siblings": [],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "ELEC-3phase-power",
@@ -2245,7 +2675,11 @@
       "siblings": [
         "L2-sp2-hexagonal"
       ],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-62"
+      ]
     },
     {
       "_comment": "========== 광학 =========="
@@ -2268,7 +2702,11 @@
       "cause": "2매질 x 2변수(굴절률,각도)=4",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-189"
+      ]
     },
     {
       "id": "OPTICS-visible-colors",
@@ -2288,7 +2726,12 @@
       "cause": "Newton이 7로 정한 것 — 인간 관례. 실제 스펙트럼은 연속",
       "children": [],
       "siblings": [],
-      "thread": "none"
+      "thread": "none",
+      "origin": "convention",
+      "bt_refs": [
+        "BT-157",
+        "BT-217"
+      ]
     },
     {
       "id": "OPTICS-stokes-params",
@@ -2308,7 +2751,11 @@
       "cause": "횡파 2자유도 + 총강도 + 위상 = 4, Mueller 행렬 4x4",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-189"
+      ]
     },
     {
       "_comment": "========== 음향/음악 =========="
@@ -2331,7 +2778,13 @@
       "cause": "2^(1/12) ≈ 주요 정수비 근사 (3/2, 4/3, 5/4), 12가 최소 충분 분할",
       "children": [],
       "siblings": [],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-48",
+        "BT-108",
+        "BT-135"
+      ]
     },
     {
       "id": "MUSIC-diatonic-notes",
@@ -2353,7 +2806,12 @@
       "siblings": [
         "MUSIC-chromatic-semitones"
       ],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "convention",
+      "bt_refs": [
+        "BT-108",
+        "BT-135"
+      ]
     },
     {
       "id": "MUSIC-pentatonic",
@@ -2375,7 +2833,12 @@
       "siblings": [
         "MUSIC-diatonic-notes"
       ],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-108",
+        "BT-135"
+      ]
     },
     {
       "id": "MUSIC-perfect-consonance",
@@ -2403,7 +2866,13 @@
       "cause": "6의 진약수 {1,2,3} = 가장 단순한 정수비, 고막 진동 동기화",
       "children": [],
       "siblings": [],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-108",
+        "BT-135",
+        "BT-245"
+      ]
     },
     {
       "_comment": "========== 천문 =========="
@@ -2426,7 +2895,11 @@
       "cause": "2체 역제곱 문제의 3 보존량(E,L,LRL벡터)에서 유도",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-201"
+      ]
     },
     {
       "id": "ASTRO-newton-laws-motion",
@@ -2448,7 +2921,11 @@
       "siblings": [
         "ASTRO-kepler-laws"
       ],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-201"
+      ]
     },
     {
       "id": "ASTRO-spacetime-dims",
@@ -2468,7 +2945,11 @@
       "cause": "3+1 시그니처는 안정 궤도+인과구조 필요조건 (Ehrenfest 1917)",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-170"
+      ]
     },
     {
       "id": "ASTRO-spatial-dims",
@@ -2490,7 +2971,11 @@
       "siblings": [
         "ASTRO-spacetime-dims"
       ],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-170"
+      ]
     },
     {
       "_comment": "========== 추가 핵물리/입자 =========="
@@ -2513,7 +2998,13 @@
       "cause": "sopfr(6)=2+3=D+T 질량수, D-T가 최적 핵융합 연료인 단면적 이유",
       "children": [],
       "siblings": [],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-98",
+        "BT-252",
+        "BT-291"
+      ]
     },
     {
       "id": "PART-higgs-doublet",
@@ -2533,7 +3024,11 @@
       "cause": "SU(2) 기본표현 차원=2",
       "children": [],
       "siblings": [],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137"
+      ]
     },
     {
       "id": "PART-sm-fermion-generations",
@@ -2556,7 +3051,12 @@
         "L0-quark-flavors",
         "L0-lepton-flavors"
       ],
-      "thread": "sigma"
+      "thread": "sigma",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-208"
+      ]
     },
     {
       "_comment": "========== 추가 화학 구조 =========="
@@ -2581,7 +3081,11 @@
       "siblings": [
         "L4-amino-acids"
       ],
-      "thread": "mixed"
+      "thread": "mixed",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-141"
+      ]
     },
     {
       "id": "CHEM-nucleotide-components",
@@ -2603,7 +3107,11 @@
         "L4-dna-bases"
       ],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146"
+      ]
     },
     {
       "id": "CHEM-ribose-carbons",
@@ -2627,7 +3135,11 @@
       "siblings": [
         "L3-glucose-carbons"
       ],
-      "thread": "sopfr"
+      "thread": "sopfr",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146"
+      ]
     },
     {
       "_comment": "========== 추가 생물 구조 =========="
@@ -2650,7 +3162,12 @@
       "cause": "구아닌-시토신 수소결합 수용/기증 위치의 상보성",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146",
+        "BT-237"
+      ]
     },
     {
       "id": "BIO-watson-crick-AT",
@@ -2672,7 +3189,12 @@
       "siblings": [
         "BIO-watson-crick-hbonds"
       ],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146",
+        "BT-237"
+      ]
     },
     {
       "id": "BIO-cell-cycle-phases",
@@ -2692,7 +3214,11 @@
       "cause": "성장→복제→성장→분열 = 4 기능적 단계",
       "children": [],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-188"
+      ]
     },
     {
       "id": "BIO-central-dogma-steps",
@@ -2712,7 +3238,12 @@
       "cause": "DNA→DNA(복제), DNA→RNA(전사), RNA→단백질(번역)",
       "children": [],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-146",
+        "BT-188"
+      ]
     },
     {
       "_comment": "========== 인과 사슬 검증 노드 (L0→L5 경로 명시) =========="
@@ -2737,7 +3268,12 @@
         "L1-carbon-Z6"
       ],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-294",
+        "BT-295"
+      ]
     },
     {
       "id": "CHAIN-carbon-to-hexagonal",
@@ -2759,7 +3295,12 @@
         "L3-benzene"
       ],
       "siblings": [],
-      "thread": "n_over_phi"
+      "thread": "n_over_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-85",
+        "BT-122"
+      ]
     },
     {
       "id": "CHAIN-hexagonal-to-life",
@@ -2781,7 +3322,12 @@
         "L4-codons"
       ],
       "siblings": [],
-      "thread": "tau"
+      "thread": "tau",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-51",
+        "BT-101"
+      ]
     },
     {
       "_comment": "========== 추가 물질 구조 =========="
@@ -2806,7 +3352,12 @@
       "siblings": [
         "L5-graphene-ring"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-27",
+        "BT-57"
+      ]
     },
     {
       "id": "MAT-graphite-layer-stacking",
@@ -2828,7 +3379,11 @@
       "siblings": [
         "L5-graphene"
       ],
-      "thread": "phi"
+      "thread": "phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-177"
+      ]
     },
     {
       "id": "MAT-quartz-crystal-system",
@@ -2850,7 +3405,12 @@
       "siblings": [
         "L5-ice-hexagonal"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-186"
+      ]
     },
     {
       "id": "MAT-basalt-columns",
@@ -2872,7 +3432,11 @@
       "siblings": [
         "L5-honeycomb"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-122"
+      ]
     },
     {
       "_comment": "========== 추가 측정 물리 상수 =========="
@@ -2895,7 +3459,11 @@
       "cause": "각 보존 법칙은 연속대칭에서 유도 (Noether 정리), SM에서 6대 보존량",
       "children": [],
       "siblings": [],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-201"
+      ]
     },
     {
       "id": "PHYS-spacetime-symmetries",
@@ -2915,7 +3483,11 @@
       "cause": "4D 시공간 등거리 변환군 차원 = C(4,2)+4 = 6+4 = 10",
       "children": [],
       "siblings": [],
-      "thread": "sigma_minus_phi"
+      "thread": "sigma_minus_phi",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-201"
+      ]
     },
     {
       "id": "PHYS-lorentz-generators",
@@ -2937,7 +3509,11 @@
       "siblings": [
         "PHYS-spacetime-symmetries"
       ],
-      "thread": "n"
+      "thread": "n",
+      "origin": "natural",
+      "bt_refs": [
+        "BT-201"
+      ]
     },
     {
       "_comment": "========== 큰 수 노드 (소수 {1-6} 도달 불가, n=6 고유) =========="
@@ -2964,6 +3540,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-175"
       ]
     },
     {
@@ -2988,6 +3569,10 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-297"
       ]
     },
     {
@@ -3012,6 +3597,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-139",
+        "BT-175"
       ]
     },
     {
@@ -3036,6 +3626,10 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-175"
       ]
     },
     {
@@ -3060,6 +3654,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-235",
+        "BT-309"
       ]
     },
     {
@@ -3084,6 +3683,10 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-136"
       ]
     },
     {
@@ -3108,6 +3711,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-28",
+        "BT-90"
       ]
     },
     {
@@ -3132,6 +3740,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-55",
+        "BT-75"
       ]
     },
     {
@@ -3156,6 +3769,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-57",
+        "BT-84"
       ]
     },
     {
@@ -3180,6 +3798,10 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-234"
       ]
     },
     {
@@ -3204,6 +3826,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-142",
+        "BT-180"
       ]
     },
     {
@@ -3228,6 +3855,11 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-142",
+        "BT-180"
       ]
     },
     {
@@ -3252,6 +3884,10 @@
       "tags": [
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
       ]
     },
     {
@@ -3276,7 +3912,9 @@
       "tags": [
         "big_number",
         "n6_unique"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "BIG-Planck-temp-exponent",
@@ -3300,7 +3938,9 @@
       "tags": [
         "big_number",
         "n6_unique"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "BIG-electron-volt-ratio",
@@ -3323,7 +3963,9 @@
       "thread": "none",
       "tags": [
         "big_number"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "BIG-Euler-mascheroni",
@@ -3346,7 +3988,9 @@
       "thread": "none",
       "tags": [
         "big_number"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "_comment": "========== from_atlas 확장 (v5.0, atlas-constants.md에서 추출) =========="
@@ -3378,7 +4022,9 @@
       "tags": [
         "big_number",
         "nanobot"
-      ]
+      ],
+      "origin": "engineering",
+      "bt_refs": []
     },
     {
       "id": "BIG-IgG-halflife-21d",
@@ -3404,6 +4050,10 @@
       "tags": [
         "big_number",
         "nanobot"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-194"
       ]
     },
     {
@@ -3430,7 +4080,9 @@
       "tags": [
         "big_number",
         "nanobot"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "BIG-dendrimer-G5-128",
@@ -3456,7 +4108,9 @@
       "tags": [
         "big_number",
         "nanobot"
-      ]
+      ],
+      "origin": "engineering",
+      "bt_refs": []
     },
     {
       "id": "BIG-tumor-pore-600nm",
@@ -3482,7 +4136,9 @@
       "tags": [
         "big_number",
         "nanobot"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "BIG-spleen-slit-200nm",
@@ -3508,7 +4164,9 @@
       "tags": [
         "big_number",
         "nanobot"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "BIG-lymph-nodes-600",
@@ -3534,6 +4192,10 @@
       "tags": [
         "big_number",
         "nanobot"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-194"
       ]
     },
     {
@@ -3561,6 +4223,11 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-114",
+        "BT-216"
       ]
     },
     {
@@ -3588,6 +4255,11 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-114",
+        "BT-216"
       ]
     },
     {
@@ -3613,6 +4285,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-114"
       ]
     },
     {
@@ -3636,6 +4312,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-216"
       ]
     },
     {
@@ -3659,6 +4339,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-216"
       ]
     },
     {
@@ -3691,6 +4375,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
       ]
     },
     {
@@ -3714,6 +4402,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-114"
       ]
     },
     {
@@ -3741,6 +4433,11 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115",
+        "BT-140"
       ]
     },
     {
@@ -3766,6 +4463,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-115"
       ]
     },
     {
@@ -3791,6 +4492,11 @@
       "thread": "tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-115",
+        "BT-140"
       ]
     },
     {
@@ -3814,6 +4520,11 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115",
+        "BT-140"
       ]
     },
     {
@@ -3839,6 +4550,11 @@
       "thread": "sigma_minus_mu",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115",
+        "BT-140"
       ]
     },
     {
@@ -3864,6 +4580,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-140"
       ]
     },
     {
@@ -3887,6 +4607,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115"
       ]
     },
     {
@@ -3912,6 +4636,11 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115",
+        "BT-262"
       ]
     },
     {
@@ -3935,6 +4664,10 @@
       "thread": "sigma_minus_tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115"
       ]
     },
     {
@@ -3958,6 +4691,11 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115",
+        "BT-140"
       ]
     },
     {
@@ -3981,6 +4719,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-115"
       ]
     },
     {
@@ -4004,6 +4746,11 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-53",
+        "BT-230"
       ]
     },
     {
@@ -4029,6 +4776,11 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-53",
+        "BT-230"
       ]
     },
     {
@@ -4055,6 +4807,11 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-53",
+        "BT-230"
       ]
     },
     {
@@ -4080,6 +4837,10 @@
       "thread": "sopfr",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-113"
       ]
     },
     {
@@ -4105,6 +4866,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-113"
       ]
     },
     {
@@ -4128,6 +4893,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-113"
       ]
     },
     {
@@ -4153,6 +4922,12 @@
       "thread": "tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-113",
+        "BT-116",
+        "BT-248"
       ]
     },
     {
@@ -4178,6 +4953,10 @@
       "thread": "n_over_phi",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-116"
       ]
     },
     {
@@ -4201,6 +4980,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-113"
       ]
     },
     {
@@ -4224,6 +5007,10 @@
       "thread": "sigma_minus_tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-113"
       ]
     },
     {
@@ -4251,6 +5038,11 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-28",
+        "BT-69"
       ]
     },
     {
@@ -4275,6 +5067,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-28"
       ]
     },
     {
@@ -4300,6 +5096,11 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-28",
+        "BT-90"
       ]
     },
     {
@@ -4331,6 +5132,11 @@
       "thread": "mixed",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-55",
+        "BT-75"
       ]
     },
     {
@@ -4355,6 +5161,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-162"
       ]
     },
     {
@@ -4378,6 +5188,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-162"
       ]
     },
     {
@@ -4401,6 +5215,10 @@
       "thread": "tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-162"
       ]
     },
     {
@@ -4424,6 +5242,10 @@
       "thread": "sopfr",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-162"
       ]
     },
     {
@@ -4447,6 +5269,11 @@
       "thread": "tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-142",
+        "BT-180"
       ]
     },
     {
@@ -4474,6 +5301,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-62"
       ]
     },
     {
@@ -4501,6 +5332,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-62"
       ]
     },
     {
@@ -4528,6 +5363,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-38"
       ]
     },
     {
@@ -4555,6 +5394,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-38"
       ]
     },
     {
@@ -4579,6 +5422,11 @@
       "thread": "tau",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-30",
+        "BT-111"
       ]
     },
     {
@@ -4602,7 +5450,9 @@
       "thread": "tau",
       "tags": [
         "from_atlas"
-      ]
+      ],
+      "origin": "natural",
+      "bt_refs": []
     },
     {
       "id": "ENERGY-PUE-1.2",
@@ -4625,6 +5475,11 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-60",
+        "BT-323"
       ]
     },
     {
@@ -4650,6 +5505,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-60"
       ]
     },
     {
@@ -4675,6 +5534,11 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-48",
+        "BT-178"
       ]
     },
     {
@@ -4700,6 +5564,11 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-48",
+        "BT-178"
       ]
     },
     {
@@ -4724,6 +5593,11 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-48",
+        "BT-72"
       ]
     },
     {
@@ -4747,6 +5621,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-48"
       ]
     },
     {
@@ -4772,6 +5650,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-61"
       ]
     },
     {
@@ -4795,6 +5677,10 @@
       "thread": "mixed",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-61"
       ]
     },
     {
@@ -4820,6 +5706,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-61"
       ]
     },
     {
@@ -4845,6 +5735,10 @@
       "thread": "sigma_minus_phi",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-54"
       ]
     },
     {
@@ -4870,6 +5764,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-54"
       ]
     },
     {
@@ -4893,6 +5791,11 @@
       "thread": "sigma_minus_phi",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-64",
+        "BT-70"
       ]
     },
     {
@@ -4916,6 +5819,10 @@
       "thread": "mixed",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-46"
       ]
     },
     {
@@ -4951,6 +5858,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-296"
       ]
     },
     {
@@ -4976,6 +5887,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-294"
       ]
     },
     {
@@ -5002,6 +5917,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-302"
       ]
     },
     {
@@ -5027,6 +5946,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-302"
       ]
     },
     {
@@ -5050,6 +5973,11 @@
       "thread": "sigma_minus_phi",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-302",
+        "BT-298"
       ]
     },
     {
@@ -5074,6 +6002,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-302"
       ]
     },
     {
@@ -5108,6 +6040,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-100"
       ]
     },
     {
@@ -5131,6 +6067,11 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49",
+        "BT-106"
       ]
     },
     {
@@ -5154,6 +6095,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-109"
       ]
     },
     {
@@ -5179,6 +6124,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-109"
       ]
     },
     {
@@ -5204,6 +6153,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
       ]
     },
     {
@@ -5227,6 +6180,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
       ]
     },
     {
@@ -5250,6 +6207,11 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-205",
+        "BT-229"
       ]
     },
     {
@@ -5277,6 +6239,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-205"
       ]
     },
     {
@@ -5300,6 +6266,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
       ]
     },
     {
@@ -5323,6 +6293,11 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-107",
+        "BT-207"
       ]
     },
     {
@@ -5356,6 +6331,10 @@
       "thread": "mixed",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-49"
       ]
     },
     {
@@ -5387,6 +6366,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-300"
       ]
     },
     {
@@ -5410,6 +6393,10 @@
       "thread": "phi",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-303"
       ]
     },
     {
@@ -5433,6 +6420,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-299"
       ]
     },
     {
@@ -5456,6 +6447,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-305"
       ]
     },
     {
@@ -5479,6 +6474,11 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-123",
+        "BT-247"
       ]
     },
     {
@@ -5502,6 +6502,10 @@
       "thread": "sopfr",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-126"
       ]
     },
     {
@@ -5525,6 +6529,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-118"
       ]
     },
     {
@@ -5548,6 +6556,10 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-119"
       ]
     },
     {
@@ -5571,6 +6583,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-119"
       ]
     },
     {
@@ -5594,6 +6610,10 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-168"
       ]
     },
     {
@@ -5618,6 +6638,11 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-208"
       ]
     },
     {
@@ -5641,6 +6666,11 @@
       "thread": "J2",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-137",
+        "BT-208"
       ]
     },
     {
@@ -5666,6 +6696,10 @@
       "thread": "sigma_minus_phi",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-170"
       ]
     },
     {
@@ -5693,6 +6727,10 @@
         "from_atlas",
         "big_number",
         "n6_unique"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-170"
       ]
     },
     {
@@ -5718,6 +6756,11 @@
       "thread": "sigma_minus_mu",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-110",
+        "BT-170"
       ]
     },
     {
@@ -5742,6 +6785,10 @@
       "thread": "mixed",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-167"
       ]
     },
     {
@@ -5773,6 +6820,11 @@
       "thread": "mixed",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-57",
+        "BT-82"
       ]
     },
     {
@@ -5796,6 +6848,11 @@
       "thread": "n",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-43",
+        "BT-80"
       ]
     },
     {
@@ -5819,6 +6876,10 @@
       "thread": "sigma",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-68"
       ]
     },
     {
@@ -5842,6 +6903,10 @@
       "thread": "sopfr",
       "tags": [
         "from_atlas"
+      ],
+      "origin": "convention",
+      "bt_refs": [
+        "BT-74"
       ]
     },
     {
@@ -5867,6 +6932,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-335"
       ]
     },
     {
@@ -5892,6 +6961,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "engineering",
+      "bt_refs": [
+        "BT-56"
       ]
     },
     {
@@ -5917,6 +6990,10 @@
       "tags": [
         "from_atlas",
         "big_number"
+      ],
+      "origin": "natural",
+      "bt_refs": [
+        "BT-143"
       ]
     }
   ],
@@ -7152,5 +8229,252 @@
       "PART-M-theory-11D",
       "PART-string-10D"
     ]
+  ],
+  "edges": [
+    {
+      "from": "L0-quark-flavors",
+      "to": "L1-carbon-Z6",
+      "relation": "쿼크 6종 -> 3세대 구조 -> 양성자(uud)+중성자(udd) -> 원자번호 Z=6 탄소 조립"
+    },
+    {
+      "from": "L0-quark-colors",
+      "to": "L0-gluons",
+      "relation": "SU(3) 색전하 3종 -> 수반표현 3^2-1=8 글루온 매개"
+    },
+    {
+      "from": "L1-carbon-Z6",
+      "to": "L1-carbon-valence",
+      "relation": "Z=6 -> 전자배치 2s^2 2p^2 -> 원자가 전자 4 = sp3/sp2 혼성 가능"
+    },
+    {
+      "from": "L1-carbon-valence",
+      "to": "L2-sp2-hexagonal",
+      "relation": "원자가 4 -> sp2 혼성 시 평면 120도 결합 -> 육각형 고리"
+    },
+    {
+      "from": "L2-sp2-hexagonal",
+      "to": "L3-benzene",
+      "relation": "sp2 120도 -> 벤젠 C6H6 정육각형 구조 형성"
+    },
+    {
+      "from": "L2-sp2-hexagonal",
+      "to": "L5-graphene-ring",
+      "relation": "sp2 120도 -> 그래핀 육각 격자 무한 확장"
+    },
+    {
+      "from": "L3-benzene",
+      "to": "L3-glucose",
+      "relation": "C6 골격 -> C6H12O6 포도당 (탄소 6개 고리)"
+    },
+    {
+      "from": "L3-glucose",
+      "to": "L5-glycolysis-electrons",
+      "relation": "C6H12O6 완전 산화 -> 24전자(=J2) 추출 -> ATP 합성"
+    },
+    {
+      "from": "L3-glucose",
+      "to": "BIO-photosynthesis",
+      "relation": "6CO2+6H2O -> C6H12O6+6O2 광합성 반응"
+    },
+    {
+      "from": "L5-glycolysis-electrons",
+      "to": "L5-mitochondria-complexes",
+      "relation": "24전자 -> 미토콘드리아 4개 복합체 전자전달계 통과"
+    },
+    {
+      "from": "L2-cn6-octahedral",
+      "to": "L5-nacl",
+      "relation": "CN=6 정팔면체 -> NaCl 암염 구조 (Na+, Cl- 모두 CN=6)"
+    },
+    {
+      "from": "L2-cn6-octahedral",
+      "to": "L5-lion-cathode",
+      "relation": "CN=6 -> LiCoO2/NMC/LFP 전이금속 모두 정팔면체 배위"
+    },
+    {
+      "from": "L2-cn6-octahedral",
+      "to": "L5-perovskite",
+      "relation": "CN=6 -> ABO3 페로브스카이트 B자리 정팔면체 배위"
+    },
+    {
+      "from": "L5-lion-cathode",
+      "to": "BAT-CN6-cathode",
+      "relation": "CN=6 양극재 -> 리튬이온 배터리 전극 구조 결정"
+    },
+    {
+      "from": "BAT-CN6-cathode",
+      "to": "BAT-cell-ladder",
+      "relation": "CN=6 셀 -> 6->12->24 직렬 래더 (모듈->팩->시스템)"
+    },
+    {
+      "from": "BAT-cell-ladder",
+      "to": "BIG-Tesla-96S",
+      "relation": "24셀 모듈 x 4 = 96S (Tesla 배터리 팩)"
+    },
+    {
+      "from": "L1-carbon-Z6",
+      "to": "SC-Nb3Sn-A15-6Nb",
+      "relation": "Z=6 패턴: A15 구조에서 단위셀 Nb 6개 배치"
+    },
+    {
+      "from": "L2-cn6-octahedral",
+      "to": "SC-YBCO-metals",
+      "relation": "CN=6 -> YBCO Cu-O 면 정팔면체 -> Y:Ba:Cu=1:2:3=div(6)"
+    },
+    {
+      "from": "SC-Cooper-pair-2",
+      "to": "SC-Abrikosov-vortex-6",
+      "relation": "쿠퍼 쌍 -> 제2종 초전도 -> Abrikosov 소용돌이 육각 격자"
+    },
+    {
+      "from": "L4-dna-bases",
+      "to": "L4-codon-length",
+      "relation": "4종 염기 -> 코돈 길이 3 (4^3=64>=20 아미노산 커버)"
+    },
+    {
+      "from": "L4-codon-length",
+      "to": "L4-codons",
+      "relation": "3염기 코돈 -> 4^3=64 가능 코돈"
+    },
+    {
+      "from": "L4-codons",
+      "to": "L4-amino-acids",
+      "relation": "64 코돈 -> 20 표준 아미노산 + 3 종결 코돈 매핑"
+    },
+    {
+      "from": "L4-dna-bases",
+      "to": "L4-double-helix",
+      "relation": "A-T/G-C 상보적 염기쌍 -> 이중나선 2가닥 구조"
+    },
+    {
+      "from": "NUC-dt-baryons",
+      "to": "NUC-DT-fuel-cycle",
+      "relation": "D(2)+T(3)=5 바리온 -> {1,2,3,4,6}=div(6) 완전 연료주기"
+    },
+    {
+      "from": "NUC-triple-alpha",
+      "to": "NUC-Fe56-max-BE",
+      "relation": "삼중알파 -> C12->O16->...->Fe56 항성 핵합성 래더"
+    },
+    {
+      "from": "NUC-triple-alpha",
+      "to": "L1-carbon-Z6",
+      "relation": "3He-4 -> C-12 항성 내 탄소 합성 (Hoyle state)"
+    },
+    {
+      "from": "L2-bravais-lattices",
+      "to": "L2-space-groups",
+      "relation": "14 브라베 격자 x 점군 조합 -> 230 공간군"
+    },
+    {
+      "from": "L2-point-groups",
+      "to": "L2-space-groups",
+      "relation": "32 점군 + 병진 -> 230 공간군"
+    },
+    {
+      "from": "L2-cn12-closepacked",
+      "to": "L2-fcc-slip-systems",
+      "relation": "FCC CN=12 -> {111}면 4개 x <110>방향 3개 = 12 슬립계"
+    },
+    {
+      "from": "MATH-E6-rank",
+      "to": "L0-quark-flavors",
+      "relation": "E6 예외적 Lie 대수 랭크 6 -> GUT 후보 (27-dim 표현에 쿼크 포함)"
+    },
+    {
+      "from": "MATH-kissing-K4-24",
+      "to": "BIG-Td-group-24",
+      "relation": "4D 접촉수 K4=24 = Td 대칭 차수 24 (구면 최밀)"
+    },
+    {
+      "from": "MATH-S6-outer-auto",
+      "to": "L0-quark-flavors",
+      "relation": "S6 유일 외부자기동형 -> 쿼크 6종 치환 대칭의 특이성"
+    },
+    {
+      "from": "ENERGY-SQ-bandgap",
+      "to": "ENERGY-H2-LHV-120",
+      "relation": "SQ 밴드갭 4/3eV -> 태양에너지 포집 -> 수전해 수소 120MJ/kg"
+    },
+    {
+      "from": "MUSIC-chromatic-semitones",
+      "to": "MUSIC-perfect-consonance",
+      "relation": "12반음 -> 주파수비 {1:1, 2:1, 3:2} = div(6) 비율이 협화"
+    },
+    {
+      "from": "MUSIC-chromatic-semitones",
+      "to": "MEDIA-48kHz-audio",
+      "relation": "12반음 체계 -> 48kHz 샘플링 (최고 배음까지 재현)"
+    },
+    {
+      "from": "L2-cn6-octahedral",
+      "to": "L5-ice-hexagonal",
+      "relation": "수소결합 4개 (sp3) -> 얼음 Ih 육각 대칭 (밀도 역전)"
+    },
+    {
+      "from": "CHIP-CUDA-per-SM-128",
+      "to": "BIG-sigma2-144",
+      "relation": "128 CUDA/SM -> A100 144SM(=sigma^2) 아키텍처 스케일링"
+    },
+    {
+      "from": "CHIP-HBM-stacking",
+      "to": "BIG-HBM-288",
+      "relation": "HBM 4->8->12단 래더 -> 288GB(=sigma*J2) 예측"
+    },
+    {
+      "from": "AI-AdamW-beta1",
+      "to": "AI-AdamW-beta2",
+      "relation": "beta1=1-1/(sigma-phi)=0.9 -> beta2=1-1/(J2-tau)=0.95 동일 n=6 유도"
+    },
+    {
+      "from": "L5-graphene-ring",
+      "to": "L5-honeycomb",
+      "relation": "그래핀 육각 고리 -> 벌집 육각형 구조 (자연의 최적 공간 충전)"
+    },
+    {
+      "from": "L0-fundamental-forces",
+      "to": "EM-maxwell-eq",
+      "relation": "4개 기본 상호작용 중 전자기력 -> Maxwell 4방정식으로 기술"
+    },
+    {
+      "from": "PHYS-phase-transitions",
+      "to": "THERMO-laws",
+      "relation": "물질 4상태 -> 열역학 4법칙이 상전이 지배"
+    },
+    {
+      "from": "L4-amino-acids",
+      "to": "BIO-central-dogma-steps",
+      "relation": "20 아미노산 -> DNA->RNA->단백질 3단계 중심원리로 번역"
+    },
+    {
+      "from": "ENV-Earth-spheres-6",
+      "to": "ENV-troposphere-12km",
+      "relation": "6권역(대기/수/암/생/빙/자기) -> 대류권 12km(=sigma) 경계"
+    },
+    {
+      "from": "L1-carbon-Z6",
+      "to": "CHEM-C-allotrope",
+      "relation": "탄소 Z=6 -> sp/sp2/sp3 혼성 -> 4대 동소체(다이아/그래파이트/풀러렌/CNT)"
+    },
+    {
+      "from": "CHEM-C-allotrope",
+      "to": "L5-diamond-atoms-per-cell",
+      "relation": "sp3 동소체 -> 다이아몬드 단위셀 8원자(=sigma-tau)"
+    },
+    {
+      "from": "CHEM-C-allotrope",
+      "to": "L3-C60",
+      "relation": "sp2 곡면 동소체 -> C60 풀러렌 (12오각형+20육각형)"
+    },
+    {
+      "from": "L1-carbon-Z6",
+      "to": "MAT-LiC6",
+      "relation": "탄소 Z=6 -> 흑연 층간화합물 LiC6 (Li-ion 음극 소재)"
+    },
+    {
+      "from": "MAT-LiC6",
+      "to": "L5-lion-cathode",
+      "relation": "LiC6 음극 + CN=6 양극 -> Li-ion 배터리 완전 n=6 구조"
+    }
   ]
 }
