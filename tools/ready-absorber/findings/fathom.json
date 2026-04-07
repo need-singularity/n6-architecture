@@ -9,7 +9,7 @@
   "by_destination": {
     "contact": 1,
     "fathom": 3,
-    "nexus6": 2
+    "nexus": 2
   },
   "findings": [
     {
@@ -17,7 +17,7 @@
       "path": ".claude/settings.json",
       "size": 1512,
       "lines": 64,
-      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-universal.sh\",\n            \"timeout\": 10,\n       ",
+      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-universal.sh\",\n            \"timeout\": 10,\n       ",
       "project": "fathom",
       "ready_path": "/Users/ghost/Dev/ready/fathom/.claude/settings.json",
       "destination": "contact",
@@ -28,7 +28,7 @@
       "path": "CLAUDE.md",
       "size": 99,
       "lines": 3,
-      "preview": "\n## NEXUS-6\nNEXUS-6 자동 스캔 활성. .shared -> nexus6/shared 심링크. hooks 설정 완료.\n",
+      "preview": "\n## NEXUS-6\nNEXUS-6 자동 스캔 활성. .shared -> nexus/shared 심링크. hooks 설정 완료.\n",
       "project": "fathom",
       "ready_path": "/Users/ghost/Dev/ready/fathom/CLAUDE.md",
       "destination": "fathom",
@@ -61,10 +61,10 @@
       "path": "scripts/infinite_growth.sh",
       "size": 7429,
       "lines": 215,
-      "preview": "#!/usr/bin/env bash\n# FATHOM Infinite Growth — 10 domain + 6 common phases\n# Usage: bash scripts/infinite_growth.sh [--interval MIN] [--max-cycles N]\n# bash 3.2 compatible\n\nset -euo pipefail\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"$0\")\" && pwd)\"\n\n# ── Shared infrastructure ──\nsource \"$SCRIPT_DIR/lib/growth_common.sh\"\n\nFATHOM_ROOT=\"$PROJECT_ROOT\"\nSTATE_FILE=\"$GROWTH_DIR/growth_state.json\"\nGROWTH_BUS=\"$HOME/Dev/nexus6/shared/growth_bus.jsonl\"\n_LOG_FILE=\"$GROWTH_DIR/growth.log\"\nPIDFILE=\"/tmp/fathom_growth.pi",
+      "preview": "#!/usr/bin/env bash\n# FATHOM Infinite Growth — 10 domain + 6 common phases\n# Usage: bash scripts/infinite_growth.sh [--interval MIN] [--max-cycles N]\n# bash 3.2 compatible\n\nset -euo pipefail\n\nSCRIPT_DIR=\"$(cd \"$(dirname \"$0\")\" && pwd)\"\n\n# ── Shared infrastructure ──\nsource \"$SCRIPT_DIR/lib/growth_common.sh\"\n\nFATHOM_ROOT=\"$PROJECT_ROOT\"\nSTATE_FILE=\"$GROWTH_DIR/growth_state.json\"\nGROWTH_BUS=\"$HOME/Dev/nexus/shared/growth_bus.jsonl\"\n_LOG_FILE=\"$GROWTH_DIR/growth.log\"\nPIDFILE=\"/tmp/fathom_growth.pi",
       "project": "fathom",
       "ready_path": "/Users/ghost/Dev/ready/fathom/scripts/infinite_growth.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -75,7 +75,7 @@
       "preview": "#!/usr/bin/env bash\n# ═══════════════════════════════════════════════════════════════\n# growth_common.sh — Shared Growth Infrastructure\n# ═══════════════════════════════════════════════════════════════\n# Source this from any growth script:\n#   source \"$(dirname \"$0\")/lib/growth_common.sh\"\n#\n# Provides: singleton, logging, resource monitoring, git ops,\n#           phase runner, measurement, paper publish, doc sync\n\n# ── Constants (n=6 family) ──────────────────────────────────────\nreadonly N6_SIG",
       "project": "fathom",
       "ready_path": "/Users/ghost/Dev/ready/fathom/scripts/lib/growth_common.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     }
   ]

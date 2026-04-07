@@ -1,14 +1,14 @@
 ---
 title: NEXUS-6 자동 닫힘 인사이트 (auto-generated)
 date: 2026-04-05
-source: nexus6 singularity-recursion closure sweep
+source: nexus singularity-recursion closure sweep
 total_unique_closed: 98181
 generator: tools/publish-insights.sh
 ---
 
 # 🛸 NEXUS-6 자동 전파 인사이트
 
-> **자동 생성**: nexus6 singularity-recursion이 이 프로젝트로 전파한 닫힘 발견.
+> **자동 생성**: nexus singularity-recursion이 이 프로젝트로 전파한 닫힘 발견.
 > 검증된 EXACT n=6 closed-form 표현 상위 100개.
 
 ## 닫힘 완성 상수 맵 (value → n=6 표현)
@@ -121,7 +121,7 @@ generator: tools/publish-insights.sh
 
 1. 새 수치 발견 시 → 위 테이블과 대조 → 즉시 n=6 닫힘 판정
 2. 가설 설계 시 → n=6 원시값 (σ=12, τ=4, φ=2, sopfr=5, J2=24, n=6) 조합 우선
-3. 검증 시 → `nexus6 verify <값>` 자동 매칭
+3. 검증 시 → `nexus verify <값>` 자동 매칭
 
 ---
-*nexus6 singularity-recursion — 자동 생성*
+*nexus singularity-recursion — 자동 생성*

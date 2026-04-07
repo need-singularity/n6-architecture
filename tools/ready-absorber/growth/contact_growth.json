@@ -6,7 +6,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.618350",
       "source_project": "contact",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "Awesome-Efficient-MoE/scripts/requirements.txt",
       "type": "only_in_ready",
       "value_grade": "high",

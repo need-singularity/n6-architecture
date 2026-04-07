@@ -23,8 +23,8 @@
       "file_patterns": ["anima/**", "docs/**", "consciousness_laws*", "anima-physics/**"],
       "priority": "high"
     },
-    "nexus6": {
-      "dest": "~/Dev/nexus6",
+    "nexus": {
+      "dest": "~/Dev/nexus",
       "keywords": ["lens", "telescope", "scan", "ouroboros", "growth", "discovery"],
       "file_patterns": ["src/**", "shared/**", "scripts/**"],
       "priority": "high"

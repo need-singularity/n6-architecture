@@ -283,7 +283,7 @@
     "No standard library (only syscall builtins)",
     "x86-64 codegen limited (ARM64 is primary)"
   ],
-  "nexus6_coevolution": {
+  "nexus_coevolution": {
     "lens_to_pass": "New NEXUS-6 lens -> new optimization pass in opt/",
     "constant_to_n6rs": "New n=6 constant -> util/n6.rs auto-update",
     "convergent_refinement": "convergent_refinement.py results -> anomaly correction",

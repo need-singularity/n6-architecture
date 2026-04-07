@@ -409,11 +409,11 @@ def count_params(model):
 
 # ─── NEXUS-6 Verification ─────────────────────────────────────────────────
 
-def nexus6_verify(ela_module, dim, seq_len=64):
+def nexus_verify(ela_module, dim, seq_len=64):
     """Run NEXUS-6 verification on ELA output patterns."""
     try:
-        sys.path.insert(0, '/Users/ghost/Dev/n6-architecture/tools/nexus6/python')
-        import nexus6
+        sys.path.insert(0, '/Users/ghost/Dev/n6-architecture/tools/nexus/python')
+        import nexus
 
         print("\n  NEXUS-6 Verification")
         print("  " + "-" * 50)
@@ -429,7 +429,7 @@ def nexus6_verify(ela_module, dim, seq_len=64):
         out_flat = out.detach().numpy().flatten().tolist()
 
         # Full scan
-        scan_results = nexus6.scan_all(out_flat)
+        scan_results = nexus.scan_all(out_flat)
         n_lenses = len(scan_results) if isinstance(scan_results, dict) else 0
         print(f"    Scanned with {n_lenses} lenses")
 
@@ -446,7 +446,7 @@ def nexus6_verify(ela_module, dim, seq_len=64):
 
         n6_matches = 0
         for name, val in key_values.items():
-            result = nexus6.n6_check(val)
+            result = nexus.n6_check(val)
             grade = result if isinstance(result, str) else str(result)
             is_match = 'EXACT' in grade.upper() if isinstance(grade, str) else False
             n6_matches += int(is_match)
@@ -467,7 +467,7 @@ def nexus6_verify(ela_module, dim, seq_len=64):
 
     except ImportError:
         print("\n  [NEXUS-6 not available — skipping verification]")
-        print("  (Build with: cd tools/nexus6 && cargo build --release)")
+        print("  (Build with: cd tools/nexus && cargo build --release)")
         return False
     except Exception as e:
         print(f"\n  [NEXUS-6 verification error: {e}]")
@@ -658,7 +658,7 @@ if __name__ == '__main__':
     # ─── NEXUS-6 Verification ─────────────────────────────────────────────
     ela_module = EgyptianLinearAttention(DIM)
     ela_module.eval()
-    nexus6_verify(ela_module, DIM)
+    nexus_verify(ela_module, DIM)
 
     print(f"\n{'='*70}")
     print("  Egyptian Linear Attention (ELA) — Technique #21 Complete")

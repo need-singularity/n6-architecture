@@ -30,7 +30,7 @@
 |----------|------:|--:|-------|
 | Docs (domain-specific) | 706 | 24.2% | Largest category, spans 30+ domains |
 | DSE domains (.toml) | 540 | 18.5% | 54 unique domains, all already in main |
-| Tools/Calculators | 425 | 14.6% | hexa-sim, hexa-ir, nexus6, Python tools |
+| Tools/Calculators | 425 | 14.6% | hexa-sim, hexa-ir, nexus, Python tools |
 | Experiments | 265 | 9.1% | 11 missing from main |
 | Papers | 120 | 4.1% | Paper drafts and notes |
 | Evolution (Mk docs) | 116 | 4.0% | Mk-1 through Mk-5 evolution stages |
@@ -77,7 +77,7 @@ Ranked by n6_score, deduplicated across agent worktrees.
 | 17 | 50.0 | critical | docs/plasma-physics/kstar-steady-state-research.md | Exists in main (update) |
 | 18 | 50.0 | critical | docs/energy-architecture/goal.md | Exists in main (update) |
 | 19 | 50.0 | critical | docs/material-synthesis/physical-necessity-map.md | Exists in main (update) |
-| 20 | 50.0 | critical | tools/nexus6/tests/telescope_test.rs | Exists in main (update) |
+| 20 | 50.0 | critical | tools/nexus/tests/telescope_test.rs | Exists in main (update) |
 
 ---
 
@@ -121,19 +121,19 @@ Ranked by n6_score, deduplicated across agent worktrees.
 |------|------:|------|
 | tools/perfect_number_physics.py | 50.0 | Python calculator |
 | tools/hexa-ir/src/opt/mod.rs | 45.5 | HEXA-IR optimizer module |
-| tools/nexus6-ref/README.md | 37.5 | NEXUS-6 reference docs |
-| tools/nexus6/tests/cognitive_temporal_social_test.rs | 37.5 | NEXUS-6 test |
+| tools/nexus-ref/README.md | 37.5 | NEXUS-6 reference docs |
+| tools/nexus/tests/cognitive_temporal_social_test.rs | 37.5 | NEXUS-6 test |
 | tools/divisor_field_theory.py | 37.5 | Divisor field theory calculator |
 | tools/hexa-ir/memory/feedback_hexa_lang_dse_recheck.md | 36.4 | HEXA-IR feedback |
-| tools/nexus6/tests/recent_discovery_test.rs | 35.7 | NEXUS-6 test |
+| tools/nexus/tests/recent_discovery_test.rs | 35.7 | NEXUS-6 test |
 | tools/hexa-ir/Cargo.toml | 33.3 | HEXA-IR build config |
-| tools/nexus6/src/graph/robotics_env_deep_nodes.rs | 30.0 | Graph nodes |
-| tools/nexus6/tests/extended_discovery_test.rs | 28.6 | NEXUS-6 test |
+| tools/nexus/src/graph/robotics_env_deep_nodes.rs | 30.0 | Graph nodes |
+| tools/nexus/tests/extended_discovery_test.rs | 28.6 | NEXUS-6 test |
 | tools/n6_uniqueness_tester.py | 25.0 | Uniqueness validation |
-| tools/nexus6/src/graph/recent_discoveries.rs | 9.1 | Discovery graph |
-| tools/nexus6/src/graph/energy_voltage_chain_nodes.rs | 9.1 | Energy chain nodes |
-| tools/nexus6/src/graph/transport_medical_nodes.rs | 0.0 | Transport/medical nodes |
-| tools/nexus6/src/graph/cognitive_temporal_social_nodes.rs | 0.0 | Cognitive nodes |
+| tools/nexus/src/graph/recent_discoveries.rs | 9.1 | Discovery graph |
+| tools/nexus/src/graph/energy_voltage_chain_nodes.rs | 9.1 | Energy chain nodes |
+| tools/nexus/src/graph/transport_medical_nodes.rs | 0.0 | Transport/medical nodes |
+| tools/nexus/src/graph/cognitive_temporal_social_nodes.rs | 0.0 | Cognitive nodes |
 
 ### 4.5 Missing Docs (alien-10, physical-limit, cross-DSE, evolution)
 

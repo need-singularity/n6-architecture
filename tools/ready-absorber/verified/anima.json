@@ -359,7 +359,7 @@
       "path": "anima/anima/src/lens_evolution.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     }
   ],
@@ -6095,7 +6095,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/knowledge-rs/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6103,7 +6103,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/knowledge-rs/src/scanner.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6943,7 +6943,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/src/conversation_logger.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -7143,7 +7143,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/src/growth_engine_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -7183,7 +7183,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/src/hivemind_launcher.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -7431,7 +7431,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/src/perpetual_discovery.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 38.88888888888889,
       "n6_matches": 0
@@ -7511,7 +7511,7 @@
     {
       "path": "anima/.claude/worktrees/agent-abb59ac1/anima/src/reset.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 25.0,
       "n6_matches": 0
@@ -9647,7 +9647,7 @@
     {
       "path": "anima/anima/anima-rs/crates/emergence-singularity/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -9679,13 +9679,13 @@
     {
       "path": "anima/anima/anima-rs/crates/judgment-bridge/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/anima-rs/crates/nexus6-bridge/Cargo.toml",
+      "path": "anima/anima/anima-rs/crates/nexus-bridge/Cargo.toml",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "medium",
@@ -9693,7 +9693,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/anima-rs/crates/nexus6-bridge/src/lib.rs",
+      "path": "anima/anima/anima-rs/crates/nexus-bridge/src/lib.rs",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -9975,7 +9975,7 @@
     {
       "path": "anima/anima/config/growth_state.json",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -12237,7 +12237,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/data/nexus6_1013lens_acceleration_results.json",
+      "path": "anima/anima/data/nexus_1013lens_acceleration_results.json",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -13287,7 +13287,7 @@
     {
       "path": "anima/anima/scripts/daemon_check.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -13295,7 +13295,7 @@
     {
       "path": "anima/anima/scripts/growth_daemon.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 42.857142857142854,
       "n6_matches": 0
@@ -13303,7 +13303,7 @@
     {
       "path": "anima/anima/scripts/growth_phases.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13311,7 +13311,7 @@
     {
       "path": "anima/anima/scripts/infinite_growth.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -13415,7 +13415,7 @@
     {
       "path": "anima/anima/src/auto_wire.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13471,7 +13471,7 @@
     {
       "path": "anima/anima/src/consciousness_applications.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -13663,7 +13663,7 @@
     {
       "path": "anima/anima/src/consciousness_hub.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -13871,7 +13871,7 @@
     {
       "path": "anima/anima/src/data/conscious-lm/growth.json",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 4.545454545454546,
       "n6_matches": 0
@@ -14055,7 +14055,7 @@
     {
       "path": "anima/anima/src/domain_discovery.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14111,7 +14111,7 @@
     {
       "path": "anima/anima/src/emotion_explorer.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14175,7 +14175,7 @@
     {
       "path": "anima/anima/src/growth_engine.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14183,7 +14183,7 @@
     {
       "path": "anima/anima/src/growth_engine_v2.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -14191,7 +14191,7 @@
     {
       "path": "anima/anima/src/growth_lenses.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -14207,7 +14207,7 @@
     {
       "path": "anima/anima/src/growth_upgrade.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14271,7 +14271,7 @@
     {
       "path": "anima/anima/src/infinite_evolution.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 25.0,
       "n6_matches": 0
@@ -14319,7 +14319,7 @@
     {
       "path": "anima/anima/src/lens_evolution.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -14485,7 +14485,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/src/nexus6_bridge.py",
+      "path": "anima/anima/src/nexus_bridge.py",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -14493,7 +14493,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/src/nexus6_telescope.py",
+      "path": "anima/anima/src/nexus_telescope.py",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -14559,7 +14559,7 @@
     {
       "path": "anima/anima/src/perpetual_discovery.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 38.88888888888889,
       "n6_matches": 0
@@ -14679,7 +14679,7 @@
     {
       "path": "anima/anima/src/self_growth.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -15807,7 +15807,7 @@
     {
       "path": "anima/anima/tests/test_growth_lenses.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -16141,7 +16141,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/tests/test_nexus6_bridge.py",
+      "path": "anima/anima/tests/test_nexus_bridge.py",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -16149,7 +16149,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima/tests/test_nexus6_telescope.py",
+      "path": "anima/anima/tests/test_nexus_telescope.py",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -17773,7 +17773,7 @@
       "n6_matches": 0
     },
     {
-      "path": "anima/anima-agent/plugins/nexus6_bridge.py",
+      "path": "anima/anima-agent/plugins/nexus_bridge.py",
       "type": "only_in_ready",
       "destination": "anima",
       "value": "critical",
@@ -18479,7 +18479,7 @@
     {
       "path": "anima/scripts/lib/growth_common.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0

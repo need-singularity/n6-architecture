@@ -105,7 +105,7 @@ Tokamak/SSBattery/Solar/Supercap/D-T/Hybrid | HEXA-1/Neuro/QPU/RISC-V/Photonic/H
 
 - H-AERO-01~30: 26/30 EXACT (86.7%) + 4 CLOSE
 - 12 불가능성 정리: SE(3), Kissing, Betz, Carnot, Tsiolkovsky, Shannon, Heisenberg, Breguet, 2nd Law, Kutta-Joukowski, Mach Cone, Rayleigh-Taylor
-- NEXUS-6 스캔: nexus6-scan-results.md
+- NEXUS-6 스캔: nexus-scan-results.md
 
 ---
 

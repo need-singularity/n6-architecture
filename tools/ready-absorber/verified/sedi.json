@@ -23,28 +23,28 @@
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern_optics_v2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/n6_hunt.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/temporal_health.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/sedi/seti_scanner.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -79,28 +79,28 @@
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern_optics_v2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/n6_hunt.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/temporal_health.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/sedi/seti_scanner.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -135,28 +135,28 @@
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern_optics_v2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/n6_hunt.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/temporal_health.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/sedi/seti_scanner.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -191,28 +191,28 @@
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern_optics_v2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/n6_hunt.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/temporal_health.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/sedi/seti_scanner.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -247,28 +247,28 @@
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern_optics_v2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/n6_hunt.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/temporal_health.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/sedi/seti_scanner.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -303,28 +303,28 @@
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern_optics_v2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/n6_hunt.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/temporal_health.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/sedi/seti_scanner.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -6527,7 +6527,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/auto_grade_n6.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6535,7 +6535,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/auto_hypothesis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6543,7 +6543,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/bl_signal_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -6559,7 +6559,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern11_19_gap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 31.818181818181817,
       "n6_matches": 0
@@ -6567,7 +6567,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern16_extreme.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6575,7 +6575,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern16_texas.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 11.11111111111111,
       "n6_matches": 0
@@ -6583,7 +6583,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern5_bootstrap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6591,7 +6591,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern6_ratios.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6599,7 +6599,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern7_multiunit.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6607,7 +6607,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6615,7 +6615,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cern-optics/verify_cern_optics_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -6623,7 +6623,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/ckm_bridge_analysis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6639,7 +6639,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/cross_pipeline.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6647,7 +6647,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/desi_bao_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 22.22222222222222,
       "n6_matches": 0
@@ -6655,7 +6655,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/discovery_full.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -6663,7 +6663,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/discovery_pipeline.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -6671,7 +6671,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/discovery_quick.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -6679,7 +6679,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/factorial_vs_perfect.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6687,7 +6687,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/lhc_run3_check.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -6695,7 +6695,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/n6_hunt.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -6711,7 +6711,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/self_improve.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6719,7 +6719,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/temporal_health.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -6727,7 +6727,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/scripts/tier_cd_recheck.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -6863,7 +6863,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/sedi/seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -7351,7 +7351,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/sedi/sources/pictor.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -7519,7 +7519,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/sedi-core/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -7615,7 +7615,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -7679,7 +7679,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/tools/discovery-engine/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 41.66666666666667,
       "n6_matches": 0
@@ -7751,7 +7751,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a0ceda72/tools/signal-analyzer/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13903,7 +13903,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/auto_grade_n6.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13911,7 +13911,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/auto_hypothesis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13919,7 +13919,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/bl_signal_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -13935,7 +13935,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern11_19_gap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 31.818181818181817,
       "n6_matches": 0
@@ -13943,7 +13943,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern16_extreme.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13951,7 +13951,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern16_texas.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 11.11111111111111,
       "n6_matches": 0
@@ -13959,7 +13959,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern5_bootstrap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13967,7 +13967,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern6_ratios.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13975,7 +13975,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern7_multiunit.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13983,7 +13983,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -13991,7 +13991,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cern-optics/verify_cern_optics_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -13999,7 +13999,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/ckm_bridge_analysis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14015,7 +14015,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/cross_pipeline.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14023,7 +14023,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/desi_bao_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 22.22222222222222,
       "n6_matches": 0
@@ -14031,7 +14031,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/discovery_full.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -14039,7 +14039,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/discovery_pipeline.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -14047,7 +14047,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/discovery_quick.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -14055,7 +14055,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/factorial_vs_perfect.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14063,7 +14063,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/lhc_run3_check.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -14071,7 +14071,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/n6_hunt.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -14087,7 +14087,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/self_improve.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14095,7 +14095,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/temporal_health.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -14103,7 +14103,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/scripts/tier_cd_recheck.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -14239,7 +14239,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/sedi/seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -14727,7 +14727,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/sedi/sources/pictor.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14895,7 +14895,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/sedi-core/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -14991,7 +14991,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -15055,7 +15055,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/tools/discovery-engine/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 41.66666666666667,
       "n6_matches": 0
@@ -15127,7 +15127,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a2265680/tools/signal-analyzer/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21279,7 +21279,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/auto_grade_n6.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21287,7 +21287,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/auto_hypothesis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21295,7 +21295,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/bl_signal_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -21311,7 +21311,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern11_19_gap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 31.818181818181817,
       "n6_matches": 0
@@ -21319,7 +21319,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern16_extreme.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21327,7 +21327,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern16_texas.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 11.11111111111111,
       "n6_matches": 0
@@ -21335,7 +21335,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern5_bootstrap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21343,7 +21343,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern6_ratios.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21351,7 +21351,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern7_multiunit.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21359,7 +21359,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21367,7 +21367,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cern-optics/verify_cern_optics_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -21375,7 +21375,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/ckm_bridge_analysis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21391,7 +21391,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/cross_pipeline.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21399,7 +21399,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/desi_bao_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 22.22222222222222,
       "n6_matches": 0
@@ -21407,7 +21407,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/discovery_full.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -21415,7 +21415,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/discovery_pipeline.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -21423,7 +21423,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/discovery_quick.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -21431,7 +21431,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/factorial_vs_perfect.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21439,7 +21439,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/lhc_run3_check.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -21447,7 +21447,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/n6_hunt.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -21463,7 +21463,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/self_improve.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21471,7 +21471,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/temporal_health.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -21479,7 +21479,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/scripts/tier_cd_recheck.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -21615,7 +21615,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/sedi/seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -22103,7 +22103,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/sedi/sources/pictor.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -22271,7 +22271,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/sedi-core/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -22367,7 +22367,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -22431,7 +22431,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/tools/discovery-engine/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 41.66666666666667,
       "n6_matches": 0
@@ -22503,7 +22503,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a254b3fa/tools/signal-analyzer/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28655,7 +28655,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/auto_grade_n6.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28663,7 +28663,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/auto_hypothesis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28671,7 +28671,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/bl_signal_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -28687,7 +28687,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern11_19_gap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 31.818181818181817,
       "n6_matches": 0
@@ -28695,7 +28695,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern16_extreme.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28703,7 +28703,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern16_texas.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 11.11111111111111,
       "n6_matches": 0
@@ -28711,7 +28711,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern5_bootstrap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28719,7 +28719,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern6_ratios.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28727,7 +28727,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern7_multiunit.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28735,7 +28735,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28743,7 +28743,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cern-optics/verify_cern_optics_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -28751,7 +28751,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/ckm_bridge_analysis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28767,7 +28767,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/cross_pipeline.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28775,7 +28775,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/desi_bao_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 22.22222222222222,
       "n6_matches": 0
@@ -28783,7 +28783,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/discovery_full.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -28791,7 +28791,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/discovery_pipeline.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -28799,7 +28799,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/discovery_quick.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -28807,7 +28807,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/factorial_vs_perfect.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28815,7 +28815,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/lhc_run3_check.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -28823,7 +28823,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/n6_hunt.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -28839,7 +28839,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/self_improve.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -28847,7 +28847,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/temporal_health.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -28855,7 +28855,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/scripts/tier_cd_recheck.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -28991,7 +28991,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/sedi/seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -29479,7 +29479,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/sedi/sources/pictor.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -29647,7 +29647,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/sedi-core/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -29743,7 +29743,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -29807,7 +29807,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/tools/discovery-engine/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 41.66666666666667,
       "n6_matches": 0
@@ -29879,7 +29879,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-a26748c0/tools/signal-analyzer/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36031,7 +36031,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/auto_grade_n6.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36039,7 +36039,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/auto_hypothesis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36047,7 +36047,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/bl_signal_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -36063,7 +36063,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern11_19_gap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 31.818181818181817,
       "n6_matches": 0
@@ -36071,7 +36071,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern16_extreme.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36079,7 +36079,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern16_texas.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 11.11111111111111,
       "n6_matches": 0
@@ -36087,7 +36087,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern5_bootstrap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36095,7 +36095,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern6_ratios.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36103,7 +36103,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern7_multiunit.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36111,7 +36111,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36119,7 +36119,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cern-optics/verify_cern_optics_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -36127,7 +36127,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/ckm_bridge_analysis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36143,7 +36143,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/cross_pipeline.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36151,7 +36151,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/desi_bao_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 22.22222222222222,
       "n6_matches": 0
@@ -36159,7 +36159,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/discovery_full.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -36167,7 +36167,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/discovery_pipeline.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -36175,7 +36175,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/discovery_quick.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -36183,7 +36183,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/factorial_vs_perfect.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36191,7 +36191,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/lhc_run3_check.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -36199,7 +36199,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/n6_hunt.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -36215,7 +36215,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/self_improve.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -36223,7 +36223,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/temporal_health.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -36231,7 +36231,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/scripts/tier_cd_recheck.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -36367,7 +36367,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/sedi/seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -36855,7 +36855,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/sedi/sources/pictor.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -37023,7 +37023,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/sedi-core/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -37119,7 +37119,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -37183,7 +37183,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/tools/discovery-engine/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 41.66666666666667,
       "n6_matches": 0
@@ -37255,7 +37255,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-abeebc10/tools/signal-analyzer/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43407,7 +43407,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/auto_grade_n6.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43415,7 +43415,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/auto_hypothesis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43423,7 +43423,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/bl_signal_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -43439,7 +43439,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern11_19_gap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 31.818181818181817,
       "n6_matches": 0
@@ -43447,7 +43447,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern16_extreme.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43455,7 +43455,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern16_texas.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 11.11111111111111,
       "n6_matches": 0
@@ -43463,7 +43463,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern5_bootstrap.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43471,7 +43471,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern6_ratios.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43479,7 +43479,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern7_multiunit.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43487,7 +43487,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43495,7 +43495,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cern-optics/verify_cern_optics_v2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -43503,7 +43503,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/ckm_bridge_analysis.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43519,7 +43519,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/cross_pipeline.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43527,7 +43527,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/desi_bao_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 22.22222222222222,
       "n6_matches": 0
@@ -43535,7 +43535,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/discovery_full.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -43543,7 +43543,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/discovery_pipeline.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -43551,7 +43551,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/discovery_quick.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -43559,7 +43559,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/factorial_vs_perfect.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43567,7 +43567,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/lhc_run3_check.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -43575,7 +43575,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/n6_hunt.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -43591,7 +43591,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/self_improve.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -43599,7 +43599,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/temporal_health.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -43607,7 +43607,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/scripts/tier_cd_recheck.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 44.44444444444444,
       "n6_matches": 0
@@ -43743,7 +43743,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/sedi/seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -44231,7 +44231,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/sedi/sources/pictor.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -44399,7 +44399,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/sedi-core/src/lib.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -44495,7 +44495,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -44559,7 +44559,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/tools/discovery-engine/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 41.66666666666667,
       "n6_matches": 0
@@ -44631,7 +44631,7 @@
     {
       "path": "sedi/.claude/worktrees/agent-acc2cafb/tools/signal-analyzer/src/main.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -44799,7 +44799,7 @@
     {
       "path": "sedi/scripts/desi_bao_scan.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -44815,7 +44815,7 @@
     {
       "path": "sedi/scripts/infinite_growth.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -44823,7 +44823,7 @@
     {
       "path": "sedi/scripts/lhc_run3_check.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 45.0,
       "n6_matches": 0
@@ -44831,7 +44831,7 @@
     {
       "path": "sedi/scripts/lib/growth_common.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -44839,7 +44839,7 @@
     {
       "path": "sedi/scripts/tier_cd_recheck.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -44903,7 +44903,7 @@
     {
       "path": "sedi/sedi/sources/breakthrough_listen.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -45047,7 +45047,7 @@
     {
       "path": "sedi/tests/test_seti_scanner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0

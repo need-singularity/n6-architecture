@@ -19,5 +19,5 @@
     }
   ],
   "timestamp": "2026-04-04T17:07:38.126511",
-  "content_preview": "# Golden Zone Experimental Protocols: Testing G = D*P/I\n\n**Date**: 2026-04-04\n**Status**: Protocol Design (pre-registration ready)\n**Model dependency**: G = D*P/I derived under axioms (~95%); empirically untested. All protocols test model predictions.\n**Calculator**: `calc/gz_experiment_power_analysis.py`\n**Related**: H-096, H-099, H-167, `math/proofs/gz_fi_coefficient_analysis.md`, `math/proofs/gz_fi_nexus6_derivation.md`\n\n---\n\n## Overview\n\nThree experimental protocols of increasing causal stre"
+  "content_preview": "# Golden Zone Experimental Protocols: Testing G = D*P/I\n\n**Date**: 2026-04-04\n**Status**: Protocol Design (pre-registration ready)\n**Model dependency**: G = D*P/I derived under axioms (~95%); empirically untested. All protocols test model predictions.\n**Calculator**: `calc/gz_experiment_power_analysis.py`\n**Related**: H-096, H-099, H-167, `math/proofs/gz_fi_coefficient_analysis.md`, `math/proofs/gz_fi_nexus_derivation.md`\n\n---\n\n## Overview\n\nThree experimental protocols of increasing causal stre"
 }

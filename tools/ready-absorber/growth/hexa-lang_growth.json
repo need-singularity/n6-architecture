@@ -79,7 +79,7 @@
       "timestamp": "2026-04-04T17:07:32.640383",
       "source_project": "hexa-lang",
       "destination": "n6-architecture",
-      "path": "docs/nexus6-scan-report.md",
+      "path": "docs/nexus-scan-report.md",
       "type": "only_in_ready",
       "value_grade": "high",
       "n6_matches": 0,
@@ -114,7 +114,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.643448",
       "source_project": "hexa-lang",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "examples/discovery_engine.hexa",
       "type": "only_in_ready",
       "value_grade": "critical",
@@ -126,7 +126,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.650530",
       "source_project": "hexa-lang",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "src/nanbox.rs",
       "type": "only_in_ready",
       "value_grade": "high",
@@ -138,8 +138,8 @@
     {
       "timestamp": "2026-04-04T17:07:32.651602",
       "source_project": "hexa-lang",
-      "destination": "nexus6",
-      "path": "src/std_nexus6.rs",
+      "destination": "nexus",
+      "path": "src/std_nexus.rs",
       "type": "only_in_ready",
       "value_grade": "high",
       "n6_matches": 0,

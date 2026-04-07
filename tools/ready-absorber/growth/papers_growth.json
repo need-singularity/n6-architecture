@@ -6,7 +6,7 @@
     {
       "timestamp": "2026-04-04T17:07:35.478023",
       "source_project": "papers",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "papers/README.md",
       "type": "different",
       "value_grade": "high",

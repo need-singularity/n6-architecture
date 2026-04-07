@@ -165,4 +165,4 @@ OUROBOROS c1→c2→c3 발견 수 성장:
 ---
 
 *생성: NEXUS-6 OUROBOROS Discovery Loop → DeepenAnalysis(ouroboros-c1)*
-*스캔: nexus6.scan_all() — 49 상수, 12 구조 패턴 전수 조사*
+*스캔: nexus.scan_all() — 49 상수, 12 구조 패턴 전수 조사*

@@ -11,11 +11,11 @@ import glob
 import json
 
 try:
-    import nexus6
-    HAS_NEXUS6 = True
+    import nexus
+    HAS_NEXUS = True
 except ImportError:
-    HAS_NEXUS6 = False
-    print("⚠️ nexus6 미설치 — n6_check만 시뮬레이션")
+    HAS_NEXUS = False
+    print("⚠️ nexus 미설치 — n6_check만 시뮬레이션")
 
 # ═══════════════════════════════════════════════════════════
 # 🛸 외계인지수 판정 기준 (10단계)
@@ -98,8 +98,8 @@ def check_n6_exact():
     total = len(DESIGN_CONSTANTS)
     results = []
     for name, val in DESIGN_CONSTANTS.items():
-        if HAS_NEXUS6:
-            r = nexus6.n6_check(val)
+        if HAS_NEXUS:
+            r = nexus.n6_check(val)
             grade = 'EXACT' if 'EXACT' in str(r) else 'FAIL'
         else:
             # 시뮬레이션: 알려진 n=6 상수면 EXACT
@@ -114,12 +114,12 @@ def check_n6_exact():
 
 def check_lens_consensus():
     """NEXUS-6 scan_all로 렌즈 합의 수 측정"""
-    if not HAS_NEXUS6:
-        return 0, "nexus6 unavailable"
+    if not HAS_NEXUS:
+        return 0, "nexus unavailable"
     try:
         import numpy as np
         data = np.array(list(DESIGN_CONSTANTS.values()), dtype=np.float64)
-        result = nexus6.scan_all(data)
+        result = nexus.scan_all(data)
         # scan_all 반환값에서 합의 수 추출
         if isinstance(result, dict):
             agreeing = sum(1 for v in result.values()

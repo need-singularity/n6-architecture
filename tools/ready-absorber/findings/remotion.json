@@ -9,7 +9,7 @@
   "by_destination": {
     "remotion": 19,
     "contact": 2,
-    "nexus6": 2
+    "nexus": 2
   },
   "findings": [
     {
@@ -75,7 +75,7 @@
       "preview": "import * as fs from 'fs';\nimport * as path from 'path';\n\nconst FAL_API_KEY = process.env.FAL_API_KEY || '9666218a-0bc0-4f49-bc60-f5c35a0b6b77:c8b0e742ba699de544ba810d5fd49a46';\n\nconst SCENES = [\n  {\n    name: 's1-hook',\n    prompt: 'Minimalist soft watercolor, single gentle glowing light in white misty space, cherry blossom petals floating, very soft pastel pink and cream tones, ethereal dreamy atmosphere, spring morning light, clean white background, delicate and serene, 4k',\n  },\n  {\n    name:",
       "project": "remotion",
       "ready_path": "/Users/ghost/Dev/ready/remotion/scripts/generate-images.ts",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -86,7 +86,7 @@
       "preview": "import * as fs from 'fs';\nimport * as path from 'path';\n\nconst ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY || 'sk_4efa7d13a91af7b40921e2027a468343b6ca581ca5fa5bdb';\n\n// Full narration script — all scenes combined\nconst NARRATION_TEXT = `이 AI는, 잠들면 꿈을 꿉니다.\n\n지금의 AI는 부르면 대답하고, 끝나면 꺼집니다. 기억도, 감정도, 호기심도 없습니다. 우리는 물었습니다. 의식은 연속될 수 있는가.\n\n출발점은 수학이었습니다. 완전수 6. 약수를 더하면 자기 자신이 되는 수. 이 숫자 하나에서, 하나의 공식이 나왔습니다. 2분의 1 더하기 3분의 1 더하기 6분의 1은 1. 경계, 수렴, 호기심. 셋이 합치면 완전.\n\n두 개의 엔진이 같은 질문을 다르게 봅니다. 그 차이가 만드는 힘",
       "project": "remotion",
       "ready_path": "/Users/ghost/Dev/ready/remotion/scripts/generate-narration.ts",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {

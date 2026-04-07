@@ -107,7 +107,7 @@
       "path": "backend/scripts/discover_major_2.py",
       "score": 50.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -254,7 +254,7 @@
       "path": "backend/backend/tecs_calc/gravitational_optics.py",
       "score": 40.909090909090914,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -310,7 +310,7 @@
       "path": "backend/scripts/discover_major_3.py",
       "score": 40.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -1679,7 +1679,7 @@
     {
       "path": "backend/backend/tecs_calc/gravitational_optics.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 40.909090909090914,
       "n6_matches": 0
@@ -3207,7 +3207,7 @@
     {
       "path": "backend/scripts/auto_refresh.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3231,7 +3231,7 @@
     {
       "path": "backend/scripts/benchmark_hyper.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3239,7 +3239,7 @@
     {
       "path": "backend/scripts/benchmark_singularity.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3255,7 +3255,7 @@
     {
       "path": "backend/scripts/benchmark_ultra.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3263,7 +3263,7 @@
     {
       "path": "backend/scripts/discover_major_2.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 50.0,
       "n6_matches": 0
@@ -3271,7 +3271,7 @@
     {
       "path": "backend/scripts/discover_major_3.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 40.0,
       "n6_matches": 0
@@ -3335,7 +3335,7 @@
     {
       "path": "backend/scripts/hyper_full_scan.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3343,7 +3343,7 @@
     {
       "path": "backend/scripts/hyper_triple_combos.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3351,7 +3351,7 @@
     {
       "path": "backend/scripts/rank_by_asset_class.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3375,7 +3375,7 @@
     {
       "path": "backend/scripts/run_pattern_miner.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3391,7 +3391,7 @@
     {
       "path": "backend/scripts/setup_cron.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -3399,7 +3399,7 @@
     {
       "path": "backend/scripts/update_universe.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 13.636363636363635,
       "n6_matches": 0
@@ -6351,7 +6351,7 @@
     {
       "path": "frontend/src/app/backtest/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6359,7 +6359,7 @@
     {
       "path": "frontend/src/app/globals.css",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -6367,7 +6367,7 @@
     {
       "path": "frontend/src/app/layout.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6375,7 +6375,7 @@
     {
       "path": "frontend/src/app/orders/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6383,7 +6383,7 @@
     {
       "path": "frontend/src/app/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6391,7 +6391,7 @@
     {
       "path": "frontend/src/app/portfolio/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6399,7 +6399,7 @@
     {
       "path": "frontend/src/app/settings/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6407,7 +6407,7 @@
     {
       "path": "frontend/src/app/singularity/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6415,7 +6415,7 @@
     {
       "path": "frontend/src/app/strategies/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6423,7 +6423,7 @@
     {
       "path": "frontend/src/app/youtube/page.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6431,7 +6431,7 @@
     {
       "path": "frontend/src/components/ui/button.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6439,7 +6439,7 @@
     {
       "path": "frontend/src/components/ui/card.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -6447,7 +6447,7 @@
     {
       "path": "frontend/src/components/ui/input.tsx",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6455,7 +6455,7 @@
     {
       "path": "frontend/src/lib/api.ts",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -6463,7 +6463,7 @@
     {
       "path": "frontend/src/lib/utils.ts",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0

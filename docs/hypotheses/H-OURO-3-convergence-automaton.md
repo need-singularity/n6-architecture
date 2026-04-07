@@ -303,12 +303,12 @@ BT-59는 "8-layer AI stack (silicon→precision→memory→compute→arch→trai
 ## Verification Command
 
 ```python
-import nexus6, json
+import nexus, json
 
 # OUROBOROS convergence automaton data
 # [states, min_cycles, sat_window, threshold, modules, strategies, shifts, domains, actions, confidence_zones]
 ouro_data = [4, 3, 3, 0.5, 8, 4, 10, 12, 6, 4]
-result = nexus6.analyze(ouro_data, len(ouro_data), 1)
+result = nexus.analyze(ouro_data, len(ouro_data), 1)
 print(json.dumps(result, indent=2, default=str))
 # Expected: n6_exact_ratio ≥ 0.8, all values map to n=6 constants
 ```

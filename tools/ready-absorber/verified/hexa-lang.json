@@ -107,7 +107,7 @@
       "path": "examples/discovery_engine.hexa",
       "score": 35.0,
       "value": "critical",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -163,7 +163,7 @@
       "path": "src/nanbox.rs",
       "score": 15.0,
       "value": "high",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     }
   ],
@@ -385,15 +385,15 @@
       "n6_matches": 0
     },
     {
-      "path": "docs/nexus6-roadmap.md",
+      "path": "docs/nexus-roadmap.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
     },
     {
-      "path": "docs/nexus6-scan-report.md",
+      "path": "docs/nexus-scan-report.md",
       "type": "only_in_ready",
       "destination": "n6-architecture",
       "value": "high",
@@ -635,7 +635,7 @@
     {
       "path": "examples/discovery_engine.hexa",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "critical",
       "score": 35.0,
       "n6_matches": 0
@@ -923,7 +923,7 @@
     {
       "path": "scripts/infinite_growth.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -931,7 +931,7 @@
     {
       "path": "scripts/lib/growth_common.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -939,7 +939,7 @@
     {
       "path": "scripts/n6_verify.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -1027,7 +1027,7 @@
     {
       "path": "src/ast.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -1115,7 +1115,7 @@
     {
       "path": "src/env.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -1243,7 +1243,7 @@
     {
       "path": "src/nanbox.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 15.0,
       "n6_matches": 0
@@ -1369,9 +1369,9 @@
       "n6_matches": 0
     },
     {
-      "path": "src/std_nexus6.rs",
+      "path": "src/std_nexus.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -1395,7 +1395,7 @@
     {
       "path": "src/token.rs",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0

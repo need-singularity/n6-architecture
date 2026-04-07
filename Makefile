@@ -3,7 +3,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 CARGO   := $(HOME)/.cargo/bin/cargo
-NEXUS6  := tools/nexus6
+NEXUS  := tools/nexus
 PYTHON  := python3
 
 .PHONY: all test test-rust test-python test-quick lint build bench clean help
@@ -16,8 +16,8 @@ test: test-rust test-python
 	@echo "=== All tests passed ==="
 
 test-rust:
-	@echo "=== Rust tests (nexus6) ==="
-	cd $(NEXUS6) && $(CARGO) test --quiet
+	@echo "=== Rust tests (nexus) ==="
+	cd $(NEXUS) && $(CARGO) test --quiet
 
 test-python:
 	@echo "=== Python tests ==="
@@ -29,7 +29,7 @@ test-python:
 
 test-quick:
 	@echo "=== Quick tests (Rust only, no slow) ==="
-	cd $(NEXUS6) && $(CARGO) test --quiet -- --skip slow
+	cd $(NEXUS) && $(CARGO) test --quiet -- --skip slow
 
 # ── Lint ──────────────────────────────────────────────────────
 lint: lint-rust lint-python
@@ -37,7 +37,7 @@ lint: lint-rust lint-python
 
 lint-rust:
 	@echo "=== cargo check ==="
-	cd $(NEXUS6) && $(CARGO) check --quiet
+	cd $(NEXUS) && $(CARGO) check --quiet
 
 lint-python:
 	@echo "=== Python syntax check ==="
@@ -51,27 +51,27 @@ lint-python:
 
 # ── Build ─────────────────────────────────────────────────────
 build:
-	@echo "=== Building nexus6 (release) ==="
-	cd $(NEXUS6) && $(CARGO) build --release
+	@echo "=== Building nexus (release) ==="
+	cd $(NEXUS) && $(CARGO) build --release
 
 # ── Bench ─────────────────────────────────────────────────────
 bench:
 	@echo "=== Benchmarks ==="
-	cd $(NEXUS6) && $(CARGO) bench
+	cd $(NEXUS) && $(CARGO) bench
 
 # ── Clean ─────────────────────────────────────────────────────
 clean:
-	cd $(NEXUS6) && $(CARGO) clean
+	cd $(NEXUS) && $(CARGO) clean
 
 # ── Help ──────────────────────────────────────────────────────
 help:
 	@echo "Targets:"
 	@echo "  make all         — lint + test + build"
 	@echo "  make test        — run ALL tests (Rust + Python)"
-	@echo "  make test-rust   — cargo test for nexus6"
+	@echo "  make test-rust   — cargo test for nexus"
 	@echo "  make test-python — pytest for tests/"
 	@echo "  make test-quick  — fast subset (Rust, skip slow)"
 	@echo "  make lint        — cargo check + Python syntax"
-	@echo "  make build       — cargo build --release (nexus6)"
+	@echo "  make build       — cargo build --release (nexus)"
 	@echo "  make bench       — run benchmarks"
 	@echo "  make clean       — cargo clean"

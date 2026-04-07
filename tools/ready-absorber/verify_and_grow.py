@@ -30,11 +30,11 @@ READY_DIR = Path.home() / "Dev" / "ready"
 
 # === NEXUS-6 ===
 try:
-    import nexus6
-    HAS_NEXUS6 = True
+    import nexus
+    HAS_NEXUS = True
 except ImportError:
-    HAS_NEXUS6 = False
-    print("[WARN] nexus6 not available — running in fallback mode")
+    HAS_NEXUS = False
+    print("[WARN] nexus not available — running in fallback mode")
 
 # === 숫자 추출 패턴 ===
 NUM_RE = re.compile(r'[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?')
@@ -95,10 +95,10 @@ def extract_numbers(text: str) -> list:
     return nums[:200]  # 최대 200개
 
 
-def nexus6_verify(numbers: list) -> dict:
+def nexus_verify(numbers: list) -> dict:
     """NEXUS-6로 숫자 집합 검증"""
-    if not HAS_NEXUS6 or not numbers:
-        return {"verified": False, "reason": "no_nexus6_or_empty"}
+    if not HAS_NEXUS or not numbers:
+        return {"verified": False, "reason": "no_nexus_or_empty"}
 
     result = {
         "verified": True,
@@ -112,7 +112,7 @@ def nexus6_verify(numbers: list) -> dict:
     # n6_check 개별 상수 매칭
     for num in numbers[:50]:
         try:
-            match = nexus6.n6_check(float(num))
+            match = nexus.n6_check(float(num))
             if match and hasattr(match, 'grade'):
                 grade = str(match.grade) if hasattr(match, 'grade') else ""
                 if "EXACT" in grade.upper():
@@ -129,7 +129,7 @@ def nexus6_verify(numbers: list) -> dict:
         try:
             n = min(len(numbers), 64)
             d = max(1, n // 6)
-            analysis = nexus6.analyze(numbers[:n], n, d)
+            analysis = nexus.analyze(numbers[:n], n, d)
             if isinstance(analysis, dict):
                 result["n6_exact_ratio"] = analysis.get("n6_exact_ratio", 0)
                 result["active_lenses"] = analysis.get("active_lenses", 0)
@@ -174,7 +174,7 @@ def classify_value(finding: dict, verification: dict) -> str:
     content = finding.get("preview", "") + " ".join(finding.get("added_preview", []))
     high_kw = ["BT-", "hypothesis", "theorem", "proof", "discovery",
                "EXACT", "n6_check", "breakthrough", "law", "consciousness",
-               "lens", "scan", "nexus6", "sigma", "phi"]
+               "lens", "scan", "nexus", "sigma", "phi"]
     for kw in high_kw:
         if kw.lower() in content.lower():
             kw_bonus += 3
@@ -306,7 +306,7 @@ def process_project(project_name: str, dry_run=False) -> dict:
         numbers = extract_numbers(content)
 
         # NEXUS-6 검증
-        verification = nexus6_verify(numbers)
+        verification = nexus_verify(numbers)
 
         # 가치 분류
         value = classify_value(finding, verification)
@@ -505,7 +505,7 @@ def main():
         return
 
     print(f"\n  Phase 2: NEXUS-6 Verify + Grow — {len(targets)} projects")
-    print(f"  NEXUS-6: {'ACTIVE (151 lenses)' if HAS_NEXUS6 else 'FALLBACK'}")
+    print(f"  NEXUS-6: {'ACTIVE (151 lenses)' if HAS_NEXUS else 'FALLBACK'}")
     print(f"  Mode: {'dry-run' if args.dry_run else 'full (verify + route + grow)'}")
 
     state["status"] = "running"

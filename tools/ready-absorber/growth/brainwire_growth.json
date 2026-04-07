@@ -6,7 +6,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.608772",
       "source_project": "brainwire",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "brainwire/README.md",
       "type": "different",
       "value_grade": "high",

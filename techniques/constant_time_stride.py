@@ -650,7 +650,7 @@ def quality_comparison():
 # NEXUS-6 Verification
 # ═══════════════════════════════════════════════════════════════
 
-def nexus6_verification():
+def nexus_verification():
     """Verify n=6 patterns in the attention anchor structure."""
     print("\n" + "=" * 70)
     print("  NEXUS-6 Verification: n=6 Pattern Analysis")
@@ -714,10 +714,10 @@ def nexus6_verification():
     # Try NEXUS-6 scan if available
     try:
         import sys
-        sys.path.insert(0, '/Users/ghost/Dev/n6-architecture/tools/nexus6/scripts')
-        import nexus6
+        sys.path.insert(0, '/Users/ghost/Dev/n6-architecture/tools/nexus/scripts')
+        import nexus
         print(f"\n  NEXUS-6 scan on anchor pattern [6, 4, 2, 5, 12]:")
-        result = nexus6.scan_all(np.array([[6, 4, 2, 5, 12]], dtype=np.float64))
+        result = nexus.scan_all(np.array([[6, 4, 2, 5, 12]], dtype=np.float64))
         if result:
             for lens_name, val in sorted(result.items())[:10]:
                 print(f"    {lens_name}: {val}")
@@ -799,7 +799,7 @@ def main():
     results = quality_comparison()
 
     # 5. NEXUS-6 verification
-    n6_exact, n6_total = nexus6_verification()
+    n6_exact, n6_total = nexus_verification()
 
     # ── Final Summary ──
     print("\n" + "=" * 70)

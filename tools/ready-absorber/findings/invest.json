@@ -12,7 +12,7 @@
     "tecs-l": 322,
     "golden-moe": 4,
     "conscious-lm": 2,
-    "nexus6": 28,
+    "nexus": 28,
     "n6-architecture": 5,
     "anima": 4,
     "contact": 34,
@@ -1831,7 +1831,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Gravitational Lens and Telescope Calculator\n\nModels the R-spectrum as a gravitational optics system.\nPerfect numbers act as perfect lenses (achromatic, zero aberration).\n\nUsage:\n  python3 gravitational_optics.py --lens --n 6\n  python3 gravitational_optics.py --lens --n 28 --full\n  python3 gravitational_optics.py --lens --range 1-50\n  python3 gravitational_optics.py --lens --perfect --compare\n  python3 gravitational_optics.py --telescope --scan\n  python3 gravitational_op",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/backend/tecs_calc/gravitational_optics.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -3932,7 +3932,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Auto refresh: download data → run orchestrator → report.\"\"\"\n\nimport sys\nimport os\nimport subprocess\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\n\ndef main():\n    scripts_dir = os.path.dirname(__file__)\n\n    # Step 1: Download fresh market data\n    print(\"Step 1: Downloading market data...\")\n    download_script = os.path.join(scripts_dir, \"download_market_data.py\")\n    if os.path.exists(download_script):\n        subprocess.run([sys.executable, down",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/auto_refresh.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -3965,7 +3965,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Benchmark: Hyper vs Ultra vs Turbo vs Standard — the final showdown.\"\"\"\nimport sys, os, time, itertools\nimport numpy as np\nimport pandas as pd\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.calc.backtest import BacktestEngine, OHLCV\nfrom backend.calc.backtest_turbo import turbo_run, turbo_scan\nfrom backend.calc.backtest_ultra import ultra_run, ultra_scan, ultra_batch, ULTRA_SIGNALS\nfrom backend.calc.backtest_hyper import (\n    hyper_run",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/benchmark_hyper.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -3976,7 +3976,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"SINGULARITY Speed Benchmark — identify bottlenecks.\"\"\"\n\nimport sys\nimport os\nimport time\nimport numpy as np\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\n\ndef benchmark(name, fn, iterations=1):\n    \"\"\"Run function and measure time.\"\"\"\n    start = time.perf_counter()\n    for _ in range(iterations):\n        result = fn()\n    elapsed = time.perf_counter() - start\n    per_iter = elapsed / iterations\n    print(f\"  {name:<40} {per_iter*1000:>8.1f}ms\")\n  ",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/benchmark_singularity.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -3998,7 +3998,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Benchmark: Ultra vs Turbo vs Standard — push to the absolute limit.\"\"\"\nimport sys, os, time\nimport numpy as np\nimport pandas as pd\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.calc.backtest import BacktestEngine, OHLCV\nfrom backend.calc.backtest_turbo import turbo_run, turbo_scan, SIGNAL_REGISTRY as TURBO_REG\nfrom backend.calc.backtest_ultra import ultra_run, ultra_scan, ultra_batch, ultra_param_sweep, ULTRA_SIGNALS, _sma\nfrom backend",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/benchmark_ultra.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -4009,7 +4009,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Discovery Hunt Round 2 — deeper structural patterns.\"\"\"\nimport sys, os, math, itertools\nimport numpy as np\nimport pandas as pd\nfrom scipy import stats\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.calc.backtest_hyper import (\n    hyper_backtest, HYPER_SIGNALS, fast_sma, fast_ema, fast_rsi, fast_macd_hist, fast_bb,\n)\n\nDATA_DIR = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\nE = math.e; PHI = (1+math.sqrt(5))/2\nGZ_C = 1/E; GZ_U =",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/discover_major_2.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -4020,7 +4020,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Discovery Hunt Round 3 — temporal, volume, regime, microstructure.\"\"\"\nimport sys, os, math\nimport numpy as np\nimport pandas as pd\nfrom scipy import stats\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\nfrom backend.calc.backtest_hyper import fast_ema, fast_sma, fast_rsi, fast_macd_hist\n\nDATA_DIR = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\nE = math.e; PHI = (1+math.sqrt(5))/2\nGZ_C = 1/E; GZ_U = 0.5; GZ_L = 0.5-math.log(4/3); GZ_W = math.log",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/discover_major_3.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -4108,7 +4108,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Hyper Full Scan — ALL solos + ALL combos × ALL assets. Record everything.\"\"\"\nimport sys, os, time, itertools, json\nimport numpy as np\nimport pandas as pd\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.calc.backtest_hyper import (\n    hyper_scan, hyper_batch, hyper_all_combos, hyper_combo,\n    HYPER_SIGNALS, HyperResult,\n)\n\nDATA_DIR = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\nASSETS = [\"AAPL\",\"TSLA\",\"NVDA\",\"SPY\",\"QQQ\",\"EWY\",\"",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/hyper_full_scan.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -4119,7 +4119,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Triple combo scan — 2중+3중 조합 per asset class.\"\"\"\nimport sys, os, time, itertools\nimport numpy as np\nimport pandas as pd\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.calc.backtest_hyper import (\n    hyper_backtest, hyper_scan, HYPER_SIGNALS, HyperResult, _signals_to_position,\n)\n\nDATA_DIR = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\nCLASSES = {\n    \"Stock\": [\"AAPL\",\"TSLA\",\"NVDA\",\"SPY\",\"QQQ\",\"EWY\"],\n    \"Crypto\": [\"BTC_USD\",\"E",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/hyper_triple_combos.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -4130,7 +4130,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Generate per-asset-class TOP rankings using Turbo engine.\"\"\"\nimport sys, os\nimport numpy as np\nimport pandas as pd\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.calc.backtest_turbo import turbo_scan, SIGNAL_REGISTRY\n\nDATA_DIR = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\n\nASSET_CLASSES = {\n    \"Stock (S&P 500 / NASDAQ / KOSPI)\": {\"SPY\": \"S&P 500\", \"QQQ\": \"NASDAQ 100\", \"AAPL\": \"Apple\", \"TSLA\": \"Tesla\", \"NVDA\": \"NVIDIA\", \"EWY\": ",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/rank_by_asset_class.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -4163,7 +4163,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Run the Pattern Miner genetic algorithm on real market data.\"\"\"\n\nimport sys\nimport os\nimport numpy as np\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.singularity.scheduler import load_market_data, ASSETS\nfrom backend.hypothesis.engine import HypothesisEngine\n\n\ndef main():\n    data_dir = os.path.join(os.path.dirname(__file__), \"..\", \"data\")\n    hypotheses_dir = os.path.join(os.path.dirname(__file__), \"..\", \"..\", \"docs\", \"hypotheses\")\n\n",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/run_pattern_miner.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -4185,7 +4185,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Setup cron jobs for SINGULARITY autonomous operation.\n\nCreates crontab entries for:\n  - Every hour: regime check\n  - Daily 22:00 UTC: auto-trade cycle + telegram report\n  - Weekly Sunday 00:00: hypothesis mining\n  - Monthly 1st: full data refresh + re-rank\n\"\"\"\n\nimport os\nimport sys\nimport subprocess\n\n\ndef get_python_path():\n    return sys.executable\n\n\ndef get_backend_dir():\n    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n\n\ndef generate_cron_entrie",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/setup_cron.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -4196,7 +4196,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Update universe: download data for all S&P500/KOSPI200/Crypto assets.\"\"\"\n\nimport sys\nimport os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\"))\n\nfrom backend.singularity.universe import (\n    UniverseConfig, get_default_universe, get_yfinance_tickers,\n    save_universe, internal_to_yf,\n)\n\n\ndef main():\n    config = UniverseConfig(\n        sp500_top_n=30,   # top 30 S&P 500\n        kospi_top_n=15,   # top 15 KOSPI\n        crypto_top_n=10,  # top 10 crypto",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/backend/scripts/update_universe.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8255,7 +8255,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\nexport default function BacktestPage() {\n  const [assets, setAssets] = useState<string[]>([]);\n  const [strategies, setStrategies] = useState<string[]>([]);\n  const [asset, setAsset] = useState(\"SPY\");\n  const [strategy, setStrategy] = useState(\"all\");\n  const [results, setResults] = useState<any>(null);\n  const [loading, setLoading] = useState(false);\n\n  useEffect(() => {\n    api.backtest.assets().then(",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/backtest/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8266,7 +8266,7 @@
       "preview": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n@layer base {\n  :root {\n    --background: 0 0% 100%;\n    --foreground: 222.2 84% 4.9%;\n    --card: 0 0% 100%;\n    --card-foreground: 222.2 84% 4.9%;\n    --popover: 0 0% 100%;\n    --popover-foreground: 222.2 84% 4.9%;\n    --primary: 222.2 47.4% 11.2%;\n    --primary-foreground: 210 40% 98%;\n    --secondary: 210 40% 96.1%;\n    --secondary-foreground: 222.2 47.4% 11.2%;\n    --muted: 210 40% 96.1%;\n    --muted-foreground: 215.4 16.3% 46.9%;\n",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/globals.css",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8277,7 +8277,7 @@
       "preview": "import type { Metadata } from \"next\";\nimport Link from \"next/link\";\nimport \"./globals.css\";\n\nexport const metadata: Metadata = { title: \"Invest\" };\n\nconst NAV = [\n  { href: \"/\", label: \"Dashboard\" },\n  { href: \"/singularity\", label: \"Singularity\" },\n  { href: \"/strategies\", label: \"Strategies\" },\n  { href: \"/youtube\", label: \"YouTube\" },\n  { href: \"/backtest\", label: \"Backtest\" },\n  { href: \"/portfolio\", label: \"Portfolio\" },\n  { href: \"/orders\", label: \"Orders\" },\n  { href: \"/settings\", label: ",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/layout.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8288,7 +8288,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\nexport default function OrdersPage() {\n  const [orders, setOrders] = useState<any[]>([]);\n  const [stats, setStats] = useState<any>(null);\n\n  useEffect(() => {\n    api.orders.list().then(setOrders).catch(() => {});\n    api.orders.stats().then(setStats).catch(() => {});\n  }, []);\n\n  return (\n    <div className=\"p-6 space-y-6\">\n      <h1 className=\"text-3xl font-bold\">Orders</h1>\n\n      {stats && (\n       ",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/orders/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8299,7 +8299,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\nexport default function Dashboard() {\n  const [stats, setStats] = useState<any>(null);\n  const [trading, setTrading] = useState<any>(null);\n  const [orderStats, setOrderStats] = useState<any>(null);\n\n  useEffect(() => {\n    Promise.all([\n      api.dashboard().catch(() => null),\n      api.trading.status().catch(() => null),\n      api.orders.stats().catch(() => null),\n    ]).then(([d, t, o]) => { setStats(",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8310,7 +8310,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\nexport default function PortfolioPage() {\n  const [positions, setPositions] = useState<any[]>([]);\n  const [history, setHistory] = useState<any[]>([]);\n\n  useEffect(() => {\n    api.portfolio.positions().then(setPositions).catch(() => {});\n    api.portfolio.history().then(setHistory).catch(() => {});\n  }, []);\n\n  const totalValue = positions.reduce((sum, p) => sum + (p.current_price || p.avg_price) * p.qu",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/portfolio/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8321,7 +8321,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\nexport default function SettingsPage() {\n  const [settings, setSettings] = useState<any>({});\n  const [accounts, setAccounts] = useState<any[]>([]);\n  const [saved, setSaved] = useState(false);\n\n  useEffect(() => {\n    api.settings.get().then(setSettings).catch(() => {});\n    api.settings.accounts().then(setAccounts).catch(() => {});\n  }, []);\n\n  const save = async () => {\n    await api.settings.update(s",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/settings/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8332,7 +8332,7 @@
       "preview": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\n\ninterface RegimeData {\n  [asset: string]: {\n    regime: string;\n    emoji: string;\n  };\n}\n\ninterface SystemStatus {\n  status: string;\n  strategies: number;\n  assets: number;\n  soc_strategies: number;\n  short_strategies: number;\n  combo_strategies: number;\n  timestamp: string;\n}\n\nconst REGIME_COLORS: Record<string, string> = {\n  calm: \"bg-green-500\",\n  normal: \"bg-yellow-500\",\n  elevated: \"bg-orange-500\",\n  critical: \"bg-red-500\",\n};\n\nc",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/singularity/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8343,7 +8343,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\ninterface Strategy {\n  id: string; name: string; type: string; broker: string;\n  symbol: string; timeframe: string; is_active: boolean;\n  allocated_capital: number; source: string | null; params: any;\n}\n\nexport default function StrategiesPage() {\n  const [strategies, setStrategies] = useState<Strategy[]>([]);\n  const [showCreate, setShowCreate] = useState(false);\n  const [form, setForm] = useState({\n    ",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/strategies/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8354,7 +8354,7 @@
       "preview": "\"use client\";\nimport { useEffect, useState } from \"react\";\nimport { api } from \"@/lib/api\";\n\nexport default function YoutubePage() {\n  const [url, setUrl] = useState(\"\");\n  const [channelUrl, setChannelUrl] = useState(\"\");\n  const [channelName, setChannelName] = useState(\"\");\n  const [loading, setLoading] = useState(false);\n  const [addingChannel, setAddingChannel] = useState(false);\n  const [results, setResults] = useState<any[]>([]);\n  const [savedStrategies, setSavedStrategies] = useState<any",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/app/youtube/page.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8365,7 +8365,7 @@
       "preview": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst buttonVariants = cva(\n  \"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    vari",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/components/ui/button.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8376,7 +8376,7 @@
       "preview": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Card = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\n      \"rounded-lg border bg-card text-card-foreground shadow-sm\",\n      className\n    )}\n    {...props}\n  />\n))\nCard.displayName = \"Card\"\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) =>",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/components/ui/card.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8387,7 +8387,7 @@
       "preview": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface InputProps\n  extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-me",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/components/ui/input.tsx",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8398,7 +8398,7 @@
       "preview": "const API_BASE = process.env.NEXT_PUBLIC_API_URL || \"http://localhost:8000\";\n\nasync function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {\n  const res = await fetch(`${API_BASE}${path}`, {\n    ...options,\n    headers: { \"Content-Type\": \"application/json\", ...options?.headers },\n  });\n  if (!res.ok) throw new Error(`API ${res.status}`);\n  return res.json();\n}\n\nexport const api = {\n  // Dashboard\n  dashboard: () => fetchAPI<any>(\"/api/dashboard\"),\n\n  // Strategies\n  strategies: {\n",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/lib/api.ts",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -8409,7 +8409,7 @@
       "preview": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
       "project": "invest",
       "ready_path": "/Users/ghost/Dev/ready/invest/frontend/src/lib/utils.ts",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {

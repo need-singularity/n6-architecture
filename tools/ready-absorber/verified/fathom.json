@@ -56,7 +56,7 @@
     {
       "path": "scripts/infinite_growth.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -64,7 +64,7 @@
     {
       "path": "scripts/lib/growth_common.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0

@@ -27,10 +27,10 @@ from datetime import datetime
 
 HEXA_ROOT = Path(__file__).resolve().parent.parent  # tools/hexa-ir/
 N6_ARCH = HEXA_ROOT.parent.parent                   # n6-architecture/
-NEXUS_ROOT = Path.home() / "Dev" / "nexus6"
+NEXUS_ROOT = Path.home() / "Dev" / "nexus"
 BUS_FILE = NEXUS_ROOT / "shared" / "growth_bus.jsonl"
 N6_RS = HEXA_ROOT / "src" / "util" / "n6.rs"
-CONVERGENT = N6_ARCH / "tools" / "nexus6" / "scripts" / "convergent_refinement.py"
+CONVERGENT = N6_ARCH / "tools" / "nexus" / "scripts" / "convergent_refinement.py"
 
 # ═══════════════════════════════════════════════════════════
 # Bus Integration

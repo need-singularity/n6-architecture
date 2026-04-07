@@ -7,7 +7,7 @@ MAX_CYCLES=${MAX_CYCLES:-${1:-999}}
 INTERVAL=${INTERVAL:-${2:-1800}}
 
 # 공통 라이브러리
-COMMON="$HOME/Dev/nexus6/scripts/lib/growth_common.sh"
+COMMON="$HOME/Dev/nexus/scripts/lib/growth_common.sh"
 source "$COMMON"
 
 # 프로젝트별 phases
@@ -27,25 +27,25 @@ domain_phases() {
         write_growth_bus "arch_docs" "skip" "no_docs_dir"
     fi
 
-    # 2. nexus6 tools 빌드
-    log_info "Phase: nexus6 tools 빌드"
-    local tools_dir="$PROJECT_ROOT/tools/nexus6"
+    # 2. nexus tools 빌드
+    log_info "Phase: nexus tools 빌드"
+    local tools_dir="$PROJECT_ROOT/tools/nexus"
     if [ -d "$tools_dir" ]; then
         local tools_cargo="$tools_dir/Cargo.toml"
         if [ -f "$tools_cargo" ]; then
             if cargo check --manifest-path "$tools_cargo" 2>/dev/null; then
-                log_info "  cargo check tools/nexus6: OK"
+                log_info "  cargo check tools/nexus: OK"
                 write_growth_bus "tools_build" "ok" ""
             else
-                log_warn "  cargo check tools/nexus6: FAIL"
+                log_warn "  cargo check tools/nexus: FAIL"
                 write_growth_bus "tools_build" "fail" "cargo_check_error"
             fi
         else
-            log_info "  tools/nexus6/Cargo.toml 없음"
+            log_info "  tools/nexus/Cargo.toml 없음"
             write_growth_bus "tools_build" "skip" "no_cargo_toml"
         fi
     else
-        log_info "  tools/nexus6 디렉토리 없음 — skip"
+        log_info "  tools/nexus 디렉토리 없음 — skip"
         write_growth_bus "tools_build" "skip" "no_tools_dir"
     fi
 

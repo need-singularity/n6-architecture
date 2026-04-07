@@ -2,8 +2,8 @@
 """
 HEXA-GATE 검증 스크립트 — n=6 EXACT 24/24 + TP-1~6 검증
 
-Design: docs/nexus6-breakthrough-gate/goal.md
-Rust impl: tools/nexus6/src/gate/
+Design: docs/nexus-breakthrough-gate/goal.md
+Rust impl: tools/nexus/src/gate/
 
 실행:
     python3 experiments/verify_hexa_gate.py
@@ -109,7 +109,7 @@ section("TP-1: 오염본 차단율")
 BLACKLIST_PREFIXES = ("ready", "backup-", "contaminated-", "broken-", "trash-", "corrupt-")
 WHITELIST = {
     "n6-architecture", "TECS-L", "anima", "sedi", "brainwire",
-    "papers", "nexus6", "hexa-lang", "fathom",
+    "papers", "nexus", "hexa-lang", "fathom",
 }
 
 def gate1_source(repo: str) -> bool:

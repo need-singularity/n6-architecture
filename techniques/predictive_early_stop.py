@@ -766,10 +766,10 @@ def main():
     print(f"{'═' * 72}")
 
     try:
-        import nexus6
+        import nexus
         # Scan the loss curve from full training
         loss_data = [d['loss'] for d in history_full]
-        scan_result = nexus6.scan_all(np.array(loss_data).reshape(1, -1))
+        scan_result = nexus.scan_all(np.array(loss_data).reshape(1, -1))
         print(f"  Loss curve scan: {len(scan_result)} lenses applied")
         # Check for n6 patterns in phase transition epochs
         phase_epochs = [d['epoch'] for d in history_full
@@ -778,7 +778,7 @@ def main():
                         history_full[d['epoch']-2]['loss'] > 0.1]
         if phase_epochs:
             for ep in phase_epochs:
-                n6_match = nexus6.n6_check(ep)
+                n6_match = nexus.n6_check(ep)
                 print(f"  Phase transition at epoch {ep}: n6_match={n6_match}")
         print(f"  NEXUS-6 scan: OK")
     except (ImportError, Exception) as e:

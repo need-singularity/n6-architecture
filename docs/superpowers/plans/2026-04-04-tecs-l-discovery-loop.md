@@ -4,7 +4,7 @@
 
 **Goal:** Build an autonomous discovery loop for TECS-L that measures 8 mathematical domains, picks the weakest, runs convergence/proof engines, validates with 3-way cross-check, records to atlas/BT, and auto-publishes papers to Zenodo+OSF when discoveries accumulate.
 
-**Architecture:** Bash daemon (nexus6 pattern) orchestrates Python measurement/action/publish scripts. State persisted in JSON. Safety brakes: 3 consecutive failures = stop, max_cycles=6, SIGTERM graceful shutdown. Mode rotation (DFS→Pair→Backtrack) on stagnation.
+**Architecture:** Bash daemon (nexus pattern) orchestrates Python measurement/action/publish scripts. State persisted in JSON. Safety brakes: 3 consecutive failures = stop, max_cycles=6, SIGTERM graceful shutdown. Mode rotation (DFS→Pair→Backtrack) on stagnation.
 
 **Tech Stack:** Bash (daemon), Python 3 (measurement/engines/publishing), existing TECS-L engines (convergence_engine.py, proof_engine.py), existing Zenodo/OSF batch_upload.py.
 
@@ -17,7 +17,7 @@
 ```
 ~/Dev/TECS-L/
   scripts/
-    tecs_discovery_loop.sh      ← Main daemon (bash, nexus6 growth_daemon pattern)
+    tecs_discovery_loop.sh      ← Main daemon (bash, nexus growth_daemon pattern)
     tecs_measure.py             ← Domain health measurement (8 domains × 4 metrics)
     tecs_act.py                 �� Discovery action executor (convergence/proof engine wrapper)
     tecs_validate.py            ← 3-way cross-validation (calc + verify + n6_check)
@@ -1147,7 +1147,7 @@ git commit -m "feat: TECS-L discovery loop — auto-publish to Zenodo+OSF"
 #!/usr/bin/env bash
 # ═══════════════════════════════════════════════════════════════
 # TECS-L Infinite Discovery Loop Daemon
-# Pattern: nexus6 growth_daemon.sh (measure→pick→act→validate→record→publish)
+# Pattern: nexus growth_daemon.sh (measure→pick→act→validate→record→publish)
 # ═══════════════════════════════════════════════════════════════
 set -euo pipefail
 

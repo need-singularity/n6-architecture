@@ -10,7 +10,7 @@
     "contact": 55,
     "papers": 29,
     "golden-moe": 13,
-    "nexus6": 3,
+    "nexus": 3,
     "anima": 9,
     "ph-training": 1,
     "hexa-lang": 1,
@@ -260,7 +260,7 @@
       "preview": "requests>=2.25.0\nfeedparser>=6.0.0\npython-dateutil>=2.8.0\nopenai>=1.0.0\nanthropic>=0.3.0\npython-dotenv>=0.19.0\nPillow>=8.0.0",
       "project": "contact",
       "ready_path": "/Users/ghost/Dev/ready/contact/Awesome-Efficient-MoE/scripts/requirements.txt",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -865,7 +865,7 @@
       "preview": "# Contributing to Awesome AI for Science\n\nThank you for your interest in contributing to Awesome AI for Science! 🎉\n\nThis project aims to be the most comprehensive and up-to-date collection of AI resources for scientific research. Your contributions help researchers worldwide discover tools and knowledge that can accelerate scientific discovery.\n\n## 📋 Table of Contents\n\n- [How to Contribute](#how-to-contribute)\n- [Types of Contributions](#types-of-contributions)\n- [Contribution Guidelines](#contr",
       "project": "contact",
       "ready_path": "/Users/ghost/Dev/ready/contact/awesome-ai-for-science/CONTRIBUTING.md",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.2
     },
     {
@@ -887,7 +887,7 @@
       "preview": "<div align=\"center\">\n  <h1>✨ Awesome AI for Science (AI4Science) ✨</h1>\n  \n  <img src=\"assets/banner.jpg\" alt=\"Awesome AI for Science Banner\" width=\"100%\">\n  \n  <p align=\"center\">\n    A curated list of awesome AI tools, libraries, papers, datasets, and frameworks that accelerate <strong>scientific discovery</strong> across all disciplines.\n  </p>\n  \n  <!-- Keep these links. Translations will automatically update with the README. -->\n  <p align=\"center\">\n    <a href=\"https://zdoc.app/de/ai-boost/",
       "project": "contact",
       "ready_path": "/Users/ghost/Dev/ready/contact/awesome-ai-for-science/README.md",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.2
     },
     {

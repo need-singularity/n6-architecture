@@ -54,7 +54,7 @@ def gen_badge(data: dict) -> str:
     s = data["stats"]
     return "\n".join([
         f'[![DSE](https://img.shields.io/badge/DSE-{s["dse_domains"]}%20domains-blue.svg)](docs/dse-map.toml)',
-        f'[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-{s["nexus6_tests"]}%20tests-green.svg)](tools/nexus6/)',
+        f'[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-{s["nexus_tests"]}%20tests-green.svg)](tools/nexus/)',
     ])
 
 
@@ -65,7 +65,7 @@ def gen_stats(data: dict) -> str:
         f'  AI techniques:    {s["ai_techniques"]}\n'
         f'  DSE domains:      {s["dse_domains"]}\n'
         f'  DSE paths:        {s["dse_paths"]}\n'
-        f'  NEXUS-6 tests:    {s["nexus6_tests"]}\n'
+        f'  NEXUS-6 tests:    {s["nexus_tests"]}\n'
         "```"
     )
 

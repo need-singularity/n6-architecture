@@ -59,16 +59,16 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            tools/nexus6/target
-          key: cargo-${{ runner.os }}-${{ hashFiles('tools/nexus6/Cargo.lock', 'tools/nexus6/Cargo.toml') }}
+            tools/nexus/target
+          key: cargo-${{ runner.os }}-${{ hashFiles('tools/nexus/Cargo.lock', 'tools/nexus/Cargo.toml') }}
           restore-keys: |
             cargo-${{ runner.os }}-
 
       - name: Cargo check
-        run: cd tools/nexus6 && cargo check
+        run: cd tools/nexus && cargo check
 
       - name: Cargo test
-        run: cd tools/nexus6 && cargo test
+        run: cd tools/nexus && cargo test
 
   # ── Job 3: CDO JSON validation ──────────────────────────────
   cdo-validate:

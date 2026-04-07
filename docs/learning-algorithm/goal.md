@@ -403,4 +403,4 @@ Scaling {20, 3e-4, 0.1} -- 이 모든 값이 sigma(n)*phi(n) = n*tau(n), n=6의 
 - techniques/ (17 Python 구현)
 - engine/ (thermodynamic_frame.py, emergent_n6_trainer.py)
 - docs/ai-efficiency/ (17기법 상세, cross-DSE)
-- tools/nexus6/ (Discovery Engine)
+- tools/nexus/ (Discovery Engine)

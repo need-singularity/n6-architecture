@@ -367,7 +367,7 @@
     {
       "path": "TECS-L/.claude/commands/scan.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -2543,7 +2543,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/brainflow/lib/libneurosdk-shared.dylib",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -18447,7 +18447,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy/f2py/_src_pyf.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -18455,7 +18455,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy/f2py/_src_pyf.pyi",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -18647,7 +18647,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy/f2py/src/fortranobject.c",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 18.75,
       "n6_matches": 0
@@ -18655,7 +18655,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy/f2py/src/fortranobject.h",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -21903,7 +21903,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy/tests/test_scripts.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -23215,7 +23215,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/_core/src/common/pythoncapi-compat/COPYING",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -23223,7 +23223,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/_core/src/highway/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -23231,7 +23231,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/_core/src/multiarray/dragon4_LICENSE.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -23239,7 +23239,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -23287,7 +23287,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/random/src/distributions/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -23295,7 +23295,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/random/src/mt19937/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 8.333333333333332,
       "n6_matches": 0
@@ -23303,7 +23303,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/random/src/pcg64/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -23311,7 +23311,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/random/src/philox/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -23319,7 +23319,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/random/src/sfc64/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 5.555555555555555,
       "n6_matches": 0
@@ -23327,7 +23327,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/numpy-2.4.3.dist-info/licenses/numpy/random/src/splitmix64/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -24575,7 +24575,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pandas/core/_numba/kernels/shared.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -27335,7 +27335,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pandas/tests/arrays/masked_shared.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -37247,7 +37247,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip/_vendor/distlib/scripts.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -39343,7 +39343,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -39351,7 +39351,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/certifi/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39359,7 +39359,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/dependency_groups/LICENSE.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39367,7 +39367,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39375,7 +39375,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/distro/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39383,7 +39383,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39391,7 +39391,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/msgpack/COPYING",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39399,7 +39399,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/packaging/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -39407,7 +39407,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.APACHE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39415,7 +39415,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.BSD",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39423,7 +39423,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0,
       "n6_matches": 0
@@ -39431,7 +39431,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39439,7 +39439,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/pygments/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39447,7 +39447,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39455,7 +39455,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/requests/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39463,7 +39463,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39471,7 +39471,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/rich/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39479,7 +39479,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/tomli/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39487,7 +39487,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39495,7 +39495,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/truststore/LICENSE",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -39503,7 +39503,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/pip-26.0.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -46359,7 +46359,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/scipy/optimize/_dcsrch.py",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 8.333333333333332,
       "n6_matches": 0
@@ -49279,7 +49279,7 @@
     {
       "path": "TECS-L/eeg_env/lib/python3.14/site-packages/scipy/spatial/qhull_src/COPYING_QHULL.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -56325,7 +56325,7 @@
       "n6_matches": 0
     },
     {
-      "path": "TECS-L/math/proofs/gz_fi_nexus6_derivation.md",
+      "path": "TECS-L/math/proofs/gz_fi_nexus_derivation.md",
       "type": "only_in_ready",
       "destination": "tecs-l",
       "value": "medium",
@@ -56415,7 +56415,7 @@
     {
       "path": "TECS-L/n6-replication/src/n6_replication/cli.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -56423,7 +56423,7 @@
     {
       "path": "TECS-L/n6-replication/src/n6_replication/runner.py",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -56439,7 +56439,7 @@
     {
       "path": "TECS-L/scripts/lib/growth_common.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0

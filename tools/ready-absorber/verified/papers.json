@@ -31,7 +31,7 @@
     {
       "path": "papers/.claude/commands/scan.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0
@@ -63,7 +63,7 @@
     {
       "path": "papers/README.md",
       "type": "different",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 0.0,
       "n6_matches": 0
@@ -103,7 +103,7 @@
     {
       "path": "papers/scripts/infinite_growth.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -111,7 +111,7 @@
     {
       "path": "papers/scripts/lib/growth_common.sh",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "low",
       "score": 0.0,
       "n6_matches": 0
@@ -135,7 +135,7 @@
     {
       "path": "papers/upload_results_20260404_075321.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0

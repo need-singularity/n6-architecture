@@ -2,7 +2,7 @@ __pycache__/
 *.pyc
 .env
 data/
-!tools/nexus6/data/
+!tools/nexus/data/
 models/
 .claude/
 .discovery-cache
@@ -45,9 +45,9 @@ tools/solar-dse/solar-dse
 tools/tokamak-shape/tokamak-shape
 tools/universal-dse/universal-dse
 tools/vendor-compare-calc/vendor-compare-calc
-tools/nexus6/target/
-tools/nexus6/nexus6
-tools/nexus6/scripts/growth_log.jsonl
+tools/nexus/target/
+tools/nexus/nexus
+tools/nexus/scripts/growth_log.jsonl
 .growth/
 
 # TECS-L calc symlink

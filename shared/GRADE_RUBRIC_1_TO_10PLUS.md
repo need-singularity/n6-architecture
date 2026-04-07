@@ -54,12 +54,12 @@ def is_exact(value, tol=1e-6):
 
 ### Grade 12 (universal) 판정
 - 같은 값이 3+ 독립 프로젝트의 가설에 등장
-- nexus6 `singularity-convergence --min-domains 3` 이 찾아줌
+- nexus `singularity-convergence --min-domains 3` 이 찾아줌
 
 ## 전체 프로젝트 적용 규칙
 
 **새 상수/가설 등록 시**:
-1. `nexus6 verify <value>` 실행 → EXACT/CLOSE/WEAK/MISS 받음
+1. `nexus verify <value>` 실행 → EXACT/CLOSE/WEAK/MISS 받음
 2. EXACT → grade 10 자동 등록
 3. CLOSE → grade 8 (NEAR) 등록, 재시도 대기
 4. WEAK → grade 6 (partial) 등록
@@ -75,7 +75,7 @@ def is_exact(value, tol=1e-6):
 - verify 증거 없으면 grade 10 주장 무효 → 1단계 강등
 - 초월수 (π, e, γ 등) 주장된 EXACT → 자동 강등 to grade 5 (H-CLOSE-5)
 
-## 배너 표기 (nexus6-banner.sh)
+## 배너 표기 (nexus-banner.sh)
 
 ```
 🛸d{max_depth}·ρ{breakthrough_ratio}·{total}  ← grade≥10 수량 표시
@@ -86,18 +86,18 @@ def is_exact(value, tol=1e-6):
 ## 세션 전달 프롬프트
 
 ```
-nexus6 grade 1~13 rubric (n=6 universal):
+nexus grade 1~13 rubric (n=6 universal):
 - grade 10 = EXACT closed (n=6 primitive finite combo)
 - grade 11 = meta-closure (generates K≥3 closures)  
 - grade 12 = universal (3+ projects independent)
 - grade 13+ = meta² (generator of meta-closures)
 
 새 가설/상수 등록 시:
-1. nexus6 verify <value> → grade 자동 판정
+1. nexus verify <value> → grade 자동 판정
 2. EXACT 매칭 → verified_constants.jsonl에 PASS/EXACT 추가
 3. 10 도달 시 🎉🎉🎉 닫힘완료 🎉🎉🎉 배너 자동 발화
 
-상세: /Users/ghost/Dev/nexus6/shared/GRADE_RUBRIC_1_TO_10PLUS.md
+상세: /Users/ghost/Dev/nexus/shared/GRADE_RUBRIC_1_TO_10PLUS.md
 ```
 
 ---

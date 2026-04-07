@@ -4,8 +4,8 @@
 [21:42:09] [n6-architecture] ━━━ Cycle 1/1 ━━━
 [21:42:09] [n6-architecture] Phase: 아키텍처 문서 스캔
 [21:42:09] [n6-architecture]   docs/ Markdown: 911개
-[21:42:09] [n6-architecture] Phase: nexus6 tools 빌드
-[21:42:09] [n6-architecture] WARN:   cargo check tools/nexus6: FAIL
+[21:42:09] [n6-architecture] Phase: nexus tools 빌드
+[21:42:09] [n6-architecture] WARN:   cargo check tools/nexus: FAIL
 [21:42:09] [n6-architecture] Phase: DSE 상태
 [21:42:09] [n6-architecture]   dse/ 디렉토리 없음
 [21:42:09] [n6-architecture] Phase: 성장 스캔

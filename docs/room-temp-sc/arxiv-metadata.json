@@ -11,7 +11,7 @@
   },
   "journal_ref": "",
   "doi": "",
-  "report_no": "NEXUS6-RTSC-2026-001",
+  "report_no": "NEXUS-RTSC-2026-001",
   "comments": "25+ pages, 13 verification scripts, 938 parameters. Dataset available on Zenodo and OSF.",
   "msc_class": "82D55, 11A25, 74E15",
   "acm_class": "",

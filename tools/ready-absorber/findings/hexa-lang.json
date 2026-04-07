@@ -14,7 +14,7 @@
     "anima": 6,
     "n6-architecture": 15,
     "sedi": 1,
-    "nexus6": 10
+    "nexus": 10
   },
   "findings": [
     {
@@ -22,7 +22,7 @@
       "path": ".claude/settings.json",
       "size": 1512,
       "lines": 64,
-      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-universal.sh\",\n            \"timeout\": 10,\n       ",
+      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-universal.sh\",\n            \"timeout\": 10,\n       ",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/.claude/settings.json",
       "destination": "contact",
@@ -316,23 +316,23 @@
     },
     {
       "type": "only_in_ready",
-      "path": "docs/nexus6-roadmap.md",
+      "path": "docs/nexus-roadmap.md",
       "size": 11986,
       "lines": 335,
       "preview": "# NEXUS-6 × HEXA-LANG 활용 로드맵\n\n> 2026-04-04 작성 | NEXUS-6 1,014렌즈 → HEXA-LANG v4.0 적용 전략\n\n## 현재 상태\n\n```\nNEXUS-6                          HEXA-LANG\n━━━━━━━━━━━━━━━━━━               ━━━━━━━━━━━━━━━━━━\n1,014 렌즈 (171+843)             v4.0, 38.7K LOC\nMetal GPU 가속                   1,349 tests\nPython+Rust+CLI                  6 backends\nOuroboros 자기진화                25 BT 발견\ngrowth daemon                    Health 88.7/100\n\n연결 채널:\n  growth daemon ──→ .growth/growth.log (health scan)\n  ANIMA bridge ──→ W",
       "project": "hexa-lang",
-      "ready_path": "/Users/ghost/Dev/ready/hexa-lang/docs/nexus6-roadmap.md",
-      "destination": "nexus6",
+      "ready_path": "/Users/ghost/Dev/ready/hexa-lang/docs/nexus-roadmap.md",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
       "type": "only_in_ready",
-      "path": "docs/nexus6-scan-report.md",
+      "path": "docs/nexus-scan-report.md",
       "size": 4960,
       "lines": 122,
       "preview": "# NEXUS-6 Compiler Full Scan Report + Blowup Loop\n\n> 2026-04-04 | 1,014 렌즈 풀스캔 | Active 1,138/1,180 | n6 EXACT ratio: 100%\n\n## n=6 상수 검증 결과\n\n| 카운트 | 현재 값 | n=6 공식 | NEXUS-6 판정 | 상태 |\n|--------|---------|----------|-------------|------|\n| Keywords | 55 | T(10)=sopfr(6)*sopfr(28) | NONE→확장 | BT-12 갱신 |\n| Operators (BinOp+Unary) | 22+3=25 | sopfr² | CLOSE(J2) | BT-14 유지 |\n| BinOp only | 22 | - | - | 설계 24에서 2 부족 |\n| AST enums | 12 | sigma(6) | **EXACT** | BT-20 유지 |\n| Expr variants | 33 | - | - | |",
       "project": "hexa-lang",
-      "ready_path": "/Users/ghost/Dev/ready/hexa-lang/docs/nexus6-scan-report.md",
+      "ready_path": "/Users/ghost/Dev/ready/hexa-lang/docs/nexus-scan-report.md",
       "destination": "n6-architecture",
       "confidence": 0.6
     },
@@ -663,7 +663,7 @@
       "preview": "// discovery_engine.hexa — A Mini NEXUS-6 Reimplemented in HEXA\n// NEXUS-6 is the telescope that scans for n=6 patterns.\n// This is the tool written in the language it helped design.\n//\n// Implements 3 core lenses: Consciousness, Topology, Causality\n// Scans numeric data for n=6 arithmetic constants\n// Reports when 3+ lenses agree (consensus = confirmed)\n\nprintln(\"=== Discovery Engine: NEXUS-6 in HEXA ===\")\nprintln(\"  3 lenses: Consciousness | Topology | Causality\")\nprintln(\"  Consensus: 3/3 = c",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/examples/discovery_engine.hexa",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.8
     },
     {
@@ -1056,10 +1056,10 @@
       "path": "scripts/infinite_growth.sh",
       "size": 9635,
       "lines": 287,
-      "preview": "#!/bin/bash\n# HEXA-LANG Infinite Growth Daemon — 10-phase loop\n# bash 3.2 compatible, no bashisms\n# Usage: bash scripts/infinite_growth.sh [--max-cycles N] [--interval SECS]\n\nset -e\nsource \"$(cd \"$(dirname \"$0\")\" && pwd)/lib/growth_common.sh\"\n\nREPO_ROOT=\"$(cd \"$(dirname \"$0\")/..\" && pwd)\"\nGROWTH_DIR=\"${REPO_ROOT}/.growth\"\nSTATE_FILE=\"${GROWTH_DIR}/growth_state.json\"\nLOG_FILE=\"${GROWTH_DIR}/growth.log\"\nGROWTH_BUS=\"${HOME}/Dev/nexus6/shared/growth_bus.jsonl\"\nCARGO=\"${HOME}/.cargo/bin/cargo\"\n\nMAX_C",
+      "preview": "#!/bin/bash\n# HEXA-LANG Infinite Growth Daemon — 10-phase loop\n# bash 3.2 compatible, no bashisms\n# Usage: bash scripts/infinite_growth.sh [--max-cycles N] [--interval SECS]\n\nset -e\nsource \"$(cd \"$(dirname \"$0\")\" && pwd)/lib/growth_common.sh\"\n\nREPO_ROOT=\"$(cd \"$(dirname \"$0\")/..\" && pwd)\"\nGROWTH_DIR=\"${REPO_ROOT}/.growth\"\nSTATE_FILE=\"${GROWTH_DIR}/growth_state.json\"\nLOG_FILE=\"${GROWTH_DIR}/growth.log\"\nGROWTH_BUS=\"${HOME}/Dev/nexus/shared/growth_bus.jsonl\"\nCARGO=\"${HOME}/.cargo/bin/cargo\"\n\nMAX_C",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/scripts/infinite_growth.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -1070,7 +1070,7 @@
       "preview": "#!/usr/bin/env bash\n# ═══════════════════════════════════════════════════════════════\n# growth_common.sh — Shared Growth Infrastructure\n# ═══════════════════════════════════════════════════════════════\n# Source this from any growth script:\n#   source \"$(dirname \"$0\")/lib/growth_common.sh\"\n#\n# Provides: singleton, logging, resource monitoring, git ops,\n#           phase runner, measurement, paper publish, doc sync\n\n# ── Constants (n=6 family) ──────────────────────────────────────\nreadonly N6_SIG",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/scripts/lib/growth_common.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -1078,10 +1078,10 @@
       "path": "scripts/n6_verify.sh",
       "size": 5934,
       "lines": 193,
-      "preview": "#!/bin/bash\n# n6_verify.sh — NEXUS-6 기반 n=6 상수 자동 검증\n# 사용법: bash scripts/n6_verify.sh [--strict]\n# pre-commit hook에서 호출 가능\n\nset -e\ncd \"$(dirname \"$0\")/..\"\n\nN6=\"${HOME}/Dev/n6-architecture/tools/nexus6/target/release/nexus6\"\nSTRICT=\"${1:-}\"\nERRORS=0\nWARNINGS=0\n\n# 색상\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nCYAN='\\033[0;36m'\nNC='\\033[0m'\n\necho -e \"${CYAN}╔══════════════════════════════════════════════╗${NC}\"\necho -e \"${CYAN}║  NEXUS-6 × HEXA-LANG n=6 상수 검증          ║${NC}\"\necho -e \"",
+      "preview": "#!/bin/bash\n# n6_verify.sh — NEXUS-6 기반 n=6 상수 자동 검증\n# 사용법: bash scripts/n6_verify.sh [--strict]\n# pre-commit hook에서 호출 가능\n\nset -e\ncd \"$(dirname \"$0\")/..\"\n\nN6=\"${HOME}/Dev/n6-architecture/tools/nexus/target/release/nexus\"\nSTRICT=\"${1:-}\"\nERRORS=0\nWARNINGS=0\n\n# 색상\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nCYAN='\\033[0;36m'\nNC='\\033[0m'\n\necho -e \"${CYAN}╔══════════════════════════════════════════════╗${NC}\"\necho -e \"${CYAN}║  NEXUS-6 × HEXA-LANG n=6 상수 검증          ║${NC}\"\necho -e \"",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/scripts/n6_verify.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -1202,7 +1202,7 @@
       "preview": "#[allow(dead_code)]\n#[derive(Debug, Clone)]\npub enum Expr {\n    IntLit(i64),\n    FloatLit(f64),\n    BoolLit(bool),\n    StringLit(String),\n    CharLit(char),\n    Ident(String),\n    Binary(Box<Expr>, BinOp, Box<Expr>),\n    Unary(UnaryOp, Box<Expr>),\n    Call(Box<Expr>, Vec<Expr>),\n    Lambda(Vec<Param>, Box<Expr>),\n    Array(Vec<Expr>),\n    Tuple(Vec<Expr>),\n    Field(Box<Expr>, String),\n    Index(Box<Expr>, Box<Expr>),\n    If(Box<Expr>, Block, Option<Block>),\n    Match(Box<Expr>, Vec<MatchArm>),\n",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/src/ast.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -1323,7 +1323,7 @@
       "preview": "#![allow(dead_code)]\n\nuse std::collections::HashMap;\nuse std::sync::{Arc, Mutex};\n#[cfg(not(target_arch = \"wasm32\"))]\nuse std::sync::mpsc;\n\n#[derive(Debug, Clone)]\npub enum Value {\n    Int(i64),\n    Float(f64),\n    Bool(bool),\n    Char(char),\n    Str(String),\n    Byte(u8),\n    Void,\n    Array(Vec<Value>),\n    Tuple(Vec<Value>),\n    Fn(String, Vec<String>, Vec<crate::ast::Stmt>), // name, param_names, body\n    BuiltinFn(String),  // name of builtin\n    Struct(String, HashMap<String, Value>),  // ",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/src/env.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -1499,7 +1499,7 @@
       "preview": "#![allow(dead_code)]\n\n//! NaN-Boxing: encodes all primitive values in a single 64-bit f64.\n//!\n//! IEEE 754 double-precision NaN has 52 mantissa bits. By using quiet NaN\n//! bit patterns with tag bits, we can store ints, bools, pointers, and void\n//! in 8 bytes instead of the ~64+ bytes of a full Value enum.\n//!\n//! Layout:\n//!   Float:  any bit pattern where (bits & QNAN) != QNAN  (normal f64)\n//!   Int:    QNAN | TAG_INT  | (lower 48 bits of i64)\n//!   Bool:   QNAN | TAG_BOOL | (0 or 1)\n//!   ",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/src/nanbox.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {
@@ -1669,13 +1669,13 @@
     },
     {
       "type": "only_in_ready",
-      "path": "src/std_nexus6.rs",
+      "path": "src/std_nexus.rs",
       "size": 6387,
       "lines": 174,
-      "preview": "//! std::nexus6 — NEXUS-6 integration for HEXA-LANG.\n//!\n//! Provides native access to the NEXUS-6 discovery engine from within HEXA code.\n//! This is the 13th stdlib module (sigma + mu = 12 + 1 = 13).\n//!\n//! Provides:\n//!   nexus6_scan(domain)      — Run NEXUS-6 full scan on a domain\n//!   nexus6_verify(value)     — Check if a value matches n=6 constants\n//!   nexus6_omega(phi, tension, cells, entropy, alpha, balance) — Run 6 Omega lenses\n//!   nexus6_lenses()          — List the 6 Omega lens ",
+      "preview": "//! std::nexus — NEXUS-6 integration for HEXA-LANG.\n//!\n//! Provides native access to the NEXUS-6 discovery engine from within HEXA code.\n//! This is the 13th stdlib module (sigma + mu = 12 + 1 = 13).\n//!\n//! Provides:\n//!   nexus_scan(domain)      — Run NEXUS-6 full scan on a domain\n//!   nexus_verify(value)     — Check if a value matches n=6 constants\n//!   nexus_omega(phi, tension, cells, entropy, alpha, balance) — Run 6 Omega lenses\n//!   nexus_lenses()          — List the 6 Omega lens ",
       "project": "hexa-lang",
-      "ready_path": "/Users/ghost/Dev/ready/hexa-lang/src/std_nexus6.rs",
-      "destination": "nexus6",
+      "ready_path": "/Users/ghost/Dev/ready/hexa-lang/src/std_nexus.rs",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -1708,7 +1708,7 @@
       "preview": "/// Source location: line and column (1-based).\n#[derive(Debug, Clone, PartialEq)]\npub struct Span {\n    pub line: usize,\n    pub col: usize,\n}\n\nimpl Span {\n    pub fn new(line: usize, col: usize) -> Self {\n        Self { line, col }\n    }\n}\n\n/// A token paired with its source location.\n#[derive(Debug, Clone)]\npub struct Spanned {\n    pub token: Token,\n    pub span: Span,\n}\n\nimpl Spanned {\n    pub fn new(token: Token, line: usize, col: usize) -> Self {\n        Self { token, span: Span::new(line,",
       "project": "hexa-lang",
       "ready_path": "/Users/ghost/Dev/ready/hexa-lang/src/token.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.4
     },
     {

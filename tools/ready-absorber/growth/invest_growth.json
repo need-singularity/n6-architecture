@@ -390,7 +390,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.680757",
       "source_project": "invest",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "backend/backend/tecs_calc/gravitational_optics.py",
       "type": "only_in_ready",
       "value_grade": "critical",
@@ -690,7 +690,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.702284",
       "source_project": "invest",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "backend/scripts/discover_major_2.py",
       "type": "only_in_ready",
       "value_grade": "critical",
@@ -702,7 +702,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.702828",
       "source_project": "invest",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "backend/scripts/discover_major_3.py",
       "type": "only_in_ready",
       "value_grade": "critical",
@@ -726,7 +726,7 @@
     {
       "timestamp": "2026-04-04T17:07:32.704782",
       "source_project": "invest",
-      "destination": "nexus6",
+      "destination": "nexus",
       "path": "backend/scripts/update_universe.py",
       "type": "only_in_ready",
       "value_grade": "high",

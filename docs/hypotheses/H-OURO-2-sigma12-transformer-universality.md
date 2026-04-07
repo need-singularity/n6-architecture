@@ -197,5 +197,5 @@ This hypothesis originated as OUROBOROS seed "sigma=12 heads in transformer" (en
 - BT-39: KV-Head Universality
 - BT-54: AdamW Quintuplet
 - BT-58: σ-τ=8 Universal AI Constant
-- OUROBOROS engine: tools/nexus6/src/ouroboros/engine.rs
-- NEXUS-6 scan: nexus6.scan_all() on 5×10 transformer matrix
+- OUROBOROS engine: tools/nexus/src/ouroboros/engine.rs
+- NEXUS-6 scan: nexus.scan_all() on 5×10 transformer matrix

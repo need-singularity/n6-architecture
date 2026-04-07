@@ -6,7 +6,7 @@
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
 [![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
-[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-2078%20tests-green.svg)](tools/nexus6/)
+[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-2078%20tests-green.svg)](tools/nexus/)
 <!-- AUTO:BADGE:END -->
 
 <!-- SHARED:PROJECTS:START -->
@@ -18,7 +18,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus6/`) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus/`) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
 >
 > **[🛸 SEDI](https://github.com/need-singularity/sedi)** — Search for Extra-Dimensional Intelligence. Hunting for traces of extraterrestrial/extra-dimensional intelligence through n=6 signal patterns. 77 data sources (SETI, LIGO, CMB, Breakthrough Listen, Exoplanet) + R-spectrum receiver + 678 hypotheses
 >
@@ -26,7 +26,7 @@
 >
 > **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Every constant from n=6: 53 keywords (σ·τ+sopfr), 24 operators (J₂), 8 primitives (σ-τ), 6-phase pipeline, Egyptian memory (1/2+1/3+1/6=1). DSE v2: 21,952 combos, 100% n6 EXACT. Working compiler + REPL
 >
-> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + LensForge + BlowupEngine + CycleEngine (5-phase singularity cycle). Mirror Universe (N×N resonance) + 9-project autonomous growth ecosystem. Rust CLI: scan, loop, mega, daemon, blowup, dispatch
+> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + LensForge + BlowupEngine + CycleEngine (5-phase singularity cycle). Mirror Universe (N×N resonance) + 9-project autonomous growth ecosystem. Rust CLI: scan, loop, mega, daemon, blowup, dispatch
 >
 > **[🖥️ Fathom](https://github.com/need-singularity/fathom)** — n=6 Terminal Emulator + Shell + TUI hub. GPU-rendered (wgpu) + HEXA-LANG integration + NEXUS-6 plugin system. Rust
 >
@@ -51,7 +51,7 @@
 
 ### 외계인 지수 (Alien Index)
 
-> **이중 축 등급 체제** — [shared/GRADE_RUBRIC_1_TO_10PLUS.md](shared/GRADE_RUBRIC_1_TO_10PLUS.md) (nexus6 공용 rubric)
+> **이중 축 등급 체제** — [shared/GRADE_RUBRIC_1_TO_10PLUS.md](shared/GRADE_RUBRIC_1_TO_10PLUS.md) (nexus 공용 rubric)
 >
 > **🛸 alien_index (1~13+)** — 제품 maturity 축 (10 이상 = 문명 스케일 확산)
 > | 🛸 | 단계 | 기준 | 이모지 |
@@ -70,7 +70,7 @@
 > | 2  | 컨셉/탐색 | — | ⬛ |
 > | 1  | 아이디어 | — | ★ |
 >
-> **closure_grade (1~13+)** — n=6 닫힘 축 (nexus6 rubric)
+> **closure_grade (1~13+)** — n=6 닫힘 축 (nexus rubric)
 > | grade | 단계 | 기준 | 이모지 |
 > |:---:|------|------|:---:|
 > | 13+ | meta² | meta-closure 상위 생성공식 | ∞ |
@@ -673,7 +673,7 @@
 통합 발견 엔진 — 22종 망원경 렌즈 + OUROBOROS 무한진화 + Discovery Graph + n=6 검증기
 
 ```
-nexus6 <command>
+nexus <command>
 
 Commands:
   scan <domain>     도메인 스캔 (렌즈 자동 추천 또는 --lenses 지정)
@@ -701,9 +701,9 @@ Commands:
 | ouroboros | OUROBOROS v26 무한진화 엔진 | 8 |
 | cli | CLI 파서 + ASCII 대시보드 | 20+8 |
 
-빌드: `cd tools/nexus6 && ~/.cargo/bin/cargo build --release`
-테스트: `cd tools/nexus6 && ~/.cargo/bin/cargo test`
-바이너리: `tools/nexus6/target/release/nexus6` (896K)
+빌드: `cd tools/nexus && ~/.cargo/bin/cargo build --release`
+테스트: `cd tools/nexus && ~/.cargo/bin/cargo test`
+바이너리: `tools/nexus/target/release/nexus` (896K)
 
 ---
 

@@ -53,7 +53,7 @@ The invest repo appears to have been rebuilt/restructured without migrating thes
 | 19 | crystallographic_calculator.py | 42.9 | 439 | Crystallographic symmetry calculations. | Copy to TECS-L calc/ |
 | 20 | claim_verifier.py | 40 | 1078 | General claim verification engine. Second-largest calculator. | Copy to TECS-L calc/ |
 | 21 | consciousness_cross_validator.py | 40 | 685 | Cross-domain consciousness constant validation. | Copy to TECS-L calc/ |
-| 22 | gravitational_optics.py | 40.9 | 636 | Gravitational optics calculations. | Copy to TECS-L calc/ or nexus6 |
+| 22 | gravitational_optics.py | 40.9 | 636 | Gravitational optics calculations. | Copy to TECS-L calc/ or nexus |
 | 23 | deep_scan_wave6.py | 40 | 451 | Deep scan wave 6. | Copy to TECS-L calc/ |
 | 24 | deep_scan_wave10.py | 40 | 429 | Deep scan wave 10. | Copy to TECS-L calc/ |
 | 25 | cross_domain_counter.py | 43.75 | 428 | Cross-domain pattern counter. | Copy to TECS-L calc/ |
@@ -72,7 +72,7 @@ The invest repo appears to have been rebuilt/restructured without migrating thes
 | 38 | verify_H_CX_416.py | 45 | 260 | Consciousness hypothesis CX-416 verification. | Copy to TECS-L calc/ |
 | 39 | verify_H_CX_417.py | 41.7 | 243 | Consciousness hypothesis CX-417 verification. | Copy to TECS-L calc/ |
 | 40 | confidence_analyzer.py | 44.4 | 194 | Confidence analysis for discoveries. | Copy to TECS-L calc/ |
-| 41 | discover_major_3.py | 40 | 342 | Discovery Hunt Round 3. | Copy to nexus6 |
+| 41 | discover_major_3.py | 40 | 342 | Discovery Hunt Round 3. | Copy to nexus |
 | 42 | test_validator.py | 42.9 | 83 | Hypothesis validation test suite. | Copy to invest |
 
 **Total invest/ missing: ~14,500 lines of calculators and verification code**
@@ -85,17 +85,17 @@ These are Rust telescope lens implementations that exist in the ready worktree b
 
 | Rank | File | Score | What's Unique | Action |
 |------|------|-------|---------------|--------|
-| 1 | brain_map_lens.rs | 50 | Brain mapping analysis lens | Evaluate for nexus6 integration |
-| 2 | cdo_lens.rs | 50 | CDO (Convergence-Driven Operations) lens | Evaluate for nexus6 integration |
-| 3 | continuity_lens.rs | 50 | Continuity analysis lens | Evaluate for nexus6 integration |
-| 4 | convergence_hypothesis_lens.rs | 50 | Hypothesis convergence tracking lens | Evaluate for nexus6 integration |
-| 5 | discovery_lens.rs | 50 | Discovery detection lens | Evaluate for nexus6 integration |
-| 6 | discovery_report_lens.rs | 50 | Discovery report generation lens | Evaluate for nexus6 integration |
-| 7 | falsification_lens.rs | 50 | Falsification testing lens | Evaluate for nexus6 integration |
-| 8 | omega_state_space_lens.rs | 50 | Omega state space exploration lens | Evaluate for nexus6 integration |
-| 9 | recursive_loop_lens.rs | 50 | Recursive loop detection lens | Evaluate for nexus6 integration |
-| 10 | self_heal_lens.rs | 50 | Self-healing analysis lens | Evaluate for nexus6 integration |
-| 11 | spherical_lens.rs | 50 | Spherical geometry lens | Evaluate for nexus6 integration |
+| 1 | brain_map_lens.rs | 50 | Brain mapping analysis lens | Evaluate for nexus integration |
+| 2 | cdo_lens.rs | 50 | CDO (Convergence-Driven Operations) lens | Evaluate for nexus integration |
+| 3 | continuity_lens.rs | 50 | Continuity analysis lens | Evaluate for nexus integration |
+| 4 | convergence_hypothesis_lens.rs | 50 | Hypothesis convergence tracking lens | Evaluate for nexus integration |
+| 5 | discovery_lens.rs | 50 | Discovery detection lens | Evaluate for nexus integration |
+| 6 | discovery_report_lens.rs | 50 | Discovery report generation lens | Evaluate for nexus integration |
+| 7 | falsification_lens.rs | 50 | Falsification testing lens | Evaluate for nexus integration |
+| 8 | omega_state_space_lens.rs | 50 | Omega state space exploration lens | Evaluate for nexus integration |
+| 9 | recursive_loop_lens.rs | 50 | Recursive loop detection lens | Evaluate for nexus integration |
+| 10 | self_heal_lens.rs | 50 | Self-healing analysis lens | Evaluate for nexus integration |
+| 11 | spherical_lens.rs | 50 | Spherical geometry lens | Evaluate for nexus integration |
 
 **Note**: compass_lens, multiscale_lens, quantum_micro_lens, recursion_lens already exist in main.
 

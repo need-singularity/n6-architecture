@@ -3,11 +3,11 @@
 Physics Fundamental Constants — n=6 Connection Scanner
 =======================================================
 Scans physics constants, ratios, and combinations for n=6 arithmetic matches.
-Uses nexus6.n6_check() for matching against σ=12, φ=2, τ=4, J₂=24, etc.
+Uses nexus.n6_check() for matching against σ=12, φ=2, τ=4, J₂=24, etc.
 """
 
 import math
-import nexus6
+import nexus
 
 # ─── n=6 arithmetic constants for manual cross-reference ───
 N6 = {
@@ -243,7 +243,7 @@ DERIVED["magic 126 = J2*sopfr + n"] = 126
 
 print("=" * 80)
 print("  NEXUS-6 PHYSICS CONSTANTS n=6 SCAN")
-print("  Using nexus6.n6_check() — EXACT/CLOSE/WEAK matching")
+print("  Using nexus.n6_check() — EXACT/CLOSE/WEAK matching")
 print("=" * 80)
 
 # ─── Scan all physics constants ───
@@ -251,7 +251,7 @@ results = {"EXACT": [], "CLOSE": [], "WEAK": [], "NONE": []}
 
 def scan_and_record(label, value, category="physics"):
     try:
-        m = nexus6.n6_check(value)
+        m = nexus.n6_check(value)
         grade = m.grade if hasattr(m, 'grade') else ("EXACT" if m.quality >= 1.0 else "CLOSE" if m.quality >= 0.8 else "WEAK" if m.quality >= 0.5 else "NONE")
         results[grade].append((label, value, m.constant_name, m.quality))
     except Exception as e:
@@ -328,7 +328,7 @@ highlights = [
 for h, kind in highlights:
     print(f"  [{kind:14s}] {h}")
 
-# ─── Run nexus6.scan_all on particle mass array ───
+# ─── Run nexus.scan_all on particle mass array ───
 print("\n" + "=" * 80)
 print("  NEXUS-6 FULL LENS SCAN — Particle Masses (MeV)")
 print("=" * 80)
@@ -350,7 +350,7 @@ try:
     ]
     n = len(masses)
     d = 1
-    result = nexus6.scan(masses, n, d)
+    result = nexus.scan(masses, n, d)
     print(f"  Scan result: {result}")
     if hasattr(result, '__dict__'):
         for k, v in result.__dict__.items():
@@ -361,7 +361,7 @@ except Exception as e:
     try:
         import numpy as np
         arr = np.array(masses).reshape(-1, 1)
-        result = nexus6.scan_numpy(arr)
+        result = nexus.scan_numpy(arr)
         print(f"  scan_numpy result: {result}")
     except Exception as e2:
         print(f"  scan_numpy error: {e2}")
@@ -373,7 +373,7 @@ print("=" * 80)
 
 try:
     magic = [2, 8, 20, 28, 50, 82, 126]
-    result = nexus6.scan(magic, len(magic), 1)
+    result = nexus.scan(magic, len(magic), 1)
     print(f"  Magic numbers scan: {result}")
 except Exception as e:
     print(f"  Error: {e}")
@@ -393,7 +393,7 @@ couplings = {
 }
 
 for label, val in couplings.items():
-    m = nexus6.n6_check(val)
+    m = nexus.n6_check(val)
     print(f"  {label} = {val:.4f} → {m.constant_name} (grade={m.grade}, q={m.quality:.2f})")
 
 print("\n" + "=" * 80)

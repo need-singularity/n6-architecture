@@ -237,9 +237,9 @@ If predictions P1-P5 (original) + P6-P9 (below) verified:
 ## Verification Command
 
 ```python
-import nexus6, json
+import nexus, json
 seed = [0.553, 4, 3, 0.548, 0.548, 0.563, 219, 5213, 1]
-result = nexus6.analyze(seed, len(seed), 1)
+result = nexus.analyze(seed, len(seed), 1)
 print(json.dumps(result, indent=2, default=str))
 # Expected: n6_exact_ratio = 0.333, consensus on convergence_rate
 ```

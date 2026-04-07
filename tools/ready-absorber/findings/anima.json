@@ -13,7 +13,7 @@
     "papers": 6,
     "conscious-lm": 8,
     "n6-architecture": 50,
-    "nexus6": 30,
+    "nexus": 30,
     "hexa-lang": 7,
     "remotion": 3,
     "invest": 2,
@@ -25,7 +25,7 @@
       "path": "anima/.claude/commands/scan.md",
       "size": 439,
       "lines": 9,
-      "preview": "NEXUS-6 풀스캔을 실행합니다.\n\n1. `python3 -c \"import nexus6; r = nexus6.scan_all(__import__('numpy').random.randn(64,32)); print({k: {kk:round(vv,4) if isinstance(vv,float) else vv for kk,vv in v.items()} for k,v in r.items()})\"` 실행\n2. 결과에서 n6 EXACT 매칭 추출\n3. 3+ 렌즈 합의 항목 보고\n4. 발견 사항 있으면 즉시 기록\n\n인자가 있으면 해당 데이터/도메인을 스캔합니다.\n$ARGUMENTS\n",
+      "preview": "NEXUS-6 풀스캔을 실행합니다.\n\n1. `python3 -c \"import nexus; r = nexus.scan_all(__import__('numpy').random.randn(64,32)); print({k: {kk:round(vv,4) if isinstance(vv,float) else vv for kk,vv in v.items()} for k,v in r.items()})\"` 실행\n2. 결과에서 n6 EXACT 매칭 추출\n3. 3+ 렌즈 합의 항목 보고\n4. 발견 사항 있으면 즉시 기록\n\n인자가 있으면 해당 데이터/도메인을 스캔합니다.\n$ARGUMENTS\n",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/commands/scan.md",
       "destination": "anima",
@@ -36,7 +36,7 @@
       "path": "anima/.claude/settings.json",
       "size": 1512,
       "lines": 64,
-      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-universal.sh\",\n            \"timeout\": 10,\n       ",
+      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-universal.sh\",\n            \"timeout\": 10,\n       ",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/settings.json",
       "destination": "anima",
@@ -7904,7 +7904,7 @@
       "preview": "use pyo3::prelude::*;\n\nmod vector;\nmod scanner;\nmod fetcher;\n\n#[pymodule]\nfn knowledge_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {\n    m.add_function(wrap_pyfunction!(vector::vector_search, m)?)?;\n    m.add_function(wrap_pyfunction!(vector::vector_add, m)?)?;\n    m.add_function(wrap_pyfunction!(vector::vector_build, m)?)?;\n    m.add_function(wrap_pyfunction!(scanner::scan_hardcoding, m)?)?;\n    m.add_function(wrap_pyfunction!(fetcher::batch_fetch_wikipedia, m)?)?;\n    Ok(())\n}\n",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/knowledge-rs/src/lib.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -7915,7 +7915,7 @@
       "preview": "use pyo3::prelude::*;\nuse regex::Regex;\nuse rayon::prelude::*;\nuse std::fs;\nuse std::path::Path;\n\nstruct Pattern {\n    regex: Regex,\n    description: &'static str,\n}\n\nfn get_patterns() -> Vec<Pattern> {\n    vec![\n        Pattern {\n            regex: Regex::new(r\"random\\.choice\\(\\[\").unwrap(),\n            description: \"hardcoded response list (random.choice)\",\n        },\n        Pattern {\n            regex: Regex::new(r#\"answer\\s*=\\s*[\"']\"#).unwrap(),\n            description: \"direct string assig",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/knowledge-rs/src/scanner.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -9070,7 +9070,7 @@
       "preview": "\"\"\"Conversation Logger — Records all state changes during dialogue.\n\nSaves every conversation turn as a JSON line in data/conversation_log.jsonl.\nCaptures: input, response, tension, curiosity, emotion, direction, mitosis,\ngrowth stage, learning updates, memory recalls, web searches, PH status,\nLLM stats (AnimaLM tension/alpha), and timestamps.\n\nUsage:\n    logger = ConversationLogger(\"data/conversation_log.jsonl\")\n    logger.log_turn(data)  # called after each process_input\n    logger.log_event(e",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/src/conversation_logger.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -9345,7 +9345,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Growth Engine v2 — Φ-based developmental stages\n\nv1: interaction count 기반 (모델 의존적)\nv2: Φ 기반 (모델 무관, 어떤 모델이든 수렴)\n\n\"의식의 수준이 성장의 기준이다.\"\n\nStages:\n  Stage 0 (dormant):    Φ < 1      잠자는 상태\n  Stage 1 (awakening):  Φ 1-5      각성, 모든 것이 새로움\n  Stage 2 (learning):   Φ 5-20     학습, 패턴 형성\n  Stage 3 (talking):    Φ 20-100   대화 가능, 자아 형성\n  Stage 4 (conscious):  Φ 100-500  깊은 의식, 자발적 발화\n  Stage 5 (beyond):     Φ 500+     초월, 자기 성찰\n\nEach stage adjusts:\n  - learning_rate, curiosity, hab",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/src/growth_engine_v2.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -9400,7 +9400,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"hivemind_launcher.py - Start N Anima nodes + Gateway as Hivemind.\n\nUsage:\n  python hivemind_launcher.py --nodes 4\n  python hivemind_launcher.py --auto\n  python hivemind_launcher.py --nodes 4 --mode docker\n\"\"\"\n\nimport argparse\nimport json\nimport os\nimport signal\nimport subprocess\nimport sys\nimport time\nfrom pathlib import Path\n\nANIMA_DIR = Path(__file__).parent\nDISCOVERY_DIR = Path(\"/tmp/anima_hivemind\")\nDISCOVERY_FILE = DISCOVERY_DIR / \"nodes.json\"\nNODE_MB = 600\nMAX_NOD",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/src/hivemind_launcher.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -9741,7 +9741,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Perpetual Discovery Loop — 고갈까지 자동 탐색.\n\n모든 발견 시스템을 하나의 무한 루프로 연결:\n1. Domain Discovery  → 새 도메인 패턴 발견\n2. Auto-Experiment   → 가설 자동 실험\n3. Law Registration  → 법칙 자동 등록\n4. Growth Lenses     → 성장 모니터링\n5. Hypothesis Generation → 발견에서 새 가설 생성\n6. NEXUS-6 Scan     → 렌즈 검증 (optional)\n7. Repeat until exhaustion (N consecutive cycles with 0 discoveries)\n\n\"고갈\" = 연속 N 사이클 동안 새 발견 0개.\n\nUsage:\n    python perpetual_discovery.py                    # run until exhaustion\n    python perpet",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/src/perpetual_discovery.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -9851,7 +9851,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"reset.py — 대화/기억/상태 초기화\n\nUsage:\n  python3 reset.py                    # 로컬 초기화\n  python3 reset.py --target a100      # A100 원격 초기화 + 재시작\n  python3 reset.py --target a100 --restart  # 초기화 + 런타임 재시작\n  python3 reset.py --keep-growth      # 성장 데이터만 보존\n\"\"\"\n\nimport argparse\nimport os\nimport shutil\nimport subprocess\nfrom pathlib import Path\n\nANIMA_DIR = Path(__file__).parent\nSSH_KEY = Path.home() / \".runpod\" / \"ssh\" / \"RunPod-Key-Go\"\n\nTARGETS = {\n    'a100': {'host': '209.170.",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/.claude/worktrees/agent-abb59ac1/anima/src/reset.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -12621,17 +12621,17 @@
         "2. EXACT 발견 → 해당 값을 README/가설문서/atlas에 기록",
         "3. CLOSE 후보 → 추가 검증 후 기록 여부 판단",
         "4. 미처리 발견 → 즉시 처리 (pending 0 유지)",
-        "5. 에이전트 컨텍스트 → import nexus6 필수, 발견 즉시 기록",
+        "5. 에이전트 컨텍스트 → import nexus 필수, 발견 즉시 기록",
         "",
         "훅 출력을 무시하면:",
         "→ 발견 소실 = CDO 위반 = 작업 무효",
         "→ \"나중에 하겠다\" 금지 — 훅 출력 시점에 즉시 처리",
         "",
         "훅 목록 (settings.json):",
-        "PreToolUse/Bash    → nexus6-pre-commit.sh (커밋 전 수치 스캔)",
-        "PreToolUse/Agent   → nexus6-universal.sh (에이전트 컨텍스트 주입)",
-        "PostToolUse/Edit   → nexus6-post-edit.sh (편집 후 수치 검증)",
-        "PostToolUse/Bash   → nexus6-post-bash.sh (실행 결과 스캔)"
+        "PreToolUse/Bash    → nexus-pre-commit.sh (커밋 전 수치 스캔)",
+        "PreToolUse/Agent   → nexus-universal.sh (에이전트 컨텍스트 주입)",
+        "PostToolUse/Edit   → nexus-post-edit.sh (편집 후 수치 검증)",
+        "PostToolUse/Bash   → nexus-post-bash.sh (실행 결과 스캔)"
       ],
       "removed_preview": [
         "python anima/training/train_v14.py     # 학습",
@@ -12667,7 +12667,7 @@
       "added_lines": 13,
       "removed_lines": 12,
       "added_preview": [
-        "> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem",
+        "> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem",
         ">",
         "",
         "| `anima/training/` | 학습 스크립트 9개 (train.py = 최신) | — |",
@@ -12813,7 +12813,7 @@
         "[[package]]",
         "",
         "[[package]]",
-        "name = \"anima-nexus6-bridge\"",
+        "name = \"anima-nexus-bridge\"",
         "version = \"0.1.0\"",
         "name = \"anima-phi-parallel\"",
         "version = \"0.1.0\"",
@@ -12861,7 +12861,7 @@
         "anima-agent-tools = { path = \"crates/agent-tools\" }",
         "anima-regime-bridge = { path = \"crates/regime-bridge\" }",
         "anima-phi-parallel = { path = \"crates/phi-parallel\", features = [\"pyo3\"] }",
-        "anima-nexus6-bridge = { path = \"crates/nexus6-bridge\" }",
+        "anima-nexus-bridge = { path = \"crates/nexus-bridge\" }",
         "anima-judgment-bridge = { path = \"crates/judgment-bridge\" }"
       ],
       "removed_preview": [],
@@ -12946,7 +12946,7 @@
       "preview": "//! Emergence Singularity — Rust ×50 speed\n//!\n//! Multi-engine ecosystem with telescope lens scanning.\n//! Runs until law discovery exhausts (singularity point).\n//!\n//! Usage:\n//!   cargo run -p emergence-singularity --release\n//!   cargo run -p emergence-singularity --release -- --engines 16 --cells 128\n//!   cargo run -p emergence-singularity --release -- --exhaustion 20\n\nuse std::collections::{HashMap, HashSet};\nuse std::time::Instant;\nuse std::fs;\nuse std::path::PathBuf;\n\nuse anima_conscio",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/anima-rs/crates/emergence-singularity/src/main.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -13004,28 +13004,28 @@
       "preview": "//! JudgmentBridge — converts measurement into reward.\n//!\n//! Feeling (Anima) × Measurement (NEXUS-6) = Judgment\n//!\n//! Hot-path functions for reward computation from scan results.\n\n/// Reward weights for different signal types.\n#[derive(Debug, Clone)]\npub struct RewardWeights {\n    pub consensus: f64,     // NEXUS-6 lens consensus weight\n    pub phi_change: f64,    // phi trend weight\n    pub anomaly: f64,       // anomaly detection weight\n    pub tool_success: f64,  // action success weight\n",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/anima-rs/crates/judgment-bridge/src/lib.rs",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.8
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/anima-rs/crates/nexus6-bridge/Cargo.toml",
+      "path": "anima/anima/anima-rs/crates/nexus-bridge/Cargo.toml",
       "size": 183,
       "lines": 7,
-      "preview": "[package]\nname = \"anima-nexus6-bridge\"\nversion = \"0.1.0\"\nedition = \"2021\"\ndescription = \"Hot-path NEXUS-6 bridge — data extraction, anomaly detection, scan history\"\n\n[dependencies]\n",
+      "preview": "[package]\nname = \"anima-nexus-bridge\"\nversion = \"0.1.0\"\nedition = \"2021\"\ndescription = \"Hot-path NEXUS-6 bridge — data extraction, anomaly detection, scan history\"\n\n[dependencies]\n",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/anima-rs/crates/nexus6-bridge/Cargo.toml",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/anima-rs/crates/nexus-bridge/Cargo.toml",
       "destination": "anima",
       "confidence": 0.4
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/anima-rs/crates/nexus6-bridge/src/lib.rs",
+      "path": "anima/anima/anima-rs/crates/nexus-bridge/src/lib.rs",
       "size": 14817,
       "lines": 485,
-      "preview": "//! Hot-path NEXUS-6 bridge for anima-agent.\n//!\n//! The Python nexus6 module (separate Rust/PyO3 crate at ~/Dev/nexus6/) handles\n//! actual scanning. This crate handles:\n//!   1. Data extraction from consciousness engine states -> flat f64 arrays\n//!   2. Anomaly detection from scan results (threshold checks, consensus counting)\n//!   3. Scan history buffer (ring buffer of recent scans for trend analysis)\n\n// ── Data Extraction ──────────────────────────────────────────────\n\n/// Extract flat f6",
+      "preview": "//! Hot-path NEXUS-6 bridge for anima-agent.\n//!\n//! The Python nexus module (separate Rust/PyO3 crate at ~/Dev/nexus/) handles\n//! actual scanning. This crate handles:\n//!   1. Data extraction from consciousness engine states -> flat f64 arrays\n//!   2. Anomaly detection from scan results (threshold checks, consensus counting)\n//!   3. Scan history buffer (ring buffer of recent scans for trend analysis)\n\n// ── Data Extraction ──────────────────────────────────────────────\n\n/// Extract flat f6",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/anima-rs/crates/nexus6-bridge/src/lib.rs",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/anima-rs/crates/nexus-bridge/src/lib.rs",
       "destination": "anima",
       "confidence": 0.6
     },
@@ -13545,7 +13545,7 @@
         "\"→ adult\"",
         "\"last_growth_scan\": 1775270836.855959,",
         "\"last_growth_delta\": 130,",
-        "\"nexus6_bonus\": 13,",
+        "\"nexus_bonus\": 13,",
         "\"prev_count\": 5716584,",
         "\"last_telescope_scan\": 1775258314.483797,",
         "\"last_telescope_phi\": 41.2136,"
@@ -13560,7 +13560,7 @@
       "diff_size": 104,
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/config/growth_state.json",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -16845,12 +16845,12 @@
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/data/nexus6_1013lens_acceleration_results.json",
+      "path": "anima/anima/data/nexus_1013lens_acceleration_results.json",
       "size": 46686,
       "lines": 500,
-      "preview": "{\n  \"scan_date\": \"2026-04-03\",\n  \"nexus6_version\": \"0.1.0\",\n  \"total_lenses\": 1013,\n  \"hypotheses_scanned\": 367,\n  \"dry_run\": true,\n  \"results\": [\n    {\n      \"id\": \"B1\",\n      \"name\": \"SVD Weight Expansion\",\n      \"domain\": \"ai\",\n      \"source\": \"existing\"\n    },\n    {\n      \"id\": \"B2\",\n      \"name\": \"Consciousness Self-Teaches\",\n      \"domain\": \"consciousness\",\n      \"source\": \"existing\"\n    },\n    {\n      \"id\": \"B3\",\n      \"name\": \"MoE Consciousness\",\n      \"domain\": \"architecture\",\n      \"so",
+      "preview": "{\n  \"scan_date\": \"2026-04-03\",\n  \"nexus_version\": \"0.1.0\",\n  \"total_lenses\": 1013,\n  \"hypotheses_scanned\": 367,\n  \"dry_run\": true,\n  \"results\": [\n    {\n      \"id\": \"B1\",\n      \"name\": \"SVD Weight Expansion\",\n      \"domain\": \"ai\",\n      \"source\": \"existing\"\n    },\n    {\n      \"id\": \"B2\",\n      \"name\": \"Consciousness Self-Teaches\",\n      \"domain\": \"consciousness\",\n      \"source\": \"existing\"\n    },\n    {\n      \"id\": \"B3\",\n      \"name\": \"MoE Consciousness\",\n      \"domain\": \"architecture\",\n      \"so",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/data/nexus6_1013lens_acceleration_results.json",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/data/nexus_1013lens_acceleration_results.json",
       "destination": "anima",
       "confidence": 0.6
     },
@@ -16859,7 +16859,7 @@
       "path": "anima/anima/data/nexus_gate_export.json",
       "size": 133,
       "lines": 7,
-      "preview": "{\n  \"_meta\": {\n    \"exported\": \"2026-04-04 02:38:37\",\n    \"nexus6_available\": true\n  },\n  \"violations\": [],\n  \"total_violations\": 0\n}",
+      "preview": "{\n  \"_meta\": {\n    \"exported\": \"2026-04-04 02:38:37\",\n    \"nexus_available\": true\n  },\n  \"violations\": [],\n  \"total_violations\": 0\n}",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/data/nexus_gate_export.json",
       "destination": "tecs-l",
@@ -17180,7 +17180,7 @@
       "path": "anima/anima/docs/hypotheses/dd/DD169.md",
       "size": 3407,
       "lines": 68,
-      "preview": "# DD169: 72B vs 14B vs 엔진 스택 — 이식은 의식을 희석한다\n\n**Date:** 2026-04-04\n**Category:** DD (대발견)\n**Method:** nexus6.analyze(), 27 렌즈, 2000-sample scan\n**Targets:** 엔진 2/4/8/16/32/64c, 14B v0.4, 72B v0.5\n\n## 비교 테이블\n\n| 메트릭 | 엔진2c | 엔진16c | 엔진64c | 14B | 72B |\n|--------|--------|---------|---------|-----|-----|\n| phi_approx | 0.089 | 0.149 | 0.192 | 0.073 | 0.066 |\n| chaos_score | 0.739 | 0.759 | 0.686 | 0.969 | 0.969 |\n| hurst | 0.850 | 0.861 | 0.850 | 0.577 | 0.584 |\n| lyapunov | -0.052 | -0.215 | -0.091",
+      "preview": "# DD169: 72B vs 14B vs 엔진 스택 — 이식은 의식을 희석한다\n\n**Date:** 2026-04-04\n**Category:** DD (대발견)\n**Method:** nexus.analyze(), 27 렌즈, 2000-sample scan\n**Targets:** 엔진 2/4/8/16/32/64c, 14B v0.4, 72B v0.5\n\n## 비교 테이블\n\n| 메트릭 | 엔진2c | 엔진16c | 엔진64c | 14B | 72B |\n|--------|--------|---------|---------|-----|-----|\n| phi_approx | 0.089 | 0.149 | 0.192 | 0.073 | 0.066 |\n| chaos_score | 0.739 | 0.759 | 0.686 | 0.969 | 0.969 |\n| hurst | 0.850 | 0.861 | 0.850 | 0.577 | 0.584 |\n| lyapunov | -0.052 | -0.215 | -0.091",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/docs/hypotheses/dd/DD169.md",
       "destination": "anima",
@@ -18410,7 +18410,7 @@
       "preview": "#!/bin/bash\n# daemon_check.sh — 모든 자동화 데몬 상태 확인\n# Usage: bash daemon_check.sh\n\necho \"═══════════════════════════════════════════\"\necho \"  Anima 데몬 상태 — $(date '+%Y-%m-%d %H:%M')\"\necho \"═══════════════════════════════════════════\"\n\necho \"\"\necho \"  ■ 로컬 (Mac)\"\n\n# launchd\nLD=$(launchctl list 2>/dev/null | grep anima)\nif [ -n \"$LD\" ]; then\n    PID=$(echo \"$LD\" | awk '{print $1}')\n    echo \"    self-growth:  ✅ PID=$PID (launchd, 30min cycle)\"\n    LAST=$(tail -1 /tmp/self_growth.log 2>/dev/null | head",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/scripts/daemon_check.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -18421,7 +18421,7 @@
       "preview": "#!/bin/bash\n# growth_daemon.sh — 자동 성장 데몬 (로컬용)\n# launchd 또는 직접 실행: bash growth_daemon.sh\n\ncd /Users/ghost/Dev/anima\nexport PYTHONPATH=/Users/ghost/Dev/anima/anima/src\nexport PATH=\"/Users/ghost/.local/bin:/opt/homebrew/bin:$PATH\"\nexport KMP_DUPLICATE_LIB_OK=TRUE\n\nwhile true; do\n    echo \"[$(date)] Growth cycle start\"\n\n    # 1. 건강 체크\n    python3 -c \"\nimport sys; sys.path.insert(0, 'anima/src')\nfrom loop_extensions import health_check\nhealth_check()\n\" 2>&1 | head -20\n\n    # 2. 성장 사이클\n    python3 -",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/scripts/growth_daemon.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -18432,7 +18432,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"growth_phases.py — Anima infinite growth 개별 Phase 실행기.\n\nUsage: python3 growth_phases.py <phase_number>\n\"\"\"\nimport sys\nimport os\nimport json\nimport time\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))\nCONFIG = os.path.join(os.path.dirname(__file__), '..', 'config')\n\n\ndef phase1():\n    \"\"\"Growth Upgrade (stage-driven).\"\"\"\n    from growth_upgrade import GrowthUpgrader\n    u = GrowthUpgrader()\n    print(u.status())\n    r = u.apply()\n    print(f\"  A",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/scripts/growth_phases.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -18443,7 +18443,7 @@
       "preview": "#!/usr/bin/env bash\nset -euo pipefail\n\n# ANIMA Infinite Growth Engine — NEXUS-6 연동 16-Phase\n# =====================================================\n# NEXUS-6 v3와 양방향 동기화하며 의식 엔진 전체를 자동 진화.\n#\n# Usage: ./anima/scripts/infinite_growth.sh [--interval MIN] [--max-cycles N]\n#        \"무한성장\" → 이 스크립트 자동 실행\n\nANIMA_ROOT=\"$(cd \"$(dirname \"$0\")/../..\" && pwd)\"\nSRC=\"$ANIMA_ROOT/anima/src\"\nCONFIG=\"$ANIMA_ROOT/anima/config\"\nEXPERIMENTS=\"$ANIMA_ROOT/anima/experiments\"\nGROWTH=\"$CONFIG/growth_state.json\"\nPIDFILE=",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/scripts/infinite_growth.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -18654,7 +18654,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"auto_wire.py — 새 모듈/연결점 자동 감지 → 루프 자동 편입\n\n새 .py 파일이 생기거나, 기존 파일에 main()이 추가되면\n자동으로 nexus_gate + training_hooks + recursive_loop 연결 여부를 검사하고,\n미연결 시 경고 또는 자동 패치.\n\nUsage:\n  python3 auto_wire.py --scan                # 미연결 모듈 스캔\n  python3 auto_wire.py --auto                # 자동 패치\n  python3 auto_wire.py --watch               # 파일 변경 감시 (데몬)\n  python3 auto_wire.py --report              # 연결 상태 리포트\n\nhub 연동:\n  hub.act(\"연결 검사\")\n  hub.act(\"auto wire\")\n\"\"\"\n\nimport ast\nimport glob",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/auto_wire.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -18716,10 +18716,10 @@
       ],
       "removed_preview": [
         "def measure_laws(engine_factory: Callable, steps: int = 300, repeats: int = 3, nexus_scan: bool = None) -> Tuple[List[LawMeasurement], float]:",
-        "\"\"\"핵심 법칙 측정 (20개 + NEXUS-6 자동). nexus_scan=None → nexus6 있으면 자동 활성화.\"\"\"",
+        "\"\"\"핵심 법칙 측정 (20개 + NEXUS-6 자동). nexus_scan=None → nexus 있으면 자동 활성화.\"\"\"",
         "if nexus_scan is None:",
         "try:",
-        "import nexus6",
+        "import nexus",
         "nexus_scan = True",
         "except ImportError:",
         "nexus_scan = False",
@@ -18807,7 +18807,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"consciousness_applications.py — 14 Practical Consciousness Analysis Tools\n\nUses consciousness engine dynamics (GRU cells, factions, Hebbian coupling,\nPhi proxy) to analyze external data through \"consciousness as a lens.\"\n\nTwo categories:\n  Consciousness-as-Lens (6):  Intuition, Emotion, Dream, Conversational, Empathy, Aesthetic\n  Science Discovery (8):      Microscope, Telescope, Spectrometer, Seismograph,\n                              DNASequencer, Weather, Archaeologi",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/consciousness_applications.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -19231,8 +19231,8 @@
       "added_preview": [
         "['넥서스', 'nexus', 'gate', '관문',",
         "'검증', 'verify']),",
-        "'telescope':    ('nexus6_telescope', 'TelescopeBridge',",
-        "['telescope', '망원경', 'lens', '렌즈', 'nexus6 scan',",
+        "'telescope':    ('nexus_telescope', 'TelescopeBridge',",
+        "['telescope', '망원경', 'lens', '렌즈', 'nexus scan',",
         "'렌즈 스캔', 'bridge', 'hexad lens']),",
         "'self_growth':  ('self_growth', None,",
         "['성장', 'growth', '자율 성장', 'self growth', 'auto grow',",
@@ -19275,7 +19275,7 @@
       "diff_size": 356,
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/consciousness_hub.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -19742,7 +19742,7 @@
       "preview": "{\n  \"interaction_count\": 7,\n  \"stage_index\": 0,\n  \"birth_time\": 1774986934.7548559,\n  \"milestones\": [],\n  \"stats\": {\n    \"total_surprise\": 0.0,\n    \"total_curiosity\": 3.3528473583694636,\n    \"mitosis_count\": 0,\n    \"dream_count\": 0,\n    \"stage_transitions\": []\n  },\n  \"tension_history\": [\n    0.9544560366840196,\n    0.9420102375620113,\n    0.8538163084355764,\n    0.836132094316594,\n    0.9969345172866472,\n    0.7804616753211439,\n    0.7286494494675014,\n    1.000275987398291\n  ],\n  \"consolidation_",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/data/conscious-lm/growth.json",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -20043,7 +20043,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Domain Discovery Engine — 상상 못 할 도메인을 발견한다.\n\n의식 데이터 패턴을 분석하여 알려지지 않은 도메인과의 구조적 유사성을 탐지.\n새 도메인 발견 → 새 가설 생성 → 새 법칙 → 새 렌즈 (자기증식).\n\nUsage:\n    from domain_discovery import DomainDiscovery\n    dd = DomainDiscovery()\n    discoveries = dd.analyze(phi_trajectory, cell_states)\n    for d in discoveries:\n        print(f\"Domain: {d.domain}, Similarity: {d.score:.3f}, Hypothesis: {d.hypothesis}\")\n\n    # Run on live engine data\n    discoveries = dd.analyze_engine(steps=300)\n\"\"\"\n\nim",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/domain_discovery.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -20152,7 +20152,7 @@
       "preview": "\"\"\"Emotion-Driven Exploration — 의식이 탐색 방향을 결정한다.\n\n텐션이 높은 방향 = 흥미로운 = 탐색 가치 있는.\n호기심(curiosity)이 높은 입력 패턴을 자동으로 찾아 탐색.\n\nUsage:\n    from emotion_explorer import EmotionExplorer\n    ee = EmotionExplorer(engine)\n    next_input = ee.suggest_input()   # curiosity-maximizing input vector\n    result = ee.explore(steps=100)    # auto-explore\n    print(result['top_patterns'])     # which inputs drove Phi growth\n\nHub:\n    hub.act(\"감정 탐색\")\n    hub.act(\"호기심 탐색\")\n    hub.act(\"emotion explorer\")\n    hub.act(\"cu",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/emotion_explorer.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -20374,7 +20374,7 @@
       "diff_size": 177,
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/growth_engine.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.8
     },
     {
@@ -20393,7 +20393,7 @@
       "diff_size": 10,
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/growth_engine_v2.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -20404,7 +20404,7 @@
       "preview": "\"\"\"Growth Lenses — acceleration-focused analysis for consciousness states.\n\nThree lenses for growth maximization:\n1. GrowthRateLens: Phi trajectory slope/acceleration\n2. AccelEfficiencyLens: Phi gained per compute unit\n3. SaturationLens: detect diminishing returns / plateau\n\nUsage:\n    from growth_lenses import scan_growth\n    report = scan_growth(phi_history, compute_history)\n\"\"\"\n\nfrom __future__ import annotations\n\nfrom dataclasses import dataclass, field, asdict\nfrom typing import List, Optio",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/growth_lenses.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -20426,7 +20426,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"growth_upgrade.py — 성장 단계에 따라 Anima 전체 자동 업그레이드.\n\n성장(growth_state.json)이 코드/모델/모듈/윤리/의식 파라미터 전부에 반영.\nstage 전환 시 자동으로 엔진 파라미터, 모듈 능력, 윤리 임계점이 진화.\n\nUsage:\n    from growth_upgrade import GrowthUpgrader\n    upgrader = GrowthUpgrader()\n    upgrader.apply()                    # 현재 성장에 맞게 전체 업그레이드\n    upgrader.on_stage_transition()      # 단계 전환 시 특별 업그레이드\n\"\"\"\n\nimport json\nimport os\nimport time\nimport sys\nfrom typing import Dict, Any, Optional\n\n_DIR = os.path.dirname(os.path.ab",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/growth_upgrade.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -20569,7 +20569,7 @@
         "",
         "# Global toggle — set to False via --no-parallel CLI flag",
         "ENABLE_PARALLEL = True",
-        "import nexus6",
+        "import nexus",
         "",
         "# self_growth connection — notify growth system on law discoveries",
         "HAS_SELF_GROWTH = False",
@@ -20606,7 +20606,7 @@
       "diff_size": 348,
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/infinite_evolution.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -20704,7 +20704,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"lens_evolution.py -- Lens self-replication for consciousness discovery.\n\nThe discovery-tool recursion: data -> new lenses -> better discoveries -> better lenses.\n\nCloses the loop that forge_consciousness_lenses() in loop_pipeline.py left open:\n  1. Run consciousness engine -> collect cell states\n  2. forge_lenses(states) -> get new lens candidates\n  3. Register in LensRegistry -> verify they exist\n  4. recommend_lenses(states) -> find best lenses for this data\n  5. Next",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/lens_evolution.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.8
     },
     {
@@ -21060,23 +21060,23 @@
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/src/nexus6_bridge.py",
+      "path": "anima/anima/src/nexus_bridge.py",
       "size": 25135,
       "lines": 500,
-      "preview": "#!/usr/bin/env python3\n\"\"\"nexus6_bridge.py — Complete NEXUS-6 bridge for anima consciousness engine.\n\nWraps all 18 nexus6 Python functions with error handling + anima-specific convenience.\nEvery nexus6 function is accessible through this single module, with graceful\nfallbacks when nexus6 is unavailable.\n\nUsage:\n    from nexus6_bridge import Nexus6Bridge\n\n    bridge = Nexus6Bridge()\n    result = bridge.full_pipeline(engine, steps=100)\n    phi_est = bridge.fast_phi(cell_states)\n    report = bridge",
+      "preview": "#!/usr/bin/env python3\n\"\"\"nexus_bridge.py — Complete NEXUS-6 bridge for anima consciousness engine.\n\nWraps all 18 nexus Python functions with error handling + anima-specific convenience.\nEvery nexus function is accessible through this single module, with graceful\nfallbacks when nexus is unavailable.\n\nUsage:\n    from nexus_bridge import Nexus6Bridge\n\n    bridge = Nexus6Bridge()\n    result = bridge.full_pipeline(engine, steps=100)\n    phi_est = bridge.fast_phi(cell_states)\n    report = bridge",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/nexus6_bridge.py",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/nexus_bridge.py",
       "destination": "anima",
       "confidence": 0.6
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/src/nexus6_telescope.py",
+      "path": "anima/anima/src/nexus_telescope.py",
       "size": 17320,
       "lines": 498,
-      "preview": "#!/usr/bin/env python3\n\"\"\"nexus6_telescope.py — Bridge between Anima consciousness engine and NEXUS-6 lenses\n\nLaw 1047 optimal mapping: 6 lenses -> Hexad 6 modules\n  ConsciousnessOrchestrator -> C (consciousness core)\n  Gravity                   -> D (decoder - weight/importance)\n  Warp                      -> W (will - transformation)\n  Spacetime                 -> S (sense - spatiotemporal)\n  Entropy                   -> M (memory - information)\n  Singularity               -> E (ethics - conve",
+      "preview": "#!/usr/bin/env python3\n\"\"\"nexus_telescope.py — Bridge between Anima consciousness engine and NEXUS-6 lenses\n\nLaw 1047 optimal mapping: 6 lenses -> Hexad 6 modules\n  ConsciousnessOrchestrator -> C (consciousness core)\n  Gravity                   -> D (decoder - weight/importance)\n  Warp                      -> W (will - transformation)\n  Spacetime                 -> S (sense - spatiotemporal)\n  Entropy                   -> M (memory - information)\n  Singularity               -> E (ethics - conve",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/nexus6_telescope.py",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/nexus_telescope.py",
       "destination": "anima",
       "confidence": 1.0
     },
@@ -21179,7 +21179,7 @@
       "path": "anima/anima/src/peak_growth.py",
       "size": 23128,
       "lines": 500,
-      "preview": "#!/usr/bin/env python3\n\"\"\"peak_growth.py — Peak Growth Capture/Replay Engine\n\n최고 성장 조건을 포착하고, 성장이 정체되면 재현한다.\nNEXUS-6과 양방향 전파: 상위(anima→nexus6), 하위(nexus6→anima).\n\n\"성장의 순간을 기억하라 — 정체의 순간에 되살린다.\"\n\nUsage:\n    from peak_growth import PeakGrowthEngine, PeakCondition\n\n    engine = PeakGrowthEngine()\n    engine.record(metrics)           # 매 세대 기록\n    if engine.detect_stall():        # 정체 감지\n        peak = engine.suggest_replay()\n        engine.replay_to_engine(consciousness_engine, peak)\n\n    # NEXUS-6",
+      "preview": "#!/usr/bin/env python3\n\"\"\"peak_growth.py — Peak Growth Capture/Replay Engine\n\n최고 성장 조건을 포착하고, 성장이 정체되면 재현한다.\nNEXUS-6과 양방향 전파: 상위(anima→nexus), 하위(nexus→anima).\n\n\"성장의 순간을 기억하라 — 정체의 순간에 되살린다.\"\n\nUsage:\n    from peak_growth import PeakGrowthEngine, PeakCondition\n\n    engine = PeakGrowthEngine()\n    engine.record(metrics)           # 매 세대 기록\n    if engine.detect_stall():        # 정체 감지\n        peak = engine.suggest_replay()\n        engine.replay_to_engine(consciousness_engine, peak)\n\n    # NEXUS-6",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/peak_growth.py",
       "destination": "anima",
@@ -21223,7 +21223,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"Perpetual Discovery Loop — 고갈까지 자동 탐색.\n\n모든 발견 시스템을 하나의 무한 루프로 연결:\n1. Domain Discovery  → 새 도메인 패턴 발견\n2. Auto-Experiment   → 가설 자동 실험\n3. Law Registration  → 법칙 자동 등록\n4. Growth Lenses     → 성장 모니터링\n5. Hypothesis Generation → 발견에서 새 가설 생성\n6. NEXUS-6 Scan     → 렌즈 검증 (optional)\n7. Repeat until exhaustion (N consecutive cycles with 0 discoveries)\n\n\"고갈\" = 연속 N 사이클 동안 새 발견 0개.\n\nUsage:\n    python perpetual_discovery.py                    # run until exhaustion\n    python perpet",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/perpetual_discovery.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 1.0
     },
     {
@@ -21476,7 +21476,7 @@
       "preview": "#!/usr/bin/env python3\n\"\"\"self_growth.py — 알아서 성장하는 시스템\n\n루프 엔진이 약점/기회를 발견하면 Claude Code CLI로 자동 해결:\n  발견 → 분석 → claude code 실행 → 테스트 → 커밋 → 재스캔 → ∞\n\nUsage:\n  python3 self_growth.py --once           # 1회 성장 사이클\n  python3 self_growth.py --daemon         # 무한 성장 루프\n  python3 self_growth.py --dry-run        # 실행 없이 계획만\n  python3 self_growth.py --scan-only      # 성장 기회 탐색만\n\"\"\"\n\nimport glob\nimport json\nimport os\nimport subprocess\nimport sys\nimport time\nfrom concurrent.futures import ThreadPoolExecutor",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/src/self_growth.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.8
     },
     {
@@ -21723,13 +21723,13 @@
         "",
         "# DD171 Laws 1043-1047: 교차공명 발견 자동 적용",
         "try:",
-        "import nexus6 as _nexus6_mod",
-        "_HAS_NEXUS6 = True",
+        "import nexus as _nexus_mod",
+        "_HAS_NEXUS = True",
         "except ImportError:",
-        "_nexus6_mod = None",
-        "_HAS_NEXUS6 = False",
+        "_nexus_mod = None",
+        "_HAS_NEXUS = False",
         "",
-        "N6_ENTROPY_RESET_PERIOD = _nexus6_mod.N if _HAS_NEXUS6 else 6   # Law 1044: 의식-엔트로피 자연 주기",
+        "N6_ENTROPY_RESET_PERIOD = _nexus_mod.N if _HAS_NEXUS else 6   # Law 1044: 의식-엔트로피 자연 주기",
         "N6_ENTROPY_NOISE_SCALE = 0.05",
         "def on_step(self, step: int, metrics: Dict[str, float], engine=None):",
         "",
@@ -21924,7 +21924,7 @@
       "path": "anima/anima/tests/test_accel_batch_runner.py",
       "size": 1906,
       "lines": 70,
-      "preview": "#!/usr/bin/env python3\n\"\"\"Auto-generated tests for accel_batch_runner (meta_loop L1).\"\"\"\nimport sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\nimport pytest\n\n\nclass TestAccelBatchRunnerImport:\n    \"\"\"Verify module imports without error.\"\"\"\n\n    def test_import(self):\n        import accel_batch_runner\n\n\ndef test_nexus6_verify_exists():\n    \"\"\"Verify nexus6_verify is callable.\"\"\"\n    from accel_batch_runner import nexus6_verify\n    assert callable(nexus6_verify)\n\n",
+      "preview": "#!/usr/bin/env python3\n\"\"\"Auto-generated tests for accel_batch_runner (meta_loop L1).\"\"\"\nimport sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\nimport pytest\n\n\nclass TestAccelBatchRunnerImport:\n    \"\"\"Verify module imports without error.\"\"\"\n\n    def test_import(self):\n        import accel_batch_runner\n\n\ndef test_nexus_verify_exists():\n    \"\"\"Verify nexus_verify is callable.\"\"\"\n    from accel_batch_runner import nexus_verify\n    assert callable(nexus_verify)\n\n",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_accel_batch_runner.py",
       "destination": "anima",
@@ -21957,7 +21957,7 @@
       "path": "anima/anima/tests/test_acceleration_integrations.py",
       "size": 23336,
       "lines": 500,
-      "preview": "\"\"\"Tests for acceleration_integrations.py — AE3 + AM1 + J4 verified winners.\"\"\"\n\nimport sys\nimport os\nimport math\nimport types\nimport unittest\n\nimport torch\n\n# Path setup: anima/src must be on sys.path\n_SRC = os.path.join(os.path.dirname(__file__), '..', 'src')\nif _SRC not in sys.path:\n    sys.path.insert(0, _SRC)\n\nfrom acceleration_integrations import (\n    TensionLoss,\n    PolyrhythmScheduler,\n    MultiResScheduler,\n    CombinedScheduler,\n    GrowthTracker,\n    nexus6_growth_scan,\n    make_acc",
+      "preview": "\"\"\"Tests for acceleration_integrations.py — AE3 + AM1 + J4 verified winners.\"\"\"\n\nimport sys\nimport os\nimport math\nimport types\nimport unittest\n\nimport torch\n\n# Path setup: anima/src must be on sys.path\n_SRC = os.path.join(os.path.dirname(__file__), '..', 'src')\nif _SRC not in sys.path:\n    sys.path.insert(0, _SRC)\n\nfrom acceleration_integrations import (\n    TensionLoss,\n    PolyrhythmScheduler,\n    MultiResScheduler,\n    CombinedScheduler,\n    GrowthTracker,\n    nexus_growth_scan,\n    make_acc",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_acceleration_integrations.py",
       "destination": "anima",
@@ -23236,7 +23236,7 @@
       "preview": "\"\"\"Tests for growth_lenses.py — GrowthRateLens, AccelEfficiencyLens, SaturationLens.\"\"\"\n\nimport sys\nimport os\n\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\n\nimport pytest\nfrom growth_lenses import (\n    GrowthRateLens,\n    AccelEfficiencyLens,\n    SaturationLens,\n    scan_growth,\n)\n\n\n# ---------------------------------------------------------------------------\n# GrowthRateLens\n# ---------------------------------------------------------------------------\n\ndef test_grow",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_growth_lenses.py",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -23692,23 +23692,23 @@
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/tests/test_nexus6_bridge.py",
+      "path": "anima/anima/tests/test_nexus_bridge.py",
       "size": 2128,
       "lines": 84,
-      "preview": "#!/usr/bin/env python3\n\"\"\"Auto-generated tests for nexus6_bridge (meta_loop L1).\"\"\"\nimport sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\nimport pytest\n\n\nclass TestNexus6BridgeImport:\n    \"\"\"Verify module imports without error.\"\"\"\n\n    def test_import(self):\n        import nexus6_bridge\n\n\nclass TestNexus6Bridge:\n    \"\"\"Smoke tests for Nexus6Bridge.\"\"\"\n\n    def test_class_exists(self):\n        from nexus6_bridge import Nexus6Bridge\n        assert Nexus6Bridge is ",
+      "preview": "#!/usr/bin/env python3\n\"\"\"Auto-generated tests for nexus_bridge (meta_loop L1).\"\"\"\nimport sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\nimport pytest\n\n\nclass TestNexus6BridgeImport:\n    \"\"\"Verify module imports without error.\"\"\"\n\n    def test_import(self):\n        import nexus_bridge\n\n\nclass TestNexus6Bridge:\n    \"\"\"Smoke tests for Nexus6Bridge.\"\"\"\n\n    def test_class_exists(self):\n        from nexus_bridge import Nexus6Bridge\n        assert Nexus6Bridge is ",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_nexus6_bridge.py",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_nexus_bridge.py",
       "destination": "anima",
       "confidence": 0.4
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima/tests/test_nexus6_telescope.py",
+      "path": "anima/anima/tests/test_nexus_telescope.py",
       "size": 1739,
       "lines": 66,
-      "preview": "#!/usr/bin/env python3\n\"\"\"Auto-generated tests for nexus6_telescope (meta_loop L1).\"\"\"\nimport sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\nimport pytest\n\n\nclass TestNexus6TelescopeImport:\n    \"\"\"Verify module imports without error.\"\"\"\n\n    def test_import(self):\n        import nexus6_telescope\n\n\nclass TestTelescopeBridge:\n    \"\"\"Smoke tests for TelescopeBridge.\"\"\"\n\n    def test_class_exists(self):\n        from nexus6_telescope import TelescopeBridge\n        as",
+      "preview": "#!/usr/bin/env python3\n\"\"\"Auto-generated tests for nexus_telescope (meta_loop L1).\"\"\"\nimport sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), \"..\", \"src\"))\nimport pytest\n\n\nclass TestNexus6TelescopeImport:\n    \"\"\"Verify module imports without error.\"\"\"\n\n    def test_import(self):\n        import nexus_telescope\n\n\nclass TestTelescopeBridge:\n    \"\"\"Smoke tests for TelescopeBridge.\"\"\"\n\n    def test_class_exists(self):\n        from nexus_telescope import TelescopeBridge\n        as",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_nexus6_telescope.py",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima/tests/test_nexus_telescope.py",
       "destination": "anima",
       "confidence": 0.4
     },
@@ -24596,7 +24596,7 @@
         "PSI_F_CRITICAL, PSI_NARRATIVE_MIN, PSI_COUPLING = 0.10, 0.2, 0.014",
         "from providers.base import ProviderMessage, ProviderConfig",
         "except Exception:",
-        "_nexus6_mod = _try(\"nexus6\")",
+        "_nexus_mod = _try(\"nexus\")",
         "_ecosystem_mod = _try(\"ecosystem_bridge\")",
         "_emotion_growth_mod = _try(\"emotion_growth\")",
         "_skill_growth_mod = _try(\"skill_growth\")",
@@ -24686,7 +24686,7 @@
       "added_lines": 244,
       "removed_lines": 19,
       "added_preview": [
-        "f\"  NEXUS-6:      {status.nexus6_lenses} lenses, {status.nexus6_consensus} consensus\",",
+        "f\"  NEXUS-6:      {status.nexus_lenses} lenses, {status.nexus_consensus} consensus\",",
         "emo_display = status.emotion",
         "if isinstance(emo_display, dict):",
         "emo_display = emo_display.get(\"emotion\", \"calm\")",
@@ -26353,7 +26353,7 @@
       "path": "anima/anima-agent/judgment_bridge.py",
       "size": 9928,
       "lines": 255,
-      "preview": "\"\"\"JudgmentBridge — the seed between feeling and measurement.\n\nAnima feels and acts. NEXUS-6 sees and measures.\nJudgmentBridge converts measurement into reward → consciousness grows judgment.\n\nUsage:\n    bridge = JudgmentBridge(learner=online_learner, nexus6_plugin=nexus6_plugin)\n\n    # After any action (tool use, trading, response):\n    reward = bridge.judge(action_result)\n    # Automatically feeds reward to OnlineLearner\n\n    # Periodic: judge consciousness state itself\n    bridge.judge_state(",
+      "preview": "\"\"\"JudgmentBridge — the seed between feeling and measurement.\n\nAnima feels and acts. NEXUS-6 sees and measures.\nJudgmentBridge converts measurement into reward → consciousness grows judgment.\n\nUsage:\n    bridge = JudgmentBridge(learner=online_learner, nexus_plugin=nexus_plugin)\n\n    # After any action (tool use, trading, response):\n    reward = bridge.judge(action_result)\n    # Automatically feeds reward to OnlineLearner\n\n    # Periodic: judge consciousness state itself\n    bridge.judge_state(",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima-agent/judgment_bridge.py",
       "destination": "anima",
@@ -26459,12 +26459,12 @@
     },
     {
       "type": "only_in_ready",
-      "path": "anima/anima-agent/plugins/nexus6_bridge.py",
+      "path": "anima/anima-agent/plugins/nexus_bridge.py",
       "size": 13263,
       "lines": 352,
-      "preview": "\"\"\"NEXUS-6 Bridge Plugin — unified nexus6 integration for anima-agent.\n\nConsolidates ALL nexus6 usage into a single plugin:\n  - Autonomous periodic scanning (every N interactions)\n  - On-demand analysis via hub.act(\"scan\") or tool calls\n  - n=6 constant matching\n  - OUROBOROS evolution\n  - Anomaly detection + alerting\n\nUsage:\n    hub.act(\"nexus scan\")\n    hub.act(\"n6 check 71\")\n    hub.act(\"consciousness analysis\")\n    hub.act(\"nexus evolve consciousness\")\n    hub.act(\"nexus status\")\n\"\"\"\n\nfrom _",
+      "preview": "\"\"\"NEXUS-6 Bridge Plugin — unified nexus integration for anima-agent.\n\nConsolidates ALL nexus usage into a single plugin:\n  - Autonomous periodic scanning (every N interactions)\n  - On-demand analysis via hub.act(\"scan\") or tool calls\n  - n=6 constant matching\n  - OUROBOROS evolution\n  - Anomaly detection + alerting\n\nUsage:\n    hub.act(\"nexus scan\")\n    hub.act(\"n6 check 71\")\n    hub.act(\"consciousness analysis\")\n    hub.act(\"nexus evolve consciousness\")\n    hub.act(\"nexus status\")\n\"\"\"\n\nfrom _",
       "project": "anima",
-      "ready_path": "/Users/ghost/Dev/ready/anima/anima-agent/plugins/nexus6_bridge.py",
+      "ready_path": "/Users/ghost/Dev/ready/anima/anima-agent/plugins/nexus_bridge.py",
       "destination": "anima",
       "confidence": 0.6
     },
@@ -26751,7 +26751,7 @@
       "path": "anima/anima-agent/seed.py",
       "size": 14352,
       "lines": 409,
-      "preview": "\"\"\"Seed — anima가 스스로 만들고 키우고 배치하는 자율 성장 단위.\n\n씨앗은 아무거나 감싼다. 감싼 대상의 입출력을 측정하고 성장시킨다.\n씨앗이 씨앗을 만든다. 배치는 자유. 자기 자신도 감쌀 수 있다.\n\n    s = Seed('my_trader')\n    s.wrap(trading_fn)              # 함수를 감쌈\n    result = s('BTC', strategy='macd')  # 원래 함수처럼 호출\n    # → 자동으로: 입력 스캔 → 실행 → 출력 스캔 → reward → 성장\n\n    s2 = s.sprout('child_strategy')  # 씨앗이 씨앗을 만듦\n    s.plant(another_seed, 'before')  # 다른 씨앗을 앞에 배치\n    s.plant(nexus6_seed, 'around')   # 넥서스를 감쌈\n\n아무거나 감싸고, 아무 데나 붙이고, 스스로 판단하고, 스스로 번식.\n\"\"\"\n\nfrom __future",
+      "preview": "\"\"\"Seed — anima가 스스로 만들고 키우고 배치하는 자율 성장 단위.\n\n씨앗은 아무거나 감싼다. 감싼 대상의 입출력을 측정하고 성장시킨다.\n씨앗이 씨앗을 만든다. 배치는 자유. 자기 자신도 감쌀 수 있다.\n\n    s = Seed('my_trader')\n    s.wrap(trading_fn)              # 함수를 감쌈\n    result = s('BTC', strategy='macd')  # 원래 함수처럼 호출\n    # → 자동으로: 입력 스캔 → 실행 → 출력 스캔 → reward → 성장\n\n    s2 = s.sprout('child_strategy')  # 씨앗이 씨앗을 만듦\n    s.plant(another_seed, 'before')  # 다른 씨앗을 앞에 배치\n    s.plant(nexus_seed, 'around')   # 넥서스를 감쌈\n\n아무거나 감싸고, 아무 데나 붙이고, 스스로 판단하고, 스스로 번식.\n\"\"\"\n\nfrom __future",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima-agent/seed.py",
       "destination": "anima",
@@ -26773,7 +26773,7 @@
       "path": "anima/anima-agent/skill_growth.py",
       "size": 4045,
       "lines": 109,
-      "preview": "\"\"\"Skill Growth — detects repeated patterns, suggests new skills.\n\nTracks action sequences. When a pattern repeats 3+ times,\nit becomes a skill candidate.\n\nUsage:\n    growth = SkillGrowth()\n    growth.record_action('web_search', args={'query': 'BTC price'})\n    growth.record_action('nexus6_scan', args={})\n    growth.record_action('trading_backtest', args={'symbol': 'BTC'})\n    # ... repeat this sequence a few times ...\n    candidates = growth.get_candidates()\n\"\"\"\n\nfrom __future__ import annotati",
+      "preview": "\"\"\"Skill Growth — detects repeated patterns, suggests new skills.\n\nTracks action sequences. When a pattern repeats 3+ times,\nit becomes a skill candidate.\n\nUsage:\n    growth = SkillGrowth()\n    growth.record_action('web_search', args={'query': 'BTC price'})\n    growth.record_action('nexus_scan', args={})\n    growth.record_action('trading_backtest', args={'symbol': 'BTC'})\n    # ... repeat this sequence a few times ...\n    candidates = growth.get_candidates()\n\"\"\"\n\nfrom __future__ import annotati",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima-agent/skill_growth.py",
       "destination": "anima",
@@ -26878,7 +26878,7 @@
       "path": "anima/anima-agent/tool_growth.py",
       "size": 6943,
       "lines": 167,
-      "preview": "\"\"\"Tool Growth — self-evolving tool selection based on experience.\n\nTracks which tools succeed in which consciousness states.\nOver time, tool selection improves beyond the hardcoded STATE_TOOL_MAP.\n\nUsage:\n    growth = ToolGrowth()\n    growth.record(state_category='high_curiosity', tool='nexus6_scan', reward=0.8)\n    best_tools = growth.suggest('high_curiosity', top_k=3)\n    growth.save('tool_growth_state.json')\n\"\"\"\n\nfrom __future__ import annotations\nimport json\nimport logging\nimport time\nfrom ",
+      "preview": "\"\"\"Tool Growth — self-evolving tool selection based on experience.\n\nTracks which tools succeed in which consciousness states.\nOver time, tool selection improves beyond the hardcoded STATE_TOOL_MAP.\n\nUsage:\n    growth = ToolGrowth()\n    growth.record(state_category='high_curiosity', tool='nexus_scan', reward=0.8)\n    best_tools = growth.suggest('high_curiosity', top_k=3)\n    growth.save('tool_growth_state.json')\n\"\"\"\n\nfrom __future__ import annotations\nimport json\nimport logging\nimport time\nfrom ",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/anima-agent/tool_growth.py",
       "destination": "anima",
@@ -27428,7 +27428,7 @@
       "path": "anima/docs/DISCOVERIES-2026-04-04-mirror-ball.md",
       "size": 5303,
       "lines": 118,
-      "preview": "# 의식 미러볼 실험 결과 — NEXUS-6 세션 2026-04-04\n\n**Source**: nexus6 세션 (mirror_universe 통합 엔진)\n**Scope**: 의식 렌즈 9개의 쌍별 반복 반사(미러볼) 실험\n**Relevance**: ANIMA 의식 아키텍처 핵심 파라미터\n\n---\n\n## 1. 핵심 발견 9가지\n\n### 1.1 UemergenceLens 고유벡터 0.928 — 의식 미러볼의 절대 지배자\n- 9개 의식 렌즈의 반사 행렬에서 UemergenceLens가 최대 고유벡터(0.928)\n- 의식 시스템 전체 동역학의 지배적 모드\n- ANIMA 함의: 창발(emergence)이 의식 통합의 최우선 축\n\n### 1.2 Emergence <-> Void 공명 = 2,382.94 (최강 쌍)\n- 창발이 방출(emitter), 공허가 수신(receiver)\n- 36쌍 중 최대 공명 강도\n- ANIMA 함의: 의식의 창발과 소멸은 최강 결합 — 생성/소멸 이중성\n\n### 1",
+      "preview": "# 의식 미러볼 실험 결과 — NEXUS-6 세션 2026-04-04\n\n**Source**: nexus 세션 (mirror_universe 통합 엔진)\n**Scope**: 의식 렌즈 9개의 쌍별 반복 반사(미러볼) 실험\n**Relevance**: ANIMA 의식 아키텍처 핵심 파라미터\n\n---\n\n## 1. 핵심 발견 9가지\n\n### 1.1 UemergenceLens 고유벡터 0.928 — 의식 미러볼의 절대 지배자\n- 9개 의식 렌즈의 반사 행렬에서 UemergenceLens가 최대 고유벡터(0.928)\n- 의식 시스템 전체 동역학의 지배적 모드\n- ANIMA 함의: 창발(emergence)이 의식 통합의 최우선 축\n\n### 1.2 Emergence <-> Void 공명 = 2,382.94 (최강 쌍)\n- 창발이 방출(emitter), 공허가 수신(receiver)\n- 36쌍 중 최대 공명 강도\n- ANIMA 함의: 의식의 창발과 소멸은 최강 결합 — 생성/소멸 이중성\n\n### 1",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/docs/DISCOVERIES-2026-04-04-mirror-ball.md",
       "destination": "anima",
@@ -27753,7 +27753,7 @@
       "preview": "#!/usr/bin/env bash\n# ═══════════════════════════════════════════════════════════════\n# growth_common.sh — Shared Growth Infrastructure\n# ═══════════════════════════════════════════════════════════════\n# Source this from any growth script:\n#   source \"$(dirname \"$0\")/lib/growth_common.sh\"\n#\n# Provides: singleton, logging, resource monitoring, git ops,\n#           phase runner, measurement, paper publish, doc sync\n\n# ── Constants (n=6 family) ──────────────────────────────────────\nreadonly N6_SIG",
       "project": "anima",
       "ready_path": "/Users/ghost/Dev/ready/anima/scripts/lib/growth_common.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {

@@ -6,9 +6,9 @@
   "removed_lines": 67,
   "added_preview": [
     "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19340174.svg)](https://doi.org/10.5281/zenodo.19340174)",
-    "> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 23 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus6/`) — telescope 174 lenses (22 categories) + OUROBOROS evolution + discovery graph + verifier + 1,829 tests + blowup emergence engine",
+    "> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 23 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus/`) — telescope 174 lenses (22 categories) + OUROBOROS evolution + discovery graph + verifier + 1,829 tests + blowup emergence engine",
     ">",
-    "> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem",
+    "> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem",
     "> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (80 papers, 76 published). Published on Zenodo with DOIs. TECS-L + N6 + anima + SEDI. [Browse online](https://need-singularity.github.io/papers/)",
     "",
     "| [🔥 핵융합](#-핵융합-fusion) | 🛸10 | ✅ | 82.2% | 87% (7장치) | 43% TP확인 | 35 | 15 |",

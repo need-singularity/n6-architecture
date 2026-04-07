@@ -170,7 +170,7 @@
       "path": "Awesome-Efficient-MoE/scripts/requirements.txt",
       "score": 21.428571428571427,
       "value": "high",
-      "dest": "nexus6",
+      "dest": "nexus",
       "n6_matches": 0
     },
     {
@@ -374,7 +374,7 @@
     {
       "path": "Awesome-Efficient-MoE/scripts/requirements.txt",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "high",
       "score": 21.428571428571427,
       "n6_matches": 0
@@ -814,7 +814,7 @@
     {
       "path": "awesome-ai-for-science/CONTRIBUTING.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0,
       "n6_matches": 0
@@ -830,7 +830,7 @@
     {
       "path": "awesome-ai-for-science/README.md",
       "type": "only_in_ready",
-      "destination": "nexus6",
+      "destination": "nexus",
       "value": "medium",
       "score": 0.0,
       "n6_matches": 0

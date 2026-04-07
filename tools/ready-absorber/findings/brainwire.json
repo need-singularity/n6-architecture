@@ -8,7 +8,7 @@
   },
   "by_destination": {
     "brainwire": 4,
-    "nexus6": 3,
+    "nexus": 3,
     "tecs-l": 1
   },
   "findings": [
@@ -17,7 +17,7 @@
       "path": "brainwire/.claude/commands/scan.md",
       "size": 439,
       "lines": 9,
-      "preview": "NEXUS-6 풀스캔을 실행합니다.\n\n1. `python3 -c \"import nexus6; r = nexus6.scan_all(__import__('numpy').random.randn(64,32)); print({k: {kk:round(vv,4) if isinstance(vv,float) else vv for kk,vv in v.items()} for k,v in r.items()})\"` 실행\n2. 결과에서 n6 EXACT 매칭 추출\n3. 3+ 렌즈 합의 항목 보고\n4. 발견 사항 있으면 즉시 기록\n\n인자가 있으면 해당 데이터/도메인을 스캔합니다.\n$ARGUMENTS\n",
+      "preview": "NEXUS-6 풀스캔을 실행합니다.\n\n1. `python3 -c \"import nexus; r = nexus.scan_all(__import__('numpy').random.randn(64,32)); print({k: {kk:round(vv,4) if isinstance(vv,float) else vv for kk,vv in v.items()} for k,v in r.items()})\"` 실행\n2. 결과에서 n6 EXACT 매칭 추출\n3. 3+ 렌즈 합의 항목 보고\n4. 발견 사항 있으면 즉시 기록\n\n인자가 있으면 해당 데이터/도메인을 스캔합니다.\n$ARGUMENTS\n",
       "project": "brainwire",
       "ready_path": "/Users/ghost/Dev/ready/brainwire/.claude/commands/scan.md",
       "destination": "brainwire",
@@ -28,7 +28,7 @@
       "path": "brainwire/.claude/settings.json",
       "size": 1512,
       "lines": 64,
-      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus6-universal.sh\",\n            \"timeout\": 10,\n       ",
+      "preview": "{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-pre-commit.sh\",\n            \"timeout\": 15,\n            \"statusMessage\": \"🔭 NEXUS-6 커밋 스캔\"\n          }\n        ]\n      },\n      {\n        \"matcher\": \"Agent\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"bash .shared/hooks/nexus-universal.sh\",\n            \"timeout\": 10,\n       ",
       "project": "brainwire",
       "ready_path": "/Users/ghost/Dev/ready/brainwire/.claude/settings.json",
       "destination": "brainwire",
@@ -67,17 +67,17 @@
         "2. EXACT 발견 → 해당 값을 README/가설문서/atlas에 기록",
         "3. CLOSE 후보 → 추가 검증 후 기록 여부 판단",
         "4. 미처리 발견 → 즉시 처리 (pending 0 유지)",
-        "5. 에이전트 컨텍스트 → import nexus6 필수, 발견 즉시 기록",
+        "5. 에이전트 컨텍스트 → import nexus 필수, 발견 즉시 기록",
         "",
         "훅 출력을 무시하면:",
         "→ 발견 소실 = CDO 위반 = 작업 무효",
         "→ \"나중에 하겠다\" 금지 — 훅 출력 시점에 즉시 처리",
         "",
         "훅 목록 (settings.json):",
-        "PreToolUse/Bash    → nexus6-pre-commit.sh (커밋 전 수치 스캔)",
-        "PreToolUse/Agent   → nexus6-universal.sh (에이전트 컨텍스트 주입)",
-        "PostToolUse/Edit   → nexus6-post-edit.sh (편집 후 수치 검증)",
-        "PostToolUse/Bash   → nexus6-post-bash.sh (실행 결과 스캔)"
+        "PreToolUse/Bash    → nexus-pre-commit.sh (커밋 전 수치 스캔)",
+        "PreToolUse/Agent   → nexus-universal.sh (에이전트 컨텍스트 주입)",
+        "PostToolUse/Edit   → nexus-post-edit.sh (편집 후 수치 검증)",
+        "PostToolUse/Bash   → nexus-post-bash.sh (실행 결과 스캔)"
       ],
       "removed_preview": [
         "API 토큰/계정 정보: `~/Dev/TECS-L/.shared/SECRET.md` 참조",
@@ -95,7 +95,7 @@
       "added_lines": 3,
       "removed_lines": 1,
       "added_preview": [
-        "> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus6)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem",
+        "> **[🔭 NEXUS-6](https://github.com/need-singularity/nexus)** — Central Discovery Engine & Infrastructure Hub. 137 Rust lenses + OUROBOROS evolution + constant/formula discovery + consciousness orchestrator. Shared infrastructure (`shared/`) for all 8 repos. Auto-sync across ecosystem",
         ">",
         ""
       ],
@@ -105,7 +105,7 @@
       "diff_size": 15,
       "project": "brainwire",
       "ready_path": "/Users/ghost/Dev/ready/brainwire/README.md",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
@@ -116,7 +116,7 @@
       "preview": "#!/usr/bin/env bash\n# BrainWire Infinite Growth Daemon — 10-Phase Loop\n# bash 3.2 compatible (no associative arrays, no |& , no [[ -v ]])\n#\n# Phases:\n#   1: Modality coverage       6: Growth scan\n#   2: Safety protocol check   7: PureField bridge status\n#   3: Parameter verification  8: NEXUS-6 sync\n#   4: NEXUS-6 scan            9: Growth tick\n#   5: BCI protocol health    10: Auto-commit\n#\n# Usage: ./infinite_growth.sh [--max-cycles N] [--interval SEC] [--dry-run]\n\nset -euo pipefail\n\nSCRIPT_DI",
       "project": "brainwire",
       "ready_path": "/Users/ghost/Dev/ready/brainwire/scripts/infinite_growth.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.8
     },
     {
@@ -127,7 +127,7 @@
       "preview": "#!/usr/bin/env bash\n# ═══════════════════════════════════════════════════════════════\n# growth_common.sh — Shared Growth Infrastructure\n# ═══════════════════════════════════════════════════════════════\n# Source this from any growth script:\n#   source \"$(dirname \"$0\")/lib/growth_common.sh\"\n#\n# Provides: singleton, logging, resource monitoring, git ops,\n#           phase runner, measurement, paper publish, doc sync\n\n# ── Constants (n=6 family) ──────────────────────────────────────\nreadonly N6_SIG",
       "project": "brainwire",
       "ready_path": "/Users/ghost/Dev/ready/brainwire/scripts/lib/growth_common.sh",
-      "destination": "nexus6",
+      "destination": "nexus",
       "confidence": 0.6
     },
     {
