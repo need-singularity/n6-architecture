@@ -169,7 +169,21 @@ F5: pct(102.0, 100.0) = 0     // (102.0 - 100.0) / 100.0 * 100.0
 **영향:** G3 byte-perfect에 영향 (Rust calc 다수가 `{:?}` 또는 `{}` 로 bool 출력)
 **필요:** `to_string`에서 TAG_BOOL → `"true"`/`"false"`
 
-### B-23. 과학 표기 리터럴 (`1.38e-23`)
+### B-28. fn 본문에서 top-level `let` 상수 미가시
+
+**증상:** 모듈 레벨 `let SIGMA = 12.0`이 `fn solar() { ... SIGMA ... }` 내부에서 undeclared
+**영향:** Rust `const` 패턴으로 작성된 모든 calc — fn 분리 불가
+**우회:** 평탄화 (fn 없이) 또는 fn 안에서 상수 재선언
+**필요:** 모듈 스코프 식별자가 fn 본문에서 가시화
+
+### B-29. `format_float` scientific notation 미지원
+
+**증상:** Rust `{:.4e}` 등가 부재. `format_float(2.87e-21, 4)` → `0.0000` (4 decimal places만)
+**영향:** 물리 상수 출력 (Boltzmann, Planck, Avogadro 등)
+**우회:** mantissa 수동 분해 (`landauer * 1e21`로 normalize 후 표시)
+**필요:** `format_float_sci(f, prec)` 또는 `{:.4e}` 등가
+
+### B-23. 과학 표기 리터럴 (`1.38e-23`) (RESOLVED 2026-04-08)
 
 **증상:** 렉서가 `1.38e` + `-23`으로 분리 → C 코드에 `e` 미선언 식별자
 **영향:** Boltzmann/Planck 등 물리 상수, energy-calc/optics-calc/photonic-energy-calc
