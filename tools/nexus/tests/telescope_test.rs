@@ -310,7 +310,7 @@ fn test_registry_core_count() {
     let reg = LensRegistry::new();
     let cores = reg.by_category(LensCategory::Core);
     assert_eq!(cores.len(), 23, "Registry must contain exactly 23 Core lenses");
-    assert_eq!(reg.len(), 1022, "Total registry size should be 1022 after new()");
+    assert_eq!(reg.len(), 1029, "Total registry size should be 1029 after new()");
 }
 
 // ──────────────────────────────────────────────
@@ -339,7 +339,7 @@ fn test_registry_by_category() {
     let mut reg = LensRegistry::new();
 
     // 991 Extended, no Custom or DomainCombo
-    assert_eq!(reg.by_category(LensCategory::Extended).len(), 999);
+    assert_eq!(reg.by_category(LensCategory::Extended).len(), 1006);
     assert_eq!(reg.by_category(LensCategory::Custom).len(), 0);
     assert_eq!(reg.by_category(LensCategory::DomainCombo).len(), 0);
 
@@ -351,8 +351,8 @@ fn test_registry_by_category() {
         domain_affinity: vec![],
         complementary: vec![],
     });
-    assert_eq!(reg.by_category(LensCategory::Extended).len(), 1000);
-    assert_eq!(reg.len(), 1023);
+    assert_eq!(reg.by_category(LensCategory::Extended).len(), 1007);
+    assert_eq!(reg.len(), 1030);
 }
 
 // ──────────────────────────────────────────────
@@ -418,7 +418,7 @@ fn test_domain_combos() {
 #[test]
 fn test_register_custom() {
     let mut reg = LensRegistry::new();
-    assert_eq!(reg.len(), 1022);
+    assert_eq!(reg.len(), 1029);
 
     reg.register(LensEntry {
         name: "my_custom_lens".into(),
@@ -428,7 +428,7 @@ fn test_register_custom() {
         complementary: vec!["consciousness".into()],
     });
 
-    assert_eq!(reg.len(), 1023);
+    assert_eq!(reg.len(), 1030);
 
     let custom = reg.get("my_custom_lens").unwrap();
     assert_eq!(custom.category, LensCategory::Custom);
@@ -529,10 +529,10 @@ fn test_global_lens_name_uniqueness() {
 #[test]
 fn test_registry_total_411() {
     let reg = LensRegistry::new();
-    assert_eq!(reg.len(), 1022, "Registry should have 1022 lenses total");
+    assert_eq!(reg.len(), 1029, "Registry should have 1029 lenses total");
 
     let extended = reg.by_category(LensCategory::Extended);
-    assert_eq!(extended.len(), 999, "Extended category should have 999 lenses");
+    assert_eq!(extended.len(), 1006, "Extended category should have 1006 lenses");
 }
 
 // ──────────────────────────────────────────────

@@ -553,3 +553,21 @@ pub use wind_turbine_lens::WindTurbineLens;
 pub use winemaking_lens::WinemakingLens;
 pub use yoga_asana_lens::YogaAsanaLens;
 
+// ── 신규 도메인 렌즈 8종 (언어학/음악/경제/생태/면역) — todo#16 ──
+pub mod morphology_lens;
+pub mod tonal_harmony_lens;
+pub mod ecological_niche_lens;
+pub mod macroeconomics_lens;
+pub mod immunogenetics_lens;
+pub mod phonetics_lens;
+pub mod food_web_lens;
+pub mod behavioral_economics_lens;
+
+pub use morphology_lens::MorphologyLens;
+pub use tonal_harmony_lens::TonalHarmonyLens;
+pub use ecological_niche_lens::EcologicalNicheLens;
+pub use macroeconomics_lens::MacroeconomicsLens;
+pub use immunogenetics_lens::ImmunogeneticsLens;
+pub use phonetics_lens::PhoneticsLens;
+pub use food_web_lens::FoodWebLens;
+pub use behavioral_economics_lens::BehavioralEconomicsLens;
