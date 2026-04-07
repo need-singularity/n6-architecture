@@ -1,0 +1,607 @@
+// atlas-verifier — N6 Atlas Constants Auto-Verifier (HEXA port)
+// Original: tools/atlas-verifier/main.rs
+// Sandbox: no file I/O — embeds representative test rows inline
+
+let N = 6.0
+let PHI = 2.0
+let TAU = 4.0
+let SIGMA = 12.0
+let J2 = 24.0
+let SOPFR = 5.0
+let MU = 1.0
+let E_CONST = 2.718281828459045
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn rd2(x) { round(x * 100.0) / 100.0 }
+fn rd4(x) { round(x * 10000.0) / 10000.0 }
+fn rd6(x) { round(x * 1000000.0) / 1000000.0 }
+
+fn grade(expected, actual) {
+    if expected == 0.0 {
+        if actual == 0.0 { return "EXACT" }
+    }
+    let denom = abs(expected)
+    let d = if denom > pow(10.0, -30.0) { denom } else { pow(10.0, -30.0) }
+    let rel_err = abs((actual - expected) / d)
+    if rel_err < 0.0001 {
+        "EXACT"
+    } else if rel_err < 0.05 {
+        "CLOSE"
+    } else if rel_err < 0.20 {
+        "WEAK"
+    } else {
+        "FAIL"
+    }
+}
+
+// Build lookup: (expression_name, expected_value) pairs
+// This replaces Rust HashMap — linear scan is fine for ~100 entries
+fn build_lookup() {
+    let mut names = []
+    let mut vals = []
+
+    // Base
+    names = names + ["sigma"]
+    vals = vals + [SIGMA]
+    names = names + ["tau"]
+    vals = vals + [TAU]
+    names = names + ["phi"]
+    vals = vals + [PHI]
+    names = names + ["sopfr"]
+    vals = vals + [SOPFR]
+    names = names + ["J2"]
+    vals = vals + [J2]
+    names = names + ["mu"]
+    vals = vals + [MU]
+    names = names + ["n"]
+    vals = vals + [N]
+
+    // Simple arithmetic
+    names = names + ["sigma-tau"]
+    vals = vals + [SIGMA - TAU]
+    names = names + ["sigma-phi"]
+    vals = vals + [SIGMA - PHI]
+    names = names + ["sigma-mu"]
+    vals = vals + [SIGMA - MU]
+    names = names + ["sigma+mu"]
+    vals = vals + [SIGMA + MU]
+    names = names + ["sigma-sopfr"]
+    vals = vals + [SIGMA - SOPFR]
+    names = names + ["J2-tau"]
+    vals = vals + [J2 - TAU]
+    names = names + ["J2+phi"]
+    vals = vals + [J2 + PHI]
+    names = names + ["sigma+n/phi"]
+    vals = vals + [SIGMA + N / PHI]
+    names = names + ["n/phi"]
+    vals = vals + [N / PHI]
+
+    // Products
+    names = names + ["sigma*tau"]
+    vals = vals + [SIGMA * TAU]
+    names = names + ["sigma*n"]
+    vals = vals + [SIGMA * N]
+    names = names + ["sigma*phi"]
+    vals = vals + [SIGMA * PHI]
+    names = names + ["sigma*sopfr"]
+    vals = vals + [SIGMA * SOPFR]
+    names = names + ["sigma*J2"]
+    vals = vals + [SIGMA * J2]
+    names = names + ["sigma*(sigma-phi)"]
+    vals = vals + [SIGMA * (SIGMA - PHI)]
+    names = names + ["sigma*(sigma-tau)"]
+    vals = vals + [SIGMA * (SIGMA - TAU)]
+    names = names + ["sigma*(sigma-1)/2"]
+    vals = vals + [SIGMA * (SIGMA - 1.0) / 2.0]
+    names = names + ["sigma*(sigma-tau)*2^n"]
+    vals = vals + [SIGMA * (SIGMA - TAU) * pow(2.0, N)]
+    names = names + ["sopfr*phi"]
+    vals = vals + [SOPFR * PHI]
+    names = names + ["sopfr*(sigma-phi)"]
+    vals = vals + [SOPFR * (SIGMA - PHI)]
+    names = names + ["sigma*tau*(sigma-phi)"]
+    vals = vals + [SIGMA * TAU * (SIGMA - PHI)]
+    names = names + ["sigma*sopfr*tau"]
+    vals = vals + [SIGMA * SOPFR * TAU]
+    names = names + ["J2*(sigma-phi)"]
+    vals = vals + [J2 * (SIGMA - PHI)]
+    names = names + ["sigma*n+phi"]
+    vals = vals + [SIGMA * N + PHI]
+    names = names + ["sigma_sq"]
+    vals = vals + [SIGMA * SIGMA]
+    names = names + ["sopfr*2^n"]
+    vals = vals + [SOPFR * pow(2.0, N)]
+
+    // Powers
+    names = names + ["sigma^2"]
+    vals = vals + [SIGMA * SIGMA]
+    names = names + ["sigma^3"]
+    vals = vals + [pow(SIGMA, 3.0)]
+    names = names + ["sigma^4"]
+    vals = vals + [pow(SIGMA, 4.0)]
+    names = names + ["phi^tau"]
+    vals = vals + [pow(PHI, TAU)]
+    names = names + ["2^n"]
+    vals = vals + [pow(2.0, N)]
+    names = names + ["2^sigma"]
+    vals = vals + [pow(2.0, SIGMA)]
+    names = names + ["2^sopfr"]
+    vals = vals + [pow(2.0, SOPFR)]
+    names = names + ["2^(sigma-tau)"]
+    vals = vals + [pow(2.0, SIGMA - TAU)]
+    names = names + ["2^(sigma-sopfr)"]
+    vals = vals + [pow(2.0, SIGMA - SOPFR)]
+    names = names + ["phi^n"]
+    vals = vals + [pow(PHI, N)]
+    names = names + ["J2^2"]
+    vals = vals + [J2 * J2]
+    names = names + ["sigma^2*tau"]
+    vals = vals + [SIGMA * SIGMA * TAU]
+
+    // Combined powers
+    names = names + ["sigma^2-phi"]
+    vals = vals + [SIGMA * SIGMA - PHI]
+    names = names + ["sigma^2-n/phi"]
+    vals = vals + [SIGMA * SIGMA - N / PHI]
+    names = names + ["sigma^2+tau"]
+    vals = vals + [SIGMA * SIGMA + TAU]
+    names = names + ["sigma^2-sigma"]
+    vals = vals + [SIGMA * SIGMA - SIGMA]
+    names = names + ["phi^tau*sopfr"]
+    vals = vals + [pow(PHI, TAU) * SOPFR]
+    names = names + ["sigma*phi^tau"]
+    vals = vals + [SIGMA * pow(PHI, TAU)]
+    names = names + ["(sigma-phi)^tau"]
+    vals = vals + [pow(SIGMA - PHI, TAU)]
+    names = names + ["(sigma-phi)^2*tau"]
+    vals = vals + [pow(SIGMA - PHI, 2.0) * TAU]
+    names = names + ["(sigma-phi)^3"]
+    vals = vals + [pow(SIGMA - PHI, 3.0)]
+    names = names + ["(sigma-phi)^(n/phi)"]
+    vals = vals + [pow(SIGMA - PHI, N / PHI)]
+    names = names + ["(sigma-phi)^(-tau)"]
+    vals = vals + [pow(SIGMA - PHI, 0.0 - TAU)]
+    names = names + ["tau*(sigma-phi)"]
+    vals = vals + [TAU * (SIGMA - PHI)]
+
+    // Ratios
+    names = names + ["tau^2/sigma"]
+    vals = vals + [TAU * TAU / SIGMA]
+    names = names + ["phi/tau"]
+    vals = vals + [PHI / TAU]
+    names = names + ["tau/(n/phi)"]
+    vals = vals + [TAU / (N / PHI)]
+    names = names + ["tau/(sigma-sopfr)"]
+    vals = vals + [TAU / (SIGMA - SOPFR)]
+    names = names + ["mu/sigma"]
+    vals = vals + [MU / SIGMA]
+    names = names + ["mu/J2"]
+    vals = vals + [MU / J2]
+    names = names + ["phi^2/n"]
+    vals = vals + [PHI * PHI / N]
+    names = names + ["sigma/(sigma-phi)"]
+    vals = vals + [SIGMA / (SIGMA - PHI)]
+    names = names + ["(sigma-mu)/(sigma-phi)"]
+    vals = vals + [(SIGMA - MU) / (SIGMA - PHI)]
+    names = names + ["1/(sigma-phi)"]
+    vals = vals + [1.0 / (SIGMA - PHI)]
+    names = names + ["phi/(sigma-phi)"]
+    vals = vals + [PHI / (SIGMA - PHI)]
+    names = names + ["(n/phi)/(sigma-phi)"]
+    vals = vals + [(N / PHI) / (SIGMA - PHI)]
+    names = names + ["(n/phi)/(sigma+mu)"]
+    vals = vals + [(N / PHI) / (SIGMA + MU)]
+    names = names + ["(n/phi)/(sigma-phi)^phi"]
+    vals = vals + [(N / PHI) / pow(SIGMA - PHI, PHI)]
+    names = names + ["sopfr/((sigma-sopfr)*n)"]
+    vals = vals + [SOPFR / ((SIGMA - SOPFR) * N)]
+    names = names + ["(sigma+n/phi)/phi"]
+    vals = vals + [(SIGMA + N / PHI) / PHI]
+    names = names + ["(sigma+n/phi)/(sigma-sopfr)"]
+    vals = vals + [(SIGMA + N / PHI) / (SIGMA - SOPFR)]
+    names = names + ["1/n"]
+    vals = vals + [1.0 / N]
+    names = names + ["1/e"]
+    vals = vals + [1.0 / E_CONST]
+    names = names + ["phi/(sigma-phi)^phi"]
+    vals = vals + [PHI / pow(SIGMA - PHI, PHI)]
+
+    // Adam / LLM
+    names = names + ["1-1/(J2-tau)"]
+    vals = vals + [1.0 - 1.0 / (J2 - TAU)]
+    names = names + ["1-1/(sigma-phi)"]
+    vals = vals + [1.0 - 1.0 / (SIGMA - PHI)]
+    names = names + ["10^(-(sigma-tau))"]
+    vals = vals + [pow(10.0, 0.0 - (SIGMA - TAU))]
+    names = names + ["R(6)"]
+    vals = vals + [SIGMA * PHI / (N * TAU)]
+    names = names + ["ln(4/3)"]
+    vals = vals + [0.28768207]
+    names = names + ["tau^2/(n/phi)^3"]
+    vals = vals + [TAU * TAU / pow(N / PHI, 3.0)]
+    names = names + ["1/(sigma-phi)^(n/phi)"]
+    vals = vals + [1.0 / pow(SIGMA - PHI, N / PHI)]
+
+    // Cosmology
+    names = names + ["1-mu/P2"]
+    vals = vals + [1.0 - MU / 28.0]
+    names = names + ["sigma/sigma(P2)^2"]
+    vals = vals + [SIGMA / (56.0 * 56.0)]
+    names = names + ["(n/phi+mu/sigma)*10^(-sopfr)"]
+    vals = vals + [(N / PHI + MU / SIGMA) * pow(10.0, 0.0 - SOPFR)]
+
+    // Egyptian
+    names = names + ["sigma^2*sigma*J2"]
+    vals = vals + [SIGMA * SIGMA * SIGMA * J2]
+    names = names + ["sigma^2*tau/2"]
+    vals = vals + [SIGMA * SIGMA * TAU / 2.0]
+    names = names + ["sigma^2*240W"]
+    vals = vals + [SIGMA * SIGMA * 240.0]
+
+    // Fine structure
+    names = names + ["sigma(sigma-mu)+sopfr+mu/P2"]
+    vals = vals + [SIGMA * (SIGMA - MU) + SOPFR + MU / 28.0]
+
+    // J2 identities
+    names = names + ["J2-tau=tau*sopfr"]
+    vals = vals + [J2 - TAU]
+    names = names + ["tau*sopfr"]
+    vals = vals + [TAU * SOPFR]
+
+    [names, vals]
+}
+
+// Embedded test rows: [expression_key, claimed_value]
+// Representative sample covering all categories from atlas-constants.md
+fn build_test_rows() {
+    let mut expr = []
+    let mut claimed = []
+
+    // Base
+    expr = expr + ["sigma"]
+    claimed = claimed + [12.0]
+    expr = expr + ["tau"]
+    claimed = claimed + [4.0]
+    expr = expr + ["phi"]
+    claimed = claimed + [2.0]
+    expr = expr + ["sopfr"]
+    claimed = claimed + [5.0]
+    expr = expr + ["J2"]
+    claimed = claimed + [24.0]
+    expr = expr + ["mu"]
+    claimed = claimed + [1.0]
+    expr = expr + ["n"]
+    claimed = claimed + [6.0]
+
+    // Arithmetic
+    expr = expr + ["sigma-tau"]
+    claimed = claimed + [8.0]
+    expr = expr + ["sigma-phi"]
+    claimed = claimed + [10.0]
+    expr = expr + ["sigma-mu"]
+    claimed = claimed + [11.0]
+    expr = expr + ["sigma+mu"]
+    claimed = claimed + [13.0]
+    expr = expr + ["sigma-sopfr"]
+    claimed = claimed + [7.0]
+    expr = expr + ["J2-tau"]
+    claimed = claimed + [20.0]
+    expr = expr + ["J2+phi"]
+    claimed = claimed + [26.0]
+    expr = expr + ["sigma+n/phi"]
+    claimed = claimed + [15.0]
+    expr = expr + ["n/phi"]
+    claimed = claimed + [3.0]
+
+    // Products
+    expr = expr + ["sigma*tau"]
+    claimed = claimed + [48.0]
+    expr = expr + ["sigma*n"]
+    claimed = claimed + [72.0]
+    expr = expr + ["sigma*phi"]
+    claimed = claimed + [24.0]
+    expr = expr + ["sigma*sopfr"]
+    claimed = claimed + [60.0]
+    expr = expr + ["sigma*J2"]
+    claimed = claimed + [288.0]
+    expr = expr + ["sigma*(sigma-phi)"]
+    claimed = claimed + [120.0]
+    expr = expr + ["sigma*(sigma-tau)"]
+    claimed = claimed + [96.0]
+    expr = expr + ["sigma*(sigma-1)/2"]
+    claimed = claimed + [66.0]
+    expr = expr + ["sigma*(sigma-tau)*2^n"]
+    claimed = claimed + [6144.0]
+    expr = expr + ["sopfr*phi"]
+    claimed = claimed + [10.0]
+    expr = expr + ["sopfr*(sigma-phi)"]
+    claimed = claimed + [50.0]
+    expr = expr + ["sigma*tau*(sigma-phi)"]
+    claimed = claimed + [480.0]
+    expr = expr + ["sigma*sopfr*tau"]
+    claimed = claimed + [240.0]
+    expr = expr + ["J2*(sigma-phi)"]
+    claimed = claimed + [240.0]
+    expr = expr + ["sigma*n+phi"]
+    claimed = claimed + [74.0]
+    expr = expr + ["sigma_sq"]
+    claimed = claimed + [144.0]
+    expr = expr + ["sopfr*2^n"]
+    claimed = claimed + [320.0]
+
+    // Powers
+    expr = expr + ["sigma^2"]
+    claimed = claimed + [144.0]
+    expr = expr + ["sigma^3"]
+    claimed = claimed + [1728.0]
+    expr = expr + ["sigma^4"]
+    claimed = claimed + [20736.0]
+    expr = expr + ["phi^tau"]
+    claimed = claimed + [16.0]
+    expr = expr + ["2^n"]
+    claimed = claimed + [64.0]
+    expr = expr + ["2^sigma"]
+    claimed = claimed + [4096.0]
+    expr = expr + ["2^sopfr"]
+    claimed = claimed + [32.0]
+    expr = expr + ["2^(sigma-tau)"]
+    claimed = claimed + [256.0]
+    expr = expr + ["2^(sigma-sopfr)"]
+    claimed = claimed + [128.0]
+    expr = expr + ["phi^n"]
+    claimed = claimed + [64.0]
+    expr = expr + ["J2^2"]
+    claimed = claimed + [576.0]
+    expr = expr + ["sigma^2*tau"]
+    claimed = claimed + [576.0]
+
+    // Combined powers
+    expr = expr + ["sigma^2-phi"]
+    claimed = claimed + [142.0]
+    expr = expr + ["sigma^2-n/phi"]
+    claimed = claimed + [141.0]
+    expr = expr + ["sigma^2+tau"]
+    claimed = claimed + [148.0]
+    expr = expr + ["sigma^2-sigma"]
+    claimed = claimed + [132.0]
+    expr = expr + ["phi^tau*sopfr"]
+    claimed = claimed + [80.0]
+    expr = expr + ["sigma*phi^tau"]
+    claimed = claimed + [192.0]
+    expr = expr + ["(sigma-phi)^tau"]
+    claimed = claimed + [10000.0]
+    expr = expr + ["(sigma-phi)^2*tau"]
+    claimed = claimed + [400.0]
+    expr = expr + ["(sigma-phi)^3"]
+    claimed = claimed + [1000.0]
+    expr = expr + ["(sigma-phi)^(n/phi)"]
+    claimed = claimed + [1000.0]
+    expr = expr + ["(sigma-phi)^(-tau)"]
+    claimed = claimed + [0.0001]
+    expr = expr + ["tau*(sigma-phi)"]
+    claimed = claimed + [40.0]
+
+    // Ratios
+    expr = expr + ["tau^2/sigma"]
+    claimed = claimed + [1.333333]
+    expr = expr + ["phi/tau"]
+    claimed = claimed + [0.5]
+    expr = expr + ["tau/(n/phi)"]
+    claimed = claimed + [1.333333]
+    expr = expr + ["tau/(sigma-sopfr)"]
+    claimed = claimed + [0.571429]
+    expr = expr + ["mu/sigma"]
+    claimed = claimed + [0.083333]
+    expr = expr + ["mu/J2"]
+    claimed = claimed + [0.041667]
+    expr = expr + ["phi^2/n"]
+    claimed = claimed + [0.666667]
+    expr = expr + ["sigma/(sigma-phi)"]
+    claimed = claimed + [1.2]
+    expr = expr + ["(sigma-mu)/(sigma-phi)"]
+    claimed = claimed + [1.1]
+    expr = expr + ["1/(sigma-phi)"]
+    claimed = claimed + [0.1]
+    expr = expr + ["phi/(sigma-phi)"]
+    claimed = claimed + [0.2]
+    expr = expr + ["(n/phi)/(sigma-phi)"]
+    claimed = claimed + [0.3]
+    expr = expr + ["(n/phi)/(sigma+mu)"]
+    claimed = claimed + [0.230769]
+    expr = expr + ["(n/phi)/(sigma-phi)^phi"]
+    claimed = claimed + [0.03]
+    expr = expr + ["sopfr/((sigma-sopfr)*n)"]
+    claimed = claimed + [0.119048]
+    expr = expr + ["(sigma+n/phi)/phi"]
+    claimed = claimed + [7.5]
+    expr = expr + ["(sigma+n/phi)/(sigma-sopfr)"]
+    claimed = claimed + [2.142857]
+    expr = expr + ["1/n"]
+    claimed = claimed + [0.166667]
+    expr = expr + ["1/e"]
+    claimed = claimed + [0.367879]
+    expr = expr + ["phi/(sigma-phi)^phi"]
+    claimed = claimed + [0.02]
+
+    // Adam / LLM
+    expr = expr + ["1-1/(J2-tau)"]
+    claimed = claimed + [0.95]
+    expr = expr + ["1-1/(sigma-phi)"]
+    claimed = claimed + [0.9]
+    expr = expr + ["10^(-(sigma-tau))"]
+    claimed = claimed + [0.00000001]
+    expr = expr + ["R(6)"]
+    claimed = claimed + [1.0]
+    expr = expr + ["ln(4/3)"]
+    claimed = claimed + [0.2877]
+    expr = expr + ["tau^2/(n/phi)^3"]
+    claimed = claimed + [0.592593]
+    expr = expr + ["1/(sigma-phi)^(n/phi)"]
+    claimed = claimed + [0.001]
+
+    // Cosmology
+    expr = expr + ["1-mu/P2"]
+    claimed = claimed + [0.964286]
+    expr = expr + ["sigma/sigma(P2)^2"]
+    claimed = claimed + [0.003827]
+    expr = expr + ["(n/phi+mu/sigma)*10^(-sopfr)"]
+    claimed = claimed + [0.0000308333]
+
+    // Egyptian
+    expr = expr + ["sigma^2*sigma*J2"]
+    claimed = claimed + [41472.0]
+    expr = expr + ["sigma^2*tau/2"]
+    claimed = claimed + [288.0]
+    expr = expr + ["sigma^2*240W"]
+    claimed = claimed + [34560.0]
+
+    // Fine structure
+    expr = expr + ["sigma(sigma-mu)+sopfr+mu/P2"]
+    claimed = claimed + [137.035714]
+
+    // J2 identity
+    expr = expr + ["tau*sopfr"]
+    claimed = claimed + [20.0]
+
+    [expr, claimed]
+}
+
+// Lookup: find expected value for an expression key
+fn lookup_val(names, vals, key) {
+    let mut i = 0
+    while i < len(names) {
+        if names[i] == key {
+            return vals[i]
+        }
+        i = i + 1
+    }
+    -999999.0
+}
+
+// === Main ===
+println("=== N6 Atlas Verifier (HEXA) ===")
+println("Mode: embedded test rows (sandbox — no file I/O)")
+println("")
+
+let lu = build_lookup()
+let lu_names = lu[0]
+let lu_vals = lu[1]
+
+let test = build_test_rows()
+let t_expr = test[0]
+let t_claimed = test[1]
+
+let total_rows = len(t_expr)
+let mut evaluated = 0
+let mut skipped = 0
+let mut exact_count = 0
+let mut close_count = 0
+let mut weak_count = 0
+let mut fail_count = 0
+
+// Result arrays
+let mut r_expr = []
+let mut r_expected = []
+let mut r_actual = []
+let mut r_grade = []
+
+let mut idx = 0
+while idx < total_rows {
+    let key = t_expr[idx]
+    let claimed = t_claimed[idx]
+    let expected = lookup_val(lu_names, lu_vals, key)
+
+    if expected == -999999.0 {
+        skipped = skipped + 1
+        idx = idx + 1
+        continue
+    }
+
+    let g = grade(expected, claimed)
+    r_expr = r_expr + [key]
+    r_expected = r_expected + [expected]
+    r_actual = r_actual + [claimed]
+    r_grade = r_grade + [g]
+    evaluated = evaluated + 1
+
+    if g == "EXACT" {
+        exact_count = exact_count + 1
+    } else if g == "CLOSE" {
+        close_count = close_count + 1
+    } else if g == "WEAK" {
+        weak_count = weak_count + 1
+    } else {
+        fail_count = fail_count + 1
+    }
+
+    idx = idx + 1
+}
+
+println("Total test rows: " + to_string(total_rows))
+println("Evaluated:       " + to_string(evaluated))
+println("Skipped:         " + to_string(skipped))
+println("")
+
+let denom = if evaluated > 0 { evaluated } else { 1 }
+let exact_pct = rd2(100.0 * exact_count / denom)
+let close_pct = rd2(100.0 * close_count / denom)
+let weak_pct = rd2(100.0 * weak_count / denom)
+let fail_pct = rd2(100.0 * fail_count / denom)
+
+println("--- Summary ---")
+println("  EXACT : " + to_string(exact_count) + " (" + to_string(exact_pct) + "%)")
+println("  CLOSE : " + to_string(close_count) + " (" + to_string(close_pct) + "%)")
+println("  WEAK  : " + to_string(weak_count) + " (" + to_string(weak_pct) + "%)")
+println("  FAIL  : " + to_string(fail_count) + " (" + to_string(fail_pct) + "%)")
+println("")
+
+// Show non-EXACT entries
+let mut has_non_exact = false
+let mut ni = 0
+while ni < evaluated {
+    if r_grade[ni] != "EXACT" {
+        has_non_exact = true
+    }
+    ni = ni + 1
+}
+
+if has_non_exact {
+    println("--- Non-EXACT entries ---")
+    println(pad_r("Expression", 40) + pad_l("Expected", 14) + pad_l("Actual", 14) + "  Grade")
+    println("-".repeat(40) + "-".repeat(14) + "-".repeat(14) + "  ------")
+    let mut j = 0
+    while j < evaluated {
+        if r_grade[j] != "EXACT" {
+            println(pad_r(r_expr[j], 40) + pad_l(to_string(rd6(r_expected[j])), 14) + pad_l(to_string(rd6(r_actual[j])), 14) + "  " + r_grade[j])
+        }
+        j = j + 1
+    }
+} else {
+    println("All " + to_string(evaluated) + " evaluated expressions are EXACT.")
+}
+
+// Show failures prominently
+if fail_count > 0 {
+    println("")
+    println("!!! " + to_string(fail_count) + " FAILURES detected !!!")
+    let mut k = 0
+    while k < evaluated {
+        if r_grade[k] == "FAIL" {
+            let exp = r_expected[k]
+            let act = r_actual[k]
+            let d2 = if abs(exp) > pow(10.0, -30.0) { abs(exp) } else { pow(10.0, -30.0) }
+            let rel_pct = rd2(abs((act - exp) / d2) * 100.0)
+            println("  " + r_expr[k] + " -- expected " + to_string(exp) + ", got " + to_string(act) + " (err " + to_string(rel_pct) + "%)")
+        }
+        k = k + 1
+    }
+}
