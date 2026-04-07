@@ -5373,13 +5373,13 @@ The two ratios τ=4 and σ-φ=10 alternate through the chain.
 ## BT-139: Crystallography Space Group n=6 Arithmetic
 
 **Domain**: Materials/Physics (cross: chip, chemistry)
-**Claim**: Crystal symmetry classifications follow n=6: crystal systems = sigma-sopfr = 7, Bravais lattices = sigma+phi = 14, point groups (crystal) = sigma*n/phi+sigma+phi = 32, and space groups = sigma*sigma*n/phi + sigma*sopfr - sigma - phi = 230. Close-packed structures have coordination number CN = sigma = 12 (FCC/HCP).
+**Claim**: Crystal symmetry classifications follow n=6: crystal systems = sigma-sopfr = 7, Bravais lattices = sigma+phi = 14, point groups (crystal) = 2^sopfr = 32. Space groups = 230 has no simple n=6 expression (230 = 2x5x23, prime factor 23 is outside n=6 arithmetic). Close-packed structures have coordination number CN = sigma = 12 (FCC/HCP).
 
-**Evidence (8/8 EXACT)**:
+**Evidence (7/8 EXACT, 1 MISS)**:
 1. Crystal systems = sigma-sopfr = 7 (triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, cubic)
 2. Bravais lattices = sigma+phi = 14 (Auguste Bravais, 1850)
 3. Crystallographic point groups = 2^sopfr = 32 (Hessel, 1830)
-4. Space groups = 230 (Fedorov/Schoenflies, 1891) -- 230 = sigma^2*n/phi - sigma*n/phi - sigma*phi + phi*phi = complex n=6 expression
+4. Space groups = 230 (Fedorov/Schoenflies, 1891) -- MISS: 230 has no simple n=6 expression (prior formula sigma^2*n/phi - sigma*n/phi - sigma*phi + phi^2 = 376, not 230)
 5. Close-packed CN = sigma = 12 (FCC: 12 nearest neighbors, Kepler conjecture proved 2017)
 6. HCP CN = sigma = 12 (hexagonal close-packed, same coordination)
 7. Hexagonal lattice symmetry order = n = 6 (C6 rotation)
@@ -5395,7 +5395,7 @@ The two ratios τ=4 and σ-φ=10 alternate through the chain.
 | n | 6 | Hexagonal order | 0% | EXACT |
 | sigma*tau | 48 | Oh group order | 0% | EXACT |
 
-**Grade**: Three stars -- 8/8 EXACT. Crystallographic classifications are mathematical theorems (not conventions). The 7 crystal systems, 14 Bravais lattices, 32 point groups, and 230 space groups are rigorous mathematical enumerations that precisely match n=6 expressions.
+**Grade**: Three stars -- 7/8 EXACT + 1 MISS. Crystallographic classifications are mathematical theorems (not conventions). The 7 crystal systems, 14 Bravais lattices, 32 point groups precisely match n=6 expressions. Space groups 230 has no simple n=6 mapping (prior formula was arithmetic error: yielded 376, not 230).
 
 ---
 
