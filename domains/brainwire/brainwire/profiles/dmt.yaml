@@ -1,0 +1,36 @@
+state:
+  name: "DMT Breakthrough (30mg inhaled)"
+  category: "psychedelic"
+target_vector:
+  DA: 2.2
+  eCB: 1.2
+  5HT: 4.5
+  GABA: 0.3
+  NE: 2.5
+  Theta: 4.0
+  Alpha: 0.1
+  Gamma: 3.5
+  PFC: 2.0
+  Sensory: 5.0
+  Body: 0.8
+  Coherence: 0.2
+envelope:
+  onset_s: 30
+  plateau_s: 600
+  offset_s: 300
+  curve: exponential
+pid_hints:
+  5HT:
+    Kp_scale: 2.0
+    Ki_scale: 2.0
+  Sensory:
+    Kp_scale: 1.5
+  GABA:
+    Kd_scale: 3.0
+safety_overrides:
+  max_session_min: 20
+  emergency_vars: ["GABA", "NE", "Sensory"]
+  first_session_limits:
+    Sensory: 3.0
+    5HT: 3.0
+    Gamma: 2.5

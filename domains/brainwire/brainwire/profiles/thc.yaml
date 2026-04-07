@@ -1,0 +1,30 @@
+state:
+  name: "THC Strong (25%)"
+  category: "cannabinoid"
+target_vector:
+  DA: 2.5
+  eCB: 3.0
+  5HT: 1.5
+  GABA: 1.8
+  NE: 0.4
+  Theta: 2.5
+  Alpha: 0.5
+  Gamma: 1.8
+  PFC: 0.5
+  Sensory: 2.0
+  Body: 2.5
+  Coherence: 2.0
+envelope:
+  onset_s: 300
+  plateau_s: 3600
+  offset_s: 180
+  curve: sigmoid
+pid_hints:
+  eCB:
+    Kp_scale: 1.5
+    Ki_scale: 2.0
+  Theta:
+    Kd_scale: 0.5
+safety_overrides:
+  max_session_min: 60
+  emergency_vars: ["NE"]

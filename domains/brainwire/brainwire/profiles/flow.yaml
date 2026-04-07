@@ -1,0 +1,29 @@
+state:
+  name: "Flow State"
+  category: "endogenous"
+target_vector:
+  DA: 1.8
+  eCB: 2.0
+  5HT: 1.3
+  GABA: 1.5
+  NE: 1.2
+  Theta: 2.0
+  Alpha: 1.5
+  Gamma: 2.0
+  PFC: 0.7
+  Sensory: 1.5
+  Body: 1.8
+  Coherence: 2.5
+envelope:
+  onset_s: 600
+  plateau_s: 7200
+  offset_s: 300
+  curve: linear
+pid_hints:
+  Coherence:
+    Kp_scale: 1.5
+  Alpha:
+    Kp_scale: 1.2
+safety_overrides:
+  max_session_min: 90
+  emergency_vars: []

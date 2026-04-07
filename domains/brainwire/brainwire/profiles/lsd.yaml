@@ -1,0 +1,31 @@
+state:
+  name: "LSD (100ug)"
+  category: "psychedelic"
+target_vector:
+  DA: 1.8
+  eCB: 1.3
+  5HT: 3.5
+  GABA: 0.6
+  NE: 2.0
+  Theta: 3.0
+  Alpha: 0.3
+  Gamma: 2.5
+  PFC: 1.5
+  Sensory: 3.5
+  Body: 1.5
+  Coherence: 0.4
+envelope:
+  onset_s: 1800
+  plateau_s: 21600
+  offset_s: 3600
+  curve: sigmoid
+pid_hints:
+  5HT:
+    Kp_scale: 1.8
+    Ki_scale: 1.5
+  Coherence:
+    Kp_scale: 0.5
+    Kd_scale: 2.0
+safety_overrides:
+  max_session_min: 40
+  emergency_vars: ["GABA", "NE"]
