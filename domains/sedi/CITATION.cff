@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "SEDI: Search for Extra-Dimensional Intelligence"
+abstract: >-
+  Systematic analysis of particle physics data using the arithmetic
+  of perfect number 6 (TECS-L framework). Fisher-combined 5.26 sigma
+  significance from independent findings including QCD resonance ladder,
+  Higgs decay branching ratios, and quark-lepton mass bridge. Includes
+  29 testable predictions for LHC, LiteBIRD, and Hyper-Kamiokande.
+authors:
+  - name: "need-singularity"
+    affiliation: "Independent Researcher"
+    email: "nerve011235@gmail.com"
+doi: "10.5281/zenodo.19239580"
+repository-code: "https://github.com/need-singularity/sedi"
+url: "https://github.com/need-singularity/TECS-L"
+license: MIT
+keywords:
+  - particle physics
+  - number theory
+  - perfect numbers
+  - Standard Model
+  - signal detection
+  - Monte Carlo
+  - QCD resonances
+  - Higgs boson
+  - divisor functions
+  - TECS-L
+date-released: "2026-03-27"

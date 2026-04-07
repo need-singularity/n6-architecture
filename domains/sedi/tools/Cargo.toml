@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "discovery-engine",
+    "formula-miner",
+    "graph-builder",
+    "signal-analyzer",
+]
+resolver = "2"

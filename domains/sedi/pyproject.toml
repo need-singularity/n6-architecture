@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "sedi"
+version = "0.1.0"
+description = "Search for Extra-Dimensional Intelligence — R-spectrum signal receiver tuned to n=6"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+ligo = ["h5py"]
+all = ["h5py", "gudhi", "scipy"]
+
+[project.scripts]
+sedi = "sedi.cli:main"

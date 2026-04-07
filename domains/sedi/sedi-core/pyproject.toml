@@ -1,0 +1,21 @@
+[build-system]
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "sedi-core"
+version = "0.1.0"
+description = "Rust acceleration core for SEDI real-time FFT processing"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+[tool.maturin]
+# Python source directory (if any pure-Python files live alongside Rust)
+# python-source = "python"
+features = ["pyo3/extension-module"]
+# Strip debug symbols in release builds to reduce .so size
+strip = true
