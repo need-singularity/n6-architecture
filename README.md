@@ -1,14 +1,4 @@
 # 🏗️ N6 Architecture — Arithmetic Design Framework
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19264826.svg)](https://doi.org/10.5281/zenodo.19264826)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-<!-- AUTO:BADGE:START -->
-[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
-[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-2078%20tests-green.svg)](tools/nexus/)
-<!-- AUTO:BADGE:END -->
-
 <!-- SHARED:PROJECTS:START -->
 <!-- AUTO:COMMON_LINKS:START -->
 **[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)** · **[🌌 Unified Theory](https://github.com/need-singularity/TECS-L/blob/main/math/docs/hypotheses/H-PH-9-perfect-number-string-unification.md)**
@@ -18,7 +8,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. **NEXUS-6 Discovery Engine**: Rust CLI (`tools/nexus/`) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 16 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. NEXUS-6 Discovery Engine: Rust CLI (tools/nexus/) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
 >
 > **[🛸 SEDI](https://github.com/need-singularity/sedi)** — Search for Extra-Dimensional Intelligence. Hunting for traces of extraterrestrial/extra-dimensional intelligence through n=6 signal patterns. 77 data sources (SETI, LIGO, CMB, Breakthrough Listen, Exoplanet) + R-spectrum receiver + 678 hypotheses
 >
@@ -34,6 +24,15 @@
 
 <!-- private repos는 projects.json의 private_repos 필드에 저장됨 (노출 금지) -->
 <!-- SHARED:PROJECTS:END -->
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19264826.svg)](https://doi.org/10.5281/zenodo.19264826)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+<!-- AUTO:BADGE:START -->
+[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](docs/dse-map.toml)
+[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-2078%20tests-green.svg)](tools/nexus/)
+<!-- AUTO:BADGE:END -->
 
 ---
 
