@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>n=6 Reality Map 3D v5.0</title>
+<title>n=6 Reality Map 3D v6.0 — WebGL</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #0a0a1a; color: #eee; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
@@ -40,7 +40,6 @@ body { background: #0a0a1a; color: #eee; font-family: 'Segoe UI', sans-serif; ov
   border: 1px solid #334; border-radius: 8px; padding: 10px 14px;
   font-size: 12px; z-index: 100; line-height: 1.6;
 }
-canvas { display: block; }
 #search-bar {
   position: fixed; top: 12px; right: 12px;
   background: rgba(10,10,30,0.92); border: 1px solid #334; border-radius: 8px;
@@ -57,6 +56,7 @@ canvas { display: block; }
   color: #eee; padding: 4px 6px; font-size: 12px; outline: none;
 }
 #search-bar select option { background: #1a1a2e; }
+#webgl-canvas { display: block; position: fixed; top: 0; left: 0; }
 </style>
 </head>
 <body>
@@ -81,7 +81,7 @@ canvas { display: block; }
   <span class="dot" style="background:#42a5f5"></span>L4 Genetic
   <span class="dot" style="background:#ab47bc;margin-left:8px"></span>L5 Material/Bio<br>
   <span class="dot" style="background:#ffd700;margin-left:8px"></span><b style="color:#ffd700">CHAIN</b> (인과 사슬)<br>
-  <span style="display:inline-block;width:20px;height:2px;background:#ffd700;margin-right:6px;border-top:2px dashed #ffd700"></span><b style="color:#ffd700">→</b> (인과 엣지)<br>
+  <span style="display:inline-block;width:20px;height:2px;background:#ffd700;margin-right:6px;border-top:2px dashed #ffd700"></span><b style="color:#ffd700">&rarr;</b> (인과 엣지)<br>
   <br><b>Causal Type</b><br>
   <span style="color:#4fc3f7">STRUCTURAL</span> (수학/군론 증명)&nbsp;
   <span style="color:#66bb6a">CAUSAL</span> (물리 유도)<br>
@@ -116,425 +116,574 @@ canvas { display: block; }
   </select>
 </div>
 
-<canvas id="c"></canvas>
+<!-- Three.js CDN (r175, ES module) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+  }
+}
+</script>
 
-<script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ── 데이터 로드 ──
 fetch("reality_map.json")
   .then(r => r.json())
   .then(DATA => { initApp(DATA); })
-  .catch(e => { document.body.innerHTML = '<h1 style=\"color:#ef5350;padding:40px\">reality_map.json 로드 실패: ' + e.message + '</h1>'; });
+  .catch(e => {
+    document.body.innerHTML =
+      '<h1 style="color:#ef5350;padding:40px">reality_map.json 로드 실패: ' + e.message + '</h1>';
+  });
 
 function initApp(DATA) {
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-const tooltip = document.getElementById('tooltip');
 
-let W, H;
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-// Search/filter event listeners
-['search-input', 'filter-grade', 'filter-origin'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => { /* redraw on next frame */ });
-  document.getElementById(id).addEventListener('change', () => { /* redraw on next frame */ });
-});
-
-// Stats (computed from nodes)
-const STATS = { total: 0, exact: 0, close: 0, miss: 0 };
-DATA.nodes.forEach(n => {
-  STATS.total++;
-  if (n.grade === 'EXACT') STATS.exact++;
-  else if (n.grade === 'CLOSE') STATS.close++;
-  else if (n.grade === 'MISS') STATS.miss++;
-});
-document.getElementById('s-total').textContent = STATS.total;
-document.getElementById('s-exact').textContent = STATS.exact;
-document.getElementById('s-close').textContent = STATS.close;
-document.getElementById('s-miss').textContent = STATS.miss;
-document.getElementById('s-pct').textContent = ((STATS.exact / STATS.total) * 100).toFixed(1);
-
-// Colors
-const LEVEL_COLORS = {
-  'L0_particle': '#ef5350',
-  'L1_atom': '#ff9800',
-  'L2_bond': '#ffee58',
-  'L3_molecule': '#66bb6a',
-  'L4_genetic': '#42a5f5',
-  'L5_material': '#ab47bc',
-  'L5_bio': '#ce93d8'
-};
-
-const THREAD_COLORS = {
-  'n': '#4fc3f7',
-  'sigma': '#ff7043',
-  'tau': '#66bb6a',
-  'phi': '#ffd54f',
-  'mu': '#e0e0e0',
-  'sopfr': '#ba68c8',
-  'J2': '#ff8a65',
-  'n_over_phi': '#4dd0e1',
-  'sigma_minus_tau': '#aed581',
-  'sigma_minus_phi': '#e6ee9c',
-  'sigma_minus_mu': '#c5e1a5',
-  'mixed': '#90a4ae',
-  'none': '#616161'
-};
-
-const GRADE_ALPHA = { 'EXACT': 1.0, 'CLOSE': 0.8, 'MISS': 0.5 };
-
-// Causal type colors (for tooltip badge)
-const CAUSAL_COLORS = {
-  'STRUCTURAL': '#4fc3f7',
-  'CAUSAL': '#66bb6a',
-  'EMPIRICAL': '#ffd54f',
-  'CONVENTION': '#b0bec5'
-};
-
-// Chain node gold color
-const CHAIN_COLOR = '#ffd700';
-
-// Filter out comment nodes + add isChain flag
-DATA.nodes = DATA.nodes.filter(n => n.id);
-DATA.nodes.forEach(n => { n.isChain = !!(n.children && n.children.length > 0); });
-
-// Node lookup
-const nodeById = {};
-DATA.nodes.forEach(n => { nodeById[n.id] = n; });
-
-// Auto-layout: level → X, thread → Y, domain index → Z
-const LEVEL_ORDER = ['L0_particle','L1_atom','L2_bond','L3_molecule','L4_genetic','L5_material','L5_bio'];
-const THREAD_ORDER = ['n','sigma','tau','phi','mu','sopfr','J2','n_over_phi','sigma_minus_tau','sigma_minus_phi','sigma_minus_mu','mixed','none'];
-const SCALE_X = 120;
-const SCALE_Y = 60;
-const SCALE_Z = 40;
-
-// Count per (level, thread) for Z offset
-const posCounter = {};
-DATA.nodes.forEach(n => {
-  let lx = LEVEL_ORDER.indexOf(n.level);
-  if (lx < 0) lx = LEVEL_ORDER.length;
-  let ty = THREAD_ORDER.indexOf(n.thread);
-  if (ty < 0) ty = THREAD_ORDER.length;
-  let key = lx + ',' + ty;
-  if (!posCounter[key]) posCounter[key] = 0;
-  let zi = posCounter[key]++;
-  n.px = (lx - 3) * SCALE_X;
-  n.py = (ty - 6) * SCALE_Y;
-  n.pz = (zi - 3) * SCALE_Z;
-});
-
-// Build edges from children/siblings
-DATA.thread_edges = DATA.thread_edges || [];
-DATA.parent_edges = DATA.parent_edges || [];
-DATA.sibling_edges = DATA.sibling_edges || [];
-
-DATA.nodes.forEach(n => {
-  if (n.children) n.children.forEach(cid => {
-    if (nodeById[cid]) DATA.parent_edges.push([n.id, cid]);
-  });
-  if (n.siblings) n.siblings.forEach(sid => {
-    if (nodeById[sid]) DATA.sibling_edges.push([n.id, sid]);
-  });
-});
-
-// Camera
-let rotX = -0.3;
-let rotY = 0.5;
-let zoom = 1.0;
-let panX = 0, panY = 0;
-
-// Projection
-function project(px, py, pz) {
-  // Rotate Y
-  let x1 = px * Math.cos(rotY) - pz * Math.sin(rotY);
-  let z1 = px * Math.sin(rotY) + pz * Math.cos(rotY);
-  let y1 = py;
-  // Rotate X
-  let y2 = y1 * Math.cos(rotX) - z1 * Math.sin(rotX);
-  let z2 = y1 * Math.sin(rotX) + z1 * Math.cos(rotX);
-  let x2 = x1;
-  // Perspective
-  let d = 800;
-  let scale = d / (d + z2) * zoom;
-  return {
-    sx: W / 2 + x2 * scale + panX,
-    sy: H / 2 + y2 * scale + panY,
-    z: z2,
-    scale: scale
+  // ── 상수 / 색상 맵 ──
+  const LEVEL_COLORS = {
+    'L0_particle': 0xef5350,
+    'L1_atom':     0xff9800,
+    'L2_bond':     0xffee58,
+    'L3_molecule': 0x66bb6a,
+    'L4_genetic':  0x42a5f5,
+    'L5_material': 0xab47bc,
+    'L5_bio':      0xce93d8
   };
-}
+  const THREAD_COLORS = {
+    'n': 0x4fc3f7, 'sigma': 0xff7043, 'tau': 0x66bb6a,
+    'phi': 0xffd54f, 'mu': 0xe0e0e0, 'sopfr': 0xba68c8,
+    'J2': 0xff8a65, 'n_over_phi': 0x4dd0e1,
+    'sigma_minus_tau': 0xaed581, 'sigma_minus_phi': 0xe6ee9c,
+    'sigma_minus_mu': 0xc5e1a5, 'mixed': 0x90a4ae, 'none': 0x616161
+  };
+  const CAUSAL_COLORS = {
+    'STRUCTURAL': '#4fc3f7', 'CAUSAL': '#66bb6a',
+    'EMPIRICAL': '#ffd54f', 'CONVENTION': '#b0bec5'
+  };
+  const CHAIN_COLOR = 0xffd700;
+  const GRADE_ALPHA = { 'EXACT': 1.0, 'CLOSE': 0.8, 'MISS': 0.5 };
 
-// Draw
-function draw() {
-  ctx.clearRect(0, 0, W, H);
+  const LEVEL_ORDER = ['L0_particle','L1_atom','L2_bond','L3_molecule','L4_genetic','L5_material','L5_bio'];
+  const THREAD_ORDER = ['n','sigma','tau','phi','mu','sopfr','J2','n_over_phi','sigma_minus_tau','sigma_minus_phi','sigma_minus_mu','mixed','none'];
+  const SCALE_X = 120, SCALE_Y = 60, SCALE_Z = 40;
 
-  // Draw grid lines faintly
-  ctx.globalAlpha = 0.06;
-  ctx.strokeStyle = '#4488aa';
-  ctx.lineWidth = 0.5;
+  // ── 노드 필터링 및 전처리 ──
+  DATA.nodes = DATA.nodes.filter(n => n.id);
+  DATA.nodes.forEach(n => { n.isChain = !!(n.children && n.children.length > 0); });
+  const nodeById = {};
+  DATA.nodes.forEach(n => { nodeById[n.id] = n; });
+
+  // ── 통계 (Stats) ──
+  const STATS = { total: 0, exact: 0, close: 0, miss: 0 };
+  DATA.nodes.forEach(n => {
+    STATS.total++;
+    if (n.grade === 'EXACT') STATS.exact++;
+    else if (n.grade === 'CLOSE') STATS.close++;
+    else if (n.grade === 'MISS') STATS.miss++;
+  });
+  document.getElementById('s-total').textContent = STATS.total;
+  document.getElementById('s-exact').textContent = STATS.exact;
+  document.getElementById('s-close').textContent = STATS.close;
+  document.getElementById('s-miss').textContent  = STATS.miss;
+  document.getElementById('s-pct').textContent   = ((STATS.exact / STATS.total) * 100).toFixed(1);
+
+  // ── 3D 좌표 계산 (기존 레이아웃 보존) ──
+  const posCounter = {};
+  DATA.nodes.forEach(n => {
+    let lx = LEVEL_ORDER.indexOf(n.level);
+    if (lx < 0) lx = LEVEL_ORDER.length;
+    let ty = THREAD_ORDER.indexOf(n.thread);
+    if (ty < 0) ty = THREAD_ORDER.length;
+    const key = lx + ',' + ty;
+    if (!posCounter[key]) posCounter[key] = 0;
+    const zi = posCounter[key]++;
+    n.px = (lx - 3) * SCALE_X;
+    n.py = (ty - 6) * SCALE_Y;
+    n.pz = (zi - 3) * SCALE_Z;
+  });
+
+  // ── 엣지 데이터 구축 ──
+  DATA.thread_edges  = DATA.thread_edges  || [];
+  DATA.parent_edges  = DATA.parent_edges  || [];
+  DATA.sibling_edges = DATA.sibling_edges || [];
+  DATA.nodes.forEach(n => {
+    if (n.children) n.children.forEach(cid => {
+      if (nodeById[cid]) DATA.parent_edges.push([n.id, cid]);
+    });
+    if (n.siblings) n.siblings.forEach(sid => {
+      if (nodeById[sid]) DATA.sibling_edges.push([n.id, sid]);
+    });
+  });
+
+  // ══════════════════════════════════════════════════════
+  // Three.js 씬 초기화
+  // ══════════════════════════════════════════════════════
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x0a0a1a, 1);
+  renderer.domElement.id = 'webgl-canvas';
+  document.body.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 10000);
+  camera.position.set(300, 250, 500);
+
+  // ── OrbitControls (마우스 회전/줌/패닝) ──
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.minDistance = 50;
+  controls.maxDistance = 3000;
+  controls.target.set(0, 0, 0);
+
+  // ── 조명 (은은한 환경광 + 포인트) ──
+  scene.add(new THREE.AmbientLight(0x667788, 0.6));
+  const pointLight = new THREE.PointLight(0xffffff, 1.0, 2000);
+  pointLight.position.set(200, 300, 400);
+  scene.add(pointLight);
+
+  // ══════════════════════════════════════════════════════
+  // InstancedMesh 기반 노드 렌더링 (1000+ 성능 보장)
+  // ══════════════════════════════════════════════════════
+  const nodeCount = DATA.nodes.length;
+  const sphereGeo = new THREE.SphereGeometry(1, 16, 12);
+
+  // 메인 노드 InstancedMesh
+  const nodeMat = new THREE.MeshPhongMaterial({
+    vertexColors: false,
+    transparent: true,
+    depthWrite: true
+  });
+  // 개별 색상 + 크기를 위해 커스텀 InstancedMesh 생성
+  const nodeMesh = new THREE.InstancedMesh(sphereGeo, nodeMat, nodeCount);
+  nodeMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+
+  // 인스턴스별 색상 속성
+  const instanceColors = new Float32Array(nodeCount * 3);
+  const instanceAlphas = new Float32Array(nodeCount); // 개별 투명도 관리용
+
+  const dummy = new THREE.Object3D();
+  const tempColor = new THREE.Color();
+  const nodeRadii = new Float32Array(nodeCount); // 레이캐스트용 반지름 기록
+
+  // ── 글로우 스프라이트 텍스처 생성 (EXACT/CHAIN 노드용) ──
+  function createGlowTexture(size) {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const center = size / 2;
+    const grad = ctx.createRadialGradient(center, center, 0, center, center, center);
+    grad.addColorStop(0, 'rgba(255,255,255,0.6)');
+    grad.addColorStop(0.3, 'rgba(255,255,255,0.2)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(canvas);
+  }
+  const glowTexture = createGlowTexture(128);
+
+  // ── 글로우 스프라이트 그룹 ──
+  const glowGroup = new THREE.Group();
+  scene.add(glowGroup);
+
+  // ── 노드 배치 + 색상/크기 설정 ──
+  // 필터 상태 저장 (가시성 제어)
+  const nodeVisible = new Uint8Array(nodeCount).fill(1);
+  // 노드 인덱스 ↔ 데이터 매핑
+  const nodeIndexMap = []; // index → node data
+
+  function updateNodes() {
+    const searchVal = (document.getElementById('search-input').value || '').toLowerCase();
+    const gradeFilter = document.getElementById('filter-grade').value;
+    const originFilter = document.getElementById('filter-origin').value;
+
+    // 글로우 스프라이트 초기화
+    while (glowGroup.children.length > 0) {
+      const child = glowGroup.children[0];
+      child.material.dispose();
+      glowGroup.remove(child);
+    }
+
+    for (let i = 0; i < nodeCount; i++) {
+      const n = DATA.nodes[i];
+      nodeIndexMap[i] = n;
+
+      // 필터 적용
+      let visible = true;
+      if (searchVal && !n.id.toLowerCase().includes(searchVal) && !(n.claim || '').toLowerCase().includes(searchVal)) visible = false;
+      if (gradeFilter && n.grade !== gradeFilter) visible = false;
+      if (originFilter && n.origin !== originFilter) visible = false;
+      nodeVisible[i] = visible ? 1 : 0;
+
+      // 색상 결정
+      const hexColor = n.isChain ? CHAIN_COLOR : (LEVEL_COLORS[n.level] || 0x888888);
+      tempColor.setHex(hexColor);
+      instanceColors[i * 3]     = tempColor.r;
+      instanceColors[i * 3 + 1] = tempColor.g;
+      instanceColors[i * 3 + 2] = tempColor.b;
+      instanceAlphas[i] = GRADE_ALPHA[n.grade] || 0.6;
+
+      // 크기: 기본 6, CHAIN은 8, MISS는 5
+      let radius = 6;
+      if (n.isChain) radius = 8;
+      else if (n.grade === 'MISS') radius = 5;
+      nodeRadii[i] = radius;
+
+      // 변환 행렬 설정
+      dummy.position.set(n.px, n.py, n.pz);
+      if (visible) {
+        dummy.scale.setScalar(radius);
+      } else {
+        dummy.scale.setScalar(0); // 비가시: 스케일 0
+      }
+      dummy.updateMatrix();
+      nodeMesh.setMatrixAt(i, dummy.matrix);
+
+      // 개별 인스턴스 색상
+      nodeMesh.setColorAt(i, tempColor);
+
+      // EXACT/CHAIN 노드에 글로우 스프라이트 추가
+      if (visible && (n.grade === 'EXACT' || n.isChain)) {
+        const glowColor = n.isChain ? 0xffd700 : hexColor;
+        const glowSize = n.isChain ? radius * 6 : radius * 4;
+        const spriteMat = new THREE.SpriteMaterial({
+          map: glowTexture,
+          color: glowColor,
+          transparent: true,
+          opacity: n.isChain ? 0.35 : 0.2,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.position.set(n.px, n.py, n.pz);
+        sprite.scale.setScalar(glowSize);
+        glowGroup.add(sprite);
+      }
+    }
+
+    nodeMesh.instanceMatrix.needsUpdate = true;
+    if (nodeMesh.instanceColor) nodeMesh.instanceColor.needsUpdate = true;
+  }
+
+  scene.add(nodeMesh);
+  updateNodes();
+
+  // ══════════════════════════════════════════════════════
+  // LineSegments 기반 엣지 일괄 렌더링
+  // ══════════════════════════════════════════════════════
+
+  // ── 엣지 생성 헬퍼 ──
+  function createEdgeLines(edges, defaultColor, opacity, dashSize, gapSize, isIdPair) {
+    if (!edges || edges.length === 0) return null;
+    const positions = [];
+    const colors = [];
+    const tc = new THREE.Color();
+
+    edges.forEach(e => {
+      let a, b, colorHex;
+      if (isIdPair) {
+        // [fromId, toId] 또는 [fromId, toId, threadName]
+        a = nodeById[e[0]];
+        b = nodeById[e[1]];
+        colorHex = e[2] ? (THREAD_COLORS[e[2]] || defaultColor) : defaultColor;
+      } else {
+        // { from, to } 형식
+        a = nodeById[e.from];
+        b = nodeById[e.to];
+        colorHex = defaultColor;
+      }
+      if (!a || !b) return;
+      positions.push(a.px, a.py, a.pz, b.px, b.py, b.pz);
+      tc.setHex(colorHex);
+      colors.push(tc.r, tc.g, tc.b, tc.r, tc.g, tc.b);
+    });
+
+    if (positions.length === 0) return null;
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+    let mat;
+    if (dashSize > 0) {
+      mat = new THREE.LineDashedMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: opacity,
+        dashSize: dashSize,
+        gapSize: gapSize,
+        depthWrite: false
+      });
+    } else {
+      mat = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: opacity,
+        depthWrite: false
+      });
+    }
+
+    const lines = new THREE.LineSegments(geo, mat);
+    if (dashSize > 0) lines.computeLineDistances();
+    return lines;
+  }
+
+  // ── 엣지 그룹 ──
+  // 쓰레드 엣지 (가장 뒤, 투명)
+  const threadLines = createEdgeLines(DATA.thread_edges, 0x555555, 0.15, 0, 0, true);
+  if (threadLines) scene.add(threadLines);
+
+  // 부모 엣지 (흰색)
+  const parentLines = createEdgeLines(DATA.parent_edges, 0xffffff, 0.4, 0, 0, true);
+  if (parentLines) scene.add(parentLines);
+
+  // 형제 엣지 (회색, 대시)
+  const siblingLines = createEdgeLines(DATA.sibling_edges, 0x888888, 0.25, 8, 8, true);
+  if (siblingLines) scene.add(siblingLines);
+
+  // 인과 엣지 (금색, 대시) — edges 배열
+  const causalLines = createEdgeLines(DATA.edges, 0xffd700, 0.6, 12, 6, false);
+  if (causalLines) scene.add(causalLines);
+
+  // ── 인과 엣지 화살표 콘 ──
+  if (DATA.edges) {
+    const coneGeo = new THREE.ConeGeometry(3, 10, 8);
+    const coneMat = new THREE.MeshBasicMaterial({ color: 0xffd700, transparent: true, opacity: 0.7 });
+    DATA.edges.forEach(e => {
+      const a = nodeById[e.from], b = nodeById[e.to];
+      if (!a || !b) return;
+      const dir = new THREE.Vector3(b.px - a.px, b.py - a.py, b.pz - a.pz);
+      const len = dir.length();
+      if (len < 1) return;
+      dir.normalize();
+      const cone = new THREE.Mesh(coneGeo, coneMat);
+      // 화살표 위치: 목표 노드 근처
+      cone.position.set(
+        b.px - dir.x * 10,
+        b.py - dir.y * 10,
+        b.pz - dir.z * 10
+      );
+      // 콘 방향 설정
+      const up = new THREE.Vector3(0, 1, 0);
+      const quat = new THREE.Quaternion().setFromUnitVectors(up, dir);
+      cone.setRotationFromQuaternion(quat);
+      scene.add(cone);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 그리드 라인 (희미한 배경)
+  // ══════════════════════════════════════════════════════
+  const gridGroup = new THREE.Group();
+  const gridMat = new THREE.LineBasicMaterial({ color: 0x4488aa, transparent: true, opacity: 0.06, depthWrite: false });
   for (let lx = 0; lx < 7; lx++) {
     for (let ly = 0; ly < 11; ly++) {
-      let a = project((lx - 3) * SCALE_X, (ly - 5) * SCALE_Y, -3 * SCALE_Z);
-      let b = project((lx - 3) * SCALE_X, (ly - 5) * SCALE_Y, 5 * SCALE_Z);
-      ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
+      const geo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3((lx - 3) * SCALE_X, (ly - 5) * SCALE_Y, -3 * SCALE_Z),
+        new THREE.Vector3((lx - 3) * SCALE_X, (ly - 5) * SCALE_Y,  5 * SCALE_Z)
+      ]);
+      gridGroup.add(new THREE.Line(geo, gridMat));
     }
   }
-  ctx.globalAlpha = 1;
+  scene.add(gridGroup);
 
-  // Collect projected nodes
-  // Filter nodes
-  let searchVal = (document.getElementById('search-input').value || '').toLowerCase();
-  let gradeFilter = document.getElementById('filter-grade').value;
-  let originFilter = document.getElementById('filter-origin').value;
-  let filtered = DATA.nodes.filter(n => {
-    if (searchVal && !n.id.toLowerCase().includes(searchVal) && !(n.claim || '').toLowerCase().includes(searchVal)) return false;
-    if (gradeFilter && n.grade !== gradeFilter) return false;
-    if (originFilter && n.origin !== originFilter) return false;
-    return true;
-  });
-
-  let projected = filtered.map(n => {
-    let p = project(n.px, n.py, n.pz);
-    return { ...n, sx: p.sx, sy: p.sy, z: p.z, scale: p.scale };
-  });
-
-  // Sort by z (back to front)
-  projected.sort((a, b) => b.z - a.z);
-
-  // Draw thread edges first (behind everything)
-  ctx.lineWidth = 0.8;
-  (DATA.thread_edges||[]).forEach(e => {
-    let a = nodeById[e[0]], b = nodeById[e[1]];
-    if (!a || !b) return;
-    let pa = project(a.px, a.py, a.pz);
-    let pb = project(b.px, b.py, b.pz);
-    ctx.globalAlpha = 0.15;
-    ctx.strokeStyle = THREAD_COLORS[e[2]] || '#555';
-    ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
-  });
-
-  // Draw parent edges
-  ctx.lineWidth = 1.2;
-  (DATA.parent_edges||[]).forEach(e => {
-    let a = nodeById[e[0]], b = nodeById[e[1]];
-    if (!a || !b) return;
-    let pa = project(a.px, a.py, a.pz);
-    let pb = project(b.px, b.py, b.pz);
-    ctx.globalAlpha = 0.35;
-    ctx.strokeStyle = '#ffffff';
-    ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
-  });
-
-  // Draw sibling edges
-  ctx.lineWidth = 0.8;
-  (DATA.sibling_edges||[]).forEach(e => {
-    let a = nodeById[e[0]], b = nodeById[e[1]];
-    if (!a || !b) return;
-    let pa = project(a.px, a.py, a.pz);
-    let pb = project(b.px, b.py, b.pz);
-    ctx.globalAlpha = 0.2;
-    ctx.strokeStyle = '#888888';
-    ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
-    ctx.setLineDash([]);
-  });
-
-  ctx.globalAlpha = 1;
-
-  // Draw nodes
-  projected.forEach(n => {
-    let r = Math.max(3, 6 * n.scale);
-    let color = n.isChain ? CHAIN_COLOR : (LEVEL_COLORS[n.level] || '#888');
-    let alpha = GRADE_ALPHA[n.grade] || 0.6;
-
-    // Glow for CHAIN nodes (gold pulsing)
-    if (n.isChain) {
-      ctx.globalAlpha = 0.25;
-      ctx.fillStyle = CHAIN_COLOR;
-      ctx.beginPath(); ctx.arc(n.sx, n.sy, r * 3.5, 0, Math.PI * 2); ctx.fill();
-      ctx.globalAlpha = 0.4;
-      ctx.beginPath(); ctx.arc(n.sx, n.sy, r * 2, 0, Math.PI * 2); ctx.fill();
-    }
-    // Glow for EXACT
-    else if (n.grade === 'EXACT') {
-      ctx.globalAlpha = alpha * 0.2;
-      ctx.fillStyle = color;
-      ctx.beginPath(); ctx.arc(n.sx, n.sy, r * 2.5, 0, Math.PI * 2); ctx.fill();
-    }
-
-    // Node
-    ctx.globalAlpha = alpha;
+  // ══════════════════════════════════════════════════════
+  // 축 라벨 (CSS2DRenderer 대신 스프라이트 텍스트)
+  // ══════════════════════════════════════════════════════
+  function createTextSprite(text, fontSize, color) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 256; canvas.height = 64;
+    ctx.font = fontSize + 'px monospace';
     ctx.fillStyle = color;
-    ctx.beginPath(); ctx.arc(n.sx, n.sy, r, 0, Math.PI * 2); ctx.fill();
-
-    // Diamond border for CHAIN
-    if (n.isChain) {
-      ctx.strokeStyle = CHAIN_COLOR;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.arc(n.sx, n.sy, r + 2, 0, Math.PI * 2); ctx.stroke();
-    }
-    // Border for MISS
-    else if (n.grade === 'MISS') {
-      ctx.strokeStyle = '#ef5350';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.arc(n.sx, n.sy, r + 1, 0, Math.PI * 2); ctx.stroke();
-    }
-
-    // Store screen coords for hover
-    n._r = r;
-  });
-
-  // Draw causal chain edges (새로 추가)
-  if (DATA.edges) {
-    ctx.lineWidth = 1.5;
-    DATA.edges.forEach(e => {
-      let a = nodeById[e.from], b = nodeById[e.to];
-      if (!a || !b) return;
-      let pa = project(a.px, a.py, a.pz);
-      let pb = project(b.px, b.py, b.pz);
-      ctx.globalAlpha = 0.5;
-      ctx.strokeStyle = '#ffd700';
-      ctx.setLineDash([6, 3]);
-      ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
-      ctx.setLineDash([]);
-      // Arrow head
-      let angle = Math.atan2(pb.sy - pa.sy, pb.sx - pa.sx);
-      let arrowLen = 8;
-      ctx.beginPath();
-      ctx.moveTo(pb.sx, pb.sy);
-      ctx.lineTo(pb.sx - arrowLen * Math.cos(angle - 0.4), pb.sy - arrowLen * Math.sin(angle - 0.4));
-      ctx.moveTo(pb.sx, pb.sy);
-      ctx.lineTo(pb.sx - arrowLen * Math.cos(angle + 0.4), pb.sy - arrowLen * Math.sin(angle + 0.4));
-      ctx.stroke();
-    });
-    ctx.globalAlpha = 1;
+    ctx.textAlign = 'center';
+    ctx.fillText(text, 128, 40);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
+    const sprite = new THREE.Sprite(mat);
+    sprite.scale.set(80, 20, 1);
+    return sprite;
   }
-  ctx.globalAlpha = 1;
-
-  // Axis labels
-  ctx.font = '11px monospace';
-  ctx.fillStyle = '#667';
-  const levelNames = ['L0\nParticle','L1\nAtom','L2\nBond','L3\nMolecule','L4\nGenetic','L5\nMaterial','L5\nBio'];
+  const levelNames = ['L0 Particle','L1 Atom','L2 Bond','L3 Molecule','L4 Genetic','L5 Material','L5 Bio'];
   for (let i = 0; i < 7; i++) {
-    let p = project((i - 3) * SCALE_X, -6 * SCALE_Y, 0);
-    ctx.fillText(levelNames[i].replace('\\n',' '), p.sx - 20, p.sy);
+    const label = createTextSprite(levelNames[i], 18, '#667788');
+    label.position.set((i - 3) * SCALE_X, -7 * SCALE_Y, 0);
+    scene.add(label);
   }
 
-  requestAnimationFrame(draw);
-}
+  // ══════════════════════════════════════════════════════
+  // Raycaster (노드 클릭/호버 감지)
+  // ══════════════════════════════════════════════════════
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  const tooltip = document.getElementById('tooltip');
 
-draw();
+  // 레이캐스트를 위한 보이지 않는 구체 배열 (InstancedMesh raycasting 한계 보완)
+  // Three.js InstancedMesh.raycast 는 bounding sphere 기반이므로
+  // 개별 인스턴스에 대해 정밀 감지하려면 별도 처리 필요
+  // → InstancedMesh 의 raycast 를 직접 사용하되, 반지름 차이를 감안
+  raycaster.params.Points = { threshold: 10 };
 
-// Mouse interaction
-let dragging = false, lastMX, lastMY, rightDrag = false;
+  // 포인터 이동 시 노드 호버 감지
+  let hoveredIndex = -1;
+  function onPointerMove(event) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-canvas.addEventListener('mousedown', e => {
-  if (e.button === 2) { rightDrag = true; } else { dragging = true; }
-  lastMX = e.clientX; lastMY = e.clientY;
-  e.preventDefault();
-});
+    raycaster.setFromCamera(pointer, camera);
 
-canvas.addEventListener('contextmenu', e => e.preventDefault());
+    // InstancedMesh 레이캐스트
+    const intersects = raycaster.intersectObject(nodeMesh, false);
 
-window.addEventListener('mouseup', () => { dragging = false; rightDrag = false; });
+    let hit = null;
+    let hitIdx = -1;
+    if (intersects.length > 0) {
+      // 가장 가까운 가시 인스턴스 찾기
+      for (const isect of intersects) {
+        const idx = isect.instanceId;
+        if (idx !== undefined && nodeVisible[idx]) {
+          hit = nodeIndexMap[idx];
+          hitIdx = idx;
+          break;
+        }
+      }
+    }
 
-window.addEventListener('mousemove', e => {
-  if (dragging) {
-    let dx = e.clientX - lastMX, dy = e.clientY - lastMY;
-    rotY += dx * 0.005;
-    rotX += dy * 0.005;
-    lastMX = e.clientX; lastMY = e.clientY;
+    // 호버 노드가 없으면 수동 거리 체크 (정밀 폴백)
+    if (!hit) {
+      const ray = raycaster.ray;
+      let minDist = Infinity;
+      for (let i = 0; i < nodeCount; i++) {
+        if (!nodeVisible[i]) continue;
+        const n = DATA.nodes[i];
+        const pos = new THREE.Vector3(n.px, n.py, n.pz);
+        const dist = ray.distanceToPoint(pos);
+        const threshold = nodeRadii[i] * 1.5;
+        if (dist < threshold && dist < minDist) {
+          minDist = dist;
+          hit = n;
+          hitIdx = i;
+        }
+      }
+    }
+
+    hoveredIndex = hitIdx;
+
+    if (hit) {
+      const mx = event.clientX, my = event.clientY;
+      tooltip.style.display = 'block';
+      tooltip.style.left = (mx + 16) + 'px';
+      tooltip.style.top = (my - 10) + 'px';
+      if (mx + 400 > window.innerWidth) tooltip.style.left = (mx - 390) + 'px';
+      if (my + 150 > window.innerHeight) tooltip.style.top = (my - 140) + 'px';
+
+      const gradeClass = 'grade-' + hit.grade;
+      const causalColor = CAUSAL_COLORS[hit.causal] || '#888';
+      const chainTag = hit.isChain
+        ? '<span style="display:inline-block;padding:1px 8px;border-radius:3px;background:#ffd700;color:#000;font-weight:bold;font-size:11px;margin-left:6px">CHAIN</span>'
+        : '';
+      tooltip.innerHTML =
+        '<b>' + hit.claim + '</b>' +
+        '<span class="grade-tag ' + gradeClass + '">' + hit.grade + '</span>' + chainTag + '<br>' +
+        '<span style="color:#aaa">measured:</span> ' + hit.measured + '<br>' +
+        '<span style="color:#aaa">n6 expr:</span> <span style="color:#4fc3f7">' + hit.n6_expr + '</span><br>' +
+        '<span style="color:#aaa">thread:</span> ' + hit.thread +
+        ' &nbsp; <span style="color:#aaa">level:</span> ' + hit.level + '<br>' +
+        '<span style="color:#aaa">causal:</span> <span style="color:' + causalColor + ';font-weight:bold">' + (hit.causal || 'N/A') + '</span><br>' +
+        (hit.cause ? '<span style="color:#777;font-size:11px">' + hit.cause + '</span><br>' : '') +
+        '<span style="color:#888;font-size:11px">' + hit.source + '</span>' +
+        (hit.origin ? '<br><span style="color:#aaa;font-size:11px">origin:</span> <span style="color:#81d4fa">' + hit.origin + '</span>' : '') +
+        (hit.bt_refs && hit.bt_refs.length ? '<br><span style="color:#aaa;font-size:11px">BT:</span> <span style="color:#ce93d8">' + hit.bt_refs.join(", ") + '</span>' : '');
+    } else {
+      tooltip.style.display = 'none';
+    }
   }
-  if (rightDrag) {
-    panX += e.clientX - lastMX;
-    panY += e.clientY - lastMY;
-    lastMX = e.clientX; lastMY = e.clientY;
-  }
+  window.addEventListener('pointermove', onPointerMove);
 
-  // Hover detection
-  let mx = e.clientX, my = e.clientY;
-  let hit = null, minDist = Infinity;
-  DATA.nodes.forEach(n => {
-    if (!n.sx) return;
-    let p = project(n.px, n.py, n.pz);
-    let dx = p.sx - mx, dy = p.sy - my;
-    let dist = Math.sqrt(dx*dx + dy*dy);
-    let r = Math.max(3, 6 * p.scale);
-    if (dist < r + 4 && dist < minDist) { minDist = dist; hit = n; }
+  // ── 노드 클릭: source_url 열기 ──
+  window.addEventListener('click', (event) => {
+    // UI 요소 위에서 클릭 시 무시
+    if (event.target.closest('#stats, #legend, #axes-label, #search-bar, #tooltip')) return;
+
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+
+    let hit = null;
+    const intersects = raycaster.intersectObject(nodeMesh, false);
+    if (intersects.length > 0) {
+      for (const isect of intersects) {
+        const idx = isect.instanceId;
+        if (idx !== undefined && nodeVisible[idx]) {
+          hit = nodeIndexMap[idx];
+          break;
+        }
+      }
+    }
+    // 폴백: 수동 거리 체크
+    if (!hit) {
+      const ray = raycaster.ray;
+      let minDist = Infinity;
+      for (let i = 0; i < nodeCount; i++) {
+        if (!nodeVisible[i]) continue;
+        const n = DATA.nodes[i];
+        const pos = new THREE.Vector3(n.px, n.py, n.pz);
+        const dist = ray.distanceToPoint(pos);
+        const threshold = nodeRadii[i] * 1.5;
+        if (dist < threshold && dist < minDist) {
+          minDist = dist;
+          hit = n;
+        }
+      }
+    }
+    if (hit && hit.source_url) {
+      window.open(hit.source_url, '_blank');
+    }
   });
 
-  if (hit) {
-    tooltip.style.display = 'block';
-    tooltip.style.left = (mx + 16) + 'px';
-    tooltip.style.top = (my - 10) + 'px';
-    // Keep tooltip on screen
-    if (mx + 400 > W) tooltip.style.left = (mx - 390) + 'px';
-    if (my + 150 > H) tooltip.style.top = (my - 140) + 'px';
+  // ══════════════════════════════════════════════════════
+  // 필터 이벤트 리스너
+  // ══════════════════════════════════════════════════════
+  ['search-input', 'filter-grade', 'filter-origin'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', updateNodes);
+    el.addEventListener('change', updateNodes);
+  });
 
-    let gradeClass = 'grade-' + hit.grade;
-    let causalColor = CAUSAL_COLORS[hit.causal] || '#888';
-    let chainTag = hit.isChain ? '<span style="display:inline-block;padding:1px 8px;border-radius:3px;background:#ffd700;color:#000;font-weight:bold;font-size:11px;margin-left:6px">CHAIN</span>' : '';
-    tooltip.innerHTML =
-      '<b>' + hit.claim + '</b>' +
-      '<span class="grade-tag ' + gradeClass + '">' + hit.grade + '</span>' + chainTag + '<br>' +
-      '<span style="color:#aaa">measured:</span> ' + hit.measured + '<br>' +
-      '<span style="color:#aaa">n6 expr:</span> <span style="color:#4fc3f7">' + hit.n6_expr + '</span><br>' +
-      '<span style="color:#aaa">thread:</span> ' + hit.thread +
-      ' &nbsp; <span style="color:#aaa">level:</span> ' + hit.level + '<br>' +
-      '<span style="color:#aaa">causal:</span> <span style="color:' + causalColor + ';font-weight:bold">' + (hit.causal || 'N/A') + '</span><br>' +
-      (hit.cause ? '<span style="color:#777;font-size:11px">' + hit.cause + '</span><br>' : '') +
-      '<span style="color:#888;font-size:11px">' + hit.source + '</span>' +
-      (hit.origin ? '<br><span style="color:#aaa;font-size:11px">origin:</span> <span style="color:#81d4fa">' + hit.origin + '</span>' : '') +
-      (hit.bt_refs && hit.bt_refs.length ? '<br><span style="color:#aaa;font-size:11px">BT:</span> <span style="color:#ce93d8">' + hit.bt_refs.join(", ") + '</span>' : '');
-  } else {
-    tooltip.style.display = 'none';
+  // ══════════════════════════════════════════════════════
+  // 반응형 리사이즈
+  // ══════════════════════════════════════════════════════
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ══════════════════════════════════════════════════════
+  // 애니메이션 루프
+  // ══════════════════════════════════════════════════════
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // 글로우 스프라이트 맥동 효과
+    glowGroup.children.forEach((sprite, i) => {
+      const pulse = 0.9 + 0.1 * Math.sin(t * 2 + i * 0.5);
+      sprite.material.opacity = sprite.material.opacity * pulse;
+    });
+
+    controls.update();
+    renderer.render(scene, camera);
   }
-});
 
-canvas.addEventListener('wheel', e => {
-  zoom *= e.deltaY > 0 ? 0.93 : 1.07;
-  zoom = Math.max(0.2, Math.min(5, zoom));
-  e.preventDefault();
-}, { passive: false });
+  animate();
 
-// Touch support
-let lastTouchDist = 0;
-canvas.addEventListener('touchstart', e => {
-  if (e.touches.length === 1) {
-    dragging = true;
-    lastMX = e.touches[0].clientX;
-    lastMY = e.touches[0].clientY;
-  } else if (e.touches.length === 2) {
-    let dx = e.touches[0].clientX - e.touches[1].clientX;
-    let dy = e.touches[0].clientY - e.touches[1].clientY;
-    lastTouchDist = Math.sqrt(dx*dx + dy*dy);
-  }
-  e.preventDefault();
-}, { passive: false });
-
-canvas.addEventListener('touchmove', e => {
-  if (e.touches.length === 1 && dragging) {
-    let dx = e.touches[0].clientX - lastMX;
-    let dy = e.touches[0].clientY - lastMY;
-    rotY += dx * 0.005;
-    rotX += dy * 0.005;
-    lastMX = e.touches[0].clientX;
-    lastMY = e.touches[0].clientY;
-  } else if (e.touches.length === 2) {
-    let dx = e.touches[0].clientX - e.touches[1].clientX;
-    let dy = e.touches[0].clientY - e.touches[1].clientY;
-    let dist = Math.sqrt(dx*dx + dy*dy);
-    if (lastTouchDist > 0) {
-      zoom *= dist / lastTouchDist;
-      zoom = Math.max(0.2, Math.min(5, zoom));
-    }
-    lastTouchDist = dist;
-  }
-  e.preventDefault();
-}, { passive: false });
-
-canvas.addEventListener('touchend', () => { dragging = false; lastTouchDist = 0; });
-} // initApp
+} // initApp 끝
 </script>
 </body>
+</html>

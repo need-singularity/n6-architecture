@@ -1,0 +1,112 @@
+# ═══════════════════════════════════════════════════════════════
+# reality_map.json 검증 워크플로
+# - JSON 파싱 유효성
+# - 필수 필드 존재 확인
+# - EXACT 비율 계산 + 노드 수 리포트
+# ═══════════════════════════════════════════════════════════════
+name: Reality Map Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-reality-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate reality_map.json
+        run: |
+          python3 - <<'PYEOF'
+          import json, sys, os
+
+          # reality_map.json 경로 탐색 (docs/ 또는 shared/ 심링크)
+          candidates = [
+              "docs/reality_map.json",
+              "shared/reality_map.json",
+          ]
+          path = None
+          for c in candidates:
+              if os.path.isfile(c):
+                  path = c
+                  break
+
+          if path is None:
+              print("reality_map.json not found in docs/ or shared/ -- skipping")
+              sys.exit(0)
+
+          print(f"Validating: {path}")
+
+          # 1) JSON 파싱
+          try:
+              with open(path) as f:
+                  data = json.load(f)
+          except json.JSONDecodeError as e:
+              print(f"FAIL: JSON parse error -- {e}")
+              sys.exit(1)
+          print("  JSON parse: OK")
+
+          # 2) 필수 필드 확인
+          errors = []
+
+          if not isinstance(data, dict):
+              print("FAIL: root is not a JSON object")
+              sys.exit(1)
+
+          # _meta 필수
+          meta = data.get("_meta")
+          if meta is None:
+              errors.append("missing '_meta'")
+          else:
+              for field in ["description", "version", "constants"]:
+                  if field not in meta:
+                      errors.append(f"_meta missing '{field}'")
+
+          # nodes 필수
+          nodes = data.get("nodes")
+          if nodes is None:
+              errors.append("missing 'nodes' array")
+          elif not isinstance(nodes, list):
+              errors.append("'nodes' is not an array")
+
+          # edges (최소 1종)
+          edge_keys = [k for k in data.keys() if "edge" in k.lower()]
+          if not edge_keys:
+              errors.append("no edge arrays found (expected *_edges or edges)")
+
+          if errors:
+              print("FAIL: required fields missing:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+          print("  Required fields: OK")
+
+          # 3) 노드 분석 + EXACT 비율
+          total = len(nodes)
+          grades = {}
+          for node in nodes:
+              g = node.get("grade", "UNKNOWN")
+              grades[g] = grades.get(g, 0) + 1
+
+          exact = grades.get("EXACT", 0)
+          ratio = (exact / total * 100) if total > 0 else 0
+
+          print(f"\n  === Reality Map Report ===")
+          print(f"  Version:    {meta.get('version', '?')}")
+          print(f"  Total nodes: {total}")
+          print(f"  _meta.node_count: {meta.get('node_count', '?')}")
+          for g in sorted(grades.keys()):
+              pct = grades[g] / total * 100 if total > 0 else 0
+              print(f"    {g}: {grades[g]} ({pct:.1f}%)")
+          print(f"  EXACT ratio: {exact}/{total} = {ratio:.1f}%")
+
+          # 4) node_count 일관성 경고
+          declared = meta.get("node_count")
+          if declared is not None and declared != total:
+              print(f"\n  WARNING: _meta.node_count={declared} but actual nodes={total}")
+
+          print("\nPASS: reality_map.json is valid")
+          PYEOF

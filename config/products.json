@@ -2297,15 +2297,49 @@
           "name": "HEXA-NANOBOT 치료 나노봇",
           "ufo": 7,
           "ceiling": false,
-          "ver": "v1",
-          "description": "BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%), 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴",
+          "ver": "v2",
+          "description": "BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%), Mk.I~V 진화 완료, 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, DSE 7776 조합, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴",
+          "bt": [
+            "BT-404",
+            "BT-405",
+            "BT-406",
+            "BT-407",
+            "BT-408",
+            "BT-409",
+            "BT-410",
+            "BT-411",
+            "BT-412",
+            "BT-413"
+          ],
           "links": [
             {
               "label": "문서",
               "path": "docs/therapeutic-nanobot/goal.md"
+            },
+            {
+              "label": "Mk.I 현재기술",
+              "path": "docs/therapeutic-nanobot/evolution/mk-1-current.md"
+            },
+            {
+              "label": "Mk.II 근미래",
+              "path": "docs/therapeutic-nanobot/evolution/mk-2-near-term.md"
+            },
+            {
+              "label": "Mk.III 중기",
+              "path": "docs/therapeutic-nanobot/evolution/mk-3-mid-term.md"
+            },
+            {
+              "label": "Mk.IV 장기",
+              "path": "docs/therapeutic-nanobot/evolution/mk-4-long-term.md"
+            },
+            {
+              "label": "Mk.V 이론",
+              "path": "docs/therapeutic-nanobot/evolution/mk-5-theoretical.md"
             }
           ],
-          "exact": "113/122"
+          "exact": "113/122",
+          "mk_count": 5,
+          "dse_combinations": 7776
         }
       ],
       "anchor": "-최전선-대발견-rt-sc-기반-차세대-기술",
