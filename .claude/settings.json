@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/block-forbidden-ext.sh"
+            "command": ".shared/hooks/block-forbidden-ext.sh"
           }
         ]
       }
