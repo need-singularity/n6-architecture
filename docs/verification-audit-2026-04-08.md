@@ -46,7 +46,7 @@
 | docs/paper/ | 14 |
 | docs/<domain>/goal.md, hypotheses.md 등 | 약 110 |
 | docs/ai-efficiency/ BT-시리즈 | 14 |
-| docs/chip-architecture/, room-temp-sc/ 등 | 18 |
+| docs/chip-architecture/, room-temp-sc/, kolon/ 등 | 18 |
 
 ## 미달 파일
 
