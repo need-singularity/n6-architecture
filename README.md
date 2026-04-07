@@ -1,5 +1,7 @@
 # 🏗️ N6 Architecture — Arithmetic Design Framework
 
+> **[3D Reality Map](https://need-singularity.github.io/n6-architecture/)** — 247노드 바텀업 인과 매핑. 쿼크→탄소→벤젠→DNA 인과 사슬 12/12 EXACT. Monte Carlo z=3.06 (큰 수, p=0.003). n=28/496 대조 실패 → n=6 유일성.
+
 <!-- SHARED:PROJECTS:START -->
 <!-- AUTO:COMMON_LINKS:START -->
 **[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)** · **[🌌 Unified Theory](https://github.com/need-singularity/TECS-L/blob/main/math/docs/hypotheses/H-PH-9-perfect-number-string-unification.md)**
