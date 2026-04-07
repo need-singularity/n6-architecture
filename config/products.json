@@ -2,6 +2,25 @@
   "_meta": {
     "total_products": 125,
     "total_domains": 120,
+    "total_papers": 55,
+    "papers_chunk_c_2026-04-08": {
+      "count": 11,
+      "category": "인체/의료/생물",
+      "bt_range": "BT-405~416",
+      "papers": [
+        "docs/paper/n6-hexa-neuro-paper.md",
+        "docs/paper/n6-hexa-mind-paper.md",
+        "docs/paper/n6-hexa-telepathy-paper.md",
+        "docs/paper/n6-hexa-dream-paper.md",
+        "docs/paper/n6-hexa-skin-paper.md",
+        "docs/paper/n6-hexa-exo-paper.md",
+        "docs/paper/n6-hexa-limb-paper.md",
+        "docs/paper/n6-hexa-olfact-paper.md",
+        "docs/paper/n6-entomology-paper.md",
+        "docs/paper/n6-synthetic-biology-paper.md",
+        "docs/paper/n6-dolphin-bioacoustics-paper.md"
+      ]
+    },
     "last_updated": "2026-04-08",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
@@ -308,6 +327,10 @@
             {
               "label": "문서",
               "path": "docs/superpowers/specs/2026-04-02-ultimate-fusion-powerplant-design.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-fusion-powerplant-paper.md"
             }
           ],
           "verify_script": "docs/fusion/verify_alien10.py"
@@ -322,6 +345,10 @@
             {
               "label": "문서",
               "path": "docs/superpowers/specs/2026-04-02-kstar-n6-tokamak-design.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-fusion-powerplant-paper.md"
             }
           ],
           "verify_script": "docs/fusion/verify_alien10.py"
@@ -428,6 +455,10 @@
             {
               "label": "문서",
               "path": "docs/chip-architecture/ultimate-consciousness-soc.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-anima-soc-paper.md"
             }
           ],
           "verify_script": "docs/chip-architecture/verify_alien10.py"
@@ -442,6 +473,10 @@
             {
               "label": "문서",
               "path": "docs/chip-architecture/hexa-topological-performance-chip.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-topo-paper.md"
             }
           ],
           "verify_script": "docs/chip-architecture/verify_alien10.py"
@@ -456,6 +491,10 @@
             {
               "label": "문서",
               "path": "docs/chip-architecture/hexa-asic-skywater.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-asic-paper.md"
             }
           ],
           "verify_script": "docs/chip-architecture/verify_alien10.py"
@@ -754,6 +793,10 @@
             {
               "label": "문서",
               "path": "docs/smr-datacenter/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-datacenter-reactor-paper.md"
             }
           ]
         }
@@ -817,6 +860,10 @@
             {
               "label": "문서",
               "path": "docs/environmental-protection/microplastics-solution.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-microplastics-paper.md"
             }
           ],
           "verify_script": "docs/environmental-protection/verify_alien10.py"
@@ -877,6 +924,10 @@
             {
               "label": "검증",
               "path": "docs/recycling/verify_recycling_n6.py"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-recycle-paper.md"
             }
           ]
         }
@@ -924,6 +975,10 @@
             {
               "label": "문서",
               "path": "docs/material-synthesis/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-material-synthesis-paper.md"
             }
           ],
           "verify_script": "docs/material-synthesis/verify_alien10.py"
@@ -1234,6 +1289,10 @@
             {
               "label": "문서",
               "path": "docs/programming-language/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-proglang-paper.md"
             }
           ],
           "verify_script": "docs/programming-language/verify_alien10.py"
@@ -1262,6 +1321,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-macos/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-macos-paper.md"
             }
           ],
           "verify_script": "experiments/verify_hexa_macos.py"
@@ -1276,6 +1339,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-ios/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-ios-paper.md"
             }
           ],
           "verify_script": "experiments/verify_hexa_ios.py"
@@ -1290,6 +1357,10 @@
             {
               "label": "문서",
               "path": "docs/network-protocol/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-netproto-paper.md"
             }
           ]
         }
@@ -1336,6 +1407,10 @@
             {
               "label": "문서",
               "path": "docs/display/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-display-8stack-paper.md"
             }
           ],
           "verify_script": "docs/display/verify_alien10.py"
@@ -1423,6 +1498,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-speak/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-speak-paper.md"
             }
           ],
           "verify_script": "docs/hexa-speak/verify_alien10.py"
@@ -1491,6 +1570,10 @@
             {
               "label": "문서",
               "path": "docs/safety/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-ultimate-safety-paper.md"
             }
           ],
           "verify_script": "docs/safety/verify_alien10.py"
@@ -1551,6 +1634,10 @@
             {
               "label": "문서",
               "path": "docs/fun-car/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-fun-car-paper.md"
             }
           ],
           "verify_script": "docs/fun-car/verify_alien10.py"
@@ -1565,6 +1652,10 @@
             {
               "label": "문서",
               "path": "docs/motorcycle/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-motorcycle-paper.md"
             }
           ],
           "verify_script": "docs/motorcycle/verify_alien10.py"
@@ -1613,6 +1704,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-starship/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-starship-paper.md"
             }
           ],
           "verify_script": "docs/hexa-starship/verify_hexa_starship.py"
@@ -1659,6 +1754,10 @@
             {
               "label": "문서",
               "path": "docs/sf/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-sf-paper.md"
             }
           ]
         }
@@ -1736,6 +1835,10 @@
             {
               "label": "문서",
               "path": "docs/gravity-wave/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-grav-paper.md"
             }
           ],
           "verify_script": "docs/gravity-wave/verify_alien10.py",
@@ -1751,6 +1854,10 @@
             {
               "label": "문서",
               "path": "docs/cloak/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-cloak-paper.md"
             }
           ],
           "verify_script": "docs/cloak/verify_alien10.py",
@@ -1766,6 +1873,10 @@
             {
               "label": "문서",
               "path": "docs/earth-defense/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-defense-paper.md"
             }
           ],
           "verify_script": "docs/earth-defense/verify_alien10.py",
@@ -1781,6 +1892,10 @@
             {
               "label": "문서",
               "path": "docs/quantum-network/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-teleport-paper.md"
             }
           ],
           "verify_script": "docs/quantum-network/verify_alien10.py",
@@ -1796,6 +1911,10 @@
             {
               "label": "문서",
               "path": "docs/hover/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-hover-paper.md"
             }
           ],
           "verify_script": "docs/hover/verify_alien10.py",
@@ -1811,6 +1930,10 @@
             {
               "label": "문서",
               "path": "docs/sc-memory/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-mram-paper.md"
             }
           ],
           "verify_script": "docs/sc-memory/verify_alien10.py",
@@ -1826,6 +1949,10 @@
             {
               "label": "문서",
               "path": "docs/seabed-grid/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-seabed-grid-paper.md"
             }
           ],
           "verify_script": "docs/seabed-grid/verify_alien10.py",
@@ -1841,6 +1968,10 @@
             {
               "label": "문서",
               "path": "docs/mini-accelerator/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-accel-paper.md"
             }
           ],
           "verify_script": "docs/mini-accelerator/verify_alien10.py",
@@ -1856,6 +1987,10 @@
             {
               "label": "문서",
               "path": "docs/weather-control/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-weather-paper.md"
             }
           ],
           "verify_script": "docs/weather-control/verify_alien10.py",
@@ -1901,6 +2036,10 @@
             {
               "label": "문서",
               "path": "docs/holography/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-holo-paper.md"
             }
           ],
           "verify_script": "docs/holography/verify_alien10.py",
@@ -1931,6 +2070,10 @@
             {
               "label": "문서",
               "path": "docs/skyway/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-skyway-paper.md"
             }
           ],
           "verify_script": "docs/skyway/verify_alien10.py",
@@ -1946,6 +2089,10 @@
             {
               "label": "문서",
               "path": "docs/tsunami-shield/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-tsunami-paper.md"
             }
           ],
           "verify_script": "docs/tsunami-shield/verify_alien10.py",
@@ -1961,6 +2108,10 @@
             {
               "label": "문서",
               "path": "docs/antimatter-factory/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-antimatter-factory-paper.md"
             }
           ],
           "verify_script": "docs/antimatter-factory/verify_alien10.py",
@@ -1976,6 +2127,10 @@
             {
               "label": "문서",
               "path": "docs/cosmic-observatory/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-cosmic-paper.md"
             }
           ],
           "verify_script": "docs/cosmic-observatory/verify_alien10.py",
@@ -1991,6 +2146,10 @@
             {
               "label": "문서",
               "path": "docs/desalination/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-desal-paper.md"
             }
           ],
           "verify_script": "docs/desalination/verify_alien10.py",
@@ -2006,6 +2165,10 @@
             {
               "label": "문서",
               "path": "docs/quantum-oracle/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-oracle-paper.md"
             }
           ],
           "verify_script": "docs/quantum-oracle/verify_alien10.py",
@@ -2021,6 +2184,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-one/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-one-paper.md"
             }
           ],
           "verify_script": "docs/hexa-one/verify_alien10.py",
@@ -2036,6 +2203,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-glass/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-glass-paper.md"
             }
           ],
           "verify_script": "docs/hexa-glass/verify_alien10.py",
@@ -2051,6 +2222,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-ear/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-ear-paper.md"
             }
           ],
           "verify_script": "docs/hexa-ear/verify_alien10.py",
@@ -2111,6 +2286,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-fabric/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-fabric-paper.md"
             }
           ],
           "verify_script": "docs/hexa-fabric/verify_alien10.py",
@@ -2156,6 +2335,10 @@
             {
               "label": "문서",
               "path": "docs/hexa-empath/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-empath-paper.md"
             }
           ],
           "verify_script": "docs/hexa-empath/verify_alien10.py",
@@ -2294,6 +2477,10 @@
             {
               "label": "문서",
               "path": "docs/simulation-theory/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hexa-sim-paper.md"
             }
           ],
           "verify_script": "docs/simulation-theory/verify_alien10.py",
@@ -2362,6 +2549,10 @@
             {
               "label": "Mk.V 이론",
               "path": "docs/therapeutic-nanobot/evolution/mk-5-theoretical.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-therapeutic-nanobot-paper.md"
             }
           ],
           "verify_script": "docs/therapeutic-nanobot/verify_alien10.py",
@@ -2417,6 +2608,10 @@
             {
               "label": "가설",
               "path": "docs/religion/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-religion-mythology-paper.md"
             }
           ],
           "bt": [
@@ -2438,6 +2633,10 @@
             {
               "label": "가설",
               "path": "docs/jurisprudence/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-jurisprudence-paper.md"
             }
           ],
           "bt": [
@@ -2459,6 +2658,10 @@
             {
               "label": "가설",
               "path": "docs/writing-systems/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-writing-systems-paper.md"
             }
           ],
           "bt": [
@@ -2480,6 +2683,10 @@
             {
               "label": "가설",
               "path": "docs/archaeology/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-archaeology-paper.md"
             }
           ]
         },
@@ -2497,6 +2704,10 @@
             {
               "label": "가설",
               "path": "docs/monetary-history/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-monetary-history-paper.md"
             }
           ],
           "bt": [
@@ -2518,6 +2729,10 @@
             {
               "label": "가설",
               "path": "docs/dance-choreography/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-dance-choreography-paper.md"
             }
           ]
         },
@@ -2531,6 +2746,10 @@
             {
               "label": "가설",
               "path": "docs/horology/hypotheses.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-horology-paper.md"
             }
           ]
         }
@@ -2576,6 +2795,10 @@
             {
               "label": "문서",
               "path": "docs/fermentation/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-fermentation-paper.md"
             }
           ],
           "bt": [
@@ -2593,6 +2816,10 @@
             {
               "label": "문서",
               "path": "docs/wine-enology/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-wine-enology-paper.md"
             }
           ]
         },
@@ -2606,6 +2833,10 @@
             {
               "label": "문서",
               "path": "docs/fashion-textile/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-fashion-textile-paper.md"
             }
           ]
         },
@@ -2619,6 +2850,10 @@
             {
               "label": "문서",
               "path": "docs/aquaculture/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-aquaculture-paper.md"
             }
           ]
         },
@@ -2632,6 +2867,10 @@
             {
               "label": "문서",
               "path": "docs/insurance/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-insurance-paper.md"
             }
           ],
           "bt": [
@@ -2720,7 +2959,17 @@
         "digital-twin",
         "architecture",
         "underground-tunnel",
-        "ecommerce-fintech"
+        "ecommerce-fintech",
+        "nylon",
+        "aramid",
+        "tire-cord",
+        "epoxy",
+        "pet-film",
+        "airbag",
+        "water-treatment",
+        "pemfc",
+        "concrete",
+        "bio-pharma"
       ],
       "tools": [],
       "products": [
@@ -2734,6 +2983,10 @@
             {
               "label": "문서",
               "path": "docs/advanced-packaging/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-advanced-packaging-paper.md"
             }
           ]
         },
@@ -2764,6 +3017,10 @@
             {
               "label": "문서",
               "path": "docs/ar-vr-xr/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-ar-vr-xr-paper.md"
             }
           ],
           "bt": [
@@ -2781,6 +3038,10 @@
             {
               "label": "문서",
               "path": "docs/digital-twin/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-digital-twin-paper.md"
             }
           ],
           "bt": [
@@ -2798,6 +3059,10 @@
             {
               "label": "문서",
               "path": "docs/construction-structural/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-construction-structural-paper.md"
             }
           ],
           "bt": [
@@ -2815,6 +3080,10 @@
             {
               "label": "문서",
               "path": "docs/underground-tunnel/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-underground-tunnel-paper.md"
             }
           ],
           "bt": [
@@ -2832,11 +3101,135 @@
             {
               "label": "문서",
               "path": "docs/ecommerce-fintech/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-ecommerce-fintech-paper.md"
             }
           ]
+        },
+        {
+          "name": "나일론 6/6,6 폴리아미드",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "23/23 EXACT — n=6 폴리머, σ=12C, 원사 840d=σ(σ-φ)(σ-sopfr), 필라멘트 σ²=144f",
+          "links": [
+            {"label": "문서", "path": "docs/nylon/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_breakthrough.py",
+          "exact": "23/23"
+        },
+        {
+          "name": "아라미드 (Heracron)",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "20/20 EXACT — 28=2nd 완전수, 밀도 1.44=σ²/100, 1500d=σ·sopfr³, 분해 500°C",
+          "links": [
+            {"label": "문서", "path": "docs/aramid/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_breakthrough.py",
+          "exact": "20/20"
+        },
+        {
+          "name": "타이어코드",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "20/20 EXACT — 가황 144°C=σ², 벨트각 J₂=24°, 공기압 2^sopfr=32psi, 부품 n=6",
+          "links": [
+            {"label": "문서", "path": "docs/tire-cord/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_breakthrough.py",
+          "exact": "20/20"
+        },
+        {
+          "name": "에폭시/페놀 수지",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "20/20 EXACT — FR-4 1.6mm=φ^τ/(σ-φ), Tg=σ(σ-φ)=120°C, 탄소섬유 tow n/σ/J₂",
+          "links": [
+            {"label": "문서", "path": "docs/epoxy/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_breakthrough.py",
+          "exact": "20/20"
+        },
+        {
+          "name": "PET 광학필름",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "22/22 EXACT — 탄소 σ-φ=10, Tg=σn=72°C, IV=0.6=n/(σ-φ), 투과율 90=(σ-φ)²-(σ-φ)",
+          "links": [
+            {"label": "문서", "path": "docs/pet-film/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_breakthrough.py",
+          "exact": "22/22"
+        },
+        {
+          "name": "에어백",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "18/18 EXACT — 차량당 n=6개, 전개 30ms=σφ+n, 부피 σ·sopfr=60L, 실밀도 J₂=24",
+          "links": [
+            {"label": "문서", "path": "docs/airbag/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_breakthrough.py",
+          "exact": "18/18"
+        },
+        {
+          "name": "수처리 멤브레인",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "21/21 EXACT — CN=6 팔면체, A2O n/φ=3, BOD σ-φ=10, pH n~σ-τ",
+          "links": [
+            {"label": "문서", "path": "docs/water-treatment/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_phase2.py",
+          "exact": "21/21"
+        },
+        {
+          "name": "PEMFC 수소 연료전지",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "21/21 EXACT — 넥쏘 120kW=σ(σ-φ), 충전 700bar=(σ-sopfr)(σ-φ)², HHV=σ²-φ=142",
+          "links": [
+            {"label": "문서", "path": "docs/pemfc/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_phase2.py",
+          "exact": "21/21"
+        },
+        {
+          "name": "건설 콘크리트",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "22/22 EXACT — 양생 28일=2nd 완전수, 강도 J₂=24MPa, 피복 20/40/60=φ·τ·σ×(σ-φ)",
+          "links": [
+            {"label": "문서", "path": "docs/concrete/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_phase2.py",
+          "exact": "22/22"
+        },
+        {
+          "name": "바이오 약물전달/제약",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "25/25 EXACT — ICH 6/12/24=n/σ/J₂ 래더, 멸균 121°C=σ(σ-φ)+μ, ADME τ=4",
+          "links": [
+            {"label": "문서", "path": "docs/bio-pharma/goal.md"}
+          ],
+          "verify_script": "calc/kolon_n6_phase2.py",
+          "exact": "25/25"
         }
       ],
-      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축16/16, BT-379 디지털트윈16/16"
+      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축16/16, BT-379 디지털트윈16/16, 코오롱10도메인 222/222"
     },
     {
       "id": "virology",
