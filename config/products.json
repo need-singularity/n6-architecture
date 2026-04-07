@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "total_products": 120,
-    "total_domains": 118,
+    "total_products": 121,
+    "total_domains": 119,
     "last_updated": "2026-04-07",
     "description": "완성제품 SSOT — README 자동 생성용",
     "alien_index_order": [
@@ -1673,7 +1673,7 @@
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
-      "bt_count": 254,
+      "bt_count": 264,
       "industry_pct": 100,
       "industry_detail": "Neuralink/LIGO/LHC/HAARP 등",
       "experiment_pct": 99,
@@ -1705,7 +1705,8 @@
         "cosmic-observatory",
         "desalination",
         "quantum-oracle",
-        "simulation-theory"
+        "simulation-theory",
+        "therapeutic-nanobot"
       ],
       "tools": [],
       "products": [
@@ -2291,6 +2292,20 @@
             }
           ],
           "verify_script": "docs/cross-domain-mega/verify_alien10.py"
+        },
+        {
+          "name": "HEXA-NANOBOT 치료 나노봇",
+          "ufo": 7,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%), 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴",
+          "links": [
+            {
+              "label": "문서",
+              "path": "docs/therapeutic-nanobot/goal.md"
+            }
+          ],
+          "exact": "113/122"
         }
       ],
       "anchor": "-최전선-대발견-rt-sc-기반-차세대-기술",
