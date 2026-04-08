@@ -1,13 +1,12 @@
-// n6-discriminant — n=6 판별기 (HEXA 스켈레톤)
+// n6-discriminant — n=6 판별기 (HEXA)
 //
 // 임의 정수 n 에 대해 sigma(n)*phi(n) == n*tau(n) 성립 여부 판정.
 // n=6 유일성 정리(BT-Theorem-R1)의 빠른 브루트포스 검증 도구.
-// HEXA-FIRST 규칙(CLAUDE.md)에 따라 .hexa로 작성. 사용자 요청의 main.rs는 본 파일로 대체.
+// HEXA-FIRST 규칙(CLAUDE.md)에 따라 .hexa로 작성.
 //
-// 사용:  hexa-bin tools/n6-discriminant/main.hexa <max_n>
-// 작성: 2026-04-08 / 상태: 스켈레톤 (TODO 항목 다수)
+// 실행: hexa tools/n6-discriminant/main.hexa
 
-fn sigma(n: int) -> int {
+fn sigma(n) {
     let mut s = 0
     let mut d = 1
     while d * d <= n {
@@ -20,7 +19,7 @@ fn sigma(n: int) -> int {
     return s
 }
 
-fn tau(n: int) -> int {
+fn tau(n) {
     let mut t = 0
     let mut d = 1
     while d * d <= n {
@@ -33,7 +32,7 @@ fn tau(n: int) -> int {
     return t
 }
 
-fn phi(n: int) -> int {
+fn phi(n) {
     let mut result = n
     let mut nn = n
     let mut p = 2
@@ -48,35 +47,56 @@ fn phi(n: int) -> int {
     return result
 }
 
-fn is_n6_candidate(n: int) -> bool {
+fn is_n6_candidate(n) {
     return sigma(n) * phi(n) == n * tau(n)
 }
 
-fn main(args: list<str>) {
-    let max_n = if args.len() > 1 { parse_int(args[1]) } else { 10000 }
+let max_n = 10000
 
-    print("# n6-discriminant — sigma(n)*phi(n) == n*tau(n) brute force")
-    print("# range: 2..=" + str(max_n))
-    print("# n=6 expected unique pass (BT-Theorem-R1)")
+println("# n6-discriminant — sigma(n)*phi(n) == n*tau(n) brute force")
+println("# range: 2..=" + to_string(max_n))
+println("# n=6 expected unique pass (BT-Theorem-R1)")
 
-    let mut hits = []
-    let mut n = 2
-    while n <= max_n {
-        if is_n6_candidate(n) { hits.push(n) }
-        n = n + 1
-    }
+let mut hits = []
+let mut n = 2
+while n <= max_n {
+    if is_n6_candidate(n) { hits = hits + [n] }
+    n = n + 1
+}
 
-    print("PASS count: " + str(hits.len()))
-    for h in hits {
-        print("  n = " + str(h) + "  sigma=" + str(sigma(h)) + " phi=" + str(phi(h)) + " tau=" + str(tau(h)))
-    }
+println("PASS count: " + to_string(len(hits)))
+let mut hi = 0
+while hi < len(hits) {
+    let h = hits[hi]
+    println("  n = " + to_string(h) + "  sigma=" + to_string(sigma(h)) + " phi=" + to_string(phi(h)) + " tau=" + to_string(tau(h)))
+    hi = hi + 1
+}
 
-    // self check: n=6 정의에서 도출
-    assert sigma(6) == 12   // 1+2+3+6
-    assert phi(6) == 2      // {1,5}
-    assert tau(6) == 4      // {1,2,3,6}
-    assert is_n6_candidate(6)
-    print("self-check: n=6 PASS (sigma*phi=24, n*tau=24)")
+// self check: n=6 정의에서 도출
+let sc_sigma = sigma(6)
+let sc_phi = phi(6)
+let sc_tau = tau(6)
+let sc_pass = is_n6_candidate(6)
+
+if sc_sigma == 12 {
+    println("self-check sigma(6)=12: PASS")
+} else {
+    println("self-check sigma(6): FAIL got " + to_string(sc_sigma))
+}
+if sc_phi == 2 {
+    println("self-check phi(6)=2: PASS")
+} else {
+    println("self-check phi(6): FAIL got " + to_string(sc_phi))
+}
+if sc_tau == 4 {
+    println("self-check tau(6)=4: PASS")
+} else {
+    println("self-check tau(6): FAIL got " + to_string(sc_tau))
+}
+if sc_pass {
+    println("self-check: n=6 PASS (sigma*phi=24, n*tau=24)")
+} else {
+    println("self-check: n=6 FAIL")
 }
 
 // TODO:

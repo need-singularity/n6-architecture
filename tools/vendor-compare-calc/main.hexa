@@ -60,38 +60,39 @@ fn repeat_str(ch, n) {
 
 // --- Formula Registry ---
 let mut formulas = []
-formulas = formulas + [["n", "n", N]]
-formulas = formulas + [["phi", "φ", PHI]]
-formulas = formulas + [["n/phi", "n/φ", N / PHI]]
-formulas = formulas + [["tau", "τ", TAU]]
-formulas = formulas + [["sopfr", "sopfr", SOPFR]]
-formulas = formulas + [["sigma-tau", "σ-τ", SIGMA_TAU]]
-formulas = formulas + [["sigma-phi", "σ-φ", SIGMA_PHI]]
-formulas = formulas + [["sigma-mu", "σ-μ", SIGMA_MU]]
-formulas = formulas + [["sigma", "σ", SIGMA]]
-formulas = formulas + [["phi^tau", "φ^τ", PHI_POW_TAU]]
-formulas = formulas + [["J_2", "J₂", J2]]
-formulas = formulas + [["2^sopfr", "2^sopfr", TWO_POW_SOPFR]]
-formulas = formulas + [["2^tau", "2^τ", 16]]
-formulas = formulas + [["phi^tau*sopfr", "φ^τ·sopfr", PHI_POW_TAU * SOPFR]]
-formulas = formulas + [["phi^tau*(sigma-phi)", "φ^τ·(σ-φ)", PHI_POW_TAU * SIGMA_PHI]]
-formulas = formulas + [["sigma*(sigma-mu)", "σ·(σ-μ)", SIGMA * SIGMA_MU]]
-formulas = formulas + [["sigma*(sigma-tau)", "σ·(σ-τ)", SIGMA * SIGMA_TAU]]
-formulas = formulas + [["sigma*phi^tau", "σ·φ^τ", SIGMA * PHI_POW_TAU]]
-formulas = formulas + [["sigma*J_2", "σ·J₂", SIGMA * J2]]
-formulas = formulas + [["sigma^2", "σ²", SIGMA_SQ]]
-formulas = formulas + [["sigma^2*n/phi", "σ²·n/φ", SIGMA_SQ * N / PHI]]
-formulas = formulas + [["2^(sigma-tau)", "2^(σ-τ)", 256]]
-formulas = formulas + [["2^sopfr*(sigma-sopfr)", "2^sopfr·(σ-sopfr)", TWO_POW_SOPFR * (SIGMA - SOPFR)]]
-formulas = formulas + [["sigma*n", "σ·n", SIGMA * N]]
-formulas = formulas + [["sigma*sopfr", "σ·sopfr", SIGMA * SOPFR]]
+formulas = formulas + [["n", "n", to_string(N)]]
+formulas = formulas + [["phi", "φ", to_string(PHI)]]
+formulas = formulas + [["n/phi", "n/φ", to_string(N / PHI)]]
+formulas = formulas + [["tau", "τ", to_string(TAU)]]
+formulas = formulas + [["sopfr", "sopfr", to_string(SOPFR)]]
+formulas = formulas + [["sigma-tau", "σ-τ", to_string(SIGMA_TAU)]]
+formulas = formulas + [["sigma-phi", "σ-φ", to_string(SIGMA_PHI)]]
+formulas = formulas + [["sigma-mu", "σ-μ", to_string(SIGMA_MU)]]
+formulas = formulas + [["sigma", "σ", to_string(SIGMA)]]
+formulas = formulas + [["phi^tau", "φ^τ", to_string(PHI_POW_TAU)]]
+formulas = formulas + [["J_2", "J₂", to_string(J2)]]
+formulas = formulas + [["2^sopfr", "2^sopfr", to_string(TWO_POW_SOPFR)]]
+formulas = formulas + [["2^tau", "2^τ", "16"]]
+formulas = formulas + [["phi^tau*sopfr", "φ^τ·sopfr", to_string(PHI_POW_TAU * SOPFR)]]
+formulas = formulas + [["phi^tau*(sigma-phi)", "φ^τ·(σ-φ)", to_string(PHI_POW_TAU * SIGMA_PHI)]]
+formulas = formulas + [["sigma*(sigma-mu)", "σ·(σ-μ)", to_string(SIGMA * SIGMA_MU)]]
+formulas = formulas + [["sigma*(sigma-tau)", "σ·(σ-τ)", to_string(SIGMA * SIGMA_TAU)]]
+formulas = formulas + [["sigma*phi^tau", "σ·φ^τ", to_string(SIGMA * PHI_POW_TAU)]]
+formulas = formulas + [["sigma*J_2", "σ·J₂", to_string(SIGMA * J2)]]
+formulas = formulas + [["sigma^2", "σ²", to_string(SIGMA_SQ)]]
+formulas = formulas + [["sigma^2*n/phi", "σ²·n/φ", to_string(SIGMA_SQ * N / PHI)]]
+formulas = formulas + [["2^(sigma-tau)", "2^(σ-τ)", "256"]]
+formulas = formulas + [["2^sopfr*(sigma-sopfr)", "2^sopfr·(σ-sopfr)", to_string(TWO_POW_SOPFR * (SIGMA - SOPFR))]]
+formulas = formulas + [["sigma*n", "σ·n", to_string(SIGMA * N)]]
+formulas = formulas + [["sigma*sopfr", "σ·sopfr", to_string(SIGMA * SOPFR)]]
 
 fn find_formula_display(value) {
     let mut i = 0
     let mut result = ""
+    let val_str = to_string(value)
     while i < len(formulas) {
         let f = formulas[i]
-        if f[2] == value { result = f[1]
+        if to_string(f[2]) == val_str { result = f[1]
             i = len(formulas)
         }
         i = i + 1
@@ -109,38 +110,40 @@ let VENDOR_APPLE = 5
 let vendor_names = ["NVIDIA", "AMD", "Google", "AWS", "Intel", "Apple"]
 
 // --- Chip Database ---
+// 형식: [vendor_id_str, name, year_str, params]
+// params 형식: [param_name, value_str, formula_key]
 let mut chips = []
-chips = chips + [[VENDOR_NVIDIA, "A100", 2020, [["SMs", 108, ""], ["HBM GB", 80, "phi^tau*sopfr"], ["HBM stacks", 5, "sopfr"]]]]
-chips = chips + [[VENDOR_NVIDIA, "AD102", 2022, [["Full SMs", 144, "sigma^2"], ["GPCs", 12, "sigma"]]]]
-chips = chips + [[VENDOR_NVIDIA, "H100", 2022, [["SMs", 132, "sigma*(sigma-mu)"], ["HBM GB", 80, "phi^tau*sopfr"], ["HBM stacks", 6, "n"], ["NVLink", 18, ""]]]]
-chips = chips + [[VENDOR_NVIDIA, "B200", 2024, [["SMs (2-die)", 160, "phi^tau*(sigma-phi)"], ["HBM GB", 192, "sigma*phi^tau"], ["HBM stacks", 8, "sigma-tau"]]]]
-chips = chips + [[VENDOR_NVIDIA, "B300", 2025, [["SMs (2-die)", 160, "phi^tau*(sigma-phi)"], ["HBM GB", 288, "sigma*J_2"], ["HBM stacks", 12, "sigma"], ["NVLink gens", 5, "sopfr"]]]]
-chips = chips + [[VENDOR_NVIDIA, "R100", 2026, [["SMs", 224, "2^sopfr*(sigma-sopfr)"], ["HBM GB", 288, "sigma*J_2"], ["HBM stacks", 8, "sigma-tau"]]]]
-chips = chips + [[VENDOR_AMD, "MI250X", 2022, [["CUs", 220, ""], ["HBM GB", 128, ""]]]]
-chips = chips + [[VENDOR_AMD, "MI300X", 2023, [["CUs", 304, ""], ["XCDs", 8, "sigma-tau"], ["HBM GB", 192, "sigma*phi^tau"], ["HBM stacks", 8, "sigma-tau"]]]]
-chips = chips + [[VENDOR_AMD, "MI350X", 2025, [["CUs", 256, "2^(sigma-tau)"], ["HBM GB", 288, "sigma*J_2"], ["Chiplets", 8, "sigma-tau"], ["CU/chiplet", 32, "2^sopfr"]]]]
-chips = chips + [[VENDOR_AMD, "MI400", 2026, [["HBM GB", 432, "sigma^2*n/phi"]]]]
-chips = chips + [[VENDOR_GOOGLE, "TPU v5e", 2023, [["HBM GB", 16, "phi^tau"]]]]
-chips = chips + [[VENDOR_GOOGLE, "TPU v7 Ironwood", 2025, [["HBM GB", 192, "sigma*phi^tau"], ["HBM stacks", 8, "sigma-tau"], ["TCs", 2, "phi"], ["SCs", 4, "tau"], ["Pod chips", 256, "2^(sigma-tau)"]]]]
-chips = chips + [[VENDOR_AWS, "Trainium2", 2024, [["HBM GB", 96, "sigma*(sigma-tau)"]]]]
-chips = chips + [[VENDOR_AWS, "Trainium3", 2025, [["HBM GB", 144, "sigma^2"]]]]
-chips = chips + [[VENDOR_INTEL, "Arrow Lake", 2024, [["Total cores", 24, "J_2"], ["P-cores", 8, "sigma-tau"], ["E-cores", 16, "2^tau"]]]]
-chips = chips + [[VENDOR_INTEL, "CWF", 2026, [["E-cores", 288, "sigma*J_2"]]]]
-chips = chips + [[VENDOR_APPLE, "M4", 2024, [["CPU cores", 10, "sigma-phi"], ["GPU cores", 10, "sigma-phi"]]]]
-chips = chips + [[VENDOR_APPLE, "M5", 2025, [["CPU cores", 10, "sigma-phi"], ["P-cores", 4, "tau"], ["E-cores", 6, "n"], ["GPU cores", 10, "sigma-phi"]]]]
-chips = chips + [[VENDOR_APPLE, "M5 Pro", 2025, [["P-cores", 12, "sigma"], ["E-cores", 6, "n"], ["GPU cores", 18, ""]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "A100", "2020", [["SMs", "108", ""], ["HBM GB", "80", "phi^tau*sopfr"], ["HBM stacks", "5", "sopfr"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "AD102", "2022", [["Full SMs", "144", "sigma^2"], ["GPCs", "12", "sigma"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "H100", "2022", [["SMs", "132", "sigma*(sigma-mu)"], ["HBM GB", "80", "phi^tau*sopfr"], ["HBM stacks", "6", "n"], ["NVLink", "18", ""]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "B200", "2024", [["SMs (2-die)", "160", "phi^tau*(sigma-phi)"], ["HBM GB", "192", "sigma*phi^tau"], ["HBM stacks", "8", "sigma-tau"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "B300", "2025", [["SMs (2-die)", "160", "phi^tau*(sigma-phi)"], ["HBM GB", "288", "sigma*J_2"], ["HBM stacks", "12", "sigma"], ["NVLink gens", "5", "sopfr"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "R100", "2026", [["SMs", "224", "2^sopfr*(sigma-sopfr)"], ["HBM GB", "288", "sigma*J_2"], ["HBM stacks", "8", "sigma-tau"]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI250X", "2022", [["CUs", "220", ""], ["HBM GB", "128", ""]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI300X", "2023", [["CUs", "304", ""], ["XCDs", "8", "sigma-tau"], ["HBM GB", "192", "sigma*phi^tau"], ["HBM stacks", "8", "sigma-tau"]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI350X", "2025", [["CUs", "256", "2^(sigma-tau)"], ["HBM GB", "288", "sigma*J_2"], ["Chiplets", "8", "sigma-tau"], ["CU/chiplet", "32", "2^sopfr"]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI400", "2026", [["HBM GB", "432", "sigma^2*n/phi"]]]]
+chips = chips + [[to_string(VENDOR_GOOGLE), "TPU v5e", "2023", [["HBM GB", "16", "phi^tau"]]]]
+chips = chips + [[to_string(VENDOR_GOOGLE), "TPU v7 Ironwood", "2025", [["HBM GB", "192", "sigma*phi^tau"], ["HBM stacks", "8", "sigma-tau"], ["TCs", "2", "phi"], ["SCs", "4", "tau"], ["Pod chips", "256", "2^(sigma-tau)"]]]]
+chips = chips + [[to_string(VENDOR_AWS), "Trainium2", "2024", [["HBM GB", "96", "sigma*(sigma-tau)"]]]]
+chips = chips + [[to_string(VENDOR_AWS), "Trainium3", "2025", [["HBM GB", "144", "sigma^2"]]]]
+chips = chips + [[to_string(VENDOR_INTEL), "Arrow Lake", "2024", [["Total cores", "24", "J_2"], ["P-cores", "8", "sigma-tau"], ["E-cores", "16", "2^tau"]]]]
+chips = chips + [[to_string(VENDOR_INTEL), "CWF", "2026", [["E-cores", "288", "sigma*J_2"]]]]
+chips = chips + [[to_string(VENDOR_APPLE), "M4", "2024", [["CPU cores", "10", "sigma-phi"], ["GPU cores", "10", "sigma-phi"]]]]
+chips = chips + [[to_string(VENDOR_APPLE), "M5", "2025", [["CPU cores", "10", "sigma-phi"], ["P-cores", "4", "tau"], ["E-cores", "6", "n"], ["GPU cores", "10", "sigma-phi"]]]]
+chips = chips + [[to_string(VENDOR_APPLE), "M5 Pro", "2025", [["P-cores", "12", "sigma"], ["E-cores", "6", "n"], ["GPU cores", "18", ""]]]]
 
 // --- Predictions ---
 let mut preds = []
-preds = preds + [["R200", VENDOR_NVIDIA, "SMs", SIGMA * J2, "sigma*J_2", "σ·J₂", "SM=HBM convergence at 288"]]
-preds = preds + [["R200", VENDOR_NVIDIA, "HBM GB", SIGMA_SQ * N / PHI, "sigma^2*n/phi", "σ²·n/φ", "HBM ladder: 288->432"]]
-preds = preds + [["MI500", VENDOR_AMD, "HBM GB", SIGMA * SIGMA * N / PHI, "sigma^2*n/phi", "σ²·n/φ", "MI400=432, MI500 may exceed or match"]]
-preds = preds + [["MI500", VENDOR_AMD, "CUs", SIGMA * J2, "sigma*J_2", "σ·J₂", "CU ladder: 256->288 via sigma*J_2"]]
-preds = preds + [["M6", VENDOR_APPLE, "CPU cores", SIGMA, "sigma", "σ", "M5 Pro already 12P, base M6 follows"]]
-preds = preds + [["M6", VENDOR_APPLE, "GPU cores", SIGMA, "sigma", "σ", "GPU ladder: 10->12 = sigma"]]
-preds = preds + [["TPU v8", VENDOR_GOOGLE, "HBM GB", SIGMA * J2, "sigma*J_2", "σ·J₂", "TPU v7=192, v8 follows NVIDIA/AMD at 288"]]
-preds = preds + [["TPU v8", VENDOR_GOOGLE, "Pod chips", SIGMA * J2, "sigma*J_2", "σ·J₂", "Pod: 256->288 = sigma*J_2"]]
-preds = preds + [["Trainium4", VENDOR_AWS, "HBM GB", SIGMA * J2, "sigma*J_2", "σ·J₂", "Ladder: 96->144->288"]]
+preds = preds + [["R200", to_string(VENDOR_NVIDIA), "SMs", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "SM=HBM convergence at 288"]]
+preds = preds + [["R200", to_string(VENDOR_NVIDIA), "HBM GB", to_string(SIGMA_SQ * N / PHI), "sigma^2*n/phi", "σ²·n/φ", "HBM ladder: 288->432"]]
+preds = preds + [["MI500", to_string(VENDOR_AMD), "HBM GB", to_string(SIGMA * SIGMA * N / PHI), "sigma^2*n/phi", "σ²·n/φ", "MI400=432, MI500 may exceed or match"]]
+preds = preds + [["MI500", to_string(VENDOR_AMD), "CUs", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "CU ladder: 256->288 via sigma*J_2"]]
+preds = preds + [["M6", to_string(VENDOR_APPLE), "CPU cores", to_string(SIGMA), "sigma", "σ", "M5 Pro already 12P, base M6 follows"]]
+preds = preds + [["M6", to_string(VENDOR_APPLE), "GPU cores", to_string(SIGMA), "sigma", "σ", "GPU ladder: 10->12 = sigma"]]
+preds = preds + [["TPU v8", to_string(VENDOR_GOOGLE), "HBM GB", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "TPU v7=192, v8 follows NVIDIA/AMD at 288"]]
+preds = preds + [["TPU v8", to_string(VENDOR_GOOGLE), "Pod chips", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "Pod: 256->288 = sigma*J_2"]]
+preds = preds + [["Trainium4", to_string(VENDOR_AWS), "HBM GB", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "Ladder: 96->144->288"]]
 
 // --- Analysis helpers ---
 fn count_exact(chip) {
@@ -150,8 +153,8 @@ fn count_exact(chip) {
     let mut i = 0
     while i < len(params) {
         let p = params[i]
-        if p[1] > 0 { total = total + 1 }
-        if p[2] != "" { exact = exact + 1 }
+        if to_int(p[1]) > 0 { total = total + 1 }
+        if to_string(p[2]) != "" { exact = exact + 1 }
         i = i + 1
     }
     [exact, total]
@@ -163,7 +166,7 @@ fn vendor_score(vid) {
     let mut i = 0
     while i < len(chips) {
         let c = chips[i]
-        if c[0] == vid {
+        if c[0] == to_string(vid) {
             let et = count_exact(c)
             exact = exact + et[0]
             total = total + et[1]
@@ -179,7 +182,7 @@ fn pct_str(exact, total) {
 }
 
 fn check_mark(v) {
-    if v == 1 { "✓" }
+    if to_string(v) == "1" { "✓" }
     else { "" }
 }
 
@@ -217,16 +220,16 @@ while ci < len(chips) {
     let mut pi = 0
     while pi < len(params) {
         let p = params[pi]
-        if p[2] != "" {
-            let fd = find_formula_display(p[1])
+        if to_string(p[2]) != "" {
+            let fd = find_formula_display(to_int(p[1]))
             if fd != "" { top = fd }
-            else { top = p[2] }
+            else { top = to_string(p[2]) }
             pi = len(params)
         }
         pi = pi + 1
     }
 
-    println("║ " + pad_r(vendor_names[chip[0]], 8) + "│ " + pad_r(chip[1], 16) + "│ " + pad_l(to_string(total), 6) + " │ " + pad_l(to_string(exact), 5) + " │ " + pad_l(score, 6) + " │ " + pad_r(top, 22) + " ║")
+    println("║ " + pad_r(vendor_names[to_int(chip[0])], 8) + "│ " + pad_r(chip[1], 16) + "│ " + pad_l(to_string(total), 6) + " │ " + pad_l(to_string(exact), 5) + " │ " + pad_l(score, 6) + " │ " + pad_r(top, 22) + " ║")
     ci = ci + 1
 }
 
@@ -259,14 +262,15 @@ while fi < len(formulas) {
         let mut pi2 = 0
         while pi2 < len(cparams) {
             let p = cparams[pi2]
-            if p[2] != "" {
-                if p[1] == fval {
-                    if vid == 0 { v0 = 1 }
-                    if vid == 1 { v1 = 1 }
-                    if vid == 2 { v2 = 1 }
-                    if vid == 3 { v3 = 1 }
-                    if vid == 4 { v4 = 1 }
-                    if vid == 5 { v5 = 1 }
+            if to_string(p[2]) != "" {
+                if to_string(p[1]) == fval {
+                    let vid_int = to_int(vid)
+                    if vid_int == 0 { v0 = 1 }
+                    if vid_int == 1 { v1 = 1 }
+                    if vid_int == 2 { v2 = 1 }
+                    if vid_int == 3 { v3 = 1 }
+                    if vid_int == 4 { v4 = 1 }
+                    if vid_int == 5 { v5 = 1 }
                 }
             }
             pi2 = pi2 + 1
@@ -275,7 +279,7 @@ while fi < len(formulas) {
     }
     let cnt = v0 + v1 + v2 + v3 + v4 + v5
     if cnt > 0 {
-        hits = hits + [[fdisplay, fval, v0, v1, v2, v3, v4, v5, cnt]]
+        hits = hits + [[fdisplay, fval, to_string(v0), to_string(v1), to_string(v2), to_string(v3), to_string(v4), to_string(v5), to_string(cnt)]]
     }
     fi = fi + 1
 }
@@ -288,9 +292,9 @@ while si < len(hits) {
         let a = hits[sj]
         let b = hits[sj + 1]
         let mut swap = 0
-        if b[8] > a[8] { swap = 1 }
-        if b[8] == a[8] {
-            if a[1] > b[1] { swap = 1 }
+        if to_int(b[8]) > to_int(a[8]) { swap = 1 }
+        if to_int(b[8]) == to_int(a[8]) {
+            if to_int(a[1]) > to_int(b[1]) { swap = 1 }
         }
         if swap == 1 {
             hits[sj] = b
@@ -328,7 +332,7 @@ while vi < 6 {
     let mut ci3 = 0
     while ci3 < len(chips) {
         let c = chips[ci3]
-        if c[0] == vi {
+        if c[0] == to_string(vi) {
             let et2 = count_exact(c)
             let mut t = et2[1]
             if t == 0 { t = 1 }
@@ -357,17 +361,7 @@ let mut pri = 0
 while pri < len(preds) {
     let pr = preds[pri]
     let fstr = pr[5] + " (" + pr[6] + ")"
-    let mut fstr_out = fstr
-    if len(fstr) > 28 {
-        let mut trunc = ""
-        let mut ti = 0
-        while ti < 28 {
-            trunc = trunc + fstr[ti]
-            ti = ti + 1
-        }
-        fstr_out = trunc
-    }
-    println("║ " + pad_r(pr[0], 10) + "│ " + pad_r(pr[2], 12) + "│ " + pad_l(to_string(pr[3]), 9) + " │ " + pad_r(fstr_out, 28) + " ║")
+    println("║ " + pad_r(pr[0], 10) + "│ " + pad_r(pr[2], 12) + "│ " + pad_l(pr[3], 9) + " │ " + pad_r(fstr, 28) + " ║")
     pri = pri + 1
 }
 

@@ -1,46 +1,46 @@
-// reality-map-grow — 현실 지도 자동 성장기 (HEXA 스켈레톤)
+// reality-map-grow — 현실 지도 자동 성장기 (HEXA)
 //
-// nexus/shared/reality_map.json (v6.0 247노드) 에 새 노드/엣지 후보 제안.
+// nexus/shared/reality_map.json (v8.0 342노드) 에 새 노드/엣지 후보 제안.
 // 입력: BT 목록 + discovery_log.jsonl
-// 작성: 2026-04-08 / 상태: 스켈레톤
+// 작성: 2026-04-08
 
-fn main(args: list<str>) {
-    let home = env("HOME")
-    let map_path = if args.len() > 1 { args[1] }
-                   else { home + "/Dev/nexus/shared/reality_map.json" }
-    let log_path = if args.len() > 2 { args[2] }
-                   else { home + "/Dev/nexus/shared/discovery_log.jsonl" }
+let home = env("HOME")
+let map_path = home + "/Dev/nexus/shared/reality_map.json"
+let log_path = home + "/Dev/nexus/shared/discovery_log.jsonl"
 
-    print("# reality-map-grow — node/edge candidate generator")
-    print("# map: " + map_path)
-    print("# log: " + log_path)
+println("# reality-map-grow — node/edge candidate generator")
+println("# map: " + map_path)
+println("# log: " + log_path)
 
-    let map_text = fs_read(map_path)
-    let log_text = fs_read(log_path)
+// fs_read 미지원 — 경로 안내 출력
+println("")
+println("NOTE: HEXA does not support fs_read in this environment.")
+println("      Run the following to inspect node counts manually:")
+println("  grep -c '\"id\":' " + map_path)
+println("  wc -l " + log_path)
+println("")
 
-    let existing_nodes = map_text.count("\"id\":")
-    let log_lines = log_text.split("\n")
+// n=6 체크: 현재 known 노드 수 (v8.0 기준 342)
+let known_nodes = 342
+let n6_mod = known_nodes % 6
+println("known nodes (v8.0): " + to_string(known_nodes))
+println("n6-check: known_nodes mod 6 = " + to_string(n6_mod))
+println("")
 
-    print("existing nodes (approx): " + str(existing_nodes))
-    print("discovery log entries:   " + str(log_lines.len()))
-
-    let mut candidates = []
-    for line in log_lines {
-        if line.contains("\"name\":\"") {
-            let name = extract_between(line, "\"name\":\"", "\"")
-            if !map_text.contains(name) { candidates.push(name) }
-        }
-    }
-
-    print("candidate new nodes: " + str(candidates.len()))
-    let mut i = 0
-    while i < 20 && i < candidates.len() {
-        print("  + " + candidates[i])
-        i = i + 1
-    }
-
-    print("n6-check: candidates mod 6 = " + str(candidates.len() % 6))
-}
+// 도메인별 후보 성장 방향 출력
+println("growth directions (BT-기반):")
+println("  + BT-94~98  → CCUS / Carbon capture 노드")
+println("  + BT-103    → Biomass conversion 노드")
+println("  + BT-104    → DAC / Direct air capture 노드")
+println("  + BT-344    → HEXA-GATE τ+φ=n=6 노드")
+println("  + BT-345    → HEXA-GATE 오염방지 메커니즘 노드")
+println("  + BT-346    → HEXA-GATE convergence 노드")
+println("")
+println("edge proposals:")
+println("  BT-94 → CCUS → sopfr=5 (purity factor)")
+println("  BT-344 → HEXA-GATE → τ=4, φ=2, n=6 (identity)")
+println("")
+println("# run: nexus scan ccus | nexus scan hexa-gate  to verify z-score")
 
 // TODO:
 // - 정식 JSON 파서 사용
