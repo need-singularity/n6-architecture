@@ -1,3 +1,22 @@
+## ⛔ L0 CORE 보호 파일 (AI 수정 승인 필수)
+
+> 아래 파일은 수렴 완료된 코어 로직. 수정 시 반드시 유저에게 승인 질문.
+> 상세: `nexus/shared/core-lockdown.json`
+
+```
+🔴 L0 (불변식 — 코드 수정 전 유저 명시 승인 필수):
+  config/products.json              — 완성제품 SSOT
+  docs/theorem-r1-uniqueness.md     — 핵심 정리 증명 σφ=nτ⟺n=6
+  docs/atlas-constants.md           — 상수 레지스트리 1100+
+  docs/breakthrough-theorems.md     — BT-1~343 돌파 정리
+  tools/nexus/src/telescope/lenses/ — NEXUS-6 렌즈 181개
+
+🟡 L1 (보호 — 리뷰 필요):
+  scripts/sync_products_readme.py   — products→README 동기화
+  docs/dse-map.toml                 — DSE 전체 현황 지도
+  docs/testable-predictions.md      — 검증 가능 예측 45건
+```
+
 > 🔴 **HEXA-FIRST**: 모든 코드는 `.hexa`로 작성. 부하 유발 명령 최소화.
 > 🔴 **NEXUS-6 특이점 연동**: 돌파 시 `blowup.hexa <domain> 3`, 발견 → `growth_bus.jsonl` append, 상태 → `command_router.hexa`
 > 🔴 **하드코딩 절대 금지**: 상수/도메인/키워드 → `nexus/shared/*.jsonl` 동적 로드. 코드에 배열 나열 금지.

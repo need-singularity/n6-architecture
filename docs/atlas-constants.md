@@ -1,3 +1,5 @@
+> ⛔ CORE — L0 불변식 (상수 레지스트리 1100+. 수정 전 유저 승인 필수)
+
 # N6 Architecture — Atlas Constants & Formulas
 
 > 1400+ 가설 (42 도메인) + 360+ BTs에서 발견/검증된 모든 상수와 공식.
