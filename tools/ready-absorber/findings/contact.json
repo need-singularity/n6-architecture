@@ -37,7 +37,7 @@
       "path": ".local/runpod.env",
       "size": 66,
       "lines": 1,
-      "preview": "RUNPOD_API_KEY=rpa_NNHM4SUDGBB8QYQ7X8UPQ2P0JS5ZDAMV9K5YN2IVnpd731\n",
+      "preview": "RUNPOD_API_KEY=REDACTED\n",
       "project": "contact",
       "ready_path": "/Users/ghost/Dev/ready/contact/.local/runpod.env",
       "destination": "contact",
