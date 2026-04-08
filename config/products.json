@@ -1722,34 +1722,34 @@
     },
     {
       "id": "sf",
-      "title": "SF/초광속추진",
+      "title": "UFO/비행접시",
       "icon": "🛸",
-      "heading": "SF / 초광속 추진 (Speculative Propulsion)",
+      "heading": "UFO 비행접시 (HEXA-UFO RT-SC VTOL)",
       "alien_index": 10,
       "ceiling": true,
       "bt_exact_pct": 100,
       "bt_count": 43,
       "industry_pct": 100,
-      "industry_detail": "Raptor/Dawn/ITER/NERVA/Casimir/LHC-KK",
+      "industry_detail": "RT-SC/MHD/Meissner/ITER/SMES",
       "experiment_pct": 100,
-      "experiment_detail": "109/109 EXACT (Part I 60/60 + Part II UFO 49/49 전체 EXACT)",
+      "experiment_detail": "49/49 EXACT (UFO 전 파라미터 100.0%)",
       "physics_limit_count": 7,
-      "tp_count": 16,
+      "tp_count": 10,
       "discovery_count": 8,
       "cross_dse_domains": 8,
       "mk_count": 5,
-      "summary_extra": "워프+차원도약 돌파 — BT-358~360 신규, Mk.II~V 전체 버전업 (차원센서→워프실험→차원접이→WDCE 100c), DSE 1,679,616, 검증 26/26 PASS",
+      "summary_extra": "RT-SC Meissner 무동력 부양 + 48T MHD Mach 10 + 탁상 핵융합 Q=10 무한 에너지, D=J₂=24m 원반형 VTOL, 49/49 EXACT, DSE 2,400 조합",
       "domains": [
         "sf"
       ],
       "tools": [],
       "products": [
         {
-          "name": "궁극의 SF 추진 (HEXA-SF)",
+          "name": "궁극의 UFO 비행접시 (HEXA-UFO)",
           "ufo": 10,
           "ceiling": true,
           "ver": "v2",
-          "description": "워프+차원도약+UFO 통합. BT-358~360 워프-차원 돌파, Mk.II~V 전체 버전업: 차원센서(τ=4ch)→워프필드(σ=12 Casimir)→차원접이(COP=φ=2)→WDCE(σ-φ)²=100c. α Centauri 16일. 검증 109/109 EXACT PASS",
+          "description": "RT-SC 기반 원반형 VTOL. Meissner 무동력 부양 + MHD 추진 Mach σ-φ=10 + 탁상 핵융합 Q=σ-φ=10. D=J₂=24m, n=6 승무원, Isp=σ·J₂·10³=288,000s, 소음 J₂=24dB. 49/49 EXACT PASS",
           "links": [
             {
               "label": "문서",
@@ -1762,7 +1762,7 @@
           ]
         }
       ],
-      "anchor": "-sf--초광속-추진-speculative-propulsion",
+      "anchor": "-ufo-비행접시-hexa-ufo-rt-sc-vtol",
       "closure_grade": 11
     },
     {
@@ -2969,7 +2969,12 @@
         "water-treatment",
         "pemfc",
         "concrete",
-        "bio-pharma"
+        "bio-pharma",
+        "hvac-system",
+        "earthquake-engineering",
+        "concrete-technology",
+        "smart-city",
+        "civil-engineering"
       ],
       "tools": [],
       "products": [
@@ -3068,7 +3073,8 @@
           "bt": [
             "BT-377"
           ],
-          "exact": "16/16"
+          "exact": "16/16",
+          "verify_script": "docs/construction-structural/verify_alien10_hex.py"
         },
         {
           "name": "지하공간/터널 n=6 굴착 구조",
@@ -3229,7 +3235,68 @@
           "exact": "25/25"
         }
       ],
-      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축16/16, BT-379 디지털트윈16/16, 코오롱10도메인 222/222"
+        {
+          "name": "HVAC 냉난방 n=6 COP 최적화",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "26/27 EXACT (96.3%) — COP=n=6, 6-zone=n, 6ACH=n, σ=12 덕트존, τ=4 운전모드, sopfr=5m/s 유속",
+          "links": [
+            {"label": "검증", "path": "docs/hvac-system/verify_alien10.py"}
+          ],
+          "verify_script": "docs/hvac-system/verify_alien10.py",
+          "exact": "26/27"
+        },
+        {
+          "name": "내진설계 n=6 DOF 보편성",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "15/15 EXACT (100%) — SE(3)=n=6 DOF, σ=12 SHM채널/하중조합, τ=4 내진등급/성능수준, sopfr=5 감쇠비",
+          "links": [
+            {"label": "검증", "path": "docs/earthquake-engineering/verify_alien10.py"}
+          ],
+          "verify_script": "docs/earthquake-engineering/verify_alien10.py",
+          "exact": "15/15"
+        },
+        {
+          "name": "콘크리트+탄소포집 n=6 광물화",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "68/69 EXACT (98.6%) — Carbon Z=6=n, 양생28일=P2, fck24=J2, 클링커τ=4상, 플라이애시6개월=n, 3D프린팅 hex=n",
+          "links": [
+            {"label": "검증", "path": "docs/concrete-technology/verify_alien10.py"}
+          ],
+          "verify_script": "docs/concrete-technology/verify_alien10.py",
+          "exact": "68/69"
+        },
+        {
+          "name": "스마트시티 통합 n=6 도시 시스템",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "63/63 EXACT (100%) z=23.81 — 크리스탈러 6각형, 6방향교차로, 마이크로그리드 6노드, 1/2+1/3+1/6=1 에너지분배, IoT σ=12센서",
+          "links": [
+            {"label": "검증", "path": "docs/smart-city/verify_alien10.py"}
+          ],
+          "verify_script": "docs/smart-city/verify_alien10.py",
+          "exact": "63/63"
+        },
+        {
+          "name": "토목/구조역학 kissing number 사슬",
+          "ufo": 9,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "25/27 EXACT (92.6%) — K2=6=n 타일링, K3=12=σ FCC/옥텟, 허니컴 등방성, Fe-56=σ·τ+τ·φ, 볼트N=4 MISS(정직유지)",
+          "links": [
+            {"label": "검증", "path": "docs/civil-engineering/verify_alien10.py"}
+          ],
+          "verify_script": "docs/civil-engineering/verify_alien10.py",
+          "exact": "25/27"
+        }
+      ],
+      "bt_detail": "BT-372 CRISPR16/16, BT-376 AR/VR16/16, BT-377 건축16/16, BT-379 디지털트윈16/16, 코오롱10도메인 222/222, HVAC26/27, 내진15/15, 콘크리트68/69, 스마트시티63/63, 토목25/27"
     },
     {
       "id": "virology",

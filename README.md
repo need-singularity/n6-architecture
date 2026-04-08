@@ -431,15 +431,15 @@
 
 ---
 
-# 🛸 SF / 초광속 추진 (Speculative Propulsion)
+# 🛸 UFO 비행접시 (HEXA-UFO RT-SC VTOL)
 
 <!-- AUTO:SUMMARY_sf:START -->
-> **🛸10** | ✅ | BT 43개 100%EXACT | 워프+차원도약 돌파 — BT-358~360 신규, Mk.II~V 전체 버전업 (차원센서→워프실험→차원접이→WDCE 100c), DSE 1,679,616, 검증 26/26 PASS | 산업100% (Raptor/Dawn/ITER/NERVA/Casimir/LHC-KK) | 실험100% 109/109 EXACT (Part I 60/60 + Part II UFO 49/49 전체 EXACT) | 물리한계7 | TP16 | 발견8 | Mk.V
+> **🛸10** | ✅ | BT 43개 100%EXACT | RT-SC Meissner 무동력 부양 + 48T MHD Mach 10 + 탁상 핵융합 Q=10 무한 에너지, D=J₂=24m 원반형 VTOL, 49/49 EXACT, DSE 2,400 조합 | 산업100% (RT-SC/MHD/Meissner/ITER/SMES) | 실험100% 49/49 EXACT (UFO 전 파라미터 100.0%) | 물리한계7 | TP10 | 발견8 | Mk.V
 <!-- AUTO:SUMMARY_sf:END -->
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 SF 추진 (HEXA-SF)** | 워프+차원도약+UFO 통합. BT-358~360 워프-차원 돌파, Mk.II~V 전체 버전업: 차원센서(τ=4ch)→워프필드(σ=12 Casimir)→차원접이(COP=φ=2)→WDCE(σ-φ)²=100c. α Centauri 16일. 검증 109/109 EXACT PASS | [문서](docs/sf/goal.md) · [논문](docs/paper/n6-hexa-sf-paper.md) |
+| 10 | ✅ | v2 | **궁극의 UFO 비행접시 (HEXA-UFO)** | RT-SC 기반 원반형 VTOL. Meissner 무동력 부양 + MHD 추진 Mach σ-φ=10 + 탁상 핵융합 Q=σ-φ=10. D=J₂=24m, n=6 승무원, Isp=σ·J₂·10³=288,000s, 소음 J₂=24dB. 49/49 EXACT PASS | [문서](docs/sf/goal.md) · [논문](docs/paper/n6-hexa-sf-paper.md) |
 
 <!-- AUTO:FOOTER_sf:START -->
 > 도메인: [sf/](docs/sf/)
@@ -637,7 +637,7 @@
 | — | 2030 | **궁극의 의료기기** | ★★★★☆☆ | T3 | [goal](docs/medical-device/goal.md) |
 | — | ✅ | **궁극의 안전** | ★★★★☆☆ | T3 | 7,776 조합 → [🛡️ 안전](#-안전-safety) |
 | — | ✅ | **궁극의 펀카** | ★★★☆☆☆ | ✅ | 160,920 조합 🛸10 → [🎪 유희](#-유희-play) |
-| 30 | 2045~2125 | **HEXA-WARP 워프항법장치** | ★★★★★★★★★★ | 🔮 | Mk.III 0.1c 핵융합 DFD → Mk.V Alcubierre(SF) |
+| 30 | 2030~2050 | **HEXA-UFO 비행접시** | ★★★★★★★★★★ | 🔮 | RT-SC Meissner 부양 + MHD Mach 10 + 탁상 핵융합 → [HEXA-UFO](docs/sf/goal.md) |
 | 31 | 2040~2070 | **HEXA-NEURO 뇌-기계 인터페이스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-NEURO](docs/neuro/goal.md) |
 | 32 | 2040~2070 | **HEXA-GRAV 중력파 검출/통신** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-GRAV](docs/gravity-wave/goal.md) |
 | 33 | 2040~2070 | **HEXA-CLOAK 투명망토/스텔스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-CLOAK](docs/cloak/goal.md) |
