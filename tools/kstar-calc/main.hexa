@@ -1,0 +1,486 @@
+// KSTAR 전용 계산기 — n=6 기반 심층 분석 (HEXA port)
+// Original: tools/kstar-calc/main.rs
+
+// ═══════════════════════════════════════════════════════════════
+// helpers (no global refs)
+// ═══════════════════════════════════════════════════════════════
+
+fn repeat_str(s, n) {
+  let r = ""
+  let i = 0
+  while i < n {
+    r = r + s
+    i = i + 1
+  }
+  return r
+}
+
+fn pad_r(s, w) {
+  let r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  return r
+}
+
+fn pad_l(s, w) {
+  let r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  return r
+}
+
+fn fmt0(x) {
+  return to_string(round(x))
+}
+
+fn fmt1(x) {
+  return to_string(round(x * 10.0) / 10.0)
+}
+
+fn fmt2(x) {
+  return to_string(round(x * 100.0) / 100.0)
+}
+
+fn n6_match(v) {
+  if v == 1 { return "mu" }
+  if v == 2 { return "phi" }
+  if v == 3 { return "n/phi" }
+  if v == 4 { return "tau" }
+  if v == 5 { return "sopfr" }
+  if v == 6 { return "n" }
+  if v == 7 { return "sigma-sopfr" }
+  if v == 8 { return "sigma-tau" }
+  if v == 10 { return "n+tau" }
+  if v == 12 { return "sigma" }
+  if v == 14 { return "sigma+phi" }
+  if v == 15 { return "sigma+n/phi" }
+  if v == 16 { return "sigma+tau" }
+  if v == 18 { return "sigma+n" }
+  if v == 20 { return "sigma+sigma-tau" }
+  if v == 24 { return "J2" }
+  if v == 25 { return "sopfr^2" }
+  if v == 36 { return "n^2" }
+  if v == 48 { return "sigma*tau" }
+  if v == 60 { return "sigma*sopfr" }
+  if v == 72 { return "sigma*n" }
+  if v == 120 { return "sigma*10" }
+  if v == 300 { return "sigma*sopfr^2" }
+  if v == 360 { return "sigma*sopfr*n/phi" }
+  if v == 600 { return "J2*sopfr^2" }
+  return ""
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Main — all inline, no global variable reads from functions
+// ═══════════════════════════════════════════════════════════════
+
+println("╔══════════════════════════════════════════════════════════════════════╗")
+println("║  KSTAR 전용 계산기 — n=6 기반 심층 분석                              ║")
+println("║  Korea Superconducting Tokamak Advanced Research                    ║")
+println("║  세계 기록: 1억도 300초 (2024.12)                                    ║")
+println("╚══════════════════════════════════════════════════════════════════════╝")
+
+// ═══ full_analysis ═══
+
+println("")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("  KSTAR 현재 구성")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("")
+println("    위치: 대전 한국핵융합에너지연구원 (KFE)")
+println("    첫 플라즈마: 2008년")
+println("    세계 기록: 1억도 300초 (2024년 12월)")
+
+// ═══ 가열 시스템 n=6 분석 ═══
+
+println("")
+println("  ═══ 가열 시스템 n=6 분석 ═══")
+println("")
+
+let h_names = ["NBI", "ECH", "ICH", "Total"]
+let h_vals = [8, 1, 6, 15]
+
+let exact_count = 0
+let idx = 0
+while idx < 4 {
+  let v = h_vals[idx]
+  let n6 = n6_match(v)
+  let marker = if n6 != "" { "✅" } else { "❌" }
+  let expr = if n6 != "" { "= " + n6 } else { "-" }
+  if n6 != "" { exact_count = exact_count + 1 }
+  println("    " + marker + " " + pad_r(h_names[idx], 6) + " = " + pad_l(to_string(v), 3) + " MW  " + expr)
+  idx = idx + 1
+}
+
+println("")
+println("    상세 분해:")
+println("    NBI 8 MW = sigma - tau = 12 - 4 = 8")
+println("    ECH 1 MW = mu(6) = 1")
+println("    ICH 6 MW = n = 6")
+println("    합 15 MW = sigma + n/phi = 12 + 3 = 15")
+println("")
+println("    NBI 빔 수: 3 = n/phi ✅")
+println("    NBI 에너지: 120 keV = sigma * 10 = 120 ✅")
+println("")
+let pct = round(100.0 * exact_count / 4.0)
+println("    n=6 매칭: " + to_string(exact_count) + "/4 (" + to_string(pct) + "%)")
+
+// ═══ 코일 시스템 n=6 분석 ═══
+
+println("")
+println("  ═══ 코일 시스템 n=6 분석 ═══")
+println("")
+
+let c_names = ["TF", "PF", "CS", "IVC"]
+let c_actual = [16, 14, 8, 4]
+let c_expect = [12, 6, 8, 4]
+let c_expr = ["sigma", "n", "sigma-tau", "tau"]
+
+let exact = 0
+let ci = 0
+while ci < 4 {
+  let a = c_actual[ci]
+  let e = c_expect[ci]
+  let diff = abs(a - e)
+  let marker = if a == e { "✅" } else if diff <= 2 { "~" } else { "❌" }
+  let status = if a == e { "EXACT" } else if diff <= 2 { "CLOSE" } else { "FAIL" }
+  if a == e { exact = exact + 1 }
+  println("    " + marker + " " + pad_r(c_names[ci], 4) + " = " + pad_l(to_string(a), 2) + " (n=6 → " + c_expr[ci] + " = " + to_string(e) + ") " + status)
+  ci = ci + 1
+}
+
+println("")
+println("    n=6 매칭: " + to_string(exact) + "/4")
+println("")
+println("    분석:")
+println("    TF 16 ≠ sigma=12: KSTAR는 ITER(18)보다 작지만 여전히 n=6 예측 실패")
+println("    PF 14 ≠ n=6: 7쌍 구조, ITER(6)보다 많음")
+println("    CS 8 = sigma-tau: 4개 솔레노이드 × 2섹션 = 8 ✅")
+println("    IVC 4 = tau: 플라즈마 안정화 코일 정확히 4개 ✅")
+
+// ═══ 플라즈마 형상 n=6 분석 ═══
+
+println("")
+println("  ═══ 플라즈마 형상 n=6 분석 ═══")
+println("")
+
+let r0_m = 1.8
+let a_m = 0.5
+let kappa = 2.0
+let delta_val = 0.8
+let bt_t = 3.5
+let ip_ma = 2.0
+let pi_val = 3.14159265358979
+
+let a_check = abs(a_m - 0.5) < 0.01
+let kappa_check = abs(kappa - 2.0) < 0.05
+let delta_check = abs(delta_val - 1.0 / 3.0) < 0.1
+let ar = r0_m / a_m
+let aspect_check = abs(ar - 3.0) < 0.3
+
+println("    R₀ = " + fmt2(r0_m) + " m  (n=6 예측 없음)")
+
+let a_mark = if a_check { "✅" } else { "~" }
+let a_status = if a_check { "EXACT" } else { "CLOSE" }
+println("    " + a_mark + " a = " + fmt2(a_m) + " m  (phi/tau = 0.5) " + a_status)
+
+let k_mark = if kappa_check { "✅" } else { "~" }
+let k_status = if kappa_check { "EXACT" } else { "CLOSE" }
+println("    " + k_mark + " kappa = " + fmt2(kappa) + "    (phi = 2) " + k_status)
+
+let d_mark = if delta_check { "✅" } else { "❌" }
+let d_status = if delta_check { "EXACT" } else { "FAIL" }
+println("    " + d_mark + " delta = " + fmt2(delta_val) + "    (1/3 = 0.33) " + d_status)
+
+let ar_mark = if aspect_check { "✅" } else { "~" }
+let ar_status = if aspect_check { "EXACT" } else { "CLOSE" }
+println("    " + ar_mark + " A = " + fmt2(ar) + "    (n/phi = 3) " + ar_status)
+
+let vol = 2.0 * pi_val * r0_m * pi_val * a_m * a_m * kappa
+println("")
+println("    B_T = " + fmt1(bt_t) + " T")
+println("    I_p = " + fmt1(ip_ma) + " MA (phi = 2) ✅ EXACT")
+println("    Volume = " + fmt1(vol) + " m³")
+
+// ═══ 종합 점수 ═══
+
+println("")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("  KSTAR 종합 n=6 점수")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("")
+
+println("    카테고리       EXACT   CLOSE   FAIL    점수")
+println("    ──────────────────────────────────────────────")
+println("    가열 시스템      6       0       0      100%")
+println("    코일 시스템      2       0       2       50%")
+println("    플라즈마 형상    2       1       2       50%")
+println("    운전 파라미터    2       1       0       83%")
+println("    ──────────────────────────────────────────────")
+println("    전체            12       2       4       76%")
+println("")
+println("    KSTAR는 가열 시스템에서 100% n=6 매칭을 달성한 유일한 토카막이다.")
+
+// ═══ KSTAR 시간 진화 분석 ═══
+
+println("")
+println("  ═══ KSTAR 시간 진화 분석 ═══")
+println("")
+
+println("    " + pad_r("Year", 4) + " " + pad_l("Duration", 8) + " " + pad_l("n=6", 8) + "  " + pad_r("Description", 20) + " " + "Match")
+println("    " + repeat_str("─", 70))
+
+let ms_year = [2008, 2010, 2016, 2018, 2019, 2020, 2021, 2023, 2024, 2025, 2026]
+let ms_dur  = [0.0, 0.1, 1.0, 1.5, 8.0, 20.0, 30.0, 100.0, 300.0, 400.0, 600.0]
+let ms_desc = ["첫 플라즈마", "H-mode 달성", "1억도 도달", "고성능 모드", "8초 유지", "20초 유지", "30초 유지", "100초 돌파", "300초 세계기록", "목표 (계획)", "목표 (계획)"]
+
+let mi = 0
+while mi < 11 {
+  let yr = ms_year[mi]
+  let dur = ms_dur[mi]
+  let dur_int = round(dur)
+  let n6 = n6_match(dur_int)
+  let marker = if n6 != "" { "✅" } else { "" }
+  let expr_t = if n6 != "" { n6 } else { "-" }
+  println("    " + to_string(yr) + " " + pad_l(fmt1(dur) + "s", 8) + " " + pad_l(expr_t, 8) + "  " + pad_r(ms_desc[mi], 20) + " " + marker)
+  mi = mi + 1
+}
+
+println("")
+println("  ═══ 기간 진행 n=6 분석 ═══")
+println("")
+println("    300 = sigma * sopfr^2 = 12 * 25")
+println("    360 = sigma * sopfr * n/phi = 12 * 5 * 6/2 = 180? (NO)")
+println("        = sigma * 30 = 360 ✅")
+println("    400 = sigma * 33.3? (NO CLEAN MATCH)")
+println("    600 = J2 * sopfr^2 = 24 * 25 ✅")
+println("        = phi * 300 = 2 * 300 ✅")
+
+println("")
+println("  ═══ 성장률 분석 ═══")
+println("")
+println("    2019→2024: 8s → 300s = 37.5× 증가 (5년)")
+println("    연평균: 300/8 = 37.5, 37.5^(1/5) = 2.37×/년")
+println("    phi(6) ≈ 2 (연간 2배 증가 근사)")
+println("")
+println("    2024→2026: 300s → 600s = 2× 증가 (2년)")
+println("    = phi(6)× 증가 ✅")
+
+// ═══ 최적화 제안 ═══
+
+println("")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("  KSTAR n=6 최적화 제안")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("")
+
+println("  [1] 가열 시스템 최적화")
+println("")
+println("    현재: NBI 8 + ECH 1 + ICH 6(계획) = 15 MW")
+println("    이집트 분수: 1/2 + 1/3 + 1/6 = 1")
+println("")
+println("    n=6 제안:")
+println("    ┌────────────────────────────────────────────────────────┐")
+println("    │ NBI : ECH : ICH = 1/2 : 1/6 : 1/3 (에너지 비율)       │")
+println("    │ = 7.5 : 2.5 : 5.0 MW (총 15 MW 유지)                  │")
+println("    │                                                        │")
+println("    │ 또는 총 18 MW (= sigma+n)로 업그레이드:                │")
+println("    │ NBI 9 + ECH 3 + ICH 6 = 18 MW                         │")
+println("    │ (9:3:6 = 3:1:2)                                        │")
+println("    └────────────────────────────────────────────────────────┘")
+
+println("")
+println("  [2] 6-DOF 형태 제어 구현")
+println("")
+println("    현재: PF 14개 코일로 coupled 제어")
+println("    n=6 제안: 6개 독립 형태 파라미터 decoupled 제어")
+println("")
+println("    ┌────────────────────────────────────────────────────────┐")
+println("    │ DOF 1: R₀ 위치 제어       (PF 1-2 담당)              │")
+println("    │ DOF 2: a 크기 제어        (PF 3-4 담당)              │")
+println("    │ DOF 3: kappa 연신율 제어  (PF 5-6 담당)              │")
+println("    │ DOF 4: delta 삼각성 제어  (PF 7-8 담당)              │")
+println("    │ DOF 5: xi 사각성 제어     (PF 9-10 담당)             │")
+println("    │ DOF 6: q95 프로파일 제어  (PF 11-14 담당)            │")
+println("    └────────────────────────────────────────────────────────┘")
+
+println("")
+println("  [3] n=6 목표 파라미터")
+println("")
+println("    ┌────────────────────────────────────────────────────────┐")
+println("    │ 파라미터      현재      n=6 목표     변경              │")
+println("    ├────────────────────────────────────────────────────────┤")
+println("    │ q95           4-7       5 (sopfr)    중간값 유지       │")
+println("    │ kappa         2.0       2.0 (phi)    현재 유지 ✅      │")
+println("    │ delta         0.8       0.33 (1/3)   감소 필요 *       │")
+println("    │ A             3.6       3.0 (n/phi)  R₀ 조정 필요      │")
+println("    │ T_i           10 keV    10 (n+tau)   현재 유지 ✅      │")
+println("    │ f_bs          30%       50% (phi/tau) 부트스트랩 증가  │")
+println("    └────────────────────────────────────────────────────────┘")
+println("    * delta 감소: negative triangularity 연구와 일치")
+
+println("")
+println("  [4] n=6 마일스톤 예측")
+println("")
+println("    ┌────────────────────────────────────────────────────────┐")
+println("    │ 마일스톤     초        n=6 분해                       │")
+println("    ├────────────────────────────────────────────────────────┤")
+println("    │ 현재        300s      sigma * sopfr^2 = 12 * 25      │")
+println("    │ 다음        360s      sigma * 30                      │")
+println("    │ 중기        600s      J2 * sopfr^2 = 24 * 25         │")
+println("    │ 장기       1200s      sigma * 100 = 2 * 600           │")
+println("    │ 정상상태     INF      (bootstrap f_bs >= 1/2)         │")
+println("    └────────────────────────────────────────────────────────┘")
+
+println("")
+println("  [5] n=6 점수 향상 경로")
+println("")
+println("    현재 n=6 Score: 76%")
+println("")
+println("    향상 가능 항목:")
+println("    - delta: 0.8 → 0.33 (FAIL → EXACT): +1")
+println("    - A: 3.6 → 3.0 (R₀ 조정 필요): +0.5")
+println("    - f_bs: 30% → 50%: +1")
+println("")
+println("    잠재적 n=6 Score: ~85%")
+
+// ═══ 경쟁자 비교 ═══
+
+println("")
+println("  ═══════════════════════════════════════════════════════════════════════════════════════════")
+println("  KSTAR vs 경쟁자 비교 분석")
+println("  ═══════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+
+let d_name    = ["KSTAR", "EAST", "JT-60SA", "ITER", "SPARC"]
+let d_country = ["한국", "중국", "일본/EU", "국제", "미국"]
+let d_r0      = [1.8, 1.9, 2.96, 6.2, 1.85]
+let d_a       = [0.5, 0.5, 1.18, 2.0, 0.57]
+let d_kappa   = [2.0, 1.9, 1.95, 1.7, 1.97]
+let d_bt      = [3.5, 3.5, 2.25, 5.3, 12.2]
+let d_ip      = [2.0, 1.0, 5.5, 15.0, 8.7]
+let d_tf      = [16, 16, 18, 18, 18]
+let d_pf      = [14, 14, 8, 6, 0]
+let d_rec_s   = [300.0, 1066.0, 0.0, 0.0, 0.0]
+let d_rec_t   = [100.0, 70.0, 0.0, 0.0, 0.0]
+let d_qt      = [0.0, 0.0, 0.0, 10.0, 11.0]
+let d_status  = ["운전중", "운전중", "시운전", "건설중", "건설중"]
+
+println("  [기본 스펙 비교]")
+println("")
+println("    " + pad_r("Device", 10) + " " + pad_r("국가", 6) + " " + pad_l("R₀", 5) + " " + pad_l("a", 5) + " " + pad_l("kappa", 5) + " " + pad_l("B_T", 5) + " " + pad_l("I_p", 5) + " " + pad_l("TF", 4) + " " + pad_l("PF", 4) + " " + pad_l("Record", 8) + " " + pad_l("Status", 8))
+println("    " + repeat_str("─", 90))
+
+let di = 0
+while di < 5 {
+  let record = if d_rec_s[di] > 0.0 { fmt0(d_rec_s[di]) + "s@" + fmt0(d_rec_t[di]) + "M" } else { "-" }
+  println("    " + pad_r(d_name[di], 10) + " " + pad_r(d_country[di], 6) + " " + pad_l(fmt2(d_r0[di]), 5) + " " + pad_l(fmt2(d_a[di]), 5) + " " + pad_l(fmt2(d_kappa[di]), 5) + " " + pad_l(fmt1(d_bt[di]), 5) + " " + pad_l(fmt1(d_ip[di]), 5) + " " + pad_l(to_string(d_tf[di]), 4) + " " + pad_l(to_string(d_pf[di]), 4) + " " + pad_l(record, 8) + " " + pad_l(d_status[di], 8))
+  di = di + 1
+}
+
+// n=6 score comparison
+println("")
+println("  [n=6 점수 비교]")
+println("")
+println("    " + pad_r("Device", 10) + " " + pad_l("Score", 6) + " " + pad_r("Matches", 40))
+println("    " + repeat_str("─", 60))
+
+let si = 0
+while si < 5 {
+  let score = 0.0
+  let matches = ""
+
+  if abs(d_a[si] - 0.5) < 0.1 {
+    score = score + 1.0
+    matches = if matches == "" { "a=phi/tau" } else { matches + ", a=phi/tau" }
+  }
+
+  if abs(d_kappa[si] - 2.0) < 0.1 {
+    score = score + 1.0
+    matches = if matches == "" { "kappa=phi" } else { matches + ", kappa=phi" }
+  }
+
+  let asp = d_r0[si] / d_a[si]
+  if abs(asp - 3.0) < 0.3 {
+    score = score + 0.5
+    matches = if matches == "" { "A~n/phi" } else { matches + ", A~n/phi" }
+  }
+
+  if d_pf[si] == 6 {
+    score = score + 1.0
+    matches = if matches == "" { "PF=n" } else { matches + ", PF=n" }
+  }
+
+  if d_tf[si] == 12 {
+    score = score + 1.0
+    matches = if matches == "" { "TF=sigma" } else { matches + ", TF=sigma" }
+  }
+
+  if abs(d_qt[si] - 10.0) < 0.5 {
+    score = score + 1.0
+    matches = if matches == "" { "Q=n+tau" } else { matches + ", Q=n+tau" }
+  }
+
+  if abs(d_bt[si] - 12.0) < 1.0 {
+    score = score + 1.0
+    matches = if matches == "" { "B~sigma" } else { matches + ", B~sigma" }
+  }
+
+  if abs(d_ip[si] - 2.0) < 0.3 {
+    score = score + 0.5
+    matches = if matches == "" { "Ip~phi" } else { matches + ", Ip~phi" }
+  }
+
+  println("    " + pad_r(d_name[si], 10) + " " + pad_l(fmt1(score), 6) + " " + pad_r(matches, 40))
+  si = si + 1
+}
+
+println("")
+println("  [KSTAR의 n=6 강점]")
+println("")
+println("    1. minor radius a = 0.5 m = phi/tau (EXACT) ✅")
+println("    2. elongation kappa = 2.0 = phi (EXACT) ✅")
+println("    3. plasma current I_p = 2.0 MA = phi (EXACT) ✅")
+println("    4. 가열: NBI 8 + ECH 1 + ICH 6 = 15 MW = sigma+n/phi (UNIQUE!)")
+println("")
+println("    KSTAR는 형상 파라미터에서 가장 높은 n=6 일치율을 보임.")
+println("    ITER는 거시적 파라미터(R₀, Q)에서 n=6 일치.")
+println("    SPARC는 B_T = 12T = sigma에서 유일한 EXACT.")
+
+println("")
+println("  [KSTAR vs EAST 상세 비교]")
+println("")
+println("    ┌────────────────────────────────────────────────────────┐")
+println("    │ 항목              KSTAR           EAST                │")
+println("    ├────────────────────────────────────────────────────────┤")
+println("    │ 기록 (시간)      300s @ 100MK     1066s @ 70MK        │")
+println("    │ 온도             더 높음 ✅       더 낮음             │")
+println("    │ 시간             더 짧음          더 길음 ✅          │")
+println("    │ 트리플 프로덕트  더 높음 ✅       더 낮음             │")
+println("    │ elongation       2.0 = phi ✅     1.9                 │")
+println("    │ n=6 Score        높음 ✅          중간                │")
+println("    └────────────────────────────────────────────────────────┘")
+println("")
+println("    결론: KSTAR는 '품질' (온도×시간 곱), EAST는 '양' (순수 시간)")
+println("          핵융합 성능 기준으로 KSTAR가 우위.")
+
+// ═══ 요약 ═══
+
+println("")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("  요약")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("")
+println("    KSTAR n=6 핵심 발견:")
+println("    1. 가열 출력 8+1+6=15 MW는 n=6 상수의 완벽한 매칭")
+println("    2. 형상 (a=0.5, kappa=2.0)이 n=6 예측과 정확히 일치")
+println("    3. 300초 = sigma*sopfr^2 = 12*25 (수학적으로 깔끔)")
+println("    4. 경쟁자 대비 가장 높은 n=6 일치율")
+println("")
+println("    다음 목표:")
+println("    - 360초 (= sigma*30): 2025년 예상")
+println("    - 600초 (= J2*sopfr^2): 2026년 계획")
+println("    - 정상 상태: bootstrap fraction >= 50% = phi/tau")
+println("")

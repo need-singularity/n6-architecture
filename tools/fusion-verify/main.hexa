@@ -1,0 +1,457 @@
+// N6 Fusion Comprehensive Verifier -- HEXA port
+// 28 verification items, n=6 constants vs experimental values
+
+// n=6 base constants
+let N6 = 6.0
+let SIGMA = 12.0
+let TAU = 4.0
+let PHI = 2.0
+let SOPFR = 5.0
+let J2 = 24.0
+let MU = 1.0
+let P2 = 28.0
+
+// n=6 derived constants
+let SIGMA_MINUS_PHI = 10.0
+let SIGMA_PLUS_PHI = 14.0
+let SIGMA_MINUS_MU = 11.0
+let J2_MINUS_TAU = 20.0
+let SIGMA_TIMES_J2 = 288.0
+let PHI_POW_N = 64.0
+let TAU_SQ_OVER_SIGMA = 16.0 / 12.0
+
+// experimental constants
+let SIN2_THETA_W_EXP = 0.23122
+let DT_Q_VALUE = 17.586
+let DT_ALPHA_ENERGY = 3.518
+let DT_NEUTRON_ENERGY = 14.068
+let HE4_BINDING_ENERGY = 28.296
+let TRITIUM_HALF_LIFE_YEARS = 12.32
+let SPARC_BT = 12.2
+let DT_CROSS_SECTION_PEAK_KEV = 64.0
+let DT_OPTIMAL_T_KEV = 13.6
+let LAWSON_EXPONENT = 20.0
+let RECONNECTION_RATE_EXP = 0.1
+let CNO_TRANSITION_T_MK = 17.0
+let TRIPLE_ALPHA_PRODUCT_A = 12.0
+let GLUCOSE_TOTAL_ATOMS = 24.0
+let CO2_CARBON_Z = 6.0
+let EARTH_AVG_TEMP_K = 288.0
+
+// helper: pad right
+fn pad_r(s, w) {
+    let mut result = s
+    while len(result) < w { result = result + " " }
+    result
+}
+
+// helper: pad left
+fn pad_l(s, w) {
+    let mut result = s
+    while len(result) < w { result = " " + result }
+    result
+}
+
+// grade error
+fn grade_error(error_pct) {
+    let ae = abs(error_pct)
+    if ae < 0.5 { return "EXACT" }
+    if ae < 5.0 { return "CLOSE" }
+    if ae < 20.0 { return "WEAK" }
+    "FAIL"
+}
+
+// compute error percent
+fn calc_error(theory_val, experiment_val) {
+    if abs(experiment_val) > 0.000000000000001 {
+        return (theory_val - experiment_val) / experiment_val * 100.0
+    }
+    0.0
+}
+
+// format float to N decimal places as string
+fn fmt_f(v, decimals) {
+    let factor = pow(10.0, decimals)
+    let r = round(v * factor) / factor
+    let s = to_string(r)
+    // find decimal point position
+    let mut dot_pos = -1
+    let mut ci = 0
+    while ci < len(s) {
+        if to_string(s[ci]) == "." { dot_pos = ci }
+        ci = ci + 1
+    }
+    if dot_pos == -1 {
+        // no decimal point, add one
+        let mut result = s + "."
+        let mut di = 0
+        while di < decimals {
+            result = result + "0"
+            di = di + 1
+        }
+        return result
+    }
+    // has decimal point, pad with zeros if needed
+    let current_dec = len(s) - dot_pos - 1
+    let mut result = s
+    let mut di = current_dec
+    while di < decimals {
+        result = result + "0"
+        di = di + 1
+    }
+    result
+}
+
+// Use parallel arrays for results (HEXA does not allow mixed-type arrays)
+let mut r_name = []
+let mut r_bt = []
+let mut r_theory = []
+let mut r_expr = []
+let mut r_exp = []
+let mut r_src = []
+let mut r_err = []
+let mut r_grade = []
+
+fn add_result(name, bt, theory, expr, experiment, src) {
+    let err = calc_error(theory, experiment)
+    let grade = grade_error(err)
+    r_name = r_name + [name]
+    r_bt = r_bt + [bt]
+    r_theory = r_theory + [theory]
+    r_expr = r_expr + [expr]
+    r_exp = r_exp + [experiment]
+    r_src = r_src + [src]
+    r_err = r_err + [err]
+    r_grade = r_grade + [grade]
+}
+
+// build all verifications
+fn verify_all() {
+    // #1 D-T nucleon sum
+    let dt_nucleon_sum = 2.0 + 3.0
+    add_result("D-T nucleon sum = sopfr(6)", "BT-98", SOPFR, "sopfr(6)=5", dt_nucleon_sum, "D(A=2)+T(A=3)=5")
+
+    // #2 D-T-Li6 fuel cycle
+    let fuel_a = [1.0, 2.0, 3.0, 4.0, 6.0]
+    let div6_tau = [1.0, 2.0, 3.0, 4.0, 6.0]
+    let mut all_match = true
+    let mut fi = 0
+    while fi < len(fuel_a) {
+        let mut found = false
+        let mut di = 0
+        while di < len(div6_tau) {
+            if fuel_a[fi] == div6_tau[di] { found = true }
+            di = di + 1
+        }
+        if !found { all_match = false }
+        fi = fi + 1
+    }
+    let mut match_val = 0.0
+    if all_match { match_val = 5.0 }
+    add_result("D-T-Li6 fuel cycle A in div6u{t}", "BT-98", 5.0, "count=sopfr=5", match_val, "n(1),D(2),T(3),He4(4),Li6(6)")
+
+    // #3 Alpha energy fraction ~ 1/sopfr
+    let alpha_frac_theory = 1.0 / SOPFR
+    let alpha_frac_exp = DT_ALPHA_ENERGY / DT_Q_VALUE
+    add_result("Alpha energy frac ~ 1/sopfr", "BT-98", alpha_frac_theory, "1/sopfr(6)=0.200", alpha_frac_exp, "3.518/17.586 [NRL]")
+
+    // #4 q0=1 = 1/2+1/3+1/6
+    let prs = 1.0/2.0 + 1.0/3.0 + 1.0/6.0
+    let tokamak_q = 1.0
+    add_result("q0=1 = 1/2+1/3+1/6 perfect recip", "BT-99", prs, "1/2+1/3+1/6=1", tokamak_q, "tokamak q0=1 [Wesson 2004]")
+
+    // #5-#8 CNO catalyst A = sigma + offset
+    let cno_offsets = [0.0, MU, PHI, N6/PHI]
+    let cno_labels = ["C-12", "N-13", "N-14", "O-15"]
+    let cno_a_vals = [12.0, 13.0, 14.0, 15.0]
+    let cno_offset_names = ["s+0", "s+mu", "s+phi", "s+n/phi"]
+    let mut ci = 0
+    while ci < 4 {
+        let predicted = SIGMA + cno_offsets[ci]
+        add_result("CNO " + cno_labels[ci] + " A = " + cno_offset_names[ci], "BT-100", predicted, cno_offset_names[ci] + "=" + to_string(predicted), cno_a_vals[ci], cno_labels[ci] + " A=" + to_string(cno_a_vals[ci]))
+        ci = ci + 1
+    }
+
+    // #9 Triple-alpha C-12 = sigma
+    add_result("Triple-alpha C-12 = sigma", "BT-100", SIGMA, "sigma(6)=12", TRIPLE_ALPHA_PRODUCT_A, "C-12 A=12 [Hoyle state]")
+
+    // #10 CNO transition temp 17 MK = sigma+sopfr
+    let cno_t_pred = SIGMA + SOPFR
+    add_result("CNO transition T 17MK = s+sopfr", "BT-100", cno_t_pred, "s+sopfr=17", CNO_TRANSITION_T_MK, "~17 MK [Bahcall 2005]")
+
+    // #11 Weinberg angle
+    let weinberg_n6 = (N6 / PHI) / (SIGMA + MU)
+    add_result("Weinberg sin2tW = (n/phi)/(s+mu)", "BT-97", weinberg_n6, "(n/phi)/(s+mu)=3/13", SIN2_THETA_W_EXP, "0.23122 [PDG 2024]")
+
+    // #12 Magnetic reconnection rate = 1/(sigma-phi)
+    let recon_n6 = 1.0 / SIGMA_MINUS_PHI
+    add_result("Reconnection rate = 1/(s-phi)", "BT-102", recon_n6, "1/(s-phi)=0.1", RECONNECTION_RATE_EXP, "~0.1 V_A [MRX Yamada+ 2010]")
+
+    // #13 Glucose C6H12O6 = 24 atoms = J2
+    add_result("Glucose C6H12O6 atoms = J2", "BT-101", J2, "J2(6)=24", GLUCOSE_TOTAL_ATOMS, "6+12+6=24 [chemistry]")
+
+    // #14 CO2 carbon Z=6=n
+    add_result("CO2 carbon Z = n", "BT-104", N6, "n=6", CO2_CARBON_Z, "Carbon Z=6")
+
+    // #15 D-T optimal T ~ sigma+phi keV
+    add_result("D-T optimal T ~ s+phi keV", "BT-98", SIGMA_PLUS_PHI, "s+phi=14", DT_OPTIMAL_T_KEV, "13.6 keV [NRL]")
+
+    // #16 SPARC B_T ~ sigma Tesla
+    add_result("SPARC B_T ~ sigma Tesla", "BT-97", SIGMA, "sigma(6)=12", SPARC_BT, "12.2 T [CFS/MIT 2020]")
+
+    // #17 Tritium half-life ~ sigma years
+    add_result("Tritium half-life ~ sigma yr", "BT-98", SIGMA, "sigma(6)=12", TRITIUM_HALF_LIFE_YEARS, "12.32 yr [NNDC]")
+
+    // #18 He-4 binding energy ~ P2 MeV
+    add_result("He-4 binding E ~ P2 MeV", "BT-98", P2, "P2=28", HE4_BINDING_ENERGY, "28.296 MeV [AME2020]")
+
+    // #19 Lawson exponent 20 = J2-tau
+    add_result("Lawson exponent 20 = J2-tau", "BT-99", J2_MINUS_TAU, "J2-tau=24-4=20", LAWSON_EXPONENT, "10^20 [NRL/Wesson]")
+
+    // #20 D-T cross section peak 64 keV = phi^n
+    add_result("D-T xs peak = phi^n keV", "BT-98", PHI_POW_N, "phi^n=2^6=64", DT_CROSS_SECTION_PEAK_KEV, "64 keV [NRL]")
+
+    // #21 Earth avg temp 288K = sigma*J2
+    add_result("Earth avg T = sigma*J2 K", "BT-104", SIGMA_TIMES_J2, "s*J2=12*24=288", EARTH_AVG_TEMP_K, "288 K [NASA GISS]")
+
+    // #22 Photosynthesis quantum yield 8 = sigma-tau
+    let photo_qy = 8.0
+    add_result("Photosynthesis QY 8 = s-tau", "BT-101", SIGMA - TAU, "s-tau=12-4=8", photo_qy, "8 photons/O2 [Emerson+ 1957]")
+
+    // #23 Photosynthesis n=6 coefficients count = n/phi
+    let photo_n6_coeff = 3.0
+    add_result("Photosynthesis n=6 coeff = n/phi", "BT-103", N6 / PHI, "n/phi=3", photo_n6_coeff, "6CO2+6H2O->C6H12O6+6O2")
+
+    // #24 D-T Q value 17.6 ~ sigma+sopfr
+    let dt_q_pred = SIGMA + SOPFR
+    add_result("D-T Q 17.6 MeV ~ s+sopfr", "BT-98", dt_q_pred, "s+sopfr=12+5=17", DT_Q_VALUE, "17.586 MeV [NNDC]")
+
+    // #25 E_alpha/E_n ~ 1/tau
+    let aen_theory = 1.0 / TAU
+    let aen_exp = DT_ALPHA_ENERGY / DT_NEUTRON_ENERGY
+    add_result("E_a/E_n ~ 1/tau", "BT-98", aen_theory, "1/tau=0.25", aen_exp, "3.518/14.068 [NRL]")
+
+    // #26 SQ bandgap ~ tau^2/sigma eV
+    let sq_exp = 1.34
+    add_result("SQ bandgap ~ tau2/sigma eV", "BT-30", TAU_SQ_OVER_SIGMA, "tau2/s=16/12=1.333", sq_exp, "1.34 eV [SQ 1961]")
+
+    // #27 B-11 mass number = sigma-mu
+    let b11 = 11.0
+    add_result("B-11 mass A = sigma-mu", "BT-98", SIGMA_MINUS_MU, "s-mu=12-1=11", b11, "B-11 A=11")
+
+    // #28 Li-6 mass number = n
+    let li6 = 6.0
+    add_result("Li-6 mass A = n", "BT-98", N6, "n=6", li6, "Li-6 A=6")
+}
+
+// print table
+fn print_results() {
+    println("===========================================================================")
+    println("  N6 FUSION COMPREHENSIVE VERIFIER -- n=6 numerical verification")
+    println("  Constants: CODATA 2018 / PDG 2024 / AME2020 / NRL Plasma Formulary")
+    println("===========================================================================")
+    println("")
+
+    println("----+------------------------------------+--------+--------------+--------------+---------+-------")
+    println(" #  | Item                               | BT     | Theory(n=6)  | Experiment   | Err(%)  | Grade ")
+    println("----+------------------------------------+--------+--------------+--------------+---------+-------")
+
+    let mut i = 0
+    while i < len(r_name) {
+        let vid = i + 1
+        let id_s = pad_l(to_string(vid), 3)
+        let name_s = pad_r(r_name[i], 36)
+        let bt_s = pad_r(r_bt[i], 6)
+        let theory_s = pad_l(fmt_f(r_theory[i], 6), 12)
+        let exp_s = pad_l(fmt_f(r_exp[i], 6), 12)
+
+        let mut err_sign = "+"
+        if r_err[i] < 0.0 { err_sign = "-" }
+        let err_abs = abs(r_err[i])
+        let err_s = pad_l(err_sign + fmt_f(err_abs, 3), 7)
+        let grade_s = pad_r(r_grade[i], 5)
+
+        println(id_s + " | " + name_s + " | " + bt_s + " | " + theory_s + " | " + exp_s + " | " + err_s + " | " + grade_s)
+        i = i + 1
+    }
+    println("----+------------------------------------+--------+--------------+--------------+---------+-------")
+}
+
+// print detail
+fn print_detail() {
+    println("")
+    println("=== Detailed Verification ===")
+    println("")
+    let mut i = 0
+    while i < len(r_name) {
+        let vid = i + 1
+        let mut icon = "?"
+        if r_grade[i] == "EXACT" { icon = "OK" }
+        if r_grade[i] == "CLOSE" { icon = "~" }
+        if r_grade[i] == "WEAK" { icon = "!" }
+        if r_grade[i] == "FAIL" { icon = "X" }
+
+        let mut id_s = to_string(vid)
+        if vid < 10 { id_s = "0" + id_s }
+
+        println("  #" + id_s + " " + icon + " [" + r_bt[i] + "] " + r_name[i])
+        println("      Theory: " + r_expr[i] + " = " + fmt_f(r_theory[i], 6))
+        println("      Exper:  " + r_src[i])
+        println("      Error:  " + fmt_f(r_err[i], 4) + "% -> " + r_grade[i])
+        println("")
+        i = i + 1
+    }
+}
+
+// bar chart helper
+fn make_bar(count, total) {
+    let max_w = 30
+    let mut filled = 0
+    if total > 0 { filled = count * max_w / total }
+    let empty = max_w - filled
+    let mut bar_s = ""
+    let mut fi = 0
+    while fi < filled {
+        bar_s = bar_s + "#"
+        fi = fi + 1
+    }
+    let mut ei = 0
+    while ei < empty {
+        bar_s = bar_s + "."
+        ei = ei + 1
+    }
+    bar_s + "|"
+}
+
+// print summary
+fn print_summary() {
+    let total = len(r_name)
+    let mut exact = 0
+    let mut close = 0
+    let mut weak = 0
+    let mut fail = 0
+
+    let mut i = 0
+    while i < total {
+        let g = r_grade[i]
+        if g == "EXACT" { exact = exact + 1 }
+        if g == "CLOSE" { close = close + 1 }
+        if g == "WEAK" { weak = weak + 1 }
+        if g == "FAIL" { fail = fail + 1 }
+        i = i + 1
+    }
+
+    let exact_pct = round(exact * 1000.0 / total) / 10.0
+    let ec_pct = round((exact + close) * 1000.0 / total) / 10.0
+
+    println("")
+    println("===========================================================")
+    println("  Final Summary")
+    println("===========================================================")
+    println("  Total items:    " + to_string(total))
+    println("")
+    println("  EXACT (<0.5%):  " + pad_l(to_string(exact), 3) + "  " + make_bar(exact, total))
+    println("  CLOSE (<5.0%):  " + pad_l(to_string(close), 3) + "  " + make_bar(close, total))
+    println("  WEAK  (<20%):   " + pad_l(to_string(weak), 3) + "  " + make_bar(weak, total))
+    println("  FAIL  (>20%):   " + pad_l(to_string(fail), 3) + "  " + make_bar(fail, total))
+    println("")
+    println("  EXACT%:         " + to_string(exact_pct) + "%")
+    println("  EXACT+CLOSE%:   " + to_string(ec_pct) + "%")
+    println("===========================================================")
+
+    // BT breakdown
+    println("")
+    println("  === BT Breakdown ===")
+
+    // collect unique BTs
+    let mut bt_keys = []
+    i = 0
+    while i < len(r_bt) {
+        let bt = r_bt[i]
+        let mut found = false
+        let mut j = 0
+        while j < len(bt_keys) {
+            if bt_keys[j] == bt { found = true }
+            j = j + 1
+        }
+        if !found { bt_keys = bt_keys + [bt] }
+        i = i + 1
+    }
+
+    // sort bt_keys by extracting numeric part after "BT-"
+    let mut bt_nums = []
+    let mut sxi = 0
+    while sxi < len(bt_keys) {
+        let bk = bt_keys[sxi]
+        let mut num_s = ""
+        let mut ci = 3
+        while ci < len(bk) {
+            num_s = num_s + to_string(bk[ci])
+            ci = ci + 1
+        }
+        let mut num_val = 0
+        ci = 0
+        while ci < len(num_s) {
+            let c = to_string(num_s[ci])
+            let mut digit = 0
+            if c == "0" { digit = 0 }
+            if c == "1" { digit = 1 }
+            if c == "2" { digit = 2 }
+            if c == "3" { digit = 3 }
+            if c == "4" { digit = 4 }
+            if c == "5" { digit = 5 }
+            if c == "6" { digit = 6 }
+            if c == "7" { digit = 7 }
+            if c == "8" { digit = 8 }
+            if c == "9" { digit = 9 }
+            num_val = num_val * 10 + digit
+            ci = ci + 1
+        }
+        bt_nums = bt_nums + [num_val]
+        sxi = sxi + 1
+    }
+    // bubble sort by numeric value
+    let mut si = 0
+    while si < len(bt_keys) {
+        let mut sj = si + 1
+        while sj < len(bt_keys) {
+            if bt_nums[sj] < bt_nums[si] {
+                let tmp = bt_keys[si]
+                bt_keys[si] = bt_keys[sj]
+                bt_keys[sj] = tmp
+                let tmp_n = bt_nums[si]
+                bt_nums[si] = bt_nums[sj]
+                bt_nums[sj] = tmp_n
+            }
+            sj = sj + 1
+        }
+        si = si + 1
+    }
+
+    println("  " + pad_r("BT", 10) + pad_l("Total", 6) + pad_l("EXACT", 6) + pad_l("EXACT%", 8))
+    println("  ------------------------------")
+
+    let mut bi = 0
+    while bi < len(bt_keys) {
+        let bt = bt_keys[bi]
+        let mut bt_total = 0
+        let mut bt_exact = 0
+        let mut k = 0
+        while k < len(r_bt) {
+            if r_bt[k] == bt {
+                bt_total = bt_total + 1
+                if r_grade[k] == "EXACT" { bt_exact = bt_exact + 1 }
+            }
+            k = k + 1
+        }
+        let bt_pct = round(bt_exact * 1000.0 / bt_total) / 10.0
+        println("  " + pad_r(bt, 10) + pad_l(to_string(bt_total), 6) + pad_l(to_string(bt_exact), 6) + pad_l(to_string(bt_pct) + "%", 8))
+        bi = bi + 1
+    }
+}
+
+// main
+verify_all()
+print_results()
+print_detail()
+print_summary()

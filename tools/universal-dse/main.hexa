@@ -1,0 +1,907 @@
+// Universal DSE Explorer — n6-architecture (HEXA port)
+// Usage: hexa main.hexa <domain.toml> [--top N]
+
+// N6 Constants
+let N6 = 6.0
+let PHI = 2.0
+let TAU = 4.0
+let SIGMA = 12.0
+let SOPFR = 5.0
+let MU = 1.0
+let J2 = 24.0
+
+// ── Helpers ──
+
+fn pad_r(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  r
+}
+
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn min_val(a, b) {
+  if a < b {
+    a
+  } else {
+    b
+  }
+}
+
+fn max_val(a, b) {
+  if a > b {
+    a
+  } else {
+    b
+  }
+}
+
+fn repeat_str(ch, n) {
+  let mut r = ""
+  let mut i = 0
+  while i < n {
+    r = r + ch
+    i = i + 1
+  }
+  r
+}
+
+fn trunc_str(s, maxlen) {
+  if len(s) > maxlen {
+    s.substring(0, maxlen)
+  } else {
+    s
+  }
+}
+
+fn fmt_f1(v) {
+  let r = round(v * 10.0) / 10.0
+  to_string(r)
+}
+
+fn fmt_f3(v) {
+  let r = round(v * 1000.0) / 1000.0
+  to_string(r)
+}
+
+fn fmt_f4(v) {
+  let r = round(v * 10000.0) / 10000.0
+  to_string(r)
+}
+
+// ── Global domain state ──
+// 전역 변수로 parse_toml 결과 저장
+
+let mut g_d_name = ""
+let mut g_d_desc = ""
+let mut g_w_n6 = 0.40
+let mut g_w_perf = 0.30
+let mut g_w_power = 0.20
+let mut g_w_cost = 0.10
+let mut g_lev_names = []
+let mut g_lev_cand_start = []
+let mut g_lev_cand_count = []
+let mut g_lev_count = 0
+let mut g_c_id = []
+let mut g_c_label = []
+let mut g_c_n6 = []
+let mut g_c_perf = []
+let mut g_c_power = []
+let mut g_c_cost = []
+let mut g_c_count = 0
+let mut g_r_type = []
+let mut g_r_if_lev = []
+let mut g_r_if_id = []
+let mut g_r_then_lev = []
+let mut g_r_then_ids = []
+let mut g_r_count = 0
+
+// ── TOML Parser ──
+// 전역 g_* 변수에 저장. 반환: 1=성공 0=실패
+
+fn load_domain(content) {
+  let lines = split(content, "\n")
+  let line_count = len(lines)
+
+  g_d_name = ""
+  g_d_desc = ""
+  g_w_n6 = 0.40
+  g_w_perf = 0.30
+  g_w_power = 0.20
+  g_w_cost = 0.10
+  g_lev_names = []
+  g_lev_cand_start = []
+  g_lev_cand_count = []
+  g_lev_count = 0
+  g_c_id = []
+  g_c_label = []
+  g_c_n6 = []
+  g_c_perf = []
+  g_c_power = []
+  g_c_cost = []
+  g_c_count = 0
+  g_r_type = []
+  g_r_if_lev = []
+  g_r_if_id = []
+  g_r_then_lev = []
+  g_r_then_ids = []
+  g_r_count = 0
+
+  // section: 0=none 1=meta 2=scoring 3=level 4=candidate 5=rule
+  let mut section = 0
+  let mut has_cand = false
+  let mut has_rule = false
+
+  // temp candidate
+  let mut tc_id = ""
+  let mut tc_label = ""
+  let mut tc_n6 = 0.0
+  let mut tc_perf = 0.0
+  let mut tc_power = 0.0
+  let mut tc_cost = 0.0
+
+  // temp rule
+  let mut tr_type = ""
+  let mut tr_if_lev = 0
+  let mut tr_if_id = ""
+  let mut tr_then_lev = 0
+  let mut tr_then_ids = ""
+
+  let mut li = 0
+  while li < line_count {
+    let raw = lines[li]
+    let line = trim(raw)
+
+    if len(line) == 0 {
+      li = li + 1
+    } else {
+      if starts_with(line, "#") {
+        li = li + 1
+      } else {
+        if line == "[[level]]" {
+          if has_cand {
+            if g_lev_count > 0 {
+              g_c_id = g_c_id + [tc_id]
+              g_c_label = g_c_label + [tc_label]
+              g_c_n6 = g_c_n6 + [tc_n6]
+              g_c_perf = g_c_perf + [tc_perf]
+              g_c_power = g_c_power + [tc_power]
+              g_c_cost = g_c_cost + [tc_cost]
+              g_c_count = g_c_count + 1
+              g_lev_cand_count[g_lev_count - 1] = g_lev_cand_count[g_lev_count - 1] + 1
+            }
+            has_cand = false
+          }
+          if has_rule {
+            g_r_type = g_r_type + [tr_type]
+            g_r_if_lev = g_r_if_lev + [tr_if_lev]
+            g_r_if_id = g_r_if_id + [tr_if_id]
+            g_r_then_lev = g_r_then_lev + [tr_then_lev]
+            g_r_then_ids = g_r_then_ids + [tr_then_ids]
+            g_r_count = g_r_count + 1
+            has_rule = false
+          }
+          g_lev_names = g_lev_names + [""]
+          g_lev_cand_start = g_lev_cand_start + [g_c_count]
+          g_lev_cand_count = g_lev_cand_count + [0]
+          g_lev_count = g_lev_count + 1
+          section = 3
+          li = li + 1
+        } else {
+          if line == "[[candidate]]" {
+            if has_cand {
+              if g_lev_count > 0 {
+                g_c_id = g_c_id + [tc_id]
+                g_c_label = g_c_label + [tc_label]
+                g_c_n6 = g_c_n6 + [tc_n6]
+                g_c_perf = g_c_perf + [tc_perf]
+                g_c_power = g_c_power + [tc_power]
+                g_c_cost = g_c_cost + [tc_cost]
+                g_c_count = g_c_count + 1
+                g_lev_cand_count[g_lev_count - 1] = g_lev_cand_count[g_lev_count - 1] + 1
+              }
+            }
+            tc_id = ""
+            tc_label = ""
+            tc_n6 = 0.0
+            tc_perf = 0.0
+            tc_power = 0.0
+            tc_cost = 0.0
+            has_cand = true
+            section = 4
+            li = li + 1
+          } else {
+            if line == "[[rule]]" {
+              if has_cand {
+                if g_lev_count > 0 {
+                  g_c_id = g_c_id + [tc_id]
+                  g_c_label = g_c_label + [tc_label]
+                  g_c_n6 = g_c_n6 + [tc_n6]
+                  g_c_perf = g_c_perf + [tc_perf]
+                  g_c_power = g_c_power + [tc_power]
+                  g_c_cost = g_c_cost + [tc_cost]
+                  g_c_count = g_c_count + 1
+                  g_lev_cand_count[g_lev_count - 1] = g_lev_cand_count[g_lev_count - 1] + 1
+                }
+                has_cand = false
+              }
+              if has_rule {
+                g_r_type = g_r_type + [tr_type]
+                g_r_if_lev = g_r_if_lev + [tr_if_lev]
+                g_r_if_id = g_r_if_id + [tr_if_id]
+                g_r_then_lev = g_r_then_lev + [tr_then_lev]
+                g_r_then_ids = g_r_then_ids + [tr_then_ids]
+                g_r_count = g_r_count + 1
+              }
+              tr_type = ""
+              tr_if_lev = 0
+              tr_if_id = ""
+              tr_then_lev = 0
+              tr_then_ids = ""
+              has_rule = true
+              section = 5
+              li = li + 1
+            } else {
+              if line == "[meta]" {
+                section = 1
+                li = li + 1
+              } else {
+                if line == "[scoring]" {
+                  section = 2
+                  li = li + 1
+                } else {
+                  if contains(line, "=") {
+                    let parts = split(line, "=")
+                    let key = trim(parts[0])
+                    let mut val = ""
+                    let mut pi = 1
+                    while pi < len(parts) {
+                      if pi > 1 {
+                        val = val + "="
+                      }
+                      val = val + parts[pi]
+                      pi = pi + 1
+                    }
+                    val = trim(val)
+                    let val_str = replace(val, "\"", "")
+
+                    if section == 1 {
+                      if key == "name" {
+                        g_d_name = val_str
+                      }
+                      if key == "desc" {
+                        g_d_desc = val_str
+                      }
+                    }
+                    if section == 2 {
+                      let v = to_float(val)
+                      if key == "n6" {
+                        g_w_n6 = v
+                      }
+                      if key == "perf" {
+                        g_w_perf = v
+                      }
+                      if key == "power" {
+                        g_w_power = v
+                      }
+                      if key == "cost" {
+                        g_w_cost = v
+                      }
+                    }
+                    if section == 3 {
+                      if key == "name" {
+                        if g_lev_count > 0 {
+                          g_lev_names[g_lev_count - 1] = val_str
+                        }
+                      }
+                    }
+                    if section == 4 {
+                      if key == "id" {
+                        tc_id = val_str
+                      }
+                      if key == "label" {
+                        tc_label = val_str
+                      }
+                      if key == "n6" {
+                        tc_n6 = to_float(val)
+                      }
+                      if key == "perf" {
+                        tc_perf = to_float(val)
+                      }
+                      if key == "power" {
+                        tc_power = to_float(val)
+                      }
+                      if key == "cost" {
+                        tc_cost = to_float(val)
+                      }
+                    }
+                    if section == 5 {
+                      if key == "type" {
+                        tr_type = val_str
+                      }
+                      if key == "if_level" {
+                        tr_if_lev = to_int(val)
+                      }
+                      if key == "if_id" {
+                        tr_if_id = val_str
+                      }
+                      if key == "then_level" {
+                        tr_then_lev = to_int(val)
+                      }
+                      if key == "then_ids" {
+                        tr_then_ids = val_str
+                      }
+                    }
+                  }
+                  li = li + 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // flush remaining
+  if has_cand {
+    if g_lev_count > 0 {
+      g_c_id = g_c_id + [tc_id]
+      g_c_label = g_c_label + [tc_label]
+      g_c_n6 = g_c_n6 + [tc_n6]
+      g_c_perf = g_c_perf + [tc_perf]
+      g_c_power = g_c_power + [tc_power]
+      g_c_cost = g_c_cost + [tc_cost]
+      g_c_count = g_c_count + 1
+      g_lev_cand_count[g_lev_count - 1] = g_lev_cand_count[g_lev_count - 1] + 1
+    }
+  }
+  if has_rule {
+    g_r_type = g_r_type + [tr_type]
+    g_r_if_lev = g_r_if_lev + [tr_if_lev]
+    g_r_if_id = g_r_if_id + [tr_if_id]
+    g_r_then_lev = g_r_then_lev + [tr_then_lev]
+    g_r_then_ids = g_r_then_ids + [tr_then_ids]
+    g_r_count = g_r_count + 1
+  }
+
+  g_lev_count
+}
+
+// ── Compatibility Check ──
+
+fn is_compat(indices) {
+  let mut ri = 0
+  while ri < g_r_count {
+    if g_r_if_lev[ri] < g_lev_count {
+      if g_r_then_lev[ri] < g_lev_count {
+        let if_idx = g_lev_cand_start[g_r_if_lev[ri]] + indices[g_r_if_lev[ri]]
+        if g_c_id[if_idx] == g_r_if_id[ri] {
+          let then_idx = g_lev_cand_start[g_r_then_lev[ri]] + indices[g_r_then_lev[ri]]
+          let then_id = g_c_id[then_idx]
+
+          if g_r_type[ri] == "require" {
+            let id_list = split(g_r_then_ids[ri], ",")
+            let mut found = false
+            let mut k = 0
+            while k < len(id_list) {
+              if trim(id_list[k]) == then_id {
+                found = true
+              }
+              k = k + 1
+            }
+            if found == false {
+              ri = g_r_count + 1
+            }
+          }
+          if ri < g_r_count {
+            if g_r_type[ri] == "exclude" {
+              let id_list = split(g_r_then_ids[ri], ",")
+              let mut found = false
+              let mut k = 0
+              while k < len(id_list) {
+                if trim(id_list[k]) == then_id {
+                  found = true
+                }
+                k = k + 1
+              }
+              if found {
+                ri = g_r_count + 1
+              }
+            }
+          }
+        }
+      }
+    }
+    ri = ri + 1
+  }
+  if ri > g_r_count + 1 {
+    false
+  } else {
+    if ri == g_r_count + 1 {
+      false
+    } else {
+      true
+    }
+  }
+}
+
+// ── Scoring ──
+
+fn score_combo(indices) {
+  let n = 1.0 * g_lev_count
+  let mut n6_sum = 0.0
+  let mut perf_sum = 0.0
+  let mut power_sum = 0.0
+  let mut cost_sum = 0.0
+
+  let mut i = 0
+  while i < g_lev_count {
+    let ci = g_lev_cand_start[i] + indices[i]
+    n6_sum = n6_sum + g_c_n6[ci]
+    perf_sum = perf_sum + g_c_perf[ci]
+    power_sum = power_sum + g_c_power[ci]
+    cost_sum = cost_sum + g_c_cost[ci]
+    i = i + 1
+  }
+
+  let n6_avg = n6_sum / n
+  let perf_avg = perf_sum / n
+  let power_avg = power_sum / n
+  let cost_avg = cost_sum / n
+  let pareto = g_w_n6 * n6_avg + g_w_perf * perf_avg + g_w_power * power_avg + g_w_cost * cost_avg
+
+  [n6_avg, perf_avg, power_avg, cost_avg, pareto]
+}
+
+// ── Main logic ──
+
+fn run_domain(top_n) {
+  if g_lev_count == 0 {
+    println("Warning: no levels defined")
+  } else {
+    let mut total = 1
+    let mut i = 0
+    while i < g_lev_count {
+      total = total * g_lev_cand_count[i]
+      i = i + 1
+    }
+
+    let mut res_indices = []
+    let mut res_n6 = []
+    let mut res_perf = []
+    let mut res_power = []
+    let mut res_cost = []
+    let mut res_pareto = []
+    let mut res_count = 0
+
+    let mut indices = []
+    i = 0
+    while i < g_lev_count {
+      indices = indices + [0]
+      i = i + 1
+    }
+
+    let mut combo_idx = 0
+    while combo_idx < total {
+      let compat = is_compat(indices)
+      if compat {
+        let sc = score_combo(indices)
+        let mut idx_copy = []
+        let mut j = 0
+        while j < g_lev_count {
+          idx_copy = idx_copy + [indices[j]]
+          j = j + 1
+        }
+        res_indices = res_indices + [idx_copy]
+        res_n6 = res_n6 + [sc[0]]
+        res_perf = res_perf + [sc[1]]
+        res_power = res_power + [sc[2]]
+        res_cost = res_cost + [sc[3]]
+        res_pareto = res_pareto + [sc[4]]
+        res_count = res_count + 1
+      }
+
+      let mut carry = true
+      let mut k = g_lev_count - 1
+      while k >= 0 {
+        if carry {
+          indices[k] = indices[k] + 1
+          if indices[k] >= g_lev_cand_count[k] {
+            indices[k] = 0
+          } else {
+            carry = false
+          }
+        }
+        k = k - 1
+      }
+      combo_idx = combo_idx + 1
+    }
+
+    // selection sort by pareto descending
+    let mut sort_idx = []
+    i = 0
+    while i < res_count {
+      sort_idx = sort_idx + [i]
+      i = i + 1
+    }
+
+    i = 0
+    while i < res_count {
+      let mut best = i
+      let mut j = i + 1
+      while j < res_count {
+        if res_pareto[sort_idx[j]] > res_pareto[sort_idx[best]] {
+          best = j
+        }
+        j = j + 1
+      }
+      if best != i {
+        let tmp = sort_idx[i]
+        sort_idx[i] = sort_idx[best]
+        sort_idx[best] = tmp
+      }
+      i = i + 1
+    }
+
+    // Print header
+    let bar = repeat_str("=", 66)
+    println("")
+    println(bar)
+    println(format("  Universal DSE -- {}", g_d_name))
+    if len(g_d_desc) > 0 {
+      println(format("  {}", g_d_desc))
+    }
+    println(format("  {} total combinations -> {} compatible", to_string(total), to_string(res_count)))
+    println(format("  Weights: n6={}% perf={}% power={}% cost={}%", to_string(round(g_w_n6 * 100.0)), to_string(round(g_w_perf * 100.0)), to_string(round(g_w_power * 100.0)), to_string(round(g_w_cost * 100.0))))
+    println(bar)
+
+    // Print candidates
+    println("")
+    println("=== CANDIDATES ===")
+    println("")
+    i = 0
+    while i < g_lev_count {
+      let mut ids_str = ""
+      let mut j = 0
+      while j < g_lev_cand_count[i] {
+        if j > 0 {
+          ids_str = ids_str + ", "
+        }
+        ids_str = ids_str + g_c_id[g_lev_cand_start[i] + j]
+        j = j + 1
+      }
+      println(format("  L{}: {} ({})  {}", to_string(i + 1), g_lev_names[i], to_string(g_lev_cand_count[i]), ids_str))
+      i = i + 1
+    }
+
+    // Print top N
+    let show = min_val(top_n, res_count)
+    println("")
+    println(format("=== TOP {} ===", to_string(show)))
+    println("")
+
+    let mut hdr = format("  {} |", pad_l("Rank", 4))
+    i = 0
+    while i < g_lev_count {
+      let col_name = trunc_str(g_lev_names[i], 10)
+      hdr = hdr + format(" {} |", pad_l(col_name, 10))
+      i = i + 1
+    }
+    hdr = hdr + "  n6%  | Perf  | Power | Cost  | Pareto"
+    println(hdr)
+
+    let sep_w = 7 + (g_lev_count * 13) + 45
+    println(format("  {}", repeat_str("-", sep_w)))
+
+    let mut rank = 0
+    while rank < show {
+      let idx = sort_idx[rank]
+      let combo_indices = res_indices[idx]
+      let mut row = format("  {} |", pad_l(to_string(rank + 1), 4))
+      i = 0
+      while i < g_lev_count {
+        let ci = g_lev_cand_start[i] + combo_indices[i]
+        let short = trunc_str(g_c_id[ci], 10)
+        row = row + format(" {} |", pad_l(short, 10))
+        i = i + 1
+      }
+      row = row + format(" {} | {} | {} | {} | {}", pad_l(fmt_f1(res_n6[idx] * 100.0), 5), fmt_f3(res_perf[idx]), fmt_f3(res_power[idx]), fmt_f3(res_cost[idx]), fmt_f4(res_pareto[idx]))
+      println(row)
+      rank = rank + 1
+    }
+
+    // Best by category
+    println("")
+    println("=== BEST BY CATEGORY ===")
+    println("")
+
+    let mut best_n6_idx = 0
+    i = 0
+    while i < res_count {
+      if res_n6[i] > res_n6[best_n6_idx] {
+        best_n6_idx = i
+      }
+      i = i + 1
+    }
+    let mut path_n6 = ""
+    i = 0
+    while i < g_lev_count {
+      if i > 0 {
+        path_n6 = path_n6 + " + "
+      }
+      path_n6 = path_n6 + g_c_id[g_lev_cand_start[i] + res_indices[best_n6_idx][i]]
+      i = i + 1
+    }
+    println(format("  Best n6:    {} ({}%)", path_n6, fmt_f1(res_n6[best_n6_idx] * 100.0)))
+
+    let mut best_perf_idx = 0
+    i = 0
+    while i < res_count {
+      if res_perf[i] > res_perf[best_perf_idx] {
+        best_perf_idx = i
+      }
+      i = i + 1
+    }
+    let mut path_perf = ""
+    i = 0
+    while i < g_lev_count {
+      if i > 0 {
+        path_perf = path_perf + " + "
+      }
+      path_perf = path_perf + g_c_id[g_lev_cand_start[i] + res_indices[best_perf_idx][i]]
+      i = i + 1
+    }
+    println(format("  Best Perf:  {} (perf={})", path_perf, fmt_f3(res_perf[best_perf_idx])))
+
+    let mut best_pow_idx = 0
+    i = 0
+    while i < res_count {
+      if res_power[i] > res_power[best_pow_idx] {
+        best_pow_idx = i
+      }
+      i = i + 1
+    }
+    let mut path_pow = ""
+    i = 0
+    while i < g_lev_count {
+      if i > 0 {
+        path_pow = path_pow + " + "
+      }
+      path_pow = path_pow + g_c_id[g_lev_cand_start[i] + res_indices[best_pow_idx][i]]
+      i = i + 1
+    }
+    println(format("  Best Power: {} (power={})", path_pow, fmt_f3(res_power[best_pow_idx])))
+
+    let mut best_cost_idx = 0
+    i = 0
+    while i < res_count {
+      if res_cost[i] > res_cost[best_cost_idx] {
+        best_cost_idx = i
+      }
+      i = i + 1
+    }
+    let mut path_cost = ""
+    i = 0
+    while i < g_lev_count {
+      if i > 0 {
+        path_cost = path_cost + " + "
+      }
+      path_cost = path_cost + g_c_id[g_lev_cand_start[i] + res_indices[best_cost_idx][i]]
+      i = i + 1
+    }
+    println(format("  Best Cost:  {} (cost={})", path_cost, fmt_f3(res_cost[best_cost_idx])))
+
+    // Pareto frontier
+    println("")
+    let pareto_limit = min_val(500, res_count)
+    let mut frontier = []
+    let mut fi = 0
+    while fi < pareto_limit {
+      let mut dominated = false
+      let mut fj = 0
+      while fj < pareto_limit {
+        if fi != fj {
+          if dominated == false {
+            let a_n6 = res_n6[sort_idx[fj]]
+            let a_perf = res_perf[sort_idx[fj]]
+            let a_pow = res_power[sort_idx[fj]]
+            let a_cost = res_cost[sort_idx[fj]]
+            let b_n6 = res_n6[sort_idx[fi]]
+            let b_perf = res_perf[sort_idx[fi]]
+            let b_pow = res_power[sort_idx[fi]]
+            let b_cost = res_cost[sort_idx[fi]]
+            let all_geq = a_n6 >= b_n6
+            if all_geq {
+              if a_perf >= b_perf {
+                if a_pow >= b_pow {
+                  if a_cost >= b_cost {
+                    if a_n6 > b_n6 {
+                      dominated = true
+                    }
+                    if a_perf > b_perf {
+                      dominated = true
+                    }
+                    if a_pow > b_pow {
+                      dominated = true
+                    }
+                    if a_cost > b_cost {
+                      dominated = true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        fj = fj + 1
+      }
+      if dominated == false {
+        frontier = frontier + [sort_idx[fi]]
+      }
+      fi = fi + 1
+    }
+
+    println(format("=== PARETO FRONTIER ({} non-dominated solutions) ===", to_string(len(frontier))))
+    println("")
+    let pareto_show = min_val(10, len(frontier))
+    let mut pi = 0
+    while pi < pareto_show {
+      let idx2 = frontier[pi]
+      let combo_indices2 = res_indices[idx2]
+      let mut path2 = ""
+      let mut j = 0
+      while j < g_lev_count {
+        if j > 0 {
+          path2 = path2 + " + "
+        }
+        path2 = path2 + g_c_id[g_lev_cand_start[j] + combo_indices2[j]]
+        j = j + 1
+      }
+      println(format("  {}. {} | n6={}% perf={} pow={} cost={}", pad_l(to_string(pi + 1), 2), path2, fmt_f1(res_n6[idx2] * 100.0), fmt_f3(res_perf[idx2]), fmt_f3(res_power[idx2]), fmt_f3(res_cost[idx2])))
+      pi = pi + 1
+    }
+    if len(frontier) > pareto_show {
+      println(format("  ... +{} more", to_string(len(frontier) - pareto_show)))
+    }
+
+    // Statistics
+    println("")
+    println("=== STATISTICS ===")
+    println("")
+
+    let mut n6_max = -1.0
+    let mut n6_min = 2.0
+    let mut n6_sum = 0.0
+    let mut perf_max = -1.0
+    let mut perf_sum = 0.0
+
+    i = 0
+    while i < res_count {
+      let n6v = res_n6[i] * 100.0
+      if n6v > n6_max {
+        n6_max = n6v
+      }
+      if n6v < n6_min {
+        n6_min = n6v
+      }
+      n6_sum = n6_sum + n6v
+      if res_perf[i] > perf_max {
+        perf_max = res_perf[i]
+      }
+      perf_sum = perf_sum + res_perf[i]
+      i = i + 1
+    }
+
+    let n6_avg = n6_sum / (1.0 * res_count)
+    let perf_avg = perf_sum / (1.0 * res_count)
+
+    let mut sorted_n6 = []
+    i = 0
+    while i < res_count {
+      sorted_n6 = sorted_n6 + [res_n6[i] * 100.0]
+      i = i + 1
+    }
+    i = 0
+    while i < res_count {
+      let mut mn = i
+      let mut j = i + 1
+      while j < res_count {
+        if sorted_n6[j] < sorted_n6[mn] {
+          mn = j
+        }
+        j = j + 1
+      }
+      if mn != i {
+        let tmp2 = sorted_n6[i]
+        sorted_n6[i] = sorted_n6[mn]
+        sorted_n6[mn] = tmp2
+      }
+      i = i + 1
+    }
+
+    let p50 = sorted_n6[res_count / 2]
+    let p75 = sorted_n6[res_count * 3 / 4]
+    let p90 = sorted_n6[res_count * 9 / 10]
+
+    println(format("  n6%:  max={}  min={}  avg={}  p50={}  p75={}  p90={}", fmt_f1(n6_max), fmt_f1(n6_min), fmt_f1(n6_avg), fmt_f1(p50), fmt_f1(p75), fmt_f1(p90)))
+    println(format("  perf: max={}  avg={}", fmt_f3(perf_max), fmt_f3(perf_avg)))
+    println(format("  combos: {}", to_string(res_count)))
+
+    // ASCII optimal path
+    println("")
+    println("=== OPTIMAL PATH ===")
+    println("")
+    if res_count > 0 {
+      let best_combo = res_indices[sort_idx[0]]
+      i = 0
+      while i < g_lev_count {
+        let ci = g_lev_cand_start[i] + best_combo[i]
+        let bar_len = to_int(to_string(round(g_c_n6[ci] * 20.0)))
+        let bar_str = repeat_str("X", bar_len)
+        let empty_str = repeat_str(".", 20 - bar_len)
+        println(format("  L{} {}: [{}{}] n6={}%  {}", to_string(i + 1), pad_l(g_lev_names[i], 10), bar_str, empty_str, to_string(round(g_c_n6[ci] * 100.0)), g_c_label[ci]))
+        if i < g_lev_count - 1 {
+          println("        |")
+          println("        v")
+        }
+        i = i + 1
+      }
+    }
+    println("")
+  }
+}
+
+// ── Main ──
+
+let argv = args()
+let argc = len(argv)
+
+if argc < 3 {
+  println("Universal DSE Explorer -- n6-architecture")
+  println("")
+  println("Usage:")
+  println("  hexa main.hexa <domain.toml>                Single domain DSE")
+  println("  hexa main.hexa <domain.toml> --top 30       Custom top-N")
+} else {
+  let mut toml_files = []
+  let mut top_n = 20
+  let mut i = 2
+  while i < argc {
+    if argv[i] == "--top" {
+      if i + 1 < argc {
+        top_n = to_int(argv[i + 1])
+        i = i + 2
+      } else {
+        i = i + 1
+      }
+    } else {
+      toml_files = toml_files + [argv[i]]
+      i = i + 1
+    }
+  }
+
+  if len(toml_files) == 0 {
+    println("Error: no TOML files specified")
+  } else {
+    let mut di = 0
+    while di < len(toml_files) {
+      let content = read_file(toml_files[di])
+      let ok = load_domain(content)
+      if ok > 0 {
+        run_domain(top_n)
+      } else {
+        println(format("Warning: {} has no levels defined", toml_files[di]))
+      }
+      di = di + 1
+    }
+  }
+}

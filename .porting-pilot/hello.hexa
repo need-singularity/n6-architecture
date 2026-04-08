@@ -1,0 +1,8 @@
+let n = 6
+let sigma = 12
+let phi = 2
+let tau = 4
+let lhs = sigma * phi
+let rhs = n * tau
+println("lhs=" + to_string(lhs))
+println("rhs=" + to_string(rhs))

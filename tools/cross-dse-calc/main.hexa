@@ -1,0 +1,419 @@
+// Cross-DSE Pair Analysis Calculator (HEXA port)
+// Original: tools/cross-dse-calc/main.rs
+// Computes cross-compatibility scores for every domain pair.
+// Cross-score = geometric mean of (best_n6_A[i] * best_n6_B[i]) across shared levels
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn rd2(x) { round(x * 100.0) / 100.0 }
+fn rd4(x) { round(x * 10000.0) / 10000.0 }
+
+fn ln_approx(x) {
+    if x <= 0.0 { return -100.0 }
+    let ln2 = 0.6931471805599453
+    let mut val = x
+    let mut k = 0.0
+    while val > 2.0 {
+        val = val / 2.0
+        k = k + 1.0
+    }
+    while val < 0.5 {
+        val = val * 2.0
+        k = k - 1.0
+    }
+    let t = (val - 1.0) / (val + 1.0)
+    let t2 = t * t
+    let mut term = t
+    let mut result = t
+    let mut n = 1
+    while n < 29 {
+        term = term * t2
+        n = n + 2
+        result = result + term / (n * 1.0)
+    }
+    2.0 * result + k * ln2
+}
+
+fn exp_approx(x) {
+    if x < -50.0 { return 0.0 }
+    if x > 50.0 { return pow(10, 20) }
+    let mut sum = 1.0
+    let mut term = 1.0
+    let mut n = 1
+    while n < 60 {
+        term = term * x / (n * 1.0)
+        sum = sum + term
+        n = n + 1
+    }
+    sum
+}
+
+// ===== Embedded test domains =====
+// 6 domains x 5 levels each. Varied n6 to exercise geometric mean.
+// Flat arrays: domain i, level j -> index i*5+j
+
+let domain_names = ["marine-propulsion", "3d-printing", "quantum-sensor", "display", "network-protocol", "music-rhythm"]
+
+let domain_n6 = [1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 0.95, 1.00, 0.98, 1.00, 1.00, 1.00, 0.97, 0.96, 0.98, 1.00, 0.96, 1.00, 0.95]
+
+let domain_ids = ["H2-Fuel", "Electric-6phase", "Pod-Drive-12MW", "VoithSchneider", "Ferry-6route", "Ti6Al4V", "Binder-Jet", "HexInfill", "Multi-Laser-6", "Construction", "SQUID-6", "NV-Diamond", "Cryo-6K", "Entangle-12", "GravWave-6", "Perovskite", "uLED-Array", "QD-6nm", "DiffusionGen", "FreeformLens", "Mesh_N6", "WireGuard", "Segment", "Congestion", "LoadBal", "TS_POLY_2_3", "SC_HEXATONIC", "IN_GUITAR", "PR_48KHZ", "SP_MONITOR"]
+
+// cross_score = exp(mean(ln(n6_a[i] * n6_b[i]))) for i in 0..5
+fn compute_cross_score(a_idx, b_idx) {
+    let mut log_sum = 0.0
+    let mut i = 0
+    while i < 5 {
+        let va = domain_n6[a_idx * 5 + i]
+        let vb = domain_n6[b_idx * 5 + i]
+        let product = va * vb
+        if product > 0.0 {
+            log_sum = log_sum + ln_approx(product)
+        } else {
+            log_sum = log_sum + (-100.0)
+        }
+        i = i + 1
+    }
+    exp_approx(log_sum / 5.0)
+}
+
+fn count_shared_constants(a_idx, b_idx) {
+    let mut constants = []
+    let mut i = 0
+    while i < 5 {
+        let na = domain_n6[a_idx * 5 + i]
+        let nb = domain_n6[b_idx * 5 + i]
+        if na >= 0.99 {
+            if nb >= 0.99 {
+                let id_a = domain_ids[a_idx * 5 + i]
+                let id_b = domain_ids[b_idx * 5 + i]
+                constants = constants + [format("L{}:{}+{}", i, id_a, id_b)]
+            }
+        }
+        i = i + 1
+    }
+    constants
+}
+
+// ===== Compute all pairs =====
+let total_pairs = 6 * 5 / 2
+
+let mut pair_a = []
+let mut pair_b = []
+let mut pair_score = []
+let mut pair_constants = []
+
+let mut di = 0
+while di < 6 {
+    let mut dj = di + 1
+    while dj < 6 {
+        let score = compute_cross_score(di, dj)
+        let constants = count_shared_constants(di, dj)
+        pair_a = pair_a + [di]
+        pair_b = pair_b + [dj]
+        pair_score = pair_score + [score]
+        pair_constants = pair_constants + [constants]
+        dj = dj + 1
+    }
+    di = di + 1
+}
+
+// ===== Sort by cross_score descending (selection sort) =====
+let n_pairs = len(pair_score)
+let mut si = 0
+while si < n_pairs {
+    let mut max_idx = si
+    let mut sj = si + 1
+    while sj < n_pairs {
+        if pair_score[sj] > pair_score[max_idx] {
+            max_idx = sj
+        }
+        sj = sj + 1
+    }
+    if max_idx != si {
+        let tmp_a = pair_a[si]
+        let tmp_b = pair_b[si]
+        let tmp_s = pair_score[si]
+        let tmp_c = pair_constants[si]
+        pair_a[si] = pair_a[max_idx]
+        pair_b[si] = pair_b[max_idx]
+        pair_score[si] = pair_score[max_idx]
+        pair_constants[si] = pair_constants[max_idx]
+        pair_a[max_idx] = tmp_a
+        pair_b[max_idx] = tmp_b
+        pair_score[max_idx] = tmp_s
+        pair_constants[max_idx] = tmp_c
+    }
+    si = si + 1
+}
+
+// ===== Output =====
+println(format("Cross-DSE Analysis: 6 domains, {} pairs", total_pairs))
+println("")
+
+// Helper to join constants array
+fn join_constants(cs) {
+    let mut joined = ""
+    let mut ci = 0
+    let clen = len(cs)
+    while ci < clen {
+        if ci > 0 { joined = joined + ", " }
+        joined = joined + cs[ci]
+        ci = ci + 1
+    }
+    joined
+}
+
+// Top 5
+let show_top = if 5 < n_pairs { 5 } else { n_pairs }
+println(format("Top {} pairs:", show_top))
+let mut ti = 0
+while ti < show_top {
+    let a_name = domain_names[pair_a[ti]]
+    let b_name = domain_names[pair_b[ti]]
+    let sc = rd4(pair_score[ti])
+    let cs = pair_constants[ti]
+    let mut cs_str = ""
+    if len(cs) > 0 {
+        cs_str = " [" + join_constants(cs) + "]"
+    }
+    println(format("  {} x {}: {} (5 shared levels){}", a_name, b_name, sc, cs_str))
+    ti = ti + 1
+}
+
+// Bottom 5
+println("")
+let show_bottom = if 5 < n_pairs { 5 } else { n_pairs }
+println(format("Bottom {} pairs:", show_bottom))
+let start = if n_pairs > show_bottom { n_pairs - show_bottom } else { 0 }
+let mut bi = start
+while bi < n_pairs {
+    let a_name = domain_names[pair_a[bi]]
+    let b_name = domain_names[pair_b[bi]]
+    let sc = rd4(pair_score[bi])
+    let cs = pair_constants[bi]
+    let mut cs_str = ""
+    if len(cs) > 0 {
+        cs_str = " [" + join_constants(cs) + "]"
+    }
+    println(format("  {} x {}: {} (5 shared levels){}", a_name, b_name, sc, cs_str))
+    bi = bi + 1
+}
+
+// ===== Stats =====
+let mut score_sum = 0.0
+let mut qi = 0
+while qi < n_pairs {
+    score_sum = score_sum + pair_score[qi]
+    qi = qi + 1
+}
+let avg = if n_pairs > 0 { rd4(score_sum / (n_pairs * 1.0)) } else { 0.0 }
+
+// Median (already sorted descending, reverse for ascending)
+let mut sorted_scores = []
+let mut mi = 0
+while mi < n_pairs {
+    sorted_scores = sorted_scores + [pair_score[mi]]
+    mi = mi + 1
+}
+let mut ri = 0
+while ri < n_pairs / 2 {
+    let tmp = sorted_scores[ri]
+    sorted_scores[ri] = sorted_scores[n_pairs - 1 - ri]
+    sorted_scores[n_pairs - 1 - ri] = tmp
+    ri = ri + 1
+}
+let mid = n_pairs / 2
+let med = if n_pairs == 0 { 0.0 } else { if n_pairs % 2 == 0 { rd4((sorted_scores[mid - 1] + sorted_scores[mid]) / 2.0) } else { rd4(sorted_scores[mid]) } }
+
+let mut above_95 = 0
+let mut perfect = 0
+let mut ci2 = 0
+while ci2 < n_pairs {
+    if pair_score[ci2] > 0.95 { above_95 = above_95 + 1 }
+    if pair_score[ci2] >= 0.9999 { perfect = perfect + 1 }
+    ci2 = ci2 + 1
+}
+
+let pct_95 = if total_pairs > 0 { rd2(100.0 * (above_95 * 1.0) / (total_pairs * 1.0)) } else { 0.0 }
+let pct_perf = if total_pairs > 0 { rd2(100.0 * (perfect * 1.0) / (total_pairs * 1.0)) } else { 0.0 }
+
+println("")
+println("Stats:")
+println(format("  avg={}, median={}", avg, med))
+println(format("  >0.95: {} pairs ({}%)", above_95, pct_95))
+println(format("  =1.000: {} pairs ({}%)", perfect, pct_perf))
+
+// ===== Per-domain average cross-score =====
+println("")
+println("Per-domain average cross-score:")
+let mut dom_avg_scores = []
+let mut dom_avg_names = []
+let mut di2 = 0
+while di2 < 6 {
+    let mut dsum = 0.0
+    let mut dcnt = 0
+    let mut pi = 0
+    while pi < n_pairs {
+        if pair_a[pi] == di2 {
+            dsum = dsum + pair_score[pi]
+            dcnt = dcnt + 1
+        }
+        if pair_b[pi] == di2 {
+            dsum = dsum + pair_score[pi]
+            dcnt = dcnt + 1
+        }
+        pi = pi + 1
+    }
+    let davg = if dcnt > 0 { dsum / (dcnt * 1.0) } else { 0.0 }
+    dom_avg_scores = dom_avg_scores + [davg]
+    dom_avg_names = dom_avg_names + [domain_names[di2]]
+    di2 = di2 + 1
+}
+
+// Sort per-domain averages descending
+let mut si2 = 0
+while si2 < 6 {
+    let mut max_idx2 = si2
+    let mut sj2 = si2 + 1
+    while sj2 < 6 {
+        if dom_avg_scores[sj2] > dom_avg_scores[max_idx2] {
+            max_idx2 = sj2
+        }
+        sj2 = sj2 + 1
+    }
+    if max_idx2 != si2 {
+        let tmp_n = dom_avg_names[si2]
+        let tmp_s2 = dom_avg_scores[si2]
+        dom_avg_names[si2] = dom_avg_names[max_idx2]
+        dom_avg_scores[si2] = dom_avg_scores[max_idx2]
+        dom_avg_names[max_idx2] = tmp_n
+        dom_avg_scores[max_idx2] = tmp_s2
+    }
+    si2 = si2 + 1
+}
+
+let mut pi2 = 0
+while pi2 < 6 {
+    println(format("  {}: {}", dom_avg_names[pi2], rd4(dom_avg_scores[pi2])))
+    pi2 = pi2 + 1
+}
+
+// ===== Verification =====
+println("")
+println("--- Verification ---")
+let mut v_pass = 0
+let mut v_fail = 0
+
+// Check 1: marine-propulsion x 3d-printing (both all n6=1.0) -> score ~1.0
+let mut vi = 0
+let mut found_mp_3d = -1.0
+while vi < n_pairs {
+    let a_n = domain_names[pair_a[vi]]
+    let b_n = domain_names[pair_b[vi]]
+    if a_n == "marine-propulsion" {
+        if b_n == "3d-printing" { found_mp_3d = pair_score[vi] }
+    }
+    if a_n == "3d-printing" {
+        if b_n == "marine-propulsion" { found_mp_3d = pair_score[vi] }
+    }
+    vi = vi + 1
+}
+if found_mp_3d >= 0.9999 {
+    println("  [PASS] marine-propulsion x 3d-printing = " + to_string(rd4(found_mp_3d)) + " (expected ~1.0)")
+    v_pass = v_pass + 1
+} else {
+    println("  [FAIL] marine-propulsion x 3d-printing = " + to_string(rd4(found_mp_3d)) + " (expected ~1.0)")
+    v_fail = v_fail + 1
+}
+
+// Check 2: display x music-rhythm (sub-1.0 levels) -> score < 1.0
+let mut vi2 = 0
+let mut found_dm = -1.0
+while vi2 < n_pairs {
+    let a_n2 = domain_names[pair_a[vi2]]
+    let b_n2 = domain_names[pair_b[vi2]]
+    if a_n2 == "display" {
+        if b_n2 == "music-rhythm" { found_dm = pair_score[vi2] }
+    }
+    if a_n2 == "music-rhythm" {
+        if b_n2 == "display" { found_dm = pair_score[vi2] }
+    }
+    vi2 = vi2 + 1
+}
+// Expected: exp(mean(ln(1*0.98) + ln(1*1) + ln(0.95*0.96) + ln(1*1) + ln(0.98*0.95)))
+let expected_dm = exp_approx((ln_approx(1.0 * 0.98) + ln_approx(1.0 * 1.0) + ln_approx(0.95 * 0.96) + ln_approx(1.0 * 1.0) + ln_approx(0.98 * 0.95)) / 5.0)
+if abs(found_dm - expected_dm) < 0.001 {
+    println("  [PASS] display x music-rhythm = " + to_string(rd4(found_dm)) + " (expected ~" + to_string(rd4(expected_dm)) + ")")
+    v_pass = v_pass + 1
+} else {
+    println("  [FAIL] display x music-rhythm = " + to_string(rd4(found_dm)) + " (expected ~" + to_string(rd4(expected_dm)) + ")")
+    v_fail = v_fail + 1
+}
+
+// Check 3: total_pairs count = C(6,2) = 15
+if total_pairs == 15 {
+    println(format("  [PASS] total_pairs = {} (expected 15)", total_pairs))
+    v_pass = v_pass + 1
+} else {
+    println(format("  [FAIL] total_pairs = {} (expected 15)", total_pairs))
+    v_fail = v_fail + 1
+}
+
+// Check 4: marine x quantum-sensor (both all 1.0) -> score ~1.0
+let mut vi3 = 0
+let mut found_mq = -1.0
+while vi3 < n_pairs {
+    let a_n3 = domain_names[pair_a[vi3]]
+    let b_n3 = domain_names[pair_b[vi3]]
+    if a_n3 == "marine-propulsion" {
+        if b_n3 == "quantum-sensor" { found_mq = pair_score[vi3] }
+    }
+    if a_n3 == "quantum-sensor" {
+        if b_n3 == "marine-propulsion" { found_mq = pair_score[vi3] }
+    }
+    vi3 = vi3 + 1
+}
+if found_mq >= 0.9999 {
+    println("  [PASS] marine-propulsion x quantum-sensor = " + to_string(rd4(found_mq)) + " (expected ~1.0)")
+    v_pass = v_pass + 1
+} else {
+    println("  [FAIL] marine-propulsion x quantum-sensor = " + to_string(rd4(found_mq)) + " (expected ~1.0)")
+    v_fail = v_fail + 1
+}
+
+// Check 5: top pair score >= bottom pair score (sort correctness)
+if pair_score[0] >= pair_score[n_pairs - 1] {
+    println("  [PASS] sort order: top >= bottom")
+    v_pass = v_pass + 1
+} else {
+    println("  [FAIL] sort order: top < bottom")
+    v_fail = v_fail + 1
+}
+
+// Check 6: per-domain avg for all-1.0 domains >= mixed domains
+let mut all1_avg = -1.0
+let mut mixed_avg = -1.0
+let mut ai = 0
+while ai < 6 {
+    if dom_avg_names[ai] == "marine-propulsion" { all1_avg = dom_avg_scores[ai] }
+    if dom_avg_names[ai] == "music-rhythm" { mixed_avg = dom_avg_scores[ai] }
+    ai = ai + 1
+}
+if all1_avg >= mixed_avg {
+    println("  [PASS] per-domain: marine-propulsion avg >= music-rhythm avg")
+    v_pass = v_pass + 1
+} else {
+    println("  [FAIL] per-domain: marine-propulsion avg < music-rhythm avg")
+    v_fail = v_fail + 1
+}
+
+println("")
+println(format("Result: {} PASS, {} FAIL", v_pass, v_fail))

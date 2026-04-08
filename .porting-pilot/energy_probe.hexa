@@ -1,0 +1,24 @@
+// Probe: features needed for energy-calc port (round 2 - skip ln/log10/sci-notation)
+println("=== F1: float precision in to_string ===")
+let f = 1.34
+println("[" + to_string(f) + "]")
+let g = 0.337
+println("[" + to_string(g) + "]")
+
+println("=== F5: float * float arithmetic ===")
+let a = 12.0
+let b = 4.0
+let c = a / (a / b)
+println("12.0 / (12.0/4.0) =", c)
+
+println("=== F6: array.contains() ===")
+let xs = ["--solar", "--battery", "--all"]
+let has_all = xs.contains("--all")
+println("contains --all:", has_all)
+
+println("=== F7: tuple destructuring === SKIP (B-15)")
+
+println("=== F8: ternary chain (else if) ===")
+let err = 0.5
+let mark = if err < 1.0 { "OK" } else if err < 5.0 { "WARN" } else { "FAIL" }
+println("mark =", mark)

@@ -1,0 +1,560 @@
+// N6 Material Synthesis DSE (HEXA port)
+// Original: tools/material-dse/main.rs
+// 소재 x 공정 x 조립기 x 제어 x 시스템 전수 조합 탐색기
+
+// N6 constants
+let N = 6.0
+let PHI = 2.0
+let TAU = 4.0
+let SIGMA = 12.0
+let SOPFR = 5.0
+let MU = 1.0
+let J2 = 24.0
+
+// Helper functions
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn fmt1(x) {
+    let v = round(x * 10.0) / 10.0
+    let mut s = to_string(v)
+    if s.contains(".") == false { s = s + ".0" }
+    s
+}
+fn fmt2(x) {
+    let v = round(x * 100.0) / 100.0
+    let mut s = to_string(v)
+    if s.contains(".") == false { s = s + ".00" }
+    s
+}
+fn repeat_char(c, n) {
+    let mut r = ""
+    let mut i = 0
+    while i < n {
+        r = r + c
+        i = i + 1
+    }
+    r
+}
+
+// Build a table row with | separators
+fn row12(a, b, c, d, e, f, g, h, i, j, k, l) {
+    "  " + a + " | " + b + " | " + c + " | " + d + " | " + e + " | " + f + " | " + g + " | " + h + " | " + i + " | " + j + " | " + k + " | " + l
+}
+fn row11(a, b, c, d, e, f, g, h, i, j, k) {
+    "  " + a + " | " + b + " | " + c + " | " + d + " | " + e + " | " + f + " | " + g + " | " + h + " | " + i + " | " + j + " | " + k
+}
+fn best_line(label, eid, pid, aid, cid, fid, val) {
+    "    " + label + eid + "+" + pid + "+" + aid + "+" + cid + "+" + fid + " = " + val
+}
+
+// ============================================================
+// Level 1: Element (5 candidates)
+// ============================================================
+let e_id   = ["E1", "E2", "E3", "E4", "E5"]
+let e_name = ["Carbon_Z6", "Silicon_Z14", "TransitionMetal", "NobleMetal", "Ceramic"]
+let e_n6   = [1.0, 0.7, 0.8, 0.6, 0.5]
+let e_perf = [95.0, 85.0, 80.0, 90.0, 75.0]
+let e_pwr  = [70.0, 75.0, 65.0, 60.0, 80.0]
+let e_cost = [60.0, 90.0, 50.0, 20.0, 70.0]
+let e_count = 5
+
+// ============================================================
+// Level 2: Process (6 candidates)
+// ============================================================
+let p_id   = ["P1", "P2", "P3", "P4", "P5", "P6"]
+let p_name = ["ALD", "MBE", "CVD", "Mechanosynthesis", "Electrochemistry", "SelfAssembly"]
+let p_n6   = [0.9, 0.7, 0.6, 0.8, 0.7, 1.0]
+let p_perf = [90.0, 95.0, 80.0, 98.0, 75.0, 85.0]
+let p_pwr  = [70.0, 50.0, 75.0, 60.0, 80.0, 90.0]
+let p_cost = [75.0, 40.0, 85.0, 30.0, 80.0, 70.0]
+let p_count = 6
+
+// ============================================================
+// Level 3: Assembler (6 candidates)
+// ============================================================
+let a_id   = ["A1", "A2", "A3", "A4", "A5", "A6"]
+let a_name = ["STM_tip", "MolecularAsm", "DNA_origami", "OpticalTweezer", "FocusedIonBeam", "NanobotSwarm"]
+let a_n6   = [0.8, 0.9, 1.0, 0.6, 0.5, 0.7]
+let a_perf = [95.0, 98.0, 80.0, 85.0, 90.0, 92.0]
+let a_pwr  = [40.0, 70.0, 90.0, 65.0, 50.0, 75.0]
+let a_cost = [30.0, 25.0, 60.0, 50.0, 45.0, 35.0]
+let a_count = 6
+
+// ============================================================
+// Level 4: Control (4 candidates)
+// ============================================================
+let c_id   = ["C1", "C2", "C3", "C4"]
+let c_name = ["ClassicalPID", "QuantumSensing", "AI_ML_Control", "HybridQC"]
+let c_n6   = [0.5, 0.9, 0.7, 0.8]
+let c_perf = [70.0, 95.0, 90.0, 98.0]
+let c_pwr  = [85.0, 60.0, 75.0, 70.0]
+let c_cost = [90.0, 40.0, 70.0, 50.0]
+let c_count = 4
+
+// ============================================================
+// Level 5: Factory (5 candidates)
+// ============================================================
+let f_id   = ["F1", "F2", "F3", "F4", "F5"]
+let f_name = ["SingleStation", "ParallelArray", "ConvergentAsm", "DistribSwarm", "SelfReplicating"]
+let f_n6   = [0.4, 0.6, 0.8, 0.7, 1.0]
+let f_perf = [50.0, 80.0, 90.0, 85.0, 99.0]
+let f_pwr  = [90.0, 75.0, 70.0, 80.0, 65.0]
+let f_cost = [95.0, 70.0, 55.0, 50.0, 30.0]
+let f_count = 5
+
+let total_combos = e_count * p_count * a_count * c_count * f_count
+
+println("================================================================")
+println("  N6 Material Synthesis DSE")
+println("  궁극의 물질합성 — 소재 x 공정 x 조립기 x 제어 x 시스템")
+println("================================================================")
+println("")
+println("  N6 Core: sigma(" + to_string(SIGMA) + ")·phi(" + to_string(PHI) + ") = n(" + to_string(N) + ")·tau(" + to_string(TAU) + ")")
+println("           " + to_string(SIGMA) + "·" + to_string(PHI) + " = " + to_string(N) + "·" + to_string(TAU) + " = " + to_string(SIGMA * PHI))
+println("")
+
+// Build candidate ID strings
+fn join_ids(arr, cnt) {
+    let mut r = ""
+    let mut i = 0
+    while i < cnt {
+        if i > 0 { r = r + "," }
+        r = r + arr[i]
+        i = i + 1
+    }
+    r
+}
+
+println("  후보군:")
+println("    소재(Element):   " + join_ids(e_id, e_count) + " candidates (" + to_string(e_count) + ")")
+println("    공정(Process):   " + join_ids(p_id, p_count) + " candidates (" + to_string(p_count) + ")")
+println("    조립기(Assembler): " + join_ids(a_id, a_count) + " candidates (" + to_string(a_count) + ")")
+println("    제어(Control):   " + join_ids(c_id, c_count) + " candidates (" + to_string(c_count) + ")")
+println("    시스템(Factory): " + join_ids(f_id, f_count) + " candidates (" + to_string(f_count) + ")")
+println("")
+println("  총 조합 수: " + to_string(e_count) + "x" + to_string(p_count) + "x" + to_string(a_count) + "x" + to_string(c_count) + "x" + to_string(f_count) + " = " + to_string(total_combos))
+println("")
+
+// ============================================================
+// Enumerate all 3600 combinations - parallel arrays
+// ============================================================
+let mut r_ei = []
+let mut r_pi = []
+let mut r_ai = []
+let mut r_ci = []
+let mut r_fi = []
+let mut r_n6pct = []
+let mut r_perf = []
+let mut r_pwr = []
+let mut r_cost = []
+let mut r_total = []
+let mut r_count = 0
+
+let mut ei = 0
+while ei < e_count {
+    let mut pi = 0
+    while pi < p_count {
+        let mut ai = 0
+        while ai < a_count {
+            let mut ci = 0
+            while ci < c_count {
+                let mut fi = 0
+                while fi < f_count {
+                    let n6_product = e_n6[ei] * p_n6[pi] * a_n6[ai] * c_n6[ci] * f_n6[fi]
+                    let n6_exact_pct = n6_product * 100.0
+                    let perf = (e_perf[ei] + p_perf[pi] + a_perf[ai] + c_perf[ci] + f_perf[fi]) / 5.0
+                    let pwr = (e_pwr[ei] + p_pwr[pi] + a_pwr[ai] + c_pwr[ci] + f_pwr[fi]) / 5.0
+                    let cost = (e_cost[ei] + p_cost[pi] + a_cost[ai] + c_cost[ci] + f_cost[fi]) / 5.0
+                    let total_score = 0.35 * n6_exact_pct + 0.25 * perf + 0.20 * pwr + 0.20 * cost
+
+                    r_ei = r_ei + [ei]
+                    r_pi = r_pi + [pi]
+                    r_ai = r_ai + [ai]
+                    r_ci = r_ci + [ci]
+                    r_fi = r_fi + [fi]
+                    r_n6pct = r_n6pct + [n6_exact_pct]
+                    r_perf = r_perf + [perf]
+                    r_pwr = r_pwr + [pwr]
+                    r_cost = r_cost + [cost]
+                    r_total = r_total + [total_score]
+                    r_count = r_count + 1
+
+                    fi = fi + 1
+                }
+                ci = ci + 1
+            }
+            ai = ai + 1
+        }
+        pi = pi + 1
+    }
+    ei = ei + 1
+}
+
+// ============================================================
+// Sort by total_score descending (selection sort via index array)
+// ============================================================
+let mut sort_idx = []
+let mut si = 0
+while si < r_count {
+    sort_idx = sort_idx + [si]
+    si = si + 1
+}
+
+si = 0
+while si < r_count {
+    let mut best = si
+    let mut sj = si + 1
+    while sj < r_count {
+        if r_total[sort_idx[sj]] > r_total[sort_idx[best]] {
+            best = sj
+        }
+        sj = sj + 1
+    }
+    if best != si {
+        let tmp = sort_idx[si]
+        sort_idx[si] = sort_idx[best]
+        sort_idx[best] = tmp
+    }
+    si = si + 1
+}
+
+// ============================================================
+// Find Pareto frontier
+// ============================================================
+let mut pareto = []
+let mut pareto_count = 0
+
+let mut ii = 0
+while ii < r_count {
+    let mut dominated = false
+    let mut jj = 0
+    while jj < r_count {
+        if ii != jj {
+            let an6 = r_n6pct[jj]
+            let ap = r_perf[jj]
+            let aw = r_pwr[jj]
+            let ac = r_cost[jj]
+            let bn6 = r_n6pct[ii]
+            let bp = r_perf[ii]
+            let bw = r_pwr[ii]
+            let bc = r_cost[ii]
+
+            let mut all_geq = true
+            let mut any_gt = false
+
+            if an6 < bn6 { all_geq = false }
+            if ap < bp { if all_geq { all_geq = false } }
+            if aw < bw { if all_geq { all_geq = false } }
+            if ac < bc { if all_geq { all_geq = false } }
+
+            if all_geq {
+                if an6 > bn6 { any_gt = true }
+                if ap > bp { any_gt = true }
+                if aw > bw { any_gt = true }
+                if ac > bc { any_gt = true }
+            }
+
+            if all_geq {
+                if any_gt { dominated = true }
+            }
+        }
+        if dominated { jj = r_count }
+        if dominated == false { jj = jj + 1 }
+    }
+    if dominated == false {
+        pareto = pareto + [ii]
+        pareto_count = pareto_count + 1
+    }
+    ii = ii + 1
+}
+
+// ============================================================
+// TOP 20 TABLE
+// ============================================================
+println("================================================================================================================================")
+println("  TOP 20 CONFIGURATIONS (by total score)")
+println("================================================================================================================================")
+println("")
+println(row12(pad_l("Rank", 4), pad_l("소재", 14), pad_l("공정", 14), pad_l("조립기", 14), pad_l("제어", 14), pad_l("시스템", 14), pad_l("n6_EX%", 7), pad_l("성능", 5), pad_l("전력", 5), pad_l("비용", 5), pad_l("종합", 6), pad_l("PF", 3)))
+println("  -----+----------------+----------------+----------------+----------------+----------------+---------+-------+-------+-------+--------+----")
+
+let mut rank = 0
+while rank < 20 {
+    let idx = sort_idx[rank]
+    let r_e = r_ei[idx]
+    let r_p = r_pi[idx]
+    let r_a = r_ai[idx]
+    let r_c = r_ci[idx]
+    let r_f = r_fi[idx]
+
+    // Check if this index is in pareto
+    let mut is_pareto = ""
+    let mut pk = 0
+    while pk < pareto_count {
+        if pareto[pk] == idx { is_pareto = "*" }
+        pk = pk + 1
+    }
+
+    println(row12(pad_l(to_string(rank + 1), 4), pad_l(e_name[r_e], 14), pad_l(p_name[r_p], 14), pad_l(a_name[r_a], 14), pad_l(c_name[r_c], 14), pad_l(f_name[r_f], 14), pad_l(fmt1(r_n6pct[idx]), 6) + "%", pad_l(fmt1(r_perf[idx]), 5), pad_l(fmt1(r_pwr[idx]), 5), pad_l(fmt1(r_cost[idx]), 5), pad_l(fmt2(r_total[idx]), 6), pad_l(is_pareto, 3)))
+
+    rank = rank + 1
+}
+
+// ============================================================
+// PARETO FRONTIER
+// ============================================================
+println("")
+println("================================================================")
+println("  PARETO FRONTIER (" + to_string(pareto_count) + " non-dominated solutions)")
+println("================================================================")
+println("")
+println(row11(pad_l("#", 4), pad_l("소재", 14), pad_l("공정", 14), pad_l("조립기", 14), pad_l("제어", 14), pad_l("시스템", 14), pad_l("n6_EX%", 7), pad_l("성능", 5), pad_l("전력", 5), pad_l("비용", 5), pad_l("종합", 6)))
+println("  -----+----------------+----------------+----------------+----------------+----------------+---------+-------+-------+-------+--------")
+
+// Sort pareto indices by total_score descending
+let mut p_sort = []
+let mut psi = 0
+while psi < pareto_count {
+    p_sort = p_sort + [pareto[psi]]
+    psi = psi + 1
+}
+
+psi = 0
+while psi < pareto_count {
+    let mut best = psi
+    let mut psj = psi + 1
+    while psj < pareto_count {
+        if r_total[p_sort[psj]] > r_total[p_sort[best]] {
+            best = psj
+        }
+        psj = psj + 1
+    }
+    if best != psi {
+        let tmp = p_sort[psi]
+        p_sort[psi] = p_sort[best]
+        p_sort[best] = tmp
+    }
+    psi = psi + 1
+}
+
+let mut pri = 0
+while pri < pareto_count {
+    let idx = p_sort[pri]
+    let r_e = r_ei[idx]
+    let r_p = r_pi[idx]
+    let r_a = r_ai[idx]
+    let r_c = r_ci[idx]
+    let r_f = r_fi[idx]
+
+    println(row11(pad_l(to_string(pri + 1), 4), pad_l(e_name[r_e], 14), pad_l(p_name[r_p], 14), pad_l(a_name[r_a], 14), pad_l(c_name[r_c], 14), pad_l(f_name[r_f], 14), pad_l(fmt1(r_n6pct[idx]), 6) + "%", pad_l(fmt1(r_perf[idx]), 5), pad_l(fmt1(r_pwr[idx]), 5), pad_l(fmt1(r_cost[idx]), 5), pad_l(fmt2(r_total[idx]), 6)))
+
+    pri = pri + 1
+}
+
+// ============================================================
+// STATISTICS
+// ============================================================
+println("")
+println("================================================================")
+println("  STATISTICS")
+println("================================================================")
+
+let mut max_n6 = 0.0
+let mut min_n6 = 100.0
+let mut sum_n6 = 0.0
+let mut above50 = 0
+let mut above30 = 0
+let mut above10 = 0
+
+let mut sti = 0
+while sti < r_count {
+    let v = r_n6pct[sti]
+    if v > max_n6 { max_n6 = v }
+    if v < min_n6 { min_n6 = v }
+    sum_n6 = sum_n6 + v
+    if v > 50.0 { above50 = above50 + 1 }
+    if v > 30.0 { above30 = above30 + 1 }
+    if v > 10.0 { above10 = above10 + 1 }
+    sti = sti + 1
+}
+let avg_n6 = sum_n6 / r_count
+
+println("")
+println("  Total combinations explored:  " + to_string(total_combos))
+println("  Pareto-optimal solutions:     " + to_string(pareto_count))
+println("")
+println("  n6 EXACT distribution:")
+println("    Max n6_EXACT:    " + fmt1(max_n6) + "%")
+println("    Min n6_EXACT:    " + fmt1(min_n6) + "%")
+println("    Avg n6_EXACT:    " + fmt1(avg_n6) + "%")
+println("    n6 > 50%:        " + to_string(above50) + " (" + fmt1(above50 * 100.0 / total_combos) + "% of total)")
+println("    n6 > 30%:        " + to_string(above30) + " (" + fmt1(above30 * 100.0 / total_combos) + "% of total)")
+println("    n6 > 10%:        " + to_string(above10) + " (" + fmt1(above10 * 100.0 / total_combos) + "% of total)")
+
+// Best per objective
+println("")
+println("  BEST BY OBJECTIVE:")
+
+// Find best indices
+let mut best_n6_idx = 0
+let mut best_perf_idx = 0
+let mut best_pwr_idx = 0
+let mut best_cost_idx = 0
+
+let mut bi = 0
+while bi < r_count {
+    if r_n6pct[bi] > r_n6pct[best_n6_idx] { best_n6_idx = bi }
+    if r_perf[bi] > r_perf[best_perf_idx] { best_perf_idx = bi }
+    if r_pwr[bi] > r_pwr[best_pwr_idx] { best_pwr_idx = bi }
+    if r_cost[bi] > r_cost[best_cost_idx] { best_cost_idx = bi }
+    bi = bi + 1
+}
+
+let best_total_idx = sort_idx[0]
+
+println(best_line("Best n6_EXACT:  ", e_id[r_ei[best_n6_idx]], p_id[r_pi[best_n6_idx]], a_id[r_ai[best_n6_idx]], c_id[r_ci[best_n6_idx]], f_id[r_fi[best_n6_idx]], fmt1(r_n6pct[best_n6_idx]) + "%"))
+println(best_line("Best Perf:      ", e_id[r_ei[best_perf_idx]], p_id[r_pi[best_perf_idx]], a_id[r_ai[best_perf_idx]], c_id[r_ci[best_perf_idx]], f_id[r_fi[best_perf_idx]], fmt1(r_perf[best_perf_idx])))
+println(best_line("Best Power:     ", e_id[r_ei[best_pwr_idx]], p_id[r_pi[best_pwr_idx]], a_id[r_ai[best_pwr_idx]], c_id[r_ci[best_pwr_idx]], f_id[r_fi[best_pwr_idx]], fmt1(r_pwr[best_pwr_idx])))
+println(best_line("Best Cost:      ", e_id[r_ei[best_cost_idx]], p_id[r_pi[best_cost_idx]], a_id[r_ai[best_cost_idx]], c_id[r_ci[best_cost_idx]], f_id[r_fi[best_cost_idx]], fmt1(r_cost[best_cost_idx])))
+println(best_line("Best Total:     ", e_id[r_ei[best_total_idx]], p_id[r_pi[best_total_idx]], a_id[r_ai[best_total_idx]], c_id[r_ci[best_total_idx]], f_id[r_fi[best_total_idx]], fmt2(r_total[best_total_idx])))
+
+// ============================================================
+// OPTIMAL PATH ASCII DIAGRAM
+// ============================================================
+let best_idx = sort_idx[0]
+let b_e = r_ei[best_idx]
+let b_p = r_pi[best_idx]
+let b_a = r_ai[best_idx]
+let b_c = r_ci[best_idx]
+let b_f = r_fi[best_idx]
+
+println("")
+println("================================================================")
+println("  OPTIMAL PATH — 궁극의 물질합성 최적 경로")
+println("================================================================")
+println("")
+println("  n6_EXACT = " + fmt1(r_n6pct[best_idx]) + "% | 성능 = " + fmt1(r_perf[best_idx]) + " | 전력 = " + fmt1(r_pwr[best_idx]) + " | 비용 = " + fmt1(r_cost[best_idx]) + " | 종합 = " + fmt2(r_total[best_idx]))
+println("")
+
+// ASCII box diagram
+println("  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐")
+println("  │   소재 (L1)  │     │  공정 (L2)   │     │ 조립기 (L3)  │     │  제어 (L4)   │     │ 시스템 (L5)  │")
+println("  │              │     │              │     │              │     │              │     │              │")
+println("  │ " + pad_l(e_name[b_e], 12) + " │ ──> │ " + pad_l(p_name[b_p], 12) + " │ ──> │ " + pad_l(a_name[b_a], 12) + " │ ──> │ " + pad_l(c_name[b_c], 12) + " │ ──> │ " + pad_l(f_name[b_f], 12) + " │")
+
+// n6 scores per level
+let b_en6 = round(e_n6[b_e] * 100.0)
+let b_pn6 = round(p_n6[b_p] * 100.0)
+let b_an6 = round(a_n6[b_a] * 100.0)
+let b_cn6 = round(c_n6[b_c] * 100.0)
+let b_fn6 = round(f_n6[b_f] * 100.0)
+
+println("  │  n6=" + pad_r(to_string(b_en6), 4) + " %    │     │  n6=" + pad_r(to_string(b_pn6), 4) + " %    │     │  n6=" + pad_r(to_string(b_an6), 4) + " %    │     │  n6=" + pad_r(to_string(b_cn6), 4) + " %    │     │  n6=" + pad_r(to_string(b_fn6), 4) + " %    │")
+println("  └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘")
+println("")
+
+// N6 Connection
+println("  N6 Connection:")
+
+let e_conn = ["Carbon Z=6 = n (diamond/graphene/CNT)", "Silicon Z=14 = sigma+phi", "Transition Metal CN=6 octahedral", "Noble Metal Au(79~80=phi^tau*sopfr)", "Ceramic oxide/nitride"]
+println("    L1 " + e_id[b_e] + " — " + e_conn[b_e])
+
+let p_conn = ["ALD cycle ~ n steps", "MBE molecular beam", "CVD chemical vapor", "Mechanosynthesis (tip)", "Electrochemistry", "SelfAssembly hexagonal = n=6 symmetry"]
+println("    L2 " + p_id[b_p] + " — " + p_conn[b_p])
+
+let a_conn = ["STM tip 0.1nm = 1/(sigma-phi)", "Molecular Assembler", "DNA origami 6 H-bonds = n", "Optical Tweezer", "Focused Ion Beam", "Nanobot Swarm"]
+println("    L3 " + a_id[b_a] + " — " + a_conn[b_a])
+
+let c_conn = ["Classical PID", "Quantum Sensing (NV diamond = C = Z6)", "AI/ML Control", "Hybrid Quantum-Classical"]
+println("    L4 " + c_id[b_c] + " — " + c_conn[b_c])
+
+let f_conn = ["Single Station", "Parallel Array", "Convergent Assembly", "Distributed Swarm", "Self-Replicating (exponential)"]
+println("    L5 " + f_id[b_f] + " — " + f_conn[b_f])
+
+// ============================================================
+// N6 EXACT RATIO
+// ============================================================
+println("")
+println("================================================================")
+println("  N6 EXACT RATIO (n6_exact > 50%)")
+println("================================================================")
+println("")
+println("  " + to_string(above50) + " / " + to_string(total_combos) + " combinations have n6_EXACT > 50%")
+println("  Ratio: " + fmt1(above50 * 100.0 / total_combos) + "%")
+println("")
+
+// Top-50 distribution by level
+fn count_top50(sort_arr, r_idx_arr, target_val, r_cnt) {
+    let mut cnt = 0
+    let mut i = 0
+    let lim = if r_cnt < 50 { r_cnt } else { 50 }
+    while i < lim {
+        let idx = sort_arr[i]
+        if r_idx_arr[idx] == target_val { cnt = cnt + 1 }
+        i = i + 1
+    }
+    cnt
+}
+
+println("  Top-50 element distribution:")
+let mut di = 0
+while di < e_count {
+    let cnt = count_top50(sort_idx, r_ei, di, r_count)
+    let bar = repeat_char("#", cnt)
+    println("    " + e_id[di] + " " + pad_l(e_name[di], 14) + ": " + pad_l(to_string(cnt), 2) + " " + bar)
+    di = di + 1
+}
+
+println("")
+println("  Top-50 process distribution:")
+di = 0
+while di < p_count {
+    let cnt = count_top50(sort_idx, r_pi, di, r_count)
+    let bar = repeat_char("#", cnt)
+    println("    " + p_id[di] + " " + pad_l(p_name[di], 14) + ": " + pad_l(to_string(cnt), 2) + " " + bar)
+    di = di + 1
+}
+
+println("")
+println("  Top-50 assembler distribution:")
+di = 0
+while di < a_count {
+    let cnt = count_top50(sort_idx, r_ai, di, r_count)
+    let bar = repeat_char("#", cnt)
+    println("    " + a_id[di] + " " + pad_l(a_name[di], 14) + ": " + pad_l(to_string(cnt), 2) + " " + bar)
+    di = di + 1
+}
+
+println("")
+println("  Top-50 control distribution:")
+di = 0
+while di < c_count {
+    let cnt = count_top50(sort_idx, r_ci, di, r_count)
+    let bar = repeat_char("#", cnt)
+    println("    " + c_id[di] + " " + pad_l(c_name[di], 14) + ": " + pad_l(to_string(cnt), 2) + " " + bar)
+    di = di + 1
+}
+
+println("")
+println("  Top-50 factory distribution:")
+di = 0
+while di < f_count {
+    let cnt = count_top50(sort_idx, r_fi, di, r_count)
+    let bar = repeat_char("#", cnt)
+    println("    " + f_id[di] + " " + pad_l(f_name[di], 14) + ": " + pad_l(to_string(cnt), 2) + " " + bar)
+    di = di + 1
+}
+
+println("")
+println("================================================================")
+println("  DSE 완료 — " + to_string(total_combos) + " 조합 전수 탐색, Pareto " + to_string(pareto_count) + " 최적 경로 도출")
+println("  sigma(" + to_string(SIGMA) + ")·phi(" + to_string(PHI) + ") = n(" + to_string(N) + ")·tau(" + to_string(TAU) + ") = " + to_string(SIGMA * PHI) + " -- n=6 is unique")
+println("================================================================")

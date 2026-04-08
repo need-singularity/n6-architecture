@@ -1,0 +1,531 @@
+// HEXA-BATTERY Design Space Exploration (DSE)
+// Original: tools/battery-dse/main.rs
+// 소재 x 공정 x 코어 x 칩 x 시스템 전수 조합 최적 배터리 설계 도출
+
+// --- helpers ---
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd2(x) { round(x * 100.0) / 100.0 }
+fn rd3(x) { round(x * 1000.0) / 1000.0 }
+fn rd4(x) { round(x * 10000.0) / 10000.0 }
+
+fn format_comma(n) {
+    let s = to_string(n)
+    let slen = len(s)
+    let mut result = ""
+    let mut ci = 0
+    while ci < slen {
+        let pos = slen - 1 - ci
+        if ci > 0 {
+            if ci % 3 == 0 { result = "," + result }
+        }
+        // extract char at pos
+        let ch = s[pos]
+        result = ch + result
+        ci = ci + 1
+    }
+    result
+}
+
+// --- N6 constants ---
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let J2 = 24
+
+// ============================================================
+// Level 1: 소재 (Material) — 6 candidates
+// ============================================================
+let mat_name     = ["LFP",   "NMC811", "NCA",   "LCO",   "Na-ion", "Li-S"]
+let mat_cn       = [6,       6,        6,       6,       6,        8]
+let mat_n6m      = [4,       3,        3,       4,       3,        5]
+let mat_n6t      = [4,       4,        4,       4,       4,        6]
+let mat_ed       = [170.0,   280.0,    260.0,   200.0,   140.0,    500.0]
+let mat_cyc      = [4000,    1000,     1500,    500,     3000,     300]
+let mat_cost     = [0.65,    1.00,     0.95,    1.20,    0.45,     0.55]
+let mat_safe     = [0.95,    0.70,     0.72,    0.65,    0.92,     0.50]
+let mat_count = 6
+
+// ============================================================
+// Level 2: 공정 (Process/Electrode) — 5 candidates
+// ============================================================
+let proc_name    = ["Graphite-Wet", "SiC-10%-Wet", "SiC-20%-Dry", "Si-SSB", "Na-HardCarbon"]
+let proc_anode   = ["Graphite",     "Si-Graphite",  "Si-Graphite",  "Si-Solid", "HardCarbon"]
+let proc_n6m     = [2,              1,              1,              2,          1]
+let proc_n6t     = [2,              2,              2,              2,          2]
+let proc_cap     = [1.0,            1.5,            2.0,            3.0,        0.8]
+let proc_mat     = [1.00,           0.85,           0.55,           0.25,       0.70]
+let proc_cost    = [0.50,           0.70,           0.80,           1.40,       0.40]
+let proc_count = 5
+
+// ============================================================
+// Level 3: 코어 (Core/Cell Form) — 5 candidates
+// ============================================================
+let core_name    = ["18650",   "21700",   "4680",    "Prismatic", "Pouch"]
+let core_ff      = ["Cylindrical", "Cylindrical", "Cylindrical", "Prismatic", "Pouch"]
+let core_n6m     = [2,         1,         1,         1,           1]
+let core_n6t     = [3,         3,         3,         3,           3]
+let core_emult   = [1.00,      1.15,      1.30,      1.10,        1.25]
+let core_therm   = [0.85,      0.82,      0.70,      0.75,        0.65]
+let core_mcost   = [0.60,      0.65,      0.70,      0.80,        0.85]
+let core_count = 5
+
+// ============================================================
+// Level 4: 칩 (Chip/BMS) — 5 candidates
+// ============================================================
+let chip_name    = ["Discrete-6ch", "Integrated-12ch", "Wireless-12ch", "AI-BMS-12ch", "Minimal-4ch"]
+let chip_ch      = [6,              12,                 12,              12,             4]
+let chip_adc     = [12,             12,                 12,              16,             10]
+let chip_n6m     = [3,              4,                  4,               3,              2]
+let chip_n6t     = [4,              4,                  4,               4,              4]
+let chip_acc     = [0.85,           0.92,               0.90,            0.96,           0.78]
+let chip_feat    = [0.50,           0.80,               0.90,            1.00,           0.35]
+let chip_cost    = [0.30,           0.60,               0.90,            1.10,           0.20]
+let chip_count = 5
+
+// ============================================================
+// Level 5: 시스템 (System) — 5 candidates
+// ============================================================
+let sys_name     = ["48V-ESS", "400V-EV", "800V-EV", "Grid-MW", "DC-Micro"]
+let sys_cells    = [24,        96,        192,       3456,      24]
+let sys_volt     = [48,        400,       800,       1000,      48]
+let sys_n6m      = [4,         3,         3,         3,         4]
+let sys_n6t      = [4,         4,         4,         4,         4]
+let sys_scal     = [0.70,      0.80,      0.85,      1.00,      0.55]
+let sys_grid     = [0.85,      0.40,      0.40,      1.00,      0.75]
+let sys_cost     = [0.50,      0.85,      1.10,      2.00,      0.35]
+let sys_count = 5
+
+// ============================================================
+// Header
+// ============================================================
+let bar65 = "=".repeat(65)
+println(bar65)
+println("  HEXA-BATTERY Design Space Exploration (DSE)")
+println("  소재 x 공정 x 코어 x 칩 x 시스템 전수 탐색")
+println(bar65)
+println("")
+
+// Print candidates
+fn join_arr(arr, cnt) {
+    let mut r = ""
+    let mut i = 0
+    while i < cnt {
+        if i > 0 { r = r + ", " }
+        r = r + arr[i]
+        i = i + 1
+    }
+    r
+}
+
+println("  후보군:")
+println("    소재:   " + join_arr(mat_name, mat_count) + " (" + to_string(mat_count) + ")")
+println("    공정:   " + join_arr(proc_name, proc_count) + " (" + to_string(proc_count) + ")")
+println("    코어:   " + join_arr(core_name, core_count) + " (" + to_string(core_count) + ")")
+println("    칩:     " + join_arr(chip_name, chip_count) + " (" + to_string(chip_count) + ")")
+println("    시스템: " + join_arr(sys_name, sys_count) + " (" + to_string(sys_count) + ")")
+println("")
+
+let total_combos = mat_count * proc_count * core_count * chip_count * sys_count
+println("  총 조합: " + format_comma(total_combos))
+
+// ============================================================
+// Enumerate all compatible combinations
+// ============================================================
+let mut r_mi = []
+let mut r_pi = []
+let mut r_ci = []
+let mut r_bi = []
+let mut r_si = []
+let mut r_n6pct = []
+let mut r_perf = []
+let mut r_tcost = []
+let mut r_cscore = []
+let mut r_safety = []
+let mut r_life = []
+let mut r_maturity = []
+let mut r_pareto = []
+let mut rcount = 0
+
+let mut mi = 0
+while mi < mat_count {
+    let mut pi = 0
+    while pi < proc_count {
+        // Compatibility: Na-ion only with Na-HardCarbon
+        let mut mat_proc_ok = true
+        if mat_name[mi] == "Na-ion" {
+            if proc_name[pi] != "Na-HardCarbon" { mat_proc_ok = false }
+        }
+        if proc_name[pi] == "Na-HardCarbon" {
+            if mat_name[mi] != "Na-ion" { mat_proc_ok = false }
+        }
+        // Li-S only with Si-SSB
+        if mat_name[mi] == "Li-S" {
+            if proc_name[pi] != "Si-SSB" { mat_proc_ok = false }
+        }
+        // Si-SSB not with Na-ion
+        if proc_name[pi] == "Si-SSB" {
+            if mat_name[mi] == "Na-ion" { mat_proc_ok = false }
+        }
+
+        if mat_proc_ok {
+            let mut cci = 0
+            while cci < core_count {
+                let mut bi = 0
+                while bi < chip_count {
+                    let mut si = 0
+                    while si < sys_count {
+                        // More compatibility checks
+                        let mut ok = true
+                        // Minimal BMS not for high voltage
+                        if chip_name[bi] == "Minimal-4ch" {
+                            if sys_name[si] == "400V-EV" { ok = false }
+                            if sys_name[si] == "800V-EV" { ok = false }
+                            if sys_name[si] == "Grid-MW" { ok = false }
+                        }
+                        // 18650 impractical for 800V
+                        if core_name[cci] == "18650" {
+                            if sys_name[si] == "800V-EV" { ok = false }
+                        }
+
+                        if ok {
+                            // Score
+                            let n6_exact = mat_n6m[mi] + proc_n6m[pi] + core_n6m[cci] + chip_n6m[bi] + sys_n6m[si]
+                            let n6_total = mat_n6t[mi] + proc_n6t[pi] + core_n6t[cci] + chip_n6t[bi] + sys_n6t[si]
+                            let n6_pct = n6_exact * 1.0 / (n6_total * 1.0) * 100.0
+
+                            let perf = (mat_ed[mi] * proc_cap[pi] * core_emult[cci]) / (500.0 * 3.0 * 1.30)
+
+                            let total_cost = mat_cost[mi] + proc_cost[pi] + core_mcost[cci] + chip_cost[bi] + sys_cost[si]
+                            let cost_score = 1.0 / total_cost
+
+                            let safety = mat_safe[mi] * core_therm[cci]
+
+                            let life = mat_cyc[mi] * 1.0 / 4000.0
+
+                            let maturity = proc_mat[pi]
+
+                            let pareto = n6_pct / 100.0 * 0.20 + perf * 0.25 + cost_score * 2.0 * 0.15 + safety * 0.15 + life * 0.15 + maturity * 0.10
+
+                            r_mi = r_mi + [mi]
+                            r_pi = r_pi + [pi]
+                            r_ci = r_ci + [cci]
+                            r_bi = r_bi + [bi]
+                            r_si = r_si + [si]
+                            r_n6pct = r_n6pct + [n6_pct]
+                            r_perf = r_perf + [perf]
+                            r_tcost = r_tcost + [total_cost]
+                            r_cscore = r_cscore + [cost_score]
+                            r_safety = r_safety + [safety]
+                            r_life = r_life + [life]
+                            r_maturity = r_maturity + [maturity]
+                            r_pareto = r_pareto + [pareto]
+                            rcount = rcount + 1
+                        }
+
+                        si = si + 1
+                    }
+                    bi = bi + 1
+                }
+                cci = cci + 1
+            }
+        }
+        pi = pi + 1
+    }
+    mi = mi + 1
+}
+
+println("  호환 조합: " + to_string(rcount) + " (필터 후)")
+println("")
+
+// ============================================================
+// Find TOP 20 by pareto (iterative max extraction, no full sort)
+// ============================================================
+let mut top20 = []
+let mut top20_count = 0
+
+let mut top_limit = 20
+if rcount < 20 { top_limit = rcount }
+
+let mut ti = 0
+while ti < top_limit {
+    let mut best_idx = -1
+    let mut best_val = -999.0
+    let mut si2 = 0
+    while si2 < rcount {
+        if r_pareto[si2] > best_val {
+            let mut already = false
+            let mut ck = 0
+            while ck < top20_count {
+                if top20[ck] == si2 { already = true }
+                ck = ck + 1
+            }
+            if already == false {
+                best_val = r_pareto[si2]
+                best_idx = si2
+            }
+        }
+        si2 = si2 + 1
+    }
+    top20 = top20 + [best_idx]
+    top20_count = top20_count + 1
+    ti = ti + 1
+}
+
+// ============================================================
+// TOP 20
+// ============================================================
+let bar130 = "=".repeat(130)
+println(bar130)
+println("  TOP 20 (by Pareto score)")
+println(bar130)
+println("")
+
+println("  " + pad_l("Rank", 4) + " | " + pad_l("Material", 8) + " | " + pad_l("Process", 14) + " | " + pad_l("Core", 9) + " | " + pad_l("Chip", 15) + " | " + pad_l("System", 9) + " | " + pad_l("n6%", 5) + " | " + pad_l("Perf", 5) + " | " + pad_l("Cost", 5) + " | " + pad_l("Safe", 5) + " | " + pad_l("Life", 5) + " | " + pad_l("Pareto", 6))
+
+let sep_line = "  " + "-".repeat(5) + "+" + "-".repeat(10) + "+" + "-".repeat(16) + "+" + "-".repeat(11) + "+" + "-".repeat(17) + "+" + "-".repeat(11) + "+" + "-".repeat(7) + "+" + "-".repeat(7) + "+" + "-".repeat(7) + "+" + "-".repeat(7) + "+" + "-".repeat(7) + "+" + "-".repeat(7)
+println(sep_line)
+
+let mut tii = 0
+while tii < top20_count {
+    let idx = top20[tii]
+    let rank = tii + 1
+    let n6_str = to_string(rd1(r_n6pct[idx])) + "%"
+    println("  " + pad_l(to_string(rank), 4) + " | " + pad_l(mat_name[r_mi[idx]], 8) + " | " + pad_l(proc_name[r_pi[idx]], 14) + " | " + pad_l(core_name[r_ci[idx]], 9) + " | " + pad_l(chip_name[r_bi[idx]], 15) + " | " + pad_l(sys_name[r_si[idx]], 9) + " | " + pad_l(n6_str, 5) + " | " + pad_l(to_string(rd3(r_perf[idx])), 5) + " | " + pad_l(to_string(rd2(r_tcost[idx])), 5) + " | " + pad_l(to_string(rd2(r_safety[idx])), 5) + " | " + pad_l(to_string(rd2(r_life[idx])), 5) + " | " + pad_l(to_string(rd4(r_pareto[idx])), 6))
+    tii = tii + 1
+}
+
+// ============================================================
+// BEST BY CATEGORY
+// ============================================================
+println("")
+println(bar130)
+println("  BEST BY CATEGORY")
+println(bar130)
+
+fn fmt_path(idx) {
+    mat_name[r_mi[idx]] + " + " + proc_name[r_pi[idx]] + " + " + core_name[r_ci[idx]] + " + " + chip_name[r_bi[idx]] + " + " + sys_name[r_si[idx]]
+}
+
+// Best n6
+let mut best_n6_idx = 0
+let mut best_n6_val = r_n6pct[0]
+let mut bn = 1
+while bn < rcount {
+    if r_n6pct[bn] > best_n6_val {
+        best_n6_val = r_n6pct[bn]
+        best_n6_idx = bn
+    }
+    bn = bn + 1
+}
+
+// Best perf
+let mut best_perf_idx = 0
+let mut best_perf_val = r_perf[0]
+let mut bp = 1
+while bp < rcount {
+    if r_perf[bp] > best_perf_val {
+        best_perf_val = r_perf[bp]
+        best_perf_idx = bp
+    }
+    bp = bp + 1
+}
+
+// Best cost (lowest)
+let mut best_cost_idx = 0
+let mut best_cost_val = r_tcost[0]
+let mut bc = 1
+while bc < rcount {
+    if r_tcost[bc] < best_cost_val {
+        best_cost_val = r_tcost[bc]
+        best_cost_idx = bc
+    }
+    bc = bc + 1
+}
+
+// Best safety
+let mut best_safe_idx = 0
+let mut best_safe_val = r_safety[0]
+let mut bs = 1
+while bs < rcount {
+    if r_safety[bs] > best_safe_val {
+        best_safe_val = r_safety[bs]
+        best_safe_idx = bs
+    }
+    bs = bs + 1
+}
+
+// Best life
+let mut best_life_idx = 0
+let mut best_life_val = r_life[0]
+let mut bl = 1
+while bl < rcount {
+    if r_life[bl] > best_life_val {
+        best_life_val = r_life[bl]
+        best_life_idx = bl
+    }
+    bl = bl + 1
+}
+
+// Best maturity
+let mut best_matu_idx = 0
+let mut best_matu_val = r_maturity[0]
+let mut bm = 1
+while bm < rcount {
+    if r_maturity[bm] > best_matu_val {
+        best_matu_val = r_maturity[bm]
+        best_matu_idx = bm
+    }
+    bm = bm + 1
+}
+
+println("    Best n6 EXACT:    " + fmt_path(best_n6_idx) + " (" + to_string(rd1(best_n6_val)) + "%)")
+let eff_whkg = round(best_perf_val * 500.0 * 3.0 * 1.30)
+println("    Best Performance: " + fmt_path(best_perf_idx) + " (" + to_string(round(eff_whkg)) + " Wh/kg effective)")
+println("    Best Cost:        " + fmt_path(best_cost_idx) + " ($" + to_string(rd2(best_cost_val)) + " relative)")
+println("    Best Safety:      " + fmt_path(best_safe_idx) + " (" + to_string(rd2(best_safe_val)) + ")")
+let best_life_cyc = round(best_life_val * 4000.0)
+println("    Best Longevity:   " + fmt_path(best_life_idx) + " (" + to_string(round(best_life_cyc)) + " cycles)")
+println("    Best Maturity:    " + fmt_path(best_matu_idx) + " (" + to_string(rd2(best_matu_val)) + " TRL)")
+
+// ============================================================
+// N6 ANALYSIS
+// ============================================================
+println("")
+println(bar130)
+println("  N6 ANALYSIS")
+println(bar130)
+println("")
+
+// Per-level best n6
+let mut blm_i = 0
+let mut blm_v = 0
+let mut bli = 0
+while bli < mat_count {
+    let v = mat_n6m[bli] * 100 / mat_n6t[bli]
+    if v > blm_v {
+        blm_v = v
+        blm_i = bli
+    }
+    bli = bli + 1
+}
+let mut blp_i = 0
+let mut blp_v = 0
+let mut bpi = 0
+while bpi < proc_count {
+    let v = proc_n6m[bpi] * 100 / proc_n6t[bpi]
+    if v > blp_v {
+        blp_v = v
+        blp_i = bpi
+    }
+    bpi = bpi + 1
+}
+let mut blc_i = 0
+let mut blc_v = 0
+let mut bci = 0
+while bci < core_count {
+    let v = core_n6m[bci] * 100 / core_n6t[bci]
+    if v > blc_v {
+        blc_v = v
+        blc_i = bci
+    }
+    bci = bci + 1
+}
+let mut blb_i = 0
+let mut blb_v = 0
+let mut bbi = 0
+while bbi < chip_count {
+    let v = chip_n6m[bbi] * 100 / chip_n6t[bbi]
+    if v > blb_v {
+        blb_v = v
+        blb_i = bbi
+    }
+    bbi = bbi + 1
+}
+let mut bls_i = 0
+let mut bls_v = 0
+let mut bsi = 0
+while bsi < sys_count {
+    let v = sys_n6m[bsi] * 100 / sys_n6t[bsi]
+    if v > bls_v {
+        bls_v = v
+        bls_i = bsi
+    }
+    bsi = bsi + 1
+}
+
+println("  Per-level best n6:")
+println("    소재:   " + mat_name[blm_i] + " (" + to_string(mat_n6m[blm_i]) + "/" + to_string(mat_n6t[blm_i]) + ")")
+println("    공정:   " + proc_name[blp_i] + " (" + to_string(proc_n6m[blp_i]) + "/" + to_string(proc_n6t[blp_i]) + ")")
+println("    코어:   " + core_name[blc_i] + " (" + to_string(core_n6m[blc_i]) + "/" + to_string(core_n6t[blc_i]) + ")")
+println("    칩:     " + chip_name[blb_i] + " (" + to_string(chip_n6m[blb_i]) + "/" + to_string(chip_n6t[blb_i]) + ")")
+println("    시스템: " + sys_name[bls_i] + " (" + to_string(sys_n6m[bls_i]) + "/" + to_string(sys_n6t[bls_i]) + ")")
+println("")
+
+// n6 vs Performance trade-off
+// perf rank of best n6 combo = 1 + count of combos with higher perf
+let mut best_n6_perf_rank = 1
+let mut pri = 0
+while pri < rcount {
+    if r_perf[pri] > r_perf[best_n6_idx] {
+        best_n6_perf_rank = best_n6_perf_rank + 1
+    }
+    pri = pri + 1
+}
+
+// best perf combo's n6 and pareto rank
+let best_perf_n6 = r_n6pct[best_perf_idx]
+let mut best_perf_pareto_rank = 1
+let mut pra = 0
+while pra < rcount {
+    if r_pareto[pra] > r_pareto[best_perf_idx] {
+        best_perf_pareto_rank = best_perf_pareto_rank + 1
+    }
+    pra = pra + 1
+}
+
+println("  n6 vs Performance trade-off:")
+println("    100% n6 path -> perf = " + to_string(rd3(r_perf[best_n6_idx])) + " (perf rank #" + to_string(best_n6_perf_rank) + ")")
+println("    Best perf    -> n6 = " + to_string(rd1(best_perf_n6)) + "% (pareto rank #" + to_string(best_perf_pareto_rank) + ")")
+
+// ============================================================
+// STATISTICS
+// ============================================================
+println("")
+println(bar130)
+println("  STATISTICS")
+println(bar130)
+
+let mut sum_n6 = 0.0
+let mut max_n6 = 0.0
+let mut above80 = 0
+let mut above60 = 0
+let mut sti = 0
+while sti < rcount {
+    sum_n6 = sum_n6 + r_n6pct[sti]
+    if r_n6pct[sti] > max_n6 { max_n6 = r_n6pct[sti] }
+    if r_n6pct[sti] >= 80.0 { above80 = above80 + 1 }
+    if r_n6pct[sti] >= 60.0 { above60 = above60 + 1 }
+    sti = sti + 1
+}
+let avg_n6 = sum_n6 / (rcount * 1.0)
+
+println("  Compatible combinations: " + to_string(rcount))
+println("  Max n6 EXACT:  " + to_string(rd1(max_n6)) + "%")
+println("  Avg n6 EXACT:  " + to_string(rd1(avg_n6)) + "%")
+println("  >=80% EXACT:   " + to_string(above80) + " (" + to_string(rd1(above80 * 1.0 / (rcount * 1.0) * 100.0)) + "%)")
+println("  >=60% EXACT:   " + to_string(above60) + " (" + to_string(rd1(above60 * 1.0 / (rcount * 1.0) * 100.0)) + "%)")
+println("")
+println("  DSE 완료")
+println(bar130)

@@ -1,0 +1,254 @@
+// N6 Fusion Calculator — 핵융합 파라미터 계산 + n=6 검증 (HEXA port)
+// Original: tools/fusion-calc/main.rs
+
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+let N6 = 6
+
+fn pad_r(s, width) {
+    let mut result = s
+    while len(result) < width { result = result + " " }
+    result
+}
+fn pad_l(s, width) {
+    let mut result = s
+    while len(result) < width { result = " " + result }
+    result
+}
+
+// ── n6 유도 상수 생성 ──
+fn build_derived() {
+    let base_v = [SIGMA, TAU, PHI, SOPFR, J2, MU, N6]
+    let base_n = ["σ", "τ", "φ", "sopfr", "J₂", "μ", "n"]
+    let mut vals = []
+    let mut exprs = []
+    let mut i = 0
+    while i < 7 {
+        let a = base_v[i]
+        let na = base_n[i]
+        // 기본값 추가 (중복 체크)
+        let mut found = false
+        let mut c = 0
+        while c < len(vals) {
+            if vals[c] == a { found = true }
+            c = c + 1
+        }
+        if !found {
+            vals = vals + [a]
+            exprs = exprs + [na]
+        }
+        let mut j = 0
+        while j < 7 {
+            let b = base_v[j]
+            let nb = base_n[j]
+            // sum
+            let sum = a + b
+            if sum <= 200 {
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == sum { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [sum]
+                    exprs = exprs + [na + "+" + nb]
+                }
+            }
+            // diff
+            if a > b {
+                let diff = a - b
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == diff { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [diff]
+                    exprs = exprs + [na + "-" + nb]
+                }
+            }
+            // prod
+            let prod = a * b
+            if prod <= 200 {
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == prod { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [prod]
+                    exprs = exprs + [na + "×" + nb]
+                }
+            }
+            // div
+            if b > 0 && a % b == 0 {
+                let div = a / b
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == div { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [div]
+                    exprs = exprs + [na + "/" + nb]
+                }
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    [vals, exprs]
+}
+
+fn check_n6(value, d_vals, d_exprs) {
+    let mut i = 0
+    while i < len(d_vals) {
+        if d_vals[i] == value { return d_exprs[i] }
+        i = i + 1
+    }
+    ""
+}
+
+// ── 장치 분석 ──
+fn analyze_device(name, param_names, param_vals, d_vals, d_exprs) {
+    println("")
+    println(format("  ═══ {} ═══", name))
+    let mut exact = 0
+    let mut close = 0
+    let mut miss = 0
+    let mut i = 0
+    while i < len(param_names) {
+        let pname = param_names[i]
+        let pval = param_vals[i]
+        let int_val = round(pval)
+        let expr = check_n6(int_val, d_vals, d_exprs)
+        let mut grade = "MISS"
+        let mut marker = "❌"
+        let mut expr_show = "-"
+        if expr != "" {
+            if abs(pval - int_val) < 0.01 {
+                grade = "EXACT"
+                marker = "✅"
+                exact = exact + 1
+            } else {
+                grade = "CLOSE"
+                marker = "~"
+                close = close + 1
+            }
+            expr_show = expr
+        } else {
+            miss = miss + 1
+        }
+        println("    " + marker + " " + pad_r(pname, 20) + " = " + pad_l(to_string(pval), 8) + " → " + grade + " (" + expr_show + ")")
+        i = i + 1
+    }
+    let total = exact + close + miss
+    let score = (exact + 0.5 * close) / total * 100.0
+    println("    ────────────────────────────────────────")
+    println(format("    EXACT={} CLOSE={} MISS={} Score={}%", exact, close, miss, round(score * 10.0) / 10.0))
+}
+
+// ── Lawson ──
+fn lawson_analysis() {
+    println("")
+    println("  ═══ LAWSON CRITERION ═══")
+    println("    n·T·τ_E ≥ 5×10²¹ m⁻³·keV·s (D-T ignition)")
+    println("")
+    println("    " + pad_r("Scenario", 15) + " " + pad_l("n(m⁻³)", 10) + " " + pad_l("T(keV)", 8) + " " + pad_l("τ_E(s)", 8) + " " + pad_l("Triple", 12) + " " + pad_l("Q_est", 8))
+    println("    " + "-".repeat(70))
+
+    let sc_name = ["ITER", "KSTAR-current", "DEMO", "Breakeven"]
+    let sc_n = [1.0 * pow(10.0, 20.0), 0.7 * pow(10.0, 20.0), 1.5 * pow(10.0, 20.0), 1.0 * pow(10.0, 20.0)]
+    let sc_t = [8.8, 10.0, 15.0, 10.0]
+    let sc_tau = [3.7, 0.4, 5.0, 5.0]
+    let ignition = 5.0 * pow(10.0, 21.0)
+    let mut i = 0
+    while i < 4 {
+        let triple = sc_n[i] * sc_t[i] * sc_tau[i]
+        let qe = triple / ignition * 10.0
+        let status = if triple >= ignition { "IGNITION" } else { "sub-Q" }
+        println("    " + pad_r(sc_name[i], 15) + " " + pad_l(to_string(sc_n[i]), 10) + " " + pad_l(to_string(sc_t[i]), 8) + " " + pad_l(to_string(sc_tau[i]), 8) + " " + pad_l(to_string(triple), 12) + " " + pad_l(to_string(round(qe * 10.0) / 10.0), 8) + " (" + status + ")")
+        i = i + 1
+    }
+
+    println("")
+    println("    n=6 predictions:")
+    println(format("    T_ignition = sopfr×φ = {} keV ✅", SOPFR * PHI))
+    println(format("    T_optimal  = J₂-τ = {} keV (D-T cross-section peak)", J2 - TAU))
+    println("    τ_E needed  = σ? → 12s (too long, actual ~3-5s) ❌")
+}
+
+// ── Nuclear Reactions ──
+fn reaction_analysis() {
+    println("")
+    println("  ═══ NUCLEAR REACTIONS ═══")
+    println("")
+    println("    D-T: ²H + ³H → ⁴He + n + 17.6 MeV")
+    println(format("      D mass = {} = φ(6) ✅", PHI))
+    println("      T mass = 3 = n/φ ✅")
+    println(format("      He4 mass = {} = τ(6) ✅", TAU))
+    println(format("      n mass = {} = μ(6) ✅", MU))
+    println(format("      D+T = {} = sopfr(6) ✅", SOPFR))
+    println(format("      He4+n = {} = τ+μ ✅", TAU + MU))
+    println(format("      E_n/E_α = 14.1/3.5 = 4.03 ≈ τ/μ = {} ✅", TAU))
+    println("")
+    println("    D-D: ²H + ²H → two branches (φ=2 ✅)")
+    println("      Branch 1: ³He + n (3+1 = τ)")
+    println("      Branch 2: T + p (3+1 = τ)")
+    println("")
+    println("    D-He3: ²H + ³He → ⁴He + p + 18.3 MeV")
+    println(format("      Aneutronic! Products: {} + {} = τ + μ", TAU, MU))
+    println("")
+    println("    p-B11: ¹H + ¹¹B → 3 × ⁴He + 8.7 MeV")
+    println(format("      B-11 = σ-μ = {} ✅", SIGMA - MU))
+    println("      Products: 3 alphas = n/φ × He4")
+    println("")
+    println("    Li-6 breeding: ⁶Li + n → T + ⁴He + 4.8 MeV")
+    println(format("      Li-6 mass = {} = n ✅", N6))
+    println(format("      Products: T(3) + He4({}) = n/φ + τ", TAU))
+}
+
+// ── main ──
+
+println("╔══════════════════════════════════════════════════════╗")
+println("║  N6 FUSION CALCULATOR                               ║")
+println("║  핵융합 파라미터 계산 + n=6 검증                      ║")
+println("╚══════════════════════════════════════════════════════╝")
+
+let derived = build_derived()
+let d_vals = derived[0]
+let d_exprs = derived[1]
+
+// KSTAR
+let kstar_names = ["A_ratio", "BT_T", "CS_modules", "ECH_MW", "ICH_MW", "IVC_coils", "Ip_MA", "NBI_MW", "PF_coils", "R0_m", "TF_coils", "T_keV", "a_m", "density_ctrl", "elongation", "heating_methods"]
+let kstar_vals = [3.6, 3.5, 8.0, 1.0, 6.0, 4.0, 2.0, 8.0, 14.0, 1.8, 16.0, 10.0, 0.5, 4.0, 2.0, 3.0]
+analyze_device("KSTAR", kstar_names, kstar_vals, d_vals, d_exprs)
+
+// ITER
+let iter_names = ["A_ratio", "BT_T", "CS_modules", "ECRH_MW", "ICRH_MW", "Ip_MA", "NBI_MW", "PF_coils", "Q_target", "R0_m", "TBM_ports", "TF_coils", "a_m", "elongation", "heating_methods"]
+let iter_vals = [3.1, 5.3, 6.0, 20.0, 20.0, 15.0, 33.0, 6.0, 10.0, 6.2, 6.0, 18.0, 2.0, 1.7, 3.0]
+analyze_device("ITER", iter_names, iter_vals, d_vals, d_exprs)
+
+// SPARC
+let sparc_names = ["A_ratio", "BT_T", "ICRH_MW", "Ip_MA", "Q_target", "R0_m", "TF_coils", "a_m"]
+let sparc_vals = [3.25, 12.2, 25.0, 8.7, 11.0, 1.85, 18.0, 0.57]
+analyze_device("SPARC", sparc_names, sparc_vals, d_vals, d_exprs)
+
+lawson_analysis()
+reaction_analysis()
+
+println("")
+println("  ═══ SUMMARY ═══")
+println("    D-T reaction: ALL mass numbers match n=6 (5/5 EXACT)")
+println("    Li-6 breeding: mass number = n = 6 (EXACT)")
+println("    SPARC BT = 12T ≈ σ (EXACT)")
+println("    ITER PF=6, CS=6, TBM=6 (all n, EXACT)")
+println("    TF coils: FAIL across all devices (16/18/18/32)")

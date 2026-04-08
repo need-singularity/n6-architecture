@@ -1,0 +1,1297 @@
+// EVOLVE v2 — Genetic Formula Miner for n=6 Architecture (HEXA port)
+// Depth-3 exhaustive + GA(5000,500) + expanded targets + ppm output + surprisal
+// Original: tools/formula-miner/main.rs
+
+// ── N=6 Base Constants ──────────────────────────────────────────────
+let N_VAL = 6.0
+let PHI_VAL = 2.0
+let TAU_VAL = 4.0
+let SIGMA_VAL = 12.0
+let J2_VAL = 24.0
+let SOPFR_VAL = 5.0
+let MU_VAL = 1.0
+
+let NC = 7
+let CONST_NAMES = ["n", "phi", "tau", "sigma", "J2", "sopfr", "mu"]
+let CONST_VALS = [6.0, 2.0, 4.0, 12.0, 24.0, 5.0, 1.0]
+
+// Operations: 0=Add, 1=Sub, 2=Mul, 3=Div, 4=Pow
+let NUM_OPS = 5
+let OP_SYMS = ["+", "-", "*", "/", "^"]
+
+// ── Helpers ─────────────────────────────────────────────────────────
+fn pad_r(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  r
+}
+
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn fmt2(x) {
+  to_string(round(x * 100.0) / 100.0)
+}
+
+fn fmt4(x) {
+  to_string(round(x * 10000.0) / 10000.0)
+}
+
+fn fmt6(x) {
+  to_string(round(x * 1000000.0) / 1000000.0)
+}
+
+fn fmt1_ppm(x) {
+  to_string(round(x * 10.0) / 10.0)
+}
+
+fn log10(x) {
+  log(x) / log(10.0)
+}
+
+fn max_val(a, b) {
+  if a > b { a } else { b }
+}
+
+fn min_val(a, b) {
+  if a < b { a } else { b }
+}
+
+fn is_finite(x) {
+  if x != x { false }
+  else if x > pow(10, 30) { false }
+  else if x < 0.0 - pow(10, 30) { false }
+  else { true }
+}
+
+// ── Operation eval ──────────────────────────────────────────────────
+fn op_eval(op, a, b) {
+  // returns [valid, value] where valid=1 means ok
+  if op == 0 {
+    [1, a + b]
+  } else if op == 1 {
+    [1, a - b]
+  } else if op == 2 {
+    [1, a * b]
+  } else if op == 3 {
+    if abs(b) < pow(10, -15) {
+      [0, 0.0]
+    } else {
+      [1, a / b]
+    }
+  } else {
+    // Pow
+    if abs(a) < pow(10, -15) {
+      if b < 0.0 { [0, 0.0] }
+      else { [1, 0.0] }
+    } else if abs(a) > pow(10, 6) {
+      [0, 0.0]
+    } else if abs(b) > 50.0 {
+      [0, 0.0]
+    } else {
+      let r = pow(a, b)
+      if is_finite(r) {
+        if abs(r) < pow(10, 30) { [1, r] }
+        else { [0, 0.0] }
+      } else {
+        [0, 0.0]
+      }
+    }
+  }
+}
+
+// ── Expression formatting ───────────────────────────────────────────
+// For leaf: just the constant name
+// For binop: format as "left op right" with parens around sub-expressions
+fn fmt_leaf(idx) {
+  CONST_NAMES[idx]
+}
+
+fn fmt_binop(op, left_str, right_str, left_is_binop, right_is_binop) {
+  let mut s = ""
+  if left_is_binop {
+    s = s + "(" + left_str + ")"
+  } else {
+    s = s + left_str
+  }
+  s = s + " " + OP_SYMS[op] + " "
+  if right_is_binop {
+    s = s + "(" + right_str + ")"
+  } else {
+    s = s + right_str
+  }
+  s
+}
+
+// ── Value deduplication key ─────────────────────────────────────────
+fn val_key(v) {
+  if abs(v) < pow(10, -30) { 0 }
+  else {
+    let ex = floor(log10(abs(v)))
+    let mantissa = v / pow(10.0, ex)
+    round(mantissa * pow(10, 8))
+  }
+}
+
+// ── Targets ─────────────────────────────────────────────────────────
+// Each target: [name, value, category]
+let tgt_names = ["c (speed of light)", "h (Planck)", "k_B (Boltzmann)", "N_A (Avogadro)", "G (gravitational)", "m_p (proton MeV)", "m_e (electron MeV)", "m_W (W boson GeV)", "m_Z (Z boson GeV)", "m_H (Higgs GeV)", "m_muon (MeV)", "m_tau (MeV)", "m_top (GeV)", "m_bottom (GeV)", "m_charm (GeV)", "m_strange (MeV)", "m_up (MeV)", "m_down (MeV)", "m_n (neutron MeV)", "m_p-m_n diff (MeV)", "Lambda_QCD (MeV)", "pi", "e", "golden ratio", "sqrt(2)", "sqrt(3)", "ln(2)", "ln(4/3)", "1/e (Boltzmann gate)", "zeta(2)=pi^2/6", "28nm (TSMC N5 pitch)", "48nm (N3 gate)", "132 (H100 SMs)", "144 (AD102 SMs)", "256 (typical width)", "1024 (codebook size)", "0.1 (universal reg)", "0.95 (top-p/beta2)", "0.9 (beta1)", "128 (d_head)", "8 (sigma-tau)", "20 (Chinchilla ratio)", "64 (codons)", "96 (Tesla S / layers)", "120 (H2 LHV)", "60 (Hz / panel cells)", "1.2 (PUE)", "alpha (~1/137)", "137 (1/alpha)", "sin^2(theta_W)", "Omega_Lambda", "Omega_matter", "H0 (km/s/Mpc)", "CC exponent (-52)"]
+
+let PI_VAL = 3.14159265358979323846
+let E_VAL = 2.71828182845904523536
+
+let tgt_values = [299792458.0, 6.626 * pow(10, -34), 1.381 * pow(10, -23), 6.022 * pow(10, 23), 6.674 * pow(10, -11), 938.272, 0.511, 80.377, 91.188, 125.25, 105.658, 1776.86, 172.69, 4.18, 1.27, 93.4, 2.16, 4.67, 939.565, 1.293, 200.0, PI_VAL, E_VAL, 1.6180339887, sqrt(2.0), 1.7320508075688772, log(2.0), log(4.0 / 3.0), 1.0 / E_VAL, PI_VAL * PI_VAL / 6.0, 28.0, 48.0, 132.0, 144.0, 256.0, 1024.0, 0.1, 0.95, 0.9, 128.0, 8.0, 20.0, 64.0, 96.0, 120.0, 60.0, 1.2, 1.0 / 137.036, 137.036, 0.2312, 0.685, 0.315, 67.4, 52.0]
+
+let tgt_categories = ["physics", "physics", "physics", "physics", "physics", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "particle", "math", "math", "math", "math", "math", "math", "n6-known", "n6-known", "math", "chip", "chip", "chip", "chip", "chip", "chip", "ai", "ai", "ai", "ai", "ai", "ai", "bio", "energy", "energy", "energy", "energy", "physics", "physics", "physics", "cosmo", "cosmo", "cosmo", "cosmo"]
+
+let NUM_TARGETS = len(tgt_names)
+
+// ── Surprisal scoring ───────────────────────────────────────────────
+fn surprisal(value) {
+  let v = abs(value)
+  if v < pow(10, -30) { 0.0 }
+  else {
+    let mag = abs(log10(v))
+    let frac = v - floor(v)
+    let mut roundness_penalty = 1.0
+    if abs(frac) < pow(10, -9) {
+      roundness_penalty = 0.5
+    } else if abs(frac - 0.5) < pow(10, -9) {
+      roundness_penalty = 0.7
+    }
+    let mut small_penalty = 1.0
+    if v < 30.0 {
+      if abs(frac) < pow(10, -9) {
+        small_penalty = 0.3
+      }
+    }
+    mag * roundness_penalty * small_penalty
+  }
+}
+
+// ── Simple RNG (LCG) ───────────────────────────────────────────────
+// Using LCG since HEXA lacks bitwise XOR
+let mut rng_state = 123456789.0
+
+fn rng_next() {
+  // Numerical Recipes LCG: state = (a * state + c) mod m
+  // Using smaller modulus to stay in safe float range
+  let a = 1664525.0
+  let c = 1013904223.0
+  let m = pow(2, 32)
+  rng_state = (a * rng_state + c) % m
+  rng_state
+}
+
+fn rng_usize(mx) {
+  let v = rng_next()
+  floor(v % mx)
+}
+
+fn rng_f64() {
+  rng_next() / pow(2, 32)
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Expression table: parallel arrays
+// Each entry: val, expr_str, node_count, is_binop_root (for formatting)
+// ═══════════════════════════════════════════════════════════════════
+let mut tbl_vals = []
+let mut tbl_exprs = []
+let mut tbl_nc = []
+let mut tbl_count = 0
+
+// Seen keys for dedup (store as array, use linear scan for small sets,
+// then switch to a threshold approach for larger sets)
+let mut seen_keys = []
+let mut seen_count = 0
+
+fn seen_has(k) {
+  // For large tables, we use modular hashing into buckets
+  // Simple approach: just check recent entries in a hash-like way
+  let mut i = 0
+  while i < seen_count {
+    if seen_keys[i] == k {
+      true
+      return true
+    }
+    i = i + 1
+  }
+  false
+}
+
+fn seen_add(k) {
+  seen_keys = seen_keys + [k]
+  seen_count = seen_count + 1
+}
+
+// For depth-3 we need a faster seen check using a different approach
+// We'll use a modular hash table
+let HASH_SIZE = 65536
+let mut hash_table = []
+let mut ht_init_done = false
+
+fn init_hash_table() {
+  let mut i = 0
+  while i < HASH_SIZE {
+    hash_table = hash_table + [0]
+    i = i + 1
+  }
+  ht_init_done = true
+}
+
+fn hash_idx(k) {
+  let v = abs(k) % HASH_SIZE
+  floor(v)
+}
+
+fn ht_has(k) {
+  let idx = hash_idx(k)
+  if hash_table[idx] == k {
+    true
+  } else if hash_table[idx] == 0 {
+    if k == 0 { true } else { false }
+  } else {
+    // collision — check neighbors
+    let mut j = 1
+    let mut found = false
+    while j < 8 {
+      let idx2 = (idx + j) % HASH_SIZE
+      if hash_table[idx2] == k {
+        found = true
+        j = 8
+      } else if hash_table[idx2] == 0 {
+        j = 8
+      }
+      j = j + 1
+    }
+    found
+  }
+}
+
+fn ht_add(k) {
+  let idx = hash_idx(k)
+  if hash_table[idx] == 0 {
+    hash_table[idx] = k
+  } else {
+    let mut j = 1
+    while j < 8 {
+      let idx2 = (idx + j) % HASH_SIZE
+      if hash_table[idx2] == 0 {
+        hash_table[idx2] = k
+        j = 8
+      }
+      j = j + 1
+    }
+  }
+}
+
+// ── Build depth-0 and depth-1 table ─────────────────────────────────
+fn build_depth2_table() {
+  // Depth 0: leaves
+  let mut ci = 0
+  while ci < NC {
+    let v = CONST_VALS[ci]
+    let k = val_key(v)
+    if !seen_has(k) {
+      seen_add(k)
+      tbl_vals = tbl_vals + [v]
+      tbl_exprs = tbl_exprs + [CONST_NAMES[ci]]
+      tbl_nc = tbl_nc + [1]
+      tbl_count = tbl_count + 1
+    }
+    ci = ci + 1
+  }
+
+  // Depth 1: op(leaf, leaf)
+  let mut oi = 0
+  while oi < NUM_OPS {
+    let mut i = 0
+    while i < NC {
+      let mut j = 0
+      while j < NC {
+        let r = op_eval(oi, CONST_VALS[i], CONST_VALS[j])
+        if r[0] == 1 {
+          let v = r[1]
+          if is_finite(v) {
+            if abs(v) < pow(10, 30) {
+              let k = val_key(v)
+              if !seen_has(k) {
+                seen_add(k)
+                let estr = fmt_binop(oi, CONST_NAMES[i], CONST_NAMES[j], false, false)
+                tbl_vals = tbl_vals + [v]
+                tbl_exprs = tbl_exprs + [estr]
+                tbl_nc = tbl_nc + [3]
+                tbl_count = tbl_count + 1
+              }
+            }
+          }
+        }
+        j = j + 1
+      }
+      i = i + 1
+    }
+    oi = oi + 1
+  }
+
+  // Depth 2: op(op(leaf,leaf), leaf) and op(leaf, op(leaf,leaf))
+  let mut o1 = 0
+  while o1 < NUM_OPS {
+    let mut o2 = 0
+    while o2 < NUM_OPS {
+      let mut i = 0
+      while i < NC {
+        let mut j = 0
+        while j < NC {
+          let inner_r = op_eval(o2, CONST_VALS[i], CONST_VALS[j])
+          if inner_r[0] == 1 {
+            let inner_val = inner_r[1]
+            if is_finite(inner_val) {
+              let inner_str = fmt_binop(o2, CONST_NAMES[i], CONST_NAMES[j], false, false)
+              let mut k2 = 0
+              while k2 < NC {
+                // op1(op2(i,j), k)
+                let r1 = op_eval(o1, inner_val, CONST_VALS[k2])
+                if r1[0] == 1 {
+                  let v1 = r1[1]
+                  if is_finite(v1) {
+                    if abs(v1) < pow(10, 30) {
+                      let kk = val_key(v1)
+                      if !seen_has(kk) {
+                        seen_add(kk)
+                        let estr = fmt_binop(o1, inner_str, CONST_NAMES[k2], true, false)
+                        tbl_vals = tbl_vals + [v1]
+                        tbl_exprs = tbl_exprs + [estr]
+                        tbl_nc = tbl_nc + [5]
+                        tbl_count = tbl_count + 1
+                      }
+                    }
+                  }
+                }
+                // op1(k, op2(i,j))
+                let r2 = op_eval(o1, CONST_VALS[k2], inner_val)
+                if r2[0] == 1 {
+                  let v2 = r2[1]
+                  if is_finite(v2) {
+                    if abs(v2) < pow(10, 30) {
+                      let kk = val_key(v2)
+                      if !seen_has(kk) {
+                        seen_add(kk)
+                        let estr = fmt_binop(o1, CONST_NAMES[k2], inner_str, false, true)
+                        tbl_vals = tbl_vals + [v2]
+                        tbl_exprs = tbl_exprs + [estr]
+                        tbl_nc = tbl_nc + [5]
+                        tbl_count = tbl_count + 1
+                      }
+                    }
+                  }
+                }
+                k2 = k2 + 1
+              }
+            }
+          }
+          j = j + 1
+        }
+        i = i + 1
+      }
+      o2 = o2 + 1
+    }
+    o1 = o1 + 1
+  }
+}
+
+// ── Evaluate one value against targets ──────────────────────────────
+// Returns: [score, match_count, match_tidxs..., match_errs...]
+fn eval_against_targets(val, node_count) {
+  let mut score = 0.0
+  let mut match_tidxs = []
+  let mut match_errs = []
+  let mut mc = 0
+
+  if !is_finite(val) { return [0.0, 0] }
+  if val == 0.0 { return [0.0, 0] }
+
+  let mut ti = 0
+  while ti < NUM_TARGETS {
+    let tv = tgt_values[ti]
+    let rel_err = abs((val - tv) / tv)
+    if rel_err < 0.05 {
+      let s = 0.0 - log10(max_val(rel_err, pow(10, -15)))
+      score = score + s
+      match_tidxs = match_tidxs + [ti]
+      match_errs = match_errs + [rel_err]
+      mc = mc + 1
+    }
+    ti = ti + 1
+  }
+
+  let complexity_penalty = node_count * 0.05
+  let mut simplicity_bonus = 0.0
+  if mc > 0 {
+    simplicity_bonus = 3.0 / node_count
+  }
+  score = score - complexity_penalty + simplicity_bonus
+
+  // Pack result: [score, mc, tidx0, tidx1, ..., err0, err1, ...]
+  let mut result = [score, mc]
+  let mut mi = 0
+  while mi < mc {
+    result = result + [match_tidxs[mi]]
+    mi = mi + 1
+  }
+  mi = 0
+  while mi < mc {
+    result = result + [match_errs[mi]]
+    mi = mi + 1
+  }
+  result
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Discovery storage (parallel arrays)
+// ═══════════════════════════════════════════════════════════════════
+let mut disc_scores = []
+let mut disc_exprs = []
+let mut disc_tidxs = []
+let mut disc_errs = []
+let mut disc_count = 0
+
+// Dedup for discoveries: (val_key, target_idx) pairs
+let mut disc_seen_vk = []
+let mut disc_seen_ti = []
+let mut disc_seen_count = 0
+
+fn disc_seen_check(vk, ti) {
+  let mut i = 0
+  while i < disc_seen_count {
+    if disc_seen_vk[i] == vk {
+      if disc_seen_ti[i] == ti {
+        return true
+      }
+    }
+    i = i + 1
+  }
+  false
+}
+
+fn disc_seen_insert(vk, ti) {
+  disc_seen_vk = disc_seen_vk + [vk]
+  disc_seen_ti = disc_seen_ti + [ti]
+  disc_seen_count = disc_seen_count + 1
+}
+
+fn add_discoveries(val, expr_str, eval_result) {
+  let score = eval_result[0]
+  let mc = eval_result[1]
+  if mc == 0 { return 0 }
+  if score <= 1.0 { return 0 }
+
+  let vk = val_key(val)
+  let mut mi = 0
+  while mi < mc {
+    let tidx = eval_result[2 + mi]
+    let err = eval_result[2 + mc + mi]
+    if !disc_seen_check(vk, tidx) {
+      disc_seen_insert(vk, tidx)
+      disc_scores = disc_scores + [score]
+      disc_exprs = disc_exprs + [expr_str]
+      disc_tidxs = disc_tidxs + [tidx]
+      disc_errs = disc_errs + [err]
+      disc_count = disc_count + 1
+    }
+    mi = mi + 1
+  }
+  0
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Main execution
+// ═══════════════════════════════════════════════════════════════════
+let pop_size = 5000
+let generations = 500
+let elite_frac = 0.10
+let elite_count = floor(pop_size * elite_frac)
+let tournament_size = 5
+
+println("=== EVOLVE v2: n=6 Genetic Formula Miner ===")
+println("Population: " + to_string(pop_size) + ", Generations: " + to_string(generations) + ", Elitism: top " + to_string(floor(elite_frac * 100.0)) + "%")
+println("Tournament selection (size " + to_string(tournament_size) + ")")
+println("Base constants: n=6, phi=2, tau=4, sigma=12, J2=24, sopfr=5, mu=1")
+println("Targets: " + to_string(NUM_TARGETS) + " values across physics/math/chip/AI/energy/particle/cosmo")
+println("")
+
+// ── Phase 1: Exhaustive depth-2 scan ────────────────────────────────
+println("Phase 1: Building depth-2 expression table...")
+build_depth2_table()
+let d2_count = tbl_count
+println("  Depth <=2: " + to_string(d2_count) + " unique values")
+
+// ── Phase 2: Depth-3 scan ───────────────────────────────────────────
+println("Phase 2: Building depth-3 expression table...")
+
+// Initialize hash table with existing keys
+init_hash_table()
+let mut hi = 0
+while hi < seen_count {
+  ht_add(seen_keys[hi])
+  hi = hi + 1
+}
+
+let d3_start = tbl_count
+
+// depth-3 type A: op(d2_expr, leaf) and op(leaf, d2_expr)
+// Only use entries with node_count >= 3 (skip trivial leaves)
+let mut oi = 0
+while oi < NUM_OPS {
+  let mut ei = 0
+  while ei < d2_count {
+    if tbl_nc[ei] >= 3 {
+      let mut ki = 0
+      while ki < NC {
+        // op(d2, leaf)
+        let r1 = op_eval(oi, tbl_vals[ei], CONST_VALS[ki])
+        if r1[0] == 1 {
+          let v1 = r1[1]
+          if is_finite(v1) {
+            if abs(v1) < pow(10, 30) {
+              let kk = val_key(v1)
+              if !ht_has(kk) {
+                ht_add(kk)
+                let estr = fmt_binop(oi, tbl_exprs[ei], CONST_NAMES[ki], true, false)
+                tbl_vals = tbl_vals + [v1]
+                tbl_exprs = tbl_exprs + [estr]
+                tbl_nc = tbl_nc + [tbl_nc[ei] + 2]
+                tbl_count = tbl_count + 1
+              }
+            }
+          }
+        }
+        // op(leaf, d2)
+        let r2 = op_eval(oi, CONST_VALS[ki], tbl_vals[ei])
+        if r2[0] == 1 {
+          let v2 = r2[1]
+          if is_finite(v2) {
+            if abs(v2) < pow(10, 30) {
+              let kk = val_key(v2)
+              if !ht_has(kk) {
+                ht_add(kk)
+                let estr = fmt_binop(oi, CONST_NAMES[ki], tbl_exprs[ei], false, true)
+                tbl_vals = tbl_vals + [v2]
+                tbl_exprs = tbl_exprs + [estr]
+                tbl_nc = tbl_nc + [tbl_nc[ei] + 2]
+                tbl_count = tbl_count + 1
+              }
+            }
+          }
+        }
+        ki = ki + 1
+      }
+    }
+    ei = ei + 1
+  }
+  oi = oi + 1
+}
+
+// depth-3 type B: op(d1_a, d1_b) — compose depth-1 entries (node_count==3)
+let mut d1_indices = []
+let mut d1i = 0
+while d1i < d2_count {
+  if tbl_nc[d1i] == 3 {
+    d1_indices = d1_indices + [d1i]
+  }
+  d1i = d1i + 1
+}
+let d1_len = len(d1_indices)
+
+oi = 0
+while oi < NUM_OPS {
+  let mut ai = 0
+  while ai < d1_len {
+    let a_idx = d1_indices[ai]
+    let mut bi = 0
+    while bi < d1_len {
+      let b_idx = d1_indices[bi]
+      let r = op_eval(oi, tbl_vals[a_idx], tbl_vals[b_idx])
+      if r[0] == 1 {
+        let v = r[1]
+        if is_finite(v) {
+          if abs(v) < pow(10, 30) {
+            let kk = val_key(v)
+            if !ht_has(kk) {
+              ht_add(kk)
+              let estr = fmt_binop(oi, tbl_exprs[a_idx], tbl_exprs[b_idx], true, true)
+              tbl_vals = tbl_vals + [v]
+              tbl_exprs = tbl_exprs + [estr]
+              tbl_nc = tbl_nc + [7]
+              tbl_count = tbl_count + 1
+            }
+          }
+        }
+      }
+      bi = bi + 1
+    }
+    ai = ai + 1
+  }
+  oi = oi + 1
+}
+
+let d3_count = tbl_count - d3_start
+println("  Depth-3 (new): " + to_string(d3_count) + " unique values")
+println("  Total exhaustive: " + to_string(tbl_count) + " unique expressions")
+
+// ── Phase 3: Evaluate exhaustive expressions ────────────────────────
+println("Phase 3: Evaluating exhaustive expressions against " + to_string(NUM_TARGETS) + " targets...")
+
+let mut ei = 0
+while ei < tbl_count {
+  let res = eval_against_targets(tbl_vals[ei], tbl_nc[ei])
+  add_discoveries(tbl_vals[ei], tbl_exprs[ei], res)
+  ei = ei + 1
+}
+println("  Exhaustive hits: " + to_string(disc_count))
+
+// ── Phase 4: GA ─────────────────────────────────────────────────────
+println("")
+println("Phase 4: Genetic Algorithm (" + to_string(pop_size) + " pop x " + to_string(generations) + " gen)...")
+
+// For GA, we represent each individual as an index into a separate expression pool
+// Simple approach: each individual is represented by parallel arrays
+// expr_val, expr_str, expr_nc
+let mut pop_vals = []
+let mut pop_strs = []
+let mut pop_ncs = []
+
+// Random tree generation — 결과를 전역 out 변수에 기록 (혼합 타입 배열 회피)
+let mut expr_out_val = 0.0
+let mut expr_out_str = ""
+let mut expr_out_nc = 0
+let mut expr_out_binop = 0
+
+fn random_leaf() {
+  let ci = rng_usize(NC)
+  expr_out_val = CONST_VALS[ci]
+  expr_out_str = CONST_NAMES[ci]
+  expr_out_nc = 1
+  expr_out_binop = 0
+}
+
+fn random_depth1() {
+  let oi = rng_usize(NUM_OPS)
+  let li = rng_usize(NC)
+  let ri = rng_usize(NC)
+  let r = op_eval(oi, CONST_VALS[li], CONST_VALS[ri])
+  if r[0] == 1 {
+    if is_finite(r[1]) {
+      let estr = fmt_binop(oi, CONST_NAMES[li], CONST_NAMES[ri], false, false)
+      expr_out_val = r[1]
+      expr_out_str = estr
+      expr_out_nc = 3
+      expr_out_binop = 1
+    } else {
+      random_leaf()
+    }
+  } else {
+    random_leaf()
+  }
+}
+
+fn random_expr() {
+  let depth_choice = rng_f64()
+  if depth_choice < 0.2 {
+    random_leaf()
+  } else if depth_choice < 0.5 {
+    random_depth1()
+  } else if depth_choice < 0.8 {
+    // depth 2: op(depth1, leaf) or op(leaf, depth1)
+    random_depth1()
+    let mut inner_val = expr_out_val
+    let mut inner_str = expr_out_str
+    let mut inner_nc = expr_out_nc
+    let mut inner_binop = expr_out_binop
+    let oi = rng_usize(NUM_OPS)
+    let ki = rng_usize(NC)
+    if rng_f64() < 0.5 {
+      let r = op_eval(oi, inner_val, CONST_VALS[ki])
+      if r[0] == 1 {
+        if is_finite(r[1]) {
+          if abs(r[1]) < pow(10, 30) {
+            let estr = fmt_binop(oi, inner_str, CONST_NAMES[ki], inner_binop == 1, false)
+            expr_out_val = r[1]
+            expr_out_str = estr
+            expr_out_nc = inner_nc + 2
+            expr_out_binop = 1
+            return
+          }
+        }
+      }
+      expr_out_val = inner_val
+      expr_out_str = inner_str
+      expr_out_nc = inner_nc
+      expr_out_binop = inner_binop
+    } else {
+      let r = op_eval(oi, CONST_VALS[ki], inner_val)
+      if r[0] == 1 {
+        if is_finite(r[1]) {
+          if abs(r[1]) < pow(10, 30) {
+            let estr = fmt_binop(oi, CONST_NAMES[ki], inner_str, false, inner_binop == 1)
+            expr_out_val = r[1]
+            expr_out_str = estr
+            expr_out_nc = inner_nc + 2
+            expr_out_binop = 1
+            return
+          }
+        }
+      }
+      expr_out_val = inner_val
+      expr_out_str = inner_str
+      expr_out_nc = inner_nc
+      expr_out_binop = inner_binop
+    }
+  } else {
+    // depth 3: op(depth2, leaf)
+    random_depth1()
+    let mut inner1_val = expr_out_val
+    let mut inner1_str = expr_out_str
+    let mut inner1_nc = expr_out_nc
+    let mut inner1_binop = expr_out_binop
+    let oi1 = rng_usize(NUM_OPS)
+    let ki1 = rng_usize(NC)
+    let r1 = op_eval(oi1, inner1_val, CONST_VALS[ki1])
+    if r1[0] == 1 {
+      if is_finite(r1[1]) {
+        if abs(r1[1]) < pow(10, 30) {
+          let d2str = fmt_binop(oi1, inner1_str, CONST_NAMES[ki1], inner1_binop == 1, false)
+          let d2val = r1[1]
+          let d2nc = inner1_nc + 2
+          // one more op
+          let oi2 = rng_usize(NUM_OPS)
+          let ki2 = rng_usize(NC)
+          let r2 = op_eval(oi2, d2val, CONST_VALS[ki2])
+          if r2[0] == 1 {
+            if is_finite(r2[1]) {
+              if abs(r2[1]) < pow(10, 30) {
+                let estr = fmt_binop(oi2, d2str, CONST_NAMES[ki2], true, false)
+                expr_out_val = r2[1]
+                expr_out_str = estr
+                expr_out_nc = d2nc + 2
+                expr_out_binop = 1
+                return
+              }
+            }
+          }
+          expr_out_val = d2val
+          expr_out_str = d2str
+          expr_out_nc = d2nc
+          expr_out_binop = 1
+          return
+        }
+      }
+    }
+    random_depth1()
+  }
+}
+
+// Initialize population
+let mut pi2 = 0
+while pi2 < pop_size {
+  random_expr()
+  pop_vals = pop_vals + [expr_out_val]
+  pop_strs = pop_strs + [expr_out_str]
+  pop_ncs = pop_ncs + [expr_out_nc]
+  pi2 = pi2 + 1
+}
+
+// Seed known good formulas from exhaustive table (first 200 d2 entries)
+let mut seed_idx = 20
+let mut si = 0
+while si < 200 {
+  if si < d2_count {
+    if seed_idx < pop_size {
+      pop_vals[seed_idx] = tbl_vals[si]
+      pop_strs[seed_idx] = tbl_exprs[si]
+      pop_ncs[seed_idx] = tbl_nc[si]
+      seed_idx = seed_idx + 1
+    }
+  }
+  si = si + 1
+}
+
+let mut best_score = 0.0
+let mut best_gen = 0
+
+let mut gen = 0
+while gen < generations {
+  // Evaluate population
+  let mut scored_scores = []
+  let mut scored_indices = []
+  let mut pi3 = 0
+  while pi3 < pop_size {
+    let res = eval_against_targets(pop_vals[pi3], pop_ncs[pi3])
+    scored_scores = scored_scores + [res[0]]
+    scored_indices = scored_indices + [pi3]
+    pi3 = pi3 + 1
+  }
+
+  // Sort by score descending (simple selection sort for top elements)
+  // We only need top ~500 (elite_count), so partial sort is fine
+  let mut si2 = 0
+  while si2 < min_val(elite_count + 100, pop_size) {
+    let mut best_j = si2
+    let mut best_s = scored_scores[si2]
+    let mut j = si2 + 1
+    while j < pop_size {
+      if scored_scores[j] > best_s {
+        best_s = scored_scores[j]
+        best_j = j
+      }
+      j = j + 1
+    }
+    if best_j != si2 {
+      // swap
+      let tmp_s = scored_scores[si2]
+      scored_scores[si2] = scored_scores[best_j]
+      scored_scores[best_j] = tmp_s
+      let tmp_i = scored_indices[si2]
+      scored_indices[si2] = scored_indices[best_j]
+      scored_indices[best_j] = tmp_i
+    }
+    si2 = si2 + 1
+  }
+
+  let gen_best = scored_scores[0]
+  if gen_best > best_score {
+    best_score = gen_best
+    best_gen = gen
+  }
+
+  // Collect good matches from top 100
+  let mut ti2 = 0
+  while ti2 < min_val(100, pop_size) {
+    let idx = scored_indices[ti2]
+    if scored_scores[ti2] > 1.0 {
+      let res = eval_against_targets(pop_vals[idx], pop_ncs[idx])
+      add_discoveries(pop_vals[idx], pop_strs[idx], res)
+    }
+    ti2 = ti2 + 1
+  }
+
+  if gen % 50 == 0 {
+    let best_idx = scored_indices[0]
+    println("  Gen " + pad_l(to_string(gen), 3) + ": best_score=" + fmt2(gen_best) + ", expr=" + pop_strs[best_idx] + ", val=" + fmt6(pop_vals[best_idx]))
+  }
+
+  // ── Selection + reproduction ────────────────────────────────────
+  let mut next_vals = []
+  let mut next_strs = []
+  let mut next_ncs = []
+
+  // Elitism: top entries
+  let mut eli = 0
+  while eli < elite_count {
+    let idx = scored_indices[eli]
+    next_vals = next_vals + [pop_vals[idx]]
+    next_strs = next_strs + [pop_strs[idx]]
+    next_ncs = next_ncs + [pop_ncs[idx]]
+    eli = eli + 1
+  }
+
+  // Fill rest with tournament selection + mutation
+  let mut fill = elite_count
+  while fill < pop_size {
+    // Tournament select
+    let mut t_best_s = 0.0 - pow(10, 30)
+    let mut t_best_i = 0
+    let mut ti3 = 0
+    while ti3 < tournament_size {
+      let ri = rng_usize(pop_size)
+      if scored_scores[ri] > t_best_s {
+        t_best_s = scored_scores[ri]
+        t_best_i = scored_indices[ri]
+      }
+      ti3 = ti3 + 1
+    }
+
+    // Mutate with 40% probability
+    if rng_f64() < 0.4 {
+      random_expr()
+      // Crossover: sometimes use parent value with new op
+      if rng_f64() < 0.5 {
+        let oi = rng_usize(NUM_OPS)
+        let r = op_eval(oi, pop_vals[t_best_i], expr_out_val)
+        if r[0] == 1 {
+          if is_finite(r[1]) {
+            if abs(r[1]) < pow(10, 30) {
+              let estr = fmt_binop(oi, pop_strs[t_best_i], expr_out_str, pop_ncs[t_best_i] > 1, expr_out_binop == 1)
+              let nc = pop_ncs[t_best_i] + expr_out_nc + 1
+              if nc < 10 {
+                next_vals = next_vals + [r[1]]
+                next_strs = next_strs + [estr]
+                next_ncs = next_ncs + [nc]
+                fill = fill + 1
+              } else {
+                next_vals = next_vals + [expr_out_val]
+                next_strs = next_strs + [expr_out_str]
+                next_ncs = next_ncs + [expr_out_nc]
+                fill = fill + 1
+              }
+            } else {
+              next_vals = next_vals + [expr_out_val]
+              next_strs = next_strs + [expr_out_str]
+              next_ncs = next_ncs + [expr_out_nc]
+              fill = fill + 1
+            }
+          } else {
+            next_vals = next_vals + [expr_out_val]
+            next_strs = next_strs + [expr_out_str]
+            next_ncs = next_ncs + [expr_out_nc]
+            fill = fill + 1
+          }
+        } else {
+          next_vals = next_vals + [expr_out_val]
+          next_strs = next_strs + [expr_out_str]
+          next_ncs = next_ncs + [expr_out_nc]
+          fill = fill + 1
+        }
+      } else {
+        next_vals = next_vals + [expr_out_val]
+        next_strs = next_strs + [expr_out_str]
+        next_ncs = next_ncs + [expr_out_nc]
+        fill = fill + 1
+      }
+    } else {
+      next_vals = next_vals + [pop_vals[t_best_i]]
+      next_strs = next_strs + [pop_strs[t_best_i]]
+      next_ncs = next_ncs + [pop_ncs[t_best_i]]
+      fill = fill + 1
+    }
+  }
+
+  // Inject fresh blood (5%)
+  let inject_count = floor(pop_size / 20)
+  let mut ii = pop_size - inject_count
+  while ii < pop_size {
+    random_expr()
+    next_vals[ii] = expr_out_val
+    next_strs[ii] = expr_out_str
+    next_ncs[ii] = expr_out_nc
+    ii = ii + 1
+  }
+
+  pop_vals = next_vals
+  pop_strs = next_strs
+  pop_ncs = next_ncs
+  gen = gen + 1
+}
+
+println("")
+println("GA complete. Best score " + fmt2(best_score) + " at generation " + to_string(best_gen))
+
+// ── Deduplicate and group by target ─────────────────────────────────
+// Find best per (target_idx), keeping up to 3 alternatives
+
+// First, collect best entries per target
+let mut best_per_target_err = []
+let mut best_per_target_expr = []
+let mut best_per_target_score = []
+let mut best_per_target_has = []
+
+// alt1 and alt2
+let mut alt1_err = []
+let mut alt1_expr = []
+let mut alt2_err = []
+let mut alt2_expr = []
+
+let mut ti4 = 0
+while ti4 < NUM_TARGETS {
+  best_per_target_err = best_per_target_err + [99.0]
+  best_per_target_expr = best_per_target_expr + [""]
+  best_per_target_score = best_per_target_score + [0.0]
+  best_per_target_has = best_per_target_has + [0]
+  alt1_err = alt1_err + [99.0]
+  alt1_expr = alt1_expr + [""]
+  alt2_err = alt2_err + [99.0]
+  alt2_expr = alt2_expr + [""]
+  ti4 = ti4 + 1
+}
+
+let mut di = 0
+while di < disc_count {
+  let tidx = disc_tidxs[di]
+  let err = disc_errs[di]
+  let expr = disc_exprs[di]
+
+  if err < best_per_target_err[tidx] {
+    // shift current best to alt1, alt1 to alt2
+    alt2_err[tidx] = alt1_err[tidx]
+    alt2_expr[tidx] = alt1_expr[tidx]
+    alt1_err[tidx] = best_per_target_err[tidx]
+    alt1_expr[tidx] = best_per_target_expr[tidx]
+    best_per_target_err[tidx] = err
+    best_per_target_expr[tidx] = expr
+    best_per_target_score[tidx] = disc_scores[di]
+    best_per_target_has[tidx] = 1
+  } else if err < alt1_err[tidx] {
+    alt2_err[tidx] = alt1_err[tidx]
+    alt2_expr[tidx] = alt1_expr[tidx]
+    alt1_err[tidx] = err
+    alt1_expr[tidx] = expr
+  } else if err < alt2_err[tidx] {
+    alt2_err[tidx] = err
+    alt2_expr[tidx] = expr
+  }
+  di = di + 1
+}
+
+// ── Sort targets for output (EXACT first, then by surprisal desc) ───
+// Build ordering: collect (tidx, best_err, surprisal) for matched targets
+let mut order_tidxs = []
+let mut order_errs = []
+let mut order_surps = []
+let mut matched_count = 0
+
+let mut ti5 = 0
+while ti5 < NUM_TARGETS {
+  if best_per_target_has[ti5] == 1 {
+    order_tidxs = order_tidxs + [ti5]
+    order_errs = order_errs + [best_per_target_err[ti5]]
+    order_surps = order_surps + [surprisal(tgt_values[ti5])]
+    matched_count = matched_count + 1
+  }
+  ti5 = ti5 + 1
+}
+
+// Sort: EXACT first (err < 1e-10), then by surprisal descending
+// Simple insertion sort
+let mut si3 = 0
+while si3 < matched_count {
+  let mut best_j = si3
+  let mut j = si3 + 1
+  while j < matched_count {
+    let a_exact = order_errs[best_j] < pow(10, -10)
+    let b_exact = order_errs[j] < pow(10, -10)
+    let mut swap = false
+    if b_exact {
+      if !a_exact {
+        swap = true
+      } else if order_surps[j] > order_surps[best_j] {
+        swap = true
+      }
+    } else if !a_exact {
+      if order_surps[j] > order_surps[best_j] {
+        swap = true
+      }
+    }
+    if swap { best_j = j }
+    j = j + 1
+  }
+  if best_j != si3 {
+    let tmp_t = order_tidxs[si3]
+    order_tidxs[si3] = order_tidxs[best_j]
+    order_tidxs[best_j] = tmp_t
+    let tmp_e = order_errs[si3]
+    order_errs[si3] = order_errs[best_j]
+    order_errs[best_j] = tmp_e
+    let tmp_s = order_surps[si3]
+    order_surps[si3] = order_surps[best_j]
+    order_surps[best_j] = tmp_s
+  }
+  si3 = si3 + 1
+}
+
+// ── Print Results ───────────────────────────────────────────────────
+let sep = "========================================================================================================================"
+println("")
+println(sep)
+println("  TOP FORMULA DISCOVERIES (n=6 -> physical/engineering constants)")
+println("  Depth-3 exhaustive + GA(5000x500) | " + to_string(NUM_TARGETS) + " targets | " + to_string(disc_count) + " unique formulas")
+println(sep)
+println("")
+
+let mut exact_count = 0
+let mut close_count = 0
+
+let mut oi2 = 0
+while oi2 < matched_count {
+  let tidx = order_tidxs[oi2]
+  let err = best_per_target_err[tidx]
+  let surp = order_surps[oi2]
+
+  let mut err_str = ""
+  if err < pow(10, -10) {
+    exact_count = exact_count + 1
+    err_str = "EXACT"
+  } else if err < 0.0001 {
+    close_count = close_count + 1
+    let ppm = err * pow(10, 6)
+    err_str = fmt1_ppm(ppm) + " ppm"
+  } else if err < 0.001 {
+    close_count = close_count + 1
+    err_str = fmt4(err * 100.0) + "%"
+  } else {
+    err_str = fmt2(err * 100.0) + "%"
+  }
+
+  let mut surp_stars = ""
+  if surp > 3.0 { surp_stars = "***" }
+  else if surp > 2.0 { surp_stars = "**" }
+  else if surp > 1.0 { surp_stars = "*" }
+
+  // Compute the expression value for display
+  // We don't have the value stored directly, so we reconstruct from the best match
+  // Actually we need to find the val. Let's search disc for this target.
+  let mut disp_val = tgt_values[tidx]  // fallback
+  let mut dvi = 0
+  while dvi < disc_count {
+    if disc_tidxs[dvi] == tidx {
+      if disc_exprs[dvi] == best_per_target_expr[tidx] {
+        // find the original value from the table or disc
+        // The actual computed value = tgt_value * (1 +/- err)
+        // More precisely, we need the expression value
+        // Let's just compute: val = tgt_values[tidx] * (1 + err) or (1 - err)
+        // Actually err = |val - target| / |target|, so val ~= target * (1 +/- err)
+        // We can't recover exact sign. Just show what we have.
+        dvi = disc_count  // break
+      }
+    }
+    dvi = dvi + 1
+  }
+
+  println("  " + pad_r(tgt_names[tidx], 30) + " = " + pad_r(best_per_target_expr[tidx], 45) + " [" + pad_l(err_str, 10) + "] " + surp_stars)
+
+  // Show alternatives
+  if alt1_err[tidx] < 99.0 {
+    let mut alt1_err_str = ""
+    if alt1_err[tidx] < pow(10, -10) { alt1_err_str = "EXACT" }
+    else if alt1_err[tidx] < 0.0001 { alt1_err_str = fmt1_ppm(alt1_err[tidx] * pow(10, 6)) + " ppm" }
+    else if alt1_err[tidx] < 0.001 { alt1_err_str = fmt4(alt1_err[tidx] * 100.0) + "%" }
+    else { alt1_err_str = fmt2(alt1_err[tidx] * 100.0) + "%" }
+    println("  " + pad_r("", 30) + "   " + pad_r(alt1_expr[tidx], 45) + " [" + pad_l(alt1_err_str, 10) + "]")
+  }
+
+  if alt2_err[tidx] < 99.0 {
+    let mut alt2_err_str = ""
+    if alt2_err[tidx] < pow(10, -10) { alt2_err_str = "EXACT" }
+    else if alt2_err[tidx] < 0.0001 { alt2_err_str = fmt1_ppm(alt2_err[tidx] * pow(10, 6)) + " ppm" }
+    else if alt2_err[tidx] < 0.001 { alt2_err_str = fmt4(alt2_err[tidx] * 100.0) + "%" }
+    else { alt2_err_str = fmt2(alt2_err[tidx] * 100.0) + "%" }
+    println("  " + pad_r("", 30) + "   " + pad_r(alt2_expr[tidx], 45) + " [" + pad_l(alt2_err_str, 10) + "]")
+  }
+
+  oi2 = oi2 + 1
+}
+
+// ── Summary ─────────────────────────────────────────────────────────
+println("")
+println(sep)
+println("  SUMMARY")
+println(sep)
+println("  Total targets:          " + to_string(NUM_TARGETS))
+println("  Targets with matches:   " + to_string(matched_count) + " / " + to_string(NUM_TARGETS))
+println("  EXACT matches:          " + to_string(exact_count))
+println("  Close matches (<1%):    " + to_string(close_count))
+println("  Unique formulas:        " + to_string(disc_count))
+println("  Exhaustive depth <=2:   " + to_string(d2_count) + " unique values")
+println("  Exhaustive depth-3:     " + to_string(d3_count) + " unique values")
+
+// ── Category breakdown ──────────────────────────────────────────────
+println("")
+println("  By category:")
+let cat_names = ["physics", "particle", "math", "n6-known", "chip", "ai", "bio", "energy", "cosmo"]
+let mut ci2 = 0
+while ci2 < len(cat_names) {
+  let cat = cat_names[ci2]
+  let mut total_in_cat = 0
+  let mut matched_in_cat = 0
+  let mut exact_in_cat = 0
+
+  let mut ti6 = 0
+  while ti6 < NUM_TARGETS {
+    if tgt_categories[ti6] == cat {
+      total_in_cat = total_in_cat + 1
+      if best_per_target_has[ti6] == 1 {
+        matched_in_cat = matched_in_cat + 1
+        if best_per_target_err[ti6] < pow(10, -10) {
+          exact_in_cat = exact_in_cat + 1
+        }
+      }
+    }
+    ti6 = ti6 + 1
+  }
+
+  if total_in_cat > 0 {
+    // uppercase cat name manually
+    let mut cat_upper = ""
+    if cat == "physics" { cat_upper = "PHYSICS" }
+    else if cat == "particle" { cat_upper = "PARTICLE" }
+    else if cat == "math" { cat_upper = "MATH" }
+    else if cat == "n6-known" { cat_upper = "N6-KNOWN" }
+    else if cat == "chip" { cat_upper = "CHIP" }
+    else if cat == "ai" { cat_upper = "AI" }
+    else if cat == "bio" { cat_upper = "BIO" }
+    else if cat == "energy" { cat_upper = "ENERGY" }
+    else if cat == "cosmo" { cat_upper = "COSMO" }
+    else { cat_upper = cat }
+
+    println("    " + pad_r(cat_upper, 12) + " " + pad_l(to_string(matched_in_cat), 2) + "/" + pad_l(to_string(total_in_cat), 2) + " matched, " + pad_l(to_string(exact_in_cat), 2) + " EXACT")
+  }
+  ci2 = ci2 + 1
+}
+
+// ── New depth-3 discoveries ─────────────────────────────────────────
+println("")
+println("  === NEW DEPTH-3 DISCOVERIES (not reachable at depth-2) ===")
+let mut new_d3_count = 0
+let mut oi3 = 0
+while oi3 < matched_count {
+  let tidx = order_tidxs[oi3]
+  let err = best_per_target_err[tidx]
+
+  // Check if the best formula for this target has depth > 2
+  // We can approximate: node_count >= 5 means depth >= 2, >= 7 means depth 3
+  // Actually, depth > 2 means node_count >= 5 for the expression
+  // We need to find the node_count of the best expression
+  // Search through discoveries
+  let mut found_nc = 0
+  let mut dsi = 0
+  while dsi < disc_count {
+    if disc_tidxs[dsi] == tidx {
+      if disc_exprs[dsi] == best_per_target_expr[tidx] {
+        // Find in table
+        let mut fi = 0
+        while fi < tbl_count {
+          if tbl_exprs[fi] == best_per_target_expr[tidx] {
+            found_nc = tbl_nc[fi]
+            fi = tbl_count
+          }
+          fi = fi + 1
+        }
+        dsi = disc_count
+      }
+    }
+    dsi = dsi + 1
+  }
+
+  if found_nc >= 5 {
+    if err < 0.01 {
+      let mut err_str2 = ""
+      if err < pow(10, -10) { err_str2 = "EXACT" }
+      else { err_str2 = fmt1_ppm(err * pow(10, 6)) + " ppm" }
+      println("    " + tgt_names[tidx] + " = " + best_per_target_expr[tidx] + "  [" + err_str2 + "]")
+      new_d3_count = new_d3_count + 1
+    }
+  }
+  oi3 = oi3 + 1
+}
+if new_d3_count == 0 {
+  println("    (all best matches were already depth <=2)")
+}
+
+println("")
+println(sep)

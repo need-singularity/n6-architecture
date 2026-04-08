@@ -1,0 +1,1136 @@
+// N6 Fusion Design Space Exploration (DSE)
+// 14 파라미터 전수 조합으로 최적 핵융합 아키텍처 도출
+
+// --- helpers ---
+fn pad_r(s, w) {
+  let mut out = s
+  while len(out) < w {
+    out = out + " "
+  }
+  return out
+}
+
+fn pad_l(s, w) {
+  let mut out = s
+  while len(out) < w {
+    out = " " + out
+  }
+  return out
+}
+
+fn repeat_str(ch, n) {
+  let mut out = ""
+  let mut i = 0
+  while i < n {
+    out = out + ch
+    i = i + 1
+  }
+  return out
+}
+
+fn join_arr(arr, sep) {
+  let mut out = ""
+  let mut i = 0
+  while i < len(arr) {
+    if i > 0 {
+      out = out + sep
+    }
+    out = out + arr[i]
+    i = i + 1
+  }
+  return out
+}
+
+fn min_val(a, b) {
+  if a < b {
+    return a
+  }
+  return b
+}
+
+fn max_val(a, b) {
+  if a > b {
+    return a
+  }
+  return b
+}
+
+fn floor_div(a, b) {
+  return (a - (a % b)) / b
+}
+
+fn contains_arr(arr, v) {
+  let mut i = 0
+  while i < len(arr) {
+    if arr[i] == v {
+      return 1
+    }
+    i = i + 1
+  }
+  return 0
+}
+
+// --- N6 constants ---
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let MU = 1
+let J2 = 24
+
+let N6_BASE = [1, 2, 3, 4, 5, 6, 12, 24]
+
+fn is_n6_base(v) {
+  return contains_arr(N6_BASE, v)
+}
+
+fn build_n6_derived_set() {
+  let mut set = []
+  let mut i = 0
+  while i < len(N6_BASE) {
+    let a = N6_BASE[i]
+    if contains_arr(set, a) == 0 {
+      set = set + [a]
+    }
+    let mut j = 0
+    while j < len(N6_BASE) {
+      let b = N6_BASE[j]
+      let v1 = a + b
+      if contains_arr(set, v1) == 0 {
+        set = set + [v1]
+      }
+      let v2 = a * b
+      if contains_arr(set, v2) == 0 {
+        set = set + [v2]
+      }
+      if a > b {
+        let v3 = a - b
+        if contains_arr(set, v3) == 0 {
+          set = set + [v3]
+        }
+      }
+      if b > 0 {
+        if a % b == 0 {
+          let v4 = a / b
+          if contains_arr(set, v4) == 0 {
+            set = set + [v4]
+          }
+        }
+      }
+      j = j + 1
+    }
+    i = i + 1
+  }
+  // insertion sort
+  let mut si = 1
+  while si < len(set) {
+    let key = set[si]
+    let mut sj = si - 1
+    let mut done = 0
+    while sj >= 0 {
+      if done == 0 {
+        if set[sj] > key {
+          set[sj + 1] = set[sj]
+          sj = sj - 1
+        } else {
+          done = 1
+        }
+      } else {
+        sj = -1
+      }
+    }
+    set[sj + 1] = key
+    si = si + 1
+  }
+  return set
+}
+
+let N6_DERIVED = build_n6_derived_set()
+
+fn is_n6_derived(v) {
+  return contains_arr(N6_DERIVED, v)
+}
+
+// ============================================================
+// Data arrays
+// ============================================================
+let sch_name     = ["Tokamak", "Stellarator", "ICF_Laser", "FRC", "Mirror", "Z_Pinch"]
+let sch_q_upper  = [10, 5, 2, 2, 1, 1]
+let sch_trl      = [7, 5, 4, 3, 3, 2]
+let sch_lcoe_est = [60, 80, 200, 100, 150, 300]
+let sch_t_comm   = [2035, 2040, 2045, 2042, 2045, 2050]
+let sch_pf_coils = [6, 0, 0, 0, 0, 0]
+let sch_cs_mods  = [6, 0, 0, 0, 0, 0]
+
+let sc_name      = ["NbTi", "Nb3Sn", "REBCO", "BSCCO"]
+let sc_b_max_t   = [10, 24, 45, 35]
+let sc_cost_rank = [1, 2, 4, 3]
+
+let bl_name         = ["Li_ceramic", "PbLi_eut", "FLiBe_molt", "He_pebble"]
+let bl_coolant_types = [1, 2, 1, 1]
+
+let st_name = ["RAFM", "V_alloy", "SiC_SiC"]
+
+let ht_name       = ["NBI", "ICRH", "ECRH", "LHCD"]
+let ht_typical_mw = [8, 6, 1, 3]
+
+let conf_name = ["SC_coil", "Normal_Cu", "Perm_Hybrid"]
+
+let fuel_name                = ["D_T", "D_D", "D_He3", "p_B11"]
+let fuel_cross_section_kev   = [10, 100, 200, 500]
+let fuel_neutron_fraction_pct = [80, 33, 5, 0]
+let fuel_d_mass              = [5, 4, 5, 12]
+
+let tf_name       = ["TF6", "TF12", "TF16", "TF18"]
+let tf_coil_count = [6, 12, 16, 18]
+
+let geo_name             = ["A2.5", "A3.0", "A3.1", "A4.0", "A5.0"]
+let geo_aspect_ratio_10x = [25, 30, 31, 40, 50]
+
+let bf_name = ["B5", "B12", "B20"]
+let bf_bt_t = [5, 12, 20]
+
+let qt_name    = ["Q2", "Q10", "Q_ign"]
+let qt_q_value = [2, 10, 1000]
+
+let pc_name           = ["Rankine", "Brayton", "Direct_CV"]
+let pc_efficiency_pct = [33, 45, 60]
+let pc_maturity       = [5, 3, 1]
+
+let tbr_name     = ["Li6_ceramic", "PbLi_self", "DCLL_dual"]
+let tbr_tbr_100x = [105, 115, 120]
+
+let gr_name    = ["AC_50Hz", "AC_60Hz", "HVDC"]
+let gr_freq_hz = [50, 60, 0]
+
+// ============================================================
+// Scoring functions
+// ============================================================
+fn q_gain_score(sch_i, qt_i, fuel_i) {
+  let mut q_eff = min_val(sch_q_upper[sch_i], qt_q_value[qt_i])
+  let mut cs = fuel_cross_section_kev[fuel_i]
+  if cs == 0 {
+    cs = 1
+  }
+  let raw = floor_div(q_eff * 100, cs)
+  return min_val(raw, 100)
+}
+
+fn trl_score(sch_i, pc_i) {
+  let raw = sch_trl[sch_i] * 10 + pc_maturity[pc_i] * 4
+  return min_val(raw, 100)
+}
+
+fn lcoe_score(sch_i, fuel_i, sc_i, pc_i) {
+  let fuel_diff = floor_div(fuel_cross_section_kev[fuel_i], 10)
+  let sc_cost = sc_cost_rank[sc_i] * 5
+  let mut eff_bonus = 0
+  if pc_efficiency_pct[pc_i] > 40 {
+    eff_bonus = 10
+  }
+  let lcoe_raw = sch_lcoe_est[sch_i] + fuel_diff + sc_cost
+  let mut lcoe_adj = lcoe_raw - eff_bonus
+  if lcoe_adj < 0 {
+    lcoe_adj = 0
+  }
+  if lcoe_adj < 500 {
+    return 100 - floor_div(lcoe_adj, 5)
+  }
+  return 0
+}
+
+fn t_comm_score(sch_i) {
+  let mut raw = 0
+  if sch_t_comm[sch_i] < 2055 {
+    raw = (2055 - sch_t_comm[sch_i]) * 5
+  }
+  return min_val(raw, 100)
+}
+
+// ============================================================
+// Compatibility
+// ============================================================
+fn is_compatible(sc_i, bf_i, conf_i, fuel_i) {
+  if bf_bt_t[bf_i] > sc_b_max_t[sc_i] {
+    return 0
+  }
+  if conf_name[conf_i] == "Normal_Cu" {
+    if bf_bt_t[bf_i] > 8 {
+      return 0
+    }
+  }
+  if fuel_name[fuel_i] == "p_B11" {
+    if bf_bt_t[bf_i] < 12 {
+      return 0
+    }
+  }
+  return 1
+}
+
+// ============================================================
+// Header
+// ============================================================
+let total_combos = len(sch_name) * len(sc_name) * len(bl_name) * len(st_name) * len(ht_name) * len(conf_name) * len(fuel_name) * len(tf_name) * len(geo_name) * len(bf_name) * len(qt_name) * len(pc_name) * len(tbr_name) * len(gr_name)
+
+println(repeat_str("=", 90))
+println("  N6 Fusion Design Space Exploration (DSE)")
+println("  방식 x 소재(SC x 블랭킷 x 구조재) x 코어(가열 x 가둠 x 연료)")
+println("  x 장치(TF x 기하 x 자장 x Q) x 시스템(발전 x TBR x 계통)")
+println(repeat_str("=", 90))
+println("")
+println("  후보군:")
+println("    방식:     " + join_arr(sch_name, ", ") + " (" + to_string(len(sch_name)) + ")")
+println("    초전도체: " + join_arr(sc_name, ", ") + " (" + to_string(len(sc_name)) + ")")
+println("    블랭킷:   " + join_arr(bl_name, ", ") + " (" + to_string(len(bl_name)) + ")")
+println("    구조재:   " + join_arr(st_name, ", ") + " (" + to_string(len(st_name)) + ")")
+println("    가열:     " + join_arr(ht_name, ", ") + " (" + to_string(len(ht_name)) + ")")
+println("    가둠:     " + join_arr(conf_name, ", ") + " (" + to_string(len(conf_name)) + ")")
+println("    연료:     " + join_arr(fuel_name, ", ") + " (" + to_string(len(fuel_name)) + ")")
+println("    TF코일:   " + join_arr(tf_name, ", ") + " (" + to_string(len(tf_name)) + ")")
+println("    기하:     " + join_arr(geo_name, ", ") + " (" + to_string(len(geo_name)) + ")")
+println("    자장:     " + join_arr(bf_name, ", ") + " (" + to_string(len(bf_name)) + ")")
+println("    Q목표:    " + join_arr(qt_name, ", ") + " (" + to_string(len(qt_name)) + ")")
+println("    발전:     " + join_arr(pc_name, ", ") + " (" + to_string(len(pc_name)) + ")")
+println("    TBR:      " + join_arr(tbr_name, ", ") + " (" + to_string(len(tbr_name)) + ")")
+println("    계통:     " + join_arr(gr_name, ", ") + " (" + to_string(len(gr_name)) + ")")
+println("")
+println("  이론적 총 조합: " + to_string(total_combos))
+println("  탐색 시작...")
+println("")
+
+// ============================================================
+// DSE main loop - top-K parallel arrays
+// ============================================================
+let TOP_K = 200
+let n6_total_c = 15
+let PHI_POW_TAU = 16
+
+let mut res_scheme = []
+let mut res_sc = []
+let mut res_blanket = []
+let mut res_structural = []
+let mut res_heating = []
+let mut res_confinement = []
+let mut res_fuel = []
+let mut res_tf = []
+let mut res_geometry = []
+let mut res_bfield = []
+let mut res_qtarget = []
+let mut res_power_conv = []
+let mut res_tbr_strat = []
+let mut res_grid = []
+let mut res_n6_exact = []
+let mut res_n6_total = []
+let mut res_n6_pct = []
+let mut res_q_gain = []
+let mut res_trl = []
+let mut res_lcoe = []
+let mut res_t_comm = []
+let mut res_pareto = []
+
+let mut skipped = 0
+let mut evaluated = 0
+let mut sum_n6 = 0.0
+let mut max_n6 = 0.0
+let mut count_above80 = 0
+let mut count_above60 = 0
+
+// best by axis
+let mut best_n6_val = -1.0
+let mut best_n6_scheme = ""
+let mut best_n6_sc_s = ""
+let mut best_n6_bl = ""
+let mut best_n6_st = ""
+let mut best_n6_ht = ""
+let mut best_n6_conf = ""
+let mut best_n6_fuel_s = ""
+let mut best_n6_tf_s = ""
+let mut best_n6_geo = ""
+let mut best_n6_bf = ""
+let mut best_n6_qt = ""
+let mut best_n6_pc = ""
+let mut best_n6_tbr = ""
+let mut best_n6_gr = ""
+
+let mut best_q_val = -1
+let mut best_q_scheme = ""
+let mut best_q_fuel_s = ""
+let mut best_q_qt = ""
+
+let mut best_trl_val = -1
+let mut best_trl_scheme = ""
+let mut best_trl_pc = ""
+
+let mut best_lcoe_val = -1
+let mut best_lcoe_scheme = ""
+let mut best_lcoe_fuel_s = ""
+let mut best_lcoe_sc_s = ""
+
+// per-scheme best stored via parallel arrays
+let mut sb_scheme = []
+let mut sb_sc = []
+let mut sb_blanket = []
+let mut sb_structural = []
+let mut sb_heating = []
+let mut sb_confinement = []
+let mut sb_fuel = []
+let mut sb_tf = []
+let mut sb_geometry = []
+let mut sb_bfield = []
+let mut sb_qtarget = []
+let mut sb_power_conv = []
+let mut sb_tbr_strat = []
+let mut sb_grid = []
+let mut sb_n6_pct = []
+let mut sb_q_gain = []
+let mut sb_trl = []
+let mut sb_lcoe = []
+let mut sb_pareto = []
+
+// initialize 6 slots
+let mut sbi_init = 0
+while sbi_init < 6 {
+  sb_scheme = sb_scheme + [""]
+  sb_sc = sb_sc + [""]
+  sb_blanket = sb_blanket + [""]
+  sb_structural = sb_structural + [""]
+  sb_heating = sb_heating + [""]
+  sb_confinement = sb_confinement + [""]
+  sb_fuel = sb_fuel + [""]
+  sb_tf = sb_tf + [""]
+  sb_geometry = sb_geometry + [""]
+  sb_bfield = sb_bfield + [""]
+  sb_qtarget = sb_qtarget + [""]
+  sb_power_conv = sb_power_conv + [""]
+  sb_tbr_strat = sb_tbr_strat + [""]
+  sb_grid = sb_grid + [""]
+  sb_n6_pct = sb_n6_pct + [0.0]
+  sb_q_gain = sb_q_gain + [0]
+  sb_trl = sb_trl + [0]
+  sb_lcoe = sb_lcoe + [0]
+  sb_pareto = sb_pareto + [-1.0]
+  sbi_init = sbi_init + 1
+}
+
+let mut si = 0
+while si < len(sch_name) {
+  let mut l1_exact = 0
+  if sch_pf_coils[si] == N {
+    l1_exact = l1_exact + 1
+  }
+  if sch_cs_mods[si] == N {
+    l1_exact = l1_exact + 1
+  }
+  let l1_t_comm = t_comm_score(si)
+
+  let mut sci = 0
+  while sci < len(sc_name) {
+    let mut l2_sc_exact = 0
+    if is_n6_derived(sc_b_max_t[sci]) == 1 {
+      l2_sc_exact = 1
+    }
+
+    let mut bli = 0
+    while bli < len(bl_name) {
+      let mut l2_bl_exact = 0
+      if is_n6_base(bl_coolant_types[bli]) == 1 {
+        l2_bl_exact = 1
+      }
+
+      let mut sti = 0
+      while sti < len(st_name) {
+        let mut hti = 0
+        while hti < len(ht_name) {
+          let mut l3_ht_exact = 0
+          if is_n6_base(ht_typical_mw[hti]) == 1 {
+            l3_ht_exact = 1
+          }
+
+          let mut confi = 0
+          while confi < len(conf_name) {
+            let mut fueli = 0
+            while fueli < len(fuel_name) {
+              let mut l3_fuel_exact = 0
+              if is_n6_base(fuel_d_mass[fueli]) == 1 {
+                l3_fuel_exact = 1
+              }
+              let mut l3_neut_exact = 0
+              if fuel_neutron_fraction_pct[fueli] == PHI_POW_TAU * SOPFR {
+                l3_neut_exact = 1
+              }
+
+              let partial_1_3 = l1_exact + l2_sc_exact + l2_bl_exact + l3_ht_exact + l3_fuel_exact + l3_neut_exact
+
+              let mut tfi = 0
+              while tfi < len(tf_name) {
+                let mut l4_tf_exact = 0
+                if is_n6_base(tf_coil_count[tfi]) == 1 {
+                  l4_tf_exact = 1
+                }
+
+                let mut geoi = 0
+                while geoi < len(geo_name) {
+                  let mut l4_geo_exact = 0
+                  if geo_aspect_ratio_10x[geoi] == (N / PHI) * 10 {
+                    l4_geo_exact = 1
+                  }
+
+                  let mut bfi = 0
+                  while bfi < len(bf_name) {
+                    let inner_count = len(qt_name) * len(pc_name) * len(tbr_name) * len(gr_name)
+                    let mut do_inner = 1
+                    let mut l4_bf_exact = 0
+                    let mut partial_1_4 = 0
+
+                    if is_compatible(sci, bfi, confi, fueli) == 0 {
+                      skipped = skipped + inner_count
+                      do_inner = 0
+                    }
+
+                    if do_inner == 1 {
+                      if bf_bt_t[bfi] == SIGMA {
+                        l4_bf_exact = 1
+                      }
+
+                      partial_1_4 = partial_1_3 + l4_tf_exact + l4_geo_exact + l4_bf_exact
+
+                      // pruning check
+                      let upper_n6_pct = (partial_1_4 + 1 + 4) * 100.0 / n6_total_c
+                      let upper_pareto = upper_n6_pct * 0.35 + 100.0 * 0.25 + 100.0 * 0.20 + 100.0 * 0.12 + 100.0 * 0.08
+
+                      let mut min_topk = 0.0
+                      if len(res_pareto) >= TOP_K {
+                        min_topk = res_pareto[len(res_pareto) - 1]
+                      }
+
+                      if len(res_pareto) >= TOP_K {
+                        if upper_pareto < min_topk {
+                          skipped = skipped + inner_count
+                          do_inner = 0
+                        }
+                      }
+                    }
+
+                    if do_inner == 1 {
+                      let mut qti = 0
+                      while qti < len(qt_name) {
+                        let mut l4_qt_exact = 0
+                        if qt_q_value[qti] == SOPFR * PHI {
+                          l4_qt_exact = 1
+                        }
+                        let qg = q_gain_score(si, qti, fueli)
+
+                        let mut pci = 0
+                        while pci < len(pc_name) {
+                          let mut l5_pc_exact = 0
+                          if pc_efficiency_pct[pci] == 100 / (N / PHI) {
+                            l5_pc_exact = 1
+                          }
+                          let tr = trl_score(si, pci)
+                          let lc = lcoe_score(si, fueli, sci, pci)
+
+                          let mut tbri = 0
+                          while tbri < len(tbr_name) {
+                            let mut l5_tbr_exact = 0
+                            if tbr_tbr_100x[tbri] == SIGMA * 10 {
+                              l5_tbr_exact = 1
+                            }
+
+                            let mut gri = 0
+                            while gri < len(gr_name) {
+                              evaluated = evaluated + 1
+
+                              let mut l5_gr_exact = 0
+                              if gr_freq_hz[gri] == SIGMA * SOPFR {
+                                l5_gr_exact = 1
+                              }
+                              if gr_freq_hz[gri] == SOPFR * (SIGMA - PHI) {
+                                l5_gr_exact = 1
+                              }
+
+                              let n6_exact = partial_1_4 + l4_qt_exact + l5_pc_exact + l5_tbr_exact + l5_gr_exact
+                              let n6_pct = n6_exact * 100.0 / n6_total_c
+                              let tc = l1_t_comm
+
+                              let pareto_score = n6_pct * 0.35 + qg * 0.25 + tr * 0.20 + lc * 0.12 + tc * 0.08
+
+                              sum_n6 = sum_n6 + n6_pct
+                              if n6_pct > max_n6 {
+                                max_n6 = n6_pct
+                              }
+                              if n6_pct >= 80.0 {
+                                count_above80 = count_above80 + 1
+                              }
+                              if n6_pct >= 60.0 {
+                                count_above60 = count_above60 + 1
+                              }
+
+                              // --- best by axis ---
+                              if n6_pct > best_n6_val {
+                                best_n6_val = n6_pct
+                                best_n6_scheme = sch_name[si]
+                                best_n6_sc_s = sc_name[sci]
+                                best_n6_bl = bl_name[bli]
+                                best_n6_st = st_name[sti]
+                                best_n6_ht = ht_name[hti]
+                                best_n6_conf = conf_name[confi]
+                                best_n6_fuel_s = fuel_name[fueli]
+                                best_n6_tf_s = tf_name[tfi]
+                                best_n6_geo = geo_name[geoi]
+                                best_n6_bf = bf_name[bfi]
+                                best_n6_qt = qt_name[qti]
+                                best_n6_pc = pc_name[pci]
+                                best_n6_tbr = tbr_name[tbri]
+                                best_n6_gr = gr_name[gri]
+                              }
+
+                              if qg > best_q_val {
+                                best_q_val = qg
+                                best_q_scheme = sch_name[si]
+                                best_q_fuel_s = fuel_name[fueli]
+                                best_q_qt = qt_name[qti]
+                              }
+
+                              if tr > best_trl_val {
+                                best_trl_val = tr
+                                best_trl_scheme = sch_name[si]
+                                best_trl_pc = pc_name[pci]
+                              }
+
+                              if lc > best_lcoe_val {
+                                best_lcoe_val = lc
+                                best_lcoe_scheme = sch_name[si]
+                                best_lcoe_fuel_s = fuel_name[fueli]
+                                best_lcoe_sc_s = sc_name[sci]
+                              }
+
+                              // --- per-scheme best ---
+                              if pareto_score > sb_pareto[si] {
+                                sb_pareto[si] = pareto_score
+                                sb_scheme[si] = sch_name[si]
+                                sb_sc[si] = sc_name[sci]
+                                sb_blanket[si] = bl_name[bli]
+                                sb_structural[si] = st_name[sti]
+                                sb_heating[si] = ht_name[hti]
+                                sb_confinement[si] = conf_name[confi]
+                                sb_fuel[si] = fuel_name[fueli]
+                                sb_tf[si] = tf_name[tfi]
+                                sb_geometry[si] = geo_name[geoi]
+                                sb_bfield[si] = bf_name[bfi]
+                                sb_qtarget[si] = qt_name[qti]
+                                sb_power_conv[si] = pc_name[pci]
+                                sb_tbr_strat[si] = tbr_name[tbri]
+                                sb_grid[si] = gr_name[gri]
+                                sb_n6_pct[si] = n6_pct
+                                sb_q_gain[si] = qg
+                                sb_trl[si] = tr
+                                sb_lcoe[si] = lc
+                              }
+
+                              // --- top-K insert ---
+                              let mut insert_at = 0
+                              let mut ip_found = 0
+                              while insert_at < len(res_pareto) {
+                                if ip_found == 0 {
+                                  if res_pareto[insert_at] < pareto_score {
+                                    ip_found = 1
+                                  } else {
+                                    insert_at = insert_at + 1
+                                  }
+                                } else {
+                                  insert_at = len(res_pareto)
+                                }
+                              }
+                              if ip_found == 1 {
+                                if insert_at > len(res_pareto) {
+                                  insert_at = insert_at - 1
+                                }
+                              }
+
+                              if insert_at < TOP_K {
+                                // append then bubble to position
+                                res_scheme = res_scheme + [sch_name[si]]
+                                res_sc = res_sc + [sc_name[sci]]
+                                res_blanket = res_blanket + [bl_name[bli]]
+                                res_structural = res_structural + [st_name[sti]]
+                                res_heating = res_heating + [ht_name[hti]]
+                                res_confinement = res_confinement + [conf_name[confi]]
+                                res_fuel = res_fuel + [fuel_name[fueli]]
+                                res_tf = res_tf + [tf_name[tfi]]
+                                res_geometry = res_geometry + [geo_name[geoi]]
+                                res_bfield = res_bfield + [bf_name[bfi]]
+                                res_qtarget = res_qtarget + [qt_name[qti]]
+                                res_power_conv = res_power_conv + [pc_name[pci]]
+                                res_tbr_strat = res_tbr_strat + [tbr_name[tbri]]
+                                res_grid = res_grid + [gr_name[gri]]
+                                res_n6_exact = res_n6_exact + [n6_exact]
+                                res_n6_total = res_n6_total + [n6_total_c]
+                                res_n6_pct = res_n6_pct + [n6_pct]
+                                res_q_gain = res_q_gain + [qg]
+                                res_trl = res_trl + [tr]
+                                res_lcoe = res_lcoe + [lc]
+                                res_t_comm = res_t_comm + [tc]
+                                res_pareto = res_pareto + [pareto_score]
+
+                                // bubble from end to insert_at
+                                let mut bi = len(res_pareto) - 1
+                                while bi > insert_at {
+                                  let prev = bi - 1
+                                  let mut tmp = res_pareto[prev]
+                                  res_pareto[prev] = res_pareto[bi]
+                                  res_pareto[bi] = tmp
+                                  tmp = res_scheme[prev]
+                                  res_scheme[prev] = res_scheme[bi]
+                                  res_scheme[bi] = tmp
+                                  tmp = res_sc[prev]
+                                  res_sc[prev] = res_sc[bi]
+                                  res_sc[bi] = tmp
+                                  tmp = res_blanket[prev]
+                                  res_blanket[prev] = res_blanket[bi]
+                                  res_blanket[bi] = tmp
+                                  tmp = res_structural[prev]
+                                  res_structural[prev] = res_structural[bi]
+                                  res_structural[bi] = tmp
+                                  tmp = res_heating[prev]
+                                  res_heating[prev] = res_heating[bi]
+                                  res_heating[bi] = tmp
+                                  tmp = res_confinement[prev]
+                                  res_confinement[prev] = res_confinement[bi]
+                                  res_confinement[bi] = tmp
+                                  tmp = res_fuel[prev]
+                                  res_fuel[prev] = res_fuel[bi]
+                                  res_fuel[bi] = tmp
+                                  tmp = res_tf[prev]
+                                  res_tf[prev] = res_tf[bi]
+                                  res_tf[bi] = tmp
+                                  tmp = res_geometry[prev]
+                                  res_geometry[prev] = res_geometry[bi]
+                                  res_geometry[bi] = tmp
+                                  tmp = res_bfield[prev]
+                                  res_bfield[prev] = res_bfield[bi]
+                                  res_bfield[bi] = tmp
+                                  tmp = res_qtarget[prev]
+                                  res_qtarget[prev] = res_qtarget[bi]
+                                  res_qtarget[bi] = tmp
+                                  tmp = res_power_conv[prev]
+                                  res_power_conv[prev] = res_power_conv[bi]
+                                  res_power_conv[bi] = tmp
+                                  tmp = res_tbr_strat[prev]
+                                  res_tbr_strat[prev] = res_tbr_strat[bi]
+                                  res_tbr_strat[bi] = tmp
+                                  tmp = res_grid[prev]
+                                  res_grid[prev] = res_grid[bi]
+                                  res_grid[bi] = tmp
+                                  tmp = res_n6_exact[prev]
+                                  res_n6_exact[prev] = res_n6_exact[bi]
+                                  res_n6_exact[bi] = tmp
+                                  tmp = res_n6_total[prev]
+                                  res_n6_total[prev] = res_n6_total[bi]
+                                  res_n6_total[bi] = tmp
+                                  tmp = res_n6_pct[prev]
+                                  res_n6_pct[prev] = res_n6_pct[bi]
+                                  res_n6_pct[bi] = tmp
+                                  tmp = res_q_gain[prev]
+                                  res_q_gain[prev] = res_q_gain[bi]
+                                  res_q_gain[bi] = tmp
+                                  tmp = res_trl[prev]
+                                  res_trl[prev] = res_trl[bi]
+                                  res_trl[bi] = tmp
+                                  tmp = res_lcoe[prev]
+                                  res_lcoe[prev] = res_lcoe[bi]
+                                  res_lcoe[bi] = tmp
+                                  tmp = res_t_comm[prev]
+                                  res_t_comm[prev] = res_t_comm[bi]
+                                  res_t_comm[bi] = tmp
+                                  bi = bi - 1
+                                }
+
+                                // trim to TOP_K by rebuilding arrays
+                                if len(res_pareto) > TOP_K {
+                                  let mut t_scheme = []
+                                  let mut t_sc = []
+                                  let mut t_blanket = []
+                                  let mut t_structural = []
+                                  let mut t_heating = []
+                                  let mut t_confinement = []
+                                  let mut t_fuel = []
+                                  let mut t_tf = []
+                                  let mut t_geometry = []
+                                  let mut t_bfield = []
+                                  let mut t_qtarget = []
+                                  let mut t_power_conv = []
+                                  let mut t_tbr_strat = []
+                                  let mut t_grid = []
+                                  let mut t_n6_exact = []
+                                  let mut t_n6_total = []
+                                  let mut t_n6_pct = []
+                                  let mut t_q_gain = []
+                                  let mut t_trl = []
+                                  let mut t_lcoe = []
+                                  let mut t_t_comm = []
+                                  let mut t_pareto = []
+                                  let mut ti = 0
+                                  while ti < TOP_K {
+                                    t_scheme = t_scheme + [res_scheme[ti]]
+                                    t_sc = t_sc + [res_sc[ti]]
+                                    t_blanket = t_blanket + [res_blanket[ti]]
+                                    t_structural = t_structural + [res_structural[ti]]
+                                    t_heating = t_heating + [res_heating[ti]]
+                                    t_confinement = t_confinement + [res_confinement[ti]]
+                                    t_fuel = t_fuel + [res_fuel[ti]]
+                                    t_tf = t_tf + [res_tf[ti]]
+                                    t_geometry = t_geometry + [res_geometry[ti]]
+                                    t_bfield = t_bfield + [res_bfield[ti]]
+                                    t_qtarget = t_qtarget + [res_qtarget[ti]]
+                                    t_power_conv = t_power_conv + [res_power_conv[ti]]
+                                    t_tbr_strat = t_tbr_strat + [res_tbr_strat[ti]]
+                                    t_grid = t_grid + [res_grid[ti]]
+                                    t_n6_exact = t_n6_exact + [res_n6_exact[ti]]
+                                    t_n6_total = t_n6_total + [res_n6_total[ti]]
+                                    t_n6_pct = t_n6_pct + [res_n6_pct[ti]]
+                                    t_q_gain = t_q_gain + [res_q_gain[ti]]
+                                    t_trl = t_trl + [res_trl[ti]]
+                                    t_lcoe = t_lcoe + [res_lcoe[ti]]
+                                    t_t_comm = t_t_comm + [res_t_comm[ti]]
+                                    t_pareto = t_pareto + [res_pareto[ti]]
+                                    ti = ti + 1
+                                  }
+                                  res_scheme = t_scheme
+                                  res_sc = t_sc
+                                  res_blanket = t_blanket
+                                  res_structural = t_structural
+                                  res_heating = t_heating
+                                  res_confinement = t_confinement
+                                  res_fuel = t_fuel
+                                  res_tf = t_tf
+                                  res_geometry = t_geometry
+                                  res_bfield = t_bfield
+                                  res_qtarget = t_qtarget
+                                  res_power_conv = t_power_conv
+                                  res_tbr_strat = t_tbr_strat
+                                  res_grid = t_grid
+                                  res_n6_exact = t_n6_exact
+                                  res_n6_total = t_n6_total
+                                  res_n6_pct = t_n6_pct
+                                  res_q_gain = t_q_gain
+                                  res_trl = t_trl
+                                  res_lcoe = t_lcoe
+                                  res_t_comm = t_t_comm
+                                  res_pareto = t_pareto
+                                }
+                              }
+
+                              gri = gri + 1
+                            }
+                            tbri = tbri + 1
+                          }
+                          pci = pci + 1
+                        }
+                        qti = qti + 1
+                      }
+                    }
+
+                    bfi = bfi + 1
+                  }
+                  geoi = geoi + 1
+                }
+                tfi = tfi + 1
+              }
+              fueli = fueli + 1
+            }
+            confi = confi + 1
+          }
+          hti = hti + 1
+        }
+        sti = sti + 1
+      }
+      bli = bli + 1
+    }
+    sci = sci + 1
+  }
+  si = si + 1
+}
+
+let avg_n6 = sum_n6 / evaluated
+
+// ============================================================
+// TOP 20
+// ============================================================
+println(repeat_str("=", 170))
+println("  TOP 20 CONFIGURATIONS (by Pareto score)")
+println(repeat_str("=", 170))
+println("")
+println("  " + pad_l("#", 3) + " | " + pad_l("Scheme", 11) + " | " + pad_l("SC", 5) + " | " + pad_l("Blanket", 10) + " | " + pad_l("Struct", 7) + " | " + pad_l("Heat", 4) + " | " + pad_l("Confine", 10) + " | " + pad_l("Fuel", 5) + " | " + pad_l("TF", 4) + " | " + pad_l("Geo", 3) + " | " + pad_l("B", 4) + " | " + pad_l("Q", 5) + " | " + pad_l("PwrConv", 7) + " | " + pad_l("TBR", 10) + " | " + pad_l("Grid", 5) + " | " + pad_l("n6%", 5) + " | " + pad_l("Q_g", 4) + " | " + pad_l("TRL", 4) + " | " + pad_l("LCOE", 4) + " | " + pad_l("Pareto", 6))
+println("  " + repeat_str("-", 165))
+
+let mut i = 0
+let limit20 = min_val(20, len(res_pareto))
+while i < limit20 {
+  let n6_pct_show = to_string(round(res_n6_pct[i], 0))
+  let pareto_show = to_string(round(res_pareto[i], 2))
+  let line = "  " + pad_l(to_string(i + 1), 3) + " | " + pad_l(res_scheme[i], 11) + " | " + pad_l(res_sc[i], 5) + " | " + pad_l(res_blanket[i], 10) + " | " + pad_l(res_structural[i], 7) + " | " + pad_l(res_heating[i], 4) + " | " + pad_l(res_confinement[i], 10) + " | " + pad_l(res_fuel[i], 5) + " | " + pad_l(res_tf[i], 4) + " | " + pad_l(res_geometry[i], 3) + " | " + pad_l(res_bfield[i], 4) + " | " + pad_l(res_qtarget[i], 5) + " | " + pad_l(res_power_conv[i], 7) + " | " + pad_l(res_tbr_strat[i], 10) + " | " + pad_l(res_grid[i], 5) + " | " + pad_l(n6_pct_show + "%", 5) + " | " + pad_l(to_string(res_q_gain[i]), 4) + " | " + pad_l(to_string(res_trl[i]), 4) + " | " + pad_l(to_string(res_lcoe[i]), 4) + " | " + pad_l(pareto_show, 6)
+  println(line)
+  i = i + 1
+}
+
+// ============================================================
+// STATISTICS
+// ============================================================
+println("")
+println(repeat_str("=", 90))
+println("  STATISTICS")
+println(repeat_str("=", 90))
+println("  Theoretical combinations: " + to_string(total_combos))
+println("  Skipped (incompatible):   " + to_string(skipped))
+println("  Evaluated:                " + to_string(evaluated))
+println("  Max n6 EXACT:             " + to_string(round(max_n6, 1)) + "%")
+println("  Avg n6 EXACT:             " + to_string(round(avg_n6, 1)) + "%")
+let pct_80 = round(count_above80 * 100.0 / evaluated, 2)
+let pct_60 = round(count_above60 * 100.0 / evaluated, 2)
+println("  >=80% EXACT:              " + to_string(count_above80) + " (" + to_string(pct_80) + "%)")
+println("  >=60% EXACT:              " + to_string(count_above60) + " (" + to_string(pct_60) + "%)")
+
+// ============================================================
+// BEST BY AXIS
+// ============================================================
+println("")
+println("  BEST BY AXIS:")
+println("    Best n6 EXACT:  " + best_n6_scheme + " + " + best_n6_sc_s + " + " + best_n6_bl + " + " + best_n6_st + " + " + best_n6_ht + " + " + best_n6_conf + " + " + best_n6_fuel_s + " + " + best_n6_tf_s + " + " + best_n6_geo + " + " + best_n6_bf + " + " + best_n6_qt + " + " + best_n6_pc + " + " + best_n6_tbr + " + " + best_n6_gr + " (" + to_string(round(best_n6_val, 1)) + "%)")
+println("    Best Q_gain:    " + best_q_scheme + " + " + best_q_fuel_s + " + " + best_q_qt + " (Q_gain=" + to_string(best_q_val) + ")")
+println("    Best TRL:       " + best_trl_scheme + " + " + best_trl_pc + " (TRL=" + to_string(best_trl_val) + ")")
+println("    Best LCOE:      " + best_lcoe_scheme + " + " + best_lcoe_fuel_s + " + " + best_lcoe_sc_s + " (LCOE=" + to_string(best_lcoe_val) + ")")
+println("    Best Pareto:    " + res_scheme[0] + " + " + res_sc[0] + " + " + res_fuel[0] + " + " + res_tf[0] + " + " + res_geometry[0] + " + " + res_bfield[0] + " + " + res_power_conv[0] + " (score=" + to_string(round(res_pareto[0], 2)) + ")")
+
+// ============================================================
+// SCHEME BREAKDOWN
+// ============================================================
+println("")
+println(repeat_str("=", 90))
+println("  SCHEME BREAKDOWN (best config per scheme)")
+println(repeat_str("=", 90))
+println("")
+
+let mut sbi2 = 0
+while sbi2 < len(sch_name) {
+  if sb_pareto[sbi2] >= 0.0 {
+    println("  [" + pad_r(sch_name[sbi2], 11) + "] Pareto=" + to_string(round(sb_pareto[sbi2], 2)) + "  n6=" + to_string(round(sb_n6_pct[sbi2], 0)) + "%  Q=" + to_string(sb_q_gain[sbi2]) + "  TRL=" + to_string(sb_trl[sbi2]) + "  LCOE=" + to_string(sb_lcoe[sbi2]))
+    println("    SC=" + sb_sc[sbi2] + " Blanket=" + sb_blanket[sbi2] + " Struct=" + sb_structural[sbi2] + " Heat=" + sb_heating[sbi2] + " Conf=" + sb_confinement[sbi2] + " Fuel=" + sb_fuel[sbi2])
+    println("    TF=" + sb_tf[sbi2] + " Geo=" + sb_geometry[sbi2] + " B=" + sb_bfield[sbi2] + " Q=" + sb_qtarget[sbi2] + " PwrConv=" + sb_power_conv[sbi2] + " TBR=" + sb_tbr_strat[sbi2] + " Grid=" + sb_grid[sbi2])
+    println("")
+  }
+  sbi2 = sbi2 + 1
+}
+
+// ============================================================
+// OPTIMAL PATH
+// ============================================================
+println(repeat_str("=", 90))
+println("  OPTIMAL PATH (Pareto #1)")
+println(repeat_str("=", 90))
+println("")
+
+let r = 0
+let mut pf_val = "0"
+let mut cs_val = "0"
+if res_scheme[r] == "Tokamak" {
+  pf_val = "6"
+  cs_val = "6"
+}
+
+println("  Level 1: 방식                Level 2: 소재                    Level 3: 코어")
+println("  ┌─────────────┐             ┌──────────────────┐             ┌──────────────────┐")
+println("  | " + pad_r(res_scheme[r], 12) + "|             | SC:  " + pad_r(res_sc[r], 13) + "|             | Heat: " + pad_r(res_heating[r], 11) + "|")
+println("  | PF=" + pf_val + " CS=" + cs_val + " |  ────>    | Bl:  " + pad_r(res_blanket[r], 13) + "|  ────>    | Conf: " + pad_r(res_confinement[r], 11) + "|")
+
+let mut sch_trl_val = 0
+let mut sfi = 0
+while sfi < len(sch_name) {
+  if sch_name[sfi] == res_scheme[r] {
+    sch_trl_val = sch_trl[sfi]
+  }
+  sfi = sfi + 1
+}
+
+println("  | TRL=" + to_string(sch_trl_val) + "       |             | St:  " + pad_r(res_structural[r], 13) + "|             | Fuel: " + pad_r(res_fuel[r], 11) + "|")
+println("  └─────────────┘             └──────────────────┘             └──────────────────┘")
+println("                                                                        |")
+println("                                                                        v")
+println("  Level 5: 시스템               Level 4: 장치")
+println("  ┌──────────────────┐             ┌──────────────────┐")
+println("  | Pwr:  " + pad_r(res_power_conv[r], 11) + "|             | TF:  " + pad_r(res_tf[r], 13) + "|")
+println("  | TBR:  " + pad_r(res_tbr_strat[r], 11) + "|  <────    | Geo: " + pad_r(res_geometry[r], 13) + "|")
+println("  | Grid: " + pad_r(res_grid[r], 11) + "|             | B:   " + pad_r(res_bfield[r], 13) + "|")
+println("  └──────────────────┘             | Q:   " + pad_r(res_qtarget[r], 13) + "|")
+println("                                   └──────────────────┘")
+println("")
+println("  Pareto Score: " + to_string(round(res_pareto[r], 2)))
+println("  n6 EXACT:     " + to_string(res_n6_exact[r]) + "/" + to_string(res_n6_total[r]) + " = " + to_string(round(res_n6_pct[r], 1)) + "%")
+println("  Q_gain:       " + to_string(res_q_gain[r]))
+println("  TRL:          " + to_string(res_trl[r]))
+println("  LCOE:         " + to_string(res_lcoe[r]))
+println("  T_comm:       " + to_string(res_t_comm[r]))
+
+// ============================================================
+// N6 MATCH DETAIL
+// ============================================================
+println("")
+println("  N6 MATCH DETAIL (optimal path):")
+
+let mut pf_n6 = "no"
+let mut cs_n6 = "no"
+let mut pf_v = 0
+let mut cs_v = 0
+if res_scheme[r] == "Tokamak" {
+  pf_n6 = "YES"
+  cs_n6 = "YES"
+  pf_v = 6
+  cs_v = 6
+}
+println("    Level 1: PF_coils=" + to_string(pf_v) + " (n=6? " + pf_n6 + "), CS_modules=" + to_string(cs_v) + " (n=6? " + cs_n6 + ")")
+
+let mut sc_bmax_val = 0
+let mut sc_derived_yn = "no"
+let mut fi1 = 0
+while fi1 < len(sc_name) {
+  if sc_name[fi1] == res_sc[r] {
+    sc_bmax_val = sc_b_max_t[fi1]
+    if is_n6_derived(sc_bmax_val) == 1 {
+      sc_derived_yn = "YES"
+    }
+  }
+  fi1 = fi1 + 1
+}
+println("    Level 2: SC_Bmax=" + to_string(sc_bmax_val) + " (n6_derived? " + sc_derived_yn + "), Coolant_types (n6_base? yes)")
+
+let mut ht_mw_val = 0
+let mut ht_n6_yn = "no"
+let mut fi2 = 0
+while fi2 < len(ht_name) {
+  if ht_name[fi2] == res_heating[r] {
+    ht_mw_val = ht_typical_mw[fi2]
+    if is_n6_base(ht_mw_val) == 1 {
+      ht_n6_yn = "YES"
+    }
+  }
+  fi2 = fi2 + 1
+}
+
+let mut fuel_dm_val = 0
+let mut fuel_n6_yn = "no"
+let mut fuel_neut_val = 0
+let mut fi3 = 0
+while fi3 < len(fuel_name) {
+  if fuel_name[fi3] == res_fuel[r] {
+    fuel_dm_val = fuel_d_mass[fi3]
+    fuel_neut_val = fuel_neutron_fraction_pct[fi3]
+    if is_n6_base(fuel_dm_val) == 1 {
+      fuel_n6_yn = "YES"
+    }
+  }
+  fi3 = fi3 + 1
+}
+println("    Level 3: Heat_MW=" + to_string(ht_mw_val) + " (n6_base? " + ht_n6_yn + "), Fuel_mass=" + to_string(fuel_dm_val) + " (n6_base? " + fuel_n6_yn + "), Neutron=" + to_string(fuel_neut_val) + "%")
+
+let mut tf_cc_val = 0
+let mut tf_n6_yn = "no"
+let mut fi4 = 0
+while fi4 < len(tf_name) {
+  if tf_name[fi4] == res_tf[r] {
+    tf_cc_val = tf_coil_count[fi4]
+    if is_n6_base(tf_cc_val) == 1 {
+      tf_n6_yn = "YES"
+    }
+  }
+  fi4 = fi4 + 1
+}
+
+let mut geo_ar_val = 0
+let mut geo_yn = "no"
+let mut fi5 = 0
+while fi5 < len(geo_name) {
+  if geo_name[fi5] == res_geometry[r] {
+    geo_ar_val = geo_aspect_ratio_10x[fi5]
+    if geo_ar_val == 30 {
+      geo_yn = "YES"
+    }
+  }
+  fi5 = fi5 + 1
+}
+
+let mut bf_val = 0
+let mut bf_yn = "no"
+let mut fi6 = 0
+while fi6 < len(bf_name) {
+  if bf_name[fi6] == res_bfield[r] {
+    bf_val = bf_bt_t[fi6]
+    if bf_val == SIGMA {
+      bf_yn = "YES"
+    }
+  }
+  fi6 = fi6 + 1
+}
+
+let mut qt_val = 0
+let mut qt_yn = "no"
+let mut fi7 = 0
+while fi7 < len(qt_name) {
+  if qt_name[fi7] == res_qtarget[r] {
+    qt_val = qt_q_value[fi7]
+    if qt_val == 10 {
+      qt_yn = "YES"
+    }
+  }
+  fi7 = fi7 + 1
+}
+println("    Level 4: TF_coils=" + to_string(tf_cc_val) + " (n6_base? " + tf_n6_yn + "), A*10=" + to_string(geo_ar_val) + " (==30? " + geo_yn + "), B_T=" + to_string(bf_val) + " (==sigma? " + bf_yn + "), Q=" + to_string(qt_val) + " (==10? " + qt_yn + ")")
+
+let mut pc_eff_val = 0
+let mut pc_yn = "no"
+let mut fi8 = 0
+while fi8 < len(pc_name) {
+  if pc_name[fi8] == res_power_conv[r] {
+    pc_eff_val = pc_efficiency_pct[fi8]
+    if pc_eff_val == 33 {
+      pc_yn = "YES"
+    }
+  }
+  fi8 = fi8 + 1
+}
+
+let mut tbr_val = 0
+let mut tbr_yn = "no"
+let mut fi9 = 0
+while fi9 < len(tbr_name) {
+  if tbr_name[fi9] == res_tbr_strat[r] {
+    tbr_val = tbr_tbr_100x[fi9]
+    if tbr_val == 120 {
+      tbr_yn = "YES"
+    }
+  }
+  fi9 = fi9 + 1
+}
+
+let mut gr_freq_val = 0
+let mut gr_yn = "no"
+let mut fi10 = 0
+while fi10 < len(gr_name) {
+  if gr_name[fi10] == res_grid[r] {
+    gr_freq_val = gr_freq_hz[fi10]
+    if gr_freq_val == SIGMA * SOPFR {
+      gr_yn = "YES"
+    }
+    if gr_freq_val == SOPFR * (SIGMA - PHI) {
+      gr_yn = "YES"
+    }
+  }
+  fi10 = fi10 + 1
+}
+println("    Level 5: Eff=" + to_string(pc_eff_val) + "% (==33? " + pc_yn + "), TBR_100x=" + to_string(tbr_val) + " (==120? " + tbr_yn + "), Freq=" + to_string(gr_freq_val) + " (n6? " + gr_yn + ")")
+
+println("")
+println(repeat_str("=", 90))
+println("  DSE 완료 -- " + to_string(total_combos) + " 조합 중 " + to_string(evaluated) + " 평가, " + to_string(skipped) + " 비호환 제외")
+println("  최적 경로: " + res_scheme[0] + " + " + res_sc[0] + " + " + res_fuel[0] + " + " + res_tf[0] + " + " + res_geometry[0] + " + " + res_bfield[0] + " + " + res_power_conv[0])
+println("  Pareto Score: " + to_string(round(res_pareto[0], 2)) + " | n6 EXACT: " + to_string(round(res_n6_pct[0], 1)) + "%")
+println(repeat_str("=", 90))

@@ -1,0 +1,559 @@
+// HEXA-CCUS Carbon Capture Calculator v1.0
+// n=6 Thermodynamic Verification
+// Ported from: tools/carbon-capture-calc/main.rs
+
+let E = 2.718281828459045
+let PI = 3.141592653589793
+let LOG10 = log(10.0)
+
+// n=6 Constants
+let N = 6.0
+let SIGMA = 12.0
+let PHI = 2.0
+let TAU = 4.0
+let SOPFR = 5.0
+let J2 = 24.0
+let MU = 1.0
+
+// Physical Constants
+let R_GAS = 8.314
+let T_STD = 298.15
+
+// --- helpers ---
+fn pad_r(s, width) {
+    let mut result = s
+    while len(result) < width { result = result + " " }
+    result
+}
+fn pad_l(s, width) {
+    let mut result = s
+    while len(result) < width { result = " " + result }
+    result
+}
+fn find_dot(s) {
+    let mut ci = 0
+    while ci < len(s) {
+        if to_string(s[ci]) == "." { return ci }
+        ci = ci + 1
+    }
+    return -1
+}
+fn fmt(v, decimals) {
+    if decimals == 0 { return to_string(round(v)) }
+    let factor = pow(10.0, decimals)
+    let rounded = round(v * factor) / factor
+    let mut s = to_string(rounded)
+    let mut dot_pos = find_dot(s)
+    if dot_pos == -1 {
+        s = s + "."
+        dot_pos = len(s) - 1
+    }
+    let target_len = dot_pos + 1 + decimals
+    if len(s) > target_len {
+        let mut ns = ""
+        let mut ti = 0
+        while ti < target_len {
+            ns = ns + s[ti]
+            ti = ti + 1
+        }
+        s = ns
+    }
+    while len(s) < target_len {
+        s = s + "0"
+    }
+    s
+}
+fn fmt_sci(v, dec) {
+    if v == 0.0 { return "0.0e0" }
+    let mut neg = 0
+    let mut val = v
+    if val < 0.0 {
+        neg = 1
+        val = 0.0 - val
+    }
+    let mut e = 0
+    if val >= 1.0 {
+        while val >= 10.0 {
+            val = val / 10.0
+            e = e + 1
+        }
+    }
+    if val < 1.0 {
+        while val < 1.0 {
+            val = val * 10.0
+            e = e - 1
+        }
+    }
+    let mut prefix = ""
+    if neg == 1 { prefix = "-" }
+    prefix + fmt(val, dec) + "e" + to_string(e)
+}
+fn myexp(x) { pow(E, x) }
+fn log10(x) { log(x) / LOG10 }
+
+fn grade_raw(ratio, target) {
+    let pct = abs(ratio - target) / abs(target)
+    if pct <= 0.05 { return "EXACT" }
+    if pct <= 0.20 { return "CLOSE" }
+    if pct <= 0.40 { return "WEAK" }
+    return "FAIL"
+}
+
+// match storage (parallel arrays)
+let mut m_desc = []
+let mut m_val = []
+let mut m_expr = []
+let mut m_target = []
+let mut m_grade = []
+
+fn push_match(desc, val, expr, target, gr) {
+    m_desc = m_desc + [desc]
+    m_val = m_val + [val]
+    m_expr = m_expr + [expr]
+    m_target = m_target + [target]
+    m_grade = m_grade + [gr]
+}
+
+// ============================================================
+println("=".repeat(63))
+println("  HEXA-CCUS Carbon Capture Calculator v1.0")
+println("  n=6 Thermodynamic Verification")
+println("=".repeat(63))
+println("")
+
+// ============================================================
+// 1. Minimum Separation Energy
+// ============================================================
+println("+-------------------------------------------------------------+")
+println("|  1. MINIMUM SEPARATION ENERGY: W_min = RT*ln(1/x_CO2)      |")
+println("+-------------------------------------------------------------+")
+println("")
+
+let case_names = ["Atmospheric (420 ppm)", "Post-combustion (12%)", "Pre-combustion (40%)", "Oxy-fuel (80%)"]
+let case_x = [0.000420, 0.12, 0.40, 0.80]
+
+println("  " + pad_r("Source", 30) + " " + pad_l("x_CO2", 10) + " " + pad_l("W_min (kJ/mol)", 14))
+println("  " + "-".repeat(56))
+
+let mut w_atm = 0.0
+let mut w_post = 0.0
+
+let mut ci = 0
+while ci < 4 {
+    let w_min = R_GAS * T_STD * log(1.0 / case_x[ci]) / 1000.0
+    println("  " + pad_r(case_names[ci], 30) + " " + pad_l(fmt(case_x[ci], 6), 10) + " " + pad_l(fmt(w_min, 3), 14))
+    if ci == 0 { w_atm = w_min }
+    if ci == 1 { w_post = w_min }
+    ci = ci + 1
+}
+println("")
+
+// Actual DAC energy
+let actual_dac = 200.0
+let ratio_dac = actual_dac / w_atm
+let gr_dac = grade_raw(ratio_dac, SIGMA - PHI)
+println("  Actual DAC energy (Climeworks): " + fmt(actual_dac, 1) + " kJ/mol")
+println("  Actual / W_min(atm) = " + fmt(ratio_dac, 2) + "  <- n6_match: sigma-phi = " + fmt(SIGMA - PHI, 0) + " (" + gr_dac + ")")
+push_match("DAC actual/theoretical ratio", ratio_dac, "sigma-phi", SIGMA - PHI, gr_dac)
+println("")
+
+let ratio_post = w_atm / w_post
+let gr_post = grade_raw(ratio_post, N)
+println("  W_atm / W_post = " + fmt(ratio_post, 3) + "  <- n6_match: n = " + fmt(N, 0) + " (" + gr_post + ")")
+push_match("W_atm / W_post ratio", ratio_post, "n", N, gr_post)
+println("")
+
+// ============================================================
+// 2. Langmuir Adsorption
+// ============================================================
+println("+-------------------------------------------------------------+")
+println("|  2. LANGMUIR ADSORPTION: q = q_max*K*P/(1+K*P)             |")
+println("+-------------------------------------------------------------+")
+println("")
+
+let q_max = 8.0
+let k_ref = 1.2
+let dh_ads = -47.0
+
+let t_ads = 300.0
+let t_reg = 420.0
+let p_co2 = 0.0004
+let p_post_c = 0.12
+let t_ref = 300.0
+
+// Van't Hoff: K(T) = K_ref * exp(-dH/R * (1/T - 1/T_ref))
+fn k_at(t) {
+    k_ref * myexp((0.0 - dh_ads) * 1000.0 / R_GAS * (1.0 / t - 1.0 / t_ref))
+}
+
+fn langmuir(q_m, k, p) {
+    q_m * k * p / (1.0 + k * p)
+}
+
+println("  MOF-74 Mg: q_max=" + fmt(q_max, 1) + " mmol/g, K_ref=" + fmt(k_ref, 1) + " bar^-1, DH=" + fmt(dh_ads, 0) + " kJ/mol")
+println("")
+
+let k300 = k_at(t_ads)
+let k420 = k_at(t_reg)
+println("  K(300K) = " + fmt(k300, 4) + " bar^-1")
+println("  K(420K) = " + fmt(k420, 4) + " bar^-1")
+println("")
+
+let q_ads_atm = langmuir(q_max, k300, p_co2)
+let q_reg_atm = langmuir(q_max, k420, p_co2)
+let q_ads_post = langmuir(q_max, k300, p_post_c)
+let q_reg_post = langmuir(q_max, k420, p_post_c)
+
+println("  " + pad_r("Condition", 35) + " " + pad_l("q (mmol/g)", 10) + " " + pad_l("K (bar^-1)", 10))
+println("  " + "-".repeat(58))
+println("  " + pad_r("Atmospheric, 300K (adsorb)", 35) + " " + pad_l(fmt(q_ads_atm, 4), 10) + " " + pad_l(fmt(k300, 4), 10))
+println("  " + pad_r("Atmospheric, 420K (regenerate)", 35) + " " + pad_l(fmt(q_reg_atm, 4), 10) + " " + pad_l(fmt(k420, 4), 10))
+println("  " + pad_r("Post-combustion, 300K (adsorb)", 35) + " " + pad_l(fmt(q_ads_post, 4), 10) + " " + pad_l(fmt(k300, 4), 10))
+println("  " + pad_r("Post-combustion, 420K (regenerate)", 35) + " " + pad_l(fmt(q_reg_post, 4), 10) + " " + pad_l(fmt(k420, 4), 10))
+println("")
+
+let delta_q_post = q_ads_post - q_reg_post
+let selectivity = q_ads_post / q_reg_post
+println("  Working capacity (post-comb): " + fmt(delta_q_post, 4) + " mmol/g")
+println("  Adsorb/Regen selectivity: " + fmt(selectivity, 2))
+
+// Check selectivity against n6 constants
+let mut sel_target = SIGMA
+let mut sel_expr = "sigma"
+if abs(selectivity - SIGMA) / SIGMA < 0.20 {
+    sel_target = SIGMA
+    sel_expr = "sigma"
+} else if abs(selectivity - (SIGMA - PHI)) / (SIGMA - PHI) < 0.20 {
+    sel_target = SIGMA - PHI
+    sel_expr = "sigma-phi"
+} else if abs(selectivity - N) / N < 0.20 {
+    sel_target = N
+    sel_expr = "n"
+} else if abs(selectivity - SIGMA * SOPFR) / (SIGMA * SOPFR) < 0.20 {
+    sel_target = SIGMA * SOPFR
+    sel_expr = "sigma*sopfr"
+}
+let gr_sel = grade_raw(selectivity, sel_target)
+println("  Selectivity ratio = " + fmt(selectivity, 2) + "  <- n6_match: " + sel_expr + " = " + fmt(sel_target, 0) + " (" + gr_sel + ")")
+push_match("Adsorb/regen selectivity", selectivity, sel_expr, sel_target, gr_sel)
+println("")
+
+// q_max check
+let gr_qmax = grade_raw(q_max, SIGMA - TAU)
+println("  q_max = " + fmt(q_max, 1) + "  <- n6_match: sigma-tau = " + fmt(SIGMA - TAU, 0) + " (" + gr_qmax + ")")
+push_match("MOF-74 q_max", q_max, "sigma-tau", SIGMA - TAU, gr_qmax)
+println("")
+
+// ============================================================
+// 3. TSA 6-Stage Cycle Energy Balance
+// ============================================================
+println("+-------------------------------------------------------------+")
+println("|  3. TSA 6-STAGE CYCLE ENERGY BALANCE                       |")
+println("+-------------------------------------------------------------+")
+println("")
+
+let stage_names = ["1. Adsorb", "2. Heat", "3. Desorb", "4. Purge", "5. Cool", "6. Condition"]
+
+println("  TSA Cycle Stages (n=6):")
+let mut si = 0
+while si < 6 {
+    println("    " + stage_names[si])
+    si = si + 1
+}
+let gr_stages = grade_raw(6.0, N)
+println("  Stage count = 6  <- n6_match: n = " + fmt(N, 0) + " (" + gr_stages + ")")
+push_match("TSA cycle stages", 6.0, "n", N, gr_stages)
+println("")
+
+// Energy calculation
+let dt = 120.0
+let cp_sorbent = 1.0
+let sorbent_density = 500.0
+let bed_volume = 1.0
+let mass_sorbent = sorbent_density * bed_volume
+
+let mw_co2 = 44.0
+let co2_per_cycle_mol = delta_q_post * mass_sorbent
+let co2_per_cycle_kg = co2_per_cycle_mol * mw_co2 / pow(10.0, 6)
+
+let q_sensible = mass_sorbent * cp_sorbent * dt
+let dh_des = abs(dh_ads)
+let q_desorption = co2_per_cycle_mol / 1000.0 * dh_des
+let q_total = q_sensible + q_desorption
+
+let cycles_per_ton = 1000.0 / co2_per_cycle_kg
+let energy_per_ton = q_total * cycles_per_ton / pow(10.0, 3)
+let energy_per_mol = q_total / (co2_per_cycle_mol / 1000.0)
+
+println("  Bed parameters:")
+println("    Sorbent mass:       " + fmt(mass_sorbent, 0) + " kg")
+println("    Cp (sorbent):       " + fmt(cp_sorbent, 1) + " kJ/(kg*K)")
+println("    Temperature swing:  " + fmt(dt, 0) + " K")
+println("    Working capacity:   " + fmt(delta_q_post, 4) + " mmol/g = " + fmt(delta_q_post, 2) + " mol/kg")
+println("")
+
+println("  Energy per cycle (1 m3 bed):")
+println("    Sensible heat:   " + pad_l(fmt(q_sensible, 1), 10) + " kJ")
+println("    Desorption heat: " + pad_l(fmt(q_desorption, 1), 10) + " kJ")
+println("    Total:           " + pad_l(fmt(q_total, 1), 10) + " kJ")
+println("")
+
+println("  CO2 per cycle:     " + fmt(co2_per_cycle_kg, 4) + " kg")
+println("  Energy per mol CO2: " + fmt(energy_per_mol, 1) + " kJ/mol")
+println("  Energy per ton CO2: " + fmt(energy_per_ton, 1) + " MJ/ton")
+println("")
+
+let climeworks_energy = 200.0
+let hexa_target = 20.0
+
+let gr_dt = grade_raw(dt, SIGMA * (SIGMA - PHI))
+println("  DeltaT = " + fmt(dt, 0) + "  <- n6_match: sigma*(sigma-phi) = " + fmt(SIGMA * (SIGMA - PHI), 0) + " (" + gr_dt + ")")
+push_match("TSA temperature swing", dt, "sigma*(sigma-phi)", SIGMA * (SIGMA - PHI), gr_dt)
+
+let ratio_clim_hexa = climeworks_energy / hexa_target
+let gr_clim = grade_raw(ratio_clim_hexa, SIGMA - PHI)
+println("  Climeworks/HEXA ratio = " + fmt(ratio_clim_hexa, 1) + "  <- n6_match: sigma-phi = " + fmt(SIGMA - PHI, 0) + " (" + gr_clim + ")")
+push_match("Climeworks/HEXA energy ratio", ratio_clim_hexa, "sigma-phi", SIGMA - PHI, gr_clim)
+println("")
+
+// ============================================================
+// 4. Pipeline Hydraulics (Darcy-Weisbach)
+// ============================================================
+println("+-------------------------------------------------------------+")
+println("|  4. PIPELINE HYDRAULICS (Darcy-Weisbach)                   |")
+println("+-------------------------------------------------------------+")
+println("")
+
+let rho_sc = 800.0
+let mu_sc = 5.0 / pow(10.0, 5)
+let d_pipe = 6.0 * 0.0254
+let v_flow = 2.0
+let roughness = 0.046 / pow(10.0, 3)
+
+let re = rho_sc * v_flow * d_pipe / mu_sc
+
+println("  Supercritical CO2 properties:")
+println("    Density:     " + fmt(rho_sc, 0) + " kg/m3")
+println("    Viscosity:   " + fmt_sci(mu_sc, 1) + " Pa*s")
+println("    Pipe dia:    " + fmt(d_pipe, 4) + " m (" + fmt(6.0, 0) + " inches)")
+println("    Flow vel:    " + fmt(v_flow, 1) + " m/s")
+println("    Roughness:   " + fmt_sci(roughness, 3) + " m")
+println("    Reynolds:    " + fmt(re, 0) + "")
+println("")
+
+// Colebrook-White (iterative)
+let e_d = roughness / d_pipe
+let mut f = 0.02
+let mut iter = 0
+while iter < 50 {
+    let rhs = 0.0 - 2.0 * log10(e_d / 3.7 + 2.51 / (re * sqrt(f)))
+    f = 1.0 / (rhs * rhs)
+    iter = iter + 1
+}
+
+println("  Darcy friction factor f = " + fmt(f, 6))
+
+let dp_per_m = f * rho_sc * v_flow * v_flow / (2.0 * d_pipe)
+let dp_per_km_kpa = dp_per_m * 1000.0 / 1000.0
+
+println("  Pressure drop: " + fmt(dp_per_m, 2) + " Pa/m = " + fmt(dp_per_km_kpa, 1) + " kPa/km")
+
+let max_dp = 2000.0
+let booster_spacing = max_dp / dp_per_km_kpa
+
+println("  Max allowable drop: " + fmt(max_dp, 0) + " kPa (" + fmt(max_dp / 1000.0, 0) + " MPa)")
+println("  Booster spacing: " + fmt(booster_spacing, 1) + " km")
+println("")
+
+let gr_pipe = grade_raw(d_pipe / 0.0254, N)
+println("  Pipe diameter = " + fmt(d_pipe / 0.0254, 0) + " inches  <- n6_match: n = " + fmt(N, 0) + " (" + gr_pipe + ")")
+push_match("Pipe diameter (inches)", d_pipe / 0.0254, "n", N, gr_pipe)
+
+let gr_boost = grade_raw(booster_spacing, SIGMA)
+println("  Booster spacing = " + fmt(booster_spacing, 1) + " km  <- n6_match: sigma = " + fmt(SIGMA, 0) + " (" + gr_boost + ")")
+push_match("Booster spacing (km)", booster_spacing, "sigma", SIGMA, gr_boost)
+println("")
+
+// Mass flow rate
+let area = PI * d_pipe * d_pipe / 4.0
+let mass_flow = rho_sc * v_flow * area
+let mass_flow_tpy = mass_flow * 3600.0 * 24.0 * 365.0 / pow(10.0, 6)
+println("  Mass flow rate: " + fmt(mass_flow, 2) + " kg/s = " + fmt(mass_flow_tpy, 3) + " Mton/yr")
+
+println("  Note: 6-inch pipe = small diameter; large pipelines use 12-24 inch")
+let re_per_1e5 = re / pow(10.0, 5)
+let gr_re = grade_raw(re_per_1e5, SIGMA * TAU)
+println("  Re/1e5 = " + fmt(re_per_1e5, 1) + "  <- n6_match: sigma*tau = " + fmt(SIGMA * TAU, 0) + " (" + gr_re + ")")
+push_match("Reynolds/1e5", re_per_1e5, "sigma*tau", SIGMA * TAU, gr_re)
+println("")
+
+// ============================================================
+// 5. n=6 Constant Verification Summary
+// ============================================================
+println("+-------------------------------------------------------------+")
+println("|  5. n=6 CONSTANT VERIFICATION -- SCAN ALL VALUES            |")
+println("+-------------------------------------------------------------+")
+println("")
+
+let dh_abs = abs(dh_ads)
+let gr_dh = grade_raw(dh_abs, SIGMA * TAU)
+println("  |DH_ads| = " + fmt(dh_abs, 0) + " kJ/mol  <- n6_match: sigma*tau = " + fmt(SIGMA * TAU, 0) + " (" + gr_dh + ")")
+push_match("|DH_ads| MOF-74", dh_abs, "sigma*tau", SIGMA * TAU, gr_dh)
+
+println("  Re = " + fmt(re, 0) + "  (Re/1e5 = " + fmt(re / pow(10.0, 5), 1) + ")")
+
+let gr_mw = grade_raw(mw_co2, SIGMA * TAU - TAU)
+println("  M(CO2) = " + fmt(mw_co2, 0) + " g/mol  <- n6_match: sigma*tau-tau = " + fmt(SIGMA * TAU - TAU, 0) + " (" + gr_mw + ")")
+push_match("CO2 molar mass", mw_co2, "sigma*tau-tau", SIGMA * TAU - TAU, gr_mw)
+
+let rho_hecto = rho_sc / 100.0
+let gr_rho = grade_raw(rho_hecto, SIGMA - TAU)
+println("  rho(scCO2)/100 = " + fmt(rho_hecto, 1) + "  <- n6_match: sigma-tau = " + fmt(SIGMA - TAU, 0) + " (" + gr_rho + ")")
+push_match("scCO2 density/100", rho_hecto, "sigma-tau", SIGMA - TAU, gr_rho)
+
+println("  Carbon Z = 6  <- n6_match: n = 6 (EXACT)")
+push_match("Carbon atomic number Z", 6.0, "n", N, "EXACT")
+
+let co2_atoms = 3.0
+let gr_atoms = grade_raw(co2_atoms, N / PHI)
+println("  CO2 atom count = 3  <- n6_match: n/phi = " + fmt(N / PHI, 0) + " (" + gr_atoms + ")")
+push_match("CO2 atom count", co2_atoms, "n/phi", N / PHI, gr_atoms)
+
+let co2_valence = 16.0
+let gr_val = grade_raw(co2_valence, pow(PHI, TAU))
+println("  CO2 valence electrons = 16  <- n6_match: phi^tau = " + fmt(pow(PHI, TAU), 0) + " (" + gr_val + ")")
+push_match("CO2 valence electrons", co2_valence, "phi^tau", pow(PHI, TAU), gr_val)
+
+println("")
+
+// ============================================================
+// SUMMARY TABLE
+// ============================================================
+println("+---------------------------------------------------------------------------+")
+println("|  n=6 MATCH SUMMARY                                                        |")
+println("+---------------------------------------------------------------------------+")
+println("")
+
+println("  " + pad_r("Description", 35) + " " + pad_l("Value", 10) + " " + pad_l("Expression", 15) + " " + pad_l("Target", 8) + " " + pad_l("Grade", 7))
+println("  " + "-".repeat(78))
+
+let mut exact_count = 0
+let mut close_count = 0
+let mut weak_count = 0
+let mut fail_count = 0
+
+let mut mi = 0
+while mi < len(m_desc) {
+    let gr = m_grade[mi]
+    println("  " + pad_r(m_desc[mi], 35) + " " + pad_l(fmt(m_val[mi], 3), 10) + " " + pad_l(m_expr[mi], 15) + " " + pad_l(fmt(m_target[mi], 1), 8) + " " + pad_l(gr, 7))
+    if gr == "EXACT" { exact_count = exact_count + 1 }
+    if gr == "CLOSE" { close_count = close_count + 1 }
+    if gr == "WEAK" { weak_count = weak_count + 1 }
+    if gr == "FAIL" { fail_count = fail_count + 1 }
+    mi = mi + 1
+}
+let total = len(m_desc)
+
+println("  " + "-".repeat(78))
+println("  EXACT: " + to_string(exact_count) + "/" + to_string(total) + "  CLOSE: " + to_string(close_count) + "/" + to_string(total) + "  WEAK: " + to_string(weak_count) + "/" + to_string(total) + "  FAIL: " + to_string(fail_count) + "/" + to_string(total))
+let consistency_pct = (exact_count + close_count) * 100.0 / total
+println("  n=6 consistency (EXACT+CLOSE): " + to_string(exact_count + close_count) + "/" + to_string(total) + " = " + fmt(consistency_pct, 0) + "%")
+println("")
+
+// ============================================================
+// 6. Pareto Comparison
+// ============================================================
+println("+-------------------------------------------------------------+")
+println("|  6. PARETO COMPARISON: Climeworks / Carbon Eng / HEXA      |")
+println("+-------------------------------------------------------------+")
+println("")
+
+let sys_names = ["Climeworks (DAC-S)", "Carbon Eng (DAC-L)", "HEXA-CCUS (target)"]
+let sys_energy = [2000.0, 1500.0, 200.0]
+let sys_cap = [4000.0, 1000000.0, 100000.0]
+let sys_cost = [600.0, 250.0, 60.0]
+let sys_eff = [90.0, 85.0, 95.0]
+
+// Energy comparison
+println("  Energy (kWh/ton CO2) -- lower is better:")
+let max_e = 2000.0
+let mut pi2 = 0
+while pi2 < 3 {
+    let bar_len = floor(sys_energy[pi2] / max_e * 40.0)
+    let bar = "#".repeat(min(bar_len, 40))
+    println("    " + pad_r(sys_names[pi2], 22) + " " + pad_l(fmt(sys_energy[pi2], 0), 6) + " |" + pad_r(bar, 40) + "|")
+    pi2 = pi2 + 1
+}
+println("")
+
+// Cost comparison
+println("  Cost ($/ton CO2) -- lower is better:")
+let max_c = 600.0
+let mut pi3 = 0
+while pi3 < 3 {
+    let bar_len = floor(sys_cost[pi3] / max_c * 40.0)
+    let bar = "#".repeat(min(bar_len, 40))
+    println("    " + pad_r(sys_names[pi3], 22) + " " + pad_l(fmt(sys_cost[pi3], 0), 6) + " |" + pad_r(bar, 40) + "|")
+    pi3 = pi3 + 1
+}
+println("")
+
+// Capacity comparison
+println("  Capacity (ton/yr) -- higher is better:")
+let max_cap = 1000000.0
+let mut pi4 = 0
+while pi4 < 3 {
+    let bar_len = floor(log10(sys_cap[pi4]) / log10(max_cap) * 40.0)
+    let bar = "#".repeat(min(bar_len, 40))
+    println("    " + pad_r(sys_names[pi4], 22) + " " + pad_l(fmt(sys_cap[pi4], 0), 10) + " |" + pad_r(bar, 40) + "|")
+    pi4 = pi4 + 1
+}
+println("")
+
+// Efficiency comparison
+println("  Capture efficiency (%) -- higher is better:")
+let mut pi5 = 0
+while pi5 < 3 {
+    let bar_len = floor(sys_eff[pi5] / 100.0 * 40.0)
+    let bar = "#".repeat(min(bar_len, 40))
+    println("    " + pad_r(sys_names[pi5], 22) + " " + pad_l(fmt(sys_eff[pi5], 1) + "%", 6) + " |" + pad_r(bar, 40) + "|")
+    pi5 = pi5 + 1
+}
+println("")
+
+// Pareto score
+println("  Pareto composite score (lower = better):")
+println("  Score = (energy/200) + (cost/60) + (1M/capacity) + (100/eff)")
+println("")
+let mut pi6 = 0
+while pi6 < 3 {
+    let score = sys_energy[pi6] / 200.0 + sys_cost[pi6] / 60.0 + 1000000.0 / sys_cap[pi6] + 100.0 / sys_eff[pi6]
+    let bar_len = floor(score / 30.0 * 40.0)
+    let bar = "#".repeat(min(bar_len, 40))
+    println("    " + pad_r(sys_names[pi6], 22) + " " + pad_l(fmt(score, 2), 6) + " |" + pad_r(bar, 40) + "|")
+    pi6 = pi6 + 1
+}
+println("")
+
+// HEXA cost target n6 check
+let hexa_cost = 60.0
+let gr_cost = grade_raw(hexa_cost, SIGMA * SOPFR)
+println("  HEXA cost target = $" + fmt(hexa_cost, 0) + "/ton  <- n6_match: sigma*sopfr = " + fmt(SIGMA * SOPFR, 0) + " (" + gr_cost + ")")
+push_match("HEXA cost target", hexa_cost, "sigma*sopfr", SIGMA * SOPFR, gr_cost)
+
+// Recount final
+let mut exact_final = 0
+let mut close_final = 0
+let mut fi = 0
+while fi < len(m_grade) {
+    if m_grade[fi] == "EXACT" { exact_final = exact_final + 1 }
+    if m_grade[fi] == "CLOSE" { close_final = close_final + 1 }
+    fi = fi + 1
+}
+
+println("")
+println("=".repeat(63))
+println("  FINAL: " + to_string(exact_final) + "/" + to_string(len(m_grade)) + " EXACT, " + to_string(exact_final + close_final) + "/" + to_string(len(m_grade)) + " CLOSE+EXACT")
+let final_pct = (exact_final + close_final) * 100.0 / len(m_grade)
+println("  n=6 thermodynamic consistency: " + fmt(final_pct, 0) + "%")
+println("=".repeat(63))

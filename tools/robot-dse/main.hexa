@@ -1,0 +1,659 @@
+// N6 궁극의 로봇 DSE — 6단 전수 조합 탐색기
+// 구조체 -> 구동기 -> 센서 -> 제어 -> 지능 -> 시스템
+
+// --- 패딩 헬퍼 ---
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd2(x) { round(x * 100.0) / 100.0 }
+
+fn join_arr(arr, cnt) {
+    let mut r = ""
+    let mut i = 0
+    while i < cnt {
+        if i > 0 { r = r + ", " }
+        r = r + arr[i]
+        i = i + 1
+    }
+    r
+}
+
+// --- N6 상수 ---
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let J2 = 24
+
+// --- Level 1: 구조체/Body (6) ---
+let body_name = ["Arm-6DOF", "Quadruped", "Humanoid", "Wheeled-Arm", "Quadrotor", "ModularCube"]
+let body_dof = [6, 12, 24, 10, 6, 6]
+let body_legs = [0, 4, 2, 4, 4, 0]
+let body_dof_per_limb = [6, 3, 6, 1, 1, 1]
+let body_payload = [5, 15, 10, 50, 2, 1]
+let body_cost = [3, 4, 5, 2, 2, 1]
+let nb = 6
+
+// --- Level 2: 구동기/Actuator (6) ---
+let act_name = ["BLDC-Gear", "DirectDrive", "SeriesElastic", "Hydraulic", "Pneumatic", "SMA-Soft"]
+let act_torque = [4, 3, 4, 5, 2, 1]
+let act_speed = [3, 5, 3, 2, 4, 1]
+let act_precision = [12, 24, 12, 12, 8, 6]
+let act_efficiency = [85, 95, 80, 60, 50, 5]
+let act_cost = [2, 4, 3, 4, 1, 3]
+let na = 6
+
+// --- Level 3: 센서/Sensor (5) ---
+let sens_name = ["Basic-6IMU", "Full-Vision", "Tactile-Array", "IMU-Only", "FullStack-12"]
+let sens_modalities = [3, 5, 4, 1, 6]
+let sens_imu = [6, 6, 6, 6, 12]
+let sens_camera = [2, 4, 2, 0, 4]
+let sens_cost = [1, 3, 4, 1, 5]
+let ns = 5
+
+// --- Level 4: 제어/Control (5) ---
+let ctrl_name = ["MCU-1kHz", "SoC-RT", "GPU-Onboard", "Cloud-Edge", "HEXA-1"]
+let ctrl_hz = [1000, 1000, 500, 100, 1000]
+let ctrl_layers = [2, 4, 5, 6, 6]
+let ctrl_latency = [1, 5, 10, 50, 1]
+let ctrl_watt = [2, 15, 50, 5, 12]
+let ctrl_cost = [1, 3, 4, 2, 5]
+let nc = 5
+
+// --- Level 5: 지능/AI (5) ---
+let ai_name = ["TeleOp", "Classic-PID", "RL-Policy", "VLA-1B", "N6-Egyptian"]
+let ai_params = [0, 0, 12, 1000, 4096]
+let ai_modality = [1, 2, 3, 4, 6]
+let ai_rl = [0, 0, 1, 1, 1]
+let ai_llm = [0, 0, 0, 1, 1]
+let ai_autonomy = [1, 2, 3, 4, 5]
+let ai_cost = [1, 1, 3, 4, 5]
+let nai = 5
+
+// --- Level 6: 시스템/System (5) ---
+let sys_name = ["Home-Care", "Delivery-6", "Factory-12", "Swarm-24", "Surgery-1"]
+let sys_fleet = [1, 6, 12, 24, 1]
+let sys_battery = [12, 24, 48, 5, 6]
+let sys_runtime = [60, 40, 80, 20, 120]
+let sys_cost = [3, 2, 4, 3, 5]
+let ny = 5
+
+let total_combos = nb * na * ns * nc * nai * ny
+
+println("═══════════════════════════════════════════════════════════════════════════")
+println("  N6 궁극의 로봇 DSE — 6단 전수 조합 탐색")
+println("  구조체 × 구동기 × 센서 × 제어 × 지능 × 시스템")
+println("  목표: 가사·간병·배달 로봇 최적 아키텍처")
+println("═══════════════════════════════════════════════════════════════════════════")
+println("")
+println("  후보군:")
+println("    구조체: " + join_arr(body_name, nb) + " (" + to_string(nb) + ")")
+println("    구동기: " + join_arr(act_name, na) + " (" + to_string(na) + ")")
+println("    센서:   " + join_arr(sens_name, ns) + " (" + to_string(ns) + ")")
+println("    제어:   " + join_arr(ctrl_name, nc) + " (" + to_string(nc) + ")")
+println("    지능:   " + join_arr(ai_name, nai) + " (" + to_string(nai) + ")")
+println("    시스템: " + join_arr(sys_name, ny) + " (" + to_string(ny) + ")")
+println("")
+println("  총 조합: " + to_string(total_combos) + " (호환 필터 전)")
+println("")
+
+// 결과 배열
+let mut r_bi = []
+let mut r_ai = []
+let mut r_si = []
+let mut r_ci = []
+let mut r_ii = []
+let mut r_yi = []
+let mut r_pct = []
+let mut r_perf = []
+let mut r_cost = []
+let mut r_auto = []
+let mut r_score = []
+let mut filtered = 0
+
+let mut bi = 0
+while bi < nb {
+    let mut aidx = 0
+    while aidx < na {
+        let mut si = 0
+        while si < ns {
+            let mut ci = 0
+            while ci < nc {
+                let mut ii = 0
+                while ii < nai {
+                    let mut yi = 0
+                    while yi < ny {
+                        let bn = body_name[bi]
+                        let an = act_name[aidx]
+                        let sn = sens_name[si]
+                        let cn = ctrl_name[ci]
+                        let inn = ai_name[ii]
+                        let yn = sys_name[yi]
+
+                        let mut ok = true
+
+                        // 드론은 BLDC/DirectDrive만
+                        if bn == "Quadrotor" {
+                            if an != "BLDC-Gear" {
+                                if an != "DirectDrive" { ok = false }
+                            }
+                        }
+                        // SMA-Soft는 ModularCube만
+                        if an == "SMA-Soft" {
+                            if bn != "ModularCube" { ok = false }
+                        }
+                        // Hydraulic은 대형만
+                        if an == "Hydraulic" {
+                            if bn != "Humanoid" {
+                                if bn != "Quadruped" { ok = false }
+                            }
+                        }
+                        // 수술용은 Arm-6DOF만
+                        if yn == "Surgery-1" {
+                            if bn != "Arm-6DOF" { ok = false }
+                        }
+                        // 텔레오퍼레이션 제한
+                        if inn == "TeleOp" {
+                            if yn != "Surgery-1" {
+                                if yn != "Home-Care" { ok = false }
+                            }
+                        }
+                        // 휴머노이드 배달 비현실적
+                        if yn == "Delivery-6" {
+                            if bn == "Humanoid" { ok = false }
+                        }
+                        // Swarm은 드론/모듈러만
+                        if yn == "Swarm-24" {
+                            if bn != "Quadrotor" {
+                                if bn != "ModularCube" { ok = false }
+                            }
+                        }
+                        // VLA/N6-Egyptian은 MCU 불가
+                        if inn == "VLA-1B" {
+                            if cn == "MCU-1kHz" { ok = false }
+                        }
+                        if inn == "N6-Egyptian" {
+                            if cn == "MCU-1kHz" { ok = false }
+                        }
+                        // N6-Egyptian은 GPU/HEXA-1/Cloud만
+                        if inn == "N6-Egyptian" {
+                            if cn != "GPU-Onboard" {
+                                if cn != "HEXA-1" {
+                                    if cn != "Cloud-Edge" { ok = false }
+                                }
+                            }
+                        }
+                        // FullStack 센서는 소형 불가
+                        if sn == "FullStack-12" {
+                            if bn == "Quadrotor" { ok = false }
+                            if bn == "ModularCube" { ok = false }
+                        }
+                        // IMU-Only는 고급 AI/수술 불가
+                        if sn == "IMU-Only" {
+                            if yn == "Surgery-1" { ok = false }
+                            if inn == "VLA-1B" { ok = false }
+                            if inn == "N6-Egyptian" { ok = false }
+                        }
+
+                        if ok {
+                            // --- N6 EXACT 계산 ---
+                            let mut exact = 0
+                            let mut total = 0
+                            let dof = body_dof[bi]
+                            let legs = body_legs[bi]
+                            let dpl = body_dof_per_limb[bi]
+                            let prec = act_precision[aidx]
+                            let eff = act_efficiency[aidx]
+                            let trk = act_torque[aidx]
+                            let spd = act_speed[aidx]
+                            let imu = sens_imu[si]
+                            let mods = sens_modalities[si]
+                            let cam = sens_camera[si]
+                            let layers = ctrl_layers[ci]
+                            let hz = ctrl_hz[ci]
+                            let watt = ctrl_watt[ci]
+                            let lat = ctrl_latency[ci]
+                            let amod = ai_modality[ii]
+                            let aparam = ai_params[ii]
+                            let arl = ai_rl[ii]
+                            let allm = ai_llm[ii]
+                            let aaut = ai_autonomy[ii]
+                            let fleet = sys_fleet[yi]
+                            let batt = sys_battery[yi]
+                            let runt = sys_runtime[yi]
+
+                            // 구조체 6 checks
+                            total = total + 1
+                            if dof == N { exact = exact + 1 }
+                            if dof == SIGMA { exact = exact + 1 }
+                            if dof == J2 { exact = exact + 1 }
+
+                            total = total + 1
+                            if legs == TAU { exact = exact + 1 }
+                            if legs == PHI { exact = exact + 1 }
+                            if legs == N { exact = exact + 1 }
+
+                            total = total + 1
+                            let ndp = N / PHI
+                            if dpl == N { exact = exact + 1 }
+                            if dpl == ndp { exact = exact + 1 }
+                            if dpl == 1 { exact = exact + 1 }
+
+                            total = total + 1
+                            if bn == "ModularCube" { exact = exact + 1 }
+                            if bn != "ModularCube" {
+                                if dof == N { exact = exact + 1 }
+                            }
+
+                            total = total + 1
+                            if dof == SIGMA { exact = exact + 1 }
+
+                            total = total + 1
+                            if dof == J2 { exact = exact + 1 }
+
+                            // 구동기 4 checks
+                            total = total + 1
+                            if prec == SIGMA { exact = exact + 1 }
+
+                            total = total + 1
+                            if prec == J2 { exact = exact + 1 }
+
+                            total = total + 1
+                            if eff >= 83 {
+                                if eff <= 87 { exact = exact + 1 }
+                            }
+
+                            total = total + 1
+                            let ts = trk + spd
+                            let smn = SIGMA - N
+                            if ts == N { exact = exact + 1 }
+                            if ts == smn { exact = exact + 1 }
+
+                            // 센서 4 checks
+                            total = total + 1
+                            if imu == N { exact = exact + 1 }
+
+                            total = total + 1
+                            if imu == SIGMA { exact = exact + 1 }
+
+                            total = total + 1
+                            if mods == N { exact = exact + 1 }
+
+                            total = total + 1
+                            if cam == PHI { exact = exact + 1 }
+                            if cam == TAU { exact = exact + 1 }
+
+                            // 제어 4 checks
+                            total = total + 1
+                            if layers == N { exact = exact + 1 }
+
+                            total = total + 1
+                            if hz == 1000 { exact = exact + 1 }
+
+                            total = total + 1
+                            if watt == SIGMA { exact = exact + 1 }
+
+                            total = total + 1
+                            if lat == 1 { exact = exact + 1 }
+
+                            // 지능 4 checks
+                            total = total + 1
+                            if amod == N { exact = exact + 1 }
+
+                            total = total + 1
+                            if aparam == SIGMA { exact = exact + 1 }
+                            if aparam == 4096 { exact = exact + 1 }
+
+                            total = total + 1
+                            if arl == 1 {
+                                if allm == 1 { exact = exact + 1 }
+                            }
+
+                            total = total + 1
+                            if aaut == SOPFR { exact = exact + 1 }
+
+                            // 시스템 4 checks
+                            total = total + 1
+                            if fleet == N { exact = exact + 1 }
+                            if fleet == SIGMA { exact = exact + 1 }
+                            if fleet == J2 { exact = exact + 1 }
+
+                            total = total + 1
+                            let st = SIGMA * TAU
+                            if batt == J2 { exact = exact + 1 }
+                            if batt == st { exact = exact + 1 }
+                            if batt == SIGMA { exact = exact + 1 }
+                            if batt == N { exact = exact + 1 }
+
+                            total = total + 1
+                            let s10 = SIGMA * 10
+                            let n10 = N * 10
+                            if runt == s10 { exact = exact + 1 }
+                            if runt == n10 { exact = exact + 1 }
+
+                            total = total + 1
+                            exact = exact + 1
+
+                            let mut n6_pct = 0.0
+                            if total > 0 { n6_pct = exact * 100.0 / (total * 1.0) }
+
+                            // 성능 스코어
+                            let mut dof_s = dof
+                            if dof_s > 24 { dof_s = 24 }
+                            dof_s = dof_s * 2
+                            let payload = body_payload[bi]
+                            let torque = act_torque[aidx] * 10
+                            let autonomy_pts = ai_autonomy[ii] * 15
+                            let mut perf = dof_s + payload + torque + autonomy_pts
+                            if perf > 100 { perf = 100 }
+
+                            // 비용
+                            let cost = body_cost[bi] * 15 + act_cost[aidx] * 15 + sens_cost[si] * 10 + ctrl_cost[ci] * 10 + ai_cost[ii] * 10 + sys_cost[yi] * 10
+                            let autonomy = ai_autonomy[ii]
+
+                            // Pareto score
+                            let perf_norm = perf * 1.0
+                            let auto_norm = autonomy * 20.0
+                            let mut cost_raw = 350.0 - cost * 1.0
+                            if cost_raw < 0.0 { cost_raw = 0.0 }
+                            let cost_norm = cost_raw / 3.5
+                            let v1 = body_dof[bi] * 1.0 / 24.0 * 50.0
+                            let v2 = ai_modality[ii] * 1.0 / 6.0 * 50.0
+                            let mut versatility = v1 + v2
+                            if versatility > 100.0 { versatility = 100.0 }
+
+                            let score = n6_pct * 0.20 + perf_norm * 0.25 + auto_norm * 0.20 + cost_norm * 0.20 + versatility * 0.15
+
+                            r_bi = r_bi + [bi]
+                            r_ai = r_ai + [aidx]
+                            r_si = r_si + [si]
+                            r_ci = r_ci + [ci]
+                            r_ii = r_ii + [ii]
+                            r_yi = r_yi + [yi]
+                            r_pct = r_pct + [n6_pct]
+                            r_perf = r_perf + [perf]
+                            r_cost = r_cost + [cost]
+                            r_auto = r_auto + [autonomy]
+                            r_score = r_score + [score]
+                        }
+                        if ok == false { filtered = filtered + 1 }
+                        yi = yi + 1
+                    }
+                    ii = ii + 1
+                }
+                ci = ci + 1
+            }
+            si = si + 1
+        }
+        aidx = aidx + 1
+    }
+    bi = bi + 1
+}
+
+let valid = len(r_score)
+println("  호환 필터: " + to_string(filtered) + " 제거 → " + to_string(valid) + " 유효 조합")
+println("")
+
+// --- 정렬 (insertion sort, 내림차순 by score) ---
+let mut sidx = []
+let mut sorted_scores = []
+let mut i = 0
+while i < valid {
+    sidx = sidx + [i]
+    sorted_scores = sorted_scores + [r_score[i]]
+    i = i + 1
+}
+
+i = 1
+while i < valid {
+    let key_s = sorted_scores[i]
+    let key_i = sidx[i]
+    let mut j = i - 1
+    let mut done = false
+    while j >= 0 {
+        if done == false {
+            if sorted_scores[j] < key_s {
+                sorted_scores[j + 1] = sorted_scores[j]
+                sidx[j + 1] = sidx[j]
+                j = j - 1
+            }
+            if sorted_scores[j] >= key_s { done = true }
+        }
+    }
+    sorted_scores[j + 1] = key_s
+    sidx[j + 1] = key_i
+    i = i + 1
+}
+
+// --- TOP 30 ---
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  TOP 30 CONFIGURATIONS (by Pareto score)")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+println("  " + pad_l("#", 3) + " │ " + pad_l("Body", 11) + " │ " + pad_l("Actuator", 12) + " │ " + pad_l("Sensor", 12) + " │ " + pad_l("Control", 11) + " │ " + pad_l("AI", 12) + " │ " + pad_l("System", 10) + " │ " + pad_l("n6%", 5) + " │ " + pad_l("Perf", 4) + " │ " + pad_l("Aut", 3) + " │ " + pad_l("Cost", 4) + " │ " + pad_l("Score", 6))
+println("  ────┼─────────────┼──────────────┼──────────────┼─────────────┼──────────────┼────────────┼───────┼──────┼─────┼──────┼───────")
+
+let mut k = 0
+let mut limit = 30
+if valid < limit { limit = valid }
+while k < limit {
+    let ri = sidx[k]
+    let pct_rounded = round(r_pct[ri])
+    let pct_str = pad_l(to_string(pct_rounded), 4) + "%"
+    let score_val = rd2(sorted_scores[k])
+    let mut score_str = to_string(score_val)
+
+    let line = "  " + pad_l(to_string(k + 1), 3) + " │ " + pad_l(body_name[r_bi[ri]], 11) + " │ " + pad_l(act_name[r_ai[ri]], 12) + " │ " + pad_l(sens_name[r_si[ri]], 12) + " │ " + pad_l(ctrl_name[r_ci[ri]], 11) + " │ " + pad_l(ai_name[r_ii[ri]], 12) + " │ " + pad_l(sys_name[r_yi[ri]], 10) + " │" + pct_str + " │ " + pad_l(to_string(r_perf[ri]), 4) + " │  " + to_string(r_auto[ri]) + "  │ " + pad_l(to_string(r_cost[ri]), 4) + " │ " + pad_l(score_str, 6)
+    println(line)
+    k = k + 1
+}
+
+// --- 가사·간병 특화 ---
+println("")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  HOME-CARE ROBOTS — 가사·간병 특화 경로")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+
+let mut home_idx = []
+let mut home_count = 0
+k = 0
+while k < valid {
+    let ri = sidx[k]
+    if sys_name[r_yi[ri]] == "Home-Care" {
+        home_idx = home_idx + [k]
+        home_count = home_count + 1
+    }
+    k = k + 1
+}
+
+println("  " + pad_l("#", 3) + " │ " + pad_l("Body", 11) + " │ " + pad_l("Actuator", 12) + " │ " + pad_l("Sensor", 12) + " │ " + pad_l("Control", 11) + " │ " + pad_l("AI", 12) + " │ " + pad_l("n6%", 5) + " │ " + pad_l("Perf", 4) + " │ " + pad_l("Aut", 3) + " │ " + pad_l("Score", 6))
+println("  ────┼─────────────┼──────────────┼──────────────┼─────────────┼──────────────┼───────┼──────┼─────┼───────")
+
+k = 0
+let mut hlimit = 15
+if home_count < hlimit { hlimit = home_count }
+while k < hlimit {
+    let sk = home_idx[k]
+    let ri = sidx[sk]
+    let pct_rounded = round(r_pct[ri])
+    let pct_str = pad_l(to_string(pct_rounded), 4) + "%"
+    let score_val = rd2(sorted_scores[sk])
+    let mut score_str = to_string(score_val)
+
+    let line = "  " + pad_l(to_string(k + 1), 3) + " │ " + pad_l(body_name[r_bi[ri]], 11) + " │ " + pad_l(act_name[r_ai[ri]], 12) + " │ " + pad_l(sens_name[r_si[ri]], 12) + " │ " + pad_l(ctrl_name[r_ci[ri]], 11) + " │ " + pad_l(ai_name[r_ii[ri]], 12) + " │" + pct_str + " │ " + pad_l(to_string(r_perf[ri]), 4) + " │  " + to_string(r_auto[ri]) + "  │ " + pad_l(score_str, 6)
+    println(line)
+    k = k + 1
+}
+println("")
+let home_pct = rd1(home_count * 100.0 / (valid * 1.0))
+println("  가사·간병 조합: " + to_string(home_count) + " / " + to_string(valid) + " 유효 (" + to_string(home_pct) + "%)")
+
+// --- 배달 특화 ---
+println("")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  DELIVERY ROBOTS — 배달 특화 경로")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+
+let mut del_idx = []
+let mut del_count = 0
+k = 0
+while k < valid {
+    let ri = sidx[k]
+    if sys_name[r_yi[ri]] == "Delivery-6" {
+        del_idx = del_idx + [k]
+        del_count = del_count + 1
+    }
+    k = k + 1
+}
+
+println("  " + pad_l("#", 3) + " │ " + pad_l("Body", 11) + " │ " + pad_l("Actuator", 12) + " │ " + pad_l("Sensor", 12) + " │ " + pad_l("Control", 11) + " │ " + pad_l("AI", 12) + " │ " + pad_l("n6%", 5) + " │ " + pad_l("Perf", 4) + " │ " + pad_l("Aut", 3) + " │ " + pad_l("Score", 6))
+println("  ────┼─────────────┼──────────────┼──────────────┼─────────────┼──────────────┼───────┼──────┼─────┼───────")
+
+k = 0
+let mut dlimit = 10
+if del_count < dlimit { dlimit = del_count }
+while k < dlimit {
+    let sk = del_idx[k]
+    let ri = sidx[sk]
+    let pct_rounded = round(r_pct[ri])
+    let pct_str = pad_l(to_string(pct_rounded), 4) + "%"
+    let score_val = rd2(sorted_scores[sk])
+    let mut score_str = to_string(score_val)
+
+    let line = "  " + pad_l(to_string(k + 1), 3) + " │ " + pad_l(body_name[r_bi[ri]], 11) + " │ " + pad_l(act_name[r_ai[ri]], 12) + " │ " + pad_l(sens_name[r_si[ri]], 12) + " │ " + pad_l(ctrl_name[r_ci[ri]], 11) + " │ " + pad_l(ai_name[r_ii[ri]], 12) + " │" + pct_str + " │ " + pad_l(to_string(r_perf[ri]), 4) + " │  " + to_string(r_auto[ri]) + "  │ " + pad_l(score_str, 6)
+    println(line)
+    k = k + 1
+}
+println("")
+let del_pct = rd1(del_count * 100.0 / (valid * 1.0))
+println("  배달 조합: " + to_string(del_count) + " / " + to_string(valid) + " 유효 (" + to_string(del_pct) + "%)")
+
+// --- STATISTICS ---
+println("")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  STATISTICS")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+
+let mut max_n6 = 0.0
+let mut sum_n6 = 0.0
+let mut above80 = 0
+let mut above60 = 0
+k = 0
+while k < valid {
+    let pv = r_pct[k]
+    sum_n6 = sum_n6 + pv
+    if pv > max_n6 { max_n6 = pv }
+    if pv >= 80.0 { above80 = above80 + 1 }
+    if pv >= 60.0 { above60 = above60 + 1 }
+    k = k + 1
+}
+let mut avg_n6 = 0.0
+if valid > 0 { avg_n6 = sum_n6 / (valid * 1.0) }
+
+println("")
+println("  Total raw:     " + to_string(total_combos))
+println("  Filtered:      " + to_string(filtered))
+println("  Valid:         " + to_string(valid))
+println("")
+println("  n6 EXACT max:  " + to_string(rd1(max_n6)) + "%")
+println("  n6 EXACT avg:  " + to_string(rd1(avg_n6)) + "%")
+
+let mut a80_pct = 0.0
+let mut a60_pct = 0.0
+if valid > 0 {
+    a80_pct = rd1(above80 * 100.0 / (valid * 1.0))
+    a60_pct = rd1(above60 * 100.0 / (valid * 1.0))
+}
+println("  >=80% EXACT:    " + to_string(above80) + " (" + to_string(a80_pct) + "%)")
+println("  >=60% EXACT:    " + to_string(above60) + " (" + to_string(a60_pct) + "%)")
+
+// --- BEST BY CATEGORY ---
+println("")
+println("  BEST BY CATEGORY:")
+
+// Best n6
+let mut best_n6_idx = 0
+let mut best_n6_val = 0.0
+k = 0
+while k < valid {
+    if r_pct[k] > best_n6_val {
+        best_n6_val = r_pct[k]
+        best_n6_idx = k
+    }
+    k = k + 1
+}
+println("    Best n6:     " + body_name[r_bi[best_n6_idx]] + " + " + act_name[r_ai[best_n6_idx]] + " + " + sens_name[r_si[best_n6_idx]] + " + " + ctrl_name[r_ci[best_n6_idx]] + " + " + ai_name[r_ii[best_n6_idx]] + " + " + sys_name[r_yi[best_n6_idx]] + " (" + to_string(rd1(best_n6_val)) + "%)")
+
+// Best Perf
+let mut best_perf_idx = 0
+let mut best_perf_val = 0
+k = 0
+while k < valid {
+    if r_perf[k] > best_perf_val {
+        best_perf_val = r_perf[k]
+        best_perf_idx = k
+    }
+    k = k + 1
+}
+println("    Best Perf:   " + body_name[r_bi[best_perf_idx]] + " + " + act_name[r_ai[best_perf_idx]] + " + " + sens_name[r_si[best_perf_idx]] + " + " + ctrl_name[r_ci[best_perf_idx]] + " + " + ai_name[r_ii[best_perf_idx]] + " + " + sys_name[r_yi[best_perf_idx]] + " (perf=" + to_string(best_perf_val) + ")")
+
+// Best Cost (min)
+let mut best_cost_idx = 0
+let mut best_cost_val = 99999
+k = 0
+while k < valid {
+    if r_cost[k] < best_cost_val {
+        best_cost_val = r_cost[k]
+        best_cost_idx = k
+    }
+    k = k + 1
+}
+println("    Best Cost:   " + body_name[r_bi[best_cost_idx]] + " + " + act_name[r_ai[best_cost_idx]] + " + " + sens_name[r_si[best_cost_idx]] + " + " + ctrl_name[r_ci[best_cost_idx]] + " + " + ai_name[r_ii[best_cost_idx]] + " + " + sys_name[r_yi[best_cost_idx]] + " (cost=" + to_string(best_cost_val) + ")")
+
+// Best Pareto
+let ri0 = sidx[0]
+let ps0 = rd2(sorted_scores[0])
+println("    Best Pareto: " + body_name[r_bi[ri0]] + " + " + act_name[r_ai[ri0]] + " + " + sens_name[r_si[ri0]] + " + " + ctrl_name[r_ci[ri0]] + " + " + ai_name[r_ii[ri0]] + " + " + sys_name[r_yi[ri0]] + " (score=" + to_string(ps0) + ")")
+
+// --- N6 PATTERN MAP ---
+println("")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  N6 PATTERN MAP — 로봇 n=6 일치 지도")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+println("  ┌────────────────────────────────────────────────────────────────┐")
+println("  │ EXACT 일치 (물리/수학적 근거)                                  │")
+println("  │   SE(3) = 6 DOF: 모든 로봇의 기본 자유도 = n                  │")
+println("  │   6축 IMU: 3가속도+3자이로 = n (최소 자세 추정)               │")
+println("  │   6-DOF 매니퓰레이터: 산업 표준 (UR, FANUC, ABB)             │")
+println("  │   Quadruped 12 DOF = σ (4다리×3관절)                         │")
+println("  │   Humanoid 24 DOF = J₂ (4지×6관절)                           │")
+println("  │   12-bit PWM = σ (ADC/DAC 산업 표준)                          │")
+println("  │   24-bit DirectDrive = J₂ (고정밀)                            │")
+println("  │   Quadrotor 4 로터 = τ                                        │")
+println("  │   ModularCube 6면 = n (공간 충전)                             │")
+println("  ├────────────────────────────────────────────────────────────────┤")
+println("  │ 시스템 n=6                                                    │")
+println("  │   배달 플릿 6대 = n                                           │")
+println("  │   공장 플릿 12대 = σ                                          │")
+println("  │   탐사 스웜 24대 = J₂                                        │")
+println("  │   배터리 2.4kWh = J₂/10, 4.8kWh = σ·τ/10                   │")
+println("  │   Egyptian RL: 1/2 보행 + 1/3 효율 + 1/6 안정 = 1            │")
+println("  │   HEXA-1 칩: 12W=σ, 6계층=n, 1ms=μ 지연                     │")
+println("  └────────────────────────────────────────────────────────────────┘")
+
+println("")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  DSE 완료 — " + to_string(total_combos) + " 전수 / " + to_string(valid) + " 유효 / 가사·간병·배달 최적 경로 도출")
+println("══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")

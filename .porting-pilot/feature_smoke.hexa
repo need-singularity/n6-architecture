@@ -1,0 +1,14 @@
+// Smoke test: B-14 format(), B-17 +=, B-18 .len(), multi-arg println, for-in
+let xs = [10, 20, 30, 40]
+let mut total = 0
+for x in xs {
+    total += x
+}
+println("sum =", total, "len =", xs.len())
+
+let name = "GUT"
+let dim = 24
+println(format("{} dim = {}", name, dim))
+
+let s = format("J = {} = sigma*phi", dim)
+println(s)

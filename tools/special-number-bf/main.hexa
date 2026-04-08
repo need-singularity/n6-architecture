@@ -1,10 +1,10 @@
-// special-number-bf — 특수수 브루트포스 탐색기 (HEXA 스켈레톤)
+// special-number-bf — 특수수 브루트포스 탐색기 (HEXA)
 //
 // Perfect / Multiperfect / Superperfect / Quasiperfect / Almost-perfect 6종을
 // 동시 탐색. n=6 = 첫 완전수. 다른 특수수의 분포를 조사.
-// 작성: 2026-04-08 / 상태: 스켈레톤
+// 실행: hexa tools/special-number-bf/main.hexa
 
-fn sigma(n: int) -> int {
+fn sigma(n) {
     let mut s = 0
     let mut d = 1
     while d * d <= n {
@@ -17,41 +17,76 @@ fn sigma(n: int) -> int {
     return s
 }
 
-fn is_perfect(n: int) -> bool { return sigma(n) == 2 * n }
-fn is_multiperfect_k(n: int, k: int) -> bool { return sigma(n) == k * n }
-fn is_superperfect(n: int) -> bool { return sigma(sigma(n)) == 2 * n }
-fn is_almost_perfect(n: int) -> bool { return sigma(n) == 2 * n - 1 }
-fn is_quasiperfect(n: int) -> bool { return sigma(n) == 2 * n + 1 }  // open
+fn is_perfect(n) { return sigma(n) == 2 * n }
+fn is_multiperfect_k(n, k) { return sigma(n) == k * n }
+fn is_superperfect(n) { return sigma(sigma(n)) == 2 * n }
+fn is_almost_perfect(n) { return sigma(n) == 2 * n - 1 }
+fn is_quasiperfect(n) { return sigma(n) == 2 * n + 1 }
 
-fn main(args: list<str>) {
-    let max_n = if args.len() > 1 { parse_int(args[1]) } else { 100000 }
+let max_n = 100000
 
-    print("# special-number-bf — perfect family brute force")
-    print("# range: 2..=" + str(max_n))
+println("# special-number-bf — perfect family brute force")
+println("# range: 2..=" + to_string(max_n))
 
-    let mut perfects = []
-    let mut superperfects = []
-    let mut tri = []
-    let mut almost_count = 0
+let mut perfects = []
+let mut superperfects = []
+let mut tri = []
+let mut almost_count = 0
 
-    let mut n = 2
-    while n <= max_n {
-        if is_perfect(n) { perfects.push(n) }
-        if is_superperfect(n) { superperfects.push(n) }
-        if is_multiperfect_k(n, 3) { tri.push(n) }
-        if is_almost_perfect(n) { almost_count = almost_count + 1 }
-        n = n + 1
-    }
+let mut n = 2
+while n <= max_n {
+    if is_perfect(n) { perfects = perfects + [n] }
+    if is_superperfect(n) { superperfects = superperfects + [n] }
+    if is_multiperfect_k(n, 3) { tri = tri + [n] }
+    if is_almost_perfect(n) { almost_count = almost_count + 1 }
+    n = n + 1
+}
 
-    print("Perfect (sigma=2n):       " + str(perfects))
-    print("Superperfect:             " + str(superperfects))
-    print("Triperfect (sigma=3n):    " + str(tri))
-    print("Almost perfect count:     " + str(almost_count) + " (powers of 2)")
+// print lists
+let mut pi = 0
+let mut out_perf = "["
+while pi < len(perfects) {
+    if pi > 0 { out_perf = out_perf + ", " }
+    out_perf = out_perf + to_string(perfects[pi])
+    pi = pi + 1
+}
+out_perf = out_perf + "]"
 
-    // self check
-    assert is_perfect(6)
-    assert sigma(6) == 12
-    print("self-check: n=6 PASS (first perfect)")
+let mut si = 0
+let mut out_super = "["
+while si < len(superperfects) {
+    if si > 0 { out_super = out_super + ", " }
+    out_super = out_super + to_string(superperfects[si])
+    si = si + 1
+}
+out_super = out_super + "]"
+
+let mut ti = 0
+let mut out_tri = "["
+while ti < len(tri) {
+    if ti > 0 { out_tri = out_tri + ", " }
+    out_tri = out_tri + to_string(tri[ti])
+    ti = ti + 1
+}
+out_tri = out_tri + "]"
+
+println("Perfect (sigma=2n):       " + out_perf)
+println("Superperfect:             " + out_super)
+println("Triperfect (sigma=3n):    " + out_tri)
+println("Almost perfect count:     " + to_string(almost_count) + " (powers of 2)")
+
+// self check
+let check_perf = is_perfect(6)
+let check_sigma = sigma(6)
+if check_perf {
+    println("self-check: is_perfect(6) PASS")
+} else {
+    println("self-check: is_perfect(6) FAIL")
+}
+if check_sigma == 12 {
+    println("self-check: sigma(6)=12 PASS (n=6 first perfect)")
+} else {
+    println("self-check: sigma(6) FAIL got " + to_string(check_sigma))
 }
 
 // TODO:

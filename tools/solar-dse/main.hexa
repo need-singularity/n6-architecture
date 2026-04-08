@@ -1,0 +1,662 @@
+// HEXA-SOLAR Design Space Exploration (DSE)
+// Original: tools/solar-dse/main.rs
+// Ported to HEXA: parallel arrays, no struct/Vec/HashMap/closures
+
+// N6 constants
+let N = 6.0
+let PHI = 2.0
+let TAU = 4.0
+let SIGMA = 12.0
+let SOPFR = 5.0
+let MU = 1.0
+let J2 = 24.0
+let SIGMA_TAU = 8.0
+let SIGMA_PHI = 10.0
+
+// Helpers
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd2(x) { round(x * 100.0) / 100.0 }
+fn rd4(x) { round(x * 10000.0) / 10000.0 }
+
+// Format float with guaranteed decimal places
+fn fmt1(x) {
+    let v = rd1(x)
+    let s = to_string(v)
+    // ensure at least 1 decimal
+    if !s.contains(".") { return s + ".0" }
+    s
+}
+fn fmt2(x) {
+    let v = rd2(x)
+    let s = to_string(v)
+    if !s.contains(".") { return s + ".00" }
+    // count digits after dot
+    let dot = s.find(".")
+    let after = len(s) - dot - 1
+    if after == 1 { return s + "0" }
+    s
+}
+fn fmt4(x) {
+    let v = rd4(x)
+    let s = to_string(v)
+    if !s.contains(".") { return s + ".0000" }
+    let dot = s.find(".")
+    let after = len(s) - dot - 1
+    let mut r = s
+    while len(r) - dot - 1 < 4 { r = r + "0" }
+    r
+}
+fn fmt3(x) {
+    let v = round(x * 1000.0) / 1000.0
+    let s = to_string(v)
+    if !s.contains(".") { return s + ".000" }
+    let dot = s.find(".")
+    let mut r = s
+    while len(r) - dot - 1 < 3 { r = r + "0" }
+    r
+}
+
+// ============================================================
+// Level 1: Material (6 candidates) - parallel arrays
+// ============================================================
+let m_name = ["c-Si", "Perovskite", "GaAs", "CIGS", "CdTe", "OPV"]
+let m_bandgap = [112.0, 155.0, 142.0, 115.0, 145.0, 140.0]
+let m_theoeff = [29.0, 33.0, 34.0, 28.0, 32.0, 18.0]
+let m_costrank = [1.0, 1.0, 5.0, 2.0, 2.0, 1.0]
+let m_maturity = [100.0, 40.0, 90.0, 75.0, 85.0, 30.0]
+let m_atomicz = [14.0, 82.0, 31.0, 29.0, 48.0, 6.0]
+let m_durability = [95.0, 30.0, 90.0, 70.0, 80.0, 20.0]
+let m_count = 6
+
+// ============================================================
+// Level 2: Process (6 candidates)
+// ============================================================
+let p_name = ["Al-BSF", "PERC", "TOPCon", "HJT", "IBC", "Perov-Print"]
+let p_realeff = [200.0, 230.0, 255.0, 260.0, 265.0, 220.0]
+let p_proccost = [1.0, 2.0, 3.0, 3.0, 4.0, 1.0]
+let p_maturity = [100.0, 95.0, 80.0, 65.0, 55.0, 25.0]
+let p_tempcoeff = [450.0, 400.0, 350.0, 280.0, 320.0, 300.0]
+let p_passlayers = [1.0, 2.0, 3.0, 4.0, 4.0, 2.0]
+let p_count = 6
+
+// ============================================================
+// Level 3: Core (5 candidates)
+// ============================================================
+let c_name = ["Single-1J", "Tandem-2J", "Triple-3J", "CPV", "Bifacial"]
+let c_junctions = [1.0, 2.0, 3.0, 3.0, 1.0]
+let c_theolimit = [337.0, 457.0, 518.0, 470.0, 337.0]
+let c_recordeff = [268.0, 339.0, 392.0, 476.0, 270.0]
+let c_complexity = [1.0, 3.0, 4.0, 5.0, 2.0]
+let c_concentration = [0.0, 0.0, 0.0, 1.0, 0.0]
+let c_bifacial = [0.0, 0.0, 0.0, 0.0, 1.0]
+let c_count = 5
+
+// ============================================================
+// Level 4: Chip (5 candidates)
+// ============================================================
+let ch_name = ["String-Inv", "Micro-Inv", "DC-Optimizer", "Hybrid-Inv", "SiC-Central"]
+let ch_conveff = [975.0, 965.0, 990.0, 970.0, 985.0]
+let ch_costrank = [2.0, 4.0, 3.0, 4.0, 5.0]
+let ch_features = [60.0, 85.0, 80.0, 95.0, 70.0]
+let ch_mppt = [2.0, 1.0, 1.0, 2.0, 12.0]
+let ch_monitoring = [0.0, 1.0, 1.0, 1.0, 0.0]
+let ch_count = 5
+
+// ============================================================
+// Level 5: System (5 candidates)
+// ============================================================
+let s_name = ["Res-60", "Com-72", "HC-120", "HC-144", "BIPV"]
+let s_cells = [60.0, 72.0, 120.0, 144.0, 48.0]
+let s_watts = [300.0, 400.0, 400.0, 500.0, 250.0]
+let s_app = ["Residential", "Commercial", "Residential-HE", "Commercial-HE", "Building-Integ"]
+let s_roofcompat = [90.0, 80.0, 90.0, 75.0, 100.0]
+let s_lifespan = [25.0, 25.0, 30.0, 30.0, 30.0]
+let s_count = 5
+
+let total_combos = m_count * p_count * c_count * ch_count * s_count
+
+println("=".repeat(110))
+println("  HEXA-SOLAR Design Space Exploration (DSE)")
+println("  소재 x 공정 x 코어(접합) x 칩(전력전자) x 시스템(모듈) 전수 탐색")
+println("  비전: 전기요금 0원 -- 지붕 하나로 집+차 전력 자급")
+println("=".repeat(110))
+println("")
+println("  후보군:")
+println("    소재:   " + m_name[0] + ", " + m_name[1] + ", " + m_name[2] + ", " + m_name[3] + ", " + m_name[4] + ", " + m_name[5] + " (" + to_string(m_count) + ")")
+println("    공정:   " + p_name[0] + ", " + p_name[1] + ", " + p_name[2] + ", " + p_name[3] + ", " + p_name[4] + ", " + p_name[5] + " (" + to_string(p_count) + ")")
+println("    코어:   " + c_name[0] + ", " + c_name[1] + ", " + c_name[2] + ", " + c_name[3] + ", " + c_name[4] + " (" + to_string(c_count) + ")")
+println("    칩:     " + ch_name[0] + ", " + ch_name[1] + ", " + ch_name[2] + ", " + ch_name[3] + ", " + ch_name[4] + " (" + to_string(ch_count) + ")")
+println("    시스템: " + s_name[0] + ", " + s_name[1] + ", " + s_name[2] + ", " + s_name[3] + ", " + s_name[4] + " (" + to_string(s_count) + ")")
+println("")
+println("  총 조합:  " + to_string(total_combos) + " (필터 전)")
+
+// ============================================================
+// Enumerate all compatible combos
+// ============================================================
+// Result arrays (parallel)
+let mut r_mi = []
+let mut r_pi = []
+let mut r_ci = []
+let mut r_chi = []
+let mut r_si = []
+let mut r_n6pct = []
+let mut r_eff = []
+let mut r_tcost = []
+let mut r_mat = []
+let mut r_dur = []
+let mut r_pareto = []
+let mut r_n6exact = []
+let mut r_n6total = []
+let mut r_count = 0
+
+let mut mi = 0
+while mi < m_count {
+    let mut pi = 0
+    while pi < p_count {
+        let mut ci = 0
+        while ci < c_count {
+            let mut chi = 0
+            while chi < ch_count {
+                let mut si = 0
+                while si < s_count {
+                    // Compatibility filter
+                    let mut compat = 1
+                    // Perovskite only with Perov-Print or HJT
+                    if m_name[mi] == "Perovskite" {
+                        if p_name[pi] != "Perov-Print" {
+                            if p_name[pi] != "HJT" { compat = 0 }
+                        }
+                    }
+                    // Perov-Print only with Perovskite
+                    if p_name[pi] == "Perov-Print" {
+                        if m_name[mi] != "Perovskite" { compat = 0 }
+                    }
+                    // GaAs only with CPV or Triple
+                    if m_name[mi] == "GaAs" {
+                        if c_name[ci] != "CPV" {
+                            if c_name[ci] != "Triple-3J" { compat = 0 }
+                        }
+                    }
+                    // OPV only with Single-1J or Bifacial
+                    if m_name[mi] == "OPV" {
+                        if c_name[ci] != "Single-1J" {
+                            if c_name[ci] != "Bifacial" { compat = 0 }
+                        }
+                    }
+                    // CPV only with GaAs
+                    if c_name[ci] == "CPV" {
+                        if m_name[mi] != "GaAs" { compat = 0 }
+                    }
+                    // CIGS/CdTe no IBC
+                    if m_name[mi] == "CIGS" {
+                        if p_name[pi] == "IBC" { compat = 0 }
+                    }
+                    if m_name[mi] == "CdTe" {
+                        if p_name[pi] == "IBC" { compat = 0 }
+                    }
+                    // OPV: only Al-BSF or Perov-Print
+                    if m_name[mi] == "OPV" {
+                        if p_name[pi] != "Al-BSF" {
+                            if p_name[pi] != "Perov-Print" { compat = 0 }
+                        }
+                    }
+                    // Micro-Inv impractical for HC-144
+                    if ch_name[chi] == "Micro-Inv" {
+                        if s_name[si] == "HC-144" { compat = 0 }
+                    }
+                    // SiC-Central overkill for residential
+                    if ch_name[chi] == "SiC-Central" {
+                        if s_name[si] == "Res-60" { compat = 0 }
+                        if s_name[si] == "BIPV" { compat = 0 }
+                    }
+
+                    if compat == 1 {
+                        // --- N6 EXACT scoring ---
+                        let mut exact = 0.0
+                        let mut total = 0.0
+
+                        // Material (4 checks)
+                        // Bandgap ~ 4/3 = 133 (x100)
+                        total = total + 1.0
+                        let bg_target = (TAU * 100.0) / (N / PHI)
+                        if m_bandgap[mi] >= bg_target - 10.0 {
+                            if m_bandgap[mi] <= bg_target + 15.0 { exact = exact + 1.0 }
+                        }
+
+                        // Atomic Z: n=6 related
+                        total = total + 1.0
+                        let pow_sopfr = pow(2.0, SOPFR)
+                        if m_atomicz[mi] == N { exact = exact + 1.0 }
+                        if m_atomicz[mi] == SIGMA + PHI { exact = exact + 1.0 }
+                        if m_atomicz[mi] == pow_sopfr { exact = exact + 1.0 }
+                        // Cap: only count once
+                        if exact > total { exact = total }
+
+                        // Theoretical eff ~ 1/3 = 33%
+                        total = total + 1.0
+                        if m_theoeff[mi] == 33.0 { exact = exact + 1.0 }
+                        if m_theoeff[mi] == 34.0 {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Process (4 checks)
+                        // Passivation layers: tau=4 or phi=2
+                        total = total + 1.0
+                        if p_passlayers[pi] == TAU { exact = exact + 1.0 }
+                        if p_passlayers[pi] == PHI {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Temperature coefficient
+                        total = total + 1.0
+                        if p_tempcoeff[pi] == 280.0 { exact = exact + 1.0 }
+                        if p_tempcoeff[pi] == 300.0 {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+                        if p_tempcoeff[pi] == 400.0 {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Process efficiency: divisible by sigma or n, or specific values
+                        total = total + 1.0
+                        let pe = p_realeff[pi]
+                        let pe_mod_sigma = pe - SIGMA * round(pe / SIGMA)
+                        let pe_mod_n = pe - N * round(pe / N)
+                        let mut pe_hit = 0
+                        if pe == SIGMA * PHI * 100.0 / SIGMA { pe_hit = 1 }
+                        if pe == J2 * SIGMA_TAU + J2 + PHI { pe_hit = 1 }
+                        if abs(pe_mod_sigma) < 0.001 { pe_hit = 1 }
+                        if abs(pe_mod_n) < 0.001 { pe_hit = 1 }
+                        if pe_hit == 1 {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Core (4 checks)
+                        // Junctions: 1=mu, 2=phi, 3=n/phi
+                        total = total + 1.0
+                        if c_junctions[ci] == MU { exact = exact + 1.0 }
+                        if c_junctions[ci] == PHI {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+                        if c_junctions[ci] == N / PHI {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Theoretical limit: 337 = 1/3 exactly
+                        total = total + 1.0
+                        if c_theolimit[ci] == 337.0 { exact = exact + 1.0 }
+
+                        // Bifacial
+                        total = total + 1.0
+                        if c_bifacial[ci] == 1.0 { exact = exact + 1.0 }
+
+                        // Concentration + 3J CPV
+                        total = total + 1.0
+                        if c_concentration[ci] == 1.0 {
+                            if c_junctions[ci] == N / PHI { exact = exact + 1.0 }
+                        }
+
+                        // Chip (4 checks)
+                        // MPPT channels
+                        total = total + 1.0
+                        if ch_mppt[chi] == MU { exact = exact + 1.0 }
+                        if ch_mppt[chi] == PHI {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+                        if ch_mppt[chi] == SIGMA {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Conversion efficiency
+                        total = total + 1.0
+                        if ch_conveff[chi] == 975.0 { exact = exact + 1.0 }
+                        if ch_conveff[chi] == 985.0 {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+                        if ch_conveff[chi] == 990.0 {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Monitoring
+                        total = total + 1.0
+                        if ch_monitoring[chi] == 1.0 { exact = exact + 1.0 }
+
+                        // System (5 checks)
+                        // Cell count
+                        total = total + 1.0
+                        let mut cell_hit = 0
+                        if s_cells[si] == SIGMA * SOPFR { cell_hit = 1 }
+                        if s_cells[si] == SIGMA * N { cell_hit = 1 }
+                        if s_cells[si] == SIGMA * SIGMA_PHI { cell_hit = 1 }
+                        if s_cells[si] == SIGMA * SIGMA { cell_hit = 1 }
+                        if s_cells[si] == SIGMA * TAU { cell_hit = 1 }
+                        if cell_hit == 1 { exact = exact + 1.0 }
+
+                        // Module watts
+                        total = total + 1.0
+                        let mut watt_hit = 0
+                        let w_mod = s_watts[si] - (SIGMA * SOPFR) * round(s_watts[si] / (SIGMA * SOPFR))
+                        if abs(w_mod) < 0.001 { watt_hit = 1 }
+                        if s_watts[si] == 400.0 { watt_hit = 1 }
+                        if s_watts[si] == 500.0 { watt_hit = 1 }
+                        if s_watts[si] == 250.0 { watt_hit = 1 }
+                        if watt_hit == 1 { exact = exact + 1.0 }
+
+                        // Lifespan
+                        total = total + 1.0
+                        if s_lifespan[si] == J2 + MU { exact = exact + 1.0 }
+                        if s_lifespan[si] == SOPFR * N {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // Roof compatibility
+                        total = total + 1.0
+                        if s_roofcompat[si] >= 90.0 { exact = exact + 1.0 }
+
+                        // Application match
+                        total = total + 1.0
+                        if s_app[si].contains("Residential") { exact = exact + 1.0 }
+                        if s_app[si].contains("Building") {
+                            if exact < total { exact = exact + 1.0 }
+                        }
+
+                        // --- Compute scores ---
+                        let n6_pct = exact / total * 100.0
+
+                        let cell_eff = p_realeff[pi] / 1000.0
+                        let mut junction_mult = 1.0
+                        if c_junctions[ci] == 2.0 { junction_mult = 1.35 }
+                        if c_junctions[ci] == 3.0 {
+                            if c_concentration[ci] == 1.0 { junction_mult = 1.80 }
+                            if c_concentration[ci] == 0.0 { junction_mult = 1.50 }
+                        }
+                        let bifacial_bonus = if c_bifacial[ci] == 1.0 { 1.10 } else { 1.0 }
+                        let inv_eff = ch_conveff[chi] / 1000.0
+                        let efficiency = cell_eff * junction_mult * bifacial_bonus * inv_eff
+
+                        let total_cost = (m_costrank[mi] + p_proccost[pi] + c_complexity[ci] + ch_costrank[chi]) / 20.0
+                        let cost_score = 1.0 - total_cost
+
+                        let maturity_score = (m_maturity[mi] + p_maturity[pi]) / 200.0
+
+                        let durability_score = m_durability[mi] / 100.0 * (s_lifespan[si] / 30.0)
+
+                        let eff_norm_raw = efficiency / 0.50
+                        let eff_norm = if eff_norm_raw > 1.0 { 1.0 } else { eff_norm_raw }
+                        let pareto = (n6_pct / 100.0) * 0.40 + eff_norm * 0.25 + cost_score * 0.15 + maturity_score * 0.10 + durability_score * 0.10
+
+                        r_mi = r_mi + [mi * 1.0]
+                        r_pi = r_pi + [pi * 1.0]
+                        r_ci = r_ci + [ci * 1.0]
+                        r_chi = r_chi + [chi * 1.0]
+                        r_si = r_si + [si * 1.0]
+                        r_n6pct = r_n6pct + [n6_pct]
+                        r_eff = r_eff + [efficiency]
+                        r_tcost = r_tcost + [total_cost]
+                        r_mat = r_mat + [maturity_score]
+                        r_dur = r_dur + [durability_score]
+                        r_pareto = r_pareto + [pareto]
+                        r_n6exact = r_n6exact + [exact]
+                        r_n6total = r_n6total + [total]
+                        r_count = r_count + 1
+                    }
+
+                    si = si + 1
+                }
+                chi = chi + 1
+            }
+            ci = ci + 1
+        }
+        pi = pi + 1
+    }
+    mi = mi + 1
+}
+
+println("  호환 조합: " + to_string(r_count) + " (필터 후)")
+println("")
+
+// ============================================================
+// Sort by pareto (bubble sort descending)
+// ============================================================
+let mut i = 0
+while i < r_count - 1 {
+    let mut j = 0
+    while j < r_count - 1 - i {
+        if r_pareto[j] < r_pareto[j + 1] {
+            // Swap all parallel arrays
+            let tmp_mi = r_mi[j]
+            r_mi[j] = r_mi[j + 1]
+            r_mi[j + 1] = tmp_mi
+
+            let tmp_pi = r_pi[j]
+            r_pi[j] = r_pi[j + 1]
+            r_pi[j + 1] = tmp_pi
+
+            let tmp_ci = r_ci[j]
+            r_ci[j] = r_ci[j + 1]
+            r_ci[j + 1] = tmp_ci
+
+            let tmp_chi = r_chi[j]
+            r_chi[j] = r_chi[j + 1]
+            r_chi[j + 1] = tmp_chi
+
+            let tmp_si = r_si[j]
+            r_si[j] = r_si[j + 1]
+            r_si[j + 1] = tmp_si
+
+            let tmp_n6p = r_n6pct[j]
+            r_n6pct[j] = r_n6pct[j + 1]
+            r_n6pct[j + 1] = tmp_n6p
+
+            let tmp_eff = r_eff[j]
+            r_eff[j] = r_eff[j + 1]
+            r_eff[j + 1] = tmp_eff
+
+            let tmp_tc = r_tcost[j]
+            r_tcost[j] = r_tcost[j + 1]
+            r_tcost[j + 1] = tmp_tc
+
+            let tmp_m = r_mat[j]
+            r_mat[j] = r_mat[j + 1]
+            r_mat[j + 1] = tmp_m
+
+            let tmp_d = r_dur[j]
+            r_dur[j] = r_dur[j + 1]
+            r_dur[j + 1] = tmp_d
+
+            let tmp_p = r_pareto[j]
+            r_pareto[j] = r_pareto[j + 1]
+            r_pareto[j + 1] = tmp_p
+
+            let tmp_ne = r_n6exact[j]
+            r_n6exact[j] = r_n6exact[j + 1]
+            r_n6exact[j + 1] = tmp_ne
+
+            let tmp_nt = r_n6total[j]
+            r_n6total[j] = r_n6total[j + 1]
+            r_n6total[j + 1] = tmp_nt
+        }
+        j = j + 1
+    }
+    i = i + 1
+}
+
+// ── TOP 20 ──
+let bar = "=".repeat(130)
+println(bar)
+println("  TOP 20 (by Pareto score)")
+println(bar)
+println("")
+println("  " + pad_l("Rank", 4) + " | " + pad_l("Material", 10) + " | " + pad_l("Process", 11) + " | " + pad_l("Core", 10) + " | " + pad_l("Chip", 12) + " | " + pad_l("System", 8) + " | " + pad_l("n6%", 5) + " | " + pad_l("Eff%", 5) + " | " + pad_l("Cost", 5) + " | " + pad_l("Mat.", 5) + " | " + pad_l("Dur.", 5) + " | " + pad_l("Pareto", 6))
+println("  -----+------------+-------------+------------+--------------+----------+-------+-------+-------+-------+-------+-------")
+
+let mut ti = 0
+let top_limit = if r_count < 20 { r_count } else { 20 }
+while ti < top_limit {
+    let mii = round(r_mi[ti])
+    let pii = round(r_pi[ti])
+    let cii = round(r_ci[ti])
+    let chii = round(r_chi[ti])
+    let sii = round(r_si[ti])
+    println("  " + pad_l(to_string(ti + 1), 4) + " | " + pad_l(m_name[mii], 10) + " | " + pad_l(p_name[pii], 11) + " | " + pad_l(c_name[cii], 10) + " | " + pad_l(ch_name[chii], 12) + " | " + pad_l(s_name[sii], 8) + " | " + pad_l(fmt1(r_n6pct[ti]), 4) + "% | " + pad_l(fmt1(r_eff[ti] * 100.0), 4) + "% | " + pad_l(fmt2(r_tcost[ti]), 5) + " | " + pad_l(fmt2(r_mat[ti]), 5) + " | " + pad_l(fmt2(r_dur[ti]), 5) + " | " + pad_l(fmt4(r_pareto[ti]), 6))
+    ti = ti + 1
+}
+
+// ── BEST BY CATEGORY ──
+println("")
+println(bar)
+println("  BEST BY CATEGORY")
+println(bar)
+
+fn fmt_combo(idx) {
+    let mii = round(r_mi[idx])
+    let pii = round(r_pi[idx])
+    let cii = round(r_ci[idx])
+    let chii = round(r_chi[idx])
+    let sii = round(r_si[idx])
+    m_name[mii] + " + " + p_name[pii] + " + " + c_name[cii] + " + " + ch_name[chii] + " + " + s_name[sii]
+}
+
+// Find best by each category
+let mut best_n6_idx = 0
+let mut best_eff_idx = 0
+let mut best_cost_idx = 0
+let mut best_mat_idx = 0
+let mut best_dur_idx = 0
+
+let mut fi = 1
+while fi < r_count {
+    if r_n6pct[fi] > r_n6pct[best_n6_idx] { best_n6_idx = fi }
+    if r_eff[fi] > r_eff[best_eff_idx] { best_eff_idx = fi }
+    if r_tcost[fi] < r_tcost[best_cost_idx] { best_cost_idx = fi }
+    if r_mat[fi] > r_mat[best_mat_idx] { best_mat_idx = fi }
+    if r_dur[fi] > r_dur[best_dur_idx] { best_dur_idx = fi }
+    fi = fi + 1
+}
+
+println("    Best n6 EXACT:    " + fmt_combo(best_n6_idx) + " (" + fmt1(r_n6pct[best_n6_idx]) + "%, " + to_string(round(r_n6exact[best_n6_idx])) + "/" + to_string(round(r_n6total[best_n6_idx])) + ")")
+println("    Best Efficiency:  " + fmt_combo(best_eff_idx) + " (" + fmt1(r_eff[best_eff_idx] * 100.0) + "%)")
+println("    Best Cost:        " + fmt_combo(best_cost_idx) + " (" + fmt2(r_tcost[best_cost_idx]) + ")")
+println("    Best Maturity:    " + fmt_combo(best_mat_idx) + " (" + fmt2(r_mat[best_mat_idx]) + ")")
+println("    Best Durability:  " + fmt_combo(best_dur_idx) + " (" + fmt2(r_dur[best_dur_idx]) + ")")
+println("    Best Pareto:      " + fmt_combo(0) + " (" + fmt4(r_pareto[0]) + ")")
+
+// ── N6 ANALYSIS ──
+println("")
+println(bar)
+println("  N6 ANALYSIS -- n=6 Parameter Alignment")
+println(bar)
+println("")
+
+println("  Key n=6 anchors:")
+println("    Bandgap target:  4/3 eV = " + fmt3(TAU / (N / PHI)) + " eV  (BT-30)")
+println("    SQ limit:        1/3    = " + fmt4(PHI / N) + "      (BT-30)")
+println("    Thermal voltage: J2+phi = " + to_string(round(J2 + PHI)) + " mV      (BT-30 EXACT)")
+println("    Cell ladder:     " + to_string(round(SIGMA * SOPFR)) + " / " + to_string(round(SIGMA * N)) + " / " + to_string(round(SIGMA * SIGMA_PHI)) + " / " + to_string(round(SIGMA * SIGMA)) + " cells (BT-63)")
+println("    Lifespan:        " + to_string(round(J2 + MU)) + " yrs = J2+mu, " + to_string(round(SOPFR * N)) + " yrs = sopfr*n")
+println("")
+
+// n6 distribution
+let mut above80 = 0
+let mut above60 = 0
+let mut above40 = 0
+let mut di = 0
+while di < r_count {
+    if r_n6pct[di] >= 80.0 { above80 = above80 + 1 }
+    if r_n6pct[di] >= 60.0 { above60 = above60 + 1 }
+    if r_n6pct[di] >= 40.0 { above40 = above40 + 1 }
+    di = di + 1
+}
+
+println("  n6 EXACT distribution:")
+println("    >=80%: " + to_string(above80) + " (" + fmt1(above80 * 1.0 / r_count * 100.0) + "%)")
+println("    >=60%: " + to_string(above60) + " (" + fmt1(above60 * 1.0 / r_count * 100.0) + "%)")
+println("    >=40%: " + to_string(above40) + " (" + fmt1(above40 * 1.0 / r_count * 100.0) + "%)")
+
+// ── RESIDENTIAL OPTIMUM ──
+println("")
+println(bar)
+println("  RESIDENTIAL OPTIMUM -- 지붕 자급자족 최적 경로")
+println(bar)
+println("")
+
+// Collect residential indices (already sorted by pareto)
+let mut res_indices = []
+let mut res_count = 0
+let mut ri = 0
+while ri < r_count {
+    let sii = round(r_si[ri])
+    if s_name[sii] == "Res-60" {
+        res_indices = res_indices + [ri * 1.0]
+        res_count = res_count + 1
+    }
+    if s_name[sii] == "HC-120" {
+        res_indices = res_indices + [ri * 1.0]
+        res_count = res_count + 1
+    }
+    if s_name[sii] == "BIPV" {
+        res_indices = res_indices + [ri * 1.0]
+        res_count = res_count + 1
+    }
+    ri = ri + 1
+}
+
+if res_count > 0 {
+    let best_ri = round(res_indices[0])
+    println("  Best residential path:")
+    println("    " + fmt_combo(best_ri) + " (Pareto=" + fmt4(r_pareto[best_ri]) + ", n6=" + fmt1(r_n6pct[best_ri]) + "%, Eff=" + fmt1(r_eff[best_ri] * 100.0) + "%)")
+    println("")
+
+    println("  Top 5 residential:")
+    let mut rj = 0
+    let res_top = if res_count < 5 { res_count } else { 5 }
+    while rj < res_top {
+        let idx = round(res_indices[rj])
+        println("    " + to_string(rj + 1) + ". " + fmt_combo(idx) + " (n6=" + fmt1(r_n6pct[idx]) + "%, Eff=" + fmt1(r_eff[idx] * 100.0) + "%, Pareto=" + fmt4(r_pareto[idx]) + ")")
+        rj = rj + 1
+    }
+}
+
+// ── STATISTICS ──
+println("")
+println(bar)
+println("  STATISTICS")
+println(bar)
+
+let mut max_n6 = 0.0
+let mut sum_n6 = 0.0
+let mut max_eff = 0.0
+let mut sum_eff = 0.0
+let mut si2 = 0
+while si2 < r_count {
+    if r_n6pct[si2] > max_n6 { max_n6 = r_n6pct[si2] }
+    sum_n6 = sum_n6 + r_n6pct[si2]
+    if r_eff[si2] > max_eff { max_eff = r_eff[si2] }
+    sum_eff = sum_eff + r_eff[si2]
+    si2 = si2 + 1
+}
+
+let avg_n6 = sum_n6 / r_count
+let avg_eff = sum_eff / r_count
+
+println("  Total combinations:    " + to_string(r_count) + " (of " + to_string(total_combos) + " possible)")
+println("  Max n6 EXACT:          " + fmt1(max_n6) + "%")
+println("  Avg n6 EXACT:          " + fmt1(avg_n6) + "%")
+println("  Max system efficiency: " + fmt1(max_eff * 100.0) + "%")
+println("  Avg system efficiency: " + fmt1(avg_eff * 100.0) + "%")
+
+println("")
+println(bar)
+println("  DSE 완료 -- " + to_string(r_count) + " 호환 조합 탐색, 최적 경로 도출")
+println("  Vision: 전기요금 0원 -- 지붕 하나로 집+차 전력 자급")
+println(bar)

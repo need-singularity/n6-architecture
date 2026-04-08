@@ -1,0 +1,182 @@
+// N6 Crypto / Blockchain / Cryptography Calculator (HEXA port)
+// Original: tools/crypto-calc/main.rs
+// 우회: struct Stats → global mut 카운터 (B-28: fn이 top-level mut 읽고/씀)
+
+let SIGMA = 12.0
+let TAU = 4.0
+let PHI = 2.0
+let SOPFR = 5.0
+let J2 = 24.0
+let MU = 1.0
+let N = 6.0
+
+let mut s_exact = 0
+let mut s_close = 0
+let mut s_fail = 0
+
+fn format_float(v, prec) {
+    if prec == 0 { return to_string(round(v)) }
+    let mut factor = 1.0
+    let mut i = 0
+    while i < prec { factor = factor * 10.0
+        i = i + 1 }
+    let mut rounded = round(v * factor) / factor
+    let mut s = to_string(rounded)
+    let mut has_dot = 0
+    let mut k = 0
+    while k < len(s) { if to_string(s[k]) == "." { has_dot = 1 }
+        k = k + 1 }
+    if has_dot == 0 { s = s + "." }
+    let mut dot_pos = -1
+    let mut j = 0
+    while j < len(s) { if to_string(s[j]) == "." { dot_pos = j }
+        j = j + 1 }
+    let mut dec_digits = len(s) - dot_pos - 1
+    while dec_digits < prec { s = s + "0"
+        dec_digits = dec_digits + 1 }
+    return s
+}
+
+fn pad_right(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+fn pad_left(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+fn fmt_num(v) {
+    let frac = v - floor(v)
+    if abs(frac) < 1.0e-9 {
+        if abs(v) < 1.0e15 {
+            return format_float(v, 0)
+        }
+    }
+    return format_float(v, 4)
+}
+
+fn section(title) {
+    println("")
+    println("=".repeat(72))
+    println("  " + title)
+    println("=".repeat(72))
+    println("")
+}
+
+fn header() {
+    println("  " + pad_right("Parameter", 40) + " " + pad_left("Actual", 12) + " " + pad_left("n=6 Pred", 12) + " " + pad_right("Expression", 28) + " Grade")
+    println("  " + "-".repeat(104))
+}
+
+fn check(name, actual, predicted, expr) {
+    let mut err = 0.0
+    if abs(predicted) > 1.0e-10 {
+        err = abs((actual - predicted) / predicted) * 100.0
+    }
+    let mut mark = "❌"
+    let mut grade = "FAIL "
+    if err < 0.5 {
+        mark = "✅"
+        grade = "EXACT"
+        s_exact = s_exact + 1
+    } else if err < 5.0 {
+        mark = "⚠️ "
+        grade = "CLOSE"
+        s_close = s_close + 1
+    } else {
+        s_fail = s_fail + 1
+    }
+    println("  " + mark + " " + pad_right(name, 38) + " " + pad_left(fmt_num(actual), 12) + " " + pad_left(fmt_num(predicted), 12) + " " + pad_right(expr, 28) + " " + grade)
+}
+
+fn bitcoin() {
+    section("BT-53: Bitcoin n=6 Universality")
+    header()
+    check("Max supply (millions)", 21.0, (N / PHI) * (SIGMA - SOPFR), "n/φ·(σ-sopfr) = 3×7 = 21")
+    check("Confirmations", 6.0, N, "n = 6")
+    check("Block time (min)", 10.0, SIGMA - PHI, "σ-φ = 12-2 = 10")
+    check("Halving interval (×10⁴ blocks)", 21.0, (N / PHI) * (SIGMA - SOPFR), "n/φ·(σ-sopfr) = 21")
+    check("Initial reward (BTC)", 50.0, SOPFR * (SIGMA - PHI), "sopfr·(σ-φ) = 5×10 = 50")
+    check("SHA-256 bits", 256.0, pow(2.0, SIGMA - TAU), "2^(σ-τ) = 2^8 = 256")
+    check("ECDSA key (bits)", 256.0, pow(2.0, SIGMA - TAU), "2^(σ-τ) = 2^8 = 256")
+    check("Block size (MB)", 1.0, MU, "μ = 1")
+}
+
+fn ethereum() {
+    section("BT-53: Ethereum n=6 Universality")
+    header()
+    check("Block time (s)", 12.0, SIGMA, "σ = 12")
+    check("Slots per epoch", 32.0, pow(2.0, SOPFR), "2^sopfr = 2^5 = 32")
+    check("Min validator stake (ETH)", 32.0, pow(2.0, SOPFR), "2^sopfr = 2^5 = 32")
+    check("Shard count (planned)", 64.0, pow(2.0, N), "2^n = 2^6 = 64")
+}
+
+fn cryptography() {
+    section("Cryptography n=6 Constants")
+    header()
+    check("AES-128 key (bits)", 128.0, pow(2.0, SIGMA - SOPFR), "2^(σ-sopfr) = 2^7 = 128")
+    check("AES-192 key (bits)", 192.0, SIGMA * pow(2.0, TAU), "σ·2^τ = 12·16 = 192")
+    check("AES-256 key (bits)", 256.0, pow(2.0, SIGMA - TAU), "2^(σ-τ) = 2^8 = 256")
+    check("AES block (bits)", 128.0, pow(2.0, SIGMA - SOPFR), "2^(σ-sopfr) = 2^7 = 128")
+    check("RSA-2048 key (bits)", 2048.0, pow(2.0, SIGMA - MU), "2^(σ-μ) = 2^11 = 2048")
+    check("SHA-512 bits", 512.0, pow(2.0, SIGMA - N / PHI), "2^(σ-n/φ) = 2^9 = 512")
+    check("ChaCha20 rounds", 20.0, J2 - TAU, "J₂-τ = 24-4 = 20")
+    check("Poly1305 exponent (130)", 130.0, SIGMA * (SIGMA - MU) - PHI, "σ(σ-μ)-φ = 132-2 = 130")
+    check("Poly1305 subtrahend (5)", 5.0, SOPFR, "sopfr = 5")
+}
+
+fn qec() {
+    section("BT-41: Quantum Error Correction n=6")
+    header()
+    check("Surface code d=5 syndromes", 24.0, J2, "J₂ = 24")
+    check("Surface code d=3 qubits", 17.0, SIGMA + SOPFR, "σ+sopfr = 12+5 = 17")
+    check("Quantum Volume exponent", 20.0, J2 - TAU, "J₂-τ = 24-4 = 20")
+    check("Steane [[7,1,3]] code n", 7.0, SIGMA - SOPFR, "σ-sopfr = 12-5 = 7")
+    check("Shor [[9,1,3]] code n", 9.0, SIGMA - N / PHI, "σ-n/φ = 12-3 = 9")
+}
+
+fn summary() {
+    let total = s_exact + s_close + s_fail
+    println("")
+    println("=".repeat(72))
+    println("  SUMMARY")
+    println("=".repeat(72))
+    println("")
+    println("  Total parameters checked:  " + to_string(total))
+    let pct = 100.0 * to_float(s_exact) / to_float(total)
+    println("  ✅ EXACT:                   " + to_string(s_exact) + " / " + to_string(total) + " (" + format_float(pct, 1) + "%)")
+    println("  ⚠️  CLOSE:                   " + to_string(s_close) + " / " + to_string(total))
+    println("  ❌ FAIL:                    " + to_string(s_fail) + " / " + to_string(total))
+
+    let n6_ratio = to_float(s_exact) / to_float(total)
+    println("")
+    println("  n=6 EXACT ratio: " + format_float(n6_ratio * 100.0, 1) + "%")
+
+    if n6_ratio > 0.8 {
+        println("  → Strong n=6 universality in crypto/blockchain domain")
+    } else if n6_ratio > 0.6 {
+        println("  → Moderate n=6 presence in crypto/blockchain domain")
+    } else {
+        println("  → Weak n=6 signal — needs more investigation")
+    }
+
+    println("")
+    println("  Core identity: σ(n)·φ(n) = n·τ(n) ⟺ n=6")
+    println("  12·2 = 6·4 = 24 = J₂(6)")
+}
+
+println("╔══════════════════════════════════════════════════════════════════════╗")
+println("║  N6 Crypto / Blockchain / Cryptography Calculator                   ║")
+println("║  BT-53: Crypto n=6 Universality  |  BT-41: QEC n=6                 ║")
+println("║  σ(6)·φ(6) = 6·τ(6) = 24 = J₂(6)                                  ║")
+println("╚══════════════════════════════════════════════════════════════════════╝")
+
+bitcoin()
+ethereum()
+cryptography()
+qec()
+summary()

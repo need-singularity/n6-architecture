@@ -1,0 +1,965 @@
+// Deep Miner -- Depth-4 targeted formula search for n=6 hard constants
+// Ported from tools/deep-miner/main.rs
+// Focuses on 6 hardest targets: h, Lambda, G, top quark, tau lepton, W boson
+
+// N=6 base constants
+let N = 6.0
+let PHI_C = 2.0
+let TAU_C = 4.0
+let SIGMA_C = 12.0
+let J2 = 24.0
+let SOPFR = 5.0
+let MU_C = 1.0
+
+let NC = 7
+let CONST_NAMES = ["n", "phi", "tau", "sigma", "J2", "sopfr", "mu"]
+let CONST_VALS = [N, PHI_C, TAU_C, SIGMA_C, J2, SOPFR, MU_C]
+
+let OP_SYM = ["+", "-", "*", "/", "^"]
+
+// helpers
+fn pad_r(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  r
+}
+
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn floor_val(x) {
+  let t = round(x)
+  if t > x { t - 1.0 } else { t }
+}
+
+fn log10(x) {
+  log(x) / log(10.0)
+}
+
+fn max_val(a, b) {
+  if a > b { a } else { b }
+}
+
+fn min_val(a, b) {
+  if a < b { a } else { b }
+}
+
+fn fmt4(x) {
+  to_string(round(x * 10000.0) / 10000.0)
+}
+
+fn fmt2(x) {
+  to_string(round(x * 100.0) / 100.0)
+}
+
+fn fmt1(x) {
+  to_string(round(x * 10.0) / 10.0)
+}
+
+fn fmt_sci(x) {
+  let a = abs(x)
+  if a < pow(10.0, -300) { "0.000000e0" }
+  else {
+    let lg = log10(a)
+    let e = floor_val(lg)
+    let m = x / pow(10.0, e)
+    let ms = to_string(round(m * 1000000.0) / 1000000.0)
+    ms + "e" + to_string(round(e))
+  }
+}
+
+// op_eval: returns result or sentinel for invalid
+fn op_eval(op, a, b) {
+  let SEN = -9.999 * pow(10.0, 99)
+  if op == 0 { a + b }
+  else if op == 1 { a - b }
+  else if op == 2 { a * b }
+  else if op == 3 {
+    if abs(b) < pow(10.0, -15) { SEN }
+    else {
+      let r = a / b
+      if r != r { SEN }
+      else if abs(r) > pow(10.0, 300) { SEN }
+      else { r }
+    }
+  }
+  else if op == 4 {
+    if abs(a) < pow(10.0, -15) { SEN }
+    else if abs(a) > pow(10.0, 8) { SEN }
+    else if abs(b) > 80.0 { SEN }
+    else {
+      let r = pow(a, b)
+      if r != r { SEN }
+      else if abs(r) > pow(10.0, 300) { SEN }
+      else { r }
+    }
+  }
+  else { SEN }
+}
+
+fn is_sentinel(v) {
+  v < -9.0 * pow(10.0, 99)
+}
+
+// helper to update best arrays at index ti
+fn update_best(err_arr, val_arr, form_arr, cnt, ti, new_err, new_val, new_form) {
+  let mut ub_err = []
+  let mut ub_val = []
+  let mut ub_form = []
+  let mut ui = 0
+  while ui < cnt {
+    if ui == ti {
+      ub_err = ub_err + [new_err]
+      ub_val = ub_val + [new_val]
+      ub_form = ub_form + [new_form]
+    } else {
+      let ev = err_arr[ui]
+      let vv = val_arr[ui]
+      let fv = form_arr[ui]
+      ub_err = ub_err + [ev]
+      ub_val = ub_val + [vv]
+      ub_form = ub_form + [fv]
+    }
+    ui = ui + 1
+  }
+  [ub_err, ub_val, ub_form]
+}
+
+// ============================================================
+// gen_depth2: build all depth-0/1/2 expressions
+// ============================================================
+println("=== Deep Miner: Depth-4 Targeted Formula Search ===")
+println("Building depth-2 expression table...")
+
+let mut d2v = []
+let mut d2f = []
+
+// Depth 0: bare constants
+let mut ci = 0
+while ci < NC {
+  let cv = CONST_VALS[ci]
+  let cn = CONST_NAMES[ci]
+  d2v = d2v + [cv]
+  d2f = d2f + [cn]
+  ci = ci + 1
+}
+
+// Depth 1: const op const
+let mut di = 0
+while di < NC {
+  let mut dj = 0
+  while dj < NC {
+    let mut dop = 0
+    while dop < 5 {
+      let va = CONST_VALS[di]
+      let vb = CONST_VALS[dj]
+      let v = op_eval(dop, va, vb)
+      if is_sentinel(v) == false {
+        if v == v {
+          if abs(v) < pow(10.0, 18) {
+            if abs(v) > pow(10.0, -18) {
+              let na = CONST_NAMES[di]
+              let nb = CONST_NAMES[dj]
+              let os = OP_SYM[dop]
+              let f = "(" + na + " " + os + " " + nb + ")"
+              d2v = d2v + [v]
+              d2f = d2f + [f]
+            }
+          }
+        }
+      }
+      dop = dop + 1
+    }
+    dj = dj + 1
+  }
+  di = di + 1
+}
+
+// Depth 2: (d2_expr op const) and (const op d2_expr)
+let base_len = len(d2v)
+let mut idx = 0
+while idx < base_len {
+  let mut k = 0
+  while k < NC {
+    let mut op = 0
+    while op < 5 {
+      let d2v_idx = d2v[idx]
+      let d2f_idx = d2f[idx]
+      let ck = CONST_VALS[k]
+      let nk = CONST_NAMES[k]
+      let os = OP_SYM[op]
+      // d2_expr op const
+      let v1 = op_eval(op, d2v_idx, ck)
+      if is_sentinel(v1) == false {
+        if v1 == v1 {
+          if abs(v1) < pow(10.0, 30) {
+            if abs(v1) > pow(10.0, -30) {
+              let f1 = "(" + d2f_idx + " " + os + " " + nk + ")"
+              d2v = d2v + [v1]
+              d2f = d2f + [f1]
+            }
+          }
+        }
+      }
+      // const op d2_expr
+      let v2 = op_eval(op, ck, d2v_idx)
+      if is_sentinel(v2) == false {
+        if v2 == v2 {
+          if abs(v2) < pow(10.0, 30) {
+            if abs(v2) > pow(10.0, -30) {
+              let f2 = "(" + nk + " " + os + " " + d2f_idx + ")"
+              d2v = d2v + [v2]
+              d2f = d2f + [f2]
+            }
+          }
+        }
+      }
+      op = op + 1
+    }
+    k = k + 1
+  }
+  idx = idx + 1
+}
+
+// Deduplicate by value (simple linear scan, keep shortest formula)
+// First sort: use a simple approach - build sorted index
+let raw_len = len(d2v)
+
+// Instead of sorting, deduplicate by checking all previous entries
+// This is O(n^2) but avoids the O(n^3) sort-with-rebuild
+let mut dd_v = []
+let mut dd_f = []
+let mut di2 = 0
+while di2 < raw_len {
+  let cv = d2v[di2]
+  let cf = d2f[di2]
+  let mut found = false
+  let mut fi = 0
+  while fi < len(dd_v) {
+    if found == false {
+      let prev = dd_v[fi]
+      let diff = abs(prev - cv) / max_val(abs(prev), pow(10.0, -30))
+      if diff < pow(10.0, -12) {
+        found = true
+      }
+    }
+    fi = fi + 1
+  }
+  if found == false {
+    dd_v = dd_v + [cv]
+    dd_f = dd_f + [cf]
+  }
+  di2 = di2 + 1
+}
+
+d2v = dd_v
+d2f = dd_f
+let d2_len = len(d2v)
+
+println("  Depth-2 expressions: " + to_string(d2_len) + " unique values")
+
+// ============================================================
+// Targets (parallel arrays)
+// ============================================================
+let tgt_name = ["h (Planck) = 6.626e-34", "Lambda (cosmo) ~ 1.1056e-52", "G (gravitational) = 6.674e-11", "m_top = 172.69 GeV", "m_tau = 1776.86 MeV", "m_W = 80.377 GeV"]
+let tgt_value = [6.62607015 * pow(10.0, -34), 1.1056 * pow(10.0, -52), 6.674 * pow(10.0, -11), 172.69, 1776.86, 80.377]
+let tgt_extreme = [true, true, true, false, false, false]
+let tgt_count = 6
+
+let mut best_err = [pow(10.0, 300), pow(10.0, 300), pow(10.0, 300), pow(10.0, 300), pow(10.0, 300), pow(10.0, 300)]
+let mut best_form = ["", "", "", "", "", ""]
+let mut best_val = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+// ============================================================
+// Phase 1: Direct depth-4 (d2 op d2) for non-extreme targets
+// ============================================================
+let cand_count = d2_len * d2_len * 5
+println("")
+println("Phase 1: Direct depth-4 (d2 op d2) -- " + to_string(d2_len) + " x " + to_string(d2_len) + " x 5 = " + to_string(cand_count) + " candidates")
+
+let mut checked = 0
+let mut p1i = 0
+while p1i < d2_len {
+  let mut p1j = 0
+  while p1j < d2_len {
+    let mut p1op = 0
+    while p1op < 5 {
+      let vi = d2v[p1i]
+      let vj = d2v[p1j]
+      let v = op_eval(p1op, vi, vj)
+      if is_sentinel(v) == false {
+        checked = checked + 1
+        if v == v {
+          if v != 0.0 {
+            let mut ti = 3
+            while ti < tgt_count {
+              let tv = tgt_value[ti]
+              let rel = abs((v - tv) / tv)
+              let be = best_err[ti]
+              if rel < be {
+                let fi2 = d2f[p1i]
+                let fj2 = d2f[p1j]
+                let os = OP_SYM[p1op]
+                let nf = fi2 + " " + os + " " + fj2
+                let res = update_best(best_err, best_val, best_form, tgt_count, ti, rel, v, nf)
+                best_err = res[0]
+                best_val = res[1]
+                best_form = res[2]
+              }
+              ti = ti + 1
+            }
+          }
+        }
+      }
+      p1op = p1op + 1
+    }
+    p1j = p1j + 1
+  }
+  p1i = p1i + 1
+}
+println("  Phase 1 done: " + to_string(checked) + " combinations checked")
+
+// ============================================================
+// Phase 2: Extreme-scale search (base * 10^exp)
+// ============================================================
+println("")
+println("Phase 2: Extreme-scale search (base * 10^exp)")
+
+// Precompute positive d2 arrays
+let mut d2pv = []
+let mut d2pl = []
+let mut d2pf = []
+let mut pi = 0
+while pi < d2_len {
+  let pval = d2v[pi]
+  if pval > 0.0 {
+    d2pv = d2pv + [pval]
+    d2pl = d2pl + [log10(pval)]
+    let pf = d2f[pi]
+    d2pf = d2pf + [pf]
+  }
+  pi = pi + 1
+}
+let d2p_len = len(d2pv)
+println("  Positive d2 values: " + to_string(d2p_len))
+
+let mut eti = 0
+while eti < tgt_count {
+  let is_ext = tgt_extreme[eti]
+  if is_ext {
+    let tv = tgt_value[eti]
+    let log_tgt = log10(tv)
+    let tn = tgt_name[eti]
+    println("  Target: " + tn + " (log10 = " + fmt4(log_tgt) + ")")
+
+    // Strategy A: d2_base * 10^(d2_exp)
+    let mut ai = 0
+    while ai < d2p_len {
+      let lb = d2pl[ai]
+      let needed_exp = log_tgt - lb
+      // Linear scan for d2 values near needed_exp
+      let mut k = 0
+      while k < d2_len {
+        let ev = d2v[k]
+        let diff = abs(ev - needed_exp)
+        if diff < 1.0 {
+          let actual_log = lb + ev
+          let log_rel_err = abs(actual_log - log_tgt)
+          let rel = abs(pow(10.0, log_rel_err) - 1.0)
+          let be = best_err[eti]
+          if rel < be {
+            let bf = d2pf[ai]
+            let ef = d2f[k]
+            let nf = bf + " * 10^(" + ef + ")"
+            let nv = if abs(actual_log) < 300.0 { pow(10.0, actual_log) } else { 0.0 }
+            let res = update_best(best_err, best_val, best_form, tgt_count, eti, rel, nv, nf)
+            best_err = res[0]
+            best_val = res[1]
+            best_form = res[2]
+          }
+        }
+        k = k + 1
+      }
+      ai = ai + 1
+    }
+
+    // Strategy B: base * 10^(-exp)
+    let mut bi2 = 0
+    while bi2 < d2p_len {
+      let lb = d2pl[bi2]
+      let mut dk = 0
+      while dk < d2_len {
+        let dkv = d2v[dk]
+        if dkv >= 1.0 {
+          if dkv < 200.0 {
+            let actual_log = lb - dkv
+            let log_rel_err = abs(actual_log - log_tgt)
+            if log_rel_err < 1.0 {
+              let rel = abs(pow(10.0, log_rel_err) - 1.0)
+              let be = best_err[eti]
+              if rel < be {
+                let bf = d2pf[bi2]
+                let ef = d2f[dk]
+                let nf = bf + " * 10^(-(" + ef + "))  [= 10^" + fmt4(actual_log) + "]"
+                let nv = if abs(actual_log) < 300.0 { pow(10.0, actual_log) } else { 0.0 }
+                let res = update_best(best_err, best_val, best_form, tgt_count, eti, rel, nv, nf)
+                best_err = res[0]
+                best_val = res[1]
+                best_form = res[2]
+              }
+            }
+          }
+        }
+        dk = dk + 1
+      }
+      bi2 = bi2 + 1
+    }
+
+    // Strategy C: mantissa * 10^exponent decomposition
+    let exponent = floor_val(log_tgt)
+    let mantissa = tv / pow(10.0, exponent)
+    println("    Decomposed: " + to_string(round(mantissa * 1000000.0) / 1000000.0) + " * 10^" + to_string(round(exponent)))
+
+    let mut bm_err = pow(10.0, 300)
+    let mut bm_form = ""
+    let mut bm_val = 0.0
+    let mut be_err = pow(10.0, 300)
+    let mut be_form = ""
+    let mut be_val = 0.0
+
+    let mut ci2 = 0
+    while ci2 < d2_len {
+      let dv = d2v[ci2]
+      let df = d2f[ci2]
+      // mantissa search
+      if dv > 0.0 {
+        let rel = abs((dv - mantissa) / mantissa)
+        if rel < bm_err {
+          bm_err = rel
+          bm_form = df
+          bm_val = dv
+        }
+      }
+      // exponent search
+      let rel_exp = abs(dv - exponent)
+      if rel_exp < be_err {
+        be_err = rel_exp
+        be_form = df
+        be_val = dv
+      }
+      ci2 = ci2 + 1
+    }
+
+    // Combined
+    let comb_log = log10(bm_val) + be_val
+    let comb_rel = abs(pow(10.0, abs(comb_log - log_tgt)) - 1.0)
+    let cur_be = best_err[eti]
+    if comb_rel < cur_be {
+      let nf = bm_form + " * 10^(" + be_form + ")"
+      let nv = if abs(comb_log) < 300.0 { pow(10.0, comb_log) } else { 0.0 }
+      let res = update_best(best_err, best_val, best_form, tgt_count, eti, comb_rel, nv, nf)
+      best_err = res[0]
+      best_val = res[1]
+      best_form = res[2]
+    }
+
+    println("    Best mantissa: " + bm_form + " = " + to_string(round(bm_val * 1000000.0) / 1000000.0) + " (err " + fmt4(bm_err * 100.0) + "%)")
+    println("    Best exponent: " + be_form + " = " + fmt2(be_val) + " (need " + to_string(round(exponent)) + ")")
+  }
+  eti = eti + 1
+}
+
+// ============================================================
+// Phase 3: Enhanced patterns for near-miss targets
+// ============================================================
+println("")
+println("Phase 3: Enhanced patterns for near-miss targets")
+println("  Pattern: (d2 * d2) +/- d2, d2^2 +/- d2, etc.")
+
+let mut p3ti = 3
+while p3ti < tgt_count {
+  let tv = tgt_value[p3ti]
+  let sqrt_tv = sqrt(tv)
+
+  // collect candidates near sqrt(target)
+  let mut cns = []
+  let mut ci3 = 0
+  while ci3 < d2_len {
+    let dv = d2v[ci3]
+    if dv > 0.0 {
+      if abs(dv - sqrt_tv) / sqrt_tv < 0.5 {
+        cns = cns + [ci3]
+      }
+    }
+    ci3 = ci3 + 1
+  }
+
+  // Try a*b +/- c
+  let mut cai = 0
+  while cai < len(cns) {
+    let ai2 = cns[cai]
+    let mut cbi = 0
+    while cbi < len(cns) {
+      let bi3 = cns[cbi]
+      let va = d2v[ai2]
+      let vb = d2v[bi3]
+      let prod = op_eval(2, va, vb)
+      if is_sentinel(prod) == false {
+        let residual = tv - prod
+        // Linear scan for d2 values near residual
+        let mut k3 = 0
+        while k3 < d2_len {
+          let dkv = d2v[k3]
+          if abs(dkv - residual) < abs(residual) + 1.0 {
+            let v = prod + dkv
+            let rel = abs((v - tv) / tv)
+            let be = best_err[p3ti]
+            if rel < be {
+              let fa = d2f[ai2]
+              let fb = d2f[bi3]
+              let fk = d2f[k3]
+              let nf = "(" + fa + " * " + fb + ") + " + fk
+              let res = update_best(best_err, best_val, best_form, tgt_count, p3ti, rel, v, nf)
+              best_err = res[0]
+              best_val = res[1]
+              best_form = res[2]
+            }
+            let v2 = prod - dkv
+            let rel2 = abs((v2 - tv) / tv)
+            let be2 = best_err[p3ti]
+            if rel2 < be2 {
+              let fa = d2f[ai2]
+              let fb = d2f[bi3]
+              let fk = d2f[k3]
+              let nf2 = "(" + fa + " * " + fb + ") - " + fk
+              let res2 = update_best(best_err, best_val, best_form, tgt_count, p3ti, rel2, v2, nf2)
+              best_err = res2[0]
+              best_val = res2[1]
+              best_form = res2[2]
+            }
+          }
+          k3 = k3 + 1
+        }
+      }
+      cbi = cbi + 1
+    }
+    cai = cai + 1
+  }
+  p3ti = p3ti + 1
+}
+
+// ============================================================
+// Phase 4: Focused brute-force for near-miss targets
+// ============================================================
+println("")
+println("Phase 4: Focused brute-force for near-miss targets")
+
+let divs = [2.0, 3.0, 4.0, 5.0, 6.0, 12.0, 24.0]
+
+let mut p4ti = 3
+while p4ti < tgt_count {
+  let tv = tgt_value[p4ti]
+
+  // collect relevant d2 indices
+  let mut rel_idx = []
+  let mut ri = 0
+  while ri < d2_len {
+    let va = abs(d2v[ri])
+    let mut dominated = false
+    if va < tv * 100.0 {
+      if va > tv * 0.001 {
+        rel_idx = rel_idx + [ri]
+        dominated = true
+      }
+    }
+    if dominated == false {
+      if va > 0.0 {
+        if va < 10.0 {
+          rel_idx = rel_idx + [ri]
+          dominated = true
+        }
+      }
+    }
+    if dominated == false {
+      let mut dvi = 0
+      while dvi < 7 {
+        if dominated == false {
+          let dv = divs[dvi]
+          let rdv = d2v[ri]
+          if abs((rdv - tv / dv) / (tv / dv)) < 0.1 {
+            rel_idx = rel_idx + [ri]
+            dominated = true
+          }
+          if dominated == false {
+            if abs((rdv - tv * dv) / (tv * dv)) < 0.1 {
+              rel_idx = rel_idx + [ri]
+              dominated = true
+            }
+          }
+        }
+        dvi = dvi + 1
+      }
+    }
+    ri = ri + 1
+  }
+
+  // Simple dedup of rel_idx
+  let mut rel_dedup = []
+  let mut rdi = 0
+  while rdi < len(rel_idx) {
+    let rv = rel_idx[rdi]
+    if len(rel_dedup) == 0 {
+      rel_dedup = rel_dedup + [rv]
+    } else {
+      let last = rel_dedup[len(rel_dedup) - 1]
+      if rv != last {
+        rel_dedup = rel_dedup + [rv]
+      }
+    }
+    rdi = rdi + 1
+  }
+  rel_idx = rel_dedup
+
+  let tn = tgt_name[p4ti]
+  println("  " + tn + " -- " + to_string(len(rel_idx)) + " relevant d2 values")
+
+  let mut p4count = 0
+  let mut p4i = 0
+  while p4i < len(rel_idx) {
+    let ii2 = rel_idx[p4i]
+    let mut p4j = 0
+    while p4j < len(rel_idx) {
+      let jj2 = rel_idx[p4j]
+      let mut p4op = 0
+      while p4op < 5 {
+        let vi = d2v[ii2]
+        let vj = d2v[jj2]
+        let v = op_eval(p4op, vi, vj)
+        if is_sentinel(v) == false {
+          p4count = p4count + 1
+          if v == v {
+            if v != 0.0 {
+              let rel = abs((v - tv) / tv)
+              let be = best_err[p4ti]
+              if rel < be {
+                let fi2 = d2f[ii2]
+                let fj2 = d2f[jj2]
+                let os = OP_SYM[p4op]
+                let nf = fi2 + " " + os + " " + fj2
+                let res = update_best(best_err, best_val, best_form, tgt_count, p4ti, rel, v, nf)
+                best_err = res[0]
+                best_val = res[1]
+                best_form = res[2]
+              }
+            }
+          }
+        }
+        p4op = p4op + 1
+      }
+      p4j = p4j + 1
+    }
+    p4i = p4i + 1
+  }
+  println("    Checked " + to_string(p4count) + " combinations")
+  p4ti = p4ti + 1
+}
+
+// ============================================================
+// Phase 5: Integer power ladders for extreme-scale targets
+// ============================================================
+println("")
+println("Phase 5: Integer power ladders for extreme-scale targets")
+
+let signs = [1.0, -1.0]
+
+let mut p5ti = 0
+while p5ti < tgt_count {
+  let is_ext = tgt_extreme[p5ti]
+  if is_ext {
+    let log_tgt = log10(tgt_value[p5ti])
+
+    let mut a = 0
+    while a < NC {
+      let mut b = 0
+      while b < NC {
+        let base1 = CONST_VALS[a]
+        let exp1 = CONST_VALS[b]
+        if abs(base1) >= pow(10.0, -15) {
+          if base1 > 0.0 {
+            let mut si1 = 0
+            while si1 < 2 {
+              let s1 = signs[si1]
+              let log1 = s1 * exp1 * log10(base1)
+
+              let mut c = 0
+              while c < NC {
+                let mut d = 0
+                while d < NC {
+                  let base2 = CONST_VALS[c]
+                  let exp2 = CONST_VALS[d]
+                  if abs(base2) >= pow(10.0, -15) {
+                    if base2 > 0.0 {
+                      let mut si2 = 0
+                      while si2 < 2 {
+                        let s2 = signs[si2]
+                        let log2 = s2 * exp2 * log10(base2)
+                        let total_log = log1 + log2
+                        let log_err = abs(total_log - log_tgt)
+                        if log_err < 2.0 {
+                          let rel = abs(pow(10.0, log_err) - 1.0)
+                          let be = best_err[p5ti]
+                          if rel < be {
+                            let s1s = if s1 < 0.0 { "-" } else { "" }
+                            let s2s = if s2 < 0.0 { "-" } else { "" }
+                            let na = CONST_NAMES[a]
+                            let nb = CONST_NAMES[b]
+                            let nc2 = CONST_NAMES[c]
+                            let nd = CONST_NAMES[d]
+                            let nf = na + "^(" + s1s + nb + ") * " + nc2 + "^(" + s2s + nd + ")"
+                            let nv = if abs(total_log) < 300.0 { pow(10.0, total_log) } else { 0.0 }
+                            let res = update_best(best_err, best_val, best_form, tgt_count, p5ti, rel, nv, nf)
+                            best_err = res[0]
+                            best_val = res[1]
+                            best_form = res[2]
+                          }
+
+                          // Also try with d2 multiplier
+                          let mut d2e = 0
+                          while d2e < d2_len {
+                            let d2ev = d2v[d2e]
+                            if d2ev > 0.0 {
+                              let adj_log = total_log + log10(d2ev)
+                              let adj_err = abs(adj_log - log_tgt)
+                              if adj_err < 0.5 {
+                                let adj_rel = abs(pow(10.0, adj_err) - 1.0)
+                                let be2 = best_err[p5ti]
+                                if adj_rel < be2 {
+                                  let s1s = if s1 < 0.0 { "-" } else { "" }
+                                  let s2s = if s2 < 0.0 { "-" } else { "" }
+                                  let na = CONST_NAMES[a]
+                                  let nb = CONST_NAMES[b]
+                                  let nc2 = CONST_NAMES[c]
+                                  let nd = CONST_NAMES[d]
+                                  let d2ef = d2f[d2e]
+                                  let nf = na + "^(" + s1s + nb + ") * " + nc2 + "^(" + s2s + nd + ") * " + d2ef
+                                  let nv = if abs(adj_log) < 300.0 { pow(10.0, adj_log) } else { 0.0 }
+                                  let res = update_best(best_err, best_val, best_form, tgt_count, p5ti, adj_rel, nv, nf)
+                                  best_err = res[0]
+                                  best_val = res[1]
+                                  best_form = res[2]
+                                }
+                              }
+                            }
+                            d2e = d2e + 1
+                          }
+                        }
+                        si2 = si2 + 1
+                      }
+                    }
+                  }
+                  d = d + 1
+                }
+                c = c + 1
+              }
+              si1 = si1 + 1
+            }
+          }
+        }
+        b = b + 1
+      }
+      a = a + 1
+    }
+  }
+  p5ti = p5ti + 1
+}
+
+// ============================================================
+// Phase 6: Full log-space d2 x d2 for extreme targets
+// ============================================================
+println("")
+println("Phase 6: Full log-space d2 x d2 for extreme targets")
+
+// Precompute log10 of abs of all non-zero d2
+let mut ld2l = []
+let mut ld2i = []
+let mut li = 0
+while li < d2_len {
+  let dv = d2v[li]
+  if dv != 0.0 {
+    ld2l = ld2l + [log10(abs(dv))]
+    ld2i = ld2i + [li]
+  }
+  li = li + 1
+}
+let ld2_len = len(ld2l)
+println("  Log-d2 entries: " + to_string(ld2_len))
+
+let mut p6ti = 0
+while p6ti < tgt_count {
+  let is_ext = tgt_extreme[p6ti]
+  if is_ext {
+    let tv = tgt_value[p6ti]
+    if tv > 0.0 {
+      let log_tgt = log10(tv)
+      let mut p6count = 0
+
+      let mut p6i = 0
+      while p6i < ld2_len {
+        let li_log = ld2l[p6i]
+        let li_idx = ld2i[p6i]
+
+        // Multiplication: li_log + log_j = log_tgt
+        let needed = log_tgt - li_log
+        // Linear scan for log values near needed
+        let mut k6 = 0
+        while k6 < ld2_len {
+          let log_j = ld2l[k6]
+          if abs(log_j - needed) < 0.3 {
+            let j_idx = ld2i[k6]
+            let total_log = li_log + log_j
+            let err = abs(total_log - log_tgt)
+            if err < 0.3 {
+              p6count = p6count + 1
+              let rel = abs(pow(10.0, err) - 1.0)
+              let be = best_err[p6ti]
+              if rel < be {
+                let fi2 = d2f[li_idx]
+                let fj2 = d2f[j_idx]
+                let nf = fi2 + " * " + fj2
+                let nv = if abs(total_log) < 300.0 { pow(10.0, total_log) } else { 0.0 }
+                let res = update_best(best_err, best_val, best_form, tgt_count, p6ti, rel, nv, nf)
+                best_err = res[0]
+                best_val = res[1]
+                best_form = res[2]
+              }
+            }
+          }
+          k6 = k6 + 1
+        }
+
+        // Division: li_log - log_j = log_tgt
+        let needed_div = li_log - log_tgt
+        let mut k7 = 0
+        while k7 < ld2_len {
+          let log_j = ld2l[k7]
+          if abs(log_j - needed_div) < 0.3 {
+            let j_idx = ld2i[k7]
+            let total_log = li_log - log_j
+            let err = abs(total_log - log_tgt)
+            if err < 0.3 {
+              p6count = p6count + 1
+              let rel = abs(pow(10.0, err) - 1.0)
+              let be = best_err[p6ti]
+              if rel < be {
+                let fi2 = d2f[li_idx]
+                let fj2 = d2f[j_idx]
+                let nf = fi2 + " / " + fj2
+                let nv = if abs(total_log) < 300.0 { pow(10.0, total_log) } else { 0.0 }
+                let res = update_best(best_err, best_val, best_form, tgt_count, p6ti, rel, nv, nf)
+                best_err = res[0]
+                best_val = res[1]
+                best_form = res[2]
+              }
+            }
+          }
+          k7 = k7 + 1
+        }
+
+        // Power: d2_val[k] * li_log = log_tgt
+        if abs(li_log) > 0.01 {
+          let needed_exp = log_tgt / li_log
+          let mut k8 = 0
+          while k8 < d2_len {
+            let dkv = d2v[k8]
+            if abs(dkv - needed_exp) < 1.0 {
+              let exp_log = dkv * li_log
+              let err = abs(exp_log - log_tgt)
+              if err < 0.3 {
+                p6count = p6count + 1
+                let rel = abs(pow(10.0, err) - 1.0)
+                let be = best_err[p6ti]
+                if rel < be {
+                  let fi2 = d2f[li_idx]
+                  let fk = d2f[k8]
+                  let nf = fi2 + " ^ (" + fk + ")"
+                  let nv = if abs(exp_log) < 300.0 { pow(10.0, exp_log) } else { 0.0 }
+                  let res = update_best(best_err, best_val, best_form, tgt_count, p6ti, rel, nv, nf)
+                  best_err = res[0]
+                  best_val = res[1]
+                  best_form = res[2]
+                }
+              }
+            }
+            k8 = k8 + 1
+          }
+        }
+
+        p6i = p6i + 1
+      }
+
+      let tn = tgt_name[p6ti]
+      let be = best_err[p6ti]
+      println("  " + tn + " -- checked " + to_string(p6count) + " log-space combinations, best = " + fmt4(be * 100.0) + "%")
+    }
+  }
+  p6ti = p6ti + 1
+}
+
+// ============================================================
+// Final Report
+// ============================================================
+println("")
+println("======================================================================")
+println("============================================================")
+println("  DEEP MINER RESULTS -- Depth-4 Targeted Search")
+println("============================================================")
+println("")
+
+let mut ri3 = 0
+while ri3 < tgt_count {
+  let be = best_err[ri3]
+  let ppm = be * 1000000.0
+  let pct = be * 100.0
+  let grade = if pct < 0.01 { "EXACT" } else if pct < 0.1 { "CLOSE" } else if pct < 1.0 { "NEAR" } else if pct < 5.0 { "WEAK" } else { "MISS" }
+
+  let tn = tgt_name[ri3]
+  let tv = tgt_value[ri3]
+  let bv = best_val[ri3]
+  let bf = best_form[ri3]
+
+  println("--- " + tn + " ---")
+  println("  Target:  " + fmt_sci(tv))
+  if bv != 0.0 {
+    println("  Found:   " + fmt_sci(bv))
+  }
+  println("  Error:   " + fmt4(pct) + "% (" + fmt1(ppm) + " ppm)  [" + grade + "]")
+  println("  Formula: " + bf)
+  println("")
+  ri3 = ri3 + 1
+}
+
+// Summary table
+println("============================================================")
+println("  SUMMARY")
+println("============================================================")
+println(pad_r("Target", 35) + " " + pad_l("Error%", 10) + " " + pad_l("PPM", 10) + " " + pad_l("Grade", 6))
+println(pad_r("-----------------------------------", 35) + " " + pad_l("----------", 10) + " " + pad_l("----------", 10) + " " + pad_l("------", 6))
+
+let mut ri4 = 0
+while ri4 < tgt_count {
+  let be = best_err[ri4]
+  let ppm = be * 1000000.0
+  let pct = be * 100.0
+  let grade = if pct < 0.01 { "EXACT" } else if pct < 0.1 { "CLOSE" } else if pct < 1.0 { "NEAR" } else if pct < 5.0 { "WEAK" } else { "MISS" }
+  let tn = tgt_name[ri4]
+  println(pad_r(tn, 35) + " " + pad_l(fmt4(pct) + "%", 10) + " " + pad_l(fmt1(ppm), 10) + " " + pad_l(grade, 6))
+  ri4 = ri4 + 1
+}
+println("")

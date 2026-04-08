@@ -1,0 +1,308 @@
+// N6 Interconnect Speed Calculator (HEXA port)
+// Verifies ALL interconnect standards against n=6 arithmetic:
+// PCIe, UCIe, CXL, HBM interface, NVLink, DDR
+// Original: tools/interconnect-calc/main.rs
+
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+let N = 6
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+fn repeat_char(ch, count) {
+    let mut r = ""
+    let mut i = 0
+    while i < count {
+        r = r + ch
+        i = i + 1
+    }
+    r
+}
+
+fn status_str(actual, computed, is_pred) {
+    if is_pred { "PREDICT" }
+    else if actual == computed { "EXACT" }
+    else { "MISS" }
+}
+
+fn status_icon(actual, computed, is_pred) {
+    if is_pred { "🔮" }
+    else if actual == computed { "✅" }
+    else { "❌" }
+}
+
+fn print_header() {
+    println("╭" + repeat_char("─", 78))
+    println("│  N6 INTERCONNECT CALCULATOR v1.0")
+    println("│  n=6: σ=12, τ=4, φ=2, sopfr=5, J₂=24, μ=1")
+    println("│  Verifies interconnect speeds from n=6 arithmetic")
+    println("╰" + repeat_char("─", 78))
+    println("")
+}
+
+// Each entry: [standard, gen, speed_value, speed_unit, n6_formula, n6_computed, is_prediction]
+// is_prediction: 1 = true, 0 = false
+
+fn print_section(standards, gens, speed_vals, speed_units, formulas, computeds, preds, count, title) {
+    let dashes76 = repeat_char("─", 76)
+    println("┌" + dashes76 + "┐")
+    println("│ " + pad_r(title, 74) + " │")
+    println("├" + dashes76 + "┤")
+    println("│ " + pad_r("Standard", 10) + " " + pad_r("Gen", 8) + " " + pad_r("Speed", 14) + " " + pad_r("n=6 Formula", 22) + " " + pad_r("Status", 8) + " " + pad_r("", 6) + " │")
+    println("├" + dashes76 + "┤")
+
+    let mut exact = 0
+    let mut total = 0
+    let mut predictions = 0
+    let mut i = 0
+    while i < count {
+        let sv = speed_vals[i]
+        let comp = computeds[i]
+        let is_p = preds[i]
+        let st = status_str(sv, comp, is_p)
+        let ic = status_icon(sv, comp, is_p)
+        let speed_s = to_string(sv) + " " + speed_units[i]
+        println("│ " + pad_r(standards[i], 10) + " " + pad_r(gens[i], 8) + " " + pad_r(speed_s, 14) + " " + pad_r(formulas[i], 22) + " " + pad_r(st, 8) + " " + ic + " │")
+
+        if is_p == 1 {
+            predictions = predictions + 1
+        } else {
+            total = total + 1
+            if sv == comp {
+                exact = exact + 1
+            }
+        }
+        i = i + 1
+    }
+
+    println("└" + dashes76 + "┘")
+    println("  Section: " + to_string(exact) + "/" + to_string(total) + " EXACT")
+    println("")
+
+    [exact, total, predictions]
+}
+
+fn print_pcie_ladder() {
+    let d76 = repeat_char("─", 76)
+    println("┌" + d76 + "┐")
+    println("│ " + pad_r("PCIe EXPONENT LADDER (doubling = 2^k, k consecutive)", 74) + " │")
+    println("├" + d76 + "┤")
+    println("│  PCIe 3.0  4.0  5.0  6.0  7.0  8.0                                     │")
+    println("│  exp:  3    4    5    6    7    8                                         │")
+    println("│  n=6: n/φ  τ  sopfr  n  σ-sopfr  σ-τ                                    │")
+    println("│                                                                            │")
+    println("│  Consecutive integers [3,4,5,6,7,8] map to n=6 constants!                 │")
+    println("│  Range: n/φ=3 to σ-τ=8 → span = sopfr = 5                              │")
+    println("└" + d76 + "┘")
+    println("")
+}
+
+fn print_hbm_ladder() {
+    let d76 = repeat_char("─", 76)
+    println("┌" + d76 + "┐")
+    println("│ " + pad_r("HBM INTERFACE WIDTH LADDER (BT-75)", 74) + " │")
+    println("├" + d76 + "┤")
+    println("│  HBM1/2/2e/3/3e: 1024 bits = 2^(σ-φ) = 2^10                           │")
+    println("│  HBM4:           2048 bits = 2^(σ-μ) = 2^11                           │")
+    println("│  HBM5 (pred):    4096 bits = 2^σ     = 2^12                           │")
+    println("│                                                                            │")
+    println("│  Exponent ladder: σ-φ → σ-μ → σ = 10 → 11 → 12                      │")
+    println("└" + d76 + "┘")
+    println("")
+}
+
+fn print_nvlink_pattern() {
+    let d76 = repeat_char("─", 76)
+    println("┌" + d76 + "┐")
+    println("│ " + pad_r("NVLink BANDWIDTH PATTERN", 74) + " │")
+    println("├" + d76 + "┤")
+    println("│  1.0: 20   = J₂-τ                                                       │")
+    println("│  2.0: 25   = J₂+μ                                                       │")
+    println("│  3.0: 50   = sopfr·(σ-φ)                                               │")
+    println("│  4.0: 100  = (σ-φ)^{φ} = 10^2                                          │")
+    println("│  5.0: 200  = φ·(σ-φ)^{φ}                                             │")
+    println("│                                                                            │")
+    println("│  Each gen: ×φ scaling from (σ-φ)^{φ} base                               │")
+    println("└" + d76 + "┘")
+    println("")
+}
+
+fn print_bandwidth_summary() {
+    let d76 = repeat_char("─", 76)
+    println("┌" + d76 + "┐")
+    println("│ " + pad_r("BANDWIDTH CALCULATIONS (per direction)", 74) + " │")
+    println("├" + d76 + "┤")
+
+    // PCIe x16 bandwidth
+    let pcie_names = ["PCIe 5.0", "PCIe 6.0", "PCIe 7.0"]
+    let pcie_gts = [32, 64, 128]
+    let pcie_lanes = [16, 16, 16]
+    let mut pi = 0
+    while pi < 3 {
+        let bw_gbs = pcie_gts[pi] * pcie_lanes[pi] / 8
+        let line = "  " + pad_r(pcie_names[pi], 12) + " x" + to_string(pcie_lanes[pi]) + ": ~" + to_string(bw_gbs) + " GB/s raw (" + to_string(pcie_gts[pi]) + " GT/s × " + to_string(pcie_lanes[pi]) + " lanes / 8)"
+        println("│" + pad_r(line, 76) + "│")
+        pi = pi + 1
+    }
+
+    println("│" + pad_r("", 76) + "│")
+
+    // NVLink total bandwidth
+    let nvl4_total = 100 * 18
+    let nvl5_total = 200 * 18
+    let nvl4_line = "  NVLink 4.0: " + to_string(nvl4_total) + " GB/s total (18 links × 100 GB/s)"
+    let nvl5_line = "  NVLink 5.0: " + to_string(nvl5_total) + " GB/s total (18 links × 200 GB/s)"
+    let note_line = "  Note: 1800 = σ·(σ-φ)^φ·(σ+n) = 12·100·1.5... beautiful!"
+    println("│" + pad_r(nvl4_line, 76) + "│")
+    println("│" + pad_r(nvl5_line, 76) + "│")
+    println("│" + pad_r(note_line, 76) + "│")
+
+    println("└" + d76 + "┘")
+    println("")
+}
+
+fn print_summary(total_exact, total_checked, total_predictions) {
+    let pct = if total_checked > 0 {
+        round(total_exact * 1000 / total_checked) / 10.0
+    } else { 0.0 }
+
+    let d76 = repeat_char("═", 76)
+    println("╔" + d76 + "╗")
+    println("║ " + pad_r("FINAL SUMMARY", 74) + " ║")
+    println("╠" + d76 + "╣")
+    let v_line = "  Total verified:   " + to_string(total_exact) + "/" + to_string(total_checked) + " EXACT (" + to_string(pct) + "%)"
+    println("║" + pad_r(v_line, 76) + "║")
+    let p_line = "  Predictions:      " + to_string(total_predictions)
+    println("║" + pad_r(p_line, 76) + "║")
+    println("╠" + d76 + "╣")
+    println("║ " + pad_r("PREDICTIONS", 74) + " ║")
+    println("╠" + d76 + "╣")
+    let pred1 = "  PCIe 8.0:    256 GT/s  = 2^(σ-τ) = 2^8"
+    let pred2 = "  HBM5 width:  4096 bits = 2^σ = 2^12"
+    println("║" + pad_r(pred1, 76) + "║")
+    println("║" + pad_r(pred2, 76) + "║")
+    println("╠" + d76 + "╣")
+    println("║ " + pad_r("KEY INSIGHT", 74) + " ║")
+    println("╠" + d76 + "╣")
+    let k1 = "  PCIe exponents [3,4,5,6,7,8] = consecutive = [n/φ,τ,sopfr,n,σ-sopfr,σ-τ]"
+    let k2 = "  HBM width exponents [10,11,12] = [σ-φ, σ-μ, σ]"
+    let k3 = "  NVLink scaling base = (σ-φ)^φ = 100, ×φ per gen"
+    println("║" + pad_r(k1, 76) + "║")
+    println("║" + pad_r(k2, 76) + "║")
+    println("║" + pad_r(k3, 76) + "║")
+    println("╚" + d76 + "╝")
+}
+
+// ─── Main ───
+
+print_header()
+
+let mut total_exact = 0
+let mut total_checked = 0
+let mut total_predictions = 0
+
+// === PCIe ===
+let pcie_stds = ["PCIe", "PCIe", "PCIe", "PCIe", "PCIe", "PCIe"]
+let pcie_gens = ["3.0", "4.0", "5.0", "6.0", "7.0", "8.0"]
+let pcie_speeds = [8, 16, 32, 64, 128, 256]
+let pcie_units = ["GT/s", "GT/s", "GT/s", "GT/s", "GT/s", "GT/s"]
+let pcie_formulas = ["2^(n/φ) = 2^3", "2^τ", "2^sopfr", "2^n", "2^(σ-sopfr)", "2^(σ-τ)"]
+let pcie_computed = [pow(2, N / PHI), pow(2, TAU), pow(2, SOPFR), pow(2, N), pow(2, SIGMA - SOPFR), pow(2, SIGMA - TAU)]
+let pcie_pred = [0, 0, 0, 0, 0, 1]
+
+let r1 = print_section(pcie_stds, pcie_gens, pcie_speeds, pcie_units, pcie_formulas, pcie_computed, pcie_pred, 6, "PCIe — PCI Express Speed Ladder")
+total_exact = total_exact + r1[0]
+total_checked = total_checked + r1[1]
+total_predictions = total_predictions + r1[2]
+
+print_pcie_ladder()
+
+// === UCIe ===
+let ucie_stds = ["UCIe", "UCIe", "UCIe", "UCIe", "UCIe", "UCIe"]
+let ucie_gens = ["1.0", "2.0", "3.0lo", "3.0hi", "lanes", "pitch"]
+let ucie_speeds = [4, 32, 48, 64, 64, 25]
+let ucie_units = ["GT/s", "GT/s", "GT/s", "GT/s", "lanes", "μm"]
+let ucie_formulas = ["τ", "2^sopfr", "σ·τ", "2^n", "2^n", "J₂+μ"]
+let ucie_computed = [TAU, pow(2, SOPFR), SIGMA * TAU, pow(2, N), pow(2, N), J2 + MU]
+let ucie_pred = [0, 0, 0, 0, 0, 0]
+
+let r2 = print_section(ucie_stds, ucie_gens, ucie_speeds, ucie_units, ucie_formulas, ucie_computed, ucie_pred, 6, "UCIe — Universal Chiplet Interconnect Express")
+total_exact = total_exact + r2[0]
+total_checked = total_checked + r2[1]
+total_predictions = total_predictions + r2[2]
+
+// === CXL ===
+let cxl_stds = ["CXL", "CXL", "CXL", "CXL"]
+let cxl_gens = ["1.0/1.1", "2.0", "3.0/3.1", "4.0"]
+let cxl_speeds = [32, 32, 64, 128]
+let cxl_units = ["GT/s", "GT/s", "GT/s", "GT/s"]
+let cxl_formulas = ["2^sopfr", "2^sopfr", "2^n", "2^(σ-sopfr)"]
+let cxl_computed = [pow(2, SOPFR), pow(2, SOPFR), pow(2, N), pow(2, SIGMA - SOPFR)]
+let cxl_pred = [0, 0, 0, 0]
+
+let r3 = print_section(cxl_stds, cxl_gens, cxl_speeds, cxl_units, cxl_formulas, cxl_computed, cxl_pred, 4, "CXL — Compute Express Link")
+total_exact = total_exact + r3[0]
+total_checked = total_checked + r3[1]
+total_predictions = total_predictions + r3[2]
+
+// === HBM ===
+let hbm_stds = ["HBM", "HBM", "HBM", "HBM", "HBM", "HBM", "HBM", "HBM"]
+let hbm_gens = ["1/2/2e", "3/3e", "4", "3 ch", "4 ch", "3e rate", "4 rate", "4E rate"]
+let hbm_speeds = [1024, 1024, 2048, 16, 32, 8, 8, 10]
+let hbm_units = ["bits", "bits", "bits", "channels", "channels", "Gb/s", "Gb/s", "Gb/s"]
+let hbm_formulas = ["2^(σ-φ)", "2^(σ-φ)", "2^(σ-μ)", "2^τ", "2^sopfr", "σ-τ", "σ-τ", "σ-φ"]
+let hbm_computed = [pow(2, SIGMA - PHI), pow(2, SIGMA - PHI), pow(2, SIGMA - MU), pow(2, TAU), pow(2, SOPFR), SIGMA - TAU, SIGMA - TAU, SIGMA - PHI]
+let hbm_pred = [0, 0, 0, 0, 0, 0, 0, 0]
+
+let r4 = print_section(hbm_stds, hbm_gens, hbm_speeds, hbm_units, hbm_formulas, hbm_computed, hbm_pred, 8, "HBM — High Bandwidth Memory Interface")
+total_exact = total_exact + r4[0]
+total_checked = total_checked + r4[1]
+total_predictions = total_predictions + r4[2]
+
+print_hbm_ladder()
+
+// === NVLink ===
+let nvl_stds = ["NVLink", "NVLink", "NVLink", "NVLink", "NVLink", "NVLink"]
+let nvl_gens = ["1.0", "2.0", "3.0", "4.0", "5.0", "4.0 lnk"]
+let nvl_speeds = [20, 25, 50, 100, 200, 18]
+let nvl_units = ["GB/s/link", "GB/s/link", "GB/s/link", "GB/s/link", "GB/s/link", "links/GPU"]
+let nvl_formulas = ["J₂-τ", "J₂+μ", "sopfr·(σ-φ)", "(σ-φ)^φ", "φ·(σ-φ)^φ", "σ+n"]
+let nvl_computed = [J2 - TAU, J2 + MU, SOPFR * (SIGMA - PHI), pow(SIGMA - PHI, PHI), PHI * pow(SIGMA - PHI, PHI), SIGMA + N]
+let nvl_pred = [0, 0, 0, 0, 0, 0]
+
+let r5 = print_section(nvl_stds, nvl_gens, nvl_speeds, nvl_units, nvl_formulas, nvl_computed, nvl_pred, 6, "NVLink — NVIDIA GPU Interconnect")
+total_exact = total_exact + r5[0]
+total_checked = total_checked + r5[1]
+total_predictions = total_predictions + r5[2]
+
+print_nvlink_pattern()
+
+// === DDR ===
+let ddr_stds = ["DDR", "DDR"]
+let ddr_gens = ["bus", "ch/DIMM"]
+let ddr_speeds = [64, 2]
+let ddr_units = ["bits", "channels"]
+let ddr_formulas = ["2^n", "φ"]
+let ddr_computed = [pow(2, N), PHI]
+let ddr_pred = [0, 0]
+
+let r6 = print_section(ddr_stds, ddr_gens, ddr_speeds, ddr_units, ddr_formulas, ddr_computed, ddr_pred, 2, "DDR — Double Data Rate Memory Bus")
+total_exact = total_exact + r6[0]
+total_checked = total_checked + r6[1]
+total_predictions = total_predictions + r6[2]
+
+print_bandwidth_summary()
+print_summary(total_exact, total_checked, total_predictions)

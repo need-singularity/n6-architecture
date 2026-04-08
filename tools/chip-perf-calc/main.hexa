@@ -1,0 +1,805 @@
+// chip-perf-calc: N6 칩 성능 추정기 (Roofline 모델)
+// HEXA 포트: tools/chip-perf-calc/main.rs → main.hexa
+// ANIMA-HEXA, HEXA-OMEGA, HEXA-EDGE — sigma(6)*phi(6)=n*tau(6)=24
+
+// ── N6 상수 ──
+let N_CONST = 6.0
+let PHI_CONST = 2.0
+let SIGMA_CONST = 12.0
+let J2_CONST = 24.0
+let SIGMA_TAU_CONST = 8.0
+let SIGMA_SQ_CONST = 144.0
+
+// ── Precision 정수 상수 ──
+let PREC_FP64 = 0
+let PREC_FP32 = 1
+let PREC_FP16 = 2
+let PREC_BF16 = 3
+let PREC_FP8  = 4
+let PREC_INT8 = 5
+let PREC_INT4 = 6
+
+fn prec_name(p) {
+    if p == 0 { return "FP64" }
+    if p == 1 { return "FP32" }
+    if p == 2 { return "FP16" }
+    if p == 3 { return "BF16" }
+    if p == 4 { return "FP8" }
+    if p == 5 { return "INT8" }
+    return "INT4"
+}
+
+fn prec_bytes(p) {
+    if p == 0 { return 8.0 }
+    if p == 1 { return 4.0 }
+    if p == 2 { return 2.0 }
+    if p == 3 { return 2.0 }
+    if p == 4 { return 1.0 }
+    if p == 5 { return 1.0 }
+    return 0.5
+}
+
+// ── 유틸 함수 ──
+fn format_float(v, prec) {
+    if prec == 0 { return to_string(round(v)) }
+    let mut factor = 1.0
+    let mut i = 0
+    while i < prec { factor = factor * 10.0
+        i = i + 1 }
+    let mut rounded = round(v * factor) / factor
+    let mut s = to_string(rounded)
+    let mut has_dot = 0
+    let mut k = 0
+    while k < len(s) { if to_string(s[k]) == "." { has_dot = 1 }
+        k = k + 1 }
+    if has_dot == 0 { s = s + "." }
+    let mut dot_pos = -1
+    let mut j = 0
+    while j < len(s) { if to_string(s[j]) == "." { dot_pos = j }
+        j = j + 1 }
+    let mut dec_digits = len(s) - dot_pos - 1
+    while dec_digits < prec { s = s + "0"
+        dec_digits = dec_digits + 1 }
+    return s
+}
+
+fn repeat_str(s, n) {
+    let mut r = ""
+    let mut i = 0
+    while i < n { r = r + s
+        i = i + 1 }
+    return r
+}
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    return r
+}
+
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    return r
+}
+
+fn max_f(a, b) {
+    if a > b { return a }
+    return b
+}
+
+fn min_f(a, b) {
+    if a < b { return a }
+    return b
+}
+
+fn abs_f(x) {
+    if x < 0.0 { return 0.0 - x }
+    return x
+}
+
+fn separator(w) {
+    println(repeat_str("=", w))
+}
+
+fn print_header(title) {
+    let mut w = 90
+    println("")
+    separator(w)
+    let mut plen = w - len(title) - 4
+    if plen < 0 { plen = 0 }
+    let mut half = plen / 2
+    println(repeat_str("=", half) + "  " + title + "  " + repeat_str("=", half))
+    separator(w)
+}
+
+fn fmt_tflops(v) {
+    if v >= 1000.0 {
+        return pad_l(format_float(v / 1000.0, 1), 10) + " PFLOPS"
+    }
+    if v >= 1.0 {
+        return pad_l(format_float(v, 1), 10) + " TFLOPS"
+    }
+    return pad_l(format_float(v * 1000.0, 1), 10) + " GFLOPS"
+}
+
+// ── 칩 스펙 parallel arrays ──
+// [0]=ANIMA-HEXA  [1]=HEXA-OMEGA  [2]=HEXA-EDGE  [3]=H100  [4]=B200  [5]=GB300  [6]=MI350X
+let chip_names = ["ANIMA-HEXA", "HEXA-OMEGA", "HEXA-EDGE", "NVIDIA H100", "NVIDIA B200", "NVIDIA GB300", "AMD MI350X"]
+let chip_codes = ["Conscious AI SoC", "Ultimate Training GPU", "Edge/Mobile SoC", "Hopper", "Blackwell", "Grace-Blackwell", "CDNA4"]
+let chip_sm    = [144.0, 144.0, 12.0, 132.0, 160.0, 160.0, 304.0]
+let chip_freq  = [1.5, 2.0, 2.0, 1.83, 1.8, 1.8, 1.7]
+let chip_tdp   = [120.0, 288.0, 6.0, 700.0, 1000.0, 1400.0, 750.0]
+let chip_fp8   = [576.0, 2048.0, 48.0, 512.0, 1250.0, 1250.0, 350.0]
+let chip_fp16  = [288.0, 1024.0, 24.0, 256.0, 625.0, 625.0, 175.0]
+let chip_fp32c = [256.0, 256.0, 24.0, 128.0, 128.0, 128.0, 64.0]
+let chip_int8  = [1152.0, 4096.0, 96.0, 1024.0, 2500.0, 2500.0, 700.0]
+let chip_mtype = ["HBM4E", "HBM4E", "LPDDR5X", "HBM3", "HBM3E", "HBM3E", "HBM3E"]
+let chip_memgb = [24.0, 288.0, 8.0, 80.0, 192.0, 288.0, 288.0]
+let chip_bw    = [2000.0, 8000.0, 48.0, 3350.0, 8000.0, 12000.0, 8000.0]
+let chip_eff   = [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.80]
+let chip_nvl   = [0.0, 8.0, 0.0, 18.0, 18.0, 18.0, 0.0]
+let chip_nvbw  = [0.0, 120.0, 0.0, 50.0, 100.0, 100.0, 0.0]
+let chip_cost  = [1500.0, 25000.0, 80.0, 30000.0, 40000.0, 70000.0, 25000.0]
+let chip_die   = [400.0, 600.0, 72.0, 814.0, 900.0, 900.0, 750.0]
+let chip_trans = [144.0, 144.0, 24.0, 80.0, 208.0, 208.0, 153.0]
+let chip_proc  = ["TSMC N2", "TSMC N2", "TSMC N2", "TSMC N4", "TSMC N4P", "TSMC N4P", "TSMC N3"]
+
+fn peak_tflops(ci, p) {
+    let mut ops = 0.0
+    if p == PREC_FP64 {
+        ops = chip_fp32c[ci] / PHI_CONST
+    }
+    if p == PREC_FP32 {
+        ops = chip_fp32c[ci] * 2.0
+    }
+    if p == PREC_FP16 {
+        ops = chip_fp16[ci]
+    }
+    if p == PREC_BF16 {
+        ops = chip_fp16[ci]
+    }
+    if p == PREC_FP8 {
+        ops = chip_fp8[ci]
+    }
+    if p == PREC_INT8 {
+        ops = chip_int8[ci]
+    }
+    if p == PREC_INT4 {
+        ops = chip_int8[ci] * PHI_CONST
+    }
+    return chip_sm[ci] * ops * chip_freq[ci] / 1000.0
+}
+
+fn eff_bw(ci) {
+    return chip_bw[ci] * chip_eff[ci]
+}
+
+fn ridge_point(ci, p) {
+    let mut compute = peak_tflops(ci, p) * 1000000000000.0
+    let mut bw = eff_bw(ci) * 1000000000.0
+    return compute / bw
+}
+
+fn nvlink_total_bw(ci) {
+    return chip_nvl[ci] * chip_nvbw[ci]
+}
+
+fn edge_npu_tops_int8() { return 72.0 }
+fn edge_npu_tops_int4() { return 144.0 }
+
+// ── 워크로드 parallel arrays ──
+// [0]=GPT-3 175B  [1]=GPT-4 MoE  [2]=Llama-3 70B  [3]=SDXL
+let wl_names   = ["GPT-3 175B", "GPT-4 ~1.8T MoE", "Llama-3 70B train", "Stable Diffusion XL"]
+let wl_descs   = ["175B dense, inference", "~1.8T MoE, 8 experts top-2, inference", "70B dense, training (fwd+bwd)", "SDXL 50-step, 1024x1024"]
+let wl_params  = [175.0, 1800.0, 70.0, 6.6]
+let wl_prec    = [PREC_FP16, PREC_FP8, PREC_BF16, PREC_FP16]
+let wl_flops   = [350000000000.0, 600000000000.0, 420000000000.0, 30000000000.0]
+let wl_memgb   = [350.0, 1800.0, 560.0, 13.2]
+let wl_oi      = [87.5, 25.0, 150.0, 200.0]
+
+// ── 루프라인 워크로드 ──
+let rl_names = ["Transformer Attn (short seq)", "Transformer Attn (long seq)", "MoE Forward", "Mamba SSM", "LoRA Inference", "Convolution 3x3", "GEMM (large)", "Softmax", "LayerNorm", "Elementwise"]
+let rl_oi    = [8.0, 64.0, 5.0, 20.0, 100.0, 150.0, 200.0, 1.5, 2.0, 0.5]
+
+// ── 섹션: Raw FLOPS/TOPS ──
+fn print_compute(ci, is_edge) {
+    println("")
+    println("  (a) Raw FLOPS/TOPS by Precision")
+    println("  +-----------+------------------+-----------+--------------+")
+    println("  | Precision |   Peak Throughput | TOPS val  | TOPS/W       |")
+    println("  +-----------+------------------+-----------+--------------+")
+    let mut pi = 0
+    while pi <= 6 {
+        let mut tf = peak_tflops(ci, pi)
+        if is_edge == 1 {
+            if pi == PREC_INT8 { tf = tf + edge_npu_tops_int8() }
+            if pi == PREC_INT4 { tf = tf + edge_npu_tops_int4() }
+        }
+        let mut topsw = tf * 1000.0 / chip_tdp[ci]
+        println("  | " + pad_r(prec_name(pi), 9) + " | " + fmt_tflops(tf) + " | " + pad_l(format_float(tf, 1), 9) + " | " + pad_l(format_float(topsw, 1), 8) + " G/W  |")
+        pi = pi + 1
+    }
+    println("  +-----------+------------------+-----------+--------------+")
+    println("")
+    println("  SMs/CUs: " + format_float(chip_sm[ci], 0) + "  |  Freq: " + format_float(chip_freq[ci], 2) + " GHz  |  TDP: " + format_float(chip_tdp[ci], 0) + "W  |  Process: " + chip_proc[ci])
+}
+
+// ── 섹션: 메모리 대역폭 ──
+fn print_memory(ci) {
+    println("")
+    println("  (b) Memory Bandwidth")
+    println("  +-------------------+-------------------+")
+    println("  | Parameter         | Value             |")
+    println("  +-------------------+-------------------+")
+    println("  | Type              | " + pad_r(chip_mtype[ci], 17) + " |")
+    println("  | Capacity          | " + pad_l(format_float(chip_memgb[ci], 0), 8) + " GB        |")
+    println("  | Peak BW           | " + pad_l(format_float(chip_bw[ci], 0), 8) + " GB/s      |")
+    println("  | Peak BW           | " + pad_l(format_float(chip_bw[ci] / 1000.0, 2), 8) + " TB/s      |")
+    println("  | Efficiency        | " + pad_l(format_float(chip_eff[ci] * 100.0, 0), 8) + "%          |")
+    println("  | Effective BW      | " + pad_l(format_float(eff_bw(ci), 0), 8) + " GB/s      |")
+    println("  | Effective BW      | " + pad_l(format_float(eff_bw(ci) / 1000.0, 2), 8) + " TB/s      |")
+    println("  +-------------------+-------------------+")
+}
+
+// ── 섹션: Roofline 모델 ──
+fn print_roofline(ci) {
+    println("")
+    println("  (c) Roofline Model")
+    let mut prec = PREC_FP16
+    let mut ptf = peak_tflops(ci, prec)
+    let mut ebw = eff_bw(ci)
+    let mut ridge = ridge_point(ci, prec)
+    println("")
+    println("  Compute ceiling (FP16): " + fmt_tflops(ptf) + " (" + format_float(ptf, 1) + " TFLOPS)")
+    println("  Memory BW ceiling:      " + format_float(ebw, 0) + " GB/s effective")
+    println("  Ridge point:            " + format_float(ridge, 1) + " FLOP/Byte")
+    println("")
+
+    let mut plot_w = 72
+    let mut plot_h = 16
+    let mut oi_min_log = -1.0
+    let mut oi_max_log = 3.0
+    let mut peak_gflops = ptf * 1000.0
+
+    // 그리드 — 문자 배열 대신 행별 문자열 사용
+    // grid[row] = 72글자 문자열
+    let mut grid = ["        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        ", "        "]
+
+    // 빈 행 72글자로 초기화
+    let mut ri = 0
+    while ri < plot_h {
+        grid[ri] = repeat_str(" ", plot_w)
+        ri = ri + 1
+    }
+
+    // set_char: row의 x번째 문자를 c로 교체
+    fn set_char(row_str, x, c) {
+        let mut left = ""
+        let mut right = ""
+        let mut k = 0
+        while k < len(row_str) {
+            if k < x { left = left + to_string(row_str[k]) }
+            if k > x  { right = right + to_string(row_str[k]) }
+            k = k + 1
+        }
+        return left + c + right
+    }
+
+    fn oi_to_x(oi) {
+        let mut l = ln(oi) / ln(10.0)
+        let mut frac = (l - oi_min_log) / (oi_max_log - oi_min_log)
+        let mut xf = frac * plot_w
+        if xf < 0.0 { xf = 0.0 }
+        if xf > plot_w - 1.0 { xf = plot_w - 1.0 }
+        return floor(xf)
+    }
+
+    fn gflops_to_y(g) {
+        let mut gv = g
+        if gv < 1.0 { gv = 1.0 }
+        let mut l = ln(gv) / ln(10.0)
+        let mut y_max_l = ln(peak_gflops * 1.5) / ln(10.0)
+        let mut frac = (l - 0.0) / (y_max_l - 0.0)
+        let mut row = floor((1.0 - frac) * plot_h)
+        if row < 0.0 { row = 0.0 }
+        if row > plot_h - 1.0 { row = plot_h - 1.0 }
+        return row
+    }
+
+    // Roofline 그리기
+    let mut x = 0
+    while x < plot_w {
+        let mut oi = pow(10.0, oi_min_log + (x / plot_w) * (oi_max_log - oi_min_log))
+        let mut perf_bw = oi * ebw
+        let mut perf = min_f(perf_bw, peak_gflops)
+        if perf >= 1.0 {
+            let mut y = gflops_to_y(perf)
+            let mut yi = floor(y)
+            if yi < plot_h {
+                let mut ch = "-"
+                if oi < ridge { ch = "/" }
+                grid[yi] = set_char(grid[yi], x, ch)
+            }
+        }
+        x = x + 1
+    }
+
+    // Ridge 포인트 표시
+    let mut rx = floor(oi_to_x(ridge))
+    let mut ry = floor(gflops_to_y(peak_gflops))
+    if ry < plot_h {
+        if rx < plot_w {
+            grid[ry] = set_char(grid[ry], rx, "^")
+        }
+    }
+
+    // 워크로드 마커
+    let rl_markers = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    let mut wi = 0
+    while wi < len(rl_names) {
+        let mut woi = rl_oi[wi]
+        let mut wperf = min_f(woi * ebw, peak_gflops)
+        if wperf >= 1.0 {
+            let mut wx = floor(oi_to_x(woi))
+            let mut wy = floor(gflops_to_y(wperf))
+            if wy < plot_h {
+                if wx < plot_w {
+                    grid[wy] = set_char(grid[wy], wx, rl_markers[wi])
+                }
+            }
+        }
+        wi = wi + 1
+    }
+
+    // 플롯 출력
+    let mut y_max_l = ln(peak_gflops * 1.5) / ln(10.0)
+    println("  GFLOPS")
+    let mut row = 0
+    while row < plot_h {
+        let mut g = pow(10.0, y_max_l - (row / plot_h) * y_max_l)
+        let mut lbl = "        "
+        if row == 0 { lbl = pad_l(format_float(g, 0), 8) }
+        if row == plot_h / 4 { lbl = pad_l(format_float(g, 0), 8) }
+        if row == plot_h / 2 { lbl = pad_l(format_float(g, 0), 8) }
+        if row == 3 * plot_h / 4 { lbl = pad_l(format_float(g, 0), 8) }
+        if row == plot_h - 1 { lbl = pad_l(format_float(g, 0), 8) }
+        println("  " + lbl + " |" + grid[row])
+        row = row + 1
+    }
+    println("          +" + repeat_str("-", plot_w))
+    println("           0.1            1             10            100           1000")
+    println("                               Operational Intensity (FLOP/Byte)")
+
+    println("")
+    println("  Legend:  ^ = Ridge Point (" + format_float(ridge, 1) + " FLOP/B)")
+    let mut li = 0
+    while li < len(rl_names) {
+        let mut woi = rl_oi[li]
+        let mut wperf = min_f(woi * ebw, peak_gflops)
+        let mut bound = "COMPUTE-BOUND"
+        if woi < ridge { bound = "MEM-BOUND    " }
+        let mut achieved = fmt_tflops(wperf / 1000.0)
+        println("    " + rl_markers[li] + " = " + pad_r(rl_names[li], 32) + " OI=" + pad_l(format_float(woi, 1), 6) + "  " + bound + "  " + achieved)
+        li = li + 1
+    }
+}
+
+// ── 섹션: AI 워크로드 추정 ──
+fn print_workloads(ci) {
+    println("")
+    println("  (d) AI Workload Estimates")
+    println("")
+    println("  +----------------------------+------------+-----------+------------+---------------+")
+    println("  | Workload                   | tok/s      | Mem (GB)  | Bottleneck | Utilization   |")
+    println("  +----------------------------+------------+-----------+------------+---------------+")
+    let mut wi = 0
+    while wi < len(wl_names) {
+        let mut peak_f = peak_tflops(ci, wl_prec[wi]) * 1000000000000.0
+        let mut ebw_f = eff_bw(ci) * 1000000000.0
+        let mut fits = 1
+        if wl_memgb[wi] > chip_memgb[ci] { fits = 0 }
+        let mut comp_time = wl_flops[wi] / peak_f
+        let mut bytes_tok = wl_params[wi] * 1000000000.0 * prec_bytes(wl_prec[wi])
+        let mut mem_time = bytes_tok / ebw_f
+        let mut actual_time = max_f(comp_time, mem_time)
+        let mut tps = 0.0
+        if actual_time > 0.0 { tps = 1.0 / actual_time }
+        let mut bneck = "COMPUTE   "
+        if fits == 0 { bneck = "NO FIT    " }
+        if fits == 1 {
+            if mem_time > comp_time { bneck = "MEMORY    " }
+        }
+        let mut util = 0.0
+        if actual_time > 0.0 { util = (wl_flops[wi] / (peak_f * actual_time)) * 100.0 }
+        let mut tok_str = format_float(tps, 1)
+        if fits == 0 {
+            tok_str = "N/A (" + format_float(wl_memgb[wi], 0) + "GB)"
+        }
+        if fits == 1 {
+            if wi == 3 {
+                let mut steps = 50.0
+                let mut tot_flops = wl_flops[wi] * steps * 1024.0
+                let mut img_t = tot_flops / peak_f
+                tok_str = format_float(1.0 / img_t, 2) + " img/s"
+            }
+        }
+        println("  | " + pad_r(wl_names[wi], 26) + " | " + pad_l(tok_str, 10) + " | " + pad_l(format_float(wl_memgb[wi], 0), 7) + " GB | " + pad_r(bneck, 10) + " | " + pad_l(format_float(util, 1), 8) + "%      |")
+        wi = wi + 1
+    }
+    println("  +----------------------------+------------+-----------+------------+---------------+")
+}
+
+// ── 섹션: EFA 절감 ──
+fn print_efa(ci) {
+    println("")
+    println("  (e) Egyptian Fraction Attention (EFA) Savings")
+    println("")
+    println("  EFA: 1/2 + 1/3 + 1/6 = 1  (Technique 17, BT-33)")
+    println("")
+    let mut d_model = 4096.0
+    let mut n_heads = 32.0
+    let mut d_head = d_model / n_heads
+    println("  d_model=" + format_float(d_model, 0) + "  n_heads=" + format_float(n_heads, 0) + "  d_head=" + format_float(d_head, 0))
+    println("")
+    println("  +----------+------------------+------------------+---------+------------------+")
+    println("  | Seq Len  | Standard TFLOPS  |   EFA TFLOPS     | Savings | Eff TFLOPS avail |")
+    println("  +----------+------------------+------------------+---------+------------------+")
+    let seq_lens = [2048.0, 4096.0, 8192.0, 32768.0]
+    let mut peak_fp16 = peak_tflops(ci, PREC_FP16)
+    let mut si = 0
+    while si < len(seq_lens) {
+        let mut seq = seq_lens[si]
+        let mut std_flops = 4.0 * seq * seq * d_model
+        let mut std_tf = std_flops / 1000000000000.0
+        let mut full_half = 0.5 * std_flops
+        let mut window = seq / N_CONST
+        let mut local_third = (1.0 / 3.0) * (4.0 * seq * window * d_model)
+        let mut sparse_sixth = (1.0 / N_CONST) * (4.0 * seq * (seq / N_CONST) * d_model)
+        let mut efa_flops = full_half + local_third + sparse_sixth
+        let mut efa_tf = efa_flops / 1000000000000.0
+        let mut savings = (1.0 - efa_flops / std_flops) * 100.0
+        let mut efa_mult = std_flops / efa_flops
+        let mut eff_tf = peak_fp16 * efa_mult
+        println("  | " + pad_l(format_float(seq, 0), 8) + " | " + pad_l(format_float(std_tf, 6), 12) + " TF   | " + pad_l(format_float(efa_tf, 6), 12) + " TF   | " + pad_l(format_float(savings, 1), 5) + "%  | " + pad_l(format_float(eff_tf, 1), 12) + " TF   |")
+        si = si + 1
+    }
+    println("  +----------+------------------+------------------+---------+------------------+")
+    println("")
+    println("  EFA budget: 1/2 global (full QKV)")
+    println("              1/3 local  (window = seq/" + format_float(N_CONST, 0) + ")")
+    println("              1/6 sparse (stride = " + format_float(N_CONST, 0) + ")")
+    println("  Average savings: ~40% of attention FLOPS")
+}
+
+// ── 섹션: 인터커넥트 ──
+fn print_interconnect(ci) {
+    println("")
+    println("  (f) Interconnect Performance")
+    println("")
+    if chip_nvl[ci] == 0.0 {
+        println("  [No NVLink -- standalone SoC]")
+        return
+    }
+    let mut total_bw = nvlink_total_bw(ci)
+    let mut bidir_bw = total_bw * 2.0
+    println("  NVLink Configuration:")
+    println("    Links:           " + format_float(chip_nvl[ci], 0))
+    println("    BW per link:     " + format_float(chip_nvbw[ci], 0) + " GB/s (unidirectional)")
+    println("    Total unidir:    " + format_float(total_bw, 0) + " GB/s")
+    println("    Total bidir:     " + format_float(bidir_bw, 0) + " GB/s (" + format_float(bidir_bw / 1000.0, 2) + " TB/s)")
+    println("")
+    let gpu_counts = [8.0, 64.0, 512.0, 4096.0]
+    let model_sizes = [2.0, 14.0, 140.0]
+    println("  All-Reduce Time (ring, ms):")
+    println("  +--------+----------+----------+----------+")
+    println("  | GPUs   | 1B grad  | 7B grad  | 70B grad |")
+    println("  +--------+----------+----------+----------+")
+    let mut gi = 0
+    while gi < len(gpu_counts) {
+        let mut ngpu = gpu_counts[gi]
+        let mut row = "  | " + pad_l(format_float(ngpu, 0), 6) + " |"
+        let mut mi = 0
+        while mi < len(model_sizes) {
+            let mut sz_gb = model_sizes[mi]
+            let mut data_bytes = sz_gb * 1000000000.0
+            let mut factor = 2.0 * (ngpu - 1.0) / ngpu
+            let mut time_s = factor * data_bytes / (total_bw * 1000000000.0)
+            let mut time_ms = time_s * 1000.0
+            row = row + " " + pad_l(format_float(time_ms, 2), 7) + " ms|"
+            mi = mi + 1
+        }
+        println(row)
+        gi = gi + 1
+    }
+    println("  +--------+----------+----------+----------+")
+    println("")
+    println("  SuperPOD Scaling Efficiency:")
+    println("  +--------+-------------------+--------------------+")
+    println("  | GPUs   | Comm/Compute Ratio| Scaling Efficiency |")
+    println("  +--------+-------------------+--------------------+")
+    let mut base_compute_ms = 10.0
+    let mut gi2 = 0
+    while gi2 < len(gpu_counts) {
+        let mut ngpu = gpu_counts[gi2]
+        let mut grad_gb = 14.0
+        let mut factor = 2.0 * (ngpu - 1.0) / ngpu
+        let mut comm_ms = factor * grad_gb * 1000000000.0 / (total_bw * 1000000000.0) * 1000.0
+        let mut ratio = comm_ms / base_compute_ms
+        let mut eff = base_compute_ms / (base_compute_ms + comm_ms) * 100.0
+        println("  | " + pad_l(format_float(ngpu, 0), 6) + " | " + pad_l(format_float(ratio, 3), 17) + " | " + pad_l(format_float(eff, 1), 16) + "%   |")
+        gi2 = gi2 + 1
+    }
+    println("  +--------+-------------------+--------------------+")
+    println("")
+    println("  Communication/Computation Overlap: estimated 80-90% with pipeline parallelism")
+}
+
+// ── 섹션: 비교표 ──
+fn print_comparison(ci) {
+    println("")
+    println("  (g) Comparison vs Industry")
+    println("")
+    println("  +-------------------+----------+----------+--------+---------+----------+---------+")
+    println("  | Chip              | FP8 TF   | FP16 TF  | Mem GB | BW TB/s | TFLOP/W  | TFLOP/$ |")
+    println("  +-------------------+----------+----------+--------+---------+----------+---------+")
+    // 타겟 칩 먼저
+    let mut t_fp8  = peak_tflops(ci, PREC_FP8)
+    let mut t_fp16 = peak_tflops(ci, PREC_FP16)
+    let mut t_tpw  = t_fp8 * 1000.0 / chip_tdp[ci]
+    let mut t_tpd  = 0.0
+    if chip_cost[ci] > 0.0 { t_tpd = t_fp8 * 1000.0 / chip_cost[ci] }
+    println("  | " + pad_r(chip_names[ci], 17) + " | " + pad_l(format_float(t_fp8, 1), 7) + "  | " + pad_l(format_float(t_fp16, 1), 7) + "  | " + pad_l(format_float(chip_memgb[ci], 0), 5) + "  | " + pad_l(format_float(chip_bw[ci] / 1000.0, 2), 6) + "  | " + pad_l(format_float(t_tpw, 2), 7) + "  | " + pad_l(format_float(t_tpd, 3), 6) + "  | <--")
+    // 나머지 칩
+    let mut other = 0
+    while other < len(chip_names) {
+        if other != ci {
+            let mut fp8  = peak_tflops(other, PREC_FP8)
+            let mut fp16 = peak_tflops(other, PREC_FP16)
+            let mut tpw  = fp8 * 1000.0 / chip_tdp[other]
+            let mut tpd  = 0.0
+            if chip_cost[other] > 0.0 { tpd = fp8 * 1000.0 / chip_cost[other] }
+            println("  | " + pad_r(chip_names[other], 17) + " | " + pad_l(format_float(fp8, 1), 7) + "  | " + pad_l(format_float(fp16, 1), 7) + "  | " + pad_l(format_float(chip_memgb[other], 0), 5) + "  | " + pad_l(format_float(chip_bw[other] / 1000.0, 2), 6) + "  | " + pad_l(format_float(tpw, 2), 7) + "  | " + pad_l(format_float(tpd, 3), 6) + "  |")
+        }
+        other = other + 1
+    }
+    println("  +-------------------+----------+----------+--------+---------+----------+---------+")
+    println("")
+    // H100 대비 비율 (index=3)
+    let mut h_fp8  = peak_tflops(3, PREC_FP8)
+    let mut h_fp16 = peak_tflops(3, PREC_FP16)
+    println("  vs H100 ratios:")
+    println("    FP8:     " + format_float(t_fp8 / h_fp8, 1) + "x")
+    println("    FP16:    " + format_float(t_fp16 / h_fp16, 1) + "x")
+    println("    Mem:     " + format_float(chip_memgb[ci] / chip_memgb[3], 1) + "x")
+    println("    BW:      " + format_float(chip_bw[ci] / chip_bw[3], 1) + "x")
+    println("    TFLOP/W: " + format_float((t_fp8 / chip_tdp[ci]) / (h_fp8 / chip_tdp[3]), 1) + "x")
+}
+
+// ── 섹션: N6 일관성 검사 ──
+fn print_n6_check(ci) {
+    println("")
+    println("  N6 Arithmetic Consistency:")
+    println("  +-----------------------------+------------+------------------+-------+")
+    println("  | Parameter                   | Value      | N6 Formula       | EXACT |")
+    println("  +-----------------------------+------------+------------------+-------+")
+    let chk_names   = ["SM count", "TDP (W)", "Memory (GB)", "NVLink links", "Die area (mm2)", "Transistors (B)"]
+    let chk_vals    = [chip_sm[ci], chip_tdp[ci], chip_memgb[ci], chip_nvl[ci], chip_die[ci], chip_trans[ci]]
+    let chk_formulas= ["sigma^2=144", "varies", "varies", "sigma-tau=8", "varies", "sigma^2=144"]
+    let chk_targets = [SIGMA_SQ_CONST, chip_tdp[ci], chip_memgb[ci], SIGMA_TAU_CONST, chip_die[ci], SIGMA_SQ_CONST]
+    let mut exact = 0
+    let mut total = 0
+    let mut ki = 0
+    while ki < len(chk_names) {
+        let mut v = chk_vals[ki]
+        let mut t = chk_targets[ki]
+        if t == 0.0 {
+            if v == 0.0 {
+                ki = ki + 1
+                continue
+            }
+        }
+        total = total + 1
+        let mut is_exact = 0
+        if abs_f(v - t) < 0.01 { is_exact = 1 }
+        if t != 0.0 {
+            if abs_f(v / t - 1.0) < 0.01 { is_exact = 1 }
+        }
+        if is_exact == 1 { exact = exact + 1 }
+        let mut mark = "~    "
+        if is_exact == 1 { mark = "YES  " }
+        println("  | " + pad_r(chk_names[ki], 27) + " | " + pad_l(format_float(v, 1), 10) + " | " + pad_r(chk_formulas[ki], 16) + " | " + mark + " |")
+        ki = ki + 1
+    }
+    println("  +-----------------------------+------------+------------------+-------+")
+    println("  N6 EXACT: " + to_string(exact) + "/" + to_string(total))
+}
+
+// ── 칩 종합 분석 ──
+fn analyze_chip(ci, is_edge) {
+    print_header(chip_names[ci])
+    println("  Codename: " + chip_codes[ci] + "  |  Process: " + chip_proc[ci] + "  |  Die: " + format_float(chip_die[ci], 0) + " mm2  |  TDP: " + format_float(chip_tdp[ci], 0) + "W")
+    print_compute(ci, is_edge)
+    print_memory(ci)
+    print_roofline(ci)
+    print_workloads(ci)
+    print_efa(ci)
+    print_interconnect(ci)
+    print_comparison(ci)
+    print_n6_check(ci)
+}
+
+// ── 워크로드별 분석 ──
+fn analyze_workload(model_key) {
+    let mut found = -1
+    let mut wi = 0
+    while wi < len(wl_names) {
+        if found == -1 {
+            // 간단한 키워드 매칭
+            let mut nm = wl_names[wi]
+            if model_key == "GPT-3" {
+                if wi == 0 { found = wi }
+            }
+            if model_key == "GPT-4" {
+                if wi == 1 { found = wi }
+            }
+            if model_key == "Llama" {
+                if wi == 2 { found = wi }
+            }
+            if model_key == "Llama-3" {
+                if wi == 2 { found = wi }
+            }
+            if model_key == "Stable" {
+                if wi == 3 { found = wi }
+            }
+        }
+        wi = wi + 1
+    }
+    if found == -1 {
+        println("Unknown workload: " + model_key)
+        println("Available: GPT-3, GPT-4, Llama-3, Stable")
+        return
+    }
+    let mut w = found
+    print_header("Workload Analysis: " + wl_names[w])
+    println("  " + wl_descs[w])
+    println("  Parameters: " + format_float(wl_params[w], 1) + "B  |  Precision: " + prec_name(wl_prec[w]) + "  |  FLOPS/token: " + format_float(wl_flops[w], 1))
+    println("  Memory required: " + format_float(wl_memgb[w], 0) + " GB  |  Typical OI: " + format_float(wl_oi[w], 1) + " FLOP/B")
+    println("")
+    println("  +-------------------+----------+----------+---------+------------+----------+")
+    println("  | Chip              | tok/s    | Fits?    | BNeck   | Util %     | Latency  |")
+    println("  +-------------------+----------+----------+---------+------------+----------+")
+    let chip_is_edge = [0, 0, 1, 0, 0, 0, 0]
+    let mut ci = 0
+    while ci < len(chip_names) {
+        let mut peak_f = peak_tflops(ci, wl_prec[w]) * 1000000000000.0
+        let mut ebw_f = eff_bw(ci) * 1000000000.0
+        let mut fits = 1
+        if wl_memgb[w] > chip_memgb[ci] { fits = 0 }
+        let mut comp_time = wl_flops[w] / peak_f
+        let mut bytes_tok = wl_params[w] * 1000000000.0 * prec_bytes(wl_prec[w])
+        let mut mem_time = bytes_tok / ebw_f
+        let mut actual_time = max_f(comp_time, mem_time)
+        let mut tps = 0.0
+        if actual_time > 0.0 { tps = 1.0 / actual_time }
+        let mut bneck = "COMPUTE"
+        if fits == 0 { bneck = "NO FIT " }
+        if fits == 1 {
+            if mem_time > comp_time { bneck = "MEMORY " }
+        }
+        let mut util = 0.0
+        if actual_time > 0.0 { util = (wl_flops[w] / (peak_f * actual_time)) * 100.0 }
+        let mut tok_str = format_float(tps, 1)
+        if fits == 0 { tok_str = "N/A" }
+        let mut lat_str = format_float(actual_time * 1000.0, 3) + " ms"
+        if fits == 0 { lat_str = "N/A" }
+        let mut fits_str = "YES     "
+        if fits == 0 { fits_str = "NO      " }
+        println("  | " + pad_r(chip_names[ci], 17) + " | " + pad_l(tok_str, 8) + " | " + fits_str + " | " + bneck + " | " + pad_l(format_float(util, 1), 8) + "%   | " + pad_l(lat_str, 8) + " |")
+        ci = ci + 1
+    }
+    println("  +-------------------+----------+----------+---------+------------+----------+")
+}
+
+fn row3(lbl, v0, v1, v2) {
+    println("  | " + pad_r(lbl, 17) + " | " + pad_r(v0, 14) + " | " + pad_r(v1, 14) + " | " + pad_r(v2, 14) + " |")
+}
+
+// ── 요약 테이블 ──
+fn print_summary() {
+    print_header("N6 CHIP FAMILY SUMMARY")
+    // ci: 0=ANIMA, 1=OMEGA, 2=EDGE
+    println("  +-------------------+----------------+----------------+----------------+")
+    println("  | Parameter         | ANIMA-HEXA     | HEXA-OMEGA     | HEXA-EDGE      |")
+    println("  +-------------------+----------------+----------------+----------------+")
+    row3("Role", "Consciousness AI", "Training GPU", "Edge/Mobile")
+    row3("SMs/Cores", format_float(chip_sm[0], 0) + " SMs", format_float(chip_sm[1], 0) + " SMs", format_float(chip_sm[2], 0) + " shaders")
+    row3("Frequency", format_float(chip_freq[0], 1) + " GHz", format_float(chip_freq[1], 1) + " GHz", format_float(chip_freq[2], 1) + " GHz")
+    row3("TDP", format_float(chip_tdp[0], 0) + "W", format_float(chip_tdp[1], 0) + "W", format_float(chip_tdp[2], 0) + "W")
+    row3("FP8 TFLOPS", format_float(peak_tflops(0, PREC_FP8), 1), format_float(peak_tflops(1, PREC_FP8), 1), format_float(peak_tflops(2, PREC_FP8), 1) + " +NPU")
+    row3("FP16 TFLOPS", format_float(peak_tflops(0, PREC_FP16), 1), format_float(peak_tflops(1, PREC_FP16), 1), format_float(peak_tflops(2, PREC_FP16), 1))
+    row3("INT8 TOPS", format_float(peak_tflops(0, PREC_INT8), 1), format_float(peak_tflops(1, PREC_INT8), 1), format_float(peak_tflops(2, PREC_INT8) + edge_npu_tops_int8(), 1) + " (72 NPU)")
+    row3("Memory", format_float(chip_memgb[0], 0) + " GB " + chip_mtype[0], format_float(chip_memgb[1], 0) + " GB " + chip_mtype[1], format_float(chip_memgb[2], 0) + " GB " + chip_mtype[2])
+    row3("Bandwidth", format_float(chip_bw[0] / 1000.0, 1) + " TB/s", format_float(chip_bw[1] / 1000.0, 1) + " TB/s", format_float(chip_bw[2], 1) + " GB/s")
+    row3("NVLink", "N/A (SoC)", format_float(chip_nvl[1], 0) + " links, " + format_float(nvlink_total_bw(1), 0) + " GB/s", "N/A (SoC)")
+    row3("Die Area", format_float(chip_die[0], 0) + " mm2", format_float(chip_die[1], 0) + " mm2", format_float(chip_die[2], 0) + " mm2")
+    row3("Process", chip_proc[0], chip_proc[1], chip_proc[2])
+    row3("Transistors", format_float(chip_trans[0], 0) + "B", format_float(chip_trans[1], 0) + "B", format_float(chip_trans[2], 0) + "B")
+    row3("Est. Cost", "$" + format_float(chip_cost[0], 0), "$" + format_float(chip_cost[1], 0), "$" + format_float(chip_cost[2], 0))
+    row3("FP8 TFLOP/W", format_float(peak_tflops(0, PREC_FP8) * 1000.0 / chip_tdp[0], 2), format_float(peak_tflops(1, PREC_FP8) * 1000.0 / chip_tdp[1], 2), format_float(peak_tflops(2, PREC_FP8) * 1000.0 / chip_tdp[2], 2))
+    println("  +-------------------+----------------+----------------+----------------+")
+    println("")
+    println("  N6 design: sigma(n)*phi(n) = n*tau(n) = 24 = J_2(6)")
+    println("  All chip parameters derived from n=6 perfect number arithmetic")
+}
+
+fn print_usage() {
+    println("chip-perf-calc -- N6 칩 성능 추정기 (Roofline 모델)")
+    println("")
+    println("Usage:")
+    println("  hexa main.hexa              All 3 chips (ANIMA-HEXA, HEXA-OMEGA, HEXA-EDGE)")
+    println("  hexa main.hexa anima        ANIMA-HEXA only")
+    println("  hexa main.hexa omega        HEXA-OMEGA only")
+    println("  hexa main.hexa edge         HEXA-EDGE only")
+    println("  hexa main.hexa workload MODEL_NAME")
+    println("                              Models: GPT-3, GPT-4, Llama-3, Stable")
+    println("")
+    println("N6 Constants: n=6 phi=2 tau=4 sigma=12 J2=24 sigma^2=144")
+}
+
+// ── 메인 진입점 ──
+println("")
+println("  ================================================================")
+println("  N6 Chip Performance Estimator with Roofline Model")
+println("  sigma(6)*phi(6) = 6*tau(6) = 24 = J_2(6)")
+println("  ================================================================")
+
+// args(0): [0]=hexa binary, [1]=script path, [2..]=실제 인자
+let mut a_args = args(0)
+let mut nargs = len(a_args)
+
+if nargs < 3 {
+    print_summary()
+    analyze_chip(0, 0)
+    analyze_chip(1, 0)
+    analyze_chip(2, 1)
+} else {
+    let mut cmd = a_args[2]
+    if cmd == "anima" {
+        analyze_chip(0, 0)
+    } else {
+        if cmd == "omega" {
+            analyze_chip(1, 0)
+        } else {
+            if cmd == "edge" {
+                analyze_chip(2, 1)
+            } else {
+                if cmd == "workload" {
+                    if nargs < 4 {
+                        println("Usage: hexa main.hexa workload MODEL_NAME")
+                        println("Models: GPT-3, GPT-4, Llama-3, Stable")
+                    } else {
+                        analyze_workload(a_args[3])
+                    }
+                } else {
+                    if cmd == "help" {
+                        print_usage()
+                    } else {
+                        if cmd == "--help" {
+                            print_usage()
+                        } else {
+                            if cmd == "-h" {
+                                print_usage()
+                            } else {
+                                println("Unknown option: " + cmd)
+                                print_usage()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+println("")

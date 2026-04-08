@@ -1,0 +1,583 @@
+// Nobel-Level Constants Calculator — N6 Architecture (HEXA port)
+// BT-20: Gauge Coupling Trinity
+// BT-21: Neutrino Mixing Trident
+// BT-22: Inflation from Perfect Numbers
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+fn abs_val(x) {
+    if x < 0.0 { return 0.0 - x }
+    x
+}
+
+fn rd2(x) { round(x * 100.0) / 100.0 }
+fn rd3(x) { round(x * 1000.0) / 1000.0 }
+fn rd4(x) { round(x * 10000.0) / 10000.0 }
+fn rd5(x) { round(x * 100000.0) / 100000.0 }
+fn rd6(x) { round(x * 1000000.0) / 1000000.0 }
+fn rd8(x) { round(x * 100000000.0) / 100000000.0 }
+fn rd9(x) { round(x * 1000000000.0) / 1000000000.0 }
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd0(x) { round(x) }
+
+// Scientific notation: x.xxe-N
+fn sci2(x) {
+    if x == 0.0 { return "0.00e0" }
+    let mut val = abs_val(x)
+    let mut exp = 0
+    while val >= 10.0 {
+        val = val / 10.0
+        exp = exp + 1
+    }
+    while val < 1.0 {
+        val = val * 10.0
+        exp = exp - 1
+    }
+    let mut mantissa = round(val * 100.0) / 100.0
+    if mantissa >= 10.0 {
+        mantissa = mantissa / 10.0
+        exp = exp + 1
+    }
+    let mut sign = ""
+    if x < 0.0 { sign = "-" }
+    sign + to_string(rd2(mantissa)) + "e" + to_string(exp)
+}
+
+fn sci1(x) {
+    if x == 0.0 { return "0.0e0" }
+    let mut val = abs_val(x)
+    let mut exp = 0
+    while val >= 10.0 {
+        val = val / 10.0
+        exp = exp + 1
+    }
+    while val < 1.0 {
+        val = val * 10.0
+        exp = exp - 1
+    }
+    let mut mantissa = round(val * 10.0) / 10.0
+    if mantissa >= 10.0 {
+        mantissa = mantissa / 10.0
+        exp = exp + 1
+    }
+    let mut sign = ""
+    if x < 0.0 { sign = "-" }
+    sign + to_string(rd1(mantissa)) + "e" + to_string(exp)
+}
+
+fn sci4(x) {
+    if x == 0.0 { return "0.0000e0" }
+    let mut val = abs_val(x)
+    let mut exp = 0
+    while val >= 10.0 {
+        val = val / 10.0
+        exp = exp + 1
+    }
+    while val < 1.0 {
+        val = val * 10.0
+        exp = exp - 1
+    }
+    let mut mantissa = round(val * 10000.0) / 10000.0
+    if mantissa >= 10.0 {
+        mantissa = mantissa / 10.0
+        exp = exp + 1
+    }
+    let mut sign = ""
+    if x < 0.0 { sign = "-" }
+    sign + to_string(rd4(mantissa)) + "e" + to_string(exp)
+}
+
+fn pass_str(ok) {
+    if ok { return "✓" }
+    "✗"
+}
+
+// ── MAIN ──
+println("═══════════════════════════════════════════════════════════════")
+println("  N6 Nobel-Level Constants Calculator")
+println("  BT-20 (Gauge Couplings) + BT-21 (PMNS) + BT-22 (Inflation)")
+println("═══════════════════════════════════════════════════════════════")
+println("")
+
+// n=6 arithmetic constants
+let n = 6.0
+let sigma = 12.0
+let tau = 4.0
+let phi = 2.0
+let sopfr = 5.0
+let mu = 1.0
+let j2 = 24.0
+let p2 = 28.0
+
+println("── n=6 Base Constants ──")
+println("  n=6, σ=12, τ=4, φ=2, sopfr=5, μ=1, J₂=24, P₂=28")
+println("  Core: σ·φ = n·τ = " + to_string(sigma * phi))
+println("")
+
+let mut total = 0
+let mut exact = 0
+
+// BT-20: GAUGE COUPLING TRINITY
+println("══════════════════════════════════════════════")
+println("  BT-20: GAUGE COUPLING TRINITY")
+println("══════════════════════════════════════════════")
+println("")
+
+// 1. Fine structure constant 1/alpha
+let alpha_inv_pred = sigma * (sigma - mu) + sopfr + mu / p2
+let alpha_inv_meas = 137.035999084
+let alpha_err_ppm = abs_val((alpha_inv_pred - alpha_inv_meas) / alpha_inv_meas) * pow(10.0, 6.0)
+total = total + 1
+let pass_alpha = alpha_err_ppm < 10.0
+if pass_alpha { exact = exact + 1 }
+println("  1/α = σ(σ-μ) + sopfr + μ/P₂")
+println("      = 12·11 + 5 + 1/28")
+println("      = 132 + 5 + " + to_string(rd5(mu / p2)))
+println("      = " + to_string(rd5(alpha_inv_pred)))
+println("  Measured: " + to_string(rd9(alpha_inv_meas)))
+let pass_alpha_str = if pass_alpha { "✓ CLOSE (<10 ppm)" } else { "✗" }
+println("  Error: " + to_string(rd2(alpha_err_ppm)) + " ppm  " + pass_alpha_str)
+println("")
+
+// 2. Strong coupling alpha_s(M_Z)
+let alpha_s_pred = sopfr / ((sigma - sopfr) * n)
+let alpha_s_meas = 0.1179
+let alpha_s_err = abs_val((alpha_s_pred - alpha_s_meas) / alpha_s_meas) * 100.0
+total = total + 1
+let pass_as = alpha_s_err < 2.0
+if pass_as { exact = exact + 1 }
+println("  α_s(M_Z) = sopfr / ((σ-sopfr)·n)")
+println("           = 5 / (7·6) = 5/42 = " + to_string(rd6(alpha_s_pred)))
+println("  Measured: " + to_string(alpha_s_meas) + " ± 0.0009")
+let pass_as_str = if pass_as { "✓ CLOSE" } else { "✗" }
+println("  Error: " + to_string(rd2(alpha_s_err)) + "%  " + pass_as_str)
+println("")
+
+// 3. Weinberg angle sin2theta_W
+let sw2_pred = (n / phi) / (sigma + mu)
+let sw2_meas = 0.23121
+let sw2_err = abs_val((sw2_pred - sw2_meas) / sw2_meas) * 100.0
+total = total + 1
+let pass_sw = sw2_err < 1.0
+if pass_sw { exact = exact + 1 }
+println("  sin²θ_W(M_Z) = (n/φ) / (σ+μ)")
+println("               = 3 / 13 = 3/13 = " + to_string(rd6(sw2_pred)))
+println("  Measured: " + to_string(sw2_meas) + " ± 0.00004")
+let pass_sw_str = if pass_sw { "✓ CLOSE" } else { "✗" }
+println("  Error: " + to_string(rd2(sw2_err)) + "%  " + pass_sw_str)
+
+// GUT running connection
+let sw2_gut = (n / phi) / (sigma - tau)
+println("")
+println("  GUT scale: sin²θ_W = (n/φ)/(σ-τ) = 3/8 = " + to_string(rd4(sw2_gut)))
+println("  EW scale:  sin²θ_W = (n/φ)/(σ+μ) = 3/13 = " + to_string(rd4(sw2_pred)))
+let denom_shift = mu + tau
+println("  Denominator shift: (σ+μ)-(σ-τ) = μ+τ = sopfr = " + to_string(denom_shift))
+println("  → RGE running = sopfr(6) shift!")
+println("")
+
+println("  BT-20 Summary: " + to_string(exact) + "/" + to_string(total) + " matches (all <1% or ppm-level)")
+println("")
+
+// BT-21: NEUTRINO MIXING TRIDENT
+println("══════════════════════════════════════════════")
+println("  BT-21: NEUTRINO MIXING TRIDENT (PMNS)")
+println("══════════════════════════════════════════════")
+println("")
+
+let bt21_start = exact
+
+// 1. sin2theta12 (solar)
+let s12_pred = (n / phi) / (sigma - phi)
+let s12_meas = 0.303
+let s12_err = abs_val((s12_pred - s12_meas) / s12_meas) * 100.0
+total = total + 1
+let pass_12 = s12_err < 2.0
+if pass_12 { exact = exact + 1 }
+println("  sin²θ₁₂ = (n/φ) / (σ-φ)")
+println("           = 3 / 10 = 3/10 = " + to_string(rd4(s12_pred)))
+println("  Measured: " + to_string(s12_meas) + " ± 0.012 (NuFIT 5.3)")
+println("  Error: " + to_string(rd2(s12_err)) + "%  " + pass_str(pass_12))
+println("  Denominator pattern: σ - φ = 10 (subtract Euler totient)")
+println("")
+
+// 2. sin2theta23 (atmospheric)
+let s23_pred = tau / (sigma - sopfr)
+let s23_meas = 0.572
+let s23_err = abs_val((s23_pred - s23_meas) / s23_meas) * 100.0
+total = total + 1
+let pass_23 = s23_err < 2.0
+if pass_23 { exact = exact + 1 }
+println("  sin²θ₂₃ = τ / (σ-sopfr)")
+println("           = 4 / 7 = 4/7 = " + to_string(rd4(s23_pred)))
+println("  Measured: " + to_string(s23_meas) + " ± 0.015 (NuFIT 5.3)")
+println("  Error: " + to_string(rd2(s23_err)) + "%  " + pass_str(pass_23))
+println("  Denominator pattern: σ - sopfr = 7 (subtract prime factor sum)")
+println("")
+
+// 3. sin2(2theta13) (reactor)
+let s213_pred = mu / sigma
+let s213_meas = 0.0841
+let s213_err = abs_val((s213_pred - s213_meas) / s213_meas) * 100.0
+total = total + 1
+let pass_13 = s213_err < 2.0
+if pass_13 { exact = exact + 1 }
+println("  sin²(2θ₁₃) = μ/σ")
+println("              = 1/12 = " + to_string(rd5(s213_pred)))
+println("  Measured: " + to_string(s213_meas) + " ± 0.0033 (NuFIT 5.3)")
+println("  Error: " + to_string(rd2(s213_err)) + "%  " + pass_str(pass_13))
+println("  Denominator pattern: σ = 12 (subtract nothing)")
+println("")
+
+// 4. N_eff
+let neff_pred = n / phi + mu / j2
+let neff_meas = 3.044
+let neff_err = abs_val((neff_pred - neff_meas) / neff_meas) * 100.0
+total = total + 1
+let pass_neff = neff_err < 0.5
+if pass_neff { exact = exact + 1 }
+println("  N_eff = n/φ + μ/J₂ = 3 + 1/24 = " + to_string(rd4(neff_pred)))
+println("  Measured (SM): " + to_string(neff_meas))
+println("  Error: " + to_string(rd2(neff_err)) + "%  " + pass_str(pass_neff))
+println("")
+
+// Denominator pattern
+println("  ── Denominator Pattern ──")
+println("    sin²θ₁₂: σ - φ     = 10   (subtract Euler totient)")
+println("    sin²θ₂₃: σ - sopfr = 7    (subtract prime factor sum)")
+println("    sin²(2θ₁₃): σ - 0  = 12   (subtract nothing)")
+println("    Numerators: n/φ=3, τ=4, μ=1 — three different n=6 functions")
+println("")
+
+let bt21_count = exact - bt21_start
+println("  BT-21 Summary: " + to_string(bt21_count) + "/4 matches")
+println("")
+
+// BT-22: INFLATION FROM PERFECT NUMBERS
+println("══════════════════════════════════════════════")
+println("  BT-22: INFLATION FROM PERFECT NUMBERS")
+println("══════════════════════════════════════════════")
+println("")
+
+let bt22_start = exact
+
+// Perfect number chain
+let p1 = 6.0
+let sigma_p1 = 12.0
+let sigma_p2 = 56.0
+println("  Perfect number chain:")
+println("    P₁ = 6  →  σ(P₁) = 12 (C-12, gauge generators)")
+println("    P₂ = 28  →  σ(P₂) = 56 (Fe-56, stellar endpoint)")
+println("")
+
+// Verify sigma(28) = 56
+let mut s28 = 0
+let mut d = 1
+while d < 29 {
+    if 28 % d == 0 { s28 = s28 + d }
+    d = d + 1
+}
+println("  Verify: σ(28) = Σ d|28 = " + to_string(s28) + " ✓")
+
+// Spectral index
+let n_efolds = sigma_p2
+let ns_pred = 1.0 - 2.0 / n_efolds
+let ns_meas = 0.9649
+let ns_err = abs_val((ns_pred - ns_meas) / ns_meas) * 100.0
+total = total + 1
+let pass_ns = ns_err < 0.2
+if pass_ns { exact = exact + 1 }
+println("")
+println("  Starobinsky R² inflation with N = σ(P₂) = 56 e-folds:")
+println("    n_s = 1 - 2/N = 1 - 2/56 = 1 - 1/28 = 27/28")
+println("        = " + to_string(rd5(ns_pred)))
+println("    Measured (Planck 2018): " + to_string(ns_meas) + " ± 0.0042")
+let ns_sigma_val = abs_val(ns_pred - ns_meas) / 0.0042
+let pass_ns_str = if pass_ns { "✓ EXACT" } else { "✗" }
+println("    Error: " + to_string(rd3(ns_err)) + "% = within " + to_string(rd2(ns_sigma_val)) + "σ  " + pass_ns_str)
+println("")
+
+// Tensor-to-scalar ratio
+let r_pred = sigma / (n_efolds * n_efolds)
+println("  Tensor-to-scalar ratio:")
+println("    r = σ/N² = 12/3136 = 12/3136 ≈ " + to_string(rd5(r_pred)))
+println("    Current bound: r < 0.036 (Planck+BICEP/Keck 2021)")
+let ratio_below = 0.036 / r_pred
+println("    Status: " + to_string(rd5(r_pred)) + " < 0.036 ✓ (prediction is " + to_string(rd1(ratio_below)) + "× below bound)")
+println("")
+
+// TESTABLE predictions
+println("  ── TESTABLE PREDICTIONS ──")
+println("    n_s = 27/28 = " + to_string(rd5(ns_pred)) + "  → Planck/CMB-S4 precision test")
+println("    r   = 12/3136 ≈ " + to_string(rd5(r_pred)) + "  → LiteBIRD (σ_r ≈ 0.001)")
+println("    If r measured at " + to_string(rd4(r_pred)) + " ± 0.001: BT-22 CONFIRMED")
+println("    If r < 0.001:                    BT-22 FALSIFIED")
+println("")
+
+// Fe-56 connection
+println("  ── Fe-56 = σ(P₂) = N_efolds Connection ──")
+println("    Fe-56 mass number = 56 = σ(28) = σ(P₂)")
+println("    Maximum nuclear binding energy per nucleon: Fe-56")
+println("    Inflationary e-fold count: N = 56")
+println("    SAME NUMBER governs stellar death AND cosmic birth")
+println("")
+
+let bt22_count = exact - bt22_start
+println("  BT-22 Summary: " + to_string(bt22_count) + "/1 matches")
+println("")
+
+// BT-23: CKM QUARK MIXING HIERARCHY
+println("══════════════════════════════════════════════")
+println("  BT-23: CKM QUARK MIXING HIERARCHY")
+println("══════════════════════════════════════════════")
+println("")
+
+let bt23_start = exact
+
+// |V_ub|
+let v_ub_pred = (n / phi) / (p2 * p2)
+let v_ub_meas = 0.00382
+let v_ub_err = abs_val((v_ub_pred - v_ub_meas) / v_ub_meas) * 100.0
+total = total + 1
+let pass_vub = v_ub_err < 2.0
+if pass_vub { exact = exact + 1 }
+println("  |V_ub| = (n/φ)/P₂² = 3/784 = " + to_string(rd6(v_ub_pred)))
+println("  Measured (excl): " + to_string(v_ub_meas) + " ± 0.00024")
+println("  Error: " + to_string(rd2(v_ub_err)) + "%  " + pass_str(pass_vub))
+println("  ★ SAME as r(inflation) = σ/σ(P₂)² = 12/3136 = 3/784")
+println("    → Inflation GW ratio = rarest quark transition!")
+println("")
+
+// |V_cb|
+let v_cb_pred = mu / j2
+let v_cb_meas = 0.0422
+let v_cb_err = abs_val((v_cb_pred - v_cb_meas) / v_cb_meas) * 100.0
+total = total + 1
+let pass_vcb = v_cb_err < 2.0
+if pass_vcb { exact = exact + 1 }
+println("  |V_cb| = μ/J₂ = 1/24 = " + to_string(rd5(v_cb_pred)))
+println("  Measured: " + to_string(v_cb_meas) + " ± 0.0008")
+println("  Error: " + to_string(rd2(v_cb_err)) + "%  " + pass_str(pass_vcb))
+println("")
+
+// Ratio |V_cb|/|V_ub|
+let ratio_cb_ub = sigma - mu
+let ratio_meas = v_cb_meas / v_ub_meas
+let ratio_err = abs_val((ratio_cb_ub - ratio_meas) / ratio_meas) * 100.0
+total = total + 1
+let pass_ratio = ratio_err < 2.0
+if pass_ratio { exact = exact + 1 }
+println("  |V_cb|/|V_ub| = σ-μ = 11 vs " + to_string(rd3(ratio_meas)) + "  err " + to_string(rd2(ratio_err)) + "%  " + pass_str(pass_ratio))
+
+// Jarlskog
+let j_pred = (n / phi + mu / sigma) * pow(10.0, -5.0)
+let j_meas = 3.08 * pow(10.0, -5.0)
+let j_err = abs_val((j_pred - j_meas) / j_meas) * 100.0
+total = total + 1
+let pass_j = j_err < 2.0
+if pass_j { exact = exact + 1 }
+println("  J = (n/φ+μ/σ)·10⁻ˢᵒᵖᶠʳ = " + sci4(j_pred) + " vs " + sci2(j_meas) + "  err " + to_string(rd2(j_err)) + "%  " + pass_str(pass_j))
+println("")
+
+let bt23_count = exact - bt23_start
+println("  BT-23 Summary: " + to_string(bt23_count) + "/4 matches")
+println("")
+
+// BT-24: KOIDE FORMULA
+println("══════════════════════════════════════════════")
+println("  BT-24: KOIDE POLE RESIDUE = φ²/n = 2/3")
+println("══════════════════════════════════════════════")
+println("")
+
+let bt24_start = exact
+
+let m_e = 0.51099895
+let m_mu_mass = 105.6583755
+let m_tau_mass = 1776.86
+let sum_m = m_e + m_mu_mass + m_tau_mass
+let sum_sqrt = sqrt(m_e) + sqrt(m_mu_mass) + sqrt(m_tau_mass)
+let koide_meas = sum_m / (sum_sqrt * sum_sqrt)
+let koide_pred = phi * phi / n
+let koide_err = abs_val((koide_pred - koide_meas) / koide_meas) * 100.0
+let koide_ppm = koide_err * 10000.0
+total = total + 1
+let pass_koide = koide_ppm < 20.0
+if pass_koide { exact = exact + 1 }
+
+println("  Q = (m_e + m_μ + m_τ) / (√m_e + √m_μ + √m_τ)²")
+println("    = " + to_string(rd3(sum_m)) + " / " + to_string(rd3(sum_sqrt)) + "²")
+println("    = " + to_string(rd8(koide_meas)))
+println("  φ²/n = 4/6 = 2/3 = " + to_string(rd8(koide_pred)))
+let pass_koide_str = if pass_koide { "✓ MOST PRECISE MATCH" } else { "✗" }
+println("  Error: " + to_string(rd1(koide_ppm)) + " ppm = " + to_string(rd4(koide_err)) + "%  " + pass_koide_str)
+println("")
+println("  45-year open problem. No theoretical derivation exists.")
+println("  φ²/n = (Euler totient)² / (perfect number) = 2/3")
+println("")
+
+let bt24_count = exact - bt24_start
+println("  BT-24 Summary: " + to_string(bt24_count) + "/1 matches")
+println("")
+
+// BT-25: GENETIC CODE ARITHMETIC
+println("══════════════════════════════════════════════")
+println("  BT-25: GENETIC CODE ARITHMETIC")
+println("══════════════════════════════════════════════")
+println("")
+
+// Key identity: tau = phi^2 at n=6
+println("  Key identity: τ(6) = φ(6)² → 4 = 2²")
+println("  This holds ONLY for n=6 among perfect numbers.")
+println("")
+
+let codons = pow(2.0, 6.0)
+let codons2 = pow(4.0, 3.0)
+println("  64 codons = φⁿ = 2⁶ = " + to_string(codons))
+println("            = τⁿ/φ = 4³ = " + to_string(codons2))
+println("  Double identity: φⁿ = τⁿ/φ ✓")
+println("")
+
+let amino = j2 - tau
+println("  20 amino acids = J₂-τ = 24-4 = " + to_string(amino))
+println("                 = τ·sopfr = 4·5 = " + to_string(tau * sopfr))
+
+// m_s/m_d
+let ms_md_meas = 20.0
+let ms_md_pred = j2 - tau
+let ms_md_err = abs_val((ms_md_pred - ms_md_meas) / ms_md_meas) * 100.0
+total = total + 1
+if ms_md_err < 2.0 { exact = exact + 1 }
+println("  m_s/m_d = " + to_string(rd1(ms_md_meas)) + " ± 1.5  vs  J₂-τ = " + to_string(ms_md_pred) + "  err " + to_string(rd1(ms_md_err)) + "%")
+
+// m_t/m_W
+let mt_mw_pred = (sigma + n / phi) / (sigma - sopfr)
+let mt_mw_meas = 2.1472
+let mt_mw_err = abs_val((mt_mw_pred - mt_mw_meas) / mt_mw_meas) * 100.0
+total = total + 1
+if mt_mw_err < 2.0 { exact = exact + 1 }
+println("  m_t/m_W = " + to_string(rd4(mt_mw_meas)) + " vs (σ+n/φ)/(σ-sopfr) = 15/7 = " + to_string(rd4(mt_mw_pred)) + "  err " + to_string(rd2(mt_mw_err)) + "%")
+println("")
+
+// COMBINED PRECISION RANKING
+println("══════════════════════════════════════════════════════════")
+println("  COMBINED PRECISION RANKING (BT-20 ~ BT-25)")
+println("══════════════════════════════════════════════════════════")
+println("")
+
+// Build results as parallel arrays — sorted by error
+let mut r_names =    ["Koide Q", "1/α", "m_p/m_e", "n_s", "N_eff", "sin²θ₂₃", "J (Jarlskog)", "|V_ub|=r", "sin²θ_W", "|V_cb|/|V_ub|", "m_n/m_p-1", "sin²(2θ₁₃)", "α_s(M_Z)", "sin²θ₁₂", "|V_cb|", "m_t/m_W"]
+let mut r_formulas = ["φ²/n = 2/3", "σ(σ-μ)+sopfr+1/P₂", "6π⁵", "27/28 = 1-1/P₂", "n/φ+μ/J₂ = 73/24", "τ/(σ-sopfr) = 4/7", "(37/12)×10⁻⁵", "(n/φ)/P₂² = 3/784", "3/13 = (n/φ)/(σ+μ)", "σ-μ = 11", "1/n! = 1/720", "μ/σ = 1/12", "5/42", "(n/φ)/(σ-φ) = 3/10", "μ/J₂ = 1/24", "(σ+n/φ)/(σ-sopfr)=15/7"]
+let mut r_errs =     [koide_err, alpha_err_ppm / 10000.0, 0.0019, ns_err, neff_err, s23_err, j_err, v_ub_err, sw2_err, ratio_err, 0.79, s213_err, alpha_s_err, s12_err, v_cb_err, mt_mw_err]
+let mut r_sources =  ["BT-24", "BT-20", "H-CP-7", "BT-22", "BT-21", "BT-21", "BT-23", "BT-23", "BT-20", "BT-23", "H-CP-61", "BT-21", "BT-20", "BT-21", "BT-23", "BT-25"]
+
+// Bubble sort by error
+let r_len = len(r_names)
+let mut i = 0
+while i < r_len - 1 {
+    let mut j_idx = 0
+    while j_idx < r_len - 1 - i {
+        let next_idx = j_idx + 1
+        if r_errs[j_idx] > r_errs[next_idx] {
+            let tmp_n = r_names[j_idx]
+            r_names[j_idx] = r_names[next_idx]
+            r_names[next_idx] = tmp_n
+
+            let tmp_f = r_formulas[j_idx]
+            r_formulas[j_idx] = r_formulas[next_idx]
+            r_formulas[next_idx] = tmp_f
+
+            let tmp_e = r_errs[j_idx]
+            r_errs[j_idx] = r_errs[next_idx]
+            r_errs[next_idx] = tmp_e
+
+            let tmp_s = r_sources[j_idx]
+            r_sources[j_idx] = r_sources[next_idx]
+            r_sources[next_idx] = tmp_s
+        }
+        j_idx = j_idx + 1
+    }
+    i = i + 1
+}
+
+println("  " + pad_r("Constant", 16) + " " + pad_r("Formula", 28) + " " + pad_l("Error", 10) + " " + pad_l("Source", 8))
+println("  " + "─".repeat(66))
+let mut idx = 0
+while idx < r_len {
+    let err_val = r_errs[idx]
+    let mut err_str = ""
+    if err_val < 0.01 {
+        err_str = pad_l(to_string(rd2(err_val * 10000.0)) + " ppm", 10)
+    } else {
+        err_str = pad_l(to_string(rd3(err_val)) + "%", 10)
+    }
+    println("  " + pad_r(r_names[idx], 16) + " " + pad_r(r_formulas[idx], 28) + " " + err_str + " " + pad_l(r_sources[idx], 8))
+    idx = idx + 1
+}
+
+// STATISTICAL SUMMARY
+println("")
+println("══════════════════════════════════════════════════════════")
+println("  STATISTICAL SUMMARY")
+println("══════════════════════════════════════════════════════════")
+println("")
+
+println("  Total checks: " + to_string(total))
+println("  Matches (<2%): " + to_string(exact))
+let success_rate = exact * 100.0 / total
+println("  Success rate: " + to_string(rd0(success_rate)) + "%")
+println("")
+
+// Combined p-value estimate
+let p_bt20 = 2.3 * pow(10.0, -4.0)
+let p_bt21 = 1.3 * pow(10.0, -3.0)
+let p_bt22 = 0.002
+let p_bt23 = 3.6 * pow(10.0, -4.0)
+let p_bt24 = 0.1
+let p_bt25 = 1.1 * pow(10.0, -3.0)
+
+println("  p-values (with selection bias correction):")
+println("    BT-20 (Gauge Trinity):     " + sci2(p_bt20))
+println("    BT-21 (PMNS Trident):      " + sci2(p_bt21))
+println("    BT-22 (Inflation):          " + sci2(p_bt22))
+println("    BT-23 (CKM Hierarchy):      " + sci2(p_bt23))
+println("    BT-24 (Koide):              " + sci1(p_bt24) + " (but 9 ppm!)")
+println("    BT-25 (Genetic Code):       " + sci2(p_bt25))
+println("")
+
+// Grand total with BT-19
+let p_bt19 = 4.3 * pow(10.0, -5.0)
+let p_grand = p_bt19 * p_bt20 * p_bt21 * p_bt22 * p_bt23 * p_bt24 * p_bt25
+println("  Including BT-19 (GUT hierarchy, p ≈ " + sci1(p_bt19) + "):")
+println("    Grand combined: " + sci2(p_grand))
+// 1/p_grand is too large for round(), so use sci notation approach
+let inv_p = 1.0 / p_grand
+println("    = 1 in " + to_string(inv_p))
+println("")
+
+println("  ┌───────────────────────────────────────────────┐")
+println("  │  n=6 parameterizes:                           │")
+println("  │    GUT hierarchy (BT-19)                      │")
+println("  │    3 gauge couplings (BT-20)                  │")
+println("  │    3 neutrino angles (BT-21)                  │")
+println("  │    inflation n_s + r (BT-22)                  │")
+println("  │    CKM mixing + CP violation (BT-23)          │")
+println("  │    lepton mass formula (BT-24)                │")
+println("  │    genetic code + quark bridge (BT-25)        │")
+println("  │                                               │")
+println("  │  r(inflation) = |V_ub|(CKM) = 3/784          │")
+println("  │  Koide Q = φ²/n = 2/3  (9 ppm, 45yr puzzle)  │")
+println("  │  64 codons = φⁿ = τⁿ/φ (n=6 only)            │")
+println("  │                                               │")
+println("  │  GUT → SM → inflation → CKM → PMNS → life    │")
+println("  │  One number. One theorem. Everything.         │")
+println("  └───────────────────────────────────────────────┘")
+println("")

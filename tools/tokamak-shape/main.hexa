@@ -1,0 +1,274 @@
+// Tokamak Shape Optimizer — n=6 매개변수 공간 탐색 (HEXA port)
+// Original: tools/tokamak-shape/main.rs
+
+let PI = 3.14159265358979
+let SIGMA = 12.0
+let TAU = 4.0
+let PHI = 2.0
+let SOPFR = 5.0
+let N6 = 6.0
+
+// ── 헬퍼 ──
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd2(x) { round(x * 100.0) / 100.0 }
+fn rd3(x) { round(x * 1000.0) / 1000.0 }
+
+fn pad_r(s, width) {
+    let mut result = s
+    while len(result) < width { result = result + " " }
+    result
+}
+fn pad_l(s, width) {
+    let mut result = s
+    while len(result) < width { result = " " + result }
+    result
+}
+
+fn aspect_ratio(r0, a) { r0 / a }
+fn epsilon(r0, a) { a / r0 }
+
+fn plasma_volume(r0, a, kappa) {
+    2.0 * PI * r0 * PI * a * a * kappa
+}
+
+fn greenwald_density(ip, a) {
+    ip / (PI * a * a)
+}
+
+fn tau_e_estimate(ip, bt, r0, a, kappa) {
+    let h = 0.0562
+    h * pow(ip, 0.93) * pow(bt, 0.15) * pow(r0, 1.97) * pow(a / r0, 0.58) * pow(kappa, 0.78) * pow(50.0, -0.69) * pow(1.0, 0.41) * pow(2.5, 0.19)
+}
+
+fn q_estimate(ip, bt, r0, a, kappa) {
+    let tau_e = tau_e_estimate(ip, bt, r0, a, kappa)
+    let n_gw = greenwald_density(ip, a)
+    let t_kev = 10.0
+    let triple = n_gw * t_kev * tau_e
+    triple / 5.0 * 10.0
+}
+
+fn n6_score(r0, a, kappa, delta, q95, bt) {
+    let mut score = 0.0
+    let ar = aspect_ratio(r0, a)
+    // R0 vs n=6
+    if abs(r0 - N6) / N6 < 0.01 { score = score + 1.0 }
+    else { if abs(r0 - N6) / N6 < 0.1 { score = score + 0.5 } }
+    // a vs phi=2
+    if abs(a - PHI) / PHI < 0.01 { score = score + 1.0 }
+    else { if abs(a - PHI) / PHI < 0.1 { score = score + 0.5 } }
+    // kappa vs phi=2
+    if abs(kappa - PHI) / PHI < 0.01 { score = score + 1.0 }
+    else { if abs(kappa - PHI) / PHI < 0.1 { score = score + 0.5 } }
+    // delta vs 1/3
+    let d_target = 1.0 / 3.0
+    if abs(delta - d_target) / d_target < 0.01 { score = score + 1.0 }
+    else { if abs(delta - d_target) / d_target < 0.1 { score = score + 0.5 } }
+    // A vs n/phi=3
+    let a_target = N6 / PHI
+    if abs(ar - a_target) / a_target < 0.01 { score = score + 1.0 }
+    else { if abs(ar - a_target) / a_target < 0.1 { score = score + 0.5 } }
+    // q95 vs sopfr=5
+    if abs(q95 - SOPFR) / SOPFR < 0.01 { score = score + 1.0 }
+    else { if abs(q95 - SOPFR) / SOPFR < 0.1 { score = score + 0.5 } }
+    // bt vs sigma=12
+    if abs(bt - SIGMA) / SIGMA < 0.01 { score = score + 1.0 }
+    else { if abs(bt - SIGMA) / SIGMA < 0.1 { score = score + 0.5 } }
+    score
+}
+
+fn n6_matches_str(r0, a, kappa, delta, q95, bt) {
+    let ar = aspect_ratio(r0, a)
+    let d_target = 1.0 / 3.0
+    let a_target = N6 / PHI
+    let checks_name = ["R₀", "a", "κ", "δ", "A", "q₉₅", "B_T"]
+    let checks_actual = [r0, a, kappa, delta, ar, q95, bt]
+    let checks_target = [N6, PHI, PHI, d_target, a_target, SOPFR, SIGMA]
+    let checks_expr = ["n", "φ", "φ", "1/3", "n/φ", "sopfr", "σ"]
+    let mut i = 0
+    while i < 7 {
+        let err = abs(checks_actual[i] - checks_target[i]) / checks_target[i]
+        if err < 0.01 {
+            println("    ✅ " + checks_name[i] + " = " + checks_expr[i] + " (EXACT)")
+        } else {
+            if err < 0.1 {
+                println("    ✅ " + checks_name[i] + " ≈ " + checks_expr[i] + " (" + to_string(round(err * 100.0)) + "%)")
+            }
+        }
+        i = i + 1
+    }
+}
+
+// ── 장치 데이터 (병렬 배열) ──
+let dev_name  = ["ITER", "KSTAR", "SPARC", "ARC", "N6-DESIGN"]
+let dev_r0    = [6.2, 1.8, 1.85, 3.3, 6.0]
+let dev_a     = [2.0, 0.5, 0.57, 1.1, 2.0]
+let dev_kappa = [1.7, 2.0, 1.97, 1.8, 2.0]
+let dev_delta = [0.33, 0.5, 0.54, 0.5, 0.333]
+let dev_q95   = [3.0, 5.0, 3.4, 4.5, 5.0]
+let dev_bt    = [5.3, 3.5, 12.2, 9.2, 12.0]
+let dev_ip    = [15.0, 2.0, 8.7, 7.8, 10.0]
+
+// ── 메인 ──
+println("╔══════════════════════════════════════════════════════╗")
+println("║  TOKAMAK SHAPE OPTIMIZER                            ║")
+println("║  n=6 매개변수 공간 탐색 + 물리 성능 벤치마크           ║")
+println("╚══════════════════════════════════════════════════════╝")
+
+// ── BENCHMARK ──
+println("")
+println("  ═══════════════════════════════════════════════════════════════════════")
+println("  Device        R₀     a     κ     δ     A   q₉₅   B_T  Vol(m³)   τ_E(s)  Q_est  N6_sc")
+println("  " + "─".repeat(85))
+
+let mut di = 0
+while di < 5 {
+    let r0 = dev_r0[di]
+    let a = dev_a[di]
+    let kappa = dev_kappa[di]
+    let delta = dev_delta[di]
+    let q95 = dev_q95[di]
+    let bt = dev_bt[di]
+    let ip = dev_ip[di]
+    let vol = plasma_volume(r0, a, kappa)
+    let te = tau_e_estimate(ip, bt, r0, a, kappa)
+    let qe = q_estimate(ip, bt, r0, a, kappa)
+    let n6s = n6_score(r0, a, kappa, delta, q95, bt)
+    let name = dev_name[di]
+    // 패딩 간소화: 공백으로 정렬
+    println(format("  {}   {}   {}  {}  {}   {}   {}   {}    {}    {}   {}    {}", pad_r(name, 10), rd1(r0), rd1(a), rd2(kappa), rd2(delta), rd1(aspect_ratio(r0, a)), rd1(q95), rd1(bt), rd1(vol), rd3(te), rd1(qe), rd1(n6s)))
+    di = di + 1
+}
+
+// ── PARAMETER SCAN ──
+println("")
+println("  ═══ PARAMETER SCAN: n=6 score vs physics performance ═══")
+println("")
+
+// 스캔 결과를 배열로 수집 — 병렬 배열 (최대 256 조합)
+let scan_a_vals = [1.0, 1.5, 2.0, 2.5]
+let scan_k_vals = [1.5, 1.7, 2.0, 2.2]
+let scan_b_vals = [5.0, 8.0, 10.0, 12.0]
+let scan_q_vals = [3.0, 4.0, 5.0, 6.0]
+
+// n6 score >= 4 인 것만 출력 (상위 20개 대신 간소화)
+println("  " + pad_l("N6_sc", 6) + " " + pad_l("Q_est", 8) + " Config")
+println("  " + "─".repeat(48))
+
+let mut top_count = 0
+// n6 score 내림차순 출력: 7, 6, 5, 4 순서로
+let mut target_sc = 7.0
+while target_sc >= 4.0 {
+    let mut ai = 0
+    while ai < 4 {
+        let sa = scan_a_vals[ai]
+        let mut ki = 0
+        while ki < 4 {
+            let sk = scan_k_vals[ki]
+            let mut bi = 0
+            while bi < 4 {
+                let sb = scan_b_vals[bi]
+                let mut qi = 0
+                while qi < 4 {
+                    let sq = scan_q_vals[qi]
+                    let sr0 = 3.0 * sa
+                    let sip = 5.0 * sa * sa * sb / (sq * sr0)
+                    let sc = n6_score(sr0, sa, sk, 0.333, sq, sb)
+                    if sc == target_sc && top_count < 20 {
+                        let qe = q_estimate(sip, sb, sr0, sa, sk)
+                        let cfg = "a" + to_string(round(sa * 10.0)) + "k" + to_string(round(sk * 10.0)) + "b" + to_string(round(sb)) + "q" + to_string(round(sq))
+                        let marker = if sc >= 4.0 { " ◄── HIGH N6" } else { "" }
+                        println("  " + pad_l(to_string(rd1(sc)), 6) + " " + pad_l(to_string(rd1(qe)), 8) + " " + pad_r(cfg, 30) + marker)
+                        top_count = top_count + 1
+                    }
+                    qi = qi + 1
+                }
+                bi = bi + 1
+            }
+            ki = ki + 1
+        }
+        ai = ai + 1
+    }
+    target_sc = target_sc - 1.0
+}
+
+// ── PARETO FRONT ──
+println("")
+println("  ═══ PARETO FRONT: n=6 score vs Q ═══")
+println("")
+println("  " + pad_l("N6_sc", 6) + " " + pad_l("Best_Q", 8) + " Config")
+println("  " + "─".repeat(48))
+
+// 각 score 레벨에서 최대 Q 찾기
+let pareto_scores = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0]
+let mut pi2 = 0
+while pi2 < 6 {
+    let ps = pareto_scores[pi2]
+    let mut best_q = 0.0
+    let mut best_cfg = ""
+    let mut ai = 0
+    while ai < 4 {
+        let sa = scan_a_vals[ai]
+        let mut ki = 0
+        while ki < 4 {
+            let sk = scan_k_vals[ki]
+            let mut bi = 0
+            while bi < 4 {
+                let sb = scan_b_vals[bi]
+                let mut qi = 0
+                while qi < 4 {
+                    let sq = scan_q_vals[qi]
+                    let sr0 = 3.0 * sa
+                    let sip = 5.0 * sa * sa * sb / (sq * sr0)
+                    let sc = n6_score(sr0, sa, sk, 0.333, sq, sb)
+                    // score를 0.5 단위로 버킷
+                    let bucket = round(sc * 2.0) / 2.0
+                    if bucket == ps {
+                        let qe = q_estimate(sip, sb, sr0, sa, sk)
+                        if qe > best_q {
+                            best_q = qe
+                            best_cfg = "a" + to_string(round(sa * 10.0)) + "k" + to_string(round(sk * 10.0)) + "b" + to_string(round(sb)) + "q" + to_string(round(sq))
+                        }
+                    }
+                    qi = qi + 1
+                }
+                bi = bi + 1
+            }
+            ki = ki + 1
+        }
+        ai = ai + 1
+    }
+    if best_q > 0.0 {
+        println("  " + pad_l(to_string(rd1(ps)), 6) + " " + pad_l(to_string(rd1(best_q)), 8) + " " + pad_r(best_cfg, 30))
+    }
+    pi2 = pi2 + 1
+}
+
+// ── N6 DESIGN ANALYSIS ──
+println("")
+println("  ═══ N6 DESIGN ANALYSIS ═══")
+println("")
+let n6_r0 = 6.0
+let n6_a = 2.0
+let n6_kappa = 2.0
+let n6_delta = 0.333
+let n6_q95 = 5.0
+let n6_bt = 12.0
+let n6_ip = 10.0
+let n6_vol = plasma_volume(n6_r0, n6_a, n6_kappa)
+let n6_te = tau_e_estimate(n6_ip, n6_bt, n6_r0, n6_a, n6_kappa)
+let n6_qe = q_estimate(n6_ip, n6_bt, n6_r0, n6_a, n6_kappa)
+let n6_sc = n6_score(n6_r0, n6_a, n6_kappa, n6_delta, n6_q95, n6_bt)
+println(format("  N6 Design: R₀={}, a={}, κ={}, δ={}, q₉₅={}, B_T={}T", n6_r0, n6_a, n6_kappa, n6_delta, n6_q95, n6_bt))
+println(format("  Volume: {} m³", rd1(n6_vol)))
+println(format("  τ_E estimate: {} s", rd3(n6_te)))
+println(format("  Q estimate: {}", rd1(n6_qe)))
+println(format("  N6 match score: {}/7", rd1(n6_sc)))
+println("  Matches:")
+n6_matches_str(n6_r0, n6_a, n6_kappa, n6_delta, n6_q95, n6_bt)
+
+println("")
+println("  ═══ KEY FINDING ═══")
+println("  n=6 최적 설계 (A=3, κ=2, δ=1/3, B_T=12T)가")
+println("  ITER/SPARC 수준의 Q를 달성할 수 있는지?")
+println("  → τ_E와 Q 추정치로 판단")

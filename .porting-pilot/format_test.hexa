@@ -1,0 +1,9 @@
+// Test: format() width/precision specifiers
+let s = format("[{:<8}]", "SU(5)")
+println(s)
+let r = format("[{:>2}]", 4)
+println(r)
+let f = format("[{:.4}]", 0.0028)
+println(f)
+let m = format("{} rank = {} vs {} = {}", "SU(5)", 4, "tau(6)", 4)
+println(m)

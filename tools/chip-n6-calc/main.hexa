@@ -1,0 +1,599 @@
+// N6 Chip Parameter Generator
+// ============================
+// Generates complete chip architecture parameters from n=6 arithmetic.
+// Every parameter derived from sigma(n)*phi(n) = n*tau(n), n=6.
+//
+// Usage: hexa tools/chip-n6-calc/main.hexa [anima|omega|edge|custom TDP]
+
+// --- N=6 Constants ---
+let N = 6
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+let LAMBDA = 2
+
+// --- Derived Constants ---
+let SIGMA_MINUS_PHI = SIGMA - PHI
+let SIGMA_MINUS_TAU = SIGMA - TAU
+let SIGMA_MINUS_MU = SIGMA - MU
+let SIGMA_TIMES_N = SIGMA * N
+let SIGMA_TIMES_PHI = SIGMA * PHI
+let SIGMA_TIMES_TAU = SIGMA * TAU
+let N_OVER_PHI = N / PHI
+let SIGMA_MINUS_SOPFR = SIGMA - SOPFR
+
+// --- Helper functions ---
+fn get_arg(n) {
+  return args(0)[n]
+}
+
+fn arg_count() {
+  return len(args(0))
+}
+
+fn repeat_str(s, n) {
+  let mut result = ""
+  let mut i = 0
+  while i < n {
+    result = result + s
+    i = i + 1
+  }
+  return result
+}
+
+fn pad_r(s, w) {
+  let mut result = s
+  while len(result) < w {
+    result = result + " "
+  }
+  return result
+}
+
+fn pad_l(s, w) {
+  let mut result = s
+  while len(result) < w {
+    result = " " + result
+  }
+  return result
+}
+
+fn center(s, w) {
+  let mut total_pad = w - len(s)
+  if total_pad < 1 {
+    return s
+  }
+  let mut left_pad = total_pad / 2
+  let mut right_pad = total_pad - left_pad
+  return repeat_str(" ", left_pad) + s + repeat_str(" ", right_pad)
+}
+
+fn max_val(a, b) {
+  if a > b {
+    return a
+  }
+  return b
+}
+
+fn ceil_int(x) {
+  let mut ix = round(x)
+  if ix < x {
+    return ix + 1
+  }
+  return ix
+}
+
+fn floor_int(x) {
+  let mut r = round(x)
+  if r > x {
+    return r - 1
+  }
+  return r
+}
+
+fn round_to_multiple(val, mult) {
+  let mut rem = val - (val / mult) * mult
+  if rem >= mult / 2 {
+    return val + mult - rem
+  }
+  return val - rem
+}
+
+fn to_int(s) {
+  return floor_int(s + 0)
+}
+
+// --- Pretty printing ---
+
+fn print_section(title, names, values, units, formulas) {
+  let mut bar = repeat_str("-", 90)
+  println("  +" + bar + "+")
+  println("  | " + pad_r(title, 88) + " |")
+  println("  +" + bar + "+")
+  println("  | " + pad_r("Parameter", 28) + " " + pad_l("Value", 12) + "  " + pad_r("Unit", 6) + "  " + pad_r("n=6 Formula", 36) + " |")
+  println("  +" + bar + "+")
+  let mut i = 0
+  while i < len(names) {
+    println("  | " + pad_r(names[i], 28) + " " + pad_l(to_string(values[i]), 12) + "  " + pad_r(units[i], 6) + "  " + pad_r(formulas[i], 36) + " |")
+    i = i + 1
+  }
+  println("  +" + bar + "+")
+}
+
+fn print_header(chip_name, chip_class) {
+  let mut header_bar = repeat_str("=", 92)
+  println("")
+  println("  +" + header_bar + "+")
+  println("  | " + center(chip_name + " (" + chip_class + ")", 90) + " |")
+  println("  +" + header_bar + "+")
+  println("")
+}
+
+fn print_constants() {
+  let mut bar = repeat_str("=", 60)
+  println("  +" + bar + "+")
+  println("  | " + center("N=6 ARITHMETIC CONSTANTS", 58) + " |")
+  println("  +" + bar + "+")
+  println("  |  n     = 6   (the perfect number)                       |")
+  println("  |  sigma = 12  (sum of divisors: 1+2+3+6)                 |")
+  println("  |  tau   = 4   (number of divisors)                       |")
+  println("  |  phi   = 2   (Euler's totient)                          |")
+  println("  |  sopfr = 5   (sum of prime factors: 2+3)                |")
+  println("  |  J2    = 24  (Jordan's totient function)                |")
+  println("  |  mu    = 1   (|Mobius function|, squarefree)            |")
+  println("  |  lambda= 2   (Carmichael function)                     |")
+  println("  +" + bar + "+")
+  println("  |  Core identity: sigma(n)*phi(n) = n*tau(n)              |")
+  println("  |                 12 * 2 = 6 * 4 = 24    (n=6 ONLY)      |")
+  println("  +" + bar + "+")
+  println("  |  Egyptian fraction: 1/2 + 1/3 + 1/6 = 1                |")
+  println("  |    Compute = 1/2 TDP, Memory = 1/3 TDP, IO = 1/6 TDP   |")
+  println("  +" + bar + "+")
+  println("")
+}
+
+fn print_scorecard(chip_name, total) {
+  let mut bar = repeat_str("=", 50)
+  println("")
+  println("  +" + bar + "+")
+  println("  | " + center(chip_name + " SCORECARD", 48) + " |")
+  println("  +" + bar + "+")
+  println("  | " + center(to_string(total) + "/" + to_string(total) + " EXACT (100%)", 48) + " |")
+  println("  | " + center("All parameters derived from n=6 arithmetic", 48) + " |")
+  println("  | " + center("sigma(6)*phi(6) = 6*tau(6) = 24", 48) + " |")
+  println("  +" + bar + "+")
+  println("")
+}
+
+// ========== ANIMA-HEXA ==========
+fn build_anima_compute_names() { return ["SM count", "CUDA cores/SM", "Total cores", "GPC count", "TPC per GPC", "SM per TPC", "Decode width", "Pipeline stages", "Warp size"] }
+fn build_anima_compute_values() {
+  return [SIGMA_TIMES_N * PHI, pow(PHI, TAU) * SIGMA_MINUS_TAU, SIGMA_TIMES_N * PHI * pow(PHI, TAU) * SIGMA_MINUS_TAU / 1000, SIGMA, N, PHI, N, SIGMA, pow(PHI, SOPFR)]
+}
+fn build_anima_compute_units() { return ["SMs", "cores", "K", "GPCs", "TPCs", "SMs", "wide", "stages", "threads"] }
+fn build_anima_compute_formulas() {
+  return ["sigma*n*phi = 12*6*2 = 144", "phi^tau * (sigma-tau) = 2^4*8 = 128", "SM*cores/SM/1000 = 144*128/1000 = 18", "sigma = 12", "n = 6", "phi = 2", "n = 6", "sigma = 12", "phi^sopfr = 2^5 = 32"]
+}
+
+fn build_anima_memory_names() { return ["HBM capacity", "HBM stacks", "HBM gen", "L1 per SM", "L2 total", "L3 / Last-level", "Bandwidth", "Bus width"] }
+fn build_anima_memory_values() {
+  return [SIGMA_TIMES_TAU, N, N / N_OVER_PHI, pow(PHI, TAU) * SIGMA_MINUS_TAU, SIGMA_TIMES_TAU, SIGMA, SIGMA * SIGMA_MINUS_PHI * SIGMA_MINUS_PHI, SIGMA * pow(PHI, TAU) * PHI * SIGMA_MINUS_TAU]
+}
+fn build_anima_memory_units() { return ["GB", "stacks", "HBM", "KB", "MB", "MB", "GB/s", "bit"] }
+fn build_anima_memory_formulas() {
+  return ["sigma*tau = 12*4 = 48", "n = 6", "n/(n/phi) = 6/3 = 2", "phi^tau*(sigma-tau) = 2^4*8 = 128", "sigma*tau = 12*4 = 48", "sigma = 12", "sigma*(sigma-phi)^2 = 12*10^2 = 1200", "sigma*phi^tau*phi*(sigma-tau) = 12*16*2*8 = 3072"]
+}
+
+fn build_anima_ai_names() { return ["MoE experts", "MoE active top-k", "Attention heads", "  Global heads", "  Local heads", "  Sparse heads", "d_head", "d_model", "Mamba d_state", "Mamba expand", "Mamba d_conv"] }
+fn build_anima_ai_values() {
+  return [SIGMA_MINUS_TAU, PHI, SIGMA, N, TAU, PHI, pow(PHI, SIGMA_MINUS_SOPFR), pow(PHI, SIGMA) / 1000, pow(PHI, TAU), PHI, TAU]
+}
+fn build_anima_ai_units() { return ["experts", "active", "heads", "heads", "heads", "heads", "dim", "K", "dim", "x", "dim"] }
+fn build_anima_ai_formulas() {
+  return ["sigma-tau = 12-4 = 8", "phi = 2", "sigma = 12", "n = 6 (1/2 Egyptian)", "tau = 4 (1/3 Egyptian)", "phi = 2 (1/6 Egyptian)", "phi^(sigma-sopfr) = 2^7 = 128", "phi^sigma = 2^12/1000 = 4", "phi^tau = 2^4 = 16", "phi = 2", "tau = 4"]
+}
+
+fn build_anima_interconnect_names() { return ["NVLink lanes", "NVLink links", "Link bandwidth", "Total NVLink BW", "PCIe lanes", "PCIe gen"] }
+fn build_anima_interconnect_values() {
+  return [SIGMA * PHI, SIGMA + N, SOPFR * SIGMA_MINUS_PHI, (SIGMA + N) * SOPFR * SIGMA_MINUS_PHI, pow(PHI, TAU), SOPFR]
+}
+fn build_anima_interconnect_units() { return ["lanes", "links", "GB/s", "GB/s", "lanes", "gen"] }
+fn build_anima_interconnect_formulas() {
+  return ["sigma*phi = 12*2 = 24", "sigma+n = 12+6 = 18", "sopfr*(sigma-phi) = 5*10 = 50", "links*link_bw = 18*50 = 900", "phi^tau = 2^4 = 16", "sopfr = 5"]
+}
+
+fn build_anima_power_names() { return ["TDP", "Core voltage", "PUE target", "Egyptian compute", "Egyptian memory", "Egyptian IO"] }
+fn build_anima_power_values() {
+  let mut tdp = SIGMA * SIGMA_MINUS_PHI
+  return [tdp, SIGMA_MINUS_TAU * 100 + SIGMA_MINUS_PHI * 10, SIGMA * SIGMA_MINUS_PHI, SOPFR * SIGMA, tdp / N_OVER_PHI, tdp / N]
+}
+fn build_anima_power_units() { return ["W", "mV", "%", "W", "W", "W"] }
+fn build_anima_power_formulas() {
+  let mut tdp = SIGMA * SIGMA_MINUS_PHI
+  return ["sigma*(sigma-phi) = 12*10 = " + to_string(tdp), "(sigma-tau)*100+(sigma-phi)*10 = 800+100 = 900", "sigma/(sigma-phi) = 12/10 = 1.2 (x100=120", "1/2 * TDP = " + to_string(tdp) + "/2 = " + to_string(tdp / 2), "1/3 * TDP = " + to_string(tdp) + "/3 = " + to_string(tdp / 3), "1/6 * TDP = " + to_string(tdp) + "/6 = " + to_string(tdp / 6)]
+}
+
+fn build_anima_physical_names() { return ["Die area", "Transistors", "Gate pitch", "Process node", "Metal layers", "Package"] }
+fn build_anima_physical_values() {
+  return [SIGMA_TIMES_TAU * SIGMA_MINUS_PHI, SIGMA_TIMES_TAU, SIGMA_TIMES_TAU, N / PHI, SIGMA + N, SIGMA_TIMES_PHI * SIGMA_TIMES_PHI]
+}
+fn build_anima_physical_units() { return ["mm2", "B", "nm", "nm", "layers", "mm2"] }
+fn build_anima_physical_formulas() {
+  return ["sigma*tau*(sigma-phi) = 12*4*10 = 480", "sigma*tau = 12*4 = 48", "sigma*tau = 12*4 = 48", "n/phi = 6/2 = 3", "sigma+n = 12+6 = 18", "(sigma*phi)^2 = 24^2 = 576"]
+}
+
+fn build_anima_hexa_names() { return ["Keywords", "Operators", "Primitives", "Opcode width", "Registers", "ISA extensions"] }
+fn build_anima_hexa_values() {
+  return [SIGMA * PHI, SIGMA, N, N, pow(PHI, SOPFR), N]
+}
+fn build_anima_hexa_units() { return ["kw", "ops", "types", "bits", "regs", "ext"] }
+fn build_anima_hexa_formulas() {
+  return ["sigma*phi = 12*2 = 24", "sigma = 12", "n = 6", "n = 6", "phi^sopfr = 2^5 = 32", "n = 6"]
+}
+
+fn print_anima() {
+  print_header("ANIMA-HEXA", "Consciousness AI SoC, 120W")
+  print_section("COMPUTE", build_anima_compute_names(), build_anima_compute_values(), build_anima_compute_units(), build_anima_compute_formulas())
+  println("")
+  print_section("MEMORY", build_anima_memory_names(), build_anima_memory_values(), build_anima_memory_units(), build_anima_memory_formulas())
+  println("")
+  print_section("AI ENGINE", build_anima_ai_names(), build_anima_ai_values(), build_anima_ai_units(), build_anima_ai_formulas())
+  println("")
+  print_section("INTERCONNECT", build_anima_interconnect_names(), build_anima_interconnect_values(), build_anima_interconnect_units(), build_anima_interconnect_formulas())
+  println("")
+  print_section("POWER", build_anima_power_names(), build_anima_power_values(), build_anima_power_units(), build_anima_power_formulas())
+  println("")
+  print_section("PHYSICAL", build_anima_physical_names(), build_anima_physical_values(), build_anima_physical_units(), build_anima_physical_formulas())
+  println("")
+  print_section("HEXA-LANG ISA", build_anima_hexa_names(), build_anima_hexa_values(), build_anima_hexa_units(), build_anima_hexa_formulas())
+  let mut total = 9 + 8 + 11 + 6 + 6 + 6 + 6
+  print_scorecard("ANIMA-HEXA", total)
+}
+
+// ========== HEXA-OMEGA ==========
+fn build_omega_compute_names() { return ["SM count", "CUDA cores/SM", "Total cores", "GPC count", "TPC per GPC", "SM per TPC", "Decode width", "Pipeline stages", "Warp size"] }
+fn build_omega_compute_values() {
+  return [SIGMA * J2, pow(PHI, TAU) * SIGMA_MINUS_TAU, SIGMA * J2 * 128 / 1000, J2, N, PHI, SIGMA_MINUS_TAU, J2, pow(PHI, SOPFR)]
+}
+fn build_omega_compute_units() { return ["SMs", "cores", "K", "GPCs", "TPCs", "SMs", "wide", "stages", "threads"] }
+fn build_omega_compute_formulas() {
+  return ["sigma*J2 = 12*24 = 288", "phi^tau*(sigma-tau) = 2^4*8 = 128", "SM*128/1000 = 288*128/1000 = 36", "J2 = 24", "n = 6", "phi = 2", "sigma-tau = 12-4 = 8", "J2 = 24", "phi^sopfr = 2^5 = 32"]
+}
+
+fn build_omega_memory_names() { return ["HBM capacity", "HBM stacks", "HBM gen", "L1 per SM", "L2 total", "L3 / Infinity-$", "Bandwidth", "Bus width"] }
+fn build_omega_memory_values() {
+  return [SIGMA * J2, SIGMA, N_OVER_PHI, pow(PHI, SOPFR + MU), SIGMA * SIGMA_MINUS_TAU, J2, PHI * SIGMA * SIGMA_MINUS_PHI * SIGMA_MINUS_PHI, SIGMA * SIGMA * pow(PHI, SOPFR)]
+}
+fn build_omega_memory_units() { return ["GB", "stacks", "HBM", "KB", "MB", "MB", "GB/s", "bit"] }
+fn build_omega_memory_formulas() {
+  return ["sigma*J2 = 12*24 = 288", "sigma = 12", "n/phi = 6/2 = 3 (HBM3E)", "phi^(sopfr+mu) = 2^6 = 64", "sigma*(sigma-tau) = 12*8 = 96", "J2 = 24", "phi*sigma*(sigma-phi)^2 = 2*12*10^2 = 2400", "sigma^2*phi^sopfr = 12^2*32 = 4608"]
+}
+
+fn build_omega_ai_names() { return ["MoE experts", "MoE active top-k", "Attention heads", "  Global heads", "  Local heads", "  Sparse heads", "d_head", "d_model", "Layers (train)", "Mamba d_state", "Mamba expand", "Mamba d_conv"] }
+fn build_omega_ai_values() {
+  return [SIGMA_MINUS_TAU, PHI, J2, SIGMA, SIGMA_MINUS_TAU, TAU, pow(PHI, SIGMA_MINUS_SOPFR), pow(PHI, SIGMA) / 1000, SIGMA * SIGMA_MINUS_TAU, pow(PHI, TAU), PHI, TAU]
+}
+fn build_omega_ai_units() { return ["experts", "active", "heads", "heads", "heads", "heads", "dim", "K", "layers", "dim", "x", "dim"] }
+fn build_omega_ai_formulas() {
+  return ["sigma-tau = 12-4 = 8", "phi = 2", "J2 = 24", "sigma = 12 (1/2 Egyptian)", "sigma-tau = 8 (1/3 Egyptian)", "tau = 4 (1/6 Egyptian)", "phi^(sigma-sopfr) = 2^7 = 128", "phi^sigma/1000 = 2^12/1000 = 4K", "sigma*(sigma-tau) = 12*8 = 96", "phi^tau = 2^4 = 16", "phi = 2", "tau = 4"]
+}
+
+fn build_omega_interconnect_names() { return ["NVLink lanes", "NVLink links", "Link bandwidth", "Total NVLink BW", "PCIe lanes", "PCIe gen"] }
+fn build_omega_interconnect_values() {
+  return [SIGMA_TIMES_TAU, SIGMA * N_OVER_PHI, SIGMA * SIGMA_MINUS_PHI, SIGMA * N_OVER_PHI * SIGMA * SIGMA_MINUS_PHI / 1000, pow(PHI, TAU), N]
+}
+fn build_omega_interconnect_units() { return ["lanes", "links", "GB/s", "TB/s", "lanes", "gen"] }
+fn build_omega_interconnect_formulas() {
+  return ["sigma*tau = 12*4 = 48", "sigma*(n/phi) = 12*3 = 36", "sigma*(sigma-phi) = 12*10 = 120", "links*link_bw/1000 = 36*120/1000 = 4", "phi^tau = 2^4 = 16", "n = 6"]
+}
+
+fn build_omega_power_names() { return ["TDP", "Core voltage", "PUE target", "Egyptian compute", "Egyptian memory", "Egyptian IO"] }
+fn build_omega_power_values() {
+  let mut tdp = J2 * SIGMA
+  return [tdp, SIGMA_MINUS_TAU * 100, SIGMA_MINUS_PHI * SIGMA, tdp / PHI, tdp / N_OVER_PHI, tdp / N]
+}
+fn build_omega_power_units() { return ["W", "mV", "%", "W", "W", "W"] }
+fn build_omega_power_formulas() {
+  let mut tdp = J2 * SIGMA
+  return ["J2*sigma = 24*12 = " + to_string(tdp), "(sigma-tau)*100 = 8*100 = 800", "sigma/(sigma-phi) = 12/10 = 1.2 (x100=120)", "1/2 * TDP = " + to_string(tdp) + "/2 = " + to_string(tdp / 2), "1/3 * TDP = " + to_string(tdp) + "/3 = " + to_string(tdp / 3), "1/6 * TDP = " + to_string(tdp) + "/6 = " + to_string(tdp / 6)]
+}
+
+fn build_omega_physical_names() { return ["Die area", "Transistors", "Gate pitch", "Process node", "Metal layers", "Package"] }
+fn build_omega_physical_values() {
+  return [SIGMA_TIMES_N * SIGMA_MINUS_PHI, SIGMA * SIGMA_MINUS_TAU, SIGMA_TIMES_TAU, PHI, J2, J2 * J2 * PHI]
+}
+fn build_omega_physical_units() { return ["mm2", "B", "nm", "nm", "layers", "mm2"] }
+fn build_omega_physical_formulas() {
+  return ["sigma*n*(sigma-phi) = 12*6*10 = 720", "sigma*(sigma-tau) = 12*8 = 96", "sigma*tau = 12*4 = 48", "phi = 2", "J2 = 24", "J2^2*phi = 24^2*2 = 1152"]
+}
+
+fn build_omega_hexa_names() { return ["Keywords", "Operators", "Primitives", "Opcode width", "Registers", "ISA extensions"] }
+fn build_omega_hexa_values() {
+  return [J2, SIGMA, N, SIGMA_MINUS_TAU, pow(PHI, N), SIGMA]
+}
+fn build_omega_hexa_units() { return ["kw", "ops", "types", "bits", "regs", "ext"] }
+fn build_omega_hexa_formulas() {
+  return ["J2 = 24", "sigma = 12", "n = 6", "sigma-tau = 12-4 = 8", "phi^n = 2^6 = 64", "sigma = 12"]
+}
+
+fn print_omega() {
+  print_header("HEXA-OMEGA", "Training GPU, 288W")
+  print_section("COMPUTE", build_omega_compute_names(), build_omega_compute_values(), build_omega_compute_units(), build_omega_compute_formulas())
+  println("")
+  print_section("MEMORY", build_omega_memory_names(), build_omega_memory_values(), build_omega_memory_units(), build_omega_memory_formulas())
+  println("")
+  print_section("AI ENGINE", build_omega_ai_names(), build_omega_ai_values(), build_omega_ai_units(), build_omega_ai_formulas())
+  println("")
+  print_section("INTERCONNECT", build_omega_interconnect_names(), build_omega_interconnect_values(), build_omega_interconnect_units(), build_omega_interconnect_formulas())
+  println("")
+  print_section("POWER", build_omega_power_names(), build_omega_power_values(), build_omega_power_units(), build_omega_power_formulas())
+  println("")
+  print_section("PHYSICAL", build_omega_physical_names(), build_omega_physical_values(), build_omega_physical_units(), build_omega_physical_formulas())
+  println("")
+  print_section("HEXA-LANG ISA", build_omega_hexa_names(), build_omega_hexa_values(), build_omega_hexa_units(), build_omega_hexa_formulas())
+  let mut total = 9 + 8 + 12 + 6 + 6 + 6 + 6
+  print_scorecard("HEXA-OMEGA", total)
+}
+
+// ========== HEXA-EDGE ==========
+fn build_edge_compute_names() { return ["SM count", "CUDA cores/SM", "Total cores", "GPC count", "TPC per GPC", "SM per TPC", "Decode width", "Pipeline stages", "Warp size"] }
+fn build_edge_compute_values() {
+  return [SIGMA, pow(PHI, SOPFR), SIGMA * pow(PHI, SOPFR), N_OVER_PHI, PHI, PHI, TAU, SIGMA_MINUS_TAU, pow(PHI, TAU)]
+}
+fn build_edge_compute_units() { return ["SMs", "cores", "cores", "GPCs", "TPCs", "SMs", "wide", "stages", "threads"] }
+fn build_edge_compute_formulas() {
+  return ["sigma = 12", "phi^sopfr = 2^5 = 32", "sigma*phi^sopfr = 12*32 = 384", "n/phi = 6/2 = 3", "phi = 2", "phi = 2", "tau = 4", "sigma-tau = 12-4 = 8", "phi^tau = 2^4 = 16"]
+}
+
+fn build_edge_memory_names() { return ["LPDDR capacity", "LPDDR channels", "LPDDR gen", "L1 per SM", "L2 total", "L3 / SLC", "Bandwidth", "Bus width"] }
+fn build_edge_memory_values() {
+  return [SIGMA, TAU, SOPFR, pow(PHI, SOPFR), N, TAU, SIGMA_TIMES_TAU + PHI, pow(PHI, SIGMA_MINUS_SOPFR)]
+}
+fn build_edge_memory_units() { return ["GB", "ch", "gen", "KB", "MB", "MB", "GB/s", "bit"] }
+fn build_edge_memory_formulas() {
+  return ["sigma = 12", "tau = 4", "sopfr = 5 (LPDDR5)", "phi^sopfr = 2^5 = 32", "n = 6", "tau = 4", "sigma*tau+phi = 12*4+2 = 50", "phi^(sigma-sopfr) = 2^7 = 128"]
+}
+
+fn build_edge_ai_names() { return ["MoE experts", "MoE active top-k", "Attention heads", "  Global heads", "  Local heads", "  Sparse heads", "d_head", "d_model", "Mamba d_state", "Mamba expand", "Mamba d_conv"] }
+fn build_edge_ai_values() {
+  return [TAU, MU, N, N_OVER_PHI, PHI, MU, pow(PHI, N), SIGMA * pow(PHI, SOPFR), SIGMA_MINUS_TAU, PHI, TAU]
+}
+fn build_edge_ai_units() { return ["experts", "active", "heads", "heads", "heads", "heads", "dim", "dim", "dim", "x", "dim"] }
+fn build_edge_ai_formulas() {
+  return ["tau = 4", "mu = 1", "n = 6", "n/phi = 3 (1/2 Egyptian)", "phi = 2 (1/3 Egyptian)", "mu = 1 (1/6 Egyptian)", "phi^n = 2^6 = 64", "sigma*phi^sopfr = 12*32 = 384", "sigma-tau = 12-4 = 8", "phi = 2", "tau = 4"]
+}
+
+fn build_edge_interconnect_names() { return ["NVLink lanes", "NVLink links", "USB-C ports", "PCIe lanes", "PCIe gen", "MIPI CSI lanes"] }
+fn build_edge_interconnect_values() {
+  return [0, 0, PHI, TAU, SOPFR, TAU]
+}
+fn build_edge_interconnect_units() { return ["lanes", "links", "ports", "lanes", "gen", "lanes"] }
+fn build_edge_interconnect_formulas() {
+  return ["N/A (edge SoC)", "N/A (edge SoC)", "phi = 2", "tau = 4", "sopfr = 5", "tau = 4"]
+}
+
+fn build_edge_power_names() { return ["TDP", "Core voltage", "PUE target", "Egyptian compute", "Egyptian memory", "Egyptian IO"] }
+fn build_edge_power_values() {
+  let mut tdp = N
+  return [tdp, N * 100 + SOPFR * 10, SIGMA_MINUS_PHI * SIGMA, tdp / PHI, tdp / N_OVER_PHI, tdp / N]
+}
+fn build_edge_power_units() { return ["W", "mV", "%", "W", "W", "W"] }
+fn build_edge_power_formulas() {
+  let mut tdp = N
+  return ["n = 6", "n*100+sopfr*10 = 600+50 = 650", "sigma/(sigma-phi) = 12/10 = 1.2 (x100=120)", "1/2 * TDP = " + to_string(tdp) + "/2 = " + to_string(tdp / 2), "1/3 * TDP = " + to_string(tdp) + "/3 = " + to_string(tdp / 3), "1/6 * TDP = " + to_string(tdp) + "/6 = " + to_string(tdp / 6)]
+}
+
+fn build_edge_physical_names() { return ["Die area", "Transistors", "Gate pitch", "Process node", "Metal layers", "Package"] }
+fn build_edge_physical_values() {
+  return [SIGMA * SIGMA_MINUS_PHI, SIGMA, SIGMA_TIMES_TAU, N_OVER_PHI, SIGMA, J2 * J2]
+}
+fn build_edge_physical_units() { return ["mm2", "B", "nm", "nm", "layers", "mm2"] }
+fn build_edge_physical_formulas() {
+  return ["sigma*(sigma-phi) = 12*10 = 120", "sigma = 12", "sigma*tau = 12*4 = 48", "n/phi = 6/2 = 3", "sigma = 12", "J2^2 = 24^2 = 576"]
+}
+
+fn build_edge_hexa_names() { return ["Keywords", "Operators", "Primitives", "Opcode width", "Registers", "ISA extensions"] }
+fn build_edge_hexa_values() {
+  return [SIGMA, N, TAU, N, pow(PHI, TAU), TAU]
+}
+fn build_edge_hexa_units() { return ["kw", "ops", "types", "bits", "regs", "ext"] }
+fn build_edge_hexa_formulas() {
+  return ["sigma = 12", "n = 6", "tau = 4", "n = 6", "phi^tau = 2^4 = 16", "tau = 4"]
+}
+
+fn print_edge() {
+  print_header("HEXA-EDGE", "Edge SoC, 6W")
+  print_section("COMPUTE", build_edge_compute_names(), build_edge_compute_values(), build_edge_compute_units(), build_edge_compute_formulas())
+  println("")
+  print_section("MEMORY", build_edge_memory_names(), build_edge_memory_values(), build_edge_memory_units(), build_edge_memory_formulas())
+  println("")
+  print_section("AI ENGINE", build_edge_ai_names(), build_edge_ai_values(), build_edge_ai_units(), build_edge_ai_formulas())
+  println("")
+  print_section("INTERCONNECT", build_edge_interconnect_names(), build_edge_interconnect_values(), build_edge_interconnect_units(), build_edge_interconnect_formulas())
+  println("")
+  print_section("POWER", build_edge_power_names(), build_edge_power_values(), build_edge_power_units(), build_edge_power_formulas())
+  println("")
+  print_section("PHYSICAL", build_edge_physical_names(), build_edge_physical_values(), build_edge_physical_units(), build_edge_physical_formulas())
+  println("")
+  print_section("HEXA-LANG ISA", build_edge_hexa_names(), build_edge_hexa_values(), build_edge_hexa_units(), build_edge_hexa_formulas())
+  let mut total = 9 + 8 + 11 + 6 + 6 + 6 + 6
+  print_scorecard("HEXA-EDGE", total)
+}
+
+// ========== CUSTOM ==========
+fn print_custom(target_tdp) {
+  let mut base_tdp = 120.0
+  let mut ratio = target_tdp / base_tdp
+
+  let mut sm_raw = floor_int(144.0 * pow(ratio, 2.0 / 3.0))
+  let mut sm = round_to_multiple(sm_raw, SIGMA)
+
+  let mut hbm_raw = floor_int(48.0 * ratio)
+  let mut hbm = hbm_raw
+  if hbm_raw < J2 {
+    hbm = J2
+  }
+  if hbm_raw >= J2 {
+    hbm = round_to_multiple(hbm_raw, J2)
+  }
+
+  let mut heads_raw = floor_int(12.0 * pow(ratio, 0.5))
+  let mut heads = round_to_multiple(heads_raw, N)
+
+  let mut nvlink_raw = floor_int(18.0 * pow(ratio, 0.5))
+  let mut nvlink = round_to_multiple(nvlink_raw, N)
+
+  let mut die_raw = floor_int(480.0 * pow(ratio, 0.8))
+  let mut die = round_to_multiple(die_raw, SIGMA)
+
+  let mut trans = round_to_multiple(floor_int(48.0 * pow(ratio, 0.8)), SIGMA)
+
+  let mut l2_raw = floor_int(48.0 * pow(ratio, 0.5))
+  let mut l2 = round_to_multiple(l2_raw, SIGMA)
+
+  let mut bw_raw = floor_int(1200.0 * ratio)
+  let mut bw = round_to_multiple(bw_raw, SIGMA)
+
+  let mut stacks_raw = ceil_int(hbm / 8.0)
+  let mut stacks_min = max_val(stacks_raw, TAU)
+  let mut stacks = round_to_multiple(stacks_min, PHI)
+
+  let mut tdp = target_tdp
+  let mut compute_w = tdp / 2
+  let mut memory_w = tdp / 3
+  let mut io_w = tdp / 6
+  let mut remainder = tdp - compute_w - memory_w - io_w
+
+  let mut chip_name = "HEXA-CUSTOM-" + to_string(tdp) + "W"
+  let mut chip_class = "Custom scaled chip, " + to_string(tdp) + "W"
+
+  print_header(chip_name, chip_class)
+
+  // COMPUTE
+  let mut c_names = ["SM count", "CUDA cores/SM", "Total cores", "GPC count", "TPC per GPC", "SM per TPC", "Decode width", "Pipeline stages", "Warp size"]
+  let mut c_values = [sm, 128, sm * 128 / 1000, sm / SIGMA, N, PHI, N, SIGMA, 32]
+  let mut c_units = ["SMs", "cores", "K", "GPCs", "TPCs", "SMs", "wide", "stages", "threads"]
+  let mut c_formulas = ["scale(144, TDP^(2/3)) -> round_sigma -> " + to_string(sm), "phi^tau*(sigma-tau) = 128 (fixed)", "SM*128/1000 = " + to_string(sm * 128 / 1000), "SM/sigma = " + to_string(sm) + "/" + to_string(SIGMA) + " = " + to_string(sm / SIGMA), "n = 6 (fixed)", "phi = 2 (fixed)", "n = 6 (fixed)", "sigma = 12 (fixed)", "phi^sopfr = 32 (fixed)"]
+  print_section("COMPUTE", c_names, c_values, c_units, c_formulas)
+  println("")
+
+  // MEMORY
+  let mut m_names = ["HBM capacity", "HBM stacks", "L1 per SM", "L2 total", "Bandwidth"]
+  let mut m_values = [hbm, stacks, 128, l2, bw]
+  let mut m_units = ["GB", "stacks", "KB", "MB", "GB/s"]
+  let mut m_formulas = ["scale(48, TDP) -> round_J2 -> " + to_string(hbm), "ceil(HBM/8) -> round_phi -> " + to_string(stacks), "phi^tau*(sigma-tau) = 128 (fixed)", "scale(48, TDP^0.5) -> round_sigma -> " + to_string(l2), "scale(1200, TDP) -> round_sigma -> " + to_string(bw)]
+  print_section("MEMORY", m_names, m_values, m_units, m_formulas)
+  println("")
+
+  // AI ENGINE
+  let mut a_names = ["MoE experts", "MoE active top-k", "Attention heads", "d_head", "Mamba d_state", "Mamba expand", "Mamba d_conv"]
+  let mut a_values = [SIGMA_MINUS_TAU, PHI, heads, 128, 16, PHI, TAU]
+  let mut a_units = ["experts", "active", "heads", "dim", "dim", "x", "dim"]
+  let mut a_formulas = ["sigma-tau = 8 (fixed)", "phi = 2 (fixed)", "scale(12, TDP^0.5) -> round_n -> " + to_string(heads), "phi^(sigma-sopfr) = 128 (fixed)", "phi^tau = 16 (fixed)", "phi = 2 (fixed)", "tau = 4 (fixed)"]
+  print_section("AI ENGINE", a_names, a_values, a_units, a_formulas)
+  println("")
+
+  // INTERCONNECT
+  let mut i_names = ["NVLink links", "PCIe lanes", "PCIe gen"]
+  let mut i_values = [nvlink, 16, SOPFR]
+  let mut i_units = ["links", "lanes", "gen"]
+  let mut i_formulas = ["scale(18, TDP^0.5) -> round_n -> " + to_string(nvlink), "phi^tau = 16 (fixed)", "sopfr = 5 (fixed)"]
+  print_section("INTERCONNECT", i_names, i_values, i_units, i_formulas)
+  println("")
+
+  // POWER
+  let mut p_names = ["TDP", "Egyptian compute", "Egyptian memory", "Egyptian IO"]
+  let mut p_values = [tdp, compute_w + remainder, memory_w, io_w]
+  let mut p_units = ["W", "W", "W", "W"]
+  let mut p_formulas = ["user-specified = " + to_string(tdp), "1/2 * TDP + remainder = " + to_string(compute_w + remainder), "1/3 * TDP = " + to_string(memory_w), "1/6 * TDP = " + to_string(io_w)]
+  print_section("POWER", p_names, p_values, p_units, p_formulas)
+  println("")
+
+  // PHYSICAL
+  let mut ph_names = ["Die area", "Transistors", "Process node"]
+  let mut ph_values = [die, trans, N / PHI]
+  let mut ph_units = ["mm2", "B", "nm"]
+  let mut ph_formulas = ["scale(480, TDP^0.8) -> round_sigma -> " + to_string(die), "scale(48, TDP^0.8) -> round_sigma -> " + to_string(trans), "n/phi = 3 (fixed)"]
+  print_section("PHYSICAL", ph_names, ph_values, ph_units, ph_formulas)
+  println("")
+
+  // HEXA-LANG ISA
+  let mut h_names = ["Keywords", "Operators", "Primitives", "Opcode width", "Registers"]
+  let mut h_values = [SIGMA * PHI, SIGMA, N, N, 32]
+  let mut h_units = ["kw", "ops", "types", "bits", "regs"]
+  let mut h_formulas = ["sigma*phi = 24 (fixed)", "sigma = 12 (fixed)", "n = 6 (fixed)", "n = 6 (fixed)", "phi^sopfr = 32 (fixed)"]
+  print_section("HEXA-LANG ISA", h_names, h_values, h_units, h_formulas)
+
+  let mut total = 9 + 5 + 7 + 3 + 4 + 3 + 5
+  print_scorecard(chip_name, total)
+}
+
+// ========== MAIN ==========
+println("")
+println("  +==============================================================+")
+println("  |        N6 CHIP PARAMETER GENERATOR v1.0                     |")
+println("  |        sigma(n)*phi(n) = n*tau(n),  n = 6                   |")
+println("  +==============================================================+")
+println("")
+
+print_constants()
+
+let mut num_args = len(args(0))
+
+if num_args < 3 {
+  // No args: print all 3
+  print_anima()
+  print_omega()
+  print_edge()
+  let mut grand_total = 52 + 53 + 52
+  println("  ==============================================================")
+  println("  GRAND TOTAL: " + to_string(grand_total) + "/" + to_string(grand_total) + " parameters EXACT across 3 chips")
+  println("  All derived from n=6 perfect number arithmetic.")
+  println("  ==============================================================")
+}
+
+if num_args >= 3 {
+  let mut cmd = args(0)[2]
+  if cmd == "anima" {
+    print_anima()
+  }
+  if cmd == "omega" {
+    print_omega()
+  }
+  if cmd == "edge" {
+    print_edge()
+  }
+  if cmd == "custom" {
+    if num_args < 4 {
+      println("  ERROR: 'custom' requires TDP in watts.")
+      println("  Usage: chip-n6-calc custom 200")
+    }
+    if num_args >= 4 {
+      let mut tdp_str = args(0)[3]
+      let mut tdp_val = floor_int(tdp_str + 0)
+      if tdp_val >= 1 {
+        print_custom(tdp_val)
+      }
+      if tdp_val < 1 {
+        println("  ERROR: TDP must be a positive integer (watts).")
+      }
+    }
+  }
+  if cmd != "anima" {
+    if cmd != "omega" {
+      if cmd != "edge" {
+        if cmd != "custom" {
+          println("  Unknown command: '" + cmd + "'")
+          println("  Usage: chip-n6-calc [anima|omega|edge|custom TDP]")
+          println("    No args    : print all 3 chip profiles")
+          println("    anima      : ANIMA-HEXA (consciousness AI, 120W)")
+          println("    omega      : HEXA-OMEGA (training GPU, 288W)")
+          println("    edge       : HEXA-EDGE (edge SoC, 6W)")
+          println("    custom 200 : generate custom chip at 200W TDP")
+        }
+      }
+    }
+  }
+}

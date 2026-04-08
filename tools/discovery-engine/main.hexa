@@ -1,0 +1,197 @@
+// Discovery Engine — N6 Architecture (HEXA port)
+// COLLISION, INVERSE, COMPOSE, ANOMALY operators
+// Usage: hexa tools/discovery-engine/main.hexa
+
+// ── N6 Base Constants ──
+let base_names = ["σ", "τ", "φ", "sopfr", "J₂", "μ", "n"]
+let base_values = [12.0, 4.0, 2.0, 5.0, 24.0, 1.0, 6.0]
+
+// ── Category System (9 categories) ──
+let cat_names = ["Physics", "AI", "Chip", "Energy", "Network", "Biology", "Math", "Materials", "Engineering"]
+
+fn categorize(domain) {
+  let mut d = to_lower(domain)
+  if contains(d, "fusion") || contains(d, "particle") || contains(d, "cosmology") || contains(d, "plasma") || contains(d, "neutrino") { return 0 }
+  if contains(d, "ai") || contains(d, "llm") || contains(d, "training") || contains(d, "transformer") || contains(d, "diffusion") { return 1 }
+  if contains(d, "chip") || contains(d, "soc") || contains(d, "semiconductor") || contains(d, "gpu") || contains(d, "hbm") || contains(d, "photonic") { return 2 }
+  if contains(d, "energy") || contains(d, "solar") || contains(d, "battery") || contains(d, "hydrogen") || contains(d, "grid") || contains(d, "power") { return 3 }
+  if contains(d, "network") || contains(d, "crypto") || contains(d, "blockchain") { return 4 }
+  if contains(d, "biology") || contains(d, "genetic") || contains(d, "codon") { return 5 }
+  if contains(d, "math") || contains(d, "lattice") { return 6 }
+  if contains(d, "material") || contains(d, "carbon") || contains(d, "graphene") { return 7 }
+  if contains(d, "robotics") || contains(d, "autonomous") || contains(d, "pharmaceutical") { return 8 }
+  return -1
+}
+
+// ── Build Expression Table ──
+let mut et_text = []
+let mut et_val = []
+
+fn add_expr(text, val) {
+  if val > 1e15 || val < -1e15 { return }
+  et_text = et_text + [text]
+  et_val = et_val + [val]
+}
+
+// Base constants
+let mut bi = 0
+while bi < 7 {
+  add_expr(base_names[bi], base_values[bi])
+  let mut v = base_values[bi]
+  let mut nm = base_names[bi]
+  if v > 0.0 {
+    add_expr("1/" + nm, 1.0 / v)
+    add_expr(nm + "²", v * v)
+    if v <= 24.0 { add_expr("2^" + nm, pow(2.0, v)) }
+    if v > 1.0 { add_expr("ln(" + nm + ")", ln(v)) }
+  }
+  bi = bi + 1
+}
+
+let unary_count = len(et_text)
+
+// Binary ops on base pairs
+let mut bi2 = 0
+while bi2 < 7 {
+  let mut bj = 0
+  while bj < 7 {
+    let mut av = base_values[bi2]
+    let mut bv = base_values[bj]
+    let mut an = base_names[bi2]
+    let mut bn = base_names[bj]
+    add_expr(an + "+" + bn, av + bv)
+    if av > bv { add_expr(an + "-" + bn, av - bv) }
+    add_expr(an + "·" + bn, av * bv)
+    if bv != 0.0 { add_expr(an + "/" + bn, av / bv) }
+    if av > 0.0 && abs(bv) <= 12.0 {
+      let mut r = pow(av, bv)
+      if abs(r) < 1e15 { add_expr(an + "^" + bn, r) }
+    }
+    bj = bj + 1
+  }
+  bi2 = bi2 + 1
+}
+
+// Depth-2: unary op combined with base
+let mut ui = 0
+while ui < unary_count {
+  let mut ut = et_text[ui]
+  let mut uv = et_val[ui]
+  if !contains(ut, "+") && !contains(ut, "-") && !contains(ut, "·") && !contains(ut, "/") {
+    let mut dj = 0
+    while dj < 7 {
+      let mut bv2 = base_values[dj]
+      let mut bn2 = base_names[dj]
+      add_expr("(" + ut + ")+" + bn2, uv + bv2)
+      if uv > bv2 { add_expr("(" + ut + ")-" + bn2, uv - bv2) }
+      if bv2 > uv { add_expr(bn2 + "-(" + ut + ")", bv2 - uv) }
+      add_expr("(" + ut + ")·" + bn2, uv * bv2)
+      if bv2 != 0.0 { add_expr("(" + ut + ")/" + bn2, uv / bv2) }
+      if uv != 0.0 { add_expr(bn2 + "/(" + ut + ")", bv2 / uv) }
+      dj = dj + 1
+    }
+  }
+  ui = ui + 1
+}
+
+// Special compound expressions
+let spec_t = ["1-1/(σ-φ)", "1-1/(J₂-τ)", "ln(4/3)", "σ/(σ-φ)", "τ²/(n/φ)³", "1/2+1/3+1/6", "σ·φ·n", "σ(σ-φ)", "σ²-φ", "(σ-φ)^(n/φ)", "(σ-φ)^τ", "φ^τ·sopfr", "σ·φ^τ", "σ·J₂", "σ·(σ-τ)", "σ·τ·(σ-φ)", "(σ-φ)³", "τ·(σ-φ)", "sopfr·(σ-φ)", "φ²/n", "μ/σ", "φ/(σ-φ)", "J₂²", "σ⁴", "σ³"]
+let spec_v = [0.9, 0.95, 0.28768207, 1.2, 0.59259259, 1.0, 144.0, 120.0, 142.0, 1000.0, 10000.0, 80.0, 192.0, 288.0, 96.0, 480.0, 1000.0, 40.0, 50.0, 0.66666667, 0.08333333, 0.2, 576.0, 20736.0, 1728.0]
+
+let mut si = 0
+while si < len(spec_t) {
+  add_expr(spec_t[si], spec_v[si])
+  si = si + 1
+}
+
+let total_exprs = len(et_text)
+
+// ── Engineering Targets (parallel arrays) ──
+let tgt_val = [4096.0, 2048.0, 128.0, 32.0, 0.9, 0.95, 0.999, 1e-8, 0.1, 0.288, 7.5, 1000.0, 50.0, 20.0, 8.0, 40.0, 144.0, 132.0, 80.0, 192.0, 288.0, 48.0, 256.0, 96.0, 400.0, 1000.0, 120.0, 142.0, 1.333, 60.0, 50.0, 1.2, 480.0, 0.5926, 137.036, 0.1190, 0.2308, 0.300, 0.5714, 0.0833, 0.96429, 0.6667, 64.0, 20.0, 4.0, 13.0, 7.0, 48000.0, 12.0, 24.0]
+let tgt_name = ["GPT-3 d_model", "LLaMA-7B d_model", "d_head universal", "Attention heads", "Adam β₁", "Top-p sampling", "Adam β₂", "Adam ε", "Weight decay", "Mertens dropout", "CFG guidance", "DDPM timesteps", "DDIM steps", "Chinchilla ratio", "LoRA rank", "Top-k sampling", "AD102 SMs", "H100 SMs", "A100-80GB HBM", "B100 HBM", "B300 HBM", "N3 gate pitch", "MI350X CUs", "Gaudi 2 HBM", "A100 TDP", "B200 TDP", "H₂ LHV", "H₂ HHV", "SQ bandgap", "Grid 60Hz", "Grid 50Hz", "PUE target", "3-phase DC", "Betz limit", "1/α fine", "α_s(M_Z)", "sin²θ_W", "sin²θ₁₂", "sin²θ₂₃", "sin²(2θ₁₃)", "n_s spectral", "Koide Q", "Codons", "Amino acids", "DNA bases", "DNS roots", "OSI layers", "Audio 48kHz", "Semitones", "Film 24fps"]
+let tgt_domain = ["AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "AI", "Chip", "Chip", "Chip", "Chip", "Chip", "Chip", "Chip", "Chip", "Chip", "Chip", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "Energy", "Physics", "Physics", "Physics", "Physics", "Physics", "Physics", "Physics", "Physics", "Biology", "Biology", "Biology", "Network", "Network", "Audio", "Audio", "Display"]
+
+// ── find_best: linear scan for best matching expression ──
+fn find_best(target, tol) {
+  let mut best_idx = -1
+  let mut best_err = 999.0
+  if abs(target) < 1e-15 { return best_idx }
+  let mut fi = 0
+  while fi < len(et_val) {
+    let mut err = abs((et_val[fi] - target) / target)
+    if err < tol && err < best_err {
+      best_err = err
+      best_idx = fi
+    }
+    fi = fi + 1
+  }
+  return best_idx
+}
+
+// ══════════════════════════════════════════════════════════════════
+// OP: INVERSE — match engineering targets to n6 expressions
+// ══════════════════════════════════════════════════════════════════
+
+let mut inv_count = 0
+let mut inv_exact = 0
+let mut inv_results = []
+let mut anom_results = []
+
+let mut ti = 0
+while ti < len(tgt_val) {
+  let mut idx = find_best(tgt_val[ti], 0.01)
+  if idx >= 0 {
+    let mut err = abs((et_val[idx] - tgt_val[ti]) / tgt_val[ti])
+    let mut tag = if err < 0.0001 { "EXACT" } else { "CLOSE" }
+    if tag == "EXACT" { inv_exact = inv_exact + 1 }
+    inv_results = inv_results + [tgt_name[ti] + " = " + to_string(tgt_val[ti]) + " <- " + et_text[idx] + " [" + tag + " err=" + to_string(round(err * 1000000.0) / 10000.0) + "%]"]
+    inv_count = inv_count + 1
+  } else {
+    anom_results = anom_results + ["HONEST-FAIL: " + tgt_name[ti] + " = " + to_string(tgt_val[ti]) + " -- no n6 expr within 1%"]
+  }
+  ti = ti + 1
+}
+
+// ══════════════════════════════════════════════════════════════════
+// Output
+// ══════════════════════════════════════════════════════════════════
+
+println("+=================================================================+")
+println("|          N6 DISCOVERY ENGINE  (HEXA port)                      |")
+println("|          sigma(n)*phi(n) = n*tau(n), n=6                       |")
+println("+=================================================================+")
+println("")
+println("  Expression table: " + to_string(total_exprs) + " depth-2 expressions")
+println("  Engineering targets: " + to_string(len(tgt_val)))
+println("")
+
+println("-- INVERSE: Engineering targets matched to n6 expressions --")
+println("  Matched: " + to_string(inv_count) + "/" + to_string(len(tgt_val)) + " (" + to_string(inv_exact) + " EXACT)")
+println("")
+
+let mut ri = 0
+while ri < len(inv_results) {
+  println("  " + inv_results[ri])
+  ri = ri + 1
+}
+
+if len(anom_results) > 0 {
+  println("")
+  println("-- ANOMALY: No n6 expression within 1% --")
+  let mut ai3 = 0
+  while ai3 < len(anom_results) {
+    println("  " + anom_results[ai3])
+    ai3 = ai3 + 1
+  }
+}
+
+println("")
+println("-- Summary --")
+println("  Operators: INVERSE + ANOMALY")
+println("  Total expressions: " + to_string(total_exprs))
+println("  INVERSE hits: " + to_string(inv_count) + "/" + to_string(len(tgt_val)))
+println("  EXACT: " + to_string(inv_exact))
+println("  HONEST-FAIL: " + to_string(len(anom_results)))
+println("")
+println("  sigma(6)*phi(6) = 6*tau(6) = 24.")
+println("  하나의 수, 하나의 정리, 모든 것.")

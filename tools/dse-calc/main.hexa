@@ -1,0 +1,497 @@
+// N6 Design Space Exploration (DSE) — 전수 조합 탐색기 (HEXA port)
+// Original: tools/dse-calc/main.rs
+// Note: HEXA perf limits → top-20 insertion sort + inline stats (no full array)
+
+// N6 constants
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let J2 = 24
+let P2 = 28
+
+// ============================================================
+// Helpers
+// ============================================================
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn min_val(a, b) {
+  if a < b { a } else { b }
+}
+
+fn fmt1(x) {
+  to_string(round(x * 10.0) / 10.0)
+}
+
+fn fmt2(x) {
+  to_string(round(x * 100.0) / 100.0)
+}
+
+fn eq1(a, b) {
+  if a == b { 1 } else { 0 }
+}
+
+// ============================================================
+// Data arrays
+// ============================================================
+let mat_names = ["Si", "SiC-4H", "GaN", "Diamond", "Ge", "Si+SiGe"]
+let mat_wafer_z = [14, 14, 31, 6, 32, 14]
+let mat_cn = [4, 4, 4, 4, 4, 4]
+let mat_cost_rank = [1, 3, 4, 5, 2, 2]
+let mat_count = 6
+
+let proc_names = ["TSMC_N2", "TSMC_N3E", "Intel_18A", "Samsung_SF2", "TSMC_A16"]
+let proc_gate_pitch = [48, 48, 44, 48, 48]
+let proc_metal_pitch = [28, 28, 30, 28, 24]
+let proc_metal_layers = [12, 12, 13, 12, 14]
+let proc_nanosheets = [4, 3, 4, 3, 4]
+let proc_euv_masks = [24, 20, 22, 20, 28]
+let proc_yield_pct = [75, 82, 70, 68, 60]
+let proc_count = 5
+
+let core_names = ["HEXA-P", "HEXA-Lite", "ARM-Big", "x86-Zen5", "RISC-V"]
+let core_p_cores = [8, 4, 8, 16, 12]
+let core_e_cores = [4, 2, 4, 0, 6]
+let core_gpu_sms = [144, 72, 16, 0, 48]
+let core_npu_cores = [24, 12, 8, 0, 12]
+let core_fp32_per_sm = [128, 128, 64, 0, 64]
+let core_rob_entries = [256, 256, 320, 448, 128]
+let core_count = 5
+
+let chip_names = ["HEXA-1_Full", "HEXA-1_Half", "H100_Style", "B200_Style", "M4Ultra_Style"]
+let chip_hbm_stacks = [8, 4, 6, 8, 0]
+let chip_hbm_gb = [36, 36, 16, 24, 0]
+let chip_tdp_w = [240, 150, 700, 1000, 150]
+let chip_die_area = [800, 400, 814, 900, 400]
+let chip_cowos_tiles = [5, 3, 4, 5, 2]
+let chip_count = 5
+
+let sys_names = ["DGX_Style", "TPU_Pod", "SuperPOD_72", "Edge_Compact"]
+let sys_gpus_per_node = [8, 4, 8, 1]
+let sys_nodes_per_rack = [12, 24, 12, 48]
+let sys_rack_power_kw = [48, 40, 48, 24]
+let sys_network_tiers = [3, 3, 3, 2]
+let sys_pue_10x = [12, 11, 12, 15]
+let sys_count = 4
+
+// ============================================================
+// Header
+// ============================================================
+let total_combos = mat_count * proc_count * core_count * chip_count * sys_count
+
+println("═══════════════════════════════════════════════════════════════════")
+println("  N6 Design Space Exploration (DSE)")
+println("  소재 x 공정 x 코어 x 칩 x 시스템 전수 탐색")
+println("═══════════════════════════════════════════════════════════════════")
+println("")
+
+let mut mat_list = ""
+let mut i = 0
+while i < mat_count {
+  if i > 0 {
+    mat_list = mat_list + ", "
+  }
+  mat_list = mat_list + mat_names[i]
+  i = i + 1
+}
+println("  후보군:")
+println("    소재:   " + mat_list + " (" + to_string(mat_count) + ")")
+
+let mut proc_list = ""
+i = 0
+while i < proc_count {
+  if i > 0 {
+    proc_list = proc_list + ", "
+  }
+  proc_list = proc_list + proc_names[i]
+  i = i + 1
+}
+println("    공정:   " + proc_list + " (" + to_string(proc_count) + ")")
+
+let mut core_list = ""
+i = 0
+while i < core_count {
+  if i > 0 {
+    core_list = core_list + ", "
+  }
+  core_list = core_list + core_names[i]
+  i = i + 1
+}
+println("    코어:   " + core_list + " (" + to_string(core_count) + ")")
+
+let mut chip_list = ""
+i = 0
+while i < chip_count {
+  if i > 0 {
+    chip_list = chip_list + ", "
+  }
+  chip_list = chip_list + chip_names[i]
+  i = i + 1
+}
+println("    칩:     " + chip_list + " (" + to_string(chip_count) + ")")
+
+let mut sys_list = ""
+i = 0
+while i < sys_count {
+  if i > 0 {
+    sys_list = sys_list + ", "
+  }
+  sys_list = sys_list + sys_names[i]
+  i = i + 1
+}
+println("    시스템: " + sys_list + " (" + to_string(sys_count) + ")")
+
+println("")
+println("  총 조합: " + to_string(total_combos))
+println("")
+
+// ============================================================
+// Top-20 arrays (insertion-maintained)
+// ============================================================
+let top_max = 20
+let mut top_mi = []
+let mut top_pi = []
+let mut top_ci = []
+let mut top_chi = []
+let mut top_si = []
+let mut top_pct = []
+let mut top_perf = []
+let mut top_tdp = []
+let mut top_cost = []
+let mut top_pareto = []
+let mut top_count = 0
+
+// Stats accumulators
+let mut max_n6 = 0.0
+let mut sum_n6 = 0.0
+let mut cnt_perfect = 0
+let mut cnt_80 = 0
+let mut cnt_60 = 0
+
+// Best-by-category trackers
+let mut bn6_mi = 0
+let mut bn6_pi = 0
+let mut bn6_ci = 0
+let mut bn6_chi = 0
+let mut bn6_si = 0
+let mut bn6_pct = -1.0
+
+let mut bp_mi = 0
+let mut bp_pi = 0
+let mut bp_ci = 0
+let mut bp_chi = 0
+let mut bp_si = 0
+let mut bp_perf = -1
+
+let mut be_mi = 0
+let mut be_pi = 0
+let mut be_ci = 0
+let mut be_chi = 0
+let mut be_si = 0
+let mut be_perf = 0
+let mut be_tdp = 1
+let mut be_val = -1.0
+
+// ============================================================
+// Enumerate
+// ============================================================
+let mut mi = 0
+while mi < mat_count {
+  let mut pi = 0
+  while pi < proc_count {
+    let mut ci = 0
+    while ci < core_count {
+      let mut chi = 0
+      while chi < chip_count {
+        let mut si = 0
+        while si < sys_count {
+          // count n6 exact inline
+          let mut exact = 0
+          exact = exact + eq1(mat_cn[mi], TAU)
+          let mut ez = SIGMA + PHI
+          if mat_names[mi] == "Diamond" {
+            ez = N
+          }
+          if mat_names[mi] == "Ge" {
+            ez = 32
+          }
+          exact = exact + eq1(mat_wafer_z[mi], ez)
+          exact = exact + eq1(proc_gate_pitch[pi], SIGMA * TAU)
+          exact = exact + eq1(proc_metal_pitch[pi], P2)
+          exact = exact + eq1(proc_metal_layers[pi], SIGMA)
+          exact = exact + eq1(proc_nanosheets[pi], TAU)
+          exact = exact + eq1(proc_euv_masks[pi], J2)
+          exact = exact + eq1(core_p_cores[ci], SIGMA - TAU)
+          exact = exact + eq1(core_e_cores[ci], TAU)
+          exact = exact + eq1(core_gpu_sms[ci], SIGMA * SIGMA)
+          exact = exact + eq1(core_npu_cores[ci], J2)
+          exact = exact + eq1(core_fp32_per_sm[ci], 128)
+          exact = exact + eq1(core_rob_entries[ci], 256)
+          exact = exact + eq1(core_p_cores[ci] + core_e_cores[ci], SIGMA)
+          exact = exact + eq1(chip_hbm_stacks[chi], SIGMA - TAU)
+          exact = exact + eq1(chip_hbm_stacks[chi] * chip_hbm_gb[chi], SIGMA * J2)
+          exact = exact + eq1(chip_tdp_w[chi], J2 * (SIGMA - PHI))
+          exact = exact + eq1(chip_cowos_tiles[chi], SOPFR)
+          exact = exact + eq1(sys_gpus_per_node[si], SIGMA - TAU)
+          exact = exact + eq1(sys_nodes_per_rack[si], SIGMA)
+          exact = exact + eq1(sys_rack_power_kw[si], SIGMA * TAU)
+          exact = exact + eq1(sys_network_tiers[si], N / PHI)
+          exact = exact + eq1(sys_pue_10x[si], SIGMA)
+
+          let n6_total = 23
+          let n6_pct = 1.0 * exact / (1.0 * n6_total) * 100.0
+
+          // perf
+          let gpu_flops = core_gpu_sms[ci] * core_fp32_per_sm[ci]
+          let mem_gb = chip_hbm_stacks[chi] * chip_hbm_gb[chi]
+          let mem_bw = chip_hbm_stacks[chi] * 500
+          let perf = min_val((gpu_flops / 200) * 50 + (mem_gb / 3) * 30 + (mem_bw / 50) * 20, 100)
+
+          let tdp = chip_tdp_w[chi]
+
+          // cost
+          let raw_cost = mat_cost_rank[mi] * 10 + chip_die_area[chi] / 10
+          let yb = proc_yield_pct[pi]
+          let mut cost = 0
+          if raw_cost > yb {
+            cost = raw_cost - yb / 2
+          }
+
+          // pareto
+          let mut efficiency = 0.0
+          if tdp > 0 {
+            efficiency = 1.0 * perf / (1.0 * tdp) * 100.0
+          }
+          let mut inv_cost = 100.0 - 1.0 * cost
+          if inv_cost < 0.0 {
+            inv_cost = 0.0
+          }
+          let pareto = n6_pct * 0.40 + 1.0 * perf * 0.30 + efficiency * 0.20 + inv_cost * 0.10
+
+          // --- stats ---
+          if n6_pct > max_n6 {
+            max_n6 = n6_pct
+          }
+          sum_n6 = sum_n6 + n6_pct
+          if n6_pct >= 99.9 {
+            cnt_perfect = cnt_perfect + 1
+          }
+          if n6_pct >= 80.0 {
+            cnt_80 = cnt_80 + 1
+          }
+          if n6_pct >= 60.0 {
+            cnt_60 = cnt_60 + 1
+          }
+
+          // --- best by category ---
+          if n6_pct > bn6_pct {
+            bn6_pct = n6_pct
+            bn6_mi = mi
+            bn6_pi = pi
+            bn6_ci = ci
+            bn6_chi = chi
+            bn6_si = si
+          }
+          if perf > bp_perf {
+            bp_perf = perf
+            bp_mi = mi
+            bp_pi = pi
+            bp_ci = ci
+            bp_chi = chi
+            bp_si = si
+          }
+          let mut cur_eff = 0.0
+          if tdp > 0 {
+            cur_eff = 1.0 * perf / (1.0 * tdp)
+          }
+          if cur_eff > be_val {
+            be_val = cur_eff
+            be_mi = mi
+            be_pi = pi
+            be_ci = ci
+            be_chi = chi
+            be_si = si
+            be_perf = perf
+            be_tdp = tdp
+          }
+
+          // --- top-20 insertion ---
+          if top_count < top_max {
+            top_mi = top_mi + [mi]
+            top_pi = top_pi + [pi]
+            top_ci = top_ci + [ci]
+            top_chi = top_chi + [chi]
+            top_si = top_si + [si]
+            top_pct = top_pct + [n6_pct]
+            top_perf = top_perf + [perf]
+            top_tdp = top_tdp + [tdp]
+            top_cost = top_cost + [cost]
+            top_pareto = top_pareto + [pareto]
+            top_count = top_count + 1
+            // bubble up
+            let mut k = top_count - 1
+            while k > 0 {
+              if top_pareto[k] > top_pareto[k - 1] {
+                // swap all arrays at k and k-1
+                let t0 = top_mi[k - 1]
+                top_mi[k - 1] = top_mi[k]
+                top_mi[k] = t0
+                let t1 = top_pi[k - 1]
+                top_pi[k - 1] = top_pi[k]
+                top_pi[k] = t1
+                let t2 = top_ci[k - 1]
+                top_ci[k - 1] = top_ci[k]
+                top_ci[k] = t2
+                let t3 = top_chi[k - 1]
+                top_chi[k - 1] = top_chi[k]
+                top_chi[k] = t3
+                let t4 = top_si[k - 1]
+                top_si[k - 1] = top_si[k]
+                top_si[k] = t4
+                let t5 = top_pct[k - 1]
+                top_pct[k - 1] = top_pct[k]
+                top_pct[k] = t5
+                let t6 = top_perf[k - 1]
+                top_perf[k - 1] = top_perf[k]
+                top_perf[k] = t6
+                let t7 = top_tdp[k - 1]
+                top_tdp[k - 1] = top_tdp[k]
+                top_tdp[k] = t7
+                let t8 = top_cost[k - 1]
+                top_cost[k - 1] = top_cost[k]
+                top_cost[k] = t8
+                let t9 = top_pareto[k - 1]
+                top_pareto[k - 1] = top_pareto[k]
+                top_pareto[k] = t9
+                k = k - 1
+              } else {
+                k = 0
+              }
+            }
+          } else {
+            // check if better than worst (last)
+            if pareto > top_pareto[top_max - 1] {
+              // replace last
+              top_mi[top_max - 1] = mi
+              top_pi[top_max - 1] = pi
+              top_ci[top_max - 1] = ci
+              top_chi[top_max - 1] = chi
+              top_si[top_max - 1] = si
+              top_pct[top_max - 1] = n6_pct
+              top_perf[top_max - 1] = perf
+              top_tdp[top_max - 1] = tdp
+              top_cost[top_max - 1] = cost
+              top_pareto[top_max - 1] = pareto
+              // bubble up
+              let mut k = top_max - 1
+              while k > 0 {
+                if top_pareto[k] > top_pareto[k - 1] {
+                  let t0 = top_mi[k - 1]
+                  top_mi[k - 1] = top_mi[k]
+                  top_mi[k] = t0
+                  let t1 = top_pi[k - 1]
+                  top_pi[k - 1] = top_pi[k]
+                  top_pi[k] = t1
+                  let t2 = top_ci[k - 1]
+                  top_ci[k - 1] = top_ci[k]
+                  top_ci[k] = t2
+                  let t3 = top_chi[k - 1]
+                  top_chi[k - 1] = top_chi[k]
+                  top_chi[k] = t3
+                  let t4 = top_si[k - 1]
+                  top_si[k - 1] = top_si[k]
+                  top_si[k] = t4
+                  let t5 = top_pct[k - 1]
+                  top_pct[k - 1] = top_pct[k]
+                  top_pct[k] = t5
+                  let t6 = top_perf[k - 1]
+                  top_perf[k - 1] = top_perf[k]
+                  top_perf[k] = t6
+                  let t7 = top_tdp[k - 1]
+                  top_tdp[k - 1] = top_tdp[k]
+                  top_tdp[k] = t7
+                  let t8 = top_cost[k - 1]
+                  top_cost[k - 1] = top_cost[k]
+                  top_cost[k] = t8
+                  let t9 = top_pareto[k - 1]
+                  top_pareto[k - 1] = top_pareto[k]
+                  top_pareto[k] = t9
+                  k = k - 1
+                } else {
+                  k = 0
+                }
+              }
+            }
+          }
+
+          si = si + 1
+        }
+        chi = chi + 1
+      }
+      ci = ci + 1
+    }
+    pi = pi + 1
+  }
+  mi = mi + 1
+}
+
+// ============================================================
+// Top 20 output
+// ============================================================
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  TOP 20 CONFIGURATIONS (by Pareto score)")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+println("  " + pad_l("Rank", 4) + " | " + pad_l("Material", 8) + " | " + pad_l("Process", 12) + " | " + pad_l("Core", 10) + " | " + pad_l("Chip", 14) + " | " + pad_l("System", 14) + " | " + pad_l("n6%", 6) + " | " + pad_l("Perf", 4) + " | " + pad_l("TDP", 5) + " | " + pad_l("Cost", 5) + " | " + pad_l("Pareto", 7))
+println("  -----+----------+--------------+------------+----------------+----------------+--------+------+-------+-------+--------")
+
+let mut rank = 0
+while rank < top_count {
+  let pct_str = fmt1(top_pct[rank]) + "%"
+  let tdp_str = to_string(top_tdp[rank]) + "W"
+  let pareto_str = fmt2(top_pareto[rank])
+
+  println("  " + pad_l(to_string(rank + 1), 4) + " | " + pad_l(mat_names[top_mi[rank]], 8) + " | " + pad_l(proc_names[top_pi[rank]], 12) + " | " + pad_l(core_names[top_ci[rank]], 10) + " | " + pad_l(chip_names[top_chi[rank]], 14) + " | " + pad_l(sys_names[top_si[rank]], 14) + " | " + pad_l(pct_str, 6) + " | " + pad_l(to_string(top_perf[rank]), 4) + " | " + pad_l(tdp_str, 5) + " | " + pad_l(to_string(top_cost[rank]), 5) + " | " + pad_l(pareto_str, 7))
+  rank = rank + 1
+}
+
+// ============================================================
+// Statistics
+// ============================================================
+println("")
+println("═══════════════════════════════════════════════════════════════════")
+println("  STATISTICS")
+println("═══════════════════════════════════════════════════════════════════")
+
+let avg_n6 = sum_n6 / (1.0 * total_combos)
+
+println("  Total combinations:  " + to_string(total_combos))
+println("  Max n6 EXACT:        " + fmt1(max_n6) + "%")
+println("  Avg n6 EXACT:        " + fmt1(avg_n6) + "%")
+
+let perfect_pct = round(1.0 * cnt_perfect / (1.0 * total_combos) * 1000.0) / 10.0
+let a80_pct = round(1.0 * cnt_80 / (1.0 * total_combos) * 1000.0) / 10.0
+let a60_pct = round(1.0 * cnt_60 / (1.0 * total_combos) * 1000.0) / 10.0
+
+println("  100% EXACT:          " + to_string(cnt_perfect) + " (" + fmt1(perfect_pct) + "%)")
+println("  >=80% EXACT:         " + to_string(cnt_80) + " (" + fmt1(a80_pct) + "%)")
+println("  >=60% EXACT:         " + to_string(cnt_60) + " (" + fmt1(a60_pct) + "%)")
+
+println("")
+println("  BEST BY CATEGORY:")
+println("    Best n6 EXACT:   " + mat_names[bn6_mi] + " + " + proc_names[bn6_pi] + " + " + core_names[bn6_ci] + " + " + chip_names[bn6_chi] + " + " + sys_names[bn6_si] + " (" + fmt1(bn6_pct) + "%)")
+println("    Best Perf:       " + mat_names[bp_mi] + " + " + proc_names[bp_pi] + " + " + core_names[bp_ci] + " + " + chip_names[bp_chi] + " + " + sys_names[bp_si] + " (perf=" + to_string(bp_perf) + ")")
+println("    Best Efficiency: " + mat_names[be_mi] + " + " + proc_names[be_pi] + " + " + core_names[be_ci] + " + " + chip_names[be_chi] + " + " + sys_names[be_si] + " (" + to_string(be_perf) + "/" + to_string(be_tdp) + "W)")
+println("    Best Pareto:     " + mat_names[top_mi[0]] + " + " + proc_names[top_pi[0]] + " + " + core_names[top_ci[0]] + " + " + chip_names[top_chi[0]] + " + " + sys_names[top_si[0]] + " (score=" + fmt2(top_pareto[0]) + ")")
+
+println("")
+println("═══════════════════════════════════════════════════════════════════")
+println("  DSE 완료 — " + to_string(total_combos) + " 조합 탐색, 최적 경로 도출")
+println("═══════════════════════════════════════════════════════════════════")

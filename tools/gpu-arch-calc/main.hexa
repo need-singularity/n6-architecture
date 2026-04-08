@@ -1,0 +1,386 @@
+// N6 GPU/HBM Architecture Calculator (HEXA port)
+// Verifies and predicts AI accelerator architecture constants
+// from n=6 arithmetic
+// Original: tools/gpu-arch-calc/main.rs
+
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+let N = 6
+let P2 = 28
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// --- N6 Expression Finder ---
+
+fn find_simple(target) {
+    let vals = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 16, 20, 24, 28, 32]
+    let exprs = ["mu", "phi", "n/phi", "tau", "sopfr", "n", "sigma-sopfr", "sigma-tau", "sigma-phi", "sigma-mu", "sigma", "sigma+mu", "2^tau", "J2-tau", "J2", "P2", "2^sopfr"]
+    let mut i = 0
+    while i < len(vals) {
+        if vals[i] == target {
+            return exprs[i]
+        }
+        i = i + 1
+    }
+    return ""
+}
+
+fn find_n6_expression(target) {
+    let vals = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 16, 20, 24, 28, 32, 48, 64, 72, 128, 132, 144, 192, 224, 240, 256, 288, 384, 432, 768, 784, 1024, 2048, 4096, 12288, 28672]
+    let exprs = ["mu", "phi", "n/phi", "tau", "sopfr", "n", "sigma-sopfr", "sigma-tau", "sigma-phi", "sigma-mu", "sigma", "sigma+mu", "2^tau", "J2-tau", "J2", "P2", "2^sopfr", "sigma*tau", "2^n", "sigma*n", "2^(sigma-sopfr)", "sigma(sigma-mu)", "sigma^2", "sigma*2^tau", "2^sopfr*(sigma-sopfr)", "sigma*(J2-tau)", "2^(sigma-tau)", "sigma*J2", "sigma*2^sopfr", "sigma^2*(n/phi)", "sigma*2^n", "P2^2", "2^(sigma-phi)", "2^(sigma-mu)", "2^sigma", "sigma*2^(sigma-phi)", "P2*2^(sigma-phi)"]
+    let mut i = 0
+    while i < len(vals) {
+        if vals[i] == target {
+            return exprs[i]
+        }
+        i = i + 1
+    }
+
+    // Try sigma * k
+    if target % 12 == 0 {
+        let k = target / 12
+        let inner = find_simple(k)
+        if inner != "" {
+            return "sigma*" + inner + " = sigma*" + to_string(k)
+        }
+    }
+
+    // Try J2 * k
+    if target % 24 == 0 {
+        let k = target / 24
+        let inner = find_simple(k)
+        if inner != "" {
+            return "J2*" + inner + " = J2*" + to_string(k)
+        }
+    }
+
+    // Try 2^k (power of two check)
+    if target > 0 {
+        let lg = log2(target)
+        let flg = floor(lg)
+        if abs(lg - flg) < 0.0001 {
+            let exp = round(flg)
+            let inner = find_simple(exp)
+            if inner != "" {
+                return "2^" + inner + " = 2^" + to_string(exp)
+            }
+        }
+    }
+
+    return ""
+}
+
+// --- Main execution (all inline to avoid global-capture duplication bug) ---
+
+println("+=============================================================+")
+println("|     N6 GPU/HBM Architecture Calculator                     |")
+println("|     sigma(6)=12  tau(6)=4  phi(6)=2  sopfr(6)=5  J2(6)=24 |")
+println("+=============================================================+")
+println("")
+
+// ======== Verify all GPUs (inline) ========
+
+let gpu_names = ["GV100", "TU102", "GA100", "AD102", "GH100", "GB202"]
+let gpu_gens = ["Volta", "Turing", "Ampere", "Ada Lovelace", "Hopper", "Blackwell"]
+let gpu_years = [2017, 2018, 2020, 2022, 2022, 2024]
+let gpu_full_sms = [84, 72, 128, 144, 144, 192]
+let gpu_enabled_sms = [80, 68, 108, 128, 132, 192]
+let gpu_gpcs = [6, 6, 8, 12, 8, 12]
+let gpu_tpcs = [7, 6, 8, 6, 9, 8]
+let gpu_sms_tpc = [2, 2, 2, 2, 2, 2]
+let gpu_cuda_sm = [64, 64, 64, 128, 128, 128]
+let gpu_tc_sm = [8, 8, 4, 4, 4, 4]
+let gpu_hbm = [4, 0, 5, 0, 5, 6]
+let gpu_vram = [32, 24, 80, 24, 80, 192]
+let gpu_nvlink = [6, 0, 12, 0, 18, 18]
+let gpu_tdp = [300, 250, 400, 450, 700, 1000]
+
+let mut gi = 0
+while gi < len(gpu_names) {
+    let name = gpu_names[gi]
+    let gen = gpu_gens[gi]
+    let year = gpu_years[gi]
+
+    println("+=============================================================+")
+    println("|  " + pad_r(name + " (" + gen + ", " + to_string(year) + ")", 60) + "|")
+    println("+=============================================================+")
+
+    let check_names = ["Full die SMs", "Enabled SMs", "GPCs", "TPCs/GPC", "SMs/TPC", "CUDA/SM", "TC/SM", "HBM stacks", "VRAM (GB)", "NVLink links", "TDP (W)"]
+    let check_vals = [gpu_full_sms[gi], gpu_enabled_sms[gi], gpu_gpcs[gi], gpu_tpcs[gi], gpu_sms_tpc[gi], gpu_cuda_sm[gi], gpu_tc_sm[gi], gpu_hbm[gi], gpu_vram[gi], gpu_nvlink[gi], gpu_tdp[gi]]
+
+    let mut exact_count = 0
+    let mut total = 0
+
+    let mut ci = 0
+    while ci < len(check_names) {
+        let cname = check_names[ci]
+        let cval = check_vals[ci]
+        if cval != 0 {
+            total = total + 1
+            let expr = find_n6_expression(cval)
+            if expr != "" {
+                println("|  [OK] " + pad_r(cname, 15) + " = " + pad_l(cval, 5) + "  =  " + pad_r(expr, 30) + "|")
+                exact_count = exact_count + 1
+            } else {
+                println("|  [--] " + pad_r(cname, 15) + " = " + pad_l(cval, 5) + "  =  " + pad_r("(no n=6 match)", 30) + "|")
+            }
+        }
+        ci = ci + 1
+    }
+
+    // Hierarchy check
+    let computed = gpu_gpcs[gi] * gpu_tpcs[gi] * gpu_sms_tpc[gi]
+    let hierarchy_ok = computed == gpu_full_sms[gi]
+    let h_mark = if hierarchy_ok { "[OK]" } else { "[--]" }
+
+    println("+-------------------------------------------------------------+")
+    println("|  Hierarchy: " + to_string(gpu_gpcs[gi]) + " GPCs x " + to_string(gpu_tpcs[gi]) + " TPCs x " + to_string(gpu_sms_tpc[gi]) + " SMs = " + to_string(computed) + " " + h_mark)
+    let pct = round(exact_count * 100.0 / total)
+    println("|  N6 match: " + to_string(exact_count) + "/" + to_string(total) + " parameters (" + to_string(round(pct)) + "%)")
+
+    // Special: enabled SMs = sigma(sigma-mu) = 132
+    if gpu_enabled_sms[gi] == 12 * (12 - 1) {
+        println("|  * Enabled SMs = sigma(sigma-mu) = 132 = 1/alpha leading term!")
+    }
+
+    println("+=============================================================+")
+    println("")
+
+    gi = gi + 1
+}
+
+// ======== HBM Verification (inline) ========
+
+println("+=============================================================+")
+println("|  HBM Stack Height Ladder: tau -> (sigma-tau) -> sigma -> 2^tau -> J2?")
+println("+=============================================================+")
+
+let hbm_names = ["HBM1", "HBM2", "HBM2e", "HBM3", "HBM3e", "HBM4"]
+let hbm_years = [2013, 2016, 2020, 2022, 2024, 2025]
+let hbm_stack_h = [4, 8, 8, 12, 12, 16]
+let hbm_channels = [8, 8, 8, 16, 16, 16]
+let hbm_bits_ch = [128, 128, 128, 64, 64, 128]
+let hbm_pin_gbps = [1.0, 2.0, 3.6, 6.4, 9.6, 12.0]
+
+let mut hi = 0
+while hi < len(hbm_names) {
+    let n6 = find_n6_expression(hbm_stack_h[hi])
+    let n6_str = if n6 != "" { n6 } else { "?" }
+    let bus_w = hbm_channels[hi] * hbm_bits_ch[hi]
+    let bw = bus_w * hbm_pin_gbps[hi] / 8.0
+    println("|  " + pad_r(hbm_names[hi], 6) + " " + to_string(hbm_years[hi]) + "  " + pad_r(to_string(hbm_stack_h[hi]) + "-hi", 5) + " = " + pad_r(n6_str, 8) + "  " + to_string(hbm_channels[hi]) + "ch x " + to_string(hbm_bits_ch[hi]) + "b = " + to_string(bus_w) + "b  " + to_string(round(bw)) + " GB/s/stack")
+    hi = hi + 1
+}
+
+println("+-------------------------------------------------------------+")
+println("|  Ladder: 4(tau) -> 8(sigma-tau) -> 12(sigma) -> 16(2^tau) -> 24(J2)?")
+println("|  Channel evolution: 8(sigma-tau) -> 16(2^tau)")
+println("|  Bus width: 1024b = (sigma-tau)*2^(sigma-sopfr) = 8*128")
+println("+-------------------------------------------------------------+")
+println("|  PREDICTION: HBM5 (~2027) = 24-hi = J2(6)")
+println("|  PREDICTION: HBM5 bus = 2048b = 2^(sigma-mu)")
+println("+=============================================================+")
+println("")
+
+// ======== Exponent Ladder (inline) ========
+
+println("+=============================================================+")
+println("|  BT-28 Exponent Ladder: 2^k where k in n=6 constants       |")
+println("+=============================================================+")
+
+let el_exps = [4, 5, 6, 7, 8, 11, 12]
+let el_n6_exprs = ["tau = 4", "sopfr = 5", "n = 6", "sigma-sopfr = 7", "sigma-tau = 8", "sigma-mu = 11", "sigma = 12"]
+let el_hw = ["Tensor Core dim = 16", "CUDA warp = 32", "Cache line = 64", "SSE/NEON/TPU = 128", "AVX-256 / SHA-256", "L2 TLB = 2048", "Page size = 4096"]
+
+let mut ei = 0
+while ei < len(el_exps) {
+    let val = round(pow(2, el_exps[ei]))
+    println("|  2^(" + pad_r(el_n6_exprs[ei], 12) + ") = 2^" + pad_l(el_exps[ei], 2) + " = " + pad_l(val, 5) + "   <- " + el_hw[ei])
+    ei = ei + 1
+}
+
+println("+-------------------------------------------------------------+")
+println("|  Next: 2^(sigma+mu)=2^13=8192 (GPU shared mem per SM?)")
+println("|        2^(2^tau)=2^16=65536 (max thread block size?)")
+println("+=============================================================+")
+println("")
+
+// ======== SM Sequence Analysis (inline) ========
+
+println("+=============================================================+")
+println("|  GPU SM Count Sequence -- sigma(6)=12 as Architectural Atom |")
+println("+=============================================================+")
+
+let seq_years = [2017, 2018, 2020, 2022, 2022, 2024, 2026, 2026]
+let seq_names = ["Volta GV100", "Turing TU102", "Ampere GA100", "Ada AD102", "Hopper GH100", "Blackwell GB202", "Rubin (pred A)", "Rubin (pred B)"]
+let seq_sms = [84, 72, 128, 144, 144, 192, 240, 288]
+let seq_exprs = ["sigma*(sigma-sopfr) = 12*7", "sigma*n = 12*6", "2^(sigma-sopfr) = 2^7", "sigma^2 = 12*12", "sigma^2 = 12*12", "sigma*2^tau = 12*16", "sigma*(J2-tau) = 12*20", "sigma*J2 = 12*24"]
+
+let mut si = 0
+while si < len(seq_years) {
+    let is_sigma_mult = seq_sms[si] % 12 == 0
+    let marker = if seq_years[si] >= 2026 { "[??]" } else { if is_sigma_mult { "[OK]" } else { "[!!]" } }
+    let factor = if is_sigma_mult { seq_sms[si] / 12 } else { 0 }
+    println("|  " + marker + " " + to_string(seq_years[si]) + " " + pad_r(seq_names[si], 20) + " " + pad_l(seq_sms[si], 3) + " SMs = " + pad_r(seq_exprs[si], 25) + " (sigma x" + to_string(factor) + ")")
+    si = si + 1
+}
+
+// sigma-multiples count for real GPUs (first 6)
+let real_sms = [84, 72, 128, 144, 144, 192]
+let mut sigma_mult = 0
+let mut ri = 0
+while ri < 6 {
+    if real_sms[ri] % 12 == 0 {
+        sigma_mult = sigma_mult + 1
+    }
+    ri = ri + 1
+}
+let sm_pct = round(sigma_mult * 100.0 / 6)
+
+println("+-------------------------------------------------------------+")
+println("|  sigma-multiples: " + to_string(sigma_mult) + "/6  (" + to_string(round(sm_pct)) + "%)")
+println("|  128 = 2^(sigma-sopfr) -- Ampere is the only non-sigma-multiple")
+println("|  Factor sequence: 7->6->?->12->12->16->20?->24?")
+println("+=============================================================+")
+println("")
+
+// ======== Multi-Vendor Verification (inline) ========
+
+println("+=============================================================+")
+println("|  Multi-Vendor Chip Verification (BT-69 extension)          |")
+println("+=============================================================+")
+
+let mv_vendors = ["NVIDIA", "AMD", "Google", "AWS", "Intel", "Apple"]
+let mv_names = ["R100 (predicted)", "MI400 (predicted)", "TPU v7 Ironwood", "Trainium3 (predicted)", "Clearwater Forest", "M5 (predicted)"]
+let mv_years = [2027, 2026, 2025, 2026, 2025, 2026]
+let mv_param_counts = [3, 1, 5, 1, 1, 4]
+let mv_param_names = ["SMs", "VRAM (GB)", "HBM stacks", "VRAM (GB)", "VRAM (GB)", "HBM stacks", "TensorCores", "SparseCores", "Pod chips", "VRAM (GB)", "E-cores", "CPU cores", "P-cores", "E-cores", "GPU cores"]
+let mv_param_vals = [224, 288, 8, 432, 192, 8, 2, 4, 256, 144, 288, 10, 4, 6, 10]
+let mv_param_formulas = ["2^sopfr x (sigma-sopfr) = 32x7", "sigma x J2 = 12x24", "sigma-tau", "sigma^2 x (n/phi) = 144x3", "sigma x phi^tau = 12x16", "sigma-tau", "phi", "tau", "2^(sigma-tau)", "sigma^2", "sigma x J2 = 12x24", "sigma-phi", "tau", "n", "sigma-phi"]
+
+let mut mv_total_exact = 0
+let mut mv_total_params = 0
+let mut mv_param_idx = 0
+
+let mut mvi = 0
+while mvi < len(mv_vendors) {
+    println("|                                                             |")
+    println("|  " + mv_vendors[mvi] + " -- " + mv_names[mvi] + " (" + to_string(mv_years[mvi]) + ")")
+    println("|  ----------------------------------------")
+    let count = mv_param_counts[mvi]
+    let mut pi = 0
+    while pi < count {
+        let pname = mv_param_names[mv_param_idx]
+        let pval = mv_param_vals[mv_param_idx]
+        let pformula = mv_param_formulas[mv_param_idx]
+        mv_total_params = mv_total_params + 1
+        let matched = find_n6_expression(pval)
+        if matched != "" {
+            mv_total_exact = mv_total_exact + 1
+        }
+        let icon = if matched != "" { "[OK]" } else { "[!!]" }
+        println("|    " + icon + " " + pad_r(pname, 18) + " = " + pad_l(pval, 5) + "  =  " + pformula)
+        mv_param_idx = mv_param_idx + 1
+        pi = pi + 1
+    }
+    mvi = mvi + 1
+}
+
+let mv_pct = round(mv_total_exact * 100.0 / mv_total_params)
+println("+-------------------------------------------------------------+")
+println("|  Multi-vendor N6 match: " + to_string(mv_total_exact) + "/" + to_string(mv_total_params) + " (" + to_string(round(mv_pct)) + "%)")
+println("+=============================================================+")
+println("")
+
+// ======== Interconnect Standards (inline) ========
+
+println("+=============================================================+")
+println("|  Interconnect / Memory Standards -- N6 Verification         |")
+println("+=============================================================+")
+
+let ic_names = ["HBM4 JEDEC", "UCIe 3.0 (predicted)", "CXL 4.0 (predicted)"]
+let ic_years = [2025, 2026, 2026]
+let ic_param_counts = [3, 2, 1]
+let ic_pnames = ["Interface bits", "Channels", "Pin Gb/s", "GT/s (standard)", "GT/s (advanced)", "GT/s"]
+let ic_pvals = [2048, 32, 8, 48, 64, 128]
+let ic_pformulas = ["2^(sigma-mu) = 2^11", "2^sopfr = 2^5", "sigma-tau", "sigma x tau = 12x4", "2^n = 2^6", "2^(sigma-sopfr) = 2^7"]
+
+let mut ic_total_exact = 0
+let mut ic_total_params = 0
+let mut ic_param_idx = 0
+
+let mut ici = 0
+while ici < len(ic_names) {
+    println("|                                                             |")
+    println("|  " + ic_names[ici] + " (" + to_string(ic_years[ici]) + ")")
+    println("|  ----------------------------------------")
+    let ic_count = ic_param_counts[ici]
+    let mut ipi = 0
+    while ipi < ic_count {
+        let ipname = ic_pnames[ic_param_idx]
+        let ipval = ic_pvals[ic_param_idx]
+        let ipformula = ic_pformulas[ic_param_idx]
+        ic_total_params = ic_total_params + 1
+        let imatched = find_n6_expression(ipval)
+        if imatched != "" {
+            ic_total_exact = ic_total_exact + 1
+        }
+        let iicon = if imatched != "" { "[OK]" } else { "[!!]" }
+        println("|    " + iicon + " " + pad_r(ipname, 18) + " = " + pad_l(ipval, 5) + "  =  " + ipformula)
+        ic_param_idx = ic_param_idx + 1
+        ipi = ipi + 1
+    }
+    ici = ici + 1
+}
+
+let ic_pct = round(ic_total_exact * 100.0 / ic_total_params)
+println("+-------------------------------------------------------------+")
+println("|  Interconnect N6 match: " + to_string(ic_total_exact) + "/" + to_string(ic_total_params) + " (" + to_string(round(ic_pct)) + "%)")
+println("|  PREDICTION: UCIe 3.0 = sigma*tau = 48 GT/s base rate")
+println("|  PREDICTION: CXL 4.0 = 2^(sigma-sopfr) = 128 GT/s")
+println("+=============================================================+")
+println("")
+
+// ======== Predict Rubin (inline) ========
+
+println("+=============================================================+")
+println("|  NVIDIA Rubin (~2026) -- N6 Predictions                     |")
+println("+=============================================================+")
+
+let cand_sms = [240, 256, 288]
+let cand_exprs = ["sigma*(J2-tau) = 12*20", "2^(sigma-tau) = 2^8", "sigma*J2 = 12*24"]
+let cand_notes = ["Chinchilla multiplier", "Bott periodicity power", "Leech lattice multiplier"]
+
+println("|  SM count candidates (sigma-multiples):                     |")
+let mut ci = 0
+while ci < len(cand_sms) {
+    let cuda_total = cand_sms[ci] * 128
+    let tflops = cuda_total * 2.0 * 2.0 / 1000.0
+    println("|    " + to_string(cand_sms[ci]) + " SMs = " + cand_exprs[ci] + "  (" + cand_notes[ci] + ")")
+    println("|      -> " + to_string(cuda_total) + " CUDA cores, ~" + to_string(round(tflops)) + " TFLOPS FP16 est.")
+    ci = ci + 1
+}
+
+println("+-------------------------------------------------------------+")
+println("|  Other predictions:")
+println("|    GPCs: 12(sigma) or 16(2^tau) or 20(J2-tau)")
+println("|    HBM: HBM4 16-hi (2^tau), 6(n) stacks -> 192 GB")
+println("|    NVLink: 24(J2) links = 1:1 with Golay code length")
+println("|    TDP: ~1200W = sigma^2*(sigma-tau+phi/tau) or sigma^3/sqrt(phi)")
+println("|    TC/SM: tau=4 (maintained since Ampere)")
+println("|    CUDA/SM: 128=2^(sigma-sopfr) or 192=sigma*2^tau (Kepler return)")
+println("+=============================================================+")
+println("")

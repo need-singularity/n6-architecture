@@ -1,0 +1,227 @@
+// N6 Energy Strategy Calculator (HEXA port)
+// Original: tools/energy-calc/main.rs
+// Note: 평탄화 — fn 안에서 top-level let 미가시 (B-28), 모두 inline
+
+fn pad_right(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+fn pad_left(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+fn format_float(v, prec) {
+    to_string(v)
+}
+
+let SIGMA = 12.0
+let TAU = 4.0
+let PHI = 2.0
+let SOPFR = 5.0
+let J2 = 24.0
+let MU = 1.0
+let N = 6.0
+let DASH = "-".repeat(90)
+let DASH50 = "-".repeat(50)
+let DASH40 = "-".repeat(40)
+let DASH95 = "-".repeat(95)
+let HEADER_BAR = "═".repeat(70)
+let SECTION_BAR = "=".repeat(70)
+let HEAD_PARAM = "  " + pad_right("Parameter", 35) + " " + pad_left("Measured", 10) + " " + pad_left("n=6", 10) + " " + pad_right("Expression", 20) + " " + pad_left("Error", 7)
+
+println(HEADER_BAR)
+println("  N6 Energy Strategy Calculator")
+println("  σ=12  τ=4  φ=2  sopfr=5  J₂=24  n=6")
+println(HEADER_BAR)
+
+// === SOLAR ===
+println("")
+println(SECTION_BAR)
+println("  BT-30: Shockley-Queisser Solar Bridge")
+println(SECTION_BAR)
+println("")
+println(HEAD_PARAM)
+println("  " + DASH)
+
+// check inline helper via parallel arrays of (name, measured, predicted, expr)
+let s_name = ["SQ optimal bandgap (eV)", "SQ efficiency limit", "Thermal voltage V_T (mV)", "Infinite-junction limit", "Photon energy at V_T"]
+let s_meas = [1.34, 0.337, 25.852, 0.687, 0.02585]
+let s_pred = [TAU / (N / PHI), PHI / N, J2 + PHI, PHI * PHI / N, (J2 + PHI) / 1000.0]
+let s_expr = ["τ/(n/φ) = 4/3", "φ/n = 1/3", "(J₂+φ) = 26 mV", "φ²/n = 2/3", "(J₂+φ)/1000"]
+
+let mut i = 0
+while i < 5 {
+    let mut err = 0.0
+    if abs(s_pred[i]) > 1e-10 { err = abs((s_meas[i] - s_pred[i]) / s_pred[i]) * 100.0 }
+    let mark = if err < 1.0 { "✅" } else if err < 5.0 { "⚠️" } else { "❌" }
+    println("  " + mark + " " + pad_right(s_name[i], 35) + " " + pad_left(format_float(s_meas[i], 4), 10) + " " + pad_left(format_float(s_pred[i], 4), 10) + " " + pad_right(s_expr[i], 20) + " " + pad_left(format_float(err, 2), 6) + "%")
+    i = i + 1
+}
+
+println("")
+println("  Landauer-Solar Bridge:")
+let landauer = 1.38e-23 * 300.0 * ln(PHI)
+// 수동 과학표기 (B-29 우회): mantissa = landauer * 1e21
+let lmant = landauer * 1.0e21
+println("    E_Landauer = kT·ln(φ) = " + format_float(lmant, 4) + "e-21 J")
+println("    V_T = kT/q = (J₂+φ) mV = 26 mV")
+println("    Bandgap = τ/(n/φ) = 4/3 eV = 1.333 eV")
+println("    Bits per photon ≈ bandgap/V_T ≈ 1333/26 ≈ 51")
+
+// === BATTERY ===
+println("")
+println(SECTION_BAR)
+println("  BT-35 + BT-43: Battery Voltage + Cathode CN=6")
+println(SECTION_BAR)
+println("")
+println(HEAD_PARAM)
+println("  " + DASH)
+
+let b_name = ["NiMH / NiCd (V)", "Alkaline (V)", "Lead-acid (V)", "EDLC supercap (V)", "Li primary / Na-ion (V)", "LiFePO₄ (V)", "LiMn₂O₄ spinel (V)"]
+let b_meas = [1.2, 1.5, 2.0, 2.5, 3.0, 3.2, 4.0]
+let b_pred = [N / SOPFR, N / TAU, PHI, SOPFR / PHI, N / PHI, N / PHI + 1.0 / SOPFR, TAU]
+let b_expr = ["n/sopfr = 6/5", "n/τ = 6/4", "φ = 2", "sopfr/φ = 5/2", "n/φ = 6/2", "n/φ+1/sopfr", "τ = 4"]
+
+let mut bi = 0
+while bi < 7 {
+    let mut err = 0.0
+    if abs(b_pred[bi]) > 1e-10 { err = abs((b_meas[bi] - b_pred[bi]) / b_pred[bi]) * 100.0 }
+    let mark = if err < 1.0 { "✅" } else if err < 5.0 { "⚠️" } else { "❌" }
+    println("  " + mark + " " + pad_right(b_name[bi], 35) + " " + pad_left(format_float(b_meas[bi], 4), 10) + " " + pad_left(format_float(b_pred[bi], 4), 10) + " " + pad_right(b_expr[bi], 20) + " " + pad_left(format_float(err, 2), 6) + "%")
+    bi = bi + 1
+}
+
+println("")
+println("  === Cathode Coordination Numbers (BT-43) ===")
+let c_chem = ["LiCoO₂ (LCO)", "LiFePO₄ (LFP)", "LiMn₂O₄ (LMO)", "NMC (Ni/Mn/Co)", "NCA (Ni/Co/Al)", "Li₂MnO₃ (LRMO)", "Graphite (LiC₆)", "LTO (Li₄Ti₅O₁₂)"]
+let c_metal = ["Co³⁺", "Fe²⁺", "Mn³⁺/⁴⁺", "mixed", "mixed", "Mn⁴⁺", "C hex", "Ti⁴⁺"]
+let c_cn = [6, 6, 6, 6, 6, 6, 6, 6]
+let c_n6 = ["n", "n", "n", "n", "n", "n", "n", "n"]
+
+println("  " + pad_right("Chemistry", 25) + " " + pad_right("Metal", 10) + " " + pad_left("CN", 4) + " " + pad_right("n=6", 6))
+println("  " + DASH50)
+let mut ci = 0
+while ci < 8 {
+    println("  ✅ " + pad_right(c_chem[ci], 23) + " " + pad_right(c_metal[ci], 10) + " " + pad_left(to_string(c_cn[ci]), 4) + " " + pad_right(c_n6[ci], 6))
+    ci = ci + 1
+}
+println("")
+println("  ALL " + to_string(c_cn.len()) + "/" + to_string(c_cn.len()) + "  cathodes have CN=6 = n (octahedral)")
+
+println("")
+println("  === Car Battery → Computing Bridge ===")
+println("    Car battery = n=6 cells × φ=2.0V/cell = σ=12V")
+println("    ATX power supply = σ=12V (adopted from automotive)")
+println("    BT-40: The same σ=12V powers both cars and computers")
+
+// === HYDROGEN ===
+println("")
+println(SECTION_BAR)
+println("  BT-38: Hydrogen Energy Density Quadruplet")
+println(SECTION_BAR)
+println("")
+println(HEAD_PARAM)
+println("  " + DASH)
+
+let h_name = ["LHV (MJ/kg)", "HHV (MJ/kg)", "Gibbs vapor (MJ/kg)", "Gibbs liquid (MJ/kg)"]
+let h_meas = [120.0, 142.0, 113.0, 118.0]
+let h_pred = [SIGMA * (SIGMA - PHI), SIGMA * SIGMA - PHI, SIGMA * (SIGMA - PHI) - (SIGMA - SOPFR), SIGMA * (SIGMA - PHI) - PHI]
+let h_expr = ["σ·(σ-φ) = 12·10", "σ²-φ = 144-2", "σ(σ-φ)-(σ-sopfr)", "σ(σ-φ)-φ = 120-2"]
+
+let mut hi = 0
+while hi < 4 {
+    let mut err = 0.0
+    if abs(h_pred[hi]) > 1e-10 { err = abs((h_meas[hi] - h_pred[hi]) / h_pred[hi]) * 100.0 }
+    let mark = if err < 1.0 { "✅" } else if err < 5.0 { "⚠️" } else { "❌" }
+    println("  " + mark + " " + pad_right(h_name[hi], 35) + " " + pad_left(format_float(h_meas[hi], 4), 10) + " " + pad_left(format_float(h_pred[hi], 4), 10) + " " + pad_right(h_expr[hi], 20) + " " + pad_left(format_float(err, 2), 6) + "%")
+    hi = hi + 1
+}
+
+println("")
+println("  === Difference Matrix ===")
+let lhv = 120.0
+let hhv = 142.0
+let gv = 113.0
+let gl = 118.0
+println("    HHV - LHV     = " + format_float(hhv - lhv, 0) + " = J₂-φ = " + format_float(J2 - PHI, 0))
+println("    LHV - G(vapor) = " + format_float(lhv - gv, 0) + " = σ-sopfr = " + format_float(SIGMA - SOPFR, 0))
+println("    LHV - G(liquid)= " + format_float(lhv - gl, 0) + " = φ = " + format_float(PHI, 0))
+println("    HHV - G(liquid)= " + format_float(hhv - gl, 0) + " = J₂ = " + format_float(J2, 0))
+println("")
+println("  4/4 values EXACT + 4/4 differences EXACT = most overdetermined energy result")
+
+// === IEEE519 ===
+println("")
+println(SECTION_BAR)
+println("  BT-29: IEEE 519 Power Quality + 6-Pulse Harmonics")
+println(SECTION_BAR)
+println("")
+println("  " + pad_right("Standard", 35) + " " + pad_left("Limit", 10) + " " + pad_left("n=6", 10) + " " + pad_right("Expression", 20) + " " + pad_left("Error", 7))
+println("  " + DASH)
+
+let ie_name = ["Voltage THD (%)", "Individual harmonic (%)", "Current TDD (%)"]
+let ie_meas = [5.0, 3.0, 8.0]
+let ie_pred = [SOPFR, N / PHI, SIGMA - TAU]
+let ie_expr = ["sopfr = 5", "n/φ = 3", "σ-τ = 8"]
+
+let mut iei = 0
+while iei < 3 {
+    let mut err = 0.0
+    if abs(ie_pred[iei]) > 1e-10 { err = abs((ie_meas[iei] - ie_pred[iei]) / ie_pred[iei]) * 100.0 }
+    let mark = if err < 1.0 { "✅" } else if err < 5.0 { "⚠️" } else { "❌" }
+    println("  " + mark + " " + pad_right(ie_name[iei], 35) + " " + pad_left(format_float(ie_meas[iei], 4), 10) + " " + pad_left(format_float(ie_pred[iei], 4), 10) + " " + pad_right(ie_expr[iei], 20) + " " + pad_left(format_float(err, 2), 6) + "%")
+    iei = iei + 1
+}
+
+println("")
+println("  === 6-Pulse Harmonic Series (h = 6k ± 1) ===")
+let hh = [5, 7, 11, 13, 23, 25]
+let hf = ["6·1-1", "6·1+1", "6·2-1", "6·2+1", "6·4-1", "6·4+1"]
+let hn = ["sopfr", "σ-sopfr", "σ-μ", "σ+μ", "J₂-μ", "J₂+μ"]
+
+println("  " + pad_right("Harmonic", 10) + " " + pad_right("Formula", 10) + " " + pad_right("n=6", 15))
+println("  " + DASH40)
+let mut hj = 0
+while hj < 6 {
+    println("  ✅ " + to_string(hh[hj]) + "th       " + pad_right(hf[hj], 10) + " " + pad_right(hn[hj], 15))
+    hj = hj + 1
+}
+
+println("")
+println("  Pulse rectifier chain: n→σ→J₂ (6→12→24)")
+println("    6-pulse:  cancels 2nd, 3rd; leaves 5th(sopfr), 7th(σ-sopfr)")
+println("    12-pulse: cancels 5th, 7th; leaves 11th(σ-μ), 13th(σ+μ)")
+println("    24-pulse: cancels 11th, 13th; THD < 1%")
+
+// === GRAND CHAIN ===
+println("")
+println(SECTION_BAR)
+println("  BT-36: Grand Energy-Information-Hardware-Physics Chain")
+println(SECTION_BAR)
+println("")
+
+let l_name = ["SQ bandgap", "Thermal voltage", "Landauer bits", "H100 SMs", "1/α"]
+let l_meas = [1.34, 25.852, 74.4, 132.0, 137.036]
+let l_pred = [TAU / (N / PHI), J2 + PHI, SIGMA * N + PHI, SIGMA * (SIGMA - MU), SIGMA * (SIGMA - MU) + SOPFR + MU / 28.0]
+let l_expr = ["τ/(n/φ)=4/3 eV", "(J₂+φ)=26 mV", "σ·n+φ=74", "σ(σ-μ)=132", "σ(σ-μ)+sopfr+μ/P₂"]
+let l_dom  = ["Solar", "Semiconductor", "Information", "AI Hardware", "Physics"]
+
+println("  " + pad_right("Link", 20) + " " + pad_left("Measured", 10) + " " + pad_left("n=6", 10) + " " + pad_right("Expression", 25) + " " + pad_right("Domain", 15) + " " + pad_left("Error", 7))
+println("  " + DASH95)
+
+let mut lk = 0
+while lk < 5 {
+    let err = abs((l_meas[lk] - l_pred[lk]) / l_pred[lk]) * 100.0
+    let mark = if err < 1.0 { "✅" } else { "⚠️" }
+    println("  " + mark + " " + pad_right(l_name[lk], 18) + " " + pad_left(format_float(l_meas[lk], 3), 10) + " " + pad_left(format_float(l_pred[lk], 3), 10) + " " + pad_right(l_expr[lk], 25) + " " + pad_right(l_dom[lk], 15) + " " + pad_left(format_float(err, 3), 6) + "%")
+    lk = lk + 1
+}
+
+println("")
+println("  Reading: Solar photon(4/3 eV) → voltage(26 thermal units)")
+println("           → 74 Landauer bits → 132 SMs → 1/α=137.036")
+println("  Each link uses a DIFFERENT n=6 function, chained causally.")

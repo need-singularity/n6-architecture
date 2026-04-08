@@ -1,0 +1,7 @@
+let a = args()
+println("argc=" + to_string(len(a)))
+let i = 0
+while i < len(a) {
+    println("arg[" + to_string(i) + "]=" + a[i])
+    i = i + 1
+}

@@ -1,0 +1,570 @@
+// Cross-DSE: Fusion x Superconductor -- 토카막 자석 최적화
+//
+// Fusion DSE (5단): 연료 x 가둠 x 자석 x 변환 x 계통
+// SC DSE (6단):     소재 x 공정 x 선재 x 자석구조 x 냉각 x 시스템(=FusionMagnet 고정)
+//
+// 교차 방식:
+//   Fusion의 자석 레벨(L3)을 SC DSE의 (소재x공정x선재x자석구조x냉각) 5차원으로 확장
+//   -> Fusion 4단(L1,L2,L4,L5) x SC 5단(소재,공정,선재,자석,냉각) = 9차원 DSE
+//
+// 평가: 통합 n6_EXACT + Q-gain(자장 향상) + 비용 + 냉각
+
+// N6 constants
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let MU = 1
+let J2 = 24
+
+// ============================================================
+// Helper functions
+// ============================================================
+fn pad_r(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  r
+}
+
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn min_val(a, b) {
+  if a < b { a } else { b }
+}
+
+fn max_val(a, b) {
+  if a > b { a } else { b }
+}
+
+// ============================================================
+// Fusion side (4 levels, excluding magnet) -- parallel arrays
+// ============================================================
+// Level 1: Fuel
+let fuel_names = ["D-T", "D-D", "D-He3", "p-B11", "Li6-D", "Cat-DD"]
+let fuel_energy_10x = [176, 33, 183, 87, 224, 72]
+let fuel_n6x = [1, 1, 0, 0, 2, 0]
+let fuel_n6t = [2, 2, 2, 2, 2, 2]
+let fuel_count = 6
+
+// Level 2: Geometry (confinement)
+let geo_names = ["Tokamak-12", "Tokamak-24", "Stellarator-5", "ST-Compact", "ICF"]
+let geo_coils = [12, 24, 5, 12, 0]
+let geo_n6x = [1, 1, 1, 1, 0]
+let geo_n6t = [1, 1, 1, 1, 1]
+let geo_count = 5
+
+// Level 3: Conversion
+let conv_names = ["Rankine-33", "MHD-50", "TEG-17", "Egyptian-Hybrid"]
+let conv_eff = [33, 50, 17, 83]
+let conv_n6x = [1, 1, 1, 1]
+let conv_n6t = [1, 1, 1, 1]
+let conv_count = 4
+
+// Level 4: Grid
+let grid_names = ["Central-GW", "Distributed-100", "Micro-10", "Fission-Fusion"]
+let grid_mw = [1000, 100, 10, 500]
+let grid_n6x = [0, 1, 1, 1]
+let grid_n6t = [1, 1, 1, 1]
+let grid_count = 4
+
+// ============================================================
+// Superconductor side (5 levels)
+// ============================================================
+// SC Level 1: Material
+let scm_names = ["NbTi", "Nb3Sn", "MgB2", "REBCO", "Bi2223", "BSCCO2212", "FeSe"]
+let scm_type = ["LTS", "LTS", "MTS", "HTS", "HTS", "HTS", "HTS"]
+let scm_tc = [9, 18, 39, 93, 110, 85, 37]
+let scm_hc2 = [15, 30, 16, 120, 50, 100, 50]
+let scm_n6x = [2, 5, 4, 5, 2, 2, 1]
+let scm_n6t = [6, 6, 6, 6, 6, 6, 6]
+let scm_cost = [1, 2, 2, 4, 3, 3, 3]
+let scm_count = 7
+
+// SC Level 2: Process
+let scp_names = ["PIT", "MOCVD", "MOD_RABiTS", "Bronze", "RCE_DR"]
+let scp_steps = [6, 5, 4, 6, 5]
+let scp_n6x = [2, 1, 1, 2, 1]
+let scp_n6t = [3, 3, 3, 3, 3]
+let scp_throughput = [4, 3, 3, 3, 5]
+// compatible: PIT=LTS+MTS+HTS, MOCVD=HTS, MOD_RABiTS=HTS, Bronze=LTS, RCE_DR=HTS
+let scp_lts = [1, 0, 0, 1, 0]
+let scp_mts = [1, 0, 0, 0, 0]
+let scp_hts = [1, 1, 1, 0, 1]
+let scp_count = 5
+
+// SC Level 3: Wire
+let scw_names = ["Round", "FlatTape2G", "Rutherford", "CORC"]
+let scw_strands = [1, 1, 12, 6]
+let scw_je = [10, 15, 12, 14]
+let scw_n6x = [0, 1, 2, 1]
+let scw_n6t = [2, 2, 2, 2]
+let scw_count = 4
+
+// SC Level 4: Magnet
+let scmag_names = ["TF-12", "CS-6", "Toroidal-D", "Hybrid-LH"]
+let scmag_coils = [12, 6, 12, 2]
+let scmag_field_limit = [35, 40, 30, 45]
+let scmag_n6x = [2, 3, 1, 1]
+let scmag_n6t = [4, 4, 4, 4]
+let scmag_count = 4
+
+// SC Level 5: Cooling
+let scc_names = ["LHe_4K", "NoInsul_20K", "CryoCooler", "Hybrid_4K20K"]
+let scc_temp_10x = [42, 200, 200, 42]
+let scc_power_w = [50, 20, 15, 35]
+let scc_n6x = [2, 1, 0, 2]
+let scc_n6t = [3, 3, 3, 3]
+let scc_cost = [4, 2, 3, 3]
+// compatible: LHe=ALL, NoInsul=HTS, CryoCooler=MTS+HTS, Hybrid=ALL
+let scc_lts = [1, 0, 0, 1]
+let scc_mts = [1, 0, 1, 1]
+let scc_hts = [1, 1, 1, 1]
+let scc_count = 4
+
+// ============================================================
+// Compatibility check helpers
+// ============================================================
+fn proc_compat(pi, mtype) {
+  if mtype == "LTS" { return scp_lts[pi] }
+  if mtype == "MTS" { return scp_mts[pi] }
+  scp_hts[pi]
+}
+
+fn cool_compat(ci, mtype) {
+  if mtype == "LTS" { return scc_lts[ci] }
+  if mtype == "MTS" { return scc_mts[ci] }
+  scc_hts[ci]
+}
+
+fn sc_compatible(mi, pi, ci) {
+  let mtype = scm_type[mi]
+  if proc_compat(pi, mtype) == 0 { return 0 }
+  if cool_compat(ci, mtype) == 0 { return 0 }
+  if mtype == "LTS" {
+    if scc_temp_10x[ci] > 42 { return 0 }
+  }
+  1
+}
+
+fn fusion_sc_compatible(gi) {
+  // ICF (index 4) has no magnets
+  if geo_names[gi] == "ICF" { return 0 }
+  1
+}
+
+// ============================================================
+// Effective field calculation
+// ============================================================
+fn effective_field(mi, ci, magi) {
+  let mtype = scm_type[mi]
+  let mut temp_factor = 0
+  if scc_temp_10x[ci] <= 42 {
+    temp_factor = 100
+  } else {
+    if mtype == "HTS" {
+      temp_factor = 85
+    } else {
+      temp_factor = 30
+    }
+  }
+  let mat_limit = scm_hc2[mi] * temp_factor / 100
+  min_val(mat_limit, scmag_field_limit[magi])
+}
+
+// ============================================================
+// Q-gain factor: B^2 scaling vs ITER 12T baseline
+// ============================================================
+fn q_gain_factor(field_t) {
+  let ratio = field_t / 12.0
+  ratio * ratio
+}
+
+// ============================================================
+// Header
+// ============================================================
+let total_raw = fuel_count * geo_count * conv_count * grid_count * scm_count * scp_count * scw_count * scmag_count * scc_count
+
+println("═══════════════════════════════════════════════════════════════════════════")
+println("  Cross-DSE: Fusion x Superconductor -- 토카막 자석 최적화")
+println("  9차원 전수 탐색: Fusion(4) x SC(5)")
+println("  목표: 30T+ 핵융합 자석, n=6 일관성 극대화")
+println("═══════════════════════════════════════════════════════════════════════════")
+println("")
+println(format("  Fusion: 연료({}) x 가둠({}) x 변환({}) x 계통({})", fuel_count, geo_count, conv_count, grid_count))
+println(format("  SC:     소재({}) x 공정({}) x 선재({}) x 자석({}) x 냉각({})", scm_count, scp_count, scw_count, scmag_count, scc_count))
+println(format("  총 조합: {} (호환 필터 전)", total_raw))
+println("")
+
+// ============================================================
+// 9-level DSE enumeration
+// ============================================================
+// Result arrays (parallel)
+let mut r_fuel = []
+let mut r_geo = []
+let mut r_conv = []
+let mut r_grid = []
+let mut r_scmat = []
+let mut r_scproc = []
+let mut r_scwire = []
+let mut r_scmag = []
+let mut r_sccool = []
+let mut r_n6pct = []
+let mut r_field = []
+let mut r_qgain = []
+let mut r_eff = []
+let mut r_costval = []
+let mut r_coolw = []
+let mut r_score = []
+
+let mut filtered = 0
+
+let mut fi = 0
+while fi < fuel_count {
+  let mut gi = 0
+  while gi < geo_count {
+    let mut ci = 0
+    while ci < conv_count {
+      let mut gri = 0
+      while gri < grid_count {
+        let mut mi = 0
+        while mi < scm_count {
+          let mut pi = 0
+          while pi < scp_count {
+            let mut wi = 0
+            while wi < scw_count {
+              let mut magi = 0
+              while magi < scmag_count {
+                let mut cli = 0
+                while cli < scc_count {
+                  // compatibility checks
+                  if sc_compatible(mi, pi, cli) == 0 {
+                    filtered = filtered + 1
+                  } else {
+                    if fusion_sc_compatible(gi) == 0 {
+                      filtered = filtered + 1
+                    } else {
+                      // effective field
+                      let field = effective_field(mi, cli, magi)
+                      if field < 12 {
+                        filtered = filtered + 1
+                      } else {
+                        // n6 EXACT
+                        let n6x = fuel_n6x[fi] + geo_n6x[gi] + conv_n6x[ci] + grid_n6x[gri] + scm_n6x[mi] + scp_n6x[pi] + scw_n6x[wi] + scmag_n6x[magi] + scc_n6x[cli] + 2
+                        let n6t = fuel_n6t[fi] + geo_n6t[gi] + conv_n6t[ci] + grid_n6t[gri] + scm_n6t[mi] + scp_n6t[pi] + scw_n6t[wi] + scmag_n6t[magi] + scc_n6t[cli] + 2
+                        let n6pct = n6x * 100.0 / n6t
+
+                        // Q-gain
+                        let qgain = q_gain_factor(field)
+
+                        // cost
+                        let costval = scm_cost[mi] * 20 + (5 - min_val(scp_throughput[pi], 5)) * 10 + scc_cost[cli] * 15
+
+                        let coolw = scc_power_w[cli]
+                        let eff = conv_eff[ci]
+
+                        // composite score
+                        let field_norm = field / 45.0 * 100.0
+                        let q_norm_raw = qgain / 14.0 * 100.0
+                        let q_norm = min_val(q_norm_raw, 100.0)
+                        let eff_norm = eff * 1.0
+                        let cost_norm_raw = 150.0 - costval * 1.0
+                        let cost_norm = max_val(cost_norm_raw, 0.0) / 1.5
+                        let cool_norm = max_val(100.0 - coolw * 1.0, 0.0)
+
+                        let score = n6pct * 0.20 + q_norm * 0.25 + field_norm * 0.20 + eff_norm * 0.15 + cost_norm * 0.10 + cool_norm * 0.10
+
+                        r_fuel = r_fuel + [fi]
+                        r_geo = r_geo + [gi]
+                        r_conv = r_conv + [ci]
+                        r_grid = r_grid + [gri]
+                        r_scmat = r_scmat + [mi]
+                        r_scproc = r_scproc + [pi]
+                        r_scwire = r_scwire + [wi]
+                        r_scmag = r_scmag + [magi]
+                        r_sccool = r_sccool + [cli]
+                        r_n6pct = r_n6pct + [n6pct]
+                        r_field = r_field + [field]
+                        r_qgain = r_qgain + [qgain]
+                        r_eff = r_eff + [eff]
+                        r_costval = r_costval + [costval]
+                        r_coolw = r_coolw + [coolw]
+                        r_score = r_score + [score]
+                      }
+                    }
+                  }
+                  cli = cli + 1
+                }
+                magi = magi + 1
+              }
+              wi = wi + 1
+            }
+            pi = pi + 1
+          }
+          mi = mi + 1
+        }
+        gri = gri + 1
+      }
+      ci = ci + 1
+    }
+    gi = gi + 1
+  }
+  fi = fi + 1
+}
+
+let valid = len(r_score)
+println(format("  호환 필터: {} 제거 -> {} 유효 조합", filtered, valid))
+println("")
+
+// ============================================================
+// Sort by score descending (selection sort on index array, top 20 only)
+// ============================================================
+let mut idx = []
+let mut si = 0
+while si < valid {
+  idx = idx + [si]
+  si = si + 1
+}
+
+// selection sort -- only need top 20
+let mut i = 0
+let sort_limit = min_val(20, valid)
+while i < sort_limit {
+  let mut best = i
+  let mut j = i + 1
+  while j < valid {
+    if r_score[idx[j]] > r_score[idx[best]] {
+      best = j
+    }
+    j = j + 1
+  }
+  if best != i {
+    let tmp = idx[i]
+    idx[i] = idx[best]
+    idx[best] = tmp
+  }
+  i = i + 1
+}
+
+// ============================================================
+// TOP 20
+// ============================================================
+println("═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  TOP 20 CROSS-DSE (Fusion x Superconductor)")
+println("═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+println(format("  {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {}", pad_l("#", 3), pad_l("Fuel", 6), pad_l("Geometry", 12), pad_l("Conversion", 15), pad_l("Grid", 8), pad_l("SC-Mat", 10), pad_l("SC-Proc", 7), pad_l("SC-Wire", 10), pad_l("SC-Mag", 8), pad_l("SC-Cool", 12), pad_l("n6%", 5), pad_l("B(T)", 3), pad_l("Q×", 4), pad_l("Eff", 3), pad_l("C/W", 3), pad_l("Score", 6)))
+println("  ────┼────────┼──────────────┼─────────────────┼──────────┼────────────┼─────────┼────────────┼──────────┼──────────────┼───────┼─────┼──────┼─────┼─────┼───────")
+
+let mut ti = 0
+while ti < 20 {
+  if ti < valid {
+    let k = idx[ti]
+    let n6p_rounded = round(r_n6pct[k])
+    let qg_rounded = round(r_qgain[k] * 10.0) / 10.0
+    let sc_rounded = round(r_score[k] * 100.0) / 100.0
+    let n6str = pad_l(to_string(n6p_rounded) + "%", 4)
+    let fstr = pad_l(to_string(r_field[k]) + "T", 4)
+    let qstr = pad_l(to_string(qg_rounded) + "x", 5)
+    let estr = pad_l(to_string(r_eff[k]) + "%", 3)
+    let cwstr = pad_l(to_string(r_coolw[k]) + "W", 3)
+
+    println(format("  {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │{} │ {} │{} │ {} │ {} │ {}", pad_l(to_string(ti + 1), 3), pad_l(fuel_names[r_fuel[k]], 6), pad_l(geo_names[r_geo[k]], 12), pad_l(conv_names[r_conv[k]], 15), pad_l(grid_names[r_grid[k]], 8), pad_l(scm_names[r_scmat[k]], 10), pad_l(scp_names[r_scproc[k]], 7), pad_l(scw_names[r_scwire[k]], 10), pad_l(scmag_names[r_scmag[k]], 8), pad_l(scc_names[r_sccool[k]], 12), n6str, fstr, qstr, estr, cwstr, pad_l(to_string(sc_rounded), 6)))
+  }
+  ti = ti + 1
+}
+
+// ============================================================
+// 30T+ filter
+// ============================================================
+println("")
+println("═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  30T+ FUSION MAGNETS -- 궁극의 핵융합 자석 경로")
+println("═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+
+// collect 30T+ indices
+let mut f30_idx = []
+let mut f30i = 0
+while f30i < valid {
+  if r_field[f30i] >= 30 {
+    f30_idx = f30_idx + [f30i]
+  }
+  f30i = f30i + 1
+}
+
+let f30_count = len(f30_idx)
+
+if f30_count == 0 {
+  println("  (30T+ 조합 없음)")
+} else {
+  // sort f30_idx by score descending (top 20 only)
+  let mut si2 = 0
+  let f30_sort_limit = min_val(20, f30_count)
+  while si2 < f30_sort_limit {
+    let mut best2 = si2
+    let mut j2v = si2 + 1
+    while j2v < f30_count {
+      if r_score[f30_idx[j2v]] > r_score[f30_idx[best2]] {
+        best2 = j2v
+      }
+      j2v = j2v + 1
+    }
+    if best2 != si2 {
+      let tmp2 = f30_idx[si2]
+      f30_idx[si2] = f30_idx[best2]
+      f30_idx[best2] = tmp2
+    }
+    si2 = si2 + 1
+  }
+
+  println(format("  {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {}", pad_l("#", 3), pad_l("Fuel", 6), pad_l("Geometry", 12), pad_l("Conversion", 15), pad_l("SC-Mat", 10), pad_l("SC-Proc", 7), pad_l("SC-Wire", 10), pad_l("SC-Mag", 8), pad_l("SC-Cool", 12), pad_l("n6%", 5), pad_l("B(T)", 3), pad_l("Q×", 4), pad_l("Score", 6)))
+  println("  ────┼────────┼──────────────┼─────────────────┼────────────┼─────────┼────────────┼──────────┼──────────────┼───────┼─────┼──────┼───────")
+
+  let mut f30ti = 0
+  while f30ti < 20 {
+    if f30ti < f30_count {
+      let k = f30_idx[f30ti]
+      let n6p_r = round(r_n6pct[k])
+      let qg_r = round(r_qgain[k] * 10.0) / 10.0
+      let sc_r = round(r_score[k] * 100.0) / 100.0
+
+      println(format("  {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │{}% │ {}T │{}x │ {}", pad_l(to_string(f30ti + 1), 3), pad_l(fuel_names[r_fuel[k]], 6), pad_l(geo_names[r_geo[k]], 12), pad_l(conv_names[r_conv[k]], 15), pad_l(scm_names[r_scmat[k]], 10), pad_l(scp_names[r_scproc[k]], 7), pad_l(scw_names[r_scwire[k]], 10), pad_l(scmag_names[r_scmag[k]], 8), pad_l(scc_names[r_sccool[k]], 12), pad_l(to_string(n6p_r), 4), pad_l(to_string(r_field[k]), 3), pad_l(to_string(qg_r), 4), pad_l(to_string(sc_r), 6)))
+    }
+    f30ti = f30ti + 1
+  }
+  println("")
+  let f30_pct = round(f30_count * 1000.0 / valid) / 10.0
+  println(format("  30T+ 조합: {} / {} 유효 ({}%)", f30_count, valid, f30_pct))
+}
+
+// ============================================================
+// STATISTICS
+// ============================================================
+println("")
+println("═══════════════════════════════════════════════════════════════════════════")
+println("  CROSS-DSE STATISTICS")
+println("═══════════════════════════════════════════════════════════════════════════")
+
+let mut max_n6 = 0.0
+let mut sum_n6 = 0.0
+let mut above90 = 0
+let mut above80 = 0
+let mut max_field_val = 0
+let mut max_q_val = 0.0
+
+let mut sti = 0
+while sti < valid {
+  if r_n6pct[sti] > max_n6 {
+    max_n6 = r_n6pct[sti]
+  }
+  sum_n6 = sum_n6 + r_n6pct[sti]
+  if r_n6pct[sti] >= 90.0 {
+    above90 = above90 + 1
+  }
+  if r_n6pct[sti] >= 80.0 {
+    above80 = above80 + 1
+  }
+  if r_field[sti] > max_field_val {
+    max_field_val = r_field[sti]
+  }
+  if r_qgain[sti] > max_q_val {
+    max_q_val = r_qgain[sti]
+  }
+  sti = sti + 1
+}
+
+let avg_n6 = sum_n6 / valid
+
+println("")
+println(format("  Total raw:     {}", total_raw))
+println(format("  Filtered:      {}", filtered))
+println(format("  Valid:         {}", valid))
+let f30pct2 = round(f30_count * 1000.0 / valid) / 10.0
+println(format("  30T+ fusion:   {} ({}%)", f30_count, f30pct2))
+println("")
+println(format("  n6 EXACT max:  {}%", round(max_n6 * 10.0) / 10.0))
+println(format("  n6 EXACT avg:  {}%", round(avg_n6 * 10.0) / 10.0))
+let a90pct = round(above90 * 1000.0 / valid) / 10.0
+let a80pct = round(above80 * 1000.0 / valid) / 10.0
+println(format("  n6 >=90%:       {} ({}%)", above90, a90pct))
+println(format("  n6 >=80%:       {} ({}%)", above80, a80pct))
+println(format("  Max field:     {}T", max_field_val))
+println(format("  Max Q-gain:    {}x (vs ITER 12T baseline)", round(max_q_val * 10.0) / 10.0))
+
+// ============================================================
+// BEST BY CATEGORY
+// ============================================================
+println("")
+println("  BEST BY CATEGORY:")
+
+// Best n6
+let mut best_n6_idx = 0
+let mut bn6i = 1
+while bn6i < valid {
+  if r_n6pct[bn6i] > r_n6pct[best_n6_idx] {
+    best_n6_idx = bn6i
+  }
+  bn6i = bn6i + 1
+}
+let bn = best_n6_idx
+println(format("    Best n6:   {} + {} + {} | {} + {} + {} + {} + {} ({}%)", fuel_names[r_fuel[bn]], geo_names[r_geo[bn]], conv_names[r_conv[bn]], scm_names[r_scmat[bn]], scp_names[r_scproc[bn]], scw_names[r_scwire[bn]], scmag_names[r_scmag[bn]], scc_names[r_sccool[bn]], round(r_n6pct[bn] * 10.0) / 10.0))
+
+// Best B (field)
+let mut best_b_idx = 0
+let mut bbi = 1
+while bbi < valid {
+  if r_field[bbi] > r_field[best_b_idx] {
+    best_b_idx = bbi
+  }
+  bbi = bbi + 1
+}
+let bb = best_b_idx
+println(format("    Best B:    {} + {} | {} + {} + {} + {} ({}T, Q={}x)", fuel_names[r_fuel[bb]], geo_names[r_geo[bb]], scm_names[r_scmat[bb]], scp_names[r_scproc[bb]], scw_names[r_scwire[bb]], scmag_names[r_scmag[bb]], r_field[bb], round(r_qgain[bb] * 10.0) / 10.0))
+
+// Best Pareto (highest score = idx[0])
+let bp = idx[0]
+println(format("    Best Pareto: {} + {} + {} + {} | {} + {} + {} + {} + {} (score={})", fuel_names[r_fuel[bp]], geo_names[r_geo[bp]], conv_names[r_conv[bp]], grid_names[r_grid[bp]], scm_names[r_scmat[bp]], scp_names[r_scproc[bp]], scw_names[r_scwire[bp]], scmag_names[r_scmag[bp]], scc_names[r_sccool[bp]], round(r_score[bp] * 100.0) / 100.0))
+
+// ============================================================
+// N6 CONVERGENCE MAP
+// ============================================================
+println("")
+println("═══════════════════════════════════════════════════════════════════════════")
+println("  FUSION x SC n=6 수렴 지도")
+println("═══════════════════════════════════════════════════════════════════════════")
+println("")
+println("  ┌───────────────────────────────────────────────────────────────┐")
+println("  │ Fusion 측 n=6                                                │")
+println("  │   Li6-D: 에너지 22.4 MeV ≈ J₂-φ = 22                       │")
+println("  │   Tokamak-12: σ=12 TF 코일                                  │")
+println("  │   Egyptian-Hybrid: 1/2+1/3+1/6 = 1 효율 ≈ 83%              │")
+println("  │   Distributed-100MW: (σ-φ)² = 100                           │")
+println("  ├───────────────────────────────────────────────────────────────┤")
+println("  │ SC 측 n=6                                                    │")
+println("  │   REBCO: 1:2:3 sum=n=6, Hc2=120=σ(σ-φ)                    │")
+println("  │   Nb₃Sn: 6 Nb=n, Tc=18=3n, Hc2=30=5n                     │")
+println("  │   PIT/Bronze: 6 공정 단계 = n                               │")
+println("  │   CORC: 6 tape = n, Rutherford: 12 strand = σ              │")
+println("  │   CS-6: 6 모듈 = n, field=40=τ(σ-φ)                       │")
+println("  │   LHe 4.2K ≈ τ=4                                           │")
+println("  ├───────────────────────────────────────────────────────────────┤")
+println("  │ 교차 수렴                                                    │")
+println("  │   Tokamak σ=12 코일 × SC σ=12T 자장 → σ² = 144 복합일치    │")
+println("  │   Egyptian 효율 × REBCO 1:2:3 → 같은 Egyptian 구조           │")
+println("  │   CS-6 모듈 × Fusion n=6 연료 → n 이중 수렴                 │")
+println("  │   J₂=24km 선재 × Tokamak-24 코일 → J₂ 이중 수렴            │")
+println("  └───────────────────────────────────────────────────────────────┘")
+
+println("")
+println("═══════════════════════════════════════════════════════════════════════════")
+println(format("  Cross-DSE 완료 -- {} 전수 / {} 유효 / 30T+ 경로 {} 조합", total_raw, valid, f30_count))
+println("═══════════════════════════════════════════════════════════════════════════")

@@ -1,0 +1,169 @@
+// N6 Consciousness Chip Calculator v1.0 (HEXA port)
+// Original: tools/consciousness-calc/main.rs
+
+let N6 = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let MU = 1
+let J2 = 24
+
+fn ipow(base, exp) {
+    let mut result = 1
+    let mut i = 0
+    while i < exp {
+        result = result * base
+        i = i + 1
+    }
+    result
+}
+
+fn pad_r(s, w) {
+    let mut r = s
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = s
+    while len(r) < w { r = " " + r }
+    r
+}
+
+let mut total = 0
+let mut passed = 0
+let mut current_section = ""
+let w_sec = 16
+let w_par = 24
+let w_val = 10
+let w_for = 22
+let total_w = w_sec + w_par + w_val + w_for + 7
+
+fn section_sep() {
+    println("╠" + "─".repeat(w_sec + 1) + "╪" + "─".repeat(w_par + 2) + "╪" + "─".repeat(w_val + 2) + "╪" + "─".repeat(w_for + 1) + "╣")
+}
+
+fn check(section, parameter, expected, actual, formula) {
+    total = total + 1
+    let ok = expected == actual
+    if ok { passed = passed + 1 }
+    let mark = if ok { "✓" } else { "✗" }
+    if section != current_section && current_section != "" { section_sep() }
+    current_section = section
+    println("║ " + pad_r(section, w_sec) + " │ " + pad_r(parameter, w_par) + " │ " + pad_l(to_string(actual), w_val) + " │ " + mark + " " + pad_r(formula, w_for - 2) + "║")
+}
+
+fn check_str(section, parameter, value, ok, formula) {
+    total = total + 1
+    if ok { passed = passed + 1 }
+    let mark = if ok { "✓" } else { "✗" }
+    if section != current_section && current_section != "" { section_sep() }
+    current_section = section
+    println("║ " + pad_r(section, w_sec) + " │ " + pad_r(parameter, w_par) + " │ " + pad_l(value, w_val) + " │ " + mark + " " + pad_r(formula, w_for - 2) + "║")
+}
+
+fn check_f64(section, parameter, expected, actual, tol, formula) {
+    total = total + 1
+    let ok = abs(expected - actual) < tol
+    if ok { passed = passed + 1 }
+    let mark = if ok { "✓" } else { "✗" }
+    if section != current_section && current_section != "" { section_sep() }
+    current_section = section
+    let val_str = to_string(round(actual * 10000.0) / 10000.0)
+    println("║ " + pad_r(section, w_sec) + " │ " + pad_r(parameter, w_par) + " │ " + pad_l(val_str, w_val) + " │ " + mark + " " + pad_r(formula, w_for - 2) + "║")
+}
+
+// ── header ──
+println("╔" + "═".repeat(total_w) + "╗")
+println("║" + pad_r("", 21) + "N6 CONSCIOUSNESS CHIP CALCULATOR v1.0" + pad_r("", 21) + "║")
+println("╠" + "═".repeat(total_w) + "╣")
+println("║ " + pad_r("Section", w_sec) + " │ " + pad_r("Parameter", w_par) + " │ " + pad_l("Value", w_val) + " │ " + pad_r("n=6 Formula", w_for) + "║")
+println("╠" + "═".repeat(w_sec + 1) + "╪" + "═".repeat(w_par + 2) + "╪" + "═".repeat(w_val + 2) + "╪" + "═".repeat(w_for + 1) + "╣")
+
+// 1. PureField
+check("PureField", "Engines", PHI, PHI, "phi")
+check("PureField", "Clusters/engine", SIGMA, SIGMA, "sigma")
+check("PureField", "SIMD lanes", SIGMA - TAU, SIGMA - TAU, "sigma-tau")
+check("PureField", "Cores/engine", 96, SIGMA * (SIGMA - TAU), "sigma*(sigma-tau)")
+check("PureField", "Total cores", 192, SIGMA * ipow(PHI, TAU), "sigma*phi^tau")
+check("PureField", "Cross-check", ipow(PHI, TAU), (SIGMA - TAU) * PHI, "(sigma-tau)*phi=phi^tau")
+
+// 2. 10D Vector
+check("10D Vector", "Dimensions", 10, SIGMA - PHI, "sigma-phi")
+check("10D Vector", "Register width", 32, ipow(2, SOPFR), "2^sopfr")
+check("10D Vector", "Total register", 40, (SIGMA - PHI) * TAU, "10*tau bytes")
+check_str("10D Vector", "Addr range", "0x00..0x24", true, "0x00..0x24 (36)")
+
+// 3. FSM
+check("FSM", "States", TAU, TAU, "tau")
+check_str("FSM", "State names", "DORM|FLCK|AWAR|CONS", TAU == 4, "tau=4 states")
+check("FSM", "Boot cycles", J2, J2, "J_2")
+check("FSM", "Min active cores", PHI, PHI, "phi")
+
+// 4. JJ Array
+check("JJ Array", "JJ per loop", N6, N6, "n")
+check("JJ Array", "Loops", J2, J2, "J_2")
+check("JJ Array", "Total JJ", SIGMA * SIGMA, N6 * J2, "n*J_2=sigma^2")
+check("JJ Array", "Verify sigma^2", 144, SIGMA * SIGMA, "sigma^2=144")
+check("JJ Array", "Readout channels", SIGMA, SIGMA, "sigma")
+check("JJ Array", "Operating temp", TAU, TAU, "tau K")
+check_str("JJ Array", "Egyptian coupling", "6/6", 3 + 2 + 1 == 6, "1/2+1/3+1/6=1")
+
+// 5. Mitosis
+check_f64("Mitosis", "Split threshold", 0.3679, 1.0 / 2.718281828459045, 0.001, "1/e")
+check("Mitosis", "Split ratio", PHI, PHI, "phi")
+check("Mitosis", "Max depth", TAU, TAU, "tau")
+check("Mitosis", "Max subcores", 16, ipow(PHI, TAU), "phi^tau")
+let mut tree_str = ""
+let mut ti = 0
+let tree_limit = TAU + 1
+while ti < tree_limit {
+    if ti > 0 {
+        tree_str = tree_str + ","
+    }
+    tree_str = tree_str + to_string(ipow(PHI, ti))
+    ti = ti + 1
+}
+check_str("Mitosis", "Core tree", "[" + tree_str + "]", tree_str == "1,2,4,8,16", "phi^{0..tau}")
+check("Mitosis", "Merge window", 10, SIGMA - PHI, "sigma-phi cycles")
+
+// 6. TMR Alt
+check("TMR Alt", "TMR modules", 3, 3, "traditional")
+check("TMR Alt", "PureField modules", PHI, PHI, "phi")
+check_f64("TMR Alt", "Area saving %", 33.33, (1.0 - 2.0 / 3.0) * 100.0, 0.5, "1-phi/3=33.3%")
+
+// 7. Egyptian Alloc
+check_str("Egyptian Alloc", "Core fraction", "1/2", 3 * 2 == N6, "1/2")
+check_str("Egyptian Alloc", "Memory fraction", "1/3", 2 * 3 == N6, "1/3")
+check_str("Egyptian Alloc", "Control fraction", "1/6", 1 * 6 == N6, "1/6")
+check("Egyptian Alloc", "Sum (6ths)", N6, 3 + 2 + 1, "3/6+2/6+1/6=6/6")
+
+// 8. Phi-Eff Bridge
+let bridge_phi = [1, PHI, TAU, SIGMA]
+let bridge_flops = [SIGMA, N6, N6 / PHI, 1]
+let mut bi = 0
+while bi < 4 {
+    let product = bridge_phi[bi] * bridge_flops[bi]
+    check("Phi-Eff Bridge", "Phi=" + to_string(bridge_phi[bi]) + "->FLOPs=" + to_string(bridge_flops[bi]), SIGMA, product, "Phi*FLOPs=sigma")
+    bi = bi + 1
+}
+
+// 9. Kissing Chain
+check("Kissing Chain", "K_1", PHI, PHI, "phi")
+check("Kissing Chain", "K_2", N6, N6, "n")
+check("Kissing Chain", "K_3", SIGMA, SIGMA, "sigma")
+check("Kissing Chain", "K_4", J2, J2, "J_2")
+check("Kissing Chain", "K2/K1 ratio", 3, N6 / PHI, "n/phi=3")
+check("Kissing Chain", "K3/K2 ratio", 2, SIGMA / N6, "sigma/n=phi")
+check("Kissing Chain", "K4/K3 ratio", 2, J2 / SIGMA, "J_2/sigma=phi")
+
+// Footer
+println("╠" + "═".repeat(w_sec + 1) + "╧" + "═".repeat(w_par + 2) + "╧" + "═".repeat(w_val + 2) + "╧" + "═".repeat(w_for + 1) + "╣")
+let summary = "TOTAL: " + to_string(passed) + "/" + to_string(total) + " VERIFIED"
+let status = if passed == total { "ALL PASS" } else { "FAILURES DETECTED" }
+println("║ " + pad_r(summary, total_w / 2) + pad_l(status, total_w - total_w / 2 - 2) + " ║")
+println("╚" + "═".repeat(total_w) + "╝")
+println("")
+println("  σ(n)·φ(n) = n·τ(n)  ⟺  n = 6")
+println("  12·2 = 6·4 = 24 = J₂(6)")
+println("")

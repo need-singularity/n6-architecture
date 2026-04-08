@@ -4,56 +4,68 @@
 // n=6 카테고리별 분포 매트릭스 생성. 1022종 레지스트리 빈 칸 탐지.
 // 작성: 2026-04-08 / 상태: 스켈레톤
 
-let N6_CATEGORIES = [
-    "consciousness", "info", "multiscale", "network", "triangle", "fiber",
-    "causal", "topology", "quantum", "thermo", "boundary", "stability",
-    "memory", "wave", "scale", "evolution", "geometry", "symmetry",
-    "recursion", "electromagnetic", "ratio", "curvature"
-]
-
-fn main(args: list<str>) {
-    let dir = if args.len() > 1 { args[1] } else { "tools/nexus/src/telescope/lenses" }
-    print("# lens-coverage — NEXUS-6 lens registry analyzer")
-    print("# scanning: " + dir)
-
-    let files = fs_list_dir(dir)
-    let mut total = 0
-    let mut counts = {}
-    for c in N6_CATEGORIES { counts[c] = 0 }
-    let mut uncategorized = []
-
-    for f in files {
-        if f.ends_with(".rs") {
-            total = total + 1
-            let stem = f.replace(".rs", "")
-            let mut matched = false
-            for c in N6_CATEGORIES {
-                if stem.contains(c) {
-                    counts[c] = counts[c] + 1
-                    matched = true
-                    break
-                }
-            }
-            if !matched { uncategorized.push(stem) }
-        }
-    }
-
-    print("Total .rs lens files: " + str(total))
-    print("By n=6 category:")
-    for c in N6_CATEGORIES {
-        let v = counts[c]
-        let bar = "#" * v
-        print("  " + c + "  " + str(v) + "  " + bar)
-    }
-    print("Uncategorized: " + str(uncategorized.len()))
-
-    // n=6 sanity: 최소 6 카테고리 nonzero
-    let mut nonzero = 0
-    for c in N6_CATEGORIES { if counts[c] > 0 { nonzero = nonzero + 1 } }
-    print("n6-check: nonzero categories = " + str(nonzero) + " (target >= 6)")
-    if nonzero >= 6 { print("PASS — n=6 fiber 만족") }
-    else { print("FAIL — 카테고리 보강 필요") }
+fn repeat_str(s, n) {
+  let mut r = ""
+  let mut i = 0
+  while i < n { r = r + s
+    i = i + 1 }
+  return r
 }
+
+let N6_CATEGORIES = ["consciousness", "info", "multiscale", "network", "triangle", "fiber", "causal", "topology", "quantum", "thermo", "boundary", "stability", "memory", "wave", "scale", "evolution", "geometry", "symmetry", "recursion", "electromagnetic", "ratio", "curvature"]
+
+let argv = args()
+let dir = if len(argv) > 1 { argv[1] } else { "tools/nexus/src/telescope/lenses" }
+print("# lens-coverage — NEXUS-6 lens registry analyzer")
+print("# scanning: " + dir)
+
+let files_raw = exec("ls " + dir)
+let files = split(files_raw, "\n")
+let mut total = 0
+// counts 배열: N6_CATEGORIES 순서와 동일 (22개)
+let mut counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+let mut uncategorized_count = 0
+
+for f in files {
+    if contains(f, ".rs") {
+        total = total + 1
+        let stem = f
+        let mut matched = false
+        let mut ci = 0
+        while ci < len(N6_CATEGORIES) {
+            if contains(stem, N6_CATEGORIES[ci]) {
+                counts[ci] = counts[ci] + 1
+                matched = true
+                ci = len(N6_CATEGORIES)
+            } else {
+                ci = ci + 1
+            }
+        }
+        if !matched { uncategorized_count = uncategorized_count + 1 }
+    }
+}
+
+print("Total .rs lens files: " + to_string(total))
+print("By n=6 category:")
+let mut pi = 0
+while pi < len(N6_CATEGORIES) {
+    let v = counts[pi]
+    let bar = repeat_str("#", v)
+    print("  " + N6_CATEGORIES[pi] + "  " + to_string(v) + "  " + bar)
+    pi = pi + 1
+}
+print("Uncategorized: " + to_string(uncategorized_count))
+
+// n=6 sanity: 최소 6 카테고리 nonzero
+let mut nonzero = 0
+let mut ni = 0
+while ni < len(N6_CATEGORIES) {
+    if counts[ni] > 0 { nonzero = nonzero + 1 }
+    ni = ni + 1
+}
+print("n6-check: nonzero categories = " + to_string(nonzero) + " (target >= 6)")
+if nonzero >= 6 { print("PASS — n=6 fiber 만족") }
+else { print("FAIL — 카테고리 보강 필요") }
 
 // TODO:
 // - JSONL 출력

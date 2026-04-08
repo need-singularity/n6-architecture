@@ -1,0 +1,151 @@
+// N6 Semiconductor Process / GPU SM / HBM Ladder Calculator
+// ==========================================================
+// Verifies semiconductor architecture constants from n=6 arithmetic.
+// BT-28 (GPU SM), BT-37 (process nodes), BT-55 (HBM capacity),
+// BT-69 (chiplet), BT-75 (HBM interface).
+// Original: tools/semiconductor-calc/main.rs
+
+let SIGMA = 12.0
+let TAU = 4.0
+let PHI = 2.0
+let SOPFR = 5.0
+let J2 = 24.0
+let MU = 1.0
+let N = 6.0
+let P2 = 28.0
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd2(x) { round(x * 100.0) / 100.0 }
+
+fn grade_label(actual, expected) {
+    if actual == 0.0 {
+        if expected == 0.0 { return "EXACT" }
+    }
+    let err = abs((actual - expected) / expected) * 100.0
+    if err < 0.01 { return "EXACT" }
+    if err < 5.0 { return "CLOSE" }
+    "FAIL"
+}
+
+fn grade_err(actual, expected) {
+    if actual == 0.0 {
+        if expected == 0.0 { return 0.0 }
+    }
+    abs((actual - expected) / expected) * 100.0
+}
+
+// Database: parallel arrays
+let db_cat = ["Process", "Process", "Process", "Process", "Process", "Process", "Process", "GPU SM", "GPU SM", "GPU SM", "GPU SM", "GPU SM", "GPU SM", "GPU SM", "HBM Cap", "HBM Cap", "HBM Cap", "HBM Cap", "HBM Cap", "HBM Cap", "HBM Intf", "HBM Intf", "HBM Intf", "HBM Intf", "HBM Intf", "Chiplet", "Chiplet", "Chiplet", "CUDA/SM", "CUDA/SM", "CUDA/SM", "Process"]
+
+let db_bt = ["BT-37", "BT-37", "BT-37", "BT-37", "BT-37", "BT-37", "BT-37", "BT-28", "BT-28", "BT-28", "BT-28", "BT-28", "BT-28", "BT-28", "BT-55", "BT-55", "BT-55", "BT-55", "BT-55", "BT-55", "BT-75", "BT-75", "BT-75", "BT-75", "BT-75", "BT-69", "BT-69", "BT-69", "BT-28", "BT-28", "BT-28", "BT-37"]
+
+let db_name = ["N5 gate pitch (nm)", "N5 metal pitch (nm)", "N7 gate pitch (nm)", "N7 metal pitch (nm)", "N3 gate pitch (nm)", "N3 metal pitch (nm)", "N2 gate pitch (nm)", "AD102 full-die SMs", "GH100 enabled SMs", "GB100 full-die SMs", "GB300 SMs", "GV100 full-die SMs", "GA100 full-die SMs", "TU102 full-die SMs", "A100 40GB", "A100 80GB", "H100 80GB", "H200 141GB", "B100/B200 192GB", "B300 288GB", "HBM bus width (bits)", "HBM2 stack layers", "HBM3 stack layers", "HBM3E stack layers", "Stack ladder tau->sigma-tau->sigma", "B300 dual-die total SMs", "R100 sigma stacks predicted", "NVLink lanes per direction", "Volta/Turing/Ampere CUDA/SM", "Hopper/Ada CUDA/SM", "Tensor cores per SM (modern)", "sigma*tau attractor (nm)"]
+
+let db_actual = [48.0, 28.0, 54.0, 40.0, 48.0, 21.0, 48.0, 144.0, 132.0, 192.0, 160.0, 84.0, 128.0, 72.0, 40.0, 80.0, 80.0, 141.0, 192.0, 288.0, 1024.0, 4.0, 8.0, 12.0, 24.0, 160.0, 12.0, 18.0, 64.0, 128.0, 4.0, 48.0]
+
+let db_formula = ["sigma * tau", "P2", "sigma * tau + n", "tau * (sigma - phi)", "sigma * tau", "P2 - sopfr - phi", "sigma * tau", "sigma^2", "sigma * (sigma - mu)", "sigma * 2^tau", "phi^sopfr * sopfr", "sigma * (n + mu)", "phi^(sigma - sopfr)", "sigma * n", "tau * (sigma - phi)", "phi^tau * sopfr", "phi^tau * sopfr", "sigma^2 - n/phi", "sigma * phi^tau", "sigma * J2", "2^(sigma - phi)", "tau", "sigma - tau", "sigma", "tau+(sigma-tau)+sigma=2*sigma", "phi^sopfr * sopfr", "sigma", "sigma + n", "2^n", "2^(n+mu)", "tau", "sigma * tau"]
+
+let db_expected = [SIGMA * TAU, P2, SIGMA * TAU + N, TAU * (SIGMA - PHI), SIGMA * TAU, P2 - SOPFR - PHI, SIGMA * TAU, SIGMA * SIGMA, SIGMA * (SIGMA - MU), SIGMA * pow(PHI, TAU), pow(PHI, SOPFR) * SOPFR, SIGMA * (N + MU), pow(PHI, SIGMA - SOPFR), SIGMA * N, TAU * (SIGMA - PHI), pow(PHI, TAU) * SOPFR, pow(PHI, TAU) * SOPFR, SIGMA * SIGMA - N / PHI, SIGMA * pow(PHI, TAU), SIGMA * J2, pow(2.0, SIGMA - PHI), TAU, SIGMA - TAU, SIGMA, 2.0 * SIGMA, pow(PHI, SOPFR) * SOPFR, SIGMA, SIGMA + N, pow(2.0, N), pow(2.0, N + MU), TAU, SIGMA * TAU]
+
+let db_len = len(db_cat)
+let dashes = "-".repeat(108)
+let eqs = "=".repeat(108)
+
+// Header
+println("=======================================================")
+println("  N6 Semiconductor Calculator")
+println("  BT-28 / BT-37 / BT-55 / BT-69 / BT-75")
+println("  sigma=12, tau=4, phi=2, sopfr=5, J2=24, mu=1, P2=28")
+println("=======================================================")
+println("")
+
+println(pad_r("Category", 10) + " " + pad_r("BT", 6) + " " + pad_r("Parameter", 35) + " " + pad_l("Actual", 8) + " " + pad_r("Formula", 25) + " " + pad_l("Expect", 8) + " " + pad_r("Grade", 6) + " " + pad_l("Err%", 6))
+println(dashes)
+
+let mut total = 0
+let mut exact_count = 0
+let mut close_count = 0
+let mut fail_count = 0
+let mut current_cat = ""
+let mut idx = 0
+
+while idx < db_len {
+    let cat = db_cat[idx]
+    let bt = db_bt[idx]
+    let nm = db_name[idx]
+    let actual = db_actual[idx]
+    let formula = db_formula[idx]
+    let expected = db_expected[idx]
+
+    if cat != current_cat {
+        if current_cat != "" { println("") }
+        current_cat = cat
+    }
+
+    let g = grade_label(actual, expected)
+    let err = grade_err(actual, expected)
+    total = total + 1
+
+    if g == "EXACT" { exact_count = exact_count + 1 }
+    if g == "CLOSE" { close_count = close_count + 1 }
+    if g == "FAIL" { fail_count = fail_count + 1 }
+
+    println(pad_r(cat, 10) + " " + pad_r(bt, 6) + " " + pad_r(nm, 35) + " " + pad_l(to_string(rd1(actual)), 8) + " " + pad_r(formula, 25) + " " + pad_l(to_string(rd1(expected)), 8) + " " + pad_r(g, 6) + " " + pad_l(to_string(rd2(err)) + "%", 6))
+
+    idx = idx + 1
+}
+
+println("")
+println(eqs)
+println("SUMMARY")
+println(dashes)
+
+let exact_pct = rd1(exact_count * 100.0 / total)
+let close_pct = rd1(close_count * 100.0 / total)
+let fail_pct = rd1(fail_count * 100.0 / total)
+
+println("  Total parameters : " + to_string(total))
+println("  EXACT            : " + to_string(exact_count) + " (" + to_string(exact_pct) + "%)")
+println("  CLOSE            : " + to_string(close_count) + " (" + to_string(close_pct) + "%)")
+println("  FAIL             : " + to_string(fail_count) + " (" + to_string(fail_pct) + "%)")
+println("")
+
+// Per-BT breakdown
+let bt_labels = ["BT-28", "BT-37", "BT-55", "BT-69", "BT-75"]
+println("Per-BT Breakdown:")
+println("  " + pad_r("BT", 8) + " " + pad_l("Total", 6) + " " + pad_l("EXACT", 6) + " " + pad_l("CLOSE", 6) + " " + pad_l("EXACT%", 8))
+
+let mut bi = 0
+while bi < 5 {
+    let bt_label = bt_labels[bi]
+    let mut bt_total = 0
+    let mut bt_exact = 0
+    let mut bt_close = 0
+    let mut bj = 0
+    while bj < db_len {
+        if db_bt[bj] == bt_label {
+            bt_total = bt_total + 1
+            let bg = grade_label(db_actual[bj], db_expected[bj])
+            if bg == "EXACT" { bt_exact = bt_exact + 1 }
+            if bg == "CLOSE" { bt_close = bt_close + 1 }
+        }
+        bj = bj + 1
+    }
+    let mut bt_pct = 0.0
+    if bt_total > 0 { bt_pct = rd1(bt_exact * 100.0 / bt_total) }
+    println("  " + pad_r(bt_label, 8) + " " + pad_l(to_string(bt_total), 6) + " " + pad_l(to_string(bt_exact), 6) + " " + pad_l(to_string(bt_close), 6) + " " + pad_l(to_string(bt_pct) + "%", 8))
+    bi = bi + 1
+}
+
+println("")
+println(eqs)

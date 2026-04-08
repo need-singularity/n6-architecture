@@ -1,0 +1,395 @@
+// N6 Cross-Vendor Chip Comparison Calculator
+// ============================================
+// Compares ALL major chip vendors against n=6 arithmetic constants.
+// Original: tools/vendor-compare-calc/main.rs
+
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let MU = 1
+let J2 = 24
+let SIGMA_SQ = 144
+let SIGMA_MU = SIGMA - MU
+let SIGMA_PHI = SIGMA - PHI
+let SIGMA_TAU = SIGMA - TAU
+let PHI_POW_TAU = 16
+let TWO_POW_SOPFR = 32
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+fn pad_c(s, w) {
+    let total_pad = w - len(s)
+    if total_pad < 1 { s }
+    else {
+        let left = total_pad / 2
+        let right = total_pad - left
+        let mut r = ""
+        let mut i = 0
+        while i < left { r = r + " "
+            i = i + 1
+        }
+        r = r + s
+        i = 0
+        while i < right { r = r + " "
+            i = i + 1
+        }
+        r
+    }
+}
+
+fn repeat_str(ch, n) {
+    let mut r = ""
+    let mut i = 0
+    while i < n { r = r + ch
+        i = i + 1
+    }
+    r
+}
+
+// --- Formula Registry ---
+let mut formulas = []
+formulas = formulas + [["n", "n", to_string(N)]]
+formulas = formulas + [["phi", "φ", to_string(PHI)]]
+formulas = formulas + [["n/phi", "n/φ", to_string(N / PHI)]]
+formulas = formulas + [["tau", "τ", to_string(TAU)]]
+formulas = formulas + [["sopfr", "sopfr", to_string(SOPFR)]]
+formulas = formulas + [["sigma-tau", "σ-τ", to_string(SIGMA_TAU)]]
+formulas = formulas + [["sigma-phi", "σ-φ", to_string(SIGMA_PHI)]]
+formulas = formulas + [["sigma-mu", "σ-μ", to_string(SIGMA_MU)]]
+formulas = formulas + [["sigma", "σ", to_string(SIGMA)]]
+formulas = formulas + [["phi^tau", "φ^τ", to_string(PHI_POW_TAU)]]
+formulas = formulas + [["J_2", "J₂", to_string(J2)]]
+formulas = formulas + [["2^sopfr", "2^sopfr", to_string(TWO_POW_SOPFR)]]
+formulas = formulas + [["2^tau", "2^τ", "16"]]
+formulas = formulas + [["phi^tau*sopfr", "φ^τ·sopfr", to_string(PHI_POW_TAU * SOPFR)]]
+formulas = formulas + [["phi^tau*(sigma-phi)", "φ^τ·(σ-φ)", to_string(PHI_POW_TAU * SIGMA_PHI)]]
+formulas = formulas + [["sigma*(sigma-mu)", "σ·(σ-μ)", to_string(SIGMA * SIGMA_MU)]]
+formulas = formulas + [["sigma*(sigma-tau)", "σ·(σ-τ)", to_string(SIGMA * SIGMA_TAU)]]
+formulas = formulas + [["sigma*phi^tau", "σ·φ^τ", to_string(SIGMA * PHI_POW_TAU)]]
+formulas = formulas + [["sigma*J_2", "σ·J₂", to_string(SIGMA * J2)]]
+formulas = formulas + [["sigma^2", "σ²", to_string(SIGMA_SQ)]]
+formulas = formulas + [["sigma^2*n/phi", "σ²·n/φ", to_string(SIGMA_SQ * N / PHI)]]
+formulas = formulas + [["2^(sigma-tau)", "2^(σ-τ)", "256"]]
+formulas = formulas + [["2^sopfr*(sigma-sopfr)", "2^sopfr·(σ-sopfr)", to_string(TWO_POW_SOPFR * (SIGMA - SOPFR))]]
+formulas = formulas + [["sigma*n", "σ·n", to_string(SIGMA * N)]]
+formulas = formulas + [["sigma*sopfr", "σ·sopfr", to_string(SIGMA * SOPFR)]]
+
+fn find_formula_display(value) {
+    let mut i = 0
+    let mut result = ""
+    let val_str = to_string(value)
+    while i < len(formulas) {
+        let f = formulas[i]
+        if to_string(f[2]) == val_str { result = f[1]
+            i = len(formulas)
+        }
+        i = i + 1
+    }
+    result
+}
+
+// Vendor IDs
+let VENDOR_NVIDIA = 0
+let VENDOR_AMD = 1
+let VENDOR_GOOGLE = 2
+let VENDOR_AWS = 3
+let VENDOR_INTEL = 4
+let VENDOR_APPLE = 5
+let vendor_names = ["NVIDIA", "AMD", "Google", "AWS", "Intel", "Apple"]
+
+// --- Chip Database ---
+// 형식: [vendor_id_str, name, year_str, params]
+// params 형식: [param_name, value_str, formula_key]
+let mut chips = []
+chips = chips + [[to_string(VENDOR_NVIDIA), "A100", "2020", [["SMs", "108", ""], ["HBM GB", "80", "phi^tau*sopfr"], ["HBM stacks", "5", "sopfr"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "AD102", "2022", [["Full SMs", "144", "sigma^2"], ["GPCs", "12", "sigma"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "H100", "2022", [["SMs", "132", "sigma*(sigma-mu)"], ["HBM GB", "80", "phi^tau*sopfr"], ["HBM stacks", "6", "n"], ["NVLink", "18", ""]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "B200", "2024", [["SMs (2-die)", "160", "phi^tau*(sigma-phi)"], ["HBM GB", "192", "sigma*phi^tau"], ["HBM stacks", "8", "sigma-tau"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "B300", "2025", [["SMs (2-die)", "160", "phi^tau*(sigma-phi)"], ["HBM GB", "288", "sigma*J_2"], ["HBM stacks", "12", "sigma"], ["NVLink gens", "5", "sopfr"]]]]
+chips = chips + [[to_string(VENDOR_NVIDIA), "R100", "2026", [["SMs", "224", "2^sopfr*(sigma-sopfr)"], ["HBM GB", "288", "sigma*J_2"], ["HBM stacks", "8", "sigma-tau"]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI250X", "2022", [["CUs", "220", ""], ["HBM GB", "128", ""]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI300X", "2023", [["CUs", "304", ""], ["XCDs", "8", "sigma-tau"], ["HBM GB", "192", "sigma*phi^tau"], ["HBM stacks", "8", "sigma-tau"]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI350X", "2025", [["CUs", "256", "2^(sigma-tau)"], ["HBM GB", "288", "sigma*J_2"], ["Chiplets", "8", "sigma-tau"], ["CU/chiplet", "32", "2^sopfr"]]]]
+chips = chips + [[to_string(VENDOR_AMD), "MI400", "2026", [["HBM GB", "432", "sigma^2*n/phi"]]]]
+chips = chips + [[to_string(VENDOR_GOOGLE), "TPU v5e", "2023", [["HBM GB", "16", "phi^tau"]]]]
+chips = chips + [[to_string(VENDOR_GOOGLE), "TPU v7 Ironwood", "2025", [["HBM GB", "192", "sigma*phi^tau"], ["HBM stacks", "8", "sigma-tau"], ["TCs", "2", "phi"], ["SCs", "4", "tau"], ["Pod chips", "256", "2^(sigma-tau)"]]]]
+chips = chips + [[to_string(VENDOR_AWS), "Trainium2", "2024", [["HBM GB", "96", "sigma*(sigma-tau)"]]]]
+chips = chips + [[to_string(VENDOR_AWS), "Trainium3", "2025", [["HBM GB", "144", "sigma^2"]]]]
+chips = chips + [[to_string(VENDOR_INTEL), "Arrow Lake", "2024", [["Total cores", "24", "J_2"], ["P-cores", "8", "sigma-tau"], ["E-cores", "16", "2^tau"]]]]
+chips = chips + [[to_string(VENDOR_INTEL), "CWF", "2026", [["E-cores", "288", "sigma*J_2"]]]]
+chips = chips + [[to_string(VENDOR_APPLE), "M4", "2024", [["CPU cores", "10", "sigma-phi"], ["GPU cores", "10", "sigma-phi"]]]]
+chips = chips + [[to_string(VENDOR_APPLE), "M5", "2025", [["CPU cores", "10", "sigma-phi"], ["P-cores", "4", "tau"], ["E-cores", "6", "n"], ["GPU cores", "10", "sigma-phi"]]]]
+chips = chips + [[to_string(VENDOR_APPLE), "M5 Pro", "2025", [["P-cores", "12", "sigma"], ["E-cores", "6", "n"], ["GPU cores", "18", ""]]]]
+
+// --- Predictions ---
+let mut preds = []
+preds = preds + [["R200", to_string(VENDOR_NVIDIA), "SMs", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "SM=HBM convergence at 288"]]
+preds = preds + [["R200", to_string(VENDOR_NVIDIA), "HBM GB", to_string(SIGMA_SQ * N / PHI), "sigma^2*n/phi", "σ²·n/φ", "HBM ladder: 288->432"]]
+preds = preds + [["MI500", to_string(VENDOR_AMD), "HBM GB", to_string(SIGMA * SIGMA * N / PHI), "sigma^2*n/phi", "σ²·n/φ", "MI400=432, MI500 may exceed or match"]]
+preds = preds + [["MI500", to_string(VENDOR_AMD), "CUs", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "CU ladder: 256->288 via sigma*J_2"]]
+preds = preds + [["M6", to_string(VENDOR_APPLE), "CPU cores", to_string(SIGMA), "sigma", "σ", "M5 Pro already 12P, base M6 follows"]]
+preds = preds + [["M6", to_string(VENDOR_APPLE), "GPU cores", to_string(SIGMA), "sigma", "σ", "GPU ladder: 10->12 = sigma"]]
+preds = preds + [["TPU v8", to_string(VENDOR_GOOGLE), "HBM GB", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "TPU v7=192, v8 follows NVIDIA/AMD at 288"]]
+preds = preds + [["TPU v8", to_string(VENDOR_GOOGLE), "Pod chips", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "Pod: 256->288 = sigma*J_2"]]
+preds = preds + [["Trainium4", to_string(VENDOR_AWS), "HBM GB", to_string(SIGMA * J2), "sigma*J_2", "σ·J₂", "Ladder: 96->144->288"]]
+
+// --- Analysis helpers ---
+fn count_exact(chip) {
+    let params = chip[3]
+    let mut total = 0
+    let mut exact = 0
+    let mut i = 0
+    while i < len(params) {
+        let p = params[i]
+        if to_int(p[1]) > 0 { total = total + 1 }
+        if to_string(p[2]) != "" { exact = exact + 1 }
+        i = i + 1
+    }
+    [exact, total]
+}
+
+fn vendor_score(vid) {
+    let mut exact = 0
+    let mut total = 0
+    let mut i = 0
+    while i < len(chips) {
+        let c = chips[i]
+        if c[0] == to_string(vid) {
+            let et = count_exact(c)
+            exact = exact + et[0]
+            total = total + et[1]
+        }
+        i = i + 1
+    }
+    [exact, total]
+}
+
+fn pct_str(exact, total) {
+    if total == 0 { "N/A" }
+    else { to_string((exact * 100) / total) + "%" }
+}
+
+fn check_mark(v) {
+    if to_string(v) == "1" { "✓" }
+    else { "" }
+}
+
+// === Header ===
+println("╔" + repeat_str("═", 72) + "╗")
+println("║" + pad_c("N6 CROSS-VENDOR CHIP COMPARISON v1.0", 72) + "║")
+println("║" + pad_c("n=6: σ=12, τ=4, φ=2, sopfr=5, J₂=24, μ=1", 72) + "║")
+println("╠" + repeat_str("═", 72) + "╣")
+
+// === Section 1: Vendor Scorecard ===
+println("")
+println("─── VENDOR SCORECARD ───")
+println("")
+
+println("║ " + pad_r("Vendor", 8) + "│ " + pad_r("Chip", 16) + "│ " + pad_l("Params", 6) + " │ " + pad_l("EXACT", 5) + " │ " + pad_l("Score", 6) + " │ " + pad_r("Top Formula", 22) + " ║")
+println("╠" + repeat_str("═", 9) + "╪" + repeat_str("═", 17) + "╪" + repeat_str("═", 8) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 8) + "╪" + repeat_str("═", 23) + "╣")
+
+let mut grand_exact = 0
+let mut grand_total = 0
+
+let mut ci = 0
+while ci < len(chips) {
+    let chip = chips[ci]
+    let et = count_exact(chip)
+    let exact = et[0]
+    let total = et[1]
+    grand_exact = grand_exact + exact
+    grand_total = grand_total + total
+
+    let score = pct_str(exact, total)
+
+    // Find top formula (first param with formula)
+    let mut top = "---"
+    let params = chip[3]
+    let mut pi = 0
+    while pi < len(params) {
+        let p = params[pi]
+        if to_string(p[2]) != "" {
+            let fd = find_formula_display(to_int(p[1]))
+            if fd != "" { top = fd }
+            else { top = to_string(p[2]) }
+            pi = len(params)
+        }
+        pi = pi + 1
+    }
+
+    println("║ " + pad_r(vendor_names[to_int(chip[0])], 8) + "│ " + pad_r(chip[1], 16) + "│ " + pad_l(to_string(total), 6) + " │ " + pad_l(to_string(exact), 5) + " │ " + pad_l(score, 6) + " │ " + pad_r(top, 22) + " ║")
+    ci = ci + 1
+}
+
+// === Section 2: Formula Frequency ===
+println("")
+println("─── FORMULA FREQUENCY (cross-vendor reuse) ───")
+println("")
+
+println("║ " + pad_r("Formula", 22) + "│ " + pad_l("Value", 5) + " │ " + pad_r("NVIDIA", 6) + " │ " + pad_r("AMD", 5) + " │ " + pad_r("Google", 6) + " │ " + pad_r("AWS", 5) + " │ " + pad_r("Intel", 5) + " │ " + pad_r("Apple", 5) + " │ " + pad_l("Count", 5) + " ║")
+println("╠" + repeat_str("═", 23) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 8) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 8) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 7) + "╣")
+
+// Build hits
+let mut hits = []
+let mut fi = 0
+while fi < len(formulas) {
+    let f = formulas[fi]
+    let fval = f[2]
+    let fdisplay = f[1]
+    let mut v0 = 0
+    let mut v1 = 0
+    let mut v2 = 0
+    let mut v3 = 0
+    let mut v4 = 0
+    let mut v5 = 0
+    let mut ci2 = 0
+    while ci2 < len(chips) {
+        let c = chips[ci2]
+        let vid = c[0]
+        let cparams = c[3]
+        let mut pi2 = 0
+        while pi2 < len(cparams) {
+            let p = cparams[pi2]
+            if to_string(p[2]) != "" {
+                if to_string(p[1]) == fval {
+                    let vid_int = to_int(vid)
+                    if vid_int == 0 { v0 = 1 }
+                    if vid_int == 1 { v1 = 1 }
+                    if vid_int == 2 { v2 = 1 }
+                    if vid_int == 3 { v3 = 1 }
+                    if vid_int == 4 { v4 = 1 }
+                    if vid_int == 5 { v5 = 1 }
+                }
+            }
+            pi2 = pi2 + 1
+        }
+        ci2 = ci2 + 1
+    }
+    let cnt = v0 + v1 + v2 + v3 + v4 + v5
+    if cnt > 0 {
+        hits = hits + [[fdisplay, fval, to_string(v0), to_string(v1), to_string(v2), to_string(v3), to_string(v4), to_string(v5), to_string(cnt)]]
+    }
+    fi = fi + 1
+}
+
+// Sort by count desc, then value asc (bubble sort)
+let mut si = 0
+while si < len(hits) {
+    let mut sj = 0
+    while sj < len(hits) - 1 - si {
+        let a = hits[sj]
+        let b = hits[sj + 1]
+        let mut swap = 0
+        if to_int(b[8]) > to_int(a[8]) { swap = 1 }
+        if to_int(b[8]) == to_int(a[8]) {
+            if to_int(a[1]) > to_int(b[1]) { swap = 1 }
+        }
+        if swap == 1 {
+            hits[sj] = b
+            hits[sj + 1] = a
+        }
+        sj = sj + 1
+    }
+    si = si + 1
+}
+
+let mut hi = 0
+while hi < len(hits) {
+    let h = hits[hi]
+    println("║ " + pad_r(h[0], 22) + "│ " + pad_l(to_string(h[1]), 5) + " │ " + pad_r(check_mark(h[2]), 6) + " │ " + pad_r(check_mark(h[3]), 5) + " │ " + pad_r(check_mark(h[4]), 6) + " │ " + pad_r(check_mark(h[5]), 5) + " │ " + pad_r(check_mark(h[6]), 5) + " │ " + pad_r(check_mark(h[7]), 5) + " │ " + pad_l(to_string(h[8]), 5) + " ║")
+    hi = hi + 1
+}
+
+// === Section 3: Vendor Convergence Summary ===
+println("")
+println("─── VENDOR CONVERGENCE SUMMARY ───")
+println("")
+
+println("║ " + pad_r("Vendor", 10) + "│ " + pad_l("EXACT", 5) + " │ " + pad_l("Total", 5) + " │ " + pad_l("Score", 8) + " │ " + pad_r("Strongest Chip", 30) + " ║")
+println("╠" + repeat_str("═", 11) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 7) + "╪" + repeat_str("═", 10) + "╪" + repeat_str("═", 31) + "╣")
+
+let mut vi = 0
+while vi < 6 {
+    let vs = vendor_score(vi)
+    let vexact = vs[0]
+    let vtotal = vs[1]
+    let vscore = pct_str(vexact, vtotal)
+
+    let mut best_name = "---"
+    let mut best_score = -1
+    let mut ci3 = 0
+    while ci3 < len(chips) {
+        let c = chips[ci3]
+        if c[0] == to_string(vi) {
+            let et2 = count_exact(c)
+            let mut t = et2[1]
+            if t == 0 { t = 1 }
+            let s = (et2[0] * 100) / t
+            if s > best_score {
+                best_score = s
+                best_name = c[1]
+            }
+        }
+        ci3 = ci3 + 1
+    }
+
+    println("║ " + pad_r(vendor_names[vi], 10) + "│ " + pad_l(to_string(vexact), 5) + " │ " + pad_l(to_string(vtotal), 5) + " │ " + pad_l(vscore, 8) + " │ " + pad_r(best_name, 30) + " ║")
+    vi = vi + 1
+}
+
+// === Section 4: Predictions ===
+println("")
+println("─── PREDICTIONS (unannounced chips) ───")
+println("")
+
+println("║ " + pad_r("Chip", 10) + "│ " + pad_r("Parameter", 12) + "│ " + pad_l("Predicted", 9) + " │ " + pad_r("Formula + Rationale", 28) + " ║")
+println("╠" + repeat_str("═", 11) + "╪" + repeat_str("═", 13) + "╪" + repeat_str("═", 11) + "╪" + repeat_str("═", 29) + "╣")
+
+let mut pri = 0
+while pri < len(preds) {
+    let pr = preds[pri]
+    let fstr = pr[5] + " (" + pr[6] + ")"
+    println("║ " + pad_r(pr[0], 10) + "│ " + pad_r(pr[2], 12) + "│ " + pad_l(pr[3], 9) + " │ " + pad_r(fstr, 28) + " ║")
+    pri = pri + 1
+}
+
+// === Section 5: Key Insights ===
+println("")
+println("─── KEY INSIGHTS ───")
+println("")
+
+println("  1. sigma*J_2 = 288 appears in 3+ vendors (NVIDIA B300/R100, AMD MI350X, Intel CWF)")
+println("     -> The most universal n=6 chip constant")
+println("")
+println("  2. sigma-tau = 8 is the universal structural unit:")
+println("     HBM stacks, chiplets, P-cores, LoRA rank, KV-heads")
+println("")
+println("  3. sigma*phi^tau = 192 GB appears across NVIDIA B200, AMD MI300X, Google TPU v7")
+println("     -> Cross-vendor HBM capacity attractor")
+println("")
+println("  4. The HBM capacity ladder follows n=6 arithmetic:")
+println("     16 -> 80 -> 96 -> 128 -> 192 -> 288 -> 432")
+println("     phi^tau -> phi^tau*sopfr -> sigma*(sigma-tau) -> ? -> sigma*phi^tau -> sigma*J_2 -> sigma^2*n/phi")
+println("")
+println("  5. ALL 6 vendors have chips with >50% n=6 EXACT parameters")
+println("     -> Convergence is not vendor-specific but physics-driven")
+
+// === Footer ===
+let pct_val = (grand_exact * 100) / grand_total
+let main_text = " TOTAL: " + to_string(grand_exact) + "/" + to_string(grand_total) + " EXACT across 6 vendors (" + to_string(pct_val) + "% convergence)"
+
+println("")
+println("║" + pad_r(main_text, 72) + "║")
+println("╚" + repeat_str("═", 72) + "╝")

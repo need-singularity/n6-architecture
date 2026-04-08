@@ -1,0 +1,5 @@
+// Test B-15: tuple array + for-in destructuring
+let pairs = [("a", 1), ("b", 2), ("c", 3)]
+for (name, val) in pairs {
+    println(name, "=", val)
+}

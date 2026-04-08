@@ -1,0 +1,1035 @@
+// N6 Energy DSE — 에너지 통합 설계공간 탐색
+// 4 도메인 (Fusion, Solar, Battery, Grid) x 5 레벨 후보 전수탐색
+// Original: tools/dse-calc/energy_main.rs
+
+// N6 constants
+let N = 6
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+
+// Weights
+let W_N6 = 0.40
+let W_PERF = 0.30
+let W_EFF = 0.20
+let W_COST = 0.10
+
+// ============================================================
+// Helper functions
+// ============================================================
+fn pad_r(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = r + " "
+  }
+  r
+}
+
+fn pad_l(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    r = " " + r
+  }
+  r
+}
+
+fn pad_c(s, w) {
+  let mut r = to_string(s)
+  while len(r) < w {
+    if len(r) % 2 == 0 {
+      r = r + " "
+    } else {
+      r = " " + r
+    }
+  }
+  r
+}
+
+fn min_val(a, b) {
+  if a < b { a } else { b }
+}
+
+fn max_val(a, b) {
+  if a > b { a } else { b }
+}
+
+fn clamp01(v) {
+  max_val(0.0, min_val(1.0, v))
+}
+
+fn repeat_str(ch, n) {
+  let mut r = ""
+  let mut i = 0
+  while i < n {
+    r = r + ch
+    i = i + 1
+  }
+  r
+}
+
+fn fmt3(x) {
+  let v = round(x * 1000) / 1000
+  let mut s = to_string(v)
+  // ensure at least X.XXX
+  if s == "0" { s = "0.0" }
+  if s == "1" { s = "1.0" }
+  // find dot position
+  let mut has_dot = 0
+  let mut di = 0
+  while di < len(s) {
+    if s[di] == "." { has_dot = 1 }
+    di = di + 1
+  }
+  if has_dot == 0 { s = s + ".0" }
+  // pad decimals to 3
+  // find dot
+  let mut dot_pos = 0
+  let mut dk = 0
+  while dk < len(s) {
+    if s[dk] == "." { dot_pos = dk }
+    dk = dk + 1
+  }
+  let dec_len = len(s) - dot_pos - 1
+  if dec_len < 3 { s = s + "0" }
+  let dec_len2 = len(s) - dot_pos - 1
+  if dec_len2 < 3 { s = s + "0" }
+  s
+}
+
+fn fmt4(x) {
+  let v = round(x * 10000) / 10000
+  let mut s = to_string(v)
+  if s == "0" { s = "0.0" }
+  if s == "1" { s = "1.0" }
+  let mut has_dot = 0
+  let mut di = 0
+  while di < len(s) {
+    if s[di] == "." { has_dot = 1 }
+    di = di + 1
+  }
+  if has_dot == 0 { s = s + ".0" }
+  let mut dot_pos = 0
+  let mut dk = 0
+  while dk < len(s) {
+    if s[dk] == "." { dot_pos = dk }
+    dk = dk + 1
+  }
+  let dec_len = len(s) - dot_pos - 1
+  if dec_len < 4 { s = s + "0" }
+  let dec_len2 = len(s) - dot_pos - 1
+  if dec_len2 < 4 { s = s + "0" }
+  let dec_len3 = len(s) - dot_pos - 1
+  if dec_len3 < 4 { s = s + "0" }
+  s
+}
+
+fn fmt1(x) {
+  let v = round(x * 10) / 10
+  let mut s = to_string(v)
+  if s == "0" { s = "0.0" }
+  if s == "1" { s = "1.0" }
+  let mut has_dot = 0
+  let mut di = 0
+  while di < len(s) {
+    if s[di] == "." { has_dot = 1 }
+    di = di + 1
+  }
+  if has_dot == 0 { s = s + ".0" }
+  s
+}
+
+// ============================================================
+// FUSION candidates (6, 5, 5, 4, 4 = 2400)
+// ============================================================
+let fu_m_id = ["FU-M1", "FU-M2", "FU-M3", "FU-M4", "FU-M5", "FU-M6"]
+let fu_m_name = ["D-T Standard", "D-D Proton", "D-He3 Aneutronic", "p-B11 Clean", "Li6-D Hybrid", "Cat-DD Catalyzed"]
+let fu_m_exact = [1, 1, 0, 0, 1, 0]
+let fu_m_pa = [17.6, 3.27, 18.3, 8.7, 22.4, 7.2]
+let fu_m_pb = [5.0, 4.0, 17.0, 9.0, 22.0, 7.0]
+let fu_m_count = 6
+
+let fu_p_id = ["FU-P1", "FU-P2", "FU-P3", "FU-P4", "FU-P5"]
+let fu_p_name = ["Tokamak-12", "Tokamak-24", "Stellarator-5", "Spherical Tokamak", "ICF"]
+let fu_p_exact = [1, 1, 1, 1, 1]
+let fu_p_count = 5
+
+let fu_c_id = ["FU-C1", "FU-C2", "FU-C3", "FU-C4", "FU-C5"]
+let fu_c_name = ["HTS High-Field", "Low-Field Large", "Compact ST", "Laser ICF", "Magnetized Target"]
+let fu_c_exact = [1, 1, 1, 0, 1]
+let fu_c_count = 5
+
+let fu_s_id = ["FU-S1", "FU-S2", "FU-S3", "FU-S4"]
+let fu_s_name = ["Steam Rankine", "Direct MHD", "TEG Thermoelectric", "Egyptian Hybrid"]
+let fu_s_exact = [1, 1, 1, 1]
+let fu_s_pa = [0.333, 0.500, 0.167, 0.833]
+let fu_s_pb = [0.7, 0.4, 0.9, 0.2]
+let fu_s_count = 4
+
+let fu_g_id = ["FU-G1", "FU-G2", "FU-G3", "FU-G4"]
+let fu_g_name = ["Central GW", "Distributed 100MW", "Micro-fusion 10MW", "Fission-Fusion 500MW"]
+let fu_g_exact = [0, 1, 1, 1]
+let fu_g_pa = [1000.0, 100.0, 10.0, 500.0]
+let fu_g_pb = [0.3, 0.6, 0.8, 0.5]
+let fu_g_count = 4
+
+// ============================================================
+// SOLAR candidates (6, 5, 5, 4, 4 = 2400)
+// ============================================================
+let sl_m_id = ["SL-M1", "SL-M2", "SL-M3", "SL-M4", "SL-M5", "SL-M6"]
+let sl_m_name = ["c-Si Mono", "mc-Si Poly", "GaAs", "CdTe", "CIGS", "Perovskite"]
+let sl_m_exact = [0, 0, 1, 1, 0, 0]
+let sl_m_pb = [0.22, 0.19, 0.29, 0.22, 0.20, 0.26]
+let sl_m_count = 6
+
+let sl_p_id = ["SL-P1", "SL-P2", "SL-P3", "SL-P4", "SL-P5"]
+let sl_p_name = ["PERC", "TOPCon", "HJT Heterojunction", "IBC Back-contact", "Tandem Perovskite/Si"]
+let sl_p_exact = [0, 1, 1, 1, 1]
+let sl_p_pa = [0.0, 1.5, 2.0, 2.5, 5.0]
+let sl_p_pb = [0.9, 0.7, 0.5, 0.4, 0.3]
+let sl_p_count = 5
+
+let sl_c_id = ["SL-C1", "SL-C2", "SL-C3", "SL-C4", "SL-C5"]
+let sl_c_name = ["60-cell", "72-cell", "120-half", "144-half", "210mm Shingled"]
+let sl_c_exact = [1, 1, 1, 1, 1]
+let sl_c_pa = [60.0, 72.0, 120.0, 144.0, 66.0]
+let sl_c_pb = [0.8, 0.7, 0.6, 0.5, 0.6]
+let sl_c_count = 5
+
+let sl_s_id = ["SL-S1", "SL-S2", "SL-S3", "SL-S4"]
+let sl_s_name = ["String Inverter", "Micro Inverter", "Central Inverter", "DC Optimizer Hybrid"]
+let sl_s_exact = [1, 1, 1, 1]
+let sl_s_count = 4
+
+let sl_g_id = ["SL-G1", "SL-G2", "SL-G3", "SL-G4"]
+let sl_g_name = ["Fixed Tilt", "1-Axis", "2-Axis", "CPV Concentrated"]
+let sl_g_exact = [0, 1, 1, 1]
+let sl_g_pa = [0.0, 10.0, 12.0, 20.0]
+let sl_g_pb = [0.9, 0.7, 0.5, 0.3]
+let sl_g_count = 4
+
+// ============================================================
+// BATTERY candidates (6, 5, 5, 4, 4 = 2400)
+// ============================================================
+let bt_m_id = ["BT-M1", "BT-M2", "BT-M3", "BT-M4", "BT-M5", "BT-M6"]
+let bt_m_name = ["LFP Cathode", "NMC811 Cathode", "NCA Cathode", "Graphite Anode", "Silicon Anode", "Li Metal Anode"]
+let bt_m_exact = [1, 1, 1, 1, 1, 1]
+let bt_m_pa = [170.0, 200.0, 210.0, 372.0, 3579.0, 3860.0]
+let bt_m_pb = [0.9, 0.6, 0.5, 0.9, 0.3, 0.2]
+let bt_m_count = 6
+
+let bt_p_id = ["BT-P1", "BT-P2", "BT-P3", "BT-P4", "BT-P5"]
+let bt_p_name = ["Pouch", "Cylindrical 21700", "Cylindrical 4680", "Prismatic", "Solid-State"]
+let bt_p_exact = [0, 0, 1, 0, 1]
+let bt_p_pa = [1.0, 1.0, 1.2, 1.0, 1.5]
+let bt_p_pb = [0.7, 0.8, 0.6, 0.7, 0.3]
+let bt_p_count = 5
+
+let bt_c_id = ["BT-C1", "BT-C2", "BT-C3", "BT-C4", "BT-C5"]
+let bt_c_name = ["6S Module", "12S Module", "24S Module", "CTP Cell-to-Pack", "CTC Cell-to-Chassis"]
+let bt_c_exact = [1, 1, 1, 0, 0]
+let bt_c_count = 5
+
+let bt_s_id = ["BT-S1", "BT-S2", "BT-S3", "BT-S4"]
+let bt_s_name = ["96S 400V", "192S 800V", "Hybrid Egyptian", "Modular ESS 6kWh"]
+let bt_s_exact = [1, 1, 1, 1]
+let bt_s_pb = [384.0, 768.0, 288.0, 48.0]
+let bt_s_count = 4
+
+let bt_g_id = ["BT-G1", "BT-G2", "BT-G3", "BT-G4"]
+let bt_g_name = ["EV 400V", "EV 800V", "Grid ESS MWh", "Home ESS 10kWh"]
+let bt_g_exact = [1, 1, 1, 1]
+let bt_g_count = 4
+
+// ============================================================
+// GRID candidates (6, 5, 5, 4, 4 = 2400)
+// ============================================================
+let gr_m_id = ["GR-M1", "GR-M2", "GR-M3", "GR-M4", "GR-M5", "GR-M6"]
+let gr_m_name = ["ACSR Aluminum", "HTLS High-Temp", "HTS YBCO", "XLPE Submarine", "GIL Gas-Insulated", "MgB2 Superconductor"]
+let gr_m_exact = [0, 0, 1, 0, 1, 0]
+let gr_m_pa = [1.0, 1.5, 3.0, 1.2, 2.0, 2.5]
+let gr_m_pb = [0.9, 0.6, 0.2, 0.5, 0.3, 0.3]
+let gr_m_count = 6
+
+let gr_p_id = ["GR-P1", "GR-P2", "GR-P3", "GR-P4", "GR-P5"]
+let gr_p_name = ["6-Pulse Rectifier", "12-Pulse Rectifier", "MMC Multilevel", "SiC MOSFET", "GaN HEMT"]
+let gr_p_exact = [1, 1, 1, 0, 0]
+let gr_p_pb = [25.0, 10.0, 2.0, 1.0, 0.5]
+let gr_p_count = 5
+
+let gr_c_id = ["GR-C1", "GR-C2", "GR-C3", "GR-C4", "GR-C5"]
+let gr_c_name = ["Oil-Immersed", "Dry-Type", "SST Solid-State", "Superconducting", "Multi-Winding"]
+let gr_c_exact = [1, 1, 1, 1, 1]
+let gr_c_pb = [0.8, 0.7, 0.4, 0.2, 0.5]
+let gr_c_count = 5
+
+let gr_s_id = ["GR-S1", "GR-S2", "GR-S3", "GR-S4"]
+let gr_s_name = ["HVDC +/-500kV", "UHVDC +/-800kV", "UHVDC +/-1100kV", "MVDC 48V"]
+let gr_s_exact = [1, 1, 1, 1]
+let gr_s_pa = [500.0, 800.0, 1100.0, 0.048]
+let gr_s_pb = [0.5, 0.3, 0.2, 0.9]
+let gr_s_count = 4
+
+let gr_g_id = ["GR-G1", "GR-G2", "GR-G3", "GR-G4"]
+let gr_g_name = ["Central Radial", "Microgrid 24-node", "Supergrid Intercontinental", "Hybrid AC/DC Egyptian"]
+let gr_g_exact = [0, 1, 1, 1]
+let gr_g_pa = [1.0, 3.0, 4.0, 3.5]
+let gr_g_pb = [0.9, 0.5, 0.2, 0.4]
+let gr_g_count = 4
+
+// ============================================================
+// Performance functions
+// ============================================================
+fn fusion_perf(m_pa, m_pb, s_pa, s_pb, g_pa, g_pb) {
+  let raw = m_pa * s_pa * g_pa
+  let max_p = 22.4 * 0.833 * 1000.0
+  let perf = min_val(raw / max_p, 1.0)
+  let eff = min_val(s_pa, 1.0)
+  let cost_raw = 1.0 - (m_pb * 0.02 + s_pb * 0.5 + g_pb * 0.48)
+  let cost = clamp01(cost_raw)
+  [perf, eff, cost]
+}
+
+fn solar_perf(m_pb, p_pa, p_pb, c_pa, c_pb, g_pa, g_pb) {
+  let eff = m_pb + p_pa / 100.0
+  let raw = eff * c_pa * (1.0 + g_pa / 100.0)
+  let max_p = 0.34 * 144.0 * 1.20
+  let perf = min_val(raw / max_p, 1.0)
+  let cost = clamp01(m_pb * 0.1 + p_pb * 0.3 + c_pb * 0.2 + g_pb * 0.4)
+  [perf, min_val(eff, 1.0), cost]
+}
+
+fn battery_perf(m_pa, m_pb, p_pa, p_pb, s_pb) {
+  let raw = m_pa * s_pb * p_pa
+  let max_p = 3860.0 * 768.0 * 1.5
+  let perf = min_val(raw / max_p, 1.0)
+  let eff = clamp01((p_pa - 1.0) * 0.5 + 0.7)
+  let cost = clamp01(m_pb * 0.4 + p_pb * 0.3 + s_pb * 0.01 * 0.3)
+  [perf, eff, cost]
+}
+
+fn grid_perf(m_pa, m_pb, p_pb, c_pb, s_pa, s_pb, g_pa, g_pb) {
+  let thd_factor = 1.0 - p_pb / 100.0
+  let raw = s_pa * thd_factor * m_pa * g_pa
+  let max_p = 1100.0 * 1.0 * 3.0 * 4.0
+  let perf = min_val(raw / max_p, 1.0)
+  let eff = min_val(thd_factor, 1.0)
+  let cost = clamp01(m_pb * 0.3 + c_pb * 0.2 + s_pb * 0.3 + g_pb * 0.2)
+  [perf, eff, cost]
+}
+
+// ============================================================
+// MAIN
+// ============================================================
+println("+=================================================================+")
+println("|  N6 Energy DSE -- Energy Design Space Exploration               |")
+println("|  sigma(n)*phi(n) = n*tau(n) iff n = 6                          |")
+println("|  4 Domains x 5 Levels = 9,600 total + 625 Cross-DSE            |")
+println("+=================================================================+")
+println("")
+println("  N6 Constants: n=" + to_string(N) + " sigma=" + to_string(SIGMA) + " tau=" + to_string(TAU) + " phi=" + to_string(PHI) + " sopfr=" + to_string(SOPFR) + " J2=" + to_string(J2) + " mu=" + to_string(MU))
+println("  Weights: n6=40% perf=30% eff=20% cost=10%")
+
+// ============================================================
+// FUSION DSE
+// ============================================================
+let fu_total = fu_m_count * fu_p_count * fu_c_count * fu_s_count * fu_g_count
+
+println("")
+println("===============================================================")
+println("  Domain: FUSION (DSE-FU)  ")
+println("===============================================================")
+println("  Total combinations: " + pad_l(to_string(fu_total), 6))
+println("")
+
+let mut fu_r_i0 = []
+let mut fu_r_i1 = []
+let mut fu_r_i2 = []
+let mut fu_r_i3 = []
+let mut fu_r_i4 = []
+let mut fu_r_n6 = []
+let mut fu_r_perf = []
+let mut fu_r_eff = []
+let mut fu_r_cost = []
+let mut fu_r_total = []
+
+let mut i0 = 0
+while i0 < fu_m_count {
+  let mut i1 = 0
+  while i1 < fu_p_count {
+    let mut i2 = 0
+    while i2 < fu_c_count {
+      let mut i3 = 0
+      while i3 < fu_s_count {
+        let mut i4 = 0
+        while i4 < fu_g_count {
+          let n6c = fu_m_exact[i0] + fu_p_exact[i1] + fu_c_exact[i2] + fu_s_exact[i3] + fu_g_exact[i4]
+          let n6s = n6c / 5.0
+          let pec = fusion_perf(fu_m_pa[i0], fu_m_pb[i0], fu_s_pa[i3], fu_s_pb[i3], fu_g_pa[i4], fu_g_pb[i4])
+          let ts = W_N6 * n6s + W_PERF * pec[0] + W_EFF * pec[1] + W_COST * pec[2]
+
+          fu_r_i0 = fu_r_i0 + [i0]
+          fu_r_i1 = fu_r_i1 + [i1]
+          fu_r_i2 = fu_r_i2 + [i2]
+          fu_r_i3 = fu_r_i3 + [i3]
+          fu_r_i4 = fu_r_i4 + [i4]
+          fu_r_n6 = fu_r_n6 + [n6c]
+          fu_r_perf = fu_r_perf + [pec[0]]
+          fu_r_eff = fu_r_eff + [pec[1]]
+          fu_r_cost = fu_r_cost + [pec[2]]
+          fu_r_total = fu_r_total + [ts]
+
+          i4 = i4 + 1
+        }
+        i3 = i3 + 1
+      }
+      i2 = i2 + 1
+    }
+    i1 = i1 + 1
+  }
+  i0 = i0 + 1
+}
+
+// Sort fusion (selection sort descending)
+let mut si = 0
+while si < fu_total - 1 {
+  let mut best = si
+  let mut sj = si + 1
+  while sj < fu_total {
+    if fu_r_total[sj] > fu_r_total[best] { best = sj }
+    sj = sj + 1
+  }
+  if best != si {
+    let t = fu_r_total[si]
+    fu_r_total[si] = fu_r_total[best]
+    fu_r_total[best] = t
+    let t0 = fu_r_i0[si]
+    fu_r_i0[si] = fu_r_i0[best]
+    fu_r_i0[best] = t0
+    let t1 = fu_r_i1[si]
+    fu_r_i1[si] = fu_r_i1[best]
+    fu_r_i1[best] = t1
+    let t2 = fu_r_i2[si]
+    fu_r_i2[si] = fu_r_i2[best]
+    fu_r_i2[best] = t2
+    let t3 = fu_r_i3[si]
+    fu_r_i3[si] = fu_r_i3[best]
+    fu_r_i3[best] = t3
+    let t4 = fu_r_i4[si]
+    fu_r_i4[si] = fu_r_i4[best]
+    fu_r_i4[best] = t4
+    let tn = fu_r_n6[si]
+    fu_r_n6[si] = fu_r_n6[best]
+    fu_r_n6[best] = tn
+    let tp = fu_r_perf[si]
+    fu_r_perf[si] = fu_r_perf[best]
+    fu_r_perf[best] = tp
+    let te = fu_r_eff[si]
+    fu_r_eff[si] = fu_r_eff[best]
+    fu_r_eff[best] = te
+    let tc = fu_r_cost[si]
+    fu_r_cost[si] = fu_r_cost[best]
+    fu_r_cost[best] = tc
+  }
+  si = si + 1
+}
+
+// Print Fusion Top 10
+println("  Top 10 Pareto:")
+println("  " + repeat_str("-", 108))
+let mut rank = 0
+while rank < 10 {
+  println("  | " + pad_l(to_string(rank + 1), 4) + " | " + pad_c(fu_m_id[fu_r_i0[rank]], 16) + " | " + pad_c(fu_p_id[fu_r_i1[rank]], 14) + " | " + pad_c(fu_c_id[fu_r_i2[rank]], 14) + " | " + pad_c(fu_s_id[fu_r_i3[rank]], 14) + " | " + pad_c(fu_g_id[fu_r_i4[rank]], 14) + " | " + to_string(fu_r_n6[rank]) + "/5  | " + fmt3(fu_r_total[rank]) + " | " + fmt3(fu_r_perf[rank]) + " | " + fmt3(fu_r_eff[rank]) + " |")
+  rank = rank + 1
+}
+println("  " + repeat_str("-", 108))
+
+// Fusion statistics
+let fu_f = fu_total * 1.0
+let mut fu_cnt5 = 0
+let mut fu_cnt4 = 0
+let mut fu_cnt3 = 0
+let mut fsi = 0
+while fsi < fu_total {
+  if fu_r_n6[fsi] == 5 { fu_cnt5 = fu_cnt5 + 1 }
+  if fu_r_n6[fsi] >= 4 { fu_cnt4 = fu_cnt4 + 1 }
+  if fu_r_n6[fsi] >= 3 { fu_cnt3 = fu_cnt3 + 1 }
+  fsi = fsi + 1
+}
+println("")
+println("  Statistics:")
+println("    100% EXACT (5/5): " + pad_l(fmt1(fu_cnt5 / fu_f * 100.0), 6) + "% (" + to_string(fu_cnt5) + " combinations)")
+println("    >=80% EXACT (4/5): " + pad_l(fmt1(fu_cnt4 / fu_f * 100.0), 6) + "% (" + to_string(fu_cnt4) + " combinations)")
+println("    >=60% EXACT (3/5): " + pad_l(fmt1(fu_cnt3 / fu_f * 100.0), 6) + "% (" + to_string(fu_cnt3) + " combinations)")
+
+// ============================================================
+// SOLAR DSE
+// ============================================================
+let sl_total = sl_m_count * sl_p_count * sl_c_count * sl_s_count * sl_g_count
+
+println("")
+println("===============================================================")
+println("  Domain: SOLAR (DSE-SL)  ")
+println("===============================================================")
+println("  Total combinations: " + pad_l(to_string(sl_total), 6))
+println("")
+
+let mut sl_r_i0 = []
+let mut sl_r_i1 = []
+let mut sl_r_i2 = []
+let mut sl_r_i3 = []
+let mut sl_r_i4 = []
+let mut sl_r_n6 = []
+let mut sl_r_perf = []
+let mut sl_r_eff = []
+let mut sl_r_cost = []
+let mut sl_r_total = []
+
+i0 = 0
+while i0 < sl_m_count {
+  let mut i1 = 0
+  while i1 < sl_p_count {
+    let mut i2 = 0
+    while i2 < sl_c_count {
+      let mut i3 = 0
+      while i3 < sl_s_count {
+        let mut i4 = 0
+        while i4 < sl_g_count {
+          let n6c = sl_m_exact[i0] + sl_p_exact[i1] + sl_c_exact[i2] + sl_s_exact[i3] + sl_g_exact[i4]
+          let n6s = n6c / 5.0
+          let pec = solar_perf(sl_m_pb[i0], sl_p_pa[i1], sl_p_pb[i1], sl_c_pa[i2], sl_c_pb[i2], sl_g_pa[i4], sl_g_pb[i4])
+          let ts = W_N6 * n6s + W_PERF * pec[0] + W_EFF * pec[1] + W_COST * pec[2]
+
+          sl_r_i0 = sl_r_i0 + [i0]
+          sl_r_i1 = sl_r_i1 + [i1]
+          sl_r_i2 = sl_r_i2 + [i2]
+          sl_r_i3 = sl_r_i3 + [i3]
+          sl_r_i4 = sl_r_i4 + [i4]
+          sl_r_n6 = sl_r_n6 + [n6c]
+          sl_r_perf = sl_r_perf + [pec[0]]
+          sl_r_eff = sl_r_eff + [pec[1]]
+          sl_r_cost = sl_r_cost + [pec[2]]
+          sl_r_total = sl_r_total + [ts]
+
+          i4 = i4 + 1
+        }
+        i3 = i3 + 1
+      }
+      i2 = i2 + 1
+    }
+    i1 = i1 + 1
+  }
+  i0 = i0 + 1
+}
+
+// Sort solar
+si = 0
+while si < sl_total - 1 {
+  let mut best = si
+  let mut sj = si + 1
+  while sj < sl_total {
+    if sl_r_total[sj] > sl_r_total[best] { best = sj }
+    sj = sj + 1
+  }
+  if best != si {
+    let t = sl_r_total[si]
+    sl_r_total[si] = sl_r_total[best]
+    sl_r_total[best] = t
+    let t0 = sl_r_i0[si]
+    sl_r_i0[si] = sl_r_i0[best]
+    sl_r_i0[best] = t0
+    let t1 = sl_r_i1[si]
+    sl_r_i1[si] = sl_r_i1[best]
+    sl_r_i1[best] = t1
+    let t2 = sl_r_i2[si]
+    sl_r_i2[si] = sl_r_i2[best]
+    sl_r_i2[best] = t2
+    let t3 = sl_r_i3[si]
+    sl_r_i3[si] = sl_r_i3[best]
+    sl_r_i3[best] = t3
+    let t4 = sl_r_i4[si]
+    sl_r_i4[si] = sl_r_i4[best]
+    sl_r_i4[best] = t4
+    let tn = sl_r_n6[si]
+    sl_r_n6[si] = sl_r_n6[best]
+    sl_r_n6[best] = tn
+    let tp = sl_r_perf[si]
+    sl_r_perf[si] = sl_r_perf[best]
+    sl_r_perf[best] = tp
+    let te = sl_r_eff[si]
+    sl_r_eff[si] = sl_r_eff[best]
+    sl_r_eff[best] = te
+    let tc = sl_r_cost[si]
+    sl_r_cost[si] = sl_r_cost[best]
+    sl_r_cost[best] = tc
+  }
+  si = si + 1
+}
+
+// Print Solar Top 10
+println("  Top 10 Pareto:")
+println("  " + repeat_str("-", 108))
+rank = 0
+while rank < 10 {
+  println("  | " + pad_l(to_string(rank + 1), 4) + " | " + pad_c(sl_m_id[sl_r_i0[rank]], 16) + " | " + pad_c(sl_p_id[sl_r_i1[rank]], 14) + " | " + pad_c(sl_c_id[sl_r_i2[rank]], 14) + " | " + pad_c(sl_s_id[sl_r_i3[rank]], 14) + " | " + pad_c(sl_g_id[sl_r_i4[rank]], 14) + " | " + to_string(sl_r_n6[rank]) + "/5  | " + fmt3(sl_r_total[rank]) + " | " + fmt3(sl_r_perf[rank]) + " | " + fmt3(sl_r_eff[rank]) + " |")
+  rank = rank + 1
+}
+println("  " + repeat_str("-", 108))
+
+let sl_f = sl_total * 1.0
+let mut sl_cnt5 = 0
+let mut sl_cnt4 = 0
+let mut sl_cnt3 = 0
+fsi = 0
+while fsi < sl_total {
+  if sl_r_n6[fsi] == 5 { sl_cnt5 = sl_cnt5 + 1 }
+  if sl_r_n6[fsi] >= 4 { sl_cnt4 = sl_cnt4 + 1 }
+  if sl_r_n6[fsi] >= 3 { sl_cnt3 = sl_cnt3 + 1 }
+  fsi = fsi + 1
+}
+println("")
+println("  Statistics:")
+println("    100% EXACT (5/5): " + pad_l(fmt1(sl_cnt5 / sl_f * 100.0), 6) + "% (" + to_string(sl_cnt5) + " combinations)")
+println("    >=80% EXACT (4/5): " + pad_l(fmt1(sl_cnt4 / sl_f * 100.0), 6) + "% (" + to_string(sl_cnt4) + " combinations)")
+println("    >=60% EXACT (3/5): " + pad_l(fmt1(sl_cnt3 / sl_f * 100.0), 6) + "% (" + to_string(sl_cnt3) + " combinations)")
+
+// ============================================================
+// BATTERY DSE
+// ============================================================
+let bt_total = bt_m_count * bt_p_count * bt_c_count * bt_s_count * bt_g_count
+
+println("")
+println("===============================================================")
+println("  Domain: BATTERY (DSE-BT)  ")
+println("===============================================================")
+println("  Total combinations: " + pad_l(to_string(bt_total), 6))
+println("")
+
+let mut bt_r_i0 = []
+let mut bt_r_i1 = []
+let mut bt_r_i2 = []
+let mut bt_r_i3 = []
+let mut bt_r_i4 = []
+let mut bt_r_n6 = []
+let mut bt_r_perf = []
+let mut bt_r_eff = []
+let mut bt_r_cost = []
+let mut bt_r_total = []
+
+i0 = 0
+while i0 < bt_m_count {
+  let mut i1 = 0
+  while i1 < bt_p_count {
+    let mut i2 = 0
+    while i2 < bt_c_count {
+      let mut i3 = 0
+      while i3 < bt_s_count {
+        let mut i4 = 0
+        while i4 < bt_g_count {
+          let n6c = bt_m_exact[i0] + bt_p_exact[i1] + bt_c_exact[i2] + bt_s_exact[i3] + bt_g_exact[i4]
+          let n6s = n6c / 5.0
+          let pec = battery_perf(bt_m_pa[i0], bt_m_pb[i0], bt_p_pa[i1], bt_p_pb[i1], bt_s_pb[i3])
+          let ts = W_N6 * n6s + W_PERF * pec[0] + W_EFF * pec[1] + W_COST * pec[2]
+
+          bt_r_i0 = bt_r_i0 + [i0]
+          bt_r_i1 = bt_r_i1 + [i1]
+          bt_r_i2 = bt_r_i2 + [i2]
+          bt_r_i3 = bt_r_i3 + [i3]
+          bt_r_i4 = bt_r_i4 + [i4]
+          bt_r_n6 = bt_r_n6 + [n6c]
+          bt_r_perf = bt_r_perf + [pec[0]]
+          bt_r_eff = bt_r_eff + [pec[1]]
+          bt_r_cost = bt_r_cost + [pec[2]]
+          bt_r_total = bt_r_total + [ts]
+
+          i4 = i4 + 1
+        }
+        i3 = i3 + 1
+      }
+      i2 = i2 + 1
+    }
+    i1 = i1 + 1
+  }
+  i0 = i0 + 1
+}
+
+// Sort battery
+si = 0
+while si < bt_total - 1 {
+  let mut best = si
+  let mut sj = si + 1
+  while sj < bt_total {
+    if bt_r_total[sj] > bt_r_total[best] { best = sj }
+    sj = sj + 1
+  }
+  if best != si {
+    let t = bt_r_total[si]
+    bt_r_total[si] = bt_r_total[best]
+    bt_r_total[best] = t
+    let t0 = bt_r_i0[si]
+    bt_r_i0[si] = bt_r_i0[best]
+    bt_r_i0[best] = t0
+    let t1 = bt_r_i1[si]
+    bt_r_i1[si] = bt_r_i1[best]
+    bt_r_i1[best] = t1
+    let t2 = bt_r_i2[si]
+    bt_r_i2[si] = bt_r_i2[best]
+    bt_r_i2[best] = t2
+    let t3 = bt_r_i3[si]
+    bt_r_i3[si] = bt_r_i3[best]
+    bt_r_i3[best] = t3
+    let t4 = bt_r_i4[si]
+    bt_r_i4[si] = bt_r_i4[best]
+    bt_r_i4[best] = t4
+    let tn = bt_r_n6[si]
+    bt_r_n6[si] = bt_r_n6[best]
+    bt_r_n6[best] = tn
+    let tp = bt_r_perf[si]
+    bt_r_perf[si] = bt_r_perf[best]
+    bt_r_perf[best] = tp
+    let te = bt_r_eff[si]
+    bt_r_eff[si] = bt_r_eff[best]
+    bt_r_eff[best] = te
+    let tc = bt_r_cost[si]
+    bt_r_cost[si] = bt_r_cost[best]
+    bt_r_cost[best] = tc
+  }
+  si = si + 1
+}
+
+// Print Battery Top 10
+println("  Top 10 Pareto:")
+println("  " + repeat_str("-", 108))
+rank = 0
+while rank < 10 {
+  println("  | " + pad_l(to_string(rank + 1), 4) + " | " + pad_c(bt_m_id[bt_r_i0[rank]], 16) + " | " + pad_c(bt_p_id[bt_r_i1[rank]], 14) + " | " + pad_c(bt_c_id[bt_r_i2[rank]], 14) + " | " + pad_c(bt_s_id[bt_r_i3[rank]], 14) + " | " + pad_c(bt_g_id[bt_r_i4[rank]], 14) + " | " + to_string(bt_r_n6[rank]) + "/5  | " + fmt3(bt_r_total[rank]) + " | " + fmt3(bt_r_perf[rank]) + " | " + fmt3(bt_r_eff[rank]) + " |")
+  rank = rank + 1
+}
+println("  " + repeat_str("-", 108))
+
+let bt_f = bt_total * 1.0
+let mut bt_cnt5 = 0
+let mut bt_cnt4 = 0
+let mut bt_cnt3 = 0
+fsi = 0
+while fsi < bt_total {
+  if bt_r_n6[fsi] == 5 { bt_cnt5 = bt_cnt5 + 1 }
+  if bt_r_n6[fsi] >= 4 { bt_cnt4 = bt_cnt4 + 1 }
+  if bt_r_n6[fsi] >= 3 { bt_cnt3 = bt_cnt3 + 1 }
+  fsi = fsi + 1
+}
+println("")
+println("  Statistics:")
+println("    100% EXACT (5/5): " + pad_l(fmt1(bt_cnt5 / bt_f * 100.0), 6) + "% (" + to_string(bt_cnt5) + " combinations)")
+println("    >=80% EXACT (4/5): " + pad_l(fmt1(bt_cnt4 / bt_f * 100.0), 6) + "% (" + to_string(bt_cnt4) + " combinations)")
+println("    >=60% EXACT (3/5): " + pad_l(fmt1(bt_cnt3 / bt_f * 100.0), 6) + "% (" + to_string(bt_cnt3) + " combinations)")
+
+// ============================================================
+// GRID DSE
+// ============================================================
+let gr_total = gr_m_count * gr_p_count * gr_c_count * gr_s_count * gr_g_count
+
+println("")
+println("===============================================================")
+println("  Domain: GRID (DSE-GR)  ")
+println("===============================================================")
+println("  Total combinations: " + pad_l(to_string(gr_total), 6))
+println("")
+
+let mut gr_r_i0 = []
+let mut gr_r_i1 = []
+let mut gr_r_i2 = []
+let mut gr_r_i3 = []
+let mut gr_r_i4 = []
+let mut gr_r_n6 = []
+let mut gr_r_perf = []
+let mut gr_r_eff = []
+let mut gr_r_cost = []
+let mut gr_r_total = []
+
+i0 = 0
+while i0 < gr_m_count {
+  let mut i1 = 0
+  while i1 < gr_p_count {
+    let mut i2 = 0
+    while i2 < gr_c_count {
+      let mut i3 = 0
+      while i3 < gr_s_count {
+        let mut i4 = 0
+        while i4 < gr_g_count {
+          let n6c = gr_m_exact[i0] + gr_p_exact[i1] + gr_c_exact[i2] + gr_s_exact[i3] + gr_g_exact[i4]
+          let n6s = n6c / 5.0
+          let pec = grid_perf(gr_m_pa[i0], gr_m_pb[i0], gr_p_pb[i1], gr_c_pb[i2], gr_s_pa[i3], gr_s_pb[i3], gr_g_pa[i4], gr_g_pb[i4])
+          let ts = W_N6 * n6s + W_PERF * pec[0] + W_EFF * pec[1] + W_COST * pec[2]
+
+          gr_r_i0 = gr_r_i0 + [i0]
+          gr_r_i1 = gr_r_i1 + [i1]
+          gr_r_i2 = gr_r_i2 + [i2]
+          gr_r_i3 = gr_r_i3 + [i3]
+          gr_r_i4 = gr_r_i4 + [i4]
+          gr_r_n6 = gr_r_n6 + [n6c]
+          gr_r_perf = gr_r_perf + [pec[0]]
+          gr_r_eff = gr_r_eff + [pec[1]]
+          gr_r_cost = gr_r_cost + [pec[2]]
+          gr_r_total = gr_r_total + [ts]
+
+          i4 = i4 + 1
+        }
+        i3 = i3 + 1
+      }
+      i2 = i2 + 1
+    }
+    i1 = i1 + 1
+  }
+  i0 = i0 + 1
+}
+
+// Sort grid
+si = 0
+while si < gr_total - 1 {
+  let mut best = si
+  let mut sj = si + 1
+  while sj < gr_total {
+    if gr_r_total[sj] > gr_r_total[best] { best = sj }
+    sj = sj + 1
+  }
+  if best != si {
+    let t = gr_r_total[si]
+    gr_r_total[si] = gr_r_total[best]
+    gr_r_total[best] = t
+    let t0 = gr_r_i0[si]
+    gr_r_i0[si] = gr_r_i0[best]
+    gr_r_i0[best] = t0
+    let t1 = gr_r_i1[si]
+    gr_r_i1[si] = gr_r_i1[best]
+    gr_r_i1[best] = t1
+    let t2 = gr_r_i2[si]
+    gr_r_i2[si] = gr_r_i2[best]
+    gr_r_i2[best] = t2
+    let t3 = gr_r_i3[si]
+    gr_r_i3[si] = gr_r_i3[best]
+    gr_r_i3[best] = t3
+    let t4 = gr_r_i4[si]
+    gr_r_i4[si] = gr_r_i4[best]
+    gr_r_i4[best] = t4
+    let tn = gr_r_n6[si]
+    gr_r_n6[si] = gr_r_n6[best]
+    gr_r_n6[best] = tn
+    let tp = gr_r_perf[si]
+    gr_r_perf[si] = gr_r_perf[best]
+    gr_r_perf[best] = tp
+    let te = gr_r_eff[si]
+    gr_r_eff[si] = gr_r_eff[best]
+    gr_r_eff[best] = te
+    let tc = gr_r_cost[si]
+    gr_r_cost[si] = gr_r_cost[best]
+    gr_r_cost[best] = tc
+  }
+  si = si + 1
+}
+
+// Print Grid Top 10
+println("  Top 10 Pareto:")
+println("  " + repeat_str("-", 108))
+rank = 0
+while rank < 10 {
+  println("  | " + pad_l(to_string(rank + 1), 4) + " | " + pad_c(gr_m_id[gr_r_i0[rank]], 16) + " | " + pad_c(gr_p_id[gr_r_i1[rank]], 14) + " | " + pad_c(gr_c_id[gr_r_i2[rank]], 14) + " | " + pad_c(gr_s_id[gr_r_i3[rank]], 14) + " | " + pad_c(gr_g_id[gr_r_i4[rank]], 14) + " | " + to_string(gr_r_n6[rank]) + "/5  | " + fmt3(gr_r_total[rank]) + " | " + fmt3(gr_r_perf[rank]) + " | " + fmt3(gr_r_eff[rank]) + " |")
+  rank = rank + 1
+}
+println("  " + repeat_str("-", 108))
+
+let gr_f = gr_total * 1.0
+let mut gr_cnt5 = 0
+let mut gr_cnt4 = 0
+let mut gr_cnt3 = 0
+fsi = 0
+while fsi < gr_total {
+  if gr_r_n6[fsi] == 5 { gr_cnt5 = gr_cnt5 + 1 }
+  if gr_r_n6[fsi] >= 4 { gr_cnt4 = gr_cnt4 + 1 }
+  if gr_r_n6[fsi] >= 3 { gr_cnt3 = gr_cnt3 + 1 }
+  fsi = fsi + 1
+}
+println("")
+println("  Statistics:")
+println("    100% EXACT (5/5): " + pad_l(fmt1(gr_cnt5 / gr_f * 100.0), 6) + "% (" + to_string(gr_cnt5) + " combinations)")
+println("    >=80% EXACT (4/5): " + pad_l(fmt1(gr_cnt4 / gr_f * 100.0), 6) + "% (" + to_string(gr_cnt4) + " combinations)")
+println("    >=60% EXACT (3/5): " + pad_l(fmt1(gr_cnt3 / gr_f * 100.0), 6) + "% (" + to_string(gr_cnt3) + " combinations)")
+
+// ============================================================
+// CROSS-DSE: top-5 from each domain
+// ============================================================
+let top_n = 5
+let cross_total = top_n * top_n * top_n * top_n
+
+println("")
+println("===============================================================")
+println("  CROSS-DSE: Energy Integration")
+println("===============================================================")
+println("  Domain top-" + to_string(top_n) + " winners x 4 domains = " + to_string(cross_total) + " combinations")
+println("")
+
+let mut cr_fu = []
+let mut cr_sl = []
+let mut cr_bt = []
+let mut cr_gr = []
+let mut cr_n6 = []
+let mut cr_score = []
+
+let mut fi = 0
+while fi < top_n {
+  let mut sli = 0
+  while sli < top_n {
+    let mut bi = 0
+    while bi < top_n {
+      let mut gi = 0
+      while gi < top_n {
+        let tn6 = fu_r_n6[fi] + sl_r_n6[sli] + bt_r_n6[bi] + gr_r_n6[gi]
+        let ts = (fu_r_total[fi] + sl_r_total[sli] + bt_r_total[bi] + gr_r_total[gi]) / 4.0
+
+        cr_fu = cr_fu + [fi]
+        cr_sl = cr_sl + [sli]
+        cr_bt = cr_bt + [bi]
+        cr_gr = cr_gr + [gi]
+        cr_n6 = cr_n6 + [tn6]
+        cr_score = cr_score + [ts]
+
+        gi = gi + 1
+      }
+      bi = bi + 1
+    }
+    sli = sli + 1
+  }
+  fi = fi + 1
+}
+
+// Sort cross results
+let mut ci = 0
+while ci < cross_total - 1 {
+  let mut cbest = ci
+  let mut cj = ci + 1
+  while cj < cross_total {
+    if cr_score[cj] > cr_score[cbest] { cbest = cj }
+    cj = cj + 1
+  }
+  if cbest != ci {
+    let t1 = cr_fu[ci]
+    cr_fu[ci] = cr_fu[cbest]
+    cr_fu[cbest] = t1
+    let t2 = cr_sl[ci]
+    cr_sl[ci] = cr_sl[cbest]
+    cr_sl[cbest] = t2
+    let t3 = cr_bt[ci]
+    cr_bt[ci] = cr_bt[cbest]
+    cr_bt[cbest] = t3
+    let t4 = cr_gr[ci]
+    cr_gr[ci] = cr_gr[cbest]
+    cr_gr[cbest] = t4
+    let t5 = cr_n6[ci]
+    cr_n6[ci] = cr_n6[cbest]
+    cr_n6[cbest] = t5
+    let t6 = cr_score[ci]
+    cr_score[ci] = cr_score[cbest]
+    cr_score[cbest] = t6
+  }
+  ci = ci + 1
+}
+
+// Top 10 Cross-DSE
+println("  Top 10 Cross-DSE Pareto:")
+println("  " + repeat_str("-", 120))
+
+let mut crank = 0
+while crank < 10 {
+  let fui = cr_fu[crank]
+  let slx = cr_sl[crank]
+  let bti = cr_bt[crank]
+  let gri = cr_gr[crank]
+
+  let fu_path = fu_m_id[fu_r_i0[fui]] + "->" + fu_s_id[fu_r_i3[fui]]
+  let sl_path = sl_m_id[sl_r_i0[slx]] + "->" + sl_s_id[sl_r_i3[slx]]
+  let bt_path = bt_m_id[bt_r_i0[bti]] + "->" + bt_s_id[bt_r_i3[bti]]
+  let gr_path = gr_m_id[gr_r_i0[gri]] + "->" + gr_s_id[gr_r_i3[gri]]
+
+  let exact_str = pad_l(to_string(cr_n6[crank]), 2) + "/20"
+
+  println("  | " + pad_l(to_string(crank + 1), 4) + " | " + pad_c(fu_path, 22) + " | " + pad_c(sl_path, 22) + " | " + pad_c(bt_path, 22) + " | " + pad_c(gr_path, 22) + " | " + exact_str + " | " + fmt4(cr_score[crank]) + " |")
+
+  crank = crank + 1
+}
+println("  " + repeat_str("-", 120))
+
+// ============================================================
+// ULTIMATE WINNER
+// ============================================================
+let w_fui = cr_fu[0]
+let w_sli = cr_sl[0]
+let w_bti = cr_bt[0]
+let w_gri = cr_gr[0]
+
+let w_n6 = cr_n6[0]
+let w_pct = fmt1(w_n6 / 20.0 * 100.0)
+
+println("")
+println("===============================================================")
+println("  ULTIMATE ENERGY WINNER")
+println("===============================================================")
+println("")
+println("  Total Score: " + fmt4(cr_score[0]) + "  |  n6 EXACT: " + to_string(w_n6) + "/20  |  n6 Coverage: " + w_pct + "%")
+println("")
+
+// Fusion detail
+println("  +--- FUSION ----------------------------------------------+")
+println("  |  Score: " + fmt4(fu_r_total[w_fui]) + "  n6: " + to_string(fu_r_n6[w_fui]) + "/5")
+println("  |  L1: " + fu_m_id[fu_r_i0[w_fui]] + " (" + fu_m_name[fu_r_i0[w_fui]] + ")")
+println("  |  L2: " + fu_p_id[fu_r_i1[w_fui]] + " (" + fu_p_name[fu_r_i1[w_fui]] + ")")
+println("  |  L3: " + fu_c_id[fu_r_i2[w_fui]] + " (" + fu_c_name[fu_r_i2[w_fui]] + ")")
+println("  |  L4: " + fu_s_id[fu_r_i3[w_fui]] + " (" + fu_s_name[fu_r_i3[w_fui]] + ")")
+println("  |  L5: " + fu_g_id[fu_r_i4[w_fui]] + " (" + fu_g_name[fu_r_i4[w_fui]] + ")")
+println("  +--------------------------------------------------------+")
+
+// Solar detail
+println("  +--- SOLAR -----------------------------------------------+")
+println("  |  Score: " + fmt4(sl_r_total[w_sli]) + "  n6: " + to_string(sl_r_n6[w_sli]) + "/5")
+println("  |  L1: " + sl_m_id[sl_r_i0[w_sli]] + " (" + sl_m_name[sl_r_i0[w_sli]] + ")")
+println("  |  L2: " + sl_p_id[sl_r_i1[w_sli]] + " (" + sl_p_name[sl_r_i1[w_sli]] + ")")
+println("  |  L3: " + sl_c_id[sl_r_i2[w_sli]] + " (" + sl_c_name[sl_r_i2[w_sli]] + ")")
+println("  |  L4: " + sl_s_id[sl_r_i3[w_sli]] + " (" + sl_s_name[sl_r_i3[w_sli]] + ")")
+println("  |  L5: " + sl_g_id[sl_r_i4[w_sli]] + " (" + sl_g_name[sl_r_i4[w_sli]] + ")")
+println("  +--------------------------------------------------------+")
+
+// Battery detail
+println("  +--- BATTERY ---------------------------------------------+")
+println("  |  Score: " + fmt4(bt_r_total[w_bti]) + "  n6: " + to_string(bt_r_n6[w_bti]) + "/5")
+println("  |  L1: " + bt_m_id[bt_r_i0[w_bti]] + " (" + bt_m_name[bt_r_i0[w_bti]] + ")")
+println("  |  L2: " + bt_p_id[bt_r_i1[w_bti]] + " (" + bt_p_name[bt_r_i1[w_bti]] + ")")
+println("  |  L3: " + bt_c_id[bt_r_i2[w_bti]] + " (" + bt_c_name[bt_r_i2[w_bti]] + ")")
+println("  |  L4: " + bt_s_id[bt_r_i3[w_bti]] + " (" + bt_s_name[bt_r_i3[w_bti]] + ")")
+println("  |  L5: " + bt_g_id[bt_r_i4[w_bti]] + " (" + bt_g_name[bt_r_i4[w_bti]] + ")")
+println("  +--------------------------------------------------------+")
+
+// Grid detail
+println("  +--- GRID ------------------------------------------------+")
+println("  |  Score: " + fmt4(gr_r_total[w_gri]) + "  n6: " + to_string(gr_r_n6[w_gri]) + "/5")
+println("  |  L1: " + gr_m_id[gr_r_i0[w_gri]] + " (" + gr_m_name[gr_r_i0[w_gri]] + ")")
+println("  |  L2: " + gr_p_id[gr_r_i1[w_gri]] + " (" + gr_p_name[gr_r_i1[w_gri]] + ")")
+println("  |  L3: " + gr_c_id[gr_r_i2[w_gri]] + " (" + gr_c_name[gr_r_i2[w_gri]] + ")")
+println("  |  L4: " + gr_s_id[gr_r_i3[w_gri]] + " (" + gr_s_name[gr_r_i3[w_gri]] + ")")
+println("  |  L5: " + gr_g_id[gr_r_i4[w_gri]] + " (" + gr_g_name[gr_r_i4[w_gri]] + ")")
+println("  +--------------------------------------------------------+")
+
+// N6 constants summary
+println("")
+println("  +--- N6 Constants ----------------------------------------+")
+println("  |  n=6  sigma=12  tau=4  phi=2  sopfr=5  J2=24  mu=1     |")
+println("  |  sigma*phi*tau = 12*2*4 = 96 -> BT-84 triple convergence|")
+println("  |  sigma(6)*phi(6) = n*tau(6) -> 12*2 = 6*4 = 24         |")
+println("  |  Egyptian: 1/2 + 1/3 + 1/6 = 1                         |")
+println("  +--------------------------------------------------------+")
+println("")
+
+let grand_total = 2400 * 4 + 625
+println("  Grand Total: " + to_string(2400 * 4) + " domain combinations + 625 cross-DSE = " + to_string(grand_total) + " evaluated")
+println("")
+println("=== DSE Complete ===")

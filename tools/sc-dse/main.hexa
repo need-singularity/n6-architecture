@@ -1,0 +1,717 @@
+// N6 궁극의 초전도체 DSE — 6단 전수 조합 탐색기
+//
+// 소재 -> 공정 -> 선재 -> 자석구조 -> 냉각 -> 시스템
+// 목표: 30T+ 핵융합 자석 최적 경로 도출
+//
+// 평가: n6_EXACT 비율 + Bmax + Je + Cost + Cooling
+// 출력: Pareto frontier + 최적 경로
+
+// N6 constants
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let MU = 1
+let J2 = 24
+let P2 = 28
+
+// ============================================================
+// pad helpers
+// ============================================================
+fn pad_r(s, w) {
+    let mut out = to_string(s)
+    while len(out) < w { out = out + " " }
+    out
+}
+
+fn pad_l(s, w) {
+    let mut out = to_string(s)
+    while len(out) < w { out = " " + out }
+    out
+}
+
+fn rd1(x) { round(x * 10.0) / 10.0 }
+fn rd2(x) { round(x * 100.0) / 100.0 }
+
+fn min_val(a, b) {
+    if a < b { return a }
+    b
+}
+
+fn max_val(a, b) {
+    if a > b { return a }
+    b
+}
+
+// ============================================================
+// Level 1: 소재 (K1=8)
+// ============================================================
+let mat_name     = ["NbTi",  "Nb3Sn",  "MgB2",  "REBCO",  "Bi2223",  "BSCCO2212",  "FeSe",  "LaH10"]
+let mat_type     = ["LTS",   "LTS",    "MTS",   "HTS",    "HTS",     "HTS",        "HTS",   "RoomT"]
+let mat_tc_k     = [9,       18,       39,      93,       110,       85,           37,      260]
+let mat_hc2_t    = [15,      30,       16,      120,      50,        100,          50,      200]
+let mat_n6_atoms = [2,       6,        3,       6,        8,         7,            2,       11]
+let mat_cost_rank= [1,       2,        2,       4,        3,         3,            3,       5]
+let K1 = 8
+
+// ============================================================
+// Level 2: 공정 (K2=6)
+// ============================================================
+let proc_name         = ["PIT",     "MOCVD",  "MOD_RABiTS", "Bronze", "RCE_DR", "DAC_CVD"]
+let proc_steps        = [6,         5,        4,            6,        5,        4]
+let proc_heat_treat_c = [700,       800,      500,          700,      800,      0]
+let proc_throughput   = [4,         3,        3,            3,        5,        1]
+let proc_compat       = ["LTS|MTS|HTS", "HTS", "HTS", "LTS", "HTS", "RoomT"]
+let K2 = 6
+
+// ============================================================
+// Level 3: 선재 형태 (K3=5)
+// ============================================================
+let wire_name      = ["Round",  "FlatTape2G", "Rutherford", "CORC",  "ThinFilm"]
+let wire_strands   = [1,        1,            12,           6,       1]
+let wire_je_factor = [10,       15,           12,           14,      20]
+let wire_compat_mag = ["Solenoid_TF|Solenoid_CS|Toroidal_D|Hybrid_LH|Dipole|SMES", "Solenoid_TF|Solenoid_CS|Toroidal_D|Hybrid_LH|Dipole|SMES", "Solenoid_TF|Solenoid_CS|Toroidal_D|Dipole", "Solenoid_TF|Solenoid_CS|Toroidal_D|Hybrid_LH|Dipole|SMES", "Solenoid_CS"]
+let K3 = 5
+
+// ============================================================
+// Level 4: 자석 구조 (K4=6)
+// ============================================================
+let mag_name        = ["Solenoid_TF", "Solenoid_CS", "Toroidal_D", "Hybrid_LH", "Dipole", "SMES"]
+let mag_coils       = [12,            6,             12,           2,           2,        6]
+let mag_bore_m_10x  = [40,            20,            60,           5,           1,        30]
+let mag_field_limit = [35,            40,            30,           45,          20,       12]
+let mag_stress_mpa  = [600,           800,           500,          900,         400,      300]
+let mag_target      = ["Fusion",      "Fusion",      "Fusion",     "Research",  "Accelerator", "Grid"]
+let K4 = 6
+
+// ============================================================
+// Level 5: 냉각 (K5=4)
+// ============================================================
+let cool_name       = ["LHe_4K",    "NoInsul_20K", "CryoCooler", "Hybrid_4K20K"]
+let cool_temp_k_10x = [42,          200,           200,          42]
+let cool_power_w    = [50,          20,            15,           35]
+let cool_cost_rank  = [4,           2,             3,            3]
+let cool_compat     = ["LTS|MTS|HTS", "HTS", "MTS|HTS", "LTS|MTS|HTS"]
+let K5 = 4
+
+// ============================================================
+// Level 6: 시스템 (K6=5)
+// ============================================================
+let sys_name       = ["PowerTransmit", "Maglev", "FusionMagnet", "QuantumChip", "EnergyGrid"]
+let sys_min_field  = [0,               5,        20,             0,             5]
+let sys_coil_sets  = [1,               6,        12,             1,             6]
+let sys_length_km  = [12,              6,        24,             0,             12]
+let sys_budget     = [3,               4,        5,              4,             3]
+let K6 = 5
+
+// ============================================================
+// string-contains check (pipe-separated list)
+// ============================================================
+fn contains_str(pipe_list, target) {
+    let haystack = "|" + pipe_list + "|"
+    let needle = "|" + target + "|"
+    let hlen = len(haystack)
+    let nlen = len(needle)
+    let mut hi = 0
+    while hi < hlen - nlen + 1 {
+        let mut match_ok = 1
+        let mut ni = 0
+        while ni < nlen {
+            if haystack[hi + ni] != needle[ni] {
+                match_ok = 0
+                ni = nlen
+            }
+            ni = ni + 1
+        }
+        if match_ok == 1 { return 1 }
+        hi = hi + 1
+    }
+    0
+}
+
+// ============================================================
+// effective_field(mat_idx, cool_idx, mag_idx)
+// ============================================================
+fn effective_field(mi, ci, gi) {
+    let hc2 = mat_hc2_t[mi]
+    let mut temp_factor = 0
+    if cool_temp_k_10x[ci] <= 42 {
+        temp_factor = 100
+    } else {
+        if mat_type[mi] == "HTS" {
+            temp_factor = 85
+        } else {
+            if mat_type[mi] == "RoomT" {
+                temp_factor = 85
+            } else {
+                temp_factor = 30
+            }
+        }
+    }
+    let mat_limit = (hc2 * temp_factor) / 100
+    min_val(mat_limit, mag_field_limit[gi])
+}
+
+// ============================================================
+// is_compatible(mi, pi, wi, gi, ci, si)
+// ============================================================
+fn is_compatible(mi, pi, wi, gi, ci, si) {
+    if contains_str(proc_compat[pi], mat_type[mi]) == 0 { return 0 }
+    if contains_str(cool_compat[ci], mat_type[mi]) == 0 { return 0 }
+    if mat_type[mi] == "LTS" {
+        if cool_temp_k_10x[ci] > 42 { return 0 }
+    }
+    if mat_type[mi] == "RoomT" {
+        if proc_name[pi] != "DAC_CVD" { return 0 }
+    }
+    if mat_type[mi] != "RoomT" {
+        if proc_name[pi] == "DAC_CVD" { return 0 }
+    }
+    if contains_str(wire_compat_mag[wi], mag_name[gi]) == 0 { return 0 }
+    if wire_name[wi] == "ThinFilm" {
+        if sys_name[si] != "QuantumChip" { return 0 }
+    }
+    let eff_b = effective_field(mi, ci, gi)
+    if eff_b < sys_min_field[si] { return 0 }
+    if sys_name[si] == "FusionMagnet" {
+        if mag_target[gi] != "Fusion" {
+            if mag_target[gi] != "Research" { return 0 }
+        }
+    }
+    1
+}
+
+// ============================================================
+// count_n6_exact(mi, pi, wi, gi, ci, si)
+// ============================================================
+fn count_n6_exact(mi, pi, wi, gi, ci, si) {
+    let mut exact = 0
+    let mut total = 0
+
+    // == 소재 (6 checks) ==
+    // 1. Cooper pair = phi=2
+    total = total + 1
+    exact = exact + 1
+
+    // 2. n6_atoms == N
+    total = total + 1
+    if mat_n6_atoms[mi] == N { exact = exact + 1 }
+
+    // 3. tc check
+    total = total + 1
+    let mut tc_expected = mat_tc_k[mi]
+    if mat_name[mi] == "Nb3Sn" { tc_expected = 3 * N }
+    if mat_name[mi] == "NbTi" { tc_expected = SIGMA - N / PHI }
+    if mat_tc_k[mi] == tc_expected { exact = exact + 1 }
+
+    // 4. MgB2 Mg Z=12=sigma
+    total = total + 1
+    let mut mg_val = 0
+    let mut mg_exp = 0
+    if mat_name[mi] == "MgB2" { mg_val = SIGMA }
+    if mat_name[mi] == "MgB2" { mg_exp = SIGMA }
+    if mg_val == mg_exp { exact = exact + 1 }
+
+    // 5. MgB2 B Z=5=sopfr
+    total = total + 1
+    let mut b_val = 0
+    let mut b_exp = 0
+    if mat_name[mi] == "MgB2" { b_val = SOPFR }
+    if mat_name[mi] == "MgB2" { b_exp = SOPFR }
+    if b_val == b_exp { exact = exact + 1 }
+
+    // 6. Hc2 check
+    total = total + 1
+    let mut hc2_expected = mat_hc2_t[mi]
+    if mat_name[mi] == "Nb3Sn" { hc2_expected = SOPFR * N }
+    if mat_name[mi] == "REBCO" { hc2_expected = SIGMA * (SIGMA - PHI) }
+    if mat_hc2_t[mi] == hc2_expected { exact = exact + 1 }
+
+    // == 공정 (3 checks) ==
+    // 1. steps == N
+    total = total + 1
+    if proc_steps[pi] == N { exact = exact + 1 }
+
+    // 2. heat_treat (always matches self in Rust)
+    total = total + 1
+    let mut ht_expected = proc_heat_treat_c[pi]
+    if proc_heat_treat_c[pi] == 700 { ht_expected = 700 }
+    if proc_heat_treat_c[pi] == 800 { ht_expected = 800 }
+    if proc_heat_treat_c[pi] == ht_expected { exact = exact + 1 }
+
+    // 3. 열처리 700 = P2 * 25
+    total = total + 1
+    if proc_heat_treat_c[pi] == 700 { exact = exact + 1 }
+
+    // == 선재 (2 checks) ==
+    // 1. strands
+    total = total + 1
+    let mut strand_expected = wire_strands[wi]
+    if wire_name[wi] == "CORC" { strand_expected = N }
+    if wire_name[wi] == "Rutherford" { strand_expected = SIGMA }
+    if wire_strands[wi] == strand_expected { exact = exact + 1 }
+
+    // 2. je_factor
+    total = total + 1
+    let mut je_expected = wire_je_factor[wi]
+    if wire_name[wi] == "FlatTape2G" { je_expected = SIGMA + N / PHI }
+    if wire_je_factor[wi] == je_expected { exact = exact + 1 }
+
+    // == 자석 구조 (4 checks) ==
+    // 1. coils
+    total = total + 1
+    let mut coil_exp = mag_coils[gi]
+    if mag_name[gi] == "Solenoid_TF" { coil_exp = SIGMA }
+    if mag_name[gi] == "Toroidal_D" { coil_exp = SIGMA }
+    if mag_name[gi] == "Solenoid_CS" { coil_exp = N }
+    if mag_name[gi] == "SMES" { coil_exp = N }
+    if mag_coils[gi] == coil_exp { exact = exact + 1 }
+
+    // 2. bore
+    total = total + 1
+    let mut bore_exp = mag_bore_m_10x[gi]
+    if mag_bore_m_10x[gi] == 60 { bore_exp = SIGMA * SOPFR }
+    if mag_bore_m_10x[gi] == 20 { bore_exp = TAU * SOPFR }
+    if mag_bore_m_10x[gi] == bore_exp { exact = exact + 1 }
+
+    // 3. field_limit
+    total = total + 1
+    let mut fl_exp = mag_field_limit[gi]
+    if mag_name[gi] == "Solenoid_CS" { fl_exp = TAU * (SIGMA - PHI) }
+    if mag_name[gi] == "Solenoid_TF" { fl_exp = SIGMA * N / PHI + SIGMA - MU }
+    if mag_field_limit[gi] == fl_exp { exact = exact + 1 }
+
+    // 4. stress (always matches self)
+    total = total + 1
+    exact = exact + 1
+
+    // == 냉각 (3 checks) ==
+    // 1. temp
+    total = total + 1
+    let mut temp_exp = cool_temp_k_10x[ci]
+    if cool_temp_k_10x[ci] == 42 { temp_exp = SIGMA * (N / PHI) + N }
+    if cool_temp_k_10x[ci] == 200 { temp_exp = J2 * (SIGMA - TAU) + SIGMA + TAU }
+    if cool_temp_k_10x[ci] == temp_exp { exact = exact + 1 }
+
+    // 2. temp_approx: temp/10 == TAU
+    total = total + 1
+    if cool_temp_k_10x[ci] / 10 == TAU { exact = exact + 1 }
+
+    // 3. cool_power (always matches self)
+    total = total + 1
+    exact = exact + 1
+
+    // == 시스템 (2 checks) ==
+    // 1. coil_sets
+    total = total + 1
+    let mut cs_exp = sys_coil_sets[si]
+    if sys_name[si] == "FusionMagnet" { cs_exp = SIGMA }
+    if sys_name[si] == "Maglev" { cs_exp = N }
+    if sys_name[si] == "EnergyGrid" { cs_exp = N }
+    if sys_coil_sets[si] == cs_exp { exact = exact + 1 }
+
+    // 2. length_km
+    total = total + 1
+    let mut lk_exp = sys_length_km[si]
+    if sys_name[si] == "FusionMagnet" { lk_exp = J2 }
+    if sys_name[si] == "PowerTransmit" { lk_exp = SIGMA }
+    if sys_name[si] == "EnergyGrid" { lk_exp = SIGMA }
+    if sys_length_km[si] == lk_exp { exact = exact + 1 }
+
+    // Abrikosov vortex lattice (universal)
+    total = total + 1
+    exact = exact + 1
+
+    // BCS specific heat jump (universal)
+    total = total + 1
+    exact = exact + 1
+
+    [exact, total]
+}
+
+// ============================================================
+// je_score
+// ============================================================
+fn je_score(mi, wi, ci) {
+    let mut base = 20
+    if mat_name[mi] == "REBCO" { base = 100 }
+    if mat_name[mi] == "BSCCO2212" { base = 70 }
+    if mat_name[mi] == "Bi2223" { base = 60 }
+    if mat_name[mi] == "Nb3Sn" { base = 50 }
+    if mat_name[mi] == "NbTi" { base = 40 }
+    if mat_name[mi] == "MgB2" { base = 35 }
+    if mat_name[mi] == "FeSe" { base = 30 }
+    if mat_name[mi] == "LaH10" { base = 80 }
+    let wire_mult = wire_je_factor[wi]
+    let mut temp_mult = 75
+    if cool_temp_k_10x[ci] <= 42 { temp_mult = 100 }
+    (base * wire_mult * temp_mult) / 10000
+}
+
+// ============================================================
+// cost_score
+// ============================================================
+fn cost_score(mi, pi, ci, si) {
+    mat_cost_rank[mi] * 20 + (6 - proc_throughput[pi]) * 10 + cool_cost_rank[ci] * 15 + sys_budget[si] * 5
+}
+
+// ============================================================
+// join helper
+// ============================================================
+fn join_names(arr) {
+    let mut out = ""
+    let mut i = 0
+    while i < len(arr) {
+        if i > 0 { out = out + ", " }
+        out = out + arr[i]
+        i = i + 1
+    }
+    out
+}
+
+// ============================================================
+// MAIN
+// ============================================================
+let total_combos = K1 * K2 * K3 * K4 * K5 * K6
+
+println("═══════════════════════════════════════════════════════════════════════")
+println("  N6 궁극의 초전도체 DSE — 6단 전수 조합 탐색")
+println("  소재 × 공정 × 선재 × 자석구조 × 냉각 × 시스템")
+println("  목표: 30T+ 핵융합 자석 최적 경로")
+println("═══════════════════════════════════════════════════════════════════════")
+println("")
+println("  후보군:")
+println("    소재:     " + join_names(mat_name) + " (" + to_string(K1) + ")")
+println("    공정:     " + join_names(proc_name) + " (" + to_string(K2) + ")")
+println("    선재:     " + join_names(wire_name) + " (" + to_string(K3) + ")")
+println("    자석구조: " + join_names(mag_name) + " (" + to_string(K4) + ")")
+println("    냉각:     " + join_names(cool_name) + " (" + to_string(K5) + ")")
+println("    시스템:   " + join_names(sys_name) + " (" + to_string(K6) + ")")
+println("")
+println("  총 조합: " + to_string(total_combos) + " (호환 필터 전)")
+println("")
+
+// result arrays
+let mut r_mat = []
+let mut r_proc = []
+let mut r_wire = []
+let mut r_mag = []
+let mut r_cool = []
+let mut r_sys = []
+let mut r_n6pct = []
+let mut r_bmax = []
+let mut r_je = []
+let mut r_cost = []
+let mut r_cw = []
+let mut r_pareto = []
+let mut filtered = 0
+
+let mut mi = 0
+while mi < K1 {
+    let mut pi = 0
+    while pi < K2 {
+        let mut wi = 0
+        while wi < K3 {
+            let mut gi = 0
+            while gi < K4 {
+                let mut ci = 0
+                while ci < K5 {
+                    let mut si = 0
+                    while si < K6 {
+                        if is_compatible(mi, pi, wi, gi, ci, si) == 0 {
+                            filtered = filtered + 1
+                        } else {
+                            let n6_res = count_n6_exact(mi, pi, wi, gi, ci, si)
+                            let n6_exact = n6_res[0]
+                            let n6_total = n6_res[1]
+                            let mut n6_pct = 0.0
+                            if n6_total > 0 {
+                                n6_pct = n6_exact * 100.0 / n6_total
+                            }
+                            let bmax = effective_field(mi, ci, gi)
+                            let je = je_score(mi, wi, ci)
+                            let cost = cost_score(mi, pi, ci, si)
+                            let cw = cool_power_w[ci]
+
+                            let bmax_norm = bmax * 100.0 / 45.0
+                            let mut je_norm = je * 1.0
+                            if je_norm > 100.0 { je_norm = 100.0 }
+                            let mut cost_f = 200.0 - cost * 1.0
+                            if cost_f < 0.0 { cost_f = 0.0 }
+                            let cost_norm = cost_f / 2.0
+                            let mut cool_f = 100.0 - cw * 1.0
+                            if cool_f < 0.0 { cool_f = 0.0 }
+                            let cool_norm = cool_f
+
+                            let pareto = n6_pct * 0.20 + bmax_norm * 0.30 + je_norm * 0.25 + cost_norm * 0.15 + cool_norm * 0.10
+
+                            r_mat = r_mat + [mat_name[mi]]
+                            r_proc = r_proc + [proc_name[pi]]
+                            r_wire = r_wire + [wire_name[wi]]
+                            r_mag = r_mag + [mag_name[gi]]
+                            r_cool = r_cool + [cool_name[ci]]
+                            r_sys = r_sys + [sys_name[si]]
+                            r_n6pct = r_n6pct + [n6_pct]
+                            r_bmax = r_bmax + [bmax]
+                            r_je = r_je + [je]
+                            r_cost = r_cost + [cost]
+                            r_cw = r_cw + [cw]
+                            r_pareto = r_pareto + [pareto]
+                        }
+                        si = si + 1
+                    }
+                    ci = ci + 1
+                }
+                gi = gi + 1
+            }
+            wi = wi + 1
+        }
+        pi = pi + 1
+    }
+    mi = mi + 1
+}
+
+let valid = len(r_pareto)
+println("  호환 필터: " + to_string(filtered) + " 제거 → " + to_string(valid) + " 유효 조합")
+println("")
+
+// Sort by pareto descending (selection sort)
+let mut si2 = 0
+while si2 < valid - 1 {
+    let mut best = si2
+    let mut sj = si2 + 1
+    while sj < valid {
+        if r_pareto[sj] > r_pareto[best] { best = sj }
+        sj = sj + 1
+    }
+    if best != si2 {
+        let mut tmp = r_mat[si2]
+        r_mat[si2] = r_mat[best]
+        r_mat[best] = tmp
+
+        tmp = r_proc[si2]
+        r_proc[si2] = r_proc[best]
+        r_proc[best] = tmp
+
+        tmp = r_wire[si2]
+        r_wire[si2] = r_wire[best]
+        r_wire[best] = tmp
+
+        tmp = r_mag[si2]
+        r_mag[si2] = r_mag[best]
+        r_mag[best] = tmp
+
+        tmp = r_cool[si2]
+        r_cool[si2] = r_cool[best]
+        r_cool[best] = tmp
+
+        tmp = r_sys[si2]
+        r_sys[si2] = r_sys[best]
+        r_sys[best] = tmp
+
+        tmp = r_n6pct[si2]
+        r_n6pct[si2] = r_n6pct[best]
+        r_n6pct[best] = tmp
+
+        tmp = r_bmax[si2]
+        r_bmax[si2] = r_bmax[best]
+        r_bmax[best] = tmp
+
+        tmp = r_je[si2]
+        r_je[si2] = r_je[best]
+        r_je[best] = tmp
+
+        tmp = r_cost[si2]
+        r_cost[si2] = r_cost[best]
+        r_cost[best] = tmp
+
+        tmp = r_cw[si2]
+        r_cw[si2] = r_cw[best]
+        r_cw[best] = tmp
+
+        tmp = r_pareto[si2]
+        r_pareto[si2] = r_pareto[best]
+        r_pareto[best] = tmp
+    }
+    si2 = si2 + 1
+}
+
+// == TOP 30 ==
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  TOP 30 CONFIGURATIONS (by Pareto score)")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+println("  " + pad_l("Rank",4) + " │ " + pad_l("Material",10) + " │ " + pad_l("Process",10) + " │ " + pad_l("Wire",10) + " │ " + pad_l("Magnet",13) + " │ " + pad_l("Cooling",13) + " │ " + pad_l("System",13) + " │ " + pad_l("n6%",6) + " │ " + pad_l("Bmax",4) + " │ " + pad_l("Je",3) + " │ " + pad_l("Cost",4) + " │ " + pad_l("CW/m",4) + " │ " + pad_l("Pareto",7))
+println("  ─────┼────────────┼────────────┼────────────┼───────────────┼───────────────┼───────────────┼────────┼──────┼─────┼──────┼──────┼────────")
+
+let mut i = 0
+let mut limit30 = 30
+if valid < 30 { limit30 = valid }
+while i < limit30 {
+    let n6_str = to_string(rd1(r_n6pct[i]))
+    let pareto_str = to_string(rd2(r_pareto[i]))
+    println("  " + pad_l(to_string(i + 1), 4) + " │ " + pad_l(r_mat[i], 10) + " │ " + pad_l(r_proc[i], 10) + " │ " + pad_l(r_wire[i], 10) + " │ " + pad_l(r_mag[i], 13) + " │ " + pad_l(r_cool[i], 13) + " │ " + pad_l(r_sys[i], 13) + " │ " + pad_l(n6_str + "%", 6) + " │ " + pad_l(to_string(r_bmax[i]) + "T", 4) + " │ " + pad_l(to_string(r_je[i]), 3) + " │ " + pad_l(to_string(r_cost[i]), 4) + " │ " + pad_l(to_string(r_cw[i]) + "W", 4) + " │ " + pad_l(pareto_str, 7))
+    i = i + 1
+}
+
+// == FUSION 30T+ ==
+println("")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  FUSION 30T+ CANDIDATES (핵융합 자석, Bmax >= 30T)")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+
+let mut f30_idx = []
+i = 0
+while i < valid {
+    if r_sys[i] == "FusionMagnet" {
+        if r_bmax[i] >= 30 {
+            f30_idx = f30_idx + [i]
+        }
+    }
+    i = i + 1
+}
+
+if len(f30_idx) == 0 {
+    println("  (없음 — 30T+ 핵융합 자석 조합 없음)")
+} else {
+    println("  " + pad_l("Rank",4) + " │ " + pad_l("Material",10) + " │ " + pad_l("Process",10) + " │ " + pad_l("Wire",10) + " │ " + pad_l("Magnet",13) + " │ " + pad_l("Cooling",13) + " │ " + pad_l("n6%",6) + " │ " + pad_l("Bmax",4) + " │ " + pad_l("Je",3) + " │ " + pad_l("Cost",4) + " │ " + pad_l("CW/m",4) + " │ " + pad_l("Pareto",7))
+    println("  ─────┼────────────┼────────────┼────────────┼───────────────┼───────────────┼────────┼──────┼─────┼──────┼──────┼────────")
+
+    let mut fi = 0
+    let mut flimit = 20
+    if len(f30_idx) < 20 { flimit = len(f30_idx) }
+    while fi < flimit {
+        let idx = f30_idx[fi]
+        let n6_str = to_string(rd1(r_n6pct[idx]))
+        let pareto_str = to_string(rd2(r_pareto[idx]))
+        println("  " + pad_l(to_string(fi + 1), 4) + " │ " + pad_l(r_mat[idx], 10) + " │ " + pad_l(r_proc[idx], 10) + " │ " + pad_l(r_wire[idx], 10) + " │ " + pad_l(r_mag[idx], 13) + " │ " + pad_l(r_cool[idx], 13) + " │ " + pad_l(n6_str + "%", 6) + " │ " + pad_l(to_string(r_bmax[idx]) + "T", 4) + " │ " + pad_l(to_string(r_je[idx]), 3) + " │ " + pad_l(to_string(r_cost[idx]), 4) + " │ " + pad_l(to_string(r_cw[idx]) + "W", 4) + " │ " + pad_l(pareto_str, 7))
+        fi = fi + 1
+    }
+    println("")
+    let f30_pct = rd1(len(f30_idx) * 1000.0 / valid) / 10.0
+    println("  30T+ 핵융합 조합: " + to_string(len(f30_idx)) + " / " + to_string(valid) + " 유효 (" + to_string(f30_pct) + "%)")
+}
+
+// == STATISTICS ==
+println("")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  STATISTICS")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+
+let mut max_n6 = 0.0
+let mut sum_n6 = 0.0
+let mut above80 = 0
+let mut above60 = 0
+let mut max_bmax = 0
+i = 0
+while i < valid {
+    if r_n6pct[i] > max_n6 { max_n6 = r_n6pct[i] }
+    sum_n6 = sum_n6 + r_n6pct[i]
+    if r_n6pct[i] >= 80.0 { above80 = above80 + 1 }
+    if r_n6pct[i] >= 60.0 { above60 = above60 + 1 }
+    if r_bmax[i] > max_bmax { max_bmax = r_bmax[i] }
+    i = i + 1
+}
+let mut avg_n6 = 0.0
+if valid > 0 { avg_n6 = sum_n6 / valid }
+
+println("")
+println("  Total raw combinations:   " + to_string(total_combos))
+println("  Filtered (incompatible):  " + to_string(filtered))
+println("  Valid combinations:       " + to_string(valid))
+println("")
+println("  Max n6 EXACT:    " + to_string(rd1(max_n6)) + "%")
+println("  Avg n6 EXACT:    " + to_string(rd1(avg_n6)) + "%")
+let mut a80_pct = 0.0
+if valid > 0 { a80_pct = rd1(above80 * 1000.0 / valid) / 10.0 }
+let mut a60_pct = 0.0
+if valid > 0 { a60_pct = rd1(above60 * 1000.0 / valid) / 10.0 }
+println("  >=80% EXACT:      " + to_string(above80) + " (" + to_string(a80_pct) + "%)")
+println("  >=60% EXACT:      " + to_string(above60) + " (" + to_string(a60_pct) + "%)")
+println("  Max Bmax:        " + to_string(max_bmax) + "T")
+
+// == BEST BY CATEGORY ==
+println("")
+println("  BEST BY CATEGORY:")
+
+// Best n6 EXACT
+let mut best_n6_idx = 0
+let mut best_n6_val = 0.0
+i = 0
+while i < valid {
+    if r_n6pct[i] > best_n6_val {
+        best_n6_val = r_n6pct[i]
+        best_n6_idx = i
+    }
+    i = i + 1
+}
+if valid > 0 {
+    println("    Best n6 EXACT:   " + r_mat[best_n6_idx] + " + " + r_proc[best_n6_idx] + " + " + r_wire[best_n6_idx] + " + " + r_mag[best_n6_idx] + " + " + r_cool[best_n6_idx] + " + " + r_sys[best_n6_idx] + " (" + to_string(rd1(best_n6_val)) + "%)")
+}
+
+// Best Bmax
+let mut best_b_idx = 0
+let mut best_b_val = 0
+i = 0
+while i < valid {
+    if r_bmax[i] > best_b_val {
+        best_b_val = r_bmax[i]
+        best_b_idx = i
+    }
+    i = i + 1
+}
+if valid > 0 {
+    println("    Best Bmax:       " + r_mat[best_b_idx] + " + " + r_proc[best_b_idx] + " + " + r_wire[best_b_idx] + " + " + r_mag[best_b_idx] + " + " + r_cool[best_b_idx] + " + " + r_sys[best_b_idx] + " (" + to_string(best_b_val) + "T)")
+}
+
+// Best Je
+let mut best_je_idx = 0
+let mut best_je_val = 0
+i = 0
+while i < valid {
+    if r_je[i] > best_je_val {
+        best_je_val = r_je[i]
+        best_je_idx = i
+    }
+    i = i + 1
+}
+if valid > 0 {
+    println("    Best Je:         " + r_mat[best_je_idx] + " + " + r_proc[best_je_idx] + " + " + r_wire[best_je_idx] + " + " + r_mag[best_je_idx] + " + " + r_cool[best_je_idx] + " + " + r_sys[best_je_idx] + " (Je=" + to_string(best_je_val) + ")")
+}
+
+// Best Pareto (index 0 after sort)
+if valid > 0 {
+    println("    Best Pareto:     " + r_mat[0] + " + " + r_proc[0] + " + " + r_wire[0] + " + " + r_mag[0] + " + " + r_cool[0] + " + " + r_sys[0] + " (score=" + to_string(rd2(r_pareto[0])) + ")")
+}
+
+// == N6 PATTERN SUMMARY ==
+println("")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  N6 PATTERN SUMMARY — 초전도체 n=6 일치 지도")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("")
+println("  ┌──────────────────────────────────────────────────────────────┐")
+println("  │ EXACT 일치 (보편적)                                         │")
+println("  │   Cooper pair = φ(6) = 2 전자                              │")
+println("  │   Abrikosov vortex lattice = hexagonal CN = n = 6          │")
+println("  │   BCS ΔC/(γTc) = 12/(7ζ(3)), 분자 12 = σ(6)              │")
+println("  │   YBCO 금속비 1:2:3, 합 = n = 6                           │")
+println("  │   Nb₃Sn: 6 Nb atoms = n, Tc=18=3n, Hc2≈30=sopfr×n       │")
+println("  │   MgB₂: Mg Z=12=σ, B Z=5=sopfr                           │")
+println("  │   CORC 6-tape = n, Rutherford 12-strand = σ               │")
+println("  │   TF coils 12 = σ, CS modules 6 = n                       │")
+println("  │   FusionMagnet 12 coil sets = σ, 24km wire = J₂           │")
+println("  │   LHe 4.2K ≈ τ(6) = 4                                     │")
+println("  ├──────────────────────────────────────────────────────────────┤")
+println("  │ 궁극 최적 경로 (30T+ 핵융합):                              │")
+println("  │   REBCO + MOCVD/RCE-DR + CORC(6) + Solenoid_CS(6)        │")
+println("  │   + NoInsul_20K + FusionMagnet(12 sets, 24km)             │")
+println("  │   → n=6 일관성 + 30T+ 달성 + 경제적 냉각                  │")
+println("  └──────────────────────────────────────────────────────────────┘")
+
+println("")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")
+println("  DSE 완료 — " + to_string(total_combos) + " 전수 / " + to_string(valid) + " 유효 / 30T+ 핵융합 최적 경로 도출")
+println("═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════")

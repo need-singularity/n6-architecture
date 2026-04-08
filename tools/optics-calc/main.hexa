@@ -1,0 +1,170 @@
+// N6 Optics Calculator (HEXA port)
+// Original: tools/optics-calc/main.rs
+// 우회: tuple destructure(let (a,b)=) 미지원 → 이름/값 배열 분리
+
+fn pad_right(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+fn pad_left(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+fn format_float(v, prec) {
+    to_string(v)
+}
+
+let SIGMA = 12.0
+let TAU = 4.0
+let PHI = 2.0
+let SOPFR = 5.0
+let J2 = 24.0
+let MU = 1.0
+let N6 = 6.0
+
+// check_n6: 후보 표 순회 → 매치되면 [name_idx, target] 반환
+// 이름/값 배열 분리 방식 (튜플 미지원 우회)
+let CAND_NAMES = ["n", "σ", "τ", "φ", "sopfr", "J₂", "μ", "σ-τ", "σ-sopfr", "σ-μ", "n/φ", "τ²/σ", "sopfr×φ", "σ×sopfr", "J₂-τ", "σ+n", "σ+τ", "σ×τ"]
+let CAND_VALS = [6.0, 12.0, 4.0, 2.0, 5.0, 24.0, 1.0, 8.0, 7.0, 11.0, 3.0, 1.3333333, 10.0, 60.0, 20.0, 18.0, 16.0, 48.0]
+
+fn check_n6_name(value, tolerance) {
+    let mut i = 0
+    while i < CAND_VALS.len() {
+        let target = CAND_VALS[i]
+        if target != 0.0 {
+            let err = abs(value - target) / target
+            if err <= tolerance {
+                return CAND_NAMES[i]
+            }
+        }
+        i = i + 1
+    }
+    return ""
+}
+
+fn check_n6_val(value, tolerance) {
+    let mut i = 0
+    while i < CAND_VALS.len() {
+        let target = CAND_VALS[i]
+        if target != 0.0 {
+            let err = abs(value - target) / target
+            if err <= tolerance {
+                return target
+            }
+        }
+        i = i + 1
+    }
+    return 0.0
+}
+
+fn print_row(name, value, prec, expr, grade, note) {
+    let mut vstr = ""
+    if prec == 2 { vstr = format_float(value, 2) } else { vstr = format_float(value, 1) }
+    println("  " + pad_right(name, 40) + " " + pad_left(vstr, 8) + " " + pad_left(expr, 8) + " " + pad_left(grade, 8) + " " + note)
+}
+
+fn run_table(p_names, p_vals, p_notes, prec) {
+    println("  " + pad_right("Parameter", 40) + " " + pad_left("Value", 8) + " " + pad_left("n=6", 8) + " " + pad_left("Grade", 8) + " Note")
+    println("  " + "─".repeat(90))
+    let mut exact = 0
+    let mut close = 0
+    let mut miss = 0
+    let mut i = 0
+    while i < p_names.len() {
+        let name = p_names[i]
+        let value = p_vals[i]
+        let note = p_notes[i]
+        let expr = check_n6_name(value, 0.05)
+        let target = check_n6_val(value, 0.05)
+        if target > 0.0 {
+            let err = abs(value - target) / target
+            let mut grade = "CLOSE"
+            if err < 0.01 {
+                grade = "EXACT"
+                exact = exact + 1
+            } else { close = close + 1 }
+            print_row(name, value, prec, expr, grade, note)
+        } else {
+            miss = miss + 1
+            print_row(name, value, prec, "-", "MISS", note)
+        }
+        i = i + 1
+    }
+    println("")
+    println("  EXACT=" + to_string(exact) + ", CLOSE=" + to_string(close) + ", MISS=" + to_string(miss))
+}
+
+fn lens_analysis() {
+    println("")
+    println("  ═══ LENS DESIGN — n=6 매칭 ═══")
+    println("")
+    let p_names = ["Seidel aberration types", "3rd order + 5th order", "Achromat elements", "Apochromat elements", "Cooke triplet elements", "Double Gauss elements", "Tessar elements", "Petzval elements", "Abbe number V_d typical range", "Abbe number V_d crown", "Quarter-wave layers (AR)", "MgF2 refractive index", "Single-mode fiber core", "Multimode fiber core", "Fiber NA typical", "Standard f-stops", "Full-frame sensor (mm)", "APS-C crop factor"]
+    let p_vals = [5.0, 2.0, 2.0, 3.0, 3.0, 6.0, 4.0, 4.0, 20.0, 60.0, 4.0, 1.38, 6.0, 50.0, 0.12, 8.0, 24.0, 1.5]
+    let p_notes = ["spherical, coma, astigmatism, field curvature, distortion", "aberration order groups", "crown + flint glass", "3-element color correction", "classic 3-element design", "standard camera lens", "4-element Zeiss design", "4-element portrait lens", "flint glass ~20", "crown glass ~60 = σ×sopfr", "typical broadband AR coating", "n ≈ 1.38", "~6 μm core diameter for 1550nm", "50 or 62.5 μm", "σ/100 = 0.12", "f/1.4, 2, 2.8, 4, 5.6, 8, 11, 16 = σ-τ stops", "24×36mm = J₂ × (σ×n/φ)", "= n/τ"]
+    run_table(p_names, p_vals, p_notes, 2)
+}
+
+fn telescope_analysis() {
+    println("")
+    println("  ═══ TELESCOPE — n=6 매칭 ═══")
+    println("")
+    let p_names = ["Major telescope types", "Mirror shapes", "HST primary diameter (m)", "HST instruments", "JWST mirror segments", "JWST wavelength bands", "JWST instruments", "JWST Lagrange point", "ELT primary segments", "ELT mirror diameter (m)", "ALMA antennas (12m)", "ALMA antennas (7m)", "SKA-Mid dishes", "Cassegrain mirrors", "Nasmyth foci", "Ritchey-Chrétien mirrors", "AO Zernike modes (typical)", "DM actuators across pupil", "Wavefront sensor types", "CCD readout channels", "Bayer filter pattern", "Color channels"]
+    let p_vals = [3.0, 4.0, 2.4, 5.0, 18.0, 3.0, 4.0, 2.0, 798.0, 39.3, 50.0, 12.0, 197.0, 2.0, 2.0, 2.0, 12.0, 12.0, 3.0, 4.0, 4.0, 3.0]
+    let p_notes = ["refractor, reflector, catadioptric", "spherical, parabolic, hyperbolic, elliptical", "= J₂/10?", "WFC3, COS, STIS, ACS, FGS", "= σ+n", "NIR, MIR, visible = n/φ", "NIRCam, NIRSpec, MIRI, FGS/NIRISS", "L2 = φ", "not n=6 related", "not n=6", "50 = σ×τ+φ? weak", "= σ!", "not n=6", "primary + secondary = φ", "= φ", "= φ", "first 12 modes = σ? or more", "typical 12×12 = σ×σ?", "Shack-Hartmann, pyramid, curvature = n/φ", "typical quad-readout = τ", "RGGB = τ colors (2G+R+B)", "RGB = n/φ"]
+    run_table(p_names, p_vals, p_notes, 1)
+}
+
+fn tokamak_optics() {
+    println("")
+    println("  ═══ TOKAMAK OPTICAL DIAGNOSTICS — n=6 매칭 ═══")
+    println("")
+    let p_names = ["Major diagnostic categories", "Thomson scattering points", "ECE channels", "Interferometer chords", "Soft X-ray arrays", "Visible cameras", "Bolometer channels", "Reflectometry frequencies", "CXRS viewing lines", "MSE channels", "Diagnostic port windows", "Mirror types for diagnostics", "Spectrometer gratings (typical)", "Thomson scattering lasers", "Laser wavelength (Nd:YAG, nm)"]
+    let p_vals = [6.0, 12.0, 24.0, 5.0, 2.0, 4.0, 24.0, 6.0, 12.0, 8.0, 6.0, 3.0, 3.0, 2.0, 1064.0]
+    let p_notes = ["magnetic, particle, spectroscopy, imaging, microwave, neutron", "KSTAR: ~12 spatial points (σ)", "KSTAR: ~24 channels (J₂)", "KSTAR: ~5 chords (sopfr)", "upper + lower = φ", "KSTAR: ~4 fast cameras (τ)", "KSTAR: ~24 channels (J₂)", "KSTAR: ~6 frequency bands (n)", "KSTAR: ~12 spatial channels (σ)", "KSTAR: ~8 spatial channels (σ-τ)", "KSTAR midplane: ~6 ports", "first/retro/relay = n/φ", "UV/visible/IR = n/φ", "KSTAR: Nd:YAG dual = φ", "not n=6"]
+    run_table(p_names, p_vals, p_notes, 1)
+    println("")
+    println("  ═══ KEY FINDING ═══")
+    println("  KSTAR 진단 장치에서 n=6 상수가 자주 등장:")
+    println("    Thomson: σ=12 points, ECE: J₂=24 channels")
+    println("    Bolometer: J₂=24, CXRS: σ=12, MSE: σ-τ=8")
+    println("    Reflectometry: n=6 bands, Interferometer: sopfr=5")
+    println("    이것은 설계자가 n=6을 의도한 것이 아니라")
+    println("    '실용적 채널 수'가 n=6 상수와 일치하는 패턴")
+}
+
+// === main ===
+let cli = args()
+let mut mode = "--all"
+if cli.len() >= 2 { mode = cli[1] }
+
+println("╔══════════════════════════════════════════════════════╗")
+println("║  N6 OPTICS CALCULATOR                               ║")
+println("║  렌즈/망원경/토카막 광학 진단 — n=6 검증              ║")
+println("╚══════════════════════════════════════════════════════╝")
+
+if mode == "--lens" {
+    lens_analysis()
+} else if mode == "--telescope" {
+    telescope_analysis()
+} else if mode == "--tokamak-optics" {
+    tokamak_optics()
+} else {
+    lens_analysis()
+    telescope_analysis()
+    tokamak_optics()
+    println("")
+    println("  ═══ OVERALL SUMMARY ═══")
+    println("  Strongest matches:")
+    println("    Double Gauss lens: 6 elements = n")
+    println("    JWST: 18 segments = σ+n")
+    println("    Full-frame sensor: 24mm = J₂")
+    println("    Seidel aberrations: 5 types = sopfr")
+    println("    ALMA 7m antennas: 12 = σ")
+    println("    AO Zernike modes: 12 = σ")
+    println("    KSTAR Thomson: 12 pts, ECE: 24 ch, Bolometer: 24 ch")
+    println("    f-stop count: 8 = σ-τ")
+}
