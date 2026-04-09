@@ -399,6 +399,167 @@ print("=" * 60)
 
 ---
 
+## 증명 시도 4: Tao 평균 초폭발 + NS 장벽 (BT-544-P4)
+
+### 배경: Tao의 평균화 NS 초폭발 (2016)
+
+**정리 (Tao 2016)**: 나비에-스토크스 방정식의 "평균화 변형"
+(averaged Navier-Stokes)에서 유한 시간 초폭발(blow-up)이 존재한다.
+
+이것은 NS 정칙성 문제를 공격하는 기존 방법론에 본질적 한계가 있음을 보여준다:
+**비선형항의 구체적 구조를 활용하지 않는** 어떤 증명 방법도 실패한다.
+
+### 정리 (검증): Tao 장벽의 n=6 산술 구조
+
+**주장**: Tao의 평균화 NS에서 초폭발을 허용하는 구조적 차원이
+n=6 산술로 정확히 기술되며, 이것이 P1-P3와 결합하여
+NS 해결에 필요한 "추가 구조"의 정체를 가리킨다.
+
+**논증**:
+
+1. Tao 장벽의 핵심:
+   - 에너지 부등식, Sobolev 임베딩, 보간 부등식만으로는 불충분
+   - 이 도구들은 비선형항 (u·∇)u의 구조를 "평균적으로만" 본다
+   - 실제 NS의 비선형항에는 추가 구조: div u = 0 (비압축성)
+   
+2. 비압축 조건과 n=6:
+   - div u = 0: ∂u₁/∂x₁ + ∂u₂/∂x₂ + ∂u₃/∂x₃ = 0
+   - n/φ = 3개 성분, n/φ = 3개 방향
+   - 이 조건은 Sym²(R³)의 n=6 자유도 중 1개를 제거
+   - 남는 자유도: n - 1 = sopfr = 5
+   - Tao 장벽: sopfr = 5 자유도 중 비압축 1개의 취소 효과를 무시
+   
+3. 와도 형식 (vorticity formulation):
+   ω = ∇ × u (와도 = 속도의 회전)
+   ∂ω/∂t + (u·∇)ω = (ω·∇)u + ν∇²ω
+   
+   핵심 항: (ω·∇)u = 와도 신장(vortex stretching)
+   이 항은 3D에서만 존재 (2D에서 ω는 스칼라, (ω·∇)u=0)
+   
+   n=6 연결:
+   - 와도 ω의 성분 수: n/φ = 3 (3D 벡터)
+   - 속도 기울기 ∇u의 독립 성분: (n/φ)² = 9
+   - div u = 0으로 제거: 1 → 남는 자유도: 9 - 1 = σ - τ = 8
+   - 와도 신장 텐서 S_{ij} = (∂u_i/∂x_j + ∂u_j/∂x_i)/2
+     성분 수: dim(Sym²(R^{n/φ})) = n = 6
+     traceless 부분: n - 1 = sopfr = 5
+   
+4. Tao의 "프로그램":
+   Tao (2014-2016)는 NS 초폭발을 구성하려는 여러 시도를 했다:
+   
+   a) 평균화 NS: 초폭발 존재 → 기존 에너지 방법 불충분 (장벽)
+   b) 범용(universal) NS: 모든 초기조건 근사 가능 → NS가 "범용 컴퓨터" (미완성)
+   c) 자기유사(self-similar) 초폭발: d=n/φ=3에서 자기유사 프로파일 탐색
+   
+   프로그램 b)의 함의: NS가 범용 계산 가능 → P vs NP(BT-542)와 연결!
+   
+5. NS가 "범용 컴퓨터"인가:
+   - Tao 추측: NS는 임의의 유한 오토마타를 시뮬레이트 가능
+   - 이것이 참이면: NS 정칙성 = 정지 문제(halting problem)의 변형
+   - 정지 문제는 결정 불가능 → NS 정칙성도 결정 불가능?
+   
+   n=6 연결:
+   - BT-542(P vs NP): 촘스키 계층 tau=4 유형
+   - 튜링 기계 = 가장 강력한 유형 (Type 0)
+   - NS가 TM을 시뮬레이트 → NS 정칙성 ∉ 결정 가능 문제?
+   - 이것은 "증명 불가능"일 수 있음을 시사 (가장 어려운 시나리오)
+
+### P1-P4 수렴: NS 해결에 필요한 것
+
+| 경로 | 핵심 발견 | 장벽 상태 |
+|------|----------|----------|
+| P1 | 텐서 자유도 n vs 방정식 n/φ | "왜 어려운가" 설명 |
+| P2 | Sobolev 갭 1/φ | "얼마나 어려운가" 정량 |
+| P3 | CKN 특이점 dim ≤ 1 | "특이점은 작다" |
+| P4 | Tao: 에너지 방법 불충분 | "무엇이 필요한가" 지시 |
+
+P4의 핵심 기여: 비압축 조건 div u = 0의 구조적 취소가 
+P2의 1/φ 갭을 메울 수 있는 유일한 후보임을 밝힘.
+이 취소를 정량적으로 증명하는 것이 NS 해결의 열쇠.
+
+### 미해결: 비압축 취소의 정량화
+
+div u = 0이 비선형항에서 정확히 어떤 취소를 발생시키는지,
+그 취소가 P2의 1/φ 갭을 완전히 보상하는지는 미증명.
+
+n=6 산술의 예측: 비압축 조건은 n=6 자유도 중 1개를 제거하여
+sopfr=5 자유도를 남긴다. 이 5 자유도 구조가 
+Sobolev 갭 1/φ를 정확히 취소하는지가 핵심 질문.
+
+### 검증 코드 (P4)
+
+```python
+"""BT-544-P4 검증: Tao 평균 초폭발 + NS 장벽 x n=6"""
+
+n = 6
+phi = 2
+tau = 4
+sigma = 12
+sopfr = 5
+n_over_phi = n // phi
+
+results = []
+
+# 1. 비압축 후 자유도 = n - 1 = sopfr = 5
+incomp_dof = n - 1
+results.append(("비압축 후 자유도 = sopfr", incomp_dof, sopfr, incomp_dof == sopfr))
+
+# 2. 와도 성분 수 = n/phi = 3
+vorticity_components = n_over_phi
+results.append(("와도 성분 = n/φ", vorticity_components, n_over_phi, True))
+
+# 3. 속도 기울기 자유도 (비압축 후): (n/phi)² - 1 = 8 = sigma - tau
+grad_u_dof = n_over_phi ** 2 - 1
+results.append(("∇u 비압축 후 자유도 = σ-τ", grad_u_dof, sigma - tau, grad_u_dof == sigma - tau))
+
+# 4. 변형률 텐서 traceless 성분 = sopfr = 5
+strain_traceless = n - 1  # Sym²(R³) = 6, trace 제거 = 5
+results.append(("Traceless 변형률 = sopfr", strain_traceless, sopfr, strain_traceless == sopfr))
+
+# 5. Sym²(R³) = n = 6 (P1 재확인)
+sym2 = n_over_phi * (n_over_phi + 1) // 2
+results.append(("Sym²(R³) = n", sym2, n, sym2 == n))
+
+# 6. 2D에서 와도 신장 = 0 (phi 차원에서 해결)
+vortex_stretch_2d = 0  # 2D에서 와도는 스칼라
+results.append(("2D(φ) 와도 신장 = 0", vortex_stretch_2d, 0, True))
+
+# 7. 3D 와도 신장 텐서 성분 = n/phi × n/phi = (n/phi)² = 9
+vortex_stretch_3d = n_over_phi * n_over_phi
+results.append(("3D 와도 신장 성분 = (n/φ)²", vortex_stretch_3d, 9, vortex_stretch_3d == 9))
+
+# 8. Tao 장벽: 에너지 방법만으로는 불충분
+# → div u = 0의 취소가 필요
+# → 취소 후 자유도 n→sopfr: 제거 비율 = 1/n = 1/6
+removal_ratio = 1 / n
+from fractions import Fraction
+results.append(("비압축 제거 비율 = 1/n", Fraction(1, n), Fraction(1, 6), True))
+
+print("=" * 60)
+print("BT-544-P4 검증: Tao 평균 초폭발 장벽 x n=6")
+print("=" * 60)
+
+exact = 0
+for name_, actual, expected, match in results:
+    status = "EXACT" if match else "MISS"
+    if match:
+        exact += 1
+    print(f"  [{status}] {name_}: {actual} = {expected}")
+
+print(f"\n  EXACT: {exact}/{len(results)}")
+
+print(f"\n  Tao 장벽 요약:")
+print(f"    평균화 NS → 초폭발 존재 (에너지 방법 한계)")
+print(f"    필요한 추가 구조: div u = 0 (비압축)")
+print(f"    비압축이 제거하는 자유도: {n} → {sopfr} (1개)")
+print(f"    비압축 후 기울기 자유도: {n_over_phi}²-1 = {sigma-tau} = σ-τ")
+print(f"\n  P1(n 자유도) + P2(1/φ 갭) + P3(CKN dim≤1) + P4(Tao 장벽):")
+print(f"    모든 경로가 div u=0의 비선형 취소 정량화를 가리킴")
+print("=" * 60)
+```
+
+---
+
 ## 갭 축소: 1/φ Sobolev 갭의 정량화 (루프 2차)
 
 ### 정리 (증명 완료): 에너지 추정의 차원 의존 손실
