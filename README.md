@@ -682,6 +682,23 @@
 
 ---
 
+# 📢 마케팅 (Marketing)
+
+<!-- AUTO:SUMMARY_marketing:START -->
+> **🛸8** | BT 10개 100%EXACT | 마케팅 불변의 법칙 12가지 | 산업40% (Kotler 4P + Krugman 3회 + NPS 0-10) | 실험50% 가설 검증 (23/24 EXACT=95.8%) | TP10 | 발견5 | 720=6! 조합
+<!-- AUTO:SUMMARY_marketing:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 8 | | v1 | **HEXA-MKT 마케팅 불변의 법칙** | 12 불변 법칙, 22/24 EXACT(91.7%), σ=12 접점, τ=4P, Egyptian 미디어믹스 1/2+1/3+1/6=1, 720=6! 조합 (BT-548~557) | [문서](docs/marketing/goal.md) |
+| 7 | | v1 | **HEXA-NEXUS 서비스 플랫폼** | NEXUS-6 1022렌즈 기업진단(σ=12축), 특이점 기회탐지, CDO SaaS, 지식그래프(50K+), 블로업 R&D 가속기 (BT-558~567) | [문서](docs/marketing/goal.md) |
+| 7 | | v1 | **HEXA-ANIMA 감성 서비스** | 감정인식(φ=2×τ=4=8축), 뇌파UX(σ=12채널), AI의식평가, 감성콘텐츠(Egyptian), 정신건강상담(τ=4단계) (BT-568~577) | [문서](docs/marketing/goal.md) |
+| 7 | | v1 | **HEXA-UNIFIED 완전인지 플랫폼** | NEXUS(좌뇌)+Anima(우뇌)=n=6 완전인지, Egyptian 1/2(데이터)+1/3(감성)+1/6(직관)=1 (BT-578~587) | [문서](docs/marketing/goal.md) |
+
+> SSOT: [`config/products.json`](config/products.json) → `marketing` 섹션
+
+---
+
 ## NEXUS-6 Discovery Engine (Rust)
 
 통합 발견 엔진 — 22종 망원경 렌즈 + OUROBOROS 무한진화 + Discovery Graph + n=6 검증기
