@@ -27,6 +27,16 @@ N6_BASES = [1, 2, 4, 5, 6, 12, 24]
 PEP_BASES = [math.pi, math.e, (1+math.sqrt(5))/2,
              2*math.pi, math.pi/2, math.pi**2, math.e**2, ((1+math.sqrt(5))/2)**2]
 
+# VERIFY_V3: 개별 특수수 대조군 (각각 독립 풀)
+PHI = (1 + math.sqrt(5)) / 2
+PI_BASES  = [math.pi]
+E_BASES   = [math.e]
+PHI_BASES = [PHI]
+# n=28 (완전수): divisors={1,2,4,7,14,28}, tau=6, sigma=56, sopfr=2+2+7=11
+N28_BASES = [1, 2, 4, 6, 7, 11, 14, 28, 56]
+# n=496 (완전수): divisors={1,2,4,8,16,31,62,124,248,496}, tau=10, sigma=992, sopfr=2+2+2+2+31=39
+N496_BASES = [1, 2, 4, 8, 10, 16, 31, 39, 62, 124, 248, 496, 992]
+
 def best_rel_err(x, pool):
     """스케일 불변 최선 상대오차."""
     if x == 0 or not math.isfinite(x):
@@ -130,6 +140,53 @@ def main():
         ap = ac/tot*100 if tot else 0
         match = "OK" if abs(ac-dc) <= 5 else "MISMATCH"
         print(f"  πeφ {k:5s}  doc={dc:5d} ({dp:5.2f}%)  actual={ac:5d} ({ap:5.2f}%)  [{match}]")
+    print()
+
+    # ==========================================================
+    # VERIFY_V3: 5개 개별 대조군 교차 대조
+    # ==========================================================
+    print("=" * 72)
+    print("  VERIFY_V3 — 특수수 교차 대조 (같은 노드 집합, 동일 판정 규칙)")
+    print("=" * 72)
+    controls = [
+        ("n=6",   expand(N6_BASES)),
+        ("pi",    expand(PI_BASES)),
+        ("e",     expand(E_BASES)),
+        ("phi",   expand(PHI_BASES)),
+        ("n=28",  expand(N28_BASES)),
+        ("n=496", expand(N496_BASES)),
+    ]
+    results = {}
+    print(f"  {'집합':8s} | {'pool':>5s} | {'EXACT':>14s} | {'CLOSE':>14s} | {'MISS':>14s}")
+    print("-" * 72)
+    for name, pool in controls:
+        c, _, t = analyze(valid, pool, name)
+        results[name] = (c, t, len(pool))
+        print(f"  {name:8s} | {len(pool):5d} | {pct(c['EXACT'],t):>14s} | {pct(c['CLOSE'],t):>14s} | {pct(c['MISS'],t):>14s}")
+    print()
+
+    # 통계적 우위: 2표본 비율 z-검정 (n=6 vs 각 대조군)
+    n6c, n6t, _ = results["n=6"]
+    p6 = n6c["EXACT"] / n6t
+    print("=" * 72)
+    print("  n=6 EXACT 비율 우위 (2표본 비율 z-검정, chi^2)")
+    print("=" * 72)
+    print(f"  {'대조군':8s} | {'p(n6)':>8s} | {'p(ctrl)':>8s} | {'delta':>8s} | {'z':>8s} | {'chi^2':>9s}")
+    print("-" * 72)
+    for name, _ in controls:
+        if name == "n=6": continue
+        cc, ct, _ = results[name]
+        pc = cc["EXACT"] / ct
+        # 풀된 비율
+        pp = (n6c["EXACT"] + cc["EXACT"]) / (n6t + ct)
+        se = math.sqrt(pp * (1 - pp) * (1/n6t + 1/ct))
+        z  = (p6 - pc) / se if se > 0 else float('inf')
+        # chi^2 (2x2: EXACT vs not-EXACT)
+        a, b = n6c["EXACT"], n6t - n6c["EXACT"]
+        c2_, d = cc["EXACT"], ct - cc["EXACT"]
+        n_ = a + b + c2_ + d
+        chi2 = n_ * (a*d - b*c2_)**2 / ((a+b)*(c2_+d)*(a+c2_)*(b+d)) if (a+b)*(c2_+d)*(a+c2_)*(b+d) > 0 else float('inf')
+        print(f"  {name:8s} | {p6*100:7.2f}% | {pc*100:7.2f}% | {(p6-pc)*100:+7.2f}%p | {z:8.2f} | {chi2:9.2f}")
     print()
 
     # 레벨별
