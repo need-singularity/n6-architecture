@@ -1,9 +1,9 @@
 {
   "_meta": {
     "total_domains": 2,
-    "total_hypotheses": 60,
-    "total_exact": 16,
-    "exact_pct": 26.7,
+    "total_hypotheses": 70,
+    "total_exact": 26,
+    "exact_pct": 37.1,
     "last_updated": "2026-04-06",
     "description": "판타지 도메인 SSOT — docs/fantasy/README.md 자동 생성용",
     "warning": "이 섹션은 신화/판타지 탐색입니다. 공학적 설계 대상이 아닙니다.",
@@ -18,19 +18,21 @@
       "ufo": 4,
       "ceiling": "n/a",
       "ver": "v2",
-      "description": "12/30 EXACT (40%), 6카테고리, 혈액생화학+바이러스+질병+야행성, BT 8개 교차",
-      "hypotheses": 30,
-      "exact": 12,
+      "description": "22/40 EXACT (55%), 8카테고리, 혈액생화학+바이러스+질병+야행성+인간↔뱀파이어 변환, BT 8개 교차",
+      "hypotheses": 40,
+      "exact": 22,
       "close": 10,
       "weak": 8,
-      "exact_pct": 40.0,
+      "exact_pct": 55.0,
       "categories": [
         {"id": "A", "name": "혈액 생화학", "hypotheses": 5, "exact": 2, "summary": "헤모글로빈 τ=4, 포르피린 σ-τ=8 효소"},
         {"id": "B", "name": "신화 구조", "hypotheses": 5, "exact": 0, "summary": "약점 n=6, 변환 τ=4 (문화적 합의)"},
         {"id": "C", "name": "흡혈 생태학", "hypotheses": 5, "exact": 3, "summary": "모기침 n=6, 박쥐 n/φ=3, 거머리 n/φ=3"},
         {"id": "D", "name": "영구동토층 + 고대바이러스", "hypotheses": 5, "exact": 2, "summary": "캡시드 σ=12, T-number 60=σ·sopfr"},
         {"id": "E", "name": "뱀파이어 질병/의학", "hypotheses": 5, "exact": 2, "summary": "포르피리아 σ-τ=8, XP σ-τ=8 상보군"},
-        {"id": "F", "name": "야행성 생물학", "hypotheses": 5, "exact": 3, "summary": "야행성 σ=12h, 6-4PP n-τ, 멜라닌 φ=2"}
+        {"id": "F", "name": "야행성 생물학", "hypotheses": 5, "exact": 3, "summary": "야행성 σ=12h, 6-4PP n-τ, 멜라닌 φ=2"},
+        {"id": "G", "name": "인간→뱀파이어 변환", "hypotheses": 5, "exact": 5, "summary": "광견병 σ=12주+τ=4, Desmodus n=6, HFE 6번+Fe d⁶, 골수 n=6, 타액샘 n/φ=3"},
+        {"id": "H", "name": "뱀파이어→인간 변환", "hypotheses": 5, "exact": 5, "summary": "헴 아르기네이트 τ=4일, NER τ=4, 킬레이터 n/φ=3, 비타민D τ=4, ABO τ=4+Rh φ=2"}
       ],
       "key_exact": [
         "헤모글로빈 τ=4 서브유닛 + Fe 배위수 n=6",
@@ -44,7 +46,17 @@
         "XP σ-τ=8 상보군",
         "야행성 σ=12 시간",
         "6-4PP UV 광산물 (n-τ 직접 매핑)",
-        "멜라닌 φ=2 유형"
+        "멜라닌 φ=2 유형",
+        "광견병 잠복기 σ=12주 + 임상 τ=4 단계",
+        "Desmodus 타액 항지혈 n=6 단백 + DSPA τ=4 이소형",
+        "HFE 6번 염색체 + Fe d⁶ + 헤모크로마토시스 τ=4 유형",
+        "골수 성숙 혈구 n=6 계통",
+        "주요 타액샘 n/φ=3 쌍 + 타액 단백군 τ=4",
+        "헴 아르기네이트 τ=4일 주입 + σ-τ=8 효소 피드백",
+        "NER DNA 수리 τ=4 단계 + 6-4PP 복구",
+        "철 킬레이터 FDA 승인 n/φ=3종",
+        "비타민 D 합성 τ=4 효소 단계 + φ=2 이성질체",
+        "ABO τ=4 혈액형 + Rh φ=2 + 교차시험 n/φ=3"
       ],
       "bt_cross": ["BT-51", "BT-101", "BT-122", "BT-146", "BT-194", "BT-235", "BT-262", "BT-265"],
       "links": [
