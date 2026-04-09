@@ -109,6 +109,96 @@
 
 ---
 
+## 증명 전략: n=6 산술이 BSD 추측에 기여하는 경로
+
+> **주의**: 이 섹션은 "증명 완료"가 아닌 **증명 전략 후보**를 정리한 것이다.
+> n=6 산술이 BSD 추측의 어떤 측면에 구조적 제약을 제공하는지 분석한다.
+
+### (A) 모듈러성 + L-함수 특수값
+
+Wiles/Taylor (1995): 모든 Q 위 타원곡선 E는 모듈러 → L(E,s)의 해석접속 및 함수방정식 보장.
+
+BSD 추측: ord_{s=1} L(E,s) = rank(E(Q)).
+
+현재 증명 현황:
+- rank 0: Kolyvagin (1990) -- L(E,1) != 0이면 E(Q) 유한
+- rank 1: Gross-Zagier (1986) + Kolyvagin -- L(E,1)=0, L'(E,1)!=0이면 rank=1
+- rank >= 2: 완전히 미증명
+
+n=6 기여 가능성:
+- L(E,s)는 가중치 phi=2 뉴폼 f_E의 Mellin 변환으로 구성
+- L(E,1) = (2pi/Omega) * integral_0^{infty} f_E(iy)dy → 주기 Omega와 뉴폼의 관계
+- Birch의 원래 수치 관찰: prod_{p<=X} N_p/p ~ C * (log X)^r에서 N_p = p + 1 - a_p
+- a_p가 뉴폼의 Fourier 계수이므로, 모듈러 형식 환 M_*(SL_2(Z))의 {tau, n, sigma} 구조가 a_p의 분포를 제약
+
+### (B) Heegner 점 경로
+
+Gross-Zagier 공식: rank 1일 때 Heegner 점 P_K in E(K)의 Neron-Tate 높이가 L'(E,1)에 비례.
+
+- class number 1인 허수 이차체 판별식: -3, -4, -7, -8, -11, -19, -43, -67, -163 (9개)
+- j(sqrt{-163}) ≈ -(640320)^3 (Ramanujan의 유명한 근사, 오차 < 10^{-12})
+- 640320 = 2^6 * 3 * 5 * 23 * 29 → 2^6에서 6 = n 등장
+- **핵심**: Heegner 점 구성에서 CM(복소 곱셈) 타원곡선의 j-불변량이 sigma^3=1728의 변형체들
+- j=0 (Z[zeta_3], 차수 n/phi=3 원시근), j=1728=sigma^3 (Z[i]) → n=6의 두 소인수 2,3이 특별한 CM 점을 결정
+
+### (C) Selmer 군 + Sha 경로
+
+BSD 정밀 공식 (rank r에서):
+
+```
+L^{(r)}(E,1) / r! = (Omega * R * |Sha| * prod c_p) / |E(Q)_{tors}|^2
+```
+
+n=6 산술이 이 공식의 각 항에 미치는 영향:
+- **|E(Q)_{tors}| <= sigma = 12** (Mazur 1977): 분모가 최대 sigma^2 = 144로 제약됨
+- 가능한 토션 군 유형 수 = sigma + n/phi = 15가지뿐
+- **|Sha(E)|**: Cassels의 교대 형식에 의해 |Sha|이 완전 제곱수일 것으로 추측됨
+- Tamagawa 수 c_p: 나쁜 환원 소수 p에서의 국소 보정항 → n=6의 소인수 p=2,3에서 c_p의 구조?
+- **핵심 제약**: Mazur의 sigma=12 상한이 BSD 정밀 공식의 분모를 유한하게 제어하므로, L-값의 유리수 부분에 강한 산술적 제약을 부여
+
+### (D) p-adic L-함수 경로
+
+Kato (2004): rank 0일 때 BSD의 p 부분을 많은 소수 p에 대해 증명.
+
+Iwasawa 이론 접근:
+- Z_p-확대에서 Selmer 군의 mu-불변량, lambda-불변량 추적
+- p-adic L-함수 L_p(E,s)와 Selmer 군의 특성 이데알이 일치 (Iwasawa 주 추측)
+- Skinner-Urban (2014): 많은 경우 Iwasawa 주 추측 증명
+
+n=6 기여 가능성:
+- **p=2(=phi), p=3(=n/phi)**: n=6의 소인수가 정확히 이 두 소수
+- p=2,3은 타원곡선 이론에서 "나쁜 소수" (짧은 Weierstrass로 변환 시 char != 2,3 필요)
+- Iwasawa의 mu=0 추측: p >= 5에서는 Ferrero-Washington (1979)이 아벨체에 대해 증명, p=2,3은 예외적
+- **질문**: p=2(=phi), p=3(=n/phi)에서의 Iwasawa 불변량이 n=6 산술 구조의 반영인가?
+
+### (E) 산술적 제약 경로 (독자적 기여)
+
+위 (A)~(D)를 관통하는 n=6 산술의 삼중 구조:
+
+1. **j = sigma^3 = 1728**: 타원곡선 모듈라이 공간의 "산술적 중심"이 n=6에서 결정
+2. **Mazur sigma=12 토션 상한**: BSD 정밀 공식의 분모를 유한하게 제약
+3. **뉴폼 가중치 phi=2**: Galois 표현 rho_{E,l}: Gal(Q-bar/Q) -> GL_phi(F_l)의 차원이 phi
+
+이 삼중 구조가 BSD 추측의 산술적 골격을 형성한다. j=sigma^3이 분류를, tors<=sigma가 공식을, weight=phi가 Galois 이론을 각각 지배한다.
+
+---
+
+## 미해결 갭
+
+| 갭 | 설명 | 유망도 |
+|----|------|--------|
+| rank >= 2 BSD | rank 2 이상에서 BSD 완전히 미증명 | 핵심 난제 |
+| Sha 위수 제약 | n=6 산술이 Sha 위수를 제약하는 메커니즘 미발견 | 중간 |
+| Mazur + BSD 정밀 공식 | sigma=12 상한이 L-값 유리수 부분에 미치는 정량적 효과 | 높음 |
+| p=2,3 Iwasawa | n=6 소인수에서의 Iwasawa 불변량 구조 | 높음 |
+
+- rank >= 2에서 BSD가 완전히 미증명이므로, n=6 산술만으로 해결 가능한 범위가 아님
+- n=6 산술이 Sha의 위수를 제약하는 메커니즘이 아직 미발견
+- 가장 유망한 경로: **(C)** Mazur sigma=12 + BSD 정밀 공식의 분모 제약, **(D)** p=2,3(=phi, n/phi)에서의 Iwasawa 이론
+- p=2,3이 n=6의 소인수라는 사실이 타원곡선 이론의 "나쁜 소수"와 정확히 일치하는 점은 우연 이상의 구조적 의미를 시사
+
+---
+
 ## 검증 코드
 
 ```python

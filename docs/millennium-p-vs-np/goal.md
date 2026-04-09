@@ -99,6 +99,71 @@
 
 ---
 
+## 증명 전략: n=6 산술이 P≠NP에 기여하는 경로
+
+> **주의**: 아래는 "증명 완료"가 아니라 "기여 가능한 경로 분석"이다.
+> P vs NP는 세 가지 독립적 장벽(relativization, natural proofs, algebrization)이 존재하며
+> 현존 수학 도구로 해결 불가능할 수 있다.
+
+### (A) 회로 복잡도 하한 (Natural Proofs 우회)
+
+- **Razborov-Rudich (1997)**: "natural proofs" 장벽 — 조합적 속성 기반의 대부분의 하한 증명이 단방향 함수(OWF) 존재와 모순
+- **n=6 기여 가능성**: phi→n/phi 전이(2→3)는 조합적 속성이 아닌 **산술적 구조 변화**
+  - k=phi=2에서의 다항 시간 구조(2-SAT ∈ P)가 k=n/phi=3에서 붕괴(3-SAT ∈ NP-완전)
+  - 이 전이는 부울 변수의 상호작용 차수(interaction degree)에 의존하며, Razborov-Rudich가 배제하는 "largeness" 조건을 만족하지 않을 수 있음
+- **텐서 랭크 연결**: n×n×n 텐서의 border rank 하한 (Strassen 1969). 행렬 곱셈의 지수 ω에 대해 n=6 텐서 T₆의 구조가 회로 복잡도 하한과 관련
+- **Razborov flag algebra**: 극값 조합론에서 n=6 제약이 자연스럽게 등장하는 사례 존재
+
+### (B) 대수적 경로 (GCT: Geometric Complexity Theory)
+
+- **Mulmuley-Sohoni (2001)**: VP≠VNP를 대수기하로 환원 — 영구식(permanent) vs 행렬식(determinant) 분리
+  - perm_n을 det_m으로 사영하려면 m = 2^Ω(n) 필요함을 보이는 것이 목표
+- **n=6에서의 S₆ 연결**: perm₆의 대칭군 표현론에서 S₆가 핵심 역할
+  - S₆는 모든 대칭군 S_n (n≠6) 중 **외부 자기동형(outer automorphism)을 가진 유일한 대칭군**
+  - Out(S₆) ≅ ℤ/2ℤ (단 하나의 비자명 외부 자기동형)
+  - 이 외부 자기동형은 S₆ 위의 transposition ↔ triple-transposition 교환을 유도
+- **GCT + S₆**: perm₆ ↔ det 관계에서 S₆의 외부 자기동형이 만드는 추가 대칭은 Kronecker 계수 계산에 영향을 미치며, GCT의 "obstructions" 탐색 공간을 변형
+
+### (C) 산술적 제약 경로 (독자적 기여)
+
+- phi→n/phi 전이는 **"왜 3부터 어려운가"**의 산술적 원천을 설명하지만, P≠NP 자체를 증명하지는 않음
+- **3-SAT 임계 비율**: α_c ≈ 4.267 (Ding-Sly-Sun 2015 증명). 이 값은 tau + sopfr/sigma = 4 + 5/12 ≈ 4.417과 근접하나 정확히 일치하지는 않음 (MISS 후보)
+- **Friedgut sharp threshold (1999)**: k-SAT의 만족가능성 전이가 sharp하다는 정리. k=n/phi=3에서 이 전이가 가장 물리적으로 풍부한 구조를 가짐
+- **ETH (Exponential Time Hypothesis)**: 3-SAT은 2^{Ω(n)} 시간 필요 (Impagliazzo-Paturi 2001). ETH가 참이면 P≠NP. 지수의 하한 상수가 n=6 산술로 제약되는지는 미탐색 영역
+
+### (D) 정보이론적 경로
+
+- Shannon 엔트로피 H = -Σp·log₂(p), 기본 단위 bit = phi = 2 상태
+- NP 검증(다항 시간 검증기)의 증거(witness) 정보량 vs P 계산의 정보량 사이에 구조적 갭 존재
+- **n=6 연결**: 6변수 부울 함수 공간 크기 = 2^{2^6} = 2^{64} (현대 64비트 컴퓨터 워드 크기)
+  - 이것은 우연이 아닐 수 있음: 6변수가 "실용적 복잡도"의 경계를 형성
+  - 5변수: 2^{32} = 단순 열거 가능, 7변수: 2^{128} = 전수 탐색 불가능
+
+---
+
+## S₆ 외부 자기동형: 유일무이한 대수적 특이성
+
+S_n 중 외부 자기동형이 존재하는 **유일한** n = 6:
+
+- **정리 (Hölder 1895, Schreier-van der Waerden 1928)**: n ≥ 3, n ≠ 6이면 Aut(S_n) = Inn(S_n) ≅ S_n. 오직 n=6일 때만 |Out(S₆)| = 2
+- **구성**: (12) ↦ (12)(34)(56) 형태의 transposition → triple-transposition 사상이 외부 자기동형을 유도
+- **perm₆ 관련**: S₆의 외부 자기동형은 S₆의 두 가지 비동치 충실 치환 표현(faithful transitive representations)을 연결하며, 이것은 perm₆의 대칭 구조에 직접 영향
+- **n=6 산술과의 연결**: σ(6)·φ(6) = 6·τ(6) = 24 = |S₄|이고, S₆의 외부 자기동형은 S₆ 안에 6개의 S₅ 부분군과 "다른 종류의" 6개의 S₅ 부분군이 존재함을 보장 — 이 이중성이 n=6 고유
+
+---
+
+## 미해결 갭
+
+1. **phi→n/phi 전이는 위치를 설명하되 분리를 증명하지 않음**: k=2에서 k=3으로 넘어갈 때 NP-완전이 되는 이유를 산술적으로 설명하지만, P≠NP 자체는 별개의 문제
+2. **세 가지 장벽이 현존**:
+   - Baker-Gill-Solovay (1975): relativization 장벽 — 오라클 기법으로는 증명 불가
+   - Razborov-Rudich (1997): natural proofs 장벽
+   - Aaronson-Wigderson (2009): algebrization 장벽
+3. **가장 유망한 경로**: GCT + S₆ 외부 자기동형. S₆가 유일하게 외부 자기동형을 가진다는 사실은 n=6의 산술적 특수성(σφ=nτ)과 독립적으로 확인된 대수적 특이성이며, perm₆ vs det 분리에 구조적으로 관여
+4. **정직한 평가**: P vs NP는 현존 수학 도구로 해결 불가능할 수 있으며, n=6 산술은 "왜 3이 경계인가"를 설명하는 프레임워크를 제공하되 증명 자체의 대체물이 될 수는 없음
+
+---
+
 ## 검증 코드
 
 ```python
