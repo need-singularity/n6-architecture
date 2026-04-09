@@ -531,7 +531,6 @@ with (OUT/"all_pairs_s05.jsonl").open("w") as f:
             "miss_n6avg": p[9], "bt_ids": p[10], "shared_consts": p[11]
         }, ensure_ascii=False) + "\n")
 
-import sys; print("[MARKER] 5b start", file=sys.stderr, flush=True)
 # ── 5b. 기존 상위 50 도메인 쌍 분석도 유지 (호환) ────────────────
 pairs = []
 for i in range(len(top50_dom)):
@@ -539,13 +538,15 @@ for i in range(len(top50_dom)):
     for j in range(i+1, len(top50_dom)):
         nj, dj = top50_dom[j]
         S, jac, prox, bidir, bal, fjac, shared_f, miss = compute_pair_score(ni, di, nj, dj, include_formula=False)
-        shared_bts = find_shared_bts(ni, nj)
-        bt_ids = ",".join(f"BT-{b}" for b,_ in shared_bts[:3]) if shared_bts else "-"
-        shared_consts = set()
-        for _b, cc in shared_bts:
-            if cc and cc != "-":
-                for tok in cc.split(","): shared_consts.add(tok)
-        consts_str = "/".join(sorted(shared_consts)) if shared_consts else "-"
+        # BT 공유 조회 건너뜀 (전체 쌍 분석 all_pairs_s05에서 이미 수행)
+        bt_ids = "-"
+        consts_str = "-"
+        # S>=0.5 쌍에서 BT 정보 가져오기
+        for _ap in all_pairs_s05:
+            if (_ap[0] == ni and _ap[1] == nj) or (_ap[0] == nj and _ap[1] == ni):
+                bt_ids = _ap[10]
+                consts_str = _ap[11]
+                break
         pairs.append((ni, nj, S, jac, prox, bidir, bal, miss, bt_ids, consts_str))
 
 pairs.sort(key=lambda t: t[2], reverse=True)
@@ -571,7 +572,6 @@ with (OUT/"resonance_hist.jsonl").open("w") as f:
     for b,c in hist:
         f.write(json.dumps({"bin": b, "count": c}) + "\n")
 
-import sys; print("[MARKER] 5c clustering start", file=sys.stderr, flush=True)
 # ── 5c. 수식 기반 도메인 클러스터링 (Union-Find) ─────────────────
 # 같은 수식을 공유하는 도메인을 클러스터로 묶음
 # 최소 공유 수식 수: 3개 이상이면 같은 클러스터
@@ -650,7 +650,6 @@ with (OUT/"domain_clusters.jsonl").open("w") as f:
 
 print(f"[OK] 클러스터: {len(cluster_stats)}개 (2+ 멤버), 최대 클러스터 {cluster_stats[0]['size']}개 도메인" if cluster_stats else "[OK] 클러스터 없음", file=_sys.stderr, flush=True)
 
-import sys; print("[MARKER] 6 md generation start", file=sys.stderr, flush=True)
 # ── 6. docs/dse-cross-resonance.md 생성 ─────────────────────────
 lines = []
 lines.append("# DSE 교차 공명 분석 — 전체 335 도메인 확장판 (v2)")

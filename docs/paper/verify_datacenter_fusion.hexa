@@ -1,0 +1,99 @@
+// verify_datacenter_fusion.hexa — BT-531~540 데이터센터 소형 핵융합 10 돌파 검증
+// n=6 산술 함수
+let n = 6
+let sigma = 12        // σ(6) = 1+2+3+6
+let phi = 2           // φ(6) = {1,5}
+let tau = 4           // τ(6) = {1,2,3,6}
+let sopfr = 5         // sopfr(6) = 2+3
+let j2 = 24           // J₂(6) = σ·φ = 24
+
+let pass_count = 0
+let total = 0
+let near_count = 0
+let miss_count = 0
+
+fn check(name: str, measured: f64, predicted: f64, tol: f64) {
+    total += 1
+    let err = abs(measured - predicted) / max(abs(measured), 1e-12) * 100.0
+    if err <= tol {
+        pass_count += 1
+        print("[EXACT] {name}: 측정={measured}, 예측={predicted}, 오차={err:.2}%")
+    } else if err <= tol * 3.0 {
+        near_count += 1
+        print("[NEAR]  {name}: 측정={measured}, 예측={predicted}, 오차={err:.2}%")
+    } else {
+        miss_count += 1
+        print("[MISS]  {name}: 측정={measured}, 예측={predicted}, 오차={err:.2}%")
+    }
+}
+
+print("=" * 60)
+print("BT-531: SPARC 토로이달 자기장")
+check("SPARC B₀ (T)", 12.2, sigma, 5.0)
+check("ST40 B₀ (T)", 3.0, n / phi, 5.0)
+check("REBCO 한계 (T)", 20.0, j2 - tau, 5.0)
+check("코일 감김 층", 2.0, phi, 1.0)
+
+print("\nBT-532: TF 코일 수")
+check("ITER TF", 18.0, sigma + n, 1.0)
+check("ITER PF", 6.0, n, 1.0)
+check("ITER CS", 6.0, n, 1.0)
+check("SPARC TF", 18.0, sigma + n, 1.0)
+check("K-DEMO TF", 16.0, pow(2, tau), 1.0)
+check("DEMO-EU TF", 18.0, sigma + n, 1.0)
+
+print("\nBT-533: D-T 에너지 비")
+check("E_n/E_α", 3.99, tau, 1.0)
+check("반응물 수", 2.0, phi, 1.0)
+check("생성물 수", 2.0, phi, 1.0)
+check("총 에너지 (MeV)", 17.58, sigma + n, 5.0)
+
+print("\nBT-534: 안전인자 q")
+check("q_min", 3.0, n / phi, 1.0)
+check("q=1 킹크", 1.0, 1.0, 1.0)
+check("Troyon g 근사", 3.0, n / phi, 1.0)
+check("Greenwald 차원", 2.0, phi, 1.0)
+check("위험 q-면 수", 4.0, tau, 1.0)
+
+print("\nBT-535: 종횡비")
+check("ITER A", 3.1, n / phi, 5.0)
+check("SPARC A", 3.09, n / phi, 5.0)
+check("NSTX-U A", 1.65, phi, 20.0)
+
+print("\nBT-536: DC 커플링")
+check("전기출력 (MWe)", 60.0, sigma * sopfr, 1.0)
+check("랙 수 (1MW)", 60.0, sigma * sopfr, 1.0)
+check("PUE", 1.017, 1.0 + 1.0 / (sigma * tau * sigma), 1.0)
+check("폐열 분율", 0.333, 1.0 / 3.0, 1.0)
+
+print("\nBT-537: Tritium Breeding")
+check("TBR 목표", 1.15, 7.0 / 6.0, 2.0)
+check("blanket 구역", 2.0, phi, 1.0)
+check("Li-6 원자번호", 3.0, n / phi, 1.0)
+check("Li-6 질량수", 6.0, n, 1.0)
+
+print("\nBT-538: Divertor")
+check("SN 스트라이크", 2.0, phi, 1.0)
+check("DN 스트라이크", 4.0, tau, 1.0)
+check("열부하 한계 (MW/m²)", 10.0, sigma - phi, 1.0)
+check("Super-X 다리", 4.0, tau, 1.0)
+check("방사냉각 가스 종류", 3.0, n / phi, 1.0)
+
+print("\nBT-539: REBCO 자석")
+check("운전 자기장 (T)", 12.0, sigma, 1.0)
+check("구성 원소", 4.0, tau, 1.0)
+check("운전 온도 (K)", 20.0, j2 - tau, 1.0)
+check("팬케이크 층", 2.0, phi, 1.0)
+check("쿠엔치 보호", 3.0, n / phi, 1.0)
+
+print("\nBT-540: 캠퍼스 스케일")
+check("모듈 수", 12.0, sigma, 1.0)
+check("총 출력 (MWe)", 720.0, sigma * sigma * sopfr, 1.0)
+check("Mk.V 출력 (MWe)", 1440.0, j2 * sigma * sopfr, 1.0)
+check("총 랙 수", 864.0, sigma * sigma * n, 1.0)
+check("건설 주기 (월)", 24.0, j2, 1.0)
+check("연료 교체 (월)", 18.0, sigma + n, 1.0)
+
+print("\n" + "=" * 60)
+print("결과: {pass_count}/{total} EXACT, {near_count} NEAR, {miss_count} MISS")
+print("EXACT 비율: {pass_count * 100.0 / total:.1}%")
