@@ -3943,7 +3943,7 @@
           "links": [
             {
               "label": "문서",
-              "path": "docs/marketing/goal.md"
+              "path": "docs/nexus-service/goal.md"
             }
           ]
         },
@@ -3956,7 +3956,7 @@
           "links": [
             {
               "label": "문서",
-              "path": "docs/marketing/goal.md"
+              "path": "docs/anima-service/goal.md"
             }
           ]
         },
@@ -3969,7 +3969,7 @@
           "links": [
             {
               "label": "문서",
-              "path": "docs/marketing/goal.md"
+              "path": "docs/unified-service/goal.md"
             }
           ]
         }
