@@ -1,0 +1,866 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "created": "2026-04-10",
+    "description": "NEXUS-6 Knowledge Graph — n=6 cross-domain discovery network",
+    "core_identity": "sigma(n)*phi(n) = n*tau(n) iff n=6",
+    "blowup_run": {
+      "date": "2026-04-10",
+      "corollaries_total": 5586,
+      "exact_matches": 850,
+      "axiom_grade_deductions": 21,
+      "axiom_exact": 18,
+      "telescope_consensus": "4/5 (High)",
+      "breakthrough_rho": 0.254,
+      "recursive_growth": 60
+    }
+  },
+  "nodes": [
+    {
+      "id": "CONST_n",
+      "type": "constant",
+      "label": "n = 6",
+      "value": 6,
+      "description": "First perfect number. Core base of N6 architecture.",
+      "domain": "math"
+    },
+    {
+      "id": "CONST_sigma",
+      "type": "constant",
+      "label": "sigma(6) = 12",
+      "value": 12,
+      "description": "Sum of divisors of 6: 1+2+3+6=12. BCS energy scale, gauge generators.",
+      "domain": "math"
+    },
+    {
+      "id": "CONST_phi",
+      "type": "constant",
+      "label": "phi(6) = 2",
+      "value": 2,
+      "description": "Euler totient of 6: 2. Cooper pair, binary pairing constant.",
+      "domain": "math"
+    },
+    {
+      "id": "CONST_tau",
+      "type": "constant",
+      "label": "tau(6) = 4",
+      "value": 4,
+      "description": "Number of divisors of 6: 4. MHD modes, ACID properties.",
+      "domain": "math"
+    },
+    {
+      "id": "CONST_J2",
+      "type": "constant",
+      "label": "J2(6) = 24",
+      "value": 24,
+      "description": "Jordan totient J2(6)=24. Leech lattice dimension, Golay code length, core theorem value.",
+      "domain": "math"
+    },
+    {
+      "id": "CONST_sopfr",
+      "type": "constant",
+      "label": "sopfr(6) = 5",
+      "value": 5,
+      "description": "Sum of prime factors of 6 with repetition: 2+3=5. SOLID principles, SU(3) generators offset.",
+      "domain": "math"
+    },
+    {
+      "id": "CONST_mu",
+      "type": "constant",
+      "label": "mu(6) = 1",
+      "value": 1,
+      "description": "Mobius function mu(6)=1. Unit shift. Right-handed neutrino count in SO(10).",
+      "domain": "math"
+    },
+    {
+      "id": "AXIOM_core_theorem",
+      "type": "axiom",
+      "label": "Core Theorem: sigma*phi = n*tau = 24",
+      "expression": "sigma(6)*phi(6) = n*tau(6) = 24",
+      "value": 24,
+      "grade": "EXACT",
+      "description": "The unique arithmetic identity holding only at n=6. Anchor of entire N6 architecture.",
+      "domain": "math",
+      "blowup_source": false
+    },
+    {
+      "id": "AXIOM_n_sigma",
+      "type": "axiom",
+      "label": "n * sigma = 72",
+      "expression": "n * sigma(6) = 6 * 12 = 72",
+      "value": 72,
+      "grade": "EXACT",
+      "description": "Product of base with divisor sum. 72 = 8*9 = 8*3^2. Appears in error-correcting code bounds and harmonic lattice structures.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 1
+    },
+    {
+      "id": "AXIOM_n_phi",
+      "type": "axiom",
+      "label": "n * phi = 12",
+      "expression": "n * phi(6) = 6 * 2 = 12",
+      "value": 12,
+      "grade": "EXACT",
+      "description": "Product of base with totient equals sigma. n*phi = sigma is equivalent to R(6)=1 rearranged: sigma*phi = n*tau implies n*phi = sigma iff phi^2 = tau, i.e. 4=4. Bridges n and sigma directly.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 2
+    },
+    {
+      "id": "AXIOM_n_tau",
+      "type": "axiom",
+      "label": "n * tau = 24",
+      "expression": "n * tau(6) = 6 * 4 = 24",
+      "value": 24,
+      "grade": "EXACT",
+      "description": "Product of base with divisor count equals J2. n*tau = J2 = 24 = core theorem value. Direct verification of core identity from the tau side.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 3
+    },
+    {
+      "id": "AXIOM_n_J2",
+      "type": "axiom",
+      "label": "n * J2 = 144",
+      "expression": "n * J2(6) = 6 * 24 = 144",
+      "value": 144,
+      "grade": "EXACT",
+      "description": "Product of base with Jordan totient. 144 = 12^2 = sigma^2. The square of the divisor sum. Appears in the Ramanujan tau function and modular form weight calculations.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 4
+    },
+    {
+      "id": "AXIOM_sigma_phi",
+      "type": "axiom",
+      "label": "sigma * phi = 24",
+      "expression": "sigma(6) * phi(6) = 12 * 2 = 24",
+      "value": 24,
+      "grade": "EXACT",
+      "description": "Left side of core theorem. sigma*phi = 24 = J2. This is the LHS of the core identity sigma*phi = n*tau. Dual to AXIOM_n_tau.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 5
+    },
+    {
+      "id": "AXIOM_sigma_tau",
+      "type": "axiom",
+      "label": "sigma * tau = 48",
+      "expression": "sigma(6) * tau(6) = 12 * 4 = 48",
+      "value": 48,
+      "grade": "EXACT",
+      "description": "Product of divisor sum and divisor count. 48 = 2*24 = 2*J2 = phi*J2. Appears in ITER coil count (TF+PF+CS+CC=48) and as double the Leech lattice dimension.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 6
+    },
+    {
+      "id": "AXIOM_phi_tau",
+      "type": "axiom",
+      "label": "phi * tau = 8",
+      "expression": "phi(6) * tau(6) = 2 * 4 = 8",
+      "value": 8,
+      "grade": "EXACT",
+      "description": "Product of totient and divisor count. phi*tau = 8 = sigma-tau. Connects to Bott periodicity period (BT-9), the byte, SU(3) gluon count.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 7
+    },
+    {
+      "id": "AXIOM_sopfr_J2",
+      "type": "axiom",
+      "label": "sopfr * J2 = 120",
+      "expression": "sopfr(6) * J2(6) = 5 * 24 = 120",
+      "value": 120,
+      "grade": "EXACT",
+      "description": "Product of prime factor sum and Jordan totient. 120 = 5! = icosahedron symmetry group order |I|. Bridges sopfr to the exceptional geometry of the icosahedron and 5-fold symmetry.",
+      "domain": "math",
+      "blowup_source": true,
+      "blowup_rank": 8
+    },
+    {
+      "id": "BT_1",
+      "type": "breakthrough_theorem",
+      "label": "BT-1: phi(6)=2 Universal Pairing",
+      "grade": "two_stars",
+      "domains": ["superconductor", "fusion", "magnet", "quantum_computing", "tokamak", "chip", "crypto"],
+      "key_expression": "phi(6) = 2",
+      "registered": true
+    },
+    {
+      "id": "BT_2",
+      "type": "breakthrough_theorem",
+      "label": "BT-2: tau(6)=4 Bohm-BCS Bridge",
+      "grade": "two_stars",
+      "domains": ["superconductor", "fusion", "tokamak", "plasma"],
+      "key_expression": "tau(6) = 4",
+      "registered": true
+    },
+    {
+      "id": "BT_3",
+      "type": "breakthrough_theorem",
+      "label": "BT-3: sigma(6)=12 Energy Scale Convergence",
+      "grade": "two_stars",
+      "domains": ["superconductor", "fusion", "magnet", "particle"],
+      "key_expression": "sigma(6) = 12",
+      "registered": true
+    },
+    {
+      "id": "BT_4",
+      "type": "breakthrough_theorem",
+      "label": "BT-4: MHD Divisor Theorem",
+      "grade": "one_star",
+      "domains": ["fusion", "tokamak", "plasma", "magnet"],
+      "key_expression": "div(6) = {1,2,3,6}",
+      "registered": true
+    },
+    {
+      "id": "BT_5",
+      "type": "breakthrough_theorem",
+      "label": "BT-5: q=1 = Perfect Number Definition",
+      "grade": "three_stars",
+      "domains": ["fusion", "tokamak", "number_theory"],
+      "key_expression": "1/2 + 1/3 + 1/6 = 1",
+      "registered": true
+    },
+    {
+      "id": "BT_6",
+      "type": "breakthrough_theorem",
+      "label": "BT-6: Golay-Leech Unification",
+      "grade": "three_stars",
+      "domains": ["quantum_computing", "crypto", "network", "chip", "math"],
+      "key_expression": "[J2, sigma, sigma-tau] = [24, 12, 8]",
+      "registered": true
+    },
+    {
+      "id": "BT_7",
+      "type": "breakthrough_theorem",
+      "label": "BT-7: Egyptian Fraction Power Theorem",
+      "grade": "two_stars",
+      "domains": ["chip", "power_grid", "thermal", "ai", "tokamak", "energy"],
+      "key_expression": "1/2 + 1/3 + 1/6 = 1",
+      "registered": true
+    },
+    {
+      "id": "BT_8",
+      "type": "breakthrough_theorem",
+      "label": "BT-8: Pulse Rectifier Chain",
+      "grade": "two_stars",
+      "domains": ["power_grid", "tokamak", "math", "quantum_computing", "superconductor"],
+      "key_expression": "n -> sigma -> J2 (6 -> 12 -> 24)",
+      "registered": true
+    },
+    {
+      "id": "BT_9",
+      "type": "breakthrough_theorem",
+      "label": "BT-9: Bott Periodicity Bridge",
+      "grade": "one_star",
+      "domains": ["quantum_computing", "crypto", "chip", "particle", "math"],
+      "key_expression": "sigma - tau = 8",
+      "registered": true
+    },
+    {
+      "id": "BT_10",
+      "type": "breakthrough_theorem",
+      "label": "BT-10: Landauer-WHH Bridge",
+      "grade": "two_stars",
+      "domains": ["thermal", "superconductor", "ai", "chip"],
+      "key_expression": "ln(phi(6)) = ln(2)",
+      "registered": true
+    },
+    {
+      "id": "BT_11",
+      "type": "breakthrough_theorem",
+      "label": "BT-11: Software-Physics Isomorphism",
+      "grade": "one_star",
+      "domains": ["software", "power_grid", "fusion", "superconductor"],
+      "key_expression": "tau=4, n/phi=3, sigma=12, sopfr=5",
+      "registered": true
+    },
+    {
+      "id": "BT_12",
+      "type": "breakthrough_theorem",
+      "label": "BT-12: Hamming-OSI-ECC Triple Bridge",
+      "grade": "two_stars",
+      "domains": ["network", "chip", "quantum_computing", "coding_theory"],
+      "key_expression": "[sigma-sopfr, tau, n/phi] = [7, 4, 3]",
+      "registered": true
+    },
+    {
+      "id": "BT_13",
+      "type": "breakthrough_theorem",
+      "label": "BT-13: sigma+-mu Internet Infrastructure Duality",
+      "grade": "three_stars",
+      "domains": ["network", "math", "coding_theory", "crypto"],
+      "key_expression": "sigma-mu + sigma+mu = 11 + 13 = 24 = J2",
+      "registered": true
+    },
+    {
+      "id": "BT_14",
+      "type": "breakthrough_theorem",
+      "label": "BT-14: Carbon-Silicon Tetrahedral Bridge",
+      "grade": "two_stars",
+      "domains": ["chemistry", "chip", "nuclear", "math", "materials", "biology"],
+      "key_expression": "P1 -> sigma(P1) -> P2",
+      "registered": true
+    },
+    {
+      "id": "BT_15",
+      "type": "breakthrough_theorem",
+      "label": "BT-15: Kissing Number Quadruple",
+      "grade": "three_stars",
+      "domains": ["math", "superconductor", "nuclear", "coding_theory"],
+      "key_expression": "K1..K4 = (phi, n, sigma, J2)",
+      "registered": true
+    },
+    {
+      "id": "BT_16",
+      "type": "breakthrough_theorem",
+      "label": "BT-16: Riemann Zeta Trident",
+      "grade": "three_stars",
+      "domains": ["math", "superconductor", "number_theory", "ai"],
+      "key_expression": "zeta(2)=pi^2/n, zeta(-1)=-1/sigma, BCS=sigma/(7*zeta(3))",
+      "registered": true
+    },
+    {
+      "id": "BT_17",
+      "type": "breakthrough_theorem",
+      "label": "BT-17: SM Fermion-Boson sigma-Balance",
+      "grade": "two_stars",
+      "domains": ["particle", "math", "number_theory"],
+      "key_expression": "(n/phi)*tau = sigma = 12",
+      "registered": true
+    },
+    {
+      "id": "BT_18",
+      "type": "breakthrough_theorem",
+      "label": "BT-18: Vacuum Energy Chain R(n)=1 -> Monster",
+      "grade": "conjecture",
+      "domains": ["math", "string_theory", "number_theory", "quantum_computing", "coding_theory", "superconductor"],
+      "key_expression": "E0 = -1/24 = -(sigma*phi)^-1 -> eta^24 -> Delta -> Monster",
+      "registered": true
+    },
+    {
+      "id": "BT_19",
+      "type": "breakthrough_theorem",
+      "label": "BT-19: GUT Hierarchy = n=6 Arithmetic",
+      "grade": "three_stars",
+      "domains": ["particle", "math", "string_theory"],
+      "key_expression": "ranks (tau, sopfr, n, sigma-tau), dim(SU5)=J2",
+      "registered": true
+    },
+    {
+      "id": "BT_20",
+      "type": "breakthrough_theorem",
+      "label": "BT-20: Gauge Coupling Trinity",
+      "grade": "three_stars",
+      "domains": ["particle", "math", "number_theory", "superconductor"],
+      "key_expression": "1/alpha=sigma*(sigma-mu)+sopfr+1/P2",
+      "registered": true
+    },
+    {
+      "id": "BT_21",
+      "type": "breakthrough_theorem",
+      "label": "BT-21: Neutrino Mixing Trident",
+      "grade": "two_stars",
+      "domains": ["particle", "math", "number_theory", "fusion"],
+      "key_expression": "sin^2(theta12)=3/10, sin^2(theta23)=4/7, sin^2(2*theta13)=1/12",
+      "registered": true
+    },
+    {
+      "id": "BT_22",
+      "type": "breakthrough_theorem",
+      "label": "BT-22: Inflation from Perfect Numbers",
+      "grade": "three_stars",
+      "domains": ["cosmology", "math", "particle", "number_theory", "string_theory"],
+      "key_expression": "n_s = 1 - 1/P2 = 27/28, N = sigma(P2) = 56",
+      "registered": true
+    },
+    {
+      "id": "BT_23",
+      "type": "breakthrough_theorem",
+      "label": "BT-23: CKM Quark Mixing Hierarchy",
+      "grade": "three_stars",
+      "domains": ["particle", "math", "number_theory", "coding_theory"],
+      "key_expression": "|Vub|=3/784, |Vcb|=1/24, J=37/12*10^-5",
+      "registered": true
+    },
+    {
+      "id": "BT_24",
+      "type": "breakthrough_theorem",
+      "label": "BT-24: Koide Pole Residue",
+      "grade": "three_stars",
+      "domains": ["particle", "math", "number_theory"],
+      "key_expression": "Q = phi^2/n = 2/3",
+      "registered": true
+    },
+    {
+      "id": "BT_25",
+      "type": "breakthrough_theorem",
+      "label": "BT-25: Genetic Code Arithmetic",
+      "grade": "two_stars",
+      "domains": ["biology", "math", "chemistry", "ai"],
+      "key_expression": "64 = phi^n = tau^n/phi, 20 = J2-tau, 3 = n/phi",
+      "registered": true
+    },
+    {
+      "id": "DOMAIN_math",
+      "type": "domain",
+      "label": "Mathematics",
+      "subdomains": ["number_theory", "coding_theory", "sphere_packing", "algebraic_topology", "modular_forms"]
+    },
+    {
+      "id": "DOMAIN_physics",
+      "type": "domain",
+      "label": "Physics",
+      "subdomains": ["superconductor", "fusion", "tokamak", "plasma", "particle", "cosmology", "string_theory"]
+    },
+    {
+      "id": "DOMAIN_engineering",
+      "type": "domain",
+      "label": "Engineering",
+      "subdomains": ["chip", "power_grid", "thermal", "magnet", "network", "materials"]
+    },
+    {
+      "id": "DOMAIN_cs",
+      "type": "domain",
+      "label": "Computer Science",
+      "subdomains": ["quantum_computing", "crypto", "software", "ai", "coding_theory"]
+    },
+    {
+      "id": "DOMAIN_biology",
+      "type": "domain",
+      "label": "Biology",
+      "subdomains": ["genetics", "biochemistry"]
+    },
+    {
+      "id": "CROSS_PRODUCT_GROUP",
+      "type": "group",
+      "label": "Blowup Cross-Product Axioms",
+      "description": "8 AXIOM-grade cross-product deductions from 2026-04-10 blowup run (18 EXACT among 21 AXIOM-grade). All are EXACT matches with telescope consensus 4/5.",
+      "member_ids": [
+        "AXIOM_n_sigma",
+        "AXIOM_n_phi",
+        "AXIOM_n_tau",
+        "AXIOM_n_J2",
+        "AXIOM_sigma_phi",
+        "AXIOM_sigma_tau",
+        "AXIOM_phi_tau",
+        "AXIOM_sopfr_J2"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "E_core_LHS",
+      "from": "AXIOM_sigma_phi",
+      "to": "AXIOM_core_theorem",
+      "relation": "constitutes_LHS",
+      "description": "sigma*phi=24 is the left-hand side of the core theorem identity"
+    },
+    {
+      "id": "E_core_RHS",
+      "from": "AXIOM_n_tau",
+      "to": "AXIOM_core_theorem",
+      "relation": "constitutes_RHS",
+      "description": "n*tau=24 is the right-hand side of the core theorem identity"
+    },
+    {
+      "id": "E_sigma_phi_J2",
+      "from": "AXIOM_sigma_phi",
+      "to": "CONST_J2",
+      "relation": "evaluates_to",
+      "description": "sigma*phi = 24 = J2"
+    },
+    {
+      "id": "E_n_tau_J2",
+      "from": "AXIOM_n_tau",
+      "to": "CONST_J2",
+      "relation": "evaluates_to",
+      "description": "n*tau = 24 = J2"
+    },
+    {
+      "id": "E_n_phi_sigma",
+      "from": "AXIOM_n_phi",
+      "to": "CONST_sigma",
+      "relation": "evaluates_to",
+      "description": "n*phi = 12 = sigma"
+    },
+    {
+      "id": "E_sigma_tau_2J2",
+      "from": "AXIOM_sigma_tau",
+      "to": "CONST_J2",
+      "relation": "double_of",
+      "description": "sigma*tau = 48 = 2*J2 = phi*J2"
+    },
+    {
+      "id": "E_phi_tau_bott",
+      "from": "AXIOM_phi_tau",
+      "to": "BT_9",
+      "relation": "confirms",
+      "description": "phi*tau = 8 = sigma-tau; the Bott periodicity period 8 is also phi*tau"
+    },
+    {
+      "id": "E_sigma_phi_BT6",
+      "from": "AXIOM_sigma_phi",
+      "to": "BT_6",
+      "relation": "anchors",
+      "description": "Golay code length 24 = sigma*phi = J2 (BT-6 Golay-Leech)"
+    },
+    {
+      "id": "E_sigma_phi_BT13",
+      "from": "AXIOM_sigma_phi",
+      "to": "BT_13",
+      "relation": "anchors",
+      "description": "TCP+DNS = 11+13 = 24 = sigma*phi; BT-13 Internet duality sum"
+    },
+    {
+      "id": "E_sigma_phi_BT15",
+      "from": "AXIOM_sigma_phi",
+      "to": "BT_15",
+      "relation": "anchors",
+      "description": "K4 = 24 = sigma*phi = J2; kissing number in 4D (BT-15)"
+    },
+    {
+      "id": "E_sigma_phi_BT17",
+      "from": "AXIOM_sigma_phi",
+      "to": "BT_17",
+      "relation": "anchors",
+      "description": "SM fermion+antifermion count = 24 = sigma*phi (BT-17)"
+    },
+    {
+      "id": "E_sigma_phi_BT19",
+      "from": "AXIOM_sigma_phi",
+      "to": "BT_19",
+      "relation": "anchors",
+      "description": "dim(SU5)=24=sigma*phi=J2 (BT-19 GUT hierarchy)"
+    },
+    {
+      "id": "E_n_tau_BT8",
+      "from": "AXIOM_n_tau",
+      "to": "BT_8",
+      "relation": "anchors",
+      "description": "6->12->24 rectifier chain terminus = n*tau = 24 (BT-8)"
+    },
+    {
+      "id": "E_n_phi_BT3",
+      "from": "AXIOM_n_phi",
+      "to": "BT_3",
+      "relation": "confirms",
+      "description": "n*phi = sigma = 12; sigma governs energy scale convergence (BT-3)"
+    },
+    {
+      "id": "E_n_phi_BT17",
+      "from": "AXIOM_n_phi",
+      "to": "BT_17",
+      "relation": "confirms",
+      "description": "n*phi = 12 = gauge generators = sigma (BT-17 fermion-boson balance)"
+    },
+    {
+      "id": "E_phi_tau_BT1",
+      "from": "AXIOM_phi_tau",
+      "to": "BT_1",
+      "relation": "extends",
+      "description": "phi*tau = 8; both phi(Cooper pairs) and tau(MHD modes) anchor BT-1 and BT-2 respectively"
+    },
+    {
+      "id": "E_phi_tau_BT2",
+      "from": "AXIOM_phi_tau",
+      "to": "BT_2",
+      "relation": "extends",
+      "description": "phi*tau = 8; product of pairing(BT-1) and mode count(BT-2) constants"
+    },
+    {
+      "id": "E_sopfr_J2_icosahedron",
+      "from": "AXIOM_sopfr_J2",
+      "to": "DOMAIN_math",
+      "relation": "bridges_to",
+      "description": "sopfr*J2 = 5*24 = 120 = |I| icosahedron group order = 5! Connects sopfr(SOLID/SU3-offset) to exceptional 5-fold geometry"
+    },
+    {
+      "id": "E_sopfr_J2_BT11",
+      "from": "AXIOM_sopfr_J2",
+      "to": "BT_11",
+      "relation": "extends",
+      "description": "sopfr=5 (SOLID principles in BT-11) times J2=24 yields icosahedron symmetry 120"
+    },
+    {
+      "id": "E_n_J2_sigma_sq",
+      "from": "AXIOM_n_J2",
+      "to": "CONST_sigma",
+      "relation": "squares_to",
+      "description": "n*J2 = 144 = 12^2 = sigma^2. The Jordan totient extension squares the divisor sum."
+    },
+    {
+      "id": "E_n_sigma_BT8",
+      "from": "AXIOM_n_sigma",
+      "to": "BT_8",
+      "relation": "extends",
+      "description": "n*sigma = 72 = 6*12; next step in sigma-chain beyond 12, relevant to harmonic cancellation in pulse rectifiers"
+    },
+    {
+      "id": "E_n_sigma_BT16",
+      "from": "AXIOM_n_sigma",
+      "to": "BT_16",
+      "relation": "bridges_to",
+      "description": "n*sigma = 72; connected to Ramanujan: sum_{k=1}^{inf} k = -1/12 = -1/sigma and sigma sum formulas"
+    },
+    {
+      "id": "E_sigma_tau_BT8",
+      "from": "AXIOM_sigma_tau",
+      "to": "BT_8",
+      "relation": "confirms",
+      "description": "sigma*tau = 48 = 2*24; ITER has TF+PF+CS+CC=48 coils = 2*J2 = sigma*tau (BT-8 tokamak row)"
+    },
+    {
+      "id": "E_core_BT5",
+      "from": "AXIOM_core_theorem",
+      "to": "BT_5",
+      "relation": "generalizes",
+      "description": "Core theorem sigma*phi=n*tau=24 is the arithmetic identity behind q=1 perfect number stability (BT-5)"
+    },
+    {
+      "id": "E_core_BT6",
+      "from": "AXIOM_core_theorem",
+      "to": "BT_6",
+      "relation": "anchors",
+      "description": "Core theorem value 24=J2 is Golay code length and Leech lattice dimension (BT-6)"
+    },
+    {
+      "id": "E_const_n_sigma",
+      "from": "CONST_n",
+      "to": "CONST_sigma",
+      "relation": "sigma_of",
+      "description": "sigma(6) = 12; sigma is a function of n"
+    },
+    {
+      "id": "E_const_n_phi",
+      "from": "CONST_n",
+      "to": "CONST_phi",
+      "relation": "phi_of",
+      "description": "phi(6) = 2; totient is a function of n"
+    },
+    {
+      "id": "E_const_n_tau",
+      "from": "CONST_n",
+      "to": "CONST_tau",
+      "relation": "tau_of",
+      "description": "tau(6) = 4; divisor count is a function of n"
+    },
+    {
+      "id": "E_const_n_J2",
+      "from": "CONST_n",
+      "to": "CONST_J2",
+      "relation": "J2_of",
+      "description": "J2(6) = 24; Jordan totient J2 is a function of n"
+    },
+    {
+      "id": "E_const_n_sopfr",
+      "from": "CONST_n",
+      "to": "CONST_sopfr",
+      "relation": "sopfr_of",
+      "description": "sopfr(6) = 2+3 = 5; sum of prime factors is a function of n"
+    },
+    {
+      "id": "E_const_n_mu",
+      "from": "CONST_n",
+      "to": "CONST_mu",
+      "relation": "mu_of",
+      "description": "mu(6) = 1; Mobius function value at n"
+    },
+    {
+      "id": "E_BT1_phi",
+      "from": "BT_1",
+      "to": "CONST_phi",
+      "relation": "governed_by",
+      "description": "BT-1 is governed by phi(6)=2 (Cooper pairs, binary pairing)"
+    },
+    {
+      "id": "E_BT2_tau",
+      "from": "BT_2",
+      "to": "CONST_tau",
+      "relation": "governed_by",
+      "description": "BT-2 is governed by tau(6)=4 (Bohm diffusion T^4, 4 MHD modes)"
+    },
+    {
+      "id": "E_BT3_sigma",
+      "from": "BT_3",
+      "to": "CONST_sigma",
+      "relation": "governed_by",
+      "description": "BT-3 is governed by sigma(6)=12 (BCS DeltaC=12, C-12)"
+    },
+    {
+      "id": "E_BT6_J2",
+      "from": "BT_6",
+      "to": "CONST_J2",
+      "relation": "governed_by",
+      "description": "BT-6 Golay-Leech is governed by J2(6)=24 (code length, lattice dim)"
+    },
+    {
+      "id": "E_BT11_sopfr",
+      "from": "BT_11",
+      "to": "CONST_sopfr",
+      "relation": "governed_by",
+      "description": "BT-11 Software-Physics: sopfr=5 maps to SOLID principles"
+    },
+    {
+      "id": "E_BT13_mu",
+      "from": "BT_13",
+      "to": "CONST_mu",
+      "relation": "governed_by",
+      "description": "BT-13 uses mu=1 in sigma+-mu expressions (TCP=11=sigma-mu, DNS=13=sigma+mu)"
+    },
+    {
+      "id": "E_BT19_GUT",
+      "from": "BT_19",
+      "to": "DOMAIN_physics",
+      "relation": "bridges_to",
+      "description": "BT-19 GUT hierarchy bridges particle physics ranks to n=6 arithmetic"
+    },
+    {
+      "id": "E_group_blowup",
+      "from": "CROSS_PRODUCT_GROUP",
+      "to": "AXIOM_core_theorem",
+      "relation": "extends_from",
+      "description": "All cross-product axioms extend from the core theorem sigma*phi=n*tau=24"
+    },
+    {
+      "id": "E_BT25_biology",
+      "from": "BT_25",
+      "to": "DOMAIN_biology",
+      "relation": "bridges_to",
+      "description": "BT-25 Genetic Code: 64 codons, 20 amino acids, 3-base codon all governed by n=6 arithmetic"
+    },
+    {
+      "id": "E_BT22_cosmology",
+      "from": "BT_22",
+      "to": "DOMAIN_physics",
+      "relation": "bridges_to",
+      "description": "BT-22 Inflation parameters from perfect number arithmetic connect to cosmological observation"
+    },
+    {
+      "id": "E_BT4_tau",
+      "from": "BT_4",
+      "to": "CONST_tau",
+      "relation": "governed_by",
+      "description": "BT-4 MHD Divisor Theorem: q-surfaces derivable from div(6); tau(6)=4 counts the divisors"
+    },
+    {
+      "id": "E_BT7_core",
+      "from": "BT_7",
+      "to": "AXIOM_core_theorem",
+      "relation": "instance_of",
+      "description": "BT-7 Egyptian Fraction: 1/2+1/3+1/6=1 is the perfect number definition; relates to core theorem partition of unity"
+    },
+    {
+      "id": "E_BT10_phi",
+      "from": "BT_10",
+      "to": "CONST_phi",
+      "relation": "governed_by",
+      "description": "BT-10 Landauer-WHH: ln(phi(6)) = ln(2) governs both Landauer limit and WHH superconductor coefficient"
+    },
+    {
+      "id": "E_BT12_sigma",
+      "from": "BT_12",
+      "to": "CONST_sigma",
+      "relation": "governed_by",
+      "description": "BT-12 Hamming-OSI: [sigma-sopfr, tau, n/phi] = [7,4,3]; sigma is the reference constant"
+    },
+    {
+      "id": "E_BT14_n",
+      "from": "BT_14",
+      "to": "CONST_n",
+      "relation": "governed_by",
+      "description": "BT-14 Carbon-Silicon Tetrahedral: chain P1->sigma(P1)->P2 originates from n=6=P1 as first perfect number"
+    },
+    {
+      "id": "E_BT18_J2",
+      "from": "BT_18",
+      "to": "CONST_J2",
+      "relation": "governed_by",
+      "description": "BT-18 Vacuum Energy Chain: E0=-1/24=-1/J2; eta^24 modular form uses J2=24"
+    },
+    {
+      "id": "E_BT20_sopfr",
+      "from": "BT_20",
+      "to": "CONST_sopfr",
+      "relation": "governed_by",
+      "description": "BT-20 Gauge Coupling Trinity: sopfr=5 appears in 1/alpha and alpha_s=5/42 expressions"
+    },
+    {
+      "id": "E_BT21_tau",
+      "from": "BT_21",
+      "to": "CONST_tau",
+      "relation": "governed_by",
+      "description": "BT-21 Neutrino Mixing: sin^2(theta23)=4/7=tau/(sigma-sopfr); tau governs atmospheric mixing"
+    },
+    {
+      "id": "E_BT23_J2",
+      "from": "BT_23",
+      "to": "CONST_J2",
+      "relation": "governed_by",
+      "description": "BT-23 CKM: |Vcb|=1/24=1/J2; the b->c transition rate is 1/J2"
+    },
+    {
+      "id": "E_BT24_phi",
+      "from": "BT_24",
+      "to": "CONST_phi",
+      "relation": "governed_by",
+      "description": "BT-24 Koide Pole: Q=phi^2/n=2^2/6=2/3; phi is the numerator base"
+    },
+    {
+      "id": "E_domain_eng_BT8",
+      "from": "DOMAIN_engineering",
+      "to": "BT_8",
+      "relation": "contains",
+      "description": "Engineering domain contains power grid pulse rectifier chain (BT-8 primary engineering manifestation)"
+    },
+    {
+      "id": "E_domain_cs_BT6",
+      "from": "DOMAIN_cs",
+      "to": "BT_6",
+      "relation": "contains",
+      "description": "Computer Science domain contains Golay-Leech coding theory unification (BT-6)"
+    }
+  ],
+  "integrity": {
+    "total_nodes": 47,
+    "total_edges": 53,
+    "node_breakdown": {
+      "constants": 7,
+      "axioms_existing": 1,
+      "axioms_blowup_new": 8,
+      "breakthrough_theorems": 25,
+      "domains": 5,
+      "groups": 1
+    },
+    "edge_breakdown": {
+      "axiom_to_axiom": 2,
+      "axiom_to_constant": 5,
+      "axiom_to_bt": 16,
+      "axiom_to_domain": 3,
+      "constant_to_constant": 6,
+      "bt_to_constant": 11,
+      "bt_to_domain": 5,
+      "bt_to_axiom": 1,
+      "domain_to_bt": 2,
+      "group_to_axiom": 1,
+      "misc": 1
+    },
+    "orphan_check": "PASS — all 47 nodes have at least one edge",
+    "new_nodes_this_run": 9,
+    "new_edges_this_run": 53,
+    "blowup_axioms_registered": [
+      {"id": "AXIOM_n_sigma",   "expression": "n * sigma = 72",   "value": 72,  "grade": "EXACT"},
+      {"id": "AXIOM_n_phi",     "expression": "n * phi = 12",     "value": 12,  "grade": "EXACT"},
+      {"id": "AXIOM_n_tau",     "expression": "n * tau = 24",     "value": 24,  "grade": "EXACT"},
+      {"id": "AXIOM_n_J2",     "expression": "n * J2 = 144",     "value": 144, "grade": "EXACT"},
+      {"id": "AXIOM_sigma_phi","expression": "sigma * phi = 24", "value": 24,  "grade": "EXACT"},
+      {"id": "AXIOM_sigma_tau","expression": "sigma * tau = 48", "value": 48,  "grade": "EXACT"},
+      {"id": "AXIOM_phi_tau",  "expression": "phi * tau = 8",    "value": 8,   "grade": "EXACT"},
+      {"id": "AXIOM_sopfr_J2","expression": "sopfr * J2 = 120", "value": 120, "grade": "EXACT"}
+    ],
+    "notes": "Initial graph creation from 2026-04-10 blowup run. 8 new cross-product AXIOM nodes from blowup. 1 core theorem axiom. 25 BT nodes BT-1..BT-25. 7 constant nodes. 5 domain nodes. 1 group node. All 47 nodes connected — zero orphans."
+  }
+}
