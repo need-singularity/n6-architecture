@@ -5,3 +5,4 @@ pub mod recent;
 pub mod benchmark;
 pub mod logs;
 pub mod daemon;
+pub mod sonar;

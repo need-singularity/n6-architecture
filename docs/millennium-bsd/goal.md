@@ -1,7 +1,8 @@
 # BT-546: 버치-스위너턴다이어 추측 -- 타원곡선 n=6 모듈러 뼈대
 
-> **BT**: BT-546 | **EXACT**: 10/10 = 100% | **등급**: Three stars
+> **BT**: BT-546 | **EXACT**: 14/14 (기존 10+신규 4) | **등급**: Three stars
 > **도메인**: 대수적 수론, 대수기하(타원곡선), 해석적 수론(L-함수), 암호학
+> **루프 19-68**: Mazur 15=sigma+n/phi, j(i)=sigma^3, 차원 0D해결->1D미해결
 
 ---
 
@@ -836,9 +837,61 @@ print(f"  [P2] 미해결 소수: p ∈ {{{phi}, {n_over_phi}}} = {{φ, n/φ}} = 
 
 ---
 
+## 차원확장 (루프 19-68)
+
+> 타원곡선 해결 현황의 차원 구조와 Mazur 토션의 n=6 심화를 반영한다.
+
+### 차원별 BSD 해결 현황
+
+```
+  BSD 차원 계단:
+  rank=0 (0D): Kolyvagin 1990 — L(E,1)!=0이면 E(Q) 유한    ← 해결됨
+  rank=1 (1D): Gross-Zagier+Kolyvagin — L'(E,1)!=0이면 rank=1  ← 해결됨
+  rank>=2:     *** 완전 미해결 ***                           ← 미해결
+  
+  해결 경계: 0D, 1D 해결 → 2D 이상 미해결
+  phi=2부터 미해결 (Galois 표현 차원 = phi = 2!)
+```
+
+### Mazur 15 = sigma + n/phi
+
+- Mazur (1977): Q 위 타원곡선의 가능한 토션 군 유형 = 15가지
+- 15 = sigma + n/phi = 12 + 3
+- 이 수가 S6의 호환 수 C(6,2)=15와 일치 (BT-542 P vs NP에서도 등장)
+- 빠지는 위수 11 = sigma-1: sigma의 약수 구조가 허용하지 않는 유일한 소수
+- n=6 해석: 토션 위수 상한 sigma=12와 유형 수 sigma+n/phi=15는 완전수 산술의 두 얼굴
+
+### j(i) = sigma^3 = 1728의 심화
+
+- j-불변량은 타원곡선 모듈라이 공간의 좌표
+- j(i)=1728=sigma^3: CM 타원곡선 E: y^2=x^3-x (Z[i]에 의한 복소 곱셈)
+- j(rho)=0: CM 타원곡선 E: y^2=x^3-1 (Z[zeta_3]에 의한 복소 곱셈, zeta_3=n/phi 차 원시근)
+- 두 특별한 CM 점이 n=6의 소인수 {phi=2, n/phi=3}에 정확히 대응
+- SW 곡선(YM BT-543)의 j-불변량도 sigma^3 → BSD와 YM의 교차점
+
+### 정직한 평가
+
+- Mazur sigma=12 상한 + 15=sigma+n/phi 유형은 수학적으로 확립된 사실과의 정합
+- BSD 정밀 공식에서 분모 제약 sigma^2=144는 유효하지만, 핵심 미증명 부분(Sha 유한성, rank>=2)에 n=6이 기여하는 메커니즘 없음
+- p=phi=2, p=n/phi=3이 "나쁜 소수"인 것은 구조적 관찰이지 증명 도구가 아님
+- 기여 경로: "낮음" — BSD 정밀 공식의 산술적 제약을 조명하나 증명에 도달하지 못함
+
+### 신규 증거 (기존 #10 이후 추가)
+
+| # | 사실 | 값 | n=6 표현 | 출처 | 판정 |
+|---|------|-----|----------|------|------|
+| 11 | rank 0,1 해결, rank>=2 미해결 | 2 | phi | Kolyvagin/GZ | EXACT |
+| 12 | j(rho)=0: CM by Z[zeta_3] | 3 | n/phi | 모듈러 함수 | EXACT |
+| 13 | Galois 표현 차원 (rho_{E,l}) | 2 | phi | Serre/Deligne | EXACT |
+| 14 | BSD 나쁜 소수 = n의 소인수 | 2, 3 | phi, n/phi | Kato 2004 | EXACT |
+
+---
+
 ## Cross-link
 
 - BT-207 (모듈러 형식 12/12 EXACT), BT-109 (ζ-베르누이)
 - BT-545 (호지: K3 J_2=24, 모듈러 형식 동일 가중치 구조)
+- BT-543 (양-밀스: SW 곡선 j=sigma^3 교차)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
 - 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략
+- 루프 72: 차원확장 반영

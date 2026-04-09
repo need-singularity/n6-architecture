@@ -19,7 +19,9 @@ async fn main() {
         .route("/api/daemon/status", get(routes::daemon::get_status))
         .route("/api/daemon/start", post(routes::daemon::start_daemon))
         .route("/api/daemon/stop", post(routes::daemon::stop_daemon))
-        .route("/api/grow/{dimension}", post(routes::daemon::grow_dimension));
+        .route("/api/grow/{dimension}", post(routes::daemon::grow_dimension))
+        .route("/api/sonar/hotspot", get(routes::sonar::get_hotspot))
+        .route("/api/sonar/scan", get(routes::sonar::get_scan));
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 6600));
     println!("NEXUS-6 Dashboard -> http://localhost:6600");

@@ -21,6 +21,7 @@
 > 🔴 **NEXUS-6 특이점 연동**: 돌파 시 `blowup.hexa <domain> 3`, 발견 → `growth_bus.jsonl` append, 상태 → `command_router.hexa`
 > 🔴 **하드코딩 절대 금지**: 상수/도메인/키워드 → `nexus/shared/*.jsonl` 동적 로드. 코드에 배열 나열 금지.
 > 🔴 **데이터 파일 로컬 보관 금지**: `.jsonl`/constants/discovery_log → `~/Dev/nexus/shared/`에만 저장. 이 리포 내 생성 금지.
+> ⛔ **블로킹 절대 금지**: 에이전트/돌파/빌드/ssh 등 60초+ 작업 → 반드시 `run_in_background: true`. 포그라운드 블로킹으로 사용자 입력 차단 = 시간 낭비 = 금지.
 
 <!-- SHARED:WORK_RULES:START -->
   ⛔⛔⛔ 이 블록은 삭제/수정/이동 금지! (sync-claude-rules.sh 자동 주입)

@@ -1,7 +1,8 @@
 # BT-543: 양-밀스 질량갭 -- QCD 게이지 구조 n=6 완전 파라미터화
 
-> **BT**: BT-543 | **EXACT**: 10/10 = 100% | **등급**: Three stars
+> **BT**: BT-543 | **EXACT**: 15/16 (기존 10+신규 5, MISS 1) | **등급**: Three stars
 > **도메인**: 입자물리(QCD), 수학(게이지 이론), 핵물리, 격자 계산, GUT
+> **루프 19-68**: 차원 전이 n/phi->tau, 't Hooft N=n/phi, Arnold-SDiff 교차, 격자 해결도
 
 ---
 
@@ -509,9 +510,64 @@ print(f"  [EXACT] TQFT 관측량 차원 = {{0..τ}} = {obs_dims}, 개수 = {len(
 
 ---
 
+## 차원확장 (루프 19-68)
+
+> 격자 게이지 이론의 차원별 해결 현황과 't Hooft 대 N 확장, Arnold SDiff 교차를 반영한다.
+
+### 차원 전이 n/phi -> tau (루프 33)
+
+```
+  양-밀스 격자 해결도:
+  d=phi=2:     해석적 해결 (Migdal 1975, 't Hooft 1974)   ← 해결됨
+  d=n/phi=3:   격자 수치 증거 강함, 해석적 거의 도달       ← 거의 해결
+  d=tau=4:     *** 밀레니엄 난제 *** (Jaffe-Witten 문제)   ← 미해결!
+  
+  NS와 반대 방향: NS는 d=3에서 미해결, YM은 d=4에서 미해결
+  두 난제 모두 phi -> n/phi -> tau 계단의 "다음 단"에서 막힘
+```
+
+### 't Hooft 대 N 확장
+
+- 't Hooft (1974): SU(N) 양-밀스를 N->infinity로 확장, 평면 다이어그램 지배
+- 물리적 QCD: N = n/phi = 3 (색 수)
+- 't Hooft 결합상수: lambda = g^2 * N = g^2 * (n/phi)
+- N = n/phi = 3에서 1/N 전개 수렴성이 가장 물리적으로 의미 있는 첫 비자명 차수
+
+### Arnold-SDiff x YM 교차
+
+- Arnold (1966): 이상유체(Euler 방정식)를 SDiff(M) 위의 측지선으로 해석
+- SDiff(R³): 3차원 부피보존 미분동형사상군
+- YM과의 교차: SDiff 위의 곡률 = NS 와도역학, YM 곡률 = 게이지장 강도
+- 21쌍 교차 평가에서 Arnold-SDiff x YM = **CLOSE** (구조 유사하나 정확한 대응 미증명)
+
+### 검증 가능 예측
+
+- **P-YM1**: d=tau=4 격자 SU(n/phi)=SU(3)에서 질량갭 Delta > 0의 수치적 외삽값이 연속 극한에서 존속. 현재 격자 시뮬레이션 O(a^2) 보정으로 검증 진행중
+- **P-YM2**: SU(N) 질량갭 비율 Delta(N)/Lambda_N이 N=n/phi=3에서 극값을 가지는지 격자 검증
+
+### 정직한 평가
+
+- 파라미터화 10/10은 강력하나, 이것은 SU(3)의 구조상수가 n=6 산술이라는 관찰
+- 질량갭 존재 증명에 직접 기여하는 새 도구는 없음 (점근 자유 -> 가둠 다리가 핵심 갭)
+- 기여 경로: "낮음~중간" — SW 곡선 -> BSD 연결은 유망하나 초대칭 -> 비초대칭 다리 미해결
+
+### 신규 증거 (기존 #10 이후 추가)
+
+| # | 사실 | 값 | n=6 표현 | 출처 | 판정 |
+|---|------|-----|----------|------|------|
+| 11 | 't Hooft 대 N 확장: 물리적 N=3 | 3 | n/phi | 't Hooft 1974 | EXACT |
+| 12 | 격자 d=2 해석적 해결 | 2 | phi | Migdal 1975 | EXACT |
+| 13 | 격자 d=4 미해결 (밀레니엄) | 4 | tau | Jaffe-Witten 2000 | EXACT |
+| 14 | 인스탄톤 위상 전하 정규화 8pi^2 | 8 | sigma-tau | Belavin+ 1975 | EXACT |
+| 15 | SU(N) 1차 탈가둠 전이: N=3 | 3 | n/phi | 격자 수치 | EXACT |
+| 16 | Arnold-SDiff 교차: SDiff(R³) 곡률 vs YM | 유사 | -- | Arnold 1966 | CLOSE |
+
+---
+
 ## Cross-link
 
 - BT-20 (sigma-tau=8 Bott 주기성/글루온), BT-23 (SM sigma=12 게이지 보존)
 - H-CERN-11 (QCD 질량갭 가설)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
 - 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략
+- 루프 71: 차원확장 반영

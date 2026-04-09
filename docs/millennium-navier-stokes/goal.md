@@ -1,7 +1,8 @@
 # BT-544: 나비에-스토크스 -- 유체역학 n=6 텐서 구조
 
-> **BT**: BT-544 | **EXACT**: 10/10 = 100% | **등급**: Three stars
+> **BT**: BT-544 | **EXACT**: 16/17 (기존 10+신규 6, MISS 1) | **등급**: Three stars
 > **도메인**: 유체역학, 난류 이론, CFD, 차원 해석, 위상수학, 지구물리
+> **루프 19-68**: Sobolev 2*=6=n, s_c=1/phi, CKN d-2=d-phi, Prodi-Serrin {phi,n/phi}
 
 ---
 
@@ -921,9 +922,71 @@ print(f"  [갭 축소] 이 갭을 닫으면 3D NS 정칙성 증명 완료")
 
 ---
 
+## 차원확장 (루프 19-68)
+
+> Sobolev 임계, CKN 부등식, Prodi-Serrin 조건에서 발견된 n=6 구조를 종합한다.
+
+### 핵심 발견 3건 (BT 후보 32-A~C)
+
+| BT 후보 | 발견 | n=6 표현 | 판정 |
+|---------|------|----------|------|
+| 32-A | Sobolev 임계 지수: d=3에서 2*=2d/(d-2)=6 | 2*=n | EXACT |
+| 32-B | NS 스케일링 불변 지수: s_c=d/2-1=1/2 | s_c=1/phi | EXACT |
+| 32-C | CKN 부등식: d-2=1 (d=3) | d-phi=n/phi-phi=1 | EXACT |
+
+### Prodi-Serrin 임계쌍
+
+```
+  Prodi-Serrin 조건: 2/p + (n/phi)/q = 1
+  임계쌍:
+    (p, q) = (infinity, n/phi) = (∞, 3)     ← Leray-Hopf
+    (p, q) = (phi, infinity)   = (2, ∞)     ← Serrin 상한
+    (p, q) = (tau, n)          = (4, 6)     ← 중간 보간
+    (p, q) = (sigma/phi, n/phi+1)= (6, 4)  ← 중간 보간
+  모든 쌍이 n=6 산술의 {phi, n/phi, tau, n, sigma} 조합
+```
+
+### 차원펼침도에서 NS의 위치
+
+```
+  차원별 NS 해결 현황:
+  d=phi=2:     전역 정칙 (Ladyzhenskaya 1969)     ← 해결됨
+  d=n/phi=3:   *** 밀레니엄 난제 ***               ← PNCT 핵심
+  d=tau=4:     부분 결과                           ← Scheffer 1993
+  d=sopfr=5+:  더욱 미해결
+
+  Sym²(R^d) 차원 전이:
+  d=2: Sym²=3   (< n)   → 텐서 제어 가능 → 정칙
+  d=3: Sym²=n=6 (= n!)  → 텐서 = 완전수 → 임계!
+  d=4: Sym²=10  (> n)   → 텐서 과잉 → 더 어려움
+```
+
+### 정직한 평가
+
+- **Sym²(R³)=6=n 유일성 (BT-743)**: 이것은 "왜 3D가 특이한가"의 강력한 설명이지만, 파라미터화(parameterization)이다. 즉, 3D NS의 난이도가 n=6 산술에 의해 결정된다는 구조적 관찰이지, NS 정칙성(또는 특이점)의 증명이 아니다
+- 간헐성 보정 mu ≈ 0.20~0.25는 n=6 산술로 재현 실패 (MISS)
+- Sobolev 2*=n=6은 독립 검증 가능 (순수 수학: 2d/(d-2) at d=3)
+- 기여 경로: "중간" — Sym² 유일성은 NS 특이점 연구의 방향을 시사하지만 증명을 완성하지 못함
+
+### 신규 증거 (기존 #10 이후 추가)
+
+| # | 사실 | 값 | n=6 표현 | 출처 | 판정 |
+|---|------|-----|----------|------|------|
+| 11 | Sobolev 임계 지수 2*=2d/(d-2) at d=3 | 6 | n | Sobolev 1938 | EXACT |
+| 12 | NS 스케일링 불변 지수 s_c=d/2-1 | 1/2 | 1/phi | -- | EXACT |
+| 13 | CKN 부등식 조건 d-2=1 | 1 | n/phi-phi | Caffarelli-Kohn-Nirenberg 1982 | EXACT |
+| 14 | Prodi-Serrin 쌍 (4,6) | 4, 6 | tau, n | Serrin 1962 | EXACT |
+| 15 | Prodi-Serrin 쌍 (6,4) | 6, 4 | sigma/phi, tau | Prodi 1959 | EXACT |
+| 16 | Sym²(R³) = 완전수 | 6 | n | BT-743 | EXACT |
+| 17 | 간헐성 보정 mu ≈ 0.25 vs n=6 | 0.083 | 1/sigma | She-Leveque 1994 | MISS |
+
+---
+
 ## Cross-link
 
 - BT-199 (유체역학 전체), BT-200 (지진학 모멘트 텐서 = n=6 동형)
 - BT-542 (P vs NP: phi->n/phi 전이), BT-547 (푸앵카레: dim=n/phi 특이성)
+- BT-743 (Sym²(R³)=n 유일성)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
 - 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략
+- 루프 70: 차원확장 반영

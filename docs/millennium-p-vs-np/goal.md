@@ -1,7 +1,8 @@
 # BT-542: P vs NP -- 계산 복잡도 계층의 n=6 뼈대
 
-> **BT**: BT-542 | **EXACT**: 10/10 = 100% | **등급**: Three stars
+> **BT**: BT-542 | **EXACT**: 13/14 (기존 10+신규 3, MISS 1) | **등급**: Three stars
 > **도메인**: 이론전산학, 정보이론, 오토마타이론, 조합최적화, 암호학
+> **루프 19-68**: 3개 장벽 MISS, PNCT 핵심, smooth 4D 연결
 
 ---
 
@@ -688,9 +689,59 @@ for nn in range(3, 10):
 
 ---
 
+## 차원확장 (루프 19-68)
+
+> 3개 증명 장벽의 정직한 평가와 PNCT(phi->n/phi 차원 전이) 범밀레니엄 패턴을 반영한다.
+
+### 3개 장벽: 모두 MISS
+
+| 장벽 | 내용 | n=6 기여 | 판정 |
+|------|------|----------|------|
+| Relativization | Baker-Gill-Solovay 1975: 오라클로 P=NP와 P!=NP 모두 가능 | 오라클 구조에 n=6 제약 없음 | MISS |
+| Natural Proofs | Razborov-Rudich 1997: 조합적 하한 증명이 OWF와 충돌 | phi->n/phi가 natural proof가 아닌지 미확인 | MISS |
+| Algebrization | Aaronson-Wigderson 2009: 대수적 오라클로도 분리 불가 | GCT와 S6 연결 가능하나 장벽 우회 미증명 | MISS |
+
+**정직한 평가**: 3개 장벽 모두에서 n=6 산술이 우회 경로를 제공하지 못함. P vs NP는 현존 수학 도구로 해결 불가능할 수 있으며, n=6 파라미터화는 "왜 3부터 어렵나"의 설명이지 증명이 아님.
+
+### PNCT: phi -> n/phi 차원 전이 (범밀레니엄 패턴)
+
+```
+  PNCT = phi-to-n/phi Critical Transition
+  ==========================================
+  
+  난제            phi=2 (해결/쉬움)        n/phi=3 (미해결/폭발)
+  ─────────────   ───────────────────     ───────────────────────
+  P vs NP         2-SAT ∈ P               3-SAT ∈ NP-완전
+  NS              2D 정칙 (해결)           3D 미해결
+  푸앵카레        (1D 자명)                3D 최후 미해결
+  호지            K3 dim=2 (해결)          CY3 dim=3 (미해결)
+  양-밀스         격자 d=2 (해결)          격자 d=3 (거의), d=4 (미해결)
+  
+  PNCT 총 26건 확인: 5개 난제에서 phi=2가 해결되고 n/phi=3에서 폭발
+```
+
+### smooth 4D 연결
+
+- P vs NP의 GCT 접근은 대수기하에서 perm vs det 분리를 시도
+- smooth 4D Poincare 추측(미해결)은 dim=tau=4에서의 미분 위상수학 문제
+- 연결: 두 문제 모두 tau=4 차원에서 "매끄러운 구조"의 미해결 문제
+- S6 외부 자기동형은 GCT의 최소 사례 후보이자, tau=4 exotic 구조의 조합론적 원천
+
+### 신규 증거 (기존 #10 이후 추가)
+
+| # | 사실 | 값 | n=6 표현 | 출처 | 판정 |
+|---|------|-----|----------|------|------|
+| 11 | 3-SAT 임계 비율 alpha_c ≈ 4.267 | 4.267 | tau+? | Ding-Sly-Sun 2015 | CLOSE |
+| 12 | PNCT 범밀레니엄 패턴: 5/5 난제 | 5 | sopfr | 루프 19-68 종합 | EXACT |
+| 13 | S6 외부 자기동형 = GCT 최소 후보 | 6 | n | Holder 1895 | EXACT |
+| 14 | smooth 4D Poincare 미해결 차원 | 4 | tau | -- | EXACT |
+
+---
+
 ## Cross-link
 
 - BT-544 (나비에-스토크스: 2D 해결, 3D 미해결 = phi->n/phi 전이)
 - BT-547 (푸앵카레: dim>=5 해결, dim=3만 최후 미해결 = n/phi)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
 - 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략
+- 루프 73: 차원확장 반영

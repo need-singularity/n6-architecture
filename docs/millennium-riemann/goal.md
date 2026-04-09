@@ -1412,9 +1412,57 @@ print("=" * 65)
 
 ---
 
+## 차원확장 (루프 19-68)
+
+> 50차 루프에 걸쳐 축적된 교차 발견과 정직한 재평가를 반영한다.
+
+### 차원펼침도에서 RH의 위치
+
+```
+  GL 계층 차원 전개:
+  d=1  GL(1) ── ζ(s), 디리클레 L-함수   ← 리만 가설 (여기)
+  d=2  GL(2) ── 모듈러 형식, 타원곡선    ← BSD (BT-546)
+  d=3  GL(3) ── 대칭제곱 L-함수
+  ...
+  d=6  GL(6) ── sym⁵ L-함수 (degree n=6)  ← P-RH1 예측 대상
+```
+
+RH는 GL(1) 차원에 위치하며, Langlands 프로그램의 가장 바닥 층이다.
+sym⁵ 리프트(degree 6=n)가 GL(n) 꼭대기에 도달하는 것은 Selberg 급수 최대 차수 대응.
+
+### 루프 29-31 핵심 발견 요약
+
+| 루프 | 발견 | 판정 |
+|------|------|------|
+| 29 | Selberg degree 1~6 = GL(1)~GL(n) 대응 | EXACT |
+| 30 | dBN Lambda <= 1/phi = Sobolev s_c (RH x NS 교차) | EXACT |
+| 31 | Prodi-Serrin {phi, n/phi} 임계쌍 | EXACT |
+| 31 | Mertens 상수 M = 0.2615... = n=6 비율? | MISS |
+
+### 루프 60 정직한 평가
+
+- **기여 경로 판정: "낮음"**
+- 파라미터화 7/7 (모든 ζ 특수값이 n=6 산술), 증명 기여 0/6 (어떤 경로도 RH 증명에 도달하지 못함)
+- n=6 산술은 ζ의 "왜"에 대한 해석을 제공하지만, "모든 영점이 임계선 위"라는 진술을 증명하는 데 필요한 해석학적 도구(GUE 상관, 드 브랑주 양의 정부호성)를 대체하지 못함
+- 가장 유망한 기여 방향: P-RH1 (sym⁵ degree 6 검증) — 수치적 검증 가능
+
+### 검증 가능 예측
+
+- **P-RH1**: sym⁵ L-함수의 Selberg degree = n = 6. 현재 sym⁴(degree 5=sopfr)까지 증명됨 (Kim-Shahidi 2002). sym⁵가 증명되면 degree 6=n 완성
+- **P-RH2**: dBN Lambda 상한 1/phi = 0.5와 Rodgers-Tao(2020) Lambda >= 0의 사이에서 실제값 위치 실험적 검증
+
+### 누적 증거 현황
+
+기존 12/12 EXACT + 신규 비자명 6건 = **18/19 EXACT (1 MISS)**
+MISS 1건 = Mertens 상수 (n=6 산술 비율과 불일치, 정직한 MISS)
+
+---
+
 ## Cross-link
 
 - BT-16 (제타 삼각편대), BT-109 (바젤 문제), BT-207 (베르누이-Von Staudt)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
 - 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략
 - 루프 29-31: Selberg degree + RH×NS 교차 + 신규 증거 (본 섹션)
+- 루프 60: 정직한 재평가 (기여 경로 "낮음")
+- 루프 69: 차원확장 반영
