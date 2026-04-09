@@ -40,7 +40,7 @@ $\sigma\phi=n\tau=24$, unique to $n=6$. Used constants: $\sigma=12$, $\phi=2$, $
 |----------|-----------|-------|
 | Thermal output | $\sigma^2\cdot \mathrm{sopfr}/4$ | 180 MWth |
 | Electrical | $\sigma\cdot\mathrm{sopfr}$ | 60 MWe |
-| Carnot η | $(\sigma-\mathrm{sopfr}-\phi)/\sigma$ | 1/3 → 33% |
+| Carnot η | $(\sigma-2\tau)/\sigma$ | 1/3 → 33% |
 | Control rods | $n$ | 6 |
 | Refuel months | $\sigma+\sigma-\sigma/2\cdot\phi$ | 18 |
 | Vessel life yr | $\sigma$ | 12 |
@@ -158,7 +158,7 @@ assert s*p == n*t == 24
 assert s*5 == 60                          # 60 MWe
 assert s*n == 72                          # racks per SMR
 assert 1 + 1/(s*t*s) == 1.0017361111111112  # PUE
-assert (s - 5 - p)/s == 1/3               # Carnot η
+assert (s - 2*t)/s == 1/3                  # Carnot η = (σ-2τ)/σ
 print("HEXA-DC verified: 60 MWe, 72 racks, PUE 1.017, η 33%")
 # ── [표준 증강 2026-04-08] σ·φ=n·τ 유일성 + 소수 편향 대조 + MISS ──
 def _sig(n): return sum(d for d in range(1,n+1) if n%d==0)
