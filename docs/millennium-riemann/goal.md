@@ -863,3 +863,4 @@ print(f"  [평가] 증명 갭: 대칭축 존재 → 영점 위치 제약")
 
 - BT-16 (제타 삼각편대), BT-109 (바젤 문제), BT-207 (베르누이-Von Staudt)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
+- 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략

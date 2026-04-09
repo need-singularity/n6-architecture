@@ -783,3 +783,4 @@ print(f"  [P2] 미해결 소수: p ∈ {{{phi}, {n_over_phi}}} = {{φ, n/φ}} = 
 - BT-207 (모듈러 형식 12/12 EXACT), BT-109 (ζ-베르누이)
 - BT-545 (호지: K3 J_2=24, 모듈러 형식 동일 가중치 구조)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
+- 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략

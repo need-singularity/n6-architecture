@@ -633,3 +633,4 @@ for nn in range(3, 10):
 - BT-544 (나비에-스토크스: 2D 해결, 3D 미해결 = phi->n/phi 전이)
 - BT-547 (푸앵카레: dim>=5 해결, dim=3만 최후 미해결 = n/phi)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
+- 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략

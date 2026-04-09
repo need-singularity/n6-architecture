@@ -753,3 +753,4 @@ print(f"  [P1] Lefschetz (1,1) → K3에서 호지 추측 성립!")
 - BT-6 (Golay-Leech J_2=24), BT-207 (모듈러 형식 12/12 EXACT)
 - BT-546 (BSD: j=sigma^3, 타원곡선 모듈러 연결)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
+- 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략

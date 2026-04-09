@@ -503,3 +503,4 @@ print(f"  [EXACT] TQFT 관측량 차원 = {{0..τ}} = {obs_dims}, 개수 = {len(
 - BT-20 (sigma-tau=8 Bott 주기성/글루온), BT-23 (SM sigma=12 게이지 보존)
 - H-CERN-11 (QCD 질량갭 가설)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
+- 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략

@@ -465,3 +465,4 @@ print(f"\n  [발견] 7/7 밀레니엄 난제에서 φ→n/φ 전이 확인!")
 - BT-20 (sigma-tau=8 Bott 주기성), BT-6 (J_2=24 Leech 호모토피)
 - BT-542 (P vs NP: phi->n/phi 전이), BT-544 (NS: 2D->3D 전이)
 - 밀레니엄 종합: `docs/breakthrough-theorems.md` BT-541~547
+- 교차 증명 전략: [통합 논문](docs/paper/n6-millennium-problems-paper.md) § 교차 증명 전략
