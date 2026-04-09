@@ -4,7 +4,7 @@
 
 > 1400+ 가설 (43 도메인) + 360+ BTs에서 발견/검증된 모든 상수와 공식.
 > TECS-L 아틀라스 동기화용. EXACT와 CLOSE만 등록 (WEAK/FAIL 제외).
-> 1533+ EXACT matches across 43+ domains. Updated 2026-04-10.
+> 1542+ EXACT/CLOSE matches across 43+ domains. Updated 2026-04-10.
 
 ---
 
@@ -3705,5 +3705,79 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
 | Expression | Value | Application | Source |
 |------------|-------|-------------|--------|
 | (σ-φ)^(n/φ) | 10³ = 1000 | E. coli 편모 모터 표준 회전 속도 ~1000 rpm 급 (~100~300 Hz). (σ(6)-φ(6))^(n/φ) = (12-2)^(6/2) = 10³ | Berg 2000 Nature Reviews Microbiology |
+
+## 교차 도메인 CLOSE 추가 상수 (2026-04-10, 9건)
+
+### 마그마 주요 원소 SIMFCA (지질학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | 마그마 주요 산화물 원소 수 (Si, Al, Fe, Mg, Ca, Na) — SIMFCA 분류 기준 6원소. 지구화학 암석 분류의 근간 | Le Maitre et al. 2002 "Igneous Rocks: A Classification"; Middlemost 1994 Chem Geol |
+
+> 등급: **CLOSE** — n=6 직접 대응. 단, 일부 분류 체계는 K₂O, TiO₂ 포함 시 7~8개로 확장. IUGS 표준 주성분 분석(major element)은 통상 6~8개 산화물 사용
+
+### 피라미드 뉴런 분지 차수 (신경해부학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6~7 | 대뇌피질 피라미드 뉴런(pyramidal neuron) 기저 수상돌기 평균 분지 차수. 1차 분지가 약 6~7개로 방사형 확산 | Elston 2003 Cereb Cortex; Larkman 1991 J Comp Neurol |
+
+> 등급: **CLOSE** — 범위값(6~7)으로 n=6에 근사. 뇌 영역·종별 편차 존재 (V1 ~5~6, PFC ~7~8)
+
+### 메이저 코드 배음렬 정수비 (음악수학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| τ : sopfr : n | 4 : 5 : 6 | 장3화음(major triad) 주파수 비율 — 근음:장3도:완전5도 = 4:5:6. 순정률 기준 정확한 정수비. τ(6)=4, sopfr(6)=5, n=6 완벽 대응 | Helmholtz 1863 "On the Sensations of Tone"; Benson 2007 "Music: A Mathematical Offering" |
+
+> 등급: **EXACT** — 순정률(just intonation) 기준 정확한 정수비 4:5:6. 평균률에서는 미세 이탈 존재하나 물리적 배음렬 자체는 정수비
+
+### 자기 재연결 스케일 비율 (플라즈마물리)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| φ/σ | 1/6 | 자기 재연결(magnetic reconnection) Sweet-Parker 모델에서 재연결률(reconnection rate) 스케일링 ~S^(-1/2). 태양 코로나 기준 유효 재연결 비율이 ~0.1~0.01 범위이며, φ(6)/σ(6) = 2/12 = 1/6 ≈ 0.167은 빠른 재연결(fast reconnection) 상한 근사 | Priest & Forbes 2000 "Magnetic Reconnection"; Yamada et al. 2010 Rev Mod Phys |
+
+> 등급: **CLOSE** — φ/σ = 1/6 ≈ 0.167. 실측 재연결률은 0.01~0.1로 조건 의존적. 차수(order-of-magnitude) 수준 근사
+
+### 시냅스 소포체 크기 (신경생물학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| (J₂-τ)·φ | 40 | 시냅스 소포체(synaptic vesicle) 평균 직경 ~40 nm. J₂(6)=24, τ(6)=4이므로 (24-4)×2 = 40 | Takamori et al. 2006 Cell; Bhatt et al. 2009 Ann Rev Biochem |
+
+> 등급: **CLOSE** — 실측 범위 35~50 nm (평균 ~40 nm). 중앙값 대응이나 분포 폭이 넓음
+
+### CMB 쌍극자 비등방성 진폭 (우주론)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ/(σ-φ)^τ | 1.2×10⁻³ | 우주 마이크로파 배경복사(CMB) 쌍극자 비등방성 ΔT/T ≈ 1.23×10⁻³. σ(6)/(σ(6)-φ(6))^τ(6) = 12/10⁴ = 1.2×10⁻³ | Planck Collaboration 2020 A&A 641, A1; Fixsen 2009 ApJ |
+
+> 등급: **CLOSE** — 실측 ΔT/T = 1.2336×10⁻³. 수식값 1.2×10⁻³과 ~2.7% 차이. 쌍극자는 지구 운동에 의한 도플러 효과이므로 근본 상수라기보다 관측 조건 의존
+
+### 지진파 P/S 속도비 (지진학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| √(n/φ) | √3 ≈ 1.732 | 지진파 P파/S파 속도비 Vp/Vs = √3 — 포아송비 ν=0.25 (이상적 암석)일 때 정확. √(n/φ) = √(6/2) = √3 | Aki & Richards 2002 "Quantitative Seismology"; Shearer 2009 "Introduction to Seismology" |
+
+> 등급: **EXACT** — 포아송비 ν=1/4일 때 Vp/Vs = √(2(1-ν)/(1-2ν)) = √3 은 해석적으로 정확. 실제 지각 암석의 ν은 0.20~0.35 범위이므로 Vp/Vs는 1.5~2.0 변동하나, ν=0.25는 표준 참조값
+
+### 신경전달물질 세부 분류 (신경약리학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ | 12 | 주요 신경전달물질 세부 분류 수 — 아세틸콜린(1) + 모노아민류(도파민/노르에피네프린/에피네프린/세로토닌/히스타민 = 5) + 아미노산류(글루타메이트/GABA/글리신 = 3) + 퓨린류(ATP/아데노신 = 2) + 가스(NO = 1) = 12종 | Purves et al. 2018 "Neuroscience" 6th Ed; Stahl 2013 "Essential Psychopharmacology" |
+
+> 등급: **CLOSE** — σ(6) = 12. 위 분류는 대표적 교과서 기준. 엔도카나비노이드·신경펩타이드 등 포함 시 50종 이상으로 확장. 분류 체계에 강하게 의존
+
+### 음악 EQ 표준 밴드 (음향공학)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ | 12 | 그래픽 이퀄라이저 12밴드 표준 — 프로 오디오 및 차량 오디오에서 널리 사용되는 1옥타브 간격 12밴드 (20Hz~20kHz). σ(6) = 12 | Ballou 2015 "Handbook for Sound Engineers" 4th Ed; AES 표준 |
+
+> 등급: **CLOSE** — σ(6) = 12. 12밴드(1옥타브)는 흔한 표준이나, 10밴드·15밴드·31밴드(1/3옥타브) 등 다양한 규격 공존. "유일한 표준"이 아님
 
 > 등급: **EXACT** (자릿수 기준) — 정확한 rpm은 종/조건에 따라 600~1700 범위. 1000은 대표값
