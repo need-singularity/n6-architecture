@@ -1,8 +1,8 @@
 # BT-543: 양-밀스 질량갭 -- QCD 게이지 구조 n=6 완전 파라미터화
 
-> **BT**: BT-543 | **EXACT**: 15/16 (기존 10+신규 5, MISS 1) | **등급**: Three stars
+> **BT**: BT-543 | **EXACT**: 16/17 (기존 15+신규 1, CLOSE 1) | **등급**: Three stars
 > **도메인**: 입자물리(QCD), 수학(게이지 이론), 핵물리, 격자 계산, GUT
-> **루프 19-68**: 차원 전이 n/phi->tau, 't Hooft N=n/phi, Arnold-SDiff 교차, 격자 해결도
+> **루프 19-68+파동**: 차원 전이 n/phi->tau, 't Hooft N=n/phi, Arnold-SDiff CLOSE 유지, F_μν 시공 성분 C(tau,2)=n EXACT 신규
 
 ---
 
@@ -533,12 +533,44 @@ print(f"  [EXACT] TQFT 관측량 차원 = {{0..τ}} = {obs_dims}, 개수 = {len(
 - 't Hooft 결합상수: lambda = g^2 * N = g^2 * (n/phi)
 - N = n/phi = 3에서 1/N 전개 수렴성이 가장 물리적으로 의미 있는 첫 비자명 차수
 
-### Arnold-SDiff x YM 교차
+### Arnold-SDiff x YM 교차 (돌파 시도)
 
 - Arnold (1966): 이상유체(Euler 방정식)를 SDiff(M) 위의 측지선으로 해석
 - SDiff(R³): 3차원 부피보존 미분동형사상군
 - YM과의 교차: SDiff 위의 곡률 = NS 와도역학, YM 곡률 = 게이지장 강도
-- 21쌍 교차 평가에서 Arnold-SDiff x YM = **CLOSE** (구조 유사하나 정확한 대응 미증명)
+
+**Hoppe 정규화 (1982) 경유 n=6 정밀화**:
+
+1. **Hoppe (1982)**: 막(membrane) 양자화에서 SDiff(S²) = lim_{N→∞} SU(N)
+   - SU(N)이 SDiff(S²)의 행렬 정규화(matrix regularization)임을 증명
+   - 즉, SU(n/φ) = SU(3)은 SDiff(S²)의 **N=n/φ=3 절단(truncation)**
+
+2. **구조 대응**:
+   - SDiff(R³): Lie 괄호 [v,w] = curl(v×w), 레비-치비타 ε_{ijk} 사용 (i,j,k = 1..n/φ)
+   - SU(n/φ): Lie 괄호 [T_a, T_b] = if_{abc}T_c, 구조상수 f_{abc} (a,b,c = 1..σ-τ=8)
+   - 공통 구조: 두 대수 모두 반대칭 3-텐서로 정의, 공간 차원 = 내부 색 수 = n/φ = 3
+
+3. **SU(2)×SU(3) = SU(φ)×SU(n/φ) 전기약-강력 구조**:
+   - SU(φ)=SU(2): SDiff(S²)의 N=φ=2 절단 → 전기약 게이지 군
+   - SU(n/φ)=SU(3): SDiff(S²)의 N=n/φ=3 절단 → 색 게이지 군 (QCD)
+   - 총 생성원: (φ²-1) + ((n/φ)²-1) + 1 = 3 + 8 + 1 = σ = 12
+
+4. **정량적 n=6 대응 (신규)**:
+   - SDiff(S²)의 N-절단에서 대수 차원 = N²-1
+   - N=n/φ=3: dim(su(3)) = (n/φ)²-1 = 8 = σ-τ ← EXACT
+   - N=φ=2: dim(su(2)) = φ²-1 = 3 = n/φ ← EXACT
+   - Arnold 와도 방정식 ∂ω/∂t + {ω, ψ} = 0 의 포아송 괄호 {,}는
+     SDiff(S²)의 Lie 괄호이며, SU(N→∞) 교환자의 고전 극한
+
+5. **판정 근거**: Hoppe 정규화가 SDiff → SU(N) 대응을 수학적으로 확립했고,
+   N=n/φ=3이 QCD 색 군과 정확히 일치한다. 그러나:
+   - Hoppe 정규화는 S²에서 정의 (Arnold의 R³가 아님)
+   - N=3은 N→∞ 극한과 거리가 있어, 절단의 물리적 의미에 논란 가능
+   - SDiff ↔ YM의 **동역학적** 대응(해의 대응)은 미확립
+   - ∴ 구조적 대응은 EXACT 수준이나, 동역학적 완전 대응은 미증명 → **CLOSE** (강화)
+
+- 기존 21쌍 교차 평가: Arnold-SDiff x YM = **CLOSE**
+- 돌파 시도 결과: Hoppe 정규화로 대수적 대응 정밀화, 그러나 동역학 갭 잔존 → **CLOSE** 유지 (MISS→CLOSE 승격 불가: 기존 이미 CLOSE)
 
 ### 검증 가능 예측
 
@@ -560,7 +592,8 @@ print(f"  [EXACT] TQFT 관측량 차원 = {{0..τ}} = {obs_dims}, 개수 = {len(
 | 13 | 격자 d=4 미해결 (밀레니엄) | 4 | tau | Jaffe-Witten 2000 | EXACT |
 | 14 | 인스탄톤 위상 전하 정규화 8pi^2 | 8 | sigma-tau | Belavin+ 1975 | EXACT |
 | 15 | SU(N) 1차 탈가둠 전이: N=3 | 3 | n/phi | 격자 수치 | EXACT |
-| 16 | Arnold-SDiff 교차: SDiff(R³) 곡률 vs YM | 유사 | -- | Arnold 1966 | CLOSE |
+| 16 | Arnold-SDiff 교차: SU(n/φ) = SDiff(S²)의 N=3 절단 (Hoppe 1982) | N=3 | n/φ | Arnold 1966 + Hoppe 1982 | CLOSE |
+| 17 | YM 장강도 F_μν 시공 독립 성분 C(tau,2) | 6 | n = C(4,2) | Peskin-Schroeder, 표준 QFT | EXACT |
 
 ---
 
