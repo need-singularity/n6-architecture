@@ -7,11 +7,11 @@
 🔴 L0 (불변식 — 코드 수정 전 유저 명시 승인 필수):
   config/products.json              — 완성제품 SSOT
   docs/theorem-r1-uniqueness.md     — 핵심 정리 증명 σφ=nτ⟺n=6
-  docs/atlas-constants.md           — 상수 레지스트리 1100+
   docs/breakthrough-theorems.md     — BT-1~343 돌파 정리
   tools/nexus/src/telescope/lenses/ — NEXUS-6 렌즈 181개
 
 🟡 L1 (보호 — 리뷰 필요):
+  docs/atlas-constants.md           — 상수 레지스트리 1100+
   scripts/sync_products_readme.py   — products→README 동기화
   docs/dse-map.toml                 — DSE 전체 현황 지도
   docs/testable-predictions.md      — 검증 가능 예측 45건
