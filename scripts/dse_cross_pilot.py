@@ -25,9 +25,96 @@ from collections import defaultdict
 
 ROOT = Path("/Users/ghost/Dev/n6-architecture")
 TOML = ROOT / "docs/dse-map.toml"
+BT_MD = ROOT / "docs/breakthrough-theorems.md"
 OUT  = Path(os.path.expanduser("~/Dev/nexus/shared/dse_cross"))
 OUT.mkdir(parents=True, exist_ok=True)
 MD_OUT = ROOT / "docs/dse-cross-resonance.md"
+
+# ── BT 파싱: BT-id → (공유상수, 텍스트) ────────────────────────────
+# docs/breakthrough-theorems.md 에서 BT 엔트리 추출.
+# 공유상수: σ/τ/φ/J₂ 키워드 스캔 (헤더+본문), 복수 시 " "로 연결.
+def parse_bt_entries():
+    """BT-id → {'constants': 'σ,τ', 'text': '...', 'domains_text': '...'} 반환"""
+    entries = {}
+    if not BT_MD.exists():
+        return entries
+    txt = BT_MD.read_text(encoding="utf-8", errors="ignore")
+    # ── (A) 요약 테이블 행:  | **BT-N** | name | ... | domains | grade |
+    for m in re.finditer(r'\|\s*\*\*BT-(\d+)\*\*\s*\|([^\n]+)', txt):
+        bt_id = int(m.group(1))
+        row = m.group(2)
+        entries.setdefault(bt_id, {"text": "", "domains_text": ""})
+        entries[bt_id]["text"] += " " + row
+        entries[bt_id]["domains_text"] += " " + row
+    # ── (B) 헤더 섹션: ## BT-N: ...   다음 헤더 전까지 본문
+    headers = list(re.finditer(r'^## BT-(\d+)[:\s][^\n]*$', txt, re.MULTILINE))
+    for i, h in enumerate(headers):
+        bt_id = int(h.group(1))
+        start = h.start()
+        end = headers[i+1].start() if i+1 < len(headers) else len(txt)
+        body = txt[start:end]
+        entries.setdefault(bt_id, {"text": "", "domains_text": ""})
+        entries[bt_id]["text"] += " " + body
+        entries[bt_id]["domains_text"] += " " + body
+    # 공유상수 추출
+    for bt_id, e in entries.items():
+        t = e["text"]
+        consts = []
+        if re.search(r'σ|sigma\b|σ\(6\)|σ=12', t, re.IGNORECASE): consts.append("σ")
+        if re.search(r'τ|tau\b|τ\(6\)|τ=4', t, re.IGNORECASE): consts.append("τ")
+        if re.search(r'φ|phi\b|φ\(6\)|φ=2', t, re.IGNORECASE): consts.append("φ")
+        if re.search(r'J[_₂2]|J\(6\)|J₂=24|J_2', t): consts.append("J₂")
+        e["constants"] = ",".join(consts) if consts else "-"
+    return entries
+
+BT_ENTRIES = parse_bt_entries()
+
+# 도메인 슬러그 → BT 도메인 텍스트 매칭용 키워드 맵
+# dse-map 도메인명(예: chip-architecture)을 BT 본문 내 키워드(예: "Chip","Chip Architecture")로 변환
+def _slug_keywords(slug):
+    parts = slug.replace("_","-").split("-")
+    keys = set()
+    keys.add(slug.replace("-", " "))
+    keys.add(slug.replace("-", ""))
+    for p in parts:
+        if len(p) >= 3:
+            keys.add(p)
+    # 특수 약어 매핑
+    alias = {
+        "chip": ["Chip", "Chip Architecture"],
+        "architecture": [],
+        "superconductor": ["SC", "Superconductor"],
+        "fusion": ["Fusion"],
+        "quantum": ["QC", "Quantum"],
+        "computing": [],
+        "crypto": ["Crypto", "Cryptography"],
+        "network": ["Network Protocol", "Network"],
+        "protocol": [],
+        "magnet": ["Magnet"],
+        "tokamak": ["Tokamak"],
+        "plasma": ["Plasma"],
+        "particle": ["Particle"],
+    }
+    for p in parts:
+        if p in alias:
+            for a in alias[p]: keys.add(a)
+    return {k for k in keys if len(k) >= 3}
+
+def find_shared_bts(slug_a, slug_b):
+    """두 도메인이 동시에 언급된 BT 목록 반환: [(bt_id, constants), ...]"""
+    ka = _slug_keywords(slug_a)
+    kb = _slug_keywords(slug_b)
+    shared = []
+    for bt_id, e in BT_ENTRIES.items():
+        t = e["domains_text"]
+        if not t: continue
+        tl = t.lower()
+        ha = any(k.lower() in tl for k in ka)
+        hb = any(k.lower() in tl for k in kb)
+        if ha and hb:
+            shared.append((bt_id, e.get("constants", "-")))
+    shared.sort(key=lambda x: x[0])
+    return shared
 
 # ── 1. 얇은 TOML 파서 (섹션 + key=value만; 리스트/숫자/문자열) ─────
 SEC_RE = re.compile(r"^\[([A-Za-z0-9_\-\.]+)\]\s*$")
@@ -275,7 +362,21 @@ def score_size(d):
     return 0
 
 ranked_domains = sorted(pure_domains.items(), key=lambda kv: score_size(kv[1]), reverse=True)
-top50_dom = ranked_domains[:50]
+combos_top50 = ranked_domains[:50]
+
+# 선정 정책: combos 상위 50 ∪ {n6_avg ≥ 90 도메인}
+def _n6avg_raw(d):
+    v = d.get("n6_avg")
+    if isinstance(v,(int,float)): return float(v)
+    return None
+
+high_n6 = [(n,d) for n,d in pure_domains.items() if (_n6avg_raw(d) is not None and _n6avg_raw(d) >= 90.0)]
+_seen = set()
+top50_dom = []
+for n,d in combos_top50 + high_n6:
+    if n in _seen: continue
+    _seen.add(n)
+    top50_dom.append((n,d))
 top50_names = [n for n,_ in top50_dom]
 
 with (OUT/"top50_domains.jsonl").open("w") as f:
@@ -294,28 +395,53 @@ def get_cross(d):
     return set(cd) if isinstance(cd, list) else set()
 
 def get_n6avg(d):
+    """(value, present_bool) — 결측 시 (None, False)"""
     v = d.get("n6_avg")
-    if isinstance(v,(int,float)): return float(v)
+    if isinstance(v,(int,float)): return float(v), True
     v = d.get("n6_max")
-    if isinstance(v,(int,float)): return float(v)
-    return 50.0
+    if isinstance(v,(int,float)): return float(v), True
+    return None, False
+
+# 가중치: prox 결측 시 재정규화
+W_JAC, W_PROX, W_BIDIR, W_BAL = 0.5, 0.2, 0.2, 0.1
 
 pairs = []
 for i in range(len(top50_dom)):
     ni, di = top50_dom[i]
-    ci = get_cross(di); ai = get_n6avg(di); si = score_size(di)
+    ci = get_cross(di); ai, ai_ok = get_n6avg(di); si = score_size(di)
     for j in range(i+1, len(top50_dom)):
         nj, dj = top50_dom[j]
-        cj = get_cross(dj); aj = get_n6avg(dj); sj = score_size(dj)
+        cj = get_cross(dj); aj, aj_ok = get_n6avg(dj); sj = score_size(dj)
         union = ci | cj
         jac = (len(ci & cj) / len(union)) if union else 0.0
-        prox = 1.0 - abs(ai-aj)/100.0
+        prox_ok = ai_ok and aj_ok
+        if prox_ok:
+            prox = 1.0 - abs(ai-aj)/100.0
+        else:
+            prox = None
         bidir = 0.0
         if nj in ci and ni in cj: bidir = 1.0
         elif nj in ci or ni in cj: bidir = 0.5
         bal = (min(si,sj)/max(si,sj)) if max(si,sj) > 0 else 0.0
-        S = 0.5*jac + 0.2*prox + 0.2*bidir + 0.1*bal
-        pairs.append((ni, nj, S, jac, prox, bidir, bal))
+        if prox_ok:
+            S = W_JAC*jac + W_PROX*prox + W_BIDIR*bidir + W_BAL*bal
+        else:
+            # prox 제외 후 나머지 가중치 재정규화 (합=1 기준)
+            denom = W_JAC + W_BIDIR + W_BAL  # 0.8
+            S = (W_JAC*jac + W_BIDIR*bidir + W_BAL*bal) / denom
+        # 도메인 결측 플래그
+        miss = []
+        if not ai_ok: miss.append(ni)
+        if not aj_ok: miss.append(nj)
+        # BT 공유
+        shared_bts = find_shared_bts(ni, nj)
+        bt_ids = ",".join(f"BT-{b}" for b,_ in shared_bts[:3]) if shared_bts else "-"
+        shared_consts = set()
+        for _b, cc in shared_bts:
+            if cc and cc != "-":
+                for tok in cc.split(","): shared_consts.add(tok)
+        consts_str = "/".join(sorted(shared_consts)) if shared_consts else "-"
+        pairs.append((ni, nj, S, jac, prox, bidir, bal, miss, bt_ids, consts_str))
 
 pairs.sort(key=lambda t: t[2], reverse=True)
 
@@ -323,8 +449,10 @@ with (OUT/"pair_scores.jsonl").open("w") as f:
     for p in pairs:
         f.write(json.dumps({
             "a": p[0], "b": p[1], "score": round(p[2],4),
-            "jaccard": round(p[3],4), "n6_prox": round(p[4],4),
-            "bidir": p[5], "size_balance": round(p[6],4)
+            "jaccard": round(p[3],4),
+            "n6_prox": (round(p[4],4) if p[4] is not None else None),
+            "bidir": p[5], "size_balance": round(p[6],4),
+            "miss_n6avg": p[7], "bt_ids": p[8], "shared_consts": p[9]
         }, ensure_ascii=False) + "\n")
 
 # 히스토그램
@@ -451,19 +579,25 @@ for i, (name, total, cross) in enumerate(density[:20], 1):
 lines.append("")
 
 # ── 6.6 쌍 분석 (기존)
-lines.append("## 6. 도메인 쌍별 공명 (상위 50 도메인, combos 기준)")
+lines.append(f"## 6. 도메인 쌍별 공명 (선정 도메인 {len(top50_dom)}개 — combos 상위 50 ∪ n6_avg≥90)")
 lines.append("")
 lines.append("```")
 lines.append("S(i,j) = 0.5*Jaccard(cross_i, cross_j)")
-lines.append("       + 0.2*(1 - |n6avg_i - n6avg_j|/100)")
+lines.append("       + 0.2*(1 - |n6avg_i - n6avg_j|/100)   ← n6_avg 결측 시 항 제외")
 lines.append("       + 0.2*bidir(i in cross_j, j in cross_i)")
 lines.append("       + 0.1*min(combos)/max(combos)")
+lines.append("결측 시: prox 항 제외 후 (0.5+0.2+0.1)=0.8 로 나눠 재정규화")
+lines.append("⚠결측 = n6_avg 필드 부재 (dse-map.toml 미기입)")
 lines.append("```")
 lines.append("")
-lines.append("| # | A | B | S | Jaccard | n6 근접 | 상호 | 규모균형 |")
-lines.append("|---|---|---|---:|---:|---:|---:|---:|")
+lines.append("| # | A | B | S | Jaccard | n6 근접 | 상호 | 규모균형 | BT | 공유상수 | 결측 |")
+lines.append("|---|---|---|---:|---:|---:|---:|---:|---|---|---|")
 for i,p in enumerate(pairs[:30], 1):
-    lines.append(f"| {i} | {p[0]} | {p[1]} | {p[2]:.3f} | {p[3]:.3f} | {p[4]:.3f} | {p[5]:.1f} | {p[6]:.3f} |")
+    prox_cell = f"{p[4]:.3f}" if p[4] is not None else "—"
+    miss_cell = ("⚠" + ",".join(p[7])) if p[7] else ""
+    a_cell = p[0] + (" ⚠결측" if p[0] in p[7] else "")
+    b_cell = p[1] + (" ⚠결측" if p[1] in p[7] else "")
+    lines.append(f"| {i} | {a_cell} | {b_cell} | {p[2]:.3f} | {p[3]:.3f} | {prox_cell} | {p[5]:.1f} | {p[6]:.3f} | {p[8]} | {p[9]} | {miss_cell} |")
 lines.append("")
 
 # ── 6.7 공명 히스토그램

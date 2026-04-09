@@ -220,7 +220,9 @@ def main():
 
     # 리포트 작성
     lines = []
-    lines.append("# BT Audit Report — BT-1~359 전수 감사\n")
+    max_bt = max((r["id"] for r in results), default=0)
+    min_bt = min((r["id"] for r in results), default=0)
+    lines.append(f"# BT Audit Report — BT-1~{total} 전수 감사 (ID 범위 BT-{min_bt}~{max_bt})\n")
     lines.append(f"- 감사 대상: `{BT_FILE.relative_to(ROOT)}`\n")
     lines.append(f"- 감사 스크립트: `scripts/audit_bt.py`\n")
     lines.append(f"- 전체 BT 수: **{total}**\n")
@@ -230,9 +232,18 @@ def main():
         pct = (v / total * 100) if total else 0
         lines.append(f"| {name} | {v} | {pct:.1f}% |")
     lines.append("")
-    lines.append(f"**BT 단위 일치율 (EXACT+PARTIAL)/판정가능 = "
-                 f"{(exact + partial)}/{total - unknown} = "
-                 f"{((exact + partial) / max(total - unknown, 1) * 100):.1f}%**\n")
+    judgable = total - unknown
+    rate_all = (exact + partial) / max(total, 1) * 100
+    rate_judgable = (exact + partial) / max(judgable, 1) * 100
+    exact_rate_all = exact / max(total, 1) * 100
+    exact_rate_judgable = exact / max(judgable, 1) * 100
+    lines.append(f"**BT 단위 일치율 (두 지표 병기)**\n")
+    lines.append(f"- EXACT/(전체) = {exact}/{total} = {exact_rate_all:.1f}% "
+                 f"(UNKNOWN {unknown}건 포함)")
+    lines.append(f"- EXACT/(판정가능) = {exact}/{judgable} = {exact_rate_judgable:.1f}% "
+                 f"(UNKNOWN 제외)")
+    lines.append(f"- (EXACT+PARTIAL)/(전체) = {exact + partial}/{total} = {rate_all:.1f}%")
+    lines.append(f"- (EXACT+PARTIAL)/(판정가능) = {exact + partial}/{judgable} = {rate_judgable:.1f}%\n")
     lines.append(f"**행 단위**: EXACT {row_exact} / CLOSE {row_close} / MISS {row_miss} "
                  f"(합 {rows_total}) — MISS율 {(row_miss / max(rows_total,1) * 100):.2f}%\n")
     lines.append(f"**mismatch 총계: {row_miss}** (목표 <50)\n")
@@ -291,7 +302,11 @@ def main():
     print(f"완료: {REPORT.relative_to(ROOT)}")
     print(f"  BT {total}개 — EXACT {exact} / PARTIAL {partial} / MISS {miss} / UNKNOWN {unknown}")
     print(f"  row MISS {row_miss} (목표 <50)")
-    print(f"  일치율 {((exact + partial) / max(total - unknown, 1) * 100):.1f}%")
+    print(f"  BT 범위 BT-{min_bt}~{max_bt}")
+    print(f"  EXACT/(전체)      = {exact}/{total} = {exact_rate_all:.1f}%")
+    print(f"  EXACT/(판정가능)  = {exact}/{judgable} = {exact_rate_judgable:.1f}%")
+    print(f"  (EXACT+PARTIAL)/(전체)     = {rate_all:.1f}%")
+    print(f"  (EXACT+PARTIAL)/(판정가능) = {rate_judgable:.1f}%")
 
 
 if __name__ == "__main__":

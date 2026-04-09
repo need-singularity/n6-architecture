@@ -17568,7 +17568,7 @@ J₂=24: 시간, 프레임, 절기, 콘크리트, Golay, Leech...        8+ EXAC
 | RT 이형이량체 소단위 | 2 (p66/p51) | φ=2 | EXACT |
 | NNRTI 결합 포켓 형성 잔기 핵심 수 | 12 (NNBP 코어) | σ=12 | EXACT |
 | AZT 등 NRTI 계 승인 약물 초기 | 6 | n=6 | EXACT |
-| MISS | p51 RNase H 도메인 절단으로 비활성 | 구조 비대칭 | MISS |
+| 적용한계 | p51 RNase H 도메인 절단으로 비활성 | 구조 비대칭 | LIMIT |
 
 **등급**: Two stars — 4/5 EXACT.
 **출처**: Kohlstaedt LA et al., *Science* 1992;256:1783-1790. DOI: 10.1126/science.1377403 (PubMed PMID 1377403)

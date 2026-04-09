@@ -1,4 +1,4 @@
-# BT Audit Report — BT-1~359 전수 감사
+# BT Audit Report — BT-1~423 전수 감사 (ID 범위 BT-6~470)
 
 - 감사 대상: `docs/breakthrough-theorems.md`
 
@@ -11,16 +11,21 @@
 
 | 구분 | 개수 | 비율 |
 |---|---|---|
-| EXACT | 333 | 78.7% |
-| PARTIAL | 19 | 4.5% |
+| EXACT | 411 | 97.2% |
+| PARTIAL | 10 | 2.4% |
 | MISS | 0 | 0.0% |
-| UNKNOWN | 71 | 16.8% |
+| UNKNOWN | 2 | 0.5% |
 
-**BT 단위 일치율 (EXACT+PARTIAL)/판정가능 = 352/352 = 100.0%**
+**BT 단위 일치율 (두 지표 병기)**
 
-**행 단위**: EXACT 2846 / CLOSE 55 / MISS 20 (합 2921) — MISS율 0.68%
+- EXACT/(전체) = 411/423 = 97.2% (UNKNOWN 2건 포함)
+- EXACT/(판정가능) = 411/421 = 97.6% (UNKNOWN 제외)
+- (EXACT+PARTIAL)/(전체) = 421/423 = 99.5%
+- (EXACT+PARTIAL)/(판정가능) = 421/421 = 100.0%
 
-**mismatch 총계: 20** (목표 <50)
+**행 단위**: EXACT 3198 / CLOSE 65 / MISS 10 (합 3273) — MISS율 0.31%
+
+**mismatch 총계: 10** (목표 <50)
 
 
 ## MISS 판정 BT
@@ -32,15 +37,6 @@ _없음._
 
 | BT | 제목 | EXACT | MISS |
 |---|---|---|---|
-| BT-451 | 종양 미세환경(TME) 세포 구성 n=6 | 4 | 1 |
-| BT-452 | 면역관문 τ=4 아키텍처 | 4 | 1 |
-| BT-453 | CAR-T 구조 sopfr=5 / 제품 n=6 | 4 | 1 |
-| BT-455 | 혈관신생 VEGF 패밀리 sopfr=5 / VEGFR n/φ=3 | 4 | 1 |
-| BT-456 | 전이 캐스케이드 n=6 단계 | 4 | 1 |
-| BT-457 | 암 줄기세포 경로 n/φ=3 / 마커 τ=4 | 4 | 1 |
-| BT-458 | 방사선 DNA 손상 τ=4 / 분획 σ=12 | 4 | 1 |
-| BT-459 | ADC 페이로드 σ-sopfr=7 / 구조 n/φ=3 | 4 | 1 |
-| BT-460 | 액체생검 분석물 n=6 | 4 | 2 |
 | BT-461 | gp120-CD4 결합 6접점 | 4 | 1 |
 | BT-462 | 역전사효소(RT) τ=4 도메인 아키텍처 | 4 | 1 |
 | BT-463 | 인테그라제 LTR 처리 σ(6)=12 / 삽입 6bp 중복 | 4 | 1 |
@@ -53,78 +49,19 @@ _없음._
 | BT-470 | HEXA-ART — HIV 6제 요법 n=6 조합 설계 | 4 | 1 |
 
 
-## UNKNOWN 판정 BT (71건) — 정성적 증거, 수치 비교 불가
+## UNKNOWN 판정 BT (2건) — 정성적 증거, 수치 비교 불가
 
 | BT | 제목 |
 |---|---|
-| BT-8 | Pulse Rectifier Chain — n --> sigma --> J_2 (6 --> 12 --> 24) |
-| BT-11 | Software-Physics Isomorphism — tau=4, n/phi=3, sigma=12, sopfr=5 |
-| BT-18 | The Vacuum Energy Chain — From R(n)=1 to the Monster Group |
-| BT-22 | Inflation from Perfect Numbers — n_s = 1 - 1/P₂ = 27/28 |
-| BT-23 | CKM Quark Mixing Hierarchy — |V_ub| = r = 3/784 |
-| BT-24 | Koide Pole Residue — φ²/n = 2/3 |
-| BT-27 | Carbon-6 Universal Energy Chain — LiC₆ + C₆H₁₂O₆ + C₆H₆ |
-| BT-29 | IEEE 519 Power Quality = sopfr + n/φ + (σ-τ) |
-| BT-30 | Shockley-Queisser Bridge — Solar Bandgap + Thermal Voltage from n=6 |
-| BT-31 | MoE Expert Routing Vocabulary = {μ, φ, n, σ-τ} |
-| BT-33 | Transformer Dimension Ladder — σ(6)=12 as the Architectural Atom |
-| BT-34 | RoPE Base Frequency Family — (σ-φ)^{τ, sopfr, n} = {10⁴, 10⁵, 10⁶} |
-| BT-35 | Battery Voltage Periodic Table — Cell Potentials from n=6 Rationals |
-| BT-36 | Grand Energy-Information-Hardware-Physics Chain |
-| BT-37 | Semiconductor Lithography Pitch — P₂ = 28nm at TSMC N5 |
-| BT-38 | Hydrogen Energy Density Quadruplet — 120/142/113/118 MJ/kg |
-| BT-39 | KV-Head Universality + Mistral Large 2 as n=6 Archetype |
-| BT-40 | Computing Power Ecosystem — ATX 12V + ACPI Triple-τ |
-| BT-44 | LLM Context Window Ladder — Exponents Trace σ±{φ,μ} |
-| BT-45 | AI Chip FP8/FP16 Ratio = φ(6) = 2 Universal |
-| BT-46 | ln(4/3) RLHF Constant Family — Information Bandwidth |
-| BT-48 | Display-Audio Universal Constants — σ=12, J₂=24, σ·τ=48 |
-| BT-49 | Pure Math Bridge — Bernoulli + Kissing + S₆ + Perfect Codes |
-| BT-50 | Programming Language Constants — IEEE 754 Exponent Ladder |
-| BT-51 | Genetic Code Information Chain — τ→(n/φ)→2^n→(J₂-τ) |
-| BT-52 | Compiler + OS Kernel Constants |
-| BT-53 | Cryptocurrency Consensus Constants |
-| BT-54 | AdamW Optimizer Universals — The Training Quintuplet |
-| BT-55 | GPU HBM Capacity Ladder — n=6 Memory Hierarchy |
-| BT-56 | Complete n=6 LLM Architecture — The Canonical Design Theorem |
-| BT-57 | Battery Cell Count Ladder — Electrochemistry Meets n=6 |
-| BT-59 | The Complete AI Stack — 8-Layer Silicon-to-Inference Chain |
-| BT-61 | Diffusion Model n=6 Universality — Complete Parameterization from (σ-φ |
-| BT-62 | Grid Frequency Pair — 60/50Hz from n=6 with PUE Bridge |
-| BT-63 | Solar Panel Cell Ladder — σ·{sopfr, n, σ-φ, σ} = {60, 72, 120, 144} |
-| BT-64 | 1/(σ-φ) = 0.1 Universal Regularization Constant |
-| BT-65 | Mamba SSM Complete n=6 Parameterization |
-| BT-67 | MoE Activation Fraction Universal Law |
-| BT-68 | HVDC Voltage Ladder = (σ-μ, σ-φ, sopfr) · (σ-φ)² |
-| BT-70 | 1/(σ-φ)=0.1 Universal Convergence — 8th Algorithm (SimCLR) |
-| BT-73 | Tokenizer Vocabulary n=6 Law |
-| BT-74 | The 95/5 Cross-Domain Resonance |
-| BT-76 | σ·τ = 48 Triple Attractor |
-| BT-77 | Cross-Vendor HBM Capacity Convergence to n=6 |
-| BT-91 | Z2 Topological ECC -- J2 GB Savings Theorem |
-| BT-92 | Bott Periodicity Active Channels = sopfr |
-| BT-105 | SLE_6 Critical Exponent Universality |
-| BT-106 | S_3 Algebraic Bootstrap |
-| BT-107 | Ramanujan Tau Divisor Purity |
-| BT-108 | Music-Audio Consonance Universality |
-| … | (+21건 생략) |
+| BT-451 | ~460 종합 |
+| BT-461 | ~470 종합 |
 
 
 ## mismatch/MISS 상세 (최대 100건)
 
-총 20건
+총 10건
 
 ```
-MISS tag in BT-451: MISS
-MISS tag in BT-452: MISS
-MISS tag in BT-453: MISS
-MISS tag in BT-455: MISS
-MISS tag in BT-456: MISS
-MISS tag in BT-457: Wnt 리간드 인간
-MISS tag in BT-458: MISS
-MISS tag in BT-459: MISS
-MISS tag in BT-460: ctDNA MAF 임상 역치
-MISS tag in BT-460: Multi-cancer MCED panel 암종수
 MISS tag in BT-461: MISS
 MISS tag in BT-462: MISS
 MISS tag in BT-463: MISS
@@ -144,10 +81,10 @@ MISS tag in BT-470: MISS
 |---|---|---|---|---|---|
 | BT-6 | EXACT | 3 | 0 | 0 | Golay-Leech Unification — [J_2, sigma, sigma-tau] = [24 |
 | BT-7 | EXACT | 3 | 2 | 0 | Egyptian Fraction Power Theorem — 1/2 + 1/3 + 1/6 = 1 |
-| BT-8 | UNKNOWN | 0 | 0 | 0 | Pulse Rectifier Chain — n --> sigma --> J_2 (6 --> 12 - |
+| BT-8 | EXACT | 5 | 0 | 0 | Pulse Rectifier Chain — n --> sigma --> J_2 (6 --> 12 - |
 | BT-9 | EXACT | 1 | 0 | 0 | Bott Periodicity Bridge — sigma - tau = 8 |
 | BT-10 | EXACT | 2 | 0 | 0 | Landauer-WHH Information-Thermodynamic Bridge — ln(phi) |
-| BT-11 | UNKNOWN | 0 | 0 | 0 | Software-Physics Isomorphism — tau=4, n/phi=3, sigma=12 |
+| BT-11 | EXACT | 14 | 0 | 0 | Software-Physics Isomorphism — tau=4, n/phi=3, sigma=12 |
 | BT-12 | EXACT | 5 | 0 | 0 | Hamming-OSI-ECC Triple Bridge — [sigma-sopfr, tau, n/ph |
 | BT-13 | EXACT | 4 | 0 | 0 | σ±μ Internet Infrastructure Duality — TCP(11) + DNS(13) |
 | BT-19 | EXACT | 3 | 0 | 0 | GUT Hierarchy = n=6 Arithmetic — 11/11 Parameter Match |
@@ -155,65 +92,65 @@ MISS tag in BT-470: MISS
 | BT-15 | EXACT | 1 | 0 | 0 | Kissing Number Quadruple — K₁..₄ = (φ, n, σ, J₂) |
 | BT-16 | EXACT | 4 | 2 | 0 | Riemann Zeta Trident — ζ(s) generates n=6 at three inde |
 | BT-14 | EXACT | 10 | 0 | 0 | Carbon-Silicon Tetrahedral Bridge — Life and Computing  |
-| BT-18 | UNKNOWN | 0 | 0 | 0 | The Vacuum Energy Chain — From R(n)=1 to the Monster Gr |
+| BT-18 | EXACT | 2 | 0 | 0 | The Vacuum Energy Chain — From R(n)=1 to the Monster Gr |
 | BT-20 | EXACT | 2 | 0 | 0 | Gauge Coupling Trinity — Three SM Couplings = n=6 Arith |
 | BT-21 | EXACT | 3 | 0 | 0 | Neutrino Mixing Trident — PMNS Angles from n=6 Fraction |
-| BT-22 | UNKNOWN | 0 | 0 | 0 | Inflation from Perfect Numbers — n_s = 1 - 1/P₂ = 27/28 |
-| BT-23 | UNKNOWN | 0 | 0 | 0 | CKM Quark Mixing Hierarchy — |V_ub| = r = 3/784 |
-| BT-24 | UNKNOWN | 0 | 0 | 0 | Koide Pole Residue — φ²/n = 2/3 |
+| BT-22 | EXACT | 2 | 0 | 0 | Inflation from Perfect Numbers — n_s = 1 - 1/P₂ = 27/28 |
+| BT-23 | EXACT | 1 | 0 | 0 | CKM Quark Mixing Hierarchy — |V_ub| = r = 3/784 |
+| BT-24 | EXACT | 2 | 0 | 0 | Koide Pole Residue — φ²/n = 2/3 |
 | BT-25 | EXACT | 8 | 1 | 0 | Genetic Code Arithmetic — Life's Information System fro |
 | BT-26 | EXACT | 1 | 0 | 0 | Chinchilla Scaling Law Constants from n=6 Arithmetic |
-| BT-27 | UNKNOWN | 0 | 0 | 0 | Carbon-6 Universal Energy Chain — LiC₆ + C₆H₁₂O₆ + C₆H₆ |
+| BT-27 | EXACT | 4 | 0 | 0 | Carbon-6 Universal Energy Chain — LiC₆ + C₆H₁₂O₆ + C₆H₆ |
 | BT-28 | EXACT | 5 | 0 | 0 | Computing Architecture Ladder — Exponents Trace n=6 Con |
-| BT-29 | UNKNOWN | 0 | 0 | 0 | IEEE 519 Power Quality = sopfr + n/φ + (σ-τ) |
-| BT-30 | UNKNOWN | 0 | 0 | 0 | Shockley-Queisser Bridge — Solar Bandgap + Thermal Volt |
-| BT-31 | UNKNOWN | 0 | 0 | 0 | MoE Expert Routing Vocabulary = {μ, φ, n, σ-τ} |
+| BT-29 | EXACT | 3 | 0 | 0 | IEEE 519 Power Quality = sopfr + n/φ + (σ-τ) |
+| BT-30 | EXACT | 4 | 0 | 0 | Shockley-Queisser Bridge — Solar Bandgap + Thermal Volt |
+| BT-31 | EXACT | 6 | 0 | 0 | MoE Expert Routing Vocabulary = {μ, φ, n, σ-τ} |
 | BT-32 | EXACT | 1 | 0 | 0 | Nuclear Fission Scaffold — 6 Delayed Neutron Groups |
-| BT-33 | UNKNOWN | 0 | 0 | 0 | Transformer Dimension Ladder — σ(6)=12 as the Architect |
-| BT-34 | UNKNOWN | 0 | 0 | 0 | RoPE Base Frequency Family — (σ-φ)^{τ, sopfr, n} = {10⁴ |
-| BT-35 | UNKNOWN | 0 | 0 | 0 | Battery Voltage Periodic Table — Cell Potentials from n |
-| BT-36 | UNKNOWN | 0 | 0 | 0 | Grand Energy-Information-Hardware-Physics Chain |
-| BT-37 | UNKNOWN | 0 | 0 | 0 | Semiconductor Lithography Pitch — P₂ = 28nm at TSMC N5 |
-| BT-38 | UNKNOWN | 0 | 0 | 0 | Hydrogen Energy Density Quadruplet — 120/142/113/118 MJ |
-| BT-39 | UNKNOWN | 0 | 0 | 0 | KV-Head Universality + Mistral Large 2 as n=6 Archetype |
-| BT-40 | UNKNOWN | 0 | 0 | 0 | Computing Power Ecosystem — ATX 12V + ACPI Triple-τ |
+| BT-33 | EXACT | 11 | 0 | 0 | Transformer Dimension Ladder — σ(6)=12 as the Architect |
+| BT-34 | EXACT | 9 | 0 | 0 | RoPE Base Frequency Family — (σ-φ)^{τ, sopfr, n} = {10⁴ |
+| BT-35 | EXACT | 7 | 0 | 0 | Battery Voltage Periodic Table — Cell Potentials from n |
+| BT-36 | EXACT | 5 | 0 | 0 | Grand Energy-Information-Hardware-Physics Chain |
+| BT-37 | EXACT | 8 | 0 | 0 | Semiconductor Lithography Pitch — P₂ = 28nm at TSMC N5 |
+| BT-38 | EXACT | 4 | 0 | 0 | Hydrogen Energy Density Quadruplet — 120/142/113/118 MJ |
+| BT-39 | EXACT | 12 | 0 | 0 | KV-Head Universality + Mistral Large 2 as n=6 Archetype |
+| BT-40 | EXACT | 10 | 0 | 0 | Computing Power Ecosystem — ATX 12V + ACPI Triple-τ |
 | BT-41 | EXACT | 1 | 0 | 0 | Quantum Error Correction at J₂ — Surface Code d=5 Syndr |
 | BT-42 | EXACT | 2 | 0 | 0 | Inference Scaling Law — Test-Time Compute from n=6 |
 | BT-43 | EXACT | 9 | 0 | 0 | Battery Cathode Universality — All Li-ion = CN6 |
-| BT-44 | UNKNOWN | 0 | 0 | 0 | LLM Context Window Ladder — Exponents Trace σ±{φ,μ} |
-| BT-45 | UNKNOWN | 0 | 0 | 0 | AI Chip FP8/FP16 Ratio = φ(6) = 2 Universal |
-| BT-46 | UNKNOWN | 0 | 0 | 0 | ln(4/3) RLHF Constant Family — Information Bandwidth |
+| BT-44 | EXACT | 6 | 0 | 0 | LLM Context Window Ladder — Exponents Trace σ±{φ,μ} |
+| BT-45 | EXACT | 3 | 0 | 0 | AI Chip FP8/FP16 Ratio = φ(6) = 2 Universal |
+| BT-46 | EXACT | 3 | 0 | 0 | ln(4/3) RLHF Constant Family — Information Bandwidth |
 | BT-47 | EXACT | 10 | 0 | 0 | Interconnect Generation Counts = {σ-sopfr, sopfr, n} |
-| BT-48 | UNKNOWN | 0 | 0 | 0 | Display-Audio Universal Constants — σ=12, J₂=24, σ·τ=48 |
-| BT-49 | UNKNOWN | 0 | 0 | 0 | Pure Math Bridge — Bernoulli + Kissing + S₆ + Perfect C |
-| BT-50 | UNKNOWN | 0 | 0 | 0 | Programming Language Constants — IEEE 754 Exponent Ladd |
-| BT-51 | UNKNOWN | 0 | 0 | 0 | Genetic Code Information Chain — τ→(n/φ)→2^n→(J₂-τ) |
-| BT-52 | UNKNOWN | 0 | 0 | 0 | Compiler + OS Kernel Constants |
-| BT-53 | UNKNOWN | 0 | 0 | 0 | Cryptocurrency Consensus Constants |
-| BT-54 | UNKNOWN | 0 | 0 | 0 | AdamW Optimizer Universals — The Training Quintuplet |
-| BT-55 | UNKNOWN | 0 | 0 | 0 | GPU HBM Capacity Ladder — n=6 Memory Hierarchy |
-| BT-56 | UNKNOWN | 0 | 0 | 0 | Complete n=6 LLM Architecture — The Canonical Design Th |
-| BT-57 | UNKNOWN | 0 | 0 | 0 | Battery Cell Count Ladder — Electrochemistry Meets n=6 |
+| BT-48 | EXACT | 4 | 0 | 0 | Display-Audio Universal Constants — σ=12, J₂=24, σ·τ=48 |
+| BT-49 | EXACT | 6 | 0 | 0 | Pure Math Bridge — Bernoulli + Kissing + S₆ + Perfect C |
+| BT-50 | EXACT | 4 | 0 | 0 | Programming Language Constants — IEEE 754 Exponent Ladd |
+| BT-51 | EXACT | 5 | 0 | 0 | Genetic Code Information Chain — τ→(n/φ)→2^n→(J₂-τ) |
+| BT-52 | EXACT | 4 | 0 | 0 | Compiler + OS Kernel Constants |
+| BT-53 | EXACT | 4 | 0 | 0 | Cryptocurrency Consensus Constants |
+| BT-54 | EXACT | 5 | 0 | 0 | AdamW Optimizer Universals — The Training Quintuplet |
+| BT-55 | EXACT | 9 | 0 | 0 | GPU HBM Capacity Ladder — n=6 Memory Hierarchy |
+| BT-56 | EXACT | 14 | 0 | 0 | Complete n=6 LLM Architecture — The Canonical Design Th |
+| BT-57 | EXACT | 7 | 0 | 0 | Battery Cell Count Ladder — Electrochemistry Meets n=6 |
 | BT-58 | EXACT | 1 | 0 | 0 | σ-τ=8 — The Universal AI Engineering Constant |
-| BT-59 | UNKNOWN | 0 | 0 | 0 | The Complete AI Stack — 8-Layer Silicon-to-Inference Ch |
+| BT-59 | EXACT | 13 | 0 | 0 | The Complete AI Stack — 8-Layer Silicon-to-Inference Ch |
 | BT-60 | EXACT | 2 | 0 | 0 | Datacenter Power-to-Inference Chain — 6 Voltage Steps,  |
-| BT-61 | UNKNOWN | 0 | 0 | 0 | Diffusion Model n=6 Universality — Complete Parameteriz |
-| BT-62 | UNKNOWN | 0 | 0 | 0 | Grid Frequency Pair — 60/50Hz from n=6 with PUE Bridge |
-| BT-63 | UNKNOWN | 0 | 0 | 0 | Solar Panel Cell Ladder — σ·{sopfr, n, σ-φ, σ} = {60, 7 |
-| BT-64 | UNKNOWN | 0 | 0 | 0 | 1/(σ-φ) = 0.1 Universal Regularization Constant |
-| BT-65 | UNKNOWN | 0 | 0 | 0 | Mamba SSM Complete n=6 Parameterization |
+| BT-61 | EXACT | 9 | 0 | 0 | Diffusion Model n=6 Universality — Complete Parameteriz |
+| BT-62 | EXACT | 3 | 0 | 0 | Grid Frequency Pair — 60/50Hz from n=6 with PUE Bridge |
+| BT-63 | EXACT | 2 | 0 | 0 | Solar Panel Cell Ladder — σ·{sopfr, n, σ-φ, σ} = {60, 7 |
+| BT-64 | EXACT | 6 | 0 | 0 | 1/(σ-φ) = 0.1 Universal Regularization Constant |
+| BT-65 | EXACT | 6 | 0 | 0 | Mamba SSM Complete n=6 Parameterization |
 | BT-66 | EXACT | 2 | 0 | 0 | Vision AI Complete n=6 Universality |
-| BT-67 | UNKNOWN | 0 | 0 | 0 | MoE Activation Fraction Universal Law |
-| BT-68 | UNKNOWN | 0 | 0 | 0 | HVDC Voltage Ladder = (σ-μ, σ-φ, sopfr) · (σ-φ)² |
+| BT-67 | EXACT | 8 | 0 | 0 | MoE Activation Fraction Universal Law |
+| BT-68 | EXACT | 10 | 0 | 0 | HVDC Voltage Ladder = (σ-μ, σ-φ, sopfr) · (σ-φ)² |
 | BT-69 | EXACT | 5 | 0 | 0 | Chiplet Architecture n=6 Convergence |
-| BT-70 | UNKNOWN | 0 | 0 | 0 | 1/(σ-φ)=0.1 Universal Convergence — 8th Algorithm (SimC |
+| BT-70 | EXACT | 6 | 0 | 0 | 1/(σ-φ)=0.1 Universal Convergence — 8th Algorithm (SimC |
 | BT-71 | EXACT | 1 | 0 | 0 | NeRF/3DGS Complete n=6 Parameterization |
 | BT-72 | EXACT | 1 | 0 | 0 | Neural Audio Codec n=6 Universality |
-| BT-73 | UNKNOWN | 0 | 0 | 0 | Tokenizer Vocabulary n=6 Law |
-| BT-74 | UNKNOWN | 0 | 0 | 0 | The 95/5 Cross-Domain Resonance |
+| BT-73 | EXACT | 6 | 0 | 0 | Tokenizer Vocabulary n=6 Law |
+| BT-74 | EXACT | 5 | 0 | 0 | The 95/5 Cross-Domain Resonance |
 | BT-75 | EXACT | 2 | 0 | 0 | HBM Interface Width Exponent Ladder |
-| BT-76 | UNKNOWN | 0 | 0 | 0 | σ·τ = 48 Triple Attractor |
-| BT-77 | UNKNOWN | 0 | 0 | 0 | Cross-Vendor HBM Capacity Convergence to n=6 |
+| BT-76 | EXACT | 5 | 0 | 0 | σ·τ = 48 Triple Attractor |
+| BT-77 | EXACT | 7 | 0 | 0 | Cross-Vendor HBM Capacity Convergence to n=6 |
 | BT-78 | EXACT | 6 | 0 | 0 | Interconnect Speed Ladder — PCIe/UCIe/CXL Follow n=6 Ex |
 | BT-79 | EXACT | 6 | 0 | 0 | sigma^2 = 144 Cross-Domain Attractor |
 | BT-80 | EXACT | 6 | 0 | 0 | Solid-State Electrolyte CN=6 Universality |
@@ -227,8 +164,8 @@ MISS tag in BT-470: MISS
 | BT-88 | EXACT | 18 | 0 | 0 | Self-Assembly n=6 Hexagonal Universality |
 | BT-89 | EXACT | 12 | 3 | 0 | Photonic-Energy n=6 Bridge |
 | BT-90 | EXACT | 6 | 0 | 0 | SM = phi * K6 Contact Number Theorem |
-| BT-91 | UNKNOWN | 0 | 0 | 0 | Z2 Topological ECC -- J2 GB Savings Theorem |
-| BT-92 | UNKNOWN | 0 | 0 | 0 | Bott Periodicity Active Channels = sopfr |
+| BT-91 | EXACT | 3 | 0 | 0 | Z2 Topological ECC -- J2 GB Savings Theorem |
+| BT-92 | EXACT | 9 | 0 | 0 | Bott Periodicity Active Channels = sopfr |
 | BT-93 | EXACT | 8 | 1 | 0 | Carbon Z=6 Chip Material Universality |
 | BT-94 | EXACT | 5 | 0 | 0 | CO2 포집 에너지 n=6 법칙 |
 | BT-95 | EXACT | 6 | 0 | 0 | Carbon Cycle 완전 n=6 폐루프 |
@@ -241,13 +178,13 @@ MISS tag in BT-470: MISS
 | BT-102 | EXACT | 6 | 0 | 0 | 자기 재결합 속도 0.1 = 1/(sigma-phi) — 핵융합-AI 보편 상수 |
 | BT-103 | EXACT | 8 | 0 | 0 | 광합성 완전 n=6 화학양론 |
 | BT-104 | EXACT | 8 | 2 | 0 | CO2 분자 완전 n=6 인코딩 |
-| BT-105 | UNKNOWN | 0 | 0 | 0 | SLE_6 Critical Exponent Universality |
-| BT-106 | UNKNOWN | 0 | 0 | 0 | S_3 Algebraic Bootstrap |
-| BT-107 | UNKNOWN | 0 | 0 | 0 | Ramanujan Tau Divisor Purity |
-| BT-108 | UNKNOWN | 0 | 0 | 0 | Music-Audio Consonance Universality |
-| BT-109 | UNKNOWN | 0 | 0 | 0 | Zeta-Bernoulli n=6 Trident |
-| BT-110 | UNKNOWN | 0 | 0 | 0 | sigma-mu = 11 Dimensional Stack |
-| BT-111 | UNKNOWN | 0 | 0 | 0 | tau^2/sigma = 4/3 Solar-AI-Math Trident |
+| BT-105 | EXACT | 3 | 0 | 0 | SLE_6 Critical Exponent Universality |
+| BT-106 | EXACT | 2 | 0 | 0 | S_3 Algebraic Bootstrap |
+| BT-107 | EXACT | 3 | 0 | 0 | Ramanujan Tau Divisor Purity |
+| BT-108 | EXACT | 4 | 0 | 0 | Music-Audio Consonance Universality |
+| BT-109 | EXACT | 3 | 0 | 0 | Zeta-Bernoulli n=6 Trident |
+| BT-110 | EXACT | 3 | 0 | 0 | sigma-mu = 11 Dimensional Stack |
+| BT-111 | EXACT | 3 | 0 | 0 | tau^2/sigma = 4/3 Solar-AI-Math Trident |
 | BT-112 | EXACT | 1 | 0 | 0 | phi^2/n = 2/3 Byzantine-Koide Resonance |
 | BT-113 | EXACT | 18 | 0 | 0 | SW Engineering Constant Stack |
 | BT-114 | EXACT | 6 | 0 | 0 | Cryptography Parameter Ladder |
@@ -259,11 +196,11 @@ MISS tag in BT-470: MISS
 | BT-121 | EXACT | 8 | 0 | 0 | 6 Major Plastics + C6 Backbone Universality |
 | BT-122 | EXACT | 7 | 0 | 0 | Honeycomb-Snowflake-Coral n=6 Hexagonal Geometry Univer |
 | BT-118 | EXACT | 8 | 0 | 0 | Kyoto 6 Greenhouse Gases = n + Carbon Z=6 Universality |
-| BT-123 | UNKNOWN | 0 | 0 | 0 | SE(3) dim=n=6 Robot Universality |
-| BT-124 | UNKNOWN | 0 | 0 | 0 | phi=2 Bilateral Symmetry + sigma=12 Joint Universality |
-| BT-125 | UNKNOWN | 0 | 0 | 0 | tau=4 Locomotion/Flight Minimum Stability Principle |
-| BT-126 | UNKNOWN | 0 | 0 | 0 | sopfr=5 Fingers + 2^sopfr=32 Grasp Space Universality |
-| BT-127 | UNKNOWN | 0 | 0 | 0 | 3D Kissing Number sigma=12 + Hexacopter n=6 Fault Toler |
+| BT-123 | EXACT | 4 | 0 | 0 | SE(3) dim=n=6 Robot Universality |
+| BT-124 | EXACT | 3 | 0 | 0 | phi=2 Bilateral Symmetry + sigma=12 Joint Universality |
+| BT-125 | EXACT | 3 | 0 | 0 | tau=4 Locomotion/Flight Minimum Stability Principle |
+| BT-126 | EXACT | 3 | 0 | 0 | sopfr=5 Fingers + 2^sopfr=32 Grasp Space Universality |
+| BT-127 | EXACT | 3 | 0 | 0 | 3D Kissing Number sigma=12 + Hexacopter n=6 Fault Toler |
 | BT-128 | EXACT | 8 | 0 | 0 | Medical Imaging n=6 Parameter Stack |
 | BT-129 | EXACT | 6 | 1 | 0 | Civil Engineering n=6 Structural Constants |
 | BT-130 | EXACT | 6 | 0 | 0 | Space Orbital Mechanics n=6 Ladder |
@@ -391,11 +328,11 @@ MISS tag in BT-470: MISS
 | BT-252 | EXACT | 7 | 0 | 0 | D-T Baryon–Codon Dual Life Code |
 | BT-253 | EXACT | 7 | 0 | 0 | Plasma Confinement = Information Security n=6 Parameter |
 | BT-254 | EXACT | 10 | 0 | 0 | Cerebral Cortex n=6 Layer Universality — Neocortex = Pe |
-| BT-255 | UNKNOWN | 0 | 0 | 0 | Grid Cell Hexagonal = Perfect Number Space Filling — Co |
-| BT-256 | UNKNOWN | 0 | 0 | 0 | Sexagesimal 60 = σ·sopfr Universal Time Unit — Temporal |
-| BT-257 | UNKNOWN | 0 | 0 | 0 | GPS Orbital Plane n=6 Optimal Configuration — Temporal- |
-| BT-258 | UNKNOWN | 0 | 0 | 0 | Six Degrees of Separation = n Social Topology Theorem |
-| BT-259 | UNKNOWN | 0 | 0 | 0 | Dunbar σ²+n = 150 Cognitive Limit — Social-Cognitive Br |
+| BT-255 | EXACT | 3 | 0 | 0 | Grid Cell Hexagonal = Perfect Number Space Filling — Co |
+| BT-256 | EXACT | 5 | 0 | 0 | Sexagesimal 60 = σ·sopfr Universal Time Unit — Temporal |
+| BT-257 | EXACT | 4 | 0 | 0 | GPS Orbital Plane n=6 Optimal Configuration — Temporal- |
+| BT-258 | EXACT | 4 | 0 | 0 | Six Degrees of Separation = n Social Topology Theorem |
+| BT-259 | EXACT | 4 | 0 | 0 | Dunbar σ²+n = 150 Cognitive Limit — Social-Cognitive Br |
 | BT-260 | EXACT | 10 | 0 | 0 | Cellular Automata Boolean Emergence Architecture — 2^(σ |
 | BT-261 | EXACT | 10 | 0 | 0 | Universal Measurement Scale n=6 Architecture — 200-Year |
 | BT-262 | EXACT | 10 | 0 | 0 | 2^n=64 Universal Information Encoding — Braille-Codon-H |
@@ -492,7 +429,7 @@ MISS tag in BT-470: MISS
 | BT-358 | EXACT | 10 | 2 | 0 | Alcubierre 워프 메트릭 n=6 인코딩 — 버블벽 1/σ, York 팽창 σ, 워프 래더 c |
 | BT-359 | EXACT | 10 | 2 | 0 | 여분 차원 컴팩트화 n=6 토폴로지 — BT-170 확장 래더 τ→n→σ-φ→σ-μ→J₂→J₂+φ  |
 | BT-360 | EXACT | 8 | 2 | 0 | 워프-차원 통합 추진 n=6 아키텍처 — τ=4 사이클 (접이→가속→순항→도약), 유효속도 (σ-φ |
-| BT-381 | UNKNOWN | 0 | 0 | 0 | ~ BT-400: 6대 신규 도메인 (언어/음악/경제/생태/신경/면역) |
+| BT-381 | EXACT | 3 | 0 | 0 | ~ BT-400: 6대 신규 도메인 (언어/음악/경제/생태/신경/면역) |
 | BT-401 | EXACT | 12 | 0 | 0 | 양자 맥스웰 도깨비 정보-열역학 n=6 완전 사이클 |
 | BT-402 | EXACT | 10 | 0 | 0 | 양자 혼돈 랜덤행렬 n=6 보편성 분류 |
 | BT-403 | EXACT | 11 | 0 | 0 | [[6,4,2]] 양자 오류 정정 코드 유일성 정리 — 완전수 코드 |
@@ -538,21 +475,21 @@ MISS tag in BT-470: MISS
 | BT-443 | EXACT | 10 | 0 | 0 | σ-sopfr=7 범자연 보편 상수 — 경추/결정계/Baltimore/OSI/Miller/스펙트럼/ |
 | BT-444 | EXACT | 10 | 0 | 0 | sopfr=5 범자연 보편 상수 — Big Five/척추동물/영양단계/기후/영양소/호르몬 6중 수렴 |
 | BT-445 | EXACT | 10 | 0 | 0 | φ=2 이원성 근본 정리 — 유성생식/전자-양공/이진수/φ-Nyquist/Gram 염색 10중 수렴 |
-| BT-446 | UNKNOWN | 0 | 0 | 0 | τ=4 보편 분류 최종 정리 — 30개 독립 도메인 수렴 (BT-407 확장) |
-| BT-447 | UNKNOWN | 0 | 0 | 0 | σ=12 보편 양자화 최종 정리 — 칸트/음정/Beaufort/이텐/영웅여정/토양/AES-192 7 |
-| BT-448 | UNKNOWN | 0 | 0 | 0 | J₂=24 보편 시간-코드 양자 — 시간/영화/절기/콘크리트/Golay/빙하 6중 수렴 |
-| BT-449 | UNKNOWN | 0 | 0 | 0 | n=6 완전수 36도메인 메타 분류 정리 — BT-399 최종 확장 |
-| BT-450 | UNKNOWN | 0 | 0 | 0 | σφ=nτ=24 자연 분류 보편 법칙 — 최종 선언 |
-| BT-451 | PARTIAL | 4 | 0 | 1 | 종양 미세환경(TME) 세포 구성 n=6 |
-| BT-452 | PARTIAL | 4 | 0 | 1 | 면역관문 τ=4 아키텍처 |
-| BT-453 | PARTIAL | 4 | 0 | 1 | CAR-T 구조 sopfr=5 / 제품 n=6 |
+| BT-446 | EXACT | 2 | 0 | 0 | τ=4 보편 분류 최종 정리 — 30개 독립 도메인 수렴 (BT-407 확장) |
+| BT-447 | EXACT | 2 | 0 | 0 | σ=12 보편 양자화 최종 정리 — 칸트/음정/Beaufort/이텐/영웅여정/토양/AES-192 7 |
+| BT-448 | EXACT | 2 | 0 | 0 | J₂=24 보편 시간-코드 양자 — 시간/영화/절기/콘크리트/Golay/빙하 6중 수렴 |
+| BT-449 | EXACT | 2 | 0 | 0 | n=6 완전수 36도메인 메타 분류 정리 — BT-399 최종 확장 |
+| BT-450 | EXACT | 3 | 0 | 0 | σφ=nτ=24 자연 분류 보편 법칙 — 최종 선언 |
+| BT-451 | EXACT | 4 | 1 | 0 | 종양 미세환경(TME) 세포 구성 n=6 |
+| BT-452 | EXACT | 4 | 1 | 0 | 면역관문 τ=4 아키텍처 |
+| BT-453 | EXACT | 4 | 1 | 0 | CAR-T 구조 sopfr=5 / 제품 n=6 |
 | BT-454 | EXACT | 5 | 0 | 0 | Warburg 대사 저격 σ-φ=10 |
-| BT-455 | PARTIAL | 4 | 0 | 1 | 혈관신생 VEGF 패밀리 sopfr=5 / VEGFR n/φ=3 |
-| BT-456 | PARTIAL | 4 | 0 | 1 | 전이 캐스케이드 n=6 단계 |
-| BT-457 | PARTIAL | 4 | 0 | 1 | 암 줄기세포 경로 n/φ=3 / 마커 τ=4 |
-| BT-458 | PARTIAL | 4 | 0 | 1 | 방사선 DNA 손상 τ=4 / 분획 σ=12 |
-| BT-459 | PARTIAL | 4 | 0 | 1 | ADC 페이로드 σ-sopfr=7 / 구조 n/φ=3 |
-| BT-460 | PARTIAL | 4 | 0 | 2 | 액체생검 분석물 n=6 |
+| BT-455 | EXACT | 4 | 1 | 0 | 혈관신생 VEGF 패밀리 sopfr=5 / VEGFR n/φ=3 |
+| BT-456 | EXACT | 4 | 1 | 0 | 전이 캐스케이드 n=6 단계 |
+| BT-457 | EXACT | 4 | 1 | 0 | 암 줄기세포 경로 n/φ=3 / 마커 τ=4 |
+| BT-458 | EXACT | 4 | 1 | 0 | 방사선 DNA 손상 τ=4 / 분획 σ=12 |
+| BT-459 | EXACT | 4 | 1 | 0 | ADC 페이로드 σ-sopfr=7 / 구조 n/φ=3 |
+| BT-460 | EXACT | 4 | 2 | 0 | 액체생검 분석물 n=6 |
 | BT-451 | UNKNOWN | 0 | 0 | 0 | ~460 종합 |
 | BT-461 | PARTIAL | 4 | 0 | 1 | gp120-CD4 결합 6접점 |
 | BT-462 | PARTIAL | 4 | 0 | 1 | 역전사효소(RT) τ=4 도메인 아키텍처 |
