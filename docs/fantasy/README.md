@@ -10,7 +10,7 @@
 
 <!-- AUTO:FANTASY_STATS:START -->
 ```
-  도메인:     2
+  도메인:     4
   가설:       70
   EXACT:      26 (37.1%)
   CLOSE:      23
@@ -30,8 +30,8 @@
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
 | 4 | n/a | v2 | **뱀파이어 과학** | 22/40 EXACT (55%), 8카테고리, 혈액생화학+바이러스+질병+야행성+인간↔뱀파이어 변환, BT 8개 교차 | [문서](../vampire/hypotheses.md) |
-| | | | **인간→뱀파이어** | 5/5 EXACT (100%), 광견병 σ=12주+τ=4, Desmodus n=6, HFE 6번+Fe d⁶, 골수 n=6, 타액샘 n/φ=3 | [문서](../vampire/hypotheses.md#카테고리-g-인간뱀파이어-변환-human--vampire-transformation) |
-| | | | **뱀파이어→인간** | 5/5 EXACT (100%), 헴 아르기네이트 τ=4일, NER τ=4+6-4PP, 킬레이터 n/φ=3, 비타민D τ=4, ABO τ=4+Rh φ=2 | [문서](../vampire/hypotheses.md#카테고리-g-인간뱀파이어-변환-human--vampire-transformation) |
+| 4 | n/a | v2 | **인간→뱀파이어** | 5/5 EXACT (100%), 광견병 σ=12주+τ=4, Desmodus n=6, HFE 6번+Fe d⁶, 골수 n=6, 타액샘 n/φ=3 | [문서](../vampire/hypotheses.md#카테고리-g-인간뱀파이어-변환-human--vampire-transformation) |
+| 4 | n/a | v2 | **뱀파이어→인간** | 5/5 EXACT (100%), 헴 아르기네이트 τ=4일, NER τ=4+6-4PP, 킬레이터 n/φ=3, 비타민D τ=4, ABO τ=4+Rh φ=2 | [문서](../vampire/hypotheses.md#카테고리-g-인간뱀파이어-변환-human--vampire-transformation) |
 <!-- AUTO:PRODUCTS_vampire:END -->
 
 | # | 카테고리 | 가설 수 | EXACT | 핵심 |

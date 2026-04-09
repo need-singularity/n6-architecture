@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "total_domains": 2,
+    "total_domains": 4,
     "total_hypotheses": 70,
     "total_exact": 26,
     "exact_pct": 37.1,
@@ -59,6 +59,64 @@
         "ABO τ=4 혈액형 + Rh φ=2 + 교차시험 n/φ=3"
       ],
       "bt_cross": ["BT-51", "BT-101", "BT-122", "BT-146", "BT-194", "BT-235", "BT-262", "BT-265"],
+      "links": [
+        {"label": "문서", "path": "docs/vampire/hypotheses.md"}
+      ]
+    },
+    {
+      "id": "human-to-vampire",
+      "name": "인간→뱀파이어 (Human → Vampire)",
+      "icon": "🧛",
+      "ufo": 4,
+      "ceiling": "n/a",
+      "ver": "v2",
+      "parent": "vampire",
+      "description": "5/5 EXACT (100%), 광견병+Desmodus+HFE+골수+타액샘, 10 연속 돌파 전반",
+      "hypotheses": 5,
+      "exact": 5,
+      "close": 0,
+      "weak": 0,
+      "exact_pct": 100.0,
+      "categories": [
+        {"id": "G", "name": "인간→뱀파이어 변환", "hypotheses": 5, "exact": 5, "summary": "광견병 σ=12주+τ=4, Desmodus n=6, HFE 6번+Fe d⁶, 골수 n=6, 타액샘 n/φ=3"}
+      ],
+      "key_exact": [
+        "광견병 잠복기 σ=12주 + 임상 τ=4 단계",
+        "Desmodus 타액 항지혈 n=6 단백 + DSPA τ=4 이소형",
+        "HFE 6번 염색체 + Fe d⁶ + 헤모크로마토시스 τ=4 유형",
+        "골수 성숙 혈구 n=6 계통",
+        "주요 타액샘 n/φ=3 쌍 + 타액 단백군 τ=4"
+      ],
+      "bt_cross": ["BT-43", "BT-86", "BT-146", "BT-194"],
+      "links": [
+        {"label": "문서", "path": "docs/vampire/hypotheses.md"}
+      ]
+    },
+    {
+      "id": "vampire-to-human",
+      "name": "뱀파이어→인간 (Vampire → Human)",
+      "icon": "🧛",
+      "ufo": 4,
+      "ceiling": "n/a",
+      "ver": "v2",
+      "parent": "vampire",
+      "description": "5/5 EXACT (100%), 헴치료+NER수리+킬레이션+비타민D+혈액형, 10 연속 돌파 후반",
+      "hypotheses": 5,
+      "exact": 5,
+      "close": 0,
+      "weak": 0,
+      "exact_pct": 100.0,
+      "categories": [
+        {"id": "H", "name": "뱀파이어→인간 변환", "hypotheses": 5, "exact": 5, "summary": "헴 아르기네이트 τ=4일, NER τ=4, 킬레이터 n/φ=3, 비타민D τ=4, ABO τ=4+Rh φ=2"}
+      ],
+      "key_exact": [
+        "헴 아르기네이트 τ=4일 주입 + σ-τ=8 효소 피드백",
+        "NER DNA 수리 τ=4 단계 + 6-4PP 복구",
+        "철 킬레이터 FDA 승인 n/φ=3종",
+        "비타민 D 합성 τ=4 효소 단계 + φ=2 이성질체",
+        "ABO τ=4 혈액형 + Rh φ=2 + 교차시험 n/φ=3"
+      ],
+      "bt_cross": ["BT-43", "BT-86", "BT-146", "BT-215"],
       "links": [
         {"label": "문서", "path": "docs/vampire/hypotheses.md"}
       ]
