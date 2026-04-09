@@ -56,6 +56,7 @@ arXiv paper outlines and academic publications.
 |-------|-------|-----|------|
 | [Virology](n6-virology-paper.md) | Capsid Geometry, Genome Segmentation, Epidemiology | BT-351~353 | 15K |
 | [Biology/Medical](n6-biology-medical-paper.md) | Biology & Medical Science | BT-128~194 | 33K |
+| [HIV/AIDS](n6-hiv-paper.md) | HIV 생활사 6단계 + HEXA-ART 6제 병용 완치 설계 | BT-461~423 | — |
 | [Therapeutic Nanobot](../therapeutic-nanobot/goal.md) | 치료 나노봇 BT-404~413 + Mk.I~V 진화 ([DOI](https://doi.org/10.5281/zenodo.19457675)) | BT-404~413 | 73K |
 | [Crystallography](n6-crystallography-materials-paper.md) | Crystallography & Materials | BT-139,175~177,186 | 31K |
 | [Robotics/Transport](n6-robotics-transport-paper.md) | Robotics & Transportation | BT-123~127 | 32K |
@@ -109,9 +110,9 @@ arXiv paper outlines and academic publications.
 | [HEXA-EXO](n6-hexa-exo-paper.md) | AI 외골격 | BT-411 | 진짜 |
 | [HEXA-LIMB](n6-hexa-limb-paper.md) | AI 의수/의족 | BT-412 | 진짜 |
 | [HEXA-OLFACT](n6-hexa-olfact-paper.md) | 디지털 후각 | BT-413 | 진짜 |
-| [Entomology](n6-entomology-paper.md) | 곤충학 Hexapoda | BT-414 | 진짜 |
-| [Synthetic Biology](n6-synthetic-biology-paper.md) | 합성생물학 이중 완전수 | BT-415 | 진짜 |
-| [Dolphin Bioacoustics](n6-dolphin-bioacoustics-paper.md) | 돌고래 생물음향 | BT-416 | 진짜 |
+| [Entomology](n6-entomology-paper.md) | 곤충학 Hexapoda | BT-461 | 진짜 |
+| [Synthetic Biology](n6-synthetic-biology-paper.md) | 합성생물학 이중 완전수 | BT-462 | 진짜 |
+| [Dolphin Bioacoustics](n6-dolphin-bioacoustics-paper.md) | 돌고래 생물음향 | BT-463 | 진짜 |
 
 ## HEXA 제품 라인 — 칩/하드웨어 (7) — 2026-04-08
 

@@ -2,31 +2,442 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>n=6 Reality Map 3D — n6-architecture</title>
-<meta http-equiv="Cache-Control" content="no-store">
-<!--
-  ⛔ LOCKED 3D MAP IMPORT (R5 SSOT)
-  렌더링 원본: https://need-singularity.github.io/nexus/reality_map_3d.html
-  로컬 원본:   ~/Dev/nexus/shared/reality_map_3d.html
-  어댑터:      ~/Dev/nexus/mk2_hexa/native/dashboard_map3d_adapter.hexa
-
-  이 파일은 얇은 import 쉘이다. 렌더링 로직/데이터 복사 금지.
-  변경 필요 시 원본(nexus)만 수정하고 nexus pages 재배포하면 자동 반영된다.
--->
+<title>n=6 Full Layer Map 3D</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-  html, body { margin: 0; padding: 0; height: 100%; background: #07071a; }
-  iframe { border: 0; width: 100%; height: 100%; display: block; }
-  .lock-tag {
-    position: fixed; top: 8px; right: 8px; z-index: 1000;
-    background: rgba(10,10,30,.85); border: 1px solid #334; color: #8b949e;
-    font: 11px/1 'Segoe UI',sans-serif; padding: 4px 10px; border-radius: 4px;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#07071a;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif}
+canvas{display:block}
+
+/* HUD */
+#hud{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;gap:12px;padding:8px 16px;background:rgba(7,7,26,.92);border-bottom:1px solid #223;z-index:10;font-size:13px}
+#hud h1{font-size:15px;font-weight:600;white-space:nowrap;color:#8bf}
+#search{flex:1;max-width:340px;padding:5px 10px;background:#111;border:1px solid #334;border-radius:4px;color:#eee;font-size:13px;outline:none}
+#search:focus{border-color:#66f}
+.layer-btn{padding:3px 10px;border:1px solid #334;border-radius:12px;background:transparent;color:#aaa;cursor:pointer;font-size:12px;transition:.2s}
+.layer-btn.active{border-color:var(--lc);color:var(--lc);background:rgba(255,255,255,.06)}
+.layer-btn:hover{background:rgba(255,255,255,.08)}
+#stats{margin-left:auto;color:#666;font-size:11px;white-space:nowrap}
+
+/* Info panel */
+#info{position:fixed;right:16px;top:56px;width:320px;max-height:calc(100vh - 72px);overflow-y:auto;background:rgba(10,10,30,.94);border:1px solid #334;border-radius:8px;padding:16px;display:none;z-index:10;font-size:13px;line-height:1.6}
+#info h2{font-size:15px;margin-bottom:8px;color:#adf}
+#info .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;margin:2px}
+#info .close{position:absolute;top:8px;right:12px;cursor:pointer;color:#666;font-size:18px}
+#info .close:hover{color:#fff}
+#info table{width:100%;border-collapse:collapse;margin-top:8px}
+#info td{padding:2px 6px;border-bottom:1px solid #222}
+#info td:first-child{color:#888;width:90px}
+
+/* Legend */
+#legend{position:fixed;left:16px;bottom:16px;background:rgba(10,10,30,.9);border:1px solid #334;border-radius:8px;padding:12px 16px;z-index:10;font-size:12px}
+#legend div{display:flex;align-items:center;gap:8px;margin:3px 0}
+#legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* Loading */
+#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#07071a;z-index:100;font-size:18px;color:#668}
 </style>
 </head>
 <body>
-<span class="lock-tag">⛔ LOCKED · import from nexus · map3d_adapter.hexa</span>
-<iframe src="https://need-singularity.github.io/nexus/reality_map_3d.html"
-        title="n=6 Reality Map 3D (canonical from nexus)"
-        allow="fullscreen"></iframe>
+
+<div id="loading">n=6 Full Layer Map Loading...</div>
+
+<div id="hud">
+  <h1>n=6 Layer Map</h1>
+  <input id="search" type="text" placeholder="Search nodes...">
+  <button class="layer-btn active" data-layer="0" style="--lc:#f66">L0 Constants</button>
+  <button class="layer-btn active" data-layer="1" style="--lc:#fa4">L1 Materials</button>
+  <button class="layer-btn active" data-layer="2" style="--lc:#4f8">L2 Applications</button>
+  <button class="layer-btn active" data-layer="3" style="--lc:#4bf">L3 Technology</button>
+  <button class="layer-btn active" data-layer="4" style="--lc:#c6f">L4 Products</button>
+  <span id="stats"></span>
+</div>
+
+<div id="info">
+  <span class="close">&times;</span>
+  <h2 id="info-title"></h2>
+  <div id="info-body"></div>
+</div>
+
+<div id="legend">
+  <div><span class="dot" style="background:#f66"></span> L0: Constants / Elements</div>
+  <div><span class="dot" style="background:#fa4"></span> L1: Materials / Chemistry</div>
+  <div><span class="dot" style="background:#4f8"></span> L2: Applications</div>
+  <div><span class="dot" style="background:#4bf"></span> L3: Technology / Techniques</div>
+  <div><span class="dot" style="background:#c6f"></span> L4: Products</div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+// ── Colors per layer ──
+const LAYER_COLORS = [0xff6666, 0xffaa44, 0x44ff88, 0x44bbff, 0xcc66ff];
+const LAYER_Y = [0, 30, 60, 90, 120];  // Y heights
+const LAYER_RADIUS = [40, 60, 100, 80, 50]; // spread radius per layer
+
+let mapData = null;
+let nodeMap = {};        // id → {node, mesh_index, pos}
+let layerVisible = [true, true, true, true, true];
+let nodeMeshes = null;   // InstancedMesh
+let edgeLines = null;
+let hoveredIdx = -1;
+let selectedId = null;
+
+// ── Scene setup ──
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x07071a, 0.003);
+
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.5, 800);
+camera.position.set(0, 100, 180);
+
+const renderer = new THREE.WebGLRenderer({antialias: true, alpha: false});
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x07071a);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.target.set(0, 60, 0);
+controls.maxDistance = 400;
+
+// ── Lights ──
+scene.add(new THREE.AmbientLight(0x334466, 1.2));
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+dirLight.position.set(50, 120, 80);
+scene.add(dirLight);
+
+// ── Raycaster ──
+const raycaster = new THREE.Raycaster();
+raycaster.params.Points = {threshold: 1.5};
+const mouse = new THREE.Vector2();
+
+// ── Load data ──
+async function loadData() {
+  const resp = await fetch('n6-map-data.json');
+  mapData = await resp.json();
+  buildScene();
+  document.getElementById('loading').style.display = 'none';
+  updateStats();
+}
+
+function goldenAngle(i, total, radius) {
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  const r = radius * Math.sqrt(i / total);
+  const theta = golden * i;
+  return [r * Math.cos(theta), r * Math.sin(theta)];
+}
+
+function buildScene() {
+  const nodes = mapData.nodes;
+  const edges = mapData.edges;
+
+  // ── Assign positions ──
+  const layerIndices = [0, 0, 0, 0, 0];
+  const layerTotals = [0, 0, 0, 0, 0];
+  nodes.forEach(n => layerTotals[n.layer]++);
+
+  nodes.forEach((n, i) => {
+    const L = n.layer;
+    const li = layerIndices[L]++;
+    const [x, z] = goldenAngle(li, layerTotals[L], LAYER_RADIUS[L]);
+    const y = LAYER_Y[L] + (Math.random() - 0.5) * 6;
+    n._pos = new THREE.Vector3(x, y, z);
+    n._idx = i;
+    nodeMap[n.id] = n;
+  });
+
+  // ── Instanced spheres ──
+  const geo = new THREE.SphereGeometry(0.6, 8, 6);
+  const mat = new THREE.MeshPhongMaterial({});
+  nodeMeshes = new THREE.InstancedMesh(geo, mat, nodes.length);
+  nodeMeshes.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+
+  const colorAttr = new THREE.InstancedBufferAttribute(new Float32Array(nodes.length * 3), 3);
+  nodeMeshes.instanceColor = colorAttr;
+
+  const dummy = new THREE.Object3D();
+  const tmpColor = new THREE.Color();
+
+  nodes.forEach((n, i) => {
+    dummy.position.copy(n._pos);
+    // size by type
+    let s = 0.6;
+    if (n.type === 'section') s = 1.8;
+    else if (n.type === 'product') s = 1.0;
+    else if (n.type === 'dse_domain') s = 0.9;
+    else if (n.type === 'constant') s = 1.2;
+    else if (n.type === 'ratio') s = 0.5;
+    dummy.scale.setScalar(s);
+    dummy.updateMatrix();
+    nodeMeshes.setMatrixAt(i, dummy.matrix);
+
+    tmpColor.setHex(LAYER_COLORS[n.layer]);
+    colorAttr.setXYZ(i, tmpColor.r, tmpColor.g, tmpColor.b);
+  });
+
+  scene.add(nodeMeshes);
+
+  // ── Edges ──
+  buildEdges(edges);
+
+  // ── Layer planes (subtle grids) ──
+  for (let L = 0; L < 5; L++) {
+    const planeGeo = new THREE.PlaneGeometry(LAYER_RADIUS[L] * 2.4, LAYER_RADIUS[L] * 2.4);
+    const planeMat = new THREE.MeshBasicMaterial({
+      color: LAYER_COLORS[L], transparent: true, opacity: 0.03, side: THREE.DoubleSide
+    });
+    const plane = new THREE.Mesh(planeGeo, planeMat);
+    plane.rotation.x = -Math.PI / 2;
+    plane.position.y = LAYER_Y[L];
+    plane.userData = {layer: L};
+    scene.add(plane);
+  }
+
+  // ── Layer labels ──
+  const LAYER_LABELS = ['L0: Constants', 'L1: Materials', 'L2: Applications', 'L3: Technology', 'L4: Products'];
+  for (let L = 0; L < 5; L++) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024; canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 1024, 512);
+    ctx.fillStyle = '#' + LAYER_COLORS[L].toString(16).padStart(6, '0');
+    ctx.font = 'bold 80px sans-serif';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(LAYER_LABELS[L], 40, 256);
+    const tex = new THREE.CanvasTexture(canvas);
+    const spriteMat = new THREE.SpriteMaterial({map: tex, transparent: true, opacity: 0.85, depthTest: false});
+    const sprite = new THREE.Sprite(spriteMat);
+    sprite.position.set(-LAYER_RADIUS[L] - 20, LAYER_Y[L] + 5, 0);
+    sprite.scale.set(50, 25, 1);
+    sprite.userData = {layer: L};
+    scene.add(sprite);
+  }
+}
+
+function buildEdges(edges) {
+  if (edgeLines) scene.remove(edgeLines);
+
+  const positions = [];
+  const colors = [];
+  const tmpColor = new THREE.Color();
+
+  edges.forEach(e => {
+    const src = nodeMap[e.source];
+    const tgt = nodeMap[e.target];
+    if (!src || !tgt) return;
+    if (!layerVisible[src.layer] || !layerVisible[tgt.layer]) return;
+
+    positions.push(src._pos.x, src._pos.y, src._pos.z);
+    positions.push(tgt._pos.x, tgt._pos.y, tgt._pos.z);
+
+    // edge color: blend of source/target layer
+    const srcC = new THREE.Color(LAYER_COLORS[src.layer]);
+    const tgtC = new THREE.Color(LAYER_COLORS[tgt.layer]);
+    tmpColor.copy(srcC).lerp(tgtC, 0.5);
+    colors.push(tmpColor.r, tmpColor.g, tmpColor.b);
+    colors.push(tmpColor.r, tmpColor.g, tmpColor.b);
+  });
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  const mat = new THREE.LineBasicMaterial({vertexColors: true, transparent: true, opacity: 0.12, depthWrite: false});
+  edgeLines = new THREE.LineSegments(geo, mat);
+  scene.add(edgeLines);
+}
+
+// ── Visibility ──
+function updateVisibility() {
+  if (!mapData) return;
+  const dummy = new THREE.Object3D();
+  const searchTerm = document.getElementById('search').value.toLowerCase();
+
+  mapData.nodes.forEach((n, i) => {
+    const visible = layerVisible[n.layer] &&
+      (!searchTerm || n.label.toLowerCase().includes(searchTerm) || (n.id && n.id.toLowerCase().includes(searchTerm)));
+
+    dummy.position.copy(n._pos);
+    let s = 0.6;
+    if (n.type === 'section') s = 1.8;
+    else if (n.type === 'product') s = 1.0;
+    else if (n.type === 'dse_domain') s = 0.9;
+    else if (n.type === 'constant') s = 1.2;
+    else if (n.type === 'ratio') s = 0.5;
+
+    if (!visible) s = 0;
+    else if (searchTerm && visible) s *= 2; // highlight matches
+
+    dummy.scale.setScalar(s);
+    dummy.updateMatrix();
+    nodeMeshes.setMatrixAt(i, dummy.matrix);
+  });
+  nodeMeshes.instanceMatrix.needsUpdate = true;
+
+  // Rebuild edges
+  buildEdges(mapData.edges);
+  updateStats();
+}
+
+function updateStats() {
+  if (!mapData) return;
+  const searchTerm = document.getElementById('search').value.toLowerCase();
+  let vis = 0;
+  mapData.nodes.forEach(n => {
+    if (layerVisible[n.layer] && (!searchTerm || n.label.toLowerCase().includes(searchTerm) || n.id.toLowerCase().includes(searchTerm)))
+      vis++;
+  });
+  document.getElementById('stats').textContent = `${vis}/${mapData.nodes.length} nodes`;
+}
+
+// ── Interaction ──
+function onMouseMove(e) {
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+}
+
+function onClick(e) {
+  if (!mapData || !nodeMeshes) return;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObject(nodeMeshes);
+  if (hits.length > 0) {
+    const idx = hits[0].instanceId;
+    const node = mapData.nodes[idx];
+    showInfo(node);
+  }
+}
+
+function showInfo(node) {
+  selectedId = node.id;
+  const panel = document.getElementById('info');
+  document.getElementById('info-title').textContent = node.label;
+
+  let html = `<span class="tag" style="background:${'#' + LAYER_COLORS[node.layer].toString(16).padStart(6,'0')}40;color:#${ LAYER_COLORS[node.layer].toString(16).padStart(6,'0')}">${node.type}</span>`;
+  html += `<span class="tag" style="background:#333">Layer ${node.layer}</span>`;
+
+  html += '<table>';
+  if (node.description) html += `<tr><td>Description</td><td>${node.description}</td></tr>`;
+  if (node.combos) html += `<tr><td>Combos</td><td>${node.combos.toLocaleString()}</td></tr>`;
+  if (node.alien_level) html += `<tr><td>Alien Level</td><td>${node.alien_level}</td></tr>`;
+  if (node.n6_max) html += `<tr><td>n6 Max</td><td>${node.n6_max}%</td></tr>`;
+  if (node.ufo) html += `<tr><td>UFO Score</td><td>${node.ufo}</td></tr>`;
+  if (node.bt_count) html += `<tr><td>BT Count</td><td>${node.bt_count}</td></tr>`;
+  if (node.bt_exact_pct) html += `<tr><td>BT Exact</td><td>${node.bt_exact_pct}%</td></tr>`;
+  if (node.closure_grade) html += `<tr><td>Closure Grade</td><td>${node.closure_grade}</td></tr>`;
+  if (node.levels && node.levels.length) html += `<tr><td>Levels</td><td>${node.levels.join(' → ')}</td></tr>`;
+  if (node.file) html += `<tr><td>File</td><td>${node.file}</td></tr>`;
+  if (node.section) html += `<tr><td>Section</td><td>${node.section}</td></tr>`;
+  if (node.domain) html += `<tr><td>Domain</td><td>${node.domain}</td></tr>`;
+  html += '</table>';
+
+  // Connected nodes
+  const connected = [];
+  mapData.edges.forEach(e => {
+    if (e.source === node.id && nodeMap[e.target]) connected.push({id: e.target, type: e.type, dir: '→'});
+    if (e.target === node.id && nodeMap[e.source]) connected.push({id: e.source, type: e.type, dir: '←'});
+  });
+  if (connected.length) {
+    html += `<h3 style="margin-top:12px;font-size:13px;color:#888">Connections (${connected.length})</h3><div style="max-height:180px;overflow-y:auto">`;
+    connected.slice(0, 30).forEach(c => {
+      const cn = nodeMap[c.id];
+      html += `<div style="font-size:11px;padding:2px 0;color:#aaa">${c.dir} <span style="color:#${ LAYER_COLORS[cn.layer].toString(16).padStart(6,'0')}">${cn.label}</span> <span style="color:#555">(${c.type})</span></div>`;
+    });
+    if (connected.length > 30) html += `<div style="color:#555;font-size:11px">...+${connected.length - 30} more</div>`;
+    html += '</div>';
+  }
+
+  document.getElementById('info-body').innerHTML = html;
+  panel.style.display = 'block';
+
+  // Highlight connected edges
+  highlightNode(node);
+}
+
+function highlightNode(node) {
+  if (!edgeLines) return;
+  const posArr = edgeLines.geometry.attributes.position.array;
+  const colArr = edgeLines.geometry.attributes.color.array;
+  // Reset opacity
+  edgeLines.material.opacity = 0.06;
+
+  // Rebuild edges with highlight
+  if (!mapData) return;
+  const positions = [];
+  const colors = [];
+  const tmpColor = new THREE.Color();
+
+  mapData.edges.forEach(e => {
+    const src = nodeMap[e.source];
+    const tgt = nodeMap[e.target];
+    if (!src || !tgt) return;
+    if (!layerVisible[src.layer] || !layerVisible[tgt.layer]) return;
+
+    const isHighlight = (e.source === node.id || e.target === node.id);
+
+    positions.push(src._pos.x, src._pos.y, src._pos.z);
+    positions.push(tgt._pos.x, tgt._pos.y, tgt._pos.z);
+
+    if (isHighlight) {
+      tmpColor.setHex(0xffffff);
+    } else {
+      const srcC = new THREE.Color(LAYER_COLORS[src.layer]);
+      const tgtC = new THREE.Color(LAYER_COLORS[tgt.layer]);
+      tmpColor.copy(srcC).lerp(tgtC, 0.5);
+    }
+    colors.push(tmpColor.r, tmpColor.g, tmpColor.b);
+    colors.push(tmpColor.r, tmpColor.g, tmpColor.b);
+  });
+
+  edgeLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  edgeLines.geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  edgeLines.material.opacity = 0.15;
+}
+
+// ── Event listeners ──
+window.addEventListener('mousemove', onMouseMove);
+window.addEventListener('click', onClick);
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+document.querySelectorAll('.layer-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const L = parseInt(btn.dataset.layer);
+    layerVisible[L] = !layerVisible[L];
+    btn.classList.toggle('active');
+    updateVisibility();
+
+    // Toggle layer planes and labels
+    scene.children.forEach(c => {
+      if (c.userData && c.userData.layer === L) c.visible = layerVisible[L];
+    });
+  });
+});
+
+document.getElementById('search').addEventListener('input', updateVisibility);
+document.querySelector('#info .close').addEventListener('click', () => {
+  document.getElementById('info').style.display = 'none';
+  selectedId = null;
+  if (mapData) buildEdges(mapData.edges);
+});
+
+// ── Animate ──
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// ── Load ──
+loadData();
+</script>
 </body>
 </html>

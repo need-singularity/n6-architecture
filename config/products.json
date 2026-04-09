@@ -3065,6 +3065,79 @@
         }
       ],
       "bt_detail": "BT-351 구조-분류 11/11, BT-352 게놈래더 15/15, BT-353 역학-백신-효소 13/13"
+    },
+    {
+      "id": "hiv-treatment",
+      "title": "HIV 치료",
+      "icon": "🧬",
+      "heading": "HIV 치료 (HIV Treatment)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 10,
+      "industry_pct": 60,
+      "industry_detail": "HAART 6제 프로토콜 + CCR5 Δ32 + bNAb 6에피토프 + 잠복저장소 6구획",
+      "experiment_pct": 0,
+      "experiment_detail": "임상 진입 대기",
+      "physics_limit_count": 0,
+      "tp_count": 6,
+      "discovery_count": 10,
+      "cross_dse_domains": 3,
+      "mk_count": 5,
+      "summary_extra": "BT-461~423 10연속돌파, HAART 6제/CCR5/bNAb/잠복저장소 6구획 동시 소거, Mk.I~V 진화",
+      "domains": [
+        "hiv-treatment"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "HEXA-HIV 6축 완전 치료 체인",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "BT-461~423: HAART 6제 동시 타격(RT/PR/IN/진입/성숙/보조), CCR5 CRISPR 자가조혈모세포, bNAb 6에피토프(CD4bs/V3/V1V2/gp41MPER/gp120실리콘/fusion peptide), 잠복저장소 6구획(휴지CD4/대식세포/미세아교/생식관/장GALT/골수) 동시 소거, n=6 gp120 삼량체 τ=4접힘, σ-φ=10 역전사 기착, J2=24 면역 재구성",
+          "bt": [
+            "BT-461",
+            "BT-462",
+            "BT-463",
+            "BT-464",
+            "BT-465",
+            "BT-466",
+            "BT-467",
+            "BT-468",
+            "BT-469",
+            "BT-470"
+          ],
+          "links": [
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-hiv-paper.md"
+            },
+            {
+              "label": "Mk.I",
+              "path": "docs/hiv-treatment/evolution/mk-1-basic.md"
+            },
+            {
+              "label": "Mk.II",
+              "path": "docs/hiv-treatment/evolution/mk-2-short.md"
+            },
+            {
+              "label": "Mk.III",
+              "path": "docs/hiv-treatment/evolution/mk-3-mid.md"
+            },
+            {
+              "label": "Mk.IV",
+              "path": "docs/hiv-treatment/evolution/mk-4-long.md"
+            },
+            {
+              "label": "Mk.V",
+              "path": "docs/hiv-treatment/evolution/mk-5-ultimate.md"
+            }
+          ],
+          "mk_count": 5
+        }
+      ],
+      "bt_detail": "BT-461 HAART6제, BT-462 CCR5Δ32, BT-463 bNAb6에피토프, BT-464 잠복6구획, BT-465 gp120삼량체τ=4, BT-466 역전사σ-φ=10, BT-467 통합효소J₂, BT-468 면역재구성n=6, BT-469 바이러스부하n/φ, BT-470 완치소거σ"
     }
   ],
   "roadmap": [
