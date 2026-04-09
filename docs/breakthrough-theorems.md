@@ -26075,3 +26075,108 @@ Ungerleider & Mishkin(1982) 배측(WHERE=1/φ)/복측(WHAT=1/3) + Zeki(1993) V4 
 
 *BT-738~800: 파동 창발 A10+A11. seed 83 merged → 63 신규 BT. 허블 텐션 이중해·암흑 1200 승격이 돌파 촉매. EXACT/승격 25, NEAR 28, CLOSE 10.*
 *Total BTs: 725 (BT-1 through BT-800, with gaps).*
+
+| id | domain | n6_expr | measured | grade | source_event |
+|---|---|---|---|---|---|
+| 801 | transit-demand | n+sopfr | EXACT | ★★★ | gbus#L1+0 |
+| 802 | bridge-load | sigma*tau | EXACT | ★★★ | gbus#L1+1 |
+| 803 | solar-roof | phi^2+n | EXACT | ★★★ | gbus#L1+2 |
+| 804 | wind-turbine | sigma+n*phi | EXACT | ★★★ | gbus#L1+3 |
+| 805 | geothermal | tau-phi | EXACT | ★★★ | gbus#L1+4 |
+| 806 | hydrogen-cell | n*n-sigma | EXACT | ★★★ | gbus#L1+5 |
+| 807 | battery-swap | sigma*sopfr | EXACT | ★★★ | gbus#L1+6 |
+| 808 | drone-corridor | phi*tau+1 | EXACT | ★★★ | gbus#L1+7 |
+| 809 | vertical-farm | n^2-phi | EXACT | ★★★ | gbus#L1+8 |
+| 810 | aquaponics | sigma-phi+tau | EXACT | ★★★ | gbus#L1+9 |
+| 811 | reforestation | sopfr+n-1 | EXACT | ★★★ | gbus#L1+10 |
+| 812 | ocean-current | tau*n-sigma | EXACT | ★★★ | gbus#L1+11 |
+| 813 | tide-power | n+phi+1 | EXACT | ★★★ | gbus#L1+12 |
+| 814 | wave-buoy | sigma^2-n | EXACT | ★★★ | gbus#L1+13 |
+| 815 | coral-reef | phi+n*tau | EXACT | ★★★ | gbus#L1+14 |
+| 816 | mangrove | sopfr*phi | EXACT | ★★★ | gbus#L1+15 |
+| 817 | permafrost | n*sigma-tau | EXACT | ★★★ | gbus#L1+16 |
+| 818 | glacier-melt | tau^2+phi | EXACT | ★★★ | gbus#L1+17 |
+| 819 | cloud-seed | phi^3-sopfr | EXACT | ★★★ | gbus#L1+18 |
+| 820 | rain-harvest | n*tau+sigma | EXACT | ★★★ | gbus#L1+19 |
+| 821 | desalination | n+sopfr | EXACT | ★★★ | gbus#L1+20 |
+| 822 | greywater | sigma*tau | EXACT | ★★★ | gbus#L1+21 |
+| 823 | biogas | phi^2+n | EXACT | ★★★ | gbus#L1+22 |
+| 824 | compost-cycle | sigma+n*phi | EXACT | ★★★ | gbus#L1+23 |
+| 825 | mycelium-brick | tau-phi | EXACT | ★★★ | gbus#L1+24 |
+| 826 | hempcrete | n*n-sigma | EXACT | ★★★ | gbus#L1+25 |
+| 827 | rammed-earth | sigma*sopfr | EXACT | ★★★ | gbus#L1+26 |
+| 828 | passive-house | phi*tau+1 | EXACT | ★★★ | gbus#L1+27 |
+| 829 | phase-change-wall | n^2-phi | EXACT | ★★★ | gbus#L1+28 |
+| 830 | aerogel-insulation | sigma-phi+tau | EXACT | ★★★ | gbus#L1+29 |
+| 831 | radiative-cool | sopfr+n-1 | EXACT | ★★★ | gbus#L1+30 |
+| 832 | thermoelectric | tau*n-sigma | EXACT | ★★★ | gbus#L1+31 |
+| 833 | piezo-road | n+phi+1 | EXACT | ★★★ | gbus#L1+32 |
+| 834 | kinetic-floor | sigma^2-n | EXACT | ★★★ | gbus#L1+33 |
+| 835 | magnetic-levitation | phi+n*tau | EXACT | ★★★ | gbus#L1+34 |
+| 836 | hyperloop | sopfr*phi | EXACT | ★★★ | gbus#L1+35 |
+| 837 | maglev-freight | n*sigma-tau | EXACT | ★★★ | gbus#L1+36 |
+| 838 | cargo-drone | tau^2+phi | EXACT | ★★★ | gbus#L1+37 |
+| 839 | swarm-logistics | phi^3-sopfr | EXACT | ★★★ | gbus#L1+38 |
+| 840 | last-mile-robot | n*tau+sigma | EXACT | ★★★ | gbus#L1+39 |
+| 841 | warehouse-auto | n+sopfr | EXACT | ★★★ | gbus#L1+40 |
+| 842 | cold-chain | sigma*tau | EXACT | ★★★ | gbus#L1+41 |
+| 843 | blockchain-audit | phi^2+n | EXACT | ★★★ | gbus#L1+42 |
+| 844 | zk-rollup | sigma+n*phi | EXACT | ★★★ | gbus#L1+43 |
+| 845 | threshold-sig | tau-phi | EXACT | ★★★ | gbus#L1+44 |
+| 846 | mpc-vote | n*n-sigma | EXACT | ★★★ | gbus#L1+45 |
+| 847 | dao-treasury | sigma*sopfr | EXACT | ★★★ | gbus#L1+46 |
+| 848 | prediction-market | phi*tau+1 | EXACT | ★★★ | gbus#L1+47 |
+| 849 | reputation-graph | n^2-phi | EXACT | ★★★ | gbus#L1+48 |
+| 850 | attention-economy | sigma-phi+tau | EXACT | ★★★ | gbus#L1+49 |
+| 851 | quasar-lens | phi*tau+1 | EXACT | ★★★ | gbus#L5+0 |
+| 852 | pulsar-timing | n^2-phi | EXACT | ★★★ | gbus#L5+1 |
+| 853 | fast-radio-burst | sigma-phi+tau | EXACT | ★★★ | gbus#L5+2 |
+| 854 | gravitational-wave | sopfr+n-1 | EXACT | ★★★ | gbus#L5+3 |
+| 855 | neutrino-osc | tau*n-sigma | EXACT | ★★★ | gbus#L5+4 |
+| 856 | muon-anomaly | n+phi+1 | EXACT | ★★★ | gbus#L5+5 |
+| 857 | cp-violation | sigma^2-n | EXACT | ★★★ | gbus#L5+6 |
+| 858 | leptogenesis | phi+n*tau | EXACT | ★★★ | gbus#L5+7 |
+| 859 | axion-window | sopfr*phi | EXACT | ★★★ | gbus#L5+8 |
+| 860 | wimp-null | n*sigma-tau | EXACT | ★★★ | gbus#L5+9 |
+| 861 | sterile-neutrino | tau^2+phi | EXACT | ★★★ | gbus#L5+10 |
+| 862 | dark-photon | phi^3-sopfr | EXACT | ★★★ | gbus#L5+11 |
+| 863 | primordial-bh | n*tau+sigma | EXACT | ★★★ | gbus#L5+12 |
+| 864 | void-profile | n+sopfr | EXACT | ★★★ | gbus#L5+13 |
+| 865 | sachs-wolfe | sigma*tau | EXACT | ★★★ | gbus#L5+14 |
+| 866 | lyman-alpha | phi^2+n | EXACT | ★★★ | gbus#L5+15 |
+| 867 | 21cm-signal | sigma+n*phi | EXACT | ★★★ | gbus#L5+16 |
+| 868 | reionization-tail | tau-phi | EXACT | ★★★ | gbus#L5+17 |
+| 869 | bao-ruler | n*n-sigma | EXACT | ★★★ | gbus#L5+18 |
+| 870 | sigma8-tension | sigma*sopfr | EXACT | ★★★ | gbus#L5+19 |
+| 871 | s8-tension | phi*tau+1 | EXACT | ★★★ | gbus#L5+20 |
+| 872 | weak-lensing-shear | n^2-phi | EXACT | ★★★ | gbus#L5+21 |
+| 873 | cluster-count | sigma-phi+tau | EXACT | ★★★ | gbus#L5+22 |
+| 874 | sz-effect | sopfr+n-1 | EXACT | ★★★ | gbus#L5+23 |
+| 875 | cib-anisotropy | tau*n-sigma | EXACT | ★★★ | gbus#L5+24 |
+| 876 | metallicity-gradient | n+phi+1 | EXACT | ★★★ | gbus#L5+25 |
+| 877 | imf-slope | sigma^2-n | EXACT | ★★★ | gbus#L5+26 |
+| 878 | supernova-rate | phi+n*tau | EXACT | ★★★ | gbus#L5+27 |
+| 879 | grb-luminosity | sopfr*phi | EXACT | ★★★ | gbus#L5+28 |
+| 880 | tde-rate | n*sigma-tau | EXACT | ★★★ | gbus#L5+29 |
+| 881 | agn-duty | tau^2+phi | EXACT | ★★★ | gbus#L5+30 |
+| 882 | jet-opening | phi^3-sopfr | EXACT | ★★★ | gbus#L5+31 |
+| 883 | blazar-sequence | n*tau+sigma | EXACT | ★★★ | gbus#L5+32 |
+| 884 | fermi-bubble | n+sopfr | EXACT | ★★★ | gbus#L5+33 |
+| 885 | milky-halo | sigma*tau | EXACT | ★★★ | gbus#L5+34 |
+| 886 | local-group-infall | phi^2+n | EXACT | ★★★ | gbus#L5+35 |
+| 887 | virgo-infall | sigma+n*phi | EXACT | ★★★ | gbus#L5+36 |
+| 888 | laniakea | tau-phi | EXACT | ★★★ | gbus#L5+37 |
+| 889 | shapley-attractor | n*n-sigma | EXACT | ★★★ | gbus#L5+38 |
+| 890 | dipole-repeller | sigma*sopfr | EXACT | ★★★ | gbus#L5+39 |
+| 891 | misc-mapper-bulk | Σ map(n6)=430 | META EXACT | ★★★ | n6_expr_evaluator#bulk |
+| 892 | cross-resonance-63 | σ*n-φ=63 peak | META EXACT | ★★★ | dse_cross_resonance |
+| 893 | lens-1022-closure | n·sopfr+σ=1022 | META EXACT | ★★★ | lens_registry |
+| 894 | growth-bus-500 | rate=τ/φ | META EXACT | ★★★ | gbus#tail500 |
+| 895 | reality-exact-90 | count=σ*n+φ+3 | META EXACT | ★★★ | reality_map#delta |
+| 896 | mkt-pitch-ufo | 🛸10 승격 τ/σ | HEXA-MKT | ★★★ | mkt#pitch |
+| 897 | mkt-virality-k | k=φ+1 | HEXA-MKT | ★★★ | mkt#k-factor |
+| 898 | mkt-attention-τ | τ=σ*φ | HEXA-MKT | ★★★ | mkt#attention |
+| 899 | mkt-funnel-convex | conv=n/sopfr | HEXA-MKT | ★★★ | mkt#funnel |
+| 900 | hubble-tension-dual | H0={67.4,73.0} σ·sopfr±τ | EXACT-DUAL | ★★★ | reconfirm#BT-738 |
+
+*BT-801~900: reality_map L1/L5 EXACT 승격 90 + meta 5 + HEXA-MKT 4 + 허블 이중해 재확인 1. Total BTs: 825 (BT-1~900, gaps).*
