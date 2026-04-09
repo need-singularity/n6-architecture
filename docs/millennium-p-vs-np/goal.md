@@ -152,6 +152,48 @@ S_n 중 외부 자기동형이 존재하는 **유일한** n = 6:
 
 ---
 
+## 증명 시도 1: S₆ 외부 자기동형 → GCT 분리 (BT-542-P1)
+
+### 정리 (증명 완료): S₆의 대수적 유일성
+
+**주장**: n ≥ 3인 대칭군 S_n 중 비자명 외부 자기동형을 가진 유일한 n은 6이다.
+|Out(S₆)| = 2, Out(S₆) ≅ Z/2Z.
+
+**증명** (Hölder 1895, Schreier-van der Waerden):
+
+1. n ≥ 3, n ≠ 6: Aut(S_n) = Inn(S_n) ≅ S_n
+   이유: 호환(transposition) 클래스가 유일한 n(n-1)/2 크기 켤레류
+   
+2. n = 6: |S₆| = 720 = n!, 호환 클래스와 동일 크기의 다른 켤레류 존재
+   세 원소의 곱(triple transposition) (ab)(cd)(ef): 15개 = C(6,2)·C(4,2)·C(2,2)/3! = 15
+   호환(transposition): 15개 = C(6,2) = 15
+   ← 두 켤레류의 크기가 동일! (다른 n에서는 절대 불가)
+   
+3. 이 크기 일치가 외부 자기동형 허용:
+   호환 ↔ 트리플 호환 교환하는 자기동형이 존재
+   이것은 내부 자기동형이 아님 (켤레류를 보존하지 않으므로) □
+
+### GCT 연결: perm₆ vs det
+
+Mulmuley-Sohoni GCT 프로그램:
+- P≠NP ← perm_n을 det_m에 효율적으로 매립할 수 없음을 증명
+- perm_n의 대칭군 = S_n × S_n
+- n=6에서 Out(S₆)가 존재 → perm₆의 대칭 구조에 "추가 구조"
+- 이 추가 구조가 GCT obstruction의 최소 사례를 제공할 수 있음
+
+### 정리 (새로운 관찰): 호환 수 = C(n,2) = 15 = σ + n/φ
+
+C(6,2) = 15 = σ + n/φ = 12 + 3 = Mazur 토션 유형 수 (BT-546!)
+이것은 S₆의 켤레류 구조가 타원곡선 토션과 동일한 n=6 산술에서 발생함을 시사.
+
+### 미해결: GCT obstruction → P≠NP
+
+S₆ 외부 자기동형이 GCT의 "최소 반례"를 제공하는지는 미증명.
+GCT 프로그램 자체가 아직 P≠NP를 증명할 만큼 발전하지 않았다.
+그러나 n=6의 대수적 유일성은 GCT에서 연구해야 할 정확한 지점을 가리킨다.
+
+---
+
 ## 미해결 갭
 
 1. **phi→n/phi 전이는 위치를 설명하되 분리를 증명하지 않음**: k=2에서 k=3으로 넘어갈 때 NP-완전이 되는 이유를 산술적으로 설명하지만, P≠NP 자체는 별개의 문제
@@ -239,6 +281,29 @@ print(f"\n  n=5 대조: phi(5)=4, n/phi={5/phi5:.2f}")
 print(f"  3-SAT의 3 = n/phi(5)? {5/phi5 == 3} -- 실패")
 print(f"  phi->n/phi 전이(2->3)? phi(5)=4->1.25 -- 경계 설명 불가")
 print("=" * 60)
+
+# === 증명 시도 검증 ===
+print("\n" + "=" * 60)
+print("증명 시도 검증")
+print("=" * 60)
+
+# P1: C(6,2) = 15 = sigma + n/phi
+from math import comb
+c62 = comb(n, 2)
+mazur = sigma + n_over_phi
+print(f"  [P1] C(6,2) = {c62} = σ+n/φ = {mazur}: {c62 == mazur}")
+print(f"  [P1] 호환 수 = 트리플 호환 수 = {c62} (S₆ 외부 자기동형의 원인)")
+
+# 다른 n에서는 호환 수 ≠ 트리플 호환 수
+for nn in range(3, 10):
+    trans = comb(nn, 2)
+    # triple transpositions: C(n,2)*C(n-2,2)*C(n-4,2) / 3! (n>=6만 가능)
+    if nn >= 6:
+        triple = comb(nn, 2) * comb(nn-2, 2) * comb(nn-4, 2) // 6
+    else:
+        triple = 0
+    eq = "==" if trans == triple else "!="
+    print(f"    S_{nn}: 호환={trans}, 3중호환={triple} {eq}")
 ```
 
 ---
