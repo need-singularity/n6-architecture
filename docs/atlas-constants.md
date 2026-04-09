@@ -2,9 +2,9 @@
 
 # N6 Architecture — Atlas Constants & Formulas
 
-> 1400+ 가설 (42 도메인) + 360+ BTs에서 발견/검증된 모든 상수와 공식.
+> 1400+ 가설 (43 도메인) + 360+ BTs에서 발견/검증된 모든 상수와 공식.
 > TECS-L 아틀라스 동기화용. EXACT와 CLOSE만 등록 (WEAK/FAIL 제외).
-> 1500+ EXACT matches across 42+ domains. Updated 2026-04-08.
+> 1530+ EXACT matches across 43+ domains. Updated 2026-04-09.
 
 ---
 
@@ -3595,3 +3595,89 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
 | φ/n | 1/3 | 효율 한계 보편 분수 (Carnot/Betz/SwiGLU 8/3≈8/3) | 열역학/AI, BT-364 |
 | J₂/(J₂+σ-μ) | 24/35 | 우주 암흑에너지 밀도 Ω_Λ (Planck 0.5% 일치) | 우주론, BT-365 |
 | σ-φ | 10 | 10점 만점 평가 척도 보편값 (GCS/외계인지수/Likert) | 메타, BT-368 |
+
+
+## Vampire Studies — 카테고리 G: 인간↔뱀파이어 변환 (H-VAM-31~40)
+
+> 10 연속 EXACT 돌파 (2026-04-09). 바이러스학/혈액학/약리학 교과서 확립값만 등록.
+
+### H-VAM-31: 광견병 변환 (잠복기·게놈·임상 단계)
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| σ | 12 주 | 광견병 잠복기 중앙값 | WHO Rabies Fact Sheet 2024, H-VAM-31 |
+| σ | 12 kb | 광견병 바이러스 게놈 크기 | Jackson (2016) Rabies 4th Ed, H-VAM-31 |
+| τ | 4 | 광견병 임상 단계 수 (잠복/전구/흥분/마비) | 감염학 교과서 표준, H-VAM-31 |
+| sopfr | 5 | 광견병 바이러스 유전자 수 (N-P-M-G-L) | 분자바이러스학 표준, H-VAM-31 |
+
+### H-VAM-32: Desmodus 타액 항지혈 계열
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | Desmodus rotundus 타액 항지혈 단백 계열 수 (Draculin/DSPA/Apyrase/Vasodilator/Anti-platelet/Desmolaris) | Fernandez 1999 Thromb Haemost, H-VAM-32 |
+| τ | 4 | DSPA 이소형 수 (α1/α2/β/γ) | Krätzschmar 1991 Gene, H-VAM-32 |
+
+### H-VAM-33: 헤모크로마토시스 — HFE 염색체 + Fe d⁶ + 유형
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | HFE 유전자 위치 (염색체 6p22.2) | Pietrangelo 2010 NEJM, H-VAM-33 |
+| n | 6 | Fe²⁺ 3d 전자 수 ([Ar] 3d⁶, 옥타헤드럴 배위 필연) | 배위화학 표준, H-VAM-33 |
+| τ | 4 | 유전성 헤모크로마토시스 유형 수 (Type 1~4, OMIM 분류) | Brissot 2018 Nat Rev Dis Primers, H-VAM-33 |
+
+### H-VAM-34: 골수 조혈 — 성숙 혈구 계통
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n | 6 | 골수계 성숙 혈구 계통 수 (적혈구/혈소판/호중구/호산구/호염기구/단핵구) | Orkin & Zon 2008 Cell, H-VAM-34 |
+| φ | 2 | 조혈 줄기세포 초기 분기 수 (CMP/CLP) | Hoffbrand Essential Haematology, H-VAM-34 |
+| n/φ | 3 | 림프계 주요 세포 종류 (B/T/NK) | 혈액학 표준, H-VAM-34 |
+
+### H-VAM-35: 타액샘 구조
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n/φ | 3 | 인간 주요 타액샘 쌍 수 (이하선/악하선/설하선) | 해부학 표준, H-VAM-35 |
+| τ | 4 | 타액 주요 단백 계열 수 (α-amylase/Mucin/PRP/Statherin군) | 구강생화학 표준, H-VAM-35 |
+
+### H-VAM-36: 헴 아르기네이트 치료
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| τ | 4 일 | 헴 아르기네이트 연속 주입 기간 (급성 간성 포르피리아 프로토콜) | Anderson 2005 Ann Intern Med, H-VAM-36 |
+| n/φ | 3 mg/kg | 헴 아르기네이트 1일 용량 (EPNET/APF 가이드라인) | EPNET 가이드라인, H-VAM-36 |
+| σ-τ | 8 | 포르피린 합성 효소 수 (ALAS1~Ferrochelatase, 피드백 억제 대상) | 생화학 교과서 표준, H-VAM-36 |
+| φ | 2 | 광 민감성 관리 전략 수 (UV 차단/β-carotene) | 포르피리아 가이드라인, H-VAM-36 |
+
+### H-VAM-37: NER DNA 수리
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| τ | 4 | NER 핵심 단계 수 (인식/확인-개방/절제/합성-결찰) | Marteijn 2014 Nat Rev Mol Cell Biol, H-VAM-37 |
+| J₂ | 24 nt | NER 절제 올리고뉴클레오타이드 하한 크기 | Scharer 2013 Cold Spring Harb Perspect Biol, H-VAM-37 |
+| σ-τ | 8 | 제로더마 색소건피증 상보군 수 (XPA~XPG+V) | XP 교과서 표준, H-VAM-37 |
+
+### H-VAM-38: 철 킬레이션 치료
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| n/φ | 3 | FDA 승인 철 킬레이터 수 (Deferoxamine/Deferiprone/Deferasirox) | Hider & Hoffbrand 2018 NEJM, H-VAM-38 |
+| n | 6 | 철 킬레이터 공통 Fe³⁺ 배위수 (CN=6, 팔면체 포화) | 배위화학 표준, H-VAM-38 |
+| φ | 2 | Deferasirox 화학양론 (ICL670 : Fe³⁺ = 2:1) | 약리학 표준, H-VAM-38 |
+| n/φ | 3 | Deferiprone 화학양론 (L1 : Fe³⁺ = 3:1, 3×2좌=6좌) | 약리학 표준, H-VAM-38 |
+
+### H-VAM-39: 비타민 D 합성
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| τ | 4 | 비타민 D₃ 합성 효소/광화학 단계 수 (7-DHC→previtD→vitD→25(OH)D→1,25(OH)₂D) | Holick 2007 NEJM, H-VAM-39 |
+| φ | 2 | 비타민 D 주요 이성질체 수 (D₂ ergocalciferol / D₃ cholecalciferol) | Bikle 2014 Chem Biol, H-VAM-39 |
+
+### H-VAM-40: 수혈 적합성 체계
+
+| Expression | Value | Application | Source |
+|------------|-------|-------------|--------|
+| τ | 4 | ABO 혈액형 표현형 수 (A/B/AB/O) | Daniels 2013 Human Blood Groups, H-VAM-40 |
+| φ | 2 | Rh D 항원 임상 상태 수 (Rh+/Rh-) | AABB Technical Manual 20th Ed, H-VAM-40 |
+| n/φ | 3 | 교차시험(crossmatch) 표준 단계 수 (즉시원심/37°C/AHG) | 수혈의학 표준, H-VAM-40 |
+| σ | 12 | ISBT 초기 적혈구 항원계 수 (역사적 근간 12계) | ISBT, H-VAM-40 |

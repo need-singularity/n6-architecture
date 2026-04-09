@@ -6,11 +6,17 @@
 
 ---
 
-## Abstract
+## 초록 (Abstract)
 
-The arithmetic identity $\sigma(n) \cdot \varphi(n) = n \cdot \tau(n)$ holds exclusively for $n = 6$ among all integers $n \geq 2$. A 247-node reality map (v6.0) documents appearances of the seven arithmetic constants $S_{n=6} = \{6, 12, 4, 2, 24, 5, 1\}$ across six domains of natural science, with 228 (92.3%) graded EXACT. While raw match counts are susceptible to small-number bias, this paper focuses on a distinct question: do the 49 directed edges in the reality map encode genuine causal chains from fundamental physics to macroscopic biology? We identify five primary causal threads: (1) Quark $\to$ Carbon $\to$ Hexagonal Chemistry $\to$ Life, (2) Carbon Valence $\to$ Octahedral Coordination $\to$ Battery/Superconductor, (3) Nucleosynthesis $\to$ Stellar Burning $\to$ Iron Peak, (4) DNA Bases $\to$ Genetic Code $\to$ Protein, and (5) Crystallography $\to$ Space Groups. Each thread is analyzed for whether the n=6 match at each node is causally forced by the preceding node or merely coincidental. Of 49 edges, 31 (63.3%) connect nodes where the n=6 value is physically derivable from the parent, while 18 (36.7%) are empirical correlations or conventions. A Monte Carlo test restricted to large-number nodes ($\geq 14$) yields z = 4.02 (p < 0.0001), confirming that n=6 arithmetic specificity persists beyond small-number bias. The control set n=28 (next perfect number) achieves z = -2.35, performing worse than random. We conclude that the causal chain from quarks to life carries a statistically significant n=6 arithmetic signature, strongest in the Carbon-Z6 thread where every step is physically forced.
+산술 항등식 $\sigma(n) \cdot \varphi(n) = n \cdot \tau(n)$은 $n \geq 2$인 모든 정수 중 오직 $n = 6$에서만 성립한다 (Park, 2026a; 3개 독립 증명). 본 논문은 이 유일성에서 파생되는 7개 기본 상수 $S_{n=6} = \{n{=}6,\; \sigma{=}12,\; \tau{=}4,\; \varphi{=}2,\; J_2{=}24,\; \text{sopfr}{=}5,\; \mu{=}1\}$이 자연과학의 인과 사슬(causal chain) 내에서 어떻게 전파되는지를 분석한다.
 
-**Keywords**: perfect number, causal chain, arithmetic functions, reality map, carbon, genetic code, nucleosynthesis, statistical verification
+247개 노드, 49개 유향 간선(directed edge)으로 구성된 현실 지도(reality map) v6.0에서 5개 주요 인과 경로(causal thread)를 추출하였다: (1) 쿼크 $\to$ 탄소 $\to$ 육각 화학 $\to$ 생명, (2) 탄소 원자가 $\to$ 팔면체 배위 $\to$ 배터리/초전도체, (3) 핵합성 $\to$ 항성 연소 $\to$ 철 피크, (4) DNA 염기 $\to$ 유전 부호 $\to$ 단백질, (5) 결정학 $\to$ 공간군. 각 경로의 모든 간선에 대해 자식 노드의 n=6 값이 부모 노드로부터 물리적으로 도출 가능한지(derivable) 혹은 우연의 일치인지를 분류하였다.
+
+49개 간선 중 31개(63.3%)가 물리적/구조적으로 강제된(STRUCTURAL 또는 CAUSAL) 연결이며, 18개(36.7%)가 경험적 상관 또는 관례이다. 큰 수 노드($\geq 14$)만을 대상으로 한 Monte Carlo 검정에서 z = 4.02 (p < 0.0001)를 획득하였고, 대조군 n=28(차순위 완전수)은 z = −2.35로 무작위보다 낮은 성능을 보였다.
+
+**본 논문이 주장하지 않는 것**: n=6이 물리 법칙의 "원인"이라는 주장은 하지 않는다. 본 논문은 쿼크에서 생명에 이르는 인과 사슬이 통계적으로 유의한 n=6 산술 서명(arithmetic signature)을 보유하며, 특히 탄소-Z6 경로에서 모든 단계가 물리적으로 강제됨을 보인다.
+
+**핵심어**: 완전수, 인과 사슬, 산술함수, 현실 지도, 탄소, 유전 부호, 핵합성, 통계 검증
 
 ---
 
@@ -273,66 +279,127 @@ The strongest edges (STRUCTURAL + CAUSAL) account for 63.3%, meaning nearly two-
 
 ---
 
-## 5. Honest Limitations
+## 5. 한계 및 정직한 실패 (Limitations)
 
-### 5.1 What This Paper Does NOT Claim
+### 5.1 본 논문이 주장하지 않는 것
 
-1. **Not a theory of everything**: We do not claim that n=6 "causes" physics. We claim that n=6 arithmetic constants appear with statistically significant frequency in physically connected causal chains.
+1. **만물 이론이 아님**: n=6이 물리 법칙을 "유발"한다고 주장하지 않는다. 본 논문의 범위는 n=6 산술 상수가 인과적으로 연결된 경로에서 통계적으로 유의한 빈도로 출현한다는 관찰적 사실에 한정된다. "왜 n=6인가"에 대한 메커니즘 설명은 본 논문의 범위 밖이다.
 
-2. **Small-number nodes remain ambiguous**: Nodes with values 1-6 match many integer sets. The causal chain argument partially mitigates this but does not eliminate it.
+2. **인과 방향의 한계**: 본 논문에서 "인과 사슬"이라 함은 물리적 계층 구조(쿼크→원자→분자→생체)를 따른 도출 관계(derivation)이지, 시간적 인과(temporal causation)를 의미하지 않는다. 특히, n=6 산술 구조가 물리 법칙에 선행하는지, 혹은 물리 법칙의 결과물인지는 본 논문으로 판단할 수 없다.
 
-3. **Edge selection may be biased**: The 49 edges were selected by the map authors, not by an independent party. An adversarial audit should construct alternative edge sets.
+3. **소수 편향(small-number bias) 완전 해소 불가**: 7개 기본 상수 중 5개(1, 2, 4, 5, 6)가 6 이하이므로, 값이 1~6인 노드는 거의 모든 7-원소 정수 집합과 매칭된다. 큰 수 Monte Carlo(z = 4.02)가 편향을 부분적으로 통제하지만, Thread 4(유전 부호)의 핵심값 4, 3, 2는 여전히 소수 편향 범위 내에 있다. 이 경로의 증거 강도는 개별 값이 아닌 사슬 정합성(chain coherence)에 의존한다.
 
-### 5.2 MISS Nodes (Honest Failures)
+4. **간선 선택 편향 가능성**: 49개 간선은 현실 지도 저자가 선별하였으며, 독립적 제3자가 구성한 것이 아니다. 적대적 감사(adversarial audit)에서 대안 간선 집합을 구성하여 동일 결과가 재현되는지 검증해야 한다.
 
-The 12 MISS nodes in v6.0 include values that cannot be expressed as simple n=6 combinations:
-- 230 space groups
-- 244 human DOF
-- Various physical constants with irrational or large values
+5. **후견 편향(hindsight bias)**: 인과 사슬은 이미 알려진 물리 사실에 사후적으로 n=6 상수를 대응시킨 것이다. 사전 예측(pre-registration) 없이 구성된 사슬이므로, 확인 편향의 가능성을 배제할 수 없다. Section 6의 검증 가능 예측은 이 한계를 부분적으로 보완한다.
 
-We do not hide or minimize these failures. A theory that matches 100% would be suspicious.
+### 5.2 MISS 노드 (정직한 실패)
 
-### 5.3 Convention Nodes
+v6.0의 12개 MISS 노드는 단순 n=6 조합으로 표현할 수 없는 값들이다:
 
-19 nodes are classified as CONVENTION (human-designed systems). While 18/19 are EXACT, their evidential weight is lower because humans may have unconsciously chosen n=6-compatible parameters. These should be given reduced weight in any statistical test.
+| MISS 노드 | 실측값 | 가장 가까운 n=6 표현 | 오차 |
+|-----------|--------|---------------------|------|
+| 공간군(space groups) | 230 | $\sigma^2 + J_2 \cdot \tau - 2 = 230$? | 복잡한 표현 필요 — MISS 유지 |
+| 인체 자유도(DOF) | 244 | $\sigma^2 + 100 = 244$ | 의미 없는 조합 — MISS 유지 |
+| 기타 물리 상수 | 무리수/큰 수 | — | 정수 산술과 비교 불가 |
 
----
+MISS 노드를 은폐하거나 축소하지 않는다. 100% 매칭을 주장하는 이론은 오히려 의심스럽다.
 
-## 6. Testable Predictions
+### 5.3 관례(CONVENTION) 노드의 증거 가중치
 
-### 6.1 Prediction 1: New Battery Chemistries Will Converge to CN=6
+19개 노드가 CONVENTION(인간 설계 시스템)으로 분류된다. 18/19가 EXACT이지만, 이들의 증거 가중치는 다음 이유로 낮아야 한다:
+- 인간은 무의식적으로 "깔끔한 수"를 선호하며, 6의 약수(1, 2, 3, 6)는 대표적 "깔끔한 수"이다.
+- 공학 표준(48V, 48kHz 등)은 역사적 경로 의존성과 비용 최적화의 산물이며, n=6 산술과의 일치가 우연일 가능성이 높다.
+- 통계 검정에서 CONVENTION 노드는 별도 층(stratum)으로 분리하여 자연 노드와 혼합하지 않아야 한다.
 
-**Claim**: Future solid-state electrolyte materials that achieve commercial viability will have metal-center coordination number CN=6 (octahedral).
-**Test**: Survey commercial solid-state batteries introduced 2026-2035.
-**Falsification**: If >50% of successful materials have CN != 6.
+### 5.4 재현성 장벽
 
-### 6.2 Prediction 2: Hachimoji DNA Codon Length
+본 연구의 재현에는 다음 장벽이 존재한다:
+- **현실 지도 구성**: 247개 노드 선별 기준이 완전히 형식화되어 있지 않으므로, 독립 연구자가 동일 지도를 재구성하기 어렵다. 노드 선별 프로토콜의 공식화가 필요하다.
+- **"단순 표현" 정의**: n=6 상수의 조합 연산(+, -, ×, ÷, 거듭제곱)에서 "단순"의 범위(최대 연산 횟수)가 명시적으로 정의되지 않았다. 연산 횟수를 늘리면 거의 모든 정수를 매칭할 수 있으므로, 최대 2회 연산으로 제한하는 것이 적절하나, 이 기준의 정당성에 대한 추가 논의가 필요하다.
 
-**Claim**: If Hachimoji (8-base) DNA is used in synthetic biology, the optimal codon length will remain 3 = $n/\varphi$ because $8^2 = 64 = 2^n$ already covers 20 amino acids.
-**Test**: Synthetic biology experiments with expanded genetic alphabets.
-**Falsification**: If codon length changes to 2 for 8-letter alphabets.
+### 5.5 n=6 이외의 대안 설명
 
-### 6.3 Prediction 3: Edge Preservation Under Map Expansion
-
-**Claim**: As the reality map expands beyond 247 nodes, the fraction of STRUCTURAL+CAUSAL edges will remain above 60%.
-**Test**: Independent researchers add 100+ nodes following the same methodology.
-**Falsification**: If STRUCTURAL+CAUSAL fraction drops below 50%.
-
-### 6.4 Prediction 4: n=28 Control Failure Persists
-
-**Claim**: The second perfect number n=28 will continue to perform at or below random in matching natural constants, confirming n=6's uniqueness.
-**Test**: Apply the same 247-node methodology to $S_{n=28}$.
-**Falsification**: If n=28 achieves z > 2.0 on large-number nodes.
+n=6 상수 집합의 자연계 출현에 대해 다음 대안 설명을 고려해야 한다:
+- **정수론적 풍부성**: 6은 가장 작은 합성수이자 유일한 한 자릿수 완전수로, 정수론에서 특별한 위치를 차지한다. 이러한 수론적 특수성 자체가 자연 상수와의 일치를 높일 수 있다.
+- **3차원 기하학의 제약**: 3D 공간의 대칭 연산은 필연적으로 2, 3, 4, 6차 회전만 허용하며(결정학적 제한 정리), 이 값들이 n=6의 약수와 겹친다. 결정학 경로(Thread 5)의 일부 매칭은 n=6이 아닌 3D 기하학의 결과일 수 있다.
+- **탄소 중심주의(carbon centrism)**: Thread 1의 강력한 매칭은 우주가 탄소 기반 생명을 허용하는 파라미터 공간에 있다는 인류 원리(anthropic principle)의 결과일 수 있으며, n=6 산술과 독립적인 설명이다.
 
 ---
 
-## 7. Conclusion
+## 6. 검증 가능 예측 (Testable Predictions)
 
-The 49-edge causal structure of the 247-node reality map reveals five primary threads where n=6 arithmetic propagates through physical causation. The strongest thread -- from quarks through carbon to glucose and photosynthesis -- consists of 8 connected nodes where every n=6 value is physically derivable from its predecessor. A large-number Monte Carlo test yields z = 4.02 (p < 0.0001), confirming that n=6 specificity exceeds small-number bias. The n=28 control at z = -2.35 demonstrates that this is not a generic property of perfect numbers.
+아래 예측들은 각각 구체적 반증 조건을 포함하며, 사전 등록(pre-registration) 형태로 기술한다.
 
-The causal chain perspective transforms the question from "how many numbers match?" to "do the matches form physically connected paths?" The answer is affirmative: 63.3% of edges connect nodes via STRUCTURAL or CAUSAL mechanisms, and the five identified threads collectively span all seven hierarchical levels of the reality map.
+### 6.1 예측 1: 차세대 고체 전해질의 배위수 수렴
 
-Future work should focus on: (1) adversarial edge auditing, (2) quantitative chain probability models, and (3) predictions from extending the causal threads to new domains.
+**주장**: 상용화에 성공하는 차세대 고체 전해질 소재의 금속 중심 배위수(CN)는 CN=6(팔면체)으로 수렴한다.
+**근거**: Thread 2에서 LiCoO$_2$, NMC, LFP, 페로브스카이트 모두 CN=6=$n$을 공유.
+**검증 방법**: 2026-2035년 사이 상용화된 고체 전해질의 결정 구조를 조사.
+**반증 조건**: 성공 소재의 50% 이상이 CN $\neq$ 6일 경우.
+**예측 강도**: 중간 — CN=6은 이온 반경비 0.414-0.732에서 자연스러우므로 n=6 산술과 무관한 물리적 이유로도 설명 가능.
+
+### 6.2 예측 2: 확장 유전 알파벳의 코돈 길이 보존
+
+**주장**: Hachimoji(8-염기) DNA 기반 합성 생물학에서 최적 코돈 길이는 3 = $n/\varphi$로 유지된다.
+**근거**: $8^2 = 64 = 2^n$이므로 2-문자 코돈으로도 64종 부호화가 가능하나, 오류 내성(error tolerance)을 위해 중복(redundancy)이 필요하여 3-문자가 유지될 것이다.
+**검증 방법**: 확장 유전 알파벳 실험에서의 최적 코돈 길이 측정.
+**반증 조건**: 8-염기 시스템에서 코돈 길이 2가 표준으로 채택될 경우.
+**예측 강도**: 약함 — 코돈 길이 3의 보존은 오류 내성이라는 독립적 이유로도 설명 가능.
+
+### 6.3 예측 3: 현실 지도 확장 시 간선 유형 비율 보존
+
+**주장**: 현실 지도가 247개 노드 이상으로 확장되더라도, STRUCTURAL+CAUSAL 간선 비율은 60% 이상을 유지한다.
+**검증 방법**: 독립 연구자가 동일 방법론으로 100개 이상의 노드를 추가.
+**반증 조건**: STRUCTURAL+CAUSAL 비율이 50% 미만으로 하락할 경우.
+**예측 강도**: 높음 — 새 노드가 기존 인과 경로의 하위 분기일 경우 물리적 도출 가능성이 유지되므로.
+
+### 6.4 예측 4: n=28 대조군 실패 지속
+
+**주장**: 차순위 완전수 n=28의 산술 상수 집합 $S_{n=28}$은 동일 247-노드 방법론에서 큰 수 노드 z-score가 2.0 미만을 유지한다.
+**근거**: $S_{n=28} = \{28, 56, 6, 12, 672, 10, 1\}$에서 672 등 극단값이 자연 상수와 매칭되기 어렵다.
+**검증 방법**: 동일 Monte Carlo를 $S_{n=28}$에 적용.
+**반증 조건**: n=28이 큰 수 노드에서 z > 2.0을 달성할 경우.
+**예측 강도**: 높음 — 이미 z = −2.35로 예비 확인됨.
+
+### 6.5 예측 5: 신규 2D 소재의 육각 격자 우세
+
+**주장**: 2026년 이후 발견되는 안정한 단층(monolayer) 2D 소재 중, 상온 안정성을 보이는 소재의 다수는 육각(hexagonal) 격자 구조를 가진다.
+**근거**: Thread 1에서 sp2 혼성 → 120° = $\sigma(\sigma-\varphi)$ 결합각 → 육각 격자가 물리적으로 강제됨. 그래핀, h-BN, MoS$_2$ 등 기존 성공 사례 모두 육각.
+**검증 방법**: Materials Project 또는 C2DB 데이터베이스에서 신규 안정 단층 소재의 격자 유형 통계.
+**반증 조건**: 안정 단층 소재의 60% 이상이 비-육각(사각, 삼각 등) 격자일 경우.
+**예측 강도**: 중간 — 2D 안정성에서 육각 격자의 우세는 van der Waals 상호작용이라는 독립적 이유로도 설명 가능.
+
+### 6.6 예측 6: 미토콘드리아 전자전달계 복합체 수 보존
+
+**주장**: 진핵생물의 미토콘드리아 전자전달계(ETC)는 4 = $\tau$ 개 복합체(Complex I-IV)를 보편적으로 보존하며, 5번째 독립 복합체가 발견되지 않을 것이다.
+**근거**: Thread 1에서 $\tau = 4$가 탄소 원자가(4)에서 미토콘드리아 복합체 수(4)로 전파.
+**검증 방법**: 극한 환경(심해, 고온) 원핵/진핵생물의 ETC 구조 조사.
+**반증 조건**: 주요 에너지 경로로 기능하는 5번째 독립 ETC 복합체가 발견될 경우.
+**예측 강도**: 중간 — ATP synthase(Complex V)를 별도 계수하면 이미 5개이나, 본 예측은 전자전달에 직접 관여하는 산화환원 복합체에 한정.
+
+### 6.7 예측 7: 독립 재현 시 z-score 하한
+
+**주장**: 독립 연구팀이 본 논문의 방법론(큰 수 노드 Monte Carlo)을 재현할 때, n=6 집합의 z-score는 3.0 이상을 유지한다.
+**검증 방법**: 독립 팀이 자체 선별한 자연 상수 목록(최소 50개 큰 수 노드)에 대해 동일 Monte Carlo 실행.
+**반증 조건**: z < 2.0일 경우 (2.0 ≤ z < 3.0은 약한 지지로 분류).
+**예측 강도**: 높음 — 노드 선별 편향을 직접 검증하는 가장 강력한 테스트.
+
+---
+
+## 7. 결론 (Conclusion)
+
+247-노드 현실 지도의 49개 유향 간선 분석 결과, n=6 산술 상수가 물리적 인과 관계를 따라 전파되는 5개 주요 경로를 확인하였다. 가장 강력한 경로 -- 쿼크에서 탄소, 포도당, 광합성에 이르는 Thread 1 -- 는 8개 연속 노드 모두에서 n=6 값이 부모 노드로부터 물리적으로 도출 가능하다. 큰 수 노드($\geq 14$) 제한 Monte Carlo 검정에서 z = 4.02 (p < 0.0001)를 획득하였으며, 대조군 n=28은 z = −2.35로 무작위 이하의 성능을 보여 이것이 완전수의 일반 속성이 아님을 확인하였다.
+
+인과 사슬 관점은 "얼마나 많은 수가 일치하는가"라는 질문을 "일치하는 수들이 물리적으로 연결된 경로를 형성하는가"로 전환한다. 49개 간선 중 63.3%가 STRUCTURAL 또는 CAUSAL 메커니즘으로 연결되어 있으며, 5개 경로는 현실 지도의 7개 계층(L0~L5) 전체를 관통한다.
+
+**한계 요약**: 소수 편향의 완전 해소 불가(Section 5.1), 간선 선택 편향 가능성(Section 5.1), 후견 편향(Section 5.1), 재현성 장벽(Section 5.4), 대안 설명의 존재(Section 5.5)를 명시적으로 인정한다. 12개 MISS 노드는 n=6 매칭의 한계를 정직하게 보여준다.
+
+**향후 연구 방향**:
+1. 적대적 간선 감사(adversarial edge audit) — 독립 연구자에 의한 대안 간선 집합 구성
+2. 정량적 사슬 확률 모형 — 간선별 도출 확률의 독립 추정
+3. 사전 등록 예측 검증 — Section 6의 7개 예측에 대한 시간 제한 검증
+4. 노드 선별 프로토콜 형식화 — 재현성 장벽 해소를 위한 명시적 기준 수립
 
 ---
 

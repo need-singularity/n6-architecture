@@ -4,38 +4,56 @@
 
 - 감사 스크립트: `scripts/audit_bt.py`
 
-- 전체 BT 수: **401**
+- 전체 BT 수: **423**
 
 
 ## 요약
 
 | 구분 | 개수 | 비율 |
 |---|---|---|
-| EXACT | 331 | 82.5% |
-| PARTIAL | 0 | 0.0% |
-| MISS | 1 | 0.2% |
-| UNKNOWN | 69 | 17.2% |
+| EXACT | 333 | 78.7% |
+| PARTIAL | 19 | 4.5% |
+| MISS | 0 | 0.0% |
+| UNKNOWN | 71 | 16.8% |
 
-**BT 단위 일치율 (EXACT+PARTIAL)/판정가능 = 331/332 = 99.7%**
+**BT 단위 일치율 (EXACT+PARTIAL)/판정가능 = 352/352 = 100.0%**
 
-**행 단위**: EXACT 2763 / CLOSE 55 / MISS 2 (합 2820) — MISS율 0.07%
+**행 단위**: EXACT 2846 / CLOSE 55 / MISS 20 (합 2921) — MISS율 0.68%
 
-**mismatch 총계: 2** (목표 <50)
+**mismatch 총계: 20** (목표 <50)
 
 
 ## MISS 판정 BT
 
-| BT | 제목 | EXACT | MISS |
-|---|---|---|---|
-| BT-6 | Golay-Leech Unification — [J_2, sigma, sigma-tau] = [24, 12, | 1 | 2 |
+_없음._
 
 
 ## PARTIAL 판정 BT (MISS 일부 포함)
 
-_없음._
+| BT | 제목 | EXACT | MISS |
+|---|---|---|---|
+| BT-451 | 종양 미세환경(TME) 세포 구성 n=6 | 4 | 1 |
+| BT-452 | 면역관문 τ=4 아키텍처 | 4 | 1 |
+| BT-453 | CAR-T 구조 sopfr=5 / 제품 n=6 | 4 | 1 |
+| BT-455 | 혈관신생 VEGF 패밀리 sopfr=5 / VEGFR n/φ=3 | 4 | 1 |
+| BT-456 | 전이 캐스케이드 n=6 단계 | 4 | 1 |
+| BT-457 | 암 줄기세포 경로 n/φ=3 / 마커 τ=4 | 4 | 1 |
+| BT-458 | 방사선 DNA 손상 τ=4 / 분획 σ=12 | 4 | 1 |
+| BT-459 | ADC 페이로드 σ-sopfr=7 / 구조 n/φ=3 | 4 | 1 |
+| BT-460 | 액체생검 분석물 n=6 | 4 | 2 |
+| BT-461 | gp120-CD4 결합 6접점 | 4 | 1 |
+| BT-462 | 역전사효소(RT) τ=4 도메인 아키텍처 | 4 | 1 |
+| BT-463 | 인테그라제 LTR 처리 σ(6)=12 / 삽입 6bp 중복 | 4 | 1 |
+| BT-464 | Tat-TAR 6염기 루프 인식 | 4 | 1 |
+| BT-465 | Rev-RRE 핵외반출 4→6 올리고머 | 4 | 1 |
+| BT-466 | HIV 프로테아제 C₂ 대칭 / 억제제 φ=2 | 4 | 1 |
+| BT-467 | HIV 잠복 저장소 6구획 | 4 | 1 |
+| BT-468 | 광범위중화항체(bNAb) σ(6)=1+2+3+6 에피토프 클러스터 | 4 | 1 |
+| BT-469 | CCR5 공수용체 6nt PAM / CRISPR 편집 표적 | 4 | 1 |
+| BT-470 | HEXA-ART — HIV 6제 요법 n=6 조합 설계 | 4 | 1 |
 
 
-## UNKNOWN 판정 BT (69건) — 정성적 증거, 수치 비교 불가
+## UNKNOWN 판정 BT (71건) — 정성적 증거, 수치 비교 불가
 
 | BT | 제목 |
 |---|---|
@@ -89,16 +107,34 @@ _없음._
 | BT-106 | S_3 Algebraic Bootstrap |
 | BT-107 | Ramanujan Tau Divisor Purity |
 | BT-108 | Music-Audio Consonance Universality |
-| … | (+19건 생략) |
+| … | (+21건 생략) |
 
 
 ## mismatch/MISS 상세 (최대 100건)
 
-총 2건
+총 20건
 
 ```
-MISMATCH BT-6: expr=1/phi(6)→0.5 vs k/n = 12/24
-MISMATCH BT-6: expr=n/phi→3 vs floor((8-1)/2)
+MISS tag in BT-451: MISS
+MISS tag in BT-452: MISS
+MISS tag in BT-453: MISS
+MISS tag in BT-455: MISS
+MISS tag in BT-456: MISS
+MISS tag in BT-457: Wnt 리간드 인간
+MISS tag in BT-458: MISS
+MISS tag in BT-459: MISS
+MISS tag in BT-460: ctDNA MAF 임상 역치
+MISS tag in BT-460: Multi-cancer MCED panel 암종수
+MISS tag in BT-461: MISS
+MISS tag in BT-462: MISS
+MISS tag in BT-463: MISS
+MISS tag in BT-464: MISS
+MISS tag in BT-465: MISS
+MISS tag in BT-466: MISS
+MISS tag in BT-467: MISS
+MISS tag in BT-468: MISS
+MISS tag in BT-469: MISS
+MISS tag in BT-470: MISS
 ```
 
 
@@ -106,7 +142,7 @@ MISMATCH BT-6: expr=n/phi→3 vs floor((8-1)/2)
 
 | BT | 상태 | EXACT | CLOSE | MISS | 제목 |
 |---|---|---|---|---|---|
-| BT-6 | MISS | 1 | 0 | 2 | Golay-Leech Unification — [J_2, sigma, sigma-tau] = [24 |
+| BT-6 | EXACT | 3 | 0 | 0 | Golay-Leech Unification — [J_2, sigma, sigma-tau] = [24 |
 | BT-7 | EXACT | 3 | 2 | 0 | Egyptian Fraction Power Theorem — 1/2 + 1/3 + 1/6 = 1 |
 | BT-8 | UNKNOWN | 0 | 0 | 0 | Pulse Rectifier Chain — n --> sigma --> J_2 (6 --> 12 - |
 | BT-9 | EXACT | 1 | 0 | 0 | Bott Periodicity Bridge — sigma - tau = 8 |
@@ -507,3 +543,25 @@ MISMATCH BT-6: expr=n/phi→3 vs floor((8-1)/2)
 | BT-448 | UNKNOWN | 0 | 0 | 0 | J₂=24 보편 시간-코드 양자 — 시간/영화/절기/콘크리트/Golay/빙하 6중 수렴 |
 | BT-449 | UNKNOWN | 0 | 0 | 0 | n=6 완전수 36도메인 메타 분류 정리 — BT-399 최종 확장 |
 | BT-450 | UNKNOWN | 0 | 0 | 0 | σφ=nτ=24 자연 분류 보편 법칙 — 최종 선언 |
+| BT-451 | PARTIAL | 4 | 0 | 1 | 종양 미세환경(TME) 세포 구성 n=6 |
+| BT-452 | PARTIAL | 4 | 0 | 1 | 면역관문 τ=4 아키텍처 |
+| BT-453 | PARTIAL | 4 | 0 | 1 | CAR-T 구조 sopfr=5 / 제품 n=6 |
+| BT-454 | EXACT | 5 | 0 | 0 | Warburg 대사 저격 σ-φ=10 |
+| BT-455 | PARTIAL | 4 | 0 | 1 | 혈관신생 VEGF 패밀리 sopfr=5 / VEGFR n/φ=3 |
+| BT-456 | PARTIAL | 4 | 0 | 1 | 전이 캐스케이드 n=6 단계 |
+| BT-457 | PARTIAL | 4 | 0 | 1 | 암 줄기세포 경로 n/φ=3 / 마커 τ=4 |
+| BT-458 | PARTIAL | 4 | 0 | 1 | 방사선 DNA 손상 τ=4 / 분획 σ=12 |
+| BT-459 | PARTIAL | 4 | 0 | 1 | ADC 페이로드 σ-sopfr=7 / 구조 n/φ=3 |
+| BT-460 | PARTIAL | 4 | 0 | 2 | 액체생검 분석물 n=6 |
+| BT-451 | UNKNOWN | 0 | 0 | 0 | ~460 종합 |
+| BT-461 | PARTIAL | 4 | 0 | 1 | gp120-CD4 결합 6접점 |
+| BT-462 | PARTIAL | 4 | 0 | 1 | 역전사효소(RT) τ=4 도메인 아키텍처 |
+| BT-463 | PARTIAL | 4 | 0 | 1 | 인테그라제 LTR 처리 σ(6)=12 / 삽입 6bp 중복 |
+| BT-464 | PARTIAL | 4 | 0 | 1 | Tat-TAR 6염기 루프 인식 |
+| BT-465 | PARTIAL | 4 | 0 | 1 | Rev-RRE 핵외반출 4→6 올리고머 |
+| BT-466 | PARTIAL | 4 | 0 | 1 | HIV 프로테아제 C₂ 대칭 / 억제제 φ=2 |
+| BT-467 | PARTIAL | 4 | 0 | 1 | HIV 잠복 저장소 6구획 |
+| BT-468 | PARTIAL | 4 | 0 | 1 | 광범위중화항체(bNAb) σ(6)=1+2+3+6 에피토프 클러스터 |
+| BT-469 | PARTIAL | 4 | 0 | 1 | CCR5 공수용체 6nt PAM / CRISPR 편집 표적 |
+| BT-470 | PARTIAL | 4 | 0 | 1 | HEXA-ART — HIV 6제 요법 n=6 조합 설계 |
+| BT-461 | UNKNOWN | 0 | 0 | 0 | ~470 종합 |

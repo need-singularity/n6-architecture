@@ -254,6 +254,42 @@ def load_products():
     return nodes, edges
 
 
+def load_breakthroughs():
+    """breakthrough-theorems.md → BT 노드 + cross-link 엣지 (L3)"""
+    nodes, edges = [], []
+    path = DOCS / "breakthrough-theorems.md"
+    if not path.exists():
+        return nodes, edges
+    text = path.read_text(encoding="utf-8")
+    header_re = re.compile(r"^##\s+BT-(\d+)\s*:?\s*(.*)$", re.MULTILINE)
+    matches = list(header_re.finditer(text))
+    for i, m in enumerate(matches):
+        num = int(m.group(1))
+        title = m.group(2).strip()
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        body = text[start:end]
+        bt_id = f"bt_{num}"
+        nodes.append({
+            "id": bt_id,
+            "label": f"BT-{num}: {title}"[:80],
+            "layer": 3,
+            "type": "breakthrough",
+            "bt_num": num,
+            "title": title,
+        })
+        # Cross-link: BT-xxx 참조 → 엣지
+        for cm in re.finditer(r"BT-(\d+)", body):
+            tgt = int(cm.group(1))
+            if tgt != num:
+                edges.append({
+                    "source": bt_id,
+                    "target": f"bt_{tgt}",
+                    "type": "bt_crosslink",
+                })
+    return nodes, edges
+
+
 def load_tools():
     """Rust/Python 도구 → L3 노드"""
     nodes = []
@@ -272,33 +308,140 @@ def load_tools():
     return nodes
 
 
+def _keywords(text: str) -> set[str]:
+    """텍스트에서 매칭용 키워드 추출"""
+    return {w for w in re.split(r"[\s,/·_\-]+", text.lower()) if len(w) >= 3}
+
+
+SECTION_KEYWORDS = {
+    "fusion":      {"fusion", "plasma", "tokamak", "tritium", "deuterium", "blanket", "magnetic", "confinement"},
+    "chip":        {"chip", "semiconductor", "transistor", "silicon", "dram", "memory", "nand", "cpu", "gpu", "fpga", "asic", "lithograph", "wafer", "process", "interconnect", "pim"},
+    "energy":      {"energy", "solar", "battery", "grid", "power", "wind", "turbine", "thermal", "hydrogen", "fuel"},
+    "ai":          {"neural", "attention", "transformer", "moe", "scaling", "inference", "training", "llm", "dropout", "norm", "activation", "decoding", "embedding", "gradient"},
+    "environment": {"environment", "carbon", "water", "recycling", "desalination", "pollution", "climate", "soil", "ocean", "waste"},
+    "physics":     {"particle", "quantum", "neutrino", "cosmology", "relativity", "gravity", "string", "higgs", "boson", "standard"},
+    "materials":   {"material", "crystal", "alloy", "polymer", "ceramic", "graphene", "superconductor", "composite", "diamond", "glass", "metal", "foam", "piezo", "ferr"},
+    "robotics":    {"robot", "actuator", "servo", "locomotion", "manipulator", "humanoid", "autonomous", "sensor", "lidar"},
+    "software":    {"compiler", "operating", "programming", "algorithm", "database", "file", "kernel", "runtime", "protocol"},
+    "display":     {"display", "oled", "lcd", "pixel", "refresh", "hdr", "micro", "panel", "backlight"},
+    "audio":       {"audio", "speaker", "microphone", "codec", "acoustic", "noise", "dac", "amplifier", "equalizer"},
+    "safety":      {"safety", "fire", "earthquake", "structural", "redundan", "fault", "hazard", "seismic"},
+    "play":        {"game", "haptic", "render", "engine", "simulation"},
+    "aerospace":   {"aerospace", "rocket", "satellite", "orbit", "propulsion", "space", "launch", "reentry"},
+    "sf":          {"consciousness", "telekinesis", "telepathy", "dream", "mind", "brain", "neuro"},
+    "frontier":    {"frontier", "civilization", "religion", "law", "currency", "insurance", "architecture", "ferment"},
+}
+
+
 def add_cross_layer_edges(all_nodes, edges):
-    """상수→도메인, 기법→도메인 자동 연결"""
+    """모든 계층간 촘촘한 연결 — 상수→모두, 재료→모두, 응용↔기술↔제품"""
     node_map = {n["id"]: n for n in all_nodes}
-    dse_ids = [n["id"] for n in all_nodes if n["type"] == "dse_domain"]
 
-    # 상수→도메인: domain 필드 매칭
+    by_layer = {i: [] for i in range(5)}
     for n in all_nodes:
-        if n["type"] == "ratio" and n.get("domain"):
-            dom_str = n["domain"].lower()
-            for did in dse_ids:
-                dname = did.replace("dse_", "")
-                if dname in dom_str or dom_str.split(",")[0].strip().lower() in dname:
-                    edges.append({
-                        "source": n["id"],
-                        "target": did,
-                        "type": "constant_domain",
-                    })
+        by_layer[n["layer"]].append(n)
 
-    # 기법→AI 섹션 연결
-    tech_ids = [n["id"] for n in all_nodes if n["type"] == "technique"]
-    if "sec_ai" in node_map:
-        for tid in tech_ids:
-            edges.append({
-                "source": tid,
-                "target": "sec_ai",
-                "type": "technique_section",
-            })
+    dse_nodes = [n for n in all_nodes if n["type"] == "dse_domain"]
+    sec_nodes = [n for n in all_nodes if n["type"] == "section"]
+    tech_nodes = [n for n in all_nodes if n["type"] == "technique"]
+    tool_nodes = [n for n in all_nodes if n["type"] == "tool"]
+
+    # ═══ 1. 상수(L0) → 모든 상위 계층 ═══
+    for const in by_layer[0]:
+        const_kw = _keywords(
+            const.get("domain", "") + " " + const.get("description", ""))
+
+        # 상수 → DSE 도메인 (L1+L2)
+        for dse in dse_nodes:
+            dse_kw = _keywords(dse["label"] + " " + dse.get("note", ""))
+            if const_kw & dse_kw:
+                edges.append({"source": const["id"], "target": dse["id"],
+                              "type": "constant_domain"})
+
+        # 상수 → 섹션 (L4)
+        for sec in sec_nodes:
+            sid = sec["id"].replace("sec_", "")
+            if const_kw & SECTION_KEYWORDS.get(sid, set()):
+                edges.append({"source": const["id"], "target": sec["id"],
+                              "type": "constant_section"})
+
+        # 상수 → 기법 (L3)
+        for tech in tech_nodes:
+            tech_kw = _keywords(tech["label"] + " " + tech.get("description", ""))
+            if const_kw & tech_kw:
+                edges.append({"source": const["id"], "target": tech["id"],
+                              "type": "constant_technique"})
+
+    # 기본 상수 7개 → 모든 섹션 (n=6은 만물의 기초)
+    for cid in [n["id"] for n in by_layer[0] if n["type"] == "constant"]:
+        for sec in sec_nodes:
+            edges.append({"source": cid, "target": sec["id"],
+                          "type": "foundation"})
+
+    # ═══ 2. 재료(L1) → 응용(L2) + 기술(L3) + 제품(L4) ═══
+    for mat in by_layer[1]:
+        mat_kw = _keywords(mat["label"] + " " + mat.get("note", ""))
+
+        for app in by_layer[2]:
+            app_kw = _keywords(app["label"] + " " + app.get("note", ""))
+            if mat_kw & app_kw:
+                edges.append({"source": mat["id"], "target": app["id"],
+                              "type": "material_application"})
+
+        for sec in sec_nodes:
+            sid = sec["id"].replace("sec_", "")
+            if mat_kw & SECTION_KEYWORDS.get(sid, set()):
+                edges.append({"source": mat["id"], "target": sec["id"],
+                              "type": "material_section"})
+
+        for tool in tool_nodes:
+            if _keywords(tool["label"]) & mat_kw:
+                edges.append({"source": mat["id"], "target": tool["id"],
+                              "type": "material_tool"})
+
+    # ═══ 3. 응용(L2) → 기술(L3) + 제품(L4) ═══
+    for app in by_layer[2]:
+        app_kw = _keywords(app["label"] + " " + app.get("note", ""))
+
+        for sec in sec_nodes:
+            sid = sec["id"].replace("sec_", "")
+            if app_kw & SECTION_KEYWORDS.get(sid, set()):
+                edges.append({"source": app["id"], "target": sec["id"],
+                              "type": "application_section"})
+
+        for tech in tech_nodes:
+            tech_kw = _keywords(tech["label"] + " " + tech.get("description", ""))
+            if app_kw & tech_kw:
+                edges.append({"source": app["id"], "target": tech["id"],
+                              "type": "application_technique"})
+
+    # ═══ 4. 기법(L3) → 제품(L4) ═══
+    for tech in tech_nodes:
+        tech_kw = _keywords(tech["label"] + " " + tech.get("description", ""))
+        for sec in sec_nodes:
+            sid = sec["id"].replace("sec_", "")
+            if tech_kw & SECTION_KEYWORDS.get(sid, set()):
+                edges.append({"source": tech["id"], "target": sec["id"],
+                              "type": "technique_section"})
+
+    # ═══ 5. 도구(L3) → 제품(L4) ═══
+    for tool in tool_nodes:
+        tool_kw = _keywords(tool["label"])
+        for sec in sec_nodes:
+            sid = sec["id"].replace("sec_", "")
+            if tool_kw & SECTION_KEYWORDS.get(sid, set()):
+                edges.append({"source": tool["id"], "target": sec["id"],
+                              "type": "tool_section"})
+
+    # ═══ 6. DSE levels "Material/Fuel/Cell" → L1 재료 ═══
+    for dse in dse_nodes:
+        levels = [l.lower() for l in dse.get("levels", [])]
+        if any("material" in l or "cell" in l or "fuel" in l for l in levels):
+            dse_kw = _keywords(dse["label"])
+            for mat in by_layer[1]:
+                if _keywords(mat["label"]) & dse_kw:
+                    edges.append({"source": mat["id"], "target": dse["id"],
+                                  "type": "material_uses"})
 
 
 def deduplicate_edges(edges):
@@ -333,6 +476,11 @@ def main():
 
     print("Loading techniques...")
     all_nodes.extend(load_techniques())
+
+    print("Loading breakthroughs...")
+    bt_nodes, bt_edges = load_breakthroughs()
+    all_nodes.extend(bt_nodes)
+    all_edges.extend(bt_edges)
 
     print("Loading tools...")
     all_nodes.extend(load_tools())

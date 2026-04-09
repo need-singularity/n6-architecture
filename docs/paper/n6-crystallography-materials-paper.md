@@ -300,6 +300,25 @@ We propose the following falsifiability criteria:
 
 4. **Quasicrystal test.** Quasicrystals violate the crystallographic restriction by exhibiting 5-fold symmetry ($=\text{sopfr}$). The n=6 framework predicts that quasicrystalline parameters should correlate with $\text{sopfr}=5$ rather than $n=6$. This is testable: icosahedral quasicrystals have coordination numbers related to 12 ($=\sigma$) and 20 ($=J_2-\tau$), consistent with the n=6 function set applied to icosahedral geometry (as in $C_{60}$).
 
+### 7.2b Testable Predictions (검증 가능 예측)
+
+본 프레임워크는 결정학·재료 도메인에서 다음을 정량적으로 예측하며, 각 항목은 독립 실험/DB 로 반증 가능하다.
+
+1. **ICSD 신규 엔트리 배위수 분포.** 향후 ICSD 에 추가되는 안정 결정 구조의 1차 배위수는 {2, 3, 4, 5, 6, 8, 12} 집합 — 즉 {φ, n/φ, τ, sopfr, n, 2τ, σ} — 에서 95% 이상 관측될 것. 이외 값(예: 7, 9, 11)의 빈도는 5% 미만.
+2. **준결정 배위 지표.** 5중 대칭 준결정의 정점 배위수는 icosahedron 에 대응하여 12(=σ) 근방에 집중되며, 추가 cluster shell 원자수는 20(=J₂−τ)·42(=7·σ/2 부근) 근방에 첨두를 갖는다. Bergman/Mackay cluster 통계로 검증.
+3. **HCP c/a 편차 방향성.** 실제 금속(Be, Mg, Ti, Zn 등)의 c/a 는 이상치 √(8/3)=1.633 의 −0.02 ~ +0.25 범위에서 원자 반경 대비 축 비(τ=4 슬립 활성화 정도)와 양의 상관을 가져야 한다.
+4. **FCC 슬립 수 불변.** 압력 500 GPa 이하 실험에서 FCC 금속의 {111}⟨110⟩ 슬립계 수는 항상 12(=σ(6))이며, 전위 분해가 이 수를 넘어설 경우 상변태가 선행한다.
+5. **허용 회전 차수 확장 금지.** 3D 주기 격자에서 5, 7, 8, 9, 10, 11 중 어떠한 회전 차수도 새롭게 허용되지 않을 것. (이는 결정학적 제한 정리의 재확인이며, 준결정/모듈레이션 구조는 주기성 위반으로 분류.)
+6. **탄소 동소체 신규 발견.** 향후 발견될 안정 탄소 동소체의 단위 셀 원자수 또는 대칭 차수는 {2, 3, 4, 6, 8, 12, 24, 60} ∪ {2^k · 3^m} 꼴로 제한될 것.
+
+### 7.2c Limitations (한계, 정직)
+
+- **작은 정수 편향**. 본 논문이 다루는 대상 정수는 대부분 ≤ 64 로, "임의의 유한 함수 집합으로 작은 정수를 맞출 위험" 은 근본적으로 제거 불가. 본 논문은 (a) 함수 집합을 7개의 정수론 함수로 사전 고정, (b) 인접 정수(n=4,5,7,8) 대조군 우위를 `verify_crystallography_materials.py` 에서 정량 비교함으로써 이 위험을 부분적으로만 완화한다.
+- **연속량 환원 불가**. 격자상수, 원자 반경, 탄성계수 등 연속 관측량은 n=6 정수 함수로 직접 도출 불가. HCP 이상 c/a 만이 τ(6)·2/(n/φ(6))=8/3 형태로 정수 비율로 환원되며, 다른 연속량은 MISS 로 분류.
+- **그룹 이론 반복 계산**. 7 결정계·14 Bravais·32 점군·230 공간군은 서로 유도 관계가 있어 "4 건 독립 관측" 이 아니다. 독립성의 상한은 실질적으로 2~3 자유도로 평가해야 하며, 본 논문이 주장하는 "150+ EXACT" 수치는 이 종속성으로 팽창되어 있다.
+- **카이랄리티 미반영**. 230 공간군 중 카이랄 공간군 65 개의 개수(=65)는 n=6 단순 함수 조합으로 직접 도출되지 않음. 이는 reality_map.json 의 MISS 4 건과 동일 카테고리로 향후 확장 필요.
+- **재현성 범위**. 본 논문의 실제 외부 데이터 대조는 `verify_crystallography_materials.py` 에 12 개 IUPAC/Kittel/Bravais 표준 수치로 한정. ICSD 전수 검증은 후속 과제.
+
 ### 7.3 The Deepest Connection: Why 6?
 
 The crystallographic restriction theorem proves that 6 is the maximum rotation order compatible with lattice periodicity. The honeycomb theorem proves that hexagonal geometry minimizes perimeter per unit area. The Thue-Fejes Toth theorem proves that hexagonal packing maximizes 2D density. These are independent mathematical results, proved by different methods across a span of more than a century (Bravais 1850, Thue 1910, Hales 2001).
