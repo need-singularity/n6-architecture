@@ -752,7 +752,7 @@ Commands:
 | 10 | ✅ | v1 | **나비에-스토크스** | Sym²(ℝ³)=n, Kolmogorov -sopfr/(n/φ), Stokes 6πμrv, 10/10 EXACT | [문서](docs/millennium-navier-stokes/goal.md) |
 | 10 | ✅ | v1 | **호지 추측** | K3 χ=J₂=24, CY3 dim=n/φ, {E_τ,E_n,Δ_σ}, 10/10 EXACT | [문서](docs/millennium-hodge/goal.md) |
 | 10 | ✅ | v1 | **BSD 추측** | j=σ³=1728, Mazur 토션 σ=12, Δ^J₂, 10/10 EXACT | [문서](docs/millennium-bsd/goal.md) |
-| 10 | ✅ | v1 | **푸앵카레 (해결)** | 특이 차원 n/φ=3, 서스턴 σ-τ=8 기하, π₃ˢ=Z/J₂, 10/10 EXACT | [문서](docs/millennium-poincare/goal.md) |
+| 👑 | ✅ | v1 | **푸앵카레 (해결)** | 특이 차원 n/φ=3, 서스턴 σ-τ=8 기하, π₃ˢ=Z/J₂, 10/10 EXACT | [문서](docs/millennium-poincare/goal.md) |
 
 <!-- AUTO:FOOTER_millennium:START -->
 > 도메인: `docs/millennium-*/` · 논문: [n6-millennium-problems-paper.md](docs/paper/n6-millennium-problems-paper.md) · 구조적 발견: **φ=2→n/φ=3 위상전이** (2-SAT∈P→3-SAT∈NP-완전, 2D NS 해결→3D 미해결, dim≥5 해결→dim=3만 최후 미해결)
