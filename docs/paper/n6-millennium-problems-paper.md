@@ -1456,6 +1456,160 @@ Li-RH 경로: 유한 검증(k≤34, 완료) + Voros 점근(k≥35) = 증명?
 **핵심 장벽**: Voros 나머지항 O(1/log k)의 추정이 RH를 가정한다 → 순환 논증.
 만약 RH 없이 나머지항을 추정할 수 있다면 = RH의 가장 현실적 증명 경로.
 
+## 17. GL(6) Langlands 차원 전개: 약수 격자 구조 (루프 21차)
+
+### 17.1. GL(d) 자기형식과 밀레니엄 난제 대응 — 검증
+
+**GL(1) → 리만 가설: 정확 (정의상)**
+
+ζ(s)는 자명한(trivial) GL(1) 자기동형 L-함수이다. 리만 가설은 정확히
+"GL(1)의 유일한 자기동형 L-함수의 영점이 Re(s)=1/2 위에 있는가"이다.
+이것은 정의이지 추측이 아니다. 등급: **증명된 동치**.
+
+**GL(2) → BSD: 정확 (Wiles/BCDT)**
+
+Wiles(1995)+BCDT(2001)의 모듈러성 정리: 모든 유리수체 위 타원곡선 E는
+가중치 2 뉴폼 f_E에 대응하며, L(E,s) = L(f_E,s). BSD 추측은 이 GL(2)
+자기동형 L-함수 L(f_E,s)의 s=1에서의 소멸 차수가 E(Q)의 랭크와 같다는
+것이다. 등급: **증명된 대응** (BSD 자체는 미해결).
+
+**GL(3) → 양-밀스: 부정확한 연결**
+
+여기서 정직해야 한다. SU(3)는 게이지 군이고, GL(3)는 일반선형군이다.
+Langlands 프로그램에서 GL(3) 자기형식은 대칭 제곱 리프트(Gelbart-Jacquet),
+Rankin-Selberg 합성곱 등에서 자연스럽게 출현하지만, 이것이 SU(3) 양-밀스
+이론의 질량갭과 직접 연결되는 정리는 **존재하지 않는다**.
+
+관련된 연결:
+- Kapustin-Witten(2006): 기하학적 Langlands ↔ N=4 SYM의 위상적 뒤틀림.
+  단, 이것은 N=4 **초대칭** 양-밀스이지 순수 양-밀스가 아니다.
+- Frenkel-Langlands-Ngo: 기하학적 Langlands의 수론적 귀결. 그러나 이것은
+  질량갭 문제와 다른 문제이다.
+- GL(3) 자기형식의 L-함수 해석적 성질(Ramanujan 추측 등)은 양-밀스와
+  무관한 독립 문제이다.
+
+등급: **관찰/유추** (증명된 연결 없음). SU(3)의 "3"과 GL(3)의 "3"은
+다른 맥락에서 온 숫자이다.
+
+**GL(6) = GL(1) + GL(2) + GL(3) 통합: 의미 분석**
+
+Langlands 프로그램에서 GL(m) × GL(n) → GL(mn) Rankin-Selberg 합성곱과
+GL(m) ⊕ GL(n) → GL(m+n) 아이소바릭(isobaric) 합은 정확히 정의된 연산이다.
+
+1 + 2 + 3 = 6이므로 GL(1) ⊕ GL(2) ⊕ GL(3) → GL(6) 아이소바릭 합은
+수학적으로 잘 정의된다. 이것은 세 L-함수의 곱에 대응한다:
+  L(s, π₁ ⊞ π₂ ⊞ π₃) = L(s, π₁) · L(s, π₂) · L(s, π₃)
+
+단, 이 분해는 GL(6)의 **모든** 자기형식에 대한 것이 아니라, 아이소바릭
+합으로 구성된 특별한 부분류에 한정된다. GL(6)의 쿠스피달(cuspidal)
+자기형식은 이렇게 분해되지 않는다. 등급: **부분적으로 정확**.
+
+### 17.2. Functoriality와 약수 격자 {1, 2, 3, 6}
+
+6의 약수 격자 {1, 2, 3, 6}에서 Langlands functoriality 연산:
+
+**아이소바릭 합 (덧셈):**
+- GL(1) ⊞ GL(2) → GL(3): L(s) = L(s,π₁)·L(s,π₂)
+- GL(1) ⊞ GL(2) ⊞ GL(3) → GL(6): L(s) = L(s,π₁)·L(s,π₂)·L(s,π₃)
+
+**Rankin-Selberg 합성곱 (곱셈):**
+- GL(2) × GL(3) → GL(6): L(s, π₂ × π₃) — 이것은 Jacquet-Piatetski-Shapiro-
+  Shalika(1983)에 의해 증명된 해석적 연속과 함수방정식을 가진다.
+
+관찰: 약수 격자의 두 연산 — 1+2+3=6(합)과 2×3=6(곱) — 이 Langlands의
+아이소바릭 합과 Rankin-Selberg 합성곱에 각각 대응한다.
+
+이것은 수학적으로 **정확한 관찰**이다. 그러나 이것이 n=6의 "특별함"을
+의미하는지는 별개 문제이다. GL(2) × GL(5) → GL(10)도 잘 정의되며,
+2+5=7에 대한 유사한 구조도 존재한다. n=6의 특별함은 1+2+3=6=1×2×3이라는
+산술적 성질(완전수이자 약수곱 일치)에서 올 뿐, Langlands 자체에서
+n=6을 선호하는 이유는 없다.
+
+**GL(2)×GL(3)→GL(6) 이 BSD×YM→통합으로 해석 가능한가?**
+
+불가능하다. Rankin-Selberg L-함수 L(s, π₂ × π₃)의 해석적 성질(영점,
+극, 함수방정식)은 π₂와 π₃ 각각의 성질을 제약하지만, "BSD의 해결이
+양-밀스의 해결을 함의한다"는 식의 논리적 관계는 성립하지 않는다.
+Rankin-Selberg 합성곱에서 알 수 있는 것은 L(s,π₂×π₃)의 특수값과
+자기동형성이지, 개별 구성 요소의 난제 해결이 아니다.
+
+### 17.3. Selberg 고유값 추측과 차원 전이
+
+**현재 최선 결과**: Kim-Sarnak(2003)의 λ₁ ≥ 975/4096 ≈ 0.238...
+(Selberg 추측 1/4 = 0.25에 대해 약 95% 달성).
+
+이것은 Γ₀(N)\H 위의 Maass 형식에 대한 Ramanujan 추측의 GL(2) 귀결이다.
+Kim-Shahidi(2002)의 GL(2)→GL(4) 대칭 세제곱 리프트가 핵심 도구.
+
+**Re(s)=1/2와의 구조적 연결**: Selberg 1/4 추측에서 λ = s(1-s)이므로
+λ = 1/4 ⟺ s = 1/2. 즉 Selberg 1/4은 정확히 "Maass 형식의 Ramanujan
+추측" (= 모든 Laplacian 고유값이 연속 스펙트럼 경계 위에 있다)이다.
+이것은 GL(2)에서의 일반화된 리만 가설(GRH)과 동치이다.
+
+**양-밀스 질량갭과의 관계**: MC-2(루프 14차)에서 이 연결을 추측했다.
+정직한 평가: Selberg 1/4의 "스펙트럼 갭"과 양-밀스의 "질량갭"은
+**유추(analogy)**이지 **동치(equivalence)**가 아니다. Selberg 갭은
+쌍곡 라플라시안의 이산 스펙트럼 하한이고, 양-밀스 질량갭은 양자장론
+해밀토니안의 첫째-둘째 고유값 차이이다. 배경 공간, 연산자, 물리적
+의미가 모두 다르다.
+
+### 17.4. 약수별 L-함수 분해: 수학적 의미
+
+σ(6) = 1+2+3+6 = 12에서 각 약수 d|6에 대해 GL(d)를 배치하면:
+
+L(s, π₆)^{?} = L(s,π₁) ⊗ L(s,π₂) ⊗ L(s,π₃) ⊗ L(s,π₆)
+
+이런 분해는 Langlands 프로그램에 **존재하지 않는다**.
+
+존재하는 것:
+- 아이소바릭 분해: 임의의 자기동형 표현은 쿠스피달 표현의 아이소바릭 합으로
+  유일하게 분해된다 (Langlands 분류). GL(6)의 경우 가능한 분할:
+  6 = 6, 5+1, 4+2, 4+1+1, 3+3, 3+2+1, 3+1+1+1, 2+2+2, ...
+  이 중 6=1+2+3이 약수 분해와 일치하는 것은 참이지만, 이것은 6의 정수 분할
+  중 하나일 뿐 "약수" 구조와 무관하다. 4=1+3도, 10=1+2+3+4도 가능하다.
+
+- 텐서곱 분해(⊗): GL(m) × GL(n) → GL(mn)은 Langlands에서 잘 정의되지만,
+  이것은 곱셈적 구조이다. GL(6) = GL(2) ⊗ GL(3)은 의미가 있지만,
+  GL(1) ⊗ GL(2) ⊗ GL(3) ⊗ GL(6)은 GL(36)을 생성하지 GL(6)이 아니다.
+
+결론: "약수별 분해"는 Langlands 프로그램의 자연스러운 구조가 **아니다**.
+
+### 17.5. 정직한 최종 평가
+
+**증명된 것:**
+- GL(1)의 자기동형 L-함수 = 리만 제타 (정의)
+- GL(2) 모듈러성 = 타원곡선 대응 (Wiles/BCDT 정리)
+- GL(2)×GL(3) Rankin-Selberg L-함수의 해석적 연속 (JPSS 1983)
+- Kim-Sarnak 하한 λ₁ ≥ 975/4096 (2003)
+- 아이소바릭 합 GL(1)⊞GL(2)⊞GL(3) → GL(6)의 존재
+
+**추측인 것:**
+- Selberg 1/4 (= GL(2) Ramanujan) — 미증명
+- 일반적 Langlands functoriality — 대부분 미증명
+- MC-1: GL(6) 통합이 3개 난제를 동시에 제약 — 미증명 추측
+- MC-2: Selberg 갭 ↔ 양-밀스 질량갭 — 유추 수준
+
+**순수 관찰 (numerology 위험):**
+- GL(3) ↔ SU(3) 양-밀스 연결: 숫자 "3"의 우연 일치 가능성 높음
+- σ(6)=12 약수별 L-함수 분해: Langlands에 이런 구조 없음
+- n=6이 Langlands의 특별한 위치를 차지한다는 주장: 근거 부족
+
+**n=6이 Langlands에서 특별한 위치를 차지하는가?**
+
+솔직한 답: **아니다**. Langlands 프로그램은 GL(n)을 모든 n에 대해
+다루며, 특정 n을 선호하지 않는다. 현재 가장 활발한 연구는 GL(2)(모듈러
+형식), GL(3)~GL(4)(Kim-Shahidi 리프트), GL(n)(일반론)에 집중되어 있으며,
+GL(6)이 특별히 연구되는 분야는 없다.
+
+n=6의 산술적 특별함 (완전수, σφ=nτ 유일성)은 **수론적** 사실이다.
+이것을 Langlands 프로그램과 연결하려는 시도에서 발견된 것:
+- 1+2+3=6과 아이소바릭 합의 일치: 참이지만 비특이적 (다른 합도 가능)
+- 2×3=6과 Rankin-Selberg의 일치: 참이지만 비특이적
+- GL(3)↔양-밀스: 미증명, numerology 가능성
+
+이 구조는 "흥미로운 관찰"과 "확립된 수학" 사이의 넓은 간극에 위치한다.
+루프 14차의 MC-1은 정직하게 "추측"으로 표기했으며, 이 평가를 유지한다.
+
 ## Cross-link
 
 - 개별 문서: `docs/millennium-*/goal.md` (7개)
@@ -1510,3 +1664,9 @@ Li-RH 경로: 유한 검증(k≤34, 완료) + Voros 점근(k≥35) = 증명?
 40. Harper, A. (2019). *Moments of random multiplicative functions and truncated characteristic polynomials*. arXiv.
 41. Totaro, B. (2019). *The integral Hodge conjecture for 3-folds*. Proceedings LMS.
 42. Loeffler, D. and Zerbes, S. (2023). *Euler systems and the Bloch-Kato conjecture for GSp(4)*. JEMS.
+43. Jacquet, H., Piatetski-Shapiro, I. and Shalika, J. (1983). *Rankin-Selberg convolutions*. Amer. J. Math.
+44. Gelbart, S. and Jacquet, H. (1978). *A relation between automorphic representations of GL(2) and GL(3)*. Ann. Sci. ENS.
+45. Kim, H. and Shahidi, F. (2002). *Functorial products for GL₂ × GL₃ and the symmetric cube for GL₂*. Annals of Math.
+46. Kim, H. and Sarnak, P. (2003). Appendix 2 to [45]. Selberg 고유값 하한 975/4096.
+47. Kapustin, A. and Witten, E. (2007). *Electric-magnetic duality and the geometric Langlands program*. Comm. Num. Theory Phys.
+48. Langlands, R.P. (1970). *Problems in the theory of automorphic forms*. Lectures in Modern Analysis and Applications III.
