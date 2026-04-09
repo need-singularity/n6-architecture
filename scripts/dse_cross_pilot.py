@@ -456,15 +456,54 @@ def compute_pair_score(ni, di, nj, dj, include_formula=True):
     return S, jac, prox, bidir, bal, fjac, sorted(shared_f), miss
 
 # ── 5a. 전체 도메인 쌍 분석 (S >= 0.5 필터) ─────────────────────
-print(f"[...] 전체 도메인 {len(all_dom)}개 쌍 분석 시작 ({len(all_dom)*(len(all_dom)-1)//2}쌍)...", flush=True)
-all_pairs = []
+import sys as _sys
+_total_pairs = len(all_dom)*(len(all_dom)-1)//2
+print(f"[...] 전체 도메인 {len(all_dom)}개 쌍 분석 시작 ({_total_pairs}쌍)...", file=_sys.stderr, flush=True)
+
+# 사전 캐시: 각 도메인의 cross_dse, n6avg, size, formulas
+_cache = {}
+for _n, _d in all_dom:
+    _cache[_n] = {
+        "cross": get_cross(_d),
+        "n6avg": get_n6avg(_d),
+        "size": score_size(_d),
+        "formulas": domain_formulas.get(_n, set()),
+    }
+
 all_pairs_s05 = []  # S >= 0.5 만
 for i in range(len(all_dom)):
-    ni, di = all_dom[i]
+    ni = all_dom[i][0]
+    ci = _cache[ni]
     for j in range(i+1, len(all_dom)):
-        nj, dj = all_dom[j]
-        S, jac, prox, bidir, bal, fjac, shared_f, miss = compute_pair_score(ni, di, nj, dj)
+        nj = all_dom[j][0]
+        cj = _cache[nj]
+        # 인라인 스코어 계산 (함수 호출 오버헤드 제거)
+        cross_i, cross_j = ci["cross"], cj["cross"]
+        union_set = cross_i | cross_j
+        jac = (len(cross_i & cross_j) / len(union_set)) if union_set else 0.0
+        ai, ai_ok = ci["n6avg"]
+        aj, aj_ok = cj["n6avg"]
+        prox_ok = ai_ok and aj_ok
+        prox = (1.0 - abs(ai-aj)/100.0) if prox_ok else None
+        bidir = 0.0
+        if nj in cross_i and ni in cross_j: bidir = 1.0
+        elif nj in cross_i or ni in cross_j: bidir = 0.5
+        si, sj = ci["size"], cj["size"]
+        bal = (min(si,sj)/max(si,sj)) if max(si,sj) > 0 else 0.0
+        fi, fj = ci["formulas"], cj["formulas"]
+        f_union = fi | fj
+        fjac = (len(fi & fj) / len(f_union)) if f_union else 0.0
+        if prox_ok:
+            S = (W_JAC*jac + W_PROX*prox + W_BIDIR*bidir + W_BAL*bal + W_FJAC*fjac) / (W_JAC + W_PROX + W_BIDIR + W_BAL + W_FJAC)
+        else:
+            denom = W_JAC + W_BIDIR + W_BAL + W_FJAC
+            S = (W_JAC*jac + W_BIDIR*bidir + W_BAL*bal + W_FJAC*fjac) / denom
         if S >= 0.5:
+            miss = []
+            if not ai_ok: miss.append(ni)
+            if not aj_ok: miss.append(nj)
+            shared_f = sorted(fi & fj)
+            # BT 공유 (비용이 높으므로 S>=0.5 쌍만)
             shared_bts = find_shared_bts(ni, nj)
             bt_ids = ",".join(f"BT-{b}" for b,_ in shared_bts[:3]) if shared_bts else "-"
             shared_consts = set()
@@ -473,9 +512,11 @@ for i in range(len(all_dom)):
                     for tok in cc.split(","): shared_consts.add(tok)
             consts_str = "/".join(sorted(shared_consts)) if shared_consts else "-"
             all_pairs_s05.append((ni, nj, S, jac, prox, bidir, bal, fjac, shared_f, miss, bt_ids, consts_str))
+    if (i+1) % 100 == 0:
+        print(f"  ... {i+1}/{len(all_dom)} 도메인 완료", file=_sys.stderr, flush=True)
 
 all_pairs_s05.sort(key=lambda t: t[2], reverse=True)
-print(f"[OK] S >= 0.5 쌍: {len(all_pairs_s05)}개", flush=True)
+print(f"[OK] S >= 0.5 쌍: {len(all_pairs_s05)}개", file=_sys.stderr, flush=True)
 
 # jsonl 저장: 전체 S>=0.5
 with (OUT/"all_pairs_s05.jsonl").open("w") as f:
@@ -605,7 +646,7 @@ with (OUT/"domain_clusters.jsonl").open("w") as f:
     for cs in cluster_stats:
         f.write(json.dumps(cs, ensure_ascii=False) + "\n")
 
-print(f"[OK] 클러스터: {len(cluster_stats)}개 (2+ 멤버), 최대 클러스터 {cluster_stats[0]['size']}개 도메인" if cluster_stats else "[OK] 클러스터 없음", flush=True)
+print(f"[OK] 클러스터: {len(cluster_stats)}개 (2+ 멤버), 최대 클러스터 {cluster_stats[0]['size']}개 도메인" if cluster_stats else "[OK] 클러스터 없음", file=_sys.stderr, flush=True)
 
 # ── 6. docs/dse-cross-resonance.md 생성 ─────────────────────────
 lines = []
@@ -859,14 +900,14 @@ MD_OUT.write_text("\n".join(lines), encoding="utf-8")
 # ── 요약 출력 ──────────────────────────────────────────────────
 import sys
 sys.stdout.flush()
-print(f"[OK] 전체 도메인 (cross-dse 제외): {len(pure_domains)}", flush=True)
-print(f"[OK] 수식 추출 대상 도메인: {len(domain_formulas)}")
-print(f"[OK] 고유 수식 패턴: {len(formula_domains)}")
-print(f"[OK] 교차 공명 수식 (2+ 도메인): {len(cross_resonance)}")
-print(f"[OK] 총 DSE 항목 (도메인 x 수식): {sum(len(f) for f in domain_formulas.values())}")
-print(f"[OK] (기존) 상위50 쌍 {len(pairs)}개 계산, 평균 스코어 {mean_s:.3f}")
-print(f"[OK] (v2) 전체 S>=0.5 쌍: {len(all_pairs_s05)}개")
-print(f"[OK] (v2) 도메인 클러스터: {len(cluster_stats)}개 (2+ 멤버)")
+print(f"[OK] 전체 도메인 (cross-dse 제외): {len(pure_domains)}", file=_sys.stderr, flush=True)
+print(f"[OK] 수식 추출 대상 도메인: {len(domain_formulas)}", file=_sys.stderr)
+print(f"[OK] 고유 수식 패턴: {len(formula_domains)}", file=_sys.stderr)
+print(f"[OK] 교차 공명 수식 (2+ 도메인): {len(cross_resonance)}", file=_sys.stderr)
+print(f"[OK] 총 DSE 항목 (도메인 x 수식): {sum(len(f) for f in domain_formulas.values())}", file=_sys.stderr)
+print(f"[OK] (기존) 상위50 쌍 {len(pairs)}개 계산, 평균 스코어 {mean_s:.3f}", file=_sys.stderr)
+print(f"[OK] (v2) 전체 S>=0.5 쌍: {len(all_pairs_s05)}개", file=_sys.stderr)
+print(f"[OK] (v2) 도메인 클러스터: {len(cluster_stats)}개 (2+ 멤버)", file=_sys.stderr)
 if cluster_stats:
     print(f"  최대 클러스터: {cluster_stats[0]['size']}개 도메인")
     print(f"  클러스터 크기 분포: {', '.join(str(c['size']) for c in cluster_stats[:10])}")
@@ -879,5 +920,5 @@ print("=== S>=0.5 고공명 쌍 상위 10 ===")
 for i, p in enumerate(all_pairs_s05[:10], 1):
     print(f"  {i:2d}. {p[0]:30s} <-> {p[1]:30s}  S={p[2]:.3f}  수식Jac={p[7]:.3f}")
 print()
-print(f"[OK] docs/dse-cross-resonance.md 생성")
-print(f"[OK] {OUT}/ 에 6개 .jsonl 저장")
+print(f"[OK] docs/dse-cross-resonance.md 생성", file=_sys.stderr)
+print(f"[OK] {OUT}/ 에 6개 .jsonl 저장", file=_sys.stderr)

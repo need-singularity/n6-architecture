@@ -1,0 +1,75 @@
+# verify_autonomous_driving.hexa
+# n6-autonomous-driving-paper.md 외부출처 검증
+# 규칙: R1 HEXA-FIRST. 자기참조 금지, EXACT/CLOSE/MISS, 소수 대조군 포함.
+# 출처: SAE J3016/J3400, ISO 11898-1/26262, Tesla AI Day 2019,
+#       Bosch 5G radar, VW MEB, Porsche Taycan, Hyundai E-GMP.
+
+domain "autonomous-driving"
+paper "docs/paper/n6-autonomous-driving-paper.md"
+
+const N     = 6
+const SIGMA = 12    # sigma(6) = 1+2+3+6
+const TAU   = 4     # tau(6)   = |{1,2,3,6}|
+const PHI   = 2     # phi(6)   = 6*(1-1/2)(1-1/3)
+const SOPFR = 5     # sopfr(6) = 2+3
+
+assert SIGMA * PHI == N * TAU    # 핵심 정리 σφ=nτ
+
+# 외부 관측 (항목, 관측, 이론식, 이론값, 출처)
+cases = [
+  ("SE(3) 차원",                          6,   "n",                   N,              "Murray-Li-Sastry 1994"),
+  ("Tesla FSD HW3 연산(TOPS)",            144, "sigma^2",             SIGMA*SIGMA,    "Tesla AI Day 2019"),
+  ("CAN 2.0 payload bytes",               8,   "sigma-tau",           SIGMA-TAU,      "ISO 11898-1"),
+  ("SAE J3016 자율주행 레벨 수",           6,   "n",                   N,              "SAE J3016:2021 L0..L5"),
+  ("ASIL 등급 수(A,B,C,D)",               4,   "tau",                 TAU,            "ISO 26262-3"),
+  ("Sense->Perceive->Plan->Control 단계", 4,   "tau",                 TAU,            "Apollo/Autoware/DRIVE"),
+  ("코너 레이더 수(표준 AD 패키지)",       4,   "tau",                 TAU,            "Bosch 5G radar docs"),
+  ("주요 GNSS 수(GPS/GLONASS/Galileo/BeiDou)", 4, "tau",              TAU,            "ITU GNSS list"),
+  ("EV 400V 플랫폼 팩 전압",              400, "tau*(sigma-phi)^2",   TAU*(SIGMA-PHI)*(SIGMA-PHI),"VW MEB, Tesla M3/Y"),
+  ("EV 800V 플랫폼 팩 전압",              800, "phi*tau*(sigma-phi)^2",PHI*TAU*(SIGMA-PHI)*(SIGMA-PHI),"Porsche Taycan, E-GMP"),
+  ("NACS(J3400) 커넥터 핀 수",            5,   "sopfr",               SOPFR,          "SAE J3400:2023"),
+  ("Tesla Model 3 LR 팩 셀 직렬 수",      96,  "sigma*(sigma-tau)",   SIGMA*(SIGMA-TAU),"Tesla Model 3 LR 96s74p"),
+  # 의도적 MISS(투명성): 주장 n=6 vs 실제 8
+  ("Tesla Model 3 서라운드 카메라 수",     8,   "n (주장)",             N,              "Tesla FSD HW3 공식 8대"),
+]
+
+fn judge(obs, theo) -> str {
+  if obs == theo      { return "EXACT" }
+  if abs(obs-theo) * 20 < theo { return "CLOSE" }    # 5% 이내
+  return "MISS"
+}
+
+# 본 검증
+var exact = 0
+var close = 0
+var miss  = 0
+for (name, obs, formula, theo, src) in cases {
+  let j = judge(obs, theo)
+  match j { "EXACT" -> exact+=1, "CLOSE" -> close+=1, _ -> miss+=1 }
+  print("{j}  obs={obs}  theo={theo}  ({formula})  {name}")
+}
+let total = len(cases)
+print("요약: EXACT={exact}/{total}  CLOSE={close}  MISS={miss}")
+
+# 소수 편향 대조군: n=5,7에 동일 식을 평가하면 거의 맞지 않아야 한다.
+# 기대: EXACT 비율 << 본 실험.
+control_targets = [5, 7]
+for m in control_targets {
+  let ms = sigma(m)         # 5->6, 7->8
+  let mt = tau(m)           # 5->2, 7->2
+  let mp = phi(m)           # 5->4, 7->6
+  let msop = sopfr(m)       # 5->5, 7->7
+  var hit = 0
+  for (_, obs, _, _, _) in cases {
+    # 같은 관측 obs 가 m 계열 단순치(m, ms, mt, ms-mt, mt*m, ...) 중 하나와 일치하는지
+    let candidates = [m, ms, mt, mp, ms-mt, mt*(ms-mp)*(ms-mp), ms*(ms-mt), msop]
+    if obs in candidates { hit += 1 }
+  }
+  print("대조군 n={m}: 우연일치 {hit}/{total}")
+}
+
+# 출처 목록
+print("\n[출처]")
+for (name, _, _, _, src) in cases {
+  print("  - {name}: {src}")
+}

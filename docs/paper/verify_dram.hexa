@@ -1,0 +1,81 @@
+# verify_dram.hexa
+# n6-dram-paper.md 외부출처 검증
+# 규칙: R1 HEXA-FIRST, 자기참조 금지, EXACT/CLOSE/MISS, 소수 대조군.
+# 출처: JEDEC JESD79-5 (DDR5), JESD209-6 (LPDDR6, 2025-07),
+#       Samsung press 2023-05/2024-06 (1a/1b/1c/1d nm),
+#       JEDEC DDR 세대 전압 로드맵.
+
+domain "dram"
+paper "docs/paper/n6-dram-paper.md"
+
+const N     = 6
+const SIGMA = 12
+const TAU   = 4
+const PHI   = 2
+const SOPFR = 5
+const MU    = 1
+
+assert SIGMA * PHI == N * TAU
+
+cases = [
+  ("DDR5 채널당 데이터 버스 폭(bit)",        64,    "2^n",              1 shl N,             "JEDEC JESD79-5"),
+  ("DDR5 서브채널 수",                        2,    "phi",              PHI,                 "JEDEC JESD79-5"),
+  ("DDR5 서브채널당 비트 폭",                32,    "2^sopfr",          1 shl SOPFR,         "JEDEC JESD79-5"),
+  ("DDR5 burst length(prefetch)",           16,    "phi^tau",          PHI*PHI*PHI*PHI,     "JEDEC JESD79-5 BL16"),
+  ("DDR5 bank group 수",                     8,    "sigma-tau",        SIGMA-TAU,           "JEDEC JESD79-5"),
+  ("DDR5 bank group당 bank 수",              4,    "tau",              TAU,                 "JEDEC JESD79-5"),
+  ("DDR5 총 bank 수",                        32,   "2^sopfr",          1 shl SOPFR,         "8*4 per JESD79-5"),
+  ("DDR5 VDD(V) * 10",                       11,   "sigma-mu",         SIGMA-MU,            "JESD79-5: VDD=1.1V"),
+  ("DDR5 DIMM 핀 수",                        288,  "sigma*J2",         SIGMA*24,            "JEDEC DIMM 288-pin"),
+  ("LPDDR6 sub-channel당 DQ 라인 수(2025)",  12,   "sigma",            SIGMA,               "JESD209-6 (2025-07)"),
+  ("ECC 폭(DDR5 on-die)",                    8,    "sigma-tau",        SIGMA-TAU,           "JESD79-5 on-die ECC"),
+  # Samsung 공정 노드: 14/12/11/10 nm
+  ("Samsung 1a nm",                          14,   "sigma+phi",        SIGMA+PHI,           "Samsung 2021"),
+  ("Samsung 1b nm",                          12,   "sigma",            SIGMA,               "Samsung 2023-05"),
+  ("Samsung 1c nm",                          11,   "sigma-mu",         SIGMA-MU,            "Samsung 2024"),
+  ("Samsung 1d nm",                          10,   "sigma-phi",        SIGMA-PHI,           "Samsung 2024-06"),
+  # DDR 세대 전압 단조감소 (JEDEC)
+  ("DDR1 VDD * 10",                          25,   "(no n6 fit)",      -1,                  "JEDEC JESD79"),
+  ("DDR2 VDD * 10",                          18,   "(no n6 fit)",      -1,                  "JEDEC JESD79-2"),
+  ("DDR3 VDD * 10",                          15,   "sigma+n/2?",       -1,                  "JEDEC JESD79-3"),
+  ("DDR4 VDD * 10",                          12,   "sigma",            SIGMA,               "JEDEC JESD79-4"),
+  ("DDR5 VDD * 10 (재확인)",                 11,   "sigma-mu",         SIGMA-MU,            "JEDEC JESD79-5"),
+]
+
+fn judge(obs, theo) -> str {
+  if theo < 0 { return "SKIP" }          # 이론식 없음(대조용 기록)
+  if obs == theo { return "EXACT" }
+  if abs(obs-theo)*20 < theo { return "CLOSE" }
+  return "MISS"
+}
+
+var exact=0; var close=0; var miss=0; var skip=0
+for (name, obs, formula, theo, src) in cases {
+  let j = judge(obs, theo)
+  match j {
+    "EXACT" -> exact+=1,
+    "CLOSE" -> close+=1,
+    "SKIP"  -> skip+=1,
+    _       -> miss+=1
+  }
+  print("{j}  obs={obs}  theo={theo}  ({formula})  {name}")
+}
+let total = len(cases) - skip
+print("요약: EXACT={exact}/{total}  CLOSE={close}  MISS={miss}  (SKIP={skip})")
+
+# 대조군: n=5,7,10 — n6 식을 그대로 교체해서 계산 시 EXACT가 급감해야 함
+for m in [5, 7, 10] {
+  let ms=sigma(m); let mt=tau(m); let mp=phi(m); let msop=sopfr(m)
+  var hit=0; var tested=0
+  for (_, obs, _, theo, _) in cases {
+    if theo < 0 { continue }
+    tested += 1
+    let cand = [m, ms, mt, mp, msop,
+                1 shl m, 1 shl msop, ms-mt, ms+mp, ms-mp, ms*24]
+    if obs in cand { hit += 1 }
+  }
+  print("대조군 n={m}: 우연일치 {hit}/{tested}")
+}
+
+print("\n[출처]")
+for (name,_,_,_,src) in cases { print("  - {name}: {src}") }

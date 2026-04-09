@@ -1,0 +1,68 @@
+# verify_thermodynamics.hexa
+# n6-thermodynamics-paper.md (BT-149 / BT-193 / BT-199) 외부출처 검증
+# 규칙: R1 HEXA-FIRST, 자기참조 금지, EXACT/CLOSE/MISS, 소수 대조군.
+# 출처: 표준 학부 교재 (Callen; Reif; Landau-Lifshitz; Batchelor; Pope "Turbulent Flows").
+
+domain "thermodynamics"
+paper "docs/paper/n6-thermodynamics-paper.md"
+
+const N     = 6
+const SIGMA = 12
+const TAU   = 4
+const PHI   = 2
+const SOPFR = 5
+
+assert SIGMA * PHI == N * TAU
+
+# BT-149: 열역학 기본 구조가 모두 τ=4 (Callen, Thermodynamics, 2e)
+# BT-193: 열전달/상전이/볼츠만/Stefan-Boltzmann (Reif)
+# BT-199: Navier-Stokes / Kolmogorov / Stokes drag (Pope 2000; Batchelor 1967)
+cases = [
+  # BT-149 ---------------------------------------------------
+  ("열역학 법칙 수(0,1,2,3)",            4,   "tau",           TAU,    "Callen 2e Ch.1"),
+  ("열역학 퍼텐셜 수(U,H,F,G)",           4,   "tau",           TAU,    "Callen 2e Ch.5"),
+  ("Maxwell 관계식 수",                   4,   "tau",           TAU,    "Callen 2e §7.4"),
+  ("Carnot 사이클 단계 수",               4,   "tau",           TAU,    "Fermi Thermodynamics §9"),
+  # BT-193 ---------------------------------------------------
+  ("Stefan-Boltzmann T^a 지수 a",         4,   "tau",           TAU,    "Planck 1900; Landau-Lifshitz V §60"),
+  ("열전달 모드 수(전도/대류/복사)",       3,   "n/phi",         N/PHI,  "Incropera Ch.1"),
+  ("4상(고/액/기/플라즈마) 쌍 전이 수",    6,   "C(tau,2)=n",    N,      "조합론 C(4,2)=6"),
+  ("Landauer 한계 kT*ln(x), x=",          2,   "phi",           PHI,    "Landauer 1961 IBM J"),
+  # BT-199 ---------------------------------------------------
+  ("Navier-Stokes 모멘텀 방정식 수(3D)",   3,   "n/phi",         N/PHI,  "Batchelor §3.3"),
+  ("Navier-Stokes 계 전체 보존방정식 수",   5,   "sopfr",         SOPFR,  "질량1+운동량3+에너지1"),
+  ("Stokes drag 계수 F=?*mu*r*v",        6,   "n",             N,      "Stokes 1851; Batchelor §4.9"),
+  ("Kolmogorov 에너지 스펙트럼 지수(부호뺀 분자)", 5, "sopfr",    SOPFR,  "Kolmogorov 1941; Pope 2000 §6"),
+  ("Kolmogorov 지수 분모",                3,   "n/phi",         N/PHI,  "Pope 2000 §6 (k^-5/3)"),
+]
+
+fn judge(obs, theo) -> str {
+  if obs == theo { return "EXACT" }
+  if abs(obs-theo)*20 < theo { return "CLOSE" }
+  return "MISS"
+}
+
+var exact=0; var close=0; var miss=0
+for (name, obs, formula, theo, src) in cases {
+  let j = judge(obs, theo)
+  match j { "EXACT" -> exact+=1, "CLOSE" -> close+=1, _ -> miss+=1 }
+  print("{j}  obs={obs}  theo={theo}  ({formula})  {name}")
+}
+let total = len(cases)
+print("요약: EXACT={exact}/{total}  CLOSE={close}  MISS={miss}")
+
+# 대조군: n=5,7,8
+for m in [5, 7, 8] {
+  let ms=sigma(m); let mt=tau(m); let mp=phi(m); let msop=sopfr(m)
+  var hit=0
+  for (_, obs, _, _, _) in cases {
+    let cand = [m, ms, mt, mp, msop, ms-mt, m/mp if mp>0 else 0]
+    if obs in cand { hit += 1 }
+  }
+  print("대조군 n={m}: 우연일치 {hit}/{total}")
+}
+
+# 특기: Kolmogorov -5/3 지수는 -sopfr/(n/phi) = -5/3 (관측과 구조 모두 일치)
+# 특기: 삼중점 상전이 쌍 수 C(4,2)=6=n (조합적 필연, n=6과의 일치는 구조적)
+print("\n[출처]")
+for (name,_,_,_,src) in cases { print("  - {name}: {src}") }
