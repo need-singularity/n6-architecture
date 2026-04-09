@@ -155,4 +155,4 @@ python3 experiments/experiment_h_ee_11_combined_architecture.py  # 통합 실험
 - 제품 라인 도메인당 1개만 유지 (v1/v2 분기 금지, git history가 버전)
 
 ## 할일 (todo)
-- "todo", "할일" → `hexa-bin-actual $HOME/Dev/nexus/mk2_hexa/native/todo.hexa n6-arch` 실행 후 **결과를 마크다운 텍스트로 그대로 출력** (재포맷 금지)
+- "todo", "할일" → `$HOME/Dev/hexa-lang/target/release/hexa $HOME/Dev/nexus/mk2_hexa/native/todo.hexa n6-arch` 실행 후 **결과를 마크다운 텍스트로 그대로 출력** (재포맷 금지)

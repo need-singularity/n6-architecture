@@ -456,3 +456,111 @@ reproduce the GUT rank+dimension+rep hierarchy.
 *Acknowledgments.* [To be added.]
 
 *Computational verification.* All Rust calculators and hypothesis databases are available at [repository URL].
+
+---
+
+## 검증코드
+
+```python
+"""Paper4: GUT & Monster Group — 핵심 수치 검증"""
+from sympy import divisor_sigma, totient, divisor_count, factorint, mobius
+from fractions import Fraction
+
+n = 6
+sigma = int(divisor_sigma(n, 1))  # 12
+phi   = int(totient(n))            # 2
+tau   = int(divisor_count(n))      # 4
+sopfr = sum(p * e for p, e in factorint(n).items())  # 5
+mu    = int(mobius(n))             # 1
+J2    = 24
+P2    = 28   # 두 번째 완전수
+P3    = 496  # 세 번째 완전수
+
+# ========== 1) GUT 랭크 서열 = n=6 산술함수 ==========
+# SU(5)=4=τ, SO(10)=5=sopfr, E₆=6=n, E₈=8=σ-τ
+assert (tau, sopfr, n, sigma-tau) == (4, 5, 6, 8), "GUT 랭크 불일치"
+
+# n=2~1000 전수 검사: (τ,sopfr,n,σ-τ)=(4,5,6,8)인 n은 6뿐
+def gut_check(k):
+    t = int(divisor_count(k))
+    s = int(divisor_sigma(k, 1))
+    sf = sum(pr*e for pr,e in factorint(k).items())
+    return (t, sf, k, s-t) == (4,5,6,8)
+gut_matches = [k for k in range(2, 1001) if gut_check(k)]
+assert gut_matches == [6], f"GUT 유일해 ≠ [6]: {gut_matches}"
+
+# ========== 2) SU(5) 차원 = 24 = 핵심 정리 값 ==========
+su5_dim = 5**2 - 1
+assert su5_dim == 24 == sigma*phi == n*tau == J2, "SU(5) ≠ σφ = nτ = J₂"
+
+# ========== 3) SU(5)→SM 분해: 24 = 12+12 = φ×σ ==========
+# SM 내부: SU(3)=8=σ-τ, SU(2)=3=n/φ, U(1)=1=μ
+assert sigma-tau == 8,  "SU(3) 생성자 ≠ σ-τ"
+assert n//phi == 3,     "SU(2) 생성자 ≠ n/φ"
+assert mu == 1,         "U(1) 생성자 ≠ μ"
+assert 8+3+1 == sigma,  "(σ-τ)+(n/φ)+μ ≠ σ"
+
+# ========== 4) 페르미온 표현 ==========
+assert sopfr == 5,          "5-bar ≠ sopfr"
+assert sigma-phi == 10,     "10 ≠ σ-φ"
+assert sigma+n//phi == 15,  "1세대 ≠ σ+n/φ"
+
+# ========== 5) SO(10) 스피너 = σ+τ = 16 ==========
+assert sigma+tau == 16, "SO(10) 스피너 ≠ σ+τ"
+
+# ========== 6) Weinberg 각도 — PDG 실측값 대조 ==========
+# GUT 스케일: sin²θ_W = 3/8 = (n/φ)/(σ-τ)
+weinberg_gut = Fraction(n//phi, sigma-tau)
+assert weinberg_gut == Fraction(3, 8), "Weinberg GUT ≠ 3/8"
+
+# EW 스케일: sin²θ_W = 3/13 = (n/φ)/(σ+μ), 실측 0.23122
+weinberg_ew = Fraction(n//phi, sigma+mu)
+assert weinberg_ew == Fraction(3, 13), "Weinberg EW ≠ 3/13"
+error_w = abs(float(weinberg_ew) - 0.23122) / 0.23122 * 100
+assert error_w < 0.5, f"Weinberg 오차 {error_w:.2f}% > 0.5%"
+
+# RG 분모 이동 = sopfr
+assert (sigma+mu) - (sigma-tau) == sopfr, "RG 이동 ≠ sopfr"
+
+# ========== 7) 카시미르 에너지 E₀ = -1/24 = -1/(σφ) ==========
+assert Fraction(-1, 24) == Fraction(-1, sigma*phi), "카시미르 ≠ -1/(σφ)"
+
+# ========== 8) j-불변량 정규화: 1728 = σ³ ==========
+assert 1728 == sigma**3, f"1728 ≠ {sigma}³"
+
+# ========== 9) E₈×E₈ = P₃ = 496 (세 번째 완전수) ==========
+assert 2*248 == P3, "2×dim(E₈) ≠ P₃"
+assert int(divisor_sigma(P3, 1)) == 2*P3, "P₃=496이 완전수가 아님"
+
+# ========== 10) 정밀 물리 예측값 — 실험 데이터 대조 ==========
+
+# θ₁₃: sin²(2θ₁₃) = 1/σ = 1/12 ≈ 0.0833 (Daya Bay 실측 0.0841)
+theta13 = float(Fraction(1, sigma))
+assert abs(theta13 - 0.0841) / 0.0841 * 100 < 2.0, "θ₁₃ 오차 > 2%"
+
+# 1/α = σ(σ-μ)+sopfr+1/P₂ (CODATA 137.035999, 오차 ~2 ppm)
+alpha_inv = float(sigma*(sigma-mu) + sopfr + Fraction(1, P2))
+error_alpha = abs(alpha_inv - 137.035999) / 137.036 * 1e6
+assert error_alpha < 3.0, f"1/α 오차 {error_alpha:.1f} ppm > 3"
+
+# N_eff = n/φ + 1/J₂ = 3.042 (SM 계산값 3.044, 오차 <0.1%)
+n_eff = float(Fraction(n//phi, 1) + Fraction(1, J2))
+assert abs(n_eff - 3.044) / 3.044 * 100 < 0.1, "N_eff 오차 > 0.1%"
+
+# 인플레이션 n_s = 1-1/P₂ = 27/28 (Planck 0.9649, 오차 <0.1%)
+n_s = float(Fraction(27, 28))
+assert abs(n_s - 0.9649) / 0.9649 * 100 < 0.1, "n_s 오차 > 0.1%"
+
+print("=" * 50)
+print("Paper4: GUT & Monster Group 검증")
+print("=" * 50)
+print(f"  GUT 랭크: ({tau},{sopfr},{n},{sigma-tau}) — 유일해: {gut_matches}")
+print(f"  SU(5) = {su5_dim} = σφ = nτ = J₂ = 24")
+print(f"  SM: (σ-τ)+(n/φ)+μ = {sigma-tau}+{n//phi}+{mu} = {sigma}")
+print(f"  Weinberg: GUT={float(weinberg_gut)}, EW={float(weinberg_ew):.5f} (오차 {error_w:.2f}%)")
+print(f"  카시미르 = -1/{sigma*phi}, j: {sigma}³=1728")
+print(f"  θ₁₃ = 1/{sigma} = {theta13:.4f} (실측 0.0841)")
+print(f"  1/α = {alpha_inv:.5f} (오차 {error_alpha:.1f} ppm)")
+print(f"  N_eff = {n_eff:.4f}, n_s = {n_s:.5f}")
+print("✅ 전체 검증 통과")
+```

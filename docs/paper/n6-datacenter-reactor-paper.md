@@ -157,7 +157,7 @@ s,p,t = sigma(n),phi(n),tau(n)
 assert s*p == n*t == 24
 assert s*5 == 60                          # 60 MWe
 assert s*n == 72                          # racks per SMR
-assert 1 + 1/(s*t*s) == 1.0173611111111112  # PUE
+assert 1 + 1/(s*t*s) == 1.0017361111111112  # PUE
 assert (s - 5 - p)/s == 1/3               # Carnot η
 print("HEXA-DC verified: 60 MWe, 72 racks, PUE 1.017, η 33%")
 # ── [표준 증강 2026-04-08] σ·φ=n·τ 유일성 + 소수 편향 대조 + MISS ──

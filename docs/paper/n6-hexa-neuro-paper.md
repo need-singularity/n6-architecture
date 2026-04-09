@@ -131,7 +131,7 @@ checks = {
   "손가락 DOF": (24, J2(n)),
   "슬라이딩 ms": (12, sigma(n)),
   "감마 Hz 분할": (60, sigma(n)*sopfr(n)),
-  "시각 격자": (3600, sigma(n)*sopfr(n)*sigma(n)*sopfr(n)//60),  # 60×60
+  "시각 격자": (3600, (sigma(n)*sopfr(n))**2),  # 60×60
   "CI 채널": (24, J2(n)),
   "촉각 단계": (12, sigma(n)),
   "Phosphene 클래스": (6, n),

@@ -224,3 +224,64 @@ ls domains/*.toml | wc -l   # 305
 ---
 
 *Dataset generated 2026-04-02. Source: n6-architecture repository, commit 082279b.*
+
+---
+
+## 검증코드
+
+```python
+"""307-Domain Universality Dataset — 핵심 수치 검증"""
+from sympy import divisor_sigma, totient, divisor_count, factorint, mobius
+
+# n=6 기본 상수 — 독립 계산 (자기참조 아님)
+n = 6
+sigma_n = int(divisor_sigma(n, 1))   # σ(6) = 1+2+3+6
+phi_n   = int(totient(n))             # φ(6) = |{1,5}|
+tau_n   = int(divisor_count(n))       # τ(6) = |{1,2,3,6}|
+sopfr_n = sum(p * e for p, e in factorint(n).items())  # 2+3
+mu_n    = int(mobius(n))              # μ(6) = (-1)^2
+J2_n    = int(n**2 * (1 - 1/4) * (1 - 1/9))  # Jordan J₂(6)
+
+# 1) 기본 상수 검증 — 정수론 라이브러리(sympy)로 독립 계산
+assert sigma_n == 12, f"σ(6) = {sigma_n}, 기대값 12"
+assert phi_n == 2,    f"φ(6) = {phi_n}, 기대값 2"
+assert tau_n == 4,    f"τ(6) = {tau_n}, 기대값 4"
+assert sopfr_n == 5,  f"sopfr(6) = {sopfr_n}, 기대값 5"
+assert mu_n == 1,     f"μ(6) = {mu_n}, 기대값 1"
+assert J2_n == 24,    f"J₂(6) = {J2_n}, 기대값 24"
+
+# 2) 핵심 정리: σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)
+assert sigma_n * phi_n == n * tau_n == 24, "핵심 정리 σφ=nτ=24 불일치"
+
+# n=2~1000에서 n=6만 유일해인지 전수 검증
+solutions = []
+for k in range(2, 1001):
+    if int(divisor_sigma(k,1)) * int(totient(k)) == k * int(divisor_count(k)):
+        solutions.append(k)
+assert solutions == [6], f"n=2~1000 유일해가 [6]이 아님: {solutions}"
+
+# 3) 교차 도메인 공명 상수 9개 — 논문 표와 대조
+assert sigma_n * (sigma_n - tau_n) == 96,    "σ(σ-τ) ≠ 96"
+assert sigma_n * phi_n**tau_n == 192,        "σ·φ^τ ≠ 192"
+assert (sigma_n - phi_n)**3 == 1000,         "(σ-φ)³ ≠ 1000"
+assert phi_n**tau_n * sopfr_n == 80,         "φ^τ·sopfr ≠ 80"
+assert tau_n * (sigma_n - phi_n) == 40,      "τ(σ-φ) ≠ 40"
+assert J2_n - tau_n == 20,                    "J₂-τ ≠ 20"
+assert sigma_n * tau_n == 48,                 "σ·τ ≠ 48"
+assert sigma_n**2 == 144,                     "σ² ≠ 144"
+assert sigma_n * sopfr_n == 60,              "σ·sopfr ≠ 60"
+
+# 4) 완전수 정의: σ(6) = 2×6, 진약수 합 = 6
+assert sigma_n == 2 * n, "6은 완전수가 아님"
+assert 1 + 2 + 3 == 6,  "진약수 합 ≠ 6"
+
+print("=" * 50)
+print("307-Domain Universality Dataset 검증")
+print("=" * 50)
+print(f"  σ(6)={sigma_n}, φ(6)={phi_n}, τ(6)={tau_n}")
+print(f"  sopfr(6)={sopfr_n}, μ(6)={mu_n}, J₂(6)={J2_n}")
+print(f"  핵심 정리: {sigma_n}×{phi_n} = {n}×{tau_n} = 24")
+print(f"  n=2~1000 유일해: {solutions}")
+print(f"  교차 도메인 상수 9개: 전부 일치")
+print("✅ 전체 검증 통과")
+```

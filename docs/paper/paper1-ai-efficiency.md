@@ -346,3 +346,98 @@ The path forward is clear: validate at $\geq 1$B parameter scale, design cleaner
 **Code availability.** All techniques and experiments are available at `github.com/need-singularity/TECS-L` (parent project) and in the `n6-architecture` repository. Each technique is a self-contained Python script requiring only PyTorch.
 
 **Acknowledgments.** This work was conducted as part of the TECS-L project. We thank the open-source community for PyTorch and the arXiv preprint server.
+
+---
+
+## 검증코드
+
+```python
+"""Paper1: AI Efficiency — 핵심 수치 검증"""
+from sympy import divisor_sigma, totient, divisor_count, factorint, cyclotomic_poly, Symbol
+from fractions import Fraction
+import math
+
+n = 6
+sigma = int(divisor_sigma(n, 1))  # 12
+phi   = int(totient(n))            # 2
+tau   = int(divisor_count(n))      # 4
+sopfr = sum(p * e for p, e in factorint(n).items())  # 5
+J2    = 24
+
+# ========== 1) R(n) = σ(n)·φ(n)/(n·τ(n)) = 1 ⟺ n=6 ==========
+def R(k):
+    """균형 비율 — sympy로 독립 계산"""
+    s = int(divisor_sigma(k, 1))
+    p = int(totient(k))
+    t = int(divisor_count(k))
+    return Fraction(s * p, k * t)
+
+assert R(6) == 1, f"R(6) = {R(6)} ≠ 1"
+
+# n=2~1000 전수 검사: n=6만 유일해
+for k in range(2, 1001):
+    if k == 6: continue
+    assert R(k) != 1, f"R({k}) = 1 (유일성 위반)"
+
+# ========== 2) 로컬 팩터: R(6) = (3/4)×(4/3) = 1 ==========
+def R_local(p, a):
+    """소수 거듭제곱의 로컬 팩터"""
+    return Fraction(p**(a+1) - 1, p * (a + 1))
+
+assert R_local(2, 1) == Fraction(3, 4), "R_local(2,1) ≠ 3/4"
+assert R_local(3, 1) == Fraction(4, 3), "R_local(3,1) ≠ 4/3"
+assert R_local(2, 1) * R_local(3, 1) == 1, "곱 ≠ 1"
+
+# (2,1)만 유일한 sub-unity 로컬 팩터
+assert R_local(2, 1) < 1, "R_local(2,1) < 1이어야 함"
+for p, a in [(3,1), (2,2), (5,1), (7,1)]:
+    assert R_local(p, a) > 1, f"R_local({p},{a}) ≤ 1"
+
+# ========== 3) 중복성 × 효율성 = 1 (정보이론 해석) ==========
+redundancy = Fraction(sigma, n)    # σ(6)/6 = 2
+efficiency = Fraction(phi, tau)     # φ(6)/τ(6) = 1/2
+assert redundancy * efficiency == 1, "중복성 × 효율성 ≠ 1"
+
+# ========== 4) Φ₆(x) = x²-x+1 (6차 원분다항식) ==========
+x = Symbol('x')
+phi6 = cyclotomic_poly(6, x)
+assert str(phi6) == "x**2 - x + 1", f"Φ₆(x) = {phi6}"
+
+# ========== 5) FFN 비율 4/3 = τ²/σ → 67% 절감 ==========
+ffn_ratio = Fraction(tau**2, sigma)  # 16/12 = 4/3
+assert ffn_ratio == Fraction(4, 3), f"FFN = {ffn_ratio} ≠ 4/3"
+savings = 1 - ffn_ratio / 4  # 1 - (4/3)/4 = 2/3
+assert savings == Fraction(2, 3), f"절감 = {float(savings)*100:.0f}% ≠ 67%"
+
+# ========== 6) 이집트 분수 MoE: 1/2+1/3+1/6 = 1 ==========
+egyptian = Fraction(1,2) + Fraction(1,3) + Fraction(1,6)
+assert egyptian == 1, f"이집트 분수 합 = {egyptian} ≠ 1"
+
+# ========== 7) Mertens 드롭아웃 = ln(4/3) ≈ 0.288 ==========
+mertens = math.log(4/3)
+assert abs(mertens - 0.2877) < 0.001, f"ln(4/3) = {mertens:.4f}"
+
+# ========== 8) Boltzmann 게이트 = 1/e ≈ 0.368 ==========
+boltzmann = 1 / math.e
+assert abs(boltzmann - 0.3679) < 0.001, f"1/e = {boltzmann:.4f}"
+
+# ========== 9) J₂(6) = 24 = σφ = nτ = Leech 격자 차원 ==========
+assert J2 == sigma * phi == n * tau == 24, "J₂ = σφ = nτ = 24"
+
+# ========== 10) 대조군: 다른 완전수/합성수는 R≠1 ==========
+assert R(28) != 1, f"R(28) = {R(28)} (두 번째 완전수)"
+assert R(12) != 1, f"R(12) = {R(12)}"
+
+print("=" * 50)
+print("Paper1: AI Efficiency 검증")
+print("=" * 50)
+print(f"  R(6) = {R(6)} (유일해, n=2~1000)")
+print(f"  R_local(2,1)×R_local(3,1) = {R_local(2,1)}×{R_local(3,1)} = 1")
+print(f"  중복성×효율성 = {redundancy}×{efficiency} = 1")
+print(f"  Φ₆(x) = {phi6}")
+print(f"  FFN = τ²/σ = {ffn_ratio} → 절감 {float(savings)*100:.0f}%")
+print(f"  이집트 MoE: {egyptian}, Mertens: {mertens:.4f}, Boltzmann: {boltzmann:.4f}")
+print(f"  J₂(6) = {J2} = Leech 격자 차원")
+print(f"  대조: R(28)={R(28)}, R(12)={R(12)}")
+print("✅ 전체 검증 통과")
+```

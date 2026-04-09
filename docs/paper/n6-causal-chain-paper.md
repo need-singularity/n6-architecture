@@ -355,10 +355,37 @@ Future work should focus on: (1) adversarial edge auditing, (2) quantitative cha
 import math
 import random
 
-# ── n6 constants from definitions ──
-def sigma(n): return sum(d for d in range(1, n+1) if n % d == 0)
-def tau(n):   return sum(1 for d in range(1, n+1) if n % d == 0)
-def phi(n):   return sum(1 for k in range(1, n+1) if math.gcd(k, n) == 1)
+# ── n6 constants from definitions (소인수분해 기반 O(sqrt(n)) 최적화) ──
+def _factorize(n):
+    """소인수분해 → {소수: 지수} 딕셔너리"""
+    factors = {}
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors[d] = factors.get(d, 0) + 1
+            n //= d
+        d += 1
+    if n > 1:
+        factors[n] = factors.get(n, 0) + 1
+    return factors
+
+def sigma(n):
+    result = 1
+    for p, e in _factorize(n).items():
+        result *= (p**(e+1) - 1) // (p - 1)
+    return result
+
+def tau(n):
+    result = 1
+    for e in _factorize(n).values():
+        result *= (e + 1)
+    return result
+
+def phi(n):
+    result = n
+    for p in _factorize(n):
+        result = result // p * (p - 1)
+    return result
 def sopfr(n):
     s, temp = 0, n
     d = 2
@@ -507,11 +534,9 @@ print(f"\nUniqueness: sigma*phi = n*tau verified unique at n=6 for n in [2, 1000
 # ── [표준 증강 2026-04-08] σ·φ=n·τ 유일성 + 소수 편향 대조 + MISS ──
 # 출처: docs/theorem-r1-uniqueness.md (3개 독립 증명)
 # 출처: nexus/shared/reality_map.json v8.0 (342노드, 291 EXACT, 4 MISS)
-def _sig(n): return sum(d for d in range(1, n+1) if n % d == 0)
-def _tau(n): return sum(1 for d in range(1, n+1) if n % d == 0)
-def _phi(n):
-    from math import gcd as _g
-    return sum(1 for k in range(1, n+1) if _g(k, n) == 1)
+def _sig(n): return sigma(n)
+def _tau(n): return tau(n)
+def _phi(n): return phi(n)
 # 2 <= v < 1000 에서 σ(v)·φ(v) == v·τ(v) 만족하는 v 전수 탐색
 _n6_solutions = [v for v in range(2, 1000) if _sig(v)*_phi(v) == v*_tau(v)]
 assert _n6_solutions == [6], f"유일성 위반: {_n6_solutions}"
