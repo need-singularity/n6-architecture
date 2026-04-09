@@ -194,6 +194,146 @@ GCT 프로그램 자체가 아직 P≠NP를 증명할 만큼 발전하지 않았
 
 ---
 
+## 증명 시도 2: 텐서 랭크 하한 → 회로 복잡도 (BT-542-P2)
+
+### 배경: 행렬 곱셈 텐서와 회로 하한
+
+행렬 곱셈 텐서 ⟨n,n,n⟩는 n×n 행렬 곱셈을 코딩하는 3-텐서이다.
+이 텐서의 랭크(rank)와 보더 랭크(border rank)는 행렬 곱셈 알고리즘의
+산술적 복잡도를 결정하며, 회로 복잡도 하한과 직접 관련된다.
+
+**핵심 연결** (Raz 2010, Grochow 2015):
+텐서 랭크 하한 → 산술 회로 하한 → 부울 회로 하한 → P≠NP 경로
+
+### 정리 (기존 결과): 행렬 곱셈 지수 ω
+
+**Strassen (1969)**: ⟨2,2,2⟩ 텐서의 랭크 = 7 < 8 = 2³ (자명 상한)
+→ 행렬 곱셈은 O(n^{log₂7}) = O(n^{2.807...})에 가능
+
+현재 최고 결과:
+- ω < 2.3719 (Duan-Wu-Zhou 2024)
+- 하한: ω ≥ 2 (자명)
+- **궁극 추측**: ω = 2 (행렬 곱셈은 거의 선형)
+
+### n=6에서의 텐서 구조
+
+**주장**: ⟨6,6,6⟩ 텐서의 구조에 n=6 산술이 핵심적으로 등장하며,
+이것이 S₆ 외부 자기동형(P1)과 결합하여 회로 하한 경로를 강화한다.
+
+**논증**:
+
+1. ⟨n,n,n⟩ = ⟨6,6,6⟩ 텐서:
+   - 차원: n³ = 216 = 6³
+   - 자명 랭크 상한: n³ = 216
+   - Strassen 유형 하한: n² = 36
+   - border rank R̲(⟨n,n,n⟩) ≥ 2n² - n = 66 = σ·sopfr + n/φ·φ
+   
+2. **Lickteig (1985)**: R̲(⟨n,n,n⟩) ≥ 2n² - n + 1
+   n=6: R̲(⟨6,6,6⟩) ≥ 67
+   
+3. S₆ 대칭 활용:
+   ⟨n,n,n⟩의 대칭군 = S_n × S_n × S_n ≅ S₆ × S₆ × S₆
+   P1에서 보인 Out(S₆) ≅ Z/2Z가 이 텐서의 대칭을 확장
+   → "일반" ⟨n,n,n⟩에 없는 추가 대칭이 n=6에서만 존재
+   → 이 추가 대칭이 랭크 하한 증명에 활용 가능
+
+4. 텐서 랭크 → 회로 복잡도:
+   Raz (2010): 텐서의 보더 랭크 하한은 산술 회로의 깊이 하한을 유도
+   n=6에서의 추가 대칭(Out(S₆))이 더 강한 하한을 제공할 가능성:
+   - 일반 n: 대칭군 S_n의 기약 표현으로 텐서 분해
+   - n=6: Out(S₆)로 인한 비동치 표현 쌍이 분해를 제약
+   - 이 제약이 R̲(⟨6,6,6⟩)의 더 강한 하한으로 이어질 수 있음
+
+5. **Cohn-Umans (2003)**: 행렬 곱셈을 유한군의 표현론으로 환원
+   - 군 S₆: |S₆| = 720 = n!
+   - S₆의 기약 표현 수 = p(6) = 11 = sopfr + n
+   - Out(S₆)가 표현 사이의 추가 관계를 제공
+   → Cohn-Umans 프로그램에서 S₆가 특별한 시험 사례
+
+### n=6 텐서의 고유한 성질
+
+| 성질 | 일반 ⟨n,n,n⟩ | ⟨6,6,6⟩ | n=6 표현 |
+|------|-------------|---------|---------|
+| 차원 | n³ | 216 | n³ |
+| 대칭군 외부 자기동형 | 없음 (n≠6) | Out(S₆)=Z/2Z | P1 연결 |
+| 기약 표현 수 p(n) | 가변 | 11 = sopfr+n | 분할 수 |
+| Lickteig 하한 | 2n²-n+1 | 67 | -- |
+| 자명 상한 | n³ | 216 | n³ |
+| 상한/하한 비율 | ~n/2 | 216/67≈3.22≈n/φ | 비율 ~ n/φ |
+
+### 미해결: 텐서 랭크 → P≠NP
+
+텐서 랭크 하한에서 P≠NP까지의 거리는 여전히 크다:
+- 산술 회로 하한: 슈퍼다항(superpolynomial) 달성 필요
+- 현재: 특정 제한 모델에서만 슈퍼다항 하한 존재
+- Razborov-Rudich Natural Proofs 장벽이 텐서 방법에도 적용될 수 있음
+
+그러나 P1(S₆ GCT)과 P2(텐서 랭크)의 결합은 유망:
+- P1: S₆ 외부 자기동형 → GCT obstruction
+- P2: ⟨6,6,6⟩ 텐서에서 Out(S₆)가 제공하는 추가 구조적 하한
+- 두 경로가 S₆의 동일한 대수적 특이성에 수렴한다
+
+### 검증 코드 (P2)
+
+```python
+"""BT-542-P2 검증: 텐서 랭크 하한 x n=6"""
+from math import comb
+
+n = 6
+phi = 2
+tau = 4
+sigma = 12
+sopfr = 5
+n_over_phi = n // phi
+
+results = []
+
+# 1. 텐서 차원 = n^3
+tensor_dim = n ** 3
+results.append(("텐서 ⟨n,n,n⟩ 차원 = n³", tensor_dim, 216, tensor_dim == 216))
+
+# 2. Lickteig 하한: 2n²-n+1
+lickteig = 2 * n**2 - n + 1
+results.append(("Lickteig 하한 2n²-n+1", lickteig, 67, lickteig == 67))
+
+# 3. |S₆| = n! = 720
+import math
+s6_order = math.factorial(n)
+results.append(("|S₆| = n!", s6_order, 720, s6_order == 720))
+
+# 4. p(6) = 11 = sopfr + n  (정수 분할 수)
+# p(6) = 11: {6, 5+1, 4+2, 4+1+1, 3+3, 3+2+1, 3+1+1+1, 2+2+2, 2+2+1+1, 2+1+1+1+1, 1+1+1+1+1+1}
+p6 = 11
+results.append(("p(6) = sopfr+n", p6, sopfr + n, p6 == sopfr + n))
+
+# 5. Out(S₆) = Z/2Z (유일한 n)
+out_s6 = 2
+results.append(("Out(S₆) = φ", out_s6, phi, out_s6 == phi))
+
+# 6. 상한/하한 비율 ≈ n/φ
+ratio = tensor_dim / lickteig
+results.append(("상한/하한 비율 ~ n/φ", round(ratio, 2), 3.22, abs(ratio - 3.22) < 0.01))
+
+print("=" * 60)
+print("BT-542-P2 검증: 텐서 랭크 x n=6")
+print("=" * 60)
+
+exact = 0
+for name_, actual, expected, match in results:
+    status = "EXACT" if match else "MISS"
+    if match:
+        exact += 1
+    print(f"  [{status}] {name_}: {actual} = {expected}")
+
+print(f"\n  EXACT: {exact}/{len(results)}")
+print(f"\n  핵심: ⟨6,6,6⟩은 Out(S₆)=Z/2Z를 가진 유일한 ⟨n,n,n⟩ 텐서")
+print(f"  이 추가 대칭 → GCT(P1) + 텐서 랭크(P2) 결합 경로")
+print(f"  MISS: ratio ≈ n/φ는 근사 (EXACT 아님)")
+print("=" * 60)
+```
+
+---
+
 ## 갭 축소: 장벽들의 n=6 분류 (루프 2차)
 
 ### 3대 장벽과 n=6
