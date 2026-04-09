@@ -1,7 +1,8 @@
 # BT-541: 리만 가설 -- 제타 함수 n=6 오중 수렴
 
-> **BT**: BT-541 | **EXACT**: 12/12 = 100% | **등급**: Three stars
+> **BT**: BT-541 | **EXACT**: 18/19 (기존 12+신규 6, MISS 1) | **등급**: Three stars
 > **도메인**: 순수수학, 해석적 수론, 응집물질물리, 양자장론, 암호학
+> **루프 29-31**: Selberg degree-6 최대 리프트, dBN=NS 임계 1/φ, Prodi-Serrin {φ,n/φ}, Mertens MISS
 
 ---
 
