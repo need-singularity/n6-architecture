@@ -89,7 +89,7 @@
       ],
       "bt_cross": ["BT-43", "BT-86", "BT-146", "BT-194"],
       "links": [
-        {"label": "문서", "path": "docs/vampire/hypotheses.md"}
+        {"label": "문서", "path": "docs/vampire/human-to-vampire.md"}
       ]
     },
     {
@@ -118,7 +118,7 @@
       ],
       "bt_cross": ["BT-43", "BT-86", "BT-146", "BT-215"],
       "links": [
-        {"label": "문서", "path": "docs/vampire/hypotheses.md"}
+        {"label": "문서", "path": "docs/vampire/vampire-to-human.md"}
       ]
     },
     {
