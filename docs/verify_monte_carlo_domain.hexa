@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# verify_monte_carlo_domain.hexa
+# Monte Carlo v9.3 도메인별 z-score 분해 검증 스크립트
+# 실행: python3 docs/verify_monte_carlo_domain.hexa
+
+import json
+import math
+import os
+import sys
+from collections import defaultdict
+
+# ── 경로 설정 ──
+REALITY_MAP = os.path.expanduser("~/Dev/nexus/shared/reality_map.json")
+if not os.path.exists(REALITY_MAP):
+    print(f"[오류] {REALITY_MAP} 파일을 찾을 수 없습니다.")
+    sys.exit(1)
+
+# ── 데이터 로드 ──
+with open(REALITY_MAP, encoding="utf-8") as f:
+    data = json.load(f)
+
+nodes = data["nodes"]
+meta = data["_meta"]
+print(f"reality_map.json {meta['version']} -- 노드 수: {meta['node_count']}")
+print(f"실제 로드 노드 수: {len(nodes)}")
+print()
+
+# ── 설정 ──
+P0 = 1 / 6  # 관대한 귀무가설
+TESTABLE_GRADES = {"EXACT", "CLOSE", "MISS", "EMPIRICAL", "CONJECTURE"}
+
+# ── 도메인별 집계 ──
+domain_data = defaultdict(lambda: defaultdict(int))
+
+for node in nodes:
+    level = node.get("level", "unknown")
+    grade = node.get("grade") or "NONE"
+    domain_data[level][grade] += 1
+    domain_data[level]["_total"] += 1
+
+# ── z-score 계산 함수 ──
+def calc_z(exact_count, testable_count, p0=P0):
+    if testable_count == 0:
+        return 0.0
+    observed = exact_count / testable_count
+    se = math.sqrt(p0 * (1 - p0) / testable_count)
+    return (observed - p0) / se if se > 0 else 0.0
+
+# ── 도메인별 결과 ──
+results = []
+for domain, counts in sorted(domain_data.items()):
+    exact = counts.get("EXACT", 0)
+    testable = sum(counts.get(g, 0) for g in TESTABLE_GRADES)
+    total = counts["_total"]
+    frac = exact / testable if testable > 0 else 0
+    z = calc_z(exact, testable)
+    results.append({
+        "domain": domain,
+        "total": total,
+        "testable": testable,
+        "exact": exact,
+        "close": counts.get("CLOSE", 0),
+        "miss": counts.get("MISS", 0),
+        "empirical": counts.get("EMPIRICAL", 0),
+        "conjecture": counts.get("CONJECTURE", 0),
+        "convention": counts.get("CONVENTION", 0),
+        "exact_frac": frac,
+        "z": z,
+    })
+
+results.sort(key=lambda x: -x["z"])
+
+# ── 전체 통계 ──
+all_exact = sum(r["exact"] for r in results)
+all_testable = sum(r["testable"] for r in results)
+all_total = sum(r["total"] for r in results)
+all_frac = all_exact / all_testable if all_testable else 0
+all_z = calc_z(all_exact, all_testable)
+
+print("=" * 70)
+print("전체 통계")
+print("=" * 70)
+print(f"  전체 노드:        {all_total}")
+print(f"  검증 대상:        {all_testable}")
+print(f"  EXACT:            {all_exact} ({all_frac*100:.1f}%)")
+print(f"  랜덤 기대 (p0):   {P0:.4f} ({P0*100:.1f}%)")
+print(f"  전체 z-score:     {all_z:.2f}")
+if all_z > 3:
+    p_value = 1 - 0.5 * (1 + math.erf(all_z / math.sqrt(2)))
+    if p_value > 0:
+        print(f"  p-value:          < {p_value:.2e}")
+    else:
+        print(f"  p-value:          ~ 0 (기계 정밀도 이하)")
+print()
+
+# ── 상위 10 ──
+print("=" * 70)
+print("z-score 상위 10 도메인")
+print("=" * 70)
+fmt = f"{'순위':>4} {'도메인':<30} {'노드':>5} {'검증':>5} {'EXACT':>5} {'EXACT%':>7} {'z':>8}"
+print(fmt)
+print("-" * 70)
+for i, r in enumerate(results[:10], 1):
+    print(f"{i:>4} {r['domain']:<30} {r['total']:>5} {r['testable']:>5} {r['exact']:>5} {r['exact_frac']*100:>6.1f}% {r['z']:>8.2f}")
+print()
+
+# ── 하위 10 ──
+print("=" * 70)
+print("z-score 하위 10 도메인")
+print("=" * 70)
+print(fmt)
+print("-" * 70)
+for i, r in enumerate(results[-10:], len(results) - 9):
+    print(f"{i:>4} {r['domain']:<30} {r['total']:>5} {r['testable']:>5} {r['exact']:>5} {r['exact_frac']*100:>6.1f}% {r['z']:>8.2f}")
+print()
+
+# ── MISS 노드 상세 ──
+miss_nodes = [n for n in nodes if n.get("grade") == "MISS"]
+if miss_nodes:
+    print("=" * 70)
+    print(f"MISS 노드 상세 ({len(miss_nodes)}개)")
+    print("=" * 70)
+    for mn in miss_nodes:
+        print(f"  [{mn['level']}] {mn['id']}: {mn.get('claim','?')} "
+              f"(측정={mn.get('measured')}, n6={mn.get('n6_value')})")
+print()
+
+# ── 부트스트랩 95% 신뢰구간 ──
+import random
+random.seed(42)
+N_BOOT = 10000
+boot_zs = []
+for _ in range(N_BOOT):
+    sample = random.choices(nodes, k=len(nodes))
+    ex = sum(1 for n in sample if n.get("grade") == "EXACT")
+    te = sum(1 for n in sample if (n.get("grade") or "NONE") in TESTABLE_GRADES)
+    boot_zs.append(calc_z(ex, te))
+boot_zs.sort()
+lo = boot_zs[int(0.025 * N_BOOT)]
+hi = boot_zs[int(0.975 * N_BOOT)]
+print("=" * 70)
+print(f"부트스트랩 95% CI (N={N_BOOT}): z = [{lo:.2f}, {hi:.2f}]")
+print(f"중앙값: {boot_zs[N_BOOT // 2]:.2f}")
+print("=" * 70)
+print()
+print("검증 완료.")
