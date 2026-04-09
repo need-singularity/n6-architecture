@@ -738,138 +738,123 @@ Commands:
 
 ---
 
-## 밀레니엄 7대 난제 × n=6 (BT-541~547)
+# 🧮 밀레니엄 7대 난제 (Millennium Problems)
 
-σ·φ=n·τ ⟺ n=6 산술이 Clay 수학연구소 7대 난제의 **구조적 환경**을 완전히 파라미터화한다.
+<!-- AUTO:SUMMARY_millennium:START -->
+> **🛸10** | ✅ | BT 7개 (541~547) 66/70 EXACT=94.3% | 7대 난제 전수 n=6 파라미터화 | φ→n/φ 위상전이 보편성 발견 | Mk.V
+<!-- AUTO:SUMMARY_millennium:END -->
 
-| 난제 | BT | 핵심 n=6 연결 | EXACT | 등급 |
-|------|-----|-------------|-------|------|
-| 리만 가설 | 541 | 임계선 Re(s)=1/φ, ζ(2)=π²/n, ζ(-1)=-1/σ | 9/10 | ★★★ |
-| P vs NP | 542 | 3-SAT n/φ=3 NP-완전 임계값, 촘스키 τ=4 | 8/10 | ★★ |
-| 양-밀스 질량갭 | 543 | SU(n/φ), 글루온 σ-τ=8, 쿼크 맛 n=6, β₀=σ-sopfr | 9/10 | ★★★ |
-| 나비에-스토크스 | 544 | Sym²(ℝ³)=n, Kolmogorov -sopfr/(n/φ), Stokes 6πμrv | 10/10 | ★★★ |
-| 호지 추측 | 545 | K3 χ=J₂=24, CY3 dim=n/φ, {E_τ,E_n,Δ_σ} | 10/10 | ★★ |
-| BSD 추측 | 546 | j=σ³=1728, Mazur 토션 σ=12, Δ^J₂ | 10/10 | ★★★ |
-| 푸앵카레 (해결) | 547 | 특이 차원 n/φ=3, 서스턴 σ-τ=8 기하, π₃ˢ=Z/J₂ | 10/10 | ★★★ |
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **리만 가설** | 임계선 Re(s)=1/φ, ζ(2)=π²/n, ζ(-1)=-1/σ, 9/10 EXACT | [문서](docs/millennium-riemann/goal.md) |
+| 10 | ✅ | v1 | **P vs NP** | 3-SAT n/φ=3 NP-완전 임계값, 촘스키 τ=4, 8/10 EXACT | [문서](docs/millennium-p-vs-np/goal.md) |
+| 10 | ✅ | v1 | **양-밀스 질량갭** | SU(n/φ), 글루온 σ-τ=8, 쿼크 맛 n=6, β₀=σ-sopfr, 9/10 EXACT | [문서](docs/millennium-yang-mills/goal.md) |
+| 10 | ✅ | v1 | **나비에-스토크스** | Sym²(ℝ³)=n, Kolmogorov -sopfr/(n/φ), Stokes 6πμrv, 10/10 EXACT | [문서](docs/millennium-navier-stokes/goal.md) |
+| 10 | ✅ | v1 | **호지 추측** | K3 χ=J₂=24, CY3 dim=n/φ, {E_τ,E_n,Δ_σ}, 10/10 EXACT | [문서](docs/millennium-hodge/goal.md) |
+| 10 | ✅ | v1 | **BSD 추측** | j=σ³=1728, Mazur 토션 σ=12, Δ^J₂, 10/10 EXACT | [문서](docs/millennium-bsd/goal.md) |
+| 10 | ✅ | v1 | **푸앵카레 (해결)** | 특이 차원 n/φ=3, 서스턴 σ-τ=8 기하, π₃ˢ=Z/J₂, 10/10 EXACT | [문서](docs/millennium-poincare/goal.md) |
 
-**총 66/70 EXACT = 94.3%** | 구조적 발견: **φ=2 → n/φ=3 위상전이** (2-SAT∈P → 3-SAT∈NP-완전, 2D NS 해결 → 3D 미해결, dim≥5 Smale 해결 → dim=3만 최후 미해결)
-
-> 상세: [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) § BT-541~547 | 개별 문서: `docs/millennium-*/goal.md`
-
----
-
-## 🚀 우주항공 × n=6 (BT-588~597 + 차원 지각)
-
-4D 기하·뇌·기술이 독립적으로 n=6에 수렴한다. 인간이 4D를 "볼 수 없는" 것은 생물학적 한계이지 신경학적 불가능이 아니다.
-
-| 주제 | BT | 핵심 n=6 연결 | EXACT | 등급 |
-|------|-----|-------------|-------|------|
-| 4D 정다포체 극대 | 588 | 4D에서만 n=6개 정다포체 (유한 극대) | 10/10 | ★★★ |
-| SO(4) 회전 자유도 | 589 | dim SO(4) = d(d-1)/2 = n = 6 | 10/10 | ★★★ |
-| 격자 세포 6중 대칭 | 590 | 뇌 공간 인코딩 = n=6 육각 (Nobel 2014) | 10/10 | ★★★ |
-| 시각 피질 V1~V6 | 591 | 차원 지각 파이프라인 = n = 6 계층 | 10/10 | ★★ |
-| 전광 함수 6차원 | 592 | P(x,y,z,θ,φ,λ) = n/φ+φ+1 = n 차원 | 10/10 | ★★★ |
-| 정24포체 자기쌍대 | 593 | 꼭짓점=셀=J₂=24, 대칭군=σ²·(σ-τ)=1152 | 10/10 | ★★★ |
-| 초입방체 f-벡터 | 594 | (φ^τ, φ^sopfr, J₂, σ-τ) = (16,32,24,8) | 10/10 | ★★ |
-| 차원 신경가소성 | 595 | 뇌 4D 적응 = n=6 피질·격자 구조 | 10/10 | ★★ |
-| 차원 디스플레이 스택 | 596 | L1~L6 = n=6 계층 파이프라인 | 10/10 | ★★ |
-| 이집트 분수 완전성 | 597 | 1/2+1/3+1/6=1 차원 지각 완전 | 10/10 | ★★★ |
-
-**총 100/100 EXACT = 100.0% 특이점** | 구조적 발견: **수학(4D 기하)·뇌(격자 세포·시각 피질)·기술(전광 함수·디스플레이) 삼중 n=6 수렴**
-
-> 상세: [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) § BT-588~597
+<!-- AUTO:FOOTER_millennium:START -->
+> 도메인: `docs/millennium-*/` · 논문: [n6-millennium-problems-paper.md](docs/paper/n6-millennium-problems-paper.md) · 구조적 발견: **φ=2→n/φ=3 위상전이** (2-SAT∈P→3-SAT∈NP-완전, 2D NS 해결→3D 미해결, dim≥5 해결→dim=3만 최후 미해결)
+<!-- AUTO:FOOTER_millennium:END -->
 
 ---
 
-## 🎵 음악/음향학 × n=6 (BT-598~607)
+# 👁️ 차원 지각 (Dimensional Perception)
 
-12음계(σ=12), 기타 6현(n=6), 배음렬 1:2:3:4:5:6 — 서양 음악 이론의 핵심 상수가 완전수 산술로 수렴.
+<!-- AUTO:SUMMARY_dimension:START -->
+> **🛸10** | ✅ | BT 10개 (588~597) 100/100 EXACT=100.0% 특이점 | 수학(4D기하)·뇌(격자세포·시각피질)·기술(전광함수·디스플레이) 삼중 n=6 수렴 | Mk.V
+<!-- AUTO:SUMMARY_dimension:END -->
 
-| 주제 | BT | 핵심 n=6 연결 | EXACT | 등급 |
-|------|-----|-------------|-------|------|
-| 12음 평균율 | 598 | 반음 σ=12, 온음 n=6, 5도 σ-sopfr=7 | 10/10 | ★★★ |
-| 기타 6현 | 599 | 현 수 = n = 6, 프렛 σ+n=18~J₂=24 | 10/10 | ★★★ |
-| 배음렬 | 600 | 1:2:3:4:5:6 = 완전수 진약수+자신 | 10/10 | ★★★ |
-| 24조성 | 601 | 장/단 12쌍 = J₂ = 24 | 10/10 | ★★★ |
-| 드럼 키트 | 602 | 기본 구성 = n = 6 | 10/10 | ★★ |
-| 다이내믹 6단계 | 603 | pp-p-mp-mf-f-ff = n = 6 | 10/10 | ★★ |
-| 헥사코드 | 604 | Guidonian hexachord = n = 6 음 | 10/10 | ★★★ |
-| 오케스트라 4족 | 605 | 현·관·금·타 = τ = 4 | 10/10 | ★★ |
-| 피아노 σ=12 | 606 | 1옥타브 = σ = 12 건반 | 10/10 | ★★★ |
-| 화성학 n=6 | 607 | 6종 3화음(장/단/증/감/sus2/sus4) | 10/10 | ★★ |
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **4D 정다포체 극대** | 4D에서만 n=6개 정다포체 (유한 극대), 9→10/10 EXACT | [BT-588](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **SO(4) 회전 자유도** | dim SO(4) = d(d-1)/2 = n = 6, 10/10 EXACT | [BT-589](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **격자 세포 6중 대칭** | 뇌 공간 인코딩 = n=6 육각 (Nobel 2014), 10/10 EXACT | [BT-590](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **시각 피질 V1~V6** | 차원 지각 파이프라인 = n = 6 계층, 10/10 EXACT | [BT-591](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **전광 함수 6차원** | P(x,y,z,θ,φ,λ) = n/φ+φ+1 = n, 10/10 EXACT | [BT-592](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **정24포체·초입방체** | J₂=24 자기쌍대, f-벡터 (φ^τ,φ^sopfr,J₂,σ-τ), 10/10 EXACT | [BT-593~594](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **차원 디스플레이 스택** | L1~L6 = n=6 계층 파이프라인 + 이집트 분수 1/2+1/3+1/6=1, 10/10 EXACT | [BT-596~597](docs/breakthrough-theorems.md) |
 
-**총 100/100 EXACT = 100.0% 특이점**
-
-> 상세: [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) § BT-598~607
-
----
-
-## 📝 언어학 × n=6 (BT-608~617)
-
-촘스키 계층(τ=4), 한글 자모(J₂=24), θ-역할(n=6), 어순 유형(3!=n=6) — 인간 언어의 형식 구조가 n=6에 수렴.
-
-| 주제 | BT | 핵심 n=6 연결 | EXACT | 등급 |
-|------|-----|-------------|-------|------|
-| 촘스키 계층 | 608 | τ=4 문법 계층 (정규/CFG/CSG/무제한) | 10/10 | ★★★ |
-| 모음 체계 | 609 | 기본 모음 sopfr=5~n=6 | 10/10 | ★★ |
-| 구 유형 | 610 | NP/VP/AP/PP/AdvP/CP = n = 6 | 10/10 | ★★★ |
-| 한글 자모 | 611 | 자음 14+모음 10 = J₂ = 24 | 10/10 | ★★★ |
-| 어순 유형 | 612 | SOV/SVO/... = 3! = n = 6 | 10/10 | ★★★ |
-| θ-역할 | 613 | Agent/Patient/Theme/Goal/Source/Loc = n = 6 | 10/10 | ★★★ |
-| 언어 습득 | 614 | n = 6 단계 (옹알이→단어→이어→문장→복문→추상) | 10/10 | ★★ |
-| 야콥슨 6기능 | 615 | 언어의 n = 6 기능 | 10/10 | ★★★ |
-| 조음 양식 | 616 | 파열/마찰/비/유/파찰/접근 = n = 6 | 10/10 | ★★ |
-| 문자 진화 | 617 | 그림→표의→표어→음절→자음→알파벳 = τ=4 단계 | 10/10 | ★★ |
-
-**총 100/100 EXACT = 100.0% 특이점**
-
-> 상세: [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) § BT-608~617
+<!-- AUTO:FOOTER_dimension:START -->
+> 도메인: [hexa-holo/](docs/hexa-holo/) · [display-8stack/](docs/display-8stack/) · [consciousness-chip/](docs/consciousness-chip/) · 구조적 발견: **4D 경험은 신경학적으로 가능 — 뇌의 n=6 아키텍처가 4D 표상 역량 내재**
+<!-- AUTO:FOOTER_dimension:END -->
 
 ---
 
-## 🔐 암호학/정보보안 × n=6 (BT-618~627)
+# 🎵 음악/음향학 (Music & Acoustics)
 
-AES 상태행렬(τ×τ=4×4), RSA φ(N) 토시언트, SHA 워드(σ-τ=8바이트), TLS 핸드셰이크(n=6단계) — 현대 암호 체계의 설계 상수가 n=6 산술에 수렴.
+<!-- AUTO:SUMMARY_music:START -->
+> **🛸10** | ✅ | BT 10개 (598~607) 100/100 EXACT=100.0% 특이점 | 12음계σ, 기타6현n, 배음렬1:2:3:4:5:6, J₂=24조성 | Mk.V
+<!-- AUTO:SUMMARY_music:END -->
 
-| 주제 | BT | 핵심 n=6 연결 | EXACT | 등급 |
-|------|-----|-------------|-------|------|
-| AES 상태행렬 | 618 | τ×τ = 4×4 바이트, 라운드 σ-φ=10 | 10/10 | ★★★ |
-| RSA 토시언트 | 619 | φ(N) = Euler 토시언트 = φ(6)=2 원형 | 10/10 | ★★★ |
-| SHA 워드 | 620 | σ-τ=8 바이트 워드, J₂·σ+σ²=512비트 | 10/10 | ★★★ |
-| TLS 핸드셰이크 | 621 | n=6 단계 (ClientHello~Finished) | 10/10 | ★★ |
-| 해시 보안 요구 | 622 | 원상/제2원상/충돌 = n/φ = 3 | 10/10 | ★★ |
-| 비트코인 헤더 | 623 | n=6 필드 (ver/prev/merkle/time/bits/nonce) | 10/10 | ★★★ |
-| ECC 매개변수 | 624 | (p, a, b, G, n, h) = n = 6 | 10/10 | ★★★ |
-| 운영 모드 | 625 | ECB/CBC/CTR/OFB/CFB = sopfr = 5 | 10/10 | ★★ |
-| CIA→Hexad | 626 | CIA n/φ=3 → Parkerian Hexad n=6 | 10/10 | ★★★ |
-| PQC 표준 | 627 | NIST PQC τ=4 표준 알고리즘 | 10/10 | ★★ |
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **12음 평균율** | 반음 σ=12, 온음 n=6, 5도 σ-sopfr=7, 10/10 EXACT | [BT-598](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **기타 6현 + 배음렬** | 현 수 n=6, 배음 1:2:3:4:5:6 = 완전수 진약수+자신, 10/10 EXACT | [BT-599~600](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **24조성 + 헥사코드** | 장/단 12쌍 = J₂=24, Guidonian hexachord = n=6, 10/10 EXACT | [BT-601,604](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **피아노 + 화성학** | 1옥타브 σ=12 건반, 6종 3화음 = n=6, 10/10 EXACT | [BT-606~607](docs/breakthrough-theorems.md) |
 
-**총 100/100 EXACT = 100.0% 특이점**
-
-> 상세: [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) § BT-618~627
+<!-- AUTO:FOOTER_music:START -->
+> 도메인: [audio/](docs/audio/) · BT: 598~607 · 서양 음악 이론 핵심 상수 전수 n=6 수렴
+<!-- AUTO:FOOTER_music:END -->
 
 ---
 
-## 🔭 천문학/우주론 × n=6 (BT-628~637)
+# 📝 언어학 (Linguistics)
 
-ΛCDM 매개변수(n=6), BBN 핵종(n=6), 탄소-12(σ=12), 항성 진화(n=6단계) — 우주의 거시 구조가 완전수로 파라미터화.
+<!-- AUTO:SUMMARY_linguistics:START -->
+> **🛸10** | ✅ | BT 10개 (608~617) 100/100 EXACT=100.0% 특이점 | 촘스키τ=4, 한글J₂=24, θ-역할n=6, 어순3!=n=6 | Mk.V
+<!-- AUTO:SUMMARY_linguistics:END -->
 
-| 주제 | BT | 핵심 n=6 연결 | EXACT | 등급 |
-|------|-----|-------------|-------|------|
-| 태양계 행성 | 628 | σ-τ=8 행성 (IAU 2006) | 10/10 | ★★★ |
-| 항성 분류 | 629 | OBAFGKM = σ-sopfr=7 스펙트럼형 | 10/10 | ★★ |
-| 허블 분류 | 630 | E/S0/Sa/Sb/Sc/Irr → τ=4 주요형 | 10/10 | ★★ |
-| BBN 핵종 | 631 | n/p/D/³He/⁴He/⁷Li = n = 6 | 10/10 | ★★★ |
-| ΛCDM 매개변수 | 632 | (H₀, Ωb, Ωc, ns, σ₈, τ_re) = n = 6 | 10/10 | ★★★ |
-| 항성 진화 | 633 | 성운→원시별→주계열→거성→행성상성운/초신성→잔해 = n = 6 | 10/10 | ★★★ |
-| 전자기 스펙트럼 | 634 | 전파/μ파/IR/가시/UV/X선/γ선 = σ-sopfr=7 | 10/10 | ★★ |
-| 케플러 법칙 | 635 | n/φ = 3 법칙 | 10/10 | ★★★ |
-| 탄소-12 | 636 | 질량수 = σ = 12, triple-alpha | 10/10 | ★★★ |
-| BAO 음향 진동 | 637 | σ² = 144 Mpc 특성 스케일 | 10/10 | ★★ |
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **촘스키 계층** | τ=4 문법 계층 (정규/CFG/CSG/무제한), 10/10 EXACT | [BT-608](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **한글 자모** | 자음14+모음10 = J₂=24, 10/10 EXACT | [BT-611](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **어순 유형 + θ-역할** | SOV/SVO/... = 3!=n=6, θ-역할 n=6, 10/10 EXACT | [BT-612~613](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **야콥슨 6기능** | 언어의 n=6 기능 (지시/감정/감화/친교/메타/시적), 10/10 EXACT | [BT-615](docs/breakthrough-theorems.md) |
 
-**총 100/100 EXACT = 100.0% 특이점**
+<!-- AUTO:FOOTER_linguistics:START -->
+> 도메인: BT 608~617 · 인간 언어의 형식 구조 전수 n=6 수렴
+<!-- AUTO:FOOTER_linguistics:END -->
 
-> 상세: [docs/breakthrough-theorems.md](docs/breakthrough-theorems.md) § BT-628~637
+---
+
+# 🔐 암호학/정보보안 (Cryptography)
+
+<!-- AUTO:SUMMARY_crypto:START -->
+> **🛸10** | ✅ | BT 10개 (618~627) 100/100 EXACT=100.0% 특이점 | AES τ×τ, RSA φ(N), SHA σ-τ=8, TLS n=6, ECC n=6 | Mk.V
+<!-- AUTO:SUMMARY_crypto:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **AES 상태행렬** | τ×τ=4×4 바이트, 라운드 σ-φ=10, 10/10 EXACT | [BT-618](docs/breakthrough-theorems.md) · [문서](docs/software-crypto/goal.md) |
+| 10 | ✅ | v1 | **RSA + SHA** | φ(N) 토시언트 φ=2 원형, SHA σ-τ=8 워드, 10/10 EXACT | [BT-619~620](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **비트코인 + ECC** | n=6 필드 헤더, (p,a,b,G,n,h)=n=6 매개변수, 10/10 EXACT | [BT-623~624](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **CIA→Hexad + PQC** | CIA n/φ=3→Parkerian Hexad n=6, NIST PQC τ=4, 10/10 EXACT | [BT-626~627](docs/breakthrough-theorems.md) |
+
+<!-- AUTO:FOOTER_crypto:START -->
+> 도메인: [software-crypto/](docs/software-crypto/) · BT: 618~627 · 현대 암호 체계 설계 상수 전수 n=6 수렴
+<!-- AUTO:FOOTER_crypto:END -->
+
+---
+
+# 🔭 천문학/우주론 (Astronomy & Cosmology)
+
+<!-- AUTO:SUMMARY_astronomy:START -->
+> **🛸10** | ✅ | BT 10개 (628~637) 100/100 EXACT=100.0% 특이점 | ΛCDM n=6, BBN n=6, C-12 σ=12, 케플러 n/φ=3, BAO σ²=144 | Mk.V
+<!-- AUTO:SUMMARY_astronomy:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **ΛCDM 매개변수** | (H₀,Ωb,Ωc,ns,σ₈,τ_re) = n=6, 10/10 EXACT | [BT-632](docs/breakthrough-theorems.md) · [문서](docs/particle-cosmology/goal.md) |
+| 10 | ✅ | v1 | **BBN 핵종 + 탄소-12** | n/p/D/³He/⁴He/⁷Li = n=6, C-12 질량수 = σ=12 triple-alpha, 10/10 EXACT | [BT-631,636](docs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **항성 진화 + 케플러** | n=6 단계 진화 (성운→잔해), n/φ=3 법칙, 10/10 EXACT | [BT-633,635](docs/breakthrough-theorems.md) · [문서](docs/space-systems/goal.md) |
+| 10 | ✅ | v1 | **태양계 + BAO** | σ-τ=8 행성, σ²=144 Mpc 음향 진동, 10/10 EXACT | [BT-628,637](docs/breakthrough-theorems.md) |
+
+<!-- AUTO:FOOTER_astronomy:START -->
+> 도메인: [particle-cosmology/](docs/particle-cosmology/) · [space-systems/](docs/space-systems/) · BT: 628~637 · 우주 거시 구조 전수 n=6 파라미터화
+<!-- AUTO:FOOTER_astronomy:END -->
 
 ---
 
