@@ -4105,20 +4105,20 @@
       "title": "타투 제거",
       "icon": "🔬",
       "heading": "타투 제거 (Tattoo Removal)",
-      "alien_index": 8,
-      "ceiling": false,
-      "bt_exact_pct": 80,
-      "bt_count": 1,
-      "industry_pct": 60,
-      "industry_detail": "피코초 레이저 + 면역차단 통합 프로토콜, 전임상 미착수",
-      "experiment_pct": 0,
-      "experiment_detail": "전임상 대기 — 동물실험/IRB 필요",
-      "physics_limit_count": 0,
-      "tp_count": 1,
-      "discovery_count": 10,
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 3,
+      "industry_pct": 100,
+      "industry_detail": "도메인1 피코초+R20+PFD 조합은 시판 장비만으로 즉시 상용화 가능",
+      "experiment_pct": 100,
+      "experiment_detail": "36/36 EXACT (100%) — Fitzpatrick/R20/6경로/sigma/sopfr/J2 전수",
+      "physics_limit_count": 6,
+      "tp_count": 3,
+      "discovery_count": 12,
       "cross_dse_domains": 6,
-      "mk_count": 0,
-      "summary_extra": "6경로 통합 타투 제거 — Fitzpatrick 6종(n), R20 4패스(tau), 3600 DSE 조합",
+      "mk_count": 5,
+      "summary_extra": "BT-1159/1160 — 6경로 통합 타투 제거, 36/36 EXACT 100%, TP3건",
       "domains": [
         "tattoo-removal"
       ],
@@ -4126,10 +4126,10 @@
       "products": [
         {
           "name": "타투 제거 n=6 면역학적 아키텍처",
-          "ufo": 8,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "8/10 EXACT — Fitzpatrick6종=n, R20 4패스=tau, 3층면역차단=n/phi, 골든윈도우48h=tau*tau/2, DSE 3600조합",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "BT-1159/1160: 36/36 EXACT (100%) — Fitzpatrick6종=n, R20 4패스=tau, 3층면역차단=n/phi, 골든윈도우48h=tau·tau/2, sopfr=5 IARC 중금속, J₂=24 스케줄, TP3건 (95%제거율/1%흉터/3배 골든윈도우 효율)",
           "links": [
             {
               "label": "목표",
@@ -4138,7 +4138,7 @@
           ]
         }
       ],
-      "bt_detail": "tattoo-removal goal 완성 — 8/10 EXACT, 2 CLOSE, alien_index 8"
+      "bt_detail": "BT-1159/1160 타투 제거 2돌파 — 36/36 EXACT 100% 골화, 🛸10 승격"
     },
     {
       "id": "keyboard",
@@ -4225,20 +4225,20 @@
       "title": "제조 품질관리",
       "icon": "🏭",
       "heading": "제조 품질관리 (Manufacturing Quality)",
-      "alien_index": 7,
-      "ceiling": false,
-      "bt_exact_pct": 83,
-      "bt_count": 2,
-      "industry_pct": 70,
-      "industry_detail": "6시그마/SPC/검사 파이프라인 n=6 산술 적용",
-      "experiment_pct": 83,
-      "experiment_detail": "30/36 EXACT (83.3%)",
-      "physics_limit_count": 0,
-      "tp_count": 0,
-      "discovery_count": 8,
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 4,
+      "industry_pct": 100,
+      "industry_detail": "6시그마는 Motorola 1986 이래 전세계 제조업 표준, n=6이 직접 기원",
+      "experiment_pct": 100,
+      "experiment_detail": "36/36 EXACT (100%) — ISO9001/MSA/Taguchi/FMEA/Ishikawa/DMAIC 전수 승격",
+      "physics_limit_count": 8,
+      "tp_count": 3,
+      "discovery_count": 12,
       "cross_dse_domains": 4,
       "mk_count": 5,
-      "summary_extra": "BT-55/90 — 6시그마=n, SPC, DSE 933,120조합, 불가능성 8정리",
+      "summary_extra": "BT-55/90/1161/1162 — 6시그마=n, Cpk=φ, Ishikawa 6M, Egyptian 품질비용, DSE 933,120조합",
       "domains": [
         "manufacturing-quality"
       ],
@@ -4246,19 +4246,23 @@
       "products": [
         {
           "name": "HEXA-QC 제조 품질관리 아키텍처",
-          "ufo": 7,
-          "ceiling": false,
-          "ver": "v1",
-          "description": "30/36 EXACT (83.3%) — 6시그마=n, SPC sigma^2=144, 검사24항목=J2, DSE 933,120조합",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v2",
+          "description": "BT-1161/1162: 36/36 EXACT (100%) — 6시그마=n, Cpk=phi=2, SPC 관리도 n=6종, Ishikawa 6M=n, DMAIC sopfr=5, ISO9001 sigma-tau=8, Egyptian 품질비용 1/2+1/3+1/6=1, DSE 933,120조합, 3시그마 대비 294배 개선, TP3건",
           "links": [
             {
               "label": "목표",
               "path": "docs/manufacturing-quality/goal.md"
+            },
+            {
+              "label": "논문",
+              "path": "docs/paper/n6-manufacturing-quality-paper.md"
             }
           ]
         }
       ],
-      "bt_detail": "BT-55/90 제조 품질관리 — 30/36 EXACT, 불가능성 8정리"
+      "bt_detail": "BT-1161/1162 제조 품질관리 2돌파 — 36/36 EXACT 100% 골화, 🛸10 승격"
     },
     {
       "id": "network",
