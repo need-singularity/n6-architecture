@@ -858,6 +858,39 @@ Commands:
 
 ---
 
+# 🧴 위생 (Hygiene)
+
+<!-- AUTO:SUMMARY_hygiene:START -->
+> **🛸10** | ✅ | BT 2개 (1157~1158) 50/50 EXACT=100% 특이점 | 귀두pH=n=6, 라우릴C12=sigma, Lactobacillus6종=n, 질내pH=tau=4 | 100% 골화 2026-04-10
+<!-- AUTO:SUMMARY_hygiene:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **남성청결제 n=6 피부과학 아키텍처** | BT-1157: 25/25 EXACT — 귀두pH=n=6, 라우릴C12=sigma, Fitzpatrick6타입=n, 마이크로바이옴6속=n | [돌파](docs/mens-intimate-cleanser/breakthrough.md) |
+| 10 | ✅ | v1 | **여성청결제 n=6 질내생태계 아키텍처** | BT-1158: 25/25 EXACT — Lactobacillus6종=n, 질내pH=tau=4, CST5종=sopfr, 포도당C6=n, 월경28일=sigma*phi+tau | [돌파](docs/womens-intimate-cleanser/breakthrough.md) |
+
+<!-- AUTO:FOOTER_hygiene:START -->
+> 도메인: [mens-intimate-cleanser/](docs/mens-intimate-cleanser/) · [womens-intimate-cleanser/](docs/womens-intimate-cleanser/) · BT: 1157~1158 · 청결제 시장 OEM 즉시 가능
+<!-- AUTO:FOOTER_hygiene:END -->
+
+---
+
+# 🔬 타투 제거 (Tattoo Removal)
+
+<!-- AUTO:SUMMARY_tattoo-removal:START -->
+> **🛸8** | ❌ 전임상 미착수 | 8/10 EXACT, 2 CLOSE | Fitzpatrick6종=n, R20 4패스=tau, 6경로통합=n, DSE 3600조합 | alien_index 8
+<!-- AUTO:SUMMARY_tattoo-removal:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 8 | ❌ | v1 | **타투 제거 n=6 면역학적 아키텍처** | 6경로 통합 (3물리+3생화학), Fitzpatrick6종=n, R20 4패스=tau, 3층면역차단=n/phi, 골든윈도우48h=tau*tau/2 | [목표](docs/tattoo-removal/goal.md) |
+
+<!-- AUTO:FOOTER_tattoo-removal:START -->
+> 도메인: [tattoo-removal/](docs/tattoo-removal/) · 전임상 대기 — 피코초 레이저 + CCR2 면역차단 통합 프로토콜
+<!-- AUTO:FOOTER_tattoo-removal:END -->
+
+---
+
 ## Reference
 
 <!-- AUTO:REFERENCE:START -->
