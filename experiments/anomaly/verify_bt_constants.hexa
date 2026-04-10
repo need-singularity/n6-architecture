@@ -1,0 +1,10 @@
+// verify_bt_constants.py → .hexa 포팅 스텁
+// 원본 경로: experiments/anomaly/verify_bt_constants.py
+// 포팅 상태: STUB (원본 454 줄)
+// 원본 요약: BT Auto-Verification — Numerical claims from Breakthrough Theorems
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_bt_constants.py (HEXA 포팅 대기)")
+}

@@ -1,0 +1,11 @@
+// experiment_cosmology_biology.py → .hexa 포팅 스텁
+// 원본 경로: experiments/cross/experiment_cosmology_biology.py
+// 포팅 상태: STUB (의존 라이브러리: numpy; 원본 214 줄)
+// 원본 요약: Experiment: Cosmology + Biology Numerical Verification
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: experiment_cosmology_biology.py (HEXA 포팅 대기)")
+    println("의존: numpy")
+}

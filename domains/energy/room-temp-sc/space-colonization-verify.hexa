@@ -1,0 +1,10 @@
+// space-colonization-verify.py → .hexa 포팅 스텁
+// 원본 경로: domains/energy/room-temp-sc/space-colonization-verify.py
+// 포팅 상태: STUB (원본 192 줄)
+// 원본 요약: HEXA-SHIP 우주 식민지 아키텍처 — n=6 파라미터 전수 검증
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: space-colonization-verify.py (HEXA 포팅 대기)")
+}

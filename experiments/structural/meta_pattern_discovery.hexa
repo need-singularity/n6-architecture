@@ -1,0 +1,10 @@
+// meta_pattern_discovery.py → .hexa 포팅 스텁
+// 원본 경로: experiments/structural/meta_pattern_discovery.py
+// 포팅 상태: STUB (원본 858 줄)
+// 원본 요약: Meta-Pattern Discovery in DSE Domain Structure
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: meta_pattern_discovery.py (HEXA 포팅 대기)")
+}

@@ -1,0 +1,10 @@
+// verify_cancer10.py → .hexa 포팅 스텁
+// 원본 경로: domains/life/cancer-therapy/verify_cancer10.py
+// 포팅 상태: STUB (원본 131 줄)
+// 원본 요약: 암치료 10 연속돌파 검증 (BT-451~460).
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_cancer10.py (HEXA 포팅 대기)")
+}

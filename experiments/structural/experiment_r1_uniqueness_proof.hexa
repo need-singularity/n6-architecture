@@ -1,0 +1,11 @@
+// experiment_r1_uniqueness_proof.py → .hexa 포팅 스텁
+// 원본 경로: experiments/structural/experiment_r1_uniqueness_proof.py
+// 포팅 상태: STUB (의존 라이브러리: sympy; 원본 225 줄)
+// 원본 요약: Experiment: R(n) = 1 Uniqueness — Towards a Proof
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: experiment_r1_uniqueness_proof.py (HEXA 포팅 대기)")
+    println("의존: sympy")
+}

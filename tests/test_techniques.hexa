@@ -1,0 +1,11 @@
+// test_techniques.py → .hexa 포팅 스텁
+// 원본 경로: tests/test_techniques.py
+// 포팅 상태: STUB (의존 라이브러리: numpy, pytest, torch; 원본 977 줄)
+// 원본 요약: Tests for all 17 n=6 AI techniques in techniques/.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: test_techniques.py (HEXA 포팅 대기)")
+    println("의존: numpy, pytest, torch")
+}

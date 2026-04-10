@@ -1,0 +1,10 @@
+// verify_bt461_470.py → .hexa 포팅 스텁
+// 원본 경로: domains/life/hiv-treatment/verify_bt461_470.py
+// 포팅 상태: STUB (원본 145 줄)
+// 원본 요약: HIV 10돌파 BT-461~470 통합 검증 스크립트.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_bt461_470.py (HEXA 포팅 대기)")
+}

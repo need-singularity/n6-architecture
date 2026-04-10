@@ -1,0 +1,10 @@
+// exoplanet.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sedi/sources/exoplanet.py
+// 포팅 상태: STUB (원본 176 줄)
+// 원본 요약: NASA Exoplanet Archive — confirmed exoplanets with orbital data.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: exoplanet.py (HEXA 포팅 대기)")
+}

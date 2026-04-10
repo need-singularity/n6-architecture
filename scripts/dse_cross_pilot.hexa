@@ -1,0 +1,10 @@
+// dse_cross_pilot.py → .hexa 포팅 스텁
+// 원본 경로: scripts/dse_cross_pilot.py
+// 포팅 상태: STUB (원본 927 줄)
+// 원본 요약: DSE 교차 공명 분석 — 전체 335 도메인, n=6 수식 패턴 교차 탐색 (v2: 전체 확장)
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: dse_cross_pilot.py (HEXA 포팅 대기)")
+}

@@ -1,0 +1,85 @@
+{
+  "_doc": "n6-architecture 리포 9축 매니페스트 SSOT — 모든 에이전트 진입점",
+  "_version": "1.0.0",
+  "_generated": "2026-04-10",
+  "_root": "/Users/ghost/Dev/n6-architecture",
+
+  "axes": {
+    "theory": {
+      "path": "theory/",
+      "purpose": "영구 이론층 — 증명·BT·상수·예측·설계흐름",
+      "ssot": "theory/_index.json",
+      "subs": ["proofs", "breakthroughs", "constants", "predictions", "flow"],
+      "timeless": true
+    },
+    "domains": {
+      "path": "domains/",
+      "purpose": "295 도메인 — 도메인당 1개 .md + 1개 verify.hexa + 1개 CLAUDE.md",
+      "ssot": "domains/_index.json",
+      "axes_count": 10,
+      "domain_count": 295,
+      "subs": ["physics", "life", "energy", "compute", "materials", "space", "infra", "cognitive", "culture", "sf-ufo"]
+    },
+    "nexus": {
+      "path": "nexus/",
+      "purpose": "단일 Rust 바이너리 — 모든 계산기·DSE·분석·대시보드 흡수",
+      "ssot": "nexus/_registry.json",
+      "binary": "nexus",
+      "subcommands": ["scan", "verify", "calc", "dse", "analyze", "hexa", "dashboard"]
+    },
+    "techniques": {
+      "path": "techniques/",
+      "purpose": "AI 기법 66종 — .hexa 전환 완료",
+      "ssot": "techniques/_registry.json",
+      "subs": ["attention", "moe", "optim", "sparse", "graph", "compress", "arch"]
+    },
+    "experiments": {
+      "path": "experiments/",
+      "purpose": "검증 실험 — .hexa 전환 완료",
+      "ssot": "experiments/_results.jsonl",
+      "subs": ["ai-efficiency", "structural", "cross", "anomaly"]
+    },
+    "engine": {
+      "path": "engine/",
+      "purpose": "훈련/수학 런타임 — emergent n=6 트레이너, anima tension, consciousness"
+    },
+    "papers": {
+      "path": "papers/",
+      "purpose": "논문 39편 — 도메인당 1편, 검증코드 없으면 미완성",
+      "ssot": "papers/_registry.json"
+    },
+    "reports": {
+      "path": "reports/",
+      "purpose": "시점 리포트 — 감사·세션·발견·체인지로그 (이론 오염 금지)",
+      "subs": ["audits", "sessions", "discovery", "changelogs"]
+    },
+    "shared": {
+      "path": "shared/",
+      "purpose": "SSOT 설정·규칙·컨버전스·루프 (R14 단일진실)",
+      "subs": ["config", "convergence", "loop", "logs"]
+    }
+  },
+
+  "meta": {
+    "scripts": {"path": "scripts/", "purpose": "빌드·동기화·감사 — .hexa"},
+    "tests":   {"path": "tests/", "purpose": "통합 테스트 — .hexa"},
+    "claude":  {"path": ".claude/", "purpose": "Claude Code 프로젝트 로컬 에이전트·훅"}
+  },
+
+  "rules": {
+    "hexa_only": "모든 코드 .hexa, .py 금지",
+    "korean_only": ".md·print·주석·커밋 메시지 한글, 영어 혼용 금지",
+    "single_domain_doc": "도메인당 1개 .md + 1개 verify.hexa + 1개 CLAUDE.md",
+    "folder_claude_md": "모든 탐색 노드 CLAUDE.md 필수 (AI 진입점)",
+    "ssot_json": "규칙 본문은 shared/config/absolute_rules.json만, 그 외는 참조",
+    "no_hardcode": "상수/도메인/키워드 → shared/*.jsonl 동적로드",
+    "data_remote": ".jsonl/constants/discovery_log → ~/Dev/nexus/shared/ (R8)"
+  },
+
+  "navigation": {
+    "new_agent_entry": "CLAUDE.md 읽고 → INDEX.json (이 파일) → 해당 축 CLAUDE.md → 세부",
+    "breakthrough": "blowup.hexa <d> 3 → growth_bus.jsonl 기록",
+    "discovery": "nexus scan <domain> → growth_bus.jsonl",
+    "verify": "nexus verify <v>"
+  }
+}

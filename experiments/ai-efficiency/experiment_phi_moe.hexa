@@ -1,0 +1,10 @@
+// experiment_phi_moe.py → .hexa 포팅 스텁
+// 원본 경로: experiments/ai-efficiency/experiment_phi_moe.py
+// 포팅 상태: STUB (대규모 포팅 보류)
+// 원본 요약: Experiment Stub: Phi/Tau Expert Activation -- Technique #4
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: experiment_phi_moe.py (HEXA 포팅 대기)")
+}

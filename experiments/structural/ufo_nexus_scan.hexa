@@ -1,0 +1,10 @@
+// ufo_nexus_scan.py → .hexa 포팅 스텁
+// 원본 경로: experiments/structural/ufo_nexus_scan.py
+// 포팅 상태: STUB (원본 431 줄)
+// 원본 요약: NEXUS-6 Aerospace Domain Full Scan -- aerospace/aviation/space constants n=6 matching
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: ufo_nexus_scan.py (HEXA 포팅 대기)")
+}

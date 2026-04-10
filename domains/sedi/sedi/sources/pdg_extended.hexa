@@ -1,0 +1,10 @@
+// pdg_extended.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sedi/sources/pdg_extended.py
+// 포팅 상태: STUB (원본 269 줄)
+// 원본 요약: Extended PDG Particle Database — ~200 states including excited, exotic.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: pdg_extended.py (HEXA 포팅 대기)")
+}

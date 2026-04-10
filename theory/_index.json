@@ -1,0 +1,55 @@
+{
+  "_doc": "이론층 SSOT — 영구 불변 증명·정리·상수·예측·흐름",
+  "_version": "1.0.0",
+
+  "proofs": {
+    "main": "proofs/theorem-r1-uniqueness.md",
+    "related": [
+      "proofs/standard-model-from-n6.md",
+      "proofs/the-number-24.md",
+      "proofs/honest-limitations.md",
+      "proofs/physics-math-certification.md"
+    ],
+    "statement": "σ(n)·φ(n) = n·τ(n) ⟺ n = 6 (n≥2)",
+    "independent_proofs": 3
+  },
+
+  "breakthroughs": {
+    "main": "breakthroughs/breakthrough-theorems.md",
+    "total": 343,
+    "candidates": [
+      "breakthroughs/bt-candidates-from-tecs-l.md",
+      "breakthroughs/bt-candidates-round2.md",
+      "breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md",
+      "breakthroughs/new-bt-new-domains-part1-2026-04-06.md",
+      "breakthroughs/new-bt-new-domains-part2-2026-04-06.md"
+    ]
+  },
+
+  "constants": {
+    "main": "constants/atlas-constants.md",
+    "total": "1100+",
+    "grade": "EXACT",
+    "analysis": [
+      "constants/constant-collision-analysis.md",
+      "constants/special-number-contrast.md",
+      "constants/special-number-control.md"
+    ],
+    "verify": "constants/verify_special_numbers.hexa"
+  },
+
+  "predictions": {
+    "main": "predictions/testable-predictions.md",
+    "total": 45,
+    "falsification": "predictions/falsification-experiments.md",
+    "pre_registered": "predictions/pre-registered-predictions.md",
+    "unmeasured": "predictions/predictions-unmeasured.md"
+  },
+
+  "flow": {
+    "alien_design": "flow/alien-design-flow.md",
+    "synthesis": "flow/SYNTHESIS.md",
+    "anima_law": "flow/anima-law-bridges.md",
+    "tecs_bridge": "flow/tecs-l-bridge.md"
+  }
+}

@@ -1,0 +1,10 @@
+// constants.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sedi/constants.py
+// 포팅 상태: STUB (대규모 포팅 보류)
+// 원본 요약: n=6 arithmetic constants — the tuning frequencies of SEDI.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: constants.py (HEXA 포팅 대기)")
+}

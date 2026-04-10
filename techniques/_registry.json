@@ -1,0 +1,41 @@
+{
+  "_doc": "AI 기법 66종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
+  "_version": "1.0.0",
+  "_total": 66,
+
+  "attention": [
+    "alibi_attention", "dedekind_head", "egyptian_attention",
+    "egyptian_linear_attention", "fft_mix_attention", "gqa_grouping",
+    "ring_attention", "yarn_rope_scaling", "zamba_shared_attention"
+  ],
+  "moe": [
+    "deepseek_moe", "egyptian_moe", "gshard_switch", "jamba_hybrid",
+    "jordan_leech_moe", "mixtral_moe", "mixture_of_depths", "moco_queue",
+    "moe_activation_fraction", "partition_routing", "phi_moe"
+  ],
+  "optim": [
+    "adamw_quintuplet", "carmichael_lr", "chinchilla_scaling",
+    "constant_time_stride", "dpo_beta", "entropy_early_stop",
+    "fibonacci_stride", "inference_scaling", "layer_skip",
+    "lookahead_decoding", "lr_schedule_n6", "medusa_heads",
+    "predictive_early_stop", "speculative_decoding", "streaming_llm"
+  ],
+  "sparse": [
+    "boltzmann_gate", "mertens_dropout", "mobius_sparse",
+    "radical_norm", "rfilter_phase", "takens_dim6"
+  ],
+  "graph": [
+    "gat_heads", "gcn_depth", "gin_isomorphism",
+    "graphsage_sampling", "hcn_dimensions"
+  ],
+  "compress": [
+    "bpe_vocab_32k", "deepseek_mla_compression", "mae_masking",
+    "phi_bottleneck", "recurrent_gemma"
+  ],
+  "arch": [
+    "complete_llm_n6", "constitutional_ai", "context_window_ladder",
+    "detr_queries", "fpn_pyramid", "griffin_rglru", "mamba2_ssm",
+    "phi6simple", "rectified_flow", "sd3_mmdit", "simclr_temperature",
+    "vit_patch_n6", "whisper_ladder", "yolo_nms", "zetaln2_activation"
+  ]
+}

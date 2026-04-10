@@ -1,0 +1,10 @@
+// ouroboros_c1_physics_deepdive.py → .hexa 포팅 스텁
+// 원본 경로: experiments/structural/ouroboros_c1_physics_deepdive.py
+// 포팅 상태: STUB (원본 415 줄)
+// 원본 요약: ouroboros-c1-d1 Deep Analysis: n=6 patterns in fundamental physics
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: ouroboros_c1_physics_deepdive.py (HEXA 포팅 대기)")
+}

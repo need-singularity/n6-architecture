@@ -1,0 +1,11 @@
+// complete_llm_n6.py → .hexa 포팅 스텁
+// 원본 경로: techniques/arch/complete_llm_n6.py
+// 포팅 상태: STUB (의존 라이브러리: numpy; 원본 268 줄)
+// 원본 요약: Technique 27: Complete n=6 LLM Architecture (BT-56)
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: complete_llm_n6.py (HEXA 포팅 대기)")
+    println("의존: numpy")
+}

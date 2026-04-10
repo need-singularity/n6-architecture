@@ -1,0 +1,10 @@
+// build_n6_map.py → .hexa 포팅 스텁
+// 원본 경로: scripts/build_n6_map.py
+// 포팅 상태: STUB (원본 632 줄)
+// 원본 요약: build_n6_map.py — n6-architecture 전체 5계층 3D 맵 데이터 생성
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: build_n6_map.py (HEXA 포팅 대기)")
+}

@@ -1,0 +1,10 @@
+// info_geo_duality.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sedi/sources/info_geo_duality.py
+// 포팅 상태: STUB (원본 260 줄)
+// 원본 요약: Information–Geometry Duality — H-CX-505.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: info_geo_duality.py (HEXA 포팅 대기)")
+}

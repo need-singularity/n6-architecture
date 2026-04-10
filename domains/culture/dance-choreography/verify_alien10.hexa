@@ -1,0 +1,10 @@
+// verify_alien10.py → .hexa 포팅 스텁
+// 원본 경로: domains/culture/dance-choreography/verify_alien10.py
+// 포팅 상태: STUB (대규모 포팅 보류)
+// 원본 요약: 검증코드 -- 무용/안무 n=6 공간 기하학
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_alien10.py (HEXA 포팅 대기)")
+}

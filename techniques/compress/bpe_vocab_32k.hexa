@@ -1,0 +1,11 @@
+// bpe_vocab_32k.py → .hexa 포팅 스텁
+// 원본 경로: techniques/compress/bpe_vocab_32k.py
+// 포팅 상태: STUB (의존 라이브러리: numpy; 원본 130 줄)
+// 원본 요약: Technique 18: BPE Vocabulary 32K Decomposition (BT-73)
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: bpe_vocab_32k.py (HEXA 포팅 대기)")
+    println("의존: numpy")
+}

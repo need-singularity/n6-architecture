@@ -1,0 +1,11 @@
+// emergent_n6_trainer.py → .hexa 포팅 스텁
+// 원본 경로: engine/emergent_n6_trainer.py
+// 포팅 상태: STUB (의존 라이브러리: numpy, torch; 원본 227 줄)
+// 원본 요약: Emergent N6 Trainer
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: emergent_n6_trainer.py (HEXA 포팅 대기)")
+    println("의존: numpy, torch")
+}

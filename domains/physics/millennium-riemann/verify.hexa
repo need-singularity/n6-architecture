@@ -1,0 +1,4 @@
+# verify.hexa — millennium-riemann
+# TODO: 검증 로직 미구현
+
+print("verify: 미구현")

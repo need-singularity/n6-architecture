@@ -1,0 +1,10 @@
+// experiment_mathematical_verification.py → .hexa 포팅 스텁
+// 원본 경로: experiments/structural/experiment_mathematical_verification.py
+// 포팅 상태: STUB (원본 357 줄)
+// 원본 요약: Mathematical Verification of ALL Core Claims
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: experiment_mathematical_verification.py (HEXA 포팅 대기)")
+}

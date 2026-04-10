@@ -1,0 +1,10 @@
+// dse_cluster_v2.py → .hexa 포팅 스텁
+// 원본 경로: scripts/dse_cluster_v2.py
+// 포팅 상태: STUB (원본 189 줄)
+// 원본 요약: DSE 교차공명 클러스터링 v2
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: dse_cluster_v2.py (HEXA 포팅 대기)")
+}

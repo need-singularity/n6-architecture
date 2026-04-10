@@ -1,0 +1,10 @@
+// verify_crystallography_materials.py → .hexa 포팅 스텁
+// 원본 경로: domains/materials/paper/verify_crystallography_materials.py
+// 포팅 상태: STUB (원본 144 줄)
+// 원본 요약: verify_crystallography_materials.py — 외부 결정학 표준값 검증
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_crystallography_materials.py (HEXA 포팅 대기)")
+}

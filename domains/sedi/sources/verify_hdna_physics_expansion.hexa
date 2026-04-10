@@ -1,0 +1,10 @@
+// verify_hdna_physics_expansion.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sources/verify_hdna_physics_expansion.py
+// 포팅 상태: STUB (원본 112 줄)
+// 원본 요약: R-spectrum verification: 15 physical constants vs n=6 arithmetic.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_hdna_physics_expansion.py (HEXA 포팅 대기)")
+}

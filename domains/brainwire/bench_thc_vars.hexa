@@ -1,0 +1,10 @@
+// bench_thc_vars.py → .hexa 포팅 스텁
+// 원본 경로: domains/brainwire/bench_thc_vars.py
+// 포팅 상태: STUB (원본 671 줄)
+// 원본 요약: BrainWire THC Variable Benchmark — 뇌자극 전용 12변수 하드웨어 재현 검증.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: bench_thc_vars.py (HEXA 포팅 대기)")
+}

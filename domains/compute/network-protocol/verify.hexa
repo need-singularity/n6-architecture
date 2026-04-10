@@ -1,0 +1,5 @@
+# verify.hexa — network-protocol
+# 원본: verify_n6_network_50.py
+# TODO: .py → .hexa 포팅 필요
+
+print("verify: TODO 포팅 필요")

@@ -1,0 +1,10 @@
+// verify_hdna_fermion_six.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sources/verify_hdna_fermion_six.py
+// 포팅 상태: STUB (원본 455 줄)
+// 원본 요약: Cross-validation of H-DNA-261/262: 6 quarks + 6 leptons = 12 = sigma(6).
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: verify_hdna_fermion_six.py (HEXA 포팅 대기)")
+}

@@ -1,0 +1,10 @@
+// condensed_matter_extended.py → .hexa 포팅 스텁
+// 원본 경로: domains/sedi/sedi/sources/condensed_matter_extended.py
+// 포팅 상태: STUB (원본 234 줄)
+// 원본 요약: Extended Condensed Matter Physics -- TECS-L Waves 17-36.
+// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: condensed_matter_extended.py (HEXA 포팅 대기)")
+}
