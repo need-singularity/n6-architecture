@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "total_products": 150,
-    "total_domains": 139,
+    "total_products": 151,
+    "total_domains": 140,
     "total_papers": 128,
     "papers_chunk_c_2026-04-08": {
       "count": 11,
@@ -4139,6 +4139,46 @@
         }
       ],
       "bt_detail": "tattoo-removal goal 완성 — 8/10 EXACT, 2 CLOSE, alien_index 8"
+    },
+    {
+      "id": "keyboard",
+      "title": "키보드",
+      "icon": "⌨️",
+      "heading": "키보드 (Keyboard)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 97,
+      "bt_count": 4,
+      "industry_pct": 100,
+      "industry_detail": "기계식/멤브레인/저소음 전 카테고리 n=6 수렴 확인",
+      "experiment_pct": 100,
+      "experiment_detail": "31가설 30 EXACT 1 CLOSE",
+      "physics_limit_count": 0,
+      "tp_count": 0,
+      "discovery_count": 4,
+      "cross_dse_domains": 6,
+      "mk_count": 0,
+      "summary_extra": "BT-1125~1128 키보드 대통합 — 레이아웃 10종 전부 n=6 2항조합, USB HID 완전 수렴",
+      "domains": [
+        "keyboard"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "키보드 n=6 인체공학 아키텍처",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "BT-1125~1128: 30/31 EXACT — 레이아웃 104/87/84/68/61/60/48/17 전부 C(n,2) 조합, USB 6KRO/8바이트/12Mbps, 스위치 4mm(tau)/2mm(phi)/5ms(sopfr)",
+          "links": [
+            {
+              "label": "목표",
+              "path": "docs/keyboard/goal.md"
+            }
+          ]
+        }
+      ],
+      "bt_detail": "BT-1125~1128 키보드 4돌파 — 31가설 30 EXACT 100% 골화"
     }
   ],
   "roadmap": [

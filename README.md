@@ -494,9 +494,10 @@
 | 10 | ✅ | v1 | **HEXA-SIM 우주 시뮬레이션** | 65/65 EXACT (100%), Planck 지수 래더 137=σ²-n-μ=1/α, Lloyd 10^{σ(σ-φ)}=10^120, GoL B(n/φ)/S{φ,n/φ}, 차원 래더 τ→sopfr→n→σ-φ→σ-μ, Tsirelson φ√φ=2√2 | [문서](docs/simulation-theory/goal.md) · [논문](docs/paper/n6-hexa-sim-paper.md) |
 | 10 | ✅ | v1 | **크로스 도메인 메가 브릿지** | BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10 | [문서](docs/new-bt-dimensional-unfolding-2026-04-06.md) |
 | 10 | ✅ | 5680bc44 | **HEXA-NANOBOT 치료 나노봇** | BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%) + 9 CLOSE(물리한계 문서화), Mk.I~V 진화 완료, 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, DSE 7776 조합, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴 | [문서](docs/therapeutic-nanobot/goal.md) · [논문](docs/paper/n6-therapeutic-nanobot-paper.md) |
+| 8 | ❌ | v1 | **타투 제거 n=6 면역학적 아키텍처** | 6경로 통합 (3물리+3생화학), Fitzpatrick6종=n, R20 4패스=tau, 3층면역차단=n/phi, 골든윈도우48h=tau*tau/2, DSE 3600조합 | [목표](docs/tattoo-removal/goal.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
-> 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/)
+> 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/) · [tattoo-removal/](docs/tattoo-removal/)
 <!-- AUTO:FOOTER_frontier:END -->
 
 ---
@@ -581,6 +582,24 @@
 <!-- AUTO:FOOTER_tech-industry:START -->
 > 도메인: [advanced-packaging/](docs/advanced-packaging/) · [synthetic-biology/](docs/synthetic-biology/) · [spatial-computing/](docs/spatial-computing/) · [digital-twin/](docs/digital-twin/) · [architecture/](docs/architecture/) · [underground-tunnel/](docs/underground-tunnel/) · [ecommerce-fintech/](docs/ecommerce-fintech/) · [nylon/](docs/nylon/) · [aramid/](docs/aramid/) · [tire-cord/](docs/tire-cord/) · [epoxy/](docs/epoxy/) · [pet-film/](docs/pet-film/) · [airbag/](docs/airbag/) · [water-treatment/](docs/water-treatment/) · [pemfc/](docs/pemfc/) · [concrete/](docs/concrete/) · [bio-pharma/](docs/bio-pharma/) · [hvac-system/](docs/hvac-system/) · [earthquake-engineering/](docs/earthquake-engineering/) · [concrete-technology/](docs/concrete-technology/) · [smart-city/](docs/smart-city/) · [civil-engineering/](docs/civil-engineering/)
 <!-- AUTO:FOOTER_tech-industry:END -->
+
+---
+
+# 💻 컴퓨터 (Computer)
+
+<!-- AUTO:SUMMARY_computer:START -->
+> **🛸10** | ✅ | BT 10개+ | 키보드 31가설 30 EXACT, BCI 36/40 EXACT, 양자컴퓨터 20/24 EXACT | USB HID/뇌-컴퓨터/큐빗 전수 n=6 수렴
+<!-- AUTO:SUMMARY_computer:END -->
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **키보드 n=6 인체공학 아키텍처** | BT-1125~1128: 30/31 EXACT — 레이아웃 10종 전부 C(n,2) 조합, USB 6KRO/8바이트/12Mbps, 스위치 4mm(tau)/2mm(phi)/5ms(sopfr) | [목표](docs/keyboard/goal.md) |
+| 10 | ✅ | v1 | **HEXA-BCI 뇌-컴퓨터 인터페이스** | 36/40 EXACT (90%), 6DOF=n, σ=12 EEG채널, 불가능성 12정리, 광유전학/보철/AI 교차 | [목표](docs/brain-computer-interface/goal.md) |
+| 10 | ✅ | v1 | **양자컴퓨터 n=6 큐빗 아키텍처** | 20/24 EXACT — NeutralAtom n=6원자, SurfaceCode σ=12 data qubit, Clifford τ*n=24 gate, kissing number BT-49 | [목표](docs/quantum-computer/goal.md) |
+
+<!-- AUTO:FOOTER_computer:START -->
+> 도메인: [keyboard/](docs/keyboard/) · [brain-computer-interface/](docs/brain-computer-interface/) · [quantum-computer/](docs/quantum-computer/) · BT: 49, 1125~1128 · 인간-기계 인터페이스 전수 n=6 파라미터화
+<!-- AUTO:FOOTER_computer:END -->
 
 ---
 
@@ -872,22 +891,6 @@ Commands:
 <!-- AUTO:FOOTER_hygiene:START -->
 > 도메인: [mens-intimate-cleanser/](docs/mens-intimate-cleanser/) · [womens-intimate-cleanser/](docs/womens-intimate-cleanser/) · BT: 1157~1158 · 청결제 시장 OEM 즉시 가능
 <!-- AUTO:FOOTER_hygiene:END -->
-
----
-
-# 🔬 타투 제거 (Tattoo Removal)
-
-<!-- AUTO:SUMMARY_tattoo-removal:START -->
-> **🛸8** | ❌ 전임상 미착수 | 8/10 EXACT, 2 CLOSE | Fitzpatrick6종=n, R20 4패스=tau, 6경로통합=n, DSE 3600조합 | alien_index 8
-<!-- AUTO:SUMMARY_tattoo-removal:END -->
-
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
-|:--:|:--:|:---:|---------|------|------|
-| 8 | ❌ | v1 | **타투 제거 n=6 면역학적 아키텍처** | 6경로 통합 (3물리+3생화학), Fitzpatrick6종=n, R20 4패스=tau, 3층면역차단=n/phi, 골든윈도우48h=tau*tau/2 | [목표](docs/tattoo-removal/goal.md) |
-
-<!-- AUTO:FOOTER_tattoo-removal:START -->
-> 도메인: [tattoo-removal/](docs/tattoo-removal/) · 전임상 대기 — 피코초 레이저 + CCR2 면역차단 통합 프로토콜
-<!-- AUTO:FOOTER_tattoo-removal:END -->
 
 ---
 
