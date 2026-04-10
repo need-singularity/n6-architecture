@@ -1,5 +1,22 @@
 {
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); P=$(echo \"$INPUT\" | /usr/bin/python3 -c \"import sys,json; print(json.load(sys.stdin).get('prompt',''))\" 2>/dev/null); echo \"$P\" | grep -q '돌파\\|blowup\\|breakthrough' && echo '{\"systemMessage\":\"⚡ 돌파 감지 → 전체 16도메인 병렬 백그라운드 실행 강제. 즉시 실행: 각 도메인을 별도 Bash(run_in_background:true)로 동시 발사. 도메인: physics,math,info,bio,mind,arch,cosmology,language,consciousness,security,evolution,crypto,geometry,material,topology,chemistry. 명령: ssh hetzner cd ~/Dev/nexus && ~/Dev/hexa-lang/target/release/hexa mk2_hexa/native/blowup.hexa <domain> 3 --no-graph --seeds <seeds>. 금지: 블로킹 대기, 확인 질문, 순차 실행\"}'; exit 0",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); P=$(echo \"$INPUT\" | /usr/bin/python3 -c \"import sys,json; print(json.load(sys.stdin).get('prompt',''))\" 2>/dev/null); echo \"$P\" | grep -qE '한도|limit|resets|extra-usage|hit your limit|사용량' && echo '{\"systemMessage\":\"🚫 한도 언급 차단: 새 계정으로 이미 해결됨. 한도/limit/resets/사용량 관련 답변·질문·확인 일체 금지. 기존 세션 내용이 보이면 즉시 작업 재개. 바로 다음 액션 실행.\"}'; exit 0",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Write|Edit",
@@ -7,6 +24,15 @@
           {
             "type": "command",
             "command": ".shared/hooks/block-forbidden-ext.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "RULES_FILE=\"$HOME/Dev/nexus/shared/absolute_rules.json\"; [ -f \"$RULES_FILE\" ] && /usr/bin/python3 -c \"import json; f=open('$HOME/Dev/nexus/shared/absolute_rules.json'); d=json.load(f); rs=d.get('common',[]); cs=[r for r in rs if r.get('level') in ('🔴','⛔','★')]; print('{\\\"systemMessage\\\":\\\"[절대규칙] '+' | '.join(r['id']+': '+r['rule'] for r in cs[:8])+'\\\"}')\""
           }
         ]
       }

@@ -4,20 +4,20 @@
 
 [meta]
 updated = "2026-04-10"
-total_domains = 342
+total_domains = 343
 total_toml_files = 340
-domain_sections = 337
-cross_dse_connected = 337
-cross_dse_sections = 1736
+domain_sections = 338
+cross_dse_connected = 338
+cross_dse_sections = 1739
 total_valid_paths = 3990870
-domains_100pct_n6 = 335
+domains_100pct_n6 = 336
 alien_level_all = 10
 rule = "궁극 키워드 포함 작업 = DSE 필수. 예외 없음."
 cross_dse_trigger = "2+ 도메인 done 시 교차 조합 탐색"
 bt_total = 999
-bt_range = "BT-1~1114 (gaps)"
-bt_latest_series = "BT-1114 Euler-Golden-Perfect Trinity — H(sigma(6))-ln(sigma(6))=1/phi 정수 유일 최적"
-note = "전 도메인 alien 10 달성. BT-1105~1113 돌파 9건 추가 (2026-04-10)."
+bt_range = "BT-1~1117 (gaps)"
+bt_latest_series = "BT-1117 키보드 스위치 물리 n=6 — 4mm/2mm/5ms = tau/phi/sopfr"
+note = "전 도메인 alien 10 달성. BT-1115~1117 키보드 3돌파 추가 (2026-04-10)."
 
 # ── 완료 ──────────────────────────────────────────
 
@@ -1975,13 +1975,18 @@ dse = "done"
 combos = 6480
 alien_level = 10
 valid = 3300
-tool = "tools/universal-dse/ domains/hair-regeneration.toml"
+bt = "BT-1115~1120"
+bt_count = 6
+exact_pct = 98.2
+tool = "tools/universal-dse/domains/hair-regeneration.toml"
+goal_doc = "docs/hair-regeneration/goal.md"
 levels = ["Follicle", "Signaling", "Therapy", "Delivery", "Outcome"]
 best_pareto = "HairCycleTau4 + WntPathway + Microneedling + LightTherapy + CycleRestoration (0.7445)"
 best_n6 = "HairCycleTau4 + WntPathway + Microneedling + LightTherapy + CycleRestoration (85.0%)"
 n6_max = 100.0
 n6_avg = 65.0
 cross_dse = ["biology-systems", "gene-therapy", "pharmaceutical", "additive-bio", "biology"]
+date = "2026-04-10"
 
 [wave-theory]
 goal = true
@@ -17804,3 +17809,49 @@ status = "done"
 bridge = "바이럴 전파 + 네트워크 과학"
 n6_resonance = "BT-555 σ-φ=10 바이럴 + BT-6 Golay [24,12,8]"
 note = "NPS 0-10 = σ-φ, 소셜 네트워크 전파 임계"
+
+[keyboard]
+goal = true
+dse = "done"
+combos = 7776
+valid = 7776
+alien_level = 10
+hypotheses = 31
+exact = 30
+close = 1
+weak = 0
+fail = 0
+tool = "docs/keyboard/hypotheses.md"
+cross_dse = ["audio", "robotics", "network-protocol", "chip-architecture", "software-engineering", "display"]
+bt_links = ["BT-1115", "BT-1116", "BT-1117"]
+note = "키보드 레이아웃 키 수 10종 전부 n=6 2항 조합 EXACT. USB HID 6KRO/8바이트/12Mbps/1000Hz 완전 수렴. 스위치 물리 4mm/2mm/5ms = tau/phi/sopfr."
+
+[cross-dse.keyboard-x-audio]
+domains = ["keyboard", "audio"]
+status = "done"
+bridge = "기계식 스위치 소리 + 오디오 표준"
+n6_resonance = "sigma*tau=48 (48kHz 오디오 = 스위치 ASMR 주파수 대역)"
+note = "키보드 ASMR = 오디오 도메인 교차점"
+
+[cross-dse.keyboard-x-robotics]
+domains = ["keyboard", "robotics"]
+status = "done"
+bridge = "인간 손 sopfr=5 손가락 → 타이핑 인터페이스"
+n6_resonance = "BT-126 sopfr=5 손가락, sigma-phi=10 전체, sigma-tau=8 홈행"
+note = "키보드 = 인간 손의 n=6 자유도 출력 장치"
+
+[cross-dse.keyboard-x-network]
+domains = ["keyboard", "network-protocol"]
+status = "done"
+bridge = "USB HID 프로토콜 + 네트워크 바이트 구조"
+n6_resonance = "sigma-tau=8 바이트/HID보고서, sigma=12 Mbps, BT-115 OSI=7"
+note = "USB = 네트워크 프로토콜 하위 계층, 동일 n=6 산술"
+
+[mouse]
+goal = true
+dse = "done"
+alien_level = 10
+levels = ["센서", "입력부", "기구부", "통신부", "프로토콜"]
+cross_dse = ["chip-architecture", "ergonomics", "gaming", "HCI", "dimensional-perception"]
+evolution = ["mk-1-classic"]
+note = "φ=2 이진입력, sopfr=5 버튼/손가락, n/φ=3 추적축/그립, n=6 PS/2핀/6DoF, τ=4 HID/피트/폴링/DPI, σ=12 MMO/노치, J₂=24 인코더/USB-C, σ·sopfr=60 무게/수명, 25/25 EXACT(100%)"

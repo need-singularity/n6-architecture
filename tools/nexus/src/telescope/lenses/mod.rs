@@ -575,3 +575,11 @@ pub use behavioral_economics_lens::BehavioralEconomicsLens;
 // ── 차원지각 렌즈 (BT-1108) ──
 pub mod dimensional_perception_lens;
 pub use dimensional_perception_lens::DimensionalPerceptionLens;
+
+// ── 오일러-황금-완전수 삼위일체 렌즈 (BT-1114 / BT-1113) ──
+pub mod euler_golden_perfect_lens;
+pub use euler_golden_perfect_lens::EulerGoldenPerfectLens;
+
+// ── BCI 뉴로피드백 렌즈 (BT-1108 확장) ──
+pub mod bci_neurofeedback_lens;
+pub use bci_neurofeedback_lens::BciNeurofeedbackLens;

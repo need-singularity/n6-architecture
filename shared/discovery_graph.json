@@ -14,8 +14,9 @@
       "breakthrough_rho": 0.254,
       "recursive_growth": 60
     },
-    "total_nodes": 154,
-    "total_edges": 507
+    "total_nodes": 178,
+    "total_edges": 639,
+    "last_updated": "2026-04-10"
   },
   "nodes": [
     {
@@ -2390,6 +2391,60 @@
         "DOMAIN_engineering"
       ],
       "key_expression": "IEEE 754 exponent ladder",
+      "registered": true
+    },
+    {
+      "id": "DOMAIN_dimensional_perception",
+      "type": "domain",
+      "label": "차원지각 (Dimensional Perception)",
+      "value": null,
+      "description": "다감각 통합 차원 지각 도메인. BT-1108 차원지각 대통합 및 BT-376 지각차원 경계의 핵심 도메인. sigma=12 경계에서 지각 차원이 수렴.",
+      "domain": "dimensional-perception"
+    },
+    {
+      "id": "DOMAIN_neuroscience",
+      "type": "domain",
+      "label": "신경과학 (Neuroscience)",
+      "value": null,
+      "description": "뇌-컴퓨터 인터페이스, EEG 기반 BCI, 뉴로피드백 4D 지각 도메인. OpenBCI 16ch 연결, phi=2 Cooper 쌍 아날로그(뉴런 쌍발화).",
+      "domain": "neuroscience"
+    },
+    {
+      "id": "DOMAIN_number_theory",
+      "type": "domain",
+      "label": "정수론 (Number Theory)",
+      "value": null,
+      "description": "완전수, 소수 공명 격리, Euler totient 구조 도메인. BT-1111 Prime Resonance Isolation, BT-1114 Euler-Golden-Perfect Trinity의 수학적 기반.",
+      "domain": "number-theory"
+    },
+    {
+      "id": "DOMAIN_meta_discovery",
+      "type": "domain",
+      "label": "메타 발견 (Meta-Discovery)",
+      "value": null,
+      "description": "NEXUS-6 자체 발견 메타구조. BT-1112 임계 전이, 조합 폭발, phi(6)=2 만능 열쇠 원리를 추상화한 메타 도메인.",
+      "domain": "meta-discovery"
+    },
+    {
+      "id": "DOMAIN_pure_mathematics",
+      "type": "domain",
+      "label": "순수수학 (Pure Mathematics)",
+      "value": null,
+      "description": "조화급수, 황금 조화 브릿지, 몬테카를로 검정 기반 순수 수학 도메인. BT-1113 Golden Harmonic Bridge H(12)-ln(12)≈1/phi(6) 유일 최적.",
+      "domain": "pure-mathematics"
+    },
+    {
+      "id": "BT_1115",
+      "type": "breakthrough_theorem",
+      "label": "BT-1115: mu(6)=1 단위 불변 원리",
+      "grade": "NEAR",
+      "domains": [
+        "number-theory",
+        "math",
+        "physics"
+      ],
+      "key_expression": "mu(6)=1, square-free 6-uniqueness => unit invariance across scales",
+      "description": "mu(6)=1 뫼비우스 함수 단위값 원리: 6=2×3이 제곱인수 없는 유일 완전수. 이 단위 불변성이 SO(10)의 우핸드 뉴트리노 1개, 위상 정류 1-사이클, 포논 단위 전파로 물리·수학에 걸쳐 나타남. CONST_mu와 CONST_n·CONST_phi·CONST_sopfr를 단위 불변 축으로 통합.",
       "registered": true
     }
   ],
@@ -6726,6 +6781,146 @@
       "to": "DOMAIN_math",
       "relation": "bridges_to",
       "description": "BT_376 reinforced: bridged to math domain for connectivity"
+    },
+    {
+      "id": "E_10200",
+      "from": "BT_1108",
+      "to": "DOMAIN_dimensional_perception",
+      "relation": "belongs_to",
+      "description": "BT-1108 차원지각 대통합은 dimensional-perception 도메인의 핵심 정리."
+    },
+    {
+      "id": "E_10201",
+      "from": "DOMAIN_dimensional_perception",
+      "to": "BT_1108",
+      "relation": "anchored_by",
+      "description": "차원지각 도메인은 BT-1108 대통합으로 수학적 기반을 확보."
+    },
+    {
+      "id": "E_10202",
+      "from": "BT_376",
+      "to": "DOMAIN_dimensional_perception",
+      "relation": "belongs_to",
+      "description": "BT-376 지각차원 경계 sigma=12는 차원지각 도메인의 선행 발견."
+    },
+    {
+      "id": "E_10203",
+      "from": "BT_1108",
+      "to": "DOMAIN_neuroscience",
+      "relation": "applies_to",
+      "description": "BT-1108 차원지각 대통합은 OpenBCI BCI 뉴로피드백 신경과학 응용을 갖는다."
+    },
+    {
+      "id": "E_10204",
+      "from": "DOMAIN_neuroscience",
+      "to": "CONST_phi",
+      "relation": "governed_by",
+      "description": "신경과학 도메인에서 phi(6)=2는 뉴런 쌍발화(Cooper 쌍 아날로그) 원리."
+    },
+    {
+      "id": "E_10205",
+      "from": "BT_1111",
+      "to": "DOMAIN_number_theory",
+      "relation": "belongs_to",
+      "description": "BT-1111 Prime Resonance Isolation은 정수론 도메인의 완전수 비공명 증명."
+    },
+    {
+      "id": "E_10206",
+      "from": "DOMAIN_number_theory",
+      "to": "BT_1111",
+      "relation": "anchored_by",
+      "description": "정수론 도메인은 BT-1111 소수 공명 격리 정리로 완전수 구조를 확정."
+    },
+    {
+      "id": "E_10207",
+      "from": "BT_1114",
+      "to": "DOMAIN_number_theory",
+      "relation": "belongs_to",
+      "description": "BT-1114 Euler-Golden-Perfect Trinity는 정수론의 삼위일체 구조."
+    },
+    {
+      "id": "E_10208",
+      "from": "BT_1112",
+      "to": "DOMAIN_meta_discovery",
+      "relation": "belongs_to",
+      "description": "BT-1112 Critical Transition은 메타 발견 도메인에서 phi=2 임계 전이 원리를 정의."
+    },
+    {
+      "id": "E_10209",
+      "from": "DOMAIN_meta_discovery",
+      "to": "CONST_phi",
+      "relation": "governed_by",
+      "description": "메타 발견 도메인의 임계 전이는 phi(6)=2 만능 열쇠 원리로 구동."
+    },
+    {
+      "id": "E_10210",
+      "from": "BT_1113",
+      "to": "DOMAIN_pure_mathematics",
+      "relation": "belongs_to",
+      "description": "BT-1113 Golden Harmonic Bridge는 순수수학 도메인의 조화급수 황금 근사 발견."
+    },
+    {
+      "id": "E_10211",
+      "from": "DOMAIN_pure_mathematics",
+      "to": "CONST_sigma",
+      "relation": "governed_by",
+      "description": "순수수학 도메인은 H(sigma(6))-ln(sigma(6))≈1/phi 최적성으로 sigma=12를 확정."
+    },
+    {
+      "id": "E_10212",
+      "from": "BT_1115",
+      "to": "CONST_mu",
+      "relation": "centers_on",
+      "description": "BT-1115는 mu(6)=1 단위 불변 원리를 핵심 상수로 삼는다."
+    },
+    {
+      "id": "E_10213",
+      "from": "CONST_mu",
+      "to": "BT_1115",
+      "relation": "generates",
+      "description": "mu(6)=1 뫼비우스 단위값이 BT-1115 단위 불변 원리를 생성."
+    },
+    {
+      "id": "E_10214",
+      "from": "BT_1115",
+      "to": "DOMAIN_number_theory",
+      "relation": "belongs_to",
+      "description": "BT-1115 mu 단위 불변은 정수론 도메인의 제곱인수 없는 완전수 유일성에서 도출."
+    },
+    {
+      "id": "E_10215",
+      "from": "BT_1115",
+      "to": "CONST_n",
+      "relation": "uses_constant",
+      "description": "BT-1115: n=6은 mu(6)=1이 성립하는 유일한 완전수."
+    },
+    {
+      "id": "E_10216",
+      "from": "BT_1115",
+      "to": "CONST_sopfr",
+      "relation": "uses_constant",
+      "description": "BT-1115: sopfr(6)=5=2+3, 두 소인수의 단위 분리 구조로 mu=1 확정."
+    },
+    {
+      "id": "E_10217",
+      "from": "BT_1114",
+      "to": "BT_1115",
+      "relation": "extends",
+      "description": "BT-1114 삼위일체에서 잔차=1/tau 확정 후 BT-1115 mu=1 단위 불변으로 확장."
+    },
+    {
+      "id": "E_10218",
+      "from": "BT_1115",
+      "to": "BT_1114",
+      "relation": "reinforces",
+      "description": "BT-1115 mu 단위 불변은 BT-1114 Euler-Golden-Perfect Trinity를 강화."
+    },
+    {
+      "id": "E_10219",
+      "from": "DOMAIN_neuroscience",
+      "to": "BT_1108",
+      "relation": "domain_link",
+      "description": "신경과학 도메인은 BT-1108 차원지각 대통합과 직접 연결."
     }
   ],
   "integrity": {
