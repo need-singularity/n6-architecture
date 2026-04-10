@@ -87,7 +87,7 @@ assert exact == len(checks)
 1. ~~**즉시**: `n6-hexa-neuro-paper.md`의 "시각 격자" 산식을 `(sigma(n)*sopfr(n))**2`로 수정 후 재감사.~~ **완료 (2026-04-09)**: 산식 수정 + 표 명확화 + 재검증 11/11 PASS.
 2. **후속 TODO**: `docs/paper/`의 나머지 105편 전수 실행 감사 (`audit-quality-all115.md`로 분리). → 대규모 배치 작업으로 별도 세션 권장. 11편 감사 파이프라인(`/tmp/paper_audit/`)을 확장하여 일괄 실행 가능.
 3. ~~**SSOT 정합성**: TODO에 명시된 "39편"과 products.json 실제 등록 11편의 괴리 해소~~ **완료 (2026-04-10)**: CLAUDE.md "39편"→"116편" 수정, products.json `_meta.total_papers=116` 확인, 괴리 원인(스냅샷 미갱신) 문서화.
-4. **감사 자동화**: ~~본 감사의 추출/실행 파이프라인을 `scripts/audit_paper_verification.py`로 고정하여 매 커밋 CI 검증.~~ → CI 환경 미구축 상태. 로컬에서 수동 실행으로 대체 가능 (CDO 위반 아님). 스크립트 구현은 `shared/todo/n6-architecture.json`에 백로그로 등록.
+4. **감사 자동화**: ~~본 감사의 추출/실행 파이프라인을 `scripts/audit_paper_verification.py`로 고정하여 매 커밋 CI 검증.~~ → CI 환경 미구축 상태. 로컬에서 수동 실행으로 대체 가능 (CDO 위반 아님). 스크립트 구현은 `shared/blowup/todo.hexa`(자연창발) 코어엔진이 자동 탐지/돌파.
 
 ---
 
