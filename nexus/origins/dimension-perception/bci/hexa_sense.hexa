@@ -1,0 +1,218 @@
+// HEXA-SENSE: BCI 뉴로피드백 4D 지각 시스템
+// OpenBCI Cyton+Daisy 16ch -> 두정엽 공간처리 모니터링 -> 4D 과제 피드백
+//
+// 필수: brainflow, numpy, websockets (HEXA 런타임 바인딩)
+
+// n=6 상수
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let SOPFR = 5
+let J2 = 24
+
+// 채널 매핑 (10-20 시스템, OpenBCI 16ch)
+// 16 = phi^tau = 2^4 = 테서랙트 꼭짓점
+let CHANNELS = {
+    // 두정엽 (tau=4ch) -- 공간 처리 핵심
+    "parietal": {"P3": 0, "P4": 1, "P7": 2, "P8": 3},
+    // 후두엽 (phi=2ch) -- 시각 기저선
+    "occipital": {"O1": 4, "O2": 5},
+    // 전두엽 (tau=4ch) -- 주의력/작업기억
+    "frontal": {"F3": 6, "F4": 7, "F7": 8, "F8": 9},
+    // 측두엽 (phi=2ch) -- 청각 공간
+    "temporal": {"T7": 10, "T8": 11},
+    // 중심부 (tau=4ch) -- 운동/판단
+    "central": {"C3": 12, "C4": 13, "Fp1": 14, "Fp2": 15}
+}
+
+// 주파수 밴드 (n=6 산술)
+let BANDS = {
+    "delta":  [1, TAU],             // 1-4 Hz
+    "theta":  [TAU, SIGMA - TAU],   // 4-8 Hz
+    "alpha":  [SIGMA - TAU, SIGMA], // 8-12 Hz
+    "beta":   [SIGMA, SIGMA + J2]   // 12-36 Hz (집중, 공간)
+}
+
+// BCI 뉴로피드백 4D 지각 훈련 시스템
+fn create_hexa_sense(serial_port, synthetic) {
+    let mut state = {
+        "board": nil,
+        "board_id": if synthetic { "SYNTHETIC" } else { "CYTON_DAISY" },
+        "serial_port": serial_port,
+        "sampling_rate": 0,
+        "eeg_channels": [],
+        // 뉴로피드백 상태
+        "baseline_alpha": nil,
+        "spatial_activation": 0.0,
+        "feedback_score": 0,
+        "trial_count": 0,
+        "correct_count": 0,
+        "current_w": 0.0,
+        "ws_clients": []
+    }
+    state
+}
+
+// 보드 시작
+fn sense_start(state) {
+    state["board"] = bci_create_board(state["board_id"], state["serial_port"])
+    bci_start_stream(state["board"])
+    state["sampling_rate"] = bci_get_sampling_rate(state["board"])
+    state["eeg_channels"] = bci_get_eeg_channels(state["board"])
+    let ch_count = len(state["eeg_channels"])
+    println("[HEXA-SENSE] 보드 시작: " + to_string(ch_count) + "ch, " + to_string(state["sampling_rate"]) + "Hz")
+    println("[HEXA-SENSE] " + to_string(ch_count) + " = phi^tau = " + to_string(PHI) + "^" + to_string(TAU) + " = 테서랙트 꼭짓점")
+}
+
+// 보드 정지
+fn sense_stop(state) {
+    if state["board"] != nil {
+        bci_stop_stream(state["board"])
+        bci_release(state["board"])
+        println("[HEXA-SENSE] 보드 정지")
+    }
+}
+
+// 특정 채널의 주파수 밴드 파워 계산
+fn get_band_power(state, data, ch_idx, band_name) {
+    if ch_idx >= len(state["eeg_channels"]) { return 0.0 }
+    let ch = state["eeg_channels"][ch_idx]
+    let signal = data[ch]
+    if len(signal) < state["sampling_rate"] { return 0.0 }
+    let band = BANDS[band_name]
+    let low = band[0]
+    let high = band[1]
+    bci_bandpass(signal, state["sampling_rate"], (low + high) / 2, high - low, 4)
+    let psd = bci_psd_welch(signal, 256, 128, state["sampling_rate"])
+    bci_band_power(psd, low, high)
+}
+
+// 두정엽 공간 처리 활성도 계산
+fn compute_spatial_activation(state, data) {
+    let parietal_chs = [0, 1, 2, 3]   // tau=4 채널
+    let occipital_chs = [4, 5]          // phi=2 채널
+
+    // 두정엽 알파 파워 (tau=4 채널 평균)
+    let mut pa_sum = 0.0
+    for ch in parietal_chs { pa_sum = pa_sum + get_band_power(state, data, ch, "alpha") }
+    let parietal_alpha = pa_sum / len(parietal_chs)
+
+    // 후두엽 알파 (기저선 대조)
+    let mut oa_sum = 0.0
+    for ch in occipital_chs { oa_sum = oa_sum + get_band_power(state, data, ch, "alpha") }
+    let occipital_alpha = oa_sum / len(occipital_chs)
+
+    // 두정엽 세타 (공간 탐색 지표)
+    let mut pt_sum = 0.0
+    for ch in parietal_chs { pt_sum = pt_sum + get_band_power(state, data, ch, "theta") }
+    let parietal_theta = pt_sum / len(parietal_chs)
+
+    // 공간 활성도 = 알파 억제 비율 + 세타 증가
+    let activation = if occipital_alpha > 0.0 and state["baseline_alpha"] != nil and state["baseline_alpha"] > 0.0 {
+        let alpha_suppression = 1.0 - (parietal_alpha / state["baseline_alpha"])
+        let theta_boost = parietal_theta / (parietal_alpha + 1e-10)
+        clamp(alpha_suppression * 0.7 + theta_boost * 0.3, 0.0, 1.0)
+    } else {
+        0.0
+    }
+    state["spatial_activation"] = activation
+    {
+        "parietal_alpha": parietal_alpha,
+        "occipital_alpha": occipital_alpha,
+        "parietal_theta": parietal_theta,
+        "spatial_activation": activation
+    }
+}
+
+// 기저선 캘리브레이션
+fn calibrate(state, duration_sec) {
+    println("[캘리브레이션] " + to_string(duration_sec) + "초간 편안히 눈 감고 대기...")
+    sleep(2000)
+    let mut alphas = []
+    let start = perf_now()
+    while (perf_now() - start) / 1e9 < duration_sec {
+        let data = bci_get_current_data(state["board"], state["sampling_rate"])
+        let mut pa = 0.0
+        for ch in [0, 1, 2, 3] { pa = pa + get_band_power(state, data, ch, "alpha") }
+        push(alphas, pa / 4.0)
+        sleep(1000)
+    }
+    let mut sum = 0.0
+    for a in alphas { sum = sum + a }
+    state["baseline_alpha"] = sum / len(alphas)
+    println("[캘리브레이션] 기저선 알파 = " + to_string(state["baseline_alpha"]))
+    println("[캘리브레이션] 알파 범위 = " + to_string(SIGMA - TAU) + "-" + to_string(SIGMA) + " Hz = (sigma-tau, sigma)")
+    state["baseline_alpha"]
+}
+
+// 4D 공간 과제 생성
+fn generate_4d_trial(state) {
+    let choices = [-1.0, -0.5, 0.5, 1.0]
+    state["current_w"] = choices[random_int(0, 3)]
+    state["trial_count"] = state["trial_count"] + 1
+    {
+        "trial": state["trial_count"],
+        "w_target": state["current_w"],
+        "w_audio_freq": 130.0 + (state["current_w"] + 1.0) * 935.0,
+        "w_vibration": (state["current_w"] + 1.0) / 2.0
+    }
+}
+
+// 사용자 응답 평가 + 뉴로피드백
+fn evaluate_response(state, user_answer) {
+    let correct = (user_answer > 0.0) == (state["current_w"] > 0.0)
+    if correct { state["correct_count"] = state["correct_count"] + 1 }
+    let accuracy = state["correct_count"] * 1.0 / max(1, state["trial_count"])
+    {
+        "correct": correct,
+        "trial": state["trial_count"],
+        "accuracy": accuracy,
+        "spatial_activation": state["spatial_activation"],
+        "feedback": if correct and state["spatial_activation"] > 0.5 { "STRENGTHEN" }
+                    else if correct { "CORRECT" }
+                    else { "RETRY" }
+    }
+}
+
+// 실시간 상태 (웹소켓 전송용)
+fn get_realtime_state(state) {
+    let data = bci_get_current_data(state["board"], state["sampling_rate"])
+    let metrics = compute_spatial_activation(state, data)
+    {
+        "timestamp": now_epoch(),
+        "metrics": metrics,
+        "trial_count": state["trial_count"],
+        "correct_count": state["correct_count"],
+        "accuracy": state["correct_count"] * 1.0 / max(1, state["trial_count"]),
+        "current_w": state["current_w"],
+        "n6": {
+            "channels": len(state["eeg_channels"]),
+            "channels_n6": "phi^tau = " + to_string(PHI) + "^" + to_string(TAU) + " = " + to_string(pow(PHI, TAU)),
+            "parietal_count": TAU,
+            "alpha_band": to_string(SIGMA - TAU) + "-" + to_string(SIGMA) + " Hz",
+            "modalities": SOPFR
+        }
+    }
+}
+
+// 메인 실행
+fn main() {
+    let args = parse_args()
+    let port = args["port"] or "/dev/cu.usbserial-DM0258EI"
+    let synthetic = args["synthetic"] or false
+    let ws_port = args["ws-port"] or 6600
+    let cal_sec = args["calibrate"] or 30
+
+    let sense = create_hexa_sense(port, synthetic)
+
+    sense_start(sense)
+    calibrate(sense, cal_sec)
+    // 웹소켓 서버 시작 (n=6 Hz 전송)
+    println("[HEXA-SENSE] 웹소켓 서버: ws://localhost:" + to_string(ws_port))
+    println("[HEXA-SENSE] 전송 주기: " + to_string(N) + "Hz (= n)")
+    ws_serve(ws_port, sense)
+    sense_stop(sense)
+}
+
+main()

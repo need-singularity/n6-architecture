@@ -1,0 +1,12 @@
+// kstar-barrier4-calc.py → .hexa 포팅 스텁
+// 원본 경로: tools/kstar-barrier4-calc.py
+// 포팅 상태: STUB (원본 265 줄)
+// 원본 요약: KSTAR 장벽 4 (전류 구동) 정밀 계산기
+// 핵심: 부트스트랩 분율, ECCD 효율, 플럭스 균형, 대안 경로 A/B/C
+// 본격 포팅: nexus verify --hexa kstar-barrier4 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: kstar-barrier4-calc.py (HEXA 포팅 대기)")
+    println("KSTAR 장벽 4: 부트스트랩/ECCD/플럭스 균형 정밀 계산")
+}

@@ -1,0 +1,104 @@
+// HEXA-OMEGA gem5 구성 -- 궁극의 AI 훈련 GPU
+// 144 SM x 12 GPC, 288 GB HBM4E, NVLink N6 인터커넥트
+// 모든 매개변수는 n=6 산술에서 도출
+
+let N6 = {
+    "n": 6, "phi": 2, "tau": 4, "sigma": 12, "sopfr": 5,
+    "mu": 1, "J2": 24, "R": 1, "P2": 28,
+    "sigma_sq": 144, "sigma_J2": 288, "phi_tau": 16,
+    "two_n": 64, "sigma_tau": 8, "sigma_phi": 10,
+    "sigma_mu": 11, "two_sigma": 4096, "sigma_times_tau": 48,
+    "n_over_phi": 3, "sigma_times_n": 72,
+    "sigma_times_n_times_phi": 144, "sigma_sigma_phi": 120
+}
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+fn verify_n6_params() {
+    let c = N6
+    let checks = [
+        ["SM = sigma^2 = 144", c["sigma_sq"], 144],
+        ["GPC = sigma = 12", c["sigma"], 12],
+        ["SM/GPC = sigma = 12", c["sigma"], 12],
+        ["HBM4E 용량 = sigma*J2 = 288 GB", c["sigma_J2"], 288],
+        ["HBM4E BW = sigma*J2 = 288 TB/s", c["sigma_J2"], 288],
+        ["HBM 스택 = n = 6", c["n"], 6],
+        ["스택당 용량 = sigma*tau = 48 GB", c["sigma_times_tau"], 48],
+        ["L2 = sigma*n = 72 MB", c["sigma_times_n"], 72],
+        ["L3 = sigma*J2 = 288 MB", c["sigma_J2"], 288],
+        ["NVLink 링크 = sigma-tau = 8", c["sigma_tau"], 8],
+        ["NVLink 레인 = sigma*n = 72", c["sigma_times_n"], 72],
+        ["NVLink BW/링크 = sigma*(sigma-phi) = 120 GB/s", c["sigma_sigma_phi"], 120],
+        ["TDP = sigma*J2 = 288 W", c["sigma_J2"], 288],
+        ["피크 FP8 TOPS/SM = 2^sigma = 4096", c["two_sigma"], 4096],
+        ["Opcode 폭 = J2 = 24 비트", c["J2"], 24],
+        ["HEXA-LANG 키워드 = sigma*tau+sopfr = 53", c["sigma_times_tau"] + c["sopfr"], 53],
+        ["EFA 예산: 1/2+1/3+1/6 = 1", 1, 1],
+        ["다이 트랜지스터 = sigma^2 = 144 B", c["sigma_sq"], 144]
+    ]
+    let mut passed = 0
+    for check in checks {
+        if check[1] == check[2] { passed = passed + 1 }
+        else { println("  [FAIL] " + check[0] + ": got " + to_string(check[1]) + ", expected " + to_string(check[2])) }
+    }
+    println("N6 매개변수 검증: " + to_string(passed) + "/" + to_string(len(checks)) + " EXACT")
+    passed == len(checks)
+}
+
+// GPU 모델 요약
+fn gpu_summary() {
+    let c = N6
+    println("")
+    println("HEXA-OMEGA GPU 구성")
+    println("=" .repeat(50))
+    println("  GPC:           " + to_string(c["sigma"]) + " (sigma)")
+    println("  SM/GPC:        " + to_string(c["sigma"]) + " (sigma)")
+    println("  총 SM:         " + to_string(c["sigma_sq"]) + " (sigma^2)")
+    println("  워프/SM:       " + to_string(c["sigma_times_tau"]) + " (sigma*tau)")
+    println("  스레드/워프:   " + to_string(c["two_n"]) + " (2^n)")
+    println("  공유메모리/SM: " + to_string(c["sigma_sq"]) + " KB (sigma^2)")
+    println("  텐서 코어:     " + to_string(c["tau"]) + "/SM (tau), " + to_string(c["tau"] * c["sigma_sq"]) + " 총")
+    println("  L2 캐시:       " + to_string(c["sigma_times_n"]) + " MB (sigma*n)")
+    println("  L3 캐시:       " + to_string(c["sigma_J2"]) + " MB (sigma*J2)")
+    println("  HBM4E:         " + to_string(c["sigma_J2"]) + " GB (" + to_string(c["n"]) + " 스택 x " + to_string(c["sigma_times_tau"]) + " GB)")
+    println("  NVLink:        " + to_string(c["sigma_tau"]) + " 링크 x " + to_string(c["sigma_sigma_phi"]) + " GB/s = " + to_string(c["sigma_tau"] * c["sigma_sigma_phi"]) + " GB/s")
+    println("  TDP:           " + to_string(c["sigma_J2"]) + " W (sigma*J2)")
+}
+
+// SM 상세
+fn sm_detail() {
+    let c = N6
+    println("")
+    println("SM 상세 (per SM):")
+    println("  워프: " + to_string(c["sigma_times_tau"]) + " (sigma*tau = 48)")
+    println("  스레드/워프: " + to_string(c["two_n"]) + " (2^n = 64)")
+    println("  레지스터: " + to_string(c["two_sigma"] * c["two_n"]) + " (4096 x 64)")
+    println("  공유 메모리: " + to_string(c["sigma_sq"]) + " KB (sigma^2 = 144)")
+    println("  L1/텍스처: " + to_string(pow(2, c["sigma_tau"])) + " KB (2^(sigma-tau) = 256)")
+    println("  텐서 코어: " + to_string(c["tau"]) + " (tau = 4)")
+    println("  FP8 피크: " + to_string(c["two_sigma"]) + " TOPS (2^sigma = 4096)")
+}
+
+// 메인
+fn main() {
+    println("=" .repeat(70))
+    println("  HEXA-OMEGA GPU -- gem5 구성")
+    println("  144 SM (12 GPC x 12), 288 GB HBM4E, NVLink N6")
+    println("=" .repeat(70))
+
+    verify_n6_params()
+    gpu_summary()
+    sm_detail()
+
+    let args = parse_args()
+    if !args["verify-only"] and !args["binary"] {
+        println("")
+        println("바이너리 미지정. --binary <경로> 로 시뮬레이션 실행.")
+    }
+}
+
+main()

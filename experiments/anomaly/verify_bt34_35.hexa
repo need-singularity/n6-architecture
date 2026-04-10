@@ -1,0 +1,12 @@
+// bt34_35_verify.py → .hexa 포팅 스텁
+// 원본 경로: tools/bt34_35_verify.py
+// 포팅 상태: STUB (원본 115 줄)
+// 원본 요약: BT-34/35 독립 수치 검증 — RoPE 주파수, LLM 하이퍼파라미터, 배터리 전압
+// 핵심: (σ-φ)^τ=10000, 십진법 브릿지
+// 본격 포팅: nexus verify --hexa bt34-35 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: bt34_35_verify.py (HEXA 포팅 대기)")
+    println("BT-34/35: RoPE 기저 주파수 + 십진법 브릿지 검증")
+}

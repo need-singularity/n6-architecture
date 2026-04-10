@@ -14,6 +14,7 @@
 - src/growth/        자율성장 시스템
 - src/consciousness_bridge/  의식 브릿지
 - crates/dashboard/  Axum 웹 대시보드 (port 6600)
+- origins/           도구 원본 소스 (구 tools/ 에서 이관, .hexa 47개 + legacy .py 15개)
 - scripts/           자동성장·헬스체크·벤치마크 쉘 19종
 - tests/             통합 테스트
 

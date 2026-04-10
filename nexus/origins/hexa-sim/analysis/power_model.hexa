@@ -1,0 +1,144 @@
+// HEXA 칩 패밀리 전력 모델 (McPAT 호환)
+// gem5 통계 -> McPAT XML 입력 + 이집트 분수 전력 검증 + DVFS 스윕
+// 모든 전력 매개변수는 n=6 산술에서 도출
+
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let J2 = 24
+let SIGMA_TAU = 8
+let SIGMA_PHI = 10
+let SIGMA_TIMES_TAU = 48
+let SIGMA_SQ = 144
+let SIGMA_J2 = 288
+let SIGMA_SIGMA_PHI = 120  // sigma * (sigma - phi)
+let LN_4_3 = 0.2877        // ln(4/3)
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// 칩 전력 스펙
+let POWER_SPECS = {
+    "edge": {
+        "name": "HEXA-EDGE", "tdp_w": N, "burst_w": SIGMA, "idle_mw": 1000.0 / SIGMA,
+        "voltage_nom": 0.8, "voltage_min": 0.6, "voltage_max": 1.0,
+        "freq_ghz": 3.0, "power_states": N, "process_nm": 2, "die_mm2": SIGMA * N,
+        "egyptian": {"compute (1/2)": N * 1.0 / PHI, "memory (1/3)": N * 1.0 / (N / PHI), "io (1/6)": 1.0}
+    },
+    "omega": {
+        "name": "HEXA-OMEGA", "tdp_w": SIGMA_J2, "burst_w": SIGMA_J2 * 1.2, "idle_mw": 2400.0,
+        "voltage_nom": 0.8, "voltage_min": 0.6, "voltage_max": 1.0,
+        "freq_ghz": 2.0, "power_states": TAU, "process_nm": 2, "die_mm2": 600,
+        "egyptian": {"compute (1/2)": SIGMA_J2 * 1.0 / PHI, "memory (1/3)": SIGMA_J2 * 1.0 / (N / PHI), "io (1/6)": SIGMA_J2 * 1.0 / N}
+    },
+    "anima": {
+        "name": "ANIMA-HEXA", "tdp_w": SIGMA_SIGMA_PHI, "burst_w": SIGMA_SQ, "idle_mw": 1000.0,
+        "voltage_nom": 0.6, "voltage_min": 0.4, "voltage_max": 0.8,
+        "freq_ghz": 2.0, "power_states": TAU, "process_nm": 2, "die_mm2": 400,
+        "egyptian": {"compute (1/2)": SIGMA_SIGMA_PHI * 1.0 / PHI, "consciousness (1/3)": SIGMA_SIGMA_PHI * 1.0 / (N / PHI), "io+snn (1/6)": SIGMA_SIGMA_PHI * 1.0 / N}
+    }
+}
+
+// 이집트 분수 전력 검증
+fn verify_egyptian_power(config) {
+    let spec = POWER_SPECS[config]
+    let budget = spec["egyptian"]
+    let tdp = spec["tdp_w"] * 1.0
+
+    println("")
+    println("  이집트 분수 전력 예산 (1/2 + 1/3 + 1/6 = 1)")
+    println("  " + "-" .repeat(55))
+
+    let mut total = 0.0
+    for cat in keys(budget) {
+        let power = budget[cat]
+        let frac = power / tdp
+        total = total + frac
+        println("    " + pad_r(cat, 25) + "  " + pad_l(to_string(power), 7) + " W  (" + to_string(round(frac * 1000.0) / 1000.0) + ")")
+    }
+    let ok = abs(total - 1.0) < 1e-6
+    println("    " + pad_r("합계", 25) + "  " + pad_l(to_string(tdp), 7) + " W  (" + to_string(round(total * 1000.0) / 1000.0) + ")  " + if ok { "EXACT" } else { "FAIL" })
+}
+
+// DVFS 스윕 분석
+fn dvfs_sweep(config) {
+    let spec = POWER_SPECS[config]
+    let v_nom = spec["voltage_nom"]
+    let v_min = spec["voltage_min"]
+    let v_max = spec["voltage_max"]
+    let tdp = spec["tdp_w"] * 1.0
+    let p_dyn_nom = tdp * 0.8
+    let p_stat_nom = tdp * 0.2
+    let f_nom = spec["freq_ghz"]
+    let n_states = spec["power_states"]
+
+    println("")
+    println("  DVFS 스윕 (" + to_string(n_states) + " 전력 상태)")
+    println("  " + "-" .repeat(80))
+    println("  " + pad_r("상태", 8) + pad_l("V(V)", 6) + pad_l("f(GHz)", 8) + pad_l("P_dyn(W)", 10) + pad_l("P_stat(W)", 10) + pad_l("P_tot(W)", 10) + pad_l("성능", 6) + pad_l("효율", 8))
+    println("  " + "-" .repeat(80))
+
+    let mut i = 0
+    while i < n_states {
+        let frac = i * 1.0 / max(n_states - 1, 1)
+        let v = v_max - frac * (v_max - v_min)
+        let f = f_nom * (v / v_nom)
+        let p_dyn = p_dyn_nom * pow(v / v_nom, 2) * (f / f_nom)
+        let p_stat = p_stat_nom * (v / v_nom)
+        let p_total = p_dyn + p_stat
+        let perf_rel = f / f_nom
+        let eff = if p_total > 0.0 { perf_rel / p_total } else { 0.0 }
+
+        println("  " + pad_r("P" + to_string(i), 8) + pad_l(to_string(round(v * 1000.0) / 1000.0), 6) + pad_l(to_string(round(f * 100.0) / 100.0), 8) + pad_l(to_string(round(p_dyn * 1000.0) / 1000.0), 10) + pad_l(to_string(round(p_stat * 1000.0) / 1000.0), 10) + pad_l(to_string(round(p_total * 1000.0) / 1000.0), 10) + pad_l(to_string(round(perf_rel * 1000.0) / 1000.0), 6) + pad_l(to_string(round(eff * 10000.0) / 10000.0), 8))
+        i = i + 1
+    }
+}
+
+// McPAT XML 생성 (미리보기)
+fn generate_mcpat_preview(config) {
+    let spec = POWER_SPECS[config]
+    println("")
+    println("  McPAT XML 미리보기:")
+    println("    <component id=\"root\" type=\"system\">")
+    println("      <param name=\"core_tech_node\" value=\"" + to_string(spec["process_nm"]) + "\"/>")
+    println("      <param name=\"target_core_clockrate\" value=\"" + to_string(round(spec["freq_ghz"] * 1000.0)) + "\"/>")
+    println("      <param name=\"temperature\" value=\"340\"/>")
+    println("    ...</component>")
+}
+
+// 메인
+fn main() {
+    let args = parse_args()
+    let config = args["config"] or "edge"
+    let spec = POWER_SPECS[config]
+
+    println("=" .repeat(70))
+    println("  " + spec["name"] + " 전력 모델")
+    println("=" .repeat(70))
+    println("")
+    println("  TDP:        " + to_string(spec["tdp_w"]) + " W")
+    println("  Burst:      " + to_string(spec["burst_w"]) + " W")
+    println("  Idle:       " + to_string(spec["idle_mw"]) + " mW")
+    println("  전압:       " + to_string(spec["voltage_min"]) + "V - " + to_string(spec["voltage_max"]) + "V (nom=" + to_string(spec["voltage_nom"]) + "V)")
+    println("  공정:       " + to_string(spec["process_nm"]) + " nm")
+    println("  다이 면적:  " + to_string(spec["die_mm2"]) + " mm^2")
+
+    verify_egyptian_power(config)
+
+    if args["dvfs-sweep"] {
+        dvfs_sweep(config)
+    }
+
+    generate_mcpat_preview(config)
+}
+
+main()

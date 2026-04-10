@@ -1,0 +1,12 @@
+// llm_improvement_n6_analysis.py → .hexa 포팅 스텁
+// 원본 경로: tools/llm_improvement_n6_analysis.py
+// 포팅 상태: STUB (원본 577 줄)
+// 원본 요약: LLM 개선 가설 검증기 — n=6 산술 예측 vs 실제 하이퍼파라미터
+// 핵심: σφ=nτ=24, 1/2+1/3+1/6=1 완전성, 황금대역 1/e, 메타 고정점 1/3
+// 본격 포팅: nexus verify --hexa llm-improvement 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: llm_improvement_n6_analysis.py (HEXA 포팅 대기)")
+    println("LLM 개선: n=6 산술 예측 vs 실제 하이퍼파라미터 검증")
+}

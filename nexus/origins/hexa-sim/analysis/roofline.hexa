@@ -1,0 +1,149 @@
+// HEXA 칩 패밀리 루프라인 모델 생성기
+// 연산 천장 vs 메모리 대역폭, AI 워크로드 마커
+// HEXA-EDGE, HEXA-OMEGA, H100, Apple M4 비교
+// 모든 칩 매개변수는 n=6 산술에서 도출
+
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let J2 = 24
+let SIGMA_TAU = 8
+let SIGMA_PHI = 10
+let TWO_N = 64
+let TWO_SIGMA = 4096
+let SIGMA_SQ = 144
+let SIGMA_J2 = 288
+let SIGMA_TIMES_TAU = 48
+
+// 칩 스펙 (피크 연산 TFLOPS, 피크 BW GB/s)
+let CHIPS = {
+    "HEXA-EDGE": {"peak": 49.0, "int8": 72.0, "bw": 48.0, "tdp": 6},
+    "HEXA-OMEGA": {"peak": 295.0, "int8": 590.0, "bw": 2880.0, "tdp": 288},
+    "ANIMA-HEXA": {"peak": 200.0, "int8": 400.0, "bw": 2000.0, "tdp": 120},
+    "H100": {"peak": 989.0, "int8": 1979.0, "bw": 3350.0, "tdp": 700},
+    "Apple-M4": {"peak": 4.6, "int8": 38.0, "bw": 120.0, "tdp": 22}
+}
+
+// AI 워크로드 연산 강도 (ops/byte)
+let WORKLOADS = {
+    "Transformer-FP16": {"oi": 64.0, "desc": "표준 트랜스포머 포워드"},
+    "EFA-Attention": {"oi": 96.0, "desc": "이집트 분수 어텐션 (1/2+1/3+1/6)"},
+    "MoE-Egyptian": {"oi": 32.0, "desc": "이집트 MoE (8 전문가, top-2)"},
+    "Mamba-SSM": {"oi": 16.0, "desc": "Mamba 선택 스캔"},
+    "LoRA-r8": {"oi": 8.0, "desc": "LoRA 파인튜닝 (rank=sigma-tau=8)"},
+    "Embedding": {"oi": 0.5, "desc": "토큰 임베딩 (vocab=32K)"}
+}
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// 릿지 포인트 (FLOP/byte)
+fn ridge_point(peak_tflops, bw_gbps) {
+    if bw_gbps > 0.0 { (peak_tflops * 1000.0) / bw_gbps } else { 0.0 }
+}
+
+// 달성 가능 성능 (TFLOPS)
+fn attainable_perf(oi, peak_tflops, bw_gbps) {
+    let mem_bound = oi * bw_gbps / 1000.0
+    min(peak_tflops, mem_bound)
+}
+
+// ASCII 루프라인 차트
+fn ascii_roofline() {
+    let W = 72
+    let H = 20
+
+    println("  루프라인 모델 (log-log)")
+    println("  " + "-" .repeat(W + 2))
+
+    // 칩별 범례
+    println("")
+    println("  칩 스펙:")
+    for name in keys(CHIPS) {
+        let spec = CHIPS[name]
+        let rp = ridge_point(spec["peak"], spec["bw"])
+        println("    " + pad_r(name, 15) + "  Peak=" + pad_l(to_string(spec["peak"]), 8) + " TFLOPS  BW=" + pad_l(to_string(spec["bw"]), 6) + " GB/s  Ridge=" + pad_l(to_string(round(rp)), 6) + " FLOP/B  TDP=" + to_string(spec["tdp"]) + "W")
+    }
+    println("")
+    println("  워크로드:")
+    for wname in keys(WORKLOADS) {
+        let w = WORKLOADS[wname]
+        println("    OI=" + pad_l(to_string(w["oi"]), 6) + "  " + pad_r(wname, 20) + "  " + w["desc"])
+    }
+}
+
+// 성능 테이블
+fn performance_table() {
+    println("")
+    println("  달성 가능 성능 (TFLOPS) - 칩 x 워크로드")
+    println("  " + "-" .repeat(90))
+    let mut header = "  " + pad_r("워크로드", 22)
+    for cname in keys(CHIPS) { header = header + " " + pad_l(cname, 14) }
+    println(header)
+    println("  " + "-" .repeat(90))
+
+    for wname in keys(WORKLOADS) {
+        let mut row = "  " + pad_r(wname, 22)
+        for cname in keys(CHIPS) {
+            let spec = CHIPS[cname]
+            let perf = attainable_perf(WORKLOADS[wname]["oi"], spec["peak"], spec["bw"])
+            row = row + " " + pad_l(to_string(round(perf * 100.0) / 100.0), 14)
+        }
+        println(row)
+    }
+
+    // TFLOPS/W 효율
+    println("")
+    println("  효율 (TFLOPS/W) at OI=64 (트랜스포머)")
+    println("  " + "-" .repeat(50))
+    for cname in keys(CHIPS) {
+        let spec = CHIPS[cname]
+        let perf = attainable_perf(64.0, spec["peak"], spec["bw"])
+        let eff = perf / spec["tdp"]
+        println("    " + pad_r(cname, 15) + ": " + to_string(round(perf * 100.0) / 100.0) + " TFLOPS / " + to_string(spec["tdp"]) + "W = " + to_string(round(eff * 1000.0) / 1000.0) + " TFLOPS/W")
+    }
+}
+
+// gem5 통계 파서
+fn parse_gem5_stats(path) {
+    let mut stats = {}
+    let lines = read_lines(path)
+    for line in lines {
+        let trimmed = trim(line)
+        if starts_with(trimmed, "#") or trimmed == "" { continue }
+        let parts = split(trimmed, " ")
+        if len(parts) >= 2 {
+            let val = to_float(parts[1])
+            if val != nil { stats[parts[0]] = val }
+        }
+    }
+    stats
+}
+
+// 메인
+fn main() {
+    let args = parse_args()
+    println("=" .repeat(72))
+    println("  HEXA 루프라인 모델")
+    println("=" .repeat(72))
+
+    if args["stats"] {
+        let gem5 = parse_gem5_stats(args["stats"])
+        println("")
+        println("  gem5 통계: " + args["stats"])
+    }
+
+    ascii_roofline()
+    performance_table()
+}
+
+main()

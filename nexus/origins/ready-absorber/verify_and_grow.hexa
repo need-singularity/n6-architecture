@@ -1,0 +1,386 @@
+// Phase 2: NEXUS-6 검증 → 반영 → 성장 엔진
+//
+// 41,379건 발견을 NEXUS-6로 검증하고, 고가치 발견을 각 프로젝트에 반영.
+// 반영 과정에서 프로젝트 자체가 성장.
+//
+// 사용법:
+//   hexa verify_and_grow.hexa                      # 전체 (미처리분부터)
+//   hexa verify_and_grow.hexa --project anima       # 특정 프로젝트만
+//   hexa verify_and_grow.hexa --status              # 진행 상태
+//   hexa verify_and_grow.hexa --report              # 성장 리포트
+//   hexa verify_and_grow.hexa --reset               # 재시작
+
+let HOME = env("HOME")
+let TOOL_DIR = dirname(__file__)
+let FINDINGS_DIR = TOOL_DIR + "/findings"
+let VERIFIED_DIR = TOOL_DIR + "/verified"
+let GROWTH_DIR = TOOL_DIR + "/growth"
+let PHASE2_STATE = TOOL_DIR + "/phase2_state.json"
+let MAIN_DIR = HOME + "/Dev"
+let READY_DIR = HOME + "/Dev/ready"
+
+// n=6 핵심 상수
+let N6_CONSTANTS = {
+    "n": 6, "sigma": 12, "phi": 2, "tau": 4, "sopfr": 5,
+    "J2": 24, "mu": 1, "sigma_minus_phi": 10, "sigma_minus_tau": 8,
+    "sigma_minus_mu": 11, "sigma_sq": 144, "sigma_times_J2": 288,
+    "sigma_times_tau": 48, "phi_sq": 4, "R6": 1,
+    "ln43": 0.2877, "1_over_e": 0.3679, "4_over_3": 1.3333
+}
+
+// 고가치 파일 확장자
+let CODE_EXT = [".hexa", ".rs", ".ts", ".tsx", ".js", ".c", ".cpp", ".h"]
+let DOC_EXT = [".md", ".txt", ".rst"]
+let DATA_EXT = [".json", ".toml", ".yaml", ".yml", ".csv"]
+
+fn load_json(path) { json_parse(read_file(path)) }
+fn save_json(path, data) { write_file(path, json_stringify(data, 2)) }
+
+fn init_phase2_state() {
+    if file_exists(PHASE2_STATE) {
+        return load_json(PHASE2_STATE)
+    }
+    let state = {
+        "status": "idle",
+        "processed_projects": [],
+        "total_verified": 0,
+        "total_high_value": 0,
+        "total_routed": 0,
+        "growth_events": [],
+        "errors": [],
+        "last_run": nil
+    }
+    save_json(PHASE2_STATE, state)
+    state
+}
+
+// 텍스트에서 숫자 추출
+fn extract_numbers(text) {
+    let nums = []
+    let matches = regex_find_all(text, "[-+]?\\d*\\.?\\d+(?:[eE][-+]?\\d+)?")
+    for m in matches {
+        let v = to_float(m)
+        if v != nil and abs(v) < 1e12 and v != 0.0 {
+            push(nums, v)
+        }
+        if len(nums) >= 200 { break }
+    }
+    nums
+}
+
+// NEXUS-6로 숫자 집합 검증
+fn nexus_verify(numbers) {
+    if len(numbers) == 0 {
+        return {"verified": false, "reason": "비어있음", "score": 0.0, "n6_matches": [], "consensus": []}
+    }
+
+    let mut result = {
+        "verified": true,
+        "n6_matches": [],
+        "consensus": [],
+        "n6_exact_ratio": 0.0,
+        "active_lenses": 0,
+        "score": 0.0
+    }
+
+    // n6_check 개별 상수 매칭
+    let limit = min(len(numbers), 50)
+    let mut i = 0
+    while i < limit {
+        let match_result = n6_check(numbers[i])
+        if match_result != nil and match_result["grade"] != nil {
+            if contains(upper(match_result["grade"]), "EXACT") {
+                push(result["n6_matches"], {
+                    "value": numbers[i],
+                    "constant": match_result["constant"] or "",
+                    "grade": match_result["grade"]
+                })
+            }
+        }
+        i = i + 1
+    }
+
+    // 종합 점수 계산
+    let n6_score = len(result["n6_matches"]) * 10
+    let ratio_score = result["n6_exact_ratio"] * 50
+    result["score"] = n6_score + ratio_score
+    result
+}
+
+// 발견의 가치 등급 분류
+fn classify_value(finding, verification) {
+    let score = verification["score"] or 0
+    let path = finding["path"] or ""
+    let ext = file_ext(path)
+
+    // 파일 유형 보너스
+    let mut type_bonus = 0
+    if contains(CODE_EXT, ext) { type_bonus = 5 }
+    else if contains(DOC_EXT, ext) { type_bonus = 3 }
+    else if contains(DATA_EXT, ext) { type_bonus = 4 }
+
+    // 키워드 보너스
+    let mut kw_bonus = 0
+    let content = (finding["preview"] or "") + join(finding["added_preview"] or [], " ")
+    let high_kw = ["BT-", "hypothesis", "theorem", "proof", "discovery",
+        "EXACT", "n6_check", "breakthrough", "law", "consciousness",
+        "lens", "scan", "nexus", "sigma", "phi"]
+    for kw in high_kw {
+        if contains(lower(content), lower(kw)) { kw_bonus = kw_bonus + 3 }
+    }
+
+    let total = score + type_bonus + kw_bonus
+    if total >= 30 { "critical" }
+    else if total >= 15 { "high" }
+    else if total >= 5 { "medium" }
+    else { "low" }
+}
+
+// 성장 이벤트 구성
+fn build_growth_event(finding, verification, value) {
+    {
+        "timestamp": now_iso(),
+        "source_project": finding["project"] or "unknown",
+        "destination": finding["destination"] or "unknown",
+        "path": finding["path"] or "",
+        "type": finding["type"] or "",
+        "value_grade": value,
+        "n6_matches": len(verification["n6_matches"] or []),
+        "consensus_count": len(verification["consensus"] or []),
+        "score": verification["score"] or 0,
+        "n6_exact_ratio": verification["n6_exact_ratio"] or 0
+    }
+}
+
+// 검증된 발견을 목적지 프로젝트에 반영
+fn route_finding(finding, verification, value, dry_run) {
+    let dest = finding["destination"] or "unknown"
+    let dest_dir = MAIN_DIR + "/" + dest
+    if !dir_exists(dest_dir) { return false }
+
+    let growth_dest = dest_dir + "/.growth/absorbed"
+    if !dry_run { mkdir_p(growth_dest) }
+
+    let ready_path = finding["ready_path"] or ""
+
+    if (finding["type"] == "only_in_ready" or finding["type"] == "different") and (value == "critical" or value == "high") {
+        if !dry_run and file_exists(ready_path) {
+            let record = {
+                "absorbed_from": ready_path,
+                "original_path": finding["path"] or "",
+                "value_grade": value,
+                "n6_score": verification["score"] or 0,
+                "n6_matches": verification["n6_matches"] or [],
+                "timestamp": now_iso(),
+                "content_preview": slice(finding["preview"] or "", 0, 2000)
+            }
+            let safe_name = slice(replace(replace(finding["path"] or "unknown", "/", "__"), "\\", "__"), 0, 200)
+            let prefix = if finding["type"] == "different" { "diff__" } else { "" }
+            save_json(growth_dest + "/" + prefix + safe_name + ".json", record)
+            return true
+        }
+    }
+    false
+}
+
+// 단일 프로젝트 findings 전체 검증+반영
+fn process_project(project_name, dry_run) {
+    let findings_file = FINDINGS_DIR + "/" + lower(project_name) + ".json"
+    if !file_exists(findings_file) {
+        println("  [SKIP] " + project_name + ": findings 없음")
+        return {"processed": 0}
+    }
+
+    let data = load_json(findings_file)
+    let findings = data["findings"] or []
+    let total = len(findings)
+
+    println("")
+    println("=" .repeat(60))
+    println("  검증+성장: " + project_name + " (" + to_string(total) + " 발견)")
+    println("=" .repeat(60))
+
+    let mut stats = {
+        "processed": 0, "critical": 0, "high": 0, "medium": 0, "low": 0,
+        "routed": 0, "n6_total_matches": 0, "consensus_total": 0,
+        "growth_events": [], "top_findings": []
+    }
+
+    let mut i = 0
+    while i < total {
+        let finding = findings[i]
+        let content = (finding["preview"] or "") + join(finding["added_preview"] or [], " ")
+        let numbers = extract_numbers(content)
+        let verification = nexus_verify(numbers)
+        let value = classify_value(finding, verification)
+
+        stats[value] = stats[value] + 1
+        stats["processed"] = stats["processed"] + 1
+        stats["n6_total_matches"] = stats["n6_total_matches"] + len(verification["n6_matches"] or [])
+
+        if value == "critical" or value == "high" {
+            let routed = route_finding(finding, verification, value, dry_run)
+            if routed {
+                stats["routed"] = stats["routed"] + 1
+                push(stats["growth_events"], build_growth_event(finding, verification, value))
+            }
+        }
+
+        if (verification["score"] or 0) > 10 {
+            push(stats["top_findings"], {
+                "path": finding["path"] or "",
+                "score": verification["score"] or 0,
+                "value": value,
+                "dest": finding["destination"] or ""
+            })
+        }
+
+        if (i + 1) % 500 == 0 or i == total - 1 {
+            println("  [" + to_string(i + 1) + "/" + to_string(total) + "] C:" + to_string(stats["critical"]) + " H:" + to_string(stats["high"]) + " M:" + to_string(stats["medium"]) + " L:" + to_string(stats["low"]) + " | 라우팅:" + to_string(stats["routed"]))
+        }
+        i = i + 1
+    }
+
+    // verified 결과 저장
+    mkdir_p(VERIFIED_DIR)
+    save_json(VERIFIED_DIR + "/" + lower(project_name) + ".json", {
+        "project": project_name,
+        "timestamp": now_iso(),
+        "stats": stats,
+        "top_findings": stats["top_findings"]
+    })
+
+    // 성장 로그 저장
+    if len(stats["growth_events"]) > 0 {
+        mkdir_p(GROWTH_DIR)
+        save_json(GROWTH_DIR + "/" + lower(project_name) + "_growth.json", {
+            "project": project_name,
+            "timestamp": now_iso(),
+            "events_count": len(stats["growth_events"]),
+            "events": stats["growth_events"]
+        })
+    }
+
+    println("")
+    println("  결과: " + to_string(stats["processed"]) + " 검증")
+    println("  Critical: " + to_string(stats["critical"]) + " | High: " + to_string(stats["high"]) + " | Medium: " + to_string(stats["medium"]) + " | Low: " + to_string(stats["low"]))
+    println("  라우팅: " + to_string(stats["routed"]) + " | N6 매칭: " + to_string(stats["n6_total_matches"]))
+    stats
+}
+
+fn show_status() {
+    let state = init_phase2_state()
+    println("")
+    println("  Phase 2 상태: " + state["status"])
+    println("  마지막 실행: " + (state["last_run"] or "없음"))
+    println("  처리완료: " + to_string(len(state["processed_projects"])) + "/18")
+    println("  검증: " + to_string(state["total_verified"]))
+    println("  고가치: " + to_string(state["total_high_value"]))
+    println("  라우팅: " + to_string(state["total_routed"]))
+}
+
+fn show_report() {
+    println("")
+    println("=" .repeat(60))
+    println("  성장 리포트")
+    println("=" .repeat(60))
+
+    if !dir_exists(VERIFIED_DIR) {
+        println("  검증 데이터 없음.")
+        return
+    }
+
+    let mut grand_total = {"processed": 0, "critical": 0, "high": 0, "medium": 0, "low": 0, "routed": 0}
+    let vfiles = glob(VERIFIED_DIR + "/*.json")
+    for vf in vfiles {
+        let data = load_json(vf)
+        let stats = data["stats"] or {}
+        println("")
+        println("  " + (data["project"] or basename(vf)) + ":")
+        println("    처리: " + to_string(stats["processed"] or 0))
+        println("    C/H/M/L: " + to_string(stats["critical"] or 0) + "/" + to_string(stats["high"] or 0) + "/" + to_string(stats["medium"] or 0) + "/" + to_string(stats["low"] or 0))
+        println("    라우팅: " + to_string(stats["routed"] or 0))
+        for k in keys(grand_total) {
+            grand_total[k] = grand_total[k] + (stats[k] or 0)
+        }
+    }
+    println("")
+    println("=" .repeat(60))
+    println("  합계")
+    println("  처리: " + to_string(grand_total["processed"]))
+    println("  Critical: " + to_string(grand_total["critical"]) + " | High: " + to_string(grand_total["high"]))
+    println("  라우팅: " + to_string(grand_total["routed"]))
+}
+
+// 메인 실행
+fn main() {
+    let args = parse_args()
+
+    if args["status"] or args["s"] { show_status(); return }
+    if args["report"] or args["r"] { show_report(); return }
+    if args["reset"] {
+        let state = init_phase2_state()
+        state["processed_projects"] = []
+        state["total_verified"] = 0
+        state["total_high_value"] = 0
+        state["total_routed"] = 0
+        state["errors"] = []
+        state["status"] = "idle"
+        save_json(PHASE2_STATE, state)
+        println("  Phase 2 상태 초기화.")
+        return
+    }
+
+    let state = init_phase2_state()
+    mkdir_p(VERIFIED_DIR)
+    mkdir_p(GROWTH_DIR)
+
+    let dry_run = args["dry-run"] or args["n"] or false
+    let targets = if args["project"] or args["p"] {
+        [args["project"] or args["p"]]
+    } else {
+        let done = state["processed_projects"] or []
+        let mut t = []
+        let ffiles = glob(FINDINGS_DIR + "/*.json")
+        for f in ffiles {
+            let name = basename_no_ext(f)
+            if !contains(done, name) { push(t, name) }
+        }
+        t
+    }
+
+    if len(targets) == 0 {
+        println("  전체 처리 완료. --reset 으로 재시작 가능.")
+        return
+    }
+
+    println("")
+    println("  Phase 2: NEXUS-6 검증 + 성장 -- " + to_string(len(targets)) + " 프로젝트")
+    println("  모드: " + if dry_run { "dry-run" } else { "전체 (검증 + 라우팅 + 성장)" })
+
+    state["status"] = "running"
+    save_json(PHASE2_STATE, state)
+
+    for proj in targets {
+        let stats = process_project(proj, dry_run)
+        push(state["processed_projects"], proj)
+        state["total_verified"] = state["total_verified"] + (stats["processed"] or 0)
+        state["total_high_value"] = state["total_high_value"] + (stats["critical"] or 0) + (stats["high"] or 0)
+        state["total_routed"] = state["total_routed"] + (stats["routed"] or 0)
+        state["last_run"] = now_iso()
+        save_json(PHASE2_STATE, state)
+    }
+
+    state["status"] = "complete"
+    save_json(PHASE2_STATE, state)
+
+    println("")
+    println("=" .repeat(60))
+    println("  PHASE 2 완료")
+    println("  검증: " + to_string(state["total_verified"]))
+    println("  고가치: " + to_string(state["total_high_value"]))
+    println("  라우팅: " + to_string(state["total_routed"]))
+    println("=" .repeat(60))
+}
+
+main()

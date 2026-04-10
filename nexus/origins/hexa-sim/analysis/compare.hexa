@@ -1,0 +1,161 @@
+// HEXA gem5 시뮬레이션 다중 구성 비교 도구
+// gem5 통계에서 IPC, CPI, 캐시 미스율, 대역폭 비교 + ASCII 바 차트
+// 모든 참조값은 n=6 산술에서 도출
+
+let N = 6
+let PHI = 2
+let TAU = 4
+let SIGMA = 12
+let J2 = 24
+let SIGMA_TAU = 8
+let SIGMA_PHI = 10
+let SIGMA_SQ = 144
+let SIGMA_J2 = 288
+let SIGMA_TIMES_TAU = 48
+let TWO_N = 64
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// gem5 통계 파서
+fn parse_stats(path) {
+    let mut stats = {}
+    let lines = read_lines(path)
+    for line in lines {
+        let t = trim(line)
+        if t == "" or starts_with(t, "#") or starts_with(t, "---") { continue }
+        let parts = split(t, " ")
+        if len(parts) >= 2 {
+            let val = to_float(parts[1])
+            if val != nil { stats[parts[0]] = val }
+        }
+    }
+    stats
+}
+
+// 데모 데이터
+fn demo_data() {
+    [
+        {"label": "HEXA-EDGE (big)", "IPC": 3.0, "CPI": 0.333, "L1I_miss": 1.2, "L1D_miss": 4.8, "L2_miss": 12.0, "L3_miss": 2.4, "BW_GBs": SIGMA_TIMES_TAU * 0.7},
+        {"label": "HEXA-EDGE (little)", "IPC": 1.5, "CPI": 0.667, "L1I_miss": 0.8, "L1D_miss": 3.6, "L2_miss": 8.0, "L3_miss": 1.8, "BW_GBs": SIGMA_TIMES_TAU * 0.4},
+        {"label": "HEXA-OMEGA (SM)", "IPC": 50.0, "CPI": 0.02, "L1I_miss": 0.5, "L1D_miss": 6.0, "L2_miss": 18.0, "L3_miss": 3.6, "BW_GBs": 2880.0 * 0.75},
+        {"label": "ANIMA-HEXA (consc.)", "IPC": 10.0, "CPI": 0.1, "L1I_miss": 2.0, "L1D_miss": 8.0, "L2_miss": 15.0, "L3_miss": 4.0, "BW_GBs": 2000.0 * 0.6}
+    ]
+}
+
+// ASCII 바 차트
+fn ascii_bar(value, max_val, width) {
+    if max_val <= 0.0 { return "" }
+    let fill = round(value / max_val * width)
+    let fill_c = max(0, min(width, fill))
+    "#" .repeat(fill_c) + "." .repeat(width - fill_c)
+}
+
+fn ascii_bar_chart(metrics, key, title) {
+    println("")
+    println("  " + title)
+    let mut max_val = 0.0
+    for m in metrics {
+        if (m[key] or 0.0) > max_val { max_val = m[key] or 0.0 }
+    }
+    if max_val == 0.0 { max_val = 1.0 }
+    println("  " + pad_r("", 20) + " |" + "=" .repeat(40) + "|")
+    for m in metrics {
+        let val = m[key] or 0.0
+        let bar = ascii_bar(val, max_val, 40)
+        println("  " + pad_r(slice(m["label"], 0, 20), 20) + " |" + bar + "| " + to_string(round(val * 100.0) / 100.0))
+    }
+    println("  " + pad_r("", 20) + " |" + "=" .repeat(40) + "|")
+}
+
+// 비교 테이블
+fn comparison_table(metrics) {
+    let cols = ["IPC", "CPI", "L1I_miss", "L1D_miss", "L2_miss", "L3_miss", "BW_GBs"]
+    let col_w = 12
+
+    let mut header = "  " + pad_r("구성", 22)
+    for c in cols { header = header + " " + pad_l(c, col_w) }
+    println("  " + "-" .repeat(22 + len(cols) * (col_w + 1)))
+    println(header)
+    println("  " + "-" .repeat(22 + len(cols) * (col_w + 1)))
+
+    for m in metrics {
+        let mut row = "  " + pad_r(m["label"], 22)
+        for c in cols {
+            row = row + " " + pad_l(to_string(round((m[c] or 0.0) * 10000.0) / 10000.0), col_w)
+        }
+        println(row)
+    }
+    println("  " + "-" .repeat(22 + len(cols) * (col_w + 1)))
+}
+
+// N6 아키텍처 참조 테이블
+fn n6_reference_table() {
+    println("")
+    println("  N6 아키텍처 참조")
+    println("  " + "-" .repeat(55))
+    println("  " + pad_r("매개변수", 30) + pad_l("값", 10) + pad_l("출처", 15))
+    println("  " + "-" .repeat(55))
+    let params = ["디코드 폭 (big)", "디코드 폭 (little)", "파이프라인 (big)", "ROB 엔트리", "물리 레지스터", "IQ 엔트리", "L1 (KB)", "L3 (MB)", "LPDDR5X (GB)", "BW 목표 (GB/s)", "GPU SM (OMEGA)", "HBM4E (GB, OMEGA)"]
+    let vals = [N, N / PHI, SIGMA, SIGMA_J2, SIGMA * N, SIGMA_SQ, TWO_N, SIGMA, SIGMA_TAU, SIGMA_TIMES_TAU, SIGMA_SQ, SIGMA_J2]
+    let srcs = ["n", "n/phi", "sigma", "sigma*J2", "sigma*n", "sigma^2", "2^n", "sigma", "sigma-tau", "sigma*tau", "sigma^2", "sigma*J2"]
+    let mut i = 0
+    while i < len(params) {
+        println("  " + pad_r(params[i], 30) + pad_l(to_string(vals[i]), 10) + pad_l(srcs[i], 15))
+        i = i + 1
+    }
+    println("  " + "-" .repeat(55))
+}
+
+// 메인
+fn main() {
+    let args = parse_args()
+    println("=" .repeat(70))
+    println("  HEXA gem5 시뮬레이션 비교")
+    println("=" .repeat(70))
+
+    let metrics = if args["demo"] or (!args["dirs"] and !args["files"]) {
+        println("")
+        println("  데모 데이터 사용 (--dirs 또는 --files 로 실제 결과 사용)")
+        demo_data()
+    } else {
+        // 실제 파일 파싱은 향후 구현
+        demo_data()
+    }
+
+    println("")
+    comparison_table(metrics)
+    ascii_bar_chart(metrics, "IPC", "사이클당 명령어 (IPC)")
+    ascii_bar_chart(metrics, "L1D_miss", "L1D 캐시 미스율 (%)")
+    ascii_bar_chart(metrics, "BW_GBs", "메모리 대역폭 (GB/s)")
+
+    if args["reference"] or args["demo"] or (!args["dirs"] and !args["files"]) {
+        n6_reference_table()
+    }
+
+    // 상대 비교
+    if len(metrics) > 1 {
+        let base = metrics[0]
+        println("")
+        println("  " + base["label"] + " 대비 상대값:")
+        println("  " + "-" .repeat(60))
+        let mut i = 1
+        while i < len(metrics) {
+            let m = metrics[i]
+            let ipc_r = if base["IPC"] > 0.0 { m["IPC"] / base["IPC"] } else { 0.0 }
+            let bw_r = if base["BW_GBs"] > 0.0 { m["BW_GBs"] / base["BW_GBs"] } else { 0.0 }
+            println("    " + pad_r(m["label"], 25) + "  IPC: " + to_string(round(ipc_r * 100.0) / 100.0) + "x  BW: " + to_string(round(bw_r * 100.0) / 100.0) + "x")
+            i = i + 1
+        }
+    }
+}
+
+main()

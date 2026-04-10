@@ -1,0 +1,220 @@
+// 에너지 & 핵융합 심층 n=6 분석 계산기
+// 핵융합 반응, Betz 한계, Shockley-Queisser 한계, 에너지 상수의 P1=6 산술 검증
+//
+// n=6 산술: sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5, gpf(6)=3
+
+let P1 = 6
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let GPF = 3
+let LPF = 2
+let META_FP = 1.0 / 3.0
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// PART 1: BETZ 한계 증명
+fn betz_limit_proof() {
+    println("=" .repeat(72))
+    println("PART 1: BETZ 한계 증명")
+    println("=" .repeat(72))
+
+    println("")
+    println("  Betz 유도 (1919):")
+    println("  Cp(r) = (1/2) * (1 - r^2) * (1 + r)")
+    println("  dCp/dr = 0 => r = 1/3 (물리적 해)")
+    println("  Cp_max = 16/27")
+    println("")
+
+    // 1a. 16/27 분해
+    let betz = 16.0 / 27.0
+    let n6_val = pow(LPF, TAU) * 1.0 / pow(GPF, GPF)
+    println("  16/27 = " + to_string(betz))
+    println("  2^tau(6) / gpf(6)^gpf(6) = 2^4 / 3^3 = " + to_string(n6_val))
+    println("  일치: EXACT (오차 = " + to_string(abs(betz - n6_val)) + ")")
+    println("")
+
+    // 1b. 속도 최적점 r = 1/3
+    println("  속도비 최적점: r = 1/3 = phi(6)/P1 = 2/6")
+    println("  유도인자 최적: a = 1/3 (3차 속도 의존성에 의해 강제)")
+    println("  Cp(1/3) = 4 * (1/3) * (2/3)^2 = 16/27")
+    println("")
+
+    // 1/3 메타 패턴 요약
+    println("  에너지의 1/3 메타 패턴:")
+    println("  =========================")
+    println("  Betz 속도 최적:     r = 1/3 (정확, 3차)")
+    println("  Betz 유도 인자:     a = 1/3 (정확, 3차)")
+    println("  SQ 단일접합 한계:   33.78% ~ 1/3 (1.3% 오차)")
+    println("  열발전 효율:        ~33% ~ 1/3 (가변)")
+    println("  메타 고정점 f(I):   1/3 (축약 사상)")
+    println("  이집트 분수:        1/2 + 1/3 + 1/6 = 1")
+    println("")
+}
+
+// PART 2: 모든 핵융합 반응 vs n=6 산술
+fn nuclear_fusion_all() {
+    println("=" .repeat(72))
+    println("PART 2: 전체 핵융합 반응 vs n=6 산술")
+    println("=" .repeat(72))
+    println("")
+
+    // n=6 함수 매핑
+    let n6_funcs_a = [1, 2, 3, 4, 5, 6, 12, 24]
+    let n6_funcs_n = ["unit", "phi", "gpf", "tau", "sopfr", "P1", "sigma", "sigma*phi"]
+
+    // 반응 데이터: [이름, 반응물A, 생성물A, Q(MeV), n6매핑반응물, n6매핑생성물]
+    let rx_names = [
+        "D-D -> He-3 + n", "D-D -> T + p", "D-T -> He-4 + n",
+        "D-He3 -> He-4 + p", "Li-6 + D -> 2*He-4", "Li-6 + n -> T + He-4",
+        "Li-7 + p -> 2*He-4", "B-11 + p -> 3*He-4",
+        "Triple-alpha: 3*He-4 -> C-12", "CNO 촉매: C-12", "pp chain: 4p -> He-4"
+    ]
+    let rx_r = ["2+2", "2+2", "2+3", "2+3", "6+2", "6+1", "7+1", "11+1", "4+4+4", "12", "1+1+1+1"]
+    let rx_p = ["3+1", "3+1", "4+1", "4+1", "4+4", "3+4", "4+4", "4+4+4", "12", "12", "4"]
+    let rx_q = [3.27, 4.03, 17.6, 18.3, 22.4, 4.78, 17.3, 8.7, -7.275, 25.0, 26.7]
+    let rx_n6r = ["phi+phi", "phi+phi", "phi+gpf", "phi+gpf", "P1+phi", "P1+1", "(P1+1)+1", "11+1", "3*tau", "sigma", "tau protons"]
+    let rx_n6p = ["gpf+1", "gpf+1", "tau+1", "tau+1", "2*tau", "gpf+tau", "2*tau", "gpf*tau", "sigma", "sigma", "tau"]
+    let rx_grade = ["EXACT", "EXACT", "EXACT", "EXACT", "EXACT-STAR", "EXACT", "WEAK", "PARTIAL", "EXACT-STAR", "EXACT", "EXACT"]
+
+    println(pad_r("반응", 35) + " " + pad_r("질량식", 15) + " " + pad_r("n=6 매핑", 25) + " " + pad_l("Q(MeV)", 10) + " " + "등급")
+    println("-" .repeat(100))
+
+    let mut i = 0
+    while i < len(rx_names) {
+        println(pad_r(rx_names[i], 35) + " " + pad_r(rx_r[i] + "->" + rx_p[i], 15) + " " + pad_r(rx_n6r[i] + "->" + rx_n6p[i], 25) + " " + pad_l(to_string(rx_q[i]), 10) + " " + rx_grade[i])
+        i = i + 1
+    }
+
+    let mut es = 0
+    let mut ex = 0
+    let mut pt = 0
+    let mut wk = 0
+    for g in rx_grade {
+        if g == "EXACT-STAR" { es = es + 1 }
+        else if g == "EXACT" { ex = ex + 1 }
+        else if g == "PARTIAL" { pt = pt + 1 }
+        else if g == "WEAK" { wk = wk + 1 }
+    }
+    println("")
+    println("  요약: " + to_string(es) + " EXACT-STAR, " + to_string(ex) + " EXACT, " + to_string(pt) + " PARTIAL, " + to_string(wk) + " WEAK")
+    println("")
+    println("  핵융합 질량수 vs n=6 함수:")
+    println("  A=1 (n,p)    = unit      [7/11 반응]")
+    println("  A=2 (D)      = phi(6)    [6/11 반응]")
+    println("  A=3 (T,He-3) = gpf(6)    [5/11 반응]")
+    println("  A=4 (He-4)   = tau(6)    [9/11 반응 -- 지배적]")
+    println("  A=6 (Li-6)   = P1        [2/11 반응]")
+    println("  A=12 (C-12)  = sigma(6)  [2/11 반응]")
+    println("  깨끗한 n=6 비율: 9/11 반응이 n=6 함수 질량수만 사용")
+    println("")
+}
+
+// PART 3: Q값 분석
+fn q_values_analysis() {
+    println("=" .repeat(72))
+    println("PART 3: Q값 vs n=6 표현식")
+    println("=" .repeat(72))
+    println("")
+    println("  결론: Q값은 n=6 산술에 깨끗하게 매핑되지 않는다.")
+    println("  Q값은 핵 결합 에너지(Bethe-Weizsacker 질량 공식)에 의존하며,")
+    println("  이는 정수 산술이 아니다. 질량 번호 매핑은 구조적이나,")
+    println("  Q값 매핑은 아니다. 이것이 정직한 평가다.")
+    println("")
+}
+
+// PART 4: SQ 심층 분석
+fn shockley_queisser_deep() {
+    println("=" .repeat(72))
+    println("PART 4: SHOCKLEY-QUEISSER 심층 분석")
+    println("=" .repeat(72))
+    println("")
+
+    let T_sun = 5778.0
+    let T_cell = 300.0
+    let Eg_opt = 1.34
+    let eta_max = 0.3378
+    let n6_Eg = TAU * 1.0 / GPF   // 4/3 = 1.3333
+    let n6_eta = PHI * 1.0 / P1    // 1/3 = 0.3333
+    let err_Eg = abs(Eg_opt - n6_Eg) / Eg_opt * 100.0
+    let err_eta = abs(eta_max - n6_eta) / eta_max * 100.0
+
+    println("  최적 밴드갭:   Eg = " + to_string(Eg_opt) + " eV   vs  tau/gpf = " + to_string(n6_Eg) + " eV  (오차 " + to_string(err_Eg) + "%)")
+    println("  최대 효율:     eta = " + to_string(eta_max) + "   vs  phi/P1 = " + to_string(n6_eta) + "     (오차 " + to_string(err_eta) + "%)")
+    println("")
+    println("  왜 SQ가 1/3 근처인가?")
+    println("  카르노 한계: 1 - T_cell/T_sun = 1 - 300/5778 = 0.948")
+    println("  실제 SQ: 0.338 = 열역학 한계의 ~1/3")
+    println("  이 1/3은 수론이 아니라 광자 물리학에서 온다.")
+    println("")
+
+    // 다중접합 한계
+    println("  다중접합 한계:")
+    let mj_j = [1, 2, 3, 4, 6]
+    let mj_l = [33.78, 45.7, 51.6, 55.3, 59.9]
+    let mut mi = 0
+    while mi < len(mj_j) {
+        println("    " + to_string(mj_j[mi]) + "접합: " + to_string(mj_l[mi]) + "%")
+        mi = mi + 1
+    }
+    println("    무한접합: 68.7% ~ 2/3 (2% 오차)")
+    println("")
+    println("  주목: 6접합 한계 59.9% ~ Betz 한계 59.26% (1.1% 차이)")
+    println("")
+}
+
+// PART 5: 에너지 생성 상수 vs n=6
+fn energy_constants_table() {
+    println("=" .repeat(72))
+    println("PART 5: 에너지 생성 상수 vs n=6")
+    println("=" .repeat(72))
+    println("")
+    println("  Stefan-Boltzmann 지수: 4 = tau(6)   EXACT (d=3 차원 + 1)")
+    println("  HCP/FCC 배위수:       12 = sigma(6) EXACT (3D 구 충진)")
+    println("  Betz 한계:            16/27 = 2^tau/gpf^gpf EXACT")
+    println("  SQ 최적 밴드갭:       1.34 eV ~ tau/gpf = 4/3 APPROX")
+    println("  SQ 효율:              33.78% ~ phi/P1 = 1/3 APPROX")
+    println("  kT_room = 0.02585 eV:  깨끗한 n=6 표현 없음")
+    println("")
+}
+
+// 최종 요약
+fn final_summary() {
+    println("=" .repeat(72))
+    println("최종 평가")
+    println("=" .repeat(72))
+    println("")
+    println("  진짜 구조적 연결:")
+    println("    1. 핵융합 질량수: Li-6=P1, D=phi, He-4=tau, C-12=sigma")
+    println("       9/11 반응이 n=6 함수 질량수만 사용")
+    println("    2. Betz 한계: 16/27 = 2^tau/gpf^gpf, 최적점 1/3 = phi/P1")
+    println("    3. Stefan-Boltzmann T^4: 지수 = tau(6) = d+1")
+    println("    4. 구 키싱수: 12 = sigma(6)")
+    println("")
+    println("  흥미롭지만 약한 것:")
+    println("    5. SQ 밴드갭 4/3 = tau/gpf (0.5% 오차)")
+    println("    6. SQ 효율 ~1/3 (1.3% 오차)")
+    println("    7. 6접합 한계 ~ Betz 한계 (1.1% 차이)")
+    println("")
+    println("  Q값은 n=6에 매핑 안됨 (정직한 평가)")
+    println("  에너지 공학 상수 대부분은 우연적 일치")
+    println("")
+}
+
+// 실행
+betz_limit_proof()
+nuclear_fusion_all()
+q_values_analysis()
+shockley_queisser_deep()
+energy_constants_table()
+final_summary()

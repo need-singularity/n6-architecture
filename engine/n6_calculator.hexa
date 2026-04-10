@@ -1,0 +1,13 @@
+// n6_calculator.py → .hexa 포팅 스텁
+// 원본 경로: tools/n6_calculator.py
+// 포팅 상태: STUB (원본 423 줄)
+// 원본 요약: N6 마스터 계산기 — 모든 n=6 산술 함수 및 설계 도구
+// 핵심 기능: 상수 출력, R-score 계산, 수 표현식 탐색, Leech-24, 칩 메트릭, 산업 패턴, R(n) 스펙트럼
+// 참고: nexus calc 명령어가 Rust 버전으로 대부분 대체
+// 본격 포팅: nexus calc 통합 또는 hexa run engine/n6_calculator.hexa 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: n6_calculator.py (HEXA 포팅 대기)")
+    println("기능: σ/τ/φ/sopfr 상수, R-score, Leech-24, 칩 메트릭, 산업 패턴")
+}

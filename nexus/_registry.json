@@ -1,78 +1,92 @@
 {
-  "_doc": "NEXUS-6 통합 도구 레지스트리 — SSOT. tools/ 62 크레이트 흡수 완료 상태.",
+  "_doc": "NEXUS-6 통합 도구 레지스트리 — SSOT. nexus/origins/ 62 크레이트 흡수 완료 상태.",
   "_generated": "2026-04-10",
   "_dispatcher": "nexus/src/cmd/mod.rs",
   "_cli": "nexus <category> <name> [args]",
-  "_note": "원본 tools/<name>/main.hexa 는 HEXA 바이너리로 위임. Rust 재구현은 TODO.",
+  "_note": "원본 nexus/origins/<name>/main.hexa 는 HEXA 바이너리로 위임. Rust 재구현은 TODO.",
 
   "calc": {
-    "optics":                { "desc": "광학/렌즈 계산기",            "src": "src/cmd/calc/optics.rs",                "origin": "tools/optics-calc/main.hexa" },
-    "energy":                { "desc": "에너지 수지 계산기",          "src": "src/cmd/calc/energy.rs",                "origin": "tools/energy-calc/main.hexa" },
-    "gpu-arch":              { "desc": "GPU 아키텍처 계산기",         "src": "src/cmd/calc/gpu_arch.rs",              "origin": "tools/gpu-arch-calc/main.hexa" },
-    "crypto":                { "desc": "암호/해시 계산기",            "src": "src/cmd/calc/crypto.rs",                "origin": "tools/crypto-calc/main.hexa" },
-    "quantum":               { "desc": "양자역학 계산기",             "src": "src/cmd/calc/quantum.rs",               "origin": "tools/quantum-calc/main.hexa" },
-    "carbon-capture":        { "desc": "탄소포집 계산기",             "src": "src/cmd/calc/carbon_capture.rs",        "origin": "tools/carbon-capture-calc/main.hexa" },
-    "semiconductor":         { "desc": "반도체 계산기",               "src": "src/cmd/calc/semiconductor.rs",         "origin": "tools/semiconductor-calc/main.hexa" },
-    "chip-n6":               { "desc": "n=6 칩 계산기",               "src": "src/cmd/calc/chip_n6.rs",               "origin": "tools/chip-n6-calc/main.hexa" },
-    "chip-power":            { "desc": "칩 전력 계산기",              "src": "src/cmd/calc/chip_power.rs",            "origin": "tools/chip-power-calc/main.hexa" },
-    "chip-perf":             { "desc": "칩 성능 계산기",              "src": "src/cmd/calc/chip_perf.rs",             "origin": "tools/chip-perf-calc/main.hexa" },
-    "interconnect":          { "desc": "인터커넥트 계산기",           "src": "src/cmd/calc/interconnect.rs",          "origin": "tools/interconnect-calc/main.hexa" },
-    "photonic-energy":       { "desc": "광자 에너지 계산기",          "src": "src/cmd/calc/photonic_energy.rs",       "origin": "tools/photonic-energy-calc/main.hexa" },
-    "tokamak-shape":         { "desc": "토카막 형상 계산기",          "src": "src/cmd/calc/tokamak_shape.rs",         "origin": "tools/tokamak-shape/main.hexa" },
-    "kstar":                 { "desc": "KSTAR 운전 계산기",           "src": "src/cmd/calc/kstar.rs",                 "origin": "tools/kstar-calc/main.hexa" },
-    "nobel":                 { "desc": "노벨상 후보 계산기",          "src": "src/cmd/calc/nobel.rs",                 "origin": "tools/nobel-calc/main.hexa" },
-    "consciousness":         { "desc": "의식 검증 계산기",            "src": "src/cmd/calc/consciousness.rs",         "origin": "tools/consciousness-calc/main.hexa" },
-    "dimension-perception":  { "desc": "차원 지각 계산기",            "src": "src/cmd/calc/dimension_perception.rs",  "origin": "tools/dimension-perception-calc/main.hexa" },
-    "fusion":                { "desc": "핵융합 계산기",               "src": "src/cmd/calc/fusion.rs",                "origin": "tools/fusion-calc/main.hexa" },
-    "gut":                   { "desc": "GUT(대통일) 계산기",          "src": "src/cmd/calc/gut.rs",                   "origin": "tools/gut-calc-rust/main.hexa" },
-    "cross-dse":             { "desc": "교차 DSE 계산기",             "src": "src/cmd/calc/cross_dse.rs",             "origin": "tools/cross-dse-calc/main.hexa" }
+    "optics":                { "desc": "광학/렌즈 계산기",            "src": "src/cmd/calc/optics.rs",                "origin": "nexus/origins/optics-calc/main.hexa" },
+    "energy":                { "desc": "에너지 수지 계산기",          "src": "src/cmd/calc/energy.rs",                "origin": "nexus/origins/energy-calc/main.hexa" },
+    "gpu-arch":              { "desc": "GPU 아키텍처 계산기",         "src": "src/cmd/calc/gpu_arch.rs",              "origin": "nexus/origins/gpu-arch-calc/main.hexa" },
+    "crypto":                { "desc": "암호/해시 계산기",            "src": "src/cmd/calc/crypto.rs",                "origin": "nexus/origins/crypto-calc/main.hexa" },
+    "quantum":               { "desc": "양자역학 계산기",             "src": "src/cmd/calc/quantum.rs",               "origin": "nexus/origins/quantum-calc/main.hexa" },
+    "carbon-capture":        { "desc": "탄소포집 계산기",             "src": "src/cmd/calc/carbon_capture.rs",        "origin": "nexus/origins/carbon-capture-calc/main.hexa" },
+    "semiconductor":         { "desc": "반도체 계산기",               "src": "src/cmd/calc/semiconductor.rs",         "origin": "nexus/origins/semiconductor-calc/main.hexa" },
+    "chip-n6":               { "desc": "n=6 칩 계산기",               "src": "src/cmd/calc/chip_n6.rs",               "origin": "nexus/origins/chip-n6-calc/main.hexa" },
+    "chip-power":            { "desc": "칩 전력 계산기",              "src": "src/cmd/calc/chip_power.rs",            "origin": "nexus/origins/chip-power-calc/main.hexa" },
+    "chip-perf":             { "desc": "칩 성능 계산기",              "src": "src/cmd/calc/chip_perf.rs",             "origin": "nexus/origins/chip-perf-calc/main.hexa" },
+    "interconnect":          { "desc": "인터커넥트 계산기",           "src": "src/cmd/calc/interconnect.rs",          "origin": "nexus/origins/interconnect-calc/main.hexa" },
+    "photonic-energy":       { "desc": "광자 에너지 계산기",          "src": "src/cmd/calc/photonic_energy.rs",       "origin": "nexus/origins/photonic-energy-calc/main.hexa" },
+    "tokamak-shape":         { "desc": "토카막 형상 계산기",          "src": "src/cmd/calc/tokamak_shape.rs",         "origin": "nexus/origins/tokamak-shape/main.hexa" },
+    "kstar":                 { "desc": "KSTAR 운전 계산기",           "src": "src/cmd/calc/kstar.rs",                 "origin": "nexus/origins/kstar-calc/main.hexa" },
+    "nobel":                 { "desc": "노벨상 후보 계산기",          "src": "src/cmd/calc/nobel.rs",                 "origin": "nexus/origins/nobel-calc/main.hexa" },
+    "consciousness":         { "desc": "의식 검증 계산기",            "src": "src/cmd/calc/consciousness.rs",         "origin": "nexus/origins/consciousness-calc/main.hexa" },
+    "dimension-perception":  { "desc": "차원 지각 계산기",            "src": "src/cmd/calc/dimension_perception.rs",  "origin": "nexus/origins/dimension-perception-calc/main.hexa" },
+    "fusion":                { "desc": "핵융합 계산기",               "src": "src/cmd/calc/fusion.rs",                "origin": "nexus/origins/fusion-calc/main.hexa" },
+    "gut":                   { "desc": "GUT(대통일) 계산기",          "src": "src/cmd/calc/gut.rs",                   "origin": "nexus/origins/gut-calc-rust/main.hexa" },
+    "cross-dse":             { "desc": "교차 DSE 계산기",             "src": "src/cmd/calc/cross_dse.rs",             "origin": "nexus/origins/cross-dse-calc/main.hexa" }
   },
 
   "dse": {
-    "universal":             { "desc": "만능 DSE",                    "src": "src/cmd/dse/universal.rs",              "origin": "tools/universal-dse/main.hexa" },
-    "material":              { "desc": "재료 DSE",                    "src": "src/cmd/dse/material.rs",               "origin": "tools/material-dse/main.hexa" },
-    "solar":                 { "desc": "태양광 DSE",                  "src": "src/cmd/dse/solar.rs",                  "origin": "tools/solar-dse/main.hexa" },
-    "fusion":                { "desc": "핵융합 DSE",                  "src": "src/cmd/dse/fusion.rs",                 "origin": "tools/fusion-dse/main.hexa" },
-    "battery":               { "desc": "배터리 DSE",                  "src": "src/cmd/dse/battery.rs",                "origin": "tools/battery-dse/main.hexa" },
-    "sc":                    { "desc": "초전도 DSE",                  "src": "src/cmd/dse/sc.rs",                     "origin": "tools/sc-dse/main.hexa" },
-    "robot":                 { "desc": "로봇 DSE",                    "src": "src/cmd/dse/robot.rs",                  "origin": "tools/robot-dse/main.hexa" },
-    "dse-calc":              { "desc": "일반 DSE 계산기",             "src": "src/cmd/dse/dse_calc.rs",               "origin": "tools/dse-calc/main.hexa" }
+    "universal":             { "desc": "만능 DSE",                    "src": "src/cmd/dse/universal.rs",              "origin": "nexus/origins/universal-dse/main.hexa" },
+    "material":              { "desc": "재료 DSE",                    "src": "src/cmd/dse/material.rs",               "origin": "nexus/origins/material-dse/main.hexa" },
+    "solar":                 { "desc": "태양광 DSE",                  "src": "src/cmd/dse/solar.rs",                  "origin": "nexus/origins/solar-dse/main.hexa" },
+    "fusion":                { "desc": "핵융합 DSE",                  "src": "src/cmd/dse/fusion.rs",                 "origin": "nexus/origins/fusion-dse/main.hexa" },
+    "battery":               { "desc": "배터리 DSE",                  "src": "src/cmd/dse/battery.rs",                "origin": "nexus/origins/battery-dse/main.hexa" },
+    "sc":                    { "desc": "초전도 DSE",                  "src": "src/cmd/dse/sc.rs",                     "origin": "nexus/origins/sc-dse/main.hexa" },
+    "robot":                 { "desc": "로봇 DSE",                    "src": "src/cmd/dse/robot.rs",                  "origin": "nexus/origins/robot-dse/main.hexa" },
+    "dse-calc":              { "desc": "일반 DSE 계산기",             "src": "src/cmd/dse/dse_calc.rs",               "origin": "nexus/origins/dse-calc/main.hexa" }
   },
 
   "analyze": {
-    "deep-miner":            { "desc": "심층 마이너",                 "src": "src/cmd/analyze/deep_miner.rs",         "origin": "tools/deep-miner/main.hexa" },
-    "formula-miner":         { "desc": "수식 마이너",                 "src": "src/cmd/analyze/formula_miner.rs",      "origin": "tools/formula-miner/main.hexa" },
-    "discovery-engine":      { "desc": "발견 엔진",                   "src": "src/cmd/analyze/discovery_engine.rs",   "origin": "tools/discovery-engine/main.hexa" },
-    "atlas-verifier":        { "desc": "상수 아틀라스 검증기",        "src": "src/cmd/analyze/atlas_verifier.rs",     "origin": "tools/atlas-verifier/main.hexa" },
-    "hypothesis-grader":     { "desc": "가설 채점기",                 "src": "src/cmd/analyze/hypothesis_grader.rs",  "origin": "tools/hypothesis-grader/main.hexa" },
-    "lens-coverage":         { "desc": "렌즈 커버리지",               "src": "src/cmd/analyze/lens_coverage.rs",      "origin": "tools/lens-coverage/main.hexa" },
-    "bt-extension-verifier": { "desc": "BT 확장 검증기",              "src": "src/cmd/analyze/bt_extension_verifier.rs","origin": "tools/bt-extension-verifier/main.hexa" },
-    "n6-discriminant":       { "desc": "n=6 판별기",                  "src": "src/cmd/analyze/n6_discriminant.rs",    "origin": "tools/n6-discriminant/main.hexa" },
-    "reality-map-grow":      { "desc": "현실 지도 성장",              "src": "src/cmd/analyze/reality_map_grow.rs",   "origin": "tools/reality-map-grow/main.hexa" },
-    "special-number-bf":     { "desc": "특수수 브루트포스",           "src": "src/cmd/analyze/special_number_bf.rs",  "origin": "tools/special-number-bf/main.hexa" },
-    "vendor-compare":        { "desc": "벤더 비교 계산기",            "src": "src/cmd/analyze/vendor_compare.rs",     "origin": "tools/vendor-compare-calc/main.hexa" },
-    "fusion-verify":         { "desc": "핵융합 검증기",               "src": "src/cmd/analyze/fusion_verify.rs",      "origin": "tools/fusion-verify/main.hexa" }
+    "deep-miner":            { "desc": "심층 마이너",                 "src": "src/cmd/analyze/deep_miner.rs",         "origin": "nexus/origins/deep-miner/main.hexa" },
+    "formula-miner":         { "desc": "수식 마이너",                 "src": "src/cmd/analyze/formula_miner.rs",      "origin": "nexus/origins/formula-miner/main.hexa" },
+    "discovery-engine":      { "desc": "발견 엔진",                   "src": "src/cmd/analyze/discovery_engine.rs",   "origin": "nexus/origins/discovery-engine/main.hexa" },
+    "atlas-verifier":        { "desc": "상수 아틀라스 검증기",        "src": "src/cmd/analyze/atlas_verifier.rs",     "origin": "nexus/origins/atlas-verifier/main.hexa" },
+    "hypothesis-grader":     { "desc": "가설 채점기",                 "src": "src/cmd/analyze/hypothesis_grader.rs",  "origin": "nexus/origins/hypothesis-grader/main.hexa" },
+    "lens-coverage":         { "desc": "렌즈 커버리지",               "src": "src/cmd/analyze/lens_coverage.rs",      "origin": "nexus/origins/lens-coverage/main.hexa" },
+    "bt-extension-verifier": { "desc": "BT 확장 검증기",              "src": "src/cmd/analyze/bt_extension_verifier.rs","origin": "nexus/origins/bt-extension-verifier/main.hexa" },
+    "n6-discriminant":       { "desc": "n=6 판별기",                  "src": "src/cmd/analyze/n6_discriminant.rs",    "origin": "nexus/origins/n6-discriminant/main.hexa" },
+    "reality-map-grow":      { "desc": "현실 지도 성장",              "src": "src/cmd/analyze/reality_map_grow.rs",   "origin": "nexus/origins/reality-map-grow/main.hexa" },
+    "special-number-bf":     { "desc": "특수수 브루트포스",           "src": "src/cmd/analyze/special_number_bf.rs",  "origin": "nexus/origins/special-number-bf/main.hexa" },
+    "vendor-compare":        { "desc": "벤더 비교 계산기",            "src": "src/cmd/analyze/vendor_compare.rs",     "origin": "nexus/origins/vendor-compare-calc/main.hexa" },
+    "fusion-verify":         { "desc": "핵융합 검증기",               "src": "src/cmd/analyze/fusion_verify.rs",      "origin": "nexus/origins/fusion-verify/main.hexa" },
+    "dimension-perception":  { "desc": "차원 지각 BCI 웹 인터페이스", "src": "src/cmd/analyze/dimension_perception_ui.rs", "origin": "nexus/origins/dimension-perception/" }
   },
 
   "hexa": {
-    "rtl":                   { "desc": "HEXA RTL 설계/시뮬",          "src": "src/cmd/hexa/rtl.rs",                   "origin": "tools/hexa-rtl/" },
-    "ssh":                   { "desc": "원격 HEXA 실행 브리지",       "src": "src/cmd/hexa/ssh.rs",                   "origin": "tools/hexa-ssh/hexa_ssh.py" },
-    "sim":                   { "desc": "HEXA 시뮬/벤치 자산",         "src": "src/cmd/hexa/sim.rs",                   "origin": "tools/hexa-sim/" },
-    "ready-absorber":        { "desc": "~/Dev/ready/ 흡수기",         "src": "src/cmd/hexa/ready_absorber.rs",        "origin": "tools/ready-absorber/" }
+    "rtl":                   { "desc": "HEXA RTL 설계/시뮬",          "src": "src/cmd/hexa/rtl.rs",                   "origin": "nexus/origins/hexa-rtl/" },
+    "ssh":                   { "desc": "원격 HEXA 실행 브리지",       "src": "src/cmd/hexa/ssh.rs",                   "origin": "nexus/origins/hexa-ssh/hexa_ssh.py" },
+    "sim":                   { "desc": "HEXA 시뮬/벤치 자산",         "src": "src/cmd/hexa/sim.rs",                   "origin": "nexus/origins/hexa-sim/" },
+    "ready-absorber":        { "desc": "~/Dev/ready/ 흡수기",         "src": "src/cmd/hexa/ready_absorber.rs",        "origin": "nexus/origins/ready-absorber/" }
   },
 
   "workspace_members": {
     "nexus":                 { "desc": "메인 크레이트(dispatcher + 기존 NEXUS-6 전부)", "path": "." },
-    "nexus-dashboard":       { "desc": "Axum 웹 대시보드 (port 6600)",                "path": "crates/dashboard", "origin": "tools/nexus-dashboard/" }
+    "nexus-dashboard":       { "desc": "Axum 웹 대시보드 (port 6600)",                "path": "crates/dashboard", "origin": "nexus/origins/nexus-dashboard-legacy/" }
+  },
+
+  "legacy_py": {
+    "_doc": "HEXA 전환 대기 레거시 .py/.sh — nexus/origins/legacy/ 보관",
+    "files": [
+      "ai_algorithm_n6_analysis.py", "arch_optimizer.py", "auto-register-domain.sh",
+      "bt_master_verify.py", "bt26_verify.py", "bt34_35_verify.py",
+      "bt36_38_verify.py", "bt42_47_verify.py", "bt48_53_verify.py",
+      "chinchilla_n6_deep_verify.py", "kstar-barrier4-calc.py",
+      "llm_architecture_constants_verify.py", "llm_improvement_n6_analysis.py",
+      "n6_calculator.py", "optimizer_constants_n6_deep.py"
+    ]
   },
 
   "stats": {
     "absorbed_calc": 20,
     "absorbed_dse": 8,
-    "absorbed_analyze": 12,
+    "absorbed_analyze": 13,
     "absorbed_hexa": 4,
     "absorbed_workspace_crates": 2,
-    "total_absorbed": 46,
-    "note": "원본 tools/ 디렉터리에서 Cargo.toml 보유 크레이트는 nexus, nexus-dashboard 2개뿐. 나머지 40개는 HEXA-FIRST 규칙에 따라 .hexa 소스이며 nexus 바이너리가 hexa-lang 으로 위임 실행한다."
+    "total_absorbed": 47,
+    "legacy_py_count": 15,
+    "note": "tools/ → nexus/origins/ 물리 이동 완료. 원본 .hexa 소스는 nexus/origins/<name>/main.hexa, 레거시 .py/.sh는 nexus/origins/legacy/. nexus 바이너리가 hexa-lang 으로 위임 실행."
   }
 }

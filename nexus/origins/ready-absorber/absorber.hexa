@@ -1,0 +1,372 @@
+// ready-absorber: ~/Dev/ready/ 오염 버전에서 유실 정보 추출 → 본체 프로젝트로 라우팅
+//
+// 사용법:
+//   hexa absorber.hexa                    # 전체 스캔 (미완료 프로젝트부터)
+//   hexa absorber.hexa --project anima    # 특정 프로젝트만
+//   hexa absorber.hexa --dry-run          # 실제 전달 없이 발견만
+//   hexa absorber.hexa --status           # 현재 진행 상태
+//   hexa absorber.hexa --reset            # 상태 초기화
+
+let HOME = env("HOME")
+let READY_DIR = HOME + "/Dev/ready"
+let MAIN_DIR = HOME + "/Dev"
+let TOOL_DIR = dirname(__file__)
+let STATE_FILE = TOOL_DIR + "/state.json"
+let ROUTES_FILE = TOOL_DIR + "/routes.json"
+let FINDINGS_DIR = TOOL_DIR + "/findings"
+
+// 무시할 패턴
+let IGNORE_PARTS = [".git", "__pycache__", "node_modules", ".venv", "venv",
+    "target", ".DS_Store", ".mypy_cache", ".pytest_cache"]
+let BINARY_EXTS = [".png", ".jpg", ".jpeg", ".gif", ".ico", ".woff", ".woff2",
+    ".ttf", ".eot", ".mp3", ".mp4", ".wav", ".zip", ".tar",
+    ".gz", ".bz2", ".pdf", ".bin", ".exe", ".o", ".a"]
+
+// 고가치 파일 패턴 (우선 스캔)
+let HIGH_VALUE_PATTERNS = ["*.md", "*.hexa", "*.rs", "*.toml", "*.json",
+    "*.ts", "*.tsx", "*.js"]
+
+// JSON 로드/저장 헬퍼
+fn load_json(path) {
+    let text = read_file(path)
+    json_parse(text)
+}
+
+fn save_json(path, data) {
+    let text = json_stringify(data, 2)
+    write_file(path, text)
+}
+
+// 파일 무시 여부 판별
+fn is_ignored(path) {
+    for part in split(path, "/") {
+        for ign in IGNORE_PARTS {
+            if part == ign { return true }
+        }
+    }
+    let ext = file_ext(path)
+    for bext in BINARY_EXTS {
+        if ext == bext { return true }
+    }
+    false
+}
+
+// 파일 해시 (MD5)
+fn file_hash(path) {
+    md5_file(path)
+}
+
+// 안전한 파일 읽기 (최대 500줄)
+fn safe_read(path, max_lines) {
+    let lines = read_lines(path)
+    if len(lines) > max_lines {
+        join(lines[0..max_lines], "\n")
+    } else {
+        join(lines, "\n")
+    }
+}
+
+// 두 파일 간 차이 분석
+fn diff_files(ready_path, main_path) {
+    let ready_content = safe_read(ready_path, 500)
+    if ready_content == nil {
+        return {"type": "unreadable", "path": ready_path}
+    }
+    let main_content = safe_read(main_path, 500)
+    if main_content == nil {
+        // 본체에 없는 파일 = ready에만 존재
+        let sz = file_size(ready_path)
+        let nlines = len(split(ready_content, "\n"))
+        return {
+            "type": "only_in_ready",
+            "path": relative(ready_path, READY_DIR),
+            "size": sz,
+            "lines": nlines,
+            "preview": slice(ready_content, 0, 500)
+        }
+    }
+    if ready_content == main_content {
+        return {"type": "identical"}
+    }
+    // 차이 존재
+    let ready_lines = split(ready_content, "\n")
+    let main_lines = split(main_content, "\n")
+    let added = []
+    let removed = []
+    // 단순 차이 집계
+    for line in ready_lines {
+        if !contains(main_lines, line) { push(added, line) }
+    }
+    for line in main_lines {
+        if !contains(ready_lines, line) { push(removed, line) }
+    }
+    {
+        "type": "different",
+        "path": relative(ready_path, READY_DIR),
+        "added_lines": len(added),
+        "removed_lines": len(removed),
+        "added_preview": slice(added, 0, 20),
+        "removed_preview": slice(removed, 0, 20),
+        "diff_size": len(added) + len(removed)
+    }
+}
+
+// 발견을 분류하고 목적지 결정
+fn classify_finding(finding, project, routes) {
+    let path = finding["path"]
+    let content = (finding["preview"] or "") + join(finding["added_preview"] or [], " ")
+    let mut dest = lower(project)
+    let mut best_score = 0
+
+    for route_name in keys(routes["routes"] or {}) {
+        let route_info = routes["routes"][route_name]
+        let mut score = 0
+        for kw in route_info["keywords"] or [] {
+            if contains(lower(content), lower(kw)) or contains(lower(path), lower(kw)) {
+                score = score + 1
+            }
+        }
+        for pat in route_info["file_patterns"] or [] {
+            let pat_clean = replace(replace(pat, "**", ""), "*", "")
+            if pat_clean != "" and contains(path, pat_clean) {
+                score = score + 2
+            }
+        }
+        if score > best_score {
+            best_score = score
+            dest = lower(route_name)
+        }
+    }
+    finding["destination"] = dest
+    finding["confidence"] = min(best_score / 5.0, 1.0)
+    finding
+}
+
+// 단일 프로젝트 스캔: ready vs main 비교
+fn scan_project(project_name, routes, dry_run) {
+    let ready_root = READY_DIR + "/" + project_name
+    let main_candidates = [
+        MAIN_DIR + "/" + project_name,
+        MAIN_DIR + "/" + lower(project_name),
+        MAIN_DIR + "/" + replace(project_name, "-", "_")
+    ]
+    let mut main_root = nil
+    for c in main_candidates {
+        if dir_exists(c) { main_root = c; break }
+    }
+
+    if !dir_exists(ready_root) {
+        println("  [SKIP] " + project_name + ": ready 경로 없음")
+        return []
+    }
+
+    let mut findings = []
+    let mut scanned = 0
+    let mut skipped = 0
+
+    println("")
+    println("=" .repeat(60))
+    println("  SCANNING: " + project_name)
+    println("  ready: " + ready_root)
+    println("  main:  " + (main_root or "(없음 - 전체가 유실 데이터)"))
+    println("=" .repeat(60))
+
+    let all_files = glob_recursive(ready_root, "*")
+    for ready_path in all_files {
+        if !is_file(ready_path) { continue }
+        if is_ignored(ready_path) { skipped = skipped + 1; continue }
+        scanned = scanned + 1
+
+        let result = if main_root != nil {
+            let rel = relative(ready_path, ready_root)
+            let main_path = main_root + "/" + rel
+            diff_files(ready_path, main_path)
+        } else {
+            let content = safe_read(ready_path, 500)
+            {
+                "type": "only_in_ready",
+                "path": relative(ready_path, ready_root),
+                "size": file_size(ready_path),
+                "lines": len(split(content or "", "\n")),
+                "preview": slice(content or "", 0, 500)
+            }
+        }
+
+        if result["type"] == "only_in_ready" or result["type"] == "different" {
+            result["project"] = project_name
+            result["ready_path"] = ready_path
+            let finding = classify_finding(result, project_name, routes)
+            push(findings, finding)
+        }
+
+        if scanned % 1000 == 0 {
+            println("  ... " + to_string(scanned) + " 스캔, " + to_string(len(findings)) + " 발견")
+        }
+    }
+    println("  완료: " + to_string(scanned) + " 스캔, " + to_string(skipped) + " 건너뜀, " + to_string(len(findings)) + " 발견")
+    findings
+}
+
+// 발견 사항을 파일로 저장
+fn save_findings(project_name, findings) {
+    if len(findings) == 0 { return }
+    mkdir_p(FINDINGS_DIR)
+    let out_path = FINDINGS_DIR + "/" + lower(project_name) + ".json"
+
+    let mut by_type = {"only_in_ready": 0, "different": 0}
+    for f in findings {
+        if f["type"] == "only_in_ready" { by_type["only_in_ready"] = by_type["only_in_ready"] + 1 }
+        if f["type"] == "different" { by_type["different"] = by_type["different"] + 1 }
+    }
+
+    let mut dest_counts = {}
+    for f in findings {
+        let d = f["destination"] or "unknown"
+        dest_counts[d] = (dest_counts[d] or 0) + 1
+    }
+
+    save_json(out_path, {
+        "project": project_name,
+        "timestamp": now_iso(),
+        "count": len(findings),
+        "by_type": by_type,
+        "by_destination": dest_counts,
+        "findings": findings
+    })
+    println("  저장: " + out_path + " (" + to_string(len(findings)) + " 발견)")
+    for dest in keys(dest_counts) {
+        println("    -> " + dest + ": " + to_string(dest_counts[dest]) + " 항목")
+    }
+}
+
+// 전체 요약 출력
+fn print_summary(all_findings) {
+    println("")
+    println("=" .repeat(60))
+    println("  ABSORBER 요약")
+    println("=" .repeat(60))
+
+    let mut total = 0
+    let mut dest_totals = {}
+    for proj in keys(all_findings) {
+        let findings = all_findings[proj]
+        let count = len(findings)
+        total = total + count
+        println("  " + proj + ": " + to_string(count) + " 발견")
+        for f in findings {
+            let d = f["destination"] or "unknown"
+            dest_totals[d] = (dest_totals[d] or 0) + 1
+        }
+    }
+    println("")
+    println("  합계: " + to_string(total) + " 발견, " + to_string(len(keys(all_findings))) + " 프로젝트")
+    println("")
+    println("  라우팅 목적지:")
+    for dest in keys(dest_totals) {
+        println("    " + dest + ": " + to_string(dest_totals[dest]))
+    }
+}
+
+// 상태 업데이트
+fn update_state(state, project, status, findings_count) {
+    state["current_project"] = if status == "scanning" { project } else { nil }
+    state["status"] = status
+    state["last_run"] = now_iso()
+    if status == "done" {
+        if !contains(state["completed"], project) {
+            push(state["completed"], project)
+        }
+        state["findings_count"] = (state["findings_count"] or 0) + findings_count
+    }
+    save_json(STATE_FILE, state)
+}
+
+// 현재 상태 출력
+fn show_status() {
+    let state = load_json(STATE_FILE)
+    println("")
+    println("  상태: " + state["status"])
+    println("  마지막 실행: " + (state["last_run"] or "없음"))
+    println("  완료: " + to_string(len(state["completed"])) + "/" + to_string(len(state["scan_order"])))
+    println("  총 발견: " + to_string(state["findings_count"] or 0))
+    println("  라우팅 완료: " + to_string(state["routed_count"] or 0))
+
+    let remaining = []
+    for p in state["scan_order"] {
+        if !contains(state["completed"], p) { push(remaining, p) }
+    }
+    if len(remaining) > 0 {
+        println("")
+        println("  남은 프로젝트 (" + to_string(len(remaining)) + "):")
+        for p in remaining { println("    - " + p) }
+    } else {
+        println("")
+        println("  전체 완료!")
+    }
+}
+
+// 메인 실행
+fn main() {
+    let args = parse_args()
+
+    if args["status"] or args["s"] {
+        show_status()
+        return
+    }
+
+    if args["reset"] {
+        let state = load_json(STATE_FILE)
+        state["completed"] = []
+        state["findings_count"] = 0
+        state["routed_count"] = 0
+        state["errors"] = []
+        state["status"] = "idle"
+        state["current_project"] = nil
+        save_json(STATE_FILE, state)
+        println("  상태 초기화 완료.")
+        return
+    }
+
+    let state = load_json(STATE_FILE)
+    let routes = load_json(ROUTES_FILE)
+    mkdir_p(FINDINGS_DIR)
+
+    let dry_run = args["dry-run"] or args["n"] or false
+    let targets = if args["project"] or args["p"] {
+        [args["project"] or args["p"]]
+    } else {
+        let mut t = []
+        for p in state["scan_order"] {
+            if !contains(state["completed"], p) { push(t, p) }
+        }
+        t
+    }
+
+    if len(targets) == 0 {
+        println("  모든 프로젝트 스캔 완료. --reset 으로 재시작 가능.")
+        return
+    }
+
+    println("")
+    println("  Ready Absorber -- " + to_string(len(targets)) + " 프로젝트 스캔")
+    println("  모드: " + if dry_run { "dry-run" } else { "전체" })
+    println("  소스: " + READY_DIR)
+
+    let mut all_findings = {}
+    state["status"] = "running"
+    save_json(STATE_FILE, state)
+
+    for project in targets {
+        update_state(state, project, "scanning", 0)
+        let findings = scan_project(project, routes, dry_run)
+        save_findings(project, findings)
+        all_findings[project] = findings
+        update_state(state, project, "done", len(findings))
+    }
+
+    state["status"] = "complete"
+    save_json(STATE_FILE, state)
+    print_summary(all_findings)
+}
+
+main()

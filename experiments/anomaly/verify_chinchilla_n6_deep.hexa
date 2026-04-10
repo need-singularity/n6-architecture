@@ -1,0 +1,13 @@
+// chinchilla_n6_deep_verify.py → .hexa 포팅 스텁
+// 원본 경로: tools/chinchilla_n6_deep_verify.py
+// 포팅 상태: STUB (원본 928 줄)
+// 원본 요약: Chinchilla 스케일링 법칙 vs n=6 산술 — 정밀 검증 계산기
+// 핵심: τ·sopfr=20 토큰/파라미터 비율, C≈6ND FLOPs 공식
+// 출처: Hoffmann 2022, Kaplan 2020, LLaMA, Mistral, DeepSeek, GPT-3, Pythia
+// 본격 포팅: nexus verify --hexa chinchilla-deep 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: chinchilla_n6_deep_verify.py (HEXA 포팅 대기)")
+    println("Chinchilla 스케일링: τ(6)·sopfr(6)=20 정밀 검증")
+}

@@ -1,0 +1,211 @@
+// CHIPDESIGN-001~020: AI 칩 설계 x 완전수 6 분석
+// n=6 산술과 AI 칩 설계의 수치적 관계 검증
+// 각 가설에 대해: 정확성 확인 + 등급 + Texas Sharpshooter 검증
+
+let N = 6
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let GZ_CENTER = 0.3679     // 1/e
+let GZ_UPPER = 0.5
+let GZ_LOWER = 0.2123      // 0.5 - ln(4/3)
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+// 결과 저장
+let mut r_ids = []
+let mut r_titles = []
+let mut r_grades = []
+let mut r_notes = []
+
+fn record(id, title, grade, note) {
+    push(r_ids, id)
+    push(r_titles, title)
+    push(r_grades, grade)
+    push(r_notes, note)
+}
+
+fn run_all() {
+    println("=" .repeat(72))
+    println("AI 칩 설계 x 완전수 6 분석 (20개 가설)")
+    println("n=6 상수: sigma=12, tau=4, phi=2, sopfr=5")
+    println("=" .repeat(72))
+    println("")
+
+    // CHIP-001: TPU 시스톨릭 배열
+    println("CHIP-001: TPU 시스톨릭 배열 차원")
+    println("  TPU v1: 256x256 = 2^8, TPU v2+: 128x128 = 2^7")
+    println("  sigma(6)^2 = 144 -> 어떤 TPU도 144 사용 안 함")
+    println("  칩 차원은 2의 거듭제곱. n=6 연결 없음.")
+    record("CHIP-001", "TPU 시스톨릭 = sigma^2", "WHITE", "칩 차원은 2의 거듭제곱")
+
+    // CHIP-002: 텐서 코어 4x4 = tau(6)
+    println("")
+    println("CHIP-002: 텐서 코어 4x4 = tau(6)")
+    println("  Volta 텐서 코어: 4x4x4 FP16")
+    println("  4 = 2^2 = 최소 실용 타일 (SIMD 효율)")
+    println("  Texas: 칩 차원 {2,4,8,16,...} 에서 P(n=6 상수) = 44%")
+    record("CHIP-002", "텐서 코어 4x4 = tau(6)", "WHITE (정확하지만 사소)", "4=2^2, 이진 타일")
+
+    // CHIP-003: 메모리 계층 = tau(6)
+    println("")
+    println("CHIP-003: 메모리 계층 수준 = tau(6) = 4")
+    println("  GPU: Reg/L1/L2/HBM = 4 (세는 방법에 따라 3~6)")
+    println("  주관적 카운팅 문제")
+    record("CHIP-003", "메모리 계층 = tau(6)", "WHITE", "주관적 카운팅")
+
+    // CHIP-004: 양자화 비트폭 비율
+    println("")
+    println("CHIP-004: 양자화 비트폭 비율")
+    println("  모든 비트폭은 2의 거듭제곱 -> 비율도 2의 거듭제곱")
+    println("  phi(6)=2, tau(6)=4 히트 보장. 정보량 제로.")
+    record("CHIP-004", "비트폭 비율 = phi/tau", "WHITE (ad-hoc)", "2의 거듭제곱 도메인")
+
+    // CHIP-005: HBM 적층 = sigma(6)
+    println("")
+    println("CHIP-005: HBM3 레이어 = sigma(6) = 12")
+    println("  HBM: 4->8->12->16 (4다이 단위 증가)")
+    println("  12 = 3스택 x 4다이. 수론이 아닌 제조 증분.")
+    record("CHIP-005", "HBM3 12레이어 = sigma(6)", "WHITE", "제조 증분 4->8->12->16")
+
+    // CHIP-006: NoC 메시
+    println("")
+    println("CHIP-006: NoC 메시 토폴로지")
+    println("  2의 거듭제곱 차원 사용 (이진 주소). n=6 연결 없음.")
+    record("CHIP-006", "NoC 메시 = n=6?", "WHITE", "2의 거듭제곱 차원")
+
+    // CHIP-007: 칩렛 수
+    println("")
+    println("CHIP-007: 최적 칩렛 수")
+    println("  AMD EPYC: 12 CCD (레티클 한계/비용). 다른 칩: 2,8,47")
+    println("  설계마다 다름. 패턴 없음.")
+    record("CHIP-007", "칩렛 수 = sigma(6)", "WHITE", "설계마다 다름")
+
+    // CHIP-008: 육각형 웨이퍼 타일링
+    println("")
+    println("CHIP-008: 육각형 웨이퍼 타일링 (6면)")
+    println("  벌집 추측 (기하학). 수론이 아닌 유클리드 기하.")
+    println("  육각형 효율: pi/(2*sqrt(3)) = 90.69%")
+    record("CHIP-008", "육각형 타일링 6면 = P1", "GREEN (기하학적)", "벌집 추측, 수론 아님")
+
+    // CHIP-009: FP16 지수 비트 = sopfr(6) = 5
+    println("")
+    println("CHIP-009: FP16 지수 비트 = sopfr(6) = 5")
+    println("  IEEE 754 범위/정밀도 트레이드오프. {3-8} 중 P(=5) = 17%")
+    record("CHIP-009", "FP16 지수 = sopfr(6)", "WHITE", "IEEE 트레이드오프")
+
+    // CHIP-010: 파이프라인 스테이지 = 24?
+    println("")
+    println("CHIP-010: 파이프라인 스테이지 = sigma*phi = 24")
+    println("  실제: ARM=13, Skylake=14, Ampere~20, P4=31. 24인 것 없음.")
+    record("CHIP-010", "파이프라인 = 24", "WHITE", "표준 파이프라인에 24 없음")
+
+    // CHIP-011: 캐시 라인 = 2^P1 = 64
+    println("")
+    println("CHIP-011: 캐시 라인 64B = 2^P1 = 2^6")
+    println("  64B = 공간 지역성 vs 캐시 활용 균형점")
+    println("  지수 6 = P1 은 우연. Texas: {16,32,64,128}에서 P(지수=6) = 25%")
+    record("CHIP-011", "캐시 라인 = 2^P1", "WHITE", "공학 최적점, 우연")
+
+    // CHIP-012: 워프 스케줄러 = tau(6)
+    println("")
+    println("CHIP-012: 워프 스케줄러/SM = tau(6) = 4")
+    println("  4 = 2^2, 표준 이진 세분화.")
+    record("CHIP-012", "워프 스케줄러 = tau(6)", "WHITE", "4=2^2, 이진 세분화")
+
+    // CHIP-013: 어텐션 헤드
+    println("")
+    println("CHIP-013: LLM 어텐션 헤드 = sigma(6) 배수?")
+    println("  GPT-2: 12, BERT: 12 (= sigma). 나머지: 16,20,25,32,64,96")
+    println("  2/9만 배수. 대부분 d_model/d_head 로 결정.")
+    record("CHIP-013", "어텐션 헤드 = sigma(6) 배수", "WHITE", "2/9만 배수")
+
+    // CHIP-014: 뉴로모픽 스파이크 임계 ~ 1/e
+    println("")
+    println("CHIP-014: 뉴로모픽 스파이크 감쇄 = 1/e = GZ 중심")
+    println("  범용 지수 감쇄. GZ 중심은 1/e 로 정의됨 (동어반복).")
+    record("CHIP-014", "스파이크 감쇄 = 1/e", "WHITE", "동어반복: GZ 중심 = 1/e")
+
+    // CHIP-015: IMC 정밀도
+    println("")
+    println("CHIP-015: IMC 정밀도 = tau(6) = 4 레벨")
+    println("  4 = 2^2, 최소 다중 레벨 옵션. 수론 무관.")
+    record("CHIP-015", "IMC 레벨 = tau(6)", "WHITE (ad-hoc)", "4=2^2, 최소 다중 레벨")
+
+    // CHIP-016: UCIe 범프 피치 36um = n^2
+    println("")
+    println("CHIP-016: UCIe 범프 피치 36um = n^2 = 36")
+    println("  표준 피치 3개 중 하나 (25, 36, 55). 제조 기반.")
+    record("CHIP-016", "UCIe 36um = n^2", "WHITE", "제조 기반, 3개 중 1개")
+
+    // CHIP-017: 클럭 트리
+    println("")
+    println("CHIP-017: 클럭 트리 토폴로지")
+    println("  항상 이진 (H-tree). 6-ary 아님. n=6 연결 없음.")
+    record("CHIP-017", "클럭 트리", "WHITE", "이진. n=6 연결 없음")
+
+    // CHIP-018: VRM 위상 수
+    println("")
+    println("CHIP-018: VRM 위상 수 = P1 배수")
+    println("  6, 12, 24 위상 사용 -> 3상 AC 전력 기반 (3상 x 2^k)")
+    println("  전기공학, 수론 아님.")
+    record("CHIP-018", "VRM 위상 = P1 배수", "WHITE", "3상 AC 전력 기반")
+
+    // CHIP-019: 레티클 한계
+    println("")
+    println("CHIP-019: 레티클 한계 치수")
+    println("  ASML: 26mm x 33mm = 858mm^2. 858/6 = 143 (정수 아님)")
+    println("  n=6 관계 없음.")
+    record("CHIP-019", "레티클 치수 vs n=6", "WHITE", "연결 없음")
+
+    // CHIP-020: Dennard 스케일링
+    println("")
+    println("CHIP-020: 1/sqrt(P1) = 0.408 in GZ?")
+    println("  GZ에 들어가지만 인위적 연결. 칩 설계 매개변수 아님.")
+    record("CHIP-020", "1/sqrt(P1) in GZ", "WHITE (ad-hoc)", "인위적 연결")
+}
+
+fn print_summary() {
+    println("")
+    println("=" .repeat(72))
+    println("전체 요약")
+    println("=" .repeat(72))
+    println("")
+
+    // 등급 집계
+    let mut green = 0
+    let mut white = 0
+    let mut i = 0
+    while i < len(r_grades) {
+        if contains(r_grades[i], "GREEN") { green = green + 1 }
+        else { white = white + 1 }
+        i = i + 1
+    }
+
+    println(pad_r("ID", 12) + " " + pad_r("등급", 30) + " " + "제목")
+    println("-" .repeat(72))
+    let mut j = 0
+    while j < len(r_ids) {
+        println(pad_r(r_ids[j], 12) + " " + pad_r(r_grades[j], 30) + " " + r_titles[j])
+        j = j + 1
+    }
+
+    println("")
+    println("  GREEN (구조적): " + to_string(green) + " / " + to_string(len(r_ids)))
+    println("  WHITE (우연/사소): " + to_string(white) + " / " + to_string(len(r_ids)))
+    println("")
+    println("  정직한 평가:")
+    println("  - 칩 설계는 2의 거듭제곱이 지배 (이진 논리)")
+    println("  - n=6 상수 {2, 4}는 {2^1, 2^2}와 혼동됨")
+    println("  - 6의 배수는 3상 전력이 표준이라 나타남")
+    println("  - 나머지 매칭 (5, 36)은 작은 풀 (p > 0.15)")
+    println("  - 유일한 비사소 연결: 육각형 타일링 (기하학, 수론 아님)")
+}
+
+run_all()
+print_summary()

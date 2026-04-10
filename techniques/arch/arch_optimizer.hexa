@@ -1,0 +1,12 @@
+// arch_optimizer.py → .hexa 포팅 스텁
+// 원본 경로: tools/arch_optimizer.py
+// 포팅 상태: STUB (원본 170 줄)
+// 원본 요약: 아키텍처 최적화기 — 주어진 제약 조건에서 n=6 최적 설정 탐색
+// 핵심 기능: HCN 차원, σ 약수 헤드, 4/3 FFN 비율, MoE 전문가 수
+// 본격 포팅: nexus verify --hexa arch-optimizer 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: arch_optimizer.py (HEXA 포팅 대기)")
+    println("기능: 파라미터/FLOPs 제약 → n=6 최적 아키텍처 설정 탐색")
+}

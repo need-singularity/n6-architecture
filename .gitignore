@@ -48,6 +48,9 @@ tools/tokamak-shape/tokamak-shape
 tools/universal-dse/universal-dse
 tools/vendor-compare-calc/vendor-compare-calc
 tools/nexus/target/
+nexus/origins/**/target/
+**/target/debug/
+**/target/release/
 tools/nexus/nexus
 tools/nexus/scripts/growth_log.jsonl
 .growth/

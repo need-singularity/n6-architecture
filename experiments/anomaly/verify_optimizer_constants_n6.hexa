@@ -1,0 +1,13 @@
+// optimizer_constants_n6_deep.py → .hexa 포팅 스텁
+// 원본 경로: tools/optimizer_constants_n6_deep.py
+// 포팅 상태: STUB (원본 949 줄)
+// 원본 요약: 옵티마이저 하이퍼파라미터 vs n=6 산술 정밀 분석
+// 핵심: Adam/AdamW/SGD/LAMB/Lion/Sophia 등 15개 옵티마이저 기본값 검증
+// 황금대역: center=1/e, upper=1/2, lower=1/2-ln(4/3), width=ln(4/3)
+// 본격 포팅: nexus verify --hexa optimizer-constants 으로 추진 예정
+// 원본 로직은 git history 에 보존됨
+
+fn main() {
+    println("STUB: optimizer_constants_n6_deep.py (HEXA 포팅 대기)")
+    println("15개 옵티마이저: 기본값이 n=6 산술 구조를 인코딩하는지 정밀 검증")
+}

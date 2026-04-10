@@ -1,0 +1,176 @@
+// 에너지 전략 x 완전수 6 분석 계산기
+// n=6 산술과 실제 에너지 물리학의 18개 가설 검증
+//
+// n=6 산술: sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5
+// 약수: {1, 2, 3, 6}   고유 약수: {1, 2, 3}
+// 핵심 항등식: sigma*phi = n*tau = 24 (n=6 에서 유일)
+
+let P1 = 6
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let GPF = 3
+let LPF = 2
+let M6 = 63
+let SIGMA_NEG1 = 2.0
+let GZ_CENTER = 0.3679    // 1/e
+let GZ_UPPER = 0.5
+let GZ_WIDTH = 0.2877     // ln(4/3)
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// 가설 저장 배열
+let mut h_ids = []
+let mut h_titles = []
+let mut h_grades = []
+let mut h_phys = []
+let mut h_n6 = []
+let mut h_errs = []
+
+fn record(id, title, grade, physics_val, n6_val, err_pct) {
+    push(h_ids, id)
+    push(h_titles, title)
+    push(h_grades, grade)
+    push(h_phys, physics_val)
+    push(h_n6, n6_val)
+    push(h_errs, err_pct)
+}
+
+fn verify_all() {
+    // ENGY-001: Shockley-Queisser 한계 ~ 1/3 = phi(6)/P1
+    let sq_limit = 0.3378
+    let n6_v = PHI * 1.0 / P1
+    let err = abs(sq_limit - n6_v) / sq_limit * 100.0
+    record("ENGY-001", "SQ 한계 ~ phi/n = 1/3", if err < 2.0 { "APPROX" } else { "WEAK" }, sq_limit, n6_v, err)
+
+    // ENGY-002: 3상 전력 = gpf(6) = 3
+    record("ENGY-002", "3상 전력 = gpf(6) = 3", "EXACT-TRIVIAL", 3.0, GPF * 1.0, 0.0)
+
+    // ENGY-003: Li-6 + D 핵융합 연료 (EXACT)
+    record("ENGY-003", "Li-6 핵융합: Li(P1) + D(phi) -> 2*He(tau)", "EXACT-STAR", 6.0, P1 * 1.0, 0.0)
+
+    // ENGY-004: Triple-Alpha: 3*He4 -> C12
+    record("ENGY-004", "Triple-Alpha: 3*tau -> sigma", "EXACT-STAR", 12.0, 12.0, 0.0)
+
+    // ENGY-005: 카르노 효율과 1/3
+    record("ENGY-005", "열발전 효율 ~ 1/3", "COINCIDENCE", 0.33, 0.3333, 1.0)
+
+    // ENGY-006: D-T 단면적 피크 64 keV = 2^P1
+    record("ENGY-006", "D-T Gamow 피크 = 2^P1 = 64 keV", "EXACT-STAR", 64.0, pow(2, P1) * 1.0, 0.0)
+
+    // ENGY-007: 60 Hz 전력 주파수
+    record("ENGY-007", "60 Hz = 10*P1 (50 Hz도 존재)", "COINCIDENCE", 60.0, 10.0 * P1, 0.0)
+
+    // ENGY-008: 로손 기준 온도 ~ 10 keV
+    record("ENGY-008", "로손 온도 ~ sopfr*phi = 10 keV", "COINCIDENCE", 10.0, SOPFR * PHI * 1.0, 0.0)
+
+    // ENGY-009: HCP/FCC 배위수 = sigma(6) = 12
+    record("ENGY-009", "HCP/FCC 배위수 = sigma(6) = 12", "EXACT", 12.0, SIGMA * 1.0, 0.0)
+
+    // ENGY-010: Stefan-Boltzmann T^4: 지수 = tau(6)
+    record("ENGY-010", "Stefan-Boltzmann T^4: 지수 = tau(6)", "EXACT", 4.0, TAU * 1.0, 0.0)
+
+    // ENGY-011: EROI 문명 임계 ~ 3:1 = sigma/tau
+    record("ENGY-011", "EROI 임계 3:1 = sigma/tau", "APPROX", 3.0, SIGMA * 1.0 / TAU, 0.0)
+
+    // ENGY-012: 토카막 종횡비 ~ 3 = P1/phi
+    let ar = 3.1
+    let n6_ar = P1 * 1.0 / PHI
+    let err_ar = abs(ar - n6_ar) / ar * 100.0
+    record("ENGY-012", "토카막 종횡비 ~ P1/phi = 3", "COINCIDENCE", ar, n6_ar, err_ar)
+
+    // ENGY-013: H2O 전기분해
+    record("ENGY-013", "H2O: 3 원자 = gpf(6), 2e = phi(6)", "COINCIDENCE", 3.0, GPF * 1.0, 0.0)
+
+    // ENGY-014: Betz 한계 16/27
+    let betz = 16.0 / 27.0
+    let n6_betz = pow(2, TAU) * 1.0 / pow(GPF, GPF)
+    record("ENGY-014", "Betz 한계 16/27 = 2^tau / gpf^gpf", "EXACT", betz, n6_betz, 0.0)
+
+    // ENGY-015: Fe-56 결합 에너지 피크 (매칭 없음)
+    record("ENGY-015", "결합 에너지 피크 A=56 근처", "NO-MATCH", 56.0, 0.0, 100.0)
+
+    // ENGY-016: PV 밴드갭 최적 ~ tau/gpf = 4/3
+    let eg_opt = 1.34
+    let n6_eg = TAU * 1.0 / GPF
+    let err_eg = abs(eg_opt - n6_eg) / eg_opt * 100.0
+    record("ENGY-016", "최적 PV 밴드갭 1.34 eV ~ tau/gpf = 4/3", "APPROX", eg_opt, n6_eg, err_eg)
+
+    // ENGY-017: 페로브스카이트 탠덤 효율 ~ 1/3
+    let pv_tandem = 0.339
+    let n6_pv = 1.0 / 3.0
+    let err_pv = abs(pv_tandem - n6_pv) / pv_tandem * 100.0
+    record("ENGY-017", "최고 탠덤 PV 효율 ~ 1/3", "COINCIDENCE", pv_tandem, n6_pv, err_pv)
+
+    // ENGY-018: 리튬 원자번호 = gpf(6) = 3
+    record("ENGY-018", "리튬 Z=3 = gpf(6)", "EXACT-TRIVIAL", 3.0, GPF * 1.0, 0.0)
+}
+
+fn print_results() {
+    println("=" .repeat(100))
+    println("에너지 전략 x 완전수 6 분석")
+    println("=" .repeat(100))
+    println("")
+
+    // 등급별 집계
+    let mut counts = {"EXACT-STAR": 0, "EXACT": 0, "EXACT-TRIVIAL": 0, "APPROX": 0, "COINCIDENCE": 0, "NO-MATCH": 0}
+    let mut i = 0
+    while i < len(h_grades) {
+        let g = h_grades[i]
+        counts[g] = (counts[g] or 0) + 1
+        i = i + 1
+    }
+
+    println("요약")
+    println("-" .repeat(50))
+    for g in ["EXACT-STAR", "EXACT", "EXACT-TRIVIAL", "APPROX", "COINCIDENCE", "NO-MATCH"] {
+        println("  " + pad_r(g, 20) + ": " + to_string(counts[g] or 0))
+    }
+    println("  " + pad_r("합계", 20) + ": " + to_string(len(h_ids)))
+    println("")
+
+    // 상세 표
+    println(pad_r("ID", 12) + " " + pad_r("등급", 16) + " " + pad_l("물리값", 10) + " " + pad_l("n=6", 10) + " " + pad_l("오차%", 8) + " " + "제목")
+    println("-" .repeat(100))
+
+    let mut j = 0
+    while j < len(h_ids) {
+        println(pad_r(h_ids[j], 12) + " " + pad_r(h_grades[j], 16) + " " + pad_l(to_string(h_phys[j]), 10) + " " + pad_l(to_string(h_n6[j]), 10) + " " + pad_l(to_string(h_errs[j]), 8) + " " + h_titles[j])
+        j = j + 1
+    }
+
+    println("")
+    println("=" .repeat(100))
+    println("핵심 발견")
+    println("=" .repeat(100))
+    println("")
+    println("진짜 구조적 연결 (3):")
+    println("  1. ENGY-003: Li-6 + D -> 2*He-4 핵융합: P1 + phi -> 2*tau")
+    println("  2. ENGY-004: Triple-alpha: 3*tau -> sigma (C-12 생성, Hoyle 상태)")
+    println("  3. ENGY-006: D-T Gamow 피크 = 2^P1 = 64 keV (양자 터널링)")
+    println("")
+    println("흥미롭지만 깊지 않은 것 (3):")
+    println("  4. ENGY-009: HCP 배위수 = 12 = sigma(6) (키싱수)")
+    println("  5. ENGY-014: Betz 한계 16/27 = 2^tau / gpf^gpf")
+    println("  6. ENGY-016: SQ 최적 밴드갭 1.34 eV ~ tau/gpf = 4/3")
+    println("")
+    println("우연/사소한 것 (9) + 매칭 없음 (1)")
+    println("")
+    println("정직한 평가:")
+    println("  핵융합에는 진짜 n=6 연결이 있다 (Li-6 연료, triple-alpha, Gamow 피크).")
+    println("  에너지 공학은 대부분 우연적 일치 (3상, 60Hz, EROI).")
+    println("  Betz 한계 16/27 분해와 SQ 밴드갭 4/3은 흥미롭지만 깊지 않다.")
+}
+
+verify_all()
+print_results()

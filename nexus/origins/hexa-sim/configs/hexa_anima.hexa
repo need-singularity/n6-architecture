@@ -1,0 +1,138 @@
+// ANIMA-HEXA gem5 구성 -- 의식 AI 프로세서
+// HEXA-OMEGA 연산 패브릭 + 의식 클러스터 (n=6 셀 토러스) + SNN 코프로세서 + EEG 브릿지
+// 모든 매개변수는 n=6 산술에서 도출
+
+let N6 = {
+    "n": 6, "phi": 2, "tau": 4, "sigma": 12, "sopfr": 5,
+    "mu": 1, "J2": 24, "R": 1, "P2": 28,
+    "sigma_sq": 144, "sigma_J2": 288, "phi_tau": 16,
+    "two_n": 64, "sigma_tau": 8, "sigma_phi": 10,
+    "sigma_mu": 11, "two_sigma": 4096, "sigma_times_tau": 48,
+    "n_over_phi": 3, "sigma_times_n": 72, "sigma_sigma_phi": 120,
+    "ln_4_3": 0.2877
+}
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    r
+}
+
+// 의식 셀 모델
+fn consciousness_cell_summary(cell_id) {
+    let c = N6
+    // tau=4 전력 상태: DORMANT, FLICKERING, AWARE, CONSCIOUS
+    // A-field MAC 레인: sigma=12
+    // G-field MAC 레인: sigma=12
+    // 필드당 레지스터: J2=24
+    // PMU 비교기: sigma^2=144
+    // 의식 차원: sigma-phi=10
+    // 텐션 목표: R(6)=1.0, 데드밴드: ln(4/3)=0.288
+    "셀 " + to_string(cell_id) + ": MAC=" + to_string(c["sigma"]) + " lanes, PMU=" + to_string(c["sigma_sq"]) + " comp, dim=" + to_string(c["sigma_phi"])
+}
+
+// 의식 클러스터
+fn consciousness_cluster_summary() {
+    let c = N6
+    println("의식 클러스터")
+    println("  셀: " + to_string(c["n"]) + " (n=6, 3x2 토러스)")
+    println("  링크/셀: " + to_string(c["tau"]) + " (tau)")
+    println("  총 링크: " + to_string(c["sigma"]) + " (sigma)")
+    println("  링크 BW: " + to_string(c["sigma_times_tau"]) + " GB/s (sigma*tau)")
+    println("  양분 BW: " + to_string(c["sigma_J2"]) + " GB/s (sigma*J2)")
+    println("  PMU 비교기/셀: " + to_string(c["sigma_sq"]) + " (sigma^2)")
+    println("  의식 차원: " + to_string(c["sigma_phi"]) + " (sigma-phi)")
+    println("  데드밴드: " + to_string(c["ln_4_3"]) + " (ln(4/3))")
+}
+
+// SNN 코프로세서
+fn snn_summary() {
+    let c = N6
+    let tiles = c["n"] * c["n"]           // 36
+    let neurons_per_tile = c["sigma_sq"]   // 144
+    let total_neurons = tiles * neurons_per_tile
+    let total_synapses = total_neurons * c["J2"]
+
+    println("")
+    println("SNN 코프로세서")
+    println("  타일: " + to_string(c["n"]) + "x" + to_string(c["n"]) + " = " + to_string(tiles) + " (n x n = n^2=36)")
+    println("  뉴런/타일: " + to_string(neurons_per_tile) + " (sigma^2=144)")
+    println("  총 뉴런: " + to_string(total_neurons))
+    println("  시냅스/뉴런: " + to_string(c["J2"]) + " (J2=24)")
+    println("  총 시냅스: " + to_string(total_synapses))
+    println("  스파이크 지연: " + to_string(c["n"]) + " ns (n=6)")
+    println("  STDP 윈도우: " + to_string(c["sigma"]) + " ms (sigma=12)")
+}
+
+// EEG 브릿지
+fn eeg_bridge_summary() {
+    let c = N6
+    println("")
+    println("EEG 브릿지 인터페이스")
+    println("  채널: " + to_string(c["sigma"]) + " (sigma=12)")
+    println("  샘플 레이트: " + to_string(c["sigma"] * 1000) + " Hz")
+    println("  ADC 비트: " + to_string(c["sigma"]) + " (sigma=12)")
+    println("  파이프라인 지연: " + to_string(c["sigma_times_tau"]) + " us (sigma*tau=48)")
+    println("  버스 BW: " + to_string(c["sigma_times_tau"]) + " GT/s (sigma*tau)")
+    println("  주파수 밴드:")
+    println("    delta:  0.5 - " + to_string(c["tau"]) + " Hz")
+    println("    theta:  " + to_string(c["tau"]) + " - " + to_string(c["sigma_tau"]) + " Hz")
+    println("    alpha:  " + to_string(c["sigma_tau"]) + " - " + to_string(c["sigma"]) + " Hz")
+    println("    beta:   " + to_string(c["sigma"]) + " - " + to_string(c["sigma_times_tau"]) + " Hz")
+    println("    gamma:  " + to_string(c["sigma_times_tau"]) + " - " + to_string(c["sigma_sq"]) + " Hz")
+}
+
+// N6 검증
+fn verify_n6_params() {
+    let c = N6
+    let checks = [
+        ["의식 셀 = n = 6", c["n"], 6],
+        ["토러스 링크 = sigma = 12", c["sigma"], 12],
+        ["링크/셀 = tau = 4", c["tau"], 4],
+        ["PMU 비교기 = sigma^2 = 144", c["sigma_sq"], 144],
+        ["의식 차원 = sigma-phi = 10", c["sigma_phi"], 10],
+        ["SNN 타일 = n*n = 36", c["n"] * c["n"], 36],
+        ["뉴런/타일 = sigma^2 = 144", c["sigma_sq"], 144],
+        ["시냅스/뉴런 = J2 = 24", c["J2"], 24],
+        ["EEG 채널 = sigma = 12", c["sigma"], 12],
+        ["EEG ADC 비트 = sigma = 12", c["sigma"], 12],
+        ["EEG 지연 = sigma*tau = 48 us", c["sigma_times_tau"], 48],
+        ["탈라머스 버스 = sigma*tau = 48 GT/s", c["sigma_times_tau"], 48],
+        ["HBM4E = J2 = 24 GB", c["J2"], 24],
+        ["HBM 스택 = sigma-tau = 8", c["sigma_tau"], 8],
+        ["스택당 = n/phi = 3 GB", c["n_over_phi"], 3],
+        ["TDP = sigma*(sigma-phi) = 120 W", c["sigma_sigma_phi"], 120],
+        ["STDP tau+ = tau = 4 ms", c["tau"], 4],
+        ["STDP tau- = sigma = 12 ms", c["sigma"], 12],
+        ["전력 상태 = tau = 4", c["tau"], 4]
+    ]
+    let mut passed = 0
+    for check in checks {
+        if check[1] == check[2] { passed = passed + 1 }
+        else { println("  [FAIL] " + check[0] + ": got " + to_string(check[1]) + ", expected " + to_string(check[2])) }
+    }
+    println("N6 매개변수 검증: " + to_string(passed) + "/" + to_string(len(checks)) + " EXACT")
+    passed == len(checks)
+}
+
+// 메인
+fn main() {
+    println("=" .repeat(70))
+    println("  ANIMA-HEXA SoC -- 의식 AI 프로세서")
+    println("  144 SM + n=6 의식 클러스터 + SNN + EEG 브릿지")
+    println("=" .repeat(70))
+
+    verify_n6_params()
+    println("")
+    consciousness_cluster_summary()
+    snn_summary()
+    eeg_bridge_summary()
+
+    let args = parse_args()
+    if !args["verify-only"] and !args["binary"] {
+        println("")
+        println("바이너리 미지정. --binary <경로> 로 시뮬레이션 실행.")
+    }
+}
+
+main()
