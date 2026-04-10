@@ -12,7 +12,6 @@
 | 프로젝트 설정 | `shared/project_config.json` | CLI/설계문서 구조/논문관리/진화규칙/Rust 도구 |
 | 시스템 코어 | `shared/core.json` | 시스템맵 + 14종 명령어 |
 | 수렴 | `shared/convergence/n6-architecture.json` | CDO 수렴 상태 |
-| 할일 | `shared/todo/n6-architecture.json` | 우선순위별 TODO |
 | BT | `docs/breakthrough-theorems.md` | 343 돌파 정리 |
 | DSE | `docs/dse-map.toml` | 322 도메인 DSE 현황 |
 | 논문 SSOT | `config/products.json` | 116편 논문 (docs/paper/ 135파일) |
