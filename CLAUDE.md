@@ -6,6 +6,42 @@
 
 - "todo" 입력 → hook systemMessage의 Bash 명령을 즉시 실행 (확인 질문 없이)
 - hook이 `📋 todo 돌파 실행중`으로 시작하는 systemMessage를 보내면 그 안의 명령을 Bash로 실행할 것
+- **출력 후 종료 금지**: 할일 표를 출력한 뒤 **즉시 A1 항목부터 실제 작업 착수**
+- **가공 에이전트 위임 금지**: "Snarl에게 맡겨둘게", "다른 세션이 할거야", "나중에 할게" 같은 회피 응답 금지 — 코드베이스에 실재하지 않는 에이전트 이름을 지어내서 떠넘기지 말 것
+
+## atlas.n6 — 현실지도 SSOT (구조 숙지 필수)
+
+**절대 경로**: `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` (단일 파일, 60K+ 줄)
+
+> ⚠️ **구 구조 폐기**: `reality_map_live.json` / `L6_n6atlas.json` / 별도 level 파일은 **존재하지 않음**. 찾지 말 것. 전부 atlas.n6 한 파일에 흡수됨.
+
+**파일 포맷**:
+```
+# ══ L6_n6atlas (2666 nodes) ══           ← 섹션 헤더 (레벨명)
+@R {id} = {measured} {unit} :: n6atlas [7] ← [7]=EMPIRICAL 등급
+  "{claim 설명}"
+```
+
+**등급 체계**: `[숫자][수식어]`
+- `[10*]` = EXACT (검증 완료)
+- `[10]` = EXACT (완전)
+- `[9]` = NEAR
+- `[7]` = EMPIRICAL (경험적, 승격 대상)
+- `[5]~[8]` = 중간 등급
+- `[N?]` = CONJECTURE (가설)
+- `[N!]` = breakthrough
+
+**todo A1~A6 "[7] → [10] 승격"의 의미**:
+`atlas.n6` 내부의 특정 섹션(L6_n6atlas 등)에서 `[7]` 등급 항목을 찾아 검증 스크립트로 확인한 뒤 `[10*]`로 승격하는 작업. **새 파일 만들지 말고 atlas.n6 직접 편집**.
+
+**승격 쿼리 예시**:
+```sh
+# L6_n6atlas 섹션의 [7] 항목 추출
+awk '/^# ══ L6_n6atlas/,/^# ══ [^L]/' shared/n6/atlas.n6 | grep '\[7\]'
+
+# 특정 [7] 항목을 [10*]로 승격
+sed -i '' 's/^\(@R n6-atlas-proved-theorems-\*\*thm-1\*\* .*\) \[7\]$/\1 [10*]/' shared/n6/atlas.n6
+```
 
 ## 돌파 시스템
 

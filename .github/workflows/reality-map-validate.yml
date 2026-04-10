@@ -1,10 +1,10 @@
 # ═══════════════════════════════════════════════════════════════
-# reality_map.json 검증 워크플로
-# - JSON 파싱 유효성
-# - 필수 필드 존재 확인
-# - EXACT 비율 계산 + 노드 수 리포트
+# atlas.n6 검증 워크플로 (구 reality_map.json 검증 → atlas.n6 전환)
+# - 파일 존재 + 최소 줄 수
+# - 등급 분포 + [10*](EXACT) 비율 계산
+# - 섹션 헤더 개수 리포트
 # ═══════════════════════════════════════════════════════════════
-name: Reality Map Validation
+name: Atlas Validation
 
 on:
   push:
@@ -13,100 +13,60 @@ on:
     branches: [main]
 
 jobs:
-  validate-reality-map:
+  validate-atlas:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate reality_map.json
+      - name: Validate atlas.n6
         run: |
-          python3 - <<'PYEOF'
-          import json, sys, os
+          set -e
+          # 경로 탐색
+          PATH_FILE=""
+          for c in "shared/n6/atlas.n6" "docs/atlas.n6"; do
+            if [ -f "$c" ]; then PATH_FILE="$c"; break; fi
+          done
 
-          # reality_map.json 경로 탐색 (docs/ 또는 shared/ 심링크)
-          candidates = [
-              "docs/reality_map.json",
-              "shared/reality_map.json",
-          ]
-          path = None
-          for c in candidates:
-              if os.path.isfile(c):
-                  path = c
-                  break
+          if [ -z "$PATH_FILE" ]; then
+            echo "atlas.n6 not found in shared/n6/ or docs/ -- skipping"
+            exit 0
+          fi
 
-          if path is None:
-              print("reality_map.json not found in docs/ or shared/ -- skipping")
-              sys.exit(0)
+          echo "Validating: $PATH_FILE"
 
-          print(f"Validating: {path}")
+          # 1) 파일 크기 + 줄 수
+          LINES=$(wc -l < "$PATH_FILE")
+          BYTES=$(wc -c < "$PATH_FILE")
+          echo "  Lines: $LINES"
+          echo "  Bytes: $BYTES"
 
-          # 1) JSON 파싱
-          try:
-              with open(path) as f:
-                  data = json.load(f)
-          except json.JSONDecodeError as e:
-              print(f"FAIL: JSON parse error -- {e}")
-              sys.exit(1)
-          print("  JSON parse: OK")
+          if [ "$LINES" -lt 1000 ]; then
+            echo "FAIL: atlas.n6 too small ($LINES lines, expected 1000+)"
+            exit 1
+          fi
 
-          # 2) 필수 필드 확인
-          errors = []
+          # 2) 등급 분포 + EXACT 비율
+          awk 'match($0,/\[([0-9]+)([*!?]*)\]/,a){
+            g=a[1]; mod=a[2]
+            if(mod~/\*/) ex++
+            else if(g=="10") ex++
+            else if(g=="9") ne++
+            else if(g+0>=5) emp++
+            else if(mod~/\?/) conj++
+            n++
+          } END{
+            pct = n ? ex/n*100 : 0
+            printf "  === Atlas Report ===\n"
+            printf "  Graded entries: %d\n", n
+            printf "  EXACT [10*]:    %d (%.1f%%)\n", ex, pct
+            printf "  NEAR  [9]:      %d\n", ne
+            printf "  EMPIRICAL [5-8]: %d\n", emp
+            printf "  CONJECTURE [?]: %d\n", conj
+            if (n < 100) { print "FAIL: insufficient graded entries"; exit 1 }
+            if (pct < 50) { print "FAIL: EXACT ratio too low"; exit 1 }
+            print "PASS: atlas.n6 is valid"
+          }' "$PATH_FILE"
 
-          if not isinstance(data, dict):
-              print("FAIL: root is not a JSON object")
-              sys.exit(1)
-
-          # _meta 필수
-          meta = data.get("_meta")
-          if meta is None:
-              errors.append("missing '_meta'")
-          else:
-              for field in ["description", "version", "constants"]:
-                  if field not in meta:
-                      errors.append(f"_meta missing '{field}'")
-
-          # nodes 필수
-          nodes = data.get("nodes")
-          if nodes is None:
-              errors.append("missing 'nodes' array")
-          elif not isinstance(nodes, list):
-              errors.append("'nodes' is not an array")
-
-          # edges (최소 1종)
-          edge_keys = [k for k in data.keys() if "edge" in k.lower()]
-          if not edge_keys:
-              errors.append("no edge arrays found (expected *_edges or edges)")
-
-          if errors:
-              print("FAIL: required fields missing:")
-              for e in errors:
-                  print(f"  - {e}")
-              sys.exit(1)
-          print("  Required fields: OK")
-
-          # 3) 노드 분석 + EXACT 비율
-          total = len(nodes)
-          grades = {}
-          for node in nodes:
-              g = node.get("grade", "UNKNOWN")
-              grades[g] = grades.get(g, 0) + 1
-
-          exact = grades.get("EXACT", 0)
-          ratio = (exact / total * 100) if total > 0 else 0
-
-          print(f"\n  === Reality Map Report ===")
-          print(f"  Version:    {meta.get('version', '?')}")
-          print(f"  Total nodes: {total}")
-          print(f"  _meta.node_count: {meta.get('node_count', '?')}")
-          for g in sorted(grades.keys()):
-              pct = grades[g] / total * 100 if total > 0 else 0
-              print(f"    {g}: {grades[g]} ({pct:.1f}%)")
-          print(f"  EXACT ratio: {exact}/{total} = {ratio:.1f}%")
-
-          # 4) node_count 일관성 경고
-          declared = meta.get("node_count")
-          if declared is not None and declared != total:
-              print(f"\n  WARNING: _meta.node_count={declared} but actual nodes={total}")
-
-          print("\nPASS: reality_map.json is valid")
-          PYEOF
+          # 3) 섹션 헤더
+          SECTIONS=$(grep -c "^# ══" "$PATH_FILE" || echo 0)
+          echo "  Sections: $SECTIONS"
