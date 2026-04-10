@@ -1,0 +1,192 @@
+// N6 Dimension Perception Calculator
+// 차원 인식(3D/4D/6D) 파라미터 계산 + n=6 검증
+// 인간 시각·공간 인지 시스템의 차원 축 개수, 자유도, 채널 수를
+// 완전수 n=6 유도 상수(σ=12, τ=4, φ=2, sopfr=5, J₂=24, μ=1)와 대조.
+//
+// 빌드: hexa main.hexa
+// Rust 포트 필요 시: ~/.cargo/bin/rustc main.rs -o dim-calc
+
+let SIGMA = 12
+let TAU = 4
+let PHI = 2
+let SOPFR = 5
+let J2 = 24
+let MU = 1
+let N6 = 6
+
+fn pad_r(s, width) {
+    let mut result = s
+    while len(result) < width { result = result + " " }
+    result
+}
+fn pad_l(s, width) {
+    let mut result = s
+    while len(result) < width { result = " " + result }
+    result
+}
+
+// ── n=6 유도 상수 생성 (fusion-calc 동일 패턴) ──
+fn build_derived() {
+    let base_v = [SIGMA, TAU, PHI, SOPFR, J2, MU, N6]
+    let base_n = ["σ", "τ", "φ", "sopfr", "J₂", "μ", "n"]
+    let mut vals = []
+    let mut exprs = []
+    let mut i = 0
+    while i < 7 {
+        let a = base_v[i]
+        let na = base_n[i]
+        let mut found = false
+        let mut c = 0
+        while c < len(vals) {
+            if vals[c] == a { found = true }
+            c = c + 1
+        }
+        if !found {
+            vals = vals + [a]
+            exprs = exprs + [na]
+        }
+        let mut j = 0
+        while j < 7 {
+            let b = base_v[j]
+            let nb = base_n[j]
+            let sum = a + b
+            if sum <= 200 {
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == sum { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [sum]
+                    exprs = exprs + [na + "+" + nb]
+                }
+            }
+            if a > b {
+                let diff = a - b
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == diff { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [diff]
+                    exprs = exprs + [na + "-" + nb]
+                }
+            }
+            let prod = a * b
+            if prod <= 200 {
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == prod { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [prod]
+                    exprs = exprs + [na + "×" + nb]
+                }
+            }
+            if b > 0 && a % b == 0 {
+                let div = a / b
+                found = false
+                c = 0
+                while c < len(vals) {
+                    if vals[c] == div { found = true }
+                    c = c + 1
+                }
+                if !found {
+                    vals = vals + [div]
+                    exprs = exprs + [na + "/" + nb]
+                }
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    [vals, exprs]
+}
+
+fn check_n6(value, d_vals, d_exprs) {
+    let mut i = 0
+    while i < len(d_vals) {
+        if d_vals[i] == value { return d_exprs[i] }
+        i = i + 1
+    }
+    ""
+}
+
+// ── 차원 분석 ──
+fn analyze_dim(name, param_names, param_vals, d_vals, d_exprs) {
+    println("")
+    println(format("  ═══ {} ═══", name))
+    let mut exact = 0
+    let mut miss = 0
+    let mut i = 0
+    while i < len(param_names) {
+        let pname = param_names[i]
+        let pval = param_vals[i]
+        let expr = check_n6(pval, d_vals, d_exprs)
+        let mut grade = "MISS"
+        let mut marker = "❌"
+        let mut expr_show = "-"
+        if expr != "" {
+            grade = "EXACT"
+            marker = "✅"
+            exact = exact + 1
+            expr_show = expr
+        } else {
+            miss = miss + 1
+        }
+        println("    " + marker + " " + pad_r(pname, 24) + " = " + pad_l(to_string(pval), 6) + " → " + grade + " (" + expr_show + ")")
+        i = i + 1
+    }
+    let total = exact + miss
+    let score = exact * 100 / total
+    println("    ────────────────────────────────────────────")
+    println(format("    EXACT={} MISS={} Score={}%", exact, miss, score))
+}
+
+// ── main ──
+
+println("╔══════════════════════════════════════════════════════╗")
+println("║  N6 DIMENSION PERCEPTION CALCULATOR                  ║")
+println("║  차원 인식 파라미터 + n=6 검증                         ║")
+println("╚══════════════════════════════════════════════════════╝")
+
+let derived = build_derived()
+let d_vals = derived[0]
+let d_exprs = derived[1]
+
+// 3D 공간 인식 (유클리드 3축: x,y,z)
+// axes=3, DoF=6(3위치+3회전), stereo_channels=2, depth_cues=12
+let dim3_names = ["axes", "DoF_rigid_body", "stereo_channels", "rotation_planes", "depth_cues_total", "vergence_muscles"]
+let dim3_vals = [3, 6, 2, 3, 12, 6]
+analyze_dim("3D EUCLIDEAN (인간 공간시각)", dim3_names, dim3_vals, d_vals, d_exprs)
+
+// 4D 시공간 (3D + time)
+// axes=4, minkowski_sig=2(1-3 or 3-1), lorentz_gen=6(3 boost+3 rot), gamma_matrices=4
+let dim4_names = ["axes", "lorentz_generators", "gamma_matrices", "minkowski_signature_abs", "lightcone_regions", "tensor_components_rank2"]
+let dim4_vals = [4, 6, 4, 2, 3, 16]
+analyze_dim("4D MINKOWSKI (시공간)", dim4_names, dim4_vals, d_vals, d_exprs)
+
+// 6D 위상공간 (3 position + 3 momentum — Hamilton)
+// axes=6, symplectic_form_rank=6, poisson_bracket_pairs=3, canonical_coords=6
+let dim6_names = ["axes", "symplectic_rank", "poisson_pairs", "canonical_coords", "so6_generators", "su3_color_states"]
+let dim6_vals = [6, 6, 3, 6, 15, 3]
+analyze_dim("6D PHASE SPACE (해밀턴 위상)", dim6_names, dim6_vals, d_vals, d_exprs)
+
+// 시각 피질 차원 채널 (V1-V6)
+let cortex_names = ["visual_areas_V1_V6", "orientation_columns_per_hypercol", "ocular_dominance_stripes", "LGN_layers", "retinal_ganglion_types", "color_opponent_channels"]
+let cortex_vals = [6, 12, 2, 6, 5, 3]
+analyze_dim("VISUAL CORTEX (V1~V6)", cortex_names, cortex_vals, d_vals, d_exprs)
+
+println("")
+println("  ═══ SUMMARY ═══")
+println("    3D 강체 자유도 = 6 = n ✅ (3위치 + 3회전)")
+println("    4D Lorentz 생성자 = 6 = n ✅ (3부스트 + 3회전)")
+println("    6D 위상공간 축 = 6 = n ✅ (3q + 3p)")
+println("    시각피질 V1~V6 = 6 영역 = n ✅")
+println("    LGN = 6층 = n ✅ (4 parvo + 2 magno)")
+println("    결론: 차원 인식은 n=6 위에서 구조화된다")
