@@ -604,104 +604,6 @@
 
 ---
 
-# 📄 논문 (Papers) — 24편
-
-| 논문 | 주제 | 링크 |
-|------|------|------|
-| **Paper 1** | AI Energy Efficiency | [논문](docs/paper/paper1-ai-efficiency.md) |
-| **Paper 2** | Cross-Domain Universality | [논문](docs/paper/paper2-cross-domain.md) |
-| **Paper 3** | Tokamak Physics | [논문](docs/paper/paper3-tokamak-physics.md) |
-| **Paper 4** | GUT + Monster Group | [논문](docs/paper/paper4-gut-monster.md) |
-| **#307** | Domain Universality Dataset | [논문](docs/paper/307-domain-universality-dataset.md) |
-| **#308** | Fusion N6 Alien Discoveries | [논문](docs/paper/308-fusion-n6-alien-discoveries.md) |
-| 칩 논문 | SoC, PIM, 3D, Photon, Wafer, Super, DRAM, V-NAND, Exynos, ISOCELL | [paper/](docs/paper/) |
-| 의식칩 논문 | Consciousness Chip, Consciousness SoC | [paper/](docs/paper/) |
-| CCUS 논문 | Carbon Capture | [논문](docs/paper/n6-carbon-capture-paper.md) |
-
----
-
-# 🗺️ 궁극의 아키텍처 로드맵 (30 Domains)
-
-<!-- AUTO:ROADMAP:START -->
-| 순위 | 실현 | 도메인 | 영향력 | Tier | DSE |
-|:---:|:---:|--------|:---:|:---:|:---:|
-| 0 | 2035 | **궁극의 AGI** | ★★★★★★ | 🔄 | → [Anima](https://github.com/need-singularity/anima) |
-| 0 | 2040 | **궁극의 의식** | ★★★★★★ | 🔄 | → [Anima](https://github.com/need-singularity/anima) |
-| 0 | 2050 | **궁극의 불멸** | ★★★★★★ | 🔄 | → [Anima](https://github.com/need-singularity/anima) + [BrainWire](https://github.com/need-singularity/brainwire) |
-| 0 | ✅ | **궁극의 에너지** | ★★★★★★ | ✅ | 10,225 조합 → [⚡ 에너지](#-에너지-energy) |
-| 0 | 2040 | **궁극의 우주진출** | ★★★★★★ | T3 | [goal](docs/space-engineering/goal.md) |
-| 0 | ✅ | **궁극의 물질합성** | ★★★★★★ | ✅ | 3,600 조합 🛸10 → [🧬 물질합성](#-물질합성-materials) |
-| 1 | 2030 | **궁극의 소재** | ★★★★★☆ | T1 | — |
-| 2 | 2028 | **궁극의 공정** | ★★★★★☆ | T1 | — |
-| 3 | ✅ | **궁극의 코어** | ★★★★★☆ | ✅ | 3,000 조합 → [💻 칩](#-칩--반도체-chip) |
-| 4 | ✅ | **궁극의 칩** | ★★★★★☆ | ✅ | 3,000 조합 → [💻 칩](#-칩--반도체-chip) |
-| 5 | ✅ | **궁극의 배터리** | ★★★★★☆ | ✅ | 1,908 조합 → [⚡ 에너지](#-에너지-energy) |
-| 6 | ✅ | **궁극의 태양전지** | ★★★★★☆ | ✅ | 1,584 조합 🛸10 → [⚡ 에너지](#-에너지-energy) |
-| 7 | 2035 | **궁극의 핵융합** | ★★★★★☆ | ✅ | 2,400 조합 → [🔥 핵융합](#-핵융합-fusion) |
-| 8 | ✅ | **궁극의 학습알고리즘** | ★★★★☆☆ | T2 | — |
-| 9 | 2030 | **궁극의 네트워크** | ★★★★☆☆ | T2 | — |
-| 10 | ✅ | **궁극의 로봇** | ★★★★☆☆ | ✅ | 🛸10 270,000 조합 → [🤖 로봇](#-로봇-robotics) |
-| 11 | ✅ | **궁극의 송전망** | ★★★★☆☆ | ✅ | [⚡ 에너지](#-에너지-energy) |
-| 12 | 2035 | **궁극의 생명공학** | ★★★★☆☆ | T3 | [biology/](docs/biology/) |
-| 13 | ✅ | **궁극의 디스플레이** | ★★★☆☆☆ | ✅ | H-DISP 10개 → [📺 디스플레이](#-디스플레이-display) |
-| 14 | ✅ | **궁극의 오디오** | ★★★☆☆☆ | ✅ | H-AUD 18개 → [🎵 오디오](#-오디오-audio) |
-| 15 | ✅ | **궁극의 열관리** | ★★★☆☆☆ | T3 | — |
-| 16 | ✅ | **궁극의 암호** | ★★★☆☆☆ | T3 | — |
-| 17 | 2035 | **궁극의 양자컴퓨터** | ★★★☆☆☆ | T1 | — |
-| 18 | ✅ | **궁극의 초전도체** | ★★★☆☆☆ | ✅ | 🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math) |
-| 19 | ✅ | **궁극의 블록체인** | ★★☆☆☆☆ | T3 | — |
-| 20 | ✅ | **궁극의 컴파일러/OS** | ★★☆☆☆☆ | T3 | — |
-| 21 | ✅ | **궁극의 프로그래밍언어** | ★★☆☆☆☆ | ✅ | 6,480 조합 → [💬 소프트웨어](#-소프트웨어인프라-software--infra) |
-| 22 | ✅ | **궁극의 초전도자석** | ★★★☆☆☆ | ✅ | 🛸10 SC 내 통합 (hexa-magnet/coil/cool/fusion) → [🔬 물리·수학](#-물리수학-physics--math) |
-| 23 | ✅ | **궁극의 순수수학** | ★☆☆☆☆☆ | ✅ | 🛸10 11불가능성정리 → [🔬 물리·수학](#-물리수학-physics--math) |
-| 24 | ✅ | **궁극의 우주론/입자** | ★☆☆☆☆☆ | ✅ | 🛸9 53.3%EXACT+TP28 → [🔬 물리·수학](#-물리수학-physics--math) |
-| — | ✅ | **궁극의 환경보호** | ★★★★☆☆ | ✅ | 1.68M 조합 → [🌍 환경보호](#-환경보호-environment) |
-| — | ✅ | **궁극의 탄소포집** | ★★★★☆☆ | ✅ | → [🌍 환경보호](#-환경보호-environment) |
-| — | 2030 | **궁극의 농업** | ★★★☆☆☆ | T3 | [goal](docs/agriculture/goal.md) |
-| — | 2030 | **궁극의 자율주행** | ★★★☆☆☆ | T3 | [goal](docs/autonomous-driving/goal.md) |
-| — | 2030 | **궁극의 의료기기** | ★★★★☆☆ | T3 | [goal](docs/medical-device/goal.md) |
-| — | ✅ | **궁극의 안전** | ★★★★☆☆ | T3 | 7,776 조합 → [🛡️ 안전](#-안전-safety) |
-| — | ✅ | **궁극의 펀카** | ★★★☆☆☆ | ✅ | 160,920 조합 🛸10 → [🎪 유희](#-유희-play) |
-| 30 | 2045~2125 | **HEXA-WARP 워프항법장치** | ★★★★★★★★★★ | 🔮 | Mk.III 0.1c 핵융합 DFD → Mk.V Alcubierre(SF) |
-| 31 | 2040~2070 | **HEXA-NEURO 뇌-기계 인터페이스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-NEURO](docs/neuro/goal.md) |
-| 32 | 2040~2070 | **HEXA-GRAV 중력파 검출/통신** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-GRAV](docs/gravity-wave/goal.md) |
-| 33 | 2040~2070 | **HEXA-CLOAK 투명망토/스텔스** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-CLOAK](docs/cloak/goal.md) |
-| 34 | 2040~2070 | **HEXA-DEFENSE 지구방어 시스템** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-DEFENSE](docs/earth-defense/goal.md) |
-| 35 | 2040~2070 | **HEXA-TELEPORT 양자얽힘 통신망** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-TELEPORT](docs/quantum-network/goal.md) |
-| 36 | 2040~2070 | **HEXA-HOVER 개인 호버보드** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-HOVER](docs/hover/goal.md) |
-| 37 | 2040~2070 | **HEXA-MRAM 초전도 비휘발 메모리** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-MRAM](docs/sc-memory/goal.md) |
-| 38 | 2040~2070 | **HEXA-SEABED 대륙간 해저 송전** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-SEABED](docs/seabed-grid/goal.md) |
-| 39 | 2040~2070 | **HEXA-ACCEL 소형 입자가속기** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-ACCEL](docs/mini-accelerator/goal.md) |
-| 40 | 2040~2070 | **HEXA-WEATHER 대기 전자기 제어** | ★★★★★★ | 🔮 | RT-SC 기반 → [HEXA-WEATHER](docs/weather-control/goal.md) |
-| 41 | 2045~2080 | **HEXA-MIND 의식 업로드** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-MIND](docs/mind-upload/goal.md) |
-| 42 | 2045~2080 | **HEXA-TELEPATHY 뇌-뇌 직접통신** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-TELEPATHY](docs/telepathy/goal.md) |
-| 43 | 2045~2080 | **HEXA-HOLO 홀로그래픽 디스플레이** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-HOLO](docs/holography/goal.md) |
-| 44 | 2045~2080 | **HEXA-DREAM 꿈 기록/재생** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-DREAM](docs/dream-recorder/goal.md) |
-| 45 | 2045~2080 | **HEXA-SKYWAY 공중 고속도로망** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-SKYWAY](docs/skyway/goal.md) |
-| 46 | 2045~2080 | **HEXA-TSUNAMI 해일 방지기** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-TSUNAMI](docs/tsunami-shield/goal.md) |
-| 47 | 2045~2080 | **HEXA-ANTIMATTER 반물질 공장** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-ANTIMATTER](docs/antimatter-factory/goal.md) |
-| 48 | 2045~2080 | **HEXA-COSMIC 초기우주 관측망** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-COSMIC](docs/cosmic-observatory/goal.md) |
-| 49 | 2045~2080 | **HEXA-DESAL 초전도 담수화** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-DESAL](docs/desalination/goal.md) |
-| 50 | 2045~2080 | **HEXA-ORACLE 양자 예측기** | ★★★★★☆ | 🔮 | 융합형 차세대 → [HEXA-ORACLE](docs/quantum-oracle/goal.md) |
-<!-- AUTO:ROADMAP:END -->
-
-> **실현**: ✅ = 현재 기술로 실현가능 / 20XX = 예상 실현 연도
-> **Tier**: ✅ 완료·DSE / 🔄 진행 / T1 즉시 착수 가능 / T2 구조화 필요 / T3 새 BT 발굴 필요
-> **제품 원칙**: 궁극의 X는 도메인당 **1개 제품 라인만** 유지. v1/v2 버전 분기 ❌ → git history로 관리. 문서가 진화한다.
-
----
-
-# 🐉 판타지 (Fantasy)
-
-<!-- AUTO:SUMMARY_fantasy:START -->
-> [!WARNING]
-> 신화/판타지 탐색 — 공학적 설계 대상 아님 · 2 도메인 · 60 가설 · 16 EXACT (26.7%) · BT 교차 16
-<!-- AUTO:SUMMARY_fantasy:END -->
-
-> 상세: [판타지 README](docs/fantasy/README.md) · SSOT: [`config/fantasy.json`](config/fantasy.json)
-
----
-
 # 📢 마케팅 (Marketing)
 
 <!-- AUTO:SUMMARY_marketing:START -->
@@ -892,6 +794,17 @@ Commands:
 <!-- AUTO:FOOTER_hygiene:START -->
 > 도메인: [mens-intimate-cleanser/](docs/mens-intimate-cleanser/) · [womens-intimate-cleanser/](docs/womens-intimate-cleanser/) · BT: 1157~1158 · 청결제 시장 OEM 즉시 가능
 <!-- AUTO:FOOTER_hygiene:END -->
+
+---
+
+# 🐉 판타지 (Fantasy)
+
+<!-- AUTO:SUMMARY_fantasy:START -->
+> [!WARNING]
+> 신화/판타지 탐색 — 공학적 설계 대상 아님 · 2 도메인 · 60 가설 · 16 EXACT (26.7%) · BT 교차 16
+<!-- AUTO:SUMMARY_fantasy:END -->
+
+> 상세: [판타지 README](docs/fantasy/README.md) · SSOT: [`config/fantasy.json`](config/fantasy.json)
 
 ---
 
