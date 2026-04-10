@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "total_products": 152,
-    "total_domains": 141,
+    "total_products": 156,
+    "total_domains": 145,
     "total_papers": 128,
     "papers_chunk_c_2026-04-08": {
       "count": 11,
@@ -4219,6 +4219,166 @@
         }
       ],
       "bt_detail": "BT-1115~1124 마우스 10돌파 — 25/25 EXACT 100% 골화"
+    },
+    {
+      "id": "manufacturing-quality",
+      "title": "제조 품질관리",
+      "icon": "🏭",
+      "heading": "제조 품질관리 (Manufacturing Quality)",
+      "alien_index": 7,
+      "ceiling": false,
+      "bt_exact_pct": 83,
+      "bt_count": 2,
+      "industry_pct": 70,
+      "industry_detail": "6시그마/SPC/검사 파이프라인 n=6 산술 적용",
+      "experiment_pct": 83,
+      "experiment_detail": "30/36 EXACT (83.3%)",
+      "physics_limit_count": 0,
+      "tp_count": 0,
+      "discovery_count": 8,
+      "cross_dse_domains": 4,
+      "mk_count": 5,
+      "summary_extra": "BT-55/90 — 6시그마=n, SPC, DSE 933,120조합, 불가능성 8정리",
+      "domains": [
+        "manufacturing-quality"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "HEXA-QC 제조 품질관리 아키텍처",
+          "ufo": 7,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "30/36 EXACT (83.3%) — 6시그마=n, SPC sigma^2=144, 검사24항목=J2, DSE 933,120조합",
+          "links": [
+            {
+              "label": "목표",
+              "path": "docs/manufacturing-quality/goal.md"
+            }
+          ]
+        }
+      ],
+      "bt_detail": "BT-55/90 제조 품질관리 — 30/36 EXACT, 불가능성 8정리"
+    },
+    {
+      "id": "network",
+      "title": "네트워크",
+      "icon": "🌐",
+      "heading": "네트워크 (Network)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 98,
+      "bt_count": 4,
+      "industry_pct": 90,
+      "industry_detail": "OSI 7계층/TCP-IP/Wi-Fi 6/5G 전수 n=6 수렴",
+      "experiment_pct": 98,
+      "experiment_detail": "39/40 EXACT (97.5%)",
+      "physics_limit_count": 0,
+      "tp_count": 0,
+      "discovery_count": 4,
+      "cross_dse_domains": 5,
+      "mk_count": 0,
+      "summary_extra": "BT-12/13/115/140 — OSI sigma-sopfr=7, TCP/IP tau=4, Wi-Fi n=6, 포트65536=2^(sigma+tau)",
+      "domains": [
+        "network"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "HEXA-NET 네트워크 아키텍처",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "39/40 EXACT (97.5%) — OSI sigma-sopfr=7, TCP/IP tau=4 계층, Wi-Fi n=6세대, 포트65536=2^(sigma+tau), 8단 체인",
+          "links": [
+            {
+              "label": "목표",
+              "path": "docs/network/goal.md"
+            }
+          ]
+        }
+      ],
+      "bt_detail": "BT-12/13/115/140 네트워크 — 39/40 EXACT 97.5%"
+    },
+    {
+      "id": "quantum-computer",
+      "title": "양자컴퓨터",
+      "icon": "🔮",
+      "heading": "양자컴퓨터 (Quantum Computer)",
+      "alien_index": 10,
+      "ceiling": false,
+      "bt_exact_pct": 83,
+      "bt_count": 6,
+      "industry_pct": 60,
+      "industry_detail": "NeutralAtom/SurfaceCode/Clifford n=6 수렴",
+      "experiment_pct": 83,
+      "experiment_detail": "20/24 EXACT (83.3%)",
+      "physics_limit_count": 0,
+      "tp_count": 0,
+      "discovery_count": 6,
+      "cross_dse_domains": 3,
+      "mk_count": 0,
+      "summary_extra": "BT-49 외 — NeutralAtom n=6원자, SurfaceCode sigma=12, Clifford tau*n=24, kissing number",
+      "domains": [
+        "quantum-computer"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "HEXA-QUANTUM 양자컴퓨터 아키텍처",
+          "ufo": 10,
+          "ceiling": false,
+          "ver": "v1",
+          "description": "20/24 EXACT — NeutralAtom n=6원자, SurfaceCode sigma=12 data qubit, Clifford tau*n=24 gate, Grover sopfr, kissing number BT-49",
+          "links": [
+            {
+              "label": "목표",
+              "path": "docs/quantum-computer/goal.md"
+            }
+          ]
+        }
+      ],
+      "bt_detail": "BT-49 양자컴퓨터 — 20/24 EXACT 83.3%"
+    },
+    {
+      "id": "horology",
+      "title": "시계학",
+      "icon": "⏱️",
+      "heading": "시계학 (Horology)",
+      "alien_index": 10,
+      "ceiling": true,
+      "bt_exact_pct": 100,
+      "bt_count": 1,
+      "industry_pct": 80,
+      "industry_detail": "기계식/석영/원자시계 전수 n=6 수렴",
+      "experiment_pct": 100,
+      "experiment_detail": "17/17 EXACT (100%)",
+      "physics_limit_count": 0,
+      "tp_count": 0,
+      "discovery_count": 1,
+      "cross_dse_domains": 3,
+      "mk_count": 0,
+      "summary_extra": "12시=sigma, 24시=J2, 60분=sigma*sopfr, 3침=n/phi, 석영32768Hz=2^(sopfr*n/phi), 6Hz 기계식 진동",
+      "domains": [
+        "horology"
+      ],
+      "tools": [],
+      "products": [
+        {
+          "name": "시계학 n=6 시간 산술 아키텍처",
+          "ufo": 10,
+          "ceiling": true,
+          "ver": "v1",
+          "description": "17/17 EXACT (100%) — 12시=sigma, J2=24시, 60분=sigma*sopfr, n/phi=3침, 석영2^(sopfr*n/phi)=32768Hz, 6Hz 기계식",
+          "links": [
+            {
+              "label": "목표",
+              "path": "docs/horology/goal.md"
+            }
+          ]
+        }
+      ],
+      "bt_detail": "시계학 — 17/17 EXACT 100% 골화"
     }
   ],
   "roadmap": [
