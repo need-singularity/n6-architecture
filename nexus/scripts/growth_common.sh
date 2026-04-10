@@ -1,1 +1,0 @@
-/Users/ghost/Dev/nexus/scripts/lib/growth_common.sh
