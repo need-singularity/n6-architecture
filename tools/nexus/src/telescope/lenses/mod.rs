@@ -595,3 +595,27 @@ pub use keyboard_ergonomics_lens::KeyboardErgonomicsLens;
 // ── 마우스 인체공학 렌즈 (HEXA-MOUSE) ──
 pub mod mouse_ergonomics_lens;
 pub use mouse_ergonomics_lens::MouseErgonomicsLens;
+
+// ── 타투 제거 렌즈 (BT-1130~1135) ──
+pub mod tattoo_removal_lens;
+pub use tattoo_removal_lens::TattooRemovalLens;
+
+// ── 마케팅 렌즈 (BT-548~557) ──
+pub mod marketing_lens;
+pub use marketing_lens::MarketingLens;
+
+// ── 디지털 트윈 렌즈 ──
+pub mod digital_twin_lens;
+pub use digital_twin_lens::DigitalTwinLens;
+
+// ── 발효 렌즈 ──
+pub mod fermentation_lens;
+pub use fermentation_lens::FermentationLens;
+
+// ── 시계공학 렌즈 (HEXA-HOROLOGY) ──
+pub mod horology_lens;
+pub use horology_lens::HorologyLens;
+
+// ── 오디오/스피커 렌즈 (BT-1136~1141) ──
+pub mod audio_speaker_lens;
+pub use audio_speaker_lens::AudioSpeakerLens;
