@@ -46,7 +46,7 @@
 12. [Predictions & Falsifiability](#12-predictions--falsifiability)
 13. [Future Directions](#13-future-directions)
 14. [n=6 Complete Parameter Map](#14-n6-complete-parameter-map)
-15. [Open Questions / TODO](#15-open-questions--todo)
+15. [미해결 질문 및 후속 과제](#15-미해결-질문-및-후속-과제)
 16. [Links](#16-links)
 
 ---
@@ -825,7 +825,7 @@ entirely by application requirements (EV packaging, cost, thermal).
 
 ---
 
-## 15. Open Questions / TODO
+## 15. 미해결 질문 및 후속 과제
 
 ```
   ┌──────────────────────────────────────────────────────────────────┐
@@ -855,7 +855,7 @@ entirely by application requirements (EV packaging, cost, thermal).
   └──────────────────────────────────────────────────────────────────┘
 ```
 
-### TODO
+### 후속 과제
 
 - [x] Verify 18650 manufacturing history (was 18mm truly mandrel-driven?)
     - 18650은 1991년 Sony 최초 상용화. 18mm 직경은 mandrel(권취 심봉) 규격이 아닌

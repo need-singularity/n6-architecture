@@ -13,7 +13,9 @@
       "telescope_consensus": "4/5 (High)",
       "breakthrough_rho": 0.254,
       "recursive_growth": 60
-    }
+    },
+    "total_nodes": 154,
+    "total_edges": 507
   },
   "nodes": [
     {
@@ -2145,7 +2147,7 @@
       "id": "BT_1114",
       "type": "breakthrough_theorem",
       "label": "BT-1114: Euler-Golden-Perfect Trinity",
-      "grade": "three_stars",
+      "grade": "NEAR",
       "domains": [
         "number-theory",
         "math",

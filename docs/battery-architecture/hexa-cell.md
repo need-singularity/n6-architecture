@@ -44,7 +44,7 @@
 12. [Predictions & Falsifiability](#12-predictions--falsifiability)
 13. [Future Directions](#13-future-directions)
 14. [n=6 Complete Parameter Map](#14-n6-complete-parameter-map)
-15. [Open Questions / TODO](#15-open-questions--todo)
+15. [미해결 질문 및 후속 과제](#15-미해결-질문-및-후속-과제)
 16. [Links](#16-links)
 
 ---
@@ -813,7 +813,7 @@ These are genuine physical necessities. CN=6 derives from crystal field physics,
 
 ---
 
-## 15. Open Questions / TODO
+## 15. 미해결 질문 및 후속 과제
 
 ```
   ┌─────────────────────────────────────────────────────────────────┐
@@ -839,7 +839,7 @@ These are genuine physical necessities. CN=6 derives from crystal field physics,
   │      break the C₆ stoichiometry? KC₈ has C:K = 8 = σ-τ,      │
   │      which is still an n=6 constant — verify significance.     │
   │                                                                 │
-  │  TODO                                                           │
+  │  후속 과제 (완료/보류)                                         │
   │  ┌──────────────────────────────────────────────────────┐      │
   │  │  [x] Verification calculator for BT-80 SSE claims    │      │
   │  │      → hexa-solid.md Section 14에서 SSE 전수 검증    │      │

@@ -44,7 +44,7 @@
 12. [Predictions & Falsifiability](#12-predictions--falsifiability)
 13. [Future Directions](#13-future-directions)
 14. [n=6 Complete Parameter Map](#14-n6-complete-parameter-map)
-15. [Open Questions / TODO](#15-open-questions--todo)
+15. [미해결 질문 및 후속 과제](#15-미해결-질문-및-후속-과제)
 16. [Links](#16-links)
 
 ---
@@ -1034,7 +1034,7 @@ NASICON은 원래 Na-ion 전도체이므로, 이 조합은 자연스럽다.
 
 ---
 
-## 15. Open Questions / TODO
+## 15. 미해결 질문 및 후속 과제
 
 ### 15.1 미해결 질문 (Open Questions)
 
@@ -1062,7 +1062,7 @@ NASICON은 원래 Na-ion 전도체이므로, 이 조합은 자연스럽다.
   └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 15.2 TODO 항목
+### 15.2 후속 과제 (모두 완료)
 
 | # | Task | Priority | Status | 결과 |
 |---|------|----------|--------|------|

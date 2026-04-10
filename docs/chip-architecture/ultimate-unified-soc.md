@@ -1717,7 +1717,7 @@ MOESIF 6-state 프로토콜을 n=6에 맞춰 최적화.
 
 ---
 
-## 19. Open Questions (TODO)
+## 19. 미해결 질문 및 후속 과제 (모두 해소됨)
 
 - [x] HBM4 vs LPDDR6 통합 — 둘 다 지원? 또는 HBM only?
   - 해소: 듀얼 메모리 아키텍처 채택

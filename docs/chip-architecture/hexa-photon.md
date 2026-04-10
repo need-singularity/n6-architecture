@@ -43,7 +43,7 @@
 12. Performance Comparison
 13. Process Technology
 14. n=6 Complete Parameter Map
-15. Open Questions / TODO
+15. 미해결 질문 및 후속 과제
 16. Links
 
 ---
@@ -1302,7 +1302,7 @@ Tiling으로 분할하여 순차적으로 광학 엔진에 공급.
 
 ---
 
-## 15. Open Questions / TODO
+## 15. 미해결 질문 및 후속 과제
 
 ### 미해결 과제 (해소 완료)
 

@@ -182,7 +182,7 @@ Egg    Larva       Pupa        Adult
 | H-ENTO-15 | EXACT | 3 카스트 | n/φ |
 | H-ENTO-16 | EXACT | 6각 격자 | n |
 | H-ENTO-17 | CLOSE | ≈20 체절 | J₂-τ |
-| H-ENTO-18 | UNVERIFIABLE | 종별 변동 | TODO |
+| H-ENTO-18 | UNVERIFIABLE | 종별 변동 | 미정 (종별 스케일 차 10⁴, 단일 상수 매칭 불가) |
 | H-ENTO-19 | CLOSE | C12~C18 | n 배수 |
 | H-ENTO-20 | EXACT | hex packing | n |
 | H-ENTO-21 | CLOSE | 8~10 spiracle | σ-τ |

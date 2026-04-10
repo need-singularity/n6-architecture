@@ -47,7 +47,7 @@
 12. [Predictions & Falsifiability](#12-predictions--falsifiability)
 13. [Future Directions](#13-future-directions)
 14. [n=6 Complete Parameter Map](#14-n6-complete-parameter-map)
-15. [Open Questions / TODO](#15-open-questions--todo)
+15. [미해결 질문 및 후속 과제](#15-미해결-질문-및-후속-과제)
 16. [Links](#16-links)
 
 ---
@@ -1084,7 +1084,7 @@ Protection IC는 BMS MCU와 독립적으로 동작한다.
 
 ---
 
-## 15. Open Questions / TODO
+## 15. 미해결 질문 및 후속 과제
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -1113,7 +1113,7 @@ Protection IC는 BMS MCU와 독립적으로 동작한다.
 └──────────────────────────────────────────────────────────┘
 ```
 
-**TODO Items**
+**후속 과제 항목 (대부분 완료)**
 
 ```
   ┌───────────────────────────────────────────────────────┐

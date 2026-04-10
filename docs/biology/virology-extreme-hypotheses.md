@@ -177,7 +177,7 @@
 | H-VIRO-10 | EXACT | gp120 cluster | n=6 |
 | H-VIRO-11 | EXACT | minimal ORF | τ=4 |
 | H-VIRO-12 | CLOSE | 8~10 vs σ-τ | |
-| H-VIRO-13 | UNVERIFIABLE | 통계 필요 | TODO |
+| H-VIRO-13 | UNVERIFIABLE | 통계 필요 | 미정 (대규모 유전체 메타분석 필요) |
 | H-VIRO-14 | EXACT | 9 = n+n/φ | |
 | H-VIRO-15 | EXACT | 8 segment | σ-τ |
 | H-VIRO-16 | CLOSE | 289 ≈ J₂·σ+1 | |
