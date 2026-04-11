@@ -15,7 +15,7 @@
 
 ## 사용법
 - 본문 읽기: 섹션 2 목표 → 3 가설 → 4 BT → 7 검증
-- 공통 검증 실행: `hexa verify.hexa` (도메인 폴더에서)
+- 검증 실행: 도메인 본문 .md 내 ```python 블록 참조
 - alien10 검증 실행: `hexa /Users/ghost/Dev/nexus/shared/n6/scripts/verify_synbio_alien10.hexa`
 - 진화 단계: 섹션 9 Mk.I~V
 - 예측 추적: 섹션 10
@@ -28,4 +28,4 @@
 - 원본 섹션 유지, 신규는 해당 섹션 뒤에 추가
 - 레거시는 부록 B에만
 - 한글 필수 (R-한글)
-- R29: 계산기/검증/스캐너 .hexa 는 `nexus/shared/n6/scripts/` 에만 작성 — 이 폴더에는 `verify.hexa` (공통 템플릿) 만 허용
+- R29: 계산기/검증/스캐너 .hexa 는 `nexus/shared/n6/scripts/` 에만 작성
