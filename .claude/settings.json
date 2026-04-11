@@ -6,12 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/nexus-prompt-scan.hexa",
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa prompt /Users/ghost/Dev/nexus/shared/hooks/nexus-prompt-scan.hexa",
             "timeout": 3
           },
           {
             "type": "command",
-            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/go-parallel.hexa",
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa prompt /Users/ghost/Dev/nexus/shared/hooks/go-parallel.hexa",
             "timeout": 3
           }
         ]
@@ -23,11 +23,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/block-forbidden-ext.hexa"
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa pretool /Users/ghost/Dev/nexus/shared/hooks/block-forbidden-ext.hexa"
           },
           {
             "type": "command",
-            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/absolute-rules-loader.hexa"
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa pretool /Users/ghost/Dev/nexus/shared/hooks/absolute-rules-loader.hexa"
           }
         ]
       },
@@ -47,7 +47,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hexa-grammar-guard.hexa"
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa post /Users/ghost/Dev/nexus/shared/hooks/nexus-post-bash.hexa"
+          },
+          {
+            "type": "command",
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa post /Users/ghost/Dev/nexus/shared/hooks/hexa-grammar-guard.hexa"
           }
         ]
       },
@@ -56,7 +60,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/nexus-post-edit.hexa"
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa post /Users/ghost/Dev/nexus/shared/hooks/nexus-post-edit.hexa"
           }
         ]
       }
