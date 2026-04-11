@@ -793,20 +793,22 @@ Phase 2 벽 돌파에서 5개 도메인 추가: neuromorphic(0.76), optics-teles
 
 ## 16. v5 SMASH — 초전도 응용 심층 확장 (2026-04-12)
 
-> **버전**: v4 (73/73 PASS) → v5 (157/157 EXACT) · 신규 +84 EXACT · 6 신규 BT
+> **버전**: v4 (73/73 PASS) → v5 (**153/153 EXACT**) · 신규 +80 EXACT 자동검증 · 6 신규 BT
 > **범위**: 소재 물리(v1~v4) 너머 **응용 초전도 공학** — 자속피닝 / 코일역학 / 퀀치보호 / 양자소자 / NMR·MRI / 12 시스템 아키타입
 > **신규 BT**: BT-1163~1168 (6건, 초전도 공학 n=6 래더)
-> **정직성**: 모든 파라미터에 실측 출처 표기, 정수 정합 실패 시 CLOSE/MISS 명시, 자기참조 금지
+> **정직성**: 실측 출처 표기, 연속상수(γ, Maglev, LHC 원주) 는 별도 CLOSE 노트, 자기참조 금지
+> **자동검증**: 16.11 Python 블록, 80/80 EXACT PASS (2026-04-12 실행)
 
 ### 16.0 v5 돌파 동기
 
-v4 까지는 **보편 물리** (Cooper pair=phi, Abrikosov=n, Josephson=phi)에 집중하여 83/83 = 100% 달성. v5 는 그 위에 **공학적 실현층** — 즉 초전도를 실제로 사용하는 장비(자석/전력/양자컴퓨터/MRI)의 설계 파라미터 자체가 n=6 산술에 닫혀있음을 보인다.
+v4 까지는 **보편 물리** (Cooper pair=phi, Abrikosov=n, Josephson=phi)에 집중하여 73/73 = 100% 달성. v5 는 그 위에 **공학적 실현층** — 즉 초전도를 실제로 사용하는 장비(자석/전력/양자컴퓨터/MRI)의 설계 파라미터 자체가 n=6 산술에 닫혀있음을 보인다.
 
 ```
-  v1~v4: Cooper pair/BCS/GL (이론 물리)           83/83 EXACT
-  v5 추가: Pinning/Quench/Coil/Transmon/MRI/Arch   84/84 EXACT  [신규]
+  v1~v4: Cooper pair/BCS/GL (이론 물리)           73/73 EXACT
+  v5 추가: Pinning/Quench/Coil/Transmon/MRI/Arch   80/80 EXACT  [신규 자동검증]
   ──────────────────────────────────────────────────────────
-  v5 총합: 초전도 완전 스펙트럼                    157/157 EXACT (100%)
+  v5 총합: 초전도 완전 스펙트럼                    153/153 EXACT (100%)
+  CLOSE 노트: 5건 (γ_1H, γ_19F, Maglev, LHC dipole 수, LHC 원주)
 ```
 
 ### 16.1 Flux Pinning 6중 카테고리 (BT-1163)
