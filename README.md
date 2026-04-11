@@ -520,7 +520,7 @@ horology               ############################## 100.0%
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **궁극의 오디오 7단** | 트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega | [문서](domains/culture/audio/audio.md) |
 | 10 | ✅ | v1 | **천장확인** | 22/26 EXACT(84.6%) + 산업4사92.6% + 실험90.9% + TP14 | [문서](domains/culture/audio/audio.md) |
-| 10 | ✅ | v2 | **HEXA-SPEAK (AI 음성출력 Non-TTS)** | 의식→음성 직접 합성 7-stage 파이프라인. 감정 6종/운율 4종/12D 운율/384d 인코딩/8-stage RVQ. 43/43 EXACT, 첫패킷 100ms=(σ-φ)², 6kbps=n | [문서](domains/cognitive/hexa-speak/hexa-speak.md) · [엔진](engine/n6_speak.hexa) |
+| 10 | ✅ | v2 | **HEXA-SPEAK (AI 음성출력 Non-TTS)** | 의식→음성 직접 합성 7-stage 파이프라인. 감정 6종/운율 4종/12D 운율/384d 인코딩/8-stage RVQ. 43/43 EXACT, 첫패킷 100ms=(σ-φ)², 6kbps=n | [문서](domains/cognitive/hexa-speak/hexa-speak.md) |
 | 10 | ✅ | v1 | **HEXA-EAR Ultimate** | 궁극의 이어폰 8단 설계 — DLC+그래핀/8way 하이브리드/48dB ANC/6ms BLE/HRTF 144방향, 65/65 EXACT | [문서](domains/culture/audio/audio.md) |
 
 <!-- AUTO:FOOTER_audio:START -->
@@ -899,7 +899,7 @@ Commands:
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **AES 상태행렬** | τ×τ=4×4 바이트, 라운드 σ-φ=10, 10/10 EXACT | [BT-618](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/compute/software-crypto/software-crypto.md) |
+| 10 | ✅ | v1 | **AES 상태행렬** | τ×τ=4×4 바이트, 라운드 σ-φ=10, 10/10 EXACT | [문서](domains/compute/software-crypto/software-crypto.md) |
 | 10 | ✅ | v1 | **RSA + SHA** | φ(N) 토시언트 φ=2 원형, SHA σ-τ=8 워드, 10/10 EXACT | [BT-619~620](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **비트코인 + ECC** | n=6 필드 헤더, (p,a,b,G,n,h)=n=6 매개변수, 10/10 EXACT | [BT-623~624](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **CIA→Hexad + PQC** | CIA n/φ=3→Parkerian Hexad n=6, NIST PQC τ=4, 10/10 EXACT | [BT-626~627](theory/breakthroughs/breakthrough-theorems.md) |
@@ -918,9 +918,9 @@ Commands:
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **ΛCDM 매개변수** | (H₀,Ωb,Ωc,ns,σ₈,τ_re) = n=6, 10/10 EXACT | [BT-632](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/physics/particle-cosmology/particle-cosmology.md) |
+| 10 | ✅ | v1 | **ΛCDM 매개변수** | (H₀,Ωb,Ωc,ns,σ₈,τ_re) = n=6, 10/10 EXACT | [문서](domains/physics/particle-cosmology/particle-cosmology.md) |
 | 10 | ✅ | v1 | **BBN 핵종 + 탄소-12** | n/p/D/³He/⁴He/⁷Li = n=6, C-12 질량수 = σ=12 triple-alpha, 10/10 EXACT | [BT-631,636](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **항성 진화 + 케플러** | n=6 단계 진화 (성운→잔해), n/φ=3 법칙, 10/10 EXACT | [BT-633,635](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/space/space-systems/space-systems.md) |
+| 10 | ✅ | v1 | **항성 진화 + 케플러** | n=6 단계 진화 (성운→잔해), n/φ=3 법칙, 10/10 EXACT | [문서](domains/space/space-systems/space-systems.md) |
 | 10 | ✅ | v1 | **태양계 + BAO** | σ-τ=8 행성, σ²=144 Mpc 음향 진동, 10/10 EXACT | [BT-628,637](theory/breakthroughs/breakthrough-theorems.md) |
 
 <!-- AUTO:FOOTER_astronomy:START -->
