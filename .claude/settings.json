@@ -28,6 +28,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/l0-block.hexa"
+          },
+          {
+            "type": "command",
             "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa pretool /Users/ghost/Dev/nexus/shared/hooks/block-forbidden-ext.hexa"
           },
           {
