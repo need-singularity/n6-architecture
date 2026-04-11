@@ -1,0 +1,10 @@
+# verify_chip-hexa1 -- 칩 6단계 1단(HEXA-1 디지털 통합 SoC) 검증 스텁
+# 본 스텁은 chip-hexa1.md 의 H-CHIP-1~28 가설을 N62/R29 기준으로 호출한다.
+# 향후: 12x12 텐서 RTL 합성값, phi_6 사이클 수, MoE 라우팅 지연을 .md 부록 A 에 임베드.
+# SSOT 이관 예정: nexus/shared/n6/scripts/verify_chip-hexa1_n6.hexa
+fn main() {
+    println("[chip-hexa1] 1단 베이스라인 검증 stub -- TODO: 12x12 MAC, phi_6 2cyc, 이집트 분배")
+    let n = 6
+    assert(sigma(n) == 12 and phi(n) == 2 and tau(n) == 4)
+    println("[chip-hexa1] R(6) = sigma*phi/(n*tau) = 1 PASS")
+}

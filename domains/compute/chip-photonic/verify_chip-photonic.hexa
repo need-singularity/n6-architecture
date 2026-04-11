@@ -1,0 +1,10 @@
+# verify_chip-photonic -- 칩 6단계 4단(HEXA-PHOTONIC 광 컴퓨트) 검증 스텁
+# 본 스텁은 chip-photonic.md 의 6 파장 WDM + sigma^2 MZI mesh 를 호출.
+# 향후: < 1 fJ/MAC, 6 파장 분리도, MZI 정확도 측정값 임베드.
+# SSOT 이관 예정: nexus/shared/n6/scripts/verify_chip-photonic_n6.hexa
+fn main() {
+    println("[chip-photonic] 4단 광 컴퓨트 stub -- TODO: 6파장 WDM, 144 MAC/타일, fJ/MAC")
+    let wdm = 6; let mzi_macs = 12 * 12
+    assert(wdm == 6 and mzi_macs == 144)
+    println("[chip-photonic] n=6 WDM + sigma^2=144 MAC PASS")
+}

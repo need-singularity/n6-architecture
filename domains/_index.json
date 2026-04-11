@@ -1,11 +1,12 @@
 {
-  "_doc": "도메인 SSOT — 299 도메인을 9축으로 분류. 축 변경 시 이 파일만 수정.",
-  "_version": "1.0.2",
-  "_total": 298,
+  "_doc": "도메인 SSOT — 304 도메인을 10축으로 분류. 축 변경 시 이 파일만 수정.",
+  "_version": "1.0.3",
+  "_total": 304,
   "_axes": 10,
   "_changelog": [
     "1.0.1 (2026-04-11): compute 축에 4 도메인 추가 — chip-rtl-gen, chip-dse-pipeline, chip-isa-n6, chip-npu-n6 (칩 설계 축 확장)",
-    "1.0.2 (2026-04-11): life 축 synbio ↔ synthetic-biology 병합 — synthetic-biology 항목 제거, synbio 단일 canonical (부록 A/B/C 흡수, reports/audits/synbio-merge-2026-04-11.md)"
+    "1.0.2 (2026-04-11): life 축 synbio ↔ synthetic-biology 병합 — synthetic-biology 항목 제거, synbio 단일 canonical (부록 A/B/C 흡수, reports/audits/synbio-merge-2026-04-11.md)",
+    "1.0.3 (2026-04-12): compute 축에 칩 6단계 로드맵 6 도메인 추가 — chip-hexa1, chip-pim, chip-3d, chip-photonic, chip-wafer, chip-sc (HEXA-1→PIM→3D→Photonic→Wafer→Superconducting, project_chip_architecture_goal.md 출처)"
   ],
   "_template": "각 도메인: domains/<axis>/<name>/{CLAUDE.md, <name>.md, verify.hexa}",
 
@@ -48,8 +49,10 @@
 
   "compute": [
     "5g-6g-network", "advanced-packaging", "ai-efficiency", "blockchain",
-    "browser", "chip-architecture", "chip-dse-pipeline", "chip-isa-n6",
-    "chip-npu-n6", "chip-rtl-gen", "compiler-os", "consciousness-chip",
+    "browser", "chip-3d", "chip-architecture", "chip-dse-pipeline",
+    "chip-hexa1", "chip-isa-n6", "chip-npu-n6", "chip-photonic",
+    "chip-pim", "chip-rtl-gen", "chip-sc", "chip-wafer",
+    "compiler-os", "consciousness-chip",
     "consciousness-soc", "cryptography", "digital-twin", "display",
     "display-8stack", "dram", "exynos", "isocell-comms", "keyboard",
     "learning-algorithm", "mouse", "network", "network-protocol",

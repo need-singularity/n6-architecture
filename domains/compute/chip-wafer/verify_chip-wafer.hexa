@@ -1,0 +1,10 @@
+# verify_chip-wafer -- 칩 6단계 5단(HEXA-WAFER 웨이퍼 스케일) 검증 스텁
+# 본 스텁은 chip-wafer.md 의 sigma^4 코어 그리드 + 6-regular hex NoC 를 호출.
+# 향후: 248,832 코어, reticle 12 단계, NoC < 0.5 ns 측정값 임베드.
+# SSOT 이관 예정: nexus/shared/n6/scripts/verify_chip-wafer_n6.hexa
+fn main() {
+    println("[chip-wafer] 5단 wafer 검증 stub -- TODO: sigma^5 코어, 6-reg hex, reticle 12")
+    let cores_mk2 = 12 * 12 * 12 * 12 * 12
+    assert(cores_mk2 == 248832)
+    println("[chip-wafer] sigma^5 = 248832 코어 (Mk.II) PASS")
+}

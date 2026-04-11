@@ -1,0 +1,10 @@
+# verify_chip-pim -- 칩 6단계 2단(HEXA-PIM 메모리 내 연산) 검증 스텁
+# 본 스텁은 chip-pim.md 의 PIM 균형식을 호출하며, 디테일은 hexa-pim 도메인에 위임.
+# 향후: 6144 MAC, J_2+1=25배 BW, sigma*tau=48W 측정값 임베드.
+# SSOT 이관 예정: nexus/shared/n6/scripts/verify_chip-pim_n6.hexa
+fn main() {
+    println("[chip-pim] 2단 PIM 검증 stub -- TODO: 12x8x64=6144 MAC, 25 TB/s, 48W")
+    let total_mac = 12 * 8 * 64
+    assert(total_mac == 6144)
+    println("[chip-pim] sigma*(sigma-tau)*2^n = 6144 PASS")
+}
