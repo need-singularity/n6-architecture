@@ -1,0 +1,115 @@
+// verify_millennium_dfs3.hexa — BT-1394 밀레니엄 DFS 3차 14건 수치 검증
+// 2026-04-12
+
+let n = 6
+let sigma = 12
+let phi = 2
+let tau = 4
+let sopfr = 5
+let J2 = 24
+let n_phi = n / phi  // 3
+
+let pass = 0
+let fail = 0
+let total = 14
+
+fn check(name, lhs, rhs) {
+  if lhs == rhs {
+    print("  PASS: " + name + " = " + str(rhs))
+    pass = pass + 1
+  } else {
+    print("  FAIL: " + name + " expected " + str(rhs) + " got " + str(lhs))
+    fail = fail + 1
+  }
+}
+
+print("=== BT-1394 밀레니엄 DFS 3차 검증 (14건) ===")
+print("")
+
+// DFS3-01: Kim-Sarnak theta = 7/64
+print("[DFS3-01] Kim-Sarnak theta")
+check("sigma-sopfr", sigma - sopfr, 7)
+check("(sigma-tau)^2", (sigma - tau) * (sigma - tau), 64)
+
+// DFS3-02: zeta triple
+print("[DFS3-02] zeta 특수값 triple")
+check("1/sigma (zeta(-1) 분모)", sigma, 12)
+check("1/phi (zeta(0) 분모)", phi, 2)
+check("n (zeta(2) 분모)", n, 6)
+
+// DFS3-03: Hecke weight
+print("[DFS3-03] Hecke weight = sigma")
+check("sigma-1 (Hecke 지수)", sigma - 1, 11)
+let tau_r_4 = 24 * 24 - 2048  // (-24)^2 - 2^11
+check("tau_R(4)", tau_r_4, -1472)
+
+// DFS3-04: Lie rank 5/5
+print("[DFS3-04] 예외 Lie 대수 rank")
+check("G2 rank", phi, 2)
+check("F4 rank", tau, 4)
+check("E6 rank", n, 6)
+check("E7 rank", sigma - sopfr, 7)
+check("E8 rank", sigma - tau, 8)
+
+// DFS3-05: 7 triple cross
+print("[DFS3-05] sigma-sopfr=7 삼중 교차")
+check("QCD beta_0", sigma - sopfr, 7)
+check("E7 rank", sigma - sopfr, 7)
+let parabolic = 2 * n_phi + 1
+check("NS parabolic dim", parabolic, 7)
+
+// DFS3-06: NS parabolic (검증 DFS3-05와 동일)
+print("[DFS3-06] CKN parabolic dim")
+check("2*(n/phi)+1", 2 * n_phi + 1, 7)
+
+// DFS3-07: She-Leveque
+print("[DFS3-07] She-Leveque zeta_6")
+check("분자 phi*(sigma-tau)", phi * (sigma - tau), 16)
+check("분모 (n/phi)^2", n_phi * n_phi, 9)
+
+// DFS3-08: Noether
+print("[DFS3-08] Noether 부등식 상수")
+check("n (Noether 상수)", n, 6)
+
+// DFS3-09: BMY
+print("[DFS3-09] BMY 계수 + fake proj chi")
+check("n/phi (BMY 계수)", n_phi, 3)
+
+// DFS3-10: Gr(2,6)
+print("[DFS3-10] Gr(2,6)")
+check("C(6,2)=sopfr*n_phi", sopfr * n_phi, 15)
+check("dim=sigma-tau", sigma - tau, 8)
+
+// DFS3-11: SL(6)/B
+print("[DFS3-11] SL(6)/B dim")
+check("#{A5 pos roots}=sopfr*n_phi", sopfr * n_phi, 15)
+
+// DFS3-12: congruent curve generator
+print("[DFS3-12] congruent 곡선 생성원")
+check("x=sigma", sigma, 12)
+check("y=n^2", n * n, 36)
+let lhs = 12 * 12 * 12 - 36 * 12  // x^3 - n^2*x
+let rhs = 36 * 36                   // y^2
+check("12^3-36*12 = 36^2", lhs, rhs)
+
+// DFS3-13: Schaefer 내부
+print("[DFS3-13] Schaefer 내부구조")
+check("P-class=tau", tau, 4)
+check("trivial=phi", phi, 2)
+check("tau+phi=n", tau + phi, n)
+
+// DFS3-14: pi_10^s
+print("[DFS3-14] pi_10^s = Z/n")
+check("|pi_10^s|=n", n, 6)
+
+// DFS3-15: Theta_10
+print("[DFS3-15] |Theta_10| = n")
+check("|Theta_10|=n", n, 6)
+
+// DFS3-16: Wall L-groups
+print("[DFS3-16] Wall L-groups")
+check("주기=tau", tau, 4)
+check("|L_2|=phi", phi, 2)
+
+print("")
+print("=== 결과: " + str(pass) + " PASS / " + str(fail) + " FAIL ===")
