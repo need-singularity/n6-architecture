@@ -13,6 +13,11 @@
             "type": "command",
             "command": "/Users/ghost/Dev/hexa-lang/target/release/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa prompt /Users/ghost/Dev/nexus/shared/hooks/go-parallel.hexa",
             "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "/Users/ghost/Dev/hexa-lang/target/release/hexa /Users/ghost/Dev/nexus/shared/hooks/project-aware-improver.hexa",
+            "timeout": 3
           }
         ]
       }
@@ -52,6 +57,10 @@
           {
             "type": "command",
             "command": "/Users/ghost/Dev/hexa-lang/target/release/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa post /Users/ghost/Dev/nexus/shared/hooks/hexa-grammar-guard.hexa"
+          },
+          {
+            "type": "command",
+            "command": "/Users/ghost/Dev/hexa-lang/target/release/hexa /Users/ghost/Dev/nexus/shared/hooks/build-fail-diag.hexa"
           }
         ]
       },
