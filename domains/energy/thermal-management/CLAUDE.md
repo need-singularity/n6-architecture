@@ -4,12 +4,12 @@
 
 ## 파일
 - `thermal-management.md` — 15섹션 통합 본문
-- `verify.hexa` — 검증 실행 진입점
+- 검증코드는 도메인 본문 .md 에 ```python 블록으로 임베드됨
 - `CLAUDE.md` — 본 가이드
 
 ## 사용법
 - 본문 읽기: 섹션 2 목표 → 3 가설 → 4 BT → 7 검증
-- 검증 실행: `hexa verify.hexa`
+- 검증 실행: 도메인 본문 .md 내 ```python 블록 참조
 - 진화 단계: 섹션 9 Mk.I~V
 - 예측 추적: 섹션 10
 
