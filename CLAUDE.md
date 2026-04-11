@@ -2,6 +2,13 @@
 
 > shared/ JSON 단일진실 (R14). 규칙: `shared/rules/common.json` (R0~R27)
 
+## ⛔ 규칙 준수 (필수)
+
+모든 작업 전 아래 규칙 파일을 읽고 준수할 것. 위반 시 즉시 수정.
+
+- **공통**: `shared/rules/common.json` — R0~R27, AI-NATIVE 원칙
+- **프로젝트**: `shared/rules/n6-architecture.json` — N61~N65
+
 ## atlas.n6 — 현실지도 SSOT (구조 숙지 필수)
 
 **절대 경로**: `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` (단일 파일, 60K+ 줄)
