@@ -1,6 +1,7 @@
 {
   "_doc": "이론층 SSOT — 영구 불변 증명·정리·상수·예측·흐름",
-  "_version": "1.0.0",
+  "_version": "1.1.0",
+  "_updated": "2026-04-11",
 
   "proofs": {
     "main": "proofs/theorem-r1-uniqueness.md",
@@ -8,15 +9,32 @@
       "proofs/standard-model-from-n6.md",
       "proofs/the-number-24.md",
       "proofs/honest-limitations.md",
-      "proofs/physics-math-certification.md"
+      "proofs/physics-math-certification.md",
+      "proofs/attractor-meta-theorem-2026-04-11.md",
+      "proofs/bernoulli-boundary-2026-04-11.md"
     ],
     "statement": "σ(n)·φ(n) = n·τ(n) ⟺ n = 6 (n≥2)",
-    "independent_proofs": 3
+    "independent_proofs": 3,
+    "meta_theorems": [
+      {
+        "name": "Attractor Meta-Theorem",
+        "file": "proofs/attractor-meta-theorem-2026-04-11.md",
+        "theorems": ["0","A","B","C","D","E","F","H"],
+        "self_referential_identities": 16
+      }
+    ]
   },
 
   "breakthroughs": {
     "main": "breakthroughs/breakthrough-theorems.md",
-    "total": 343,
+    "total": 547,
+    "extensions": [
+      "breakthroughs/breakthrough-theorems-extension-2026-04-08.md",
+      "breakthroughs/breakthrough-theorems-warp-dimension-2026-04-08.md",
+      "breakthroughs/millennium-7-closure-2026-04-11.md",
+      "breakthroughs/millennium-dfs-complete-2026-04-11.md",
+      "breakthroughs/millennium-n6-attractor-2026-04-11.md"
+    ],
     "candidates": [
       "breakthroughs/bt-candidates-from-tecs-l.md",
       "breakthroughs/bt-candidates-round2.md",

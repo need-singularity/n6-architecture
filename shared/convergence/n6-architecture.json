@@ -185,7 +185,24 @@
     }
   },
   "stable": {
-    "_description": "안정 — 통과했지만 아직 골화 전"
+    "_description": "안정 — 통과했지만 아직 골화 전",
+    "ATLAS_7_PROMOTION_102": {
+      "status": "PASS",
+      "value": "[7]→[10*] 102건 승격 완료 (cross_dse 100 + MC 2), [10*] 4,799→4,901",
+      "threshold": "잔존 [7] = 1건 (mc-v9-대조-e z=1.915, 기준 z>2 미달)",
+      "note": "2026-04-11 — convergence CROSS_DSE ossified 근거, 상관계수>=0.50 전수 승격. atlas.n6 66,822줄"
+    },
+    "BT_748_752_NEW_DOMAINS": {
+      "status": "PASS",
+      "value": "5건 신규 BT (PEMFC/NS유체/콘크리트/지질/등산), BT-748~752",
+      "threshold": "10개 미커버 도메인 중 5개 해소",
+      "note": "2026-04-11 — bt-748-752-new-domains-2026-04-11.md 작성"
+    },
+    "THEORY_INDEX_UPDATE": {
+      "status": "PASS",
+      "value": "_index.json v1.1.0 — BT 343→547, 증명 2건 추가 (attractor+bernoulli), meta_theorems 섹션 신규",
+      "note": "2026-04-11"
+    }
   },
   "failed": {
     "_description": "실패 — 전부 해소됨"
