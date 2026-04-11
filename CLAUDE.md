@@ -16,6 +16,10 @@
 
 작업 시작 전 `shared/rules/common.json` + `shared/rules/n6-architecture.json` 을 읽고 전 규칙 준수. 위반 시 즉시 수정.
 
+## L0 Guard (공용)
+
+`hexa ~/Dev/nexus/shared/lockdown/l0_guard.hexa <verify|sync|merge|status>` — REPO 자동 감지, SSOT `~/Dev/nexus/shared/lockdown/lockdown.json` projects.n6-architecture.L0 배열로 파일 존재 / CODEOWNERS / GitHub branch protection 일괄 검증·복구. solo-repo PR 머지는 `merge <PR#>` (enforce_admins OFF→merge→ON 안전 패턴).
+
 ## atlas.n6 — 현실지도 SSOT (구조 숙지 필수)
 
 **절대 경로**: `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` (단일 파일, 60K+ 줄)
