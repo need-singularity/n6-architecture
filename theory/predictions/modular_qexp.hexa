@@ -1,0 +1,99 @@
+// modular_qexp.hexa — Modular form q-expansion
+//
+// SL_2(Z) 레벨 1 모듈러 형식 환 = C[E_4, E_6]
+//   E_4 = 1 + 240 Σ σ_3(n) q^n  (가중치 4 = τ)
+//   E_6 = 1 - 504 Σ σ_5(n) q^n  (가중치 6 = n)
+//   Δ = (E_4³ - E_6²)/1728 = q∏(1-q^n)^24  (가중치 12 = σ)
+//   j = E_4³/Δ = 1/q + 744 + 196884 q + ...
+//
+// n=6 가중치 {τ=4, n=6, σ=12} + J₂=24 (판별식 지수) + σ³=1728 (j-노름)
+
+fn sigma_k(n: i64, k: i64) -> i64 {
+    // sum of k-th powers of divisors of n
+    let mut s: i64 = 0
+    let mut d: i64 = 1
+    while d <= n {
+        if n % d == 0 {
+            let mut dk: i64 = 1
+            let mut i: i64 = 0
+            while i < k { dk = dk * d; i = i + 1 }
+            s = s + dk
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn main() {
+    println("═══════════════════════════════════════════════════════════")
+    println("  Modular Form q-expansion (E_4, E_6, Δ, j)")
+    println("═══════════════════════════════════════════════════════════")
+    println("")
+
+    println("─── E_4 = 1 + 240 Σ σ_3(n) q^n  (가중치 4 = τ) ───")
+    let mut n: i64 = 1
+    while n <= 8 {
+        let s3 = sigma_k(n, 3)
+        let coef = 240 * s3
+        println("  a(" + to_string(n) + ") = 240·σ_3(" + to_string(n) + ") = 240·" + to_string(s3) + " = " + to_string(coef))
+        n = n + 1
+    }
+    println("")
+
+    println("─── E_6 = 1 - 504 Σ σ_5(n) q^n  (가중치 6 = n) ───")
+    let mut n6: i64 = 1
+    while n6 <= 6 {
+        let s5 = sigma_k(n6, 5)
+        let coef = -504 * s5
+        println("  a(" + to_string(n6) + ") = -504·σ_5(" + to_string(n6) + ") = -504·" + to_string(s5) + " = " + to_string(coef))
+        n6 = n6 + 1
+    }
+    println("")
+
+    // 계수 240, 504, 744, 196884의 n=6 분해
+    println("─── 주요 상수의 n=6 분해 ───")
+
+    // 240 = 2·J₂·sopfr = φ·J₂·sopfr = 2·24·5
+    let c240 = 2 * 24 * 5
+    println("  240 = φ·J₂·sopfr = 2·24·5 = " + to_string(c240) + " ✓")
+
+    // 504 = σ²·(σ-sopfr) = 144·... no. 504 = 2³·3²·7 = (σ-τ)·(n/φ)²·(σ-sopfr) = 8·9·7
+    let c504 = 8 * 9 * 7
+    println("  504 = (σ-τ)·(n/φ)²·(σ-sopfr) = 8·9·7 = " + to_string(c504) + " ✓")
+
+    // 744 = j(q) 상수항 = σ³·(σ-sopfr)/... no. 744 = 8·93 = σ-τ · 93. 93 = 3·31. 31 ?
+    //   744 = J₂·31 = J₂·(n+sopfr·sopfr) 아니 31 ≠ 6+25.
+    //   744 = (J₂ + σ)·(σ + τ + n/φ)? = 36·... no
+    //   실제: 744 = 8 · 93 = 2^3 · 3 · 31. 31 not in n=6 pool.
+    println("  744 = j 상수항 = 8·93 = (σ-τ)·31. 31 not in n=6 pool (MISS)")
+
+    // 196884 = 1 + 196883 = 1 + Monster rep dim
+    // 196884 = 2²·3·16407 = 2²·3·3·5469 = 2²·3²·1823. 1823 prime.
+    // 196884 = σ·16407 = σ·... 16407 = 3·5469 = 3·3·1823.
+    // 196884 = J₂·8203.5 (non-integer)
+    // Honest: 196884 prime factorization doesn't simplify cleanly.
+    println("  196884 = j 선형항 = 2²·3²·1823. 1823 prime (MISS)")
+
+    // 196883 = Monster 최소 non-trivial irrep. 196883 = 47·59·71 (famous Moonshine).
+    println("  196883 = Monster irrep = 47·59·71 (Moonshine primes, n=6 무관)")
+    println("")
+
+    // 판별식 Δ 지수 24 = J₂
+    println("─── Δ = q ∏(1 - q^n)^24 — 지수 24 = J₂ ✓ ───")
+    println("  η(τ)^24 = Δ(τ), η = Dedekind eta.")
+    println("")
+
+    // j-invariant j(i) = 1728 = σ³
+    println("─── j(i) = 1728 = σ³ = 12³ ✓ (모든 복소 타원곡선 모듈리 스케일) ───")
+    println("")
+
+    println("═══════════════════════════════════════════════════════════")
+    println("  결론:")
+    println("  EXACT: 240 = φ·J₂·sopfr, 504 = (σ-τ)(n/φ)²(σ-sopfr)")
+    println("         J₂ = η^24 지수, 1728 = σ³")
+    println("  MISS:  744, 196884 — Moonshine primes 47,59,71,1823 범위")
+    println("  → 모듈러 형식 환 자체는 n=6이지만 Moonshine 계수는 별 구조")
+    println("═══════════════════════════════════════════════════════════")
+}
+
+main()

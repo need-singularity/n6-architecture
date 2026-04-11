@@ -1,0 +1,97 @@
+// riemann_explicit.hexa — Riemann explicit formula 수치 확인
+//
+// ψ(x) = x - Σ_ρ (x^ρ/ρ) - log(2π) - (1/2)·log(1 - x^{-2})
+//
+// 여기서 ψ(x) = Σ_{n≤x} Λ(n)는 Chebyshev 함수.
+// ρ = 비자명 영점. log(2π)는 n=6 해석?
+//
+// 수치 예: x=6에서 ψ(6) = Σ_{n≤6} Λ(n) = log(2) + log(3) + log(2) + log(5) = log(60)
+
+fn log_approx(x: f64) -> f64 {
+    // Newton 근사: log(x) for x > 0
+    // 사용: ln(x) = 2·atanh((x-1)/(x+1))
+    let t = (x - 1.0) / (x + 1.0)
+    // atanh(t) = t + t³/3 + t⁵/5 + ...
+    let mut sum = t
+    let mut tk = t
+    let t2 = t * t
+    let mut k: i64 = 3
+    while k < 30 {
+        tk = tk * t2
+        let fk: f64 = to_float(k)
+        sum = sum + tk / fk
+        k = k + 2
+    }
+    return 2.0 * sum
+}
+
+fn main() {
+    println("═══════════════════════════════════════════════════════════")
+    println("  Riemann Explicit Formula 수치 검증")
+    println("═══════════════════════════════════════════════════════════")
+    println("")
+
+    // Chebyshev ψ(6) = log(2) + log(2) + log(3) + log(5)
+    //                = log(2²·3·5) = log(60) ≈ 4.0943
+    let log2 = log_approx(2.0)
+    let log3 = log_approx(3.0)
+    let log5 = log_approx(5.0)
+    let log_2pi = log_approx(6.28318530718)  // 2π
+    let log_n = log_approx(6.0)
+
+    println("─── 기본 로그 값 ───")
+    println("  log(2) = " + to_string(log2))
+    println("  log(3) = " + to_string(log3))
+    println("  log(5) = " + to_string(log5))
+    println("  log(6) = " + to_string(log_n))
+    println("  log(2π) = " + to_string(log_2pi))
+    println("")
+
+    // ψ(6) = 2log2 + log3 + log5 = log(60)
+    let psi_6 = 2.0 * log2 + log3 + log5
+    let log_60 = log_approx(60.0)
+    println("─── Chebyshev ψ(6) ───")
+    println("  ψ(6) = 2·log(2) + log(3) + log(5) = " + to_string(psi_6))
+    println("  log(60) = " + to_string(log_60))
+    println("  일치: " + to_string(psi_6 - log_60 < 0.001 && log_60 - psi_6 < 0.001))
+    println("")
+
+    // Explicit formula: ψ(x) = x - [영점 기여] - log(2π) - (1/2)log(1-x^{-2})
+    // x=6: RHS = 6 - [영점] - log(2π) - (1/2)log(1 - 1/36) = 6 - [영점] - log(2π) - (1/2)log(35/36)
+    let corr = 0.5 * log_approx(35.0/36.0)
+    println("─── x=6에서 명시 공식 RHS (영점 제외) ───")
+    println("  6 - log(2π) - (1/2)log(35/36) = " + to_string(6.0 - log_2pi - corr))
+    println("  vs ψ(6) = " + to_string(psi_6))
+    let diff = (6.0 - log_2pi - corr) - psi_6
+    println("  차이 = [영점 기여] = " + to_string(diff))
+    println("  (정확히는 Σ_ρ 6^ρ/ρ, 처음 몇 영점으로 약 -1 정도)")
+    println("")
+
+    // n=6 특수: x = n = 6, sum of log over primes ≤ n
+    // 첫 3소수 {2, 3, 5} = {φ, n/φ, sopfr}
+    println("─── 소수 ≤ n 관측 ───")
+    println("  첫 3소수 = {2, 3, 5} = {φ, n/φ, sopfr} ← n=6 핵심 3조")
+    println("  π(n) = π(6) = 3 = n/φ (소수 계수 함수)")
+    println("  sum_{p≤n} log(p) = log(30) = " + to_string(log_approx(30.0)))
+    println("  n·log(p avg) ≈ " + to_string(log_approx(30.0)))
+    println("")
+
+    // Explicit formula의 log(2π) 항 해석
+    // log(2π) = log(2) + log(π) ≈ 0.693 + 1.144 = 1.837
+    // = log(φ·π) — n=6에서 φ=2
+    println("─── log(2π) = log(φ·π) 해석 ───")
+    println("  log(2π) = " + to_string(log_2pi))
+    println("  = log(φ) + log(π) (φ=2)")
+    println("  — 명시 공식의 'n=6-scaled' 상수항")
+    println("")
+
+    println("═══════════════════════════════════════════════════════════")
+    println("  결론:")
+    println("  - Chebyshev ψ(n=6) = log(60) = 로그 2²·3·5")
+    println("  - 명시 공식 상수항 log(2π) = log(φ·π)")
+    println("  - 첫 3소수 {2,3,5} = {φ, n/φ, sopfr}")
+    println("  이것들은 산술적 facts, 증명 경로는 아님.")
+    println("═══════════════════════════════════════════════════════════")
+}
+
+main()

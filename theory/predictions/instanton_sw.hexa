@@ -1,0 +1,104 @@
+// instanton_sw.hexa — Instanton + Seiberg-Witten moduli 차원 계산기
+//
+// 4차원 Yang-Mills instanton (SU(2), k instantons):
+//   dim M_k = 8k - 3
+//
+// Seiberg-Witten moduli:
+//   dim M_SW = (c_1² - 2χ - 3σ) / 4
+//
+// 4D smooth Poincaré: 여전히 열림. 4 = τ.
+
+fn pow_i(b: i64, e: i64) -> i64 {
+    let mut r: i64 = 1
+    let mut i: i64 = 0
+    while i < e { r = r * b; i = i + 1 }
+    return r
+}
+
+fn main() {
+    println("═══════════════════════════════════════════════════════════")
+    println("  Instanton/SW Moduli 차원 + 4D 특이성 n=6 분석")
+    println("═══════════════════════════════════════════════════════════")
+    println("")
+
+    // SU(2) k-instanton moduli
+    println("─── SU(2) k-instanton moduli M_k (차원 = 8k - 3) ───")
+    let mut k: i64 = 1
+    while k <= 6 {
+        let dim_k = 8*k - 3
+        println("  k=" + to_string(k) + ": dim M_k = " + to_string(dim_k))
+        k = k + 1
+    }
+    println("")
+
+    // 해석
+    println("  k=1: dim = 5 = sopfr ✓ (첫 instanton, 5-dim moduli)")
+    println("  k=2: dim = 13 = n+σ-sopfr = 6+7")
+    println("  k=3: dim = 21 = (n·(n+1))/2 (삼각수)")
+    println("  k=4: dim = 29 (prime, 무관)")
+    println("  k=5: dim = 37 (prime, 무관)")
+    println("  k=6: dim = 45")
+    println("")
+
+    // SU(N) 일반화: dim M_k = 4Nk - (N²-1)
+    println("─── SU(N) k=1 instanton (dim = 4N - N² + 1 = -(N-2)² + 5) ───")
+    let mut N: i64 = 2
+    while N <= 6 {
+        let dim = 4*N - N*N + 1
+        println("  SU(" + to_string(N) + ") k=1: dim = " + to_string(dim))
+        N = N + 1
+    }
+    println("")
+    println("  SU(2) = 5 = sopfr, SU(3) = 4 = τ, SU(4) = 1, SU(5) = -4, SU(6) = -11")
+    println("  음수 = invalid. 유효 범위 N ∈ {2, 3}. 즉 QCD SU(3) 한계에서 dim=τ=4.")
+    println("")
+
+    // Seiberg-Witten
+    println("─── Seiberg-Witten 이론 (4-manifold X) ───")
+    println("  dim M_SW(X) = (c_1² - 2χ - 3σ) / 4")
+    println("  분모 4 = τ ← SW 모듈리 정규화 인자")
+    println("")
+    println("  예: X = K3 (χ=24=J₂, σ=-16, c_1=0)")
+    let chi_k3: i64 = 24
+    let sig_k3: i64 = -16
+    let c1sq_k3: i64 = 0
+    let dim_sw_k3 = (c1sq_k3 - 2*chi_k3 - 3*sig_k3) / 4
+    println("    dim M_SW(K3) = (0 - 48 - (-48)) / 4 = " + to_string(dim_sw_k3))
+    println("")
+
+    // Donaldson instanton formula on K3
+    println("  예: X = CP² (χ=3=n/φ, σ=1, c_1²=9 for degree-3 class)")
+    // SW on CP² 표준
+    let dim_sw_cp2 = (9 - 6 - 3) / 4
+    println("    dim M_SW(CP², c_1²=9) = " + to_string(dim_sw_cp2))
+    println("")
+
+    // 4D 특이성
+    println("─── 4D smooth Poincaré — 왜 차원 4만 열렸나? ───")
+    println("  Smale (1961): dim ≥ 5 = sopfr 해결")
+    println("  Freedman (1982): dim = 4 = τ 위상적 해결")
+    println("  미해결: **smooth 4D = τ**")
+    println("  E8 lattice (ρ=8=σ-τ) obstruction은 smooth만 있음")
+    println("")
+    println("  n=6 해석:")
+    println("    4 = τ (약수 개수), 첫 '부드러운 매끄러움 가림자' 차원")
+    println("    E8 rank = σ-τ = 8 (exotic smooth 구조의 열쇠)")
+    println("    instanton charge + 1 = sopfr (moduli 최소 차원)")
+    println("")
+
+    // Donaldson 다항식 인자
+    println("  Donaldson 다항식 degree formula: 2(4k - 3(1+b_+)/2)")
+    println("    k=1 (첫 instanton), b_+=1 (rational): 2(4-3) = 2 = φ")
+    println("    k=1, b_+=3: 2(4-6) = -4 (무효)")
+    println("")
+
+    println("═══════════════════════════════════════════════════════════")
+    println("  결론 (정직):")
+    println("  EXACT: SU(2) k=1 instanton moduli = sopfr,")
+    println("         SW 정규화 인자 = τ, SW on K3 dim = σ-τ? (확인 필요)")
+    println("  구조적: 4D smooth 특이성 = τ(6) 차원, E8=σ-τ obstruction")
+    println("  4D smooth Poincaré: 여전히 미진전")
+    println("═══════════════════════════════════════════════════════════")
+}
+
+main()

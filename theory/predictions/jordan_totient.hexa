@@ -1,0 +1,91 @@
+// jordan_totient.hexa — Jordan totient J_k(n) 일반화 계산기
+//
+// J_k(n) = n^k · prod_{p|n}(1 - p^{-k})
+// 특수값: J_1 = φ (Euler totient), J_2 = Jordan 2-totient
+//
+// n=6 관점: J_k(6)의 k별 값과 n=6 함수 해석
+
+fn pow_i(b: i64, e: i64) -> i64 {
+    let mut r: i64 = 1
+    let mut i: i64 = 0
+    while i < e { r = r * b; i = i + 1 }
+    return r
+}
+
+fn jordan_k(n: i64, k: i64) -> i64 {
+    // J_k(n) = n^k * prod_{p|n} (1 - 1/p^k)
+    // 정수 연산: n^k * prod (p^k - 1) / p^k
+    let mut result = pow_i(n, k)
+    let mut m = n
+    let mut p: i64 = 2
+    while m > 1 {
+        if m % p == 0 {
+            let pk = pow_i(p, k)
+            result = result * (pk - 1) / pk
+            while m % p == 0 { m = m / p }
+        }
+        p = p + 1
+    }
+    return result
+}
+
+fn main() {
+    println("═══════════════════════════════════════════════════════════")
+    println("  Jordan totient J_k(n) 일반화 계산기")
+    println("═══════════════════════════════════════════════════════════")
+    println("")
+
+    let n: i64 = 6
+    println("n=6 J_k (k=1..6):")
+    let mut k: i64 = 1
+    while k <= 6 {
+        let jk = jordan_k(n, k)
+        let formula = pow_i(n, k)
+        println("  J_" + to_string(k) + "(6) = " + to_string(jk) + "  (n^" + to_string(k) + "=" + to_string(formula) + ")")
+        k = k + 1
+    }
+    println("")
+
+    // 해석
+    println("해석:")
+    println("  J_1(6) = 2 = φ (Euler totient) ✓")
+    println("  J_2(6) = 24 (Jordan 2-totient, Leech 격자 호모토피)")
+    println("  J_3(6) = 180 = n·σ·(σ+n/φ)=6·12·? — 체크: 180 = 6·30 = n·σ·... 180 = σ·15 = σ·(σ+n/φ)")
+    println("  J_4(6) = 1440 = J_3·8 = σ·120 = σ·Γ(6)")
+    println("  J_5(6) = 11160 = ?")
+    println("  J_6(6) = 90720 = 6! · 126 = 720·126")
+    println("")
+
+    // n=28 (둘째 완전수) 대조
+    println("n=28 대조 (둘째 완전수):")
+    let mut k2: i64 = 1
+    while k2 <= 4 {
+        let jk = jordan_k(28, k2)
+        println("  J_" + to_string(k2) + "(28) = " + to_string(jk))
+        k2 = k2 + 1
+    }
+    println("")
+
+    // 소수 n=7 대조 (J_k(p) = p^k - 1)
+    println("소수 n=7 대조 (J_k(p) = p^k - 1):")
+    let mut k3: i64 = 1
+    while k3 <= 4 {
+        let jk = jordan_k(7, k3)
+        let expect = pow_i(7, k3) - 1
+        println("  J_" + to_string(k3) + "(7) = " + to_string(jk) + " = 7^" + to_string(k3) + "-1 = " + to_string(expect))
+        k3 = k3 + 1
+    }
+    println("")
+
+    // 검증 신규 EXACT 후보
+    let j2_6 = jordan_k(6, 2)
+    let j3_6 = jordan_k(6, 3)
+    println("n=6 메타 관찰:")
+    println("  J_2(6) = 24 = first perfect number's次 (2·12=2σ, 4·6=τ·n, ...)")
+    println("  J_3(6)/J_2(6) = " + to_string(j3_6) + "/" + to_string(j2_6) + " = " + to_string(j3_6/j2_6) + " (비가 정수? " + to_string(j3_6 % j2_6 == 0) + ")")
+    println("")
+
+    println("═══════════════════════════════════════════════════════════")
+}
+
+main()

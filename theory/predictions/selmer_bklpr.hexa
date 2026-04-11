@@ -1,0 +1,108 @@
+// selmer_bklpr.hexa — BKLPR 모델 기반 Sel_n 평균 시뮬레이터
+//
+// Poonen-Rains (JAMS 2012) + Bhargava-Kane-Lenstra-Poonen-Rains (Camb. J. Math 2015)
+//
+// 모델: Sel_p(E)의 크기가 F_p-벡터공간 위 random alternating form의
+//       maximal isotropic subspace 차원 분포로 주어짐.
+//       E[|Sel_p|] = p + 1 = σ(p) for prime p.
+//
+// 여기선 수학적 예측값만 출력 (실제 random sampling은 F_p 대수 필요).
+// 핵심: squarefree n에 대해 BKLPR 모델 하 E[|Sel_n|] = σ(n).
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut d: i64 = 1
+    while d <= n {
+        if n % d == 0 { s = s + d }
+        d = d + 1
+    }
+    return s
+}
+
+fn is_squarefree(n: i64) -> bool {
+    let mut p: i64 = 2
+    let mut m = n
+    while p * p <= m {
+        if m % (p*p) == 0 { return false }
+        while m % p == 0 { m = m / p }
+        p = p + 1
+    }
+    return true
+}
+
+fn is_perfect(n: i64) -> bool {
+    return sigma(n) == 2 * n
+}
+
+fn main() {
+    println("═══════════════════════════════════════════════════════════")
+    println("  Selmer BKLPR 모델: E[|Sel_n(E)|] = σ(n) 예측")
+    println("═══════════════════════════════════════════════════════════")
+    println("")
+    println("근거: Poonen-Rains 2012 + BKLPR 2015")
+    println("증명 완료: n ∈ {2, 3, 4, 5} (Bhargava-Shankar Ann. Math. 2015+)")
+    println("예측 (미증명): n ∈ {6, 7, 8, ...} (곱셈성 + 무상관성 가정)")
+    println("")
+
+    println("n\t| σ(n)\t| sf?\t| perfect?\t| E[|Sel_n|] 예측")
+    println("---|------|-------|----------|----------------")
+    let mut n: i64 = 2
+    while n <= 30 {
+        let s = sigma(n)
+        let sf = is_squarefree(n)
+        let perf = is_perfect(n)
+        let sf_mark = if sf { "✓" } else { " " }
+        let perf_mark = if perf { "★" } else { " " }
+        println("  " + to_string(n) + "\t|  " + to_string(s) + "\t|  " + sf_mark + "\t|    " + perf_mark + "\t\t|  " + to_string(s))
+        n = n + 1
+    }
+    println("")
+
+    // 완전수 특별 표
+    println("─── 완전수 n에서 E[|Sel_n|] = 2n 예측 ───")
+    let perfects = [6, 28, 496, 8128]
+    let mut pi: i64 = 0
+    while pi < 4 {
+        let pn = perfects[pi]
+        let expected = 2 * pn
+        let actual = sigma(pn)
+        let ok = actual == expected
+        println("  n=" + to_string(pn) + ": σ(n)=" + to_string(actual) + ", 2n=" + to_string(expected) + ", 일치=" + to_string(ok))
+        pi = pi + 1
+    }
+    println("")
+
+    // n=6 CRT 분해 확인
+    println("─── n=6 CRT 분해 (Lemma 1 무조건) ───")
+    let s2 = sigma(2)
+    let s3 = sigma(3)
+    let s6 = sigma(6)
+    let prod = s2 * s3
+    println("  |Sel_6(E)| = |Sel_2(E)| · |Sel_3(E)| (모든 E)")
+    println("  E[|Sel_6|] = E[|Sel_2|·|Sel_3|]")
+    println("    = σ(2)·σ(3) (A3 무상관성 가정)")
+    println("    = " + to_string(s2) + "·" + to_string(s3) + " = " + to_string(prod))
+    println("    = σ(6) = " + to_string(s6))
+    let matched = prod == s6
+    println("    일치: " + to_string(matched))
+    println("")
+
+    // n = 30 = 2·3·5 (squarefree, 3-prime)
+    let s5 = sigma(5)
+    let s30 = sigma(30)
+    let prod30 = s2 * s3 * s5
+    println("─── n=30 = 2·3·5 (3-prime squarefree) ───")
+    println("  σ(30) = " + to_string(s30) + ", σ(2)·σ(3)·σ(5) = " + to_string(prod30))
+    println("  일치: " + to_string(s30 == prod30))
+    println("")
+
+    println("═══════════════════════════════════════════════════════════")
+    println("  결론:")
+    println("  - 곱셈성 |Sel_{mn}|=|Sel_m|·|Sel_n| (gcd=1) — 무조건 (Lemma 1)")
+    println("  - E[곱] = 곱[E] — A3 가정 (미증명, BKLPR 내장)")
+    println("  - 완전수 n에서 E[|Sel_n|] = 2n = σ(n) 예측")
+    println("  - n=6 최소 사례, n=28 다음 사례 (비-squarefree)")
+    println("═══════════════════════════════════════════════════════════")
+}
+
+main()

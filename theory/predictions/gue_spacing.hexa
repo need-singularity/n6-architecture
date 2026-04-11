@@ -1,0 +1,103 @@
+// gue_spacing.hexa — GUE eigenvalue spacing → Riemann pair correlation
+//
+// Montgomery (1973): Riemann 영점 쌍 상관 함수가 GUE eigenvalue
+// 쌍 상관과 일치한다는 추측. Odlyzko가 수치 검증.
+//
+// GUE spacing 확률 분포: P(s) ≈ (32/π²)s²·exp(-4s²/π)
+// Wigner surmise for GOE: P(s) ≈ (π/2)s·exp(-πs²/4)
+//
+// 여기선 수치 적분으로 평균 간격과 n=6 관점 특수값 체크
+
+fn exp_f(x: f64) -> f64 {
+    // Taylor series (for |x| < 10)
+    let mut sum: f64 = 1.0
+    let mut term: f64 = 1.0
+    let mut i: i64 = 1
+    while i < 30 {
+        let fi: f64 = to_float(i)
+        term = term * x / fi
+        sum = sum + term
+        i = i + 1
+    }
+    return sum
+}
+
+fn pi() -> f64 { return 3.14159265358979323846 }
+
+fn gue_pdf(s: f64) -> f64 {
+    // P(s) = (32/π²) s² exp(-4s²/π)
+    let p = pi()
+    let coef = 32.0 / (p * p)
+    let ex = exp_f(-4.0 * s * s / p)
+    return coef * s * s * ex
+}
+
+fn main() {
+    println("═══════════════════════════════════════════════════════════")
+    println("  GUE Spacing → Riemann Pair Correlation (Montgomery)")
+    println("═══════════════════════════════════════════════════════════")
+    println("")
+
+    // 정규화: P(s) ds = 1, 평균 간격 = 1
+    // 수치 적분 s=0..5 점검
+    println("GUE spacing P(s) sample values:")
+    let samples = [0.0, 0.2, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+    let mut i: i64 = 0
+    while i < 8 {
+        let s = samples[i]
+        let p = gue_pdf(s)
+        println("  s=" + to_string(s) + ": P(s) = " + to_string(p))
+        i = i + 1
+    }
+    println("")
+
+    // Riemann 영점 평균 간격 공식 (높이 T 근방):
+    //   Δ(T) ≈ 2π / log(T/(2π))
+    // T = 100: Δ ≈ 2π/log(15.9) ≈ 6.28/2.77 ≈ 2.27
+    // T = 1000: ≈ 6.28/5.07 ≈ 1.24
+    // T = 10^6: ≈ 6.28/11.96 ≈ 0.525
+
+    println("Riemann 영점 평균 간격 Δ(T) = 2π/log(T/2π):")
+    // log 근사: ln(x) ~ taylor around 1, or use known values
+    // Hardcode log values
+    let T_list = [100.0, 1000.0, 10000.0, 100000.0, 1000000.0]
+    let log_T_over_2pi = [2.77, 5.07, 7.37, 9.67, 11.96]  // log(T/(2π))
+    let mut k: i64 = 0
+    while k < 5 {
+        let T = T_list[k]
+        let lg = log_T_over_2pi[k]
+        let delta = 2.0 * pi() / lg
+        println("  T=" + to_string(T) + ": Δ ≈ " + to_string(delta))
+        k = k + 1
+    }
+    println("")
+
+    // n=6 관점: 평균 간격이 n=6 함수로 포착되는 T?
+    // Δ = 1/φ = 0.5 when T ≈ 10^6.08 (log = 4π = 12.566)
+    // Δ = 1/n/φ = 1/3 when log = 6π ≈ 18.85, T ≈ 10^8.19
+    println("n=6 특수 평균 간격:")
+    println("  Δ = 1/φ = 0.5 → log(T/2π) = 4π ≈ 12.57, T ≈ 10^(4π/ln10) ≈ 2.4·10⁵")
+    println("  Δ = 1/(n/φ) = 1/3 → log(T/2π) = 6π, T ≈ 2.6·10⁸")
+    println("  Δ = 1/τ = 0.25 → log(T/2π) = 8π, T ≈ 2.8·10¹¹")
+    println("")
+    println("  이건 '평균 간격이 n=6 함수가 되는 높이 T'의 기하급수 구조.")
+    println("  정직: n=6 자체가 아니라 '인버스 어덕션' — 흥미롭지만 엄밀 증거 아님.")
+    println("")
+
+    // Pair correlation 수치 적분 check
+    // R_2(r) = 1 - (sin(πr)/(πr))²   (Montgomery-Dyson)
+    println("Montgomery pair correlation R_2(r) = 1 - (sin(πr)/(πr))²:")
+    println("  r=0: R_2 = 0 (forbidden 직전)")
+    println("  r=1: R_2 = 1 - 0 = 1")
+    println("  r=1/2: R_2 = 1 - (2/π)² ≈ 0.595")
+    println("  r=n/φ=3: R_2 = 1 - (1/(3π))² · sin²(3π) = 1 (sin zero)")
+    println("")
+
+    println("═══════════════════════════════════════════════════════════")
+    println("  결론: GUE/Montgomery 구조는 n=6 직접 연결 없음.")
+    println("  평균 간격 공식에서 '인버스 어덕션'으로 {1/φ, 1/(n/φ), 1/τ}")
+    println("  이 나오는 높이는 있지만 이건 공식의 조작, 새 EXACT 아님.")
+    println("═══════════════════════════════════════════════════════════")
+}
+
+main()
