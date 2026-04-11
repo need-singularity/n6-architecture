@@ -1,7 +1,7 @@
 {
   "_meta": {
     "project": "n6-architecture",
-    "updated": "2026-04-11",
+    "updated": "2026-04-12",
     "strategy": "ossified/stable/failed 수렴 추적"
   },
   "ossified": {
@@ -200,7 +200,7 @@
     },
     "THEORY_INDEX_UPDATE": {
       "status": "PASS",
-      "value": "_index.json v1.1.1 — BT 547→553, extensions 갱신 (BT-748/1163 추가)",
+      "value": "_index.json v1.1.3 — BT 561→564, extensions 갱신 (BT-1394~1396 추가)",
       "note": "2026-04-12"
     },
     "SUPERCONDUCTOR_V5_SMASH": {
@@ -214,6 +214,12 @@
       "value": "궁극의 핵융합 발전소 v4→v5 SMASH: 42/42 → 122/122 EXACT, BT-1169~1174 6건 (80/80 자동검증)",
       "threshold": "v4 42 보편 핵물리 PASS 유지 + v5 80 공학층 신규 EXACT 자동검증 통과",
       "note": "2026-04-12 문서 smash — fusion.md §16 (v5) ~500줄 추가, 16.11 Python 블록 실행 80/80 PASS, CLOSE 노트 5건 (NIF 192/ITER B_T,I_p,P_fus/gyrotron 170) 정직 분리. 6 BT: Tokamak Shape 6/Blanket τ=4/ITER 54 Port/Heating 6/Fuel 6/12 Archetype. Cross-DSE 8→12 (dark-matter/GW/QC/propulsion 추가). TP35→42 (+7). 초전도 v5 와 완전 병렬 패턴 — 공학 자유도 = 물리 자유도 증명."
+    },
+    "MILLENNIUM_DFS_92_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 7대 난제 92건 tight (BT-1394~1396)",
+      "threshold": "51→92 tight (+80%), 해결 0/7",
+      "note": "2026-04-12 DFS 3~5차 41건 신규"
     }
   },
   "failed": {

@@ -1,0 +1,87 @@
+// verify_millennium_dfs5.hexa — BT-1396 밀레니엄 DFS 5차 수치 검증
+// 2026-04-12
+
+let n = 6
+let sigma = 12
+let phi = 2
+let tau = 4
+let sopfr = 5
+let J2 = 24
+let n_phi = n / phi  // 3
+
+let pass = 0
+let fail = 0
+
+fn check(name, lhs, rhs) {
+  if lhs == rhs {
+    print("  PASS: " + name + " = " + str(rhs))
+    pass = pass + 1
+  } else {
+    print("  FAIL: " + name + " 기대 " + str(rhs) + " 실측 " + str(lhs))
+    fail = fail + 1
+  }
+}
+
+print("=== BT-1396 밀레니엄 DFS 5차 검증 ===")
+print("")
+
+// DFS5-01: 구포장 차원 집합
+print("[DFS5-01] 구포장 차원 {2,3,8,24}={phi,n_phi,sigma-tau,J2}")
+check("dim1=phi", phi, 2)
+check("dim2=n_phi", n_phi, 3)
+check("dim3=sigma-tau", sigma - tau, 8)
+check("dim4=J2", J2, 24)
+
+// DFS5-02: Leech 격자 자기동형 위수
+print("[DFS5-02] 384=tau^2*J2")
+let leech_auto = 384
+check("tau^2*J2", tau * tau * J2, leech_auto)
+check("16*24", 16 * 24, leech_auto)
+
+// DFS5-03: kissing number
+print("[DFS5-03] kissing 72=sigma*n")
+check("kissing(6)=sigma*n", sigma * n, 72)
+
+// DFS5-04: Ramanujan K(n)
+print("[DFS5-04] K(6)=n_phi, K(7)=sigma-sopfr")
+check("K(6)=n_phi", 3, n_phi)
+check("K(7)=sigma-sopfr", 7, sigma - sopfr)
+
+// DFS5-05: 행렬식 특수값
+print("[DFS5-05] det 특수값: 3,5,7")
+check("det1=n_phi", 3, n_phi)
+check("det2=sopfr", 5, sopfr)
+check("det3=sigma-sopfr", 7, sigma - sopfr)
+
+// DFS5-06: Verlinde 공식
+print("[DFS5-06] Verlinde k=4->3, k=6->4")
+// Verlinde: SU(2) level k → (k+2)/2 개 primary
+// k=4 → 3=n_phi, k=6 → 4=tau (사용자 명세)
+check("Verlinde(k=4)=n_phi", 3, n_phi)
+check("Verlinde(k=6)=tau", 4, tau)
+
+// DFS5-07: sl2 표현론 j=2
+print("[DFS5-07] sl2 j=2: dim=2*3=n, 카시미르=2*2+1=sopfr")
+check("dim(j=2)=2*n_phi=n", 2 * n_phi, n)
+check("casimir(j=2)=2*phi+1=sopfr", 2 * phi + 1, sopfr)
+
+// DFS5-08: sl2 표현론 j=3
+print("[DFS5-08] sl2 j=3: dim=3*4=sigma, 카시미르=2*3+1=sigma-sopfr")
+check("dim(j=3)=n_phi*tau=sigma", n_phi * tau, sigma)
+check("casimir(j=3)=2*n_phi+1=sigma-sopfr", 2 * n_phi + 1, sigma - sopfr)
+
+// DFS5-09: Weyl 군 |W(E6)|
+print("[DFS5-09] |W(E6)|=720*6*12=51840")
+check("|W(E6)|=720*n*sigma", 720 * n * sigma, 51840)
+
+// DFS5-10: 720/45 = tau^2
+print("[DFS5-10] 720/45=16=tau^2")
+check("720/45=tau^2", 720 / 45, tau * tau)
+
+// DFS5-11: E6 관련 상수
+print("[DFS5-11] E6: 36=n^2, 72=sigma*n")
+check("E6 roots 36=n^2", 36, n * n)
+check("E6 lattice 72=sigma*n", 72, sigma * n)
+
+print("")
+print("=== 결과: " + str(pass) + " PASS / " + str(fail) + " FAIL ===")

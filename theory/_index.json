@@ -1,6 +1,6 @@
 {
   "_doc": "이론층 SSOT — 영구 불변 증명·정리·상수·예측·흐름",
-  "_version": "1.1.2",
+  "_version": "1.1.3",
   "_updated": "2026-04-12",
 
   "proofs": {
@@ -27,7 +27,7 @@
 
   "breakthroughs": {
     "main": "breakthroughs/breakthrough-theorems.md",
-    "total": 561,
+    "total": 564,
     "extensions": [
       "breakthroughs/breakthrough-theorems-extension-2026-04-08.md",
       "breakthroughs/breakthrough-theorems-warp-dimension-2026-04-08.md",
@@ -40,7 +40,8 @@
       "breakthroughs/bt-1175-water-treatment-2026-04-12.md",
       "breakthroughs/bt-1176-nuclear-reactor-kinetics-2026-04-12.md",
       "breakthroughs/bt-1392-millennium-7-breakthrough-ideas-2026-04-12.md",
-      "breakthroughs/bt-1393-n6-dfs-10k-autonomous-2026-04-12.md"
+      "breakthroughs/bt-1393-n6-dfs-10k-autonomous-2026-04-12.md",
+      "breakthroughs/bt-1394-1396-millennium-dfs-tight-2026-04-12.md"
     ],
     "candidates": [
       "breakthroughs/bt-candidates-from-tecs-l.md",
