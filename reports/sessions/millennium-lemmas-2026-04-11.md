@@ -65,7 +65,7 @@ d=7 예측: dim Sym²(ℝ⁷) = 28 = 둘째 완전수. 유사 장벽 가능성 (
 
 ---
 
-## 2. 도구 포팅 (theory/predictions/ 신규 10종)
+## 2. 도구 포팅 (nexus/shared/n6/scripts/ 신규 10종)
 
 모두 hexa-native, R1 HEXA-FIRST 준수.
 
@@ -114,7 +114,7 @@ d=7 예측: dim Sym²(ℝ⁷) = 28 = 둘째 완전수. 유사 장벽 가능성 (
 - **BT-1160~1200 41개 신규 노드** 그래프 추가 (discovery_graph.json)
 - **hexa dev-fast 리빌드** (cranelift backend)
 
-내 작업 스코프(BT-541~547 + theory/predictions/)와 충돌 없음. 병렬 안전.
+내 작업 스코프(BT-541~547 + nexus/shared/n6/scripts/)와 충돌 없음. 병렬 안전.
 
 ---
 

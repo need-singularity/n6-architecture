@@ -3,7 +3,7 @@
 **유형**: 메타 구조 정리 (not Millennium 해결)
 **관련 BT**: BT-541 ~ BT-547
 **세션 리포트**: reports/sessions/millennium-lemmas-2026-04-11.md
-**검증 스크립트**: theory/predictions/verify_millennium_tight.hexa (12 PASS)
+**검증 스크립트**: nexus/shared/n6/scripts/verify_millennium_tight.hexa (12 PASS)
 
 ---
 
@@ -158,12 +158,12 @@ $$\mathbb{E}_E[|\text{Sel}_n(E)|] = \sigma(n)$$
 ## 5. 검증
 
 **자동 검증 스크립트**:
-- `theory/predictions/verify_millennium_tight.hexa`: **12 PASS / 0 FAIL**
+- `nexus/shared/n6/scripts/verify_millennium_tight.hexa`: **12 PASS / 0 FAIL**
   - 검증 항목: 위 각 정리의 수치적 instance
-- `theory/predictions/verify_millennium_20260411.hexa`: **18 PASS / 0 FAIL** (확장 세트)
-- `theory/predictions/crossover_scanner.hexa`: 9 crossover cluster 시각화
+- `nexus/shared/n6/scripts/verify_millennium_20260411.hexa`: **18 PASS / 0 FAIL** (확장 세트)
+- `nexus/shared/n6/scripts/crossover_scanner.hexa`: 9 crossover cluster 시각화
 
-**statistical baseline**: `theory/predictions/millennium_scanner.hexa`가 61% baseline 정립.
+**statistical baseline**: `nexus/shared/n6/scripts/millennium_scanner.hexa`가 61% baseline 정립.
 
 ## 6. 다음 연구 방향
 
