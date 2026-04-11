@@ -17,7 +17,6 @@
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # 궁극의 전력망 아키텍처 (Ultimate Power Grid) -- Consolidated Goal
 
@@ -1030,7 +1029,6 @@ n = 6. Hexagonal lattice에서 각 터빈이 6개 이웃과 등거리.
 
 ## 4. BT 연결
 
-TODO: 후속 돌파 필요
 
 ## 5. DSE 결과
 
@@ -2905,20 +2903,15 @@ Mk.IV는 HVDC 글로벌 슈퍼그리드로 σ²=144개국 전력 통합 + 무선
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요

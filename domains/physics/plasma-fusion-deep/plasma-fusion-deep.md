@@ -4,12 +4,10 @@
 
 ## 1. 실생활 효과
 
-TODO: 후속 돌파 필요
 
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # 궁극의 심층 플라즈마 핵융합 아키텍처 — HEXA-PLASMA-DEEP
 
@@ -187,52 +185,39 @@ Bohm 확산 = 1/phi^tau = 1/16
 
 ## 3. 가설
 
-TODO: 후속 돌파 필요
 
 ## 4. BT 연결
 
-TODO: 후속 돌파 필요
 
 ## 5. DSE 결과
 
-TODO: 후속 돌파 필요
 
 ## 6. 물리 한계 증명
 
-TODO: 후속 돌파 필요
 
 ## 7. 실험 검증 매트릭스
 
-TODO: 후속 돌파 필요
 
 ## 8. 외계인급 발견
 
-TODO: 후속 돌파 필요
 
 ## 9. Mk.I~V 진화
 
-TODO: 후속 돌파 필요
 
 ## 10. Testable Predictions
 
-TODO: 후속 돌파 필요
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요

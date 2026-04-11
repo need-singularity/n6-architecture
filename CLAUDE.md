@@ -10,11 +10,11 @@
 | `free` / `dfs` | 자율 조립 + DFS 탐색 |
 | `list` / `목록` | 이 명령어 표 다시 출력 |
 
-> shared/ JSON 단일진실 (R14). 규칙: `shared/rules/common.json` (R0~R27)
+> shared/ JSON 단일진실 (R14). 규칙: `shared/config/absolute_rules.json` (R0~R29)
 
 ## ⛔ 규칙 준수 (필수)
 
-작업 시작 전 `shared/rules/common.json` + `shared/rules/n6-architecture.json` 을 읽고 전 규칙 준수. 위반 시 즉시 수정.
+작업 시작 전 `shared/config/absolute_rules.json` 을 읽고 전 규칙 준수. 위반 시 즉시 수정.
 
 ## 렌즈 SSOT — ⚠️ 혼동 주의 (새 세션 필독)
 
@@ -71,10 +71,7 @@ sed -i '' 's/^\(@R n6-atlas-proved-theorems-\*\*thm-1\*\* .*\) \[7\]$/\1 [10*]/'
 ## ref
 
 ```
-rules     shared/rules/common.json                R0~R27 공통
-project   shared/rules/n6-architecture.json       N61~N65
-lock      shared/rules/lockdown.json              L0/L1/L2
-cdo       shared/rules/convergence_ops.json       CDO 수렴
+rules     shared/config/absolute_rules.json       R0~R29 + N61~N65 (단일 SSOT)
 registry  shared/config/projects.json             7프로젝트
 cfg       shared/config/project_config.json
 core      shared/config/core.json

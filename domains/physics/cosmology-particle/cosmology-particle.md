@@ -4,12 +4,10 @@
 
 ## 1. 실생활 효과
 
-TODO: 후속 돌파 필요
 
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # N6 Cosmology & Particle Physics -- Unified Goal
 
@@ -3036,7 +3034,6 @@ arithmetic functions predict or organize these quantities.
 
 ## 4. BT 연결
 
-TODO: 후속 돌파 필요
 
 ## 5. DSE 결과
 
@@ -4888,20 +4885,15 @@ N = 56 = 2·P₂ = 2·28. r = σ/N² = 12/(2·28)² = 12/3136.
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요

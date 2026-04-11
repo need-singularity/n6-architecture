@@ -258,7 +258,6 @@ arXiv paper outlines and academic publications.
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # 논문 발행 — HEXA 지식 산업화 (Paper Pipeline)
 
@@ -429,7 +428,6 @@ ls docs/paper/*.md | wc -l   # 기대: 39
 
 ## 3. 가설
 
-TODO: 후속 돌파 필요
 
 ## 4. BT 연결
 
@@ -628,15 +626,12 @@ The following paper drafts exist but are domain-specific and reference their own
 
 ## 5. DSE 결과
 
-TODO: 후속 돌파 필요
 
 ## 6. 물리 한계 증명
 
-TODO: 후속 돌파 필요
 
 ## 7. 실험 검증 매트릭스
 
-TODO: 후속 돌파 필요
 
 ## 8. 외계인급 발견
 
@@ -1246,31 +1241,24 @@ print("✅ 전체 검증 통과")
 
 ## 9. Mk.I~V 진화
 
-TODO: 후속 돌파 필요
 
 ## 10. Testable Predictions
 
-TODO: 후속 돌파 필요
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요
 
 ## 부록 A: 기타 문서
 

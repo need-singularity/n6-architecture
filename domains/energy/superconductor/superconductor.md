@@ -17,7 +17,6 @@
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # 궁극의 초전도체 — HEXA-SC 8단 완전 아키텍처
 
@@ -16638,23 +16637,18 @@ would overturn quantum mechanics itself.
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요
 
 ## 부록 A: 기타 문서
 

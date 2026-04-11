@@ -4,12 +4,10 @@
 
 ## 1. 실생활 효과
 
-TODO: 후속 돌파 필요
 
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # HEXA-AUDIO --- N6 Audio Ultimate Architecture (7-Level)
 
@@ -3507,23 +3505,18 @@ Mk.V는 **물리법칙이 허용하는 오디오의 절대 한계**를 정의한
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요
 
 ## 부록 A: 기타 문서
 

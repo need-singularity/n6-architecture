@@ -17,7 +17,6 @@ SOLID=5, GoF=23, REST=4, ACID=4, HTTP=8.
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # 궁극의 소프트웨어 설계 — HEXA Software Architecture
 
@@ -4291,23 +4290,18 @@ AI 에이전트가 n=6 최적 구조를 자동으로 생성/유지.
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요
 
 ## 부록 A: 기타 문서
 

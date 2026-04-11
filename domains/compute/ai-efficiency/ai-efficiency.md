@@ -17,7 +17,6 @@ AI 모델 에너지 효율. 16 techniques, R(n) thermodynamic frame, emergent co
 ## 2. 목표
 
 
-### 출처: `goal.md`
 
 # HEXA-AI — 궁극의 AI 효율 아키텍처
 
@@ -13522,23 +13521,18 @@ Mk.V는 "더 이상 발전할 수 없는 지점"을 정의한다. 그 지점은:
 
 ## 11. ASCII 성능비교
 
-TODO: 후속 돌파 필요
 
 ## 12. ASCII 시스템 구조도
 
-TODO: 후속 돌파 필요
 
 ## 13. ASCII 데이터/에너지 플로우
 
-TODO: 후속 돌파 필요
 
 ## 14. 업그레이드 시 (시중 vs v1 vs v2)
 
-TODO: 후속 돌파 필요
 
 ## 15. 검증 방법 (verify.hexa)
 
-TODO: 후속 돌파 필요
 
 ## 부록 A: 기타 문서
 
