@@ -1,13 +1,4 @@
-# robotics
-
-> 축: **infra** · 자동 통합본 · n6-architecture
-
-## 1. 실생활 효과
-
-
-### 출처: `README.md`
-
-# Robotics --- 궁극의 로봇 아키텍처
+# 궁극의 로봇 아키텍처 — HEXA-ROBOT
 
 n=6 완전수 산술로 원자 스케일 소재부터 군집 지능까지 관통하는 8단 로봇 아키텍처.
 
