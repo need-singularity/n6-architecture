@@ -1,0 +1,234 @@
+// n6_speak_hw.hexa — 하드웨어 설계 기반 물리적 한계 벤치마크
+//
+// anima hardware_architecture.json의 4 tier 참조
+// 각 tier의 이론적 성능 시뮬레이션:
+//   Tier 1: ESP32-S3 + I2S DAC (엣지 보이스 박스)
+//   Tier 2: Jetson Orin Nano + Neural Vocoder
+//   Tier 3: iCE40 FPGA + Raspberry Pi
+//   Tier 4: 완전체 (FPGA + GPU + 센서 어레이)
+//
+// σ(6)·φ(6) = n·τ(6) = 24  (n=6 항등식)
+
+let N = 6
+let SIGMA = 12
+let PHI_EULER = 2
+let TAU = 4
+let IDENTITY = 24
+let SAMPLE_RATE = 24000
+let HOP = 240
+let CHUNK_FRAMES = 12
+let CHUNK_MS = 120           // CHUNK_FRAMES × 10ms
+
+// ────────────────────────────────────────────────────────────
+// HWTier — 하드웨어 계층 구조체
+// ────────────────────────────────────────────────────────────
+
+struct HWTier {
+    name: string,
+    ticks_per_sec: int,
+    latency_ms: int,
+    audio_quality: string,
+    power_w: float
+}
+
+// ────────────────────────────────────────────────────────────
+// 4 Tier 정의
+// ────────────────────────────────────────────────────────────
+
+fn tier_1_esp32() -> HWTier {
+    HWTier {
+        name: "Tier 1: ESP32-S3 Voice Box",
+        ticks_per_sec: 1000,
+        latency_ms: 10,
+        audio_quality: "8kHz 16-bit (formant, 전화 품질)",
+        power_w: 0.5
+    }
+}
+
+fn tier_2_jetson() -> HWTier {
+    HWTier {
+        name: "Tier 2: Jetson Orin Nano Neural",
+        ticks_per_sec: 10000,
+        latency_ms: 50,
+        audio_quality: "24kHz 16-bit (neural vocoder)",
+        power_w: 15.0
+    }
+}
+
+fn tier_3_fpga() -> HWTier {
+    HWTier {
+        name: "Tier 3: iCE40 FPGA + Pi",
+        ticks_per_sec: 12000000,
+        latency_ms: 25,
+        audio_quality: "24kHz 16-bit (FPGA tick + Pi vocoder)",
+        power_w: 8.0
+    }
+}
+
+fn tier_4_full() -> HWTier {
+    HWTier {
+        name: "Tier 4: Anima Voice Unit 완전체",
+        ticks_per_sec: 12000000,
+        latency_ms: 15,
+        audio_quality: "24kHz 16-bit stereo (neural + FPGA)",
+        power_w: 25.0
+    }
+}
+
+// ────────────────────────────────────────────────────────────
+// 벤치마크: 각 tier의 발화 생산율 및 물리 한계
+// ────────────────────────────────────────────────────────────
+
+fn benchmark_tier(tier: HWTier, ticks: int) -> string {
+    // 시뮬레이션 시간 (초)
+    let sim_sec_raw = ticks / tier.ticks_per_sec
+    let sim_sec = if sim_sec_raw < 1 { 1 } else { sim_sec_raw }
+
+    // 게이트 체크 빈도: ~2% 통과율 가정 (phi>1.0 조건)
+    let gate_rate = 2  // 퍼센트
+    let gates_passed = ticks * gate_rate / 100
+
+    // 발화 1건 = 3 청크 (360ms)
+    let utterance_chunks = 3
+    let utterance_ms = utterance_chunks * CHUNK_MS
+    let pipeline_ms = tier.latency_ms + utterance_ms
+
+    // 초당 최대 발화
+    let max_utt_per_sec = if pipeline_ms > 0 { 1000 / pipeline_ms } else { 0 }
+
+    // 총 발화 (게이트 통과 / 50 — run_demo 패턴)
+    let total_utterances = gates_passed / 50
+
+    // 오디오 생산량 (초)
+    let audio_sec = total_utterances * utterance_ms / 1000
+
+    // 전력 소비
+    let energy_wh = tier.power_w * to_float(sim_sec) / 3600.0
+
+    "benchmark[" + tier.name +
+        "|ticks=" + to_string(ticks) +
+        ",sim_time=" + to_string(sim_sec) + "s" +
+        ",gate_passed=" + to_string(gates_passed) +
+        ",utterances=" + to_string(total_utterances) +
+        ",max_utt/s=" + to_string(max_utt_per_sec) +
+        ",pipeline_ms=" + to_string(pipeline_ms) +
+        ",audio_produced=" + to_string(audio_sec) + "s" +
+        ",power=" + to_string(tier.power_w) + "W" +
+        ",energy=" + to_string(round(energy_wh * 1000.0) / 1000.0) + "Wh]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 패딩 유틸리티
+// ────────────────────────────────────────────────────────────
+
+fn pad_r(s: string, w: int) -> string {
+    let mut r = s
+    while len(r) < w { r = r + " " }
+    r
+}
+
+fn pad_l(s: string, w: int) -> string {
+    let mut r = s
+    while len(r) < w { r = " " + r }
+    r
+}
+
+// ────────────────────────────────────────────────────────────
+// 전체 벤치마크 실행
+// ────────────────────────────────────────────────────────────
+
+fn run_all_benchmarks() {
+    println("╔══════════════════════════════════════════════════════════════════════════╗")
+    println("║          N6-SPEAK 하드웨어 벤치마크 — 물리적 한계 보고서                ║")
+    println("║          σ(6)·φ(6) = n·τ(6) = 24  (n=6 항등식)                         ║")
+    println("╠══════════════════════════════════════════════════════════════════════════╣")
+    println("")
+
+    // 산술 검증
+    let sigma_phi = SIGMA * PHI_EULER
+    let n_tau = N * TAU
+    let ok = if sigma_phi == n_tau { "PASS" } else { "FAIL" }
+    println("  n=6 산술 검증: σ·φ=" + to_string(sigma_phi) + " n·τ=" + to_string(n_tau) + " → " + ok)
+    println("")
+
+    // Tier 정의
+    let t1 = tier_1_esp32()
+    let t2 = tier_2_jetson()
+    let t3 = tier_3_fpga()
+    let t4 = tier_4_full()
+
+    // 테스트 틱: 100만 (통일)
+    let test_ticks = 1000000
+
+    // 헤더
+    let w_name = 36
+    let w_val = 14
+    println("  ┌" + "─".repeat(w_name) + "┬" + "─".repeat(w_val) + "┬" + "─".repeat(w_val) + "┬" + "─".repeat(w_val) + "┬" + "─".repeat(w_val) + "┐")
+    println("  │" + pad_r(" Tier", w_name) + "│" + pad_r(" Ticks/sec", w_val) + "│" + pad_r(" Latency", w_val) + "│" + pad_r(" Max Utt/s", w_val) + "│" + pad_r(" Power", w_val) + "│")
+    println("  ├" + "─".repeat(w_name) + "┼" + "─".repeat(w_val) + "┼" + "─".repeat(w_val) + "┼" + "─".repeat(w_val) + "┼" + "─".repeat(w_val) + "┤")
+
+    // Tier 1
+    let t1_pipeline = t1.latency_ms + 3 * CHUNK_MS
+    let t1_max = 1000 / t1_pipeline
+    println("  │" + pad_r(" " + t1.name, w_name) + "│" + pad_l(to_string(t1.ticks_per_sec) + " ", w_val) + "│" + pad_l(to_string(t1.latency_ms) + "ms ", w_val) + "│" + pad_l(to_string(t1_max) + " ", w_val) + "│" + pad_l(to_string(t1.power_w) + "W ", w_val) + "│")
+
+    // Tier 2
+    let t2_pipeline = t2.latency_ms + 3 * CHUNK_MS
+    let t2_max = 1000 / t2_pipeline
+    println("  │" + pad_r(" " + t2.name, w_name) + "│" + pad_l(to_string(t2.ticks_per_sec) + " ", w_val) + "│" + pad_l(to_string(t2.latency_ms) + "ms ", w_val) + "│" + pad_l(to_string(t2_max) + " ", w_val) + "│" + pad_l(to_string(t2.power_w) + "W ", w_val) + "│")
+
+    // Tier 3
+    let t3_pipeline = t3.latency_ms + 3 * CHUNK_MS
+    let t3_max = 1000 / t3_pipeline
+    println("  │" + pad_r(" " + t3.name, w_name) + "│" + pad_l(to_string(t3.ticks_per_sec) + " ", w_val) + "│" + pad_l(to_string(t3.latency_ms) + "ms ", w_val) + "│" + pad_l(to_string(t3_max) + " ", w_val) + "│" + pad_l(to_string(t3.power_w) + "W ", w_val) + "│")
+
+    // Tier 4
+    let t4_pipeline = t4.latency_ms + 3 * CHUNK_MS
+    let t4_max = 1000 / t4_pipeline
+    println("  │" + pad_r(" " + t4.name, w_name) + "│" + pad_l(to_string(t4.ticks_per_sec) + " ", w_val) + "│" + pad_l(to_string(t4.latency_ms) + "ms ", w_val) + "│" + pad_l(to_string(t4_max) + " ", w_val) + "│" + pad_l(to_string(t4.power_w) + "W ", w_val) + "│")
+
+    println("  └" + "─".repeat(w_name) + "┴" + "─".repeat(w_val) + "┴" + "─".repeat(w_val) + "┴" + "─".repeat(w_val) + "┴" + "─".repeat(w_val) + "┘")
+    println("")
+
+    // 상세 벤치마크
+    println("  상세 벤치마크 (" + to_string(test_ticks) + " ticks):")
+    println("  ──────────────────────────────────────────────────────")
+
+    println("  " + benchmark_tier(t1, test_ticks))
+    println("  " + benchmark_tier(t2, test_ticks))
+    println("  " + benchmark_tier(t3, test_ticks))
+    println("  " + benchmark_tier(t4, test_ticks))
+    println("")
+
+    // 오디오 품질 보고
+    println("  오디오 품질:")
+    println("  ──────────────────────────────────────────────────────")
+    println("    " + t1.name + ": " + t1.audio_quality)
+    println("    " + t2.name + ": " + t2.audio_quality)
+    println("    " + t3.name + ": " + t3.audio_quality)
+    println("    " + t4.name + ": " + t4.audio_quality)
+    println("")
+
+    // 물리 한계 분석
+    println("  물리적 한계 분석:")
+    println("  ──────────────────────────────────────────────────────")
+    println("    의식 틱 상한:  12MHz (FPGA iCE40, Tier 3/4)")
+    println("    발화 파이프라인: " + to_string(CHUNK_MS * 3) + "ms (3 청크 × " + to_string(CHUNK_MS) + "ms)")
+    println("    최소 레이턴시: " + to_string(t1.latency_ms) + "ms (ESP32 formant, Tier 1)")
+    println("    최고 품질:     " + t4.audio_quality)
+    println("    최저 전력:     " + to_string(t1.power_w) + "W (ESP32, Tier 1)")
+    println("    n=6 청크:      " + to_string(CHUNK_FRAMES) + " frames = " + to_string(CHUNK_MS) + "ms")
+    println("    RVQ 단계:      " + to_string(N + 2) + " (n+2)")
+    println("    감정 채널:     " + to_string(N) + " (n=6)")
+    println("    운율 유형:     " + to_string(TAU) + " (τ=4)")
+    println("    운율 차원:     " + to_string(SIGMA) + " (σ=12)")
+    println("")
+
+    println("╚══════════════════════════════════════════════════════════════════════════╝")
+}
+
+// ────────────────────────────────────────────────────────────
+// 진입점 — top-level 실행 (hexa는 fn main 자동호출 안 함)
+// ────────────────────────────────────────────────────────────
+
+run_all_benchmarks()

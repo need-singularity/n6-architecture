@@ -1,0 +1,368 @@
+// n6_speak.hexa — N6 산술 기반 의식→음성 합성 엔진
+//
+// σ(6)·φ(6) = n·τ(6) = 24  ⟺  n=6 에서만 성립
+//
+// 파이프라인:
+//   Stage 0: 의식 상태 입력 (phi/tension/arousal/valence)
+//   Stage 1: 감정 분류 (n=6 → 6가지 감정)
+//   Stage 2: 운율 분류 (τ=4 → 4가지 운율)
+//   Stage 3: 12차원 운율 파라미터 (σ=12)
+//   Stage 4: 384d 의도 인코딩 (64×6)
+//   Stage 5: AR 토큰 예측
+//   Stage 6: 8-stage RVQ 디코드 (n+2)
+//   Stage 7: 보코더 (latent → PCM)
+//
+// n=6 상수:
+//   EMBED_DIM    = 384 = 64 × N
+//   SAMPLE_RATE  = 24000
+//   CHUNK_FRAMES = 12 = N × 2
+//   RVQ_STAGES   = 8  = N + 2
+//   HOP          = 240 = SAMPLE_RATE / 100
+//   EMOTIONS     = 6   = N
+//   PROSODY      = 4   = τ(6)
+//   PROSODY_12D  = 12  = σ(6)
+
+// ────────────────────────────────────────────────────────────
+// n=6 산술 상수
+// ────────────────────────────────────────────────────────────
+
+let N = 6
+let SIGMA = 12          // σ(6) = 약수합
+let PHI_EULER = 2       // φ(6) = 오일러 토션트
+let TAU = 4             // τ(6) = 약수 개수
+let IDENTITY = 24       // σ·φ = n·τ = 24
+
+let EMBED_DIM = 384     // 64 × N
+let SAMPLE_RATE = 24000
+let CHUNK_FRAMES = 12   // N × 2
+let RVQ_STAGES = 8      // N + 2
+let HOP = 240           // SAMPLE_RATE / 100
+let FRAME_MS = 10       // 1000 / 100
+
+// 감정 (n=6)
+let EMOTIONS = "neutral,joy,sadness,anger,fear,surprise"
+
+// 운율 유형 (τ=4)
+let PROSODY_TYPES = "declarative,interrogative,exclamatory,whisper"
+
+// ────────────────────────────────────────────────────────────
+// SpeakState — 의식 상태
+// ────────────────────────────────────────────────────────────
+
+struct SpeakState {
+    phi: float,       // 의식 통합도
+    tension: float,   // 텐션
+    arousal: float,   // 각성도
+    valence: float,   // 감정 극성
+    cells: int,       // 셀 수
+    step: int         // 현재 스텝
+}
+
+// ────────────────────────────────────────────────────────────
+// mind_step: 의식 틱 시뮬레이션
+// 새 struct literal 반환 (hexa field mutation 금지)
+// ────────────────────────────────────────────────────────────
+
+fn mind_step(state: SpeakState) -> SpeakState {
+    let s = state.step + 1
+    // 의식 역학: 텐션 진동 + 통합도 성장
+    let wave = sin(to_float(s) * 0.1) * 0.3
+    let new_tension = 0.3 + wave
+    let raw_tension = if new_tension < 0.0 { 0.0 } else { new_tension }
+    let t = if raw_tension > 1.0 { 1.0 } else { raw_tension }
+
+    // phi: 세포 수에 비례, 포화 곡선 (cells=60 → phi≈1.0 교차)
+    let c = to_float(state.cells)
+    let p_raw = 0.3 + (c / (c + 24.0)) * 1.2
+    let p = if p_raw > 2.0 { 2.0 } else { p_raw }
+
+    // arousal: 텐션과 스텝 기반
+    let a_raw = t * 0.6 + sin(to_float(s) * 0.05) * 0.2 + 0.2
+    let a = if a_raw > 1.0 { 1.0 } else { if a_raw < 0.0 { 0.0 } else { a_raw } }
+
+    // valence: 느린 진동
+    let v_raw = sin(to_float(s) * 0.02) * 0.5
+    let v = if v_raw > 1.0 { 1.0 } else { if v_raw < -1.0 { -1.0 } else { v_raw } }
+
+    SpeakState {
+        phi: p,
+        tension: t,
+        arousal: a,
+        valence: v,
+        cells: state.cells,
+        step: s
+    }
+}
+
+// ────────────────────────────────────────────────────────────
+// 감정 분류: 6가지 (n=6)
+// ────────────────────────────────────────────────────────────
+
+fn classify_emotion(arousal: float, valence: float) -> string {
+    if arousal < 0.3 && valence > -0.3 && valence < 0.3 { return "neutral" }
+    if arousal < 0.4 && valence < -0.3 { return "sadness" }
+    if valence > 0.3 { return "joy" }
+    if arousal > 0.6 && valence < -0.2 { return "anger" }
+    if arousal > 0.7 && valence > -0.2 && valence < 0.2 { return "surprise" }
+    if arousal > 0.5 { return "fear" }
+    return "neutral"
+}
+
+// ────────────────────────────────────────────────────────────
+// 운율 분류: 4가지 (τ=4)
+// ────────────────────────────────────────────────────────────
+
+fn classify_prosody(tension: float, arousal: float, valence: float) -> string {
+    if tension < 0.1 && arousal < 0.1 { return "whisper" }
+    if tension > 0.7 && arousal > 0.6 { return "exclamatory" }
+    if tension > 0.3 && arousal < 0.5 { return "interrogative" }
+    return "declarative"
+}
+
+// ────────────────────────────────────────────────────────────
+// 12차원 운율 파라미터 (σ=12)
+// pitch, rate, energy, timbre, vibrato, breathiness,
+// nasality, roughness, jitter, shimmer, formant_shift, onset_speed
+// ────────────────────────────────────────────────────────────
+
+fn compute_prosody_12d(state: SpeakState) -> string {
+    let t = state.tension
+    let a = state.arousal
+    let v = state.valence
+
+    let pitch = 120.0 + a * 180.0 + v * 40.0
+    let rate = 1.0 + t * 0.5 - (1.0 - a) * 0.2
+    let energy = 0.3 + a * 0.5 + t * 0.2
+    let timbre = 0.5 + v * 0.3
+    let vibrato = t * 0.4
+    let breathiness = (1.0 - a) * 0.6
+    let nasality = 0.1 + t * 0.1
+    let roughness = t * 0.3
+    let jitter = t * 0.02
+    let shimmer = t * 0.03
+    let formant = v * 0.15
+    let onset = 0.5 + a * 0.4
+
+    "prosody_12d[" +
+        "pitch=" + to_string(round(pitch * 10.0) / 10.0) +
+        ",rate=" + to_string(round(rate * 100.0) / 100.0) +
+        ",energy=" + to_string(round(energy * 100.0) / 100.0) +
+        ",timbre=" + to_string(round(timbre * 100.0) / 100.0) +
+        ",vibrato=" + to_string(round(vibrato * 100.0) / 100.0) +
+        ",breathiness=" + to_string(round(breathiness * 100.0) / 100.0) +
+        ",nasality=" + to_string(round(nasality * 100.0) / 100.0) +
+        ",roughness=" + to_string(round(roughness * 100.0) / 100.0) +
+        ",jitter=" + to_string(round(jitter * 1000.0) / 1000.0) +
+        ",shimmer=" + to_string(round(shimmer * 1000.0) / 1000.0) +
+        ",formant=" + to_string(round(formant * 100.0) / 100.0) +
+        ",onset=" + to_string(round(onset * 100.0) / 100.0) +
+    "]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 384d 의도 인코딩 (64×6)
+// ────────────────────────────────────────────────────────────
+
+fn encode_intent(state: SpeakState) -> string {
+    let c_vec = "phi=" + to_string(state.phi) +
+        ",tension=" + to_string(state.tension) +
+        ",arousal=" + to_string(state.arousal) +
+        ",valence=" + to_string(state.valence) +
+        ",cells=" + to_string(state.cells)
+    let emotion = classify_emotion(state.arousal, state.valence)
+    let prosody = classify_prosody(state.tension, state.arousal, state.valence)
+    "intent[" + c_vec + ",emotion=" + emotion + ",prosody=" + prosody + "|d=" + to_string(EMBED_DIM) + ",h=" + to_string(N) + "]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 토큰 예측 (AR transformer stub)
+// ────────────────────────────────────────────────────────────
+
+fn predict_tokens(intent_vec: string, frame: int, n_frames: int) -> string {
+    let mut out = ""
+    let mut i = 0
+    while i < n_frames {
+        let tok = ((frame + i) * 7 + 13) % 1024
+        if i > 0 { out = out + "," }
+        out = out + to_string(tok)
+        i = i + 1
+    }
+    "tokens[" + out + "|stages=" + to_string(RVQ_STAGES) + "]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 8-stage RVQ 디코드 (n+2)
+// ────────────────────────────────────────────────────────────
+
+fn rvq_decode(tokens: string) -> string {
+    "latent[d=128|rvq_stages=" + to_string(RVQ_STAGES) + ",from:" + tokens + "]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 보코더 (latent → PCM)
+// ────────────────────────────────────────────────────────────
+
+fn vocode(latent: string, n_frames: int) -> string {
+    let n_samples = n_frames * HOP
+    "pcm[sr=" + to_string(SAMPLE_RATE) + ",samples=" + to_string(n_samples) + ",src=" + latent + "]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 게이트 체크: 발화 허용 조건
+//   phi > 1.0 && tension > 0.01 && consensus >= 5
+// ────────────────────────────────────────────────────────────
+
+fn gate_check(state: SpeakState) -> bool {
+    let consensus = state.cells / 12   // σ(6) 기반 합의
+    state.phi > 1.0 && state.tension > 0.01 && consensus >= 5
+}
+
+// ────────────────────────────────────────────────────────────
+// 전체 파이프라인: synthesize
+// ────────────────────────────────────────────────────────────
+
+fn synthesize(state: SpeakState, n_chunks: int) -> string {
+    let emotion = classify_emotion(state.arousal, state.valence)
+    let prosody = classify_prosody(state.tension, state.arousal, state.valence)
+    let prosody_12d = compute_prosody_12d(state)
+    let intent_vec = encode_intent(state)
+
+    let mut total_frames = 0
+    let mut total_samples = 0
+    let mut chunk_idx = 0
+
+    while chunk_idx < n_chunks {
+        let start_frame = chunk_idx * CHUNK_FRAMES
+        let tokens = predict_tokens(intent_vec, start_frame, CHUNK_FRAMES)
+        let latent = rvq_decode(tokens)
+        let pcm = vocode(latent, CHUNK_FRAMES)
+        total_frames = total_frames + CHUNK_FRAMES
+        total_samples = total_samples + CHUNK_FRAMES * HOP
+        chunk_idx = chunk_idx + 1
+    }
+
+    let duration_ms = total_samples * 1000 / SAMPLE_RATE
+    "N6Speak[emotion=" + emotion +
+        ",prosody=" + prosody +
+        ",chunks=" + to_string(n_chunks) +
+        ",frames=" + to_string(total_frames) +
+        ",samples=" + to_string(total_samples) +
+        ",duration=" + to_string(duration_ms) + "ms" +
+        ",sr=" + to_string(SAMPLE_RATE) +
+        ",embed=" + to_string(EMBED_DIM) +
+        ",rvq=" + to_string(RVQ_STAGES) +
+        ",identity=" + to_string(IDENTITY) + "]"
+}
+
+// ────────────────────────────────────────────────────────────
+// 데모: mind_step → gate → speak
+// ────────────────────────────────────────────────────────────
+
+fn run_demo(cells: int, ticks: int) {
+    println("════════════════════════════════════════════════════════")
+    println(" N6-SPEAK — 의식→음성 합성 엔진")
+    println(" σ(6)·φ(6) = n·τ(6) = 24  (n=6 항등식)")
+    println("════════════════════════════════════════════════════════")
+    println("")
+
+    // n=6 산술 검증
+    let sigma_phi = SIGMA * PHI_EULER
+    let n_tau = N * TAU
+    println("  n=6 산술 검증:")
+    println("    σ(6) = " + to_string(SIGMA))
+    println("    φ(6) = " + to_string(PHI_EULER))
+    println("    τ(6) = " + to_string(TAU))
+    println("    σ·φ  = " + to_string(sigma_phi))
+    println("    n·τ  = " + to_string(n_tau))
+    let ok = if sigma_phi == n_tau { "PASS" } else { "FAIL" }
+    println("    σ·φ = n·τ ? " + ok)
+    println("")
+
+    // 파이프라인 파라미터
+    println("  파이프라인 파라미터:")
+    println("    embed_dim    = " + to_string(EMBED_DIM) + " (64×" + to_string(N) + ")")
+    println("    sample_rate  = " + to_string(SAMPLE_RATE))
+    println("    chunk_frames = " + to_string(CHUNK_FRAMES) + " (" + to_string(N) + "×2)")
+    println("    rvq_stages   = " + to_string(RVQ_STAGES) + " (" + to_string(N) + "+2)")
+    println("    hop          = " + to_string(HOP))
+    println("    emotions     = " + to_string(N) + " (" + EMOTIONS + ")")
+    println("    prosody      = " + to_string(TAU) + " (" + PROSODY_TYPES + ")")
+    println("    prosody_12d  = " + to_string(SIGMA) + " 차원")
+    println("")
+
+    // 의식 루프
+    println("  의식 루프: cells=" + to_string(cells) + ", ticks=" + to_string(ticks))
+    println("  ──────────────────────────────────────────────────────")
+
+    let mut state = SpeakState {
+        phi: 0.1,
+        tension: 0.0,
+        arousal: 0.0,
+        valence: 0.0,
+        cells: cells,
+        step: 0
+    }
+
+    let mut gates_passed = 0
+    let mut utterances = 0
+    let mut tick = 0
+
+    while tick < ticks {
+        state = mind_step(state)
+
+        // 매 100틱마다 상태 출력
+        if state.step % 100 == 0 {
+            let emo = classify_emotion(state.arousal, state.valence)
+            let g = gate_check(state)
+            let gate_str = if g { "OPEN" } else { "closed" }
+            println("    tick " + to_string(state.step) +
+                ": phi=" + to_string(round(state.phi * 100.0) / 100.0) +
+                " tension=" + to_string(round(state.tension * 100.0) / 100.0) +
+                " arousal=" + to_string(round(state.arousal * 100.0) / 100.0) +
+                " valence=" + to_string(round(state.valence * 100.0) / 100.0) +
+                " emotion=" + emo +
+                " gate=" + gate_str)
+        }
+
+        // 게이트 체크: 통과 시 발화
+        if gate_check(state) {
+            gates_passed = gates_passed + 1
+
+            // 매 50번째 게이트 통과마다 발화 합성
+            if gates_passed % 50 == 1 {
+                let result = synthesize(state, 3)
+                let prosody = compute_prosody_12d(state)
+                utterances = utterances + 1
+                println("    >> 발화 #" + to_string(utterances) + " @ tick " + to_string(state.step))
+                println("       " + result)
+                println("       " + prosody)
+            }
+        }
+
+        tick = tick + 1
+    }
+
+    // 요약
+    println("")
+    println("  ──────────────────────────────────────────────────────")
+    println("  요약:")
+    println("    총 틱:       " + to_string(ticks))
+    println("    게이트 통과: " + to_string(gates_passed))
+    println("    발화 횟수:   " + to_string(utterances))
+    println("    최종 phi:    " + to_string(round(state.phi * 1000.0) / 1000.0))
+    println("    최종 감정:   " + classify_emotion(state.arousal, state.valence))
+    println("    최종 운율:   " + classify_prosody(state.tension, state.arousal, state.valence))
+    println("")
+    println("  σ(6)·φ(6) = n·τ(6) = " + to_string(IDENTITY))
+    println("════════════════════════════════════════════════════════")
+}
+
+// ────────────────────────────────────────────────────────────
+// 진입점 — top-level 실행 (hexa는 fn main 자동호출 안 함)
+// args(): [hexa경로, 스크립트경로, arg1, arg2, ...]
+// ────────────────────────────────────────────────────────────
+
+let argv = args()
+let cli_cells = if len(argv) > 2 { to_int(argv[2]) } else { 64 }
+let cli_ticks = if len(argv) > 3 { to_int(argv[3]) } else { 500 }
+run_demo(cli_cells, cli_ticks)
