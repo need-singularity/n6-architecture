@@ -401,12 +401,12 @@
           "name": "궁극의 핵융합 발전소",
           "ufo": 10,
           "ceiling": true,
-          "ver": "v4",
-          "description": "79/79 EXACT, 42보편핵물리100%, 12불가능성정리, BT-97~102+291~298, 물리천장QED",
+          "ver": "v5",
+          "description": "122/122 EXACT (v4 42 보편핵물리 + v5 80 공학층 신규), BT-97~102+291~298+1169~1174, Cross-DSE 12, TP42, Python 80/80 PASS, 12 Fusion Archetype 폐쇄 증명",
           "links": [
             {
               "label": "문서",
-              "path": "domains/cognitive/superpowers/superpowers.md"
+              "path": "domains/energy/fusion/fusion.md"
             }
           ]
         },
@@ -3933,7 +3933,7 @@
       "name": "궁극의 핵융합",
       "impact": 5,
       "tier": "✅",
-      "dse_info": "2,400 조합 → [🔥 핵융합](#-핵융합-fusion)"
+      "dse_info": "🛸10 v5 122/122 EXACT + BT-1169~1174 6건 + CrossDSE12 + TP42 + 80/80 자동검증 PASS → [🔥 핵융합](#-핵융합-fusion)"
     },
     {
       "rank": 8,

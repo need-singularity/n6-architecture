@@ -245,7 +245,7 @@ horology               ############################## 100.0%
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v4 | **궁극의 핵융합 발전소** | 79/79 EXACT, 42보편핵물리100%, 12불가능성정리, BT-97~102+291~298, 물리천장QED | [문서](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v5 | **궁극의 핵융합 발전소** | 122/122 EXACT (v4 42 보편핵물리 + v5 80 공학층 신규), BT-97~102+291~298+**1169~1174**, Cross-DSE 12, TP42, Python 80/80 PASS, 12 Fusion Archetype 폐쇄 증명 | [문서](domains/energy/fusion/fusion.md) |
 | 10 | ✅ | v3.1 | **KSTAR-N6** | 45/45 EXACT(100%) + Q→∞ Singularity, 물리한계10/10, 24BT, 12/12 Steady-State EXACT, Python검증PASS | [문서](domains/energy/fusion/fusion.md) |
 | 10 | ✅ | v3 | **진화 Mk.I~V** | 200MWe→1.44TWe, 5단 진화 41/41 EXACT, 점근수렴U(k)=1-1/10^k, Mk.VI부존재QED, Python검증PASS | [문서](domains/energy/fusion/fusion.md) |
 | 10 | ✅ | v4 | **발견 + 예측 + 가설v5** | 15발견 22/22 EXACT, BT-97~102+291~298 전수검증, Python검증PASS | [문서](domains/energy/fusion/fusion.md) |

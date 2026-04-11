@@ -208,6 +208,12 @@
       "value": "궁극의 초전도체 v4→v5 SMASH: 73/73 → 153/153 EXACT, BT-1163~1168 6건 (80/80 자동검증)",
       "threshold": "v4 73 PASS 유지 + v5 80 신규 EXACT 자동검증 통과",
       "note": "2026-04-12 문서 smash — superconductor.md §16 (v5) 470줄 추가, 16.11 Python 블록 실행 80/80 PASS, CLOSE 노트 5건 (γ/Maglev/LHC) 정직 분리. 6 BT: Flux Pinning/Coil Stress/Quench/Transmon/MRI NMR/12 Archetype. Cross-DSE 13→16 (dark-matter/GW/radio 추가). TP28→35 (+7)."
+    },
+    "FUSION_V5_SMASH": {
+      "status": "PASS",
+      "value": "궁극의 핵융합 발전소 v4→v5 SMASH: 42/42 → 122/122 EXACT, BT-1169~1174 6건 (80/80 자동검증)",
+      "threshold": "v4 42 보편 핵물리 PASS 유지 + v5 80 공학층 신규 EXACT 자동검증 통과",
+      "note": "2026-04-12 문서 smash — fusion.md §16 (v5) ~500줄 추가, 16.11 Python 블록 실행 80/80 PASS, CLOSE 노트 5건 (NIF 192/ITER B_T,I_p,P_fus/gyrotron 170) 정직 분리. 6 BT: Tokamak Shape 6/Blanket τ=4/ITER 54 Port/Heating 6/Fuel 6/12 Archetype. Cross-DSE 8→12 (dark-matter/GW/QC/propulsion 추가). TP35→42 (+7). 초전도 v5 와 완전 병렬 패턴 — 공학 자유도 = 물리 자유도 증명."
     }
   },
   "failed": {

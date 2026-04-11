@@ -1,7 +1,7 @@
 # n=6 Arithmetic Attractor Meta-Theorem
 
-**날짜**: 2026-04-11
-**유형**: 메타 정리 (DFS 20회차 결정화)
+**날짜**: 2026-04-11 (확장: 2026-04-12, DFS 49~58)
+**유형**: 메타 정리 (DFS 58회차 결정화, 24대 정리)
 **검증**: verify_millennium_dfs1.hexa (30 PASS), verify_millennium_tight.hexa (13 PASS)
 **atlas**: 45+ 노드 [10*]
 
@@ -284,6 +284,282 @@ Theorem C(좌표계), J(파티션), K(그래프), L(카탈란) 어느 것과도 
 23 = J2-1은 소수이며, 이 소수가 4함수의 합으로 분해됨.
 
 **QED**
+
+## Theorem P (E_8 적재, 해석적 증명)
+
+**정리**: sigma(n) * tau(n) * sopfr(n) = 240 iff n = 6 (n >= 2)
+
+**값**: 12 * 4 * 5 = 240 = |E_8 root system|
+
+**증명**:
+- 단계 1: n >= 2이면 sigma(n) >= n+1, tau(n) >= 2, sopfr(n) >= 2
+- 단계 2: 따라서 sigma(n)*tau(n)*sopfr(n) >= 4(n+1)
+- 단계 3: 240 >= 4(n+1) → n <= 59
+- 단계 4: n=2..59 유한 전수검사 → n=6 유일 해 (반소수 n=pq 경우 (p+1)(q+1)(p+q)=60도 (2,3)만 해)
+
+**QED**
+
+**보조 1**: n! = 6! = 720 = 240 * 3 = sigma*tau*sopfr * (n/phi) — n=6 유일 (n<=100 검증)
+
+**의미**: n=6의 3개 산술함수 곱이 정확히 최대 예외 Lie 대수 E_8의 근 개수.
+E_8의 248 = dim(E_8), 248 - 8 = 240 = rank 뺀 근 수.
+n=6은 자신의 함수 곱을 통해 E_8을 **대수적으로** 부호화.
+
+## Theorem Q (Catalan-sopfr 유일성, n<=100000 검증)
+
+**정리**: C(sopfr(n)) = n + sigma(n) + J2(n) iff n = 6 (n >= 2)
+
+여기서 C(k) = (2k)! / (k!(k+1)!) 은 k번째 Catalan 수.
+
+**값**: C(5) = 42 = 6 + 12 + 24
+
+**보조**: C(sopfr(n))은 sopfr이 커지면 지수적으로 증가하지만, n+sigma+J2는 다항 증가.
+따라서 해는 작은 n에 한정되며, n<=100000에서 n=6 유일.
+
+**의미**: "42 = 생명, 우주, 모든 것의 답" 농담이 n=6의 Catalan-산술함수 자기참조 구조에서 나온다.
+
+**QED (computational)**
+
+## Theorem R (바젤 삼중 유일성)
+
+**정리**: 다음을 동시에 만족하는 n은 n=6 유일.
+1. zeta(phi(n)) = pi^{phi(n)} / n  (바젤)
+2. zeta(-1) = -1/sigma(n)
+3. zeta(0) = -1/phi(n)
+
+**증명**:
+- zeta(2) = pi^2/6 (Euler): n=6일 때 phi=2이므로 만족.
+- zeta(-1) = -1/12 (해석접속): sigma(6)=12이므로 만족.
+- zeta(0) = -1/2: phi(6)=2이므로 만족.
+- phi(n)=2 해: {3, 4, 6}. 이 중 sigma(n)=12인 것은 n=6 유일 (Theorem I 계열).
+- → n=6 유일.
+
+**QED**
+
+**의미**: Riemann zeta 함수의 세 특수값 {zeta(-1), zeta(0), zeta(2)}가
+n=6의 세 산술함수 {sigma, phi, n} 자체로 표현된다.
+바젤 문제부터 해석접속까지, n=6이 zeta 함수의 "가장 단순한 비자명 값"들을 점유.
+
+## Theorem S (zeta(4) 부호화)
+
+**정리**: zeta(4) = pi^4 / (sopfr(n) * (sopfr(n)-2) * n) at n=6
+
+**값**: 90 = 5 * 3 * 6 = sopfr * (sopfr-2) * n. zeta(4) = pi^4/90 ✓
+
+**보조**: sopfr=5, sopfr-2=3=(n/phi). 따라서 90 = sopfr*(n/phi)*n.
+
+**의미**: zeta(4) 역시 n=6의 산술함수만으로 표현. Theorem R + S → zeta 4개 값 부호화.
+
+**QED**
+
+## Theorem T (MZV weight 4 부호화)
+
+**정리**: 다중 제타 값 (Multiple Zeta Value)의 weight 4 기저 3개 모두가 n=6의 산술함수 곱으로 자연 표현.
+
+- zeta(2, 2) = pi^4 / 120 = pi^4 / (J_2(n) * sopfr(n))
+- zeta(3, 1) = pi^4 / 360 = pi^4 / (J_2(n) * sopfr(n) * (n/phi(n)))
+- zeta(4)    = pi^4 / 90  = pi^4 / (sopfr(n) * (sopfr(n)-2) * n)
+
+**값 검증**:
+- 120 = 24 * 5 = J_2 * sopfr ✓
+- 360 = 24 * 5 * 3 = J_2 * sopfr * (n/phi) ✓
+- 90 = 5 * 3 * 6 = sopfr * (sopfr-2) * n ✓
+
+**정직성 주석**: MZV weight 4 공간은 Zagier 정리에 의해 1차원(모두 zeta(4)의 유리수배).
+따라서 "모든 MZV가 n=6 함수"가 아닌 "자연 정규화된 세 표현의 분모가 모두 n=6 함수 곱"이라는 약한 주장.
+그러나 120, 360, 90 세 수가 모두 n=6 산술함수의 깔끔한 곱으로 분해되는 것은 비자명.
+
+**QED (약한 주장, Zagier MZV 정리 귀결)**
+
+## Theorem V (von Staudt-Clausen: n=6 공통 Bernoulli 분모, 해석적)
+
+**정리**: 모든 짝수 Bernoulli 수 B_{2k} (k >= 1)의 분모는 6의 배수이다.
+즉 n=6은 **전 Bernoulli 수열의 공통 분모 인수**이다.
+
+**증명** (von Staudt-Clausen 1840):
+- von Staudt-Clausen 정리: B_{2k} + sum_{(p-1) | 2k} (1/p) ∈ Z
+- 따라서 B_{2k}의 분모 = prod_{p prime, (p-1) | 2k} p
+- 모든 k >= 1에 대해:
+  - (2-1) = 1 | 2k  (항상)
+  - (3-1) = 2 | 2k  (2k가 짝수이므로 항상)
+- 따라서 {2, 3} ⊂ {B_{2k} 분모의 소인수}
+- 즉 6 = 2*3 | 분모(B_{2k})
+
+**QED**
+
+**검증** (k=1..10):
+- B_2 분모 = 6 = n
+- B_4 분모 = 30 = n*sopfr
+- B_6 분모 = 42 = n + sigma + J_2 (Theorem Q와 일치)
+- B_8 분모 = 30
+- B_10 분모 = 66 = n*(sigma-1) = n*p(n) (Theorem J 일치)
+- B_12 분모 = 2730 = n*455
+- 모두 6의 배수 ✓
+
+**의미**: B_2 = 1/6 = 1/n은 단순한 우연이 아니라 
+**"가장 짧은 Bernoulli 분모가 정확히 n=6"** 이라는 체계적 사실의 특수 경우.
+n=6은 Bernoulli 이론에서 "모든 분모가 관통하는 최소 공통 축".
+Euler의 zeta(2)=pi^2/6은 이 구조의 직접 귀결 (Theorem N).
+
+**연결**:
+- B_6 분모 = 42 = Catalan_5 = 6+12+24 (Theorem Q)
+- B_10 분모 = 66 = n * (sigma-1) (Theorem J의 11이 직접 등장)
+
+## Theorem U (Bernoulli 시작: B_2 = 1/n)
+
+**정리**: 첫 비자명 Bernoulli 수 B_2 = 1/6 = 1/n. 이 단일 항등식이 Euler 공식
+    zeta(2k) = (2*pi)^{2k} * |B_{2k}| / (2 * (2k)!)
+을 통해 zeta(2) = pi^2/n = pi^2/6 (Basel 정리)을 낳는다.
+
+**나아가 n=6 산술함수가 짝수 zeta 분모에 재귀적으로 등장**:
+- zeta(2)  = pi^2/6 = pi^2/n
+- zeta(4)  = pi^4/90, 90 = sopfr * (sopfr-2) * n (Theorem S)
+- zeta(6)  = pi^6/945, 945 = (n/phi)^3 * sopfr * (n+1)
+- zeta(8)  = pi^8/9450, 9450 = phi * sopfr^2 * (n/phi)^3 * (n+1)
+- Bernoulli 수: B_2=1/n, B_4=-1/(n*sopfr), B_6=1/(n+sigma+J_2)=1/42
+
+**의미**: Bernoulli 수는 n=6과 무관하게 정의되지만 (B_k = k번째 Bernoulli 수),
+수치적으로 B_2=1/6이라는 사실이 "왜 zeta(2)=pi^2/6인가"의 근본이다.
+완전수 6과 B_2의 분모 6이 **같은 n=6**이라는 것이 attractor의 증거.
+
+**정직성**: 이는 구조적 관찰이며 "B_2=1/6이므로 n=6이 특별하다"는 순환 논증은 피해야 함.
+오히려 "완전수=6 ∧ B_2 분모=6 ∧ Basel 답=6"이 모두 **독립적 경로로 n=6에 수렴**하는 것이 핵심.
+
+**연결**: B_6 = 1/42 = 1/(n+sigma+J_2) — Theorem Q(Catalan-sopfr)와 직접 연결.
+
+## Theorem W (X_0(N) 최초 비유리 경계)
+
+**정리**: 첫 N >= 1에서 모듈러 곡선 X_0(N)이 genus >= 1을 갖는 것은 N = 11 이고, 이 값은
+    11 = sigma(n) - 1 = p(n)
+을 만족한다 (n=6에서, Theorem J).
+
+**배경**: X_0(N)은 Γ_0(N) 공역으로 얻어지는 모듈러 곡선. 
+genus 공식 g(X_0(N)) = 1 + idx/12 - ν_2/4 - ν_3/3 - ν_inf/2
+에서 N=1..10은 g=0 (유리), N=11에서 최초로 g=1.
+
+**검증**: 컴퓨팅 (N=1..20).
+
+**의미**: 11 = sigma(n) - 1 = p(n) (파티션 수) 이라는 사실이 
+**타원곡선 이론의 "유리 → 비유리 경계"** 를 n=6으로 직결.
+- 가능 torsion (Mazur): {1..10, 12} (11개, 최대 12=sigma)
+- X_0(N) 첫 g>=1: N=11 (sigma-1, p(n))
+- Selmer 6-descent 가능성 (BKLPR): n=6 뿌리
+
+**QED** (computational; Mazur 정리와 Ogg 1974 참고)
+
+## Theorem X (σ_3 자기참조, n<=10000 검증)
+
+**정리**: σ_3(n) = n * (n + sigma(n) + J_2(n)) iff n = 6 (n >= 2)
+
+**값**: σ_3(6) = 1 + 8 + 27 + 216 = 252 = 6 * 42 = n * (n+sigma+J_2)
+
+**보조**: 42 = Catalan_5 = C(sopfr(n)) (Theorem Q)
+**보조**: 252 = tau(n) * (n/phi(n))^2 * (n+1) — 다중 분해
+
+**의미**: 고차 제수함수 σ_3은 σ_1(=sigma)의 다음 층. n=6에서 σ_3이 정확히
+"n * Catalan_{sopfr(n)}"으로 분해됨. 이는 Theorem Q의 3차 리프팅.
+
+**QED (computational)**
+
+## 추가 발견 (DFS 53~58)
+
+- **J_2(n) = tau(n)*sigma(n)/phi(n)**: n<=10000에서 n=6 유일 해 (24=4*12/2)
+- **A_n Schur multiplier**: M(A_6)=Z/6Z=Z/nZ (A_n 족에서 n=6,7 예외, 크기 n)
+- **G_2 Weyl 위수**: |W(G_2)| = 12 = sigma(n), A_2 Weyl = 6 = n
+- **Ramanujan Δ = η^24**: weight=sigma(n), 지수=J_2(n). n=6의 이중 부호화
+- **Mazur 금지 경계**: p=11=sigma-1(=p(n)), p=13=sigma+1 (Theorem G, J 직결)
+- **SL_2 사상**: SL_2(F_{phi})=n, SL_2(F_{n/phi})=J_2, SL_2(F_{sopfr})=n!
+- **Dirichlet 항등식**: n=6에서 J_2 = tau*sigma/phi (일반적으로 성립 안함)
+- **Ramanujan τ_R**: τ_R(2)=-J_2(n), τ_R(3)=σ_3(n), τ_R(6)=-J_2 * σ_3
+- **모듈러 형식 주기**: M_k(SL_2(Z)) 공간이 k=12=sigma(n)에서 2차원으로 점프 (첫 cusp form Δ)
+- **Moonshine j(q)**: j 함수 상수항 744 = J_2(n) * 31
+- **Heegner 수**: {1,2,3,7,11,19,43,67,163} — 포함 {3=n/phi, 7=n+1, 11=sigma-1}
+
+## Theorem Y (Stirling 2nd S(m,3)=90, m<=200 검증)
+
+**정리**: S(m, 3) = 90 iff m = 6, 여기서 S(m, k)는 제2종 Stirling 수.
+
+**값**: S(6, 3) = 90 = sopfr(n) * (sopfr(n)-2) * n = zeta(4) 분모 (Theorem S 일치)
+
+**의미**: 
+- S(m, 3) = (3^m - 3*2^m + 3)/6 는 m에 대해 지수 성장.
+- S(m,3) = 90 방정식은 단일 해 m=6을 갖는다.
+- 이 값 90이 정확히 zeta(4) 분모이자 n=6 산술함수 조합.
+- Stirling 2nd kind가 n=6을 **조합론적으로** 부호화.
+
+**QED (computational)**
+
+## Theorem Z (Lucas 수 L_n=n*(n/phi), n<=1000 검증)
+
+**정리**: L_n = n * (n/phi(n)) iff n = 6, 여기서 L_n은 Lucas 수열.
+
+**값**: L_6 = 18 = 6 * 3 = n * (n/phi)
+
+**증명 스케치**:
+- Lucas 수는 황금비 지수 성장: L_n ~ φ^n (φ=황금비)
+- n * (n/phi(n)) 는 기껏해야 n^2 급 성장
+- 따라서 n이 커지면 L_n >> n*(n/phi)가 되어 해 없음
+- 유한 검색으로 n=6 유일
+
+**보조 등식**: 
+- L_6 = L_5 + L_4 = 11 + 7 = (sigma-1) + (n+1) (Theorem J + n+1)
+- F_6 = 8 = 5 + 3 = sopfr + n/phi (n<=1000 유일)
+
+**QED (computational)**
+
+**의미**: 피보나치-뤼카 수열이 n=6을 산술함수 곱으로 부호화.
+황금비 기반 재귀와 n=6 산술 구조의 만남.
+
+## 추가 발견 (DFS 59~60: 확률/물리/대수기하/조합)
+
+- **F_n = sopfr(n) + n/phi(n)**: n=6 유일 (n<=1000)
+- **Stirling S(6, 5) = 15 = C(n,2)** (Theorem K 일치)
+- **Bell B(4) = 15 = C(n,2)** (Theorem K 일치)
+- **tau(n)! = J_2(n)**: 해 = {6, 232, 246} (비유일, 3개)
+
+## 추가 발견 (DFS 61: p-adic / Galois)
+
+- **Legendre (n! 소인수분해)**: 6! = 720 = 2^4 * 3^2 * 5 = 2^tau * 3^phi * 5
+  - v_2(n!) = tau(n), v_3(n!) = phi(n) at n=6 (자기참조)
+- **Q(ζ_n) 체**: [Q(ζ_6):Q] = phi(n) = 2, disc = -3 = -(n/phi(n))
+- **CRT 분해**: Z/6Z = Z/2Z × Z/3Z — 첫 두 소수 {2,3}를 정확히 분리하는 최소 합성수
+- **원시근**: n=6 = 2·3은 첫 2p 형태 원시근 존재 합성수 (n=4 다음)
+- **Frobenius**: Gal(F_{2^n}/F_2) = Z/nZ, n=6일 때 위수 6
+- **Dirichlet L(1, χ_{-3})**: = π/((n/phi)·sqrt(n/phi)) = π/(3·sqrt(3))
+- **유한체 공백**: F_6 존재 안함 (n=6은 소수거듭제곱 아님), 이는 n=6이 "유한체에 없는 최소 합성수" 구조
+
+## DFS 49~61 확장 요약
+
+**2026-04-12 세션 추가**: Theorem O~Z (12개)
+- 해석적 증명: P (E_8 = 240), V (von Staudt-Clausen 6|분모)
+- 컴퓨팅 유일성: O, Q, R, S, T, U, W, X, Y, Z (10)
+
+**총 정리**: 24대 (0, C, E, F, H~Z)
+**독립 가족**: 15개 (이전 10 + Zeta짝수값, σ_k고차, 모듈러곡선, E_8적재, Catalan-sopfr)
+**검증 한계**: 해석적 증명 13개, 컴퓨팅 11개 (n<=10000 ~ 100000)
+**7대 밀레니엄**: 0/7 (정직성 유지)
+
+**핵심 추가**: 
+- B_2 = 1/n 이 모든 것의 뿌리 (Theorem U)
+- von Staudt-Clausen으로 6 | B_{2k} 분모 **항상** (Theorem V 해석적)
+- E_8 부호화: sigma·tau·sopfr = 240 = |E_8 roots| (Theorem P 해석적)
+- MZV weight 4 공간이 n=6 함수로 (Theorem T)
+- 42 = Catalan_sopfr = n+sigma+J_2 = B_6 분모 (Theorem Q)
+- X_0(sigma-1)이 첫 non-rational 모듈러 곡선 (Theorem W)
+
+- **주사위 분산**: Var(die_n) = 35/12 = sopfr*(n+1)/sigma (n=6)
+- **Coupon collector**: H_n = (n+1)^2 / (tau*sopfr), E[T] = n*H_n = 147/10
+- **E 곡선 y^2=x^3+1**: |E(Q)_tors|=n=6, conductor=n^2=36, disc=-sigma*n^2=-432, j=0 (CM)
+- **표준모형**: 페르미온 24 = J_2, 게이지 보존 12 = sigma (Theorem I 재확인)
+- **차원 자기참조**:
+  - String 10D = tau(n) + n
+  - M-theory 11D = sopfr(n) + n = sigma(n) - 1 = p(n)
+  - Bosonic string 26D = sigma + J_2 - phi*tau
+  - Calabi-Yau 6D = n
+- **E_8 dim 분해**: 248 = sigma*tau*sopfr + phi*tau = 240 + 8 (두 n=6 함수 조합)
+- **Lie 대수 dim**: so(4)=n, so(6)=su(4)=C(n,2) (Theorem K 일치), G_2 Weyl=sigma
+- **정다면체 축**: 정팔면체 (V,E,F)=(n, sigma, phi*tau), 정사면체 E=n
+- **주기 코인시던스**: 모듈러 k=12=sigma, cusp form 첫 등장 / 주사위 분산 분모=sigma / 게이지 대칭=sigma
 
 ## 추가 발견 (DFS 41~48)
 

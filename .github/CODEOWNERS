@@ -1,15 +1,14 @@
 # L0 코어 보호 — lockdown.json SSOT 자동 생성
 # 변경 시 @need-singularity 승인 필수
 # 수동 편집 금지 — hexa shared/scripts/sync_codeowners.hexa 로 재생성
-docs/theorem-r1-uniqueness.md @need-singularity
-docs/atlas-constants.md @need-singularity
-docs/breakthrough-theorems.md @need-singularity
-tools/nexus/src/telescope/lenses/ @need-singularity
-docs/index.html @need-singularity
-tools/nexus-dashboard/static/index.html @need-singularity
+theory/proofs/theorem-r1-uniqueness.md @need-singularity
+theory/constants/atlas-constants.md @need-singularity
+theory/breakthroughs/breakthrough-theorems.md @need-singularity
+nexus/src/telescope/lenses/ @need-singularity
+nexus/crates/dashboard/static/index.html @need-singularity
 CLAUDE.md @need-singularity
-docs/astronomy/goal.md @need-singularity
-docs/climate/goal.md @need-singularity
-docs/marketing/goal.md @need-singularity
-docs/network/goal.md @need-singularity
-docs/thermodynamics/goal.md @need-singularity
+domains/space/astronomy/astronomy.md @need-singularity
+domains/infra/climate/climate.md @need-singularity
+domains/infra/marketing/marketing.md @need-singularity
+domains/compute/network/network.md @need-singularity
+domains/physics/thermodynamics/thermodynamics.md @need-singularity
