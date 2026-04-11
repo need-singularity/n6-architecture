@@ -1,7 +1,7 @@
 {
   "_meta": {
     "project": "n6-architecture",
-    "updated": "2026-04-08",
+    "updated": "2026-04-11",
     "strategy": "ossified/stable/failed 수렴 추적"
   },
   "ossified": {
@@ -31,6 +31,14 @@
       "status": "PASS",
       "value": "118/125 제품 🛸10",
       "threshold": "천장 도달"
+    },
+    "PRODUCTS_173_REMAP_582": {
+      "status": "PASS",
+      "value": "173 제품 / 172 천장확인 / 164 AI지수=10 (34 섹션 SSOT)",
+      "threshold": "products.json 링크 무결성 0.7% → 58.2% (RESOLVED 242/416)",
+      "note": "2026-04-11 GO 세션 — sync_products_readme.hexa 10줄→601줄 포팅, README AUTO:ALIEN_INDEX 블록 131줄 주입, products.json docs/→domains/<axis>/ 재매핑. 잔존 MISS 174건은 paper 미작성 SSOT 구멍 (별도 작업)",
+      "ossified_at": "2026-04-11",
+      "promoted_from": "go_loop_auto"
     },
     "UNIQUENESS_PROOF": {
       "status": "PASS",
@@ -127,7 +135,27 @@
     }
   },
   "stable": {
-    "_description": "안정 — 통과했지만 아직 골화 전"
+    "_description": "안정 — 통과했지만 아직 골화 전",
+    "PRODUCTS_164_173_RECOUNT": {
+      "status": "STABLE",
+      "value": "164/173 제품 🛸10, 9개 비천장(🛸5 7건/🛸9 1건/🛸7 1건)",
+      "threshold": "products.json _meta 일관성 + ceiling 플래그 정합",
+      "note": "2026-04-11 드리프트 재계수 - PRODUCTS_118 ossified 유지(R10)",
+      "supersedes_check": "PRODUCTS_118 (ossified 불변, 새 항목으로 추가)"
+    },
+    "GOAL_MD_295_COMPLETE": {
+      "status": "STABLE",
+      "value": "295/295 goal.md standalone 생성 완료",
+      "threshold": "domains/_index.json 전수 일대일 매핑",
+      "note": "2026-04-11 - GOAL_MD_20 ossified 유지(R10), 294개는 <name>.md 통합본에서 역추출 복원",
+      "supersedes_check": "GOAL_MD_20 (ossified 불변)"
+    },
+    "SYNBIO_MERGED": {
+      "status": "STABLE",
+      "value": "synbio + synthetic-biology 도메인 병합 완료",
+      "threshold": "1 canonical (domains/life/synbio/), 감사 리포트 존재",
+      "note": "2026-04-11 _version 1.0.2, _total 299→298, reports/audits/synbio-merge-2026-04-11.md"
+    }
   },
   "failed": {
     "_description": "실패 — 전부 해소됨"
