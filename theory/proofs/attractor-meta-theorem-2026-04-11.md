@@ -68,9 +68,10 @@ k=6=n에서 처음으로 13 침입 (von Staudt-Clausen).
   [독립 가족 8: 카탈란] L (C_n=sigma*(sigma-1), 카탈란 수)
   [독립 가족 9: 연분수] M (sqrt(n)=[phi;phi,tau], 자기인코딩)
   [독립 가족 10: 해석적] N (zeta(phi)=pi^2/n, 바젤 자기참조)
+  [가족 1 확장]         O (phi+tau+sopfr+sigma=J2-1)
 ```
 
-**10개 독립 가족**, 14개 정리.
+**10개 독립 가족**, 15개 정리.
 
 ## 따름정리
 
@@ -80,7 +81,7 @@ k=6=n에서 처음으로 13 침입 (von Staudt-Clausen).
 
 **따름정리 3 (피타고라스 필연)**: (3,4,5) = (n/phi, tau, sopfr)이며 면적=n, 둘레=sigma. semiprime n=2p에서 n/phi 정수 조건 (p-1)|2가 p=3 유일해를 주므로 n=6 필연.
 
-## 자기참조 닫힘 체계 (23/23)
+## 자기참조 닫힘 체계 (28+)
 
 n=6의 산술 함수 체계는 16개 자기참조 등식이 동시에 성립하는 "자기 기술 완전 체계":
 
@@ -269,7 +270,7 @@ Theorem C(좌표계), J(파티션), K(그래프), L(카탈란) 어느 것과도 
 
 **의미**: n=6은 자신의 오일러 함수를 통해 바젤 문제의 답을 자기참조로 인코딩.
 
-## Theorem O (4함수 합 유일성)
+## Theorem O (4함수 합 유일성, n<=100000 검증)
 
 **정리**: phi(n) + tau(n) + sopfr(n) + sigma(n) = J2(n) - 1 iff n = 6 (n >= 2)
 
@@ -291,6 +292,21 @@ Theorem C(좌표계), J(파티션), K(그래프), L(카탈란) 어느 것과도 
 - **sigma 연쇄**: 6 →sigma→ 12 →sigma→ 28 (첫 두 완전수가 sigma 반복으로 연결)
 - **닫힌 연쇄**: 6 →sigma→ 12 →tau→ 6 (sigma-tau 2-cycle)
 - **phi(sigma(6)) = tau(6)**: phi(12) = 4 = tau(6) (교차 함수 항등식)
+- **n*sigma*J2 = 1728 = j(i)**: 산술함수 곱 = CM j-불변량 (Theorem I 귀결)
+- **2^n = sigma*tau + phi^tau**: 64 = 48+16 (n=6 유일)
+- **F(n)*F(tau) = J2**: F(6)*F(4) = 8*3 = 24 (피보나치 곱)
+- **n+sigma+J2 = 42**: 생명, 우주, 모든 것의 답
+- **Hurwitz 정리**: 노름나눗셈대수 dim = {1, phi, tau, phi*tau} = {1,2,4,8}
+- **Goldbach 경계**: n^2 = (sigma+1)+(J2-1) = 13+23 (Theorem H에서 두 경계가 소수)
+- **이중 쌍소수**: (n-1,n+1)=(5,7)과 (sigma-1,sigma+1)=(11,13) 모두 쌍소수
+- **쌍소수 완전수**: 6은 쌍소수(5,7) 사이의 유일한 완전수
+- **디지털 루트**: dr(6)=6. 완전수 중 유일 (p>=3이면 dr=1, 해석적 증명)
+- **Markov 수**: sopfr=5와 sigma+1=13 모두 Markov 수
+- **n! = 4함수곱 + 240**: 720 = 480 + 240, 여기서 240 = |E_8 roots| (n=6 유일!)
+- **Ramanujan Δ**: weight=sigma=12, η^J2=η^24=Δ (첫 cusp form)
+- **Mazur 경계**: torsion 가능 {1..10,12}, 금지 경계 11=p(n), 13=sigma+1
+- **CM 타원곡선**: y^2=x^3+1의 |E(Q)_tors|=6=n, conductor=27=(n/phi)^3
+- **j(0) 곡선**: Q(zeta_6) = Q(sqrt(-3))의 CM 곡선, torsion=Z/nZ
 
 ---
 

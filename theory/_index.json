@@ -1,7 +1,7 @@
 {
   "_doc": "이론층 SSOT — 영구 불변 증명·정리·상수·예측·흐름",
-  "_version": "1.1.0",
-  "_updated": "2026-04-11",
+  "_version": "1.1.1",
+  "_updated": "2026-04-12",
 
   "proofs": {
     "main": "proofs/theorem-r1-uniqueness.md",
@@ -27,13 +27,15 @@
 
   "breakthroughs": {
     "main": "breakthroughs/breakthrough-theorems.md",
-    "total": 547,
+    "total": 553,
     "extensions": [
       "breakthroughs/breakthrough-theorems-extension-2026-04-08.md",
       "breakthroughs/breakthrough-theorems-warp-dimension-2026-04-08.md",
       "breakthroughs/millennium-7-closure-2026-04-11.md",
       "breakthroughs/millennium-dfs-complete-2026-04-11.md",
-      "breakthroughs/millennium-n6-attractor-2026-04-11.md"
+      "breakthroughs/millennium-n6-attractor-2026-04-11.md",
+      "breakthroughs/bt-748-752-new-domains-2026-04-11.md",
+      "breakthroughs/bt-1163-1168-superconductor-v5-2026-04-12.md"
     ],
     "candidates": [
       "breakthroughs/bt-candidates-from-tecs-l.md",

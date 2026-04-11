@@ -1126,8 +1126,8 @@
           "name": "궁극의 초전도체",
           "ufo": 10,
           "ceiling": true,
-          "ver": "v4",
-          "description": "73/73 PASS, BT-299~306 100%EXACT, CrossDSE 8도메인, TP28, Python검증PASS",
+          "ver": "v5",
+          "description": "153/153 EXACT (v4 73 + v5 80 신규), BT-299~306 + BT-1163~1168, CrossDSE 16도메인, TP35, Python 80/80 PASS",
           "links": [
             {
               "label": "문서",
@@ -4021,7 +4021,7 @@
       "name": "궁극의 초전도체",
       "impact": 3,
       "tier": "✅",
-      "dse_info": "🛸10 36파일 17,399줄 + BT11 + CrossDSE5 + TP27 + 물리한계증명 → [🔬 물리·수학](#-물리수학-physics--math)"
+      "dse_info": "🛸10 v5 153/153 EXACT + BT-1163~1168 6건 + CrossDSE16 + TP35 + 80/80 자동검증 PASS → [🔬 물리·수학](#-물리수학-physics--math)"
     },
     {
       "rank": 19,

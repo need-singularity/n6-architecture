@@ -461,7 +461,7 @@ horology               ############################## 100.0%
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v4 | **궁극의 초전도체** | 73/73 PASS, BT-299~306 100%EXACT, CrossDSE 8도메인, TP28, Python검증PASS | [문서](domains/energy/superconductor/superconductor.md) |
+| 10 | ✅ | v5 | **궁극의 초전도체** | 153/153 EXACT (v4 73 + v5 80 신규), BT-299~306 + BT-1163~1168, CrossDSE 16도메인, TP35, Python 80/80 PASS | [문서](domains/energy/superconductor/superconductor.md) |
 | 10 | ✅ | v2 | **궁극의 순수수학** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS | [문서](domains/physics/pure-mathematics/pure-mathematics.md) |
 | 10 | ✅ | v2 | **궁극의 우주론/입자** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS | [문서](domains/physics/cosmology-particle/cosmology-particle.md) |
 | 10 | ✅ | v5 | **궁극의 상온 초전도체** | 325/325 EXACT (이론150+실현76+Mk.I합성48+Mk.II소재51), 9소재후보+6Mk.II후보, Mk.I정밀레시피(6소재P-T경로+Phase1/2실험$6.18M), Mk.II상압후보(La,Ce,Y,Sc)H24고엔트로피Pareto1위, 2685줄 | [문서](domains/energy/room-temp-sc/room-temp-sc.md) |
