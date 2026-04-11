@@ -1,13 +1,4 @@
-# concrete-technology
-
-> 축: **materials** · 자동 통합본 · n6-architecture
-
-## 1. 실생활 효과
-
-
-## 2. 목표
-
-
+# HEXA-CONCRETE — 궁극의 콘크리트 기술
 
 ### 콘크리트 기술 — HEXA-CONCRETE 목표
 
