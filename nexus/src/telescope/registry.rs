@@ -96,6 +96,9 @@ impl LensRegistry {
         for entry in super::frontier_lenses::new_quad_lens_entries() {
             reg.entries.insert(entry.name.clone(), entry);
         }
+        for entry in super::frontier_lenses::expansion_56_lens_entries() {
+            reg.entries.insert(entry.name.clone(), entry);
+        }
         // Auto-load persisted custom lenses from disk (if present).
         let _ = reg.load_custom();
         reg

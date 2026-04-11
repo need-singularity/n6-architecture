@@ -14,10 +14,10 @@
     },
     "domains": {
       "path": "domains/",
-      "purpose": "295 도메인 — 도메인당 1개 .md + 1개 verify.hexa + 1개 CLAUDE.md",
+      "purpose": "299 도메인 — 도메인당 1개 .md + 1개 verify.hexa + 1개 CLAUDE.md",
       "ssot": "domains/_index.json",
       "axes_count": 10,
-      "domain_count": 295,
+      "domain_count": 299,
       "subs": ["physics", "life", "energy", "compute", "materials", "space", "infra", "cognitive", "culture", "sf-ufo"]
     },
     "nexus": {

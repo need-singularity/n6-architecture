@@ -1,8 +1,11 @@
 {
-  "_doc": "도메인 SSOT — 295 도메인을 9축으로 분류. 축 변경 시 이 파일만 수정.",
-  "_version": "1.0.0",
-  "_total": 295,
+  "_doc": "도메인 SSOT — 299 도메인을 9축으로 분류. 축 변경 시 이 파일만 수정.",
+  "_version": "1.0.1",
+  "_total": 299,
   "_axes": 10,
+  "_changelog": [
+    "1.0.1 (2026-04-11): compute 축에 4 도메인 추가 — chip-rtl-gen, chip-dse-pipeline, chip-isa-n6, chip-npu-n6 (칩 설계 축 확장)"
+  ],
   "_template": "각 도메인: domains/<axis>/<name>/{CLAUDE.md, <name>.md, verify.hexa}",
 
   "physics": [
@@ -44,7 +47,8 @@
 
   "compute": [
     "5g-6g-network", "advanced-packaging", "ai-efficiency", "blockchain",
-    "browser", "chip-architecture", "compiler-os", "consciousness-chip",
+    "browser", "chip-architecture", "chip-dse-pipeline", "chip-isa-n6",
+    "chip-npu-n6", "chip-rtl-gen", "compiler-os", "consciousness-chip",
     "consciousness-soc", "cryptography", "digital-twin", "display",
     "display-8stack", "dram", "exynos", "isocell-comms", "keyboard",
     "learning-algorithm", "mouse", "network", "network-protocol",

@@ -113,3 +113,31 @@
 {"name": "ppa_model", "category": "structural", "file": "structural/ppa_model.hexa", "status": "registered"}
 {"name": "telescope_product_review", "category": "structural", "file": "structural/telescope_product_review.hexa", "status": "registered"}
 {"name": "ufo_nexus_scan", "category": "structural", "file": "structural/ufo_nexus_scan.hexa", "status": "registered"}
+{"name": "experiment_yarn_rope_scaling_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_yarn_rope_scaling_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_ring_attention_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_ring_attention_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_deepseek_mla_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_deepseek_mla_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_mamba2_ssm_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_mamba2_ssm_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_griffin_rglru_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_griffin_rglru_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_jamba_hybrid_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_jamba_hybrid_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_mixture_of_depths_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_mixture_of_depths_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_gshard_switch_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_gshard_switch_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_speculative_decoding_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_speculative_decoding_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "experiment_medusa_heads_n6", "category": "ai-efficiency", "file": "ai-efficiency/experiment_medusa_heads_n6.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "ai-technique-gap"}
+{"name": "verify_bt372_geology", "category": "anomaly", "file": "anomaly/verify_bt372_geology.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt373_meteorology", "category": "anomaly", "file": "anomaly/verify_bt373_meteorology.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt374_cryosphere", "category": "anomaly", "file": "anomaly/verify_bt374_cryosphere.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt375_ocean", "category": "anomaly", "file": "anomaly/verify_bt375_ocean.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt376_atmospheric_chem", "category": "anomaly", "file": "anomaly/verify_bt376_atmospheric_chem.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt377_curvature", "category": "anomaly", "file": "anomaly/verify_bt377_curvature.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt378_warp", "category": "anomaly", "file": "anomaly/verify_bt378_warp.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt379_extra_dim", "category": "anomaly", "file": "anomaly/verify_bt379_extra_dim.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_bt380_meta", "category": "anomaly", "file": "anomaly/verify_bt380_meta.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "bt380-new"}
+{"name": "verify_chip_cache_hierarchy", "category": "anomaly", "file": "anomaly/verify_chip_cache_hierarchy.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "chip-design"}
+{"name": "experiment_physics_ai_n6_bridge", "category": "cross", "file": "cross/experiment_physics_ai_n6_bridge.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "cross-domain"}
+{"name": "experiment_bio_chip_cascade", "category": "cross", "file": "cross/experiment_bio_chip_cascade.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "cross-domain"}
+{"name": "experiment_energy_materials_fusion", "category": "cross", "file": "cross/experiment_energy_materials_fusion.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "cross-domain"}
+{"name": "experiment_space_infra_topology", "category": "cross", "file": "cross/experiment_space_infra_topology.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "cross-domain"}
+{"name": "experiment_hexagonal_tiling_optimality", "category": "structural", "file": "structural/experiment_hexagonal_tiling_optimality.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "structural-proof"}
+{"name": "experiment_e6_lattice_packing", "category": "structural", "file": "structural/experiment_e6_lattice_packing.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "structural-proof"}
+{"name": "experiment_6d_renormalization_flow", "category": "structural", "file": "structural/experiment_6d_renormalization_flow.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "structural-proof"}
+{"name": "experiment_discovery_graph_v10", "category": "structural", "file": "structural/experiment_discovery_graph_v10.hexa", "status": "pending", "batch": "expansion-122-150", "priority": "structural-proof"}
