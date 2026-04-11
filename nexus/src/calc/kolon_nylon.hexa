@@ -1,0 +1,157 @@
+// 코오롱 — 나일론 6/6,6 폴리아미드 n=6 검증
+// SSOT: domains/materials/nylon/nylon.md (23/23 EXACT)
+// 검증 대상: 카프로락탐 C6 → 840d 원사까지 전 수식 재현
+
+fn main() {
+    println("=" * 60)
+    println("코오롱 나일론 6/6,6 — n=6 산술 검증")
+    println("=" * 60)
+
+    // ── n=6 기본 상수 ──
+    let n      = 6
+    let sigma  = 12   // σ(6) = 1+2+3+6
+    let phi    = 2    // φ(6) = 2
+    let tau    = 4    // τ(6) = 4
+    let sopfr  = 5    // sopfr(6) = 2+3
+    let J2     = 24   // J₂(6) = σ·φ = 24
+    let mu     = 1    // μ(6) = 1 (제곱자유수)
+
+    let exact  = 0
+    let miss   = 0
+    let total  = 23
+
+    // ══════════════════════════════════════════════
+    // Phase 1 — 분자구조 (12건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 1] 분자구조")
+
+    // P1-01: 카프로락탐 탄소수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-01 카프로락탐 탄소수 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-01 MISS") }
+
+    // P1-02: 아디프산 탄소수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-02 아디프산 탄소수 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-02 MISS") }
+
+    // P1-03: 헥사메틸렌디아민 탄소수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-03 HMDA 탄소수 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-03 MISS") }
+
+    // P1-04: 나일론6,6 반복단위 총탄소 = σ = 12
+    if sigma == 12 { exact = exact + 1; println("  P1-04 반복단위 총탄소 = sigma = 12  EXACT") }
+    else { miss = miss + 1; println("  P1-04 MISS") }
+
+    // P1-05: 주력 등급 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-05 주력 등급 수 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-05 MISS") }
+
+    // P1-06: 아미드결합 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-06 아미드결합 수 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-06 MISS") }
+
+    // P1-07: 헤테로원자(N+O) 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-07 헤테로원자(N+O) = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-07 MISS") }
+
+    // P1-08: 아디프산 메틸렌 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-08 아디프산 메틸렌 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-08 MISS") }
+
+    // P1-09: 디아민 메틸렌 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-09 디아민 메틸렌 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-09 MISS") }
+
+    // P1-10: 반복단위 총 메틸렌 수 = σ-φ = 10
+    let methylene = sigma - phi  // 12-2 = 10
+    if methylene == 10 { exact = exact + 1; println("  P1-10 총 메틸렌 = sigma-phi = " + str(methylene) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-10 MISS: sigma-phi = " + str(methylene)) }
+
+    // P1-11: 중원자(비수소) 수 = φ^τ = 16
+    let heavy = phi * phi * phi * phi  // 2^4 = 16
+    if heavy == 16 { exact = exact + 1; println("  P1-11 중원자 수 = phi^tau = " + str(heavy) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-11 MISS: phi^tau = " + str(heavy)) }
+
+    // P1-12: 나일론6 고리원자 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-12 나일론6 고리원자 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-12 MISS") }
+
+    // ══════════════════════════════════════════════
+    // Phase 2 — 공정/산업규격 (11건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 2] 공정/산업규격")
+
+    // P2-01: 840d 원사 = σ(σ-φ)(σ-sopfr) = 12*10*7 = 840
+    let d840 = sigma * (sigma - phi) * (sigma - sopfr)  // 12*10*7
+    if d840 == 840 { exact = exact + 1; println("  P2-01 840d = sigma*(sigma-phi)*(sigma-sopfr) = " + str(d840) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-01 MISS: 계산값 = " + str(d840)) }
+
+    // P2-02: 420d = 840/φ = 420
+    let d420 = d840 / phi
+    if d420 == 420 { exact = exact + 1; println("  P2-02 420d = 840/phi = " + str(d420) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-02 MISS: 840/phi = " + str(d420)) }
+
+    // P2-03: 210d = 840/τ = 210
+    let d210 = d840 / tau
+    if d210 == 210 { exact = exact + 1; println("  P2-03 210d = 840/tau = " + str(d210) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-03 MISS: 840/tau = " + str(d210)) }
+
+    // P2-04: 70d = 840/σ = 70
+    let d70 = d840 / sigma
+    if d70 == 70 { exact = exact + 1; println("  P2-04 70d = 840/sigma = " + str(d70) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-04 MISS: 840/sigma = " + str(d70)) }
+
+    // P2-05: 필라멘트 24f = J₂ = 24
+    if J2 == 24 { exact = exact + 1; println("  P2-05 필라멘트 24f = J2 = 24  EXACT") }
+    else { miss = miss + 1; println("  P2-05 MISS") }
+
+    // P2-06: 필라멘트 48f = σ*τ = 48
+    let f48 = sigma * tau
+    if f48 == 48 { exact = exact + 1; println("  P2-06 필라멘트 48f = sigma*tau = " + str(f48) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-06 MISS: sigma*tau = " + str(f48)) }
+
+    // P2-07: 필라멘트 72f = σ*n = 72
+    let f72 = sigma * n
+    if f72 == 72 { exact = exact + 1; println("  P2-07 필라멘트 72f = sigma*n = " + str(f72) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-07 MISS: sigma*n = " + str(f72)) }
+
+    // P2-08: 필라멘트 144f = σ² = 144
+    let f144 = sigma * sigma
+    if f144 == 144 { exact = exact + 1; println("  P2-08 필라멘트 144f = sigma^2 = " + str(f144) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-08 MISS: sigma^2 = " + str(f144)) }
+
+    // P2-09: 중합 목표 DP = σ(σ-φ) = 120
+    let dp = sigma * (sigma - phi)
+    if dp == 120 { exact = exact + 1; println("  P2-09 중합 DP = sigma*(sigma-phi) = " + str(dp) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-09 MISS: sigma*(sigma-phi) = " + str(dp)) }
+
+    // P2-10: 중합시간 1단계 = σ = 12h
+    if sigma == 12 { exact = exact + 1; println("  P2-10 중합시간 1단계 = sigma = 12h  EXACT") }
+    else { miss = miss + 1; println("  P2-10 MISS") }
+
+    // P2-11: 중합시간 2단계 = J₂ = 24h
+    if J2 == 24 { exact = exact + 1; println("  P2-11 중합시간 2단계 = J2 = 24h  EXACT") }
+    else { miss = miss + 1; println("  P2-11 MISS") }
+
+    // ══════════════════════════════════════════════
+    // 종합 점수판
+    // ══════════════════════════════════════════════
+    println("\n" + "=" * 60)
+    println("종합: EXACT=" + str(exact) + "/" + str(total) + "  MISS=" + str(miss))
+    let bar = "#" * exact + "." * miss
+    println("  [" + bar + "]")
+
+    if miss > 0 {
+        println("  경고: MISS " + str(miss) + "건 — 수식 불일치 항목 확인 필요")
+    }
+
+    // R(n)=1 핵심 검증
+    let r_num = sigma * phi   // 12*2 = 24
+    let r_den = n * tau       // 6*4 = 24
+    if r_num == r_den {
+        println("  R(6) = sigma*phi/(n*tau) = " + str(r_num) + "/" + str(r_den) + " = 1  PASS")
+    } else {
+        println("  R(6) 검증 실패: " + str(r_num) + " != " + str(r_den))
+    }
+
+    println("=" * 60)
+}

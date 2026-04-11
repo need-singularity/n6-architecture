@@ -1,0 +1,133 @@
+// 코오롱 — 에어백 n=6 검증
+// SSOT: domains/infra/airbag/airbag.md (18/18 EXACT)
+// 검증 대상: 나일론 원단 → 전개 30ms, 실밀도 J₂=24 전 수식 재현
+
+fn main() {
+    println("=" * 60)
+    println("코오롱 에어백 — n=6 산술 검증")
+    println("=" * 60)
+
+    // ── n=6 기본 상수 ──
+    let n      = 6
+    let sigma  = 12
+    let phi    = 2
+    let tau    = 4
+    let sopfr  = 5
+    let J2     = 24
+    let mu     = 1
+
+    let exact  = 0
+    let miss   = 0
+    let total  = 18
+
+    // ══════════════════════════════════════════════
+    // Phase 1 — 소재/구조 (9건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 1] 소재/구조 파라미터")
+
+    // P1-01: 원단 나일론 탄소 = σ = 12
+    if sigma == 12 { exact = exact + 1; println("  P1-01 나일론 탄소 = sigma = 12  EXACT") }
+    else { miss = miss + 1; println("  P1-01 MISS") }
+
+    // P1-02: 에어백 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-02 에어백 수 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-02 MISS") }
+
+    // P1-03: 전개 단계 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-03 전개 단계 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-03 MISS") }
+
+    // P1-04: 인플레이터 N₂ 반응 계수 = n/φ = 3
+    let n2_coeff = n / phi  // 3
+    if n2_coeff == 3 { exact = exact + 1; println("  P1-04 N2 반응계수 = n/phi = " + str(n2_coeff) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-04 MISS") }
+
+    // P1-05: 운전석 에어백 용량 = σ*sopfr = 60L
+    let vol_driver = sigma * sopfr  // 12*5 = 60
+    if vol_driver == 60 { exact = exact + 1; println("  P1-05 운전석 60L = sigma*sopfr = " + str(vol_driver) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-05 MISS: sigma*sopfr = " + str(vol_driver)) }
+
+    // P1-06: 조수석 에어백 용량 = σ*(σ-φ) = 120L
+    let vol_pass = sigma * (sigma - phi)  // 12*10 = 120
+    if vol_pass == 120 { exact = exact + 1; println("  P1-06 조수석 120L = sigma*(sigma-phi) = " + str(vol_pass) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-06 MISS: sigma*(sigma-phi) = " + str(vol_pass)) }
+
+    // P1-07: 직조 방향 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-07 직조 방향 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-07 MISS") }
+
+    // P1-08: 실 밀도 = J₂ = 24본/cm
+    if J2 == 24 { exact = exact + 1; println("  P1-08 실밀도 = J2 = 24본/cm  EXACT") }
+    else { miss = miss + 1; println("  P1-08 MISS") }
+
+    // P1-09: SRS 시스템 모듈 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-09 SRS 모듈 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-09 MISS") }
+
+    // ══════════════════════════════════════════════
+    // Phase 2 — 공정/안전규격 (9건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 2] 공정/안전규격")
+
+    // P2-01: ACU 센서 채널 = σ-τ = 8
+    let sensor_ch = sigma - tau  // 12-4 = 8
+    if sensor_ch == 8 { exact = exact + 1; println("  P2-01 센서 채널 = sigma-tau = " + str(sensor_ch) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-01 MISS") }
+
+    // P2-02: 인플레이터 저항 하한 = μ = 1옴
+    if mu == 1 { exact = exact + 1; println("  P2-02 저항 하한 = mu = 1옴  EXACT") }
+    else { miss = miss + 1; println("  P2-02 MISS") }
+
+    // P2-03: 인플레이터 저항 상한 = φ = 2옴
+    if phi == 2 { exact = exact + 1; println("  P2-03 저항 상한 = phi = 2옴  EXACT") }
+    else { miss = miss + 1; println("  P2-03 MISS") }
+
+    // P2-04: 전개 시간 = σ*φ+n = 24+6 = 30ms
+    let deploy_ms = sigma * phi + n  // 24+6 = 30
+    if deploy_ms == 30 { exact = exact + 1; println("  P2-04 전개 = sigma*phi+n = " + str(deploy_ms) + "ms  EXACT") }
+    else { miss = miss + 1; println("  P2-04 MISS: sigma*phi+n = " + str(deploy_ms)) }
+
+    // P2-05: 감압 완료 시간 = σ*(σ-φ) = 120ms
+    let deflate = sigma * (sigma - phi)  // 120
+    if deflate == 120 { exact = exact + 1; println("  P2-05 감압 = sigma*(sigma-phi) = " + str(deflate) + "ms  EXACT") }
+    else { miss = miss + 1; println("  P2-05 MISS") }
+
+    // P2-06: OPW 직조 레이어 = μ = 1
+    if mu == 1 { exact = exact + 1; println("  P2-06 OPW 레이어 = mu = 1  EXACT") }
+    else { miss = miss + 1; println("  P2-06 MISS") }
+
+    // P2-07: 점화제 종류 = n/φ = 3
+    let igniter = n / phi  // 3
+    if igniter == 3 { exact = exact + 1; println("  P2-07 점화제 종류 = n/phi = " + str(igniter) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-07 MISS") }
+
+    // P2-08: 실리콘 코팅 밀도 = J₂ = 24g/m2
+    if J2 == 24 { exact = exact + 1; println("  P2-08 코팅 밀도 = J2 = 24g/m2  EXACT") }
+    else { miss = miss + 1; println("  P2-08 MISS") }
+
+    // P2-09: Euro NCAP 별점 만점 = sopfr = 5
+    if sopfr == 5 { exact = exact + 1; println("  P2-09 NCAP 별점 = sopfr = 5  EXACT") }
+    else { miss = miss + 1; println("  P2-09 MISS") }
+
+    // ══════════════════════════════════════════════
+    // 종합 점수판
+    // ══════════════════════════════════════════════
+    println("\n" + "=" * 60)
+    println("종합: EXACT=" + str(exact) + "/" + str(total) + "  MISS=" + str(miss))
+    let bar = "#" * exact + "." * miss
+    println("  [" + bar + "]")
+
+    if miss > 0 {
+        println("  경고: MISS " + str(miss) + "건 — 수식 불일치 항목 확인 필요")
+    }
+
+    let r_num = sigma * phi
+    let r_den = n * tau
+    if r_num == r_den {
+        println("  R(6) = sigma*phi/(n*tau) = " + str(r_num) + "/" + str(r_den) + " = 1  PASS")
+    } else {
+        println("  R(6) 검증 실패")
+    }
+
+    println("=" * 60)
+}

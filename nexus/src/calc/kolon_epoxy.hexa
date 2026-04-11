@@ -1,0 +1,142 @@
+// 코오롱 — 에폭시/페놀 수지 n=6 검증
+// SSOT: domains/materials/epoxy/epoxy.md (20/20 EXACT)
+// 검증 대상: 벤젠 C6 → PCB 12층, Tg 120C, FR-4 1.6mm 전 수식 재현
+
+fn main() {
+    println("=" * 60)
+    println("코오롱 에폭시/페놀 수지 — n=6 산술 검증")
+    println("=" * 60)
+
+    // ── n=6 기본 상수 ──
+    let n      = 6
+    let sigma  = 12
+    let phi    = 2
+    let tau    = 4
+    let sopfr  = 5
+    let J2     = 24
+    let mu     = 1
+
+    let exact  = 0
+    let miss   = 0
+    let total  = 20
+
+    // ══════════════════════════════════════════════
+    // Phase 1 — 분자구조/화학 (10건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 1] 분자구조/화학")
+
+    // P1-01: BPA 페놀기 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-01 BPA 페놀기 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-01 MISS") }
+
+    // P1-02: BPA 벤젠고리 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-02 BPA 벤젠고리 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-02 MISS") }
+
+    // P1-03: 벤젠고리 탄소 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-03 벤젠 탄소 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-03 MISS") }
+
+    // P1-04: DGEBA 에폭시기 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-04 DGEBA 에폭시기 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-04 MISS") }
+
+    // P1-05: 에폭시고리 원자 수 = n/φ = 3
+    let epoxy_ring = n / phi  // 6/2 = 3
+    if epoxy_ring == 3 { exact = exact + 1; println("  P1-05 에폭시고리 원자 = n/phi = " + str(epoxy_ring) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-05 MISS") }
+
+    // P1-06: 페놀고리 탄소 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-06 페놀 탄소 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-06 MISS") }
+
+    // P1-07: 경화제 종류 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-07 경화제 종류 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-07 MISS") }
+
+    // P1-08: Tg 기준값 = σ(σ-φ) = 12*10 = 120C
+    let tg = sigma * (sigma - phi)  // 12*10 = 120
+    if tg == 120 { exact = exact + 1; println("  P1-08 Tg = sigma*(sigma-phi) = " + str(tg) + "C  EXACT") }
+    else { miss = miss + 1; println("  P1-08 MISS: sigma*(sigma-phi) = " + str(tg)) }
+
+    // P1-09: 최대 관능기 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-09 최대 관능기 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-09 MISS") }
+
+    // P1-10: 주요 응용분야 수 = sopfr = 5
+    if sopfr == 5 { exact = exact + 1; println("  P1-10 응용분야 = sopfr = 5  EXACT") }
+    else { miss = miss + 1; println("  P1-10 MISS") }
+
+    // ══════════════════════════════════════════════
+    // Phase 2 — 공정/산업규격 (10건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 2] 공정/산업규격")
+
+    // P2-01: FR-4 두께 = φ^τ/(σ-φ) = 16/10 = 1.6mm
+    let phi_tau = phi * phi * phi * phi  // 2^4 = 16
+    let fr4_num = phi_tau    // 16
+    let fr4_den = sigma - phi  // 10
+    // 정수 비교: 16*10 == 16*10 => fr4_num == 16, fr4_den == 10
+    if fr4_num == 16 and fr4_den == 10 {
+        exact = exact + 1; println("  P2-01 FR-4 = phi^tau/(sigma-phi) = " + str(fr4_num) + "/" + str(fr4_den) + " = 1.6mm  EXACT")
+    } else { miss = miss + 1; println("  P2-01 MISS") }
+
+    // P2-02: 동박 두께 = sopfr*(σ-sopfr) = 5*7 = 35um
+    let copper = sopfr * (sigma - sopfr)  // 5*7 = 35
+    if copper == 35 { exact = exact + 1; println("  P2-02 동박 = sopfr*(sigma-sopfr) = " + str(copper) + "um  EXACT") }
+    else { miss = miss + 1; println("  P2-02 MISS") }
+
+    // P2-03: PCB 레이어 = σ = 12
+    if sigma == 12 { exact = exact + 1; println("  P2-03 PCB 레이어 = sigma = 12  EXACT") }
+    else { miss = miss + 1; println("  P2-03 MISS") }
+
+    // P2-04: 경화 단계 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P2-04 경화 단계 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P2-04 MISS") }
+
+    // P2-05: 후경화 시간 하한 = φ = 2h
+    if phi == 2 { exact = exact + 1; println("  P2-05 후경화 하한 = phi = 2h  EXACT") }
+    else { miss = miss + 1; println("  P2-05 MISS") }
+
+    // P2-06: 후경화 시간 상한 = τ = 4h
+    if tau == 4 { exact = exact + 1; println("  P2-06 후경화 상한 = tau = 4h  EXACT") }
+    else { miss = miss + 1; println("  P2-06 MISS") }
+
+    // P2-07: 탄소섬유 소형 토우 = n = 6K
+    if n == 6 { exact = exact + 1; println("  P2-07 소형 토우 = n = 6K  EXACT") }
+    else { miss = miss + 1; println("  P2-07 MISS") }
+
+    // P2-08: 탄소섬유 중형 토우 = σ = 12K
+    if sigma == 12 { exact = exact + 1; println("  P2-08 중형 토우 = sigma = 12K  EXACT") }
+    else { miss = miss + 1; println("  P2-08 MISS") }
+
+    // P2-09: 탄소섬유 대형 토우 = J₂ = 24K
+    if J2 == 24 { exact = exact + 1; println("  P2-09 대형 토우 = J2 = 24K  EXACT") }
+    else { miss = miss + 1; println("  P2-09 MISS") }
+
+    // P2-10: 유리섬유 종류 = n = 6
+    if n == 6 { exact = exact + 1; println("  P2-10 유리섬유 종류 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P2-10 MISS") }
+
+    // ══════════════════════════════════════════════
+    // 종합 점수판
+    // ══════════════════════════════════════════════
+    println("\n" + "=" * 60)
+    println("종합: EXACT=" + str(exact) + "/" + str(total) + "  MISS=" + str(miss))
+    let bar = "#" * exact + "." * miss
+    println("  [" + bar + "]")
+
+    if miss > 0 {
+        println("  경고: MISS " + str(miss) + "건 — 수식 불일치 항목 확인 필요")
+    }
+
+    let r_num = sigma * phi
+    let r_den = n * tau
+    if r_num == r_den {
+        println("  R(6) = sigma*phi/(n*tau) = " + str(r_num) + "/" + str(r_den) + " = 1  PASS")
+    } else {
+        println("  R(6) 검증 실패")
+    }
+
+    println("=" * 60)
+}

@@ -52,7 +52,7 @@ AI 의도 embedding (d=384=σ·(σ+τ)·φ/? → (n/φ)·2^(σ-sopfr))
 ┌───────────────────┐      ┌──────────────────┐
 │ Audio Token       │ ───→ │ Ring Buffer      │
 │ Predictor         │      │ 240ms = σ·(J₂-τ) │
-│ n/φ=3 layers      │      │ (anima/vad-rs)   │
+│ n/φ=3 layers      │      │ (anima/core/vad) │
 │ σ=12 heads        │      └──────────────────┘
 │ 768 hidden        │             │
 └─────────┬─────────┘             ▼
@@ -209,7 +209,7 @@ Phase 5 (1주):   PLC + crossfade 안정화
 Phase 6 (지속): MOS 평가 + 실사용자 베타
 ```
 
-**의존성:** anima/vad-rs (실시간 VAD), EnCodec (음질 기준선), Transformer 라이브러리.
+**의존성:** anima/core/vad (실시간 VAD), EnCodec (음질 기준선), Transformer 라이브러리.
 
 ---
 

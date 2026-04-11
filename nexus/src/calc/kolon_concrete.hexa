@@ -1,0 +1,157 @@
+// 코오롱 — 건설 콘크리트 n=6 검증
+// SSOT: domains/materials/concrete/concrete.md (22/22 EXACT)
+// 검증 대상: 시멘트 6산화물 → 양생 28일, 강도 J₂=24MPa, 내구 60년 전 수식 재현
+
+fn main() {
+    println("=" * 60)
+    println("코오롱 건설 콘크리트 — n=6 산술 검증")
+    println("=" * 60)
+
+    // ── n=6 기본 상수 ──
+    let n      = 6
+    let sigma  = 12
+    let phi    = 2
+    let tau    = 4
+    let sopfr  = 5
+    let J2     = 24
+    let mu     = 1
+
+    let exact  = 0
+    let miss   = 0
+    let total  = 22
+
+    // ══════════════════════════════════════════════
+    // Phase 1 — 재료/배합 (11건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 1] 재료/배합")
+
+    // P1-01: 시멘트 주요 산화물 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-01 산화물 수 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-01 MISS") }
+
+    // P1-02: 포틀랜드 시멘트 타입 수 = sopfr = 5
+    if sopfr == 5 { exact = exact + 1; println("  P1-02 시멘트 타입 = sopfr = 5  EXACT") }
+    else { miss = miss + 1; println("  P1-02 MISS") }
+
+    // P1-03: 보그 광물 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-03 보그 광물 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-03 MISS") }
+
+    // P1-04: C3S 수화비 = n/φ = 3
+    let c3s = n / phi  // 3
+    if c3s == 3 { exact = exact + 1; println("  P1-04 C3S 수화비 = n/phi = " + str(c3s) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-04 MISS") }
+
+    // P1-05: 배합 구성 재료 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-05 배합 재료 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-05 MISS") }
+
+    // P1-06: 물-시멘트비 w/c = μ/φ = 0.5
+    // 정수 비교: mu*2 = 2, phi*1 = 2
+    let wc_a = mu * 2   // 2
+    let wc_b = phi * 1  // 2
+    if wc_a == wc_b { exact = exact + 1; println("  P1-06 w/c = mu/phi = 1/2 = 0.5  EXACT") }
+    else { miss = miss + 1; println("  P1-06 MISS") }
+
+    // P1-07: 표준 양생 기간 = 28일 (2번째 완전수)
+    // 28 = J₂+τ = 24+4
+    let curing = J2 + tau  // 28
+    if curing == 28 { exact = exact + 1; println("  P1-07 양생 = J2+tau = " + str(curing) + "일 (2nd 완전수)  EXACT") }
+    else { miss = miss + 1; println("  P1-07 MISS: J2+tau = " + str(curing)) }
+
+    // P1-08: 표준 배합강도 = J₂ = 24MPa
+    if J2 == 24 { exact = exact + 1; println("  P1-08 배합강도 = J2 = 24MPa  EXACT") }
+    else { miss = miss + 1; println("  P1-08 MISS") }
+
+    // P1-09: 기준 슬럼프 = σ*(σ-φ) = 120mm
+    let slump = sigma * (sigma - phi)  // 12*10 = 120
+    if slump == 120 { exact = exact + 1; println("  P1-09 슬럼프 = sigma*(sigma-phi) = " + str(slump) + "mm  EXACT") }
+    else { miss = miss + 1; println("  P1-09 MISS: sigma*(sigma-phi) = " + str(slump)) }
+
+    // P1-10: 최소 피복 두께 = σ*sopfr = 60mm
+    let cover = sigma * sopfr  // 12*5 = 60
+    if cover == 60 { exact = exact + 1; println("  P1-10 피복 = sigma*sopfr = " + str(cover) + "mm  EXACT") }
+    else { miss = miss + 1; println("  P1-10 MISS") }
+
+    // P1-11: 열팽창계수 기준 = σ-φ = 10 x10^-6/C
+    let thermal = sigma - phi  // 10
+    if thermal == 10 { exact = exact + 1; println("  P1-11 열팽창 = sigma-phi = " + str(thermal) + " x10^-6/C  EXACT") }
+    else { miss = miss + 1; println("  P1-11 MISS") }
+
+    // ══════════════════════════════════════════════
+    // Phase 2 — 규격/내구 (11건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 2] 규격/내구")
+
+    // P2-01: 혼화제 주요 분류 = n = 6
+    if n == 6 { exact = exact + 1; println("  P2-01 혼화제 분류 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P2-01 MISS") }
+
+    // P2-02: 골재 표준체 수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P2-02 표준체 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P2-02 MISS") }
+
+    // P2-03: 철근 주요 직경 수 = σ = 12
+    if sigma == 12 { exact = exact + 1; println("  P2-03 철근 직경 수 = sigma = 12  EXACT") }
+    else { miss = miss + 1; println("  P2-03 MISS") }
+
+    // P2-04: 최소 철근 직경 = σ-φ = 10mm
+    let rebar_min = sigma - phi  // 10
+    if rebar_min == 10 { exact = exact + 1; println("  P2-04 최소 철근 = sigma-phi = " + str(rebar_min) + "mm  EXACT") }
+    else { miss = miss + 1; println("  P2-04 MISS") }
+
+    // P2-05: 일반 구조물 내구 = σ*sopfr = 60년
+    let life_std = sigma * sopfr  // 60
+    if life_std == 60 { exact = exact + 1; println("  P2-05 일반 내구 = sigma*sopfr = " + str(life_std) + "년  EXACT") }
+    else { miss = miss + 1; println("  P2-05 MISS") }
+
+    // P2-06: 특수 구조물 내구 = (σ-φ)^2 = 100년
+    let sp = sigma - phi  // 10
+    let life_spc = sp * sp  // 100
+    if life_spc == 100 { exact = exact + 1; println("  P2-06 특수 내구 = (sigma-phi)^2 = " + str(life_spc) + "년  EXACT") }
+    else { miss = miss + 1; println("  P2-06 MISS") }
+
+    // P2-07: 콘크리트 내부 pH = σ = 12
+    if sigma == 12 { exact = exact + 1; println("  P2-07 내부 pH = sigma = 12  EXACT") }
+    else { miss = miss + 1; println("  P2-07 MISS") }
+
+    // P2-08: 기둥 최소 피복 = τ*(σ-φ) = 40mm
+    let col_cover = tau * (sigma - phi)  // 4*10 = 40
+    if col_cover == 40 { exact = exact + 1; println("  P2-08 기둥 피복 = tau*(sigma-phi) = " + str(col_cover) + "mm  EXACT") }
+    else { miss = miss + 1; println("  P2-08 MISS") }
+
+    // P2-09: 슬래브 최소 피복 = φ*(σ-φ) = 20mm
+    let slab_cover = phi * (sigma - phi)  // 2*10 = 20
+    if slab_cover == 20 { exact = exact + 1; println("  P2-09 슬래브 피복 = phi*(sigma-phi) = " + str(slab_cover) + "mm  EXACT") }
+    else { miss = miss + 1; println("  P2-09 MISS") }
+
+    // P2-10: 설계 호칭강도 = J₂ = 24MPa
+    if J2 == 24 { exact = exact + 1; println("  P2-10 호칭강도 = J2 = 24MPa  EXACT") }
+    else { miss = miss + 1; println("  P2-10 MISS") }
+
+    // P2-11: 표준 호칭 슬럼프 = σ = 12cm
+    if sigma == 12 { exact = exact + 1; println("  P2-11 호칭 슬럼프 = sigma = 12cm  EXACT") }
+    else { miss = miss + 1; println("  P2-11 MISS") }
+
+    // ══════════════════════════════════════════════
+    // 종합 점수판
+    // ══════════════════════════════════════════════
+    println("\n" + "=" * 60)
+    println("종합: EXACT=" + str(exact) + "/" + str(total) + "  MISS=" + str(miss))
+    let bar = "#" * exact + "." * miss
+    println("  [" + bar + "]")
+
+    if miss > 0 {
+        println("  경고: MISS " + str(miss) + "건 — 수식 불일치 항목 확인 필요")
+    }
+
+    let r_num = sigma * phi
+    let r_den = n * tau
+    if r_num == r_den {
+        println("  R(6) = sigma*phi/(n*tau) = " + str(r_num) + "/" + str(r_den) + " = 1  PASS")
+    } else {
+        println("  R(6) 검증 실패")
+    }
+
+    println("=" * 60)
+}

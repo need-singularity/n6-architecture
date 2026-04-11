@@ -91,15 +91,11 @@
       "desc": "DSE 전체 현황 지도"
     },
     {
-      "path": "tools/nexus/src/telescope/lenses/",
-      "desc": "NEXUS-6 렌즈 181 .rs — 1022종 (Rust 코어)"
+      "path": "nexus/telescope/lenses/",
+      "desc": "NEXUS-6 렌즈 — 1022종 (HEXA 네이티브)"
     },
     {
-      "path": "tools/nexus-dashboard/static/index.html",
-      "desc": "n6-arch 대시보드 — 2-컬럼 + 3D 맵 iframe 잠금"
-    },
-    {
-      "path": "nexus/crates/dashboard/static/index.html",
+      "path": "nexus/dashboard/static/index.html",
       "desc": "nexus 통합 대시보드 프론트엔드"
     },
     {

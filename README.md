@@ -803,9 +803,9 @@ Commands:
 | ouroboros | OUROBOROS v26 무한진화 엔진 | 8 |
 | cli | CLI 파서 + ASCII 대시보드 | 20+8 |
 
-빌드: `cd tools/nexus && ~/.cargo/bin/cargo build --release`
-테스트: `cd tools/nexus && ~/.cargo/bin/cargo test`
-바이너리: `tools/nexus/target/release/nexus` (896K)
+빌드: `$HEXA nexus/main.hexa`
+테스트: `$HEXA nexus/tests/tests.hexa --verify`
+진입점: `nexus/main.hexa`
 
 ---
 

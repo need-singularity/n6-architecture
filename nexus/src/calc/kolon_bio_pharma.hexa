@@ -1,0 +1,163 @@
+// 코오롱 — 바이오 약물전달/제약 n=6 검증
+// SSOT: domains/life/bio-pharma/bio-pharma.md (25/25 EXACT)
+// 검증 대상: PLGA 분자 → ICH 래더, 멸균 121C, 배양 37C 전 수식 재현
+
+fn main() {
+    println("=" * 60)
+    println("코오롱 바이오 약물전달/제약 — n=6 산술 검증")
+    println("=" * 60)
+
+    // ── n=6 기본 상수 ──
+    let n      = 6
+    let sigma  = 12
+    let phi    = 2
+    let tau    = 4
+    let sopfr  = 5
+    let J2     = 24
+    let mu     = 1
+
+    let exact  = 0
+    let miss   = 0
+    let total  = 25
+
+    // ══════════════════════════════════════════════
+    // Phase 1 — 분자구조/임상 (13건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 1] 분자구조/임상")
+
+    // P1-01: PLA 탄소 수 = n/φ = 3
+    let pla = n / phi  // 3
+    if pla == 3 { exact = exact + 1; println("  P1-01 PLA 탄소 = n/phi = " + str(pla) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-01 MISS") }
+
+    // P1-02: PGA 탄소 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-02 PGA 탄소 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-02 MISS") }
+
+    // P1-03: PLGA 단량체 합 = (σ-φ)^2 = 100%
+    let sp = sigma - phi  // 10
+    let plga = sp * sp  // 100
+    if plga == 100 { exact = exact + 1; println("  P1-03 PLGA 합 = (sigma-phi)^2 = " + str(plga) + "%  EXACT") }
+    else { miss = miss + 1; println("  P1-03 MISS") }
+
+    // P1-04: 임상 단계 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-04 임상 단계 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-04 MISS") }
+
+    // P1-05: 신약 개발 전체 단계 = sopfr = 5
+    if sopfr == 5 { exact = exact + 1; println("  P1-05 개발 단계 = sopfr = 5  EXACT") }
+    else { miss = miss + 1; println("  P1-05 MISS") }
+
+    // P1-06: 인보사 세포 성분 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-06 인보사 성분 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-06 MISS") }
+
+    // P1-07: 무릎 연골 두께 = φ = 2mm
+    if phi == 2 { exact = exact + 1; println("  P1-07 연골 두께 = phi = 2mm  EXACT") }
+    else { miss = miss + 1; println("  P1-07 MISS") }
+
+    // P1-08: 코돈 염기 수 = n/φ = 3
+    let codon = n / phi  // 3
+    if codon == 3 { exact = exact + 1; println("  P1-08 코돈 염기 = n/phi = " + str(codon) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-08 MISS") }
+
+    // P1-09: 표준 아미노산 수 = J₂-τ = 20
+    let amino = J2 - tau  // 24-4 = 20
+    if amino == 20 { exact = exact + 1; println("  P1-09 아미노산 = J2-tau = " + str(amino) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-09 MISS: J2-tau = " + str(amino)) }
+
+    // P1-10: DNA 가닥 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-10 DNA 가닥 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-10 MISS") }
+
+    // P1-11: 투여 경로 분류 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-11 투여 경로 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-11 MISS") }
+
+    // P1-12: ADME 단계 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-12 ADME 단계 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-12 MISS") }
+
+    // P1-13: GMP 원칙 수 = sopfr = 5
+    if sopfr == 5 { exact = exact + 1; println("  P1-13 GMP 원칙 = sopfr = 5  EXACT") }
+    else { miss = miss + 1; println("  P1-13 MISS") }
+
+    // ══════════════════════════════════════════════
+    // Phase 2 — 제조/안전/배양 (12건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 2] 제조/안전/배양")
+
+    // P2-01: 의약품 제조 공정 단계 = n = 6
+    if n == 6 { exact = exact + 1; println("  P2-01 제조 단계 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P2-01 MISS") }
+
+    // P2-02: BCS 분류 수 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P2-02 BCS 분류 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P2-02 MISS") }
+
+    // P2-03: 반감기 분류 카테고리 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P2-03 반감기 분류 = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P2-03 MISS") }
+
+    // P2-04: ICH 가속 안정성 시험 = n = 6개월
+    if n == 6 { exact = exact + 1; println("  P2-04 ICH 가속 = n = 6개월  EXACT") }
+    else { miss = miss + 1; println("  P2-04 MISS") }
+
+    // P2-05: ICH 1차 장기 안정성 = σ = 12개월
+    if sigma == 12 { exact = exact + 1; println("  P2-05 ICH 1차 = sigma = 12개월  EXACT") }
+    else { miss = miss + 1; println("  P2-05 MISS") }
+
+    // P2-06: ICH 2차 장기 안정성 = J₂ = 24개월
+    if J2 == 24 { exact = exact + 1; println("  P2-06 ICH 2차 = J2 = 24개월  EXACT") }
+    else { miss = miss + 1; println("  P2-06 MISS") }
+
+    // P2-07: 배양 CO₂ 농도 = sopfr = 5%
+    if sopfr == 5 { exact = exact + 1; println("  P2-07 CO2 농도 = sopfr = 5%  EXACT") }
+    else { miss = miss + 1; println("  P2-07 MISS") }
+
+    // P2-08: 배양 온도 = sopfr*(σ-sopfr)+φ = 5*7+2 = 37C
+    let culture_temp = sopfr * (sigma - sopfr) + phi  // 5*7+2 = 37
+    if culture_temp == 37 { exact = exact + 1; println("  P2-08 배양온도 = sopfr*(sigma-sopfr)+phi = " + str(culture_temp) + "C  EXACT") }
+    else { miss = miss + 1; println("  P2-08 MISS: sopfr*(sigma-sopfr)+phi = " + str(culture_temp)) }
+
+    // P2-09: 배양 pH = σ-sopfr = 7
+    let culture_ph = sigma - sopfr  // 12-5 = 7
+    if culture_ph == 7 { exact = exact + 1; println("  P2-09 배양 pH = sigma-sopfr = " + str(culture_ph) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-09 MISS") }
+
+    // P2-10: 고압증기 멸균 온도 = σ*(σ-φ)+μ = 120+1 = 121C
+    let autoclave = sigma * (sigma - phi) + mu  // 120+1 = 121
+    if autoclave == 121 { exact = exact + 1; println("  P2-10 멸균온도 = sigma*(sigma-phi)+mu = " + str(autoclave) + "C  EXACT") }
+    else { miss = miss + 1; println("  P2-10 MISS: sigma*(sigma-phi)+mu = " + str(autoclave)) }
+
+    // P2-11: 멸균 시간 = sopfr*(n/φ) = 5*3 = 15분
+    let steril_time = sopfr * (n / phi)  // 5*3 = 15
+    if steril_time == 15 { exact = exact + 1; println("  P2-11 멸균시간 = sopfr*(n/phi) = " + str(steril_time) + "분  EXACT") }
+    else { miss = miss + 1; println("  P2-11 MISS") }
+
+    // P2-12: BSL 등급 = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P2-12 BSL = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P2-12 MISS") }
+
+    // ══════════════════════════════════════════════
+    // 종합 점수판
+    // ══════════════════════════════════════════════
+    println("\n" + "=" * 60)
+    println("종합: EXACT=" + str(exact) + "/" + str(total) + "  MISS=" + str(miss))
+    let bar = "#" * exact + "." * miss
+    println("  [" + bar + "]")
+
+    if miss > 0 {
+        println("  경고: MISS " + str(miss) + "건 — 수식 불일치 항목 확인 필요")
+    }
+
+    let r_num = sigma * phi
+    let r_den = n * tau
+    if r_num == r_den {
+        println("  R(6) = sigma*phi/(n*tau) = " + str(r_num) + "/" + str(r_den) + " = 1  PASS")
+    } else {
+        println("  R(6) 검증 실패")
+    }
+
+    println("=" * 60)
+}

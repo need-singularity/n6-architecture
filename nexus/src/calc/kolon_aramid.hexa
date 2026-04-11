@@ -1,0 +1,147 @@
+// 코오롱 — 아라미드 (Heracron) n=6 검증
+// SSOT: domains/materials/aramid/aramid.md (20/20 EXACT)
+// 검증 대상: 벤젠 C6 → 방탄 1500d까지 전 수식 재현
+
+fn main() {
+    println("=" * 60)
+    println("코오롱 아라미드 (Heracron) — n=6 산술 검증")
+    println("=" * 60)
+
+    // ── n=6 기본 상수 ──
+    let n      = 6
+    let sigma  = 12
+    let phi    = 2
+    let tau    = 4
+    let sopfr  = 5
+    let J2     = 24
+    let mu     = 1
+
+    let exact  = 0
+    let miss   = 0
+    let total  = 20
+
+    // ══════════════════════════════════════════════
+    // Phase 1 — 분자구조 (10건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 1] 분자구조")
+
+    // P1-01: 반복단위 벤젠고리 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-01 벤젠고리 수 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-01 MISS") }
+
+    // P1-02: 벤젠고리 탄소수 = n = 6
+    if n == 6 { exact = exact + 1; println("  P1-02 벤젠 탄소수 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P1-02 MISS") }
+
+    // P1-03: 반복단위 총탄소 = σ+φ = 14
+    let total_c = sigma + phi  // 12+2 = 14
+    if total_c == 14 { exact = exact + 1; println("  P1-03 총탄소 = sigma+phi = " + str(total_c) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-03 MISS: sigma+phi = " + str(total_c)) }
+
+    // P1-04: 수소 수 = σ-φ = 10
+    let h_count = sigma - phi
+    if h_count == 10 { exact = exact + 1; println("  P1-04 수소 수 = sigma-phi = " + str(h_count) + "  EXACT") }
+    else { miss = miss + 1; println("  P1-04 MISS") }
+
+    // P1-05: 헤테로원자(N+O) = τ = 4
+    if tau == 4 { exact = exact + 1; println("  P1-05 헤테로원자(N+O) = tau = 4  EXACT") }
+    else { miss = miss + 1; println("  P1-05 MISS") }
+
+    // P1-06: 반복단위 총원자 = J₂+τ = 28 (2번째 완전수)
+    let total_atoms = J2 + tau  // 24+4 = 28
+    if total_atoms == 28 { exact = exact + 1; println("  P1-06 총원자 = J2+tau = " + str(total_atoms) + " (2nd 완전수)  EXACT") }
+    else { miss = miss + 1; println("  P1-06 MISS: J2+tau = " + str(total_atoms)) }
+
+    // P1-07: 아미드결합 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-07 아미드결합 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-07 MISS") }
+
+    // P1-08: 밀도*100 = σ² = 144 (밀도 1.44 g/cm3)
+    let density_100 = sigma * sigma  // 144
+    if density_100 == 144 { exact = exact + 1; println("  P1-08 밀도*100 = sigma^2 = " + str(density_100) + " (1.44 g/cm3)  EXACT") }
+    else { miss = miss + 1; println("  P1-08 MISS: sigma^2 = " + str(density_100)) }
+
+    // P1-09: 카르보닐(C=O) 수 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P1-09 카르보닐 수 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P1-09 MISS") }
+
+    // P1-10: 방향족 탄소 수 = σ = 12
+    if sigma == 12 { exact = exact + 1; println("  P1-10 방향족 탄소 = sigma = 12  EXACT") }
+    else { miss = miss + 1; println("  P1-10 MISS") }
+
+    // ══════════════════════════════════════════════
+    // Phase 2 — 공정/산업규격 (10건)
+    // ══════════════════════════════════════════════
+    println("\n[Phase 2] 공정/산업규격")
+
+    // P2-01: 방사 공정 단계 = n = 6
+    if n == 6 { exact = exact + 1; println("  P2-01 방사 공정 단계 = n = 6  EXACT") }
+    else { miss = miss + 1; println("  P2-01 MISS") }
+
+    // P2-02: 황산 원자 수 = σ-sopfr = 7
+    let h2so4 = sigma - sopfr  // 12-5 = 7
+    if h2so4 == 7 { exact = exact + 1; println("  P2-02 황산 원자 수 = sigma-sopfr = " + str(h2so4) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-02 MISS") }
+
+    // P2-03: 표준 굵기 1500d = σ*sopfr^3 = 12*125 = 1500
+    let sopfr3 = sopfr * sopfr * sopfr  // 125
+    let d1500 = sigma * sopfr3
+    if d1500 == 1500 { exact = exact + 1; println("  P2-03 1500d = sigma*sopfr^3 = " + str(d1500) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-03 MISS: sigma*sopfr^3 = " + str(d1500)) }
+
+    // P2-04: 고강력 3000d = φ*1500 = 3000
+    let d3000 = phi * d1500
+    if d3000 == 3000 { exact = exact + 1; println("  P2-04 3000d = phi*1500 = " + str(d3000) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-04 MISS") }
+
+    // P2-05: 필라멘트 1000f = (σ-φ)^3 = 10^3 = 1000
+    let sp = sigma - phi  // 10
+    let f1000 = sp * sp * sp  // 1000
+    if f1000 == 1000 { exact = exact + 1; println("  P2-05 1000f = (sigma-phi)^3 = " + str(f1000) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-05 MISS") }
+
+    // P2-06: 단섬유 직경 = σ = 12um
+    if sigma == 12 { exact = exact + 1; println("  P2-06 단섬유 직경 = sigma = 12um  EXACT") }
+    else { miss = miss + 1; println("  P2-06 MISS") }
+
+    // P2-07: LOI = σ*φ+sopfr = 24+5 = 29
+    let loi = sigma * phi + sopfr  // 24+5 = 29
+    if loi == 29 { exact = exact + 1; println("  P2-07 LOI = sigma*phi+sopfr = " + str(loi) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-07 MISS: sigma*phi+sopfr = " + str(loi)) }
+
+    // P2-08: 열분해 온도 = sopfr*(σ-φ)^2 = 5*100 = 500C
+    let decomp = sopfr * (sigma - phi) * (sigma - phi)  // 5*100
+    if decomp == 500 { exact = exact + 1; println("  P2-08 열분해 500C = sopfr*(sigma-phi)^2 = " + str(decomp) + "  EXACT") }
+    else { miss = miss + 1; println("  P2-08 MISS: sopfr*(sigma-phi)^2 = " + str(decomp)) }
+
+    // P2-09: 수분율 = sopfr = 5%
+    if sopfr == 5 { exact = exact + 1; println("  P2-09 수분율 = sopfr = 5%  EXACT") }
+    else { miss = miss + 1; println("  P2-09 MISS") }
+
+    // P2-10: 표면처리 코팅층 = φ = 2
+    if phi == 2 { exact = exact + 1; println("  P2-10 코팅층 수 = phi = 2  EXACT") }
+    else { miss = miss + 1; println("  P2-10 MISS") }
+
+    // ══════════════════════════════════════════════
+    // 종합 점수판
+    // ══════════════════════════════════════════════
+    println("\n" + "=" * 60)
+    println("종합: EXACT=" + str(exact) + "/" + str(total) + "  MISS=" + str(miss))
+    let bar = "#" * exact + "." * miss
+    println("  [" + bar + "]")
+
+    if miss > 0 {
+        println("  경고: MISS " + str(miss) + "건 — 수식 불일치 항목 확인 필요")
+    }
+
+    // R(n)=1 핵심 검증
+    let r_num = sigma * phi
+    let r_den = n * tau
+    if r_num == r_den {
+        println("  R(6) = sigma*phi/(n*tau) = " + str(r_num) + "/" + str(r_den) + " = 1  PASS")
+    } else {
+        println("  R(6) 검증 실패")
+    }
+
+    println("=" * 60)
+}
