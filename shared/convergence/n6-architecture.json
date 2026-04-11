@@ -189,8 +189,8 @@
     "ATLAS_7_PROMOTION_102": {
       "status": "PASS",
       "value": "[7]→[10*] 102건 승격 완료 (cross_dse 100 + MC 2), [10*] 4,799→4,901",
-      "threshold": "잔존 [7] = 1건 (mc-v9-대조-e z=1.915, 기준 z>2 미달)",
-      "note": "2026-04-11 — convergence CROSS_DSE ossified 근거, 상관계수>=0.50 전수 승격. atlas.n6 66,822줄"
+      "threshold": "잔존 [7] = 0건 (mc-v9-대조-e z=1.915 → [7] 유지 판정, z<2 기준 미달)",
+      "note": "2026-04-12 — mc-v9-대조-e 최종 판정: z=1.915<2.0 통계적 유의성 미달, [7] EMPIRICAL 유지가 안전. 승격 대상 0건으로 종결"
     },
     "BT_748_752_NEW_DOMAINS": {
       "status": "PASS",

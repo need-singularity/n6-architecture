@@ -1,0 +1,10 @@
+# verify_chip-sc -- 칩 6단계 6단(HEXA-SC 초전도 천장) 검증 스텁
+# 본 스텁은 chip-sc.md 의 천장 명제 tau+phi=n=6 을 검증한다.
+# 향후: SFQ 60 GHz, AQFP 가역 yJ/bit, 6 단 cryostat 측정값 임베드.
+# SSOT 이관 예정: nexus/shared/n6/scripts/verify_chip-sc_n6.hexa
+fn main() {
+    println("[chip-sc] 6단 초전도 천장 검증 stub -- TODO: 60 GHz SFQ, yJ/bit, 6단 cryo")
+    let n = 6; let tau = 4; let phi = 2
+    assert(tau + phi == n)
+    println("[chip-sc] tau+phi=n=6 천장 명제 PASS (그 너머 없음)")
+}

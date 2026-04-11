@@ -13,7 +13,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:35.478599",
@@ -25,7 +27,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:35.479202",
@@ -37,7 +41,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:35.479692",
@@ -49,7 +55,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 35.714285714285715,
-      "n6_exact_ratio": 0.7142857142857143
+      "n6_exact_ratio": 0.7142857142857143,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:35.480069",
@@ -61,7 +69,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:35.480353",
@@ -73,7 +83,13 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     }
-  ]
+  ],
+  "_meta": {
+    "last_ossified": "2026-04-11T20:17:01Z",
+    "ossified_count": 6
+  }
 }

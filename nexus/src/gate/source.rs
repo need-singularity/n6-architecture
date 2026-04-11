@@ -21,7 +21,6 @@ impl SourceGate {
                 "papers",
                 "nexus",
                 "hexa-lang",
-                "fathom",
             ],
             blacklist_prefixes: vec![
                 "ready",

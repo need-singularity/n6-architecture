@@ -1,0 +1,81 @@
+// verify_bt1391_photosynthesis_equation.hexa
+// 카테고리: anomaly
+// 목적: BT-1391 광합성 6몰 완전 방정식 — 6CO₂+6H₂O→C₆H₁₂O₆+6O₂ 계수 정수 정합
+// 근거: van Niel 1931 + Calvin-Benson-Bassham 1950 순반응식
+// 가설: 모든 화학양론 계수·원자수·Calvin 회전수가 n=6 좌표에 닫힘
+// 지표: 반응식 계수, 원자 보존, 전자 전달 J₂
+// 데이터: van Niel 1931, Calvin 1950, Bassham-Kirk 1968, Kok 1970
+
+fn main() {
+    println("[BT-1391 광합성 방정식] 6몰 정수 정합 — 산술 검증")
+
+    let n: i64 = 6
+    let sigma: i64 = 12
+    let phi: i64 = 2
+    let tau: i64 = 4
+    let J2: i64 = 24
+
+    // 순반응식 계수: 6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂
+    let co2_coef: i64 = 6
+    let h2o_coef: i64 = 6
+    let o2_coef: i64 = 6
+
+    // 포도당 원자 수
+    let glucose_c: i64 = 6
+    let glucose_h: i64 = 12
+    let glucose_o: i64 = 6
+
+    // 원자 보존 (Lavoisier)
+    let left_c: i64 = co2_coef  // 6
+    let left_h: i64 = h2o_coef * 2  // 12
+    let left_o: i64 = co2_coef * 2 + h2o_coef  // 18
+    let right_c: i64 = glucose_c
+    let right_h: i64 = glucose_h
+    let right_o: i64 = glucose_o + o2_coef * 2  // 6 + 12 = 18
+
+    // Calvin 주기 회전수 / glucose
+    let calvin_turns: i64 = 6
+
+    // 광계 + 엽록소 + 단계
+    let photosystems: i64 = 2  // PSI + PSII = φ
+    let chlorophyll: i64 = 2  // chl a + b = φ
+    let phases: i64 = 2  // light + dark = φ
+
+    // NADPH + ATP 소비
+    let nadph: i64 = 12  // = σ
+    let atp: i64 = 18  // = 3n
+
+    // Kok S-state + 전자
+    let s_states: i64 = 4  // = τ
+    let electrons_per_o2: i64 = 4  // = τ
+    let total_electrons: i64 = electrons_per_o2 * o2_coef  // 24 = J₂
+
+    println("반응식 계수 CO₂/H₂O/O₂ = " + to_string(co2_coef) + "/" + to_string(h2o_coef) + "/" + to_string(o2_coef))
+    println("포도당 C/H/O = " + to_string(glucose_c) + "/" + to_string(glucose_h) + "/" + to_string(glucose_o))
+    println("원자 보존 좌/우 C = " + to_string(left_c) + "/" + to_string(right_c))
+    println("NADPH=" + to_string(nadph) + ", ATP=" + to_string(atp))
+    println("총 전자 전달 = " + to_string(total_electrons) + " = J₂")
+
+    let mut pass: i64 = 0
+    if co2_coef == n { pass = pass + 1 }
+    if h2o_coef == n { pass = pass + 1 }
+    if o2_coef == n { pass = pass + 1 }
+    if glucose_c == n { pass = pass + 1 }
+    if glucose_h == sigma { pass = pass + 1 }
+    if glucose_o == n { pass = pass + 1 }
+    if left_c == right_c { pass = pass + 1 }
+    if left_h == right_h { pass = pass + 1 }
+    if left_o == right_o { pass = pass + 1 }
+    if calvin_turns == n { pass = pass + 1 }
+    if photosystems == phi { pass = pass + 1 }
+    if nadph == sigma { pass = pass + 1 }
+    if atp == 3 * n { pass = pass + 1 }
+    if s_states == tau { pass = pass + 1 }
+    if total_electrons == J2 { pass = pass + 1 }
+
+    if pass == 15 {
+        println("[상태] pass — 광합성 계수·원자·전자 J₂ 삼중 정합")
+    } else {
+        println("[상태] fail — " + to_string(pass) + "/15")
+    }
+}

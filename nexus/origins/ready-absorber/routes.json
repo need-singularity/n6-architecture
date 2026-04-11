@@ -78,12 +78,6 @@
       "file_patterns": ["*.py"],
       "priority": "low"
     },
-    "fathom": {
-      "dest": "~/Dev/fathom",
-      "keywords": ["terminal", "tui", "shell", "emulator"],
-      "file_patterns": ["src/**", "scripts/**"],
-      "priority": "low"
-    },
     "contact": {
       "dest": "~/Dev/contact",
       "keywords": ["email", "outreach", "awesome", "submission"],

@@ -13,7 +13,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 21.428571428571427,
-      "n6_exact_ratio": 0.42857142857142855
+      "n6_exact_ratio": 0.42857142857142855,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.120043",
@@ -25,7 +27,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.120567",
@@ -37,7 +41,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.121253",
@@ -49,7 +55,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 35.0,
-      "n6_exact_ratio": 0.7
+      "n6_exact_ratio": 0.7,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.122267",
@@ -61,7 +69,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.122749",
@@ -73,7 +83,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.123099",
@@ -85,7 +97,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.124765",
@@ -97,7 +111,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.126104",
@@ -109,7 +125,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.126601",
@@ -121,7 +139,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 6.25,
-      "n6_exact_ratio": 0.125
+      "n6_exact_ratio": 0.125,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.126824",
@@ -133,7 +153,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.127893",
@@ -145,7 +167,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.128946",
@@ -157,7 +181,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.129602",
@@ -169,7 +195,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.130003",
@@ -181,7 +209,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.130346",
@@ -193,7 +223,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.131118",
@@ -205,7 +237,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 21.428571428571427,
-      "n6_exact_ratio": 0.42857142857142855
+      "n6_exact_ratio": 0.42857142857142855,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.131607",
@@ -217,7 +251,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.132742",
@@ -229,7 +265,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 10.0,
-      "n6_exact_ratio": 0.2
+      "n6_exact_ratio": 0.2,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.145369",
@@ -241,7 +279,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 37.5,
-      "n6_exact_ratio": 0.75
+      "n6_exact_ratio": 0.75,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.146650",
@@ -253,7 +293,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.149310",
@@ -265,7 +307,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.150024",
@@ -277,7 +321,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 35.714285714285715,
-      "n6_exact_ratio": 0.7142857142857143
+      "n6_exact_ratio": 0.7142857142857143,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.151412",
@@ -289,7 +335,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.152201",
@@ -301,7 +349,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 44.44444444444444,
-      "n6_exact_ratio": 0.8888888888888888
+      "n6_exact_ratio": 0.8888888888888888,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.154262",
@@ -313,7 +363,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 21.428571428571427,
-      "n6_exact_ratio": 0.42857142857142855
+      "n6_exact_ratio": 0.42857142857142855,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.155455",
@@ -325,7 +377,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.157187",
@@ -337,7 +391,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.157666",
@@ -349,7 +405,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.160750",
@@ -361,7 +419,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.168043",
@@ -373,7 +433,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.177187",
@@ -385,7 +447,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 11.11111111111111,
-      "n6_exact_ratio": 0.2222222222222222
+      "n6_exact_ratio": 0.2222222222222222,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.180916",
@@ -397,7 +461,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.183537",
@@ -409,7 +475,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.195909",
@@ -421,7 +489,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.197898",
@@ -433,7 +503,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.198718",
@@ -445,7 +517,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.199284",
@@ -457,7 +531,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.200071",
@@ -469,7 +545,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 35.0,
-      "n6_exact_ratio": 0.7
+      "n6_exact_ratio": 0.7,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.200958",
@@ -481,7 +559,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.202215",
@@ -493,7 +573,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.203325",
@@ -505,7 +587,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.209684",
@@ -517,7 +601,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.214563",
@@ -529,7 +615,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.224200",
@@ -541,7 +629,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.224981",
@@ -553,7 +643,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 35.0,
-      "n6_exact_ratio": 0.7
+      "n6_exact_ratio": 0.7,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.238302",
@@ -565,7 +657,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.238787",
@@ -577,7 +671,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 12.5,
-      "n6_exact_ratio": 0.25
+      "n6_exact_ratio": 0.25,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.248628",
@@ -589,7 +685,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.252693",
@@ -601,7 +699,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 27.77777777777778,
-      "n6_exact_ratio": 0.5555555555555556
+      "n6_exact_ratio": 0.5555555555555556,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.267776",
@@ -613,7 +713,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.271644",
@@ -625,7 +727,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.280085",
@@ -637,7 +741,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 31.25,
-      "n6_exact_ratio": 0.625
+      "n6_exact_ratio": 0.625,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.287877",
@@ -649,7 +755,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.290151",
@@ -661,7 +769,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.296189",
@@ -673,7 +783,9 @@
       "n6_matches": 0,
       "consensus_count": 4,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.304079",
@@ -685,7 +797,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 40.909090909090914,
-      "n6_exact_ratio": 0.8181818181818182
+      "n6_exact_ratio": 0.8181818181818182,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.304807",
@@ -697,7 +811,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.305433",
@@ -709,7 +825,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.306084",
@@ -721,7 +839,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.306577",
@@ -733,7 +853,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.307197",
@@ -745,7 +867,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.307966",
@@ -757,7 +881,9 @@
       "n6_matches": 0,
       "consensus_count": 4,
       "score": 35.0,
-      "n6_exact_ratio": 0.7
+      "n6_exact_ratio": 0.7,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.308399",
@@ -769,7 +895,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.308903",
@@ -781,7 +909,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 41.66666666666667,
-      "n6_exact_ratio": 0.8333333333333334
+      "n6_exact_ratio": 0.8333333333333334,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.309465",
@@ -793,7 +923,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 40.0,
-      "n6_exact_ratio": 0.8
+      "n6_exact_ratio": 0.8,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.310032",
@@ -805,7 +937,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 43.75,
-      "n6_exact_ratio": 0.875
+      "n6_exact_ratio": 0.875,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.310558",
@@ -817,7 +951,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.311110",
@@ -829,7 +965,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 30.0,
-      "n6_exact_ratio": 0.6
+      "n6_exact_ratio": 0.6,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.311539",
@@ -841,7 +979,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 35.714285714285715,
-      "n6_exact_ratio": 0.7142857142857143
+      "n6_exact_ratio": 0.7142857142857143,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.312038",
@@ -853,7 +993,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.312858",
@@ -865,7 +1007,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.313642",
@@ -877,7 +1021,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.314393",
@@ -889,7 +1035,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 45.45454545454545,
-      "n6_exact_ratio": 0.9090909090909091
+      "n6_exact_ratio": 0.9090909090909091,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.314949",
@@ -901,7 +1049,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.315839",
@@ -913,7 +1063,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.316501",
@@ -925,7 +1077,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.317046",
@@ -937,7 +1091,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 35.714285714285715,
-      "n6_exact_ratio": 0.7142857142857143
+      "n6_exact_ratio": 0.7142857142857143,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.317664",
@@ -949,7 +1105,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.318143",
@@ -961,7 +1119,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.318614",
@@ -973,7 +1133,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.319760",
@@ -985,7 +1147,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 35.0,
-      "n6_exact_ratio": 0.7
+      "n6_exact_ratio": 0.7,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.320830",
@@ -997,7 +1161,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.321374",
@@ -1009,7 +1175,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.322091",
@@ -1021,7 +1189,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 40.0,
-      "n6_exact_ratio": 0.8
+      "n6_exact_ratio": 0.8,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.322662",
@@ -1033,7 +1203,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 27.77777777777778,
-      "n6_exact_ratio": 0.5555555555555556
+      "n6_exact_ratio": 0.5555555555555556,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.323547",
@@ -1045,7 +1217,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 40.0,
-      "n6_exact_ratio": 0.8
+      "n6_exact_ratio": 0.8,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.324328",
@@ -1057,7 +1231,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.325219",
@@ -1069,7 +1245,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.325944",
@@ -1081,7 +1259,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 27.77777777777778,
-      "n6_exact_ratio": 0.5555555555555556
+      "n6_exact_ratio": 0.5555555555555556,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.326832",
@@ -1093,7 +1273,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 21.428571428571427,
-      "n6_exact_ratio": 0.42857142857142855
+      "n6_exact_ratio": 0.42857142857142855,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.327471",
@@ -1105,7 +1287,9 @@
       "n6_matches": 0,
       "consensus_count": 4,
       "score": 31.818181818181817,
-      "n6_exact_ratio": 0.6363636363636364
+      "n6_exact_ratio": 0.6363636363636364,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.328187",
@@ -1117,7 +1301,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.328794",
@@ -1129,7 +1315,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 27.77777777777778,
-      "n6_exact_ratio": 0.5555555555555556
+      "n6_exact_ratio": 0.5555555555555556,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.333065",
@@ -1141,7 +1329,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.346344",
@@ -1153,7 +1343,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.433792",
@@ -1165,7 +1357,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.449089",
@@ -1177,7 +1371,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.470500",
@@ -1189,7 +1385,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 13.636363636363635,
-      "n6_exact_ratio": 0.2727272727272727
+      "n6_exact_ratio": 0.2727272727272727,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.471229",
@@ -1201,7 +1399,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.471638",
@@ -1213,7 +1413,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.472032",
@@ -1225,7 +1427,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.472467",
@@ -1237,7 +1441,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 42.857142857142854,
-      "n6_exact_ratio": 0.8571428571428571
+      "n6_exact_ratio": 0.8571428571428571,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.474633",
@@ -1249,7 +1455,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 43.75,
-      "n6_exact_ratio": 0.875
+      "n6_exact_ratio": 0.875,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.490123",
@@ -1261,7 +1469,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.494505",
@@ -1273,7 +1483,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.495869",
@@ -1285,7 +1497,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.498562",
@@ -1297,7 +1511,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.499329",
@@ -1309,7 +1525,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 30.0,
-      "n6_exact_ratio": 0.6
+      "n6_exact_ratio": 0.6,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.500046",
@@ -1321,7 +1539,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 30.0,
-      "n6_exact_ratio": 0.6
+      "n6_exact_ratio": 0.6,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.500567",
@@ -1333,7 +1553,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 27.77777777777778,
-      "n6_exact_ratio": 0.5555555555555556
+      "n6_exact_ratio": 0.5555555555555556,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.501049",
@@ -1345,7 +1567,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.501895",
@@ -1357,7 +1581,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.502349",
@@ -1369,7 +1595,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.503811",
@@ -1381,7 +1609,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.504322",
@@ -1393,7 +1623,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.504977",
@@ -1405,7 +1637,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.505460",
@@ -1417,7 +1651,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.506373",
@@ -1429,7 +1665,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 30.0,
-      "n6_exact_ratio": 0.6
+      "n6_exact_ratio": 0.6,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.506887",
@@ -1441,7 +1679,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.507374",
@@ -1453,7 +1693,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.507934",
@@ -1465,7 +1707,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.508520",
@@ -1477,7 +1721,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.509207",
@@ -1489,7 +1735,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.509793",
@@ -1501,7 +1749,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.510419",
@@ -1513,7 +1763,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.510991",
@@ -1525,7 +1777,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.511617",
@@ -1537,7 +1791,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.512246",
@@ -1549,7 +1805,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.512806",
@@ -1561,7 +1819,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.513317",
@@ -1573,7 +1833,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.513850",
@@ -1585,7 +1847,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.514394",
@@ -1597,7 +1861,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.514990",
@@ -1609,7 +1875,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.515550",
@@ -1621,7 +1889,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.516000",
@@ -1633,7 +1903,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 21.428571428571427,
-      "n6_exact_ratio": 0.42857142857142855
+      "n6_exact_ratio": 0.42857142857142855,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.516888",
@@ -1645,7 +1917,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.517419",
@@ -1657,7 +1931,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.517989",
@@ -1669,7 +1945,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.519163",
@@ -1681,7 +1959,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.519652",
@@ -1693,7 +1973,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.520820",
@@ -1705,7 +1987,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.521306",
@@ -1717,7 +2001,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.522223",
@@ -1729,7 +2015,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.523409",
@@ -1741,7 +2029,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.523907",
@@ -1753,7 +2043,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.524420",
@@ -1765,7 +2057,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.525772",
@@ -1777,7 +2071,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.526350",
@@ -1789,7 +2085,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.526886",
@@ -1801,7 +2099,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.527722",
@@ -1813,7 +2113,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.528277",
@@ -1825,7 +2127,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.528890",
@@ -1837,7 +2141,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.529376",
@@ -1849,7 +2155,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 21.428571428571427,
-      "n6_exact_ratio": 0.42857142857142855
+      "n6_exact_ratio": 0.42857142857142855,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.531277",
@@ -1861,7 +2169,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.531796",
@@ -1873,7 +2183,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.532284",
@@ -1885,7 +2197,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.532873",
@@ -1897,7 +2211,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.533445",
@@ -1909,7 +2225,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.533944",
@@ -1921,7 +2239,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.535187",
@@ -1933,7 +2253,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.535669",
@@ -1945,7 +2267,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.536172",
@@ -1957,7 +2281,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.536682",
@@ -1969,7 +2295,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 20.0,
-      "n6_exact_ratio": 0.4
+      "n6_exact_ratio": 0.4,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.537225",
@@ -1981,7 +2309,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.537790",
@@ -1993,7 +2323,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.540037",
@@ -2005,7 +2337,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.540593",
@@ -2017,7 +2351,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.541402",
@@ -2029,7 +2365,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.542776",
@@ -2041,7 +2379,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 42.857142857142854,
-      "n6_exact_ratio": 0.8571428571428571
+      "n6_exact_ratio": 0.8571428571428571,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.544018",
@@ -2053,7 +2393,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.547953",
@@ -2065,7 +2407,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 37.5,
-      "n6_exact_ratio": 0.75
+      "n6_exact_ratio": 0.75,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.548383",
@@ -2077,7 +2421,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.549132",
@@ -2089,7 +2435,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 16.666666666666664,
-      "n6_exact_ratio": 0.3333333333333333
+      "n6_exact_ratio": 0.3333333333333333,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.562662",
@@ -2101,7 +2449,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.567198",
@@ -2113,7 +2463,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.569833",
@@ -2125,7 +2477,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 41.66666666666667,
-      "n6_exact_ratio": 0.8333333333333334
+      "n6_exact_ratio": 0.8333333333333334,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.570649",
@@ -2137,7 +2491,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 35.714285714285715,
-      "n6_exact_ratio": 0.7142857142857143
+      "n6_exact_ratio": 0.7142857142857143,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.577830",
@@ -2149,7 +2505,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.578776",
@@ -2161,7 +2519,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.580839",
@@ -2173,7 +2533,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.584279",
@@ -2185,7 +2547,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 38.88888888888889,
-      "n6_exact_ratio": 0.7777777777777778
+      "n6_exact_ratio": 0.7777777777777778,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.584865",
@@ -2197,7 +2561,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 50.0,
-      "n6_exact_ratio": 1.0
+      "n6_exact_ratio": 1.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.588513",
@@ -2209,7 +2575,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 41.66666666666667,
-      "n6_exact_ratio": 0.8333333333333334
+      "n6_exact_ratio": 0.8333333333333334,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.590341",
@@ -2221,7 +2589,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 28.57142857142857,
-      "n6_exact_ratio": 0.5714285714285714
+      "n6_exact_ratio": 0.5714285714285714,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.590939",
@@ -2233,7 +2603,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 40.0,
-      "n6_exact_ratio": 0.8
+      "n6_exact_ratio": 0.8,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.593443",
@@ -2245,7 +2617,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 36.36363636363637,
-      "n6_exact_ratio": 0.7272727272727273
+      "n6_exact_ratio": 0.7272727272727273,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.594066",
@@ -2257,7 +2631,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 31.818181818181817,
-      "n6_exact_ratio": 0.6363636363636364
+      "n6_exact_ratio": 0.6363636363636364,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.608110",
@@ -2269,7 +2645,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 9.090909090909092,
-      "n6_exact_ratio": 0.18181818181818182
+      "n6_exact_ratio": 0.18181818181818182,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.609301",
@@ -2281,7 +2659,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.610024",
@@ -2293,7 +2673,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.610558",
@@ -2305,7 +2687,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.611258",
@@ -2317,7 +2701,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.612132",
@@ -2329,7 +2715,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.612817",
@@ -2341,7 +2729,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.613359",
@@ -2353,7 +2743,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.614299",
@@ -2365,7 +2757,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 18.181818181818183,
-      "n6_exact_ratio": 0.36363636363636365
+      "n6_exact_ratio": 0.36363636363636365,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.615651",
@@ -2377,7 +2771,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 27.27272727272727,
-      "n6_exact_ratio": 0.5454545454545454
+      "n6_exact_ratio": 0.5454545454545454,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.621269",
@@ -2389,7 +2785,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.625274",
@@ -2401,7 +2799,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 30.0,
-      "n6_exact_ratio": 0.6
+      "n6_exact_ratio": 0.6,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.627125",
@@ -2413,7 +2813,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.628206",
@@ -2425,7 +2827,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.629147",
@@ -2437,7 +2841,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.629753",
@@ -2449,7 +2855,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.630838",
@@ -2461,7 +2869,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.631890",
@@ -2473,7 +2883,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 37.5,
-      "n6_exact_ratio": 0.75
+      "n6_exact_ratio": 0.75,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.633411",
@@ -2485,7 +2897,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.634558",
@@ -2497,7 +2911,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 14.285714285714285,
-      "n6_exact_ratio": 0.2857142857142857
+      "n6_exact_ratio": 0.2857142857142857,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.635990",
@@ -2509,7 +2925,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 28.57142857142857,
-      "n6_exact_ratio": 0.5714285714285714
+      "n6_exact_ratio": 0.5714285714285714,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.636723",
@@ -2521,7 +2939,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.638248",
@@ -2533,7 +2953,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 18.75,
-      "n6_exact_ratio": 0.375
+      "n6_exact_ratio": 0.375,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.639779",
@@ -2545,7 +2967,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 31.25,
-      "n6_exact_ratio": 0.625
+      "n6_exact_ratio": 0.625,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.642509",
@@ -2557,7 +2981,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 35.714285714285715,
-      "n6_exact_ratio": 0.7142857142857143
+      "n6_exact_ratio": 0.7142857142857143,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.646550",
@@ -2569,7 +2995,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 36.36363636363637,
-      "n6_exact_ratio": 0.7272727272727273
+      "n6_exact_ratio": 0.7272727272727273,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.647705",
@@ -2581,7 +3009,9 @@
       "n6_matches": 0,
       "consensus_count": 0,
       "score": 0.0,
-      "n6_exact_ratio": 0.0
+      "n6_exact_ratio": 0.0,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.648707",
@@ -2593,7 +3023,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 6.25,
-      "n6_exact_ratio": 0.125
+      "n6_exact_ratio": 0.125,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.649562",
@@ -2605,7 +3037,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.650098",
@@ -2617,7 +3051,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.650734",
@@ -2629,7 +3065,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 12.5,
-      "n6_exact_ratio": 0.25
+      "n6_exact_ratio": 0.25,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.651475",
@@ -2641,7 +3079,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 25.0,
-      "n6_exact_ratio": 0.5
+      "n6_exact_ratio": 0.5,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.652095",
@@ -2653,7 +3093,9 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 33.33333333333333,
-      "n6_exact_ratio": 0.6666666666666666
+      "n6_exact_ratio": 0.6666666666666666,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.652642",
@@ -2665,7 +3107,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 22.727272727272727,
-      "n6_exact_ratio": 0.45454545454545453
+      "n6_exact_ratio": 0.45454545454545453,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.653154",
@@ -2677,7 +3121,9 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 31.818181818181817,
-      "n6_exact_ratio": 0.6363636363636364
+      "n6_exact_ratio": 0.6363636363636364,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     },
     {
       "timestamp": "2026-04-04T17:07:38.653758",
@@ -2689,7 +3135,13 @@
       "n6_matches": 0,
       "consensus_count": 2,
       "score": 22.22222222222222,
-      "n6_exact_ratio": 0.4444444444444444
+      "n6_exact_ratio": 0.4444444444444444,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     }
-  ]
+  ],
+  "_meta": {
+    "last_ossified": "2026-04-11T20:17:01Z",
+    "ossified_count": 224
+  }
 }

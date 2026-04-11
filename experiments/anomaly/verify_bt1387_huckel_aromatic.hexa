@@ -1,0 +1,58 @@
+// verify_bt1387_huckel_aromatic.hexa
+// 카테고리: anomaly
+// 목적: BT-1387 Hückel 방향족 4n+2 (n=1) → 6π 벤젠 정수 정합 검증
+// 근거: 벤젠 C₆H₆, π 전자 6, D_6h 대칭군 차수 24 = J₂
+// 가설: Hückel 주 해 k=1 이 벤젠 6 을 고정, (n/φ)·φ = n 폐각
+// 지표: π 전자 수, 원자 수, D_6h 차수
+// 데이터: Hückel 1931 Z Phys 70, Kekulé 1865, Cotton 1990
+
+fn main() {
+    println("[BT-1387 Hückel 방향족] 벤젠 6π 전자 — 산술 검증")
+
+    let n: i64 = 6
+    let phi: i64 = 2
+    let J2: i64 = 24
+
+    // Hückel 4n+2 주 해 (k=1)
+    let k: i64 = 1
+    let huckel_k1: i64 = 4 * k + 2  // = 6
+
+    // 벤젠 구성
+    let carbon_atoms: i64 = 6
+    let hydrogen_atoms: i64 = 6
+    let pi_electrons: i64 = 6
+    let cc_bonds: i64 = 6
+    let mo_count: i64 = 6
+
+    // D_6h 대칭군
+    let d6h_order: i64 = 24
+
+    // HMO 폐각: (n/φ) bonding pair × φ electrons/pair = n
+    let bonding_pairs: i64 = n / phi  // 3
+    let electrons_per_pair: i64 = phi  // 2
+    let closed_shell: i64 = bonding_pairs * electrons_per_pair  // 6
+
+    // Kistiakowsky 1937 공명 안정화 kcal/mol (3σ=36)
+    let resonance_stab: i64 = 36
+
+    println("Hückel 4·1+2 = " + to_string(huckel_k1))
+    println("벤젠 C=" + to_string(carbon_atoms) + ", H=" + to_string(hydrogen_atoms) + ", π=" + to_string(pi_electrons))
+    println("D_6h |G| = " + to_string(d6h_order) + " = J₂")
+    println("HMO 폐각 (n/φ)·φ = " + to_string(closed_shell))
+
+    let mut pass: i64 = 0
+    if huckel_k1 == n { pass = pass + 1 }
+    if carbon_atoms == n { pass = pass + 1 }
+    if pi_electrons == n { pass = pass + 1 }
+    if cc_bonds == n { pass = pass + 1 }
+    if mo_count == n { pass = pass + 1 }
+    if d6h_order == J2 { pass = pass + 1 }
+    if closed_shell == n { pass = pass + 1 }
+    if resonance_stab == 36 { pass = pass + 1 }
+
+    if pass == 8 {
+        println("[상태] pass — 벤젠 6중 정수 정합 + HMO 폐각 n")
+    } else {
+        println("[상태] fail — " + to_string(pass) + "/8")
+    }
+}

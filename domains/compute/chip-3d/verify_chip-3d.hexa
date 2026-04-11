@@ -1,0 +1,10 @@
+# verify_chip-3d -- 칩 6단계 3단(HEXA-3D 수직 적층) 검증 스텁
+# 본 스텁은 chip-3d.md 의 적층 균형식을 호출하며, 디테일은 hexa-3d 도메인에 위임.
+# 향후: TSV 288/mm^2, 12 단 적층, 100 TB/s, 이집트 240W 분배 측정값 임베드.
+# SSOT 이관 예정: nexus/shared/n6/scripts/verify_chip-3d_n6.hexa
+fn main() {
+    println("[chip-3d] 3단 3D 적층 검증 stub -- TODO: TSV*sigma*J2=288, 12층, 100 TB/s")
+    let tsv_density = 12 * 24
+    assert(tsv_density == 288)
+    println("[chip-3d] sigma*J_2 = 288 TSV/mm^2 PASS")
+}

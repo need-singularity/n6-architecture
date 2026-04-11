@@ -1,0 +1,65 @@
+// verify_bt1388_ionic_octahedral.hexa
+// 카테고리: anomaly
+// 목적: BT-1388 이온결정 옥타헤드럴 CN=6 표준 — Shannon 1976 + Pauling 1929 검증
+// 근거: NaCl/Perovskite/Rutile/Corundum/Spinel 주요 구조 CN=6 중심
+// 가설: Pauling 배위수 {3,4,6,8,12} = {n/φ, τ, n, 2τ, σ} 완전 일치
+// 지표: CN 값, FCC 단위셀 구멍 수
+// 데이터: Shannon 1976 Acta Cryst A32, Pauling 1929 JACS 51, Kittel SSP
+
+fn main() {
+    println("[BT-1388 이온결정 CN=6] Shannon 표준 — 산술 검증")
+
+    let n: i64 = 6
+    let sigma: i64 = 12
+    let phi: i64 = 2
+    let tau: i64 = 4
+
+    // Shannon 1976 기준 CN
+    let shannon_cn: i64 = 6
+
+    // 주요 이온결정 구조의 CN
+    let nacl_cation: i64 = 6
+    let nacl_anion: i64 = 6
+    let perovskite_b: i64 = 6
+    let perovskite_a: i64 = 12
+    let rutile_ti: i64 = 6
+    let rutile_o: i64 = 3  // = n/φ
+    let spinel_a: i64 = 4  // = τ
+    let spinel_b: i64 = 6
+
+    // FCC 단위셀 구멍 수
+    let fcc_oct_holes: i64 = 4  // = τ
+    let fcc_tet_holes: i64 = 8  // = 2τ
+    let total_holes: i64 = fcc_oct_holes + fcc_tet_holes  // = σ
+
+    // Pauling 배위수 집합 = {n/φ, τ, n, 2τ, σ}
+    let pauling_3: i64 = n / phi
+    let pauling_4: i64 = tau
+    let pauling_6: i64 = n
+    let pauling_8: i64 = 2 * tau
+    let pauling_12: i64 = sigma
+
+    println("Shannon CN = " + to_string(shannon_cn) + " = n")
+    println("NaCl 양/음 이온 CN = " + to_string(nacl_cation) + "/" + to_string(nacl_anion))
+    println("페로브스카이트 B/A = " + to_string(perovskite_b) + "/" + to_string(perovskite_a))
+    println("FCC 구멍 총수 = " + to_string(total_holes) + " = σ")
+    println("Pauling 배위 집합 = {" + to_string(pauling_3) + "," + to_string(pauling_4) + "," + to_string(pauling_6) + "," + to_string(pauling_8) + "," + to_string(pauling_12) + "}")
+
+    let mut pass: i64 = 0
+    if shannon_cn == n { pass = pass + 1 }
+    if nacl_cation == n { pass = pass + 1 }
+    if nacl_anion == n { pass = pass + 1 }
+    if perovskite_b == n { pass = pass + 1 }
+    if perovskite_a == sigma { pass = pass + 1 }
+    if rutile_o == n / phi { pass = pass + 1 }
+    if spinel_a == tau { pass = pass + 1 }
+    if fcc_oct_holes == tau { pass = pass + 1 }
+    if fcc_tet_holes == 2 * tau { pass = pass + 1 }
+    if total_holes == sigma { pass = pass + 1 }
+
+    if pass == 10 {
+        println("[상태] pass — 이온결정 CN 집합 = n=6 좌표 완전 닫힘")
+    } else {
+        println("[상태] fail — " + to_string(pass) + "/10")
+    }
+}

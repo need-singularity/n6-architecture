@@ -13,7 +13,13 @@
       "n6_matches": 0,
       "consensus_count": 3,
       "score": 15.0,
-      "n6_exact_ratio": 0.3
+      "n6_exact_ratio": 0.3,
+      "absorbed": true,
+      "absorbed_at": "2026-04-11T20:17:01Z"
     }
-  ]
+  ],
+  "_meta": {
+    "last_ossified": "2026-04-11T20:17:01Z",
+    "ossified_count": 1
+  }
 }

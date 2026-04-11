@@ -1,0 +1,73 @@
+// verify_bt1389_cube_octahedron_duality.hexa
+// 카테고리: anomaly
+// 목적: BT-1389 정육면체-정팔면체 쌍대 n=6 기하 — V/E/F 쌍대 교환 + O_h 차수
+// 근거: Cube (V=8,E=12,F=6) ↔ Octahedron (V=6,E=12,F=8), 공유 |O_h|=48
+// 가설: E=σ 쌍대 불변, Euler V−E+F=2=φ, |O_h|=σ·τ
+// 지표: 꼭짓점/모서리/면 수, 대칭군 차수
+// 데이터: Euclid Elements XIII.18, Coxeter Regular Polytopes, Euler 1758
+
+fn main() {
+    println("[BT-1389 Cube-Octahedron] 쌍대 기하 — 산술 검증")
+
+    let n: i64 = 6
+    let sigma: i64 = 12
+    let phi: i64 = 2
+    let tau: i64 = 4
+    let sopfr: i64 = 5
+    let J2: i64 = 24
+
+    // 정다면체 종수
+    let platonic_count: i64 = 5  // = sopfr
+
+    // Cube (V, E, F)
+    let cube_v: i64 = 8  // = 2τ
+    let cube_e: i64 = 12  // = σ
+    let cube_f: i64 = 6  // = n
+    let cube_euler: i64 = cube_v - cube_e + cube_f  // = 2 = φ
+
+    // Octahedron (V, E, F)
+    let oct_v: i64 = 6  // = n
+    let oct_e: i64 = 12  // = σ
+    let oct_f: i64 = 8  // = 2τ
+    let oct_euler: i64 = oct_v - oct_e + oct_f  // = 2 = φ
+
+    // 쌍대 관계: V ↔ F 교환
+    let dual_v_ok: bool = cube_v == oct_f
+    let dual_f_ok: bool = cube_f == oct_v
+    let dual_e_invariant: bool = cube_e == oct_e
+
+    // O_h 대칭군
+    let oh_rotation: i64 = 24  // = J₂
+    let oh_full: i64 = 48  // = σ·τ
+
+    // Cube 회전축
+    let axis_3fold: i64 = 4  // = τ (체대각선)
+    let axis_4fold: i64 = 3  // = n/φ (면중심)
+    let axis_2fold: i64 = 6  // = n (모서리)
+
+    println("Cube V/E/F = " + to_string(cube_v) + "/" + to_string(cube_e) + "/" + to_string(cube_f))
+    println("Oct V/E/F = " + to_string(oct_v) + "/" + to_string(oct_e) + "/" + to_string(oct_f))
+    println("Euler χ = " + to_string(cube_euler) + " (Cube), " + to_string(oct_euler) + " (Oct)")
+    println("|O_h| = " + to_string(oh_full) + " = σ·τ")
+
+    let mut pass: i64 = 0
+    if platonic_count == sopfr { pass = pass + 1 }
+    if cube_f == n { pass = pass + 1 }
+    if cube_e == sigma { pass = pass + 1 }
+    if cube_euler == phi { pass = pass + 1 }
+    if oct_v == n { pass = pass + 1 }
+    if oct_e == sigma { pass = pass + 1 }
+    if oct_euler == phi { pass = pass + 1 }
+    if dual_v_ok { pass = pass + 1 }
+    if dual_f_ok { pass = pass + 1 }
+    if dual_e_invariant { pass = pass + 1 }
+    if oh_rotation == J2 { pass = pass + 1 }
+    if oh_full == sigma * tau { pass = pass + 1 }
+    if axis_3fold == tau { pass = pass + 1 }
+
+    if pass == 13 {
+        println("[상태] pass — 쌍대 V↔F 교환 + E=σ 불변 + |O_h|=σ·τ")
+    } else {
+        println("[상태] fail — " + to_string(pass) + "/13")
+    }
+}

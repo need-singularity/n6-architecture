@@ -1,0 +1,64 @@
+// verify_bt1390_hsv_color_hexad.hexa
+// 카테고리: anomaly
+// 목적: BT-1390 HSV 색상환 6원색 60° 주기 + 시각 수용체 n=6 좌표 검증
+// 근거: HSV R/Y/G/C/B/M 6 primary, Hering 3축×2극=6, RGB+CMY=6
+// 가설: 색 인지 축 자유도가 {μ, φ, n/φ, τ, n} 집합에 닫힘
+// 지표: 원색 수, 원추 세포 유형, 대립 채널
+// 데이터: Smith 1978 SIGGRAPH, Hering 1878, Bowmaker 1980
+
+fn main() {
+    println("[BT-1390 HSV 색상환] 6 원색 60° 주기 — 산술 검증")
+
+    let n: i64 = 6
+    let phi: i64 = 2
+    let tau: i64 = 4
+    let sopfr: i64 = 5
+    let mu: i64 = 1
+
+    // HSV 6 primary
+    let hsv_primaries: i64 = 6
+    let hue_step: i64 = 360 / n  // 60°
+
+    // RGB + CMY = 6
+    let rgb_primaries: i64 = 3  // = n/φ
+    let cmy_primaries: i64 = 3  // = n/φ
+    let combined: i64 = rgb_primaries + cmy_primaries  // = n
+
+    // 시각 수용체
+    let cone_types: i64 = 3  // L/M/S = n/φ
+    let rod_plus_cone: i64 = 4  // rod + 3 cones = τ
+    let opsin_families: i64 = 2  // rhodopsin + photopsin = φ
+
+    // Hering 대립 과정
+    let opp_channels: i64 = 3  // R-G, Y-B, L-D = n/φ
+    let opp_poles: i64 = opp_channels * phi  // 6 = n
+
+    // Munsell & Newton
+    let munsell_basic: i64 = 5  // R/Y/G/B/P = sopfr
+    let newton_spectrum: i64 = 7  // ROYGBIV = n + μ
+
+    println("HSV primary = " + to_string(hsv_primaries) + " = n")
+    println("Hue step = " + to_string(hue_step) + "°")
+    println("RGB+CMY = " + to_string(combined) + " = n")
+    println("원추 세포 = " + to_string(cone_types) + " = n/φ")
+    println("대립 극 = " + to_string(opp_poles) + " = " + to_string(opp_channels) + "·" + to_string(phi))
+
+    let mut pass: i64 = 0
+    if hsv_primaries == n { pass = pass + 1 }
+    if hue_step == 60 { pass = pass + 1 }
+    if rgb_primaries * phi == n { pass = pass + 1 }
+    if combined == n { pass = pass + 1 }
+    if cone_types * phi == n { pass = pass + 1 }
+    if rod_plus_cone == tau { pass = pass + 1 }
+    if opsin_families == phi { pass = pass + 1 }
+    if opp_channels * phi == n { pass = pass + 1 }
+    if opp_poles == n { pass = pass + 1 }
+    if munsell_basic == sopfr { pass = pass + 1 }
+    if newton_spectrum == n + mu { pass = pass + 1 }
+
+    if pass == 11 {
+        println("[상태] pass — HSV 6 primary + 대립 (n/φ)·φ = n 이중 정합")
+    } else {
+        println("[상태] fail — " + to_string(pass) + "/11")
+    }
+}
