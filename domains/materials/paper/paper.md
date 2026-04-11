@@ -1,13 +1,4 @@
-# paper
-
-> 축: **materials** · 자동 통합본 · n6-architecture
-
-## 1. 실생활 효과
-
-
-### 출처: `README.md`
-
-# Papers
+# N6 논문 아카이브 — PAPERS
 
 arXiv paper outlines and academic publications.
 
