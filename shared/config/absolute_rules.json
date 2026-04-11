@@ -299,8 +299,9 @@
     "n6-architecture": [
       {
         "id": "N61",
-        "rule": "설계 문서 = 실생활 효과 섹션 + ASCII 3개(비교/구조/플로우) 필수",
-        "level": "🔴"
+        "rule": "도메인 문서 15섹션 템플릿 필수 — domains/<axis>/<name>/<name>.md 는 반드시 다음 15개 ## 섹션 순서 준수: 1.실생활효과 2.목표 3.가설 4.BT연결 5.DSE결과 6.물리한계증명 7.실험검증매트릭스 8.외계인급발견 9.Mk.I~V진화 10.TestablePredictions 11.ASCII성능비교 12.ASCII시스템구조도 13.ASCII데이터플로우 14.업그레이드비교(시중vs v1 vs v2) 15.검증방법(verify.hexa). 참고: domains/life/neuro/neuro.md",
+        "level": "🔴",
+        "enforcement": "domain-doc-sync.hexa PostToolUse 훅 검증. 신규 도메인 돌파 시 15섹션 스캐폴딩 자동 생성. '출처: goal.md' / 'TODO: 후속 돌파 필요' 등 잔해 금지"
       },
       {
         "id": "N62",
