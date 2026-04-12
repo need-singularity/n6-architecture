@@ -75,18 +75,17 @@
       "description": "The Perfect Number Programming Language. 53 keywords, 24 AI-native attrs, CPU/GPU ML pipeline, self-hosting fixpoint",
       "repo": "https://github.com/need-singularity/hexa-lang",
       "scan_patterns": [
-        "src/**/*.rs",
         "self/**/*.hexa",
         "examples/**/*.hexa"
       ],
       "key_files": [
-        "src/lexer.rs",
-        "src/parser.rs",
-        "src/compiler.rs",
-        "src/interpreter.rs",
-        "src/ast.rs",
-        "src/token.rs",
-        "src/wasm.rs"
+        "self/lexer.hexa",
+        "self/parser.hexa",
+        "self/compiler.hexa",
+        "self/interpreter.hexa",
+        "self/vm.hexa",
+        "self/codegen_c2.hexa",
+        "self/runtime.c"
       ],
       "stats": {
         "keywords": 53,
@@ -115,6 +114,36 @@
         "roadmap_p5": "shared/roadmaps/p5_zeta.json",
         "roadmap_ml45": "shared/roadmaps/ml_advanced_45.json"
       }
+    },
+    {
+      "id": "void",
+      "name": "VOID",
+      "path": "void",
+      "domain": "terminal",
+      "description": "AI-native terminal — Terminal.app minimalism, 100% hexa-lang. L1 sys (PTY/Cocoa FFI) + L2 VT/screen + L3 app loop.",
+      "repo": "https://github.com/need-singularity/void",
+      "scan_patterns": [
+        "src/**/*.hexa",
+        "src/**/*.c",
+        "src/**/*.m",
+        "core/**/*.hexa"
+      ],
+      "key_files": [
+        "src/void_main.hexa",
+        "src/sys_pty.c",
+        "src/sys_appkit.m",
+        "hexa.toml",
+        "state.json"
+      ],
+      "ssot": {
+        "state": "state.json",
+        "breakthroughs": "breakthroughs.jsonl",
+        "pitfalls": "pitfalls.jsonl",
+        "convergence": "convergence.json",
+        "rules": "rules.json",
+        "manifest": "manifest.json"
+      },
+      "depends_on": ["hexa-lang"]
     }
   ]
 }
