@@ -13,6 +13,11 @@
             "type": "command",
             "command": "/Users/ghost/Dev/hexa-lang/hexa /Users/ghost/Dev/nexus/shared/hooks/hook-entry.hexa prompt /Users/ghost/Dev/nexus/shared/hooks/go-parallel.hexa",
             "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "R=$(git rev-parse --show-toplevel 2>/dev/null) && [ -f \"$R/.shared/hooks/l0-prompt-guard.hexa\" ] && hexa \"$R/.shared/hooks/l0-prompt-guard.hexa\" || true",
+            "timeout": 5
           }
         ]
       }
