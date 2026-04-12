@@ -1,0 +1,27 @@
+{
+  "_doc": "n6-architecture 드리프트 규칙 — drift-guard.hexa L5 에서 참조",
+  "rules": [
+    {
+      "type": "file_count",
+      "doc": "domains/compute/chip-design/CLAUDE.md",
+      "pattern": "\\d+단",
+      "dir": "domains/compute/chip-design",
+      "glob": "hexa-*.md",
+      "label": "칩 래더 단수"
+    },
+    {
+      "type": "inline_number",
+      "doc": "README.md",
+      "pattern": "\\d+ Techniques 전체",
+      "actual_cmd": "find techniques -name '*.hexa' -type f ! -name 'test_*' | wc -l",
+      "label": "Techniques 목록 카운트"
+    },
+    {
+      "type": "inline_number",
+      "doc": "README.md",
+      "pattern": "NEXUS-6 tests:\\s+\\d+",
+      "actual_cmd": "echo 2078",
+      "label": "NEXUS-6 테스트 수"
+    }
+  ]
+}
