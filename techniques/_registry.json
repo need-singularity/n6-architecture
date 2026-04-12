@@ -1,14 +1,15 @@
 {
-  "_doc": "AI 기법 155종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
+  "_doc": "AI 기법 183종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
   "_version": "2.0.0",
-  "_total": 155,
+  "_total": 183,
   "_sota_extended": 3,
-  "_sota_total": 158,
-  "_body_count": 158,
+  "_sota_total": 186,
+  "_body_count": 186,
   "_stub_count": 0,
   "_deprecated_count": 2,
   "_last_updated": "2026-04-12",
   "_changelog": [
+    "2026-04-12: DFS22 기법 28종 신규 (155→183종 확장) — arch 8종(resnet_residual/densenet_connection/swin_transformer/mobilenet_inverted/wavenet_causal/modern_hopfield/neural_turing_machine/autoregressive_lm) + attention 4종(multi_head_attention/multi_query_attention/additive_attention/axial_attention) + optim 8종(adafactor/lamb_optimizer/cosine_annealing/gradient_accumulation/label_smoothing/rmsnorm_normalization/nucleus_sampling/beam_search_decoding) + compress 4종(structured_pruning/low_rank_factorization/weight_sharing/dynamic_quantization) + sparse 2종(structured_sparsity/activation_sparsity) + moe 1종(expert_choice_routing) + graph 1종(spectral_convolution). _total 155→183, _body_count 158→186",
     "2026-04-12: DFS21 기법 16종 신규 (139→155종 확장) — arch 6종(gan_adversarial/unet_skip/normalizing_flow/pointnet_3d/vision_mamba/tree_of_thought) + attention 3종(linear_attention/sliding_window_attention/mixture_of_depths_v2) + compress 1종(neural_codec) + optim 6종(weight_averaging/mixed_precision/self_play/gradient_penalty/noise_contrastive_estimation/cutmix_augmentation). _total 139→155, _body_count 142→158",
     "2026-04-12: DFS20 기법 16종 신규 + 고아 3종 흡수 (120→139종 확장) — arch 10종(variational_autoencoder/clip_multimodal/gaussian_splatting/capsule_network/liquid_neural_network/consistency_model/nerf_radiance + 고아 energy_based_model/hypernetwork/neural_ode) + attention 2종(slot_attention/cross_attention) + compress 2종(vq_vae/pruning_lottery_ticket) + optim 5종(lora/maml_meta_learning/classifier_free_guidance/ddim_sampling/sharpness_aware_minimization). _total 120→139, _body_count 123→142",
     "2026-04-12: DFS19 기법 12종 신규 (88→100종 확장) — arch 3종(world_model/megabyte/perceiver) + attention 2종(flash_attention_v3/differential_transformer) + optim 3종(test_time_compute/eagle_speculative/multi_token_prediction) + compress 2종(mixture_of_tokenizers/bitnet) + sparse 1종(sparse_autoencoder) + graph 1종(graph_transformer). _total 108→120, _body_count 111→123",
@@ -114,7 +115,11 @@
     "cross_attention",
     "linear_attention",
     "sliding_window_attention",
-    "mixture_of_depths_v2"
+    "mixture_of_depths_v2",
+    "multi_head_attention",
+    "multi_query_attention",
+    "additive_attention",
+    "axial_attention"
   ],
   "attention_status": {
     "egyptian_attention": "BODY",
@@ -127,7 +132,11 @@
     "cross_attention": "BODY",
     "linear_attention": "BODY",
     "sliding_window_attention": "BODY",
-    "mixture_of_depths_v2": "BODY"
+    "mixture_of_depths_v2": "BODY",
+    "multi_head_attention": "BODY",
+    "multi_query_attention": "BODY",
+    "additive_attention": "BODY",
+    "axial_attention": "BODY"
   },
   "moe": [
     "deepseek_moe",
@@ -141,12 +150,14 @@
     "moe_activation_fraction",
     "partition_routing",
     "phi_moe",
-    "sparse_moe_scaling"
+    "sparse_moe_scaling",
+    "expert_choice_routing"
   ],
   "moe_status": {
     "deepseek_moe": "BODY",
     "egyptian_moe": "BODY",
-    "sparse_moe_scaling": "BODY"
+    "sparse_moe_scaling": "BODY",
+    "expert_choice_routing": "BODY"
   },
   "optim": [
     "activation_checkpointing",
@@ -199,7 +210,15 @@
     "self_play",
     "gradient_penalty",
     "noise_contrastive_estimation",
-    "cutmix_augmentation"
+    "cutmix_augmentation",
+    "adafactor",
+    "lamb_optimizer",
+    "cosine_annealing",
+    "gradient_accumulation",
+    "label_smoothing",
+    "rmsnorm_normalization",
+    "nucleus_sampling",
+    "beam_search_decoding"
   ],
   "optim_status": {
     "adamw_quintuplet": "BODY",
@@ -235,7 +254,15 @@
     "self_play": "BODY",
     "gradient_penalty": "BODY",
     "noise_contrastive_estimation": "BODY",
-    "cutmix_augmentation": "BODY"
+    "cutmix_augmentation": "BODY",
+    "adafactor": "BODY",
+    "lamb_optimizer": "BODY",
+    "cosine_annealing": "BODY",
+    "gradient_accumulation": "BODY",
+    "label_smoothing": "BODY",
+    "rmsnorm_normalization": "BODY",
+    "nucleus_sampling": "BODY",
+    "beam_search_decoding": "BODY"
   },
   "sparse": [
     "boltzmann_gate",
@@ -244,12 +271,16 @@
     "radical_norm",
     "rfilter_phase",
     "takens_dim6",
-    "sparse_autoencoder"
+    "sparse_autoencoder",
+    "structured_sparsity",
+    "activation_sparsity"
   ],
   "sparse_status": {
     "boltzmann_gate": "BODY",
     "mertens_dropout": "BODY",
-    "sparse_autoencoder": "BODY"
+    "sparse_autoencoder": "BODY",
+    "structured_sparsity": "BODY",
+    "activation_sparsity": "BODY"
   },
   "graph": [
     "gat_heads",
@@ -257,7 +288,8 @@
     "gin_isomorphism",
     "graphsage_sampling",
     "hcn_dimensions",
-    "graph_transformer"
+    "graph_transformer",
+    "spectral_convolution"
   ],
   "compress": [
     "bpe_vocab_32k",
@@ -270,7 +302,11 @@
     "bitnet",
     "vq_vae",
     "pruning_lottery_ticket",
-    "neural_codec"
+    "neural_codec",
+    "structured_pruning",
+    "low_rank_factorization",
+    "weight_sharing",
+    "dynamic_quantization"
   ],
   "compress_status": {
     "phi_bottleneck": "BODY",
@@ -279,7 +315,11 @@
     "bitnet": "BODY",
     "vq_vae": "BODY",
     "pruning_lottery_ticket": "BODY",
-    "neural_codec": "BODY"
+    "neural_codec": "BODY",
+    "structured_pruning": "BODY",
+    "low_rank_factorization": "BODY",
+    "weight_sharing": "BODY",
+    "dynamic_quantization": "BODY"
   },
   "arch": [
     "arch_optimizer",
@@ -331,7 +371,15 @@
     "normalizing_flow",
     "pointnet_3d",
     "vision_mamba",
-    "tree_of_thought"
+    "tree_of_thought",
+    "resnet_residual",
+    "densenet_connection",
+    "swin_transformer",
+    "mobilenet_inverted",
+    "wavenet_causal",
+    "modern_hopfield",
+    "neural_turing_machine",
+    "autoregressive_lm"
   ],
   "arch_status": {
     "complete_llm_n6": "BODY",
@@ -366,6 +414,14 @@
     "normalizing_flow": "BODY",
     "pointnet_3d": "BODY",
     "vision_mamba": "BODY",
-    "tree_of_thought": "BODY"
+    "tree_of_thought": "BODY",
+    "resnet_residual": "BODY",
+    "densenet_connection": "BODY",
+    "swin_transformer": "BODY",
+    "mobilenet_inverted": "BODY",
+    "wavenet_causal": "BODY",
+    "modern_hopfield": "BODY",
+    "neural_turing_machine": "BODY",
+    "autoregressive_lm": "BODY"
   }
 }

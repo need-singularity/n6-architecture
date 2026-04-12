@@ -1,0 +1,272 @@
+// attention/multi_head_attention.hexa — 멀티헤드 어텐션 x n=6
+//
+// 포팅 상태: BODY (의존 없음 — 순수 정수 산술)
+// 원본 요약: Vaswani 외 2017, "Attention Is All You Need"
+//            Q·K^T / sqrt(d_k) 소프트맥스 → 가중 합산
+//            멀티헤드 병렬 연산 후 연결 → 출력 투영
+// n=6 정렬:
+//   - 헤드수     = σ(6) = 12   -> 병렬 어텐션 헤드
+//   - 헤드차원   = τ(6) = 4    -> 각 헤드의 키/쿼리 차원
+//   - 모델차원   = σ²(6) = 144 -> d_model = 헤드수 · 헤드차원 · 3 (확장)
+//   - 내부투영   = σ·τ = 48    -> 헤드수 × 헤드차원
+//   - 드롭아웃   = φ/σ = 2/12  -> 약 16.7% (정수: 167/SCALE)
+//   - σ·φ = n·τ = 24           -> 완전수 정점
+//
+// 실행: hexa run techniques/attention/multi_head_attention.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ════════════════════════════════════════════════════════════════════
+// 1) n=6 산술 함수
+// ════════════════════════════════════════════════════════════════════
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 { s = s + d; rem = rem / d }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ════════════════════════════════════════════════════════════════════
+// 2) MHA 핵심 상수 (n=6 도출)
+//    d_model = σ² = 144,  num_heads = σ = 12
+//    d_k = d_v = τ = 4,   inner = σ·τ = 48
+// ════════════════════════════════════════════════════════════════════
+
+const NUM_HEADS: i64 = 12    // σ(6)
+const HEAD_DIM: i64 = 4      // τ(6)
+const D_MODEL: i64 = 144     // σ² = 12·12
+const INNER_DIM: i64 = 48    // σ·τ = 12·4
+const DROPOUT: i64 = 167     // φ/σ·SCALE = 2/12·1000
+
+// ════════════════════════════════════════════════════════════════════
+// 3) 스케일드 닷-프로덕트 어텐션
+//    score(q, k) = q · k / sqrt(d_k)
+//    sqrt(4) = 2  →  정수 나눗셈
+// ════════════════════════════════════════════════════════════════════
+
+fn scaled_dot_product(q: i64, k: i64) -> i64 {
+    // q·k / sqrt(d_k),  d_k = τ(6) = 4, sqrt(4) = 2
+    return q * k / 2
+}
+
+// 소프트맥스 정수 근사: 각 스코어를 전체 합 대비 비율로
+fn softmax_approx(score: i64, total: i64) -> i64 {
+    if total == 0 { return 0 }
+    return score * SCALE / total
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 4) 단일 헤드 어텐션 시뮬레이션
+//    시퀀스 길이 = σ(6) = 12
+//    Q[i] = i+1,  K[i] = σ-i,  V[i] = (i+1)·τ
+// ════════════════════════════════════════════════════════════════════
+
+fn single_head_attn(head_id: i64) -> i64 {
+    let seq_len: i64 = sigma(N6)
+    let mut context: i64 = 0
+
+    // 쿼리 위치 = head_id 기반 대표 토큰
+    let q_val: i64 = head_id + 1
+
+    // 모든 키와 스코어 계산 → 합산
+    let mut score_sum: i64 = 0
+    let mut k_idx: i64 = 0
+    while k_idx < seq_len {
+        let k_val: i64 = seq_len - k_idx
+        let raw: i64 = scaled_dot_product(q_val, k_val)
+        let s: i64 = abs_val(raw) + 1
+        score_sum = score_sum + s
+        k_idx = k_idx + 1
+    }
+
+    // 가중 합산 (콘텍스트 벡터)
+    let mut k_idx2: i64 = 0
+    while k_idx2 < seq_len {
+        let k_val: i64 = seq_len - k_idx2
+        let v_val: i64 = (k_idx2 + 1) * tau(N6)
+        let raw: i64 = scaled_dot_product(q_val, k_val)
+        let s: i64 = abs_val(raw) + 1
+        let weight: i64 = softmax_approx(s, score_sum)
+        context = context + weight * v_val / SCALE
+        k_idx2 = k_idx2 + 1
+    }
+    return context
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 5) 멀티헤드 연결 + 출력 투영
+//    concat(head_0..head_11) → W_o 투영
+//    W_o 효과: 합산 / 헤드수 (정수 근사)
+// ════════════════════════════════════════════════════════════════════
+
+fn multi_head_concat() -> i64 {
+    let mut total: i64 = 0
+    let mut h: i64 = 0
+    while h < NUM_HEADS {
+        total = total + single_head_attn(h)
+        h = h + 1
+    }
+    // 출력 투영 = 평균 (W_o 시뮬레이션)
+    return total / NUM_HEADS
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 6) FLOPs 분석
+//    Q·K^T: 시퀀스² · d_k · 헤드수
+//    softmax·V: 시퀀스² · d_v · 헤드수
+//    합계: 2 · seq² · d_k · h
+// ════════════════════════════════════════════════════════════════════
+
+fn flops_per_layer(seq_len: i64) -> i64 {
+    // 2 · seq² · d_k · num_heads
+    return 2 * seq_len * seq_len * HEAD_DIM * NUM_HEADS
+}
+
+fn memory_per_layer(seq_len: i64) -> i64 {
+    // 어텐션 행렬: num_heads · seq² 크기
+    return NUM_HEADS * seq_len * seq_len
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 7) 드롭아웃 효과 — φ/σ 비율 마스킹
+//    인덱스 % σ < φ 이면 드롭 (약 16.7%)
+// ════════════════════════════════════════════════════════════════════
+
+fn dropout_count(seq_len: i64) -> i64 {
+    let mut dropped: i64 = 0
+    let mut i: i64 = 0
+    while i < seq_len {
+        if i % sigma(N6) < phi(N6) { dropped = dropped + 1 }
+        i = i + 1
+    }
+    return dropped
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 8) 파라미터 카운트
+//    W_Q, W_K, W_V: 각 d_model · inner_dim
+//    W_O: inner_dim · d_model
+//    합계: 4 · d_model · inner_dim
+// ════════════════════════════════════════════════════════════════════
+
+fn param_count() -> i64 {
+    // 4개 투영 행렬: W_Q + W_K + W_V + W_O
+    return 4 * D_MODEL * INNER_DIM
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 9) 게이트 실행 + 벤치마크
+// ════════════════════════════════════════════════════════════════════
+
+fn main() {
+    let sig: i64 = sigma(N6)
+    let t: i64 = tau(N6)
+    let ph: i64 = phi(N6)
+    let sf: i64 = sopfr(N6)
+
+    println("═══ 멀티헤드 어텐션 (Vaswani 2017) x n=6 ═══")
+    println("n=6 산술: σ=12 / τ=4 / φ=2 / sopfr=5 / σ²=144 / σ·τ=48")
+
+    // G1: σφ = nτ 정점
+    let g1: bool = sig * ph == N6 * t
+    println("G1 σφ=nτ 정점               : " + g1)
+
+    // G2: 헤드수 = σ = 12
+    let g2: bool = NUM_HEADS == sig
+    println("G2 헤드수=σ=12              : " + g2)
+
+    // G3: 헤드차원 = τ = 4
+    let g3: bool = HEAD_DIM == t
+    println("G3 헤드차원=τ=4             : " + g3)
+
+    // G4: 모델차원 = σ² = 144
+    let g4: bool = D_MODEL == sig * sig
+    println("G4 d_model=σ²=144           : " + g4)
+
+    // G5: 내부차원 = σ·τ = 48
+    let g5: bool = INNER_DIM == sig * t
+    println("G5 inner=σ·τ=48             : " + g5)
+
+    // G6: 멀티헤드 콘텍스트 > 0 (연산 정합)
+    let mh_out: i64 = multi_head_concat()
+    let g6: bool = mh_out > 0
+    println("G6 MH출력=" + mh_out + " >0     : " + g6)
+
+    // G7: 드롭아웃 = φ/σ 비율
+    let drop: i64 = dropout_count(sig * sig)
+    let drop_pct: i64 = drop * SCALE / (sig * sig)
+    let g7: bool = abs_val(drop_pct - DROPOUT) < 10
+    println("G7 드롭아웃=φ/σ=" + drop_pct + "‰  : " + g7)
+
+    // G8: 파라미터 = 4·d_model·inner = 27648
+    let params: i64 = param_count()
+    let expected: i64 = 4 * sig * sig * sig * t
+    let g8: bool = params == expected
+    println("G8 파라미터=" + params + "       : " + g8)
+
+    // G9: FLOPs 복잡도 O(n²d) — seq=σ 기준
+    let flops: i64 = flops_per_layer(sig)
+    let mem: i64 = memory_per_layer(sig)
+    let g9: bool = flops > 0 && mem > 0
+    println("G9 FLOPs=" + flops + " mem=" + mem + " : " + g9)
+
+    // 벤치마크 지표
+    println("--- 벤치마크 ---")
+    println("파라미터수=" + params)
+    println("FLOPs(seq=" + sig + ")=" + flops)
+    println("메모리(seq=" + sig + ")=" + mem)
+    println("드롭아웃=φ/σ≈16.7%")
+    println("복잡도=O(n²·d_k·h)")
+
+    let all_pass: bool = g1 && g2 && g3 && g4 && g5 && g6 && g7 && g8 && g9
+    if all_pass {
+        println("MULTI_HEAD_ATTENTION OSSIFIED: 9/9  →  [7]empirical → [10*] 승격 후보")
+    } else {
+        println("MULTI_HEAD_ATTENTION FAIL: 게이트 위반")
+    }
+}

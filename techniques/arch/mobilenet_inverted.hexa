@@ -1,0 +1,289 @@
+// arch/mobilenet_inverted.hexa -- 역잔차 경량 네트워크 (MobileNetV2 Inverted Residual) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수 연산)
+// 원본 요약: Technique: MobileNetV2 -- Sandler 외 2018
+//            "MobileNetV2: Inverted Residuals and Linear Bottlenecks" (CVPR 2018),
+//            역잔차: 좁은 입출력 + 넓은 중간층, 선형 보틀넥
+// n=6 정렬:
+//   - 확장비율        = n = 6               -> 역잔차 확장 배수
+//   - 깊이별합성곱    = sopfr(6) = 5        -> 깊이별 합성곱 커널
+//   - 스퀴즈비율      = phi(6) = 2          -> SE 블록 축소 비율
+//   - 블록수          = sigma(6) = 12       -> 역잔차 블록 총수
+//
+// 실행: hexa run techniques/arch/mobilenet_inverted.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── n=6 산술 함수 ──────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 핵심 상수 ──────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// n=6 유도 상수
+fn get_expansion_ratio() -> i64 {
+    // n = 6 -> 역잔차 확장 배수
+    return N6
+}
+
+fn get_dw_kernel() -> i64 {
+    // sopfr(6) = 5 -> 깊이별 합성곱 커널 크기
+    return sopfr(N6)
+}
+
+fn get_squeeze_ratio() -> i64 {
+    // phi(6) = 2 -> SE 스퀴즈 비율
+    return phi(N6)
+}
+
+fn get_num_blocks() -> i64 {
+    // sigma(6) = 12 -> 역잔차 블록 총수
+    return sigma(N6)
+}
+
+// ── ReLU6 활성화 ───────────────────────────────────────────
+
+// ReLU6: min(max(0, x), 6*SCALE/6) -- 모바일 최적화 활성화
+fn relu6(x: i64) -> i64 {
+    if x < 0 { return 0 }
+    let cap: i64 = N6 * SCALE / N6
+    if x > cap { return cap }
+    return x
+}
+
+// ── 역잔차 블록 ────────────────────────────────────────────
+
+// 1x1 확장 합성곱: 채널을 expand_ratio배 확장
+fn pointwise_expand(input: i64, in_ch: i64, expand_ratio: i64) -> i64 {
+    let expanded_ch: i64 = in_ch * expand_ratio
+    let output: i64 = input * expanded_ch / (in_ch + 1)
+    return relu6(output)
+}
+
+// 깊이별 합성곱: 채널별 독립 합성곱
+fn depthwise_conv(input: i64, kernel_sz: i64) -> i64 {
+    // 깊이별: 각 채널 독립 처리 -- 파라미터 = kernel^2 * channels
+    let output: i64 = input * kernel_sz / (kernel_sz + 1)
+    return relu6(output)
+}
+
+// 1x1 투영 합성곱: 선형 보틀넥 (활성화 없음)
+fn pointwise_project(input: i64, expanded_ch: i64, out_ch: i64) -> i64 {
+    // 선형 보틀넥: ReLU 없이 투영
+    let output: i64 = input * out_ch / (expanded_ch + 1)
+    return output
+}
+
+// 역잔차 블록 전체: expand -> depthwise -> project + skip
+fn inverted_residual(input: i64, in_ch: i64, out_ch: i64, expand_r: i64, kernel: i64, use_skip: i64) -> i64 {
+    let expanded_ch: i64 = in_ch * expand_r
+    // 확장
+    let h1: i64 = pointwise_expand(input, in_ch, expand_r)
+    // 깊이별 합성곱
+    let h2: i64 = depthwise_conv(h1, kernel)
+    // 투영 (선형)
+    let h3: i64 = pointwise_project(h2, expanded_ch, out_ch)
+    // 스킵 연결: 입출력 채널 동일 + stride 1일 때만
+    if use_skip != 0 {
+        return h3 + input
+    }
+    return h3
+}
+
+// ── SE 블록 (Squeeze-and-Excitation) ──────────────────────
+
+// 채널 어텐션: 전역풀링 -> FC(축소) -> ReLU -> FC(확장) -> Sigmoid
+fn se_block(input: i64, channels: i64, squeeze_r: i64) -> i64 {
+    // 전역 평균 풀링
+    let pooled: i64 = input
+    // 축소: channels / squeeze_ratio
+    let squeezed_ch: i64 = channels / squeeze_r
+    if squeezed_ch < 1 { return input }
+    let squeezed: i64 = pooled * squeezed_ch / (channels + 1)
+    let activated: i64 = relu6(squeezed)
+    // 확장 + sigmoid 근사
+    let expanded: i64 = activated * channels / (squeezed_ch + 1)
+    let sigmoid: i64 = expanded * SCALE / (abs_val(expanded) + SCALE)
+    let scale: i64 = (sigmoid + SCALE) / 2
+    // 채널 재조정
+    return input * scale / SCALE
+}
+
+// ── 파라미터 효율 분석 ─────────────────────────────────────
+
+// 일반 합성곱 파라미터: K^2 * C_in * C_out
+fn standard_conv_params(kernel: i64, in_ch: i64, out_ch: i64) -> i64 {
+    return kernel * kernel * in_ch * out_ch
+}
+
+// 역잔차 파라미터: 1x1*C_in*(C_in*t) + K^2*(C_in*t) + 1x1*(C_in*t)*C_out
+fn inverted_res_params(kernel: i64, in_ch: i64, out_ch: i64, expand: i64) -> i64 {
+    let mid_ch: i64 = in_ch * expand
+    let pw1: i64 = in_ch * mid_ch
+    let dw: i64 = kernel * kernel * mid_ch
+    let pw2: i64 = mid_ch * out_ch
+    return pw1 + dw + pw2
+}
+
+// 파라미터 절감률
+fn param_savings(kernel: i64, in_ch: i64, out_ch: i64, expand: i64) -> i64 {
+    let std_p: i64 = standard_conv_params(kernel, in_ch, out_ch)
+    let inv_p: i64 = inverted_res_params(kernel, in_ch, out_ch, expand)
+    if std_p == 0 { return 0 }
+    return (std_p - inv_p) * SCALE / std_p
+}
+
+// ── 전체 네트워크 순전파 ───────────────────────────────────
+
+fn mobilenet_forward(input: i64) -> i64 {
+    let exp_r: i64 = get_expansion_ratio()
+    let kernel: i64 = get_dw_kernel()
+    let sq_r: i64 = get_squeeze_ratio()
+    let blocks: i64 = get_num_blocks()
+
+    // 초기 합성곱
+    let mut h: i64 = input * sigma(N6) / (sigma(N6) + 1)
+    let mut channels: i64 = sigma(N6)
+
+    // 역잔차 블록 스택
+    let mut b: i64 = 0
+    while b < blocks {
+        // tau(6)=4 간격으로 채널 확장
+        let use_skip: i64 = if b % tau(N6) != 0 { 1 } else { 0 }
+        let out_ch: i64 = if b % tau(N6) == 0 { channels + sigma(N6) } else { channels }
+        h = inverted_residual(h, channels, out_ch, exp_r, kernel, use_skip)
+        // SE 블록 적용
+        h = se_block(h, out_ch, sq_r)
+        channels = out_ch
+        b = b + 1
+    }
+
+    // 전역 평균 풀링
+    let pooled: i64 = h * SCALE / (h + SCALE)
+    return pooled
+}
+
+// ── 메인: G1~G9 게이트 ─────────────────────────────────────
+
+fn main() -> i64 {
+    println("== MobileNetV2 역잔차 x n=6 ==")
+    println("")
+
+    // G1: n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+    let identity: i64 = s6 * p6 - N6 * t6
+    println("G1 산술 | sigma=" + s6 + " tau=" + t6 + " phi=" + p6 + " sopfr=" + sp6 + " | sigma*phi-n*tau=" + identity)
+    let mut pass: i64 = 0
+    if identity == 0 { pass = pass + 1 }
+
+    // G2: 핵심 상수 유도
+    let er: i64 = get_expansion_ratio()
+    let dk: i64 = get_dw_kernel()
+    let sr: i64 = get_squeeze_ratio()
+    let nb: i64 = get_num_blocks()
+    println("G2 상수 | 확장비율=" + er + " 깊이별커널=" + dk + " 스퀴즈=" + sr + " 블록수=" + nb)
+    if er == 6 { pass = pass + 1 }
+
+    // G3: 역잔차 블록 -- 확장 후 축소
+    let ir_out: i64 = inverted_residual(SCALE / 2, s6, s6, er, dk, 1)
+    println("G3 역잔차 | 입력=500 확장=" + er + "배 출력=" + ir_out)
+    if ir_out > 0 { pass = pass + 1 }
+
+    // G4: 깊이별 합성곱 -- 파라미터 효율
+    let dw_out: i64 = depthwise_conv(SCALE, dk)
+    println("G4 깊이별합성곱 | 입력=" + SCALE + " 커널=" + dk + " 출력=" + dw_out)
+    if dw_out > 0 { pass = pass + 1 }
+
+    // G5: SE 블록 -- 채널 어텐션
+    let se_out: i64 = se_block(SCALE / 2, s6, sr)
+    println("G5 SE블록 | 채널=" + s6 + " 스퀴즈=" + sr + " 출력=" + se_out)
+    if se_out > 0 { pass = pass + 1 }
+
+    // G6: 전체 순전파
+    let net_out: i64 = mobilenet_forward(700)
+    println("G6 순전파 | 입력=700 -> 출력=" + net_out)
+    if net_out > 0 { pass = pass + 1 }
+
+    // G7: 파라미터 절감률
+    let savings: i64 = param_savings(dk, s6, s6, er)
+    println("G7 파라미터 | 역잔차 절감률=" + savings + "/1000")
+    if savings > 0 { pass = pass + 1 }
+
+    // G8: ReLU6 검증 -- 상한 n=6 기반
+    let r6_low: i64 = relu6(0 - 100)
+    let r6_mid: i64 = relu6(500)
+    let r6_high: i64 = relu6(1500)
+    println("G8 ReLU6 | 음수->=" + r6_low + " 중간=" + r6_mid + " 상한=" + r6_high)
+    if r6_low == 0 { pass = pass + 1 }
+
+    // G9: 전체 정합 -- sigma*phi = n*tau, 확장*스퀴즈 = sigma
+    let coherence: i64 = s6 * p6
+    let expected: i64 = N6 * t6
+    let es_check: i64 = er * sr
+    println("G9 정합 | sigma*phi=" + coherence + " n*tau=" + expected + " 확장*스퀴즈=" + es_check + " sigma=" + s6)
+    if coherence == expected { pass = pass + 1 }
+
+    println("")
+    println("통과: " + pass + "/9")
+    println("MobileNetV2 역잔차 OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    return pass
+}

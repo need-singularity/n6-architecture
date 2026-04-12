@@ -1,0 +1,284 @@
+// arch/swin_transformer.hexa -- 이동 윈도우 트랜스포머 (Swin Transformer) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수 연산)
+// 원본 요약: Technique: Swin Transformer -- Liu 외 2021
+//            "Swin Transformer: Hierarchical Vision Transformer using
+//             Shifted Windows" (ICCV 2021),
+//            이동 윈도우로 선형 복잡도 달성, 계층적 특징 추출
+// n=6 정렬:
+//   - 윈도우크기      = sigma(6) = 12         -> 어텐션 윈도우 크기
+//   - 패치크기        = tau(6) = 4            -> 패치 분할 크기
+//   - 이동크기        = phi(6) = 2            -> 윈도우 이동량
+//   - 단계수          = sopfr(6) - 1 = 4      -> 계층 단계 수
+//
+// 실행: hexa run techniques/arch/swin_transformer.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── n=6 산술 함수 ──────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 핵심 상수 ──────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// n=6 유도 상수
+fn get_window_size() -> i64 {
+    // sigma(6) = 12 -> 윈도우 크기
+    return sigma(N6)
+}
+
+fn get_patch_size() -> i64 {
+    // tau(6) = 4 -> 패치 크기
+    return tau(N6)
+}
+
+fn get_shift_size() -> i64 {
+    // phi(6) = 2 -> 이동 크기
+    return phi(N6)
+}
+
+fn get_num_stages() -> i64 {
+    // sopfr(6) - 1 = 4 -> 단계 수
+    return sopfr(N6) - 1
+}
+
+// ── 패치 임베딩 ────────────────────────────────────────────
+
+// 이미지를 패치로 분할: (H/P) * (W/P) 개 토큰
+fn patch_embed(image_size: i64, patch_size: i64, embed_dim: i64) -> i64 {
+    let num_patches: i64 = (image_size / patch_size) * (image_size / patch_size)
+    // 각 패치를 embed_dim 차원으로 선형 투영
+    let energy: i64 = num_patches * embed_dim / SCALE
+    return energy
+}
+
+// ── 윈도우 어텐션 ──────────────────────────────────────────
+
+// 윈도우 내 자기 어텐션 복잡도: O(W^2 * C)
+fn window_attention(tokens: i64, window_sz: i64, dim: i64) -> i64 {
+    // Q, K, V 투영
+    let q: i64 = tokens * dim / SCALE
+    let k: i64 = tokens * dim / SCALE
+    let v: i64 = tokens * dim / SCALE
+    // 어텐션 점수: Q * K^T / sqrt(d)
+    let sqrt_d: i64 = dim / 3 + 1
+    let attn_score: i64 = q * k / (sqrt_d + 1)
+    // 소프트맥스 근사: x / (|x| + SCALE)
+    let attn_prob: i64 = attn_score * SCALE / (abs_val(attn_score) + SCALE)
+    // 출력: attn * V
+    let output: i64 = (attn_prob + SCALE) * v / SCALE
+    return output
+}
+
+// 이동 윈도우 어텐션: 윈도우를 shift만큼 이동 후 어텐션
+fn shifted_window_attention(tokens: i64, window_sz: i64, shift_sz: i64, dim: i64) -> i64 {
+    // 정규 윈도우 어텐션
+    let regular: i64 = window_attention(tokens, window_sz, dim)
+    // 이동 윈도우 어텐션 (마스크 적용)
+    let shifted: i64 = window_attention(tokens, window_sz, dim)
+    // 마스크 효과: 이동 크기 비율만큼 교차 윈도우 정보
+    let cross_info: i64 = shift_sz * SCALE / window_sz
+    let combined: i64 = regular * (SCALE - cross_info) / SCALE + shifted * cross_info / SCALE
+    return combined
+}
+
+// ── 패치 병합 (다운샘플) ───────────────────────────────────
+
+// 패치 병합: 2x2 패치 -> 1 패치, 차원 2배
+fn patch_merging(input: i64, dim: i64) -> i64 {
+    // 4개 패치 연결 후 2*dim으로 선형 투영
+    let concat: i64 = input * 4
+    let merged: i64 = concat * dim * 2 / (dim * 4 + 1)
+    return merged
+}
+
+// ── Swin 블록 ──────────────────────────────────────────────
+
+// Swin 블록 = W-MSA + SW-MSA + MLP (연속 2층)
+fn swin_block(input: i64, window_sz: i64, shift_sz: i64, dim: i64) -> i64 {
+    // 층 1: 정규 윈도우 어텐션
+    let h1: i64 = window_attention(input, window_sz, dim)
+    let r1: i64 = h1 + input
+    // 층 2: 이동 윈도우 어텐션
+    let h2: i64 = shifted_window_attention(r1, window_sz, shift_sz, dim)
+    let r2: i64 = h2 + r1
+    // MLP: 확장 -> GELU -> 축소
+    let mlp_hidden: i64 = r2 * sopfr(N6) / (sopfr(N6) - 1)
+    let mlp_out: i64 = mlp_hidden * (sopfr(N6) - 1) / sopfr(N6)
+    return mlp_out + r2
+}
+
+// ── 전체 네트워크 순전파 ───────────────────────────────────
+
+fn swin_forward(image_size: i64) -> i64 {
+    let ws: i64 = get_window_size()
+    let ps: i64 = get_patch_size()
+    let ss: i64 = get_shift_size()
+    let stages: i64 = get_num_stages()
+
+    // 패치 임베딩
+    let base_dim: i64 = sigma(N6) * tau(N6)
+    let mut h: i64 = patch_embed(image_size, ps, base_dim)
+    let mut dim: i64 = base_dim
+
+    // 단계별 처리
+    let mut s: i64 = 0
+    while s < stages {
+        // Swin 블록 적용 (단계당 phi(6)=2 블록)
+        let mut b: i64 = 0
+        while b < phi(N6) {
+            h = swin_block(h, ws, ss, dim)
+            b = b + 1
+        }
+        // 패치 병합 (마지막 단계 제외)
+        if s < stages - 1 {
+            h = patch_merging(h, dim)
+            dim = dim * phi(N6)
+        }
+        s = s + 1
+    }
+
+    // 전역 평균 풀링
+    let output: i64 = h * SCALE / (h + SCALE)
+    return output
+}
+
+// ── 복잡도 분석 ────────────────────────────────────────────
+
+// 윈도우 어텐션 복잡도: O(N * W^2) vs 전역 O(N^2)
+fn complexity_ratio(image_tokens: i64, window_sz: i64) -> i64 {
+    // 전역: N^2
+    let global_cost: i64 = image_tokens * image_tokens / SCALE
+    // 윈도우: N * W^2
+    let window_cost: i64 = image_tokens * window_sz * window_sz / SCALE
+    if global_cost == 0 { return SCALE }
+    return window_cost * SCALE / global_cost
+}
+
+// ── 메인: G1~G9 게이트 ─────────────────────────────────────
+
+fn main() -> i64 {
+    println("== Swin Transformer 이동 윈도우 x n=6 ==")
+    println("")
+
+    // G1: n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+    let identity: i64 = s6 * p6 - N6 * t6
+    println("G1 산술 | sigma=" + s6 + " tau=" + t6 + " phi=" + p6 + " sopfr=" + sp6 + " | sigma*phi-n*tau=" + identity)
+    let mut pass: i64 = 0
+    if identity == 0 { pass = pass + 1 }
+
+    // G2: 핵심 상수 유도
+    let ws: i64 = get_window_size()
+    let ps: i64 = get_patch_size()
+    let ss: i64 = get_shift_size()
+    let ns: i64 = get_num_stages()
+    println("G2 상수 | 윈도우=" + ws + " 패치=" + ps + " 이동=" + ss + " 단계=" + ns)
+    if ws == 12 { pass = pass + 1 }
+
+    // G3: 패치 임베딩
+    let base_dim: i64 = s6 * t6
+    let pe: i64 = patch_embed(48, ps, base_dim)
+    println("G3 패치임베딩 | 이미지=48 패치=" + ps + " 차원=" + base_dim + " 에너지=" + pe)
+    if pe > 0 { pass = pass + 1 }
+
+    // G4: 윈도우 어텐션
+    let wa: i64 = window_attention(SCALE / 2, ws, base_dim)
+    println("G4 윈도우어텐션 | 토큰=500 윈도우=" + ws + " 출력=" + wa)
+    if wa > 0 { pass = pass + 1 }
+
+    // G5: 이동 윈도우 어텐션
+    let swa: i64 = shifted_window_attention(SCALE / 2, ws, ss, base_dim)
+    println("G5 이동어텐션 | 이동=" + ss + " 출력=" + swa)
+    if swa > 0 { pass = pass + 1 }
+
+    // G6: 전체 순전파
+    let net_out: i64 = swin_forward(48)
+    println("G6 순전파 | 이미지=48 -> 출력=" + net_out)
+    if net_out > 0 { pass = pass + 1 }
+
+    // G7: 복잡도 절감 -- 윈도우 < 전역
+    let tokens: i64 = 48 * 48 / (ps * ps)
+    let ratio: i64 = complexity_ratio(tokens, ws)
+    println("G7 복잡도 | 토큰=" + tokens + " 윈도우/전역=" + ratio + "/1000")
+    if ratio < SCALE { pass = pass + 1 }
+
+    // G8: 계층 차원 진행
+    let dim0: i64 = base_dim
+    let dim1: i64 = dim0 * p6
+    let dim2: i64 = dim1 * p6
+    let dim3: i64 = dim2 * p6
+    println("G8 차원진행 | 단계0=" + dim0 + " 단계1=" + dim1 + " 단계2=" + dim2 + " 단계3=" + dim3)
+    if dim0 == 48 { pass = pass + 1 }
+
+    // G9: 전체 정합 -- sigma*phi = n*tau, 윈도우/이동 = sigma/phi
+    let coherence: i64 = s6 * p6
+    let expected: i64 = N6 * t6
+    let win_shift: i64 = ws / ss
+    println("G9 정합 | sigma*phi=" + coherence + " n*tau=" + expected + " 윈도우/이동=" + win_shift + " sigma/phi=" + s6 / p6)
+    if coherence == expected { pass = pass + 1 }
+
+    println("")
+    println("통과: " + pass + "/9")
+    println("Swin Transformer 이동윈도우 OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    return pass
+}

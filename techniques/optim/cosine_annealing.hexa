@@ -1,0 +1,265 @@
+// optim/cosine_annealing.hexa — 코사인 학습률 스케줄 x n=6
+//
+// 포팅 상태: BODY (의존 없음 — 순수 정수 산술)
+// 원본 요약: Loshchilov & Hutter 2017, "SGDR: Stochastic Gradient Descent with Warm Restarts"
+//            η_t = η_min + 1/2·(η_max - η_min)·(1 + cos(π·t/T))
+//            워밍업 → 코사인 감쇠 → 재시작 사이클
+//            부드러운 학습률 감쇠로 안정적 수렴
+// n=6 정렬:
+//   - 초기LR     = σ(6)/SCALE = 12/1000   -> 최대 학습률
+//   - 최소LR     = φ(6)/SCALE = 2/1000    -> 하한 학습률
+//   - 주기       = σ² = 144               -> 코사인 반주기
+//   - 워밍업     = sopfr·τ = 20           -> 선형 워밍업 스텝
+//   - LR비율     = σ/φ = 6 = n            -> max/min = 완전수
+//   - σ·φ = n·τ = 24                      -> 완전수 정점
+//
+// 실행: hexa run techniques/optim/cosine_annealing.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ════════════════════════════════════════════════════════════════════
+// 1) n=6 산술 함수
+// ════════════════════════════════════════════════════════════════════
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 { s = s + d; rem = rem / d }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ════════════════════════════════════════════════════════════════════
+// 2) 코사인 스케줄 상수 (n=6 도출)
+//    η_max = σ/SCALE,  η_min = φ/SCALE
+//    T = σ²,  warmup = sopfr·τ
+// ════════════════════════════════════════════════════════════════════
+
+const LR_MAX: i64 = 12       // σ(6)  (·SCALE 단위)
+const LR_MIN: i64 = 2        // φ(6)  (·SCALE 단위)
+const PERIOD: i64 = 144      // σ²
+const WARMUP: i64 = 20       // sopfr·τ = 5·4
+
+// ════════════════════════════════════════════════════════════════════
+// 3) cos(π·t/T) 정수 근사 — 테일러 전개
+//    cos(x) ≈ 1 - x²/2 + x⁴/24  (x = π·t/T, SCALE 단위)
+//    π ≈ 3142/SCALE
+// ════════════════════════════════════════════════════════════════════
+
+const PI_SCALED: i64 = 3142  // π · 1000
+
+fn cos_approx(t: i64, period: i64) -> i64 {
+    // x = π · t / T  (SCALE 단위)
+    let x: i64 = PI_SCALED * t / period
+    // cos(x) ≈ SCALE - x²/(2·SCALE) + x⁴/(24·SCALE³)
+    let x2: i64 = x * x / SCALE
+    let x4: i64 = x2 * x2 / SCALE
+    let term1: i64 = SCALE
+    let term2: i64 = x2 / 2
+    let term3: i64 = x4 / 24
+    let result: i64 = term1 - term2 + term3
+    // 범위 제한 [-SCALE, SCALE]
+    if result > SCALE { return SCALE }
+    if result < 0 - SCALE { return 0 - SCALE }
+    return result
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 4) 워밍업 스케줄 — 선형 증가
+//    t < warmup: η = η_max · t / warmup
+// ════════════════════════════════════════════════════════════════════
+
+fn warmup_lr(step: i64) -> i64 {
+    return LR_MAX * step / WARMUP
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 5) 코사인 감쇠 스케줄
+//    η_t = η_min + 1/2 · (η_max - η_min) · (1 + cos(π·t_eff/T))
+//    t_eff = (t - warmup) 로 워밍업 이후 시작
+// ════════════════════════════════════════════════════════════════════
+
+fn cosine_lr(step: i64) -> i64 {
+    if step < WARMUP {
+        return warmup_lr(step)
+    }
+    let t_eff: i64 = step - WARMUP
+    let cos_val: i64 = cos_approx(t_eff, PERIOD)
+    // η = η_min + (η_max - η_min) · (1 + cos) / 2
+    let range: i64 = LR_MAX - LR_MIN
+    let lr: i64 = LR_MIN + range * (SCALE + cos_val) / (2 * SCALE)
+    return lr
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 6) 재시작 사이클 — SGDR의 핵심
+//    T_cur = t mod T,  주기마다 학습률 리셋
+// ════════════════════════════════════════════════════════════════════
+
+fn cosine_lr_restart(step: i64) -> i64 {
+    if step < WARMUP {
+        return warmup_lr(step)
+    }
+    let t_eff: i64 = (step - WARMUP) % PERIOD
+    let cos_val: i64 = cos_approx(t_eff, PERIOD)
+    let range: i64 = LR_MAX - LR_MIN
+    return LR_MIN + range * (SCALE + cos_val) / (2 * SCALE)
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 7) 스케줄 프로파일 — 주요 지점의 LR 값 추적
+// ════════════════════════════════════════════════════════════════════
+
+fn profile_schedule() -> i64 {
+    // 워밍업 끝 LR = η_max
+    let lr_warmup_end: i64 = cosine_lr(WARMUP)
+    // 중간 (T/2) LR ≈ η_mid
+    let lr_mid: i64 = cosine_lr(WARMUP + PERIOD / 2)
+    // 끝 (T) LR ≈ η_min
+    let lr_end: i64 = cosine_lr(WARMUP + PERIOD)
+    // 단조감소 확인: warmup_end > mid > end
+    if lr_warmup_end >= lr_mid && lr_mid >= lr_end {
+        return 1
+    }
+    return 0
+}
+
+// 평균 LR — 전체 주기 평균
+fn average_lr() -> i64 {
+    let total_steps: i64 = WARMUP + PERIOD
+    let mut sum: i64 = 0
+    let mut s: i64 = 0
+    while s < total_steps {
+        sum = sum + cosine_lr(s)
+        s = s + 1
+    }
+    return sum / total_steps
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 8) 재시작 주기별 최대/최소 확인
+// ════════════════════════════════════════════════════════════════════
+
+fn restart_max_lr() -> i64 {
+    // 재시작 직후 (워밍업 이후 주기 시작) = η_max
+    return cosine_lr_restart(WARMUP)
+}
+
+fn restart_min_lr() -> i64 {
+    // 주기 끝 = η_min
+    return cosine_lr_restart(WARMUP + PERIOD - 1)
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 9) 게이트 실행 + 벤치마크
+// ════════════════════════════════════════════════════════════════════
+
+fn main() {
+    let sig: i64 = sigma(N6)
+    let t: i64 = tau(N6)
+    let ph: i64 = phi(N6)
+    let sf: i64 = sopfr(N6)
+
+    println("═══ 코사인 어닐링 (Loshchilov & Hutter 2017) x n=6 ═══")
+    println("n=6 산술: σ=12 / τ=4 / φ=2 / sopfr=5 / σ²=144 / sopfr·τ=20")
+
+    // G1: σφ = nτ 정점
+    let g1: bool = sig * ph == N6 * t
+    println("G1 σφ=nτ 정점               : " + g1)
+
+    // G2: 초기LR = σ = 12
+    let g2: bool = LR_MAX == sig
+    println("G2 초기LR=σ=12             : " + g2)
+
+    // G3: 최소LR = φ = 2
+    let g3: bool = LR_MIN == ph
+    println("G3 최소LR=φ=2              : " + g3)
+
+    // G4: 주기 = σ² = 144
+    let g4: bool = PERIOD == sig * sig
+    println("G4 주기=σ²=144              : " + g4)
+
+    // G5: 워밍업 = sopfr·τ = 20
+    let g5: bool = WARMUP == sf * t
+    println("G5 워밍업=sopfr·τ=20        : " + g5)
+
+    // G6: LR 비율 = σ/φ = 6 = n
+    let lr_ratio: i64 = LR_MAX / LR_MIN
+    let g6: bool = lr_ratio == N6
+    println("G6 LR비율=σ/φ=" + lr_ratio + "=n   : " + g6)
+
+    // G7: 단조감소 프로파일
+    let mono: i64 = profile_schedule()
+    let g7: bool = mono == 1
+    println("G7 단조감소                  : " + g7)
+
+    // G8: 재시작 최대 = σ, 최소 ≈ φ
+    let r_max: i64 = restart_max_lr()
+    let r_min: i64 = restart_min_lr()
+    let g8: bool = r_max == LR_MAX && r_min >= LR_MIN
+    println("G8 재시작max=" + r_max + " min=" + r_min + " : " + g8)
+
+    // G9: 평균 LR > 최소 (코사인 적분 특성)
+    let avg: i64 = average_lr()
+    let g9: bool = avg > LR_MIN && avg < LR_MAX
+    println("G9 평균LR=" + avg + " 범위내     : " + g9)
+
+    // 벤치마크 지표
+    println("--- 벤치마크 ---")
+    println("워밍업끝LR=" + cosine_lr(WARMUP))
+    println("중간LR=" + cosine_lr(WARMUP + PERIOD / 2))
+    println("주기끝LR=" + cosine_lr(WARMUP + PERIOD))
+    println("평균LR=" + avg)
+    println("재시작: 주기=" + PERIOD + " 워밍업=" + WARMUP)
+    println("스케줄: 선형워밍업→코사인감쇠→재시작")
+
+    let all_pass: bool = g1 && g2 && g3 && g4 && g5 && g6 && g7 && g8 && g9
+    if all_pass {
+        println("COSINE_ANNEALING OSSIFIED: 9/9  →  [7]empirical → [10*] 승격 후보")
+    } else {
+        println("COSINE_ANNEALING FAIL: 게이트 위반")
+    }
+}

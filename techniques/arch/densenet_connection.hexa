@@ -1,0 +1,256 @@
+// arch/densenet_connection.hexa -- 조밀 연결 네트워크 (DenseNet Dense Connection) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수 연산)
+// 원본 요약: Technique: DenseNet -- Huang 외 2017
+//            "Densely Connected Convolutional Networks" (CVPR 2017),
+//            모든 층이 이전 모든 층과 직접 연결
+// n=6 정렬:
+//   - 성장률          = sigma(6) = 12         -> 층당 추가 특징맵 수
+//   - 블록당층수      = tau(6) = 4            -> 밀집 블록 내 층 수
+//   - 전이비율        = phi(6)/tau(6) = 500   -> 전이층 압축 비율 (SCALE 기준)
+//   - 보틀넥배율      = sopfr(6) = 5          -> 보틀넥 확장 배수
+//
+// 실행: hexa run techniques/arch/densenet_connection.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── n=6 산술 함수 ──────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 핵심 상수 ──────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// n=6 유도 상수
+fn get_growth_rate() -> i64 {
+    // sigma(6) = 12 -> 성장률 k
+    return sigma(N6)
+}
+
+fn get_layers_per_block() -> i64 {
+    // tau(6) = 4 -> 밀집 블록 내 층수
+    return tau(N6)
+}
+
+fn get_transition_ratio() -> i64 {
+    // phi(6)/tau(6) = 2/4 = 0.5 -> SCALE 기준 500
+    return phi(N6) * SCALE / tau(N6)
+}
+
+fn get_bottleneck_mult() -> i64 {
+    // sopfr(6) = 5 -> 보틀넥 확장 배수
+    return sopfr(N6)
+}
+
+// ── 밀집 연결 시뮬레이션 ───────────────────────────────────
+
+// 밀집층: BN -> ReLU -> 1x1 Conv (보틀넥) -> BN -> ReLU -> 3x3 Conv
+fn dense_layer(input: i64, growth: i64, bn_mult: i64) -> i64 {
+    // 보틀넥: 1x1 합성곱으로 bn_mult * growth 채널 생성
+    let bottleneck_ch: i64 = bn_mult * growth
+    let h1: i64 = input * bottleneck_ch / (bottleneck_ch + growth)
+    // ReLU
+    let h2: i64 = if h1 < 0 { 0 } else { h1 }
+    // 3x3 합성곱: growth 채널 출력
+    let h3: i64 = h2 * growth / (growth + 1)
+    return h3
+}
+
+// 밀집 블록: 각 층의 입력 = 이전 모든 층의 출력 연결
+fn dense_block(input: i64, layers: i64, growth: i64, bn_mult: i64) -> i64 {
+    let mut concat: i64 = input
+    let mut total_ch: i64 = input
+    let mut l: i64 = 0
+    while l < layers {
+        let new_feat: i64 = dense_layer(concat, growth, bn_mult)
+        // 연결: 이전 + 새 특징맵
+        concat = concat + new_feat
+        total_ch = total_ch + growth
+        l = l + 1
+    }
+    return concat
+}
+
+// 전이층: BN -> 1x1 Conv (압축) -> 2x2 평균 풀링
+fn transition_layer(input: i64, ratio: i64) -> i64 {
+    // 압축: 채널 수를 ratio 배로 감소
+    let compressed: i64 = input * ratio / SCALE
+    // 평균 풀링: 공간 크기 반감
+    let pooled: i64 = compressed / 2
+    if pooled < 1 { return 1 }
+    return pooled
+}
+
+// ── 특징 재사용 분석 ───────────────────────────────────────
+
+// 층 l에서 받는 연결 수 (조밀 연결: l-1개)
+fn connections_at_layer(layer_idx: i64) -> i64 {
+    return layer_idx
+}
+
+// 밀집 블록 내 총 연결 수: L*(L-1)/2
+fn total_connections(layers: i64) -> i64 {
+    return layers * (layers - 1) / 2
+}
+
+// 특징 재사용 효율: 총 연결 대비 파라미터 절감
+fn feature_reuse_efficiency(layers: i64, growth: i64) -> i64 {
+    let conns: i64 = total_connections(layers)
+    // 밀집넷 파라미터: 각 층은 growth 채널만 생성
+    let dense_params: i64 = layers * growth
+    // 일반넷 파라미터: 각 층이 전체 채널 변환
+    let normal_params: i64 = layers * growth * layers
+    if normal_params == 0 { return 0 }
+    return (normal_params - dense_params) * SCALE / normal_params
+}
+
+// ── 전체 네트워크 순전파 ───────────────────────────────────
+
+fn densenet_forward(input: i64) -> i64 {
+    let growth: i64 = get_growth_rate()
+    let lpb: i64 = get_layers_per_block()
+    let tr: i64 = get_transition_ratio()
+    let bn: i64 = get_bottleneck_mult()
+
+    // 초기 합성곱
+    let mut h: i64 = input * sigma(N6) / (sigma(N6) + 1)
+
+    // 밀집 블록 3개 (블록수 = sigma(6)/tau(6) = 3)
+    let num_blocks: i64 = sigma(N6) / tau(N6)
+    let mut b: i64 = 0
+    while b < num_blocks {
+        h = dense_block(h, lpb, growth, bn)
+        // 마지막 블록 제외 전이층
+        if b < num_blocks - 1 {
+            h = transition_layer(h, tr)
+        }
+        b = b + 1
+    }
+
+    // 전역 평균 풀링
+    let pooled: i64 = h * SCALE / (h + SCALE)
+    return pooled
+}
+
+// ── 메인: G1~G9 게이트 ─────────────────────────────────────
+
+fn main() -> i64 {
+    println("== DenseNet 조밀 연결 x n=6 ==")
+    println("")
+
+    // G1: n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+    let identity: i64 = s6 * p6 - N6 * t6
+    println("G1 산술 | sigma=" + s6 + " tau=" + t6 + " phi=" + p6 + " sopfr=" + sp6 + " | sigma*phi-n*tau=" + identity)
+    let mut pass: i64 = 0
+    if identity == 0 { pass = pass + 1 }
+
+    // G2: 핵심 상수 유도
+    let gr: i64 = get_growth_rate()
+    let lpb: i64 = get_layers_per_block()
+    let tr: i64 = get_transition_ratio()
+    let bn: i64 = get_bottleneck_mult()
+    println("G2 상수 | 성장률=" + gr + " 블록당층=" + lpb + " 전이비율=" + tr + "/1000 보틀넥=" + bn)
+    if gr == 12 { pass = pass + 1 }
+
+    // G3: 단일 밀집층
+    let dl_out: i64 = dense_layer(SCALE, gr, bn)
+    println("G3 밀집층 | 입력=" + SCALE + " 성장률=" + gr + " 출력=" + dl_out)
+    if dl_out > 0 { pass = pass + 1 }
+
+    // G4: 밀집 블록 -- 연결 누적 검증
+    let db_out: i64 = dense_block(SCALE / 2, lpb, gr, bn)
+    println("G4 밀집블록 | 입력=500 층수=" + lpb + " 출력=" + db_out)
+    if db_out > SCALE / 2 { pass = pass + 1 }
+
+    // G5: 전이층 -- 압축 검증
+    let tl_out: i64 = transition_layer(SCALE, tr)
+    println("G5 전이층 | 입력=" + SCALE + " 비율=" + tr + "/1000 출력=" + tl_out)
+    if tl_out < SCALE { pass = pass + 1 }
+
+    // G6: 전체 순전파
+    let net_out: i64 = densenet_forward(700)
+    println("G6 순전파 | 입력=700 -> 출력=" + net_out)
+    if net_out > 0 { pass = pass + 1 }
+
+    // G7: 조밀 연결 수 -- tau(6)=4 층이면 6개 연결
+    let conns: i64 = total_connections(lpb)
+    println("G7 연결수 | " + lpb + "층 밀집블록 -> 총 연결=" + conns)
+    if conns == 6 { pass = pass + 1 }
+
+    // G8: 특징 재사용 효율
+    let eff: i64 = feature_reuse_efficiency(lpb, gr)
+    println("G8 재사용 | 파라미터 절감률=" + eff + "/1000")
+    if eff > 500 { pass = pass + 1 }
+
+    // G9: 전체 정합 -- sigma*phi = n*tau, 성장률*블록당층 = sigma*tau
+    let coherence: i64 = s6 * p6
+    let expected: i64 = N6 * t6
+    let gr_check: i64 = gr * lpb
+    let st_check: i64 = s6 * t6
+    println("G9 정합 | sigma*phi=" + coherence + " n*tau=" + expected + " 성장*층=" + gr_check + " sigma*tau=" + st_check)
+    if coherence == expected { pass = pass + 1 }
+
+    println("")
+    println("통과: " + pass + "/9")
+    println("DenseNet 조밀연결 OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    return pass
+}

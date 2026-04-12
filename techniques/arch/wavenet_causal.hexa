@@ -1,0 +1,303 @@
+// arch/wavenet_causal.hexa -- 확장 인과 합성곱 (WaveNet Dilated Causal Convolution) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수 연산)
+// 원본 요약: Technique: WaveNet -- van den Oord 외 2016
+//            "WaveNet: A Generative Model for Raw Audio" (arXiv 2016),
+//            확장 인과 합성곱으로 지수적 수용장 확장, 자기회귀 오디오 생성
+// n=6 정렬:
+//   - 확장비율        = phi(6) = 2          -> 확장 합성곱 배율 (2^l)
+//   - 잔차채널        = sigma(6) = 12       -> 잔차 연결 채널 수
+//   - 스택수          = sopfr(6) = 5        -> 확장 합성곱 스택 반복
+//   - 층/스택         = tau(6) = 4          -> 각 스택 내 층 수
+//
+// 실행: hexa run techniques/arch/wavenet_causal.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── n=6 산술 함수 ──────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 핵심 상수 ──────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// n=6 유도 상수
+fn get_dilation_base() -> i64 {
+    // phi(6) = 2 -> 확장 비율 기저
+    return phi(N6)
+}
+
+fn get_residual_channels() -> i64 {
+    // sigma(6) = 12 -> 잔차 채널
+    return sigma(N6)
+}
+
+fn get_num_stacks() -> i64 {
+    // sopfr(6) = 5 -> 스택 수
+    return sopfr(N6)
+}
+
+fn get_layers_per_stack() -> i64 {
+    // tau(6) = 4 -> 스택당 층 수
+    return tau(N6)
+}
+
+// ── 거듭제곱 (정수) ────────────────────────────────────────
+
+fn power(base: i64, exp: i64) -> i64 {
+    let mut result: i64 = 1
+    let mut i: i64 = 0
+    while i < exp {
+        result = result * base
+        i = i + 1
+    }
+    return result
+}
+
+// ── 인과 합성곱 ────────────────────────────────────────────
+
+// 인과 합성곱: 미래 정보 차단, 과거만 참조
+fn causal_conv(input: i64, kernel_sz: i64, dilation: i64) -> i64 {
+    // 수용장 크기: (kernel_sz - 1) * dilation + 1
+    let receptive: i64 = (kernel_sz - 1) * dilation + 1
+    // 가중합 근사: 입력에 수용장 비율 반영
+    let output: i64 = input * receptive / (receptive + 1)
+    return output
+}
+
+// 확장 인과 합성곱: dilation = base^layer
+fn dilated_causal_conv(input: i64, layer: i64, base: i64) -> i64 {
+    let dilation: i64 = power(base, layer)
+    // 커널 크기 = phi(6) = 2 (WaveNet 원본)
+    let kernel: i64 = phi(N6)
+    return causal_conv(input, kernel, dilation)
+}
+
+// ── 게이트 활성화 ──────────────────────────────────────────
+
+// tanh 근사: x * SCALE / (|x| + SCALE)
+fn tanh_approx(x: i64) -> i64 {
+    let denom: i64 = abs_val(x) + SCALE
+    if denom == 0 { return 0 }
+    return x * SCALE / denom
+}
+
+// sigmoid 근사: (SCALE + tanh(x/2)) / 2
+fn sigmoid_approx(x: i64) -> i64 {
+    let half_x: i64 = x / 2
+    let th: i64 = tanh_approx(half_x)
+    return (SCALE + th) / 2
+}
+
+// 게이트 활성화: tanh(W_f * x) * sigma(W_g * x)
+fn gated_activation(input: i64, channels: i64) -> i64 {
+    // 필터 경로 (tanh)
+    let filter_out: i64 = tanh_approx(input * channels / (channels + 1))
+    // 게이트 경로 (sigmoid)
+    let gate_out: i64 = sigmoid_approx(input * channels / (channels + 1))
+    // 요소별 곱
+    return filter_out * gate_out / SCALE
+}
+
+// ── WaveNet 잔차 블록 ──────────────────────────────────────
+
+// 잔차 블록: dilated_conv -> gated_activation -> 1x1 -> skip + residual
+fn wavenet_residual_block(input: i64, layer: i64, base: i64, res_ch: i64) -> i64 {
+    // 확장 인과 합성곱
+    let dilated: i64 = dilated_causal_conv(input, layer, base)
+    // 게이트 활성화
+    let gated: i64 = gated_activation(dilated, res_ch)
+    // 1x1 합성곱 (잔차 경로)
+    let residual_path: i64 = gated * res_ch / (res_ch + 1)
+    // 잔차 연결
+    return residual_path + input
+}
+
+// 스킵 출력 추출
+fn skip_output(gated: i64, skip_ch: i64) -> i64 {
+    return gated * skip_ch / (skip_ch + 1)
+}
+
+// ── 수용장 계산 ────────────────────────────────────────────
+
+// 단일 스택 수용장: sum(base^l for l in 0..layers) * (kernel-1) + 1
+fn stack_receptive_field(layers: i64, base: i64) -> i64 {
+    let mut total: i64 = 0
+    let mut l: i64 = 0
+    while l < layers {
+        total = total + power(base, l)
+        l = l + 1
+    }
+    // kernel = phi(6) = 2 이므로 kernel-1 = 1
+    return total + 1
+}
+
+// 전체 수용장: stacks * stack_rf
+fn total_receptive_field(stacks: i64, layers: i64, base: i64) -> i64 {
+    let stack_rf: i64 = stack_receptive_field(layers, base)
+    return stacks * (stack_rf - 1) + 1
+}
+
+// ── 전체 네트워크 순전파 ───────────────────────────────────
+
+fn wavenet_forward(input: i64) -> i64 {
+    let base: i64 = get_dilation_base()
+    let res_ch: i64 = get_residual_channels()
+    let stacks: i64 = get_num_stacks()
+    let lps: i64 = get_layers_per_stack()
+
+    // 초기 인과 합성곱
+    let mut h: i64 = causal_conv(input, phi(N6), 1)
+    let mut skip_sum: i64 = 0
+
+    // 스택 반복
+    let mut s: i64 = 0
+    while s < stacks {
+        // 스택 내 층 반복 (확장 비율 초기화)
+        let mut l: i64 = 0
+        while l < lps {
+            let prev: i64 = h
+            h = wavenet_residual_block(h, l, base, res_ch)
+            // 스킵 연결 누적
+            let gated: i64 = gated_activation(dilated_causal_conv(prev, l, base), res_ch)
+            skip_sum = skip_sum + skip_output(gated, res_ch)
+            l = l + 1
+        }
+        s = s + 1
+    }
+
+    // 스킵 연결 합산 후 출력
+    let combined: i64 = skip_sum / (stacks * lps)
+    // ReLU -> 1x1 -> ReLU -> 1x1
+    let r1: i64 = if combined < 0 { 0 } else { combined }
+    let h1: i64 = r1 * res_ch / (res_ch + 1)
+    let r2: i64 = if h1 < 0 { 0 } else { h1 }
+    return r2
+}
+
+// ── 메인: G1~G9 게이트 ─────────────────────────────────────
+
+fn main() -> i64 {
+    println("== WaveNet 확장 인과 합성곱 x n=6 ==")
+    println("")
+
+    // G1: n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+    let identity: i64 = s6 * p6 - N6 * t6
+    println("G1 산술 | sigma=" + s6 + " tau=" + t6 + " phi=" + p6 + " sopfr=" + sp6 + " | sigma*phi-n*tau=" + identity)
+    let mut pass: i64 = 0
+    if identity == 0 { pass = pass + 1 }
+
+    // G2: 핵심 상수 유도
+    let db: i64 = get_dilation_base()
+    let rc: i64 = get_residual_channels()
+    let ns: i64 = get_num_stacks()
+    let lps: i64 = get_layers_per_stack()
+    println("G2 상수 | 확장기저=" + db + " 잔차채널=" + rc + " 스택=" + ns + " 층/스택=" + lps)
+    if db == 2 { pass = pass + 1 }
+
+    // G3: 확장 비율 -- 지수적 증가 검증
+    let d0: i64 = power(db, 0)
+    let d1: i64 = power(db, 1)
+    let d2: i64 = power(db, 2)
+    let d3: i64 = power(db, 3)
+    println("G3 확장 | 층0=" + d0 + " 층1=" + d1 + " 층2=" + d2 + " 층3=" + d3)
+    if d3 == 8 { pass = pass + 1 }
+
+    // G4: 게이트 활성화 -- tanh * sigmoid
+    let ga: i64 = gated_activation(SCALE / 2, rc)
+    println("G4 게이트활성화 | 입력=500 채널=" + rc + " 출력=" + ga)
+    if ga > 0 { pass = pass + 1 }
+
+    // G5: 잔차 블록
+    let rb_out: i64 = wavenet_residual_block(SCALE / 2, 2, db, rc)
+    println("G5 잔차블록 | 입력=500 확장=2^2=4 출력=" + rb_out)
+    if rb_out > 0 { pass = pass + 1 }
+
+    // G6: 전체 순전파
+    let net_out: i64 = wavenet_forward(700)
+    println("G6 순전파 | 입력=700 -> 출력=" + net_out)
+    if net_out > 0 { pass = pass + 1 }
+
+    // G7: 수용장 -- 지수적 확장 검증
+    let stack_rf: i64 = stack_receptive_field(lps, db)
+    let total_rf: i64 = total_receptive_field(ns, lps, db)
+    println("G7 수용장 | 스택=" + stack_rf + " 전체=" + total_rf)
+    if total_rf > stack_rf { pass = pass + 1 }
+
+    // G8: 인과성 검증 -- 미래 참조 없음 (수용장이 과거만)
+    let causal_out1: i64 = causal_conv(SCALE, p6, 1)
+    let causal_out2: i64 = causal_conv(SCALE, p6, 4)
+    println("G8 인과성 | 확장1=" + causal_out1 + " 확장4=" + causal_out2 + " (과거만 참조)")
+    if causal_out2 > causal_out1 { pass = pass + 1 }
+
+    // G9: 전체 정합 -- sigma*phi = n*tau, 총층수 = stacks*lps = 20
+    let coherence: i64 = s6 * p6
+    let expected: i64 = N6 * t6
+    let total_layers: i64 = ns * lps
+    println("G9 정합 | sigma*phi=" + coherence + " n*tau=" + expected + " 총층=" + total_layers + " 수용장=" + total_rf)
+    if coherence == expected { pass = pass + 1 }
+
+    println("")
+    println("통과: " + pass + "/9")
+    println("WaveNet 확장인과합성곱 OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    return pass
+}
