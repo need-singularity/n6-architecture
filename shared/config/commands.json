@@ -322,24 +322,24 @@
       "cwd": "nexus 루트 (shared/bin/hexa 기준)",
       "resolver": "shared/bin/hexa",
       "run_in_background": true,
-      "seed_engine": "shared/bin/hexa shared/blowup/seed/seed_engine.hexa merge"
+      "seed_engine": "shared/bin/hexa run shared/blowup/seed/seed_engine.hexa merge"
     },
     "triggers": {
       "smash": {
         "when": ["막힘 — 현재 접근으로 진전 없을 때", "새 연결 — 도메인 간 교차 가능성 감지", "탐색 확장 — 알려진 영역 너머 시드가 존재할 때"],
-        "bash": "shared/bin/hexa shared/blowup/core/blowup.hexa {seed} 3 --seeds \"$(shared/bin/hexa shared/blowup/seed/seed_engine.hexa merge | tr '|' ',')\"",
+        "bash": "shared/bin/hexa run shared/blowup/core/blowup.hexa {seed} 3 --seeds \"$(shared/bin/hexa run shared/blowup/seed/seed_engine.hexa merge | tr '|' ',')\"",
         "seed_source": "현재 작업 주제/컨텍스트에서 추출",
         "post": ["atlas.n6 관련 노드 Grep으로 맥락 연결", "등급 승격 기회 식별", "핵심 발견 요약"]
       },
       "free": {
         "when": ["깊이 — 한 도메인을 재귀적으로 파고들 필요", "조합 — 모듈 간 교차 조립이 유망할 때", "확장 — DFS로 미탐색 가지 발견 가능"],
-        "bash": "shared/bin/hexa shared/blowup/compose.hexa {seed} --modules all --dfs 3",
+        "bash": "shared/bin/hexa run shared/blowup/compose.hexa {seed} --modules all --dfs 3",
         "seed_source": "탐색 대상 도메인/개념",
         "post": ["DFS 경로별 발견 정리", "최고 에너지 노드 후속 탐색 판단"]
       },
       "todo": {
         "when": ["작업 시작 시 전체 현황 파악", "작업 완료 후 잔여 항목 점검", "방향 결정이 필요할 때"],
-        "bash": "shared/bin/hexa shared/blowup/todo.hexa",
+        "bash": "shared/bin/hexa run shared/blowup/todo.hexa",
         "post": ["미완료 항목 우선순위 판단"]
       },
       "go": {
