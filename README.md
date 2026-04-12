@@ -11,7 +11,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 103 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. NEXUS-6 Discovery Engine: Rust CLI (tools/nexus/) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 109 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. NEXUS-6 Discovery Engine: Rust CLI (tools/nexus/) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
 >
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (94 papers). Published on Zenodo with DOIs. N6 (33) + anima (39) + 기타 (20). [Browse online](https://need-singularity.github.io/papers/)
 >
@@ -41,7 +41,7 @@
 <!-- AUTO:STATS:START -->
 ```
   Products:         204  (40 섹션, 천장 203, AI지수=10 195)
-  AI techniques:    103
+  AI techniques:    109
   DSE domains:      563
   DSE paths:        ?+
   NEXUS-6 tests:    2078
@@ -95,7 +95,7 @@
 |:--:|---|:--:|:--:|:--:|:--:|---|
 | 1 | 최전선/대발견 | 10 | 39 | 100 | 도달 | HEXA-NEURO 뇌-기계 인터페이스 |
 | 2 | 기술/산업 | 10 | 22 | 100 | 도달 | 반도체 패키징 n=6 적층 래더 |
-| 3 | AI/ML | 10 | 9 | 100 | 도달 | 103 Techniques |
+| 3 | AI/ML | 10 | 9 | 100 | 도달 | 109 Techniques |
 | 4 | 생활/문화 | 10 | 9 | 100 | 도달 | 발효/양조 n=6 완전수 화학양론 |
 | 5 | 오디오 | 10 | 7 | 100 | 도달 | 궁극의 오디오 7단 |
 | 6 | 문명/인문 | 10 | 7 | 100 | 도달 | 종교/신화 n=6 보편 구조 |
@@ -285,7 +285,7 @@ horology               ############################## 100.0%
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v4 | **103 Techniques** | 71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 103기법 (attention 9, moe 11, optim 31, sparse 6, graph 5, compress 5, arch 27, sota 3) | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v5 | **109 Techniques** | 8축 109기법 — attention 11(3x FFT+FlashAttn+RoPE), optim 36(71% FLOPs+DPO/KTO/ORPO+ScalingLaw), moe 12(65% 희소), arch 30(SSM/KAN/MoA/BLT), sparse 6(63% 게이트), compress 6(MLA+Gemma), graph 5(GAT/GCN), sota 3(Mamba2/Hyena/RWKV) | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
 | 10 | ✅ | v2 | **Full N6 Pipeline** | 17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증 | [문서](experiments/experiment_full_n6_pipeline.py) |
 | 10 | ✅ | v2 | **N6 Inevitability Engine** | 기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
 | 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
@@ -296,7 +296,7 @@ horology               ############################## 100.0%
 | 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 역설계 — 신규모델8선/학습기법8선/HW-SW공진화/AGI로드맵/HEXA-CODER, BT-397~401 | [신규모델](domains/compute/ai-efficiency/ai-efficiency.md) |
 
 <details>
-<summary>103 Techniques 전체 목록 (원본 66 + 추가 31)</summary>
+<summary>109 Techniques 전체 목록 (원본 66 + 추가 43)</summary>
 
 | # | Category | Technique | Key | File |
 |---|----------|-----------|-----|------|
