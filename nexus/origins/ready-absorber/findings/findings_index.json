@@ -1,0 +1,91 @@
+{
+  "_description": "findings/ sidecar index — mtime/size/entry_count per file. Generated for fast-path skip.",
+  "_updated": "2026-04-12",
+  "files": {
+    "anima.json": {
+      "mtime": 1775544137,
+      "size": 2432857,
+      "entry_count": 2269
+    },
+    "brainwire.json": {
+      "mtime": 1775544138,
+      "size": 8086,
+      "entry_count": 8
+    },
+    "conscious-lm.json": {
+      "mtime": 1775544137,
+      "size": 13468,
+      "entry_count": 16
+    },
+    "contact.json": {
+      "mtime": 1775672922,
+      "size": 105289,
+      "entry_count": 126
+    },
+    "golden-moe.json": {
+      "mtime": 1775544138,
+      "size": 12659,
+      "entry_count": 15
+    },
+    "hexa-lang.json": {
+      "mtime": 1775544137,
+      "size": 140881,
+      "entry_count": 159
+    },
+    "homebrew-tap.json": {
+      "mtime": 1775544137,
+      "size": 1763,
+      "entry_count": 2
+    },
+    "invest.json": {
+      "mtime": 1775544137,
+      "size": 776544,
+      "entry_count": 909
+    },
+    "n6-architecture.json": {
+      "mtime": 1775544138,
+      "size": 16375643,
+      "entry_count": 15729
+    },
+    "nexus.json": {
+      "mtime": 1775544138,
+      "size": 1628476,
+      "entry_count": 326
+    },
+    "papers.json": {
+      "mtime": 1775544137,
+      "size": 25142,
+      "entry_count": 15
+    },
+    "ph-training.json": {
+      "mtime": 1775544138,
+      "size": 15045,
+      "entry_count": 21
+    },
+    "redo.json": {
+      "mtime": 1775544139,
+      "size": 8240830,
+      "entry_count": 9153
+    },
+    "remotion.json": {
+      "mtime": 1775544137,
+      "size": 18636,
+      "entry_count": 23
+    },
+    "secret.json": {
+      "mtime": 1775544138,
+      "size": 1066,
+      "entry_count": 1
+    },
+    "sedi.json": {
+      "mtime": 1775544138,
+      "size": 5340537,
+      "entry_count": 5588
+    },
+    "tecs-l.json": {
+      "mtime": 1775672922,
+      "size": 7000983,
+      "entry_count": 7013
+    }
+  }
+}

@@ -197,42 +197,39 @@ fn save_findings_cache(cache) { save_json(CACHE_FILE, cache) }
 
 // mtime+size 비교로 파일 변경 여부 판단.
 // 불변이면 true (재파싱 불필요), 변경됐으면 false.
-// [주의] file_stat()이 hexa 내장이 아니면 쉘 호출로 대체 필요:
-//   let stat_out = shell("stat -f '%m|%z' " + path)
-//   let parts = split(stat_out, "|")
-//   { "mtime": to_int(parts[0]), "size": to_int(parts[1]) }
+// exec("stat ...") 로 mtime/size 조회 — O(1) fast-path.
 fn is_findings_unchanged(filename, cache) {
     let entry = cache[filename]
     if entry == nil { return false }
 
     let path = FINDINGS_DIR + "/" + filename
-    // --- hexa에 file_stat 내장이 있으면 ---
-    // let stat = file_stat(path)
-    // return stat["mtime"] == entry["mtime"] and stat["size"] == entry["size"]
-    // --- 없으면 쉘 폴백 ---
-    // let stat_out = shell("stat -f '%m|%z' " + path)
-    // let parts = split(trim(stat_out), "|")
-    // return to_int(parts[0]) == entry["mtime"] and to_int(parts[1]) == entry["size"]
-    false  // 기본값: 항상 재파싱 (stat 구현 후 위 주석 해제)
+    if !file_exists(path) { return false }
+    let stat_out = exec("stat -f \"%m|%z\" " + path)
+    if stat_out == "" { return false }
+    let parts = split(trim(stat_out), "|")
+    if len(parts) < 2 { return false }
+    return to_int(parts[0]) == entry["mtime"] and to_int(parts[1]) == entry["size"]
 }
 
-// 캐시 항목 갱신 (파싱 직후 호출)
+// 캐시 항목 갱신 (파싱 직후 호출). exec("stat ...") 로 실제 mtime/size 기록.
 fn update_findings_cache_entry(cache, filename, entry_count) {
     let path = FINDINGS_DIR + "/" + filename
-    // --- stat 구현 후 아래 주석 해제 ---
-    // let stat_out = shell("stat -f '%m|%z' " + path)
-    // let parts = split(trim(stat_out), "|")
-    // cache[filename] = {
-    //     "mtime": to_int(parts[0]),
-    //     "size": to_int(parts[1]),
-    //     "entry_count": entry_count,
-    //     "last_checked": now_iso()
-    // }
-    cache[filename] = {
-        "mtime": 0,
-        "size": 0,
-        "entry_count": entry_count,
-        "last_checked": now_iso()
+    let stat_out = exec("stat -f \"%m|%z\" " + path)
+    let parts = split(trim(stat_out), "|")
+    if len(parts) >= 2 {
+        cache[filename] = {
+            "mtime": to_int(parts[0]),
+            "size": to_int(parts[1]),
+            "entry_count": entry_count,
+            "last_checked": now_iso()
+        }
+    } else {
+        cache[filename] = {
+            "mtime": 0,
+            "size": 0,
+            "entry_count": entry_count,
+            "last_checked": now_iso()
+        }
     }
     cache
 }
@@ -245,18 +242,14 @@ fn process_project(project_name, dry_run) {
         return {"processed": 0}
     }
 
-    // --- fast-path: mtime+size 캐시 확인 ---
-    // 파일이 변경되지 않았으면 이전 verified 결과를 재사용할 수 있음.
-    // 현재는 항상 재파싱 (is_findings_unchanged가 false 반환).
-    // stat 구현 완료 후 아래 블록 활성화:
-    //
-    // let cache = load_findings_cache()
-    // let fname = lower(project_name) + ".json"
-    // if is_findings_unchanged(fname, cache) {
-    //     let cached = cache[fname]
-    //     println("  [캐시] " + project_name + ": " + to_string(cached["entry_count"]) + "건 불변 — 재파싱 건너뜀")
-    //     return {"processed": cached["entry_count"], "cached": true}
-    // }
+    // fast-path: mtime+size 캐시 확인 — 파일 불변이면 O(1) 스킵
+    let cache_fp = load_findings_cache()
+    let fname = lower(project_name) + ".json"
+    if is_findings_unchanged(fname, cache_fp) {
+        let cached = cache_fp[fname]
+        println("  [캐시] " + project_name + ": " + to_string(cached["entry_count"]) + "건 불변 — 재파싱 건너뜀")
+        return {"processed": cached["entry_count"], "cached": true}
+    }
 
     let data = load_json(findings_file)
     let findings = data["findings"] or []

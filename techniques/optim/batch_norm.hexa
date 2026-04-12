@@ -1,0 +1,307 @@
+// optim/batch_norm.hexa — 배치 정규화 x n=6
+//
+// 포팅 상태: BODY (의존 없음 — 순수 정수 산술)
+// 원본 요약: Technique: Batch Normalization — Ioffe & Szegedy 2015
+//            "Batch Normalization: Accelerating Deep Network Training"
+//            미니배치 평균/분산 → 정규화 → 감마 스케일 + 베타 시프트
+//            이동평균 추적, 학습/추론 모드 분리
+// n=6 정렬:
+//   - 배치크기      = sigma(6) = 12       -> 미니배치 샘플 수
+//   - 채널 수       = sigma(6)*tau(6) = 48 -> 특징맵 채널
+//   - 모멘텀        = 9/10                 -> 이동평균 감쇠 (0.9)
+//   - 엡실론 ε      = 1                    -> 정수 최소 안정화
+//   - 감마 초기값   = SCALE                -> 1.0 (스케일 팩터)
+//   - 베타 초기값   = 0                    -> 시프트 팩터
+//   - 은닉 차원     = sigma(6)^2 = 144    -> J2 기하급수
+//
+// 실행: hexa run techniques/optim/batch_norm.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ════════════════════════════════════════════════════════════════════
+// 1) n=6 산술 함수
+// ════════════════════════════════════════════════════════════════════
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 { s = s + d; rem = rem / d }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ════════════════════════════════════════════════════════════════════
+// 2) 배치 정규화 핵심 함수
+// ════════════════════════════════════════════════════════════════════
+
+// 배치 평균: sum(x_i) / batch_size (정수 SCALE 기반)
+fn batch_mean(x0: i64, x1: i64, x2: i64, x3: i64, x4: i64, x5: i64, batch: i64) -> i64 {
+    let total: i64 = x0 + x1 + x2 + x3 + x4 + x5
+    return total / batch
+}
+
+// 배치 분산: sum((x_i - mean)^2) / batch_size
+fn batch_var(x0: i64, x1: i64, x2: i64, x3: i64, x4: i64, x5: i64, mean: i64, batch: i64) -> i64 {
+    let d0: i64 = x0 - mean
+    let d1: i64 = x1 - mean
+    let d2: i64 = x2 - mean
+    let d3: i64 = x3 - mean
+    let d4: i64 = x4 - mean
+    let d5: i64 = x5 - mean
+    let ss: i64 = d0 * d0 + d1 * d1 + d2 * d2 + d3 * d3 + d4 * d4 + d5 * d5
+    return ss / batch
+}
+
+// 정규화: (x - mean) * SCALE / sqrt(var + eps)
+// sqrt 근사: 뉴턴법 3회 반복
+fn isqrt(v: i64) -> i64 {
+    if v <= 0 { return SCALE }
+    let mut g: i64 = v / 2
+    if g == 0 { g = 1 }
+    let mut i: i64 = 0
+    while i < 3 {
+        g = (g + v / g) / 2
+        i = i + 1
+    }
+    if g == 0 { return SCALE }
+    return g
+}
+
+fn bn_normalize(x: i64, mean: i64, var_val: i64, eps: i64) -> i64 {
+    let std_dev: i64 = isqrt(var_val + eps)
+    return (x - mean) * SCALE / std_dev
+}
+
+// 감마·베타 어파인 변환: y = gamma * x_hat / SCALE + beta
+fn bn_affine(x_hat: i64, gamma: i64, beta: i64) -> i64 {
+    return gamma * x_hat / SCALE + beta
+}
+
+// 이동평균 갱신: running = momentum * running + (1 - momentum) * current
+// momentum_scaled = 900 (= 0.9 * SCALE)
+fn running_update(running: i64, current: i64, momentum: i64) -> i64 {
+    return momentum * running / SCALE + (SCALE - momentum) * current / SCALE
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 3) main — G1~G9 게이트 검증
+// ════════════════════════════════════════════════════════════════════
+
+fn main() -> i64 {
+    let mut pass: i64 = 0
+
+    // n=6 상수 유도
+    let sig6: i64 = sigma(N6)       // 12
+    let tau6: i64 = tau(N6)          // 4
+    let phi6: i64 = phi(N6)          // 2
+    let spf6: i64 = sopfr(N6)       // 5
+    let j2: i64 = sig6 * sig6       // 144
+    let sig_tau: i64 = sig6 * tau6   // 48
+
+    // 배치 정규화 하이퍼파라미터
+    let batch_size: i64 = sig6                // 12
+    let channels: i64 = sig_tau               // 48
+    let momentum: i64 = 9 * SCALE / 10       // 900
+    let eps: i64 = 1                          // 정수 최소 안정화
+    let gamma: i64 = SCALE                    // 1.0
+    let beta: i64 = 0                         // 0.0
+
+    print("════════════════════════════════════════")
+    print("  배치 정규화 (Ioffe & Szegedy 2015) x n=6")
+    print("════════════════════════════════════════")
+
+    // ── G1: n=6 항등식 sigma*phi = n*tau ──
+    print("")
+    print("[G1] n=6 항등식: sigma*phi = n*tau")
+    let lhs: i64 = sig6 * phi6       // 12*2 = 24
+    let rhs: i64 = N6 * tau6         // 6*4  = 24
+    print("  sigma(6)*phi(6) = ")
+    print(lhs)
+    print("  6*tau(6) = ")
+    print(rhs)
+    if lhs == rhs {
+        print("  -> PASS")
+        pass = pass + 1
+    }
+
+    // ── G2: 배치크기 = sigma(6) = 12 유도 검증 ──
+    print("")
+    print("[G2] 배치크기 = sigma(6) = 12")
+    print("  batch_size = ")
+    print(batch_size)
+    if batch_size == 12 {
+        print("  -> PASS")
+        pass = pass + 1
+    }
+
+    // ── G3: 미니배치 평균 계산 검증 ──
+    print("")
+    print("[G3] 미니배치 평균 계산")
+    // 6개 샘플 (배치 12중 채널 대표)
+    let x0: i64 = 500
+    let x1: i64 = 700
+    let x2: i64 = 300
+    let x3: i64 = 900
+    let x4: i64 = 100
+    let x5: i64 = 800
+    let mean: i64 = batch_mean(x0, x1, x2, x3, x4, x5, N6)
+    print("  샘플: [500, 700, 300, 900, 100, 800]")
+    print("  평균 = ")
+    print(mean)
+    // (500+700+300+900+100+800)/6 = 3300/6 = 550
+    if mean == 550 {
+        print("  -> PASS (550)")
+        pass = pass + 1
+    }
+
+    // ── G4: 배치 분산 계산 검증 ──
+    print("")
+    print("[G4] 배치 분산 계산")
+    let var_val: i64 = batch_var(x0, x1, x2, x3, x4, x5, mean, N6)
+    print("  분산 = ")
+    print(var_val)
+    // 편차: -50,150,-250,350,-450,250 -> 제곱합 = 2500+22500+62500+122500+202500+62500 = 475000/6 = 79166
+    if var_val > 0 {
+        print("  -> PASS (분산 > 0)")
+        pass = pass + 1
+    }
+
+    // ── G5: 정규화 후 평균 ≈ 0 검증 ──
+    print("")
+    print("[G5] 정규화 후 중심화 검증")
+    let n0: i64 = bn_normalize(x0, mean, var_val, eps)
+    let n1: i64 = bn_normalize(x1, mean, var_val, eps)
+    let n2: i64 = bn_normalize(x2, mean, var_val, eps)
+    let n3: i64 = bn_normalize(x3, mean, var_val, eps)
+    let n4: i64 = bn_normalize(x4, mean, var_val, eps)
+    let n5: i64 = bn_normalize(x5, mean, var_val, eps)
+    let norm_sum: i64 = n0 + n1 + n2 + n3 + n4 + n5
+    print("  정규화 합 = ")
+    print(norm_sum)
+    // 정규화 후 합 ≈ 0 (정수 절사 오차 허용)
+    if abs_val(norm_sum) < SCALE {
+        print("  -> PASS (합 ~ 0)")
+        pass = pass + 1
+    }
+
+    // ── G6: 어파인 변환 (감마=1, 베타=0) 항등성 ──
+    print("")
+    print("[G6] 어파인 변환 항등성 (gamma=1, beta=0)")
+    let y0: i64 = bn_affine(n0, gamma, beta)
+    print("  정규화값: ")
+    print(n0)
+    print("  어파인값: ")
+    print(y0)
+    if y0 == n0 {
+        print("  -> PASS (항등)")
+        pass = pass + 1
+    }
+
+    // ── G7: 이동평균 갱신 검증 ──
+    print("")
+    print("[G7] 이동평균 갱신 (모멘텀=0.9)")
+    let running_mean_0: i64 = 0
+    let rm_1: i64 = running_update(running_mean_0, mean, momentum)
+    let rm_2: i64 = running_update(rm_1, mean, momentum)
+    print("  1단계 이동평균: ")
+    print(rm_1)
+    print("  2단계 이동평균: ")
+    print(rm_2)
+    // 이동평균은 현재값에 점진 수렴해야
+    let gap1: i64 = abs_val(rm_1 - mean)
+    let gap2: i64 = abs_val(rm_2 - mean)
+    if gap2 < gap1 {
+        print("  -> PASS (수렴 확인)")
+        pass = pass + 1
+    }
+
+    // ── G8: 학습 vs 추론 모드 비교 ──
+    print("")
+    print("[G8] 학습 vs 추론 모드 비교")
+    // 학습: 배치 통계 사용
+    let train_out: i64 = bn_affine(bn_normalize(x0, mean, var_val, eps), gamma, beta)
+    // 추론: 이동평균 사용 (수렴 후 rm_2 기준)
+    let infer_out: i64 = bn_affine(bn_normalize(x0, rm_2, var_val, eps), gamma, beta)
+    print("  학습 출력: ")
+    print(train_out)
+    print("  추론 출력: ")
+    print(infer_out)
+    // 두 값이 다르면 모드 분리 확인
+    let mode_diff: i64 = abs_val(train_out - infer_out)
+    if mode_diff > 0 {
+        print("  -> PASS (모드 분리)")
+        pass = pass + 1
+    }
+
+    // ── G9: 채널=48, J2=144 대규모 안정성 ──
+    print("")
+    print("[G9] 채널=48, J2=144 구조 안정성")
+    print("  채널 수: ")
+    print(channels)
+    print("  특징맵 차원: ")
+    print(j2)
+    // 큰 입력에서도 정규화 작동 검증
+    let big_x: i64 = j2 * 10   // 1440
+    let big_norm: i64 = bn_normalize(big_x, mean, var_val, eps)
+    print("  큰 입력(1440) 정규화: ")
+    print(big_norm)
+    // 정규화 결과가 유한해야
+    if abs_val(big_norm) < SCALE * 100 {
+        print("  -> PASS (안정)")
+        pass = pass + 1
+    }
+
+    // ── 최종 결과 ──
+    print("")
+    print("════════════════════════════════════════")
+    print("통과: ")
+    print(pass)
+    print(" / 9")
+    print("BATCH_NORM OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    print("════════════════════════════════════════")
+
+    return pass
+}

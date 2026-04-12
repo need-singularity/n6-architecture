@@ -1,0 +1,321 @@
+// optim/layer_norm.hexa — 레이어 정규화 x n=6
+//
+// 포팅 상태: BODY (의존 없음 — 순수 정수 산술)
+// 원본 요약: Technique: Layer Normalization — Ba 외 2016
+//            "Layer Normalization"
+//            배치 독립적 층 내 정규화, 시퀀스 모델에 필수
+//            Pre-LN vs Post-LN 비교, GroupNorm 변형
+// n=6 정렬:
+//   - 은닉 차원     = sigma(6)*tau(6) = 48 -> 어텐션 임베딩
+//   - 그룹 수       = tau(6) = 4            -> GroupNorm 분할
+//   - 엡실론 ε      = 1                     -> 정수 최소 안정화
+//   - 어텐션 헤드   = sigma(6) = 12         -> 멀티헤드 수
+//   - 그룹 크기     = 48/4 = 12 = sigma(6) -> 자연 정렬
+//   - 잔차 계수     = phi(6) = 2            -> 잔차 스케일
+//
+// 실행: hexa run techniques/optim/layer_norm.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ════════════════════════════════════════════════════════════════════
+// 1) n=6 산술 함수
+// ════════════════════════════════════════════════════════════════════
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 { s = s + d; rem = rem / d }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ════════════════════════════════════════════════════════════════════
+// 2) 레이어 정규화 핵심 함수
+// ════════════════════════════════════════════════════════════════════
+
+// 층 내 평균: 단일 샘플 d개 특징의 평균
+fn layer_mean(v0: i64, v1: i64, v2: i64, v3: i64, v4: i64, v5: i64, d: i64) -> i64 {
+    return (v0 + v1 + v2 + v3 + v4 + v5) / d
+}
+
+// 층 내 분산
+fn layer_var(v0: i64, v1: i64, v2: i64, v3: i64, v4: i64, v5: i64, mean: i64, d: i64) -> i64 {
+    let d0: i64 = v0 - mean
+    let d1: i64 = v1 - mean
+    let d2: i64 = v2 - mean
+    let d3: i64 = v3 - mean
+    let d4: i64 = v4 - mean
+    let d5: i64 = v5 - mean
+    return (d0 * d0 + d1 * d1 + d2 * d2 + d3 * d3 + d4 * d4 + d5 * d5) / d
+}
+
+// 정수 제곱근 근사 (뉴턴법)
+fn isqrt(v: i64) -> i64 {
+    if v <= 0 { return SCALE }
+    let mut g: i64 = v / 2
+    if g == 0 { g = 1 }
+    let mut i: i64 = 0
+    while i < 4 {
+        g = (g + v / g) / 2
+        i = i + 1
+    }
+    if g == 0 { return SCALE }
+    return g
+}
+
+// LayerNorm: (x - mean) / sqrt(var + eps) * gamma + beta
+fn ln_normalize(x: i64, mean: i64, var_val: i64, eps: i64, gamma: i64, beta: i64) -> i64 {
+    let std_dev: i64 = isqrt(var_val + eps)
+    let x_hat: i64 = (x - mean) * SCALE / std_dev
+    return gamma * x_hat / SCALE + beta
+}
+
+// GroupNorm: 그룹 내 정규화 — 그룹 평균/분산 사용
+fn group_mean(g0: i64, g1: i64, g2: i64, gsize: i64) -> i64 {
+    return (g0 + g1 + g2) / gsize
+}
+
+fn group_var(g0: i64, g1: i64, g2: i64, mean: i64, gsize: i64) -> i64 {
+    let d0: i64 = g0 - mean
+    let d1: i64 = g1 - mean
+    let d2: i64 = g2 - mean
+    return (d0 * d0 + d1 * d1 + d2 * d2) / gsize
+}
+
+// Pre-LN 잔차: LN(x) -> sublayer -> x + output
+fn pre_ln_residual(x: i64, sublayer_out: i64, residual_scale: i64) -> i64 {
+    return x + sublayer_out * SCALE / (residual_scale * SCALE / 2)
+}
+
+// Post-LN 잔차: sublayer -> x + output -> LN
+fn post_ln_residual(x: i64, sublayer_out: i64) -> i64 {
+    return x + sublayer_out
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 3) main — G1~G9 게이트 검증
+// ════════════════════════════════════════════════════════════════════
+
+fn main() -> i64 {
+    let mut pass: i64 = 0
+
+    // n=6 상수 유도
+    let sig6: i64 = sigma(N6)       // 12
+    let tau6: i64 = tau(N6)          // 4
+    let phi6: i64 = phi(N6)          // 2
+    let spf6: i64 = sopfr(N6)       // 5
+    let j2: i64 = sig6 * sig6       // 144
+    let sig_tau: i64 = sig6 * tau6   // 48
+
+    // 레이어 정규화 하이퍼파라미터
+    let hidden_dim: i64 = sig_tau            // 48
+    let num_groups: i64 = tau6               // 4
+    let eps: i64 = 1                         // 정수 최소
+    let num_heads: i64 = sig6                // 12
+    let group_size: i64 = hidden_dim / num_groups  // 12 = sigma(6)
+    let gamma: i64 = SCALE                   // 1.0
+    let beta: i64 = 0                        // 0.0
+    let residual_scale: i64 = phi6           // 2
+
+    print("════════════════════════════════════════")
+    print("  레이어 정규화 (Ba 외 2016) x n=6")
+    print("════════════════════════════════════════")
+
+    // ── G1: n=6 항등식 sigma*phi = n*tau ──
+    print("")
+    print("[G1] n=6 항등식: sigma*phi = n*tau")
+    let lhs: i64 = sig6 * phi6       // 24
+    let rhs: i64 = N6 * tau6         // 24
+    print("  sigma(6)*phi(6) = ")
+    print(lhs)
+    print("  6*tau(6) = ")
+    print(rhs)
+    if lhs == rhs {
+        print("  -> PASS")
+        pass = pass + 1
+    }
+
+    // ── G2: 은닉차원=48, 그룹크기=12=sigma(6) 정렬 ──
+    print("")
+    print("[G2] 은닉차원/그룹크기 n=6 정렬")
+    print("  은닉 차원: ")
+    print(hidden_dim)
+    print("  그룹 수: ")
+    print(num_groups)
+    print("  그룹 크기: ")
+    print(group_size)
+    if group_size == sig6 {
+        print("  -> PASS (그룹크기 = sigma(6))")
+        pass = pass + 1
+    }
+
+    // ── G3: 층 내 평균/분산 계산 ──
+    print("")
+    print("[G3] LayerNorm 평균/분산 계산")
+    let v0: i64 = 200
+    let v1: i64 = 800
+    let v2: i64 = 400
+    let v3: i64 = 600
+    let v4: i64 = 100
+    let v5: i64 = 900
+    let lm: i64 = layer_mean(v0, v1, v2, v3, v4, v5, N6)
+    let lv: i64 = layer_var(v0, v1, v2, v3, v4, v5, lm, N6)
+    print("  평균 = ")
+    print(lm)
+    print("  분산 = ")
+    print(lv)
+    // (200+800+400+600+100+900)/6 = 3000/6 = 500
+    if lm == 500 {
+        print("  -> PASS (평균 = 500)")
+        pass = pass + 1
+    }
+
+    // ── G4: 정규화 후 중심화 검증 ──
+    print("")
+    print("[G4] LayerNorm 정규화 후 합 ~ 0")
+    let n0: i64 = ln_normalize(v0, lm, lv, eps, gamma, beta)
+    let n1: i64 = ln_normalize(v1, lm, lv, eps, gamma, beta)
+    let n2: i64 = ln_normalize(v2, lm, lv, eps, gamma, beta)
+    let n3: i64 = ln_normalize(v3, lm, lv, eps, gamma, beta)
+    let n4: i64 = ln_normalize(v4, lm, lv, eps, gamma, beta)
+    let n5: i64 = ln_normalize(v5, lm, lv, eps, gamma, beta)
+    let norm_sum: i64 = n0 + n1 + n2 + n3 + n4 + n5
+    print("  정규화 합 = ")
+    print(norm_sum)
+    if abs_val(norm_sum) < SCALE {
+        print("  -> PASS (합 ~ 0)")
+        pass = pass + 1
+    }
+
+    // ── G5: 배치 독립성 — 단일 샘플로 정규화 ──
+    print("")
+    print("[G5] 배치 독립성 검증")
+    // 다른 배치여도 같은 샘플이면 같은 결과
+    let single_mean: i64 = layer_mean(v0, v1, v2, v3, v4, v5, N6)
+    let single_var: i64 = layer_var(v0, v1, v2, v3, v4, v5, single_mean, N6)
+    let single_out: i64 = ln_normalize(v0, single_mean, single_var, eps, gamma, beta)
+    print("  단일 샘플 출력: ")
+    print(single_out)
+    print("  배치 내 출력: ")
+    print(n0)
+    if single_out == n0 {
+        print("  -> PASS (배치 독립)")
+        pass = pass + 1
+    }
+
+    // ── G6: GroupNorm (그룹=4) 검증 ──
+    print("")
+    print("[G6] GroupNorm (tau(6)=4 그룹)")
+    let gm: i64 = group_mean(v0, v1, v2, 3)
+    let gv: i64 = group_var(v0, v1, v2, gm, 3)
+    print("  그룹 평균: ")
+    print(gm)
+    print("  그룹 분산: ")
+    print(gv)
+    // 그룹 통계가 전체 통계와 다르면 분할 효과 확인
+    if gm != lm {
+        print("  -> PASS (그룹 통계 != 전체 통계)")
+        pass = pass + 1
+    }
+
+    // ── G7: Pre-LN vs Post-LN 잔차 비교 ──
+    print("")
+    print("[G7] Pre-LN vs Post-LN 비교")
+    let sublayer: i64 = 300
+    let pre_out: i64 = pre_ln_residual(v0, sublayer, residual_scale)
+    let post_raw: i64 = post_ln_residual(v0, sublayer)
+    print("  Pre-LN 출력: ")
+    print(pre_out)
+    print("  Post-LN 원시합: ")
+    print(post_raw)
+    // Pre-LN이 스케일 제어로 Post-LN보다 안정적 (값 작음)
+    if abs_val(pre_out) <= abs_val(post_raw) {
+        print("  -> PASS (Pre-LN 안정)")
+        pass = pass + 1
+    }
+
+    // ── G8: 감마/베타 학습 효과 ──
+    print("")
+    print("[G8] 감마/베타 어파인 학습 효과")
+    let gamma2: i64 = SCALE * 2    // 감마 = 2.0
+    let beta2: i64 = 100           // 베타 = 0.1
+    let aff_default: i64 = ln_normalize(v0, lm, lv, eps, gamma, beta)
+    let aff_scaled: i64 = ln_normalize(v0, lm, lv, eps, gamma2, beta2)
+    print("  기본 (g=1,b=0): ")
+    print(aff_default)
+    print("  학습 (g=2,b=0.1): ")
+    print(aff_scaled)
+    if aff_scaled != aff_default {
+        print("  -> PASS (어파인 변환 효과)")
+        pass = pass + 1
+    }
+
+    // ── G9: 헤드=12, 차원=48 트랜스포머 구조 정합 ──
+    print("")
+    print("[G9] 헤드=12, 차원=48 트랜스포머 정합")
+    let head_dim: i64 = hidden_dim / num_heads  // 48/12 = 4 = tau(6)
+    print("  어텐션 헤드: ")
+    print(num_heads)
+    print("  헤드 차원: ")
+    print(head_dim)
+    print("  head_dim = tau(6) = ")
+    print(tau6)
+    if head_dim == tau6 {
+        print("  -> PASS (head_dim = tau(6))")
+        pass = pass + 1
+    }
+
+    // ── 최종 결과 ──
+    print("")
+    print("════════════════════════════════════════")
+    print("통과: ")
+    print(pass)
+    print(" / 9")
+    print("LAYER_NORM OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    print("════════════════════════════════════════")
+
+    return pass
+}

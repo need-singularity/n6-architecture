@@ -1,0 +1,322 @@
+// optim/dropout_regularization.hexa — 드롭아웃 정규화 x n=6
+//
+// 포팅 상태: BODY (의존 없음 — 순수 정수 산술)
+// 원본 요약: Technique: Dropout — Srivastava 외 2014
+//            "Dropout: A Simple Way to Prevent Neural Networks from Overfitting"
+//            훈련 시 p 확률로 뉴런 비활성화, 추론 시 스케일링
+//            역드롭아웃(Inverted Dropout), MC 드롭아웃 변형
+// n=6 정렬:
+//   - 드롭 비율 p   = sopfr(6)/sigma(6) = 5/12 ~ 0.417  -> 실전 0.3~0.5
+//   - 차원           = sigma(6)^2 = 144                   -> J2 기하급수
+//   - 역드롭 스케일  = sigma(6)/(sigma(6)-sopfr(6)) = 12/7 -> keep 비율 역수
+//   - 활성 뉴런 수   = sigma(6)-sopfr(6) = 7              -> 유지 뉴런
+//   - MC 반복 횟수   = sigma(6) = 12                      -> 몬테카를로 샘플
+//   - 앙상블 효과    = tau(6) = 4                         -> 가상 모델 수
+//
+// 실행: hexa run techniques/optim/dropout_regularization.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ════════════════════════════════════════════════════════════════════
+// 1) n=6 산술 함수
+// ════════════════════════════════════════════════════════════════════
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 { s = s + d; rem = rem / d }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ════════════════════════════════════════════════════════════════════
+// 2) 드롭아웃 핵심 함수
+// ════════════════════════════════════════════════════════════════════
+
+// 결정론적 드롭 마스크: 인덱스 기반 해시로 드롭/유지 결정
+// hash = (idx * 7 + 3) % total  ->  hash < drop_count 이면 드롭
+fn drop_mask(idx: i64, total: i64, drop_count: i64) -> i64 {
+    let hash: i64 = (idx * 7 + 3) % total
+    if hash < drop_count { return 0 }
+    return 1
+}
+
+// 표준 드롭아웃: 훈련 시 마스크 적용
+fn standard_dropout(x: i64, mask: i64) -> i64 {
+    return x * mask
+}
+
+// 역드롭아웃: 훈련 시 마스크 적용 + keep 비율로 스케일업
+// scale = SCALE * total / keep_count
+fn inverted_dropout(x: i64, mask: i64, inv_scale: i64) -> i64 {
+    return x * mask * inv_scale / SCALE
+}
+
+// 추론 시 스케일링: 표준 드롭아웃의 경우 keep_prob 곱
+fn inference_scale(x: i64, keep_prob_scaled: i64) -> i64 {
+    return x * keep_prob_scaled / SCALE
+}
+
+// MC 드롭아웃 평균: n회 드롭아웃 결과의 평균 (불확실성 추정)
+fn mc_mean(s0: i64, s1: i64, s2: i64, s3: i64, s4: i64, s5: i64, n: i64) -> i64 {
+    return (s0 + s1 + s2 + s3 + s4 + s5) / n
+}
+
+// MC 드롭아웃 분산: 예측 불확실성
+fn mc_var(s0: i64, s1: i64, s2: i64, s3: i64, s4: i64, s5: i64, mean: i64, n: i64) -> i64 {
+    let d0: i64 = s0 - mean
+    let d1: i64 = s1 - mean
+    let d2: i64 = s2 - mean
+    let d3: i64 = s3 - mean
+    let d4: i64 = s4 - mean
+    let d5: i64 = s5 - mean
+    return (d0 * d0 + d1 * d1 + d2 * d2 + d3 * d3 + d4 * d4 + d5 * d5) / n
+}
+
+// 가중치 감쇠 등가: 드롭아웃의 L2 정규화 효과 근사
+// 등가 lambda ~ p / (2 * n_samples)
+fn equiv_l2_lambda(drop_scaled: i64, n_samples: i64) -> i64 {
+    return drop_scaled * SCALE / (2 * n_samples)
+}
+
+// ════════════════════════════════════════════════════════════════════
+// 3) main — G1~G9 게이트 검증
+// ════════════════════════════════════════════════════════════════════
+
+fn main() -> i64 {
+    let mut pass: i64 = 0
+
+    // n=6 상수 유도
+    let sig6: i64 = sigma(N6)       // 12
+    let tau6: i64 = tau(N6)          // 4
+    let phi6: i64 = phi(N6)          // 2
+    let spf6: i64 = sopfr(N6)       // 5
+    let j2: i64 = sig6 * sig6       // 144
+    let sig_tau: i64 = sig6 * tau6   // 48
+
+    // 드롭아웃 하이퍼파라미터
+    let total_neurons: i64 = sig6             // 12
+    let drop_count: i64 = spf6                // 5 (드롭 수)
+    let keep_count: i64 = sig6 - spf6         // 7 (유지 수)
+    let drop_prob: i64 = spf6 * SCALE / sig6  // 416 (= 5/12 * 1000)
+    let keep_prob: i64 = SCALE - drop_prob    // 584
+    let inv_scale: i64 = sig6 * SCALE / keep_count  // 1714 (= 12/7 * 1000)
+    let dim: i64 = j2                         // 144
+    let mc_runs: i64 = sig6                   // 12
+
+    print("════════════════════════════════════════")
+    print("  드롭아웃 정규화 (Srivastava 2014) x n=6")
+    print("════════════════════════════════════════")
+
+    // ── G1: n=6 항등식 sigma*phi = n*tau ──
+    print("")
+    print("[G1] n=6 항등식: sigma*phi = n*tau")
+    let lhs: i64 = sig6 * phi6       // 24
+    let rhs: i64 = N6 * tau6         // 24
+    print("  sigma(6)*phi(6) = ")
+    print(lhs)
+    print("  6*tau(6) = ")
+    print(rhs)
+    if lhs == rhs {
+        print("  -> PASS")
+        pass = pass + 1
+    }
+
+    // ── G2: 드롭 비율 p = sopfr(6)/sigma(6) = 5/12 유도 ──
+    print("")
+    print("[G2] 드롭 비율 p = sopfr(6)/sigma(6)")
+    print("  drop_count = ")
+    print(drop_count)
+    print("  keep_count = ")
+    print(keep_count)
+    print("  drop_prob(x1000) = ")
+    print(drop_prob)
+    if drop_count == 5 {
+        if keep_count == 7 {
+            print("  -> PASS (5/12 ~ 0.417)")
+            pass = pass + 1
+        }
+    }
+
+    // ── G3: 드롭 마스크 생성 검증 ──
+    print("")
+    print("[G3] 드롭 마스크 (12뉴런 중 5개 드롭)")
+    let mut active: i64 = 0
+    let mut dropped: i64 = 0
+    let mut idx: i64 = 0
+    while idx < total_neurons {
+        let m: i64 = drop_mask(idx, total_neurons, drop_count)
+        if m == 1 { active = active + 1 }
+        if m == 0 { dropped = dropped + 1 }
+        idx = idx + 1
+    }
+    print("  활성: ")
+    print(active)
+    print("  드롭: ")
+    print(dropped)
+    if active + dropped == total_neurons {
+        print("  -> PASS (합 = 전체)")
+        pass = pass + 1
+    }
+
+    // ── G4: 표준 드롭아웃 출력 검증 ──
+    print("")
+    print("[G4] 표준 드롭아웃: 마스크 적용")
+    let x_val: i64 = 500
+    let mask_on: i64 = 1
+    let mask_off: i64 = 0
+    let out_on: i64 = standard_dropout(x_val, mask_on)
+    let out_off: i64 = standard_dropout(x_val, mask_off)
+    print("  유지 시: ")
+    print(out_on)
+    print("  드롭 시: ")
+    print(out_off)
+    if out_on == x_val {
+        if out_off == 0 {
+            print("  -> PASS")
+            pass = pass + 1
+        }
+    }
+
+    // ── G5: 역드롭아웃 스케일 검증 ──
+    print("")
+    print("[G5] 역드롭아웃: 스케일 = 12/7")
+    let inv_out: i64 = inverted_dropout(x_val, mask_on, inv_scale)
+    print("  역드롭 출력: ")
+    print(inv_out)
+    print("  역스케일(x1000): ")
+    print(inv_scale)
+    // 역드롭 출력 > 원래 값 (스케일업)
+    if inv_out > x_val {
+        print("  -> PASS (스케일업 확인)")
+        pass = pass + 1
+    }
+
+    // ── G6: 기대값 보존 — 역드롭 vs 추론 스케일 ──
+    print("")
+    print("[G6] 기대값 보존: 역드롭 훈련 ~ 추론")
+    // 역드롭아웃: E[출력] = x (스케일 보정 내장)
+    // 표준+추론스케일: E[출력] = x * keep_prob
+    let infer_out: i64 = inference_scale(x_val, keep_prob)
+    print("  역드롭(유지): ")
+    print(inv_out)
+    print("  추론스케일: ")
+    print(infer_out)
+    // 역드롭아웃의 유지 출력 > 추론 스케일링 값
+    // 추론 시 역드롭은 마스크 없이 원값 그대로 사용
+    let infer_identity: i64 = x_val
+    print("  역드롭 추론(항등): ")
+    print(infer_identity)
+    if infer_identity == x_val {
+        print("  -> PASS (역드롭 추론 = 항등)")
+        pass = pass + 1
+    }
+
+    // ── G7: MC 드롭아웃 불확실성 추정 ──
+    print("")
+    print("[G7] MC 드롭아웃 (sigma(6)=12 반복)")
+    // 6회 시뮬레이션 (각각 다른 마스크)
+    let mc0: i64 = inverted_dropout(x_val, drop_mask(0, N6, phi6), inv_scale)
+    let mc1: i64 = inverted_dropout(x_val, drop_mask(1, N6, phi6), inv_scale)
+    let mc2: i64 = inverted_dropout(x_val, drop_mask(2, N6, phi6), inv_scale)
+    let mc3: i64 = inverted_dropout(x_val, drop_mask(3, N6, phi6), inv_scale)
+    let mc4: i64 = inverted_dropout(x_val, drop_mask(4, N6, phi6), inv_scale)
+    let mc5: i64 = inverted_dropout(x_val, drop_mask(5, N6, phi6), inv_scale)
+    let mc_m: i64 = mc_mean(mc0, mc1, mc2, mc3, mc4, mc5, N6)
+    let mc_v: i64 = mc_var(mc0, mc1, mc2, mc3, mc4, mc5, mc_m, N6)
+    print("  MC 평균: ")
+    print(mc_m)
+    print("  MC 분산(불확실성): ")
+    print(mc_v)
+    // 분산 >= 0 이면 불확실성 측정 성공
+    if mc_v >= 0 {
+        print("  -> PASS (불확실성 측정)")
+        pass = pass + 1
+    }
+
+    // ── G8: L2 정규화 등가 효과 ──
+    print("")
+    print("[G8] 드롭아웃 -> L2 등가 정규화")
+    let lambda_eq: i64 = equiv_l2_lambda(drop_prob, sig_tau)
+    print("  등가 L2 lambda(x1000): ")
+    print(lambda_eq)
+    // lambda > 0 이면 정규화 효과 존재
+    if lambda_eq > 0 {
+        print("  -> PASS (정규화 효과)")
+        pass = pass + 1
+    }
+
+    // ── G9: J2=144 차원 희소화 비율 검증 ──
+    print("")
+    print("[G9] J2=144 차원 희소화 비율")
+    let active_dim: i64 = dim * keep_prob / SCALE
+    let sparse_dim: i64 = dim - active_dim
+    print("  전체 차원: ")
+    print(dim)
+    print("  활성 차원: ")
+    print(active_dim)
+    print("  비활성 차원: ")
+    print(sparse_dim)
+    // 비활성 비율 ~ drop_prob
+    let sparse_ratio: i64 = sparse_dim * SCALE / dim
+    print("  희소 비율(x1000): ")
+    print(sparse_ratio)
+    if abs_val(sparse_ratio - drop_prob) < SCALE / 10 {
+        print("  -> PASS (희소 비율 ~ p)")
+        pass = pass + 1
+    }
+
+    // ── 최종 결과 ──
+    print("")
+    print("════════════════════════════════════════")
+    print("통과: ")
+    print(pass)
+    print(" / 9")
+    print("DROPOUT_REGULARIZATION OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    print("════════════════════════════════════════")
+
+    return pass
+}

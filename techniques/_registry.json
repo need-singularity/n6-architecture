@@ -1,14 +1,15 @@
 {
-  "_doc": "AI 기법 183종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
+  "_doc": "AI 기법 206종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
   "_version": "2.0.0",
-  "_total": 183,
+  "_total": 206,
   "_sota_extended": 3,
-  "_sota_total": 186,
-  "_body_count": 186,
+  "_sota_total": 209,
+  "_body_count": 209,
   "_stub_count": 0,
   "_deprecated_count": 2,
   "_last_updated": "2026-04-12",
   "_changelog": [
+    "2026-04-12: DFS23 기법 23종 신규 (183→206종 확장) — arch 8종(inception_module/squeeze_excitation/efficientnet_compound/bert_masked_lm/encoder_decoder/spatial_transformer/deformable_conv/depthwise_separable) + attention 3종(performer_favor/sparse_attention/memory_attention) + optim 10종(radam_optimizer/schedule_free/muon_optimizer/gradient_clipping/ema_averaging/batch_norm/layer_norm/dropout_regularization/data_parallel/temperature_scaling) + compress 1종(tensor_decomposition) + sparse 1종(top_k_sparsity). _total 183→206, _body_count 186→209",
     "2026-04-12: DFS22 기법 28종 신규 (155→183종 확장) — arch 8종(resnet_residual/densenet_connection/swin_transformer/mobilenet_inverted/wavenet_causal/modern_hopfield/neural_turing_machine/autoregressive_lm) + attention 4종(multi_head_attention/multi_query_attention/additive_attention/axial_attention) + optim 8종(adafactor/lamb_optimizer/cosine_annealing/gradient_accumulation/label_smoothing/rmsnorm_normalization/nucleus_sampling/beam_search_decoding) + compress 4종(structured_pruning/low_rank_factorization/weight_sharing/dynamic_quantization) + sparse 2종(structured_sparsity/activation_sparsity) + moe 1종(expert_choice_routing) + graph 1종(spectral_convolution). _total 155→183, _body_count 158→186",
     "2026-04-12: DFS21 기법 16종 신규 (139→155종 확장) — arch 6종(gan_adversarial/unet_skip/normalizing_flow/pointnet_3d/vision_mamba/tree_of_thought) + attention 3종(linear_attention/sliding_window_attention/mixture_of_depths_v2) + compress 1종(neural_codec) + optim 6종(weight_averaging/mixed_precision/self_play/gradient_penalty/noise_contrastive_estimation/cutmix_augmentation). _total 139→155, _body_count 142→158",
     "2026-04-12: DFS20 기법 16종 신규 + 고아 3종 흡수 (120→139종 확장) — arch 10종(variational_autoencoder/clip_multimodal/gaussian_splatting/capsule_network/liquid_neural_network/consistency_model/nerf_radiance + 고아 energy_based_model/hypernetwork/neural_ode) + attention 2종(slot_attention/cross_attention) + compress 2종(vq_vae/pruning_lottery_ticket) + optim 5종(lora/maml_meta_learning/classifier_free_guidance/ddim_sampling/sharpness_aware_minimization). _total 120→139, _body_count 123→142",
@@ -119,7 +120,10 @@
     "multi_head_attention",
     "multi_query_attention",
     "additive_attention",
-    "axial_attention"
+    "axial_attention",
+    "performer_favor",
+    "sparse_attention",
+    "memory_attention"
   ],
   "attention_status": {
     "egyptian_attention": "BODY",
@@ -136,7 +140,10 @@
     "multi_head_attention": "BODY",
     "multi_query_attention": "BODY",
     "additive_attention": "BODY",
-    "axial_attention": "BODY"
+    "axial_attention": "BODY",
+    "performer_favor": "BODY",
+    "sparse_attention": "BODY",
+    "memory_attention": "BODY"
   },
   "moe": [
     "deepseek_moe",
@@ -218,7 +225,17 @@
     "label_smoothing",
     "rmsnorm_normalization",
     "nucleus_sampling",
-    "beam_search_decoding"
+    "beam_search_decoding",
+    "radam_optimizer",
+    "schedule_free",
+    "muon_optimizer",
+    "gradient_clipping",
+    "ema_averaging",
+    "batch_norm",
+    "layer_norm",
+    "dropout_regularization",
+    "data_parallel",
+    "temperature_scaling"
   ],
   "optim_status": {
     "adamw_quintuplet": "BODY",
@@ -262,7 +279,17 @@
     "label_smoothing": "BODY",
     "rmsnorm_normalization": "BODY",
     "nucleus_sampling": "BODY",
-    "beam_search_decoding": "BODY"
+    "beam_search_decoding": "BODY",
+    "radam_optimizer": "BODY",
+    "schedule_free": "BODY",
+    "muon_optimizer": "BODY",
+    "gradient_clipping": "BODY",
+    "ema_averaging": "BODY",
+    "batch_norm": "BODY",
+    "layer_norm": "BODY",
+    "dropout_regularization": "BODY",
+    "data_parallel": "BODY",
+    "temperature_scaling": "BODY"
   },
   "sparse": [
     "boltzmann_gate",
@@ -273,14 +300,16 @@
     "takens_dim6",
     "sparse_autoencoder",
     "structured_sparsity",
-    "activation_sparsity"
+    "activation_sparsity",
+    "top_k_sparsity"
   ],
   "sparse_status": {
     "boltzmann_gate": "BODY",
     "mertens_dropout": "BODY",
     "sparse_autoencoder": "BODY",
     "structured_sparsity": "BODY",
-    "activation_sparsity": "BODY"
+    "activation_sparsity": "BODY",
+    "top_k_sparsity": "BODY"
   },
   "graph": [
     "gat_heads",
@@ -306,7 +335,8 @@
     "structured_pruning",
     "low_rank_factorization",
     "weight_sharing",
-    "dynamic_quantization"
+    "dynamic_quantization",
+    "tensor_decomposition"
   ],
   "compress_status": {
     "phi_bottleneck": "BODY",
@@ -319,7 +349,8 @@
     "structured_pruning": "BODY",
     "low_rank_factorization": "BODY",
     "weight_sharing": "BODY",
-    "dynamic_quantization": "BODY"
+    "dynamic_quantization": "BODY",
+    "tensor_decomposition": "BODY"
   },
   "arch": [
     "arch_optimizer",
@@ -379,7 +410,15 @@
     "wavenet_causal",
     "modern_hopfield",
     "neural_turing_machine",
-    "autoregressive_lm"
+    "autoregressive_lm",
+    "inception_module",
+    "squeeze_excitation",
+    "efficientnet_compound",
+    "bert_masked_lm",
+    "encoder_decoder",
+    "spatial_transformer",
+    "deformable_conv",
+    "depthwise_separable"
   ],
   "arch_status": {
     "complete_llm_n6": "BODY",
@@ -422,6 +461,14 @@
     "wavenet_causal": "BODY",
     "modern_hopfield": "BODY",
     "neural_turing_machine": "BODY",
-    "autoregressive_lm": "BODY"
+    "autoregressive_lm": "BODY",
+    "inception_module": "BODY",
+    "squeeze_excitation": "BODY",
+    "efficientnet_compound": "BODY",
+    "bert_masked_lm": "BODY",
+    "encoder_decoder": "BODY",
+    "spatial_transformer": "BODY",
+    "deformable_conv": "BODY",
+    "depthwise_separable": "BODY"
   }
 }

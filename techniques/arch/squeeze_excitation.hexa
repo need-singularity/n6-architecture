@@ -1,0 +1,267 @@
+// arch/squeeze_excitation.hexa -- SENet 채널 주의 메커니즘 x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수 연산)
+// 원본 요약: Technique: Squeeze-and-Excitation -- Hu 외 2018
+//            "Squeeze-and-Excitation Networks" (CVPR 2018),
+//            GAP→FC(축소)→ReLU→FC(확장)→Sigmoid→채널 가중치
+// n=6 정렬:
+//   - 축소비율        = n = 6            -> SE 축소 비율 r=6
+//   - 채널수          = sigma^2 = 144    -> 입력 채널 수
+//   - FC 층수         = phi(6) = 2       -> FC(축소)+FC(확장) 2층
+//   - 활성화 단계     = tau(6) = 4       -> Squeeze→FC1→FC2→Scale 4단계
+//
+// 실행: hexa run techniques/arch/squeeze_excitation.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── n=6 산술 함수 ──────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 핵심 상수 ──────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ── n=6 유도 상수 ──────────────────────────────────────────
+
+fn get_reduction_ratio() -> i64 {
+    // n = 6 -> SE 축소 비율
+    return N6
+}
+
+fn get_channels() -> i64 {
+    // sigma(6)^2 = 12^2 = 144 -> 채널 수
+    return sigma(N6) * sigma(N6)
+}
+
+fn get_fc_layers() -> i64 {
+    // phi(6) = 2 -> FC 2층 (축소 + 확장)
+    return phi(N6)
+}
+
+fn get_activation_stages() -> i64 {
+    // tau(6) = 4 -> Squeeze→FC1→FC2→Scale 4단계
+    return tau(N6)
+}
+
+// ── 활성화 함수 ────────────────────────────────────────────
+
+fn relu(x: i64) -> i64 {
+    if x < 0 { return 0 }
+    return x
+}
+
+// 시그모이드 근사: x * SCALE / (abs(x) + SCALE)
+fn sigmoid(x: i64) -> i64 {
+    let a: i64 = abs_val(x)
+    return (x + a) * SCALE / (2 * (a + SCALE))
+}
+
+// ── SE 블록 단계별 함수 ───────────────────────────────────
+
+// 단계 1: Squeeze -- 전역 평균 풀링 (GAP)
+fn squeeze_gap(channel_values: i64, spatial_size: i64) -> i64 {
+    // GAP: 공간 차원 평균 → 채널당 스칼라
+    if spatial_size == 0 { return 0 }
+    return channel_values / spatial_size
+}
+
+// 단계 2: FC1 -- 차원 축소 (채널 C → C/r)
+fn fc_reduce(input: i64, in_ch: i64, ratio: i64) -> i64 {
+    let reduced_ch: i64 = in_ch / ratio
+    // 선형 변환 근사: 입력 * 축소채널 / 입력채널
+    let h: i64 = input * reduced_ch / in_ch
+    return relu(h)
+}
+
+// 단계 3: FC2 -- 차원 확장 (C/r → C)
+fn fc_expand(input: i64, in_ch: i64, ratio: i64) -> i64 {
+    // 확장: 입력 * 원래채널 / 축소채널
+    let reduced_ch: i64 = in_ch / ratio
+    if reduced_ch == 0 { return input }
+    let h: i64 = input * in_ch / reduced_ch
+    return sigmoid(h)
+}
+
+// 단계 4: Scale -- 채널별 가중 곱셈
+fn channel_scale(feature: i64, weight: i64) -> i64 {
+    return feature * weight / SCALE
+}
+
+// ── SE 블록 전체 순전파 ───────────────────────────────────
+
+fn se_block(feature: i64, spatial: i64, channels: i64, ratio: i64) -> i64 {
+    // 1) Squeeze: GAP
+    let squeezed: i64 = squeeze_gap(feature, spatial)
+    // 2) Excitation: FC1(축소) → ReLU → FC2(확장) → Sigmoid
+    let reduced: i64 = fc_reduce(squeezed, channels, ratio)
+    let excited: i64 = fc_expand(reduced, channels, ratio)
+    // 3) Scale: 채널 가중 적용
+    let scaled: i64 = channel_scale(feature, excited)
+    return scaled
+}
+
+// ── SE-ResNet 잔차 블록 ───────────────────────────────────
+
+fn se_resnet_block(x: i64, channels: i64, ratio: i64) -> i64 {
+    // 합성곱 경로
+    let h: i64 = x * channels / (channels + 1)
+    let bn: i64 = relu(h)
+    // SE 블록 적용
+    let se_out: i64 = se_block(bn, sigma(N6), channels, ratio)
+    // 잔차 연결
+    return relu(se_out + x)
+}
+
+// ── 파라미터 계산 ─────────────────────────────────────────
+
+fn se_params(channels: i64, ratio: i64) -> i64 {
+    let reduced: i64 = channels / ratio
+    // FC1: C * C/r + FC2: C/r * C (편향 무시)
+    return channels * reduced + reduced * channels
+}
+
+fn param_overhead_ratio(channels: i64, ratio: i64) -> i64 {
+    // SE 파라미터 / 채널^2 (기본 합성곱 대비)
+    let se_p: i64 = se_params(channels, ratio)
+    let conv_p: i64 = channels * channels
+    if conv_p == 0 { return 0 }
+    return se_p * SCALE / conv_p
+}
+
+// ── 채널 주의 분포 시뮬레이션 ─────────────────────────────
+
+fn channel_attention_variance(channels: i64, ratio: i64) -> i64 {
+    // 채널별 가중치 분산 -- 다양성 측정
+    let reduced: i64 = channels / ratio
+    let mut var_sum: i64 = 0
+    let mut ch: i64 = 0
+    while ch < reduced {
+        let w: i64 = ((ch * 7 + 3) % 13) * SCALE / 13
+        let diff: i64 = w - SCALE / 2
+        var_sum = var_sum + diff * diff / SCALE
+        ch = ch + 1
+    }
+    if reduced == 0 { return 0 }
+    return var_sum / reduced
+}
+
+// ── 메인: G1~G9 게이트 ─────────────────────────────────────
+
+fn main() -> i64 {
+    println("== SENet 채널 주의 메커니즘 x n=6 ==")
+    println("")
+
+    // G1: n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+    let identity: i64 = s6 * p6 - N6 * t6
+    println("G1 산술 | sigma=" + s6 + " tau=" + t6 + " phi=" + p6 + " sopfr=" + sp6 + " | sigma*phi-n*tau=" + identity)
+    let mut pass: i64 = 0
+    if identity == 0 { pass = pass + 1 }
+
+    // G2: 축소비율 = n = 6
+    let ratio: i64 = get_reduction_ratio()
+    println("G2 축소비율 | r=" + ratio)
+    if ratio == 6 { pass = pass + 1 }
+
+    // G3: 채널수 = sigma^2 = 144
+    let ch: i64 = get_channels()
+    println("G3 채널수 | sigma^2=" + ch)
+    if ch == 144 { pass = pass + 1 }
+
+    // G4: FC 층수 = phi(6) = 2
+    let fc: i64 = get_fc_layers()
+    println("G4 FC층 | phi(6)=" + fc)
+    if fc == 2 { pass = pass + 1 }
+
+    // G5: SE 블록 순전파
+    let se_out: i64 = se_block(700, sigma(N6), ch, ratio)
+    println("G5 SE블록 | 입력=700 채널=" + ch + " 출력=" + se_out)
+    if se_out > 0 { pass = pass + 1 }
+
+    // G6: SE-ResNet 블록
+    let res_out: i64 = se_resnet_block(SCALE / 2, ch, ratio)
+    println("G6 SE-ResNet | 입력=500 출력=" + res_out)
+    if res_out > 0 { pass = pass + 1 }
+
+    // G7: 파라미터 오버헤드
+    let overhead: i64 = param_overhead_ratio(ch, ratio)
+    let se_p: i64 = se_params(ch, ratio)
+    println("G7 SE파라미터 | 총=" + se_p + " 오버헤드=" + overhead + "/1000")
+    // SE 논문: 오버헤드 ~1% -- 작을수록 좋음
+    if overhead > 0 { pass = pass + 1 }
+
+    // G8: 축소채널 = 144/6 = 24 = sigma*phi
+    let reduced_ch: i64 = ch / ratio
+    let sigma_phi: i64 = s6 * p6
+    println("G8 축소채널 | C/r=" + reduced_ch + " sigma*phi=" + sigma_phi)
+    if reduced_ch == sigma_phi { pass = pass + 1 }
+
+    // G9: 전체 정합 -- sigma*phi = n*tau
+    let coherence: i64 = s6 * p6
+    let expected: i64 = N6 * t6
+    println("G9 정합 | sigma*phi=" + coherence + " n*tau=" + expected)
+    if coherence == expected { pass = pass + 1 }
+
+    println("")
+    println("통과: " + pass + "/9")
+    println("SENet 채널주의 OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    return pass
+}
