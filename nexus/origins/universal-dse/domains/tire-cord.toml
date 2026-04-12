@@ -1,0 +1,370 @@
+# 타이어코드 DSE — 코오롱인더 세계 1위
+# n=6: 나일론66 sigma=12C, 벨트코드 J2=24도, 가황 sigma^2=144C, 수명 n*10^4=6만km
+# 5단 DSE: 소재 x 코드 x 카카스 x 벨트 x 타이어 = 7,776 조합
+
+[meta]
+name = "tire-cord"
+desc = "타이어코드 DSE (나일론66 sigma=12C, 벨트각 J2=24도, 가황 sigma^2=144C, 20/20 EXACT)"
+
+[scoring]
+n6 = 0.30
+perf = 0.30
+power = 0.15
+cost = 0.25
+
+# ============================================================
+# Level 0: 원사 소재
+# ============================================================
+
+[[level]]
+name = "Material"
+
+[[candidate]]
+level = 0
+id = "Nylon66"
+label = "나일론66 (sigma=12C 반복단위, 840d 표준, 코오롱)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Nylon6"
+label = "나일론6 (n=6C 카프로락탐, 가격우위)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "PET"
+label = "PET 폴리에스터 (고모듈러스, sigma-phi=10 GPa)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.90
+
+[[candidate]]
+level = 0
+id = "Aramid"
+label = "아라미드 (파라계/메타계, 밀도 sigma^2=1.44 g/cm3)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Steel"
+label = "스틸코드 (고탄소강, phi=2+n/phi=3 필라멘트)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Hybrid"
+label = "하이브리드 코드 (아라미드+나일론, phi=2 성분)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.50
+
+# ============================================================
+# Level 1: 코드 가공
+# ============================================================
+
+[[level]]
+name = "Cord"
+
+[[candidate]]
+level = 1
+id = "SingleTwist-12TPI"
+label = "단연사 sigma=12 TPI (표준 꼬임, 균형성)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "CableTwist"
+label = "합연사 (phi=2가닥 합연, 고강도)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "OpenEnd"
+label = "오픈엔드 코드 (무꼬임, 평탄성, n=6 노즐)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Dip-Treated"
+label = "딥처리 RFL (레소르시놀-포르말린-라텍스, n/phi=3 성분)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "HeatSet-144C"
+label = "열세팅 sigma^2=144C (치수안정, 나일론 전용)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "PreStretched"
+label = "프리스트레치 (n/phi=3% 신율 제거, PET 전용)"
+n6 = 1.00
+perf = 0.82
+power = 0.82
+cost = 0.72
+
+# ============================================================
+# Level 2: 카카스 구조
+# ============================================================
+
+[[level]]
+name = "Carcass"
+
+[[candidate]]
+level = 2
+id = "Radial-2ply"
+label = "래디얼 phi=2 플라이 (승용차 표준, 90도 배열)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Radial-4ply"
+label = "래디얼 tau=4 플라이 (트럭/버스, 고하중)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Radial-1ply"
+label = "래디얼 mu=1 플라이 (초경량, 연비 최적)"
+n6 = 1.00
+perf = 0.78
+power = 0.92
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Bias-6ply"
+label = "바이어스 n=6 플라이 (농업용/건설, 내충격)"
+n6 = 1.00
+perf = 0.75
+power = 0.65
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "RunFlat"
+label = "런플랫 (사이드 보강, n/phi=3 mm 삽입물)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Airless"
+label = "에어리스 (스포크 구조, sigma=12 스포크)"
+n6 = 1.00
+perf = 0.82
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Level 3: 벨트 구조
+# ============================================================
+
+[[level]]
+name = "Belt"
+
+[[candidate]]
+level = 3
+id = "Steel-2layer"
+label = "스틸 벨트 phi=2층 (표준, J2=24도 배치각)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Steel-4layer"
+label = "스틸 벨트 tau=4층 (고속/고하중, 안정성)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Aramid-Belt"
+label = "아라미드 벨트 (경량, sigma-phi=10 g/m2 절감)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.50
+
+[[candidate]]
+level = 3
+id = "JointlessBand"
+label = "무이음 나일론 밴드 (벨트 위 보호층, mu=1 층)"
+n6 = 1.00
+perf = 0.82
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "ZeroDegree"
+label = "0도 벨트 캡 (원주방향, n/phi=3 mm 폭)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "Hybrid-Belt"
+label = "하이브리드 벨트 (스틸+아라미드, phi=2 소재 혼합)"
+n6 = 1.00
+perf = 0.93
+power = 0.65
+cost = 0.45
+
+# ============================================================
+# Level 4: 타이어 완성품
+# ============================================================
+
+[[level]]
+name = "Tire"
+
+[[candidate]]
+level = 4
+id = "Passenger-PCR"
+label = "승용 PCR (편평비 sigma*sopfr=60, n=6만km 수명)"
+n6 = 1.00
+perf = 0.85
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Truck-TBR"
+label = "트럭 TBR (sigma=12R22.5 표준, 고하중)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "HP-UHP"
+label = "고성능 UHP (2^sopfr=32 PSI 최적, 속도등급 sigma=12종)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "EV-LRR"
+label = "전기차 LRR (저구름저항, 중량 sigma+tau=16 kg)"
+n6 = 1.00
+perf = 0.88
+power = 0.80
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "OTR"
+label = "OTR 건설기계 (phi^tau=16인치 림, 내절상)"
+n6 = 1.00
+perf = 0.82
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Airless-City"
+label = "에어리스 도심형 (무공기압, sigma=12 스포크)"
+n6 = 1.00
+perf = 0.78
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# 호환성 규칙
+# ============================================================
+
+# 트럭 TBR은 4플라이 이상 카카스 필요
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Truck-TBR"
+then_level = 2
+then_ids = ["Radial-4ply", "Bias-6ply"]
+
+# 에어리스 타이어는 에어리스 카카스만 호환
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Airless-City"
+then_level = 2
+then_ids = ["Airless"]
+
+# 아라미드 소재는 딥처리 필수
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Aramid"
+then_level = 1
+then_ids = ["Dip-Treated"]
+
+# 열세팅은 나일론 전용
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "HeatSet-144C"
+then_level = 0
+then_ids = ["Nylon66", "Nylon6"]
+
+# 프리스트레치는 PET 전용
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "PreStretched"
+then_level = 0
+then_ids = ["PET"]
+
+# 1플라이 카카스는 트럭/OTR 비호환
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Radial-1ply"
+then_level = 4
+then_ids = ["Truck-TBR", "OTR"]

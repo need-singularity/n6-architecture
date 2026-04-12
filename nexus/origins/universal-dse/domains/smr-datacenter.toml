@@ -1,0 +1,370 @@
+# 데이터센터용 소형 원자로(SMR) DSE — HEXA-REACTOR
+# n=6: 모듈 n=6팩, TRISO sopfr=5층, 제어봉 sigma=12, 냉각루프 tau=4, PUE=R(6)=1.0
+# 5단 DSE: 연료 x 노심 x 냉각 x 변환 x 시스템 = 7,776 조합
+
+[meta]
+name = "smr-datacenter"
+desc = "데이터센터 SMR DSE (TRISO sopfr=5층, 제어봉 sigma=12, 냉각루프 tau=4, PUE=R(6)=1.0)"
+
+[scoring]
+n6 = 0.30
+perf = 0.25
+power = 0.25
+cost = 0.20
+
+# ============================================================
+# Level 0: 연료 (HEXA-FUEL)
+# ============================================================
+
+[[level]]
+name = "Fuel"
+
+[[candidate]]
+level = 0
+id = "TRISO-HALEU"
+label = "TRISO-HALEU (sopfr=5 코팅층, sigma-phi=10% 농축, 60=sigma*sopfr GWd/MTU)"
+n6 = 1.00
+perf = 0.95
+power = 0.80
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "UO2-LEU"
+label = "UO2 저농축 (표준 sopfr=5% 농축, 기존 실적)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Metal-Fuel"
+label = "금속연료 U-Zr (고밀도, tau=4종 합금 조성)"
+n6 = 1.00
+perf = 0.85
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Molten-Salt"
+label = "용융염 연료 FLiBe (phi=2 성분 LiF+BeF2, 액체)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "UN-Nitride"
+label = "질화우라늄 UN (고열전도, sigma-phi=10 W/m*K)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Th-MOX"
+label = "토륨 MOX Th/Pu (n=6종 핵분열 생성물 관리)"
+n6 = 1.00
+perf = 0.80
+power = 0.75
+cost = 0.60
+
+# ============================================================
+# Level 1: 노심 (HEXA-CORE)
+# ============================================================
+
+[[level]]
+name = "Core"
+
+[[candidate]]
+level = 1
+id = "PWR-iPWR"
+label = "일체형 가압경수로 iPWR (제어봉 sigma=12, J2=24봉 집합체)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "HTGR-Pebble"
+label = "고온가스로 페블베드 (TRISO 페블, n=6만개/노심)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 1
+id = "HTGR-Prismatic"
+label = "고온가스로 각주형 (sigma=12 연료봉/블록, 흑연 Z=n=6)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "SFR-Pool"
+label = "소듐 고속로 풀형 (Na Z=11=sigma-mu, tau=4 안전계통)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 1
+id = "MSR"
+label = "용융염로 MSR (액체연료, 상압, n/phi=3 루프)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "LFR"
+label = "납냉각 고속로 LFR (Pb Z=82, 자연순환, sigma=12m 용기)"
+n6 = 1.00
+perf = 0.87
+power = 0.70
+cost = 0.45
+
+# ============================================================
+# Level 2: 냉각 (HEXA-COOL)
+# ============================================================
+
+[[level]]
+name = "Cooling"
+
+[[candidate]]
+level = 2
+id = "NatCirc-Water"
+label = "자연순환 경수 (sigma=12m 높이차, 무동력)"
+n6 = 1.00
+perf = 0.80
+power = 0.95
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "He-Gas"
+label = "헬륨 가스 냉각 (sigma-phi=10 MPa, 비활성)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Na-Liquid"
+label = "소듐 액체금속 (고열전도, phi=2 루프 중간/1차)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 2
+id = "Pb-Liquid"
+label = "납/납-비스무트 (자연순환, tau=4 계통분리)"
+n6 = 1.00
+perf = 0.85
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "sCO2-Direct"
+label = "초임계 CO2 직접 냉각 (n=6 MPa 운전압, 콤팩트)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "MoltenSalt"
+label = "용융염 냉각 FLiNaK (phi=2 염 선택, 고온 내구)"
+n6 = 1.00
+perf = 0.93
+power = 0.58
+cost = 0.38
+
+# ============================================================
+# Level 3: 에너지 변환 (HEXA-CONVERT)
+# ============================================================
+
+[[level]]
+name = "Convert"
+
+[[candidate]]
+level = 3
+id = "sCO2-Brayton"
+label = "초임계 CO2 브레이턴 (sigma*tau=48% 효율, tau=4단 터빈)"
+n6 = 1.00
+perf = 0.95
+power = 0.70
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "Steam-Rankine"
+label = "증기 랭킨 사이클 (tau^2/sigma=33% 효율, 성숙 기술)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "He-Brayton"
+label = "헬륨 브레이턴 직접 (sigma*tau=48% 목표, n=6 단계 압축)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "Combined-CHP"
+label = "열병합 CHP (전기+열, sigma-tau=8:4 전열비, 88% 종합효율)"
+n6 = 1.00
+perf = 0.92
+power = 0.75
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "Thermoelectric"
+label = "열전변환 TEG (ZT>R(6)=1, 보조 발전)"
+n6 = 1.00
+perf = 0.55
+power = 0.90
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "H2-Electrolysis"
+label = "수소 전기분해 (고온 SOEC, sigma-phi=10% 효율 향상)"
+n6 = 1.00
+perf = 0.70
+power = 0.60
+cost = 0.35
+
+# ============================================================
+# Level 4: 데이터센터 시스템 (HEXA-DC)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+level = 4
+id = "DC-Direct"
+label = "데이터센터 직결 (PUE=R(6)=1.0, sigma*sopfr=60MW급)"
+n6 = 1.00
+perf = 0.95
+power = 0.90
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "DC-Microgrid"
+label = "마이크로그리드 (n=6 모듈팩, 48V DC=sigma*tau)"
+n6 = 1.00
+perf = 0.88
+power = 0.85
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Campus-Grid"
+label = "캠퍼스 전력망 (sigma*n=72 MW, 다중 건물)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Island-Mode"
+label = "아일랜드 모드 (완전 독립, tau=4 비상계통)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.50
+
+[[candidate]]
+level = 4
+id = "Remote-Edge"
+label = "원격 엣지 (소형 n/phi=3 MW, 극지/도서)"
+n6 = 1.00
+perf = 0.72
+power = 0.92
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Hybrid-RE"
+label = "하이브리드 원자력+신재생 (태양광+SMR, phi=2 전원)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.65
+
+# ============================================================
+# 호환성 규칙
+# ============================================================
+
+# TRISO 연료는 고온가스로 노심 필요
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "TRISO-HALEU"
+then_level = 1
+then_ids = ["HTGR-Pebble", "HTGR-Prismatic"]
+
+# 용융염 연료는 용융염로 전용
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "Molten-Salt"
+then_level = 1
+then_ids = ["MSR"]
+
+# 소듐 냉각은 소듐 고속로 전용
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Na-Liquid"
+then_level = 1
+then_ids = ["SFR-Pool"]
+
+# 헬륨 냉각은 고온가스로 전용
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "He-Gas"
+then_level = 1
+then_ids = ["HTGR-Pebble", "HTGR-Prismatic"]
+
+# 열전변환은 원격 엣지 전용 (보조 발전)
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Thermoelectric"
+then_level = 4
+then_ids = ["DC-Direct", "Campus-Grid"]
+
+# 수소 전기분해는 데이터센터 직결과 비호환
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "H2-Electrolysis"
+then_level = 4
+then_ids = ["DC-Direct"]

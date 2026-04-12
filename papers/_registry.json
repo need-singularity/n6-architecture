@@ -2,8 +2,8 @@
   "_meta": {
     "total_products": 173,
     "total_domains": 120,
-    "total_papers": 76,
-    "_count_verified": "2026-04-12 실측 — papers/*.md 76 (기존 73 + 통합 3: AI 68기법·칩 6단·밀레니엄 DFS 1~12), sections[].products 합계 173, sections[].domains 합계 120",
+    "total_papers": 85,
+    "_count_verified": "2026-04-12 실측 — papers/n6-*-paper.md 85 (이전 79 + chunk_j 6: 종교·문자·와인·무용·건축·탄소), sections[].products 합계 173, sections[].domains 합계 120",
     "papers_chunk_c_2026-04-08": {
       "count": 11,
       "category": "인체/의료/생물",
@@ -275,6 +275,52 @@
         "honest_resolution_status": "밀레니엄 해결 0/7 (정직)"
       },
       "ghost_status_transition": "ghost → v1 (3 개 신규 통합 메타 작성)"
+    },
+    "papers_chunk_j_2026-04-12": {
+      "count": 6,
+      "category": "문명·문화·환경·산업 ghost 해소 (ghost→v1)",
+      "bt_range": "BT-7, BT-5, BT-370, BT-73, BT-197, BT-227, BT-262, BT-329, BT-340, BT-27, BT-101, BT-103, BT-192, BT-265, BT-371, BT-123, BT-124, BT-135, BT-108, BT-201, BT-233, BT-143, BT-149, BT-189, BT-130, BT-167, BT-377, BT-85, BT-93, BT-38",
+      "status": "v1 완성 -- hexa 검증 STUB + ASCII 결과표 + MISS 공시 포함",
+      "target_id_range": "N6-079 ~ N6-084",
+      "papers": [
+        "papers/n6-religion-mythology-paper.md",
+        "papers/n6-writing-systems-paper.md",
+        "papers/n6-wine-enology-paper.md",
+        "papers/n6-dance-choreography-paper.md",
+        "papers/n6-construction-structural-paper.md",
+        "papers/n6-carbon-capture-paper.md"
+      ],
+      "bt_mapping": {
+        "n6-religion-mythology-paper.md": "BT-7, BT-5, BT-370 (종교/신화 성수)",
+        "n6-writing-systems-paper.md": "BT-73, BT-197, BT-227, BT-262, BT-329, BT-340 (문자체계/인코딩)",
+        "n6-wine-enology-paper.md": "BT-27, BT-101, BT-103, BT-192, BT-265, BT-371 (발효/양조)",
+        "n6-dance-choreography-paper.md": "BT-123, BT-124, BT-135, BT-108, BT-201, BT-233 (SE(3)/라반/안무)",
+        "n6-construction-structural-paper.md": "BT-143, BT-201, BT-149, BT-189, BT-130, BT-167, BT-377 (건축/구조)",
+        "n6-carbon-capture-paper.md": "BT-27, BT-85, BT-93, BT-103, BT-38 (탄소 Z=6/CCUS)"
+      },
+      "exact_stats": {
+        "n6-religion-mythology-paper.md": "20/30 EXACT (66.7%)",
+        "n6-writing-systems-paper.md": "20/20 EXACT (100%)",
+        "n6-wine-enology-paper.md": "20/21 EXACT (95.2%)",
+        "n6-dance-choreography-paper.md": "20/20 EXACT (100%)",
+        "n6-construction-structural-paper.md": "22/25 EXACT (88%)",
+        "n6-carbon-capture-paper.md": "30/30 EXACT (100%)"
+      },
+      "line_counts": {
+        "n6-religion-mythology-paper.md": 283,
+        "n6-writing-systems-paper.md": 239,
+        "n6-wine-enology-paper.md": 267,
+        "n6-dance-choreography-paper.md": 290,
+        "n6-construction-structural-paper.md": 320,
+        "n6-carbon-capture-paper.md": 316
+      },
+      "verify_code_status": {
+        "all_papers_have_hexa_stub": true,
+        "n62_compliance": "전 6편 본문에 verify/*_seed.hexa STUB 블록 + ASCII 결과표 + n=28/n=496 대조 + Honest Limitations 섹션",
+        "honest_miss_disclosed": true,
+        "korean_only": true
+      },
+      "ghost_status_transition": "ghost → v1 (6개 신규 작성: civilization 2, life-culture 2, tech-industry 1, environment 1)"
     },
     "last_updated": "2026-04-12",
     "description": "완성제품 SSOT — README 자동 생성용",

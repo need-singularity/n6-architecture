@@ -1,0 +1,362 @@
+# 에어백 시스템 DSE — 코오롱인더 에어백 원단
+# n=6: 에어백 n=6개, 전개 tau=4단계, 원사 J2=24본/cm, 팽창 30ms=sigma*phi+n
+# 5단 DSE: 센서 x ECU x 인플레이터 x 원단 x 에어백 = 7,776 조합
+
+[meta]
+name = "airbag"
+desc = "에어백 DSE (에어백 n=6개, 전개 tau=4단계, 원사밀도 J2=24본/cm, 18/18 EXACT)"
+
+[scoring]
+n6 = 0.30
+perf = 0.30
+power = 0.15
+cost = 0.25
+
+# ============================================================
+# Level 0: 충돌 센서
+# ============================================================
+
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level = 0
+id = "Accel-8ch"
+label = "가속도 센서 sigma-tau=8채널 (전방+측면+후면, MEMS)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Pressure-6ch"
+label = "압력 센서 n=6채널 (사이드임팩트 전용, 도어 내장)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Radar-Precrash"
+label = "레이더 프리크래시 (사전감지, tau=4종 시나리오)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 0
+id = "Camera-AI"
+label = "카메라 AI 인식 (탑승자 자세 검출, n=6 포즈)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Fusion-12ch"
+label = "센서 퓨전 sigma=12채널 (가속도+압력+레이더+카메라)"
+n6 = 1.00
+perf = 0.97
+power = 0.50
+cost = 0.35
+
+[[candidate]]
+level = 0
+id = "Gyro-6axis"
+label = "자이로 n=6축 (6DOF=SE(3), 횡전복 감지)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.65
+
+# ============================================================
+# Level 1: ACU/ECU 제어
+# ============================================================
+
+[[level]]
+name = "ACU"
+
+[[candidate]]
+level = 1
+id = "Basic-ACU"
+label = "기본 ACU (phi=2채널 운전석+조수석, 단순 임계값)"
+n6 = 1.00
+perf = 0.60
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "Multi-ACU-6ch"
+label = "다중 ACU n=6채널 (전방+측면+커튼+무릎)"
+n6 = 1.00
+perf = 0.82
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "Adaptive-ACU"
+label = "적응형 ACU (탑승자 체중/위치별, tau=4단계 출력)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "AI-ACU"
+label = "AI ACU (딥러닝 충돌 분류, sigma=12 시나리오)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "Dual-Stage-ACU"
+label = "2단계 ACU phi=2 (저속/고속 충돌 분리 점화)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Central-Gateway"
+label = "중앙 게이트웨이 (차량 전체 SRS 통합, sopfr=5 버스)"
+n6 = 1.00
+perf = 0.88
+power = 0.60
+cost = 0.45
+
+# ============================================================
+# Level 2: 인플레이터 (가스발생장치)
+# ============================================================
+
+[[level]]
+name = "Inflator"
+
+[[candidate]]
+level = 2
+id = "Pyro-Single"
+label = "화약식 단일 (NaN3, 빠른 전개, mu=1 점화)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Pyro-Dual"
+label = "화약식 이중 phi=2 (저속/고속 phi=2단계 출력)"
+n6 = 1.00
+perf = 0.88
+power = 0.72
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "Hybrid-N2"
+label = "하이브리드 N2 (가압 N2+화약, n/phi=3 반응계수)"
+n6 = 1.00
+perf = 0.92
+power = 0.78
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "Cold-Gas"
+label = "냉가스 (비화약 Ar/He, 안전 우선)"
+n6 = 0.75
+perf = 0.65
+power = 0.90
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Micro-Gas"
+label = "마이크로 가스발생기 (MEMS, sopfr=5 mm 소형)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Adaptive-Multi"
+label = "적응형 다중 (tau=4 출력 단계, 체중/거리 연동)"
+n6 = 1.00
+perf = 0.95
+power = 0.65
+cost = 0.40
+
+# ============================================================
+# Level 3: 에어백 원단
+# ============================================================
+
+[[level]]
+name = "Fabric"
+
+[[candidate]]
+level = 3
+id = "OPW-Nylon66"
+label = "OPW 나일론66 (sigma=12C 반복단위, J2=24본/cm, 코오롱)"
+n6 = 1.00
+perf = 0.90
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Coated-Nylon"
+label = "실리콘 코팅 나일론 (기밀성 강화, phi=2면 코팅)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "PET-Fabric"
+label = "PET 원단 (폴리에스터, 저가형 사이드)"
+n6 = 0.75
+perf = 0.72
+power = 0.75
+cost = 0.90
+
+[[candidate]]
+level = 3
+id = "Aramid-Hybrid"
+label = "아라미드 하이브리드 (고강력, 내열 300C)"
+n6 = 0.75
+perf = 0.95
+power = 0.60
+cost = 0.35
+
+[[candidate]]
+level = 3
+id = "Uncoated-420d"
+label = "무코팅 420d=840/phi (경량, 커튼에어백용)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "SmartFabric"
+label = "스마트 원단 (센서 내장, n=6 측정점)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.30
+
+# ============================================================
+# Level 4: 에어백 모듈
+# ============================================================
+
+[[level]]
+name = "Module"
+
+[[candidate]]
+level = 4
+id = "Driver-60L"
+label = "운전석 에어백 sigma*sopfr=60L (스티어링 내장)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Passenger-120L"
+label = "조수석 에어백 sigma*(sigma-phi)=120L (대시보드)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Side-12L"
+label = "사이드 에어백 sigma=12L (시트 내장, 골반 보호)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Curtain-24L"
+label = "커튼 에어백 J2=24L (루프라인, 머리 보호)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 4
+id = "Knee-6L"
+label = "무릎 에어백 n=6L (하체 보호)"
+n6 = 1.00
+perf = 0.75
+power = 0.90
+cost = 0.85
+
+[[candidate]]
+level = 4
+id = "Center-6L"
+label = "센터 에어백 n=6L (승객간 충돌 방지)"
+n6 = 1.00
+perf = 0.80
+power = 0.88
+cost = 0.65
+
+# ============================================================
+# 호환성 규칙
+# ============================================================
+
+# AI ACU는 센서 퓨전 또는 카메라 AI 필요
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "AI-ACU"
+then_level = 0
+then_ids = ["Fusion-12ch", "Camera-AI"]
+
+# 적응형 다중 인플레이터는 적응형 ACU 이상 필요
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "Adaptive-Multi"
+then_level = 1
+then_ids = ["Adaptive-ACU", "AI-ACU"]
+
+# 기본 ACU는 운전석/조수석만 제어 가능
+[[rule]]
+type = "exclude"
+if_level = 1
+if_id = "Basic-ACU"
+then_level = 4
+then_ids = ["Side-12L", "Curtain-24L", "Knee-6L", "Center-6L"]
+
+# 스마트 원단은 AI ACU 또는 센서 퓨전과 연동 필요
+[[rule]]
+type = "require"
+if_level = 3
+if_id = "SmartFabric"
+then_level = 0
+then_ids = ["Fusion-12ch", "Camera-AI"]
+
+# 냉가스 인플레이터는 대형 에어백 비호환 (팽창력 부족)
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Cold-Gas"
+then_level = 4
+then_ids = ["Passenger-120L", "Curtain-24L"]

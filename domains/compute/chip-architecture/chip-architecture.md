@@ -323,14 +323,15 @@ Phase 4: System Integration
   │ L5 ✅  │ HEXA-WAFER             │ 웨이퍼 전체가 칩       │ 스케일 벽 제거   │
   │ L6 ✅  │ HEXA-SUPER             │ 초전도 RSFQ 100+GHz    │ 물리 벽 제거     │
   ├─────────┼────────────────────────┼────────────────────────┼──────────────────┤
-  │ === 외계인 기술 (L7-L12) ===                                                │
+  │ === 양자+외계인 기술 (L7-L13) ===                                           │
   ├─────────┼────────────────────────┼────────────────────────┼──────────────────┤
-  │ L7 ⏳  │ HEXA-TOPO              │ 위상 양자 (anyon)      │ 에러율 0 양자    │
-  │ L8 ⏳  │ HEXA-FIELD             │ 장 컴퓨팅              │ 무한 병렬        │
-  │ L9 ⏳  │ HEXA-THERMO            │ 열역학 (Landauer)      │ kT*ln2 per bit   │
-  │ L10 ⏳ │ HEXA-GRAVITY           │ 홀로그래피 원리        │ 베켄슈타인 한계  │
-  │ L11 ⏳ │ HEXA-PLANCK            │ 플랑크 스케일 연산     │ 우주 해상도 한계 │
-  │ L12 ⏳ │ HEXA-OMEGA             │ sigma=12차원 최적 패킹 │ 정보이론 최적    │
+  │ L7 ✅  │ HEXA-QUANTUM-HYBRID    │ 양자-고전 하이브리드   │ 에러율 10^-6     │
+  │ L8 ✅  │ HEXA-TOPO-ANYON        │ 위상 양자 (anyon)      │ 에러율 ~0 양자   │
+  │ L9 ⏳  │ HEXA-FIELD             │ 장 컴퓨팅              │ 무한 병렬        │
+  │ L10 ⏳ │ HEXA-THERMO            │ 열역학 (Landauer)      │ kT*ln2 per bit   │
+  │ L11 ⏳ │ HEXA-GRAVITY           │ 홀로그래피 원리        │ 베켄슈타인 한계  │
+  │ L12 ⏳ │ HEXA-PLANCK            │ 플랑크 스케일 연산     │ 우주 해상도 한계 │
+  │ L13 ⏳ │ HEXA-OMEGA             │ sigma=12차원 최적 패킹 │ 정보이론 최적    │
   └─────────┴────────────────────────┴────────────────────────┴──────────────────┘
 ```
 
@@ -875,11 +876,12 @@ Docs: [evolution/mk-1-current.md](evolution/mk-1-current.md) ~ [evolution/mk-5-l
   2033 ███░░░░░░░░░░░░░░░░░  L5: HEXA-WAFER ✅ (설계)
   2035 ██░░░░░░░░░░░░░░░░░░  L6: HEXA-SUPER ✅ (설계)
 
-  === 외계인 기술 ===
-  2035 ██░░░░░░░░░░░░░░░░░░  L7: HEXA-TOPO
-  2040 █░░░░░░░░░░░░░░░░░░░  L8: HEXA-FIELD
-  2045 ░░░░░░░░░░░░░░░░░░░░  L9: HEXA-THERMO
-  2050 ░░░░░░░░░░░░░░░░░░░░  L10~L12: HEXA-GRAVITY/PLANCK/OMEGA
+  === 양자+외계인 기술 ===
+  2033 ██░░░░░░░░░░░░░░░░░░  L7: HEXA-QUANTUM-HYBRID ✅ (설계, 66/66 EXACT)
+  2035 ██░░░░░░░░░░░░░░░░░░  L8: HEXA-TOPO-ANYON ✅ (설계, 72/72 EXACT)
+  2040 █░░░░░░░░░░░░░░░░░░░  L9: HEXA-FIELD
+  2045 ░░░░░░░░░░░░░░░░░░░░  L10: HEXA-THERMO
+  2050 ░░░░░░░░░░░░░░░░░░░░  L11~L13: HEXA-GRAVITY/PLANCK/OMEGA
 ```
 
 ---

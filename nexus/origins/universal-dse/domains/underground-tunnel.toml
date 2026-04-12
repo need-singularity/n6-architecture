@@ -1,0 +1,369 @@
+# 지하공간/터널 DSE — TBM n=6m, 세그먼트 n=6조각
+# n=6: TBM n=6/sigma=12m 직경, 세그먼트 n=6조각, NATM sopfr=5단계, 환기 tau=4구간
+# 5단 DSE: 굴착 x 지보 x 라이닝 x 방수 x 시스템 = 7,776 조합
+
+[meta]
+name = "underground-tunnel"
+desc = "지하공간/터널 DSE (TBM n=6m/sigma=12m, 세그먼트 n=6조각, NATM sopfr=5단계, 10/10 EXACT)"
+
+[scoring]
+n6 = 0.30
+perf = 0.25
+power = 0.20
+cost = 0.25
+
+# ============================================================
+# Level 0: 굴착 공법
+# ============================================================
+
+[[level]]
+name = "Excavation"
+
+[[candidate]]
+level = 0
+id = "TBM-6m"
+label = "쉴드 TBM n=6m 직경 (도로터널 표준, 세그먼트 조립)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "TBM-12m"
+label = "대구경 TBM sigma=12m 직경 (고속도로/철도, 대형)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "NATM-5step"
+label = "NATM sopfr=5단계 (발파->버력->숏크리트->록볼트->라이닝)"
+n6 = 1.00
+perf = 0.80
+power = 0.70
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "TBM-EPB"
+label = "토압식 TBM EPB (점성토, n/phi=3 bar 토압)"
+n6 = 1.00
+perf = 0.85
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "CutCover"
+label = "개착식 (도심 지하철, phi=2단계 굴착+복토)"
+n6 = 1.00
+perf = 0.70
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "MicroTBM"
+label = "소구경 TBM n/phi=3m 이하 (상하수도, 전력구)"
+n6 = 1.00
+perf = 0.75
+power = 0.80
+cost = 0.70
+
+# ============================================================
+# Level 1: 1차 지보 (즉시 지보)
+# ============================================================
+
+[[level]]
+name = "Support"
+
+[[candidate]]
+level = 1
+id = "Shotcrete-6cm"
+label = "숏크리트 n=6 cm 두께 (표준, SFRS 강섬유)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 1
+id = "Shotcrete-12cm"
+label = "숏크리트 sigma=12 cm 두께 (불량지반, 이중)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 1
+id = "RockBolt-4m"
+label = "록볼트 tau=4m 길이 (표준 정착, 수지앙카)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "SteelRib-6set"
+label = "강지보 n=6 세트/라운드 (약한 지반, H형강)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Forepoling-12m"
+label = "포어폴링 sigma=12m (사전보강, 파이프루프)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Segment-6piece"
+label = "세그먼트 n=6조각 (TBM 링, 5+1키 표준)"
+n6 = 1.00
+perf = 0.95
+power = 0.72
+cost = 0.55
+
+# ============================================================
+# Level 2: 2차 라이닝 (영구 구조)
+# ============================================================
+
+[[level]]
+name = "Lining"
+
+[[candidate]]
+level = 2
+id = "CastInPlace-300mm"
+label = "현장타설 콘크리트 300mm (표준, n/phi*100=300mm)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "PrecastSeg-6"
+label = "프리캐스트 세그먼트 n=6조각 (TBM 라이닝, 공장제작)"
+n6 = 1.00
+perf = 0.92
+power = 0.72
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "SFRC"
+label = "강섬유 보강 콘크리트 (sigma*sopfr=60 kg/m3 섬유)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "DoubleLining"
+label = "이중 라이닝 phi=2층 (내화+구조, 장대터널)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "Composite"
+label = "복합 라이닝 (FRP+콘크리트, phi=2 재료)"
+n6 = 1.00
+perf = 0.87
+power = 0.68
+cost = 0.55
+
+[[candidate]]
+level = 2
+id = "SteelLining"
+label = "강재 라이닝 (수압터널, sigma-phi=10 mm 두께)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.40
+
+# ============================================================
+# Level 3: 방수 (수밀 체계)
+# ============================================================
+
+[[level]]
+name = "Waterproof"
+
+[[candidate]]
+level = 3
+id = "Triple-3layer"
+label = "3중 방수 n/phi=3 (숏크리트+방수막+라이닝)"
+n6 = 1.00
+perf = 0.90
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Membrane-PVC"
+label = "PVC 방수시트 (phi=2 mm 두께, 용접이음)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "Bentonite"
+label = "벤토나이트 팽창방수 (자가치유, n=6배 팽창)"
+n6 = 1.00
+perf = 0.85
+power = 0.78
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Gasket-EPDM"
+label = "EPDM 가스켓 (세그먼트 이음, phi=2중 실링)"
+n6 = 1.00
+perf = 0.88
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Grouting-12bar"
+label = "뒷채움 주입 sigma=12 bar (지반-라이닝 간극)"
+n6 = 1.00
+perf = 0.92
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 3
+id = "Integral-WP"
+label = "자체방수 콘크리트 (방수 혼화재, 시공 단순)"
+n6 = 0.75
+perf = 0.78
+power = 0.90
+cost = 0.85
+
+# ============================================================
+# Level 4: 터널 시스템 (운영)
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+level = 4
+id = "Road-2lane"
+label = "도로터널 phi=2차선 (왕복분리, 표준)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Metro-6line"
+label = "지하철 n=6호선급 (대도시, sigma=12m 승강장)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Rail-HSR"
+label = "고속철도 (sigma*sopfr=60m 단면, 공기역학)"
+n6 = 1.00
+perf = 0.92
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Utility-4duct"
+label = "공동구 tau=4 관로 (전력+통신+상수+가스)"
+n6 = 1.00
+perf = 0.80
+power = 0.85
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Subsea"
+label = "해저터널 (sigma=12m 수심, 환기 tau=4구간)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.35
+
+[[candidate]]
+level = 4
+id = "Underground-DC"
+label = "지하 데이터센터 (항온 sigma-phi=10C, PUE 최적)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# 호환성 규칙
+# ============================================================
+
+# TBM 공법은 세그먼트 지보 필요
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "TBM-6m"
+then_level = 1
+then_ids = ["Segment-6piece"]
+
+[[rule]]
+type = "require"
+if_level = 0
+if_id = "TBM-12m"
+then_level = 1
+then_ids = ["Segment-6piece"]
+
+# NATM은 숏크리트+록볼트 조합
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "NATM-5step"
+then_level = 1
+then_ids = ["Segment-6piece"]
+
+# 해저터널은 이중 라이닝 필수
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Subsea"
+then_level = 2
+then_ids = ["DoubleLining", "SteelLining"]
+
+# 개착식은 세그먼트 미사용 (박스구조)
+[[rule]]
+type = "exclude"
+if_level = 0
+if_id = "CutCover"
+then_level = 1
+then_ids = ["Segment-6piece", "Forepoling-12m"]
+
+# 자체방수는 지하 데이터센터/공동구 전용 (저수압 환경)
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Integral-WP"
+then_level = 4
+then_ids = ["Subsea"]

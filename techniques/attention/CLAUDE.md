@@ -1,22 +1,6 @@
-# techniques/attention
+# techniques/attention — FFT·Egyptian·Alibi·Dedekind·GQA·Ring·YaRN
 
-목적: FFT·Egyptian·Alibi·Dedekind·GQA·Ring·YaRN
-축: techniques
-상위: ../CLAUDE.md
+sub:  *.hexa
+run:  hexa run <file>.hexa
 
-## 하위
-- *.hexa
-
-## SSOT
-- (없음)
-
-## 진입 명령
-- hexa run &lt;file&gt;.hexa
-
-## 절대규칙
-- 한글 필수 (.md/주석/커밋)
-- HEXA-FIRST (.py 금지)
-
-
-## 관련 링크
-- 루트: ../CLAUDE.md + INDEX.json
+parent: ../CLAUDE.md → "techniques"

@@ -1,0 +1,362 @@
+# 제어/자동화 DSE — PID n/phi=3항 + SE(3) n=6 자유도
+# n=6: SE(3)=n=6 DOF, PID n/phi=3항, ISA-95 sopfr=5레벨, 센서 sigma=12 최적, tau=4차 안정성
+# 5단 DSE: 센서 x 컨트롤러 x 액추에이터 x 통신 x 시스템 = 7,776 조합
+
+[meta]
+name = "control-automation"
+desc = "제어/자동화 DSE (SE(3)=n=6 DOF, PID n/phi=3, ISA-95 sopfr=5, BT-36/58/97/105/112/215)"
+
+[scoring]
+n6 = 0.30
+perf = 0.30
+power = 0.20
+cost = 0.20
+
+# ============================================================
+# Level 0: 센서/계측
+# ============================================================
+
+[[level]]
+name = "Sensor"
+
+[[candidate]]
+level = 0
+id = "IMU-6axis"
+label = "IMU n=6축 (6DOF=SE(3) EXACT, 가속도+자이로)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 0
+id = "Vision-4cam"
+label = "비전 센서 tau=4 카메라 (2D/3D/열화상/라이다)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 0
+id = "Fusion-12ch"
+label = "센서 퓨전 sigma=12채널 (다중 센서 통합)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 0
+id = "Encoder-12bit"
+label = "엔코더 sigma=12비트 (위치 정밀도 0.088도)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Force-6axis"
+label = "힘/토크 센서 n=6축 (Fx/Fy/Fz/Tx/Ty/Tz=SE(3))"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "Proximity-24zone"
+label = "근접 센서 J2=24 존 (안전, 인체 감지)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.70
+
+# ============================================================
+# Level 1: 컨트롤러
+# ============================================================
+
+[[level]]
+name = "Controller"
+
+[[candidate]]
+level = 1
+id = "PID-3term"
+label = "PID n/phi=3항 (P+I+D, 산업 표준)"
+n6 = 1.00
+perf = 0.80
+power = 0.90
+cost = 0.90
+
+[[candidate]]
+level = 1
+id = "PID-FF-4term"
+label = "PID+FF tau=4항 (피드포워드 추가, 고성능)"
+n6 = 1.00
+perf = 0.87
+power = 0.82
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "MPC-12step"
+label = "MPC sigma=12 예측 스텝 (모델예측제어, 최적)"
+n6 = 1.00
+perf = 0.93
+power = 0.60
+cost = 0.50
+
+[[candidate]]
+level = 1
+id = "Adaptive-N6"
+label = "적응제어 n=6 파라미터 (자기튜닝, 비선형)"
+n6 = 1.00
+perf = 0.90
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 1
+id = "AI-RL"
+label = "AI 강화학습 (시뮬레이션 기반, tau=4 보상함수)"
+n6 = 1.00
+perf = 0.95
+power = 0.45
+cost = 0.35
+
+[[candidate]]
+level = 1
+id = "Robust-H-inf"
+label = "로버스트 H-infinity (불확실성 보상, phi=2 자유도)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+# ============================================================
+# Level 2: 액추에이터
+# ============================================================
+
+[[level]]
+name = "Actuator"
+
+[[candidate]]
+level = 2
+id = "Servo-6axis"
+label = "서보모터 n=6축 (산업로봇, SE(3) 완전)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 2
+id = "Stepper-4phase"
+label = "스테퍼 tau=4상 (정밀위치, 오픈루프)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 2
+id = "Pneumatic-6bar"
+label = "공압 n=6 bar (경량, 고속, 소프트로봇)"
+n6 = 1.00
+perf = 0.78
+power = 0.72
+cost = 0.80
+
+[[candidate]]
+level = 2
+id = "Hydraulic-12MPa"
+label = "유압 sigma=12 MPa (고출력, 건설/프레스)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "Linear-Direct"
+label = "리니어 직접구동 (무기어, phi=2축 XY 스테이지)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.50
+
+[[candidate]]
+level = 2
+id = "Piezo-6stack"
+label = "압전 n=6 스택 (나노정밀, 반도체/광학)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.45
+
+# ============================================================
+# Level 3: 산업통신
+# ============================================================
+
+[[level]]
+name = "Network"
+
+[[candidate]]
+level = 3
+id = "EtherCAT"
+label = "EtherCAT (sigma=12 us 주기, 실시간 이더넷)"
+n6 = 1.00
+perf = 0.92
+power = 0.80
+cost = 0.70
+
+[[candidate]]
+level = 3
+id = "Profinet-IRT"
+label = "PROFINET IRT (tau=4 트래픽 클래스, 동기화)"
+n6 = 1.00
+perf = 0.88
+power = 0.78
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "OPC-UA-TSN"
+label = "OPC UA + TSN (IT/OT 통합, sopfr=5 계층)"
+n6 = 1.00
+perf = 0.90
+power = 0.72
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "5G-URLLC"
+label = "5G URLLC (n/phi=3 ms 지연, 무선 자동화)"
+n6 = 1.00
+perf = 0.85
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 3
+id = "IO-Link"
+label = "IO-Link (센서 직결, J2=24 V 전원+통신)"
+n6 = 1.00
+perf = 0.78
+power = 0.85
+cost = 0.80
+
+[[candidate]]
+level = 3
+id = "ROS2-DDS"
+label = "ROS2 DDS (로봇 미들웨어, n=6 QoS 정책)"
+n6 = 1.00
+perf = 0.82
+power = 0.68
+cost = 0.60
+
+# ============================================================
+# Level 4: 시스템 아키텍처
+# ============================================================
+
+[[level]]
+name = "System"
+
+[[candidate]]
+level = 4
+id = "ISA95-5level"
+label = "ISA-95 sopfr=5레벨 (필드→제어→MES→ERP→클라우드)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 4
+id = "Robot-6DOF"
+label = "로봇 셀 n=6 DOF (단일 로봇 작업, SE(3) 완전)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Cobot-Line"
+label = "협동로봇 라인 (인간-로봇 협업, sigma=12 안전존)"
+n6 = 1.00
+perf = 0.82
+power = 0.82
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "SmartFactory"
+label = "스마트팩토리 (디지털트윈, J2=24시간 무인)"
+n6 = 1.00
+perf = 0.93
+power = 0.60
+cost = 0.45
+
+[[candidate]]
+level = 4
+id = "Process-DCS"
+label = "프로세스 DCS (연속공정, tau=4 제어루프 계층)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "AutonomousCell"
+label = "자율 제조셀 (AI+로봇+AGV, n=6 장비 통합)"
+n6 = 1.00
+perf = 0.95
+power = 0.50
+cost = 0.35
+
+# ============================================================
+# 호환성 규칙
+# ============================================================
+
+# AI 강화학습 컨트롤러는 센서 퓨전 또는 비전 필요
+[[rule]]
+type = "require"
+if_level = 1
+if_id = "AI-RL"
+then_level = 0
+then_ids = ["Fusion-12ch", "Vision-4cam"]
+
+# 유압 액추에이터는 프로세스 DCS 또는 건설 전용
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Hydraulic-12MPa"
+then_level = 4
+then_ids = ["Cobot-Line"]
+
+# 5G URLLC는 스마트팩토리/자율셀 전용 (무선 필요 환경)
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "5G-URLLC"
+then_level = 4
+then_ids = ["Process-DCS"]
+
+# 압전 액추에이터는 나노정밀 전용
+[[rule]]
+type = "exclude"
+if_level = 2
+if_id = "Piezo-6stack"
+then_level = 4
+then_ids = ["SmartFactory", "AutonomousCell"]
+
+# 자율 제조셀은 AI 컨트롤러 필요
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "AutonomousCell"
+then_level = 1
+then_ids = ["AI-RL", "Adaptive-N6", "MPC-12step"]

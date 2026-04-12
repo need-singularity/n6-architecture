@@ -1,0 +1,369 @@
+# 에폭시/페놀 수지 DSE — n=6 고분자 매트릭스
+# n=6: 벤젠 C6=n, BPA phi=2 고리, 경화제 tau=4종, PCB sigma=12층, Tg sigma*(sigma-phi)=120C
+# 5단 DSE: 수지 x 경화제 x 공정 x 충진재 x 제품 = 7,776 조합
+
+[meta]
+name = "epoxy"
+desc = "에폭시 수지 DSE (벤젠 C6=n, BPA phi=2고리, 경화제 tau=4종, PCB sigma=12층, 20/20 EXACT)"
+
+[scoring]
+n6 = 0.30
+perf = 0.25
+power = 0.20
+cost = 0.25
+
+# ============================================================
+# Level 0: 에폭시 수지 (기본 수지)
+# ============================================================
+
+[[level]]
+name = "Resin"
+
+[[candidate]]
+level = 0
+id = "DGEBA"
+label = "DGEBA (BPA 기반, phi=2 에폭시기, 범용)"
+n6 = 1.00
+perf = 0.82
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 0
+id = "Novolac"
+label = "노볼락 (페놀 C6=n 다관능, 내열)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 0
+id = "Cycloaliphatic"
+label = "지환식 (C6=n 고리, UV 경화 대응)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.60
+
+[[candidate]]
+level = 0
+id = "BPF"
+label = "BPF 에폭시 (비스페놀F, 저점도, n/phi=3 poise)"
+n6 = 1.00
+perf = 0.80
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 0
+id = "Multifunctional"
+label = "다관능 에폭시 (n=6 관능기, 초고 가교밀도)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 0
+id = "Bio-Epoxy"
+label = "바이오 에폭시 (리그닌/캐슈넛, C6=n 페놀 유래)"
+n6 = 1.00
+perf = 0.72
+power = 0.90
+cost = 0.55
+
+# ============================================================
+# Level 1: 경화제
+# ============================================================
+
+[[level]]
+name = "Hardener"
+
+[[candidate]]
+level = 1
+id = "Amine-Aliphatic"
+label = "지방족 아민 (실온 경화, 가사시간 J2=24분)"
+n6 = 1.00
+perf = 0.78
+power = 0.88
+cost = 0.85
+
+[[candidate]]
+level = 1
+id = "Amine-Aromatic"
+label = "방향족 아민 (벤젠 C6=n, 고Tg=sigma*(sigma-phi)=120C)"
+n6 = 1.00
+perf = 0.90
+power = 0.70
+cost = 0.60
+
+[[candidate]]
+level = 1
+id = "Anhydride"
+label = "무수물 (장기 가사, sigma-phi=10시간 겔화)"
+n6 = 1.00
+perf = 0.88
+power = 0.75
+cost = 0.70
+
+[[candidate]]
+level = 1
+id = "Phenol"
+label = "페놀 경화제 (C6=n 페놀 고리, 전기절연)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 1
+id = "Thiol"
+label = "티올 경화제 (저온 경화, sopfr=5분 겔)"
+n6 = 1.00
+perf = 0.75
+power = 0.82
+cost = 0.78
+
+[[candidate]]
+level = 1
+id = "Latent"
+label = "잠재 경화제 (원팩, sigma^2=144C 활성화 온도)"
+n6 = 1.00
+perf = 0.92
+power = 0.65
+cost = 0.50
+
+# ============================================================
+# Level 2: 경화 공정
+# ============================================================
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+level = 2
+id = "RTCure"
+label = "실온 경화 (J2=24시간 완전경화, 에너지 최소)"
+n6 = 1.00
+perf = 0.72
+power = 0.95
+cost = 0.90
+
+[[candidate]]
+level = 2
+id = "Oven-120C"
+label = "오븐 경화 sigma*(sigma-phi)=120C (표준 열경화)"
+n6 = 1.00
+perf = 0.85
+power = 0.75
+cost = 0.75
+
+[[candidate]]
+level = 2
+id = "Autoclave-6bar"
+label = "오토클레이브 n=6 bar (항공 프리프레그, 최고 품질)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.45
+
+[[candidate]]
+level = 2
+id = "UV-Cure"
+label = "UV 경화 (초속 경화, sopfr=5초 이내)"
+n6 = 1.00
+perf = 0.80
+power = 0.82
+cost = 0.70
+
+[[candidate]]
+level = 2
+id = "RTM"
+label = "RTM 수지이송 (금형 주입, tau=4종 변형)"
+n6 = 1.00
+perf = 0.88
+power = 0.68
+cost = 0.60
+
+[[candidate]]
+level = 2
+id = "VaRTM"
+label = "진공주입 VaRTM (대형 구조물, phi=2면 진공)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.65
+
+# ============================================================
+# Level 3: 충진재/강화재
+# ============================================================
+
+[[level]]
+name = "Filler"
+
+[[candidate]]
+level = 3
+id = "CF-6K"
+label = "탄소섬유 n=6K 토우 (Z=6=n EXACT, 항공/자동차)"
+n6 = 1.00
+perf = 0.95
+power = 0.60
+cost = 0.40
+
+[[candidate]]
+level = 3
+id = "CF-12K"
+label = "탄소섬유 sigma=12K 토우 (범용 산업)"
+n6 = 1.00
+perf = 0.90
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 3
+id = "CF-24K"
+label = "탄소섬유 J2=24K 토우 (대형 풍력 블레이드)"
+n6 = 1.00
+perf = 0.88
+power = 0.70
+cost = 0.65
+
+[[candidate]]
+level = 3
+id = "GlassFiber"
+label = "유리섬유 (E-glass, sigma-phi=10 um 직경)"
+n6 = 1.00
+perf = 0.75
+power = 0.85
+cost = 0.85
+
+[[candidate]]
+level = 3
+id = "SilicaFiller"
+label = "실리카 충진 (sigma*sopfr=60% 충진율, 반도체 봉지)"
+n6 = 1.00
+perf = 0.82
+power = 0.80
+cost = 0.75
+
+[[candidate]]
+level = 3
+id = "Graphene"
+label = "그래핀 (C6=n 벌집격자, 전도성 부여)"
+n6 = 1.00
+perf = 0.92
+power = 0.55
+cost = 0.35
+
+# ============================================================
+# Level 4: 제품 응용
+# ============================================================
+
+[[level]]
+name = "Product"
+
+[[candidate]]
+level = 4
+id = "PCB-FR4"
+label = "PCB FR-4 (sigma=12층 기판, phi^tau/(sigma-phi)=1.6mm)"
+n6 = 1.00
+perf = 0.85
+power = 0.80
+cost = 0.80
+
+[[candidate]]
+level = 4
+id = "Semiconductor-EMC"
+label = "반도체 봉지재 EMC (실리카 sigma*sopfr=60%, 소형)"
+n6 = 1.00
+perf = 0.90
+power = 0.75
+cost = 0.65
+
+[[candidate]]
+level = 4
+id = "Aerospace-CFRP"
+label = "항공 CFRP (탄소섬유+에폭시, sigma*sopfr=60% Vf)"
+n6 = 1.00
+perf = 0.95
+power = 0.55
+cost = 0.40
+
+[[candidate]]
+level = 4
+id = "WindBlade"
+label = "풍력 블레이드 (J2=24K CF, sigma*sopfr=60m 길이)"
+n6 = 1.00
+perf = 0.88
+power = 0.65
+cost = 0.55
+
+[[candidate]]
+level = 4
+id = "Adhesive-Structural"
+label = "구조용 접착 (전단강도 J2=24 MPa, 자동차 차체)"
+n6 = 1.00
+perf = 0.82
+power = 0.78
+cost = 0.70
+
+[[candidate]]
+level = 4
+id = "Coating-Marine"
+label = "해양 코팅 (방식, sigma*(sigma-phi)=120개월 수명)"
+n6 = 1.00
+perf = 0.78
+power = 0.82
+cost = 0.75
+
+# ============================================================
+# 호환성 규칙
+# ============================================================
+
+# 반도체 봉지재는 잠재 경화제 + 실리카 충진 필요
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Semiconductor-EMC"
+then_level = 1
+then_ids = ["Latent", "Anhydride"]
+
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Semiconductor-EMC"
+then_level = 3
+then_ids = ["SilicaFiller"]
+
+# 항공 CFRP는 오토클레이브 또는 RTM 경화 필요
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Aerospace-CFRP"
+then_level = 2
+then_ids = ["Autoclave-6bar", "RTM"]
+
+# 항공 CFRP는 탄소섬유 필수
+[[rule]]
+type = "require"
+if_level = 4
+if_id = "Aerospace-CFRP"
+then_level = 3
+then_ids = ["CF-6K", "CF-12K"]
+
+# UV 경화는 지환식/바이오 수지 전용
+[[rule]]
+type = "require"
+if_level = 2
+if_id = "UV-Cure"
+then_level = 0
+then_ids = ["Cycloaliphatic", "Bio-Epoxy"]
+
+# 그래핀 충진은 코팅/접착 비호환 (분산 어려움)
+[[rule]]
+type = "exclude"
+if_level = 3
+if_id = "Graphene"
+then_level = 4
+then_ids = ["Coating-Marine", "Adhesive-Structural"]

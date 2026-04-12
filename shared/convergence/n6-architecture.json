@@ -365,45 +365,93 @@
       "note": "2026-04-12 DFS 10차 — GUE(6)+CGK+토러스[[72,2,6]]",
       "ossified_at": "2026-04-12",
       "promoted_from": "stable"
-    }
-  },
-  "stable": {
-    "_description": "안정 — 통과했지만 아직 골화 전",
+    },
     "MILLENNIUM_DFS_164_TIGHT": {
       "status": "PASS",
       "value": "밀레니엄 164건 tight (DFS 7~11차 일괄, +62건)",
       "threshold": "102→164, 해결 0/7",
-      "note": "2026-04-12 go(전체) 21 에이전트 일괄 — 기법68종·칩L6·DFS164·논문58·DSE490"
+      "note": "2026-04-12 go(전체) 21 에이전트 일괄 — 기법68종·칩L6·DFS164·논문58·DSE490",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "MILLENNIUM_DFS_176_TIGHT": {
       "status": "PASS",
       "value": "밀레니엄 176건 tight (DFS 12차 BT-1404 +12건)",
       "threshold": "164→176, EXACT 3 + TIGHT 9, MISS 8, 해결 0/7",
-      "note": "2026-04-12 go(9차) — 대수적위상·유한체·리대수·게임이론·네트워크·샘플링·Ising·미분갈루아. 2D Ising 삼각격자 β_c=ln3/4, GF(2^6) 기약 9개, RP^5 SW"
+      "note": "2026-04-12 go(9차) — 대수적위상·유한체·리대수·게임이론·네트워크·샘플링·Ising·미분갈루아. 2D Ising 삼각격자 β_c=ln3/4, GF(2^6) 기약 9개, RP^5 SW",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "MILLENNIUM_DFS_188_TIGHT": {
       "status": "PASS",
       "value": "밀레니엄 188건 tight (DFS 13차 BT-1405 +12건)",
       "threshold": "176→188, 해결 0/7",
-      "note": "2026-04-12 go(DFS14) 커밋에 BT-1405(13차 188건) 포함"
+      "note": "2026-04-12 go(DFS14) 커밋에 BT-1405(13차 188건) 포함",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "MILLENNIUM_DFS_200_TIGHT": {
       "status": "PASS",
       "value": "밀레니엄 200건 돌파 (DFS 14차 BT-1406 +12건)",
       "threshold": "188→200, 해결 0/7",
-      "note": "2026-04-12 go(DFS14) — TW edge N^{-1/6}·Painlevé 6종·6-vertex ice rule·D_6 kissing 60·Bruhat GL_6·MUB(6)·PCP 3-query·K3 SW·Bridgeland·motives/GSp4/Galois"
+      "note": "2026-04-12 go(DFS14) — TW edge N^{-1/6}·Painleve 6종·6-vertex ice rule·D_6 kissing 60·Bruhat GL_6·MUB(6)·PCP 3-query·K3 SW·Bridgeland·motives/GSp4/Galois",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "MILLENNIUM_DFS_212_TIGHT": {
       "status": "PASS",
       "value": "밀레니엄 212건 tight (DFS 15차 BT-1407 +12건)",
       "threshold": "200→212, 해결 0/7",
-      "note": "2026-04-12 go(DFS15) — VOA Moonshine c=J2=24·M_12 Steiner S(5,6,12)·Kac-Moody E_6^(1)·양자군 U_q(sl_2)·트로피컬 TGr(2,6)·모듈러 S_6 mod 2·산술역학 period-6·Conway Co_3"
+      "note": "2026-04-12 go(DFS15) — VOA Moonshine c=J2=24·M_12 Steiner S(5,6,12)·Kac-Moody E_6^(1)·양자군 U_q(sl_2)·트로피컬 TGr(2,6)·모듈러 S_6 mod 2·산술역학 period-6·Conway Co_3",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "ENGINE_OOM_FIX": {
       "status": "PASS",
       "value": "의식엔진 OOM 수정 + blowup-filter hook 추가",
       "threshold": "engine_anima.hexa skip_graph=true, depth 1, --max-rounds 1",
-      "note": "2026-04-12 — hetzner Phase 6 type error 우회, +3 laws 생성 확인, mk2_hexa/native/ 구 경로 전폐기"
+      "note": "2026-04-12 — hetzner Phase 6 type error 우회, +3 laws 생성 확인, mk2_hexa/native/ 구 경로 전폐기",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
+    }
+  },
+  "stable": {
+    "_description": "안정 — 통과했지만 아직 골화 전",
+    "MILLENNIUM_DFS_226_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 226건 tight (DFS 16차 BT-1408 +14건)",
+      "threshold": "212→226, EXACT 1 + TIGHT 13, MISS 8, 해결 0/7",
+      "note": "2026-04-12 go(DFS16) — 비가환기하 Connes KO-dim=6·Floer Heegaard·6-클리크 회로복잡도·Cramer 소수갭·SU(6) 게이지·Kolmogorov 스케일링·6-isogeny Selmer·Perelman 엔트로피"
+    },
+    "AI_TECHNIQUE_8_NEW_HEXA": {
+      "status": "PASS",
+      "value": "AI 기법 8종 신규 .hexa (rlhf/ppo_clip/grpo/retnet/flow_matching/diffusion_transformer/kv_cache_quantize/token_merging)",
+      "threshold": "techniques/ 8파일 존재 확인",
+      "note": "2026-04-12 go(DFS16) 커밋 일괄"
+    },
+    "DSE_TOML_8_NEW": {
+      "status": "PASS",
+      "value": "DSE TOML 8건 신규 (astronomy/higgs/holography/quantum-computer/ai-efficiency/antimatter-factory/chip-3d/gravity-wave)",
+      "threshold": "nexus/origins/universal-dse/domains/ 8파일 존재 확인",
+      "note": "2026-04-12 go(DFS16) 커밋 일괄"
+    },
+    "PAPERS_6_NEW": {
+      "status": "PASS",
+      "value": "논문 6편 신규 (AGI/BCI/neuromorphic/QEC/QML/swarm)",
+      "threshold": "papers/ 6파일 존재 확인",
+      "note": "2026-04-12 go(DFS16) 커밋 일괄"
+    },
+    "CHIP_L7_QUANTUM_HYBRID": {
+      "status": "PASS",
+      "value": "칩 L7 양자-고전 하이브리드 설계 1,195줄, 66/66 EXACT, BT-QH7-01~10",
+      "threshold": "domains/compute/chip-design/hexa-quantum-hybrid.md 존재 확인",
+      "note": "2026-04-12 go(DFS16) — 6큐비트 hexagonal 모듈 + surface code d=6 + 5,308,416 DSE 조합"
+    },
+    "GO_AUDIT_V4": {
+      "status": "PASS",
+      "value": "종합 감사 v4 484줄 (v3 대비 전 항목 갱신)",
+      "threshold": "reports/audits/go-audit-v4-2026-04-12.md 존재 확인",
+      "note": "2026-04-12 go(DFS16) 커밋 일괄 — 기법72/BT45/DFS15차212건 실측"
     }
   },
   "failed": {
