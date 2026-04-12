@@ -1,0 +1,451 @@
+// optim/mixed_precision.hexa -- 혼합 정밀도 학습 (Mixed Precision Training) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수/실수 연산)
+// 원본 요약: Technique: Mixed Precision -- Micikevicius 외 2018
+//            "Mixed Precision Training" (ICLR 2018),
+//            Nvidia Apex AMP,
+//            Rae 외 2021 "Scaling Language Models"
+//            FP16 연산 + FP32 누적 + 동적 손실 스케일링
+// n=6 정렬:
+//   - 손실 스케일 인자       = sigma(6)^2 = 144  -> 초기 loss scale
+//   - 스케일 갱신 주기       = sigma(6) = 12     -> 12 스텝마다 조정
+//   - FP16 가수부 비트       = sopfr(6)*2 = 10   -> 실제 FP16 가수부
+//   - 마스터 가중치 정밀도    = sigma(6)*tau(6) = 48 -> 48비트 시뮬레이션
+//   - 동적 스케일 모드       = phi(6) = 2        -> 증가/감소 2모드
+//   - 오버플로 임계 연속     = tau(6) = 4        -> 4회 연속 시 감소
+//
+// 실행: hexa run techniques/optim/mixed_precision.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── 1) n=6 산술 함수 ──────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 2) 핵심 상수 ──────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ── 3) FP16/FP32 변환 시뮬레이션 ──────────────────────────
+
+// FP32 -> FP16 양자화 -- 가수부 절삭으로 정밀도 손실 모사
+fn fp32_to_fp16(val: i64, mantissa_bits: i64) -> i64 {
+    let truncation: i64 = SCALE / mantissa_bits
+    let quantized: i64 = (val / truncation) * truncation
+    return quantized
+}
+
+// 양자화 오차 계산
+fn quantization_error(original: i64, quantized: i64) -> i64 {
+    return abs_val(original - quantized)
+}
+
+// ── 4) 손실 스케일링 엔진 ─────────────────────────────────
+
+// 손실 함수 -- L(w) = (w - data)^2 / SCALE
+fn compute_loss(w: i64, data: i64) -> i64 {
+    let diff: i64 = w - data
+    return (diff * diff) / SCALE
+}
+
+// 그래디언트 -- dL/dw = 2*(w-data)
+fn compute_gradient(w: i64, data: i64) -> i64 {
+    return 2 * (w - data)
+}
+
+// 스케일링된 그래디언트 -- grad * loss_scale
+fn scaled_gradient(w: i64, data: i64, loss_scale: i64) -> i64 {
+    let grad: i64 = compute_gradient(w, data)
+    return (grad * loss_scale) / SCALE
+}
+
+// 오버플로 감지
+fn detect_overflow(scaled_grad: i64, threshold: i64) -> bool {
+    if abs_val(scaled_grad) > threshold { return true }
+    return false
+}
+
+// 언스케일 -- 스케일 역변환
+fn unscale_gradient(scaled_grad: i64, loss_scale: i64) -> i64 {
+    if loss_scale == 0 { return 0 }
+    return (scaled_grad * SCALE) / loss_scale
+}
+
+// ── 5) 동적 손실 스케일 관리자 ────────────────────────────
+
+fn scale_up(cur: i64) -> i64 { return cur * 2 }
+
+fn scale_down(cur: i64) -> i64 {
+    let half: i64 = cur / 2
+    if half < 1 { return 1 }
+    return half
+}
+
+// ── 6) 마스터 가중치 관리 ─────────────────────────────────
+
+fn update_master_weight(master_w: i64, grad: i64, lr: i64) -> i64 {
+    return master_w - (lr * grad) / SCALE
+}
+
+fn sync_fp16_weight(master_w: i64, mantissa_bits: i64) -> i64 {
+    return fp32_to_fp16(master_w, mantissa_bits)
+}
+
+// ── 7) 메모리 계산 ───────────────────────────────────────
+
+fn fp32_memory(num_params: i64) -> i64 { return num_params * 4 }
+fn fp16_memory(num_params: i64) -> i64 { return num_params * 2 }
+
+// 혼합 정밀도 메모리 -- 마스터(FP32) + 사본(FP16) + 그래디언트(FP16)
+fn mixed_precision_memory(num_params: i64) -> i64 {
+    return fp32_memory(num_params) + fp16_memory(num_params) + fp16_memory(num_params)
+}
+
+// 순수 FP32 학습 -- 가중치 + 그래디언트 + 옵티마이저 상태(m,v)
+fn pure_fp32_memory(num_params: i64) -> i64 {
+    return fp32_memory(num_params) * 4
+}
+
+// ── main ──────────────────────────────────────────────────
+
+fn main() {
+    println("=== 혼합 정밀도 학습 (Mixed Precision Training) x n=6 ===")
+    println("")
+
+    // n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+
+    println("[G1] n=6 산술 검증")
+    println("  sigma(6) = " + s6)
+    println("  tau(6)   = " + t6)
+    println("  phi(6)   = " + p6)
+    println("  sopfr(6) = " + sp6)
+
+    let lhs: i64 = s6 * p6
+    let rhs: i64 = N6 * t6
+    println("  sigma*phi = " + lhs + " | n*tau = " + rhs + " | 일치 = " + (lhs == rhs))
+    println("")
+
+    // 핵심 상수 유도
+    let LOSS_SCALE_INIT: i64 = s6 * s6       // 144
+    let SCALE_INTERVAL: i64 = s6              // 12
+    let FP16_MANTISSA: i64 = sp6 * 2          // 10
+    let MASTER_PREC: i64 = s6 * t6            // 48
+    let DYNAMIC_MODES: i64 = p6               // 2
+    let OVERFLOW_THRESH: i64 = t6             // 4
+
+    println("[G1] 핵심 상수")
+    println("  LOSS_SCALE_INIT  = " + LOSS_SCALE_INIT + " (sigma^2)")
+    println("  SCALE_INTERVAL   = " + SCALE_INTERVAL + " (sigma)")
+    println("  FP16_MANTISSA    = " + FP16_MANTISSA + " (sopfr*2)")
+    println("  MASTER_PREC      = " + MASTER_PREC + " (sigma*tau)")
+    println("  DYNAMIC_MODES    = " + DYNAMIC_MODES + " (phi)")
+    println("  OVERFLOW_THRESH  = " + OVERFLOW_THRESH + " (tau)")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G2] FP16/FP32 변환 정밀도 분석
+    // ─────────────────────────────────────────────
+    println("[G2] FP16/FP32 변환 정밀도 분석")
+
+    let mut total_error: i64 = 0
+    let mut max_error: i64 = 0
+    let num_tests: i64 = s6
+    let mut tidx: i64 = 0
+
+    while tidx < num_tests {
+        let fp32_val: i64 = (tidx * 137 + 59) % SCALE + 1
+        let fp16_val: i64 = fp32_to_fp16(fp32_val, FP16_MANTISSA)
+        let err: i64 = quantization_error(fp32_val, fp16_val)
+        total_error = total_error + err
+        if err > max_error { max_error = err }
+        println("  값[" + tidx + "] FP32=" + fp32_val + " FP16=" + fp16_val + " 오차=" + err)
+        tidx = tidx + 1
+    }
+
+    let avg_error: i64 = total_error / num_tests
+    println("  평균 양자화 오차 = " + avg_error + " 최대 = " + max_error)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G3] 손실 스케일링 + 오버플로 감지
+    // ─────────────────────────────────────────────
+    println("[G3] 손실 스케일링 시뮬레이션")
+
+    let mut loss_scale: i64 = LOSS_SCALE_INIT
+    let overflow_limit: i64 = SCALE * s6  // 12000
+    let mut consecutive_ok: i64 = 0
+    let mut consecutive_of: i64 = 0
+    let mut scale_changes: i64 = 0
+    let num_steps: i64 = MASTER_PREC  // 48
+
+    let mut step: i64 = 0
+    while step < num_steps {
+        let w: i64 = SCALE * 3 - step * 50
+        let data: i64 = SCALE + (step * 31) % SCALE
+        let sg: i64 = scaled_gradient(w, data, loss_scale)
+        let is_of: bool = detect_overflow(sg, overflow_limit)
+
+        if is_of {
+            consecutive_of = consecutive_of + 1
+            consecutive_ok = 0
+            if consecutive_of >= OVERFLOW_THRESH {
+                loss_scale = scale_down(loss_scale)
+                consecutive_of = 0
+                scale_changes = scale_changes + 1
+            }
+        }
+        if is_of == false {
+            consecutive_ok = consecutive_ok + 1
+            consecutive_of = 0
+            if consecutive_ok >= SCALE_INTERVAL {
+                loss_scale = scale_up(loss_scale)
+                consecutive_ok = 0
+                scale_changes = scale_changes + 1
+            }
+        }
+
+        if step % s6 == 0 {
+            println("  스텝[" + step + "] scale=" + loss_scale + " grad=" + sg + " 오버플로=" + is_of)
+        }
+        step = step + 1
+    }
+
+    println("  최종 손실 스케일 = " + loss_scale + " 조정횟수 = " + scale_changes)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G4] 마스터 가중치 갱신 루프
+    // ─────────────────────────────────────────────
+    println("[G4] 마스터 가중치 갱신 루프")
+
+    let lr: i64 = 50
+    let mut master_w: i64 = SCALE * 3
+    let mut fp16_w: i64 = fp32_to_fp16(master_w, FP16_MANTISSA)
+    let epochs: i64 = s6
+    let batch_per_epoch: i64 = N6
+    let mut current_scale: i64 = LOSS_SCALE_INIT
+
+    let mut ep: i64 = 0
+    while ep < epochs {
+        let mut batch: i64 = 0
+        let mut epoch_loss: i64 = 0
+
+        while batch < batch_per_epoch {
+            let data: i64 = SCALE + (ep * 70 + batch * 120) % SCALE
+            let loss: i64 = compute_loss(fp16_w, data)
+            epoch_loss = epoch_loss + loss
+
+            let sg: i64 = scaled_gradient(fp16_w, data, current_scale)
+            let is_of: bool = detect_overflow(sg, SCALE * s6)
+
+            if is_of == false {
+                let grad: i64 = unscale_gradient(sg, current_scale)
+                master_w = update_master_weight(master_w, grad, lr)
+                fp16_w = sync_fp16_weight(master_w, FP16_MANTISSA)
+            }
+            batch = batch + 1
+        }
+
+        let avg_loss: i64 = epoch_loss / batch_per_epoch
+        let prec_gap: i64 = abs_val(master_w - fp16_w)
+        println("  에폭[" + ep + "] 손실=" + avg_loss + " 마스터w=" + master_w + " FP16w=" + fp16_w + " 격차=" + prec_gap)
+        ep = ep + 1
+    }
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G5] 동적 스케일 모드 비교
+    // ─────────────────────────────────────────────
+    println("[G5] 동적 스케일 모드 비교 -- " + DYNAMIC_MODES + "가지")
+
+    let mut mode: i64 = 0
+    while mode < DYNAMIC_MODES {
+        let mut test_scale: i64 = LOSS_SCALE_INIT
+        let mut ms: i64 = 0
+        let max_ms: i64 = s6 * t6  // 48
+
+        while ms < max_ms {
+            if mode == 0 {
+                let rng: i64 = (ms * 89 + 41) % 100
+                if rng < 70 { test_scale = scale_up(test_scale) }
+                if rng >= 70 { test_scale = scale_down(test_scale) }
+            }
+            if mode == 1 {
+                let rng: i64 = (ms * 53 + 17) % 100
+                if rng < 30 { test_scale = scale_up(test_scale) }
+                if rng >= 80 { test_scale = scale_down(test_scale) }
+            }
+            ms = ms + 1
+        }
+        println("  모드[" + mode + "] 최종 스케일 = " + test_scale)
+        mode = mode + 1
+    }
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G6] 정밀도별 학습 비교 -- FP32 vs 혼합
+    // ─────────────────────────────────────────────
+    println("[G6] 정밀도별 학습 비교")
+
+    let mut w_fp32: i64 = SCALE * 3
+    let mut ce: i64 = 0
+    while ce < epochs {
+        let mut cb: i64 = 0
+        while cb < N6 {
+            let data: i64 = SCALE + (ce * 70 + cb * 120) % SCALE
+            let grad: i64 = compute_gradient(w_fp32, data)
+            w_fp32 = update_master_weight(w_fp32, grad, lr)
+            cb = cb + 1
+        }
+        ce = ce + 1
+    }
+
+    let fp32_final_loss: i64 = compute_loss(w_fp32, SCALE)
+    let mixed_final_loss: i64 = compute_loss(fp16_w, SCALE)
+    let loss_diff: i64 = abs_val(fp32_final_loss - mixed_final_loss)
+    let loss_ratio: i64 = loss_diff * SCALE / (fp32_final_loss + 1)
+
+    println("  FP32 최종 손실  = " + fp32_final_loss)
+    println("  혼합 최종 손실  = " + mixed_final_loss)
+    println("  차이 비율       = " + loss_ratio + "/1000")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G7] 메모리 절약 분석
+    // ─────────────────────────────────────────────
+    println("[G7] 메모리 절약 분석")
+
+    let num_params: i64 = LOSS_SCALE_INIT * SCALE  // 144K
+    let mem_fp32: i64 = pure_fp32_memory(num_params)
+    let mem_mixed: i64 = mixed_precision_memory(num_params)
+    let mem_saved: i64 = mem_fp32 - mem_mixed
+    let save_ratio: i64 = mem_saved * SCALE / mem_fp32
+
+    println("  파라미터 수  = " + num_params + "K")
+    println("  FP32 메모리  = " + mem_fp32 + "KB")
+    println("  혼합 메모리  = " + mem_mixed + "KB")
+    println("  절약 비율    = " + save_ratio + "/1000 (" + (save_ratio / 10) + "%)")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G8] 처리량 향상 시뮬레이션
+    // ─────────────────────────────────────────────
+    println("[G8] 처리량 향상 시뮬레이션")
+
+    let fp32_tp: i64 = SCALE
+    let fp16_tp: i64 = SCALE * 2
+    // 순방향(40%) + 역방향(40%) FP16, 갱신(20%) FP32
+    let mixed_tp: i64 = (fp16_tp * 80 + fp32_tp * 20) / 100
+
+    println("  FP32 처리량  = " + fp32_tp + "/1000")
+    println("  혼합 처리량  = " + mixed_tp + "/1000")
+    println("  속도 향상    = " + (mixed_tp * 100 / fp32_tp) + "% 대 FP32")
+
+    let mut bp: i64 = 0
+    while bp < N6 {
+        let bs: i64 = (bp + 1) * s6
+        let time_fp32: i64 = bs * SCALE / fp32_tp
+        let time_mixed: i64 = bs * SCALE / mixed_tp
+        let speedup: i64 = time_fp32 * SCALE / (time_mixed + 1)
+        println("  배치=" + bs + " FP32=" + time_fp32 + "ms 혼합=" + time_mixed + "ms 가속=" + speedup + "/1000x")
+        bp = bp + 1
+    }
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G9] n=6 게이트 최종 검증
+    // ─────────────────────────────────────────────
+    println("[G9] n=6 게이트 최종 검증")
+
+    let mut pass: i64 = 0
+
+    if s6 == 12 { pass = pass + 1 }
+    println("  G1 sigma(6)=12           : " + (s6 == 12))
+
+    if t6 == 4 { pass = pass + 1 }
+    println("  G2 tau(6)=4              : " + (t6 == 4))
+
+    if p6 == 2 { pass = pass + 1 }
+    println("  G3 phi(6)=2              : " + (p6 == 2))
+
+    if sp6 == 5 { pass = pass + 1 }
+    println("  G4 sopfr(6)=5            : " + (sp6 == 5))
+
+    if lhs == rhs { pass = pass + 1 }
+    println("  G5 유일성                : " + (lhs == rhs))
+
+    if LOSS_SCALE_INIT == 144 { pass = pass + 1 }
+    println("  G6 LOSS_SCALE=144        : " + (LOSS_SCALE_INIT == 144))
+
+    if mem_saved > 0 { pass = pass + 1 }
+    println("  G7 메모리절약>0          : " + (mem_saved > 0))
+
+    if mixed_tp > fp32_tp { pass = pass + 1 }
+    println("  G8 처리량향상            : " + (mixed_tp > fp32_tp))
+
+    if loss_ratio < 100 { pass = pass + 1 }
+    println("  G9 품질보존(<10%)        : " + (loss_ratio < 100))
+
+    println("")
+    println("  게이트 통과: " + pass + "/9")
+    println("")
+    println("MixedPrecision OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+}

@@ -1,0 +1,358 @@
+# =============================================================
+# ETHOLOGY DSE Domain Definition
+# 동물행동학 — 동물 행동 관찰·분석·진화·응용
+# n=6 연결: n=6 주요 행동 범주, tau=4 틴버겐 질문, sopfr=5 감각 채널
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "ethology"
+desc = "Ethology DSE — 동물행동학 관찰·분석·진화·응용 (n=6 행동 범주, tau=4 틴버겐)"
+levels = ["Behavior", "Method", "Communication", "Cognition", "Application"]
+vision = "n=6 동물행동학 — n=6 행동 범주 + tau=4 틴버겐 질문 + sopfr=5 감각"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Behavior"
+
+[[candidate]]
+level  = 0
+id     = "Tinbergen_Four"
+label  = "틴버겐 4대 질문 (tau=4: 기전/발달/기능/계통)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "questions=4=tau EXACT, 행동학 근본 프레임워크"
+
+[[candidate]]
+level  = 0
+id     = "Behavior_Category"
+label  = "행동 대범주 (n=6: 먹이/번식/방어/사회/이동/학습)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "categories=6=n EXACT, 동물 행동 분류 체계"
+
+[[candidate]]
+level  = 0
+id     = "Fixed_Action"
+label  = "고정 행동 양식 (mu=1 자극-반응)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "trigger=1=mu EXACT, Lorenz 핵심 개념"
+
+[[candidate]]
+level  = 0
+id     = "Instinct_Learn"
+label  = "본능 vs 학습 (phi=2 이분법)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "dichotomy=2=phi EXACT, Nature/Nurture 연속체"
+
+[[candidate]]
+level  = 0
+id     = "Motivation"
+label  = "동기 체계 (sopfr=5 내적 동인: 배고픔/갈증/성/공포/호기심)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "drives=5=sopfr EXACT, 내적 상태 모델"
+
+[[candidate]]
+level  = 0
+id     = "Circadian"
+label  = "일주 리듬 (sigma=12 시간 명/암 주기)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "hours=12=sigma NEAR (24h), 생체 시계 SCN"
+
+[[level]]
+name = "Method"
+
+[[candidate]]
+level  = 1
+id     = "Ethogram"
+label  = "행동 목록 (n=6 기록 범주)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.60
+notes  = "categories=6=n NEAR, 관찰 기초 문서"
+
+[[candidate]]
+level  = 1
+id     = "Focal_Sampling"
+label  = "초점 관찰 (mu=1 개체 집중)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "subject=1=mu EXACT, Altmann 표본추출법"
+
+[[candidate]]
+level  = 1
+id     = "Scan_Sampling"
+label  = "주사 관찰 (tau=4 분 간격)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "interval=4min=tau NEAR, 집단 행동 빈도"
+
+[[candidate]]
+level  = 1
+id     = "Bio_Logging"
+label  = "바이오로깅 (sopfr=5 센서: GPS/가속도/심박/체온/깊이)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.45
+notes  = "sensors=5=sopfr EXACT, 야생 행동 원격 추적"
+
+[[candidate]]
+level  = 1
+id     = "Experiment"
+label  = "실험 설계 (n/phi=3 유형: 실험실/반자연/야외)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "settings=3=n/phi EXACT, 변수 통제 수준"
+
+[[candidate]]
+level  = 1
+id     = "Video_Analysis"
+label  = "영상 분석 (phi=2 방식: 수동/자동AI)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "modes=2=phi EXACT, 카메라 트랩/드론"
+
+[[level]]
+name = "Communication"
+
+[[candidate]]
+level  = 2
+id     = "Visual_Signal"
+label  = "시각 신호 (n=6 유형: 색/자세/몸짓/표정/발광/위장)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "types=6=n EXACT, 공작 꼬리/오징어 변색"
+
+[[candidate]]
+level  = 2
+id     = "Acoustic"
+label  = "음향 신호 (tau=4 기능: 영역/구애/경보/접촉)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "functions=4=tau EXACT, 새 노래/고래 소리"
+
+[[candidate]]
+level  = 2
+id     = "Chemical"
+label  = "화학 신호 (n/phi=3 유형: 페로몬/알로몬/카이로몬)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "types=3=n/phi EXACT, 곤충 주요 의사소통"
+
+[[candidate]]
+level  = 2
+id     = "Tactile"
+label  = "촉각 신호 (phi=2 맥락: 친화/공격)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "contexts=2=phi EXACT, 영장류 그루밍"
+
+[[candidate]]
+level  = 2
+id     = "Electric"
+label  = "전기 신호 (mu=1 감각 양식)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "modality=1=mu EXACT, 전기어류 고유"
+
+[[candidate]]
+level  = 2
+id     = "Multimodal"
+label  = "다중 모달 (sopfr=5 감각 복합)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "channels=5=sopfr EXACT (시/청/화/촉/전), 정보 중복·보완"
+
+[[level]]
+name = "Cognition"
+
+[[candidate]]
+level  = 3
+id     = "Tool_Use"
+label  = "도구 사용 (tau=4 수준: 사용/제작/보관/교수)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "levels=4=tau EXACT, 침팬지/뉴칼레도니아 까마귀"
+
+[[candidate]]
+level  = 3
+id     = "Social_Learning"
+label  = "사회적 학습 (n/phi=3 유형: 모방/교수/문화)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "types=3=n/phi EXACT, 문화 전파 기전"
+
+[[candidate]]
+level  = 3
+id     = "Self_Awareness"
+label  = "자기 인식 (mu=1 거울 테스트)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "test=1=mu EXACT, 코끼리/돌고래/까치/유인원"
+
+[[candidate]]
+level  = 3
+id     = "Problem_Solving"
+label  = "문제 해결 (sopfr=5 인지 전략)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "strategies=5=sopfr EXACT (시행착오/통찰/추론/계획/유추)"
+
+[[candidate]]
+level  = 3
+id     = "Theory_of_Mind"
+label  = "마음 이론 (phi=2 수준: 1차/2차)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "orders=2=phi EXACT, 타자 의도 추론"
+
+[[candidate]]
+level  = 3
+id     = "Navigation"
+label  = "내비게이션 (n=6 단서: 태양/별/자기장/냄새/지표/편광)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "cues=6=n EXACT, 철새/바다거북 귀소"
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Welfare"
+label  = "동물 복지 (sopfr=5 자유: 배고픔/불편/고통/행동/공포로부터)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "freedoms=5=sopfr EXACT, Brambell 5대 자유"
+
+[[candidate]]
+level  = 4
+id     = "Conservation_Behavior"
+label  = "보전 행동학 (tau=4 전략: 번식/방사/서식지/교육)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "strategies=4=tau EXACT, 행동 지식 보전 활용"
+
+[[candidate]]
+level  = 4
+id     = "Pest_Management"
+label  = "해충 관리 (n/phi=3 방법: 생물/행동/화학)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "methods=3=n/phi EXACT, 행동 기반 IPM"
+
+[[candidate]]
+level  = 4
+id     = "Human_Animal"
+label  = "인간-동물 상호작용 (phi=2 방향: 인간→동물/동물→인간)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "directions=2=phi EXACT, 반려동물/치료동물"
+
+[[candidate]]
+level  = 4
+id     = "Biomimicry"
+label  = "생체 모방 (n=6 영감 행동)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "inspirations=6=n NEAR (군집/위장/반향/비행/접착/발광)"
+
+[[candidate]]
+level  = 4
+id     = "Training"
+label  = "동물 훈련 (phi=2 원리: 고전/조작적 조건화)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "conditioning=2=phi EXACT, Pavlov/Skinner 유산"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Tinbergen_Four"
+then_level = 1
+then_ids   = "Ethogram,Experiment"
+
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "Acoustic"
+then_level = 1
+then_ids   = "Bio_Logging,Video_Analysis"
+
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "Tool_Use"
+then_level = 4
+then_ids   = "Biomimicry,Conservation_Behavior"

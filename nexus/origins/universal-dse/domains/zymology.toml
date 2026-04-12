@@ -1,0 +1,358 @@
+# =============================================================
+# ZYMOLOGY DSE Domain Definition
+# 발효학 — 미생물 발효 공정·산업·식품·바이오 응용
+# n=6 연결: n=6 탄소 포도당 발효, tau=4 발효 단계, sopfr=5 주요 대사산물
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "zymology"
+desc = "Zymology DSE — 발효학 미생물 발효·산업·식품·바이오 (n=6 탄소, tau=4 단계)"
+levels = ["Organism", "Process", "Food", "Industrial", "Biotech"]
+vision = "n=6 발효학 — n=6 탄소 포도당 + tau=4 발효 단계 + sigma=12 시간 주기"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Organism"
+
+[[candidate]]
+level  = 0
+id     = "Saccharomyces"
+label  = "사카로마이세스 효모 (n=6 C 포도당 발효)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "C6H12O6=glucose=6C=n EXACT, 양조/제빵 핵심"
+
+[[candidate]]
+level  = 0
+id     = "Lactobacillus"
+label  = "젖산균 (phi=2 발효 경로: 동형/이형)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "pathways=2=phi EXACT, 유산균 발효 근간"
+
+[[candidate]]
+level  = 0
+id     = "Aspergillus"
+label  = "누룩곰팡이 (n/phi=3 주요종: oryzae/niger/sojae)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "species=3=n/phi EXACT, 동아시아 발효 핵심"
+
+[[candidate]]
+level  = 0
+id     = "Acetobacter"
+label  = "초산균 (phi=2 기질→산물: 에탄올→초산)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "conversion=2=phi EXACT, 식초 생산"
+
+[[candidate]]
+level  = 0
+id     = "SCOBY"
+label  = "복합 균총 (sopfr=5 공생 미생물)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "organisms=5=sopfr NEAR (효모/초산균/젖산균/글루콘산균/셀룰로오스균)"
+
+[[candidate]]
+level  = 0
+id     = "Clostridium"
+label  = "클로스트리디움 (tau=4 대사 산물: 부탄올/아세톤/에탄올/수소)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "products=4=tau EXACT, ABE 발효, 혐기성"
+
+[[level]]
+name = "Process"
+
+[[candidate]]
+level  = 1
+id     = "Glycolysis"
+label  = "해당 과정 (n=6 C 분해: C6→2xC3)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "carbons=6=n EXACT, Embden-Meyerhof 경로"
+
+[[candidate]]
+level  = 1
+id     = "Batch"
+label  = "회분 발효 (tau=4 단계: 접종/지체/대수/정지)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "phases=4=tau EXACT, 가장 기본적 발효 방식"
+
+[[candidate]]
+level  = 1
+id     = "Continuous"
+label  = "연속 발효 (mu=1 정상 상태)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "state=1=mu EXACT, 케모스탯, 대규모 생산"
+
+[[candidate]]
+level  = 1
+id     = "Fed_Batch"
+label  = "유가 발효 (n/phi=3 변수: 기질/pH/DO)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "controls=3=n/phi EXACT, 고농도 산물 생산"
+
+[[candidate]]
+level  = 1
+id     = "Solid_State"
+label  = "고체 발효 (sopfr=5 기질: 쌀/밀기울/콩/옥수수/카사바)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "substrates=5=sopfr EXACT, 누룩/템페/코지"
+
+[[candidate]]
+level  = 1
+id     = "Temperature"
+label  = "온도 제어 (phi=2 범위: 저온/상온)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "ranges=2=phi EXACT, 라거(10C)/에일(20C)"
+
+[[level]]
+name = "Food"
+
+[[candidate]]
+level  = 2
+id     = "Alcohol"
+label  = "주류 발효 (n=6 대분류: 맥주/와인/사케/증류주/미드/시드르)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "categories=6=n EXACT, C6H12O6→2C2H5OH+2CO2"
+
+[[candidate]]
+level  = 2
+id     = "Dairy"
+label  = "유제품 발효 (tau=4 대표: 요구르트/치즈/케피어/버터밀크)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "products=4=tau EXACT, 젖당→젖산"
+
+[[candidate]]
+level  = 2
+id     = "Vegetable"
+label  = "채소 발효 (n/phi=3 대표: 김치/사우어크라우트/피클)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "ferments=3=n/phi EXACT, 젖산 발효 보존"
+
+[[candidate]]
+level  = 2
+id     = "Soy"
+label  = "대두 발효 (sopfr=5: 간장/된장/청국장/템페/나토)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "products=5=sopfr EXACT, 동아시아 식문화 근간"
+
+[[candidate]]
+level  = 2
+id     = "Bread"
+label  = "제빵 발효 (phi=2 팽창: CO2+알코올)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "gases=2=phi EXACT, 사워도/이스트"
+
+[[candidate]]
+level  = 2
+id     = "Tea_Cocoa"
+label  = "차/카카오 발효 (phi=2 산화: 효소/미생물)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "oxidation=2=phi EXACT, 풍미 발달 핵심"
+
+[[level]]
+name = "Industrial"
+
+[[candidate]]
+level  = 3
+id     = "Biofuel"
+label  = "바이오 연료 (n=6 C 에탄올 주원료)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "C6=glucose=n EXACT, 셀룰로오스→에탄올"
+
+[[candidate]]
+level  = 3
+id     = "Organic_Acid"
+label  = "유기산 생산 (tau=4 주요: 구연산/젖산/글루콘산/이타콘산)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "acids=4=tau EXACT, 식품/화학 산업"
+
+[[candidate]]
+level  = 3
+id     = "Enzyme"
+label  = "효소 생산 (n/phi=3 대분류: 가수분해/산화/이성질)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "classes=3=n/phi EXACT, 아밀라아제/프로테아제/리파아제"
+
+[[candidate]]
+level  = 3
+id     = "Antibiotic"
+label  = "항생제 발효 (sopfr=5 세대)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "generations=5=sopfr NEAR, 페니실린 이후 발효 의약"
+
+[[candidate]]
+level  = 3
+id     = "Amino_Acid"
+label  = "아미노산 발효 (phi=2 방법: 직접/전구체)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "methods=2=phi EXACT, 글루탐산(MSG)/라이신"
+
+[[candidate]]
+level  = 3
+id     = "Biogas"
+label  = "바이오가스 (tau=4 단계: 가수분해/산생성/아세트산생성/메탄생성)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "stages=4=tau EXACT, 혐기 소화, CH4+CO2"
+
+[[level]]
+name = "Biotech"
+
+[[candidate]]
+level  = 4
+id     = "Metabolic_Eng"
+label  = "대사 공학 (n=6 편집 도구 세대)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.50
+cost   = 0.50
+notes  = "tools=6=n NEAR (선택/돌연변이/재조합/RNAi/CRISPR/합성), 발효 최적화"
+
+[[candidate]]
+level  = 4
+id     = "Synthetic_Biology"
+label  = "합성 생물학 (tau=4 DBTL 주기: 설계/구축/시험/학습)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "cycle=4=tau EXACT, 비자연 산물 생산"
+
+[[candidate]]
+level  = 4
+id     = "Precision_Ferment"
+label  = "정밀 발효 (n/phi=3 산물: 단백질/지질/색소)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "products=3=n/phi EXACT, 대체 육류/유제품"
+
+[[candidate]]
+level  = 4
+id     = "Bioreactor"
+label  = "생물반응기 (sopfr=5 유형: 교반/기포/에어리프트/막/고정)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "types=5=sopfr EXACT, 스케일업 핵심 장비"
+
+[[candidate]]
+level  = 4
+id     = "Downstream"
+label  = "하류 공정 (phi=2 단계: 분리/정제)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "steps=2=phi EXACT, 총비용 60-80%"
+
+[[candidate]]
+level  = 4
+id     = "Fermentation_DB"
+label  = "발효 데이터베이스 (sigma=12 모니터링 변수)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "variables=12=sigma NEAR (pH/DO/온도/OD/기질/산물/CO2/NH3/점도/거품/교반/압력)"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Saccharomyces"
+then_level = 2
+then_ids   = "Alcohol,Bread"
+
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Glycolysis"
+then_level = 3
+then_ids   = "Biofuel,Organic_Acid"
+
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "Metabolic_Eng"
+then_level = 4
+then_ids   = "Synthetic_Biology,Precision_Ferment"

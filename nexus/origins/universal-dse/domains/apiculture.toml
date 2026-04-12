@@ -1,0 +1,358 @@
+# =============================================================
+# APICULTURE DSE Domain Definition
+# 양봉학 — 꿀벌 사육·벌통 관리·산물 수확·수분 생태
+# n=6 연결: n=6 벌집 육각형, tau=4 계절 관리, sopfr=5 벌 카스트 역할
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "apiculture"
+desc = "Apiculture DSE — 양봉학 꿀벌 사육·관리·산물·생태 (n=6 육각형, tau=4 계절)"
+levels = ["Colony", "Hive", "Product", "Pollination", "Health"]
+vision = "n=6 양봉 — n=6 벌집 육각 + tau=4 계절 관리 + sigma=12 월 연간 주기"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Colony"
+
+[[candidate]]
+level  = 0
+id     = "Hexagonal_Comb"
+label  = "육각 벌집 (n=6 면 정육각형)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "sides=6=n EXACT, 자연 최적 공간 충전, 밀랍 최소 사용"
+
+[[candidate]]
+level  = 0
+id     = "Caste_System"
+label  = "카스트 체계 (n/phi=3 역할: 여왕/일벌/수벌)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "castes=3=n/phi EXACT, 초유기체 사회 구조"
+
+[[candidate]]
+level  = 0
+id     = "Queen_Mating"
+label  = "여왕벌 교미 (sigma=12 일 교미 비행)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "drones=12=sigma NEAR (10-20마리), 1회 비행 평생 정자 저장"
+
+[[candidate]]
+level  = 0
+id     = "Worker_Life"
+label  = "일벌 수명 단계 (n=6 주 여름 수명)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "weeks=6=n EXACT, 청소→육아→밀랍→저장→경비→채집 순환"
+
+[[candidate]]
+level  = 0
+id     = "Waggle_Dance"
+label  = "8자 춤 의사소통 (phi=2 정보: 방향+거리)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "info=2=phi EXACT, Karl von Frisch 노벨상 발견"
+
+[[candidate]]
+level  = 0
+id     = "Pheromone"
+label  = "페로몬 신호 (sopfr=5 주요 페로몬)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "pheromones=5=sopfr EXACT (여왕물질/경보/나스노프/발바닥/산란억제)"
+
+[[level]]
+name = "Hive"
+
+[[candidate]]
+level  = 1
+id     = "Langstroth"
+label  = "랑스트로스 벌통 (tau=4 단 표준)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "boxes=4=tau NEAR (1-2 산란+1-2 꿀), 세계 표준 1851년"
+
+[[candidate]]
+level  = 1
+id     = "Top_Bar"
+label  = "상부바 벌통 (mu=1 단 수평)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "level=1=mu EXACT, 아프리카/개도국 저비용"
+
+[[candidate]]
+level  = 1
+id     = "Warre"
+label  = "와레 벌통 (n/phi=3 단 기본)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "boxes=3=n/phi NEAR, 자연양봉 철학"
+
+[[candidate]]
+level  = 1
+id     = "Frame_System"
+label  = "소비 프레임 (n=6 면 육각 기초)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "hex=6=n EXACT, 이동식 소비 기초"
+
+[[candidate]]
+level  = 1
+id     = "Ventilation"
+label  = "환기 시스템 (phi=2 방식: 입구/상부)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "vents=2=phi EXACT, 온도 35C 유지 핵심"
+
+[[candidate]]
+level  = 1
+id     = "Inspection"
+label  = "내검 주기 (sopfr=5 검사 항목)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "checks=5=sopfr EXACT (여왕/산란/저밀/질병/공간)"
+
+[[level]]
+name = "Product"
+
+[[candidate]]
+level  = 2
+id     = "Honey"
+label  = "벌꿀 (n=6 주요 단화꿀: 아카시아/밤/클로버/마누카/유채/메밀)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.55
+notes  = "varieties=6=n EXACT, 주산물, 수분 18% 이하"
+
+[[candidate]]
+level  = 2
+id     = "Beeswax"
+label  = "밀랍 (n=6 면 소비 구조)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "hex=6=n EXACT, 화장품/양초/코팅 원료"
+
+[[candidate]]
+level  = 2
+id     = "Propolis"
+label  = "프로폴리스 (tau=4 주요 성분: 수지/밀랍/정유/화분)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "components=4=tau EXACT, 항균/항산화 효능"
+
+[[candidate]]
+level  = 2
+id     = "Royal_Jelly"
+label  = "로열젤리 (n/phi=3 일 유충 먹이 전환)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "days=3=n/phi EXACT, 여왕벌 결정 요인"
+
+[[candidate]]
+level  = 2
+id     = "Pollen"
+label  = "화분 (sopfr=5 영양소: 단백/지방/탄수/비타민/미네랄)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "nutrients=5=sopfr EXACT, 건강식품 수요 증가"
+
+[[candidate]]
+level  = 2
+id     = "Venom"
+label  = "봉독 (mu=1 회 침 사용)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "sting=1=mu EXACT, 봉침 요법/의약품 원료"
+
+[[level]]
+name = "Pollination"
+
+[[candidate]]
+level  = 3
+id     = "Crop_Service"
+label  = "작물 수분 서비스 (n=6 주요 의존 작물군)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "groups=6=n EXACT (과수/견과/채소/유지/섬유/종자)"
+
+[[candidate]]
+level  = 3
+id     = "Foraging_Range"
+label  = "채집 반경 (n/phi=3 km 평균)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "range=3km=n/phi EXACT, 최대 5km"
+
+[[candidate]]
+level  = 3
+id     = "Migratory"
+label  = "이동 양봉 (tau=4 계절 이동)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "seasons=4=tau EXACT, 미국 아몬드→사과→블루베리→클로버"
+
+[[candidate]]
+level  = 3
+id     = "Flower_Fidelity"
+label  = "화분 충실성 (mu=1 종 한번에 방문)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "fidelity=1=mu EXACT, 교차수분 효율 핵심"
+
+[[candidate]]
+level  = 3
+id     = "Economic_Value"
+label  = "경제적 가치 (sopfr=5 배 꿀 대비 수분 가치)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "ratio=5x=sopfr NEAR (실제 10-20배), 글로벌 식량 안보"
+
+[[candidate]]
+level  = 3
+id     = "Wild_Bee"
+label  = "야생벌 보완 (phi=2 역할: 양봉+야생)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "types=2=phi EXACT, 뒤영벌/가위벌 등 보완"
+
+[[level]]
+name = "Health"
+
+[[candidate]]
+level  = 4
+id     = "Varroa"
+label  = "바로아 응애 방제 (n=6 방제법)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "methods=6=n EXACT (옥살산/포름산/티몰/아미트라즈/플루발리네이트/생물적)"
+
+[[candidate]]
+level  = 4
+id     = "Disease"
+label  = "주요 질병 (sopfr=5 종: 부저병(미/유)/노제마/백묵병/바이러스)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "diseases=5=sopfr EXACT, 정기 검사 필수"
+
+[[candidate]]
+level  = 4
+id     = "CCD"
+label  = "군집 붕괴 (tau=4 원인 복합: 농약/질병/영양/스트레스)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "factors=4=tau EXACT, 2006년 이후 글로벌 이슈"
+
+[[candidate]]
+level  = 4
+id     = "Pesticide"
+label  = "농약 영향 (n/phi=3 경로: 접촉/경구/훈증)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "routes=3=n/phi EXACT, 네오니코티노이드 규제"
+
+[[candidate]]
+level  = 4
+id     = "Genetic_Diversity"
+label  = "유전 다양성 (phi=2 전략: 자연교미/인공수정)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "strategies=2=phi EXACT, 근친 퇴화 방지"
+
+[[candidate]]
+level  = 4
+id     = "Monitoring"
+label  = "스마트 모니터링 (sigma=12 개월 연중 감시)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "months=12=sigma EXACT, IoT 센서 체중/온도/습도/소리"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Hexagonal_Comb"
+then_level = 2
+then_ids   = "Beeswax,Honey"
+
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Langstroth"
+then_level = 2
+then_ids   = "Honey,Beeswax"
+
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "Crop_Service"
+then_level = 4
+then_ids   = "CCD,Varroa"

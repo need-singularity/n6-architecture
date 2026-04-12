@@ -1,0 +1,358 @@
+# =============================================================
+# PALYNOLOGY DSE Domain Definition
+# 화분학 — 화분·포자 분석·고환경 복원·법의학 응용
+# n=6 연결: n=6 면 화분 대칭, tau=4 화분벽 층, sopfr=5 분석 기법
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "palynology"
+desc = "Palynology DSE — 화분학 화분·포자 분석·고환경·법의학 (n=6 대칭, tau=4 벽층)"
+levels = ["Morphology", "Analysis", "Paleoenvironment", "Application", "Forensic"]
+vision = "n=6 화분학 — n=6 면 화분 대칭 + tau=4 벽층 + sigma=12 표면 무늬"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Morphology"
+
+[[candidate]]
+level  = 0
+id     = "Aperture_Type"
+label  = "화분 개구부 유형 (n=6 주요형: 무공/단공/3공/3구/6구/다공)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.55
+notes  = "types=6=n EXACT, 분류학 핵심 형질"
+
+[[candidate]]
+level  = 0
+id     = "Wall_Layer"
+label  = "화분벽 층 (tau=4 층: 내벽/외벽내층/외벽외층/피막)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "layers=4=tau EXACT, 스포로폴레닌 구성"
+
+[[candidate]]
+level  = 0
+id     = "Symmetry"
+label  = "대칭 유형 (n/phi=3 축: 방사/좌우/비대칭)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "types=3=n/phi EXACT, 극축/적도면 기준"
+
+[[candidate]]
+level  = 0
+id     = "Size_Class"
+label  = "크기 분류 (sopfr=5 등급: 극소/소/중/대/극대)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "classes=5=sopfr EXACT (<10/10-25/25-50/50-100/>100 um)"
+
+[[candidate]]
+level  = 0
+id     = "Surface_Pattern"
+label  = "표면 조각 (sigma=12 유형)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "patterns=12=sigma NEAR (평활/점상/봉상/망상/극상/주상 등)"
+
+[[candidate]]
+level  = 0
+id     = "Polarity"
+label  = "극성 (phi=2 극: 원극/원극)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "poles=2=phi EXACT, 사분자 기원"
+
+[[level]]
+name = "Analysis"
+
+[[candidate]]
+level  = 1
+id     = "Light_Microscopy"
+label  = "광학 현미경 (tau=4 배율: 10x/40x/100x/대물렌즈)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "magnifications=4=tau NEAR, 기본 동정 도구"
+
+[[candidate]]
+level  = 1
+id     = "SEM"
+label  = "주사전자현미경 (mu=1 nm 해상도)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "resolution=1nm=mu NEAR, 표면 미세 구조"
+
+[[candidate]]
+level  = 1
+id     = "Chemical_Prep"
+label  = "화학 처리 (n=6 단계: KOH/HF/아세톨리시스/염색/마운트/봉입)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "steps=6=n EXACT, Erdtman 아세톨리시스법"
+
+[[candidate]]
+level  = 1
+id     = "Pollen_Count"
+label  = "화분 계수 (n/phi=3 방법: 절대/상대/농도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "methods=3=n/phi EXACT, 리코포디움 스파이크"
+
+[[candidate]]
+level  = 1
+id     = "Statistics"
+label  = "통계 분석 (sopfr=5 기법: 군집/서열/PCA/DCA/전환함수)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "techniques=5=sopfr EXACT, 다변량 분석"
+
+[[candidate]]
+level  = 1
+id     = "Reference_Collection"
+label  = "참조 컬렉션 (phi=2 형태: 슬라이드/디지털)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "forms=2=phi EXACT, 동정 기준 필수"
+
+[[level]]
+name = "Paleoenvironment"
+
+[[candidate]]
+level  = 2
+id     = "Pollen_Diagram"
+label  = "화분 다이어그램 (n=6 주요 구간 대표)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "zones=6=n NEAR, 시간축 식생 변화 기록"
+
+[[candidate]]
+level  = 2
+id     = "Climate_Proxy"
+label  = "기후 대리 지표 (tau=4 복원: 온도/강수/습도/계절성)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "proxies=4=tau EXACT, 전환 함수 적용"
+
+[[candidate]]
+level  = 2
+id     = "Vegetation_History"
+label  = "식생 변천사 (n/phi=3 시대: 빙기/간빙기/현재)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "periods=3=n/phi NEAR, 플라이스토세 이후"
+
+[[candidate]]
+level  = 2
+id     = "Lake_Core"
+label  = "호소 코어 (sopfr=5 시료 유형)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "types=5=sopfr EXACT (호수/습지/토탄/해양/빙하)"
+
+[[candidate]]
+level  = 2
+id     = "Human_Impact"
+label  = "인간 영향 지표 (phi=2 지표: 경작/교란)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "indicators=2=phi EXACT, 곡물 화분/잡초 화분 비율"
+
+[[candidate]]
+level  = 2
+id     = "Dating"
+label  = "연대 측정 (n/phi=3 방법: C14/Pb210/테프라)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "methods=3=n/phi EXACT, 화분대 절대 연대"
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 3
+id     = "Honey_Origin"
+label  = "벌꿀 원산지 감별 (n=6 주요 화분 분석)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "criteria=6=n NEAR, 멜리소팔리놀로지 전문 분야"
+
+[[candidate]]
+level  = 3
+id     = "Allergy_Forecast"
+label  = "알레르기 예보 (tau=4 계절 화분)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "seasons=4=tau EXACT, 봄/여름/가을/겨울 화분 달력"
+
+[[candidate]]
+level  = 3
+id     = "Archaeology"
+label  = "고고학 응용 (n/phi=3 복원: 식생/식단/토지이용)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "targets=3=n/phi EXACT, 신석기 농경 전환 추적"
+
+[[candidate]]
+level  = 3
+id     = "Oil_Exploration"
+label  = "석유 탐사 (sopfr=5 지층 화석 화분 지표)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "markers=5=sopfr NEAR, 생층서학 핵심 도구"
+
+[[candidate]]
+level  = 3
+id     = "Agriculture"
+label  = "농업 활용 (phi=2 목적: 수분/품종)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "goals=2=phi EXACT, 작물 수분 효율 평가"
+
+[[candidate]]
+level  = 3
+id     = "Aerobiology"
+label  = "공기생물학 (mu=1 m3 표준 포집)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "volume=1m3=mu EXACT, Hirst 포자 트랩"
+
+[[level]]
+name = "Forensic"
+
+[[candidate]]
+level  = 4
+id     = "Crime_Scene"
+label  = "범죄 현장 분석 (n=6 증거 유형)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "evidence=6=n NEAR (의류/토양/차량/시체/도구/식품)"
+
+[[candidate]]
+level  = 4
+id     = "Provenance"
+label  = "출처 추적 (tau=4 매칭: 시간/장소/식생/토양)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "matches=4=tau EXACT, 피의자-현장 연결"
+
+[[candidate]]
+level  = 4
+id     = "Drug_Trace"
+label  = "마약 추적 (n/phi=3 식물: 양귀비/대마/코카)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "plants=3=n/phi EXACT, 재배지 역추적"
+
+[[candidate]]
+level  = 4
+id     = "Court_Evidence"
+label  = "법정 증거 (phi=2 요건: 과학적/법적)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "requirements=2=phi EXACT, 전문가 감정 보고"
+
+[[candidate]]
+level  = 4
+id     = "Bioterror"
+label  = "생물 테러 감지 (sopfr=5 생물 작용제 추적)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "agents=5=sopfr NEAR (탄저/보툴리눔/리신/천연두/페스트)"
+
+[[candidate]]
+level  = 4
+id     = "Database"
+label  = "법의화분 DB (sigma=12 지역 표준 구축)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "months=12=sigma EXACT, 연중 화분 스펙트럼 기록"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Aperture_Type"
+then_level = 1
+then_ids   = "Light_Microscopy,SEM"
+
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "Lake_Core"
+then_level = 1
+then_ids   = "Chemical_Prep,Statistics"
+
+[[rule]]
+type       = "prefer"
+if_level   = 4
+if_id      = "Crime_Scene"
+then_level = 1
+then_ids   = "Reference_Collection"

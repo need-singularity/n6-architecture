@@ -1,0 +1,358 @@
+# =============================================================
+# ETHNOMUSICOLOGY DSE Domain Definition
+# 민족음악학 — 문화권별 음악 체계·악기·리듬·전승
+# n=6 연결: n=6 대륙 음악권, tau=4 박자 기본형, sopfr=5 음계 구조
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "ethnomusicology"
+desc = "Ethnomusicology DSE — 민족음악학 문화권별 음악·악기·리듬·전승 (n=6 음악권, tau=4 박자)"
+levels = ["MusicSystem", "Instrument", "Rhythm", "Performance", "Preservation"]
+vision = "n=6 민족음악 — n=6 대륙 음악권 + tau=4 박자 기본형 + sopfr=5 음계"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "MusicSystem"
+
+[[candidate]]
+level  = 0
+id     = "Pentatonic"
+label  = "5음 음계 (sopfr=5 음: 궁상각치우)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.60
+notes  = "tones=5=sopfr EXACT, 동아시아/아프리카/아메리카 원주민 공통"
+
+[[candidate]]
+level  = 0
+id     = "Heptatonic"
+label  = "7음 음계 (n+mu=7 서양 장음계)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "tones=7=n+mu NEAR, 서양 고전 및 아랍 마캄"
+
+[[candidate]]
+level  = 0
+id     = "Raga"
+label  = "라가 체계 (n=6 주요 모(母) 라가)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "parent_ragas=6=n NEAR (72 멜라카르타 중 핵심), 인도 음악 근간"
+
+[[candidate]]
+level  = 0
+id     = "Maqam"
+label  = "마캄 체계 (tau=4 음정: 전음/반음/3/4음/증2도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "intervals=4=tau EXACT, 아랍/터키/페르시아 음악"
+
+[[candidate]]
+level  = 0
+id     = "Gamelan_Tuning"
+label  = "가믈란 조율 (phi=2 체계: 슬렌드로/펠로그)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "systems=2=phi EXACT, 자바/발리 고유 음률"
+
+[[candidate]]
+level  = 0
+id     = "Microtonal"
+label  = "미분음 체계 (sigma=12 반음 세분화)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "divisions=12=sigma NEAR (24분음/36분음 등), 아랍/터키 4분음"
+
+[[level]]
+name = "Instrument"
+
+[[candidate]]
+level  = 1
+id     = "Hornbostel_Sachs"
+label  = "악기 분류법 (tau=4+1 대분류)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "classes=4=tau NEAR (체/막/현/기명+전자), 국제 표준"
+
+[[candidate]]
+level  = 1
+id     = "String_Trad"
+label  = "전통 현악기 (n=6 대표: 시타르/가야금/비파/코라/우드/발랄라이카)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "instruments=6=n EXACT, 각 문화권 대표 현악"
+
+[[candidate]]
+level  = 1
+id     = "Percussion_Trad"
+label  = "전통 타악기 (n=6 대표: 장구/타블라/젬베/카혼/가믈란/스틸팬)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.60
+notes  = "instruments=6=n EXACT, 리듬 중심 문화"
+
+[[candidate]]
+level  = 1
+id     = "Wind_Trad"
+label  = "전통 관악기 (sopfr=5 대표: 대금/바우/디저리두/시쿠/네이)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "instruments=5=sopfr EXACT, 호흡 기반 연주"
+
+[[candidate]]
+level  = 1
+id     = "Voice_Trad"
+label  = "전통 성악 (n/phi=3 기법: 배음/요들/폴리포니)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "techniques=3=n/phi EXACT, 투바/알프스/피그미 다성"
+
+[[candidate]]
+level  = 1
+id     = "Material"
+label  = "악기 소재 (phi=2 대분류: 자연/가공)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "classes=2=phi EXACT, 대나무/박/금속/가죽"
+
+[[level]]
+name = "Rhythm"
+
+[[candidate]]
+level  = 2
+id     = "Binary_Ternary"
+label  = "2/3 박자 체계 (phi=2 기본: 2박/3박)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "meters=2=phi EXACT, 서양 박자 근간"
+
+[[candidate]]
+level  = 2
+id     = "Tala"
+label  = "탈라 체계 (n=6 주요 탈라)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "talas=6=n NEAR (35 탈라 중 핵심), 인도 리듬 순환"
+
+[[candidate]]
+level  = 2
+id     = "Polyrhythm"
+label  = "다층 리듬 (n/phi=3 레이어 동시 진행)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "layers=3=n/phi EXACT, 서아프리카 핵심 기법"
+
+[[candidate]]
+level  = 2
+id     = "Additive"
+label  = "가산 박자 (sopfr=5+tau=4 조합: 2+3, 3+2+2 등)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "groupings=5=sopfr NEAR (발칸/터키 변박)"
+
+[[candidate]]
+level  = 2
+id     = "Swing_Groove"
+label  = "스윙/그루브 (mu=1 느낌 단위)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "feel=1=mu EXACT, 아프리카계 미국 음악 핵심"
+
+[[candidate]]
+level  = 2
+id     = "Cyclic"
+label  = "순환 리듬 (sigma=12 박 기본 순환)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "beats=12=sigma NEAR, 한국 장단/아프리카 타임라인"
+
+[[level]]
+name = "Performance"
+
+[[candidate]]
+level  = 3
+id     = "Oral_Tradition"
+label  = "구전 전승 (mu=1 세대 직접 전달)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "link=1=mu EXACT, 악보 없는 전통"
+
+[[candidate]]
+level  = 3
+id     = "Ritual_Context"
+label  = "의례 맥락 (n=6 의례 유형: 출생/성인/혼례/장례/수확/치유)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "rituals=6=n EXACT, 음악-의례 불가분"
+
+[[candidate]]
+level  = 3
+id     = "Improvisation"
+label  = "즉흥 연주 (tau=4 단계: 주제/전개/절정/회귀)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "stages=4=tau EXACT, 라가 알랍/재즈 솔로"
+
+[[candidate]]
+level  = 3
+id     = "Ensemble"
+label  = "합주 형태 (n/phi=3 규모: 독주/소규모/대규모)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "scales=3=n/phi EXACT, 가믈란/오케스트라/밴드"
+
+[[candidate]]
+level  = 3
+id     = "Dance_Music"
+label  = "무용 연계 (phi=2 결합: 음악+몸짓)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "elements=2=phi EXACT, 플라멩코/카탁/사물놀이"
+
+[[candidate]]
+level  = 3
+id     = "Storytelling"
+label  = "음악 서사 (sopfr=5 요소: 선율/가사/몸짓/표정/도구)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "elements=5=sopfr EXACT, 그리오/판소리/아이누"
+
+[[level]]
+name = "Preservation"
+
+[[candidate]]
+level  = 4
+id     = "Field_Recording"
+label  = "현장 녹음 (phi=2 채널: 스테레오)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "channels=2=phi EXACT, Lomax 이후 민족음악학 근간"
+
+[[candidate]]
+level  = 4
+id     = "UNESCO_ICH"
+label  = "유네스코 무형유산 (n=6 음악 등재 범주)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "categories=6=n NEAR, 긴급보호/대표 목록"
+
+[[candidate]]
+level  = 4
+id     = "Digital_Archive"
+label  = "디지털 아카이브 (tau=4 메타데이터: 음원/영상/악보/맥락)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "metadata=4=tau EXACT, 글로벌 사운드 아카이브"
+
+[[candidate]]
+level  = 4
+id     = "Notation_System"
+label  = "기보 체계 (sopfr=5 체계: 서양/정간보/숫자보/타블라추어/그래픽)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "systems=5=sopfr EXACT, 구전→기보 전환"
+
+[[candidate]]
+level  = 4
+id     = "Living_Heritage"
+label  = "살아있는 유산 (n/phi=3 전략: 교육/공연/미디어)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "strategies=3=n/phi EXACT, 전승자 양성 프로그램"
+
+[[candidate]]
+level  = 4
+id     = "Ethnography"
+label  = "음악 민족지 (mu=1 문화 단위 심층 기술)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.65
+notes  = "focus=1=mu EXACT, 참여 관찰 방법론"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Raga"
+then_level = 2
+then_ids   = "Tala"
+
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Percussion_Trad"
+then_level = 2
+then_ids   = "Polyrhythm,Cyclic"
+
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "Oral_Tradition"
+then_level = 4
+then_ids   = "Field_Recording,Living_Heritage"

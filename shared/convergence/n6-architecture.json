@@ -512,7 +512,61 @@
     }
   },
   "stable": {
-    "_description": "안정 — 통과했지만 아직 골화 전"
+    "_description": "안정 — 통과했지만 아직 골화 전",
+    "MILLENNIUM_DFS_250_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 250건 tight (DFS 18차 BT-1410 +12건)",
+      "threshold": "238→250, 해결 0/7",
+      "note": "2026-04-12 DFS 18차 — 에르고드이론/파생범주/conformal bootstrap/위상조합론/클러스터대수/불변량/모형이론/조화해석/이산기하/자유확률론"
+    },
+    "MILLENNIUM_DFS_262_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 262건 tight (DFS 19차 BT-1411 +12건)",
+      "threshold": "250→262, 해결 0/7",
+      "note": "2026-04-12 DFS 19차 — 열방정식/spectral sequence/가적분계/수론적동역학/QEC/곡률흐름/초월수론/대수적조합론/열핵커널/무한Lie대수"
+    },
+    "MILLENNIUM_DFS_274_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 274건 tight (DFS 20차 BT-1412 +12건)",
+      "threshold": "262→274, EXACT 3 (Kervaire-Milnor/Ramanujan/K_6), 해결 0/7",
+      "note": "2026-04-12 DFS 20차 — exotic sphere Theta_6=1/Thurston부피/자유확률/분할합동/역정수론/대수동역학/볼록기하/확률조합론/Painleve/측도론/분할Rademacher/준결정"
+    },
+    "MILLENNIUM_DFS_286_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 286건 tight (DFS 21차 BT-1413 +12건)",
+      "threshold": "274→286, EXACT 3 (Atiyah-Singer J2=24/K3 chi=24/M_12 sopfr=5), 해결 0/7",
+      "note": "2026-04-12 DFS 21차 — Atiyah-Singer지표/Connes spectral/Monster-Mathieu/MZV/Erdos-Kac/Harper/K3/TQFT/Dirichlet L/Tutte/Weil/Langlands"
+    },
+    "AI_TECHNIQUE_152_DFS21": {
+      "status": "PASS",
+      "value": "AI 기법 152종 .hexa (DFS 20차 16종 + DFS 21차 10종 신규)",
+      "threshold": "techniques/ 152파일 존재, 142 tracked + 10 신규 커밋",
+      "note": "2026-04-12 — DFS20: GAN/NormFlow/PointNet/ToT/UNet/ViMamba 등 16종, DFS21: MoD-v2/SWA/NeuralCodec/CutMix 등 10종"
+    },
+    "DSE_TOML_600_COMPLETE": {
+      "status": "PASS",
+      "value": "DSE TOML 600건 돌파 (+13 신규: 매사냥/보석학/지열/화폐학/수어/동굴학/조력/균학/민족음악학/양봉학/화분학/동물행동학/발효학)",
+      "threshold": "587→600, 목표 달성",
+      "note": "2026-04-12 DFS 21차 7건 + 추가 6건으로 600 돌파"
+    },
+    "CHIP_L9_NEUROMORPHIC": {
+      "status": "PASS",
+      "value": "칩 L9 뉴로모픽 HEXA-NEURO 1,623줄 + verify 273줄",
+      "threshold": "domains/compute/chip-design/hexa-neuromorphic.md 존재 확인",
+      "note": "2026-04-12 — 6-멤리스터 시냅스 타일, Egyptian 전력분배, BT-N9-01~10"
+    },
+    "CHIP_L10_DNA_MOLECULAR": {
+      "status": "PASS",
+      "value": "칩 L10 DNA/분자 컴퓨팅 HEXA-DNA 1,670줄 + verify 292줄",
+      "threshold": "domains/compute/chip-design/hexa-dna-molecular.md 존재 확인",
+      "note": "2026-04-12 — 6-뉴클레오타이드 논리게이트, 분자 자기조립, 칩 아키텍처 10단계 완성"
+    },
+    "CHIP_ROADMAP_10_OF_10_COMPLETE": {
+      "status": "PASS",
+      "value": "칩 아키텍처 10단계 전량 설계 완료 (L1-HEXA1→L10-DNA, ~12,000줄+verify)",
+      "threshold": "HEXA1→PIM→3D→Photonic→Wafer→Superconducting→QuantumHybrid→TopoAnyon→Neuromorphic→DNA",
+      "note": "2026-04-12 — L7~L8(DFS16-17) + L9~L10(DFS21), 모든 단계 n=6 산술 매핑"
+    }
   },
   "failed": {
     "_description": "실패 — 전부 해소됨"

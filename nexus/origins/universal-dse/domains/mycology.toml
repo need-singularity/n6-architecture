@@ -1,0 +1,358 @@
+# =============================================================
+# MYCOLOGY DSE Domain Definition
+# 균학 — 균류 분류·생태·배양·응용
+# n=6 연결: n=6 주요 균류 문(門), tau=4 생활사 단계, sopfr=5 주요 배양 조건
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "mycology"
+desc = "Mycology DSE — 균학 균류 분류·생태·배양·응용 (n=6 균류 문, tau=4 생활사)"
+levels = ["Taxonomy", "Ecology", "Cultivation", "Application", "Conservation"]
+vision = "n=6 균학 — n=6 주요 균류 문 + tau=4 생활사 + sigma=12 배양 주기"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Taxonomy"
+
+[[candidate]]
+level  = 0
+id     = "Phylum_Class"
+label  = "균류 문 분류 (n=6 주요 문: 담자/자낭/접합/호상/미포자/사상)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.60
+notes  = "phyla=6=n NEAR (Basidio/Asco/Zygo/Chytridio/Microsporida/Glomeromycota), 분자계통"
+
+[[candidate]]
+level  = 0
+id     = "Spore_Morphology"
+label  = "포자 형태 분류 (tau=4 기본형: 분생/자낭/담자/접합)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "types=4=tau EXACT, 현미경 관찰 필수"
+
+[[candidate]]
+level  = 0
+id     = "DNA_Barcode"
+label  = "DNA 바코딩 (phi=2 마커: ITS/LSU)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "markers=2=phi EXACT, 종 수준 동정 표준"
+
+[[candidate]]
+level  = 0
+id     = "Hyphal_System"
+label  = "균사 체계 (n/phi=3 유형: 생식/골격/결합)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "types=3=n/phi EXACT, 자실체 구조 진단"
+
+[[candidate]]
+level  = 0
+id     = "Chemical_Test"
+label  = "화학 반응 검사 (sopfr=5 시약: KOH/FeSO4/Melzer/암모니아/Schaeffer)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "reagents=5=sopfr EXACT, 현장 속성 감별"
+
+[[candidate]]
+level  = 0
+id     = "Ecological_Guild"
+label  = "생태 기능군 (n=6 군: 부생/공생/기생/내생/지의/포식)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "guilds=6=n EXACT, 생태계 역할 분류"
+
+[[level]]
+name = "Ecology"
+
+[[candidate]]
+level  = 1
+id     = "Mycorrhiza"
+label  = "균근 공생 (phi=2 유형: 외생/내생)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "types=2=phi EXACT, 90% 식물과 공생"
+
+[[candidate]]
+level  = 1
+id     = "Decomposer"
+label  = "분해자 생태 (n=6 기질 유형)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "substrates=6=n EXACT (낙엽/목재/동물잔해/배설물/각질/키틴)"
+
+[[candidate]]
+level  = 1
+id     = "Mycelium_Network"
+label  = "균사 네트워크 (sigma=12 m 최대 개체 반경)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "radius=12m=sigma NEAR (Armillaria 개체 수km), '우드와이드웹'"
+
+[[candidate]]
+level  = 1
+id     = "Succession"
+label  = "천이 단계 (tau=4 단계: 선구/초기/중기/극상)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "stages=4=tau EXACT, 생태 천이 내 균류 역할"
+
+[[candidate]]
+level  = 1
+id     = "Symbiosis_Lichen"
+label  = "지의류 공생 (n/phi=3 파트너: 균+조류+시아노)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "partners=3=n/phi EXACT, 극한 환경 지표"
+
+[[candidate]]
+level  = 1
+id     = "Pathogen"
+label  = "병원성 균류 (sopfr=5 주요 인체 감염 부위)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "sites=5=sopfr EXACT (피부/폐/혈액/뇌/점막), 면역저하 위험"
+
+[[level]]
+name = "Cultivation"
+
+[[candidate]]
+level  = 2
+id     = "Substrate_Prep"
+label  = "배지 준비 (n=6 주요 기질: 볏짚/톱밥/퇴비/곡물/한천/액체)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "substrates=6=n EXACT, 종별 최적 기질 상이"
+
+[[candidate]]
+level  = 2
+id     = "Sterilization"
+label  = "멸균 공정 (phi=2 방법: 고압증기/여과)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "methods=2=phi EXACT, 오염 방지 핵심"
+
+[[candidate]]
+level  = 2
+id     = "Spawn_Run"
+label  = "종균 배양 (tau=4 주 배양 기간)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "weeks=4=tau NEAR, 균사 기질 침투"
+
+[[candidate]]
+level  = 2
+id     = "Fruiting_Trigger"
+label  = "발이 유도 (n/phi=3 조건: 온도/습도/광)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "triggers=3=n/phi EXACT, 자실체 형성 핵심"
+
+[[candidate]]
+level  = 2
+id     = "Harvest_Cycle"
+label  = "수확 주기 (sopfr=5 회 주기 수확)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "flushes=5=sopfr NEAR (3-6회), 배지당 수확 횟수"
+
+[[candidate]]
+level  = 2
+id     = "Climate_Control"
+label  = "환경 제어 (sigma=12 시간 명암 주기)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "light_cycle=12h=sigma NEAR, 온도/습도/CO2/광 통합 관리"
+
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 3
+id     = "Food_Edible"
+label  = "식용 버섯 (n=6 주요 재배종)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.60
+cost   = 0.60
+notes  = "species=6=n EXACT (표고/느타리/양송이/팽이/새송이/목이)"
+
+[[candidate]]
+level  = 3
+id     = "Medicinal"
+label  = "약용 균류 (tau=4 약리 기전: 면역/항암/항산화/항염)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "mechanisms=4=tau EXACT, 영지/동충하초/차가/상황"
+
+[[candidate]]
+level  = 3
+id     = "Myco_Material"
+label  = "균사체 소재 (n/phi=3 응용: 포장/건축/패션)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "apps=3=n/phi EXACT, 스티로폼 대체, 친환경"
+
+[[candidate]]
+level  = 3
+id     = "Bioremediation"
+label  = "균류 정화 (sopfr=5 오염물: 유류/중금속/농약/플라스틱/방사성)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "pollutants=5=sopfr EXACT, 백색부후균 활용"
+
+[[candidate]]
+level  = 3
+id     = "Fermentation"
+label  = "발효 산업 (phi=2 대분류: 알코올/유기산)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "classes=2=phi EXACT, 효모/곰팡이 산업 활용"
+
+[[candidate]]
+level  = 3
+id     = "Biocontrol"
+label  = "생물 방제 (mu=1 표적 특이성)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "specificity=1=mu EXACT, Trichoderma/Beauveria, 해충 방제"
+
+[[level]]
+name = "Conservation"
+
+[[candidate]]
+level  = 4
+id     = "Red_List"
+label  = "적색목록 (n=6 위협 범주)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "categories=6=n NEAR (LC/NT/VU/EN/CR/EX), IUCN 균류 평가"
+
+[[candidate]]
+level  = 4
+id     = "Spore_Bank"
+label  = "포자 은행 (tau=4 보존 온도: 4/-20/-80/-196C)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "temps=4=tau EXACT, 유전자원 장기 보존"
+
+[[candidate]]
+level  = 4
+id     = "Habitat_Protect"
+label  = "서식지 보전 (n/phi=3 환경: 토양/목재/낙엽)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "habitats=3=n/phi EXACT, 고사목 보존 핵심"
+
+[[candidate]]
+level  = 4
+id     = "Citizen_Science"
+label  = "시민 과학 (sopfr=5 주요 플랫폼)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "platforms=5=sopfr NEAR (iNaturalist/MushroomObserver/Pl@ntNet/FungiMap/MycoPortal)"
+
+[[candidate]]
+level  = 4
+id     = "Myco_Diversity"
+label  = "균류 다양성 모니터링 (phi=2 방법: 형태/분자)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "methods=2=phi EXACT, eDNA 메타바코딩 확산"
+
+[[candidate]]
+level  = 4
+id     = "Education_Foray"
+label  = "균학 교육 (sigma=12 월 연중 관찰 프로그램)"
+n6     = 0.75
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "months=12=sigma EXACT, 계절별 균류 관찰 탐사"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "DNA_Barcode"
+then_level = 4
+then_ids   = "Myco_Diversity"
+
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Mycorrhiza"
+then_level = 4
+then_ids   = "Habitat_Protect"
+
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "Substrate_Prep"
+then_level = 3
+then_ids   = "Food_Edible,Myco_Material"

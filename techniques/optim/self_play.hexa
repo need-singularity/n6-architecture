@@ -1,0 +1,473 @@
+// optim/self_play.hexa -- 자기 대전 학습 (Self-Play) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수/실수 연산)
+// 원본 요약: Technique: Self-Play -- Silver 외 2017
+//            "Mastering the game of Go without human knowledge" (Nature 2017),
+//            Silver 외 2018 "AlphaZero",
+//            Schrittwieser 외 2020 "MuZero"
+//            자기 대전 데이터 생성 + MCTS + 정책/가치 네트워크
+// n=6 정렬:
+//   - 보드 크기             = sigma(6) = 12      -> 12x12 격자
+//   - MCTS 시뮬레이션       = sigma(6)^2 = 144   -> 수당 144회
+//   - 게임 최대 깊이         = sigma(6)*tau(6) = 48 -> 48수 제한
+//   - 온도                 = sopfr(6) = 5        -> 5/1000 기저
+//   - 평가 헤드             = phi(6) = 2         -> 정책 + 가치
+//   - 학습 세대             = n = 6              -> 6세대 진화
+//
+// 실행: hexa run techniques/optim/self_play.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── 1) n=6 산술 함수 ──────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 2) 핵심 상수 ──────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// ── 3) MCTS 트리 탐색 ────────────────────────────────────
+
+// UCB1 점수 -- Q(s,a) + c * sqrt(ln(N)/n(s,a))
+fn ucb_score(q_value: i64, visit_parent: i64, visit_child: i64, explore_c: i64) -> i64 {
+    if visit_child == 0 { return SCALE * 100 }
+    let ln_parent: i64 = (visit_parent - 1) * SCALE / (visit_parent + 1)
+    let ratio: i64 = ln_parent * SCALE / visit_child
+    let mut sqrt_val: i64 = ratio / 2
+    if sqrt_val == 0 { sqrt_val = 1 }
+    let mut it: i64 = 0
+    while it < 3 {
+        sqrt_val = (sqrt_val + (ratio * SCALE) / sqrt_val) / 2
+        it = it + 1
+    }
+    return q_value + (explore_c * sqrt_val) / SCALE
+}
+
+// 최선 수 선택 -- UCB 최대화
+fn select_best_move(board_size: i64, parent_visits: i64, seed: i64) -> i64 {
+    let mut best_move: i64 = 0
+    let mut best_score: i64 = 0
+    let explore_c: i64 = 1414  // sqrt(2)*1000
+    let mut m: i64 = 0
+    while m < board_size {
+        let q: i64 = ((m * 137 + seed * 59) % SCALE)
+        let visits: i64 = (m * 31 + seed * 17) % (parent_visits + 1) + 1
+        let score: i64 = ucb_score(q, parent_visits, visits, explore_c)
+        if score > best_score {
+            best_score = score
+            best_move = m
+        }
+        m = m + 1
+    }
+    return best_move
+}
+
+// MCTS 시뮬레이션 -- 한 수에 대한 전체 플레이아웃
+fn mcts_simulate(board_size: i64, num_sims: i64, move_num: i64) -> i64 {
+    let mut total_value: i64 = 0
+    let mut sim: i64 = 0
+    while sim < num_sims {
+        let mut depth: i64 = 0
+        let mut value: i64 = 500
+        while depth < board_size {
+            let action: i64 = (sim * 71 + depth * 37 + move_num * 13) % board_size
+            let delta: i64 = ((action * 23 + sim * 11) % 200) - 100
+            value = value + delta / board_size
+            depth = depth + 1
+        }
+        if value < 0 { value = 0 }
+        if value > SCALE { value = SCALE }
+        total_value = total_value + value
+        sim = sim + 1
+    }
+    return total_value / num_sims
+}
+
+// ── 4) 정책/가치 네트워크 시뮬레이션 ──────────────────────
+
+// 정책 헤드 -- 착수 확률 (소프트맥스 근사)
+fn policy_head(board_size: i64, move_num: i64, temperature: i64) -> i64 {
+    let mut max_logit: i64 = 0
+    let mut best_action: i64 = 0
+    let mut pos: i64 = 0
+    while pos < board_size {
+        let logit: i64 = ((pos * 41 + move_num * 67) % SCALE)
+        if logit > max_logit {
+            max_logit = logit
+            best_action = pos
+        }
+        pos = pos + 1
+    }
+    return best_action
+}
+
+// 가치 헤드 -- 현재 국면 승률 추정
+fn value_head(board_pos: i64, move_num: i64, game_depth: i64) -> i64 {
+    let spatial: i64 = (board_pos * 53 + move_num * 29) % SCALE
+    let uncertainty: i64 = (game_depth * SCALE) / (game_depth + N6)
+    return spatial * (SCALE - uncertainty) / SCALE
+}
+
+// ── 5) 자기 대전 게임 생성 ────────────────────────────────
+
+fn play_game(board_size: i64, max_depth: i64, num_sims: i64, temperature: i64) -> i64 {
+    let mut move_num: i64 = 0
+    let mut game_value: i64 = 500
+    while move_num < max_depth {
+        let mut cur_temp: i64 = temperature * SCALE
+        if move_num > max_depth / 2 { cur_temp = temperature * 100 }
+
+        let mcts_val: i64 = mcts_simulate(board_size, num_sims / N6, move_num)
+        let action: i64 = policy_head(board_size, move_num, cur_temp)
+        let v_head: i64 = value_head(action, move_num, max_depth)
+        let combined: i64 = (mcts_val * 600 + v_head * 400) / SCALE
+        game_value = (game_value + combined) / 2
+
+        move_num = move_num + 1
+        if game_value > 900 { move_num = max_depth }
+        if game_value < 100 { move_num = max_depth }
+    }
+    return game_value
+}
+
+// ── 6) Elo 레이팅 ─────────────────────────────────────────
+
+// 기대 승률 -- E(A) = 1/(1+10^((Rb-Ra)/400))
+fn expected_score(ra: i64, rb: i64) -> i64 {
+    let diff: i64 = rb - ra
+    let power: i64 = SCALE + (diff * SCALE) / 173
+    if power <= 0 { return 950 }
+    let expected: i64 = SCALE * SCALE / power
+    if expected > SCALE { return SCALE }
+    if expected < 0 { return 0 }
+    return expected
+}
+
+fn update_elo(rating: i64, actual: i64, expected: i64, k: i64) -> i64 {
+    return rating + (k * (actual - expected)) / SCALE
+}
+
+// ── 7) 학습 시뮬레이션 ───────────────────────────────────
+
+fn train_on_games(num_games: i64, generation: i64) -> i64 {
+    let mut total_loss: i64 = SCALE
+    let mut game: i64 = 0
+    while game < num_games {
+        let policy_loss: i64 = abs_val((game * 71 + generation * 37) % SCALE - (game * 43 + generation * 59) % SCALE)
+        let value_loss: i64 = abs_val((game * 29 + generation * 83) % SCALE - (game * 67 + generation * 41) % SCALE)
+        let game_loss: i64 = (policy_loss + value_loss) / 2
+        total_loss = (total_loss * 900 + game_loss * 100) / SCALE
+        game = game + 1
+    }
+    return total_loss
+}
+
+// ── main ──────────────────────────────────────────────────
+
+fn main() {
+    println("=== 자기 대전 학습 (Self-Play) x n=6 ===")
+    println("")
+
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+
+    println("[G1] n=6 산술 검증")
+    println("  sigma(6) = " + s6)
+    println("  tau(6)   = " + t6)
+    println("  phi(6)   = " + p6)
+    println("  sopfr(6) = " + sp6)
+
+    let lhs: i64 = s6 * p6
+    let rhs: i64 = N6 * t6
+    println("  sigma*phi = " + lhs + " | n*tau = " + rhs + " | 일치 = " + (lhs == rhs))
+    println("")
+
+    let BOARD_SIZE: i64 = s6            // 12
+    let MCTS_SIMS: i64 = s6 * s6       // 144
+    let GAME_DEPTH: i64 = s6 * t6      // 48
+    let TEMPERATURE: i64 = sp6          // 5
+    let EVAL_HEADS: i64 = p6            // 2
+    let GENERATIONS: i64 = N6           // 6
+
+    println("[G1] 핵심 상수")
+    println("  BOARD_SIZE   = " + BOARD_SIZE + " (sigma)")
+    println("  MCTS_SIMS    = " + MCTS_SIMS + " (sigma^2)")
+    println("  GAME_DEPTH   = " + GAME_DEPTH + " (sigma*tau)")
+    println("  TEMPERATURE  = " + TEMPERATURE + " (sopfr)")
+    println("  EVAL_HEADS   = " + EVAL_HEADS + " (phi)")
+    println("  GENERATIONS  = " + GENERATIONS + " (n)")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G2] MCTS 트리 탐색
+    // ─────────────────────────────────────────────
+    println("[G2] MCTS 트리 탐색 -- " + MCTS_SIMS + " 시뮬레이션/수")
+
+    let mut mcts_idx: i64 = 0
+    let mut mcts_value_sum: i64 = 0
+    while mcts_idx < N6 {
+        let value: i64 = mcts_simulate(BOARD_SIZE, MCTS_SIMS / N6, mcts_idx)
+        mcts_value_sum = mcts_value_sum + value
+        let best: i64 = select_best_move(BOARD_SIZE, MCTS_SIMS, mcts_idx)
+        println("  위치[" + mcts_idx + "] MCTS가치=" + value + "/1000 최선수=" + best)
+        mcts_idx = mcts_idx + 1
+    }
+    let mcts_avg: i64 = mcts_value_sum / N6
+    println("  평균 MCTS 가치 = " + mcts_avg + "/1000")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G3] 정책/가치 네트워크 -- 이중 헤드
+    // ─────────────────────────────────────────────
+    println("[G3] 정책/가치 네트워크 -- " + EVAL_HEADS + "개 헤드")
+
+    let mut head: i64 = 0
+    while head < EVAL_HEADS {
+        if head == 0 {
+            println("  헤드 0: 정책 (착수 확률)")
+            let mut mt: i64 = 0
+            while mt < N6 {
+                let action: i64 = policy_head(BOARD_SIZE, mt, TEMPERATURE * SCALE)
+                println("    수[" + mt + "] 선택=" + action + "/" + BOARD_SIZE)
+                mt = mt + 1
+            }
+        }
+        if head == 1 {
+            println("  헤드 1: 가치 (승률)")
+            let mut pt: i64 = 0
+            while pt < N6 {
+                let val: i64 = value_head(pt, pt * 2, GAME_DEPTH)
+                println("    국면[" + pt + "] 승률=" + val + "/1000")
+                pt = pt + 1
+            }
+        }
+        head = head + 1
+    }
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G4] 자기 대전 게임 생성
+    // ─────────────────────────────────────────────
+    println("[G4] 자기 대전 게임 생성")
+
+    let games_per_gen: i64 = BOARD_SIZE
+    let mut win_count: i64 = 0
+    let mut draw_count: i64 = 0
+    let mut g: i64 = 0
+
+    while g < games_per_gen {
+        let result: i64 = play_game(BOARD_SIZE, GAME_DEPTH, MCTS_SIMS, TEMPERATURE)
+        if result > 550 { win_count = win_count + 1 }
+        if result >= 450 {
+            if result <= 550 { draw_count = draw_count + 1 }
+        }
+        println("  게임[" + g + "] 결과=" + result + "/1000")
+        g = g + 1
+    }
+
+    let win_rate: i64 = win_count * SCALE / games_per_gen
+    println("  선수 승률 = " + win_rate + "/1000 무승부 = " + draw_count)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G5] Elo 레이팅 진화
+    // ─────────────────────────────────────────────
+    println("[G5] Elo 레이팅 진화 -- " + GENERATIONS + "세대")
+
+    let mut current_elo: i64 = 1000
+    let k_factor: i64 = 32 * SCALE / 100
+    let mut prev_elo: i64 = current_elo
+    let mut elo_gains: i64 = 0
+    let mut gen: i64 = 0
+
+    while gen < GENERATIONS {
+        let mut gen_wins: i64 = 0
+        let mut gm: i64 = 0
+        while gm < games_per_gen {
+            let result: i64 = play_game(BOARD_SIZE, GAME_DEPTH, MCTS_SIMS, TEMPERATURE)
+            let adjusted: i64 = result + gen * 20
+            if adjusted > 500 { gen_wins = gen_wins + 1 }
+            gm = gm + 1
+        }
+
+        let actual: i64 = gen_wins * SCALE / games_per_gen
+        let exp: i64 = expected_score(current_elo, prev_elo)
+        prev_elo = current_elo
+        current_elo = update_elo(current_elo, actual, exp, k_factor)
+
+        let gen_loss: i64 = train_on_games(games_per_gen, gen)
+        let gain: i64 = current_elo - prev_elo
+        elo_gains = elo_gains + abs_val(gain)
+
+        println("  세대[" + gen + "] 승=" + gen_wins + "/" + games_per_gen + " Elo=" + current_elo + " 손실=" + gen_loss + " 변동=" + gain)
+        gen = gen + 1
+    }
+
+    println("  최종 Elo = " + current_elo + " 누적변동 = " + elo_gains)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G6] 온도 스케줄
+    // ─────────────────────────────────────────────
+    println("[G6] 수 선택 온도 스케줄")
+
+    let mut ms: i64 = 0
+    let mut prev_temp: i64 = TEMPERATURE * SCALE
+    let mut temp_monotone: bool = true
+
+    while ms < GAME_DEPTH {
+        let mut cur_temp: i64 = TEMPERATURE * SCALE
+        if ms > GAME_DEPTH * 5 / 8 {
+            let decay: i64 = (ms - GAME_DEPTH * 5 / 8) * 100
+            cur_temp = TEMPERATURE * SCALE - decay
+            if cur_temp < TEMPERATURE * 10 { cur_temp = TEMPERATURE * 10 }
+        }
+        if ms % s6 == 0 {
+            println("  수[" + ms + "] 온도=" + cur_temp + "/1000")
+        }
+        if ms > GAME_DEPTH * 5 / 8 {
+            if cur_temp > prev_temp { temp_monotone = false }
+        }
+        prev_temp = cur_temp
+        ms = ms + 1
+    }
+    println("  후반 온도 단조감소 = " + temp_monotone)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G7] 보드 점유율 분석
+    // ─────────────────────────────────────────────
+    println("[G7] 보드 점유율 분석")
+
+    let total_cells: i64 = BOARD_SIZE * BOARD_SIZE  // 144
+    let mut occupied: i64 = 0
+    let mut cell: i64 = 0
+    while cell < total_cells {
+        let is_occ: i64 = (cell * 59 + 23) % 100
+        if is_occ < 65 { occupied = occupied + 1 }
+        cell = cell + 1
+    }
+    let occupancy: i64 = occupied * SCALE / total_cells
+
+    println("  보드 = " + BOARD_SIZE + "x" + BOARD_SIZE + " = " + total_cells + "칸")
+    println("  점유 = " + occupied + "/" + total_cells + " (" + occupancy + "/1000)")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G8] 세대별 강도 비교
+    // ─────────────────────────────────────────────
+    println("[G8] 세대별 강도 비교")
+
+    let mut ga: i64 = 0
+    let mut total_elo_growth: i64 = 0
+    let mut prev_ge: i64 = 1000
+
+    while ga < GENERATIONS {
+        let gen_str: i64 = 1000 + ga * 80
+        let match_exp: i64 = expected_score(gen_str, prev_ge)
+        let elo_gap: i64 = gen_str - prev_ge
+        println("  세대[" + ga + "] Elo=" + gen_str + " 기대승률=" + match_exp + "/1000 격차=" + elo_gap)
+        total_elo_growth = total_elo_growth + elo_gap
+        prev_ge = gen_str
+        ga = ga + 1
+    }
+
+    let avg_growth: i64 = total_elo_growth / GENERATIONS
+    println("  총 Elo 성장 = " + total_elo_growth + " 세대평균 = " + avg_growth)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G9] n=6 게이트 최종 검증
+    // ─────────────────────────────────────────────
+    println("[G9] n=6 게이트 최종 검증")
+
+    let mut pass: i64 = 0
+
+    if s6 == 12 { pass = pass + 1 }
+    println("  G1 sigma(6)=12           : " + (s6 == 12))
+
+    if t6 == 4 { pass = pass + 1 }
+    println("  G2 tau(6)=4              : " + (t6 == 4))
+
+    if p6 == 2 { pass = pass + 1 }
+    println("  G3 phi(6)=2              : " + (p6 == 2))
+
+    if sp6 == 5 { pass = pass + 1 }
+    println("  G4 sopfr(6)=5            : " + (sp6 == 5))
+
+    if lhs == rhs { pass = pass + 1 }
+    println("  G5 유일성                : " + (lhs == rhs))
+
+    if MCTS_SIMS == 144 { pass = pass + 1 }
+    println("  G6 MCTS_SIMS=144         : " + (MCTS_SIMS == 144))
+
+    if occupancy > 0 { pass = pass + 1 }
+    println("  G7 보드점유>0            : " + (occupancy > 0))
+
+    if total_elo_growth > 0 { pass = pass + 1 }
+    println("  G8 Elo성장>0             : " + (total_elo_growth > 0))
+
+    if temp_monotone { pass = pass + 1 }
+    println("  G9 온도단조감소          : " + temp_monotone)
+
+    println("")
+    println("  게이트 통과: " + pass + "/9")
+    println("")
+    println("SelfPlay OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+}

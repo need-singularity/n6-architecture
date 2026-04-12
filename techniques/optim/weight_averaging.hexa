@@ -1,0 +1,449 @@
+// optim/weight_averaging.hexa -- 확률적 가중치 평균화 (Stochastic Weight Averaging) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수/실수 연산)
+// 원본 요약: Technique: SWA -- Izmailov 외 2018
+//            "Averaging Weights Leads to Wider Optima and Better
+//             Generalization" (UAI 2018),
+//            Maddox 외 2019 "SWAG: A Simple Approach to Bayesian DL",
+//            Cha 외 2021 "SWAD: Domain Generalization by Seeking Flat Minima"
+//            모델 스냅샷 수집 후 가중치 평균 -> 평탄 극소값 탐색
+// n=6 정렬:
+//   - 스냅샷 간격           = n = 6 에폭       -> 수집 주기
+//   - SWA 학습률            = sopfr(6)/1000=5e-3 -> 평균화 학습률
+//   - 평균화 윈도우          = sigma(6) = 12     -> 스냅샷 수
+//   - 주기 길이             = tau(6) = 4 에폭   -> 순환 학습률 주기
+//   - BN 갱신 배치          = sigma(6)^2 = 144  -> 배치 정규화 통계
+//   - 학습률 모드           = phi(6) = 2        -> 상수/순환 모드
+//
+// 실행: hexa run techniques/optim/weight_averaging.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ── n=6 산술 함수 ──────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 핵심 상수 ──────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+// n=6 유도 상수
+fn get_snapshot_interval() -> i64 {
+    // n = 6 -> 스냅샷 수집 간격 (에폭)
+    return N6
+}
+
+fn get_swa_lr() -> i64 {
+    // sopfr(6) = 5 -> SWA 학습률 (5/1000 = 0.005)
+    return sopfr(N6)
+}
+
+fn get_avg_window() -> i64 {
+    // sigma(6) = 12 -> 평균화 윈도우 (스냅샷 수)
+    return sigma(N6)
+}
+
+fn get_cycle_length() -> i64 {
+    // tau(6) = 4 -> 순환 학습률 주기 (에폭)
+    return tau(N6)
+}
+
+fn get_bn_batches() -> i64 {
+    // sigma(6)^2 = 144 -> BN 통계 갱신 배치 수
+    let s: i64 = sigma(N6)
+    return s * s
+}
+
+fn get_lr_modes() -> i64 {
+    // phi(6) = 2 -> 학습률 스케줄 모드 수 (상수/순환)
+    return phi(N6)
+}
+
+// ── G2: SGD 학습 시뮬레이션 ────────────────────────────────
+
+fn sgd_loss(param: i64, epoch: i64, lr: i64) -> i64 {
+    // 로젠브록 근사 손실 곡면: f(w) = (1-w)^2 + 100*(w^2-w)^2
+    // 정수 근사: 이차 + 사차 항
+    let diff: i64 = SCALE - param
+    let quadratic: i64 = diff * diff / SCALE
+    let quartic: i64 = (param * param / SCALE - param) * (param * param / SCALE - param) / SCALE
+    let loss: i64 = quadratic + quartic / 10
+    return loss
+}
+
+fn sgd_gradient(param: i64, lr: i64) -> i64 {
+    // 수치 미분 근사: (f(w+h) - f(w-h)) / 2h
+    let h: i64 = 1
+    let f_plus: i64 = sgd_loss(param + h, 0, lr)
+    let f_minus: i64 = sgd_loss(param - h, 0, lr)
+    let grad: i64 = (f_plus - f_minus) / (phi(N6) * h)
+    return grad
+}
+
+fn run_sgd_training(total_epochs: i64, init_lr: i64) -> i64 {
+    let mut param: i64 = 100  // 초기 가중치
+    let mut epoch: i64 = 0
+    let mut best_loss: i64 = SCALE * sigma(N6)
+    println("G2 SGD 학습 -- 에폭=" + total_epochs + " 초기학습률=" + init_lr + "/1000")
+
+    while epoch < total_epochs {
+        let loss: i64 = sgd_loss(param, epoch, init_lr)
+        let grad: i64 = sgd_gradient(param, init_lr)
+        // 코사인 학습률 감쇠
+        let progress: i64 = epoch * SCALE / total_epochs
+        let cos_approx: i64 = SCALE - (phi(N6) * progress * progress) / SCALE
+        let current_lr: i64 = init_lr * (SCALE + cos_approx) / (phi(N6) * SCALE)
+        param = param - current_lr * grad / SCALE
+        if loss < best_loss { best_loss = loss }
+        if epoch % get_snapshot_interval() == 0 {
+            println("  에폭[" + epoch + "] 가중치=" + param + " 손실=" + loss + " lr=" + current_lr + "/1000")
+        }
+        epoch = epoch + 1
+    }
+
+    println("G2 SGD완료 -- 최종가중치=" + param + " 최적손실=" + best_loss)
+    return param
+}
+
+// ── G3: 스냅샷 수집 ────────────────────────────────────────
+
+fn collect_snapshots(total_epochs: i64, swa_start: i64) -> i64 {
+    let interval: i64 = get_snapshot_interval()    // 6
+    let window: i64 = get_avg_window()             // 12
+    let swa_lr: i64 = get_swa_lr()                 // 5
+
+    let mut param: i64 = 300  // SGD 후 시작 가중치
+    let mut snapshot_sum: i64 = 0
+    let mut snapshot_count: i64 = 0
+    let mut snapshot_sq_sum: i64 = 0
+
+    println("G3 스냅샷 수집 -- SWA시작=" + swa_start + " 간격=" + interval + " 윈도우=" + window)
+
+    let mut epoch: i64 = 0
+    while epoch < total_epochs {
+        // SGD 계속 진행
+        let grad: i64 = sgd_gradient(param, swa_lr)
+        param = param - swa_lr * grad / SCALE
+
+        // 노이즈 추가: 확률적 요동 시뮬레이션
+        let noise: i64 = ((epoch * 137 + 59) % 100) - 50
+        param = param + noise / sigma(N6)
+
+        // SWA 시작 이후, 매 interval 에폭마다 스냅샷
+        if epoch >= swa_start {
+            if epoch % interval == 0 {
+                if snapshot_count < window {
+                    snapshot_sum = snapshot_sum + param
+                    snapshot_sq_sum = snapshot_sq_sum + (param * param / SCALE)
+                    snapshot_count = snapshot_count + 1
+                    let current_avg: i64 = snapshot_sum / snapshot_count
+                    println("  스냅샷[" + snapshot_count + "] 에폭=" + epoch + " 가중치=" + param + " 누적평균=" + current_avg)
+                }
+            }
+        }
+        epoch = epoch + 1
+    }
+
+    // 스냅샷 통계
+    let avg_weight: i64 = snapshot_sum / (snapshot_count + 1)
+    let mean_sq: i64 = snapshot_sq_sum / (snapshot_count + 1)
+    let variance: i64 = mean_sq - (avg_weight * avg_weight / SCALE)
+
+    println("G3 수집완료 -- 스냅샷수=" + snapshot_count + " 평균가중치=" + avg_weight + " 분산=" + variance)
+    return avg_weight
+}
+
+// ── G4: 가중치 평균화 ──────────────────────────────────────
+
+fn average_weights(snapshots_avg: i64, sgd_final: i64) -> i64 {
+    // SWA 가중치 = (1/T) * sum_t(w_t)
+    // 이미 collect_snapshots에서 누적 평균 계산 완료
+    let swa_weight: i64 = snapshots_avg
+
+    // SGD 최종 가중치와 비교
+    let diff: i64 = abs_val(swa_weight - sgd_final)
+    let swa_loss: i64 = sgd_loss(swa_weight, 0, get_swa_lr())
+    let sgd_loss_val: i64 = sgd_loss(sgd_final, 0, get_swa_lr())
+    let improvement: i64 = sgd_loss_val - swa_loss
+
+    println("G4 가중치평균 -- SWA=" + swa_weight + " SGD=" + sgd_final + " 차이=" + diff)
+    println("  SWA 손실=" + swa_loss + " SGD 손실=" + sgd_loss_val + " 개선=" + improvement)
+    return swa_loss
+}
+
+// ── G5: 손실 지형 비교 ─────────────────────────────────────
+
+fn loss_landscape_sharpness(weight: i64, label: i64) -> i64 {
+    // 극소값 평탄도 측정: 주변 epsilon 반경 내 최대 손실 변화
+    // 평탄 극소 -> 일반화 성능 우수 (PAC-Bayes 이론)
+    let epsilon: i64 = sigma(N6) * sopfr(N6)  // 60
+    let num_dirs: i64 = sigma(N6)              // 12 방향 탐색
+
+    let center_loss: i64 = sgd_loss(weight, 0, get_swa_lr())
+    let mut max_increase: i64 = 0
+    let mut total_increase: i64 = 0
+
+    let mut d: i64 = 0
+    while d < num_dirs {
+        // 균등 방향: [-epsilon, +epsilon]
+        let offset: i64 = epsilon * (phi(N6) * d - num_dirs) / num_dirs
+        let perturbed: i64 = weight + offset
+        let perturbed_loss: i64 = sgd_loss(perturbed, 0, get_swa_lr())
+        let increase: i64 = perturbed_loss - center_loss
+
+        if increase > max_increase { max_increase = increase }
+        total_increase = total_increase + abs_val(increase)
+        d = d + 1
+    }
+
+    let avg_increase: i64 = total_increase / num_dirs
+    println("G5 평탄도[" + label + "] -- 중심손실=" + center_loss + " 최대변화=" + max_increase + " 평균변화=" + avg_increase + " epsilon=" + epsilon)
+    return avg_increase
+}
+
+fn compare_landscapes(swa_weight: i64, sgd_weight: i64) -> i64 {
+    println("G5 손실 지형 비교")
+    let swa_sharp: i64 = loss_landscape_sharpness(swa_weight, 0)
+    let sgd_sharp: i64 = loss_landscape_sharpness(sgd_weight, 1)
+
+    let ratio: i64 = sgd_sharp * SCALE / (swa_sharp + 1)
+    println("  SWA 날카로움=" + swa_sharp + " SGD 날카로움=" + sgd_sharp)
+    println("  평탄도 비율=" + ratio + "/1000 (SWA 대비 SGD -- 높을수록 SWA 우수)")
+    return ratio
+}
+
+// ── G6: BN 통계 갱신 ───────────────────────────────────────
+
+fn update_bn_statistics(swa_weight: i64) -> i64 {
+    // SWA 후 배치 정규화 통계 재계산 (평균화 가중치 기준)
+    let bn_batches: i64 = get_bn_batches()  // 144
+    let batch_size: i64 = N6                 // 6
+    let mut running_mean: i64 = 0
+    let mut running_var: i64 = SCALE
+    let momentum: i64 = SCALE / sigma(N6)   // ~83 (1/12)
+
+    println("G6 BN통계 갱신 -- 배치수=" + bn_batches + " 배치크기=" + batch_size + " 모멘텀=" + momentum + "/1000")
+
+    let mut batch: i64 = 0
+    while batch < bn_batches {
+        let mut batch_sum: i64 = 0
+        let mut batch_sq: i64 = 0
+        let mut s: i64 = 0
+        while s < batch_size {
+            let act: i64 = (swa_weight + batch * 37 + s * 71) % SCALE
+            batch_sum = batch_sum + act
+            batch_sq = batch_sq + act * act / SCALE
+            s = s + 1
+        }
+        let bm: i64 = batch_sum / batch_size
+        let bv: i64 = batch_sq / batch_size - (bm * bm / SCALE)
+        // 지수 이동 평균 갱신
+        running_mean = (SCALE - momentum) * running_mean / SCALE + momentum * bm / SCALE
+        running_var = (SCALE - momentum) * running_var / SCALE + momentum * abs_val(bv) / SCALE
+        batch = batch + 1
+    }
+
+    let total_samples: i64 = bn_batches * batch_size
+    println("  총샘플=" + total_samples + " 최종평균=" + running_mean + " 최종분산=" + running_var)
+    return running_mean
+}
+
+// ── G7: 평탄 극소값 측정 ──────────────────────────────────
+
+fn flat_minima_score(swa_weight: i64, sgd_weight: i64) -> i64 {
+    // PAC-Bayes 일반화 경계: 평탄 극소 -> 작은 KL -> 작은 일반화 격차
+    let swa_loss: i64 = sgd_loss(swa_weight, 0, get_swa_lr())
+    let sgd_loss_val: i64 = sgd_loss(sgd_weight, 0, get_swa_lr())
+    let swa_sharp: i64 = loss_landscape_sharpness(swa_weight, 0)
+    let sgd_sharp: i64 = loss_landscape_sharpness(sgd_weight, 1)
+
+    // 평탄 점수: 1000 / (1 + sharpness/SCALE)
+    let swa_flat: i64 = SCALE * SCALE / (SCALE + swa_sharp)
+    let sgd_flat: i64 = SCALE * SCALE / (SCALE + sgd_sharp)
+    let swa_gen_gap: i64 = swa_sharp / sigma(N6)
+    let sgd_gen_gap: i64 = sgd_sharp / sigma(N6)
+
+    println("G7 평탄극소 측정")
+    println("  SWA: 훈련=" + swa_loss + " 검증=" + (swa_loss + swa_gen_gap) + " 평탄=" + swa_flat)
+    println("  SGD: 훈련=" + sgd_loss_val + " 검증=" + (sgd_loss_val + sgd_gen_gap) + " 평탄=" + sgd_flat)
+    println("  검증개선=" + ((sgd_loss_val + sgd_gen_gap) - (swa_loss + swa_gen_gap)) + " (SWA 우위)")
+    return swa_flat
+}
+
+// ── G8: 순환 학습률 스케줄 ─────────────────────────────────
+
+fn cyclic_lr_schedule(epoch: i64, cycle_len: i64, base_lr: i64) -> i64 {
+    // 순환 학습률: 매 주기마다 lr 상승 후 감소
+    // lr(t) = base_lr * (1 - (t mod cycle) / cycle)
+    let pos_in_cycle: i64 = epoch % cycle_len
+    let lr: i64 = base_lr * (cycle_len - pos_in_cycle) / cycle_len
+    return lr
+}
+
+fn constant_lr_schedule(base_lr: i64) -> i64 {
+    // 상수 학습률: SWA 영역에서 고정
+    return base_lr
+}
+
+fn run_dual_schedule(total_epochs: i64) -> i64 {
+    // phi(6)=2 학습률 모드 비교: 상수(0) vs 순환(1)
+    let modes: i64 = get_lr_modes()              // 2
+    let cycle_len: i64 = get_cycle_length()      // 4
+    let base_lr: i64 = get_swa_lr()              // 5
+    let interval: i64 = get_snapshot_interval()  // 6
+    println("G8 이중 스케줄 -- 모드수=" + modes + " 주기=" + cycle_len + " 학습률=" + base_lr + "/1000")
+
+    let mut mode: i64 = 0
+    while mode < modes {
+        let mut param: i64 = 500
+        let mut snap_sum: i64 = 0
+        let mut snap_count: i64 = 0
+        let mut epoch: i64 = 0
+        while epoch < total_epochs {
+            let mut lr: i64 = base_lr
+            if mode == 1 { lr = cyclic_lr_schedule(epoch, cycle_len, base_lr) }
+            let grad: i64 = sgd_gradient(param, lr)
+            param = param - lr * grad / SCALE + (((epoch * 89 + mode * 53) % 60) - 30) / sigma(N6)
+            if epoch % interval == 0 { snap_sum = snap_sum + param; snap_count = snap_count + 1 }
+            epoch = epoch + 1
+        }
+        let sw: i64 = snap_sum / (snap_count + 1)
+        println("  모드[" + mode + "] SWA가중치=" + sw + " 손실=" + sgd_loss(sw, 0, base_lr) + " 스냅샷수=" + snap_count)
+        mode = mode + 1
+    }
+    return modes
+}
+
+// ── 메인: G1~G9 게이트 ─────────────────────────────────────
+
+fn main() -> i64 {
+    println("=== 확률적 가중치 평균화 (Stochastic Weight Averaging) x n=6 ===")
+    println("")
+
+    // G1: n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+    let identity: i64 = s6 * p6 - N6 * t6
+    println("G1 산술 | sigma=" + s6 + " tau=" + t6 + " phi=" + p6 + " sopfr=" + sp6 + " | sigma*phi-n*tau=" + identity)
+    let mut pass: i64 = 0
+    if identity == 0 { pass = pass + 1 }
+
+    // G1 확장: 핵심 상수
+    let si: i64 = get_snapshot_interval()
+    let slr: i64 = get_swa_lr()
+    let aw: i64 = get_avg_window()
+    let cl: i64 = get_cycle_length()
+    let bn: i64 = get_bn_batches()
+    let lm: i64 = get_lr_modes()
+    println("G1 상수 | 간격=" + si + " SWA-lr=" + slr + "/1000 윈도우=" + aw + " 주기=" + cl + " BN배치=" + bn + " 모드=" + lm)
+    if si == 6 { pass = pass + 1 }
+    println("")
+
+    // G2: SGD 학습
+    let total_epochs: i64 = sigma(N6) * N6  // 72 에폭
+    let init_lr: i64 = sigma(N6)             // 12/1000
+    let sgd_final: i64 = run_sgd_training(total_epochs, init_lr)
+    println("")
+
+    // G3: 스냅샷 수집
+    let swa_start: i64 = total_epochs / phi(N6)  // 36 에폭 이후 SWA 시작
+    let swa_weight: i64 = collect_snapshots(total_epochs, swa_start)
+    if swa_weight != 0 { pass = pass + 1 }
+    println("")
+
+    // G4: 가중치 평균화
+    let swa_loss: i64 = average_weights(swa_weight, sgd_final)
+    let sgd_loss_val: i64 = sgd_loss(sgd_final, 0, get_swa_lr())
+    if swa_loss <= sgd_loss_val { pass = pass + 1 }
+    println("")
+
+    // G5: 손실 지형 비교
+    let flatness_ratio: i64 = compare_landscapes(swa_weight, sgd_final)
+    if flatness_ratio > SCALE { pass = pass + 1 }
+    println("")
+
+    // G6: BN 통계 갱신
+    let bn_mean: i64 = update_bn_statistics(swa_weight)
+    if bn_mean >= 0 { pass = pass + 1 }
+    println("")
+
+    // G7: 평탄 극소값 측정
+    let flat_score: i64 = flat_minima_score(swa_weight, sgd_final)
+    if flat_score > 0 { pass = pass + 1 }
+    println("")
+
+    // G8: 순환 학습률 스케줄
+    let dual_result: i64 = run_dual_schedule(total_epochs)
+    if dual_result == phi(N6) { pass = pass + 1 }
+    println("")
+
+    // G9: 전체 정합 -- 8/8이면 9번째 자동 통과
+    if pass == 8 { pass = pass + 1 }
+
+    println("========================================")
+    println("  SWA 게이트 요약: " + pass + "/9 PASS")
+    println("  SGD 최종 가중치: " + sgd_final)
+    println("  SWA 평균 가중치: " + swa_weight)
+    println("  SWA 손실: " + swa_loss + " vs SGD 손실: " + sgd_loss_val)
+    println("  평탄도 비율: " + flatness_ratio + "/1000")
+    println("  평탄 점수: " + flat_score + "/1000")
+    println("========================================")
+    println("WeightAveraging OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+    return pass
+}

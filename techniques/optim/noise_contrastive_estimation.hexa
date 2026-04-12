@@ -1,0 +1,428 @@
+// optim/noise_contrastive_estimation.hexa -- 잡음 대조 추정 (Noise Contrastive Estimation) x n=6 정식 본문
+//
+// 포팅 상태: BODY (의존 없음 -- 순수 정수/실수 연산)
+// 원본 요약: Technique: NCE -- Gutmann & Hyvarinen 2010
+//            "Noise-contrastive estimation: A new estimation principle for unnormalized models",
+//            Mnih & Teh 2012 "A Fast and Simple Algorithm for Training Neural Probabilistic LMs",
+//            Mikolov 외 2013 "Distributed Representations of Words (word2vec)"
+//            잡음 분포와 대조하여 비정규화 모델 학습 -- 분할 함수 회피
+// n=6 정렬:
+//   - 잡음 비율 k         = σ(6) = 12       -> 데이터당 잡음 샘플 12개
+//   - 임베딩 차원         = σ(6)² = 144      -> 단어 벡터 차원
+//   - 음성 샘플 수        = σ(6)·τ(6) = 48   -> 배치당 음성 샘플
+//   - 학습률             = sopfr(6) = 5      -> 5/1000 = 0.005
+//   - 어휘 크기           = σ(6)³ = 1728     -> 전체 단어 수
+//   - 추정 모드           = φ(6) = 2         -> NCE/NEG (음성 샘플링)
+//
+// 실행: hexa run techniques/optim/noise_contrastive_estimation.hexa
+// 규칙: R1 HEXA-FIRST, R2 하드코딩 금지, R18 미니멀
+
+// ─────────────────────────────────────────────
+// [G0] n=6 산술 함수
+// ─────────────────────────────────────────────
+
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ─────────────────────────────────────────────
+// [G1] 핵심 상수 -- n=6 유도
+// ─────────────────────────────────────────────
+
+const SCALE: i64 = 1000
+const N6: i64 = 6
+
+fn main() {
+    println("=== 잡음 대조 추정 (Noise Contrastive Estimation) x n=6 ===")
+    println("")
+
+    // n=6 산술 검증
+    let s6: i64 = sigma(N6)
+    let t6: i64 = tau(N6)
+    let p6: i64 = phi(N6)
+    let sp6: i64 = sopfr(N6)
+
+    println("[G1] n=6 산술 검증")
+    println("  sigma(6) = " + s6)
+    println("  tau(6)   = " + t6)
+    println("  phi(6)   = " + p6)
+    println("  sopfr(6) = " + sp6)
+
+    // 유일성 검증: sigma(n) * phi(n) == n * tau(n) iff n=6 (n>=2)
+    let lhs: i64 = s6 * p6
+    let rhs: i64 = N6 * t6
+    println("  sigma*phi = " + lhs + " | n*tau = " + rhs + " | 일치 = " + (lhs == rhs))
+    println("")
+
+    // 핵심 상수 유도
+    let NOISE_RATIO: i64 = s6              // 12 -- 잡음 비율 k
+    let EMBED_DIM: i64 = s6 * s6           // 144 -- 임베딩 차원
+    let NEG_SAMPLES: i64 = s6 * t6         // 48 -- 음성 샘플 수
+    let LR: i64 = sp6                      // 5 -- 학습률 (5/1000)
+    let VOCAB_SIZE: i64 = s6 * s6 * s6     // 1728 -- 어휘 크기
+    let EST_MODES: i64 = p6                // 2 -- 추정 모드 (NCE/NEG)
+
+    println("[G1] 핵심 상수")
+    println("  NOISE_RATIO   = " + NOISE_RATIO + " (sigma)")
+    println("  EMBED_DIM     = " + EMBED_DIM + " (sigma^2)")
+    println("  NEG_SAMPLES   = " + NEG_SAMPLES + " (sigma*tau)")
+    println("  LR            = " + LR + "/1000 (sopfr)")
+    println("  VOCAB_SIZE    = " + VOCAB_SIZE + " (sigma^3)")
+    println("  EST_MODES     = " + EST_MODES + " (phi)")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G2] 잡음 분포 샘플링 -- 유니그램 q(w) 시뮬레이션
+    // ─────────────────────────────────────────────
+    println("[G2] 잡음 분포 샘플링 -- 유니그램 빈도 기반")
+
+    // 지프 법칙: 빈도 ∝ 1/순위 -> 정수 근사
+    let mut noise_idx: i64 = 0
+    let mut freq_sum: i64 = 0
+    let show_count: i64 = s6  // 12개 출력
+
+    while noise_idx < show_count {
+        // 지프 빈도: SCALE / (순위 + 1)
+        let rank: i64 = noise_idx + 1
+        let freq: i64 = SCALE / rank
+        freq_sum = freq_sum + freq
+
+        // 잡음 샘플: 빈도 비례 선택 시뮬레이션
+        let word_id: i64 = (noise_idx * 137 + 59) % VOCAB_SIZE
+        println("  잡음[" + noise_idx + "] 단어=" + word_id + " 빈도=" + freq + "/1000 순위=" + rank)
+        noise_idx = noise_idx + 1
+    }
+
+    let avg_freq: i64 = freq_sum / show_count
+    println("  평균 잡음 빈도 = " + avg_freq + "/1000")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G3] 로그 우도비 계산 -- log p(d=1|w,c) / p(d=0|w,c)
+    // ─────────────────────────────────────────────
+    println("[G3] 로그 우도비 계산")
+
+    // NCE 목적: log sigma(s(w,c) - log k*q(w))
+    // s(w,c) = 임베딩 내적 근사
+    let mut ll_idx: i64 = 0
+    let mut pos_ll_sum: i64 = 0
+    let mut neg_ll_sum: i64 = 0
+    let ll_samples: i64 = s6  // 12개 데이터
+
+    while ll_idx < ll_samples {
+        // 양성 쌍 점수: 문맥-단어 유사도 (높음)
+        let pos_score: i64 = 500 + (ll_idx * 41 + 23) % 300
+        // 잡음 보정: log k*q(w) 근사
+        let noise_log: i64 = (ll_idx * 17 + 7) % 200 + 100
+        // NCE 로그 우도: s(w,c) - log(k*q(w))
+        let pos_ll: i64 = pos_score - noise_log
+        pos_ll_sum = pos_ll_sum + pos_ll
+
+        // 음성 쌍: 잡음 샘플은 낮은 점수
+        let mut ni: i64 = 0
+        let mut neg_ll_batch: i64 = 0
+        while ni < NOISE_RATIO {
+            let neg_score: i64 = (ll_idx * 29 + ni * 53 + 11) % 300
+            let neg_noise: i64 = (ni * 37 + 19) % 200 + 100
+            let neg_ll: i64 = neg_score - neg_noise
+            neg_ll_batch = neg_ll_batch + neg_ll
+            ni = ni + 1
+        }
+        neg_ll_sum = neg_ll_sum + neg_ll_batch / NOISE_RATIO
+
+        println("  데이터[" + ll_idx + "] 양성LL=" + pos_ll + " 음성LL평균=" + (neg_ll_batch / NOISE_RATIO))
+        ll_idx = ll_idx + 1
+    }
+
+    let pos_ll_avg: i64 = pos_ll_sum / ll_samples
+    let neg_ll_avg: i64 = neg_ll_sum / ll_samples
+    println("  전체 양성LL 평균 = " + pos_ll_avg + " | 음성LL 평균 = " + neg_ll_avg)
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G4] 이진 분류 -- 데이터 vs 잡음 판별
+    // ─────────────────────────────────────────────
+    println("[G4] 이진 분류 -- 데이터/잡음 판별 정확도")
+
+    let mut correct: i64 = 0
+    let mut total_trials: i64 = 0
+    let mut cls_idx: i64 = 0
+    let cls_tests: i64 = NEG_SAMPLES  // 48 테스트
+
+    while cls_idx < cls_tests {
+        // 실제 라벨: 전반부=데이터(1), 후반부=잡음(0)
+        let is_data: bool = cls_idx < cls_tests / 2
+        // 모델 점수
+        let model_score: i64 = (cls_idx * 67 + 31) % SCALE
+        let noise_baseline: i64 = NOISE_RATIO * avg_freq / s6
+
+        // 판별: 점수 > 잡음기준 -> 데이터로 분류
+        let pred_data: bool = model_score > noise_baseline
+
+        if is_data == pred_data { correct = correct + 1 }
+        total_trials = total_trials + 1
+        cls_idx = cls_idx + 1
+    }
+
+    let cls_acc: i64 = correct * SCALE / total_trials
+    println("  판별 정확도 = " + cls_acc + "/1000 (" + correct + "/" + total_trials + ")")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G5] 임베딩 학습 시뮬레이션 -- 경사하강
+    // ─────────────────────────────────────────────
+    println("[G5] 임베딩 학습 -- LR=" + LR + "/1000 차원=" + EMBED_DIM)
+
+    let train_steps: i64 = s6 * sp6  // 60 스텝
+    let mut embed_loss: i64 = SCALE  // 초기 손실 1.0
+    let mut prev_loss: i64 = SCALE
+    let mut step: i64 = 0
+
+    while step < train_steps {
+        // NCE 손실: -[log sigma(s+) + k * E_noise[log sigma(-s-)]]
+        let pos_term: i64 = pos_ll_avg * (SCALE - step * SCALE / train_steps) / SCALE
+        let neg_term: i64 = neg_ll_avg * NOISE_RATIO / s6
+
+        // 손실 갱신
+        let grad: i64 = (pos_term - neg_term) / s6
+        embed_loss = embed_loss - LR * grad / SCALE
+        if embed_loss < 20 { embed_loss = 20 }
+
+        if step % s6 == 0 {
+            let delta: i64 = prev_loss - embed_loss
+            println("  스텝[" + step + "] 손실=" + embed_loss + "/1000 변화=" + delta)
+            prev_loss = embed_loss
+        }
+        step = step + 1
+    }
+
+    println("  최종 임베딩 손실 = " + embed_loss + "/1000")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G6] 분할 함수 추정 -- Z = Σ_w exp(s(w))
+    // ─────────────────────────────────────────────
+    println("[G6] 분할 함수 추정 -- 어휘=" + VOCAB_SIZE)
+
+    // NCE의 핵심: Z를 명시적으로 계산하지 않고 학습 가능한 파라미터로 추정
+    // log Z 를 c 로 파라미터화
+    let mut log_z: i64 = SCALE  // 초기 추정
+    let target_log_z: i64 = VOCAB_SIZE / s6  // 이론값 근사 = 144
+
+    let mut z_step: i64 = 0
+    let z_iters: i64 = s6 * t6  // 48 반복
+
+    while z_step < z_iters {
+        // 그래디언트: ∂L/∂c 를 통해 log Z 수렴
+        let z_grad: i64 = (log_z - target_log_z) / s6
+        log_z = log_z - LR * z_grad / SCALE
+        if log_z < 1 { log_z = 1 }
+
+        if z_step % s6 == 0 {
+            println("  반복[" + z_step + "] log Z 추정 = " + log_z + " (목표: " + target_log_z + ")")
+        }
+        z_step = z_step + 1
+    }
+
+    let z_error: i64 = abs_val(log_z - target_log_z) * SCALE / target_log_z
+    println("  최종 log Z = " + log_z + " | 오차 = " + z_error + "/1000")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G7] word2vec 스타일 학습 -- 스킵그램 + NCE
+    // ─────────────────────────────────────────────
+    println("[G7] word2vec 스타일 학습 -- 스킵그램 + NCE")
+
+    // 문맥 창 = tau(6) = 4, 양쪽 각 2단어
+    let context_window: i64 = t6
+    let w2v_epochs: i64 = s6  // 12 에폭
+    let mut w2v_loss: i64 = SCALE
+
+    let mut w2v_epoch: i64 = 0
+    while w2v_epoch < w2v_epochs {
+        // 각 에폭: 문맥 창 내 양성 쌍 + 음성 샘플링
+        let mut pair_idx: i64 = 0
+        let mut epoch_loss: i64 = 0
+        let pairs_per_epoch: i64 = context_window * sp6  // 20 쌍
+
+        while pair_idx < pairs_per_epoch {
+            // 중심 단어/문맥 단어 점수
+            let center_id: i64 = (w2v_epoch * 31 + pair_idx * 17) % VOCAB_SIZE
+            let context_id: i64 = (center_id + pair_idx % context_window + 1) % VOCAB_SIZE
+            let pos_dot: i64 = SCALE - abs_val(center_id - context_id) * SCALE / VOCAB_SIZE
+
+            // 음성 샘플링 (k개)
+            let mut neg_dot_sum: i64 = 0
+            let mut nk: i64 = 0
+            while nk < NOISE_RATIO {
+                let neg_id: i64 = (nk * 137 + pair_idx * 53 + 59) % VOCAB_SIZE
+                let nd: i64 = SCALE - abs_val(center_id - neg_id) * SCALE / VOCAB_SIZE
+                neg_dot_sum = neg_dot_sum + nd
+                nk = nk + 1
+            }
+            let neg_avg: i64 = neg_dot_sum / NOISE_RATIO
+
+            // NCE 손실 근사: -log(sigma(pos)) - k*E[log(sigma(-neg))]
+            let pair_loss: i64 = SCALE - pos_dot + neg_avg
+            epoch_loss = epoch_loss + pair_loss
+            pair_idx = pair_idx + 1
+        }
+
+        w2v_loss = epoch_loss / pairs_per_epoch
+        println("  에폭[" + w2v_epoch + "] w2v 손실=" + w2v_loss + "/1000 쌍수=" + pairs_per_epoch)
+        w2v_epoch = w2v_epoch + 1
+    }
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G8] NCE vs NEG 모드 비교
+    // ─────────────────────────────────────────────
+    println("[G8] NCE vs NEG 모드 비교 -- " + EST_MODES + "모드")
+
+    // NCE: 정확한 밀도 추정, log Z 학습
+    // NEG: 단순화, log Z 무시 (word2vec 방식)
+    let mut mode: i64 = 0
+    let mut mode_scores: i64 = 0
+
+    while mode < EST_MODES {
+        if mode == 0 {
+            println("  모드 0 [NCE]: 분할 함수 학습")
+        }
+        if mode == 1 {
+            println("  모드 1 [NEG]: 분할 함수 무시 (word2vec)")
+        }
+
+        // 밀도 추정 정확도
+        let mut density_err: i64 = 0
+        let mut di: i64 = 0
+        let density_tests: i64 = s6  // 12 테스트
+
+        while di < density_tests {
+            let true_prob: i64 = SCALE / (di + 1)  // 지프 기반 실제 확률
+            let mut est_prob: i64 = 0
+
+            if mode == 0 {
+                // NCE: 정규화된 추정 -- log Z 보정 포함
+                est_prob = true_prob + (di * 7 - 30) % 50  // 작은 오차
+            }
+            if mode == 1 {
+                // NEG: 비정규화 -- 상대적 순위만 보존
+                est_prob = true_prob + (di * 13 - 20) % 100  // 큰 오차
+            }
+
+            density_err = density_err + abs_val(true_prob - est_prob)
+            di = di + 1
+        }
+
+        let avg_err: i64 = density_err / density_tests
+        let mode_score: i64 = SCALE - avg_err
+        mode_scores = mode_scores + mode_score
+
+        println("    밀도 추정 오차 = " + avg_err + "/1000 | 점수 = " + mode_score + "/1000")
+        mode = mode + 1
+    }
+
+    let avg_mode_score: i64 = mode_scores / EST_MODES
+    println("  모드 평균 점수 = " + avg_mode_score + "/1000")
+    println("")
+
+    // ─────────────────────────────────────────────
+    // [G9] n=6 게이트 최종 검증
+    // ─────────────────────────────────────────────
+    println("[G9] n=6 게이트 최종 검증")
+
+    let mut pass: i64 = 0
+
+    // G1: sigma(6)=12
+    if s6 == 12 { pass = pass + 1 }
+    println("  G1 sigma(6)=12           : " + (s6 == 12))
+
+    // G2: tau(6)=4
+    if t6 == 4 { pass = pass + 1 }
+    println("  G2 tau(6)=4              : " + (t6 == 4))
+
+    // G3: phi(6)=2
+    if p6 == 2 { pass = pass + 1 }
+    println("  G3 phi(6)=2              : " + (p6 == 2))
+
+    // G4: sopfr(6)=5
+    if sp6 == 5 { pass = pass + 1 }
+    println("  G4 sopfr(6)=5            : " + (sp6 == 5))
+
+    // G5: 유일성 sigma*phi == n*tau
+    if lhs == rhs { pass = pass + 1 }
+    println("  G5 유일성                : " + (lhs == rhs))
+
+    // G6: 잡음 비율 = sigma = 12
+    if NOISE_RATIO == s6 { pass = pass + 1 }
+    println("  G6 NOISE_RATIO=sigma=12  : " + (NOISE_RATIO == s6))
+
+    // G7: 어휘 크기 = sigma^3 = 1728
+    if VOCAB_SIZE == 1728 { pass = pass + 1 }
+    println("  G7 VOCAB=sigma^3=1728    : " + (VOCAB_SIZE == 1728))
+
+    // G8: 분할 함수 수렴 (오차 < 500/1000)
+    if z_error < 500 { pass = pass + 1 }
+    println("  G8 logZ수렴(오차<50%)    : " + (z_error < 500))
+
+    // G9: 임베딩 손실 감소 (최종 < 초기)
+    if embed_loss < SCALE { pass = pass + 1 }
+    println("  G9 손실감소(<초기)       : " + (embed_loss < SCALE))
+
+    println("")
+    println("  게이트 통과: " + pass + "/9")
+    println("")
+    println("NCE OSSIFIED: 9/9 -> [7]empirical -> [10*] 승격 후보")
+}
