@@ -1,0 +1,358 @@
+# =============================================================
+# FALCONRY DSE Domain Definition
+# 매사냥 — 맹금 조련·훈련·사냥·보전
+# n=6 연결: n=6 주요 사냥 맹금종, tau=4 훈련 단계, sopfr=5 감각
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "falconry"
+desc = "Falconry DSE — 매사냥 맹금 조련·훈련·사냥·보전 (n=6 주요 맹금, tau=4 훈련 단계)"
+levels = ["Raptor", "Training", "Equipment", "HuntingMethod", "Conservation"]
+vision = "n=6 매사냥 — n=6 맹금종 + tau=4 훈련 + sopfr=5 감각 활용"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Raptor"
+
+[[candidate]]
+level  = 0
+id     = "Peregrine"
+label  = "매 (n=6 아종 활용)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.40
+notes  = "subspecies_used=6=n NEAR, 최고속 동물 (389km/h), 전통 매사냥 주력"
+
+[[candidate]]
+level  = 0
+id     = "Goshawk"
+label  = "참매 (phi=2 성별 크기 차: 암/수)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.50
+notes  = "dimorphism=2=phi EXACT, 숲 사냥 전문, 민첩성"
+
+[[candidate]]
+level  = 0
+id     = "Harris_Hawk"
+label  = "해리스매 (n/phi=3 마리 팩 사냥)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "pack=3=n/phi EXACT, 유일한 사회적 맹금, 초보 적합"
+
+[[candidate]]
+level  = 0
+id     = "Saker"
+label  = "삭커 매 (tau=4 서식 대륙)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.45
+notes  = "continents=4=tau NEAR (유럽/아시아/아프리카/중동), 중동 전통"
+
+[[candidate]]
+level  = 0
+id     = "Golden_Eagle"
+label  = "검독수리 (sopfr=5 kg 운반 능력)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.35
+notes  = "carry=5kg=sopfr NEAR, 카자흐 전통, 대형 사냥감"
+
+[[candidate]]
+level  = 0
+id     = "Merlin"
+label  = "쇠황조롱이 (mu=1 인 사냥)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "solo=1=mu EXACT, 소형 맹금, 참새/종달새 사냥"
+
+[[level]]
+name = "Training"
+
+[[candidate]]
+level  = 1
+id     = "Manning"
+label  = "순치 (tau=4 주 기간)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "weeks=4=tau NEAR, 사람에 대한 공포 제거"
+
+[[candidate]]
+level  = 1
+id     = "Lure_Training"
+label  = "루어 훈련 (n=6 단계 난이도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "stages=6=n EXACT, 미끼-귀환 반복 훈련"
+
+[[candidate]]
+level  = 1
+id     = "Creance"
+label  = "끈 비행 (sopfr=5 m 끈 길이 시작)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "start_length=5m=sopfr NEAR, 안전 끈 부착 자유 비행"
+
+[[candidate]]
+level  = 1
+id     = "Free_Flight"
+label  = "자유 비행 (phi=2 단계: 근거리/원거리)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.55
+notes  = "stages=2=phi EXACT, 끈 없는 야외 비행"
+
+[[candidate]]
+level  = 1
+id     = "Entering"
+label  = "실전 투입 (n/phi=3 사냥감 단계)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.55
+notes  = "prey_stages=3=n/phi EXACT (인공미끼/방사/야생)"
+
+[[candidate]]
+level  = 1
+id     = "Conditioning"
+label  = "체중 관리 (sigma=12 시간 단식 주기)"
+n6     = 0.75
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "fast=12h=sigma NEAR, 사냥 동기 조절"
+
+[[level]]
+name = "Equipment"
+
+[[candidate]]
+level  = 2
+id     = "Gauntlet"
+label  = "장갑 (mu=1 쌍 보호)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.70
+notes  = "pair=1=mu EXACT, 소가죽/사슴가죽, 발톱 보호"
+
+[[candidate]]
+level  = 2
+id     = "Jesses"
+label  = "족대 (phi=2 가닥)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "straps=2=phi EXACT, 양 발목 장착"
+
+[[candidate]]
+level  = 2
+id     = "Bells"
+label  = "방울 (phi=2 개)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "bells=2=phi EXACT (각 다리 1개), 소리 추적"
+
+[[candidate]]
+level  = 2
+id     = "Hood"
+label  = "두건 (mu=1 머리 덮개)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.65
+notes  = "cover=1=mu EXACT, 진정/이동 시 사용, 아랍 전통"
+
+[[candidate]]
+level  = 2
+id     = "Telemetry"
+label  = "텔레메트리 추적기 (n=6 채널)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "channels=6=n NEAR, GPS/VHF 위치 추적"
+
+[[candidate]]
+level  = 2
+id     = "Lure"
+label  = "루어/미끼 (n/phi=3 유형: 매/참매/독수리용)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "types=3=n/phi EXACT, 종별 훈련 미끼"
+
+[[level]]
+name = "HuntingMethod"
+
+[[candidate]]
+level  = 3
+id     = "Waiting_On"
+label  = "대기 사냥 (n=6 백 피트 상공 선회)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.55
+cost   = 0.55
+notes  = "altitude=600ft=100*n NEAR, 매 전용, 수직 급강하"
+
+[[candidate]]
+level  = 3
+id     = "Direct_Flight"
+label  = "직접 비행 (mu=1 회 돌진)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.60
+notes  = "strike=1=mu EXACT, 참매/해리스, 저공 추격"
+
+[[candidate]]
+level  = 3
+id     = "Soaring"
+label  = "활공 사냥 (tau=4 열상승류 활용)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.55
+notes  = "thermals=4=tau NEAR, 독수리, 광활한 초원"
+
+[[candidate]]
+level  = 3
+id     = "Cast_Pair"
+label  = "쌍 사냥 (phi=2 마리 협동)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "pair=2=phi EXACT, 해리스매 전문, 양면 포위"
+
+[[candidate]]
+level  = 3
+id     = "Dog_Assist"
+label  = "사냥개 협동 (n/phi=3 역할: 탐색/몰이/회수)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "roles=3=n/phi EXACT, 포인터/세터/스패니얼 연계"
+
+[[candidate]]
+level  = 3
+id     = "Night_Hunt"
+label  = "야간 사냥 (sopfr=5 km 행동반경)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.55
+cost   = 0.50
+notes  = "range=5km=sopfr NEAR, 올빼미류, 야간 시각"
+
+[[level]]
+name = "Conservation"
+
+[[candidate]]
+level  = 4
+id     = "Captive_Breeding"
+label  = "인공 번식 (phi=2 쌍 번식)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "pair=2=phi EXACT, 멸종위기종 복원"
+
+[[candidate]]
+level  = 4
+id     = "Rehab"
+label  = "재활 방사 (tau=4 단계: 치료/재활/훈련/방사)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "stages=4=tau EXACT, 부상 맹금 야생 복귀"
+
+[[candidate]]
+level  = 4
+id     = "DNA_Register"
+label  = "DNA 등록 (phi=2 가닥 시퀀싱)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "strands=2=phi EXACT, CITES 추적, 밀매 방지"
+
+[[candidate]]
+level  = 4
+id     = "Habitat"
+label  = "서식지 보전 (n=6 생태 요소)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "factors=6=n EXACT (둥지/먹이/물/은신/영역/회랑)"
+
+[[candidate]]
+level  = 4
+id     = "UNESCO_Heritage"
+label  = "유네스코 무형문화유산 (n=6 개국 공동)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "countries=6=n NEAR (2010 등재 18국 중 핵심), 전통 보존"
+
+[[candidate]]
+level  = 4
+id     = "Education"
+label  = "교육 프로그램 (n/phi=3 대상: 학생/일반/전문가)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.65
+notes  = "audiences=3=n/phi EXACT, 환경 교육 연계"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Peregrine"
+then_level = 3
+then_ids   = "Waiting_On"
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Harris_Hawk"
+then_level = 3
+then_ids   = "Cast_Pair,Dog_Assist"
+
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Manning"
+then_level = 2
+then_ids   = "Gauntlet,Jesses,Hood"

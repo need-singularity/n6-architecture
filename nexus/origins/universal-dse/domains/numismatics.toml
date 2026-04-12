@@ -1,0 +1,358 @@
+# =============================================================
+# NUMISMATICS DSE Domain Definition
+# 화폐학 — 주화·지폐 수집·감정·분류·보존
+# n=6 연결: n=6 등급 체계, sigma=12 감정 요소, tau=4 가치 결정 인자
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "numismatics"
+desc = "Numismatics DSE — 화폐학 주화/지폐 수집·감정·분류 (n=6 등급, sigma=12 요소)"
+levels = ["Classification", "Grading", "Authentication", "Preservation", "Market"]
+vision = "n=6 화폐 감정 — n=6 등급 + sigma=12 감정 요소 + tau=4 가치 인자"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "Classification"
+
+[[candidate]]
+level  = 0
+id     = "Period"
+label  = "시대 분류 (n=6 대시대)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "eras=6=n EXACT (고대/중세/근세/근대/현대/미래), 통시적 분류"
+
+[[candidate]]
+level  = 0
+id     = "Metal"
+label  = "재질 분류 (n=6 주요 금속)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.65
+notes  = "metals=6=n EXACT (금/은/구리/니켈/알루미늄/아연)"
+
+[[candidate]]
+level  = 0
+id     = "Denomination"
+label  = "액면 체계 (tau=4 단위: 동/전/냥/원)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "units=4=tau NEAR, 한국 전통 화폐 단위"
+
+[[candidate]]
+level  = 0
+id     = "Geography"
+label  = "지역 분류 (n/phi=3 대권역)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.70
+cost   = 0.70
+notes  = "regions=3=n/phi NEAR (동양/서양/이슬람)"
+
+[[candidate]]
+level  = 0
+id     = "Type"
+label  = "유형 분류 (sopfr=5 유형)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "types=5=sopfr EXACT (유통/기념/시주/견양/오류)"
+
+[[candidate]]
+level  = 0
+id     = "Series"
+label  = "발행 시리즈 (phi=2 구분: 정규/특별)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.70
+notes  = "categories=2=phi EXACT, 카탈로그 분류"
+
+[[level]]
+name = "Grading"
+
+[[candidate]]
+level  = 1
+id     = "Sheldon_Scale"
+label  = "셸던 등급 (n=6 대등급)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "major_grades=6=n EXACT (Poor/Fair/Good/Fine/XF/Unc)"
+
+[[candidate]]
+level  = 1
+id     = "Surface"
+label  = "표면 상태 (tau=4 요소)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "factors=4=tau EXACT (마모/광택/색조/흠집)"
+
+[[candidate]]
+level  = 1
+id     = "Strike"
+label  = "타각 품질 (n/phi=3 등급: 약/보통/강)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "grades=3=n/phi EXACT, 도안 선명도"
+
+[[candidate]]
+level  = 1
+id     = "Eye_Appeal"
+label  = "외관 매력 (sopfr=5 단계)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.70
+notes  = "scale=5=sopfr EXACT (매우낮음~매우높음)"
+
+[[candidate]]
+level  = 1
+id     = "Edge"
+label  = "측면 상태 (phi=2 유형: 민/톱니)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.70
+notes  = "types=2=phi EXACT, 위조 방지 테두리"
+
+[[candidate]]
+level  = 1
+id     = "Digital_Grade"
+label  = "AI 등급 판정 (n=6 인식 특징)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.55
+notes  = "features=6=n EXACT (마모/광택/타각/센터링/무결/색상)"
+
+[[level]]
+name = "Authentication"
+
+[[candidate]]
+level  = 2
+id     = "XRF_Analysis"
+label  = "XRF 성분 분석 (n=6 주요 원소)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.45
+notes  = "elements=6=n EXACT (Au/Ag/Cu/Ni/Zn/Sn), 비파괴 검사"
+
+[[candidate]]
+level  = 2
+id     = "Weight_Measure"
+label  = "중량 측정 (sopfr=5 자리 정밀도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.70
+cost   = 0.70
+notes  = "precision=5digits=sopfr EXACT, 0.001g 단위"
+
+[[candidate]]
+level  = 2
+id     = "Die_Study"
+label  = "다이 연구 (phi=2 다이: 앞/뒷면)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "dies=2=phi EXACT (정면/배면 각인틀)"
+
+[[candidate]]
+level  = 2
+id     = "Microscope"
+label  = "현미경 검사 (tau=4 배율단계)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "stages=4=tau EXACT (5x/10x/20x/40x)"
+
+[[candidate]]
+level  = 2
+id     = "Specific_Gravity"
+label  = "비중 측정 (n/phi=3 회 반복)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "repeats=3=n/phi EXACT, 아르키메데스법"
+
+[[candidate]]
+level  = 2
+id     = "Provenance"
+label  = "출처 추적 (n=6 단계 이력)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "stages=6=n EXACT (발행/유통/수집/경매/인증/현소유)"
+
+[[level]]
+name = "Preservation"
+
+[[candidate]]
+level  = 3
+id     = "Slab_Encap"
+label  = "슬래브 캡슐화 (mu=1 밀봉)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.65
+cost   = 0.55
+notes  = "seal=1=mu EXACT, NGC/PCGS 인증 슬래브"
+
+[[candidate]]
+level  = 3
+id     = "Climate_Control"
+label  = "항온항습 보관 (phi=2 제어: 온도/습도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "controls=2=phi EXACT, 40-50% RH, 18-22C"
+
+[[candidate]]
+level  = 3
+id     = "Inert_Gas"
+label  = "불활성 가스 보관 (n/phi=3 종: N2/Ar/He)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.45
+notes  = "gases=3=n/phi EXACT, 산화 방지"
+
+[[candidate]]
+level  = 3
+id     = "Conservation"
+label  = "보존 처리 (tau=4 단계: 세척/안정/코팅/건조)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "steps=4=tau EXACT, 최소 개입 원칙"
+
+[[candidate]]
+level  = 3
+id     = "Digital_Archive"
+label  = "디지털 아카이빙 (n=6 이미지 각도)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "angles=6=n EXACT (정면/배면/좌/우/상/하), 고해상도"
+
+[[candidate]]
+level  = 3
+id     = "Insurance"
+label  = "보험 평가 (sopfr=5 년 재평가)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.60
+notes  = "cycle=5yr=sopfr EXACT, 시장가 변동 반영"
+
+[[level]]
+name = "Market"
+
+[[candidate]]
+level  = 4
+id     = "Auction"
+label  = "경매 거래 (n=6 대 경매사)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.50
+notes  = "houses=6=n NEAR, Heritage/Stack's 등 주요 경매"
+
+[[candidate]]
+level  = 4
+id     = "Price_Guide"
+label  = "시세표 참조 (tau=4 주요 카탈로그)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "guides=4=tau NEAR (Krause/NGC/PCGS/Numista)"
+
+[[candidate]]
+level  = 4
+id     = "Online_Market"
+label  = "온라인 거래 (n/phi=3 플랫폼)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "platforms=3=n/phi NEAR (eBay/MA-Shops/Vcoins)"
+
+[[candidate]]
+level  = 4
+id     = "Portfolio"
+label  = "포트폴리오 관리 (n=6 자산 등급)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "tiers=6=n EXACT (핵심/성장/투기/유산/세트/잡화)"
+
+[[candidate]]
+level  = 4
+id     = "Trend_Analysis"
+label  = "시장 동향 분석 (sigma=12 개월 이동평균)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.60
+cost   = 0.60
+notes  = "window=12mo=sigma EXACT, 연간 주기 분석"
+
+[[candidate]]
+level  = 4
+id     = "Community"
+label  = "수집가 커뮤니티 (phi=2 유형: 온/오프라인)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.70
+notes  = "types=2=phi EXACT, 동호회/전시회"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Metal"
+then_level = 2
+then_ids   = "XRF_Analysis,Specific_Gravity"
+
+[[rule]]
+type       = "prefer"
+if_level   = 1
+if_id      = "Sheldon_Scale"
+then_level = 3
+then_ids   = "Slab_Encap"
+
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "XRF_Analysis"
+then_level = 4
+then_ids   = "Auction,Price_Guide"

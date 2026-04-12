@@ -1,4 +1,4 @@
-# techniques — AI 기법 140종 (139 + SOTA 3)
+# techniques — AI 기법 150종 (139 + SOTA 3)
 
 목적: HEXA 검증 가능 AI 기법. 8 서브축
 축: techniques

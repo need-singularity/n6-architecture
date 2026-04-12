@@ -1,0 +1,358 @@
+# =============================================================
+# SPELEOLOGY DSE Domain Definition
+# 동굴학 — 동굴 탐사·측량·생태·보전
+# n=6 연결: n=6 동굴 생성 유형, tau=4 동굴대, sigma=12 개월 모니터링
+# Total raw combos: 6x6x6x6x6 = 7,776 (pre-filter)
+# =============================================================
+
+[meta]
+name = "speleology"
+desc = "Speleology DSE — 동굴학 탐사·측량·생태·보전 (n=6 생성 유형, tau=4 동굴대)"
+levels = ["CaveType", "Survey", "Biology", "Monitoring", "Conservation"]
+vision = "n=6 동굴 시스템 — n=6 생성 유형 + tau=4 대 + sigma=12 개월 관측"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+[[level]]
+name = "CaveType"
+
+[[candidate]]
+level  = 0
+id     = "Solution"
+label  = "용식 동굴 (n=6 카르스트 발달 단계)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "stages=6=n EXACT (초기균열/확대/통로/방/붕괴/화석), 석회암"
+
+[[candidate]]
+level  = 0
+id     = "Lava_Tube"
+label  = "용암 동굴 (phi=2 층: 상/하)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "layers=2=phi EXACT, 화산 지역, 제주 만장굴"
+
+[[candidate]]
+level  = 0
+id     = "Sea_Cave"
+label  = "해식 동굴 (tau=4 침식 인자: 파도/바람/모래/화학)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.65
+notes  = "erosion_factors=4=tau EXACT, 해안 절벽"
+
+[[candidate]]
+level  = 0
+id     = "Glacier"
+label  = "빙하 동굴 (n/phi=3 형성 메커니즘)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.60
+cost   = 0.55
+notes  = "mechanisms=3=n/phi EXACT (융수/지열/압력), 임시 구조"
+
+[[candidate]]
+level  = 0
+id     = "Tectonic"
+label  = "구조 동굴 (phi=2 단층면)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.65
+cost   = 0.65
+notes  = "fault_faces=2=phi EXACT, 지각 운동 생성"
+
+[[candidate]]
+level  = 0
+id     = "Talus"
+label  = "암괴 동굴 (sopfr=5 m 최소 통과 크기)"
+n6     = 1.00
+perf   = 0.70
+power  = 0.70
+cost   = 0.70
+notes  = "min_passage=5m=sopfr NEAR, 낙석 사이 공간"
+
+[[level]]
+name = "Survey"
+
+[[candidate]]
+level  = 1
+id     = "Compass_Tape"
+label  = "나침반+줄자 (n/phi=3 측정: 방위/경사/거리)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.75
+cost   = 0.75
+notes  = "measurements=3=n/phi EXACT, 전통 측량법"
+
+[[candidate]]
+level  = 1
+id     = "LiDAR_Scan"
+label  = "LiDAR 3D 스캔 (n/phi=3 축)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.45
+cost   = 0.40
+notes  = "axes=3=n/phi EXACT, 밀리미터 정밀도, 고속"
+
+[[candidate]]
+level  = 1
+id     = "Photo_Grammetry"
+label  = "사진 측량 (n=6 시점 스테레오)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "viewpoints=6=n EXACT, 3D 모델 생성"
+
+[[candidate]]
+level  = 1
+id     = "Disto_X"
+label  = "DistoX 전자 측량 (tau=4 센서: 거리/방위/경사/온도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "sensors=4=tau EXACT, 블루투스 연결, 현장 도면"
+
+[[candidate]]
+level  = 1
+id     = "Radio_Location"
+label  = "무선 위치 측정 (phi=2 주파수)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "frequencies=2=phi EXACT, 동굴-지표 수직 정합"
+
+[[candidate]]
+level  = 1
+id     = "Sonar"
+label  = "수중 소나 (sopfr=5 kHz 주파수)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "freq=5kHz=sopfr NEAR, 수중 동굴(사이펀) 측량"
+
+[[level]]
+name = "Biology"
+
+[[candidate]]
+level  = 2
+id     = "Troglobite"
+label  = "진동굴성 생물 (n=6 주요 분류군)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "taxa=6=n EXACT (갑각/거미/곤충/양서/어류/연체), 완전 적응"
+
+[[candidate]]
+level  = 2
+id     = "Troglophile"
+label  = "호동굴성 생물 (phi=2 서식지: 동굴+외부)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "habitats=2=phi EXACT, 박쥐/개구리, 양쪽 생활"
+
+[[candidate]]
+level  = 2
+id     = "Guano_Ecosystem"
+label  = "구아노 생태계 (tau=4 영양 단계)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "trophic=4=tau EXACT (박쥐→구아노→분해자→포식자)"
+
+[[candidate]]
+level  = 2
+id     = "Biofilm"
+label  = "미생물 바이오필름 (n/phi=3 역할: 화학독립영양/분해/공생)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "roles=3=n/phi EXACT, 동굴 벽 미생물 매트"
+
+[[candidate]]
+level  = 2
+id     = "Adaptation"
+label  = "동굴 적응 특성 (sopfr=5 손실: 눈/색소/날개/시계/대사)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "losses=5=sopfr EXACT, 퇴행 진화, 에너지 절약"
+
+[[candidate]]
+level  = 2
+id     = "eDNA"
+label  = "환경 DNA 분석 (phi=2 가닥 시퀀싱)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.50
+cost   = 0.50
+notes  = "strands=2=phi EXACT, 비침습적 종 다양성 조사"
+
+[[level]]
+name = "Monitoring"
+
+[[candidate]]
+level  = 3
+id     = "Climate_Logger"
+label  = "기후 기록계 (n=6 측정 항목)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "parameters=6=n EXACT (온도/습도/CO2/기류/기압/라돈)"
+
+[[candidate]]
+level  = 3
+id     = "Water_Chem"
+label  = "수질 화학 (tau=4 이온: Ca/Mg/HCO3/SO4)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.60
+cost   = 0.55
+notes  = "ions=4=tau EXACT, 카르스트 용식 모니터링"
+
+[[candidate]]
+level  = 3
+id     = "Speleothem_Growth"
+label  = "이차 생성물 성장률 (sigma=12 개월 주기)"
+n6     = 0.75
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "cycle=12mo=sigma EXACT, 종유석/석순 성장 측정"
+
+[[candidate]]
+level  = 3
+id     = "Bat_Census"
+label  = "박쥐 개체수 조사 (phi=2 회/년: 동면기/활동기)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.60
+notes  = "surveys=2=phi EXACT, 동면굴/출산굴 구분"
+
+[[candidate]]
+level  = 3
+id     = "Seismic"
+label  = "미세 진동 모니터링 (n/phi=3 축 가속도)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "axes=3=n/phi EXACT, 붕괴 위험 조기 경보"
+
+[[candidate]]
+level  = 3
+id     = "Photo_Monitor"
+label  = "정점 사진 기록 (sopfr=5 년 주기)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "interval=5yr=sopfr EXACT, 장기 변화 비교"
+
+[[level]]
+name = "Conservation"
+
+[[candidate]]
+level  = 4
+id     = "Gate_Control"
+label  = "입구 게이트 (mu=1 출입 통제)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.60
+notes  = "gate=1=mu EXACT, 박쥐 통과 가능 설계"
+
+[[candidate]]
+level  = 4
+id     = "Visitor_Limit"
+label  = "탐방객 제한 (n=6 인/조)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.65
+cost   = 0.65
+notes  = "group=6=n EXACT, CO2 증가 최소화"
+
+[[candidate]]
+level  = 4
+id     = "Restoration"
+label  = "복원 사업 (tau=4 단계: 조사/계획/시공/모니터링)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.60
+cost   = 0.55
+notes  = "phases=4=tau EXACT, 오염 제거, 조명 교체"
+
+[[candidate]]
+level  = 4
+id     = "Education_Trail"
+label  = "교육 탐방로 (n=6 해설 지점)"
+n6     = 1.00
+perf   = 0.75
+power  = 0.70
+cost   = 0.65
+notes  = "stops=6=n EXACT, 동굴 지질·생태 해설"
+
+[[candidate]]
+level  = 4
+id     = "WNS_Protocol"
+label  = "백코증후군 방역 (n/phi=3 단계: 세척/소독/건조)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.55
+cost   = 0.55
+notes  = "steps=3=n/phi EXACT, 장비 오염 방지"
+
+[[candidate]]
+level  = 4
+id     = "Digital_Twin"
+label  = "디지털 트윈 보존 (n/phi=3 D 모델)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.55
+cost   = 0.50
+notes  = "dimensions=3=n/phi EXACT, 가상 동굴 체험, 원본 보호"
+
+# =============================================================
+# Compatibility Rules
+# =============================================================
+
+[[rule]]
+type       = "prefer"
+if_level   = 0
+if_id      = "Solution"
+then_level = 1
+then_ids   = "LiDAR_Scan,Disto_X"
+
+[[rule]]
+type       = "prefer"
+if_level   = 2
+if_id      = "Troglobite"
+then_level = 3
+then_ids   = "Climate_Logger"
+
+[[rule]]
+type       = "prefer"
+if_level   = 3
+if_id      = "Bat_Census"
+then_level = 4
+then_ids   = "Gate_Control,WNS_Protocol"
