@@ -1,0 +1,375 @@
+# =============================================================
+# POMOLOGY (과수학) DSE 도메인 정의
+# 과수학 — n=6 주요 온대 과수 + sigma=12 개월 재배 주기 + tau=4 계절 관리 + phi=2 자가/타가수분
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "pomology"
+desc = "과수학 DSE — 과종·대목·정지전정·수확·저장, n=6 주요 온대 과수"
+levels = ["Fruit_Type", "Rootstock", "Training", "Harvest", "Storage"]
+vision = "n=6 기반 궁극 과수학 — n=6 주요 과종 + sigma=12 개월 주기 + tau=4 계절 + phi=2 자가/타가"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Fruit_Type (과종) -- 6 후보
+# =============================================================
+[[level]]
+name = "Fruit_Type"
+
+[[candidate]]
+level  = 0
+id     = "Apple_Malus"
+label  = "사과 (세계 1위 온대 과수, n=6 주요 품종군)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.88
+notes  = "cultivar_groups=6=n NEAR (후지/갈라/홍로/감홍/시나노/그래니스미스)"
+
+[[candidate]]
+level  = 0
+id     = "Pear_Pyrus"
+label  = "배 (동서양 이분, phi=2 동양/서양 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "types=2=phi EXACT (동양배=아삭/서양배=물렁), 신고/바틀렛"
+
+[[candidate]]
+level  = 0
+id     = "Peach_Prunus"
+label  = "복숭아 (핵과류 대표, phi=2 이핵/점핵 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "pit_type=2=phi EXACT (이핵=freestone/점핵=clingstone)"
+
+[[candidate]]
+level  = 0
+id     = "Cherry_Sweet"
+label  = "체리 (양앵두, n=6 주요 품종 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.65
+notes  = "varieties=6=n NEAR (Bing/Rainier/Stella/Lapins/Sweetheart/Skeena)"
+
+[[candidate]]
+level  = 0
+id     = "Grape_Table"
+label  = "포도 (식용, sigma=12 개월 관리 주기 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.82
+notes  = "cycle=12mo=sigma EXACT (전정→발아→개화→착색→수확→휴면)"
+
+[[candidate]]
+level  = 0
+id     = "Persimmon_Diospyros"
+label  = "감 (동아시아 특산, phi=2 단감/떫은감 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.88
+notes  = "types=2=phi EXACT (단감=부유/떫은감=둥시), 탄닌 제거"
+
+# =============================================================
+# Level 1: Rootstock (대목) -- 6 후보
+# =============================================================
+[[level]]
+name = "Rootstock"
+
+[[candidate]]
+level  = 1
+id     = "M9_Dwarf"
+label  = "M.9 왜성 대목 (사과 표준, n=6 년 결실 NEAR)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.82
+notes  = "bearing_age=6yr=n NEAR (조기 결실 2-3년), 밀식 재배 혁명"
+
+[[candidate]]
+level  = 1
+id     = "M26_Semi"
+label  = "M.26 반왜성 (phi=2 왜성/반왜성 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "vigor=2=phi NEAR (왜성/반왜성 중간), 가정 과수원"
+
+[[candidate]]
+level  = 1
+id     = "MM111_Vigor"
+label  = "MM.111 강세 (대형수, sigma=12 m 수고)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.80
+notes  = "height=12m=sigma NEAR (무전정 시), 전통 과수원"
+
+[[candidate]]
+level  = 1
+id     = "Seedling_Wild"
+label  = "실생 대목 (야생종, tau=4 년 접목 적기)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.78
+cost   = 0.90
+notes  = "graft_age=4yr=tau NEAR (실생 4년차 접목), 유전 다양성"
+
+[[candidate]]
+level  = 1
+id     = "Quince_Pear"
+label  = "마르멜로 대목 (배 전용, phi=2 친화/비친화 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.75
+notes  = "compat=2=phi EXACT (친화/비친화→중간대목 필요), 유럽 배"
+
+[[candidate]]
+level  = 1
+id     = "Gisela_Cherry"
+label  = "기셀라 대목 (체리 왜화, n=6 번 시리즈)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.68
+notes  = "series=6=n NEAR (Gisela 3/5/6/7/12/13), 독일 개발"
+
+# =============================================================
+# Level 2: Training (정지/전정) -- 6 후보
+# =============================================================
+[[level]]
+name = "Training"
+
+[[candidate]]
+level  = 2
+id     = "Central_Leader"
+label  = "주간형 (중심 축, tau=4 층 배치 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.85
+notes  = "scaffold_layers=4=tau NEAR (1-4층 주지), 사과 표준"
+
+[[candidate]]
+level  = 2
+id     = "Spindle_Slender"
+label  = "세장 방추형 (밀식, sigma=12 주지 NEAR)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.88
+cost   = 0.78
+notes  = "laterals=12=sigma NEAR, 3000 주/ha, 현대 고밀식"
+
+[[candidate]]
+level  = 2
+id     = "Open_Center"
+label  = "개심형 (배상형, tau=4 주지 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.85
+notes  = "leaders=4=tau NEAR (3-4 주지 개방), 복숭아/감"
+
+[[candidate]]
+level  = 2
+id     = "Espalier_Wall"
+label  = "에스팔리에 (벽면 유인, phi=2 평면 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.65
+notes  = "dimensions=2=phi EXACT (2D 평면), 관상+소형 과수원"
+
+[[candidate]]
+level  = 2
+id     = "Tatura_V"
+label  = "타투라 V자형 (phi=2 V 분지 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.72
+notes  = "branches=2=phi EXACT (V자 2방향), 호주 개발, 수광 극대"
+
+[[candidate]]
+level  = 2
+id     = "Tall_Spindle"
+label  = "초세장형 (n=6 주지/m 밀도 NEAR)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.70
+notes  = "laterals_per_m=6=n NEAR, 코넬 시스템, 극밀식"
+
+# =============================================================
+# Level 3: Harvest (수확/품질) -- 6 후보
+# =============================================================
+[[level]]
+name = "Harvest"
+
+[[candidate]]
+level  = 3
+id     = "Brix_Sugar"
+label  = "당도 브릭스 (sigma=12 Brix 기준 NEAR)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.85
+notes  = "target=12Brix=sigma NEAR (사과 12-14 Brix), 굴절계"
+
+[[candidate]]
+level  = 3
+id     = "Starch_Index"
+label  = "전분 지수 (요오드 반응, n=6 단계 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.90
+notes  = "scale=6=n NEAR (1-6 스케일 표준), 수확 적기 판정"
+
+[[candidate]]
+level  = 3
+id     = "Firmness_Press"
+label  = "경도 (관능 검사, phi=2 과육/표피 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.82
+notes  = "zones=2=phi EXACT (과육 경도/표피 경도), 관통력 측정"
+
+[[candidate]]
+level  = 3
+id     = "Color_Chart"
+label  = "착색도 (색 차트, n=6 등급 NEAR)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.88
+notes  = "grades=6=n NEAR (1-6 색상 차트), 안토시아닌"
+
+[[candidate]]
+level  = 3
+id     = "Ethylene_Gas"
+label  = "에틸렌 호흡 (숙성 호르몬, phi=2 급등/비급등 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.78
+notes  = "pattern=2=phi EXACT (클라이맥테릭/비클라이맥테릭)"
+
+[[candidate]]
+level  = 3
+id     = "Acid_Balance"
+label  = "산도 균형 (말산, tau=4 성숙 단계)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.80
+notes  = "stages=4=tau NEAR (미숙/녹숙/적숙/과숙), 당산비"
+
+# =============================================================
+# Level 4: Storage (저장) -- 6 후보
+# =============================================================
+[[level]]
+name = "Storage"
+
+[[candidate]]
+level  = 4
+id     = "CA_Storage"
+label  = "CA 저장 (제어 대기, tau=4 가스 변수 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.88
+cost   = 0.65
+notes  = "variables=4=tau EXACT (O2/CO2/온도/습도), sigma=12 개월 사과"
+
+[[candidate]]
+level  = 4
+id     = "Cold_Storage"
+label  = "냉장 저장 (0-4 C, tau=4 C 범위 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.82
+notes  = "temp_range=4C=tau EXACT (0-4 C), 기본 유통"
+
+[[candidate]]
+level  = 4
+id     = "SmartFresh_1MCP"
+label  = "1-MCP 처리 (에틸렌 억제, phi=2 처리/비처리 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.72
+notes  = "treatment=2=phi EXACT (처리/비처리), 사과 경도 유지"
+
+[[candidate]]
+level  = 4
+id     = "MAP_Package"
+label  = "MA 포장 (변형 대기, phi=2 능동/수동 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.80
+notes  = "types=2=phi EXACT (능동 가스치환/수동 필름 투과)"
+
+[[candidate]]
+level  = 4
+id     = "Wax_Coating"
+label  = "왁스 코팅 (수분 손실 방지, n=6 종 왁스)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.80
+cost   = 0.85
+notes  = "wax_types=6=n NEAR (카나우바/셸락/폴리에틸렌/밀랍/파라핀/카르나우바)"
+
+[[candidate]]
+level  = 4
+id     = "Freeze_Dry"
+label  = "동결 건조 (수분 제거, phi=2 동결/승화 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.78
+cost   = 0.55
+notes  = "phases=2=phi EXACT (동결/승화), 간식·우주식품"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# M.9 왜성 대목은 세장방추형/초세장형 필수
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "M9_Dwarf"
+then_level = 2
+then_ids   = "Spindle_Slender,Tall_Spindle"
+
+# 복숭아는 CA 저장 비호환 (단기 유통)
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Peach_Prunus"
+then_level = 4
+then_ids   = "CA_Storage"
+
+# 에틸렌 급등형은 1-MCP 처리와 최적
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Ethylene_Gas"
+then_level = 4
+then_ids   = "SmartFresh_1MCP,CA_Storage"

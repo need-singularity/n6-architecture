@@ -1,0 +1,375 @@
+# =============================================================
+# CRYOGENICS (극저온공학) DSE 도메인 정의
+# 극저온 — n=6 주요 냉매 + sigma=12 K 전이온도 대역 + tau=4 냉각 단계 + phi=2 상전이
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "cryogenics"
+desc = "극저온공학 DSE — 냉매·냉각법·단열·응용·검출, n=6 주요 극저온 냉매"
+levels = ["Coolant", "Method", "Insulation", "Application", "Detector"]
+vision = "n=6 기반 궁극 극저온 — n=6 냉매 + sigma=12 K 전이 대역 + tau=4 냉각 단계 + phi=2 상전이"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Coolant (냉매) -- 6 후보
+# =============================================================
+[[level]]
+name = "Coolant"
+
+[[candidate]]
+level  = 0
+id     = "LHe4_Helium"
+label  = "액체 헬륨-4 (4.2 K, tau=4 양자수 EXACT)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.70
+cost   = 0.40
+notes  = "mass_number=4=tau EXACT, 초유동 2.17K, MRI/양자컴"
+
+[[candidate]]
+level  = 0
+id     = "LHe3_Helium"
+label  = "헬륨-3 (0.3 K 희석냉동, phi=2 페르미온/보손 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.50
+cost   = 0.15
+notes  = "statistics=2=phi EXACT (He3=페르미온/He4=보손), 밀리켈빈 도달"
+
+[[candidate]]
+level  = 0
+id     = "LN2_Nitrogen"
+label  = "액체 질소 (77 K, sigma=12 배 He 대비 가격)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.92
+cost   = 0.95
+notes  = "price_ratio=12=sigma NEAR (He 대비 1/12), 범용 냉각"
+
+[[candidate]]
+level  = 0
+id     = "LH2_Hydrogen"
+label  = "액체 수소 (20 K, phi=2 오르토/파라 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.75
+cost   = 0.60
+notes  = "spin_isomers=2=phi EXACT (ortho/para), 로켓 연료"
+
+[[candidate]]
+level  = 0
+id     = "LAr_Argon"
+label  = "액체 아르곤 (87 K, n=6 주요 불활성기체 중 3번째)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.88
+cost   = 0.90
+notes  = "noble_gases=6=n EXACT (He/Ne/Ar/Kr/Xe/Rn), 입자검출"
+
+[[candidate]]
+level  = 0
+id     = "Ne_Neon"
+label  = "액체 네온 (27 K, n=6 족 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.80
+cost   = 0.50
+notes  = "group=18, noble_count=6=n EXACT, 냉동 능력 He 다음"
+
+# =============================================================
+# Level 1: Method (냉각법) -- 6 후보
+# =============================================================
+[[level]]
+name = "Method"
+
+[[candidate]]
+level  = 1
+id     = "JT_Expansion"
+label  = "줄-톰슨 팽창 (등엔탈피, phi=2 가열/냉각 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "effects=2=phi EXACT (역전온도 위/아래), 린데 사이클"
+
+[[candidate]]
+level  = 1
+id     = "Dilution_Fridge"
+label  = "희석 냉동기 (He3/He4 혼합, phi=2 상 분리 EXACT)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.60
+cost   = 0.20
+notes  = "phases=2=phi EXACT (농축상/희석상), 10 mK 도달, 양자컴"
+
+[[candidate]]
+level  = 1
+id     = "Adiabatic_Demag"
+label  = "단열 소자 (ADR, tau=4 주기 단계 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.55
+cost   = 0.30
+notes  = "cycle=4=tau EXACT (자화/단열/소자/재자화), 마이크로켈빈"
+
+[[candidate]]
+level  = 1
+id     = "Pulse_Tube"
+label  = "펄스관 냉동기 (무가동부, n=6 Hz 구동 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.75
+notes  = "freq=6Hz=n NEAR (1-10 Hz 범위), 진동 최소, 위성"
+
+[[candidate]]
+level  = 1
+id     = "GM_Cooler"
+label  = "기포드-맥마흔 (GM, tau=4 행정 사이클)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.88
+cost   = 0.80
+notes  = "strokes=4=tau NEAR (흡입/팽창/방출/압축), 4K 도달"
+
+[[candidate]]
+level  = 1
+id     = "Stirling_Cryo"
+label  = "스털링 극저온 (sigma=12 W/K 효율 기준)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.82
+notes  = "COP_ref=12=sigma NEAR (80K에서), 적외선 센서"
+
+# =============================================================
+# Level 2: Insulation (단열) -- 6 후보
+# =============================================================
+[[level]]
+name = "Insulation"
+
+[[candidate]]
+level  = 2
+id     = "MLI_Multilayer"
+label  = "다층 단열 (MLI, sigma=12 층 최소 NEAR)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.70
+notes  = "min_layers=12=sigma NEAR (최소 12층 알루미늄+다크론)"
+
+[[candidate]]
+level  = 2
+id     = "Vacuum_Jacket"
+label  = "진공 재킷 (듀어, phi=2 벽 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.92
+cost   = 0.80
+notes  = "walls=2=phi EXACT (내벽/외벽), 제임스 듀어 1892"
+
+[[candidate]]
+level  = 2
+id     = "Aerogel_Block"
+label  = "에어로겔 (초경량, n=6 mg/cm3 밀도 NEAR)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.55
+notes  = "density=6mg/cc=n NEAR, 열전도율 0.015 W/mK"
+
+[[candidate]]
+level  = 2
+id     = "Perlite_Fill"
+label  = "퍼라이트 충전 (분말 단열, tau=4 입도 등급)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.85
+cost   = 0.90
+notes  = "grades=4=tau NEAR, 대형 탱크 충전, 저렴"
+
+[[candidate]]
+level  = 2
+id     = "Foam_PU"
+label  = "폴리우레탄 폼 (LNG 단열, phi=2 발포 방식)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.82
+cost   = 0.88
+notes  = "foaming=2=phi EXACT (개방셀/폐쇄셀), LNG 선박"
+
+[[candidate]]
+level  = 2
+id     = "Thermal_Anchor"
+label  = "열 앵커링 (단계적 냉각, tau=4 온도 스테이지)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.65
+notes  = "stages=4=tau EXACT (300K/50K/4K/base), 희석냉동기 표준"
+
+# =============================================================
+# Level 3: Application (응용) -- 6 후보
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 3
+id     = "MRI_Medical"
+label  = "MRI 의료 (초전도 자석, sigma=12 T 최대 자기장)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.60
+notes  = "field=12T=sigma NEAR (연구용 최대), NbTi/Nb3Sn"
+
+[[candidate]]
+level  = 3
+id     = "Quantum_Computer"
+label  = "양자 컴퓨터 (10 mK, n=6 주요 큐비트 기술)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.70
+cost   = 0.25
+notes  = "qubit_types=6=n NEAR (초전도/이온트랩/광자/NV/위상/중성원자)"
+
+[[candidate]]
+level  = 3
+id     = "LNG_Transport"
+label  = "LNG 수송 (-162 C, sigma=12 만 m3 대형선)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.90
+cost   = 0.80
+notes  = "capacity=12만m3=sigma NEAR (Q-Flex급), 메탄 액화"
+
+[[candidate]]
+level  = 3
+id     = "Particle_Accel"
+label  = "입자 가속기 (LHC, tau=4 주요 실험)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.80
+cost   = 0.30
+notes  = "experiments=4=tau EXACT (ATLAS/CMS/ALICE/LHCb), 1.9K He"
+
+[[candidate]]
+level  = 3
+id     = "Space_Sensor"
+label  = "우주 적외선 센서 (JWST, n=6 um 적외선 대역)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.75
+cost   = 0.35
+notes  = "wavelength=6um=n NEAR (MIRI 중적외선 대역), 40K 냉각"
+
+[[candidate]]
+level  = 3
+id     = "Cryo_Preservation"
+label  = "저온 보존 (세포/조직, phi=2 동결/해동 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.75
+notes  = "states=2=phi EXACT (동결/해동), 줄기세포·정자·난자"
+
+# =============================================================
+# Level 4: Detector (검출기) -- 6 후보
+# =============================================================
+[[level]]
+name = "Detector"
+
+[[candidate]]
+level  = 4
+id     = "SQUID_Mag"
+label  = "SQUID 자기 센서 (초전도 양자 간섭, phi=2 접합 EXACT)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.80
+cost   = 0.40
+notes  = "junctions=2=phi EXACT (dc SQUID), 10^-15 T 감도"
+
+[[candidate]]
+level  = 4
+id     = "TES_Bolometer"
+label  = "TES 볼로미터 (전이경계 센서, phi=2 상전이 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.78
+cost   = 0.35
+notes  = "transition=2=phi EXACT (정상/초전도 경계), CMB 관측"
+
+[[candidate]]
+level  = 4
+id     = "SNSPD_Photon"
+label  = "SNSPD 단광자 검출 (초전도 나노와이어, n=6 nm 와이어)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.75
+cost   = 0.30
+notes  = "wire_width=6nm=n NEAR, 95% 이상 양자효율"
+
+[[candidate]]
+level  = 4
+id     = "KID_Resonator"
+label  = "KID 운동 인덕턴스 검출 (sigma=12 GHz 공명)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.82
+cost   = 0.45
+notes  = "resonance=12GHz=sigma NEAR, 대면적 어레이 가능"
+
+[[candidate]]
+level  = 4
+id     = "Cryo_HEMT"
+label  = "극저온 HEMT 증폭기 (tau=4 K 동작 온도)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.55
+notes  = "temp=4K=tau EXACT, 전파천문·양자 읽기, InP 기반"
+
+[[candidate]]
+level  = 4
+id     = "STM_AFM_Cryo"
+label  = "극저온 STM/AFM (원자 해상도, n=6 자유도)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.78
+cost   = 0.40
+notes  = "DOF=6=n NEAR (xyz+tip bias+feedback+scan), 4K 원자 조작"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 희석 냉동기는 He-3 냉매 필수
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Dilution_Fridge"
+then_level = 0
+then_ids   = "LHe3_Helium,LHe4_Helium"
+
+# 양자 컴퓨터는 희석 냉동기 또는 ADR 필수
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "Quantum_Computer"
+then_level = 1
+then_ids   = "Dilution_Fridge,Adiabatic_Demag"
+
+# LNG 수송은 밀리켈빈 검출기와 비호환
+[[rule]]
+type       = "exclude"
+if_level   = 3
+if_id      = "LNG_Transport"
+then_level = 4
+then_ids   = "SQUID_Mag,SNSPD_Photon"

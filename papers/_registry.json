@@ -2,7 +2,7 @@
   "_meta": {
     "total_products": 173,
     "total_domains": 120,
-    "total_papers": 85,
+    "total_papers": 91,
     "_count_verified": "2026-04-12 실측 — papers/n6-*-paper.md 85 (이전 79 + chunk_j 6: 종교·문자·와인·무용·건축·탄소), sections[].products 합계 173, sections[].domains 합계 120",
     "papers_chunk_c_2026-04-08": {
       "count": 11,
@@ -321,6 +321,44 @@
         "korean_only": true
       },
       "ghost_status_transition": "ghost → v1 (6개 신규 작성: civilization 2, life-culture 2, tech-industry 1, environment 1)"
+    },
+    "papers_chunk_k_2026-04-12": {
+      "count": 6,
+      "category": "���명·문화·자연과학·산업 ghost 해소 (ghost→v1)",
+      "bt_range": "BT-201, BT-380, BT-9, BT-73, BT-197, BT-227, BT-370, BT-377, BT-372, BT-143, BT-189, BT-402, BT-403, BT-15, BT-1391, BT-404",
+      "status": "v1 완성 -- hexa 검증 STUB + ASCII 결과표 + MISS 공시 포함",
+      "target_id_range": "N6-085 ~ N6-090",
+      "papers": [
+        "papers/n6-game-theory-paper.md",
+        "papers/n6-cryptography-paper.md",
+        "papers/n6-music-theory-paper.md",
+        "papers/n6-horology-paper.md",
+        "papers/n6-cartography-paper.md",
+        "papers/n6-pharmacology-paper.md"
+      ],
+      "bt_mapping": {
+        "n6-game-theory-paper.md": "BT-201, BT-380, BT-9 (평형/다중패러다임/위상고정점)",
+        "n6-cryptography-paper.md": "BT-73, BT-197, BT-227 (인코딩/정보스택/이진체계)",
+        "n6-music-theory-paper.md": "BT-143, BT-189, BT-402, BT-403 (진동모드/파동매질/이어폰/공간음���)",
+        "n6-horology-paper.md": "BT-370, BT-73 (성수주기/인코딩구조)",
+        "n6-cartography-paper.md": "BT-370, BT-377, BT-372 (지리주기/곡률기하/지질PREM)",
+        "n6-pharmacology-paper.md": "BT-15, BT-1391, BT-404 (생물화학양론/광합성/치료나노봇)"
+      },
+      "exact_stats": {
+        "n6-game-theory-paper.md": "17/20 EXACT (85.0%)",
+        "n6-cryptography-paper.md": "16/20 EXACT (80.0%)",
+        "n6-music-theory-paper.md": "22/25 EXACT (88.0%)",
+        "n6-horology-paper.md": "19/22 EXACT (86.4%)",
+        "n6-cartography-paper.md": "17/20 EXACT (85.0%)",
+        "n6-pharmacology-paper.md": "18/22 EXACT (81.8%)"
+      },
+      "verify_code_status": {
+        "all_papers_have_hexa_stub": true,
+        "n62_compliance": "전 6편 본문에 verify/*_seed.hexa STUB 블록 + ASCII 결과표 + n=28/n=496 대조 + Honest Limitations 섹션",
+        "honest_miss_disclosed": true,
+        "korean_only": true
+      },
+      "ghost_status_transition": "ghost → v1 (6개 신규 작성: civilization 2, life-culture 1, tech-industry 1, natural-science 1, 시계학 1)"
     },
     "last_updated": "2026-04-12",
     "description": "완성제품 SSOT — README 자동 생성용",

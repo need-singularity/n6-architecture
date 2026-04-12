@@ -1,14 +1,15 @@
 {
-  "_doc": "AI 기법 83종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
-  "_version": "1.4.0",
-  "_total": 83,
+  "_doc": "AI 기법 91종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
+  "_version": "1.5.0",
+  "_total": 91,
   "_sota_extended": 3,
-  "_sota_total": 86,
-  "_body_count": 84,
+  "_sota_total": 94,
+  "_body_count": 92,
   "_stub_count": 0,
   "_deprecated_count": 2,
   "_last_updated": "2026-04-12",
   "_changelog": [
+    "2026-04-12: DFS17 기법 8종 신규 — optim 4종(simpo/lion_optimizer/grokking/reward_modeling) + arch 4종(mixture_of_lora/rope_scaling/kolmogorov_arnold/test_time_training). _total 83→91, _body_count 84→92",
     "2026-04-12: DFS16 기법 8종 신규 + 레지스트리 정합 — optim 4종(continual/curriculum/contrastive/knowledge_distillation) + arch 4종(state_space_s4/retrieval_augmented_gen/diffusion_sampling/multi_agent_coord) + 누락 8종(grpo/ppo_clip/rlhf/kv_cache_quantize/token_merging/diffusion_transformer/flow_matching/retnet) 등록. _total 67→83, _body_count 68→84",
     "2026-04-12: 전축 완파 — 8축 68/68 BODY (18,424줄), STUB 0. arch_optimizer(별도)+mamba2_ssm(DEPRECATED) 제외. _body_count 15→68",
     "2026-04-12: STUB→BODY 12종 일괄 변환 — attention 2, moe 2, sparse 2, compress 1, optim 3, arch 2. _body_count 3→15",
@@ -82,19 +83,23 @@
     "adamw_quintuplet", "carmichael_lr", "chinchilla_scaling",
     "constant_time_stride", "contrastive_learning", "continual_learning",
     "curriculum_learning", "dpo_beta", "entropy_early_stop",
-    "fibonacci_stride", "grpo", "inference_scaling",
+    "fibonacci_stride", "grokking", "grpo", "inference_scaling",
     "knowledge_distillation", "kv_cache_quantize", "layer_skip",
-    "lookahead_decoding", "lr_schedule_n6", "medusa_heads",
-    "ppo_clip", "predictive_early_stop", "rlhf",
-    "speculative_decoding", "streaming_llm", "token_merging"
+    "lion_optimizer", "lookahead_decoding", "lr_schedule_n6", "medusa_heads",
+    "ppo_clip", "predictive_early_stop", "reward_modeling", "rlhf",
+    "simpo", "speculative_decoding", "streaming_llm", "token_merging"
   ],
   "optim_status": {
     "adamw_quintuplet": "BODY",
     "contrastive_learning": "BODY",
     "continual_learning": "BODY",
     "curriculum_learning": "BODY",
+    "grokking": "BODY",
     "knowledge_distillation": "BODY",
+    "lion_optimizer": "BODY",
     "lr_schedule_n6": "BODY",
+    "reward_modeling": "BODY",
+    "simpo": "BODY",
     "speculative_decoding": "BODY"
   },
   "sparse": [
@@ -119,18 +124,23 @@
   "arch": [
     "arch_optimizer", "complete_llm_n6", "constitutional_ai", "context_window_ladder",
     "detr_queries", "diffusion_sampling", "diffusion_transformer",
-    "flow_matching", "fpn_pyramid", "griffin_rglru", "mamba2_ssm",
-    "multi_agent_coord", "phi6simple", "rectified_flow", "retnet",
-    "retrieval_augmented_gen", "sd3_mmdit", "simclr_temperature",
-    "state_space_s4", "vit_patch_n6", "whisper_ladder", "yolo_nms",
+    "flow_matching", "fpn_pyramid", "griffin_rglru", "kolmogorov_arnold",
+    "mamba2_ssm", "mixture_of_lora", "multi_agent_coord", "phi6simple",
+    "rectified_flow", "retnet", "retrieval_augmented_gen", "rope_scaling",
+    "sd3_mmdit", "simclr_temperature", "state_space_s4",
+    "test_time_training", "vit_patch_n6", "whisper_ladder", "yolo_nms",
     "zetaln2_activation"
   ],
   "arch_status": {
     "complete_llm_n6": "BODY",
     "diffusion_sampling": "BODY",
     "griffin_rglru": "BODY",
+    "kolmogorov_arnold": "BODY",
+    "mixture_of_lora": "BODY",
     "multi_agent_coord": "BODY",
     "retrieval_augmented_gen": "BODY",
-    "state_space_s4": "BODY"
+    "rope_scaling": "BODY",
+    "state_space_s4": "BODY",
+    "test_time_training": "BODY"
   }
 }

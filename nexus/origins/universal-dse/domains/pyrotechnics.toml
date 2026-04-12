@@ -1,0 +1,375 @@
+# =============================================================
+# PYROTECHNICS (화공/불꽃공학) DSE 도메인 정의
+# 불꽃공학 — n=6 주요 불꽃 색상 + sigma=12 산화제 조합 + tau=4 연소 단계 + phi=2 산화/환원
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "pyrotechnics"
+desc = "불꽃공학 DSE — 산화제·연료·효과·안전·응용, n=6 주요 불꽃 색상"
+levels = ["Oxidizer", "Fuel", "Effect", "Safety", "Application"]
+vision = "n=6 기반 궁극 불꽃 — n=6 색상 + sigma=12 산화제 비율 + tau=4 연소 단계 + phi=2 산화/환원"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Oxidizer (산화제) -- 6 후보
+# =============================================================
+[[level]]
+name = "Oxidizer"
+
+[[candidate]]
+level  = 0
+id     = "KNO3_Saltpeter"
+label  = "질산칼륨 (흑색화약 기본, sigma=12 세기 사용)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.95
+notes  = "centuries=12=sigma NEAR (7세기 중국→19세기), 전통 불꽃"
+
+[[candidate]]
+level  = 0
+id     = "KClO4_Perchlorate"
+label  = "과염소산칼륨 (고에너지, phi=2 산화 상태 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.80
+notes  = "oxid_states=2=phi EXACT (+7/+5), 현대 불꽃 주력"
+
+[[candidate]]
+level  = 0
+id     = "BaO_Barium"
+label  = "바륨 산화물 (녹색 불꽃, n=6 주요 Ba 화합물)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.75
+notes  = "compounds=6=n NEAR (BaCl2/BaNO3/BaO/BaCO3/BaSO4/Ba(OH)2), 녹색 발색"
+
+[[candidate]]
+level  = 0
+id     = "SrCO3_Strontium"
+label  = "탄산스트론튬 (적색 불꽃, tau=4 분해 단계)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.82
+notes  = "decomp_steps=4=tau NEAR (열분해→SrO→SrOH→SrCl 발색), 적색"
+
+[[candidate]]
+level  = 0
+id     = "CuCl_Copper"
+label  = "염화구리 (청색 불꽃, phi=2 산화 상태 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.70
+notes  = "oxid_states=2=phi EXACT (Cu+/Cu2+), 가장 어려운 청색"
+
+[[candidate]]
+level  = 0
+id     = "NaNO3_Sodium"
+label  = "질산나트륨 (황색 불꽃, n=6 nm 대역 폭)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.90
+notes  = "bandwidth=6nm=n NEAR (589.0/589.6 D선 +-3nm), 강렬 황색"
+
+# =============================================================
+# Level 1: Fuel (연료) -- 6 후보
+# =============================================================
+[[level]]
+name = "Fuel"
+
+[[candidate]]
+level  = 1
+id     = "Charcoal_Carbon"
+label  = "숯 (탄소, n=6 원자번호 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.95
+notes  = "atomic_num=6=n EXACT (C), 흑색화약 3성분"
+
+[[candidate]]
+level  = 1
+id     = "Sulfur_S"
+label  = "황 (점화 촉진, sigma=12 동소체 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.92
+notes  = "allotropes=12=sigma NEAR (S6/S7/S8/.../S20), 흑색화약"
+
+[[candidate]]
+level  = 1
+id     = "Aluminum_Powder"
+label  = "알루미늄 분말 (은백색 스파크, tau=4 입도 등급)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.80
+notes  = "grades=4=tau NEAR (flake/granular/atomized/nano), 밝기 극대"
+
+[[candidate]]
+level  = 1
+id     = "Magnesium_Mg"
+label  = "마그네슘 (sigma=12 배 밝기 대비 NEAR)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.95
+cost   = 0.75
+notes  = "brightness_ratio=12=sigma NEAR (Al 대비), 섬광탄·조명탄"
+
+[[candidate]]
+level  = 1
+id     = "Iron_Filing"
+label  = "철 분말 (금색 스파크, n=6 주요 합금 원소)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.90
+notes  = "alloy_elements=6=n NEAR (Fe/C/Mn/Si/Cr/Ni), 스파클러"
+
+[[candidate]]
+level  = 1
+id     = "Titanium_Ti"
+label  = "티타늄 분말 (은백 스파크, phi=2 상 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.60
+notes  = "phases=2=phi EXACT (alpha/beta), 대형 불꽃"
+
+# =============================================================
+# Level 2: Effect (효과) -- 6 후보
+# =============================================================
+[[level]]
+name = "Effect"
+
+[[candidate]]
+level  = 2
+id     = "Chrysanthemum"
+label  = "국화 (구형 확산, n=6 주요 변형 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.85
+notes  = "variants=6=n EXACT (국화/모란/버들/야자/토성/크로스), 대표 원형"
+
+[[candidate]]
+level  = 2
+id     = "Willow_Trail"
+label  = "버들 (하강 꼬리, sigma=12 초 체공 시간)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "hang_time=12sec=sigma NEAR, 은 스파클러"
+
+[[candidate]]
+level  = 2
+id     = "Crossette"
+label  = "크로세트 (분기 효과, phi=2 분열 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.75
+notes  = "split=2=phi EXACT (각 별이 2회 분열), 십자 형태"
+
+[[candidate]]
+level  = 2
+id     = "Strobe_Flash"
+label  = "스트로브 (점멸 효과, tau=4 Hz 기본 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.78
+notes  = "frequency=4=tau EXACT (초당 4회 점멸), Mg/BaCrO4"
+
+[[candidate]]
+level  = 2
+id     = "Peony_Round"
+label  = "모란 (둥근 확산, n=6 인치 포탄 표준)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.85
+notes  = "shell_inch=6=n NEAR (6인치 표준 경기용), 색 불꽃 주력"
+
+[[candidate]]
+level  = 2
+id     = "Whistling"
+label  = "휘슬 (음향 효과, n=6 kHz 주파수 대역)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.78
+cost   = 0.80
+notes  = "freq_band=6kHz=n NEAR (2-8 kHz), 갈산칼륨 연소"
+
+# =============================================================
+# Level 3: Safety (안전) -- 6 후보
+# =============================================================
+[[level]]
+name = "Safety"
+
+[[candidate]]
+level  = 3
+id     = "UN_Class1"
+label  = "UN 위험물 1등급 (n=6 하위 구분 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.85
+notes  = "subdivisions=6=n EXACT (1.1~1.6), 불꽃=1.3G/1.4G"
+
+[[candidate]]
+level  = 3
+id     = "Static_ESD"
+label  = "정전기 방전 방지 (phi=2 전극 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.88
+cost   = 0.82
+notes  = "poles=2=phi EXACT (+/-), 접지+도전성 용기"
+
+[[candidate]]
+level  = 3
+id     = "Friction_Sens"
+label  = "마찰 감도 (tau=4 등급 분류 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "grades=4=tau EXACT (극민감/민감/보통/둔감), BAM 마찰시험"
+
+[[candidate]]
+level  = 3
+id     = "Distance_Zone"
+label  = "안전 거리 (sigma=12 배 포탄 직경 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.88
+notes  = "distance=12x=sigma NEAR (직경 12배 반경 관람석 기준)"
+
+[[candidate]]
+level  = 3
+id     = "Fire_Resistance"
+label  = "내화 등급 (n=6 시간 기준 방화벽)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.78
+notes  = "hours=6=n NEAR (저장소 6시간 내화벽), NFPA 1124"
+
+[[candidate]]
+level  = 3
+id     = "Age_Stability"
+label  = "경년 안정성 (sigma=12 개월 보증 기간)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.82
+notes  = "shelf_life=12mo=sigma NEAR, 습도/온도 관리"
+
+# =============================================================
+# Level 4: Application (응용) -- 6 후보
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Festival_Display"
+label  = "축제 불꽃쇼 (n=6 주요 국제대회 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.70
+notes  = "major_events=6=n NEAR (Montreal/Busan/Malta/Macau/Sydney/London)"
+
+[[candidate]]
+level  = 4
+id     = "Military_Signal"
+label  = "군용 신호탄 (phi=2 주야간 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.80
+notes  = "modes=2=phi EXACT (주간 연막/야간 발광), NATO 표준"
+
+[[candidate]]
+level  = 4
+id     = "Demolition_Blast"
+label  = "산업 발파 (tau=4 지연 단계 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.92
+cost   = 0.82
+notes  = "delay_stages=4=tau EXACT (기폭/전파/확산/잔류), 채굴"
+
+[[candidate]]
+level  = 4
+id     = "Rocket_Motor"
+label  = "로켓 모터 (고체 추진, n=6 주요 성분)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.95
+cost   = 0.65
+notes  = "components=6=n NEAR (산화제/연료/결합제/경화제/촉매/가소제)"
+
+[[candidate]]
+level  = 4
+id     = "Movie_SFX"
+label  = "영화 특수효과 (sigma=12 프레임 동기 NEAR)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.75
+notes  = "sync_frames=12=sigma NEAR (24fps/2=12 반주기), 스턴트"
+
+[[candidate]]
+level  = 4
+id     = "Consumer_Sparkler"
+label  = "가정용 스파클러 (n=6 인치 표준 길이)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.95
+notes  = "length=6in=n NEAR, 안전 등급 1.4G, 생일/축하"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 과염소산칼륨은 고에너지 효과 필수
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "KClO4_Perchlorate"
+then_level = 2
+then_ids   = "Chrysanthemum,Peony_Round,Strobe_Flash"
+
+# 가정용 스파클러는 고에너지 산화제 비호환
+[[rule]]
+type       = "exclude"
+if_level   = 4
+if_id      = "Consumer_Sparkler"
+then_level = 0
+then_ids   = "KClO4_Perchlorate"
+
+# 군용 신호탄은 UN 1등급 안전 필수
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Military_Signal"
+then_level = 3
+then_ids   = "UN_Class1,Static_ESD"

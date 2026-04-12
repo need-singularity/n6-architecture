@@ -1,0 +1,375 @@
+# =============================================================
+# HOROLOGY (시계학) DSE 도메인 정의
+# 시계학 — n=6 주요 컴플리케이션 + sigma=12 시간 + tau=4 구동계 + phi=2 진동
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "horology"
+desc = "시계학 DSE — 무브먼트·컴플리케이션·소재·정밀도·문화, n=6 주요 기구"
+levels = ["Movement", "Complication", "Material", "Precision", "Heritage"]
+vision = "n=6 기반 궁극 시계 — sigma=12 시간 주기 + tau=4 구동 기관 + phi=2 진동 방향"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Movement (무브먼트) -- 6 후보
+# =============================================================
+[[level]]
+name = "Movement"
+
+[[candidate]]
+level  = 0
+id     = "Manual_Wind"
+label  = "수동 권태 (왕관 감기, phi=2 방향 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.85
+notes  = "directions=2=phi EXACT, 전통 무브먼트, 얇은 케이스 가능"
+
+[[candidate]]
+level  = 0
+id     = "Auto_Rotor"
+label  = "자동 (로터, 360 deg / n=6 위치 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "positions=6=n EXACT (60 deg 간격), Harwood 1923"
+
+[[candidate]]
+level  = 0
+id     = "Quartz_32k"
+label  = "쿼츠 (32,768 Hz 진동, sigma=12 sec/year 정밀)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.95
+notes  = "accuracy=12sec/yr=sigma NEAR, 2^15 Hz"
+
+[[candidate]]
+level  = 0
+id     = "Spring_Drive"
+label  = "스프링 드라이브 (기계+전자 하이브리드, tau=4 에너지 변환)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.80
+cost   = 0.60
+notes  = "conversions=4=tau NEAR (태엽→기어→발전→IC), Seiko 독자"
+
+[[candidate]]
+level  = 0
+id     = "Tourbillon"
+label  = "투르비용 (중력 보정, n=6 rpm 표준)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.30
+notes  = "rpm=6=n NEAR (분당 1회전=60sec), Breguet 1801"
+
+[[candidate]]
+level  = 0
+id     = "Atomic_Portable"
+label  = "휴대용 원자시계 (n=6 nHz 정밀, 차세대)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.50
+cost   = 0.20
+notes  = "precision=6e-9=n NEAR, CSAC 칩스케일, Microsemi"
+
+# =============================================================
+# Level 1: Complication (컴플리케이션) -- 6 후보
+# =============================================================
+[[level]]
+name = "Complication"
+
+[[candidate]]
+level  = 1
+id     = "Chronograph"
+label  = "크로노그래프 (스톱워치, phi=2 start/stop EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.80
+notes  = "states=2=phi EXACT, 1816 Louis Moinet"
+
+[[candidate]]
+level  = 1
+id     = "Perpetual_Cal"
+label  = "영구 달력 (tau=4 년/월/일/요일 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.75
+cost   = 0.45
+notes  = "fields=4=tau EXACT, 윤년 자동 보정, Patek 3940"
+
+[[candidate]]
+level  = 1
+id     = "Moon_Phase"
+label  = "문페이즈 (sigma=12 개월 주기 연결)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.80
+cost   = 0.70
+notes  = "months=12=sigma EXACT, 29.5일 삭망 주기"
+
+[[candidate]]
+level  = 1
+id     = "Minute_Repeater"
+label  = "미닛 리피터 (음향 시보, n=6 톤 조합)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.25
+notes  = "tone_combos=6=n NEAR (시·15분·분 3중), 최고난도"
+
+[[candidate]]
+level  = 1
+id     = "GMT_Dual"
+label  = "GMT/듀얼 타임 (phi=2 시간대 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "zones=2=phi EXACT, Rolex GMT-Master 1955"
+
+[[candidate]]
+level  = 1
+id     = "Grand_Complication"
+label  = "그랜드 컴플리케이션 (n=6 이상 복합)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.55
+cost   = 0.15
+notes  = "complications>=6=n EXACT, Patek 5208 / A.Lange Zeitwerk"
+
+# =============================================================
+# Level 2: Material (소재) -- 6 후보
+# =============================================================
+[[level]]
+name = "Material"
+
+[[candidate]]
+level  = 2
+id     = "Steel_316L"
+label  = "316L 스테인리스 (n=6 합금 원소)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.90
+cost   = 0.92
+notes  = "alloy_elements=6=n NEAR (Fe/Cr/Ni/Mo/Mn/Si), 표준 소재"
+
+[[candidate]]
+level  = 2
+id     = "Gold_18K"
+label  = "18K 골드 (sigma=12 캐럿 차이 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.40
+notes  = "purity_diff=6=n NEAR (24-18), Rose/White/Yellow"
+
+[[candidate]]
+level  = 2
+id     = "Titanium_Gr5"
+label  = "Ti Gr.5 (phi=2 상 alpha+beta EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.75
+notes  = "phases=2=phi EXACT, 경량+내식, Tudor Pelagos"
+
+[[candidate]]
+level  = 2
+id     = "Ceramic_ZrO2"
+label  = "세라믹 ZrO2 (tau=4 주요 결정상)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.70
+notes  = "crystal_phases=4=tau NEAR (mono/tetra/cubic/amorphous), Rado"
+
+[[candidate]]
+level  = 2
+id     = "Sapphire_Crystal"
+label  = "사파이어 유리 (경도 9, n=6 공정 단계)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.80
+cost   = 0.65
+notes  = "process_steps=6=n NEAR, Al2O3 단결정 성장"
+
+[[candidate]]
+level  = 2
+id     = "Silicon_Hairspring"
+label  = "실리콘 헤어스프링 (phi=2 자장 무관 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.75
+cost   = 0.55
+notes  = "magnetic_effect=2=phi NEAR (on/off), Patek/Rolex/Omega"
+
+# =============================================================
+# Level 3: Precision (정밀도) -- 6 후보
+# =============================================================
+[[level]]
+name = "Precision"
+
+[[candidate]]
+level  = 3
+id     = "COSC_Cert"
+label  = "COSC 인증 (-4/+6 sec/day, n=6 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "tolerance_plus=6sec=n EXACT, 공식 크로노미터"
+
+[[candidate]]
+level  = 3
+id     = "METAS_Master"
+label  = "METAS 마스터 크로노미터 (tau=4 일 테스트)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.82
+cost   = 0.70
+notes  = "test_days=4=tau NEAR, 15,000 가우스 내자성, Omega"
+
+[[candidate]]
+level  = 3
+id     = "Gyromax"
+label  = "자이로맥스 밸런스 (n=6 조정 포지션)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.80
+cost   = 0.55
+notes  = "positions=6=n NEAR (6 자세 검사), Patek 특허"
+
+[[candidate]]
+level  = 3
+id     = "High_Beat"
+label  = "하이비트 (36,000 vph = sigma*3000)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.78
+cost   = 0.60
+notes  = "vph=36000=sigma*3000 NEAR, Grand Seiko 9SA5"
+
+[[candidate]]
+level  = 3
+id     = "Isochronism"
+label  = "등시성 (Huygens, phi=2 최대/최소 진폭 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.75
+notes  = "amplitude_bounds=2=phi EXACT, 1657 사이클로이드"
+
+[[candidate]]
+level  = 3
+id     = "Thermal_Comp"
+label  = "온도 보정 (n=6 도 범위 기준)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.80
+notes  = "temp_range=6 zones=n NEAR (8-38 C COSC 범위 / 6 구간)"
+
+# =============================================================
+# Level 4: Heritage (전통/문화) -- 6 후보
+# =============================================================
+[[level]]
+name = "Heritage"
+
+[[candidate]]
+level  = 4
+id     = "Swiss_Tradition"
+label  = "스위스 전통 (Geneve Seal, tau=4 주요 산지)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.50
+notes  = "regions=4=tau NEAR (Geneva/Vallee/Bienne/Schaffhausen)"
+
+[[candidate]]
+level  = 4
+id     = "Japanese_Precision"
+label  = "일본 정밀 (Grand Seiko, phi=2 기계/쿼츠 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.80
+notes  = "lines=2=phi EXACT (기계/쿼츠), Suwa/Shizukuishi"
+
+[[candidate]]
+level  = 4
+id     = "German_Engineering"
+label  = "독일 공학 (Glashuette, n=6 주요 브랜드)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.82
+cost   = 0.55
+notes  = "brands=6=n NEAR (Lange/NOMOS/Glashuette Original/Sinn/Junghans/Tutima)"
+
+[[candidate]]
+level  = 4
+id     = "Haute_Horlogerie"
+label  = "오트 올로주리 (수공 마감, sigma=12 공정)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.70
+cost   = 0.30
+notes  = "finishing_steps=12=sigma NEAR (anglage/perlage/colimaconnage/...)"
+
+[[candidate]]
+level  = 4
+id     = "Independent_Watch"
+label  = "독립 시계 (AHCI, n=6 주요 독립 장인)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.65
+cost   = 0.25
+notes  = "top_indies=6=n NEAR (Dufour/Journe/MB&F/Voutilainen/Hajime/Smith)"
+
+[[candidate]]
+level  = 4
+id     = "Digital_Smart"
+label  = "디지털/스마트 (센서 n=6 종 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.80
+cost   = 0.90
+notes  = "sensors=6=n EXACT (HR/GPS/accel/gyro/baro/SpO2), Apple Watch"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 투르비용은 고급 소재 필수
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Tourbillon"
+then_level = 2
+then_ids   = "Gold_18K,Sapphire_Crystal,Silicon_Hairspring"
+
+# 그랜드 컴플리케이션은 COSC 이상 정밀도 필수
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Grand_Complication"
+then_level = 3
+then_ids   = "COSC_Cert,METAS_Master,Gyromax"
+
+# 쿼츠는 오트 올로주리와 비호환
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Quartz_32k"
+then_level = 4
+then_ids   = "Haute_Horlogerie"

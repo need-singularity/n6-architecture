@@ -1,0 +1,375 @@
+# =============================================================
+# PUPPETRY (인형극) DSE 도메인 정의
+# 인형극 — n=6 주요 조종 방식 + sigma=12 전통 인형 유형 + tau=4 공연 구성 + phi=2 인형/인형사
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "puppetry"
+desc = "인형극 DSE — 조종법·소재·무대·서사·문화, n=6 주요 조종 방식"
+levels = ["Control", "Material", "Stage", "Narrative", "Heritage"]
+vision = "n=6 기반 궁극 인형극 — n=6 조종법 + sigma=12 관절 + tau=4 막 구성 + phi=2 인형/인형사"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Control (조종법) -- 6 후보
+# =============================================================
+[[level]]
+name = "Control"
+
+[[candidate]]
+level  = 0
+id     = "Marionette_String"
+label  = "마리오네트 (줄 인형, sigma=12 줄 표준 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.70
+notes  = "strings=12=sigma NEAR (머리2/어깨2/손2/무릎2/등1/엉덩이1/발2), 체코 전통"
+
+[[candidate]]
+level  = 0
+id     = "Hand_Glove"
+label  = "손 인형 (장갑형, phi=2 손 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.92
+cost   = 0.95
+notes  = "hands=2=phi EXACT (좌/우), Punch & Judy, 펀치넬로"
+
+[[candidate]]
+level  = 0
+id     = "Rod_Puppet"
+label  = "막대 인형 (로드, tau=4 관절 축 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.88
+cost   = 0.85
+notes  = "axes=4=tau EXACT (머리/좌팔/우팔/몸통), 와양 골렉"
+
+[[candidate]]
+level  = 0
+id     = "Shadow_Puppet"
+label  = "그림자극 (실루엣, phi=2 빛/그림자 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.90
+notes  = "states=2=phi EXACT (빛/어둠), 와양 쿨릿, 중국 피영희"
+
+[[candidate]]
+level  = 0
+id     = "Bunraku_Full"
+label  = "분라쿠 (3인 조종, n=6 관절 주요 포인트)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.78
+cost   = 0.60
+notes  = "joints=6=n NEAR (머리/눈/입/좌팔/우팔/다리), 일본 국보"
+
+[[candidate]]
+level  = 0
+id     = "Digital_Animatronic"
+label  = "디지털 애니마트로닉스 (n=6 자유도 표준)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.75
+cost   = 0.50
+notes  = "DOF=6=n EXACT (x/y/z/roll/pitch/yaw), 디즈니 기술"
+
+# =============================================================
+# Level 1: Material (소재) -- 6 후보
+# =============================================================
+[[level]]
+name = "Material"
+
+[[candidate]]
+level  = 1
+id     = "Wood_Linden"
+label  = "목재 (피나무/린덴, n=6 가공 단계)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "steps=6=n NEAR (벌목/건조/성형/조각/사포/도장), 유럽 전통"
+
+[[candidate]]
+level  = 1
+id     = "Leather_Hide"
+label  = "가죽 (그림자극용, phi=2 표리 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.85
+cost   = 0.80
+notes  = "sides=2=phi EXACT (표면/이면), 와양 쿨릿 수소가죽"
+
+[[candidate]]
+level  = 1
+id     = "Fabric_Textile"
+label  = "직물 (손인형 몸체, tau=4 주요 섬유)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.90
+cost   = 0.92
+notes  = "fibers=4=tau NEAR (면/마/실크/펠트), 머펫 스타일"
+
+[[candidate]]
+level  = 1
+id     = "Foam_Latex"
+label  = "폼 라텍스 (표정 변형, n=6 밀도 등급)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.75
+notes  = "densities=6=n NEAR, 짐 헨슨 크리처샵"
+
+[[candidate]]
+level  = 1
+id     = "Paper_Washi"
+label  = "종이 (한지/화지, sigma=12 겹 적층)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.82
+cost   = 0.95
+notes  = "layers=12=sigma NEAR (강도용), 한국 꼭두각시"
+
+[[candidate]]
+level  = 1
+id     = "Silicone_Resin"
+label  = "실리콘 수지 (특수효과용, phi=2 경화 방식)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.78
+cost   = 0.55
+notes  = "cure_types=2=phi EXACT (축합/부가), 영화 특수분장"
+
+# =============================================================
+# Level 2: Stage (무대) -- 6 후보
+# =============================================================
+[[level]]
+name = "Stage"
+
+[[candidate]]
+level  = 2
+id     = "Proscenium_Box"
+label  = "프로시니엄 (액자 무대, tau=4 공간 분할)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.80
+notes  = "zones=4=tau NEAR (전경/중경/후경/뒤편), 마리오네트 정석"
+
+[[candidate]]
+level  = 2
+id     = "Booth_Screen"
+label  = "부스/스크린 (phi=2 가림막 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.88
+cost   = 0.90
+notes  = "curtain=2=phi EXACT (보이는/숨겨진), 손인형극 표준"
+
+[[candidate]]
+level  = 2
+id     = "Open_Stage"
+label  = "열린 무대 (분라쿠식, n=6 m 폭 표준)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.85
+notes  = "width=6m=n NEAR, 인형사 노출, 관객 몰입"
+
+[[candidate]]
+level  = 2
+id     = "Shadow_Screen"
+label  = "그림자 스크린 (배면 투사, phi=2 앞/뒤)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.88
+notes  = "sides=2=phi EXACT (관객면/조종면), 투명 반투명"
+
+[[candidate]]
+level  = 2
+id     = "Street_Outdoor"
+label  = "거리 공연 (야외, n=6 관객 위치 NEAR)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.78
+cost   = 0.95
+notes  = "positions=6=n NEAR (전/후/좌/우/위/아래 시선), 대형 인형"
+
+[[candidate]]
+level  = 2
+id     = "Digital_Virtual"
+label  = "디지털 가상 무대 (n=6 DOF 카메라)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.75
+cost   = 0.60
+notes  = "camera_DOF=6=n EXACT, 실시간 모캡, Unreal/Unity"
+
+# =============================================================
+# Level 3: Narrative (서사) -- 6 후보
+# =============================================================
+[[level]]
+name = "Narrative"
+
+[[candidate]]
+level  = 3
+id     = "Folk_Tale"
+label  = "민담 (전래 이야기, n=6 주요 서사 기능)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.90
+notes  = "functions=6=n NEAR (발단/전개/위기/절정/하강/결말), 프로프 축소"
+
+[[candidate]]
+level  = 3
+id     = "Satire_Comedy"
+label  = "풍자극 (사회 비판, phi=2 희/비 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.88
+notes  = "modes=2=phi EXACT (희극/비극), Punch & Judy 전통"
+
+[[candidate]]
+level  = 3
+id     = "Myth_Epic"
+label  = "신화/서사시 (영웅 여정, sigma=12 단계 NEAR)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.80
+notes  = "hero_stages=12=sigma NEAR (캠벨 영웅 여정 축소), 와양"
+
+[[candidate]]
+level  = 3
+id     = "Education_Child"
+label  = "아동 교육 (발달 단계, tau=4 연령대)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.92
+notes  = "age_groups=4=tau NEAR (유아/미취학/초등/청소년), 세서미 스트리트"
+
+[[candidate]]
+level  = 3
+id     = "Ritual_Sacred"
+label  = "제의 (종교 의식, n=6 주요 전통 EXACT)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.78
+cost   = 0.85
+notes  = "traditions=6=n NEAR (와양/분라쿠/시칠리아/이란/인도/한국), 신성"
+
+[[candidate]]
+level  = 3
+id     = "Abstract_Modern"
+label  = "추상/현대 (실험극, phi=2 구상/비구상 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.75
+cost   = 0.70
+notes  = "modes=2=phi EXACT (구상/추상), 필립 장티 스타일"
+
+# =============================================================
+# Level 4: Heritage (문화 전통) -- 6 후보
+# =============================================================
+[[level]]
+name = "Heritage"
+
+[[candidate]]
+level  = 4
+id     = "Wayang_Indonesia"
+label  = "와양 (인도네시아, UNESCO 무형유산)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.80
+notes  = "types=6=n NEAR (kulit/golek/wong/klitik/suket/orang), 1000년 전통"
+
+[[candidate]]
+level  = 4
+id     = "Bunraku_Japan"
+label  = "분라쿠 (일본, 3인 조종 체계)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.82
+cost   = 0.65
+notes  = "operators=3, 오사카 국립문악극장, UNESCO"
+
+[[candidate]]
+level  = 4
+id     = "Kkokdu_Korea"
+label  = "꼭두각시놀음 (한국, n=6 주요 등장인물)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.80
+cost   = 0.85
+notes  = "characters=6=n NEAR (박첨지/꼭두각시/홍동지/피조리/상좌/이시미), 남사당"
+
+[[candidate]]
+level  = 4
+id     = "Muppet_Modern"
+label  = "머펫 (짐 헨슨, sigma=12 주요 캐릭터)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.50
+notes  = "core_chars=12=sigma NEAR, 세서미 스트리트/머펫 쇼"
+
+[[candidate]]
+level  = 4
+id     = "Sicilian_Opera"
+label  = "시칠리아 오페라 데이 푸피 (기사 서사시)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.78
+cost   = 0.75
+notes  = "knight_chars=12=sigma NEAR (샤를마뉴 12기사), UNESCO"
+
+[[candidate]]
+level  = 4
+id     = "Czech_Tradition"
+label  = "체코 마리오네트 (유럽 인형극 중심)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.80
+notes  = "strings=12=sigma NEAR, 프라하 국립극장, UNESCO"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 그림자극은 그림자 스크린 필수
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Shadow_Puppet"
+then_level = 2
+then_ids   = "Shadow_Screen"
+
+# 분라쿠는 열린 무대 필수
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Bunraku_Full"
+then_level = 2
+then_ids   = "Open_Stage"
+
+# 디지털 애니마트로닉스는 전통 서사와 비호환
+[[rule]]
+type       = "exclude"
+if_level   = 0
+if_id      = "Digital_Animatronic"
+then_level = 3
+then_ids   = "Ritual_Sacred"

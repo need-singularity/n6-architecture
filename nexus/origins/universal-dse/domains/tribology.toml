@@ -1,0 +1,375 @@
+# =============================================================
+# TRIBOLOGY (마찰공학) DSE 도메인 정의
+# 마찰공학 — n=6 주요 마모 메커니즘 + sigma=12 윤활 등급 + tau=4 마찰 단계 + phi=2 접촉면
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "tribology"
+desc = "마찰공학 DSE — 마찰·마모·윤활·표면·응용, n=6 주요 마모 메커니즘"
+levels = ["Friction", "Wear", "Lubrication", "Surface", "Application"]
+vision = "n=6 기반 궁극 마찰공학 — n=6 마모 메커니즘 + sigma=12 윤활 등급 + tau=4 마찰 단계 + phi=2 접촉면"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Friction (마찰) -- 6 후보
+# =============================================================
+[[level]]
+name = "Friction"
+
+[[candidate]]
+level  = 0
+id     = "Coulomb_Dry"
+label  = "쿨롱 건조 마찰 (mu 계수, phi=2 정/동마찰 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.88
+notes  = "types=2=phi EXACT (정마찰/동마찰), Amontons 법칙"
+
+[[candidate]]
+level  = 0
+id     = "Viscous_Fluid"
+label  = "점성 마찰 (유체, tau=4 레이놀즈 영역)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.82
+notes  = "regimes=4=tau NEAR (층류/천이/난류/초임계), 뉴턴 유체"
+
+[[candidate]]
+level  = 0
+id     = "Rolling_Contact"
+label  = "구름 마찰 (베어링, sigma=12 배 미끄럼 대비 절감)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.92
+cost   = 0.85
+notes  = "reduction=12x=sigma NEAR (미끄럼 대비 1/12), 볼/롤러"
+
+[[candidate]]
+level  = 0
+id     = "Internal_Damping"
+label  = "내부 마찰 (재료 감쇠, phi=2 탄성/비탄성 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.82
+notes  = "response=2=phi EXACT (탄성/비탄성), 히스테리시스"
+
+[[candidate]]
+level  = 0
+id     = "Boundary_Mixed"
+label  = "경계 마찰 (혼합 윤활 영역, tau=4 스트리벡 구간)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.80
+notes  = "Stribeck_zones=4=tau NEAR (경계/혼합/EHL/유체), 전이 영역"
+
+[[candidate]]
+level  = 0
+id     = "Nano_Friction"
+label  = "나노 마찰 (원자 수준, n=6 A 접촉 반경)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.75
+cost   = 0.60
+notes  = "contact_radius=6A=n NEAR, AFM 팁, 초윤활"
+
+# =============================================================
+# Level 1: Wear (마모) -- 6 후보
+# =============================================================
+[[level]]
+name = "Wear"
+
+[[candidate]]
+level  = 1
+id     = "Adhesive_Wear"
+label  = "응착 마모 (접착 전이, phi=2 접합/분리 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.82
+notes  = "steps=2=phi EXACT (접합/전단분리), Archard 법칙"
+
+[[candidate]]
+level  = 1
+id     = "Abrasive_Wear"
+label  = "연삭 마모 (경질 입자, phi=2 체/3체 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.80
+notes  = "body_types=2=phi EXACT (2체/3체 연삭), 광산/건설"
+
+[[candidate]]
+level  = 1
+id     = "Fatigue_Wear"
+label  = "피로 마모 (반복 응력, n=6 승 사이클 기준)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.78
+notes  = "cycles=10^6=n EXACT (백만 사이클 피로한계), 기어/레일"
+
+[[candidate]]
+level  = 1
+id     = "Corrosive_Wear"
+label  = "부식 마모 (화학+기계, phi=2 화학/물리 EXACT)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.78
+cost   = 0.75
+notes  = "mechanisms=2=phi EXACT (화학반응/기계제거), 해양/화학"
+
+[[candidate]]
+level  = 1
+id     = "Erosive_Wear"
+label  = "침식 마모 (유체 입자 충돌, tau=4 충돌 변수)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.78
+notes  = "variables=4=tau NEAR (속도/각도/입도/경도), 터빈/배관"
+
+[[candidate]]
+level  = 1
+id     = "Fretting_Wear"
+label  = "프레팅 마모 (미소 진동, sigma=12 um 진폭)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.78
+cost   = 0.75
+notes  = "amplitude=12um=sigma NEAR, 볼트 접합부, 항공"
+
+# =============================================================
+# Level 2: Lubrication (윤활) -- 6 후보
+# =============================================================
+[[level]]
+name = "Lubrication"
+
+[[candidate]]
+level  = 2
+id     = "Mineral_Oil"
+label  = "광유 (기본 윤활유, sigma=12 cSt 표준 점도)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.95
+notes  = "viscosity=12cSt=sigma NEAR (ISO VG 32 @40C), 범용"
+
+[[candidate]]
+level  = 2
+id     = "Synthetic_PAO"
+label  = "합성유 PAO (폴리알파올레핀, n=6 탄소 단위)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.88
+cost   = 0.70
+notes  = "C_unit=6=n NEAR (1-hexene 기반 중합), 고성능"
+
+[[candidate]]
+level  = 2
+id     = "Grease_Lithium"
+label  = "리튬 그리스 (반고체, tau=4 NLGI 등급 주요)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.88
+cost   = 0.88
+notes  = "NLGI_grades=4=tau NEAR (0/1/2/3 주요), 베어링 표준"
+
+[[candidate]]
+level  = 2
+id     = "Solid_MoS2"
+label  = "고체 윤활 MoS2 (이황화몰리브덴, phi=2 층 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.75
+notes  = "layers=2=phi EXACT (S-Mo-S 샌드위치 활주), 진공/고온"
+
+[[candidate]]
+level  = 2
+id     = "Ionic_Liquid"
+label  = "이온성 액체 (차세대, n=6 주요 양이온 패밀리)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.78
+cost   = 0.50
+notes  = "cation_families=6=n NEAR (imidazolium/pyridinium/pyrrolidinium/ammonium/phosphonium/sulfonium)"
+
+[[candidate]]
+level  = 2
+id     = "Water_Based"
+label  = "수용성 윤활 (친환경, phi=2 유/수 EXACT)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.82
+cost   = 0.92
+notes  = "base=2=phi EXACT (유성/수성), 금속가공, 환경규제"
+
+# =============================================================
+# Level 3: Surface (표면) -- 6 후보
+# =============================================================
+[[level]]
+name = "Surface"
+
+[[candidate]]
+level  = 3
+id     = "DLC_Coating"
+label  = "DLC 코팅 (다이아몬드 유사 탄소, n=6 원자번호 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.85
+cost   = 0.60
+notes  = "C_atomic=6=n EXACT, mu<0.1, 엔진/공구"
+
+[[candidate]]
+level  = 3
+id     = "TiN_PVD"
+label  = "TiN PVD 코팅 (질화티타늄, phi=2 원소 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.72
+notes  = "elements=2=phi EXACT (Ti+N), 금색 코팅, 경도 2000HV"
+
+[[candidate]]
+level  = 3
+id     = "Texture_Dimple"
+label  = "표면 텍스처링 (미세 딤플, n=6 um 직경)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.68
+notes  = "dimple_dia=6um=n NEAR, 레이저 가공, 유체 저장"
+
+[[candidate]]
+level  = 3
+id     = "Nitriding"
+label  = "질화 처리 (표면 경화, tau=4 확산 단계)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.88
+cost   = 0.82
+notes  = "stages=4=tau NEAR (가열/확산/질화/냉각), 기어/크랭크"
+
+[[candidate]]
+level  = 3
+id     = "Superhydrophobic"
+label  = "초소수성 표면 (연꽃 효과, phi=2 친수/소수 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.78
+cost   = 0.55
+notes  = "wetting=2=phi EXACT (친수/소수), 접촉각>150도"
+
+[[candidate]]
+level  = 3
+id     = "Plasma_Spray"
+label  = "플라즈마 용사 (열차폐, sigma=12 kW 출력)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.65
+notes  = "power=12kW=sigma NEAR (소형 건), YSZ 세라믹, 터빈"
+
+# =============================================================
+# Level 4: Application (응용) -- 6 후보
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Engine_Piston"
+label  = "엔진 피스톤 (자동차, tau=4 행정 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.85
+notes  = "strokes=4=tau EXACT (흡입/압축/폭발/배기), 마찰 40% 차지"
+
+[[candidate]]
+level  = 4
+id     = "Joint_Implant"
+label  = "인공 관절 (의료, sigma=12 년 수명 기준)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.85
+cost   = 0.55
+notes  = "lifetime=12yr=sigma NEAR (최소 보증), UHMWPE/CoCr"
+
+[[candidate]]
+level  = 4
+id     = "HDD_Slider"
+label  = "HDD 슬라이더 (나노 간극, n=6 nm 부상높이)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.75
+notes  = "fly_height=6nm=n NEAR, 공기 베어링, DLC 코팅"
+
+[[candidate]]
+level  = 4
+id     = "Tire_Road"
+label  = "타이어-노면 (차량, n=6 접지면적 비율)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.90
+cost   = 0.90
+notes  = "contact_patch_ratio=6%=n NEAR (전체 원주 대비), ABS/ESC"
+
+[[candidate]]
+level  = 4
+id     = "MEMS_Micro"
+label  = "MEMS 마이크로 소자 (미세 기구, n=6 um 간극)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.80
+cost   = 0.60
+notes  = "gap=6um=n NEAR, 스틱션 문제, 자기조립 단분자층"
+
+[[candidate]]
+level  = 4
+id     = "Wind_Turbine"
+label  = "풍력 터빈 기어박스 (sigma=12 MW 대형)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.70
+notes  = "capacity=12MW=sigma NEAR (해상 대형), 마모 1위 고장"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 나노 마찰은 고체 윤활 또는 이온성 액체 필수
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Nano_Friction"
+then_level = 2
+then_ids   = "Solid_MoS2,Ionic_Liquid"
+
+# DLC 코팅은 엔진 피스톤 또는 HDD 슬라이더와 최적
+[[rule]]
+type       = "require"
+if_level   = 3
+if_id      = "DLC_Coating"
+then_level = 4
+then_ids   = "Engine_Piston,HDD_Slider,MEMS_Micro"
+
+# 수용성 윤활은 HDD 나노 응용과 비호환
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Water_Based"
+then_level = 4
+then_ids   = "HDD_Slider,MEMS_Micro"

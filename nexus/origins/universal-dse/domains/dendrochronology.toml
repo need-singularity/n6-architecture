@@ -1,0 +1,375 @@
+# =============================================================
+# DENDROCHRONOLOGY (나이테연대학) DSE 도메인 정의
+# 나이테연대학 — n=6 주요 수종 + sigma=12 개월 연륜 주기 + tau=4 계절 세포 + phi=2 조/만재
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "dendrochronology"
+desc = "나이테연대학 DSE — 수종·연륜패턴·기후복원·연대측정·응용, n=6 주요 수종"
+levels = ["Species", "Ring_Pattern", "Climate_Proxy", "Dating_Method", "Application"]
+vision = "n=6 기반 궁극 나이테학 — n=6 수종 + sigma=12 개월 주기 + tau=4 계절 세포 + phi=2 조/만재"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Species (수종) -- 6 후보
+# =============================================================
+[[level]]
+name = "Species"
+
+[[candidate]]
+level  = 0
+id     = "Bristlecone_Pine"
+label  = "브리슬콘 소나무 (최장수, tau=4 천년 NEAR)"
+n6     = 1.00
+perf   = 0.98
+power  = 0.85
+cost   = 0.60
+notes  = "max_age=4000yr=tau*1000 NEAR (Methuselah 4853yr), 마스터 연대기"
+
+[[candidate]]
+level  = 0
+id     = "Oak_Quercus"
+label  = "참나무 (유럽 표준, sigma=12 K yr 연대기)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.82
+notes  = "chronology=12Kyr=sigma NEAR (독일 참나무 12,460년), 건축 연대"
+
+[[candidate]]
+level  = 0
+id     = "Douglas_Fir"
+label  = "더글러스 퍼 (북미 서부, n=6 주요 연구 지역)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "regions=6=n NEAR (OR/WA/BC/MT/ID/CA), A.E.더글러스 원류"
+
+[[candidate]]
+level  = 0
+id     = "Kauri_NZ"
+label  = "카우리 (뉴질랜드, phi=2 반구 대조 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.55
+notes  = "hemispheres=2=phi EXACT (북/남반구 대조), 남반구 유일"
+
+[[candidate]]
+level  = 0
+id     = "Juniper_Arid"
+label  = "향나무 (건조 지역, tau=4 천년 NEAR)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.72
+notes  = "max_age=4000yr=tau*1000 NEAR, 중앙아시아/지중해"
+
+[[candidate]]
+level  = 0
+id     = "Larch_Siberian"
+label  = "시베리아 낙엽송 (극한 기후, n=6 개월 동결)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.68
+notes  = "frozen_months=6=n EXACT (11월-4월), 시베리아 기후 기록"
+
+# =============================================================
+# Level 1: Ring_Pattern (연륜 패턴) -- 6 후보
+# =============================================================
+[[level]]
+name = "Ring_Pattern"
+
+[[candidate]]
+level  = 1
+id     = "EarlyLate_Wood"
+label  = "조/만재 (phi=2 구분 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.90
+notes  = "zones=2=phi EXACT (조재=봄 성장/만재=여름 밀도), 기본 단위"
+
+[[candidate]]
+level  = 1
+id     = "Missing_Ring"
+label  = "결여 연륜 (스트레스, phi=2 유/무 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.78
+notes  = "presence=2=phi EXACT (있음/없음), 건조/냉해/화재"
+
+[[candidate]]
+level  = 1
+id     = "False_Ring"
+label  = "위연륜 (이중 연륜, phi=2 진/위 EXACT)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.75
+notes  = "authenticity=2=phi EXACT (진연륜/위연륜), 여름 가뭄"
+
+[[candidate]]
+level  = 1
+id     = "Frost_Ring"
+label  = "동해 연륜 (냉해 기록, tau=4 계절 위치)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.78
+notes  = "season_pos=4=tau NEAR (초봄/늦봄/초가을/늦가을), 화산 분화 연대"
+
+[[candidate]]
+level  = 1
+id     = "Density_Profile"
+label  = "밀도 프로파일 (X선, sigma=12 측정점/링 NEAR)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.65
+notes  = "points=12=sigma NEAR (연륜당 밀도 측정점), MXD 최대 밀도"
+
+[[candidate]]
+level  = 1
+id     = "Blue_Ring"
+label  = "청색 연륜 (광합성 감소, n=6 주요 사례)"
+n6     = 1.00
+perf   = 0.80
+power  = 0.78
+cost   = 0.72
+notes  = "events=6=n NEAR (1258/1453/1601/1815/1883/1991), 대형 화산"
+
+# =============================================================
+# Level 2: Climate_Proxy (기후 대리지표) -- 6 후보
+# =============================================================
+[[level]]
+name = "Climate_Proxy"
+
+[[candidate]]
+level  = 2
+id     = "Temperature_Summer"
+label  = "여름 기온 복원 (MXD, tau=4 개월 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.70
+notes  = "months=4=tau EXACT (6-9월), 최대밀도 상관 r=0.8+"
+
+[[candidate]]
+level  = 2
+id     = "Precipitation"
+label  = "강수량 복원 (연륜 폭, sigma=12 개월 주기)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.75
+notes  = "cycle=12mo=sigma EXACT (연간 강수), 건조지역 민감"
+
+[[candidate]]
+level  = 2
+id     = "Drought_PDSI"
+label  = "가뭄 지수 PDSI (팔머, tau=4 등급 주요)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.72
+notes  = "grades=4=tau NEAR (보통/경미/심각/극심), 북미 가뭄 아틀라스"
+
+[[candidate]]
+level  = 2
+id     = "Isotope_d13C"
+label  = "탄소 동위원소 d13C (광합성, phi=2 C3/C4 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.50
+notes  = "pathways=2=phi EXACT (C3/C4 광합성), CO2 농도 지표"
+
+[[candidate]]
+level  = 2
+id     = "Isotope_d18O"
+label  = "산소 동위원소 d18O (수원, phi=2 경/중 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.48
+notes  = "isotopes=2=phi EXACT (16O/18O), 수분 순환/온도"
+
+[[candidate]]
+level  = 2
+id     = "Volcanic_Signal"
+label  = "화산 신호 (폭발 연대, n=6 VEI>=6 기록)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.68
+notes  = "VEI6_events=6=n NEAR (역사 시대 주요), 연륜 폭 급감"
+
+# =============================================================
+# Level 3: Dating_Method (연대 측정법) -- 6 후보
+# =============================================================
+[[level]]
+name = "Dating_Method"
+
+[[candidate]]
+level  = 3
+id     = "Crossdating_Visual"
+label  = "교차 연대측정 (육안 대조, phi=2 일치/불일치 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.90
+notes  = "match=2=phi EXACT (일치/불일치), 더글러스 원리"
+
+[[candidate]]
+level  = 3
+id     = "Statistical_COFECHA"
+label  = "통계적 검증 COFECHA (상관 분석)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.88
+cost   = 0.82
+notes  = "segment_yr=6=n NEAR (6-12년 세그먼트 슬라이딩), r>=0.4"
+
+[[candidate]]
+level  = 3
+id     = "Radiocarbon_C14"
+label  = "방사성탄소 C14 대조 (반감기 교정)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.50
+notes  = "half_life=5730yr, IntCal20 보정 곡선, sigma=12 세기 범위 NEAR"
+
+[[candidate]]
+level  = 3
+id     = "Wiggle_Match"
+label  = "위글 매칭 (C14 진동 패턴, tau=4 측정점 최소)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.82
+cost   = 0.45
+notes  = "min_points=4=tau NEAR, 정밀도 +-10년 이내"
+
+[[candidate]]
+level  = 3
+id     = "Image_Analysis"
+label  = "영상 분석 (디지털 계측, n=6 um 해상도)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.75
+notes  = "resolution=6um=n NEAR, CooRecorder/WinDENDRO"
+
+[[candidate]]
+level  = 3
+id     = "Blue_Intensity"
+label  = "청색 강도 (BI, 저비용 밀도 대안, phi=2 RGB 중 1)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.80
+notes  = "channel=B from RGB, r=0.9+ vs MXD, 저비용 대안"
+
+# =============================================================
+# Level 4: Application (응용) -- 6 후보
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Archaeology"
+label  = "고고학 연대측정 (건축목, sigma=12 세기 유럽 연대기)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.75
+notes  = "range=12centuries=sigma NEAR (1000-2000 AD), 중세 건축"
+
+[[candidate]]
+level  = 4
+id     = "Climate_History"
+label  = "기후 역사 복원 (수천년, tau=4 기후기 주요)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.65
+notes  = "periods=4=tau NEAR (중세온난/소빙하/현대/미래), IPCC 기여"
+
+[[candidate]]
+level  = 4
+id     = "Art_Provenance"
+label  = "미술품 진위 감정 (패널화, n=6 주요 감정 항목)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.60
+notes  = "criteria=6=n NEAR (연대/수종/산지/가공/일치/문서), 렘브란트"
+
+[[candidate]]
+level  = 4
+id     = "Forestry_Mgmt"
+label  = "산림 관리 (수확 계획, sigma=12 년 벌채 주기)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.85
+notes  = "rotation=12yr=sigma NEAR (단벌기 기준), 성장량 예측"
+
+[[candidate]]
+level  = 4
+id     = "Musical_Instrument"
+label  = "악기 목재 감정 (바이올린, tau=4 세기 거장 시대)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.55
+notes  = "era=4=tau NEAR (아마티/스트라디/과르네리/현대), 스프루스"
+
+[[candidate]]
+level  = 4
+id     = "Geomorphology"
+label  = "지형학 (산사태/빙하, n=6 주요 자연재해 유형)"
+n6     = 1.00
+perf   = 0.82
+power  = 0.78
+cost   = 0.70
+notes  = "hazards=6=n NEAR (산사태/토석류/빙하/홍수/화재/눈사태)"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 브리슬콘 소나무는 통계적 교차 연대측정 필수
+[[rule]]
+type       = "require"
+if_level   = 0
+if_id      = "Bristlecone_Pine"
+then_level = 3
+then_ids   = "Crossdating_Visual,Statistical_COFECHA"
+
+# 동위원소 분석은 영상 분석과 비호환 (다른 기법)
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Isotope_d13C"
+then_level = 3
+then_ids   = "Image_Analysis"
+
+# 고고학 응용은 참나무 수종과 최적 조합
+[[rule]]
+type       = "require"
+if_level   = 4
+if_id      = "Archaeology"
+then_level = 0
+then_ids   = "Oak_Quercus,Douglas_Fir"

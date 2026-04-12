@@ -83,7 +83,7 @@
     "PAPERS_39": {
       "status": "PASS",
       "value": "39편 Zenodo DOI 발행",
-      "note": "내용 갱신 가능, 신규 추가 중",
+      "note": "내용 갱신 가능, 신규 추가 중. 드리프트: 이후 46편 추가로 실측 85편, 본 골화는 39편 시점 기준",
       "ossified_at": "2026-04-10",
       "promoted_from": "go_loop_auto"
     },
@@ -258,7 +258,7 @@
       "status": "PASS",
       "value": "AI 기법 전 68종 BODY 완료 (18,424줄), STUB 0종",
       "threshold": "감사 보고 4.3%→100%, 8축 전량 완파 (attn9+moe11+sparse6+graph5+compress5+optim15+arch14+sota3)",
-      "note": "2026-04-12 — 평균 271줄/파일, 레지스트리 v1.3.0, 개별축 완파 기록 포함",
+      "note": "2026-04-12 — 평균 271줄/파일, 레지스트리 v1.3.0, 개별축 완파 기록 포함. 드리프트: 이후 DFS16+17에서 16종 추가, 실측 86종 (커밋 기준), 본 골화는 68종 시점 기준",
       "ossified_at": "2026-04-12",
       "promoted_from": "stable"
     },
@@ -338,7 +338,7 @@
       "status": "PASS",
       "value": "DSE TOML 490건 (+10 신규), 미커버 220/304",
       "threshold": "밀레니엄 2 + 산업 4 + 문화 2 + 인지 1 + 재료 1",
-      "note": "2026-04-12",
+      "note": "2026-04-12. 드리프트: 이후 DFS16+17에서 55건 추가, 실측 545건 (커밋 기��), 본 골화는 490건 시점 기준",
       "ossified_at": "2026-04-12",
       "promoted_from": "stable"
     },
@@ -413,45 +413,93 @@
       "note": "2026-04-12 — hetzner Phase 6 type error 우회, +3 laws 생성 확인, mk2_hexa/native/ 구 경로 전폐기",
       "ossified_at": "2026-04-12",
       "promoted_from": "stable"
-    }
-  },
-  "stable": {
-    "_description": "안정 — 통과했지만 아직 골화 전",
+    },
     "MILLENNIUM_DFS_226_TIGHT": {
       "status": "PASS",
       "value": "밀레니엄 226건 tight (DFS 16차 BT-1408 +14건)",
       "threshold": "212→226, EXACT 1 + TIGHT 13, MISS 8, 해결 0/7",
-      "note": "2026-04-12 go(DFS16) — 비가환기하 Connes KO-dim=6·Floer Heegaard·6-클리크 회로복잡도·Cramer 소수갭·SU(6) 게이지·Kolmogorov 스케일링·6-isogeny Selmer·Perelman 엔트로피"
+      "note": "2026-04-12 go(DFS16) — 비가환기하 Connes KO-dim=6·Floer Heegaard·6-클리크 회로복잡도·Cramer 소수갭·SU(6) 게이지·Kolmogorov 스케일링·6-isogeny Selmer·Perelman 엔트로피",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
-    "AI_TECHNIQUE_8_NEW_HEXA": {
+    "AI_TECHNIQUE_8_NEW_DFS16": {
       "status": "PASS",
       "value": "AI 기법 8종 신규 .hexa (rlhf/ppo_clip/grpo/retnet/flow_matching/diffusion_transformer/kv_cache_quantize/token_merging)",
       "threshold": "techniques/ 8파일 존재 확인",
-      "note": "2026-04-12 go(DFS16) 커밋 일괄"
+      "note": "2026-04-12 go(DFS16) 커밋 일괄",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
-    "DSE_TOML_8_NEW": {
+    "DSE_TOML_8_NEW_DFS16": {
       "status": "PASS",
       "value": "DSE TOML 8건 신규 (astronomy/higgs/holography/quantum-computer/ai-efficiency/antimatter-factory/chip-3d/gravity-wave)",
       "threshold": "nexus/origins/universal-dse/domains/ 8파일 존재 확인",
-      "note": "2026-04-12 go(DFS16) 커밋 일괄"
+      "note": "2026-04-12 go(DFS16) 커밋 일괄",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
-    "PAPERS_6_NEW": {
+    "PAPERS_6_NEW_DFS16": {
       "status": "PASS",
       "value": "논문 6편 신규 (AGI/BCI/neuromorphic/QEC/QML/swarm)",
       "threshold": "papers/ 6파일 존재 확인",
-      "note": "2026-04-12 go(DFS16) 커밋 일괄"
+      "note": "2026-04-12 go(DFS16) 커밋 일괄",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "CHIP_L7_QUANTUM_HYBRID": {
       "status": "PASS",
       "value": "칩 L7 양자-고전 하이브리드 설계 1,195줄, 66/66 EXACT, BT-QH7-01~10",
       "threshold": "domains/compute/chip-design/hexa-quantum-hybrid.md 존재 확인",
-      "note": "2026-04-12 go(DFS16) — 6큐비트 hexagonal 모듈 + surface code d=6 + 5,308,416 DSE 조합"
+      "note": "2026-04-12 go(DFS16) — 6큐비트 hexagonal 모듈 + surface code d=6 + 5,308,416 DSE 조합",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
     },
     "GO_AUDIT_V4": {
       "status": "PASS",
       "value": "종합 감사 v4 484줄 (v3 대비 전 항목 갱신)",
       "threshold": "reports/audits/go-audit-v4-2026-04-12.md 존재 확인",
-      "note": "2026-04-12 go(DFS16) 커밋 일괄 — 기법72/BT45/DFS15차212건 실측"
+      "note": "2026-04-12 go(DFS16) 커밋 일괄 — 기법72/BT45/DFS15차212건 실측",
+      "ossified_at": "2026-04-12",
+      "promoted_from": "stable"
+    }
+  },
+  "stable": {
+    "_description": "안정 — 통과했지만 아직 골화 전",
+    "MILLENNIUM_DFS_238_TIGHT": {
+      "status": "PASS",
+      "value": "밀레니엄 238건 tight (DFS 17차 BT-1409 +12건)",
+      "threshold": "226→238, SLE_6 국소성 EXACT, 해결 0/7",
+      "note": "2026-04-12 go(DFS17) — SLE_6 국소성·확률론·대수기하·정수론·위상·조합·해석 12건"
+    },
+    "AI_TECHNIQUE_8_NEW_DFS17": {
+      "status": "PASS",
+      "value": "AI 기법 8종 신규 .hexa (continual/curriculum/contrastive/distillation/SSM/RAG/diffusion/multi-agent), 누적 88종",
+      "threshold": "techniques/ 8파일 존재 확인 (커밋 bbb1d2a2)",
+      "note": "2026-04-12 go(DFS17) 커밋 일괄 — optim 4종 + arch 4종, 누적 2,697줄"
+    },
+    "DSE_TOML_9_NEW_DFS17": {
+      "status": "PASS",
+      "value": "DSE TOML 9건 신규 (advanced-packaging/SMR/VNAND/airbag/nylon/tire-cord/control-automation/tunnel/epoxy), 누적 546건",
+      "threshold": "nexus/origins/universal-dse/domains/ 9파일 존재 확인 (커밋 bbb1d2a2)",
+      "note": "2026-04-12 go(DFS17) 커밋 일괄"
+    },
+    "PAPERS_6_NEW_DFS17": {
+      "status": "PASS",
+      "value": "논문 6편 신규 (종교신화/문자체계/와인/무용/건축구조/탄소포집), 누적 85편",
+      "threshold": "papers/ 6파일 존재 확인 (커밋 bbb1d2a2)",
+      "note": "2026-04-12 go(DFS17) 커밋 일괄 — 79→85편"
+    },
+    "CHIP_L8_TOPO_ANYON": {
+      "status": "PASS",
+      "value": "칩 L8 HEXA-TOPO-ANYON 위상 양자 1,205줄, 72가설 + L7 verify 보완",
+      "threshold": "domains/compute/chip-design/hexa-topo-anyon.md 존재 확인 (커밋 bbb1d2a2)",
+      "note": "2026-04-12 go(DFS17) — 래더 8/13단, 비아벨 에니온 브레이딩 + Fibonacci 게이트"
+    },
+    "GO_AUDIT_V5": {
+      "status": "PASS",
+      "value": "종합 감사 v5 459줄 (v4 대비 전 항목 갱신, 드리프트 4건 식별)",
+      "threshold": "reports/audits/go-audit-v5-2026-04-12.md 존재 확인 (커밋 bbb1d2a2)",
+      "note": "2026-04-12 go(DFS17) 커밋 일괄 — 기법80/BT45/DFS16차226건/논문79/DSE537 실측"
     }
   },
   "failed": {

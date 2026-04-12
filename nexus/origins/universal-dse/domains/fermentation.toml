@@ -1,0 +1,375 @@
+# =============================================================
+# FERMENTATION (발효) DSE 도메인 정의
+# 발효 — n=6 주요 발효 경로 + sigma=12 시간 숙성 + tau=4 온도 구간 + phi=2 혐기/호기
+# 총 조합: 6x6x6x6x6 = 7,776 (필터 전)
+# =============================================================
+
+[meta]
+name = "fermentation"
+desc = "발효 DSE — 미생물·기질·환경·산물·응용, n=6 핵심 발효 경로"
+levels = ["Organism", "Substrate", "Environment", "Product", "Application"]
+vision = "n=6 기반 궁극 발효 — n=6 경로 + sigma=12 hr 숙성 + phi=2 혐기/호기 + tau=4 온도대"
+
+[scoring]
+n6   = 0.35
+perf = 0.25
+power = 0.20
+cost  = 0.20
+
+# =============================================================
+# Level 0: Organism (미생물) -- 6 후보
+# =============================================================
+[[level]]
+name = "Organism"
+
+[[candidate]]
+level  = 0
+id     = "Saccharomyces"
+label  = "사카로마이세스 (효모, phi=2 혐기/호기 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.92
+cost   = 0.95
+notes  = "modes=2=phi EXACT (혐기→에탄올 / 호기→CO2), 맥주·빵·와인"
+
+[[candidate]]
+level  = 0
+id     = "Lactobacillus"
+label  = "락토바실러스 (유산균, sigma=12 주요 종)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.92
+notes  = "species=12=sigma NEAR (rhamnosus/plantarum/acidophilus/...), 김치·요거트"
+
+[[candidate]]
+level  = 0
+id     = "Aspergillus"
+label  = "아스페르길루스 (곰팡이, n=6 주요 산업 종)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.90
+notes  = "industrial_sp=6=n NEAR (oryzae/niger/flavus/fumigatus/terreus/nidulans), 된장·간장"
+
+[[candidate]]
+level  = 0
+id     = "Acetobacter"
+label  = "아세토박터 (초산균, phi=2 산화 단계 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.88
+notes  = "oxidation_steps=2=phi EXACT (에탄올→아세트알데히드→초산), 식초"
+
+[[candidate]]
+level  = 0
+id     = "SCOBY_Consortium"
+label  = "SCOBY 복합체 (공생, n=6 균종 혼합)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.85
+notes  = "species_mix=6=n NEAR, 콤부차·케피어, 공생 발효"
+
+[[candidate]]
+level  = 0
+id     = "Bacillus_Subtilis"
+label  = "고초균 (바실러스 서브틸리스, tau=4 생장 단계)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.90
+notes  = "growth_phases=4=tau EXACT (lag/log/stationary/death), 청국장·낫토"
+
+# =============================================================
+# Level 1: Substrate (기질) -- 6 후보
+# =============================================================
+[[level]]
+name = "Substrate"
+
+[[candidate]]
+level  = 1
+id     = "Glucose_Simple"
+label  = "단당류 (포도당, n=6 탄소 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.95
+cost   = 0.92
+notes  = "carbons=6=n EXACT (C6H12O6), 발효 기본 기질"
+
+[[candidate]]
+level  = 1
+id     = "Starch_Complex"
+label  = "전분 (복합 다당, sigma=12 단위 연결)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.88
+notes  = "avg_chain=12=sigma NEAR (amylose segment), 쌀·보리"
+
+[[candidate]]
+level  = 1
+id     = "Lactose_Milk"
+label  = "유당 (갈락토스+포도당, sigma=12 탄소 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.85
+notes  = "total_C=12=sigma EXACT (C12H22O11), 유제품 발효"
+
+[[candidate]]
+level  = 1
+id     = "Cellulose_Fiber"
+label  = "셀룰로스 (목질 섬유, tau=4 분해 단계)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "degradation=4=tau NEAR (전처리/당화/발효/분리), 바이오에탄올"
+
+[[candidate]]
+level  = 1
+id     = "Protein_Soy"
+label  = "대두 단백 (아미노산 풀, phi=2 가수분해 방식)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.85
+notes  = "hydrolysis=2=phi EXACT (효소/산), 간장·된장·템페"
+
+[[candidate]]
+level  = 1
+id     = "Fructose_Honey"
+label  = "과당/벌꿀 (n=6 탄소 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.80
+notes  = "carbons=6=n EXACT (C6H12O6 이성질), 미드·과일주"
+
+# =============================================================
+# Level 2: Environment (환경) -- 6 후보
+# =============================================================
+[[level]]
+name = "Environment"
+
+[[candidate]]
+level  = 2
+id     = "Mesophilic"
+label  = "중온 발효 (20-45 C, tau=4 구간 표준)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.92
+notes  = "temp_zones=4=tau NEAR (20/25/30/37/42/45), 대부분 식품"
+
+[[candidate]]
+level  = 2
+id     = "Thermophilic"
+label  = "고온 발효 (45-80 C, phi=2 호열성 유형)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.80
+cost   = 0.78
+notes  = "types=2=phi NEAR (세균/고세균), 퇴비화·요거트"
+
+[[candidate]]
+level  = 2
+id     = "Anaerobic_Strict"
+label  = "절대 혐기 (O2=0, phi=2 on/off EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.82
+notes  = "oxygen=2=phi EXACT (유/무), 메탄 발효·장내 발효"
+
+[[candidate]]
+level  = 2
+id     = "Low_pH_Acid"
+label  = "산성 환경 (pH 4-6, n=6 pH 중앙 EXACT)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.88
+cost   = 0.85
+notes  = "target_pH=6=n NEAR (초기), 유산 발효 자기 억제"
+
+[[candidate]]
+level  = 2
+id     = "High_Salt_Brine"
+label  = "고염 환경 (sigma=12% 염도 기준)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.85
+cost   = 0.85
+notes  = "salinity=12%=sigma NEAR, 젓갈·장류·올리브"
+
+[[candidate]]
+level  = 2
+id     = "Solid_State"
+label  = "고체 발효 (SSF, n=6 층 트레이)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.85
+notes  = "tray_layers=6=n NEAR, 누룩·템페·코지, 수분 활성도"
+
+# =============================================================
+# Level 3: Product (산물) -- 6 후보
+# =============================================================
+[[level]]
+name = "Product"
+
+[[candidate]]
+level  = 3
+id     = "Ethanol"
+label  = "에탄올 (C2H5OH, phi=2 탄소 EXACT)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.90
+notes  = "carbons=2=phi EXACT, 주류·바이오연료, 가장 대량"
+
+[[candidate]]
+level  = 3
+id     = "Lactic_Acid"
+label  = "유산 (L/D-lactate, phi=2 광학이성질 EXACT)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.90
+cost   = 0.88
+notes  = "isomers=2=phi EXACT (L/D), 김치·사워도우"
+
+[[candidate]]
+level  = 3
+id     = "Acetic_Acid"
+label  = "초산 (CH3COOH, phi=2 산화 단계)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.88
+cost   = 0.88
+notes  = "steps=2=phi EXACT (에탄올→초산), 식초·콤부차"
+
+[[candidate]]
+level  = 3
+id     = "Amino_Acid_Mix"
+label  = "아미노산 혼합물 (n=6 필수 아미노산 주요)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.82
+notes  = "essential=6=n NEAR (Glu/Lys/Thr/Met/Val/Ile 산업), 간장 감칠맛"
+
+[[candidate]]
+level  = 3
+id     = "CO2_Gas"
+label  = "이산화탄소 (빵 팽창, n=6 기공 밀도)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.90
+cost   = 0.92
+notes  = "pores_per_cm=6=n NEAR, 제빵·탄산음료·맥주"
+
+[[candidate]]
+level  = 3
+id     = "Enzyme_Complex"
+label  = "효소 복합체 (amylase 외, n=6 주요 산업 효소)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.82
+cost   = 0.80
+notes  = "key_enzymes=6=n NEAR (amylase/protease/lipase/cellulase/lactase/pectinase)"
+
+# =============================================================
+# Level 4: Application (응용) -- 6 후보
+# =============================================================
+[[level]]
+name = "Application"
+
+[[candidate]]
+level  = 4
+id     = "Korean_Jang"
+label  = "한국 장류 (된장·간장·고추장, tau=4 계절 숙성)"
+n6     = 1.00
+perf   = 0.92
+power  = 0.88
+cost   = 0.88
+notes  = "seasons=4=tau EXACT (봄 담그기→여름→가을→겨울), 한식 근간"
+
+[[candidate]]
+level  = 4
+id     = "Kimchi"
+label  = "김치 (유산균, sigma=12 주요 재료)"
+n6     = 1.00
+perf   = 0.95
+power  = 0.90
+cost   = 0.90
+notes  = "ingredients=12=sigma NEAR (배추/고춧가루/마늘/생강/젓갈/...), UNESCO"
+
+[[candidate]]
+level  = 4
+id     = "Beer_Brewing"
+label  = "맥주 양조 (n=6 공정 단계 EXACT)"
+n6     = 1.00
+perf   = 0.90
+power  = 0.85
+cost   = 0.85
+notes  = "steps=6=n EXACT (맥아/당화/끓임/냉각/발효/숙성), 독일 맥주순수령"
+
+[[candidate]]
+level  = 4
+id     = "Cheese_Making"
+label  = "치즈 제조 (sigma=12 개월 숙성 표준)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.80
+notes  = "aging=12mo=sigma NEAR (파르미지아노), 유산균+레넷"
+
+[[candidate]]
+level  = 4
+id     = "Bioethanol"
+label  = "바이오에탄올 (산업 발효, n=6% v/v 1차 농도)"
+n6     = 1.00
+perf   = 0.85
+power  = 0.80
+cost   = 0.80
+notes  = "initial_conc=6%=n NEAR, 셀룰로스계 2세대"
+
+[[candidate]]
+level  = 4
+id     = "Probiotic"
+label  = "프로바이오틱스 (건강 기능, n=6 주요 균주)"
+n6     = 1.00
+perf   = 0.88
+power  = 0.85
+cost   = 0.85
+notes  = "strains=6=n NEAR (LGG/BB-12/La-5/Bifido/Saccharo/L.reuteri)"
+
+# =============================================================
+# 호환성 규칙
+# =============================================================
+
+# 포도당 기질은 에탄올 또는 유산 산물 필수
+[[rule]]
+type       = "require"
+if_level   = 1
+if_id      = "Glucose_Simple"
+then_level = 3
+then_ids   = "Ethanol,Lactic_Acid,CO2_Gas"
+
+# 고체 발효는 한국 장류와 호환 최적
+[[rule]]
+type       = "require"
+if_level   = 2
+if_id      = "Solid_State"
+then_level = 4
+then_ids   = "Korean_Jang,Kimchi"
+
+# 절대 혐기는 호기성 초산과 비호환
+[[rule]]
+type       = "exclude"
+if_level   = 2
+if_id      = "Anaerobic_Strict"
+then_level = 3
+then_ids   = "Acetic_Acid"
