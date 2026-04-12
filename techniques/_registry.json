@@ -1,14 +1,15 @@
 {
-  "_doc": "AI 기법 139종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
+  "_doc": "AI 기법 155종 레지스트리. 각 항목은 techniques/<sub>/<name>.hexa 로 실행",
   "_version": "2.0.0",
-  "_total": 139,
+  "_total": 155,
   "_sota_extended": 3,
-  "_sota_total": 142,
-  "_body_count": 142,
+  "_sota_total": 158,
+  "_body_count": 158,
   "_stub_count": 0,
   "_deprecated_count": 2,
   "_last_updated": "2026-04-12",
   "_changelog": [
+    "2026-04-12: DFS21 기법 16종 신규 (139→155종 확장) — arch 6종(gan_adversarial/unet_skip/normalizing_flow/pointnet_3d/vision_mamba/tree_of_thought) + attention 3종(linear_attention/sliding_window_attention/mixture_of_depths_v2) + compress 1종(neural_codec) + optim 6종(weight_averaging/mixed_precision/self_play/gradient_penalty/noise_contrastive_estimation/cutmix_augmentation). _total 139→155, _body_count 142→158",
     "2026-04-12: DFS20 기법 16종 신규 + 고아 3종 흡수 (120→139종 확장) — arch 10종(variational_autoencoder/clip_multimodal/gaussian_splatting/capsule_network/liquid_neural_network/consistency_model/nerf_radiance + 고아 energy_based_model/hypernetwork/neural_ode) + attention 2종(slot_attention/cross_attention) + compress 2종(vq_vae/pruning_lottery_ticket) + optim 5종(lora/maml_meta_learning/classifier_free_guidance/ddim_sampling/sharpness_aware_minimization). _total 120→139, _body_count 123→142",
     "2026-04-12: DFS19 기법 12종 신규 (88→100종 확장) — arch 3종(world_model/megabyte/perceiver) + attention 2종(flash_attention_v3/differential_transformer) + optim 3종(test_time_compute/eagle_speculative/multi_token_prediction) + compress 2종(mixture_of_tokenizers/bitnet) + sparse 1종(sparse_autoencoder) + graph 1종(graph_transformer). _total 108→120, _body_count 111→123",
     "2026-04-12: DFS18 기법 8종 신규 — optim 4종(activation_checkpointing/ring_allreduce/neural_scaling_laws/federated_learning) + arch 2종(byte_latent_transformer/selective_state_scan) + attention 1종(rotary_embedding) + compress 1종(quantization_aware_training). _total 106→108(drift-guard 선흡수분 포함), _body_count 109→111",
@@ -110,7 +111,10 @@
     "flash_attention_v3",
     "differential_transformer",
     "slot_attention",
-    "cross_attention"
+    "cross_attention",
+    "linear_attention",
+    "sliding_window_attention",
+    "mixture_of_depths_v2"
   ],
   "attention_status": {
     "egyptian_attention": "BODY",
@@ -120,7 +124,10 @@
     "flash_attention_v3": "BODY",
     "differential_transformer": "BODY",
     "slot_attention": "BODY",
-    "cross_attention": "BODY"
+    "cross_attention": "BODY",
+    "linear_attention": "BODY",
+    "sliding_window_attention": "BODY",
+    "mixture_of_depths_v2": "BODY"
   },
   "moe": [
     "deepseek_moe",
@@ -186,7 +193,13 @@
     "maml_meta_learning",
     "classifier_free_guidance",
     "ddim_sampling",
-    "sharpness_aware_minimization"
+    "sharpness_aware_minimization",
+    "weight_averaging",
+    "mixed_precision",
+    "self_play",
+    "gradient_penalty",
+    "noise_contrastive_estimation",
+    "cutmix_augmentation"
   ],
   "optim_status": {
     "adamw_quintuplet": "BODY",
@@ -216,7 +229,13 @@
     "maml_meta_learning": "BODY",
     "classifier_free_guidance": "BODY",
     "ddim_sampling": "BODY",
-    "sharpness_aware_minimization": "BODY"
+    "sharpness_aware_minimization": "BODY",
+    "weight_averaging": "BODY",
+    "mixed_precision": "BODY",
+    "self_play": "BODY",
+    "gradient_penalty": "BODY",
+    "noise_contrastive_estimation": "BODY",
+    "cutmix_augmentation": "BODY"
   },
   "sparse": [
     "boltzmann_gate",
@@ -250,7 +269,8 @@
     "mixture_of_tokenizers",
     "bitnet",
     "vq_vae",
-    "pruning_lottery_ticket"
+    "pruning_lottery_ticket",
+    "neural_codec"
   ],
   "compress_status": {
     "phi_bottleneck": "BODY",
@@ -258,7 +278,8 @@
     "mixture_of_tokenizers": "BODY",
     "bitnet": "BODY",
     "vq_vae": "BODY",
-    "pruning_lottery_ticket": "BODY"
+    "pruning_lottery_ticket": "BODY",
+    "neural_codec": "BODY"
   },
   "arch": [
     "arch_optimizer",
@@ -304,7 +325,13 @@
     "capsule_network",
     "liquid_neural_network",
     "consistency_model",
-    "nerf_radiance"
+    "nerf_radiance",
+    "gan_adversarial",
+    "unet_skip",
+    "normalizing_flow",
+    "pointnet_3d",
+    "vision_mamba",
+    "tree_of_thought"
   ],
   "arch_status": {
     "complete_llm_n6": "BODY",
@@ -333,6 +360,12 @@
     "capsule_network": "BODY",
     "liquid_neural_network": "BODY",
     "consistency_model": "BODY",
-    "nerf_radiance": "BODY"
+    "nerf_radiance": "BODY",
+    "gan_adversarial": "BODY",
+    "unet_skip": "BODY",
+    "normalizing_flow": "BODY",
+    "pointnet_3d": "BODY",
+    "vision_mamba": "BODY",
+    "tree_of_thought": "BODY"
   }
 }
