@@ -285,7 +285,7 @@ horology               ############################## 100.0%
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v6 | **225 Techniques** | 8축 222기법+SOTA 3 — arch 72(ResNet/BERT/GAN/ViT/Diffusion/SSM/NTM/ConvNeXt), optim 75(AdamW/Lion/Sophia/Muon/DPO/RLHF/LoRA/SAM), attention 27(MHA/MQA/Flash/RoPE/Sparse/Performer), compress 18(Pruning/Quantize/VQ-VAE/BitNet), moe 13(DeepSeek/Expert-Choice/Mixtral), sparse 10(2:4 구조적/Top-K/SAE), graph 7(GAT/GCN/Spectral), sota 3(Mamba2/Hyena/RWKV) | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v6 | **225 Techniques** | 8축 222기법+SOTA 3 — arch 72(ResNet/BERT/GAN/ViT/Diffusion/SSM/NTM/ConvNeXt), optim 75(AdamW/Lion/Sophia/Muon/DPO/RLHF/LoRA/SAM), attention 27(MHA/MQA/Flash/RoPE/Sparse/Performer), compress 18(Pruning/Quantize/VQ-VAE/BitNet), moe 13(DeepSeek/Expert-Choice/Mixtral), sparse 10(2:4 구조적/Top-K/SAE), graph 7(GAT/GCN/Spectral), sota 3(Mamba2/Hyena/RWKV) | [문서](techniques/CLAUDE.md) |
 | 10 | ✅ | v2 | **Full N6 Pipeline** | 17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증 | [문서](experiments/experiment_full_n6_pipeline.py) |
 | 10 | ✅ | v2 | **N6 Inevitability Engine** | 기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
 | 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
