@@ -1,3 +1,4 @@
+<!-- gold-standard: shared/harness/sample.md -->
 ---
 domain: sf
 requires:
