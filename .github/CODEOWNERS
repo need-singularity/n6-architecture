@@ -4,7 +4,7 @@
 theory/proofs/theorem-r1-uniqueness.md @need-singularity
 theory/constants/atlas-constants.md @need-singularity
 theory/breakthroughs/breakthrough-theorems.md @need-singularity
-nexus/crates/dashboard/static/index.html @need-singularity
+bridge/crates/dashboard/static/index.html @need-singularity
 CLAUDE.md @need-singularity
 domains/space/astronomy/astronomy.md @need-singularity
 domains/infra/climate/climate.md @need-singularity
