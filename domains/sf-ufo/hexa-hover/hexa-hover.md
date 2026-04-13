@@ -1,7 +1,5 @@
 ---
 domain: hover
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 호버보드 (HEXA-HOVER) -- 통합 목표

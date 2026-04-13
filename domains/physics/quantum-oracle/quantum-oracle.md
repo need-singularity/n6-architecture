@@ -1,7 +1,5 @@
 ---
 domain: quantum-oracle
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-ORACLE — 양자 경제/기후/팬데믹 예측기 (Ultimate Quantum-AGI Oracle)

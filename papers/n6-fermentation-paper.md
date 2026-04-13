@@ -1,7 +1,5 @@
 ---
 domain: fermentation
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 발효/양조 — n=6 완전수 화학양론 시드 논문

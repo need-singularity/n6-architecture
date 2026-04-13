@@ -1,7 +1,5 @@
 ---
 domain: sota-ssm
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 SSM/RWKV/Hyena: 차세대 Transformer 대안의 산술적 정합성

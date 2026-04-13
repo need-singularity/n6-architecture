@@ -1,7 +1,5 @@
 ---
 domain: forensic-science
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 법과학의 증거 분석 구조 -- tau=4 증거 유형에서 6대 법의학 분과까지

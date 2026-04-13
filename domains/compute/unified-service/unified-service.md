@@ -1,7 +1,5 @@
 ---
 domain: unified-service
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 완전인지 플랫폼 — HEXA-UNIFIED

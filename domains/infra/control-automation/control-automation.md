@@ -1,7 +1,5 @@
 ---
 domain: control-automation
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 제어/자동화 (Control & Automation) -- 통합 목표

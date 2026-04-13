@@ -1,7 +1,5 @@
 ---
 domain: cross-domain-mega
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 교차도메인 메가프로젝트 아키텍처 -- HEXA-MEGA

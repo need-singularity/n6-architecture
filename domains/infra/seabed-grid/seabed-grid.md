@@ -1,7 +1,5 @@
 ---
 domain: seabed-grid
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-SEABED — 대륙간 해저 초전도 송전망 (Ultimate SC Submarine Grid)

@@ -1,7 +1,5 @@
 ---
 domain: curvature-geometry
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 리만 곡률: 일반 상대론의 산술적 파라미터화

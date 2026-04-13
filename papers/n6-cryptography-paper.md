@@ -1,7 +1,5 @@
 ---
 domain: cryptography
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 암호학의 격자 구조 -- AES σ=12 라운드에서 SHA-256 J₂=24 워드까지

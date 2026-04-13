@@ -1,7 +1,5 @@
 ---
 domain: photon-topo
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-PHOTON-TOPO -- Level 9 (광양자 위상 융합 칩) 아키텍처 설계

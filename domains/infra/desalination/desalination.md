@@ -1,7 +1,5 @@
 ---
 domain: desalination
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-DESAL — 초전도 해수 담수화 (Ultimate SC Desalination)

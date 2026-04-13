@@ -1,7 +1,5 @@
 ---
 domain: chip-wafer
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 칩 6단계 아키텍처 5단 — HEXA-WAFER 웨이퍼 스케일 모놀리식

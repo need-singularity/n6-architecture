@@ -1,7 +1,5 @@
 ---
 domain: pemfc
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 수소연료전지 PEMFC — 코오롱인더 수소사업

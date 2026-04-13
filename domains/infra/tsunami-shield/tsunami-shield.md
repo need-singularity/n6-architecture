@@ -1,7 +1,5 @@
 ---
 domain: tsunami-shield
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-TSUNAMI — 궁극의 해일 방지기 (능동 파랑 반사벽)

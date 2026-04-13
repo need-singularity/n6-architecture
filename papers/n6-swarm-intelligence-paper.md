@@ -1,8 +1,6 @@
 ---
 <!-- @allow-empty-section @allow-ascii-freeform -->
 domain: swarm-intelligence
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 군집지능 -- 6-에이전트 최적에서 창발 행동까지

@@ -1,7 +1,5 @@
 ---
 domain: snowflake-ice
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 눈꽃/얼음 결정 -- Unified Goal

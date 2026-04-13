@@ -1,7 +1,5 @@
 ---
 domain: chip-hexa1
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 칩 6단계 아키텍처 1단 — HEXA-1 디지털 통합 SoC

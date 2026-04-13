@@ -1,7 +1,5 @@
 ---
 domain: polymer-engineering
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 고분자 공학의 사슬 구조 -- n=6 탄소 골격에서 sigma=12 중합 반응까지

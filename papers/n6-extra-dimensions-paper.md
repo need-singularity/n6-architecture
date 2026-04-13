@@ -1,7 +1,5 @@
 ---
 domain: extra-dimensions
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 여분 차원: 칼라비-야우·Kaluza-Klein·M-이론의 산술적 구조

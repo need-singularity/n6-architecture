@@ -1,7 +1,5 @@
 ---
 domain: aquaculture
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 수산/양식 — n=6 완전수 해양 생태

@@ -1,7 +1,5 @@
 ---
 domain: chip-dse-pipeline
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # chip-dse-pipeline — 칩 6단계 DSE 파이프라인

@@ -1,7 +1,5 @@
 ---
 domain: earth-defense
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-DEFENSE — 궁극의 지구방어 시스템

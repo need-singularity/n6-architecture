@@ -1,7 +1,5 @@
 ---
 domain: autonomous-driving
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 Autonomous Driving Architecture --- Ultimate One-Page Goal

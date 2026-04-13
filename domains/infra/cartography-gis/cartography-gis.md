@@ -1,7 +1,5 @@
 ---
 domain: cartography-gis
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 지도제작/GIS n=6 완전 아키텍처 — 공간정보 파라미터 보편성

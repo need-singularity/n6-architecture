@@ -1,7 +1,5 @@
 ---
 domain: religion-mythology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 종교/신화의 수리 구조 -- 창세 6일에서 J₂=24절기까지

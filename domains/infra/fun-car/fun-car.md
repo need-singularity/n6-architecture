@@ -1,7 +1,5 @@
 ---
 domain: fun-car
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 펀카 — HEXA-FUNCAR (UFO-10 Certified, 133/133 EXACT)

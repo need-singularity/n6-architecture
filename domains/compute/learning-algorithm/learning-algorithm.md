@@ -1,7 +1,5 @@
 ---
 domain: learning-algorithm
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-LEARN — 궁극의 학습 알고리즘 아키텍처

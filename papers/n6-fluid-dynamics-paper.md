@@ -1,7 +1,5 @@
 ---
 domain: fluid-dynamics
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 유체역학 통합 — n=6 산술이 지배하는 나비에-스토크스 위상공간

@@ -1,7 +1,5 @@
 ---
 domain: ecommerce-fintech
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 전자상거래/핀테크 — n=6 완전수 결제 보안

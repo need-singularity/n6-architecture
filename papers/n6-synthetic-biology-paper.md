@@ -1,7 +1,5 @@
 ---
 domain: synthetic-biology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 합성생물학: 이중 완전수 생명 코드의 산술적 기원

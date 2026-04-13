@@ -1,7 +1,5 @@
 ---
 domain: hover
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-HOVER — 개인 호버보드/호버카 (궁극의 Meissner 부양 모빌리티)

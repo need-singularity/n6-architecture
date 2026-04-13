@@ -1,7 +1,5 @@
 ---
 domain: defense
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 방위/보안 아키텍처 -- HEXA-DEFENSE

@@ -1,7 +1,5 @@
 ---
 domain: chip-isa-n6
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # chip-isa-n6 — n=6 원시연산 RISC-V 확장 ISA (Xn6)

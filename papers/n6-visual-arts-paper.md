@@ -1,7 +1,5 @@
 ---
 domain: visual-arts
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 시각예술: 색채조화 6분할과 구성 앙카의 산술적 기원

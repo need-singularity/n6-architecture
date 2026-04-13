@@ -1,7 +1,5 @@
 ---
 domain: chip-pim
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 칩 6단계 아키텍처 2단 — HEXA-PIM 메모리 내 연산

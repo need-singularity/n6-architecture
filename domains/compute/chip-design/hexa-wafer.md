@@ -1,7 +1,5 @@
 ---
 domain: wafer
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-WAFER -- Level 5 (웨이퍼 스케일) 칩 아키텍처 설계

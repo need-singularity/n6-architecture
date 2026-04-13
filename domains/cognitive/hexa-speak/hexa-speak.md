@@ -1,7 +1,5 @@
 ---
 domain: speak
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-SPEAK — AI 음성 출력 (Non-TTS) 🛸10

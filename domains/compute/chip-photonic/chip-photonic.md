@@ -1,7 +1,5 @@
 ---
 domain: chip-photonic
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 칩 6단계 아키텍처 4단 — HEXA-PHOTONIC 실리콘 광 컴퓨트

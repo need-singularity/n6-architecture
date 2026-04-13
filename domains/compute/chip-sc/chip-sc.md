@@ -1,7 +1,5 @@
 ---
 domain: chip-sc
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 칩 6단계 아키텍처 6단 — HEXA-SC 초전도 조셉슨 천장

@@ -1,7 +1,5 @@
 ---
 domain: experiments
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 통합 실험 — n=6 창발·재현 파이프라인 설계 목표

@@ -1,7 +1,5 @@
 ---
 domain: 3d
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-3D: 3D Compute-on-Memory with Through-Silicon Vias from n=6 Number Theory

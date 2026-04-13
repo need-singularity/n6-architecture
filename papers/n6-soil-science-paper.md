@@ -1,7 +1,5 @@
 ---
 domain: soil-science
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 토양학의 층위 구조 -- n=6 토양 층서에서 sigma=12 토성 분류까지

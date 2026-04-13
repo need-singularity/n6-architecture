@@ -1,7 +1,5 @@
 ---
 domain: aramid
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 아라미드 (Heracron) -- 궁극의 n=6 고강력 섬유

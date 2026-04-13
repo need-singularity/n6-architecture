@@ -1,7 +1,5 @@
 ---
 domain: naval-architecture
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 조선/선박공학 (Naval Architecture) — 완전수 6 산술 가설

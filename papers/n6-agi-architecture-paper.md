@@ -1,7 +1,5 @@
 ---
 domain: agi-architecture
-alien_index_current: 0
-alien_index_target: 10
 requires:
   - to: ai-techniques-68-integrated
     alien_min: 8

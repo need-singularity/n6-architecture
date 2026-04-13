@@ -1,7 +1,5 @@
 ---
 domain: pure-mathematics
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 순수수학 — n=6 산술 유일성과 SLE₆

@@ -1,7 +1,5 @@
 ---
 domain: skin
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 전자 피부 — HEXA-SKIN (전신 햅틱+다감각 센싱 어레이)

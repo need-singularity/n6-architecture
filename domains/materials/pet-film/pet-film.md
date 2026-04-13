@@ -1,7 +1,5 @@
 ---
 domain: pet-film
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 <!-- @allow-empty-section @allow-ascii-freeform @allow-no-requires @allow-no-requires-sync @allow-dag-sync @allow-mk-freeform -->

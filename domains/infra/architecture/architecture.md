@@ -1,7 +1,5 @@
 ---
 domain: architecture
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 건축학/구조공학 — 완전수 6 산술로부터 도출된 건축 가설

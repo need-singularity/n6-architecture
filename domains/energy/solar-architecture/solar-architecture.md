@@ -1,7 +1,5 @@
 ---
 domain: solar-architecture
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 태양전지 --- HEXA-SOLAR 완전 아키텍처

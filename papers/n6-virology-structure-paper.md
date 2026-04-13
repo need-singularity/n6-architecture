@@ -1,7 +1,5 @@
 ---
 domain: virology-structure
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 바이러스 구조-분류 아키텍처 -- 정20면체 대칭에서 캡시드 삼각화수까지

@@ -1,7 +1,5 @@
 ---
 domain: asic
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-ASIC: 완전수 n=6 산술에서 도출된 RISC-V ASIC 마이크로아키텍처

@@ -1,7 +1,5 @@
 ---
 domain: nexus-breakthrough-gate
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-GATE — NEXUS-6 특이점 돌파 오염방지 게이트

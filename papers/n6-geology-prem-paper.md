@@ -1,7 +1,5 @@
 ---
 domain: geology-prem
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 지구 내부 구조: PREM 6층 분할의 산술적 기원

@@ -1,7 +1,5 @@
 ---
 domain: baduk
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 바둑 — 완전수 산술로 본 판·돌·규칙 체계

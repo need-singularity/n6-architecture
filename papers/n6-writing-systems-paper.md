@@ -1,7 +1,5 @@
 ---
 domain: writing-systems
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 문자체계 구조 -- 한글 J₂=24자에서 점자 2^n=64까지

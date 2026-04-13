@@ -1,7 +1,5 @@
 ---
 domain: battery-energy
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 배터리/에너지저장 아키텍처 -- HEXA-CELL

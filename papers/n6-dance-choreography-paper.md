@@ -1,7 +1,5 @@
 ---
 domain: dance-choreography
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 무용/안무의 공간 기하학 -- 라반 J₂=24에서 SE(3)=n=6 자유도까지

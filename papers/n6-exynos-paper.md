@@ -1,7 +1,5 @@
 ---
 domain: exynos
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-EXYNOS: 완전수 n=6 산술 기반 모바일 SoC 아키텍처

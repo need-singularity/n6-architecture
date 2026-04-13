@@ -1,7 +1,5 @@
 ---
 domain: skyway
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-SKYWAY — 궁극의 공중 고속도로 네트워크 (3D 도시 교통망)

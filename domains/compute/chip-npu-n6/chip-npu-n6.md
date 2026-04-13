@@ -1,7 +1,5 @@
 ---
 domain: chip-npu-n6
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # chip-npu-n6 — n=6 정합 NPU 사양 초안

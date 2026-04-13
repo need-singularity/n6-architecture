@@ -1,7 +1,5 @@
 ---
 domain: library-science
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 도서관/정보학 n=6 완전 아키텍처 — 분류·서지·메타데이터 파라미터 보편성

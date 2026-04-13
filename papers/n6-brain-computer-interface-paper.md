@@ -1,7 +1,5 @@
 ---
 domain: brain-computer-interface
-alien_index_current: 0
-alien_index_target: 10
 requires:
   - to: consciousness-chip
     alien_min: 8

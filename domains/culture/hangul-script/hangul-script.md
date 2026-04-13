@@ -1,7 +1,5 @@
 ---
 domain: hangul-script
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 한글/문자체계 — n=6 인코딩 아키텍처

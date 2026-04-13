@@ -1,7 +1,5 @@
 ---
 domain: battery-architecture
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-BATTERY — 궁극의 배터리 8단 완전 아키텍처

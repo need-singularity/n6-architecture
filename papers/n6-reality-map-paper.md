@@ -1,7 +1,5 @@
 ---
 domain: reality-map
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 현실 지도 — atlas.n6 2600+ 노드의 n=6 수렴 통계 분석

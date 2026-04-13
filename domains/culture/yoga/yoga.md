@@ -1,7 +1,5 @@
 ---
 domain: yoga
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 요가(Yoga) goal — n=6 신체정렬 산술

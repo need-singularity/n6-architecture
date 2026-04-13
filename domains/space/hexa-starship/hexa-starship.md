@@ -1,7 +1,5 @@
 ---
 domain: starship
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-STARSHIP Mk.10 — 궁극의 재사용 발사체 특이점 설계

@@ -1,7 +1,5 @@
 ---
 domain: chip-3d
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 칩 6단계 아키텍처 3단 — HEXA-3D 수직 적층 컴퓨트온메모리

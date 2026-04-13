@@ -1,8 +1,6 @@
 ---
 <!-- @allow-empty-section @allow-ascii-freeform -->
 domain: working-memory
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 작업기억: Miller 7±2의 n=6±μ 정밀화

@@ -1,7 +1,5 @@
 ---
 domain: dram
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6-DRAM: 완전수 n=6 산술에서 도출된 DRAM 메모리 아키텍처

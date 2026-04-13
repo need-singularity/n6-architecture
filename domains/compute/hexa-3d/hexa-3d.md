@@ -1,7 +1,5 @@
 ---
 domain: 3d
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 3D 적층제조 아키텍처 — HEXA-3D

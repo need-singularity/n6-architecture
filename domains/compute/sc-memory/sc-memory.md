@@ -1,7 +1,5 @@
 ---
 domain: sc-memory
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-MRAM — 초전도 비휘발 메모리 (Ultimate SC Memory Architecture)

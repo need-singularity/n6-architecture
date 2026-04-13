@@ -1,7 +1,5 @@
 ---
 domain: cross-paradigm-ai
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 AI 8-패러다임 공진: BT-380 메타 정리

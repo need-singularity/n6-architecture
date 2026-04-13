@@ -1,7 +1,5 @@
 ---
 domain: datacenter-reactor
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 데이터센터+원자로 아키텍처 — HEXA-DC-SMR

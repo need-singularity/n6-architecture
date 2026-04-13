@@ -1,7 +1,5 @@
 ---
 domain: pharmacology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 약리학의 ADME 구조 -- τ=4 약동학 단계에서 6탄소 벤젠 고리까지

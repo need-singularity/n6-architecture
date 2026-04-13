@@ -1,7 +1,5 @@
 ---
 domain: wine-enology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 와인/소믈리에 — n=6 완전수 아키텍처

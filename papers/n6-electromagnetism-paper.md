@@ -1,7 +1,5 @@
 ---
 domain: electromagnetism
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 전자기학 통합 — n=6 산술이 관통하는 맥스웰 방정식에서 스펙트럼까지

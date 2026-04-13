@@ -1,7 +1,5 @@
 ---
 domain: horology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 시계학(Horology) goal — n=6 시간 산술

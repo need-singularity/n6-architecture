@@ -1,7 +1,5 @@
 ---
 domain: calendar-time-geography
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 Calendar/Time/Geography (달력/시간/지리) -- Unified Goal

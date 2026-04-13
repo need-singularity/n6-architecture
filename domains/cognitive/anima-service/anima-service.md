@@ -1,7 +1,5 @@
 ---
 domain: anima-service
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-ANIMA 감성 서비스 -- 의식/감정 AI 엔진 단독 서비스

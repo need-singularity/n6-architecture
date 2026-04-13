@@ -1,7 +1,5 @@
 ---
 domain: biometrics
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 생체인식 — HEXA-Biometrics 다중모달

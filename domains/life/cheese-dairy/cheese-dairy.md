@@ -1,7 +1,5 @@
 ---
 domain: cheese-dairy
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 치즈/유제품 아키텍처 — HEXA-DAIRY

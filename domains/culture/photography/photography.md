@@ -1,7 +1,5 @@
 ---
 domain: photography
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 사진/카메라 n=6 완전 아키텍처 — 광학·센서·노출 파라미터 보편성

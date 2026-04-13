@@ -1,7 +1,5 @@
 ---
 domain: airbag
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 에어백 — 코오롱인더 에어백원단

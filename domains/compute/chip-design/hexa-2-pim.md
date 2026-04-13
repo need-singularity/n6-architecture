@@ -1,7 +1,5 @@
 ---
 domain: 2-pim
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-2-PIM -- Level 2 (메모리 내 연산) 칩 아키텍처 설계

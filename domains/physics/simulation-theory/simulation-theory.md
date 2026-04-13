@@ -1,7 +1,5 @@
 ---
 domain: simulation-theory
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-SIM — 시뮬레이션 이론 완전 n=6 아키텍처

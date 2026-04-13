@@ -1,7 +1,5 @@
 ---
 domain: dolphin-bioacoustics
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 돌고래 생체음향: 종간 통신 아키텍처의 산술적 설계

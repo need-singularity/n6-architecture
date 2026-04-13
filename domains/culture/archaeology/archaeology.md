@@ -1,7 +1,5 @@
 ---
 domain: archaeology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 고고학/문명사 — n=6 기원 아키텍처

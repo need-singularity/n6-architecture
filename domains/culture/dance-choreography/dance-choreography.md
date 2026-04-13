@@ -1,7 +1,5 @@
 ---
 domain: dance-choreography
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 무용/안무 — n=6 공간 기하학 아키텍처

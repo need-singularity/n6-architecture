@@ -1,7 +1,5 @@
 ---
 domain: weather-control
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-WEATHER: 궁극의 대기 전자기 제어 시스템

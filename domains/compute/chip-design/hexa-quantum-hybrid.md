@@ -1,7 +1,5 @@
 ---
 domain: quantum-hybrid
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-QUANTUM-HYBRID -- Level 7 (양자-고전 하이브리드 칩) 아키텍처 설계

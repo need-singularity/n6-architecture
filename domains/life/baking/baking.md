@@ -1,7 +1,5 @@
 ---
 domain: baking
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 제빵/제과학 (Baking Science) -- 완전수 산술로 본 빵·과자·발효 체계

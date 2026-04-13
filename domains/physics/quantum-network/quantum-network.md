@@ -1,7 +1,5 @@
 ---
 domain: quantum-network
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-TELEPORT — 상온 양자얽힘 통신망 (궁극의 양자 인터넷)

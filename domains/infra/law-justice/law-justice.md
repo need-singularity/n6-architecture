@@ -1,7 +1,5 @@
 ---
 domain: law-justice
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 법학/사법 — n=6 정의 아키텍처

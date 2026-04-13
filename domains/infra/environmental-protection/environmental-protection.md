@@ -1,7 +1,5 @@
 ---
 domain: environmental-protection
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 Environmental Protection Architecture --- 궁극의 환경보호 아키텍처 (통합 문서)

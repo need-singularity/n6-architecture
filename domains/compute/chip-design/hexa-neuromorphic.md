@@ -1,7 +1,5 @@
 ---
 domain: neuromorphic
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-NEUROMORPHIC -- Level 9 (뉴로모픽 칩) 아키텍처 설계

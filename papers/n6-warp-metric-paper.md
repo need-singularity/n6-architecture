@@ -1,7 +1,5 @@
 ---
 domain: warp-metric
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 워프 메트릭: Alcubierre·웜홀·Casimir의 산술적 파라미터화

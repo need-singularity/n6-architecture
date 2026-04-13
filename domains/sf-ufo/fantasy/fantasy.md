@@ -1,7 +1,5 @@
 ---
 domain: fantasy
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 판타지 도메인 — 신화/전승 n=6 교차 탐구

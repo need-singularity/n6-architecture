@@ -1,7 +1,5 @@
 ---
 domain: synbio
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-SYNBIO: 궁극의 합성생물학 — n=6 이중 완전수 생명공학

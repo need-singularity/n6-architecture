@@ -1,7 +1,5 @@
 ---
 domain: microplastics
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 미세플라스틱 검출/분해 -- Unified Goal

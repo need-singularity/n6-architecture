@@ -1,7 +1,5 @@
 ---
 domain: entomology
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 곤충학 (Entomology) -- 통합 목표 (n=6 Hexapoda 완전 아키텍처)

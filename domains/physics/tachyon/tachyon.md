@@ -1,7 +1,5 @@
 ---
 domain: tachyon
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 타키온 물리학 — 완전수 산술로 본 타키온·끈이론·D-브레인

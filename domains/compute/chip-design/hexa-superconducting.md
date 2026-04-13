@@ -1,7 +1,5 @@
 ---
 domain: superconducting
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-SUPERCONDUCTING -- Level 6 (초전도 SFQ 칩) 아키텍처 설계

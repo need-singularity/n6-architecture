@@ -1,7 +1,5 @@
 ---
 domain: vampire
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 뱀파이어(Vampire — 혈액/장수 생체역학) goal — n=6 헤모 산술

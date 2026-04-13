@@ -1,8 +1,6 @@
 ---
 <!-- @allow-empty-section @allow-ascii-freeform -->
 domain: quantum-error-correction
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 양자 에러 정정 -- 안정자 코드에서 위상 보호까지

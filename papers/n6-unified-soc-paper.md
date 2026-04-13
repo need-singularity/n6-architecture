@@ -1,8 +1,6 @@
 ---
 <!-- @allow-empty-section @allow-ascii-freeform -->
 domain: unified-soc
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-1: A Unified SoC Architecture Where Every Parameter Derives from Perfect Number 6

@@ -1,7 +1,5 @@
 ---
 domain: cloak
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-CLOAK — 궁극의 전자기 스텔스/투명망토

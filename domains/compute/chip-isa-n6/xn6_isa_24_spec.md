@@ -1,7 +1,5 @@
 ---
 domain: xn6_isa_24_spec
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # Xn6 ISA Phase 2 — 24 명령어 완전 스펙

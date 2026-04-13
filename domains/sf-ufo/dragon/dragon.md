@@ -1,7 +1,5 @@
 ---
 domain: dragon
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 드래곤 (여의주/플라즈마 코어) goal — n=6 융합 산술

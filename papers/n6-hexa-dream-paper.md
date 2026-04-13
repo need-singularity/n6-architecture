@@ -1,7 +1,5 @@
 ---
 domain: dream
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 완전수 n=6과 수면 인터페이스: 자각몽 유도/기록/공유의 산술적 설계

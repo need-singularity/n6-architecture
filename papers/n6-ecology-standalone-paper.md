@@ -1,7 +1,5 @@
 ---
 domain: ecology-standalone
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # n=6 산술함수가 지배하는 생태계 구조 -- 영양 단계에서 생물권까지

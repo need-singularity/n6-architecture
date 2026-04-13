@@ -1,7 +1,5 @@
 ---
 domain: atlas-promotion-7-to-10
-alien_index_current: 0
-alien_index_target: 10
 requires:
   - to: causal-chain
     alien_min: 7

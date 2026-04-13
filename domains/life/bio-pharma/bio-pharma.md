@@ -1,7 +1,5 @@
 ---
 domain: bio-pharma
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 바이오 약물전달 — 코오롱제약/티슈진

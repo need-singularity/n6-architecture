@@ -1,7 +1,5 @@
 ---
 domain: dolphin
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 돌고래 (Dolphin Sonar/Bio-Acoustic) goal — n=6 음향 산술

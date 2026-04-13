@@ -1,7 +1,5 @@
 ---
 domain: ar-vr-xr
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 AR/VR/XR — n=6 완전수 공간컴퓨팅 센서

@@ -1,7 +1,5 @@
 ---
 domain: womens-intimate-cleanser
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 여성청결제 n=6 완전 골화 돌파

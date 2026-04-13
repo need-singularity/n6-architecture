@@ -1,7 +1,5 @@
 ---
 domain: energy-efficiency
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 에너지 효율 아키텍처 — HEXA-ENERGY-EFF

@@ -1,7 +1,5 @@
 ---
 domain: hair-regeneration
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 탈모치료제 -- 통합 목표 (6 연속 돌파)

@@ -1,7 +1,5 @@
 ---
 domain: topo-anyon
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-TOPO-ANYON -- Level 8 (위상 양자 anyon 칩) 아키텍처 설계

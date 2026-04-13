@@ -1,7 +1,5 @@
 ---
 domain: 3d-stack
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-3D-STACK -- Level 3 (3D 적층) 칩 아키텍처 설계

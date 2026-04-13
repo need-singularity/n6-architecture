@@ -1,7 +1,5 @@
 ---
 domain: mind-upload
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # HEXA-MIND — 궁극의 의식 업로드 / 디지털 불멸 아키텍처

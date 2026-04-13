@@ -1,7 +1,5 @@
 ---
 domain: herbalism
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # N6 약초/한의학 — 완전수 산술과 전통의학 구조

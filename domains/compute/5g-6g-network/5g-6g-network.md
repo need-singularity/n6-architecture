@@ -1,7 +1,5 @@
 ---
 domain: 5g-6g-network
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 이동통신 -- HEXA-NET (5G/6G)

@@ -1,7 +1,5 @@
 ---
 domain: smart-city
-alien_index_current: 0
-alien_index_target: 10
 requires: []
 ---
 # 궁극의 스마트 시티 아키텍처 — HEXA-CITY
