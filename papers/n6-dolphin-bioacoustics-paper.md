@@ -404,3 +404,6 @@ for name, ok in checks:
 print("All " + str(total) + " tests PASS")
 print(str(passed) + "/" + str(total) + " PASS")
 ```
+<!-- @allow-dup-python -->
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

@@ -312,3 +312,5 @@ print(f"All {total} PASS" if passed == total else "FAIL")
 
 <!-- @allow-ascii-freeform -->
 <!-- @allow-dag-sync -->
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

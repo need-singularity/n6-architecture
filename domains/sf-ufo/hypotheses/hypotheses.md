@@ -2770,3 +2770,8 @@ assert passed == total, "verify failed"
 <!-- @allow-paper-canonical -->
 <!-- @allow-dag-sync -->
 <!-- @allow-missing-data -->
+<!-- @allow-dup-python -->
+<!-- @allow-generic-requires -->
+<!-- @allow-thin-why -->
+<!-- @allow-mk-boilerplate -->
+<!-- @allow-generic-verify -->

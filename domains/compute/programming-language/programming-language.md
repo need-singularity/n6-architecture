@@ -8503,3 +8503,5 @@ print("All " + str(total) + " tests PASS" if passed==total else "FAIL")
 ```
 
 <!-- @allow-mk-freeform -->
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

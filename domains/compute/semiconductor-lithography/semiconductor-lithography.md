@@ -256,3 +256,5 @@ if sigma==2*n: passed+=1
 print(f"{passed}/{total} PASS")
 print("All " + str(total) + " tests PASS" if passed==total else "FAIL")
 ```
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

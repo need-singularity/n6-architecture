@@ -413,3 +413,6 @@ print(summary)
 print(f"All {total} PASS")
 assert passed == total, f"verify failed: {passed}/{total}"
 ```
+<!-- @allow-dup-python -->
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

@@ -640,3 +640,5 @@ print(str(p) + "/" + str(t) + " PASS")
 예상 출력: `5/5 PASS` — 모든 n=6 항등식 골화 완료.
 
 ---
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

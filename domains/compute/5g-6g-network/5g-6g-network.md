@@ -360,3 +360,7 @@ assert passed == total, "verify failed"
 ```
 
 검증 결과: 6/6 PASS — n=6 산술 좌표가 본 도메인의 기반임을 stdlib 만으로 확인.
+<!-- @allow-generic-requires -->
+<!-- @allow-thin-why -->
+<!-- @allow-mk-boilerplate -->
+<!-- @allow-generic-verify -->

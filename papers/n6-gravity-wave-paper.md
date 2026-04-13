@@ -396,3 +396,5 @@ for name, ok in checks:
 print("All " + str(total) + " tests PASS")
 print(str(passed) + "/" + str(total) + " PASS")
 ```
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

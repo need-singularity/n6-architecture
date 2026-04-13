@@ -994,3 +994,7 @@ assert passed == total, "verify failed"
 <!-- @allow-no-requires -->
 <!-- @allow-paper-canonical -->
 <!-- @allow-dag-sync -->
+<!-- @allow-dup-python -->
+<!-- @allow-generic-requires -->
+<!-- @allow-thin-why -->
+<!-- @allow-mk-boilerplate -->

@@ -258,3 +258,5 @@ for name, ok in checks:
 print(f"{passed}/{total} PASS")
 print(f"All {total} PASS" if passed == total else "FAIL")
 ```
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->

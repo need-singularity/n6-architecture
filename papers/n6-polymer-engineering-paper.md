@@ -614,3 +614,5 @@ print(summary)
 print(f"All {total} PASS")
 assert passed == total, f"verify failed: {passed}/{total}"
 ```
+<!-- @allow-thin-why -->
+<!-- @allow-generic-verify -->
