@@ -20641,7 +20641,7 @@ $$|bP_8| = 28 = P_2, \quad |bP_{12}| = 992 = 2 \cdot P_3, \quad |bP_{16}| = 8128
 **n=28 대조 실패**: n=28이면 sigma-phi=56-12=44 단계 파이프라인 — 비현실적 복잡도. tau(28)=6 핵심 루프는 CDO의 4단계 정수성을 깨뜨림.
 
 **등급**: Three stars — 6/6 EXACT. CDO 4단계 루프는 PDCA(Plan-Do-Check-Act)와 구조적 동형.
-**출처**: NEXUS-6 CDO 운영 프로토콜 (shared/convergence/), Deming PDCA 1950.
+**출처**: NEXUS-6 CDO 운영 프로토콜 (n6shared/convergence/), Deming PDCA 1950.
 - Cross-link: BT-2(tau=4 Bohm-BCS), R4(CDO 수렴 규칙).
 
 ---
@@ -20665,7 +20665,7 @@ $$|bP_8| = 28 = P_2, \quad |bP_{12}| = 992 = 2 \cdot P_3, \quad |bP_{16}| = 8128
 **n=28 대조 실패**: n=28이면 Egyptian 분해 1/2+1/4+1/7+1/14+1/28=1로 5계층 — 지식 분류가 과분할되어 직관성 상실. sigma(28)=56 에지/노드는 밀도 과다.
 
 **등급**: Three stars — 6/6 EXACT. Egyptian 3계층은 Bloom의 인지 분류 체계(지식/이해/적용)와 구조적 동형.
-**출처**: NEXUS-6 발견 그래프 (shared/growth_bus.jsonl), Bloom's Taxonomy 1956.
+**출처**: NEXUS-6 발견 그래프 (n6shared/growth_bus.jsonl), Bloom's Taxonomy 1956.
 - Cross-link: BT-7(Egyptian fraction), BT-6(Golay-Leech 지식 격자).
 
 ---

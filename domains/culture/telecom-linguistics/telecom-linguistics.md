@@ -1,6 +1,6 @@
 # 궁극의 통신/언어학 아키텍처 -- HEXA-TELECOM-LING
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 8 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 8/10 -- 모음 n=6 + OSI 7계층 + 5G + 자음 클래스 tau=4

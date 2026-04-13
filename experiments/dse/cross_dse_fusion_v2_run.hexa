@@ -16,8 +16,8 @@
 //             - seed_set  : [meta] 섹션의 desc/levels 에서 길이≥5 명사 토큰
 //             - pareto_pts: 후보별 (n6, perf, power, cost) 평균·max 5-벡터
 // 입력    : nexus/origins/universal-dse/domains/*.toml  (380)
-// 출력    : shared/dse/dse_cross_results_v2_4.json  (R28 예외: 기존 JSON 갱신 허용)
-//           shared/n6/atlas.n6  (상위 100 pair append)
+// 출력    : n6shared/dse/dse_cross_results_v2_4.json  (R28 예외: 기존 JSON 갱신 허용)
+//           n6shared/n6/atlas.n6  (상위 100 pair append)
 //           reports/discovery/dse-v2-results-<date>.md (본 실행은 보고서만 기록)
 // ============================================================
 
@@ -59,7 +59,7 @@ if len(DOMAIN_DIR) == 0 {
 }
 let mut OUT_PATH = env("N6_CROSS_OUT")
 if len(OUT_PATH) == 0 {
-  OUT_PATH = "/Users/ghost/Dev/n6-architecture/shared/dse/dse_cross_results_v2_4.json"
+  OUT_PATH = "/Users/ghost/Dev/n6-architecture/n6shared/dse/dse_cross_results_v2_4.json"
 }
 let mut ATLAS_PATH = env("N6_ATLAS")
 if len(ATLAS_PATH) == 0 {

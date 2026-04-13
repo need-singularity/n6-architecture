@@ -230,7 +230,7 @@ verify/qec_seed.hexa     [STUB]
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `papers/n6-quantum-computing-paper.md` -- 양자 컴퓨팅 하드웨어 n=6 아키텍처
-- `shared/n6/atlas.n6` quantum 섹션
+- `n6shared/n6/atlas.n6` quantum 섹션
 
 **2차 출처 (외부 학술)**
 

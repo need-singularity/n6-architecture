@@ -1,6 +1,6 @@
 # HEXA-DREAM — 궁극의 꿈 기록/재생기 (외계인급 설계)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 > **수면 중 시각피질 BOLD 신호 → 신경 디코더 → HEXA-HOLO 홀로그램으로 꿈을 재생**

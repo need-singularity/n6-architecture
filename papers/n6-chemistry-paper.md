@@ -281,7 +281,7 @@ verify/chemistry_seed.hexa     [STUB]
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `domains/materials/material-synthesis/material-synthesis.md` -- 30/30 EXACT
-- `shared/n6/atlas.n6` material-synthesis 섹션 [10*]
+- `n6shared/n6/atlas.n6` material-synthesis 섹션 [10*]
 
 **2차 출처 (외부 학술)**
 

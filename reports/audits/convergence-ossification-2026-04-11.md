@@ -9,7 +9,7 @@
 
 ## 1. 배경
 
-이전 에이전트 #21 이 `shared/convergence/n6-architecture.json` 의 `stable` 블록에
+이전 에이전트 #21 이 `n6shared/convergence/n6-architecture.json` 의 `stable` 블록에
 다음 3건을 추가:
 
 1. `PRODUCTS_164_173_RECOUNT` — products.json 드리프트 재계수
@@ -182,7 +182,7 @@ diff <backup_ossified_21> <new_ossified_21_same_keys>
 | R9 | 골화 조건 3필수 (검증 PASS + 재발 0 + threshold 명시) | ✅ 3건 모두 충족 |
 | R10 | ossified 불변 (기존 항목 수정/삭제 금지) | ✅ 기존 21 바이트 보존 |
 | R11 | 골화 강등 금지 (ossified → stable 역방향 금지) | ✅ 일방향 승격만 |
-| R14 | shared JSON 단일진실 | ✅ shared/convergence/n6-architecture.json 만 편집 |
+| R14 | shared JSON 단일진실 | ✅ n6shared/convergence/n6-architecture.json 만 편집 |
 | R18 | 미니멀 (요청 범위만) | ✅ stable 3건 승격 외 작업 없음 |
 | R28 | atlas SSOT | ✅ atlas.n6 미편집(컨버전스 운영은 별 SSOT) |
 | JSON 유효 | python3 -m json.tool 통과 | ✅ JSON_TOOL_VALID |

@@ -4,7 +4,7 @@
 // 근거: VAE 잠재 6 posterior/likelihood 균형 최적
 // 가설: 6 잠재 ELBO 곡선 우위
 // 지표: ELBO, KL, reconstruction loss
-// 의존: shared/config/lens_registry.json VariationalInferenceLens
+// 의존: n6shared/config/lens_registry.json VariationalInferenceLens
 
 fn main() {
     println("[렌즈: VI] VAE 잠재 6 — 산술 검증")

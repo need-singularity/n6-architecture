@@ -1,6 +1,6 @@
 # N6 탄소 포집 아키텍처 --- 궁극의 목표 (HEXA-CCUS)
 
-> **등급 참조**: alien_index(🛸) = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **등급 참조**: alien_index(🛸) = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 성숙도 / closure_grade 9 (bt_exact_pct 기반 추정).
 
 **Carbon Z=6 기반, 원자 스케일부터 항성 스케일까지 관통하는 CO2 포집-저장-변환 아키텍처**

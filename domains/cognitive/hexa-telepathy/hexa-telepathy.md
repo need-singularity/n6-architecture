@@ -1,6 +1,6 @@
 # 궁극의 텔레파시 아키텍처 — HEXA-TELEPATHY
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 7 / closure_grade 7 (bt_exact_pct 기반 추정).
 
 **Rating**: 7/10 -- BCI/뇌파 통신 물리-신경 경계

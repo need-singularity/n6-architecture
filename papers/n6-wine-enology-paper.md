@@ -253,7 +253,7 @@ verify/wine_enology_seed.hexa     [STUB]
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `domains/life/wine-enology/wine-enology.md` -- 10/10 EXACT (core), 20/21 확장
-- `shared/n6/atlas.n6` wine-enology 섹션 [10*]
+- `n6shared/n6/atlas.n6` wine-enology 섹션 [10*]
 
 **2차 출처 (외부 학술)**
 

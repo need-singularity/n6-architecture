@@ -190,7 +190,7 @@ sigma(n)*phi(n) = n*tau(n) = 24라는 한 줄의 등식이 초전도의 미시(C
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `domains/energy/superconductor/superconductor.md` -- 8단 체인 153/153 EXACT
-- `shared/n6/atlas.n6` superconductor 섹션 [10*]
+- `n6shared/n6/atlas.n6` superconductor 섹션 [10*]
 
 **2차 출처 (외부 학술)**
 

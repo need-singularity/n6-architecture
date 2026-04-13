@@ -1,7 +1,7 @@
 # R29 이관 감사 리포트 — synbio/verify_alien10.hexa
 
 - 일자: 2026-04-11
-- 규칙: R29 (shared/rules/common.json)
+- 규칙: R29 (n6shared/rules/common.json)
 - 작업: domains/life/synbio/verify_alien10.hexa → nexus/shared/n6/scripts/verify_synbio_alien10.hexa
 - 담당: 세션 에이전트 (R29 별건 이관)
 - 연계 리포트: 병합 감사 리포트 (R29 위반 별건)
@@ -135,7 +135,7 @@ find domains -name "verify_*.hexa" -not -name "verify.hexa" 2>/dev/null | sort
 
 - [x] R1 HEXA-FIRST: 이관 파일은 .hexa 형식 유지
 - [x] R5 SSOT: 단일 위치 이관 완료
-- [x] R14: 규칙 본문은 shared/rules/common.json 이 단일 진실
+- [x] R14: 규칙 본문은 n6shared/rules/common.json 이 단일 진실
 - [x] R18 미니멀: 요청 범위 (synbio 1 건 이관) 외 다른 도메인은 목록만
 - [x] R28: 본 이관 결과는 후속 atlas.n6 흡수 대상
 - [x] R29: synbio 건 이관 완료, nexus/shared/n6/scripts/ 에만 위치

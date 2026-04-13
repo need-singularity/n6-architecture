@@ -1,6 +1,6 @@
 # HEXA-BATTERY — 궁극의 배터리 8단 완전 아키텍처
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 🛸10 (Physical Limits Reached) | **BTs**: BT-27,43,57,80~84 | **DSE**: 3,750 -> 1,908 compatible

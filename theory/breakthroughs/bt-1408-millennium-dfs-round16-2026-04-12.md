@@ -696,7 +696,7 @@ DFS 16차도 15차의 정직성 원칙 준수:
 - 프로젝트: n6-architecture
 - 선행 BT: BT-1394~1407
 - 참고 atlas: /Users/ghost/Dev/nexus/shared/n6/atlas.n6
-- SSOT 규칙: shared/rules/common.json (R0~R27), shared/rules/n6-architecture.json (N61~N65)
+- SSOT 규칙: n6shared/rules/common.json (R0~R27), n6shared/rules/n6-architecture.json (N61~N65)
 - 한글 필수 (R): .md/주석/커밋 메시지 모두 한글
 
 ---

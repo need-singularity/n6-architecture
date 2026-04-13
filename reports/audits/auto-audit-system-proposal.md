@@ -34,15 +34,15 @@
 | # | 데이터 소스 | 경로 | 집계 방식 |
 |---|------------|------|----------|
 | 1 | **git log** | 로컬 `.git` | `git log --since='7 days ago'` — 커밋/저자/파일/9축 분포 |
-| 2 | **growth_bus.jsonl** | `shared/growth_bus.jsonl` | awk 로 `ts` 필드 cutoff 이후 라인 수 + 타입/도메인 TOP |
-| 3 | **discovery_graph.json** | `shared/discovery_graph.json` | `"id":` / `"from":` 출현 빈도로 노드/엣지 근사 → 스냅샷 대비 델타 |
+| 2 | **growth_bus.jsonl** | `n6shared/growth_bus.jsonl` | awk 로 `ts` 필드 cutoff 이후 라인 수 + 타입/도메인 TOP |
+| 3 | **discovery_graph.json** | `n6shared/discovery_graph.json` | `"id":` / `"from":` 출현 빈도로 노드/엣지 근사 → 스냅샷 대비 델타 |
 | 4 | **atlas.n6** | `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` | grep `[10*]`, `[10]`, `[9]`, `[7]`, `[N?]`, `[N!]` 등급 집계 |
 | 5 | **cargo test** | `nexus/` 워크스페이스 | `timeout 180 cargo test --quiet --offline` 후 `test result: ok. X passed` 파싱 |
-| 6 | **convergence** | `shared/convergence/n6-architecture.json` | awk 로 `ossified`/`stable`/`failed` 블록 키 수 집계 |
+| 6 | **convergence** | `n6shared/convergence/n6-architecture.json` | awk 로 `ossified`/`stable`/`failed` 블록 키 수 집계 |
 
 ### 2.1 스냅샷 기반 델타
 
-- `shared/logs/weekly_audit_state.json` — 이전 실행 시 저장한 지표
+- `n6shared/logs/weekly_audit_state.json` — 이전 실행 시 저장한 지표
 - 필드: `dg_nodes`, `dg_edges`, `atlas_exact`, `atlas_empirical`, `gb_total`, `updated`
 - 매 실행마다 갱신 → 다음 주 실행 시 델타 계산 기준
 
@@ -77,7 +77,7 @@
 
 ### 3.3 스냅샷 JSON
 
-**경로**: `shared/logs/weekly_audit_state.json`
+**경로**: `n6shared/logs/weekly_audit_state.json`
 
 ```json
 {
@@ -152,7 +152,7 @@ hexa nexus/scripts/weekly_audit.hexa --no-cargo        # cargo test 스킵
 
 ```sh
 # ~/.crontab 또는 crontab -e
-0 9 * * 1 cd /Users/ghost/Dev/n6-architecture && /Users/ghost/Dev/hexa-lang/hexa nexus/scripts/weekly_audit.hexa >> shared/logs/weekly_audit_cron.log 2>&1
+0 9 * * 1 cd /Users/ghost/Dev/n6-architecture && /Users/ghost/Dev/hexa-lang/hexa nexus/scripts/weekly_audit.hexa >> n6shared/logs/weekly_audit_cron.log 2>&1
 ```
 
 ### 6.3 macOS launchd (권장 — cron 대체)
@@ -182,9 +182,9 @@ hexa nexus/scripts/weekly_audit.hexa --no-cargo        # cargo test 스킵
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/ghost/Dev/n6-architecture/shared/logs/weekly_audit_launchd.log</string>
+    <string>/Users/ghost/Dev/n6-architecture/n6shared/logs/weekly_audit_launchd.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/ghost/Dev/n6-architecture/shared/logs/weekly_audit_launchd.err</string>
+    <string>/Users/ghost/Dev/n6-architecture/n6shared/logs/weekly_audit_launchd.err</string>
 </dict>
 </plist>
 ```
@@ -220,8 +220,8 @@ launchctl list | grep weekly-audit
 
 **주의**: `.claude/settings.json` 은 L0 보호 대상일 수 있음 — 직접 편집 전 `core-lockdown.json` 확인 및 사용자 승인 필요 (R25 준수).
 
-**대안**: 프로젝트 로컬 `shared/config/` 수준 등록 (L2 자유 수정)
-- `shared/config/weekly_audit_schedule.json` 생성
+**대안**: 프로젝트 로컬 `n6shared/config/` 수준 등록 (L2 자유 수정)
+- `n6shared/config/weekly_audit_schedule.json` 생성
 - `nexus` 데몬이 주기적으로 해당 config 읽어 실행 (nexus_growth_daemon.hexa 확장)
 
 ---
@@ -233,14 +233,14 @@ launchctl list | grep weekly-audit
 | R1 HEXA-FIRST | ✅ | `.hexa` 만 신규 생성 |
 | R2 하드코딩 금지 | ✅ | 경로는 상대, 상수는 변수 |
 | R5 SSOT | ✅ | `shared/` 원본 참조, 중복 생성 없음 |
-| R6 자동 기록 | ✅ | `shared/logs/weekly_audit_state.json` 에 집계 결과 영구 보존 |
-| R8 데이터 로컬 금지 | ✅ | `shared/logs/` 는 허용 범위 (nexus 내부 통합) |
+| R6 자동 기록 | ✅ | `n6shared/logs/weekly_audit_state.json` 에 집계 결과 영구 보존 |
+| R8 데이터 로컬 금지 | ✅ | `n6shared/logs/` 는 허용 범위 (nexus 내부 통합) |
 | R14 공통 JSON | ✅ | 규칙은 기존 `absolute_rules.json` 참조만 |
 | R18 미니멀 | ✅ | 감사 집계에만 집중, 기능 추가 없음 |
 | R19 SILENT EXIT 금지 | ✅ | 모든 에러는 `log()` 로 stderr 출력 |
 | R21 블로킹 금지 | ✅ | `cargo test` 타임아웃 180s |
 | R22 인터프리터 경로 | ✅ | `bash` 만, python/node 호출 없음 |
-| R24 shared/hooks 신규 .sh/.py 금지 | ✅ | 이 스크립트는 `nexus/scripts/` 에 생성 |
+| R24 n6shared/hooks 신규 .sh/.py 금지 | ✅ | 이 스크립트는 `nexus/scripts/` 에 생성 |
 | 한글 필수 | ✅ | 모든 출력/주석 한글 |
 
 ---
@@ -264,7 +264,7 @@ launchctl list | grep weekly-audit
 - [ ] 월간 감사 (`monthly_audit.hexa`) 추가
 
 ### Phase 4 (장기)
-- [ ] 감사 결과를 `shared/convergence/n6-architecture.json` 자동 업데이트 (stable→ossified 전이 감지)
+- [ ] 감사 결과를 `n6shared/convergence/n6-architecture.json` 자동 업데이트 (stable→ossified 전이 감지)
 - [ ] 다른 프로젝트 (TECS-L, anima, sedi, papers) 크로스 감사 (nexus 허브 경유)
 
 ---
@@ -277,7 +277,7 @@ launchctl list | grep weekly-audit
 | `cargo test` 180s 초과 | 감사 멈춤 | `--no-cargo` 옵션 + 타임아웃 래핑 |
 | `discovery_graph.json` 구조 변경 | 노드 카운트 부정확 | Phase 3에서 정규 JSON 파서로 교체 |
 | 첫 실행 델타 = 현재 절대값 | 초기값 노이즈 | 문서에 명시 + 2회차 이후 정상 |
-| `shared/logs/weekly_audit_state.json` 손상 | 델타 0 | `--force` 재실행 + 수동 복구 문서화 |
+| `n6shared/logs/weekly_audit_state.json` 손상 | 델타 0 | `--force` 재실행 + 수동 복구 문서화 |
 
 ---
 

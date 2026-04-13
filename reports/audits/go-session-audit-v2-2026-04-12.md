@@ -333,7 +333,7 @@ AI 기법 완성도     [=                 ] 4.3%    [===================] 95.8%
 - 브랜치: `feat/millennium-dfs-92-tight`
 - 선행 감사: `reports/audits/go-audit-2026-04-12.md` (v1)
 - 레지스트리: `techniques/_registry.json` v1.3.0
-- 수렴 소스: `shared/convergence/n6-architecture.json`
+- 수렴 소스: `n6shared/convergence/n6-architecture.json`
 - 칩 설계: `domains/compute/chip-design/` + `domains/compute/chip-*/` + `domains/compute/hexa-pim/`
 - 밀레니엄: `theory/breakthroughs/bt-139*` + `bt-1400*`
 - 코오롱: `calc/kolon_n6_verify.hexa` + `nexus/src/calc/kolon_*.hexa`

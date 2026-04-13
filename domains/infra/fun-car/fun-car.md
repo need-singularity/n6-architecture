@@ -1,6 +1,6 @@
 # 궁극의 펀카 — HEXA-FUNCAR (UFO-10 Certified, 133/133 EXACT)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 > **Porsche 911 GT3 RS급 순수 드라이빙 머신 — n=6 완전수 아키텍처**

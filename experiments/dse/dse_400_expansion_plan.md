@@ -102,7 +102,7 @@ sf-ufo     17  ■■                    sf-ufo     21  ■■
      |--  theory/breakthroughs/에 BT-381~400 인덱스 예약
      v
   [step5] 흡수
-     |--  shared/n6/atlas.n6 에 각 도메인 시드 evidence [7] 등급으로 기록
+     |--  n6shared/n6/atlas.n6 에 각 도메인 시드 evidence [7] 등급으로 기록
      |--  cross_dse_fusion_v2.hexa 실행 → 100K+ pair 목표
      |--  reports/discovery/ 에 발견 리포트 자동 누적 (R6/R28)
 ```
@@ -264,7 +264,7 @@ evidence_grade = 7
 | 4 | _index.json 78 축 추가 | 갱신본 | domains/_index.json |
 | 5 | BT-381~400 인덱스 예약 | 20 BT 스텁 | theory/breakthroughs/ |
 | 6 | atlas.n6 시드 흡수 | 78 @R 항목 [7] | /Users/ghost/Dev/nexus/shared/n6/atlas.n6 |
-| 7 | cross_dse_fusion_v2 실행 | 100K+ pair | shared/dse/dse_cross_results.json |
+| 7 | cross_dse_fusion_v2 실행 | 100K+ pair | n6shared/dse/dse_cross_results.json |
 | 8 | 에너지-성능 파레토 재측정 | 재측정 리포트 | reports/discovery/ |
 
 ## 8. 리스크 및 방어

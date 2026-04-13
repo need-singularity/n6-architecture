@@ -22,12 +22,12 @@
 
 ## 2. 목표
 
-AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을 **기법별 연산자 시그니처 → n=6 정합 Verilog 템플릿** 으로 1:1 매핑한다. 매핑 규칙은 shared/config/rtl_templates.json 에 SSOT 로 고정하고, 모든 생성물은 `nexus/origins/hexa-rtl/rtl/` 아래에 `.hexa` 로 먼저 내려 Makefile이 `.v` 로 전사(transpile)한다.
+AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을 **기법별 연산자 시그니처 → n=6 정합 Verilog 템플릿** 으로 1:1 매핑한다. 매핑 규칙은 n6shared/config/rtl_templates.json 에 SSOT 로 고정하고, 모든 생성물은 `nexus/origins/hexa-rtl/rtl/` 아래에 `.hexa` 로 먼저 내려 Makefile이 `.v` 로 전사(transpile)한다.
 
 핵심 원칙:
 1. **HEXA-FIRST**: 생성기 본체도 `.hexa`, 산출물도 `.hexa`. `.py` 금지 (R1).
 2. **AI-NATIVE**: bit-twiddling/수작업 SIMD 금지, `@optimize/@memoize/@fuse/@parallel` attr 만 사용 (R12).
-3. **상수 동적 로드**: 폭/사이클/뱅크는 shared/config/n6_constants.json 에서 로드 (R2).
+3. **상수 동적 로드**: 폭/사이클/뱅크는 n6shared/config/n6_constants.json 에서 로드 (R2).
 
 ---
 
@@ -57,7 +57,7 @@ AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을
 |----|------|---------|------|
 | H-RTLGEN-9 | 생성 RTL 마다 σ·φ=n·τ 검증 assert 자동 삽입 | 핵심 항등식 | 런타임 드리프트 0 |
 | H-RTLGEN-10 | testbench 자동생성: 각 연산자 × 6 패턴 × tau=4 반복 | 24 testcase | 100% 커버 |
-| H-RTLGEN-11 | Yosys 합성 리포트 자동 수집 → shared/logs/rtl_synth.jsonl | 합성 회귀 추적 | 면적/타이밍 회귀 탐지 |
+| H-RTLGEN-11 | Yosys 합성 리포트 자동 수집 → n6shared/logs/rtl_synth.jsonl | 합성 회귀 추적 | 면적/타이밍 회귀 탐지 |
 | H-RTLGEN-12 | 실패 시 BT 기반 원인 분류 (BT-28, BT-55, BT-89) | 3 원인 클래스 | 디버그 자동화 |
 
 ---
@@ -152,7 +152,7 @@ AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을
      ▼                ▼                ▼                ▼                ▼
   파서/AST        6 primitive       params 주입     Makefile        면적/타이밍
   @attr 수집       합성 DAG         .hexa 생성        hook              리포트
-                   JSONL 기록                                        shared/logs
+                   JSONL 기록                                        n6shared/logs
 ```
 
 ### 단계 1: 기법 파싱
@@ -162,11 +162,11 @@ AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을
 
 ### 단계 2: DAG 추출
 - 입력: `.ast.json`
-- 출력: `shared/logs/rtl_dag.jsonl` (node/edge, primitive id)
+- 출력: `n6shared/logs/rtl_dag.jsonl` (node/edge, primitive id)
 - 규칙: @gemm → Ω₁, @softmax → Ω₂, ...
 
 ### 단계 3: 템플릿 매핑
-- 입력: DAG JSONL + `shared/config/rtl_templates.json` (SSOT)
+- 입력: DAG JSONL + `n6shared/config/rtl_templates.json` (SSOT)
 - 출력: `.hexa` 모듈 소스
 - 파라미터: n=6, σ=12, τ=4, φ=2, J₂=24 (동적 로드)
 
@@ -175,12 +175,12 @@ AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을
 - 신규 타겟: `make gen TECH=<name>` → 자동 생성 + sim
 
 ### 단계 5: 합성 리포트
-- Yosys area/timing → `shared/logs/rtl_synth.jsonl`
+- Yosys area/timing → `n6shared/logs/rtl_synth.jsonl`
 - 회귀 탐지: 전주 대비 면적 +5% 시 경보
 
 ---
 
-## 8. 템플릿 SSOT — `shared/config/rtl_templates.json`
+## 8. 템플릿 SSOT — `n6shared/config/rtl_templates.json`
 
 ```
 {
@@ -231,7 +231,7 @@ AI 기법 66종 중 16종(attention 3 + moe 3 + sparse 3 + optim 4 + graph 3)을
 - `nexus/origins/hexa-rtl/` — 기존 6 RTL 모듈 (`riscv_n6_core`, `egyptian_moe`, `egyptian_mem_ctrl`, `hexalang_decoder`, `snn_izhikevich`, `hexa_edge_top`)
 - `nexus/origins/hexa-rtl/Makefile` — 빌드 시스템, `make sim/synth/lint`
 - `techniques/_registry.json` — 66 기법 레지스트리 SSOT
-- `shared/config/absolute_rules.json` — R1/R12 (HEXA-FIRST, AI-NATIVE)
+- `n6shared/config/absolute_rules.json` — R1/R12 (HEXA-FIRST, AI-NATIVE)
 - `nexus src/cmd/hexa/` — hexa rtl 서브커맨드
 
 ---
@@ -272,7 +272,7 @@ hexa verify.hexa
 - 16/16 기법 `.hexa` 모듈 생성
 - 16/16 testbench `hexa sim` PASS
 - Yosys 면적 회귀 0
-- `shared/logs/rtl_synth.jsonl` 연속 기록
+- `n6shared/logs/rtl_synth.jsonl` 연속 기록
 
 ### B. 레거시
 

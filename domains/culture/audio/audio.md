@@ -1,6 +1,6 @@
 # HEXA-AUDIO --- N6 Audio Ultimate Architecture (7-Level)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
 
 **n=6 산술 기반, 트랜스듀서 ~ 신경 오디오 코덱 ~ 뇌-청각 인터페이스까지 관통하는 7단 오디오 아키텍처**

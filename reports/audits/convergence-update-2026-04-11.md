@@ -2,7 +2,7 @@
 
 > 축: **reports/audits** · n6-architecture · R11 단방향 수렴 준수 감사
 > 규칙 기준: **R10**(ossified 불변) / **R11**(골화 강등 금지, 재검증은 새 stable 항목 추가) / **R25**(공용 설정 게이트) / **R14**(규칙=JSON SSOT)
-> 대상 파일: `/Users/ghost/Dev/n6-architecture/shared/convergence/n6-architecture.json`
+> 대상 파일: `/Users/ghost/Dev/n6-architecture/n6shared/convergence/n6-architecture.json`
 
 ---
 
@@ -19,8 +19,8 @@
 
 ### 1-1. R10/R11 규칙 해석
 
-- **R10** (`shared/rules/common.json` rules[11]): *골화 항목 불변 — ossified 블록 수정/삭제/롤백 금지. 변경 필요 시 새 항목 추가*
-- **R11** (`shared/rules/common.json` rules[12]): *골화 강등 금지 — ossified → stable/failed 역방향 전이 금지. 단방향 일방통행. 재검증은 새 stable 항목으로 추가*
+- **R10** (`n6shared/rules/common.json` rules[11]): *골화 항목 불변 — ossified 블록 수정/삭제/롤백 금지. 변경 필요 시 새 항목 추가*
+- **R11** (`n6shared/rules/common.json` rules[12]): *골화 강등 금지 — ossified → stable/failed 역방향 전이 금지. 단방향 일방통행. 재검증은 새 stable 항목으로 추가*
 
 → 드리프트를 `PRODUCTS_118`/`GOAL_MD_20` 본문 교체로 처리하면 R10/R11 동시 위반. 유일한 합법 경로는 **신규 stable 항목 3개를 추가**하고 ossified 원본은 **원형 그대로 보존**하는 것.
 
@@ -88,7 +88,7 @@
 
 | 규칙 | 내용 | 본 갱신의 준수 여부 |
 |---|---|---|
-| **R5** SSOT | `shared/convergence/n6-architecture.json` 단일 진실 | ✅ 단일 파일만 편집 |
+| **R5** SSOT | `n6shared/convergence/n6-architecture.json` 단일 진실 | ✅ 단일 파일만 편집 |
 | **R9** 골화 3필드 | status/value/threshold 필수 | ✅ ossified 원형, 신규 stable 3항목 모두 status/value/threshold 완비 |
 | **R10** ossified 불변 | 수정/삭제/이동 금지 | ✅ ossified 블록 바이트 레벨 불변 (키 순서·필드·값 전부 보존) |
 | **R11** 강등 금지 | ossified→stable/failed 역전이 금지 | ✅ ossified 항목을 stable 로 내리지 않음. 신규 stable 항목 3개를 **추가만** 함 |

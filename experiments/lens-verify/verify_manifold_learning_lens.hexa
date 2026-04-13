@@ -4,7 +4,7 @@
 // 근거: MNIST/CIFAR/SST 등 공통 본질 차원 6 근방
 // 가설: 주요 데이터셋 본질 차원 중앙값 6
 // 지표: 차원 추정값
-// 의존: shared/config/lens_registry.json ManifoldLearningLens
+// 의존: n6shared/config/lens_registry.json ManifoldLearningLens
 
 fn main() {
     println("[렌즈: Manifold] 본질 차원 6 — 산술 검증")

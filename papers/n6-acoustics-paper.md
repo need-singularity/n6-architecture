@@ -363,8 +363,8 @@ verify/acoustics_seed.hexa     [STUB]
 **1차 출처 (atlas / theory SSOT)**
 
 - `theory/proofs/theorem-r1-uniqueness.md` — sigma*phi=n*tau iff n=6 (3 독립 증명)
-- `shared/n6/atlas.n6` L6_music 171 nodes (MUS-semitones-octave, MUS-midi-notes, MUS-piano-keys, MUS-octave-ratio, MUS-fifth-ratio, MUS-tempo-allegro-bpm, MUS-time-signatures-common)
-- `shared/n6/atlas.n6` L6_atmospheric_physics L6-atmo-speed-of-sound
+- `n6shared/n6/atlas.n6` L6_music 171 nodes (MUS-semitones-octave, MUS-midi-notes, MUS-piano-keys, MUS-octave-ratio, MUS-fifth-ratio, MUS-tempo-allegro-bpm, MUS-time-signatures-common)
+- `n6shared/n6/atlas.n6` L6_atmospheric_physics L6-atmo-speed-of-sound
 - `domains/audio/` HEXA-Earphone 제품 도메인
 - `papers/n6-dolphin-bioacoustics-paper.md` 생체 음향 브리지 (예정)
 

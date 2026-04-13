@@ -264,7 +264,7 @@ print(f"  sopfr=5 EEG ↔ sopfr=5 학습 스케줄")
 
 ## DSE
 
-- `shared/dse/domains/neuroscience.toml` 참조
+- `n6shared/dse/domains/neuroscience.toml` 참조
 
 
 ## 3. 가설

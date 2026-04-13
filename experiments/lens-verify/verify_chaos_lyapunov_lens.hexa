@@ -4,7 +4,7 @@
 // 근거: 6D 흐름 Lyapunov spectrum 6 성분
 // 가설: 6D 카오스 스펙트럼 구조
 // 지표: 지수 분포
-// 의존: shared/config/lens_registry.json
+// 의존: n6shared/config/lens_registry.json
 
 fn main() {
     println("[렌즈: Chaos] 검증 스텁 — 6 Lyapunov")

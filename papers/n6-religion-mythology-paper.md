@@ -267,7 +267,7 @@ verify/religion_mythology_seed.hexa     [STUB]
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `domains/culture/religion-mythology/religion-mythology.md` -- DSE 518,400, 20/30 EXACT
-- `shared/n6/atlas.n6` religion-mythology 섹션 [9]
+- `n6shared/n6/atlas.n6` religion-mythology 섹션 [9]
 
 **2차 출처 (외부 학술)**
 

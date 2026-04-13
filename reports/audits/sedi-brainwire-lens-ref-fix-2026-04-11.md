@@ -40,13 +40,13 @@
 | S2 | 103 | `⚠️ telescope-rs (구 22종)는 폐기. 모든 탐색은 NEXUS-6 사용.` | `⚠️ n6-architecture/nexus/src/telescope/ Rust 레거시 폐기 완료 (2026-04-11, 1575 HEXA 포팅). 진짜 SSOT: /Users/ghost/Dev/nexus/shared/lenses/` |
 | S3 | 110 | `렌즈 구성 (181 .rs 파일, 1022종 레지스트리):` | `렌즈 구성 (/Users/ghost/Dev/nexus/shared/lenses/ 1575+ .hexa 네이티브):` |
 | S4 | 117 | `파일: tools/nexus/src/telescope/lenses/ (181 .rs 파일)` | `파일: /Users/ghost/Dev/nexus/shared/lenses/ (1575+ .hexa 네이티브)` |
-| S5 | 189 | `src/telescope/    ← 130+ 렌즈` | `shared/lenses/    ← 1575+ HEXA 렌즈 (진짜 SSOT)` + `shared/blowup/lens/ ← 카테고리 번들 15 .hexa` |
-| S6 | 434 | `"스캔", "scan" → nexus telescope 223종 렌즈 스캔` | `"스캔", "scan" → nexus shared/lenses/ 1575+ HEXA 렌즈 스캔` |
+| S5 | 189 | `src/telescope/    ← 130+ 렌즈` | `n6shared/lenses/    ← 1575+ HEXA 렌즈 (진짜 SSOT)` + `n6shared/blowup/lens/ ← 카테고리 번들 15 .hexa` |
+| S6 | 434 | `"스캔", "scan" → nexus telescope 223종 렌즈 스캔` | `"스캔", "scan" → nexus n6shared/lenses/ 1575+ HEXA 렌즈 스캔` |
 | S7 | 446 | `# 223종 렌즈 스캔` | `# 1575+ HEXA 렌즈 스캔 (진짜 SSOT)` |
 | S8 | 447 | `$HEXA $N6/telescope.hexa full <values...>` | `$HEXA $HOME/Dev/nexus/shared/blowup/lens/telescope.hexa full <values...>` |
-| S9 | 459 | `77소스 분석 결과를 nexus telescope로 재스캔` | `77소스 분석 결과를 nexus shared/lenses/ 1575+ HEXA 렌즈로 재스캔` |
+| S9 | 459 | `77소스 분석 결과를 nexus telescope로 재스캔` | `77소스 분석 결과를 nexus n6shared/lenses/ 1575+ HEXA 렌즈로 재스캔` |
 
-> 참고: `$N6/telescope.hexa` 는 `/Users/ghost/Dev/nexus/mk2_hexa/native/telescope.hexa` 에 실재하지 않음을 확인(`ls -la` 결과). 따라서 task 명령대로 `shared/blowup/lens/telescope.hexa` (실재 21,396 byte) 로 치환.
+> 참고: `$N6/telescope.hexa` 는 `/Users/ghost/Dev/nexus/mk2_hexa/native/telescope.hexa` 에 실재하지 않음을 확인(`ls -la` 결과). 따라서 task 명령대로 `n6shared/blowup/lens/telescope.hexa` (실재 21,396 byte) 로 치환.
 
 실제 수정 라인 수: **8 라인** (`S1/S2` 를 연속된 경고 헤더 2라인으로 1회 Edit 처리, `S6+S7` 를 bash 주석 + 명령 2라인으로 1회 Edit 처리 등 — 논리적 치환 건수 6, 실제 Edit 호출 6회, 텍스트 라인 9 변경).
 
@@ -58,7 +58,7 @@
 | B2 | 103 | `⚠️ telescope-rs (구 22종)는 폐기. 모든 탐색은 NEXUS-6 사용.` | `⚠️ n6-architecture/nexus/src/telescope/ Rust 레거시 폐기 완료 (2026-04-11, 1575 HEXA 포팅). 진짜 SSOT: /Users/ghost/Dev/nexus/shared/lenses/` |
 | B3 | 110 | `렌즈 구성 (181 .rs 파일, 1022종 레지스트리):` | `렌즈 구성 (/Users/ghost/Dev/nexus/shared/lenses/ 1575+ .hexa 네이티브):` |
 | B4 | 117 | `파일: tools/nexus/src/telescope/lenses/ (181 .rs 파일)` | `파일: /Users/ghost/Dev/nexus/shared/lenses/ (1575+ .hexa 네이티브)` |
-| B5 | 189 | `src/telescope/    ← 130+ 렌즈` | `shared/lenses/    ← 1575+ HEXA 렌즈 (진짜 SSOT)` + `shared/blowup/lens/ ← 카테고리 번들 15 .hexa` |
+| B5 | 189 | `src/telescope/    ← 130+ 렌즈` | `n6shared/lenses/    ← 1575+ HEXA 렌즈 (진짜 SSOT)` + `n6shared/blowup/lens/ ← 카테고리 번들 15 .hexa` |
 
 논리적 치환 건수 3 (`B1/B2` 연결, `B3/B4` 별도, `B5` 별도) — Edit 호출 4회. task 원문은 "3 건" 이었으나 100 블록 연속 경고 헤더 + 111 블록 구성 + 117 파일 경로 + 189 경로 트리 로 세부 치환하면 **5 라인 변경**.
 
@@ -81,16 +81,16 @@ domains/brainwire/CLAUDE.md  → No matches found
 
 ### 6-2. 넓은 패턴 `telescope / lenses / 130\+ / 181 / 223종`
 
-`telescope` / `lenses` 매칭은 새 SSOT 경로 자체가 `nexus/shared/lenses/` 와 `shared/blowup/lens/telescope.hexa` 로 참조되기 때문에 필연적으로 매칭됨. **모두 신 SSOT 경로로의 참조** 임을 라인 단위로 육안 확인:
+`telescope` / `lenses` 매칭은 새 SSOT 경로 자체가 `nexus/shared/lenses/` 와 `n6shared/blowup/lens/telescope.hexa` 로 참조되기 때문에 필연적으로 매칭됨. **모두 신 SSOT 경로로의 참조** 임을 라인 단위로 육안 확인:
 
 `domains/sedi/CLAUDE.md`:
-- 103: 폐기 경고 + 진짜 SSOT (shared/lenses/)
-- 110: 렌즈 구성 (shared/lenses/ 1575+ .hexa)
-- 117: 파일: shared/lenses/ (1575+ .hexa)
-- 189: shared/lenses/ 1575+ HEXA 렌즈 (진짜 SSOT)
-- 435: shared/lenses/ 1575+ HEXA 렌즈 스캔
+- 103: 폐기 경고 + 진짜 SSOT (n6shared/lenses/)
+- 110: 렌즈 구성 (n6shared/lenses/ 1575+ .hexa)
+- 117: 파일: n6shared/lenses/ (1575+ .hexa)
+- 189: n6shared/lenses/ 1575+ HEXA 렌즈 (진짜 SSOT)
+- 435: n6shared/lenses/ 1575+ HEXA 렌즈 스캔
 - 448: $HOME/Dev/nexus/shared/blowup/lens/telescope.hexa (실재 파일)
-- 460: shared/lenses/ 1575+ HEXA 렌즈로 재스캔
+- 460: n6shared/lenses/ 1575+ HEXA 렌즈로 재스캔
 
 `domains/brainwire/CLAUDE.md`:
 - 103, 110, 117, 189: sedi 와 동일 패턴
@@ -114,7 +114,7 @@ domains/brainwire/CLAUDE.md  → No matches found
 - **본문 다른 섹션 수정 금지** → CDO 블록, hexa-native 전용 규칙, 프로젝트 목표, 디렉토리 구조, TODO 양식, 외부 검증 스크립트, Paper Management, `.shared/` 인프라, BrainWire Identity/Products/Stack, Work Rules — 일체 불변.
 - `nexus/src/telescope/` Rust 레거시 파일 실제 삭제 → 별도 세션 (본 작업은 참조 갱신에 한정)
 - `lens_registry.json` 재구축 → `lens-ssot-cleanup-2026-04-11.md` 섹션 4 후속 작업으로 유지
-- `shared/rules/common.json` 신규 R항 추가 → R14 SSOT 준수 충분, 신규 규칙 불필요
+- `n6shared/rules/common.json` 신규 R항 추가 → R14 SSOT 준수 충분, 신규 규칙 불필요
 
 ## 9. 파일 경로 요약
 

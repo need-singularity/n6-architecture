@@ -4,7 +4,7 @@
 // 근거: Betti 수 차원 6 시그니처 안정성
 // 가설: 6D persistence diagram이 잡음 대비 안정
 // 지표: Betti 수, bottleneck 편차
-// 의존: shared/config/lens_registry.json TopologicalDataLens
+// 의존: n6shared/config/lens_registry.json TopologicalDataLens
 
 fn main() {
     println("[렌즈: TDA] 6D 지속 호몰로지 — 산술 검증")

@@ -270,7 +270,7 @@ verify/ecology_seed.hexa     [STUB]
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `domains/life/ecology/ecology.md` -- DSE 23,328 탐색, 36/42 EXACT
-- `shared/n6/atlas.n6` ecology 섹션 [10*]
+- `n6shared/n6/atlas.n6` ecology 섹션 [10*]
 
 **2차 출처 (외부 학술)**
 

@@ -4,7 +4,7 @@
 // 근거: 6 DMD 주요 고유값 안정 근사
 // 가설: 6 Koopman 모드 오류 최소
 // 지표: 재구성 오류
-// 의존: shared/config/lens_registry.json
+// 의존: n6shared/config/lens_registry.json
 
 fn main() {
     println("[렌즈: Koopman] 검증 스텁 — 6 모드")

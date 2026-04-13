@@ -1,6 +1,6 @@
 # 궁극의 소형 입자가속기 아키텍처 — HEXA-ACCEL
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 **Rating**: 10/10 -- 물리적 한계 도달 (RT-SC 탁상형 가속기)

@@ -26,7 +26,7 @@
 
 핵심 원칙:
 1. **SSOT** (R5): 5개 TOML은 수정하지 않고 파이프라인 스크립트만 추가.
-2. **동적 로드** (R2): 경로/임계/가중치는 `shared/config/dse_pipeline.json` 에서 로드.
+2. **동적 로드** (R2): 경로/임계/가중치는 `n6shared/config/dse_pipeline.json` 에서 로드.
 3. **HEXA-FIRST** (R1): 파이프라인 스크립트는 `.hexa`, 결과는 `.jsonl`.
 
 ---
@@ -156,7 +156,7 @@ Top-1 후보 (예측): Nb JJ + RSFQ + σ=12 pipeline + 4K cryostat
      └────────────────────┬───────────────────────────┘
                           ▼
      ┌────────────────────────────────────────────────┐
-     │  출력: shared/logs/dse_pipeline_results.jsonl  │
+     │  출력: n6shared/logs/dse_pipeline_results.jsonl  │
      └────────────────────────────────────────────────┘
 ```
 
@@ -172,7 +172,7 @@ Top-1 후보 (예측): Nb JJ + RSFQ + σ=12 pipeline + 4K cryostat
 
 ### Phase 3: 기법 매핑
 - 입력: Phase 2 고신뢰 pair
-- 규칙: `shared/config/dse_technique_map.json` (신규 SSOT)
+- 규칙: `n6shared/config/dse_technique_map.json` (신규 SSOT)
 - 출력: `dse_technique_bindings.jsonl` (technique, stage, candidate_id, operator)
 
 ---
@@ -194,7 +194,7 @@ Top-1 후보 (예측): Nb JJ + RSFQ + σ=12 pipeline + 4K cryostat
 - 예: DSE 결과 "sigma=12 pipeline" → `gemm_core12` 파라미터
 
 ### 확장 4: 골화 자동 승격
-- n6 score ≥ 0.95 & 재검증 3회 PASS → `shared/convergence/n6-architecture.json` ossified 자동 추가
+- n6 score ≥ 0.95 & 재검증 3회 PASS → `n6shared/convergence/n6-architecture.json` ossified 자동 추가
 - 조건: CDO 규칙 R9/R11 준수
 
 ### 확장 5: 시각화 — growth dashboard 연동
@@ -203,7 +203,7 @@ Top-1 후보 (예측): Nb JJ + RSFQ + σ=12 pipeline + 4K cryostat
 
 ---
 
-## 8. SSOT — `shared/config/dse_pipeline.json` (신규)
+## 8. SSOT — `n6shared/config/dse_pipeline.json` (신규)
 
 ```
 {
@@ -221,7 +221,7 @@ Top-1 후보 (예측): Nb JJ + RSFQ + σ=12 pipeline + 4K cryostat
     "top_k_per_stage": 2
   },
   "parallel": 5,
-  "output_log": "shared/logs/dse_pipeline_results.jsonl"
+  "output_log": "n6shared/logs/dse_pipeline_results.jsonl"
 }
 ```
 
@@ -253,8 +253,8 @@ Top-1 후보 (예측): Nb JJ + RSFQ + σ=12 pipeline + 4K cryostat
 - `nexus/origins/universal-dse/domains/chip-*.toml` — 5 TOML (dca8f87f)
 - `nexus/src/cmd/dse/universal.rs` — universal DSE 엔진
 - `cross_dse_fusion.hexa` — 기존 교차 융합 (CROSS_DSE 골화)
-- `shared/convergence/n6-architecture.json` — CROSS_DSE / DSE_322_TOML 골화 확인
-- `shared/config/dse-map.toml` — DSE 레지스트리
+- `n6shared/convergence/n6-architecture.json` — CROSS_DSE / DSE_322_TOML 골화 확인
+- `n6shared/config/dse-map.toml` — DSE 레지스트리
 
 ---
 

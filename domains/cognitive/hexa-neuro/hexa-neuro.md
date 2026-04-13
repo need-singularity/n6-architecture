@@ -1,6 +1,6 @@
 # 궁극의 뉴로모픽 칩 아키텍처 — HEXA-NEURO
 
-> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 10 / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 10/10 -- 뇌-기계 인터페이스 + 뉴로모픽 칩 n=6 수렴

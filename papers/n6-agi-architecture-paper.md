@@ -211,7 +211,7 @@ AGI 아키텍처의 기본 구조 상수 -- 인지 6모듈(n=6), 피질 6층(n=6
 **1차 출처 (atlas / theory SSOT)**
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
-- `shared/n6/atlas.n6` cognitive 섹션
+- `n6shared/n6/atlas.n6` cognitive 섹션
 
 **2차 출처 (외부 학술)**
 

@@ -17,8 +17,8 @@
 ## 삭제 항목
 1. domains/sedi/ (970 파일) — git rm -rf
 2. domains/brainwire/ (174 파일) — git rm -rf
-3. shared/projects.json — sedi, brainwire 항목 제거
-4. shared/readme-data.json — brainwire 참조 제거
+3. n6shared/projects.json — sedi, brainwire 항목 제거
+4. n6shared/readme-data.json — brainwire 참조 제거
 5. nexus/src/gate/source.rs — sedi, brainwire 문자열 제거
 6. nexus/src/growth/lens_grower.rs — sedi_lenses 참조 제거
 7. nexus/src/telescope/registry.rs — sedi 주석 참조 제거
@@ -31,13 +31,13 @@
 - theory/breakthroughs/breakthrough-theorems.md: "sedimentary" = 지질학 용어, sedi 도메인 무관
 - theory/constants/atlas-constants.md: "sediment" = 공학 용어, sedi 도메인 무관
 - techniques/: "H-SEDI-" 접두어 = 기법 고유 이름, 보존
-- shared/config/dse-map.toml: "sedi-universe" = DSE 도메인명, 독립 참조
-- shared/dse/dse_cross_results_v2.json: "sedi-universe" = DSE 결과, 독립 참조
+- n6shared/config/dse-map.toml: "sedi-universe" = DSE 도메인명, 독립 참조
+- n6shared/dse/dse_cross_results_v2.json: "sedi-universe" = DSE 결과, 독립 참조
 - nexus/src/telescope/sedi_lenses.rs: 레거시 Rust (폐기 중, CLAUDE.md에 "신규 추가 금지" 명시)
 - nexus/src/telescope/quantum_lenses.rs: "SEDI" = 설명 텍스트, 레거시
 - nexus/src/graph/knowledge_nodes.rs: "SEDI Training Monitor" = 그래프 노드 설명
 - papers/_registry.json: "BrainWire" = 외부 리포 링크
 - nexus/origins/ready-absorber/: 과거 흡수 기록, 역사 보존
-- shared/logs/absorbed/: 과거 로그, 역사 보존
+- n6shared/logs/absorbed/: 과거 로그, 역사 보존
 - reports/audits/: 이전 감사 기록
 - domains/*/goal.md 내 brainwire 언급: 다른 도메인 문서 내용 (참조 문자열만 정리)

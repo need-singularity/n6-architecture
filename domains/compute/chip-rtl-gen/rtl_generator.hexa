@@ -292,7 +292,7 @@ fn generate_conv6_module(img_h: int, img_w: int, k_size: int, channels: int, var
 // ================================================================
 
 // techniques/_chip_mapping.md 의 16 기법 → 원시연산 DAG 매핑
-// (shared/config/rtl_templates.json SSOT 준수)
+// (n6shared/config/rtl_templates.json SSOT 준수)
 fn scan_technique_params(tech: string) -> list(string) {
     // 각 기법 → 필요 원시연산 리스트
     let dag =

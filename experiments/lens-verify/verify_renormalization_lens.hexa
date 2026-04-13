@@ -4,7 +4,7 @@
 // 근거: epsilon=4-d expansion d=6 상한
 // 가설: 6 차원 RG 고정점 수 명확
 // 지표: 고정점 수
-// 의존: shared/config/lens_registry.json
+// 의존: n6shared/config/lens_registry.json
 
 fn main() {
     println("[렌즈: RG Flow] 검증 스텁 — 6D")

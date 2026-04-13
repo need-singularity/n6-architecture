@@ -485,7 +485,7 @@ print("BT-1393 자동검증 통과 (10/10 EXACT, 0 MISS)")
 **결과**: **hexa 타입 체크 에러**
 ```
 error[Type]: unsupported binary operation: Str("t") Ge Str("a")
-   --> shared/blowup/compose.hexa:134:1
+   --> n6shared/blowup/compose.hexa:134:1
 ```
 **원인**: compose.hexa 의 모듈 이름 sanitization 루프 (line ~147) 에서 `_ch >= "a"` 같은 String Ge String 연산. hexa 언어가 문자열 대소 비교 연산자를 미지원. 즉 **compose.hexa 에 미해결 type 버그** 존재.
 

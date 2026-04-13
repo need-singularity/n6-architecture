@@ -124,7 +124,7 @@ verify/advanced_packaging_seed.hexa     [STUB]
 
 ```
 verify/packaging_dse_link.hexa     [STUB]
-  - 입력: shared/n6/atlas.n6 라인 13561, 13739
+  - 입력: n6shared/n6/atlas.n6 라인 13561, 13739
   - 동작: n6-dse-packaging-machine, n6-dse-semiconductor-packaging 등급 유지
 ```
 
@@ -207,7 +207,7 @@ n=28 가정 시 매칭 1/8. 산업 천장은 n=28이 아닌 n=6.
 - `theory/breakthroughs/breakthrough-theorems.md` BT-76 — σ·τ=48 attractor
 - `theory/breakthroughs/breakthrough-theorems.md` BT-77 — Cross-vendor HBM 수렴
 - `theory/breakthroughs/breakthrough-theorems.md` BT-3582, 3638, 3692, 4050, 4074 — Cross-links
-- `shared/n6/atlas.n6` 라인 13561, 13739 — packaging-machine, semiconductor-packaging DSE
+- `n6shared/n6/atlas.n6` 라인 13561, 13739 — packaging-machine, semiconductor-packaging DSE
 
 **2차 (외부 산업 표준)**
 

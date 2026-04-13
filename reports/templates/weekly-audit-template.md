@@ -110,7 +110,7 @@
 
 ---
 
-## 6. convergence 상태 (`shared/convergence/n6-architecture.json`)
+## 6. convergence 상태 (`n6shared/convergence/n6-architecture.json`)
 
 | 구분 | 항목 수 |
 |------|---------|

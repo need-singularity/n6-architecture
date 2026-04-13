@@ -1,0 +1,221 @@
+{
+  "_meta": {
+    "name": "n6-architecture 코어 잠금 레지스트리",
+    "description": "L0/L1/L2 동심원 보호 체계 — 안쪽일수록 수정 금지, 바깥쪽은 자유.",
+    "principle": "원본은 ~/Dev/nexus/shared/config/core-lockdown.json — 이 파일은 n6-architecture 프로젝트 로컬 사본.",
+    "updated": "2026-04-10",
+    "origin": "nexus canonical core-lockdown.json + CLAUDE.md L0 22 / L1 / L2 정의"
+  },
+  "levels": {
+    "L0": {
+      "label": "불변식",
+      "icon": "🔴",
+      "color": "red",
+      "rule": "유저가 L0 보호를 명시 요청할 때만 승인 절차 적용 — 평시에는 자유 수정",
+      "enforcement": [
+        "유저가 L0 체크/보호를 요청한 경우에만 승인 질문",
+        "평시(유저 미요청)에는 L0 파일도 자유 수정 가능",
+        "승인 절차 적용 시: 커밋 메시지에 'L0-수정: [파일명] — [이유]' 명시",
+        "파일 상단 불변식 주석 갱신"
+      ]
+    },
+    "L1": {
+      "label": "보호",
+      "icon": "🟡",
+      "color": "yellow",
+      "rule": "리뷰 필요 — 수정 가능하나 변경 이유 기록 필수",
+      "enforcement": [
+        "변경 이유 커밋 메시지에 명시",
+        "관련 테스트 통과 확인"
+      ]
+    },
+    "L2": {
+      "label": "자유",
+      "icon": "🟢",
+      "color": "green",
+      "rule": "자유 수정 — 테스트만 통과하면 OK",
+      "enforcement": []
+    }
+  },
+  "L0": [
+    {
+      "path": "CLAUDE.md",
+      "desc": "n6-architecture 프로젝트 규칙 원본"
+    },
+    {
+      "path": "INDEX.json",
+      "desc": "리포 전역 9축 매니페스트 — SSOT 진입점"
+    },
+    {
+      "path": "theory/_index.json",
+      "desc": "이론 SSOT — 증명·BT·상수·예측 인덱스"
+    },
+    {
+      "path": "theory/proofs/theorem-r1-uniqueness.md",
+      "desc": "핵심 정리 증명 — σφ=nτ ⟺ n=6 (n≥2)"
+    },
+    {
+      "path": "theory/constants/atlas-constants.md",
+      "desc": "상수 레지스트리 — 1100+ 항목"
+    },
+    {
+      "path": "theory/breakthroughs/breakthrough-theorems.md",
+      "desc": "BT 돌파 정리 목록 원본"
+    },
+    {
+      "path": "domains/_index.json",
+      "desc": "도메인 SSOT — 295 도메인 → 9축 매핑"
+    },
+    {
+      "path": "techniques/_registry.json",
+      "desc": "AI 기법 66종 SSOT"
+    },
+    {
+      "path": "experiments/_results.jsonl",
+      "desc": "실험 결과 122종 SSOT"
+    },
+    {
+      "path": "papers/_registry.json",
+      "desc": "논문 39편 SSOT"
+    },
+    {
+      "path": "n6shared/config/core-lockdown.json",
+      "desc": "코어 잠금 체계 자체 — 자기참조 보호"
+    },
+    {
+      "path": "n6shared/convergence/n6-architecture.json",
+      "desc": "수렴 추적 — 골화/안정/실패 상태"
+    },
+    {
+      "path": "n6shared/config/dse-map.toml",
+      "desc": "DSE 전체 현황 지도"
+    },
+    {
+      "path": "nexus/telescope/lenses/",
+      "desc": "NEXUS-6 렌즈 — 1022종 (HEXA 네이티브)"
+    },
+    {
+      "path": "nexus/dashboard/static/index.html",
+      "desc": "nexus 통합 대시보드 프론트엔드"
+    },
+    {
+      "path": "engine/",
+      "desc": "훈련/수학 런타임 (.hexa) 디렉토리"
+    },
+    {
+      "path": "n6shared/CLAUDE.md",
+      "desc": "shared 디렉토리 AI 진입점"
+    },
+    {
+      "path": "n6shared/config/CLAUDE.md",
+      "desc": "config 디렉토리 AI 진입점"
+    },
+    {
+      "path": "theory/proofs/",
+      "desc": "3개 독립 증명 디렉토리 — 영구 이론층"
+    },
+    {
+      "path": "theory/breakthroughs/",
+      "desc": "돌파 정리 디렉토리 — BT 아카이브"
+    },
+    {
+      "path": "theory/constants/",
+      "desc": "상수 디렉토리 — n=6 유도 상수"
+    }
+  ],
+  "L1": [
+    {
+      "path": "theory/flow/",
+      "desc": "이론 흐름도 — 증명 연결 구조"
+    },
+    {
+      "path": "reports/",
+      "desc": "시점 리포트 — 감사·세션·발견·체인지로그"
+    },
+    {
+      "path": "n6shared/loop/",
+      "desc": "성장 루프 설정"
+    },
+    {
+      "path": "n6shared/discovery_log.jsonl",
+      "desc": "발견 로그 스트림"
+    },
+    {
+      "path": "n6shared/growth_bus.jsonl",
+      "desc": "성장 이벤트 스트림"
+    },
+    {
+      "path": "n6shared/discovery_graph.json",
+      "desc": "발견 그래프 — 노드/엣지"
+    },
+    {
+      "path": "n6shared/projects.json",
+      "desc": "프로젝트 레지스트리"
+    }
+  ],
+  "L2": [
+    {
+      "path": "domains/",
+      "desc": "295 도메인 개별 문서/검증 (L0 인덱스 제외)"
+    },
+    {
+      "path": "techniques/",
+      "desc": "AI 기법 개별 .hexa (L0 레지스트리 제외)"
+    },
+    {
+      "path": "experiments/",
+      "desc": "실험 개별 .hexa (L0 결과 제외)"
+    },
+    {
+      "path": "papers/",
+      "desc": "논문 개별 .md (L0 레지스트리 제외)"
+    },
+    {
+      "path": "n6shared/logs/",
+      "desc": "로그 디렉토리"
+    },
+    {
+      "path": "n6shared/auto_bt.log",
+      "desc": "자동 BT 로그"
+    },
+    {
+      "path": "n6shared/auto_gap.log",
+      "desc": "자동 갭 로그"
+    }
+  ],
+  "keywords": {
+    "trigger": [
+      "못박아줘",
+      "잠궈줘",
+      "잠금",
+      "고정해줘",
+      "건드리지마",
+      "코어로",
+      "L0으로"
+    ],
+    "action": "해당 파일/모듈을 L0(불변식)에 등록",
+    "steps": [
+      "1. 이 파일 L0 배열에 추가",
+      "2. nexus canonical core-lockdown.json n6-architecture 섹션에도 동기화",
+      "3. desc에 왜 못박는지 한 줄 설명 포함",
+      "4. 커밋"
+    ]
+  },
+  "ai_protocol": {
+    "L0_designation": [
+      "AI가 스스로 L0 지정/승격/등록 절대 금지 — 유저 명시 요청 시에만",
+      "L0 관련 문의/제안/권유도 금지 — 유저가 별도 요청할 때까지 언급하지 않음"
+    ],
+    "on_L0_edit_request": [
+      "1. 유저가 L0 보호를 명시 요청한 경우에만 승인 절차 진행",
+      "2. 평시(유저 미요청)에는 L0 파일도 자유 수정",
+      "3. 승인 절차 적용 시: 커밋 메시지에 'L0-수정: [파일명] — [이유]' 명시"
+    ],
+    "on_L1_edit": [
+      "변경 이유 커밋 메시지에 기록"
+    ],
+    "on_L2_edit": [
+      "자유 수정"
+    ]
+  }
+}

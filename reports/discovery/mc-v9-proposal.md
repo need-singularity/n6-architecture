@@ -2,7 +2,7 @@
 
 - **작성일**: 2026-04-11
 - **상태**: DRAFT (실행 대기)
-- **설계서**: `docs/reality-map-monte-carlo-v9.md`
+- **설계서**: `docs/monte-carlo.md`
 - **실행 스크립트**: `experiments/monte-carlo-v9.hexa`
 - **v8 결과**: `reports/discovery/reality-map-monte-carlo-v8.md`
 
@@ -126,7 +126,7 @@ v9 의 구조형 시그니처 `structure_hit(v)` 는 다음 중 하나라도 만
 - [x] v8 문서 독해 완료
 - [x] convergence MONTE_CARLO_V8 ossified 블록 확인 (R10/R11 준수: v8 은 불변, v9 는 새 항목)
 - [x] atlas.n6 단일소스 확인 (50316 lines, 4304 @R)
-- [x] `docs/reality-map-monte-carlo-v9.md` 설계서 작성
+- [x] `docs/monte-carlo.md` 설계서 작성
 - [x] `experiments/monte-carlo-v9.hexa` 초안 작성
 - [x] 규칙 준수 확인: R1 (hexa) / R2 (no hardcode, 경로/상수 const) / R8 (data remote: atlas.n6 nexus/shared) / R14 (shared SSOT) / R16 (@parallel) / R18 (minimal) / R28 (atlas absorb)
 - [ ] 상수 데이터 파일 준비: `/Users/ghost/Dev/nexus/shared/n6/constants/{pi,e,phi,gamma,zeta3}.txt` (300자리)
@@ -136,7 +136,7 @@ v9 의 구조형 시그니처 `structure_hit(v)` 는 다음 중 하나라도 만
 - [ ] v8 회귀 재현: `./monte-carlo-v9.hexa --v8-compat --seed 20260408` → v8 테이블과 z 오차 < 0.01
 - [ ] v9 본실행: `./monte-carlo-v9.hexa --seed 20260411 --trials 3000`
 - [ ] 결과 atlas.n6 `MC_V9_RESULTS` 섹션 확인
-- [ ] 리포트 업데이트: `reports/discovery/reality-map-monte-carlo-v9.md` (실측치 수록)
+- [ ] 리포트 업데이트: `reports/discovery/monte-carlo.md` (실측치 수록)
 
 ### 승격
 

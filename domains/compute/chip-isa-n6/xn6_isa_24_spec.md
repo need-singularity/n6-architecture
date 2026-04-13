@@ -460,7 +460,7 @@ def XN6_GEMM_M : RVInstR<0b0000100, 0b000, OPC_CUSTOM_0,
 // ... 23 개 추가 패턴
 ```
 
-> 24 패턴 자동 생성은 `shared/config/xn6_isa.json` (Phase 3 SSOT) 에서 tblgen hook 으로 추출.
+> 24 패턴 자동 생성은 `n6shared/config/xn6_isa.json` (Phase 3 SSOT) 에서 tblgen hook 으로 추출.
 
 ---
 
@@ -554,7 +554,7 @@ fn <kernel>(...) { ... }
 | `domains/compute/chip-isa-n6/xn6_isa_24_spec.md` | **본 문서 (Phase 2)** | 24 명령 마스터 |
 | `domains/compute/chip-isa-n6/xn6_opcode_table.md` | Phase 2 | 박스 테이블 전용 |
 | `domains/compute/chip-isa-n6/xn6_asm_examples.hexa` | Phase 2 | hexa attr 예제 스텁 |
-| `shared/config/xn6_isa.json` | Phase 3 예정 | JSON SSOT (tblgen/decoder 입력) |
+| `n6shared/config/xn6_isa.json` | Phase 3 예정 | JSON SSOT (tblgen/decoder 입력) |
 | `rtl/xn6_decoder.hexa` | Phase 3 Mk.II | 실제 디코더 구현 |
 
 ---
@@ -584,7 +584,7 @@ verify.hexa 는 J₂=24 / funct3×variant=24 / CSR=4 / custom=4 / σ·φ=n·τ �
 
 ## 13. 다음 단계 (Phase 3 후보)
 
-1. `shared/config/xn6_isa.json` SSOT 생성 (24 엔트리 전부)
+1. `n6shared/config/xn6_isa.json` SSOT 생성 (24 엔트리 전부)
 2. `nexus/origins/hexa-rtl/rtl/xn6_decoder.hexa` 디코더 작성 (Mk.II)
 3. `xn6intrin.h` GCC 헤더 자동 생성 (Mk.III)
 4. `XN6InstrInfo.td` LLVM tblgen 패턴 (Mk.III)

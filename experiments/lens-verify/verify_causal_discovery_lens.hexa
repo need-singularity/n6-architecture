@@ -4,7 +4,7 @@
 // 근거: PC/GES 알고리즘이 6 변수 구조에서 수렴 안정
 // 가설: 6 변수 DAG 복원율 > 5/7 변수
 // 지표: DAG 경우의 수, 복원율
-// 의존: shared/config/lens_registry.json CausalDiscoveryLens
+// 의존: n6shared/config/lens_registry.json CausalDiscoveryLens
 
 fn main() {
     println("[렌즈: 인과발견] 6 변수 DAG — 산술 검증")

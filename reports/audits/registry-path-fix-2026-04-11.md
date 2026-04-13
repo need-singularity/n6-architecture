@@ -141,7 +141,7 @@ python3 -m json.tool nexus/shared/n6/n6_products.json → VALID
 | 파일 | 라인 | 유형 | 처리 권고 |
 |---|---|---|---|
 | `/Users/ghost/Dev/n6-architecture/README.md` | 560 | `AUTO:SUMMARY_tech-industry:END` 이후 수동 표 | sync-readme.hexa 재생성 (R5) |
-| `/Users/ghost/Dev/n6-architecture/shared/config/dse-map.toml` | 18775 | `note` 주석 필드 | 문구 갱신 또는 삭제 (별건) |
+| `/Users/ghost/Dev/n6-architecture/n6shared/config/dse-map.toml` | 18775 | `note` 주석 필드 | 문구 갱신 또는 삭제 (별건) |
 | `/Users/ghost/Dev/nexus/shared/n6/docs/dse-map.toml` | 18775 | 주석 필드 (동일) | 위와 동일 |
 | `/Users/ghost/Dev/n6-architecture/reports/audits/paper-legacy-audit/verify-coverage.md` | 114 | 과거 감사 기록 | **불변** (reports 시점 불변 원칙) |
 | `/Users/ghost/Dev/n6-architecture/reports/audits/synbio-merge-2026-04-11.md` | 28-29, 98-99, 117 | 감사 리포트 본문 | **불변** |

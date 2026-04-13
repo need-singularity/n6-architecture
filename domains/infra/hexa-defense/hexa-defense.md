@@ -1,6 +1,6 @@
 # 궁극의 방위/보안 아키텍처 -- HEXA-DEFENSE
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 8 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 8/10 -- 군사 6군 구조 + OODA tau=4 + 전투구역 sigma=12

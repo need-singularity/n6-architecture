@@ -4,7 +4,7 @@
 // 근거: 6 차원 다양체 sheaf 구조
 // 가설: H^0~H^5 의 6 불변량
 // 지표: 코호몰로지 차원
-// 의존: shared/config/lens_registry.json
+// 의존: n6shared/config/lens_registry.json
 
 fn main() {
     println("[렌즈: Sheaf] 검증 스텁 — 6 cohomology")

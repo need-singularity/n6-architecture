@@ -271,7 +271,7 @@ print(f"sopfr 사중 포화: 심도({pelagic_zones}) + 분지({ocean_basins}) + 
 
 ## DSE
 
-- `shared/dse/domains/ocean.toml` 참조
+- `n6shared/dse/domains/ocean.toml` 참조
 
 
 ## 3. 가설

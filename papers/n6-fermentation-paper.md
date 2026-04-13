@@ -125,7 +125,7 @@ verify/fermentation_seed.hexa     [STUB]
 
 ```
 verify/fermentation_dse_link.hexa  [STUB]
-  - 입력: shared/n6/atlas.n6 라인 13801
+  - 입력: n6shared/n6/atlas.n6 라인 13801
   - 동작: n6-dse-fermentation-biotech [10] 등급 유지 확인
 ```
 
@@ -214,8 +214,8 @@ C₆H₁₂O₆의 첨자 (6, 12, 6) = (n, σ, n), 계수 (2, 2) = (φ, φ). 이
 
 - `theory/breakthroughs/bt-1391-photosynthesis-equation-2026-04-12.md` — 광합성 n=6 EXACT (역과정)
 - `theory/breakthroughs/breakthrough-theorems.md` BT-15 — 생물 공통 화학양론
-- `shared/n6/atlas.n6` 라인 13801 — `n6-dse-fermentation-biotech = done [10]`
-- `shared/n6/atlas.n6` 라인 55183 — cross-v2 `fermentation-biotech x vertical-farm = 0.5519 [10*]`
+- `n6shared/n6/atlas.n6` 라인 13801 — `n6-dse-fermentation-biotech = done [10]`
+- `n6shared/n6/atlas.n6` 라인 55183 — cross-v2 `fermentation-biotech x vertical-farm = 0.5519 [10*]`
 - `theory/proofs/theorem-r1-uniqueness.md` — σφ=nτ⟺n=6
 
 **2차 (외부 학술)**

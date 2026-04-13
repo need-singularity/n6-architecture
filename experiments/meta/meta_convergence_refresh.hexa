@@ -1,10 +1,10 @@
 // meta_convergence_refresh.hexa
 // 카테고리: meta
-// 목적: shared/convergence/n6-architecture.json 배치 후 갱신 검증
+// 목적: n6shared/convergence/n6-architecture.json 배치 후 갱신 검증
 // 근거: R14 SSOT — 검증 완료 항목이 convergence ossified 목록에 반영되어야 함
 // 가설: experiments passed 상태 -> convergence.ossified 자동 동기
 // 지표: 추가된 ossified 항목 수, 미동기 드리프트 0
-// 의존: shared/convergence/n6-architecture.json + _results.jsonl
+// 의존: n6shared/convergence/n6-architecture.json + _results.jsonl
 
 fn main() {
     println("[메타: convergence 갱신] 스텁")

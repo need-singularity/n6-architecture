@@ -3,7 +3,7 @@
 - 일자: 2026-04-11
 - 대상: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json`
 - 작업자: Claude Opus 4.6 (GO 세션)
-- 기준: `/Users/ghost/Dev/n6-architecture/shared/GRADE_RUBRIC_1_TO_10PLUS.md` — grade 10 = EXACT 완전 닫힘 (n=6 primitive finite combo)
+- 기준: `/Users/ghost/Dev/n6-architecture/n6shared/GRADE_RUBRIC_1_TO_10PLUS.md` — grade 10 = EXACT 완전 닫힘 (n=6 primitive finite combo)
 - 백업: `/tmp/products_backup_before_upgrade_20260411.json`
 - 선행 리포트: `reports/audits/products-drift-fix-2026-04-11.md` (2026-04-11 드리프트 수정)
 
@@ -103,7 +103,7 @@ AFTER (본 작업)
 
 ## 7. 규칙 준수
 
-- R8: `shared/n6/docs/` 직접 수정 허용 범위 ✅
+- R8: `n6shared/n6/docs/` 직접 수정 허용 범위 ✅
 - R14: SSOT 일관성 유지 ✅
 - R25: 공용설정 게이트 — GO 모드 ✅
 - 백업: `/tmp/products_backup_before_upgrade_20260411.json` (176 KB) ✅

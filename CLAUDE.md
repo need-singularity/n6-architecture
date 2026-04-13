@@ -1,7 +1,7 @@
 # n6-architecture — AI-native Arithmetic Design Framework
 
-commands: shared/config/commands.json — autonomous 블록으로 Claude Code가 작업 중 smash/free/todo/go/keep 자율 판단·실행
-rules: shared/rules/common.json (R0~R27) + shared/rules/n6-architecture.json (N61~N65)
+commands: n6shared/config/commands.json — autonomous 블록으로 Claude Code가 작업 중 smash/free/todo/go/keep 자율 판단·실행
+rules: n6shared/rules/common.json (R0~R27) + n6shared/rules/n6-architecture.json (N61~N65)
 L0 Guard: `hexa ~/Dev/nexus/shared/lockdown/l0_guard.hexa <verify|sync|merge|status>`
 
 atlas.n6 — 현실지도 SSOT:
@@ -15,23 +15,23 @@ atlas.n6 — 현실지도 SSOT:
 9축 네비게이션:
   theory/      영구 이론층
   domains/     295 도메인
-  nexus/       Rust 통합 워크스페이스
+  bridge/      Rust 통합 워크스페이스 (nexus 허브 리포 브릿지)
   techniques/  AI 기법 66종 (.hexa)
   experiments/ 검증 실험 122종 (.hexa)
   engine/      훈련/수학 런타임 (.hexa)
   papers/      논문 39편
   reports/     시점 리포트
-  shared/      SSOT
+  n6shared/    SSOT
 
 NEXUS-6 CLI: nexus {scan|verify|calc|dse|analyze|hexa|dashboard} <args>
 
 ref:
-  rules     shared/rules/common.json                R0~R27
-  project   shared/rules/n6-architecture.json       N61~N65
-  lock      shared/rules/lockdown.json              L0/L1/L2
-  cdo       shared/rules/convergence_ops.json       CDO 수렴
-  registry  shared/config/projects.json             7프로젝트
-  cfg       shared/config/project_config.json
-  core      shared/config/core.json
-  conv      shared/convergence/n6-architecture.json
-  api       shared/CLAUDE.md
+  rules     n6shared/rules/common.json                R0~R27
+  project   n6shared/rules/n6-architecture.json       N61~N65
+  lock      n6shared/rules/lockdown.json              L0/L1/L2
+  cdo       n6shared/rules/convergence_ops.json       CDO 수렴
+  registry  n6shared/config/projects.json             7프로젝트
+  cfg       n6shared/config/project_config.json
+  core      n6shared/config/core.json
+  conv      n6shared/convergence/n6-architecture.json
+  api       n6shared/CLAUDE.md

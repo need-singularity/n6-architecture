@@ -19,7 +19,7 @@ sed -n '86,87p' /Users/ghost/Dev/n6-architecture/README.md
 # 출력: <!-- AUTO:ALIEN_INDEX:START -->\n<!-- AUTO:ALIEN_INDEX:END -->
 
 # 증상 2: sync 도구 STUB
-sed -n '1,12p' /Users/ghost/Dev/n6-architecture/shared/sync_products_readme.hexa
+sed -n '1,12p' /Users/ghost/Dev/n6-architecture/n6shared/sync_products_readme.hexa
 # 출력: println("STUB: sync_products_readme.py (HEXA 포팅 대기)")
 
 # 증상 3: 링크 드리프트
@@ -60,7 +60,7 @@ python3 -c "import json; p=json.load(open('/Users/ghost/Dev/nexus/shared/n6/docs
 - `AI techniques: 16` → `Products: 173 (34 섹션, 천장 172, AI지수=10 164)` 신규 + `AI techniques: 66` (66 Techniques 반영)
 - DSE domains/paths/NEXUS-6 tests 필드는 다른 파이프라인 관리이므로 값 보존
 
-### 3) `shared/sync_products_readme.hexa` STUB 제거 (Agent 3)
+### 3) `n6shared/sync_products_readme.hexa` STUB 제거 (Agent 3)
 
 - 10줄 → 601줄 (591줄 추가)
 - 16 fn: die, resolve_path, load_products, get_or, has_field, format_links, bt_pct_str, render_summary_block, render_footer_block, render_products_table, render_alien_index, render_stats, replace_marker, replace_products_table, write_readme, main

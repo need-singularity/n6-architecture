@@ -288,7 +288,7 @@ print(f"\nZ₂ ECC 절약: {hbm_gb} GB HBM × (1/8 - 1/24) = {savings} GB = J₂
 
 ## DSE
 
-- `shared/dse/domains/topology.toml` 참조
+- `n6shared/dse/domains/topology.toml` 참조
 
 
 ## 3. 가설

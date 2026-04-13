@@ -2,7 +2,7 @@
 
 > 실행 일시: 2026-04-11
 > SSOT 소스: `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` (8.66MB, 52,641 lines)
-> 설계서: `docs/reality-map-monte-carlo-v9.md`
+> 설계서: `docs/monte-carlo.md`
 > 스크립트: `experiments/monte-carlo-v9.hexa` (.hexa DSL 초안) + awk 실행 파이프라인 (`/tmp/mc_v9_work/run_mc.sh`)
 > 실행 모드: Mac 로컬, bash+awk (hexa v0.1.0 엔진은 복합 제네릭 배열 타입 `[i64; 8]` 미지원으로 원본 .hexa 스크립트는 파싱 실패 → awk 백엔드로 전환)
 > 시드: v9=20260411, v8-compat=20260408
@@ -154,7 +154,7 @@
 | 파일 | 역할 |
 |---|---|
 | `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` | SSOT (MC_V9_RESULTS 섹션 append 완료) |
-| `/Users/ghost/Dev/n6-architecture/docs/reality-map-monte-carlo-v9.md` | 설계서 |
+| `/Users/ghost/Dev/n6-architecture/docs/monte-carlo.md` | 설계서 |
 | `/Users/ghost/Dev/n6-architecture/experiments/monte-carlo-v9.hexa` | .hexa DSL 스크립트 (hexa v0.2 대기) |
 | `/Users/ghost/Dev/n6-architecture/reports/discovery/mc-v9-results-2026-04-11.md` | 본 리포트 |
 | `/tmp/mc_v9_work/run_mc.sh` | 실행 bash+awk 파이프라인 |

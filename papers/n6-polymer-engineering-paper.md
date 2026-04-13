@@ -439,7 +439,7 @@ Staudinger(1920)의 고분자 가설에서 2024년 AI 기반 고분자 설계까
 **1차 출처 (atlas / theory SSOT)**
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
-- `shared/n6/atlas.n6` polymer-engineering 섹션
+- `n6shared/n6/atlas.n6` polymer-engineering 섹션
 
 **2차 출처 (외부 학술)**
 

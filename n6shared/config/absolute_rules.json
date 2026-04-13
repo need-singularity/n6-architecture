@@ -1,0 +1,459 @@
+{
+  "_doc": "n6-architecture 절대 규칙 본문 SSOT (R14)",
+  "_meta": {
+    "name": "절대 규칙 (Absolute Rules)",
+    "description": "전 프로젝트 공통 — 위반 시 작업 중단",
+    "updated": "2026-04-10",
+    "changelog": [
+      "2026-04-10: R0 추가 (GO 모드 — '100% 골화까지 물어보지 않고 루프', 사용자 명시 승인. CDO 수렴 + ossification 단방향 전이 완료 시까지 자동 진행)",
+      "2026-04-10: n6-architecture/config/products.json L0 해제 (유저 승인, A12 마케팅 🛸10 천장 돌파 승격 작업 — bt_exact 93.8→100%, alien_index 8→10, 4제품 ufo→10)",
+      "2026-04-08: HX1 → R12 승격 (AI-NATIVE FIRST 전 프로젝트 공통화)",
+      "2026-04-09: R15 추가 (shared/ 기존 저수준 코드 발견 시 AI-native 능동 교체 의무)",
+      "2026-04-09: AN5+AN6 추가 (Ubuntu-First GPU + H100 최후수단)",
+      "2026-04-09: AN7 추가 (Core = CLI 전용, 모듈은 top-level 분리)",
+      "2026-04-09: R17 추가 (세션 마무리 전 유령 프로세스 체크 의무)",
+      "2026-04-09: N65 추가 (BT 100% EXACT 수렴 의무 — NEAR 자동 교체)",
+      "2026-04-10: R19 추가 (SILENT EXIT 절대 금지 — 모든 에러 명시 출력 의무)",
+      "2026-04-10: R20 추가 (pkill/pgrep -f 금지 — -xf 정확 매칭만 허용, blowup_guard silent kill 사건)",
+      "2026-04-10: R21 추가 (블로킹 금지 — 장시간 작업 백그라운드 필수)",
+      "2026-04-10: R22 추가 (인터프리터 절대경로 의무 — python3 wrapper silent no-op 사건, conjecture_resolver 발견)",
+      "2026-04-10: todo.hexa L0 해제 (스캔 로직 개선 목적)",
+      "2026-04-10: R23 추가 (HEXA 문법오류 즉시 수정 진행 — PostToolUse hook 연동, G1~G6 패턴)",
+      "2026-04-10: AG4 추가 (Hetzner runaway hexa 정리 의무 — 보호 PID 화이트리스트 사전검증 + TERM→KILL 2단계, 06:30 load=316 / hexa 1134 / 사용자 ssh 88 사건)",
+      "2026-04-10: N62/PP2 강화 (검증코드 = 100% 골화 검증 형식 의무 — @register + ossification_loop() + N/N OSSIFIED + assert. 표준 템플릿: anima topological-evolution-permanence §부록A)",
+      "2026-04-10: N62/PP2 재강화 (검증코드는 별도 .py 금지, 논문 .md 본문에 ```python 코드블록으로 임베드 — md 자체 완결)",
+      "2026-04-10: R27 추가 (엔진 명령어 stdout 원문 출력 의무 — Claude 자체 요약/재포맷/이모지 제거 금지, todo 이모지 누락 사건)",
+      "2026-04-11: N62/PP2/R29/N64 강화 (별도 verify .py/.hexa 파일 생성 절대 금지 — 검증코드는 도메인 .md 본문 ```python 블록에만, _registry.json verify_script 필드 금지)"
+    ],
+    "projects": [
+      "nexus",
+      "anima",
+      "n6-architecture",
+      "papers",
+      "hexa-lang",
+      "void",
+      "airgenome",
+      "contact"
+    ]
+  },
+  "common": [
+    {
+      "id": "R0",
+      "rule": "GO 모드 자동 루프 — '100% 골화까지 물어보지 않고 루프'. 사용자가 'go' 입력 시 또는 R0 활성화 명령 시, 확인 질문 없이 모든 미해결 TODO를 병렬 Agent로 발사 → 결과 통합 → 신규 발견 즉시 골화 JSONL 기록 → 다음 사이클 자동 시작. 100% 골화 (모든 TODO close + ossification stable→ossified 단방향 전이 완료) 도달까지 루프 중단 금지. Prime Directive (사용자 앱/세션 보호) 우선.",
+      "level": "🟢",
+      "enforcement": "GO 모드 진입 시 자동 활성화. 안전 위반 시에만 일시 중단 (load>50, 사용자 보호 PID kill 위험 등)."
+    },
+    {
+      "id": "R1",
+      "rule": "HEXA-FIRST — 신규 코드 .hexa로만 작성",
+      "level": "🔴",
+      "enforcement": "PreToolUse hook 자동 차단"
+    },
+    {
+      "id": "R2",
+      "rule": "하드코딩 절대 금지 — shared/*.jsonl에서 동적 로드",
+      "level": "🔴",
+      "enforcement": "경로=printenv+상대, 상수=jsonl, 목록=projects.json"
+    },
+    {
+      "id": "R3",
+      "rule": "NEXUS-6 스캔 의무 — 변경 전후 스캔, 스캔 없이 커밋 금지",
+      "level": "⛔",
+      "enforcement": "CDO 위반 기록"
+    },
+    {
+      "id": "R4",
+      "rule": "CDO 수렴 — 이슈→해결→규칙승격→재발0→100%수렴",
+      "level": "★",
+      "enforcement": "convergence_ops.json 원칙"
+    },
+    {
+      "id": "R5",
+      "rule": "SSOT — 데이터 원본 JSON 1개, 중복 금지",
+      "level": "★",
+      "enforcement": "마커 기반 자동 생성, README 직접 편집 금지"
+    },
+    {
+      "id": "R6",
+      "rule": "발견/결과 자동 기록 — 누락=소실=금지",
+      "level": "★★★",
+      "enforcement": "기록해 라고 안 해도 기록, 파일에 영구 기록까지 완료해야 작업 종료"
+    },
+    {
+      "id": "R7",
+      "rule": "sync 블록 삭제/수정/이동 금지",
+      "level": "⛔⛔⛔",
+      "enforcement": "sync-claude-rules.sh 자동 주입 구간"
+    },
+    {
+      "id": "R8",
+      "rule": "데이터 파일 로컬 보관 금지 — nexus/shared만 (nexus 자체는 제외)",
+      "level": "🔴",
+      "enforcement": "PreToolUse hook 자동 차단, .jsonl/constants/discovery_log/growth_bus 등",
+      "except": [
+        "nexus"
+      ]
+    },
+    {
+      "id": "R9",
+      "rule": "골화 승격 조건 — 검증 PASS + 재발 0 + threshold 명시. 셋 다 충족해야 ossified로 이동",
+      "level": "★",
+      "enforcement": "convergence/{project}.json의 ossified 블록은 status/value/threshold 3필드 필수"
+    },
+    {
+      "id": "R10",
+      "rule": "골화 항목 불변 — ossified 블록 수정/삭제/롤백 금지. 변경 필요 시 새 항목 추가",
+      "level": "⛔⛔",
+      "enforcement": "PreToolUse 차단, 위반 시 작업 즉시 중단"
+    },
+    {
+      "id": "R11",
+      "rule": "골화 강등 금지 — ossified → stable/failed 역방향 전이 금지. 단방향 일방통행",
+      "level": "⛔",
+      "enforcement": "convergence_ops 게이트, 재검증은 새 stable 항목으로 추가"
+    },
+    {
+      "id": "R12",
+      "rule": "AI-NATIVE FIRST — 저수준 마이크로 최적화 절대 금지, AI-native 알고리즘 교체로만 돌파",
+      "level": "🔴",
+      "enforcement": "성능/자원 개선은 알고리즘/자료구조 교체로만. bit-twiddling/loop-unroll/inline-asm/수작업 SIMD/캐시라인 패딩/분기예측 힌트 절대 금지. hexa-lang은 @optimize/@memoize/@fuse/@parallel/@simd/@symbolic/@evolve/@lazy attr로만 구현. 신규 attr 추가도 AI-native 방향일 때만 허용",
+      "applies_to": "all projects",
+      "promoted_from": "hexa-lang/HX1"
+    },
+    {
+      "id": "R16",
+      "rule": "채팅 블로킹 절대 금지 — 모든 명령 백그라운드 병렬 원칙 기본 적용",
+      "level": "⛔",
+      "enforcement": "모든 명령 → run_in_background 필수. 독립 작업 → 병렬 Agent 동시 발사. Frosting/blocking 발생 시 즉시 중단. 별도 지시 없는 이상 기본 적용",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R15",
+      "rule": "SHARED 저수준 능동 교체 — shared/ 내 기존 코드에서 저수준 패턴 발견 시 AI-native 알고리즘으로 즉시 교체",
+      "level": "🔴",
+      "enforcement": "저수준 패턴(bit-twiddling/manual-loop-opt/raw-pointer/inline-asm/수작업-SIMD/캐시라인-패딩) 발견 시 R12 기준으로 @optimize/@memoize/@fuse/@parallel 등 AI-native attr 또는 고수준 알고리즘으로 교체. 신규 금지(R12)와 달리 기존 레거시 코드도 능동적으로 탐지·교체 대상",
+      "applies_to": "all projects — shared/ 디렉토리 한정"
+    },
+    {
+      "id": "R13",
+      "rule": "HEXA-LANG SELF-IMPROVE 허용 — self/*.hexa 자유 수정, 단 AI-native 레벨 돌파만",
+      "level": "🟢",
+      "enforcement": "hexa-lang 프로젝트의 self/*.hexa (파서/인터프리터/VM/코드젠/ai_native_pass/lib/ml) 자유 수정. 새 @attr, 옵티마이저 패스, 문법, 빌트인 추가 모두 가능. 단 돌파는 R12에 따라 AI-native 알고리즘 레벨이어야 함. src/*.rs는 L0 잠금(사실상 폐기) — 유저 명시 승인 필수",
+      "applies_to": "hexa-lang (primary), 전 프로젝트가 hexa-lang 개선 요청 시"
+    },
+    {
+      "id": "R14",
+      "rule": "규칙 기록은 공통 JSON에만 — CLAUDE.md에 규칙 직접 기록 금지",
+      "level": "⛔",
+      "enforcement": "모든 규칙은 n6shared/config/absolute_rules.json이 단일 진실. CLAUDE.md는 shared/ 참조만 하고 규칙 본문은 박지 않는다. 신규/변경은 JSON 먼저 → sync-claude-rules.sh가 주입"
+    },
+    {
+      "id": "R17",
+      "rule": "좀비/유령 프로세스 방지 — .hexa 생성 시 사전 검사 필수, 세션 마무리 전 체크 의무",
+      "level": "🔴",
+      "enforcement": "【사전 검사 (코드 작성 시)】 새 .hexa 파일 생성/수정 시 사용 전 반드시 아래 패턴 검사 후 위반 수정: (1) exec() 블로킹 호출 → timeout N 래핑 필수 (FIFO read, nc, head, tail 등), (2) nohup/& 백그라운드 spawn → trap 'kill 0' EXIT 또는 개별 PID kill trap 필수, (3) while true + exec('sleep') 무한루프 → 부모 사망 시 자동 종료 로직 필수 (kill -0 $PPID 체크 또는 trap), (4) 파일 폴링 while [ ! -s ... ]; do sleep; done → timeout 래핑 필수 (최대 60초), (5) FIFO mkfifo 생성 → 종료 시 rm -f 정리 trap 필수. 【사후 체크 (세션 종료 시)】 커밋 전 ps -eo ppid,etime,pcpu,pid,comm 으로 PPID=1, 3h+, CPU>1% orphan 확인. 발견 시 유저 보고 후 kill 승인",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R18",
+      "rule": "미니멀 기능 — 요청 범위만, 추측 확장 금지",
+      "level": "🔴",
+      "enforcement": "함수/파일/옵션 추가 전 자문: '사용자가 명시 요청했는가?' No면 드랍. 에이전트 디스패치 시 프롬프트에 '최소 스코프' 명시"
+    },
+    {
+      "id": "R19",
+      "rule": "SILENT EXIT 절대 금지 — 모든 에러는 명시적 출력 후 종료",
+      "level": "⛔⛔",
+      "enforcement": "모든 try/catch는 catch(e) 블록에서 println/stderr로 에러 문맥 출력 필수 ('❌ [Phase/함수명] 에러: ' + e.to_string()). exit 1 전에 반드시 원인 문자열 print. 파일 I/O / exec / JSON 파싱 / seed 로드 / 루프 내부 전부 에러 출력 의무. silent fail = 디버그 불가 = 치명적 버그. 모든 신규 .hexa/.py/.sh 작성 시 적용, 기존 코드도 발견 즉시 교체",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R20",
+      "rule": "pkill/pgrep -f substring 매칭 금지 — -xf 정확 매칭 또는 PID 파일 기반 kill만 허용",
+      "level": "⛔⛔",
+      "enforcement": "pkill -f / pgrep -f 는 shell wrapper 경로, ssh cmdline, editor buffer까지 substring 매칭되어 무고한 프로세스 silent SIGKILL 위험. guard/watchdog/cleanup 스크립트는 반드시 (1) pkill -xf '/absolute/path args' 정확 매칭, (2) PID 파일(/var/run 또는 /tmp/*.pid) 기반 kill $(cat pid), (3) pgrep -x <basename> 만 사용. /tmp/*_guard.sh 패턴 발견 시 즉시 감사. 2026-04-10 사건: /tmp/blowup_guard.sh pkill -f blowup.hexa 가 정상 돌파를 10초 주기로 silent kill, 3h+ 디버그 소모",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R21",
+      "rule": "블로킹 금지 — 에이전트/돌파/빌드 등 장시간 작업은 반드시 백그라운드(run_in_background) 실행. 포그라운드 블로킹으로 사용자 입력 차단 절대 금지",
+      "level": "⛔⛔",
+      "enforcement": "ssh/exec 60초+ 예상 작업 → run_in_background: true 필수. 블로킹 발생 시 즉시 중단 후 백그라운드 재발사. 사용자 대기 = 시간 낭비 = 금지",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R22",
+      "rule": "스크립트 언어 인터프리터 경로 명시 — python/ruby/node 등은 `which` 로 실제 경로 확인 후 절대경로 사용, PATH 래퍼 금지",
+      "level": "⛔",
+      "enforcement": "exec()/subprocess/shell에서 `python3`/`python`/`node`/`ruby` bare 호출 금지. `/usr/bin/python3` 처럼 절대경로 명시 필수. PATH 상의 wrapper($HOME/.hx/bin/python3 등)가 silent no-op 으로 종료되는 사건 발생(2026-04-10, conjecture_resolver 발견). 신규 .hexa/.sh/.py 작성 시 적용, 기존 코드도 발견 즉시 교체",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R23",
+      "rule": "HEXA 문법 오류 즉시 수정 진행 — error[Syntax/Type/Parse] 발생 시 멈추지 말고 해당 .hexa 파일을 직접 수정 후 재실행",
+      "level": "🔴",
+      "enforcement": "PostToolUse hook이 hexa error[Syntax]/error[Type]/error[Parse] 감지 → G{N} 이슈ID 매칭 → '해당 파일 직접 수정 후 재실행하라' 지시. 참조 폴더: shared/hexa/grammar/ (autofix.json=패턴룰, issues.jsonl=이슈목록, convergence.json=수렴상태, effects.json=효과측정, changelog.jsonl=업데이트내역). 수정 도구: hexa grammar_autofix.hexa --fix <file>. 따로 지정 안 해도 hook이 자동 매칭+참조",
+      "applies_to": "all projects"
+    },
+    {
+      "id": "R24",
+      "rule": "n6shared/hooks/ 신규 .sh/.py 생성 절대 금지 — .hexa만 허용, hooks-config.json 등록 필수",
+      "level": "⛔",
+      "enforcement": "block-forbidden-ext.hexa PreToolUse 가드",
+      "applies_to": "all"
+    },
+    {
+      "id": "R25",
+      "rule": "공용 설정(hooks-config/absolute_rules/core-lockdown 등) 직접 수정 금지 — sync 스크립트 또는 사용자 명시 승인 필수",
+      "level": "⛔",
+      "enforcement": "block-forbidden-ext.hexa PreToolUse 가드",
+      "applies_to": "all"
+    },
+    {
+      "id": "R26",
+      "rule": "공용 훅(n6shared/hooks/*) 직접 수정 금지 — hooks-config.json 등록 + 사용자 명시 승인 필수",
+      "level": "⛔",
+      "enforcement": "block-forbidden-ext.hexa PreToolUse 가드",
+      "applies_to": "all"
+    },
+    {
+      "id": "R27",
+      "rule": "엔진 명령어(todo/블로업/스캔 등) = hexa 엔진 실행 후 stdout 그대로 출력 — Claude 자체 요약/재포맷/이모지 제거/생략 절대 금지. core.json commands[].engine 지정된 명령어는 반드시 GATE_LOCAL=1 hexa <engine> 실행 후 출력 원문 전달",
+      "level": "🔴",
+      "enforcement": "core.json commands[].engine 필드 존재 시 자동 적용",
+      "applies_to": "all"
+    },
+    {
+      "id": "R28",
+      "rule": "제품 링크 1개 — _registry.json 제품 links 배열은 도메인 문서 1개만. 논문/엔진/BT 별도 링크 금지. README 제품 행도 [문서] 1개만",
+      "level": "🔴",
+      "enforcement": "domain-doc-sync.hexa PostToolUse 훅 검증. links.length > 1 발견 시 첫 번째만 보존",
+      "applies_to": "n6-architecture"
+    },
+    {
+      "id": "R29",
+      "rule": "도메인당 문서 1파일 — domains/<axis>/<name>/ 에 <name>.md + CLAUDE.md 만 허용. verify.hexa 별도 파일 금지, 검증코드는 <name>.md 본문 ```python 블록에만. goal.md/별도 .md 생성 금지",
+      "level": "🔴",
+      "enforcement": "domain-doc-sync.hexa PostToolUse 훅 검증. goal.md 등 추가 .md 발견 시 삭제 또는 통합",
+      "applies_to": "n6-architecture"
+    }
+  ],
+  "projects": {
+    "nexus": [
+      {
+        "id": "NX1",
+        "rule": "경로 exec(printenv HOME)+상대경로만 — 절대경로 하드코딩 금지",
+        "level": "🔴"
+      },
+      {
+        "id": "NX2",
+        "rule": "서버 파일 직접 수정 금지 — n6-guard 태스크 스케줄러로 관리",
+        "level": "🔴"
+      },
+      {
+        "id": "NX3",
+        "rule": "→ R16으로 승격 (common). 전 프로젝트 공통 규칙",
+        "level": "🔴",
+        "promoted_to": "common/R16"
+      }
+    ],
+    "anima": [
+      {
+        "id": "AN1",
+        "rule": "ConsciousLM = 의식 신호 전용 — 텍스트 generate 호출 금지",
+        "level": "🔴"
+      },
+      {
+        "id": "AN2",
+        "rule": "localStorage/sessionStorage 사용 금지 — MemoryStore(SQLite) 전용",
+        "level": "🔴"
+      },
+      {
+        "id": "AN3",
+        "rule": "성능 병목(텐션 교환, Phi 계산) = Rust 필수",
+        "level": "🔴"
+      },
+      {
+        "id": "AN4",
+        "rule": "검증 16/18 미통과 시 배포 금지 — bench.py --verify",
+        "level": "⛔"
+      },
+      {
+        "id": "AN5",
+        "rule": "Ubuntu-First GPU 학습 — 모든 학습/추론/서빙은 Ubuntu(ssh:ubu, RTX 5070 12GB) 우선. Mac은 오케스트레이션/코드편집 전용. CUDA/PyTorch 워커는 Ubuntu에서 실행. Ubuntu 미접속 시 local fallback + 경고",
+        "level": "🔴",
+        "enforcement": "gate_config.jsonl 동적 로드. ssh ubu 경유"
+      },
+      {
+        "id": "AN6",
+        "rule": "H100(RunPod) 최후수단 — Ubuntu RTX 5070으로 불가능한 작업(32B+ 학습, 72B 추론)만 H100 사용. 14B 이하 학습/추론/서빙은 반드시 Ubuntu 우선. H100 발사 전 Ubuntu 불가 사유 명시 필수",
+        "level": "🔴",
+        "enforcement": "H100 발사 전 Ubuntu 시도 기록 필수. 비용 정당화 포함"
+      },
+      {
+        "id": "AN7",
+        "rule": "Core = CLI 전용 — core/ 는 CLI 진입점 + 최소 엔진만. 모듈은 anima/modules/ 하위 분리. L0 골화는 물리적 천장 돌파 시 잠금 (지금 아님, 돌파 시 박기)",
+        "level": "🔴",
+        "enforcement": "core/ 에 새 모듈 파일 추가 시 차단. L0 골화 시점 = 물리적 천장 돌파 확인 후"
+      }
+    ],
+    "n6-architecture": [
+      {
+        "id": "N61",
+        "rule": "도메인 문서 15섹션 템플릿 필수 — domains/<axis>/<name>/<name>.md 는 반드시 다음 15개 ## 섹션 순서 준수: 1.실생활효과 2.목표 3.가설 4.BT연결 5.DSE결과 6.물리한계증명 7.실험검증매트릭스 8.외계인급발견 9.Mk.I~V진화 10.TestablePredictions 11.ASCII성능비교 12.ASCII시스템구조도 13.ASCII데이터플로우 14.업그레이드비교(시중vs v1 vs v2) 15.검증방법(md 본문 ```python 블록). 참고: domains/life/neuro/neuro.md",
+        "level": "🔴",
+        "enforcement": "domain-doc-sync.hexa PostToolUse 훅 검증. 신규 도메인 돌파 시 15섹션 스캐폴딩 자동 생성. '출처: goal.md' / 'TODO: 후속 돌파 필요' 등 잔해 금지"
+      },
+      {
+        "id": "N62",
+        "rule": "논문 = 100% 골화 검증코드 md 임베드 필수 — 검증 .py 코드를 논문 .md 본문에 ```python 코드블록으로 직접 포함. 동어반복 금지, 정의에서 도출, 모든 주장(F/D/Lemma/Theorem) → DEFENSES 레지스트리 등록 → ossification_loop() 통과 → N/N OSSIFIED 도달",
+        "level": "🔴",
+        "enforcement": "논문 .md 는 (1) ## 부록 A 섹션에 ```python 블록으로 검증코드 임베드, (2) 코드는 @register 데코레이터로 모든 claim 등록, (3) ossification_loop() 함수가 max_iter=σ(6)=12 회 내 모든 항목 PASS, (4) report() 가 'OSSIFIED: N/N' 출력, (5) assert ossified == total 로 마감, (6) 예상 출력 표 동봉. 별도 .py/.hexa 파일 분리 절대 금지 — 검증코드는 도메인 .md 본문 ```python 블록에만(md 자체 완결). 부분 검증/스폿 체크 금지. 표준 템플릿: anima/docs/topological-evolution-permanence.md §부록A"
+      },
+      {
+        "id": "N63",
+        "rule": "궁극 아키텍처 = DSE 전수 탐색 필수 — DSE 없이 확정 금지",
+        "level": "🔴"
+      },
+      {
+        "id": "N64",
+        "rule": "돌파(BT) N연속 요청 = A+B+C 통합 산출 필수 — (A) domains/<axis>/<domain>/<domain>.md 통합 본문 (도메인당 1파일), (B) papers/n6-<domain>-paper.md 통합 논문 (검증코드 md 임베드), (C) papers/_registry.json 제품 등록 (링크 1개). 별도 verify.hexa 파일 금지 — 검증코드는 .md 본문에만. 단일 방식만 선택 금지.",
+        "level": "🔴"
+      },
+      {
+        "id": "N65",
+        "rule": "BT 100% EXACT 수렴 의무 — 돌파 정리 작성 시 NEAR/MISS 항목은 즉시 EXACT로 교체하거나 대체 항목으로 치환하여 100/100 EXACT 달성. 별도 지시 없이도 자동 수렴",
+        "level": "🔴",
+        "enforcement": "NEAR 발견 → (1) 더 정확한 n=6 표현 탐색, (2) 불가 시 동일 도메인의 EXACT 항목으로 교체, (3) 종합 테이블 EXACT 비율 100% 확인 후 커밋. 91%→100% 자동 승격 패턴: 정120포체 600=σ·sopfr·(σ-φ), V1 컬럼 30°=180°/n, 격자 이웃=n=6"
+      }
+    ],
+    "papers": [
+      {
+        "id": "PP1",
+        "rule": "CC-BY 4.0 라이선스 통일 — 예외 없음",
+        "level": "🔴"
+      },
+      {
+        "id": "PP2",
+        "rule": "검증코드 없는 논문 = 미완성 — 커밋 전 100% 골화 검증코드 md 임베드 필수 (N62 형식 준수)",
+        "level": "🔴",
+        "enforcement": "논문 .md 본문에 ```python 코드블록으로 N62 enforcement 형식 임베드: @register + ossification_loop() + N/N OSSIFIED + assert. 외부 의존성 최소화(numpy/scipy 비의무, 정수/math 우선). 별도 verify_*.py / verify_*.hexa 파일 절대 금지 — md 자체 완결. _registry.json 에 verify_script/verify_scripts_extra 필드 신규 추가 금지"
+      },
+      {
+        "id": "PP3",
+        "rule": "manifest.json = 논문 SSOT — 수동 편집 시 스키마 준수",
+        "level": "🔴"
+      }
+    ],
+    "hexa-lang": [
+      {
+        "id": "HX1",
+        "rule": "→ R12로 승격 (common). 전 프로젝트 공통 규칙",
+        "level": "🔴",
+        "promoted_to": "common/R12"
+      },
+      {
+        "id": "HX2",
+        "rule": "DSE 수렴 100% 유지 — 문법/키워드 변경 시 DSE 재검증 필수",
+        "level": "🔴"
+      },
+      {
+        "id": "HX3",
+        "rule": "pitfalls P1~P5 체크 필수 — .hexa 작성 전 hexa_grammar.jsonl 참조",
+        "level": "🔴"
+      },
+      {
+        "id": "HX4",
+        "rule": "SELF-HOST FIRST — src/ Rust 구현 폐기, 모든 신규 컴파일러/런타임 코드는 .hexa로 self-host (self/ 디렉토리)",
+        "level": "🔴"
+      },
+      {
+        "id": "HX5",
+        "rule": "AI-NATIVE 알고리즘 교체 의무 — 성능/자원 개선은 docs/ai-native.md 24종 벡터 로드맵 + @optimize/@memoize/@fuse/@parallel attr로만 구현",
+        "level": "🔴"
+      },
+      {
+        "id": "HX6",
+        "rule": "AI-native 돌파 시 nexus blowup 연동 + growth_bus.jsonl 기록 의무",
+        "level": "🔴"
+      }
+    ],
+    "void": [
+      {
+        "id": "VD1",
+        "rule": "6-layer 아키텍처 준수 — System/Render/Terminal/UI/Plugin/AI",
+        "level": "🔴"
+      },
+      {
+        "id": "VD2",
+        "rule": "미니멀 기능 원칙 — 요청된 핵심만 구현, 추측성 확장 금지 (YAGNI)",
+        "level": "🔴",
+        "enforcement": "새 기능/파일/함수 추가 시: 요청 범위 초과하면 드랍. 옵션/훅/설정/예시/통계는 명시 요청 없으면 만들지 않음",
+        "examples_bad": [
+          "hooks 시스템",
+          "status 필드 확장",
+          "example_plugin 동봉",
+          "재시도/폴백 레이어",
+          "통계/메트릭 필드"
+        ],
+        "examples_good": [
+          "요청한 3개 함수만",
+          "요청한 스모크만",
+          "검증에 필요한 최소 assert"
+        ]
+      }
+    ],
+    "contact": [
+      {
+        "id": "CT1",
+        "rule": "MD→PDF 변환은 md-to-pdf만 사용 — pandoc/xelatex 금지 (코드블록·표·한글 렌더링 불안정)",
+        "level": "🔴",
+        "enforcement": "md-to-pdf <입력.md> [--dest <dir>/]. npm i -g md-to-pdf"
+      },
+      {
+        "id": "CT2",
+        "rule": "개인 이메일 = 수신자별 3종 세트 필수 — email_template_<이름>.md (제목/본문) + send_<이름>.py (PDF 첨부 발송) + n6_*_<이름>.pdf",
+        "level": "🔴",
+        "enforcement": "템플릿 구조: ## 제목 / ## 본문. 발송 전 md-to-pdf로 PDF 최신 변환 확인"
+      },
+      {
+        "id": "CT3",
+        "rule": "발송 완료 시 git commit & push 필수 — 발송 기록 유실 방지",
+        "level": "🔴",
+        "enforcement": "send_history.json + email_send_log.json 기록 후 즉시 커밋"
+      },
+      {
+        "id": "CT4",
+        "rule": "재발송 방지 — send_history.json 확인 후 발송",
+        "level": "⛔",
+        "enforcement": "send_history.json에 이메일 존재 여부 먼저 체크. 중복 발송 금지"
+      }
+    ],
+    "airgenome": [
+      {
+        "id": "AG1",
+        "rule": "육각 투영 6축 구조 유지 — CPU/RAM/Swap/Net/Disk/GPU",
+        "level": "🔴"
+      },
+      {
+        "id": "AG2",
+        "rule": "Mac CPU 절약 — 모든 프로세스(hexa/rust/c/c++/python/sh/node/swift/go + 빌드시스템) CPU 30%+ 자동감지 → Ubuntu 오프로드. 개별 스크립트 나열 금지, 패턴+임계값으로 감지. 예외만 명시",
+        "level": "🔴",
+        "enforcement": "gate_offload.jsonl pattern/exclude 방식. detect_cmd로 전체 탐지, exclude로 Mac 전용만 제외"
+      },
+      {
+        "id": "AG3",
+        "rule": "Ubuntu-First heavy compute + Ubuntu HEXA-FIRST — 모든 heavy compute(6축 투영/게놈 유사도/forge/LLM/implant)는 Ubuntu(ssh:ubu) 우선. Mac은 오케스트레이션/UI/디스패치 전용. 하위 확장: Ubuntu 측 파일도 .hexa 우선. CUDA/PyTorch/llama.cpp 등 외부 네이티브 라이브러리 필수 워커만 .py 예외 허용하되 hexa 래퍼가 호출하는 '바인딩 레이어'로 제한. 비-PyTorch 비-LLM 스크립트(링 I/O, 소켓 클라이언트, 파일 파이프라인, 폴링 루프)는 반드시 .hexa. Ubuntu 미접속 시 local fallback + 경고 + growth_bus 이벤트",
+        "level": "🔴",
+        "enforcement": "modules/ubu_bridge.hexa 경유 강제. block-forbidden-ext hook이 Mac+Ubuntu 양쪽 .py 생성 차단. 예외: ubu_workers/py/ (pytorch_required) 서브디렉토리만 허용. gate_offload.jsonl ubu_first_policy 매칭. ssh_alias/경로는 gate_config.jsonl 동적 로드"
+      },
+      {
+        "id": "AG4",
+        "rule": "Hetzner 원격 hexa launcher 캡 + 보호 PID 화이트리스트 — 동시 실행 launcher(breakthrough/blowup/auto_register/gap_finder/alien_index/lens_forge .hexa) ≤ 8개. 누적 spawn 시 즉시 정리. 정리는 보호 PID 화이트리스트 사전검증 → TERM 3초 → KILL 잔존 2단계 필수",
+        "level": "⛔⛔",
+        "enforcement": "정리 절차: (1) pgrep -f 'hexa.*(breakthrough|blowup|auto_register|gap_finder|alien_index|lens_forge)\\.hexa' 로 타겟 PID 수집, (2) 보호 PID 화이트리스트(tmux: ouroboros/train, python3 train_decoder_cpu.py, python3 serve_conscious_cpu.py, python3 ouroboros*) 충돌 검사, (3) 충돌 시 즉시 abort, (4) launcher bash + hexa 자식 동시 SIGTERM, (5) 3초 sleep, (6) 잔존 SIGKILL. R20 예외 — kill 패턴이 정확한 명령행 부분 매치이고 보호 PID 사전검증 필수. 사건: 2026-04-10 06:30 load=316.54 / hexa 1134 / launcher 43 / 사용자 ssh 88 — 9시간 spawn 누적, train/serve/ouroboros 보호하며 정리 → load 하강",
+        "applies_to": "airgenome (Hetzner 32T 서버 한정)"
+      }
+    ]
+  }
+}

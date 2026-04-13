@@ -255,7 +255,7 @@ for name, val, expr in checks:
 
 ## DSE
 
-- `shared/dse/domains/immunology.toml` 참조
+- `n6shared/dse/domains/immunology.toml` 참조
 
 
 ## 3. 가설

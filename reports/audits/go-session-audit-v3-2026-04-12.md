@@ -164,7 +164,7 @@ sota       3/3         500      ✓ 신규 + 3 상세 기존유지
 
 ### 2-7. DSE (Design Space Exploration) 164+
 
-v2 에서 언급된 "DSE 164+" 는 `shared/convergence/` 의 DSE_322_TOML 골화
+v2 에서 언급된 "DSE 164+" 는 `n6shared/convergence/` 의 DSE_322_TOML 골화
 (322 도메인 TOML, 5,893,032+ 조합) 상위 범주와, 제품-논문 링크 164 개수가
 혼재된 값으로 추정. v3 실측:
 
@@ -195,7 +195,7 @@ v2 에서 언급된 "DSE 164+" 는 `shared/convergence/` 의 DSE_322_TOML 골화
 
 ### 3-1. 골화 카운트 실측
 
-v2 는 43건을 기록. v3 실측 `shared/convergence/n6-architecture.json` 의
+v2 는 43건을 기록. v3 실측 `n6shared/convergence/n6-architecture.json` 의
 `ossified` 블록 파싱 결과 40 ~ 44 건 범위 (날짜/항목 형식 혼재).
 
 | 날짜 | 신규 건수 | 누적 |
@@ -469,7 +469,7 @@ AI 기법 design     [       ] 0%      [=      ] 4.2%   [=======] 100%
 - 브랜치: `feat/millennium-dfs-92-tight`
 - 선행 감사: `go-audit-2026-04-12.md` (v1), `go-session-audit-v2-2026-04-12.md` (v2)
 - 레지스트리: `techniques/_registry.json` v1.3.0
-- 수렴 소스: `shared/convergence/n6-architecture.json`
+- 수렴 소스: `n6shared/convergence/n6-architecture.json`
 - AI 기법 설계서: `techniques/{attention,moe,optim,sparse,graph,compress,arch,sota}/design.md` + `techniques/design.md`
 - 밀레니엄 신규: `theory/breakthroughs/bt-1401~1405.md`
 - 논문 신규 (untracked): `papers/n6-{causal-chain,chemistry,ecology-standalone,genetics,reality-map}-paper.md`

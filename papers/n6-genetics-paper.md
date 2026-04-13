@@ -231,7 +231,7 @@ sigma(n)*phi(n) = n*tau(n) = 24라는 한 줄의 등식이 유전 코드의 미�
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
 - `domains/life/genetics/genetics.md` -- DSE 23,328 탐색, 40/42 EXACT
-- `shared/n6/atlas.n6` genetics 섹션 [10*]
+- `n6shared/n6/atlas.n6` genetics 섹션 [10*]
 
 **2차 출처 (외부 학술)**
 

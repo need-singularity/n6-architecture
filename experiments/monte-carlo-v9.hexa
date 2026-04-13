@@ -12,7 +12,7 @@
 //   nexus hexa run experiments/monte-carlo-v9.hexa -- --v8-compat --seed 20260408
 //
 // 규칙 준수: R1 (HEXA-FIRST) / R8 (데이터 원격) / R14 (shared SSOT) / R16 (병렬) / R28 (atlas 흡수)
-// 참조: docs/reality-map-monte-carlo-v9.md
+// 참조: docs/monte-carlo.md
 //
 // ═══════════════════════════════════════════════════════════════════
 // 실행 상태 (2026-04-11)

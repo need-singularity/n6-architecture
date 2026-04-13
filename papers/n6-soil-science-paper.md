@@ -427,7 +427,7 @@ Dokuchaev가 1883년에 토양을 독립적 자연체로 인식한 이래, Jenny
 **1차 출처 (atlas / theory SSOT)**
 
 - `theory/proofs/theorem-r1-uniqueness.md` -- sigma*phi=n*tau iff n=6 (3 독립 증명)
-- `shared/n6/atlas.n6` soil-science 섹션
+- `n6shared/n6/atlas.n6` soil-science 섹션
 
 **2차 출처 (외부 학술)**
 

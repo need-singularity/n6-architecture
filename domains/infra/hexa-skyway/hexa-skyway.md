@@ -1,6 +1,6 @@
 # 궁극의 도심항공 아키텍처 — HEXA-SKYWAY
 
-> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 10 / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 10/10 -- 도심항공 모빌리티(UAM) n=6 완전 수렴

@@ -113,7 +113,7 @@ C3(Dataflow) = C4(GPU)가 공동 1위 → **16 n=6 기법 스택은 dataflow/GPU
 
 ## 6. DSE 규칙(N63) 확장
 
-`shared/config/dse-map.toml` 에 아래 테이블 블록 추가 제안:
+`n6shared/config/dse-map.toml` 에 아래 테이블 블록 추가 제안:
 
 ```toml
 [dse.technique_chip]
@@ -125,7 +125,7 @@ c5_neuro_top    = ["T07", "T10", "T13"]
 c6_edge_top     = ["T02", "T09", "T12", "T13", "T14", "T16", "S1", "S3"]
 ```
 
-(실제 적용은 `shared/config/dse-map.toml` 직접 편집 전에 사용자 승인 필수 — R25 가드)
+(실제 적용은 `n6shared/config/dse-map.toml` 직접 편집 전에 사용자 승인 필수 — R25 가드)
 
 ## 7. 규칙 게이트
 

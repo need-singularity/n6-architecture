@@ -1,7 +1,7 @@
 # R29 대량 이관 감사 리포트 — 2026-04-11
 
 - 일자: 2026-04-11
-- 규칙: R29 (shared/rules/common.json)
+- 규칙: R29 (n6shared/rules/common.json)
 - 작업: domains/**/verify_*.hexa (verify.hexa 제외) → nexus/shared/n6/scripts/
 - 스크립트: `nexus/scripts/migrate_r29_verify.hexa`
 - 선행 리포트: `reports/audits/r29-migration-synbio-2026-04-11.md` (synbio 1건 이관)
@@ -93,7 +93,7 @@ ls /Users/ghost/Dev/nexus/shared/n6/scripts/verify_*.hexa | wc -l
 
 - [x] R1 HEXA-FIRST: 이관 파일 전량 .hexa 유지, 스크립트도 .hexa
 - [x] R5 SSOT: 단일 위치 (`nexus/shared/n6/scripts/`) 수렴
-- [x] R14: 규칙 본문은 `shared/rules/common.json` 단일 진실 (인용만)
+- [x] R14: 규칙 본문은 `n6shared/rules/common.json` 단일 진실 (인용만)
 - [x] R18 미니멀: 요청 범위만 — 로직 수정 없이 파일 이동만
 - [x] R19 SILENT EXIT 금지: 모든 에러 stdout 출력 + 리포트 기록
 - [x] R21 블로킹 금지: find/md5/cp 개별 호출로 대형 블로킹 없음

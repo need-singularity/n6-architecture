@@ -1,6 +1,6 @@
 # N6 Cosmology & Particle Physics -- Unified Goal
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Vision**: n=6 완전수 산술이 표준모형 입자물리 + 관측 우주론의 근본 구조를 조직하는 통합 이론 경로 전수 탐색

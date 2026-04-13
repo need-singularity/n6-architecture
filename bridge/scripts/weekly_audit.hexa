@@ -1,0 +1,660 @@
+// ═══════════════════════════════════════════════════════════
+// weekly_audit.hexa — n6-architecture 주간 감사 자동 생성기
+// ═══════════════════════════════════════════════════════════
+//
+// 목적: 지난 7일간 프로젝트 전방위 감사 → 한글 리포트 자동 작성
+//
+// 집계 항목:
+//   1) git log (커밋 수, 저자, 파일 변경, 9축 분포)
+//   2) n6shared/growth_bus.jsonl 신규 엔트리
+//   3) n6shared/discovery_graph.json 노드/엣지 변화량 (스냅샷 대비)
+//   4) /Users/ghost/Dev/nexus/shared/n6/atlas.n6 승격 건수 ([7]→[10*])
+//   5) cargo test 결과 (nexus 워크스페이스, 옵션)
+//   6) n6shared/convergence/n6-architecture.json 상태 변화
+//
+// 산출:
+//   reports/sessions/{YYYY-MM-DD}-weekly-audit.md   (한글, box-drawing 표)
+//   reports/changelogs/{YYYY-MM-DD}-weekly.md       (자동 체인지로그 템플릿)
+//   n6shared/logs/weekly_audit_state.json             (다음 주 델타용 스냅샷)
+//
+// 사용:
+//   hexa nexus/scripts/weekly_audit.hexa              # 기본 (이번 주)
+//   hexa nexus/scripts/weekly_audit.hexa --dry-run    # 작성 없이 stdout
+//   hexa nexus/scripts/weekly_audit.hexa --force      # 덮어쓰기
+//   hexa nexus/scripts/weekly_audit.hexa --no-cargo   # cargo test 스킵
+//   hexa nexus/scripts/weekly_audit.hexa --since 14   # 14일 범위
+//
+// 멱등성:
+//   - 동일 날짜 재실행 시 기본은 _rerun-HHMM 접미사 (기존 파일 보존)
+//   - --force 지정 시 덮어쓰기
+//   - 스냅샷 JSON 은 항상 최신 값으로 갱신
+//
+// 규칙:
+//   R1 HEXA-FIRST / R14 shared SSOT / 한글 필수
+//   R19 SILENT EXIT 금지 — 모든 에러 명시 출력
+//   R21 블로킹 금지 — cargo test 는 timeout 180s 래핑
+//   R22 인터프리터 경로 — bash 만 사용
+// ═══════════════════════════════════════════════════════════
+
+// ─── 경로 상수 ───
+let PROJECT_ROOT = "."
+let GROWTH_BUS = "n6shared/growth_bus.jsonl"
+let DISC_GRAPH = "n6shared/discovery_graph.json"
+let CONV_JSON = "n6shared/convergence/n6-architecture.json"
+let STATE_JSON = "n6shared/logs/weekly_audit_state.json"
+let ATLAS_N6 = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+let OUT_SESS_DIR = "reports/sessions"
+let OUT_CHLG_DIR = "reports/changelogs"
+
+// ─── 유틸 ───
+fn sh(cmd) {
+    let mut out = ""
+    try {
+        out = to_string(exec("bash", ["-c", cmd]))
+    } catch e {
+        println("⚠️ [sh] 실행 실패: " + cmd)
+        println("    원인: " + to_string(e))
+    }
+    return out
+}
+
+fn sh_trim(cmd) {
+    return sh(cmd).trim()
+}
+
+fn log_err(msg) {
+    try {
+        exec("bash", ["-c", "printf '%s\\n' " + shq(msg) + " 1>&2"])
+    } catch e {}
+}
+
+// 쉘 quote: single-quote 안전 인용
+fn shq(s) {
+    return "'" + s.replace("'", "'\\''") + "'"
+}
+
+fn pad_r(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = r + " " }
+    return r
+}
+
+fn pad_l(s, w) {
+    let mut r = to_string(s)
+    while len(r) < w { r = " " + r }
+    return r
+}
+
+fn delta_mark(d) {
+    if d > 0 { return "+" + to_string(d) }
+    if d < 0 { return to_string(d) }
+    return "±0"
+}
+
+fn file_exists_simple(path) {
+    let out = sh_trim("[ -f '" + path + "' ] && echo yes || echo no")
+    return out == "yes"
+}
+
+// 안전 정수 변환 (실패 시 0)
+fn safe_int(s) {
+    let t = s.trim()
+    if len(t) == 0 { return 0 }
+    let mut v = 0
+    try { v = to_int(t) } catch e { v = 0 }
+    return v
+}
+
+// JSON 안에서 "field": N 형태로 정수 읽기 (단순 파싱)
+fn json_get_int(body, field_name) {
+    let key = "\"" + field_name + "\""
+    let idx = body.index_of(key)
+    if idx < 0 { return 0 }
+    let after = body.substring(idx + len(key), len(body))
+    let col = after.index_of(":")
+    if col < 0 { return 0 }
+    let rest = after.substring(col + 1, len(after))
+    // 숫자 문자 수집
+    let mut num = ""
+    let mut i = 0
+    let n = len(rest)
+    while i < n {
+        let ch = rest[i]
+        if ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9" {
+            num = num + ch
+        } else if ch == " " || ch == "\t" || ch == "\n" || ch == "\r" {
+            if len(num) > 0 { break }
+        } else {
+            if len(num) > 0 { break }
+        }
+        i = i + 1
+    }
+    return safe_int(num)
+}
+
+// ─── CLI 인자 파싱 ───
+let a = args()
+let mut DRY_RUN = false
+let mut FORCE = false
+let mut NO_CARGO = false
+let mut SINCE_DAYS = 7
+
+let mut ai = 2
+while ai < len(a) {
+    let tok = a[ai]
+    if tok == "--dry-run" { DRY_RUN = true }
+    else if tok == "--force" { FORCE = true }
+    else if tok == "--no-cargo" { NO_CARGO = true }
+    else if tok == "--since" {
+        ai = ai + 1
+        if ai < len(a) {
+            let n = safe_int(a[ai])
+            if n > 0 { SINCE_DAYS = n }
+        }
+    }
+    ai = ai + 1
+}
+
+// ─── 시간 계산 ───
+let TODAY = sh_trim("date +%Y-%m-%d")
+let TODAY_HM = sh_trim("date +%H%M")
+let NOW_STR = sh_trim("date '+%Y-%m-%d %H:%M:%S'")
+let WEEK_START = sh_trim("date -v-" + to_string(SINCE_DAYS) + "d +%Y-%m-%d 2>/dev/null || date -d '" + to_string(SINCE_DAYS) + " days ago' +%Y-%m-%d")
+
+log_err("[weekly_audit] 시작 — 범위: " + WEEK_START + " ~ " + TODAY)
+log_err("[weekly_audit] 옵션: dry_run=" + to_string(DRY_RUN) + " force=" + to_string(FORCE) + " no_cargo=" + to_string(NO_CARGO))
+
+// ─── 1. git log 집계 ───
+log_err("[phase 1/6] git log 집계")
+
+let GIT_SINCE = "--since='" + to_string(SINCE_DAYS) + " days ago'"
+let GIT_CMD = "git -C '" + PROJECT_ROOT + "' log " + GIT_SINCE
+
+let n_commits = safe_int(sh_trim(GIT_CMD + " --pretty=oneline 2>/dev/null | wc -l"))
+
+let authors_raw = sh(GIT_CMD + " --pretty=format:'%an' 2>/dev/null | sort -u")
+let mut author_list = []
+for ln in authors_raw.split("\n") {
+    let t = ln.trim()
+    if len(t) > 0 { author_list = author_list + [t] }
+}
+
+let files_changed = safe_int(sh_trim(GIT_CMD + " --name-only --pretty=format: 2>/dev/null | grep -v '^$' | sort -u | wc -l"))
+let insertions_raw = sh_trim(GIT_CMD + " --numstat --pretty=format: 2>/dev/null | awk '{s+=$1} END {print s+0}'")
+let deletions_raw = sh_trim(GIT_CMD + " --numstat --pretty=format: 2>/dev/null | awk '{s+=$2} END {print s+0}'")
+
+// 9축 분포
+let axes_raw = sh(GIT_CMD + " --name-only --pretty=format: 2>/dev/null | grep -v '^$' | sort -u")
+let axes_names = ["theory", "domains", "nexus", "techniques", "experiments", "engine", "papers", "reports", "shared"]
+let mut axes_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+for path in axes_raw.split("\n") {
+    let p = path.trim()
+    if len(p) == 0 { continue }
+    let mut ix = 0
+    while ix < len(axes_names) {
+        let prefix = axes_names[ix] + "/"
+        if starts_with(p, prefix) || p == axes_names[ix] {
+            axes_counts[ix] = axes_counts[ix] + 1
+            break
+        }
+        ix = ix + 1
+    }
+}
+
+// 최근 커밋 (최대 12건)
+let recent_commits_raw = sh(GIT_CMD + " --pretty=format:'%h|%an|%s' 2>/dev/null | head -12")
+
+// ─── 2. growth_bus.jsonl ───
+log_err("[phase 2/6] growth_bus.jsonl 스캔")
+
+let mut gb_total = 0
+let mut gb_new = 0
+let mut gb_types_keys = []
+let mut gb_types_vals = []
+let mut gb_domains_keys = []
+let mut gb_domains_vals = []
+
+if file_exists_simple(GROWTH_BUS) {
+    gb_total = safe_int(sh_trim("wc -l < '" + GROWTH_BUS + "' 2>/dev/null"))
+
+    let cutoff = WEEK_START
+    gb_new = safe_int(sh_trim("awk -v cutoff='" + cutoff + "' '{n=index($0,\"\\\"ts\\\":\\\"\"); if(n==0) next; rest=substr($0,n+6); q=index(rest,\"\\\"\"); if(q==0) next; ts=substr(rest,1,q-1); if(ts>=cutoff) c++} END{print c+0}' '" + GROWTH_BUS + "' 2>/dev/null"))
+
+    // 타입 TOP 8
+    let types_raw = sh("awk -v cutoff='" + cutoff + "' '{n=index($0,\"\\\"ts\\\":\\\"\"); if(n==0) next; rest=substr($0,n+6); q=index(rest,\"\\\"\"); if(q==0) next; ts=substr(rest,1,q-1); if(ts<cutoff) next; tp=index($0,\"\\\"type\\\":\\\"\"); if(tp==0) next; trest=substr($0,tp+8); tq=index(trest,\"\\\"\"); if(tq==0) next; type=substr(trest,1,tq-1); count[type]++} END{for(k in count) printf \"%s\\t%d\\n\", k, count[k]}' '" + GROWTH_BUS + "' 2>/dev/null | sort -t'\\t' -k2,2nr | head -8")
+    for ln in types_raw.split("\n") {
+        let t = ln.trim()
+        if len(t) == 0 { continue }
+        let f = t.split("\t")
+        if len(f) < 2 { continue }
+        gb_types_keys = gb_types_keys + [f[0]]
+        gb_types_vals = gb_types_vals + [safe_int(f[1])]
+    }
+
+    // 도메인 TOP 8
+    let doms_raw = sh("awk -v cutoff='" + cutoff + "' '{n=index($0,\"\\\"ts\\\":\\\"\"); if(n==0) next; rest=substr($0,n+6); q=index(rest,\"\\\"\"); if(q==0) next; ts=substr(rest,1,q-1); if(ts<cutoff) next; dp=index($0,\"\\\"domain\\\":\\\"\"); if(dp==0) next; drest=substr($0,dp+10); dq=index(drest,\"\\\"\"); if(dq==0) next; dom=substr(drest,1,dq-1); count[dom]++} END{for(k in count) printf \"%s\\t%d\\n\", k, count[k]}' '" + GROWTH_BUS + "' 2>/dev/null | sort -t'\\t' -k2,2nr | head -8")
+    for ln in doms_raw.split("\n") {
+        let t = ln.trim()
+        if len(t) == 0 { continue }
+        let f = t.split("\t")
+        if len(f) < 2 { continue }
+        gb_domains_keys = gb_domains_keys + [f[0]]
+        gb_domains_vals = gb_domains_vals + [safe_int(f[1])]
+    }
+} else {
+    log_err("⚠️ growth_bus.jsonl 없음: " + GROWTH_BUS)
+}
+
+// ─── 3. discovery_graph.json 델타 ───
+log_err("[phase 3/6] discovery_graph.json 델타")
+
+let mut dg_nodes_now = 0
+let mut dg_edges_now = 0
+if file_exists_simple(DISC_GRAPH) {
+    dg_nodes_now = safe_int(sh_trim("awk 'BEGIN{n=0} { while(match($0,/\"id\":/)){n++; $0=substr($0,RSTART+RLENGTH)} } END{print n}' '" + DISC_GRAPH + "' 2>/dev/null"))
+    dg_edges_now = safe_int(sh_trim("awk 'BEGIN{n=0} { while(match($0,/\"from\":/)){n++; $0=substr($0,RSTART+RLENGTH)} } END{print n}' '" + DISC_GRAPH + "' 2>/dev/null"))
+} else {
+    log_err("⚠️ discovery_graph.json 없음: " + DISC_GRAPH)
+}
+
+// 이전 스냅샷 읽기
+let mut dg_nodes_prev = 0
+let mut dg_edges_prev = 0
+let mut prev_atlas_exact = 0
+let mut prev_atlas_empirical = 0
+let mut prev_gb_total = 0
+
+if file_exists_simple(STATE_JSON) {
+    let mut body = ""
+    try { body = read_file(STATE_JSON) } catch e { body = "" }
+    if len(body) > 0 {
+        dg_nodes_prev = json_get_int(body, "dg_nodes")
+        dg_edges_prev = json_get_int(body, "dg_edges")
+        prev_atlas_exact = json_get_int(body, "atlas_exact")
+        prev_atlas_empirical = json_get_int(body, "atlas_empirical")
+        prev_gb_total = json_get_int(body, "gb_total")
+    }
+}
+
+let dg_nodes_delta = dg_nodes_now - dg_nodes_prev
+let dg_edges_delta = dg_edges_now - dg_edges_prev
+
+// ─── 4. atlas.n6 등급 집계 ───
+log_err("[phase 4/6] atlas.n6 등급 집계")
+
+let mut atlas_exact = 0
+let mut atlas_near = 0
+let mut atlas_empirical = 0
+let mut atlas_conjecture = 0
+let mut atlas_breakthrough = 0
+
+if file_exists_simple(ATLAS_N6) {
+    atlas_exact = safe_int(sh_trim("grep -c '\\[10\\*\\]' '" + ATLAS_N6 + "' 2>/dev/null || echo 0"))
+    atlas_near = safe_int(sh_trim("grep -cE '\\[10\\]|\\[9\\]' '" + ATLAS_N6 + "' 2>/dev/null || echo 0"))
+    atlas_empirical = safe_int(sh_trim("grep -c '\\[7\\]' '" + ATLAS_N6 + "' 2>/dev/null || echo 0"))
+    atlas_conjecture = safe_int(sh_trim("grep -cE '\\[[0-9]+\\?\\]' '" + ATLAS_N6 + "' 2>/dev/null || echo 0"))
+    atlas_breakthrough = safe_int(sh_trim("grep -cE '\\[[0-9]+!\\]' '" + ATLAS_N6 + "' 2>/dev/null || echo 0"))
+} else {
+    log_err("⚠️ atlas.n6 없음: " + ATLAS_N6)
+}
+
+let atlas_exact_delta = atlas_exact - prev_atlas_exact
+let atlas_empirical_delta = atlas_empirical - prev_atlas_empirical
+
+// ─── 5. cargo test ───
+log_err("[phase 5/6] cargo test")
+
+let mut cargo_status = "생략 (--no-cargo)"
+let mut cargo_pass = 0
+let mut cargo_fail = 0
+let mut cargo_ignored = 0
+let mut cargo_summary = ""
+
+if !NO_CARGO {
+    let has_cargo = sh_trim("command -v cargo >/dev/null 2>&1 && echo yes || echo no")
+    if has_cargo == "yes" {
+        let tmp = "/tmp/.weekly_audit_cargo." + sh_trim("echo $$")
+        sh("cd '" + PROJECT_ROOT + "/nexus' 2>/dev/null && timeout 180 cargo test --quiet --offline 2>&1 | tail -40 > '" + tmp + "' ; echo \"exit=$?\" >> '" + tmp + "'")
+        let mut body = ""
+        try { body = read_file(tmp) } catch e { body = "" }
+        sh("rm -f '" + tmp + "'")
+
+        let idx = body.index_of("test result:")
+        if idx >= 0 {
+            let line_rest = body.substring(idx, len(body))
+            let eol = line_rest.index_of("\n")
+            let mut line = line_rest
+            if eol > 0 { line = line_rest.substring(0, eol) }
+            cargo_summary = line
+
+            // 숫자 토큰 파싱: "X passed; Y failed; Z ignored"
+            // ' passed' 직전 숫자, ' failed' 직전 숫자
+            let pp = line.index_of(" passed")
+            if pp > 0 {
+                let pre = line.substring(0, pp)
+                let mut sp = len(pre) - 1
+                while sp >= 0 {
+                    let ch = pre[sp]
+                    if !(ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") { break }
+                    sp = sp - 1
+                }
+                cargo_pass = safe_int(pre.substring(sp + 1, len(pre)))
+            }
+            let fp = line.index_of(" failed")
+            if fp > 0 {
+                let pre = line.substring(0, fp)
+                let mut sp = len(pre) - 1
+                while sp >= 0 {
+                    let ch = pre[sp]
+                    if !(ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") { break }
+                    sp = sp - 1
+                }
+                cargo_fail = safe_int(pre.substring(sp + 1, len(pre)))
+            }
+            let ip = line.index_of(" ignored")
+            if ip > 0 {
+                let pre = line.substring(0, ip)
+                let mut sp = len(pre) - 1
+                while sp >= 0 {
+                    let ch = pre[sp]
+                    if !(ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") { break }
+                    sp = sp - 1
+                }
+                cargo_ignored = safe_int(pre.substring(sp + 1, len(pre)))
+            }
+
+            if cargo_fail == 0 && cargo_pass > 0 {
+                cargo_status = "✅ PASS (" + to_string(cargo_pass) + " tests)"
+            } else if cargo_fail > 0 {
+                cargo_status = "❌ FAIL (" + to_string(cargo_fail) + "/" + to_string(cargo_pass + cargo_fail) + ")"
+            } else {
+                cargo_status = "⚠️ 파싱 실패"
+            }
+        } else {
+            if contains(body, "timeout") || contains(body, "killed") {
+                cargo_status = "⏱ 타임아웃 (180s)"
+            } else if contains(body, "error") {
+                cargo_status = "❌ 빌드/컴파일 에러"
+            } else {
+                cargo_status = "⚠️ 결과 미확인"
+            }
+            let blen = len(body)
+            let cut = if blen > 200 { 200 } else { blen }
+            cargo_summary = body.substring(0, cut)
+        }
+    } else {
+        cargo_status = "⚠️ cargo 미설치"
+    }
+}
+
+// ─── 6. convergence ───
+log_err("[phase 6/6] convergence 상태")
+
+let mut conv_ossified = 0
+let mut conv_stable = 0
+let mut conv_failed = 0
+
+if file_exists_simple(CONV_JSON) {
+    conv_ossified = safe_int(sh_trim("awk '/\"ossified\":/{f=1;next} /\"stable\":/{f=0} f && /^    \"[A-Z_][A-Z0-9_]*\":/{c++} END{print c+0}' '" + CONV_JSON + "' 2>/dev/null"))
+    conv_stable = safe_int(sh_trim("awk '/\"stable\":/{f=1;next} /\"failed\":/{f=0} f && /^    \"[A-Z_][A-Z0-9_]*\":/{c++} END{print c+0}' '" + CONV_JSON + "' 2>/dev/null"))
+    conv_failed = safe_int(sh_trim("awk '/\"failed\":/{f=1;next} f && /^    \"[A-Z_][A-Z0-9_]*\":/{c++} END{print c+0}' '" + CONV_JSON + "' 2>/dev/null"))
+} else {
+    log_err("⚠️ convergence json 없음: " + CONV_JSON)
+}
+
+// ─── 리포트 작성 ───
+log_err("[render] 리포트 작성")
+
+let mut md = ""
+md = md + "# n6-architecture 주간 감사 리포트 — " + TODAY + "\n\n"
+md = md + "> **감사 범위**: " + WEEK_START + " ~ " + TODAY + " (지난 " + to_string(SINCE_DAYS) + "일)\n"
+md = md + "> **생성 시각**: " + NOW_STR + "\n"
+md = md + "> **생성기**: `nexus/scripts/weekly_audit.hexa` (자동)\n\n"
+md = md + "---\n\n"
+
+// 요약 박스
+md = md + "## 요약 스냅샷\n\n"
+md = md + "```\n"
+md = md + "  ┌────────────────────────────────────────────────────────────────────┐\n"
+md = md + "  │                n6-architecture 주간 감사 요약                       │\n"
+md = md + "  ├──────────────┬──────────────┬──────────────┬──────────────────────┤\n"
+md = md + "  │  커밋         │  성장버스     │  발견그래프   │  atlas 승격          │\n"
+md = md + "  ├──────────────┼──────────────┼──────────────┼──────────────────────┤\n"
+md = md + "  │ " + pad_r(to_string(n_commits) + " 건", 13) + "│ " + pad_r(to_string(gb_new) + " 신규", 13) + "│ " + pad_r(delta_mark(dg_nodes_delta) + " 노드", 13) + "│ " + pad_r(delta_mark(atlas_exact_delta) + " [10*]", 21) + "│\n"
+md = md + "  │ " + pad_r(to_string(files_changed) + " 파일", 13) + "│ " + pad_r(to_string(gb_total) + " 누적", 13) + "│ " + pad_r(delta_mark(dg_edges_delta) + " 엣지", 13) + "│ " + pad_r(delta_mark(atlas_empirical_delta) + " [7]", 21) + "│\n"
+md = md + "  └──────────────┴──────────────┴──────────────┴──────────────────────┘\n"
+md = md + "```\n\n"
+
+// git
+md = md + "## 1. Git 활동 (지난 " + to_string(SINCE_DAYS) + "일)\n\n"
+md = md + "| 지표 | 값 |\n"
+md = md + "|------|-----|\n"
+md = md + "| 커밋 수 | **" + to_string(n_commits) + "** |\n"
+md = md + "| 저자 수 | **" + to_string(len(author_list)) + "** |\n"
+md = md + "| 변경 파일 | **" + to_string(files_changed) + "** |\n"
+md = md + "| 삽입 라인 | " + insertions_raw + " |\n"
+md = md + "| 삭제 라인 | " + deletions_raw + " |\n\n"
+
+if len(author_list) > 0 {
+    md = md + "**저자**: " + author_list.join(", ") + "\n\n"
+}
+
+md = md + "### 1.1 9축 파일 변경 분포\n\n"
+md = md + "| 축 | 파일 수 |\n"
+md = md + "|----|---------|\n"
+let mut ix = 0
+while ix < len(axes_names) {
+    md = md + "| `" + axes_names[ix] + "/` | " + to_string(axes_counts[ix]) + " |\n"
+    ix = ix + 1
+}
+md = md + "\n"
+
+md = md + "### 1.2 최근 커밋 (최대 12건)\n\n"
+md = md + "| SHA | 저자 | 제목 |\n"
+md = md + "|-----|------|------|\n"
+for ln in recent_commits_raw.split("\n") {
+    let t = ln.trim()
+    if len(t) == 0 { continue }
+    let f = t.split("|")
+    if len(f) >= 3 {
+        md = md + "| `" + f[0] + "` | " + f[1] + " | " + f[2] + " |\n"
+    }
+}
+md = md + "\n"
+
+// growth_bus
+md = md + "## 2. growth_bus.jsonl 신규 엔트리\n\n"
+md = md + "| 지표 | 값 |\n"
+md = md + "|------|-----|\n"
+md = md + "| 누적 라인 | **" + to_string(gb_total) + "** |\n"
+md = md + "| 지난 " + to_string(SINCE_DAYS) + "일 신규 | **" + to_string(gb_new) + "** |\n\n"
+
+if len(gb_types_keys) > 0 {
+    md = md + "### 2.1 이벤트 타입 TOP\n\n"
+    md = md + "| 타입 | 건수 |\n"
+    md = md + "|------|------|\n"
+    let mut i = 0
+    while i < len(gb_types_keys) {
+        md = md + "| `" + gb_types_keys[i] + "` | " + to_string(gb_types_vals[i]) + " |\n"
+        i = i + 1
+    }
+    md = md + "\n"
+}
+
+if len(gb_domains_keys) > 0 {
+    md = md + "### 2.2 도메인 TOP\n\n"
+    md = md + "| 도메인 | 건수 |\n"
+    md = md + "|--------|------|\n"
+    let mut i = 0
+    while i < len(gb_domains_keys) {
+        md = md + "| `" + gb_domains_keys[i] + "` | " + to_string(gb_domains_vals[i]) + " |\n"
+        i = i + 1
+    }
+    md = md + "\n"
+}
+
+// discovery_graph
+md = md + "## 3. discovery_graph.json 변화\n\n"
+md = md + "| 지표 | 이전 스냅샷 | 현재 | 델타 |\n"
+md = md + "|------|-------------|------|------|\n"
+md = md + "| 노드 | " + to_string(dg_nodes_prev) + " | **" + to_string(dg_nodes_now) + "** | " + delta_mark(dg_nodes_delta) + " |\n"
+md = md + "| 엣지 | " + to_string(dg_edges_prev) + " | **" + to_string(dg_edges_now) + "** | " + delta_mark(dg_edges_delta) + " |\n\n"
+
+// atlas
+md = md + "## 4. atlas.n6 등급 집계 ([7] → [10*] 승격 추적)\n\n"
+md = md + "```\n"
+md = md + "  파일: " + ATLAS_N6 + "\n\n"
+md = md + "  [10*] EXACT 검증완료    │ " + pad_l(to_string(atlas_exact), 6) + " │ " + delta_mark(atlas_exact_delta) + "\n"
+md = md + "  [10]/[9] NEAR           │ " + pad_l(to_string(atlas_near), 6) + " │\n"
+md = md + "  [7]  EMPIRICAL 승격대상 │ " + pad_l(to_string(atlas_empirical), 6) + " │ " + delta_mark(atlas_empirical_delta) + "\n"
+md = md + "  [N?] CONJECTURE         │ " + pad_l(to_string(atlas_conjecture), 6) + " │\n"
+md = md + "  [N!] BREAKTHROUGH       │ " + pad_l(to_string(atlas_breakthrough), 6) + " │\n"
+md = md + "```\n\n"
+
+if atlas_exact_delta > 0 {
+    md = md + "✅ 이번 주 `[7] → [10*]` 승격 **" + to_string(atlas_exact_delta) + " 건** 추정\n\n"
+} else if atlas_exact_delta == 0 && prev_atlas_exact > 0 {
+    md = md + "ℹ️ 이번 주 승격 활동 없음 — A1~A6 TODO 확인 필요\n\n"
+}
+
+// cargo
+md = md + "## 5. cargo test 결과\n\n"
+md = md + "| 상태 | 값 |\n"
+md = md + "|------|-----|\n"
+md = md + "| 요약 | " + cargo_status + " |\n"
+md = md + "| PASS | " + to_string(cargo_pass) + " |\n"
+md = md + "| FAIL | " + to_string(cargo_fail) + " |\n"
+md = md + "| IGNORED | " + to_string(cargo_ignored) + " |\n\n"
+
+if len(cargo_summary) > 0 {
+    md = md + "```\n" + cargo_summary + "\n```\n\n"
+}
+
+// convergence
+md = md + "## 6. convergence 상태 (`n6shared/convergence/n6-architecture.json`)\n\n"
+md = md + "| 구분 | 항목 수 |\n"
+md = md + "|------|---------|\n"
+md = md + "| 🔒 ossified (골화 완료) | **" + to_string(conv_ossified) + "** |\n"
+md = md + "| 🟡 stable (안정, 골화 대기) | " + to_string(conv_stable) + " |\n"
+md = md + "| ❌ failed (실패) | " + to_string(conv_failed) + " |\n\n"
+
+// 권장 액션
+md = md + "## 7. 권장 후속 액션\n\n"
+let mut actions = []
+if atlas_empirical > 0 && atlas_exact_delta == 0 && prev_atlas_exact > 0 {
+    actions = actions + ["- `[7]` 항목 " + to_string(atlas_empirical) + " 건 남음 → A1~A6 승격 파이프라인 가동"]
+}
+if cargo_fail > 0 {
+    actions = actions + ["- cargo test FAIL " + to_string(cargo_fail) + " 건 즉시 수정"]
+}
+if gb_new == 0 && gb_total > 0 {
+    actions = actions + ["- growth_bus 신규 엔트리 0 — 발견 엔진 활성화 점검"]
+}
+if dg_nodes_delta == 0 && dg_edges_delta == 0 && dg_nodes_prev > 0 {
+    actions = actions + ["- discovery_graph 변화 없음 → 스캔 스케줄 확인"]
+}
+if conv_failed > 0 {
+    actions = actions + ["- convergence failed 항목 " + to_string(conv_failed) + " 건 — 해소 계획 필요"]
+}
+if len(actions) == 0 {
+    md = md + "- ✅ 이번 주 특별 이슈 없음 — 정상 성장 중\n"
+} else {
+    let mut i = 0
+    while i < len(actions) {
+        md = md + actions[i] + "\n"
+        i = i + 1
+    }
+}
+md = md + "\n---\n\n"
+md = md + "*본 리포트는 `nexus/scripts/weekly_audit.hexa` 로 자동 생성되었습니다.*\n"
+md = md + "*규칙: R1 HEXA-FIRST / R14 shared SSOT / 한글 필수*\n"
+
+// ─── 출력 ───
+let base_name = TODAY + "-weekly-audit.md"
+let mut out_path = OUT_SESS_DIR + "/" + base_name
+
+if DRY_RUN {
+    println(md)
+    log_err("[dry-run] 파일 작성 없음")
+} else {
+    sh("mkdir -p '" + OUT_SESS_DIR + "' '" + OUT_CHLG_DIR + "' 'n6shared/logs'")
+
+    if file_exists_simple(out_path) && !FORCE {
+        out_path = OUT_SESS_DIR + "/" + TODAY + "-weekly-audit_rerun-" + TODAY_HM + ".md"
+        log_err("[write] 기존 파일 존재 — 재실행 접미사: " + out_path)
+    }
+
+    try {
+        write_file(out_path, md)
+        log_err("[write] 리포트 작성 완료: " + out_path)
+    } catch e {
+        println("❌ [write] 리포트 작성 실패: " + to_string(e))
+        exit(1)
+    }
+
+    // 체인지로그 자동 골격
+    let chlog_out = OUT_CHLG_DIR + "/" + TODAY + "-weekly.md"
+    if !file_exists_simple(chlog_out) || FORCE {
+        let mut chlog = "# 주간 체인지로그 — " + TODAY + "\n\n"
+        chlog = chlog + "> 범위: " + WEEK_START + " ~ " + TODAY + "\n"
+        chlog = chlog + "> 연결 감사: `reports/sessions/" + base_name + "`\n\n"
+        chlog = chlog + "## 자동 집계\n\n"
+        chlog = chlog + "- 커밋: **" + to_string(n_commits) + "** / 파일: **" + to_string(files_changed) + "**\n"
+        chlog = chlog + "- growth_bus 신규: **" + to_string(gb_new) + "**\n"
+        chlog = chlog + "- discovery_graph 노드 델타: **" + delta_mark(dg_nodes_delta) + "**\n"
+        chlog = chlog + "- atlas 승격 ([7]→[10*]): **" + delta_mark(atlas_exact_delta) + "**\n"
+        chlog = chlog + "- cargo test: " + cargo_status + "\n\n"
+        chlog = chlog + "## 주요 변경\n\n"
+        chlog = chlog + "<!-- 아래에 수동 요약 추가 -->\n\n"
+        chlog = chlog + "### 추가\n- \n\n"
+        chlog = chlog + "### 수정\n- \n\n"
+        chlog = chlog + "### 삭제\n- \n\n"
+        chlog = chlog + "### 수렴 (convergence)\n- \n\n"
+        chlog = chlog + "## 다음 주 TODO\n\n- \n"
+
+        try {
+            write_file(chlog_out, chlog)
+            log_err("[write] 체인지로그 템플릿: " + chlog_out)
+        } catch e {
+            println("⚠️ [write] 체인지로그 실패: " + to_string(e))
+        }
+    }
+
+    // 스냅샷 업데이트
+    let state = "{\n" +
+        "  \"updated\": \"" + TODAY + "\",\n" +
+        "  \"dg_nodes\": " + to_string(dg_nodes_now) + ",\n" +
+        "  \"dg_edges\": " + to_string(dg_edges_now) + ",\n" +
+        "  \"atlas_exact\": " + to_string(atlas_exact) + ",\n" +
+        "  \"atlas_empirical\": " + to_string(atlas_empirical) + ",\n" +
+        "  \"gb_total\": " + to_string(gb_total) + ",\n" +
+        "  \"since_days\": " + to_string(SINCE_DAYS) + "\n" +
+        "}\n"
+    try {
+        write_file(STATE_JSON, state)
+        log_err("[write] 스냅샷: " + STATE_JSON)
+    } catch e {
+        println("⚠️ [write] 스냅샷 실패: " + to_string(e))
+    }
+}
+
+println("")
+println("═══════════════════════════════════════════════════════════")
+println("  weekly_audit 완료 — " + TODAY + " (" + WEEK_START + " ~ " + TODAY + ")")
+println("═══════════════════════════════════════════════════════════")
+println("  커밋:          " + to_string(n_commits))
+println("  growth_bus:    +" + to_string(gb_new) + " (누적 " + to_string(gb_total) + ")")
+println("  discovery:     " + delta_mark(dg_nodes_delta) + " 노드 / " + delta_mark(dg_edges_delta) + " 엣지")
+println("  atlas 승격:    " + delta_mark(atlas_exact_delta) + " [10*] / " + delta_mark(atlas_empirical_delta) + " [7]")
+println("  cargo test:    " + cargo_status)
+println("  convergence:   ossified=" + to_string(conv_ossified) + " stable=" + to_string(conv_stable) + " failed=" + to_string(conv_failed))
+if !DRY_RUN {
+    println("  ▶ 리포트:      " + out_path)
+    println("  ▶ 체인지로그:  " + OUT_CHLG_DIR + "/" + TODAY + "-weekly.md")
+    println("  ▶ 스냅샷:      " + STATE_JSON)
+} else {
+    println("  ▶ (dry-run — 파일 작성 없음)")
+}
+println("═══════════════════════════════════════════════════════════")
+
+exit(0)

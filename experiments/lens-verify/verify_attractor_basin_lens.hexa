@@ -4,7 +4,7 @@
 // 근거: Lorenz-like 6D 확장 basin 수 n=6
 // 가설: 기본 attractor 수 = 6
 // 지표: basin 수, 볼륨 비율
-// 의존: shared/config/lens_registry.json AttractorBasinLens
+// 의존: n6shared/config/lens_registry.json AttractorBasinLens
 
 fn main() {
     println("[렌즈: Basin] 6D 어트랙터 — 산술 검증")

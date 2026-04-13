@@ -1,6 +1,6 @@
 # 궁극의 제조 품질관리 아키텍처 — HEXA-QC
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index **10** maturity / closure_grade 9 (6시그마 자체가 완전수 6에서 직접 유도, Motorola 1986 이래 전산업 적용).
 
 **Rating**: **10/10** -- 제조 품질관리의 수학적 기원 자체가 n=6

@@ -253,4 +253,4 @@ done < /tmp/miss_48_paths.txt
 1. **products.json 링크 갱신**: 위 §3 매핑 테이블을 바탕으로 `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` 링크 48건 교체
 2. **재감사**: 갱신 후 `products-link-audit` 스크립트 재실행 → MISS 174 - 48 = 126 (paper 116 + calc 10) 잔존 예상
 3. **paper/calc 처리**: 남은 126건은 본 작업 범위 밖. 별도 세션에서 처리
-4. **archive 폴더 확인**: 혹시 `shared/logs/absorbed/` 아래 흡수 이력 로그와 교차 검증 시 통합 연도/일자 추가 확인 가능
+4. **archive 폴더 확인**: 혹시 `n6shared/logs/absorbed/` 아래 흡수 이력 로그와 교차 검증 시 통합 연도/일자 추가 확인 가능

@@ -1,0 +1,845 @@
+// ============================================================
+// apply_dse_delta_v2.hexa
+// ------------------------------------------------------------
+// 목적  : 480 TOML (nexus/origins/universal-dse/domains/*.toml)
+//         전체에 Δ1~Δ5 스키마 필드를 [delta_v2] 섹션으로 주입.
+//         기존 [meta]/[scoring]/[[level]]/[[candidate]]/[[rule]]
+//         섹션은 절대 수정 금지 (추가만 허용).
+//
+// 규칙  : R1 HEXA-FIRST, R2 하드코딩 금지, R12 AI-NATIVE FIRST,
+//         R18 미니멀, R19 SILENT EXIT 금지, R28 자동 흡수.
+//
+// 배경  : experiments/dse/cross_dse_fusion_v2_design.md 의 Δ1~Δ5
+//         스키마 (bt_refs/cross_seeds/n6_formula/pareto_anchor/
+//         weight_vec) 가 453 TOML 중 1개(hexa-ios.toml)에만 적용.
+//         본 스크립트는 479 개 (hexa-ios 제외) 에 일괄 주입.
+//
+// 입력  : --dir  nexus/origins/universal-dse/domains
+//         --graph /Users/ghost/Dev/n6-architecture/n6shared/discovery_graph.json
+//         --report reports/audits/dse-delta-v2-schema-application-2026-04-11.md
+// 출력  : 479 TOML 인플레이스 수정 + 감사 리포트 md
+// ============================================================
+
+// ── 0. 공통 상수 ───────────────────────────────────────────
+let FORMULA_DEFAULT = "sigma*phi = n*tau"
+let PARETO_DEFAULT_A = 0.5
+let PARETO_DEFAULT_B = 0.5
+let WEIGHT_VEC_STR = "[0.35, 0.25, 0.20, 0.10, 0.10]"
+
+// n=6 정식 상수 심볼 — n6_formula 동적 추출용
+let FORMULA_TOKENS = [
+  "sigma=12", "phi=2", "tau=4", "n=6", "sopfr=5", "j2=24", "mu=1",
+  "sigma-phi", "n/phi", "sigma+phi", "sigma*phi", "sigma*tau", "phi*tau",
+  "sigma=6", "j_2=24", "tau=6", "phi=n", "sigma_phi", "n*tau"
+]
+
+// cross_seeds 에서 제외할 stop tokens
+let SEED_STOP = [
+  "the", "this", "that", "with", "from", "into", "name", "desc",
+  "meta", "level", "candidate", "scoring", "label", "notes", "vision",
+  "true", "false", "none", "null", "version", "index", "type", "tags",
+  "rule", "score", "architecture", "system", "platform", "design",
+  "engineering", "technology", "application", "management"
+]
+
+// ── 1. 경로 (동적, 하드코드 금지) ──────────────────────────
+let argv = args()
+let argc = len(argv)
+
+let mut DOMAIN_DIR = env("N6_DSE_DOMAIN_DIR")
+if len(DOMAIN_DIR) == 0 {
+  DOMAIN_DIR = "/Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains"
+}
+let mut GRAPH_PATH = env("N6_DISCOVERY_GRAPH")
+if len(GRAPH_PATH) == 0 {
+  GRAPH_PATH = "/Users/ghost/Dev/n6-architecture/n6shared/discovery_graph.json"
+}
+let mut REPORT_PATH = env("N6_DELTA_REPORT")
+if len(REPORT_PATH) == 0 {
+  REPORT_PATH = "/Users/ghost/Dev/n6-architecture/reports/audits/dse-delta-v2-schema-application-2026-04-11.md"
+}
+let SKIP_NAME_DEFAULT = "hexa-ios.toml"
+
+let mut ai = 1
+while ai < argc {
+  let a = argv[ai]
+  if a == "--dir" {
+    if ai + 1 < argc { DOMAIN_DIR = argv[ai + 1]; ai = ai + 2 } else { ai = ai + 1 }
+  } else {
+    if a == "--graph" {
+      if ai + 1 < argc { GRAPH_PATH = argv[ai + 1]; ai = ai + 2 } else { ai = ai + 1 }
+    } else {
+      if a == "--report" {
+        if ai + 1 < argc { REPORT_PATH = argv[ai + 1]; ai = ai + 2 } else { ai = ai + 1 }
+      } else {
+        ai = ai + 1
+      }
+    }
+  }
+}
+
+println("apply_dse_delta_v2 — Δ1~Δ5 스키마 전면 주입")
+println("------------------------------")
+println("DOMAIN_DIR  = " + DOMAIN_DIR)
+println("GRAPH_PATH  = " + GRAPH_PATH)
+println("REPORT_PATH = " + REPORT_PATH)
+
+// ── 2. 문자열 유틸 ────────────────────────────────────────
+let ALPHA_LC = "abcdefghijklmnopqrstuvwxyz"
+let DIGITS   = "0123456789"
+
+fn is_digit_ch(ch) { DIGITS.contains(ch) }
+
+fn is_alnum_lc(ch) {
+  if ALPHA_LC.contains(ch) { return true }
+  if DIGITS.contains(ch) { return true }
+  if ch == "_" { return true }
+  if ch == "-" { return true }
+  false
+}
+
+fn normalize_tokens(raw) {
+  let low = raw.to_lower()
+  let n = len(low)
+  let mut out = ""
+  let mut i = 0
+  while i < n {
+    let ch = low.substring(i, i + 1)
+    if is_alnum_lc(ch) {
+      out = out + ch
+    } else {
+      out = out + " "
+    }
+    i = i + 1
+  }
+  out
+}
+
+fn is_seed_stop(tok) {
+  let n = len(SEED_STOP)
+  let mut i = 0
+  while i < n {
+    if SEED_STOP[i] == tok { return true }
+    i = i + 1
+  }
+  false
+}
+
+// ── 3. 문자열-세트 ────────────────────────────────────────
+fn strset_new() { "|" }
+
+fn strset_contains(s, v) {
+  let needle = "|" + v + "|"
+  s.contains(needle)
+}
+
+fn strset_insert(s, v) {
+  let needle = "|" + v + "|"
+  if s.contains(needle) { return s }
+  s + v + "|"
+}
+
+fn strset_size(s) {
+  let n = len(s)
+  if n <= 1 { return 0 }
+  let mut cnt = 0
+  let mut i = 0
+  while i < n {
+    if s.substring(i, i + 1) == "|" { cnt = cnt + 1 }
+    i = i + 1
+  }
+  cnt - 1
+}
+
+// strset → 정렬된 배열 (작은 수 기준)
+fn strset_to_array(s) {
+  let raw = split(s, "|")
+  let nr = len(raw)
+  let mut out = []
+  let mut i = 0
+  while i < nr {
+    let t = raw[i]
+    if len(t) > 0 { out = out + [t] }
+    i = i + 1
+  }
+  out
+}
+
+// ── 4. discovery_graph.json → BT 키워드 리버스 인덱스 ─────
+// 구조: BT_node { id: "BT_N", domains: ["kw1", "kw2", ...] }
+// 리버스: kw → strset 로 "|BT-N|BT-M|"
+// 라인 단위 파서. json 객체 블록 경계 추적.
+let mut BT_KW = []    // 도메인 키워드 (중복 없음)
+let mut BT_IDS = []   // BT_KW 와 동기화된 strset 배열
+
+fn bt_kw_add(kw, bt_id) {
+  let mut idx = -1
+  let n = len(BT_KW)
+  let mut i = 0
+  while i < n {
+    if BT_KW[i] == kw { idx = i; i = n }
+    else { i = i + 1 }
+  }
+  if idx < 0 {
+    BT_KW = BT_KW + [kw]
+    BT_IDS = BT_IDS + [strset_insert(strset_new(), bt_id)]
+  } else {
+    BT_IDS[idx] = strset_insert(BT_IDS[idx], bt_id)
+  }
+}
+
+fn load_discovery_graph(path) {
+  println("[step 1] loading BT keyword index from " + path)
+  let cnt = read_file(path)
+  if type_of(cnt) != "string" {
+    eprintln("WARN: discovery_graph.json 읽기 실패 (BT 매핑 건너뜀)")
+    return 0
+  }
+  let lines = split(cnt, "\n")
+  let nl = len(lines)
+  let mut li = 0
+  let mut cur_id = ""
+  let mut in_domains = false
+  while li < nl {
+    let raw = lines[li]
+    let line = trim(raw)
+    // id 추출
+    if line.starts_with("\"id\":") {
+      // "id": "BT_N",
+      let p = split(line, "\"")
+      // 기대: "", "id", ": ", "BT_N", ","
+      if len(p) >= 4 {
+        let v = p[3]
+        if v.starts_with("BT_") {
+          // "BT_N" → "BT-N"
+          cur_id = "BT-" + v.substring(3, len(v))
+        } else {
+          cur_id = ""
+        }
+      }
+    }
+    // domains 배열 시작
+    if line.contains("\"domains\":") {
+      in_domains = true
+    } else {
+      if in_domains {
+        // 배열 원소 라인: "kw",  또는 "kw"
+        if line.contains("]") { in_domains = false }
+        else {
+          if line.contains("\"") {
+            let p2 = split(line, "\"")
+            // "", "kw", ... 또는 이것이 여러개가 아닌 단일 값
+            if len(p2) >= 2 {
+              let kw = p2[1].to_lower()
+              if len(kw) >= 3 {
+                if len(cur_id) > 0 {
+                  bt_kw_add(kw, cur_id)
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    li = li + 1
+  }
+  let nk = len(BT_KW)
+  println("  loaded " + to_string(nk) + " BT keyword tokens")
+  1
+}
+
+// 키워드 → BT ids (strset). 매칭 없으면 strset_new()
+fn bt_lookup(kw) {
+  let n = len(BT_KW)
+  let mut i = 0
+  while i < n {
+    if BT_KW[i] == kw { return BT_IDS[i] }
+    i = i + 1
+  }
+  strset_new()
+}
+
+// 부분 일치 (kw 가 BT_KW 원소의 하위문자열이거나 역) — 검색 비용 주의
+fn bt_substr_merge(kw, acc) {
+  let n = len(BT_KW)
+  let mut i = 0
+  let mut out = acc
+  while i < n {
+    let k = BT_KW[i]
+    if k == kw {
+      // 이미 정확 매칭은 별도 처리. 스킵.
+    } else {
+      if len(kw) >= 4 {
+        if k.contains(kw) {
+          let ids = BT_IDS[i]
+          let parts = split(ids, "|")
+          let np = len(parts)
+          let mut j = 0
+          while j < np {
+            let t = parts[j]
+            if len(t) > 0 { out = strset_insert(out, t) }
+            j = j + 1
+          }
+        } else {
+          if len(k) >= 4 {
+            if kw.contains(k) {
+              let ids = BT_IDS[i]
+              let parts = split(ids, "|")
+              let np = len(parts)
+              let mut j = 0
+              while j < np {
+                let t = parts[j]
+                if len(t) > 0 { out = strset_insert(out, t) }
+                j = j + 1
+              }
+            }
+          }
+        }
+      }
+    }
+    i = i + 1
+  }
+  out
+}
+
+// ── 5. 도메인 파일 목록 ────────────────────────────────────
+fn list_toml_files(dir) {
+  let cmd = "ls " + dir + " | grep '\\.toml$' | sort"
+  let out = exec(cmd)
+  let raw = split(out, "\n")
+  let mut xs = []
+  let n = len(raw)
+  let mut i = 0
+  while i < n {
+    let line = trim(raw[i])
+    if len(line) > 0 {
+      xs = xs + [line]
+    }
+    i = i + 1
+  }
+  xs
+}
+
+// ── 6. TOML 특징 추출 (BT/formula/seed/pareto/weight) ────
+// 주어진 본문 라인 배열에서:
+//   - 주석·본문의 BT-NNN 토큰 전체 스캔 → bt_refs 프록시
+//   - n=6 상수 심볼 매칭 → n6_formula 태그
+//   - [scoring] 의 n6/perf/power/cost 수치 → pareto_anchor 추정
+fn extract_bt_refs(lines) {
+  let nl = len(lines)
+  let mut bts = strset_new()
+  let mut li = 0
+  while li < nl {
+    let line = lines[li]
+    if line.contains("BT-") {
+      let n = len(line)
+      let mut i = 0
+      while i + 3 <= n {
+        if line.substring(i, i + 3) == "BT-" {
+          let mut j = i + 3
+          let mut cont = true
+          while cont {
+            if j >= n {
+              cont = false
+            } else {
+              let ch = line.substring(j, j + 1)
+              if is_digit_ch(ch) {
+                j = j + 1
+              } else {
+                cont = false
+              }
+            }
+          }
+          if j > i + 3 {
+            let bt = line.substring(i, j)
+            bts = strset_insert(bts, bt)
+            i = j
+          } else {
+            i = i + 1
+          }
+        } else {
+          i = i + 1
+        }
+      }
+    }
+    li = li + 1
+  }
+  bts
+}
+
+fn extract_formula_tags(lines) {
+  let nl = len(lines)
+  let mut fms = strset_new()
+  let mut li = 0
+  while li < nl {
+    let line = lines[li].to_lower()
+    let norm = line.replace(" ", "")
+    let ntk = len(FORMULA_TOKENS)
+    let mut fi = 0
+    while fi < ntk {
+      let tk = FORMULA_TOKENS[fi]
+      if norm.contains(tk) {
+        fms = strset_insert(fms, tk)
+      }
+      fi = fi + 1
+    }
+    li = li + 1
+  }
+  fms
+}
+
+// 도메인 이름 (파일명) 에서 토큰 추출. 하이픈/언더스코어 분리.
+fn name_tokens(name) {
+  let cleaned = normalize_tokens(name)
+  let raw = split(cleaned, " ")
+  let nr = len(raw)
+  let mut out = strset_new()
+  let mut i = 0
+  while i < nr {
+    let t = raw[i]
+    if len(t) >= 3 {
+      if !is_seed_stop(t) {
+        out = strset_insert(out, t)
+      }
+    }
+    i = i + 1
+  }
+  out
+}
+
+// [scoring] 내 n6/perf/power/cost → pareto_anchor 2-벡터
+// anchor_x = (n6+perf) / 2, anchor_y = (power+cost) / 2
+// 없으면 기본 0.5,0.5
+fn extract_pareto(lines) {
+  let nl = len(lines)
+  let mut in_scoring = false
+  let mut n6v = -1.0
+  let mut pfv = -1.0
+  let mut pwv = -1.0
+  let mut csv = -1.0
+  let mut li = 0
+  while li < nl {
+    let line = trim(lines[li])
+    if line == "[scoring]" { in_scoring = true }
+    else {
+      if line.starts_with("[") { in_scoring = false }
+    }
+    if in_scoring {
+      if line.contains("=") {
+        let parts = split(line, "=")
+        if len(parts) >= 2 {
+          let k = trim(parts[0])
+          let mut v = trim(parts[1])
+          if v.contains("#") {
+            let pc = split(v, "#")
+            v = trim(pc[0])
+          }
+          if len(v) > 0 {
+            let ch0 = v.substring(0, 1)
+            let is_numish = DIGITS.contains(ch0)
+            if is_numish {
+              let fv = to_float(v)
+              if k == "n6"   { n6v = fv }
+              if k == "perf" { pfv = fv }
+              if k == "perf_weight" { pfv = fv }
+              if k == "performance_weight" { pfv = fv }
+              if k == "power" { pwv = fv }
+              if k == "power_weight" { pwv = fv }
+              if k == "cost"  { csv = fv }
+              if k == "cost_weight" { csv = fv }
+              if k == "n6_weight" { n6v = fv }
+            }
+          }
+        }
+      }
+    }
+    li = li + 1
+  }
+  // 정규화 (0~1 범위로 강제)
+  fn norm01(v) {
+    if v < 0.0 { return -1.0 }
+    if v > 1.0 {
+      // 0~100 스케일 추정 시 /100
+      return v / 100.0
+    }
+    v
+  }
+  let a = norm01(n6v)
+  let b = norm01(pfv)
+  let c = norm01(pwv)
+  let d = norm01(csv)
+  let mut ax = PARETO_DEFAULT_A
+  let mut ay = PARETO_DEFAULT_B
+  if a >= 0.0 {
+    if b >= 0.0 {
+      ax = (a + b) / 2.0
+    } else {
+      ax = a
+    }
+  } else {
+    if b >= 0.0 { ax = b }
+  }
+  if c >= 0.0 {
+    if d >= 0.0 {
+      ay = (c + d) / 2.0
+    } else {
+      ay = c
+    }
+  } else {
+    if d >= 0.0 { ay = d }
+  }
+  [ax, ay]
+}
+
+// ── 7. delta_v2 블록 포매팅 ────────────────────────────────
+fn fmt_array_str(arr) {
+  let n = len(arr)
+  if n == 0 { return "[]" }
+  let mut s = "["
+  let mut i = 0
+  while i < n {
+    if i > 0 { s = s + ", " }
+    s = s + "\"" + arr[i] + "\""
+    i = i + 1
+  }
+  s + "]"
+}
+
+fn fmt_float2(f) {
+  let s = to_string(f)
+  let n = len(s)
+  // 소수점 3자리 제한
+  if s.contains(".") {
+    let p = split(s, ".")
+    let frac = p[1]
+    let mut lm = len(frac)
+    if lm > 3 { lm = 3 }
+    return p[0] + "." + frac.substring(0, lm)
+  }
+  s + ".0"
+}
+
+fn render_delta_block(name, bt_arr, seed_arr, formula_arr, pa, grade, bt_fallback) {
+  let mut s = "\n"
+  s = s + "# ============================================================\n"
+  s = s + "# [delta_v2] Δ1~Δ5 스키마 (cross_dse_fusion v2 전면 적용)\n"
+  s = s + "# 자동 생성: nexus/scripts/apply_dse_delta_v2.hexa\n"
+  s = s + "# 설계: experiments/dse/cross_dse_fusion_v2_design.md\n"
+  s = s + "# ============================================================\n"
+  s = s + "[delta_v2]\n"
+  s = s + "schema_version = 2\n"
+  // Δ1 bt_refs
+  if bt_fallback {
+    s = s + "# TODO: BT 매핑 보류 (주석/도메인 키워드 매칭 실패)\n"
+    s = s + "bt_refs = []\n"
+  } else {
+    s = s + "bt_refs = " + fmt_array_str(bt_arr) + "\n"
+  }
+  // Δ2 cross_seeds
+  s = s + "cross_seeds = " + fmt_array_str(seed_arr) + "\n"
+  // Δ3 n6_formula
+  if len(formula_arr) == 0 {
+    s = s + "n6_formula = \"" + FORMULA_DEFAULT + "\"\n"
+  } else {
+    // 기본값 + 상수 매칭 리스트 병합
+    s = s + "n6_formula = \"" + FORMULA_DEFAULT + "\"\n"
+    s = s + "n6_formula_tags = " + fmt_array_str(formula_arr) + "\n"
+  }
+  // Δ4 pareto_anchor
+  s = s + "pareto_anchor = [" + fmt_float2(pa[0]) + ", " + fmt_float2(pa[1]) + "]\n"
+  // Δ5 weight_vec
+  s = s + "weight_vec = " + WEIGHT_VEC_STR + "\n"
+  // 승격 경로
+  s = s + "evidence_grade = " + to_string(grade) + "\n"
+  s = s + "energy_pareto = true\n"
+  s
+}
+
+// ── 8. 주입 검사 (이미 [delta_v2] 가 있으면 재주입 금지) ──
+fn has_delta_v2(cnt) {
+  cnt.contains("[delta_v2]")
+}
+
+// ── 9. 메인 처리 루프 ──────────────────────────────────────
+let mut STAT_TOTAL = 0
+let mut STAT_SKIPPED = 0
+let mut STAT_MODIFIED = 0
+let mut STAT_BT_ONLY_PROXY = 0
+let mut STAT_BT_NAME_HIT = 0
+let mut STAT_BT_NONE = 0
+let mut STAT_FIELDS_SUM = 0
+let mut FAIL_EXAMPLES = []
+let mut SUCCESS_EXAMPLES = []
+
+fn process_one(fname) {
+  let path = DOMAIN_DIR + "/" + fname
+  let cnt = read_file(path)
+  if type_of(cnt) != "string" {
+    eprintln("WARN: read_file 실패 " + path)
+    return 0
+  }
+  // 이미 주입된 경우 건너뛰기
+  if has_delta_v2(cnt) {
+    STAT_SKIPPED = STAT_SKIPPED + 1
+    return 0
+  }
+
+  let lines = split(cnt, "\n")
+  // 도메인 이름
+  let mut name = fname
+  if name.ends_with(".toml") {
+    name = name.substring(0, len(name) - 5)
+  }
+
+  // Δ1: bt_refs
+  //   1차: 주석/본문의 BT-NNN 토큰
+  //   2차: 도메인 이름 하이픈 분해 → discovery_graph 리버스 인덱스 정확/부분 매칭
+  let bt_proxy = extract_bt_refs(lines)
+  let mut bt_merged = bt_proxy
+  let name_seeds = name_tokens(name)
+  let seed_parts = split(name_seeds, "|")
+  let nsp = len(seed_parts)
+  let mut bt_from_name = strset_new()
+  let mut si = 0
+  while si < nsp {
+    let tok = seed_parts[si]
+    if len(tok) >= 3 {
+      // 정확 매칭
+      let exact = bt_lookup(tok)
+      if strset_size(exact) > 0 {
+        let ep = split(exact, "|")
+        let nep = len(ep)
+        let mut j = 0
+        while j < nep {
+          let t = ep[j]
+          if len(t) > 0 { bt_from_name = strset_insert(bt_from_name, t) }
+          j = j + 1
+        }
+      }
+      // 부분 매칭 (token 길이 ≥ 4)
+      if len(tok) >= 4 {
+        bt_from_name = bt_substr_merge(tok, bt_from_name)
+      }
+    }
+    si = si + 1
+  }
+  // merge
+  let bfn_parts = split(bt_from_name, "|")
+  let nbf = len(bfn_parts)
+  let mut bk = 0
+  while bk < nbf {
+    let t = bfn_parts[bk]
+    if len(t) > 0 { bt_merged = strset_insert(bt_merged, t) }
+    bk = bk + 1
+  }
+
+  // 통계
+  let bt_proxy_ct = strset_size(bt_proxy)
+  let bt_name_ct = strset_size(bt_from_name)
+  let bt_total_ct = strset_size(bt_merged)
+  if bt_proxy_ct > 0 {
+    if bt_name_ct > 0 {
+      STAT_BT_NAME_HIT = STAT_BT_NAME_HIT + 1
+    } else {
+      STAT_BT_ONLY_PROXY = STAT_BT_ONLY_PROXY + 1
+    }
+  } else {
+    if bt_name_ct > 0 {
+      STAT_BT_NAME_HIT = STAT_BT_NAME_HIT + 1
+    } else {
+      STAT_BT_NONE = STAT_BT_NONE + 1
+    }
+  }
+
+  // bt_refs 배열 (최대 10개 제한)
+  let bt_all = strset_to_array(bt_merged)
+  let BT_CAP = 10
+  let mut bt_arr = []
+  let nba = len(bt_all)
+  let mut cap = nba
+  if cap > BT_CAP { cap = BT_CAP }
+  let mut ix = 0
+  while ix < cap {
+    bt_arr = bt_arr + [bt_all[ix]]
+    ix = ix + 1
+  }
+  let bt_fallback = false
+  if len(bt_arr) == 0 {
+    // fallback: 빈 배열 + 주석
+    // (bt_fallback 플래그는 render 함수에 전달)
+  }
+  let bt_fb = len(bt_arr) == 0
+
+  // Δ2: cross_seeds (도메인 이름 하이픈 분해 → 상위 3개)
+  let seed_all = strset_to_array(name_seeds)
+  let nsa = len(seed_all)
+  let SEED_CAP = 3
+  let mut seed_arr = []
+  let mut sx = 0
+  let mut scap = nsa
+  if scap > SEED_CAP { scap = SEED_CAP }
+  while sx < scap {
+    seed_arr = seed_arr + [seed_all[sx]]
+    sx = sx + 1
+  }
+
+  // Δ3: n6_formula 태그
+  let fm_proxy = extract_formula_tags(lines)
+  let fm_all = strset_to_array(fm_proxy)
+  let FM_CAP = 6
+  let mut fm_arr = []
+  let nfa = len(fm_all)
+  let mut fcap = nfa
+  if fcap > FM_CAP { fcap = FM_CAP }
+  let mut fx = 0
+  while fx < fcap {
+    fm_arr = fm_arr + [fm_all[fx]]
+    fx = fx + 1
+  }
+
+  // Δ4: pareto_anchor
+  let pa = extract_pareto(lines)
+
+  // Δ5: weight_vec — 전역 기본값 사용 (design 준수)
+
+  // render + append
+  let block = render_delta_block(name, bt_arr, seed_arr, fm_arr, pa, 7, bt_fb)
+  let new_cnt = cnt + block
+  write_file(path, new_cnt)
+
+  STAT_MODIFIED = STAT_MODIFIED + 1
+  // field 개수: schema_version, bt_refs, cross_seeds, n6_formula,
+  //             pareto_anchor, weight_vec, evidence_grade, energy_pareto (+ 선택 n6_formula_tags)
+  let mut fcnt = 8
+  if len(fm_arr) > 0 { fcnt = fcnt + 1 }
+  STAT_FIELDS_SUM = STAT_FIELDS_SUM + fcnt
+
+  if len(SUCCESS_EXAMPLES) < 5 {
+    if len(bt_arr) > 0 {
+      SUCCESS_EXAMPLES = SUCCESS_EXAMPLES + [name + " -> bt=" + to_string(len(bt_arr)) + " seeds=" + to_string(len(seed_arr)) + " fm=" + to_string(len(fm_arr))]
+    }
+  }
+  if bt_fb {
+    if len(FAIL_EXAMPLES) < 10 {
+      FAIL_EXAMPLES = FAIL_EXAMPLES + [name]
+    }
+  }
+  1
+}
+
+fn run() {
+  load_discovery_graph(GRAPH_PATH)
+
+  println("[step 2] scanning " + DOMAIN_DIR)
+  let files = list_toml_files(DOMAIN_DIR)
+  let nf = len(files)
+  println("  found " + to_string(nf) + " TOML files")
+  if nf == 0 {
+    eprintln("ERROR: 0 TOML files (R19 silent exit 금지)")
+    exit(1)
+  }
+
+  println("[step 3] applying delta_v2 schema")
+  let mut k = 0
+  while k < nf {
+    let fname = files[k]
+    STAT_TOTAL = STAT_TOTAL + 1
+    if fname == SKIP_NAME_DEFAULT {
+      STAT_SKIPPED = STAT_SKIPPED + 1
+      println("  skip (already complete): " + fname)
+    } else {
+      process_one(fname)
+      if k % 50 == 0 {
+        println("  [" + to_string(k + 1) + "/" + to_string(nf) + "] " + fname + " mod=" + to_string(STAT_MODIFIED))
+      }
+    }
+    k = k + 1
+  }
+
+  // ── 감사 리포트 ──
+  println("[step 4] writing audit report " + REPORT_PATH)
+  let mut md = "# DSE Δ1~Δ5 스키마 전면 적용 감사 — 2026-04-11\n\n"
+  md = md + "- 실행 스크립트: `nexus/scripts/apply_dse_delta_v2.hexa`\n"
+  md = md + "- 설계 문서: `experiments/dse/cross_dse_fusion_v2_design.md`\n"
+  md = md + "- 확장 계획: `experiments/dse/dse_400_expansion_plan.md`\n"
+  md = md + "- 대상 디렉토리: `" + DOMAIN_DIR + "`\n"
+  md = md + "- 백업: `/tmp/dse_toml_backup_20260411.tar.gz` (수정 전 tar)\n\n"
+
+  md = md + "## 1. 통계\n\n"
+  md = md + "| 지표 | 값 |\n"
+  md = md + "|------|-----|\n"
+  md = md + "| 스캔 대상 TOML | " + to_string(STAT_TOTAL) + " |\n"
+  md = md + "| 수정 완료 (Δ1~Δ5 주입) | " + to_string(STAT_MODIFIED) + " |\n"
+  md = md + "| 건너뜀 (이미 완전 or hexa-ios) | " + to_string(STAT_SKIPPED) + " |\n"
+  let mut avg_fields = 0.0
+  if STAT_MODIFIED > 0 {
+    avg_fields = to_float(STAT_FIELDS_SUM) / to_float(STAT_MODIFIED)
+  }
+  md = md + "| 파일별 평균 Δ 필드 수 | " + fmt_float2(avg_fields) + " |\n\n"
+
+  md = md + "## 2. BT 매핑 성공률\n\n"
+  md = md + "| 카테고리 | 카운트 |\n"
+  md = md + "|---------|-------|\n"
+  md = md + "| 주석 BT-NNN 프록시 + 이름 매칭 성공 | " + to_string(STAT_BT_NAME_HIT) + " |\n"
+  md = md + "| 프록시만 성공 (이름 매칭 0) | " + to_string(STAT_BT_ONLY_PROXY) + " |\n"
+  md = md + "| 전체 매칭 실패 (빈 배열) | " + to_string(STAT_BT_NONE) + " |\n"
+  let bt_total_hit = STAT_BT_NAME_HIT + STAT_BT_ONLY_PROXY
+  let mut hit_rate = 0.0
+  if STAT_MODIFIED > 0 {
+    hit_rate = to_float(bt_total_hit) / to_float(STAT_MODIFIED) * 100.0
+  }
+  md = md + "| **성공률** | " + fmt_float2(hit_rate) + "% |\n\n"
+
+  md = md + "## 3. Δ1~Δ5 필드 주입 요약\n\n"
+  md = md + "| 필드 | 출처 | 기본값 |\n"
+  md = md + "|------|------|--------|\n"
+  md = md + "| Δ1 `bt_refs` | 주석 BT-NNN + 도메인 이름 → discovery_graph 리버스 인덱스 | `[]` + TODO |\n"
+  md = md + "| Δ2 `cross_seeds` | 도메인 파일명 하이픈/언더스코어 분해, stop-words 필터, 상위 3개 | `[]` |\n"
+  md = md + "| Δ3 `n6_formula` | `sigma*phi = n*tau` 고정 + TOML 본문 상수 심볼 태그 배열 | `sigma*phi = n*tau` |\n"
+  md = md + "| Δ4 `pareto_anchor` | `[scoring]` n6/perf vs power/cost 평균 (정규화) | `[0.5, 0.5]` |\n"
+  md = md + "| Δ5 `weight_vec` | cross_dse_fusion v2 설계 기본 (kw/bt/formula/seed/pareto) | `[0.35, 0.25, 0.20, 0.10, 0.10]` |\n\n"
+
+  md = md + "## 4. 성공 예시 (상위 5)\n\n"
+  let mut ei = 0
+  while ei < len(SUCCESS_EXAMPLES) {
+    md = md + to_string(ei + 1) + ". `" + SUCCESS_EXAMPLES[ei] + "`\n"
+    ei = ei + 1
+  }
+  md = md + "\n"
+
+  md = md + "## 5. BT 매핑 실패 예시 (상위 10)\n\n"
+  let mut fi2 = 0
+  while fi2 < len(FAIL_EXAMPLES) {
+    md = md + to_string(fi2 + 1) + ". `" + FAIL_EXAMPLES[fi2] + "` — 주석·이름 모두 매칭 없음 → `bt_refs=[]` + TODO 주석\n"
+    fi2 = fi2 + 1
+  }
+  md = md + "\n"
+
+  md = md + "## 6. 후속 작업\n\n"
+  md = md + "- [ ] BT 매핑 실패 TOML 수동 검토 → `bt_refs` 채움\n"
+  md = md + "- [ ] `cross_dse_fusion_v2_run.hexa` 재실행 → bt_overlap 평균 기여 상승 확인\n"
+  md = md + "- [ ] 파레토 스윕 재실행 → `pareto_anchor` 실측 기반 업데이트\n"
+  md = md + "- [ ] atlas.n6 `[7] → [10*]` 승격 후보 재평가\n\n"
+
+  md = md + "## 7. 규칙 준수\n\n"
+  md = md + "- R1 HEXA-FIRST: `.hexa` 스크립트 단일 진입점, `.py` 없음\n"
+  md = md + "- R2 하드코딩 금지: 경로 `N6_DSE_DOMAIN_DIR`/`N6_DISCOVERY_GRAPH`/`N6_DELTA_REPORT` env 우선, 인자 오버라이드\n"
+  md = md + "- R18 미니멀: 기존 `[meta]`/`[scoring]`/`[[level]]`/`[[candidate]]`/`[[rule]]` 섹션 절대 미수정, `[delta_v2]` 신규 섹션만 append\n"
+  md = md + "- R19 SILENT EXIT 금지: 모든 에러에 eprintln 명시\n"
+  md = md + "- R28 자동 흡수 경로는 cross_dse_fusion v2 재실행 단계에서 atlas.n6 로 이어짐\n"
+
+  write_file(REPORT_PATH, md)
+  println("  wrote " + REPORT_PATH + " (" + to_string(len(md)) + " bytes)")
+
+  println("------------------------------")
+  println("done. summary:")
+  println("  scanned  = " + to_string(STAT_TOTAL))
+  println("  modified = " + to_string(STAT_MODIFIED))
+  println("  skipped  = " + to_string(STAT_SKIPPED))
+  println("  BT name hit   = " + to_string(STAT_BT_NAME_HIT))
+  println("  BT proxy only = " + to_string(STAT_BT_ONLY_PROXY))
+  println("  BT miss       = " + to_string(STAT_BT_NONE))
+  println("  avg delta fields = " + fmt_float2(avg_fields))
+}
+
+run()

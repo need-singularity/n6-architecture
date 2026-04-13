@@ -84,7 +84,7 @@ jobs:
           CDO_REQUIRED = {"_meta"}  # minimum CDO field
 
           errors = []
-          json_files = glob.glob("shared/**/*.json", recursive=True) + \
+          json_files = glob.glob("n6shared/**/*.json", recursive=True) + \
                        glob.glob("experiments/**/*.json", recursive=True)
 
           if not json_files:

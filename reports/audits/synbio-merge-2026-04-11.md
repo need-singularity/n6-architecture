@@ -120,7 +120,7 @@ domains/life/synthetic-biology/CLAUDE.md              (중복)
 - papers 에이전트 (#8) 의 11편 확장 작업에서 `papers/n6-synthetic-biology-paper.md` 를 신규 생성 대상에 포함 (우선순위 상)
 - _registry.json 경로를 `papers/n6-synthetic-biology-paper.md` 로 수정 (agent 에 위임)
 
-### 3-3. `shared/convergence/n6-architecture.json`
+### 3-3. `n6shared/convergence/n6-architecture.json`
 
 `PRODUCTS_118` = "118/125 제품 🛸10" ossified 상태. 실제 products 실측 = 164/173 (최근 products.json 검사 리포트 참조).
 

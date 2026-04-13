@@ -147,17 +147,17 @@ nexus dse bench --axis attention --repeats 30   # 벤치 30회
 
 ### 5.3 atlas.n6 승격 (`[7]` → `[10*]`)
 
-`shared/n6/atlas.n6` 의 `L6_n6atlas` 섹션에서 `@R n6-attention-<technique>-*`
+`n6shared/n6/atlas.n6` 의 `L6_n6atlas` 섹션에서 `@R n6-attention-<technique>-*`
 패턴으로 기록된 항목을 검증 PASS 후 `[10*]` 로 승격.
 
 ```sh
-awk '/^# ══ L6_n6atlas/,/^# ══ [^L]/' shared/n6/atlas.n6 \
+awk '/^# ══ L6_n6atlas/,/^# ══ [^L]/' n6shared/n6/atlas.n6 \
   | grep 'n6-attention' | grep '\[7\]'
 ```
 
 ### 5.4 골화 (convergence)
 
-검증 PASS 30회 + 대조군 MISS 없음 → `shared/convergence/n6-architecture.json`
+검증 PASS 30회 + 대조군 MISS 없음 → `n6shared/convergence/n6-architecture.json`
 의 `ossified_at` 에 `AXIS_ATTENTION_9_BODY_ALL` 항목 골화. 현재 상태:
 `AI_TECHNIQUE_68_BODY_ALL` 에 포함되어 2026-04-12 자 골화 완료.
 
@@ -193,4 +193,4 @@ awk '/^# ══ L6_n6atlas/,/^# ══ [^L]/' shared/n6/atlas.n6 \
 - 감사: `../../reports/audits/go-session-audit-v3-2026-04-12.md`
 - 논문: `../../papers/n6-ai-techniques-68-paper.md` (예정)
 - 실험: `../../experiments/_results.jsonl` (axis=attention 필드)
-- atlas: `../../shared/n6/atlas.n6` L6_n6atlas 섹션
+- atlas: `../../n6shared/n6/atlas.n6` L6_n6atlas 섹션

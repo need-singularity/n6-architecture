@@ -137,7 +137,7 @@
 - 453 TOML 중 `bt_refs` 필드를 직접 포함한 것은 1개(`hexa-ios.toml`)뿐. 나머지 452 개는 주석 헤더의 `BT-NNN` 토큰을 프록시로 추출했다 (151 TOML 에서 실제 검출).
 - `n6_formula` / `cross_seeds` 는 라인 본문에서 상수 심볼(`sigma=12`, `phi=2`, `n=6`, `tau=4`, `sopfr=5`, `j2=24`, `sigma-phi`, `n/phi` 등) 매칭으로 대체.
 - `pareto_frontier_400.json` 미존재 → pareto_pts 를 TOML 후보 scoring(n6/perf/power/cost/energy_proxy) 평균 5-벡터로 대체.
-- `shared/config/bt_weights.json` 미존재 → BT 가중치 하드코드 대신 overlap 카운트로 축약.
+- `n6shared/config/bt_weights.json` 미존재 → BT 가중치 하드코드 대신 overlap 카운트로 축약.
 - 기존 scan 시점에는 380 TOML 이었으나 본 실행 시점 453 TOML (78 신규 도메인 중 73 개가 이미 편입 완료). v1 기준 75 도메인 확장 (약 +20%).
 
 ## v1 → v2 개선 3점 (수치)
@@ -186,7 +186,7 @@
 
 | 파일 | 경로 | 상태 |
 |------|------|------|
-| JSON 결과 | `shared/dse/dse_cross_results_v2.json` | 작성 (80,627 bytes) |
+| JSON 결과 | `n6shared/dse/dse_cross_results_v2.json` | 작성 (80,627 bytes) |
 | 리포트 | `reports/discovery/dse-v2-results-2026-04-11.md` | 작성 (본 문서) |
 | atlas.n6 append | `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` | +100 pair [7] append |
 | 실행본 소스 | `experiments/dse/cross_dse_fusion_v2_run.hexa` | 저장 |

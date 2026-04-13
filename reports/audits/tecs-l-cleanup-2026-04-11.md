@@ -21,7 +21,7 @@ TECS-L 리포는 폐기되었으며, 수학+산업 기능이 n6-architecture 에
 | **도메인 문서 (goal.md, .md)** | 14 | 경로/참조 갱신 |
 | **CLAUDE.md (가이드)** | 2 | 갱신 |
 | **실험 (.hexa)** | 1 | 갱신 |
-| **역사 기록 (reports/, shared/logs/)** | 보존 | 미수정 |
+| **역사 기록 (reports/, n6shared/logs/)** | 보존 | 미수정 |
 | **논문 (papers/)** | 보존 | 미수정 (학술 인용) |
 | **흡수 로그 (.growth/absorbed/)** | 보존 | 미수정 |
 
@@ -88,7 +88,7 @@ TECS-L 리포는 폐기되었으며, 수학+산업 기능이 n6-architecture 에
 
 - `reports/` 전체: 세션 기록, 발견 기록, 감사 기록
 - `papers/` 전체: 학술 논문 인용 (저자명 TECS-L Research Group 등)
-- `shared/logs/absorbed/`: 흡수 로그 JSON
+- `n6shared/logs/absorbed/`: 흡수 로그 JSON
 - `domains/*/.growth/absorbed/`: 도메인별 흡수 기록
 - `nexus/origins/ready-absorber/findings/`: 흡수기 탐색 결과
 - `nexus/origins/ready-absorber/state.json`: 흡수 완료 상태

@@ -1,6 +1,6 @@
 # 궁극의 스텔스/은닉 아키텍처 -- HEXA-CLOAK
 
-> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 7 maturity / closure_grade 6 (bt_exact_pct 기반 추정).
 
 **Rating**: 7/10 -- 스텔스 전 파라미터 n=6 산술 수렴, 메타물질 연구 진행중

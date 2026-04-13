@@ -1,6 +1,6 @@
 # 궁극의 소프트웨어 암호 아키텍처 — HEXA-CRYPTO
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 9 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 9/10 -- 산업표준 전수 매칭

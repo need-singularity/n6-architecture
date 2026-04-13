@@ -4,7 +4,7 @@
 // 근거: ESS/sec 최대 지점이 n=6 부근
 // 가설: 6 파라미터 ESS/sec 최적
 // 지표: ESS, R-hat, step 수
-// 의존: shared/config/lens_registry.json BayesianInferenceLens
+// 의존: n6shared/config/lens_registry.json BayesianInferenceLens
 
 fn main() {
     println("[렌즈: Bayesian] 6 파라미터 NUTS — 산술 검증")

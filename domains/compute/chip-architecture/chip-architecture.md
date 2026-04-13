@@ -230,7 +230,7 @@ Phase 4: System Integration
 
 # N6 Chip Architecture — Ultimate Goal (Consolidated)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 > **n=6 완전수 산술이 반도체 칩 아키텍처의 모든 구조적 상수를 결정한다.**

@@ -4,7 +4,7 @@
 // 근거: 6 원자 Wasserstein 수치 안정 영역
 // 가설: 6 원자 Sinkhorn 반복 수가 5/7 대비 최소
 // 지표: 반복 수, 수렴율
-// 의존: shared/config/lens_registry.json OptimalTransportLens
+// 의존: n6shared/config/lens_registry.json OptimalTransportLens
 
 fn main() {
     println("[렌즈: OT] 6 원자 Sinkhorn — 산술 검증")

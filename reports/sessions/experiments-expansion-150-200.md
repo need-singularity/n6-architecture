@@ -18,7 +18,7 @@
 - R14 SSOT : `_results.jsonl` 단일 SSOT 에 pending 행 append, 별도 JSON 미생성
 - R18 미니멀 : fn main() 스텁 + 메타 주석만, 본격 구현은 후속
 - 기존 스텁 패턴 준수 : 파일 상단 메타 주석 + println 3행
-- shared/config/absolute_rules.json + shared/rules/n6-architecture.json 기반 검증
+- n6shared/config/absolute_rules.json + n6shared/rules/n6-architecture.json 기반 검증
 
 ## 50 신규 실험 분포
 
@@ -107,7 +107,7 @@ BT-397 도시 스케일링 / BT-398 Fisher / BT-399 게임이론 / BT-400 10 프
 
 1. 50 스텁 중 우선순위 상위 (bt400-new → chip-design → sota-bench) 순차 본격 포팅
 2. 결과 확보 시 `status: pending` → `passed` / `failed` / `inconclusive`
-3. passed BT-381~400 항목은 `shared/convergence/n6-architecture.json` ossified 승격 + `atlas.n6` [7]→[10*] 편집 후보
+3. passed BT-381~400 항목은 `n6shared/convergence/n6-architecture.json` ossified 승격 + `atlas.n6` [7]→[10*] 편집 후보
 4. chip-verify passed → `nexus rtl` 파이프라인 통과 증거로 채택
 5. `meta_atlas_promotion_automation.hexa` 자동 승격 스크립트를 본격 구현하여 루프 폐쇄
 

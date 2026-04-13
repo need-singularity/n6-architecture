@@ -1,6 +1,6 @@
 # 궁극의 중력파 검출/통신기 — HEXA-GRAV (RT-SC 거울 10⁻²⁴ 변형률)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 > 외계인 지수: 🛸10 (물리적 한계 도달 — RT-SC 테스트 질량 + 간섭계 팔 24km + 1440x LIGO 민감도)

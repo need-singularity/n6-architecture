@@ -258,7 +258,7 @@ for name, val, expr in checks:
 
 ## DSE
 
-- `shared/dse/domains/meteorology.toml` 참조
+- `n6shared/dse/domains/meteorology.toml` 참조
 
 
 ## 3. 가설

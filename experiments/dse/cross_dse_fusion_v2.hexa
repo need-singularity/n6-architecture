@@ -7,9 +7,9 @@
 // 전제     : 400 TOML 의 Δ1~Δ5 확장 스키마 (bt_refs, cross_seeds,
 //            n6_formula, evidence_grade, energy_pareto)
 // 입력     : nexus/origins/universal-dse/domains/*.toml  (400)
-//            shared/config/bt_weights.json               (BT 가중치)
-//            shared/dse/pareto_frontier_400.json         (파레토 프런티어)
-// 출력     : shared/dse/dse_cross_results.json           (v2 스키마)
+//            n6shared/config/bt_weights.json               (BT 가중치)
+//            n6shared/dse/pareto_frontier_400.json         (파레토 프런티어)
+// 출력     : n6shared/dse/dse_cross_results.json           (v2 스키마)
 //            reports/discovery/cross_dse_v2_<date>.md    (자동 리포트)
 // 비교     : v1 = 67,913 pair / 67,883 high_conf  →  v2 = 100K+ pair
 // 구현 상태: 설계 초안 (실측 런 전)
@@ -25,7 +25,7 @@ use std::math::{sqrt, min, max}
 const DOMAIN_DIR = env("N6_DOMAIN_DIR")
                  || "/Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains"
 const BT_WEIGHTS_PATH = env("N6_BT_WEIGHTS")
-                     || "/Users/ghost/Dev/n6-architecture/shared/config/bt_weights.json"
+                     || "/Users/ghost/Dev/n6-architecture/n6shared/config/bt_weights.json"
 const PARETO_PATH     = env("N6_PARETO_PATH")
                      || "/Users/ghost/Dev/nexus/shared/dse/pareto_frontier_400.json"
 const OUT_PATH        = env("N6_CROSS_OUT")
@@ -33,7 +33,7 @@ const OUT_PATH        = env("N6_CROSS_OUT")
 const ATLAS_PATH      = env("N6_ATLAS")
                      || "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
 
-// 공명 가중치 — shared/config 로 외부화 대상이나, 초안에서는 기본값만 명시
+// 공명 가중치 — n6shared/config 로 외부화 대상이나, 초안에서는 기본값만 명시
 const W_KW      = 0.35
 const W_BT      = 0.25
 const W_FORMULA = 0.20

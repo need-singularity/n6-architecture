@@ -76,7 +76,7 @@
       v
   reports/discovery/energy_pareto_sweep_<date>.md  (R6 자동 기록)
       v
-  shared/n6/atlas.n6  evidence_grade 자동 승격 (R28)
+  n6shared/n6/atlas.n6  evidence_grade 자동 승격 (R28)
 ```
 
 ---
@@ -99,8 +99,8 @@
 ### 5.1 입력
 
 - 400 TOML (`nexus/origins/universal-dse/domains/*.toml`) — Δ1~Δ5 스키마 적용본
-- `shared/config/bt_weights.json` — BT별 가중치(대체로 0.01~0.05)
-- `shared/config/pareto_params.json` — knee 탐지 파라미터 (기본값: angle_threshold=150°)
+- `n6shared/config/bt_weights.json` — BT별 가중치(대체로 0.01~0.05)
+- `n6shared/config/pareto_params.json` — knee 탐지 파라미터 (기본값: angle_threshold=150°)
 
 ### 5.2 알고리즘 (AI-native)
 
@@ -142,13 +142,13 @@ dominates(pt', pt) := (pt'.n6 ≥ pt.n6 ∧ pt'.perf ≥ pt.perf
 
 - 각 TOML 에 `[[frontier]]` 섹션 append (기존 candidate 블록 건드리지 않음)
 - 전역 리포트: `reports/discovery/energy_pareto_sweep_<date>.md`
-- 결과 JSON: `shared/dse/pareto_frontier_400.json`
+- 결과 JSON: `n6shared/dse/pareto_frontier_400.json`
 - atlas.n6: 프런티어 5 후보 × 400 도메인 = 2000 `@R` 항목 [7] 등록
 
 ### 5.6 결과 스키마
 
 ```jsonc
-// shared/dse/pareto_frontier_400.json
+// n6shared/dse/pareto_frontier_400.json
 {
   "generated_at": "2026-04-11T...",
   "n_domains": 400,

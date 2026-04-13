@@ -4,7 +4,7 @@
 // 근거: n=6 qubit 2^6=64 상태 공간
 // 가설: 6 qubit 게이트 분해 최적 깊이
 // 지표: 회로 깊이
-// 의존: shared/config/lens_registry.json
+// 의존: n6shared/config/lens_registry.json
 
 fn main() {
     println("[렌즈: Quantum] 검증 스텁 — 6 qubit")

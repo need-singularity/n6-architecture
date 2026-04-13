@@ -72,7 +72,7 @@ $$n=6, \quad \sigma(6)=12, \quad \tau(6)=4, \quad \varphi(6)=2, \quad \text{sopf
 
 - **hexa 검증**: `experiments/anomaly/verify_bt372_geology.hexa` (현재 스텁, PENDING)
 - **부록 A 파이썬 임베드**: N62/PP2 준수 — 32 항목 ossification_loop
-- **atlas.n6 연결**: `shared/n6/atlas.n6` L6_geology 섹션 (171 노드 중 BT-372 관련 6 노드)
+- **atlas.n6 연결**: `n6shared/n6/atlas.n6` L6_geology 섹션 (171 노드 중 BT-372 관련 6 노드)
 - **N62 검증 완결**: 부록 A OSSIFIED 32/32 (md 자체 완결)
 
 ## 5. Zenodo 발행 체크리스트

@@ -1,6 +1,6 @@
 # HEXA-SEABED — 대륙간 해저 초전도 송전망 (Ultimate SC Submarine Grid)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 > **단일 문서 원칙**: 이 .md 하나에 실생활 효과 / ASCII / 8단 DSE / BT 링크 / Discovery / Testable Predictions / Mk.I~V 진화 / Python 검증 전부 포함.

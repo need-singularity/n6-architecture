@@ -1,6 +1,6 @@
 # 궁극의 UFO 비행접시 (HEXA-UFO) — RT-SC 기반 원반형 VTOL
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 9 (bt_exact_pct 기반 추정).
 
 > **외계인 지수**: 🛸10 (물리적 한계 도달 — Meissner 무동력 부양 + 48T SC 추진 + 탁상 핵융합 무한 에너지) | **인증일**: 2026-04-05 | **ver**: v2

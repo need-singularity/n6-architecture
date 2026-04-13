@@ -131,4 +131,4 @@ test result: ok. 2593 passed; 0 failed; 0 ignored; 0 measured
 - Telescope: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/mod.rs`
 - 레지스트리 연결: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/registry.rs`
 - 테스트: `/Users/ghost/Dev/n6-architecture/nexus/tests/telescope_test.rs`
-- JSON: `/Users/ghost/Dev/n6-architecture/shared/config/lens_registry.json`
+- JSON: `/Users/ghost/Dev/n6-architecture/n6shared/config/lens_registry.json`

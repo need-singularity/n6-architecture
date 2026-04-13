@@ -27,7 +27,7 @@ RISC-V ISA의 **custom opcode 공간 4개**(custom-0: 0b0001011, custom-1: 0b010
 
 핵심 원칙:
 1. **표준 준수**: RV32I/RV64I 비손상, custom 공간만 사용
-2. **SSOT**: `shared/config/xn6_isa.json` 단일 진실 (R5)
+2. **SSOT**: `n6shared/config/xn6_isa.json` 단일 진실 (R5)
 3. **HEXA-FIRST**: 디코더/인코더 모두 .hexa (R1)
 
 ---
@@ -259,7 +259,7 @@ fn matmul12(a: tensor(12,12), b: tensor(12,12)) -> tensor(12,12) {
 
 | 단계 | 범위 | 산출물 | 시점 |
 |------|------|--------|------|
-| Mk.I | Xn6-ARITH 24 명령어 정의 | `shared/config/xn6_isa.json` | M+0 |
+| Mk.I | Xn6-ARITH 24 명령어 정의 | `n6shared/config/xn6_isa.json` | M+0 |
 | Mk.II | 디코더 .hexa + testbench | `rtl/xn6_decoder.hexa` | M+1 |
 | Mk.III | GCC intrinsic + LLVM tblgen | `xn6intrin.h`, `XN6InstrInfo.td` | M+2 |
 | Mk.IV | Xn6-MEM, Xn6-DMA 추가 (48 명령) | custom-1/2 할당 | M+3 |
@@ -280,7 +280,7 @@ fn matmul12(a: tensor(12,12), b: tensor(12,12)) -> tensor(12,12) {
 - RISC-V ISA Manual v20191213 — custom opcode 영역 정의
 - `nexus/origins/hexa-rtl/rtl/riscv_n6_core.hexa` — 커스텀 24비트 ISA (별개)
 - `nexus/origins/hexa-rtl/rtl/hexalang_decoder.hexa` — 53 키워드 CAM (참고)
-- `shared/config/rtl_templates.json` (chip-rtl-gen) — 원시연산 정의
+- `n6shared/config/rtl_templates.json` (chip-rtl-gen) — 원시연산 정의
 - `techniques/_registry.json` — 66 기법 (어떤 기법이 어떤 Xn6 명령 생성하는지)
 
 ---
@@ -314,7 +314,7 @@ hexa verify.hexa
 
 ### 부록 A: 성공 기준 (GO)
 
-- 24/24 명령 `shared/config/xn6_isa.json` 등록
+- 24/24 명령 `n6shared/config/xn6_isa.json` 등록
 - 디코더 `hexa sim` PASS
 - Intrinsic 헤더 컴파일 OK
 - 기존 riscv_n6_core 와 충돌 0

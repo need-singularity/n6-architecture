@@ -84,7 +84,7 @@ shared_constants 8개 (n, phi, n/phi,       동적 추출 (n6_formula 태그 전
   top_pairs[400], hubs[20] (degree top), bridges[50] (betweenness top),
   clusters[16] (greedy modularity)
       v
-  shared/dse/dse_cross_results.json  (v2)
+  n6shared/dse/dse_cross_results.json  (v2)
       v
   atlas.n6 자동 흡수 (R28)
 ```
@@ -252,7 +252,7 @@ Pareto-dominant 관계를 DAG 로 그려 hub/bridge/cluster 지표 추가:
 | `bt_refs` 누락 TOML | 기본값 [] 처리, bt_overlap=0 |
 | 400 TOML 중 일부 스키마 v1 잔존 | v2 파서가 Δ1~Δ5 필드 없으면 `energy_pareto=false`, `evidence_grade=7` 기본값 주입 |
 | O(N²) 메모리 폭발 | 배치 16 단위로 스트리밍 처리, high_conf 만 상주 |
-| 하드코드 재유입 | synergy 룰을 `shared/config/bt_weights.json` 외부화 (R2) |
+| 하드코드 재유입 | synergy 룰을 `n6shared/config/bt_weights.json` 외부화 (R2) |
 | 중복 발견 누락 (R28) | 실행 종료 시 결과를 atlas.n6 에 자동 흡수 |
 
 ## 8. 검증 절차 (N63)

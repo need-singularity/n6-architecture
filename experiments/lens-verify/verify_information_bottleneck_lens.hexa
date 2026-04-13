@@ -4,7 +4,7 @@
 // 근거: Shannon 용량 + Tishby IB 이론 n=6 상한
 // 가설: 6 비트 압축 I(T;Y) 최대
 // 지표: I(X;T), I(T;Y), 정확도
-// 의존: shared/config/lens_registry.json InformationBottleneckLens
+// 의존: n6shared/config/lens_registry.json InformationBottleneckLens
 
 fn main() {
     println("[렌즈: IB] 6 비트 압축 — 산술 검증")

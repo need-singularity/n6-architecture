@@ -346,10 +346,10 @@ verify/hydrology_seed.hexa     [STUB]
 **1차 출처 (atlas / theory SSOT)**
 
 - `theory/proofs/theorem-r1-uniqueness.md` — sigma*phi=n*tau iff n=6 (3 독립 증명)
-- `shared/n6/atlas.n6` L6_hydrology 6 nodes (water-cycle-stages, water-max-density-temp, seawater-salinity, water-bond-angle, water-boiling-point)
-- `shared/n6/atlas.n6` L6_glaciology 6 nodes
-- `shared/n6/atlas.n6` L6_oceanography 10 nodes
-- `shared/n6/atlas.n6` L6_atmospheric_physics 7 nodes
+- `n6shared/n6/atlas.n6` L6_hydrology 6 nodes (water-cycle-stages, water-max-density-temp, seawater-salinity, water-bond-angle, water-boiling-point)
+- `n6shared/n6/atlas.n6` L6_glaciology 6 nodes
+- `n6shared/n6/atlas.n6` L6_oceanography 10 nodes
+- `n6shared/n6/atlas.n6` L6_atmospheric_physics 7 nodes
 - `papers/n6-oceanography-paper.md` 해양 브리지 (기존)
 - `papers/n6-meteorology-paper.md` 기상 브리지 (기존)
 

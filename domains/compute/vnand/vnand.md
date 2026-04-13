@@ -1,6 +1,6 @@
 # 궁극의 V-NAND 아키텍처 — HEXA-VNAND
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 9 / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **Rating**: 9/10 -- 반도체 메모리 물리 한계 근접

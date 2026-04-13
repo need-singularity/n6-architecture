@@ -79,4 +79,4 @@ rad(6) = 6    ← sparse radical norm
 - 벤치: `./_bench_plan.md` (16 기준선)
 - 칩맵: `./_chip_mapping.md`
 - 레지스트리: `./_registry.json` v1.3.0
-- 수렴: `../shared/convergence/n6-architecture.json`
+- 수렴: `../n6shared/convergence/n6-architecture.json`

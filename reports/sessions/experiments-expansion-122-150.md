@@ -89,7 +89,7 @@
 
 1. 각 스텁을 본격 실험 코드로 포팅 (nexus verify --hexa 경로 통해 단계 진행)
 2. 결과 확보 시 `status: "pending"` → `"passed"` / `"failed"` / `"inconclusive"` 로 전이
-3. passed 항목은 `shared/convergence/n6-architecture.json` ossified 후보로 승격
+3. passed 항목은 `n6shared/convergence/n6-architecture.json` ossified 후보로 승격
 4. BT-372~380 검증 통과분은 `atlas.n6` 해당 섹션의 [7] → [10*] 승격 대상
 
 ## 제약 및 주석

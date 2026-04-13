@@ -256,7 +256,7 @@ print(f"통계 검정: 협화음이 div(6)만 사용 → p = 0.0015")
 
 ## DSE
 
-- `shared/dse/domains/music.toml` 참조
+- `n6shared/dse/domains/music.toml` 참조
 
 
 ## 3. 가설

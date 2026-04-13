@@ -1,6 +1,6 @@
 # 궁극의 ASIC 아키텍처 — HEXA-ASIC
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 8 maturity / closure_grade 7 (bt_exact_pct 기반 추정).
 
 **Rating**: 8/10 -- RISC-V n=6 마이크로아키텍처 수렴

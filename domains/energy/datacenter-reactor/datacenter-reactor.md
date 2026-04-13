@@ -1,6 +1,6 @@
 # 궁극의 데이터센터+원자로 아키텍처 — HEXA-DC-SMR
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 8 / closure_grade 7 (bt_exact_pct 기반 추정).
 
 **Rating**: 8/10 -- 열역학/핵공학 한계 도달

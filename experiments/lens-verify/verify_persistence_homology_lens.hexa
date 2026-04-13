@@ -4,7 +4,7 @@
 // 근거: 6D 점군 지속 다이어그램 잡음 섭동 강건
 // 가설: 6D 시그니처 bottleneck < 5D/7D
 // 지표: Betti 수, bottleneck, Wasserstein
-// 의존: shared/config/lens_registry.json PersistenceHomologyLens
+// 의존: n6shared/config/lens_registry.json PersistenceHomologyLens
 
 fn main() {
     println("[렌즈: Persistence] Betti 0~5 — 산술 검증")

@@ -1,6 +1,6 @@
 # HEXA-SKYWAY — 궁극의 공중 고속도로 네트워크 (3D 도시 교통망)
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 > **목표**: 건물 상공에 J₂=24층 공중경로 + σ·τ=48 허브 + VTOL 개별차량 자동항법

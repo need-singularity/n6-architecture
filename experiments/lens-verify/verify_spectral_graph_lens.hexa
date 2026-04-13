@@ -4,7 +4,7 @@
 // 근거: 커뮤니티 검출 상위 고유값이 sigma% 에너지
 // 가설: 상위 6 고유값 누적 에너지 >= sigma%
 // 지표: 고유값 비율, Fiedler 값
-// 의존: shared/config/lens_registry.json SpectralGraphLens
+// 의존: n6shared/config/lens_registry.json SpectralGraphLens
 
 fn main() {
     println("[렌즈: Spectral] 상위 6 고유값 — 산술 검증")

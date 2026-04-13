@@ -1,6 +1,6 @@
 # HEXA-ONE --- 궁극의 단일 통합 웨어러블 아키텍처 (8단)
 
-> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 8 maturity / closure_grade 8 (bt_exact_pct 기반 추정).
 
 **n=6 산술 기반, 하나의 안경 디바이스가 인간의 전 감각을 sigma=12배 확장하는 궁극의 통합 웨어러블**

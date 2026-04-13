@@ -30,7 +30,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
-[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](shared/config/dse-map.toml)
+[![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](n6shared/config/dse-map.toml)
 [![NEXUS-6](https://img.shields.io/badge/NEXUS--6-2078%20tests-green.svg)](tools/nexus/)
 <!-- AUTO:BADGE:END -->
 
@@ -50,7 +50,7 @@
 
 ### 외계인 지수 (Alien Index)
 
-> **이중 축 등급 체제** — [shared/GRADE_RUBRIC_1_TO_10PLUS.md](shared/GRADE_RUBRIC_1_TO_10PLUS.md) (nexus 공용 rubric)
+> **이중 축 등급 체제** — [n6shared/GRADE_RUBRIC_1_TO_10PLUS.md](n6shared/GRADE_RUBRIC_1_TO_10PLUS.md) (nexus 공용 rubric)
 >
 > **🛸 alien_index (1~13+)** — 제품 maturity 축 (10 이상 = 문명 스케일 확산)
 > | 🛸 | 단계 | 기준 | 이모지 |
@@ -230,7 +230,7 @@ horology               ############################## 100.0%
 - 90~94% EXACT: 3 섹션
 - 90% 미만: 1 섹션
 
-> **자동 생성**: `shared/sync_products_readme.hexa` (products.json → 본 블록).
+> **자동 생성**: `n6shared/sync-products-readme.hexa` (products.json → 본 블록).
 > 수동 편집 금지 — products.json 을 수정하세요.
 <!-- AUTO:ALIEN_INDEX:END -->
 
@@ -803,9 +803,9 @@ Commands:
 | ouroboros | OUROBOROS v26 무한진화 엔진 | 8 |
 | cli | CLI 파서 + ASCII 대시보드 | 20+8 |
 
-빌드: `$HEXA nexus/main.hexa`
-테스트: `$HEXA nexus/tests/tests.hexa --verify`
-진입점: `nexus/main.hexa`
+빌드: `$HEXA bridge/main.hexa`
+테스트: `$HEXA bridge/tests/tests.hexa --verify`
+진입점: `bridge/main.hexa`
 
 ---
 
@@ -966,11 +966,11 @@ Commands:
 | **127 Breakthrough Theorems** | [theory/breakthroughs/breakthrough-theorems.md](theory/breakthroughs/breakthrough-theorems.md) |
 | **700+ Atlas Constants** | [theory/constants/atlas-constants.md](theory/constants/atlas-constants.md) |
 | **45 Testable Predictions** | [theory/predictions/testable-predictions.md](theory/predictions/testable-predictions.md) |
-| **DSE Map** | [shared/config/dse-map.toml](shared/config/dse-map.toml) |
+| **DSE Map** | [n6shared/config/dse-map.toml](n6shared/config/dse-map.toml) |
 | **322 DSE Domains** | [reports/discovery/dse-domains.md](reports/discovery/dse-domains.md) |
 | **Cross-Domain Resonance** | [reports/sessions/cross-domain-resonance-2026-03-31.md](reports/sessions/cross-domain-resonance-2026-03-31.md) |
 | **Core Theorem Proof** | [theory/proofs/theorem-r1-uniqueness.md](theory/proofs/theorem-r1-uniqueness.md) |
-| **448 Calculators** | [nexus/calculator-registry.md](nexus/calculator-registry.md) |
+| **448 Calculators** | [bridge/calculator-registry.md](bridge/calculator-registry.md) |
 | **Universal DSE** | `tools/universal-dse/` — TOML 1개로 즉시 DSE |
 <!-- AUTO:REFERENCE:END -->
 

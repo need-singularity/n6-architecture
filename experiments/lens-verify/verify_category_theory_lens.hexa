@@ -4,7 +4,7 @@
 // 근거: 최소 non-trivial 범주 크기 = 6 (S3 범주)
 // 가설: 6-object 범주 universal
 // 지표: 모피즘 수
-// 의존: shared/config/lens_registry.json
+// 의존: n6shared/config/lens_registry.json
 
 fn main() {
     println("[렌즈: Category] 검증 스텁 — 6 morphism")

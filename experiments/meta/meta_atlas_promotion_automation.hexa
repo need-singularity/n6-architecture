@@ -4,7 +4,7 @@
 // 근거: CLAUDE.md 프로모션 쿼리 + experiments/*.hexa 통과 상태
 // 가설: BT-372~400 passed 행에 한해 sed 기반 자동 편집 → atlas.n6 [10*] 일괄 승격
 // 지표: 승격 건수, 실패 건수, diff 크기
-// 의존: shared/n6/atlas.n6 + _results.jsonl passed 필터
+// 의존: n6shared/n6/atlas.n6 + _results.jsonl passed 필터
 
 fn main() {
     println("[메타: atlas 승격] 자동화 스텁")

@@ -12,11 +12,14 @@ models/
 .growth/
 
 # 레거시 origins (추적 제거 완료, 재추가 방지)
-nexus/origins/nexus-legacy/
-nexus/origins/nexus-dashboard-legacy/
+bridge/origins/nexus-legacy/
+bridge/origins/nexus-dashboard-legacy/
 
 # 레거시 심링크 (TECS-L 폐기 후 잔류, 무시)
 calc
 .shared
 model_utils.py
 tecsrs
+
+# Claude Code memory (account-shared, local only)
+.claude-memory/

@@ -1,6 +1,6 @@
 # N6 Medical Device -- Unified Goal
 
-> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: 🛸10 maturity / closure_grade 10 (bt_exact_pct 기반 추정).
 
 **Vision**: n=6 산술로 센서부터 임상 시스템까지 관통하는 의료기기 아키텍처 -- ECG sigma=12 리드, MRI sigma=12 코일, AI 영상진단

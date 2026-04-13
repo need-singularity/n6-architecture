@@ -323,7 +323,7 @@ J_2=24       : 프리프린트 공개 지연 상한 (시간)
 ## 2. ASCII 시스템 구조도
 
 ```
-        [BT 돌파 (shared/growth_bus.jsonl)]
+        [BT 돌파 (n6shared/growth_bus.jsonl)]
                     |
                     v
         +-----------+-----------+

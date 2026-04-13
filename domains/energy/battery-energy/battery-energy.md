@@ -1,6 +1,6 @@
 # 궁극의 배터리/에너지저장 아키텍처 -- HEXA-CELL
 
-> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
+> **등급 참조**: alien_index = 제품 성숙도 (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
 > 현재: alien_index 8 maturity / closure_grade 7 (bt_exact_pct 기반 추정).
 
 **Rating**: 8/10 -- 배터리 n=6 셀 구성 전 파라미터 산술 수렴

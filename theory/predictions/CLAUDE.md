@@ -19,7 +19,7 @@
 ## 절대규칙
 - 한글 필수 (.md/주석/커밋)
 - HEXA-FIRST (.py 금지)
-- 규칙 N66 준수 (shared/rules/n6-architecture.json)
+- 규칙 N66 준수 (n6shared/rules/n6-architecture.json)
 
 
 ## 관련 링크
