@@ -87,9 +87,9 @@ requires:
 
 | 선행 도메인 | 🛸 현재 | 🛸 필요 | 차이 | 핵심 기술 | 링크 |
 |-------------|---------|---------|------|-----------|------|
-| room-temp-sc | 🛸5 | 🛸10 | +5 | 상온 초전도 Tc = 300K, R = 0 | [atlas](../../energy/room-temp-sc/room-temp-sc.md) |
-| fusion-powerplant | 🛸4 | 🛸10 | +6 | 탁상 핵융합 Q = σ-φ = 10, R = 0.1m | [atlas](../../energy/fusion-powerplant/fusion-powerplant.md) |
-| superconductor | 🛸6 | 🛸10 | +4 | B = σ·τ = 48T + SC 모터 60 kW/kg | [atlas](../../energy/superconductor/superconductor.md) |
+| room-temp-sc | 🛸5 | 🛸10 | +5 | 상온 초전도 Tc = 300K, R = 0 | [문서](../../energy/room-temp-sc/room-temp-sc.md) |
+| fusion-powerplant | 🛸4 | 🛸10 | +6 | 탁상 핵융합 Q = σ-φ = 10, R = 0.1m | [문서](../../energy/fusion-powerplant/fusion-powerplant.md) |
+| superconductor | 🛸6 | 🛸10 | +4 | B = σ·τ = 48T + SC 모터 60 kW/kg | [문서](../../energy/superconductor/superconductor.md) |
 
 3개 선행 도메인이 모두 🛸10 도달 시 통합 비행체 Mk.III 이후 제조 가능. 현재는 소재/부품 단계(Mk.I~II).
 
