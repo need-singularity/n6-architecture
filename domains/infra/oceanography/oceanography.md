@@ -89,10 +89,6 @@ L1 Sensing(K₁=6) ── L2 Modeling(K₂=6) ── L3 Energy(K₃=6) ── L4
 
 ---
 
-## 6. Cross-DSE: environment, energy, biology, climate, material
-
-## 7. 진화: Mk.I 인공위성 관측 -> Mk.II AUV 자율탐사 -> Mk.III 해양 에너지 팜 -> Mk.IV 심해 채굴 -> Mk.V 물리한계(해양 열역학)
-
 ## 8. BT 연결
 
 BT-119(지구 6권역), BT-122(산호 육방정계 n=6), BT-118(CO₂ 해양흡수), BT-120(해수 정화 CN=6), BT-62(파동 주기 연결)
@@ -524,39 +520,4 @@ ion species, depth layers) provide testable n=6 connections.
 
 **EXACT: 9/17, CLOSE: 6/17, WEAK: 2/17**
 
-
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

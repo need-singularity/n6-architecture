@@ -119,10 +119,6 @@ Ohm I²R 줄발열, 표피효과, 코로나 방전, Lyapunov 안정성, Ferranti
 
 ---
 
-## 9. Cross-DSE: energy, battery, solar, fusion, chip
-
-## 10. 진화: Mk.I AC grid -> Mk.II HVDC -> Mk.III DC microgrid -> Mk.IV Supergrid -> Mk.V Quantum grid
-
 ## 11. 산업 검증
 
 Edison Pearl St.(1882~, 144년), IEEE/IEC 표준, ABB/Siemens/GE/Schneider/Hitachi/State Grid 6사
@@ -1011,9 +1007,6 @@ n = 6. Hexagonal lattice에서 각 터빈이 6개 이웃과 등거리.
   BT-89: Photonic-Energy n=6 Bridge — PUE->1.0, E-O loss=1/(sigma-phi)=10%
   BT-149: Thermodynamic Laws n=6 — 4 laws, 4 potentials, 4 Maxwell, 3 heat transfer
 ```
-
-
-## 4. BT 연결
 
 
 ## 5. DSE 결과
@@ -2886,18 +2879,4 @@ Mk.IV는 HVDC 글로벌 슈퍼그리드로 σ²=144개국 전력 통합 + 무선
 | Tier 3 | 5 | 3-10 years |
 | **Total** | **15** | |
 
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

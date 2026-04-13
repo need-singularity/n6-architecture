@@ -13505,21 +13505,6 @@ Mk.V는 "더 이상 발전할 수 없는 지점"을 정의한다. 그 지점은:
 위 28개 예측은 각각 독립적으로 반증 가능하다. 만약 Tier 1의 6개 예측 중 4개 이상이 FAIL이면, n=6 AI 이론은 기각된다. 현재까지 실험 가능한 예측 중 FAIL = 0이다.
 
 
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
-
-
 ## 부록 A: 기타 문서
 
 
@@ -13528,8 +13513,6 @@ Mk.V는 "더 이상 발전할 수 없는 지점"을 정의한다. 그 지점은:
 # H-EE-Bridge-1: Phi-Bottleneck 4/3 Ratio from Perfect Number 6 Arithmetic
 
 > **Hypothesis**: The 4/3 FFN expansion ratio is not arbitrary — it equals tau(6)^2/sigma(6) = 16/12 = 4/3, derived from the first perfect number.
-
-## Grade: 🟩 CONFIRMED (cross-repo bridge from TECS-L)
 
 ## Source
 - TECS-L proven identity: sigma(6)*phi(6) = 6*tau(6) = 24 (H-CX-191, PROVED)

@@ -163,24 +163,6 @@ python3 docs/earthquake-engineering/verify_alien10.py
 기대 출력: `PASS n=6 도메인, alien_index 8/10`
 
 
-## 3. 가설
-
-
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
 ## 9. Mk.I~V 진화
 
 
@@ -650,21 +632,4 @@ Mk.IV (2039~2045) 🔮 지진파 차폐 — 메타물질 기반 파동 굴절
 Mk.V (2046~2050+) 🔮 완전 면역 도시 — n=6 도메인 통합, 지진 에너지 회수
 ```
 
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

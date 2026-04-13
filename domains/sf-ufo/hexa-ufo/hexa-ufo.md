@@ -218,18 +218,6 @@ P2 = 28 (second perfect number)
 원본 설계: `docs/sf/goal.md`
 
 
-## 3. 가설
-
-
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
 ## 7. 실험 검증 매트릭스
 
 
@@ -435,27 +423,4 @@ python3 docs/hexa-ufo/verify_n6.py 실행 -- 종료코드 0
 
 **요약**: SF에서 UFO(비행접시)와 스타쉽(우주항공)을 분리한 이후, 3개 도메인(HEXA-UFO / HEXA-AERO / HEXA-STARSHIP)의 BT, goal.md, products.json, DSE가 모두 일관적이며 경계 침범 없음. BT-270은 범용 항공 원리로 3개 도메인 교차 참조가 정당. UFO 전용 BT 16건(핵융합+초전도)은 타 도메인에 미침범.
 
-
-## 8. 외계인급 발견
-
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

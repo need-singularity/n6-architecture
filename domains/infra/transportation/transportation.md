@@ -119,8 +119,6 @@ SE(3) 6DOF, Carnot, Rolling Resistance, Betz, Shannon, Landauer, 2nd Law, Coulom
 
 ---
 
-## 9. Cross-DSE: EV x PV (배터리+태양전지), Score 0.886
-
 ## 10. 진화 경로
 
 | 단계 | 등급 | 핵심 |
@@ -5370,21 +5368,6 @@ Mk.V는 그 너머를 상상하는 사고실험이지만, 실제로 구현하려
 | 4 | 7 | 10년+ | σ²=144, σ·J₂=288, sopfr=5, σ-φ=10 |
 
 **총 28개 예측 — 전부 반증 조건 명시, 독립 검증 가능**
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
 
 ## 부록 A: 기타 문서

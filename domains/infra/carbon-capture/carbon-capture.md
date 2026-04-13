@@ -7778,21 +7778,6 @@ The strongest predictions are P-CC-01 (CN=6 superiority for CO2 capture, physica
 - [dse-results.md](dse-results.md) -- DSE exploration results
 
 
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
-
-
 ## 부록 A: 기타 문서
 
 

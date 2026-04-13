@@ -899,9 +899,6 @@ coincidence — it reflects a shared mathematical substrate.
 ```
 
 
-## 4. BT 연결
-
-
 ## 5. DSE 결과
 
 
@@ -2100,21 +2097,6 @@ Full combined predictions (28 total): [docs/display-audio/testable-predictions.m
 | TP-DA-2 | σ²=144Hz 주사율 인지 한계 | σ²=144 | Tier 1 |
 | TP-DA-5 | σ·(σ-φ)=120° 홀로그램 FOV 임계점 | σ·(σ-φ)=120 | Tier 3 |
 | TP-DA-6 | n/φ=3 SH 차수 충분성 (3DGS) | n/φ=3 | Tier 1 |
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
 
 ## 부록 A: 기타 문서

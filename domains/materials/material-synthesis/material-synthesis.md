@@ -14756,21 +14756,6 @@ material synthesis framework has predictive power beyond chance coincidence (bin
 test p < 0.001 against null hypothesis of 50% random agreement).
 
 
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
-
-
 ## 부록 A: 기타 문서
 
 

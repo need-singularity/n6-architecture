@@ -94,10 +94,6 @@ L1 Currency(K₁=6) ── L2 Market(K₂=6) ── L3 Policy(K₃=5) ── L4 
 
 ---
 
-## 6. Cross-DSE: blockchain(BTC/ETH), cryptography(금융보안), network(거래), software(ACID), energy(유틸리티)
-
-## 7. 진화: Mk.I 법정화폐 -> Mk.II 디지털화폐 -> Mk.III DeFi -> Mk.IV AI경제 -> Mk.V 물리한계(Arrow 불가능성)
-
 ## 8. BT 연결
 
 BT-53(BTC 21M, 6 confirms, ETH 12s), BT-113(ACID=tau=4), BT-114(AES-256 금융보안), BT-74(Pareto 95/5), BT-62(60Hz 경제 유틸리티)
@@ -534,39 +530,4 @@ discrete counts (asset classes, G-groups, cycle lengths) testable against n=6.
 
 **EXACT: 13/18, CLOSE: 4/18, WEAK: 1/18**
 
-
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

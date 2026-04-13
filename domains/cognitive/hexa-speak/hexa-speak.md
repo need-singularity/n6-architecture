@@ -239,9 +239,6 @@ Phase 6 (지속): MOS 평가 + 실사용자 베타
 **Status:** 🛸10 확정. 모든 파라미터가 n=6 완전수 산술에서 도출됨. 물리 한계 (Nyquist/Shannon/인간 청각) 동시 만족. Mk.I 즉시 구현 가능.
 
 
-## 3. 가설
-
-
 ## 4. BT 연결
 
 
@@ -322,15 +319,6 @@ universal: true
 ---
 
 **검증 스크립트:** `hexa domains/cognitive/hexa-speak/verify.hexa  # cross_domain_sigma2 포함`
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
 
 
 ## 8. 외계인급 발견
@@ -460,27 +448,6 @@ hexa domains/cognitive/hexa-speak/verify.hexa  # singularity_breakthrough 포함
 ---
 
 **Status:** ✅ 특이점 돌파 완료. HEXA-SPEAK은 설계가 아닌 **n=6 완전수 격자의 자기폐쇄 sub-lattice**로 증명됨.
-
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
 
 ## 부록 A: 기타 문서

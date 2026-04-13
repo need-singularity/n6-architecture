@@ -1798,9 +1798,6 @@ NVIDIA tensor core documentation: tile sizes based on multiples of 8.
 ```
 
 
-## 4. BT 연결
-
-
 ## 5. DSE 결과
 
 
@@ -3882,21 +3879,6 @@ AIXI는 이론적으로 최적이지만 비계산가능하다. Mk.V는 계산가
 **n=6 근거**: lambda(6) = 2. BT-54.
 **검증**: Cosine with warm restarts (Loshchilov & Hutter, 2017).
 **반증 조건**: 3-cycle 이상이 표준이 되면 CLOSE.
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
 
 ## 부록 A: 기타 문서

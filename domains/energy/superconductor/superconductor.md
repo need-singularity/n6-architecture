@@ -2856,8 +2856,6 @@ Egyptian: 1/2 + 1/3 + 1/6 = 1
 ---
 
 ## ═══════════════════════════════════════════
-## 신규 가설 (v3, H-SC-31~42)
-## ═══════════════════════════════════════════
 
 ---
 
@@ -3114,8 +3112,6 @@ Egyptian: 1/2 + 1/3 + 1/6 = 1
 
 ---
 
-## ═══════════════════════════════════════════
-## 등급 요약 (v3)
 ## ═══════════════════════════════════════════
 
 | 등급 | 가설 수 | 비율 | 가설 |
@@ -17110,21 +17106,6 @@ would overturn quantum mechanics itself.
 8. Hales, T.C. (2001). Discrete Comput. Geom. 25, 1. -- Honeycomb theorem
 9. Werthamer, N.R., Helfand, E., Hohenberg, P.C. (1966). Phys. Rev. 147, 295. -- WHH theory
 10. Devoret, M.H. & Schoelkopf, R.J. (2013). Science 339, 1169. -- SC qubits
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
 
 ## 부록 A: 기타 문서

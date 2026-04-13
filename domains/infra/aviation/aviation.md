@@ -93,10 +93,6 @@ L1 Material(K₁=6) ── L2 Propulsion(K₂=6) ── L3 Aero(K₃=6) ── L
 
 ---
 
-## 6. Cross-DSE: aerospace, transportation, material, energy, robotics, safety
-
-## 7. 진화: Mk.I 터보팬 -> Mk.II 전기항공 -> Mk.III 수소항공 -> Mk.IV 초음속/극초음속 -> Mk.V 물리한계(Betz+Carnot)
-
 ## 8. BT 연결
 
 BT-123(SE(3)=n=6 6DOF), BT-125(tau=4 쿼드로터), BT-127(sigma=12 kissing + n=6 헥사콥터), BT-85(카본 Z=6 CFRP), BT-93(항공 소재), BT-119(대류권 12km=sigma)
@@ -448,39 +444,4 @@ arithmetic. Aviation has rigid engineering standards with fixed parameter counts
 
 **EXACT: 9/14, CLOSE: 5/14, WEAK: 0/14**
 
-
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

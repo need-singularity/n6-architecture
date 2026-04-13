@@ -87,10 +87,6 @@ L1 작물(K₁=6) ── L2 토양(K₂=6) ── L3 수자원(K₃=5) ── L4
 - BT-101: 광합성 포도당 24원자=J₂, 양자수율 8=sigma-tau, 9/9 EXACT
 - BT-103: 6CO₂+12H₂O -> C₆H₁₂O₆+6O₂, 7계수 100% n=6
 
-## 7. Cross-DSE: food-science, biology, energy, environment, material, water
-
-## 8. 진화: Mk.I 관행농업 -> Mk.II 정밀농업 -> Mk.III 수직농장 -> Mk.IV 우주농장 -> Mk.V 물리한계(광합성 효율)
-
 ## 9. BT 연결
 
 BT-101(광합성), BT-103(화학양론), BT-118(6종 온실가스), BT-120(수처리 CN=6), BT-122(벌집 육각)
@@ -1255,15 +1251,6 @@ grounding, not management conventions.
 ```
 
 
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
 ## 7. 실험 검증 매트릭스
 
 
@@ -1592,24 +1579,4 @@ BT-30, BT-43, BT-56, BT-58, BT-59, BT-62, BT-63, BT-66, BT-85, BT-86, BT-88, BT-
 └──────────────────────────────────────────────────────────┘
 ```
 
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

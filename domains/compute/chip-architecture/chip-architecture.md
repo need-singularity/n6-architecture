@@ -233,7 +233,6 @@ Phase 4: System Integration
 ## 2. 목표
 
 
-
 # N6 Chip Architecture — Ultimate Goal (Consolidated)
 
 > **Grade 참조**: alien_index(🛸) = 제품 maturity (1~10). closure_grade = n=6 닫힘 등급 (1~13+, [rubric](../../n6shared/GRADE_RUBRIC_1_TO_10PLUS.md)).
@@ -10858,21 +10857,6 @@ Bott 주기성의 비자명 채널 수 = sopfr=5.
 4. 3개 연속 FAIL: 해당 BT 재평가
 
 > **현재 3/28 PASS, 0/28 FAIL. 반박가능성(falsifiability) 확보.**
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
 
 ## 부록 A: 기타 문서

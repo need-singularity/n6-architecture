@@ -145,10 +145,6 @@ Shannon 채널용량, 광속 지연, CAP, FLP, congestion collapse, Brewer, end-
 
 ---
 
-## 9. Cross-DSE: blockchain, cryptography, software, chip, energy
-
-## 10. 진화: Mk.I TCP -> Mk.II QUIC -> Mk.III SRv6 -> Mk.IV Intent -> Mk.V Quantum Network
-
 ## 11. 산업 검증
 
 ARPANET(1969~, 57년), TCP(1983~), TLS(1999~), WireGuard, QUIC, SRv6, 5G NR
@@ -1966,9 +1962,6 @@ OSI 7=σ-sopfr, TCP/IP 4=τ, BT-47 interconnect gen counts {7,5,6}={σ-sopfr,sop
   BT-140: TCP/IP Port n=6 Archaeology — 1024=2^(sigma-phi), SSH=22, FTP=21, SMTP=25
   BT-145: EM Spectrum n=6 Partition — 7 bands, 12 ITU radio, 5 fiber, 3 WiFi
 ```
-
-
-## 4. BT 연결
 
 
 ## 5. DSE 결과
@@ -3865,18 +3858,4 @@ Mk.IV는 양자 인터넷과 클래식 광자 네트워크를 통합하여 정�
 | Tier 3 | 5 | Future evolution |
 | **Total** | **15** | |
 
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

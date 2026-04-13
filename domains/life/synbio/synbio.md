@@ -649,21 +649,6 @@ for r in results:
 
 **DSE 결론**: σ-φ=10 배 회로 설계 단축, phi=2배 수율, σ/φ=6 배 정밀도. 모든 파라미터가 n=6 수식에 정합.
 
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
-## 9. Mk.I~V 진화
-
-
-## 10. Testable Predictions
-
-
 ## 11. ASCII 성능비교 (synthetic-biology 흡수)
 
 ```

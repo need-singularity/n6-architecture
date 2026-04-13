@@ -287,24 +287,6 @@ for name, actual, expected in results:
 생성: 2026-04-10 / n6-architecture / CDO+SSOT 준수
 
 
-## 3. 가설
-
-
-## 4. BT 연결
-
-
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
 ## 9. Mk.I~V 진화
 
 
@@ -381,21 +363,4 @@ CFRP 불량률       3%         1%
 
 생성: 2026-04-10 / n6-architecture / CDO+SSOT 준수
 
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 

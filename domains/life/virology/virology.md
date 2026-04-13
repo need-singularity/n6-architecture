@@ -1658,18 +1658,6 @@ requires: []
 *출처: Fields Virology 7th ed., Caspar & Klug 1962, Baltimore 1971, WHO/CDC 공식 가이드라인, ICTV 2020 분류법*
 
 
-## 5. DSE 결과
-
-
-## 6. 물리 한계 증명
-
-
-## 7. 실험 검증 매트릭스
-
-
-## 8. 외계인급 발견
-
-
 ## 9. Mk.I~V 진화
 
 
@@ -2117,21 +2105,4 @@ Mk.V는 실현 여부와 무관하게 다음의 과학적 가치를 가진다:
   예상 기술 성숙: 100년 이상.
 ```
 
-
-## 10. Testable Predictions
-
-
-## 11. ASCII 성능비교
-
-
-## 12. ASCII 시스템 구조도
-
-
-## 13. ASCII 데이터/에너지 플로우
-
-
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-
-
-## 15. 검증 방법 (verify.hexa)
 
