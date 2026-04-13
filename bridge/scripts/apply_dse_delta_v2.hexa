@@ -15,7 +15,7 @@
 //         본 스크립트는 479 개 (hexa-ios 제외) 에 일괄 주입.
 //
 // 입력  : --dir  nexus/origins/universal-dse/domains
-//         --graph /Users/ghost/Dev/n6-architecture/n6shared/discovery_graph.json
+//         --graph $N6_ARCH/n6shared/discovery_graph.json
 //         --report reports/audits/dse-delta-v2-schema-application-2026-04-11.md
 // 출력  : 479 TOML 인플레이스 수정 + 감사 리포트 md
 // ============================================================
@@ -46,17 +46,21 @@ let SEED_STOP = [
 let argv = args()
 let argc = len(argv)
 
+let mut N6_ARCH_ROOT = env("N6_ARCH")
+if len(N6_ARCH_ROOT) == 0 {
+  N6_ARCH_ROOT = env("HOME") + "/Dev/n6-architecture"
+}
 let mut DOMAIN_DIR = env("N6_DSE_DOMAIN_DIR")
 if len(DOMAIN_DIR) == 0 {
-  DOMAIN_DIR = "/Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains"
+  DOMAIN_DIR = N6_ARCH_ROOT + "/nexus/origins/universal-dse/domains"
 }
 let mut GRAPH_PATH = env("N6_DISCOVERY_GRAPH")
 if len(GRAPH_PATH) == 0 {
-  GRAPH_PATH = "/Users/ghost/Dev/n6-architecture/n6shared/discovery_graph.json"
+  GRAPH_PATH = N6_ARCH_ROOT + "/n6shared/discovery_graph.json"
 }
 let mut REPORT_PATH = env("N6_DELTA_REPORT")
 if len(REPORT_PATH) == 0 {
-  REPORT_PATH = "/Users/ghost/Dev/n6-architecture/reports/audits/dse-delta-v2-schema-application-2026-04-11.md"
+  REPORT_PATH = N6_ARCH_ROOT + "/reports/audits/dse-delta-v2-schema-application-2026-04-11.md"
 }
 let SKIP_NAME_DEFAULT = "hexa-ios.toml"
 

@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════
 //
 // 목적: domains/**/verify_*.hexa (verify.hexa 제외) 전수를
-//       /Users/ghost/Dev/nexus/shared/n6/scripts/ 로 일괄 이관
+//       $NEXUS/shared/n6/scripts/ 로 일괄 이관
 //
 // 규칙 근거: n6shared/rules/common.json R29
 //   "계산기/검증/스캐너 .hexa 는 nexus/shared/n6/scripts/ 에만 작성"
@@ -36,9 +36,16 @@
 // ═══════════════════════════════════════════════════════════
 
 // ─── 경로 상수 ───
-let PROJECT_ROOT = "/Users/ghost/Dev/n6-architecture"
+let mut PROJECT_ROOT = env("N6_ARCH")
+if len(PROJECT_ROOT) == 0 {
+  PROJECT_ROOT = env("HOME") + "/Dev/n6-architecture"
+}
 let DOMAINS_DIR = PROJECT_ROOT + "/domains"
-let TARGET_DIR = "/Users/ghost/Dev/nexus/shared/n6/scripts"
+let mut NEXUS_ROOT = env("NEXUS")
+if len(NEXUS_ROOT) == 0 {
+  NEXUS_ROOT = env("HOME") + "/Dev/nexus"
+}
+let TARGET_DIR = NEXUS_ROOT + "/shared/n6/scripts"
 let BACKUP_DIR = "/tmp/r29_backup_20260411"
 let REPORT_PATH = PROJECT_ROOT + "/reports/audits/r29-migration-bulk-2026-04-11.md"
 
@@ -85,9 +92,9 @@ fn basename_stem(path) {
 }
 
 // 경로에서 도메인 이름 추출
-// /Users/ghost/Dev/n6-architecture/domains/life/baking/verify_alien10.hexa
+// $N6_ARCH/domains/life/baking/verify_alien10.hexa
 //   → life/baking/verify_alien10.hexa → domain = "baking"
-// /Users/ghost/Dev/n6-architecture/domains/sedi/scripts/cern-optics/verify_cern_optics.hexa
+// $N6_ARCH/domains/sedi/scripts/cern-optics/verify_cern_optics.hexa
 //   → sedi/scripts/cern-optics/... → domain = "cern-optics" (2 step depth)
 fn extract_domain(full_path) {
     // 상대경로 추출

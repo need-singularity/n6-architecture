@@ -9,7 +9,7 @@
 - origins/           도구 원본 .hexa 소스 (calc/dse/analyze/hexa 유틸 통합)
 - scripts/           자동성장·헬스체크·벤치마크 .hexa 19종
 - tests/             통합 테스트 (.hexa)
-- 진짜 SSOT: /Users/ghost/Dev/nexus/shared/lenses/ HEXA 네이티브 렌즈
+- 진짜 SSOT: $NEXUS/shared/lenses/ HEXA 네이티브 렌즈
 
 ## SSOT
 - _registry.json    도구/서브커맨드 SSOT (calc 20 + dse 8 + analyze 12 + hexa 4 = 44 흡수)

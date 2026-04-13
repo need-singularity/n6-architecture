@@ -87,7 +87,7 @@
 <!-- AUTO:ALIEN_INDEX:START -->
 ### 전체 완성 제품 통합 요약 (products.json SSOT)
 
-> **기준일**: 2026-04-11 (post-session) · **SSOT**: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json`
+> **기준일**: 2026-04-11 (post-session) · **SSOT**: `$NEXUS/shared/n6/docs/products.json`
 >
 > **집계**: 40 섹션 · 204 제품 · 천장확인 203 · AI지수=10 195
 

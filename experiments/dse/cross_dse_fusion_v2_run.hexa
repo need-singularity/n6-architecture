@@ -53,21 +53,29 @@ let argv = args()
 let argc = len(argv)
 
 // argv[0]=스크립트명. 인자: [--dir <path>] [--out <path>] [--atlas <path>]
+let mut N6_ARCH_ROOT = env("N6_ARCH")
+if len(N6_ARCH_ROOT) == 0 {
+  N6_ARCH_ROOT = env("HOME") + "/Dev/n6-architecture"
+}
+let mut NEXUS_ROOT = env("NEXUS")
+if len(NEXUS_ROOT) == 0 {
+  NEXUS_ROOT = env("HOME") + "/Dev/nexus"
+}
 let mut DOMAIN_DIR = env("N6_DOMAIN_DIR")
 if len(DOMAIN_DIR) == 0 {
-  DOMAIN_DIR = "/Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains"
+  DOMAIN_DIR = N6_ARCH_ROOT + "/nexus/origins/universal-dse/domains"
 }
 let mut OUT_PATH = env("N6_CROSS_OUT")
 if len(OUT_PATH) == 0 {
-  OUT_PATH = "/Users/ghost/Dev/n6-architecture/n6shared/dse/dse_cross_results_v2_4.json"
+  OUT_PATH = N6_ARCH_ROOT + "/n6shared/dse/dse_cross_results_v2_4.json"
 }
 let mut ATLAS_PATH = env("N6_ATLAS")
 if len(ATLAS_PATH) == 0 {
-  ATLAS_PATH = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+  ATLAS_PATH = NEXUS_ROOT + "/shared/n6/atlas.n6"
 }
 let mut REPORT_PATH = env("N6_REPORT_PATH")
 if len(REPORT_PATH) == 0 {
-  REPORT_PATH = "/Users/ghost/Dev/n6-architecture/reports/discovery/dse-v2-results-2026-04-11.md"
+  REPORT_PATH = N6_ARCH_ROOT + "/reports/discovery/dse-v2-results-2026-04-11.md"
 }
 
 // CLI 오버라이드

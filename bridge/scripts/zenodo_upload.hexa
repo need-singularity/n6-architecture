@@ -1,5 +1,5 @@
 // zenodo_upload.hexa — Zenodo DOI 발급 자동화 (초안 스텁)
-// 원본 참조: /Users/ghost/Dev/papers/upload_zenodo.sh (bash 원본)
+// 원본 참조: $HOME/Dev/papers/upload_zenodo.sh (bash 원본)
 // 포팅 상태: STUB DRAFT (본 에이전트는 실제 API 호출 금지 — 사용자 수동 실행 전제)
 // 원본 요약:
 //   1) manifest.json 에서 <PAPER_ID> 항목을 읽어 file/title/keywords/abstract 추출
@@ -30,7 +30,7 @@
 // (현재는 STUB — 사용자가 직접 upload_zenodo.sh 를 사용하거나 본 스크립트 승급 후 사용)
 
 fn step_read_manifest(paper_id) {
-    // 1) /Users/ghost/Dev/papers/manifest.json 파싱
+    // 1) $HOME/Dev/papers/manifest.json 파싱
     // 2) papers[].id == paper_id 항목 검색
     // 3) file / title / keywords / abstract_first_line 추출
     println("STUB: manifest 읽기 (paper_id=" + paper_id + ")")
@@ -78,9 +78,9 @@ fn step_report_doi(paper_id, doi, deposit_id) {
 
 fn main() {
     println("STUB: nexus/scripts/zenodo_upload.hexa (초안 — 사용자 수동 발행 전제)")
-    println("권장: ZENODO_TOKEN=xxx bash /Users/ghost/Dev/papers/upload_zenodo.sh N6-054")
-    println("     ZENODO_TOKEN=xxx bash /Users/ghost/Dev/papers/upload_zenodo.sh N6-057")
-    println("     ZENODO_TOKEN=xxx bash /Users/ghost/Dev/papers/upload_zenodo.sh N6-058")
+    println("권장: ZENODO_TOKEN=xxx bash $HOME/Dev/papers/upload_zenodo.sh N6-054")
+    println("     ZENODO_TOKEN=xxx bash $HOME/Dev/papers/upload_zenodo.sh N6-057")
+    println("     ZENODO_TOKEN=xxx bash $HOME/Dev/papers/upload_zenodo.sh N6-058")
     println("통합 검증: 158/158 OSSIFIED (39+40+79, iter=1)")
     println("체크리스트 (3편 통합): reports/audits/zenodo-publish-3-papers-2026-04-11.md")
     println("체크리스트 (2편 선행): reports/audits/zenodo-publish-ready-2026-04-11.md")

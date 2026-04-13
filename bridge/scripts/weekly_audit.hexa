@@ -8,7 +8,7 @@
 //   1) git log (커밋 수, 저자, 파일 변경, 9축 분포)
 //   2) n6shared/growth_bus.jsonl 신규 엔트리
 //   3) n6shared/discovery_graph.json 노드/엣지 변화량 (스냅샷 대비)
-//   4) /Users/ghost/Dev/nexus/shared/n6/atlas.n6 승격 건수 ([7]→[10*])
+//   4) $NEXUS/shared/n6/atlas.n6 승격 건수 ([7]→[10*])
 //   5) cargo test 결과 (nexus 워크스페이스, 옵션)
 //   6) n6shared/convergence/n6-architecture.json 상태 변화
 //
@@ -42,7 +42,11 @@ let GROWTH_BUS = "n6shared/growth_bus.jsonl"
 let DISC_GRAPH = "n6shared/discovery_graph.json"
 let CONV_JSON = "n6shared/convergence/n6-architecture.json"
 let STATE_JSON = "n6shared/logs/weekly_audit_state.json"
-let ATLAS_N6 = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+let mut NEXUS_ROOT = env("NEXUS")
+if len(NEXUS_ROOT) == 0 {
+  NEXUS_ROOT = env("HOME") + "/Dev/nexus"
+}
+let ATLAS_N6 = NEXUS_ROOT + "/shared/n6/atlas.n6"
 let OUT_SESS_DIR = "reports/sessions"
 let OUT_CHLG_DIR = "reports/changelogs"
 

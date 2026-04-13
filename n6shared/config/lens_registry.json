@@ -2,7 +2,7 @@
   "meta": {
     "description": "NEXUS-6 Telescope Lens Registry (⚠️ 레거시 Rust 카운트, 진짜 SSOT 아님)",
     "_warning": "이 레지스트리는 n6-architecture 내부 Rust 레거시 렌즈 카운트. 진짜 SSOT 아님.",
-    "_real_ssot": "/Users/ghost/Dev/nexus/shared/lenses/ (HEXA 네이티브 84 + blowup/lens 15 번들)",
+    "_real_ssot": "$NEXUS/shared/lenses/ (HEXA 네이티브 84 + blowup/lens 15 번들)",
     "_legacy_path": "n6-architecture/nexus/src/telescope/lenses/ (Rust .rs 파생본, 폐기 중)",
     "_transition_status": "HEAD 0c23ad27 refactor(telescope) — Rust→HEXA 전환 진행, 56 렌즈 등록 해제 완료",
     "_next_session_plan": "Rust→HEXA 포팅 후 레거시 삭제 + 본 레지스트리 재구축",

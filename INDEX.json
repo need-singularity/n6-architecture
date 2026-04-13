@@ -2,7 +2,7 @@
   "_doc": "n6-architecture 리포 9축 매니페스트 SSOT — 모든 에이전트 진입점",
   "_version": "1.0.0",
   "_generated": "2026-04-10",
-  "_root": "/Users/ghost/Dev/n6-architecture",
+  "_root": "$N6_ARCH",
 
   "axes": {
     "theory": {
@@ -26,7 +26,7 @@
       "ssot": "bridge/_registry.json",
       "binary": "nexus",
       "subcommands": ["scan", "verify", "calc", "dse", "analyze", "hexa", "dashboard"],
-      "_lens_warning": "src/telescope/lenses/ 는 Rust 레거시 (폐기 중). 진짜 렌즈 SSOT: /Users/ghost/Dev/nexus/shared/lenses/ (HEXA 네이티브)"
+      "_lens_warning": "src/telescope/lenses/ 는 Rust 레거시 (폐기 중). 진짜 렌즈 SSOT: $NEXUS/shared/lenses/ (HEXA 네이티브)"
     },
     "techniques": {
       "path": "techniques/",

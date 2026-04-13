@@ -22,16 +22,18 @@ use std::math::{sqrt, min, max}
 // ------------------------------------------------------------
 // 1. 상수/경로 — 하드코딩 금지(R2), 동적 로드
 // ------------------------------------------------------------
+const N6_ARCH_ROOT = env("N6_ARCH") || (env("HOME") + "/Dev/n6-architecture")
+const NEXUS_ROOT   = env("NEXUS")   || (env("HOME") + "/Dev/nexus")
 const DOMAIN_DIR = env("N6_DOMAIN_DIR")
-                 || "/Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains"
+                 || (N6_ARCH_ROOT + "/nexus/origins/universal-dse/domains")
 const BT_WEIGHTS_PATH = env("N6_BT_WEIGHTS")
-                     || "/Users/ghost/Dev/n6-architecture/n6shared/config/bt_weights.json"
+                     || (N6_ARCH_ROOT + "/n6shared/config/bt_weights.json")
 const PARETO_PATH     = env("N6_PARETO_PATH")
-                     || "/Users/ghost/Dev/nexus/shared/dse/pareto_frontier_400.json"
+                     || (NEXUS_ROOT + "/shared/dse/pareto_frontier_400.json")
 const OUT_PATH        = env("N6_CROSS_OUT")
-                     || "/Users/ghost/Dev/nexus/shared/dse/dse_cross_results.json"
+                     || (NEXUS_ROOT + "/shared/dse/dse_cross_results.json")
 const ATLAS_PATH      = env("N6_ATLAS")
-                     || "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+                     || (NEXUS_ROOT + "/shared/n6/atlas.n6")
 
 // 공명 가중치 — n6shared/config 로 외부화 대상이나, 초안에서는 기본값만 명시
 const W_KW      = 0.35
@@ -255,7 +257,7 @@ fn pair_score(fa: Feature, fb: Feature) -> Pair {
 // ------------------------------------------------------------
 fn load_all_features() -> Vec<Feature> {
     let files       = list_dir(DOMAIN_DIR, pattern="*.toml")
-    let axis_map    = read_json("/Users/ghost/Dev/n6-architecture/domains/_index.json")
+    let axis_map    = read_json(N6_ARCH_ROOT + "/domains/_index.json")
     let pareto_map  = load_pareto_frontier(PARETO_PATH)
     let feats       = Vec::with_capacity(files.len())
 
