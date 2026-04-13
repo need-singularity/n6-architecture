@@ -20,3 +20,6 @@ calc
 .shared
 model_utils.py
 tecsrs
+
+# Claude Code memory (account-shared, local only)
+.claude-memory/
