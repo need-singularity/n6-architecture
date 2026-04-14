@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>ANIMA 로드맵 — 실시간 상태</title>
-  <meta name="description" content="ANIMA 의식 엔진 로드맵 실시간 렌더링 — 4 Phase × 3 Track × Φ Gate">
+  <meta name="description" content="ANIMA 의식 엔진 로드맵 실시간 렌더링 — Phase × 4 Axis × Φ Gate">
   <style>
     :root {
       --bg: #0a0e1a;
@@ -263,6 +266,39 @@
       flex: 0 0 auto;
     }
 
+    /* Millennium Problems Bar */
+    .mill-bar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      padding: 1rem 0.5rem;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+    }
+    @media (max-width: 800px) { .mill-bar { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 500px) { .mill-bar { grid-template-columns: repeat(2, 1fr); } }
+    .mill-card {
+      text-align: center;
+      padding: 0.7rem 0.4rem;
+      background: var(--bg-card);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .mill-card:hover { border-color: var(--accent-dim); }
+    .mill-card.solved { border-color: var(--ok); background: linear-gradient(180deg, #1a2e1a 0%, var(--bg-card) 100%); }
+    .mill-crown { font-size: 1.4rem; display: block; margin-bottom: 0.15rem; }
+    .mill-icon  { font-size: 1.2rem; display: block; margin-bottom: 0.15rem; color: var(--fg-dim); }
+    .mill-name  { font-size: 0.78rem; font-weight: 700; color: var(--fg); line-height: 1.3; }
+    .mill-field { font-size: 0.65rem; color: var(--fg-dim); margin-top: 0.15rem; }
+    .mill-bt    { font-size: 0.65rem; color: var(--accent-dim); font-family: "SF Mono", Menlo, monospace; margin-top: 0.2rem; }
+    .mill-status { font-size: 0.6rem; margin-top: 0.2rem; font-weight: 600; }
+    .mill-status.open   { color: var(--run); }
+    .mill-status.solved { color: var(--ok); }
+
     /* Joint roadmap */
     .joint {
       background: var(--bg-elev);
@@ -431,6 +467,9 @@
     <a class="rtab" href="#nexus" data-proj="nexus">🔭 nexus</a>
     <a class="rtab" href="#n6-architecture" data-proj="n6-architecture">🏗️ n6-architecture</a>
     <a class="rtab" href="#h100" data-proj="h100">⚡ H100</a>
+    <a class="rtab" href="#zeta-surpass" data-proj="zeta-surpass">💬 Zeta 추월</a>
+    <a class="rtab" href="#anima-train" data-proj="anima-train">🚀 학습·릴리스</a>
+    <a class="rtab" href="#millennium" data-proj="millennium">🏆 7대 난제</a>
   </nav>
   <header>
     <h1 id="page-title">🧠 ANIMA 의식 엔진 로드맵</h1>
@@ -449,12 +488,17 @@
 
   <main>
     <section>
-      <h2>📍 진행 흐름 — 4 Phase × 3 Track × Φ Gate</h2>
+      <h2>📍 진행 흐름 — Phase × 4 Axis × Φ Gate</h2>
       <div id="phases-container">
         <div class="skeleton" style="height:6rem"></div>
         <div class="skeleton" style="height:6rem"></div>
         <div class="skeleton" style="height:6rem"></div>
       </div>
+    </section>
+
+    <section id="mill-section" style="display:none">
+      <h2>Clay Millennium Prize Problems</h2>
+      <div class="mill-bar" id="mill-bar"></div>
     </section>
 
     <section>
@@ -489,7 +533,8 @@
   </footer>
 
   <script>
-    const NEXUS_RAW = "https://raw.githubusercontent.com/need-singularity/nexus/main";
+    const IS_LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+    const NEXUS_RAW = IS_LOCAL ? "../.." : "https://raw.githubusercontent.com/need-singularity/nexus/main";
     const POLL_MS = 60_000;
 
     // SPA config — 3 프로젝트 탭 전환, 각 탭이 다른 JSON을 SSOT로 fetch
@@ -505,7 +550,7 @@
       },
       "nexus": {
         emoji: "🔭",
-        title: "NEXUS 중앙 허브 로드맵",
+        title: "NEXUS 중앙 허브 로드맵 (19축)",
         main_url:   `${NEXUS_RAW}/shared/roadmaps/nexus.json`,
         joint_url:  null,
         joint_h2:   null,
@@ -529,6 +574,33 @@
         state_url:  `${NEXUS_RAW}/shared/harness/h100_state.json`,
         source:     "nexus/shared/harness/h100_state.json",
         ssot_html:  '<a href="https://github.com/need-singularity/nexus/blob/main/shared/config/h100_plan.json">h100_plan.json</a> · <a href="https://github.com/need-singularity/nexus/blob/main/shared/harness/h100_state.json">h100_state.json</a> · <a href="https://github.com/need-singularity/nexus/blob/main/shared/harness/h100_idle_guard.hexa">guard.hexa</a>'
+      },
+      "zeta-surpass": {
+        emoji: "💬",
+        title: "ANIMA × Zeta 추월 로드맵",
+        main_url:   `${NEXUS_RAW}/shared/roadmaps/zeta-surpass.json`,
+        joint_url:  null,
+        joint_h2:   null,
+        source:     "nexus/shared/roadmaps/zeta-surpass.json",
+        ssot_html:  '<a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/zeta-surpass.json">nexus · shared/roadmaps/zeta-surpass.json</a> · parent: <a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/anima.json">anima.json</a>'
+      },
+      "anima-train": {
+        emoji: "🚀",
+        title: "ANIMA 학습 진도 & 사용가능 단계 로드맵",
+        main_url:   `${NEXUS_RAW}/shared/roadmaps/anima-train.json`,
+        joint_url:  null,
+        joint_h2:   null,
+        source:     "nexus/shared/roadmaps/anima-train.json",
+        ssot_html:  '<a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/anima-train.json">nexus · shared/roadmaps/anima-train.json</a> · parent: <a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/anima.json">anima.json</a>'
+      },
+      "millennium": {
+        emoji: "🏆",
+        title: "7대 난제 서브프로젝트 로드맵 v2.3 (Y1~Y16 16축 × 13 Phase, 창발 고갈 R1~R14)",
+        main_url:   `${NEXUS_RAW}/shared/roadmaps/millennium.json`,
+        joint_url:  null,
+        joint_h2:   null,
+        source:     "nexus/shared/roadmaps/millennium.json",
+        ssot_html:  '<a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/millennium.json">nexus · shared/roadmaps/millennium.json</a> · parent: <a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/n6-architecture.json">n6-architecture.json</a>'
       }
     };
 
@@ -577,8 +649,11 @@
 
       const isH100 = p.mode === "h100";
       // Roadmap sections hide in H100 mode
-      const roadmapSections = document.querySelectorAll("main > section:not(.h100-section)");
+      const roadmapSections = document.querySelectorAll("main > section:not(.h100-section):not(#mill-section)");
       roadmapSections.forEach(s => { s.style.display = isH100 ? "none" : ""; });
+      // mill-section: renderMillennium()이 JSON 데이터 기반으로 제어 (기본 hidden)
+      const ms = document.getElementById("mill-section");
+      if (ms && isH100) ms.style.display = "none";
       // H100 section shows only in H100 mode
       const elH100 = document.getElementById("h100-section");
       if (elH100) elH100.classList.toggle("active", isH100);
@@ -620,7 +695,12 @@
     }
 
     function fmtTime(d) {
-      return d.toLocaleTimeString("ko-KR", { hour12: false });
+      if (!(d instanceof Date) || isNaN(d.getTime())) return "—";
+      try {
+        return d.toLocaleTimeString("ko-KR", { hour12: false });
+      } catch (_) {
+        return d.toISOString().slice(11, 19);
+      }
     }
 
     async function fetchJson(url) {
@@ -681,6 +761,34 @@
           </div>`;
       }
       return phaseHtml + gateHtml;
+    }
+
+    function renderMillennium(data) {
+      const probs = data.millennium_problems;
+      const section = document.getElementById("mill-section");
+      const bar = document.getElementById("mill-bar");
+      if (!probs || !Array.isArray(probs) || probs.length === 0) {
+        if (section) section.style.display = "none";
+        return;
+      }
+      if (section) section.style.display = "";
+      bar.innerHTML = probs.map(p => {
+        const solved = p.status === "solved";
+        const icon = solved
+          ? `<span class="mill-crown" title="${p.solver} (${p.year_solved})">👑</span>`
+          : `<span class="mill-icon">❓</span>`;
+        const statusText = solved
+          ? `${p.solver} ${p.year_solved}`
+          : `미해결 · $${(p.prize/1e6).toFixed(0)}M`;
+        const statusClass = solved ? "solved" : "open";
+        return `<div class="mill-card ${statusClass}">
+          ${icon}
+          <div class="mill-name">${esc(p.name)}</div>
+          <div class="mill-field">${esc(p.field)} · ${p.year_posed}</div>
+          <div class="mill-bt">${esc(p.id)} ${esc(p.bt_exact)}</div>
+          <div class="mill-status ${statusClass}">${esc(statusText)}</div>
+        </div>`;
+      }).join("");
     }
 
     function renderPhiChain(data) {
@@ -749,6 +857,7 @@
       elMeta.textContent = `${m.name || projLabel} · target: ${m.target || "—"} · updated: ${m.updated || "—"} · strategy: ${m.strategy || "—"}`;
       const trackOrder = Object.keys(data.tracks || {});
       elPhases.innerHTML = (data.phases || []).map(p => renderPhase(p, trackOrder)).join("");
+      renderMillennium(data);
       renderPhiChain(data);
       renderTracks(data);
       renderJoint(joint);
@@ -810,7 +919,11 @@
       const projected = st.projected_24h_usd != null ? st.projected_24h_usd : 0;
       const daily = st.daily_budget_usd || limits.daily_budget_usd_total || 0;
       const overBudget = projected > daily;
-      const stateTs = st.ts ? new Date(st.ts) : null;
+      let stateTs = null;
+      if (st.ts) {
+        const d = new Date(st.ts);
+        if (!isNaN(d.getTime())) stateTs = d;
+      }
       const ageSec = stateTs ? Math.floor((Date.now() - stateTs.getTime()) / 1000) : null;
 
       elSummary.innerHTML = `
@@ -832,7 +945,7 @@
         <div class="h100-card">
           <div class="lbl">state age</div>
           <div class="val">${fmtAge(ageSec)}</div>
-          <div class="sub">snapshot: ${stateTs ? stateTs.toISOString().replace(".000","").replace("T"," ").replace("Z"," UTC") : "(none)"}</div>
+          <div class="sub">snapshot: ${stateTs ? (() => { try { return stateTs.toISOString().replace(".000","").replace("T"," ").replace("Z"," UTC"); } catch (_) { return "(invalid)"; } })() : "(none)"}</div>
         </div>
       `;
 
