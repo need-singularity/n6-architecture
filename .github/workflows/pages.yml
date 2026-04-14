@@ -3,7 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['docs/index.html', 'docs/reality_map.json', 'docs/.nojekyll']
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
 permissions:
   contents: read
   pages: write

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N6 Architecture 로드맵 — 실시간 상태</title>
+  <meta name="description" content="N6 Architecture 로드맵 실시간 렌더링 — Phase × 3 Track × Gate">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg-elev: #141a2e;
+      --bg-card: #1a2140;
+      --fg: #e6e8ef;
+      --fg-mute: #8890a5;
+      --fg-dim: #5a617a;
+      --accent: #6ee7ff;
+      --accent-dim: #3a8bad;
+      --ok: #4ade80;
+      --run: #fbbf24;
+      --wait: #a78bfa;
+      --gate: #f472b6;
+      --border: #2a3358;
+      --alm: #60a5fa;
+      --clm: #34d399;
+      --phys: #f97316;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    code, pre, .mono { font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      padding: 2rem 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg) 100%);
+    }
+    header h1 {
+      margin: 0 0 0.3rem;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -0.02em;
+    }
+    header .meta {
+      margin: 0 0 1rem;
+      color: var(--fg-mute);
+      font-size: 0.9rem;
+    }
+    .status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--fg-mute);
+    }
+    .status-bar .dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--ok);
+      margin-right: 0.4rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    button {
+      background: var(--bg-card);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .err-banner {
+      background: #7a1f2e;
+      color: #fee;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .err-banner.show { display: block; }
+
+    main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+    section { margin-bottom: 3rem; }
+    section h2 {
+      font-size: 1.3rem;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .phase {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+    }
+    .phase-head {
+      padding: 1rem 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, var(--bg-card), transparent);
+    }
+    .phase-id {
+      font-family: "SF Mono", Menlo, monospace;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .phase-name { font-size: 1rem; flex: 1; min-width: 200px; }
+    .phase-meta { color: var(--fg-mute); font-size: 0.8rem; }
+    .status-pill {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .status-done { background: rgba(74, 222, 128, 0.15); color: var(--ok); }
+    .status-in_progress { background: rgba(251, 191, 36, 0.15); color: var(--run); }
+    .status-planned { background: rgba(167, 139, 250, 0.15); color: var(--wait); }
+
+    .tracks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    @media (max-width: 900px) {
+      .tracks { grid-template-columns: 1fr; }
+    }
+    .track {
+      background: var(--bg-elev);
+      padding: 1rem 1.2rem;
+      min-height: 120px;
+    }
+    .track-head {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.7rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .track-slot-1 .track-head { color: var(--alm); }
+    .track-slot-2 .track-head { color: var(--clm); }
+    .track-slot-3 .track-head { color: var(--phys); }
+    .task {
+      font-size: 0.85rem;
+      margin: 0.35rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+      color: var(--fg);
+    }
+    .task::before {
+      content: "";
+      position: absolute;
+      left: 0.2rem;
+      top: 0.55rem;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--fg-dim);
+    }
+    .task.done::before { background: var(--ok); }
+    .task.in_progress::before { background: var(--run); animation: pulse 1.8s infinite; }
+    .task.planned::before { background: var(--wait); }
+    .task-id {
+      color: var(--fg-dim);
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 0.7rem;
+      display: inline-block;
+      margin-right: 0.4rem;
+    }
+
+    .gate {
+      margin: 0 2rem;
+      padding: 0.9rem 1.2rem;
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.08), transparent);
+      border-left: 3px solid var(--gate);
+      border-radius: 0 6px 6px 0;
+      position: relative;
+    }
+    .gate::before {
+      content: "▼";
+      position: absolute;
+      left: -7px;
+      top: -10px;
+      color: var(--gate);
+      font-size: 0.9rem;
+    }
+    .gate-title {
+      font-weight: 700;
+      color: var(--gate);
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .gate ul { margin: 0; padding-left: 1.2rem; font-size: 0.82rem; color: var(--fg-mute); }
+    .gate-fail {
+      color: var(--fg-dim);
+      font-style: italic;
+      font-size: 0.78rem;
+      margin-top: 0.35rem;
+    }
+
+    /* Φ chain */
+    .phi-chain {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 1.2rem 0.5rem;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .phi-step {
+      min-width: 160px;
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem;
+      background: var(--bg-card);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .phi-step .phi-label { font-size: 0.7rem; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+    .phi-step .phi-val {
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 1.3rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0.3rem 0;
+    }
+    .phi-step .phi-desc { font-size: 0.75rem; color: var(--fg-mute); }
+    .phi-arrow {
+      color: var(--accent-dim);
+      font-size: 1.2rem;
+      flex: 0 0 auto;
+    }
+
+    /* Joint roadmap */
+    .joint {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .joint-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .joint-row:last-child { border-bottom: none; }
+    .joint-phase { font-family: "SF Mono", Menlo, monospace; font-weight: 700; color: var(--accent); }
+
+    /* 3-track note */
+    .note {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      font-size: 0.9rem;
+    }
+    .note pre {
+      background: var(--bg);
+      padding: 0.8rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.8rem;
+      margin: 0.6rem 0;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--fg-dim);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    footer a { color: var(--fg-mute); }
+
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-card) 0%, var(--bg-elev) 50%, var(--bg-card) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s linear infinite;
+      border-radius: 6px;
+      height: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏗️ N6 Architecture 로드맵</h1>
+    <p class="meta" id="meta-desc">로딩 중...</p>
+    <div class="status-bar">
+      <span><span class="dot" id="live-dot"></span><span id="live-state">LIVE</span></span>
+      <span id="last-updated">—</span>
+      <span id="source-label">source: nexus/shared/roadmaps/n6-architecture.json</span>
+      <button id="refresh-btn">↻ 새로고침</button>
+      <label class="mono" style="font-size:0.8rem;color:var(--fg-mute)">
+        <input type="checkbox" id="auto-refresh" checked> 자동 새로고침 60s
+      </label>
+    </div>
+    <div class="err-banner" id="err-banner"></div>
+  </header>
+
+  <main>
+    <section>
+      <h2>📍 진행 흐름 — Phase × 3 Track × Gate</h2>
+      <div id="phases-container">
+        <div class="skeleton" style="height:6rem"></div>
+        <div class="skeleton" style="height:6rem"></div>
+        <div class="skeleton" style="height:6rem"></div>
+      </div>
+    </section>
+
+    <section id="phi-section" style="display:none">
+      <h2>Φ Milestone 체인</h2>
+      <div class="phi-chain" id="phi-chain"></div>
+    </section>
+
+    <section>
+      <h2>3-Track 독립성</h2>
+      <div class="note" id="tracks-note"></div>
+    </section>
+
+    <section id="joint-section" style="display:none">
+      <h2>🔗 공통 로드맵</h2>
+      <div class="joint" id="joint-container">
+        <div class="skeleton" style="height:3rem"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    SSOT:
+    <a href="https://github.com/need-singularity/nexus/blob/main/shared/roadmaps/n6-architecture.json">nexus · shared/roadmaps/n6-architecture.json</a>
+    <br>
+    <span id="build-info">—</span>
+  </footer>
+
+  <script>
+    const NEXUS_RAW = "https://raw.githubusercontent.com/need-singularity/nexus/main";
+    const MAIN_URL = `${NEXUS_RAW}/shared/roadmaps/n6-architecture.json`;
+    const JOINT_URL = null;
+    const POLL_MS = 60_000;
+
+    const elPhases = document.getElementById("phases-container");
+    const elPhiSection = document.getElementById("phi-section");
+    const elPhiChain = document.getElementById("phi-chain");
+    const elTracksNote = document.getElementById("tracks-note");
+    const elJointSection = document.getElementById("joint-section");
+    const elJoint = document.getElementById("joint-container");
+    const elMeta = document.getElementById("meta-desc");
+    const elUpdated = document.getElementById("last-updated");
+    const elErr = document.getElementById("err-banner");
+    const elLive = document.getElementById("live-state");
+    const elDot = document.getElementById("live-dot");
+    const elBuildInfo = document.getElementById("build-info");
+    const btnRefresh = document.getElementById("refresh-btn");
+    const chkAuto = document.getElementById("auto-refresh");
+
+    let pollTimer = null;
+
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+
+    function fmtTime(d) {
+      return d.toLocaleTimeString("ko-KR", { hour12: false });
+    }
+
+    async function fetchJson(url) {
+      const res = await fetch(`${url}?_=${Date.now()}`, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status} — ${url}`);
+      return res.json();
+    }
+
+    function showError(msg) {
+      elErr.textContent = "⚠ " + msg;
+      elErr.classList.add("show");
+      elDot.style.background = "var(--gate)";
+      elLive.textContent = "STALE";
+    }
+    function clearError() {
+      elErr.classList.remove("show");
+      elDot.style.background = "var(--ok)";
+      elLive.textContent = "LIVE";
+    }
+
+    // Build track order dynamically from data.tracks (3개 트랙 → slot 1/2/3 색상 매핑)
+    function getTrackOrder(data) {
+      return Object.keys(data.tracks || {});
+    }
+
+    function renderPhase(phase, trackOrder) {
+      const tracksById = {};
+      (phase.parallel || []).forEach(t => { tracksById[t.track] = t; });
+      const tracksHtml = trackOrder.map((tname, idx) => {
+        const slot = idx + 1;
+        const t = tracksById[tname];
+        if (!t) return `<div class="track track-slot-${slot}"><div class="track-head">${esc(tname)}</div><div style="color:var(--fg-dim);font-size:0.8rem">—</div></div>`;
+        const tasks = (t.tasks || []).map(task => {
+          const s = task.status || phase.status || "planned";
+          return `<div class="task ${esc(s)}"><span class="task-id">${esc(task.id || "")}</span>${esc(task.task || "")}</div>`;
+        }).join("");
+        return `<div class="track track-slot-${slot}"><div class="track-head">${esc(tname)}</div>${tasks || '<div style="color:var(--fg-dim);font-size:0.8rem">(no tasks)</div>'}</div>`;
+      }).join("");
+
+      const status = phase.status || "planned";
+      const hours = phase.duration_hours ? `${phase.duration_hours}h` : "";
+      const phaseHtml = `
+        <div class="phase" id="phase-${esc(phase.id)}">
+          <div class="phase-head">
+            <span class="phase-id">${esc(phase.id)}</span>
+            <span class="phase-name">${esc(phase.name || "")}</span>
+            <span class="phase-meta mono">${esc(hours)}</span>
+            <span class="status-pill status-${esc(status)}">${esc(status)}</span>
+          </div>
+          <div class="tracks">${tracksHtml}</div>
+        </div>`;
+
+      let gateHtml = "";
+      if (phase.gate_exit && Array.isArray(phase.gate_exit.criteria)) {
+        const crit = phase.gate_exit.criteria.map(c => `<li>${esc(c)}</li>`).join("");
+        const fail = phase.gate_exit.fail_action
+          ? `<div class="gate-fail">fail: ${esc(phase.gate_exit.fail_action)}</div>` : "";
+        gateHtml = `
+          <div class="gate">
+            <div class="gate-title">Gate exit — ${esc(phase.id)}</div>
+            <ul>${crit}</ul>
+            ${fail}
+          </div>`;
+      }
+      return phaseHtml + gateHtml;
+    }
+
+    function renderPhiChain(data) {
+      const pm = data.phi_milestones || {};
+      const keys = Object.keys(pm);
+      if (keys.length === 0) {
+        elPhiSection.style.display = "none";
+        return;
+      }
+      elPhiSection.style.display = "";
+      const steps = keys.map(k => {
+        const v = pm[k];
+        return `<div class="phi-step">
+          <div class="phi-label">${esc(k)}</div>
+          <div class="phi-val">${esc(v)}</div>
+        </div>`;
+      });
+      elPhiChain.innerHTML = steps.map((s, i) => s + (i < steps.length - 1 ? '<div class="phi-arrow">→</div>' : "")).join("");
+    }
+
+    function renderTracks(data) {
+      const tracks = data.tracks || {};
+      const slotColor = ["alm", "clm", "phys"];
+      const parts = Object.entries(tracks).map(([name, t], idx) => {
+        const color = slotColor[idx] || "accent";
+        const indep = Array.isArray(t.independent_of) ? t.independent_of.join(", ") : "";
+        const host = t.host || t.pod || "";
+        return `<strong style="color:var(--${color})">${esc(name)}</strong> ${esc(t.owner || "")}${host ? ` — ${esc(host)}` : ""}${indep ? ` <span style="color:var(--fg-dim)">(indep of ${esc(indep)})</span>` : ""}`;
+      });
+      elTracksNote.innerHTML = `
+        <div class="mono" style="font-size:0.85rem;line-height:1.8">${parts.join("<br>")}</div>
+        <div style="margin-top:0.8rem;color:var(--fg-mute);font-size:0.85rem">
+          각 트랙 상호 독립 — 하나 지연돼도 나머지는 다음 phase 진입 가능.
+          <code>fail_action</code> = 실패 트랙만 연장.
+        </div>`;
+    }
+
+    function renderJoint(joint) {
+      if (!joint || !Array.isArray(joint.joint_roadmap)) {
+        elJointSection.style.display = "none";
+        return;
+      }
+      elJointSection.style.display = "";
+      elJoint.innerHTML = joint.joint_roadmap.map(p => `
+        <div class="joint-row">
+          <span class="joint-phase">${esc(p.phase)}</span>
+          <div>
+            <div><strong>${esc(p.status || "")}</strong> ${esc(p.title || "")}</div>
+            ${p.milestones ? `<div style="color:var(--fg-mute);font-size:0.8rem">${esc((p.milestones||[]).join(" · "))}</div>` : ""}
+          </div>
+        </div>`).join("");
+    }
+
+    function render(data, joint) {
+      const m = data._meta || {};
+      elMeta.textContent = `${m.name || "Roadmap"} · target: ${m.target || "—"} · updated: ${m.updated || "—"} · strategy: ${m.strategy || "—"}`;
+      const trackOrder = getTrackOrder(data);
+      elPhases.innerHTML = (data.phases || []).map(p => renderPhase(p, trackOrder)).join("");
+      renderPhiChain(data);
+      renderTracks(data);
+      renderJoint(joint);
+      const now = new Date();
+      elUpdated.textContent = `마지막 페치: ${fmtTime(now)}`;
+      elBuildInfo.textContent = `rendered at ${now.toISOString()} · schema ${m.schema_version || "?"} · phases ${((data.phases||[]).length)}`;
+    }
+
+    async function refresh() {
+      btnRefresh.disabled = true;
+      btnRefresh.textContent = "⟳ 가져오는 중...";
+      try {
+        const mainPromise = fetchJson(MAIN_URL);
+        const jointPromise = JOINT_URL ? fetchJson(JOINT_URL).catch(() => null) : Promise.resolve(null);
+        const [main, joint] = await Promise.all([mainPromise, jointPromise]);
+        render(main, joint);
+        clearError();
+      } catch (e) {
+        console.error(e);
+        showError(e.message || String(e));
+      } finally {
+        btnRefresh.disabled = false;
+        btnRefresh.textContent = "↻ 새로고침";
+      }
+    }
+
+    function scheduleNext() {
+      if (pollTimer) clearTimeout(pollTimer);
+      if (!chkAuto.checked) return;
+      pollTimer = setTimeout(async () => {
+        await refresh();
+        scheduleNext();
+      }, POLL_MS);
+    }
+
+    btnRefresh.addEventListener("click", async () => {
+      await refresh();
+      scheduleNext();
+    });
+    chkAuto.addEventListener("change", scheduleNext);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") refresh();
+    });
+
+    refresh().then(scheduleNext);
+  </script>
+</body>
+</html>
