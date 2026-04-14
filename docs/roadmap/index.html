@@ -337,12 +337,14 @@
     .rtab {
       padding: 0.7rem 1.1rem;
       color: var(--fg-mute);
-      border-bottom: 2px solid transparent;
-      text-decoration: none;
+      text-decoration: none !important;
       white-space: nowrap;
       font-size: 0.88rem;
       font-weight: 500;
-      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      transition: color 0.15s, background 0.15s;
+    }
+    .rtab:hover, .rtab:focus, .rtab:active, .rtab:visited {
+      text-decoration: none !important;
     }
     .rtab:hover {
       color: var(--fg);
@@ -350,7 +352,6 @@
     }
     .rtab.active {
       color: var(--accent);
-      border-bottom-color: var(--accent);
       background: var(--bg-card);
     }
   </style>
