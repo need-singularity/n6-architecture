@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "총편수": 108,
+    "총편수": 117,
     "소스": "papers/ 디렉토리 .md 실측 + _registry.json._meta.papers_chunk_* 병합",
     "분리일": "2026-04-14",
     "선행": "papers/_registry.json.bak",
@@ -8,7 +8,8 @@
     "chunk_지표": {
       "chunk에_인덱싱됨": 65,
       "chunk_미등재": 43
-    }
+    },
+    "업데이트_2026-04-14b": "unregistered 9편 등록 → 117편 (N6-109~117 신규)"
   },
   "papers": [
     {
@@ -1109,6 +1110,96 @@
       "bt_ref": "BT-73, BT-197, BT-227, BT-262, BT-329, BT-340 (문자체계/인코딩)",
       "exact_stat": "20/20 EXACT (100%)",
       "chunk_status": "v1 완성 -- hexa 검증 STUB + ASCII 결과표 + MISS 공시 포함"
+    },
+    {
+      "id": "N6-109",
+      "title": "HEXA-ARCH-EVOLUTION — 진화 적응 설계 논문 (arch-adaptive-evolution)",
+      "domain": "arch-adaptive-evolution",
+      "category": "arch-adaptive-evolution — 진화·적응 아키텍처 논문",
+      "path": "papers/n6-arch-adaptive-evolution-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-195, BT-370, BT-371",
+      "chunk_status": "v1 — paper self-label N6-110; registry canon N6-109"
+    },
+    {
+      "id": "N6-110",
+      "title": "HEXA-ARCH-QUANTUM — 양자 중첩 설계 논문 (arch-quantum-design)",
+      "domain": "arch-quantum-design",
+      "category": "arch-quantum-design — 양자 아키텍처 논문",
+      "path": "papers/n6-arch-quantum-design-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-91, BT-92, BT-114, BT-195",
+      "chunk_status": "v1 — paper self-label N6-108 (collides with writing-systems); registry canon N6-110"
+    },
+    {
+      "id": "N6-111",
+      "title": "HEXA-ARCH-SELFORG — 자기조직 창발 설계 논문 (arch-selforg-design)",
+      "domain": "arch-selforg-design",
+      "category": "arch-selforg-design — 자기조직·창발 아키텍처 논문",
+      "path": "papers/n6-arch-selforg-design-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-195, BT-366, BT-368",
+      "chunk_status": "v1 — paper self-label N6-109; registry canon N6-111"
+    },
+    {
+      "id": "N6-112",
+      "title": "HEXA-ATTRACTOR-META — 어트랙터 메타-정리 확장 논문 (attractor-meta-extended)",
+      "domain": "attractor-meta-extended",
+      "category": "attractor-meta-extended — 어트랙터 이론 확장",
+      "path": "papers/n6-attractor-meta-extended-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-361, BT-362, BT-363",
+      "chunk_status": "v1 — paper self-label N6-116; registry canon N6-112"
+    },
+    {
+      "id": "N6-113",
+      "title": "HEXA-CROSS-DSE-MATRIX-112 — 225 기법 × 10 도메인 교차 DSE 메타 논문",
+      "domain": "cross-dse-matrix-112",
+      "category": "cross-dse-matrix — 교차 DSE 메타 분석",
+      "path": "papers/n6-cross-dse-matrix-112-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-26, BT-33, BT-54, BT-64, BT-67, BT-73, BT-380",
+      "chunk_status": "v1 — paper self-label N6-111; registry canon N6-113"
+    },
+    {
+      "id": "N6-114",
+      "title": "HEXA-HYPOTHESES-MC — 가설 975건 Monte Carlo 검증 논문",
+      "domain": "hypotheses-678-mc-verification",
+      "category": "hypotheses-mc-verification — 가설 MC 검증",
+      "path": "papers/n6-hypotheses-678-mc-verification-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-380",
+      "chunk_status": "v1 — paper self-label N6-115; registry canon N6-114"
+    },
+    {
+      "id": "N6-115",
+      "title": "HEXA-NEXUS6-DISCOVERY-ENGINE — SEDI + brainwire 통합 발견 엔진",
+      "domain": "nexus6-discovery-engine",
+      "category": "nexus6-discovery-engine — 자율 발견 엔진 논문",
+      "path": "papers/n6-nexus6-discovery-engine-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-195, BT-350, BT-380",
+      "chunk_status": "v1 — paper self-label N6-112; registry canon N6-115"
+    },
+    {
+      "id": "N6-116",
+      "title": "HEXA-PROTOCOL-12 — σ=12 프로토콜 12종 커버리지 논문",
+      "domain": "protocol-12-sigma12-coverage",
+      "category": "protocol-12 — σ=12 커버리지 프로토콜",
+      "path": "papers/n6-protocol-12-sigma12-coverage-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-73, BT-197, BT-227, BT-380",
+      "chunk_status": "v1 — paper self-label N6-114; registry canon N6-116"
+    },
+    {
+      "id": "N6-117",
+      "title": "N6-SPEAK v2 — 4-tier SoC 칩 설계 논문",
+      "domain": "speak-v2-4tier-chip",
+      "category": "chip-design — N6-SPEAK v2 SoC",
+      "path": "papers/n6-speak-v2-4tier-chip-paper.md",
+      "type": "paper",
+      "bt_ref": "BT-28, BT-90, BT-93, BT-1104",
+      "chunk_status": "v1 — paper self-label N6-113; registry canon N6-117"
     }
   ]
 }

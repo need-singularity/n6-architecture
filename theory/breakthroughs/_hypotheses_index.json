@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "총가설수": 975,
-    "verified": 656,
-    "partial": 254,
-    "conjecture": 65,
+    "총가설수": 1007,
+    "verified": 664,
+    "partial": 255,
+    "conjecture": 88,
     "업데이트": "2026-04-14",
     "소스파일수": 20,
     "소스파일": [
@@ -7123,6 +7123,236 @@
       "status": "conjecture",
       "source_file": "theory/breakthroughs/millennium-dfs-complete-2026-04-11.md",
       "bt_ref": "BT-547"
+    },
+    {
+      "id": "BT-1176",
+      "title": "원자로 동역학 6군 정리 (Nuclear Reactor Kinetics n=6 Closure)",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1176-nuclear-reactor-kinetics-2026-04-12.md",
+      "bt_ref": "BT-1176"
+    },
+    {
+      "id": "BT-1386",
+      "title": "표준모형 n=6 완전대칭 (Standard Model n=6 Closure)",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1386-standard-model-2026-04-12.md",
+      "bt_ref": "BT-1386"
+    },
+    {
+      "id": "BT-1387",
+      "title": "Hückel 방향족 4n+2 (n=1) → 6π 정리",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1387-huckel-aromatic-2026-04-12.md",
+      "bt_ref": "BT-1387"
+    },
+    {
+      "id": "BT-1388",
+      "title": "이온결정 옥타헤드럴 CN=6 표준",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1388-ionic-octahedral-2026-04-12.md",
+      "bt_ref": "BT-1388"
+    },
+    {
+      "id": "BT-1389",
+      "title": "정육면체–정팔면체 쌍대 n=6 기하 정리",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1389-cube-octahedron-duality-2026-04-12.md",
+      "bt_ref": "BT-1389"
+    },
+    {
+      "id": "BT-1390",
+      "title": "HSV 색상환 6원색 60° 주기 정리",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1390-hsv-color-hexad-2026-04-12.md",
+      "bt_ref": "BT-1390"
+    },
+    {
+      "id": "BT-1391",
+      "title": "광합성 6몰 완전 방정식 정리",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1391-photosynthesis-equation-2026-04-12.md",
+      "bt_ref": "BT-1391"
+    },
+    {
+      "id": "BT-1392",
+      "title": "7대 밀레니엄 난제 대발견 아이디어 7종",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1392-millennium-7-breakthrough-ideas-2026-04-12.md",
+      "bt_ref": "BT-1392"
+    },
+    {
+      "id": "BT-1393",
+      "title": "N6-DFS 1만 노드 자율탐색 결과",
+      "status": "partial",
+      "source_file": "theory/breakthroughs/bt-1393-n6-dfs-10k-autonomous-2026-04-12.md",
+      "bt_ref": "BT-1393"
+    },
+    {
+      "id": "BT-1394",
+      "title": "7대 밀레니엄 난제 DFS 3차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1394-millennium-dfs-round3-2026-04-12.md",
+      "bt_ref": "BT-1394"
+    },
+    {
+      "id": "BT-1395",
+      "title": "7대 밀레니엄 난제 DFS 4차 + 자유탐색",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1395-millennium-dfs-round4-2026-04-12.md",
+      "bt_ref": "BT-1395"
+    },
+    {
+      "id": "BT-1396-a",
+      "original_id": "BT-1396",
+      "title": "n=6 DFS 5차: 표현론·범주론·대수구조",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1396-dfs5-representation-theory-2026-04-12.md",
+      "bt_ref": "BT-1396"
+    },
+    {
+      "id": "BT-1396-b",
+      "original_id": "BT-1396",
+      "title": "DFS 5차 TQFT·격자·매듭·표현론",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1396-dfs5-tqft-reptheory-2026-04-12.md",
+      "bt_ref": "BT-1396"
+    },
+    {
+      "id": "BT-1396-c",
+      "original_id": "BT-1396",
+      "title": "DFS 5차: TQFT·격자이론·매듭이론",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1396-tqft-lattice-knot-dfs5-2026-04-12.md",
+      "bt_ref": "BT-1396"
+    },
+    {
+      "id": "BT-1398",
+      "title": "7대 밀레니엄 난제 DFS 6차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1398-millennium-dfs-round6-2026-04-12.md",
+      "bt_ref": "BT-1398"
+    },
+    {
+      "id": "BT-1399",
+      "title": "7대 밀레니엄 난제 DFS 7차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1399-millennium-dfs-round7-2026-04-12.md",
+      "bt_ref": "BT-1399"
+    },
+    {
+      "id": "BT-1400",
+      "title": "7대 밀레니엄 난제 DFS 8차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1400-millennium-dfs-round8-2026-04-12.md",
+      "bt_ref": "BT-1400"
+    },
+    {
+      "id": "BT-1401",
+      "title": "7대 밀레니엄 난제 DFS 9차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1401-millennium-dfs-round9-2026-04-12.md",
+      "bt_ref": "BT-1401"
+    },
+    {
+      "id": "BT-1402",
+      "title": "7대 밀레니엄 난제 DFS 10차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1402-millennium-dfs-round10-2026-04-12.md",
+      "bt_ref": "BT-1402"
+    },
+    {
+      "id": "BT-1403",
+      "title": "7대 밀레니엄 난제 DFS 11차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1403-millennium-dfs-round11-2026-04-12.md",
+      "bt_ref": "BT-1403"
+    },
+    {
+      "id": "BT-1404",
+      "title": "7대 밀레니엄 난제 DFS 12차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1404-millennium-dfs-round12-2026-04-12.md",
+      "bt_ref": "BT-1404"
+    },
+    {
+      "id": "BT-1405",
+      "title": "7대 밀레니엄 난제 DFS 13차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1405-millennium-dfs-round13-2026-04-12.md",
+      "bt_ref": "BT-1405"
+    },
+    {
+      "id": "BT-1406",
+      "title": "7대 밀레니엄 난제 DFS 14차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1406-millennium-dfs-round14-2026-04-12.md",
+      "bt_ref": "BT-1406"
+    },
+    {
+      "id": "BT-1407",
+      "title": "7대 밀레니엄 난제 DFS 15차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1407-millennium-dfs-round15-2026-04-12.md",
+      "bt_ref": "BT-1407"
+    },
+    {
+      "id": "BT-1408",
+      "title": "7대 밀레니엄 난제 DFS 16차",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1408-millennium-dfs-round16-2026-04-12.md",
+      "bt_ref": "BT-1408"
+    },
+    {
+      "id": "BT-1412",
+      "title": "7대 밀레니엄 난제 DFS 20차 재탐색 (전반)",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1412-millennium-dfs-round20-2026-04-14.md",
+      "bt_ref": "BT-1412"
+    },
+    {
+      "id": "BT-1412-v1",
+      "original_id": "BT-1412",
+      "title": "7대 밀레니엄 난제 DFS 20차 (원본, 재탐색 전)",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1412-millennium-dfs-round20-2026-04-12.md",
+      "bt_ref": "BT-1412"
+    },
+    {
+      "id": "BT-1413",
+      "title": "7대 밀레니엄 난제 DFS 20차 재탐색 후반",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1413-millennium-dfs-round20-2026-04-14.md",
+      "bt_ref": "BT-1413"
+    },
+    {
+      "id": "BT-1413-v1",
+      "original_id": "BT-1413",
+      "title": "7대 밀레니엄 난제 DFS 21차 (원본, 재분할 전)",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1413-millennium-dfs-round21-2026-04-12.md",
+      "bt_ref": "BT-1413"
+    },
+    {
+      "id": "BT-1414",
+      "title": "7대 밀레니엄 난제 DFS 21차 전반",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1414-millennium-dfs-round21-2026-04-14.md",
+      "bt_ref": "BT-1414"
+    },
+    {
+      "id": "BT-1415",
+      "title": "7대 밀레니엄 난제 DFS 21차 후반",
+      "status": "conjecture",
+      "source_file": "theory/breakthroughs/bt-1415-millennium-dfs-round21-2026-04-14.md",
+      "bt_ref": "BT-1415"
+    },
+    {
+      "id": "BT-REINFORCE-DIM-UNFOLD",
+      "title": "차원펼침 발견에 의한 BT 15건 강화 (meta 문서)",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-reinforcement-dimensional-unfolding-2026-04-06.md",
+      "bt_ref": "BT-205, BT-79, BT-90, BT-58, BT-48, BT-76, BT-26, BT-111, BT-33, BT-168, BT-167, BT-10, BT-143, BT-272, BT-355",
+      "note": "meta — 15개 기존 BT 강화 교차참조"
     }
   ]
 }
