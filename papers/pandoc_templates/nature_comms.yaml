@@ -1,0 +1,78 @@
+# 저널: Nature Communications (24 편 배정)
+# 용도: pandoc 호환 YAML 헤더 — P4-1 스텁
+# 실제 pandoc 변환은 수행하지 않음. 헤더 스켈레톤만.
+# 인코딩: UTF-8 한글 필수
+
+roadmap_ref: PAPER-P4-1
+venue_id: nature_comms
+venue_name: Nature Communications
+venue_kind: journal
+venue_distribution_count: 24
+
+# ---- pandoc 메타 (UTF-8, 한글) ----
+title:         "<PAPER_TITLE 한글>"
+subtitle:      "n=6 산술 좌표 매핑 — σ(n)·φ(n) = n·τ(n) 닫힘 정리 기반"
+author:
+  - 박민우 (n6-architecture 주관)
+  - NEXUS-6 AI 협업체
+institute:     "n6-architecture 프로젝트 (AI-native Arithmetic Design Framework)"
+date:          "2026-04-14"
+lang:          ko
+mainfont:      "Noto Serif CJK KR"
+sansfont:      "Noto Sans CJK KR"
+monofont:      "Noto Sans Mono CJK KR"
+
+# ---- 논문 식별 ----
+paper_id:      "<N6-XXX>"
+rank:          "<1..48>"
+doi_sim:       "10.NEXUS6.n6-arch/2026-NNN"
+disclaimer:    "시뮬 DOI — CrossRef/DataCite 미등록. 외부 인용 시 교체 필요."
+format_status: template_ready
+
+# ---- abstract (200~350 단어) ----
+abstract: |
+  본 논문은 σ(n)·φ(n) = n·τ(n) 이 n=6 에서만 성립하는 n6 정리를 <도메인>
+  측정치 좌표계에 투영했을 때 출현하는 닫힘(closure) 구조를 제시한다.
+  atlas.n6 노드 <경로> 에서 EXACT <건수> / NEAR <건수> / MISS <건수> 로
+  분류되었으며, exact_stat <값> / closure_grade_pct <값> / alien_index
+  <값> 의 3 축 실측값을 보고한다. 재현 경로는 verify_<도메인>_n6.hexa 로
+  고정되어 있다. 한계 및 반증 후보 <2 줄> 를 명시한다.
+
+# ---- keywords ----
+keywords:
+  - n6 산술 좌표
+  - σ(n)·φ(n) = n·τ(n) 닫힘 정리
+  - atlas.n6
+  - 외계인 지수
+  - "<도메인 키워드>"
+
+# ---- Nature Communications 특화 필드 ----
+nature_comms:
+  article_type: Article
+  word_limit_main: 5000
+  figure_limit: 10
+  supplementary_allowed: true
+  open_access: true
+  review_model: single_blind
+  data_availability_statement: |
+    원 데이터 및 재현 코드는 n6-architecture 저장소 papers/ 및 atlas.n6
+    노드 <경로> 에 공개되어 있다. verify_<도메인>_n6.hexa 로 재실행 가능.
+  code_availability_statement: |
+    HEXA-FIRST 원칙에 따라 .hexa 검증 코드만 포함한다. Python 재구현은
+    존재하지 않는다.
+  competing_interests: "저자들은 경쟁 이해관계 없음을 선언한다."
+
+# ---- 참고문헌 ----
+bibliography: n6_common.bib
+csl:          nature.csl
+link-citations: true
+reference-section-title: 참고문헌
+
+# ---- 출력 옵션 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: default
+  html_document:
+    self_contained: true

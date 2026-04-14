@@ -1,0 +1,72 @@
+# ============================================================
+# NeurIPS 특화 pandoc 템플릿 (5편 배정)
+# ============================================================
+# 로드맵: PAPER-P4-1
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_neurips.yaml
+# 인코딩: UTF-8 한글 필수
+
+venue:
+  id: neurips
+  name: "NeurIPS (Neural Information Processing Systems)"
+  kind: conference
+  publisher: "NeurIPS Foundation"
+  distribution_count: 5
+
+# ---- 포맷 규격 ----
+format_spec:
+  article_type: "Main Track"
+  columns: 1                       # NeurIPS 단컬럼 레이아웃
+  word_limit_main: null            # 단어 대신 페이지 제한
+  page_limit_main: 9               # 본문 최대 9페이지
+  page_limit_appendix: null        # 부록 페이지 무제한
+  word_limit_abstract: 250         # 초록 약 250 단어
+  figure_limit: null               # 스타일 파일 내 자동 조정
+  table_limit: null
+  reference_limit: null            # 참고문헌 수 제한 없음 (본문 페이지에 미포함)
+  supplementary_allowed: true      # 부록 파일 제출 가능
+
+# ---- 심사 및 접근 ----
+review:
+  model: "double_blind"            # 이중 맹검 심사
+  anonymization: required          # 익명화 필수 (review 제출 시)
+  open_access: true                # 학회 논문 무료 공개
+  checklist_required: true         # NeurIPS 체크리스트 필수
+  broader_impact_required: true    # 사회적 영향 서술 필수
+  camera_ready_version: "style2026"
+
+# ---- 참조 스타일 ----
+csl: "neurips.csl"                 # NeurIPS 참조 스타일
+reference_style: "author-year"     # (Author, Year) 형식
+reference_section_title: "References"
+
+# ---- LaTeX/출력 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: neurips_2026
+    classoption: "final"
+
+# ---- NeurIPS 전용 섹션 ----
+neurips:
+  sections_required:
+    - "Introduction"
+    - "Related Work"
+    - "Method"
+    - "Experiments"
+    - "Conclusion"
+    - "Broader Impact Statement"
+  anonymization_note: |
+    본 템플릿의 author 블록은 camera-ready 버전이다. review 제출 시에는
+    "Anonymous Authors" 로 교체하고, 자기 인용을 3인칭으로 변경해야 한다.
+  checklist_note: |
+    NeurIPS 논문 체크리스트 (재현성, 이론 증명, 실험 세부사항 등) 를
+    부록에 반드시 첨부해야 한다.
+  broader_impact: |
+    본 연구의 n=6 산술 좌표 프레임워크는 <도메인> 에 적용되었으며, 해당
+    분야의 설계/분석 효율을 높일 잠재력이 있다. 부정적 사회적 영향은
+    확인되지 않았으나, 자동화 의사결정에의 무비판적 적용에 대해서는
+    후속 논의가 필요하다.
+  editor_note: |
+    NeurIPS 독자는 ML/AI 연구자 대상. n=6 정리의 학습/추론 적용에
+    초점을 맞추며, 재현 가능한 실험 구성을 상세히 서술한다.

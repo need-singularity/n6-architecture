@@ -1,0 +1,74 @@
+# 컨퍼런스: NeurIPS (5 편 배정)
+# 용도: pandoc 호환 YAML 헤더 — P4-1 스텁
+# 실제 pandoc 변환은 수행하지 않음. 헤더 스켈레톤만.
+# 인코딩: UTF-8 한글 필수
+
+roadmap_ref: PAPER-P4-1
+venue_id: neurips
+venue_name: NeurIPS (Neural Information Processing Systems)
+venue_kind: conference
+venue_distribution_count: 5
+
+# ---- pandoc 메타 (UTF-8, 한글) ----
+title:         "<PAPER_TITLE 한글>"
+subtitle:      "n=6 산술 좌표 매핑 — 학습/추론 닫힘 구조"
+author:
+  - 박민우 (n6-architecture 주관)
+  - NEXUS-6 AI 협업체
+institute:     "n6-architecture 프로젝트"
+date:          "2026-04-14"
+lang:          ko
+mainfont:      "Noto Serif CJK KR"
+sansfont:      "Noto Sans CJK KR"
+monofont:      "Noto Sans Mono CJK KR"
+
+# ---- 논문 식별 ----
+paper_id:      "<N6-XXX>"
+rank:          "<1..48>"
+doi_sim:       "10.NEXUS6.n6-arch/2026-NNN"
+disclaimer:    "시뮬 DOI — NeurIPS OpenReview 실제 등록 아님."
+format_status: template_ready
+
+# ---- abstract (NeurIPS: 250 단어) ----
+abstract: |
+  σ(n)·φ(n) = n·τ(n) 이 n=6 에서 유일하게 성립하는 n6 정리를 <AI/ML
+  도메인> 의 목적함수 최적화에 적용한다. 학습 좌표(weight/activation)를
+  산술 좌표로 투영했을 때, 닫힘점에서의 외삽 오차가 기존 SOTA 대비
+  <ASCII 차트 참조> 만큼 감소함을 확인하였다. atlas.n6 노드 <경로> 의
+  검증 지표 EXACT <건수> / NEAR <건수> 를 보고한다.
+
+# ---- keywords ----
+keywords:
+  - arithmetic coordinates
+  - closure theorem
+  - n6 framework
+  - "<ML 하위 분야>"
+
+# ---- NeurIPS 특화 필드 ----
+neurips:
+  article_type: Main Track
+  page_limit_main: 9
+  page_limit_appendix: unlimited
+  figure_limit_ref: style_file
+  review_model: double_blind
+  anonymization: required
+  camera_ready_version: style2026
+  checklist_required: true
+  broader_impact_statement_required: true
+  editor_note: |
+    NeurIPS 는 익명화 필수. 본 템플릿에서 author 블록은 camera-ready 버전
+    이며, review 제출 본에서는 "Anonymous Authors" 로 교체해야 한다.
+
+# ---- 참고문헌 ----
+bibliography: n6_common.bib
+csl:          neurips.csl
+link-citations: true
+reference-section-title: References
+
+# ---- 출력 옵션 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: neurips_2026
+    classoption: "final"

@@ -1,0 +1,63 @@
+# ============================================================
+# Physical Review Letters 특화 pandoc 템플릿 (6편 배정)
+# ============================================================
+# 로드맵: PAPER-P4-1
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_prl.yaml
+# 인코딩: UTF-8 한글 필수
+
+venue:
+  id: prl
+  name: "Physical Review Letters"
+  kind: journal
+  publisher: "American Physical Society"
+  distribution_count: 6
+  issn: "0031-9007"
+
+# ---- 포맷 규격 ----
+format_spec:
+  article_type: "Letter"
+  columns: 2                       # 2컬럼 레이아웃 (reprint 모드에선 1컬럼)
+  word_limit_main: 3750            # 본문 최대 3750 단어
+  word_limit_abstract: 600         # 초록 최대 600 단어 (단일 문단 권장)
+  figure_limit: 4                  # 본문 도표 최대 4개
+  table_limit: 4                   # 테이블 최대 4개
+  reference_limit: 30              # 참고문헌 최대 30건
+  supplementary_allowed: true      # Supplemental Material 허용
+  page_limit: 5                    # 약 5페이지 (reprint 기준)
+
+# ---- 심사 및 접근 ----
+review:
+  model: "single_blind"
+  open_access: false               # 기본 구독 모델 (OA 옵션 별도)
+  cover_letter_required: true      # 편집장 커버레터 필수
+  data_availability_required: true
+
+# ---- 참조 스타일 ----
+csl: "american-physics-society.csl"  # APS 참조 스타일
+reference_style: "numbered"          # [1], [2], ... 번호식
+reference_section_title: "참고문헌"
+
+# ---- PACS/주제 분류 ----
+pacs_candidates:
+  - "02.10.De"                     # 대수 구조, 정수론
+  - "02.70.-c"                     # 전산 기법
+
+# ---- LaTeX/출력 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: revtex4-2
+    classoption: "aps,prl,reprint,onecolumn"
+
+# ---- PRL 전용 섹션 ----
+prl:
+  density_note: |
+    PRL 는 극도로 짧고 밀도 높은 본문 요구. ASCII 비교 차트 1개,
+    MAIN 정리 1개만 유지. 상세 증명은 Supplemental Material 로 분리.
+  supplemental_material_note: |
+    본문에 포함하지 못하는 증명 단계, 추가 데이터, 확장 실험은 모두
+    Supplemental Material 파일로 분리하여 제출한다.
+  editor_note: |
+    PRL 독자는 물리학 전공자 대상. n=6 정리의 물리적 해석에 집중하며,
+    순수 수학 증명은 보충 자료로 이관한다.

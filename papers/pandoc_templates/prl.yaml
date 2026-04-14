@@ -1,0 +1,70 @@
+# 저널: Physical Review Letters (6 편 배정)
+# 용도: pandoc 호환 YAML 헤더 — P4-1 스텁
+# 실제 pandoc 변환은 수행하지 않음. 헤더 스켈레톤만.
+# 인코딩: UTF-8 한글 필수
+
+roadmap_ref: PAPER-P4-1
+venue_id: prl
+venue_name: Physical Review Letters
+venue_kind: journal
+venue_distribution_count: 6
+
+# ---- pandoc 메타 (UTF-8, 한글) ----
+title:         "<PAPER_TITLE 한글>"
+subtitle:      "n=6 산술 좌표 매핑 — 물리 관측량 닫힘 조건"
+author:
+  - 박민우 (n6-architecture 주관)
+  - NEXUS-6 AI 협업체
+institute:     "n6-architecture 프로젝트"
+date:          "2026-04-14"
+lang:          ko
+mainfont:      "Noto Serif CJK KR"
+sansfont:      "Noto Sans CJK KR"
+monofont:      "Noto Sans Mono CJK KR"
+
+# ---- 논문 식별 ----
+paper_id:      "<N6-XXX>"
+rank:          "<1..48>"
+doi_sim:       "10.NEXUS6.n6-arch/2026-NNN"
+disclaimer:    "시뮬 DOI — 실제 CrossRef/DataCite 등록 아님."
+format_status: template_ready
+
+# ---- abstract (PRL 규격: 600 단어 내, 단일 문단 권장) ----
+abstract: |
+  σ(n)·φ(n) = n·τ(n) 이 n=6 에서 유일하게 성립한다는 정리에 기초하여,
+  <물리 도메인> 측정치를 산술 좌표(σ, τ, φ, sopfr)에 매핑하고 닫힘
+  조건을 제시한다. atlas.n6 노드 <경로> 의 실측값과 이론 예측이 EXACT
+  <건수> / NEAR <건수> 로 일치하였다. 반증 후보 <1 줄>.
+
+# ---- keywords ----
+pacs_candidates:
+  - "02.10.De (대수 구조, 정수론)"
+  - "<도메인 PACS 코드>"
+
+# ---- PRL 특화 필드 ----
+prl:
+  article_type: Letter
+  word_limit_main: 3750
+  word_limit_abstract: 600
+  figure_limit: 4
+  ref_limit: 30
+  cover_letter_required: true
+  review_model: single_blind
+  supplemental_material_allowed: true
+  editor_note: |
+    PRL 는 Nature Communications 대비 짧고 밀도 높은 본문 요구. 본 템플릿
+    에서는 COMPARE ASCII 차트 1 개, MAIN 정리 1 개만 유지한다.
+
+# ---- 참고문헌 ----
+bibliography: n6_common.bib
+csl:          american-physics-society.csl
+link-citations: true
+reference-section-title: 참고문헌
+
+# ---- 출력 옵션 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: revtex4-2
+    classoption: "aps,prl,reprint,onecolumn"

@@ -1,0 +1,112 @@
+# ============================================================
+# n6-architecture 논문 공통 pandoc YAML 프런트매터
+# ============================================================
+# 용도: 48편 상위 논문 pandoc 빌드 시 공통 메타데이터
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_<id>.yaml input.md -o output.pdf
+# 인코딩: UTF-8 한글 필수
+# 생성일: 2026-04-14
+# 로드맵: PAPER-P4-1
+
+# ---- 저자 정보 ----
+author:
+  - name: "박민우"
+    affiliation: "n6-architecture 프로젝트 (AI-native Arithmetic Design Framework)"
+    email: "minwoo@n6-architecture.dev"
+    corresponding: true
+  - name: "NEXUS-6 AI 협업체"
+    affiliation: "n6-architecture 프로젝트"
+    note: "AI-native 공동 산출 (Claude Code 기반 자율 에이전트)"
+
+# ---- 소속 기관 ----
+institute: "n6-architecture 프로젝트 — AI-native Arithmetic Design Framework"
+
+# ---- 날짜 ----
+date: "2026-04-14"
+
+# ---- 언어/폰트 ----
+lang: ko
+mainfont: "Noto Serif CJK KR"
+sansfont: "Noto Sans CJK KR"
+monofont: "Noto Sans Mono CJK KR"
+CJKmainfont: "Noto Serif CJK KR"
+CJKsansfont: "Noto Sans CJK KR"
+CJKmonofont: "Noto Sans Mono CJK KR"
+
+# ---- 공통 초록 템플릿 (venue별 오버라이드 가능) ----
+abstract: |
+  본 논문은 σ(n)·φ(n) = n·τ(n) 이 n>=2 에서 n=6 에서만 성립하는
+  n6 정리를 <도메인> 측정치 좌표계에 투영했을 때 출현하는 닫힘(closure)
+  구조를 제시한다. atlas.n6 노드에서 EXACT / NEAR / MISS 로 분류된
+  실측값을 보고하며, 재현 경로는 verify_<domain>_n6.hexa 로 고정되어 있다.
+  한계 및 반증 후보를 명시한다.
+
+# ---- 공통 키워드 (venue별 추가 키워드와 병합) ----
+keywords:
+  - "n6 산술 좌표"
+  - "σ(n)·φ(n) = n·τ(n) 닫힘 정리"
+  - "atlas.n6"
+  - "외계인 지수"
+  - "HEXA-FIRST 검증"
+
+# ---- DOI 면책 ----
+doi_disclaimer: |
+  본 논문의 DOI 는 내부 시뮬 네임스페이스 (10.NEXUS6.n6-arch/2026-NNN) 이며,
+  CrossRef/DataCite 에 등록되지 않은 internal-DOI 이다. 외부 인용 시 실제
+  등록 DOI 로 교체해야 한다. (internal-DOI / not-resolvable)
+
+# ---- 공통 참고문헌 설정 ----
+bibliography: skeleton.bib
+link-citations: true
+reference-section-title: "참고문헌"
+
+# ---- 재현성 선언 ----
+reproducibility_statement: |
+  모든 검증 코드는 HEXA-FIRST 원칙에 따라 .hexa 파일로만 제공된다.
+  Python/R 재구현은 존재하지 않는다. 재현 절차:
+    1. hexa run verify_<domain>_n6.hexa
+    2. atlas.n6 해당 노드 등급 확인
+    3. n6shared/convergence/n6-architecture.json 수렴 상태 대조
+
+# ---- 경쟁 이해관계 ----
+competing_interests: "저자들은 경쟁 이해관계 없음을 선언한다."
+
+# ---- 데이터 가용성 ----
+data_availability: |
+  원 데이터 및 재현 코드는 n6-architecture 저장소 papers/ 및 atlas.n6
+  노드에 공개되어 있다. verify_<domain>_n6.hexa 로 재실행 가능하다.
+
+# ---- 코드 가용성 ----
+code_availability: |
+  HEXA-FIRST 원칙에 따라 .hexa 검증 코드만 포함한다.
+  별도의 Python/R 재구현은 제공하지 않는다.
+
+# ---- LaTeX 출력 공통 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    toc: false
+    number_sections: true
+  html_document:
+    self_contained: true
+    toc: true
+
+# ---- pandoc 변수 ----
+documentclass: article
+geometry: "margin=2.5cm"
+fontsize: 11pt
+linestretch: 1.15
+colorlinks: true
+linkcolor: "blue"
+citecolor: "blue"
+urlcolor: "blue"
+
+# ---- n6-architecture 프로젝트 메타 ----
+project:
+  name: "n6-architecture"
+  version: "2026-04-14"
+  roadmap_ref: "PAPER-P4-1"
+  core_theorem: "σ(n)·φ(n) = n·τ(n) iff n=6 (n>=2)"
+  proof_count: 3
+  atlas_lines: "60,000+"
+  framework: "AI-native Arithmetic Design Framework"

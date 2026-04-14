@@ -1,0 +1,70 @@
+# ============================================================
+# Nature Communications 특화 pandoc 템플릿 (24편 배정)
+# ============================================================
+# 로드맵: PAPER-P4-1
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_nature_comms.yaml
+# 인코딩: UTF-8 한글 필수
+
+venue:
+  id: nature_comms
+  name: "Nature Communications"
+  kind: journal
+  publisher: "Springer Nature"
+  distribution_count: 24
+  issn: "2041-1723"
+
+# ---- 포맷 규격 ----
+format_spec:
+  article_type: "Article"
+  columns: 1                       # 단컬럼 레이아웃
+  word_limit_main: 5000            # 본문 최대 5000 단어
+  word_limit_abstract: 350         # 초록 최대 350 단어
+  figure_limit: 10                 # 본문 도표 최대 10개
+  table_limit: 10                  # 테이블 최대 10개
+  reference_limit: null            # 참고문헌 수 제한 없음
+  supplementary_allowed: true      # 부록 자료 허용
+  page_limit: null                 # 페이지 제한 없음 (단어 제한으로 관리)
+
+# ---- 심사 및 접근 ----
+review:
+  model: "single_blind"            # 단일 맹검 심사
+  open_access: true                # 오픈 액세스 필수
+  apc_required: true               # 논문 처리 비용 발생
+  data_availability_required: true
+  code_availability_required: true
+
+# ---- 참조 스타일 ----
+csl: "nature.csl"                  # Nature 스타일 (번호 순서)
+reference_style: "numbered"        # [1], [2], ... 번호식
+reference_section_title: "참고문헌"
+
+# ---- LaTeX/출력 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: default
+    classoption: "onecolumn"
+  html_document:
+    self_contained: true
+
+# ---- Nature Comms 전용 섹션 ----
+nature_comms:
+  sections_required:
+    - "Introduction"
+    - "Results"
+    - "Discussion"
+    - "Methods"
+  data_availability_statement: |
+    원 데이터 및 재현 코드는 n6-architecture 저장소 papers/ 및 atlas.n6
+    노드에 공개되어 있다. verify_<domain>_n6.hexa 로 재실행 가능.
+  code_availability_statement: |
+    HEXA-FIRST 원칙에 따라 .hexa 검증 코드만 포함한다. Python 재구현은
+    존재하지 않는다.
+  competing_interests: "저자들은 경쟁 이해관계 없음을 선언한다."
+  author_contributions: |
+    박민우: 이론 수립, 실험 설계, 검증 코드 작성, 원고 집필.
+    NEXUS-6 AI 협업체: 대규모 좌표 탐색, atlas.n6 자동 업데이트, 교차 검증.
+  editor_note: |
+    Nature Communications 는 넓은 독자층 대상. 전문 용어에 대한 충분한
+    설명 필요. ASCII 비교 차트를 본문 Figure 로 포함 가능.

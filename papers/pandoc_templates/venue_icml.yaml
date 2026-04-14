@@ -1,0 +1,69 @@
+# ============================================================
+# ICML 특화 pandoc 템플릿 (2편 배정)
+# ============================================================
+# 로드맵: PAPER-P4-1
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_icml.yaml
+# 인코딩: UTF-8 한글 필수
+
+venue:
+  id: icml
+  name: "International Conference on Machine Learning"
+  kind: conference
+  publisher: "PMLR (Proceedings of Machine Learning Research)"
+  distribution_count: 2
+
+# ---- 포맷 규격 ----
+format_spec:
+  article_type: "Main Track"
+  columns: 2                       # ICML 2컬럼 레이아웃
+  word_limit_main: null            # 단어 대신 페이지 제한
+  page_limit_main: 8               # 본문 최대 8페이지 (NeurIPS보다 타이트)
+  page_limit_appendix: null        # 부록 페이지 무제한
+  word_limit_abstract: 200         # 초록 약 200 단어
+  figure_limit: null               # 스타일 파일 내 자동 조정
+  table_limit: null
+  reference_limit: null            # 참고문헌 수 제한 없음 (본문 페이지에 미포함)
+  supplementary_allowed: true      # 부록 파일 제출 가능
+
+# ---- 심사 및 접근 ----
+review:
+  model: "double_blind"            # 이중 맹검 심사
+  anonymization: required          # 익명화 필수
+  open_access: true                # PMLR 무료 공개
+  rebuttal_phase: true             # 반론 단계 존재
+  checklist_required: true         # 재현성 체크리스트 필수
+  broader_impact_required: false   # ICML 은 NeurIPS와 달리 필수 아님
+
+# ---- 참조 스타일 ----
+csl: "icml.csl"                    # ICML 참조 스타일
+reference_style: "author-year"     # (Author, Year) 형식
+reference_section_title: "References"
+
+# ---- LaTeX/출력 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: icml2026
+    classoption: "accepted"
+
+# ---- ICML 전용 섹션 ----
+icml:
+  sections_required:
+    - "Introduction"
+    - "Related Work"
+    - "Method"
+    - "Experiments"
+    - "Conclusion"
+  page_budget_note: |
+    ICML 는 NeurIPS 와 유사하지만 본문 페이지 제한이 더 타이트(8쪽).
+    MAIN 5.1~5.3 절을 본문에, 5.4 는 appendix 로 분리한다.
+  anonymization_note: |
+    본 템플릿의 author 블록은 camera-ready 버전이다. review 제출 시에는
+    "Anonymous Authors" 로 교체하고, 자기 인용을 3인칭으로 변경해야 한다.
+  rebuttal_note: |
+    ICML 은 심사자 반론에 대해 제한된 페이지 분량의 반론서를 제출할 수 있다.
+    핵심 실험 결과와 수학적 증명을 간결하게 요약하여 대응한다.
+  editor_note: |
+    ICML 독자는 ML 이론/알고리즘 연구자 대상. n=6 정리의 학습 이론
+    적용에 초점을 맞추며, 8페이지 제한 내에서 핵심만 전달한다.

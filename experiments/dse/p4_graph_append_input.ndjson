@@ -1,0 +1,179 @@
+{"type":"node","id":"n6arch/engine/arch_quantum.hexa","node_type":"hexa_file","path":"engine/arch_quantum.hexa","test_pass_count":10,"phase":"P4-3","lines":28,"class":"A","session":"2026-04-14","note":"EXACT 10/10 평균 1000"}
+{"type":"node","id":"n6arch/engine/arch_selforg.hexa","node_type":"hexa_file","path":"engine/arch_selforg.hexa","test_pass_count":50,"phase":"P4-3","lines":81,"class":"A","session":"2026-04-14","note":"SAMPLE 50 + END50"}
+{"type":"node","id":"n6arch/engine/arch_adaptive.hexa","node_type":"hexa_file","path":"engine/arch_adaptive.hexa","test_pass_count":20,"phase":"P4-3","lines":30,"class":"A","session":"2026-04-14","note":"EXACT 10/10 평균 983 승격 10/10"}
+{"type":"node","id":"n6arch/engine/arch_unified.hexa","node_type":"hexa_file","path":"engine/arch_unified.hexa","test_pass_count":1,"phase":"P4-3","lines":0,"class":"A","session":"2026-04-14","note":"rc=0 total 반환 (stdout 0 줄 의도)"}
+{"type":"node","id":"n6arch/bridge/ouroboros_5phase.hexa","node_type":"hexa_file","path":"bridge/ouroboros_5phase.hexa","test_pass_count":20,"phase":"P4-3","lines":55,"class":"A","session":"2026-04-14","note":"5 phase 승격 후보 15"}
+{"type":"node","id":"n6arch/bridge/ecosystem_9projects.hexa","node_type":"hexa_file","path":"bridge/ecosystem_9projects.hexa","test_pass_count":9,"phase":"P4-3","lines":15,"class":"A","session":"2026-04-14","note":"core 7 + auxiliary 2"}
+{"type":"node","id":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","node_type":"hexa_file","path":"domains/cognitive/hexa-speak/proto/rtl/top.hexa","test_pass_count":7,"phase":"P4-3","lines":9,"class":"B","session":"2026-04-14","note":"N6-SPEAK v2 4-tier 톱 래퍼 7/7"}
+{"type":"node","id":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","node_type":"hexa_file","path":"domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","test_pass_count":6,"phase":"P4-3","lines":8,"class":"B","session":"2026-04-14","note":"SoC 통합 6/6 floorplan 13794"}
+{"type":"node","id":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","node_type":"hexa_file","path":"domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","test_pass_count":12,"phase":"P4-3","lines":24,"class":"B","session":"2026-04-14","note":"DRC 6 + LVS 6 = 12/12 chksum 7482"}
+{"type":"node","id":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","node_type":"hexa_file","path":"domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","test_pass_count":15,"phase":"P4-3","lines":25,"class":"B","session":"2026-04-14","note":"tapeout GATE 15/15 sign-off 133616"}
+{"type":"node","id":"n6arch/experiments/chip-verify/verify_chip-3d.hexa","node_type":"hexa_file","path":"experiments/chip-verify/verify_chip-3d.hexa","test_pass_count":5,"phase":"P4-3","lines":9,"class":"B","session":"2026-04-14","note":"3D 적층 칩 n=6 정렬 5/5 EXACT"}
+{"type":"node","id":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","node_type":"hexa_file","path":"experiments/chip-verify/verify_anima_soc.hexa","test_pass_count":12,"phase":"P4-3","lines":20,"class":"B","session":"2026-04-14","note":"ANIMA-SOC+PureField+HEXA-TOPO 12/12 EXACT"}
+{"type":"node","id":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","node_type":"hexa_file","path":"experiments/chip-verify/boot_matrix_3x12.hexa","test_pass_count":34,"phase":"P4-3","lines":43,"class":"B","session":"2026-04-14","note":"boot matrix 34/36 94% avg_lat=2225ns"}
+{"type":"node","id":"n6_invariant/arch_quantum/EXACT_10","node_type":"invariant","check":"arch_quantum EXACT 10/10","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_quantum/avg_score_1000","node_type":"invariant","check":"arch_quantum 평균 1000","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_quantum/dim_48","node_type":"invariant","check":"arch_quantum dim=48=8*6","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_quantum/heads_12","node_type":"invariant","check":"arch_quantum heads=12=2*6","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_quantum/depth_2","node_type":"invariant","check":"arch_quantum depth=2","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_quantum/collapse_k0","node_type":"invariant","check":"arch_quantum 붕괴=k0","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_quantum/ossified","node_type":"invariant","check":"arch_quantum OSSIFIED 승격 empirical","category":"quantum"}
+{"type":"node","id":"n6_invariant/arch_selforg/sample_50","node_type":"invariant","check":"arch_selforg SAMPLE 50 완주","category":"selforg"}
+{"type":"node","id":"n6_invariant/arch_selforg/end50","node_type":"invariant","check":"arch_selforg END50 마커","category":"selforg"}
+{"type":"node","id":"n6_invariant/arch_selforg/alien_ge9","node_type":"invariant","check":"arch_selforg alien>=9","category":"selforg"}
+{"type":"node","id":"n6_invariant/arch_selforg/closure_ge9","node_type":"invariant","check":"arch_selforg closure>=9","category":"selforg"}
+{"type":"node","id":"n6_invariant/arch_selforg/parts_6","node_type":"invariant","check":"arch_selforg parts len=6","category":"selforg"}
+{"type":"node","id":"n6_invariant/arch_adaptive/EXACT_10","node_type":"invariant","check":"arch_adaptive EXACT 10/10","category":"adaptive"}
+{"type":"node","id":"n6_invariant/arch_adaptive/avg_983","node_type":"invariant","check":"arch_adaptive 평균 983","category":"adaptive"}
+{"type":"node","id":"n6_invariant/arch_adaptive/promotion_10","node_type":"invariant","check":"arch_adaptive 승격 훅 10/10","category":"adaptive"}
+{"type":"node","id":"n6_invariant/arch_adaptive/grade_10star","node_type":"invariant","check":"arch_adaptive v4 적응 10* 후보","category":"adaptive"}
+{"type":"node","id":"n6_invariant/arch_unified/rc_zero","node_type":"invariant","check":"arch_unified rc=0 total 반환","category":"unified"}
+{"type":"node","id":"n6_invariant/ouroboros/phase_5","node_type":"invariant","check":"ouroboros 5 phase 사이클 완주","category":"bridge"}
+{"type":"node","id":"n6_invariant/ouroboros/promotion_15","node_type":"invariant","check":"ouroboros 승격 후보 15","category":"bridge"}
+{"type":"node","id":"n6_invariant/ouroboros/domain_ai-efficiency","node_type":"invariant","check":"ouroboros 도메인 ai-efficiency","category":"bridge"}
+{"type":"node","id":"n6_invariant/ecosystem/core_7","node_type":"invariant","check":"ecosystem core 7 프로젝트","category":"ecosystem"}
+{"type":"node","id":"n6_invariant/ecosystem/auxiliary_2","node_type":"invariant","check":"ecosystem auxiliary 2 프로젝트","category":"ecosystem"}
+{"type":"node","id":"n6_invariant/ecosystem/total_9","node_type":"invariant","check":"ecosystem 총 9 프로젝트","category":"ecosystem"}
+{"type":"node","id":"n6_invariant/rtl_top/T1_sigma_phi_n_tau","node_type":"invariant","check":"rtl top T1 σ·φ=n·τ n=6","category":"rtl"}
+{"type":"node","id":"n6_invariant/rtl_top/T2_tier1_deterministic","node_type":"invariant","check":"rtl top T2 tier1 결정성","category":"rtl"}
+{"type":"node","id":"n6_invariant/rtl_top/T3_forward","node_type":"invariant","check":"rtl top T3 forward 48000->5149","category":"rtl"}
+{"type":"node","id":"n6_invariant/rtl_top/T4_sequence24","node_type":"invariant","check":"rtl top T4 sequence 24 total 96446","category":"rtl"}
+{"type":"node","id":"n6_invariant/rtl_top/T5_port_width","node_type":"invariant","check":"rtl top T5 포트폭 intent 384 audio 8","category":"rtl"}
+{"type":"node","id":"n6_invariant/rtl_top/T6_pipe_depth4","node_type":"invariant","check":"rtl top T6 파이프 depth=4=τ(6)","category":"rtl"}
+{"type":"node","id":"n6_invariant/rtl_top/T7_forward_deterministic","node_type":"invariant","check":"rtl top T7 forward 결정성","category":"rtl"}
+{"type":"node","id":"n6_invariant/soc_integration/S1_die_9216","node_type":"invariant","check":"soc_integration S1 die 96x96=9216","category":"rtl"}
+{"type":"node","id":"n6_invariant/soc_integration/S2_block_6048","node_type":"invariant","check":"soc_integration S2 블록면적 6048 65.6%","category":"rtl"}
+{"type":"node","id":"n6_invariant/soc_integration/S3_in_range","node_type":"invariant","check":"soc_integration S3 블록 die 범위","category":"rtl"}
+{"type":"node","id":"n6_invariant/soc_integration/S4_checksum_13794","node_type":"invariant","check":"soc_integration S4 floorplan chksum 13794","category":"rtl"}
+{"type":"node","id":"n6_invariant/soc_integration/S5_sigma_phi_unique","node_type":"invariant","check":"soc_integration S5 σ·φ=n·τ 유일성","category":"rtl"}
+{"type":"node","id":"n6_invariant/soc_integration/S6_bus_6","node_type":"invariant","check":"soc_integration S6 버스 6개 τ(6)=4+2","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/L1_metal_pitch","node_type":"invariant","check":"drc_lvs L1 메탈 피치","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/L2_via_rule","node_type":"invariant","check":"drc_lvs L2 via 규칙","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/L3_density","node_type":"invariant","check":"drc_lvs L3 밀도","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/L4_internal_bus_6","node_type":"invariant","check":"drc_lvs L4 내부 버스 6","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/L5_port_sum","node_type":"invariant","check":"drc_lvs L5 총 포트 합","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/L6_n6_5plus1","node_type":"invariant","check":"drc_lvs L6 n=6 5블록+1fusion","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/drc6_pass","node_type":"invariant","check":"drc_lvs DRC 6/6","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/lvs6_pass","node_type":"invariant","check":"drc_lvs LVS 6/6","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/checksum_7482","node_type":"invariant","check":"drc_lvs floorplan chksum 7482","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/tapeout_clean","node_type":"invariant","check":"drc_lvs ALL PASS tapeout clean","category":"rtl"}
+{"type":"node","id":"n6_invariant/drc_lvs/total_12","node_type":"invariant","check":"drc_lvs 12/12 검사","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/T13_DFM","node_type":"invariant","check":"tapeout_gate T13 DFM","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/T14_final_checksum","node_type":"invariant","check":"tapeout_gate T14 Final σ·φ=n·τ","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/T15_signoff_133616","node_type":"invariant","check":"tapeout_gate T15 sign-off 133616","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/total_15","node_type":"invariant","check":"tapeout_gate 15/15 GATE CLEAN","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/die_96x96","node_type":"invariant","check":"tapeout_gate die 96x96 μm²","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/blocks_5_plus_fusion","node_type":"invariant","check":"tapeout_gate 5블록+fusion=n=6","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/total_ports_3484","node_type":"invariant","check":"tapeout_gate total ports 3484","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/buses_6","node_type":"invariant","check":"tapeout_gate buses 6","category":"rtl"}
+{"type":"node","id":"n6_invariant/tapeout_gate/layers_m1_m4","node_type":"invariant","check":"tapeout_gate layers m1~m4","category":"rtl"}
+{"type":"node","id":"n6_invariant/chip_3d/metal_6","node_type":"invariant","check":"chip_3d 메탈 레이어 6 (n=6)","category":"chip-3d"}
+{"type":"node","id":"n6_invariant/chip_3d/SM_144","node_type":"invariant","check":"chip_3d SM 배열 144=σ²","category":"chip-3d"}
+{"type":"node","id":"n6_invariant/chip_3d/MAC_288","node_type":"invariant","check":"chip_3d MAC 어레이 288=σ·J2","category":"chip-3d"}
+{"type":"node","id":"n6_invariant/chip_3d/pipe_4","node_type":"invariant","check":"chip_3d 파이프 단 4=τ","category":"chip-3d"}
+{"type":"node","id":"n6_invariant/chip_3d/power_8","node_type":"invariant","check":"chip_3d 전원 도메인 8=σ-τ","category":"chip-3d"}
+{"type":"node","id":"n6_invariant/anima_soc/A1_unknown","node_type":"invariant","check":"anima_soc A1","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/A2_unknown","node_type":"invariant","check":"anima_soc A2","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/A3_unknown","node_type":"invariant","check":"anima_soc A3","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/A4_unknown","node_type":"invariant","check":"anima_soc A4","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/B1_unknown","node_type":"invariant","check":"anima_soc B1","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/B2_unknown","node_type":"invariant","check":"anima_soc B2","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/B3_unknown","node_type":"invariant","check":"anima_soc B3","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/B4_EU_1728","node_type":"invariant","check":"anima_soc B4 실행유닛 1728=σ³","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/C1_bott_8","node_type":"invariant","check":"anima_soc C1 Bott 주기 8=n+φ","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/C2_noc_144","node_type":"invariant","check":"anima_soc C2 NoC 노드 144=σ²","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/C3_torus_16","node_type":"invariant","check":"anima_soc C3 토러스 둘레 16=σ+τ","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/anima_soc/C4_cl8_256","node_type":"invariant","check":"anima_soc C4 Cl(8) 차원 256=(σ+τ)²","category":"anima-soc"}
+{"type":"node","id":"n6_invariant/boot_matrix/pcie_EXACT","node_type":"invariant","check":"boot_matrix HEXA-ASIC PCIe EXACT","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/usb_NEAR","node_type":"invariant","check":"boot_matrix HEXA-ASIC USB NEAR","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/nvme_NEAR","node_type":"invariant","check":"boot_matrix HEXA-ASIC NVMe NEAR","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/eth_NEAR","node_type":"invariant","check":"boot_matrix HEXA-ASIC Ethernet NEAR","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/dp_EXACT","node_type":"invariant","check":"boot_matrix HEXA-ASIC DisplayPort EXACT","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/hdmi_NEAR","node_type":"invariant","check":"boot_matrix HEXA-ASIC HDMI NEAR","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/total_34_36","node_type":"invariant","check":"boot_matrix 34/36 94%","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/avg_lat_2225","node_type":"invariant","check":"boot_matrix 평균 지연 2225 ns","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/avg_bw_55","node_type":"invariant","check":"boot_matrix 평균 대역 55 Gbps","category":"boot-matrix"}
+{"type":"node","id":"n6_invariant/boot_matrix/threshold_5_of_6","node_type":"invariant","check":"boot_matrix 임계 5/6","category":"boot-matrix"}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/EXACT_10","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/avg_score_1000","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/dim_48","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/heads_12","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/depth_2","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/collapse_k0","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_quantum.hexa","to":"n6_invariant/arch_quantum/ossified","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_selforg.hexa","to":"n6_invariant/arch_selforg/sample_50","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_selforg.hexa","to":"n6_invariant/arch_selforg/end50","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_selforg.hexa","to":"n6_invariant/arch_selforg/alien_ge9","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_selforg.hexa","to":"n6_invariant/arch_selforg/closure_ge9","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_selforg.hexa","to":"n6_invariant/arch_selforg/parts_6","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_adaptive.hexa","to":"n6_invariant/arch_adaptive/EXACT_10","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_adaptive.hexa","to":"n6_invariant/arch_adaptive/avg_983","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_adaptive.hexa","to":"n6_invariant/arch_adaptive/promotion_10","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_adaptive.hexa","to":"n6_invariant/arch_adaptive/grade_10star","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/engine/arch_unified.hexa","to":"n6_invariant/arch_unified/rc_zero","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/bridge/ouroboros_5phase.hexa","to":"n6_invariant/ouroboros/phase_5","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/bridge/ouroboros_5phase.hexa","to":"n6_invariant/ouroboros/promotion_15","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/bridge/ouroboros_5phase.hexa","to":"n6_invariant/ouroboros/domain_ai-efficiency","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/bridge/ecosystem_9projects.hexa","to":"n6_invariant/ecosystem/core_7","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/bridge/ecosystem_9projects.hexa","to":"n6_invariant/ecosystem/auxiliary_2","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/bridge/ecosystem_9projects.hexa","to":"n6_invariant/ecosystem/total_9","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T1_sigma_phi_n_tau","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T2_tier1_deterministic","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T3_forward","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T4_sequence24","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T5_port_width","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T6_pipe_depth4","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/top.hexa","to":"n6_invariant/rtl_top/T7_forward_deterministic","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","to":"n6_invariant/soc_integration/S1_die_9216","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","to":"n6_invariant/soc_integration/S2_block_6048","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","to":"n6_invariant/soc_integration/S3_in_range","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","to":"n6_invariant/soc_integration/S4_checksum_13794","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","to":"n6_invariant/soc_integration/S5_sigma_phi_unique","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_integration.hexa","to":"n6_invariant/soc_integration/S6_bus_6","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/L1_metal_pitch","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/L2_via_rule","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/L3_density","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/L4_internal_bus_6","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/L5_port_sum","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/L6_n6_5plus1","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/drc6_pass","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/lvs6_pass","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/checksum_7482","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/tapeout_clean","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/soc_drc_lvs.hexa","to":"n6_invariant/drc_lvs/total_12","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/T13_DFM","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/T14_final_checksum","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/T15_signoff_133616","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/total_15","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/die_96x96","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/blocks_5_plus_fusion","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/total_ports_3484","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/buses_6","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/domains/cognitive/hexa-speak/proto/rtl/tapeout_gate.hexa","to":"n6_invariant/tapeout_gate/layers_m1_m4","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_chip-3d.hexa","to":"n6_invariant/chip_3d/metal_6","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_chip-3d.hexa","to":"n6_invariant/chip_3d/SM_144","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_chip-3d.hexa","to":"n6_invariant/chip_3d/MAC_288","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_chip-3d.hexa","to":"n6_invariant/chip_3d/pipe_4","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_chip-3d.hexa","to":"n6_invariant/chip_3d/power_8","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/A1_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/A2_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/A3_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/A4_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/B1_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/B2_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/B3_unknown","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/B4_EU_1728","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/C1_bott_8","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/C2_noc_144","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/C3_torus_16","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/verify_anima_soc.hexa","to":"n6_invariant/anima_soc/C4_cl8_256","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/pcie_EXACT","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/usb_NEAR","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/nvme_NEAR","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/eth_NEAR","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/dp_EXACT","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/hdmi_NEAR","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/total_34_36","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/avg_lat_2225","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/avg_bw_55","edge_type":"validates","weight":1.0}
+{"type":"edge","from":"n6arch/experiments/chip-verify/boot_matrix_3x12.hexa","to":"n6_invariant/boot_matrix/threshold_5_of_6","edge_type":"validates","weight":1.0}

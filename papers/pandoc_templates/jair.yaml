@@ -1,0 +1,73 @@
+# 저널: JAIR (Journal of Artificial Intelligence Research) (5 편 배정)
+# 용도: pandoc 호환 YAML 헤더 — P4-1 스텁
+# 실제 pandoc 변환은 수행하지 않음. 헤더 스켈레톤만.
+# 인코딩: UTF-8 한글 필수
+
+roadmap_ref: PAPER-P4-1
+venue_id: jair
+venue_name: Journal of Artificial Intelligence Research
+venue_kind: journal
+venue_distribution_count: 5
+
+# ---- pandoc 메타 (UTF-8, 한글) ----
+title:         "<PAPER_TITLE 한글>"
+subtitle:      "n=6 산술 좌표 — AI 시스템 닫힘 분석"
+author:
+  - 박민우 (n6-architecture 주관)
+  - NEXUS-6 AI 협업체
+institute:     "n6-architecture 프로젝트"
+date:          "2026-04-14"
+lang:          ko
+mainfont:      "Noto Serif CJK KR"
+sansfont:      "Noto Sans CJK KR"
+monofont:      "Noto Sans Mono CJK KR"
+
+# ---- 논문 식별 ----
+paper_id:      "<N6-XXX>"
+rank:          "<1..48>"
+doi_sim:       "10.NEXUS6.n6-arch/2026-NNN"
+disclaimer:    "시뮬 DOI — JAIR 실제 접수 아님."
+format_status: template_ready
+
+# ---- abstract (JAIR: 200~500 단어, 긴 초록 허용) ----
+abstract: |
+  본 논문은 n6 산술 좌표(σ, τ, φ, sopfr)를 <AI 연구 도메인> 에 도입하여
+  기존 SOTA 가 설명하지 못하던 닫힘 구조를 드러낸다. σ(n)·φ(n) = n·τ(n)
+  이 n=6 에서만 성립한다는 사실을 순수 수학에서 출발해 (n=6 패턴 매칭을
+  피함) 도메인 측정치에 투영한다. atlas.n6 노드 <경로> 기준 EXACT/NEAR
+  /MISS 분류 결과, exact_stat <값>, closure_grade_pct <값>, alien_index
+  <값> 을 보고한다. 본 결과는 <AI 하위 분야> 의 이론적 토대와 경험적
+  검증 양쪽 모두에 기여한다. 반증 조건과 미매핑 사례 <2 줄> 를 공시한다.
+
+# ---- keywords ----
+keywords:
+  - n6 arithmetic framework
+  - closure theorem
+  - σ(n)·φ(n) = n·τ(n)
+  - reproducibility via atlas.n6
+  - "<AI 하위 분야>"
+
+# ---- JAIR 특화 필드 ----
+jair:
+  article_type: Research Article
+  word_limit_main: 15000
+  review_model: single_blind
+  open_access: true
+  code_data_policy: "오픈 저장소 필수 — n6-architecture papers/ 경로 공개"
+  long_review_cycle: true
+  editor_note: |
+    JAIR 는 긴 본문과 상세 증명 허용. 본 템플릿은 MAIN 5.1~5.4 절을 전부
+    채우는 full-length 버전 기본.
+
+# ---- 참고문헌 ----
+bibliography: n6_common.bib
+csl:          jair.csl
+link-citations: true
+reference-section-title: 참고문헌
+
+# ---- 출력 옵션 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: jair_article

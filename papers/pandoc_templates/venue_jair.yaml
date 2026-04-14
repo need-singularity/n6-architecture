@@ -1,0 +1,68 @@
+# ============================================================
+# JAIR 특화 pandoc 템플릿 (5편 배정)
+# ============================================================
+# 로드맵: PAPER-P4-1
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_jair.yaml
+# 인코딩: UTF-8 한글 필수
+
+venue:
+  id: jair
+  name: "Journal of Artificial Intelligence Research"
+  kind: journal
+  publisher: "AAAI Press"
+  distribution_count: 5
+  issn: "1076-9757"
+
+# ---- 포맷 규격 ----
+format_spec:
+  article_type: "Research Article"
+  columns: 1                       # JAIR 단컬럼 레이아웃
+  word_limit_main: 15000           # 본문 최대 15000 단어 (긴 논문 허용)
+  word_limit_abstract: 500         # 초록 200~500 단어 (긴 초록 허용)
+  figure_limit: null               # 도표 수 제한 없음
+  table_limit: null                # 테이블 수 제한 없음
+  reference_limit: null            # 참고문헌 수 제한 없음
+  supplementary_allowed: true      # 부록 허용
+  page_limit: null                 # 페이지 제한 없음 (단어 제한으로 관리)
+
+# ---- 심사 및 접근 ----
+review:
+  model: "single_blind"            # 단일 맹검 심사
+  open_access: true                # 완전 오픈 액세스
+  apc_required: false              # 논문 처리 비용 없음
+  long_review_cycle: true          # 긴 심사 주기 (3~6개월)
+  code_data_policy: |
+    오픈 저장소 필수 — n6-architecture papers/ 경로 공개
+
+# ---- 참조 스타일 ----
+csl: "jair.csl"                    # JAIR 참조 스타일
+reference_style: "author-year"     # (Author, Year) 형식
+reference_section_title: "참고문헌"
+
+# ---- LaTeX/출력 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: jair_article
+
+# ---- JAIR 전용 섹션 ----
+jair:
+  sections_required:
+    - "Introduction"
+    - "Background and Related Work"
+    - "Formal Framework"
+    - "Experimental Setup"
+    - "Results and Analysis"
+    - "Discussion"
+    - "Conclusion"
+  long_form_note: |
+    JAIR 는 긴 본문과 상세 증명 허용. 본 템플릿은 MAIN 5.1~5.4 절을
+    전부 채우는 full-length 버전 기본. 수학적 증명 전개를 본문에
+    직접 포함해도 무방하다.
+  reproducibility_note: |
+    JAIR 는 재현성을 강조. 코드와 데이터 공개를 권장하며,
+    verify_<domain>_n6.hexa 경로를 본문에 명시한다.
+  editor_note: |
+    JAIR 독자는 AI 연구자 전반. n=6 정리의 AI 시스템 분석 적용을
+    이론적 기여와 경험적 검증 양쪽 모두에서 서술한다.

@@ -1,0 +1,68 @@
+# ============================================================
+# IEEE Transactions on VLSI Systems 특화 pandoc 템플릿 (6편 배정)
+# ============================================================
+# 로드맵: PAPER-P4-1
+# 사용법: pandoc --metadata-file=_pandoc_header.yaml --metadata-file=venue_ieee_tvlsi.yaml
+# 인코딩: UTF-8 한글 필수
+
+venue:
+  id: ieee_tvlsi
+  name: "IEEE Transactions on Very Large Scale Integration (VLSI) Systems"
+  kind: journal
+  publisher: "IEEE"
+  distribution_count: 6
+  issn: "1063-8210"
+
+# ---- 포맷 규격 ----
+format_spec:
+  article_type: "Regular Paper"
+  columns: 2                       # 2컬럼 IEEE 표준 레이아웃
+  word_limit_main: null            # 단어 제한 대신 페이지 제한
+  page_limit: 14                   # 최대 14페이지 (2컬럼 기준)
+  word_limit_abstract: 250         # 초록 최대 250 단어
+  figure_limit: 20                 # 도표 넉넉하게 허용
+  table_limit: 15                  # 테이블 허용
+  reference_limit: null            # 참고문헌 수 제한 없음
+  supplementary_allowed: false     # 보충 자료 별도 제출 없음 (본문 포함)
+
+# ---- 심사 및 접근 ----
+review:
+  model: "double_blind"            # 이중 맹검 심사
+  open_access: false               # IEEE 구독 모델
+  ieee_copyright: true             # IEEE 저작권 양도 필수
+  ieee_ethics_compliance: true     # IEEE 윤리 규정 준수 선언 필수
+  data_availability_required: false
+
+# ---- 참조 스타일 ----
+csl: "ieee.csl"                    # IEEE 참조 스타일
+reference_style: "numbered"        # [1], [2], ... 번호식 (IEEE 표준)
+reference_section_title: "References"
+
+# ---- LaTeX/출력 설정 ----
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+    template: IEEEtran
+    classoption: "journal,compsoc,twoside"
+
+# ---- IEEE TVLSI 전용 섹션 ----
+ieee_tvlsi:
+  sections_required:
+    - "Introduction"
+    - "Background"
+    - "Proposed Method / Architecture"
+    - "Experimental Results"
+    - "Comparison"
+    - "Conclusion"
+  ascii_chart_note: |
+    IEEE TVLSI 는 ASCII 차트보다 정식 테이블/도표 선호. 제출 전
+    COMPARE 섹션 ASCII 를 IEEE 스타일 tabular 로 전환해야 한다.
+  chip_metrics_required:
+    - "면적 (um^2 / mm^2)"
+    - "전력 (mW)"
+    - "지연 (ns / MHz)"
+    - "PPA (Power-Performance-Area)"
+  editor_note: |
+    IEEE TVLSI 독자는 칩 설계 전문가 대상. n=6 정리의 DSE(설계 공간 탐색)
+    적용에 초점을 맞추며, 순수 수학 증명은 최소화한다.
