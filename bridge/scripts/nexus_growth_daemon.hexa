@@ -1,11 +1,13 @@
-// nexus_growth_daemon.hexa — NEXUS-6 성장 데몬 (minimal 실구현)
-// 원본: nexus/scripts/nexus_growth_daemon.sh (792줄, git 2d3b0bd9 보존)
-// 포팅 전략: 미니멀 핵심만 — measure/pick-weakest/action 은 간소화
-//            (python3/cargo/Claude CLI 의존 제거, 로컬 daemon 행동 집중)
-// 사이클: measure → weakest dimension pick → dimension action stub → log
-// 안전: singleton PID lock / graceful shutdown (shutdown file 체크) / --max-cycles
-// CLI: --interval MIN / --max-cycles N / --dimension DIM / --dry-run / --help
-// 사용: hexa shared/bin/hexa run bridge/scripts/nexus_growth_daemon.hexa [flags]
+// nexus_growth_daemon.hexa — NEXUS-6 성장 데몬 (확장판 — 7 features)
+// 원본: nexus/scripts/nexus_growth_daemon.sh (734줄, git df05ea38^ 보존)
+// 포팅 전략: 7 features (resource_grade/interval/gi/cargo/commit/revert/dashboard) full port
+//            (python3/Claude CLI 의존 제거, hexa-native 로직)
+// 사이클: shutdown_check → measure → pick_weakest → gi_consult → action
+//        → cargo_validate → revert_or_commit → notify → dashboard → log
+// 안전: singleton PID lock / graceful shutdown / consecutive failure brake
+// CLI: --interval MIN / --max-cycles N / --dimension DIM / --dry-run
+//      --skip-commit / --auto-commit / --auto-push (push default OFF)
+// 사용: hexa run bridge/scripts/nexus_growth_daemon.hexa [flags]
 
 // ─── 유틸 ──────────────────────────────────────────────────────────
 // hexa 인터프리터 quirk: exec("bash", ["-c", cmd]) 에서 "$$" 등 쉘 확장 무시됨.
@@ -30,6 +32,12 @@ fn _str(x) -> string {
     return ""
 }
 
+fn _to_int0(s: string) -> i64 {
+    let mut v: i64 = 0
+    try { v = to_int(s) } catch e { v = 0 }
+    return v
+}
+
 fn now_utc() -> string {
     return to_string(exec("date -u +%Y-%m-%dT%H:%M:%SZ")).trim()
 }
@@ -40,9 +48,7 @@ fn now_hms() -> string {
 
 fn now_epoch() -> i64 {
     let s = to_string(exec("date +%s")).trim()
-    let mut v: i64 = 0
-    try { v = to_int(s) } catch e { v = 0 }
-    return v
+    return _to_int0(s)
 }
 
 fn file_exists_simple(path) -> bool {
@@ -64,7 +70,6 @@ fn pid_alive(pid: string) -> bool {
 fn getpid() -> string {
     // sh -c 'echo $PPID' — exec()가 spawn한 sh의 부모 = daemon 프로세스 PID
     // (이전 버그: exec("echo $$")는 subshell PID 반환 → 즉시 죽어 stale pid file 원인)
-    // Mac sh/bash 호환. launchctl 환경에서도 정확한 daemon PID 보장.
     let p = to_string(exec("sh -c 'echo $PPID'")).trim()
     return p
 }
@@ -107,12 +112,32 @@ if len(NEXUS_ROOT) == 0 { NEXUS_ROOT = HOME + "/Dev/nexus" }
 let ATLAS_N6 = NEXUS_ROOT + "/shared/n6/atlas.n6"
 let N6_ARCH = HOME + "/Dev/n6-architecture"
 let SCRIPT_DIR = N6_ARCH + "/bridge/scripts"
+let CARGO_BIN = HOME + "/.cargo/bin/cargo"
 
 // ─── 15 차원 ─────────────────────────────────────────────────────
 let DIMENSIONS = [
     "performance", "architecture", "lenses", "modules", "tests",
     "hypotheses", "dse", "experiments", "calculators", "cross_resonance",
     "knowledge_graph", "red_team", "atlas", "documentation", "integration"
+]
+
+// 차원별 가중치 (×100, integer 우회) — 원본 weights와 동일 비율
+let WEIGHTS_X100 = [
+    8,   // performance     0.08
+    10,  // architecture    0.10
+    10,  // lenses          0.10
+    4,   // modules         0.04
+    12,  // tests           0.12
+    8,   // hypotheses      0.08
+    6,   // dse             0.06
+    5,   // experiments     0.05
+    4,   // calculators     0.04
+    5,   // cross_resonance 0.05
+    6,   // knowledge_graph 0.06
+    6,   // red_team        0.06
+    5,   // atlas           0.05
+    3,   // documentation   0.03
+    8    // integration     0.08
 ]
 
 // ─── CLI 파싱 ─────────────────────────────────────────────────────
@@ -123,18 +148,20 @@ let mut MAX_CYCLES: i64 = 6
 let mut FORCE_DIM = ""
 let mut DRY_RUN = false
 let mut SKIP_COMMIT = false
+let mut AUTO_COMMIT = false
+let mut AUTO_PUSH = false
 let mut SHOW_HELP = false
 let mut ai: i64 = 2          // skip [0]=hexa, [1]=script
 while ai < argc {
     let a = argv[ai]
     if a == "--interval" {
         if ai + 1 < argc {
-            try { INTERVAL_MIN = to_int(argv[ai + 1]) } catch e {}
+            INTERVAL_MIN = _to_int0(argv[ai + 1])
             ai = ai + 2
         } else { ai = ai + 1 }
     } else if a == "--max-cycles" {
         if ai + 1 < argc {
-            try { MAX_CYCLES = to_int(argv[ai + 1]) } catch e {}
+            MAX_CYCLES = _to_int0(argv[ai + 1])
             ai = ai + 2
         } else { ai = ai + 1 }
     } else if a == "--dimension" {
@@ -144,6 +171,12 @@ while ai < argc {
         ai = ai + 1
     } else if a == "--skip-commit" {
         SKIP_COMMIT = true
+        ai = ai + 1
+    } else if a == "--auto-commit" {
+        AUTO_COMMIT = true
+        ai = ai + 1
+    } else if a == "--auto-push" {
+        AUTO_PUSH = true
         ai = ai + 1
     } else if a == "-h" || a == "--help" {
         SHOW_HELP = true
@@ -155,22 +188,29 @@ while ai < argc {
 }
 
 if SHOW_HELP {
-    println("NEXUS-6 Universal Growth Daemon (hexa)")
+    println("NEXUS-6 Universal Growth Daemon (hexa, 7 features)")
     println("")
     println("Usage: hexa run nexus_growth_daemon.hexa [OPTIONS]")
     println("")
     println("Options:")
-    println("  --interval MIN     사이클 간 sleep (기본 5)")
+    println("  --interval MIN     사이클 간 sleep base (기본 5, grade로 곱셈)")
     println("  --max-cycles N     최대 사이클 (기본 6, n=6)")
     println("  --dimension DIM    강제 차원 (15 중 1)")
-    println("  --dry-run          측정만, 액션/커밋 없음")
-    println("  --skip-commit      액션만, 커밋 없음")
+    println("  --dry-run          측정만, 액션/커밋/검증 없음")
+    println("  --skip-commit      액션만, 커밋 없음 (default behavior)")
+    println("  --auto-commit      cycle별 git commit (push 안함, default OFF)")
+    println("  --auto-push        commit 후 git push (default OFF, 명시 필요)")
     println("  -h, --help         이 메시지")
     println("")
     println("Dimensions (15):")
     println("  performance architecture lenses modules tests")
     println("  hypotheses dse experiments calculators cross_resonance")
     println("  knowledge_graph red_team atlas documentation integration")
+    println("")
+    println("Resource adaptive interval:")
+    println("  FULL (CPU<50% MEM<70%):  interval × 1")
+    println("  MED  (CPU<80% MEM<85%):  interval × 2")
+    println("  LOW  (else):             interval × 4")
     println("")
     println("Files:")
     println("  PID:      " + PID_FILE)
@@ -216,23 +256,75 @@ let MY_PID = getpid()
 write_atomic(PID_FILE, MY_PID)
 
 // shutdown flag 는 시작 시 제거 (잔존 방지)
-try { exec("bash", ["-c", "rm -f '" + SHUTDOWN_FLAG + "'"]) } catch e {}
+try { exec("rm -f '" + SHUTDOWN_FLAG + "'") } catch e {}
+
+// ─── Feature 1: resource_grade() ──────────────────────────────────
+// Mac top + vm_stat 으로 시스템 부하 측정 → FULL/MED/LOW
+// CPU usage: "CPU usage: 33.69% user, 22.82% sys, 43.47% idle"
+// hexa float 우회: pct × 100 → integer 비교
+fn cpu_idle_pct_x100() -> i64 {
+    // top -l 1 -n 0 idle field 추출 (Mac 호환)
+    let raw = sh_trim("top -l 1 -n 0 2>/dev/null | awk '/CPU usage/ {gsub(\"%\",\"\"); for(i=1;i<=NF;i++) if($i==\"idle\") print $(i-1)}'")
+    if len(raw) == 0 { return 5000 }  // 알 수 없으면 50% idle 가정
+    // raw = "43.47" 형태 — "."전후 분리해서 정수×100
+    let dot = raw.index_of(".")
+    let mut whole_s = raw
+    let mut frac_s = "00"
+    if dot >= 0 {
+        whole_s = raw.substring(0, dot)
+        let rest = raw.substring(dot + 1, len(raw))
+        if len(rest) >= 2 { frac_s = rest.substring(0, 2) }
+        else if len(rest) == 1 { frac_s = rest + "0" }
+    }
+    let whole = _to_int0(whole_s)
+    let frac = _to_int0(frac_s)
+    return whole * 100 + frac
+}
+
+fn mem_used_pct_x100() -> i64 {
+    // vm_stat 으로 used / (used+free+inactive) × 100 추정
+    let free = _to_int0(sh_trim("vm_stat 2>/dev/null | awk '/Pages free:/ {gsub(\"\\\\.\",\"\"); print $3}'"))
+    let active = _to_int0(sh_trim("vm_stat 2>/dev/null | awk '/Pages active:/ {gsub(\"\\\\.\",\"\"); print $3}'"))
+    let inactive = _to_int0(sh_trim("vm_stat 2>/dev/null | awk '/Pages inactive:/ {gsub(\"\\\\.\",\"\"); print $3}'"))
+    let wired = _to_int0(sh_trim("vm_stat 2>/dev/null | awk '/Pages wired down:/ {gsub(\"\\\\.\",\"\"); print $4}'"))
+    let total = free + active + inactive + wired
+    if total <= 0 { return 5000 }
+    let used = active + wired
+    // pct × 100 = used * 10000 / total
+    return (used * 10000) / total
+}
+
+fn resource_grade() -> string {
+    // CPU idle 기준 사용률 = 100 - idle
+    let idle_x100 = cpu_idle_pct_x100()
+    let cpu_used_x100 = 10000 - idle_x100
+    let mem_used_x100 = mem_used_pct_x100()
+    // FULL: CPU<50 AND MEM<70 (×100: 5000, 7000)
+    // MED:  CPU<80 AND MEM<85 (×100: 8000, 8500)
+    // LOW:  else
+    if cpu_used_x100 < 5000 && mem_used_x100 < 7000 { return "FULL" }
+    if cpu_used_x100 < 8000 && mem_used_x100 < 8500 { return "MED" }
+    return "LOW"
+}
+
+// ─── Feature 2: interval_multiplier ───────────────────────────────
+fn interval_multiplier(grade: string) -> i64 {
+    if grade == "FULL" { return 1 }
+    if grade == "MED" { return 2 }
+    return 4   // LOW or unknown
+}
 
 // ─── 측정 (미니멀) ──────────────────────────────────────────────────
 fn count_file_lines(path) -> i64 {
     if !file_exists_simple(path) { return 0 }
     let s = sh_trim("wc -l < '" + path + "' 2>/dev/null | tr -d ' '")
-    let mut v: i64 = 0
-    try { v = to_int(s) } catch e { v = 0 }
-    return v
+    return _to_int0(s)
 }
 
 fn count_files(pattern, root) -> i64 {
     if !dir_exists_simple(root) { return 0 }
     let s = sh_trim("find '" + root + "' -name '" + pattern + "' -type f 2>/dev/null | wc -l | tr -d ' '")
-    let mut v: i64 = 0
-    try { v = to_int(s) } catch e { v = 0 }
-    return v
+    return _to_int0(s)
 }
 
 fn measure_simple() -> [i64] {
@@ -264,38 +356,152 @@ fn measure_simple() -> [i64] {
     return m
 }
 
-// ─── 최약 차원 픽 ──────────────────────────────────────────────────
-// 타겟값 대비 gap 비율 가장 큰 차원 선택
-fn pick_weakest(metrics: [i64], cycle: i64) -> string {
+// ─── 최약 차원 픽 (가중치 적용) ──────────────────────────────────
+// 타겟값 대비 gap 비율 × 가중치 = score, 최대 score 차원 선택
+fn pick_weakest_with_skip(metrics: [i64], cycle: i64, skip_csv: string) -> string {
     // 타겟 (단순화, 원본 대비 축소)
     let targets = [
         10000, 100, 200, 50, 1000,
         150, 322, 50, 50, 100,
         500, 100, 80000, 10, 500
     ]
-    let mut best_idx: i64 = 0
-    let mut best_gap: f64 = -1.0
+    // skip_csv 형식: "dim1,dim2,dim3"
+    let skip_padded = "," + skip_csv + ","
+    let mut best_idx: i64 = -1
+    let mut best_score: i64 = -1
     let mut i: i64 = 0
     while i < 15 {
-        let t = targets[i]
-        let c = metrics[i]
-        let mut gap: f64 = 0.0
-        if t > 0 {
-            let ratio = (c as f64) / (t as f64)
-            if ratio < 1.0 { gap = 1.0 - ratio } else { gap = 0.0 }
-        }
-        if gap > best_gap {
-            best_gap = gap
-            best_idx = i
+        let dim_name = DIMENSIONS[i]
+        let lookup = "," + dim_name + ","
+        let is_skipped = skip_padded.index_of(lookup) >= 0
+        if !is_skipped {
+            let t = targets[i]
+            let c = metrics[i]
+            // gap_x100 = max(0, 100 - c*100/t)
+            let mut gap_x100: i64 = 0
+            if t > 0 {
+                let pct_x100 = (c * 10000) / t   // c/t * 10000 (×100 percent)
+                if pct_x100 < 10000 {
+                    gap_x100 = 10000 - pct_x100
+                }
+            }
+            let score = gap_x100 * WEIGHTS_X100[i]   // gap×100 × weight×100 = ×10000
+            if score > best_score {
+                best_score = score
+                best_idx = i
+            }
         }
         i = i + 1
     }
-    // 모두 만점이면 cycle 기반 rotation
-    if best_gap <= 0.0 {
+    // 모두 만점 또는 모두 skipped 인 경우 cycle 기반 rotation
+    if best_idx < 0 || best_score <= 0 {
         let ri = cycle % 15
         return DIMENSIONS[ri]
     }
     return DIMENSIONS[best_idx]
+}
+
+fn pick_weakest(metrics: [i64], cycle: i64) -> string {
+    return pick_weakest_with_skip(metrics, cycle, "")
+}
+
+// ─── Feature 3: growth_intelligence wire-up ──────────────────────
+// growth_intelligence.hexa 호출 → JSON {recommended_dimension, skip_list[], confidence}
+// STUB 반환 시 비-JSON ("STUB:..."로 시작) → 무시
+// 반환: {used: bool, recommend: string, skip_csv: string, confidence_x100: i64}
+fn gi_consult() -> [string] {
+    // [used, recommend, skip_csv, conf_x100_str]
+    let mut result: [string] = ["false", "", "", "0"]
+    let gi_path = SCRIPT_DIR + "/growth_intelligence.hexa"
+    if !file_exists_simple(gi_path) { return result }
+    // perl_timeout 으로 무한루프 차단 (10초)
+    let timeout_sh = NEXUS_ROOT + "/shared/harness/perl_timeout.sh"
+    let mut cmd = ""
+    if file_exists_simple(timeout_sh) {
+        cmd = "bash " + shq(timeout_sh) + " 10 hexa run " + shq(gi_path) + " 2>/dev/null"
+    } else {
+        cmd = "hexa run " + shq(gi_path) + " 2>/dev/null"
+    }
+    let out = sh_trim(cmd)
+    if len(out) == 0 { return result }
+    // STUB 출력 무시 (JSON 아니면)
+    if out.index_of("STUB") >= 0 { return result }
+    if out.index_of("{") < 0 { return result }
+    // 미니멀 JSON 파싱 (정식 파서 회피, key 마커 기반)
+    let mut recommend = ""
+    let r_idx = out.index_of("\"recommended_dimension\"")
+    if r_idx >= 0 {
+        let after = out.substring(r_idx, len(out))
+        let q1 = after.index_of(":")
+        if q1 >= 0 {
+            let after2 = after.substring(q1 + 1, len(after))
+            let q_open = after2.index_of("\"")
+            if q_open >= 0 {
+                let after3 = after2.substring(q_open + 1, len(after2))
+                let q_close = after3.index_of("\"")
+                if q_close > 0 {
+                    recommend = after3.substring(0, q_close)
+                }
+            }
+        }
+    }
+    // confidence 추출 (숫자 — 0.0 ~ 1.0)
+    let mut conf_x100: i64 = 0
+    let c_idx = out.index_of("\"confidence\"")
+    if c_idx >= 0 {
+        let after = out.substring(c_idx, len(out))
+        let colon = after.index_of(":")
+        if colon >= 0 {
+            let after2 = after.substring(colon + 1, len(after))
+            // 다음 "," 또는 "}" 까지
+            let mut end_idx = after2.index_of(",")
+            let close_idx = after2.index_of("}")
+            if close_idx >= 0 && (end_idx < 0 || close_idx < end_idx) { end_idx = close_idx }
+            if end_idx > 0 {
+                let num_s = after2.substring(0, end_idx).trim()
+                let dot = num_s.index_of(".")
+                if dot >= 0 {
+                    let whole = _to_int0(num_s.substring(0, dot))
+                    let rest = num_s.substring(dot + 1, len(num_s))
+                    let mut frac_s = "00"
+                    if len(rest) >= 2 { frac_s = rest.substring(0, 2) }
+                    else if len(rest) == 1 { frac_s = rest + "0" }
+                    conf_x100 = whole * 100 + _to_int0(frac_s)
+                } else {
+                    conf_x100 = _to_int0(num_s) * 100
+                }
+            }
+        }
+    }
+    // skip_list 추출 — JSON 배열 안의 string들 (단순 추출)
+    let mut skip_csv = ""
+    let s_idx = out.index_of("\"skip_list\"")
+    if s_idx >= 0 {
+        let after = out.substring(s_idx, len(out))
+        let brack = after.index_of("[")
+        let close = after.index_of("]")
+        if brack >= 0 && close > brack {
+            let inside = after.substring(brack + 1, close)
+            // 따옴표 제거 + 콤마 정리
+            let mut buf = ""
+            let n = len(inside)
+            let mut i: i64 = 0
+            let mut in_str = false
+            while i < n {
+                let ch = inside.substring(i, i + 1)
+                if ch == "\"" { in_str = !in_str }
+                else if in_str { buf = buf + ch }
+                else if ch == "," && len(buf) > 0 && !buf.ends_with(",") { buf = buf + "," }
+                i = i + 1
+            }
+            skip_csv = buf
+        }
+    }
+    result[0] = "true"
+    result[1] = recommend
+    result[2] = skip_csv
+    result[3] = to_string(conf_x100)
+    return result
 }
 
 // ─── 차원별 액션 (미니멀 — 외부 스크립트 위임 or 로깅) ─────────────
@@ -332,8 +538,200 @@ fn execute_growth(dim: string) -> bool {
     return true
 }
 
+// ─── Feature 4: cargo validate gate ──────────────────────────────
+// Cargo.toml 부재 시: 스킵 + true 반환 (n6-arch는 현재 cargo 프로젝트 아님)
+// 존재 시: cargo check + cargo test 실행, 실패 시 false
+fn cargo_root() -> string {
+    // 후보 경로 (n6-arch 진화 대비)
+    let candidates = [
+        N6_ARCH + "/tools/nexus/Cargo.toml",
+        N6_ARCH + "/Cargo.toml"
+    ]
+    let mut i: i64 = 0
+    while i < len(candidates) {
+        if file_exists_simple(candidates[i]) {
+            // 디렉토리만 반환
+            let p = candidates[i]
+            let dot_idx = p.index_of("/Cargo.toml")
+            if dot_idx > 0 { return p.substring(0, dot_idx) }
+        }
+        i = i + 1
+    }
+    return ""
+}
+
+fn cargo_validate() -> bool {
+    let root = cargo_root()
+    if len(root) == 0 {
+        log_info("  Cargo: 프로젝트 부재 — validate 스킵 (true)")
+        return true
+    }
+    if !file_exists_simple(CARGO_BIN) {
+        log_warn("  Cargo: " + CARGO_BIN + " 없음 — validate 스킵 (true)")
+        return true
+    }
+    // perl_timeout 으로 60s 강제 (H-NOZOMBIE)
+    let timeout_sh = NEXUS_ROOT + "/shared/harness/perl_timeout.sh"
+    let mut t_prefix = ""
+    if file_exists_simple(timeout_sh) {
+        t_prefix = "bash " + shq(timeout_sh) + " 60 "
+    }
+    let check_cmd = "cd " + shq(root) + " && " + t_prefix + shq(CARGO_BIN) + " check 2>&1 | tail -3"
+    let check_out = sh(check_cmd)
+    if check_out.index_of("error") >= 0 {
+        log_error("  Cargo check 실패: " + check_out.trim())
+        return false
+    }
+    log_info("  Cargo check ok")
+    let test_cmd = "cd " + shq(root) + " && " + t_prefix + shq(CARGO_BIN) + " test 2>&1 | tail -5"
+    let test_out = sh(test_cmd)
+    if test_out.index_of("FAILED") >= 0 || test_out.index_of("test result: FAILED") >= 0 {
+        log_error("  Cargo test 실패: " + test_out.trim())
+        return false
+    }
+    log_info("  Cargo test ok")
+    return true
+}
+
+// ─── Feature 5: per-cycle git commit ──────────────────────────────
+// AUTO_COMMIT=true 일 때만 동작. 파일별 staged 후 commit.
+// AUTO_PUSH=true 추가시에만 push (default OFF — f-no-external-send-without-request 준수)
+fn try_commit(dim: string, cycle: i64) -> bool {
+    if !AUTO_COMMIT { return false }
+    if SKIP_COMMIT {
+        log_info("  Commit: --skip-commit 우선, 스킵")
+        return false
+    }
+    let n6_dir = N6_ARCH
+    if !dir_exists_simple(n6_dir + "/.git") {
+        log_warn("  Commit: " + n6_dir + "/.git 부재, 스킵")
+        return false
+    }
+    // 변경 파일 확인 (n6-arch 한정)
+    let st = sh_trim("cd " + shq(n6_dir) + " && git status --porcelain 2>/dev/null | head -20")
+    if len(st) == 0 {
+        log_info("  Commit: 변경 없음")
+        return false
+    }
+    // 차원별 안전 경로만 add (multisession safety — H-MULTISESSION)
+    // 실제 변경이 cargo/소스/atlas 영역으로 한정될 때만 commit
+    let safe_paths = "tools/nexus/src/ docs/atlas-constants.md docs/breakthrough-theorems.md bridge/scripts/"
+    let commit_msg = "growth(daemon): " + dim + " — cycle " + to_string(cycle)
+    let cmd = "cd " + shq(n6_dir) + " && git add " + safe_paths + " 2>/dev/null && git commit -m " + shq(commit_msg) + " -- " + safe_paths + " 2>&1 | tail -3"
+    let out = sh(cmd)
+    if out.index_of("nothing to commit") >= 0 || out.index_of("no changes added") >= 0 {
+        log_info("  Commit: 안전경로 변경 없음")
+        return false
+    }
+    if out.index_of("master") >= 0 || out.index_of("main") >= 0 {
+        log_info("  Commit: ok — " + commit_msg)
+        if AUTO_PUSH {
+            log_warn("  Push: --auto-push 활성 — origin push 시도")
+            let push_out = sh("cd " + shq(n6_dir) + " && git push origin main 2>&1 | tail -3")
+            if push_out.index_of("rejected") >= 0 || push_out.index_of("error") >= 0 {
+                log_warn("  Push 실패: " + push_out.trim())
+            } else {
+                log_info("  Push ok")
+            }
+        }
+        return true
+    }
+    log_warn("  Commit 결과 불명: " + out.trim())
+    return false
+}
+
+// ─── Feature 6: revert + troubleshoot + notify ───────────────────
+fn revert_changes() {
+    let n6_dir = N6_ARCH
+    if !dir_exists_simple(n6_dir + "/.git") { return }
+    log_warn("  Revert: 변경 되돌리기 (HEAD)")
+    // 안전: tools/nexus/src/ 영역만 revert (다른 작업 영향 최소화)
+    try { exec("cd " + shq(n6_dir) + " && git checkout -- tools/nexus/src/ 2>/dev/null") } catch e {}
+}
+
+fn troubleshoot_record(success: bool, dim: string, cycle: i64) {
+    let helper = SCRIPT_DIR + "/troubleshoot_update.hexa"
+    if !file_exists_simple(helper) { return }
+    // STUB여도 호출 (logs invocation), 실제 효과 없어도 OK
+    let flag = if success { "--record-success" } else { "--record-failure" }
+    let detail = "Cycle " + to_string(cycle) + ": " + dim
+    try {
+        exec("hexa run " + shq(helper) + " " + flag + " " + shq(dim) + " " + shq(detail) + " >/dev/null 2>&1 &")
+    } catch e {}
+}
+
+fn notify(level: string, msg: string) {
+    let helper = SCRIPT_DIR + "/growth_notify.hexa"
+    if !file_exists_simple(helper) { return }
+    try {
+        exec("hexa run " + shq(helper) + " " + shq(msg) + " --level " + shq(level) + " >/dev/null 2>&1 &")
+    } catch e {}
+}
+
+// ─── Feature 7: dashboard expansion ──────────────────────────────
+fn print_dashboard(metrics: [i64], cycle: i64, dim: string, grade: string, interval: i64, gi_used: bool, gi_recommend: string) {
+    let targets = [
+        10000, 100, 200, 50, 1000,
+        150, 322, 50, 50, 100,
+        500, 100, 80000, 10, 500
+    ]
+    println("")
+    println("  +----------------------------------------------------------+")
+    println("  | NEXUS-6 Growth Dashboard — Cycle " + to_string(cycle) + "                       |")
+    println("  +----------------------------------------------------------+")
+    println("  | Resource: " + grade + "   Interval: " + to_string(interval) + "m   Focus: " + dim)
+    if gi_used {
+        println("  | GI: recommend=" + gi_recommend)
+    } else {
+        println("  | GI: (skipped — STUB or unavailable)")
+    }
+    println("  +-----------------+----------+----------+-------------------+")
+    println("  | Dimension       | Current  | Target   | Progress          |")
+    println("  +-----------------+----------+----------+-------------------+")
+    let mut i: i64 = 0
+    let mut total_pct_x100: i64 = 0
+    let mut critical: i64 = 0
+    while i < 15 {
+        let cur = metrics[i]
+        let tgt = targets[i]
+        let mut pct_x100: i64 = 0
+        if tgt > 0 {
+            pct_x100 = (cur * 10000) / tgt
+            if pct_x100 > 10000 { pct_x100 = 10000 }
+        }
+        total_pct_x100 = total_pct_x100 + pct_x100
+        if pct_x100 < 2500 { critical = critical + 1 }
+        let pct_int = pct_x100 / 100
+        let filled = pct_int * 12 / 100
+        let mut bar = ""
+        let mut k: i64 = 0
+        while k < filled { bar = bar + "#"; k = k + 1 }
+        while k < 12 { bar = bar + "."; k = k + 1 }
+        let marker = if DIMENSIONS[i] == dim { " <<" } else { "   " }
+        // 컬럼 정렬 (간소화 — name 16, cur/tgt 8)
+        let name = DIMENSIONS[i]
+        let mut name_pad = name
+        while len(name_pad) < 15 { name_pad = name_pad + " " }
+        let cur_s = to_string(cur)
+        let mut cur_pad = cur_s
+        while len(cur_pad) < 8 { cur_pad = " " + cur_pad }
+        let tgt_s = to_string(tgt)
+        let mut tgt_pad = tgt_s
+        while len(tgt_pad) < 8 { tgt_pad = " " + tgt_pad }
+        let mut pct_pad = to_string(pct_int)
+        while len(pct_pad) < 3 { pct_pad = " " + pct_pad }
+        println("  | " + name_pad + " | " + cur_pad + " | " + tgt_pad + " | " + bar + " " + pct_pad + "% |" + marker)
+        i = i + 1
+    }
+    println("  +-----------------+----------+----------+-------------------+")
+    let overall_pct = total_pct_x100 / 1500   // (sum/15)/100 = sum/1500
+    println("  | Overall: " + to_string(overall_pct) + "%   Critical: " + to_string(critical) + "   Focus: " + dim)
+    println("  +----------------------------------------------------------+")
+    println("")
+}
+
 // ─── 사이클 로그 ───────────────────────────────────────────────────
-fn append_growth_log(cycle: i64, dim: string, action: string, success: bool, metrics: [i64]) {
+fn append_growth_log(cycle: i64, dim: string, action: string, success: bool, metrics: [i64], grade: string, interval: i64) {
     let ok = if success { "true" } else { "false" }
     // 15 차원 값 JSON 조립
     let mut metrics_json = ""
@@ -345,7 +743,9 @@ fn append_growth_log(cycle: i64, dim: string, action: string, success: bool, met
     }
     let line = "{\"timestamp\":\"" + now_utc() + "\",\"cycle\":" + to_string(cycle) +
                ",\"dimension\":\"" + dim + "\",\"action\":\"" + action + "\"" +
-               ",\"success\":" + ok + "," + metrics_json + "}"
+               ",\"success\":" + ok +
+               ",\"grade\":\"" + grade + "\",\"interval\":" + to_string(interval) +
+               "," + metrics_json + "}"
     append_line(GROWTH_LOG, line)
 }
 
@@ -364,11 +764,14 @@ fn cleanup() {
 println("")
 println("  +============================================+")
 println("  |   NEXUS-6 Universal Growth Daemon (hexa)   |")
-println("  |   Max cycles: " + to_string(MAX_CYCLES) + "  Interval: " + to_string(INTERVAL_MIN) + "m          |")
+println("  |   7 features: grade/interval/gi/cargo/     |")
+println("  |               commit/revert/dashboard      |")
+println("  |   Max cycles: " + to_string(MAX_CYCLES) + "  Base interval: " + to_string(INTERVAL_MIN) + "m       |")
 if len(FORCE_DIM) > 0 {
-    println("  |   Forced dim: " + FORCE_DIM + "                     |")
+    println("  |   Forced dim: " + FORCE_DIM)
 }
 if DRY_RUN { println("  |   DRY-RUN mode                             |") }
+if AUTO_COMMIT { println("  |   AUTO-COMMIT enabled (push: " + (if AUTO_PUSH { "ON" } else { "off" }) + ")  |") }
 println("  |   PID: " + MY_PID + "                              |")
 println("  +============================================+")
 println("")
@@ -390,56 +793,109 @@ while cycle <= MAX_CYCLES {
         cycle = MAX_CYCLES + 1
     }
     if !stopped_early {
+        // Step 0: resource grade + interval 결정
+        let grade = resource_grade()
+        let mult = interval_multiplier(grade)
+        let effective_interval = INTERVAL_MIN * mult
+
         println("")
         println("  ========================================")
-        println("  Cycle " + to_string(cycle) + " / " + to_string(MAX_CYCLES))
+        println("  Cycle " + to_string(cycle) + " / " + to_string(MAX_CYCLES) + "  Grade: " + grade + "  Interval: " + to_string(effective_interval) + "m")
         println("  ========================================")
 
         // 1. 측정
-        log_info("Step 1/4: Measuring dimensions...")
+        log_info("Step 1/6: Measuring dimensions...")
         let metrics = measure_simple()
 
-        // 2. 차원 선택
+        // 2. 차원 선택 (+ growth_intelligence 자문)
         let mut dim = ""
+        let mut gi_recommend = ""
+        let mut gi_used = false
         if len(FORCE_DIM) > 0 {
             dim = FORCE_DIM
-            log_info("Step 2/4: Forced dimension: " + dim)
+            log_info("Step 2/6: Forced dimension: " + dim)
         } else {
-            dim = pick_weakest(metrics, cycle)
-            log_info("Step 2/4: Weakest dimension: " + dim)
+            // 1차 weakest pick
+            let pick0 = pick_weakest(metrics, cycle)
+            dim = pick0
+            log_info("Step 2/6: Weakest dimension: " + dim)
+            // GI 자문 — STUB은 무시
+            let gi = gi_consult()
+            if gi[0] == "true" {
+                gi_used = true
+                gi_recommend = gi[1]
+                let conf_x100 = _to_int0(gi[3])
+                let skip_csv = gi[2]
+                if len(gi_recommend) > 0 && gi_recommend != dim && conf_x100 > 70 {
+                    log_info("  GI override: " + dim + " → " + gi_recommend + " (conf x100=" + to_string(conf_x100) + ")")
+                    dim = gi_recommend
+                }
+                // skip_csv 적용 — dim 이 skip 에 있으면 재선택
+                let pad = "," + skip_csv + ","
+                if pad.index_of("," + dim + ",") >= 0 {
+                    log_info("  GI cooldown: " + dim + " in skip_list. Re-pick.")
+                    dim = pick_weakest_with_skip(metrics, cycle, skip_csv)
+                    log_info("  New target: " + dim)
+                }
+            }
         }
 
         // 3. 액션
         let mut action_ok = true
         if DRY_RUN {
-            log_info("Step 3/4: [DRY-RUN] Skipping growth action.")
-            append_growth_log(cycle, dim, "dry-run", true, metrics)
+            log_info("Step 3/6: [DRY-RUN] Skipping growth action.")
+            append_growth_log(cycle, dim, "dry-run", true, metrics, grade, effective_interval)
         } else {
-            log_info("Step 3/4: Executing growth for '" + dim + "'...")
+            log_info("Step 3/6: Executing growth for '" + dim + "'...")
             action_ok = execute_growth(dim)
-            if action_ok {
-                consecutive_failures = 0
-            } else {
-                consecutive_failures = consecutive_failures + 1
-                log_warn("Consecutive failures: " + to_string(consecutive_failures) + " / " + to_string(MAX_CONSEC_FAIL))
-            }
-            append_growth_log(cycle, dim, dim, action_ok, metrics)
         }
 
-        // 4. 로그
-        log_info("Step 4/4: Cycle logged to " + GROWTH_LOG)
+        // 4. cargo validate (DRY-RUN 제외)
+        let mut validate_ok = action_ok
+        if !DRY_RUN && action_ok {
+            log_info("Step 4/6: Cargo validate...")
+            validate_ok = cargo_validate()
+        } else if DRY_RUN {
+            log_info("Step 4/6: [DRY-RUN] Skipping cargo validate.")
+        }
+
+        // 5. revert / commit / notify
+        if !DRY_RUN {
+            if !validate_ok {
+                log_warn("Step 5/6: Validation failed — reverting + recording")
+                revert_changes()
+                troubleshoot_record(false, dim, cycle)
+                notify("warn", "Growth cycle " + to_string(cycle) + ": " + dim + " FAILED")
+                consecutive_failures = consecutive_failures + 1
+                log_warn("Consecutive failures: " + to_string(consecutive_failures) + " / " + to_string(MAX_CONSEC_FAIL))
+            } else {
+                consecutive_failures = 0
+                log_info("Step 5/6: Validation ok — recording success")
+                troubleshoot_record(true, dim, cycle)
+                notify("success", "Growth cycle " + to_string(cycle) + ": " + dim + " ok")
+                if AUTO_COMMIT {
+                    let _ = try_commit(dim, cycle)
+                }
+            }
+            append_growth_log(cycle, dim, dim, validate_ok, metrics, grade, effective_interval)
+        }
+
+        // 6. dashboard
+        log_info("Step 6/6: Dashboard + log")
+        print_dashboard(metrics, cycle, dim, grade, effective_interval, gi_used, gi_recommend)
 
         // 안전 브레이크
         if consecutive_failures >= MAX_CONSEC_FAIL {
             log_error("Safety brake: " + to_string(MAX_CONSEC_FAIL) + " consecutive failures. Stopping.")
+            notify("error", "Safety brake after " + to_string(MAX_CONSEC_FAIL) + " failures")
             stopped_early = true
             cycle = MAX_CYCLES + 1
         }
 
-        // sleep (interruptible — shutdown 체크 fine-grained)
+        // sleep (resource grade 적용 interval — interruptible)
         if cycle < MAX_CYCLES && !stopped_early {
-            let sleep_sec: i64 = INTERVAL_MIN * 60
-            log_info("Sleeping " + to_string(INTERVAL_MIN) + "m (" + to_string(sleep_sec) + "s)...")
+            let sleep_sec: i64 = effective_interval * 60
+            log_info("Sleeping " + to_string(effective_interval) + "m (" + to_string(sleep_sec) + "s, grade=" + grade + ")...")
             // 10초 단위로 분할 sleep (shutdown 반응성)
             let mut slept: i64 = 0
             while slept < sleep_sec && !shutdown_requested() {
