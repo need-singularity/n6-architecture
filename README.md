@@ -1,6 +1,6 @@
 # 🏗️ N6 Architecture — Arithmetic Design Framework
 
-### 🔴 실시간 로드맵 — [🧠 anima](https://need-singularity.github.io/anima/roadmap/) · [🔭 nexus](https://need-singularity.github.io/nexus/roadmap/) · [🏗️ n6-architecture](https://need-singularity.github.io/n6-architecture/roadmap/)
+### 🔴 [**실시간 로드맵 (탭 전환 지원)**](https://need-singularity.github.io/n6-architecture/roadmap/#n6-architecture)
 
 > **[3D Reality Map](https://need-singularity.github.io/nexus/)** — 4098노드 바텀업 인과 매핑 + 1485 크로스레이어 연결선. 쿼크→탄소→벤젠→DNA 인과 사슬 12/12 EXACT. Monte Carlo z=3.06 (큰 수, p=0.003). n=28/496 대조 실패 → n=6 유일성.
 
