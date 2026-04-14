@@ -62,10 +62,10 @@ fn pid_alive(pid: string) -> bool {
 }
 
 fn getpid() -> string {
-    // exec("echo $$") 단일 인자 — bash/sh 로 자식쉘 기동, 그 자식 PID 반환
-    // 데몬 프로세스와 자식 PID 는 다르지만, launchctl 환경에서도 '실행 중' 증거로 충분
-    // 더 정확한 PID 는 /proc/self 또는 ps 스냅샷 필요 (macOS 비호환) — 근사치 사용
-    let p = to_string(exec("echo $$")).trim()
+    // sh -c 'echo $PPID' — exec()가 spawn한 sh의 부모 = daemon 프로세스 PID
+    // (이전 버그: exec("echo $$")는 subshell PID 반환 → 즉시 죽어 stale pid file 원인)
+    // Mac sh/bash 호환. launchctl 환경에서도 정확한 daemon PID 보장.
+    let p = to_string(exec("sh -c 'echo $PPID'")).trim()
     return p
 }
 
