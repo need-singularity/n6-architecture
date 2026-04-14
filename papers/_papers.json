@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "총편수": 126,
+    "총편수": 127,
     "소스": "papers/ 디렉토리 .md 실측 + _registry.json._meta.papers_chunk_* 병합",
     "분리일": "2026-04-14",
     "선행": "papers/_registry.json.bak",
@@ -11,7 +11,8 @@
     },
     "업데이트_2026-04-14b": "unregistered 9편 등록 → 117편 (N6-109~117 신규)",
     "업데이트_2026-04-14c_P2_1": "PAPER-P2-1 8편 추가 → 125편 (N6-118~125 신규 v3/v4 자기조직·진화 + atlas 7→10* 승격 방법론)",
-    "업데이트_2026-04-14d_P3_3": "PAPER-P3-3 1편 추가 → 126편 (N6-126 신규 atlas 승격 파이프라인 구현 논문)"
+    "업데이트_2026-04-14d_P3_3": "PAPER-P3-3 1편 추가 → 126편 (N6-126 신규 atlas 승격 파이프라인 구현 논문)",
+    "업데이트_2026-04-14e_P5_2": "PAPER-P5-2 1편 추가 → 127편 (N6-127 신규 정직한 한계 메타 논문)"
   },
   "papers": [
     {
@@ -1391,6 +1392,18 @@
       "chunk_id": "papers_chunk_P3_3_2026-04-14",
       "version_tag": "pipeline-implementation",
       "chunk_status": "PAPER-P3-3 신규 — 249줄 — scripts/atlas_promote_7_to_10star.hexa 구현 논문. 40 후보 dry-run 실측 인용 (fitness 851 avg / 873 max / 0 승격 = 안전설계 정상 작동). 이중 lock (fitness 컷오프 + 전량통과) + 수동승인 최종 관문."
+    },
+    {
+      "id": "N6-127",
+      "title": "정직한 한계 공시 메타 논문 — n6-architecture 세션 한계 9건 독립 감사 (honest-limitations-meta)",
+      "domain": "honest-limitations-meta",
+      "category": "honest-limitations-meta — P5 방법론 한계 독립 감사 논문",
+      "path": "papers/n6-honest-limitations-meta-paper.md",
+      "type": "paper",
+      "bt_ref": "R0, R3, R9, R14, R17, BT-1417~1419",
+      "chunk_id": "papers_chunk_P5_2_2026-04-14",
+      "version_tag": "meta-audit",
+      "chunk_status": "PAPER-P5-2 신규 — 247줄 — honest-limitations.md 9건 한계 독립 메타 논문. WHY/WHAT/COMPARE/MAIN/VERIFICATION/LIMITATIONS 6개 섹션 구조. 자기참조 검증 금지 준수."
     }
   ]
 }

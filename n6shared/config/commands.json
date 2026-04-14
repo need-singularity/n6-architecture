@@ -24,7 +24,8 @@
       "description": "TODO 병렬 발사 → loop 정합 → commit → push 풀사이클",
       "action": "프로젝트 TODO SSOT에서 status=todo|partial 전부 수집 → 병렬 bg Agent 발사 → 전원 완료 대기 → loop-guard --fix → git add -A → git commit → git push",
       "flow": [
-        "1. TODO 수집 + 클러스터링",
+        "0. roadmap auto --project {project} --force (gate_promote + 소진 시 창발 extend)",
+        "1. TODO 수집 + 클러스터링 (roadmap next + convergence SSOT 병합)",
         "2. 병렬 Agent 발사 (run_in_background: true)",
         "3. 발사 테이블 ASCII 출력",
         "4. 전 Agent 완료 대기",
@@ -262,6 +263,54 @@
           "format": "roi add {name} | {desc} | {impact_x} | {est_hours}"
         }
       }
+    },
+    "roadmap": {
+      "keywords": ["roadmap", "로드맵", "phase", "페이즈"],
+      "description": "로드맵 phase 자동 승격 + 창발 extend + 현황 조회",
+      "action": "하네스 roadmap.hexa 호출: gate_promote(task 전수 done→phase complete) + 소진 시 창발 extend(새 phase 자동 생성) + next task 출력",
+      "execution": {
+        "harness": "shared/harness/roadmap.hexa",
+        "hexa_bin": "shared/bin/hexa"
+      },
+      "subcommands": {
+        "default": {
+          "description": "auto = gate_promote → next → 소진 시 extend → next",
+          "action": "hexa run shared/harness/roadmap.hexa auto --project {project} --force"
+        },
+        "status": {
+          "keywords": ["status", "현황"],
+          "description": "전 phase 현황 표 출력 (done/in_progress/planned)",
+          "action": "hexa run shared/harness/roadmap.hexa status --project {project}"
+        },
+        "extend": {
+          "keywords": ["extend", "확장", "창발"],
+          "description": "창발 시드로 새 phase 강제 생성",
+          "action": "hexa run shared/harness/roadmap.hexa extend --project {project} --force"
+        },
+        "next": {
+          "keywords": ["next", "다음"],
+          "description": "다음 undone task 1개 출력",
+          "action": "hexa run shared/harness/roadmap.hexa next --project {project}"
+        },
+        "list": {
+          "keywords": ["list", "전체"],
+          "description": "전 6 프로젝트 next 요약",
+          "action": "hexa run shared/harness/roadmap.hexa list"
+        }
+      },
+      "flow": [
+        "1. gate_promote: phase 내 전 task done이면 자동 complete 마킹",
+        "2. run_next: 다음 undone task 탐색 (exit 42=소진)",
+        "3. 소진 시 emergence_collect: forge/bt_keywords/blowup 시드 수집",
+        "4. run_extend: 창발 시드 → 새 phase append (SCHEMA 준수)",
+        "5. run_next 재시도"
+      ],
+      "rules": [
+        "확인 질문 금지 — 즉시 실행",
+        "gate_promote 실패해도 계속 진행",
+        "extend 시 --force 기본 — emergence 실패해도 템플릿 fallback",
+        "go 명령 실행 시 roadmap auto 자동 선행"
+      ]
     },
     "list": {
       "keywords": ["list", "목록", "commands", "명령어"],

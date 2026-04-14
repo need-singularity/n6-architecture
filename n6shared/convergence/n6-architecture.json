@@ -509,6 +509,14 @@
       "note": "2026-04-12 go(DFS17) 커밋 일괄 — 기법80/BT45/DFS16차226건/논문79/DSE537 실측",
       "ossified_at": "2026-04-12",
       "promoted_from": "stable"
+    },
+    "SOC_BENCH_56_PASS": {
+      "status": "PASS",
+      "value": "N6-SPEAK SoC 통합 벤치 56/56 PASS (6섹션 전수)",
+      "threshold": "산술 6/6 + selforg 10/10 + top 7/7 + tapeout 15/15 + HW타이밍 6/6 + 크로스 12/12",
+      "note": "2026-04-14 CHIP-P5-2 — n6_speak_integration_bench.hexa 실행 결과, atlas.n6 [10*] 14항목 등록, sign-off hash=133616",
+      "ossified_at": "2026-04-14",
+      "promoted_from": "stable"
     }
   },
   "stable": {

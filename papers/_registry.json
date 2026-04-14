@@ -2,8 +2,8 @@
   "_meta": {
     "total_products": 173,
     "total_domains": 120,
-    "total_papers": 126,
-    "_count_verified": "2026-04-14 PAPER-P3-3 -- 실측 126 (125 + 1 P3-3 atlas 승격 파이프라인 구현 논문)",
+    "total_papers": 127,
+    "_count_verified": "2026-04-14 PAPER-P5-2 -- 실측 127 (126 + 1 P5-2 정직한 한계 메타 논문)",
     "papers_chunk_P3_3_2026-04-14": {
       "count": 1,
       "category": "P3 atlas 승격 파이프라인 구현 논문 (구현/실행)",
@@ -29,6 +29,30 @@
       "honest_limitations_note": "§4.4 한계 5건 + §4.5 반증 후보 3건. 실측 데이터만 인용 -- 허구 숫자 금지.",
       "p3_2_link": "experiments/conjecture_to_10star_20.md (20 후보 리스트, PAPER-P3-2 대응)",
       "total_lines": 249
+    },
+    "papers_chunk_P5_2_2026-04-14": {
+      "count": 1,
+      "category": "P5 정직한 한계 메타 논문 (독립 감사)",
+      "bt_range": "R0, R3, R9, R14, R17 (규칙 기반 한계 9건)",
+      "status": "PAPER-P5-2 신규 -- honest-limitations.md 9건 한계 독립 메타 논문",
+      "target_id_range": "N6-127",
+      "roadmap_ref": "PAPER-P5-2",
+      "papers": [
+        "papers/n6-honest-limitations-meta-paper.md"
+      ],
+      "bt_mapping": {
+        "n6-honest-limitations-meta-paper.md": "R0, R3, R9, R14, R17, BT-1417~1419"
+      },
+      "version_tags": {
+        "meta_audit": ["honest-limitations-meta"]
+      },
+      "verify_code_status": {
+        "source_document": "theory/proofs/honest-limitations.md (497 라인)",
+        "audit_reference": "experiments/paper/bipartite_audit_top10.md (한계 9 감사)",
+        "n62_compliance": "본문 §5 에 외부 독립 검증 경로 9건 명시"
+      },
+      "honest_limitations_note": "§6 본 메타 논문 자체 한계 4건 공시. 자기참조 검증 금지 원칙 준수.",
+      "total_lines": 247
     },
     "papers_chunk_P2_1_2026-04-14": {
       "count": 8,
