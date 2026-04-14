@@ -7,25 +7,25 @@
   "routes": {
     "_TECS-L_DEPRECATED": {
       "_note": "TECS-L 폐기 완료 (2026-04). 수학/가설/상수는 n6-architecture/theory/ 에 흡수됨.",
-      "dest": "~/Dev/n6-architecture/theory",
+      "dest": "$N6_ARCH/theory",
       "keywords": ["characterization", "proof", "theorem", "hypothesis", "math", "atlas", "constant", "formula"],
       "file_patterns": ["theory/**"],
       "priority": "disabled"
     },
     "n6-architecture": {
-      "dest": "~/Dev/n6-architecture",
+      "dest": "$N6_ARCH",
       "keywords": ["BT-", "technique", "chip", "energy", "DSE", "semiconductor", "battery", "solar", "fusion", "robot"],
       "file_patterns": ["docs/**", "techniques/**", "experiments/**", "tools/**"],
       "priority": "high"
     },
     "anima": {
-      "dest": "~/Dev/anima",
+      "dest": "$ANIMA",
       "keywords": ["consciousness", "purefield", "law", "hexad", "repulsion", "decoder", "meta_law"],
       "file_patterns": ["anima/**", "docs/**", "consciousness_laws*", "anima-physics/**"],
       "priority": "high"
     },
     "nexus": {
-      "dest": "~/Dev/nexus",
+      "dest": "$NEXUS",
       "keywords": ["lens", "telescope", "scan", "ouroboros", "growth", "discovery"],
       "file_patterns": ["src/**", "shared/**", "scripts/**"],
       "priority": "high"
@@ -37,13 +37,13 @@
       "priority": "medium"
     },
     "hexa-lang": {
-      "dest": "~/Dev/hexa-lang",
+      "dest": "$HEXA_LANG",
       "keywords": ["compiler", "lexer", "parser", "codegen", "hexa", "keyword", "operator"],
       "file_patterns": ["src/**", "examples/**", "self/**", "playground/**"],
       "priority": "medium"
     },
     "papers": {
-      "dest": "~/Dev/papers",
+      "dest": "$PAPERS",
       "keywords": ["paper", "arxiv", "zenodo", "manuscript", "doi", "draft"],
       "file_patterns": ["*.pdf", "*.tex", "anima/**", "sedi/**"],
       "priority": "medium"

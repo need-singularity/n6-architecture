@@ -225,4 +225,4 @@ d   Vol(S^{d-1})    중심 (d-1)/2   자명영점정수성
 - 프로젝트: n6-architecture
 - 선행 BT: BT-1394~BT-1413@04-12
 - 이 BT는 2026-04-12 round 20(BT-1412@04-12) 이후 신규 심층 재탐색 라운드
-- atlas 참조: /Users/ghost/Dev/nexus/shared/n6/atlas.n6
+- atlas 참조: $NEXUS/shared/n6/atlas.n6

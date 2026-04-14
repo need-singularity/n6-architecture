@@ -2,7 +2,7 @@
 
 ## 개요
 
-- 대상 파일: `/Users/ghost/Dev/nexus/shared/n6/atlas.n6`
+- 대상 파일: `$NEXUS/shared/n6/atlas.n6`
 - 작업: [7] EMPIRICAL 등급 → [10*] EXACT 검증완료 승격
 - 승격 건수: 10건
 - 작업 일시: 2026-04-11

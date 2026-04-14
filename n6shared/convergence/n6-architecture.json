@@ -78,7 +78,7 @@
       "status": "PASS",
       "value": "BT-134 주기열 {2,8,8,18,18,32,32} + Evidence 4 (2^sopfr=32) 교정",
       "threshold": "2200건 산술 정합 스캔 통과",
-      "note": "2026-04-08 수정, ~/Dev/nexus/shared/bt/bt-consistency-report.md"
+      "note": "2026-04-08 수정, $NEXUS/shared/bt/bt-consistency-report.md"
     },
     "PAPERS_39": {
       "status": "PASS",

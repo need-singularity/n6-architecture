@@ -2,8 +2,8 @@
 
 - 일자: 2026-04-11
 - 대상:
-  - SSOT: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` (154,868 byte, 4,865 줄, 34 섹션, 173 제품)
-  - 문서: `/Users/ghost/Dev/n6-architecture/README.md` (850 줄, AUTO 마커 기반)
+  - SSOT: `$NEXUS/shared/n6/docs/products.json` (154,868 byte, 4,865 줄, 34 섹션, 173 제품)
+  - 문서: `$N6_ARCH/README.md` (850 줄, AUTO 마커 기반)
 - 작업자: Claude (GO 에이전트, 읽기 전용 감사)
 - 쓰기 범위: 이 리포트 파일 1곳만 (README / products.json 수정 금지, R18 미니멀)
 - 배경: `sync_products_readme.hexa` 가 STUB 상태여서 products.json → README 자동 동기화가 작동하지 않음. 현재 두 파일은 수개월 수작업 누적으로 구조/내용 모두 벌어진 상태.
@@ -548,10 +548,10 @@ fantasy       0 .     (경고 박스만, 제품 행 없음)
 
 ## 부록 A. 참조 파일 경로
 
-- SSOT: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json`
-- README: `/Users/ghost/Dev/n6-architecture/README.md`
-- 이전 감사: `/Users/ghost/Dev/n6-architecture/reports/audits/products-drift-fix-2026-04-11.md` (products.json `_meta` 드리프트 수정 기록)
-- 백업: `/Users/ghost/Dev/n6-architecture/reports/audits/products-backup-2026-04-11.json`
+- SSOT: `$NEXUS/shared/n6/docs/products.json`
+- README: `$N6_ARCH/README.md`
+- 이전 감사: `$N6_ARCH/reports/audits/products-drift-fix-2026-04-11.md` (products.json `_meta` 드리프트 수정 기록)
+- 백업: `$N6_ARCH/reports/audits/products-backup-2026-04-11.json`
 - 동기화 스크립트 (STUB): `sync_products_readme.hexa` (경로 미확정, 본 감사 범위 밖)
 
 ## 부록 B. 감사 한계 (Honest Limitations)

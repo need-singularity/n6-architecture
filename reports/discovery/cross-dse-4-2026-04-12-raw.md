@@ -1,7 +1,7 @@
 # cross_dse_fusion v2 실측 결과 — 2026-04-11
 
 - 실행 스크립트: experiments/dse/cross_dse_fusion_v2_run.hexa (v2 설계 초안의 실행본)
-- 입력 도메인: /Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains
+- 입력 도메인: $N6_ARCH/nexus/origins/universal-dse/domains
 - 도메인 수: 480
 - 전체 쌍 수(이론상): 114960
 - high_conf 쌍: 93327

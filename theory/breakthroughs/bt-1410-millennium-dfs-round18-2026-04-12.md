@@ -650,4 +650,4 @@ DFS 18차도 17차의 정직성 원칙 준수:
 - 날짜: 2026-04-12
 - 프로젝트: n6-architecture
 - 선행 BT: BT-1394~1409
-- 참고 atlas: /Users/ghost/Dev/nexus/shared/n6/atlas.n6
+- 참고 atlas: $NEXUS/shared/n6/atlas.n6

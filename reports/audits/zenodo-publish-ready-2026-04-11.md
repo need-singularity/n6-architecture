@@ -28,7 +28,7 @@
 
 | 항목 | 값 |
 |------|----|
-| **파일 경로 (절대)** | `/Users/ghost/Dev/n6-architecture/papers/n6-cross-paradigm-ai-paper.md` |
+| **파일 경로 (절대)** | `$N6_ARCH/papers/n6-cross-paradigm-ai-paper.md` |
 | **파일 경로 (repo 상대)** | `papers/n6-cross-paradigm-ai-paper.md` |
 | **줄 수** | 185 |
 | **한글 제목** | 완전수 n=6과 AI 8-패러다임 공진: BT-380 메타 정리 |
@@ -148,7 +148,7 @@ OSSIFIED
 
 | 항목 | 값 |
 |------|----|
-| **파일 경로 (절대)** | `/Users/ghost/Dev/n6-architecture/papers/n6-ai-17-techniques-experimental-paper.md` |
+| **파일 경로 (절대)** | `$N6_ARCH/papers/n6-ai-17-techniques-experimental-paper.md` |
 | **파일 경로 (repo 상대)** | `papers/n6-ai-17-techniques-experimental-paper.md` |
 | **줄 수** | 197 |
 | **한글 제목** | 완전수 n=6과 17 AI 기법 실험: hexa 전환 후 전수 검증 |
@@ -277,7 +277,7 @@ OSSIFIED
 | 항목 | 상태 |
 |------|------|
 | ZENODO_TOKEN 환경변수 | 사용자 보유 전제 (CI 비노출) |
-| `upload_zenodo.sh` 스크립트 | `/Users/ghost/Dev/papers/upload_zenodo.sh` 존재, manifest 기반 발행 지원 |
+| `upload_zenodo.sh` 스크립트 | `$PAPERS/upload_zenodo.sh` 존재, manifest 기반 발행 지원 |
 | `manifest.json` 등록 | **미등록 — 발행 전 N6-054, N6-057 항목 추가 필요** (PP3 규정) |
 | 한글→영문 제목 병기 | payload `title` 영문, 본문 h1 한글, 본문 초록 한글 (CC-BY 4.0 허용) |
 | ORCID | 필드 빈 값 (`0000-0000-0000-0000`) — 사용자 실 ORCID 로 교체 |
@@ -289,7 +289,7 @@ OSSIFIED
 ## 5. 발행 후 작업 (사용자 → 에이전트)
 
 1. DOI_1 / DOI_2 수신 → 본 리포트 section 1.1, 2.1 의 "manifest.json 목표 id" 옆에 `zenodo_doi` 필드 기입
-2. `/Users/ghost/Dev/papers/manifest.json` 에 N6-054 (cross-paradigm-ai), N6-057 (17 AI techniques) 신규 엔트리 추가 (PP3)
+2. `$PAPERS/manifest.json` 에 N6-054 (cross-paradigm-ai), N6-057 (17 AI techniques) 신규 엔트리 추가 (PP3)
 3. `papers/_registry.json` 의 `_meta.papers_chunk_d_2026-04-11.status` 를 "Draft" → "Published (2/11)" 로 승격
 4. 본 리포트의 체크박스 `[x]` 중 "ORCID 교체" 항목 완료 기록
 5. 커밋 메시지: `feat(papers): N6-054 + N6-057 Zenodo DOI 발급 — BT-380 메타 + 17 AI 기법 전수 검증`
@@ -325,8 +325,8 @@ OSSIFIED
 
 ## 8. 결론
 
-`papers_chunk_d_2026-04-11` 11 편 중 **2 편 (cross-paradigm-ai, ai-17-techniques) 이 Zenodo DOI 발행 즉시 가능 상태**임을 확인했다. N62 임베드 재실행 결과 각각 39/39, 40/40 전수 OSSIFIED. 본 리포트는 Zenodo REST API `deposit/depositions` 엔드포인트에 즉시 투입 가능한 영문 메타데이터 payload 2 개와 BibTeX 참고문헌 초안을 제공한다. **실제 DOI 발급은 사용자가 `ZENODO_TOKEN` 을 환경변수로 설정한 후 `/Users/ghost/Dev/papers/upload_zenodo.sh` 를 실행하여 수행**한다 (본 에이전트는 API 호출 금지 원칙 준수).
+`papers_chunk_d_2026-04-11` 11 편 중 **2 편 (cross-paradigm-ai, ai-17-techniques) 이 Zenodo DOI 발행 즉시 가능 상태**임을 확인했다. N62 임베드 재실행 결과 각각 39/39, 40/40 전수 OSSIFIED. 본 리포트는 Zenodo REST API `deposit/depositions` 엔드포인트에 즉시 투입 가능한 영문 메타데이터 payload 2 개와 BibTeX 참고문헌 초안을 제공한다. **실제 DOI 발급은 사용자가 `ZENODO_TOKEN` 을 환경변수로 설정한 후 `$PAPERS/upload_zenodo.sh` 를 실행하여 수행**한다 (본 에이전트는 API 호출 금지 원칙 준수).
 
-후속: 나머지 9 편은 hexa 검증 완성 후 별도 사이클로 이관, 본 2 편 발행 성공 시 `papers/_registry.json` 및 `/Users/ghost/Dev/papers/manifest.json` 동기화 (PP3) 진행.
+후속: 나머지 9 편은 hexa 검증 완성 후 별도 사이클로 이관, 본 2 편 발행 성공 시 `papers/_registry.json` 및 `$PAPERS/manifest.json` 동기화 (PP3) 진행.
 
 — 끝 —

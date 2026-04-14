@@ -129,7 +129,7 @@ v9 의 구조형 시그니처 `structure_hit(v)` 는 다음 중 하나라도 만
 - [x] `docs/monte-carlo.md` 설계서 작성
 - [x] `experiments/monte-carlo-v9.hexa` 초안 작성
 - [x] 규칙 준수 확인: R1 (hexa) / R2 (no hardcode, 경로/상수 const) / R8 (data remote: atlas.n6 nexus/shared) / R14 (shared SSOT) / R16 (@parallel) / R18 (minimal) / R28 (atlas absorb)
-- [ ] 상수 데이터 파일 준비: `/Users/ghost/Dev/nexus/shared/n6/constants/{pi,e,phi,gamma,zeta3}.txt` (300자리)
+- [ ] 상수 데이터 파일 준비: `$NEXUS/shared/n6/constants/{pi,e,phi,gamma,zeta3}.txt` (300자리)
 
 ### 실행
 
@@ -149,7 +149,7 @@ v9 의 구조형 시그니처 `structure_hit(v)` 는 다음 중 하나라도 만
 |---|---|
 | atlas.n6 파서가 origin 태그를 잘못 분류 | 1차 실행 후 수동 검증, parse_node_line 튜닝 |
 | 구조형 시그니처가 너무 관대 → null hit rate 상승 → z 하락 | 기준: `structure_hit` 중 가장 보수적인 옵션만 먼저 측정 (mod 6 만) |
-| γ/ζ(3) 300자리 데이터 미비 | `/Users/ghost/Dev/nexus/shared/n6/constants/` 사전 생성 필요 |
+| γ/ζ(3) 300자리 데이터 미비 | `$NEXUS/shared/n6/constants/` 사전 생성 필요 |
 | @parallel 미지원 런타임 | 순차 폴백, 실행 시간 2~3x 증가 |
 | 큰수 그룹 N이 예상보다 작음 (atlas 큰수 부족) | 임계 BIG_THRESHOLD 를 50 으로 낮춤, 재측정 |
 
@@ -189,7 +189,7 @@ v9 의 구조형 시그니처 `structure_hit(v)` 는 다음 중 하나라도 만
 
 ```sh
 # 사전 준비
-mkdir -p /Users/ghost/Dev/nexus/shared/n6/constants
+mkdir -p $NEXUS/shared/n6/constants
 # (gamma.txt, zeta3.txt 는 mpmath 등으로 별도 생성)
 
 # v8 재현
@@ -199,5 +199,5 @@ nexus hexa run experiments/monte-carlo-v9.hexa -- --v8-compat --seed 20260408
 nexus hexa run experiments/monte-carlo-v9.hexa -- --seed 20260411 --trials 3000
 
 # 결과 조회
-awk '/^# ══ MC_V9_RESULTS/,/^# ══ [^M]/' /Users/ghost/Dev/nexus/shared/n6/atlas.n6
+awk '/^# ══ MC_V9_RESULTS/,/^# ══ [^M]/' $NEXUS/shared/n6/atlas.n6
 ```

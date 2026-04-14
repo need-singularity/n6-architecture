@@ -183,7 +183,7 @@
       "path": "papers/scripts/infinite_growth.sh",
       "size": 10263,
       "lines": 314,
-      "preview": "#!/bin/bash\n# Papers Infinite Growth Daemon — 10-phase loop\n# bash 3.2 compatible, no bashisms\n# Usage: bash scripts/infinite_growth.sh [--max-cycles N] [--interval SECS]\n\nset -e\nsource \"$(cd \"$(dirname \"$0\")\" && pwd)/lib/growth_common.sh\"\n\nREPO_ROOT=\"$(cd \"$(dirname \"$0\")/..\" && pwd)\"\nGROWTH_DIR=\"${REPO_ROOT}/.growth\"\nSTATE_FILE=\"${GROWTH_DIR}/growth_state.json\"\nLOG_FILE=\"${GROWTH_DIR}/growth.log\"\nMANIFEST=\"${REPO_ROOT}/manifest.json\"\nGROWTH_BUS=\"${HOME}/Dev/nexus/shared/growth_bus.jsonl\"\n\nMAX",
+      "preview": "#!/bin/bash\n# Papers Infinite Growth Daemon — 10-phase loop\n# bash 3.2 compatible, no bashisms\n# Usage: bash scripts/infinite_growth.sh [--max-cycles N] [--interval SECS]\n\nset -e\nsource \"$(cd \"$(dirname \"$0\")\" && pwd)/lib/growth_common.sh\"\n\nREPO_ROOT=\"$(cd \"$(dirname \"$0\")/..\" && pwd)\"\nGROWTH_DIR=\"${REPO_ROOT}/.growth\"\nSTATE_FILE=\"${GROWTH_DIR}/growth_state.json\"\nLOG_FILE=\"${GROWTH_DIR}/growth.log\"\nMANIFEST=\"${REPO_ROOT}/manifest.json\"\nGROWTH_BUS=\"$NEXUS/shared/growth_bus.jsonl\"\n\nMAX",
       "project": "papers",
       "ready_path": "/Users/ghost/Dev/ready/papers/scripts/infinite_growth.sh",
       "destination": "nexus",

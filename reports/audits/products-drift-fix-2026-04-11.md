@@ -1,10 +1,10 @@
 # products.json 드리프트 수정 감사 리포트
 
 - 일자: 2026-04-11
-- 대상: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` (154 KB, 4,862줄)
+- 대상: `$NEXUS/shared/n6/docs/products.json` (154 KB, 4,862줄)
 - 작업자: Claude Opus 4.6 (GO 세션)
 - 근거: 이전 감사에서 확인된 `_meta` ↔ 실측 sections 간 구조적 드리프트
-- 백업: `/Users/ghost/Dev/n6-architecture/reports/audits/products-backup-2026-04-11.json`
+- 백업: `$N6_ARCH/reports/audits/products-backup-2026-04-11.json`
 
 ## 1. 발견된 드리프트 (수정 전)
 

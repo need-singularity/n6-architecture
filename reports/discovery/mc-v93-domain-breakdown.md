@@ -1,7 +1,7 @@
 # Monte Carlo v9.3 · 도메인별 분해 리포트
 
 - 기반: `scripts/monte_carlo_v93.py` + `scripts/mc_v93_by_domain.py`
-- 데이터: `~/Dev/nexus/shared/reality_map.json`
+- 데이터: `$NEXUS/shared/reality_map.json`
 - 도메인 수: **15**
 - 도메인별 시뮬레이션: 2000회 (seed=42)
 - 평균 z-score: **10.22**

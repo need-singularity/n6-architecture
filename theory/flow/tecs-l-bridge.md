@@ -75,7 +75,7 @@
 cd ~/Dev/TECS-L && bash .shared/sync-calculators.sh
 
 # n6 → TECS-L (역방향: DSE 도메인)
-cp ~/Dev/n6-architecture/tools/universal-dse/domains/*.toml ~/Dev/TECS-L/.shared/dse/domains/
+cp $N6_ARCH/tools/universal-dse/domains/*.toml ~/Dev/TECS-L/.shared/dse/domains/
 
 # 아틀라스 스캔
 python3 ~/Dev/TECS-L/.shared/scan_math_atlas.py --save --summary

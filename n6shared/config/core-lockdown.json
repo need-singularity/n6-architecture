@@ -2,7 +2,7 @@
   "_meta": {
     "name": "n6-architecture 코어 잠금 레지스트리",
     "description": "L0/L1/L2 동심원 보호 체계 — 안쪽일수록 수정 금지, 바깥쪽은 자유.",
-    "principle": "원본은 ~/Dev/nexus/shared/config/core-lockdown.json — 이 파일은 n6-architecture 프로젝트 로컬 사본.",
+    "principle": "원본은 $NEXUS/shared/config/core-lockdown.json — 이 파일은 n6-architecture 프로젝트 로컬 사본.",
     "updated": "2026-04-10",
     "origin": "nexus canonical core-lockdown.json + CLAUDE.md L0 22 / L1 / L2 정의"
   },

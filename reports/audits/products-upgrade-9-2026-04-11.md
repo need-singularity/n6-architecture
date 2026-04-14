@@ -1,9 +1,9 @@
 # products.json 비천장 9건 → 🛸10 승급 감사 리포트
 
 - 일자: 2026-04-11
-- 대상: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json`
+- 대상: `$NEXUS/shared/n6/docs/products.json`
 - 작업자: Claude Opus 4.6 (GO 세션)
-- 기준: `/Users/ghost/Dev/n6-architecture/n6shared/GRADE_RUBRIC_1_TO_10PLUS.md` — grade 10 = EXACT 완전 닫힘 (n=6 primitive finite combo)
+- 기준: `$N6_ARCH/n6shared/GRADE_RUBRIC_1_TO_10PLUS.md` — grade 10 = EXACT 완전 닫힘 (n=6 primitive finite combo)
 - 백업: `/tmp/products_backup_before_upgrade_20260411.json`
 - 선행 리포트: `reports/audits/products-drift-fix-2026-04-11.md` (2026-04-11 드리프트 수정)
 
@@ -112,9 +112,9 @@ AFTER (본 작업)
 
 ## 8. 산출물
 
-- `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` — 7건 승급 반영
+- `$NEXUS/shared/n6/docs/products.json` — 7건 승급 반영
 - `/tmp/products_backup_before_upgrade_20260411.json` — 수정 전 백업
-- `/Users/ghost/Dev/n6-architecture/reports/audits/products-upgrade-9-2026-04-11.md` — 본 리포트
+- `$N6_ARCH/reports/audits/products-upgrade-9-2026-04-11.md` — 본 리포트
 
 ---
 

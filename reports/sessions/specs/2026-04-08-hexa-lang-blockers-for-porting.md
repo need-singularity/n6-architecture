@@ -11,7 +11,7 @@ n6-architecture의 `.py` / `.rs` / `.sh` → `.hexa` 전면 포팅은 **현재 h
 
 ## 검증된 도구체인 (Pilot-A 통과)
 
-- 빌드 cwd: `~/Dev/hexa-lang` (필수)
+- 빌드 cwd: `$HEXA_LANG` (필수)
 - 명령: `./ready/self/hexa_bootstrap <src.hexa> -o <out>`
 - 산출물: `<out>.c` + native binary
 - 통과 기능: `let`, 정수 산술, 문자열 `+`, `to_string()`, **단일인수** `println()`
@@ -240,5 +240,5 @@ F5: pct(102.0, 100.0) = 0     // (102.0 - 100.0) / 100.0 * 100.0
 ## 잠정 조치
 
 1. CLAUDE.md R1(HEXA-FIRST)은 **신규 코드 .hexa 강제** 규칙으로만 운영. 기존 자산은 동결.
-2. 이 worktree(`/Users/ghost/Dev/n6-architecture-porting`, 브랜치 `porting/pilot-2026-04-08`)는 재개 시까지 보존. 파일럿 산출물 `.porting-pilot/hello.{hexa,c,exe}` 포함.
+2. 이 worktree(`$N6_ARCH-porting`, 브랜치 `porting/pilot-2026-04-08`)는 재개 시까지 보존. 파일럿 산출물 `.porting-pilot/hello.{hexa,c,exe}` 포함.
 3. hexa-lang 측에 본 문서 링크 또는 issue로 전달 (사용자 결정).

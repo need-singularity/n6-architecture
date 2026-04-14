@@ -1,6 +1,6 @@
 # Reality Map v8.0 — Monte Carlo n=6 유일성 재검증
 
-> 데이터: `~/Dev/nexus/shared/reality_map.json` v8.0 (2026-04-08)
+> 데이터: `$NEXUS/shared/reality_map.json` v8.0 (2026-04-08)
 > 노드: 342 (id 보유) / EXACT 325 / EXACT-natural 198 / MISS 11 / CLOSE 6
 > 검증코드 패턴: `docs/*/verify_alien10.py` 의 σ/τ/φ 정의 재활용
 > 자기참조 금지: 측정값은 reality_map.json 에서만 추출, n=6 시그니처는 정의(σ·φ=n·τ)에서 직접 유도
@@ -138,7 +138,7 @@ def is_n6_signature(v):
 
 ```bash
 # 데이터 경로
-JSON=$HOME/Dev/nexus/shared/reality_map.json
+JSON=$NEXUS/shared/reality_map.json
 
 # 정의 함수는 docs/ceramics/verify_alien10.py 의 sigma/tau/phi 재사용
 # 시그니처: sigma(v)*phi(v) == v*tau(v)

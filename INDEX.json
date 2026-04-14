@@ -74,7 +74,7 @@
     "folder_claude_md": "모든 탐색 노드 CLAUDE.md 필수 (AI 진입점)",
     "ssot_json": "규칙 본문은 n6shared/config/absolute_rules.json만, 그 외는 참조",
     "no_hardcode": "상수/도메인/키워드 → shared/*.jsonl 동적로드",
-    "data_remote": ".jsonl/constants/discovery_log → ~/Dev/nexus/shared/ (R8)"
+    "data_remote": ".jsonl/constants/discovery_log → $NEXUS/shared/ (R8)"
   },
 
   "navigation": {

@@ -10,7 +10,7 @@
 ## 1. 배경
 
 - PAPERS_39 골화 상태 (`n6shared/convergence/n6-architecture.json`): 39 편 Zenodo DOI 발행 완료, ossified 2026-04-10.
-- 기존 파일 베이스: `/Users/ghost/Dev/papers/` (tecs-l + anima + SEDI + n6-architecture + 기타). manifest.json 기준 전체 117 편, 그 중 N6-030 ~ N6-044 + N6-NANOBOT + N6-MILLENNIUM 등이 n6-architecture 축.
+- 기존 파일 베이스: `$PAPERS/` (tecs-l + anima + SEDI + n6-architecture + 기타). manifest.json 기준 전체 117 편, 그 중 N6-030 ~ N6-044 + N6-NANOBOT + N6-MILLENNIUM 등이 n6-architecture 축.
 - 감사 대상: `papers/_registry.json` sections (fusion·chip·ai·energy 등) 의 paper 링크 총 110+ 건. 이 중 도메인당 1 편 원칙을 따라 핵심 39 편이 PAPERS_39 골화 대상.
 - 본 확장 목표: **50 편으로 상승 (+11 신규)**.
 
@@ -106,7 +106,7 @@ hexa 검증 스크립트가 스텁 상태이거나 미생성인 논문에는 본
    - `experiments/anomaly/verify_hexa_earphone.hexa` 생성
    - `experiments/structural/verify_dimensional_unfolding.hexa` 생성
    - `experiments/structural/atlas_promote_7_to_10.hexa` 생성
-4. **manifest.json 동기화**: 전체 papers 매니페스트 `/Users/ghost/Dev/papers/manifest.json` 에 N6-046 ~ N6-056 항목 추가
+4. **manifest.json 동기화**: 전체 papers 매니페스트 `$PAPERS/manifest.json` 에 N6-046 ~ N6-056 항목 추가
 
 ## 8. 규칙 준수 확인
 

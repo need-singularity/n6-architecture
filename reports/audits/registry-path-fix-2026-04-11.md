@@ -24,9 +24,9 @@
 ### 실체 파일 (절대경로 확인 완료)
 
 ```
-/Users/ghost/Dev/n6-architecture/domains/life/synbio/synbio.md   (38640 B)  # 병합 canonical
-/Users/ghost/Dev/n6-architecture/domains/life/synbio/goal.md     (13552 B)  # SSOT
-/Users/ghost/Dev/n6-architecture/papers/n6-synthetic-biology-paper.md  (25702 B)  # 논문 본문
+$N6_ARCH/domains/life/synbio/synbio.md   (38640 B)  # 병합 canonical
+$N6_ARCH/domains/life/synbio/goal.md     (13552 B)  # SSOT
+$N6_ARCH/papers/n6-synthetic-biology-paper.md  (25702 B)  # 논문 본문
 ```
 
 ---
@@ -82,7 +82,7 @@ reports/audits/n6_products-backup-path-fix-2026-04-11.json   (원본  99430 B)
 "papers/n6-synthetic-biology-paper.md"
 ```
 
-### 3-2. `/Users/ghost/Dev/nexus/shared/n6/docs/products.json`
+### 3-2. `$NEXUS/shared/n6/docs/products.json`
 
 **(a) 합성생물학 제품 엔트리 `links` 배열** (라인 3141 근방)
 
@@ -92,7 +92,7 @@ reports/audits/n6_products-backup-path-fix-2026-04-11.json   (원본  99430 B)
 
 `_registry.json` 과 동일하게 3-1 (b) 형태로 수정.
 
-### 3-3. `/Users/ghost/Dev/nexus/shared/n6/n6_products.json`
+### 3-3. `$NEXUS/shared/n6/n6_products.json`
 
 합성생물학 제품 엔트리 `links` 배열 (라인 2664 근방). 기존 단일 `"문서"` 링크 1개만 존재. 3개 링크 (도메인/goal/논문) 로 확장:
 
@@ -140,13 +140,13 @@ python3 -m json.tool nexus/shared/n6/n6_products.json → VALID
 
 | 파일 | 라인 | 유형 | 처리 권고 |
 |---|---|---|---|
-| `/Users/ghost/Dev/n6-architecture/README.md` | 560 | `AUTO:SUMMARY_tech-industry:END` 이후 수동 표 | sync-readme.hexa 재생성 (R5) |
-| `/Users/ghost/Dev/n6-architecture/n6shared/config/dse-map.toml` | 18775 | `note` 주석 필드 | 문구 갱신 또는 삭제 (별건) |
-| `/Users/ghost/Dev/nexus/shared/n6/docs/dse-map.toml` | 18775 | 주석 필드 (동일) | 위와 동일 |
-| `/Users/ghost/Dev/n6-architecture/reports/audits/paper-legacy-audit/verify-coverage.md` | 114 | 과거 감사 기록 | **불변** (reports 시점 불변 원칙) |
-| `/Users/ghost/Dev/n6-architecture/reports/audits/synbio-merge-2026-04-11.md` | 28-29, 98-99, 117 | 감사 리포트 본문 | **불변** |
-| `/Users/ghost/Dev/n6-architecture/reports/audits/_registry-backup-2026-04-11.json` | 20, 3215, 3219 | 본 건 백업 | **불변** |
-| `/Users/ghost/Dev/n6-architecture/reports/audits/products-backup*-2026-04-11.json` | 20, 3142/3146/3149/3153 | 과거 + 본 건 백업 | **불변** |
+| `$N6_ARCH/README.md` | 560 | `AUTO:SUMMARY_tech-industry:END` 이후 수동 표 | sync-readme.hexa 재생성 (R5) |
+| `$N6_ARCH/n6shared/config/dse-map.toml` | 18775 | `note` 주석 필드 | 문구 갱신 또는 삭제 (별건) |
+| `$NEXUS/shared/n6/docs/dse-map.toml` | 18775 | 주석 필드 (동일) | 위와 동일 |
+| `$N6_ARCH/reports/audits/paper-legacy-audit/verify-coverage.md` | 114 | 과거 감사 기록 | **불변** (reports 시점 불변 원칙) |
+| `$N6_ARCH/reports/audits/synbio-merge-2026-04-11.md` | 28-29, 98-99, 117 | 감사 리포트 본문 | **불변** |
+| `$N6_ARCH/reports/audits/_registry-backup-2026-04-11.json` | 20, 3215, 3219 | 본 건 백업 | **불변** |
+| `$N6_ARCH/reports/audits/products-backup*-2026-04-11.json` | 20, 3142/3146/3149/3153 | 과거 + 본 건 백업 | **불변** |
 
 **핵심 잔여 건**: `README.md:560` (sync 재생성 필요). `dse-map.toml:18775` (주석만).
 

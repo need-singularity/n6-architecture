@@ -81,7 +81,7 @@ find domains -name 'verify_*.hexa' -not -name 'verify.hexa' 2>/dev/null | wc -l
 ### 5.3 목적지 파일 수
 
 ```sh
-ls /Users/ghost/Dev/nexus/shared/n6/scripts/verify_*.hexa | wc -l
+ls $NEXUS/shared/n6/scripts/verify_*.hexa | wc -l
 # 결과: 211
 ```
 
@@ -109,7 +109,7 @@ ls /Users/ghost/Dev/nexus/shared/n6/scripts/verify_*.hexa | wc -l
 
 ```sh
 # 1) 목적지에서 신규 파일 제거
-rm /Users/ghost/Dev/nexus/shared/n6/scripts/verify_<도메인>_*.hexa
+rm $NEXUS/shared/n6/scripts/verify_<도메인>_*.hexa
 # 2) 백업에서 원본 경로로 복사
 # (도메인 경로는 domains/<axis>/<domain>/ 로 복원)
 ```

@@ -705,7 +705,7 @@ git commit -m "feat: 궁극의 순수수학 TOML — 39,200 조합 (10×10×8×7
 - [ ] **Step 1: universal-dse 실행 (단일 도메인)**
 
 ```bash
-cd /Users/ghost/Dev/n6-architecture
+cd $N6_ARCH
 tools/universal-dse/universal-dse tools/universal-dse/domains/pure-mathematics.toml --top 30
 ```
 

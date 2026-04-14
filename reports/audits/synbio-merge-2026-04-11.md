@@ -89,7 +89,7 @@ domains/life/synthetic-biology/CLAUDE.md              (중복)
 
 > R25: 공용 설정(hooks-config/absolute_rules/core-lockdown 등) 직접 수정 금지 — sync 스크립트 또는 사용자 명시 승인 필수
 
-### 3-1. `products.json` (`/Users/ghost/Dev/nexus/shared/n6/docs/products.json`)
+### 3-1. `products.json` (`$NEXUS/shared/n6/docs/products.json`)
 
 ```json
 {
@@ -133,7 +133,7 @@ domains/life/synthetic-biology/CLAUDE.md              (중복)
 | 규칙 | 체크 | 결과 |
 |---|---|---|
 | R1 HEXA-FIRST | .hexa 수정 없음, .md 문서 병합만 | ✅ |
-| R2 하드코딩 금지 | 경로 모두 `/Users/ghost/Dev/n6-architecture/` 절대경로 사용 | ✅ |
+| R2 하드코딩 금지 | 경로 모두 `$N6_ARCH/` 절대경로 사용 | ✅ |
 | R5 SSOT | 2 도메인 중복 → 1 canonical, _index.json 단일 진실 업데이트 | ✅ |
 | R10 ossified 불변 | convergence ossified 블록 미변경 (products.json 경로 드리프트는 별건) | ✅ |
 | R11 강등 금지 | stable → failed 전환 없음 | ✅ |

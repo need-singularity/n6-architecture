@@ -125,10 +125,10 @@ test result: ok. 2593 passed; 0 failed; 0 ignored; 0 measured
 
 ## 파일 경로
 
-- 구현: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/lenses/` (56 신규 .rs 파일)
-- 레지스트리: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/frontier_lenses.rs` (expansion_56_lens_entries() 추가)
-- 모듈: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/lenses/mod.rs`
-- Telescope: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/mod.rs`
-- 레지스트리 연결: `/Users/ghost/Dev/n6-architecture/nexus/src/telescope/registry.rs`
-- 테스트: `/Users/ghost/Dev/n6-architecture/nexus/tests/telescope_test.rs`
-- JSON: `/Users/ghost/Dev/n6-architecture/n6shared/config/lens_registry.json`
+- 구현: `$N6_ARCH/nexus/src/telescope/lenses/` (56 신규 .rs 파일)
+- 레지스트리: `$N6_ARCH/nexus/src/telescope/frontier_lenses.rs` (expansion_56_lens_entries() 추가)
+- 모듈: `$N6_ARCH/nexus/src/telescope/lenses/mod.rs`
+- Telescope: `$N6_ARCH/nexus/src/telescope/mod.rs`
+- 레지스트리 연결: `$N6_ARCH/nexus/src/telescope/registry.rs`
+- 테스트: `$N6_ARCH/nexus/tests/telescope_test.rs`
+- JSON: `$N6_ARCH/n6shared/config/lens_registry.json`

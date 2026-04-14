@@ -1,7 +1,7 @@
 # cross_dse_fusion v2 실측 결과 — 2026-04-11
 
 - 실행 스크립트: experiments/dse/cross_dse_fusion_v2_run.hexa (v2 설계 초안의 실행본)
-- 입력 도메인: /Users/ghost/Dev/n6-architecture/nexus/origins/universal-dse/domains
+- 입력 도메인: $N6_ARCH/nexus/origins/universal-dse/domains
 - 도메인 수: 453
 - 전체 쌍 수(이론상): 102378
 - high_conf 쌍: 83018
@@ -188,7 +188,7 @@
 |------|------|------|
 | JSON 결과 | `n6shared/dse/dse_cross_results_v2.json` | 작성 (80,627 bytes) |
 | 리포트 | `reports/discovery/dse-v2-results-2026-04-11.md` | 작성 (본 문서) |
-| atlas.n6 append | `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` | +100 pair [7] append |
+| atlas.n6 append | `$NEXUS/shared/n6/atlas.n6` | +100 pair [7] append |
 | 실행본 소스 | `experiments/dse/cross_dse_fusion_v2_run.hexa` | 저장 |
 | 설계 초안 | `experiments/dse/cross_dse_fusion_v2.hexa` | 보존 (pseudo-code) |
 

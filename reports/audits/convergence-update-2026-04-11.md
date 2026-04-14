@@ -2,7 +2,7 @@
 
 > 축: **reports/audits** · n6-architecture · R11 단방향 수렴 준수 감사
 > 규칙 기준: **R10**(ossified 불변) / **R11**(골화 강등 금지, 재검증은 새 stable 항목 추가) / **R25**(공용 설정 게이트) / **R14**(규칙=JSON SSOT)
-> 대상 파일: `/Users/ghost/Dev/n6-architecture/n6shared/convergence/n6-architecture.json`
+> 대상 파일: `$N6_ARCH/n6shared/convergence/n6-architecture.json`
 
 ---
 

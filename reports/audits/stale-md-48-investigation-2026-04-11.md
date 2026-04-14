@@ -3,7 +3,7 @@
 - 생성일: 2026-04-11
 - 원본 참조: `reports/audits/products-link-remap-2026-04-11.md` (MISS 174건)
 - 조사 범위: MISS 174건 중 `docs/<dom>/<nested>.md` 패턴 48건 (paper 116건, calc 10건 제외)
-- 기준 경로: `/Users/ghost/Dev/n6-architecture/`
+- 기준 경로: `$N6_ARCH/`
 - 작업 방식: 읽기 전용 (조사만, 이관 수행 안 함)
 - 대상 도메인: 24개 / 9축 중 6축 (compute · culture · energy · infra · life · materials)
 
@@ -250,7 +250,7 @@ done < /tmp/miss_48_paths.txt
 
 ## 부록 B. 다음 액션 (권장)
 
-1. **products.json 링크 갱신**: 위 §3 매핑 테이블을 바탕으로 `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` 링크 48건 교체
+1. **products.json 링크 갱신**: 위 §3 매핑 테이블을 바탕으로 `$NEXUS/shared/n6/docs/products.json` 링크 48건 교체
 2. **재감사**: 갱신 후 `products-link-audit` 스크립트 재실행 → MISS 174 - 48 = 126 (paper 116 + calc 10) 잔존 예상
 3. **paper/calc 처리**: 남은 126건은 본 작업 범위 밖. 별도 세션에서 처리
 4. **archive 폴더 확인**: 혹시 `n6shared/logs/absorbed/` 아래 흡수 이력 로그와 교차 검증 시 통합 연도/일자 추가 확인 가능

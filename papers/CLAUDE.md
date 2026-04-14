@@ -16,7 +16,7 @@
 
 ## 진입 명령
 - nexus analyze sync-papers
-- 발행: ~/Dev/papers/ → Zenodo/OSF
+- 발행: $PAPERS/ → Zenodo/OSF
 
 ## 절대규칙
 - 한글 필수 (.md/주석/커밋)

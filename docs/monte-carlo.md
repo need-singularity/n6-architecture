@@ -353,5 +353,5 @@ awk '/^# ══ MC_V9_RESULTS/,/^# ══ [^M]/' $ATLAS
 - v9.3 도메인 분해: `reports/discovery/monte-carlo-v93-domain-decomposition.md`
 - v9.3 도메인 강도: `reports/discovery/mc-v93-domain-breakdown.md`
 - 이론 기반: `docs/theorem-r1-uniqueness.md` (σ·φ=n·τ ⟺ n=6, 3개 독립 증명)
-- 규칙: `~/Dev/nexus/shared/rules/common.json` (R1/R8/R14/R16/R28)
-- 프로젝트 규칙: `~/Dev/nexus/shared/rules/n6-architecture.json` (N61~N65)
+- 규칙: `$NEXUS/shared/rules/common.json` (R1/R8/R14/R16/R28)
+- 프로젝트 규칙: `$NEXUS/shared/rules/n6-architecture.json` (N61~N65)

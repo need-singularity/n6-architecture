@@ -1,9 +1,9 @@
 // roadmap.hexa — n6-architecture 로드맵 어댑터
 //
-// 위임: ~/Dev/nexus/shared/harness/roadmap_guard.hexa (--project n6-architecture 고정)
+// 위임: $NEXUS/shared/harness/roadmap_guard.hexa (--project n6-architecture 고정)
 // 사용: $HEXA scripts/roadmap.hexa [verify|artifacts|status|all]
 //
-// SSOT: ~/Dev/nexus/shared/roadmaps/n6-architecture.json (nexus 리포 내 SSOT)
+// SSOT: $NEXUS/shared/roadmaps/n6-architecture.json (nexus 리포 내 SSOT)
 
 fn main() {
     let a = args()

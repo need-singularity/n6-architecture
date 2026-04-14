@@ -1,8 +1,8 @@
 # products.json 링크 드리프트 리매핑 리포트
 
 - 생성일: 2026-04-11
-- 원본 SSOT: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json`
-- 기준 경로: `/Users/ghost/Dev/n6-architecture/` (R1 감사 예외)
+- 원본 SSOT: `$NEXUS/shared/n6/docs/products.json`
+- 기준 경로: `$N6_ARCH/` (R1 감사 예외)
 - 사전 감사: `reports/audits/products-link-audit-2026-04-11.md` (3/416=0.7%)
 - 본 작업: 일회성 migration 스크립트 (`/tmp/remap_work/remap_products.py`)
 

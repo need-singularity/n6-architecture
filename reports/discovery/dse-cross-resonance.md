@@ -1,7 +1,7 @@
 # DSE 교차 공명 분석 — 전체 335 도메인 확장판 (v2)
 
 > 순수 분석 문서 (설계 5대 규칙 미적용). 생성: `scripts/dse_cross_pilot.py`
-> 입력 SSOT: `docs/dse-map.toml` | 중간 산출물: `~/Dev/nexus/shared/dse_cross/`
+> 입력 SSOT: `docs/dse-map.toml` | 중간 산출물: `$NEXUS/shared/dse_cross/`
 > 분석 일시: 2026-04-09 | v2: 전체 339 도메인 쌍 분석 + 클러스터링
 
 ## 1. 분석 범위
@@ -406,9 +406,9 @@ bin    count  |----------------------------------------------------
 
 ## 9. 산출물 경로
 
-- `~/Dev/nexus/shared/dse_cross/top50_domains.jsonl`
-- `~/Dev/nexus/shared/dse_cross/pair_scores.jsonl`
-- `~/Dev/nexus/shared/dse_cross/resonance_hist.jsonl`
-- `~/Dev/nexus/shared/dse_cross/formula_cross.jsonl`
-- `~/Dev/nexus/shared/dse_cross/all_pairs_s05.jsonl` (v2: 전체 S>=0.5 쌍)
-- `~/Dev/nexus/shared/dse_cross/domain_clusters.jsonl` (v2: 도메인 클러스터)
+- `$NEXUS/shared/dse_cross/top50_domains.jsonl`
+- `$NEXUS/shared/dse_cross/pair_scores.jsonl`
+- `$NEXUS/shared/dse_cross/resonance_hist.jsonl`
+- `$NEXUS/shared/dse_cross/formula_cross.jsonl`
+- `$NEXUS/shared/dse_cross/all_pairs_s05.jsonl` (v2: 전체 S>=0.5 쌍)
+- `$NEXUS/shared/dse_cross/domain_clusters.jsonl` (v2: 도메인 클러스터)

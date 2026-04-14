@@ -2,7 +2,7 @@
 
 | 항목 | 값 |
 |------|----:|
-| 대상 파일 | `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` |
+| 대상 파일 | `$NEXUS/shared/n6/docs/products.json` |
 | 백업 | `reports/audits/products-backup-2026-04-11-postsession.json` |
 | 마이그레이션 스크립트 | `/tmp/n6_migrations/products_postsession_2026_04_11.py` |
 | 실행 일시 | 2026-04-11 |

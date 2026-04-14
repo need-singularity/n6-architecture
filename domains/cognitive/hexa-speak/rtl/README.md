@@ -178,7 +178,7 @@ tier-3 CODEBOOK    = 2^(σ-φ)     = 2^10   = 1024
 ## 검증 실행
 
 ```sh
-cd /Users/ghost/Dev/n6-architecture
+cd $N6_ARCH
 hexa run domains/cognitive/hexa-speak/rtl/verify_n6_speak_v2.hexa
 ```
 

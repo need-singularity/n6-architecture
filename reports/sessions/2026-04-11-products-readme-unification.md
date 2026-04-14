@@ -4,8 +4,8 @@
 - 브랜치: main
 - 작업자: Claude Opus 4.6 (GO 모드, 병렬 백그라운드)
 - 지시: "문서 하나로 통합정리 아직안됨" + "products.json" + GO 모드 즉시 발사
-- SSOT: `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` (173 제품, 34 섹션)
-- 대상 문서: `/Users/ghost/Dev/n6-architecture/README.md` (850 → 979 라인)
+- SSOT: `$NEXUS/shared/n6/docs/products.json` (173 제품, 34 섹션)
+- 대상 문서: `$N6_ARCH/README.md` (850 → 979 라인)
 
 ## 증상 1문장
 
@@ -15,15 +15,15 @@
 
 ```sh
 # 증상 1: 통합 요약표 공백
-sed -n '86,87p' /Users/ghost/Dev/n6-architecture/README.md
+sed -n '86,87p' $N6_ARCH/README.md
 # 출력: <!-- AUTO:ALIEN_INDEX:START -->\n<!-- AUTO:ALIEN_INDEX:END -->
 
 # 증상 2: sync 도구 STUB
-sed -n '1,12p' /Users/ghost/Dev/n6-architecture/n6shared/sync_products_readme.hexa
+sed -n '1,12p' $N6_ARCH/n6shared/sync_products_readme.hexa
 # 출력: println("STUB: sync_products_readme.py (HEXA 포팅 대기)")
 
 # 증상 3: 링크 드리프트
-python3 -c "import json; p=json.load(open('/Users/ghost/Dev/nexus/shared/n6/docs/products.json')); print(p['sections'][0]['products'][0]['links'])"
+python3 -c "import json; p=json.load(open('$NEXUS/shared/n6/docs/products.json')); print(p['sections'][0]['products'][0]['links'])"
 # 출력에 'docs/fusion/goal.md' — 실제는 'domains/energy/fusion/goal.md'
 ```
 
@@ -144,7 +144,7 @@ natural-science, marketing, digital-medical, mobility, tattoo-removal, keyboard,
 ### 신규 발견 — papers SSOT 145편 구멍
 
 - `papers/_registry.json` 158편 선언
-- 실측: `n6-architecture/papers/` 내 13편, `/Users/ghost/Dev/papers/n6-architecture/` 내 1편
+- 실측: `n6-architecture/papers/` 내 13편, `$PAPERS/n6-architecture/` 내 1편
 - 차이: **145편 ghost** (papers SSOT 자체의 거대 드리프트)
 - 본 세션 범위 외 — 별도 papers 보강 세션 필요
 
@@ -216,7 +216,7 @@ natural-science, marketing, digital-medical, mobility, tattoo-removal, keyboard,
 
 - 선언 139편 vs 실측 38편 (gap 101) — 보유율 27.3%
 - products.json paper 116 분류:
-  - **FOUND_ALT 24편**: `/Users/ghost/Dev/papers/tecs-l/` 23편 + `n6-architecture/papers/` 1편
+  - **FOUND_ALT 24편**: `$PAPERS/tecs-l/` 23편 + `n6-architecture/papers/` 1편
   - **GHOST_CEIL 92편**: 디스크 어디에도 없음, 전부 ceiling=true 섹션
   - ORPHAN_DECLARED 11 / ORPHAN_DISK 14
 - frontier 단독 31편 ghost (33.7%)
@@ -226,7 +226,7 @@ natural-science, marketing, digital-medical, mobility, tattoo-removal, keyboard,
 ### 본체 — Agent C FOUND_ALT 24편 cp + path 갱신
 
 사용자 옵션 (A) 선택 — 본 세션 cp 실행:
-- 23편 cp `/Users/ghost/Dev/papers/tecs-l/n6-*-paper.md` → `n6-architecture/papers/`
+- 23편 cp `$PAPERS/tecs-l/n6-*-paper.md` → `n6-architecture/papers/`
 - 1편 (n6-synthetic-biology-paper.md) 이미 존재, skipped
 - products.json path 25건 갱신: `docs/paper/...` → `papers/...`
 - n6-architecture/papers/ 13편 → **36편** (+23)

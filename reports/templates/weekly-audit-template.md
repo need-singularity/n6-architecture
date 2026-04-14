@@ -88,7 +88,7 @@
 ## 4. atlas.n6 등급 집계 ([7] → [10*] 승격 추적)
 
 ```
-  파일: /Users/ghost/Dev/nexus/shared/n6/atlas.n6
+  파일: $NEXUS/shared/n6/atlas.n6
 
   [10*] EXACT 검증완료     │    {N} │ ±{N}
   [10]/[9] NEAR           │    {N} │

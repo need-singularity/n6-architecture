@@ -1,7 +1,7 @@
 # Reality Map Monte Carlo v9 — 실측 결과 (2026-04-11)
 
 > 실행 일시: 2026-04-11
-> SSOT 소스: `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` (8.66MB, 52,641 lines)
+> SSOT 소스: `$NEXUS/shared/n6/atlas.n6` (8.66MB, 52,641 lines)
 > 설계서: `docs/monte-carlo.md`
 > 스크립트: `experiments/monte-carlo-v9.hexa` (.hexa DSL 초안) + awk 실행 파이프라인 (`/tmp/mc_v9_work/run_mc.sh`)
 > 실행 모드: Mac 로컬, bash+awk (hexa v0.1.0 엔진은 복합 제네릭 배열 타입 `[i64; 8]` 미지원으로 원본 .hexa 스크립트는 파싱 실패 → awk 백엔드로 전환)
@@ -153,10 +153,10 @@
 
 | 파일 | 역할 |
 |---|---|
-| `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` | SSOT (MC_V9_RESULTS 섹션 append 완료) |
-| `/Users/ghost/Dev/n6-architecture/docs/monte-carlo.md` | 설계서 |
-| `/Users/ghost/Dev/n6-architecture/experiments/monte-carlo-v9.hexa` | .hexa DSL 스크립트 (hexa v0.2 대기) |
-| `/Users/ghost/Dev/n6-architecture/reports/discovery/mc-v9-results-2026-04-11.md` | 본 리포트 |
+| `$NEXUS/shared/n6/atlas.n6` | SSOT (MC_V9_RESULTS 섹션 append 완료) |
+| `$N6_ARCH/docs/monte-carlo.md` | 설계서 |
+| `$N6_ARCH/experiments/monte-carlo-v9.hexa` | .hexa DSL 스크립트 (hexa v0.2 대기) |
+| `$N6_ARCH/reports/discovery/mc-v9-results-2026-04-11.md` | 본 리포트 |
 | `/tmp/mc_v9_work/run_mc.sh` | 실행 bash+awk 파이프라인 |
 | `/tmp/mc_v9_work/results.tsv` | 결과 TSV (15 레코드) |
 | `/tmp/mc_v9_work/results_v8.tsv` | v8-compat 회귀 TSV (6 레코드) |

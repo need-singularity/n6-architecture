@@ -596,5 +596,5 @@ DFS 17차도 16차의 정직성 원칙 준수:
 - 날짜: 2026-04-12
 - 프로젝트: n6-architecture
 - 선행 BT: BT-1394~1408
-- 참고 atlas: /Users/ghost/Dev/nexus/shared/n6/atlas.n6
+- 참고 atlas: $NEXUS/shared/n6/atlas.n6
 - SSOT 규칙: n6shared/rules/common.json (R0~R27), n6shared/rules/n6-architecture.json (N61~N65)

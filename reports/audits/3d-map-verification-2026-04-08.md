@@ -45,6 +45,6 @@ HEAD 커밋(`2cf9141d feat: WebGL 3D지도 + …`)까지 push 완료되었으나
 
 ## 참조 파일
 
-- `/Users/ghost/Dev/n6-architecture/docs/index.html`
-- `/Users/ghost/Dev/n6-architecture/docs/reality_map.json`
-- `/Users/ghost/Dev/n6-architecture/n6-3dmap-2026-04-08.png`
+- `$N6_ARCH/docs/index.html`
+- `$N6_ARCH/docs/reality_map.json`
+- `$N6_ARCH/n6-3dmap-2026-04-08.png`

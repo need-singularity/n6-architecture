@@ -2,7 +2,7 @@
 
 > Generated: 2026-04-04
 > Source: ~/Dev/ready/n6-architecture/ (backup/corrupted version)
-> Target: ~/Dev/n6-architecture/ (main)
+> Target: $N6_ARCH/ (main)
 > Scanner: ready-absorber NEXUS-6
 
 ---

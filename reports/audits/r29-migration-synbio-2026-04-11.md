@@ -22,7 +22,7 @@ R29 규칙 본문:
 - `hexa-lang/docs/*.hexa`
 
 허용 단일 위치:
-- `/Users/ghost/Dev/nexus/shared/n6/scripts/`
+- `$NEXUS/shared/n6/scripts/`
 
 `domains/life/synbio/verify_alien10.hexa` 는 도메인 polder 내부에 존재하는
 검증용 .hexa 파일로 R29 의 포괄 규칙("계산기/검증/스캐너") 에 해당하여 위반
@@ -36,8 +36,8 @@ R29 규칙 본문:
 
 | 항목 | 값 |
 |------|-----|
-| 원본 경로 | `/Users/ghost/Dev/n6-architecture/domains/life/synbio/verify_alien10.hexa` |
-| 신규 경로 | `/Users/ghost/Dev/nexus/shared/n6/scripts/verify_synbio_alien10.hexa` |
+| 원본 경로 | `$N6_ARCH/domains/life/synbio/verify_alien10.hexa` |
+| 신규 경로 | `$NEXUS/shared/n6/scripts/verify_synbio_alien10.hexa` |
 | 파일 크기 | 10 줄 (STUB) |
 | md5 (이관 전) | `ee0633a4dedc488b56853e25e9adf900` |
 | md5 (이관 후 바이너리 동일성 확인) | `ee0633a4dedc488b56853e25e9adf900` |
@@ -125,7 +125,7 @@ synbio 건만 처리하며 나머지는 이관 미실행 상태로 목록만 기
 전체 206 건 목록은 다음 명령으로 재생성 가능:
 
 ```sh
-cd /Users/ghost/Dev/n6-architecture
+cd $N6_ARCH
 find domains -name "verify_*.hexa" -not -name "verify.hexa" 2>/dev/null | sort
 ```
 
@@ -144,10 +144,10 @@ find domains -name "verify_*.hexa" -not -name "verify.hexa" 2>/dev/null | sort
 
 ## 5. 결과
 
-1. `/Users/ghost/Dev/nexus/shared/n6/scripts/verify_synbio_alien10.hexa` — 생성
-2. `/Users/ghost/Dev/n6-architecture/domains/life/synbio/verify_alien10.hexa` — 삭제
-3. `/Users/ghost/Dev/n6-architecture/domains/life/synbio/CLAUDE.md` — 업데이트
-4. `/Users/ghost/Dev/n6-architecture/reports/audits/r29-migration-synbio-2026-04-11.md` — 본 리포트
+1. `$NEXUS/shared/n6/scripts/verify_synbio_alien10.hexa` — 생성
+2. `$N6_ARCH/domains/life/synbio/verify_alien10.hexa` — 삭제
+3. `$N6_ARCH/domains/life/synbio/CLAUDE.md` — 업데이트
+4. `$N6_ARCH/reports/audits/r29-migration-synbio-2026-04-11.md` — 본 리포트
 5. R29 위반 후보 잔여: 206 건 (축별 집계 섹션 3.1 참조)
 
 후속 작업: 병합 감사 리포트에 R29 위반 잔여 206 건 건을 단일 이관

@@ -126,9 +126,9 @@ BT-380-SOTA-SSM 3종 (Mamba-2 / Hyena / RWKV-7) × n=6 — 골화 완료
 
 ## 7. 파일 절대경로
 
-- `/Users/ghost/Dev/n6-architecture/techniques/sota/mamba2.hexa` (BODY)
-- `/Users/ghost/Dev/n6-architecture/techniques/sota/hyena.hexa` (BODY, FFT_CAP=96)
-- `/Users/ghost/Dev/n6-architecture/techniques/sota/rwkv.hexa` (BODY)
-- `/Users/ghost/Dev/n6-architecture/papers/n6-sota-ssm-paper.md` (N6-059 신규)
-- `/Users/ghost/Dev/n6-architecture/techniques/_registry.json` (v1.1.0, sota 섹션 추가)
-- `/Users/ghost/Dev/n6-architecture/reports/audits/sota-3-integration-2026-04-11.md` (본 보고서)
+- `$N6_ARCH/techniques/sota/mamba2.hexa` (BODY)
+- `$N6_ARCH/techniques/sota/hyena.hexa` (BODY, FFT_CAP=96)
+- `$N6_ARCH/techniques/sota/rwkv.hexa` (BODY)
+- `$N6_ARCH/papers/n6-sota-ssm-paper.md` (N6-059 신규)
+- `$N6_ARCH/techniques/_registry.json` (v1.1.0, sota 섹션 추가)
+- `$N6_ARCH/reports/audits/sota-3-integration-2026-04-11.md` (본 보고서)

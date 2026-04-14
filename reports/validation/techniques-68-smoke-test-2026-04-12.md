@@ -2,7 +2,7 @@
 
 - **작성일**: 2026-04-12
 - **대상 커밋**: 3aba13f0 (go(전체): 21 에이전트 일괄 — 기법68종·칩L6·DFS164·논문58·DSE490)
-- **대상 디렉토리**: `/Users/ghost/Dev/n6-architecture/techniques/`
+- **대상 디렉토리**: `$N6_ARCH/techniques/`
 - **검증 방식**: 정직 검증 — 전 파일 헤더·게이트·OSSIFIED 블록 직접 판독 (self-ref 금지)
 - **레지스트리 SSOT**: `techniques/_registry.json` (`_body_count=68`, `_stub_count=0`, `_deprecated_count=2`)
 

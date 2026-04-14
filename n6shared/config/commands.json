@@ -217,7 +217,7 @@
       "keywords": ["roi", "투자수익", "개선목록"],
       "description": "현재 프로젝트 인프라 ROI 항목 표 출력 — 자기 프로젝트만",
       "ssot": "n6shared/config/roi/{project}.json",
-      "project_detect": "cwd 디렉토리명 = 프로젝트명 (예: ~/Dev/nexus → nexus, ~/Dev/n6-architecture → n6-architecture). 공유 shared/ 내에선 nexus",
+      "project_detect": "cwd 디렉토리명 = 프로젝트명 (예: $NEXUS → nexus, $N6_ARCH → n6-architecture). 공유 shared/ 내에선 nexus",
       "action": "⛔ git log/stats/커밋분석/도메인집계 절대 금지 — 이 명령은 JSON 파일 기반 표 출력 전용. 순서: (1) {project} = cwd basename 판별 (2) n6shared/config/roi/{project}.json Read로 읽기 (3) items 배열에서 status=todo만 필터 (4) roi 필드 내림차순 정렬 (5) ASCII 표 출력",
       "format_rules": [
         "⛔ done + running 항목 표시 금지 — status=todo만 필터링. done/running은 카운트에만 포함",

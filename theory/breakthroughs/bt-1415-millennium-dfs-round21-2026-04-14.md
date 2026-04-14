@@ -206,4 +206,4 @@ g   | dim A_g | Hecke gen | 모듈라이
 
 - 날짜: 2026-04-14
 - 선행 BT: BT-1414@04-14
-- atlas 참조: /Users/ghost/Dev/nexus/shared/n6/atlas.n6
+- atlas 참조: $NEXUS/shared/n6/atlas.n6

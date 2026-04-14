@@ -36,7 +36,7 @@
 | 1 | **git log** | 로컬 `.git` | `git log --since='7 days ago'` — 커밋/저자/파일/9축 분포 |
 | 2 | **growth_bus.jsonl** | `n6shared/growth_bus.jsonl` | awk 로 `ts` 필드 cutoff 이후 라인 수 + 타입/도메인 TOP |
 | 3 | **discovery_graph.json** | `n6shared/discovery_graph.json` | `"id":` / `"from":` 출현 빈도로 노드/엣지 근사 → 스냅샷 대비 델타 |
-| 4 | **atlas.n6** | `/Users/ghost/Dev/nexus/shared/n6/atlas.n6` | grep `[10*]`, `[10]`, `[9]`, `[7]`, `[N?]`, `[N!]` 등급 집계 |
+| 4 | **atlas.n6** | `$NEXUS/shared/n6/atlas.n6` | grep `[10*]`, `[10]`, `[9]`, `[7]`, `[N?]`, `[N!]` 등급 집계 |
 | 5 | **cargo test** | `nexus/` 워크스페이스 | `timeout 180 cargo test --quiet --offline` 후 `test result: ok. X passed` 파싱 |
 | 6 | **convergence** | `n6shared/convergence/n6-architecture.json` | awk 로 `ossified`/`stable`/`failed` 블록 키 수 집계 |
 
@@ -140,7 +140,7 @@ main
 ### 6.1 수동 실행
 
 ```sh
-cd /Users/ghost/Dev/n6-architecture
+cd $N6_ARCH
 hexa nexus/scripts/weekly_audit.hexa                   # 이번 주 감사
 hexa nexus/scripts/weekly_audit.hexa --dry-run         # 파일 작성 없이 미리보기
 hexa nexus/scripts/weekly_audit.hexa --force           # 덮어쓰기
@@ -152,7 +152,7 @@ hexa nexus/scripts/weekly_audit.hexa --no-cargo        # cargo test 스킵
 
 ```sh
 # ~/.crontab 또는 crontab -e
-0 9 * * 1 cd /Users/ghost/Dev/n6-architecture && /Users/ghost/Dev/hexa-lang/hexa nexus/scripts/weekly_audit.hexa >> n6shared/logs/weekly_audit_cron.log 2>&1
+0 9 * * 1 cd $N6_ARCH && $HEXA_LANG/hexa nexus/scripts/weekly_audit.hexa >> n6shared/logs/weekly_audit_cron.log 2>&1
 ```
 
 ### 6.3 macOS launchd (권장 — cron 대체)
@@ -170,7 +170,7 @@ hexa nexus/scripts/weekly_audit.hexa --no-cargo        # cargo test 스킵
     <array>
         <string>/bin/bash</string>
         <string>-c</string>
-        <string>cd /Users/ghost/Dev/n6-architecture && /Users/ghost/Dev/hexa-lang/hexa nexus/scripts/weekly_audit.hexa</string>
+        <string>cd $N6_ARCH && $HEXA_LANG/hexa nexus/scripts/weekly_audit.hexa</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -182,9 +182,9 @@ hexa nexus/scripts/weekly_audit.hexa --no-cargo        # cargo test 스킵
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/ghost/Dev/n6-architecture/n6shared/logs/weekly_audit_launchd.log</string>
+    <string>$N6_ARCH/n6shared/logs/weekly_audit_launchd.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/ghost/Dev/n6-architecture/n6shared/logs/weekly_audit_launchd.err</string>
+    <string>$N6_ARCH/n6shared/logs/weekly_audit_launchd.err</string>
 </dict>
 </plist>
 ```
@@ -208,7 +208,7 @@ launchctl list | grep weekly-audit
         "hooks": [
           {
             "type": "command",
-            "command": "cd /Users/ghost/Dev/n6-architecture && /Users/ghost/Dev/hexa-lang/hexa nexus/scripts/weekly_audit.hexa --dry-run 2>&1 | head -30",
+            "command": "cd $N6_ARCH && $HEXA_LANG/hexa nexus/scripts/weekly_audit.hexa --dry-run 2>&1 | head -30",
             "timeout": 15
           }
         ]

@@ -5,7 +5,7 @@
 **범위**: 2026-04-11 Zenodo 발행 대기 3편 (N6-054 / N6-057 / N6-058)
 **작업자**: Claude (Opus 4.6, 1M context)
 **선행 리포트**: `reports/audits/zenodo-publish-ready-2026-04-11.md` (2편 버전)
-**SSOT**: `/Users/ghost/Dev/papers/manifest.json` + `papers/_registry.json`
+**SSOT**: `$PAPERS/manifest.json` + `papers/_registry.json`
 **PP3 상태**: 본 리포트 작성 시점에 manifest.json 신규 3 엔트리 등록 완료
 
 ---
@@ -30,7 +30,7 @@
 
 | 항목 | 값 |
 |------|----|
-| **파일 경로 (절대)** | `/Users/ghost/Dev/n6-architecture/papers/n6-cross-paradigm-ai-paper.md` |
+| **파일 경로 (절대)** | `$N6_ARCH/papers/n6-cross-paradigm-ai-paper.md` |
 | **파일 경로 (repo 상대)** | `papers/n6-cross-paradigm-ai-paper.md` |
 | **줄 수** | 185 |
 | **한글 제목** | 완전수 n=6과 AI 8-패러다임 공진: BT-380 메타 정리 |
@@ -71,7 +71,7 @@
 
 | 항목 | 값 |
 |------|----|
-| **파일 경로 (절대)** | `/Users/ghost/Dev/n6-architecture/papers/n6-ai-17-techniques-experimental-paper.md` |
+| **파일 경로 (절대)** | `$N6_ARCH/papers/n6-ai-17-techniques-experimental-paper.md` |
 | **파일 경로 (repo 상대)** | `papers/n6-ai-17-techniques-experimental-paper.md` |
 | **줄 수** | 197 |
 | **한글 제목** | 완전수 n=6과 17 AI 기법 실험: hexa 전환 후 전수 검증 |
@@ -105,7 +105,7 @@
 
 | 항목 | 값 |
 |------|----|
-| **파일 경로 (절대)** | `/Users/ghost/Dev/n6-architecture/papers/n6-synthetic-biology-paper.md` |
+| **파일 경로 (절대)** | `$N6_ARCH/papers/n6-synthetic-biology-paper.md` |
 | **파일 경로 (repo 상대)** | `papers/n6-synthetic-biology-paper.md` |
 | **줄 수** | 463 |
 | **한글 제목** | 완전수 n=6과 합성생물학: 이중 완전수 생명 코드의 산술적 기원 |
@@ -320,16 +320,16 @@ BT-372 합성생물학 이중 완전수 생명 코드 — 골화 완료
 | 항목 | 상태 |
 |------|------|
 | ZENODO_TOKEN 환경변수 | 사용자 보유 전제 (CI 비노출) |
-| `upload_zenodo.sh` 스크립트 | `/Users/ghost/Dev/papers/upload_zenodo.sh` 존재 |
+| `upload_zenodo.sh` 스크립트 | `$PAPERS/upload_zenodo.sh` 존재 |
 | `manifest.json` 등록 | **본 세션 완료 — N6-054, N6-057, N6-058 3 엔트리 신규 등록** (PP3) |
 | `_meta.total_papers` | 117 → 120 갱신 |
 | `_meta.updated` | 2026-04-09 → 2026-04-11 갱신 |
 | 한글→영문 제목 병기 | payload `title` 영문, 본문 h1 한글, 본문 초록 한글 |
 | ORCID | 세 편 모두 `0000-0000-0000-0000` — 사용자 실 ORCID 로 교체 필요 |
 | communities 초대 | `n6-architecture` Zenodo 커뮤니티 사전 승인 전제 |
-| R14 SSOT | `papers/_registry.json` + `/Users/ghost/Dev/papers/manifest.json` 모두 3 편 동기화 필요 (발행 후) |
+| R14 SSOT | `papers/_registry.json` + `$PAPERS/manifest.json` 모두 3 편 동기화 필요 (발행 후) |
 | N62 재검증 | 세 편 모두 본 세션 `/usr/bin/python3` 실행 PASS (158/158) |
-| JSON 유효성 | `python3 -m json.tool /Users/ghost/Dev/papers/manifest.json` PASS |
+| JSON 유효성 | `python3 -m json.tool $PAPERS/manifest.json` PASS |
 
 ---
 
@@ -337,7 +337,7 @@ BT-372 합성생물학 이중 완전수 생명 코드 — 골화 완료
 
 1. 사용자가 `ZENODO_TOKEN` 설정 후 `upload_zenodo.sh N6-054`, `N6-057`, `N6-058` 순차 실행
 2. DOI 3 개 수신 → 본 리포트 section 1.1/2.1/3.1 의 `manifest.json id` 옆 `zenodo_doi` 필드 기입
-3. `/Users/ghost/Dev/papers/manifest.json` 의 3 엔트리 `status`: "Draft" → "Published", `doi`/`zenodo_doi`: 발급 DOI 로 갱신 (PP3)
+3. `$PAPERS/manifest.json` 의 3 엔트리 `status`: "Draft" → "Published", `doi`/`zenodo_doi`: 발급 DOI 로 갱신 (PP3)
 4. `papers/_registry.json` 의 `_meta.papers_chunk_d_2026-04-11.status` "Draft" → "Published (2/11)" 승격
 5. 본 리포트 체크박스 `[x]` 중 "ORCID 교체" 항목 완료 기록
 6. 커밋 메시지 권장: `feat(papers): N6-054 + N6-057 + N6-058 Zenodo DOI 발급 — BT-380 메타 + 17 AI 기법 + BT-372 합성생물학`
@@ -388,8 +388,8 @@ BT-372 합성생물학 이중 완전수 생명 코드 — 골화 완료
 
 2026-04-11 시점에 **3 편 (N6-054, N6-057, N6-058) 이 Zenodo DOI 발행 즉시 가능 상태**임을 확인했다. N62 임베드 재실행 합계 **158/158 OSSIFIED** (39+40+79), `manifest.json` 신규 3 엔트리 등록 완료, `_meta.total_papers` 117→120 갱신, JSON 유효성 `python3 -m json.tool` PASS. 본 리포트는 세 편의 Zenodo REST API `deposit/depositions` 엔드포인트에 즉시 투입 가능한 영문 메타데이터 payload (논문 1/2 는 선행 리포트 참조, 논문 3 은 section 3.3 직접 수록) 와 BibTeX 참고문헌 (논문 3 은 section 3.5 에 15 건 수록) 초안을 제공한다.
 
-**실제 DOI 발급은 사용자가 `ZENODO_TOKEN` 환경변수 설정 후 `/Users/ghost/Dev/papers/upload_zenodo.sh <PAPER_ID>` 를 3 회 실행하여 수행**한다. 본 에이전트는 API 호출 금지 원칙을 준수한다.
+**실제 DOI 발급은 사용자가 `ZENODO_TOKEN` 환경변수 설정 후 `$PAPERS/upload_zenodo.sh <PAPER_ID>` 를 3 회 실행하여 수행**한다. 본 에이전트는 API 호출 금지 원칙을 준수한다.
 
-후속: 발행 성공 시 `papers/_registry.json` 및 `/Users/ghost/Dev/papers/manifest.json` 동기화 (status: Draft → Published + DOI 기입), `papers_chunk_d_2026-04-11` 진행률 2/11 → 3/11 로 승격. 나머지 8 편은 hexa 검증 완성 후 별도 사이클로 이관.
+후속: 발행 성공 시 `papers/_registry.json` 및 `$PAPERS/manifest.json` 동기화 (status: Draft → Published + DOI 기입), `papers_chunk_d_2026-04-11` 진행률 2/11 → 3/11 로 승격. 나머지 8 편은 hexa 검증 완성 후 별도 사이클로 이관.
 
 — 끝 —

@@ -62,7 +62,7 @@
     },
     "signal_brainwire_dse": {
       "count": 2,
-      "_ssot": "/Users/ghost/Dev/nexus/shared/lenses/ (HEXA 네이티브)",
+      "_ssot": "$NEXUS/shared/lenses/ (HEXA 네이티브)",
       "_origin": "DSE P1-4 — SEDI 시그널 서치 + brainwire EEG n=6 매핑",
       "_origin_files": [
         "bridge/origins/ready-absorber/findings/sedi.json",

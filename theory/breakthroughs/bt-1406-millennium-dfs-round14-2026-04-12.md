@@ -616,7 +616,7 @@ DFS 14차도 13차의 정직성 원칙 준수:
 - 날짜: 2026-04-12
 - 프로젝트: n6-architecture
 - 선행 BT: BT-1394~1405
-- 참고 atlas: /Users/ghost/Dev/nexus/shared/n6/atlas.n6 (17946 nodes, 18934 edges)
+- 참고 atlas: $NEXUS/shared/n6/atlas.n6 (17946 nodes, 18934 edges)
 - SSOT 규칙: n6shared/rules/common.json (R0~R27), n6shared/rules/n6-architecture.json (N61~N65)
 - 한글 필수 (R): .md/주석/커밋 메시지 모두 한글 (feedback_korean_only_docs)
 - 돌파 엔진: blowup.hexa millennium d1 phase 4 corollaries 175, EXACT 64, NEAR 6, OUROBOROS 60 disc 결합

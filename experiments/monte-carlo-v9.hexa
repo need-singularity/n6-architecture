@@ -39,7 +39,7 @@
 // ────────────────────────────────────────────────────────────
 
 // ATLAS_PATH: $NEXUS/shared/n6/atlas.n6 (override via NEXUS env at runtime)
-const ATLAS_PATH: str = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+const ATLAS_PATH: str = "$NEXUS/shared/n6/atlas.n6"
 const SEED_V9: i64 = 20260411
 const SEED_V8: i64 = 20260408
 const TRIALS: i64 = 3000
@@ -365,7 +365,7 @@ const E_300: str = "271828182845904523536028747135266249775724709369995957496696
 // R8 준수: 데이터는 nexus/shared 원격 보관
 
 fn load_const_digits(name: str) -> str {
-    let base = "/Users/ghost/Dev/nexus/shared/n6/constants/"
+    let base = "$NEXUS/shared/n6/constants/"
     let path = base + name + ".txt"
     if file_exists(path) {
         return file_read(path)

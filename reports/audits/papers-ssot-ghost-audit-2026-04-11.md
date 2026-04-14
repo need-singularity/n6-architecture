@@ -3,10 +3,10 @@
 - 생성일: 2026-04-11
 - 범위: 읽기 전용 감사 (수정 없음)
 - 대상 SSOT
-  - `/Users/ghost/Dev/n6-architecture/papers/_registry.json` (_meta.total_papers 선언값 139)
-  - `/Users/ghost/Dev/n6-architecture/papers/` 디렉토리
-  - `/Users/ghost/Dev/papers/` 외부 리포 (tecs-l, n6-architecture, 루트)
-  - `/Users/ghost/Dev/nexus/shared/n6/docs/products.json` (40 섹션 / 204 제품, 일부 product의 `links[].path`가 `docs/paper/n6-*-paper.md`)
+  - `$N6_ARCH/papers/_registry.json` (_meta.total_papers 선언값 139)
+  - `$N6_ARCH/papers/` 디렉토리
+  - `$PAPERS/` 외부 리포 (tecs-l, n6-architecture, 루트)
+  - `$NEXUS/shared/n6/docs/products.json` (40 섹션 / 204 제품, 일부 product의 `links[].path`가 `docs/paper/n6-*-paper.md`)
 - 참고: `reports/audits/products-link-remap-2026-04-11.md` (Agent 4 paper MISS 116건 선행 보고)
 
 ---
@@ -17,10 +17,10 @@
 
 | 위치 | 파일 수 |
 |---|---:|
-| `/Users/ghost/Dev/n6-architecture/papers/` | 13 |
-| `/Users/ghost/Dev/papers/tecs-l/` | 23 |
-| `/Users/ghost/Dev/papers/n6-architecture/` | 1 (`n6-millennium-problems-paper.md`) |
-| `/Users/ghost/Dev/papers/` 루트 | 1 (`n6-hexa-neuro-bci-paper.md`) |
+| `$N6_ARCH/papers/` | 13 |
+| `$PAPERS/tecs-l/` | 23 |
+| `$PAPERS/n6-architecture/` | 1 (`n6-millennium-problems-paper.md`) |
+| `$PAPERS/` 루트 | 1 (`n6-hexa-neuro-bci-paper.md`) |
 | 합집합 (중복 제거, basename 기준) | **38** |
 
 ### 1-2. 선언값 비교
@@ -53,7 +53,7 @@ products 116 vs 디스크 24 (products ∩ disk)  →  ghost 92편
 
 | 분류 | 개수 | 의미 |
 |---|---:|---|
-| **FOUND_ALT** | 24 | 선언 path와 다른 경로에 파일 존재 (주로 `/Users/ghost/Dev/papers/tecs-l/`) |
+| **FOUND_ALT** | 24 | 선언 path와 다른 경로에 파일 존재 (주로 `$PAPERS/tecs-l/`) |
 | **GHOST_CEIL** | 92 | 디스크 어디에도 없음, 전부 ceiling=True 섹션 소속 |
 | **GHOST_NOCEIL** | 0 | ceiling=False 섹션 소속 ghost 없음 (quantum-computer 섹션은 paper link 자체 없음) |
 | **ORPHAN_DECLARED** | 11 | _registry.json 선언만, products.json 참조 0 |
@@ -74,34 +74,34 @@ GHOST_NOCEIL    0
 
 ## 3. FOUND_ALT 24편 — path 갱신 후보
 
-선언 path는 전부 `docs/paper/n6-*.md` 패턴이지만 실제 파일은 `/Users/ghost/Dev/papers/tecs-l/` (23편)과 `/Users/ghost/Dev/n6-architecture/papers/` (1편)에 존재. products.json의 `links[].path` 갱신 또는 파일 이관 필요.
+선언 path는 전부 `docs/paper/n6-*.md` 패턴이지만 실제 파일은 `$PAPERS/tecs-l/` (23편)과 `$N6_ARCH/papers/` (1편)에 존재. products.json의 `links[].path` 갱신 또는 파일 이관 필요.
 
 | 선언 path (products.json) | 실제 위치 | 소속 섹션 |
 |---|---|---|
-| `docs/paper/n6-aerospace-transport-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-aerospace-transport-paper.md` | aerospace |
-| `docs/paper/n6-autonomous-driving-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-autonomous-driving-paper.md` | robotics |
-| `docs/paper/n6-calendar-time-geography-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-calendar-time-geography-paper.md` | civilization |
-| `docs/paper/n6-classical-mechanics-accelerator-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-classical-mechanics-accelerator-paper.md` | physics |
-| `docs/paper/n6-cognitive-social-psychology-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-cognitive-social-psychology-paper.md` | tech-industry |
-| `docs/paper/n6-consciousness-soc-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-consciousness-soc-paper.md` | chip |
-| `docs/paper/n6-control-automation-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-control-automation-paper.md` | robotics |
-| `docs/paper/n6-ecology-agriculture-food-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-ecology-agriculture-food-paper.md` | tech-industry |
-| `docs/paper/n6-economics-finance-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-economics-finance-paper.md` | tech-industry |
-| `docs/paper/n6-games-sports-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-games-sports-paper.md` | play |
-| `docs/paper/n6-governance-safety-urban-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-governance-safety-urban-paper.md` | safety |
-| `docs/paper/n6-hexa-3d-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-hexa-3d-paper.md` | chip |
-| `docs/paper/n6-hexa-photon-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-hexa-photon-paper.md` | chip |
-| `docs/paper/n6-hexa-pim-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-hexa-pim-paper.md` | chip |
-| `docs/paper/n6-hexa-super-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-hexa-super-paper.md` | physics |
-| `docs/paper/n6-hexa-wafer-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-hexa-wafer-paper.md` | chip |
-| `docs/paper/n6-manufacturing-quality-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-manufacturing-quality-paper.md` | tech-industry |
-| `docs/paper/n6-quantum-computing-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-quantum-computing-paper.md` | physics |
-| `docs/paper/n6-space-systems-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-space-systems-paper.md` | aerospace |
-| `docs/paper/n6-telecom-linguistics-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-telecom-linguistics-paper.md` | audio |
-| `docs/paper/n6-therapeutic-nanobot-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-therapeutic-nanobot-paper.md` | frontier |
-| `docs/paper/n6-thermodynamics-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-thermodynamics-paper.md` | physics |
-| `docs/paper/n6-unified-soc-paper.md` | `/Users/ghost/Dev/papers/tecs-l/n6-unified-soc-paper.md` | chip |
-| `papers/n6-synthetic-biology-paper.md` | `/Users/ghost/Dev/n6-architecture/papers/n6-synthetic-biology-paper.md` | tech-industry |
+| `docs/paper/n6-aerospace-transport-paper.md` | `$PAPERS/tecs-l/n6-aerospace-transport-paper.md` | aerospace |
+| `docs/paper/n6-autonomous-driving-paper.md` | `$PAPERS/tecs-l/n6-autonomous-driving-paper.md` | robotics |
+| `docs/paper/n6-calendar-time-geography-paper.md` | `$PAPERS/tecs-l/n6-calendar-time-geography-paper.md` | civilization |
+| `docs/paper/n6-classical-mechanics-accelerator-paper.md` | `$PAPERS/tecs-l/n6-classical-mechanics-accelerator-paper.md` | physics |
+| `docs/paper/n6-cognitive-social-psychology-paper.md` | `$PAPERS/tecs-l/n6-cognitive-social-psychology-paper.md` | tech-industry |
+| `docs/paper/n6-consciousness-soc-paper.md` | `$PAPERS/tecs-l/n6-consciousness-soc-paper.md` | chip |
+| `docs/paper/n6-control-automation-paper.md` | `$PAPERS/tecs-l/n6-control-automation-paper.md` | robotics |
+| `docs/paper/n6-ecology-agriculture-food-paper.md` | `$PAPERS/tecs-l/n6-ecology-agriculture-food-paper.md` | tech-industry |
+| `docs/paper/n6-economics-finance-paper.md` | `$PAPERS/tecs-l/n6-economics-finance-paper.md` | tech-industry |
+| `docs/paper/n6-games-sports-paper.md` | `$PAPERS/tecs-l/n6-games-sports-paper.md` | play |
+| `docs/paper/n6-governance-safety-urban-paper.md` | `$PAPERS/tecs-l/n6-governance-safety-urban-paper.md` | safety |
+| `docs/paper/n6-hexa-3d-paper.md` | `$PAPERS/tecs-l/n6-hexa-3d-paper.md` | chip |
+| `docs/paper/n6-hexa-photon-paper.md` | `$PAPERS/tecs-l/n6-hexa-photon-paper.md` | chip |
+| `docs/paper/n6-hexa-pim-paper.md` | `$PAPERS/tecs-l/n6-hexa-pim-paper.md` | chip |
+| `docs/paper/n6-hexa-super-paper.md` | `$PAPERS/tecs-l/n6-hexa-super-paper.md` | physics |
+| `docs/paper/n6-hexa-wafer-paper.md` | `$PAPERS/tecs-l/n6-hexa-wafer-paper.md` | chip |
+| `docs/paper/n6-manufacturing-quality-paper.md` | `$PAPERS/tecs-l/n6-manufacturing-quality-paper.md` | tech-industry |
+| `docs/paper/n6-quantum-computing-paper.md` | `$PAPERS/tecs-l/n6-quantum-computing-paper.md` | physics |
+| `docs/paper/n6-space-systems-paper.md` | `$PAPERS/tecs-l/n6-space-systems-paper.md` | aerospace |
+| `docs/paper/n6-telecom-linguistics-paper.md` | `$PAPERS/tecs-l/n6-telecom-linguistics-paper.md` | audio |
+| `docs/paper/n6-therapeutic-nanobot-paper.md` | `$PAPERS/tecs-l/n6-therapeutic-nanobot-paper.md` | frontier |
+| `docs/paper/n6-thermodynamics-paper.md` | `$PAPERS/tecs-l/n6-thermodynamics-paper.md` | physics |
+| `docs/paper/n6-unified-soc-paper.md` | `$PAPERS/tecs-l/n6-unified-soc-paper.md` | chip |
+| `papers/n6-synthetic-biology-paper.md` | `$N6_ARCH/papers/n6-synthetic-biology-paper.md` | tech-industry |
 
 권장 조치: 단일 migration 스크립트로 products.json의 `links[].path`를 실제 경로로 갱신 (또는 n6-architecture/papers/로 물리 이관 후 경로 단일화).
 
@@ -215,7 +215,7 @@ cognitive-social    1   #
 
 ## 5. ORPHAN_DECLARED 11편 — _registry.json만 참조, products.json 미참조
 
-`_registry.json`의 `papers_chunk_d_2026-04-11` 섹션에 선언되었지만, `products.json`의 어떤 product도 이 path들을 참조하지 않음. 해당 파일들은 디스크(`/Users/ghost/Dev/n6-architecture/papers/`)에 실제 존재하므로 **paper는 유효**하지만 product 매핑이 누락됨.
+`_registry.json`의 `papers_chunk_d_2026-04-11` 섹션에 선언되었지만, `products.json`의 어떤 product도 이 path들을 참조하지 않음. 해당 파일들은 디스크(`$N6_ARCH/papers/`)에 실제 존재하므로 **paper는 유효**하지만 product 매핑이 누락됨.
 
 | path | 디스크 존재 | products.json 참조 |
 |---|---|---|
@@ -241,9 +241,9 @@ ORPHAN_DECLARED 11편 + 아래 3편:
 
 | 파일 | 경로 |
 |---|---|
-| `n6-hexa-neuro-bci-paper.md` | `/Users/ghost/Dev/papers/n6-hexa-neuro-bci-paper.md` |
-| `n6-millennium-problems-paper.md` | `/Users/ghost/Dev/papers/n6-architecture/n6-millennium-problems-paper.md` |
-| `n6-sota-ssm-paper.md` | `/Users/ghost/Dev/n6-architecture/papers/n6-sota-ssm-paper.md` |
+| `n6-hexa-neuro-bci-paper.md` | `$PAPERS/n6-hexa-neuro-bci-paper.md` |
+| `n6-millennium-problems-paper.md` | `$PAPERS/n6-architecture/n6-millennium-problems-paper.md` |
+| `n6-sota-ssm-paper.md` | `$N6_ARCH/papers/n6-sota-ssm-paper.md` |
 
 이 3편은 `_registry.json`에도 `products.json`에도 공식 참조가 없으므로 SSOT 등록 필요.
 
