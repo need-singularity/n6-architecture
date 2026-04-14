@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "총가설수": 1007,
-    "verified": 664,
+    "총가설수": 1009,
+    "verified": 666,
     "partial": 255,
     "conjecture": 88,
     "업데이트": "2026-04-14",
-    "소스파일수": 20,
+    "소스파일수": 52,
     "소스파일": [
       "theory/breakthroughs/breakthrough-theorems-extension-2026-04-08.md",
       "theory/breakthroughs/breakthrough-theorems-new.md",
@@ -14,13 +14,45 @@
       "theory/breakthroughs/bt-1163-1168-superconductor-v5-2026-04-12.md",
       "theory/breakthroughs/bt-1169-1174-fusion-v5-2026-04-12.md",
       "theory/breakthroughs/bt-1175-water-treatment-2026-04-12.md",
+      "theory/breakthroughs/bt-1176-nuclear-reactor-kinetics-2026-04-12.md",
+      "theory/breakthroughs/bt-1386-standard-model-2026-04-12.md",
+      "theory/breakthroughs/bt-1387-huckel-aromatic-2026-04-12.md",
+      "theory/breakthroughs/bt-1388-ionic-octahedral-2026-04-12.md",
+      "theory/breakthroughs/bt-1389-cube-octahedron-duality-2026-04-12.md",
+      "theory/breakthroughs/bt-1390-hsv-color-hexad-2026-04-12.md",
+      "theory/breakthroughs/bt-1391-photosynthesis-equation-2026-04-12.md",
+      "theory/breakthroughs/bt-1392-millennium-7-breakthrough-ideas-2026-04-12.md",
+      "theory/breakthroughs/bt-1393-n6-dfs-10k-autonomous-2026-04-12.md",
+      "theory/breakthroughs/bt-1394-millennium-dfs-round3-2026-04-12.md",
+      "theory/breakthroughs/bt-1395-millennium-dfs-round4-2026-04-12.md",
+      "theory/breakthroughs/bt-1396-dfs5-representation-theory-2026-04-12.md",
+      "theory/breakthroughs/bt-1396-dfs5-tqft-reptheory-2026-04-12.md",
+      "theory/breakthroughs/bt-1396-tqft-lattice-knot-dfs5-2026-04-12.md",
       "theory/breakthroughs/bt-1397-uncovered-domains-2026-04-12.md",
+      "theory/breakthroughs/bt-1398-millennium-dfs-round6-2026-04-12.md",
+      "theory/breakthroughs/bt-1399-millennium-dfs-round7-2026-04-12.md",
+      "theory/breakthroughs/bt-1400-millennium-dfs-round8-2026-04-12.md",
+      "theory/breakthroughs/bt-1401-millennium-dfs-round9-2026-04-12.md",
+      "theory/breakthroughs/bt-1402-millennium-dfs-round10-2026-04-12.md",
+      "theory/breakthroughs/bt-1403-millennium-dfs-round11-2026-04-12.md",
+      "theory/breakthroughs/bt-1404-millennium-dfs-round12-2026-04-12.md",
+      "theory/breakthroughs/bt-1405-millennium-dfs-round13-2026-04-12.md",
+      "theory/breakthroughs/bt-1406-millennium-dfs-round14-2026-04-12.md",
+      "theory/breakthroughs/bt-1407-millennium-dfs-round15-2026-04-12.md",
+      "theory/breakthroughs/bt-1408-millennium-dfs-round16-2026-04-12.md",
       "theory/breakthroughs/bt-1409-millennium-dfs-round17-2026-04-12.md",
       "theory/breakthroughs/bt-1410-millennium-dfs-round18-2026-04-12.md",
       "theory/breakthroughs/bt-1411-millennium-dfs-round19-2026-04-12.md",
+      "theory/breakthroughs/bt-1412-millennium-dfs-round20-2026-04-12.md",
+      "theory/breakthroughs/bt-1412-millennium-dfs-round20-2026-04-14.md",
+      "theory/breakthroughs/bt-1413-millennium-dfs-round20-2026-04-14.md",
+      "theory/breakthroughs/bt-1413-millennium-dfs-round21-2026-04-12.md",
+      "theory/breakthroughs/bt-1414-millennium-dfs-round21-2026-04-14.md",
+      "theory/breakthroughs/bt-1415-millennium-dfs-round21-2026-04-14.md",
       "theory/breakthroughs/bt-748-752-new-domains-2026-04-11.md",
       "theory/breakthroughs/bt-candidates-from-tecs-l.md",
       "theory/breakthroughs/bt-candidates-round2.md",
+      "theory/breakthroughs/bt-reinforcement-dimensional-unfolding-2026-04-06.md",
       "theory/breakthroughs/millennium-7-closure-2026-04-11.md",
       "theory/breakthroughs/millennium-dfs-complete-2026-04-11.md",
       "theory/breakthroughs/new-breakthrough-hypotheses-2026-03-31.md",
@@ -134,7 +166,24 @@
     "분류규칙": "본문에 EXACT/proved/100%/10/10 명시=verified, PARTIAL/NEAR/MISS=partial, 그 외=conjecture (정직 보수)",
     "중복_ID_접미사": "-a/-b/-c 자동 부여 (원본_ID는 original_id 필드 보존)",
     "red_team_reject_skipped": 0,
-    "비고": "breakthrough-theorems.md 에 BT-1~1158 776개, 개별 bt-NNNN.md + 확장 문서 추가. ID 고유성은 suffix로 보장."
+    "비고": "breakthrough-theorems.md 에 BT-1~1158 776개, 개별 bt-NNNN.md + 확장 문서 추가. ID 고유성은 suffix로 보장.",
+    "P1-2_완료기록": {
+      "작업일": "2026-04-14",
+      "작업": "PAPER-P1-2 678 가설 레지스트리 완성",
+      "변경": [
+        "소스파일수 20 → 52 (+32건 meta 동기화)",
+        "meta 가설 2건 추가: BT-NEW-DOMAINS-18, BT-MILLENNIUM-ATTRACTOR",
+        "총가설수 1007 → 1009"
+      ],
+      "검증": {
+        "BT-748~752": "5건 등록 (bt-748-752-new-domains)",
+        "BT-1101~1412": "77 고유 BT 등록 (millennium DFS round 1~20)",
+        "BT-1413~1415": "3건 등록 (round 21)",
+        "millennium_DFS_rounds": "1~21 전부 인덱싱",
+        "warp_dimension": "breakthrough-theorems-warp-dimension-2026-04-08.md 포함",
+        "dimensional_unfolding": "new-bt-dimensional-unfolding-2026-04-06.md + bt-reinforcement 포함"
+      }
+    }
   },
   "hypotheses": [
     {
@@ -7353,6 +7402,22 @@
       "source_file": "theory/breakthroughs/bt-reinforcement-dimensional-unfolding-2026-04-06.md",
       "bt_ref": "BT-205, BT-79, BT-90, BT-58, BT-48, BT-76, BT-26, BT-111, BT-33, BT-168, BT-167, BT-10, BT-143, BT-272, BT-355",
       "note": "meta — 15개 기존 BT 강화 교차참조"
+    },
+    {
+      "id": "BT-NEW-DOMAINS-18",
+      "title": "미개척 대박 도메인 18선 — n=6 돌파 후보 로드맵 (meta)",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/new-domain-breakthrough-2026-04-06.md",
+      "bt_ref": "meta-roadmap",
+      "note": "18개 Tier1/2/3 도메인 후보 — 병렬 에이전트 돌파 입력"
+    },
+    {
+      "id": "BT-MILLENNIUM-ATTRACTOR",
+      "title": "밀레니엄 n=6 Attractor 메타 정리 (BT-541~547 상위)",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/millennium-n6-attractor-2026-04-11.md",
+      "bt_ref": "BT-541, BT-542, BT-543, BT-544, BT-545, BT-546, BT-547",
+      "note": "meta — n=6 유일성 10^4 검증 + Bernoulli/NS/YM 경계 대칭"
     }
   ]
 }

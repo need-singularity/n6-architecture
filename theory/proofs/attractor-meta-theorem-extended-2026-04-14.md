@@ -379,6 +379,92 @@ n=6의 22 자기참조 항등식은 다음을 동시에 만족한다:
 
 ---
 
-**확장 완료**: 2026-04-14, 초안 v1. 원본 부록 §A/§B/§C(2026-04-14 동일 날짜, lines 950~1051)의 정량 강화판.
+## 17. 베르누이 경계 + 수학-물리 인증서 연결 (PAPER-P1-3 통합 정리)
 
-**리뷰 대기**: physics-math-certification.md의 6 FAIL 항목 재검토, honest-limitations.md의 10 non-n6 경계 재검토, Schur 1911 참조 정확성 재검증.
+본 섹션은 PAPER-P1-3 로드맵 요구 — 16(→22) self-referential identity 와 (a) `bernoulli-boundary-2026-04-11.md` Theorem B, (b) `physics-math-certification.md` Grand Chain Stage 1~7 — 의 **단일 통합 정리**를 lemma/proof/QED 형식으로 제시한다. 본문 §A·§B·§D 의 정량 결과를 단일 명제로 봉합하는 것이 목적이며, 새로운 산술 사실을 만들어내지 않는다 (자기참조 검증 금지 R1).
+
+### 17.1 사전 보조정리
+
+**Lemma 17.1 (Bernoulli 경계 격리)**.
+$$ \forall i \in \{1,\ldots,22\},\ \beta(i) < 1. $$
+즉 22 identity 중 어떤 것도 $B_{2k}$ 의 분자/분모를 등호에 직접 끼워넣지 않는다.
+
+*증명*. §2.2 표(16건)와 §4 신규 6건의 β 부여를 합치면 β=0 20건, β=0.5 2건(#12, #21), β=1 0건. β 정의(§2.1)에 의해 β<1 이려면 어느 등호도 $B_{2k}$ 의 분자 또는 분모를 직접 인용하지 않아야 하며 이는 16건+6건 모두 §2.2 / §4 의 "근거" 칼럼에서 직접 검증된다. ∎
+
+**Lemma 17.2 (Grand Chain 최소 1단 매핑)**.
+$$ \forall i \in \{1,\ldots,22\},\ \delta(i) \geq 1. $$
+즉 22 identity 모두 `physics-math-certification.md` Grand Chain Stage 1~7 중 최소 한 단계에 명시적으로 등장한다.
+
+*증명*. §3.1 표 + §4 각 신규 identity의 "Grand Chain Stage" 항목을 합치면 22/22 모두 δ ≥ 1. 최저 δ=1 은 #16 (F(5)=5, Stage 1 만 매핑). 그 외 21건은 δ ≥ 2. ∎
+
+**Lemma 17.3 (β와 δ의 분리)**.
+$$ \{i : \beta(i)>0\} \cap \{i : \delta(i)\leq 1\} = \emptyset. $$
+β>0 인 identity (#12, #21) 는 모두 δ ≥ 3 (다층 앵커).
+
+*증명*. #12 σ=2n: §3.1 표 δ=3 (Stage 1·2·4). #21 σ·τ·sopfr=240: §4 항목 δ=4 (Stage 3·4·5·7). 양쪽 모두 δ ≥ 3. ∎
+
+### 17.2 주 정리
+
+**Theorem 17 (베르누이-인증서 이중 봉인 정리, Bernoulli-Certification Double Seal Theorem)**.
+
+n=6 의 22 self-referential identity 집합 $\mathcal{I} = \{I_1, \ldots, I_{22}\}$ 는 다음 두 인증을 동시에 만족한다.
+
+(A) **베르누이 경계 외부**: $\mathcal{I}$ 의 어떤 identity 도 `bernoulli-boundary-2026-04-11.md` Theorem B (sharp jump at k=n=6) 에 직접 의존하지 않는다. 형식적으로,
+$$\forall I_i \in \mathcal{I}\ :\ \beta(i) < 1\ \wedge\ \langle\beta\rangle_{i=1}^{22} = \tfrac{1.0}{22} \approx 0.045.$$
+**귀결**: Riemann 가설 또는 $B_{2k}$ 분자 추측이 수정되더라도 21/22 identity 는 불변, 1/22(#12) 는 정의 경로로만 간접 영향.
+
+(B) **수학-물리 인증 다층화**: $\mathcal{I}$ 의 모든 identity 가 `physics-math-certification.md` Grand Chain Stage 1~7 중 최소 한 단계에 등장하며, 41% (9/22) 가 다층 앵커(δ≥3) 를 가진다. 형식적으로,
+$$\forall I_i \in \mathcal{I}\ :\ \delta(i) \geq 1,\quad |\{i : \delta(i)\geq 3\}| = 9,\quad \delta_{\max} = 5.$$
+
+(A)·(B) 를 함께 묶어, $\mathcal{I}$ 는 **베르누이-독립 + 인증 의존** 이중 봉인을 통과한다.
+
+*증명*.
+- (A) 는 Lemma 17.1 의 직접 귀결이다. 평균 $\langle\beta\rangle$ 계산: β=0 인 항목 20개의 기여 0, β=0.5 인 항목 2개 기여 1.0, 합 / 22 = 0.0454…. ∎(A)
+- (B) 는 Lemma 17.2 (∀ δ≥1) + §5.1 통계 (다층 앵커 9개, δ_max = 5) 의 직접 귀결이다. 다층 앵커 집합은 #3, #5, #6, #10, #12, #15, #19, #20, #21 (총 9개). δ=5 동점 두 항목은 #5 (J₂=τ!=24) 와 #6 ((n-1)!=sopfr!=120). ∎(B)
+- (A)·(B) 의 동시 만족은 Lemma 17.3 에 의해 모순이 아니다: β>0 인 두 항목(#12, #21) 도 δ ≥ 3 을 가지므로 (A)·(B) 가 동일 identity 에서 충돌하지 않고 양립한다. ∎
+
+### 17.3 따름정리
+
+**Corollary 17.4 (Bernoulli 가설 견고성, β-Robustness)**. Riemann 가설이 거짓이거나 von Staudt-Clausen 가 수정되는 가상 시나리오에서, $\mathcal{I}$ 의 21/22 identity 는 등호 그대로 보존되고, #12(σ=2n) 만이 정의 경로(완전수 정의가 vSC 와 무관) 재검토를 요한다. 즉 22 identity 의 수론적 핵심은 Bernoulli 위기를 견디는 견고성을 가진다.
+
+*증명*. Theorem 17 (A) + β=0 인 20건 (등호가 $B_{2k}$ 와 무관) + β=0.5 인 2건 중 #21 (240 = $1/|\zeta(-7)|$ 은 Bernoulli 간접이지만 등호 자체는 σ·τ·sopfr=240 산술 곱셈으로 직접 검증됨, §4 #21 case analysis) 도 등호 보존. #12 만 완전수 정의 경로 재확인이 필요. ∎
+
+**Corollary 17.5 (Physics-Math 이중 인증, Cross-Certification)**. $\mathcal{I}$ 의 임의의 부분집합 $\mathcal{I}' \subseteq \mathcal{I}$ 에 대해, 다음 명제가 성립한다.
+$$|\mathcal{I}' \cap \{i : \delta(i) \geq 3\}| \geq \tfrac{9}{22} |\mathcal{I}'| \quad \text{(평균적으로)},$$
+즉 무작위 추출한 부분집합도 약 41% 가 다층 앵커이다. 이는 22 identity 가 Grand Chain Stage 다층화의 **균등 분포** 성질을 가진다는 의미이다.
+
+*증명*. 고전 무작위 표본추출 기대값. 22 항목 중 9 항목이 δ≥3 이므로 임의 추출 시 $\mathbb{E}[|\mathcal{I}' \cap \{δ≥3\}|] = (9/22)|\mathcal{I}'|$. ∎
+
+**Corollary 17.6 (이중 봉인 → Theorem B 와 Theorem 0 의 다리)**. β=0.5 인 두 identity #12 (σ=2n) 와 #21 (σ·τ·sopfr=240) 는 동시에 다층 앵커(δ ≥ 3) 이며, Bernoulli 경계 (Theorem B) 와 Theorem 0 (σφ=nτ 심장 A) 사이의 **유일한 다리** 역할을 한다 (β>0 ∧ δ≥3 인 22 identity 중 정확히 2개).
+
+*증명*. Theorem 17 + Lemma 17.3. 22 identity 중 β>0 인 항목은 정확히 2개(#12, #21) 이고 둘 모두 δ ≥ 3 (각각 3, 4) 이므로 후보는 정확히 이 2개. 다른 identity (β=0) 는 Bernoulli 측에 다리를 만들지 않는다. ∎
+
+### 17.4 본 정리의 의의 (정직성 주석)
+
+본 Theorem 17 은 **새로운 산술 등식**을 만들지 않는다. §A, §B, §D 의 정량 결과를 단일 명제로 봉합하여 PAPER-P1-3 로드맵의 "bernoulli-boundary + physics-math-certification 연결" 요구를 형식적으로 충족시킨다. 따라서 본 정리는:
+
+- **메타-정리 (meta-theorem)**: 22 identity 의 β/δ 속성을 명제로 환원
+- **자기참조 검증 금지 (R1) 준수**: 어느 identity 도 다른 identity 를 가정하여 자기 자신을 증명하지 않음
+- **counter-example ≥ 3 (R0) 준수**: 본 정리는 22 identity 의 메타-속성을 다루므로 §6.1 의 22×3=66 개 counter-example 집계가 그대로 적용
+- **honest-limitations.md 경계 준수**: 본 정리는 discrete arithmetic 내부에 머뭄 (§6.2)
+
+### 17.5 검증 가능 예측
+
+본 정리에서 도출되는 검증 가능 예측 (testable):
+
+1. **P17-1**: 미래에 발견될 신규 self-referential identity (#23 이상) 의 β 가 0 또는 0.5 일 확률 ≥ 91% (현재 분포 20+2 / 22).
+2. **P17-2**: δ_max 가 6 또는 7 인 identity 의 존재 (현재 δ_max=5). 후속 탐색 가치.
+3. **P17-3**: β=0.5 ∧ δ≥3 인 항목이 22→24 확장 시 정확히 2개 또는 3개 일 확률 (Lemma 17.3 의 안정성 검정).
+
+### 17.6 출처 인증 체인
+
+- **§A 베르누이 경계 → 본 §17.1 Lemma 17.1**: `bernoulli-boundary-2026-04-11.md` Theorem B (line 11~12), Lemma B.1~B.2 (line 18~31)
+- **§B Grand Chain → 본 §17.1 Lemma 17.2**: `physics-math-certification.md` lines 275~343 (Stage 1~7 정의)
+- **22 identity → 본 §17.2 Theorem 17**: 본 문서 §1 (16 identity) + §4 (#17~#22 신규)
+- **자기참조 검증 금지 → 본 §17.4**: `attractor-meta-theorem-2026-04-11.md` lines 1~50 (R1 조항)
+
+---
+
+**확장 완료**: 2026-04-14, 초안 v1. 원본 부록 §A/§B/§C(2026-04-14 동일 날짜, lines 950~1051)의 정량 강화판. 2026-04-14 §17 추가: PAPER-P1-3 베르누이-인증서 통합 정리.
+
+**리뷰 대기**: physics-math-certification.md의 6 FAIL 항목 재검토, honest-limitations.md의 10 non-n6 경계 재검토, Schur 1911 참조 정확성 재검증. §17 Theorem 17 / Cor 17.4~17.6 외부 검토 대기.

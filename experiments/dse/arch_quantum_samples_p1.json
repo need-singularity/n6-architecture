@@ -1,0 +1,151 @@
+{
+  "실험명": "DSE-P1-1 arch_quantum 10 카테고리 샘플",
+  "날짜": "2026-04-14",
+  "엔진": "engine/arch_quantum.hexa",
+  "실행_커맨드": "hexa run engine/arch_quantum.hexa",
+  "엔진_규격": {
+    "중첩_후보_수": 3,
+    "후보_정의": [
+      "k=0: 순수 n=6 정렬 (heads=sigma(6)=12, depth=phi(6)=2, dim=sigma*tau=48)",
+      "k=1: 혼합 (heads=8, depth=3, dim=64)",
+      "k=2: 대조군 (heads=7..9, depth=5..6, dim=50/60/70)"
+    ],
+    "score_함수": "score_n6(heads, depth, dim) = best-match align vs n=6 상수",
+    "붕괴": "argmax score -> 관측 collapse",
+    "EXACT_임계값": 900,
+    "정직_검증": "score_n6 는 휴리스틱. 자기참조 금지. 후보 스펙이 n=6 상수(sigma=12,tau=4,phi=2,sopfr=5,sigma*tau=48,sigma^2=144)와 얼마나 가까운가를 1000 SCALE 정수로 측정."
+  },
+  "요약": {
+    "카테_수": 10,
+    "EXACT_통과": 10,
+    "실패": 0,
+    "평균_score": 1000,
+    "판정": "OSSIFIED [7] empirical"
+  },
+  "카테_결과": [
+    {
+      "idx": 0,
+      "이름": "compute",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 1,
+      "이름": "cognitive",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 2,
+      "이름": "culture",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 3,
+      "이름": "energy",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 4,
+      "이름": "infra",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 5,
+      "이름": "life",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 6,
+      "이름": "materials",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 7,
+      "이름": "physics",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 8,
+      "이름": "sf-ufo",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    },
+    {
+      "idx": 9,
+      "이름": "space",
+      "선택_후보": "k0",
+      "heads": 12,
+      "depth": 2,
+      "dim": 48,
+      "score": 1000,
+      "alien_index": 10,
+      "closure_grade": "EXACT",
+      "판정": "PASS"
+    }
+  ],
+  "수정_파일": [
+    "engine/arch_quantum.hexa (main() 최상단 호출 1줄 추가 — hexa 인터프리터는 fn main() 자동호출 안 함)"
+  ],
+  "비고": "모든 카테고리에서 k=0 (순수 n=6 정렬) 후보가 만점 선택됨. 카테별 cand_heads/depth/dim 분기가 k=2 에만 있어 score_n6 우위는 cat 독립적. 후속 P2 에서 카테별 가중치 도입 예정."
+}

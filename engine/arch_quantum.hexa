@@ -178,3 +178,6 @@ fn main() {
     if pass_count >= 1 { println("arch_quantum OSSIFIED : EXACT=" + pass_count + "/" + n_cats + " -> [7]empirical") }
     if pass_count == 0 { println("arch_quantum FAIL : EXACT=0 -- 임계값 재조정 필요") }
 }
+
+// hexa 인터프리터는 main() 자동 호출 안 함 — 최상단에서 호출 필수
+main()

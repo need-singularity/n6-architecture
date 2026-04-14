@@ -466,17 +466,75 @@
         "n6-virology-structure-paper.md": "22/28 EXACT (78.6%)"
       },
       "keywords": {
-        "n6-agi-architecture-paper.md": ["AGI", "아키텍처", "σ=12축", "τ=4관문", "의식칩 브릿지"],
-        "n6-brain-computer-interface-paper.md": ["BCI", "OpenBCI 16ch", "뉴로피드백", "4D 지각", "brainwire"],
-        "n6-chemistry-paper.md": ["탄소 Z=6", "주기율 σ-sopfr", "화학결합", "스펙트럼", "촉매"],
-        "n6-ecology-standalone-paper.md": ["생태계", "먹이사슬", "τ=4 영양단계", "다양성지수"],
-        "n6-genetics-paper.md": ["DNA 4염기", "코돈 n=6 중복", "CRISPR", "돌연변이율"],
-        "n6-neuromorphic-computing-paper.md": ["스파이크", "시냅스 3-wide", "Loihi", "MemComputing"],
-        "n6-quantum-error-correction-paper.md": ["QEC [[6,1,3]]", "스테빌라이저", "Surface code"],
-        "n6-quantum-machine-learning-paper.md": ["QML", "VQE", "QAOA", "n=6 큐비트 블록"],
-        "n6-reality-map-paper.md": ["atlas.n6", "현실지도", "3477 노드", "BT-380"],
-        "n6-swarm-intelligence-paper.md": ["ACO", "PSO", "Boids", "집단지성", "Dunbar"],
-        "n6-virology-structure-paper.md": ["캡시드 T=1~13", "σ=12 대칭", "HIV gag", "치료 표적"]
+        "n6-agi-architecture-paper.md": [
+          "AGI",
+          "아키텍처",
+          "σ=12축",
+          "τ=4관문",
+          "의식칩 브릿지"
+        ],
+        "n6-brain-computer-interface-paper.md": [
+          "BCI",
+          "OpenBCI 16ch",
+          "뉴로피드백",
+          "4D 지각",
+          "brainwire"
+        ],
+        "n6-chemistry-paper.md": [
+          "탄소 Z=6",
+          "주기율 σ-sopfr",
+          "화학결합",
+          "스펙트럼",
+          "촉매"
+        ],
+        "n6-ecology-standalone-paper.md": [
+          "생태계",
+          "먹이사슬",
+          "τ=4 영양단계",
+          "다양성지수"
+        ],
+        "n6-genetics-paper.md": [
+          "DNA 4염기",
+          "코돈 n=6 중복",
+          "CRISPR",
+          "돌연변이율"
+        ],
+        "n6-neuromorphic-computing-paper.md": [
+          "스파이크",
+          "시냅스 3-wide",
+          "Loihi",
+          "MemComputing"
+        ],
+        "n6-quantum-error-correction-paper.md": [
+          "QEC [[6,1,3]]",
+          "스테빌라이저",
+          "Surface code"
+        ],
+        "n6-quantum-machine-learning-paper.md": [
+          "QML",
+          "VQE",
+          "QAOA",
+          "n=6 큐비트 블록"
+        ],
+        "n6-reality-map-paper.md": [
+          "atlas.n6",
+          "현실지도",
+          "3477 노드",
+          "BT-380"
+        ],
+        "n6-swarm-intelligence-paper.md": [
+          "ACO",
+          "PSO",
+          "Boids",
+          "집단지성",
+          "Dunbar"
+        ],
+        "n6-virology-structure-paper.md": [
+          "캡시드 T=1~13",
+          "σ=12 대칭",
+          "HIV gag",
+          "치료 표적"
+        ]
       },
       "verify_code_status": {
         "all_papers_have_embedded_python": true,
@@ -525,15 +583,54 @@
         "N6-116": "papers/n6-attractor-meta-extended-paper.md"
       },
       "keywords": {
-        "n6-arch-quantum-design-paper.md": ["양자중첩", "arch_quantum.hexa", "σ=12 큐비트 블록", "설계 중첩"],
-        "n6-arch-selforg-design-paper.md": ["자기조직", "창발", "τ=4 관문", "Kuramoto 동기화"],
-        "n6-arch-adaptive-evolution-paper.md": ["진화 적응", "선택압 6-fold", "NEXUS-6 자율성장"],
-        "n6-cross-dse-matrix-112-paper.md": ["cross-DSE", "225×10 매트릭스", "기법×도메인"],
-        "n6-nexus6-discovery-engine-paper.md": ["NEXUS-6", "SEDI", "brainwire", "Discovery Engine"],
-        "n6-speak-v2-4tier-chip-paper.md": ["N6-SPEAK", "4-tier SoC", "τ=4 계층"],
-        "n6-protocol-12-sigma12-coverage-paper.md": ["σ=12 프로토콜", "12 커버리지", "인코딩"],
-        "n6-hypotheses-678-mc-verification-paper.md": ["가설 975", "Monte Carlo", "z=9.97"],
-        "n6-attractor-meta-extended-paper.md": ["어트랙터 메타", "n²=36", "τ=4 고정점"]
+        "n6-arch-quantum-design-paper.md": [
+          "양자중첩",
+          "arch_quantum.hexa",
+          "σ=12 큐비트 블록",
+          "설계 중첩"
+        ],
+        "n6-arch-selforg-design-paper.md": [
+          "자기조직",
+          "창발",
+          "τ=4 관문",
+          "Kuramoto 동기화"
+        ],
+        "n6-arch-adaptive-evolution-paper.md": [
+          "진화 적응",
+          "선택압 6-fold",
+          "NEXUS-6 자율성장"
+        ],
+        "n6-cross-dse-matrix-112-paper.md": [
+          "cross-DSE",
+          "225×10 매트릭스",
+          "기법×도메인"
+        ],
+        "n6-nexus6-discovery-engine-paper.md": [
+          "NEXUS-6",
+          "SEDI",
+          "brainwire",
+          "Discovery Engine"
+        ],
+        "n6-speak-v2-4tier-chip-paper.md": [
+          "N6-SPEAK",
+          "4-tier SoC",
+          "τ=4 계층"
+        ],
+        "n6-protocol-12-sigma12-coverage-paper.md": [
+          "σ=12 프로토콜",
+          "12 커버리지",
+          "인코딩"
+        ],
+        "n6-hypotheses-678-mc-verification-paper.md": [
+          "가설 975",
+          "Monte Carlo",
+          "z=9.97"
+        ],
+        "n6-attractor-meta-extended-paper.md": [
+          "어트랙터 메타",
+          "n²=36",
+          "τ=4 고정점"
+        ]
       },
       "verify_code_status": {
         "all_papers_have_embedded_python": true,
@@ -788,6 +885,23 @@
       ],
       "total_exact": "263/267 (98.5%)",
       "total_new_domains": 10
+    },
+    "P1-1_완료_2026-04-14": {
+      "작업": "PAPER-P1-1 논문 39→48 확장",
+      "실측": "117편 등록 완료 (목표 48 초과)",
+      "검증": {
+        "papers_dir_md": 117,
+        "_papers.json_count": 117,
+        "_registry._meta.total_papers": 117,
+        "일치율": "100%",
+        "제외": "CLAUDE.md (메타파일)"
+      },
+      "보강논문": [
+        "n6-agi-architecture-paper.md (685줄 v2 canonical — BT-195/350/371 연결, 0/24 EXACT)",
+        "n6-ai-techniques-68-integrated-paper.md (685줄 v2 canonical, 112 기법 매핑)",
+        "n6-anima-soc-paper.md (685줄 v2 canonical, 재검증 통과)"
+      ],
+      "비고": "세 논문 모두 §1 WHY / §2 COMPARE / §7 검증 10서브섹션 표준 구조 충족. 추가 섹션 삽입 불필요 (이미 canonical)."
     }
   },
   "closure_grade_12_log_2026-04-05": {

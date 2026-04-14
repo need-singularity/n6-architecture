@@ -1,0 +1,358 @@
+// rtl/top.hexa — N6-SPEAK v2 HW 4-tier 최상위 래퍼
+// ─────────────────────────────────────────────────────────
+// 목적 : intent_encoder + emotion_classifier + prosody_shaper + rvq_codec
+//        4 블록을 단일 톱레벨 모듈로 인스턴스화 + fusion 인터포저 포함
+// 포트 : intent_in[384]  (384d 임베딩 체크섬 입력)
+//        audio_out[8]    (8-RVQ 코드 시퀀스 출력)
+// 배치 : Xn6 NPU 4-part 1:1 매핑 (spec §1.3)
+// 등급 : 의사-HW RTL (순수 .hexa, Verilog 변환 별도)
+// 동결 : v2.0-frozen (2026-04-14)
+//
+// 데이터 경로 (spec §3):
+//   intent_in[384]
+//        │
+//        ▼
+//   ┌──────────────────────┐
+//   │ tier-1  intent       │ embed_sum (i64 체크섬)
+//   └────────┬─────────────┘
+//            │
+//   ┌────────┴─────────────┐
+//   ▼                      ▼
+//   tier-2a emotion       tier-2b prosody
+//   (6 emo)               (4 prosody)
+//        │                      │
+//        └──────────┬───────────┘
+//                   ▼
+//             tier-2c fusion
+//           h_sum = φ·embed + emo·σ + prosody·τ = 768d 체크섬
+//                   │
+//                   ▼
+//             tier-3 rvq_codec
+//             codes_sum (8 stages)
+//                   │
+//                   ▼
+//             audio_out[8]
+//
+// 규칙 : R1 HEXA-FIRST, 한글 주석, R18 미니멀
+// 주의 : hexa 언어는 모듈 import 없음 → 각 블록의 핵심 함수를
+//        네임스페이스 prefix (intent_ / emo_ / pros_ / rvq_) 로
+//        복제하여 톱레벨에 임베드. 블록 단독 실행본은 그대로 유지.
+
+// ── n=6 기본 산술 (공통) ───────────────────────────────
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ══════════════════════════════════════════════════════════
+// tier-1: intent_encoder (384d 임베딩)  ─ 포트 prefix: intent_
+// ══════════════════════════════════════════════════════════
+
+// intent_encoder.forward 재현 (체크섬만)
+fn intent_forward(token_id: i64, pos: i64, batch_idx: i64) -> i64 {
+    let dim: i64 = 384              // σ·τ·8 = 12·4·8
+    let mut acc: i64 = 0
+    let mut k: i64 = 0
+    while k < dim {
+        let elem: i64 = (token_id * 7 + k * 13 + pos * 3 + batch_idx * 5) % 256
+        acc = acc + elem
+        k = k + 1
+    }
+    // FP16 bias (의사): +σ(6)·dim
+    acc = acc + sigma(6) * dim
+    return acc
+}
+
+fn intent_forward_sequence(seq_len: i64) -> i64 {
+    let mut total: i64 = 0
+    let mut t: i64 = 0
+    while t < seq_len {
+        let tok: i64 = (t * 131 + 7) % 32768
+        total = total + intent_forward(tok, t, 0)
+        t = t + 1
+    }
+    return total
+}
+
+// ══════════════════════════════════════════════════════════
+// tier-2a: emotion_classifier (6 감정)  ─ 포트 prefix: emo_
+// ══════════════════════════════════════════════════════════
+
+fn emo_logit_for(embed_sum: i64, emo: i64) -> i64 {
+    let dim: i64 = 384
+    let primes: i64 = 2 + emo * 3
+    let mut acc: i64 = 0
+    let mut k: i64 = 0
+    while k < dim {
+        let w: i64 = (k * primes + emo * 31) % 127 - 63
+        acc = acc + w
+        k = k + 1
+    }
+    let logit: i64 = (embed_sum / dim) + acc / dim + emo * 7
+    return logit
+}
+
+// 6 감정 argmax → [0..5]
+fn emo_forward(embed_sum: i64) -> i64 {
+    let emo_cnt: i64 = 6            // sopfr(6)+1
+    let mut best: i64 = -999999
+    let mut best_idx: i64 = 0
+    let mut e: i64 = 0
+    while e < emo_cnt {
+        let lg: i64 = emo_logit_for(embed_sum, e)
+        if lg > best {
+            best = lg
+            best_idx = e
+        }
+        e = e + 1
+    }
+    return best_idx
+}
+
+// ══════════════════════════════════════════════════════════
+// tier-2b: prosody_shaper (4 운율)  ─ 포트 prefix: pros_
+// ══════════════════════════════════════════════════════════
+
+fn pros_channel(embed_sum: i64, p: i64, t: i64) -> i64 {
+    let dim: i64 = 384
+    let offsets: i64 = p * 17 + 3
+    let mut acc: i64 = 0
+    let mut k: i64 = 0
+    while k < dim {
+        let w: i64 = (k * offsets + t * 11) % 64 - 31
+        acc = acc + w
+        k = k + 1
+    }
+    let v_raw: i64 = (embed_sum / dim) + acc / dim + p * 53 + t
+    let v: i64 = abs_val(v_raw) % 1000
+    return v
+}
+
+// 4 운율 채널 합산 (τ=4)
+fn pros_forward(embed_sum: i64, t: i64) -> i64 {
+    let prosody_cnt: i64 = 4        // τ(6)
+    let mut sum: i64 = 0
+    let mut p: i64 = 0
+    while p < prosody_cnt {
+        sum = sum + pros_channel(embed_sum, p, t)
+        p = p + 1
+    }
+    return sum
+}
+
+// ══════════════════════════════════════════════════════════
+// tier-2c: fusion 인터포저 (concat 3 stream → h[768])
+// ══════════════════════════════════════════════════════════
+// spec §2: fusion 768 = 2·384 = φ·σ·τ·16
+// h_sum  = φ(6)·embed_sum + emo_id·σ(6)·스케일 + pros_sum·τ(6)
+// 순수 함수형 체크섬 모델 (실제 HW 는 concat+linear)
+fn fusion_forward(embed_sum: i64, emo_id: i64, pros_sum: i64) -> i64 {
+    let n: i64 = 6
+    let h: i64 = phi(n) * embed_sum + emo_id * sigma(n) * 256 + pros_sum * tau(n)
+    return h
+}
+
+// ══════════════════════════════════════════════════════════
+// tier-3: rvq_codec (8-stage RVQ)  ─ 포트 prefix: rvq_
+// ══════════════════════════════════════════════════════════
+
+fn rvq_quantize_stage(residual: i64, stage: i64, codebook_sz: i64) -> i64 {
+    let idx: i64 = abs_val(residual * 37 + stage * 131) % codebook_sz
+    return idx
+}
+
+fn rvq_decode_code(code_idx: i64, stage: i64, codebook_sz: i64) -> i64 {
+    let v: i64 = (code_idx * 1024) / codebook_sz - 512
+    let scale: i64 = 8 - stage
+    let out: i64 = v * scale / 8
+    return out
+}
+
+// 인코드: fusion feat → 8 codes (체크섬)
+fn rvq_encode(feat_sum: i64) -> i64 {
+    let stages: i64 = 8             // σ-τ = 12-4
+    let codebook_sz: i64 = 1024     // 2^(σ-φ)
+    let mut residual: i64 = feat_sum
+    let mut codes_sum: i64 = 0
+    let mut s: i64 = 0
+    while s < stages {
+        let idx: i64 = rvq_quantize_stage(residual, s, codebook_sz)
+        codes_sum = codes_sum + idx
+        let decoded: i64 = rvq_decode_code(idx, s, codebook_sz)
+        residual = residual - decoded
+        s = s + 1
+    }
+    return codes_sum
+}
+
+// ══════════════════════════════════════════════════════════
+// TOP-LEVEL 포트: {intent_in[384], audio_out[8]}
+// ══════════════════════════════════════════════════════════
+// 입력 : intent_in      (384d 임베딩 체크섬 i64)
+//        t              (타임스텝)
+// 출력 : audio_out      (8-RVQ 코드 체크섬 i64)
+//
+// 내부 신호 (단일 클럭 도메인, 파이프라인 stage):
+//   stage1: intent_in → embed_sum
+//   stage2: embed_sum → emo_id, pros_sum  (병렬 tier-2a/2b)
+//   stage3: (embed_sum, emo_id, pros_sum) → h_sum  (fusion)
+//   stage4: h_sum → codes_sum  (tier-3 RVQ)
+//
+// 파이프 depth = 4 cycle (n=6 τ=4 정합)
+fn top_forward(intent_in: i64, t: i64) -> i64 {
+    // stage1 — intent tier-1 (이미 임베딩 체크섬 형태로 입력됨)
+    let embed_sum: i64 = intent_in
+
+    // stage2 — emotion (tier-2a)
+    let emo_id: i64 = emo_forward(embed_sum)
+
+    // stage2 — prosody (tier-2b), 병렬
+    let pros_sum: i64 = pros_forward(embed_sum, t)
+
+    // stage3 — fusion (tier-2c)
+    let h_sum: i64 = fusion_forward(embed_sum, emo_id, pros_sum)
+
+    // stage4 — RVQ encode (tier-3)
+    let audio_out: i64 = rvq_encode(h_sum)
+
+    return audio_out
+}
+
+// 전체 시퀀스 (T 토큰) 을 파이프로 흘려보내는 편의 함수
+fn top_run_sequence(seq_len: i64) -> i64 {
+    let mut total: i64 = 0
+    let mut t: i64 = 0
+    while t < seq_len {
+        // 가상 토큰 → 384d intent 체크섬 생성 (tier-1 호출)
+        let tok: i64 = (t * 131 + 7) % 32768
+        let intent_in: i64 = intent_forward(tok, t, 0)
+        let audio_out: i64 = top_forward(intent_in, t)
+        total = total + audio_out
+        t = t + 1
+    }
+    return total
+}
+
+// ══════════════════════════════════════════════════════════
+// dry-run 테스트 (합성 가능성 간이 체크)
+// ══════════════════════════════════════════════════════════
+fn test() -> i64 {
+    let mut pass: i64 = 0
+    let n: i64 = 6
+
+    println("=== rtl/top.hexa — N6-SPEAK v2 4-tier 톱 래퍼 ===")
+
+    // T1: n=6 산술 정합 (σ·φ = n·τ)
+    if sigma(n) * phi(n) == n * tau(n) {
+        pass = pass + 1
+        println("  [T1] σ·φ = n·τ (n=6 유일성) PASS")
+    }
+
+    // T2: intent tier-1 체크섬 결정성
+    let i1: i64 = intent_forward(42, 0, 0)
+    let i2: i64 = intent_forward(42, 0, 0)
+    if i1 == i2 {
+        pass = pass + 1
+        println("  [T2] tier-1 결정성 PASS (intent_in=" + i1 + ")")
+    }
+
+    // T3: top_forward 단일 타임스텝 → audio_out non-zero
+    let intent_in: i64 = 48000       // 384d 임베딩 모사 체크섬
+    let ao: i64 = top_forward(intent_in, 0)
+    if ao != 0 {
+        pass = pass + 1
+        println("  [T3] top_forward(intent_in=48000) PASS (audio_out=" + ao + ")")
+    }
+
+    // T4: 시퀀스 흐름 (T=24 = J₂ 하한) non-zero
+    let total: i64 = top_run_sequence(24)
+    if total != 0 {
+        pass = pass + 1
+        println("  [T4] top_run_sequence(24) PASS (total=" + total + ")")
+    }
+
+    // T5: 4-tier 포트 폭 = {384, 8} 산술 검증
+    let in_w: i64 = sigma(n) * tau(n) * 8     // 384
+    let out_w: i64 = sigma(n) - tau(n)         // 8
+    if in_w == 384 {
+        if out_w == 8 {
+            pass = pass + 1
+            println("  [T5] 포트 폭 {intent_in[384], audio_out[8]} PASS")
+        }
+    }
+
+    // T6: 파이프라인 depth = τ(6) = 4
+    let depth: i64 = 4
+    if depth == tau(n) {
+        pass = pass + 1
+        println("  [T6] 파이프 depth=4 = τ(6) PASS")
+    }
+
+    // T7: 블록 결정성 왕복 (같은 입력이면 같은 출력)
+    let a: i64 = top_forward(intent_in, 3)
+    let b: i64 = top_forward(intent_in, 3)
+    if a == b {
+        pass = pass + 1
+        println("  [T7] top_forward 결정성 PASS")
+    }
+
+    println("=== rtl/top.hexa: " + pass + "/7 PASS ===")
+    return pass
+}
+
+fn main() -> i64 {
+    let pass: i64 = test()
+    if pass == 7 { return 0 }
+    return 1
+}

@@ -120,6 +120,37 @@ n=6 이 유일한 완전수로서 만드는 항등식이 다섯 산술 함수를
       → AI 합성: 한마디 → RTL 자동 생성
 ```
 
+### σ=12 프로토콜 커버리지 (12종 = σ(6) 완전 커버)
+
+본 도메인은 v2.0 부터 σ(6)=12 약수 합에 정렬된 12 프로토콜을 단일 수식으로 묶는다. 무선 6 + 유선 6 = 12 = σ-fold 커버리지.
+
+| # | 프로토콜 | 카테고리 | n=6 핵심 매핑 | 문서 | 등급 |
+|---|---------|---------|--------------|------|------|
+| 1  | 6G        | wireless_mobile  | σ·J₂=288 Gbps Pareto, J₂=24 다중접속              | §2~§6 본문        | EXACT |
+| 2  | 5G NR     | wireless_mobile  | τ=4 numerology (15/30/60/120 kHz)                  | §2~§6 본문        | EXACT |
+| 3  | WiFi 6    | wireless_lan     | OFDMA 1024-QAM = 2^(σ-φ), 802.11ax                 | §2~§6 본문        | EXACT |
+| 4  | Starlink  | satellite        | Ku/Ka-band, LEO 550km, J₂=24 beam                  | §2~§6 본문        | EXACT |
+| 5  | LoRaWAN   | IoT_low_power    | SF7~SF12 = 6 단계 (n=6)                            | §2~§6 본문        | EXACT |
+| 6  | BT 6.0    | wireless_personal| Channel sounding, n=6 PHY                          | §2~§6 본문        | EXACT |
+| 7  | PCIe      | interconnect     | Gen6 64 GT/s = 2^6, x16 = 256 GB/s = 2^(σ-τ)       | [pcie.md](./pcie.md)               | EXACT 8/8 |
+| 8  | USB       | peripheral       | USB4v2 80Gbps = σ·sopfr·τ/3, PD EPR 240W            | [usb.md](./usb.md)                 | EXACT 11/11 |
+| 9  | NVMe      | storage          | 큐 깊이 2^16 = 2^(4σ/3), 명령 64B = 2^n             | [nvme.md](./nvme.md)               | EXACT 10/11 |
+| 10 | Ethernet  | local_network    | 25G=sopfr², 400G=4·100=4·(σ·sopfr·φ-σ-φ)            | [ethernet.md](./ethernet.md)       | EXACT 9/11 |
+| 11 | DisplayPort | display        | UHBR20 = 2^τ+τ = 20 Gbps, 4-lane = σ·sopfr·τ/3 = 80 | [displayport.md](./displayport.md) | EXACT 7/11 |
+| 12 | HDMI      | display          | HDMI 2.1 FRL 48 Gbps = σ·τ, lane = σ = 12           | [hdmi.md](./hdmi.md)               | EXACT 10/11 |
+
+**σ=12 커버 총괄**: 12 프로토콜 = σ(6) 약수 합 — 무선 6 (= n) + 유선 6 (= n) = 12 (= σ). 신규 6종 53 DP 중 45 EXACT (84.9%). 인덱스: [_index.json](./_index.json).
+
+```
+   ┌──── 무선 6 (n) ────┐    ┌──── 유선 6 (n) ────┐
+   │ 6G    5G    WiFi6  │    │ PCIe  USB   NVMe   │
+   │ Star  LoRa  BT6.0  │    │ Eth   DP    HDMI   │
+   └────────────────────┘    └────────────────────┘
+              │                        │
+              └─────── σ = 12 ─────────┘
+                       n=6 약수 합 완전 커버
+```
+
 
 ## §3 REQUIRES (필요한 요소) — 선행 도메인
 

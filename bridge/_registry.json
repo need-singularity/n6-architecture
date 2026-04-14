@@ -1,22 +1,24 @@
 {
   "_doc": "NEXUS-6 통합 도구 레지스트리 — SSOT. nexus/origins/ 62 크레이트 흡수 완료 상태.",
   "_generated": "2026-04-10",
-  "_dispatcher": "nexus/src/cmd/mod.rs",
+  "_updated": "2026-04-14",
+  "_dispatcher": "bridge/_registry.json (HEXA-ONLY SSOT)",
   "_cli": "nexus <category> <name> [args]",
-  "_note": "원본 nexus/origins/<name>/main.hexa 는 HEXA 바이너리로 위임. Rust 재구현은 TODO.",
+  "_runtime": "$HEXA bridge/origins/<origin>/main.hexa — 각 도구는 hexa 바이너리로 직접 실행",
+  "_note": "원본 bridge/origins/<name>/main.hexa 는 HEXA 바이너리로 위임. Rust 재구현은 TODO.",
 
   "calc": {
-    "optics":                { "desc": "광학/렌즈 계산기",            "src": "src/cmd/calc/optics.rs",                "origin": "nexus/origins/optics-calc/main.hexa" },
-    "energy":                { "desc": "에너지 수지 계산기",          "src": "src/cmd/calc/energy.rs",                "origin": "nexus/origins/energy-calc/main.hexa" },
-    "gpu-arch":              { "desc": "GPU 아키텍처 계산기",         "src": "src/cmd/calc/gpu_arch.rs",              "origin": "nexus/origins/gpu-arch-calc/main.hexa" },
-    "crypto":                { "desc": "암호/해시 계산기",            "src": "src/cmd/calc/crypto.rs",                "origin": "nexus/origins/crypto-calc/main.hexa" },
-    "quantum":               { "desc": "양자역학 계산기",             "src": "src/cmd/calc/quantum.rs",               "origin": "nexus/origins/quantum-calc/main.hexa" },
-    "carbon-capture":        { "desc": "탄소포집 계산기",             "src": "src/cmd/calc/carbon_capture.rs",        "origin": "nexus/origins/carbon-capture-calc/main.hexa" },
-    "semiconductor":         { "desc": "반도체 계산기",               "src": "src/cmd/calc/semiconductor.rs",         "origin": "nexus/origins/semiconductor-calc/main.hexa" },
-    "chip-n6":               { "desc": "n=6 칩 계산기",               "src": "src/cmd/calc/chip_n6.rs",               "origin": "nexus/origins/chip-n6-calc/main.hexa" },
-    "chip-power":            { "desc": "칩 전력 계산기",              "src": "src/cmd/calc/chip_power.rs",            "origin": "nexus/origins/chip-power-calc/main.hexa" },
-    "chip-perf":             { "desc": "칩 성능 계산기",              "src": "src/cmd/calc/chip_perf.rs",             "origin": "nexus/origins/chip-perf-calc/main.hexa" },
-    "interconnect":          { "desc": "인터커넥트 계산기",           "src": "src/cmd/calc/interconnect.rs",          "origin": "nexus/origins/interconnect-calc/main.hexa" },
+    "optics":                { "desc": "광학/렌즈 계산기",            "src": "src/cmd/calc/optics.rs",                "origin": "bridge/origins/optics-calc/main.hexa",          "invocation": "nexus calc optics",             "status": "integrated" },
+    "energy":                { "desc": "에너지 수지 계산기",          "src": "src/cmd/calc/energy.rs",                "origin": "bridge/origins/energy-calc/main.hexa",          "invocation": "nexus calc energy",             "status": "integrated" },
+    "gpu-arch":              { "desc": "GPU 아키텍처 계산기",         "src": "src/cmd/calc/gpu_arch.rs",              "origin": "bridge/origins/gpu-arch-calc/main.hexa",        "invocation": "nexus calc gpu-arch",           "status": "integrated", "p1_chip_p1_4": true },
+    "crypto":                { "desc": "암호/해시 계산기",            "src": "src/cmd/calc/crypto.rs",                "origin": "bridge/origins/crypto-calc/main.hexa",          "invocation": "nexus calc crypto",             "status": "integrated", "p1_chip_p1_4": true },
+    "quantum":               { "desc": "양자역학 계산기",             "src": "src/cmd/calc/quantum.rs",               "origin": "bridge/origins/quantum-calc/main.hexa",         "invocation": "nexus calc quantum",            "status": "integrated" },
+    "carbon-capture":        { "desc": "탄소포집 계산기",             "src": "src/cmd/calc/carbon_capture.rs",        "origin": "bridge/origins/carbon-capture-calc/main.hexa",  "invocation": "nexus calc carbon-capture",     "status": "integrated" },
+    "semiconductor":         { "desc": "반도체 계산기",               "src": "src/cmd/calc/semiconductor.rs",         "origin": "bridge/origins/semiconductor-calc/main.hexa",   "invocation": "nexus calc semiconductor",      "status": "integrated", "p1_chip_p1_4": true },
+    "chip-n6":               { "desc": "n=6 칩 계산기",               "src": "src/cmd/calc/chip_n6.rs",               "origin": "bridge/origins/chip-n6-calc/main.hexa",         "invocation": "nexus calc chip-n6",            "status": "integrated", "p1_chip_p1_4": true },
+    "chip-power":            { "desc": "칩 전력 계산기",              "src": "src/cmd/calc/chip_power.rs",            "origin": "bridge/origins/chip-power-calc/main.hexa",      "invocation": "nexus calc chip-power",         "status": "integrated" },
+    "chip-perf":             { "desc": "칩 성능 계산기",              "src": "src/cmd/calc/chip_perf.rs",             "origin": "bridge/origins/chip-perf-calc/main.hexa",       "invocation": "nexus calc chip-perf",          "status": "integrated" },
+    "interconnect":          { "desc": "인터커넥트 계산기",           "src": "src/cmd/calc/interconnect.rs",          "origin": "bridge/origins/interconnect-calc/main.hexa",    "invocation": "nexus calc interconnect",       "status": "integrated", "p1_chip_p1_4": true },
     "photonic-energy":       { "desc": "광자 에너지 계산기",          "src": "src/cmd/calc/photonic_energy.rs",       "origin": "nexus/origins/photonic-energy-calc/main.hexa" },
     "tokamak-shape":         { "desc": "토카막 형상 계산기",          "src": "src/cmd/calc/tokamak_shape.rs",         "origin": "nexus/origins/tokamak-shape/main.hexa" },
     "kstar":                 { "desc": "KSTAR 운전 계산기",           "src": "src/cmd/calc/kstar.rs",                 "origin": "nexus/origins/kstar-calc/main.hexa" },
@@ -29,14 +31,15 @@
   },
 
   "dse": {
-    "universal":             { "desc": "만능 DSE",                    "src": "src/cmd/dse/universal.rs",              "origin": "nexus/origins/universal-dse/main.hexa" },
-    "material":              { "desc": "재료 DSE",                    "src": "src/cmd/dse/material.rs",               "origin": "nexus/origins/material-dse/main.hexa" },
-    "solar":                 { "desc": "태양광 DSE",                  "src": "src/cmd/dse/solar.rs",                  "origin": "nexus/origins/solar-dse/main.hexa" },
-    "fusion":                { "desc": "핵융합 DSE",                  "src": "src/cmd/dse/fusion.rs",                 "origin": "nexus/origins/fusion-dse/main.hexa" },
-    "battery":               { "desc": "배터리 DSE",                  "src": "src/cmd/dse/battery.rs",                "origin": "nexus/origins/battery-dse/main.hexa" },
-    "sc":                    { "desc": "초전도 DSE",                  "src": "src/cmd/dse/sc.rs",                     "origin": "nexus/origins/sc-dse/main.hexa" },
-    "robot":                 { "desc": "로봇 DSE",                    "src": "src/cmd/dse/robot.rs",                  "origin": "nexus/origins/robot-dse/main.hexa" },
-    "dse-calc":              { "desc": "일반 DSE 계산기",             "src": "src/cmd/dse/dse_calc.rs",               "origin": "nexus/origins/dse-calc/main.hexa" }
+    "universal":             { "desc": "만능 DSE",                    "src": "src/cmd/dse/universal.rs",              "origin": "bridge/origins/universal-dse/main.hexa",                              "invocation": "nexus dse universal",  "status": "integrated" },
+    "material":              { "desc": "재료 DSE",                    "src": "src/cmd/dse/material.rs",               "origin": "bridge/origins/material-dse/main.hexa",                               "invocation": "nexus dse material",   "status": "integrated" },
+    "solar":                 { "desc": "태양광 DSE",                  "src": "src/cmd/dse/solar.rs",                  "origin": "bridge/origins/solar-dse/main.hexa",                                  "invocation": "nexus dse solar",      "status": "integrated" },
+    "fusion":                { "desc": "핵융합 DSE",                  "src": "src/cmd/dse/fusion.rs",                 "origin": "bridge/origins/fusion-dse/main.hexa",                                 "invocation": "nexus dse fusion",     "status": "integrated" },
+    "battery":               { "desc": "배터리 DSE",                  "src": "src/cmd/dse/battery.rs",                "origin": "bridge/origins/battery-dse/main.hexa",                                "invocation": "nexus dse battery",    "status": "integrated" },
+    "sc":                    { "desc": "초전도 DSE",                  "src": "src/cmd/dse/sc.rs",                     "origin": "bridge/origins/sc-dse/main.hexa",                                     "invocation": "nexus dse sc",         "status": "integrated" },
+    "robot":                 { "desc": "로봇 DSE",                    "src": "src/cmd/dse/robot.rs",                  "origin": "bridge/origins/robot-dse/main.hexa",                                  "invocation": "nexus dse robot",      "status": "integrated" },
+    "dse-calc":              { "desc": "일반 DSE 계산기",             "src": "src/cmd/dse/dse_calc.rs",               "origin": "bridge/origins/dse-calc/main.hexa",                                   "invocation": "nexus dse dse-calc",   "status": "integrated" },
+    "lang":                  { "desc": "HEXA-LANG DSE (궁극 프로그래밍언어 — BT-50/52/56/58/65/67)", "src": "src/cmd/dse/lang.rs", "origin": "bridge/origins/universal-dse/domains/programming-language.toml", "invocation": "nexus dse lang",       "status": "integrated", "p1_chip_p1_4": true, "note": "universal-dse 도메인 TOML 로딩 방식. 별도 origin 크레이트 없이 universal-dse 엔진이 programming-language.toml 을 선택 실행." }
   },
 
   "analyze": {
@@ -81,12 +84,28 @@
 
   "stats": {
     "absorbed_calc": 20,
-    "absorbed_dse": 8,
+    "absorbed_dse": 9,
     "absorbed_analyze": 13,
     "absorbed_hexa": 4,
     "absorbed_workspace_crates": 2,
-    "total_absorbed": 47,
+    "total_absorbed": 48,
     "legacy_py_count": 15,
-    "note": "tools/ → nexus/origins/ 물리 이동 완료. 원본 .hexa 소스는 nexus/origins/<name>/main.hexa, 레거시 .py/.sh는 nexus/origins/legacy/. nexus 바이너리가 hexa-lang 으로 위임 실행."
+    "note": "tools/ → bridge/origins/ 물리 이동 완료. 원본 .hexa 소스는 bridge/origins/<name>/main.hexa, 레거시 .py/.sh는 bridge/origins/legacy/. nexus 바이너리가 hexa-lang 으로 위임 실행."
+  },
+
+  "p1_chip_p1_4": {
+    "_doc": "P1 CHIP-P1-4 — 6 도구 브릿지 통합. 2026-04-14 완료.",
+    "status": "done",
+    "completed": "2026-04-14",
+    "ssot_doc": "bridge/calc_tools_registry.md",
+    "tools": {
+      "crypto-calc":       { "slot": "calc.crypto",        "origin": "bridge/origins/crypto-calc/main.hexa",        "invocation": "nexus calc crypto",        "found": true },
+      "interconnect-calc": { "slot": "calc.interconnect",  "origin": "bridge/origins/interconnect-calc/main.hexa",  "invocation": "nexus calc interconnect",  "found": true },
+      "lang-dse":          { "slot": "dse.lang",           "origin": "bridge/origins/universal-dse/domains/programming-language.toml", "invocation": "nexus dse lang", "found": true, "note": "별도 origin 크레이트 없이 universal-dse 도메인 TOML 로 탑재. dse.lang 슬롯 신규 추가." },
+      "gpu-arch-calc":     { "slot": "calc.gpu-arch",      "origin": "bridge/origins/gpu-arch-calc/main.hexa",      "invocation": "nexus calc gpu-arch",      "found": true },
+      "chip-n6-calc":      { "slot": "calc.chip-n6",       "origin": "bridge/origins/chip-n6-calc/main.hexa",       "invocation": "nexus calc chip-n6",       "found": true },
+      "semiconductor-calc":{ "slot": "calc.semiconductor", "origin": "bridge/origins/semiconductor-calc/main.hexa", "invocation": "nexus calc semiconductor", "found": true }
+    },
+    "summary": "6/6 통합. 5개는 기존 calc 슬롯 상태 verified. lang-dse 는 dse.lang 슬롯 신규 등록 (universal-dse 도메인 기반)."
   }
 }
