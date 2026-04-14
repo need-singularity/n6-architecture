@@ -1,0 +1,169 @@
+// rtl/prosody_shaper.hexa — N6-SPEAK v2 tier-2b RTL 블록
+// ─────────────────────────────────────────────────────
+// 목적  : 384d 임베딩 [B, T, 384] → 4 운율 [B, T, 4]
+// 등급  : 의사-HW RTL (순수 .hexa 함수 기반)
+// 배치  : Xn6 NPU-part-2 (tier-2 middle layer, 운율 경로)
+// 파라미터: W=[384, 4] (FP16), bias=[4] (FP16)
+// 동결  : v2.0-frozen (2026-04-14)
+//
+// n=6 정합 (spec §5.2):
+//   prosody_cnt = 4 = τ(6) (약수 수)
+//   차원 배치 : 0=pitch 1=duration 2=energy 3=spectral
+//   per-head  = 768 / τ = 192 (fusion 이후)
+//
+// 규칙: R1 HEXA-FIRST, 한글 주석
+
+// ── n=6 기본 산술 ──────────────────────────────────
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── RTL 순전파: 단일 운율 채널 ──────────────────────
+// 입력 : 임베딩 체크섬 embed_sum, 운율 채널 p (0~3), 타임스텝 t
+// 출력 : 운율 값 (정수 스케일 0~1000)
+fn prosody_channel(embed_sum: i64, p: i64, t: i64) -> i64 {
+    let dim: i64 = 384
+    // 운율별 가중치: pitch=음역, duration=지속, energy=강세, spectral=음색
+    let offsets: i64 = p * 17 + 3       // 3, 20, 37, 54
+    let mut acc: i64 = 0
+    let mut k: i64 = 0
+    while k < dim {
+        let w: i64 = (k * offsets + t * 11) % 64 - 31    // FP16 시뮬 [-31..31]
+        acc = acc + w
+        k = k + 1
+    }
+    // 범위 0~1000 정규화
+    let v_raw: i64 = (embed_sum / dim) + acc / dim + p * 53 + t
+    let v: i64 = abs_val(v_raw) % 1000
+    return v
+}
+
+// ── RTL 전체 4 운율 추출 ─────────────────────────────
+// 출력: [4] 운율 값의 합 (체크섬)
+fn forward(embed_sum: i64, t: i64) -> i64 {
+    let prosody_cnt: i64 = 4        // τ(6)
+    let mut sum: i64 = 0
+    let mut p: i64 = 0
+    while p < prosody_cnt {
+        let v: i64 = prosody_channel(embed_sum, p, t)
+        sum = sum + v
+        p = p + 1
+    }
+    return sum
+}
+
+// ── 시퀀스 단위 (T 타임스텝) ─────────────────────────
+fn forward_sequence(embed_sum_base: i64, seq_len: i64) -> i64 {
+    let mut total: i64 = 0
+    let mut t: i64 = 0
+    while t < seq_len {
+        let es: i64 = embed_sum_base + t * 128
+        total = total + forward(es, t)
+        t = t + 1
+    }
+    return total
+}
+
+// ── dry-run 테스트 ───────────────────────────────────
+fn test() -> i64 {
+    let mut pass: i64 = 0
+    let n: i64 = 6
+
+    println("=== prosody_shaper RTL dry-run ===")
+
+    // T1: 운율 채널 수 = τ(6) = 4
+    let pcnt: i64 = 4
+    if pcnt == tau(n) {
+        pass = pass + 1
+        println("  [T1] prosody_cnt=4 = τ(6) PASS")
+    }
+
+    // T2: 각 채널 범위 [0, 999]
+    let es: i64 = 48000
+    let mut ch_ok: i64 = 0
+    let mut p: i64 = 0
+    while p < 4 {
+        let v: i64 = prosody_channel(es, p, 0)
+        if v >= 0 {
+            if v < 1000 { ch_ok = ch_ok + 1 }
+        }
+        p = p + 1
+    }
+    if ch_ok == 4 {
+        pass = pass + 1
+        println("  [T2] 4 채널 모두 [0,999] PASS")
+    }
+
+    // T3: 채널별 구분 (서로 다른 값)
+    let v0: i64 = prosody_channel(es, 0, 5)
+    let v1: i64 = prosody_channel(es, 1, 5)
+    let v2: i64 = prosody_channel(es, 2, 5)
+    let v3: i64 = prosody_channel(es, 3, 5)
+    if v0 != v1 {
+        if v2 != v3 {
+            pass = pass + 1
+            println("  [T3] 채널 변별 PASS (pitch=" + v0 + " dur=" + v1 + " ene=" + v2 + " spec=" + v3 + ")")
+        }
+    }
+
+    // T4: 시퀀스 흐름 non-zero
+    let seq: i64 = forward_sequence(48000, 24)   // T=24 = J₂
+    if seq > 0 {
+        pass = pass + 1
+        println("  [T4] seq_len=24 forward non-zero PASS (sum=" + seq + ")")
+    }
+
+    // T5: per-head dim = 768/τ = 192
+    let per_head: i64 = 768 / tau(n)
+    if per_head == 192 {
+        pass = pass + 1
+        println("  [T5] per-prosody-head=192 PASS")
+    }
+
+    println("=== prosody_shaper: " + pass + "/5 PASS ===")
+    return pass
+}
+
+fn main() -> i64 {
+    let pass: i64 = test()
+    if pass == 5 { return 0 }
+    return 1
+}

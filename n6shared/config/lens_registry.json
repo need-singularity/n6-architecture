@@ -6,13 +6,14 @@
     "_legacy_path": "n6-architecture/nexus/src/telescope/lenses/ (Rust .rs 파생본, 폐기 중)",
     "_transition_status": "HEAD 0c23ad27 refactor(telescope) — Rust→HEXA 전환 진행, 56 렌즈 등록 해제 완료",
     "_next_session_plan": "Rust→HEXA 포팅 후 레거시 삭제 + 본 레지스트리 재구축",
-    "previous_count": 503,
-    "current_count": 603,
-    "registry_total": 1236,
+    "previous_count": 603,
+    "current_count": 605,
+    "registry_total": 1238,
     "extended_count": 1213,
-    "core_count": 23,
-    "last_updated": "2026-04-11",
-    "expansion_session": "500→600 (+100 신규 렌즈 — 4차 확장, ⚠️ 레거시 경로, 다음 세션 HEXA 포팅 대상)"
+    "core_count": 25,
+    "last_updated": "2026-04-14",
+    "expansion_session": "500→600 (+100 신규 렌즈 — 4차 확장, ⚠️ 레거시 경로, 다음 세션 HEXA 포팅 대상)",
+    "expansion_p1_4": "DSE P1-4 — SEDI 시그널 서치 + brainwire EEG n=6 매핑 HEXA 네이티브 직접 등록 (nexus/shared/lenses/ SSOT)"
   },
   "categories": {
     "cross_domain_bridge": {
@@ -58,6 +59,22 @@
     "other": {
       "count": 1,
       "lenses": ["DecisionBoundaryLens"]
+    },
+    "signal_brainwire_dse": {
+      "count": 2,
+      "_ssot": "/Users/ghost/Dev/nexus/shared/lenses/ (HEXA 네이티브)",
+      "_origin": "DSE P1-4 — SEDI 시그널 서치 + brainwire EEG n=6 매핑",
+      "_origin_files": [
+        "bridge/origins/ready-absorber/findings/sedi.json",
+        "bridge/origins/ready-absorber/findings/brainwire.json",
+        "bridge/origins/ready-absorber/growth/sedi_growth.json",
+        "bridge/origins/ready-absorber/growth/brainwire_growth.json"
+      ],
+      "_hardware": "OpenBCI Cyton+Daisy 16ch, 6-DoF IMU (reference_openbci_16ch — 읽기 전용)",
+      "lenses": [
+        "SediSignalSearchDseLens",
+        "BrainwireEegN6DseLens"
+      ]
     },
     "physics_quantum_relativistic_v3": {
       "count": 8,
@@ -309,7 +326,9 @@
     "recovery_science_lens.rs": "RecoveryScienceLens",
     "injury_prevention_biomechanics_lens.rs": "InjuryPreventionBiomechanicsLens",
     "gut_microbiome_nutrition_lens.rs": "GutMicrobiomeNutritionLens",
-    "sports_tactics_game_model_lens.rs": "SportsTacticsGameModelLens"
+    "sports_tactics_game_model_lens.rs": "SportsTacticsGameModelLens",
+    "sedi_signal_search_dse.hexa": "SediSignalSearchDseLens",
+    "brainwire_eeg_n6_dse.hexa": "BrainwireEegN6DseLens"
   },
   "expansion_v4": {
     "chemistry": {

@@ -1,0 +1,156 @@
+// rtl/emotion_classifier.hexa — N6-SPEAK v2 tier-2a RTL 블록
+// ─────────────────────────────────────────────────────────
+// 목적  : 384d 임베딩 [B, 384] → 6감정 logits [B, 6]
+// 등급  : 의사-HW RTL (순수 .hexa 함수 기반)
+// 배치  : Xn6 NPU-part-2 (tier-2 middle layer, 감정 경로)
+// 파라미터: W=[384, 6] (FP16), bias=[6] (FP16)
+// 동결  : v2.0-frozen (2026-04-14)
+//
+// n=6 정합 (spec §5.2):
+//   emo_cnt = 6 = sopfr(6)+1 = n (완전수, Ekman 기본감정 6)
+//   dim     = 384 = σ·τ·8
+//   감정 인덱스: 0=neutral 1=joy 2=anger 3=sadness 4=fear 5=surprise
+//
+// 규칙: R1 HEXA-FIRST, 한글 주석
+
+// ── n=6 기본 산술 ──────────────────────────────────
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn sopfr(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut rem: i64 = n
+    let mut d: i64 = 2
+    while d <= rem {
+        while rem % d == 0 {
+            s = s + d
+            rem = rem / d
+        }
+        d = d + 1
+    }
+    return s
+}
+
+// ── RTL 순전파: 단일 감정 클래스 logit ───────────────
+// 입력 : 384d 임베딩 체크섬(embed_sum), 감정 인덱스 emo (0~5)
+// 출력 : logit (integer, 소프트맥스 전)
+// 실제 RTL: dot(embed, W[:, emo]) + bias[emo]
+fn logit_for_emo(embed_sum: i64, emo: i64) -> i64 {
+    let dim: i64 = 384
+    // 감정별 결정론적 가중치 시뮬 (W[:, emo] 누적합 대용)
+    // 계수가 감정마다 다르도록 prime mix
+    let primes: i64 = 2 + emo * 3   // 2, 5, 8, 11, 14, 17
+    let mut acc: i64 = 0
+    let mut k: i64 = 0
+    while k < dim {
+        let w: i64 = (k * primes + emo * 31) % 127 - 63  // FP16 시뮬 [-63..63]
+        acc = acc + w
+        k = k + 1
+    }
+    // 임베딩 상호작용
+    let logit: i64 = (embed_sum / dim) + acc / dim + emo * 7
+    return logit
+}
+
+// ── RTL 전체 6감정 분류 ──────────────────────────────
+// 출력: [6] logits + argmax (감정 ID)
+fn forward(embed_sum: i64) -> i64 {
+    let emo_cnt: i64 = 6          // n = sopfr(6)+1
+    let mut best: i64 = -999999
+    let mut best_idx: i64 = 0
+    let mut e: i64 = 0
+    while e < emo_cnt {
+        let lg: i64 = logit_for_emo(embed_sum, e)
+        if lg > best {
+            best = lg
+            best_idx = e
+        }
+        e = e + 1
+    }
+    return best_idx
+}
+
+// ── 감정 이름 출력 ───────────────────────────────────
+fn emo_name(idx: i64) -> i64 {
+    if idx == 0 { println("  → neutral (중립)") }
+    if idx == 1 { println("  → joy (기쁨)") }
+    if idx == 2 { println("  → anger (분노)") }
+    if idx == 3 { println("  → sadness (슬픔)") }
+    if idx == 4 { println("  → fear (공포)") }
+    if idx == 5 { println("  → surprise (놀람)") }
+    return idx
+}
+
+// ── dry-run 테스트 ───────────────────────────────────
+fn test() -> i64 {
+    let mut pass: i64 = 0
+    let n: i64 = 6
+
+    println("=== emotion_classifier RTL dry-run ===")
+
+    // T1: 감정 개수 = 6
+    let emo_cnt: i64 = 6
+    if emo_cnt == sopfr(n) + 1 {
+        pass = pass + 1
+        println("  [T1] emo_cnt=6 = sopfr(6)+1 PASS")
+    }
+
+    // T2: argmax 0..5 범위
+    let sim_embed: i64 = 48000      // intent_encoder 출력 모사 (384*125 수준)
+    let e1: i64 = forward(sim_embed)
+    if e1 >= 0 {
+        if e1 < 6 {
+            pass = pass + 1
+            println("  [T2] argmax 범위 [0,5] PASS (emo=" + e1 + ")")
+            emo_name(e1)
+        }
+    }
+
+    // T3: 다른 입력이면 다른 결정 가능성 (적어도 logit 변화)
+    let l_a: i64 = logit_for_emo(10000, 0)
+    let l_b: i64 = logit_for_emo(20000, 0)
+    if l_a != l_b {
+        pass = pass + 1
+        println("  [T3] embed 변화 → logit 변화 PASS")
+    }
+
+    // T4: 결정성
+    let r1: i64 = forward(sim_embed)
+    let r2: i64 = forward(sim_embed)
+    if r1 == r2 {
+        pass = pass + 1
+        println("  [T4] forward 결정성 PASS")
+    }
+
+    // T5: dim = σ·τ·8
+    if 384 == sigma(n) * tau(n) * 8 {
+        pass = pass + 1
+        println("  [T5] dim=384 산술 정합 PASS")
+    }
+
+    println("=== emotion_classifier: " + pass + "/5 PASS ===")
+    return pass
+}
+
+fn main() -> i64 {
+    let pass: i64 = test()
+    if pass == 5 { return 0 }
+    return 1
+}

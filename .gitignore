@@ -26,3 +26,4 @@ tecsrs
 
 # macOS
 .DS_Store
+build/

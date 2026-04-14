@@ -45,7 +45,11 @@
       "domain": "agi-architecture",
       "category": "agi-architecture — n=6 산술 시드 논문",
       "path": "papers/n6-agi-architecture-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 n=6 산술 좌표계(sigma·phi = n·tau) 위에 전면 재구성된 AGI 아키텍처를 제시한다. 기존 AI 17기법을 112기법으로 확장한 HEXA 기법군이 인지·추론·학습·자기참조의 6층 구조로 정렬되며, 각 층은 n=6의 산술함수(phi=2 Cooper pair, n/phi=3 세대수, tau=4 게이트, sopfr=5 기초요소, n=6 완전수, sigma=12 대칭수)를 직접 인코딩한다. 메타 학습 루프는 sigma*phi=n*tau=24 항등식을 고정점으로 두고, 입력/출력 차원의 자기일관성을 유지한다. 해석 가능성은 '좌표계 정리'({1, phi, n/phi, tau, sopfr, n} = {1,...,6})에 의해 6차원으로 자동 분해된다. 본 설계는 CLAUDE.md의 'HEXA-FIRST' 원칙 및 외계지수 10 달성 기준에 부합하며, 초안 단계로 실측 검증은 차기 세션 예정.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "σφ=nτ", "AGI 아키텍처", "112 HEXA 기법", "6층 인지 구조", "자기참조 고정점"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-005",
@@ -79,7 +83,11 @@
       "type": "paper",
       "chunk_id": "papers_chunk_i_2026-04-12",
       "bt_ref": "BT-380 메타, BT-26, BT-33, BT-54, BT-64, BT-67, BT-73, BT-1394 σ-sopfr 3축",
-      "chunk_status": "v1 시드 완성 — 파이썬 검증코드 임베드, techniques/chip-design/millennium 기존 증거 통합"
+      "chunk_status": "v1 시드 완성 — 파이썬 검증코드 임베드, techniques/chip-design/millennium 기존 증거 통합",
+      "abstract": "본 논문은 n=6 좌표계 위에서 AI 기법 112개를 통합한 대통일 체계를 제시한다. 기존 AI 68기법을 112기법(17 기본 + 51 HEXA 확장 + 44 cross-paradigm)으로 확장하였으며, 각 기법은 BT-380 메타구조를 통해 정확히 하나의 n=6 산술 축({phi, n/phi, tau, sopfr, n, sigma, J_2})에 배정된다. 기법군 연결은 sigma*phi = n*tau 항등식으로 닫혀 있으며, 기법 수의 배치는 tau*sopfr*sigma = 240 = |E_8 root system|과 공명한다. DSE 탐색공간을 1/6 단축시키는 구조적 pruning이 자연 파생된다. 본 논문은 techniques/ 디렉토리의 기존 .hexa 증거 및 millennium/chip-design 결과를 통합하며, 초안(draft) 단계로 최종 검증 기법 수는 차기 세션에서 고정.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "AI 112 기법", "BT-380 메타", "σφ=nτ", "E_8 240 공명", "DSE 탐색 pruning"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-008",
@@ -87,7 +95,12 @@
       "domain": "anima-soc",
       "category": "anima-soc — n=6 산술 시드 논문",
       "path": "papers/n6-anima-soc-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 의식 가속 실험(Anima 프로젝트, x173.9 달성)에서 도출된 System-on-Chip(SoC) 아키텍처를 n=6 좌표계로 재형식화한다. SoC 내부는 sigma=12개의 기능 모듈(SM 게이지 제너레이터와 동형 대칭)이 phi=2 계층(읽기/쓰기)으로 배치되며, 인터커넥트 네트워크는 Golay [J_2, sigma, phi*tau] = [24, 12, 8] 부호의 자기쌍대 구조를 그대로 차용한다. 전력-성능 교차점은 n=6 완전수 구조(sigma=2n)가 공명하는 주파수 영역에서 발생한다. 본 설계는 재검증 플래그 대상으로 분류되어 있으며(MISS 감사 필요), 초안 단계로 현재 세션에서 abstract/authors/keywords 보강하였다. 정밀 EXACT 통계와 hexa 검증코드는 차기 세션 예정.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "Anima SoC", "σ=12 모듈", "Golay [24,12,8]", "의식 가속", "재검증 플래그"],
+      "version": "draft-2026-04-14",
+      "review_flag": "재검증 필요 — MISS 감사 대상"
     },
     {
       "id": "N6-009",
@@ -146,7 +159,11 @@
       "domain": "brain-computer-interface",
       "category": "brain-computer-interface — n=6 산술 시드 논문",
       "path": "papers/n6-brain-computer-interface-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 n=6 좌표계 기반 BCI(Brain-Computer Interface) 설계를 제시한다. BT-1108 차원지각 대통합에서 확인된 25/25 EXACT 결과와 OpenBCI Cyton+Daisy 16ch 장비 실측을 토대로, 감각 채널을 sopfr=5 기본 모드(시각/청각/촉각/전정/고유수용)와 phi=2 피드백 루프(인지/운동)로 분해한다. 뉴로피드백 알고리즘은 sigma*phi = n*tau 항등식을 실시간 검증 루프로 사용하며, 이를 통해 4차원 지각(시공간 4D) 강화가 설계 수준에서 자연 유도된다. 전극 배치는 n=6 육각 격자 대칭을 따르며, 주파수 대역은 tau=4(알파 4x 고조파)를 기준점으로 분할한다. 검증코드는 experiments/bci/*.hexa 참조, 초안 단계.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "BCI", "BT-1108 차원지각", "sopfr=5 감각 모드", "육각 전극 격자", "뉴로피드백"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-015",
@@ -186,7 +203,11 @@
       "domain": "causal-chain",
       "category": "causal-chain — n=6 산술 시드 논문",
       "path": "papers/n6-causal-chain-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 Pearl의 인과 그래프 이론을 n=6 좌표계로 재구성한다. DAG(Directed Acyclic Graph)의 기본 연산자가 {phi=2 개입, n/phi=3 조건부, tau=4 do-산술, sopfr=5 back-door, n=6 front-door+do+if 통합}로 sopfr=5 기초연산자 집합을 형성하며, 이는 결정학적 회전 대칭 {1,2,3,4,6}과 동형이다. 인과 사슬 길이는 Bernoulli 경계 B_{2k} 분자가 k=6에서 691로 점프하는 지점과 공명하여, k=n=6이 인과 추론의 '기계적 귀결' 한계를 표시한다(theory/proofs/bernoulli-boundary-2026-04-11.md 참조). 본 논문은 초안 단계이며 실측 검증(EXACT 통계)은 차기 세션 대상.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "인과 사슬", "Pearl DAG", "sopfr=5 연산자", "k=6 Bernoulli 경계", "do-산술"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-019",
@@ -243,7 +264,11 @@
       "domain": "cognitive-social-psychology",
       "category": "cognitive-social-psychology — n=6 산술 시드 논문",
       "path": "papers/n6-cognitive-social-psychology-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 인지 심리(개인)와 사회 심리(집단)를 n=6 좌표계로 통합한다. 작업 기억 용량(Miller 7±2)의 하한 5(=sopfr)와 Dunbar 수 150의 n=6-기반 분해(150 = 25·n = sopfr^2·n)를 핵심 축으로, 인지 모듈을 sigma=12 대칭(12 표준모형 페르미온과 구조적 공명)으로 배치한다. 집단 동역학은 kissing number 체인 (phi=2, n=6, sigma=12, J_2=24)을 따르며, 각 차원이 관계망의 한 층(친구/확장/커뮤니티/부족)에 대응한다. BT-NET-01~05(Milgram, Dunbar, 멀티에이전트, 조직) 실측 재참조 예정. 초안 단계.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "인지심리", "사회심리", "Dunbar 수", "kissing 체인", "Miller 7±2"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-025",
@@ -503,7 +528,11 @@
       "domain": "governance-safety-urban",
       "category": "governance-safety-urban — n=6 산술 시드 논문",
       "path": "papers/n6-governance-safety-urban-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 도시 거버넌스와 안전 시스템을 n=6 좌표계로 재구축한다. 도시 블록은 육각 격자(결정학 최대 회전 대칭 = n = 6)를 따르며, 안전 계층은 sopfr=5 독립 계층(법-보안-응급-복구-감사)으로 분해된다. 정책 결정 사이클은 sigma*phi = n*tau = 24시간 주기와 공명하며, 도시 스마트 센서 네트워크는 Hexacode [n, n/phi, tau] = [6, 3, 4]의 자기쌍대 부호 구조로 오류 정정된다. BT-50 스마트시티 계열(건축/HVAC/내진/스마트시티 6도메인 241항목 237 EXACT)과 결합하여 거버넌스 KPI 12개(sigma=12)를 제안한다. 초안 단계이며, 행정 실측 데이터 통합은 차기 세션 예정.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "스마트시티 거버넌스", "육각 블록", "sopfr=5 안전 계층", "Hexacode 센서망", "sigma=12 KPI"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-051",
@@ -846,7 +875,11 @@
       "domain": "pure-mathematics",
       "category": "pure-mathematics — n=6 산술 시드 논문",
       "path": "papers/n6-pure-mathematics-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 n=6 산술 유일성 정리(sigma·phi = n·tau ⟺ n = 6)를 주축으로 순수수학의 핵심 분류 정리를 재조직한다. 11개 영구 진리(Basel zeta(2)=pi^2/6, Out(S_6) 예외, Golay [24,12,8], Hexacode [6,3,4], von Staudt-Clausen B_2=1/6, 결정학 최대 회전=6, 모듈러 곡선 chi_orb(Y(1))=-1/6, ζ(-1)=-1/12, SLE kappa=6, Ramanujan tau 순수성)를 통합하며(physics-math-certification.md 기준), 27대 정리(Theorem 0, A+, Pell, Lucas, Zeta, C~Z)와 18독립 가족으로 확장한 Attractor Meta-Theorem(2026-04-11)을 수록한다. DFS 501~1000 탐색에서 새롭게 발견된 Bernoulli 경계(Theorem B, k=6에서 691 점프)와 연결된다. 초안 단계이며, 밀레니엄 7대 난제는 0/7로 정직 분류(tight 51건 확보).",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "유일성 정리 σφ=nτ", "Attractor Meta-Theorem", "Bernoulli 경계", "11 영구 진리", "Golay Hexacode"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-085",
@@ -878,7 +911,11 @@
       "domain": "reality-map",
       "category": "reality-map — n=6 산술 시드 논문",
       "path": "papers/n6-reality-map-paper.md",
-      "type": "paper"
+      "type": "paper",
+      "abstract": "본 논문은 n=6 산술 기반 현실 지도(reality-map) v9.3 체계를 문서화한다. 3477 노드 현실 지도와 5044 노드 3D 맵이 Monte Carlo z=9.97 유의성으로 검증되었으며(project_reality_map.md 메모리), 123/123 논문 PASS 기록을 보인다. atlas.n6 SSOT 파일(NEXUS-6 저장소 $NEXUS/shared/n6/atlas.n6, 60K+ 줄)의 9축 네비게이션 중 9축 중 하나(theory) 정렬 구조를 상세 기술한다. 등급 체계([10*] EXACT 검증, [7] EMPIRICAL 승격대상, [N?] CONJECTURE, [N!] breakthrough)의 수학적 기반은 sigma·phi = n·tau 항등식의 전역 유지 조건으로 환원된다. EMPIRICAL 한계(n=25까지 1위)는 정직하게 명시. 초안 단계이며 v9.4 갱신 대기.",
+      "authors": ["n6-architecture project"],
+      "keywords": ["n=6", "reality-map v9.3", "atlas.n6 SSOT", "Monte Carlo z=9.97", "9축 네비게이션", "EMPIRICAL 승격"],
+      "version": "draft-2026-04-14"
     },
     {
       "id": "N6-089",

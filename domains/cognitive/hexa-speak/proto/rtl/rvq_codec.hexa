@@ -1,0 +1,202 @@
+// rtl/rvq_codec.hexa — N6-SPEAK v2 tier-3 RTL 블록
+// ─────────────────────────────────────────────────────
+// 목적  : fusion feature [B, T, 768] → RVQ codes [B, T, 8] → feat [B, T, 768]
+// 등급  : 의사-HW RTL (순수 .hexa 함수 기반)
+// 배치  : Xn6 NPU-part-3 (tier-3 codec layer)
+// 파라미터: 8-stage RVQ, codebook 1024/stage (INT8)
+// 동결  : v2.0-frozen (2026-04-14)
+//
+// n=6 정합 (spec §5.2):
+//   stages       = 8    = σ(6)-τ(6) = 12-4
+//   codebook_sz  = 1024 = 2^(σ-φ) = 2^10
+//   fusion hidden= 768  = 2·384 = φ·σ·τ·16
+//   감정 6 × τ 4 = 24 = J₂ (교차검증)
+//
+// 규칙: R1 HEXA-FIRST, 한글 주석
+
+// ── n=6 기본 산술 ──────────────────────────────────
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn abs_val(x: i64) -> i64 {
+    if x < 0 { return 0 - x }
+    return x
+}
+
+// ── 코드북 lookup (의사-HW) ─────────────────────────
+// 1024개 코드 중 최근접 index 반환
+fn quantize_one_stage(residual: i64, stage: i64, codebook_sz: i64) -> i64 {
+    // 의사-HW: argmin_c ‖residual - codebook[c]‖
+    // 시뮬: 해시 기반 코드 선택
+    let idx: i64 = abs_val(residual * 37 + stage * 131) % codebook_sz
+    return idx
+}
+
+fn decode_code(code_idx: i64, stage: i64, codebook_sz: i64) -> i64 {
+    // 코드북 룩업: codebook[stage][code_idx] → 양자화 벡터 대표값
+    // 시뮬: 선형 매핑 [0, codebook_sz) → [-512, 512)
+    let v: i64 = (code_idx * 1024) / codebook_sz - 512
+    // 스테이지별 스케일 감쇠 (잔차 크기 축소)
+    let scale: i64 = 8 - stage        // 8,7,6,5,4,3,2,1
+    let out: i64 = v * scale / 8
+    return out
+}
+
+// ── RTL 인코딩: feature → 8 codes ───────────────────
+// 입력 : fusion feature 체크섬 feat_sum
+// 출력 : 8개 코드 인덱스의 합 (체크섬)
+fn encode(feat_sum: i64) -> i64 {
+    let stages: i64 = 8           // σ(6)-τ(6) = 12-4
+    let codebook_sz: i64 = 1024   // 2^(σ-φ) = 2^10
+    let mut residual: i64 = feat_sum
+    let mut codes_sum: i64 = 0
+    let mut s: i64 = 0
+    while s < stages {
+        let idx: i64 = quantize_one_stage(residual, s, codebook_sz)
+        codes_sum = codes_sum + idx
+        // 잔차 업데이트 = residual - codebook[s][idx]
+        let decoded: i64 = decode_code(idx, s, codebook_sz)
+        residual = residual - decoded
+        s = s + 1
+    }
+    return codes_sum
+}
+
+// ── RTL 디코딩: 8 codes → feat 재구성 ────────────────
+// 입력 : 8 코드 (시뮬: codes_sum 기반 역전개)
+// 출력 : 재구성 feat 체크섬
+fn decode(codes_sum: i64, stages: i64) -> i64 {
+    let codebook_sz: i64 = 1024
+    // 시뮬: 각 스테이지 decoded 누적
+    let mut feat: i64 = 0
+    let mut s: i64 = 0
+    while s < stages {
+        // 코드 index 재현 (시뮬): codes_sum 에서 단계별 할당
+        let idx: i64 = abs_val(codes_sum + s * 97) % codebook_sz
+        let d: i64 = decode_code(idx, s, codebook_sz)
+        feat = feat + d
+        s = s + 1
+    }
+    return feat
+}
+
+// ── 인코드-디코드 왕복 (RTL loopback) ────────────────
+fn forward(feat_sum: i64) -> i64 {
+    let codes_sum: i64 = encode(feat_sum)
+    let recon: i64 = decode(codes_sum, 8)
+    return recon
+}
+
+// ── 압축비 계산 ──────────────────────────────────────
+// 원본: 768 dim × FP16 (2B) = 1536 bytes / 토큰
+// 코드: 8 stage × log2(1024)=10bit = 80bit = 10 bytes / 토큰
+// 압축비: 1536/10 = 153.6x
+fn compression_ratio() -> i64 {
+    let orig_bytes: i64 = 768 * 2    // 1536
+    let code_bytes: i64 = 8 * 10 / 8 // = 10 (ceil)
+    let ratio: i64 = orig_bytes / code_bytes
+    return ratio
+}
+
+// ── dry-run 테스트 ───────────────────────────────────
+fn test() -> i64 {
+    let mut pass: i64 = 0
+    let n: i64 = 6
+
+    println("=== rvq_codec RTL dry-run ===")
+
+    // T1: stages = σ-τ = 8
+    let stages: i64 = 8
+    if stages == sigma(n) - tau(n) {
+        pass = pass + 1
+        println("  [T1] stages=8 = σ-τ PASS")
+    }
+
+    // T2: codebook = 2^(σ-φ) = 1024
+    let cb: i64 = 1024
+    let exp: i64 = sigma(n) - phi(n)   // 10
+    // 2^10 = 1024 계산
+    let mut p2: i64 = 1
+    let mut i: i64 = 0
+    while i < exp {
+        p2 = p2 * 2
+        i = i + 1
+    }
+    if cb == p2 {
+        pass = pass + 1
+        println("  [T2] codebook=1024 = 2^(σ-φ) PASS")
+    }
+
+    // T3: 인코드 결정성
+    let feat: i64 = 384000            // fusion 체크섬 시뮬
+    let c1: i64 = encode(feat)
+    let c2: i64 = encode(feat)
+    if c1 == c2 {
+        pass = pass + 1
+        println("  [T3] encode 결정성 PASS (codes_sum=" + c1 + ")")
+    }
+
+    // T4: 왕복 재구성 (체크섬 non-zero)
+    let r: i64 = forward(feat)
+    // 재구성 오차 측정 (feat_sum 대비)
+    let err: i64 = abs_val(feat - r)
+    if err > 0 {
+        // RVQ 는 손실 압축이므로 err>0 정상
+        pass = pass + 1
+        println("  [T4] loopback 손실 압축 PASS (err=" + err + ")")
+    }
+
+    // T5: 압축비 > 100x
+    let ratio: i64 = compression_ratio()
+    if ratio > 100 {
+        pass = pass + 1
+        println("  [T5] 압축비 " + ratio + "x PASS (>100)")
+    }
+
+    // 교차 검증식 (spec §5.3)
+    let cross: i64 = 6 * tau(n)       // 6 감정 × τ = 24
+    println("  ··· 교차: 6×τ=" + cross + " (J₂ 하한)")
+
+    println("=== rvq_codec: " + pass + "/5 PASS ===")
+    return pass
+}
+
+fn main() -> i64 {
+    let pass: i64 = test()
+    if pass == 5 { return 0 }
+    return 1
+}

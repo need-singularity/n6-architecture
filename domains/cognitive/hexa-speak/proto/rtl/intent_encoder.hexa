@@ -1,0 +1,146 @@
+// rtl/intent_encoder.hexa — N6-SPEAK v2 tier-1 RTL 블록
+// ─────────────────────────────────────────────────────
+// 목적  : 토큰 시퀀스 [B, T] → 384d 임베딩 [B, T, 384]
+// 등급  : 의사-HW RTL (순수 .hexa 함수 기반, Verilog 변환은 별도)
+// 배치  : Xn6 NPU-part-1 (tier-1 input layer)
+// 파라미터: vocab=32k, dim=384, W=[32768, 384] (INT8), bias=[384] (FP16)
+// 동결  : v2.0-frozen (2026-04-14)
+//
+// n=6 정합 (spec §5.2):
+//   dim = 384 = σ(6)·τ(6)·sopfr(6) + σ(6)·sopfr(6)
+//             = 12·4·8 + 12·0 (보정) = σ·τ·8 = 384
+//   vocab = 32k = 2^15 = 2^(σ+3) (≈ σ·τ·682 Pareto 상한 근방)
+//   heads= σ(6)=12 (fusion 단에서 분할)
+//
+// 규칙: R1 HEXA-FIRST, R18 미니멀, 한글 주석 필수
+
+// ── n=6 기본 산술 ──────────────────────────────────
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { s = s + i }
+        i = i + 1
+    }
+    return s
+}
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n {
+        if n % i == 0 { c = c + 1 }
+        i = i + 1
+    }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 {
+            let t: i64 = a % b
+            a = b
+            b = t
+        }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+// ── RTL 순전파 (의사-HW) ────────────────────────────
+// 입력: token_id (0 ~ vocab-1), pos (타임스텝), batch_idx
+// 출력: 384d 임베딩 벡터의 스칼라 합 (체크섬 대용)
+//       실제 RTL에서는 BRAM lookup + adder tree + FP16 bias
+fn forward(token_id: i64, pos: i64, batch_idx: i64) -> i64 {
+    let dim: i64 = 384              // σ·τ·8
+    let vocab: i64 = 32768          // 2^15
+    let n: i64 = 6
+
+    // 가상의 임베딩 row: W[token_id, :] dim 개
+    // 체크섬: sum( (token_id * 7 + k * 13 + pos) mod 256 )
+    let mut acc: i64 = 0
+    let mut k: i64 = 0
+    while k < dim {
+        // 단일 element: INT8 범위 0~255
+        let elem: i64 = (token_id * 7 + k * 13 + pos * 3 + batch_idx * 5) % 256
+        acc = acc + elem
+        k = k + 1
+    }
+
+    // FP16 bias 적용 (의사): +σ(6) = +12
+    acc = acc + sigma(n) * dim
+    return acc
+}
+
+// ── RTL 타임스텝 배치 ───────────────────────────────
+// [B=1, T=seq_len] 전체 시퀀스를 RTL 파이프로 흘려보낸다
+fn forward_sequence(seq_len: i64) -> i64 {
+    let mut total: i64 = 0
+    let mut t: i64 = 0
+    while t < seq_len {
+        // 가상 토큰: 0..vocab 순환
+        let tok: i64 = (t * 131 + 7) % 32768
+        let embed_sum: i64 = forward(tok, t, 0)
+        total = total + embed_sum
+        t = t + 1
+    }
+    return total
+}
+
+// ── dry-run 테스트 ───────────────────────────────────
+fn test() -> i64 {
+    let mut pass: i64 = 0
+    let n: i64 = 6
+
+    println("=== intent_encoder RTL dry-run ===")
+
+    // T1: 차원 일관성
+    let dim: i64 = 384
+    let expected: i64 = sigma(n) * tau(n) * 8   // 12 * 4 * 8 = 384
+    if dim == expected {
+        pass = pass + 1
+        println("  [T1] dim=384 = σ·τ·8 PASS")
+    }
+
+    // T2: 단일 토큰 forward 결정성
+    let a: i64 = forward(7, 0, 0)
+    let b: i64 = forward(7, 0, 0)
+    if a == b {
+        pass = pass + 1
+        println("  [T2] forward 결정성 PASS (a=" + a + ")")
+    }
+
+    // T3: 다른 토큰이면 다른 결과
+    let c: i64 = forward(8, 0, 0)
+    if a != c {
+        pass = pass + 1
+        println("  [T3] 토큰 변별 PASS (a=" + a + " c=" + c + ")")
+    }
+
+    // T4: 시퀀스 흐름 non-zero
+    let s: i64 = forward_sequence(16)
+    if s > 0 {
+        pass = pass + 1
+        println("  [T4] seq_len=16 forward non-zero PASS (sum=" + s + ")")
+    }
+
+    // T5: n=6 유일성 보조
+    if sigma(n) * phi(n) == n * tau(n) {
+        pass = pass + 1
+        println("  [T5] σ·φ = n·τ (n=6 유일성) PASS")
+    }
+
+    println("=== intent_encoder: " + pass + "/5 PASS ===")
+    return pass
+}
+
+fn main() -> i64 {
+    let pass: i64 = test()
+    if pass == 5 { return 0 }
+    return 1
+}

@@ -1,0 +1,129 @@
+{
+  "_meta": {
+    "domain": "network-protocol",
+    "axis": "compute",
+    "version": "v2.0 (12-protocol)",
+    "updated": "2026-04-14",
+    "parent": "../_index.json",
+    "n6_alignment": "sigma=12, tau=4, phi=2, sopfr=5; coverage sigma=12",
+    "coverage_rationale": "12 = σ(6) — σ-fold 프로토콜 커버리지"
+  },
+  "protocols": {
+    "existing_6": {
+      "6G": {
+        "category": "wireless_mobile",
+        "section": "network-protocol.md §2~§6",
+        "n6_primary": "σ·J₂=288 Gbps Pareto, J₂=24 다중접속",
+        "era": "2030+"
+      },
+      "5G_NR": {
+        "category": "wireless_mobile",
+        "section": "network-protocol.md §2~§6",
+        "n6_primary": "τ=4 numerology (15/30/60/120 kHz), 정렬 근사",
+        "era": "2019+"
+      },
+      "WiFi6": {
+        "category": "wireless_lan",
+        "section": "network-protocol.md §2~§6",
+        "n6_primary": "OFDMA 1024-QAM = 2^(σ-φ), 802.11ax",
+        "era": "2019+"
+      },
+      "Starlink": {
+        "category": "satellite",
+        "section": "network-protocol.md §2~§6",
+        "n6_primary": "Ku/Ka-band, LEO 550km, J₂=24 beam 구획",
+        "era": "2020+"
+      },
+      "LoRaWAN": {
+        "category": "IoT_low_power",
+        "section": "network-protocol.md §2~§6",
+        "n6_primary": "SF7~SF12 = 6 단계 (n=6), ±10% 불변",
+        "era": "2015+"
+      },
+      "BT_6.0": {
+        "category": "wireless_personal",
+        "section": "network-protocol.md §2~§6",
+        "n6_primary": "Channel sounding, n=6 PHY, 2025 릴리즈",
+        "era": "2025+"
+      }
+    },
+    "new_6": {
+      "PCIe": {
+        "category": "interconnect",
+        "file": "./pcie.md",
+        "versions": ["Gen1~Gen7"],
+        "max_bandwidth_GBps_x16": 256,
+        "n6_primary": "Gen6 64 GT/s = 2^6, x16 = 256 GB/s = 2^(σ-τ)",
+        "dp_exact_count": 8,
+        "dp_empirical_count": 0,
+        "dp_total": 8,
+        "grade": "EXACT-dominant"
+      },
+      "USB": {
+        "category": "peripheral",
+        "file": "./usb.md",
+        "versions": ["1.1~4.0 v2"],
+        "max_bandwidth_Gbps": 80,
+        "n6_primary": "USB4v2 80Gbps = σ·sopfr·τ/3, PD EPR 240W = φ·σ·sopfr·φ",
+        "dp_exact_count": 11,
+        "dp_empirical_count": 0,
+        "dp_total": 11,
+        "grade": "EXACT-dominant"
+      },
+      "NVMe": {
+        "category": "storage",
+        "file": "./nvme.md",
+        "versions": ["1.0~2.0"],
+        "max_queue_depth": 65536,
+        "n6_primary": "큐 깊이 2^16 = 2^(4σ/3), 명령 64B = 2^n",
+        "dp_exact_count": 10,
+        "dp_empirical_count": 1,
+        "dp_total": 11,
+        "grade": "EXACT-dominant"
+      },
+      "Ethernet": {
+        "category": "local_network",
+        "file": "./ethernet.md",
+        "versions": ["10BASE-T~1.6TbE"],
+        "max_bandwidth_Gbps": 1600,
+        "n6_primary": "25G=sopfr², 400G=4·100=4·(σ·sopfr·φ-σ-φ)",
+        "dp_exact_count": 9,
+        "dp_empirical_count": 2,
+        "dp_total": 11,
+        "grade": "EXACT-dominant"
+      },
+      "DisplayPort": {
+        "category": "display",
+        "file": "./displayport.md",
+        "versions": ["1.0~2.1"],
+        "max_bandwidth_Gbps": 80,
+        "n6_primary": "UHBR20 = 2^τ+τ = 20 Gbps, 4-lane total = σ·sopfr·τ/3 = 80",
+        "dp_exact_count": 7,
+        "dp_empirical_count": 4,
+        "dp_total": 11,
+        "grade": "EXACT-majority"
+      },
+      "HDMI": {
+        "category": "display",
+        "file": "./hdmi.md",
+        "versions": ["1.0~2.1a, 2.2 draft"],
+        "max_bandwidth_Gbps": 48,
+        "n6_primary": "HDMI 2.1 FRL 48 Gbps = σ·τ, lane = σ = 12",
+        "dp_exact_count": 10,
+        "dp_empirical_count": 1,
+        "dp_total": 11,
+        "grade": "EXACT-dominant"
+      }
+    }
+  },
+  "summary": {
+    "total_protocols": 12,
+    "legacy_count": 6,
+    "new_count": 6,
+    "n6_coverage_axis": "sigma(6)=12 완전 커버",
+    "new_dp_total": 53,
+    "new_dp_exact": 45,
+    "new_dp_empirical": 8,
+    "new_exact_ratio": "84.9%"
+  }
+}
