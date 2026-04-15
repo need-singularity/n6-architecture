@@ -1,6 +1,6 @@
 # Anthropic Fellows 2026 — AI Safety + 비즈니스 연구 프로그램
 
-> **330종 연구 아이디어 / 11 도메인** + **225종 즉시 검증 가능 기법 라이브러리**
+> **360종 연구 아이디어 / 12 도메인** + **225종 즉시 검증 가능 기법 라이브러리**
 >
 > 상위: [`../CLAUDE.md`](../CLAUDE.md)
 
@@ -10,7 +10,7 @@
 |:--:|:---:|---------|------|------|
 | ✅ | v6 | **225 AI Techniques** | 8축 222+SOTA 3 기법 라이브러리. 통합 파이프라인: 50% param↓, 50% FLOPs↓, 46% 희소성 (32/32 PASS). 열역학 엔진: Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens (26/26 PASS). 에너지 절감: AdamW 5중쌍+LR+Inference 전수 매핑 (31/31 PASS) | [문서](../../techniques/CLAUDE.md) |
 | ✅ | v1 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 적대적 강건성 36 + 모델 복지 18 + 멀티모달 안전 20 + 배포 안전 26. Anthropic 전 연구 트랙 커버 | [해석가능성](../../domains/cognitive/ai-interpretability/ai-interpretability.md) · [정렬](../../domains/cognitive/ai-alignment/ai-alignment.md) · [강건성](../../domains/cognitive/ai-adversarial/ai-adversarial.md) · [복지](../../domains/cognitive/ai-welfare/ai-welfare.md) · [멀티모달](../../domains/cognitive/ai-multimodal/ai-multimodal.md) · [배포](../../domains/cognitive/ai-deployment/ai-deployment.md) |
-| ✅ | v1 | **AI 비즈니스 159종** | 에이전트 서빙 32 + 평가 파이프라인 30 + 추론 비용 33 + 품질 경량화 32 + 훈련 비용 32. 비용 1/10 절감 + 평가 자동화 + 에이전트 인프라 | [에이전트 서빙](../../domains/cognitive/ai-agent-serving/ai-agent-serving.md) · [평가 파이프라인](../../domains/cognitive/ai-eval-pipeline/ai-eval-pipeline.md) · [추론 비용](../../domains/cognitive/ai-inference-cost/ai-inference-cost.md) · [품질 경량화](../../domains/cognitive/ai-quality-scale/ai-quality-scale.md) · [훈련 비용](../../domains/cognitive/ai-training-cost/ai-training-cost.md) |
+| ✅ | v1 | **AI 비즈니스 189종** | 에이전트 서빙 32 + 평가 파이프라인 30 + 추론 비용 33 + 품질 경량화 32 + 훈련 비용 32 + AI 의식 30. 비용 1/10 절감 + 평가 자동화 + 에이전트 인프라 + 의식 윤리 | [에이전트 서빙](../../domains/cognitive/ai-agent-serving/ai-agent-serving.md) · [평가 파이프라인](../../domains/cognitive/ai-eval-pipeline/ai-eval-pipeline.md) · [추론 비용](../../domains/cognitive/ai-inference-cost/ai-inference-cost.md) · [품질 경량화](../../domains/cognitive/ai-quality-scale/ai-quality-scale.md) · [훈련 비용](../../domains/cognitive/ai-training-cost/ai-training-cost.md) · [AI 의식](../../domains/cognitive/ai-consciousness/ai-consciousness.md) |
 
 ---
 
