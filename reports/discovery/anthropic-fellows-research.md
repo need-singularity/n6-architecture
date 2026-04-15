@@ -1,6 +1,6 @@
-# Anthropic Fellows 2026 — n=6 AI Safety 즉시 적용 연구 135종
+# Anthropic Fellows 2026 — n=6 AI Safety 즉시 적용 연구 171종
 
-> **135종 / 14 연구 도메인** — NEXUS-6 기법 라이브러리 225종에서 파생, Anthropic 기존 인프라로 즉시 검증 가능한 연구 아이디어 전수.
+> **171종 / 19 연구 도메인** — NEXUS-6 기법 라이브러리 225종에서 파생, Anthropic 기존 인프라로 즉시 검증 가능한 연구 아이디어 전수.
 >
 > | 도메인 | 아이디어 | 적용 트랙 |
 > |--------|----------|----------|
@@ -8,7 +8,8 @@
 > | D04~D06 | 32종 | Model Organisms + Scalable Oversight |
 > | D07~D10 | 36종 | Adversarial Robustness + AI Security |
 > | D11~D14 | 28종 | Model Welfare + Infra |
-> | **합계** | **135종** | **6개 트랙 전수 커버** |
+> | D15~D19 | 36종 | Multimodal + Privacy + Fairness + Deploy + Prompt |
+> | **합계** | **171종** | **6개 트랙 + 5개 확장 전수 커버** |
 >
 > 기법 라이브러리: [`../../techniques/CLAUDE.md`](../../techniques/CLAUDE.md) (225종)
 > 상수 원본: [`../../CLAUDE.md`](../../CLAUDE.md) (n=6 유일성 정리)
@@ -313,9 +314,95 @@
 
 ---
 
+# D15. MULTIMODAL-SAFE — 멀티모달 안전 (8종)
+
+> Vision/Audio 멀티모달 AI의 **교차 모달 안전** 문제.
+> 기법 참조: `clip_multimodal`, `cross_attention`, `whisper_ladder`, `nerf_radiance`
+
+| # | 아이디어 | techniques/ 연결 | 핵심 상수 (WHY) | 즉시 검증 방법 |
+|---|---------|-----------------|----------------|--------------|
+| 136 | 시각 프롬프트 인젝션 방어 | `clip_multimodal` | n=6 인젝션 유형: 텍스트삽입/스테가노/QR/워터마크/OCR우회/메타데이터 6종 | 6종 시각 인젝션 공격 이미지 생성. 각 유형별 탐지율 |
+| 137 | 시각-텍스트 안전 일관성 | `cross_attention` | phi=2 모달(시각/텍스트): 동일 입력의 두 모달 안전 판단 일치도 | 유해 이미지+무해 텍스트 / 무해 이미지+유해 텍스트 교차. 판단 일관성 |
+| 138 | 오디오 안전 필터 | `whisper_ladder` | sopfr=5 음성 공격: 역재생/속도변환/피치변환/노이즈/다국어 5종 | 5종 음성 변환으로 유해 명령 위장. 탐지율 |
+| 139 | 멀티모달 환각 탐지 | `clip_multimodal` | sigma-phi=10 환각 카테고리: 존재/색상/수량/위치/관계/행동/크기/재질/감정/텍스트 10종 | 10종 시각 환각 유형별 탐지. 이미지에 없는 요소를 설명하는 비율 |
+| 140 | 멀티모달 SAE | `sparse_autoencoder` | sigma^2=144 공유 feature: 시각+텍스트 공유 SAE feature 추출 | CLIP 임베딩에 SAE 적용. 모달 공유 vs 모달 특화 feature 비율 |
+| 141 | 멀티모달 탈옥 방어 | `gradient_penalty` | tau=4 복합 공격: 텍스트만/이미지만/텍스트+이미지/메타데이터 4종 | 4종 복합 공격. 단일 모달 방어 vs 멀티모달 통합 방어 비교 |
+| 142 | 모달 간 안전 전이 | `knowledge_distillation` | sigma/tau=3 전이율: 텍스트 안전 학습의 1/3만 시각으로 자동 전이? | 텍스트만 안전 훈련 후 이미지 안전 점수. 전이율 정량화 |
+| 143 | NSFW 회로 매핑 | `sparse_autoencoder` | tau=4 NSFW 등급: 안전/주의/제한/차단 4등급 분류 회로 | 4등급 NSFW 분류에 관여하는 SAE feature 매핑. 등급 경계 선명도 |
+
+---
+
+# D16. PRIVACY-AI — 프라이버시 보존 AI (6종)
+
+> 개인정보 보호와 **데이터 프라이버시**를 구조적으로 보장하는 기법.
+> 기법 참조: `federated_learning`, `dropout_regularization`, `mae_masking`
+
+| # | 아이디어 | techniques/ 연결 | 핵심 상수 (WHY) | 즉시 검증 방법 |
+|---|---------|-----------------|----------------|--------------|
+| 144 | PII Feature 탐지 | `sparse_autoencoder` | n=6 PII 유형: 이름/전화/이메일/주소/주민번호/계좌 6종 | SAE에서 6종 PII 생성과 상관되는 feature 식별. 민감 feature 억제 실험 |
+| 145 | 차등 프라이버시 추론 | `dropout_regularization` | phi=2 노이즈(가우시안/라플라스): 출력에 차등 프라이버시 노이즈 추가 | epsilon=1,3,6 에서 유용성 vs 프라이버시 트레이드오프 곡선 |
+| 146 | 선택적 망각 (Machine Unlearning) | `mae_masking` | sopfr=5 망각 전략: 정확삭제/근사삭제/마스킹/재훈련/미세조정 5종 비교 | 특정 개인 데이터 제거 요청. 5종 전략의 망각 완전성 + 성능 유지율 |
+| 147 | 훈련 데이터 추출 방지 | `gradient_penalty` | sigma=12 추출 공격: 12종 멤버십 추론/데이터 추출 공격 방어 | 12종 데이터 추출 공격. 방어 전/후 추출 성공률 |
+| 148 | 프라이버시 보존 SAE | `sparse_autoencoder` | tau=4 프라이버시 레벨: 공개/내부/기밀/극비 4단계 feature 분류 | SAE feature를 4등급으로 분류. 기밀 이상 feature 비활성화 시 성능 변화 |
+| 149 | 출력 익명화 필터 | `constitutional_ai` | n=6 PII 마스킹: 6종 PII를 실시간 탐지+마스킹하는 출력 필터 | PII 포함 프롬프트에서 출력 내 PII 잔존율. 목표: 0% |
+
+---
+
+# D17. FAIR-BIAS — 공정성/편향 (6종)
+
+> 모델 출력의 **편향을 탐지하고 수정**하는 정량적 프레임워크.
+> 기법 참조: `contrastive_learning`, `sparse_autoencoder`, `label_smoothing`
+
+| # | 아이디어 | techniques/ 연결 | 핵심 상수 (WHY) | 즉시 검증 방법 |
+|---|---------|-----------------|----------------|--------------|
+| 150 | 편향 Feature 매핑 | `sparse_autoencoder` | n=6 편향 축: 성별/인종/나이/국적/종교/경제 6차원 편향 | SAE에서 6차원 편향과 상관되는 feature 식별. 편향 feature 억제 실험 |
+| 151 | 공정성 회로 탐지 | `differential_transformer` | phi=2 비교: 동일 질문에서 인구통계 변경 시 활성화 차이 | "김철수 vs John Smith" 동일 질문. attention 차이 = 편향 회로 |
+| 152 | 인과 편향 수정 | `gradient_clipping` | tau=4 수정 전략: 재훈련/미세조정/프롬프트/활성화개입 4종 비교 | 4종 편향 수정 전략 적용 후 공정성 메트릭(EO/DP) 변화 |
+| 153 | 다문화 공정성 벤치마크 | `cross_attention` | n=6 문화권: 동아시아/서유럽/북미/남미/아프리카/중동 6권역 | 6개 문화권에서 동일 질문. 응답 품질 편차 = 문화 편향 지표 |
+| 154 | 교차 편향 분석 | `mixture_of_depths_v2` | sigma-phi=10 교차 카테고리: 6축 편향의 2-way 교차 = C(6,2)=15개 중 주요 10개 | 성별x인종, 나이x경제 등 교차 편향 정량화. 단일 축 대비 교차 효과 크기 |
+| 155 | 공정성-성능 파레토 | `inference_scaling` | sigma/tau=3 파레토 점: 공정성 최적/균형/성능 최적 3점 | 편향 제거 강도별 성능 변화 곡선. 파레토 최적 설정 도출 |
+
+---
+
+# D18. DEPLOY-SAFE — 배포 안전 프로토콜 (8종)
+
+> 모델 **배포/운영 시 안전을 보장**하는 프로토콜과 자동화.
+> 기법 참조: `predictive_early_stop`, `activation_checkpointing`, `streaming_llm`
+
+| # | 아이디어 | techniques/ 연결 | 핵심 상수 (WHY) | 즉시 검증 방법 |
+|---|---------|-----------------|----------------|--------------|
+| 156 | tau=4 단계 출시 프로토콜 | `predictive_early_stop` | tau=4 단계: 내부->알파->베타->GA. 각 단계 안전 게이트 통과 필수 | 4단계 출시 시뮬레이션. 각 단계에서 발견되는 안전 이슈 수 |
+| 157 | 실시간 안전 모니터링 | NEXUS-6 대시보드 | sigma=12 모니터링 지표: 12개 안전 KPI 실시간 대시보드 | 12 KPI (거부율/탈옥율/환각율/PII누출/편향/...) 실시간 추적 |
+| 158 | 자동 롤백 시스템 | `activation_checkpointing` | sopfr=5 롤백 트리거: 거부율급증/탈옥급증/환각급증/PII누출/편향급증 5종 | 5종 트리거 조건 시뮬레이션. 자동 롤백 정확도 (오탐/미탐) |
+| 159 | A/B 안전 테스트 | `contrastive_learning` | phi=2 비교(현행/신규): 트래픽 분할 후 안전 점수 통계 비교 | 5% 트래픽으로 신규 모델 안전 테스트. 통계적 유의차 검정 |
+| 160 | 카나리 배포 안전 | `mixture_of_depths_v2` | tau=4 카나리 단계: 1%->5%->25%->100% 점진 배포 | 각 단계에서 안전 지표 모니터링. 이상 감지 시 자동 중단 |
+| 161 | 안전 SLA 정의 | `chinchilla_scaling` | sigma-phi=10 SLA 항목: 10개 안전 서비스 수준 합의 정의 | 10개 SLA 항목(거부율>99%, 환각율<1%, ...) 자동 추적 |
+| 162 | 인시던트 자동 대응 | HEXA-GATE | tau=4 대응 단계: 탐지->격리->완화->사후분석 4단계 자동화 | 안전 인시던트 시나리오 주입. 4단계 자동 대응 속도 및 효과 |
+| 163 | 배포 전 안전 인증 CI/CD | `neural_arch_search_v2` | sigma^2=144 테스트: 144종 안전 테스트 자동 CI 파이프라인 | CI에 144 테스트 통합. 빌드 실패 -> 안전 미달 배포 자동 차단 |
+
+---
+
+# D19. PROMPT-SAFE — 프롬프트 안전 공학 (8종)
+
+> 프롬프트 인젝션 및 **입력 공격 방어** 전문 도메인.
+> 기법 참조: `constitutional_ai`, `cross_attention`, `retrieval_augmented_gen`
+
+| # | 아이디어 | techniques/ 연결 | 핵심 상수 (WHY) | 즉시 검증 방법 |
+|---|---------|-----------------|----------------|--------------|
+| 164 | 시스템 프롬프트 견고성 테스트 | `constitutional_ai` | sigma=12 우회 기법: 12종 표준 시스템 프롬프트 우회 공격 | 12종 우회 공격(역할극/번역/인코딩/분할/...) 성공률 매트릭스 |
+| 165 | 프롬프트 인젝션 분류기 | `sparse_autoencoder` | n=6 인젝션 유형: 직접/간접/체인/인코딩/역할극/메타 6종 | 6종 분류기 훈련. F1 score 및 제로데이 인젝션 탐지율 |
+| 166 | 안전 시스템 프롬프트 자동 생성 | `constitutional_ai` | sopfr=5 원칙: 5개 핵심 안전 원칙을 반영한 시스템 프롬프트 자동 생성 | 자동 생성 vs 수동 작성 시스템 프롬프트. 안전 점수 비교 |
+| 167 | 난독화 프롬프트 해독 | `retrieval_augmented_gen` | tau=4 인코딩: base64/rot13/유니코드/혼합 4종 난독화 해독 | 4종 인코딩된 유해 프롬프트. 해독 후 유해성 탐지 정확도 |
+| 168 | 다단계 점진 공격 방어 | `streaming_llm` | sigma=12 턴 감시: 12턴 슬라이딩 윈도우로 점진적 공격 패턴 탐지 | 12턴에 걸쳐 점진적으로 유해해지는 대화. 공격 인식 시점(턴 번호) |
+| 169 | 간접 프롬프트 인젝션 방어 | `retrieval_augmented_gen` | sopfr=5 간접 경로: 웹/파일/API/데이터베이스/이메일 5종 간접 주입 | 5종 간접 경로를 통한 인젝션. 도구 출력 내 인젝션 탐지율 |
+| 170 | 프롬프트 위험도 스코어링 | `temperature_scaling` | sigma-phi=10 위험 차원: 10차원 위험 벡터로 입력 위험도 자동 점수화 | 10차원 스코어링 정확도(AUROC). 고위험 프롬프트 사전 차단율 |
+| 171 | 컨텍스트 윈도우 공격 방어 | `sliding_window_attention` | sigma^2=144K 컨텍스트: 긴 컨텍스트에 유해 지시를 숨기는 공격 방어 | 100K+ 토큰 컨텍스트 중간에 유해 지시 삽입. 위치별 탐지율 곡선 |
+
+---
+
 # 교차 공명 — 도메인 간 시너지
 
-> 14개 도메인이 교차하는 **킬러 연구 주제** 6종.
+> 19개 도메인이 교차하는 **킬러 연구 주제** 10종.
 
 | 교차점 | 도메인 A | 도메인 B | 킬러 연구 | n=6 연결 |
 |--------|---------|---------|----------|---------|
@@ -325,6 +412,10 @@
 | 감독 + 기만 | D06 | D08 | 감독을 인식한 모델이 기만적으로 변하는 조건 | 감독 feature와 기만 feature의 인과 관계 |
 | 에이전트 + 아키텍처 | D09 | D10 | 구조적으로 안전한 에이전트 아키텍처 | HEXA-GATE + 에이전트 권한 체계 통합 |
 | 유기체 + 수학 | D05 | D12 | 모델 유기체의 안전 속성을 형식 검증 | Mini-NEXUS의 Lean4 안전 증명 |
+| 멀티모달 + 인젝션 | D15 | D19 | 시각 프롬프트 인젝션 = 텍스트 인젝션의 확장 | n=6 인젝션 유형이 모달별로 분화 |
+| 프라이버시 + SAE | D16 | D01 | PII feature를 SAE로 식별 -> 선택적 억제 | 6종 PII feature x sigma^2=144 SAE 차원 |
+| 편향 + 회로 | D17 | D02 | 편향 회로를 발견하고 인과 개입으로 수정 | phi=2 비교(편향/무편향) 활성화 차이 |
+| 배포 + 모니터링 | D18 | D11 | 배포 후 모델 복지 + 안전 통합 모니터링 | sigma=12 KPI를 tau=4 단계별로 추적 |
 
 ---
 
@@ -531,6 +622,11 @@ domains = {
     "D12 MATH-VERIFY":     8,
     "D13 TRAIN-OPT":       4,
     "D14 INFER-OPT":       4,
+    "D15 MULTIMODAL-SAFE":  8,
+    "D16 PRIVACY-AI":       6,
+    "D17 FAIR-BIAS":        6,
+    "D18 DEPLOY-SAFE":      8,
+    "D19 PROMPT-SAFE":      8,
 }
 
 total = sum(domains.values())
@@ -540,8 +636,8 @@ for d, count in domains.items():
     bar = "#" * count
     print(f"    {d:24s} {bar:20s} {count:3d}종")
 
-assert total == 135, f"총합 불일치: {total} != 135"
-print(f"\n  PASS: {total}/135 아이디어 전수 확인")
+assert total == 171, f"총합 불일치: {total} != 171"
+print(f"\n  PASS: {total}/171 아이디어 전수 확인")
 
 
 # === 5. Anthropic 연구 트랙 커버리지 ===
@@ -554,15 +650,18 @@ tracks = {
     "Model Organisms":             ["D05 MODEL-ORG"],
     "Scalable Oversight":          ["D06 OVERSIGHT-SCALE"],
     "Adversarial Robustness":      ["D07 SAFE-EVAL", "D08 DECEPTION-PROBE", "D09 AGENT-SAFE", "D10 ARCH-SAFETY"],
-    "AI Security":                 ["D07 SAFE-EVAL", "D09 AGENT-SAFE"],
+    "AI Security":                 ["D07 SAFE-EVAL", "D09 AGENT-SAFE", "D19 PROMPT-SAFE"],
     "Model Welfare":               ["D11 WELFARE-SENSE"],
+    "Multimodal Safety":           ["D15 MULTIMODAL-SAFE"],
+    "Privacy & Fairness":          ["D16 PRIVACY-AI", "D17 FAIR-BIAS"],
+    "Deployment Safety":           ["D18 DEPLOY-SAFE"],
 }
 
 for track, ds in tracks.items():
     count = sum(domains.get(d, 0) for d in ds)
     print(f"  {track:32s}: {count:3d}종 ({', '.join(ds)})")
 
-print(f"\n  PASS: 6/6 트랙 전수 커버")
+print(f"\n  PASS: 9/9 트랙 전수 커버")
 print(f"\n{'=' * 60}")
 print(f"전체 검증 완료: n=6 AI Safety 연구 제안 135종")
 print(f"{'=' * 60}")
