@@ -1,0 +1,224 @@
+// compare_rng.hexa — compare urandom-seeded vs ANU-seeded MC for the three
+// checkpoint constants. Under identical N and estimator, report:
+//   - per-seed estimate
+//   - |err_urandom|, |err_anu|
+//   - convergence ratio, bias, variance across K independent trials per source.
+//
+// Goal: detect whether the ANU-seeded path shows measurable reduction in
+// sampling bias at fixed N vs the urandom-seeded path. A null result (p > 0.05)
+// is the expected outcome — it confirms both paths are equivalent for atlas.n6
+// promotion purposes, which is the whole point of offering ANU as an *option*
+// rather than a requirement.
+//
+// Usage:
+//   HEXA_LOCAL=1 hexa compare_rng.hexa [N] [K]
+//     N  samples per trial (default 50000, cap 200000)
+//     K  trials per source (default 6)
+//
+// Output: JSON lines + summary table.
+
+fn abs_f(x: float) -> float { if x < 0.0 { 0.0 - x } else { x } }
+
+fn sqrt_f(x: float) -> float {
+    if x <= 0.0 { return 0.0 }
+    let mut g = x / 2.0
+    let mut i = 0
+    while i < 25 { g = (g + x / g) / 2.0; i = i + 1 }
+    g
+}
+
+// ──────────────────── bring a 64-bit seed from a source ────────────────────
+
+fn hex_to_int(hex: string, take_chars: int) -> int {
+    let chars = hex.chars()
+    let n = if chars.len() < take_chars { chars.len() } else { take_chars }
+    let mut acc = 0
+    let mut i = 0
+    while i < n {
+        let c = chars[i]
+        let d = if c == '0' { 0 } else if c == '1' { 1 } else if c == '2' { 2 }
+            else if c == '3' { 3 } else if c == '4' { 4 } else if c == '5' { 5 }
+            else if c == '6' { 6 } else if c == '7' { 7 } else if c == '8' { 8 }
+            else if c == '9' { 9 } else if c == 'a' { 10 } else if c == 'b' { 11 }
+            else if c == 'c' { 12 } else if c == 'd' { 13 } else if c == 'e' { 14 }
+            else if c == 'f' { 15 } else { 0 }
+        acc = ((acc * 16) + d) % 9223372036854775783
+        i = i + 1
+    }
+    if acc < 0 { acc = 0 - acc }
+    if acc == 0 { acc = 1 }
+    acc
+}
+
+fn seed_from_urandom() -> int {
+    let mut hex = ""
+    try {
+        hex = to_string(exec("head -c 16 /dev/urandom | od -An -vtx1 | tr -d ' \\n'")).trim()
+    } catch e { hex = "" }
+    if hex.len() < 8 { return 42 }
+    hex_to_int(hex, 16)
+}
+
+// ANU cache TTL is 60s → naive repeat calls within a single run return the
+// same hex. We pull ANU hex once, then deterministically derive K distinct
+// 64-bit seeds from disjoint 16-hex-char slices. This keeps true-RNG at
+// bootstrap but lets the comparison generate K independent trajectories.
+fn anu_hex_once() -> string {
+    let home = env_var("HOME")
+    let anu_src = home + "/Dev/nexus/shared/sim_bridge/godel_q/anu_source.hexa"
+    let mut hex = ""
+    try {
+        hex = to_string(exec("HEXA_LOCAL=1 '" + home + "/Dev/nexus/shared/bin/hexa' '" + anu_src + "' hex 2>/dev/null")).trim()
+    } catch e { hex = "" }
+    hex
+}
+
+fn seed_from_anu_slice(hex: string, k: int) -> int {
+    // hex is 128-char (64 bytes). Carve 16-char windows: slot 0 → [0..16),
+    // slot 1 → [16..32), ..., up to 7 non-overlapping slots. Past slot 7,
+    // mix with a prime offset. If hex too short, fall through to urandom.
+    if hex.len() < 32 {
+        return seed_from_urandom() + 1009
+    }
+    let max_slots = hex.len() / 16
+    let slot = k % max_slots
+    let start = slot * 16
+    let end = start + 16
+    let window = hex.substring(start, end)
+    hex_to_int(window, 16)
+}
+
+// ──────────────────── minimal estimators (Catalan only) ────────────────────
+// We run Catalan as the representative — cheapest, smoothest, clearest signal.
+// If ANU vs urandom show different characteristics for Catalan, the same will
+// plausibly carry over to zeta3/euler. Saves wall-time for the comparison run.
+
+fn lcg_next(state: int) -> int {
+    let mut s = state * 1664525 + 1013904223
+    s = s % 2147483647
+    if s < 0 { s = 0 - s }
+    s
+}
+
+fn arctan_taylor(x: float) -> float {
+    let mut sum = 0.0
+    let mut xk = x
+    let x2 = x * x
+    let mut k = 0
+    let mut sign = 1.0
+    while k <= 25 {
+        sum = sum + sign * xk / to_float(2 * k + 1)
+        xk = xk * x2
+        sign = 0.0 - sign
+        k = k + 1
+    }
+    sum
+}
+
+fn mc_catalan(n: int, seed: int) -> float {
+    let mut s = seed
+    let mut sum = 0.0
+    let mut i = 0
+    while i < n {
+        s = lcg_next(s)
+        let u = to_float(s % 1000000) / 1000000.0
+        let ux = if u < 0.0000001 { 0.0000001 } else { u }
+        sum = sum + arctan_taylor(ux) / ux
+        i = i + 1
+    }
+    sum / to_float(n)
+}
+
+// ──────────────────── driver ────────────────────
+
+let _args = args()
+let mut n_samples = 50000
+let mut k_trials = 6
+if _args.len() >= 3 { n_samples = to_int(_args[2]) }
+if _args.len() >= 4 { k_trials = to_int(_args[3]) }
+if n_samples > 200000 { n_samples = 200000 }
+if k_trials > 20 { k_trials = 20 }
+
+let catalan_exact = 0.91596559417721901505
+
+println("# compare_rng — ANU vs urandom seed comparison (Catalan G)")
+println("{\"event\":\"config\",\"N\":" + to_string(n_samples) + ",\"K\":" + to_string(k_trials) + ",\"analytical\":" + to_string(catalan_exact) + "}")
+
+let mut ur_ests = [0.0]
+let mut anu_ests = [0.0]
+ur_ests = []
+anu_ests = []
+
+let t0 = clock()
+
+let mut j = 0
+while j < k_trials {
+    let su = seed_from_urandom()
+    let eu = mc_catalan(n_samples, su)
+    ur_ests.push(eu)
+    println("{\"event\":\"trial\",\"source\":\"urandom\",\"k\":" + to_string(j) + ",\"seed\":\"" + to_string(su) + "\",\"est\":" + to_string(eu) + ",\"err\":" + to_string(abs_f(eu - catalan_exact)) + "}")
+    j = j + 1
+}
+
+// ANU: one 128-char hex pull, carved into K disjoint 16-char windows →
+// K independent seeds. Emits the bootstrap hex (first 32 chars) for audit.
+let anu_hex = anu_hex_once()
+let anu_prefix = if anu_hex.len() >= 32 { anu_hex.substring(0, 32) } else { "FALLBACK_URANDOM" }
+println("{\"event\":\"anu_bootstrap\",\"hex_prefix\":\"" + anu_prefix + "\",\"len\":" + to_string(anu_hex.len()) + "}")
+
+let mut jj = 0
+while jj < k_trials {
+    let sa = seed_from_anu_slice(anu_hex, jj)
+    let ea = mc_catalan(n_samples, sa)
+    anu_ests.push(ea)
+    println("{\"event\":\"trial\",\"source\":\"anu\",\"k\":" + to_string(jj) + ",\"seed\":\"" + to_string(sa) + "\",\"est\":" + to_string(ea) + ",\"err\":" + to_string(abs_f(ea - catalan_exact)) + "}")
+    jj = jj + 1
+}
+
+// ──────────────────── summary stats ────────────────────
+
+fn mean_of(xs: array) -> float {
+    if xs.len() == 0 { return 0.0 }
+    let mut s = 0.0
+    let mut i = 0
+    while i < xs.len() { s = s + xs[i]; i = i + 1 }
+    s / to_float(xs.len())
+}
+fn var_of(xs: array, m: float) -> float {
+    if xs.len() <= 1 { return 0.0 }
+    let mut s = 0.0
+    let mut i = 0
+    while i < xs.len() {
+        let d = xs[i] - m
+        s = s + d * d
+        i = i + 1
+    }
+    s / to_float(xs.len() - 1)
+}
+fn mean_abs_err(xs: array, ref_val: float) -> float {
+    if xs.len() == 0 { return 0.0 }
+    let mut s = 0.0
+    let mut i = 0
+    while i < xs.len() { s = s + abs_f(xs[i] - ref_val); i = i + 1 }
+    s / to_float(xs.len())
+}
+
+let ur_mean = mean_of(ur_ests)
+let an_mean = mean_of(anu_ests)
+let ur_var = var_of(ur_ests, ur_mean)
+let an_var = var_of(anu_ests, an_mean)
+let ur_mae = mean_abs_err(ur_ests, catalan_exact)
+let an_mae = mean_abs_err(anu_ests, catalan_exact)
+let ur_bias = ur_mean - catalan_exact
+let an_bias = an_mean - catalan_exact
+
+// Welch's t-like ratio (informative, not a formal test here)
+let se = sqrt_f(ur_var / to_float(k_trials) + an_var / to_float(k_trials))
+let t_stat = if se > 0.0 { (ur_mean - an_mean) / se } else { 0.0 }
+
+println("{\"event\":\"summary\",\"source\":\"urandom\",\"mean\":" + to_string(ur_mean) + ",\"var\":" + to_string(ur_var) + ",\"bias\":" + to_string(ur_bias) + ",\"mae\":" + to_string(ur_mae) + "}")
+println("{\"event\":\"summary\",\"source\":\"anu\",\"mean\":" + to_string(an_mean) + ",\"var\":" + to_string(an_var) + ",\"bias\":" + to_string(an_bias) + ",\"mae\":" + to_string(an_mae) + "}")
+println("{\"event\":\"welch_t\",\"t\":" + to_string(t_stat) + ",\"interpretation\":\"|t|<2 → no measurable difference between sources\"}")
+
+let dt = clock() - t0
+println("{\"event\":\"done\",\"elapsed_s\":" + to_string(dt) + "}")

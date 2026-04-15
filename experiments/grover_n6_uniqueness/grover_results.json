@@ -1,0 +1,79 @@
+{
+  "results": [
+    {
+      "N_max": 16,
+      "search_space": 16,
+      "qubits": 4,
+      "marked_set": [
+        6
+      ],
+      "num_marked": 1,
+      "iterations": 3,
+      "shots": 4096,
+      "gate_counts": {
+        "u3": 94,
+        "cx": 84,
+        "measure": 4
+      },
+      "gate_total": 178,
+      "top_n": 6,
+      "top_prob": 0.961181640625,
+      "prob_n_eq_6": 0.961181640625,
+      "theoretical_success_prob": 0.9613189697265625,
+      "build_sec": 0.051042207996943034,
+      "sim_sec": 0.006200584000907838,
+      "unique_six_confirmed": true
+    },
+    {
+      "N_max": 64,
+      "search_space": 64,
+      "qubits": 6,
+      "marked_set": [
+        6
+      ],
+      "num_marked": 1,
+      "iterations": 6,
+      "shots": 4096,
+      "gate_counts": {
+        "u3": 1122,
+        "cx": 1008,
+        "h": 24,
+        "measure": 6
+      },
+      "gate_total": 2154,
+      "top_n": 6,
+      "top_prob": 0.99462890625,
+      "prob_n_eq_6": 0.99462890625,
+      "theoretical_success_prob": 0.9965856807867991,
+      "build_sec": 0.06305595800222363,
+      "sim_sec": 0.030132500003674068,
+      "unique_six_confirmed": true
+    },
+    {
+      "N_max": 256,
+      "search_space": 256,
+      "qubits": 8,
+      "marked_set": [
+        6
+      ],
+      "num_marked": 1,
+      "iterations": 13,
+      "shots": 4096,
+      "gate_counts": {
+        "u3": 5414,
+        "cx": 4680,
+        "x": 156,
+        "h": 132,
+        "measure": 8
+      },
+      "gate_total": 10382,
+      "top_n": 6,
+      "top_prob": 0.984619140625,
+      "prob_n_eq_6": 0.984619140625,
+      "theoretical_success_prob": 0.9861862401036727,
+      "build_sec": 0.08468116600124631,
+      "sim_sec": 0.14728866700897925,
+      "unique_six_confirmed": true
+    }
+  ]
+}

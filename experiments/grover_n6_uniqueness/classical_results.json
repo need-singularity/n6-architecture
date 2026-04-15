@@ -1,0 +1,54 @@
+{
+  "results": [
+    {
+      "N_max": 16,
+      "matches": [
+        6
+      ],
+      "ops_estimate": 119,
+      "wall_sec": 3.070800448767841e-05,
+      "grover_oracle_calls_estimate": 3,
+      "speedup_ratio_theoretical": 5.092958178940651
+    },
+    {
+      "N_max": 64,
+      "matches": [
+        6
+      ],
+      "ops_estimate": 2015,
+      "wall_sec": 0.0004387079970911145,
+      "grover_oracle_calls_estimate": 6,
+      "speedup_ratio_theoretical": 10.185916357881302
+    },
+    {
+      "N_max": 256,
+      "matches": [
+        6
+      ],
+      "ops_estimate": 32639,
+      "wall_sec": 0.008977874997071922,
+      "grover_oracle_calls_estimate": 13,
+      "speedup_ratio_theoretical": 20.371832715762604
+    },
+    {
+      "N_max": 1024,
+      "matches": [
+        6
+      ],
+      "ops_estimate": 523775,
+      "wall_sec": 0.17315341599169187,
+      "grover_oracle_calls_estimate": 25,
+      "speedup_ratio_theoretical": 40.74366543152521
+    },
+    {
+      "N_max": 4096,
+      "matches": [
+        6
+      ],
+      "ops_estimate": 8386559,
+      "wall_sec": 3.1552411669981666,
+      "grover_oracle_calls_estimate": 50,
+      "speedup_ratio_theoretical": 81.48733086305042
+    }
+  ]
+}
