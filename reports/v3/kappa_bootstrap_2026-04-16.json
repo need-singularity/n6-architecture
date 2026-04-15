@@ -1,0 +1,34 @@
+{
+  "source": "data/cremona/kappa_10bin_results.json",
+  "bootstrap": {
+    "n_trials": 10000,
+    "n_bins_resampled": 7,
+    "seed": 42,
+    "alpha_mean": 0.17008558104374366,
+    "alpha_std": 0.022008393670841862,
+    "alpha_ci95": [
+      0.1231763065559904,
+      0.20168883009228838
+    ],
+    "alpha_ci68": [
+      0.1468771967397869,
+      0.1907154061817836
+    ],
+    "alpha_median": 0.1736742356689572,
+    "intercept_mean": -1.3976046099380757
+  },
+  "match_log2_quarter": {
+    "target_value": 0.17328679513998632,
+    "target_name": "log(2)/4",
+    "alpha_mean_observed": 0.17008558104374366,
+    "alpha_std": 0.022008393670841862,
+    "z_score": -0.14545423642089042,
+    "rel_err_pct": -1.8473502805892525,
+    "target_in_68ci": true,
+    "target_in_95ci": true,
+    "verdict": "CONSISTENT (in 68% CI)"
+  },
+  "honest_note": "5 valid bins (κ>0), 10000 trials — empirical uncertainty only. log(2)/4 match 는 여전히 suggestive 이며 증명 아님. 표본 bin 수 5 로 인한 큰 CI 는 정직하게 보고.",
+  "date": "2026-04-16",
+  "task": "v3 loop 19 empirical robustness"
+}
