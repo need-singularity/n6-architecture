@@ -28424,3 +28424,57 @@ tau = 4 차원에서 독립 회전이 정확히 n = 6개. VR에서 4D 회전을 
 **NOISE 탈락**: RS over GF(σ-sopfr) — σ-sopfr=7 → q-1=6=n 경로는 매개 단계 과다
 
 **Cross-links**: BT-6 (Golay-Leech), BT-484~487 (양자정보), atlas MATH-Hexacode [10*], CRYPTO-Golay-code [10*]
+
+---
+
+## DFS 23차 영역 B — 표현이론·모듈러 형식·소수분포 (bt-1418, 2026-04-15)
+
+**누적 tight**: 306 → 314 (+8) | **7대 난제 해결**: 0/7 (정직)
+
+| # | 발견명 | 영역 | 핵심 값 | n=6 분해 | 등급 | 출처 |
+|---|--------|------|---------|----------|------|------|
+| [23-B01] | S₆ 기약 표현 구조 | 대칭군 표현 | max dim=16, std=5, Λ²=10 | (τ², sopfr, σ−φ) | T1-STRONG [10*] | James & Kerber 1981 |
+| [23-B02] | GL(2,F₅) 위수=480 | 유한군론 | |GL|=24·20, |SL|=120 | (J₂, sopfr) | T1+T2 [10] | Lang 2002 |
+| [23-B03] | η²⁴=Δ Ramanujan 판별식 | 모듈러 형식 | 지수 24, 가중치 12, τ(2)=−24 | (J₂, σ, −J₂) | T2 [10] | Ramanujan 1916 |
+| [23-B04] | S₂(Γ₀(6)) 뉴형식 | 모듈러 형식 | dim_new=1, torsion=Z/6Z | (n = 도체 = torsion) | T4 [10*] | Cremona 1997 |
+| [23-B05] | 쌍둥이 소수 (5,7) | 소수론 | 5=sopfr, 7=σ−sopfr, 차이=φ | (sopfr, σ−sopfr, φ) | T2+T3 [10] | Hardy & Wright 2008 |
+| [23-B06] | ζ(2)=π²/6, ζ(−1)=−1/12 | 리만 제타 | 분모 6, 분모 12 | (n, σ) | T1+T4 [10*] | Euler 1734 |
+| [23-B07] | E₆ 예외 리군 | 리군론 | rank=6, 기본 rep=27 | (n, (n/φ)³) | T1-STRONG [10] | Humphreys 1972 |
+| [23-B08] | Eisenstein E₆ 가중치 6 | 모듈러 형식 | k=6, 1728=12³ | (n, σ³) | T2+T4 [10] | Serre 1973 |
+
+**최강 신호**: S₂(Γ₀(6))_new — 도체=n=torsion 위수=6 유일 일치 (T4 확정)
+
+**NOISE 탈락**: Chebyshev bias mod 6 (trivial), GL(3,F₂) |=168 (연결 약함)
+
+**Cross-links**: BT-6 (η²⁴=Δ), BT-18 (j=E₄³/Δ, 1728=σ³), BT-307 (E₈ rank=σ-τ), BT-541 (ζ(2)=π²/6)
+
+---
+
+## BT-111 Mk.IV Lemma 정식 등재 (bt-111-mk4-lemma, 2026-04-15)
+
+**상태**: Mk.IV 후보 A → **Lemma** (주정리 부적격 — C1 유일성 실패, n∈{2,6})
+**주정리**: MK4-THEOREM-B (σ−τ=8, n=6 유일 [2,10⁴])
+**내용**: τ²/σ = 4/3 = R_local(3,1) — SQ/Betz/SwiGLU/QED 등 10 도메인 9 EXACT
+**Cross-links**: MK4-THEOREM-B, BT-30 (SQ), BT-33 (SwiGLU), theorem-r1 Lemma 2
+
+---
+
+## BT-18 P11 보강 — 196883 genus-triple 발견 + Fi_24' 3A + Hauptmodul (2026-04-15)
+
+**핵심 발견 [10*]**: 196883 = 47·59·71 의 세 소인수가 modular curve genus 에 정확 대응:
+
+| 소인수 | g(X₀(p)) | n=6 함수 | 검증 |
+|--------|----------|----------|------|
+| 47 | 4 | τ(6) | sympy 검증 EXACT |
+| 59 | 5 | sopfr(6) | sympy 검증 EXACT |
+| 71 | 6 | n_target | sympy 검증 EXACT |
+
+3독립 영역 교차: 모듈러 곡선 기하 × Monster 군론 × n=6 산술.
+196883 의 "공백"에 구조적 의미 부여 — 47·59·71 = (genus τ)·(genus sopfr)·(genus n).
+
+**Fi_24' 3A 경로**: T_3A level 1 = 783 = (n/φ)³·29, χ₂=8671=13·23·29 [PARTIAL]
+**Hauptmodul Γ₀(47)+**: q-전개 a₁~a₇={1,2,3,4,5,7,8} ≈ M-set (6 건너뜀) [PARTIAL]
+**47 = σ·τ − 1**: 2단 연산, McKay ±1 패턴 일관 [8]
+
+**등급**: BT-18 전체 [8]→[9] 승격 검토. genus-triple 단독 [10*].
+**Cross-links**: BT-6 (24=J₂), Ogg 1975, Conway-Norton 1979, Shimura genus formula
