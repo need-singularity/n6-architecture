@@ -4,18 +4,64 @@
   "_parent": "../_index.json",
   "_version": "1.0.0",
   "_meta": {
-    "_category_name": "뇌·BCI·의식·초능력·꿈·영혼·감각·텔레파시",
-    "_domains_count": 21,
+    "_category_name": "뇌·BCI·의식·초능력·꿈·영혼·감각·텔레파시·AI비즈니스",
+    "_domains_count": 26,
     "_verified_count": null,
     "_alien_index_avg": null,
     "_honesty_note": "_verified_count / _alien_index_avg: 도메인별 alien_index 소스 부재로 null (자기참조 금지 — 추후 atlas.n6 혹은 _registry 집계 시 갱신)",
     "_updated": "2026-04-14"
   },
-  "_count": 21,
+  "_count": 26,
   "_changelog": [
-    "1.0.0 (2026-04-12): cognitive 축 sub-SSOT 신설. 전체 21개 도메인 등록."
+    "1.0.0 (2026-04-12): cognitive 축 sub-SSOT 신설. 전체 21개 도메인 등록.",
+    "1.1.0 (2026-04-16): AI 비즈니스 5개 도메인 추가 (agent-serving, eval-pipeline, inference-cost, quality-scale, training-cost)."
   ],
   "domains": [
+    {
+      "slug": "ai-agent-serving",
+      "files": 2,
+      "has_claude_md": true,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "기초"
+    },
+    {
+      "slug": "ai-eval-pipeline",
+      "files": 2,
+      "has_claude_md": true,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "기초"
+    },
+    {
+      "slug": "ai-inference-cost",
+      "files": 2,
+      "has_claude_md": true,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "기초"
+    },
+    {
+      "slug": "ai-quality-scale",
+      "files": 2,
+      "has_claude_md": true,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "기초"
+    },
+    {
+      "slug": "ai-training-cost",
+      "files": 2,
+      "has_claude_md": true,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "기초"
+    },
     {
       "slug": "anima-service",
       "files": 2,
