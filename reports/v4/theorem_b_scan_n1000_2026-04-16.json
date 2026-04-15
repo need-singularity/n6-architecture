@@ -1,0 +1,157 @@
+{
+  "upper": 1000,
+  "theorem_B_hits": [
+    6
+  ],
+  "near_misses_abs_le_2": [
+    [
+      2,
+      3,
+      1,
+      2
+    ],
+    [
+      3,
+      4,
+      2,
+      2
+    ],
+    [
+      4,
+      7,
+      2,
+      3
+    ]
+  ],
+  "n6_exact": {
+    "n": 6,
+    "sigma": 12,
+    "phi": 2,
+    "tau": 4,
+    "sigma_phi": 24,
+    "n_tau": 24,
+    "deviation": 0
+  },
+  "stats": {
+    "total_checked": 999,
+    "hits_count": 1,
+    "near_misses_count": 3,
+    "uniqueness_claim": true
+  },
+  "first_20_deviations": [
+    {
+      "n": 2,
+      "sigma*phi": 3,
+      "n*tau": 4,
+      "dev": -1
+    },
+    {
+      "n": 3,
+      "sigma*phi": 8,
+      "n*tau": 6,
+      "dev": 2
+    },
+    {
+      "n": 4,
+      "sigma*phi": 14,
+      "n*tau": 12,
+      "dev": 2
+    },
+    {
+      "n": 5,
+      "sigma*phi": 24,
+      "n*tau": 10,
+      "dev": 14
+    },
+    {
+      "n": 6,
+      "sigma*phi": 24,
+      "n*tau": 24,
+      "dev": 0
+    },
+    {
+      "n": 7,
+      "sigma*phi": 48,
+      "n*tau": 14,
+      "dev": 34
+    },
+    {
+      "n": 8,
+      "sigma*phi": 60,
+      "n*tau": 32,
+      "dev": 28
+    },
+    {
+      "n": 9,
+      "sigma*phi": 78,
+      "n*tau": 27,
+      "dev": 51
+    },
+    {
+      "n": 10,
+      "sigma*phi": 72,
+      "n*tau": 40,
+      "dev": 32
+    },
+    {
+      "n": 11,
+      "sigma*phi": 120,
+      "n*tau": 22,
+      "dev": 98
+    },
+    {
+      "n": 12,
+      "sigma*phi": 112,
+      "n*tau": 72,
+      "dev": 40
+    },
+    {
+      "n": 13,
+      "sigma*phi": 168,
+      "n*tau": 26,
+      "dev": 142
+    },
+    {
+      "n": 14,
+      "sigma*phi": 144,
+      "n*tau": 56,
+      "dev": 88
+    },
+    {
+      "n": 15,
+      "sigma*phi": 192,
+      "n*tau": 60,
+      "dev": 132
+    },
+    {
+      "n": 16,
+      "sigma*phi": 248,
+      "n*tau": 80,
+      "dev": 168
+    },
+    {
+      "n": 17,
+      "sigma*phi": 288,
+      "n*tau": 34,
+      "dev": 254
+    },
+    {
+      "n": 18,
+      "sigma*phi": 234,
+      "n*tau": 108,
+      "dev": 126
+    },
+    {
+      "n": 19,
+      "sigma*phi": 360,
+      "n*tau": 38,
+      "dev": 322
+    },
+    {
+      "n": 20,
+      "sigma*phi": 336,
+      "n*tau": 120,
+      "dev": 216
+    }
+  ]
+}
