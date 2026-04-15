@@ -27,3 +27,7 @@ tecsrs
 # macOS
 .DS_Store
 build/
+
+# Lean4 build artifacts (v3 M3)
+lean4-n6/.lake/
+lean4-n6/lake-manifest.json
