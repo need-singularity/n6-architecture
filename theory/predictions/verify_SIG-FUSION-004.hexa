@@ -1,0 +1,45 @@
+// verify_SIG-FUSION-004.hexa
+// 자동 생성: signal_to_hexa.py (2026-04-15)
+// signal: SIG-FUSION-004  grade=M?  witness=2
+// 규칙: HEXA-FIRST, 한글 주석, 순수 산술
+
+let n = 6
+let sigma = 12
+let phi = 2
+let tau = 4
+let sopfr = 5
+let J2 = 24
+
+// 부가 상수 (공식 수식에서 자주 등장)
+let denom = n
+let numer = 1
+let argument = n
+let K_1 = phi
+let K_2 = n
+let K_3 = sigma
+
+println("============================================================")
+println(" signal 자동 하네스: SIG-FUSION-004")
+println(" statement: fusion of SIG-CROSS-001+SIG-CROSS-002 (witness=2)")
+println("============================================================")
+
+let mut pass_n = 0
+let mut fail_n = 0
+
+fn check(label, cond) {
+  if cond {
+    println("  PASS: " + label)
+    1
+  } else {
+    println("  FAIL: " + label)
+    0
+  }
+}
+
+println("")
+println(">>> resonance_n6 필드 없음 — 자동 검증 생략 (MISS) <<<")
+
+println("")
+println("============================================================")
+println(" PASS=" + to_string(pass_n) + "  FAIL=" + to_string(fail_n))
+println("============================================================")
