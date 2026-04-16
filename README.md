@@ -306,7 +306,7 @@ horology               ############################## 100.0%
 | 10 | ✅ | v1 | **엔터프라이즈 커스텀 30종** | LoRA/QLoRA 자동화, 어댑터 핫스왑, $100/고객/월 | [문서](domains/cognitive/ai-enterprise-custom/ai-enterprise-custom.md) |
 | 10 | ✅ | v1 | **평가 파이프라인 30종** | 동적 문항, CAT 적응형, LLM-judge 교정, 오염 탐지 | [문서](domains/cognitive/ai-eval-pipeline/ai-eval-pipeline.md) |
 | 10 | ✅ | v1 | **AI 의식 30종** | IIT/GWT/HOT/RPT/AST 5이론 교차 검증, CCC 지표 | [문서](domains/cognitive/ai-consciousness/ai-consciousness.md) |
-| 10 | ✅ | v1 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 강건성 36 + 배포 26 + 멀티모달 20 + 복지 18 | [해석가능성](domains/cognitive/ai-interpretability/ai-interpretability.md) · [정렬](domains/cognitive/ai-alignment/ai-alignment.md) · [강건성](domains/cognitive/ai-adversarial/ai-adversarial.md) · [배포](domains/cognitive/ai-deployment/ai-deployment.md) · [멀티모달](domains/cognitive/ai-multimodal/ai-multimodal.md) · [복지](domains/cognitive/ai-welfare/ai-welfare.md) |
+| 10 | ✅ | v1 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 강건성 36 + 배포 26 + 멀티모달 20 + 복지 18 | [문서](reports/discovery/anthropic-fellows-research.md) |
 
 <details>
 <summary>225 Techniques 전체 목록 (8축: arch 72 / attention 27 / optim 75 / compress 18 / moe 13 / sparse 10 / graph 7 / sota 3)</summary>
