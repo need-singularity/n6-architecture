@@ -11,7 +11,7 @@
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **추론 비용 33종** | KV 캐시 압축, 투기적 디코딩, INT4 양자화, 연속 배칭, $15→$1.5/1M tok (10x). 15섹션+10검증코드 | [문서](../../domains/cognitive/ai-inference-cost/ai-inference-cost.md) |
-| 10 | ✅ | v1 | **훈련 비용 32종** | Chinchilla 최적화, MoE, 커리큘럼 학습, 합성 데이터, $12B→$1.2B (1/10). 15섹션+10검증코드 | [문서](../../domains/cognitive/ai-training-cost/ai-training-cost.md) |
+| 10 | ✅ | v1 | **학습 비용 32종** | Chinchilla 최적화, MoE, 커리큘럼 학습, 합성 데이터, $12B→$1.2B (1/10). 15섹션+10검증코드 | [문서](../../domains/cognitive/ai-training-cost/ai-training-cost.md) |
 | 10 | ✅ | v1 | **품질 경량화 32종** | 지식 증류, 구조적 가지치기, MoE 라우팅, LoRA, 400B→70B 88% 품질 유지. 15섹션+10검증코드 | [문서](../../domains/cognitive/ai-quality-scale/ai-quality-scale.md) |
 | 10 | ✅ | v1 | **에이전트 서빙 32종** | 컨텍스트 압축, 도구 캐싱, 세션 마이그레이션, 다중 에이전트 라우팅. 15섹션+10검증코드 | [문서](../../domains/cognitive/ai-agent-serving/ai-agent-serving.md) |
 | 10 | ✅ | v1 | **엔터프라이즈 커스텀 30종** | LoRA/QLoRA 자동화, 어댑터 핫스왑, 멀티테넌트 격리, 셀프서비스 포탈, $100/고객/월. 15섹션+10검증코드 | [문서](../../domains/cognitive/ai-enterprise-custom/ai-enterprise-custom.md) |
@@ -36,7 +36,7 @@
   [1]    INT4 GQA 양자화 파이프라인   추론 비용           1주       최고
   [2]    자동 LoRA 파이프라인 E2E    엔터프라이즈 커스텀   2주       최고
   [3]    적응형 컨텍스트 압축         에이전트 서빙        2주       최고
-  [4]    커리큘럼 학습 파이프라인     훈련 비용            3주       높음
+  [4]    커리큘럼 학습 파이프라인     학습 비용            3주       높음
   [5]    증류+MoE 70B 파이프라인     품질 경량화          4주       최고
   [6]    LLM-judge + 인간 교정       평가 파이프라인       2주       높음
   [7]    다이론 CCC 교차 검증        AI 의식              4주       최고
