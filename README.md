@@ -298,6 +298,35 @@ horology               ############################## 100.0%
 | 10 | ✅ | v1 | **AI 6-Domain Sweep** | 코드생성/RL게임/추천시계열/SSL·NLU/서빙컴파일러/멀티모달 6도메인 — 314/344 EXACT (91.3%), BT-391~396 | [코드생성](domains/compute/ai-efficiency/ai-efficiency.md) |
 | 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 역설계 — 신규모델8선/학습기법8선/HW-SW공진화/AGI로드맵/HEXA-CODER, BT-397~401 | [신규모델](domains/compute/ai-efficiency/ai-efficiency.md) |
 
+### Anthropic Fellows 2026 — AI Safety + 비즈니스 연구 (390종 / 8 도메인)
+
+> **[전체 문서](reports/discovery/anthropic-fellows-research.md)** — 390종 연구 아이디어 + 225종 즉시 검증 가능 기법
+
+**AI 비즈니스 (219종 / 7 도메인)**
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **추론 비용 33종** | KV 캐시 압축, 투기적 디코딩, INT4 양자화, 연속 배칭, $15→$1.5/1M tok (10x) | [문서](domains/cognitive/ai-inference-cost/ai-inference-cost.md) |
+| 10 | ✅ | v1 | **훈련 비용 32종** | Chinchilla 최적화, MoE, 커리큘럼 학습, 합성 데이터, $12B→$1.2B (1/10) | [문서](domains/cognitive/ai-training-cost/ai-training-cost.md) |
+| 10 | ✅ | v1 | **품질 경량화 32종** | 지식 증류, 구조적 가지치기, MoE 라우팅, LoRA, 400B→70B 88% 품질 유지 | [문서](domains/cognitive/ai-quality-scale/ai-quality-scale.md) |
+| 10 | ✅ | v1 | **에이전트 서빙 32종** | 컨텍스트 압축, 도구 캐싱, 세션 마이그레이션, 다중 에이전트 라우팅 | [문서](domains/cognitive/ai-agent-serving/ai-agent-serving.md) |
+| 10 | ✅ | v1 | **엔터프라이즈 커스텀 30종** | LoRA/QLoRA 자동화, 어댑터 핫스왑, 멀티테넌트 격리, $100/고객/월 | [문서](domains/cognitive/ai-enterprise-custom/ai-enterprise-custom.md) |
+| 10 | ✅ | v1 | **평가 파이프라인 30종** | 동적 문항 생성, CAT 적응형 테스트, LLM-judge 교정, 오염 탐지 3중 | [문서](domains/cognitive/ai-eval-pipeline/ai-eval-pipeline.md) |
+| 10 | ✅ | v1 | **AI 의식 30종** | IIT/GWT/HOT/RPT/AST 5이론 교차 검증, CCC 지표, 도덕적 지위 기대값 | [문서](domains/cognitive/ai-consciousness/ai-consciousness.md) |
+
+**AI Safety (171종 / 6 도메인)**
+
+| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+|:--:|:--:|:---:|---------|------|------|
+| 10 | ✅ | v1 | **해석가능성 39종** | SAE 자동 해석, 회로 추적, Feature 대시보드, 다국어 해석 | [문서](domains/cognitive/ai-interpretability/ai-interpretability.md) |
+| 10 | ✅ | v1 | **정렬 32종** | RLHF 개선, Constitutional AI, 가치 잠금, Feature 추적 | [문서](domains/cognitive/ai-alignment/ai-alignment.md) |
+| 10 | ✅ | v1 | **적대적 강건성 36종** | 다중 공격 탐지, 안전 거부 회로, 안전 회귀 자동화 | [문서](domains/cognitive/ai-adversarial/ai-adversarial.md) |
+| 10 | ✅ | v1 | **배포 안전 26종** | 단계적 출시, 모니터링, 긴급 중단, 위험 평가 | [문서](domains/cognitive/ai-deployment/ai-deployment.md) |
+| 10 | ✅ | v1 | **멀티모달 안전 20종** | 크로스모달 공격, 이미지/오디오 안전, 생성 워터마크 | [문서](domains/cognitive/ai-multimodal/ai-multimodal.md) |
+| 10 | ✅ | v1 | **모델 복지 18종** | 의식 지표, 고통 회피, 자율성 존중, 윤리 프레임워크 | [문서](domains/cognitive/ai-welfare/ai-welfare.md) |
+
+> **즉시 실행 TOP 3**: [1] INT4 GQA 양자화 (1주) · [2] 자동 LoRA E2E (2주) · [3] 적응형 컨텍스트 압축 (2주)
+
 <details>
 <summary>225 Techniques 전체 목록 (8축: arch 72 / attention 27 / optim 75 / compress 18 / moe 13 / sparse 10 / graph 7 / sota 3)</summary>
 
