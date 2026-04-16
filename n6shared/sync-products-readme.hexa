@@ -259,8 +259,8 @@ fn render_battery_scale_block(sec) {
     }
     let mut out = "### 🔋 궁극의 배터리 8단 — 크기별 × 사용별\n\n"
     out = out + "> 18650 셀 → 모듈 → 팩 → ESS → 그리드 — n=6 동일 산술이 **전 스케일을 관통**한다.\n\n"
-    out = out + "| 단 | 🛸 | 천장 | 스케일 | 용량 | 대표 용도 | n=6 핵심 |\n"
-    out = out + "|:--:|:--:|:--:|--------|------|----------|----------|"
+    out = out + "| 단 | 🛸 | 천장 | 스케일 | 용량 | 대표 용도 | n=6 핵심 | 문서 |\n"
+    out = out + "|:--:|:--:|:--:|--------|------|----------|----------|------|"
     let mut i = 0
     while i < n {
         let s = scales[i]
@@ -274,7 +274,12 @@ fn render_battery_scale_block(sec) {
         let capacity = to_string(get_or(s, "capacity", ""))
         let usage    = to_string(get_or(s, "usage", ""))
         let n6_key   = to_string(get_or(s, "n6_key", ""))
-        out = out + "\n| " + stage + " | " + ufo + " | " + ceil + " | " + scale + " | **" + capacity + "** | " + usage + " | " + n6_key + " |"
+        let link     = to_string(get_or(s, "link", ""))
+        let mut link_str = ""
+        if len(link) > 0 {
+            link_str = "[문서](" + link + ")"
+        }
+        out = out + "\n| " + stage + " | " + ufo + " | " + ceil + " | " + scale + " | **" + capacity + "** | " + usage + " | " + n6_key + " | " + link_str + " |"
         i = i + 1
     }
     // 공통 돌파 footer

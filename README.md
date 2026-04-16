@@ -291,16 +291,16 @@
 
 > 18650 셀 → 모듈 → 팩 → ESS → 그리드 — n=6 동일 산술이 **전 스케일을 관통**한다.
 
-| 단 | 🛸 | 천장 | 스케일 | 용량 | 대표 용도 | n=6 핵심 |
-|:--:|:--:|:--:|--------|------|----------|----------|
-| 8 | 10 | ✅ | 대륙/그리드 | **GWh** | 재생에너지 저장, 전력망 안정화 | σ=12 노드 그리드, Cross-DSE 통합 |
-| 7 | 10 | ✅ | 유틸리티 ESS | **10~100 MWh** | 피크셰이빙, 마이크로그리드 | J₂=24 유닛 병렬, SMES 버퍼 |
-| 6 | 10 | ✅ | 전기차 (EV) | **60~100 kWh** | 승용차, 트럭, 버스 | Li-air 3,600 Wh/kg, σ·J₂=2,880km |
-| 5 | 10 | ✅ | 가정용 ESS | **5~15 kWh** | 태양광 자가소비, 비상전원 | n=6 모듈 스택, 1/2+1/3+1/6=1 분배 |
-| 4 | 10 | ✅ | 드론/e-모빌리티 | **0.5~5 kWh** | 배달드론, 전동킥보드, e-바이크 | τ=4 경량 팩, 6-DOF 자세제어 |
-| 3 | 10 | ✅ | 노트북/태블릿 | **30~100 Wh** | 울트라북, 태블릿PC | φ=2 듀얼셀, n=6분 급속충전 |
-| 2 | 10 | ✅ | 스마트폰 | **10~25 Wh** | 플래그십, 폴더블 | sopfr=5 단공정, σ·τ=4,800 사이클 |
-| 1 | 10 | ✅ | 이어폰/웨어러블/IoT | **0.05~2 Wh** | TWS 이어폰, 스마트워치, 센서 | μ=1 마이크로셀, 고체전해질 CN=6 |
+| 단 | 🛸 | 천장 | 스케일 | 용량 | 대표 용도 | n=6 핵심 | 문서 |
+|:--:|:--:|:--:|--------|------|----------|----------|------|
+| 8 | 10 | ✅ | 대륙/그리드 | **GWh** | 재생에너지 저장, 전력망 안정화 | σ=12 노드 그리드, Cross-DSE 통합 | [문서](domains/energy/battery-architecture/battery-scale-8-grid.md) |
+| 7 | 10 | ✅ | 유틸리티 ESS | **10~100 MWh** | 피크셰이빙, 마이크로그리드 | J₂=24 유닛 병렬, SMES 버퍼 | [문서](domains/energy/battery-architecture/battery-scale-7-ess.md) |
+| 6 | 10 | ✅ | 전기차 (EV) | **60~100 kWh** | 승용차, 트럭, 버스 | Li-air 3,600 Wh/kg, σ·J₂=2,880km | [문서](domains/energy/battery-architecture/battery-scale-6-ev.md) |
+| 5 | 10 | ✅ | 가정용 ESS | **5~15 kWh** | 태양광 자가소비, 비상전원 | n=6 모듈 스택, 1/2+1/3+1/6=1 분배 | [문서](domains/energy/battery-architecture/battery-scale-5-home-ess.md) |
+| 4 | 10 | ✅ | 드론/e-모빌리티 | **0.5~5 kWh** | 배달드론, 전동킥보드, e-바이크 | τ=4 경량 팩, 6-DOF 자세제어 | [문서](domains/energy/battery-architecture/battery-scale-4-drone.md) |
+| 3 | 10 | ✅ | 노트북/태블릿 | **30~100 Wh** | 울트라북, 태블릿PC | φ=2 듀얼셀, n=6분 급속충전 | [문서](domains/energy/battery-architecture/battery-scale-3-laptop.md) |
+| 2 | 10 | ✅ | 스마트폰 | **10~25 Wh** | 플래그십, 폴더블 | sopfr=5 단공정, σ·τ=4,800 사이클 | [문서](domains/energy/battery-architecture/battery-scale-2-smartphone.md) |
+| 1 | 10 | ✅ | 이어폰/웨어러블/IoT | **0.05~2 Wh** | TWS 이어폰, 스마트워치, 센서 | μ=1 마이크로셀, 고체전해질 CN=6 | [문서](domains/energy/battery-architecture/battery-scale-1-earphone.md) |
 
 > **공통 돌파**: 고체전해질(열폭주 0) · n=6분 80%충전 · σ·τ=4,800사이클(15년 무교체) · 131/131 EXACT · 6대 제조사 매핑 · 10 불가능성 정리
 <!-- AUTO:BATTERY_SCALE:END -->
