@@ -178,7 +178,7 @@
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 적대적 강건성 36 + 배포 안전 26 + 멀티모달 안전 20 + 모델 복지 18. Anthropic 전 연구 트랙 커버. 15섹션+10검증코드 ×6 | [문서](reports/discovery/anthropic-fellows-research.md) |
+| 10 | ✅ | v3 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 적대적 강건성 36 + 배포 안전 26 + 멀티모달 안전 20 + 모델 복지 18. 통합문서 v3 특이점 돌파. BT-401~406, DSE 6,127, 불가능성 6, SINGULARITY 6/6 PASS | [문서](domains/cognitive/ai-safety/ai-safety.md) |
 | 10 | ✅ | v1 | **추론 비용 33종** | KV 캐시 압축, 투기적 디코딩, INT4 양자화, 연속 배칭, $15→$1.5/1M tok (10x). 15섹션+10검증코드 | [문서](domains/cognitive/ai-inference-cost/ai-inference-cost.md) |
 | 10 | ✅ | v1 | **훈련 비용 32종** | Chinchilla 최적화, MoE, 커리큘럼 학습, 합성 데이터, $12B→$1.2B (1/10). 15섹션+10검증코드 | [문서](domains/cognitive/ai-training-cost/ai-training-cost.md) |
 | 10 | ✅ | v1 | **품질 경량화 32종** | 지식 증류, 구조적 가지치기, MoE 라우팅, LoRA, 400B→70B 88% 품질 유지. 15섹션+10검증코드 | [문서](domains/cognitive/ai-quality-scale/ai-quality-scale.md) |

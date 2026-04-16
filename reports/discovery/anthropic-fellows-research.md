@@ -22,7 +22,7 @@
 
 | 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 적대적 강건성 36 + 배포 안전 26 + 멀티모달 안전 20 + 모델 복지 18. Anthropic 전 연구 트랙 커버. 15섹션+10검증코드 ×6 | [문서](../../domains/cognitive/ai-interpretability/ai-interpretability.md) |
+| 10 | ✅ | v3 | **AI Safety 171종** | 해석가능성 39 + 정렬 32 + 적대적 강건성 36 + 배포 안전 26 + 멀티모달 안전 20 + 모델 복지 18. 통합문서 v3 특이점 돌파. BT-401~406, SINGULARITY 6/6 PASS | [문서](../../domains/cognitive/ai-safety/ai-safety.md) |
 
 ---
 
