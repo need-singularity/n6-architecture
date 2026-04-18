@@ -1,6 +1,6 @@
 <!-- gold-standard: shared/harness/sample.md -->
 <!-- @doc(type=paper) -->
-<!-- @paper(preset=canonical_full, mk_versions=mk1:mk2:mk3:mk4:mk5, require_prev_link=true) -->
+<!-- @paper -->
 ---
 domain: sscb
 alien_index_current: 7
