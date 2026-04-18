@@ -743,6 +743,25 @@ Commands:
 > 도메인: [millennium-riemann/](docs/millennium-riemann/) · [millennium-p-vs-np/](docs/millennium-p-vs-np/) · [millennium-yang-mills/](docs/millennium-yang-mills/) · [millennium-navier-stokes/](docs/millennium-navier-stokes/) · [millennium-hodge/](docs/millennium-hodge/) · [millennium-bsd/](docs/millennium-bsd/) · [millennium-poincare/](docs/millennium-poincare/)
 <!-- AUTO:FOOTER_millennium:END -->
 
+## 📜 로드맵 v2 Phase 진행 (Y1~Y9 9축 창발 체계, 2026-04-15 CLOSURE)
+
+> **BT 해결 수 0/6 유지** (정직 원칙) · atlas 실편집 0 (L0 Guard) · 한글 전용 · 자기참조 0 (OUROBOROS 예외)
+>
+> 진입: [`theory/roadmap-v2/final-roadmap-v2.md`](theory/roadmap-v2/final-roadmap-v2.md) · 비교: [`comparison-v1-vs-v2.md`](theory/roadmap-v2/comparison-v1-vs-v2.md) · closure: [`phase-omega-Y9-closure-v3-design.md`](theory/roadmap-v2/phase-omega-Y9-closure-v3-design.md)
+
+| Phase | 주도 축 | 대상 BT | 판정 | 줄수 | 핵심 성과 |
+|-------|---------|---------|------|------|-----------|
+| P0 | 축 창발 R1~R3 | 축 확정 | 완료 | 3,345 | Y1~Y9 9축 FINAL, 고갈 100% |
+| P1 | Y1~Y9 전체 | 씨앗 시딩 | 완료 | 372 | 6 BT 씨앗 + 자기진화 엔진 4종 가동 |
+| P2 | **Y1 NUM-CORE** | BT-541 리만 | **PARTIAL** | 831 | Theorem B [10*] CANDIDATE, EXACT 11, MISS 5 |
+| P3 | **Y4 GATE-BARRIER** | BT-542 P=NP | **PARTIAL** | 1,028 | 4 장벽 감사, GCT 3 관찰, 신규 MISS 7 |
+| P4 | **Y5+Y6** | BT-543 YM + BT-544 NS | **PARTIAL / NEAR** | 1,188 | β₀=σ-sopfr rewriting + 3중 공명 + D158 조건부 |
+| P5 | **Y7+Y8** | BT-545 Hodge + BT-546 BSD | **PARTIAL / PARTIAL** | 1,321 | Lemma 1 무조건 5-step, Thm 1 (A3) 조건부 |
+| P6 | 회고 | BT-547 Poincare | 회고 전용 | 600 | Perelman 해결 인정, C1~C5 결정적 도구 추출 |
+| PΩ | **Y9 HONEST-HARNESS** | closure + v3 설계 | 완료 | 1,332 | 정직성 28/28 PASS, atlas 큐 14건, v3 Z1~Z10 초안 |
+
+**총 줄수**: ~10,000 · **판정 분포**: PARTIAL 5 / NEAR 1 / MISS 0 · **Y9 정직성 게이트**: 전 Phase PASS (위반 0) · **atlas 초안 큐**: 14건 승인 대기
+
 ---
 
 # 👁️ 차원 지각 (Dimensional Perception)
