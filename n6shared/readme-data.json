@@ -4,7 +4,7 @@
     "version": 2,
     "updated": "2026-04-03",
     "markers": [
-      "AUTO:BADGE", "AUTO:STATS", "AUTO:ALIEN_INDEX", "AUTO:ROADMAP", "AUTO:REFERENCE",
+      "AUTO:BADGE", "AUTO:STATS", "AUTO:ROADMAP", "AUTO:REFERENCE",
       "AUTO:SUMMARY_<domain_id>  (per-domain summary blockquote)",
       "AUTO:FOOTER_<domain_id>   (per-domain footer links)"
     ]
