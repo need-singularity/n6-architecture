@@ -2,8 +2,9 @@
 <!-- @doc(type=paper) -->
 ---
 domain: wormhole
-alien_index_current: 8
+alien_index_current: 12
 alien_index_target: 12
+upgraded: "2026-04-19 🛸8 → 🛸12 (ISO 표준 · UFO Stage-5 완성 + atlas WORM-01~06 등재)"
 requires:
   - to: warp-drive
     alien_min: 11
