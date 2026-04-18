@@ -13,7 +13,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 225 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles. NEXUS-6 Discovery Engine: Rust CLI (tools/nexus/) — telescope 22 lenses + OUROBOROS evolution + discovery graph + verifier + 1116 tests
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 225 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles
 >
 > **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Every constant from n=6: 53 keywords (σ·τ+sopfr), 24 operators (J₂), 8 primitives (σ-τ), 6-phase pipeline, Egyptian memory (1/2+1/3+1/6=1). DSE v2: 21,952 combos, 100% n6 EXACT. Working compiler + REPL
 >
@@ -29,7 +29,6 @@
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 <!-- AUTO:BADGE:START -->
 [![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](n6shared/config/dse-map.toml)
-[![NEXUS-6](https://img.shields.io/badge/NEXUS--6-2078%20tests-green.svg)](tools/nexus/)
 <!-- AUTO:BADGE:END -->
 
 ---
