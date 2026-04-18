@@ -680,7 +680,7 @@
 | 7 | | v1 | **HEXA-ANIMA 감성 서비스** | 감정인식(φ=2×τ=4=8축), 뇌파UX(σ=12채널), AI의식평가, 감성콘텐츠(Egyptian), 정신건강상담(τ=4단계) (BT-568~577) | [문서](domains/cognitive/anima-service/anima-service.md) |
 | 7 | | v1 | **HEXA-UNIFIED 완전인지 플랫폼** | NEXUS(좌뇌)+Anima(우뇌)=n=6 완전인지, Egyptian 1/2(데이터)+1/3(감성)+1/6(직관)=1 (BT-578~587) | [문서](domains/compute/unified-service/unified-service.md) |
 
-> SSOT: [`config/products.json`](config/products.json) → `marketing` 섹션
+> SSOT: `$NEXUS/shared/n6/docs/domains.json` (도메인 1:1 레지스트리, 기존 products.json deprecated)
 
 ---
 

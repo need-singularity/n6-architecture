@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "attr": "doc",
+    "project": "n6-architecture",
+    "version": 1,
+    "inherit": false,
+    "updated": "2026-04-18",
+    "description": "n6-architecture @doc 양식 — paper=sscb §1-§21 canonical_full + 프로젝트 고유 type 확장 (ADR/SPEC 등). 글로벌 병합 없이 완전 독립."
+  },
+  "rules": {
+    "paper": {
+      "description": "논문/도메인 명세 — sscb 수준 canonical. brief(§1-§7) + engineering(§8-§20) + impact(§21)",
+      "sections": [
+        "WHY", "COMPARE", "REQUIRES", "STRUCT", "FLOW", "EVOLVE", "VERIFY",
+        "EXEC SUMMARY", "SYSTEM REQUIREMENTS", "ARCHITECTURE", "CIRCUIT DESIGN",
+        "PCB DESIGN", "FIRMWARE", "MECHANICAL", "MANUFACTURING", "TEST",
+        "BOM", "VENDOR", "ACCEPTANCE", "APPENDIX", "IMPACT"
+      ],
+      "require_ascii_check": true,
+      "require_verify": true,
+      "require_mk_history": true,
+      "mk_history_min_lines": 3
+    },
+    "adr": {
+      "description": "Architecture Decision Record — n6 도메인 결정 기록",
+      "sections": ["Context", "Decision", "Consequences"]
+    },
+    "spec": {
+      "description": "API 또는 수학 정리 스펙",
+      "sections": ["Overview", "Interface", "Behavior", "Errors", "Examples"]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "project": "n6-architecture",
+    "version": 1,
+    "inherit": false,
+    "description": "n6-architecture README 양식 — 295 도메인 카탈로그 + Rust 엔진 독립 규약"
+  },
+  "scopes": {
+    "root": {
+      "sections": [
+        "NEXUS-6 Discovery Engine",
+        "Reference",
+        "Honest Limitations",
+        "Citation"
+      ],
+      "require_codeblock": false,
+      "require_mdlink": false,
+      "require_sealed": true
+    },
+    "domain-readme": {
+      "sections": [],
+      "require_codeblock": false,
+      "require_mdlink": true,
+      "require_sealed": false,
+      "_domain_hints": true
+    },
+    "axis-readme": {
+      "sections": ["Axis", "Domains", "선행 도메인"],
+      "require_codeblock": false,
+      "require_mdlink": true,
+      "require_sealed": false
+    }
+  }
+}

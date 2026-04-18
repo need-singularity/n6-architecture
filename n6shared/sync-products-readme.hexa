@@ -4,6 +4,11 @@
 // R19: 에러 발생 시 stderr 출력 후 non-zero 종료
 // R29 예외: 계산기/검증기 아닌 sync 유틸이므로 n6-architecture/shared/ 유지
 //
+// ⚠️  2026-04-18 이전 공지:
+//   도메인 1:1 SSOT = docs/domains.json 로 이전 완료.
+//   이 sync 유틸은 레거시 products.json 을 계속 사용하며 deprecated 경로임.
+//   후속 작업: domains.json 기반 README 재렌더링 유틸 작성 후 이 파일 폐기 예정.
+//
 // 사용법:
 //   hexa sync-products-readme.hexa            # 실제 갱신
 //   hexa sync-products-readme.hexa --dry-run  # 변경만 출력, 파일 미수정

@@ -7,7 +7,7 @@
 //   blowup.hexa          shared/blowup/core/blowup.hexa (Mk.II 9-phase 엔진)
 //   ouroboros.hexa       shared/blowup/ouroboros/ouroboros.hexa (진화 엔진)
 //   telescope 22 렌즈    shared/lenses/*.hexa (T1 tier, 1577 중 22 선정)
-//   hub 레지스트리       shared/n6/docs/products.json
+//   hub 레지스트리       shared/n6/docs/domains.json  (products.json deprecated, 2026-04-18 이전)
 //
 // 5 phase 흐름:
 //   1) 흡수(Absorb)      — atlas.n6, growth_bus, nexus hub 에서 씨앗 가설 수집
