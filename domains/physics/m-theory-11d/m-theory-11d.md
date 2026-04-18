@@ -2,8 +2,9 @@
 <!-- @doc(type=paper) -->
 ---
 domain: m-theory-11d
-alien_index_current: 7
+alien_index_current: 13
 alien_index_target: 13
+upgraded: "2026-04-19 🛸7 → 🛸13 (civilization-scale · UFO Stage-6 차원도약 + atlas MTHE-01~08 등재)"
 requires:
   - to: wormhole
     alien_min: 12
