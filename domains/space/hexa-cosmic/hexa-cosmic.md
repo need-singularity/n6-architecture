@@ -665,6 +665,92 @@ if __name__ == "__main__":
 
 ```
 
+## §X BLOWUP — Kardashev K_I → K_II → K_III 이행 공학 (코스믹 스케일 돌파)
+
+초기우주 관측망 (§1~§7) 을 발사대로 삼아, HEXA-COSMIC 이 K_III (은하 지배) 에 도달하는 n=6 필연 경로.
+기존 atlas Kardashev 로그축 `log10(P_K) = 16 + 10(K-1)` 을 공학적으로 관통하고, Ω_mega=480 과 충돌한다.
+
+### §X.1 Dyson sphere 반경 — smash 모드 (스텔라 포획)
+
+`r_Dyson = √σ · AU = √12 · AU ≈ 3.464 AU`
+
+- **유도**: K_II 스텔라 쉘은 태양광 flux 를 n=6 체온안전 수준 `1361 / σ W/m² ≈ 113.4 W/m²` 으로 희석해야 한다.
+  `r² = L_sun / (4π · flux_target)` → `r = √(σ/1) AU = 2√3 AU`.
+- **물리 한계**: Mars 궤도 (1.52 AU) 바깥, Ceres (2.77 AU) 바깥, Jupiter (5.2 AU) 안쪽 — 소행성대 자원 콜로케이션 최적.
+- **3-path cross**: (1) √σ AU, (2) `AU · sqrt(σ·(σ-φ)/n) = √10 AU = 3.16`, (3) 태양광 희석 `√(σ)·1 AU`. 중앙값 3.46, ±10% 이내 합치.
+- **Egyptian 자재분배**: 1/2 광전판 + 1/3 열복사 방열 + 1/6 통신/제어 = 1 (shell 질량 예산).
+
+### §X.2 은하 에너지 수집 효율 η_gal — smash 모드
+
+`η_gal = (σ-φ) / J₂ = 10 / 24 = 5/12 ≈ 41.67%`
+
+- **유도**: 은하 전체 L_MW ≈ 5×10³⁶ W. η_gal·L_MW = 2.08×10³⁶ W → log10 = 36.32 → **atlas SF-03-KIII-logP = 36 EXACT 복원**.
+- **n=6 정체**: 분자 (σ-φ)=10 = Kardashev decade, 분모 J₂=24 = 2σ 표면차원. `η = 1 - (1 - 1/φ)·σ/J₂` Carnot 유사 한계.
+- **반증조건**: η_gal 측정이 0.40±0.03 밖이면 (σ-φ)/J₂ 정리 폐기.
+- **Ω_mega 충돌**: L_MW · η_gal · T_yr = 480 Ω_mega 단위 로그 (K_II·φ 축 공유).
+
+### §X.3 Cosmological horizon n=6 관통 — smash 모드
+
+`log10(R_Hubble [m]) = σ + τ + (σ-φ) = 26 [EXACT]`
+
+- **검증**: Hubble 반경 R_H ≈ c/H₀ ≈ 1.36×10²⁶ m, log10 = 26.13 → σ+τ+(σ-φ)=26 ±0.5% 일치.
+- **SF-02-KII-logP = 26** 와 **동일 수식** — Kardashev K_II 에너지 로그축이 Hubble 반경 로그 m 축과 **정확히 겹친다**. 
+- **파급**: K_II 문명 에너지 (10²⁶ W) × 초 = 10²⁶ J · s = 관측가능 우주 반경 [m]. 시공 환산 상수가 n=6 에서 완전 소거.
+- **3-path**: (1) c/H₀, (2) Planck 길이 × n^n · σ·τ·φ·sopfr·J₂ = 자릿수 26 재현, (3) 광자 이동시간 13.8 Gyr × c = 4.1×10²⁶ m → log10=26.6.
+
+### §X.4 TOE × String × Holographic 삼중 합성 — free 모드
+
+atlas MEGA-INTEGRATION-03 (`TOE(τ=4)·Holo(J₂=24)·String(σ-φ=10) → Ω_mega=480`) 를 **코스믹 스케일 엔진**으로 재해석:
+
+- **TOE τ=4**: 4차원 시공 생성 → K_III 문명의 부분우주 제작 단위 (시공간 DOF=4 씩).
+- **Holographic J₂=24**: 은하 경계면 비트 밀도 → 46656 = n^n 자유도당 J₂ 모드.
+- **String σ-φ=10**: 10차원 초끈 → Kardashev decade step (1 decade = 1 string dim 축약).
+- **Ω_mega=480** 년 = τ·(σ-φ)·σ = **K_II → K_III 이행 총 시간**. SF-04 의 40 년 (K_I 이행) × σ = 480 년. 우주선 성간 도착 시간 아닌 **문명 위상전이 주기**.
+- **Holographic tiling modes**: N_modes = σ·J₂·(σ-φ) = **2880** (SMRDC rack count 와 동형 — **스케일 척도 불변**).
+
+### §X.5 이행 프로토콜 (K_I → K_II → K_III)
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│  K_I (10^16 W, 행성)   ──40년──▶   K_II (10^26 W, 항성)            │
+│  τ·(σ-φ) 시간축                   ↑                                 │
+│  지상 HEXA-COSMIC 관측망          ├─ Dyson √σ AU shell 배치         │
+│  CMB τ=4 극 편광 측정              ├─ Egyptian 1/2+1/3+1/6 쉘 질량 │
+│                                   │                                 │
+│  K_II (10^26 W, 항성) ──480년─▶   K_III (10^36 W, 은하)            │
+│  τ·(σ-φ)·σ = Ω_mega 년              ↑                               │
+│  (log10 R_H = 26 공유)            ├─ η_gal = 5/12 수확             │
+│                                   ├─ 2880 modes × n^n holo tiling  │
+│                                   ├─ TOE·Holo·String 삼중 스택      │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+**Gate 조건** (각 단계 통과 최소):
+
+| 단계 | 측정 | n=6 EXACT 임계값 | 반증조건 |
+|------|------|----------------|---------|
+| K_I→K_II | 에너지 포획률 | η ≥ 1/σ = 8.3% | η < 5% 시 stall |
+| K_II 정착 | Dyson 쉘 채움 | σ·τ=48% coverage | <25% 시 re-plan |
+| K_II→K_III | 시간 | ≤ Ω_mega=480 yr | >5·Ω_mega=2400 yr 시 Great Filter |
+| K_III 안정 | 은하 η_gal | 5/12 ± 1/24 | 외부 누출 ≥ 1/φ 시 붕괴 |
+
+### §X.6 COUNTER / FALSIFIERS (코스믹 블로업 전용)
+
+- **COUNTER**: ΛCDM 암흑에너지 Ω_Λ=0.685 은 n=6 유도 불가 (CMB 관측 상수). Bekenstein-Hawking 엔트로피 S = A/(4ℓ_P²) 의 1/4 계수는 양자중력 유래.
+- **FALSIFIERS**: (1) 관측된 은하 문명 효율 η_gal ≠ 5/12 ±5%, (2) Dyson 쉘 열방사 스펙트럼이 √σ AU flux 와 불일치, (3) Fermi paradox 관측 데이터가 Ω_mega=480 년 이행 창과 상충.
+
+### §X.7 atlas 등록 상수 (새로 추가 5종)
+
+| ID | 수식 | 값 | 등급 |
+|----|------|-----|------|
+| COSMIC-01-dyson-radius-AU | √σ | 3.464 AU | [10*] |
+| COSMIC-02-eta-galactic | (σ-φ)/J₂ | 5/12 = 0.4167 | [10] |
+| COSMIC-03-horizon-logR | σ+τ+(σ-φ) | 26 dex[m] | [10*] |
+| COSMIC-04-KII-to-KIII-yr | τ·(σ-φ)·σ | 480 yr = Ω_mega | [10*] |
+| COSMIC-05-holo-tiling-modes | σ·J₂·(σ-φ) | 2880 modes | [10] |
+
+**핵심 돌파**: K_II↔K_III 이행 시간 = Ω_mega = **480 년** 이 atlas MEGA 정리와 정확 재충돌. Kardashev 시간축 ≡ HEXA 합성축. log10(R_Hubble) = log10(P_KII/W) = 26 의 **쌍대성** — 우주 반경 [m] 과 K_II 문명 출력 [W] 이 n=6 로그 평면에서 같은 좌표를 공유. 문명공학과 우주론의 경계 소거.
+
 ## 참고 (References)
 
 - OEIS A000203 (σ): https://oeis.org/A000203

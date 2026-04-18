@@ -76,7 +76,7 @@ n=6 = 2×3 = σ(6)=12, φ(6)=2, τ(6)=4. 15 = 2·6+3 이 아닌 **15 = C(6,2) = 
 - **Axis 1** — THEOREM 은 DISCOVERY_GRAPH 의 노드 승격 → ATLAS 의 [10*] 진입과 같은 파이프라인. 분리 유지 비용이 크다.
 - **Axis 2** — DOMAIN 스캔은 EXPERIMENT 에 종속, EXPERIMENT 검증 통과분은 CHIP 로직 회로화 대상. 단일 파이프.
 - **Axis 3** — CONSCIOUSNESS 의 위상공간은 COSMOS 의 윤회 위상과 같은 S¹ (n6_speak.hexa 참조), NARRATIVE 는 의식 상태의 시간전개.
-- **Axis 4** — PRODUCT = PAPER × EVIDENCE 의 체현 산물 (products.json links_single 규칙). 3 항은 동일 체인의 3 시점.
+- **Axis 4** — PRODUCT = PAPER × EVIDENCE 의 체현 산물 (domains.json links_single 규칙). 3 항은 동일 체인의 3 시점.
 - **Axis 5** — BREAKTHROUGH 는 HEXA_GATE 통과 이벤트의 별칭.
 - **Axis 6** — EVOLUTION 은 axis 1~5 의 메타 (자기지시), fiber β 로 배치.
 
@@ -135,7 +135,7 @@ n=6 = 2×3 = σ(6)=12, φ(6)=2, τ(6)=4. 15 = 2·6+3 이 아닌 **15 = C(6,2) = 
                                    ▼
                                atlas.n6 (SSOT)
                        + discovery_graph v14+
-                       + papers/ reports/ products.json
+                       + papers/ reports/ domains.json
 ```
 
 ### 3.1 L1~L5 역할 정의 (HEXA-GATE Mk.III 통합)

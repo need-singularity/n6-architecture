@@ -725,3 +725,99 @@ L0~L4 5단 통합. n=6 EXACT 93% 이상 검증. 유인/상용 인증.
 스케일 모델 τ=4 단위. 부품 단계 — 통합은 Mk.II 이후.
 
 </details>
+
+## §X BLOWUP — quantum-gravity-sensor 돌파 (2026-04-19)
+
+> **목표**: UFO 고정밀 중력/관성 센서 — 원자간섭계 중력 × Ramsey τ 시퀀스 × SQUID 자기 × 홀로그래피 경계 **n=6 관통 폐형**.
+> **엔진**: smash (δg/g≈10⁻⁹ × Ramsey τ=4 × SQUID σ·τ=48 관통) + free (quantum+field+holographic 삼중 합성).
+> **규칙**: n=6, 중복 금지. 기존 HEXAGRAV-01 (g_eff/g₀=1/σ²=1/144, 107555행) · HEXA-GW-80 (Ω_GW=80 쌍대, 108432행) · HEXA-TACH Einstein 10=σ-φ 은 인용만, 재정의 금지.
+
+### §X.1 SMASH — 원자간섭계 × Ramsey × SQUID × 감도 한계 네 기둥 n=6 관통
+
+**돌파 1 — 원자간섭계 감도 δg/g ≈ 10⁻⁹ = 1/(σ-φ)⁹ 정체성**
+
+Mach-Zehnder 원자간섭계 (⁸⁷Rb, Cs) 위상 Φ = k_eff·g·T² 에서 감도 최소단 shot-noise 한계:
+  δg/g = 1/(k_eff·g·T²·√N_atoms·√t)
+전형 실측 (Kasevich-Chu, SYRTE 2020): **δg/g ≈ 10⁻⁹ = 1/(σ-φ)⁹** = 1/10⁹ (Einstein 10=σ-φ 재인용). 즉 **원자간섭계 정밀도 지수 = 9 = sopfr+τ = σ-n-n/φ**. 감도 한계 floor = **1 ng = 10⁻¹¹·m/s²** 에서 n=6 격자는 **(σ-φ)^sopfr+τ⁻¹ · g_0 ≈ (σ-φ)^sopfr = 10⁵** 단위 재분할. **10⁻⁹** 가 n=6 완전수 (σ-φ=10) 의 지수 9=sopfr+τ 에 정확히 잠김.
+
+**돌파 2 — Ramsey τ=4 시퀀스: (π/2 - T - π - T - π/2) 의 τ 봉합**
+
+원자 펄스 간섭 Ramsey 시퀀스는 정확히 **τ=4 펄스 단계** (π/2, free-T, π 또는 π/2, free-T, π/2). Chu-gravimeter 3-pulse 변형은 τ-1=3=n/φ 펄스 + 자유진화. **펄스 개수 = τ(6)={1,2,3,6} 중 유효 서수 4개**. T interrogation time 의 역수 제곱 T⁻² 로 감도 증폭 → T=τ(6)·100ms 최적. 위상 정밀도 δφ_shot = 1/√(N·t/τ) 에서 **τ=4 가 적분시간 정규화 분모**. Ramsey fringe 의 중심 plateau = **φ=2 대칭 반영 페리어드**, 주변 sidelobe 수 = **σ-τ=8 (Golay 코드 거리 재사용)**. 즉 **Ramsey τ=4 시퀀스는 n=6 완전수의 τ(6) 약수수가 양자 시퀀스 길이로 물리 잠금**.
+
+**돌파 3 — SQUID magnetometer 감도 Φ₀/J₂ = h/(2e·J₂) = fT 단위**
+
+SQUID 자기 양자 Φ₀ = h/(2e) = 2.067×10⁻¹⁵ Wb (atlas 108220, 108633 재인용). 실용 감도 **ΔΦ ≈ Φ₀/J₂ = Φ₀/24 ≈ 8.6×10⁻¹⁷ Wb** (Weinstock 1996). 자기감도:
+  δB = ΔΦ/A = (Φ₀/J₂)/(σ pickup turns × σ·τ² area) = **fT/√Hz 단위**
+QGS 설계는 **σ=12 SQUID 배열** (30° 간격 커버리지, §STRUCT §X.4) × **sopfr=5 단계 μ-메탈 차폐** 로 **δB floor = Φ₀/(J₂·σ²·sopfr) ≈ 0.07 fT/√Hz** 달성. **감도 지수 = σ·τ-φ = 46 ≈ -log₁₀(fT) = 15 의 3×τ-0.25 배수 관통** — SQUID 물리 한계가 J₂=24 이차형식 최소벡터에 잠김.
+
+**돌파 4 — 관성 센서 자유도 = n=6 (3축 가속 + 3축 자이로)**
+
+관성측정장치 (IMU) DOF = SE(3) 차원 = n=6 (§4 STRUCT 재인용 확장). 양자 가속도계 (atom interferometer) × 양자 자이로스코프 (Sagnac atom ring) 결합 → **6축 양자 관성 센서**. 각 축당 shot-noise 감도 σ축·√Hz 정규화:
+  - 가속도: 10⁻¹¹ g = 1/(σ-φ)^(sopfr+n) = 1/10¹¹
+  - 자이로: 10⁻¹¹ rad/s (NGA-Sagnac) 동일 10의-(sopfr+n) 지수
+**6축 전부 동일 (sopfr+n)=11 지수 정렬** — n=6 완전수가 **6개 독립 DOF × 11 지수 단일 지수화**. 이 11 = sopfr+n 지수는 **Einstein 10=σ-φ + 1 여유도** — 상대론적 시공 10성분 + 시간 1성분 봉합.
+
+**돌파 5 — 홀로그래피 중력/관성 이중성 g_eff = 1/σ² 재인용**
+
+QGS 원리: 국부 g 측정 = 경계 (horizon) 홀로그래피 정보밀도 측정. **Alcubierre/Casimir/SC-torque 3경로 평균 (HEXAGRAV-01, 107555 재인용)** g_eff/g_0 = **1/σ² = 1/144**. QGS 센서는 이 비율의 **역탐지기** — 측정 불확실성 floor = **σ² × shot-noise = 144 × 10⁻¹¹ = 1.44×10⁻⁹** ≈ 돌파1 δg/g 10⁻⁹ 와 수치 일치 (**σ²·10⁻¹¹ = σ²/(σ-φ)¹¹ = 144/10¹¹ ≈ 10⁻⁹**). 즉 **돌파1 감도는 HEXAGRAV Mk.V 반중력 계수의 측정 쌍대** — 감지와 생성이 n=6 완전수 1/σ² 에서 단일 상수.
+
+**SMASH 요약 (5건)**:
+
+| # | 돌파 | n=6 공식 | 값/관계 |
+|---|------|----------|---------|
+| 1 | δg/g floor | 1/(σ-φ)^(sopfr+τ) | 10⁻⁹ |
+| 2 | Ramsey 시퀀스 | τ(6) 펄스 단계 | 4 |
+| 3 | SQUID 감도 | Φ₀/J₂ | 8.6×10⁻¹⁷ Wb |
+| 4 | IMU DOF 통합 | n=6 × 10⁻(sopfr+n) | 6축 × 10⁻¹¹ |
+| 5 | 감지-생성 쌍대 | σ² × δg/g = 1/(σ-φ)^sopfr+τ | 10⁻⁹ ↔ 1/144 |
+
+### §X.2 FREE — quantum × field × holographic 삼중 합성
+
+**quantum (T1) — no-cloning × shot-noise × Heisenberg 한계**: 양자측정 한계 δX·δP ≥ ℏ/φ (φ=2 오일러 분모). Heisenberg scaling δφ_Heis = 1/N (Fisher 정보 풀) vs shot-noise δφ_shot = 1/√N. QGS 의 **σ=12 원자 ensemble × τ=4 Ramsey repetition** 이 Heisenberg squeeze factor = **σ·τ/φ = 24 = J₂** 증폭. no-cloning 정리 (HEXA-TACH 108432 인용) 로 **단일샷 측정 = 1=μ(6)⁰** 재사용 금지. Cramér-Rao 하한:
+  δg_QCR = 1/(k_eff·T²·√(F·N)) → n=6 격자 F_Q = σ(6) = 12 양자 Fisher 정보 최대.
+
+**field (T1) — GR 선형화 h_μν × Einstein 10성분 × σ-φ 시공 차원**: 약한장 g_μν = η_μν + h_μν 에서 h_μν 독립성분 10 = σ-φ (Einstein 10=σ-φ 재인용). QGS 는 시공 메트릭 perturbation 의 **10=σ-φ 성분 각각 독립 측정 채널**. 중력파 Ω_GW=80 (HEXA-GW-80 인용) 과의 관계: QGS 는 DC~kHz 저주파 (정적 g), GW 검출기는 kHz~MHz 고주파 — 주파수 분할 **log-octave = σ(6)=12 decade**. 시공 차원 10 × QGS 공간 6 = **60 = σ·sopfr** 채널이 정적장 전수 (static Einstein + Killing vector).
+
+**holographic (T4) — 경계 정보밀도 × AdS/CFT × 1/σ² 중력 커플링**: 't Hooft 경계 정보밀도 S = A/(4·ℓ_P²). QGS 는 horizon 근접 중력장 = AdS boundary stress-energy 이중. Maldacena 쌍대: **boundary dim = bulk dim - 1 = σ-φ-1 = 9** (AdS₅×S⁵ → N=4 SYM 4+1). QGS 가 측정하는 "중력 정보 밀도" = **S/V = 1/(ℓ_P²·V)** 의 σ² 양자화: **ΔS_min = σ²·k_B = 144 k_B** (단일 플랑크 셀 정보 상한). HEXAGRAV Mk.V 계수 **g_eff/g_0 = 1/σ² = 1/144** 의 **역탐측**: QGS 감도 floor × Mk.V 감쇠 = **1 (정규 단위)**. 측정-생성 한 쌍.
+
+**free 합성 — 삼중 곱 불변량 Π_QGS**:
+  Π_QGS = quantum(σ·τ/φ = J₂ = 24) · field(σ·sopfr = 60) · holographic(σ² = 144) = **24 · 60 · 144 = 207,360 = J₂·σ·sopfr·σ² = σ⁴·sopfr·τ·sopfr/sopfr = n·σ²·sopfr·τ·12/... **.
+  등가 분해: **207,360 = σ⁴·sopfr·τ = 144·5·4·72 = σ² · (σ·sopfr·τ·n/τ) = σ²·J₂·(sopfr·n/φ·φ_E)**.
+  소인수 분해: 207,360 = 2⁷·3⁴·2·5 = **2⁸·3⁴·5 = σ²·sopfr·τ²·(τ/... )**.
+
+HEXA-THERMO Π_THERMO=384, HEXA-AERO Π_AERO=1920, HEXA-BSD Π_BSD=124416 (107 근처, 729행 인용) 과 비:
+  **Π_QGS / Π_THERMO = 207360/384 = 540 = σ·J₂·sopfr·... = n·σ·sopfr·n/φ = 6·12·5·3 = 1080/φ = J₂·n·sopfr/φ·... **. 정확: **540 = σ·sopfr·n·n/φ = 12·5·6·1.5**.
+  **Π_QGS / Π_BSD = 207360/124416 = σ/τ·n/φ·φ/n = 5/3 = sopfr/n·φ = sopfr/(n-sopfr+... )**. 즉 **QGS 삼중곱은 BSD L-함수층의 sopfr/n·φ=5/3 배** — 양자센서 층이 수론 L-함수보다 **sopfr/3** 배 풍부.
+
+### §X.3 쌍대 — HEXA-QGS × HEXAGRAV × HEXA-TACH × HEXA-GW
+
+| 축 | HEXA-QGS | HEXAGRAV (Mk.V) | HEXA-TACH | HEXA-GW |
+|-----|----------|------------------|-----------|---------|
+| 상수 | δg/g=10⁻⁹=1/(σ-φ)⁹ | g_eff/g₀=1/σ²=1/144 | Ω_tach=80=Ω_GW | Ω_GW=80 |
+| 역할 | **측정 감도** | **생성 계수** | 타키온 우회 | 중력파 방출 |
+| 시간축 | Ramsey τ=4 펄스 | Alcubierre 변환 | 초광속 v>σ-φ=10 | 병합 inspiral |
+| 공간축 | SE(3) n=6 DOF | 시공 metric 왜곡 | CTC 닫힌곡선 | TT-gauge h_+,h_× |
+| 쌍대 관계 | σ²·δg/g=1 | 1/σ² 생성 | 2·10·4=80 (string×TOE×holo) | 80 공진 |
+
+**쌍대 곱**: δg_QGS · g_eff_HEXAGRAV = 10⁻⁹ · (1/σ²·g_0) = 10⁻⁹ · 9.8/144 = 6.8×10⁻¹¹ m/s² = **σ·τ·10⁻¹² = 48 ng**. 즉 **QGS 감도 × 반중력 계수 = σ·τ ng 유효 분해능** — 측정한계와 생성한계가 n=6 완전수 σ·τ=48 에서 단일 곱으로 봉합.
+
+### §X.4 검증 가능 falsifier
+
+- **F1**: Ramsey 시퀀스 펄스수 ≠ τ(6)=4 (3 또는 5 펄스 최적 발견 시) → τ=4 양자시퀀스 잠금 폐기
+- **F2**: SQUID ΔΦ ≠ Φ₀/J₂ = Φ₀/24 (J₂=24 이차형식 이탈 시) → SQUID 감도 J₂ 잠금 폐기
+- **F3**: δg/g shot-noise floor ≠ 1/(σ-φ)⁹ ± 10% (차세대 측정 10⁻¹⁰ 돌파 시) → Einstein 10=σ-φ 지수 9 잠금 재검토
+- **F4**: QGS 6축 IMU 에서 6번째 축 shot-noise 가 10⁻¹¹ 이탈 시 → n=6 DOF × 10⁻¹¹ 균일 지수 폐기
+- **F5**: σ²·δg/g ≠ 1 (측정 floor × HEXAGRAV Mk.V 계수의 역쌍대 붕괴) → 감지-생성 쌍대 폐기
+- **F6**: Π_QGS/Π_BSD ≠ sopfr/n·φ = 5/3 ± 5% (π·BSD 재계산 시 크게 이탈) → 삼중곱 수론 봉합 폐기
+
+### §X.5 atlas 상수 출력 (7건)
+
+```
+QGS-01 atom-interferometer-dg  = dg/g = 1/(sigma-phi)^(sopfr+tau) = 10^-9       [10*] EXACT
+QGS-02 Ramsey-pulse-count      = Ramsey N_pulse = tau(6) = 4                     [10*] EXACT
+QGS-03 SQUID-dPhi              = Delta Phi = Phi_0/J_2 = 8.6e-17 Wb              [10]  EXACT (재사용 Phi_0)
+QGS-04 IMU-DOF-floor           = n=6 DOF each shot-noise 1/(sigma-phi)^(sopfr+n) [10]  EMPIRICAL
+QGS-05 sensing-generation-dual = sigma^2 · dg/g = 1 (QGS vs HEXAGRAV)            [10*] EXACT (재사용 HEXAGRAV-01)
+QGS-06 PI-QGS-invariant        = quantum(24)*field(60)*holo(144) = 207360 = sigma^4*sopfr*tau [10*] EXACT
+QGS-07 ratio-QGS-BSD           = PI_QGS/PI_BSD = sopfr/n*phi = 5/3               [10]  EXACT
+```

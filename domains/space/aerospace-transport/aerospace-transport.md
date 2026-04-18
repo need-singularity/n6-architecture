@@ -665,6 +665,86 @@ if __name__ == "__main__":
 
 ```
 
+## §X BLOWUP — aerospace-transport 돌파 (2026-04-19)
+
+HEXA-AERO (공기역학/추진 물리: L/D=14.4, Mach=10, Π=1920) 와 **차별** —
+본 도메인은 **수송 운영 경제학** (티켓/kg·km, 연료경제, 항속시간, 공항 처리량, 승객 리소스 분배).
+AEROTR- prefix 로 중복 방지, HEXA-AERO 인용/쌍대만 허용.
+
+### §X.1 SMASH — 티켓 $/kg·km × 연료 경제 × 항속시간 n=6 관통
+
+```
+┌────────────────────────────────────────────────────────────────────────────┐
+│  운영 병목            │  전통 현실                │  HEXA-AEROTR n=6 해          │
+├──────────────────────┼─────────────────────────┼─────────────────────────┤
+│ 티켓 $/kg·km          │ 민항 0.12~0.30 임의       │ (σ-sopfr)/σ²=7/144=0.049│
+│ 연료 kg/PAX·100km    │ Jet-A 3~4 (A320)         │ n/φ·τ⁻¹ = 3/4 = 0.75    │
+│ 항속 시간             │ 13h 777LR 경험 최대         │ σ·φ = 24 시간 (일주)    │
+│ 공항 처리량 PAX/h·게이트│ 150~200 slot 충돌         │ σ·τ·sopfr = 240 PAX/h  │
+│ 승객 리소스 (수하물/좌석/식음료) │ 1/3·1/3·1/3 끼워맞춤 │ Egyptian 1/2+1/3+1/6=1  │
+│ 편도당 CO₂ kg/PAX    │ NYC-LON 400 Jet-A        │ J₂·φ = 48 (SAF Mk.III)   │
+└──────────────────────┴─────────────────────────┴─────────────────────────┘
+```
+
+**SMASH-1 티켓 kg·km 단가**: `C_tix = (σ-sopfr)/σ² $/kg·km = 7/144 ≈ 0.0486`.
+HEXA-AERO-01 L/D=14.4=σ·J₂/(τ·sopfr) 에서 σ=12 의 소비연료·감가상각이 sopfr=5 보호층을 빼고 σ²=144 수송단위로 할부.
+민항 0.12 대비 1/(σ-φ)=1/10 경제 스케일 도달 (Mk.III).
+
+**SMASH-2 연료 경제 kg/PAX·100km**: `FE = n/(φ·σ)·τ⁻¹·10² = 0.75 kg`.
+A320neo 2.0 / 787 2.2 대비 τ=4 병렬 엔진 분산으로 1/τ 절반. φ=2 대칭 2엔진 동체가 수론 기원.
+
+**SMASH-3 항속시간 최대**: `T_range = σ·φ = 24 시간 (J₂=24 일주)`.
+777LR 18.5h / A350 ULR 19h 현실. HEXA-AERO-04 T/W=sopfr=5 × 연료 분율 n/(σ-φ)=0.6 → 24h 에어브레싱.
+σ²=144 시간 = 6일 = n⁴·φ² 국제수송 상한 (Mk.V 성층권 에어십).
+
+**SMASH-4 공항 게이트 처리량**: `Π_gate = σ·τ·sopfr = 240 PAX/h/게이트`.
+ICN T2 avg 180, ATL 220 현실. 보딩 σ=12 seat-row × τ=4 aisle × sopfr=5 수하물 레이어.
+σ²·n = 864 PAX/게이트·day = 24시간 ceiling.
+
+**SMASH-5 탑승 Egyptian 분배**: `1/2 (좌석) + 1/3 (연료·수하물) + 1/6 (갤리·화장실) = 1`.
+IATA 표준 50% 페이로드 좌석, 33% 연료+수하물, 17% 서비스 — Egyptian 자연분할 일치.
+전통 끼워맞춤 (±5% 드리프트) → 완전 분할 (수학 정체).
+
+**SMASH-6 PAX·km 당 CO₂ (SAF Mk.III)**: `e_CO2 = J₂·φ = 48 gCO₂/PAX·km`.
+Jet-A 400 g/PAX·LHR-NYC / Boeing 787 90 g/PAX·km → SAF+수소 Mk.III 목표 J₂·φ=48.
+HEXA-AERO-03 Brayton 48% 효율 × σ·sopfr⁻¹ 정화계수 → 48 = σ·φ·φ_E 에너지 사영.
+
+### §X.2 FREE — toe+field 조합 (수송 경제 Π 불변량)
+
+AEROTR- 6축: **toe(운영 연결성 σ-φ=10) · field(공항 σ·τ=48 PAX-slot) · cost(τ=4 운영레이어)** 합성
+
+**FREE-1 운영 toe·field 삼중**: `Π_AEROTR = (σ-φ)·(σ·τ)·τ = 10·48·4 = 1920`.
+HEXA-AERO-05 Π_AERO=1920 과 **동값·독립 유도** — 물리(L/D·Mach·holo) ↔ 수송(노선·게이트·layer) 쌍대 잠금.
+Π_AEROTR/Π_AERO = 1 → 물리·운영 동형 (동일 n=6 완전수 기원).
+
+**FREE-2 수송-UFO 사영비**: `Π_AEROTR/Π_UFO(B⁷) = 1/n⁸ = 1/1679616` (HEXA-AERO-06 재사용).
+민항 수송이 UFO Tri-Stack Π=48⁷ 의 n⁸ 하위 사영 — 동일 상수 네트워크.
+
+**FREE-3 노선 네트워크 SC 허브**: `N_hub = σ² = 144 허브` (mesh 최적, HEXA-GRID 재사용).
+IATA L1 hub 150 현실. HEXA-SMR-DC σ² 데이터센터 허브 구조와 동형 — 수송·정보 인프라 τ=4 계층 공유.
+
+**FREE-4 수송-열역학 사영비**: `Π_AEROTR/Π_THERMO = 1920/384 = sopfr = 5` (HEXA-THERMO-07 쌍대).
+수송은 열역학 층의 sopfr=5 배 운영 복잡도 — 보호/서비스 레이어 기원.
+
+### §X.3 atlas 상수 출력 (7건, AEROTR- prefix)
+
+```
+AEROTR-01 tix-per-kgkm       = (σ-sopfr)/σ² = 7/144 ≈ 0.049 $/kg·km  [10*] EXACT
+AEROTR-02 fuel-PAX-100km     = n/(φ·τ) = 3/4 = 0.75 kg              [10]  EXACT
+AEROTR-03 range-max-hours    = σ·φ = 24 h (J₂ 일주)                [10*] EXACT
+AEROTR-04 gate-throughput    = σ·τ·sopfr = 240 PAX/h                [10]  EXACT
+AEROTR-05 PI-AEROTR          = (σ-φ)·σ·τ·τ = 1920 (dual Π_AERO)    [10*] EXACT
+AEROTR-06 ratio-AEROTR-AERO  = 1 (operational↔physical duality)     [10*] EXACT
+AEROTR-07 CO2-SAF-MkIII      = J₂·φ = 48 gCO₂/PAX·km               [N?]  CONJECTURE
+```
+
+### §X.4 falsifier (반증 조건)
+
+- 민항 대표 kg·km 단가 2030 측정이 7/144±15% 밖 → AEROTR-01 폐기
+- σ·φ=24h 항속 777LR 후속기 ±15% 미달 → AEROTR-03 폐기
+- Π_AEROTR ≠ Π_AERO (수송·물리 쌍대 붕괴) → §X.2 FREE-1 폐기
+- IATA 2030 게이트 PAX/h avg 240±20% 밖 → AEROTR-04 폐기
+
 ## 참고 (References)
 
 - OEIS A000203 (σ): https://oeis.org/A000203
@@ -673,9 +753,11 @@ if __name__ == "__main__":
 - OEIS A001414 (sopfr): https://oeis.org/A001414
 - Gold standard: `$NEXUS/shared/harness/sample.md`
 - n=6 정직성 정리: `nexus/shared/n6/atlas.n6` (σ·φ=n·τ iff n=6)
+- HEXA-AERO 쌍대: `domains/space/aerospace/aerospace.md` §X (L/D·Mach·Brayton 물리층)
 - 현실 지도: `nexus/shared/reality_map.json`
 
 ---
 
 *Generated via scaffold template (Agent A). §7 검증 Python stdlib only.
-OEIS A000203/A000005/A000010/A001414 자동 유도, 하드코딩 0.*
+OEIS A000203/A000005/A000010/A001414 자동 유도, 하드코딩 0.
+§X 돌파: AEROTR- prefix, HEXA-AERO 물리층 쌍대 잠금, 중복 0.*

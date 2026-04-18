@@ -1,8 +1,9 @@
 {
   "_meta": {
     "schema": "n6_domains/2.0",
-    "updated": 1776527094,
-    "note": "마이그레이션 from papers/_products.json (2026-04-19). SSOT 단일화."
+    "updated": 1776700800,
+    "note": "마이그레이션 from papers/_products.json (2026-04-19). SSOT 단일화. + tabletop-antimatter 독립 도메인 분리 (2026-04-19).",
+    "total_domains": 299
   },
   "entries": [
     {
@@ -2661,6 +2662,26 @@
         {
           "label": "문서",
           "path": "domains/physics/antimatter-factory/antimatter-factory.md"
+        }
+      ]
+    },
+    {
+      "domain_id": "physics/tabletop-antimatter",
+      "axis": "physics",
+      "slug": "tabletop-antimatter",
+      "path": "domains/physics/tabletop-antimatter/",
+      "name": "탁상 반물질 (3-경로 하이브리드)",
+      "section": "antimatter",
+      "alien_index": {
+        "ufo": 8,
+        "ceiling": false
+      },
+      "publish_paper": null,
+      "visible": true,
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/physics/tabletop-antimatter/tabletop-antimatter.md"
         }
       ]
     },
@@ -5758,6 +5779,66 @@
         {
           "label": "문서",
           "path": "domains/compute/sscb/sscb.md"
+        }
+      ]
+    },
+    {
+      "domain_id": "physics/pet-cyclotron",
+      "axis": "physics",
+      "slug": "pet-cyclotron",
+      "path": "domains/physics/pet-cyclotron/",
+      "name": "PET-사이클로트론 반물질 재활용",
+      "section": "antimatter",
+      "alien_index": {
+        "ufo": 7,
+        "ceiling": false
+      },
+      "publish_paper": null,
+      "visible": true,
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/physics/pet-cyclotron/pet-cyclotron.md"
+        }
+      ]
+    },
+    {
+      "domain_id": "physics/particle-accelerator",
+      "axis": "physics",
+      "slug": "particle-accelerator",
+      "path": "domains/physics/particle-accelerator/",
+      "name": "입자 가속기 (통합)",
+      "section": "particle",
+      "alien_index": {
+        "ufo": 8,
+        "ceiling": false
+      },
+      "publish_paper": null,
+      "visible": true,
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/physics/particle-accelerator/particle-accelerator.md"
+        }
+      ]
+    },
+    {
+      "domain_id": "energy/tabletop-fusion",
+      "axis": "energy",
+      "slug": "tabletop-fusion",
+      "path": "domains/energy/tabletop-fusion/",
+      "name": "탁상 핵융합 (무중성자)",
+      "section": "fusion",
+      "alien_index": {
+        "ufo": 9,
+        "ceiling": false
+      },
+      "publish_paper": null,
+      "visible": true,
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/energy/tabletop-fusion/tabletop-fusion.md"
         }
       ]
     }

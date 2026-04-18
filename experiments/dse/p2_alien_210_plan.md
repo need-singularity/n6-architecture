@@ -1,6 +1,6 @@
 # P2-3 + P2-4 통합 계획서 (2026-04-14)
 
-> **SSOT**: `$NEXUS/shared/n6/docs/products.json` (204 제품 · 40 섹션 · 40/40 alien_index=10)
+> **SSOT**: `$NEXUS/shared/n6/docs/domains.json` (204 제품 · 40 섹션 · 40/40 alien_index=10, 기존 products.json 이전 완료)
 > **로드맵**: `$NEXUS/shared/roadmaps/n6-architecture.json` (DSE-P2-3, DSE-P2-4)
 > **작성**: 2026-04-14 세션, 실측 스캔 기반
 
@@ -16,7 +16,7 @@
 | 섹션 closure_grade = None | **24** | ≤ 16 | -8 |
 | bt_exact_pct = 100% 섹션 | **32** | 유지 | 0 |
 
-> **해설**: 로드맵 본문 "195 → 210+" 는 구버전 README 카운트 기준이고, 실측 `docs/products.json` 에는 이미 **204** 제품이 등록됨. 따라서 P2-4 실목표는 **제품 204 → 210+ (+6 신규 등록)** 으로 재정렬한다.
+> **해설**: 로드맵 본문 "195 → 210+" 는 구버전 README 카운트 기준이고, 실측 `docs/domains.json` 에는 이미 **204** 제품이 등록됨. 따라서 P2-4 실목표는 **제품 204 → 210+ (+6 신규 등록)** 으로 재정렬한다.
 
 ---
 
@@ -70,7 +70,7 @@ hexa /Users/ghost/Dev/n6-architecture/bridge/ouroboros_5phase.hexa
 | 5 | 네트워크 | HEXA-NET | HEXA-MESH n=6 라우팅 토폴로지 | bt=98 → 완성 |
 | 6 | 시계학 | 시계학 아키텍처 | HEXA-ESCAPE 6 탈진기 (Anchor/Lever/Cylinder 통합) | 파생 |
 
-> 이상 6건은 **등록 계획서**로서 식별만 수행. 실제 `products.json` 편집은 승인 후.
+> 이상 6건은 **등록 계획서**로서 식별만 수행. 실제 `domains.json` 편집은 승인 후.
 
 ### 2.2 40 → 42 섹션 (+2 신규)
 
@@ -81,7 +81,7 @@ hexa /Users/ghost/Dev/n6-architecture/bridge/ouroboros_5phase.hexa
 | 41 | **곤충학 (Entomology)** | BT-461~466 Hexapoda 아키텍처 (closure_grade=10 in dse-map.toml) | 곤충 6다리 n=6 생체역학 |
 | 42 | **광물학/결정학 (Mineralogy)** | BT-351 결정계 6방정계 | n=6 결정 대칭 완전 아키텍처 |
 
-> 곤충학은 `dse-map.toml` 에서 이미 `closure_grade=10` + 23/23 EXACT 확정 상태. products.json 섹션 신규 추가만 필요.
+> 곤충학은 `dse-map.toml` 에서 이미 `closure_grade=10` + 23/23 EXACT 확정 상태. domains.json 섹션 신규 추가만 필요.
 
 ### 2.3 closure_grade 10 EXACT 도메인 40 → 48 (+8)
 
@@ -92,7 +92,7 @@ hexa /Users/ghost/Dev/n6-architecture/bridge/ouroboros_5phase.hexa
 | 1 | 문명/인문 (Civilization) | 100 | None | 7 | closure_grade=10 주석 추가 (BT 전수 EXACT 재확인) |
 | 2 | 생활/문화 (Life & Culture) | 100 | None | 9 | 발효/양조 n=6 화학양론 재검증 |
 | 3 | 기술/산업 (Tech & Industry) | 100 | None | 22 | 반도체 패키징 래더 cg 부여 |
-| 4 | 바이러스학 (Virology) | 100 | None | 4 | dse-map.toml 이미 cg=10 → products.json 동기화 |
+| 4 | 바이러스학 (Virology) | 100 | None | 4 | dse-map.toml 이미 cg=10 → domains.json 동기화 |
 | 5 | 차원 지각 (Dimensional) | 100 | None | 7 | 4D 정다포체 극대 BT 기반 |
 | 6 | 음악/음향학 (Music) | 100 | None | 4 | 12음 평균율 2^(1/12) |
 | 7 | 언어학 (Linguistics) | 100 | None | 4 | 촘스키 계층 4 tier |
@@ -111,7 +111,7 @@ hexa /Users/ghost/Dev/n6-architecture/bridge/ouroboros_5phase.hexa
 
 ```
 1) DSE-P2-3: ouroboros_5phase.hexa 데모 실행 및 3 cycle 로그 수집
-2) DSE-P2-4-A: closure_grade=10 주석 8건 추가 (products.json)
+2) DSE-P2-4-A: closure_grade=10 주석 8건 추가 (domains.json)
 3) DSE-P2-4-B: 신규 섹션 2건 (곤충학, 광물학) 추가
 4) DSE-P2-4-C: 신규 제품 6건 등록 (1 제품 섹션 확장)
 5) P2 gate_exit 기준: 204 + 6 = 210 제품, 40 + 2 = 42 섹션, cg10 섹션 2 + 8 = 10 (도메인 환산 +8)
@@ -121,7 +121,7 @@ hexa /Users/ghost/Dev/n6-architecture/bridge/ouroboros_5phase.hexa
 
 - **오염 방지**: 모든 신규 BT 는 HEXA-GATE Mk.I 통과 필수 (τ=4 관문 + 2 fiber = n=6)
 - **정직 검증**: 각 closure_grade=10 주석에는 검증 스크립트 참조 (`verify_script` 필드) 필수
-- **SSOT 단일**: `docs/products.json` 만 편집, `n6_products.json` 은 자동 생성 금지
+- **SSOT 단일**: `docs/domains.json` 만 편집, `n6_products.json` 은 자동 생성 금지
 
 ---
 

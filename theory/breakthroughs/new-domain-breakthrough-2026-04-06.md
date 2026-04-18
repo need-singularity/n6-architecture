@@ -62,7 +62,7 @@
 - 각 도메인: 가설 10개+ → 검증 → BT 후보 → EXACT 확인
 - 결과: docs/<domain>/hypotheses.md + verification.md + goal.md
 - DSE: domains/<domain>.toml 자동 생성
-- products.json 갱신 + README 자동 동기화
+- domains.json 갱신 + README 자동 동기화 (기존 products.json → domains.json SSOT 이전 완료)
 
 ## n=6 기본 상수 참조
 

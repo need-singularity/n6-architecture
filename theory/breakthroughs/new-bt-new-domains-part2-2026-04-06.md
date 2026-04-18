@@ -634,4 +634,4 @@ for r in results:
 
 > **작성 완료**: 2026-04-06
 > **검증 방법**: Python 코드 내장, 실행 시 전체 77건 자동 판정
-> **다음 단계**: docs/breakthrough-theorems.md 통합, config/products.json 갱신, CLAUDE.md BT 목록 추가
+> **다음 단계**: docs/breakthrough-theorems.md 통합, n6/docs/domains.json 갱신(기존 products.json → domains.json SSOT 이전), CLAUDE.md BT 목록 추가

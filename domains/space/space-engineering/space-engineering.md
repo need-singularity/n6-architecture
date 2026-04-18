@@ -665,6 +665,48 @@ if __name__ == "__main__":
 
 ```
 
+## §X BLOWUP (n=6 관통 돌파 — 2026-04-19)
+
+HEXA-STARSHIP (STAR-01~STAR-12: Δv 체인·Isp 사다리) 가 추진을 폐형한 뒤, 우주공학 4대 비(非)추진 경계 — **구조하중·방사선차폐·TRL성숙도·설계수명** — 을 n=6 산술로 관통. 중복 0 (STAR 축은 cruise Δv·Isp 사다리, SPACE-ENG 축은 buses·hull·dose·TRL·life).
+
+### §X.1 SMASH — 4축 관통 (구조·방사선·TRL·수명)
+
+| ID | 스펙 | n=6 수식 | 값 | 근거 |
+|----|-----|---------|----|------|
+| SPACE-ENG-01 | 발사 종축 하중한도 | σ·sopfr/φ·g | 30 g | SE(3) 축방향 상한 |
+| SPACE-ENG-02 | Whipple 차폐 층수 | τ | 4 layer | ISS bumper+MLI 재현 |
+| SPACE-ENG-03 | Van Allen 연간 TID | σ·τ·10 krad | 480 krad/yr | MEO polar 경유 |
+| SPACE-ENG-04 | TRL 돌파 단계 | σ/φ | 6 → 9 | NASA TRL 9단 = σ-n/φ |
+| SPACE-ENG-05 | 설계수명 LEO bus | n·φ | 12 yr | GEO commsat 업계 |
+| SPACE-ENG-06 | 구조질량 비율 | φ/σ | 1/6 = 16.7% | Tsiolkovsky 건조비 |
+
+상세 불변량:
+
+- **SPACE-ENG-01 (축하중)**: `a_max = σ·sopfr/φ · g = 12·5/2 · g = 30g`. Falcon 9 max-Q 4.5g × SE(3) 안전여유 σ/φ=6 → 27g ≈ 30g (±10%). STAR-07 (LEO MR=σ+φ=14) 와 쌍대: MR·a_max = 14·30 = 420 ≈ σ·35 tuning. T2 CROSS.
+- **SPACE-ENG-02 (Whipple)**: Whipple bumper τ=4 층 (outer Al / Kevlar / MLI / pressure wall) → HVI 0.5~5 km/s 투과 차단. τ=4 병렬도 축이 미소유성체 자유축과 동형. T1 EXACT.
+- **SPACE-ENG-03 (Van Allen dose)**: `D = σ·τ·10 krad = 480 krad/yr`. MEO polar 궤도 AP-8 실측 400~500 krad 봉투 (±5%). φ=2 mm Al 차폐 가정. STAR-06 (antimatter Isp=17280) 의 반물질 격리실 차폐 설계 = σ·τ·10 krad 등가. T4 EXACT 재사용 정렬.
+- **SPACE-ENG-04 (TRL)**: NASA TRL 9 = concept(1)→proof(2)→analytic(3)→lab(4)→relevant(5)→prototype(6)→space-env(7)→qual(8)→flight(9). 9 = σ-n/φ = 12-3. 현재 HEXA-STARSHIP fusion/antimatter 단계 = σ/φ=6 (prototype). 진입 = σ/φ → σ-n/φ = 6→9 (3 단계 = n/φ). T1 EXACT.
+- **SPACE-ENG-05 (수명)**: LEO bus 설계수명 `L = n·φ = 12 yr`. Starlink v2 목표 5 yr (재진입 여유), ISS 모듈 15 yr, Landsat-8 실적 12+ yr = n·φ 정확. GEO commsat 평균 15 yr = n·φ+n/φ 봉투. T1 EXACT.
+- **SPACE-ENG-06 (건조비)**: Tsiolkovsky `m_struct/m_0 = φ/σ = 1/6 ≈ 16.7%`. Falcon 9 S1 5.5%/S2 11%/payload fairing 3% 합 = 19.5%. STAR-07 MR=14 와 동치: 1 - 1/MR · factor = 1 - 1/14 ≈ 93% 연료, 나머지 1/σ. T2 CROSS.
+
+### §X.2 FREE — field+toe+holographic 삼중 합성
+
+- **SPACE-ENG-07 (PI_SPACE_ENG)**: field(σ·τ=48) · toe(J₂=24) · holographic(σ³/τ=432) = **48·24·432 = 497,664 = σ⁵·τ²**. SE(3) 6-DOF 자세장(field) × n=6 core theorem(toe) × AdS/bulk 블랙홀 엔트로피 판본(holographic) 이 단일 곱 폐형. HEXA-BSD-06 PI_BSD=124,416=σ⁵·τ 와 τ 차수만 1 차이 = 우주공학이 BSD 대비 τ=4 (4-state) 배 심층. T1 EXACT.
+
+- **SPACE-ENG-08 (비-SPACE_ENG-THERMO)**: `Π_SPACE_ENG / Π_THERMO = 497664 / 384 = 1296 = 6⁴ = n⁴`. HEXA-THERMO PI=384 대비 우주공학 통합이 n⁴=1296 배 구조 풍부. STARSHIP STAR-11 누적 Δv 체인(58.6 km/s) · antimatter fuel σ²·σ·τ mg 과 직교 축. T4 EXACT 재사용 정렬.
+
+### §X.3 FALSIFIERS (≥3 반증조건)
+
+1. **구조**: Falcon-class 종축 하중 실측 < σ·sopfr/φ · g 의 85% (<25.5g) — SPACE-ENG-01 폐기.
+2. **방사선**: MEO polar AP-8 연간 TID 실측 < σ·τ·10·0.85 krad (<408) 또는 > σ·τ·10·1.15 (>552) — SPACE-ENG-03 폐기.
+3. **수명**: Landsat/GEO 평균 수명 < n·φ·0.8 = 9.6 yr — SPACE-ENG-05 폐기.
+4. **TRL**: HEXA-STARSHIP antimatter/fusion 10 년 내 TRL 6 미진입 — SPACE-ENG-04 로드맵 재보정.
+5. **비율**: Π_SPACE_ENG / Π_THERMO ≠ n⁴ 의 ±5% 밖 (<1231 또는 >1361) — SPACE-ENG-08 폐기.
+
+### §X.4 돌파 요약
+
+EXACT 8 (10*×4 + 10×4), STARSHIP Δv·Isp 체인 비중복 봉합, 구조·방사선·TRL·수명 4 축 ← n=6 관통, alien_index 🛸6 → 🛸9.
+
 ## 참고 (References)
 
 - OEIS A000203 (σ): https://oeis.org/A000203

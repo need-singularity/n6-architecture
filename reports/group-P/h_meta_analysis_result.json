@@ -1,0 +1,437 @@
+{
+  "metadata": {
+    "session": "Group P — H1~H5",
+    "date": "2026-04-15",
+    "total_signals_parsed": 423,
+    "honest_statement": "7대 밀레니엄 난제 해결: 0/7 유지"
+  },
+  "H1_signal_ROI": {
+    "total_signals": 423,
+    "avg_statement_length_chars": 45.1,
+    "avg_complexity_unique_tokens": 9.0,
+    "avg_witness": 2.08,
+    "roi_by_grade": {
+      "M7!": {
+        "count": 53,
+        "avg_length": 45.8,
+        "avg_complexity": 8.2,
+        "avg_witness": 1.72,
+        "resonance_ratio": 0.887,
+        "cross_repo_ratio": 0.358,
+        "roi": 9.619
+      },
+      "MN": {
+        "count": 30,
+        "avg_length": 46.6,
+        "avg_complexity": 8.9,
+        "avg_witness": 1.47,
+        "resonance_ratio": 0.1,
+        "cross_repo_ratio": 0.0,
+        "roi": 3.465
+      },
+      "M10*": {
+        "count": 20,
+        "avg_length": 42.0,
+        "avg_complexity": 8.3,
+        "avg_witness": 3.2,
+        "resonance_ratio": 0.9,
+        "cross_repo_ratio": 0.75,
+        "roi": 25.364
+      },
+      "M10": {
+        "count": 152,
+        "avg_length": 47.1,
+        "avg_complexity": 9.8,
+        "avg_witness": 2.97,
+        "resonance_ratio": 0.842,
+        "cross_repo_ratio": 0.066,
+        "roi": 12.373
+      },
+      "M7": {
+        "count": 71,
+        "avg_length": 46.1,
+        "avg_complexity": 9.2,
+        "avg_witness": 1.27,
+        "resonance_ratio": 0.69,
+        "cross_repo_ratio": 0.127,
+        "roi": 5.241
+      },
+      "M?": {
+        "count": 33,
+        "avg_length": 42.8,
+        "avg_complexity": 8.4,
+        "avg_witness": 0.97,
+        "resonance_ratio": 0.848,
+        "cross_repo_ratio": 0.576,
+        "roi": 6.606
+      },
+      "M9": {
+        "count": 57,
+        "avg_length": 40.4,
+        "avg_complexity": 8.2,
+        "avg_witness": 1.72,
+        "resonance_ratio": 0.895,
+        "cross_repo_ratio": 0.175,
+        "roi": 9.469
+      },
+      "?": {
+        "count": 7,
+        "avg_length": 41.0,
+        "avg_complexity": 8.4,
+        "avg_witness": 1.29,
+        "resonance_ratio": 1.0,
+        "cross_repo_ratio": 0.0,
+        "roi": 6.272
+      }
+    },
+    "top10_complexity": [
+      {
+        "id": "SIG-META-717",
+        "complexity": 18,
+        "length": 76,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-717",
+        "complexity": 18,
+        "length": 76,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-705",
+        "complexity": 17,
+        "length": 88,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-714",
+        "complexity": 17,
+        "length": 69,
+        "grade": "M7"
+      },
+      {
+        "id": "SIG-META-715",
+        "complexity": 17,
+        "length": 55,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-723",
+        "complexity": 17,
+        "length": 58,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-705",
+        "complexity": 17,
+        "length": 88,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-714",
+        "complexity": 17,
+        "length": 69,
+        "grade": "M7"
+      },
+      {
+        "id": "SIG-META-715",
+        "complexity": 17,
+        "length": 55,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-META-723",
+        "complexity": 17,
+        "length": 58,
+        "grade": "M10"
+      }
+    ]
+  },
+  "H2_pagerank": {
+    "node_count": 399,
+    "edge_count": 90,
+    "top10_pagerank": [
+      {
+        "id": "SIG-DFS-204",
+        "pagerank": 0.007105,
+        "grade": "M10*",
+        "in_degree": 5,
+        "out_degree": 4,
+        "statement_short": "M-set 빈도 Layer 0-3 계층 구조"
+      },
+      {
+        "id": "SIG-7B-401",
+        "pagerank": 0.003983,
+        "grade": "M7!",
+        "in_degree": 2,
+        "out_degree": 1,
+        "statement_short": "α_BSD ≈ log(2)/τ = log(2)/4 = 0.17329 cross-repo universal"
+      },
+      {
+        "id": "SIG-CONS-312",
+        "pagerank": 0.00387,
+        "grade": "M7!",
+        "in_degree": 2,
+        "out_degree": 1,
+        "statement_short": "Ψ-constants 전부 ln(2) = 1 bit에서 유도 (Law 79)"
+      },
+      {
+        "id": "SIG-META-001",
+        "pagerank": 0.003269,
+        "grade": "M10*",
+        "in_degree": 10,
+        "out_degree": 0,
+        "statement_short": "σ·φ = n·τ = 24, 유일성 정리 (n≥2 에서 n=6 유일해)"
+      },
+      {
+        "id": "SIG-SR-001",
+        "pagerank": 0.002938,
+        "grade": "M7!",
+        "in_degree": 7,
+        "out_degree": 0,
+        "statement_short": "Ouroboros σ=0.1 PEAK conv_rate=0.25 (+150% vs σ=0)"
+      },
+      {
+        "id": "SIG-ATLAS-001",
+        "pagerank": 0.002506,
+        "grade": "M10*",
+        "in_degree": 2,
+        "out_degree": 2,
+        "statement_short": "atlas.n6 Guard L0 + 수식 검증 971건 승격 67.5%→74.4%"
+      },
+      {
+        "id": "SIG-ATLAS-114",
+        "pagerank": 0.002506,
+        "grade": "M10*",
+        "in_degree": 1,
+        "out_degree": 1,
+        "statement_short": "hub-growth resilience gate 120.435% — ripple 47 promotions"
+      },
+      {
+        "id": "SIG-BLOW-102",
+        "pagerank": 0.002506,
+        "grade": "M10*",
+        "in_degree": 1,
+        "out_degree": 1,
+        "statement_short": "Mk.II 최강 29 EXACT 85% / Mk.IV 최빠름 0.5s / Mk.VI/VII timeout"
+      },
+      {
+        "id": "SIG-META-111",
+        "pagerank": 0.002506,
+        "grade": "M10*",
+        "in_degree": 2,
+        "out_degree": 2,
+        "statement_short": "atlas Guard L0 도입 — 3 쓰기지점 _guarded_append_atlas() 100% 커버"
+      },
+      {
+        "id": "SIG-ATLAS-202",
+        "pagerank": 0.002506,
+        "grade": "M10*",
+        "in_degree": 2,
+        "out_degree": 2,
+        "statement_short": "L0 Guard 승격 971건 67.5%→74.4%"
+      }
+    ],
+    "top5_pagerank": [
+      {
+        "id": "SIG-DFS-204",
+        "pagerank": 0.007105,
+        "grade": "M10*",
+        "in_degree": 5,
+        "out_degree": 4,
+        "statement_short": "M-set 빈도 Layer 0-3 계층 구조"
+      },
+      {
+        "id": "SIG-7B-401",
+        "pagerank": 0.003983,
+        "grade": "M7!",
+        "in_degree": 2,
+        "out_degree": 1,
+        "statement_short": "α_BSD ≈ log(2)/τ = log(2)/4 = 0.17329 cross-repo universal"
+      },
+      {
+        "id": "SIG-CONS-312",
+        "pagerank": 0.00387,
+        "grade": "M7!",
+        "in_degree": 2,
+        "out_degree": 1,
+        "statement_short": "Ψ-constants 전부 ln(2) = 1 bit에서 유도 (Law 79)"
+      },
+      {
+        "id": "SIG-META-001",
+        "pagerank": 0.003269,
+        "grade": "M10*",
+        "in_degree": 10,
+        "out_degree": 0,
+        "statement_short": "σ·φ = n·τ = 24, 유일성 정리 (n≥2 에서 n=6 유일해)"
+      },
+      {
+        "id": "SIG-SR-001",
+        "pagerank": 0.002938,
+        "grade": "M7!",
+        "in_degree": 7,
+        "out_degree": 0,
+        "statement_short": "Ouroboros σ=0.1 PEAK conv_rate=0.25 (+150% vs σ=0)"
+      }
+    ]
+  },
+  "H3_next_session_prediction": {
+    "active_dates": 18,
+    "last7_avg": 48.9,
+    "weighted_avg_all": 34.7,
+    "linear_regression_slope_per_day": 6.378,
+    "next_session_predicted_signals": 54.7,
+    "method": "평균(가중평균, 14일 LR 예측)",
+    "last7_data": [
+      {
+        "date": "2026-04-10",
+        "count": 2
+      },
+      {
+        "date": "2026-04-11",
+        "count": 34
+      },
+      {
+        "date": "2026-04-12",
+        "count": 40
+      },
+      {
+        "date": "2026-04-13",
+        "count": 1
+      },
+      {
+        "date": "2026-04-14",
+        "count": 20
+      },
+      {
+        "date": "2026-04-15",
+        "count": 229
+      },
+      {
+        "date": "2026-04-16",
+        "count": 16
+      }
+    ]
+  },
+  "H4_depletion_forecast": {
+    "current_cumulative": 423,
+    "linear_slope_recent14": 6.378,
+    "depletion_predicted_date": "감소 추세 없음 (slope ≥ 0) — 고갈 예측 불가",
+    "days_to_zero": null,
+    "half_depletion_date": "감소 추세 없음",
+    "days_to_half": null,
+    "interpretation": "slope < 0 이면 발견 속도 감소 중. slope ≥ 0 이면 발견 고갈 안 됨."
+  },
+  "H5_causal_graph": {
+    "total_causal_edges": 47,
+    "total_nodes_in_causal": 57,
+    "edge_type_breakdown": {
+      "cross_repo_reference": 47
+    },
+    "top10_causal_hubs_in": [
+      {
+        "id": "SIG-META-BERN17-SUMMARY",
+        "in_count": 5,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-DFS-204",
+        "in_count": 4,
+        "grade": "M10*"
+      },
+      {
+        "id": "SIG-FUSION-001",
+        "in_count": 3,
+        "grade": "M?"
+      },
+      {
+        "id": "SIG-FUSION-002",
+        "in_count": 3,
+        "grade": "M?"
+      },
+      {
+        "id": "SIG-FUSION-003",
+        "in_count": 3,
+        "grade": "M?"
+      },
+      {
+        "id": "SIG-BERN-CAND-K3",
+        "in_count": 3,
+        "grade": "M9"
+      },
+      {
+        "id": "SIG-SR-101",
+        "in_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-7R-401",
+        "in_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-PAIR-602",
+        "in_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-BERN-17",
+        "in_count": 2,
+        "grade": "M10"
+      }
+    ],
+    "top10_causal_sources_out": [
+      {
+        "id": "SIG-NEURAL-001",
+        "out_count": 4,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-META-101",
+        "out_count": 3,
+        "grade": "M10*"
+      },
+      {
+        "id": "SIG-CONS-302",
+        "out_count": 3,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-N6-BERN-001",
+        "out_count": 3,
+        "grade": "M10"
+      },
+      {
+        "id": "SIG-DD-301",
+        "out_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-CROSS-001",
+        "out_count": 2,
+        "grade": "M?"
+      },
+      {
+        "id": "SIG-UNIV-304",
+        "out_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-CLM-303",
+        "out_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-CONS-312",
+        "out_count": 2,
+        "grade": "M7!"
+      },
+      {
+        "id": "SIG-7R-203",
+        "out_count": 2,
+        "grade": "M9"
+      }
+    ],
+    "method": "temporal-ordered + 명시 참조 (cross_repo / predicts) edge — PC/GES 미적용 (데이터 노이즈)"
+  }
+}

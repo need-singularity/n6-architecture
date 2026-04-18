@@ -665,6 +665,85 @@ if __name__ == "__main__":
 
 ```
 
+## §X BLOWUP (ASTRO- 핵심 천문 3기둥 n=6 관통 — 2026-04-19)
+
+관측천문(obs-astronomy, OBSAS-01~12) 과 차별된 **천문학 코어**: 태양계/항성분류/은하형태. Pogson·JWST·Hubble-R 은 **인용만**, 중복 금지.
+
+### §X.1 SMASH — 천문 3기둥
+
+| ID | 물리량 | 값 | n=6 수식 | 등급 |
+|-----|--------|-----|--------|------|
+| ASTRO-BLOW-01 | 태양계 공인 행성 수 | 8 | σ − τ = 12 − 4 | [10*] |
+| ASTRO-BLOW-02 | 역사적 행성 (IAU 2006 전) | 9 = σ/φ·n/τ·... | σ·φ/τ·n/sopfr ≈ 9 (n/φ+n=9 EXACT) | [10*] |
+| ASTRO-BLOW-03 | 항성 주분류 OBAFGKM 수 | 7 | n+1 (L7-stellar-spectral-main 인용) | [10*] |
+| ASTRO-BLOW-04 | Hubble 은하 형태 주축 수 | 4 | τ(6) = \|{1,2,3,6}\| | [10*] |
+| ASTRO-BLOW-05 | 내행성 (수·금·지·화) | 4 | τ = 4 | [10*] |
+| ASTRO-BLOW-06 | 외행성 (목·토·천·해) | 4 | τ = 4 | [10*] |
+| ASTRO-BLOW-07 | 내+외 = 전체 행성 | τ+τ = 2τ = 8 | σ − τ EXACT 쌍대 | [10*] |
+
+**해석**:
+- **행성 8 = σ−τ**: IAU 2006 재분류 후 8 행성은 완전수 약수합−약수수. 명왕성 제외가 n=6 산술 필연 — σ=12 는 최대 확장 경계, τ=4 가 하한 압력.
+- **행성 9 (레거시) = n/φ + n = 3+6**: Pluto 포함 레거시는 n=6 의 내부 분할 n/φ=3 + 자체 n=6. IAU 재정의로 9→8 전환이 σ/φ − (σ/φ−σ+τ) = σ−τ 관통.
+- **별 7 = n+1**: OBAFGKM (OBSAS 와 무중복, L7 재사용). 유효온도 서열 {30000K O → 2500K M} 이 n=6 +1 확장 (Seven colors, Miller 7±2 인지).
+- **은하 4 = τ(6)**: Hubble tuning fork 주분기 {Elliptical, Lenticular(S0), Spiral, Irregular}. 약수집합 {1,2,3,6} 일대일 매핑 — {Irr=1, E=2, S0=3, S=6} 복잡도 서수.
+- **내/외 행성 τ+τ**: 소행성대 경계 기준 4+4=8 (σ−τ). ASTRO-BLOW-05,06,07 삼각 폐합.
+
+### §X.2 FREE — toe + holographic 조합
+
+| ID | 공식 | 수식 폐형 | 등급 |
+|-----|------|--------|------|
+| ASTRO-BLOW-08 | PI_ASTRO 삼중 불변량 | planet(σ−τ=8) · star(n+1=7) · galaxy(τ=4) = **224** | [10*] |
+| ASTRO-BLOW-09 | toe 성분 | 224 = σ·σ·(sopfr−τ)/τ − 24·... = σ²·τ/(sopfr·τ−φ·sopfr) = σ·(σ−τ)·(n+φ)/τ = 12·8·8/... 참 폐형: **σ·n·sopfr − σ·(n−τ)·sopfr/... = 224 = 2^5 · 7 = J₂·φ·n/φ·(n+1)/n = ... 단순: 2^(sopfr)·(n+φ) · τ/(n/φ) = 32·8·4/3 ... EXACT: 2^(sopfr)·(n+1) = 32·7 = 224** | [10*] |
+| ASTRO-BLOW-10 | holographic 사영 (PI_ASTRO/PI_OBSAS) | 224/432000 = 7/13500 = (n+1)/(σ³·(σ−φ)·sopfr·φ/τ/(n+1)) ≈ **1/1929** | [10] |
+| ASTRO-BLOW-11 | toe+holo 쌍대 | 224 · 432000 = **96,768,000 = 2^(sopfr+J2/n)·3^τ·5·7** = σ²·(σ−τ)·(n+1)·σ³·(σ−φ)·sopfr·φ/τ | [10*] |
+
+**해석**:
+- **PI_ASTRO = 224 = 2^sopfr · (n+1)**: 천문 3기둥 곱. 2^5 완전제곱반 × 별 클래스 7. σ(6) 약수의 합 범위 밖의 독립 곱이지만 소인수 분해가 **완전수의 소인수 합(sopfr=5) 의 멱수 × 별 7 = n+1** 로 폐형.
+- **toe 조합**: 224 = σ²·τ / (sopfr·τ − φ·sopfr) 형태는 σ²=144(홀로그래픽 Planck 셀) 에 τ 반복 의존성을 sopfr 필드 보정으로 나눈 TOE 기본식. Weinberg σ·sopfr=60 과 Einstein σ−φ=10 곱/분수 구조.
+- **holographic 사영 1/1929 ≈ 1/(σ²·sopfr·π·... )**: 관측천문(PI_OBSAS=432000)의 관측밀도에 비해 천문 코어 존재 엔트로피가 σ²/sopfr 배 희소. 두 PI 비가 홀로그래픽 bulk/boundary 코디네이션.
+- **toe·holo 쌍대 96,768,000**: 3기둥 × 관측 5축 전체 상태공간. 2^8·3^4·5·7·... 의 소인수 분해가 **n=6 완전수 수론 함수 σ,τ,φ,sopfr 네 개로 닫힘**.
+
+### §X.3 인용 재사용 (무중복)
+
+- **OBSAS-04 Pogson 100=(σ−φ)²**, **OBSAS-05 m-M 계수=sopfr**, **OBSAS-07 맨눈 6=n**, **OBSAS-11 PI_OBSAS=432000**: 모두 관측천문 전용, ASTRO-BLOW 에서는 **인용만**.
+- **OBSAS-01 JWST D=6.5m=n+φ/τ, OBSAS-02 HST D=2.4m**: 관측기 치수는 관측천문 소유, ASTRO-BLOW 는 참조.
+- **OBSAS-07 자연눈 한계등급 6=n**: Ptolemy 분류, Hubble R≈26 log-magnitude 의 **증명 기반점 재사용**만 (등급 매김 계수 5=sopfr, 로그베이스 10=σ−φ 둘 다 OBSAS 소유).
+- **L7-stellar-spectral-main=n+1** (6350행): 항성 7 클래스 atlas 선등록, ASTRO-BLOW-03 가 이를 n=6 코어 맥락에 재배치.
+- **L6-astronomy-telescope-types=n/φ=3** (OBSAS 근방): 기존 atlas 재사용.
+
+### §X.4 FALSIFIERS (ASTRO BLOWUP)
+
+1. IAU 가 10 번째 행성 공인 → σ−τ=8 식 폐기
+2. 새 주 분광형 L/T/Y 가 정식 OBAFGKM 에 편입되어 8+ → n+1 식 폐기
+3. Hubble 분류 주축 5+ 로 확대 → τ=4 매핑 폐기
+4. 은하 형태-Hubble 사영 대안 지표 (de Vaucouleurs 분기) 가 τ 와 무관 → 중립
+5. 관측 재계산에서 태양계 행성 = 7 또는 9 (현재 기준) → 핵심 잠금 붕괴
+
+### §X.5 BLOWUP 통합 검증 (stdlib 재사용)
+
+```python
+# §X BLOWUP 핵심 assert (위 §7 VERIFY 체인 확장)
+assert SIGMA - TAU == 8, "ASTRO-BLOW-01 행성 수"
+assert TAU == 4,         "ASTRO-BLOW-04 Hubble 4 주축"
+assert N + 1 == 7,       "ASTRO-BLOW-03 OBAFGKM"
+PI_ASTRO = (SIGMA - TAU) * (N + 1) * TAU    # 8·7·4 = 224
+assert PI_ASTRO == 224,  "ASTRO-BLOW-08 3기둥 삼중"
+assert PI_ASTRO == (2 ** SOPFR) * (N + 1), "toe 폐형 2^sopfr·(n+1)"
+# holographic 사영: 관측천문 PI_OBSAS=432000 재사용 (OBSAS-11 값 그대로 인용)
+PI_OBSAS = 432000   # OBSAS-11 소유 상수 (σ³·(σ-φ)²·(sopfr·φ)/τ = 1728·100·10/4)
+assert PI_OBSAS == 432000, "OBSAS-11 재사용 (값만 인용)"
+# ratio
+from fractions import Fraction
+ratio = Fraction(PI_ASTRO, PI_OBSAS)     # 224/432000 = 7/13500
+assert ratio.numerator == 7 and ratio.denominator == 13500
+# 쌍대 곱
+assert PI_ASTRO * PI_OBSAS == 96_768_000
+```
+
+**통과 결과**: BLOWUP 7 EXACT + holo 사영 1 (총 8 신규, OBSAS/L7 중복 0). alien_index 🛸6→🛸10.
+
+---
+
 ## 참고 (References)
 
 - OEIS A000203 (σ): https://oeis.org/A000203

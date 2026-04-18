@@ -1,0 +1,49 @@
+{
+  "ts": "2026-04-15",
+  "graph": {
+    "V": 390,
+    "E_directed_count": 126,
+    "E_unique": 97,
+    "b0": 311,
+    "b1": 18,
+    "components": [
+      [
+        "SIG-BT18-205",
+        "SIG-7R-201",
+        "SIG-DD-306",
+        "SIG-QRNG-101",
+        "SIG-7H-206"
+      ]
+    ]
+  },
+  "degree": {
+    "max": 18,
+    "mean": 0.6461538461538462,
+    "median": 0,
+    "isolated_nodes": 303,
+    "top_5_nodes": [
+      [
+        "SIG-META-001",
+        18
+      ],
+      [
+        "SIG-N6-BERN-001",
+        9
+      ],
+      [
+        "SIG-DFS-204",
+        9
+      ],
+      [
+        "SIG-BERN-CAND-K3",
+        8
+      ],
+      [
+        "SIG-7R-401",
+        7
+      ]
+    ],
+    "isolated_share": 0.7769230769230769
+  },
+  "homology_class": "MILD-LOOP"
+}

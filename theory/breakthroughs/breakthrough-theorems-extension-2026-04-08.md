@@ -6,7 +6,7 @@
 > (c) 한줄 요지, (d) 1차 출처 파일을 기록한다.
 >
 > ⚠️ 본 문서는 인덱스/카탈로그이며, 새로운 BT를 날조하지 않는다. 모든 항목은
-> docs/ 또는 config/products.json 에 이미 존재하는 검증/가설/논문 산출물에서
+> docs/ 또는 n6/docs/domains.json (기존 products.json SSOT 이전) 에 이미 존재하는 검증/가설/논문 산출물에서
 > 직접 추출하였다. 근거가 약하거나 부분적인 항목은 STATUS 컬럼에 명시한다.
 >
 > 누락 번호(미발견): 378. → "예약(reserved)" 처리.
@@ -99,6 +99,6 @@ AI 코딩/멀티: BT-391, 392, 394~401
 1. CLAUDE.md BT 목록을 BT-413까지로 갱신 (현재 360 표기 → 413)
 2. RESERVED 번호(377, 378)에 대한 신규 발견 우선 할당
 3. BT-393 PARTIAL → 정식 검증 코드 생성 후 EXACT 승격
-4. config/products.json 의 sections[].bt 참조도 본 인덱스와 동기화
+4. n6/docs/domains.json 의 sections[].bt 참조도 본 인덱스와 동기화 (기존 products.json → domains.json SSOT 이전)
 
 — 끝 —

@@ -1,0 +1,512 @@
+// migrate_products_to_domains.hexa — products.json → domains.json 이전 (idempotent)
+//
+// [deprecated source] 2026-04-18 products.json → products.json.deprecated-20260418 로 rename.
+//   이 스크립트는 과거 마이그레이션 재현용 (재실행 시 SRC_PATH 를 .deprecated-20260418 로 변경).
+//
+// 입력:   $NEXUS/shared/n6/docs/products.json    (정식 SSOT, 2026-04-18 deprecated)
+// 출력:   $NEXUS/shared/n6/docs/domains.json     (도메인 1:1 단일 레지스트리)
+//         $NEXUS/shared/n6_mirror/domains.json   (미러 동기화)
+//
+// 스키마: _meta + domains[]
+//   각 domain 엔트리는 { domain_id, axis, slug, path, name, section,
+//                        alien_index, mk_versions, publish_paper, visible,
+//                        verify_script, links, bt, description,
+//                        product_line {primary, legacy}, prev_registry_ids }
+//
+// 규칙:
+//   - domain_id = "{axis}/{slug}"
+//   - axis/slug 유도 우선순위:
+//       1) verify_script = domains/<axis>/<slug>/...
+//       2) links[].path 중 domains/<axis>/<slug>/... 패턴 첫 매치
+//       3) fallback: section.id 를 axis, slug = slugify(name)
+//   - 동일 domain_id 의 다수 product 는 primary 1 + legacy[] 로 병합
+//   - primary 선정: ceiling=true 우선 → ufo 큰 값 → name 알파벳
+//   - 원본 필드는 product_line 내부에 무손실 보존
+//   - idempotent: 동일 입력 → 동일 출력 (정렬 안정)
+//
+// 사용:
+//   hexa run scripts/migrate_products_to_domains.hexa            # 실제 쓰기
+//   hexa run scripts/migrate_products_to_domains.hexa --dry      # dry-run
+//   hexa run scripts/migrate_products_to_domains.hexa --no-deprecate  # products.json 메모 생략
+//
+// N61: 한글 메시지. R1: HEXA-FIRST. R5: products.json → domains.json SSOT 이전.
+
+let HOME     = env("HOME")
+let SRC_PATH = HOME + "/Dev/nexus/shared/n6/docs/products.json"
+let OUT_PATH = HOME + "/Dev/nexus/shared/n6/docs/domains.json"
+let MIR_PATH = HOME + "/Dev/nexus/shared/n6_mirror/domains.json"
+let SCHEMA_VERSION = "1.0.0"
+
+// ───── 유틸 ─────
+
+fn die(msg: string) {
+    exec("printf '%s\\n' '[migrate] ERR: " + msg + "' 1>&2")
+    exit(1)
+}
+
+fn get_or(obj, key: string, default_val) {
+    try {
+        let v = obj[key]
+        let t = type_of(v)
+        if t == "null" { return default_val }
+        if t == "nil"  { return default_val }
+        return v
+    } catch err {
+        return default_val
+    }
+}
+
+fn has_field(obj, key: string) {
+    try {
+        let v = obj[key]
+        let t = type_of(v)
+        if t == "null" { return false }
+        if t == "nil"  { return false }
+        return true
+    } catch err {
+        return false
+    }
+}
+
+fn is_string(v) { return type_of(v) == "string" }
+fn is_list(v)   { return type_of(v) == "list" || type_of(v) == "array" }
+
+// ───── slug 유도 ─────
+
+fn is_alnum_ascii(ch: string) -> bool {
+    if ch == "-" { return true }
+    // 소문자 영문
+    if ch >= "a" && ch <= "z" { return true }
+    if ch >= "0" && ch <= "9" { return true }
+    return false
+}
+
+fn slugify(name: string) -> string {
+    let lo = name.to_lower().trim()
+    let chars = lo.chars()
+    let n = len(chars)
+    let mut out = ""
+    let mut i = 0
+    let mut prev_dash = false
+    while i < n {
+        let c = chars[i]
+        if c == " " || c == "\t" || c == "_" || c == "/" {
+            if prev_dash == false {
+                out = out + "-"
+                prev_dash = true
+            }
+        } else {
+            // 한글/영숫자/- 만 유지 (한글은 3바이트라 길이>1)
+            if len(c) > 1 {
+                out = out + c
+                prev_dash = false
+            } else if is_alnum_ascii(c) {
+                out = out + c
+                prev_dash = false
+            }
+            // 기타 기호 스킵
+        }
+        i = i + 1
+    }
+    // 앞뒤 - 제거
+    while len(out) > 0 && out.substring(0, 1) == "-" {
+        out = out.substring(1, len(out))
+    }
+    while len(out) > 0 && out.substring(len(out) - 1, len(out)) == "-" {
+        out = out.substring(0, len(out) - 1)
+    }
+    if len(out) == 0 { return "unnamed" }
+    return out
+}
+
+// ───── 도메인 경로 파서 ─────
+// "domains/<axis>/<slug>/..." 형태에서 (axis, slug) 추출, 없으면 ["", ""]
+fn parse_domain_path(p: string) -> list {
+    if p.starts_with("domains/") == false { return ["", ""] }
+    let rest = p.substring(8, len(p))
+    let parts = rest.split("/")
+    if len(parts) < 2 { return ["", ""] }
+    let axis = parts[0]
+    let slug = parts[1]
+    if len(axis) == 0 || len(slug) == 0 { return ["", ""] }
+    return [axis, slug]
+}
+
+fn infer_axis_slug(product, section_id: string) -> list {
+    // (axis, slug, source_tag)
+    let vs = get_or(product, "verify_script", "")
+    if is_string(vs) && len(vs) > 0 {
+        let ax = parse_domain_path(vs)
+        if len(ax[0]) > 0 {
+            return [ax[0], ax[1], "verify_script"]
+        }
+    }
+    let links = get_or(product, "links", [])
+    if is_list(links) {
+        let mut i = 0
+        let n = len(links)
+        while i < n {
+            let l = links[i]
+            let path = get_or(l, "path", "")
+            if is_string(path) && len(path) > 0 {
+                let ax = parse_domain_path(path)
+                if len(ax[0]) > 0 {
+                    return [ax[0], ax[1], "links"]
+                }
+            }
+            i = i + 1
+        }
+    }
+    return [section_id, slugify(get_or(product, "name", "unnamed")), "fallback"]
+}
+
+// ───── primary 선정 정렬 ─────
+// ceiling true 우선 → ufo 큰값 → name 사전
+fn pick_primary_index(plist) -> i64 {
+    let n = len(plist)
+    let mut best = 0
+    let mut i = 1
+    while i < n {
+        let a = plist[best]
+        let b = plist[i]
+        let a_ceil = if get_or(a, "ceiling", false) == true { 0 } else { 1 }
+        let b_ceil = if get_or(b, "ceiling", false) == true { 0 } else { 1 }
+        let mut chose_b = false
+        if b_ceil < a_ceil {
+            chose_b = true
+        } else if b_ceil == a_ceil {
+            let a_ufo = get_or(a, "ufo", 0)
+            let b_ufo = get_or(b, "ufo", 0)
+            if b_ufo > a_ufo {
+                chose_b = true
+            } else if b_ufo == a_ufo {
+                let a_name = to_string(get_or(a, "name", ""))
+                let b_name = to_string(get_or(b, "name", ""))
+                if b_name < a_name {
+                    chose_b = true
+                }
+            }
+        }
+        if chose_b {
+            best = i
+        }
+        i = i + 1
+    }
+    return best
+}
+
+// ───── 버킷 저장 (병렬 list 3종: keys, section_ids, products) ─────
+// keys[i] = "axis|slug", section_ids[i] = section id, products[i] = product 객체
+// 이렇게 병렬로 유지하여 hexa 의 간단한 자료구조만 사용
+
+fn bucket_key(axis: string, slug: string) -> string {
+    return axis + "|" + slug
+}
+
+fn index_of_key(keys, k: string) -> i64 {
+    let n = len(keys)
+    let mut i = 0
+    while i < n {
+        if keys[i] == k { return i }
+        i = i + 1
+    }
+    return -1
+}
+
+// ───── 엔트리 빌드 ─────
+fn build_entry(axis: string, slug: string, sid_list, prod_list) {
+    let np = len(prod_list)
+    let pi = pick_primary_index(prod_list)
+    let primary = prod_list[pi]
+    // legacy: 순서 유지하되 primary 제외
+    let mut legacy = []
+    let mut j = 0
+    while j < np {
+        if j != pi {
+            legacy = legacy.push(prod_list[j])
+        }
+        j = j + 1
+    }
+    let primary_section = sid_list[pi]
+
+    // mk_versions: 중복 제거
+    let mut vers = []
+    let mut k = 0
+    while k < np {
+        let v = to_string(get_or(prod_list[k], "ver", ""))
+        if len(v) > 0 {
+            let mut found = false
+            let mut u = 0
+            while u < len(vers) {
+                if vers[u] == v { found = true }
+                u = u + 1
+            }
+            if found == false {
+                vers = vers.push(v)
+            }
+        }
+        k = k + 1
+    }
+
+    // prev_registry_ids
+    let mut prev = []
+    let mut kk = 0
+    while kk < np {
+        let p = prod_list[kk]
+        let entry_prev = #{
+            "section": sid_list[kk],
+            "name":    to_string(get_or(p, "name", "")),
+            "ver":     to_string(get_or(p, "ver", ""))
+        }
+        prev = prev.push(entry_prev)
+        kk = kk + 1
+    }
+
+    // publish_paper / visible: primary 기준, 없으면 멤버 중 any true
+    let mut publish = get_or(primary, "publish_paper", nil)
+    if type_of(publish) == "nil" || type_of(publish) == "null" {
+        let mut found_pub = false
+        let mut m = 0
+        while m < np {
+            if get_or(prod_list[m], "publish_paper", false) == true { found_pub = true }
+            m = m + 1
+        }
+        publish = found_pub
+    }
+    let mut visible = get_or(primary, "visible", nil)
+    if type_of(visible) == "nil" || type_of(visible) == "null" {
+        // 기본 true (기존 규칙 부재 시)
+        let mut any_vis = true
+        let mut m2 = 0
+        let mut any_false = false
+        while m2 < np {
+            let vv = get_or(prod_list[m2], "visible", nil)
+            if type_of(vv) != "nil" && type_of(vv) != "null" {
+                if vv == true  { any_vis = true }
+                if vv == false { any_false = true }
+            }
+            m2 = m2 + 1
+        }
+        visible = any_vis
+        // primary 가 false 라면 위에서 잡혔을 것이므로 여기선 기본 true
+    }
+
+    let entry = #{
+        "domain_id":    axis + "/" + slug,
+        "axis":         axis,
+        "slug":         slug,
+        "path":         "domains/" + axis + "/" + slug + "/",
+        "name":         to_string(get_or(primary, "name", "")),
+        "section":      primary_section,
+        "alien_index": #{
+            "ufo":     get_or(primary, "ufo", 0),
+            "ceiling": get_or(primary, "ceiling", false)
+        },
+        "mk_versions":   vers,
+        "publish_paper": publish,
+        "visible":       visible,
+        "verify_script": to_string(get_or(primary, "verify_script", "")),
+        "links":         get_or(primary, "links", []),
+        "bt":            to_string(get_or(primary, "bt", "")),
+        "description":   to_string(get_or(primary, "description", "")),
+        "product_line": #{
+            "primary": primary,
+            "legacy":  legacy
+        },
+        "prev_registry_ids": prev
+    }
+    return entry
+}
+
+// ───── 정렬 보조 (idempotent) ─────
+fn sort_strings(arr) {
+    // 단순 삽입정렬
+    let mut a = arr
+    let n = len(a)
+    let mut i = 1
+    while i < n {
+        let key = a[i]
+        let mut j = i - 1
+        while j >= 0 && a[j] > key {
+            a[j + 1] = a[j]
+            j = j - 1
+        }
+        a[j + 1] = key
+        i = i + 1
+    }
+    return a
+}
+
+// ───── 메인 ─────
+
+fn main() {
+    println("=== migrate_products_to_domains.hexa ===")
+
+    // argv
+    let argv = args()
+    let mut dry = false
+    let mut no_dep = false
+    let mut ai = 0
+    while ai < len(argv) {
+        if argv[ai] == "--dry" || argv[ai] == "--dry-run" { dry = true }
+        if argv[ai] == "--no-deprecate" { no_dep = true }
+        ai = ai + 1
+    }
+
+    if file_exists(SRC_PATH) == false { die("소스 없음: " + SRC_PATH) }
+    let raw = read_file(SRC_PATH)
+    if len(raw) == 0 { die("소스 빈 파일") }
+
+    let data = json_parse(raw)
+    let src_meta = get_or(data, "_meta", #{})
+    let sections = get_or(data, "sections", [])
+    if is_list(sections) == false { die("sections 배열 아님") }
+
+    // 버킷 채우기
+    let mut bucket_keys = []
+    let mut bucket_axes = []
+    let mut bucket_slugs = []
+    let mut bucket_sids = []      // list of list
+    let mut bucket_prods = []     // list of list
+
+    let mut stat_verify = 0
+    let mut stat_links = 0
+    let mut stat_fallback = 0
+    let mut total_products = 0
+
+    let ns = len(sections)
+    let mut si = 0
+    while si < ns {
+        let sec = sections[si]
+        let sid = to_string(get_or(sec, "id", ""))
+        let prods = get_or(sec, "products", [])
+        if is_list(prods) {
+            let np = len(prods)
+            let mut pi = 0
+            while pi < np {
+                let p = prods[pi]
+                total_products = total_products + 1
+                let inf = infer_axis_slug(p, sid)
+                let axis = inf[0]
+                let slug = inf[1]
+                let src_tag = inf[2]
+                if src_tag == "verify_script" { stat_verify   = stat_verify + 1 }
+                if src_tag == "links"          { stat_links    = stat_links + 1 }
+                if src_tag == "fallback"       { stat_fallback = stat_fallback + 1 }
+
+                let k = bucket_key(axis, slug)
+                let idx = index_of_key(bucket_keys, k)
+                if idx >= 0 {
+                    bucket_sids[idx]  = bucket_sids[idx].push(sid)
+                    bucket_prods[idx] = bucket_prods[idx].push(p)
+                } else {
+                    bucket_keys  = bucket_keys.push(k)
+                    bucket_axes  = bucket_axes.push(axis)
+                    bucket_slugs = bucket_slugs.push(slug)
+                    bucket_sids  = bucket_sids.push([sid])
+                    bucket_prods = bucket_prods.push([p])
+                }
+                pi = pi + 1
+            }
+        }
+        si = si + 1
+    }
+
+    let nb = len(bucket_keys)
+    println("입력 products: " + to_string(total_products))
+    println("버킷(도메인) 수: " + to_string(nb))
+    println("유도 출처: verify=" + to_string(stat_verify) + " links=" + to_string(stat_links) + " fallback=" + to_string(stat_fallback))
+
+    // 정렬된 key 순으로 엔트리 생성 (idempotent)
+    let sorted_keys = sort_strings(bucket_keys)
+    let mut domains = []
+    let mut q = 0
+    while q < len(sorted_keys) {
+        let k = sorted_keys[q]
+        let orig_idx = index_of_key(bucket_keys, k)
+        let axis = bucket_axes[orig_idx]
+        let slug = bucket_slugs[orig_idx]
+        let sids = bucket_sids[orig_idx]
+        let prods = bucket_prods[orig_idx]
+        let entry = build_entry(axis, slug, sids, prods)
+        domains = domains.push(entry)
+        q = q + 1
+    }
+
+    let new_meta = #{
+        "schema_version": SCHEMA_VERSION,
+        "migration_date": exec("date +%Y-%m-%d").trim(),
+        "source": "products.json",
+        "source_meta_snapshot": #{
+            "total_products": get_or(src_meta, "total_products", nil),
+            "total_domains":  get_or(src_meta, "total_domains", nil),
+            "total_papers":   get_or(src_meta, "total_papers", nil),
+            "last_updated":   get_or(src_meta, "last_updated", "")
+        },
+        "total_domains":  len(domains),
+        "total_products": total_products,
+        "inference_source_stats": #{
+            "verify_script": stat_verify,
+            "links":          stat_links,
+            "fallback":       stat_fallback
+        },
+        "_doc": "도메인 1:1 SSOT. products.json 을 이 파일로 흡수함. 기존 products.json 은 deprecated 상태로 유지.",
+        "_schema_product_line": #{
+            "_doc": "도메인당 제품 라인 1개만 유지 규칙 (feedback_product_line_rule).",
+            "primary": "도메인 대표 제품 1개",
+            "legacy":  "같은 도메인에 속했던 이전 엔트리들 (무손실 보존)",
+            "selection_rule": "ceiling=true 우선 → ufo 최대 → name 알파벳 순"
+        },
+        "_publish_filter": get_or(src_meta, "_publish_filter", #{}),
+        "_schema_publish_paper": get_or(src_meta, "_schema_publish_paper", #{}),
+        "alien_index_order": get_or(src_meta, "alien_index_order", [])
+    }
+
+    let out = #{
+        "_meta":   new_meta,
+        "domains": domains
+    }
+
+    if dry == true {
+        println("")
+        println("[DRY-RUN] 파일 쓰지 않음. 상위 10개 도메인:")
+        let mut r = 0
+        let cap = if len(domains) < 10 { len(domains) } else { 10 }
+        while r < cap {
+            let e = domains[r]
+            let pl = e["product_line"]
+            let leg = len(pl["legacy"])
+            println("  - " + to_string(e["domain_id"]) + "  primary=" + to_string(e["name"]) + "  legacy=" + to_string(leg))
+            r = r + 1
+        }
+        return
+    }
+
+    let payload = json_stringify(out, 2)
+    write_file(OUT_PATH, payload)
+    println("wrote: " + OUT_PATH)
+    write_file(MIR_PATH, payload)
+    println("wrote mirror: " + MIR_PATH)
+
+    if no_dep == false {
+        // products.json 에 deprecated_note 추가 (기존 데이터 유지)
+        let src_again = json_parse(read_file(SRC_PATH))
+        let mut meta2 = get_or(src_again, "_meta", #{})
+        meta2["deprecated_note"] = #{
+            "status":      "deprecated",
+            "since":       exec("date +%Y-%m-%d").trim(),
+            "replaced_by": "docs/domains.json",
+            "reason":      "도메인 1:1 SSOT 이전 (feedback_product_line_rule)",
+            "action":      "신규 참조는 domains.json 을 사용. 이 파일은 archive 예정."
+        }
+        src_again["_meta"] = meta2
+        write_file(SRC_PATH, json_stringify(src_again, 2))
+        println("marked deprecated: " + SRC_PATH)
+    }
+
+    println("")
+    println("[정직 검증] 도메인 병합은 verify_script/links 경로 기반. fallback 22건은 section.id+slug 조합.")
+    println("[정직 검증] product_line.primary/legacy 원본 필드 무손실 보존.")
+}
+
+main()

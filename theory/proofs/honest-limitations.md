@@ -421,8 +421,8 @@ FAB 트랙 셀 라이브러리 fit 점수는 seed=42 로 결정적이지만, 산
 ### 8. alien_index 등록 미이행 — 195→210+ 계획서 상태
 
 EDGE 트랙 alien_index 195→210+ 상향 계획이 수립되었으나, 실제 제품
-레지스트리(products.json / _submission_top48) 편집은 수동 승인 대기
-상태로 남았다. 현 수치는 아직 계획 문서에만 존재한다.
+레지스트리(domains.json / _submission_top48) 편집은 수동 승인 대기
+상태로 남았다. 현 수치는 아직 계획 문서에만 존재한다. (기존 products.json → domains.json SSOT 이전 완료)
 
 - **원인**: R9 dry-run 원칙 + R14 atlas 수동 승인과 동일한 안전장치.
   alien_index 는 외부 노출 메트릭이므로 자동 상향이 금지된다.

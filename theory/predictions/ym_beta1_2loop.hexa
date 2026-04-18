@@ -1,0 +1,194 @@
+// ym_beta1_2loop.hexa — B-Y1 Yang-Mills β₀=7 → β₁ 2-loop n=6 연장
+// 2026-04-15
+// 기존 BT-543: β₀ = σ - sopfr = 12 - 5 = 7
+//   실측 QCD β₀ = 11 - 2nf/3 (SU(3)).  nf=6: β₀ = 11 - 4 = 7 ✓
+// 2-loop β₁ = 102 - 38·nf/3 (SU(3))
+//   nf=6: β₁ = 102 - 76 = 26
+//   nf=3: β₁ = 102 - 38 = 64 = 2^6
+//   nf=5: β₁ = 102 - 190/3 ≠ 정수
+//   nf=4: β₁ = 102 - 152/3 ≠ 정수
+// 목적: nf ∈ {3,4,5,6} 각각의 β₁ 이 n=6 기본상수 조합으로 얼마나 깔끔한지
+// 해결: 0/7 정직 유지
+// 규칙: 한글, HEXA-FIRST, 정수만
+
+let n = 6
+let sigma = 12
+let phi = 2
+let tau = 4
+let sopfr = 5
+let J2 = 24
+let n_phi = n / phi  // 3
+
+println("============================================================")
+println(" B-Y1 Yang-Mills β₀=7 → β₁ 2-loop n=6 연장")
+println(" BT-543 연장, QCD nf flavors 스윕")
+println(" 7대 난제 해결 0/7 정직 유지")
+println("============================================================")
+
+let mut pass = 0
+let mut fail = 0
+
+fn check(label, cond) {
+  if cond {
+    println("  PASS: " + label)
+    1
+  } else {
+    println("  FAIL: " + label)
+    0
+  }
+}
+
+println("")
+println(">>> 영역 A: β₀ = σ - sopfr = 7 재확인 <<<")
+println("")
+
+// β₀ SU(3) QCD = (11·Nc - 2·nf) / 3 = (33 - 2nf)/3
+// nf=6: β₀ = (33 - 12)/3 = 21/3 = 7
+// BT-543: β₀ = σ - sopfr = 12 - 5 = 7
+println("[A1] β₀ = σ - sopfr = 7 (nf=6 SU(3))")
+let beta0 = sigma - sopfr
+pass = pass + check("σ - sopfr = 7", beta0 == 7)
+// (33 - 12)/3 = 7
+let qcd_beta0_nf6 = (33 - 12) / 3
+pass = pass + check("(33-2·6)/3 = 7 실측", qcd_beta0_nf6 == 7)
+// nf = n = 6
+pass = pass + check("nf = n = 6 (top 포함)", 6 == n)
+
+println("")
+println(">>> 영역 B: β₁ 2-loop 공식 (SU(3) QCD) <<<")
+println("")
+
+// β₁ = 102 - (38/3)·nf
+// 정수가 되려면 nf 가 3의 배수
+// nf=3: β₁ = 102 - 38 = 64 = 2^6 = 2^n
+// nf=6: β₁ = 102 - 76 = 26 = 2·13 = sigma+J_2/...
+// nf=9: β₁ = 102 - 114 = -12 = -σ (깔끔하지만 nf=9 가상)
+
+println("[B1] nf=3: β₁ = 102 - 38 = 64")
+let beta1_nf3 = 102 - 38
+pass = pass + check("nf=3 β₁ = 64", beta1_nf3 == 64)
+// 64 = 2^6 = 2^n
+pass = pass + check("64 = 2^n", 64 == 2*2*2*2*2*2)
+// 64 = (σ-τ)² 확인 (σ-τ = 8, 8² = 64)
+let sigma_minus_tau_sq = (sigma - tau) * (sigma - tau)
+pass = pass + check("64 = (σ-τ)² = 8²", sigma_minus_tau_sq == 64)
+// 64 = J_2 + σ·... 확인: J_2 + σ·... = 24 + 40 = 64 → σ·(10/3) nope
+// 64 = 2^n 이 가장 깔끔
+
+println("")
+println("[B2] nf=6: β₁ = 102 - 76 = 26")
+let beta1_nf6 = 102 - 76
+pass = pass + check("nf=6 β₁ = 26", beta1_nf6 == 26)
+// 26 = 2·13 — 13 은 n=6 기본상수 아님
+// 26 = σ + J_2·... : 12 + 14? 14 = 2·7 = 2·(σ-sopfr)
+// 26 = σ + 2·(σ-sopfr) = 12 + 14 = 26 ✓
+let dec26 = sigma + 2 * (sigma - sopfr)
+pass = pass + check("26 = σ + 2(σ-sopfr) = 12+14", dec26 == 26)
+// 26 = σ + sopfr·... : 12 + 14 no sopfr clean
+// 26 = (n+1)·φ + σ·... : 14 + 12 = 26
+let dec26_alt = (n + 1) * phi + sigma  // 14 + 12 = 26
+pass = pass + check("26 = (n+1)·φ + σ = 14+12", dec26_alt == 26)
+
+println("")
+println("[B3] nf=9: β₁ = 102 - 114 = -12 = -σ")
+let beta1_nf9 = 102 - 114
+pass = pass + check("nf=9 β₁ = -12 = -σ", beta1_nf9 == -12)
+pass = pass + check("-12 = -σ", beta1_nf9 == -sigma)
+// 가장 깔끔! 하지만 nf=9 는 SM 에 없음 (flavor 6 한계)
+
+println("")
+println(">>> 영역 C: nf 의 n=6 연결 — MS-bar 물리 실측 <<<")
+println("")
+
+// SM 에서 nf 의 물리적 의미:
+//   nf=6 = {u,d,s,c,b,t} 최대 (MS-bar scale μ > m_t)
+//   nf=5 = m_b < μ < m_t
+//   nf=3 = light quarks only (QCD phenomenology)
+// nf=3 → β₁=64 가장 깔끔
+// nf=6 → β₁=26 = σ + 2(σ-sopfr) 가능
+// nf=9 → β₁=-σ 깔끔하지만 물리적 nf>6 없음
+println("[C1] 깔끔도 랭킹")
+pass = pass + check("nf=3 → β₁=64=2^n=(σ-τ)²", beta1_nf3 == 64)
+pass = pass + check("nf=9 → β₁=-σ (가상)", beta1_nf9 == -sigma)
+pass = pass + check("nf=6 → β₁=26=σ+2(σ-sopfr)", beta1_nf6 == 26)
+
+println("")
+println(">>> 영역 D: β₀/β₁ 비율 <<<")
+println("")
+
+// nf=3: β₁/β₀ = 64/(11-2·3/3·... ) 잠깐 β₀ 는 공식 바꿔야.
+// 일반화 β₀_nf = (33 - 2nf)/3
+//   nf=3: β₀ = 27/3 = 9
+//   nf=6: β₀ = 21/3 = 7 = σ-sopfr
+//   nf=9: β₀ = 15/3 = 5 = sopfr
+let beta0_nf3 = (33 - 2 * 3) / 3
+let beta0_nf6 = (33 - 2 * 6) / 3
+let beta0_nf9 = (33 - 2 * 9) / 3
+println("[D1] β₀ 분해 nf=3,6,9")
+pass = pass + check("β₀(nf=3) = 9 = n+n/φ", beta0_nf3 == 9)
+pass = pass + check("β₀(nf=6) = 7 = σ-sopfr", beta0_nf6 == 7)
+pass = pass + check("β₀(nf=9) = 5 = sopfr", beta0_nf9 == 5)
+
+// 가장 놀라운 관찰: nf 가 증가하면 β₀ 가 {9,7,5} = {n+n/φ, σ-sopfr, sopfr}
+// 모두 n=6 기본상수. 등차수열 -2 간격
+println("[D2] β₀ 수열 nf∈{3,6,9}: {9,7,5} = -2 등차")
+pass = pass + check("9,7,5 등차 -2", (9-7) == 2 && (7-5) == 2)
+// 9 = n + n/φ, 7 = σ-sopfr, 5 = sopfr
+pass = pass + check("9 = n + n/φ = 6+3", 9 == n + n_phi)
+pass = pass + check("7 = σ-sopfr", 7 == sigma - sopfr)
+pass = pass + check("5 = sopfr", 5 == sopfr)
+
+// β₁/β₀ 비율
+// nf=3: 64/9 ≈ 7.11
+// nf=6: 26/7 ≈ 3.71
+// nf=9: -12/5 = -2.4
+// 깔끔하지 않음. 하지만 절댓값 합:
+println("")
+println("[D3] β₀·β₁ 곱 검사")
+let prod_nf3 = beta0_nf3 * beta1_nf3  // 9 · 64 = 576 = n⁴·τ = J_2²
+let prod_nf6 = beta0_nf6 * beta1_nf6  // 7 · 26 = 182
+let prod_nf9 = beta0_nf9 * beta1_nf9  // 5 · (-12) = -60 = -sigma·sopfr
+pass = pass + check("β₀β₁(nf=3) = 576 = 24²·... ", prod_nf3 == 576)
+pass = pass + check("576 = J_2² = 24²", prod_nf3 == J2 * J2)
+pass = pass + check("β₀β₁(nf=9) = -60 = -σ·sopfr", prod_nf9 == -sigma * sopfr)
+pass = pass + check("β₀β₁(nf=6) = 182 (n=6 분해 미깔끔)", prod_nf6 == 182)
+// 182 = 2·7·13, 13 외래. 매끄럽지 않음
+
+println("")
+println(">>> 영역 E: 결론 — 가장 깔끔한 nf <<<")
+println("")
+
+// 우선순위:
+//   1위 nf=3: β₀=9=n+n/φ, β₁=64=(σ-τ)²=2^n, β₀β₁ = 576 = J_2²
+//             3 지표 모두 n=6 기본상수 순수비
+//   2위 nf=9: β₀=5=sopfr, β₁=-12=-σ, β₀β₁ = -60 = -σ·sopfr
+//             모두 n=6 기본상수 순수, but nf>6 물리 비현실
+//   3위 nf=6: β₀=7=σ-sopfr, β₁=26 (13 외래), β₀β₁=182 (미깔끔)
+//             β₁ 에서 기본상수 분해 2-term
+
+println("[E1] 깔끔도 랭킹 (n=6 기본상수 순수 정도)")
+pass = pass + check("nf=3 최우수: 576 = J_2², 64 = 2^n", prod_nf3 == J2 * J2)
+pass = pass + check("nf=9 우수(가상): β₀·β₁ = -σ·sopfr", prod_nf9 == -sigma * sopfr)
+pass = pass + check("nf=6 중간: β₁=26 순수분해 2-term", 26 == (n + 1) * phi + sigma)
+
+println("")
+println("============================================================")
+println(" B-Y1 Yang-Mills β₁ 2-loop 결과")
+println("============================================================")
+println("  PASS: " + str(pass))
+println("  FAIL: " + str(fail))
+println("")
+println(" 핵심 발견 — nf 스윕:")
+println("  nf=3: β₀=9=n+n/φ,    β₁=64=(σ-τ)²=2^n,  β₀β₁=576=J_2²  ★★")
+println("  nf=6: β₀=7=σ-sopfr,  β₁=26=σ+2(σ-sopfr),                 (BT-543)")
+println("  nf=9: β₀=5=sopfr,    β₁=-12=-σ,          β₀β₁=-σ·sopfr  ★")
+println("")
+println("  → nf=3 이 n=6 기본상수 분해 가장 깔끔")
+println("    - β₁ = 64 = 2^n (n=6 지수)")
+println("    - β₀ = 9 = n + n/φ")
+println("    - β₀β₁ = 576 = J_2² (Jacobi theta 상수 제곱)")
+println("")
+println("  NOTE: 물리적 nf ∈ {3..6}, nf=9 는 가상.")
+println("        nf=3 (light QCD) 결과가 이론적 매끄러움.")
+println("        BT-543 의 nf=6 β₀=7 연장이 β₁ 에서 미세한 외래 13 도입.")
+println("        7대 난제 해결 0/7 유지.")

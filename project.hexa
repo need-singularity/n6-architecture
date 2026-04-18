@@ -1,0 +1,35 @@
+// project.hexa — hexa project root marker (0% external-format dep)
+//
+// This file is the sole project marker. Any `hexa` invocation in this
+// directory detects project.hexa and cross-references live rules from
+// $HEXA_LANG/self/attrs/*.hexa — no markdown, no JSON, no external config.
+//
+// New rules added to self/attrs/ auto-propagate. No regeneration needed.
+
+struct ProjectMeta {
+    name: string,
+    hexa_lang: string,
+    ssot_attrs: [string],
+    local_overrides: [string]
+}
+
+fn project_meta() -> ProjectMeta {
+    return ProjectMeta {
+        name: "n6-architecture",
+        hexa_lang: "/Users/ghost/Dev/hexa-lang",
+        ssot_attrs: [
+            "dispatch",
+            "naming",
+            "self_host",
+            "ai_native"
+        ],
+        local_overrides: []
+    }
+}
+
+// Project-local policy fns — add hexa fns here to override or extend
+// core SSOT rules. Example:
+//
+//   fn local_dispatch_threshold_seconds() -> int { return 60 }
+//
+// The hexa tooling reads these at `hexa <cmd>` time and merges with SSOT.

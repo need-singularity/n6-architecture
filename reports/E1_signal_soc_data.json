@@ -1,0 +1,79 @@
+{
+  "ts": "2026-04-15",
+  "n_total_signals": 385,
+  "domain_distribution": {
+    "n_unique": 40,
+    "top_5": [
+      [
+        "META",
+        222
+      ],
+      [
+        "PHYS",
+        74
+      ],
+      [
+        "CONS",
+        59
+      ],
+      [
+        "UNIV",
+        55
+      ],
+      [
+        "ATLAS",
+        35
+      ]
+    ],
+    "top_5_share": 0.5297619047619048,
+    "log_log_slope": -1.317687086554982,
+    "n_fit": 34,
+    "soc_signal": "POWER-LAW"
+  },
+  "id_prefix_distribution": {
+    "n_unique": 39,
+    "top_5": [
+      [
+        "META",
+        55
+      ],
+      [
+        "7Y",
+        27
+      ],
+      [
+        "MEGA",
+        25
+      ],
+      [
+        "ATLAS",
+        24
+      ],
+      [
+        "PHYS",
+        23
+      ]
+    ],
+    "top_5_share": 0.4,
+    "log_log_slope": -0.9168044370731205,
+    "n_fit": 35,
+    "soc_signal": "POWER-LAW"
+  },
+  "grade_distribution": {
+    "M7!": 50,
+    "MN": 28,
+    "M10*": 20,
+    "M10": 138,
+    "M7": 58,
+    "M?": 27,
+    "M9": 57,
+    "M5": 6,
+    "M8": 1
+  },
+  "repo_distribution": {
+    "NX": 85,
+    "CROSS": 56,
+    "N6": 231,
+    "AN": 86
+  }
+}
