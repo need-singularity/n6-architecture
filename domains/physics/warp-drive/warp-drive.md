@@ -2,8 +2,9 @@
 <!-- @doc(type=paper) -->
 ---
 domain: warp-drive
-alien_index_current: 8
+alien_index_current: 11
 alien_index_target: 11
+upgraded: "2026-04-19 🛸8 → 🛸11 (multi-industry · UFO Stage-4 완성 + atlas WARP-01~07 등재)"
 requires:
   - to: room-temp-sc
     alien_min: 10
