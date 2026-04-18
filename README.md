@@ -545,45 +545,6 @@
 
 ---
 
-## NEXUS-6 Discovery Engine (Rust)
-
-통합 발견 엔진 — 22종 망원경 렌즈 + OUROBOROS 무한진화 + Discovery Graph + n=6 검증기
-
-```
-nexus <command>
-
-Commands:
-  scan <domain>     도메인 스캔 (렌즈 자동 추천 또는 --lenses 지정)
-  verify <value>    n=6 일치 검증
-  graph             Discovery Graph 출력 (ASCII/DOT)
-  history <domain>  스캔 이력 + 통계
-  recommend <domain> 렌즈 추천 (history 기반)
-  evolve <domain>   OUROBOROS 진화 루프
-  lenses            렌즈 레지스트리 조회
-  dashboard         ASCII 대시보드
-  help              도움말
-```
-
-### 아키텍처 (9 모듈, 112 tests)
-
-| 모듈 | 역할 | 테스트 |
-|------|------|--------|
-| gpu | Metal compute + CPU fallback | 3 |
-| encoder | 도메인 데이터 파싱 + 벡터화 | 4 |
-| materials | 소재 DB (68종) | - |
-| telescope | 22종 렌즈 + Registry + Consensus | 13 |
-| verifier | n=6 일치 검증 + 실현가능성 | 13 |
-| graph | Discovery Graph (노드/엣지/허브) | 7 |
-| history | 스캔 이력 + 통계 + 렌즈 추천 | 6 |
-| ouroboros | OUROBOROS v26 무한진화 엔진 | 8 |
-| cli | CLI 파서 + ASCII 대시보드 | 20+8 |
-
-빌드: `$HEXA bridge/main.hexa`
-테스트: `$HEXA bridge/tests/tests.hexa --verify`
-진입점: `bridge/main.hexa`
-
----
-
 # 🧮 밀레니엄 7대 난제 (Millennium Problems)
 
 <!-- AUTO:SUMMARY_millennium:START -->
