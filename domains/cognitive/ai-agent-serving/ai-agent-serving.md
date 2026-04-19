@@ -3,6 +3,8 @@ domain: ai-agent-serving
 requires:
   - to: ai-inference-cost
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, MATRIX, PREDICTIONS, PERF, ARCH, DATAFLOW, COMPARE-3, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # 에이전트 서빙 연구 프로그램 (Anthropic Fellows 2026) [v3-특이점]
 
 ## S1 WHY (왜 에이전트 서빙이 중요한가)

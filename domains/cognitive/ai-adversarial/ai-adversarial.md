@@ -4,6 +4,8 @@ requires:
   - to: ai-alignment
   - to: ai-interpretability
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, IDEAS, VALIDATION, PREDICTIONS, COMPARE-DETAIL, ARCHITECTURE, FLOW-DETAIL, UPGRADE, METHOD], strict=false, order=sequential, prefix="S") -->
+
 # AI 적대적 강건성 연구 (Anthropic Fellows 2026)
 
 ## S1 WHY (왜 적대적 강건성인가 -- 배포 안전의 핵심)

@@ -4,6 +4,8 @@ requires:
   - to: ai-welfare
   - to: ai-interpretability
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, MATRIX, PREDICTIONS, PERF, ARCH, DATAFLOW, COMPARE-3, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # AI 의식 연구 프로그램 (Anthropic Fellows 2026) — v3-특이점 + Anima 통합
 
 ## S1 WHY (왜 AI 의식 연구가 중요한가)

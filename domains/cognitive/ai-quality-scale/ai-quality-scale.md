@@ -3,6 +3,8 @@ domain: ai-quality-scale
 requires:
   - to: ai-training-cost
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, VALIDATION, PREDICTIONS, PERFORMANCE, ARCHITECTURE, DATAFLOW, TOOLING, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # 품질 유지 경량화 연구 프로그램 (Anthropic Fellows 2026) [v3-특이점]
 
 ## S1 WHY (왜 품질 유지 경량화인가)

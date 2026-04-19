@@ -3,6 +3,8 @@ domain: ai-inference-cost
 requires:
   - to: ai-training-cost
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, MATRIX, PREDICTIONS, PERF, ARCH, DATAFLOW, COMPARE-3, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # 추론/서빙 비용 절감 연구 프로그램 (Anthropic Fellows 2026) [v2][v3]
 
 ## S1 WHY (왜 추론 비용 절감이 중요한가)

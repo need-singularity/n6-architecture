@@ -5,6 +5,8 @@ requires:
   - to: ai-inference-cost
   - to: ai-quality-scale
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, MATRIX, PREDICTIONS, PERF, ARCH, DATAFLOW, COMPARE-3, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # 엔터프라이즈 커스텀 연구 프로그램 (Anthropic Fellows 2026) [v2 돌파]
 
 ## S1 WHY (왜 엔터프라이즈 커스텀이 중요한가)

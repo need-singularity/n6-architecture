@@ -4,6 +4,8 @@ requires:
   - to: ai-quality-scale
   - to: ai-training-cost
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, MATRIX, PREDICTIONS, PERF, ARCH, DATAFLOW, COMPARE-3, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # AI 평가 파이프라인 연구 프로그램 (Anthropic Fellows 2026) [v2 돌파]
 
 ## S1 WHY (왜 평가 파이프라인이 중요한가)

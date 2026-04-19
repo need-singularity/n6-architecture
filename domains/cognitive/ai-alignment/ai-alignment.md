@@ -4,6 +4,8 @@ requires:
   - to: ai-interpretability
   - to: cognitive-architecture
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, KEY, MATRIX, PREDICTIONS, PERF, ARCH, DATAFLOW, COMPARE-3, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # AI 정렬 연구 (AI Safety Alignment)
 
 ## S1 WHY (왜 정렬이 중요한가)

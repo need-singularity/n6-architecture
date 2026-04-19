@@ -4,6 +4,8 @@ requires:
   - to: ai-inference-cost
   - to: ai-quality-scale
 ---
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, IDEAS, VALIDATION, PREDICTIONS, PERF, ARCH, DATAFLOW, TOOLING, METHODOLOGY], strict=false, order=sequential, prefix="S") -->
+
 # 학습 비용 절감 연구 프로그램 (Anthropic Fellows 2026) [v2][v3]
 
 ## S1 WHY (왜 이 문제가 중요한가)
