@@ -5772,7 +5772,7 @@
       "section_heading": "반도체 (Chip)",
       "icon": "⚡",
       "ceiling": false,
-      "visible": true,
+      "visible": false,
       "type": "product",
       "description": "반도체 차단기 mk1 — SiC MOSFET + DB HiTek 180nm BCD + SK키 Σ-Δ + STM32 4-파운드리 SiP, 600ns 차단 / $35 BOM / 12개월 ₩4억 로드맵 (대중 공개 공정 기반)",
       "links": [
