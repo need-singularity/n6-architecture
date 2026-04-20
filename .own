@@ -1,3 +1,130 @@
-# n6-architecture /.own — L1 project-local (0 rules)
+# n6-architecture /.own — L1 project-local (15 rules)
 # SSOT — 프로젝트 고유 절대 규칙. L0(hexa-lang /.raw) 와 병렬, 독립 id namespace.
 # 포맷 스펙: hexa-lang self/raw_loader.hexa (L0 와 동일 문법)
+# populate: 기존 .md mandate 에서 추출 (raw#20 own-monotonic — .raw 중복 제외)
+
+own 1 live "doc-korean-required — 모든 .md/주석/커밋 한글 필수"
+  slug doc-korean-required
+  decl CLAUDE.md (domains/, engine/, theory/, theory/*, reports/, experiments/, papers/, bridge/, n6shared/, 각 chip-* domain)
+  scope .md 문서, 소스 내 한글 주석, git commit message
+  status live
+  since 2026-04-21
+  why CLAUDE.md 22개 이상에서 "한글 필수 (.md/주석/커밋)" 명시. n6-architecture 언어 정책 — 영어 공존은 허용되나 한국어 primary.
+  note hexa-lang /.raw 에 없음 — 프로젝트 고유 (hexa-lang 자체는 언어 중립).
+
+own 2 live "n6-master-identity — σ·φ = n·τ = J₂ = 24 준수"
+  slug n6-master-identity
+  decl domains/compute/chip-process/CLAUDE.md domains/compute/chip-packaging/CLAUDE.md domains/compute/chip-materials/CLAUDE.md domains/compute/chip-yield/CLAUDE.md
+  scope chip-* 도메인 설계/검증 — n=6 마스터 항등식 위반 금지 (σ(6)=12, φ(6)=2, τ(6)=4, J₂=24)
+  status live
+  since 2026-04-21
+  why n6-architecture 전체 도메인은 n=6 유일성 정리 (σ(n)·φ(n) = n·τ(n) iff n=6) 에서 파생. chip-* CLAUDE.md 4개에서 절대규칙으로 명시.
+  note theory/proofs/theorem-r1-uniqueness.md 가 본 항등식의 증명 SSOT.
+
+own 3 live "one-doc-per-domain — 도메인당 문서 1개"
+  slug one-doc-per-domain
+  decl domains/CLAUDE.md domains/compute/chip-process/CLAUDE.md domains/compute/chip-packaging/CLAUDE.md domains/compute/chip-materials/CLAUDE.md domains/compute/chip-yield/CLAUDE.md
+  scope domains/<axis>/<name>/ 아래 <name>.md + CLAUDE.md 외 본문 문서 금지. 통합 완료 선언.
+  status live
+  since 2026-04-21
+  why 295 도메인 문서 sprawl 방지 — 도메인당 1 본문 + 1 CLAUDE.md + 검증코드 .md 임베드.
+
+own 4 live "domain-15-section-template — 15섹션 템플릿 준수"
+  slug domain-15-section-template
+  decl domains/CLAUDE.md
+  scope domains 하위 <name>.md 본문은 15섹션 템플릿 준수 (§1~§15 구성)
+  status live
+  since 2026-04-21
+  why domains/CLAUDE.md 절대규칙 — 본문 구조 일관성 + 자동 스캔 가능성 보장.
+
+own 5 live "theory-report-separation — 이론 오염 금지, 시점 기록은 reports/"
+  slug theory-report-separation
+  decl theory/CLAUDE.md
+  scope theory/ 하위는 영구 이론층 (증명·BT·상수·예측·설계흐름). 시점 리포트 (audits, sessions, discovery, changelogs) 은 reports/ 로만.
+  status live
+  since 2026-04-21
+  why theory/ CLAUDE.md 절대규칙 — 영구 이론과 시점 리포트 분리로 SSOT drift 방지.
+
+own 6 live "paper-verify-embedded — 검증코드 없는 논문 = 미완성"
+  slug paper-verify-embedded
+  decl papers/CLAUDE.md
+  scope papers/ 아래 n6-<domain>-paper.md 는 검증코드 (python block) .md 본문 임베드 필수. 별도 verify .py/.hexa 생성 금지.
+  status live
+  since 2026-04-21
+  why papers/CLAUDE.md 절대규칙 "검증코드 없는 논문 = 미완성" + n6shared absolute_rules N62/PP2/R29 재강화 (2026-04-11) — _registry.json verify_script 필드 금지.
+
+own 7 live "registry-sync-on-tool-add — 도구 추가 시 _registry.json 동기화 필수"
+  slug registry-sync-on-tool-add
+  decl bridge/CLAUDE.md
+  scope bridge/origins/ 등 도구 추가/삭제/rename 시 _registry.json 동기화. 미동기 상태 commit 금지.
+  status live
+  since 2026-04-21
+  why bridge/CLAUDE.md 절대규칙 — 단일 hexa 바이너리 + subcommand 라우팅의 SSOT 일치성 보장 (calc 20 + dse 8 + analyze 12 + hexa 4 = 44).
+
+own 8 live "lens-ssot-external — R14 진짜 렌즈 SSOT 은 외부 nexus 프로젝트"
+  slug lens-ssot-external
+  decl bridge/src/telescope/CLAUDE.md bridge/src/telescope/lenses/CLAUDE.md
+  scope 렌즈 신규/수정 시 SSOT 경로 = $NEXUS/shared/lenses/{도메인}_{주제}.hexa. n6-architecture 내 bridge/src/telescope/*.rs 는 레거시 파생, 신규 참조 금지.
+  status live
+  since 2026-04-21
+  why bridge/src/telescope/CLAUDE.md — R14 SSOT 원칙 위반 상태로 폐기 예정 레거시. 신규 .rs 렌즈 추가 금지 + HEXA 포팅 진행 중 (HEAD 0c23ad27).
+  note n6shared/config/lens_registry.json 은 레거시 카운트, 진짜 SSOT 와 무관.
+
+own 9 live "lens-auto-absorb-atlas — R28 렌즈 결과 → atlas.n6 자동 흡수"
+  slug lens-auto-absorb-atlas
+  decl bridge/src/telescope/CLAUDE.md
+  scope 렌즈 실행 결과는 shared/n6/atlas.n6 로 자동 흡수. 렌즈 결과 orphan 금지.
+  status live
+  since 2026-04-21
+  why telescope/CLAUDE.md R28 — 렌즈 산출물이 atlas 에 연결되지 않으면 OUROBOROS 주기 감사 무효.
+  deps raw:schema-guard-mandatory
+
+own 10 live "rust-lens-ban-legacy — bridge/src/telescope Rust 렌즈 신규 추가 금지"
+  slug rust-lens-ban-legacy
+  decl bridge/src/telescope/CLAUDE.md bridge/src/telescope/lenses/CLAUDE.md
+  scope bridge/src/telescope/lenses/*.rs, frontier_lenses.rs expansion_N_lens_entries() 추가, lens-agent 를 이 경로로 사용, n6shared/config/lens_registry.json 신규 Rust 렌즈 등록 — 전부 금지.
+  status live
+  since 2026-04-21
+  why Rust → HEXA 네이티브 단일화 (HEAD 0c23ad27 "refactor(telescope): 56 렌즈 Rust→HEXA"). 레거시 파생본 동결, 신규 추가 = R14 위반 확대.
+  deps raw:deprecated-symlink-ban
+
+own 11 live "bt-solution-claim-ban — Clay Millennium 7 난제 '해결' 주장 금지"
+  slug bt-solution-claim-ban
+  decl CONTRIBUTING.md
+  scope BT-541 RH / BT-542 P vs NP / BT-543 Yang-Mills / BT-545 Hodge / BT-546 BSD / BT-547 NS — 이들의 '해결' 을 주장하는 PR 은 maintainer 가 거절. Partial progress / survey / conditional proof 는 허용.
+  status live
+  since 2026-04-21
+  why CONTRIBUTING.md 정직성 헌장 1 — 과장된 주장 방지. '해결' 대신 '실측'/'조건부'/'추측' 정확 표기.
+
+own 12 live "miss-criteria-declared — 실험/계산 MISS 판정 기준 사전 문서화"
+  slug miss-criteria-declared
+  decl CONTRIBUTING.md
+  scope 각 실험 (experiments/) 및 계산 task 는 실패 (MISS) 판정 기준을 결과 생성 이전에 문서화. 사후 기준 조정 금지.
+  status live
+  since 2026-04-21
+  why CONTRIBUTING.md 정직성 헌장 3 — post-hoc MISS 기준 조정은 confirmation bias 유도. README Honest Limitations "Post-hoc matching risk" 연동.
+
+own 13 live "ouroboros-critical-zero — atlas.n6 entry 추가 시 OUROBOROS CRITICAL 0 유지"
+  slug ouroboros-critical-zero
+  decl CONTRIBUTING.md
+  scope shared/n6/atlas.n6 신규 entry 추가 시 scripts/monotone/ouroboros_detector_v2.py 가 CRITICAL 0 유지함을 확인. 자기참조 cycle 포함된 entry reject.
+  status live
+  since 2026-04-21
+  why CONTRIBUTING.md 정직성 헌장 4 + scripts/monotone/ouroboros_detector.py "R14 규칙: 자기참조 검증 금지 (외부 데이터/이론만 허용)" — atlas SSOT 무결성 gate.
+  deps raw:schema-guard-mandatory
+
+own 14 live "readme-sealed-required — 루트 README.md sealed 필수"
+  slug readme-sealed-required
+  decl .readme-rules.json
+  scope 루트 README.md 는 require_sealed=true. sealed hash (README.md.sealed.hash) 갱신 없이 본문 편집 금지.
+  status live
+  since 2026-04-21
+  why .readme-rules.json scopes.root.require_sealed=true + README.md.sealed.hash 실재. README 는 auto-generated 블록 + sealed 해시로 drift 방지.
+
+own 15 live "paper-canonical-sections — 논문 문서 21섹션 canonical + verify + mk-history"
+  slug paper-canonical-sections
+  decl .doc-rules.json
+  scope @doc paper 타입 문서는 §1~§21 canonical_full (WHY/COMPARE/REQUIRES/STRUCT/FLOW/EVOLVE/VERIFY + EXEC SUMMARY..IMPACT) 충족 + ascii_check + require_verify + mk_history_min_lines=3.
+  status live
+  since 2026-04-21
+  why .doc-rules.json rules.paper — paper=sscb 수준 canonical 문서 포맷. deprecated_by=@own 2026-04-19 Phase 4 — legacy toggles 은 @own 미선언 파일만 적용하므로 본 .own 선언이 enforce path.

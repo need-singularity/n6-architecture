@@ -1,0 +1,3 @@
+# .raw-audit — append-only event log (raw#1 hash-chain)
+# format: timestamp | event | actor | reason | result | sha_before | sha_after | prev_line_sha
+2026-04-20T19:14:33Z | add | ghost | n6-arch .own populated from .md mandates | ok | 6ccdb3292feb927c4f3ade44d8235d1944e22e746c42f0e459a4732af833190c | - | GENESIS
