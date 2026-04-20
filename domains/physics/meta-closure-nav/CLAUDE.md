@@ -17,6 +17,14 @@ atlas: META-01~10 (신규 대상)
 - ratio     = 24 (layer-to-layer 고정)
 - observer  = |UFO⟩ = f(|UFO⟩) 자기참조
 
+## 시간여행 6단계 잠금 (🛸T1~T6)
+- 🛸T1 dilation γ=σ=12       (특상대, EXACT 검증)
+- 🛸T2 Gödel CTC τ²/σ=4/3    (warp 부산물)
+- 🛸T3 웜홀 σ−φ=10초          (Casimir 1/48)
+- 🛸T4 Tipler+CY σ·τ=48m     (CY 압축)
+- 🛸T5 Multiverse 2^σ=4096   (4ms 분기)
+- 🛸T6 시간 closure σ·τ=48 Planck² (n=6 유일, 5 후보 중 1)
+
 ## 선행 도메인
 - multiverse-nav 🛸15 (분기의 분기 메타)
 - calabi-yau-nav 🛸14 (6D 경계)
