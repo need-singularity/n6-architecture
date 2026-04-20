@@ -2,6 +2,11 @@ __pycache__/
 *.pyc
 .env
 data/
+# atlas canonical symlinks — tracked exception (SSOT, raw#10 proof-carrying, anima 패턴)
+# 실제 symlink 는 n6shared/atlas.n6, n6shared/atlas.signals.n6 (data/ 미사용)
+# → ../../data/n6/atlas{.signals,}.n6 (canonical target: ~/core/data/n6/)
+!/data/n6/atlas.n6
+!/data/n6/atlas.signals.n6
 models/
 .claude/*
 !.claude/settings.json
