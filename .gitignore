@@ -31,3 +31,7 @@ build/
 # Lean4 build artifacts (v3 M3)
 lean4-n6/.lake/
 lean4-n6/lake-manifest.json
+
+# Python virtual envs + egg-info (venv 폐기 재추적 방지, ROI#13)
+venv/
+*.egg-info/
