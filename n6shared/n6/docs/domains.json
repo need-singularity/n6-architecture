@@ -1,9 +1,9 @@
 {
   "_meta": {
     "schema": "n6_domains/2.0",
-    "updated": 1776700800,
-    "note": "마이그레이션 from papers/_products.json (2026-04-19). SSOT 단일화. + tabletop-antimatter 독립 도메인 분리 (2026-04-19).",
-    "total_domains": 299
+    "updated": 1776691731,
+    "note": "마이그레이션 from papers/_products.json (2026-04-19). SSOT 단일화. + tabletop-antimatter 독립 도메인 분리 (2026-04-19). + hexa-6stage + 9 선행도메인 15건 추가 (2026-04-20).",
+    "total_domains": 194
   },
   "entries": [
     {
@@ -5839,6 +5839,501 @@
         {
           "label": "문서",
           "path": "domains/energy/tabletop-fusion/tabletop-fusion.md"
+        }
+      ]
+    },
+    {
+      "id": "P-175",
+      "axis": "compute",
+      "name_ko": "반도체 소재",
+      "product_line": "HEXA-MATERIALS",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-materials/chip-materials.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-175-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 C Z=6 + Diamond 2160 W/mK + SiC/GaN/InP σ=6 wafer + 레지스트 τ=4 층, Python검증PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-materials/chip-materials.md"
+        }
+      ]
+    },
+    {
+      "id": "P-176",
+      "axis": "compute",
+      "name_ko": "반도체 공정",
+      "product_line": "HEXA-PROCESS",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-process/chip-process.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-176-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 EUV 0.33→High-NA 0.55 + ALD J₂=24 cycle + CMP σ=12 DoE + 공정 1500→288 단계 (81%감소), Python검증PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-process/chip-process.md"
+        }
+      ]
+    },
+    {
+      "id": "P-177",
+      "axis": "compute",
+      "name_ko": "반도체 패키징",
+      "product_line": "HEXA-PACKAGING",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-packaging/chip-packaging.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-177-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 TSV φ=2μm + μbump σ²=144/mm² + UCIe σ·J₂=288 레인 + HBM σ=12단, Python검증PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-packaging/chip-packaging.md"
+        }
+      ]
+    },
+    {
+      "id": "P-178",
+      "axis": "compute",
+      "name_ko": "반도체 수율",
+      "product_line": "HEXA-YIELD",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-yield/chip-yield.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-178-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 D₀/σ=0.00167 + σ=12 spare + τ=4 DRC + fuse σ²=144 + WSI 5%→95%, Python검증PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-yield/chip-yield.md"
+        }
+      ]
+    },
+    {
+      "id": "P-179",
+      "axis": "compute",
+      "name_ko": "EDA 설계자동화",
+      "product_line": "HEXA-EDA",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-eda/chip-eda.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-179-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 DSE 2400=6×5×4×5×4 + τ=4 synthesis + σ=12 routing + τ=4 STA corner, 13/13 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-eda/chip-eda.md"
+        }
+      ]
+    },
+    {
+      "id": "P-180",
+      "axis": "compute",
+      "name_ko": "검증·테스트",
+      "product_line": "HEXA-VERIFY",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-verify-test/chip-verify-test.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-180-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 커버리지 1-1/(σ·(σ-φ)²)=99.917% + UVM τ=4 계위 + ATE σ·J₂=288 핀 병렬, 12/12 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-verify-test/chip-verify-test.md"
+        }
+      ]
+    },
+    {
+      "id": "P-181",
+      "axis": "compute",
+      "name_ko": "열·전원",
+      "product_line": "HEXA-THERMAL",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-thermal-power/chip-thermal-power.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-181-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 TDP Egyptian 1/2+1/3+1/6=1 (Fraction 정확) + τ=4 cooling + σ=12 PDN, 13/13 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-thermal-power/chip-thermal-power.md"
+        }
+      ]
+    },
+    {
+      "id": "P-182",
+      "axis": "compute",
+      "name_ko": "인터커넥트",
+      "product_line": "HEXA-INTERCONNECT",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-interconnect/chip-interconnect.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-182-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 UCIe σ·J₂=288 × 48 Gbps=13.8 TB/s + λ=σ=12 WDM + σ²=144 NoC hex mesh, 13/13 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-interconnect/chip-interconnect.md"
+        }
+      ]
+    },
+    {
+      "id": "P-183",
+      "axis": "compute",
+      "name_ko": "HBM 메모리",
+      "product_line": "HEXA-HBM",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-hbm/chip-hbm.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-183-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 스택 σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, 14/14 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-hbm/chip-hbm.md"
+        }
+      ]
+    },
+    {
+      "id": "P-184",
+      "axis": "compute",
+      "name_ko": "HEXA-1 Digital",
+      "product_line": "HEXA-1 DIGITAL",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-design/hexa-1-digital.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-184-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 σ²=144 SM × τ=4 파이프 × φ=2 이슈 = 288 MAC/cycle + 288 TOPS/W (H100 4.8×)",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-design/hexa-1-digital.md"
+        }
+      ]
+    },
+    {
+      "id": "P-185",
+      "axis": "compute",
+      "name_ko": "HEXA-2 PIM",
+      "product_line": "HEXA-2 PIM",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-design/hexa-2-pim.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-185-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 DRAM row buffer σ·J₂=288 ALU/bank + 캐시 τ=4→φ=2 von Neumann 해체 + 60 TOPS/W",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-design/hexa-2-pim.md"
+        }
+      ]
+    },
+    {
+      "id": "P-186",
+      "axis": "compute",
+      "name_ko": "HEXA-3 3D Stack",
+      "product_line": "HEXA-3 3D",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-design/hexa-3d-stack.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-186-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 σ=12 wafer + φ=2μm TSV + σ·J₂=288 수직 레인/mm² + 144× 밀도",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-design/hexa-3d-stack.md"
+        }
+      ]
+    },
+    {
+      "id": "P-187",
+      "axis": "compute",
+      "name_ko": "HEXA-4 Photonic",
+      "product_line": "HEXA-4 PHOTONIC",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-design/hexa-photonic.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-187-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 λ=σ=12 WDM + MZI σ²=144 유니터리 + σ·J₂·sopfr=1.44 TB/s/die, 13/13 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-design/hexa-photonic.md"
+        }
+      ]
+    },
+    {
+      "id": "P-188",
+      "axis": "compute",
+      "name_ko": "HEXA-5 Wafer-scale",
+      "product_line": "HEXA-5 WAFER",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-design/hexa-wafer.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-188-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 σ²=144 타일 + σ=12 spare row+col + 2D torus τ=4 홉 + 48 GB SRAM, 12/12 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-design/hexa-wafer.md"
+        }
+      ]
+    },
+    {
+      "id": "P-189",
+      "axis": "compute",
+      "name_ko": "HEXA-6 Superconducting",
+      "product_line": "HEXA-6 SC",
+      "mk_current": "mk1",
+      "mk_target": "mk_infinity",
+      "alien_now": 10,
+      "alien_target": 10,
+      "path": "domains/compute/chip-design/hexa-superconducting.md",
+      "requires": [],
+      "history": [
+        {
+          "mk": "mk1",
+          "tag": "P-189-hexa-6stage",
+          "at": 1776691731
+        }
+      ],
+      "section_id": "chip",
+      "section_title": "칩/반도체",
+      "section_heading": "칩 / 반도체 (Chip)",
+      "icon": "💻",
+      "ceiling": true,
+      "visible": true,
+      "type": "product",
+      "description": "🛸10 100 GHz RSFQ × τ=4 파이프 + Egyptian cryo 3-stage + 10W @ 100 GHz (vs H100 700W@2GHz), 15/15 PASS",
+      "links": [
+        {
+          "label": "문서",
+          "path": "domains/compute/chip-design/hexa-superconducting.md"
         }
       ]
     }
