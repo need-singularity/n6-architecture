@@ -57,7 +57,8 @@ const MK2_TOTAL_LATENCY_S: i64 = 420     // 6 라운드 = 420초
 const MK3_TARGET_LATENCY_S: i64 = 70     // 6 라운드 = 70초 (6× 목표)
 
 // atlas.n6 경로 (DRY_RUN 시 로그만 찍음)
-const ATLAS_PATH: string = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+// canonical: $HOME/core/data/n6/atlas.n6 (override with N6_ATLAS env)
+const ATLAS_PATH: string = env("N6_ATLAS") || (env("HOME") + "/core/data/n6/atlas.n6")
 
 // ═══════════════════════════════════════════════════════════
 // ─── 2. L0: 입력 관문 (Mk.I τ=4 재사용, stateless) ───

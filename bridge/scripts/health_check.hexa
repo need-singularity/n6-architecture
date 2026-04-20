@@ -33,10 +33,11 @@ let DAEMON_LOG = NEXUS_STATE + "/daemon.log"
 let NOTIFY_LOG = NEXUS_STATE + "/notifications.log"
 let LAUNCHD_LABEL = "com.nexus.growth"
 let PLIST_USER = HOME + "/Library/LaunchAgents/" + LAUNCHD_LABEL + ".plist"
-let PLIST_SRC = HOME + "/Dev/nexus/shared/launchd/" + LAUNCHD_LABEL + ".plist"
-let SCRIPT_DIR = HOME + "/Dev/n6-architecture/bridge/scripts"
+// TODO: canonical relocation pending — currently fallback to $HOME/shared/launchd/
+let PLIST_SRC = HOME + "/shared/launchd/" + LAUNCHD_LABEL + ".plist"
+let SCRIPT_DIR = HOME + "/core/n6-architecture/bridge/scripts"
 let DAEMON_SCRIPT = SCRIPT_DIR + "/nexus_growth_daemon.hexa"
-let HEXA_BIN = HOME + "/Dev/nexus/shared/bin/hexa"
+let HEXA_BIN = env("HEXA_BIN") || (HOME + "/core/hexa-lang/hexa")
 
 // ─── CLI 파싱 ─────────────────────────────────────────────────────
 let argv = args()

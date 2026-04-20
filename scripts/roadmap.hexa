@@ -9,8 +9,9 @@ fn main() {
     let a = args()
     let cmd = if len(a) >= 3 { a[2] } else { "status" }
 
-    let g = env("HOME") + "/Dev/nexus/shared/harness/roadmap_guard.hexa"
-    let h = env("HOME") + "/Dev/hexa-lang/hexa"
+    // TODO: canonical relocation pending — currently fallback to $HOME/shared/
+    let g = env("HOME") + "/shared/harness/roadmap_guard.hexa"
+    let h = env("HEXA_BIN") || (env("HOME") + "/core/hexa-lang/hexa")
 
     let call = h + " " + g + " " + cmd + " --project n6-architecture"
     let rc = to_string(exec(call))

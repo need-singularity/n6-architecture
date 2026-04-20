@@ -76,8 +76,8 @@ fn main() {
         ai = ai + 1
     }
 
-    // atlas.n6 로드
-    let ATLAS = env("HOME") + "/Dev/nexus/shared/n6/atlas.n6"
+    // atlas.n6 로드 — canonical: $HOME/core/data/n6/atlas.n6 (override with N6_ATLAS)
+    let ATLAS = env("N6_ATLAS") || (env("HOME") + "/core/data/n6/atlas.n6")
     println("atlas 경로: " + ATLAS)
     let raw = read_file(ATLAS)
     let lines = raw.split("\n")

@@ -65,10 +65,13 @@ fn seed_from_urandom() -> int {
 // bootstrap but lets the comparison generate K independent trajectories.
 fn anu_hex_once() -> string {
     let home = env_var("HOME")
-    let anu_src = home + "/Dev/nexus/shared/sim_bridge/godel_q/anu_source.hexa"
+    // TODO: canonical relocation pending — currently fallback to $HOME/shared/sim_bridge/
+    let anu_src = home + "/shared/sim_bridge/godel_q/anu_source.hexa"
+    let hexa_bin = env_var("HEXA_BIN")
+    let hexa_cmd = if hexa_bin.len() > 0 { hexa_bin } else { home + "/core/hexa-lang/hexa" }
     let mut hex = ""
     try {
-        hex = to_string(exec("HEXA_LOCAL=1 '" + home + "/Dev/nexus/shared/bin/hexa' '" + anu_src + "' hex 2>/dev/null")).trim()
+        hex = to_string(exec("HEXA_LOCAL=1 '" + hexa_cmd + "' '" + anu_src + "' hex 2>/dev/null")).trim()
     } catch e { hex = "" }
     hex
 }

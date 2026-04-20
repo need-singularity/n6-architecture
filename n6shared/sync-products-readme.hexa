@@ -19,8 +19,9 @@
 
 // ───────── 상수 (R2: 하드코딩 최소화, 환경변수 우선) ─────────
 let HOME = exec("printenv HOME").trim()
-let DEFAULT_PRODUCTS = HOME + "/Dev/nexus/shared/n6/docs/products.json"
-let DEFAULT_README   = HOME + "/Dev/n6-architecture/README.md"
+// TODO: canonical relocation pending — currently fallback to $HOME/shared/
+let DEFAULT_PRODUCTS = HOME + "/shared/n6/docs/products.json"
+let DEFAULT_README   = HOME + "/core/n6-architecture/README.md"
 
 // ───────── 유틸: 에러 출력 + 종료 ─────────
 fn die(msg: string) {

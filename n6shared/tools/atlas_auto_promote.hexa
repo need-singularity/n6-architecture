@@ -18,9 +18,10 @@
 # ══════════════════════════════════════════════════════════════════
 
 # ── 상수 정의 ──────────────────────────────────────────────────
-let ATLAS_PATH = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
-let GRAPH_PATH = "/Users/ghost/Dev/n6-architecture/n6shared/discovery_graph.json"
-let LOG_PATH   = "/Users/ghost/Dev/n6-architecture/n6shared/logs/atlas_auto_promote.jsonl"
+# canonical atlas: $HOME/core/data/n6/atlas.n6 (override with N6_ATLAS env)
+let ATLAS_PATH = env("N6_ATLAS") || (env("HOME") + "/core/data/n6/atlas.n6")
+let GRAPH_PATH = env("HOME") + "/core/n6-architecture/n6shared/discovery_graph.json"
+let LOG_PATH   = env("HOME") + "/core/n6-architecture/n6shared/logs/atlas_auto_promote.jsonl"
 
 # n=6 핵심 상수 — OUROBOROS 불변 검증용
 let N6_n     = 6
