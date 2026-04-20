@@ -112,7 +112,22 @@
 | 10 | ✅ | v2 | **HEXA-TOPO** | Bott-8 코히어런스 + Z2 ECC + Graphene NoC, 10/10 EXACT, Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
 | 10 | ✅ | v2 | **HEXA-ASIC** | SKY130 오픈소스 ASIC — RISC-V n/phi=3-wide + n=6 pipeline + 10/10 EXACT, Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
 | 10 | ✅ | v2 | **천장확인** | 170/170검증PASS, 물리한계14, 산업6벤더92.6%, TP28, 발견12, Z>27sigma, Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
-| 7 | ❌ | v1 | **SSCB mk1 (한국 팹리스 설계)** | 반도체 차단기 mk1 — SiC MOSFET + DB HiTek 180nm BCD + SK키 Σ-Δ + STM32 4-파운드리 SiP, 600ns 차단 / $35 BOM / 12개월 ₩4억 로드맵 (대중 공개 공정 기반) | [문서](domains/compute/sscb/sscb.md) |
+| 10 | ✅ | v1 | **HEXA 칩 6단 통합 논문** | 6단계(Digital→PIM→3D→Photonic→Wafer→Superconducting) + 9 선행도메인 통합 — Mk.I 삼성 파운드리 기준 → Mk.V 🛸10, σ·φ=n·τ=J₂=24 | [문서](papers/hexa-chip-6stage-unified.md) |
+| 10 | ✅ | v1 | **HEXA-1 Digital** | σ²=144 SM × τ=4 파이프 × φ=2 이슈 = 288 MAC/cycle, 288 TOPS/W (H100 4.8×), Mk.I=Exynos 2500 SF3P | [문서](domains/compute/chip-design/hexa-1-digital.md) |
+| 10 | ✅ | v1 | **HEXA-2 PIM** | DRAM row buffer σ·J₂=288 ALU/bank + 캐시 τ=4→φ=2 von Neumann 해체 + 60 TOPS/W, Mk.I=HBM2-PIM Aquabolt-XL | [문서](domains/compute/chip-design/hexa-2-pim.md) |
+| 10 | ✅ | v1 | **HEXA-3 3D Stack** | σ=12 wafer + φ=2μm TSV + σ·J₂=288 수직 레인/mm² + 144× 밀도, Mk.I=삼성 X-Cube TSV 40μm | [문서](domains/compute/chip-design/hexa-3d-stack.md) |
+| 10 | ✅ | v1 | **HEXA-4 Photonic** | λ=σ=12 WDM + MZI σ²=144 유니터리 + σ·J₂·sopfr=1.44 TB/s/die, Mk.I=Intel SiPh+Broadcom CPO, 13/13 PASS | [문서](domains/compute/chip-design/hexa-photonic.md) |
+| 10 | ✅ | v1 | **HEXA-5 Wafer-scale** | σ²=144 타일 + σ=12 spare row+col + 2D torus τ=4 홉 + 48 GB SRAM, Mk.I=Cerebras WSE-3, 12/12 PASS | [문서](domains/compute/chip-design/hexa-wafer.md) |
+| 10 | ✅ | v1 | **HEXA-6 Superconducting** | 100 GHz RSFQ × τ=4 파이프 + Egyptian cryo 3-stage + 10W@100GHz (vs H100 700W@2GHz), Mk.I=IBM+SeeQC, 15/15 PASS | [문서](domains/compute/chip-design/hexa-superconducting.md) |
+| 10 | ✅ | v1 | **반도체 소재** | C Z=6 + Diamond 2160 W/mK + SiC/GaN/InP σ=6 wafer + 레지스트 τ=4 층, Mk.I=Si+GAAFET 2nm, Python검증PASS | [문서](domains/compute/chip-materials/chip-materials.md) |
+| 10 | ✅ | v1 | **반도체 공정** | EUV 0.33→High-NA 0.55 + ALD J₂=24 cycle + CMP σ=12 DoE + 공정 1500→288 단계(81%↓), Mk.I=SF2 2nm 2026 | [문서](domains/compute/chip-process/chip-process.md) |
+| 10 | ✅ | v1 | **반도체 패키징** | TSV φ=2μm + μbump σ²=144/mm² + UCIe σ·J₂=288 레인 + HBM σ=12단, Mk.I=삼성 FO-PLP/I-Cube/X-Cube | [문서](domains/compute/chip-packaging/chip-packaging.md) |
+| 10 | ✅ | v1 | **반도체 수율** | D₀/σ=0.00167 + σ=12 spare + τ=4 DRC + fuse σ²=144 + WSI 5%→95%, Mk.I=SF3P ~60%/SF2 >70% | [문서](domains/compute/chip-yield/chip-yield.md) |
+| 10 | ✅ | v1 | **EDA 설계자동화** | DSE 2400=6×5×4×5×4 + τ=4 synthesis + σ=12 routing + τ=4 STA corner, Mk.I=삼성 SAFE+Synopsys/Cadence, 13/13 PASS | [문서](domains/compute/chip-eda/chip-eda.md) |
+| 10 | ✅ | v1 | **검증·테스트** | 커버리지 1-1/(σ·(σ-φ)²)=99.917% + UVM τ=4 계위 + ATE σ·J₂=288 핀 병렬, Mk.I=V93000+UltraFLEX, 12/12 PASS | [문서](domains/compute/chip-verify-test/chip-verify-test.md) |
+| 10 | ✅ | v1 | **열·전원** | TDP Egyptian 1/2+1/3+1/6=1 (Fraction 정확) + τ=4 cooling + σ=12 PDN, Mk.I=air+liquid hybrid+vapor, 13/13 PASS | [문서](domains/compute/chip-thermal-power/chip-thermal-power.md) |
+| 10 | ✅ | v1 | **인터커넥트** | UCIe σ·J₂=288 × 48 Gbps=13.8 TB/s + λ=σ=12 WDM + σ²=144 NoC hex mesh, Mk.I=UCIe 1.1+PCIe 5.0/6.0, 13/13 PASS | [문서](domains/compute/chip-interconnect/chip-interconnect.md) |
+| 10 | ✅ | v1 | **HBM 메모리** | 스택 σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, Mk.I=삼성 HBM3E 12H 36GB, 14/14 PASS | [문서](domains/compute/chip-hbm/chip-hbm.md) |
 
 <!-- AUTO:FOOTER_chip:START -->
 > 도메인: [chip-architecture/](docs/chip-architecture/) · 도구: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
