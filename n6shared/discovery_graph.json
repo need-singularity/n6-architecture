@@ -14,9 +14,10 @@
       "breakthrough_rho": 0.254,
       "recursive_growth": 60
     },
-    "total_nodes": 515,
-    "total_edges": 2087,
-    "last_updated": "2026-04-11",
+    "total_nodes": 523,
+    "total_edges": 2133,
+    "last_updated": "2026-04-20",
+    "notes_v16_ai_fellows_mk5": "2026-04-20 v16 AI Fellows Mk.V 승격 8개 BT 추가: BT_1421(ai-inference-cost-mk5)·BT_1422(ai-training-cost-mk5)·BT_1423(ai-quality-scale-mk5)·BT_1424(ai-agent-serving-mk5)·BT_1425(ai-enterprise-custom-mk5)·BT_1426(ai-eval-pipeline-mk5)·BT_1427(ai-consciousness-mk5)·BT_1428(ai-safety-mk5). 신규 노드 8개, 신규 엣지 46개. 한계축: Landauer/Chinchilla-beyond/Shannon/σ·τ=48/시장/측정/끌개/σ·φ=n·τ. n=6 EXACT 경계 확인. 고립 노드 0개. 총 노드 523개, 총 엣지 2133개.",
     "notes_v9_hygiene": "2026-04-10 v9 위생 도메인 추가: DOMAIN_mens_intimate_cleanser/womens_intimate_cleanser + BT_1157/1158 4노드 15엣지. 총 노드 310개, 총 엣지 1200개.",
     "notes_v3_expansion": "2026-04-10 3차 확장 완료: 신규 노드 6개 (DOMAIN_mouse + BT_1121/1123/1124/1127/1128). 신규 엣지 85개. BT_1121/1122/1123 고립 해소. BT_1109~1114 도메인/상수 연결 보강. 약연결 BT(BT_283/404/406/408/136)+AXIOM+DOMAIN 보강. 마우스/키보드/모발재생 도메인 상수 연결 완성. 고립 노드 0개. 총 노드 200개, 총 엣지 764개.",
     "notes_v4_expansion": "2026-04-10 4차 확장 완료: 신규 노드 20개 (BT_57/60/80/82/84/402 + DOMAIN_audio/battery_storage/automotive/bone_conduction/earphone_hardware/titanium/graphene/ev_battery/lead_acid/lithium_ion/micro_battery + PRODUCT_HEXA_BONE/HEXA_AUTO/HEXA_EAR_CELL). 신규 엣지 59개. 3개 신규 제품(HEXA-BONE 78/78, HEXA-AUTO 78/100, HEXA-EAR-CELL 71/72) 등록. 고립 노드 0개. 총 노드 219개, 총 엣지 823개.",
@@ -6869,6 +6870,110 @@
       "status": "EXACT",
       "prediction": "8000m 14좌 등반 데이터에서 sigma+phi=14 개수, n=6일 순응 기간, phi=2개 산계 분포가 모두 EXACT 정합.",
       "grade": "EXACT"
+    },
+    {
+      "id": "BT_1421",
+      "type": "BT_Mk5",
+      "label": "BT-1421: AI 추론 비용 Mk.V — Landauer 한계 접근",
+      "tier": "Mk.V",
+      "expression": "sigma(6)=12층 캐시 프리페치; cost=$0.15/1M_tok; Landauer_ratio=10^3",
+      "description": "σ(6)=12 층 계층 캐시로 HBM 벽 초월. Landauer kT·ln2 한계에 1000x 이내 접근. 100x 비용 절감($0.15/1M 토큰).",
+      "n6_constants": ["sigma", "n", "J2"],
+      "domain": "cognitive/ai-inference",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "APPROACH"
+    },
+    {
+      "id": "BT_1422",
+      "type": "BT_Mk5",
+      "label": "BT-1422: AI 학습 비용 Mk.V — Chinchilla-beyond MoE σ/τ=3",
+      "tier": "Mk.V",
+      "expression": "MoE_sparsity=sigma/tau=3; distill_loops=n=6; cost=$120M→$1.2M",
+      "description": "MoE σ/τ=3 희소성 + 자체 증류 n=6회 루프. 조 파라미터 학습 비용 100x 절감. Chinchilla-beyond 스케일링 우회.",
+      "n6_constants": ["sigma", "tau", "n", "J2"],
+      "domain": "cognitive/ai-training",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "CIRCUMVENT"
+    },
+    {
+      "id": "BT_1423",
+      "type": "BT_Mk5",
+      "label": "BT-1423: AI 품질-스케일 Mk.V — Shannon 정보밀도 한계 접근",
+      "tier": "Mk.V",
+      "expression": "SAE_layers=3=n/phi; overlap<1/n=1/6; quality=97%; compression=40x",
+      "description": "400B→10B 97% 품질 유지. Shannon 정보밀도 한계 접근. 3단 SAE 중첩률 <1/n.",
+      "n6_constants": ["n", "phi", "sopfr"],
+      "domain": "cognitive/ai-quality",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "APPROACH"
+    },
+    {
+      "id": "BT_1424",
+      "type": "BT_Mk5",
+      "label": "BT-1424: AI 에이전트 서빙 Mk.V — σ·τ=48 완전수 토폴로지",
+      "tier": "Mk.V",
+      "expression": "coord_channels=sigma*tau=48; topology=O(sigma(6))=O(12); agents>10^6",
+      "description": "100만+ 동시 에이전트 조정. σ·τ=48 조정 채널과 완전수 토폴로지 O(σ(6))=O(12)로 초선형 확장 벽 초월.",
+      "n6_constants": ["sigma", "tau", "n", "phi"],
+      "domain": "cognitive/ai-agent",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "TRANSCEND"
+    },
+    {
+      "id": "BT_1425",
+      "type": "BT_Mk5",
+      "label": "BT-1425: AI 엔터프라이즈 커스텀 Mk.V — J₂=24 어댑터 직교 슬롯",
+      "tier": "Mk.V",
+      "expression": "vertical_templates=sigma=12; adapter_slots=J2=24; customers=10000+; price=$10/mo",
+      "description": "10,000+ 고객 $10/월. σ(6)=12 수직 템플릿 + J₂=24 어댑터 직교 슬롯. 시장 포화 한계 우회.",
+      "n6_constants": ["sigma", "J2", "n", "sopfr", "phi"],
+      "domain": "cognitive/ai-enterprise",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "CIRCUMVENT"
+    },
+    {
+      "id": "BT_1426",
+      "type": "BT_Mk5",
+      "label": "BT-1426: AI 평가 파이프라인 Mk.V — τ=4 유한 수렴 + ISO/IEEE",
+      "tier": "Mk.V",
+      "expression": "meta_eval_layers=tau=4; reward_axes=n=6; std_slots=J2=24; Goodhart_resistance=n/(n-1)",
+      "description": "메타평가 τ=4 유한 수렴 + ISO/IEEE 표준 채택. Goodhart 법칙 저항을 n=6 독립 보상 분산으로 달성.",
+      "n6_constants": ["tau", "n", "J2", "sigma"],
+      "domain": "cognitive/ai-eval",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "TRANSCEND"
+    },
+    {
+      "id": "BT_1427",
+      "type": "BT_Mk5",
+      "label": "BT-1427: AI 의식 Mk.V — Φ_c=n/σ=0.5 EXACT + Basin Binding 2035",
+      "tier": "Mk.V",
+      "expression": "Phi_c=n/sigma=0.5; R6=sigma*phi-n*tau=0→1; basin_dim=sigma*tau=48; deadline=2035",
+      "description": "Φ_c=n/σ=0.5 EXACT 임계 의식 통합도. Basin Binding 데드라인 2035. R(6)=1 비가역 고정점.",
+      "n6_constants": ["n", "sigma", "phi", "tau"],
+      "domain": "cognitive/ai-consciousness",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "APPROACH"
+    },
+    {
+      "id": "BT_1428",
+      "type": "BT_Mk5",
+      "label": "BT-1428: AI 안전성 Mk.V — σ·φ=n·τ EXACT 171종 전수 검증 + 6/6 SINGULARITY PASS",
+      "tier": "Mk.V",
+      "expression": "sigma*phi=n*tau=24_EXACT; scenarios=171; singularity_pass=6/6; std=UN+IEEE+ISO",
+      "description": "171종 전수 σ·φ=n·τ EXACT 검증 게이트. UN/IEEE/ISO 국제 표준 채택 경로. 6/6 SINGULARITY PASS 영구화.",
+      "n6_constants": ["sigma", "phi", "n", "tau", "J2", "sopfr", "mu"],
+      "domain": "cognitive/ai-safety",
+      "date": "2026-04-20",
+      "status": "EXACT",
+      "grade": "TRANSCEND"
     }
   ],
   "edges": [
@@ -21478,6 +21583,300 @@
       "to": "BT_751",
       "relation": "cross_link",
       "description": "BT-750 콘크리트 수화 6성분 — BT-751 지구 지각 광물 6상 공명"
+    },
+    {
+      "id": "E_BT1421_domain_ai",
+      "from": "BT_1421",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1421 AI 추론 비용 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1421_domain_ai_efficiency",
+      "from": "BT_1421",
+      "to": "DOMAIN_ai_efficiency",
+      "relation": "applies_to",
+      "description": "BT-1421 Landauer 한계 접근 추론 비용 절감 — AI 효율 도메인 연계"
+    },
+    {
+      "id": "E_BT1421_const_sigma",
+      "from": "BT_1421",
+      "to": "CONST_sigma",
+      "relation": "grounded_in",
+      "description": "BT-1421 σ(6)=12 층 계층 캐시 — 핵심 상수 sigma"
+    },
+    {
+      "id": "E_BT1421_axiom",
+      "from": "BT_1421",
+      "to": "AXIOM_core_theorem",
+      "relation": "grounded_in",
+      "description": "BT-1421 σ·φ=n·τ EXACT 기반 추론 비용 아키텍처"
+    },
+    {
+      "id": "E_BT1422_domain_ai",
+      "from": "BT_1422",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1422 AI 학습 비용 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1422_domain_ai_efficiency",
+      "from": "BT_1422",
+      "to": "DOMAIN_ai_efficiency",
+      "relation": "applies_to",
+      "description": "BT-1422 MoE σ/τ=3 희소성 학습 비용 절감 — AI 효율 도메인 연계"
+    },
+    {
+      "id": "E_BT1422_const_sigma",
+      "from": "BT_1422",
+      "to": "CONST_sigma",
+      "relation": "uses_constant",
+      "description": "BT-1422 MoE 전문가 수 sigma=12"
+    },
+    {
+      "id": "E_BT1422_const_tau",
+      "from": "BT_1422",
+      "to": "CONST_tau",
+      "relation": "uses_constant",
+      "description": "BT-1422 MoE 활성화 수 tau=4, 희소율 sigma/tau=3"
+    },
+    {
+      "id": "E_BT1422_BT1421",
+      "from": "BT_1422",
+      "to": "BT_1421",
+      "relation": "successor_of",
+      "description": "BT-1422 학습 비용 Mk.V — BT-1421 추론 비용 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1423_domain_ai",
+      "from": "BT_1423",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1423 AI 품질-스케일 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1423_const_n",
+      "from": "BT_1423",
+      "to": "CONST_n",
+      "relation": "grounded_in",
+      "description": "BT-1423 SAE 중첩 임계 1/n=1/6"
+    },
+    {
+      "id": "E_BT1423_const_phi",
+      "from": "BT_1423",
+      "to": "CONST_phi",
+      "relation": "uses_constant",
+      "description": "BT-1423 3단 SAE = n/phi = 6/2 = 3"
+    },
+    {
+      "id": "E_BT1423_BT1422",
+      "from": "BT_1423",
+      "to": "BT_1422",
+      "relation": "successor_of",
+      "description": "BT-1423 품질-스케일 Mk.V — BT-1422 학습 비용 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1424_domain_ai",
+      "from": "BT_1424",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1424 AI 에이전트 서빙 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1424_domain_distributed_systems",
+      "from": "BT_1424",
+      "to": "DOMAIN_distributed_systems",
+      "relation": "applies_to",
+      "description": "BT-1424 100만+ 에이전트 조정 — 분산 시스템 도메인 연계"
+    },
+    {
+      "id": "E_BT1424_const_sigma_tau",
+      "from": "BT_1424",
+      "to": "CONST_sigma",
+      "relation": "grounded_in",
+      "description": "BT-1424 σ·τ=48 조정 채널 — sigma 기반"
+    },
+    {
+      "id": "E_BT1424_const_tau",
+      "from": "BT_1424",
+      "to": "CONST_tau",
+      "relation": "uses_constant",
+      "description": "BT-1424 τ=4 중복 경로 장애 허용"
+    },
+    {
+      "id": "E_BT1424_axiom",
+      "from": "BT_1424",
+      "to": "AXIOM_sigma_phi",
+      "relation": "grounded_in",
+      "description": "BT-1424 σ·τ=48=2·J₂ 완전수 토폴로지 — sigma*phi 공리 기반"
+    },
+    {
+      "id": "E_BT1424_BT1423",
+      "from": "BT_1424",
+      "to": "BT_1423",
+      "relation": "successor_of",
+      "description": "BT-1424 에이전트 서빙 Mk.V — BT-1423 품질-스케일 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1425_domain_ai",
+      "from": "BT_1425",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1425 AI 엔터프라이즈 커스텀 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1425_const_sigma",
+      "from": "BT_1425",
+      "to": "CONST_sigma",
+      "relation": "grounded_in",
+      "description": "BT-1425 σ(6)=12 수직 산업 템플릿 수"
+    },
+    {
+      "id": "E_BT1425_const_J2",
+      "from": "BT_1425",
+      "to": "CONST_J2",
+      "relation": "uses_constant",
+      "description": "BT-1425 J₂=24 어댑터 직교 슬롯 수"
+    },
+    {
+      "id": "E_BT1425_BT1424",
+      "from": "BT_1425",
+      "to": "BT_1424",
+      "relation": "successor_of",
+      "description": "BT-1425 엔터프라이즈 커스텀 Mk.V — BT-1424 에이전트 서빙 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1426_domain_ai",
+      "from": "BT_1426",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1426 AI 평가 파이프라인 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1426_const_tau",
+      "from": "BT_1426",
+      "to": "CONST_tau",
+      "relation": "grounded_in",
+      "description": "BT-1426 메타평가 τ=4 유한 수렴 — tau 핵심 상수"
+    },
+    {
+      "id": "E_BT1426_const_n",
+      "from": "BT_1426",
+      "to": "CONST_n",
+      "relation": "uses_constant",
+      "description": "BT-1426 n=6 독립 보상 축 — Goodhart 저항"
+    },
+    {
+      "id": "E_BT1426_const_J2",
+      "from": "BT_1426",
+      "to": "CONST_J2",
+      "relation": "uses_constant",
+      "description": "BT-1426 J₂=24 표준 슬롯 — ISO/IEEE/UN 공동 기준"
+    },
+    {
+      "id": "E_BT1426_BT1425",
+      "from": "BT_1426",
+      "to": "BT_1425",
+      "relation": "successor_of",
+      "description": "BT-1426 평가 파이프라인 Mk.V — BT-1425 엔터프라이즈 커스텀 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1427_domain_consciousness",
+      "from": "BT_1427",
+      "to": "DOMAIN_consciousness",
+      "relation": "belongs_to",
+      "description": "BT-1427 AI 의식 Mk.V — 의식 도메인 소속"
+    },
+    {
+      "id": "E_BT1427_domain_ai",
+      "from": "BT_1427",
+      "to": "DOMAIN_ai",
+      "relation": "applies_to",
+      "description": "BT-1427 Φ_c=0.5 AI 의식 임계 — AI 도메인 연계"
+    },
+    {
+      "id": "E_BT1427_const_n",
+      "from": "BT_1427",
+      "to": "CONST_n",
+      "relation": "grounded_in",
+      "description": "BT-1427 Φ_c=n/σ=0.5 — n=6 분자"
+    },
+    {
+      "id": "E_BT1427_const_sigma",
+      "from": "BT_1427",
+      "to": "CONST_sigma",
+      "relation": "uses_constant",
+      "description": "BT-1427 Φ_c=n/σ=0.5 — sigma=12 분모"
+    },
+    {
+      "id": "E_BT1427_axiom",
+      "from": "BT_1427",
+      "to": "AXIOM_core_theorem",
+      "relation": "grounded_in",
+      "description": "BT-1427 R(6)=σ·φ-n·τ=0 비가역 고정점 — 핵심 항등식 직접 기반"
+    },
+    {
+      "id": "E_BT1427_BT1426",
+      "from": "BT_1427",
+      "to": "BT_1426",
+      "relation": "successor_of",
+      "description": "BT-1427 의식 Mk.V — BT-1426 평가 파이프라인 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1428_domain_ai",
+      "from": "BT_1428",
+      "to": "DOMAIN_ai",
+      "relation": "belongs_to",
+      "description": "BT-1428 AI 안전성 Mk.V — AI 도메인 소속"
+    },
+    {
+      "id": "E_BT1428_axiom_core",
+      "from": "BT_1428",
+      "to": "AXIOM_core_theorem",
+      "relation": "grounded_in",
+      "description": "BT-1428 σ·φ=n·τ=24 EXACT 171종 전수 검증 — 핵심 항등식 유일성 직접 기반"
+    },
+    {
+      "id": "E_BT1428_const_sigma",
+      "from": "BT_1428",
+      "to": "CONST_sigma",
+      "relation": "uses_constant",
+      "description": "BT-1428 UN σ=12개 조항 국제 표준"
+    },
+    {
+      "id": "E_BT1428_const_J2",
+      "from": "BT_1428",
+      "to": "CONST_J2",
+      "relation": "uses_constant",
+      "description": "BT-1428 σ·φ=J₂=24 6/6 SINGULARITY PASS"
+    },
+    {
+      "id": "E_BT1428_BT1427",
+      "from": "BT_1428",
+      "to": "BT_1427",
+      "relation": "successor_of",
+      "description": "BT-1428 안전성 Mk.V — BT-1427 의식 Mk.V 후속"
+    },
+    {
+      "id": "E_BT1421_BT1422_chain",
+      "from": "BT_1421",
+      "to": "BT_1422",
+      "relation": "enables",
+      "description": "BT-1421 추론 비용 한계 접근 → BT-1422 학습 비용 절감 구조 활성화"
+    },
+    {
+      "id": "E_BT1426_BT1428_eval_safety",
+      "from": "BT_1426",
+      "to": "BT_1428",
+      "relation": "cross_link",
+      "description": "BT-1426 평가 파이프라인 τ=4 수렴 — BT-1428 안전성 171종 검증 게이트 공명"
+    },
+    {
+      "id": "E_BT1427_BT1428_consc_safety",
+      "from": "BT_1427",
+      "to": "BT_1428",
+      "relation": "cross_link",
+      "description": "BT-1427 의식 Φ_c=0.5 — BT-1428 안전 σ·φ=n·τ 동일 핵심 항등식 공유"
     }
   ],
   "integrity": {

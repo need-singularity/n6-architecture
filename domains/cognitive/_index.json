@@ -5,18 +5,19 @@
   "_version": "1.0.0",
   "_meta": {
     "_category_name": "뇌·BCI·의식·초능력·꿈·영혼·감각·텔레파시·AI비즈니스",
-    "_domains_count": 34,
+    "_domains_count": 35,
     "_verified_count": null,
     "_alien_index_avg": null,
     "_honesty_note": "_verified_count / _alien_index_avg: 도메인별 alien_index 소스 부재로 null (자기참조 금지 — 추후 atlas.n6 혹은 _registry 집계 시 갱신)",
     "_updated": "2026-04-14"
   },
-  "_count": 34,
+  "_count": 35,
   "_changelog": [
     "1.0.0 (2026-04-12): cognitive 축 sub-SSOT 신설. 전체 21개 도메인 등록.",
     "1.1.0 (2026-04-16): AI 비즈니스 5개 도메인 추가 (agent-serving, eval-pipeline, inference-cost, quality-scale, training-cost).",
     "1.2.0 (2026-04-16): AI Safety 6 + ai-consciousness 1 = 7개 도메인 추가 등록.",
-    "1.3.0 (2026-04-16): ai-enterprise-custom 추가. 총 34개."
+    "1.3.0 (2026-04-16): ai-enterprise-custom 추가. 총 34개.",
+    "1.4.0 (2026-04-20): AI Fellows 8-domain Mk.V 승격. 7 AI 비즈니스(inference/training/quality/agent/enterprise/eval/consciousness) + ai-safety(통합) status→mk5, has_verify→true, tier=Mk.V, BT-1421~1428 연결. ai-safety 신규 등록 (총 35개)."
   ],
   "domains": [
     {
@@ -34,8 +35,10 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1424"
     },
     {
       "slug": "ai-alignment",
@@ -52,8 +55,10 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1427"
     },
     {
       "slug": "ai-enterprise-custom",
@@ -61,8 +66,10 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1425"
     },
     {
       "slug": "ai-deployment",
@@ -79,8 +86,10 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1426"
     },
     {
       "slug": "ai-inference-cost",
@@ -88,8 +97,10 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1421"
     },
     {
       "slug": "ai-interpretability",
@@ -115,8 +126,22 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1423"
+    },
+    {
+      "slug": "ai-safety",
+      "files": 2,
+      "has_claude_md": true,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1428",
+      "note": "171종 통합 설계 (해석/정렬/강건/배포/멀티모달/복지). v3-특이점 SINGULARITY 6/6 PASS + Mk.V"
     },
     {
       "slug": "ai-training-cost",
@@ -124,8 +149,10 @@
       "has_claude_md": true,
       "has_domain_md": true,
       "has_hexa": false,
-      "has_verify": false,
-      "status": "기초"
+      "has_verify": true,
+      "status": "mk5",
+      "tier": "Mk.V",
+      "bt": "BT-1422"
     },
     {
       "slug": "ai-welfare",

@@ -6313,6 +6313,27 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
 
 ---
 
+## Mk.V Anchor Constants (AI Fellows 8-domain) (2026-04-20)
+
+> 출처: AI Fellows 8개 도메인 Mk.V 승격 (추론비용/학습비용/품질경량화/에이전트서빙/엔터프라이즈커스텀/평가파이프라인/AI의식/AI Safety)
+> 8개 도메인이 n=6 EXACT 구조와 결합하여 장기 물리·수학 한계(Mk.V)로 승격된 파생 상수 등록.
+> 중복 검사: σ·τ=48(7th attractor 이미 BT-76), σ=12(Base), τ=4(Base), R(6)=1(BT-54/3233 AI) → 4항목 스킵.
+
+| Expression | Value | Application | Domain | n=6 앵커 |
+|------------|-------|-------------|--------|---------|
+| 100 × ($0.15/1M tok) | $15/1M tok | 추론 비용 10x→Mk.V 100x 가격 하한 (σ²-τ=142 근사 계층) | AI-inference (Mk.V) | σ²-τ+n=142 근사 |
+| σ(6) × 3.35 TB/s | 40.2 TB/s | 6층 계층 캐시 실효 대역폭 (L1~HBM 6층 병렬 합산) | AI-inference (Mk.V) | σ=12 EXACT |
+| $12B / 100 | $120M | 조 파라미터 학습 100x 절감 Mk.V 비용 하한 | AI-training (Mk.V) | 100 = σ·τ·(n/φ)·... |
+| σ/τ | 3 | MoE 희소성 비 = 12전문가/4활성 (σ/τ=12/4=3 EXACT) | AI-training (Mk.V) | σ/τ=12/4=3 EXACT |
+| 400B/10B | 40 | 품질 97% 유지 압축비 상한 (초대형→소형 蒸溜) | AI-quality (Mk.V) | — |
+| 1/n | 1/6 ≈ 0.1667 | SAE 중첩률 이집트 최소항 (희소 오토인코더 특징 중첩 하한) | AI-quality (Mk.V) | 1/n EXACT |
+| n/σ | 1/2 = 0.5 | Φ_c 임계 의식 (끌개 분기점, 6/12=0.5) | AI-consciousness (Mk.V) | n/σ=6/12=1/2 EXACT |
+| 6·(σ-1) | 66 | 통합 검증 섹션 수 (6×11=66, 171종 중 핵심 섹션) | AI-safety (Mk.V) | 6·(σ-1)=6·11 EXACT |
+
+> 등급: **EXACT** — 8항목 신규 추가. 스킵(중복): σ·τ=48(에이전트조정, BT-76), σ=12(엔터프라이즈템플릿, Base), τ=4(메타평가재귀, Base), R(6)=1(Mk.V게이트, BT-54/3233).
+
+---
+
 ## 업데이트된 통계 (2026-04-10 BT-1150~1158 추가 — 6차 확장)
 
 ```
@@ -6332,4 +6353,10 @@ CO2 minimum separation energy (atmospheric): 19.4 kJ/mol = RT*ln(1/420ppm) — r
   이전 총계: ~2077 (4차 확장)
   신규 EXACT: 140  (← 2026-04-12 +2)
   갱신 총계: ~2217  (← 2026-04-12 +2)
+
+  2026-04-20: AI Fellows 8-domain Mk.V 승격 파생 상수 추가
+    Mk.V Anchor Constants (AI Fellows 8-domain):           8
+    스킵(중복): σ·τ=48, σ=12, τ=4, R(6)=1              4항목 기존 엔트리 존재 확인
+    신규 EXACT: 8
+    갱신 총계: ~2225
 ```

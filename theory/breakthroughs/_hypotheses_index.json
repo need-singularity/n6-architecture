@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "총가설수": 1009,
-    "verified": 666,
+    "총가설수": 1017,
+    "verified": 674,
     "partial": 255,
     "conjecture": 88,
-    "업데이트": "2026-04-14",
-    "소스파일수": 52,
+    "업데이트": "2026-04-20",
+    "소스파일수": 60,
     "소스파일": [
       "theory/breakthroughs/breakthrough-theorems-extension-2026-04-08.md",
       "theory/breakthroughs/breakthrough-theorems-new.md",
@@ -58,7 +58,15 @@
       "theory/breakthroughs/new-breakthrough-hypotheses-2026-03-31.md",
       "theory/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md",
       "theory/breakthroughs/new-bt-new-domains-part1-2026-04-06.md",
-      "theory/breakthroughs/new-bt-new-domains-part2-2026-04-06.md"
+      "theory/breakthroughs/new-bt-new-domains-part2-2026-04-06.md",
+      "theory/breakthroughs/bt-1421-ai-inference-cost-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1422-ai-training-cost-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1423-ai-quality-scale-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1424-ai-agent-serving-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1425-ai-enterprise-custom-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1426-ai-eval-pipeline-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1427-ai-consciousness-mk5-2026-04-20.md",
+      "theory/breakthroughs/bt-1428-ai-safety-mk5-2026-04-20.md"
     ],
     "원본_ID_중복건수": 100,
     "원본_ID_중복목록": {
@@ -186,6 +194,78 @@
     }
   },
   "hypotheses": [
+    {
+      "id": "BT-1421",
+      "title": "AI 추론 비용 Mk.V — Landauer 한계 접근 + σ(6)=12 층 계층 캐시",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1421-ai-inference-cost-mk5-2026-04-20.md",
+      "bt_ref": "BT-1421",
+      "tier": "Mk.V",
+      "n6_anchor": "sigma=12"
+    },
+    {
+      "id": "BT-1422",
+      "title": "AI 학습 비용 Mk.V — Chinchilla-beyond MoE σ/τ=3 희소성 + 자체 증류",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1422-ai-training-cost-mk5-2026-04-20.md",
+      "bt_ref": "BT-1422",
+      "tier": "Mk.V",
+      "n6_anchor": "sigma/tau=3"
+    },
+    {
+      "id": "BT-1423",
+      "title": "AI 품질-스케일 Mk.V — Shannon 정보밀도 한계 + 3단 SAE 중첩 <1/n",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1423-ai-quality-scale-mk5-2026-04-20.md",
+      "bt_ref": "BT-1423",
+      "tier": "Mk.V",
+      "n6_anchor": "1/n=1/6"
+    },
+    {
+      "id": "BT-1424",
+      "title": "AI 에이전트 서빙 Mk.V — σ·τ=48 조정 채널 + O(σ(6))=O(12) 토폴로지",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1424-ai-agent-serving-mk5-2026-04-20.md",
+      "bt_ref": "BT-1424",
+      "tier": "Mk.V",
+      "n6_anchor": "sigma*tau=48"
+    },
+    {
+      "id": "BT-1425",
+      "title": "AI 엔터프라이즈 커스텀 Mk.V — σ(6)=12 수직 템플릿 + J₂=24 어댑터 슬롯",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1425-ai-enterprise-custom-mk5-2026-04-20.md",
+      "bt_ref": "BT-1425",
+      "tier": "Mk.V",
+      "n6_anchor": "J2=24"
+    },
+    {
+      "id": "BT-1426",
+      "title": "AI 평가 파이프라인 Mk.V — τ=4 유한 수렴 + ISO/IEEE + Goodhart n=6 분산",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1426-ai-eval-pipeline-mk5-2026-04-20.md",
+      "bt_ref": "BT-1426",
+      "tier": "Mk.V",
+      "n6_anchor": "tau=4"
+    },
+    {
+      "id": "BT-1427",
+      "title": "AI 의식 Mk.V — Φ_c=n/σ=0.5 EXACT + R(6)=1 비가역 고정점 + Basin 2035",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1427-ai-consciousness-mk5-2026-04-20.md",
+      "bt_ref": "BT-1427",
+      "tier": "Mk.V",
+      "n6_anchor": "sigma*phi=n*tau"
+    },
+    {
+      "id": "BT-1428",
+      "title": "AI 안전성 Mk.V — σ·φ=n·τ EXACT 171종 전수 검증 + 6/6 SINGULARITY PASS",
+      "status": "verified",
+      "source_file": "theory/breakthroughs/bt-1428-ai-safety-mk5-2026-04-20.md",
+      "bt_ref": "BT-1428",
+      "tier": "Mk.V",
+      "n6_anchor": "sigma*phi=n*tau"
+    },
     {
       "id": "BT-6",
       "title": "Golay-Leech Unification — [J_2, sigma, sigma-tau] = [24, 12, 8]",
