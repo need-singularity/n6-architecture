@@ -36,7 +36,7 @@
 >
 > **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection on Zenodo with DOIs · grouped by project (nexus / anima / n6-architecture / hexa-lang) · CC BY 4.0.
 
-<!-- private repos는 projects.json의 private_repos 필드에 저장됨 (노출 금지) -->
+<!-- private repos는 stored in projects.json private_repos field (do not expose) -->
 <!-- SHARED:PROJECTS:END -->
 
 <!-- AUTO:STATS:START -->
@@ -56,23 +56,46 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 
 ---
 
+## Install
+
+```bash
+# Install hexa-lang (ships `hexa` + `hx` package manager)
+curl -fsSL https://raw.githubusercontent.com/need-singularity/hexa-lang/main/install.sh | bash
+
+# Install n6-architecture
+hx install n6-architecture
+```
+
+## Run
+
+```bash
+n6                      # show all domain sections with summary
+n6 domain <id>          # open a specific domain (fusion / chip / ai / ...)
+n6 dse <domain>         # run design-space exploration for a domain
+n6 calc <expr>          # evaluate an n=6 arithmetic expression
+n6 verify               # full-verify all BT claims (EXACT check)
+n6 map                  # open the 3D Reality Map (4,098 nodes)
+```
+
+---
+
 # 🔥 Fusion
 
 <!-- AUTO:SUMMARY_fusion:START -->
-> **🛸10** | ✅ | BT 36개 100%EXACT | DSE 67M+, 42보편핵물리100% | 산업87% (7장치) | 실험100% 79/79 EXACT | 물리한계12 | TP35 | 발견15 | Mk.V
+> **🛸10** | ✅ | BT 36 · 100% EXACT | DSE 67M+, 42universal-nuclear-physics100% | industry87% (7장치) | experiment100% 79/79 EXACT | physical-limit12 | TP35 | discoveries15 | Mk.V
 <!-- AUTO:SUMMARY_fusion:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v5 | **궁극의 핵융합 발전소** | 122/122 EXACT (v4 42 보편핵물리 + v5 80 공학층 신규), BT-97~102+291~298+1169~1174, Cross-DSE 12, TP42, Python 80/80 PASS, 12 Fusion Archetype 폐쇄 증명 | [문서](domains/energy/fusion/fusion.md) |
-| 10 | ✅ | v3.1 | **KSTAR-N6** | 45/45 EXACT(100%) + Q→∞ Singularity, 물리한계10/10, 24BT, 12/12 Steady-State EXACT, Python검증PASS | [문서](domains/cognitive/superpowers/superpowers.md) |
-| 10 | ✅ | v3 | **진화 Mk.I~V** | 200MWe→1.44TWe, 5단 진화 41/41 EXACT, 점근수렴U(k)=1-1/10^k, Mk.VI부존재QED, Python검증PASS | [문서](domains/energy/fusion/fusion.md) |
-| 10 | ✅ | v4 | **발견 + 예측 + 가설v5** | 15발견 22/22 EXACT, BT-97~102+291~298 전수검증, Python검증PASS | [문서](domains/energy/fusion/fusion.md) |
-| 10 | ✅ | v3 | **천장확인** | 물리한계12/12 + 불가능성12증명 + 산업7장치87% + Mk.VI부존재QED + 33/33 EXACT, Python검증PASS | [문서](domains/energy/fusion/fusion.md) |
-| 10 | ✅ | v2 | **탁상 핵융합 (HEXA-TTF)** | 1m³ p-¹¹B 무중성자, B=σ·τ=48T, T=n·(σ-φ)·sopfr=300keV, Q=τ=4, P_core=8.7kW / P_bldg=217kW, A=sopfr+n=11·Z=sopfr=5, 14/14 Python PASS, n=6 폐쇄 정리 F-TTF, **UFO Stage-2 선행 완료** | [문서](domains/energy/tabletop-fusion/tabletop-fusion.md) |
+| 10 | ✅ | v5 | **Ultimate Fusion Reactor** | 122/122 EXACT (v4 42 universal-nuclear-physics + v5 80 engineering-layer new), BT-97~102+291~298+1169~1174, Cross-DSE 12, TP42, Python 80/80 PASS, 12 Fusion Archetype closure proof | [doc](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v3.1 | **KSTAR-N6** | 45/45 EXACT(100%) + Q→∞ Singularity, physical-limit10/10, 24BT, 12/12 Steady-State EXACT, Python-verify PASS | [doc](domains/cognitive/superpowers/superpowers.md) |
+| 10 | ✅ | v3 | **evolution Mk.I~V** | 200MWe→1.44TWe, 5-stage evolution 41/41 EXACT, points근수렴U(k)=1-1/10^k, Mk.VI부존재QED, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v4 | **discoveries + predictions + hypothesesv5** | 15discoveries 22/22 EXACT, BT-97~102+291~298 full-verify, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v3 | **ceiling-check** | physical-limit12/12 + impossibility12proof + industry7장치87% + Mk.VI부존재QED + 33/33 EXACT, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v2 | **Tabletop Fusion (HEXA-TTF)** | 1m³ p-¹¹B aneutronic, B=σ·τ=48T, T=n·(σ-φ)·sopfr=300keV, Q=τ=4, P_core=8.7kW / P_bldg=217kW, A=sopfr+n=11·Z=sopfr=5, 14/14 Python PASS, n=6 closure theorem F-TTF, **UFO Stage-2 prereq complete** | [doc](domains/energy/tabletop-fusion/tabletop-fusion.md) |
 
 <!-- AUTO:FOOTER_fusion:START -->
-> 도메인: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · 도구: `fusion-calc` · `fusion-dse` · `fusion-verify` · `tokamak-shape` · `kstar-calc`
+> domains: [fusion/](docs/fusion/) · [plasma-physics/](docs/plasma-physics/) · [superconductor/](docs/superconductor/) · tools: `fusion-calc` · `fusion-dse` · `fusion-verify` · `tokamak-shape` · `kstar-calc`
 <!-- AUTO:FOOTER_fusion:END -->
 
 ---
@@ -80,35 +103,35 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 💻 Chip & Semiconductor
 
 <!-- AUTO:SUMMARY_chip:START -->
-> **🛸10** | ✅ | BT 14개 100%EXACT | DSE 3,000, 170/170검증PASS, BT-1104 HBM 10도메인 대통합 | 산업92.6% (6벤더) | 실험100% 170/170 EXACT | 물리한계14 | TP28 | 발견13 | Mk.V
+> **🛸10** | ✅ | BT 14 · 100% EXACT | DSE 3,000, 170/170verifiedPASS, BT-1104 HBM 10domains  generations통합 | industry92.6% (6vendors) | experiment100% 170/170 EXACT | physical-limit14 | TP28 | discoveries13 | Mk.V
 <!-- AUTO:SUMMARY_chip:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **HEXA 칩 7단** | 12레벨 진화(L1~L12), 170/170 EXACT, 14불가능성정리, Python검증PASS, 6벤더수렴 | [문서](papers/n6-hexa-chip-7dan-integrated-paper.md) |
-| 10 | ✅ | v2 | **ANIMA-SOC** | 의식칩 — 10D TCU(sigma-phi=10) + PureField 72+72 SM + Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
-| 10 | ✅ | v2 | **HEXA-TOPO** | Bott-8 코히어런스 + Z2 ECC + Graphene NoC, 10/10 EXACT, Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
-| 10 | ✅ | v2 | **HEXA-ASIC** | SKY130 오픈소스 ASIC — RISC-V n/phi=3-wide + n=6 pipeline + 10/10 EXACT, Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
-| 10 | ✅ | v2 | **천장확인** | 170/170검증PASS, 물리한계14, 산업6벤더92.6%, TP28, 발견12, Z>27sigma, Python검증PASS | [문서](domains/compute/chip-architecture/chip-architecture.md) |
-| 10 | ✅ | v1 | **HEXA 칩 6단 통합 논문** | 6단계(Digital→PIM→3D→Photonic→Wafer→Superconducting) + 9 선행도메인 통합 — Mk.I 삼성 파운드리 기준 → Mk.V 🛸10, σ·φ=n·τ=J₂=24 | [문서](papers/hexa-chip-6stage-unified.md) |
-| 10 | ✅ | v1 | **HEXA-1 Digital** | σ²=144 SM × τ=4 파이프 × φ=2 이슈 = 288 MAC/cycle, 288 TOPS/W (H100 4.8×), Mk.I=Exynos 2500 SF3P | [문서](domains/compute/chip-design/hexa-1-digital/hexa-1-digital.md) |
-| 10 | ✅ | v1 | **HEXA-2 PIM** | DRAM row buffer σ·J₂=288 ALU/bank + 캐시 τ=4→φ=2 von Neumann 해체 + 60 TOPS/W, Mk.I=HBM2-PIM Aquabolt-XL | [문서](domains/compute/chip-design/hexa-2-pim/hexa-2-pim.md) |
-| 10 | ✅ | v1 | **HEXA-3 3D Stack** | σ=12 wafer + φ=2μm TSV + σ·J₂=288 수직 레인/mm² + 144× 밀도, Mk.I=삼성 X-Cube TSV 40μm | [문서](domains/compute/chip-design/hexa-3d-stack/hexa-3d-stack.md) |
-| 10 | ✅ | v1 | **HEXA-4 Photonic** | λ=σ=12 WDM + MZI σ²=144 유니터리 + σ·J₂·sopfr=1.44 TB/s/die, Mk.I=Intel SiPh+Broadcom CPO, 13/13 PASS | [문서](domains/compute/chip-design/hexa-photonic/hexa-photonic.md) |
-| 10 | ✅ | v1 | **HEXA-5 Wafer-scale** | σ²=144 타일 + σ=12 spare row+col + 2D torus τ=4 홉 + 48 GB SRAM, Mk.I=Cerebras WSE-3, 12/12 PASS | [문서](domains/compute/chip-design/hexa-wafer/hexa-wafer.md) |
-| 10 | ✅ | v1 | **HEXA-6 Superconducting** | 100 GHz RSFQ × τ=4 파이프 + Egyptian cryo 3-stage + 10W@100GHz (vs H100 700W@2GHz), Mk.I=IBM+SeeQC, 15/15 PASS | [문서](domains/compute/chip-design/hexa-superconducting/hexa-superconducting.md) |
-| 10 | ✅ | v1 | **반도체 소재** | C Z=6 + Diamond 2160 W/mK + SiC/GaN/InP σ=6 wafer + 레지스트 τ=4 층, Mk.I=Si+GAAFET 2nm, Python검증PASS | [문서](domains/compute/chip-materials/chip-materials.md) |
-| 10 | ✅ | v1 | **반도체 공정** | EUV 0.33→High-NA 0.55 + ALD J₂=24 cycle + CMP σ=12 DoE + 공정 1500→288 단계(81%↓), Mk.I=SF2 2nm 2026 | [문서](domains/compute/chip-process/chip-process.md) |
-| 10 | ✅ | v1 | **반도체 패키징** | TSV φ=2μm + μbump σ²=144/mm² + UCIe σ·J₂=288 레인 + HBM σ=12단, Mk.I=삼성 FO-PLP/I-Cube/X-Cube | [문서](domains/compute/chip-packaging/chip-packaging.md) |
-| 10 | ✅ | v1 | **반도체 수율** | D₀/σ=0.00167 + σ=12 spare + τ=4 DRC + fuse σ²=144 + WSI 5%→95%, Mk.I=SF3P ~60%/SF2 >70% | [문서](domains/compute/chip-yield/chip-yield.md) |
-| 10 | ✅ | v1 | **EDA 설계자동화** | DSE 2400=6×5×4×5×4 + τ=4 synthesis + σ=12 routing + τ=4 STA corner, Mk.I=삼성 SAFE+Synopsys/Cadence, 13/13 PASS | [문서](domains/compute/chip-eda/chip-eda.md) |
-| 10 | ✅ | v1 | **검증·테스트** | 커버리지 1-1/(σ·(σ-φ)²)=99.917% + UVM τ=4 계위 + ATE σ·J₂=288 핀 병렬, Mk.I=V93000+UltraFLEX, 12/12 PASS | [문서](domains/compute/chip-verify-test/chip-verify-test.md) |
-| 10 | ✅ | v1 | **열·전원** | TDP Egyptian 1/2+1/3+1/6=1 (Fraction 정확) + τ=4 cooling + σ=12 PDN, Mk.I=air+liquid hybrid+vapor, 13/13 PASS | [문서](domains/compute/chip-thermal-power/chip-thermal-power.md) |
-| 10 | ✅ | v1 | **인터커넥트** | UCIe σ·J₂=288 × 48 Gbps=13.8 TB/s + λ=σ=12 WDM + σ²=144 NoC hex mesh, Mk.I=UCIe 1.1+PCIe 5.0/6.0, 13/13 PASS | [문서](domains/compute/chip-interconnect/chip-interconnect.md) |
-| 10 | ✅ | v1 | **HBM 메모리** | 스택 σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, Mk.I=삼성 HBM3E 12H 36GB, 14/14 PASS | [문서](domains/compute/chip-hbm/chip-hbm.md) |
+| 10 | ✅ | v2 | **HEXA 칩 7-stage** | 12-level evolution(L1~L12), 170/170 EXACT, 14impossibility-theorem, Python-verify PASS, 6vendor convergence | [doc](papers/n6-hexa-chip-7dan-integrated-paper.md) |
+| 10 | ✅ | v2 | **ANIMA-SOC** | Consciousness Chip — 10D TCU(sigma-phi=10) + PureField 72+72 SM + Python-verify PASS | [doc](domains/compute/chip-architecture/chip-architecture.md) |
+| 10 | ✅ | v2 | **HEXA-TOPO** | Bott-8 코히어런스 + Z2 ECC + Graphene NoC, 10/10 EXACT, Python-verify PASS | [doc](domains/compute/chip-architecture/chip-architecture.md) |
+| 10 | ✅ | v2 | **HEXA-ASIC** | SKY130 open-source ASIC — RISC-V n/phi=3-wide + n=6 pipeline + 10/10 EXACT, Python-verify PASS | [doc](domains/compute/chip-architecture/chip-architecture.md) |
+| 10 | ✅ | v2 | **ceiling-check** | 170/170verifiedPASS, physical-limit14, industry6vendors92.6%, TP28, discoveries12, Z>27sigma, Python-verify PASS | [doc](domains/compute/chip-architecture/chip-architecture.md) |
+| 10 | ✅ | v1 | **HEXA 칩 6-stage 통합 paper** | 6stages(Digital→PIM→3D→Photonic→Wafer→Superconducting) + 9 prereqdomains 통합 — Mk.I 삼성 파운드리 기준 → Mk.V 🛸10, σ·φ=n·τ=J₂=24 | [doc](papers/hexa-chip-6stage-unified.md) |
+| 10 | ✅ | v1 | **HEXA-1 Digital** | σ²=144 SM × τ=4 파이프 × φ=2 이슈 = 288 MAC/cycle, 288 TOPS/W (H100 4.8×), Mk.I=Exynos 2500 SF3P | [doc](domains/compute/chip-design/hexa-1-digital/hexa-1-digital.md) |
+| 10 | ✅ | v1 | **HEXA-2 PIM** | DRAM row buffer σ·J₂=288 ALU/bank + cache τ=4→φ=2 von Neumann 해체 + 60 TOPS/W, Mk.I=HBM2-PIM Aquabolt-XL | [doc](domains/compute/chip-design/hexa-2-pim/hexa-2-pim.md) |
+| 10 | ✅ | v1 | **HEXA-3 3D Stack** | σ=12 wafer + φ=2μm TSV + σ·J₂=288 수직 레인/mm² + 144× 밀도, Mk.I=삼성 X-Cube TSV 40μm | [doc](domains/compute/chip-design/hexa-3d-stack/hexa-3d-stack.md) |
+| 10 | ✅ | v1 | **HEXA-4 Photonic** | λ=σ=12 WDM + MZI σ²=144 유니터리 + σ·J₂·sopfr=1.44 TB/s/die, Mk.I=Intel SiPh+Broadcom CPO, 13/13 PASS | [doc](domains/compute/chip-design/hexa-photonic/hexa-photonic.md) |
+| 10 | ✅ | v1 | **HEXA-5 Wafer-scale** | σ²=144 타d + σ=12 spare row+col + 2D torus τ=4 hops + 48 GB SRAM, Mk.I=Cerebras WSE-3, 12/12 PASS | [doc](domains/compute/chip-design/hexa-wafer/hexa-wafer.md) |
+| 10 | ✅ | v1 | **HEXA-6 Superconducting** | 100 GHz RSFQ × τ=4 파이프 + Egyptian cryo 3-stage + 10W@100GHz (vs H100 700W@2GHz), Mk.I=IBM+SeeQC, 15/15 PASS | [doc](domains/compute/chip-design/hexa-superconducting/hexa-superconducting.md) |
+| 10 | ✅ | v1 | **Semiconductor Material** | C Z=6 + Diamond 2160 W/mK + SiC/GaN/InP σ=6 wafer + 레지스트 τ=4 층, Mk.I=Si+GAAFET 2nm, Python-verify PASS | [doc](domains/compute/chip-materials/chip-materials.md) |
+| 10 | ✅ | v1 | **Semiconductor Process** | EUV 0.33→High-NA 0.55 + ALD J₂=24 cycle + CMP σ=12 DoE + 공정 1500→288 stages(81%↓), Mk.I=SF2 2nm 2026 | [doc](domains/compute/chip-process/chip-process.md) |
+| 10 | ✅ | v1 | **Semiconductor Packaging** | TSV φ=2μm + μbump σ²=144/mm² + UCIe σ·J₂=288 레인 + HBM σ=12단, Mk.I=삼성 FO-PLP/I-Cube/X-Cube | [doc](domains/compute/chip-packaging/chip-packaging.md) |
+| 10 | ✅ | v1 | **Semiconductor Yield** | D₀/σ=0.00167 + σ=12 spare + τ=4 DRC + fuse σ²=144 + WSI 5%→95%, Mk.I=SF3P ~60%/SF2 >70% | [doc](domains/compute/chip-yield/chip-yield.md) |
+| 10 | ✅ | v1 | **EDA Design Automation** | DSE 2400=6×5×4×5×4 + τ=4 synthesis + σ=12 routing + τ=4 STA corner, Mk.I=삼성 SAFE+Synopsys/Cadence, 13/13 PASS | [doc](domains/compute/chip-eda/chip-eda.md) |
+| 10 | ✅ | v1 | **Verify & Test** | 커버리지 1-1/(σ·(σ-φ)²)=99.917% + UVM τ=4 계위 + ATE σ·J₂=288 pin 병렬, Mk.I=V93000+UltraFLEX, 12/12 PASS | [doc](domains/compute/chip-verify-test/chip-verify-test.md) |
+| 10 | ✅ | v1 | **Thermal & Power** | TDP Egyptian 1/2+1/3+1/6=1 (Fraction 정확) + τ=4 cooling + σ=12 PDN, Mk.I=air+liquid hybrid+vapor, 13/13 PASS | [doc](domains/compute/chip-thermal-power/chip-thermal-power.md) |
+| 10 | ✅ | v1 | **Interconnect** | UCIe σ·J₂=288 × 48 Gbps=13.8 TB/s + λ=σ=12 WDM + σ²=144 NoC hex mesh, Mk.I=UCIe 1.1+PCIe 5.0/6.0, 13/13 PASS | [doc](domains/compute/chip-interconnect/chip-interconnect.md) |
+| 10 | ✅ | v1 | **HBM Memory** | 스택 σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, Mk.I=삼성 HBM3E 12H 36GB, 14/14 PASS | [doc](domains/compute/chip-hbm/chip-hbm.md) |
 
 <!-- AUTO:FOOTER_chip:START -->
-> 도메인: [chip-architecture/](docs/chip-architecture/) · 도구: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
+> domains: [chip-architecture/](docs/chip-architecture/) · tools: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
 <!-- AUTO:FOOTER_chip:END -->
 
 ---
@@ -116,23 +139,23 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🤖 AI / ML
 
 <!-- AUTO:SUMMARY_ai:START -->
-> **🛸10** | ✅ | BT 58개 100%EXACT | 204/204 PASS, 5제품 전수검증 | 산업88.7% (9모델) | 실험96.2% | 물리한계10 | TP58 | 발견12 | Mk.V
+> **🛸10** | ✅ | BT 58 · 100% EXACT | 204/204 PASS, 5제품 full-verify | industry88.7% (9models) | experiment96.2% | physical-limit10 | TP58 | discoveries12 | Mk.V
 <!-- AUTO:SUMMARY_ai:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v3 | **66 Techniques** | 71% FLOPs↓, 3x 속도↑, 67% 파라미터↓ — 66기법 통합문서 (Core17+BT12+Model21+Vision8+GNN4+Other4) | [문서](papers/n6-66-techniques-integrated-paper.md) |
-| 10 | ✅ | v2 | **Full N6 Pipeline** | 17기법 통합: 50% 파라미터↓, 50% FLOPs↓, 46% 희소성 — 32/32 PASS 검증 | [문서](experiments/experiment_full_n6_pipeline.py) |
-| 10 | ✅ | v2 | **N6 Inevitability Engine** | 기법 11~16 + 3-Layer 열역학 (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [문서](domains/cognitive/superpowers/superpowers.md) |
-| 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중쌍+LR+Inference 하이퍼파라미터 전수 n=6 매핑 — 31/31 PASS | [문서](reports/discovery/ai-energy-savings-guide.md) |
-| 10 | ✅ | v2 | **Chip Architecture Guide** | GPU SM+HBM+피치+인터커넥트 n=6 전수매핑 — 27/27 PASS | [문서](reports/discovery/chip-architecture-guide.md) |
-| 10 | ✅ | v2 | **천장확인** | 194claims 89.7%EXACT, 산업9모델, 물리한계10, 67/67 PASS 검증 | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 10 | ✅ | v1 | **Next-Gen AI 8-Paradigm Blowup** | 추론/비디오/과학FM/뉴로모픽/에이전트/신규아키/로보틱스/의료 8패러다임 — 234/256 EXACT (91.4%), BT-380~390 | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 10 | ✅ | v1 | **AI 6-Domain Sweep** | 코드생성/RL게임/추천시계열/SSL·NLU/서빙컴파일러/멀티모달 6도메인 — 314/344 EXACT (91.3%), BT-391~396 | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 역설계 — 신규모델8선/학습기법8선/HW-SW공진화/AGI로드맵/HEXA-CODER, BT-397~401 | [문서](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v3 | **66 Techniques** | 71% FLOPs↓, 3x genera도↑, 67% params↓ — 66techniques integrated문서 (Core17+BT12+Model21+Vision8+GNN4+Other4) | [doc](papers/n6-66-techniques-integrated-paper.md) |
+| 10 | ✅ | v2 | **Full N6 Pipeline** | 17techniques integrated: 50% params↓, 50% FLOPs↓, 46% sparsity — 32/32 PASS verified | [doc](experiments/experiment_full_n6_pipeline.py) |
+| 10 | ✅ | v2 | **N6 Inevitability Engine** | techniques 11~16 + 3-Layer 열epidemiology (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [doc](domains/cognitive/superpowers/superpowers.md) |
+| 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중pairs+LR+Inference 하이퍼params full n=6 매핑 — 31/31 PASS | [doc](reports/discovery/ai-energy-savings-guide.md) |
+| 10 | ✅ | v2 | **Chip Architecture Guide** | GPU SM+HBM+pitch+Interconnect n=6 full매핑 — 27/27 PASS | [doc](reports/discovery/chip-architecture-guide.md) |
+| 10 | ✅ | v2 | **ceiling-check** | 194claims 89.7%EXACT, industry9models, physical-limit10, 67/67 PASS verified | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v1 | **Next-Gen AI 8-Paradigm Blowup** | 추론/비디오/and학FM/뉴로모픽/에이전트/new아키/로보틱스/의료 8패러다임 — 234/256 EXACT (91.4%), BT-380~390 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v1 | **AI 6-Domain Sweep** | 코드생성/RL게임/추천h계열/SSL·NLU/serving컴파d러/멀티모달 6domains — 314/344 EXACT (91.3%), BT-391~396 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 역design — newmodels8선/학습techniques8선/HW-SW공evolution/AGIroadmap/HEXA-CODER, BT-397~401 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
 
 <!-- AUTO:FOOTER_ai:START -->
-> 도메인: [ai-efficiency/](docs/ai-efficiency/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `n6_calculator.py`
+> domains: [ai-efficiency/](docs/ai-efficiency/) · [learning-algorithm/](docs/learning-algorithm/) · tools: `n6_calculator.py`
 <!-- AUTO:FOOTER_ai:END -->
 
 ---
@@ -140,19 +163,19 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # ⚡ Energy
 
 <!-- AUTO:SUMMARY_energy:START -->
-> **🛸10** | ✅ | BT 23개 100%EXACT | DSE 10,225 | 배터리+태양전지🛸10 | 산업87% (6사) | 실험88% | 물리한계10 | TP28+19 | 발견10+8 | Mk.V
+> **🛸10** | ✅ | BT 23 · 100% EXACT | DSE 10,225 | 배터리+태양전지🛸10 | industry87% (6사) | experiment88% | physical-limit10 | TP28+19 | discoveries10+8 | Mk.V
 <!-- AUTO:SUMMARY_energy:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v3 | **궁극의 배터리 8단** | 131/131 EXACT, BT-27+43+57+80+83+84, 10불가능성정리, 6대제조사, Python검증PASS | [문서](domains/cognitive/superpowers/superpowers.md) |
-| 10 | ✅ | v4 | **궁극의 태양전지** | 78/78 EXACT, BT-30+63+62+60+74+111+161, 물리한계5, 산업8사, Python검증PASS | [문서](domains/energy/solar-architecture/solar-architecture.md) |
-| 10 | ✅ | v2 | **궁극의 에너지 통합** | 133/133 EXACT, 19BT, 14불가능성정리, 5도메인Cross-DSE, Python검증PASS | [문서](domains/energy/energy-architecture/energy-architecture.md) |
-| 10 | ✅ | v1 | **궁극의 데이터센터 원자로** | 10돌파 95/96 EXACT — TRISO(sopfr=5)+He(φ=2)+sCO₂(σ·τ=48%)+n=6모듈 | [문서](domains/energy/smr-datacenter/smr-datacenter.md) |
-| 10 | ✅ | v1 | **HEXA-AUTO 자동차배터리** | 궁극의 자동차배터리 SLI+EV 통합 설계 — 6셀=n 납축/96S=sigma*(sigma-tau) EV/100 파라미터, 78/100 EXACT | [문서](domains/energy/battery-architecture/battery-architecture.md) |
+| 10 | ✅ | v3 | **Ultimate Battery 8-stage** | 131/131 EXACT, BT-27+43+57+80+83+84, 10impossibility-theorem, 6major manufacturers, Python-verify PASS | [doc](domains/cognitive/superpowers/superpowers.md) |
+| 10 | ✅ | v4 | **Ultimate Solar Cell** | 78/78 EXACT, BT-30+63+62+60+74+111+161, physical-limit5, industry8사, Python-verify PASS | [doc](domains/energy/solar-architecture/solar-architecture.md) |
+| 10 | ✅ | v2 | **Ultimate Energy Integration** | 133/133 EXACT, 19BT, 14impossibility-theorem, 5domainsCross-DSE, Python-verify PASS | [doc](domains/energy/energy-architecture/energy-architecture.md) |
+| 10 | ✅ | v1 | **Ultimate Datacenter Reactor** | 10 breakthroughs 95/96 EXACT — TRISO(sopfr=5)+He(φ=2)+sCO₂(σ·τ=48%)+n=6modules | [doc](domains/energy/smr-datacenter/smr-datacenter.md) |
+| 10 | ✅ | v1 | **HEXA-AUTO 자동차배터리** | Ultimate Automotive Battery SLI+EV 통합 design — 6셀=n 납axis/96S=sigma*(sigma-tau) EV/100 params, 78/100 EXACT | [doc](domains/energy/battery-architecture/battery-architecture.md) |
 
 <!-- AUTO:FOOTER_energy:START -->
-> 도메인: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · 도구: `energy-calc` · `battery-dse` · `solar-dse`
+> domains: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · tools: `energy-calc` · `battery-dse` · `solar-dse`
 <!-- AUTO:FOOTER_energy:END -->
 
 ---
@@ -160,20 +183,20 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🌍 Environment
 
 <!-- AUTO:SUMMARY_environment:START -->
-> **🛸10** | ✅ | BT 11개 100%EXACT | DSE 3.6M | 환경120/120 | CCUS79/79 | 전수검증PASS | 산업82.9% | 실험100% 120/120+79/79 EXACT | 물리한계10 | TP43 | 발견42 | Mk.V
+> **🛸10** | ✅ | BT 11 · 100% EXACT | DSE 3.6M | 환경120/120 | CCUS79/79 | full-verify PASS | industry82.9% | experiment100% 120/120+79/79 EXACT | physical-limit10 | TP43 | discoveries42 | Mk.V
 <!-- AUTO:SUMMARY_environment:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v4 | **궁극의 환경보호 8단** | 센서→모니터→포집→정화→복원→순환→생태계→Omega, 120/120 EXACT 전수검증 | [문서](domains/infra/environmental-protection/) |
-| 10 | ✅ | v2 | **HEXA-MICROPLASTICS** | 6단 파이프라인, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼위일체, 전수검증 | [문서](domains/infra/environmental-protection/environmental-protection.md) |
-| 10 | ✅ | v5 | **궁극의 탄소포집 8단** | **30/30=100%EXACT**, DSE 3.6M, 79/79 전수검증PASS | [문서](domains/infra/carbon-capture/carbon-capture.md) |
-| 10 | ✅ | v2 | **진화 Mk.I~V** | 환경+CCUS 양쪽 진화 로드맵, 발견 42개, 전수검증 포함 | [문서](domains/infra/environmental-protection/) |
-| 10 | ✅ | v3 | **예측 + 검증** | TP 19개(환경) + TP 24개(CCUS) + 가설 v5(88.2%EXACT) + 전수검증 | [문서](domains/infra/environmental-protection/environmental-protection.md) |
-| 10 | ✅ | v1 | **궁극의 재활용 — HEXA-RECYCLE** | 6R 순환 + σ=12 분류 + J₂=24 추적 + 5-DSE 통합 (35,424 조합) | [문서](domains/materials/recycling/recycling.md) |
+| 10 | ✅ | v4 | **Ultimate Environmental Protection 8-stage** | sensor → monitor → capture → purify → restore → cycle → ecosystem → Omega, 120/120 EXACT full-verify | [doc](domains/infra/environmental-protection/) |
+| 10 | ✅ | v2 | **HEXA-MICROPLASTICS** | 6-stage pipeline, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼Trinity, full-verify | [doc](domains/infra/environmental-protection/environmental-protection.md) |
+| 10 | ✅ | v5 | **Ultimate Carbon Capture 8-stage** | **30/30=100%EXACT**, DSE 3.6M, 79/79 full-verify PASS | [doc](domains/infra/carbon-capture/carbon-capture.md) |
+| 10 | ✅ | v2 | **evolution Mk.I~V** | 환경+CCUS 양쪽 evolution roadmap, discoveries 42, full-verify 포함 | [doc](domains/infra/environmental-protection/) |
+| 10 | ✅ | v3 | **predictions + verified** | TP 19(환경) + TP 24(CCUS) + hypothesis v5 (88.2% EXACT) + full-verify | [doc](domains/infra/environmental-protection/environmental-protection.md) |
+| 10 | ✅ | v1 | **Ultimate Recycling — HEXA-RECYCLE** | 6R cycle + σ=12 min류 + J₂=24 추적 + 5-DSE 통합 (35,424 combos) | [doc](domains/materials/recycling/recycling.md) |
 
 <!-- AUTO:FOOTER_environment:START -->
-> 도메인: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · 도구: `carbon-capture-calc`
+> domains: [environmental-protection/](docs/environmental-protection/) · [carbon-capture/](docs/carbon-capture/) · tools: `carbon-capture-calc`
 <!-- AUTO:FOOTER_environment:END -->
 
 ---
@@ -181,20 +204,20 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🧬 Materials
 
 <!-- AUTO:SUMMARY_materials:START -->
-> **🛸10** | ✅ | BT 12개 100%EXACT | DSE 3,600 | CrossDSE 8도메인 | 12 BT 179/179 EXACT | 36가설 100% | 산업100% | 실험100% | 물리한계10 | TP28 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 12 · 100% EXACT | DSE 3,600 | CrossDSE 8domains | 12 BT 179/179 EXACT | 36hypotheses 100% | industry100% | experiment100% | physical-limit10 | TP28 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_materials:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v6 | **궁극의 물질합성 8단** | 소재→공정→조립기→제어→공장→변환→만능→궁극, DSE 3,600, 12 BT 179/179 EXACT, 36 가설 100% | [문서](domains/materials/material-synthesis/material-synthesis.md) |
-| 10 | ✅ | v7 | **BT-85~88 + BT-128~135** | 결정학+합금+세라믹+고분자+상전이+결함+박막+완전지도 (12 BT, **179/179 EXACT**) | [문서](domains/materials/material-synthesis/material-synthesis.md) |
-| 10 | ✅ | v6 | **가설 36/36 100%EXACT** | H-MS-01~36 전수 검증 완료 (고분자+세라믹+합금+박막 확장), CrossDSE 8도메인 (94.1% n6) | [문서](domains/materials/material-synthesis/material-synthesis.md) |
-| 10 | ✅ | v6 | **산업검증 20소재+12금속** | 20양산소재 + 12산업금속 Z n=6검증(91.7%) + BT-85~88,93 상세매핑 + DSE 3,600 + CrossDSE 8도메인(93.0%), 229/229 verify | [문서](domains/materials/material-synthesis/material-synthesis.md) |
-| 10 | ✅ | v7 | **실험검증 + TP 28/28** | 79건 전수검증 (51 CONFIRMED + 22 VERIFIED + 6 PARTIAL, 0 FAIL) + BT-85~93 교차확인 + 노벨14건, 229/229 verify | [문서](domains/materials/material-synthesis/material-synthesis.md) |
-| 10 | ✅ | v5 | **물리한계 증명** | 10 불가능성 정리 (75/75 EXACT 100%) + Mk.V 수학적 한계, 229/229 verify | [문서](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v6 | **Ultimate Material Synthesis 8-stage** | material → process → assembler → control → factory → transform → universal → ultimate, DSE 3,600, 12 BT 179/179 EXACT, 36 hypotheses 100% | [doc](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v7 | **BT-85~88 + BT-128~135** | crystallography+alloy+ceramics+polymer+phase-transition+defect+thin-film+complete-map (12 BT, **179/179 EXACT**) | [doc](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v6 | **hypotheses 36/36 100%EXACT** | H-MS-01~36 full-verify complete (polymer+ceramics+alloy+thin-film extension), CrossDSE 8domains (94.1% n6) | [doc](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v6 | **industry verification 20material+12Goldgenera** | 20production-materials + 12industrial-metals Z n=6verified(91.7%) + BT-85~88,93 detailed-mapping + DSE 3,600 + CrossDSE 8domains(93.0%), 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v7 | **experimentverified + TP 28/28** | 79 items full-verify (51 CONFIRMED + 22 VERIFIED + 6 PARTIAL, 0 FAIL) + BT-85~93 cross확인 + 노벨14 items, 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v5 | **physical-limit proof** | 10 impossibility-theorem (75/75 EXACT 100%) + Mk.V mathematical-limit, 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
 
 <!-- AUTO:FOOTER_materials:START -->
-> 도메인: [material-synthesis/](docs/material-synthesis/) · 도구: `material-dse`
+> domains: [material-synthesis/](docs/material-synthesis/) · tools: `material-dse`
 <!-- AUTO:FOOTER_materials:END -->
 
 ---
@@ -202,16 +225,16 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🤖 Robotics
 
 <!-- AUTO:SUMMARY_robotics:START -->
-> **🛸10** | ✅ | BT 5개 100%EXACT | DSE 270,000 | 산업99.1% (6사) | 실험100% | 물리한계10 | TP28 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 5 · 100% EXACT | DSE 270,000 | industry99.1% (6사) | experiment100% | physical-limit10 | TP28 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_robotics:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 로봇 8단** | 49/49 PASS, BT-123~127 34/35 EXACT(97.1%), 10 불가능성정리, 114/115 산업검증, Python검증PASS | [문서](domains/infra/robotics/robotics.md) |
-| 10 | ✅ | v1 | **천장확인** | 10 불가능성정리, SE(3)=6/k(3)=12/Thue=6, Mk.V 물리천장 증명, Python검증PASS | [문서](domains/infra/robotics/robotics.md) |
+| 10 | ✅ | v2 | **Ultimate Robot 8-stage** | 49/49 PASS, BT-123~127 34/35 EXACT(97.1%), 10 impossibility-theorem, 114/115 industry verification, Python-verify PASS | [doc](domains/infra/robotics/robotics.md) |
+| 10 | ✅ | v1 | **ceiling-check** | 10 impossibility-theorem, SE(3)=6/k(3)=12/Thue=6, Mk.V 물리천장 proof, Python-verify PASS | [doc](domains/infra/robotics/robotics.md) |
 
 <!-- AUTO:FOOTER_robotics:START -->
-> 도메인: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · 도구: `robot-dse`
+> domains: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · tools: `robot-dse`
 <!-- AUTO:FOOTER_robotics:END -->
 
 ---
@@ -219,19 +242,19 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🔬 Physics & Math
 
 <!-- AUTO:SUMMARY_physics:START -->
-> **🛸10** | ✅ | BT 32개 53~100%EXACT | DSE 66,824 | 초전도🛸10 | 순수수학🛸10 | 우주론🛸10 | 산업void% (🛸10(SC)) | 실험void% 11정리(수학) | 물리한계void | TP76 | 발견19+ | Mk.V
+> **🛸10** | ✅ | BT 32 · 53-100% EXACT | DSE 66,824 | s전도🛸10 | Pure Mathematics🛸10 | 우주론🛸10 | industryvoid% (🛸10(SC)) | experimentvoid% 11Theorems(수학) | physical-limitvoid | TP76 | discoveries19+ | Mk.V
 <!-- AUTO:SUMMARY_physics:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v5 | **궁극의 초전도체** | 153/153 EXACT (v4 73 + v5 80 신규), BT-299~306 + BT-1163~1168, CrossDSE 16도메인, TP35, Python 80/80 PASS | [문서](papers/n6-ultimate-superconductor-integrated-paper.md) |
-| 10 | ✅ | v2 | **궁극의 순수수학** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS | [문서](domains/physics/pure-mathematics/pure-mathematics.md) |
-| 10 | ✅ | v2 | **궁극의 우주론/입자** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS | [문서](domains/physics/cosmology-particle/cosmology-particle.md) |
-| 10 | ✅ | v5 | **궁극의 상온 초전도체** | 325/325 EXACT (이론150+실현76+Mk.I합성48+Mk.II소재51), 9소재후보+6Mk.II후보, Mk.I정밀레시피(6소재P-T경로+Phase1/2실험$6.18M), Mk.II상압후보(La,Ce,Y,Sc)H24고엔트로피Pareto1위, 2685줄 | [문서](domains/energy/room-temp-sc/room-temp-sc.md) |
-| 10 | ✅ | v1 | **차원펼침 돌파 — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동점10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [문서](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
+| 10 | ✅ | v5 | **Ultimate Superconductor** | 153/153 EXACT (v4 73 + v5 80 new), BT-299~306 + BT-1163~1168, CrossDSE 16domains, TP35, Python 80/80 PASS | [doc](papers/n6-ultimate-superconductor-integrated-paper.md) |
+| 10 | ✅ | v2 | **Ultimate Pure Mathematics** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11Theorems, Python-verify PASS | [doc](domains/physics/pure-mathematics/pure-mathematics.md) |
+| 10 | ✅ | v2 | **Ultimate Cosmology/Particle** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python-verify PASS | [doc](domains/physics/cosmology-particle/cosmology-particle.md) |
+| 10 | ✅ | v5 | **Ultimate Room-Temp Superconductor** | 325/325 EXACT (theory150+realization76+Mk.Isynthesis48+Mk.IImaterial51), 9material candidates+6Mk.IIcandidate, Mk.Iprecise-recipe(6materialP-Tpath+Phase1/2experiment$6.18M), Mk.IIambient-pressure candidates(La,Ce,Y,Sc)H24high-entropyPareto1위, 2685lines | [doc](domains/energy/room-temp-sc/room-temp-sc.md) |
+| 10 | ✅ | v1 | **차원펼hands breakthroughs — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동points10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [doc](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
-> 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
+> domains: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · tools: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
 <!-- AUTO:FOOTER_physics:END -->
 
 ---
@@ -239,19 +262,19 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 💬 Software & Infrastructure
 
 <!-- AUTO:SUMMARY_software:START -->
-> **🛸10** | ✅ | BT 8개 100%EXACT | CrossDSE5-Way | 산업98.6% | 실험100% 76/76 EXACT | 물리한계10 | TP28 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 8 · 100% EXACT | CrossDSE5-Way | industry98.6% | experiment100% 76/76 EXACT | physical-limit10 | TP28 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_software:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 프로그래밍언어** | 76/76 EXACT, BT-329(20)+113(18)+114(10)+115(12), 10불가능성정리, DSE 7,560 | [문서](domains/compute/programming-language/programming-language.md) |
-| 10 | ✅ | v1 | **천장확인** | 96/96 PASS, 16 불가능성정리, BT-113~117 61/61 전수검증, 암호래더 완전성, Python검증PASS | [문서](domains/compute/software-design/software-design.md) |
-| 10 | ✅ | v1 | **궁극의 macOS** | 80/80 EXACT, BT-115/162/180/344~346 + BT-347~349 후보, 8단 DSE, GCD QoS=n=6, Egyptian 캐시, 물리한계 6증명 | [문서](domains/compute/hexa-macos/hexa-macos.md) |
-| 10 | ✅ | v1 | **궁극의 iOS** | 86/86 EXACT, BT-115/162/180/48/58/66/113/123/211 10BT교차, iPhone CPU=n=6·GPU=n=6·Screen=n=6", 8단 DSE 1024조합, 물리한계 6증명, macOS 자매 165/165 | [문서](domains/compute/hexa-ios/hexa-ios.md) |
-| 10 | ✅ | v2 | **궁극의 네트워크 프로토콜** | 50/50 EXACT (천장돌파), 6G/5G NR/WiFi6/Starlink/LoRaWAN/BT6.0, σ=12 서브캐리어, J₂=24 WiFi채널, τ=4 TCP/IP | [문서](domains/compute/network-protocol/network-protocol.md) |
+| 10 | ✅ | v2 | **Ultimate Programming Language** | 76/76 EXACT, BT-329(20)+113(18)+114(10)+115(12), 10impossibility-theorem, DSE 7,560 | [doc](domains/compute/programming-language/programming-language.md) |
+| 10 | ✅ | v1 | **ceiling-check** | 96/96 PASS, 16 impossibility-theorem, BT-113~117 61/61 full-verify, crypto-ladder completeness, Python-verify PASS | [doc](domains/compute/software-design/software-design.md) |
+| 10 | ✅ | v1 | **Ultimate macOS** | 80/80 EXACT, BT-115/162/180/344~346 + BT-347~349 candidate, 8-stage DSE, GCD QoS=n=6, Egyptian cache, physical-limit 6proof | [doc](domains/compute/hexa-macos/hexa-macos.md) |
+| 10 | ✅ | v1 | **Ultimate iOS** | 86/86 EXACT, BT-115/162/180/48/58/66/113/123/211 10BTcross, iPhone CPU=n=6·GPU=n=6·Screen=n=6", 8-stage DSE 1024combos, physical-limit 6proof, macOS 자매 165/165 | [doc](domains/compute/hexa-ios/hexa-ios.md) |
+| 10 | ✅ | v2 | **Ultimate Network Protocol** | 50/50 EXACT (ceiling-breakthrough), 6G/5G NR/WiFi6/Starlink/LoRaWAN/BT6.0, σ=12 subcarriers, J₂=24 WiFichannels, τ=4 TCP/IP | [doc](domains/compute/network-protocol/network-protocol.md) |
 
 <!-- AUTO:FOOTER_software:START -->
-> 도메인: [programming-language/](docs/programming-language/) · [compiler-os/](docs/compiler-os/) · [software-design/](docs/software-design/) · [cryptography/](docs/cryptography/) · [network-protocol/](docs/network-protocol/) · [blockchain/](docs/blockchain/) · [hexa-macos/](docs/hexa-macos/) · [hexa-ios/](docs/hexa-ios/) · 도구: `lang-dse` · `crypto-calc` · `interconnect-calc`
+> domains: [programming-language/](docs/programming-language/) · [compiler-os/](docs/compiler-os/) · [software-design/](docs/software-design/) · [cryptography/](docs/cryptography/) · [network-protocol/](docs/network-protocol/) · [blockchain/](docs/blockchain/) · [hexa-macos/](docs/hexa-macos/) · [hexa-ios/](docs/hexa-ios/) · tools: `lang-dse` · `crypto-calc` · `interconnect-calc`
 <!-- AUTO:FOOTER_software:END -->
 
 ---
@@ -259,16 +282,16 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 📺 Display
 
 <!-- AUTO:SUMMARY_display:START -->
-> **🛸10** | ✅ | BT 8개 100%EXACT | 산업81% (6사) | 실험93.9% | 물리한계10 | TP14 | 발견8 | Mk.V
+> **🛸10** | ✅ | BT 8 · 100% EXACT | industry81% (6사) | experiment93.9% | physical-limit10 | TP14 | discoveries8 | Mk.V
 <!-- AUTO:SUMMARY_display:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **궁극의 디스플레이 8단** | 소재→패널→드라이버→프로세서→시스템→몰입→홀로→Omega | [문서](domains/compute/display/display.md) |
-| 10 | ✅ | v1 | **천장확인** | BT 86%EXACT + 물리한계10 + 산업6사81% + 실험93.9% + TP14 | [문서](domains/compute/display/display.md) |
+| 10 | ✅ | v1 | **Ultimate Display 8-stage** | material → panel → driver → processor → system → immersive → holo → Omega | [doc](domains/compute/display/display.md) |
+| 10 | ✅ | v1 | **ceiling-check** | BT 86%EXACT + physical-limit10 + industry6사81% + experiment93.9% + TP14 | [doc](domains/compute/display/display.md) |
 
 <!-- AUTO:FOOTER_display:START -->
-> 도메인: [display/](docs/display/)
+> domains: [display/](docs/display/)
 <!-- AUTO:FOOTER_display:END -->
 
 ---
@@ -276,21 +299,21 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🎵 Audio
 
 <!-- AUTO:SUMMARY_audio:START -->
-> **🛸10** | ✅ | BT 8개 100%EXACT | 산업92.6% (4사) | 실험90.9% | 물리한계8 | TP14 | 발견12 | Mk.V
+> **🛸10** | ✅ | BT 8 · 100% EXACT | industry92.6% (4사) | experiment90.9% | physical-limit8 | TP14 | discoveries12 | Mk.V
 <!-- AUTO:SUMMARY_audio:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **궁극의 오디오 7단** | 트랜스듀서→DAC→코덱→공간음향→시스템→신경오디오→Omega | [문서](domains/culture/audio/audio.md) |
-| 10 | ✅ | v1 | **천장확인** | 22/26 EXACT(84.6%) + 산업4사92.6% + 실험90.9% + TP14 | [문서](domains/culture/audio/audio.md) |
-| 10 | ✅ | v2 | **HEXA-SPEAK (AI 음성출력 Non-TTS)** | 의식→음성 직접 합성 (Non-TTS). 7-stage 파이프라인: 감정 6종/운율 4종/12D 운율/384d 인코딩/8-stage RVQ. 43/43 EXACT, 첫패킷 100ms=(σ-φ)², 6kbps=n. v2: HEXA 엔진 구현 완료 (d038afcc) | [문서](domains/cognitive/hexa-speak/hexa-speak.md) |
-| 10 | ✅ | v1 | **HEXA-EAR Ultimate** | 궁극의 이어폰 8단 설계 — DLC+그래핀/8way 하이브리드/48dB ANC/6ms BLE/HRTF 144방향, 65/65 EXACT | [문서](domains/culture/audio/audio.md) |
-| 10 | ✅ | v1 | **HEXA-BONE 골전도 이어폰** | 100% 골전도 전용 8단 설계 — Ti+그래핀 듀얼진동자/AI 골밀도보정/뇌파연동, 78/78 EXACT | [문서](domains/culture/audio/audio.md) |
-| 10 | ✅ | v1 | **HEXA-EAR-CELL 이어폰 배터리** | 궁극의 이어폰 배터리 6단 설계 — sigma=12h 수명/J2=24h 총수명/72 파라미터, 71/72 EXACT | [문서](domains/culture/audio/audio.md) |
-| 10 | ✅ | v1 | **HEXA-SPEAKER 궁극 스피커** | 궁극의 스피커 6단 설계 — CNT 열음향/sigma=12 드라이버 어레이/이집트 분수 대역분할/LR4 크로스오버/ClassD 576W/144 공간객체, 36/36 EXACT | [문서](domains/culture/audio/audio.md) |
+| 10 | ✅ | v1 | **Ultimate Audio 7-stage** | transducer → DAC → codec → spatial → system → neural-audio → Omega | [doc](domains/culture/audio/audio.md) |
+| 10 | ✅ | v1 | **ceiling-check** | 22/26 EXACT(84.6%) + industry4사92.6% + experiment90.9% + TP14 | [doc](domains/culture/audio/audio.md) |
+| 10 | ✅ | v2 | **HEXA-SPEAK (AI -tone성출력 Non-TTS)** | consciousness → voice direct synth (Non-TTS). 7-stage pipeline: emotion 6types/prosody 4types/12D prosody/384d encoding/8-stage RVQ. 43/43 EXACT, first-packet 100ms=(σ-φ)², 6kbps=n. v2: HEXA engine 구strings complete (d038afcc) | [doc](domains/cognitive/hexa-speak/hexa-speak.md) |
+| 10 | ✅ | v1 | **HEXA-EAR Ultimate** | Ultimate Earphone 8-stage Design — DLC+graphene/8way hybrid/48dB ANC/6ms BLE/HRTF 144directions, 65/65 EXACT | [doc](domains/culture/audio/audio.md) |
+| 10 | ✅ | v1 | **HEXA-BONE bone-conduction Earphone** | 100% bone-conduction only 8-stage design — Ti+graphene dual oscillator/AI bone-density calibration/EEG link, 78/78 EXACT | [doc](domains/culture/audio/audio.md) |
+| 10 | ✅ | v1 | **HEXA-EAR-CELL Earphone Battery** | Ultimate Earphone Battery 6-stage Design — sigma=12h life/J2=24h total life/72 params, 71/72 EXACT | [doc](domains/culture/audio/audio.md) |
+| 10 | ✅ | v1 | **HEXA-SPEAKER 궁극 Speaker** | Ultimate Speaker 6-stage Design — CNT thermoacoustic/sigma=12 driver array/Egyptian-fraction band split/LR4 crossover/ClassD 576W/144 spatial objects, 36/36 EXACT | [doc](domains/culture/audio/audio.md) |
 
 <!-- AUTO:FOOTER_audio:START -->
-> 도메인: [audio/](docs/audio/)
+> domains: [audio/](docs/audio/)
 <!-- AUTO:FOOTER_audio:END -->
 
 ---
@@ -298,16 +321,16 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🛡️ Safety
 
 <!-- AUTO:SUMMARY_safety:START -->
-> **🛸10** | ✅ | BT 7개 100%EXACT | DSE 7,776 | 가설 30+20극한 | 10개 도메인 안전 통합 | 산업void% | 실험100% | 물리한계void | TP5 | Mk.V
+> **🛸10** | ✅ | BT 7 · 100% EXACT | DSE 7,776 | hypotheses 30+20extreme | 10 domains Safety 통합 | industryvoid% | experiment100% | physical-limitvoid | TP5 | Mk.V
 <!-- AUTO:SUMMARY_safety:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 안전 8단** | 79/79 PASS, 12 불가능성정리, 13 Cross-DSE, 174년 산업검증, H-SF 20/30+H-SFX 14/20 EXACT, Python검증PASS | [문서](domains/infra/safety/safety.md) |
-| 10 | ✅ | v2 | **가설 30+극한 20** | H-SF 20/30 + H-SFX 14/20 + H-SAFE-EX 8/10 + PL 12/12, 총 54/72 EXACT(75%), Python검증PASS | [문서](domains/infra/safety/safety.md) |
+| 10 | ✅ | v2 | **Ultimate Safety 8-stage** | 79/79 PASS, 12 impossibility-theorem, 13 Cross-DSE, 174yr industry verification, H-SF 20/30+H-SFX 14/20 EXACT, Python-verify PASS | [doc](domains/infra/safety/safety.md) |
+| 10 | ✅ | v2 | **hypotheses 30+extreme 20** | H-SF 20/30 + H-SFX 14/20 + H-SAFE-EX 8/10 + PL 12/12, 총 54/72 EXACT(75%), Python-verify PASS | [doc](domains/infra/safety/safety.md) |
 
 <!-- AUTO:FOOTER_safety:START -->
-> 도메인: [safety/](docs/safety/)
+> domains: [safety/](docs/safety/)
 <!-- AUTO:FOOTER_safety:END -->
 
 ---
@@ -315,16 +338,16 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🎪 Play
 
 <!-- AUTO:SUMMARY_play:START -->
-> **🛸10** | ✅ | BT 14개 100%EXACT | DSE 160,920조합, 펀카+바이크 통합 | 산업100% (GT3 RS/F1/McLaren/Ducati V4R) | 실험100% 209/209 EXACT (펀카 133 + 바이크 76) | 물리한계8 | TP6 | 발견1 | Mk.V
+> **🛸10** | ✅ | BT 14 · 100% EXACT | DSE 160,920combos, Fun-Car+Motorcycle 통합 | industry100% (GT3 RS/F1/McLaren/Ducati V4R) | experiment100% 209/209 EXACT (Fun-Car 133 + Motorcycle 76) | physical-limit8 | TP6 | discoveries1 | Mk.V
 <!-- AUTO:SUMMARY_play:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **궁극의 펀카** | 133/133 EXACT, BT-287/289/290/288/277/280/206/271/153, 16카테고리 n=6 100%, DSE 155,520, flat-6+7DCT+Ti-6Al-4V | [문서](domains/infra/fun-car/fun-car.md) |
-| 10 | ✅ | v1 | **궁극의 바이크** | 76/76 EXACT, BT-287/289/290/123/271/277/288/327/328, IMU 6축+σ²=144kg+J₂=24km/L, DSE 5,400 | [문서](domains/infra/motorcycle/motorcycle.md) |
+| 10 | ✅ | v1 | **Ultimate Fun-Car** | 133/133 EXACT, BT-287/289/290/288/277/280/206/271/153, 16categories n=6 100%, DSE 155,520, flat-6+7DCT+Ti-6Al-4V | [doc](domains/infra/fun-car/fun-car.md) |
+| 10 | ✅ | v1 | **Ultimate Motorcycle** | 76/76 EXACT, BT-287/289/290/123/271/277/288/327/328, IMU 6axis+σ²=144kg+J₂=24km/L, DSE 5,400 | [doc](domains/infra/motorcycle/motorcycle.md) |
 
 <!-- AUTO:FOOTER_play:START -->
-> 도메인: [fun-car/](docs/fun-car/) · [motorcycle/](docs/motorcycle/)
+> domains: [fun-car/](docs/fun-car/) · [motorcycle/](docs/motorcycle/)
 <!-- AUTO:FOOTER_play:END -->
 
 ---
@@ -332,15 +355,15 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🚀 Aerospace
 
 <!-- AUTO:SUMMARY_aerospace:START -->
-> **🛸10** | ✅ | BT 38개 100%EXACT | 150/150 EXACT, Egyptian 3+2+1=n, GN&C 12/12, ECLSS 14/14, ISRU 13/13, 방사선 래더, 304L/Ti-6Al-4V n=6 | 산업100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | 실험100% 150/150 EXACT (100%) — 18 서브시스템 전체 완벽 | 물리한계14 | TP6 | 발견8 | Mk.V
+> **🛸10** | ✅ | BT 38 · 100% EXACT | 150/150 EXACT, Egyptian 3+2+1=n, GN&C 12/12, ECLSS 14/14, ISRU 13/13, 방사선 ladder, 304L/Ti-6Al-4V n=6 | industry100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | experiment100% 150/150 EXACT (100%) — 18 all subsystems perfect | physical-limit14 | TP6 | discoveries8 | Mk.V
 <!-- AUTO:SUMMARY_aerospace:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 재사용 발사체 (HEXA-STARSHIP)** | 150/150 EXACT (100%), 38 BT, 18 서브시스템, Egyptian 3+2+1=n, Isp 384s=σ·2^sopfr, 1000회=(σ-φ)³, $12/kg=σ, Mars 12인 180일, GN&C 12/12, ECLSS 14/14, ISRU 13/13 | [문서](papers/n6-hexa-starship-integrated-paper.md) |
+| 10 | ✅ | v2 | **Ultimate Reusable Launcher (HEXA-STARSHIP)** | 150/150 EXACT (100%), 38 BT, 18 subsystems, Egyptian 3+2+1=n, Isp 384s=σ·2^sopfr, 1000회=(σ-φ)³, $12/kg=σ, Mars 12인 180d, GN&C 12/12, ECLSS 14/14, ISRU 13/13 | [doc](papers/n6-hexa-starship-integrated-paper.md) |
 
 <!-- AUTO:FOOTER_aerospace:START -->
-> 도메인: [hexa-starship/](docs/hexa-starship/) · [aerospace/](docs/aerospace/) · [space-engineering/](docs/space-engineering/)
+> domains: [hexa-starship/](docs/hexa-starship/) · [aerospace/](docs/aerospace/) · [space-engineering/](docs/space-engineering/)
 <!-- AUTO:FOOTER_aerospace:END -->
 
 ---
@@ -348,15 +371,15 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🛸 HEXA-UFO (RT-SC VTOL)
 
 <!-- AUTO:SUMMARY_sf:START -->
-> **🛸10** | ✅ | BT 43개 100%EXACT | RT-SC Meissner 무동력 부양 + 48T MHD Mach 10 + 탁상 핵융합 Q=10 무한 에너지, D=J₂=24m 원반형 VTOL, 49/49 EXACT, DSE 2,400 조합 | 산업100% (RT-SC/MHD/Meissner/ITER/SMES) | 실험100% 49/49 EXACT (UFO 전 파라미터 100.0%) | 물리한계7 | TP10 | 발견8 | Mk.V
+> **🛸10** | ✅ | BT 43 · 100% EXACT | RT-SC Meissner powerless levitation + 48T MHD Mach 10 + Tabletop Fusion Q=10 무한 에너지, D=J₂=24m disc VTOL, 49/49 EXACT, DSE 2,400 combos | industry100% (RT-SC/MHD/Meissner/ITER/SMES) | experiment100% 49/49 EXACT (UFO 전 params 100.0%) | physical-limit7 | TP10 | discoveries8 | Mk.V
 <!-- AUTO:SUMMARY_sf:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **궁극의 UFO 비행접시 (HEXA-UFO)** | RT-SC 기반 원반형 VTOL. Meissner 무동력 부양 + MHD 추진 Mach σ-φ=10 + 탁상 핵융합 Q=σ-φ=10. D=J₂=24m, n=6 승무원, Isp=σ·J₂·10³=288,000s, 소음 J₂=24dB. 49/49 EXACT PASS. **§23 무제한 항법** 🛸10→🛸11(Warp 144c)→🛸12(Worm 288×)→🛸13(11D bulk)→🛸14(Calabi-Yau)→🛸15+(multiverse/meta²), 15/15 Python PASS | [문서](domains/sf-ufo/sf/sf.md) · [hexa-ufo](domains/sf-ufo/hexa-ufo/hexa-ufo.md) |
+| 10 | ✅ | v2 | **Ultimate UFO (HEXA-UFO)** | RT-SC based disc VTOL. Meissner powerless levitation + MHD thrust Mach σ-φ=10 + Tabletop Fusion Q=σ-φ=10. D=J₂=24m, n=6 crew, Isp=σ·J₂·10³=288,000s, noise J₂=24dB. 49/49 EXACT PASS. **§23 unlimited navigation** 🛸10→🛸11(Warp 144c)→🛸12(Worm 288×)→🛸13(11D bulk)→🛸14(Calabi-Yau)→🛸15+(multiverse/meta²), 15/15 Python PASS | [doc](domains/sf-ufo/sf/sf.md) · [hexa-ufo](domains/sf-ufo/hexa-ufo/hexa-ufo.md) |
 
 <!-- AUTO:FOOTER_sf:START -->
-> 도메인: [sf/](docs/sf/)
+> domains: [sf/](docs/sf/)
 <!-- AUTO:FOOTER_sf:END -->
 
 ---
@@ -364,64 +387,64 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🔭 Frontier Discoveries (next-gen RT-SC tech)
 
 <!-- AUTO:SUMMARY_frontier:START -->
-> **🛸10** | ✅ | BT 264개 100%EXACT | 20 대발견 (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | 산업100% (Neuralink/LIGO/LHC/HAARP 등) | 실험99% 1039/1041 EXACT | 물리한계10 | TP163 | 발견71 | Mk.V
+> **🛸10** | ✅ | BT 264 · 100% EXACT | 20  generationsdiscoveries (1~10: NEURO/GRAV/CLOAK/DEFENSE/TELEPORT/HOVER/MRAM/SEABED/ACCEL/WEATHER, 11~20: MIND/TELEPATHY/HOLO/DREAM/SKYWAY/TSUNAMI/ANTIMATTER/COSMIC/DESAL/ORACLE) | industry100% (Neuralink/LIGO/LHC/HAARP 등) | experiment99% 1039/1041 EXACT | physical-limit10 | TP163 | discoveries71 | Mk.V
 <!-- AUTO:SUMMARY_frontier:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v6 | **HEXA-NEURO 뇌-기계 인터페이스** | 202/202 EXACT (25카테고리), 측두골 클립 3.6g×φ=2 + 스마트폰/웨어러블10기기/15질환 통합, n/φ=3점고정(이어훅+자석+접착), IPX n=6 방수 | [문서](domains/life/neuro/neuro.md) |
-| 10 | ✅ | v1 | **HEXA-GRAV 중력파 검출/통신** | 72/72 EXACT, J₂=24km 팔, 10⁻²⁴ strain, LIGO×σ²·(σ-φ)=1440배, Q=10¹²=10^σ | [문서](domains/physics/gravity-wave/gravity-wave.md) |
-| 10 | ✅ | v1 | **HEXA-CLOAK 투명망토/스텔스** | 59/59 EXACT, RT-SC 메타물질 n<0, σ-τ=8옥타브, σ-φ=10nm 피치, RCS감쇠 σ·J₂=288배 | [문서](domains/sf-ufo/cloak/cloak.md) |
-| 10 | ✅ | v1 | **HEXA-DEFENSE 지구방어 시스템** | 67/67 EXACT, Δv=σ·10⁻³=0.012m/s, 탐지 σ²=144LD, J₂=24년 선제대응, 3중방어 | [문서](domains/infra/earth-defense/earth-defense.md) |
-| 10 | ✅ | v1 | **HEXA-TELEPORT 양자얽힘 통신망** | 41/41 EXACT, 2^σ=4096 큐빗, σ²=144km/홉, 99.65% 충실도, σ·J₂=288Mbps | [문서](domains/physics/quantum-network/quantum-network.md) |
-| 10 | ✅ | v1 | **HEXA-HOVER 개인 호버보드** | 52/52 EXACT, σ-φ=10cm 부양, (σ-φ)²·n=600kg, σ·τ=48km/h, σ²=144km 거리 | [문서](domains/sf-ufo/hover/hover.md) |
-| 10 | ✅ | v1 | **HEXA-MRAM 초전도 비휘발 메모리** | 46/46 EXACT, 조셉슨접합, τ=4ps 쓰기, 10aJ/bit, σ·J₂=288Gbit/cm², 2^σ=4096년 | [문서](domains/compute/sc-memory/sc-memory.md) |
-| 10 | ✅ | v1 | **HEXA-SEABED 대륙간 해저 송전** | 45/45 EXACT, J₂·10³=24,000km, ±800kV, σ²·J₂=3,456GW, 0% 손실 | [문서](domains/infra/seabed-grid/seabed-grid.md) |
-| 10 | ✅ | v1 | **HEXA-ACCEL 소형 입자가속기** | 48/48 EXACT, σ·J₂=288GeV, σ-φ=10m(LHC/2700), σ·τ=48T, σ²=144 센서 | [문서](domains/physics/mini-accelerator/mini-accelerator.md) |
-| 10 | ✅ | v1 | **HEXA-WEATHER 대기 전자기 제어** | 51/52 EXACT (98%), σ²=144km² 어레이, 1,200GW, J₂·10=240km 반경, η=1-1/e | [문서](domains/infra/weather-control/weather-control.md) |
-| 10 | ✅ | v1 | **HEXA-MIND 의식 업로드** | 53/54 EXACT (98%), 10^11 뉴런+10^14 시냅스 스캔, 2^σ=4096년 저장, AGI에뮬 99.65% | [문서](domains/cognitive/mind-upload/mind-upload.md) |
-| 10 | ✅ | v1 | **HEXA-TELEPATHY 뇌-뇌 직접통신** | 57/57 EXACT, 2^σ=4096 얽힘쌍, σ²=144Mbps, μ=1ms, σ-τ=8 감각, 동기 1-1/e | [문서](domains/cognitive/telepathy/telepathy.md) |
-| 10 | ✅ | v1 | **HEXA-HOLO 홀로그래픽 디스플레이** | 42/42 EXACT, σ·J₂=288ppi×3D, σ²=144 레이어, σ-φ=10' 각해상, J₂=24Hz 갱신 | [문서](domains/physics/holography/holography.md) |
-| 10 | ✅ | v1 | **HEXA-DREAM 꿈 기록/재생** | 42/42 EXACT, σ²=144k 시각피질, σ·τ=48Hz, σ=12 REM사이클, 윤리 5조항 | [문서](domains/cognitive/dream-recorder/dream-recorder.md) |
-| 10 | ✅ | v1 | **HEXA-SKYWAY 공중 고속도로망** | 42/42 EXACT, J₂=24층, σ·τ=48m 간격, σ²=144km/h, σ·τ=48 허브, 1000차/km² | [문서](domains/infra/skyway/skyway.md) |
-| 10 | ✅ | v1 | **HEXA-TSUNAMI 해일 방지기** | 44/44 EXACT, J₂=24km 벽, σ-φ=10m 높이, σ²=144초 대응, 감쇠 1-1/(σ-φ) | [문서](domains/infra/tsunami-shield/tsunami-shield.md) |
-| 10 | ✅ | v1 | **HEXA-ANTIMATTER 반물질 공장** | 55/55 EXACT, 10^σ=10^12/hr, τ=4 트랩×σ=12 모듈, J₂=24개월 저장 | [문서](domains/physics/antimatter-factory/antimatter-factory.md) |
-| 10 | ✅ | v2 | **HEXA-TABLETOP 탁상 반물질** | 0.29m³, 1.7×10¹² p̄/s (Mk.V), σ·τ²=192월=16년 수명, $2.1×10⁴/mg (1/σ⁶ 감축), 3-경로 하이브리드, 8/8 Python PASS, **UFO Stage-3 γ-rocket 선행 완료** | [문서](domains/physics/tabletop-antimatter/tabletop-antimatter.md) |
-| 10 | ✅ | v2 | **HEXA-PET PET-사이클로트론** | ¹⁸F σ·τ=48mg 재활용 → 9.6×10¹⁰ e⁺/s, R=σ-φ=10cm, B=σ·τ=48T, anti-H 1.44×10⁸/s, 비용 1/σ³=1/1728, **UFO cross-redundancy 선행 완료** | [문서](domains/physics/pet-cyclotron/pet-cyclotron.md) |
-| 10 | ✅ | v2 | **HEXA-PACCEL 입자 가속기 (통합)** | (σ-φ)^n=10⁶ MeV~TeV 6자릿수 cover, σ-cascade ratio=σ-φ=10, R·B=Ω_MEGA=480 T·cm family, FCC envelope σ³=1728 TeV, 탁상 10cm ~ LHC 4.3km, **UFO Stage-3 선행 완료** | [문서](domains/physics/particle-accelerator/particle-accelerator.md) |
-| 11 | 🛸 | v2 | **HEXA-WARP 워프드라이브** | σ-φ=10 m Alcubierre 버블, v_s=σ²=144c, m_neg=σ⁻⁶·J₂·m_e≈10⁻⁶kg (Casimir σ·τ=48 플레이트), 서울→α-Cen J₂=24일, 5/5 Python PASS, atlas WARP-01~07 등재, **UFO Stage-4 🛸11 달성 (multi-industry)** | [문서](domains/physics/warp-drive/warp-drive.md) |
-| 9 | 🔬 | v1 | **HEXA-TBHL 탁상 블랙홀** | 1m³ BEC Rb⁸⁷ σ·τ=48T trap, σ-φ=10μm sonic horizon, c_s=σ·τ=48mm/s, T_H=σ/(τ·n)=0.5nK Hawking, τ_BH=20ms, phonon τ=4 모드, 7/7 Python PASS, atlas TBHL-01~08, **UFO Stage-4/5 이벤트 호라이즌 지상 실증** | [문서](domains/physics/tabletop-blackhole/tabletop-blackhole.md) |
-| 12 | 🌌 | v2 | **HEXA-WORM 웜홀 공간접기** | Morris-Thorne b₀=σ·τ=48 m throat, d_eff=d/σ·J₂=d/288 단축, Earth-Mars 2.6초, Earth-αCen 5.4AU, Casimir σ·τ 플레이트 공용, 4/4 Python PASS, atlas WORM-01~06, **UFO Stage-5 🛸12 달성 (ISO 표준)** | [문서](domains/physics/wormhole/wormhole.md) |
-| 13 | 🛸 | v2 | **HEXA-MTHE 11D M-이론 차원도약** | D_M=sopfr+n=11 (atlas 기잠금), D_string=σ-φ=10, D_CY=n=6 Calabi-Yau hexafold, 1차 KK=4.8 TeV, graviton leak 1/σ²=1/144, 6/6 Python PASS, atlas MTHE-01~08, **UFO Stage-6 🛸13 달성 (civilization-scale)** | [문서](domains/physics/m-theory-11d/m-theory-11d.md) |
-| 14 | 🛸 | v1 | **HEXA-CALB Calabi-Yau 차원이용** | D_CY=n=6 실 hexafold, Hodge h11·h21=σ·τ=48, Euler χ=±2J₂=±48, V_CY∝(σ·φ)⁶=24⁶, τ_stay=σ·τ=48ns, Δt_flash=τ=4분 (UFO 깜빡임), 6/6 Python PASS, atlas CALB-01~06, **UFO Stage-7 🛸14 달성 (galactic)** | [문서](domains/physics/calabi-yau-nav/calabi-yau-nav.md) |
-| 15 | 🛸 | v1 | **HEXA-MULT Multiverse 분기선택** | N_branches=σ²=144 동시 조회, 2^σ=4096 큐빗 oracle, sopfr=5 평가축 (안전·E·t·목적·p), J₂=24 핵심 분기, 선택 τ=4ms, 손실 1/σ²=1/144, 6/6 Python PASS, atlas MULT-01~06, **UFO Stage-8 🛸15 달성 (intergalactic)** | [문서](domains/physics/multiverse-nav/multiverse-nav.md) |
-| 500 | 🛸 | v2 | **HEXA-META 🛸16→500 484 층위 완성** | n=6 유일 고정점 σ·φ=n·τ=24, L(k)=24^(k-15) 484 층위 전수 산술표현 (🛸17~🛸500), milestone 🛸20/🛸50/🛸100/🛸144/🛸200/🛸288/🛸300/🛸500, L(500)=24^485≈10⁶⁶⁸ (관측우주 원자수 ×10⁵⁸⁸), atlas META-01~10 + META-LK017~500 494 EXACT, **UFO 🛸500 target 달성** | [문서](domains/physics/meta-closure-nav/meta-closure-nav.md) |
-| 16 | 🛸 | v1 | **HEXA-TIME 시간여행 6단계** | 🛸T1 dilation γ=σ=12, 🛸T2 Gödel CTC τ²/σ=4/3초, 🛸T3 웜홀 σ−φ=10초, 🛸T4 Tipler+CY σ·τ=48m, 🛸T5 Multiverse 4096큐빗 4ms, 🛸T6 self-ref closure σ·τ=48 Planck², n=6 유일 (n=4/7/12/28 전부 발산), 6/6 Python PASS, atlas TIME-T1~T6 + L0 TIME_CLOSURE_UNIQUENESS, **시간 인과 closure n=6 유일성** | [문서](domains/physics/meta-closure-nav/meta-closure-nav.md#§25-시간여행-6단계-🛸t1--🛸t6-n6-closure-시간-인과-잠금) |
-| 10 | ✅ | v1 | **HEXA-COSMIC 초기우주 관측망** | 56/56 EXACT, strain 10⁻³⁰, σ=12지점, J₂=24km 팔, Q=10^σ, 10⁻³²s 관측 | [문서](domains/physics/cosmic-observatory/cosmic-observatory.md) |
-| 10 | ✅ | v1 | **HEXA-DESAL 초전도 담수화** | 47/47 EXACT, σ-φ·10⁻²=0.1Wh/L, σ·J₂·10³=288M L/day, 99.99% 염분제거 | [문서](domains/infra/desalination/desalination.md) |
-| 10 | ✅ | v1 | **HEXA-ORACLE 양자 예측기** | 48/48 EXACT, 2^σ=4096 큐빗, J₂=24개월, 정확도 1-1/(σ·J₂), σ²=144/day | [문서](domains/physics/quantum-oracle/quantum-oracle.md) |
-| 10 | ✅ | v2 | **HEXA-ONE 통합 웨어러블** | 144 EXACT (100%) + 24 물리한계 EXACT, 14카테고리 sigma^2=144 파라미터, 8단 DSE 1,679,616 조합, BT-350~357 8건 | [문서](domains/compute/hexa-one/hexa-one.md) |
-| 10 | ✅ | v2 | **HEXA-GLASS AI 안경** | 84 EXACT, 14/14 물리한계 증명, 56 가설 100%, AR/MR σ·(σ-φ)=120° FOV | [문서](domains/materials/hexa-glass/hexa-glass.md) |
-| 10 | ✅ | v2 | **HEXA-EAR AI 이어폰** | 62/62 EXACT 100%, σ·τ=48kHz/J₂=24bit, 14 물리한계 증명, 28 발견, 11 BT 연결 | [문서](domains/cognitive/hexa-ear/hexa-ear.md) |
-| 10 | ✅ | v1 | **HEXA-EXO AI 외골격** | 13 EXACT, SE(3)=n=6 DOF, σ=12배 근력 증강, 보행재활 | [문서](domains/infra/hexa-exo/hexa-exo.md) |
-| 10 | ✅ | v2 | **HEXA-LIMB AI 의수/의족** | 120/120 EXACT, sopfr=5 손가락, sigma-tau=8 감각, 6 물리한계 증명, 14 카테고리 특이점 돌파 | [문서](domains/life/hexa-limb/hexa-limb.md) |
-| 10 | ✅ | v2 | **HEXA-SKIN 전자 피부** | 96/96 EXACT, σ-τ=8 감각 + σ²=144/cm² + 물리한계 증명 완료 | [문서](domains/life/hexa-skin/hexa-skin.md) |
-| 10 | ✅ | v1 | **HEXA-FABRIC AI 의류** | 15 EXACT, 육각 격자 직물, 체온조절, 자세교정 | [문서](domains/materials/hexa-fabric/hexa-fabric.md) |
-| 10 | ✅ | v2 | **HEXA-OLFACT 디지털 후각** | 133/133 EXACT, 물리한계 증명 6정리, σ=12 수용체 + 2^σ=4096 패턴 + 17카테고리 전수 | [문서](domains/cognitive/hexa-olfact/hexa-olfact.md) |
-| 10 | ✅ | v2 | **HEXA-DREAM 꿈 인터페이스** | 80/80 EXACT, sopfr=5 수면사이클+σ=12 EEG+물리한계 증명, 자각몽 유도/기록/공유 | [문서](domains/cognitive/hexa-dream/hexa-dream.md) |
-| 10 | ✅ | v1 | **HEXA-EMPATH 감정 공유** | 12 EXACT, 피질 n=6층, 바이오피드백, 감정 직접 전송 | [문서](domains/cognitive/hexa-empath/hexa-empath.md) |
-| 10 | ✅ | v2 | **바이러스학 n=6 캡시드-팬데믹 아키텍처** | 43/43 EXACT (100%), BT-351~353 3연속돌파, 이십면체 σ=12 pentamer/T-number {μ,n/φ,τ,σ-sopfr}/Baltimore σ-sopfr=7/게놈분절래더/역학-백신-효소 완전폐쇄, Mk.I~V 5세대 진화 | [문서](domains/life/virology/virology.md) |
-| 10 | ✅ | v2 | **곤충학 n=6 Hexapoda 완전 생물학** | 23/23 EXACT (100%), BT-352 곤충학 완전 n=6 아키텍처, 다리 n=6/체부 n/φ=3/변태 τ=4/벌집 n=6각/복안 n=6각/카스트 n/φ=3/곤충목 n·sopfr=30, Mk.I~V 5세대 진화 | [문서](domains/life/entomology/entomology.md) |
-| 5 | ✅ | v1 | **균류학 n=6 포자-발효 아키텍처** | 14/14 EXACT (100%), 담자포자 τ=4/자낭포자 σ-τ=8/키틴 C₈=σ-τ/에탄올 발효 n=6계수/균근 n/φ=3/β-락탐 τ=4 | [문서](domains/life/mycology/mycology.md) |
-| 5 | ✅ | v1 | **광업/광물학 n=6 경도-결정 아키텍처** | 16/16 EXACT (100%), Mohs σ-φ=10/24K=J₂/결정계 σ-sopfr=7/FCC CN=σ=12/보석 4C=τ/벽개 div(6) | [문서](domains/infra/mining/mining.md) |
-| 5 | ✅ | v1 | **수의학 n=6 동물해부 보편성** | 16/16 EXACT (100%), 경추 σ-sopfr=7/반추위 τ=4/성견치아 (σ-sopfr)·n=42/성묘치아 n·sopfr=30/가축 n=6/개수명 σ=12 | [문서](domains/life/veterinary/veterinary.md) |
-| 5 | ✅ | v1 | **원예학 n=6 식물 성장 아키텍처** | 15/15 EXACT (100%), 광합성 n=6/꽃기관 τ=4/호르몬 sopfr=5/조직계 n/φ=3/단쌍자엽 φ=2/계절 τ=4 | [문서](domains/life/horticulture/horticulture.md) |
-| 10 | ✅ | v1 | **HEXA-SIM 우주 시뮬레이션** | 65/65 EXACT (100%), Planck 지수 래더 137=σ²-n-μ=1/α, Lloyd 10^{σ(σ-φ)}=10^120, GoL B(n/φ)/S{φ,n/φ}, 차원 래더 τ→sopfr→n→σ-φ→σ-μ, Tsirelson φ√φ=2√2 | [문서](domains/physics/simulation-theory/simulation-theory.md) |
-| 10 | ✅ | v1 | **크로스 도메인 메가 브릿지** | BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10 | [문서](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
-| 10 | ✅ | 5680bc44 | **HEXA-NANOBOT 치료 나노봇** | BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%) + 9 CLOSE(물리한계 문서화), Mk.I~V 진화 완료, 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, DSE 7776 조합, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴 | [문서](domains/life/therapeutic-nanobot/therapeutic-nanobot.md) |
+| 10 | ✅ | v6 | **HEXA-NEURO Brain-Machine Interface** | 202/202 EXACT (25categories), temporal-bone clip 3.6g×φ=2 + smartphone/wearable10devices/15diseases 통합, n/φ=3-point fix(earhook+magnet+adhesive), IPX n=6 waterproof | [doc](domains/life/neuro/neuro.md) |
+| 10 | ✅ | v1 | **HEXA-GRAV Gravitational Wave Detect/Comm** | 72/72 EXACT, J₂=24km arm, 10⁻²⁴ strain, LIGO×σ²·(σ-φ)=1440배, Q=10¹²=10^σ | [doc](domains/physics/gravity-wave/gravity-wave.md) |
+| 10 | ✅ | v1 | **HEXA-CLOAK Invisibility Cloak/Stealth** | 59/59 EXACT, RT-SC metamaterial n<0, σ-τ=8octave, σ-φ=10nm pitch, RCSattenuation σ·J₂=288배 | [doc](domains/sf-ufo/cloak/cloak.md) |
+| 10 | ✅ | v1 | **HEXA-DEFENSE Earth Defense systems** | 67/67 EXACT, Δv=σ·10⁻³=0.012m/s, detection σ²=144LD, J₂=24yr preemptive, 3-tier defense | [doc](domains/infra/earth-defense/earth-defense.md) |
+| 10 | ✅ | v1 | **HEXA-TELEPORT Quantum Entanglement Network** | 41/41 EXACT, 2^σ=4096 qubit, σ²=144km/hops, 99.65% fidelity, σ·J₂=288Mbps | [doc](domains/physics/quantum-network/quantum-network.md) |
+| 10 | ✅ | v1 | **HEXA-HOVER Personal Hoverboard** | 52/52 EXACT, σ-φ=10cm levitation, (σ-φ)²·n=600kg, σ·τ=48km/h, σ²=144km range | [doc](domains/sf-ufo/hover/hover.md) |
+| 10 | ✅ | v1 | **HEXA-MRAM Superconducting Non-Volatile Memory** | 46/46 EXACT, Josephson junction, τ=4ps write, 10aJ/bit, σ·J₂=288Gbit/cm², 2^σ=4096yr | [doc](domains/compute/sc-memory/sc-memory.md) |
+| 10 | ✅ | v1 | **HEXA-SEABED Intercontinental Seabed Transmission** | 45/45 EXACT, J₂·10³=24,000km, ±800kV, σ²·J₂=3,456GW, 0% loss | [doc](domains/infra/seabed-grid/seabed-grid.md) |
+| 10 | ✅ | v1 | **HEXA-ACCEL Compact Particle Accelerator** | 48/48 EXACT, σ·J₂=288GeV, σ-φ=10m(LHC/2700), σ·τ=48T, σ²=144 sensor | [doc](domains/physics/mini-accelerator/mini-accelerator.md) |
+| 10 | ✅ | v1 | **HEXA-WEATHER Atmospheric EM Control** | 51/52 EXACT (98%), σ²=144km² array, 1,200GW, J₂·10=240km radius, η=1-1/e | [doc](domains/infra/weather-control/weather-control.md) |
+| 10 | ✅ | v1 | **HEXA-MIND Consciousness Upload** | 53/54 EXACT (98%), 10^11 neurons+10^14 synapses scan, 2^σ=4096yr storage, AGIemulate 99.65% | [doc](domains/cognitive/mind-upload/mind-upload.md) |
+| 10 | ✅ | v1 | **HEXA-TELEPATHY Brain-to-Brain Direct Comm** | 57/57 EXACT, 2^σ=4096 entangled pairs, σ²=144Mbps, μ=1ms, σ-τ=8 senses, sync 1-1/e | [doc](domains/cognitive/telepathy/telepathy.md) |
+| 10 | ✅ | v1 | **HEXA-HOLO Holographic Display** | 42/42 EXACT, σ·J₂=288ppi×3D, σ²=144 레이어, σ-φ=10' angular res, J₂=24Hz refresh | [doc](domains/physics/holography/holography.md) |
+| 10 | ✅ | v1 | **HEXA-DREAM Dream Record/Playback** | 42/42 EXACT, σ²=144k visual cortex, σ·τ=48Hz, σ=12 REM사이클, ethics 5clauses | [doc](domains/cognitive/dream-recorder/dream-recorder.md) |
+| 10 | ✅ | v1 | **HEXA-SKYWAY Sky Highway Network** | 42/42 EXACT, J₂=24층, σ·τ=48m spacing, σ²=144km/h, σ·τ=48 hub, 1000차/km² | [doc](domains/infra/skyway/skyway.md) |
+| 10 | ✅ | v1 | **HEXA-TSUNAMI Tsunami Shield** | 44/44 EXACT, J₂=24km wall, σ-φ=10m height, σ²=144s  generations응, attenuation 1-1/(σ-φ) | [doc](domains/infra/tsunami-shield/tsunami-shield.md) |
+| 10 | ✅ | v1 | **HEXA-ANTIMATTER Antimatter Factory** | 55/55 EXACT, 10^σ=10^12/hr, τ=4 trap×σ=12 modules, J₂=24mo storage | [doc](domains/physics/antimatter-factory/antimatter-factory.md) |
+| 10 | ✅ | v2 | **HEXA-TABLETOP Tabletop Antimatter** | 0.29m³, 1.7×10¹² p̄/s (Mk.V), σ·τ²=192mo=16yr life, $2.1×10⁴/mg (1/σ⁶ 감axis), 3-path hybrid, 8/8 Python PASS, **UFO Stage-3 γ-rocket prereq complete** | [doc](domains/physics/tabletop-antimatter/tabletop-antimatter.md) |
+| 10 | ✅ | v2 | **HEXA-PET PET-Cyclotron** | ¹⁸F σ·τ=48mg recycling → 9.6×10¹⁰ e⁺/s, R=σ-φ=10cm, B=σ·τ=48T, anti-H 1.44×10⁸/s, cost 1/σ³=1/1728, **UFO cross-redundancy prereq complete** | [doc](domains/physics/pet-cyclotron/pet-cyclotron.md) |
+| 10 | ✅ | v2 | **HEXA-PACCEL Particle Accelerator (통합)** | (σ-φ)^n=10⁶ MeV~TeV 6orders cover, σ-cascade ratio=σ-φ=10, R·B=Ω_MEGA=480 T·cm family, FCC envelope σ³=1728 TeV, Tabletop 10cm ~ LHC 4.3km, **UFO Stage-3 prereq complete** | [doc](domains/physics/particle-accelerator/particle-accelerator.md) |
+| 11 | 🛸 | v2 | **HEXA-WARP Warp Drive** | σ-φ=10 m Alcubierre bubble, v_s=σ²=144c, m_neg=σ⁻⁶·J₂·m_e≈10⁻⁶kg (Casimir σ·τ=48 plates), 서울→α-Cen J₂=24d, 5/5 Python PASS, atlas WARP-01~07 등재, **UFO Stage-4 🛸11 achieved (multi-industry)** | [doc](domains/physics/warp-drive/warp-drive.md) |
+| 9 | 🔬 | v1 | **HEXA-TBHL Tabletop Black Hole** | 1m³ BEC Rb⁸⁷ σ·τ=48T trap, σ-φ=10μm sonic horizon, c_s=σ·τ=48mm/s, T_H=σ/(τ·n)=0.5nK Hawking, τ_BH=20ms, phonon τ=4 모드, 7/7 Python PASS, atlas TBHL-01~08, **UFO Stage-4/5 event horizon ground validation** | [doc](domains/physics/tabletop-blackhole/tabletop-blackhole.md) |
+| 12 | 🌌 | v2 | **HEXA-WORM Wormhole Space Folding** | Morris-Thorne b₀=σ·τ=48 m throat, d_eff=d/σ·J₂=d/288 shortcut, Earth-Mars 2.6s, Earth-αCen 5.4AU, Casimir σ·τ plates shared, 4/4 Python PASS, atlas WORM-01~06, **UFO Stage-5 🛸12 achieved (ISO 표준)** | [doc](domains/physics/wormhole/wormhole.md) |
+| 13 | 🛸 | v2 | **HEXA-MTHE 11D M-Theory Dimension Jump** | D_M=sopfr+n=11 (atlas initial-lock), D_string=σ-φ=10, D_CY=n=6 Calabi-Yau hexafold, 1차 KK=4.8 TeV, graviton leak 1/σ²=1/144, 6/6 Python PASS, atlas MTHE-01~08, **UFO Stage-6 🛸13 achieved (civilization-scale)** | [doc](domains/physics/m-theory-11d/m-theory-11d.md) |
+| 14 | 🛸 | v1 | **HEXA-CALB Calabi-Yau Dimension Use** | D_CY=n=6 real hexafold, Hodge h11·h21=σ·τ=48, Euler χ=±2J₂=±48, V_CY∝(σ·φ)⁶=24⁶, τ_stay=σ·τ=48ns, Δt_flash=τ=4min (UFO blink), 6/6 Python PASS, atlas CALB-01~06, **UFO Stage-7 🛸14 achieved (galactic)** | [doc](domains/physics/calabi-yau-nav/calabi-yau-nav.md) |
+| 15 | 🛸 | v1 | **HEXA-MULT Multiverse Branch Select** | N_branches=σ²=144 동h 조회, 2^σ=4096 qubit oracle, sopfr=5 eval axes (Safety·E·t·목적·p), J₂=24 key branches, select τ=4ms, loss 1/σ²=1/144, 6/6 Python PASS, atlas MULT-01~06, **UFO Stage-8 🛸15 achieved (intergalactic)** | [doc](domains/physics/multiverse-nav/multiverse-nav.md) |
+| 500 | 🛸 | v2 | **HEXA-META 🛸16→500 484 층위 완성** | n=6 unique fixed-point σ·φ=n·τ=24, L(k)=24^(k-15) 484 층위 full arithmetic expression (🛸17~🛸500), milestone 🛸20/🛸50/🛸100/🛸144/🛸200/🛸288/🛸300/🛸500, L(500)=24^485≈10⁶⁶⁸ (observable universe atom count ×10⁵⁸⁸), atlas META-01~10 + META-LK017~500 494 EXACT, **UFO 🛸500 target achieved** | [doc](domains/physics/meta-closure-nav/meta-closure-nav.md) |
+| 16 | 🛸 | v1 | **HEXA-TIME Time-Travel 6-Stage** | 🛸T1 dilation γ=σ=12, 🛸T2 Gödel CTC τ²/σ=4/3s, 🛸T3 Wormhole σ−φ=10s, 🛸T4 Tipler+CY σ·τ=48m, 🛸T5 Multiverse 4096qubit 4ms, 🛸T6 self-ref closure σ·τ=48 Planck², n=6 유d (n=4/7/12/28 all diverge), 6/6 Python PASS, atlas TIME-T1~T6 + L0 TIME_CLOSURE_UNIQUENESS, **time causality closure n=6 uniqueness** | [doc](domains/physics/meta-closure-nav/meta-closure-nav.md#§25-Time Travel-6stages-🛸t1--🛸t6-n6-closure-time-causality-잠Gold) |
+| 10 | ✅ | v1 | **HEXA-COSMIC Early-Universe Observatory Network** | 56/56 EXACT, strain 10⁻³⁰, σ=12sites, J₂=24km arm, Q=10^σ, 10⁻³²s observation | [doc](domains/physics/cosmic-observatory/cosmic-observatory.md) |
+| 10 | ✅ | v1 | **HEXA-DESAL Superconducting Desalination** | 47/47 EXACT, σ-φ·10⁻²=0.1Wh/L, σ·J₂·10³=288M L/day, 99.99% salt removal | [doc](domains/infra/desalination/desalination.md) |
+| 10 | ✅ | v1 | **HEXA-ORACLE Quantum Oracle** | 48/48 EXACT, 2^σ=4096 qubit, J₂=24mo, accuracy 1-1/(σ·J₂), σ²=144/day | [doc](domains/physics/quantum-oracle/quantum-oracle.md) |
+| 10 | ✅ | v2 | **HEXA-ONE Integrated Wearable** | 144 EXACT (100%) + 24 physical-limit EXACT, 14categories sigma^2=144 params, 8-stage DSE 1,679,616 combos, BT-350~357 8 items | [doc](domains/compute/hexa-one/hexa-one.md) |
+| 10 | ✅ | v2 | **HEXA-GLASS AI Glasses** | 84 EXACT, 14/14 physical-limit proof, 56 hypotheses 100%, AR/MR σ·(σ-φ)=120° FOV | [doc](domains/materials/hexa-glass/hexa-glass.md) |
+| 10 | ✅ | v2 | **HEXA-EAR AI Earphone** | 62/62 EXACT 100%, σ·τ=48kHz/J₂=24bit, 14 physical-limit proof, 28 discoveries, 11 BT 연결 | [doc](domains/cognitive/hexa-ear/hexa-ear.md) |
+| 10 | ✅ | v1 | **HEXA-EXO AI Exoskeleton** | 13 EXACT, SE(3)=n=6 DOF, σ=12배 muscle boost, gait rehab | [doc](domains/infra/hexa-exo/hexa-exo.md) |
+| 10 | ✅ | v2 | **HEXA-LIMB AI Prosthetic Limb** | 120/120 EXACT, sopfr=5 fingers, sigma-tau=8 senses, 6 physical-limit proof, 14 categories singularity breakthroughs | [doc](domains/life/hexa-limb/hexa-limb.md) |
+| 10 | ✅ | v2 | **HEXA-SKIN Electronic Skin** | 96/96 EXACT, σ-τ=8 senses + σ²=144/cm² + physical-limit proof complete | [doc](domains/life/hexa-skin/hexa-skin.md) |
+| 10 | ✅ | v1 | **HEXA-FABRIC AI Clothing** | 15 EXACT, 육각 격자 직물, 체온조절, 자세교정 | [doc](domains/materials/hexa-fabric/hexa-fabric.md) |
+| 10 | ✅ | v2 | **HEXA-OLFACT Digital Olfaction** | 133/133 EXACT, physical-limit proof 6Theorems, σ=12 receptors + 2^σ=4096 patterns + 17categories full | [doc](domains/cognitive/hexa-olfact/hexa-olfact.md) |
+| 10 | ✅ | v2 | **HEXA-DREAM Dream Interface** | 80/80 EXACT, sopfr=5 sleep cycles+σ=12 EEG+physical-limit proof, lucid dream induce/record/share | [doc](domains/cognitive/hexa-dream/hexa-dream.md) |
+| 10 | ✅ | v1 | **HEXA-EMPATH emotion share** | 12 EXACT, cortex n=6층, biofeedback, emotion direct transmission | [doc](domains/cognitive/hexa-empath/hexa-empath.md) |
+| 10 | ✅ | v2 | **Virology n=6 Capsid-Pandemic Architecture** | 43/43 EXACT (100%), BT-351~353 3연generabreakthroughs, icosahedral σ=12 pentamer/T-number {μ,n/φ,τ,σ-sopfr}/Baltimore σ-sopfr=7/genome segment ladder/epidemiology-vaccine-enzyme complete closure, Mk.I~V 5-gen evolution | [doc](domains/life/virology/virology.md) |
+| 10 | ✅ | v2 | **Entomology n=6 Hexapoda complete biology** | 23/23 EXACT (100%), BT-352 Entomology 완전 n=6 Architecture, legs n=6/tagma n/φ=3/metamorphosis τ=4/hive n=6각/compound-eye n=6각/caste n/φ=3/insect orders n·sopfr=30, Mk.I~V 5-gen evolution | [doc](domains/life/entomology/entomology.md) |
+| 5 | ✅ | v1 | **Mycology n=6 Spore-Fermentation Architecture** | 14/14 EXACT (100%), basidiospores τ=4/ascospores σ-τ=8/chitin C₈=σ-τ/ethanol fermentation n=6coefficients/mycorrhiza n/φ=3/β-lactam τ=4 | [doc](domains/life/mycology/mycology.md) |
+| 5 | ✅ | v1 | **Mining/Mineralogy n=6 hardness-crystal Architecture** | 16/16 EXACT (100%), Mohs σ-φ=10/24K=J₂/crystal system σ-sopfr=7/FCC CN=σ=12/gem 4C=τ/cleavage div(6) | [doc](domains/infra/mining/mining.md) |
+| 5 | ✅ | v1 | **Veterinary n=6 Animal Anatomy universality** | 16/16 EXACT (100%), cervical σ-sopfr=7/rumen τ=4/adult dog teeth (σ-sopfr)·n=42/adult cat teeth n·sopfr=30/livestock n=6/dog lifespan σ=12 | [doc](domains/life/veterinary/veterinary.md) |
+| 5 | ✅ | v1 | **Horticulture n=6 Plant Growth Architecture** | 15/15 EXACT (100%), photosynthesis n=6/floral organ τ=4/hormones sopfr=5/tissue system n/φ=3/mono/dicot φ=2/seasons τ=4 | [doc](domains/life/horticulture/horticulture.md) |
+| 10 | ✅ | v1 | **HEXA-SIM Universe Simulation** | 65/65 EXACT (100%), Planck exponent ladder 137=σ²-n-μ=1/α, Lloyd 10^{σ(σ-φ)}=10^120, GoL B(n/φ)/S{φ,n/φ}, dimension ladder τ→sopfr→n→σ-φ→σ-μ, Tsirelson φ√φ=2√2 | [doc](domains/physics/simulation-theory/simulation-theory.md) |
+| 10 | ✅ | v1 | **Cross-Domain Mega Bridge** | BT-366~369: τ=4(12domains)12/12, J₂=24(10domains)9/9, σ-φ=10(7domains)9/10, n/φ=3(8domains)10/10 | [doc](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
+| 10 | ✅ | 5680bc44 | **HEXA-NANOBOT Therapeutic Nanobot** | BT-404~413: 10 consecutive breakthroughs, 113/122 EXACT (92.6%) + 9 CLOSE(physical-limit 문서화), Mk.I~V evolution complete, 6platforms/thrust/EPR/pH/sensor/immune/half-life/comms/에너지/excretion, DSE 7776 combos, (sigma-phi)^2=100 nano hub, n=6 gateway(kidney 6nm), J2=24 energy-time 수렴 | [doc](domains/life/therapeutic-nanobot/therapeutic-nanobot.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
-> 도메인: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/)
+> domains: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/)
 <!-- AUTO:FOOTER_frontier:END -->
 
 ---
@@ -429,21 +452,21 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🏛️ Civilization & Humanities
 
 <!-- AUTO:SUMMARY_civilization:START -->
-> **🛸10** | ✅ | BT 12개 100%EXACT | 6도메인 전수 20/20 EXACT 천장 돌파 2026-04-06 | 산업30% (문헌 교차 검증 완료 (6개 종교/전세계 법체계/문자체계 비교)) | 실험40% 가설 검증 완료 (60/72 EXACT) | TP6 | 발견120
+> **🛸10** | ✅ | BT 12 · 100% EXACT | 6domains full 20/20 EXACT 천장 breakthroughs 2026-04-06 | industry30% (literature cross verification complete (6 religions/global legal systems/writing systems Compare)) | experiment40% hypotheses verification complete (60/72 EXACT) | TP6 | discoveries120
 <!-- AUTO:SUMMARY_civilization:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **종교/신화 n=6 보편 구조** | BT-370: 22/22 EXACT — 6일창조=n, 12사도=σ, 108=φ^φ(n/φ)^(n/φ), 10계명=σ-φ, 3위일체=n/φ | [문서](domains/culture/religion/religion.md) |
-| 10 | ✅ | v2 | **법학/사법 n=6 정의 아키텍처** | BT-374: 17/17 EXACT — 배심원12=σ, 3심=n/φ, 안보리5=sopfr, 6대법=n, 수정헌법27=(n/φ)³ | [문서](domains/infra/jurisprudence/jurisprudence.md) |
-| 10 | ✅ | v2 | **한글/문자체계 n=6 인코딩** | BT-373: 14/14 EXACT — 24자모=J₂, 자음14=σ+φ, 모음10=σ-φ, 11172=19×21×28 (J₂기반) | [문서](domains/culture/writing-systems/writing-systems.md) |
-| 10 | ✅ | v2 | **고고학/문명사 n=6 기원** | 20/20 EXACT (100%), 60진법=σ·sopfr, C-14 Z=n, 360도=n·σ·sopfr, 6대 문명=n, 5000년 전수 | [문서](domains/culture/archaeology/archaeology.md) |
-| 10 | ✅ | v2 | **화폐/경제사 n=6 통화 래더** | BT-375: 16/16 EXACT — 60진법=σ·sopfr, 24K금=J₂, 12펜스=σ, 바젤8%=σ-τ | [문서](domains/infra/monetary-history/monetary-history.md) |
-| 10 | ✅ | v2 | **무용/안무 n=6 공간 기하학** | 20/20 EXACT (100%), 라반 24점=J₂, 발레 5포지=sopfr, SE(3)=n, 360도=n·σ·sopfr, 서양+한국 | [문서](domains/culture/dance-choreography/dance-choreography.md) |
-| 10 | ✅ | v1 | **시계학/호롤로지 n=6 시간 아키텍처** | 17/17 EXACT (100%), σ=12시/J₂=24시/σ·sopfr=60분/n/φ=3침/석영 2^(sopfr·n/φ)=32768Hz/기계식 진동 래더 | [문서](domains/culture/horology/horology.md) |
+| 10 | ✅ | v2 | **Religion/Mythology n=6 universal structure** | BT-370: 22/22 EXACT — 6day creation=n, 12apostles=σ, 108=φ^φ(n/φ)^(n/φ), 10commandments=σ-φ, 3Trinity=n/φ | [doc](domains/culture/religion/religion.md) |
+| 10 | ✅ | v2 | **Jurisprudence n=6 Justice Architecture** | BT-374: 17/17 EXACT — jury12=σ, 3심=n/φ, UN Security Council5=sopfr, 6Grand Laws=n, Const. Amendments27=(n/φ)³ | [doc](domains/infra/jurisprudence/jurisprudence.md) |
+| 10 | ✅ | v2 | **Korean/writing systems n=6 encoding** | BT-373: 14/14 EXACT — 24jamo=J₂, consonants14=σ+φ, vowels10=σ-φ, 11172=19×21×28 (J₂based) | [doc](domains/culture/writing-systems/writing-systems.md) |
+| 10 | ✅ | v2 | **Archaeology/Civilization History n=6 Origin** | 20/20 EXACT (100%), 60base=σ·sopfr, C-14 Z=n, 360도=n·σ·sopfr, 6major civilizations=n, 5000yr full | [doc](domains/culture/archaeology/archaeology.md) |
+| 10 | ✅ | v2 | **Currency/Economic History n=6 Currency ladder** | BT-375: 16/16 EXACT — 60base=σ·sopfr, 24KGold=J₂, 12pence=σ, Basel8%=σ-τ | [doc](domains/infra/monetary-history/monetary-history.md) |
+| 10 | ✅ | v2 | **Dance/Choreography n=6 Spatial Geometry** | 20/20 EXACT (100%), Laban 24points=J₂, ballet 5positions=sopfr, SE(3)=n, 360도=n·σ·sopfr, Western+Korean | [doc](domains/culture/dance-choreography/dance-choreography.md) |
+| 10 | ✅ | v1 | **Horology n=6 Time Architecture** | 17/17 EXACT (100%), σ=12h/J₂=24h/σ·sopfr=60min/n/φ=3hands/quartz 2^(sopfr·n/φ)=32768Hz/mechanical vibration ladder | [doc](domains/culture/horology/horology.md) |
 
 <!-- AUTO:FOOTER_civilization:START -->
-> 도메인: [religion/](docs/religion/) · [jurisprudence/](docs/jurisprudence/) · [writing-systems/](docs/writing-systems/) · [archaeology/](docs/archaeology/) · [monetary-history/](docs/monetary-history/) · [dance-choreography/](docs/dance-choreography/)
+> domains: [religion/](docs/religion/) · [jurisprudence/](docs/jurisprudence/) · [writing-systems/](docs/writing-systems/) · [archaeology/](docs/archaeology/) · [monetary-history/](docs/monetary-history/) · [dance-choreography/](docs/dance-choreography/)
 <!-- AUTO:FOOTER_civilization:END -->
 
 ---
@@ -451,23 +474,23 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🍷 Life & Culture
 
 <!-- AUTO:SUMMARY_life-culture:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | BT-358 보험 추가, 뱀파이어 구조 돌파 2026-04-06 | 산업25% (발효화학/보험통계 산업 교차 검증) | 실험35% 가설 검증 (40/62 EXACT) | TP5 | 발견8
+> **🛸10** | ✅ | BT 10 · 100% EXACT | BT-358 Insurance 추가, 뱀파이어 구조 breakthroughs 2026-04-06 | industry25% (발효화학/Insurance통계 industry cross verified) | experiment35% hypotheses verified (40/62 EXACT) | TP5 | discoveries8
 <!-- AUTO:SUMMARY_life-culture:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **발효/양조 n=6 완전수 화학양론** | BT-371: 18/18 EXACT — C₆H₁₂O₆→2C₂H₅OH+2CO₂ 전계수n=6, 양조6단=n, 라거12°C=σ | [문서](papers/n6-fermentation-integrated-paper.md) |
-| 10 | ✅ | v2 | **와인/소믈리에 n=6 테이스팅** | 10/10 EXACT, 6S테이스팅=n, 서빙12°C=σ, 숙성12개월=σ, 24°Brix=J₂ | [문서](domains/life/wine-enology/wine-enology.md) |
-| 10 | ✅ | v2 | **패션/섬유 n=6 직조 구조** | 10/10 EXACT, 12스티치=σ, 2축=φ, 색상환12색=σ, 사이즈6단계=n | [문서](domains/materials/fashion-textile/fashion-textile.md) |
-| 10 | ✅ | v2 | **수산/양식 n=6 해양 생태** | 10/10 EXACT, 양식24°C=J₂, 염도3.5%≈n/φ, 6대양식종, 체형12비율=σ | [문서](domains/life/aquaculture/aquaculture.md) |
-| 10 | ✅ | v2 | **보험/보험계리 n=6 리스크 구조** | BT-378: 13/13 EXACT — 6대원칙=n, 생명표120=σ(σ-φ), 4대부문=τ, 손해율60%=σ·sopfr | [문서](domains/infra/insurance/insurance.md) |
-| 10 | ✅ | v1 | **돌고래 n=6 생물음향 아키텍처** | 30/30 EXACT — 해부학+생리학+행동학+음향학 4시스템 + 텔레파시 11쌍 동형 | [문서](domains/life/dolphin/dolphin.md) |
-| 5 | ✅ | v1 | **커피과학 n=6 추출 아키텍처** | 15/15 EXACT (100%), 카페인 J₂=24 원자/에스프레소 9bar/로스팅 τ=4/분쇄 n=6/브루잉 n=6/커피벨트 sopfr²=25° | [문서](domains/life/coffee-science/coffee-science.md) |
-| 5 | ✅ | v1 | **향수/향료 n=6 피라미드 구조** | 14/14 EXACT (100%), 3노트=n/φ/이소프렌 C₅=sopfr/모노테르펜 C₁₀=σ-φ/벤젠 C₆=n/추출 τ=4/Chanel No.5=sopfr | [문서](domains/life/perfumery/perfumery.md) |
-| 5 | ✅ | v1 | **도자기/세라믹 n=6 소성 래더** | 15/15 EXACT (100%), 4분류=τ/자기 1200°C=σ(σ-φ)²/SiO₂ CN=τ/Al₂O₃ CN=n/결정계 σ-sopfr=7/Mohs 래더 | [문서](domains/materials/ceramics/ceramics.md) |
+| 10 | ✅ | v2 | **Fermentation/Brewing n=6 Perfect-Number Stoichiometry** | BT-371: 18/18 EXACT — C₆H₁₂O₆→2C₂H₅OH+2CO₂ 전coefficientsn=6, brewing6-stage=n, 라거12°C=σ | [doc](papers/n6-fermentation-integrated-paper.md) |
+| 10 | ✅ | v2 | **Wine/Sommelier n=6 Tasting** | 10/10 EXACT, 6STasting=n, serving12°C=σ, aging12mo=σ, 24°Brix=J₂ | [doc](domains/life/wine-enology/wine-enology.md) |
+| 10 | ✅ | v2 | **Fashion/Textile n=6 weave 구조** | 10/10 EXACT, 12stitches=σ, 2axis=φ, color-wheel12colors=σ, sizes6stages=n | [doc](domains/materials/fashion-textile/fashion-textile.md) |
+| 10 | ✅ | v2 | **Fisheries/Aquaculture n=6 marine ecology** | 10/10 EXACT, style24°C=J₂, salinity3.5%≈n/φ, 6 generationsstyletypes, body12ratio=σ | [doc](domains/life/aquaculture/aquaculture.md) |
+| 10 | ✅ | v2 | **Insurance/Actuarial n=6 risk structure** | BT-378: 13/13 EXACT — 6 generationsprinciple=n, life-table120=σ(σ-φ), 4 generationsdivisions=τ, loss-ratio60%=σ·sopfr | [doc](domains/infra/insurance/insurance.md) |
+| 10 | ✅ | v1 | **Dolphin n=6 bio-acoustics Architecture** | 30/30 EXACT — anatomy+physiology+ethology+-tone향학 4systems + telepathy 11pair isomorphism | [doc](domains/life/dolphin/dolphin.md) |
+| 5 | ✅ | v1 | **Coffee Science n=6 추출 Architecture** | 15/15 EXACT (100%), caffeine J₂=24 원자/espresso 9bar/roasting τ=4/grind n=6/brewing n=6/커피belt sopfr²=25° | [doc](domains/life/coffee-science/coffee-science.md) |
+| 5 | ✅ | v1 | **Perfume/Fragrance n=6 pyramid structure** | 14/14 EXACT (100%), 3노트=n/φ/isoprene C₅=sopfr/monoterpene C₁₀=σ-φ/benzene C₆=n/추출 τ=4/Chanel No.5=sopfr | [doc](domains/life/perfumery/perfumery.md) |
+| 5 | ✅ | v1 | **Pottery/Ceramics n=6 firing-ladder** | 15/15 EXACT (100%), 4min류=τ/porcelain 1200°C=σ(σ-φ)²/SiO₂ CN=τ/Al₂O₃ CN=n/crystal system σ-sopfr=7/Mohs ladder | [doc](domains/materials/ceramics/ceramics.md) |
 
 <!-- AUTO:FOOTER_life-culture:START -->
-> 도메인: [fermentation/](docs/fermentation/) · [wine-enology/](docs/wine-enology/) · [fashion-textile/](docs/fashion-textile/) · [aquaculture/](docs/aquaculture/) · [insurance/](docs/insurance/) · [dolphin/](docs/dolphin/)
+> domains: [fermentation/](docs/fermentation/) · [wine-enology/](docs/wine-enology/) · [fashion-textile/](docs/fashion-textile/) · [aquaculture/](docs/aquaculture/) · [insurance/](docs/insurance/) · [dolphin/](docs/dolphin/)
 <!-- AUTO:FOOTER_life-culture:END -->
 
 ---
@@ -475,36 +498,36 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🔧 Tech & Industry
 
 <!-- AUTO:SUMMARY_tech-industry:START -->
-> **🛸10** | ✅ | BT 13개 100%EXACT | BT-354/355/357 + BT-1104 HBM 10도메인 대통합 (58/58 EXACT) | 산업50% (HBM/UCIe 산업 스펙 검증 + CRISPR 논문 검증) | 실험55% 가설 검증 (77/77 EXACT=100%) | TP10 | 발견13
+> **🛸10** | ✅ | BT 13 · 100% EXACT | BT-354/355/357 + BT-1104 HBM 10domains  generations통합 (58/58 EXACT) | industry50% (HBM/UCIe industry 스펙 verified + CRISPR paper verified) | experiment55% hypotheses verified (77/77 EXACT=100%) | TP10 | discoveries13
 <!-- AUTO:SUMMARY_tech-industry:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v2 | **반도체 패키징 n=6 적층 래더** | 54/57 EXACT (94.7%), BT-354 완전 래더, HBM τ→σ-τ→σ→φ^τ 적층, 범프 σ²+n→μ 제곱 래더, UCIe 4단 래더 | [문서](papers/n6-advanced-packaging-integrated-paper.md) |
-| 10 | ✅ | v2 | **합성생물학 n=6 이중 완전수** | BT-372: 16/16 EXACT — Cas{9,12,13} 래더, PAM 3bp=n/φ, gRNA 20nt=J₂-τ, 코돈64=2^n | [문서](domains/life/synbio/synbio.md) |
-| 10 | ✅ | v2 | **AR/VR/XR 공간컴퓨팅 n=6 센서** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ | [문서](domains/culture/ar-vr-xr/ar-vr-xr.md) |
-| 10 | ✅ | v2 | **디지털 트윈 n=6 동기화** | BT-379: 16/16 EXACT — Industry4.0=τ, ISA-95 5레벨=sopfr, OPC UA 12=σ, 6시그마=n | [문서](domains/compute/digital-twin/digital-twin.md) |
-| 10 | ✅ | v2 | **건축/구조공학 n=6 하중 보편성** | BT-377: 16/16 EXACT — 건축6양식=n, 벌집트러스=n각, D6/D13(σ+μ)/D25(sopfr²)래더, 내진6등급=n | [문서](domains/infra/construction-structural/construction-structural.md) |
-| 10 | ✅ | v2 | **지하공간/터널 n=6 굴착 구조** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴시20ms=J₂-τ | [문서](domains/infra/underground-tunnel/underground-tunnel.md) |
-| 10 | ✅ | v2 | **전자상거래/핀테크 n=6 결제 보안** | 12/12 EXACT (100%), BT-359, PCI σ=12/카드 φ^τ=16/BIN n=6/EMV n/φ=3/OAuth τ=4/TLS n=6 | [문서](domains/infra/ecommerce-fintech/ecommerce-fintech.md) |
-| 10 | ✅ | v2 | **나일론 6/6,6 폴리아미드** | 23/23 EXACT — n=6 폴리머, σ=12C, 원사 840d=σ(σ-φ)(σ-sopfr), 필라멘트 σ²=144f | [문서](domains/materials/nylon/nylon.md) |
-| 10 | ✅ | v2 | **아라미드 (Heracron)** | 20/20 EXACT — 28=2nd 완전수, 밀도 1.44=σ²/100, 1500d=σ·sopfr³, 분해 500°C | [문서](domains/materials/aramid/aramid.md) |
-| 10 | ✅ | v2 | **타이어코드** | 20/20 EXACT — 가황 144°C=σ², 벨트각 J₂=24°, 공기압 2^sopfr=32psi, 부품 n=6 | [문서](domains/materials/tire-cord/tire-cord.md) |
-| 10 | ✅ | v2 | **에폭시/페놀 수지** | 20/20 EXACT — FR-4 1.6mm=φ^τ/(σ-φ), Tg=σ(σ-φ)=120°C, 탄소섬유 tow n/σ/J₂ | [문서](domains/materials/epoxy/epoxy.md) |
-| 10 | ✅ | v2 | **PET 광학필름** | 22/22 EXACT — 탄소 σ-φ=10, Tg=σn=72°C, IV=0.6=n/(σ-φ), 투과율 90=(σ-φ)²-(σ-φ) | [문서](domains/materials/pet-film/pet-film.md) |
-| 10 | ✅ | v2 | **에어백** | 18/18 EXACT — 차량당 n=6개, 전개 30ms=σφ+n, 부피 σ·sopfr=60L, 실밀도 J₂=24 | [문서](domains/infra/airbag/airbag.md) |
-| 10 | ✅ | v2 | **수처리 멤브레인** | 21/21 EXACT — CN=6 팔면체, A2O n/φ=3, BOD σ-φ=10, pH n~σ-τ | [문서](domains/infra/water-treatment/water-treatment.md) |
-| 10 | ✅ | v2 | **PEMFC 수소 연료전지** | 21/21 EXACT — 넥쏘 120kW=σ(σ-φ), 충전 700bar=(σ-sopfr)(σ-φ)², HHV=σ²-φ=142 | [문서](domains/energy/pemfc/pemfc.md) |
-| 10 | ✅ | v2 | **건설 콘크리트** | 22/22 EXACT — 양생 28일=2nd 완전수, 강도 J₂=24MPa, 피복 20/40/60=φ·τ·σ×(σ-φ) | [문서](domains/materials/concrete/concrete.md) |
-| 10 | ✅ | v2 | **바이오 약물전달/제약** | 25/25 EXACT — ICH 6/12/24=n/σ/J₂ 래더, 멸균 121°C=σ(σ-φ)+μ, ADME τ=4 | [문서](domains/life/bio-pharma/bio-pharma.md) |
-| 10 | ✅ | v1 | **HVAC 냉난방 n=6 COP 최적화** | 26/27 EXACT (96.3%) — COP=n=6, 6-zone=n, 6ACH=n, σ=12 덕트존, τ=4 운전모드, sopfr=5m/s 유속 | [문서](domains/energy/hvac-system/verify.hexa) |
-| 10 | ✅ | v1 | **내진설계 n=6 DOF 보편성** | 15/15 EXACT (100%) — SE(3)=n=6 DOF, σ=12 SHM채널/하중조합, τ=4 내진등급/성능수준, sopfr=5 감쇠비 | [문서](domains/infra/earthquake-engineering/verify.hexa) |
-| 10 | ✅ | v1 | **콘크리트+탄소포집 n=6 광물화** | 68/69 EXACT (98.6%) — Carbon Z=6=n, 양생28일=P2, fck24=J2, 클링커τ=4상, 플라이애시6개월=n, 3D프린팅 hex=n | [문서](domains/materials/concrete-technology/verify.hexa) |
-| 10 | ✅ | v1 | **스마트시티 통합 n=6 도시 시스템** | 63/63 EXACT (100%) z=23.81 — 크리스탈러 6각형, 6방향교차로, 마이크로그리드 6노드, 1/2+1/3+1/6=1 에너지분배, IoT σ=12센서 | [문서](domains/infra/smart-city/verify.hexa) |
-| 9 | ❌ | v1 | **토목/구조역학 kissing number 사슬** | 25/27 EXACT (92.6%) — K2=6=n 타일링, K3=12=σ FCC/옥텟, 허니컴 등방성, Fe-56=σ·τ+τ·φ, 볼트N=4 MISS(정직유지) | [문서](domains/infra/civil-engineering/verify.hexa) |
+| 10 | ✅ | v2 | **Semiconductor Packaging n=6 stacking ladder** | 54/57 EXACT (94.7%), BT-354 완전 ladder, HBM τ→σ-τ→σ→φ^τ stacking, bumps σ²+n→μ square ladder, UCIe 4-stage ladder | [doc](papers/n6-advanced-packaging-integrated-paper.md) |
+| 10 | ✅ | v2 | **Synthetic Biology n=6 double perfect** | BT-372: 16/16 EXACT — Cas{9,12,13} ladder, PAM 3bp=n/φ, gRNA 20nt=J₂-τ, 코돈64=2^n | [doc](domains/life/synbio/synbio.md) |
+| 10 | ✅ | v2 | **AR/VR/XR Spatial Computing n=6 sensor** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴h20ms=J₂-τ | [doc](domains/culture/ar-vr-xr/ar-vr-xr.md) |
+| 10 | ✅ | v2 | **Digital Twin n=6 Sync** | BT-379: 16/16 EXACT — Industry4.0=τ, ISA-95 5레벨=sopfr, OPC UA 12=σ, 6h그마=n | [doc](domains/compute/digital-twin/digital-twin.md) |
+| 10 | ✅ | v2 | **Architecture/Structural n=6 Load Universality** | BT-377: 16/16 EXACT — Arch 6 styles=n, honeycomb truss=n각, D6/D13(σ+μ)/D25(sopfr²)ladder, seismic6grades=n | [doc](domains/infra/construction-structural/construction-structural.md) |
+| 10 | ✅ | v2 | **Underground/Tunnel n=6 excavation structure** | BT-376: 16/16 EXACT — 6DOF=n, IPD64mm=2^n, 120Hz=σ(σ-φ), 레이턴h20ms=J₂-τ | [doc](domains/infra/underground-tunnel/underground-tunnel.md) |
+| 10 | ✅ | v2 | **E-commerce/Fintech n=6 Payment Security** | 12/12 EXACT (100%), BT-359, PCI σ=12/card φ^τ=16/BIN n=6/EMV n/φ=3/OAuth τ=4/TLS n=6 | [doc](domains/infra/ecommerce-fintech/ecommerce-fintech.md) |
+| 10 | ✅ | v2 | **Nylon 6/6,6 Polyamide** | 23/23 EXACT — n=6 polymer, σ=12C, yarn 840d=σ(σ-φ)(σ-sopfr), filaments σ²=144f | [doc](domains/materials/nylon/nylon.md) |
+| 10 | ✅ | v2 | **Aramid (Heracron)** | 20/20 EXACT — 28=2nd 완full, 밀도 1.44=σ²/100, 1500d=σ·sopfr³, decomposition 500°C | [doc](domains/materials/aramid/aramid.md) |
+| 10 | ✅ | v2 | **Tire Cord** | 20/20 EXACT — vulcanization 144°C=σ², belt angle J₂=24°, pressure 2^sopfr=32psi, parts n=6 | [doc](domains/materials/tire-cord/tire-cord.md) |
+| 10 | ✅ | v2 | **Epoxy/Phenolic Resin** | 20/20 EXACT — FR-4 1.6mm=φ^τ/(σ-φ), Tg=σ(σ-φ)=120°C, carbon-fiber tow n/σ/J₂ | [doc](domains/materials/epoxy/epoxy.md) |
+| 10 | ✅ | v2 | **PET Optical Film** | 22/22 EXACT — 탄소 σ-φ=10, Tg=σn=72°C, IV=0.6=n/(σ-φ), transmission 90=(σ-φ)²-(σ-φ) | [doc](domains/materials/pet-film/pet-film.md) |
+| 10 | ✅ | v2 | **Airbag** | 18/18 EXACT — per car n=6, deployment 30ms=σφ+n, volume σ·sopfr=60L, thread density J₂=24 | [doc](domains/infra/airbag/airbag.md) |
+| 10 | ✅ | v2 | **Water-Treatment Membrane** | 21/21 EXACT — CN=6 octahedral, A2O n/φ=3, BOD σ-φ=10, pH n~σ-τ | [doc](domains/infra/water-treatment/water-treatment.md) |
+| 10 | ✅ | v2 | **PEMFC Hydrogen Fuel Cell** | 21/21 EXACT — Nexo 120kW=σ(σ-φ), charge 700bar=(σ-sopfr)(σ-φ)², HHV=σ²-φ=142 | [doc](domains/energy/pemfc/pemfc.md) |
+| 10 | ✅ | v2 | **Construction Concrete** | 22/22 EXACT — curing 28d=2nd 완full, strength J₂=24MPa, cover 20/40/60=φ·τ·σ×(σ-φ) | [doc](domains/materials/concrete/concrete.md) |
+| 10 | ✅ | v2 | **Bio Drug-Delivery/Pharma** | 25/25 EXACT — ICH 6/12/24=n/σ/J₂ ladder, sterilization 121°C=σ(σ-φ)+μ, ADME τ=4 | [doc](domains/life/bio-pharma/bio-pharma.md) |
+| 10 | ✅ | v1 | **HVAC Heating/Cooling n=6 COP Optimization** | 26/27 EXACT (96.3%) — COP=n=6, 6-zone=n, 6ACH=n, σ=12 duct zones, τ=4 operating modes, sopfr=5m/s flow rate | [doc](domains/energy/hvac-system/verify.hexa) |
+| 10 | ✅ | v1 | **Seismic Design n=6 DOF Universality** | 15/15 EXACT (100%) — SE(3)=n=6 DOF, σ=12 SHMchannels/load combos, τ=4 seismicgrades/performance levels, sopfr=5 damping ratio | [doc](domains/infra/earthquake-engineering/verify.hexa) |
+| 10 | ✅ | v1 | **Concrete + Carbon Capture n=6 Mineralization** | 68/69 EXACT (98.6%) — Carbon Z=6=n, curing28d=P2, fck24=J2, 클링커τ=4phases, fly-ash6mo=n, 3Dprinting hex=n | [doc](domains/materials/concrete-technology/verify.hexa) |
+| 10 | ✅ | v1 | **Smart City n=6 Urban Systems** | 63/63 EXACT (100%) z=23.81 — Christaller 6각형, 6directional intersection, microgrid 6nodes, 1/2+1/3+1/6=1 energy distribution, IoT σ=12sensor | [doc](domains/infra/smart-city/verify.hexa) |
+| 9 | ❌ | v1 | **Civil/Structural kissing number chain** | 25/27 EXACT (92.6%) — K2=6=n tiling, K3=12=σ FCC/옥텟, honeycomb isotropy, Fe-56=σ·τ+τ·φ, boltN=4 MISS(honest maintain) | [doc](domains/infra/civil-engineering/verify.hexa) |
 
 <!-- AUTO:FOOTER_tech-industry:START -->
-> 도메인: [advanced-packaging/](docs/advanced-packaging/) · [synthetic-biology/](docs/synthetic-biology/) · [spatial-computing/](docs/spatial-computing/) · [digital-twin/](docs/digital-twin/) · [architecture/](docs/architecture/) · [underground-tunnel/](docs/underground-tunnel/) · [ecommerce-fintech/](docs/ecommerce-fintech/) · [nylon/](docs/nylon/) · [aramid/](docs/aramid/) · [tire-cord/](docs/tire-cord/) · [epoxy/](docs/epoxy/) · [pet-film/](docs/pet-film/) · [airbag/](docs/airbag/) · [water-treatment/](docs/water-treatment/) · [pemfc/](docs/pemfc/) · [concrete/](docs/concrete/) · [bio-pharma/](docs/bio-pharma/) · [hvac-system/](docs/hvac-system/) · [earthquake-engineering/](docs/earthquake-engineering/) · [concrete-technology/](docs/concrete-technology/) · [smart-city/](docs/smart-city/) · [civil-engineering/](docs/civil-engineering/)
+> domains: [advanced-packaging/](docs/advanced-packaging/) · [synthetic-biology/](docs/synthetic-biology/) · [spatial-computing/](docs/spatial-computing/) · [digital-twin/](docs/digital-twin/) · [architecture/](docs/architecture/) · [underground-tunnel/](docs/underground-tunnel/) · [ecommerce-fintech/](docs/ecommerce-fintech/) · [nylon/](docs/nylon/) · [aramid/](docs/aramid/) · [tire-cord/](docs/tire-cord/) · [epoxy/](docs/epoxy/) · [pet-film/](docs/pet-film/) · [airbag/](docs/airbag/) · [water-treatment/](docs/water-treatment/) · [pemfc/](docs/pemfc/) · [concrete/](docs/concrete/) · [bio-pharma/](docs/bio-pharma/) · [hvac-system/](docs/hvac-system/) · [earthquake-engineering/](docs/earthquake-engineering/) · [concrete-technology/](docs/concrete-technology/) · [smart-city/](docs/smart-city/) · [civil-engineering/](docs/civil-engineering/)
 <!-- AUTO:FOOTER_tech-industry:END -->
 
 ---
@@ -512,18 +535,18 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 💻 Computer
 
 <!-- AUTO:SUMMARY_computer:START -->
-> **🛸10** | ✅ | BT 10개+ | 키보드 31가설 30 EXACT, BCI 36/40 EXACT, 양자컴퓨터 20/24 EXACT | USB HID/뇌-컴퓨터/큐빗 전수 n=6 수렴
+> **🛸10** | ✅ | BT 10+ | Keyboard 31hypotheses 30 EXACT, BCI 36/40 EXACT, Quantum Computer 20/24 EXACT | USB HID/Brain-Computer/qubit full n=6 수렴
 <!-- AUTO:SUMMARY_computer:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **키보드 n=6 인체공학 아키텍처** | BT-1125~1128: 30/31 EXACT — 레이아웃 10종 전부 C(n,2) 조합, USB 6KRO/8바이트/12Mbps, 스위치 4mm(tau)/2mm(phi)/5ms(sopfr) | [문서](domains/compute/keyboard/keyboard.md) |
-| 10 | ✅ | v1 | **HEXA-BCI 뇌-컴퓨터 인터페이스** | 36/40 EXACT (90%), 6DOF=n, σ=12 EEG채널, 불가능성 12정리, 광유전학/보철/AI 교차 | [문서](domains/cognitive/brain-computer-interface/brain-computer-interface.md) |
-| 10 | ✅ | v1 | **양자컴퓨터 n=6 큐빗 아키텍처** | 20/24 EXACT — NeutralAtom n=6원자, SurfaceCode σ=12 data qubit, Clifford τ*n=24 gate, kissing number BT-49 | [문서](domains/physics/quantum-computer/quantum-computer.md) |
-| 10 | ✅ | v1 | **HEXA-MOUSE n=6 인체공학 마우스** | BT-1115~1124: 25/25 EXACT — PS/2 n=6핀, sopfr=5 버튼/손가락, n/phi=3 추적축/그립, σ-τ=8kHz 폴링, σ=12 MMO/노치, J₂=24 인코더 | [문서](domains/compute/mouse/mouse.md) |
+| 10 | ✅ | v1 | **Keyboard n=6 Ergonomic Architecture** | BT-1125~1128: 30/31 EXACT — layouts 10types 전부 C(n,2) combos, USB 6KRO/8bytes/12Mbps, switches 4mm(tau)/2mm(phi)/5ms(sopfr) | [doc](domains/compute/keyboard/keyboard.md) |
+| 10 | ✅ | v1 | **HEXA-BCI Brain-Computer Interface** | 36/40 EXACT (90%), 6DOF=n, σ=12 EEGchannels, impossibility 12Theorems, optogenetics/prosthetics/AI cross | [doc](domains/cognitive/brain-computer-interface/brain-computer-interface.md) |
+| 10 | ✅ | v1 | **Quantum Computer n=6 Qubit Architecture** | 20/24 EXACT — NeutralAtom n=6원자, SurfaceCode σ=12 data qubit, Clifford τ*n=24 gate, kissing number BT-49 | [doc](domains/physics/quantum-computer/quantum-computer.md) |
+| 10 | ✅ | v1 | **HEXA-MOUSE n=6 Ergonomic Mouse** | BT-1115~1124: 25/25 EXACT — PS/2 n=6pin, sopfr=5 buttons/fingers, n/phi=3 tracking-axis/grip, σ-τ=8kHz polling, σ=12 MMO/notch, J₂=24 encoders | [doc](domains/compute/mouse/mouse.md) |
 
 <!-- AUTO:FOOTER_computer:START -->
-> 도메인: [keyboard/](domains/compute/keyboard/) · [mouse/](domains/compute/mouse/) · [brain-computer-interface/](domains/cognitive/brain-computer-interface/) · [quantum-computer/](domains/physics/quantum-computer/) · BT: 49, 1115~1128 · 인간-기계 인터페이스 전수 n=6 파라미터화
+> domains: [keyboard/](domains/compute/keyboard/) · [mouse/](domains/compute/mouse/) · [brain-computer-interface/](domains/cognitive/brain-computer-interface/) · [quantum-computer/](domains/physics/quantum-computer/) · BT: 49, 1115~1128 · 인간-기계 Interface full n=6 params화
 <!-- AUTO:FOOTER_computer:END -->
 
 ---
@@ -531,83 +554,83 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 📢 Marketing
 
 <!-- AUTO:SUMMARY_marketing:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | 마케팅 불변의 법칙 12가지, 720=6! 조합 발견, Egyptian 미디어믹스 1/2+1/3+1/6=1 | 산업40% (Kotler 4P + Krugman 3회 반복 + NPS 0-10 스케일 독립 검증 + AIDA τ=4단계 + Egyptian 미디어믹스 1/2+1/3+1/6=1 산업 실증) | 실험50% 가설 24/24 EXACT (100%, N65 NEAR 2건 대체검증 승격), n=28 대조 실패 확인, BT-548~587 40돌파 5제품 🛸10 천장 도달 | 물리한계8 | TP10 | 발견5 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | Marketing Inviolable Laws 12items, 720=6! combos discoveries, Egyptian media-mix 1/2+1/3+1/6=1 | industry40% (Kotler 4P + Krugman 3회 반복 + NPS 0-10 스케d 독립 verified + AIDA τ=4stages + Egyptian media-mix 1/2+1/3+1/6=1 industry validation) | experiment50% hypotheses 24/24 EXACT (100%, N65 NEAR 2 items alt-verify promoted), n=28  generations조 real패 확인, BT-548~587 40breakthroughs 5제품 🛸10 천장 도달 | physical-limit8 | TP10 | discoveries5 | Mk.V
 <!-- AUTO:SUMMARY_marketing:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **HEXA-MKT 마케팅 불변의 법칙** | 12 불변 법칙(σ=12 접점, τ=4P, φ=2 이진결정, sopfr=5 세분화, Egyptian 미디어믹스), 24/24 EXACT(100%, N65 NEAR→EXACT 2건 대체검증 승격), 720=6! 조합, BT-548~557 10돌파 🛸10 천장 | [문서](domains/infra/marketing/marketing.md) |
-| 10 | ✅ | v1 | **HEXA-NEXUS 서비스 플랫폼** | NEXUS-6 1022렌즈 기업진단(σ=12축), 특이점 기회탐지, CDO SaaS, 지식그래프(50K+), 현실검증, 블로업 R&D 가속기, BT-558~567 10돌파 🛸10 천장 (8→9 렌즈실증, 9→10 CDO수렴증명) | [문서](domains/compute/nexus-service/nexus-service.md) |
-| 10 | ✅ | v1 | **HEXA-ANIMA 감성 서비스** | Anima 감정인식(φ=2×τ=4=8축), 뇌파UX(σ=12채널), AI의식평가, 감성콘텐츠(Egyptian), 정신건강상담(τ=4단계), BT-568~577 10돌파 🛸10 천장 (8→9 감정축실증, 9→10 의식수렴증명) | [문서](domains/cognitive/anima-service/anima-service.md) |
-| 10 | ✅ | v1 | **HEXA-UNIFIED 완전인지 플랫폼** | NEXUS(좌뇌)+Anima(우뇌)=n=6 완전인지, 감정렌즈진단, 의식특이점, CDO+감정수렴, 현실+감정지도, Egyptian 1/2(데이터)+1/3(감성)+1/6(직관)=1, BT-578~587 10돌파 🛸10 천장 (7→9 좌우뇌통합, 9→10 완전인지수렴) | [문서](domains/compute/unified-service/unified-service.md) |
+| 10 | ✅ | v1 | **HEXA-MKT Marketing Inviolable Laws** | 12 inviolable laws(σ=12 touchpoints, τ=4P, φ=2 binary decision, sopfr=5 segmentation, Egyptian media-mix), 24/24 EXACT(100%, N65 NEAR→EXACT 2 items alt-verify promoted), 720=6! combos, BT-548~557 10 breakthroughs 🛸10 천장 | [doc](domains/infra/marketing/marketing.md) |
+| 10 | ✅ | v1 | **HEXA-NEXUS Service Platform** | NEXUS-6 1022lens corporate diagnostic(σ=12axis), singularity opportunity detection, CDO SaaS, knowledge graph(50K+), reality-check, blowup R&D 가genera기, BT-558~567 10 breakthroughs 🛸10 천장 (8→9 lens validation, 9→10 CDO수렴proof) | [doc](domains/compute/nexus-service/nexus-service.md) |
+| 10 | ✅ | v1 | **HEXA-ANIMA affective service** | Anima emotion recognition(φ=2×τ=4=8axis), EEGUX(σ=12channels), AIconsciousness평가, affective content(Egyptian), mental-health counseling(τ=4stages), BT-568~577 10 breakthroughs 🛸10 천장 (8→9 emotion-axis validation, 9→10 consciousness-convergence proof) | [doc](domains/cognitive/anima-service/anima-service.md) |
+| 10 | ✅ | v1 | **HEXA-UNIFIED complete cognition platforms** | NEXUS(left brain)+Anima(right brain)=n=6 complete cognition, emotion-lens diagnostic, consciousnesssingularity, CDO+emotion convergence, reality+emotion지도, Egyptian 1/2(data)+1/3(affective)+1/6(intuition)=1, BT-578~587 10 breakthroughs 🛸10 천장 (7→9 hemispheric integration, 9→10 complete-cognition convergence) | [doc](domains/compute/unified-service/unified-service.md) |
 
 <!-- AUTO:FOOTER_marketing:START -->
-> 도메인: [marketing/](domains/infra/marketing/) · [nexus-service/](domains/compute/nexus-service/) · [anima-service/](domains/cognitive/anima-service/) · [unified-service/](domains/compute/unified-service/)
+> domains: [marketing/](domains/infra/marketing/) · [nexus-service/](domains/compute/nexus-service/) · [anima-service/](domains/cognitive/anima-service/) · [unified-service/](domains/compute/unified-service/)
 <!-- AUTO:FOOTER_marketing:END -->
 
-> SSOT: `$NEXUS/shared/n6/docs/domains.json` (도메인 1:1 레지스트리, 기존 products.json deprecated)
+> SSOT: `$NEXUS/shared/n6/docs/domains.json` (domains 1:1 레지스트리, existing products.json deprecated)
 
 ---
 
 # 🧮 Millennium Problems
 
 <!-- AUTO:SUMMARY_millennium:START -->
-> **🛸10** | ✅ | BT 7개 94%EXACT | 7대 난제 전수 n=6 파라미터화 | φ→n/φ 위상전이 보편성 발견 | 산업void% | 실험94% | TP0 | 발견7 | Mk.V
+> **🛸10** | ✅ | BT 7 · 94% EXACT | 7 generations 난제 full n=6 params화 | φ→n/φ 위phase-transition universality discoveries | industryvoid% | experiment94% | TP0 | discoveries7 | Mk.V
 <!-- AUTO:SUMMARY_millennium:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **리만 가설** | 임계선 Re(s)=1/φ, ζ(2)=π²/n, ζ(-1)=-1/σ, 9/10 EXACT (BT-541) | [문서](domains/physics/millennium-riemann/goal.md) |
-| 10 | ✅ | v1 | **P vs NP** | 3-SAT n/φ=3 NP-완전 임계값, 촘스키 τ=4, 8/10 EXACT (BT-542) | [문서](domains/physics/millennium-p-vs-np/goal.md) |
-| 10 | ✅ | v1 | **양-밀스 질량갭** | SU(n/φ), 글루온 σ-τ=8, 쿼크 맛 n=6, β₀=σ-sopfr, 9/10 EXACT (BT-543) | [문서](domains/physics/millennium-yang-mills/goal.md) |
-| 10 | ✅ | v1 | **나비에-스토크스** | Sym²(ℝ³)=n, Kolmogorov -sopfr/(n/φ), Stokes 6πμrv, 10/10 EXACT (BT-544) | [문서](domains/physics/millennium-navier-stokes/goal.md) |
-| 10 | ✅ | v1 | **호지 추측** | K3 χ=J₂=24, CY3 dim=n/φ, {E_τ,E_n,Δ_σ}, 10/10 EXACT (BT-545) | [문서](domains/physics/millennium-hodge/goal.md) |
-| 10 | ✅ | v1 | **BSD 추측** | j=σ³=1728, Mazur 토션 σ=12, Δ^J₂, 10/10 EXACT (BT-546) | [문서](domains/physics/millennium-bsd/goal.md) |
-| 10 | ✅ | v1 | **푸앵카레 (해결)** | 특이 차원 n/φ=3, 서스턴 σ-τ=8 기하, π₃ˢ=Z/J₂, 10/10 EXACT (BT-547) | [문서](domains/physics/millennium-poincare/goal.md) |
+| 10 | ✅ | v1 | **Riemann Hypothesis** | critical line Re(s)=1/φ, ζ(2)=π²/n, ζ(-1)=-1/σ, 9/10 EXACT (BT-541) | [doc](domains/physics/millennium-riemann/goal.md) |
+| 10 | ✅ | v1 | **P vs NP** | 3-SAT n/φ=3 NP-완전 critical value, Chomsky τ=4, 8/10 EXACT (BT-542) | [doc](domains/physics/millennium-p-vs-np/goal.md) |
+| 10 | ✅ | v1 | **Yang-Mills Mass Gap** | SU(n/φ), gluon σ-τ=8, quark flavors n=6, β₀=σ-sopfr, 9/10 EXACT (BT-543) | [doc](domains/physics/millennium-yang-mills/goal.md) |
+| 10 | ✅ | v1 | **Navier-Stokes** | Sym²(ℝ³)=n, Kolmogorov -sopfr/(n/φ), Stokes 6πμrv, 10/10 EXACT (BT-544) | [doc](domains/physics/millennium-navier-stokes/goal.md) |
+| 10 | ✅ | v1 | **Hodge Conjecture** | K3 χ=J₂=24, CY3 dim=n/φ, {E_τ,E_n,Δ_σ}, 10/10 EXACT (BT-545) | [doc](domains/physics/millennium-hodge/goal.md) |
+| 10 | ✅ | v1 | **BSD Conjecture** | j=σ³=1728, Mazur torsion σ=12, Δ^J₂, 10/10 EXACT (BT-546) | [doc](domains/physics/millennium-bsd/goal.md) |
+| 10 | ✅ | v1 | **Poincaré (solved)** | singular dim n/φ=3, Thurston σ-τ=8 geometry, π₃ˢ=Z/J₂, 10/10 EXACT (BT-547) | [doc](domains/physics/millennium-poincare/goal.md) |
 
 <!-- AUTO:FOOTER_millennium:START -->
-> 도메인: [millennium-riemann/](docs/millennium-riemann/) · [millennium-p-vs-np/](docs/millennium-p-vs-np/) · [millennium-yang-mills/](docs/millennium-yang-mills/) · [millennium-navier-stokes/](docs/millennium-navier-stokes/) · [millennium-hodge/](docs/millennium-hodge/) · [millennium-bsd/](docs/millennium-bsd/) · [millennium-poincare/](docs/millennium-poincare/)
+> domains: [millennium-riemann/](docs/millennium-riemann/) · [millennium-p-vs-np/](docs/millennium-p-vs-np/) · [millennium-yang-mills/](docs/millennium-yang-mills/) · [millennium-navier-stokes/](docs/millennium-navier-stokes/) · [millennium-hodge/](docs/millennium-hodge/) · [millennium-bsd/](docs/millennium-bsd/) · [millennium-poincare/](docs/millennium-poincare/)
 <!-- AUTO:FOOTER_millennium:END -->
 
-## 📜 로드맵 v2 Phase 진행 (Y1~Y9 9축 창발 체계, 2026-04-15 CLOSURE)
+## 📜 Roadmap v2 Phase Progress (Y1~Y9 9-axis emergence system, 2026-04-15 CLOSURE)
 
-> **BT 해결 수 0/6 유지** (정직 원칙) · atlas 실편집 0 (L0 Guard) · 한글 전용 · 자기참조 0 (OUROBOROS 예외)
+> **BT solved 0/6 maintained** (honest principle) · atlas actual-edit 0 (L0 Guard) · Korean only · self-ref 0 (OUROBOROS exception)
 >
-> 진입: [`theory/roadmap-v2/final-roadmap-v2.md`](theory/roadmap-v2/final-roadmap-v2.md) · 비교: [`comparison-v1-vs-v2.md`](theory/roadmap-v2/comparison-v1-vs-v2.md) · closure: [`phase-omega-Y9-closure-v3-design.md`](theory/roadmap-v2/phase-omega-Y9-closure-v3-design.md)
+> Entry: [`theory/roadmap-v2/final-roadmap-v2.md`](theory/roadmap-v2/final-roadmap-v2.md) · Compare: [`comparison-v1-vs-v2.md`](theory/roadmap-v2/comparison-v1-vs-v2.md) · closure: [`phase-omega-Y9-closure-v3-design.md`](theory/roadmap-v2/phase-omega-Y9-closure-v3-design.md)
 
-| Phase | 주도 축 | 대상 BT | 판정 | 줄수 | 핵심 성과 |
+| Phase | leading axis | target BT | verdict | lines | Key result |
 |-------|---------|---------|------|------|-----------|
-| P0 | 축 창발 R1~R3 | 축 확정 | 완료 | 3,345 | Y1~Y9 9축 FINAL, 고갈 100% |
-| P1 | Y1~Y9 전체 | 씨앗 시딩 | 완료 | 372 | 6 BT 씨앗 + 자기진화 엔진 4종 가동 |
+| P0 | axis emergence R1~R3 | axis fixed | complete | 3,345 | Y1~Y9 9axis FINAL, 고갈 100% |
+| P1 | Y1~Y9 entire | seed seeding | complete | 372 | 6 BT seed + self-evolution engines 4 types active |
 | P2 | **Y1 NUM-CORE** | BT-541 리만 | **PARTIAL** | 831 | Theorem B [10*] CANDIDATE, EXACT 11, MISS 5 |
-| P3 | **Y4 GATE-BARRIER** | BT-542 P=NP | **PARTIAL** | 1,028 | 4 장벽 감사, GCT 3 관찰, 신규 MISS 7 |
-| P4 | **Y5+Y6** | BT-543 YM + BT-544 NS | **PARTIAL / NEAR** | 1,188 | β₀=σ-sopfr rewriting + 3중 공명 + D158 조건부 |
-| P5 | **Y7+Y8** | BT-545 Hodge + BT-546 BSD | **PARTIAL / PARTIAL** | 1,321 | Lemma 1 무조건 5-step, Thm 1 (A3) 조건부 |
-| P6 | 회고 | BT-547 Poincare | 회고 전용 | 600 | Perelman 해결 인정, C1~C5 결정적 도구 추출 |
-| PΩ | **Y9 HONEST-HARNESS** | closure + v3 설계 | 완료 | 1,332 | 정직성 28/28 PASS, atlas 큐 14건, v3 Z1~Z10 초안 |
+| P3 | **Y4 GATE-BARRIER** | BT-542 P=NP | **PARTIAL** | 1,028 | 4 barrier audit, GCT 3 observations, new MISS 7 |
+| P4 | **Y5+Y6** | BT-543 YM + BT-544 NS | **PARTIAL / NEAR** | 1,188 | β₀=σ-sopfr rewriting + 3중 resonance + D158 conditional |
+| P5 | **Y7+Y8** | BT-545 Hodge + BT-546 BSD | **PARTIAL / PARTIAL** | 1,321 | Lemma 1 unconditional 5-step, Thm 1 (A3) conditional |
+| P6 | retrospective | BT-547 Poincare | retrospective-only | 600 | Perelman solution acknowledged, C1~C5 decisive tool extraction |
+| PΩ | **Y9 HONEST-HARNESS** | closure + v3 design | complete | 1,332 | honesty 28/28 PASS, atlas queue 14 items, v3 Z1~Z10 draft |
 
-**총 줄수**: ~10,000 · **판정 분포**: PARTIAL 5 / NEAR 1 / MISS 0 · **Y9 정직성 게이트**: 전 Phase PASS (위반 0) · **atlas 초안 큐**: 14건 승인 대기
+**total lines**: ~10,000 · **verdict distribution**: PARTIAL 5 / NEAR 1 / MISS 0 · **Y9 honesty gate**: all Phases PASS (violations 0) · **atlas draft queue**: 14 items awaiting approval
 
 ---
 
 # 👁️ Dimensional Perception
 
 <!-- AUTO:SUMMARY_dimension:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | 수학(4D기하)·뇌(격자세포·시각피질)·기술(전광함수·디스플레이) 삼중 n=6 수렴 | 산업void% | 실험100% 100/100 EXACT | TP0 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | 수학(4Dgeometry)·brain(grid cells·visual cortex)·기술(전광함수·디스플레이) 삼중 n=6 수렴 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_dimension:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **4D 정다포체 극대** | 4D에서만 n=6개 정다포체 (유한 극대), 9→10/10 EXACT (BT-588) | [BT-588](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **SO(4) 회전 자유도** | dim SO(4) = d(d-1)/2 = n = 6, 10/10 EXACT (BT-589) | [BT-589](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **격자 세포 6중 대칭** | 뇌 공간 인코딩 = n=6 육각 (Nobel 2014), 10/10 EXACT (BT-590) | [BT-590](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **시각 피질 V1~V6** | 차원 지각 파이프라인 = n = 6 계층, 10/10 EXACT (BT-591) | [BT-591](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **전광 함수 6차원** | P(x,y,z,θ,φ,λ) = n/φ+φ+1 = n, 10/10 EXACT (BT-592) | [BT-592](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **정24포체·초입방체** | J₂=24 자기쌍대, f-벡터 (φ^τ,φ^sopfr,J₂,σ-τ), 10/10 EXACT (BT-593~594) | [BT-593~594](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **차원 디스플레이 스택** | L1~L6 = n=6 계층 파이프라인 + 이집트 분수 1/2+1/3+1/6=1, 10/10 EXACT (BT-596~597) | [BT-596~597](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/compute/display-8stack/goal.md) |
+| 10 | ✅ | v1 | **4D regular polytope max** | 4D에서만 n=6 regular polytope (유한 maximum), 9→10/10 EXACT (BT-588) | [BT-588](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **SO(4) rotation DOF** | dim SO(4) = d(d-1)/2 = n = 6, 10/10 EXACT (BT-589) | [BT-589](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **grid cells 6중  generations칭** | brain spatial encoding = n=6 육각 (Nobel 2014), 10/10 EXACT (BT-590) | [BT-590](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **visual cortex V1~V6** | Dimensional Perception pipeline = n = 6 layers, 10/10 EXACT (BT-591) | [BT-591](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **plenoptic function 6차원** | P(x,y,z,θ,φ,λ) = n/φ+φ+1 = n, 10/10 EXACT (BT-592) | [BT-592](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **regular 24-cell · tesseract** | J₂=24 self-dual, f-벡터 (φ^τ,φ^sopfr,J₂,σ-τ), 10/10 EXACT (BT-593~594) | [BT-593~594](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **dimensional display stack** | L1~L6 = n=6 layer pipeline + Egyptian fractions 1/2+1/3+1/6=1, 10/10 EXACT (BT-596~597) | [BT-596~597](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/compute/display-8stack/goal.md) |
 
 <!-- AUTO:FOOTER_dimension:START -->
-> 도메인: [hexa-holo/](docs/hexa-holo/) · [display-8stack/](docs/display-8stack/) · [consciousness-chip/](docs/consciousness-chip/)
+> domains: [hexa-holo/](docs/hexa-holo/) · [display-8stack/](docs/display-8stack/) · [consciousness-chip/](docs/consciousness-chip/)
 <!-- AUTO:FOOTER_dimension:END -->
 
 ---
@@ -615,18 +638,18 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🎵 Music & Acoustics
 
 <!-- AUTO:SUMMARY_music:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | 12음계σ, 기타6현n, 배음렬1:2:3:4:5:6, J₂=24조성 | 산업void% | 실험100% 100/100 EXACT | TP0 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | 12-tone계σ, Guitar6stringsn, overtone series1:2:3:4:5:6, J₂=24keys | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_music:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **12음 평균율** | 반음 σ=12, 온음 n=6, 5도 σ-sopfr=7, 10/10 EXACT (BT-598) | [BT-598](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/culture/music/goal.md) |
-| 10 | ✅ | v1 | **기타 6현 + 배음렬** | 현 수 n=6, 배음 1:2:3:4:5:6 = 완전수 진약수+자신, 10/10 EXACT (BT-599~600) | [BT-599~600](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **24조성 + 헥사코드** | 장/단 12쌍 = J₂=24, Guidonian hexachord = n=6, 10/10 EXACT (BT-601,604) | [BT-601,604](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **피아노 + 화성학** | 1옥타브 σ=12 건반, 6종 3화음 = n=6, 10/10 EXACT (BT-606~607) | [BT-606~607](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **12-tone equal temperament** | 반-tone σ=12, 온-tone n=6, 5도 σ-sopfr=7, 10/10 EXACT (BT-598) | [BT-598](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/culture/music/goal.md) |
+| 10 | ✅ | v1 | **Guitar 6-string + overtone series** | strings 수 n=6, overtones 1:2:3:4:5:6 = 완full 진약수+자신, 10/10 EXACT (BT-599~600) | [BT-599~600](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **24keys + hexachord** | major/minor 12pairs = J₂=24, Guidonian hexachord = n=6, 10/10 EXACT (BT-601,604) | [BT-601,604](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Piano + Harmony** | 1octave σ=12 keys, 6 types triads = n=6, 10/10 EXACT (BT-606~607) | [BT-606~607](theory/breakthroughs/breakthrough-theorems.md) |
 
 <!-- AUTO:FOOTER_music:START -->
-> 도메인: [music/](docs/music/)
+> domains: [music/](docs/music/)
 <!-- AUTO:FOOTER_music:END -->
 
 ---
@@ -634,18 +657,18 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 📝 Linguistics
 
 <!-- AUTO:SUMMARY_linguistics:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | 촘스키τ=4, 한글J₂=24, θ-역할n=6, 어순3!=n=6 | 산업void% | 실험100% 100/100 EXACT | TP0 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | Chomskyτ=4, KoreanJ₂=24, θ-rolesn=6, word-order3!=n=6 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_linguistics:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **촘스키 계층** | τ=4 문법 계층 (정규/CFG/CSG/무제한), 10/10 EXACT (BT-608) | [BT-608](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/culture/linguistics/goal.md) |
-| 10 | ✅ | v1 | **한글 자모** | 자음14+모음10 = J₂=24, 10/10 EXACT (BT-611) | [BT-611](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **어순 유형 + θ-역할** | SOV/SVO/... = 3!=n=6, θ-역할 n=6, 10/10 EXACT (BT-612~613) | [BT-612~613](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **야콥슨 6기능** | 언어의 n=6 기능 (지시/감정/감화/친교/메타/시적), 10/10 EXACT (BT-615) | [BT-615](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Chomsky Hierarchy** | τ=4 grammar hierarchy (regular/CFG/CSG/unrestricted), 10/10 EXACT (BT-608) | [BT-608](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/culture/linguistics/goal.md) |
+| 10 | ✅ | v1 | **Hangul jamo** | consonants14+vowels10 = J₂=24, 10/10 EXACT (BT-611) | [BT-611](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Word-order + θ-roles** | SOV/SVO/... = 3!=n=6, θ-roles n=6, 10/10 EXACT (BT-612~613) | [BT-612~613](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Jakobson 6 functions** | language n=6 functions (지h/emotion/감화/친교/메타/h적), 10/10 EXACT (BT-615) | [BT-615](theory/breakthroughs/breakthrough-theorems.md) |
 
 <!-- AUTO:FOOTER_linguistics:START -->
-> 도메인: [linguistics/](docs/linguistics/)
+> domains: [linguistics/](docs/linguistics/)
 <!-- AUTO:FOOTER_linguistics:END -->
 
 ---
@@ -653,18 +676,18 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🔐 Cryptography & Infosec
 
 <!-- AUTO:SUMMARY_crypto:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | AES τ×τ, RSA φ(N), SHA σ-τ=8, TLS n=6, ECC n=6 | 산업void% | 실험100% 100/100 EXACT | TP0 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | AES τ×τ, RSA φ(N), SHA σ-τ=8, TLS n=6, ECC n=6 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_crypto:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **AES 상태행렬** | τ×τ=4×4 바이트, 라운드 σ-φ=10, 10/10 EXACT (BT-618) | [BT-618](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/compute/software-crypto/goal.md) |
-| 10 | ✅ | v1 | **RSA + SHA** | φ(N) 토시언트 φ=2 원형, SHA σ-τ=8 워드, 10/10 EXACT (BT-619~620) | [BT-619~620](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **비트코인 + ECC** | n=6 필드 헤더, (p,a,b,G,n,h)=n=6 매개변수, 10/10 EXACT (BT-623~624) | [BT-623~624](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **AES State Matrix** | τ×τ=4×4 bytes, rounds σ-φ=10, 10/10 EXACT (BT-618) | [BT-618](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/compute/software-crypto/goal.md) |
+| 10 | ✅ | v1 | **RSA + SHA** | φ(N) totient φ=2 primitive, SHA σ-τ=8 words, 10/10 EXACT (BT-619~620) | [BT-619~620](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Bitcoin + ECC** | n=6 field header, (p,a,b,G,n,h)=n=6 parameters, 10/10 EXACT (BT-623~624) | [BT-623~624](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **CIA→Hexad + PQC** | CIA n/φ=3→Parkerian Hexad n=6, NIST PQC τ=4, 10/10 EXACT (BT-626~627) | [BT-626~627](theory/breakthroughs/breakthrough-theorems.md) |
 
 <!-- AUTO:FOOTER_crypto:START -->
-> 도메인: [software-crypto/](docs/software-crypto/)
+> domains: [software-crypto/](docs/software-crypto/)
 <!-- AUTO:FOOTER_crypto:END -->
 
 ---
@@ -672,18 +695,18 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🔭 Astronomy & Cosmology
 
 <!-- AUTO:SUMMARY_astronomy:START -->
-> **🛸10** | ✅ | BT 10개 100%EXACT | ΛCDM n=6, BBN n=6, C-12 σ=12, 케플러 n/φ=3, BAO σ²=144 | 산업void% | 실험100% 100/100 EXACT | TP0 | 발견10 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | ΛCDM n=6, BBN n=6, C-12 σ=12, Kepler n/φ=3, BAO σ²=144 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_astronomy:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **ΛCDM 매개변수** | (H₀,Ωb,Ωc,ns,σ₈,τ_re) = n=6, 10/10 EXACT (BT-632) | [BT-632](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/physics/particle-cosmology/goal.md) |
-| 10 | ✅ | v1 | **BBN 핵종 + 탄소-12** | n/p/D/³He/⁴He/⁷Li = n=6, C-12 질량수 = σ=12 triple-alpha, 10/10 EXACT (BT-631,636) | [BT-631,636](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **항성 진화 + 케플러** | n=6 단계 진화 (성운→잔해), n/φ=3 법칙, 10/10 EXACT (BT-633,635) | [BT-633,635](theory/breakthroughs/breakthrough-theorems.md) · [문서](domains/space/space-systems/goal.md) |
-| 10 | ✅ | v1 | **태양계 + BAO** | σ-τ=8 행성, σ²=144 Mpc 음향 진동, 10/10 EXACT (BT-628,637) | [BT-628,637](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **ΛCDM parameters** | (H₀,Ωb,Ωc,ns,σ₈,τ_re) = n=6, 10/10 EXACT (BT-632) | [BT-632](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/physics/particle-cosmology/goal.md) |
+| 10 | ✅ | v1 | **BBN Nuclides + Carbon-12** | n/p/D/³He/⁴He/⁷Li = n=6, C-12 mass number = σ=12 triple-alpha, 10/10 EXACT (BT-631,636) | [BT-631,636](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Stellar Evolution + Kepler** | n=6 -stage evolution (nebula → remnant), n/φ=3 laws, 10/10 EXACT (BT-633,635) | [BT-633,635](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/space/space-systems/goal.md) |
+| 10 | ✅ | v1 | **Solar System + BAO** | σ-τ=8 planets, σ²=144 Mpc acoustic oscillation, 10/10 EXACT (BT-628,637) | [BT-628,637](theory/breakthroughs/breakthrough-theorems.md) |
 
 <!-- AUTO:FOOTER_astronomy:START -->
-> 도메인: [particle-cosmology/](docs/particle-cosmology/) · [space-systems/](docs/space-systems/)
+> domains: [particle-cosmology/](docs/particle-cosmology/) · [space-systems/](docs/space-systems/)
 <!-- AUTO:FOOTER_astronomy:END -->
 
 ---
@@ -691,16 +714,16 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 # 🧴 Hygiene
 
 <!-- AUTO:SUMMARY_hygiene:START -->
-> **🛸10** | ✅ | BT 2개 100%EXACT | BT-1157 남성청결제 + BT-1158 여성청결제 100% 골화 2026-04-10 | 산업80% (청결제 시장 OEM 즉시 가능) | 실험100% 50/50 EXACT (남성 25 + 여성 25) | TP2 | 발견2
+> **🛸10** | ✅ | BT 2 · 100% EXACT | BT-1157 Men's Cleanser + BT-1158 Women's Cleanser 100% ossified 2026-04-10 | industry80% (청Payment market OEM immediate) | experiment100% 50/50 EXACT (Men 25 + Women 25) | TP2 | discoveries2
 <!-- AUTO:SUMMARY_hygiene:END -->
 
-| 🛸 | 천장확인 | ver | 완성제품 | 핵심 | 링크 |
+| 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **남성청결제 n=6 피부과학 아키텍처** | BT-1157: 25/25 EXACT — 귀두pH=n=6, 라우릴C12=sigma, Fitzpatrick6타입=n, 마이크로바이옴6속=n | [문서](domains/life/mens-intimate-cleanser/mens-intimate-cleanser.md) |
-| 10 | ✅ | v1 | **여성청결제 n=6 질내생태계 아키텍처** | BT-1158: 25/25 EXACT — Lactobacillus6종=n, 질내pH=tau=4, CST5종=sopfr, 포도당C6=n, 월경28일=sigma*phi+tau | [문서](domains/life/womens-intimate-cleanser/womens-intimate-cleanser.md) |
+| 10 | ✅ | v1 | **Men's Cleanser n=6 Dermatology Architecture** | BT-1157: 25/25 EXACT — glans pH=n=6, 라우릴C12=sigma, Fitzpatrick6types=n, microbiome6genera=n | [doc](domains/life/mens-intimate-cleanser/mens-intimate-cleanser.md) |
+| 10 | ✅ | v1 | **Women's Cleanser n=6 Vaginal-Ecosystem Architecture** | BT-1158: 25/25 EXACT — Lactobacillus6types=n, vaginal pH=tau=4, CST5types=sopfr, glucoseC6=n, menstrual28d=sigma*phi+tau | [doc](domains/life/womens-intimate-cleanser/womens-intimate-cleanser.md) |
 
 <!-- AUTO:FOOTER_hygiene:START -->
-> 도메인: [mens-intimate-cleanser/](docs/mens-intimate-cleanser/) · [womens-intimate-cleanser/](docs/womens-intimate-cleanser/)
+> domains: [mens-intimate-cleanser/](docs/mens-intimate-cleanser/) · [womens-intimate-cleanser/](docs/womens-intimate-cleanser/)
 <!-- AUTO:FOOTER_hygiene:END -->
 
 ---
@@ -709,10 +732,10 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 
 <!-- AUTO:SUMMARY_fantasy:START -->
 > [!WARNING]
-> 신화/판타지 탐색 — 공학적 설계 대상 아님 · 2 도메인 · 60 가설 · 16 EXACT (26.7%) · BT 교차 16
+> Mythology/fantasy exploration — not an engineering target · 2 domains · 60 hypotheses · 16 EXACT (26.7%) · BT cross 16
 <!-- AUTO:SUMMARY_fantasy:END -->
 
-> 상세: [판타지 README](domains/sf-ufo/fantasy/fantasy.md) · SSOT: [`config/fantasy.json`](config/fantasy.json)
+> details: [Fantasy README](domains/sf-ufo/fantasy/fantasy.md) · SSOT: [`config/fantasy.json`](config/fantasy.json)
 
 ---
 
@@ -721,7 +744,7 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 <!-- AUTO:REFERENCE:START -->
 | 항목 | 링크 |
 |------|------|
-| **n=6 상수표** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
+| **n=6 Constants Table** | σ=12, τ=4, φ=2, sopfr=5, J₂=24, σ-τ=8, 1/(σ-φ)=0.1 |
 | **127 Breakthrough Theorems** | [theory/breakthroughs/breakthrough-theorems.md](theory/breakthroughs/breakthrough-theorems.md) |
 | **700+ Atlas Constants** | [theory/constants/atlas-constants.md](theory/constants/atlas-constants.md) |
 | **45 Testable Predictions** | [theory/predictions/testable-predictions.md](theory/predictions/testable-predictions.md) |
@@ -730,7 +753,7 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 | **Cross-Domain Resonance** | [reports/sessions/cross-domain-resonance-2026-03-31.md](reports/sessions/cross-domain-resonance-2026-03-31.md) |
 | **Core Theorem Proof** | [theory/proofs/theorem-r1-uniqueness.md](theory/proofs/theorem-r1-uniqueness.md) |
 | **448 Calculators** | [bridge/calculator-registry.md](bridge/calculator-registry.md) |
-| **Universal DSE** | `tools/universal-dse/` — TOML 1개로 즉시 DSE |
+| **Universal DSE** | `tools/universal-dse/` — TOML 1로 즉h DSE |
 <!-- AUTO:REFERENCE:END -->
 
 ## Honest Limitations
@@ -754,4 +777,4 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 
 ---
 
-*Part of the [n6-architecture](https://github.com/need-singularity/n6-architecture) project family (수학+산업 통합 완료).*
+*Part of the [n6-architecture](https://github.com/need-singularity/n6-architecture) project family (math + industry integration complete).*
