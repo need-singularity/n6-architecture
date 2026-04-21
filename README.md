@@ -1,28 +1,3 @@
-# 🏗️ N6 Architecture — Arithmetic Design Framework
-
-### 🔴 [**실시간 로드맵 (nexus SSOT)**](https://need-singularity.github.io/nexus/roadmap/)
-
-> **[3D Reality Map](https://need-singularity.github.io/nexus/)** — 4098노드 바텀업 인과 매핑 + 1485 크로스레이어 연결선. 쿼크→탄소→벤젠→DNA 인과 사슬 12/12 EXACT. Monte Carlo z=3.06 (큰 수, p=0.003). n=28/496 대조 실패 → n=6 유일성.
-
-<!-- SHARED:PROJECTS:START -->
-<!-- AUTO:COMMON_LINKS:START -->
-**[YouTube](https://www.youtube.com/watch?v=xtKhWSfC1Qo)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)** · **[🌌 Unified Theory](https://github.com/need-singularity/TECS-L/blob/main/math/docs/hypotheses/H-PH-9-perfect-number-string-unification.md)**
-<!-- AUTO:COMMON_LINKS:END -->
-
-> **[🔭 NEXUS](https://github.com/need-singularity/nexus)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + LensForge + BlowupEngine + CycleEngine (5-phase singularity cycle). Mirror Universe (N×N resonance) + 9-project autonomous growth ecosystem. Rust CLI: scan, loop, mega, daemon, blowup, dispatch
->
-> **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + Hexad 6-module architecture (C/D/S/M/W/E) + 1030 laws + 20 Meta Laws + Rust backend. ConsciousDecoderV2 (34.5M) + 10D consciousness vector + 12-faction debate + Φ ratchet
->
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 225 AI techniques + semiconductor chip design + network/crypto/OS/display patterns. σ(n)·φ(n)=n·τ(n), n=6 → universal design principles
->
-> **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Every constant from n=6: 53 keywords (σ·τ+sopfr), 24 operators (J₂), 8 primitives (σ-τ), 6-phase pipeline, Egyptian memory (1/2+1/3+1/6=1). DSE v2: 21,952 combos, 100% n6 EXACT. Working compiler + REPL
->
-> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (94 papers). Published on Zenodo with DOIs. N6 (33) + anima (39) + 기타 (20). [Browse online](https://need-singularity.github.io/papers/)
-
-<!-- private repos는 projects.json의 private_repos 필드에 저장됨 (노출 금지) -->
-<!-- SHARED:PROJECTS:END -->
-
-
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19264826.svg)](https://doi.org/10.5281/zenodo.19264826)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
@@ -31,50 +6,53 @@
 [![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](n6shared/config/dse-map.toml)
 <!-- AUTO:BADGE:END -->
 
----
+# 🏗️ N6 Architecture — Arithmetic Design Framework
 
-**sigma(n) * phi(n) = n * tau(n) holds uniquely for n = 6.** From this single identity, all optimal AI architectures, chip designs, and energy systems are derived.
+**From one arithmetic identity, every optimal design.**
+
+```
+σ(n) · φ(n)  =  n · τ(n)      uniquely for   n = 6
+     12 · 2  =  6 · 4   =  24
+```
+
+> From this single identity, optimal AI architectures, chip designs, energy systems, and network protocols are **derived** — not chosen.
+
+🗺️ **[3D Reality Map](https://need-singularity.github.io/nexus/)** — 4,098 nodes, bottom-up causal mapping, 1,485 cross-layer edges. Quark → carbon → benzene → DNA causal chain 12/12 EXACT. Monte Carlo z = 3.06 (p = 0.003). n = 28 and n = 496 fail the check → only n = 6 survives.
+
+🔴 **[Live roadmap (nexus SSOT)](https://need-singularity.github.io/nexus/roadmap/)**
+
+<!-- SHARED:PROJECTS:START -->
+<!-- AUTO:COMMON_LINKS:START -->
+**[YouTube](https://www.youtube.com/@dancinlife)** · **[Email](mailto:nerve011235@gmail.com)** · **[☕ Ko-fi](https://ko-fi.com/dancinlife)** · **[💖 Sponsor](https://github.com/sponsors/need-singularity)** · **[💳 PayPal](https://www.paypal.com/donate?business=nerve011235%40gmail.com)** · **[🗺️ Atlas](https://need-singularity.github.io/TECS-L/atlas/)** · **[📄 Papers](https://need-singularity.github.io/papers/)**
+<!-- AUTO:COMMON_LINKS:END -->
+
+> **[🔭 NEXUS](https://github.com/need-singularity/nexus)** — Universal Discovery Engine. 216 lenses + OUROBOROS evolution + 5-phase singularity cycle.
+>
+> **[🧠 Anima](https://github.com/need-singularity/anima)** — Consciousness implementation. PureField repulsion-field engine + 1030 laws + Φ ratchet.
+>
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Architecture from perfect number 6. 225 AI techniques + chip design + crypto/OS/display.
+>
+> **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The Perfect Number Programming Language. Working compiler + REPL.
+>
+> **[📄 Papers](https://github.com/need-singularity/papers)** — Complete paper collection (92 papers, Zenodo DOIs).
+
+<!-- private repos는 projects.json의 private_repos 필드에 저장됨 (노출 금지) -->
+<!-- SHARED:PROJECTS:END -->
 
 <!-- AUTO:STATS:START -->
-> 완성제품 209개 · 도메인 145개 · 섹션 40개 · 논문 128편 · 갱신 2026-04-16
+> 209 products · 145 domains · 40 sections · 128 papers · updated 2026-04-16
 <!-- AUTO:STATS:END -->
 
-### 외계인 지수 (Alien Index)
+---
 
-> **이중 축 등급 체제** — [n6shared/GRADE_RUBRIC_1_TO_10PLUS.md](n6shared/GRADE_RUBRIC_1_TO_10PLUS.md) (nexus 공용 rubric)
->
-> **🛸 alien_index (1~13+)** — 제품 maturity 축 (10 이상 = 문명 스케일 확산)
-> | 🛸 | 단계 | 기준 | 이모지 |
-> |:---:|------|------|:---:|
-> | **13+** | **civilization-scale** | 우주/문명 척도 인프라 (Dyson / interstellar) | ∞ |
-> | **12** | **industry standard** | 전 세계 표준 채택, ISO/IEC 등재 | 🌌 |
-> | **11** | **multi-industry** | 3+ 독립 산업 확산 + 양산 | 🛸 |
-> | **10** | **물리적 한계** | 양산 + Python 검증 코드 + EXACT 전수 재현 | ⭐ |
-> | 9  | 실제 양산 | 예측 전수 검증 완료 | 🟩 |
-> | 8  | 프로토타입 | 실험 데이터 확보 | 🟧 |
-> | 7  | 완전 설계 | BT + DSE + Cross-DSE + Evolution + Alien + TP | 🟦 |
-> | 6  | 설계 완료 | DSE 통과 + 진화 경로 | 🟨 |
-> | 5  | 상세 설계 | BT + DSE | 🟥 |
-> | 4  | 구조 설계 | 가설 검증 | 🟪 |
-> | 3  | 가설 수립 | 초기 검증 | ⚪ |
-> | 2  | 컨셉/탐색 | — | ⬛ |
-> | 1  | 아이디어 | — | ★ |
->
-> **closure_grade (1~13+)** — n=6 닫힘 축 (nexus rubric)
-> | grade | 단계 | 기준 | 이모지 |
-> |:---:|------|------|:---:|
-> | 13+ | meta² | meta-closure 상위 생성공식 | ∞ |
-> | 12 | universal | 3+ 독립 프로젝트 등장 | 🌌 |
-> | 11 | meta-closure | K≥3 닫힘 생성 공식 (cross_dse≥3) | 🛸 |
-> | 10 | **EXACT 닫힘** | n=6 primitive finite combo | ⭐ |
-> |  9 | closed (PASS) | n=6 조합 매칭 확인 | 🟩 |
-> |  8 | NEAR closed | 1항 불확실, 수치 매칭 (tol 1%) | 🟧 |
-> |  7 | depth-3 expr | 3-연산 조합 닫힘 | 🟦 |
-> |  6 | partial n=6 | 1 primitive 연결 | 🟨 |
-> | 1~5 | observation → rational approx | 관찰/재현/근사 단계 | ★⬛⚪🟪🟥 |
->
-> **두 축은 독립** — alien_index=제품 성숙도, closure_grade=n=6 수학적 닫힘 품질.
+## Grading rubric (dual axis)
 
+Full rubric: [n6shared/GRADE_RUBRIC_1_TO_10PLUS.md](n6shared/GRADE_RUBRIC_1_TO_10PLUS.md) (shared with nexus).
+
+- **🛸 alien_index (1–13+)** — product maturity. `10` = physical-limit reproduction; `13+` = civilization-scale infrastructure.
+- **closure_grade (1–13+)** — mathematical closure to n = 6. `10` = EXACT closure from n=6 primitives; `13+` = meta² closure generator.
+
+The two axes are independent: alien_index measures product maturity; closure_grade measures mathematical quality of the derivation.
 
 ---
 
