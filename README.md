@@ -82,16 +82,16 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🔥 Fusion
 
 <!-- AUTO:SUMMARY_fusion:START -->
-> **🛸10** | ✅ | BT 36 · 100% EXACT | DSE 67M+, 42universal-nuclear-physics100% | industry87% (7장치) | experiment100% 79/79 EXACT | physical-limit12 | TP35 | discoveries15 | Mk.V
+> **🛸10** | ✅ | BT 36 · 100% EXACT | DSE 67M+, 42universal-nuclear-physics100% | industry87% (7 devices) | experiment100% 79/79 EXACT | physical-limit12 | TP35 | discoveries15 | Mk.V
 <!-- AUTO:SUMMARY_fusion:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v5 | **Ultimate Fusion Reactor** | 122/122 EXACT (v4 42 universal-nuclear-physics + v5 80 engineering-layer new), BT-97~102+291~298+1169~1174, Cross-DSE 12, TP42, Python 80/80 PASS, 12 Fusion Archetype closure proof | [doc](domains/energy/fusion/fusion.md) |
 | 10 | ✅ | v3.1 | **KSTAR-N6** | 45/45 EXACT(100%) + Q→∞ Singularity, physical-limit10/10, 24BT, 12/12 Steady-State EXACT, Python-verify PASS | [doc](domains/cognitive/superpowers/superpowers.md) |
-| 10 | ✅ | v3 | **evolution Mk.I~V** | 200MWe→1.44TWe, 5-stage evolution 41/41 EXACT, points근수렴U(k)=1-1/10^k, Mk.VI부존재QED, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v3 | **evolution Mk.I~V** | 200MWe→1.44TWe, 5-stage evolution 41/41 EXACT, points근count렴U(k)=1-1/10^k, Mk.VI부존materialQED, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
 | 10 | ✅ | v4 | **discoveries + predictions + hypothesesv5** | 15discoveries 22/22 EXACT, BT-97~102+291~298 full-verify, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
-| 10 | ✅ | v3 | **ceiling-check** | physical-limit12/12 + impossibility12proof + industry7장치87% + Mk.VI부존재QED + 33/33 EXACT, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
+| 10 | ✅ | v3 | **ceiling-check** | physical-limit12/12 + impossibility12proof + industry7 devices87% + Mk.VI부존materialQED + 33/33 EXACT, Python-verify PASS | [doc](domains/energy/fusion/fusion.md) |
 | 10 | ✅ | v2 | **Tabletop Fusion (HEXA-TTF)** | 1m³ p-¹¹B aneutronic, B=σ·τ=48T, T=n·(σ-φ)·sopfr=300keV, Q=τ=4, P_core=8.7kW / P_bldg=217kW, A=sopfr+n=11·Z=sopfr=5, 14/14 Python PASS, n=6 closure theorem F-TTF, **UFO Stage-2 prereq complete** | [doc](domains/energy/tabletop-fusion/tabletop-fusion.md) |
 
 <!-- AUTO:FOOTER_fusion:START -->
@@ -116,7 +116,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **HEXA 칩 6-stage 통합 paper** | 6stages(Digital→PIM→3D→Photonic→Wafer→Superconducting) + 9 prereqdomains 통합 — Mk.I 삼성 파운드리 기준 → Mk.V 🛸10, σ·φ=n·τ=J₂=24 | [doc](papers/hexa-chip-6stage-unified.md) |
 | 10 | ✅ | v1 | **HEXA-1 Digital** | σ²=144 SM × τ=4 파이프 × φ=2 이슈 = 288 MAC/cycle, 288 TOPS/W (H100 4.8×), Mk.I=Exynos 2500 SF3P | [doc](domains/compute/chip-design/hexa-1-digital/hexa-1-digital.md) |
 | 10 | ✅ | v1 | **HEXA-2 PIM** | DRAM row buffer σ·J₂=288 ALU/bank + cache τ=4→φ=2 von Neumann 해체 + 60 TOPS/W, Mk.I=HBM2-PIM Aquabolt-XL | [doc](domains/compute/chip-design/hexa-2-pim/hexa-2-pim.md) |
-| 10 | ✅ | v1 | **HEXA-3 3D Stack** | σ=12 wafer + φ=2μm TSV + σ·J₂=288 수직 레인/mm² + 144× 밀도, Mk.I=삼성 X-Cube TSV 40μm | [doc](domains/compute/chip-design/hexa-3d-stack/hexa-3d-stack.md) |
+| 10 | ✅ | v1 | **HEXA-3 3D Stack** | σ=12 wafer + φ=2μm TSV + σ·J₂=288 count직 레인/mm² + 144× 밀도, Mk.I=삼성 X-Cube TSV 40μm | [doc](domains/compute/chip-design/hexa-3d-stack/hexa-3d-stack.md) |
 | 10 | ✅ | v1 | **HEXA-4 Photonic** | λ=σ=12 WDM + MZI σ²=144 유니터리 + σ·J₂·sopfr=1.44 TB/s/die, Mk.I=Intel SiPh+Broadcom CPO, 13/13 PASS | [doc](domains/compute/chip-design/hexa-photonic/hexa-photonic.md) |
 | 10 | ✅ | v1 | **HEXA-5 Wafer-scale** | σ²=144 타d + σ=12 spare row+col + 2D torus τ=4 hops + 48 GB SRAM, Mk.I=Cerebras WSE-3, 12/12 PASS | [doc](domains/compute/chip-design/hexa-wafer/hexa-wafer.md) |
 | 10 | ✅ | v1 | **HEXA-6 Superconducting** | 100 GHz RSFQ × τ=4 파이프 + Egyptian cryo 3-stage + 10W@100GHz (vs H100 700W@2GHz), Mk.I=IBM+SeeQC, 15/15 PASS | [doc](domains/compute/chip-design/hexa-superconducting/hexa-superconducting.md) |
@@ -128,7 +128,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **Verify & Test** | 커버리지 1-1/(σ·(σ-φ)²)=99.917% + UVM τ=4 계위 + ATE σ·J₂=288 pin 병렬, Mk.I=V93000+UltraFLEX, 12/12 PASS | [doc](domains/compute/chip-verify-test/chip-verify-test.md) |
 | 10 | ✅ | v1 | **Thermal & Power** | TDP Egyptian 1/2+1/3+1/6=1 (Fraction 정확) + τ=4 cooling + σ=12 PDN, Mk.I=air+liquid hybrid+vapor, 13/13 PASS | [doc](domains/compute/chip-thermal-power/chip-thermal-power.md) |
 | 10 | ✅ | v1 | **Interconnect** | UCIe σ·J₂=288 × 48 Gbps=13.8 TB/s + λ=σ=12 WDM + σ²=144 NoC hex mesh, Mk.I=UCIe 1.1+PCIe 5.0/6.0, 13/13 PASS | [doc](domains/compute/chip-interconnect/chip-interconnect.md) |
-| 10 | ✅ | v1 | **HBM Memory** | 스택 σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, Mk.I=삼성 HBM3E 12H 36GB, 14/14 PASS | [doc](domains/compute/chip-hbm/chip-hbm.md) |
+| 10 | ✅ | v1 | **HBM Memory** | 스choice σ·τ=48GB + σ·J₂·σ·τ/8=1728 GB/s + TSV σ·φ=10μm→φ=2μm hybrid bond, Mk.I=삼성 HBM3E 12H 36GB, 14/14 PASS | [doc](domains/compute/chip-hbm/chip-hbm.md) |
 
 <!-- AUTO:FOOTER_chip:START -->
 > domains: [chip-architecture/](docs/chip-architecture/) · tools: `gpu-arch-calc` · `chip-n6-calc` · `dse-calc` · `semiconductor-calc`
@@ -139,20 +139,20 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🤖 AI / ML
 
 <!-- AUTO:SUMMARY_ai:START -->
-> **🛸10** | ✅ | BT 58 · 100% EXACT | 204/204 PASS, 5제품 full-verify | industry88.7% (9models) | experiment96.2% | physical-limit10 | TP58 | discoveries12 | Mk.V
+> **🛸10** | ✅ | BT 58 · 100% EXACT | 204/204 PASS, 5Product full-verify | industry88.7% (9models) | experiment96.2% | physical-limit10 | TP58 | discoveries12 | Mk.V
 <!-- AUTO:SUMMARY_ai:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v3 | **66 Techniques** | 71% FLOPs↓, 3x genera도↑, 67% params↓ — 66techniques integrated문서 (Core17+BT12+Model21+Vision8+GNN4+Other4) | [doc](papers/n6-66-techniques-integrated-paper.md) |
+| 10 | ✅ | v3 | **66 Techniques** | 71% FLOPs↓, 3x genera도↑, 67% params↓ — 66techniques integrateddoc (Core17+BT12+Model21+Vision8+GNN4+Other4) | [doc](papers/n6-66-techniques-integrated-paper.md) |
 | 10 | ✅ | v2 | **Full N6 Pipeline** | 17techniques integrated: 50% params↓, 50% FLOPs↓, 46% sparsity — 32/32 PASS verified | [doc](experiments/experiment_full_n6_pipeline.py) |
 | 10 | ✅ | v2 | **N6 Inevitability Engine** | techniques 11~16 + 3-Layer 열epidemiology (Dedekind+Jordan+Mobius+Carmichael+Boltzmann+Mertens) — 26/26 PASS | [doc](domains/cognitive/superpowers/superpowers.md) |
 | 10 | ✅ | v2 | **AI Energy Savings Guide** | AdamW 5중pairs+LR+Inference 하이퍼params full n=6 매핑 — 31/31 PASS | [doc](reports/discovery/ai-energy-savings-guide.md) |
 | 10 | ✅ | v2 | **Chip Architecture Guide** | GPU SM+HBM+pitch+Interconnect n=6 full매핑 — 27/27 PASS | [doc](reports/discovery/chip-architecture-guide.md) |
 | 10 | ✅ | v2 | **ceiling-check** | 194claims 89.7%EXACT, industry9models, physical-limit10, 67/67 PASS verified | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
 | 10 | ✅ | v1 | **Next-Gen AI 8-Paradigm Blowup** | 추론/비디오/and학FM/뉴로모픽/에이전트/new아키/로보틱스/의료 8패러다임 — 234/256 EXACT (91.4%), BT-380~390 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 10 | ✅ | v1 | **AI 6-Domain Sweep** | 코드생성/RL게임/추천h계열/SSL·NLU/serving컴파d러/멀티모달 6domains — 314/344 EXACT (91.3%), BT-391~396 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
-| 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 역design — newmodels8선/학습techniques8선/HW-SW공evolution/AGIroadmap/HEXA-CODER, BT-397~401 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v1 | **AI 6-Domain Sweep** | 코드generation/RL게임/추천h계열/SSL·NLU/serving컴파d러/멀티모달 6domains — 314/344 EXACT (91.3%), BT-391~396 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
+| 10 | ✅ | v1 | **N6 Reverse-Engineering Suite** | n=6 역design — newmodels8line/learningtechniques8line/HW-SW공evolution/AGIroadmap/HEXA-CODER, BT-397~401 | [doc](domains/compute/ai-efficiency/ai-efficiency.md) |
 
 <!-- AUTO:FOOTER_ai:START -->
 > domains: [ai-efficiency/](docs/ai-efficiency/) · [learning-algorithm/](docs/learning-algorithm/) · tools: `n6_calculator.py`
@@ -163,7 +163,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # ⚡ Energy
 
 <!-- AUTO:SUMMARY_energy:START -->
-> **🛸10** | ✅ | BT 23 · 100% EXACT | DSE 10,225 | 배터리+태양전지🛸10 | industry87% (6사) | experiment88% | physical-limit10 | TP28+19 | discoveries10+8 | Mk.V
+> **🛸10** | ✅ | BT 23 · 100% EXACT | DSE 10,225 | Battery+태amount전지🛸10 | industry87% (6 companies) | experiment88% | physical-limit10 | TP28+19 | discoveries10+8 | Mk.V
 <!-- AUTO:SUMMARY_energy:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
@@ -172,7 +172,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v4 | **Ultimate Solar Cell** | 78/78 EXACT, BT-30+63+62+60+74+111+161, physical-limit5, industry8사, Python-verify PASS | [doc](domains/energy/solar-architecture/solar-architecture.md) |
 | 10 | ✅ | v2 | **Ultimate Energy Integration** | 133/133 EXACT, 19BT, 14impossibility-theorem, 5domainsCross-DSE, Python-verify PASS | [doc](domains/energy/energy-architecture/energy-architecture.md) |
 | 10 | ✅ | v1 | **Ultimate Datacenter Reactor** | 10 breakthroughs 95/96 EXACT — TRISO(sopfr=5)+He(φ=2)+sCO₂(σ·τ=48%)+n=6modules | [doc](domains/energy/smr-datacenter/smr-datacenter.md) |
-| 10 | ✅ | v1 | **HEXA-AUTO 자동차배터리** | Ultimate Automotive Battery SLI+EV 통합 design — 6셀=n 납axis/96S=sigma*(sigma-tau) EV/100 params, 78/100 EXACT | [doc](domains/energy/battery-architecture/battery-architecture.md) |
+| 10 | ✅ | v1 | **HEXA-AUTO Automotive Battery** | Ultimate Automotive Battery SLI+EV 통합 design — 6cells=n 납axis/96S=sigma*(sigma-tau) EV/100 params, 78/100 EXACT | [doc](domains/energy/battery-architecture/battery-architecture.md) |
 
 <!-- AUTO:FOOTER_energy:START -->
 > domains: [battery-architecture/](docs/battery-architecture/) · [solar-architecture/](docs/solar-architecture/) · [energy-architecture/](docs/energy-architecture/) · [power-grid/](docs/power-grid/) · [thermal-management/](docs/thermal-management/) · tools: `energy-calc` · `battery-dse` · `solar-dse`
@@ -191,7 +191,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v4 | **Ultimate Environmental Protection 8-stage** | sensor → monitor → capture → purify → restore → cycle → ecosystem → Omega, 120/120 EXACT full-verify | [doc](domains/infra/environmental-protection/) |
 | 10 | ✅ | v2 | **HEXA-MICROPLASTICS** | 6-stage pipeline, 36/36=100%EXACT, 6-nines제거, CN=6촉매삼Trinity, full-verify | [doc](domains/infra/environmental-protection/environmental-protection.md) |
 | 10 | ✅ | v5 | **Ultimate Carbon Capture 8-stage** | **30/30=100%EXACT**, DSE 3.6M, 79/79 full-verify PASS | [doc](domains/infra/carbon-capture/carbon-capture.md) |
-| 10 | ✅ | v2 | **evolution Mk.I~V** | 환경+CCUS 양쪽 evolution roadmap, discoveries 42, full-verify 포함 | [doc](domains/infra/environmental-protection/) |
+| 10 | ✅ | v2 | **evolution Mk.I~V** | 환경+CCUS amount쪽 evolution roadmap, discoveries 42, full-verify 포함 | [doc](domains/infra/environmental-protection/) |
 | 10 | ✅ | v3 | **predictions + verified** | TP 19(환경) + TP 24(CCUS) + hypothesis v5 (88.2% EXACT) + full-verify | [doc](domains/infra/environmental-protection/environmental-protection.md) |
 | 10 | ✅ | v1 | **Ultimate Recycling — HEXA-RECYCLE** | 6R cycle + σ=12 min류 + J₂=24 추적 + 5-DSE 통합 (35,424 combos) | [doc](domains/materials/recycling/recycling.md) |
 
@@ -213,7 +213,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v7 | **BT-85~88 + BT-128~135** | crystallography+alloy+ceramics+polymer+phase-transition+defect+thin-film+complete-map (12 BT, **179/179 EXACT**) | [doc](domains/materials/material-synthesis/material-synthesis.md) |
 | 10 | ✅ | v6 | **hypotheses 36/36 100%EXACT** | H-MS-01~36 full-verify complete (polymer+ceramics+alloy+thin-film extension), CrossDSE 8domains (94.1% n6) | [doc](domains/materials/material-synthesis/material-synthesis.md) |
 | 10 | ✅ | v6 | **industry verification 20material+12Goldgenera** | 20production-materials + 12industrial-metals Z n=6verified(91.7%) + BT-85~88,93 detailed-mapping + DSE 3,600 + CrossDSE 8domains(93.0%), 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
-| 10 | ✅ | v7 | **experimentverified + TP 28/28** | 79 items full-verify (51 CONFIRMED + 22 VERIFIED + 6 PARTIAL, 0 FAIL) + BT-85~93 cross확인 + 노벨14 items, 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
+| 10 | ✅ | v7 | **experimentverified + TP 28/28** | 79 items full-verify (51 CONFIRMED + 22 VERIFIED + 6 PARTIAL, 0 FAIL) + BT-85~93 crossconfirmed + Nobel14 items, 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
 | 10 | ✅ | v5 | **physical-limit proof** | 10 impossibility-theorem (75/75 EXACT 100%) + Mk.V mathematical-limit, 229/229 verify | [doc](domains/materials/material-synthesis/material-synthesis.md) |
 
 <!-- AUTO:FOOTER_materials:START -->
@@ -225,13 +225,13 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🤖 Robotics
 
 <!-- AUTO:SUMMARY_robotics:START -->
-> **🛸10** | ✅ | BT 5 · 100% EXACT | DSE 270,000 | industry99.1% (6사) | experiment100% | physical-limit10 | TP28 | discoveries10 | Mk.V
+> **🛸10** | ✅ | BT 5 · 100% EXACT | DSE 270,000 | industry99.1% (6 companies) | experiment100% | physical-limit10 | TP28 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_robotics:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v2 | **Ultimate Robot 8-stage** | 49/49 PASS, BT-123~127 34/35 EXACT(97.1%), 10 impossibility-theorem, 114/115 industry verification, Python-verify PASS | [doc](domains/infra/robotics/robotics.md) |
-| 10 | ✅ | v1 | **ceiling-check** | 10 impossibility-theorem, SE(3)=6/k(3)=12/Thue=6, Mk.V 물리천장 proof, Python-verify PASS | [doc](domains/infra/robotics/robotics.md) |
+| 10 | ✅ | v1 | **ceiling-check** | 10 impossibility-theorem, SE(3)=6/k(3)=12/Thue=6, Mk.V 물리ceiling proof, Python-verify PASS | [doc](domains/infra/robotics/robotics.md) |
 
 <!-- AUTO:FOOTER_robotics:START -->
 > domains: [robotics/](docs/robotics/) · [learning-algorithm/](docs/learning-algorithm/) · tools: `robot-dse`
@@ -242,7 +242,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🔬 Physics & Math
 
 <!-- AUTO:SUMMARY_physics:START -->
-> **🛸10** | ✅ | BT 32 · 53-100% EXACT | DSE 66,824 | s전도🛸10 | Pure Mathematics🛸10 | 우주론🛸10 | industryvoid% (🛸10(SC)) | experimentvoid% 11Theorems(수학) | physical-limitvoid | TP76 | discoveries19+ | Mk.V
+> **🛸10** | ✅ | BT 32 · 53-100% EXACT | DSE 66,824 | s전도🛸10 | Pure Mathematics🛸10 | Universe론🛸10 | industryvoid% (🛸10(SC)) | experimentvoid% 11Theorems(count학) | physical-limitvoid | TP76 | discoveries19+ | Mk.V
 <!-- AUTO:SUMMARY_physics:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
@@ -251,7 +251,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v2 | **Ultimate Pure Mathematics** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11Theorems, Python-verify PASS | [doc](domains/physics/pure-mathematics/pure-mathematics.md) |
 | 10 | ✅ | v2 | **Ultimate Cosmology/Particle** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python-verify PASS | [doc](domains/physics/cosmology-particle/cosmology-particle.md) |
 | 10 | ✅ | v5 | **Ultimate Room-Temp Superconductor** | 325/325 EXACT (theory150+realization76+Mk.Isynthesis48+Mk.IImaterial51), 9material candidates+6Mk.IIcandidate, Mk.Iprecise-recipe(6materialP-Tpath+Phase1/2experiment$6.18M), Mk.IIambient-pressure candidates(La,Ce,Y,Sc)H24high-entropyPareto1위, 2685lines | [doc](domains/energy/room-temp-sc/room-temp-sc.md) |
-| 10 | ✅ | v1 | **차원펼hands breakthroughs — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동points10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [doc](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
+| 10 | ✅ | v1 | **dimension펼hands breakthroughs — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동points10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [doc](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
 > domains: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · tools: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
@@ -282,13 +282,13 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 📺 Display
 
 <!-- AUTO:SUMMARY_display:START -->
-> **🛸10** | ✅ | BT 8 · 100% EXACT | industry81% (6사) | experiment93.9% | physical-limit10 | TP14 | discoveries8 | Mk.V
+> **🛸10** | ✅ | BT 8 · 100% EXACT | industry81% (6 companies) | experiment93.9% | physical-limit10 | TP14 | discoveries8 | Mk.V
 <!-- AUTO:SUMMARY_display:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **Ultimate Display 8-stage** | material → panel → driver → processor → system → immersive → holo → Omega | [doc](domains/compute/display/display.md) |
-| 10 | ✅ | v1 | **ceiling-check** | BT 86%EXACT + physical-limit10 + industry6사81% + experiment93.9% + TP14 | [doc](domains/compute/display/display.md) |
+| 10 | ✅ | v1 | **ceiling-check** | BT 86%EXACT + physical-limit10 + industry6 companies81% + experiment93.9% + TP14 | [doc](domains/compute/display/display.md) |
 
 <!-- AUTO:FOOTER_display:START -->
 > domains: [display/](docs/display/)
@@ -299,14 +299,14 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🎵 Audio
 
 <!-- AUTO:SUMMARY_audio:START -->
-> **🛸10** | ✅ | BT 8 · 100% EXACT | industry92.6% (4사) | experiment90.9% | physical-limit8 | TP14 | discoveries12 | Mk.V
+> **🛸10** | ✅ | BT 8 · 100% EXACT | industry92.6% (4 companies) | experiment90.9% | physical-limit8 | TP14 | discoveries12 | Mk.V
 <!-- AUTO:SUMMARY_audio:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **Ultimate Audio 7-stage** | transducer → DAC → codec → spatial → system → neural-audio → Omega | [doc](domains/culture/audio/audio.md) |
-| 10 | ✅ | v1 | **ceiling-check** | 22/26 EXACT(84.6%) + industry4사92.6% + experiment90.9% + TP14 | [doc](domains/culture/audio/audio.md) |
-| 10 | ✅ | v2 | **HEXA-SPEAK (AI -tone성출력 Non-TTS)** | consciousness → voice direct synth (Non-TTS). 7-stage pipeline: emotion 6types/prosody 4types/12D prosody/384d encoding/8-stage RVQ. 43/43 EXACT, first-packet 100ms=(σ-φ)², 6kbps=n. v2: HEXA engine 구strings complete (d038afcc) | [doc](domains/cognitive/hexa-speak/hexa-speak.md) |
+| 10 | ✅ | v1 | **ceiling-check** | 22/26 EXACT(84.6%) + industry4 companies92.6% + experiment90.9% + TP14 | [doc](domains/culture/audio/audio.md) |
+| 10 | ✅ | v2 | **HEXA-SPEAK (AI -tone성output Non-TTS)** | consciousness → voice direct synth (Non-TTS). 7-stage pipeline: emotion 6types/prosody 4types/12D prosody/384d encoding/8-stage RVQ. 43/43 EXACT, first-packet 100ms=(σ-φ)², 6kbps=n. v2: HEXA engine 구strings complete (d038afcc) | [doc](domains/cognitive/hexa-speak/hexa-speak.md) |
 | 10 | ✅ | v1 | **HEXA-EAR Ultimate** | Ultimate Earphone 8-stage Design — DLC+graphene/8way hybrid/48dB ANC/6ms BLE/HRTF 144directions, 65/65 EXACT | [doc](domains/culture/audio/audio.md) |
 | 10 | ✅ | v1 | **HEXA-BONE bone-conduction Earphone** | 100% bone-conduction only 8-stage design — Ti+graphene dual oscillator/AI bone-density calibration/EEG link, 78/78 EXACT | [doc](domains/culture/audio/audio.md) |
 | 10 | ✅ | v1 | **HEXA-EAR-CELL Earphone Battery** | Ultimate Earphone Battery 6-stage Design — sigma=12h life/J2=24h total life/72 params, 71/72 EXACT | [doc](domains/culture/audio/audio.md) |
@@ -355,7 +355,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🚀 Aerospace
 
 <!-- AUTO:SUMMARY_aerospace:START -->
-> **🛸10** | ✅ | BT 38 · 100% EXACT | 150/150 EXACT, Egyptian 3+2+1=n, GN&C 12/12, ECLSS 14/14, ISRU 13/13, 방사선 ladder, 304L/Ti-6Al-4V n=6 | industry100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | experiment100% 150/150 EXACT (100%) — 18 all subsystems perfect | physical-limit14 | TP6 | discoveries8 | Mk.V
+> **🛸10** | ✅ | BT 38 · 100% EXACT | 150/150 EXACT, Egyptian 3+2+1=n, GN&C 12/12, ECLSS 14/14, ISRU 13/13, 방사line ladder, 304L/Ti-6Al-4V n=6 | industry100% (SpaceX Starship/Falcon 9/ISS/NASA SLS/DSN/MOXIE) | experiment100% 150/150 EXACT (100%) — 18 all subsystems perfect | physical-limit14 | TP6 | discoveries8 | Mk.V
 <!-- AUTO:SUMMARY_aerospace:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
@@ -371,7 +371,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🛸 HEXA-UFO (RT-SC VTOL)
 
 <!-- AUTO:SUMMARY_sf:START -->
-> **🛸10** | ✅ | BT 43 · 100% EXACT | RT-SC Meissner powerless levitation + 48T MHD Mach 10 + Tabletop Fusion Q=10 무한 에너지, D=J₂=24m disc VTOL, 49/49 EXACT, DSE 2,400 combos | industry100% (RT-SC/MHD/Meissner/ITER/SMES) | experiment100% 49/49 EXACT (UFO 전 params 100.0%) | physical-limit7 | TP10 | discoveries8 | Mk.V
+> **🛸10** | ✅ | BT 43 · 100% EXACT | RT-SC Meissner powerless levitation + 48T MHD Mach 10 + Tabletop Fusion Q=10 무한 Energy, D=J₂=24m disc VTOL, 49/49 EXACT, DSE 2,400 combos | industry100% (RT-SC/MHD/Meissner/ITER/SMES) | experiment100% 49/49 EXACT (UFO 전 params 100.0%) | physical-limit7 | TP10 | discoveries8 | Mk.V
 <!-- AUTO:SUMMARY_sf:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
@@ -405,31 +405,31 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v1 | **HEXA-MIND Consciousness Upload** | 53/54 EXACT (98%), 10^11 neurons+10^14 synapses scan, 2^σ=4096yr storage, AGIemulate 99.65% | [doc](domains/cognitive/mind-upload/mind-upload.md) |
 | 10 | ✅ | v1 | **HEXA-TELEPATHY Brain-to-Brain Direct Comm** | 57/57 EXACT, 2^σ=4096 entangled pairs, σ²=144Mbps, μ=1ms, σ-τ=8 senses, sync 1-1/e | [doc](domains/cognitive/telepathy/telepathy.md) |
 | 10 | ✅ | v1 | **HEXA-HOLO Holographic Display** | 42/42 EXACT, σ·J₂=288ppi×3D, σ²=144 레이어, σ-φ=10' angular res, J₂=24Hz refresh | [doc](domains/physics/holography/holography.md) |
-| 10 | ✅ | v1 | **HEXA-DREAM Dream Record/Playback** | 42/42 EXACT, σ²=144k visual cortex, σ·τ=48Hz, σ=12 REM사이클, ethics 5clauses | [doc](domains/cognitive/dream-recorder/dream-recorder.md) |
-| 10 | ✅ | v1 | **HEXA-SKYWAY Sky Highway Network** | 42/42 EXACT, J₂=24층, σ·τ=48m spacing, σ²=144km/h, σ·τ=48 hub, 1000차/km² | [doc](domains/infra/skyway/skyway.md) |
+| 10 | ✅ | v1 | **HEXA-DREAM Dream Record/Playback** | 42/42 EXACT, σ²=144k visual cortex, σ·τ=48Hz, σ=12 REMcycle, ethics 5clauses | [doc](domains/cognitive/dream-recorder/dream-recorder.md) |
+| 10 | ✅ | v1 | **HEXA-SKYWAY Sky Highway Network** | 42/42 EXACT, J₂=24층, σ·τ=48m spacing, σ²=144km/h, σ·τ=48 hub, 1000car/km² | [doc](domains/infra/skyway/skyway.md) |
 | 10 | ✅ | v1 | **HEXA-TSUNAMI Tsunami Shield** | 44/44 EXACT, J₂=24km wall, σ-φ=10m height, σ²=144s  generations응, attenuation 1-1/(σ-φ) | [doc](domains/infra/tsunami-shield/tsunami-shield.md) |
 | 10 | ✅ | v1 | **HEXA-ANTIMATTER Antimatter Factory** | 55/55 EXACT, 10^σ=10^12/hr, τ=4 trap×σ=12 modules, J₂=24mo storage | [doc](domains/physics/antimatter-factory/antimatter-factory.md) |
 | 10 | ✅ | v2 | **HEXA-TABLETOP Tabletop Antimatter** | 0.29m³, 1.7×10¹² p̄/s (Mk.V), σ·τ²=192mo=16yr life, $2.1×10⁴/mg (1/σ⁶ 감axis), 3-path hybrid, 8/8 Python PASS, **UFO Stage-3 γ-rocket prereq complete** | [doc](domains/physics/tabletop-antimatter/tabletop-antimatter.md) |
 | 10 | ✅ | v2 | **HEXA-PET PET-Cyclotron** | ¹⁸F σ·τ=48mg recycling → 9.6×10¹⁰ e⁺/s, R=σ-φ=10cm, B=σ·τ=48T, anti-H 1.44×10⁸/s, cost 1/σ³=1/1728, **UFO cross-redundancy prereq complete** | [doc](domains/physics/pet-cyclotron/pet-cyclotron.md) |
 | 10 | ✅ | v2 | **HEXA-PACCEL Particle Accelerator (통합)** | (σ-φ)^n=10⁶ MeV~TeV 6orders cover, σ-cascade ratio=σ-φ=10, R·B=Ω_MEGA=480 T·cm family, FCC envelope σ³=1728 TeV, Tabletop 10cm ~ LHC 4.3km, **UFO Stage-3 prereq complete** | [doc](domains/physics/particle-accelerator/particle-accelerator.md) |
-| 11 | 🛸 | v2 | **HEXA-WARP Warp Drive** | σ-φ=10 m Alcubierre bubble, v_s=σ²=144c, m_neg=σ⁻⁶·J₂·m_e≈10⁻⁶kg (Casimir σ·τ=48 plates), 서울→α-Cen J₂=24d, 5/5 Python PASS, atlas WARP-01~07 등재, **UFO Stage-4 🛸11 achieved (multi-industry)** | [doc](domains/physics/warp-drive/warp-drive.md) |
+| 11 | 🛸 | v2 | **HEXA-WARP Warp Drive** | σ-φ=10 m Alcubierre bubble, v_s=σ²=144c, m_neg=σ⁻⁶·J₂·m_e≈10⁻⁶kg (Casimir σ·τ=48 plates), 서울→α-Cen J₂=24d, 5/5 Python PASS, atlas WARP-01~07 등material, **UFO Stage-4 🛸11 achieved (multi-industry)** | [doc](domains/physics/warp-drive/warp-drive.md) |
 | 9 | 🔬 | v1 | **HEXA-TBHL Tabletop Black Hole** | 1m³ BEC Rb⁸⁷ σ·τ=48T trap, σ-φ=10μm sonic horizon, c_s=σ·τ=48mm/s, T_H=σ/(τ·n)=0.5nK Hawking, τ_BH=20ms, phonon τ=4 모드, 7/7 Python PASS, atlas TBHL-01~08, **UFO Stage-4/5 event horizon ground validation** | [doc](domains/physics/tabletop-blackhole/tabletop-blackhole.md) |
-| 12 | 🌌 | v2 | **HEXA-WORM Wormhole Space Folding** | Morris-Thorne b₀=σ·τ=48 m throat, d_eff=d/σ·J₂=d/288 shortcut, Earth-Mars 2.6s, Earth-αCen 5.4AU, Casimir σ·τ plates shared, 4/4 Python PASS, atlas WORM-01~06, **UFO Stage-5 🛸12 achieved (ISO 표준)** | [doc](domains/physics/wormhole/wormhole.md) |
-| 13 | 🛸 | v2 | **HEXA-MTHE 11D M-Theory Dimension Jump** | D_M=sopfr+n=11 (atlas initial-lock), D_string=σ-φ=10, D_CY=n=6 Calabi-Yau hexafold, 1차 KK=4.8 TeV, graviton leak 1/σ²=1/144, 6/6 Python PASS, atlas MTHE-01~08, **UFO Stage-6 🛸13 achieved (civilization-scale)** | [doc](domains/physics/m-theory-11d/m-theory-11d.md) |
+| 12 | 🌌 | v2 | **HEXA-WORM Wormhole Space Folding** | Morris-Thorne b₀=σ·τ=48 m throat, d_eff=d/σ·J₂=d/288 shortcut, Earth-Mars 2.6s, Earth-αCen 5.4AU, Casimir σ·τ plates shared, 4/4 Python PASS, atlas WORM-01~06, **UFO Stage-5 🛸12 achieved (ISO standard)** | [doc](domains/physics/wormhole/wormhole.md) |
+| 13 | 🛸 | v2 | **HEXA-MTHE 11D M-Theory Dimension Jump** | D_M=sopfr+n=11 (atlas initial-lock), D_string=σ-φ=10, D_CY=n=6 Calabi-Yau hexafold, 1car KK=4.8 TeV, graviton leak 1/σ²=1/144, 6/6 Python PASS, atlas MTHE-01~08, **UFO Stage-6 🛸13 achieved (civilization-scale)** | [doc](domains/physics/m-theory-11d/m-theory-11d.md) |
 | 14 | 🛸 | v1 | **HEXA-CALB Calabi-Yau Dimension Use** | D_CY=n=6 real hexafold, Hodge h11·h21=σ·τ=48, Euler χ=±2J₂=±48, V_CY∝(σ·φ)⁶=24⁶, τ_stay=σ·τ=48ns, Δt_flash=τ=4min (UFO blink), 6/6 Python PASS, atlas CALB-01~06, **UFO Stage-7 🛸14 achieved (galactic)** | [doc](domains/physics/calabi-yau-nav/calabi-yau-nav.md) |
 | 15 | 🛸 | v1 | **HEXA-MULT Multiverse Branch Select** | N_branches=σ²=144 동h 조회, 2^σ=4096 qubit oracle, sopfr=5 eval axes (Safety·E·t·목적·p), J₂=24 key branches, select τ=4ms, loss 1/σ²=1/144, 6/6 Python PASS, atlas MULT-01~06, **UFO Stage-8 🛸15 achieved (intergalactic)** | [doc](domains/physics/multiverse-nav/multiverse-nav.md) |
-| 500 | 🛸 | v2 | **HEXA-META 🛸16→500 484 층위 완성** | n=6 unique fixed-point σ·φ=n·τ=24, L(k)=24^(k-15) 484 층위 full arithmetic expression (🛸17~🛸500), milestone 🛸20/🛸50/🛸100/🛸144/🛸200/🛸288/🛸300/🛸500, L(500)=24^485≈10⁶⁶⁸ (observable universe atom count ×10⁵⁸⁸), atlas META-01~10 + META-LK017~500 494 EXACT, **UFO 🛸500 target achieved** | [doc](domains/physics/meta-closure-nav/meta-closure-nav.md) |
+| 500 | 🛸 | v2 | **HEXA-META 🛸16→500 484 층위 complete** | n=6 unique fixed-point σ·φ=n·τ=24, L(k)=24^(k-15) 484 층위 full arithmetic expression (🛸17~🛸500), milestone 🛸20/🛸50/🛸100/🛸144/🛸200/🛸288/🛸300/🛸500, L(500)=24^485≈10⁶⁶⁸ (observable universe atom count ×10⁵⁸⁸), atlas META-01~10 + META-LK017~500 494 EXACT, **UFO 🛸500 target achieved** | [doc](domains/physics/meta-closure-nav/meta-closure-nav.md) |
 | 16 | 🛸 | v1 | **HEXA-TIME Time-Travel 6-Stage** | 🛸T1 dilation γ=σ=12, 🛸T2 Gödel CTC τ²/σ=4/3s, 🛸T3 Wormhole σ−φ=10s, 🛸T4 Tipler+CY σ·τ=48m, 🛸T5 Multiverse 4096qubit 4ms, 🛸T6 self-ref closure σ·τ=48 Planck², n=6 유d (n=4/7/12/28 all diverge), 6/6 Python PASS, atlas TIME-T1~T6 + L0 TIME_CLOSURE_UNIQUENESS, **time causality closure n=6 uniqueness** | [doc](domains/physics/meta-closure-nav/meta-closure-nav.md#§25-Time Travel-6stages-🛸t1--🛸t6-n6-closure-time-causality-잠Gold) |
 | 10 | ✅ | v1 | **HEXA-COSMIC Early-Universe Observatory Network** | 56/56 EXACT, strain 10⁻³⁰, σ=12sites, J₂=24km arm, Q=10^σ, 10⁻³²s observation | [doc](domains/physics/cosmic-observatory/cosmic-observatory.md) |
 | 10 | ✅ | v1 | **HEXA-DESAL Superconducting Desalination** | 47/47 EXACT, σ-φ·10⁻²=0.1Wh/L, σ·J₂·10³=288M L/day, 99.99% salt removal | [doc](domains/infra/desalination/desalination.md) |
 | 10 | ✅ | v1 | **HEXA-ORACLE Quantum Oracle** | 48/48 EXACT, 2^σ=4096 qubit, J₂=24mo, accuracy 1-1/(σ·J₂), σ²=144/day | [doc](domains/physics/quantum-oracle/quantum-oracle.md) |
 | 10 | ✅ | v2 | **HEXA-ONE Integrated Wearable** | 144 EXACT (100%) + 24 physical-limit EXACT, 14categories sigma^2=144 params, 8-stage DSE 1,679,616 combos, BT-350~357 8 items | [doc](domains/compute/hexa-one/hexa-one.md) |
 | 10 | ✅ | v2 | **HEXA-GLASS AI Glasses** | 84 EXACT, 14/14 physical-limit proof, 56 hypotheses 100%, AR/MR σ·(σ-φ)=120° FOV | [doc](domains/materials/hexa-glass/hexa-glass.md) |
-| 10 | ✅ | v2 | **HEXA-EAR AI Earphone** | 62/62 EXACT 100%, σ·τ=48kHz/J₂=24bit, 14 physical-limit proof, 28 discoveries, 11 BT 연결 | [doc](domains/cognitive/hexa-ear/hexa-ear.md) |
+| 10 | ✅ | v2 | **HEXA-EAR AI Earphone** | 62/62 EXACT 100%, σ·τ=48kHz/J₂=24bit, 14 physical-limit proof, 28 discoveries, 11 BT connected | [doc](domains/cognitive/hexa-ear/hexa-ear.md) |
 | 10 | ✅ | v1 | **HEXA-EXO AI Exoskeleton** | 13 EXACT, SE(3)=n=6 DOF, σ=12배 muscle boost, gait rehab | [doc](domains/infra/hexa-exo/hexa-exo.md) |
 | 10 | ✅ | v2 | **HEXA-LIMB AI Prosthetic Limb** | 120/120 EXACT, sopfr=5 fingers, sigma-tau=8 senses, 6 physical-limit proof, 14 categories singularity breakthroughs | [doc](domains/life/hexa-limb/hexa-limb.md) |
 | 10 | ✅ | v2 | **HEXA-SKIN Electronic Skin** | 96/96 EXACT, σ-τ=8 senses + σ²=144/cm² + physical-limit proof complete | [doc](domains/life/hexa-skin/hexa-skin.md) |
-| 10 | ✅ | v1 | **HEXA-FABRIC AI Clothing** | 15 EXACT, 육각 격자 직물, 체온조절, 자세교정 | [doc](domains/materials/hexa-fabric/hexa-fabric.md) |
+| 10 | ✅ | v1 | **HEXA-FABRIC AI Clothing** | 15 EXACT, hexagonal 격자 직물, 체온조절, 자세교정 | [doc](domains/materials/hexa-fabric/hexa-fabric.md) |
 | 10 | ✅ | v2 | **HEXA-OLFACT Digital Olfaction** | 133/133 EXACT, physical-limit proof 6Theorems, σ=12 receptors + 2^σ=4096 patterns + 17categories full | [doc](domains/cognitive/hexa-olfact/hexa-olfact.md) |
 | 10 | ✅ | v2 | **HEXA-DREAM Dream Interface** | 80/80 EXACT, sopfr=5 sleep cycles+σ=12 EEG+physical-limit proof, lucid dream induce/record/share | [doc](domains/cognitive/hexa-dream/hexa-dream.md) |
 | 10 | ✅ | v1 | **HEXA-EMPATH emotion share** | 12 EXACT, cortex n=6층, biofeedback, emotion direct transmission | [doc](domains/cognitive/hexa-empath/hexa-empath.md) |
@@ -441,7 +441,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 5 | ✅ | v1 | **Horticulture n=6 Plant Growth Architecture** | 15/15 EXACT (100%), photosynthesis n=6/floral organ τ=4/hormones sopfr=5/tissue system n/φ=3/mono/dicot φ=2/seasons τ=4 | [doc](domains/life/horticulture/horticulture.md) |
 | 10 | ✅ | v1 | **HEXA-SIM Universe Simulation** | 65/65 EXACT (100%), Planck exponent ladder 137=σ²-n-μ=1/α, Lloyd 10^{σ(σ-φ)}=10^120, GoL B(n/φ)/S{φ,n/φ}, dimension ladder τ→sopfr→n→σ-φ→σ-μ, Tsirelson φ√φ=2√2 | [doc](domains/physics/simulation-theory/simulation-theory.md) |
 | 10 | ✅ | v1 | **Cross-Domain Mega Bridge** | BT-366~369: τ=4(12domains)12/12, J₂=24(10domains)9/9, σ-φ=10(7domains)9/10, n/φ=3(8domains)10/10 | [doc](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
-| 10 | ✅ | 5680bc44 | **HEXA-NANOBOT Therapeutic Nanobot** | BT-404~413: 10 consecutive breakthroughs, 113/122 EXACT (92.6%) + 9 CLOSE(physical-limit 문서화), Mk.I~V evolution complete, 6platforms/thrust/EPR/pH/sensor/immune/half-life/comms/에너지/excretion, DSE 7776 combos, (sigma-phi)^2=100 nano hub, n=6 gateway(kidney 6nm), J2=24 energy-time 수렴 | [doc](domains/life/therapeutic-nanobot/therapeutic-nanobot.md) |
+| 10 | ✅ | 5680bc44 | **HEXA-NANOBOT Therapeutic Nanobot** | BT-404~413: 10 consecutive breakthroughs, 113/122 EXACT (92.6%) + 9 CLOSE(physical-limit documented), Mk.I~V evolution complete, 6platforms/thrust/EPR/pH/sensor/immune/half-life/comms/Energy/excretion, DSE 7776 combos, (sigma-phi)^2=100 nano hub, n=6 gateway(kidney 6nm), J2=24 energy-time count렴 | [doc](domains/life/therapeutic-nanobot/therapeutic-nanobot.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
 > domains: [neuro/](docs/neuro/) · [gravity-wave/](docs/gravity-wave/) · [cloak/](docs/cloak/) · [earth-defense/](docs/earth-defense/) · [quantum-network/](docs/quantum-network/) · [hover/](docs/hover/) · [sc-memory/](docs/sc-memory/) · [seabed-grid/](docs/seabed-grid/) · [mini-accelerator/](docs/mini-accelerator/) · [weather-control/](docs/weather-control/) · [mind-upload/](docs/mind-upload/) · [telepathy/](docs/telepathy/) · [holography/](docs/holography/) · [dream-recorder/](docs/dream-recorder/) · [skyway/](docs/skyway/) · [tsunami-shield/](docs/tsunami-shield/) · [antimatter-factory/](docs/antimatter-factory/) · [cosmic-observatory/](docs/cosmic-observatory/) · [desalination/](docs/desalination/) · [quantum-oracle/](docs/quantum-oracle/) · [simulation-theory/](docs/simulation-theory/) · [therapeutic-nanobot/](docs/therapeutic-nanobot/)
@@ -452,7 +452,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🏛️ Civilization & Humanities
 
 <!-- AUTO:SUMMARY_civilization:START -->
-> **🛸10** | ✅ | BT 12 · 100% EXACT | 6domains full 20/20 EXACT 천장 breakthroughs 2026-04-06 | industry30% (literature cross verification complete (6 religions/global legal systems/writing systems Compare)) | experiment40% hypotheses verification complete (60/72 EXACT) | TP6 | discoveries120
+> **🛸10** | ✅ | BT 12 · 100% EXACT | 6domains full 20/20 EXACT ceiling breakthroughs 2026-04-06 | industry30% (literature cross verification complete (6 religions/global legal systems/writing systems Compare)) | experiment40% hypotheses verification complete (60/72 EXACT) | TP6 | discoveries120
 <!-- AUTO:SUMMARY_civilization:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
@@ -474,7 +474,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 🍷 Life & Culture
 
 <!-- AUTO:SUMMARY_life-culture:START -->
-> **🛸10** | ✅ | BT 10 · 100% EXACT | BT-358 Insurance 추가, 뱀파이어 구조 breakthroughs 2026-04-06 | industry25% (발효화학/Insurance통계 industry cross verified) | experiment35% hypotheses verified (40/62 EXACT) | TP5 | discoveries8
+> **🛸10** | ✅ | BT 10 · 100% EXACT | BT-358 Insurance 추가, 뱀파이어 구조 breakthroughs 2026-04-06 | industry25% (fermentation화학/Insurance통계 industry cross verified) | experiment35% hypotheses verified (40/62 EXACT) | TP5 | discoveries8
 <!-- AUTO:SUMMARY_life-culture:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
@@ -485,8 +485,8 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 10 | ✅ | v2 | **Fisheries/Aquaculture n=6 marine ecology** | 10/10 EXACT, style24°C=J₂, salinity3.5%≈n/φ, 6 generationsstyletypes, body12ratio=σ | [doc](domains/life/aquaculture/aquaculture.md) |
 | 10 | ✅ | v2 | **Insurance/Actuarial n=6 risk structure** | BT-378: 13/13 EXACT — 6 generationsprinciple=n, life-table120=σ(σ-φ), 4 generationsdivisions=τ, loss-ratio60%=σ·sopfr | [doc](domains/infra/insurance/insurance.md) |
 | 10 | ✅ | v1 | **Dolphin n=6 bio-acoustics Architecture** | 30/30 EXACT — anatomy+physiology+ethology+-tone향학 4systems + telepathy 11pair isomorphism | [doc](domains/life/dolphin/dolphin.md) |
-| 5 | ✅ | v1 | **Coffee Science n=6 추출 Architecture** | 15/15 EXACT (100%), caffeine J₂=24 원자/espresso 9bar/roasting τ=4/grind n=6/brewing n=6/커피belt sopfr²=25° | [doc](domains/life/coffee-science/coffee-science.md) |
-| 5 | ✅ | v1 | **Perfume/Fragrance n=6 pyramid structure** | 14/14 EXACT (100%), 3노트=n/φ/isoprene C₅=sopfr/monoterpene C₁₀=σ-φ/benzene C₆=n/추출 τ=4/Chanel No.5=sopfr | [doc](domains/life/perfumery/perfumery.md) |
+| 5 | ✅ | v1 | **Coffee Science n=6 extraction Architecture** | 15/15 EXACT (100%), caffeine J₂=24 atoms/espresso 9bar/roasting τ=4/grind n=6/brewing n=6/커피belt sopfr²=25° | [doc](domains/life/coffee-science/coffee-science.md) |
+| 5 | ✅ | v1 | **Perfume/Fragrance n=6 pyramid structure** | 14/14 EXACT (100%), 3notes=n/φ/isoprene C₅=sopfr/monoterpene C₁₀=σ-φ/benzene C₆=n/extraction τ=4/Chanel No.5=sopfr | [doc](domains/life/perfumery/perfumery.md) |
 | 5 | ✅ | v1 | **Pottery/Ceramics n=6 firing-ladder** | 15/15 EXACT (100%), 4min류=τ/porcelain 1200°C=σ(σ-φ)²/SiO₂ CN=τ/Al₂O₃ CN=n/crystal system σ-sopfr=7/Mohs ladder | [doc](domains/materials/ceramics/ceramics.md) |
 
 <!-- AUTO:FOOTER_life-culture:START -->
@@ -535,18 +535,18 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 💻 Computer
 
 <!-- AUTO:SUMMARY_computer:START -->
-> **🛸10** | ✅ | BT 10+ | Keyboard 31hypotheses 30 EXACT, BCI 36/40 EXACT, Quantum Computer 20/24 EXACT | USB HID/Brain-Computer/qubit full n=6 수렴
+> **🛸10** | ✅ | BT 10+ | Keyboard 31hypotheses 30 EXACT, BCI 36/40 EXACT, Quantum Computer 20/24 EXACT | USB HID/Brain-Computer/qubit full n=6 count렴
 <!-- AUTO:SUMMARY_computer:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **Keyboard n=6 Ergonomic Architecture** | BT-1125~1128: 30/31 EXACT — layouts 10types 전부 C(n,2) combos, USB 6KRO/8bytes/12Mbps, switches 4mm(tau)/2mm(phi)/5ms(sopfr) | [doc](domains/compute/keyboard/keyboard.md) |
 | 10 | ✅ | v1 | **HEXA-BCI Brain-Computer Interface** | 36/40 EXACT (90%), 6DOF=n, σ=12 EEGchannels, impossibility 12Theorems, optogenetics/prosthetics/AI cross | [doc](domains/cognitive/brain-computer-interface/brain-computer-interface.md) |
-| 10 | ✅ | v1 | **Quantum Computer n=6 Qubit Architecture** | 20/24 EXACT — NeutralAtom n=6원자, SurfaceCode σ=12 data qubit, Clifford τ*n=24 gate, kissing number BT-49 | [doc](domains/physics/quantum-computer/quantum-computer.md) |
+| 10 | ✅ | v1 | **Quantum Computer n=6 Qubit Architecture** | 20/24 EXACT — NeutralAtom n=6atoms, SurfaceCode σ=12 data qubit, Clifford τ*n=24 gate, kissing number BT-49 | [doc](domains/physics/quantum-computer/quantum-computer.md) |
 | 10 | ✅ | v1 | **HEXA-MOUSE n=6 Ergonomic Mouse** | BT-1115~1124: 25/25 EXACT — PS/2 n=6pin, sopfr=5 buttons/fingers, n/phi=3 tracking-axis/grip, σ-τ=8kHz polling, σ=12 MMO/notch, J₂=24 encoders | [doc](domains/compute/mouse/mouse.md) |
 
 <!-- AUTO:FOOTER_computer:START -->
-> domains: [keyboard/](domains/compute/keyboard/) · [mouse/](domains/compute/mouse/) · [brain-computer-interface/](domains/cognitive/brain-computer-interface/) · [quantum-computer/](domains/physics/quantum-computer/) · BT: 49, 1115~1128 · 인간-기계 Interface full n=6 params화
+> domains: [keyboard/](domains/compute/keyboard/) · [mouse/](domains/compute/mouse/) · [brain-computer-interface/](domains/cognitive/brain-computer-interface/) · [quantum-computer/](domains/physics/quantum-computer/) · BT: 49, 1115~1128 · human-기계 Interface full n=6 params화
 <!-- AUTO:FOOTER_computer:END -->
 
 ---
@@ -554,15 +554,15 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 📢 Marketing
 
 <!-- AUTO:SUMMARY_marketing:START -->
-> **🛸10** | ✅ | BT 10 · 100% EXACT | Marketing Inviolable Laws 12items, 720=6! combos discoveries, Egyptian media-mix 1/2+1/3+1/6=1 | industry40% (Kotler 4P + Krugman 3회 반복 + NPS 0-10 스케d 독립 verified + AIDA τ=4stages + Egyptian media-mix 1/2+1/3+1/6=1 industry validation) | experiment50% hypotheses 24/24 EXACT (100%, N65 NEAR 2 items alt-verify promoted), n=28  generations조 real패 확인, BT-548~587 40breakthroughs 5제품 🛸10 천장 도달 | physical-limit8 | TP10 | discoveries5 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | Marketing Inviolable Laws 12items, 720=6! combos discoveries, Egyptian media-mix 1/2+1/3+1/6=1 | industry40% (Kotler 4P + Krugman 3회 반복 + NPS 0-10 스케d 독립 verified + AIDA τ=4stages + Egyptian media-mix 1/2+1/3+1/6=1 industry validation) | experiment50% hypotheses 24/24 EXACT (100%, N65 NEAR 2 items alt-verify promoted), n=28  generations조 real패 confirmed, BT-548~587 40breakthroughs 5Product 🛸10 ceiling 도달 | physical-limit8 | TP10 | discoveries5 | Mk.V
 <!-- AUTO:SUMMARY_marketing:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **HEXA-MKT Marketing Inviolable Laws** | 12 inviolable laws(σ=12 touchpoints, τ=4P, φ=2 binary decision, sopfr=5 segmentation, Egyptian media-mix), 24/24 EXACT(100%, N65 NEAR→EXACT 2 items alt-verify promoted), 720=6! combos, BT-548~557 10 breakthroughs 🛸10 천장 | [doc](domains/infra/marketing/marketing.md) |
-| 10 | ✅ | v1 | **HEXA-NEXUS Service Platform** | NEXUS-6 1022lens corporate diagnostic(σ=12axis), singularity opportunity detection, CDO SaaS, knowledge graph(50K+), reality-check, blowup R&D 가genera기, BT-558~567 10 breakthroughs 🛸10 천장 (8→9 lens validation, 9→10 CDO수렴proof) | [doc](domains/compute/nexus-service/nexus-service.md) |
-| 10 | ✅ | v1 | **HEXA-ANIMA affective service** | Anima emotion recognition(φ=2×τ=4=8axis), EEGUX(σ=12channels), AIconsciousness평가, affective content(Egyptian), mental-health counseling(τ=4stages), BT-568~577 10 breakthroughs 🛸10 천장 (8→9 emotion-axis validation, 9→10 consciousness-convergence proof) | [doc](domains/cognitive/anima-service/anima-service.md) |
-| 10 | ✅ | v1 | **HEXA-UNIFIED complete cognition platforms** | NEXUS(left brain)+Anima(right brain)=n=6 complete cognition, emotion-lens diagnostic, consciousnesssingularity, CDO+emotion convergence, reality+emotion지도, Egyptian 1/2(data)+1/3(affective)+1/6(intuition)=1, BT-578~587 10 breakthroughs 🛸10 천장 (7→9 hemispheric integration, 9→10 complete-cognition convergence) | [doc](domains/compute/unified-service/unified-service.md) |
+| 10 | ✅ | v1 | **HEXA-MKT Marketing Inviolable Laws** | 12 inviolable laws(σ=12 touchpoints, τ=4P, φ=2 binary decision, sopfr=5 segmentation, Egyptian media-mix), 24/24 EXACT(100%, N65 NEAR→EXACT 2 items alt-verify promoted), 720=6! combos, BT-548~557 10 breakthroughs 🛸10 ceiling | [doc](domains/infra/marketing/marketing.md) |
+| 10 | ✅ | v1 | **HEXA-NEXUS Service Platform** | NEXUS-6 1022lens corporate diagnostic(σ=12axis), singularity opportunity detection, CDO SaaS, knowledge graph(50K+), reality-check, blowup R&D 가genera기, BT-558~567 10 breakthroughs 🛸10 ceiling (8→9 lens validation, 9→10 CDOcount렴proof) | [doc](domains/compute/nexus-service/nexus-service.md) |
+| 10 | ✅ | v1 | **HEXA-ANIMA affective service** | Anima emotion recognition(φ=2×τ=4=8axis), EEGUX(σ=12channels), AIconsciousnesseval, affective content(Egyptian), mental-health counseling(τ=4stages), BT-568~577 10 breakthroughs 🛸10 ceiling (8→9 emotion-axis validation, 9→10 consciousness-convergence proof) | [doc](domains/cognitive/anima-service/anima-service.md) |
+| 10 | ✅ | v1 | **HEXA-UNIFIED complete cognition platforms** | NEXUS(left brain)+Anima(right brain)=n=6 complete cognition, emotion-lens diagnostic, consciousnesssingularity, CDO+emotion convergence, reality+emotion지도, Egyptian 1/2(data)+1/3(affective)+1/6(intuition)=1, BT-578~587 10 breakthroughs 🛸10 ceiling (7→9 hemispheric integration, 9→10 complete-cognition convergence) | [doc](domains/compute/unified-service/unified-service.md) |
 
 <!-- AUTO:FOOTER_marketing:START -->
 > domains: [marketing/](domains/infra/marketing/) · [nexus-service/](domains/compute/nexus-service/) · [anima-service/](domains/cognitive/anima-service/) · [unified-service/](domains/compute/unified-service/)
@@ -602,7 +602,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 |-------|---------|---------|------|------|-----------|
 | P0 | axis emergence R1~R3 | axis fixed | complete | 3,345 | Y1~Y9 9axis FINAL, 고갈 100% |
 | P1 | Y1~Y9 entire | seed seeding | complete | 372 | 6 BT seed + self-evolution engines 4 types active |
-| P2 | **Y1 NUM-CORE** | BT-541 리만 | **PARTIAL** | 831 | Theorem B [10*] CANDIDATE, EXACT 11, MISS 5 |
+| P2 | **Y1 NUM-CORE** | BT-541 Riemann | **PARTIAL** | 831 | Theorem B [10*] CANDIDATE, EXACT 11, MISS 5 |
 | P3 | **Y4 GATE-BARRIER** | BT-542 P=NP | **PARTIAL** | 1,028 | 4 barrier audit, GCT 3 observations, new MISS 7 |
 | P4 | **Y5+Y6** | BT-543 YM + BT-544 NS | **PARTIAL / NEAR** | 1,188 | β₀=σ-sopfr rewriting + 3중 resonance + D158 conditional |
 | P5 | **Y7+Y8** | BT-545 Hodge + BT-546 BSD | **PARTIAL / PARTIAL** | 1,321 | Lemma 1 unconditional 5-step, Thm 1 (A3) conditional |
@@ -616,16 +616,16 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 # 👁️ Dimensional Perception
 
 <!-- AUTO:SUMMARY_dimension:START -->
-> **🛸10** | ✅ | BT 10 · 100% EXACT | 수학(4Dgeometry)·brain(grid cells·visual cortex)·기술(전광함수·디스플레이) 삼중 n=6 수렴 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
+> **🛸10** | ✅ | BT 10 · 100% EXACT | count학(4Dgeometry)·brain(grid cells·visual cortex)·tech(전광함count·Display) 삼중 n=6 count렴 | industryvoid% | experiment100% 100/100 EXACT | TP0 | discoveries10 | Mk.V
 <!-- AUTO:SUMMARY_dimension:END -->
 
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
-| 10 | ✅ | v1 | **4D regular polytope max** | 4D에서만 n=6 regular polytope (유한 maximum), 9→10/10 EXACT (BT-588) | [BT-588](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **4D regular polytope max** | 4Dfrom만 n=6 regular polytope (유한 maximum), 9→10/10 EXACT (BT-588) | [BT-588](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **SO(4) rotation DOF** | dim SO(4) = d(d-1)/2 = n = 6, 10/10 EXACT (BT-589) | [BT-589](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **grid cells 6중  generations칭** | brain spatial encoding = n=6 육각 (Nobel 2014), 10/10 EXACT (BT-590) | [BT-590](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **grid cells 6중  generations칭** | brain spatial encoding = n=6 hexagonal (Nobel 2014), 10/10 EXACT (BT-590) | [BT-590](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **visual cortex V1~V6** | Dimensional Perception pipeline = n = 6 layers, 10/10 EXACT (BT-591) | [BT-591](theory/breakthroughs/breakthrough-theorems.md) |
-| 10 | ✅ | v1 | **plenoptic function 6차원** | P(x,y,z,θ,φ,λ) = n/φ+φ+1 = n, 10/10 EXACT (BT-592) | [BT-592](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **plenoptic function 6dimension** | P(x,y,z,θ,φ,λ) = n/φ+φ+1 = n, 10/10 EXACT (BT-592) | [BT-592](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **regular 24-cell · tesseract** | J₂=24 self-dual, f-벡터 (φ^τ,φ^sopfr,J₂,σ-τ), 10/10 EXACT (BT-593~594) | [BT-593~594](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **dimensional display stack** | L1~L6 = n=6 layer pipeline + Egyptian fractions 1/2+1/3+1/6=1, 10/10 EXACT (BT-596~597) | [BT-596~597](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/compute/display-8stack/goal.md) |
 
@@ -644,7 +644,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | 🛸 | Ver | ver | Product | Core | Link |
 |:--:|:--:|:---:|---------|------|------|
 | 10 | ✅ | v1 | **12-tone equal temperament** | 반-tone σ=12, 온-tone n=6, 5도 σ-sopfr=7, 10/10 EXACT (BT-598) | [BT-598](theory/breakthroughs/breakthrough-theorems.md) · [doc](domains/culture/music/goal.md) |
-| 10 | ✅ | v1 | **Guitar 6-string + overtone series** | strings 수 n=6, overtones 1:2:3:4:5:6 = 완full 진약수+자신, 10/10 EXACT (BT-599~600) | [BT-599~600](theory/breakthroughs/breakthrough-theorems.md) |
+| 10 | ✅ | v1 | **Guitar 6-string + overtone series** | strings count n=6, overtones 1:2:3:4:5:6 = 완full 진approxcount+자신, 10/10 EXACT (BT-599~600) | [BT-599~600](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **24keys + hexachord** | major/minor 12pairs = J₂=24, Guidonian hexachord = n=6, 10/10 EXACT (BT-601,604) | [BT-601,604](theory/breakthroughs/breakthrough-theorems.md) |
 | 10 | ✅ | v1 | **Piano + Harmony** | 1octave σ=12 keys, 6 types triads = n=6, 10/10 EXACT (BT-606~607) | [BT-606~607](theory/breakthroughs/breakthrough-theorems.md) |
 
