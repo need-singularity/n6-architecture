@@ -1,18 +1,14 @@
 {
-  "timestamp": "2026-04-15T08:05:04Z",
-  "atlas_path": "/Users/ghost/Dev/nexus/shared/n6/atlas.n6",
-  "n_entries": 3680,
+  "timestamp": "2026-04-21T13:16:45Z",
+  "atlas_path": "/Users/ghost/Dev/nexus/n6/atlas.n6",
+  "n_entries": 5132,
   "n_internal_refs": 261,
   "n_entries_with_refs": 125,
   "cycles": [
     {
       "size": 19,
       "nodes": [
-        "L8-mw-solar-velocity-kms",
-        "L8-mw-gc-distance-kly",
         "L8-laniakea-diameter-mly",
-        "L8-mw-bulge-mass-Msun",
-        "L8-mw-disk-mass-Msun",
         "L8-m31-diameter-kly",
         "L8-m31-mass-Msun",
         "L8-virgo-cluster-mass-Msun",
@@ -23,17 +19,21 @@
         "L8-shapley-supercluster-mass-Msun",
         "L8-laniakea-mass-Msun",
         "L8-lg-total-mass-Msun",
+        "L8-mw-bulge-mass-Msun",
+        "L8-mw-disk-mass-Msun",
         "L8-mw-total-mass-Msun",
         "L8-mw-dark-matter-fraction",
         "L8-mw-halo-radius-kly",
+        "L8-mw-solar-velocity-kms",
+        "L8-mw-gc-distance-kly",
         "L8-mw-diameter-kly"
       ]
     },
     {
       "size": 7,
       "nodes": [
-        "L8-lambda-cosmological-constant",
         "L8-omega-lambda",
+        "L8-lambda-cosmological-constant",
         "L8-dark-energy-acceleration-z",
         "L8-universe-age-gyr",
         "L8-mw-age-gyr",
@@ -44,12 +44,12 @@
     {
       "size": 7,
       "nodes": [
+        "L8-m33-mass-Msun",
+        "L8-m33-distance-mly",
         "L8-m31-merger-time-gyr",
         "L8-m31-approach-velocity-kms",
         "L8-m31-distance-mly",
         "L8-lg-diameter-mpc",
-        "L8-m33-mass-Msun",
-        "L8-m33-distance-mly",
         "L8-lg-member-count"
       ]
     },
@@ -162,8 +162,8 @@
       "nodes": [
         "L8-cmb-temperature-K",
         "L8-cmb-photon-number-density",
-        "L8-bbn-helium-fraction",
         "L8-baryon-asymmetry",
+        "L8-bbn-helium-fraction",
         "L8-omega-baryon"
       ]
     },
