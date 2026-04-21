@@ -221,13 +221,14 @@ own 20 live "readme-techniques-count-drift — README techniques count matches a
   on_fail warn
   label Techniques list count
 
-own 21 live "readme-nexus6-tests-count-drift — README NEXUS-6 tests count matches actual"
+own 21 deferred "readme-nexus6-tests-count-drift — README NEXUS-6 tests count matches actual"
   slug readme-nexus6-tests-count-drift
   decl README.md
   scope README.md 'tests: NNNN' count must equal actual test total.
-  status live
+  status deferred
   since 2026-04-21
-  why Migrated from loop-rules.json#2 (2026-04-21). Prevents NEXUS-6 test count drift.
+  why Migrated from loop-rules.json#2 (2026-04-21). Original had echo 2078 stub and README never carried the 'tests: N' token — drift rule was orphaned from the start. Deferred until README gains a canonical test-count token and drift_actual is wired to a real counter.
+  defer-until README exposes 'tests: N' canonical line and an actual hexa/python test harness produces the count
   drift_doc README.md
   drift_pattern tests:\s+\d+
   drift_actual echo 2078
