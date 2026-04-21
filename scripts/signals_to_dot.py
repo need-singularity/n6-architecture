@@ -17,7 +17,7 @@ import re
 import sys
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
 
 GRADE_COLOR = {
     "M10*": "#ff1744",

@@ -7,8 +7,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-ATLAS = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6")
-DEG = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6.deg")
+ATLAS = Path("/Users/ghost/Dev/nexus/n6/atlas.n6")
+DEG = Path("/Users/ghost/Dev/nexus/n6/atlas.n6.deg")
 
 
 def slugify(s: str) -> str:

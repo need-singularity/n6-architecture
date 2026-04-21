@@ -46,7 +46,7 @@ let mut NEXUS_ROOT = env("NEXUS")
 if len(NEXUS_ROOT) == 0 {
   NEXUS_ROOT = env("HOME") + "/Dev/nexus"
 }
-let ATLAS_N6 = NEXUS_ROOT + "/shared/n6/atlas.n6"
+let ATLAS_N6 = NEXUS_ROOT + "/n6/atlas.n6"
 let OUT_SESS_DIR = "reports/sessions"
 let OUT_CHLG_DIR = "reports/changelogs"
 

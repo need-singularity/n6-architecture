@@ -23,9 +23,9 @@ import re
 import sys
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-DISCOVERY_LOG = Path("/Users/ghost/Dev/nexus/shared/discovery_log.jsonl")
-BACKUP = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.bak.pre-witness")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+DISCOVERY_LOG = Path("/Users/ghost/Dev/nexus/discovery_log.jsonl")
+BACKUP = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.bak.pre-witness")
 HAMMING_THRESHOLD = 3  # spec: Hamming <= 3 (엄격); 실제 discovery_log 토큰이 짧아
                         # 매칭이 거의 없음. 필요 시 --threshold 15~22 조정
 SIMHASH_BITS = 64

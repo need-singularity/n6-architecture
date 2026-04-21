@@ -26,8 +26,8 @@ import re
 import sys
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-BACKUP = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.bak.pre-cross-promote")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+BACKUP = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.bak.pre-cross-promote")
 
 KEYWORDS = [
     "σφ=nτ", "sigma*phi=n*tau", "stochastic resonance", "ouroboros",

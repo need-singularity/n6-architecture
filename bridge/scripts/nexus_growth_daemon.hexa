@@ -109,7 +109,7 @@ let DAEMON_LOG = NEXUS_STATE + "/daemon.log"
 let GROWTH_LOG = NEXUS_STATE + "/growth_log.jsonl"
 let mut NEXUS_ROOT = env("NEXUS")
 if len(NEXUS_ROOT) == 0 { NEXUS_ROOT = HOME + "/Dev/nexus" }
-let ATLAS_N6 = NEXUS_ROOT + "/shared/n6/atlas.n6"
+let ATLAS_N6 = NEXUS_ROOT + "/n6/atlas.n6"
 let N6_ARCH = HOME + "/Dev/n6-architecture"
 let SCRIPT_DIR = N6_ARCH + "/bridge/scripts"
 let CARGO_BIN = HOME + "/.cargo/bin/cargo"
@@ -332,24 +332,24 @@ fn measure_simple() -> [i64] {
     let atlas_lines = count_file_lines(ATLAS_N6)
     let growth_entries = count_file_lines(GROWTH_LOG)
     let hexa_scripts = count_files("*.hexa", SCRIPT_DIR)
-    let lens_count = count_files("*.hexa", NEXUS_ROOT + "/shared/lenses")
-    let engine_count = count_files("*.hexa", NEXUS_ROOT + "/shared/engine")
-    let blowup_count = count_files("*.hexa", NEXUS_ROOT + "/shared/blowup")
-    let discovery_count = count_files("*.jsonl", NEXUS_ROOT + "/shared/discovery")
+    let lens_count = count_files("*.hexa", NEXUS_ROOT + "/lenses")
+    let engine_count = count_files("*.hexa", NEXUS_ROOT + "/engine")
+    let blowup_count = count_files("*.hexa", NEXUS_ROOT + "/cli/blowup")
+    let discovery_count = count_files("*.jsonl", NEXUS_ROOT + "/discovery")
     // 순서는 DIMENSIONS 와 매칭 (15개)
     let mut m: [i64] = []
     m = m.push(hexa_scripts)        // performance (proxy: script count)
     m = m.push(engine_count)         // architecture
     m = m.push(lens_count)           // lenses
     m = m.push(blowup_count)         // modules
-    m = m.push(count_file_lines(NEXUS_ROOT + "/shared/harness/lint_log.jsonl"))  // tests
-    m = m.push(count_file_lines(NEXUS_ROOT + "/shared/bt/bt_keywords.jsonl"))    // hypotheses
-    m = m.push(count_files("*.json", NEXUS_ROOT + "/shared/dse"))                // dse
-    m = m.push(count_files("*.hexa", NEXUS_ROOT + "/shared/calc"))               // experiments
-    m = m.push(count_files("*.hexa", NEXUS_ROOT + "/shared/calc"))               // calculators
-    m = m.push(count_file_lines(NEXUS_ROOT + "/shared/convergence/nexus.json"))  // cross_resonance
+    m = m.push(count_file_lines(NEXUS_ROOT + "/harness/lint_log.jsonl"))  // tests
+    m = m.push(count_file_lines(NEXUS_ROOT + "/bt/bt_keywords.jsonl"))    // hypotheses
+    m = m.push(count_files("*.json", NEXUS_ROOT + "/dse"))                // dse
+    m = m.push(count_files("*.hexa", NEXUS_ROOT + "/calc"))               // experiments
+    m = m.push(count_files("*.hexa", NEXUS_ROOT + "/calc"))               // calculators
+    m = m.push(count_file_lines(NEXUS_ROOT + "/convergence/nexus.json"))  // cross_resonance
     m = m.push(discovery_count)      // knowledge_graph
-    m = m.push(count_files("*.jsonl", NEXUS_ROOT + "/shared/harness"))           // red_team (proxy)
+    m = m.push(count_files("*.jsonl", NEXUS_ROOT + "/harness"))           // red_team (proxy)
     m = m.push(atlas_lines)          // atlas
     m = m.push(count_files("CLAUDE.md", NEXUS_ROOT))                             // documentation
     m = m.push(growth_entries)       // integration (proxy)
@@ -415,7 +415,7 @@ fn gi_consult() -> [string] {
     let gi_path = SCRIPT_DIR + "/growth_intelligence.hexa"
     if !file_exists_simple(gi_path) { return result }
     // perl_timeout 으로 무한루프 차단 (10초)
-    let timeout_sh = NEXUS_ROOT + "/shared/harness/perl_timeout.sh"
+    let timeout_sh = NEXUS_ROOT + "/harness/perl_timeout.sh"
     let mut cmd = ""
     if file_exists_simple(timeout_sh) {
         cmd = "bash " + shq(timeout_sh) + " 10 hexa run " + shq(gi_path) + " 2>/dev/null"
@@ -571,7 +571,7 @@ fn cargo_validate() -> bool {
         return true
     }
     // perl_timeout 으로 60s 강제 (H-NOZOMBIE)
-    let timeout_sh = NEXUS_ROOT + "/shared/harness/perl_timeout.sh"
+    let timeout_sh = NEXUS_ROOT + "/harness/perl_timeout.sh"
     let mut t_prefix = ""
     if file_exists_simple(timeout_sh) {
         t_prefix = "bash " + shq(timeout_sh) + " 60 "

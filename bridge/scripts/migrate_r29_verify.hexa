@@ -3,10 +3,10 @@
 // ═══════════════════════════════════════════════════════════
 //
 // 목적: domains/**/verify_*.hexa (verify.hexa 제외) 전수를
-//       $NEXUS/shared/n6/scripts/ 로 일괄 이관
+//       $NEXUS/n6/scripts/ 로 일괄 이관
 //
 // 규칙 근거: n6shared/rules/common.json R29
-//   "계산기/검증/스캐너 .hexa 는 nexus/shared/n6/scripts/ 에만 작성"
+//   "계산기/검증/스캐너 .hexa 는 nexus/n6/scripts/ 에만 작성"
 //
 // 네이밍 규칙: verify_<domain>_<stem>.hexa
 //   예: domains/life/baking/verify_alien10.hexa
@@ -45,7 +45,7 @@ let mut NEXUS_ROOT = env("NEXUS")
 if len(NEXUS_ROOT) == 0 {
   NEXUS_ROOT = env("HOME") + "/Dev/nexus"
 }
-let TARGET_DIR = NEXUS_ROOT + "/shared/n6/scripts"
+let TARGET_DIR = NEXUS_ROOT + "/n6/scripts"
 let BACKUP_DIR = "/tmp/r29_backup_20260411"
 let REPORT_PATH = PROJECT_ROOT + "/reports/audits/r29-migration-bulk-2026-04-11.md"
 
@@ -164,7 +164,7 @@ println("")
 // 대상 목적지 확인
 if !dir_exists(TARGET_DIR) {
     println("❌ 목적지 디렉토리 없음: " + TARGET_DIR)
-    println("  R29 위반 방지를 위해 nexus/shared/n6/scripts/ 가 반드시 존재해야 합니다.")
+    println("  R29 위반 방지를 위해 nexus/n6/scripts/ 가 반드시 존재해야 합니다.")
     exit(1)
 }
 

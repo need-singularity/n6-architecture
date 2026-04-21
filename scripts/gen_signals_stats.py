@@ -26,9 +26,9 @@ from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-OUT_JSON = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.stats")
-OUT_MD = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.stats.md")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+OUT_JSON = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.stats")
+OUT_MD = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.stats.md")
 
 
 def now_iso() -> str:

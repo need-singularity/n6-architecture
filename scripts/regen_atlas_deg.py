@@ -9,9 +9,9 @@ import re
 from pathlib import Path
 from collections import Counter
 
-ATLAS = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6")
-DEG_OUT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6.deg")
-DEG_BACKUP = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6.deg.bak.pre-backfill")
+ATLAS = Path("/Users/ghost/Dev/nexus/n6/atlas.n6")
+DEG_OUT = Path("/Users/ghost/Dev/nexus/n6/atlas.n6.deg")
+DEG_BACKUP = Path("/Users/ghost/Dev/nexus/n6/atlas.n6.deg.bak.pre-backfill")
 
 
 def slugify(s: str) -> str:

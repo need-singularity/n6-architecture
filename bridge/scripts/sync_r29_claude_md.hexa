@@ -27,7 +27,7 @@ let mut NEXUS_ROOT = env("NEXUS")
 if len(NEXUS_ROOT) == 0 {
   NEXUS_ROOT = env("HOME") + "/Dev/nexus"
 }
-let TARGET_PREFIX = NEXUS_ROOT + "/shared/n6/scripts"
+let TARGET_PREFIX = NEXUS_ROOT + "/n6/scripts"
 let REPORT_PATH = PROJECT_ROOT + "/reports/audits/r29-migration-bulk-2026-04-11.md"
 
 // ─── 유틸 ───
@@ -175,7 +175,7 @@ while gi < group_count {
     }
 
     // 섹션 내용 작성
-    let mut section = "\n## 외부 검증 스크립트 (R29 — nexus/shared/n6/scripts/ SSOT)\n\n"
+    let mut section = "\n## 외부 검증 스크립트 (R29 — nexus/n6/scripts/ SSOT)\n\n"
     section = section + "2026-04-11 R29 이관: 이 폴더의 `verify_*.hexa` (verify.hexa 제외) 는\n"
     section = section + "R29 규칙에 따라 `$NEXUS/shared/n6/scripts/` 로 이관되었습니다.\n\n"
     section = section + "- 이관 참조: `reports/audits/r29-migration-bulk-2026-04-11.md`\n"

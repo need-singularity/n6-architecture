@@ -27,7 +27,7 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
 
 
 def simhash(text: str, bits: int = 64) -> int:

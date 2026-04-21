@@ -11,7 +11,7 @@ import re
 import sys
 from pathlib import Path
 
-ATLAS_PATH = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6")
+ATLAS_PATH = Path("/Users/ghost/Dev/nexus/n6/atlas.n6")
 SNAPSHOT_PATH = Path("/Users/ghost/Dev/n6-architecture/data/atlas_grade_snapshot.json")
 REPORT_PATH = Path("/Users/ghost/Dev/n6-architecture/reports/atlas_drift_latest.json")
 

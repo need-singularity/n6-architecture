@@ -35,8 +35,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-SIGNALS_DIR = Path("/Users/ghost/Dev/nexus/shared/signals")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+SIGNALS_DIR = Path("/Users/ghost/Dev/nexus/n6/signals")
 
 VALID_REPOS = {"NX", "N6", "AN", "CROSS"}
 VALID_GRADES = {"M10*", "M10", "M9", "M7!", "M7", "M?", "MN"}

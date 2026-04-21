@@ -17,9 +17,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-LENS = "/Users/ghost/Dev/nexus/shared/lenses/emergence_lens.hexa"
-HEXA = "/Users/ghost/Dev/nexus/shared/bin/hexa"
-LOG = Path("/Users/ghost/Dev/nexus/shared/harness/growth_tick.jsonl")
+LENS = "/Users/ghost/Dev/nexus/lenses/emergence_lens.hexa"
+HEXA = "/Users/ghost/Dev/nexus/bin/hexa"
+LOG = Path("/Users/ghost/Dev/nexus/harness/growth_tick.jsonl")
 
 
 def now_iso() -> str:

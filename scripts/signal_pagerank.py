@@ -20,8 +20,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-OUT = Path("/Users/ghost/Dev/nexus/shared/n6/signals/signal_pagerank.json")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+OUT = Path("/Users/ghost/Dev/nexus/n6/signals/signal_pagerank.json")
 
 HEAD_RE = re.compile(r"^@S\s+(SIG-\S+)\s*=")
 CROSS_RE = re.compile(r"^\s*cross_repo:\s*\[([^\]]*)\]")

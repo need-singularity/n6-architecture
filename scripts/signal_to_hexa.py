@@ -33,9 +33,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
 OUT_DIR = Path("/Users/ghost/Dev/n6-architecture/theory/predictions")
-BACKUP = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.bak.pre-signal2hexa")
+BACKUP = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.bak.pre-signal2hexa")
 
 TARGET_GRADES = {"M7!", "M?"}
 

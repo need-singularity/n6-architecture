@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
-ATLAS = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.n6")
+ATLAS = Path("/Users/ghost/Dev/nexus/n6/atlas.n6")
 REPORT = Path("/Users/ghost/Dev/n6-architecture/reports/ouroboros_v2_report.json")
 
 SEVERITY = {

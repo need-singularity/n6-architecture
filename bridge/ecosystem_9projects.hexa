@@ -1,5 +1,5 @@
 // ecosystem_9projects.hexa — NEXUS-6 Discovery Engine 9프로젝트 자율 성장 생태계 연동
-// 출처: /Users/ghost/Dev/nexus/shared/config/projects.json (schema v4, 2026-04-14)
+// 출처: /Users/ghost/Dev/nexus/config/projects.json (schema v4, 2026-04-14)
 // 목적: n6-architecture 입장에서 9프로젝트 성장 데몬과 발견을 교환하는 인터페이스 정의
 // 규칙: 외부 데몬은 건드리지 않는다. 본 파일은 "링크 핸들"만 발급/수집한다.
 // 호출: hexa run bridge/ecosystem_9projects.hexa [--list | --broadcast <msg> | --metrics]
@@ -33,7 +33,7 @@ fn pad_r(s, w: i64) -> string {
 let HOME = env("HOME")
 let DEV_DIR = HOME + "/Dev"
 let NEXUS_ROOT = DEV_DIR + "/nexus"
-let NEXUS_SHARED = NEXUS_ROOT + "/shared"
+let NEXUS_SHARED = NEXUS_ROOT
 let REGISTRY_JSON = NEXUS_SHARED + "/config/projects.json"
 let ROADMAPS_DIR = NEXUS_SHARED + "/roadmaps"
 let GROWTH_BUS = HOME + "/.nexus/growth_bus.jsonl"

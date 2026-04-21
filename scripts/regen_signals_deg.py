@@ -11,7 +11,7 @@ degree 계산:
   + cross_repo 수 × 2
   + CROSS tag 존재 시 +3
 
-출력: /Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.deg
+출력: /Users/ghost/Dev/nexus/n6/atlas.signals.n6.deg
 
 사용법:
   /usr/bin/python3 scripts/regen_signals_deg.py
@@ -24,9 +24,9 @@ import re
 import sys
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-OUT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.deg")
-BACKUP = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.deg.bak.pre-regen")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+OUT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.deg")
+BACKUP = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.deg.bak.pre-regen")
 
 
 def parse_signals(text: str) -> list[dict]:

@@ -21,7 +21,7 @@ from datetime import date
 from pathlib import Path
 from collections import Counter
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
 REPORT_DIR = Path("/Users/ghost/Dev/n6-architecture/reports")
 MILL_TAGS = {"7R", "7N", "7H", "7P", "7Y", "7B", "7S"}
 EXISTING_MEGAHUB = "SIG-META-001"

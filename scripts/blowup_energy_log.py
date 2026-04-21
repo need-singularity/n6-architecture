@@ -18,8 +18,8 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-LOG = Path("/Users/ghost/Dev/nexus/shared/discovery_log.jsonl")
-OUT = Path("/Users/ghost/Dev/nexus/shared/n6/signals/blowup_energy_stability.jsonl")
+LOG = Path("/Users/ghost/Dev/nexus/discovery_log.jsonl")
+OUT = Path("/Users/ghost/Dev/nexus/n6/signals/blowup_energy_stability.jsonl")
 
 
 def now_iso() -> str:

@@ -8,8 +8,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-SINK = Path("/Users/ghost/Dev/nexus/shared/discovery_log.jsonl")
-BAK = Path("/Users/ghost/Dev/nexus/shared/discovery_log.jsonl.bak.dedup")
+SINK = Path("/Users/ghost/Dev/nexus/discovery_log.jsonl")
+BAK = Path("/Users/ghost/Dev/nexus/discovery_log.jsonl.bak.dedup")
 
 
 def entry_key(e: dict) -> str:

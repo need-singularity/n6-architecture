@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 from datetime import datetime, timezone
 
-NEXUS_N6 = Path("/Users/ghost/Dev/nexus/shared/n6")
+NEXUS_N6 = Path("/Users/ghost/Dev/nexus/n6")
 SSOT = NEXUS_N6 / "atlas.signals.n6"
 STAGE_DIR = NEXUS_N6 / "staging"
 BACKUP = NEXUS_N6 / "atlas.signals.n6.bak.pre-merge"

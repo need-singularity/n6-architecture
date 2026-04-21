@@ -24,8 +24,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-OUT = Path("/Users/ghost/Dev/nexus/shared/n6/signals/signal_clusters.json")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+OUT = Path("/Users/ghost/Dev/nexus/n6/signals/signal_clusters.json")
 
 HEAD_RE = re.compile(
     r"^@S\s+(SIG-\S+)\s*=\s*(.+?)\s*::\s*signal\s+\[([^\]]+)\]\s+\[([^\]]+)\]\s+\[([^\]]+)\]"

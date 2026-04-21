@@ -15,7 +15,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-LOG = Path("/Users/ghost/Dev/nexus/shared/harness/growth_tick.jsonl")
+LOG = Path("/Users/ghost/Dev/nexus/harness/growth_tick.jsonl")
 
 
 def main() -> int:

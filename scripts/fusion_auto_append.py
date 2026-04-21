@@ -27,9 +27,9 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-SSOT = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6")
-FUSION_LOG = Path("/Users/ghost/Dev/nexus/shared/n6/signals/fusion_log.jsonl")
-BACKUP = Path("/Users/ghost/Dev/nexus/shared/n6/atlas.signals.n6.bak.pre-fusion")
+SSOT = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6")
+FUSION_LOG = Path("/Users/ghost/Dev/nexus/n6/signals/fusion_log.jsonl")
+BACKUP = Path("/Users/ghost/Dev/nexus/n6/atlas.signals.n6.bak.pre-fusion")
 
 
 def now_iso() -> str:
@@ -126,7 +126,7 @@ def format_new_entry(sig_id: str, triple: tuple[str, str, str], witness: int, so
         f"  resonance_n6: null\n"
         f"  discovered_in: nexus/fusion_auto_append\n"
         f"  discovered_at: {now_iso()}\n"
-        f"  <- /Users/ghost/Dev/nexus/shared/n6/signals/fusion_log.jsonl\n"
+        f"  <- /Users/ghost/Dev/nexus/n6/signals/fusion_log.jsonl\n"
     )
 
 

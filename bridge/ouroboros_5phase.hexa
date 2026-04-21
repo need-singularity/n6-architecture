@@ -93,7 +93,7 @@ fn banner(title: string) {
 fn phase_absorb(domain: string)  {
     log_phase(PHASE_ABSORB, "atlas.n6 씨앗 가설 수집 시작 — 도메인=" + domain)
     // stub: 실제로는 atlas.n6 에서 [7] 등급 가설을 스캔
-    //   let atlas_path = "/Users/ghost/Dev/nexus/shared/n6/atlas.n6"
+    //   let atlas_path = "/Users/ghost/Dev/nexus/n6/atlas.n6"
     //   let raw = read_file(atlas_path)
     //   seeds = extract_grade_7_candidates(raw, domain)
     let seeds = [
@@ -183,7 +183,7 @@ fn phase_cycle(corollaries: Any, cycle_idx: int)  {
 fn phase_evolution(survivors: Any, domain: string)  {
     log_phase(PHASE_EVOLUTION, "atlas.n6 승격 후보 기록 — 도메인=" + domain)
     // stub: 실제로는 atlas.n6 append
-    //   append_file("/Users/ghost/Dev/nexus/shared/n6/atlas.n6",
+    //   append_file("/Users/ghost/Dev/nexus/n6/atlas.n6",
     //               "@R " + id + " = " + val + " :: n6atlas [10*]\n")
     let mut promoted = []
     let mut i = 0
