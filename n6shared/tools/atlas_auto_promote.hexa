@@ -7,7 +7,7 @@
 # 경로: n6shared/tools/atlas_auto_promote.hexa
 #
 # 입력: /Users/ghost/Dev/n6-architecture/n6shared/discovery_graph.json
-# 출력: /Users/ghost/Dev/nexus/shared/n6/atlas.n6 (append)
+# 출력: /Users/ghost/Dev/nexus/n6/atlas.n6 (append)
 #       /Users/ghost/Dev/n6-architecture/n6shared/logs/atlas_auto_promote.jsonl
 #
 # 경고: 실행 전 반드시 atlas.n6 백업. 설계 단계 — 아직 실행 금지.
