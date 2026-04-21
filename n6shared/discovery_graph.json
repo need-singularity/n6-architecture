@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "14.0.0",
+    "version": "16.0.0",
     "created": "2026-04-10",
     "description": "NEXUS-6 Knowledge Graph — n=6 cross-domain discovery network",
     "core_identity": "sigma(n)*phi(n) = n*tau(n) iff n=6",
@@ -15,9 +15,9 @@
       "recursive_growth": 60
     },
     "total_nodes": 523,
-    "total_edges": 2133,
+    "total_edges": 2129,
     "last_updated": "2026-04-20",
-    "notes_v16_ai_fellows_mk5": "2026-04-20 v16 AI Fellows Mk.V 승격 8개 BT 추가: BT_1421(ai-inference-cost-mk5)·BT_1422(ai-training-cost-mk5)·BT_1423(ai-quality-scale-mk5)·BT_1424(ai-agent-serving-mk5)·BT_1425(ai-enterprise-custom-mk5)·BT_1426(ai-eval-pipeline-mk5)·BT_1427(ai-consciousness-mk5)·BT_1428(ai-safety-mk5). 신규 노드 8개, 신규 엣지 46개. 한계축: Landauer/Chinchilla-beyond/Shannon/σ·τ=48/시장/측정/끌개/σ·φ=n·τ. n=6 EXACT 경계 확인. 고립 노드 0개. 총 노드 523개, 총 엣지 2133개.",
+    "notes_v16_ai_fellows_mk5": "2026-04-20 v16 AI Fellows Mk.V 승격 8개 BT 추가: BT_1421(ai-inference-cost-mk5)·BT_1422(ai-training-cost-mk5)·BT_1423(ai-quality-scale-mk5)·BT_1424(ai-agent-serving-mk5)·BT_1425(ai-enterprise-custom-mk5)·BT_1426(ai-eval-pipeline-mk5)·BT_1427(ai-consciousness-mk5)·BT_1428(ai-safety-mk5). 신규 노드 8개, 신규 엣지 46개. 한계축: Landauer/Chinchilla-beyond/Shannon/σ·τ=48/시장/측정/끌개/σ·φ=n·τ. n=6 EXACT 경계 확인. 고립 노드 0개. 총 노드 523개, 총 엣지 2129개 (실측 재계측 정합, raw#12).",
     "notes_v9_hygiene": "2026-04-10 v9 위생 도메인 추가: DOMAIN_mens_intimate_cleanser/womens_intimate_cleanser + BT_1157/1158 4노드 15엣지. 총 노드 310개, 총 엣지 1200개.",
     "notes_v3_expansion": "2026-04-10 3차 확장 완료: 신규 노드 6개 (DOMAIN_mouse + BT_1121/1123/1124/1127/1128). 신규 엣지 85개. BT_1121/1122/1123 고립 해소. BT_1109~1114 도메인/상수 연결 보강. 약연결 BT(BT_283/404/406/408/136)+AXIOM+DOMAIN 보강. 마우스/키보드/모발재생 도메인 상수 연결 완성. 고립 노드 0개. 총 노드 200개, 총 엣지 764개.",
     "notes_v4_expansion": "2026-04-10 4차 확장 완료: 신규 노드 20개 (BT_57/60/80/82/84/402 + DOMAIN_audio/battery_storage/automotive/bone_conduction/earphone_hardware/titanium/graphene/ev_battery/lead_acid/lithium_ion/micro_battery + PRODUCT_HEXA_BONE/HEXA_AUTO/HEXA_EAR_CELL). 신규 엣지 59개. 3개 신규 제품(HEXA-BONE 78/78, HEXA-AUTO 78/100, HEXA-EAR-CELL 71/72) 등록. 고립 노드 0개. 총 노드 219개, 총 엣지 823개.",

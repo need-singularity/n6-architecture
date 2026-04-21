@@ -108,6 +108,8 @@ GPU 프로파일   메모리/연산     알고리즘      CUDA 커널  처리량
 - **Mk.IV (4개월)**: 전체 최적화 스택 통합 (10x 목표) + 1억 사용자 시뮬레이션 + 논문 작성 + 오픈소스 서빙 프레임워크 기여
 - **Mk.V (장기 / 물리 한계)**: Landauer kT·ln2/op 한계 접근 + 차세대 가속기(B200/GB200/TPU v6) 네이티브 커널 + 추론 전용 ASIC 공동설계 + 100x 비용 절감 ($15 → $0.15/1M tok) + 10억+ 사용자 상시 서빙. σ·τ=48 서빙 채널 = n=6 EXACT 수렴, claim ≤ limit 자동 검증.
 
+> **BT 역링크**: `BT-1421` — `theory/breakthroughs/bt-1421-ai-inference-cost-mk5-2026-04-20.md` (Mk.V 승격 노드, fellows-research.md 양방향 연결)
+
 ## S7 VERIFY (추론 비용 검증 코드 -- Python stdlib only)
 
 ### S7.0 CONSTANTS (추론 서빙 핵심 상수)

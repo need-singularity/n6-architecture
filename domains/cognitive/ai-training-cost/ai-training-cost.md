@@ -155,6 +155,8 @@ ai-training-cost
 - **Mk.IV (4개월)**: 3축 통합 파이프라인 + 70B 프록시 최종 검증 + 논문 작성 + 비용 절감 보고서
 - **Mk.V (장기 / 물리 한계)**: Chinchilla-beyond 조 파라미터(1T+) 사전학습 100x 절감 ($12B → $120M) + 자체-증류 합성 데이터 루프 + MoE 희소성 σ·τ=48 EXACT + Landauer 열역학 하한까지 단위 FLOP 에너지 접근 + 차세대 상호연결(광학/NVLink-Fusion)로 통신 병목 해소. 전역 스케일링 법칙 재정립 논문.
 
+> **BT 역링크**: `BT-1422` — `theory/breakthroughs/bt-1422-ai-training-cost-mk5-2026-04-20.md` (Mk.V 승격 노드, fellows-research.md 양방향 연결)
+
 ## S7 VERIFY (학습 비용 검증 코드 -- Python stdlib only)
 
 ### S7.0 CONSTANTS (스케일링 법칙 기본 상수)

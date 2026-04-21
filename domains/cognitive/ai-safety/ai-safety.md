@@ -659,7 +659,7 @@ print(f"{'='*60}")
 
 ---
 
-## EVOLVE (5단계 통합 로드맵)
+## S6 EVOLVE (5단계 통합 로드맵)
 
 6 서브도메인(해석가능성/정렬/강건성/배포/멀티모달/복지) 통합 진화 경로. 각 Mk 단계는 6축 동시 진전을 요구.
 
@@ -668,6 +668,8 @@ print(f"{'='*60}")
 - **Mk.III (3개월)**: BT-401~406 노드 통합. Cross-DSE 7 연결 검증, 171종 × 19축 필터 수렴, ~360 유효 조합 선별.
 - **Mk.IV (4개월)**: v3 특이점 돌파 T-1~T-6. TRANSCEND/CIRCUMVENT/APPROACH 6/6 PASS, 3단 SAE 중첩률 <1/6, Lean4 12규칙 무모순 증명, 6-PGD 0% bypass.
 - **Mk.V (장기 / 끌개 한계)**: AI 안전 물리/수학 한계 도달. σ·φ=n·τ (n=6 유일 EXACT) 전 도메인 자동 검증, Basin Binding 이전 유토피아 끌개 고정(§V5 연계), 171종 전수 상용 배포 게이트, 국제 안전 표준(UN/IEEE/ISO) 채택, R(6)=1 비가역 고정점 실측 확인. `claim ≤ limit` 자가 검증 6/6 영구 PASS.
+
+> **BT 역링크**: `BT-1428` — `theory/breakthroughs/bt-1428-ai-safety-mk5-2026-04-20.md` (Mk.V 승격 노드, fellows-research.md 양방향 연결)
 
 ---
 
