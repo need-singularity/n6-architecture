@@ -228,7 +228,7 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 | 10 | ✅ | v2 | **궁극의 순수수학** | 71/71 PASS, BT-105~112+205+207+229+232+240 100%EXACT, 11정리, Python검증PASS | [문서](domains/physics/pure-mathematics/pure-mathematics.md) |
 | 10 | ✅ | v2 | **궁극의 우주론/입자** | 63/63 PASS, BT-134+137+143+165~172+208+209+214 100%EXACT, Python검증PASS | [문서](domains/physics/cosmology-particle/cosmology-particle.md) |
 | 10 | ✅ | v5 | **궁극의 상온 초전도체** | 325/325 EXACT (이론150+실현76+Mk.I합성48+Mk.II소재51), 9소재후보+6Mk.II후보, Mk.I정밀레시피(6소재P-T경로+Phase1/2실험$6.18M), Mk.II상압후보(La,Ce,Y,Sc)H24고엔트로피Pareto1위, 2685줄 | [문서](domains/energy/room-temp-sc/room-temp-sc.md) |
-| 10 | ✅ | v1 | **차원펼침 돌파 — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동점10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [문서](theory/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
+| 10 | ✅ | v1 | **차원펼침 돌파 — 텐서/mod3/로그** | BT-361~365: n²=36어트랙터9/9, 텐서삼중3/3, mod3부동점10/10, 1/3효율8/8, Ω_Λ=24/35(0.148%) | [문서](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
 
 <!-- AUTO:FOOTER_physics:START -->
 > 도메인: [superconductor/](docs/superconductor/) · [pure-mathematics/](docs/pure-mathematics/) · [cosmology-particle/](docs/cosmology-particle/) · [quantum-computing/](docs/quantum-computing/) · 도구: `sc-dse` · `gut-calc-rust` · `quantum-calc` · `optics-calc`
@@ -417,7 +417,7 @@ The two axes are independent: alien_index measures product maturity; closure_gra
 | 5 | ✅ | v1 | **수의학 n=6 동물해부 보편성** | 16/16 EXACT (100%), 경추 σ-sopfr=7/반추위 τ=4/성견치아 (σ-sopfr)·n=42/성묘치아 n·sopfr=30/가축 n=6/개수명 σ=12 | [문서](domains/life/veterinary/veterinary.md) |
 | 5 | ✅ | v1 | **원예학 n=6 식물 성장 아키텍처** | 15/15 EXACT (100%), 광합성 n=6/꽃기관 τ=4/호르몬 sopfr=5/조직계 n/φ=3/단쌍자엽 φ=2/계절 τ=4 | [문서](domains/life/horticulture/horticulture.md) |
 | 10 | ✅ | v1 | **HEXA-SIM 우주 시뮬레이션** | 65/65 EXACT (100%), Planck 지수 래더 137=σ²-n-μ=1/α, Lloyd 10^{σ(σ-φ)}=10^120, GoL B(n/φ)/S{φ,n/φ}, 차원 래더 τ→sopfr→n→σ-φ→σ-μ, Tsirelson φ√φ=2√2 | [문서](domains/physics/simulation-theory/simulation-theory.md) |
-| 10 | ✅ | v1 | **크로스 도메인 메가 브릿지** | BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10 | [문서](theory/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
+| 10 | ✅ | v1 | **크로스 도메인 메가 브릿지** | BT-366~369: τ=4(12도메인)12/12, J₂=24(10도메인)9/9, σ-φ=10(7도메인)9/10, n/φ=3(8도메인)10/10 | [문서](reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md) |
 | 10 | ✅ | 5680bc44 | **HEXA-NANOBOT 치료 나노봇** | BT-404~413: 10 연속 돌파, 113/122 EXACT (92.6%) + 9 CLOSE(물리한계 문서화), Mk.I~V 진화 완료, 6대 플랫폼/추진/EPR/pH/센서/면역/반감기/통신/에너지/배출, DSE 7776 조합, (sigma-phi)^2=100 나노 허브, n=6 관문(신장 6nm), J2=24 에너지-시간 수렴 | [문서](domains/life/therapeutic-nanobot/therapeutic-nanobot.md) |
 
 <!-- AUTO:FOOTER_frontier:START -->
