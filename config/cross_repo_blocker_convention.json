@@ -1,0 +1,27 @@
+{
+  "_doc": "CONVENTION cross_repo_blocker — priority ≥ 95 for any entry that blocks another repo's work.",
+  "_source": "proposal n6a-20260422-004 (from hexa-lang, acked 2026-04-23)",
+  "_scope": "applies to reports/n6_blockers.json, reports/n6_gap_proposals.json, and any future inbox intake.",
+  "priority_floor": 95,
+  "default_priority": 50,
+  "categories": {
+    "lang_gap":   "hexa-lang blocker — language/compiler primitive missing that other repos depend on.",
+    "infra_gap":  "airgenome blocker — host/build/plist/launchd issue affecting cross-repo automation.",
+    "atlas_gap":  "nexus/n6 blocker — atlas.n6 or atlas.signals.n6 drift/damage affecting consumers.",
+    "data_gap":   "anima blocker — cert/weight/ckpt gap affecting downstream training or verification."
+  },
+  "blocker_kind_mapping": {
+    "nexus_unreachable":        "atlas_gap",
+    "atlas_missing":            "atlas_gap",
+    "atlas_damaged":            "atlas_gap",
+    "build_pandoc_fail":        "infra_gap",
+    "hexa_stage_regression":    "lang_gap",
+    "engine_selftest_fail":     "lang_gap",
+    "cert_stale":               "data_gap",
+    "ckpt_missing":             "data_gap"
+  },
+  "examples": [
+    {"kind": "nexus_unreachable", "category": "atlas_gap", "priority_applied": 95},
+    {"kind": "engine_selftest_fail", "category": "lang_gap", "priority_applied": 95}
+  ]
+}

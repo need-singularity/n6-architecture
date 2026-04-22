@@ -62,14 +62,20 @@ scan_blockers() {
   fi
 
   local severity_high=0 severity_med=0 severity_low=0
-  [ "$blog_fail" -gt 0 ] && severity_high=$((severity_high+1))
-  [ "$fail" -gt 0 ] && severity_high=$((severity_high+1))
+  local cross_repo_high=0
+  # CONVENTION cross_repo_blocker (n6a-20260422-004): priority ≥ 95 auto-tag
+  # atlas_gap / infra_gap / lang_gap / data_gap → promote severity to high
+  [ "$blog_fail" -gt 0 ] && { severity_high=$((severity_high+1)); cross_repo_high=$((cross_repo_high+1)); }
+  [ "$fail" -gt 0 ] && { severity_high=$((severity_high+1)); cross_repo_high=$((cross_repo_high+1)); }
   [ "$rules_drift" -gt 0 ] && severity_low=$((severity_low+1))
   [ "$stub" -gt 0 ] && severity_low=$((severity_low+1))
-  [ "$atlas_b" -lt 1000 ] && severity_high=$((severity_high+1))
-  # nexus reach
+  [ "$atlas_b" -lt 1000 ] && { severity_high=$((severity_high+1)); cross_repo_high=$((cross_repo_high+1)); }
+  # nexus reach (atlas_gap per convention)
+  local nexus_reach=true
   if ! timeout 5 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
     severity_med=$((severity_med+1))
+    nexus_reach=false
+    cross_repo_high=$((cross_repo_high+1))
   fi
 
   cat >"$out" <<JEOF
@@ -94,8 +100,11 @@ scan_blockers() {
     "critical": 0,
     "high": $severity_high,
     "med": $severity_med,
-    "low": $severity_low
-  }
+    "low": $severity_low,
+    "cross_repo_blocker_count": $cross_repo_high,
+    "cross_repo_priority_floor": 95
+  },
+  "convention": "config/cross_repo_blocker_convention.json (n6a-20260422-004)"
 }
 JEOF
   jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"

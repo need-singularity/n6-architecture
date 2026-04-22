@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-22T16:01:55Z",
-  "total": 13,
-  "green": 13,
+  "ts": "2026-04-22T16:08:17Z",
+  "total": 14,
+  "green": 14,
   "red": 0,
   "status": "GREEN",
   "claims": [
@@ -96,6 +96,13 @@
       "status": "green",
       "result": "0",
       "expected": "0"
+    },
+    {
+      "file": "14_cross_repo_blocker_priority.claim.json",
+      "type": "convention",
+      "status": "green",
+      "result": "1",
+      "expected": "1"
     }
   ]
 }

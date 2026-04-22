@@ -1,0 +1,11 @@
+{
+  "id": "cross_repo_blocker.priority_floor_applied",
+  "type": "convention",
+  "description": "cross_repo_blocker convention (n6a-20260422-004) applied: config/cross_repo_blocker_convention.json present + priority_floor=95",
+  "actual_cmd": "bash -c '[ -f config/cross_repo_blocker_convention.json ] && [ \"$(jq -r .priority_floor config/cross_repo_blocker_convention.json 2>/dev/null)\" = \"95\" ] && echo 1 || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "weekly",
+  "owner": "infra",
+  "proposal_ref": "n6a-20260422-004"
+}
