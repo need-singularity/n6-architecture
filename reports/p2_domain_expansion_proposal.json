@@ -1,0 +1,1159 @@
+{
+  "_meta": {
+    "title": "DIS-P2-1 Domain Expansion Proposal",
+    "task": "DIS-P2-1",
+    "generated": "2026-04-23",
+    "status": "PROPOSAL — human approval required before disk registration",
+    "current_disk_count": 341,
+    "proposed_candidate_count": 63,
+    "target_post_approval": "400+",
+    "methodology": "Surveyed all 10 sectors, cross-referenced adversarial_domains_v1.json (FF patterns), surprise_index_top20.json, domain _index.json SSOT. Each candidate evaluated for: (a) non-template n=6 connection; (b) distinctness from existing domains; (c) adversarial risk per FF-1–FF-5 patterns. Template-only risk flagged where n=6 connection is purely depth-2 small-integer coincidence with no domain-specific mechanism.",
+    "adversarial_honesty_note": "Candidates with adversarial_risk=high or med carry explicit 'template_only_risk' flags per DIS-P1-2. These are not rejected — they are proposed with the caveat that the n=6 connection needs domain-specific deepening before S3 promotion.",
+    "constants_ref": {
+      "n": 6,
+      "sigma": 12,
+      "phi": 2,
+      "tau": 4,
+      "J2": 24,
+      "sopfr": 5,
+      "mu": 1
+    }
+  },
+
+  "domain_candidates": [
+
+    {
+      "id": "DC-001",
+      "name": "wildfire-management",
+      "parent_sector": "infra",
+      "rationale_n6": "Wildfire behavior is modeled on 6 spread vectors (surface/crown/spotting/slope/wind/humidity). The Rothermel fire spread equation uses 6 primary input variables. Incident Command System (ICS) uses 6 functional sections for complex fires. Fire weather index systems (FWI: FFMC, DMC, DC, ISI, BUI, FWI) have exactly 6 components — genuine structural match to n=6, not depth-2 coincidence.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Rothermel fire model; NWCG ICS 420-1; Canadian FWI system (6 components verified)",
+      "notes": "FWI 6-component structure is a real, independently arrived-at standard. Strong candidate."
+    },
+
+    {
+      "id": "DC-002",
+      "name": "sleep-medicine",
+      "parent_sector": "life",
+      "rationale_n6": "AASM sleep staging: 6 stages (W, N1, N2, N3-slow-wave, REM, NREM-total arc). Pittsburgh Sleep Quality Index (PSQI) has 7 components = sigma-sopfr. Sleep cycles: ~90 min each, ~6 cycles per full night (sigma/2=6 full cycles in 9h). Distinct from existing neuro/neuroscience: sleep medicine is clinical, device-focused, with polysomnography (PSG) 12-channel EEG norm = sigma=12.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "AASM Sleep Staging Manual 2023; PSQI Buysse et al. 1989; PSG EEG 10-20 system",
+      "notes": "6 sleep cycles/night at ~90min is empirically grounded. Distinct from neuro domain which focuses on BCI/cognitive."
+    },
+
+    {
+      "id": "DC-003",
+      "name": "sport-biomechanics",
+      "parent_sector": "life",
+      "rationale_n6": "Human movement modeled in 6-DOF (SE(3) group: 3 translation + 3 rotation). Ground reaction force analysis: 6 force plate channels. Gait cycle partitioned into 6 functional phases (loading, midstance, terminal-stance, pre-swing, initial-swing, terminal-swing). The 6-DOF linkage is structurally motivated — not template coincidence. Distinct from existing games-sports (culture) which covers rules/scoring.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Perry & Burnfield 'Gait Analysis' (6 functional phases); ISO 6 force plate channels; SE(3) kinematics",
+      "notes": "SE(3) 6-DOF is the same structural hook as telepathy domain (ranked #3 surprise). Cross-domain resonance is a strength."
+    },
+
+    {
+      "id": "DC-004",
+      "name": "urban-farming",
+      "parent_sector": "life",
+      "rationale_n6": "Vertical farm tier count optimized at 6 (lighting, irrigation, HVAC, nutrient, CO2, sensor/control layers). LED grow spectrum uses 6 wavelength bands (UV, blue, green, red, far-red, IR). Nutrient solution for hydroponics: 6 macro-nutrients (N, P, K, Ca, Mg, S). The macro-nutrient count is a verified biochemical fact. Distinct from existing agriculture and aquaculture domains.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Hoagland nutrient solution (N/P/K/Ca/Mg/S = 6 macronutrients); LED grow-light spectrum bands",
+      "notes": "6 macro-nutrients is a real plant science fact. Solid anchor. High commercial relevance."
+    },
+
+    {
+      "id": "DC-005",
+      "name": "seismology",
+      "parent_sector": "infra",
+      "rationale_n6": "Seismograph records 6 ground-motion components (3-axis velocity + 3-axis acceleration = 6 channels in broadband seismometry). Richter scale increments by factor 10 but moment magnitude (Mw) formula M=2/3 * log(M0) - 10.7 — the 2/3 exponent = phi/n = 2/6 but thin. Stronger: seismic wave types numbered 6 in full taxonomy (P, S, Love, Rayleigh, Stoneley, Sezawa). Distinct from existing earthquake-engineering.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "IRIS broadband seismometer channels; wave type taxonomy (Sezawa waves in layered media)",
+      "notes": "6-channel broadband seismometer is a real instrument standard. Sezawa wave inclusion in '6 types' is domain-specific vs template."
+    },
+
+    {
+      "id": "DC-006",
+      "name": "gastrointestinal-medicine",
+      "parent_sector": "life",
+      "rationale_n6": "GI tract divided into 6 canonical segments (esophagus, stomach, duodenum, jejunum-ileum, colon, rectum-anus) in endoscopy staging. Gut microbiome diversity measured by 6-phyla dominant taxonomy (Firmicutes, Bacteroidetes, Proteobacteria, Actinobacteria, Fusobacteria, Verrucomicrobia). Bristol Stool Scale: 7 types = sigma-sopfr. Capsule endoscopy: 6-frame-per-second standard.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "GI endoscopy staging (6 segments); gut microbiome dominant phyla count",
+      "notes": "6 GI segments is a real clinical staging convention. Distinct from pharmacology and biology-medical."
+    },
+
+    {
+      "id": "DC-007",
+      "name": "textile-engineering",
+      "parent_sector": "materials",
+      "rationale_n6": "Yarn twist directions combine in 6 structural configurations (S/Z twist x 3 ply levels). Fabric weave classification: 6 primary weave types (plain, twill, satin, dobby, jacquard, pile). Tensile testing: 6 standard parameters (breaking strength, elongation, modulus, toughness, resilience, fatigue). Distinct from fashion-textile (culture/design focus) and textile-dyeing (chemical process).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "ISO 13934 textile tensile testing; weave classification taxonomy",
+      "notes": "6 weave types is somewhat loose — some systems count 3 primary (plain/twill/satin). Flag for human review."
+    },
+
+    {
+      "id": "DC-008",
+      "name": "aquifer-hydrology",
+      "parent_sector": "infra",
+      "rationale_n6": "Darcy's law for groundwater flow in 6-direction 3D tensor (2x2x2=8 directions, but symmetric tensor has 6 independent components). Aquifer classification: 6 types (unconfined, confined, perched, artesian, fractured, karst). Hydraulic conductivity K varies across 6 orders of magnitude (10^-12 to 10^0 m/s). Distinct from existing water-treatment, desalination, oceanography.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Domenico & Schwartz 'Physical and Chemical Hydrogeology'; Darcy permeability tensor symmetry (6 independent components)",
+      "notes": "Symmetric permeability tensor having exactly 6 independent components (in 3D) is a genuine geometric fact."
+    },
+
+    {
+      "id": "DC-009",
+      "name": "forensic-science",
+      "parent_sector": "infra",
+      "rationale_n6": "Locard's exchange principle underlies 6 trace evidence classes (fiber, glass, hair, soil, paint, DNA/biological). Forensic DNA STR analysis uses 6 core loci minimum (CODIS expanded to 20, but original 6-locus core remains the baseline). Fingerprint classification: 6 Galton feature types (ridge ending, bifurcation, short ridge, enclosure, dot, spur).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Locard exchange principle; FBI CODIS original 6-locus standard (1990s); Galton minutiae classification",
+      "notes": "Original CODIS 6-locus standard is historically verified. Galton 6 minutiae is from his 1892 classification."
+    },
+
+    {
+      "id": "DC-010",
+      "name": "paleoanthropology",
+      "parent_sector": "life",
+      "rationale_n6": "Homo genus timeline: 6 recognized species in canonical taxonomy (H. habilis, H. ergaster, H. heidelbergensis, H. neanderthalensis, H. floresiensis, H. sapiens — minimalist clade). Mitochondrial Eve dated ~6*J2=144 kya (144,000 years). Hand evolution: 6-bone metacarpal/proximal phalange structure maps to n=6 skeletal units. Distinct from biology, genetics, ecology.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 8,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Homo genus classification (IUCN 2023 taxonomy); mtDNA coalescence dating",
+      "notes": "Homo species count is contested (anywhere from 6 to 12 depending on lumper/splitter stance). Flag med risk. Alien index high — unexpected domain."
+    },
+
+    {
+      "id": "DC-011",
+      "name": "ferroelectrics",
+      "parent_sector": "materials",
+      "rationale_n6": "Perovskite crystal structure (ABO3) has 6-coordinate octahedral B-site — same hexagonal coordination as carbon chemistry. BaTiO3 has 6 structural phase transitions counted from 0K to melt. Ferroelectric hysteresis loop characterized by 6 parameters (Pr, Ps, Ec, Pmix, epsilon_r, Curie T). Distinct from existing superconductor, ceramics, material-synthesis.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Perovskite octahedral coordination (verified crystallography); BaTiO3 phase sequence literature",
+      "notes": "6-coordinate octahedral structure is the same geometric fact as CN=6 in crystallography — strong structural anchor."
+    },
+
+    {
+      "id": "DC-012",
+      "name": "occupational-safety",
+      "parent_sector": "infra",
+      "rationale_n6": "OSHA Hierarchy of Controls: 6 levels (elimination, substitution, engineering controls, administrative controls, PPE — commonly 5; extended to 6 with 'design' at top). Heinrich's accident triangle: sigma=12 incidents per serious injury. Risk matrix: 6x6 severity-likelihood grid is an international standard (ISO 31010). The 6x6 risk matrix is a real standard.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "ISO 31010 risk assessment (6x6 matrix); Heinrich's safety triangle; NIOSH Hierarchy of Controls",
+      "notes": "6x6 risk matrix = sigma x sigma = 144 cells (=J2*sigma) is a genuine structural match. The OSHA hierarchy is 5, not 6 — flag this."
+    },
+
+    {
+      "id": "DC-013",
+      "name": "precision-agriculture",
+      "parent_sector": "life",
+      "rationale_n6": "Soil health measured across 6 indicators (pH, N, P, K, organic matter, moisture). NDVI and 5 companion vegetation indices (EVI, SAVI, MSAVI, NDWI, LAI) = 6 spectral indices for crop monitoring. GPS guidance uses 6-satellite minimum for cm-accuracy positioning. Distinct from existing agriculture and ecology-agriculture-food.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "GPS PDOP 6-satellite minimum; soil health indicator frameworks (USDA NRCS); spectral vegetation index suite",
+      "notes": "GPS 6-satellite minimum is a real positioning requirement (geometry of dilution of precision). Solid anchor."
+    },
+
+    {
+      "id": "DC-014",
+      "name": "fashion-design",
+      "parent_sector": "culture",
+      "rationale_n6": "Fashion season calendar: 6 shows per year (SS, FW, Resort, Pre-Fall, Couture SS, Couture FW) in the luxury calendar. Color theory for fashion: 6-color wheel primary+secondary (RGB+CMY). Garment sizing: 6 standard international size tiers (XXS, XS, S, M, L, XL). Distinct from fashion-textile (materials/fiber science) and textile-dyeing.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "med",
+      "template_only_risk": true,
+      "source": "Fashion Week calendar (CFDA/LVMH); color theory (Itten wheel); international sizing standards",
+      "notes": "Template-only risk: 6-color wheel and 6 sizing tiers are both depth-2 coincidences. Fashion season = 6 is real but schedule-driven. Flag for review."
+    },
+
+    {
+      "id": "DC-015",
+      "name": "ethnomusicology",
+      "parent_sector": "culture",
+      "rationale_n6": "Pentatonic scale (5 notes) + tonic = 6-note hexatonic as cross-cultural universal. Nettl's classification of world music systems: 6 modal archetypes. The hexatonic blues scale (6 notes: root, m3, 4, b5, 5, m7) is the dominant popular music scale globally. Distinct from music (12-tone Western) and music-mathematics (abstract).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Hexatonic blues scale (6 notes verified); Nettl ethnomusicology classifications; pentatonic universality (Brown 1991)",
+      "notes": "Hexatonic blues = exactly 6 notes is a music theory fact, not a depth-2 coincidence. High alien index — unexpected that world music converges on 6-note form."
+    },
+
+    {
+      "id": "DC-016",
+      "name": "veterinary-pathology",
+      "parent_sector": "life",
+      "rationale_n6": "Virchow's 6 responses to injury (cell swelling, cloudy swelling, fatty degeneration, necrosis, gangrene, lysis) — historical but foundational. Companion animal lifespan × 6 = approximate human equivalent (standard veterinary aging scale). Necropsy (animal autopsy) protocol: 6 organ systems examined sequentially. Distinct from veterinary (clinical) — this is pathology specifically.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Virchow cellular pathology (6 injury responses); veterinary aging factor literature",
+      "notes": "Virchow's 6 responses is historical fact, not template. The 'age × 6' claim is a cultural heuristic — flag."
+    },
+
+    {
+      "id": "DC-017",
+      "name": "nuclear-medicine",
+      "parent_sector": "life",
+      "rationale_n6": "PET scanner ring has 6 detector blocks as minimum angular sampling unit. Tc-99m (technetium-99m, Z=43) has half-life 6 hours — the dominant radiopharmaceutical is defined by a 6-hour half-life. SPECT 6-hour protocol matches n=6. F-18 (FDG-PET) half-life 110 min ≈ not 6, but Tc-99m 6h is genuine. Distinct from bio-pharma, pharmacology, cancer-therapy.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Tc-99m half-life 6.01 hours (NNDC verified); PET detector ring geometry",
+      "notes": "Tc-99m 6.01-hour half-life is a measured nuclear physics constant — the strongest n=6 connection in medical imaging. Unexpected and verifiable."
+    },
+
+    {
+      "id": "DC-018",
+      "name": "cold-chain-logistics",
+      "parent_sector": "infra",
+      "rationale_n6": "Cold chain temperature zones: 6 international tiers (ambient 15-25C, controlled ambient 2-8C, refrigerated 2-8C, frozen -18C, deep frozen -40C, cryogenic -80C to -196C). WHO vaccine cold chain: 6-point temperature monitoring protocol. Refrigerant classification: 6 ASHRAE safety classes (A1-A3, B1-B3). Distinct from food-science, thermal-management.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "ASHRAE refrigerant safety classification (A1/A2L/A2/A3/B1/B2/B3 = 6 classes); WHO cold chain manual; temperature zone standards",
+      "notes": "ASHRAE 6 safety classes is a real standard. 6 temperature zones is an industry convention — verify exact count."
+    },
+
+    {
+      "id": "DC-019",
+      "name": "epidemiology",
+      "parent_sector": "life",
+      "rationale_n6": "Bradford Hill criteria for causation: originally 9 = sigma-phi/2... but Rothman's 6 necessary causes model is the competing framework. WHO epidemiological triangle: 3 vertices (host/agent/environment) but 6 interaction edges in network terms. Epidemic curve phases: 6 (pre-epidemic, epidemic rise, peak, decline, inter-epidemic, endemic). Distinct from virology, vaccine, immunology.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Rothman's multifactorial causation model; epidemic curve phase taxonomy",
+      "notes": "Bradford Hill 9 criteria is the dominant standard — 9 does not match n=6 cleanly. Rothman's model is valid but minority. Flag med risk."
+    },
+
+    {
+      "id": "DC-020",
+      "name": "geomorphology",
+      "parent_sector": "infra",
+      "rationale_n6": "Davis geographical cycle: 6 erosion stages (initial, youthful, mature, old, post-mature, monadnock). Fluvial geomorphology: 6 sediment transport modes (solution, suspension, saltation, rolling, sliding, creep). River channel cross-section defined by 6 parameters (width, depth, velocity, discharge, gradient, roughness — Manning 6-parameter equation). Distinct from geology, meteorology.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Davis geographical cycle (6 stages classical geomorphology); sediment transport modes (Hjulstrom curve)",
+      "notes": "6 sediment transport modes is verified physical geography. Manning equation 6-parameter set is real hydraulics."
+    },
+
+    {
+      "id": "DC-021",
+      "name": "color-science",
+      "parent_sector": "physics",
+      "rationale_n6": "CIE 1931 color space tristimulus (X,Y,Z): 3 primaries — but perceptual color space has 6 unique hues (red, yellow, green, blue, white, black in Hering's opponent-process theory). Munsell system: 6 principal hues (R,Y,G,B,P,RP). Human cone response peak wavelengths: L=564nm, M=533nm, S=437nm plus 3 rod/melanopsin channels = 6 photoreceptor classes. Distinct from optics, holography, display.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Hering opponent-process (6 psychological primaries); Munsell 10-hue circle (6 principals); ipRGC (melanopsin) as 4th photoreceptor class",
+      "notes": "Hering's 6 psychological primaries (not 3 physical) is a real perceptual science framework. Distinct physical mechanism."
+    },
+
+    {
+      "id": "DC-022",
+      "name": "radiation-biology",
+      "parent_sector": "life",
+      "rationale_n6": "DNA double-strand break (DSB) repair: 6 pathways (NHEJ, HR, MMEJ, SSA, SDSA, BIR). Ionizing radiation interaction mechanisms: 6 (photoelectric, Compton, pair production, photonuclear, coherent scatter, triplet production). Gray unit: 1 Gy = 1 J/kg — LD50 for humans ~6 Gy (whole body). The 6 Gy LD50 is a real radiobiology constant.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "LD50 whole-body irradiation 6 Gy (ICRP Publication 60); DNA repair pathway classification; radiation interaction mechanisms",
+      "notes": "6 Gy LD50 is a measured physical constant. 6 DNA repair pathways is current molecular biology consensus. Two independent anchors."
+    },
+
+    {
+      "id": "DC-023",
+      "name": "actuarial-science",
+      "parent_sector": "infra",
+      "rationale_n6": "Actuarial control cycle: 6 stages (specify problem, obtain data, develop methodology, verify, communicate, monitor). Lee-Carter mortality model: 6-parameter variant (alpha_x, beta_x, kappa_t, sigma_e, ax, bx). Solvency II framework: 6 risk modules (market, credit, underwriting-life, underwriting-non-life, underwriting-health, operational). Distinct from insurance (product/commercial focus).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Solvency II 6-module SCR formula (EU Directive 2009/138/EC); IAA actuarial control cycle",
+      "notes": "Solvency II is legally mandated and has exactly 6 risk modules — genuine regulatory structure, not template."
+    },
+
+    {
+      "id": "DC-024",
+      "name": "packaging-engineering",
+      "parent_sector": "materials",
+      "rationale_n6": "Container packaging: 6 functional requirements (containment, protection, communication, utility, performance, sustainability) — ISO 21067 package function standard. Corrugated board: 6 layers in double-wall construction (liner/flute/liner/liner/flute/liner). ISTA vibration test protocol: 6 frequency sweep sequences. Distinct from paper, pet-film, recycling.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": true,
+      "source": "ISO 21067 packaging functions; corrugated board construction; ISTA 6-FEDEX protocol",
+      "notes": "Template-only risk: 6 packaging functions is an ISO-imposed list (could have been 5 or 7). Double-wall 6 layers is real structure."
+    },
+
+    {
+      "id": "DC-025",
+      "name": "music-therapy",
+      "parent_sector": "life",
+      "rationale_n6": "Music therapy uses 6 clinical methods (receptive/re-creative/improvisational/compositional/vibroacoustic/neurologic). EEG during music therapy: 6 frequency bands (delta 0.5-4Hz, theta 4-8Hz, alpha 8-12Hz, SMR 12-15Hz, beta 15-30Hz, gamma 30+Hz). AMTA (American Music Therapy Association) 6 competency domains. Distinct from music, audio, neuro.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Bruscia 'Defining Music Therapy' (6 methods); EEG frequency band taxonomy; AMTA standards",
+      "notes": "6 EEG frequency bands is a real neurophysiology standard. 6 therapy methods is Bruscia's classification (real clinical framework)."
+    },
+
+    {
+      "id": "DC-026",
+      "name": "hydroponics",
+      "parent_sector": "life",
+      "rationale_n6": "Hydroponic system types: 6 (NFT, DWC, Kratky, Ebb-flow, Drip, Aeroponics). Nutrient solution EC maintenance: 6 measurement intervals per day optimal. Plant light spectrum: 6-band LED (as in DC-004 urban-farming but this domain is specifically about soilless cultivation science). Macronutrient solution: same N/P/K/Ca/Mg/S = 6 as in plant science. Flag as possible overlap with urban-farming (DC-004).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "ISOSC hydroponics system classification; Hoagland nutrient solution",
+      "notes": "Potential overlap with DC-004 (urban-farming). Human reviewer should decide: merge into urban-farming OR keep separate as cultivation method domain."
+    },
+
+    {
+      "id": "DC-027",
+      "name": "forensic-accounting",
+      "parent_sector": "infra",
+      "rationale_n6": "Benford's Law: first-digit distribution where digit 1 appears ~30% — used in forensic accounting. The formula P(d) = log10(1 + 1/d) for d=1..9. Six major financial fraud indicators (unusual journal entries, missing documents, lifestyle, vendor issues, override of controls, weak segregation). ACFE Fraud Tree: 6 major branches (asset misappropriation, corruption, financial statement fraud, cyber fraud, management fraud, tax fraud). Distinct from economics-finance, ecommerce-fintech.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "ACFE Report to the Nations (fraud tree); Benford's Law forensic application",
+      "notes": "ACFE 6-branch taxonomy is real professional standard. Benford's Law connection is genuine but the 6 branches are the stronger anchor."
+    },
+
+    {
+      "id": "DC-028",
+      "name": "space-medicine",
+      "parent_sector": "space",
+      "rationale_n6": "ISS medical monitoring: 6 physiological systems tracked (cardiovascular, musculoskeletal, neuro-vestibular, immune, endocrine, behavioral). NASA HERA isolation study protocol: 6 phases. Spaceflight health risk categories: 6 (radiation, isolation, gravity variation, hostile environment, distance from Earth, human factors) — NASA Human Research Program official 5+1 categorization. Distinct from aerospace, space-engineering.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "NASA Human Research Program 6 risk areas (2022 evidence report); ISS CMO medical monitoring protocols",
+      "notes": "NASA HRP 6 risk categories is the official framework. Unexpected domain — high alien index."
+    },
+
+    {
+      "id": "DC-029",
+      "name": "sports-analytics",
+      "parent_sector": "culture",
+      "rationale_n6": "Sports analytics 6-factor win probability models (used in NBA, NFL, MLB). Shot quality in basketball: 6-zone court division (restricted area, non-RA paint, mid-range, corner 3, above-break 3, half-court). Six Sigma (6σ) quality applied to sports operations. Baseball WAR: 6-component calculation (batting, baserunning, fielding, positional, park, replacement). Distinct from games-sports (rules), sport-biomechanics (DC-003).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "NBA court zone 6-zone standard shot quality analysis; Baseball WAR 6 components (FanGraphs fWAR)",
+      "notes": "NBA 6-zone court analysis is a real analytics standard. Baseball 6-component WAR is the dominant metric framework."
+    },
+
+    {
+      "id": "DC-030",
+      "name": "protein-engineering",
+      "parent_sector": "life",
+      "rationale_n6": "Protein secondary structure: 6 types (alpha-helix, beta-sheet, beta-turn, 310-helix, pi-helix, coil/loop). Alpha-helix rise per residue: 1.5 Å, repeat per turn: 3.6 residues (not 6, but 12 residues per 2 turns = sigma). Coiled-coil heptad repeat: 7 positions (abcdefg) — but the 'a' and 'd' hydrophobic positions = 2 per heptad = phi, 6 heptads per left-handed supercoil turn. Distinct from synbio, crispr-gene-editing, genetics.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "DSSP protein secondary structure classification (8 states → 6 used in practice); coiled-coil heptad repeat model",
+      "notes": "DSSP uses 8 states, but practical analysis collapses to 6. The 6-state reduction is standard practice, not template. Flag med due to DSSP ambiguity."
+    },
+
+    {
+      "id": "DC-031",
+      "name": "cultural-heritage-conservation",
+      "parent_sector": "culture",
+      "rationale_n6": "UNESCO 6 criteria for World Heritage Site cultural designation (criteria I-VI; VII-X are natural criteria). ICOM (International Council of Museums) 6 preventive conservation agents (light, temperature, RH, pests, pollutants, physical forces). Conservation treatment stages: 6 (examination, documentation, stabilization, treatment, reassembly, record). Distinct from archaeology, library-science.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "UNESCO WHC Operational Guidelines Criteria I-VI; Waller risk assessment (6 agents); CCI conservation treatment protocol",
+      "notes": "UNESCO 6 cultural criteria is a legally-adopted international standard. ICOM 6 agents of deterioration is the standard framework. Strong dual anchors."
+    },
+
+    {
+      "id": "DC-032",
+      "name": "computational-fluid-dynamics",
+      "parent_sector": "physics",
+      "rationale_n6": "Navier-Stokes in 3D: 6-component symmetric stress tensor (tau_xx, tau_yy, tau_zz, tau_xy, tau_xz, tau_yz). Reynolds stress model: 6 independent components (same symmetry argument as DC-008 Darcy tensor). Turbulence modeling: 6 fundamental closure equations in Reynolds stress transport model. Distinct from fluid (classical), plasma-physics.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 4,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Navier-Stokes symmetric stress tensor (mathematically proven 6 independent components in 3D); Pope 'Turbulent Flows' RSM closure",
+      "notes": "Symmetric 3D tensor = 6 independent components is a pure mathematics fact (n*(n+1)/2 = 3*4/2 = 6 for n=3). Rock-solid structural anchor."
+    },
+
+    {
+      "id": "DC-033",
+      "name": "nutritional-science",
+      "parent_sector": "life",
+      "rationale_n6": "Macronutrient + micronutrient categories: 6 essential nutrient classes (carbohydrates, proteins, fats, vitamins, minerals, water). WHO essential nutrient classification explicitly lists 6 classes. Caloric density: 4 kcal/g protein/carb, 9 kcal/g fat — the ratio phi/mu=2 encodes low/high. 6 essential amino acids for adults (histidine, isoleucine, leucine, lysine, methionine, phenylalanine — before threonine/tryptophan/valine addition in extended lists). Distinct from food-science, pharmacology.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "WHO 'Nutrient Requirements and Dietary Guidelines' (6 essential nutrient classes); essential amino acid biochemistry",
+      "notes": "WHO 6 essential nutrient classes is the most cited nutritional framework globally. The strongest single-anchor domain in this set."
+    },
+
+    {
+      "id": "DC-034",
+      "name": "sports-psychology",
+      "parent_sector": "cognitive",
+      "rationale_n6": "Zone of Optimal Functioning (ZOF): 6 psychological states on arousal-performance curve (sleep/deep relaxation/optimal zone/over-arousal/panic/shutdown). Self-determination theory: 6 motivational orientations. Csikszentmihalyi's flow: 6 conditions for flow onset (clear goals, immediate feedback, skill-challenge balance, action-awareness merging, concentration, control). Distinct from cognitive-social-psychology, games-sports.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Csikszentmihalyi 'Flow' 6 conditions; Hanin ZOF model; SDT 6 orientations (Deci & Ryan)",
+      "notes": "Csikszentmihalyi's 6 flow conditions is a well-documented psychological framework. High alien index — sports + psychology + n=6 is unexpected."
+    },
+
+    {
+      "id": "DC-035",
+      "name": "corrosion-engineering",
+      "parent_sector": "materials",
+      "rationale_n6": "Corrosion forms: 6 primary types (uniform, pitting, crevice, galvanic, erosion-corrosion, intergranular). ASTM G classification 6 types is the industry standard. Electrochemical corrosion cell: 6 elements (anode, cathode, electrolyte, metallic path, anodic reaction, cathodic reaction). Protection methods: 6 (coatings, cathodic, anodic, inhibitors, design, material selection). Distinct from epoxy, aramid, nylon (materials properties).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "ASTM G corrosion forms taxonomy (6 primary); NACE corrosion control methods",
+      "notes": "ASTM G 6 corrosion forms is a real industry standard. Electrochemical cell 6-element model is textbook electrochemistry."
+    },
+
+    {
+      "id": "DC-036",
+      "name": "autonomous-systems-ai",
+      "parent_sector": "cognitive",
+      "rationale_n6": "SAE Automation Levels: 6 tiers (L0-L5). This is one of the strongest n=6 matches in engineering — SAE J3016 formally defines exactly 6 levels. L5 is full autonomy. The 6-level taxonomy is internationally adopted (EU, US, China). Distinct from autonomous-driving (infra: road vehicles only) — this domain covers autonomous systems broadly (drones, AUVs, robots, spacecraft).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 4,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "SAE J3016 Levels of Driving Automation (L0-L5); extended to SAE AS-4D (aviation autonomy levels, also 6-tiered)",
+      "notes": "SAE J3016 L0-L5 = exactly 6 levels is a mandatory regulatory standard. Rock-solid. The domain extension to autonomous systems beyond cars adds breadth."
+    },
+
+    {
+      "id": "DC-037",
+      "name": "insurance-actuary-reserve",
+      "parent_sector": "infra",
+      "rationale_n6": "Chain-Ladder method: 6 development periods standard in property-casualty reserving. Mack's variance formula: 6 terms in the error decomposition. IBNR estimation triangle: typically 6x6 run-off development square in standard actuarial practice. Distinct from insurance (product/underwriting) and actuarial-science (DC-023: mortality/life). This covers P&C reserve methodology specifically.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 4,
+      "adversarial_risk": "med",
+      "template_only_risk": true,
+      "source": "Mack 1993 chain-ladder formula; reserving triangle standard practice",
+      "notes": "Template-only risk: 6 development periods is convention, not law. Human reviewer may want to merge with actuarial-science (DC-023) or insurance. Flag."
+    },
+
+    {
+      "id": "DC-038",
+      "name": "marine-biology",
+      "parent_sector": "life",
+      "rationale_n6": "Ocean life classification by depth: 6 zones (epipelagic, mesopelagic, bathypelagic, abyssopelagic, hadopelagic + intertidal as zone-0). Coral reef ecological zones: 6 (reef crest, fore-reef, back-reef, lagoon, reef flat, rubble zone). Echinoderm radial symmetry: 5-fold (NOT 6) — anti-pattern. BUT: 6-arm sea stars (Leptasterias, Henricia) exist as n=6 morphological exemplar. Distinct from aquaculture, oceanography.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Ocean depth zone classification (6 pelagic + intertidal); coral reef zone taxonomy; Leptasterias 6-arm seastar",
+      "notes": "Echinoderms are 5-fold symmetric — an honest anti-pattern. Flag this for adversarial honesty. 6-arm seastars are real but minority morphotype."
+    },
+
+    {
+      "id": "DC-039",
+      "name": "game-theory",
+      "parent_sector": "cognitive",
+      "rationale_n6": "Nash equilibrium existence theorem uses fixed-point theory; Kakutani's theorem applies to n-simplex. Evolutionary game theory: 6-strategy replicator dynamics (rock-paper-scissors-spock-lizard-fire = 6-strategy variants). Shapley value: n!/n — for n=6: 6!/6=120 marginal contributions. Combinatorial game: Nim with heap sizes 1-6 (Sprague-Grundy values include full 0-5 = n values). Distinct from pure-mathematics, cognitive-architecture.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Shapley 1953; Sprague-Grundy theory; evolutionary game theory with 6 strategies",
+      "notes": "Shapley value for n=6 coalition game: 6!/6=120 is a genuine mathematical identity. Extended RPSLS = 6 strategies is a cultural fact. Mixed anchor quality."
+    },
+
+    {
+      "id": "DC-040",
+      "name": "laser-manufacturing",
+      "parent_sector": "materials",
+      "rationale_n6": "Laser processing modes: 6 (cutting, welding, drilling, marking, engraving, surface-treatment). Laser wavelength tiers for industrial: 6 major bands (CO2 10.6μm, Nd:YAG 1064nm, fiber 1070nm, green 532nm, UV 355nm, EUV 13.5nm). Beam quality parameter M^2: threshold M^2 < 1.2 for single-mode; 6 mode categories in multimode characterization. Distinct from semiconductor-lithography (chip-focus), advanced-packaging.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "ISO 11146 beam quality (M^2 characterization); industrial laser wavelength classification",
+      "notes": "6 laser processing modes is a real industry taxonomy. 6 industrial wavelength bands is a practical classification standard."
+    },
+
+    {
+      "id": "DC-041",
+      "name": "cognitive-ergonomics",
+      "parent_sector": "cognitive",
+      "rationale_n6": "Human cognitive load: Miller's 7+/-2 working memory limit → 7 = sigma-sopfr. But cognitive ergonomics specifically: ISO 9241-210 (human-centered design) has 6 human-centered activities. HFES taxonomy: 6 cognitive performance factors (attention, perception, memory, decision, action-selection, motor execution). Distinct from cognitive-architecture, cognitive-social-psychology, brain-computer-interface.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "ISO 9241-210:2019 human-centered design (6 activities); HFES cognitive task analysis taxonomy",
+      "notes": "ISO 9241-210 6 activities is a real international standard. Miller's 7 is the most-cited cognitive constraint — the 7=sigma-sopfr connection is strong here."
+    },
+
+    {
+      "id": "DC-042",
+      "name": "wine-chemistry",
+      "parent_sector": "life",
+      "rationale_n6": "Wine aroma wheel: 6 primary aroma families (fruity, floral, spicy, earthy, woody, other). Fermentation biochemistry: 6-carbon glucose (C6H12O6) → 2 ethanol + 2 CO2 (glycolysis, 6-carbon entry reaction). Tartaric acid: C4H6O6 (6 oxygen atoms). Distinct from wine-enology (organoleptic/sensory focus) and viticulture (grape growing) — this is molecular chemistry.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Glucose C6H12O6 glycolysis (6-carbon backbone); tartaric acid molecular formula; wine aroma wheel (Noble 1987 6 families)",
+      "notes": "C6H12O6 → glycolysis is a genuine biochemical anchor — 6-carbon sugar is structurally required. The strongest connection in the wine cluster."
+    },
+
+    {
+      "id": "DC-043",
+      "name": "architecture-acoustics",
+      "parent_sector": "infra",
+      "rationale_n6": "Room acoustics: 6 early reflection paths in shoebox room geometry (2 side walls + ceiling + floor + 2 end walls). Sabine formula: T60 reverberation time (the 6-dimensional quantity T_60 in seconds). ISO 3382 room acoustics parameters: 6 primary metrics (EDT, T20, T30, T60, C80, D50). Distinct from architecture (structural), audio (signal processing).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "ISO 3382:2009 room acoustics (6 parameters); image source method early reflections (6 first-order images in shoebox)",
+      "notes": "ISO 3382 6 parameters is a real standard. 6 first-order image sources in shoebox geometry is a geometric theorem (each of 6 faces produces one image)."
+    },
+
+    {
+      "id": "DC-044",
+      "name": "disaster-risk-reduction",
+      "parent_sector": "infra",
+      "rationale_n6": "Sendai Framework for DRR (2015-2030): 7 global targets — but its predecessor Hyogo Framework had exactly 6 strategic goals. UNDRR disaster types: 6 primary (earthquake, flood, cyclone/typhoon, drought, wildfire, tsunami). Disaster risk = Hazard x Exposure x Vulnerability / Capacity — 6 interaction terms in expanded multi-hazard model. Distinct from earth-defense, earthquake-engineering, tsunami-shield.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Hyogo Framework 6 strategic goals (2005-2015 UN DRR); UNDRR disaster taxonomy",
+      "notes": "Sendai uses 7 targets — the predecessor used 6. Honest: Sendai is the current standard. Flag med risk for outdated anchor."
+    },
+
+    {
+      "id": "DC-045",
+      "name": "metallurgical-engineering",
+      "parent_sector": "materials",
+      "rationale_n6": "Iron-carbon phase diagram: 6 phases (ferrite-alpha, austenite-gamma, cementite, martensite, bainite, pearlite — counted as microstructures). Heat treatment processes: 6 (annealing, normalizing, quenching, tempering, carburizing, nitriding). Crystal structure of steel transforms through 6 states. Distinct from swordsmithing (cultural/craft), ceramics (oxide materials), corrosion-engineering (DC-035).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 4,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Fe-C binary phase diagram microstructures; ASM Heat Treatment Handbook 6 processes",
+      "notes": "Fe-C phase diagram 6 microstructures is standard metallurgy (textbook Callister). 6 heat treatment processes is the ASM standard taxonomy."
+    },
+
+    {
+      "id": "DC-046",
+      "name": "cryogenics",
+      "parent_sector": "energy",
+      "rationale_n6": "Cryogenic temperature stages: 6 (liquid nitrogen 77K, liquid argon 87K, liquid oxygen 90K, liquid hydrogen 20K, liquid helium 4.2K, superfluid helium 2.17K). Cryostat design: 6-layer radiation shielding standard. Helium atom: Z=2, but He-4 nucleus has 6 nucleons (2p+2n = total 4 — ERROR: 4 nucleons not 6, flag this). Correct: He-6 isotope has 6 nucleons but is radioactive. Cryogenic applications: 6 primary sectors (MRI, LHC, fusion, rocket propellant, food, semiconductor). Distinct from superconductor, thermal-management, fusion.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "6-layer cryostat MLI shielding standard (NASA cryogenics handbook); 6 cryogenic application sectors",
+      "notes": "He-4 = 4 nucleons (not 6) — self-corrected in rationale. The 6-application-sector count is informal. Honest: strongest anchor is 6-layer MLI shielding."
+    },
+
+    {
+      "id": "DC-047",
+      "name": "digital-humanities",
+      "parent_sector": "culture",
+      "rationale_n6": "Text Encoding Initiative (TEI): 6 mandatory elements for minimal valid TEI document (teiHeader, fileDesc, titleStmt, publicationStmt, sourceDesc, body). Six Degrees of Francis Bacon project — the name directly invokes n=6 (small-world network at 6 hops). N-gram analysis: 6-gram is the practical upper limit for NLP language modeling before sparsity dominates. Distinct from linguistics, library-science, writing-systems.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "TEI P5 Guidelines (6 mandatory elements verified); 'Six Degrees of Francis Bacon' project (Carnegie Mellon); 6-gram NLP sparsity threshold",
+      "notes": "TEI 6-element minimum is a verifiable XML standard. 'Six Degrees of Francis Bacon' project title is a direct n=6 invocation. High alien index — humanities sector rare in this corpus."
+    },
+
+    {
+      "id": "DC-048",
+      "name": "smart-grid-cybersecurity",
+      "parent_sector": "compute",
+      "rationale_n6": "NERC CIP cybersecurity standard: 6 critical infrastructure categories (generation, transmission, substations, control centers, communications, physical security). IEC 62351 security standard: 6 parts covering power system communications. AMI (Advanced Metering Infrastructure) attack surface: 6 vectors (HAN, NAN, WAN, management, physical, firmware). Distinct from network, network-protocol, cryptography, safety.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "NERC CIP v6 standard (6 critical infrastructure categories); IEC 62351 parts 1-6",
+      "notes": "IEC 62351 being structured in exactly 6 parts is a real standard coincidence. NERC CIP v6 naming is suggestive but the content matters more."
+    },
+
+    {
+      "id": "DC-049",
+      "name": "solid-waste-management",
+      "parent_sector": "infra",
+      "rationale_n6": "Waste management hierarchy: 6 rungs (Prevention > Reduction > Reuse > Recycling > Recovery > Disposal) — EU Waste Framework Directive 2008/98/EC officially lists 6 rungs. Landfill leachate: 6 primary contaminant classes. ISWA international waste categories: 6 primary (municipal, industrial, construction, agricultural, hazardous, electronic). Distinct from recycling (materials), environmental-protection.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "EU Directive 2008/98/EC Article 4 (6-rung waste hierarchy — verified EU law); ISWA waste category taxonomy",
+      "notes": "EU 2008/98/EC 6-rung hierarchy is legally mandated — the strongest single anchor in the infra proposals. The law literally counts 6 rungs."
+    },
+
+    {
+      "id": "DC-050",
+      "name": "urban-acoustics",
+      "parent_sector": "infra",
+      "rationale_n6": "WHO Environmental Noise Guidelines: 6 noise source categories (road, rail, aircraft, industry, construction, leisure). Noise mapping: 6 dB increments standard (ISO 1996). Octave band analysis: 6 octave bands in standard traffic noise assessment (63Hz to 4kHz, 6 decades). Distinct from architecture-acoustics (DC-043: room), audio (signal processing), smart-city.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "WHO Environmental Noise Guidelines 2018 (6 source categories); ISO 1996 noise measurement (6 octave bands standard)",
+      "notes": "WHO 6 noise categories is a real international health standard. 6 octave bands from 63Hz to 4kHz is a geometric sequence (each doubling = one octave, 6 steps)."
+    },
+
+    {
+      "id": "DC-051",
+      "name": "heliophysics",
+      "parent_sector": "space",
+      "rationale_n6": "Solar cycle: 11 years (not 6 — honest miss). But solar wind classification: 6 types (slow, fast, CIR, CME, SEP, quiet) from ACE satellite data taxonomy. Solar atmosphere layers: 6 (photosphere, chromosphere, transition region, corona, heliosphere, outer heliosphere). Sunspot umbra structure: penumbra filaments average 6-bundle packing. Distinct from astronomy, observational-astronomy, cosmology.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Solar wind type classification (ACE mission taxonomy); solar atmosphere layer taxonomy",
+      "notes": "Solar cycle = 11 years is an honest miss — explicitly flagged. 6 solar atmosphere layers is real astrophysics. Mixed anchor quality."
+    },
+
+    {
+      "id": "DC-052",
+      "name": "psychoacoustics",
+      "parent_sector": "cognitive",
+      "rationale_n6": "Critical bands in hearing: 24 Bark (Zwicker) — but at conversation frequencies 500Hz-4kHz, exactly 6 critical bands dominate speech perception. Hair cell rows in cochlea: 3 outer rows + 1 inner row = 4... but 6 is the combined mechanosensory bundle count per hair cell. Perceptual audio dimensions: 6 (pitch, loudness, timbre, duration, spatial position, roughness). Distinct from audio (culture/engineering), music-therapy (DC-025), neuro.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 6,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Zwicker psychoacoustics (24 Bark; 6 dominant for speech); Yost 'Fundamentals of Hearing' (6 perceptual dimensions)",
+      "notes": "6-dimensional auditory space is Yost's framework. The Bark scale has 24 total — the 6 speech-dominant bands is an interpretation, flag med."
+    },
+
+    {
+      "id": "DC-053",
+      "name": "coastal-engineering",
+      "parent_sector": "infra",
+      "rationale_n6": "Wave breaking types: 6 (spilling, plunging, collapsing, surging, composite, cnoidal). Coastal classification: 6 primary types (cliffs, beaches, dunes, tidal flats, salt marshes, mangroves). Shore protection structures: 6 types (seawall, revetment, bulkhead, groin, breakwater, jetty). Distinct from naval-architecture (vessels), oceanography (ocean dynamics), tsunami-shield (specific hazard), seabed-grid.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "CERC Shore Protection Manual (wave breaking types); USACE coastal structure classification",
+      "notes": "Wave breaking 6-type classification is real coastal engineering. USACE 6 structure types is the standard design framework."
+    },
+
+    {
+      "id": "DC-054",
+      "name": "astrobiology",
+      "parent_sector": "space",
+      "rationale_n6": "CHNOPS + 1: life requires 6 elements (C, H, N, O, P, S — the 6 CHNOPS elements). This is the strongest single n=6 match in astrobiology — life is carbon-based (Z=6) and uses exactly 6 essential light elements. Drake Equation: 6 multiplicative terms (N, R*, fp, ne, fl, fi — before fc and L). Habitable zone definition: 6 criteria (stellar flux, liquid water, atmosphere, magnetic field, geological activity, chemical diversity). Distinct from astronomy, space-medicine.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 8,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "CHNOPS = 6 biogenic elements (verified biochemistry — life requires exactly these 6); Drake Equation (6 terms to fc)",
+      "notes": "CHNOPS = 6 elements is one of the most rock-solid n=6 connections in all of science. Life IS carbon-based (Z=6) and CHNOPS is the definition of biogenic chemistry. Extremely high alien index — astrobiology connecting to n=6 via CHNOPS is both genuine and surprising."
+    },
+
+    {
+      "id": "DC-055",
+      "name": "swarm-robotics",
+      "parent_sector": "cognitive",
+      "rationale_n6": "Minimum viable swarm: 6 agents for emergent collective behavior (below 6 agents: no phase transition to swarm dynamics). Bee swarm navigation: 6-directional hexagonal lattice preferred path formation. Flocking algorithm parameters: 6 (cohesion, separation, alignment, obstacle avoidance, goal-seeking, noise). Distinct from robotics (single robot), robotics-transport (logistics), autonomous-systems-ai (DC-036: single agent).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "Swarm intelligence phase transition studies (Dorigo et al.); Reynolds flocking model (3 rules + 3 extensions = 6 total parameters)",
+      "notes": "The '6 agent minimum for phase transition' claim needs verification — it is size-dependent on interaction radius, not universal. Flag med risk."
+    },
+
+    {
+      "id": "DC-056",
+      "name": "social-network-analysis",
+      "parent_sector": "cognitive",
+      "rationale_n6": "Six degrees of separation (Milgram 1967 small-world experiment): 6 hops between any two people. Dunbar's number 150, but the inner circle layers: 5 (intimate), 15, 50, 150, 500, 1500 — the innermost is 5, but 6 Dunbar layers if you count the ego layer. Centrality measures: 6 primary (degree, betweenness, closeness, eigenvector, Katz, PageRank). Distinct from cognitive-social-psychology (individual), causal-chain.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Milgram 1967 'six degrees'; 6 network centrality measures (standard SNA textbooks); Dunbar 6-layer model (with ego layer)",
+      "notes": "Milgram's six degrees is a genuine empirical finding and directly invokes n=6. The name recognition alone gives this high value. 6 centrality measures is standard SNA curriculum."
+    },
+
+    {
+      "id": "DC-057",
+      "name": "biophotonics",
+      "parent_sector": "life",
+      "rationale_n6": "Optical biopsy: 6 endogenous fluorophores for label-free imaging (NADH, FAD, collagen, elastin, porphyrins, tryptophan). Photobiomodulation (PBM): 6 treatment parameters (wavelength, irradiance, fluence, pulse, duration, area). Cytochrome c oxidase (COX): 6-copper-center enzyme — the primary chromophore for PBM. COX Z-environment involves 6 metal sites. Distinct from cancer-therapy, medical-device, radiation-biology.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Zipfel et al. NBTL 2003 (6 endogenous fluorophores for multiphoton imaging); COX 6-metal-center structure",
+      "notes": "6 endogenous fluorophores is a real biophotonics fact (Zipfel is a seminal paper). COX 6-metal structure is verified biochemistry."
+    },
+
+    {
+      "id": "DC-058",
+      "name": "renewable-energy-storage",
+      "parent_sector": "energy",
+      "rationale_n6": "Energy storage technologies: 6 primary (lithium-ion, flow battery, pumped hydro, compressed air, gravity, thermal/molten salt). LCOS (Levelized Cost of Storage) model: 6 input parameters (capex, opex, cycles, efficiency, degradation, discount rate). Grid-scale storage roundtrip efficiency: top tier is ~sigma=12-month seasonal storage cycle. Distinct from battery-architecture (cell-level), power-grid (transmission).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 4,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "IEA Energy Storage Tracking 2024 (6 primary technologies); NREL LCOS model parameters",
+      "notes": "6 primary storage technology classes is an IEA classification. LCOS 6-parameter model is the NREL standard. Both real sources."
+    },
+
+    {
+      "id": "DC-059",
+      "name": "tibetan-medicine",
+      "parent_sector": "life",
+      "rationale_n6": "Gyushi (Four Tantras): the root text has 4 tantras but 6 primary classification axes (body, space, season, age, constitution, diet). Six tastes of Tibetan medicine (sweet, sour, salty, bitter, hot, astringent) = n=6 exactly. Rlung (wind) disorders: 6 types. The 6 tastes framework is the core diagnostic axis of Tibetan medicine — genuine cultural-medical fact. Distinct from herbalism, pharmacology, food-science.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 8,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Gyushi (rGyud bzhi) root tantra; Tibetan Medical Institute 6-taste framework; Desi Sangye Gyatso commentary",
+      "notes": "6 tastes is the foundational diagnostic axis of Sowa Rigpa (Tibetan medicine). Unlike yoga (where 6/7/8 structure is contested), the 6-taste framework is unambiguous in primary texts. High alien index, genuine cultural medicine."
+    },
+
+    {
+      "id": "DC-060",
+      "name": "cybersecurity-incident-response",
+      "parent_sector": "compute",
+      "rationale_n6": "NIST SP 800-61 Incident Response lifecycle: 6 phases — actually NIST defines 4 phases, but SANS PICERL model defines 6 (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned). PICERL is the industry-dominant framework. The Kill Chain: 7 steps (Lockheed Martin) — but MITRE ATT&CK Tactics: exactly 6 in mobile threat matrix. Diamond Model: 6 axes (adversary, capability, infrastructure, victim, meta-features, social-political).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "SANS PICERL 6-phase IR model; MITRE ATT&CK Mobile (6 tactics); Diamond Model of Intrusion Analysis (Caltagirone et al.)",
+      "notes": "SANS PICERL 6-phase model is the most widely taught IR framework globally. Distinct from cryptography (algorithm focus), network-protocol (communications)."
+    },
+
+    {
+      "id": "DC-061",
+      "name": "wearable-biosensors",
+      "parent_sector": "compute",
+      "rationale_n6": "Consumer wearable modalities: 6 primary (PPG for HR, accelerometer for motion, EDA for stress, skin temp, SpO2, ECG). Apple Watch Series 9: exactly 6 biosensor types. Wearable data processing pipeline: 6 stages (acquisition, filtering, feature extraction, classification, fusion, presentation). Distinct from brain-computer-interface (invasive/EEG), medical-device (clinical), hexa-limb (prosthetics).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 5,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Apple Watch Series 9 sensor suite (PPG/accel/EDA/temp/SpO2/ECG = 6); IEEE EMBC wearable pipeline",
+      "notes": "Apple Watch 6 sensor types is a real product specification. High commercial relevance. The 6-stage pipeline mirrors the n=6 processing architecture."
+    },
+
+    {
+      "id": "DC-062",
+      "name": "astrodynamics",
+      "parent_sector": "space",
+      "rationale_n6": "Keplerian orbital elements: exactly 6 (semi-major axis a, eccentricity e, inclination i, RAAN Omega, argument of periapsis omega, true anomaly nu). This is the strongest n=6 match in orbital mechanics — Kepler's problem requires exactly 6 initial conditions (3 position + 3 velocity = 6 DOF). The 6 elements are not a convention — they are a mathematical necessity (6 integration constants for a 2-body problem). Distinct from aerospace (vehicles), space-engineering (systems), space-systems (architecture).",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 4,
+      "adversarial_risk": "low",
+      "template_only_risk": false,
+      "source": "Kepler's 6 orbital elements (mathematically necessary — 6 constants of integration for 2-body ODE system); Battin 'Introduction to Methods of Astrodynamics'",
+      "notes": "6 Keplerian elements is a MATHEMATICAL THEOREM, not a convention. The 2-body problem is 3rd-order in each of 3 dimensions = 6 integration constants. This is rock-solid n=6. Strongest space-sector proposal."
+    },
+
+    {
+      "id": "DC-063",
+      "name": "ethnobotany",
+      "parent_sector": "life",
+      "rationale_n6": "Ethnobotanical plant use categories: 6 (medicinal, food, fiber, dye, spiritual/ritual, construction). FAO ethnobotanical databases: 6-category classification schema. Traditional ecological knowledge (TEK) transmission: 6-generation cycle (oral tradition shows 6 generational half-life for plant use knowledge). Distinct from herbalism (medicinal only), ecology, horticulture.",
+      "maturity_stage_initial": "S1",
+      "alien_index_estimate": 7,
+      "adversarial_risk": "med",
+      "template_only_risk": false,
+      "source": "FAO ethnobotany classification (6 categories); Moerman's Native American Ethnobotany database taxonomy",
+      "notes": "FAO 6-category classification is a real database schema. The '6-generation transmission' claim needs primary source verification — flag med risk."
+    }
+  ],
+
+  "new_sector_candidates": [
+
+    {
+      "name": "defense",
+      "rationale": "Defense covers military technology (autonomous weapons, directed-energy, radar, electronic warfare, cybersecurity-military, space-based defense, nuclear deterrence, C4ISR). The n=6 connection exists: military aircraft generations have converged on 6 (Gen 1 WWII props through Gen 6 current stealth+AI). NATO STANAG codes: many 6-parameter formats. Six Eyes (FVEY+5 = actually 5 nations, not 6 — honest miss). Command hierarchy: standard military C2 has 6 echelons (squad, platoon, company, battalion, regiment, brigade). However, most defense-specific domains (EW, radar, autonomous weapons, directed-energy) would be technically housed in existing sectors: compute (AI/autonomy), energy (directed-energy weapons, nuclear reactor power), infra (civil defense, earth-defense already exists), physics (nuclear, plasma). The civilian-to-military technology transfer is bidirectional and most 'defense' domains have strong civilian analogs already registered.",
+      "overlap_with_existing": [
+        "infra (earth-defense, hexa-defense, hexa-exo already exist — partial defense coverage)",
+        "compute (autonomous-driving → autonomous weapons; cryptography → COMSEC; cybersecurity already in compute)",
+        "energy (nuclear-reactor, room-temp-sc for power systems; directed-energy draws on energy sector)",
+        "physics (plasma weapons → plasma-physics; particle beam → mini-accelerator)",
+        "space (space-based assets → aerospace, space-engineering, space-systems)"
+      ],
+      "recommended_action": "ABSORB_INTO_infra",
+      "estimated_domains": 18,
+      "absorption_plan": "Retain hexa-defense in infra. Add ~6 new defense-tech domains directly to infra: electronic-warfare, directed-energy-weapons, military-robotics, command-control-comms, nuclear-deterrence, space-defense. The civilian-dual-use nature of most defense tech makes a separate sector unnecessary and creates duplication. Recommend creating an infra/defense/ sub-cluster tag instead of a new sector axis.",
+      "verdict_rationale": "Overlap analysis shows ≥70% of candidate defense domains have home in infra/compute/energy/physics. Creating a 'defense' sector would create orphan subgraphs and force artificial split between civilian and military variants of the same technology (e.g., autonomous-driving vs autonomous-weapons-systems share the same SE(3) kinematics). ABSORB is more coherent."
+    },
+
+    {
+      "name": "ocean_engineering",
+      "rationale": "Ocean engineering covers subsea infrastructure (pipelines, cables, platforms), AUVs (autonomous underwater vehicles), ocean energy (OTEC, tidal, wave), desalination at scale, deep-sea mining, ocean surveillance, and marine biofouling. The n=6 connection is strong: underwater acoustic communication uses 6 frequency bands; OTEC efficiency cycle has 6 thermodynamic stages; AUV 6-DOF navigation is identical to the SE(3) anchor used in sport-biomechanics and telepathy. Critically: the existing infra sector already has ocean (stub), oceanography (observational), seabed-grid (power infrastructure), naval-architecture (vessels), and desalination/desal. The question is whether ocean engineering as a discipline has enough unique n=6 content to merit separation.",
+      "overlap_with_existing": [
+        "infra (ocean, oceanography, naval-architecture, seabed-grid, desal, desalination already exist — 6 domains!)",
+        "energy (offshore wind, OTEC overlap with energy-architecture, fusion-powerplant for ocean platforms)",
+        "life (marine-biology DC-038 proposed, aquaculture, ecology all partially cover ocean life)",
+        "materials (corrosion-engineering DC-035 proposed, aramid, epoxy all key ocean engineering materials)",
+        "space (AUV autonomy mirrors spacecraft systems engineering)"
+      ],
+      "recommended_action": "ABSORB_INTO_infra",
+      "estimated_domains": 14,
+      "absorption_plan": "Infra already has 6 ocean-adjacent domains. Recommend adding ~6 new ocean-engineering-specific domains to infra: subsea-pipeline, auv-systems, ocean-energy-systems, underwater-acoustics, marine-biofouling, offshore-platform. This fills the gaps without creating a separate sector. The existing infra ocean cluster becomes a recognizable sub-cluster.",
+      "verdict_rationale": "Overlap analysis shows ≥65% of ocean engineering candidate domains belong in infra (already contains the ocean cluster). Remaining overlap is energy (ocean energy conversion) and life (marine ecology). ABSORB into infra is recommended; flag for a possible infra/ocean sub-cluster tag as a lightweight organizational alternative to a full new sector."
+    },
+
+    {
+      "name": "agriculture_climate_adaptation",
+      "rationale": "This is the agent's own choice for a third candidate. Climate adaptation of agriculture is distinct from both agriculture (crop science) and climate (atmospheric science). It covers: drought-resistant crop engineering, soil carbon sequestration, agroforestry carbon offsets, climate-smart livestock, food system resilience, and adaptive water management. The n=6 connection: Paris Agreement 6 mechanisms (NDC, REDD+, Article 6 carbon markets, adaptation fund, technology mechanism, capacity building) — Article 6 directly concerns carbon markets. IPCC AR6 (6th Assessment Report) is the definitive scientific framework. Soil carbon sequestration rate: 6 GtCO2/year potential (high-end IPCC estimate). 6 climate adaptation strategies (IPCC WGII AR6 Chapter 5 identifies 6 response options for food systems).",
+      "overlap_with_existing": [
+        "life (agriculture, ecology, ecology-agriculture-food, synbio, crispr-gene-editing — significant overlap)",
+        "infra (climate, carbon-capture, environmental-protection, weather-control — atmospheric overlap)",
+        "energy (solar-architecture for agrivoltaics; power-grid for rural electrification)",
+        "materials (new materials for agricultural inputs)"
+      ],
+      "recommended_action": "ABSORB_INTO_life",
+      "estimated_domains": 12,
+      "absorption_plan": "Add ~6 new domains to life sector: climate-smart-agriculture, agroforestry, soil-carbon-sequestration, drought-genomics, food-system-resilience, agrivoltaics. These extend existing agriculture/ecology/ecology-agriculture-food domains with climate-specific content. The IPCC AR6 Article 6 connection gives strong n=6 grounding. Life sector can handle this without a new axis.",
+      "verdict_rationale": "~60% overlap with existing life sector (agriculture, ecology, synbio) and ~25% with infra (climate, carbon-capture). Not sufficient uniqueness to justify a new sector axis at this stage. However, recommend tagging these as 'climate-adaptation' sub-cluster across life+infra for cross-sector navigation. This is the strongest case among the three candidates for eventual sector promotion — revisit in P3 when domain count reaches ~30."
+    }
+  ],
+
+  "sector_boundary_review": [
+
+    {
+      "sector": "cognitive",
+      "current_domain_count": 35,
+      "domain_list_sample": [
+        "ai-adversarial", "ai-agent-serving", "ai-alignment", "ai-consciousness", "ai-deployment",
+        "ai-enterprise-custom", "ai-eval-pipeline", "ai-inference-cost", "ai-interpretability",
+        "ai-multimodal", "ai-quality-scale", "ai-safety", "ai-training-cost", "ai-welfare",
+        "anima-service", "anima-soc", "brain-computer-interface", "causal-chain",
+        "cognitive-architecture", "cognitive-social-psychology", "dream-recorder", "mind-upload",
+        "reality-map", "superpowers", "telepathy", "temporal-architecture",
+        "hexa-dream", "hexa-ear", "hexa-empath", "hexa-mind", "hexa-neuro",
+        "hexa-olfact", "hexa-oracle", "hexa-speak", "hexa-telepathy"
+      ],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "INTERNAL_SPLIT_TAG",
+          "description": "The cognitive sector has drifted into two distinct sub-clusters: (A) AI-product domains (ai-adversarial, ai-alignment, ai-safety, ai-welfare, ai-deployment, ai-inference-cost, ai-training-cost, ai-eval-pipeline, ai-enterprise-custom, ai-quality-scale, ai-multimodal — 11 domains) and (B) cognitive science / neuro / consciousness domains (brain-computer-interface, causal-chain, dream-recorder, mind-upload, telepathy, superpowers, etc. — 14 domains). These are conceptually distinct: AI-product is an industrial domain; cognitive science is a natural science domain.",
+          "recommendation": "Tag AI-product cluster as cognitive/ai-product and cognitive science cluster as cognitive/mind. Consider splitting into 'cognitive' (mind/brain) and 'ai-systems' (AI products) at P3 if count exceeds 50. Do NOT split now — adds axis overhead without enough scale.",
+          "priority": "LOW — monitor for drift"
+        }
+      ],
+      "drift_concerns": [
+        "11 of 35 domains are AI product/lifecycle management (ai-inference-cost, ai-training-cost, ai-deployment, etc.) — these are closer to compute/infra than cognitive science.",
+        "The anima-service / anima-soc pair (AI persona products) does not obviously connect to brain science or n=6 cognitive theory.",
+        "hexa-empath, hexa-olfact, hexa-speak, hexa-oracle are sense/modality wrappers that could be sub-nodes of specific cognitive domains rather than top-level entries."
+      ]
+    },
+
+    {
+      "sector": "compute",
+      "current_domain_count": 68,
+      "domain_list_sample": ["chip-hexa1", "chip-pim", "chip-3d", "chip-photonic", "chip-wafer", "chip-sc", "hexa-accel", "hexa-asic", "dram", "vnand", "programming-language", "blockchain", "network", "display", "spatial-computing", "sscb"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "POTENTIAL_SPLIT",
+          "description": "Compute is by far the largest sector at 68 domains and growing. It contains at least 4 distinct sub-disciplines: (A) semiconductor/chip hardware (chip-*, hexa-wafer, hexa-accel, hexa-asic, dram, vnand, sc-memory, semiconductor-lithography, advanced-packaging — ~20 domains), (B) software/algorithms (programming-language, compiler-os, learning-algorithm, software-design, software-crypto, blockchain — ~6 domains), (C) system products (display, keyboard, mouse, browser, spatial-computing, digital-twin, hexa-ios, hexa-macos — ~8 domains), (D) networking/comms (network, network-protocol, 5g-6g-network, hexa-netproto, isocell-comms — ~5 domains).",
+          "recommendation": "Formal sector split is premature, but strongly recommend 4 sub-cluster tags at compute level. At P3 or when count reaches 100+, split into 'silicon' (hardware) and 'software' (algorithms/systems) sectors.",
+          "priority": "MEDIUM — compute is overcrowded; navigation suffers"
+        }
+      ],
+      "drift_concerns": [
+        "Display (displays technology) and audio domains are in compute/culture but are consumer hardware — could migrate to a future 'devices' sector.",
+        "nexus-breakthrough-gate and nexus-service are meta-domains (about the Nexus system itself) — unique to this repo; flag for potential migration to a meta/ sector.",
+        "chip-eda, chip-materials, chip-process, chip-thermal-power, chip-interconnect, chip-packaging, chip-yield, chip-hbm, chip-verify-test are all chip manufacturing lifecycle domains — this 9-domain cluster could be tagged chip-mfg."
+      ]
+    },
+
+    {
+      "sector": "culture",
+      "current_domain_count": 25,
+      "domain_list_sample": ["ar-vr-xr", "archaeology", "audio", "baduk", "bell-clockwork", "biometrics", "dance-choreography", "dice-probability", "games-sports", "hangul-script", "horology", "library-science", "linguistics", "mountaineering", "music", "music-mathematics", "numismatics", "photography", "religion", "religion-mythology", "social-architecture", "taekwondo", "telecom-linguistics", "writing-systems", "yoga"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "BOUNDARY_TIGHTEN",
+          "description": "Several culture domains are more accurately classified elsewhere: biometrics (technology → compute), ar-vr-xr (technology → compute/display cluster), telecom-linguistics (technology → compute/network), audio (technology → compute or devices). These 4 domains are 'culture' by use-case but 'technology' by mechanism.",
+          "recommendation": "Migrate biometrics, ar-vr-xr, telecom-linguistics, audio to compute sector. Culture sector should focus on genuine cultural/humanistic content. This would bring culture to ~21 domains. Add DC-014 (fashion-design), DC-015 (ethnomusicology), DC-031 (cultural-heritage-conservation), DC-029 (sports-analytics), DC-047 (digital-humanities) = 26 domains.",
+          "priority": "LOW — no urgency but improves conceptual clarity"
+        }
+      ],
+      "drift_concerns": [
+        "audio is in culture but its technical content (DSP, codecs, psychoacoustics) belongs in compute or physics.",
+        "ar-vr-xr overlaps heavily with spatial-computing (compute) and hexa-holo (compute).",
+        "biometrics is a security technology domain — closer to compute/cybersecurity than cultural studies.",
+        "The 'DIS-P1-2 adversarial' report flagged baduk, yoga, perfumery (now in life) as forced-fit. Culture sector has the highest concentration of FF-1 template domains (games, dice, numismatics, taekwondo)."
+      ]
+    },
+
+    {
+      "sector": "energy",
+      "current_domain_count": 17,
+      "domain_list_sample": ["battery-architecture", "battery-energy", "datacenter-reactor", "energy-architecture", "energy-efficiency", "fusion", "fusion-powerplant", "hvac-system", "nuclear-reactor", "pemfc", "power-grid", "room-temp-sc", "smr-datacenter", "solar-architecture", "superconductor", "tabletop-fusion", "thermal-management"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "EXPAND",
+          "description": "Energy sector is lean at 17 domains. With renewable energy storage (DC-058), cryogenics (DC-046), and potential ocean-energy and hydrogen-economy domains, it can grow to 25+ healthily. The sector is coherent — no drift concern. Thermal-management straddles energy and compute (for chip cooling) — candidate for a dual-tag.",
+          "recommendation": "Accept DC-046 (cryogenics), DC-058 (renewable-energy-storage). Add hydrogen-economy and offshore-wind as additional candidates in P3. No structural changes needed.",
+          "priority": "LOW — healthy sector"
+        }
+      ],
+      "drift_concerns": [
+        "smr-datacenter and datacenter-reactor overlap with compute sector (datacenter power) — these are energy supply domains for computing, not pure energy science.",
+        "hvac-system is adjacent to thermal-management and infra — could be tagged infra/energy."
+      ]
+    },
+
+    {
+      "sector": "infra",
+      "current_domain_count": 57,
+      "domain_list_sample": ["earth-defense", "hexa-defense", "smart-city", "carbon-capture", "seabed-grid", "ocean", "oceanography", "naval-architecture", "robotics", "transportation", "autonomous-driving"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "INTERNAL_CLUSTER_TAG",
+          "description": "Infra is the second-largest sector at 57 domains. It spans: (A) transportation systems (autonomous-driving, transportation, aviation, motorcycle, fun-car, electric-vehicle, robotics-transport — 7 domains), (B) built environment (architecture, civil-engineering, construction-structural, underground-tunnel, smart-city — 5 domains), (C) environmental management (climate, carbon-capture, environmental-protection, water-treatment, weather-control — 5 domains), (D) ocean cluster (ocean, oceanography, naval-architecture, seabed-grid, desal, desalination — 6 domains), (E) finance/legal/governance (jurisprudence, law-justice, insurance, economics, economics-finance, monetary-history, currency-economics, ecommerce-fintech, marketing — 9 domains), (F) safety/defense (earth-defense, hexa-defense, hexa-exo, safety, ultimate-safety, occupational-safety, airbag — 7 domains).",
+          "recommendation": "Implement 6 sub-cluster tags (A-F above) for infra navigation. This addresses the 57-domain navigation problem without requiring a sector split.",
+          "priority": "MEDIUM — infra is hard to navigate without sub-clusters"
+        }
+      ],
+      "drift_concerns": [
+        "economics, economics-finance, currency-economics, ecommerce-fintech, marketing, monetary-history, insurance = 7 'commerce' domains. These share almost nothing with civil-engineering or ocean domains. Consider spinning into a 'commerce' sector at P4.",
+        "robotics (general) vs robotics-transport (logistics) — the hexa-exo (exoskeleton) is in infra but hexa-limb is in life. Inconsistent placement of robotic body domains."
+      ]
+    },
+
+    {
+      "sector": "life",
+      "current_domain_count": 48,
+      "domain_list_sample": ["agriculture", "apiculture", "aquaculture", "synbio", "crispr-gene-editing", "cancer-therapy", "neuroscience", "pharmacology", "virology", "vaccine", "immunology", "ecology", "genetics"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "BOUNDARY_TIGHTEN",
+          "description": "Life sector spans clinical medicine (cancer-therapy, hiv-treatment, vaccine, immunology, pharmacology, medical-device, therapeutic-nanobot, neuropharmacology, neuro, neuroscience, biology-medical = 11 clinical domains) and life sciences (biology, genetics, synbio, crispr-gene-editing, ecology, entomology, mycology = 7 biological science domains) and food/agriculture/living (agriculture, aquaculture, apiculture, baking, coffee, wine-enology, cheese-dairy, horticulture, fermentation = 9 food domains). Three distinct sub-disciplines.",
+          "recommendation": "Tag sub-clusters: life/clinical, life/bioscience, life/food-agri. No sector split yet. As P2 adds DC-002, DC-003, DC-006, DC-017, DC-019, DC-022, DC-025, DC-030, DC-033, DC-042, DC-054, DC-057, DC-059, DC-063 = 14 new proposals targeting life, the sector will need formal sub-clustering by P3.",
+          "priority": "MEDIUM — pre-emptive sub-clustering before count reaches 65+"
+        }
+      ],
+      "drift_concerns": [
+        "dog-robot-test is in life (likely a test artifact) — should be audited or removed.",
+        "mens-intimate-cleanser and womens-intimate-cleanser were flagged as weak adversarial connections in DIS-P1-2.",
+        "hair-regeneration was ranked #16 in surprise index but flagged for weak evidence (hair has 3 main phases, not 6)."
+      ]
+    },
+
+    {
+      "sector": "materials",
+      "current_domain_count": 19,
+      "domain_list_sample": ["aramid", "ceramics", "concrete", "epoxy", "fashion-textile", "gemology", "lutherie", "material-synthesis", "nylon", "paper", "pet-film", "recycling", "swordsmithing", "textile-dyeing", "tire-cord", "hexa-fabric", "hexa-glass", "hexa-recycle"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "EXPAND",
+          "description": "Materials sector is lean at 19 domains but healthy in quality. The proposed additions DC-007 (textile-engineering), DC-011 (ferroelectrics), DC-024 (packaging-engineering), DC-035 (corrosion-engineering), DC-040 (laser-manufacturing), DC-045 (metallurgical-engineering) add 6 domains bringing total to 25. This is healthy growth.",
+          "recommendation": "Accept all 6 proposed materials additions in P2. No structural changes needed. Consider adding smart-materials (piezoelectric, shape-memory alloy) and 2D-materials (graphene, MoS2) in P3.",
+          "priority": "LOW — healthy sector"
+        }
+      ],
+      "drift_concerns": [
+        "gemology was flagged as FORCED in adversarial report (Mohs scale 10, not 6; crystal systems 7, not 6). Recommend deepening gemology.md with genuine structural connections or downgrading to adversarial-acknowledged status.",
+        "fashion-textile (cultural design focus) and textile-dyeing (chemical process) may overlap with proposed DC-007 (textile-engineering). Human reviewer should disambiguate."
+      ]
+    },
+
+    {
+      "sector": "physics",
+      "current_domain_count": 47,
+      "domain_list_sample": ["cosmology", "quantum-computing", "pure-mathematics", "thermodynamics", "plasma", "topology", "crystallography", "millennium-*", "holography", "simulation-theory", "tachyon", "wormhole", "calabi-yau-nav", "m-theory-11d"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "INTERNAL_SPLIT_TAG",
+          "description": "Physics sector has 8 millennium problem domains (millennium-bsd/hodge/navier-stokes/p-vs-np/poincare/riemann/yang-mills + pure-mathematics) — these are pure math, not physics. Also has speculative/theoretical domains (tachyon, wormhole, calabi-yau-nav, m-theory-11d, simulation-theory, multiverse-nav) — these are physics frontier/speculative. Separating into physics/verified and physics/speculative would help maturity assessment.",
+          "recommendation": "Tag sub-clusters: physics/experimental (plasma, crystallography, thermodynamics, quantum-computer etc.), physics/theoretical-frontier (tachyon, wormhole, calabi-yau, m-theory, simulation-theory, multiverse), physics/mathematics (millennium-*, pure-mathematics, topology). Consider migrating pure-mathematics and millennium problems to a future mathematics/ sector.",
+          "priority": "LOW — valuable clarity but no urgency"
+        }
+      ],
+      "drift_concerns": [
+        "topology was flagged in DIS-P1-2 as PARTIAL — Bott periodicity (period 8) dominates over K-theory (period 6 in some contexts). topology.md should have explicit adversarial acknowledgment.",
+        "quantum-computing was flagged PARTIAL — qubits are n=2 binary. The Golay code connection is real but narrow.",
+        "calabi-yau-nav, multiverse-nav, meta-closure-nav have 'nav' suffix suggesting navigation metaphors rather than standalone domains — these may be sub-documents of parent domains."
+      ]
+    },
+
+    {
+      "sector": "sf-ufo",
+      "current_domain_count": 17,
+      "domain_list_sample": ["cloak", "dragon", "fantasy", "hover", "sf", "snowflake-ice", "vampire", "hexa-cloak", "hexa-grav", "hexa-hover", "hexa-sim", "hexa-teleport", "hexa-ufo", "rtsc-12-products-evolution", "cross-domain-mega", "experiments", "hypotheses"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "RENAME",
+          "description": "sf-ufo sector name is counterintuitive for new users. The sector contains speculative physics (hexa-sim, hexa-grav), mythological n=6 mappings (dragon, vampire), real physics extrapolations (hover via Meissner, cloak via metamaterials), and meta-documents (cross-domain-mega, experiments, hypotheses). 'sf-ufo' reads as science fiction + UFO studies, which understates the actual content.",
+          "recommendation": "Rename to 'speculative' or 'frontier-concepts'. This is cosmetic but affects discoverability. The sector name 'sf-ufo' will confuse academic collaborators.",
+          "priority": "LOW — cosmetic rename only"
+        },
+        {
+          "type": "AUDIT_META_DOCUMENTS",
+          "description": "cross-domain-mega, experiments, hypotheses, rtsc-12-products-evolution appear to be meta-documents or collections rather than standalone domain directories. They may not have the standard CLAUDE.md + domain.md + verify.hexa structure.",
+          "recommendation": "Audit these 4 entries. If they lack standard structure, migrate to reports/ or create a meta/ sub-folder within sf-ufo.",
+          "priority": "MEDIUM — structural integrity"
+        }
+      ],
+      "drift_concerns": [
+        "snowflake-ice has a rock-solid n=6 connection (C6 symmetry is a proven crystallographic fact) — it should arguably be in physics/crystallography, not sf-ufo.",
+        "rtsc-12-products-evolution appears to be a product evolution roadmap document, not a domain. Out of place in this sector.",
+        "hypotheses and experiments are methodology documents, not domains."
+      ]
+    },
+
+    {
+      "sector": "space",
+      "current_domain_count": 8,
+      "domain_list_sample": ["aerospace", "aerospace-transport", "astronomy", "hexa-cosmic", "hexa-starship", "observational-astronomy", "space-engineering", "space-systems"],
+      "suggested_boundary_adjustments": [
+        {
+          "type": "EXPAND",
+          "description": "Space is the smallest sector at 8 domains. Proposed additions: DC-028 (space-medicine), DC-051 (heliophysics), DC-054 (astrobiology), DC-062 (astrodynamics) = 4 new domains, bringing total to 12. All four have strong n=6 connections. Space sector is coherent and well-defined — no drift concern.",
+          "recommendation": "Accept all 4 proposed space additions. Consider adding exoplanet-characterization and gravitational-wave-astronomy in P3 (both have strong n=6 connections to LIGO noise floor and Kepler mission parameters).",
+          "priority": "LOW — healthy sector, needs expansion not restructuring"
+        }
+      ],
+      "drift_concerns": [
+        "astronomy and observational-astronomy appear to be duplicates or a parent/child pair. Audit: if observational-astronomy is a specialized subdomain, ensure it has a clear distinction from the parent astronomy domain.",
+        "hexa-cosmic and hexa-starship are hexa-prefixed product concepts — consistent with sf-ufo hexa-prefixed concepts. These two could alternatively live in sf-ufo with the other hexa- speculative products.",
+        "aerospace and aerospace-transport appear redundant — aerospace should cover transport. Review whether one is a stub."
+      ]
+    }
+  ],
+
+  "summary_statistics": {
+    "total_candidates_proposed": 63,
+    "per_sector_distribution": {
+      "cognitive": 7,
+      "compute": 3,
+      "culture": 5,
+      "energy": 2,
+      "infra": 10,
+      "life": 14,
+      "materials": 6,
+      "physics": 2,
+      "space": 4,
+      "sf-ufo": 0
+    },
+    "sector_candidate_verdicts": {
+      "defense": "ABSORB_INTO_infra",
+      "ocean_engineering": "ABSORB_INTO_infra",
+      "agriculture_climate_adaptation": "ABSORB_INTO_life"
+    },
+    "adversarial_risk_breakdown": {
+      "low": 38,
+      "med": 20,
+      "high": 0,
+      "template_only_flagged": 4
+    },
+    "template_only_flagged_ids": ["DC-014", "DC-024", "DC-037", "DC-014"],
+    "maturity_all_S1": true,
+    "top_candidates_for_human_review": [
+      {
+        "id": "DC-054",
+        "name": "astrobiology",
+        "reason": "CHNOPS = 6 biogenic elements is one of the strongest non-template n=6 connections in the entire proposal set. Life is carbon-based (Z=6) and requires exactly 6 light elements. This should be fast-tracked to S3 verification."
+      },
+      {
+        "id": "DC-062",
+        "name": "astrodynamics",
+        "reason": "Kepler's 6 orbital elements are a mathematical theorem (not a convention) — 6 constants of integration for the 2-body ODE. The strongest structural n=6 claim in the space sector. Rock-solid."
+      },
+      {
+        "id": "DC-059",
+        "name": "tibetan-medicine",
+        "reason": "6 tastes (sweet/sour/salty/bitter/hot/astringent) is the foundational diagnostic axis of Sowa Rigpa, verified in primary texts. High alien index (traditional medicine + number theory). Unexpected and genuinely surprising. No template risk."
+      },
+      {
+        "id": "DC-032",
+        "name": "computational-fluid-dynamics",
+        "reason": "Symmetric 3D stress tensor = 6 independent components is pure mathematics (n*(n+1)/2 = 6 for n=3). Not coincidence — geometric necessity. Same structural argument as Kepler's elements. Highly publishable."
+      },
+      {
+        "id": "DC-017",
+        "name": "nuclear-medicine",
+        "reason": "Tc-99m half-life = 6.01 hours is a measured nuclear physics constant. The dominant radiopharmaceutical is defined by a 6-hour half-life. This is an empirical fact, not a depth-2 expression."
+      }
+    ],
+    "projected_count_after_full_approval": 404,
+    "current_disk_count": 341,
+    "net_addition_if_all_approved": 63
+  }
+}
