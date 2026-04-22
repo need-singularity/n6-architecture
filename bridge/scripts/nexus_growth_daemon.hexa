@@ -338,21 +338,21 @@ fn measure_simple() -> [i64] {
     let discovery_count = count_files("*.jsonl", NEXUS_ROOT + "/discovery")
     // 순서는 DIMENSIONS 와 매칭 (15개)
     let mut m: [i64] = []
-    m = m.push(hexa_scripts)        // performance (proxy: script count)
-    m = m.push(engine_count)         // architecture
-    m = m.push(lens_count)           // lenses
-    m = m.push(blowup_count)         // modules
-    m = m.push(count_file_lines(NEXUS_ROOT + "/harness/lint_log.jsonl"))  // tests
-    m = m.push(count_file_lines(NEXUS_ROOT + "/bt/bt_keywords.jsonl"))    // hypotheses
-    m = m.push(count_files("*.json", NEXUS_ROOT + "/dse"))                // dse
-    m = m.push(count_files("*.hexa", NEXUS_ROOT + "/calc"))               // experiments
-    m = m.push(count_files("*.hexa", NEXUS_ROOT + "/calc"))               // calculators
-    m = m.push(count_file_lines(NEXUS_ROOT + "/convergence/nexus.json"))  // cross_resonance
-    m = m.push(discovery_count)      // knowledge_graph
-    m = m.push(count_files("*.jsonl", NEXUS_ROOT + "/harness"))           // red_team (proxy)
-    m = m.push(atlas_lines)          // atlas
-    m = m.push(count_files("CLAUDE.md", NEXUS_ROOT))                             // documentation
-    m = m.push(growth_entries)       // integration (proxy)
+    m.push(hexa_scripts)        // performance (proxy: script count)
+    m.push(engine_count)         // architecture
+    m.push(lens_count)           // lenses
+    m.push(blowup_count)         // modules
+    m.push(count_file_lines(NEXUS_ROOT + "/harness/lint_log.jsonl"))  // tests
+    m.push(count_file_lines(NEXUS_ROOT + "/bt/bt_keywords.jsonl"))    // hypotheses
+    m.push(count_files("*.json", NEXUS_ROOT + "/dse"))                // dse
+    m.push(count_files("*.hexa", NEXUS_ROOT + "/calc"))               // experiments
+    m.push(count_files("*.hexa", NEXUS_ROOT + "/calc"))               // calculators
+    m.push(count_file_lines(NEXUS_ROOT + "/convergence/nexus.json"))  // cross_resonance
+    m.push(discovery_count)      // knowledge_graph
+    m.push(count_files("*.jsonl", NEXUS_ROOT + "/harness"))           // red_team (proxy)
+    m.push(atlas_lines)          // atlas
+    m.push(count_files("CLAUDE.md", NEXUS_ROOT))                             // documentation
+    m.push(growth_entries)       // integration (proxy)
     return m
 }
 

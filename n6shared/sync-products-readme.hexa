@@ -132,23 +132,23 @@ fn bt_pct_str(sec) {
 fn render_summary_block(sec) {
     let mut parts = []
     // [0] 외계지수 + ceiling
-    parts = parts.push("**🛸" + to_string(get_or(sec, "alien_index", 0)) + "**")
+    parts.push("**🛸" + to_string(get_or(sec, "alien_index", 0)) + "**")
     if get_or(sec, "ceiling", false) == true {
-        parts = parts.push("✅")
+        parts.push("✅")
     }
     // BT
     let bt_count = get_or(sec, "bt_count", 0)
     let pct = bt_pct_str(sec)
     if bt_count != 0 {
         if len(pct) > 0 {
-            parts = parts.push("BT " + to_string(bt_count) + "개 " + pct + "EXACT")
+            parts.push("BT " + to_string(bt_count) + "개 " + pct + "EXACT")
         }
     }
     // summary_extra
     let extra = get_or(sec, "summary_extra", "")
     if type_of(extra) == "string" {
         if len(extra) > 0 {
-            parts = parts.push(extra)
+            parts.push(extra)
         }
     }
     // 산업
@@ -160,7 +160,7 @@ fn render_summary_block(sec) {
                 ind = ind + " (" + idtl + ")"
             }
         }
-        parts = parts.push(ind)
+        parts.push(ind)
     }
     // 실험
     if has_field(sec, "experiment_pct") {
@@ -171,26 +171,26 @@ fn render_summary_block(sec) {
                 exp = exp + " " + edtl
             }
         }
-        parts = parts.push(exp)
+        parts.push(exp)
     }
     // 물리한계
     let pl = get_or(sec, "physics_limit_count", 0)
     if pl != 0 {
-        parts = parts.push("물리한계" + to_string(pl))
+        parts.push("물리한계" + to_string(pl))
     }
     // TP
     if has_field(sec, "tp_count") {
-        parts = parts.push("TP" + to_string(sec["tp_count"]))
+        parts.push("TP" + to_string(sec["tp_count"]))
     }
     // 발견
     let disc = get_or(sec, "discovery_count", 0)
     if disc != 0 {
-        parts = parts.push("발견" + to_string(disc))
+        parts.push("발견" + to_string(disc))
     }
     // Mk
     let mk = get_or(sec, "mk_count", 0)
     if mk != 0 {
-        parts = parts.push("Mk.V")
+        parts.push("Mk.V")
     }
 
     // join with " | "

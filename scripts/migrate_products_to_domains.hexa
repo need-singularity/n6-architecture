@@ -224,7 +224,7 @@ fn build_entry(axis: string, slug: string, sid_list, prod_list) {
     let mut j = 0
     while j < np {
         if j != pi {
-            legacy = legacy.push(prod_list[j])
+            legacy.push(prod_list[j])
         }
         j = j + 1
     }
@@ -243,7 +243,7 @@ fn build_entry(axis: string, slug: string, sid_list, prod_list) {
                 u = u + 1
             }
             if found == false {
-                vers = vers.push(v)
+                vers.push(v)
             }
         }
         k = k + 1
@@ -259,7 +259,7 @@ fn build_entry(axis: string, slug: string, sid_list, prod_list) {
             "name":    to_string(get_or(p, "name", "")),
             "ver":     to_string(get_or(p, "ver", ""))
         }
-        prev = prev.push(entry_prev)
+        prev.push(entry_prev)
         kk = kk + 1
     }
 
@@ -401,11 +401,11 @@ fn main() {
                     bucket_sids[idx]  = bucket_sids[idx].push(sid)
                     bucket_prods[idx] = bucket_prods[idx].push(p)
                 } else {
-                    bucket_keys  = bucket_keys.push(k)
-                    bucket_axes  = bucket_axes.push(axis)
-                    bucket_slugs = bucket_slugs.push(slug)
-                    bucket_sids  = bucket_sids.push([sid])
-                    bucket_prods = bucket_prods.push([p])
+                    bucket_keys.push(k)
+                    bucket_axes.push(axis)
+                    bucket_slugs.push(slug)
+                    bucket_sids.push([sid])
+                    bucket_prods.push([p])
                 }
                 pi = pi + 1
             }
@@ -430,7 +430,7 @@ fn main() {
         let sids = bucket_sids[orig_idx]
         let prods = bucket_prods[orig_idx]
         let entry = build_entry(axis, slug, sids, prods)
-        domains = domains.push(entry)
+        domains.push(entry)
         q = q + 1
     }
 

@@ -76,7 +76,7 @@ fn scan(n_max: i64) -> list {
         let c = spt[2]
         ops = ops + n
         if s * p == n * c {
-            matches = matches.push(n)
+            matches.push(n)
         }
         n = n + 1
     }
