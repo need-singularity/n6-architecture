@@ -40,3 +40,9 @@ lean4-n6/lake-manifest.json
 # Python virtual envs + egg-info (venv 폐기 재추적 방지, ROI#13)
 venv/
 *.egg-info/
+
+# Transient hook command state (per-invocation)
+.hook-commands/
+
+# Infra state symlink → ~/core/nexus/infra_state.json (out-of-repo SSOT)
+infra_state.json
