@@ -1,675 +1,15 @@
 {
-  "generated": "2026-04-16T02:46:47.146254+00:00",
-  "atlas": "/Users/ghost/Dev/nexus/shared/n6/atlas.n6",
-  "total_grade7": 43,
-  "promote_count": 33,
-  "hold_count": 10,
+  "generated": "2026-04-21T18:08:36.946455+00:00",
+  "atlas": "/Users/ghost/Dev/nexus/n6/atlas.n6",
+  "total_grade7": 24,
+  "promote_count": 0,
+  "hold_count": 24,
   "thresholds": {
     "[9]": 3,
     "[10]": 5,
     "[10*]": 7
   },
   "candidates": [
-    {
-      "line": 14349,
-      "type": "@X",
-      "id": "n6-bt-10",
-      "expr": "TWO_STARS bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-10 = TWO_STARS bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 14491,
-      "type": "@X",
-      "id": "n6-bt-81",
-      "expr": "TWO_STARS bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-81 = TWO_STARS bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 14493,
-      "type": "@X",
-      "id": "n6-bt-82",
-      "expr": "TWO_STARS bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-82 = TWO_STARS bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15048,
-      "type": "@X",
-      "id": "n6-bt-355",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-355 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15090,
-      "type": "@X",
-      "id": "n6-bt-381",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-381 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15092,
-      "type": "@X",
-      "id": "n6-bt-382",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-382 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15094,
-      "type": "@X",
-      "id": "n6-bt-383",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-383 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15098,
-      "type": "@X",
-      "id": "n6-bt-385",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-385 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15100,
-      "type": "@X",
-      "id": "n6-bt-386",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-386 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15104,
-      "type": "@X",
-      "id": "n6-bt-388",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-388 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15110,
-      "type": "@X",
-      "id": "n6-bt-391",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-391 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15112,
-      "type": "@X",
-      "id": "n6-bt-392",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-392 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15118,
-      "type": "@X",
-      "id": "n6-bt-395",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-395 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15122,
-      "type": "@X",
-      "id": "n6-bt-397",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-397 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15124,
-      "type": "@X",
-      "id": "n6-bt-398",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-398 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15126,
-      "type": "@X",
-      "id": "n6-bt-399",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-399 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15128,
-      "type": "@X",
-      "id": "n6-bt-400",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-400 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15140,
-      "type": "@X",
-      "id": "n6-bt-406",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-406 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15146,
-      "type": "@X",
-      "id": "n6-bt-409",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-409 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 1,
-        "paper": 0,
-        "experiment": 1,
-        "total": 4
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15248,
-      "type": "@X",
-      "id": "n6-bt-460",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-460 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15250,
-      "type": "@X",
-      "id": "n6-bt-451~460",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-451~460 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15270,
-      "type": "@X",
-      "id": "n6-bt-470",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-470 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15272,
-      "type": "@X",
-      "id": "n6-bt-461~470",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-461~470 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15306,
-      "type": "@X",
-      "id": "n6-bt-487",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-487 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 15308,
-      "type": "@X",
-      "id": "n6-bt-471~487",
-      "expr": "STRUCTURAL bt",
-      "domain": "bt",
-      "raw": "@X n6-bt-471~487 = STRUCTURAL bt :: bt [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 1,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106891,
-      "type": "@L",
-      "id": "hexa_consciousness_axes",
-      "expr": "6",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_axes = 6 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106894,
-      "type": "@L",
-      "id": "hexa_consciousness_phase_count",
-      "expr": "5",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_phase_count = 5 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106897,
-      "type": "@L",
-      "id": "hexa_consciousness_alpha",
-      "expr": "0.16667",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_alpha = 0.16667 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106900,
-      "type": "@L",
-      "id": "hexa_consciousness_cycle_latency_ms",
-      "expr": "4",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_cycle_latency_ms = 4 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106903,
-      "type": "@L",
-      "id": "hexa_consciousness_die_area_mm2",
-      "expr": "36",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_die_area_mm2 = 36 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106906,
-      "type": "@L",
-      "id": "hexa_consciousness_thermal_zones",
-      "expr": "4",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_thermal_zones = 4 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106909,
-      "type": "@L",
-      "id": "hexa_consciousness_trl_avg",
-      "expr": "5",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_trl_avg = 5 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
-    {
-      "line": 106912,
-      "type": "@L",
-      "id": "hexa_consciousness_electrodes_total",
-      "expr": "72",
-      "domain": "consciousness",
-      "raw": "@L hexa_consciousness_electrodes_total = 72 :: consciousness [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 1,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 1,
-        "experiment": 1,
-        "total": 3
-      },
-      "current_grade": "[7]",
-      "target_grade": "[9]",
-      "promote": true
-    },
     {
       "line": 9591,
       "type": "@R",
@@ -682,16 +22,16 @@
         "signal": 0,
         "bt": 1,
         "cross_domain": 0,
-        "paper": 0,
+        "paper": 1,
         "experiment": 0,
-        "total": 1
+        "total": 2
       },
       "current_grade": "[7]",
       "target_grade": "[7]",
       "promote": false
     },
     {
-      "line": 46535,
+      "line": 16576,
       "type": "@R",
       "id": "mc-v9-대조-e",
       "expr": "1.915 z-score",
@@ -702,16 +42,36 @@
         "signal": 0,
         "bt": 0,
         "cross_domain": 0,
-        "paper": 0,
+        "paper": 1,
         "experiment": 0,
-        "total": 0
+        "total": 1
       },
       "current_grade": "[7]",
       "target_grade": "[7]",
       "promote": false
     },
     {
-      "line": 106979,
+      "line": 18003,
+      "type": "@R",
+      "id": "MILL-V3-T4-n6-numerical-coincidence-honest-miss",
+      "expr": "12/5=σ(6)/sopfr(6), 30/13 n=6 cast post-hoc MISS",
+      "domain": "n6atlas",
+      "raw": "@R MILL-V3-T4-n6-numerical-coincidence-honest-miss = 12/5=σ(6)/sopfr(6), 30/13 n=6 cast post-hoc MISS :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 1,
+        "experiment": 0,
+        "total": 1
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 17859,
       "type": "@R",
       "id": "MILL-PX-A3-ym-beta0-rewriting",
       "expr": "beta_0 = sigma(6) - sopfr(6) = 12 - 5 = 7",
@@ -731,27 +91,7 @@
       "promote": false
     },
     {
-      "line": 107123,
-      "type": "@R",
-      "id": "MILL-V3-T4-n6-numerical-coincidence-honest-miss",
-      "expr": "12/5=σ(6)/sopfr(6), 30/13 n=6 cast post-hoc MISS",
-      "domain": "n6atlas",
-      "raw": "@R MILL-V3-T4-n6-numerical-coincidence-honest-miss = 12/5=σ(6)/sopfr(6), 30/13 n=6 cast post-hoc MISS :: n6atlas [7]",
-      "evidence": {
-        "verify": 0,
-        "signal": 0,
-        "bt": 0,
-        "cross_domain": 0,
-        "paper": 0,
-        "experiment": 0,
-        "total": 0
-      },
-      "current_grade": "[7]",
-      "target_grade": "[7]",
-      "promote": false
-    },
-    {
-      "line": 107141,
+      "line": 18021,
       "type": "@R",
       "id": "MILL-V3-T1-enriques-abelian-6fold-structural-link",
       "expr": "Enriques K3-cover ↔ Abelian 6-fold 6 factor 공통",
@@ -771,7 +111,7 @@
       "promote": false
     },
     {
-      "line": 107144,
+      "line": 18024,
       "type": "@R",
       "id": "MILL-V3-T2-hauptmodul-47plus-q-expansion-miss",
       "expr": "T_{47+} q-전개 20 계수 n=6 좌표 매칭 실패",
@@ -791,7 +131,7 @@
       "promote": false
     },
     {
-      "line": 107147,
+      "line": 18027,
       "type": "@R",
       "id": "MILL-V3-T2-umbral-moonshine-A212-new-angle",
       "expr": "Duncan-Frenkel-Rayhaun 2017 Umbral Moonshine 새 각도",
@@ -811,7 +151,7 @@
       "promote": false
     },
     {
-      "line": 107295,
+      "line": 18175,
       "type": "@R",
       "id": "MILL-DFS22-07-doob-talagrand-tau",
       "expr": "Doob L2 maximal const=4=tau + Talagrand T-inequality const=4=tau",
@@ -831,7 +171,7 @@
       "promote": false
     },
     {
-      "line": 107415,
+      "line": 18295,
       "type": "@R",
       "id": "MILL-DFS24-09-plunnecke-6",
       "expr": "Plünnecke k+ℓ=n=6 배가 지수",
@@ -851,12 +191,292 @@
       "promote": false
     },
     {
-      "line": 107507,
+      "line": 18387,
       "type": "@R",
       "id": "MILL-DFS26-04-bernoulli-b6-sign",
       "expr": "B_6 = +1/42 (양수), 6 = 4·1+2 형",
       "domain": "n6atlas",
       "raw": "@R MILL-DFS26-04-bernoulli-b6-sign = B_6 = +1/42 (양수), 6 = 4·1+2 형 :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18444,
+      "type": "@R",
+      "id": "HEXAGRAV-04-casimir-energy-per-m",
+      "expr": "W_lift_mk5 ≈ 9.74 J/kg·m",
+      "domain": "n6atlas",
+      "raw": "@R HEXAGRAV-04-casimir-energy-per-m = W_lift_mk5 ≈ 9.74 J/kg·m :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18492,
+      "type": "@R",
+      "id": "HEXA-CLOAK-07-rcs-cancel",
+      "expr": "RCS 상쇄: ε·μ = 55/6 ≈ σ·τ/(σ-φ)+1",
+      "domain": "sf-ufo",
+      "raw": "@R HEXA-CLOAK-07-rcs-cancel = RCS 상쇄: ε·μ = 55/6 ≈ σ·τ/(σ-φ)+1 :: sf-ufo [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18551,
+      "type": "@R",
+      "id": "ANTIMATTER-01-production-rate",
+      "expr": "N/s = N_0 · σ² = 4.3×10⁹ p̄/s",
+      "domain": "n6atlas",
+      "raw": "@R ANTIMATTER-01-production-rate = N/s = N_0 · σ² = 4.3×10⁹ p̄/s :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18554,
+      "type": "@R",
+      "id": "ANTIMATTER-02-storage-lifetime",
+      "expr": "τ_storage = σ·τ 개월 = 48 개월",
+      "domain": "n6atlas",
+      "raw": "@R ANTIMATTER-02-storage-lifetime = τ_storage = σ·τ 개월 = 48 개월 :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18557,
+      "type": "@R",
+      "id": "ANTIMATTER-03-cost-per-kg",
+      "expr": "C_k = $_0 / σ³ = $3.6×10⁸/kg (Mk.V)",
+      "domain": "n6atlas",
+      "raw": "@R ANTIMATTER-03-cost-per-kg = C_k = $_0 / σ³ = $3.6×10⁸/kg (Mk.V) :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18576,
+      "type": "@R",
+      "id": "ANTIMATTER-09-loss-rate",
+      "expr": "dS/dt = sopfr/σ² = 3.5×10⁻² %/hr",
+      "domain": "n6atlas",
+      "raw": "@R ANTIMATTER-09-loss-rate = dS/dt = sopfr/σ² = 3.5×10⁻² %/hr :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 18624,
+      "type": "@R",
+      "id": "HOVER-CONSUMER-07-consumer-price-gradient",
+      "expr": "C(M) ∝ σ·τ·10^⌈log₁₀(M/M_ref)⌉, hoverboard $4 800",
+      "domain": "n6atlas",
+      "raw": "@R HOVER-CONSUMER-07-consumer-price-gradient = C(M) ∝ σ·τ·10^⌈log₁₀(M/M_ref)⌉, hoverboard $4 800 :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 19171,
+      "type": "@R",
+      "id": "HEXA-GW-04-graviton-mass-bound",
+      "expr": "m_g_HEXA = 1/(σ·J₂·τ·10²²) ≈ 8.68e-26 eV",
+      "domain": "n6atlas",
+      "raw": "@R HEXA-GW-04-graviton-mass-bound = m_g_HEXA = 1/(σ·J₂·τ·10²²) ≈ 8.68e-26 eV :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 19254,
+      "type": "@R",
+      "id": "HOLO-07-Hogan-noise-angle",
+      "expr": "theta_H = 1/(n*tau) = 1/24 rad*s^{1/2}",
+      "domain": "n6atlas",
+      "raw": "@R HOLO-07-Hogan-noise-angle = theta_H = 1/(n*tau) = 1/24 rad*s^{1/2} :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 19830,
+      "type": "@R",
+      "id": "HEXA-TOPO-04-genus-RH-phi",
+      "expr": "g = phi = 2 (deg=tau, g'=0, R=sigma-phi=10)",
+      "domain": "n6atlas",
+      "raw": "@R HEXA-TOPO-04-genus-RH-phi = g = phi = 2 (deg=tau, g'=0, R=sigma-phi=10) :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 19836,
+      "type": "@R",
+      "id": "HEXA-TOPO-06-free-bosonic-toe-holo",
+      "expr": "Pi_free = 26·24·4 = 2496 (bosonic·toe·holo)",
+      "domain": "n6atlas",
+      "raw": "@R HEXA-TOPO-06-free-bosonic-toe-holo = Pi_free = 26·24·4 = 2496 (bosonic·toe·holo) :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 20068,
+      "type": "@R",
+      "id": "COSPART-06-MGUT-toe-string",
+      "expr": "M_GUT = sigma*tau · 10^(J2/phi_E) GeV = 4.8e13 GeV",
+      "domain": "n6atlas",
+      "raw": "@R COSPART-06-MGUT-toe-string = M_GUT = sigma*tau · 10^(J2/phi_E) GeV = 4.8e13 GeV :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 20074,
+      "type": "@R",
+      "id": "COSPART-08-Lambda-cosmological",
+      "expr": "|log10(Lambda/M_Pl^4)| = sigma*sigma − sigma*phi_E + phi = 122",
+      "domain": "n6atlas",
+      "raw": "@R COSPART-08-Lambda-cosmological = |log10(Lambda/M_Pl^4)| = sigma*sigma − sigma*phi_E + phi = 122 :: n6atlas [7]",
+      "evidence": {
+        "verify": 0,
+        "signal": 0,
+        "bt": 0,
+        "cross_domain": 0,
+        "paper": 0,
+        "experiment": 0,
+        "total": 0
+      },
+      "current_grade": "[7]",
+      "target_grade": "[7]",
+      "promote": false
+    },
+    {
+      "line": 20509,
+      "type": "@R",
+      "id": "CRYPTO-08-ratio-CRYPTO-SIM",
+      "expr": "PI_CRYPTO/PI_SIM = 37356090/11197440 ≈ 10/3 = (sigma-phi)/(n/phi)",
+      "domain": "n6atlas",
+      "raw": "@R CRYPTO-08-ratio-CRYPTO-SIM = PI_CRYPTO/PI_SIM = 37356090/11197440 ≈ 10/3 = (sigma-phi)/(n/phi) :: n6atlas [7]",
       "evidence": {
         "verify": 0,
         "signal": 0,
