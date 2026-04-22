@@ -243,8 +243,8 @@ fn run_fuse50() {
         let cur_len = len(top_idx)
         if cur_len < KEEP {
             // append then bubble into position
-            top_idx = top_idx.push(i)
-            top_fit_milli = top_fit_milli.push(fmil)
+            top_idx.push(i)
+            top_fit_milli.push(fmil)
             let mut j = len(top_idx) - 1
             while j > 0 {
                 let prev = j - 1
@@ -337,8 +337,8 @@ fn run_fuse50() {
             pi = pi + 1
         }
         if !found {
-            pair_keys = pair_keys.push(pair_name)
-            pair_counts = pair_counts.push(1)
+            pair_keys.push(pair_name)
+            pair_counts.push(1)
         }
 
         // entries JSON 누적
@@ -388,8 +388,8 @@ fn run_fuse50() {
     let mut pjcnts: list = []
     let mut k: i64 = 0
     while k < len(pair_keys) {
-        pjkeys = pjkeys.push(pair_keys[k])
-        pjcnts = pjcnts.push(pair_counts[k])
+        pjkeys.push(pair_keys[k])
+        pjcnts.push(pair_counts[k])
         k = k + 1
     }
     // selection-sort desc by count
