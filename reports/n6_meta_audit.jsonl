@@ -3,3 +3,4 @@
 {"ts":"2026-04-23T04:44:14Z","engine_version":"0.13.0","head":"c1050ec0e66c8e6ad8af15175d380c65d8f00377","health":97,"proof":{"total":24,"green":23,"red":1},"selftest":{"pass":24,"fail":0},"blockers":{"high":0,"med":0,"low":0}}
 {"ts":"2026-04-23T04:49:50Z","engine_version":"0.14.0","head":"f43d10fcfb09a6de258b61956092de045aefb4f9","health":100,"proof":{"total":24,"green":24,"red":0},"selftest":{"pass":24,"fail":0},"blockers":{"high":0,"med":0,"low":0}}
 {"ts":"2026-04-23T04:55:40Z","engine_version":"0.15.0","head":"f9856fa4a08c13c522ba65a97f8bd04dbdb978c0","health":100,"proof":{"total":25,"green":25,"red":0},"selftest":{"pass":25,"fail":0},"blockers":{"high":0,"med":0,"low":0}}
+{"ts":"2026-04-23T05:25:15Z","engine_version":"0.16.0","head":"7ed8c6ad84734b042a22c7524e0e3a329f2e530d","health":100,"proof":{"total":26,"green":26,"red":0,"red_claims":[]},"selftest":{"pass":25,"fail":0,"fail_scanners":[]},"blockers":{"high":0,"med":0,"low":0}}

@@ -1017,11 +1017,21 @@ append_audit_trail() {
   b_high=$(jq -r '.summary.high // 0' reports/n6_blockers.json 2>/dev/null)
   b_med=$(jq -r '.summary.med // 0'   reports/n6_blockers.json 2>/dev/null)
   b_low=$(jq -r '.summary.low // 0'   reports/n6_blockers.json 2>/dev/null)
+  # Phase 16 — identity of failing claims/scanners (not just counts).
+  # Makes the audit jsonl self-diagnostic instead of merely self-counting.
+  local red_claims fail_scanners
+  red_claims=$(jq -c '[.claims[]? | select(.status != "green") | .file] | sort' reports/n6_proof_obligations.json 2>/dev/null)
+  fail_scanners=$(jq -c '[.verdicts[]? | select(.verdict != "PASS") | .scanner] | sort' reports/n6_selftest.json 2>/dev/null)
+  red_claims="${red_claims:-[]}"
+  fail_scanners="${fail_scanners:-[]}"
   local line
-  line=$(printf '{"ts":"%s","engine_version":"%s","head":"%s","health":%s,"proof":{"total":%s,"green":%s,"red":%s},"selftest":{"pass":%s,"fail":%s},"blockers":{"high":%s,"med":%s,"low":%s}}\n' \
-    "$(ts)" "${ENGINE_VERSION}" "$(head_sha)" "${score:-0}" "${p_total:-0}" "${p_green:-0}" "${p_red:-0}" "${s_pass:-0}" "${s_fail:-0}" "${b_high:-0}" "${b_med:-0}" "${b_low:-0}")
+  line=$(printf '{"ts":"%s","engine_version":"%s","head":"%s","health":%s,"proof":{"total":%s,"green":%s,"red":%s,"red_claims":%s},"selftest":{"pass":%s,"fail":%s,"fail_scanners":%s},"blockers":{"high":%s,"med":%s,"low":%s}}\n' \
+    "$(ts)" "${ENGINE_VERSION}" "$(head_sha)" "${score:-0}" \
+    "${p_total:-0}" "${p_green:-0}" "${p_red:-0}" "$red_claims" \
+    "${s_pass:-0}" "${s_fail:-0}" "$fail_scanners" \
+    "${b_high:-0}" "${b_med:-0}" "${b_low:-0}")
   echo "$line" >>"$out"
-  echo "OK: audit += $(echo "$line" | jq -c '{ts,engine_version,health}')"
+  echo "OK: audit += $(echo "$line" | jq -c '{ts,engine_version,health,red_claims:.proof.red_claims,fail_scanners:.selftest.fail_scanners}')"
 }
 
 # ────────────────────────────────────────────────────────────
@@ -1036,6 +1046,10 @@ append_audit_trail() {
 # Phase 15 — trail integrity (ts 비감소 + engine_version 비다운그레이드).
 #   같은 함수(scan_audit_summary) 안에서 trail_integrity 필드 추가.
 #   claim: scanners/26_audit_trail_integrity.claim.json (두 카운트 == 0)
+# Phase 16 — failing identity + persistent failures.
+#   append_audit_trail 이 .proof.red_claims / .selftest.fail_scanners 배열 기록.
+#   scan_audit_summary 가 최근 5개 entry 를 훑어 3회 이상 등장한 id 를 persistent
+#   failure 로 flag. claim: scanners/27_no_persistent_failures.claim.json.
 # ────────────────────────────────────────────────────────────
 # ────────────────────────────────────────────────────────────
 # Phase 14 — gate alignment
@@ -1099,6 +1113,7 @@ scan_audit_summary() {
   local entries=0
   local last_ts="null" last_ver="null" last_head="null" last_health="0"
   local last_proof_red="0" last_selftest_fail="0"
+  local last_red_claims="[]" last_fail_scanners="[]"
   local h_min=100 h_max=0 h_avg=0
   local any_red_proof="false" any_selftest_fail="false"
   local ver_match="false" head_match="false"
@@ -1114,6 +1129,9 @@ scan_audit_summary() {
     last_health=$(echo "$last_line" | jq -r '.health // 0')
     last_proof_red=$(echo "$last_line" | jq -r '.proof.red // 0')
     last_selftest_fail=$(echo "$last_line" | jq -r '.selftest.fail // 0')
+    # Phase 16 — carry identity of failing items through to summary.
+    last_red_claims=$(echo "$last_line" | jq -c '.proof.red_claims // []')
+    last_fail_scanners=$(echo "$last_line" | jq -c '.selftest.fail_scanners // []')
     # aggregates across all lines (historical observability — NOT gating)
     local aggs
     aggs=$(jq -s '
@@ -1137,7 +1155,18 @@ scan_audit_summary() {
         any_red_proof: (any(.[]; (.proof.red // 0) > 0)),
         any_selftest_fail: (any(.[]; (.selftest.fail // 0) > 0)),
         ts_regressions: ([range(1; length) as $i | select(($all[$i].ts // "") < ($all[$i-1].ts // ""))] | length),
-        version_downgrades: ([range(1; length) as $i | select(cmp_semver($all[$i].engine_version // "0"; $all[$i-1].engine_version // "0") < 0)] | length)
+        version_downgrades: ([range(1; length) as $i | select(cmp_semver($all[$i].engine_version // "0"; $all[$i-1].engine_version // "0") < 0)] | length),
+        persistent_red_claims: (
+          # Phase 16 — claim ids that appear as red in the most recent
+          # K=5 entries, AND have never gone green in that window.
+          # Signals an unresolved systemic failure vs a transient flake.
+          ([.[-5:][] | (.proof.red_claims // [])] | add // []) as $recent |
+          ($recent | group_by(.) | map(select(length >= 3) | .[0]))
+        ),
+        persistent_fail_scanners: (
+          ([.[-5:][] | (.selftest.fail_scanners // [])] | add // []) as $recent |
+          ($recent | group_by(.) | map(select(length >= 3) | .[0]))
+        )
       }
     ' "$src" 2>/dev/null)
     h_min=$(echo "$aggs" | jq -r '.h_min')
@@ -1147,12 +1176,16 @@ scan_audit_summary() {
     any_selftest_fail=$(echo "$aggs" | jq -r '.any_selftest_fail')
     ts_regressions=$(echo "$aggs" | jq -r '.ts_regressions // 0')
     version_downgrades=$(echo "$aggs" | jq -r '.version_downgrades // 0')
+    persistent_red_claims=$(echo "$aggs" | jq -c '.persistent_red_claims // []')
+    persistent_fail_scanners=$(echo "$aggs" | jq -c '.persistent_fail_scanners // []')
     # continuity
     [ "$last_ver" = "${ENGINE_VERSION}" ] && ver_match="true"
     [ "$last_head" = "$(head_sha)" ] && head_match="true"
   fi
   : "${ts_regressions:=0}"
   : "${version_downgrades:=0}"
+  : "${persistent_red_claims:=[]}"
+  : "${persistent_fail_scanners:=[]}"
 
   cat >"$out" <<JEOF
 {
@@ -1167,7 +1200,9 @@ scan_audit_summary() {
     "head": $([ "$last_head" = "null" ] && echo null || printf '"%s"' "$last_head"),
     "health": ${last_health:-0},
     "proof_red": ${last_proof_red:-0},
-    "selftest_fail": ${last_selftest_fail:-0}
+    "selftest_fail": ${last_selftest_fail:-0},
+    "red_claims": $last_red_claims,
+    "fail_scanners": $last_fail_scanners
   },
   "health": {
     "min": $h_min,
@@ -1181,6 +1216,11 @@ scan_audit_summary() {
   "trail_integrity": {
     "ts_regressions": $ts_regressions,
     "version_downgrades": $version_downgrades
+  },
+  "persistent_failures": {
+    "red_claims_last_5": $persistent_red_claims,
+    "fail_scanners_last_5": $persistent_fail_scanners,
+    "threshold": "appears >=3 times in last 5 entries"
   },
   "continuity": {
     "last_engine_version_matches_current": $ver_match,

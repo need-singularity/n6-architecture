@@ -1,16 +1,18 @@
 {
   "schema": "n6-architecture/n6_audit_summary/1",
-  "ts": "2026-04-23T05:18:13Z",
-  "engine_version": "0.15.0",
+  "ts": "2026-04-23T05:27:49Z",
+  "engine_version": "0.16.0",
   "source": "reports/n6_meta_audit.jsonl",
-  "entries_total": 5,
+  "entries_total": 6,
   "last_entry": {
-    "ts": "2026-04-23T04:55:40Z",
-    "engine_version": "0.15.0",
-    "head": "f9856fa4a08c13c522ba65a97f8bd04dbdb978c0",
+    "ts": "2026-04-23T05:25:15Z",
+    "engine_version": "0.16.0",
+    "head": "7ed8c6ad84734b042a22c7524e0e3a329f2e530d",
     "health": 100,
     "proof_red": 0,
-    "selftest_fail": 0
+    "selftest_fail": 0,
+    "red_claims": [],
+    "fail_scanners": []
   },
   "health": {
     "min": 97,
@@ -25,9 +27,14 @@
     "ts_regressions": 0,
     "version_downgrades": 0
   },
+  "persistent_failures": {
+    "red_claims_last_5": [],
+    "fail_scanners_last_5": [],
+    "threshold": "appears >=3 times in last 5 entries"
+  },
   "continuity": {
     "last_engine_version_matches_current": true,
-    "last_head_matches_current": false
+    "last_head_matches_current": true
   },
   "status": "GREEN"
 }

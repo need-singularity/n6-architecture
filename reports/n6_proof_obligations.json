@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-23T05:21:53Z",
-  "total": 26,
-  "green": 26,
+  "ts": "2026-04-23T05:28:15Z",
+  "total": 27,
+  "green": 27,
   "red": 0,
   "status": "GREEN",
   "claims": [
@@ -183,6 +183,13 @@
     },
     {
       "file": "26_audit_trail_integrity.claim.json",
+      "type": "self_consistency",
+      "status": "green",
+      "result": "1",
+      "expected": "1"
+    },
+    {
+      "file": "27_no_persistent_failures.claim.json",
       "type": "self_consistency",
       "status": "green",
       "result": "1",

@@ -1,0 +1,11 @@
+{
+  "id": "audit_summary.no_persistent_failures",
+  "type": "self_consistency",
+  "description": "Phase 16 scan_audit_summary persistent_failures: no claim id may appear red in >=3 of the last 5 audit entries, and no scanner may appear fail in >=3 of the last 5. Catches systemic unresolved failures (a flaky test that flips green once doesn't trip; genuinely broken scanners do).",
+  "actual_cmd": "bash -c '[ -f reports/n6_audit_summary.json ] && jq -r \"if ((.persistent_failures.red_claims_last_5 | length) == 0) and ((.persistent_failures.fail_scanners_last_5 | length) == 0) then 1 else 0 end\" reports/n6_audit_summary.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-16-failure-identity"
+}

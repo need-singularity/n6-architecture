@@ -1,7 +1,7 @@
 {
   "schema": "n6-architecture/n6_blockers/1",
-  "ts": "2026-04-23T05:16:13Z",
-  "head": "ed23f45ac74b8801cad515c3560d48d010179680",
+  "ts": "2026-04-23T05:25:40Z",
+  "head": "7ed8c6ad84734b042a22c7524e0e3a329f2e530d",
   "inputs": {
     "atlas_n6_bytes": 1503957,
     "atlas_signals_n6_bytes": 289669,

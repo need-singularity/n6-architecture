@@ -1,13 +1,13 @@
 {
   "schema": "n6-architecture/n6_engine_integrity/1",
-  "ts": "2026-04-23T05:21:59Z",
-  "engine_version": "0.15.0",
+  "ts": "2026-04-23T05:27:48Z",
+  "engine_version": "0.16.0",
   "checks": {
-    "phases_live_declared": 15,
-    "phases_live_in_source": 15,
+    "phases_live_declared": 16,
+    "phases_live_in_source": 16,
     "scanner_dispatch_missing": 0,
-    "claims_declared": 26,
-    "claims_actual": 26
+    "claims_declared": 27,
+    "claims_actual": 27
   },
   "drift_count": 0,
   "drifts": [],
