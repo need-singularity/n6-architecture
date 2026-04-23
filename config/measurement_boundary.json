@@ -1,0 +1,50 @@
+{
+  "_doc": "Measurement boundary — atlas constants outside functor F's algebraic image. Declarative companion to config/invariants.json. Axis D from R24+27 witness closure roadmap.",
+  "schema": "n6-architecture/measurement_boundary/1",
+  "declared_round": "R24+30",
+  "declared_ts": "2026-04-24T10:40:00Z",
+  "status": "declarative_not_yet_enforced",
+
+  "boundary_principle": {
+    "F_scope": "F : C_atlas_algebraic → C_engine preserves foundation atoms + semiring derivations + transcendental approximations",
+    "out_of_scope": "pure empirical measurements — values obtained from physical experiment or statistical threshold, not derived from foundation",
+    "reason": "F is a structure-preserving map. Measurement inputs are data, not structure. Including them would make F a data adapter, breaking the faithful functor property."
+  },
+
+  "measurement_atoms": {
+    "entropy_bound": {
+      "value": 0.998,
+      "atlas_ref": "atlas.n6 @L entropy_bound :: consciousness",
+      "nature": "near-1 empirical limit",
+      "foundation_derivation_attempts": "none found — not expressible as foundation-atom semiring combination within reasonable error tolerance",
+      "handling": "external data adapter required for engine consumption; F image excludes this atom by design"
+    },
+    "alpha_coupling": {
+      "value": 0.014,
+      "atlas_ref": "atlas.n6 @L alpha_coupling :: consciousness",
+      "nature": "transcendental approximation",
+      "foundation_derivation_attempts": "ln(2) / 2^5.5 ≈ 0.0153 (9.4% error, R24+17) — derivable via transcendental operation with bounded error, borderline case",
+      "classification_decision": "INCLUDED in F's transcendental tier if approximation tolerance accepted; EXCLUDED if exact-equality required",
+      "current_stance": "borderline — counted as transcendental-approximate in R24+17 taxonomy, but strictness level not yet formally gated"
+    }
+  },
+
+  "boundary_policy": {
+    "strict_mode": "F covers only exact algebraic derivations. alpha_coupling excluded, entropy_bound excluded.",
+    "lenient_mode": "F covers exact + transcendental within ~10% error. alpha_coupling included, entropy_bound excluded.",
+    "default_stance": "lenient (per R24+17 taxonomy). Explicit policy can be set via this file if future enforcement requires choice.",
+    "policy_gate_future": "A scanner could read .default_stance and enforce matching exclusion behavior in P37/P39/etc."
+  },
+
+  "adapter_design_notes": {
+    "if_engine_needs_measurement_data": "Do NOT extend F to cover measurement atoms. Instead add a separate data adapter (e.g. tool/_n6_measurement_adapter) that reads current measured values from a trusted source and writes them into a dedicated reports/ location. Engine claims can then consume those reports.",
+    "separation_rationale": "Conflating derivation and measurement in F would break the 'same HEAD → same verdict' invariant (P27 claim cmd purity) since measurement values can change between runs without code change.",
+    "not_implemented": "No adapter currently exists. Engine's content scanners already handle numeric claims via config files — measurement integration would follow that pattern."
+  },
+
+  "enforcement_future": {
+    "P45_candidate": "measurement_boundary schema presence (analogous to P36/P42)",
+    "P46_candidate": "boundary_policy enforcement — if strict_mode, alpha_coupling tagged 'excluded' in invariants.json tier_coverage.consciousness_IIT",
+    "note": "Not yet a gate. Axis D from R24+27 witness closure completed in document form."
+  }
+}
