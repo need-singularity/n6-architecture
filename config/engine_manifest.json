@@ -2,7 +2,7 @@
   "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
   "engine": {
     "name": "n6-architecture/meta-engine",
-    "version": "0.12.0",
+    "version": "0.13.0",
     "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
     "dispatcher": "bin/n6_meta"
   },
@@ -18,7 +18,8 @@
     {"id": "P9",  "title": "cross-scan invariants",             "state": "live"},
     {"id": "P10", "title": "scanner idempotence",               "state": "live"},
     {"id": "P11", "title": "engine manifest + version stamping", "state": "live"},
-    {"id": "P12", "title": "engine self-integrity + audit trail",  "state": "live"}
+    {"id": "P12", "title": "engine self-integrity + audit trail",  "state": "live"},
+    {"id": "P13", "title": "audit trail consumer + continuity claim", "state": "live"}
   ],
   "scanner_registry": {
     "time_invariant": [
@@ -31,7 +32,7 @@
     ],
     "meta": [
       "gap", "propose", "promote", "invariants", "idempotence",
-      "manifest", "schemas", "integrity", "audit",
+      "manifest", "schemas", "integrity", "audit", "audit-summary",
       "proof", "doctor", "health", "selftest"
     ]
   },
@@ -41,7 +42,7 @@
     "papers", "monte_carlo", "causal", "citations", "nexus_dep",
     "loop_rules", "experiments", "falsification", "gap", "propose",
     "promote", "invariants", "manifest", "schemas", "integrity",
-    "proof", "doctor", "trend", "audit"
+    "proof", "doctor", "trend", "audit", "audit-summary"
   ],
   "pre_commit_hard_gates": [
     "falsification.critical_alarm == false"

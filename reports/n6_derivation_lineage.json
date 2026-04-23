@@ -1,6 +1,6 @@
 {
   "schema": "n6-architecture/n6_derivation_lineage/1",
-  "ts": "2026-04-23T04:24:44Z",
+  "ts": "2026-04-23T04:47:02Z",
   "counters": {
     "product_json_total": 3,
     "with_derivation_chain": 0,

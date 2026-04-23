@@ -999,6 +999,91 @@ append_audit_trail() {
 }
 
 # ────────────────────────────────────────────────────────────
+# Phase 13 — audit trail consumer + continuity
+#   scan_audit_summary():
+#     reports/n6_meta_audit.jsonl 를 읽어 집계/경향 요약 emit.
+#     - entries_total, last entry (ts/engine_version/head)
+#     - health min/max/avg, any_red_proof, any_selftest_fail
+#     - last_engine_version_matches_current (continuity claim)
+#     - last_entry_is_current_head (optional — true iff this run's head matches last entry's head)
+#   consumer claim 은 scanners/24_audit_summary_continuity.claim.json 로 fix.
+# ────────────────────────────────────────────────────────────
+scan_audit_summary() {
+  local src="reports/n6_meta_audit.jsonl"
+  local out="reports/n6_audit_summary.json"
+  local entries=0
+  local last_ts="null" last_ver="null" last_head="null" last_health="0"
+  local last_proof_red="0" last_selftest_fail="0"
+  local h_min=100 h_max=0 h_avg=0
+  local any_red_proof="false" any_selftest_fail="false"
+  local ver_match="false" head_match="false"
+
+  if [ -s "$src" ]; then
+    entries=$(wc -l < "$src" | tr -d ' ')
+    # last entry
+    local last_line
+    last_line=$(tail -1 "$src")
+    last_ts=$(echo "$last_line" | jq -r '.ts // empty')
+    last_ver=$(echo "$last_line" | jq -r '.engine_version // empty')
+    last_head=$(echo "$last_line" | jq -r '.head // empty')
+    last_health=$(echo "$last_line" | jq -r '.health // 0')
+    last_proof_red=$(echo "$last_line" | jq -r '.proof.red // 0')
+    last_selftest_fail=$(echo "$last_line" | jq -r '.selftest.fail // 0')
+    # aggregates across all lines (historical observability — NOT gating)
+    local aggs
+    aggs=$(jq -s '{
+      h_min: (map(.health // 0) | min // 0),
+      h_max: (map(.health // 0) | max // 0),
+      h_avg: ((map(.health // 0) | add // 0) / (length | if . == 0 then 1 else . end) | floor),
+      any_red_proof: (any(.[]; (.proof.red // 0) > 0)),
+      any_selftest_fail: (any(.[]; (.selftest.fail // 0) > 0))
+    }' "$src" 2>/dev/null)
+    h_min=$(echo "$aggs" | jq -r '.h_min')
+    h_max=$(echo "$aggs" | jq -r '.h_max')
+    h_avg=$(echo "$aggs" | jq -r '.h_avg')
+    any_red_proof=$(echo "$aggs" | jq -r '.any_red_proof')
+    any_selftest_fail=$(echo "$aggs" | jq -r '.any_selftest_fail')
+    # continuity
+    [ "$last_ver" = "${ENGINE_VERSION}" ] && ver_match="true"
+    [ "$last_head" = "$(head_sha)" ] && head_match="true"
+  fi
+
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_audit_summary/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "source": "$src",
+  "entries_total": $entries,
+  "last_entry": {
+    "ts": $([ "$last_ts" = "null" ] && echo null || printf '"%s"' "$last_ts"),
+    "engine_version": $([ "$last_ver" = "null" ] && echo null || printf '"%s"' "$last_ver"),
+    "head": $([ "$last_head" = "null" ] && echo null || printf '"%s"' "$last_head"),
+    "health": ${last_health:-0},
+    "proof_red": ${last_proof_red:-0},
+    "selftest_fail": ${last_selftest_fail:-0}
+  },
+  "health": {
+    "min": $h_min,
+    "max": $h_max,
+    "avg": $h_avg
+  },
+  "historical": {
+    "any_red_proof_ever": $any_red_proof,
+    "any_selftest_fail_ever": $any_selftest_fail
+  },
+  "continuity": {
+    "last_engine_version_matches_current": $ver_match,
+    "last_head_matches_current": $head_match
+  },
+  "status": "$([ "$ver_match" = "true" ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (entries=$entries, health_avg=$h_avg)"
+}
+
+# ────────────────────────────────────────────────────────────
 # Phase 11 — engine manifest + schema audit
 #   scan_manifest():  emit live summary pinned to config/engine_manifest.json
 #   scan_schemas():   audit every reports/n6_*.json for a well-formed
@@ -1495,6 +1580,9 @@ continuous_scan() {
   scan_trend >/dev/null 2>&1 || true
   # audit trail: one line per continuous_scan run
   append_audit_trail >/dev/null 2>&1 || true
+  # Phase 13 — audit summary MUST come after append_audit_trail so the
+  # just-appended entry is reflected in entries_total and last_entry.
+  scan_audit_summary >/dev/null 2>&1 || true
   # history archive
   local today=$(date -u +%Y-%m-%d)
   mkdir -p "reports/history/$today"
@@ -1515,7 +1603,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_audit_summary scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -1567,6 +1655,7 @@ case "${1:-}" in
   schemas|schema-audit)  scan_schemas ;;
   integrity|engine-integrity)  scan_engine_integrity ;;
   audit|audit-trail)  append_audit_trail ;;
+  audit-summary|asum)  scan_audit_summary ;;
   trend|regression)  scan_trend ;;
   proof)           run_proof_obligations ;;
   continuous-scan|continuous_scan|continuous)  continuous_scan ;;
@@ -1581,7 +1670,7 @@ usage: bash tool/_n6_lib <sub>
   sub ∈ blockers | roi | arithmetic | derivation | atlas | domains | papers
       | monte_carlo | causal | citations | nexus_dep | loop_rules
       | experiments | falsification | gap | propose | promote | invariants
-      | idempotence | manifest | schemas | integrity | audit | trend | proof
+      | idempotence | manifest | schemas | integrity | audit | audit-summary | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2

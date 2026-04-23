@@ -1,0 +1,11 @@
+{
+  "id": "audit_summary.continuity_green",
+  "type": "self_consistency",
+  "description": "Phase 13 scan_audit_summary: audit trail consumer must emit a GREEN summary — entries_total >= 1 and last_entry.engine_version matches current manifest engine.version (continuity). Historical red/fail entries are observability only, not gating.",
+  "actual_cmd": "bash -c '[ -f reports/n6_audit_summary.json ] && jq -r \"if (.entries_total >= 1) and (.continuity.last_engine_version_matches_current == true) then 1 else 0 end\" reports/n6_audit_summary.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-13-audit-consumer"
+}

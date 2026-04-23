@@ -1,0 +1,29 @@
+{
+  "schema": "n6-architecture/n6_audit_summary/1",
+  "ts": "2026-04-23T04:47:33Z",
+  "engine_version": "0.13.0",
+  "source": "reports/n6_meta_audit.jsonl",
+  "entries_total": 3,
+  "last_entry": {
+    "ts": "2026-04-23T04:44:14Z",
+    "engine_version": "0.13.0",
+    "head": "c1050ec0e66c8e6ad8af15175d380c65d8f00377",
+    "health": 97,
+    "proof_red": 1,
+    "selftest_fail": 0
+  },
+  "health": {
+    "min": 97,
+    "max": 100,
+    "avg": 99
+  },
+  "historical": {
+    "any_red_proof_ever": true,
+    "any_selftest_fail_ever": false
+  },
+  "continuity": {
+    "last_engine_version_matches_current": true,
+    "last_head_matches_current": true
+  },
+  "status": "GREEN"
+}
