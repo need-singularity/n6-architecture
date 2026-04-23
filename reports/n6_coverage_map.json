@@ -1,0 +1,89 @@
+{
+  "schema": "n6-architecture/n6_coverage_map/1",
+  "ts": "2026-04-23T15:12:23Z",
+  "engine_version": "0.24.0",
+  "must_observe_count": 12,
+  "observed_count": 9,
+  "unobserved_count": 3,
+  "unobserved": [
+    "theory",
+    "bridge",
+    "calc"
+  ],
+  "dirs": [
+    {
+      "dir": "atlas",
+      "references": 21,
+      "files": 3,
+      "status": "observed"
+    },
+    {
+      "dir": "engine",
+      "references": 15,
+      "files": 19,
+      "status": "observed"
+    },
+    {
+      "dir": "scanners",
+      "references": 27,
+      "files": 34,
+      "status": "observed"
+    },
+    {
+      "dir": "tool",
+      "references": 17,
+      "files": 18,
+      "status": "observed"
+    },
+    {
+      "dir": "config",
+      "references": 17,
+      "files": 4,
+      "status": "observed"
+    },
+    {
+      "dir": "domains",
+      "references": 26,
+      "files": 524,
+      "status": "observed"
+    },
+    {
+      "dir": "papers",
+      "references": 20,
+      "files": 471,
+      "status": "observed"
+    },
+    {
+      "dir": "techniques",
+      "references": 13,
+      "files": 242,
+      "status": "observed"
+    },
+    {
+      "dir": "experiments",
+      "references": 11,
+      "files": 6818,
+      "status": "observed"
+    },
+    {
+      "dir": "theory",
+      "references": 0,
+      "files": 275,
+      "status": "unobserved"
+    },
+    {
+      "dir": "bridge",
+      "references": 0,
+      "files": 777,
+      "status": "unobserved"
+    },
+    {
+      "dir": "calc",
+      "references": 0,
+      "files": 1,
+      "status": "unobserved"
+    }
+  ],
+  "note": "Observe-only (P24). Static proxy: a dir is 'observed' iff its bare name appears as a word in tool/_n6_lib. references=0 means no scan function mentions the dir, so content drift there goes unnoticed. Not a semantic coverage check — only name-reference presence.",
+  "status": "GREEN"
+}

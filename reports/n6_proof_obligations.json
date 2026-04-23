@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-23T14:04:16Z",
-  "total": 33,
-  "green": 33,
+  "ts": "2026-04-23T15:13:09Z",
+  "total": 34,
+  "green": 34,
   "red": 0,
   "status": "GREEN",
   "claims": [
@@ -232,6 +232,13 @@
     },
     {
       "file": "33_claim_effectiveness_observed.claim.json",
+      "type": "self_consistency",
+      "status": "green",
+      "result": "1",
+      "expected": "1"
+    },
+    {
+      "file": "34_coverage_map_observed.claim.json",
       "type": "self_consistency",
       "status": "green",
       "result": "1",

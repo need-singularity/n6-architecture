@@ -1227,6 +1227,64 @@ JEOF
   echo "OK: $out  (claims=$claims_total silent=$silent_count entries=$total_entries)"
 }
 
+# ────────────────────────────────────────────────────────────
+# Phase 24 — reverse coverage map (observe-only, dual of P18).
+#   P18 이 "dispatcher → scanner" orphan (선언됐지만 연결 안 된 scanner) 을
+#   잡았다면, 이번엔 그 역 — 어떤 scanner 도 읽지 않는 canonical 소스 디렉토리
+#   (repo 에는 있지만 어떤 scan 함수 본문에서도 이름조차 언급되지 않는 dir).
+#   이런 dir 은 내용이 drift 해도 meta-engine 이 알아차리지 못한다.
+#   Observe-only — 지금은 unobserved_count 만 emit 하고 gate 하지 않는다.
+#   실질적 커버리지(의미 기반)가 아닌 "이름 참조 존재 여부"만 본다; 정적 proxy.
+#   claim: scanners/34_coverage_map_observed.claim.json
+# ────────────────────────────────────────────────────────────
+scan_coverage_map() {
+  local out="reports/n6_coverage_map.json"
+  local must_observe=(atlas engine scanners tool config domains papers techniques experiments theory bridge calc)
+  local total=${#must_observe[@]}
+  local observed_count=0
+  local unobserved=""
+  local entries=""
+  local first=1
+  # Reference source = tool/_n6_lib with scan_coverage_map's own body
+  # stripped (its must_observe array mentions every dir by definition).
+  local corpus
+  corpus=$(awk '/^scan_coverage_map\(\) \{/{skip=1} skip && /^\}$/{skip=0; next} !skip' tool/_n6_lib)
+  for d in "${must_observe[@]}"; do
+    [ -d "$d" ] || continue
+    local refs file_count st
+    refs=$(printf '%s\n' "$corpus" | grep -cw "$d" 2>/dev/null || true)
+    file_count=$(find "$d" -type f 2>/dev/null | wc -l | tr -d ' ')
+    if [ "${refs:-0}" -gt 0 ]; then
+      observed_count=$((observed_count+1)); st="observed"
+    else
+      unobserved="${unobserved}${d} "; st="unobserved"
+    fi
+    [ $first -eq 0 ] && entries="${entries},"
+    entries="${entries}{\"dir\":\"${d}\",\"references\":${refs:-0},\"files\":${file_count},\"status\":\"${st}\"}"
+    first=0
+  done
+  local unobserved_count=$((total - observed_count))
+  local unobserved_json
+  unobserved_json=$(echo "$unobserved" | tr ' ' '\n' | grep -v '^$' | jq -R -s -c 'split("\n") | map(select(length>0))')
+  unobserved_json="${unobserved_json:-[]}"
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_coverage_map/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "must_observe_count": $total,
+  "observed_count": $observed_count,
+  "unobserved_count": $unobserved_count,
+  "unobserved": $unobserved_json,
+  "dirs": [$entries],
+  "note": "Observe-only (P24). Static proxy: a dir is 'observed' iff its bare name appears as a word in tool/_n6_lib. references=0 means no scan function mentions the dir, so content drift there goes unnoticed. Not a semantic coverage check — only name-reference presence.",
+  "status": "GREEN"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (observed=$observed_count/$total unobserved=$unobserved_count)"
+}
+
 append_audit_trail() {
   local out="reports/n6_meta_audit.jsonl"
   local score
@@ -2028,6 +2086,8 @@ continuous_scan() {
   # Phase 23 — claim effectiveness (observe-only). Must come after audit
   # trail is written so this run's red_claims are included in the window.
   scan_claim_effectiveness >/dev/null 2>&1 || true
+  # Phase 24 — reverse coverage map (observe-only).
+  scan_coverage_map >/dev/null 2>&1 || true
   # history archive
   local today=$(date -u +%Y-%m-%d)
   mkdir -p "reports/history/$today"
@@ -2048,7 +2108,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_coverage_map scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -2105,6 +2165,7 @@ case "${1:-}" in
   audit|audit-trail)  append_audit_trail ;;
   audit-summary|asum)  scan_audit_summary ;;
   claim-effectiveness|effectiveness)  scan_claim_effectiveness ;;
+  coverage-map|coverage)  scan_coverage_map ;;
   gate-alignment|gates)  scan_gate_alignment ;;
   claim-schema|claims)  scan_claim_schema ;;
   trend|regression)  scan_trend ;;
@@ -2123,7 +2184,7 @@ usage: bash tool/_n6_lib <sub>
       | experiments | falsification | gap | propose | promote | invariants
       | idempotence | manifest | schemas | integrity | engine-hash | emitter-registry
       | audit | audit-summary | audit-retention | claim-effectiveness
-      | gate-alignment | claim-schema | trend | proof
+      | coverage-map | gate-alignment | claim-schema | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2

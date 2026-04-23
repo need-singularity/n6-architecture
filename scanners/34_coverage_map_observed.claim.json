@@ -1,0 +1,11 @@
+{
+  "id": "coverage_map.observer_present",
+  "type": "self_consistency",
+  "description": "Phase 24 scan_coverage_map: reports/n6_coverage_map.json must exist with status=GREEN. Reverse of P18 — checks that every canonical source directory (atlas/engine/scanners/tool/config/domains/papers/techniques/experiments/theory/bridge/calc) is referenced by at least one scan function in tool/_n6_lib. A dir with references=0 is 'unobserved' — content drift there goes unnoticed. Static name-proxy only (not semantic coverage); observe-only in P24. A future phase may gate on unobserved_count once each currently-unobserved dir is either scanned or explicitly allowlisted.",
+  "actual_cmd": "bash -c '[ -f reports/n6_coverage_map.json ] && jq -r \"if .status == \\\"GREEN\\\" then 1 else 0 end\" reports/n6_coverage_map.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-24-coverage-map"
+}
