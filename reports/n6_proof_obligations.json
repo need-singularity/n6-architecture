@@ -1,10 +1,10 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-23T05:39:20Z",
+  "ts": "2026-04-23T05:56:09Z",
   "total": 28,
-  "green": 27,
-  "red": 1,
-  "status": "RED",
+  "green": 28,
+  "red": 0,
+  "status": "GREEN",
   "claims": [
     {
       "file": "01_arithmetic_n6.claim.json",
@@ -79,8 +79,8 @@
     {
       "file": "11_engine_zero_failures.claim.json",
       "type": "ci_health",
-      "status": "red",
-      "result": "0",
+      "status": "green",
+      "result": "1",
       "expected": "1"
     },
     {

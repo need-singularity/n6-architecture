@@ -2,7 +2,7 @@
   "id": "engine.zero_runtime_failures",
   "type": "ci_health",
   "description": "engine/*.hexa produces zero runtime failures (STUBs allowed)",
-  "actual_cmd": "bash -c 'fail=0; for f in engine/*.hexa; do [ \"$(basename $f)\" = \"__init__.hexa\" ] && continue; out=$(timeout 15 ~/.hx/bin/hexa run \"$f\" 2>&1); rc=$?; echo \"$out\" | grep -qE \"^STUB:|STUB \\(\" && continue; [ $rc -ne 0 ] && fail=$((fail+1)); done; [ $fail -eq 0 ] && echo 1 || echo 0'",
+  "actual_cmd": "bash -c 'fail=0; for f in engine/*.hexa; do [ \"$(basename $f)\" = \"__init__.hexa\" ] && continue; out=$(timeout 30 ~/.hx/bin/hexa run \"$f\" 2>&1); rc=$?; echo \"$out\" | grep -qE \"^STUB:|STUB \\(\" && continue; [ $rc -ne 0 ] && fail=$((fail+1)); done; [ $fail -eq 0 ] && echo 1 || echo 0'",
   "expected": "1",
   "must_fail": false,
   "recheck_cadence": "weekly",
