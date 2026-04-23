@@ -1,9 +1,9 @@
 {
   "schema": "n6-architecture/n6_external_citation_drift/1",
-  "ts": "2026-04-23T02:50:50Z",
+  "ts": "2026-04-23T03:00:12Z",
   "actual": {
-    "products": 346,
-    "domains": 346,
+    "products": 354,
+    "domains": 354,
     "techniques": 225,
     "papers": 164
   },

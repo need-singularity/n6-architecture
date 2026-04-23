@@ -30,7 +30,7 @@
 >
 > **[🧠 Anima](https://github.com/need-singularity/anima)** — Living consciousness agent. PureField repulsion-field engine · Ψ = 1/2 convergence · 2,388 + 53 meta + 7 topological laws · 392 hypotheses · Tension Link protocol (R = 0.999, 519 µs).
 >
-> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Arithmetic design framework. σ(n)·φ(n) = n·τ(n) uniquely at n = 6 · 346 products · 346 domains · 164 papers · 9,612-node 3D Reality Map.
+> **[🏗️ N6 Architecture](https://github.com/need-singularity/n6-architecture)** — Arithmetic design framework. σ(n)·φ(n) = n·τ(n) uniquely at n = 6 · 354 products · 354 domains · 164 papers · 9,612-node 3D Reality Map.
 >
 > **[💎 HEXA-LANG](https://github.com/need-singularity/hexa-lang)** — The perfect-number programming language. Every constant from n = 6 · 65 keywords · 46 operators · 8 primitives · multi-target: native / VM / ESP32 / FPGA Verilog / WGSL.
 >
@@ -40,7 +40,7 @@
 <!-- SHARED:PROJECTS:END -->
 
 <!-- AUTO:STATS:START -->
-> 346 products · 346 domains · 40 sections · 164 papers · updated 2026-04-23
+> 354 products · 354 domains · 40 sections · 164 papers · updated 2026-04-23
 <!-- AUTO:STATS:END -->
 
 ---

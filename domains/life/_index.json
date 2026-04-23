@@ -2,19 +2,20 @@
   "_doc": "life 축 sub-SSOT — 부모: ../_index.json (life 키). 자동 생성 2026-04-12.",
   "_axis": "life",
   "_parent": "../_index.json",
-  "_version": "1.1.0",
+  "_version": "1.2.0",
   "_meta": {
     "_category_name": "생명·의학·농업·뇌과학·유전자·면역·식품·약리",
-    "_domains_count": 49,
+    "_domains_count": 54,
     "_verified_count": null,
     "_alien_index_avg": null,
     "_honesty_note": "_verified_count / _alien_index_avg: 도메인별 alien_index 소스 부재로 null (자기참조 금지 — 추후 atlas.n6 혹은 _registry 집계 시 갱신)",
     "_updated": "2026-04-23"
   },
-  "_count": 49,
+  "_count": 54,
   "_changelog": [
     "1.0.0 (2026-04-12): life 축 sub-SSOT 신설. 전체 47개 도메인 등록.",
-    "1.1.0 (2026-04-23): DIS-P2-1 fast-track 2 domains — nuclear-medicine, tibetan-medicine."
+    "1.1.0 (2026-04-23): DIS-P2-1 fast-track 2 domains — nuclear-medicine, tibetan-medicine.",
+    "1.2.0 (2026-04-23): DIS-P2-1 low-risk batch 2 — sleep-medicine, urban-farming, gastrointestinal-medicine, radiation-biology, music-therapy."
   ],
   "domains": [
     {
@@ -451,6 +452,51 @@
     },
     {
       "slug": "tibetan-medicine",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
+    },
+    {
+      "slug": "sleep-medicine",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
+    },
+    {
+      "slug": "urban-farming",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
+    },
+    {
+      "slug": "gastrointestinal-medicine",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
+    },
+    {
+      "slug": "radiation-biology",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
+    },
+    {
+      "slug": "music-therapy",
       "files": 1,
       "has_claude_md": false,
       "has_domain_md": true,

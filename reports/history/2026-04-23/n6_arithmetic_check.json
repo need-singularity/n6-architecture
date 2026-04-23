@@ -1,6 +1,6 @@
 {
   "schema": "n6-architecture/n6_arithmetic_invariant/1",
-  "ts": "2026-04-23T02:50:26Z",
+  "ts": "2026-04-23T02:59:50Z",
   "range": "1..100",
   "identity": "sigma(n) * phi(n) == n * tau(n)",
   "equality_hits": [
