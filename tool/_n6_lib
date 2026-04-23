@@ -1115,6 +1115,65 @@ JEOF
   echo "OK: $out  (kept=$kept, archived_this_run=$archived)"
 }
 
+# ────────────────────────────────────────────────────────────
+# Phase 22 — reports emitter registry (orphan detection).
+#   reports/n6_*.json 을 그리고 tool/_n6_lib 의 emit 패턴을 대조해 orphan
+#   (emitter 가 없는 리포트) 을 찾는다. 다음 두 경로 인정:
+#     (a) `out="reports/n6_<name>.json"` 패턴으로 쓰는 함수
+#     (b) 직접 write 하는 emit (health → reports/n6_health.json)
+#   (a)(b) 어디에도 없으면 legacy allowlist (LEGACY_REPORTS) 로 관용.
+#   claim: scanners/32_reports_no_orphans.claim.json
+# ────────────────────────────────────────────────────────────
+scan_emitter_registry() {
+  local out="reports/n6_emitter_registry.json"
+  # a: out= 패턴
+  local emitters_declared
+  emitters_declared=$(grep -oE 'out="reports/n6_[a-z_]+\.json"' tool/_n6_lib \
+    | awk -F'"' '{print $2}' | sed 's|^reports/||' | sort -u)
+  # b: direct writer — health() 가 유일
+  local direct_writers="n6_health.json"
+  # legacy allowlist — 과거 ad-hoc 리포트 (tool 이 쓰지 않음)
+  local legacy_allowlist="n6_loss_free_roi_audit.json"
+  # 실제 파일 목록
+  local actual
+  actual=$(ls reports/n6_*.json 2>/dev/null | xargs -n1 basename | sort -u)
+  # orphan = actual - (emitters + direct + legacy)
+  local orphans=""
+  local orphan_count=0
+  while IFS= read -r f; do
+    [ -z "$f" ] && continue
+    echo "$emitters_declared" | grep -qxF "$f" && continue
+    echo "$direct_writers" | tr ' ' '\n' | grep -qxF "$f" && continue
+    echo "$legacy_allowlist" | tr ' ' '\n' | grep -qxF "$f" && continue
+    orphans="${orphans}${f} "
+    orphan_count=$((orphan_count+1))
+  done <<< "$actual"
+  local emitter_count
+  emitter_count=$(echo "$emitters_declared" | grep -c . | tr -d ' ')
+  local actual_count
+  actual_count=$(echo "$actual" | grep -c . | tr -d ' ')
+  # jq-encode orphan list
+  local orphans_json
+  orphans_json=$(echo "$orphans" | tr ' ' '\n' | grep -v '^$' | jq -R -s -c 'split("\n") | map(select(length>0))')
+  orphans_json="${orphans_json:-[]}"
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_emitter_registry/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "emitters_declared_count": $emitter_count,
+  "direct_writers": ["$direct_writers"],
+  "legacy_allowlist": ["$legacy_allowlist"],
+  "reports_actual_count": $actual_count,
+  "orphan_count": $orphan_count,
+  "orphans": $orphans_json,
+  "status": "$([ "$orphan_count" -eq 0 ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (orphans=$orphan_count, actual=$actual_count)"
+}
+
 append_audit_trail() {
   local out="reports/n6_meta_audit.jsonl"
   local score
@@ -1897,6 +1956,7 @@ continuous_scan() {
   scan_schemas >/dev/null 2>&1 || true
   scan_engine_integrity >/dev/null 2>&1 || true
   scan_engine_hash >/dev/null 2>&1 || true
+  scan_emitter_registry >/dev/null 2>&1 || true
   scan_gate_alignment >/dev/null 2>&1 || true
   scan_claim_schema >/dev/null 2>&1 || true
   run_proof_obligations >/dev/null 2>&1 || true
@@ -1932,7 +1992,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -1984,6 +2044,7 @@ case "${1:-}" in
   schemas|schema-audit)  scan_schemas ;;
   integrity|engine-integrity)  scan_engine_integrity ;;
   engine-hash|hash)  scan_engine_hash ;;
+  emitter-registry|emitters)  scan_emitter_registry ;;
   audit-retention|retention)  scan_audit_retention ;;
   audit|audit-trail)  append_audit_trail ;;
   audit-summary|asum)  scan_audit_summary ;;
@@ -2003,7 +2064,8 @@ usage: bash tool/_n6_lib <sub>
   sub ∈ blockers | roi | arithmetic | derivation | atlas | domains | papers
       | monte_carlo | causal | citations | nexus_dep | loop_rules
       | experiments | falsification | gap | propose | promote | invariants
-      | idempotence | manifest | schemas | integrity | engine-hash | audit | audit-summary | audit-retention
+      | idempotence | manifest | schemas | integrity | engine-hash | emitter-registry
+      | audit | audit-summary | audit-retention
       | gate-alignment | claim-schema | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE

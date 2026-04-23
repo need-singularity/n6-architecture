@@ -1,0 +1,11 @@
+{
+  "id": "reports.no_orphan_files",
+  "type": "self_consistency",
+  "description": "Phase 22 scan_emitter_registry: every reports/n6_*.json file must be produced by an active emitter — either the out=\"reports/n6_<name>.json\" pattern in tool/_n6_lib, a direct writer (currently only health → n6_health.json), or the legacy allowlist (ad-hoc audit artifacts). Orphan files signal a scanner was removed without cleaning up its output, or a typo left a stale file.",
+  "actual_cmd": "bash -c '[ -f reports/n6_emitter_registry.json ] && jq -r \"if .orphan_count == 0 then 1 else 0 end\" reports/n6_emitter_registry.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-22-emitter-registry"
+}
