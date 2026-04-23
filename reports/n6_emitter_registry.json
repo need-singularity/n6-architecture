@@ -1,15 +1,15 @@
 {
   "schema": "n6-architecture/n6_emitter_registry/1",
-  "ts": "2026-04-23T19:38:11Z",
-  "engine_version": "0.37.0",
-  "emitters_declared_count": 47,
+  "ts": "2026-04-23T19:42:00Z",
+  "engine_version": "0.38.0",
+  "emitters_declared_count": 48,
   "direct_writers": [
     "n6_health.json"
   ],
   "legacy_allowlist": [
     "n6_loss_free_roi_audit.json"
   ],
-  "reports_actual_count": 49,
+  "reports_actual_count": 50,
   "orphan_count": 0,
   "orphans": [],
   "status": "GREEN"

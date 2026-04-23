@@ -1,0 +1,11 @@
+{
+  "id": "invariants.atoms_faithful",
+  "type": "schema",
+  "description": "Phase 38 scan_invariants_atom_faithful: every atom in config/invariants.json must have value == engine_value. This is the object-level faithfulness property of the functor F : C_atlas → C_engine. If an atom's atlas value differs from its engine_value, F is not faithful — the claim that 'engine is a faithful image of atlas' would be broken. Complements P37 (live-compute on sigma only) with a global declared-equality check across all 10 atoms. Gate: unfaithful_count == 0.",
+  "actual_cmd": "bash -c '[ -f reports/n6_invariants_atom_faithful.json ] && jq -r \"if .unfaithful_count == 0 and .atoms_faithful_count > 0 then 1 else 0 end\" reports/n6_invariants_atom_faithful.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-38-atoms-faithful"
+}

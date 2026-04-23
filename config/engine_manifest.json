@@ -2,10 +2,10 @@
   "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
   "engine": {
     "name": "n6-architecture/meta-engine",
-    "version": "0.37.0",
+    "version": "0.38.0",
     "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
     "dispatcher": "bin/n6_meta",
-    "source_hash": "c5c954f45495d45d8491916c25521734c519b4c9f5411babb179866a0b7edb97"
+    "source_hash": "0f401f46c3502d8e50bf1f567c2024751e27e87b8ebdeeca92d829aace3dcb66"
   },
   "phases": [
     {
@@ -192,6 +192,11 @@
       "id": "P37",
       "title": "invariants atom value verification (sigma min viable)",
       "state": "live"
+    },
+    {
+      "id": "P38",
+      "title": "atom object-level faithfulness (value == engine_value, all 10)",
+      "state": "live"
     }
   ],
   "scanner_registry": {
@@ -245,6 +250,7 @@
       "type-enum",
       "inv-manifest",
       "inv-values",
+      "atom-faithful",
       "proof",
       "doctor",
       "health",
@@ -298,6 +304,7 @@
     "type-enum",
     "inv-manifest",
     "inv-values",
+    "atom-faithful",
     "emission-completeness"
   ],
   "pre_commit_hard_gates": [

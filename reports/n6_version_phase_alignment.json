@@ -1,11 +1,11 @@
 {
   "schema": "n6-architecture/n6_version_phase_alignment/1",
-  "ts": "2026-04-23T19:38:12Z",
-  "engine_version": "0.37.0",
-  "manifest_version": "0.37.0",
-  "version_minor": "37",
-  "last_phase_id": "P37",
-  "last_phase_num": "37",
+  "ts": "2026-04-23T19:42:01Z",
+  "engine_version": "0.38.0",
+  "manifest_version": "0.38.0",
+  "version_minor": "38",
+  "last_phase_id": "P38",
+  "last_phase_num": "38",
   "aligned": true,
   "note": "Phase 32 — engine.version follows '0.<N>.0' where N equals the last phase's numeric id. Missing a version bump after adding a phase leaves the manifest in an inconsistent stamp state (source_hash rotated but version stale). Gate: aligned == true.",
   "status": "GREEN"

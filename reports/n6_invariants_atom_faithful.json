@@ -1,0 +1,11 @@
+{
+  "schema": "n6-architecture/n6_invariants_atom_faithful/1",
+  "ts": "2026-04-23T19:41:10Z",
+  "engine_version": "0.38.0",
+  "atom_total": 10,
+  "atoms_faithful_count": 10,
+  "unfaithful_count": 0,
+  "unfaithful": [],
+  "note": "Phase 38 — object-level faithfulness for all atoms. If F is faithful, atom.value (atlas) must equal atom.engine_value (engine). Complementary to P37 (live-compute check on sigma only). Gate: unfaithful_count == 0.",
+  "status": "GREEN"
+}

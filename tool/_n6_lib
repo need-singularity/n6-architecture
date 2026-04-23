@@ -1950,6 +1950,53 @@ JEOF
   echo "OK: $out  (verified=$verified mismatched=$mismatched)"
 }
 
+# ────────────────────────────────────────────────────────────
+# Phase 38 — atom object-level faithfulness (value == engine_value).
+#   Functor F : C_atlas → C_engine 가 faithful 하다는 것은 atlas value 와
+#   engine_value 가 일치한다는 의미. P38 은 invariants.json 의 모든 atom 에
+#   대해 이 equality 를 check. P37 은 sigma 하나만 live compute 로 verify;
+#   P38 은 모든 atom 을 'declared equality' 로 verify — complementary gate.
+#   Gate: atoms_faithful_count == atom_total AND unfaithful_count == 0.
+#   claim: scanners/48_atoms_faithful.claim.json
+# ────────────────────────────────────────────────────────────
+scan_invariants_atom_faithful() {
+  local out="reports/n6_invariants_atom_faithful.json"
+  local mf="config/invariants.json"
+  local total=0 faithful=0 unfaithful_list=""
+  if [ -f "$mf" ]; then
+    local results
+    results=$(jq -r '.atoms | to_entries[] | "\(.key)|\(.value.value)|\(.value.engine_value)"' "$mf" 2>/dev/null)
+    while IFS='|' read -r name val eng; do
+      [ -z "$name" ] && continue
+      total=$((total+1))
+      if [ "$val" = "$eng" ]; then
+        faithful=$((faithful+1))
+      else
+        unfaithful_list="${unfaithful_list}${name}(val=${val},eng=${eng}) "
+      fi
+    done <<< "$results"
+  fi
+  local unfaithful_count=$((total - faithful))
+  local unfaithful_json
+  unfaithful_json=$(echo "$unfaithful_list" | tr ' ' '\n' | grep -v '^$' | jq -R -s -c 'split("\n") | map(select(length>0))')
+  unfaithful_json="${unfaithful_json:-[]}"
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_invariants_atom_faithful/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "atom_total": $total,
+  "atoms_faithful_count": $faithful,
+  "unfaithful_count": $unfaithful_count,
+  "unfaithful": $unfaithful_json,
+  "note": "Phase 38 — object-level faithfulness for all atoms. If F is faithful, atom.value (atlas) must equal atom.engine_value (engine). Complementary to P37 (live-compute check on sigma only). Gate: unfaithful_count == 0.",
+  "status": "$([ $unfaithful_count -eq 0 ] && [ $faithful -gt 0 ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (total=$total faithful=$faithful unfaithful=$unfaithful_count)"
+}
+
 append_audit_trail() {
   local out="reports/n6_meta_audit.jsonl"
   local score
@@ -2779,6 +2826,8 @@ continuous_scan() {
   scan_invariants_manifest >/dev/null 2>&1 || true
   # Phase 37 — invariants atom VALUE verification (sigma atom).
   scan_invariants_atom_values >/dev/null 2>&1 || true
+  # Phase 38 — atom object-level faithfulness (value == engine_value).
+  scan_invariants_atom_faithful >/dev/null 2>&1 || true
   # Phase 26 — emission completeness (MUST run last: every declared
   # emitter must have produced its file by now for the check to be valid).
   scan_emission_completeness >/dev/null 2>&1 || true
@@ -2802,7 +2851,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_dir_inventory scan_coverage_map scan_claim_cmd_purity scan_claim_meta_hygiene scan_manifest_phase_monotonic scan_registry_cso_parity scan_selftest_fn_parity scan_version_phase_alignment scan_recheck_cadence_enum scan_must_fail_expected_pair scan_claim_type_enum scan_invariants_manifest scan_invariants_atom_values scan_emission_completeness scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_dir_inventory scan_coverage_map scan_claim_cmd_purity scan_claim_meta_hygiene scan_manifest_phase_monotonic scan_registry_cso_parity scan_selftest_fn_parity scan_version_phase_alignment scan_recheck_cadence_enum scan_must_fail_expected_pair scan_claim_type_enum scan_invariants_manifest scan_invariants_atom_values scan_invariants_atom_faithful scan_emission_completeness scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -2873,6 +2922,7 @@ case "${1:-}" in
   type-enum|claim-type)  scan_claim_type_enum ;;
   inv-manifest|invariants-manifest)  scan_invariants_manifest ;;
   inv-values|atom-values)  scan_invariants_atom_values ;;
+  atom-faithful|faithful)  scan_invariants_atom_faithful ;;
   gate-alignment|gates)  scan_gate_alignment ;;
   claim-schema|claims)  scan_claim_schema ;;
   trend|regression)  scan_trend ;;
@@ -2893,7 +2943,7 @@ usage: bash tool/_n6_lib <sub>
       | audit | audit-summary | audit-retention | claim-effectiveness
       | coverage-map | dir-inventory | emission-completeness | claim-purity | claim-meta
       | phase-monotonic | registry-parity | selftest-parity | version-alignment | cadence-enum | mf-expected | type-enum
-      | inv-manifest | inv-values | gate-alignment | claim-schema | trend | proof
+      | inv-manifest | inv-values | atom-faithful | gate-alignment | claim-schema | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2
