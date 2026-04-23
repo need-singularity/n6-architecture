@@ -929,9 +929,11 @@ JEOF
 # Phase 12 — engine self-integrity + audit trail
 #   scan_engine_integrity():
 #     매니페스트(config/engine_manifest.json)와 실제 구현의 일치 여부 검증.
-#       - phases live 개수 == tool/_n6_lib 의 "Phase <N>" 헤더 주석 개수
-#       - scanner_registry 에 나열된 이름이 dispatcher case 에 존재
-#       - claims_total (live 집계) == scanners/*.claim.json 실제 파일 수
+#       - rule 1: phases live 개수 == tool/_n6_lib 의 "Phase <N>" 헤더 수
+#       - rule 2: scanner_registry 에 나열된 이름이 dispatcher case 에 존재
+#       - rule 3: claims_total == scanners/*.claim.json 실제 파일 수
+#       - rule 4 (Phase 18): dispatcher primary case 가 registry 에 존재
+#                             (역방향 완전성, built-in non-scanner 제외)
 #     불일치 시 drift 로 기록.
 #   append_audit_trail():
 #     reports/n6_meta_audit.jsonl 에 현재 실행의 한 줄 스냅샷 append.
@@ -980,6 +982,29 @@ EOF_NAMES
   claims_actual=$(ls scanners/*.claim.json 2>/dev/null | wc -l | tr -d ' ')
   [ "$claims_declared" != "$claims_actual" ] && _idrift "claims.declared_vs_actual" "$claims_declared" "$claims_actual"
 
+  # Phase 18 — rule 4: dispatcher reverse completeness.
+  # 디스패처의 primary case 이름(첫 alternative)이 scanner_registry 어디에도
+  # 없으면 orphan. 단 built-in non-scanner 는 제외 (continuous-scan, fast,
+  # telemetry — high-level commands, 개별 scanner 가 아님).
+  local dispatcher_orphans=0
+  local orphan_list=""
+  local registry_all
+  registry_all=$(jq -r '.scanner_registry.time_invariant + .scanner_registry.time_dependent + .scanner_registry.meta | .[]' "$mf" 2>/dev/null | sort -u)
+  # primary case 이름만 추출 (`  <name>)` 또는 `  <name>|...)` 형태)
+  local primary_cases
+  primary_cases=$(grep -oE '^  [a-z][a-z_-]*(\||\))' tool/_n6_lib | sed -E 's/^  //; s/[|)]$//' | sort -u)
+  local builtin_exclude="continuous-scan fast telemetry"
+  while IFS= read -r pc; do
+    [ -z "$pc" ] && continue
+    # built-in 제외
+    case " $builtin_exclude " in *" $pc "*) continue;; esac
+    # registry 에 존재?
+    echo "$registry_all" | grep -qxF "$pc" && continue
+    dispatcher_orphans=$((dispatcher_orphans+1))
+    orphan_list="${orphan_list}${pc} "
+  done <<< "$primary_cases"
+  [ "$dispatcher_orphans" -gt 0 ] && _idrift "dispatcher.orphan_cases" "\"in_registry\"" "\"${orphan_list% }\""
+
   drifts="${drifts}]"
   cat >"$out" <<JEOF
 {
@@ -991,7 +1016,8 @@ EOF_NAMES
     "phases_live_in_source": $phase_ids,
     "scanner_dispatch_missing": $missing_dispatch,
     "claims_declared": $claims_declared,
-    "claims_actual": $claims_actual
+    "claims_actual": $claims_actual,
+    "dispatcher_orphans": $dispatcher_orphans
   },
   "drift_count": $drift_count,
   "drifts": $drifts,

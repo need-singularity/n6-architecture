@@ -1,0 +1,11 @@
+{
+  "id": "integrity.dispatcher_no_orphans",
+  "type": "self_consistency",
+  "description": "Phase 18 integrity rule 4: every dispatcher primary case in tool/_n6_lib must appear in scanner_registry.{time_invariant,time_dependent,meta} — unless it is a built-in non-scanner command (continuous-scan, fast, telemetry). Catches silent dispatcher additions that forget to update the manifest registry.",
+  "actual_cmd": "bash -c '[ -f reports/n6_engine_integrity.json ] && jq -r \"if .checks.dispatcher_orphans == 0 then 1 else 0 end\" reports/n6_engine_integrity.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-18-dispatcher-reverse"
+}

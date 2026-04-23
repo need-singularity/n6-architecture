@@ -2,7 +2,7 @@
   "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
   "engine": {
     "name": "n6-architecture/meta-engine",
-    "version": "0.17.0",
+    "version": "0.18.0",
     "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
     "dispatcher": "bin/n6_meta"
   },
@@ -23,7 +23,8 @@
     {"id": "P14", "title": "gate declaration ↔ hook enforcement alignment", "state": "live"},
     {"id": "P15", "title": "audit trail integrity — ts/version monotonicity", "state": "live"},
     {"id": "P16", "title": "failing claim/scanner identity + persistent-failure gate", "state": "live"},
-    {"id": "P17", "title": "claim schema completeness (8 required fields)", "state": "live"}
+    {"id": "P17", "title": "claim schema completeness (8 required fields)", "state": "live"},
+    {"id": "P18", "title": "dispatcher reverse completeness — integrity rule 4", "state": "live"}
   ],
   "scanner_registry": {
     "time_invariant": [
