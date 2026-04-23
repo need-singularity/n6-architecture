@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-23T03:42:13Z",
-  "total": 19,
-  "green": 19,
+  "ts": "2026-04-23T04:02:35Z",
+  "total": 22,
+  "green": 22,
   "red": 0,
   "status": "GREEN",
   "claims": [
@@ -138,6 +138,27 @@
       "status": "green",
       "result": "0",
       "expected": "0"
+    },
+    {
+      "file": "20_scanner_idempotence.claim.json",
+      "type": "determinism",
+      "status": "green",
+      "result": "0",
+      "expected": "0"
+    },
+    {
+      "file": "21_schema_audit_clean.claim.json",
+      "type": "schema",
+      "status": "green",
+      "result": "0",
+      "expected": "0"
+    },
+    {
+      "file": "22_engine_version_stamped.claim.json",
+      "type": "schema",
+      "status": "green",
+      "result": "1",
+      "expected": "1"
     }
   ]
 }

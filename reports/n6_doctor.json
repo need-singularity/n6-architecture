@@ -1,80 +1,85 @@
 {
   "schema": "n6-architecture/n6_doctor/1",
-  "ts": "2026-04-23T03:42:13Z",
+  "ts": "2026-04-23T04:02:36Z",
   "reports_present": [
     {
       "report": "n6_arithmetic_check",
-      "ts": "2026-04-23T03:41:23Z",
+      "ts": "2026-04-23T04:02:02Z",
       "size": 507
     },
     {
       "report": "n6_atlas_integrity",
-      "ts": "2026-04-23T03:41:23Z",
+      "ts": "2026-04-23T04:02:02Z",
       "size": 529
     },
     {
       "report": "n6_auto_proposals",
-      "ts": "2026-04-23T03:42:04Z",
+      "ts": "2026-04-23T04:02:28Z",
       "size": 276
     },
     {
       "report": "n6_blockers",
-      "ts": "2026-04-23T03:40:16Z",
-      "size": 823
+      "ts": "2026-04-23T04:02:24Z",
+      "size": 821
     },
     {
       "report": "n6_causal_chain",
-      "ts": "2026-04-23T03:41:53Z",
+      "ts": "2026-04-23T04:02:32Z",
       "size": 337
     },
     {
       "report": "n6_cross_repo_promotions",
-      "ts": "2026-04-23T03:42:04Z",
+      "ts": "2026-04-23T04:02:28Z",
       "size": 358
     },
     {
       "report": "n6_derivation_lineage",
-      "ts": "2026-04-23T03:41:23Z",
+      "ts": "2026-04-23T04:02:02Z",
       "size": 286
     },
     {
       "report": "n6_domain_coverage",
-      "ts": "2026-04-23T03:41:24Z",
+      "ts": "2026-04-23T04:02:02Z",
       "size": 468
     },
     {
       "report": "n6_experiment_repro",
-      "ts": "2026-04-23T03:42:03Z",
+      "ts": "2026-04-23T04:02:28Z",
       "size": 221
     },
     {
       "report": "n6_external_citation_drift",
-      "ts": "2026-04-23T03:41:53Z",
+      "ts": "2026-04-23T04:02:33Z",
       "size": 239
     },
     {
       "report": "n6_falsification",
-      "ts": "2026-04-23T03:42:04Z",
+      "ts": "2026-04-23T04:02:28Z",
       "size": 411
     },
     {
       "report": "n6_gap_proposals",
-      "ts": "2026-04-23T03:42:04Z",
+      "ts": "2026-04-23T04:02:28Z",
       "size": 370
     },
     {
       "report": "n6_health",
-      "ts": "2026-04-23T03:35:05Z",
-      "size": 42
+      "ts": "2026-04-23T04:02:06Z",
+      "size": 41
+    },
+    {
+      "report": "n6_idempotence",
+      "ts": "2026-04-23T03:46:41Z",
+      "size": 1515
     },
     {
       "report": "n6_invariants",
-      "ts": "2026-04-23T03:42:04Z",
+      "ts": "2026-04-23T04:02:28Z",
       "size": 554
     },
     {
       "report": "n6_loop_rules",
-      "ts": "2026-04-23T03:42:12Z",
+      "ts": "2026-04-23T04:02:34Z",
       "size": 529
     },
     {
@@ -83,29 +88,39 @@
       "size": 1128
     },
     {
+      "report": "n6_manifest",
+      "ts": "2026-04-23T04:02:28Z",
+      "size": 299
+    },
+    {
       "report": "n6_monte_carlo",
-      "ts": "2026-04-23T03:41:53Z",
+      "ts": "2026-04-23T04:02:32Z",
       "size": 402
     },
     {
       "report": "n6_nexus_dep_drift",
-      "ts": "2026-04-23T03:41:53Z",
+      "ts": "2026-04-23T04:02:33Z",
       "size": 404
     },
     {
       "report": "n6_paper_lineage",
-      "ts": "2026-04-23T03:41:53Z",
+      "ts": "2026-04-23T04:02:32Z",
       "size": 191
     },
     {
       "report": "n6_proof_obligations",
-      "ts": "2026-04-23T03:42:13Z",
-      "size": 3232
+      "ts": "2026-04-23T04:02:35Z",
+      "size": 3707
     },
     {
       "report": "n6_roi",
-      "ts": "2026-04-23T03:41:23Z",
+      "ts": "2026-04-23T04:02:02Z",
       "size": 2146
+    },
+    {
+      "report": "n6_schema_audit",
+      "ts": "2026-04-23T04:02:29Z",
+      "size": 254
     },
     {
       "report": "n6_selftest",
@@ -114,7 +129,7 @@
     },
     {
       "report": "n6_trend",
-      "ts": "2026-04-23T03:37:21Z",
+      "ts": "2026-04-23T03:42:14Z",
       "size": 496
     }
   ]

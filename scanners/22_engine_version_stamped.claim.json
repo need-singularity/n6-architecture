@@ -1,0 +1,11 @@
+{
+  "id": "manifest.version_matches_live",
+  "type": "schema",
+  "description": "Phase 11 scan_manifest: live manifest report must carry engine_version equal to config/engine_manifest.json's engine.version.",
+  "actual_cmd": "bash -c 'a=$(jq -r .engine_version reports/n6_manifest.json 2>/dev/null); b=$(jq -r .engine.version config/engine_manifest.json 2>/dev/null); [ \"$a\" = \"$b\" ] && [ -n \"$a\" ] && echo 1 || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-11-manifest"
+}

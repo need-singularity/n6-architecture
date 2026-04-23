@@ -1,0 +1,49 @@
+{
+  "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
+  "engine": {
+    "name": "n6-architecture/meta-engine",
+    "version": "0.11.0",
+    "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
+    "dispatcher": "bin/n6_meta"
+  },
+  "phases": [
+    {"id": "P1",  "title": "blocker inventory",                 "state": "live"},
+    {"id": "P2",  "title": "loss-free ROI",                     "state": "live"},
+    {"id": "P3",  "title": "13 scanners (arithmetic → falsification)", "state": "live"},
+    {"id": "P4",  "title": "CLI dispatcher",                    "state": "live"},
+    {"id": "P5",  "title": "continuous-scan launchd + pre-commit fast subset", "state": "live"},
+    {"id": "P6",  "title": "proof-obligation DSL + gap proposer + telemetry",  "state": "live"},
+    {"id": "P7",  "title": "historical trend + regression alarm", "state": "live"},
+    {"id": "P8",  "title": "auto-propose from gap findings",    "state": "live"},
+    {"id": "P9",  "title": "cross-scan invariants",             "state": "live"},
+    {"id": "P10", "title": "scanner idempotence",               "state": "live"},
+    {"id": "P11", "title": "engine manifest + version stamping", "state": "live"}
+  ],
+  "scanner_registry": {
+    "time_invariant": [
+      "arithmetic", "derivation", "atlas", "domains", "papers",
+      "monte_carlo", "causal", "citations", "nexus_dep", "loop_rules",
+      "falsification"
+    ],
+    "time_dependent": [
+      "blockers", "roi", "experiments", "trend"
+    ],
+    "meta": [
+      "gap", "propose", "promote", "invariants", "idempotence",
+      "proof", "doctor", "health", "selftest"
+    ]
+  },
+  "schema_prefix": "n6-architecture/",
+  "continuous_scan_order": [
+    "blockers", "roi", "arithmetic", "derivation", "atlas", "domains",
+    "papers", "monte_carlo", "causal", "citations", "nexus_dep",
+    "loop_rules", "experiments", "falsification", "gap", "propose",
+    "promote", "invariants", "proof", "doctor", "trend"
+  ],
+  "pre_commit_hard_gates": [
+    "falsification.critical_alarm == false"
+  ],
+  "pre_commit_advisory": [
+    "trend.regression == false"
+  ]
+}

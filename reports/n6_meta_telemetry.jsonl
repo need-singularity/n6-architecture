@@ -138,3 +138,17 @@
 {"ts":"2026-04-23T03:41:54Z","scanner":"loop_rules","runtime_ms":1029,"rc":0,"out_size":529,"out_file":"reports/n6_loop_rules.json"}
 {"ts":"2026-04-23T03:42:04Z","scanner":"experiments","runtime_ms":10027,"rc":0,"out_size":0,"out_file":"reports/n6_experiments.json"}
 {"ts":"2026-04-23T03:42:04Z","scanner":"falsification","runtime_ms":214,"rc":0,"out_size":411,"out_file":"reports/n6_falsification.json"}
+{"ts":"2026-04-23T03:51:47Z","scanner":"blockers","runtime_ms":81405,"rc":0,"out_size":821,"out_file":"reports/n6_blockers.json"}
+{"ts":"2026-04-23T04:01:51Z","scanner":"roi","runtime_ms":603521,"rc":0,"out_size":2146,"out_file":"reports/n6_roi.json"}
+{"ts":"2026-04-23T04:01:51Z","scanner":"arithmetic","runtime_ms":585,"rc":0,"out_size":0,"out_file":"reports/n6_arithmetic.json"}
+{"ts":"2026-04-23T04:01:51Z","scanner":"derivation","runtime_ms":658,"rc":0,"out_size":0,"out_file":"reports/n6_derivation.json"}
+{"ts":"2026-04-23T04:01:51Z","scanner":"atlas","runtime_ms":781,"rc":0,"out_size":0,"out_file":"reports/n6_atlas.json"}
+{"ts":"2026-04-23T04:01:51Z","scanner":"domains","runtime_ms":890,"rc":0,"out_size":0,"out_file":"reports/n6_domains.json"}
+{"ts":"2026-04-23T04:02:19Z","scanner":"papers","runtime_ms":28415,"rc":0,"out_size":0,"out_file":"reports/n6_papers.json"}
+{"ts":"2026-04-23T04:02:19Z","scanner":"monte_carlo","runtime_ms":631,"rc":0,"out_size":402,"out_file":"reports/n6_monte_carlo.json"}
+{"ts":"2026-04-23T04:02:19Z","scanner":"causal","runtime_ms":693,"rc":0,"out_size":0,"out_file":"reports/n6_causal.json"}
+{"ts":"2026-04-23T04:02:20Z","scanner":"citations","runtime_ms":1171,"rc":0,"out_size":0,"out_file":"reports/n6_citations.json"}
+{"ts":"2026-04-23T04:02:20Z","scanner":"nexus_dep","runtime_ms":289,"rc":0,"out_size":0,"out_file":"reports/n6_nexus_dep.json"}
+{"ts":"2026-04-23T04:02:20Z","scanner":"loop_rules","runtime_ms":440,"rc":0,"out_size":529,"out_file":"reports/n6_loop_rules.json"}
+{"ts":"2026-04-23T04:02:28Z","scanner":"experiments","runtime_ms":8072,"rc":0,"out_size":0,"out_file":"reports/n6_experiments.json"}
+{"ts":"2026-04-23T04:02:28Z","scanner":"falsification","runtime_ms":159,"rc":0,"out_size":411,"out_file":"reports/n6_falsification.json"}

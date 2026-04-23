@@ -1,0 +1,11 @@
+{
+  "id": "schemas.all_reports_prefixed",
+  "type": "schema",
+  "description": "Phase 11 scan_schemas: every reports/n6_*.json must carry a schema field prefixed with `n6-architecture/`. drift_count must be 0.",
+  "actual_cmd": "jq -r '.drift_count // 1' reports/n6_schema_audit.json",
+  "expected": "0",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-11-manifest"
+}

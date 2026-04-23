@@ -1,0 +1,76 @@
+{
+  "schema": "n6-architecture/n6_idempotence/1",
+  "ts": "2026-04-23T03:46:41Z",
+  "total": 11,
+  "pass": 11,
+  "fail": 0,
+  "results": [
+    {
+      "scanner": "arithmetic",
+      "h1": "8807cf53416c",
+      "h2": "8807cf53416c",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "derivation",
+      "h1": "f36b96e4f25b",
+      "h2": "f36b96e4f25b",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "atlas",
+      "h1": "5a094d492c4b",
+      "h2": "5a094d492c4b",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "domains",
+      "h1": "3ec447f6a7f4",
+      "h2": "3ec447f6a7f4",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "papers",
+      "h1": "74e30b008fcd",
+      "h2": "74e30b008fcd",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "monte_carlo",
+      "h1": "3fae15c1fa24",
+      "h2": "3fae15c1fa24",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "causal",
+      "h1": "f6a4a1d1bd4f",
+      "h2": "f6a4a1d1bd4f",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "citations",
+      "h1": "0bccf9613cb0",
+      "h2": "0bccf9613cb0",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "nexus_dep",
+      "h1": "0b34c7dab32e",
+      "h2": "0b34c7dab32e",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "loop_rules",
+      "h1": "fee72afe5cf6",
+      "h2": "fee72afe5cf6",
+      "verdict": "PASS"
+    },
+    {
+      "scanner": "falsification",
+      "h1": "ea8c74840a1d",
+      "h2": "ea8c74840a1d",
+      "verdict": "PASS"
+    }
+  ],
+  "status": "GREEN"
+}

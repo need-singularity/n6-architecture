@@ -9,6 +9,10 @@ set -e
 N6="${N6:-/Users/ghost/core/n6-architecture}"
 cd "$N6"
 
+# Engine version (Phase 11). Read once from the manifest so every
+# report's engine_version tag matches what the manifest declares.
+ENGINE_VERSION=$(jq -r '.engine.version // "0.0.0"' "$N6/config/engine_manifest.json" 2>/dev/null || echo "0.0.0")
+
 ts()   { date -u +%Y-%m-%dT%H:%M:%SZ; }
 head_sha() { git rev-parse HEAD 2>/dev/null || echo "unknown"; }
 j_arr_from_stdin() { jq -R -s -c 'split("\n") | map(select(length>0))'; }
@@ -91,9 +95,9 @@ scan_blockers() {
   # nexus reach (atlas_gap per convention) — try remote first, then local fallback
   local nexus_reach=true
   local nexus_mode="remote"
-  if ! timeout 5 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
+  if ! timeout 10 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
     # remote path failed; try local fallback (documented workaround for Darwin)
-    if HEXA_ALLOW_LOCAL_FALLBACK=1 timeout 8 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
+    if HEXA_ALLOW_LOCAL_FALLBACK=1 timeout 20 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
       nexus_mode="local_fallback"
       # not a blocker — just a degraded mode
     else
@@ -896,6 +900,88 @@ JEOF
 }
 
 # ────────────────────────────────────────────────────────────
+# Phase 11 — engine manifest + schema audit
+#   scan_manifest():  emit live summary pinned to config/engine_manifest.json
+#   scan_schemas():   audit every reports/n6_*.json for a well-formed
+#                     "schema" field whose prefix matches the manifest's
+#                     schema_prefix. Catches drift where a scanner is
+#                     renamed/evolved but forgets to update its schema.
+# ────────────────────────────────────────────────────────────
+scan_manifest() {
+  local out="reports/n6_manifest.json"
+  local mf="config/engine_manifest.json"
+  [ -f "$mf" ] || {
+    echo "{\"schema\":\"n6-architecture/n6_manifest/1\",\"ts\":\"$(ts)\",\"engine_version\":\"${ENGINE_VERSION}\",\"error\":\"missing ${mf}\"}" >"$out"
+    echo "MISS: $mf"; return 0
+  }
+  local phases_live=$(jq -r '[.phases[] | select(.state=="live")] | length' "$mf")
+  local phases_total=$(jq -r '.phases | length' "$mf")
+  local scanners_time_invariant=$(jq -r '.scanner_registry.time_invariant | length' "$mf")
+  local scanners_time_dependent=$(jq -r '.scanner_registry.time_dependent | length' "$mf")
+  local scanners_meta=$(jq -r '.scanner_registry.meta | length' "$mf")
+  local hard_gates=$(jq -r '.pre_commit_hard_gates | length' "$mf")
+  local claims_total=$(ls scanners/*.claim.json 2>/dev/null | wc -l | tr -d ' ')
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_manifest/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "phases": {"live": $phases_live, "total": $phases_total},
+  "scanners": {
+    "time_invariant": $scanners_time_invariant,
+    "time_dependent": $scanners_time_dependent,
+    "meta": $scanners_meta
+  },
+  "claims_total": $claims_total,
+  "pre_commit_hard_gates": $hard_gates
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out"
+}
+
+scan_schemas() {
+  local out="reports/n6_schema_audit.json"
+  local prefix=$(jq -r '.schema_prefix // "n6-architecture/"' config/engine_manifest.json 2>/dev/null)
+  local total=0 ok=0 drift=0
+  local drifts="["
+  local first=1
+  for f in reports/n6_*.json; do
+    [ -f "$f" ] || continue
+    # skip non-schema-bearing aggregate files
+    case "$(basename "$f")" in
+      n6_health.json|n6_meta_telemetry.json|n6_manifest.json|n6_schema_audit.json) continue ;;
+    esac
+    total=$((total+1))
+    local s=$(jq -r '.schema // ""' "$f" 2>/dev/null)
+    if [ -z "$s" ] || [ "${s:0:${#prefix}}" != "$prefix" ]; then
+      drift=$((drift+1))
+      [ $first -eq 0 ] && drifts="${drifts},"
+      drifts="${drifts}{\"file\":\"${f}\",\"schema\":\"${s:-<missing>}\"}"
+      first=0
+    else
+      ok=$((ok+1))
+    fi
+  done
+  drifts="${drifts}]"
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_schema_audit/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "schema_prefix_required": "${prefix}",
+  "total_reports": $total,
+  "ok": $ok,
+  "drift_count": $drift,
+  "drifts": $drifts,
+  "status": "$([ $drift -eq 0 ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (${ok}/${total} schema-clean)"
+}
+
+# ────────────────────────────────────────────────────────────
 # Phase 10 — scanner idempotence
 #   Run each time-invariant scanner twice and verify its output (after
 #   stripping volatile keys: ts, anything ending in _ts, runtime_ms)
@@ -1297,6 +1383,8 @@ continuous_scan() {
   propose_from_gaps >/dev/null 2>&1 || true
   promote_cross_repo >/dev/null 2>&1 || true
   scan_invariants >/dev/null 2>&1 || true
+  scan_manifest >/dev/null 2>&1 || true
+  scan_schemas >/dev/null 2>&1 || true
   run_proof_obligations >/dev/null 2>&1 || true
   doctor >/dev/null
   # trend must come AFTER doctor (reads doctor's score) and BEFORE history
@@ -1322,7 +1410,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -1370,6 +1458,8 @@ case "${1:-}" in
   promote|cross-repo-promote|promote_cross_repo)  promote_cross_repo ;;
   invariants|invariant)  scan_invariants ;;
   idempotence|idem)  scan_idempotence ;;
+  manifest)        scan_manifest ;;
+  schemas|schema-audit)  scan_schemas ;;
   trend|regression)  scan_trend ;;
   proof)           run_proof_obligations ;;
   continuous-scan|continuous_scan|continuous)  continuous_scan ;;
@@ -1384,7 +1474,7 @@ usage: bash tool/_n6_lib <sub>
   sub ∈ blockers | roi | arithmetic | derivation | atlas | domains | papers
       | monte_carlo | causal | citations | nexus_dep | loop_rules
       | experiments | falsification | gap | propose | promote | invariants
-      | idempotence | trend | proof
+      | idempotence | manifest | schemas | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2

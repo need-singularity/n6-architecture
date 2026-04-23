@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_selftest/1",
-  "ts": "2026-04-23T03:37:27Z",
-  "total": 19,
-  "pass": 19,
+  "ts": "2026-04-23T04:04:14Z",
+  "total": 22,
+  "pass": 22,
   "fail": 0,
   "verdicts": [
     {
@@ -87,6 +87,21 @@
     },
     {
       "scanner": "promote_cross_repo",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_manifest",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_schemas",
       "verdict": "PASS",
       "rc": 0
     },
