@@ -660,6 +660,44 @@ JEOF
 }
 
 # ────────────────────────────────────────────────────────────
+# Phase 6.3 — cross_repo_blocker auto-promote
+#   Reads nexus ROI SSOT, emits report of priority≥95 todo items.
+#   Convention: n6a-20260422-004 (config/cross_repo_blocker_convention.json).
+#   Non-destructive: reports candidates; human approves status flip.
+# ────────────────────────────────────────────────────────────
+promote_cross_repo() {
+  local out="reports/n6_cross_repo_promotions.json"
+  local roi_ssot="/Users/ghost/core/nexus/config/roi/n6-architecture.json"
+  local floor=95
+  if [ -f config/cross_repo_blocker_convention.json ]; then
+    floor=$(jq -r '.priority_floor // 95' config/cross_repo_blocker_convention.json)
+  fi
+  local candidates="[]"
+  local count=0
+  if [ -f "$roi_ssot" ]; then
+    candidates=$(jq --argjson f "$floor" \
+      '[.items[] | select(.priority >= $f) | select(.status == "todo")
+        | {id, priority, roi, task, source}]' "$roi_ssot" 2>/dev/null)
+    candidates="${candidates:-[]}"
+    count=$(echo "$candidates" | jq 'length')
+  fi
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_cross_repo_promotions/1",
+  "ts": "$(ts)",
+  "convention_ref": "n6a-20260422-004",
+  "priority_floor": $floor,
+  "roi_ssot": "$roi_ssot",
+  "candidate_count": $count,
+  "candidates": $candidates,
+  "note": "Listed items should be flipped status: todo → running (human-gated)."
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out"
+}
+
+# ────────────────────────────────────────────────────────────
 # Phase 6.4 — Proof Obligation DSL runner
 # ────────────────────────────────────────────────────────────
 run_proof_obligations() {
@@ -785,6 +823,7 @@ continuous_scan() {
     log_telemetry "$p" "$st_ms" "$rc" "reports/n6_${p}.json"
   done
   gap_proposer >/dev/null 2>&1 || true
+  promote_cross_repo >/dev/null 2>&1 || true
   run_proof_obligations >/dev/null 2>&1 || true
   doctor >/dev/null
   # history archive
@@ -807,7 +846,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer promote_cross_repo run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -851,6 +890,7 @@ case "${1:-}" in
   experiments)     scan_experiments ;;
   falsification)   scan_falsification ;;
   gap)             gap_proposer ;;
+  promote|cross-repo-promote|promote_cross_repo)  promote_cross_repo ;;
   proof)           run_proof_obligations ;;
   continuous-scan|continuous_scan|continuous)  continuous_scan ;;
   fast|fast-subset)  fast_subset ;;
@@ -863,7 +903,7 @@ case "${1:-}" in
 usage: bash tool/_n6_lib <sub>
   sub ∈ blockers | roi | arithmetic | derivation | atlas | domains | papers
       | monte_carlo | causal | citations | nexus_dep | loop_rules
-      | experiments | falsification | gap | proof
+      | experiments | falsification | gap | promote | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2

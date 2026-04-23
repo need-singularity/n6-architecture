@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-22T16:31:53Z",
-  "total": 15,
-  "green": 15,
+  "ts": "2026-04-23T01:52:45Z",
+  "total": 16,
+  "green": 16,
   "red": 0,
   "status": "GREEN",
   "claims": [
@@ -106,6 +106,13 @@
     },
     {
       "file": "15_lang_gap_forward_convention.claim.json",
+      "type": "convention",
+      "status": "green",
+      "result": "1",
+      "expected": "1"
+    },
+    {
+      "file": "16_cross_repo_auto_promote.claim.json",
       "type": "convention",
       "status": "green",
       "result": "1",

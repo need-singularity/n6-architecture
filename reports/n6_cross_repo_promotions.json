@@ -1,0 +1,18 @@
+{
+  "schema": "n6-architecture/n6_cross_repo_promotions/1",
+  "ts": "2026-04-23T01:52:14Z",
+  "convention_ref": "n6a-20260422-004",
+  "priority_floor": 95,
+  "roi_ssot": "/Users/ghost/core/nexus/config/roi/n6-architecture.json",
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "id": "n6-roi-007",
+      "priority": 95,
+      "roi": 0.75,
+      "task": "nexus drill Darwin reach 해결 (HEXA_ALLOW_LOCAL_FALLBACK OR ubu)",
+      "source": "reports/n6_blockers.json blk-1 (cross_repo atlas_gap)"
+    }
+  ],
+  "note": "Listed items should be flipped status: todo → running (human-gated)."
+}

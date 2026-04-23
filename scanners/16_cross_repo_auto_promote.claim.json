@@ -1,0 +1,11 @@
+{
+  "id": "cross_repo_blocker.auto_promote_report_present",
+  "type": "convention",
+  "description": "cross_repo auto-promote report emitted with convention_ref = n6a-20260422-004 and priority_floor = 95",
+  "actual_cmd": "bash -c '[ -f reports/n6_cross_repo_promotions.json ] && [ \"$(jq -r .convention_ref reports/n6_cross_repo_promotions.json 2>/dev/null)\" = \"n6a-20260422-004\" ] && [ \"$(jq -r .priority_floor reports/n6_cross_repo_promotions.json 2>/dev/null)\" = \"95\" ] && echo 1 || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "infra",
+  "proposal_ref": "n6a-20260422-004"
+}
