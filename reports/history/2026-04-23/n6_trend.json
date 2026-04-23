@@ -1,0 +1,25 @@
+{
+  "schema": "n6-architecture/n6_trend/1",
+  "ts": "2026-04-23T03:18:32Z",
+  "prior_snapshot": "2026-04-22",
+  "today": {
+    "score": 100,
+    "proof_red": 0,
+    "blocker_high": 0,
+    "falsification_alarm": false
+  },
+  "prior": {
+    "score": null,
+    "proof_red": 0,
+    "blocker_high": 1,
+    "falsification_alarm": false
+  },
+  "delta": {
+    "score": 0,
+    "proof_red": 0,
+    "blocker_high": 0
+  },
+  "regress_max_allowed_drop": 5,
+  "regression": false,
+  "regression_reasons": []
+}

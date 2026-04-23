@@ -1,0 +1,11 @@
+{
+  "id": "trend.no_regression",
+  "type": "regression",
+  "description": "Phase 7 trend scanner: today's metrics must not regress vs the latest prior history snapshot (health drop ≤5, proof red not increased, blocker high not increased, falsification alarm not newly true).",
+  "actual_cmd": "jq -r '.regression // true' reports/n6_trend.json",
+  "expected": "false",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-7-trend"
+}

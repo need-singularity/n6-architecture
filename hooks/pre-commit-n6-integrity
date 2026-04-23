@@ -98,6 +98,18 @@ if [ -x "$R/bin/n6_meta" ] && [ -f "$META_LIB" ]; then
             exit 1
         fi
     fi
+    # Phase 7 trend regression: advisory (non-blocking). Print a warning
+    # when today's metrics regress vs the latest prior snapshot so the
+    # committer can decide to investigate or proceed.
+    if [ -f "$R/reports/n6_trend.json" ]; then
+        REGRESS=$(jq -r '.regression // false' "$R/reports/n6_trend.json" 2>/dev/null)
+        if [ "$REGRESS" = "true" ]; then
+            echo ""
+            echo "[WARN] n6 trend regression detected (advisory, not blocking):"
+            jq -r '.regression_reasons[] // empty' "$R/reports/n6_trend.json" 2>/dev/null | sed 's/^/  - /'
+            echo "  → reports/n6_trend.json 확인 · 필요 시 bash bin/n6_meta trend 재실행"
+        fi
+    fi
     rm -f "$META_LOG"
 fi
 
