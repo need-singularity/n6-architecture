@@ -1614,6 +1614,49 @@ JEOF
   echo "OK: $out  (reg=$reg_total cso=$cso_total unregistered=$unreg_count on_demand=$on_demand_count)"
 }
 
+# ────────────────────────────────────────────────────────────
+# Phase 31 — selftest ↔ function-definition parity.
+#   selftest() 의 for-loop 는 각 scan_*/gap_*/propose_*/promote_*/run_* 를
+#   이름으로 호출한다. 이름이 실제 함수 정의와 어긋나면 (오타·삭제·리팩터)
+#   rc=127 을 캡처해 verdict=FAIL 로 기록되는데 — P31 은 이 지연 발견 대신
+#   static 검증으로 앞당긴다. selftest 가 "열거는 했으나 부를 수 없는" 함수
+#   를 담고 있으면 즉시 gate.
+#   Gate: undefined_count == 0.
+#   claim: scanners/41_selftest_fn_parity.claim.json
+# ────────────────────────────────────────────────────────────
+scan_selftest_fn_parity() {
+  local out="reports/n6_selftest_fn_parity.json"
+  local src="tool/_n6_lib"
+  local fns undef="" undef_count=0 total=0
+  # Extract the selftest for-loop list: start at "for cmd in" line, take up to
+  # the closing "; do" on the same line.
+  fns=$(grep -E '^  for cmd in ' "$src" | head -1 | sed -E 's/^  for cmd in //; s/; do$//')
+  for fn in $fns; do
+    total=$((total+1))
+    if ! grep -qE "^${fn}\(\) \{" "$src"; then
+      undef="${undef}${fn} "
+      undef_count=$((undef_count+1))
+    fi
+  done
+  local undef_json
+  undef_json=$(echo "$undef" | tr ' ' '\n' | grep -v '^$' | jq -R -s -c 'split("\n") | map(select(length>0))')
+  undef_json="${undef_json:-[]}"
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_selftest_fn_parity/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "listed_fn_count": $total,
+  "undefined_count": $undef_count,
+  "undefined": $undef_json,
+  "note": "Phase 31 — every name in selftest's for-loop must have a matching function definition in tool/_n6_lib. A typo or stale name causes rc=127 at runtime which selftest records as FAIL — but that verdict looks like a scanner bug, not a registration drift. P31 turns that late discovery into a static gate.",
+  "status": "$([ $undef_count -eq 0 ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (listed=$total undefined=$undef_count)"
+}
+
 append_audit_trail() {
   local out="reports/n6_meta_audit.jsonl"
   local score
@@ -2429,6 +2472,8 @@ continuous_scan() {
   scan_manifest_phase_monotonic >/dev/null 2>&1 || true
   # Phase 30 — scanner registry ↔ continuous_scan_order parity.
   scan_registry_cso_parity >/dev/null 2>&1 || true
+  # Phase 31 — selftest ↔ function-definition parity.
+  scan_selftest_fn_parity >/dev/null 2>&1 || true
   # Phase 26 — emission completeness (MUST run last: every declared
   # emitter must have produced its file by now for the check to be valid).
   scan_emission_completeness >/dev/null 2>&1 || true
@@ -2452,7 +2497,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_dir_inventory scan_coverage_map scan_claim_cmd_purity scan_claim_meta_hygiene scan_manifest_phase_monotonic scan_registry_cso_parity scan_emission_completeness scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_dir_inventory scan_coverage_map scan_claim_cmd_purity scan_claim_meta_hygiene scan_manifest_phase_monotonic scan_registry_cso_parity scan_selftest_fn_parity scan_emission_completeness scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -2516,6 +2561,7 @@ case "${1:-}" in
   claim-meta|meta-hygiene)  scan_claim_meta_hygiene ;;
   phase-monotonic|monotonic)  scan_manifest_phase_monotonic ;;
   registry-parity|parity)  scan_registry_cso_parity ;;
+  selftest-parity|fn-parity)  scan_selftest_fn_parity ;;
   gate-alignment|gates)  scan_gate_alignment ;;
   claim-schema|claims)  scan_claim_schema ;;
   trend|regression)  scan_trend ;;
@@ -2535,7 +2581,8 @@ usage: bash tool/_n6_lib <sub>
       | idempotence | manifest | schemas | integrity | engine-hash | emitter-registry
       | audit | audit-summary | audit-retention | claim-effectiveness
       | coverage-map | dir-inventory | emission-completeness | claim-purity | claim-meta
-      | phase-monotonic | registry-parity | gate-alignment | claim-schema | trend | proof
+      | phase-monotonic | registry-parity | selftest-parity
+      | gate-alignment | claim-schema | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2

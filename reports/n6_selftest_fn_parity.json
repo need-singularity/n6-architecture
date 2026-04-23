@@ -1,0 +1,10 @@
+{
+  "schema": "n6-architecture/n6_selftest_fn_parity/1",
+  "ts": "2026-04-23T16:56:36Z",
+  "engine_version": "0.31.0",
+  "listed_fn_count": 38,
+  "undefined_count": 0,
+  "undefined": [],
+  "note": "Phase 31 — every name in selftest's for-loop must have a matching function definition in tool/_n6_lib. A typo or stale name causes rc=127 at runtime which selftest records as FAIL — but that verdict looks like a scanner bug, not a registration drift. P31 turns that late discovery into a static gate.",
+  "status": "GREEN"
+}

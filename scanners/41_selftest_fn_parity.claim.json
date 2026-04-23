@@ -1,0 +1,11 @@
+{
+  "id": "selftest.fn_parity",
+  "type": "schema",
+  "description": "Phase 31 scan_selftest_fn_parity: every function name listed in selftest's `for cmd in ...; do` loop must have a matching `<name>() {` definition in tool/_n6_lib. A typo, deleted function, or stale rename causes the selftest loop to execute an undefined command (rc=127) which gets recorded as FAIL — but that verdict looks like a scanner bug, not a registration drift. P31 turns the late runtime-discovery into a static gate on the code itself.",
+  "actual_cmd": "bash -c '[ -f reports/n6_selftest_fn_parity.json ] && jq -r \"if .undefined_count == 0 then 1 else 0 end\" reports/n6_selftest_fn_parity.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-31-selftest-fn-parity"
+}
