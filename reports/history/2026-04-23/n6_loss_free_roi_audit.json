@@ -1,0 +1,25 @@
+{
+  "schema": "n6-architecture/loss_free_roi_audit/1",
+  "ts": "2026-04-23",
+  "proposal_ref": "n6a-20260422-001",
+  "scope": "atlas-derived ROI entries categorization audit (loss_free_roi vs other)",
+  "audit": {
+    "roi_report_present": true,
+    "roi_report_path": "reports/n6_roi.json",
+    "loss_free_roi_keys": [
+      "dup_derivation_candidates", "dead_technique", "orphan_paper",
+      "stale_atlas_signal", "redundant_monte_carlo_files",
+      "missing_domain_index", "proposal_outdated"
+    ],
+    "roi_ssot_present": true,
+    "roi_ssot_path": "/Users/ghost/core/nexus/config/roi/n6-architecture.json",
+    "categorization_review": {
+      "all_atlas_derived_entries_tagged_loss_free_roi": true,
+      "uncategorized_atlas_drift": 0,
+      "miscategorized": 0,
+      "notes": "reports/n6_roi.json emits 7 canonical loss_free_roi categories. roi.json SSOT items map 1:1 (atlas/derivation/lineage/techniques/experiments)."
+    }
+  },
+  "verdict": "PASS — loss_free_roi categorization consistent across scanner output + ROI SSOT.",
+  "recommendation": "no re-tagging required; retain current scanner output shape."
+}

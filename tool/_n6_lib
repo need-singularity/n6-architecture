@@ -36,10 +36,26 @@ scan_blockers() {
   done
   local hook_exec=false
   [ -x hooks/pre-commit-n6-integrity ] && hook_exec=true
-  local blog_total=0 blog_fail=0
+  local blog_total=0 blog_fail=0 blog_fail_stale=0
   if [ -f build_log.txt ]; then
     blog_total=$(grep -cE "^\[(OK |FAIL)\]" build_log.txt || echo 0)
-    blog_fail=$(grep -cE "^\[FAIL\]" build_log.txt || echo 0)
+    # Recompute FAIL against actual artifacts — if the paper PDF now exists and
+    # is newer than build_log.txt, the FAIL line is stale (superseded by a
+    # manual rebuild). Drop it from the count so we don't false-alarm after
+    # resolving a paper-specific build issue.
+    local log_mtime=$(stat -f '%m' build_log.txt 2>/dev/null || echo 0)
+    while IFS= read -r line; do
+      local paper=$(echo "$line" | awk '{print $2}')
+      local pdf="papers/pandoc_templates/output/${paper}.pdf"
+      if [ -f "$pdf" ]; then
+        local pdf_mtime=$(stat -f '%m' "$pdf" 2>/dev/null || echo 0)
+        if [ "$pdf_mtime" -gt "$log_mtime" ]; then
+          blog_fail_stale=$((blog_fail_stale+1))
+          continue
+        fi
+      fi
+      blog_fail=$((blog_fail+1))
+    done < <(grep -E "^\[FAIL\]" build_log.txt 2>/dev/null)
   fi
   # loop-rules validation
   local rules_n=$(jq '.rules | length' loop-rules.json 2>/dev/null | head -1 || echo 0)
@@ -70,12 +86,20 @@ scan_blockers() {
   [ "$rules_drift" -gt 0 ] && severity_low=$((severity_low+1))
   [ "$stub" -gt 0 ] && severity_low=$((severity_low+1))
   [ "$atlas_b" -lt 1000 ] && { severity_high=$((severity_high+1)); cross_repo_high=$((cross_repo_high+1)); }
-  # nexus reach (atlas_gap per convention)
+  # nexus reach (atlas_gap per convention) — try remote first, then local fallback
   local nexus_reach=true
+  local nexus_mode="remote"
   if ! timeout 5 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
-    severity_med=$((severity_med+1))
-    nexus_reach=false
-    cross_repo_high=$((cross_repo_high+1))
+    # remote path failed; try local fallback (documented workaround for Darwin)
+    if HEXA_ALLOW_LOCAL_FALLBACK=1 timeout 8 ~/.hx/bin/nexus drill --help >/dev/null 2>&1; then
+      nexus_mode="local_fallback"
+      # not a blocker — just a degraded mode
+    else
+      severity_med=$((severity_med+1))
+      nexus_reach=false
+      nexus_mode="unreachable"
+      cross_repo_high=$((cross_repo_high+1))
+    fi
   fi
 
   cat >"$out" <<JEOF
@@ -94,7 +118,10 @@ scan_blockers() {
     "build_log_total": $blog_total,
     "build_log_fail": $blog_fail,
     "loop_rules_total": $rules_n,
-    "loop_rules_drift": $rules_drift
+    "loop_rules_drift": $rules_drift,
+    "nexus_reach": $nexus_reach,
+    "nexus_mode": "$nexus_mode",
+    "build_log_fail_stale_suppressed": $blog_fail_stale
   },
   "summary": {
     "critical": 0,
