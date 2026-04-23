@@ -2,10 +2,10 @@
   "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
   "engine": {
     "name": "n6-architecture/meta-engine",
-    "version": "0.39.0",
+    "version": "0.40.0",
     "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
     "dispatcher": "bin/n6_meta",
-    "source_hash": "a3d3df03f522354b5ca819ad3b3b411bd62cce337dde43ad346b7b79f1671e03"
+    "source_hash": "86b96bdcb90d21322e589bdfdd4156cee827707e8ee78d305c3155eecb6e4986"
   },
   "phases": [
     {
@@ -202,6 +202,11 @@
       "id": "P39",
       "title": "foundation relations live verification (5 relations evaluate)",
       "state": "live"
+    },
+    {
+      "id": "P40",
+      "title": "Euclid-Euler generator orbit verification (P1..P4)",
+      "state": "live"
     }
   ],
   "scanner_registry": {
@@ -257,6 +262,7 @@
       "inv-values",
       "atom-faithful",
       "relations-live",
+      "generator-orbits",
       "proof",
       "doctor",
       "health",
@@ -312,6 +318,7 @@
     "inv-values",
     "atom-faithful",
     "relations-live",
+    "generator-orbits",
     "emission-completeness"
   ],
   "pre_commit_hard_gates": [

@@ -1,0 +1,11 @@
+{
+  "id": "invariants.generator_orbits_verified",
+  "type": "schema",
+  "description": "Phase 40 scan_invariants_generator_orbits: every declared perfect-number orbit in config/invariants.json must satisfy the Euclid-Euler formula P_k = 2^(M_k - 1) · (2^M_k - 1). The 4 orbits (P1=6, P2=28, P3=496, P4=8128) each derived from Mersenne exponents {phi, sopfr-phi, sopfr, M3} ↔ {2, 3, 5, 7}. Live computation compares declared P_k_value against 2^(M_value - 1)·(2^M_value - 1). Gate: mismatched == 0.",
+  "actual_cmd": "bash -c '[ -f reports/n6_invariants_generator_orbits.json ] && jq -r \"if .orbits_mismatched == 0 and .orbits_passed >= 1 then 1 else 0 end\" reports/n6_invariants_generator_orbits.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-40-generator-orbits"
+}

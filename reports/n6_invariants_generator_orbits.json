@@ -1,0 +1,41 @@
+{
+  "schema": "n6-architecture/n6_invariants_generator_orbits/1",
+  "ts": "2026-04-23T19:48:27Z",
+  "engine_version": "0.40.0",
+  "orbits_total": 4,
+  "orbits_passed": 4,
+  "orbits_mismatched": 0,
+  "per_orbit": [
+    {
+      "k": 1,
+      "M_value": 2,
+      "P_k_declared": 6,
+      "P_k_computed": 6,
+      "ok": 1
+    },
+    {
+      "k": 2,
+      "M_value": 3,
+      "P_k_declared": 28,
+      "P_k_computed": 28,
+      "ok": 1
+    },
+    {
+      "k": 3,
+      "M_value": 5,
+      "P_k_declared": 496,
+      "P_k_computed": 496,
+      "ok": 1
+    },
+    {
+      "k": 4,
+      "M_value": 7,
+      "P_k_declared": 8128,
+      "P_k_computed": 8128,
+      "ok": 1
+    }
+  ],
+  "failures": [],
+  "note": "Phase 40 — verifies each declared P_k orbit against Euclid-Euler formula P_k = 2^(M_k - 1)·(2^M_k - 1). Ensures perfect-number sequence declarations in invariants.json remain consistent with their generator. Gate: mismatched == 0.",
+  "status": "GREEN"
+}
