@@ -5,6 +5,7 @@
 <!-- AUTO:BADGE:START -->
 [![DSE](https://img.shields.io/badge/DSE-323%20domains-blue.svg)](n6shared/config/dse-map.toml)
 <!-- AUTO:BADGE:END -->
+[![Discord](https://img.shields.io/badge/discord-join-5865F2.svg?logo=discord&logoColor=white)](https://discord.gg/u2spd3wwU)
 
 # 🏗️ N6 Architecture — Arithmetic Design Framework
 
