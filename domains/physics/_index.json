@@ -2,19 +2,20 @@
   "_doc": "physics 축 sub-SSOT — 부모: ../_index.json (physics 키). 자동 생성 2026-04-12.",
   "_axis": "physics",
   "_parent": "../_index.json",
-  "_version": "1.0.0",
+  "_version": "1.1.0",
   "_meta": {
     "_category_name": "물리·양자·중력·우주·광학·유체·결정·플라즈마",
-    "_domains_count": 38,
+    "_domains_count": 39,
     "_verified_count": null,
     "_alien_index_avg": null,
     "_honesty_note": "_verified_count / _alien_index_avg: 도메인별 alien_index 소스 부재로 null (자기참조 금지 — 추후 atlas.n6 혹은 _registry 집계 시 갱신)",
-    "_updated": "2026-04-19"
+    "_updated": "2026-04-23"
   },
-  "_count": 38,
+  "_count": 39,
   "_changelog": [
     "1.0.0 (2026-04-12): physics 축 sub-SSOT 신설. 전체 37개 도메인 등록.",
-    "1.1.0 (2026-04-19): tabletop-antimatter 독립 도메인 분리 (부모 antimatter-factory §9 → 독립). 37 → 38."
+    "1.1.0 (2026-04-19): tabletop-antimatter 독립 도메인 분리 (부모 antimatter-factory §9 → 독립). 37 → 38.",
+    "1.1.0 (2026-04-23): DIS-P2-1 fast-track 1 domain — computational-fluid-dynamics."
   ],
   "domains": [
     {
@@ -358,6 +359,15 @@
       "has_hexa": false,
       "has_verify": false,
       "status": "기초"
+    },
+    {
+      "slug": "computational-fluid-dynamics",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
     }
   ],
   "_note": "physics 축 전체 멤버 목록은 ../_index.json physics 키 SSOT 를 따른다 (중복 등록 금지)."

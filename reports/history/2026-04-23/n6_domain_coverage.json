@@ -1,9 +1,9 @@
 {
   "schema": "n6-architecture/n6_domain_coverage/1",
-  "ts": "2026-04-23T02:39:42Z",
+  "ts": "2026-04-23T02:50:26Z",
   "sectors_total": 10,
   "sectors_with_index": 11,
-  "domains_total": 341,
+  "domains_total": 346,
   "techniques_total": 225,
   "readme_techniques_claim": 225,
   "techniques_drift": 0,
@@ -13,10 +13,10 @@
     "culture": 25,
     "energy": 17,
     "infra": 57,
-    "life": 48,
+    "life": 50,
     "materials": 19,
-    "physics": 47,
+    "physics": 48,
     "sf-ufo": 17,
-    "space": 8
+    "space": 10
   }
 }

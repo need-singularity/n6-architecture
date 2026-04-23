@@ -2,18 +2,19 @@
   "_doc": "space 축 sub-SSOT — 부모: ../_index.json (space 키). 자동 생성 2026-04-12.",
   "_axis": "space",
   "_parent": "../_index.json",
-  "_version": "1.0.0",
+  "_version": "1.1.0",
   "_meta": {
     "_category_name": "우주·항공·천문·관측·우주선·코스믹",
-    "_domains_count": 8,
+    "_domains_count": 10,
     "_verified_count": null,
     "_alien_index_avg": null,
     "_honesty_note": "_verified_count / _alien_index_avg: 도메인별 alien_index 소스 부재로 null (자기참조 금지 — 추후 atlas.n6 혹은 _registry 집계 시 갱신)",
-    "_updated": "2026-04-14"
+    "_updated": "2026-04-23"
   },
-  "_count": 8,
+  "_count": 10,
   "_changelog": [
-    "1.0.0 (2026-04-12): space 축 sub-SSOT 신설. 전체 8개 도메인 등록."
+    "1.0.0 (2026-04-12): space 축 sub-SSOT 신설. 전체 8개 도메인 등록.",
+    "1.1.0 (2026-04-23): DIS-P2-1 fast-track 2 domains — astrobiology, astrodynamics."
   ],
   "domains": [
     {
@@ -87,6 +88,24 @@
       "has_hexa": false,
       "has_verify": false,
       "status": "기초"
+    },
+    {
+      "slug": "astrobiology",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
+    },
+    {
+      "slug": "astrodynamics",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "S1"
     }
   ],
   "_note": "space 축 전체 멤버 목록은 ../_index.json space 키 SSOT 를 따른다 (중복 등록 금지)."
