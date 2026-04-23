@@ -1,10 +1,10 @@
 {
   "schema": "n6-architecture/n6_manifest/1",
-  "ts": "2026-04-23T08:35:25Z",
-  "engine_version": "0.18.0",
+  "ts": "2026-04-23T08:56:45Z",
+  "engine_version": "0.19.0",
   "phases": {
-    "live": 18,
-    "total": 18
+    "live": 19,
+    "total": 19
   },
   "scanners": {
     "time_invariant": 11,

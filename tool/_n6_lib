@@ -1165,6 +1165,16 @@ scan_claim_schema() {
     fi
   done
   deficient="${deficient}]"
+  # Phase 19 — duplicate id detection (extension of P17 schema scan).
+  # Two claim files with the same `.id` would produce one proof slot that
+  # overwrites the other silently — the runner keys by id. Flag any id
+  # appearing >1 times across scanners/*.claim.json.
+  local duplicate_ids
+  duplicate_ids=$(jq -r '.id // empty' scanners/*.claim.json 2>/dev/null \
+    | sort | uniq -d | jq -R -s 'split("\n") | map(select(length>0))')
+  duplicate_ids="${duplicate_ids:-[]}"
+  local duplicate_id_count
+  duplicate_id_count=$(echo "$duplicate_ids" | jq 'length')
   cat >"$out" <<JEOF
 {
   "schema": "n6-architecture/n6_claim_schema/1",
@@ -1174,11 +1184,13 @@ scan_claim_schema() {
   "total_claims": $total,
   "deficient_count": $deficient_count,
   "deficient": $deficient,
-  "status": "$([ $deficient_count -eq 0 ] && echo GREEN || echo AMBER)"
+  "duplicate_id_count": $duplicate_id_count,
+  "duplicate_ids": $duplicate_ids,
+  "status": "$([ $deficient_count -eq 0 ] && [ "$duplicate_id_count" = "0" ] && echo GREEN || echo AMBER)"
 }
 JEOF
   jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
-  echo "OK: $out  (deficient=$deficient_count / $total)"
+  echo "OK: $out  (deficient=$deficient_count, duplicate_ids=$duplicate_id_count / $total)"
 }
 
 scan_audit_summary() {

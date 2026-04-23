@@ -1,8 +1,8 @@
 {
   "id": "claim_schema.all_required_fields_present",
   "type": "self_consistency",
-  "description": "Phase 17 scan_claim_schema: every scanners/*.claim.json must have 8 required fields — id, type, description, actual_cmd, expected, must_fail, recheck_cadence, owner. Optional fields (proposal_ref, tolerance) are allowed. Catches malformed new claims that would silently produce meaningless proof results.",
-  "actual_cmd": "bash -c '[ -f reports/n6_claim_schema.json ] && jq -r \"if .deficient_count == 0 then 1 else 0 end\" reports/n6_claim_schema.json 2>/dev/null || echo 0'",
+  "description": "Phase 17 scan_claim_schema: every scanners/*.claim.json must have 8 required fields (id, type, description, actual_cmd, expected, must_fail, recheck_cadence, owner). Optional fields (proposal_ref, tolerance) allowed. Phase 19 extension: the .id field must also be unique across all claim files — two files with the same id would silently overwrite each other in the proof runner.",
+  "actual_cmd": "bash -c '[ -f reports/n6_claim_schema.json ] && jq -r \"if (.deficient_count == 0) and (.duplicate_id_count == 0) then 1 else 0 end\" reports/n6_claim_schema.json 2>/dev/null || echo 0'",
   "expected": "1",
   "must_fail": false,
   "recheck_cadence": "every_commit",
