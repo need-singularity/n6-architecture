@@ -148,8 +148,9 @@ scan_roi() {
   local stale_signal=false
   [ "$signal_age_h" -gt 24 ] && stale_signal=true
 
-  local mc_files=$(find experiments -name "*monte_carlo*" -o -name "*mc_*" 2>/dev/null | wc -l | tr -d ' ')
-  local mc_paths=$(find experiments -name "*monte_carlo*" -o -name "*mc_*" 2>/dev/null | head -20 | j_arr_from_stdin)
+  # exclude venv / _archive / binary artifacts — only count source files we own
+  local mc_files=$(find experiments \( -path '*/venv/*' -o -path '*/_archive/*' -o -name '*.so' -o -name '*.pyi' -o -name '*.pyc' \) -prune -o \( -name "*monte_carlo*" -o -name "*mc_*" \) -type f -print 2>/dev/null | wc -l | tr -d ' ')
+  local mc_paths=$(find experiments \( -path '*/venv/*' -o -path '*/_archive/*' -o -name '*.so' -o -name '*.pyi' -o -name '*.pyc' \) -prune -o \( -name "*monte_carlo*" -o -name "*mc_*" \) -type f -print 2>/dev/null | head -20 | j_arr_from_stdin)
   mc_paths="${mc_paths:-[]}"
 
   local missing_idx=$(for d in domains/*/; do

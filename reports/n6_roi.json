@@ -1,15 +1,15 @@
 {
   "schema": "n6-architecture/n6_roi/1",
-  "ts": "2026-04-23T02:03:59Z",
+  "ts": "2026-04-23T02:08:31Z",
   "counters": {
     "techniques_total": 225,
     "papers_total": 164,
     "dead_technique_count": 0,
     "orphan_paper_count": 0,
-    "proposals_total": 8,
+    "proposals_total": 9,
     "products_actual": 341,
     "atlas_signal_age_hours": 9,
-    "monte_carlo_file_count": 8
+    "monte_carlo_file_count": 5
   },
   "findings": {
     "dup_derivation_candidates": [
@@ -49,11 +49,8 @@
     "stale_atlas_signal": false,
     "redundant_monte_carlo_files": [
       "experiments/meta/meta_mc_v9_cross_batch.hexa",
-      "experiments/anu_mc_verification",
       "experiments/anu_mc_verification/anu_mc_verify.hexa",
       "experiments/mc_methodology_v3.hexa",
-      "experiments/grover_n6_uniqueness/venv/lib/python3.14/site-packages/scipy/stats/_qmc_cy.cpython-314-darwin.so",
-      "experiments/grover_n6_uniqueness/venv/lib/python3.14/site-packages/scipy/stats/_qmc_cy.pyi",
       "experiments/monte_carlo_v93.hexa",
       "experiments/mc_v93_by_domain.hexa"
     ],
