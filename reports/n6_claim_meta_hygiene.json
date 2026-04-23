@@ -1,0 +1,12 @@
+{
+  "schema": "n6-architecture/n6_claim_meta_hygiene/1",
+  "ts": "2026-04-23T16:22:20Z",
+  "engine_version": "0.28.0",
+  "total_claims": 38,
+  "flagged_count": 0,
+  "flagged": [],
+  "allowed_owners": "meta-engine arithmetic_core atlas_team discovery engine infra publish techniques_team verify",
+  "proposal_ref_pattern": "^(phase-[0-9]+-[a-z0-9-]+|n6a-[0-9]{8}-[0-9]{3})$",
+  "note": "Phase 28 — value-level hygiene for claim metadata. P17 checks presence; P28 checks validity. Extending either allowlist (new team or new proposal scheme) is a deliberate ceremony — update this function, not an individual claim, so drift can't creep in.",
+  "status": "GREEN"
+}

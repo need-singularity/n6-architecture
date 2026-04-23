@@ -1,0 +1,11 @@
+{
+  "id": "claim_meta.hygiene_clean",
+  "type": "self_consistency",
+  "description": "Phase 28 scan_claim_meta_hygiene: every claim's owner must be in a known-team allowlist, and proposal_ref (when present) must match 'phase-<n>-<slug>' or 'n6a-<YYYYMMDD>-<NNN>'. P17 only checks field presence; P28 adds value-level validation so a typo (e.g. owner 'meta_engine' vs 'meta-engine') can't silently drift team attribution. Extending either allowlist is a deliberate ceremony — update scan_claim_meta_hygiene in tool/_n6_lib, not the individual claim.",
+  "actual_cmd": "bash -c '[ -f reports/n6_claim_meta_hygiene.json ] && jq -r \"if .flagged_count == 0 then 1 else 0 end\" reports/n6_claim_meta_hygiene.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-28-claim-meta-hygiene"
+}

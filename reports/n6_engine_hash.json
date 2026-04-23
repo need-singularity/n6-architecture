@@ -1,10 +1,10 @@
 {
   "schema": "n6-architecture/n6_engine_hash/1",
-  "ts": "2026-04-23T16:02:56Z",
-  "engine_version": "0.27.0",
+  "ts": "2026-04-23T16:23:10Z",
+  "engine_version": "0.28.0",
   "source_file": "tool/_n6_lib",
-  "actual_sha256": "828206de3a9b5069dbe5f7d22471692fbb3332756321c0946b9e3ece654c7e97",
-  "stamped_sha256": "828206de3a9b5069dbe5f7d22471692fbb3332756321c0946b9e3ece654c7e97",
+  "actual_sha256": "46470ebb674a374a7725a86126d2d0a8fc2854350e0bd14636e706a4c696367a",
+  "stamped_sha256": "46470ebb674a374a7725a86126d2d0a8fc2854350e0bd14636e706a4c696367a",
   "matches": true,
   "status": "GREEN",
   "note": "If matches=false, either (a) engine was intentionally modified — rotate manifest.engine.source_hash to the current sha OR (b) tamper detected — investigate diff."

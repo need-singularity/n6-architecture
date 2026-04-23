@@ -1428,6 +1428,61 @@ JEOF
   echo "OK: $out  (total=$total flagged=$flag_count)"
 }
 
+# ────────────────────────────────────────────────────────────
+# Phase 28 — claim meta hygiene (owner enum + proposal_ref pattern).
+#   P17 은 required 필드의 presence 만 보장한다. 값 자체가 drift 하면 감사
+#   체계가 조용히 오염된다 — 예: owner 가 오타 ("meta_engine" vs
+#   "meta-engine") 로 팀 할당이 바뀐 것처럼 보임. P28 은 값 레벨 검증:
+#     owner        ∈ known enum (현재 9개 팀/모듈)
+#     proposal_ref ∈ {null, "phase-<n>-<slug>", "n6a-<YYYYMMDD>-<NNN>"}
+#   Gate: flagged_count == 0. 새 owner 나 새 proposal scheme 이 필요하면
+#   이 함수의 allowlist 를 먼저 확장하는 ceremony 가 강제된다.
+#   claim: scanners/38_claim_meta_hygiene.claim.json
+# ────────────────────────────────────────────────────────────
+scan_claim_meta_hygiene() {
+  local out="reports/n6_claim_meta_hygiene.json"
+  local allowed_owners="meta-engine arithmetic_core atlas_team discovery engine infra publish techniques_team verify"
+  local ref_pattern='^(phase-[0-9]+-[a-z0-9-]+|n6a-[0-9]{8}-[0-9]{3})$'
+  local total=0 flag_count=0 entries="" first=1
+  for f in scanners/*.claim.json; do
+    [ -f "$f" ] || continue
+    total=$((total+1))
+    local owner ref base reasons
+    base=$(basename "$f")
+    owner=$(jq -r '.owner // ""' "$f")
+    ref=$(jq -r '.proposal_ref // ""' "$f")
+    reasons=""
+    if ! echo " $allowed_owners " | grep -qE " ${owner} " 2>/dev/null; then
+      reasons="${reasons}owner_unknown(${owner}) "
+    fi
+    if [ -n "$ref" ] && ! echo "$ref" | grep -qE "$ref_pattern" 2>/dev/null; then
+      reasons="${reasons}ref_malformed(${ref}) "
+    fi
+    if [ -n "$reasons" ]; then
+      flag_count=$((flag_count+1))
+      [ $first -eq 0 ] && entries="${entries},"
+      entries="${entries}{\"file\":\"${base}\",\"reasons\":\"${reasons% }\"}"
+      first=0
+    fi
+  done
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_claim_meta_hygiene/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "total_claims": $total,
+  "flagged_count": $flag_count,
+  "flagged": [$entries],
+  "allowed_owners": "$allowed_owners",
+  "proposal_ref_pattern": "$ref_pattern",
+  "note": "Phase 28 — value-level hygiene for claim metadata. P17 checks presence; P28 checks validity. Extending either allowlist (new team or new proposal scheme) is a deliberate ceremony — update this function, not an individual claim, so drift can't creep in.",
+  "status": "$([ $flag_count -eq 0 ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (total=$total flagged=$flag_count)"
+}
+
 append_audit_trail() {
   local out="reports/n6_meta_audit.jsonl"
   local score
@@ -2237,6 +2292,8 @@ continuous_scan() {
   # Phase 27 — claim cmd purity (static scan of scanners/*.claim.json,
   # no dependency on other reports; runs before emission-completeness).
   scan_claim_cmd_purity >/dev/null 2>&1 || true
+  # Phase 28 — claim meta hygiene (owner enum + proposal_ref pattern).
+  scan_claim_meta_hygiene >/dev/null 2>&1 || true
   # Phase 26 — emission completeness (MUST run last: every declared
   # emitter must have produced its file by now for the check to be valid).
   scan_emission_completeness >/dev/null 2>&1 || true
@@ -2260,7 +2317,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_dir_inventory scan_coverage_map scan_claim_cmd_purity scan_emission_completeness scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_engine_hash scan_emitter_registry scan_gate_alignment scan_claim_schema scan_audit_retention scan_audit_summary scan_claim_effectiveness scan_dir_inventory scan_coverage_map scan_claim_cmd_purity scan_claim_meta_hygiene scan_emission_completeness scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -2321,6 +2378,7 @@ case "${1:-}" in
   dir-inventory|inventory)  scan_dir_inventory ;;
   emission-completeness|emission)  scan_emission_completeness ;;
   claim-purity|purity)  scan_claim_cmd_purity ;;
+  claim-meta|meta-hygiene)  scan_claim_meta_hygiene ;;
   gate-alignment|gates)  scan_gate_alignment ;;
   claim-schema|claims)  scan_claim_schema ;;
   trend|regression)  scan_trend ;;
@@ -2339,7 +2397,7 @@ usage: bash tool/_n6_lib <sub>
       | experiments | falsification | gap | propose | promote | invariants
       | idempotence | manifest | schemas | integrity | engine-hash | emitter-registry
       | audit | audit-summary | audit-retention | claim-effectiveness
-      | coverage-map | dir-inventory | emission-completeness | claim-purity
+      | coverage-map | dir-inventory | emission-completeness | claim-purity | claim-meta
       | gate-alignment | claim-schema | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
