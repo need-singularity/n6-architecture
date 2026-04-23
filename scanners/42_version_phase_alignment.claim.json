@@ -1,0 +1,11 @@
+{
+  "id": "manifest.version_phase_aligned",
+  "type": "schema",
+  "description": "Phase 32 scan_version_phase_alignment: engine.version 'minor' component must equal the numeric id of the last phase. Convention is 0.<N>.0 where N = last phase number (P31 ↔ 0.31.0). Missing the version bump when adding a phase leaves source_hash rotated but version stale — a state that looks like a phase landed without a stamp update. Gate: aligned == true.",
+  "actual_cmd": "bash -c '[ -f reports/n6_version_phase_alignment.json ] && jq -r \"if .aligned == true then 1 else 0 end\" reports/n6_version_phase_alignment.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-32-version-phase-alignment"
+}

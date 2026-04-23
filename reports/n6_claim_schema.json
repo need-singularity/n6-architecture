@@ -1,7 +1,7 @@
 {
   "schema": "n6-architecture/n6_claim_schema/1",
-  "ts": "2026-04-23T16:57:35Z",
-  "engine_version": "0.31.0",
+  "ts": "2026-04-23T17:08:01Z",
+  "engine_version": "0.32.0",
   "required_fields": [
     "id",
     "type",
@@ -12,7 +12,7 @@
     "recheck_cadence",
     "owner"
   ],
-  "total_claims": 41,
+  "total_claims": 42,
   "deficient_count": 0,
   "deficient": [],
   "duplicate_id_count": 0,

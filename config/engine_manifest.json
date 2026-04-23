@@ -2,10 +2,10 @@
   "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
   "engine": {
     "name": "n6-architecture/meta-engine",
-    "version": "0.31.0",
+    "version": "0.32.0",
     "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
     "dispatcher": "bin/n6_meta",
-    "source_hash": "1b25d152d1556b88a3c4ac3b60f0da5fcdbc9501011c80189a7c90bd991a532d"
+    "source_hash": "eaf8af88f89fe7b53b4f1639948861299a3f03d3224e04825ad7ee74459489e4"
   },
   "phases": [
     {
@@ -162,6 +162,11 @@
       "id": "P31",
       "title": "selftest ↔ function-definition parity — no undefined names",
       "state": "live"
+    },
+    {
+      "id": "P32",
+      "title": "version ↔ last-phase alignment — 0.<N>.0 ↔ P<N>",
+      "state": "live"
     }
   ],
   "scanner_registry": {
@@ -209,6 +214,7 @@
       "phase-monotonic",
       "registry-parity",
       "selftest-parity",
+      "version-alignment",
       "proof",
       "doctor",
       "health",
@@ -256,6 +262,7 @@
     "phase-monotonic",
     "registry-parity",
     "selftest-parity",
+    "version-alignment",
     "emission-completeness"
   ],
   "pre_commit_hard_gates": [
