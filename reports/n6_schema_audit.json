@@ -1,10 +1,10 @@
 {
   "schema": "n6-architecture/n6_schema_audit/1",
-  "ts": "2026-04-23T05:27:48Z",
-  "engine_version": "0.16.0",
+  "ts": "2026-04-23T05:38:32Z",
+  "engine_version": "0.17.0",
   "schema_prefix_required": "n6-architecture/",
-  "total_reports": 27,
-  "ok": 27,
+  "total_reports": 28,
+  "ok": 28,
   "drift_count": 0,
   "drifts": [],
   "status": "GREEN"

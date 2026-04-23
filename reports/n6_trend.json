@@ -1,10 +1,10 @@
 {
   "schema": "n6-architecture/n6_trend/1",
-  "ts": "2026-04-23T05:27:49Z",
+  "ts": "2026-04-23T05:38:33Z",
   "prior_snapshot": "2026-04-22",
   "today": {
-    "score": 100,
-    "proof_red": 0,
+    "score": 97,
+    "proof_red": 1,
     "blocker_high": 0,
     "falsification_alarm": false
   },

@@ -1,0 +1,19 @@
+{
+  "schema": "n6-architecture/n6_claim_schema/1",
+  "ts": "2026-04-23T05:38:32Z",
+  "engine_version": "0.17.0",
+  "required_fields": [
+    "id",
+    "type",
+    "description",
+    "actual_cmd",
+    "expected",
+    "must_fail",
+    "recheck_cadence",
+    "owner"
+  ],
+  "total_claims": 28,
+  "deficient_count": 0,
+  "deficient": [],
+  "status": "GREEN"
+}

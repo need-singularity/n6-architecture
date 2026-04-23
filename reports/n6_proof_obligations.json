@@ -1,10 +1,10 @@
 {
   "schema": "n6-architecture/n6_proof_obligations/1",
-  "ts": "2026-04-23T05:28:15Z",
-  "total": 27,
+  "ts": "2026-04-23T05:39:20Z",
+  "total": 28,
   "green": 27,
-  "red": 0,
-  "status": "GREEN",
+  "red": 1,
+  "status": "RED",
   "claims": [
     {
       "file": "01_arithmetic_n6.claim.json",
@@ -79,8 +79,8 @@
     {
       "file": "11_engine_zero_failures.claim.json",
       "type": "ci_health",
-      "status": "green",
-      "result": "1",
+      "status": "red",
+      "result": "0",
       "expected": "1"
     },
     {
@@ -190,6 +190,13 @@
     },
     {
       "file": "27_no_persistent_failures.claim.json",
+      "type": "self_consistency",
+      "status": "green",
+      "result": "1",
+      "expected": "1"
+    },
+    {
+      "file": "28_claim_schema_complete.claim.json",
       "type": "self_consistency",
       "status": "green",
       "result": "1",

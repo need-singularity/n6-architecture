@@ -2,7 +2,7 @@
   "_doc": "Meta-evolution engine self-manifest. Authoritative record of engine identity, phase history, and scanner registry. Updated by `bin/n6_meta manifest`.",
   "engine": {
     "name": "n6-architecture/meta-engine",
-    "version": "0.16.0",
+    "version": "0.17.0",
     "source_of_truth": "tool/_n6_lib + scanners/*.claim.json",
     "dispatcher": "bin/n6_meta"
   },
@@ -22,7 +22,8 @@
     {"id": "P13", "title": "audit trail consumer + continuity claim", "state": "live"},
     {"id": "P14", "title": "gate declaration ↔ hook enforcement alignment", "state": "live"},
     {"id": "P15", "title": "audit trail integrity — ts/version monotonicity", "state": "live"},
-    {"id": "P16", "title": "failing claim/scanner identity + persistent-failure gate", "state": "live"}
+    {"id": "P16", "title": "failing claim/scanner identity + persistent-failure gate", "state": "live"},
+    {"id": "P17", "title": "claim schema completeness (8 required fields)", "state": "live"}
   ],
   "scanner_registry": {
     "time_invariant": [
@@ -36,7 +37,7 @@
     "meta": [
       "gap", "propose", "promote", "invariants", "idempotence",
       "manifest", "schemas", "integrity", "audit", "audit-summary",
-      "gate-alignment", "proof", "doctor", "health", "selftest"
+      "gate-alignment", "claim-schema", "proof", "doctor", "health", "selftest"
     ]
   },
   "schema_prefix": "n6-architecture/",
@@ -45,7 +46,7 @@
     "papers", "monte_carlo", "causal", "citations", "nexus_dep",
     "loop_rules", "experiments", "falsification", "gap", "propose",
     "promote", "invariants", "manifest", "schemas", "integrity",
-    "gate-alignment", "proof", "doctor", "trend", "audit", "audit-summary"
+    "gate-alignment", "claim-schema", "proof", "doctor", "trend", "audit", "audit-summary"
   ],
   "pre_commit_hard_gates": [
     "falsification.critical_alarm == false"

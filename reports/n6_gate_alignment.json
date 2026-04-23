@@ -1,7 +1,7 @@
 {
   "schema": "n6-architecture/n6_gate_alignment/1",
-  "ts": "2026-04-23T05:27:48Z",
-  "engine_version": "0.16.0",
+  "ts": "2026-04-23T05:38:32Z",
+  "engine_version": "0.17.0",
   "hook_path": "hooks/pre-commit-n6-integrity",
   "hook_present": true,
   "gates": [

@@ -1,0 +1,11 @@
+{
+  "id": "claim_schema.all_required_fields_present",
+  "type": "self_consistency",
+  "description": "Phase 17 scan_claim_schema: every scanners/*.claim.json must have 8 required fields — id, type, description, actual_cmd, expected, must_fail, recheck_cadence, owner. Optional fields (proposal_ref, tolerance) are allowed. Catches malformed new claims that would silently produce meaningless proof results.",
+  "actual_cmd": "bash -c '[ -f reports/n6_claim_schema.json ] && jq -r \"if .deficient_count == 0 then 1 else 0 end\" reports/n6_claim_schema.json 2>/dev/null || echo 0'",
+  "expected": "1",
+  "must_fail": false,
+  "recheck_cadence": "every_commit",
+  "owner": "meta-engine",
+  "proposal_ref": "phase-17-claim-schema"
+}

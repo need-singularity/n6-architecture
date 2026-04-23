@@ -1107,6 +1107,54 @@ JEOF
   echo "OK: $out  (unmatched=$unmatched)"
 }
 
+# ────────────────────────────────────────────────────────────
+# Phase 17 — claim schema completeness
+#   모든 scanners/*.claim.json 이 8개 필수 필드를 가지고 있는지 확인.
+#   필수: id, type, description, actual_cmd, expected, must_fail,
+#         recheck_cadence, owner.
+#   선택: proposal_ref, tolerance (둘 다 기존 파일 일부에만 존재).
+#   claim: scanners/28_claim_schema_complete.claim.json (deficient == 0)
+# ────────────────────────────────────────────────────────────
+scan_claim_schema() {
+  local out="reports/n6_claim_schema.json"
+  local required='["id","type","description","actual_cmd","expected","must_fail","recheck_cadence","owner"]'
+  local deficient="["
+  local first=1
+  local deficient_count=0
+  local total=0
+  for f in scanners/*.claim.json; do
+    [ -f "$f" ] || continue
+    total=$((total+1))
+    local missing
+    missing=$(jq --argjson req "$required" \
+      '. as $claim | [$req[] | . as $k | select($claim | has($k) | not)]' "$f" 2>/dev/null)
+    local miss_count
+    miss_count=$(echo "$missing" | jq 'length' 2>/dev/null)
+    miss_count="${miss_count:-0}"
+    if [ "$miss_count" != "0" ]; then
+      [ $first -eq 0 ] && deficient="${deficient},"
+      deficient="${deficient}{\"file\":\"$(basename "$f")\",\"missing\":$missing}"
+      first=0
+      deficient_count=$((deficient_count+1))
+    fi
+  done
+  deficient="${deficient}]"
+  cat >"$out" <<JEOF
+{
+  "schema": "n6-architecture/n6_claim_schema/1",
+  "ts": "$(ts)",
+  "engine_version": "${ENGINE_VERSION}",
+  "required_fields": $required,
+  "total_claims": $total,
+  "deficient_count": $deficient_count,
+  "deficient": $deficient,
+  "status": "$([ $deficient_count -eq 0 ] && echo GREEN || echo AMBER)"
+}
+JEOF
+  jq '.' "$out" >"$out.tmp" && mv "$out.tmp" "$out"
+  echo "OK: $out  (deficient=$deficient_count / $total)"
+}
+
 scan_audit_summary() {
   local src="reports/n6_meta_audit.jsonl"
   local out="reports/n6_audit_summary.json"
@@ -1724,6 +1772,7 @@ continuous_scan() {
   scan_schemas >/dev/null 2>&1 || true
   scan_engine_integrity >/dev/null 2>&1 || true
   scan_gate_alignment >/dev/null 2>&1 || true
+  scan_claim_schema >/dev/null 2>&1 || true
   run_proof_obligations >/dev/null 2>&1 || true
   doctor >/dev/null
   # trend must come AFTER doctor (reads doctor's score) and BEFORE history
@@ -1754,7 +1803,7 @@ selftest() {
   local results="["
   local first=1
   local total=0 pass=0 fail=0
-  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_gate_alignment scan_audit_summary scan_trend run_proof_obligations; do
+  for cmd in scan_blockers scan_roi scan_arithmetic scan_derivation scan_atlas scan_domains scan_papers scan_monte_carlo scan_causal scan_citations scan_nexus_dep scan_loop_rules scan_experiments scan_falsification gap_proposer propose_from_gaps promote_cross_repo scan_invariants scan_manifest scan_schemas scan_engine_integrity scan_gate_alignment scan_claim_schema scan_audit_summary scan_trend run_proof_obligations; do
     total=$((total+1))
     local st=$(date +%s)
     "$cmd" >/dev/null 2>&1 || true
@@ -1808,6 +1857,7 @@ case "${1:-}" in
   audit|audit-trail)  append_audit_trail ;;
   audit-summary|asum)  scan_audit_summary ;;
   gate-alignment|gates)  scan_gate_alignment ;;
+  claim-schema|claims)  scan_claim_schema ;;
   trend|regression)  scan_trend ;;
   proof)           run_proof_obligations ;;
   continuous-scan|continuous_scan|continuous)  continuous_scan ;;
@@ -1823,7 +1873,7 @@ usage: bash tool/_n6_lib <sub>
       | monte_carlo | causal | citations | nexus_dep | loop_rules
       | experiments | falsification | gap | propose | promote | invariants
       | idempotence | manifest | schemas | integrity | audit | audit-summary
-      | gate-alignment | trend | proof
+      | gate-alignment | claim-schema | trend | proof
       | continuous-scan | fast | doctor | health | telemetry | selftest
 USAGE
     exit 2
