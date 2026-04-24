@@ -1,13 +1,158 @@
-// n6_calculator.py → .hexa 포팅 스텁
-// 원본 경로: tools/n6_calculator.py
-// 포팅 상태: STUB (원본 423 줄)
-// 원본 요약: N6 마스터 계산기 — 모든 n=6 산술 함수 및 설계 도구
-// 핵심 기능: 상수 출력, R-score 계산, 수 표현식 탐색, Leech-24, 칩 메트릭, 산업 패턴, R(n) 스펙트럼
-// 참고: nexus calc 명령어가 Rust 버전으로 대부분 대체
-// 본격 포팅: nexus calc 통합 또는 hexa run engine/n6_calculator.hexa 으로 추진 예정
-// 원본 로직은 git history 에 보존됨
+// engine/n6_calculator.hexa
+// ──────────────────────────────────────────────────────────────────────────
+// N6 Master Calculator — minimal real selftest (R24-selftest-flip)
+// 원본 SSOT: tools/n6_calculator.py (git 94bf0e28^, 423 줄)
+// 원본 역할: 모든 n=6 산술 함수 SSOT — σ, τ, φ, sopfr, mobius, jordan, dedekind ...
+//
+// 이식 범위 (argparse CLI / industry pattern scan 은 범위 밖):
+//   - sigma(n), tau(n), phi(n), sopfr(n)
+//   - core identity   : σ(6)·φ(6) == n·τ(6) == 24
+//   - σ(6)² = 144     (Lie group E₆ 관련 정체성)
+//   - perfect number  : σ(p) == 2·p   ⇒ p ∈ {6, 28, 496, ...}
+//   - R(n)=1 유일성   : n∈[1,20] 에서 정확히 {1, 6}
+// 규칙: R1 HEXA-FIRST, R18 미니멀, N61 한글
+// ──────────────────────────────────────────────────────────────────────────
 
-fn main() {
-    println("STUB: n6_calculator.py (HEXA 포팅 대기)")
-    println("기능: σ/τ/φ/sopfr 상수, R-score, Leech-24, 칩 메트릭, 산업 패턴")
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n { if n % i == 0 { s = s + i } i = i + 1 }
+    return s
 }
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n { if n % i == 0 { c = c + 1 } i = i + 1 }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+// sopfr(n) — sum of prime factors with repetition
+// sopfr(6) = 2+3 = 5, sopfr(12) = 2+2+3 = 7
+fn sopfr(n: i64) -> i64 {
+    if n < 2 { return 0 }
+    let mut s: i64 = 0
+    let mut d: i64 = 2
+    let mut t: i64 = n
+    while d * d <= t {
+        while t % d == 0 { s = s + d; t = t / d }
+        d = d + 1
+    }
+    if t > 1 { s = s + t }
+    return s
+}
+
+fn R_is_one(n: i64) -> bool {
+    if n < 1 { return false }
+    return sigma(n) * phi(n) == n * tau(n)
+}
+
+// ── 자기 테스트 ───────────────────────────────────────────
+fn main() -> i64 {
+    let mut pass: i64 = 0
+    let mut fail: i64 = 0
+
+    // T1: σ(6) = 12
+    if sigma(6) == 12 {
+        println("T1 PASS : σ(6) = 12")
+        pass = pass + 1
+    } else {
+        println("T1 FAIL : σ(6) drift")
+        fail = fail + 1
+    }
+
+    // T2: τ(6) = 4
+    if tau(6) == 4 {
+        println("T2 PASS : τ(6) = 4")
+        pass = pass + 1
+    } else {
+        println("T2 FAIL : τ(6) drift")
+        fail = fail + 1
+    }
+
+    // T3: φ(6) = 2
+    if phi(6) == 2 {
+        println("T3 PASS : φ(6) = 2")
+        pass = pass + 1
+    } else {
+        println("T3 FAIL : φ(6) drift")
+        fail = fail + 1
+    }
+
+    // T4: sopfr(6) = 2 + 3 = 5
+    if sopfr(6) == 5 {
+        println("T4 PASS : sopfr(6) = 5")
+        pass = pass + 1
+    } else {
+        println("T4 FAIL : sopfr(6) drift")
+        fail = fail + 1
+    }
+
+    // T5: core identity  σ(6)·φ(6) = n·τ(6) = 24
+    let lhs: i64 = sigma(6) * phi(6)
+    let rhs: i64 = 6 * tau(6)
+    if lhs == rhs && lhs == 24 {
+        println("T5 PASS : σ(6)·φ(6) = 6·τ(6) = 24  (core identity)")
+        pass = pass + 1
+    } else {
+        println("T5 FAIL : core identity broken")
+        fail = fail + 1
+    }
+
+    // T6: σ(6)² = 144
+    let s6sq: i64 = sigma(6) * sigma(6)
+    if s6sq == 144 {
+        println("T6 PASS : σ(6)² = 144")
+        pass = pass + 1
+    } else {
+        println("T6 FAIL : σ(6)² drift")
+        fail = fail + 1
+    }
+
+    // T7: perfect number — σ(p) = 2·p  for p ∈ {6, 28}
+    if sigma(6) == 2 * 6 && sigma(28) == 2 * 28 {
+        println("T7 PASS : perfect numbers 6 and 28 (σ(p) = 2p)")
+        pass = pass + 1
+    } else {
+        println("T7 FAIL : perfect number property broken")
+        fail = fail + 1
+    }
+
+    // T8: identity uniqueness in [1,20] — exactly {1, 6} satisfy R(n)=1
+    let mut hits: i64 = 0
+    let mut hit_sum: i64 = 0
+    let mut n: i64 = 1
+    while n <= 20 {
+        if R_is_one(n) { hits = hits + 1; hit_sum = hit_sum + n }
+        n = n + 1
+    }
+    // {1,6} 의 합 = 7 이어야 한다 ({1,6} 유일성 확인)
+    if hits == 2 && hit_sum == 7 {
+        println("T8 PASS : identity uniqueness in [1,20] = {1, 6}")
+        pass = pass + 1
+    } else {
+        println("T8 FAIL : identity-set drift in [1,20]")
+        fail = fail + 1
+    }
+
+    println("────────────────────────────────────────")
+    println("SELFTEST n6_calculator : PASS/FAIL below")
+    println(pass)
+    println(fail)
+    return fail
+}
+
+main()

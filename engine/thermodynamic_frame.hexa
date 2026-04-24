@@ -1,11 +1,179 @@
-// thermodynamic_frame.py → .hexa 포팅 스텁
-// 원본 경로: engine/thermodynamic_frame.py
-// 포팅 상태: STUB (의존 라이브러리: numpy, torch; 원본 167 줄)
-// 원본 요약: Thermodynamic Frame
-// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
-// 원본 로직은 git history 에 보존됨
+// engine/thermodynamic_frame.hexa
+// ──────────────────────────────────────────────────────────────────────────
+// Thermodynamic Frame — minimal real selftest (R24-selftest-flip)
+// 원본 SSOT: engine/thermodynamic_frame.py (git 94bf0e28^, 167 줄 numpy+torch)
+// 원본 가설: R(n) = σ(n)·φ(n) / (n·τ(n)).  R(n)=1 ⇔ n ∈ {1, 6}.
+//           The unique non-trivial reversibility is at n=6.
+//
+// 이식 범위 (torch.nn, clausius_check 는 범위 밖):
+//   - sigma(n), tau(n), phi(n) — 정수 산술
+//   - R_is_one(n) : σ·φ == n·τ  (정수 교차검산, float 없음)
+//   - R_float(n)  : float division으로 1.0 cross-check
+//   - σ-subsystem(d_model%12==0 ⇒ 1.0, else (1 - min(m, 12-m)/12))
+//   - τ-subsystem(|d_ff/d_model - 4/3| → 1.0 - err)
+// 규칙: R1 HEXA-FIRST, R18 미니멀, N61 한글
+// ──────────────────────────────────────────────────────────────────────────
 
-fn main() {
-    println("STUB: thermodynamic_frame.py (HEXA 포팅 대기)")
-    println("의존: numpy, torch")
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n { if n % i == 0 { s = s + i } i = i + 1 }
+    return s
 }
+
+fn tau(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut i: i64 = 1
+    while i <= n { if n % i == 0 { c = c + 1 } i = i + 1 }
+    return c
+}
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn abs_f(x: f64) -> f64 {
+    if x < 0.0 { return -x }
+    return x
+}
+
+// R(n) = σ·φ / (n·τ)   정수 교차식: σ·φ == n·τ ⇔ R(n) = 1
+fn R_is_one(n: i64) -> bool {
+    if n < 1 { return false }
+    return sigma(n) * phi(n) == n * tau(n)
+}
+
+// Float R(n) — cross-check 용
+fn R_float(n: i64) -> f64 {
+    if n < 1 { return 0.0 }
+    let s: f64 = 1.0 * sigma(n)
+    let p: f64 = 1.0 * phi(n)
+    let t: f64 = 1.0 * tau(n)
+    let nn: f64 = 1.0 * n
+    return (s * p) / (nn * t)
+}
+
+// σ-subsystem score : d_model 이 12 (=σ(6)) 의 배수에 가까울수록 1
+fn sigma_subsystem_score(d_model: i64) -> f64 {
+    let r: i64 = d_model % 12
+    if r == 0 { return 1.0 }
+    let lo: i64 = r
+    let hi: i64 = 12 - r
+    let m: i64 = if lo < hi { lo } else { hi }
+    return 1.0 - (1.0 * m) / 12.0
+}
+
+// τ-subsystem score : d_ff/d_model 이 4/3 에 가까울수록 1
+fn tau_subsystem_score(d_model: i64, d_ff: i64) -> f64 {
+    if d_model == 0 { return 0.0 }
+    let ratio: f64 = (1.0 * d_ff) / (1.0 * d_model)
+    let target: f64 = 4.0 / 3.0
+    let err: f64 = abs_f(ratio - target) / target
+    if err >= 1.0 { return 0.0 }
+    return 1.0 - err
+}
+
+// ── 자기 테스트 ───────────────────────────────────────────
+fn main() -> i64 {
+    let mut pass: i64 = 0
+    let mut fail: i64 = 0
+    let eps: f64 = 0.000001
+
+    // T1: R(1) = 1  (trivial reversibility)
+    if R_is_one(1) {
+        println("T1 PASS : R(1) = 1  (trivial)")
+        pass = pass + 1
+    } else {
+        println("T1 FAIL : R(1) != 1")
+        fail = fail + 1
+    }
+
+    // T2: R(6) = 1  (unique non-trivial reversibility)
+    if R_is_one(6) {
+        println("T2 PASS : R(6) = 1  (non-trivial reversibility)")
+        pass = pass + 1
+    } else {
+        println("T2 FAIL : R(6) != 1")
+        fail = fail + 1
+    }
+
+    // T3: R(n) ≠ 1 for all n ∈ [2,10] \ {6}
+    let mut any_extra: bool = false
+    let mut n: i64 = 2
+    while n <= 10 {
+        if n != 6 && R_is_one(n) { any_extra = true }
+        n = n + 1
+    }
+    if !any_extra {
+        println("T3 PASS : R(n)≠1 for n∈[2,10]\\{6}")
+        pass = pass + 1
+    } else {
+        println("T3 FAIL : extra R=1 hit in [2,10]")
+        fail = fail + 1
+    }
+
+    // T4: exactly 2 hits in [1,100]  (= {1, 6})
+    let mut hits: i64 = 0
+    let mut k: i64 = 1
+    while k <= 100 {
+        if R_is_one(k) { hits = hits + 1 }
+        k = k + 1
+    }
+    if hits == 2 {
+        println("T4 PASS : |{n∈[1,100] : R(n)=1}| = 2")
+        pass = pass + 1
+    } else {
+        println("T4 FAIL : R=1 hit-count mismatch in [1,100]")
+        fail = fail + 1
+    }
+
+    // T5: σ-subsystem — d_model=12 (σ(6) 배수) ⇒ 1.0, d_model=14 ⇒ < 1.0
+    let s_ok: f64 = sigma_subsystem_score(12)
+    let s_bad: f64 = sigma_subsystem_score(14)
+    if abs_f(s_ok - 1.0) < eps && s_bad < 1.0 && s_bad > 0.0 {
+        println("T5 PASS : σ-subsystem score(12)=1, score(14)<1")
+        pass = pass + 1
+    } else {
+        println("T5 FAIL : σ-subsystem scoring wrong")
+        fail = fail + 1
+    }
+
+    // T6: τ-subsystem — d_ff/d_model = 4/3 ⇒ 1.0, ratio=2 ⇒ < 1.0
+    let t_ok: f64 = tau_subsystem_score(384, 512)     // 512/384 = 4/3
+    let t_bad: f64 = tau_subsystem_score(384, 768)    // 768/384 = 2
+    if abs_f(t_ok - 1.0) < eps && t_bad < 1.0 && t_bad >= 0.0 {
+        println("T6 PASS : τ-subsystem score(4/3)=1, score(2)<1")
+        pass = pass + 1
+    } else {
+        println("T6 FAIL : τ-subsystem scoring wrong")
+        fail = fail + 1
+    }
+
+    // T7: float cross-check — R_float(6) ≈ 1.0, R_float(5) ≠ 1.0
+    let rf6: f64 = R_float(6)
+    let rf5: f64 = R_float(5)
+    if abs_f(rf6 - 1.0) < eps && abs_f(rf5 - 1.0) > eps {
+        println("T7 PASS : R_float(6)=1.0, R_float(5)≠1.0  (float cross-check)")
+        pass = pass + 1
+    } else {
+        println("T7 FAIL : R_float drift")
+        fail = fail + 1
+    }
+
+    println("────────────────────────────────────────")
+    println("SELFTEST thermodynamic_frame : PASS/FAIL below")
+    println(pass)
+    println(fail)
+    return fail
+}
+
+main()

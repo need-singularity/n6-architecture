@@ -1,11 +1,148 @@
-// leech24_surface.py → .hexa 포팅 스텁
-// 원본 경로: engine/leech24_surface.py
-// 포팅 상태: STUB (의존 라이브러리: numpy; 원본 165 줄)
-// 원본 요약: Leech-24 Energy Surface
-// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
-// 원본 로직은 git history 에 보존됨
+// engine/leech24_surface.hexa
+// ──────────────────────────────────────────────────────────────────────────
+// Leech-24 Energy Surface — minimal real selftest (R24-selftest-flip)
+// 원본 SSOT: engine/leech24_surface.py (git 94bf0e28^, 165 줄 numpy)
+// 원본 가설: σ(6)·φ(6) = 24 = dim(Leech lattice).
+//           E(x)=0 at optimum, phi = 1/(1+E), kissing = 196560.
+//
+// 이식 범위 (numpy gradient / step_toward_n6 는 범위 밖):
+//   - LEECH_DIM   = σ(6)·φ(6) = 24 (Leech lattice dimension)
+//   - LEECH_KISSING = 196560 (Leech lattice kissing number)
+//   - energy(dx) : weighted Σ w_i · ((v_i - o_i)/o_i)²  over 5 sample axes
+//                 (3 axes at w=2: bottleneck, dedekind, jordan;
+//                  1 axis at w=1.5: phi_consciousness;
+//                  1 axis at w=1.0: tension_stability)
+//   - phi_from_energy(E) = 1 / (1 + E)
+//   - E(opt) = 0, E(perturbed) > 0, strict monotonicity of phi
+// 규칙: R1 HEXA-FIRST, R18 미니멀, N61 한글
+// ──────────────────────────────────────────────────────────────────────────
 
-fn main() {
-    println("STUB: leech24_surface.py (HEXA 포팅 대기)")
-    println("의존: numpy")
+fn sigma(n: i64) -> i64 {
+    let mut s: i64 = 0
+    let mut i: i64 = 1
+    while i <= n { if n % i == 0 { s = s + i } i = i + 1 }
+    return s
 }
+
+fn phi(n: i64) -> i64 {
+    let mut c: i64 = 0
+    let mut k: i64 = 1
+    while k <= n {
+        let mut a: i64 = k
+        let mut b: i64 = n
+        while b != 0 { let t: i64 = a % b; a = b; b = t }
+        if a == 1 { c = c + 1 }
+        k = k + 1
+    }
+    return c
+}
+
+fn abs_f(x: f64) -> f64 {
+    if x < 0.0 { return -x }
+    return x
+}
+
+// Leech lattice 상수
+comptime const LEECH_KISSING: i64 = 196560
+
+// N6_OPTIMA 에서 5 sample 축 (weighted 에너지 합 — 원본 24D 의 축소 모형)
+// o1: bottleneck_ratio = 4/3        (w=2.0)
+// o2: dedekind_heads   = 12         (w=2.0)
+// o3: jordan_experts   = 24         (w=2.0)
+// o4: phi_consciousness= 10         (w=1.5)
+// o5: tension_stability= 1          (w=1.0)
+fn energy5(v1: f64, v2: f64, v3: f64, v4: f64, v5: f64) -> f64 {
+    let o1: f64 = 4.0 / 3.0
+    let o2: f64 = 12.0
+    let o3: f64 = 24.0
+    let o4: f64 = 10.0
+    let o5: f64 = 1.0
+    let d1: f64 = (v1 - o1) / o1
+    let d2: f64 = (v2 - o2) / o2
+    let d3: f64 = (v3 - o3) / o3
+    let d4: f64 = (v4 - o4) / o4
+    let d5: f64 = (v5 - o5) / o5
+    return 2.0 * d1 * d1 + 2.0 * d2 * d2 + 2.0 * d3 * d3 + 1.5 * d4 * d4 + 1.0 * d5 * d5
+}
+
+// phi(E) = 1 / (1 + E)
+fn phi_from_energy(e: f64) -> f64 {
+    return 1.0 / (1.0 + e)
+}
+
+// ── 자기 테스트 ───────────────────────────────────────────
+fn main() -> i64 {
+    let mut pass: i64 = 0
+    let mut fail: i64 = 0
+    let eps: f64 = 0.000001
+
+    // T1: LEECH_DIM = σ(6)·φ(6) = 24
+    let leech_dim: i64 = sigma(6) * phi(6)
+    if leech_dim == 24 {
+        println("T1 PASS : LEECH_DIM = σ(6)·φ(6) = 24")
+        pass = pass + 1
+    } else {
+        println("T1 FAIL : LEECH_DIM drift")
+        fail = fail + 1
+    }
+
+    // T2: kissing number = 196560  (Leech lattice invariant)
+    if LEECH_KISSING == 196560 {
+        println("T2 PASS : kissing number = 196560")
+        pass = pass + 1
+    } else {
+        println("T2 FAIL : kissing number drift")
+        fail = fail + 1
+    }
+
+    // T3: E(optimum) = 0  (all axes at N6_OPTIMA)
+    let e_opt: f64 = energy5(4.0/3.0, 12.0, 24.0, 10.0, 1.0)
+    if abs_f(e_opt) < eps {
+        println("T3 PASS : E(optimum) = 0")
+        pass = pass + 1
+    } else {
+        println("T3 FAIL : E(opt) not zero")
+        fail = fail + 1
+    }
+
+    // T4: E(perturbed) > 0  (any off-optimum config)
+    let e_pert: f64 = energy5(1.0, 12.0, 24.0, 10.0, 1.0)  // bottleneck 축만 1.0 (≠4/3)
+    if e_pert > 0.0 {
+        println("T4 PASS : E(perturbed) > 0")
+        pass = pass + 1
+    } else {
+        println("T4 FAIL : E(pert) non-positive")
+        fail = fail + 1
+    }
+
+    // T5: phi(E=0) = 1.0  (optimum consciousness)
+    let phi_opt: f64 = phi_from_energy(e_opt)
+    if abs_f(phi_opt - 1.0) < eps {
+        println("T5 PASS : phi(0) = 1")
+        pass = pass + 1
+    } else {
+        println("T5 FAIL : phi(0) != 1")
+        fail = fail + 1
+    }
+
+    // T6: phi strict monotonicity  — E↑ ⇒ phi↓
+    let e_small: f64 = energy5(1.35, 12.0, 24.0, 10.0, 1.0)   // tiny perturb
+    let e_big:   f64 = energy5(1.0,  12.0, 24.0, 10.0, 1.0)   // bigger perturb
+    let phi_s: f64 = phi_from_energy(e_small)
+    let phi_b: f64 = phi_from_energy(e_big)
+    if phi_s > phi_b && phi_s < 1.0 && phi_b < phi_s {
+        println("T6 PASS : phi strict monotonic (E↑ ⇒ phi↓)")
+        pass = pass + 1
+    } else {
+        println("T6 FAIL : phi monotonicity broken")
+        fail = fail + 1
+    }
+
+    println("────────────────────────────────────────")
+    println("SELFTEST leech24_surface : PASS/FAIL below")
+    println(pass)
+    println(fail)
+    return fail
+}
+
+main()
