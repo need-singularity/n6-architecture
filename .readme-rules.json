@@ -14,7 +14,8 @@
       ],
       "require_codeblock": false,
       "require_mdlink": false,
-      "require_sealed": true
+      "require_sealed": true,
+      "sealed_hash": "19cb0f203b3fbc1612f942d4ec2c00f728461ebfe9d33a6b8612ee4538fc0fbf"
     },
     "domain-readme": {
       "sections": [],
@@ -24,7 +25,11 @@
       "_domain_hints": true
     },
     "axis-readme": {
-      "sections": ["Axis", "Domains", "선행 도메인"],
+      "sections": [
+        "Axis",
+        "Domains",
+        "선행 도메인"
+      ],
       "require_codeblock": false,
       "require_mdlink": true,
       "require_sealed": false

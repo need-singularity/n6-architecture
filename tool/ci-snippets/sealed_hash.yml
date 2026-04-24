@@ -1,0 +1,29 @@
+# ── CI snippet: README sealed-hash gate (own#14) ─────────────
+# MERGE INSTRUCTIONS
+#   Append this job block under .github/workflows/ci.yml > jobs:
+#   Do NOT replace existing jobs. Keep 2-space indentation relative to `jobs:`.
+#
+# Why a separate patch file?
+#   Multiple concurrent agent worktrees are editing ci.yml — direct editing
+#   would risk conflict. Merge manually or via scripted insertion once those
+#   worktrees land.
+#
+# Rule: own#14 readme-sealed-required
+#   README.md.sealed.hash must match sha256(README.md). Drift -> fail.
+#   Re-seal locally via: python3 tool/readme_sealed_check.py --update
+
+  # ── Job: README sealed-hash gate ────────────────────────────
+  readme-sealed-hash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Syntax check
+        run: python3 -m py_compile tool/readme_sealed_check.py
+
+      - name: Verify README sealed hash
+        run: python3 tool/readme_sealed_check.py

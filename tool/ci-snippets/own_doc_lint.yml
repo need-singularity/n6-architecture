@@ -1,0 +1,42 @@
+# ── CI snippet: own DOC-ONLY lint (own#1..#12, #16) ─────────────
+# MERGE INSTRUCTIONS
+#   Append this job block under .github/workflows/ci.yml > jobs:
+#   Do NOT replace existing jobs. Keep 2-space indentation relative to `jobs:`.
+#
+# Why a separate patch file?
+#   Multiple concurrent agent worktrees are editing ci.yml — direct editing
+#   would risk conflict. Merge manually or via scripted insertion once those
+#   worktrees land.
+#
+# Rule coverage (see tool/own_doc_lint.py for details):
+#   own#1  doc-english-required
+#   own#3  one-doc-per-domain
+#   own#4  domain-15-section-template
+#   own#6  paper-verify-embedded
+#   own#7  registry-sync-on-tool-add
+#   own#11 bt-solution-claim-ban
+#   own#16 md-domain-registry-required
+
+  # ── Job: own DOC-ONLY lint ──────────────────────────────────
+  own-doc-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Syntax check
+        run: python3 -m py_compile tool/own_doc_lint.py
+
+      - name: Run own DOC-ONLY linter
+        run: python3 tool/own_doc_lint.py
+
+      - name: Upload lint report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: own-doc-lint-report
+          path: reports/n6_own_doc_lint.json
+          if-no-files-found: warn
