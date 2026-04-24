@@ -349,3 +349,24 @@ jobs:
 
       - name: OUROBOROS CRITICAL=0 enforcement (own#13)
         run: python3 scripts/monotone/ouroboros_detector_v2.py
+
+  # ── Job 7: own#14 — README sealed-hash enforcement (HARD block) ──
+  # Enforces .own rule #14 (readme-sealed-required).
+  # Tool: tool/readme_sealed_check.py. README.md SHA-256 must match the
+  # value stored in README.md.sealed.hash. Drift → exit 1 (merge blocked).
+  # Re-seal locally via: python3 tool/readme_sealed_check.py --update
+  readme-sealed-hash:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Syntax check
+        run: python3 -m py_compile tool/readme_sealed_check.py
+
+      - name: Verify README sealed hash (own#14)
+        run: python3 tool/readme_sealed_check.py
