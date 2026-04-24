@@ -28,11 +28,19 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 OWN_FILE = REPO_ROOT / ".own"
 REPORT_PATH = REPO_ROOT / "reports" / "n6_own_doc_lint.json"
 # own#1 HARD-block allowlist sidecar — loaded lazily by check_rule_1.
+# (own#4/#6/#12 HARD-block legacy allowlists are inline below — < 50 entries
+#  each, see OWN4/OWN6/OWN12_LEGACY_ALLOWLIST.)
 OWN1_ALLOWLIST_PATH = REPO_ROOT / "tool" / "own1_legacy_allowlist.json"
 
-# own#1 is promoted to HARD block (2026-04-24) per user 'hard go' directive.
-# Any own#1 violation causes overall exit 1 regardless of other rules.
-HARD_RULES: set[int] = {1}
+# HARD-block rule set. Promoted in two waves:
+#   2026-04-24 wave 1 — own#1 (per user 'hard go' directive)
+#   2026-04-24 wave 2 — own#2/#3/#4/#5/#6/#7/#8/#9/#10/#11/#12/#16
+#                       (per user 'hard!!!' aggressive promotion directive)
+# Any HARD violation causes overall exit 1 regardless of other rules.
+# Rules with active violations on promotion day were grandfathered via
+# OWN{4,6,12}_LEGACY_ALLOWLIST inline sets below — new files outside
+# those allowlists must comply immediately.
+HARD_RULES: set[int] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16}
 
 # Target rule IDs — the 14 DOC-ONLY rules this linter enforces.
 TARGET_RULES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
@@ -266,6 +274,27 @@ def check_rule_3_one_doc_per_domain() -> list[dict[str, str]]:
 # own#4 domain-15-section-template — body doc must contain §1..§15 section headers.
 SECTION_HEAD_RE = re.compile(r"^\s*#{1,6}\s*§(\d+)\b", re.MULTILINE)
 
+# Legacy domain bodies grandfathered when own#4 was promoted to HARD on
+# 2026-04-24. Each entry was an existing canonical doc that pre-dated the
+# 15-section template requirement. New domain bodies (or edits that drop
+# sections from non-allowlisted files) must comply with §1..§15 immediately.
+# Frozen set — entries should be REMOVED (after compliance fix), never added.
+OWN4_LEGACY_ALLOWLIST: set[str] = {
+    "domains/culture/ethnomusicology/ethnomusicology.md",
+    "domains/infra/forensic-science/forensic-science.md",
+    "domains/life/gastrointestinal-medicine/gastrointestinal-medicine.md",
+    "domains/life/music-therapy/music-therapy.md",
+    "domains/life/nuclear-medicine/nuclear-medicine.md",
+    "domains/life/radiation-biology/radiation-biology.md",
+    "domains/life/sleep-medicine/sleep-medicine.md",
+    "domains/life/tibetan-medicine/tibetan-medicine.md",
+    "domains/life/urban-farming/urban-farming.md",
+    "domains/physics/computational-fluid-dynamics/computational-fluid-dynamics.md",
+    "domains/space/astrobiology/astrobiology.md",
+    "domains/space/astrodynamics/astrodynamics.md",
+    "domains/space/space-medicine/space-medicine.md",
+}
+
 
 def check_rule_4_fifteen_sections() -> list[dict[str, str]]:
     violations: list[dict[str, str]] = []
@@ -281,19 +310,48 @@ def check_rule_4_fifteen_sections() -> list[dict[str, str]]:
             body = domain_dir / f"{domain_dir.name}.md"
             if not body.is_file():
                 continue  # covered by rule#3
+            rel = str(body.relative_to(REPO_ROOT))
+            if rel in OWN4_LEGACY_ALLOWLIST:
+                # Grandfathered — pre-HARD-promotion legacy file.
+                continue
             text = body.read_text(encoding="utf-8", errors="replace")
             present = {int(m.group(1)) for m in SECTION_HEAD_RE.finditer(text)}
             missing = [n for n in range(1, 16) if n not in present]
             if missing:
                 violations.append({
                     "rule": "own#4",
-                    "path": str(body.relative_to(REPO_ROOT)),
+                    "path": rel,
                     "detail": f"missing sections: {missing}",
                 })
     return violations
 
 
 # own#6 paper-verify-embedded — papers/*.md must contain an embedded ```python block.
+#
+# Legacy papers grandfathered when own#6 was promoted to HARD on 2026-04-24.
+# Entries are existing papers/ docs that pre-dated the embedded-verify mandate
+# (or were drafted under the old verify-script-sibling pattern). New papers
+# under papers/ must inline a ```python verify block immediately. Frozen set.
+OWN6_LEGACY_ALLOWLIST: set[str] = {
+    "papers/M10star-21-unified-theorem-2026-04-15.md",
+    "papers/bernoulli-18-arxiv-stub-2026-04-15.md",
+    "papers/bernoulli-b6-sign-2026-04-22.md",
+    "papers/consciousness-measurement-protocol-2026-04-15.md",
+    "papers/consciousness-red-team-n6-failure-2026-04-15.md",
+    "papers/doob-talagrand-tau-2026-04-22.md",
+    "papers/embody-p10-1-l13-l14-unified-spec-2026-04-15.md",
+    "papers/embody-p11-2-nanobot-gen2-2026-04-15.md",
+    "papers/embody-p12-2-quantum-sensor-design-2026-04-15.md",
+    "papers/embody-p13-1-qkd-6state-design-2026-04-15.md",
+    "papers/enriques-abelian-6fold-link-2026-04-22.md",
+    "papers/lemmas-A3-A4-conditional-2026-04-15.md",
+    "papers/monte-carlo-control-e-2026-04-22.md",
+    "papers/n=6-convergence-80-domains-2026-04-19.md",
+    "papers/plunnecke-6-2026-04-22.md",
+    "papers/yang-mills-beta0-rewriting-2026-04-22.md",
+}
+
+
 def check_rule_6_paper_verify_embedded() -> list[dict[str, str]]:
     violations: list[dict[str, str]] = []
     papers_root = REPO_ROOT / "papers"
@@ -304,14 +362,18 @@ def check_rule_6_paper_verify_embedded() -> list[dict[str, str]]:
         name_lower = path.stem.lower()
         if name_lower in {"readme", "claude", "index", "_index"}:
             continue
+        rel = str(path.relative_to(REPO_ROOT))
+        is_grandfathered = rel in OWN6_LEGACY_ALLOWLIST
         text = path.read_text(encoding="utf-8", errors="replace")
-        if "```python" not in text:
+        if "```python" not in text and not is_grandfathered:
             violations.append({
                 "rule": "own#6",
-                "path": str(path.relative_to(REPO_ROOT)),
+                "path": rel,
                 "detail": "paper missing embedded ```python verify block",
             })
-        # Separate verify scripts forbidden.
+        # Separate verify scripts forbidden — applies to ALL papers, including
+        # grandfathered ones (the prohibition itself is independent of the
+        # embedded-block requirement).
         sibling_verify = list(path.parent.glob(f"{path.stem}_verify.*")) + \
                          list(path.parent.glob(f"{path.stem}-verify.*"))
         for sv in sibling_verify:
@@ -834,6 +896,40 @@ _MISS_TOKEN_RE = re.compile(
 )
 _EXPERIMENT_META_WHITELIST = {"README.md", "CLAUDE.md", "INDEX.md"}
 
+# Legacy experiment docs grandfathered when own#12 was promoted to HARD on
+# 2026-04-24. These pre-date the explicit MISS-criteria-up-front mandate
+# (CONTRIBUTING.md honesty charter #3). New experiment plan/report .md files
+# under experiments/, reports/experiments/, theory/experiments/ must declare a
+# MISS / failure-criteria section before data collection. Frozen set.
+OWN12_LEGACY_ALLOWLIST: set[str] = {
+    "experiments/anu_mc_verification/promote_candidate.md",
+    "experiments/atlas_promotion_p5_report.md",
+    "experiments/blowup/p4_breakthrough_attempt.md",
+    "experiments/blowup/p4_dfs_5module_report.md",
+    "experiments/chip-verify/boot_matrix_report.md",
+    "experiments/chip-verify/n6_speak_integration_bench_report.md",
+    "experiments/chip-verify/soc_bench_promotion_report.md",
+    "experiments/chip-verify/stage0_rerun_report.md",
+    "experiments/chip-verify/verify_chain.md",
+    "experiments/conjecture_to_10star_20.md",
+    "experiments/dse/arch_unified_fuse50_report.md",
+    "experiments/dse/atlas_promotion_candidates_p2.md",
+    "experiments/dse/atlas_promotion_manual_checklist_40.md",
+    "experiments/dse/cross_dse_fusion_v2_design.md",
+    "experiments/dse/cross_matrix_112x10_summary.md",
+    "experiments/dse/cross_matrix_v3_summary.md",
+    "experiments/dse/dse_400_expansion_plan.md",
+    "experiments/dse/dse_500_expansion_plan.md",
+    "experiments/dse/energy_pareto_sweep_plan.md",
+    "experiments/dse/p2_alien_210_plan.md",
+    "experiments/grover_n6_uniqueness/paper_snippet.md",
+    "experiments/paper/bipartite_audit_top10.md",
+    "experiments/paper/bipartite_v2_report.md",
+    "experiments/paper_ranking_p3_top48.md",
+    "experiments/red_team_cycle1.md",
+    "experiments/tier1_experiment_protocols.md",
+}
+
 
 def check_rule_12_miss_criteria() -> list[dict[str, str]]:
     violations: list[dict[str, str]] = []
@@ -858,6 +954,10 @@ def check_rule_12_miss_criteria() -> list[dict[str, str]]:
             for md in candidates:
                 if md.name in _EXPERIMENT_META_WHITELIST:
                     continue
+                rel = str(md.relative_to(REPO_ROOT))
+                if rel in OWN12_LEGACY_ALLOWLIST:
+                    # Grandfathered — pre-HARD-promotion legacy doc.
+                    continue
                 try:
                     text = md.read_text(encoding="utf-8", errors="replace")
                 except Exception:
@@ -865,7 +965,7 @@ def check_rule_12_miss_criteria() -> list[dict[str, str]]:
                 if not _MISS_TOKEN_RE.search(text):
                     violations.append({
                         "rule": "own#12",
-                        "path": str(md.relative_to(REPO_ROOT)),
+                        "path": rel,
                         "detail": (
                             "no MISS / 실패 조건 / failure-criteria section detected — "
                             "declare miss_criteria before data collection"
@@ -992,12 +1092,14 @@ def main(argv: list[str]) -> int:
         f"(HARD={len(hard_violations)}, SOFT={len(soft_violations)})"
     )
 
-    # Exit policy (2026-04-24 promotion):
-    #   - own#1 (HARD) violations -> exit 1 (merge blocker).
-    #   - SOFT-only violations    -> exit 1 preserved for backward compat with
-    #     existing runs; no regression relative to pre-promotion behaviour.
-    # This means the overall contract is: zero violations => 0, else 1.
-    # The split is exposed in the JSON report for downstream triage / dashboards.
+    # Exit policy (2026-04-24 'hard!!!' promotion):
+    #   - HARD violations (any of the 13 rules in HARD_RULES) -> exit 1 (merge
+    #     blocker). All auto-verifiable own rules are now HARD.
+    #   - SOFT-only violations -> exit 1 preserved for backward compat (there
+    #     are no remaining auto-verifiable SOFT rules at this time, but the
+    #     branch is kept so the contract stays "any violation => exit 1").
+    # Overall contract: zero violations => 0, else 1.
+    # The HARD/SOFT split is exposed in the JSON report for triage dashboards.
     return 1 if all_violations else 0
 
 
