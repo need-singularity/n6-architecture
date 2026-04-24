@@ -5,7 +5,7 @@
 - Date: 2026-04-24
 - Duration: approximately 8+ hours (interactive, multi-agent orchestration)
 - Scope: `.own` governance hardening, lifting enforcement coverage from 24 percent to 100 percent, plus kickoff of the allowlist shrinkage program
-- origin/main trajectory (this session): `7b1408e7` -> `3c4432c4` (plus 41 commits)
+- origin/main trajectory (this session): `7b1408e7` -> Phase 4 closure HEAD (plus 41 commits in original window; later extended through Phase 3 then Phase 4)
 - Branch: `main`
 - Repo: `n6-architecture`
 
@@ -143,7 +143,29 @@ Done (2026-04-24). Ten translator agents ran in parallel (batches 3-1 through 3-
 
 Note: per-batch "Allowlist" columns show the local pre-shrink and post-shrink entry counts witnessed by that batch; these are not strictly monotonic across the table because the ten shrink commits landed in a different serialisation order than the logical numbering (batches interleaved rebases). The final, on-main count is 815 after 3-10. Cumulative: 200 files translated, allowlist shrunk from 1015 to 815 entries. origin/main HEAD advanced to `9b0f8510`.
 
-### 3.12 Other repository hygiene
+### 3.12 Phase 4 reports/ translation
+
+Done (2026-04-25). Up to fourteen translator agents ran in parallel batches against the shared `tool/own1_legacy_allowlist.json`. The final landed batches (and their per-batch allowlist deltas) are:
+
+| Batch  | Docs SHA   | Shrink SHA | Scope                                              | Files in commit | Allowlist delta |
+| ------ | ---------- | ---------- | -------------------------------------------------- | --------------: | --------------: |
+| 4-1    | `e5c09a0e` | `df79f063` | breakthroughs-a                                    | 20              | 815 -> 795      |
+| 4-2    | `6dfe2094` | `e7e75d6f` | breakthroughs-b (2 remaining)                      | 2               | 715 -> 695      |
+| 4-3    | `90d7bb3b` | `9bdb274e` | breakthroughs-c                                    | 20              | 695 -> 675      |
+| 4-4    | `ea5153b8` | `e713868c` | breakthroughs-d (multi-bundle, 56 file diff)       | 56              | 775 -> 715      |
+| 4-5    | `8421172f` | `4d2fde5e` | breakthroughs-e                                    | 20              | 574 -> 554      |
+| 4-6    | `825366cf` | `98489323` | breakthroughs-tail + audits-a                      | 20              | 675 -> 655      |
+| 4-7    | `8f3fe86d` | `0b8533b5` | audits-b                                           | 20              | 795 -> 775      |
+| 4-8    | (bundled)  | `6b3868d4` | audits-c (shrink-only commit; docs bundled)        | 20              | 594 -> 574      |
+| 4-9    | `4914c5f7` | `ebf3a3bc` | audits-tail + sessions-a                           | 20              | 554 -> 534      |
+| 4-11   | `34cdca2c` | `a5668316` | sessions-tail + discovery-a (3 deferred)           | 17 (+3 def.)    | 594 -> 594 (def.) |
+| 4-12   | `8f3c1f82` | (bundled)  | discovery-b                                        | 20              | 715 -> 715      |
+| 4-13   | `892709a5` | `4ad4bc77` | discovery-tail + reports-top-a                     | 20              | 611 -> 594      |
+| 4-14   | `b8a87824` | `acdd20b7` | reports-top-b + misc                               | 24              | 655 -> 611      |
+
+Note: the per-batch allowlist columns are non-monotonic across the table because the fourteen batch landings interleaved several rebase serialisations on `origin/main`; per-batch numbers reflect each batch's witnessed pre/post snapshot, not the global trajectory. The on-main monotonic trajectory was 815 -> 534 net (281 entries removed over Phase 4). Three deferred `reports/sessions/specs/` files (`2026-04-02-kstar-300s-steady-state-design.md`, `2026-04-02-kstar-n6-tokamak-design.md`, `2026-04-02-ultimate-fusion-powerplant-design.md`) remain on the allowlist and roll into Phase 5; see Section 11.7 for the SAFE-REVERT rationale. Cumulative through Phase 4: allowlist 815 -> 534 (281 entries shrunk, 3 deferred to Phase 5). origin/main HEAD advanced through `ebf3a3bc` (Phase 4 final landing) to the Phase 4 closure log commit on 2026-04-25.
+
+### 3.13 Other repository hygiene
 
 | SHA        | Message                                                                        | Impact                         |
 | ---------- | ------------------------------------------------------------------------------ | ------------------------------ |
@@ -178,8 +200,8 @@ Note: per-batch "Allowlist" columns show the local pre-shrink and post-shrink en
 | Phase 1 | 2026-04-24     | `proposals/` (3 parallel batches A/B/C)       | 9             | Done            |
 | Phase 2 | 2026-04-24     | `experiments/` (5 parallel batches 2-1..2-5)  | 25            | Done            |
 | Phase 3 | 2026-04-24     | `domains/` priority (10 parallel batches 3-1..3-10) | 200 of 417    | Done            |
-| Phase 4 | next           | `reports/`                                    | 284           | Scheduled       |
-| Phase 5 | 2026-08 to 09  | `papers/` plus `theory/` (high difficulty)    | 314           | Scheduled       |
+| Phase 4 | 2026-04-25     | `reports/` (14 parallel batches 4-1..4-14)    | 281 of 284    | Done (2026-04-25, 3 deferred specs -> Phase 5) |
+| Phase 5 | 2026-08 to 09  | `papers/` plus `theory/` (high difficulty); plus 3 deferred fusion/KSTAR specs | 314 plus 3 def. | Scheduled       |
 | Phase 6 | 2026-10 to 12  | `domains/` remaining plus allowlist retire    | 217 plus meta | Scheduled       |
 
 Target: allowlist entries equals 0 by 2026 Q4, at which point the `own1_legacy_allowlist.json` file is deleted and own#1 becomes unconditional HARD for the full tree.
@@ -298,18 +320,38 @@ Combined with the 11.5 discipline (narrow `git add`, `--no-verify` plus manual l
 
 Conclusion: the parallel-agent pattern scales to at least N = 10 on the same allowlist file, provided the Phase 2 rules (11.5) are extended with (d) no cross-batch `git stash -u` during an active parallel window — agents must either commit-and-push or discard their WT state explicitly, never stash — and (e) unconditional re-read-and-re-difference of the allowlist before every push, not only after a merge conflict.
 
+### 11.7 Phase 4 field notes (14-way parallel, reports/, 3 deferred specs)
+
+Phase 4 scaled the pattern from ten to fourteen concurrent translator agents against the same `tool/own1_legacy_allowlist.json`. All fourteen batches eventually merged to `origin/main`, translating 281 of the planned 284 `reports/**/*.md` files. Three files deferred to Phase 5:
+
+- `reports/sessions/specs/2026-04-02-kstar-300s-steady-state-design.md`
+- `reports/sessions/specs/2026-04-02-kstar-n6-tokamak-design.md`
+- `reports/sessions/specs/2026-04-02-ultimate-fusion-powerplant-design.md`
+
+Root cause for the three deferrals: an out-of-band attempt to mass-translate these high-density fusion/KSTAR specs via an external regex-plus-dictionary pipeline produced corrupted output (broken cross-references, mangled sigma/tau identifiers, half-rewritten LaTeX blocks). The corruption was contained entirely in the local working tree — none of it was ever committed. On 2026-04-25 a SAFE-REVERT (`git checkout HEAD -- <three paths>`) discarded the WT corruption and restored the HEAD Korean originals; the three paths remain on the allowlist for Phase 5, where a manual or AST-grounded translator will handle them with the same care the rest of `reports/` received. No reflog recovery was needed; no commit history touched.
+
+Operational additions on top of 11.5 plus 11.6 discipline:
+
+- f) When a batch surfaces files that exceed the agent's translation-quality threshold, defer them explicitly (leave on allowlist, document in batch-plan and session log) rather than ship a degraded translation. Three deferrals in 281 attempts (1 percent) is acceptable; a degraded translation is not.
+- g) Never run an external regex/dictionary mass-translate pipeline against `.md` files in the working tree during an active parallel window — the corruption surface is unbounded and SAFE-REVERT only works if the corruption never reached a commit.
+- h) Stash hygiene at the close of a 14-way window: ten leftover stashes (`phase-4-2`, `phase-4-5`, `phase-4-7`, `phase-4-11`, `phase-4-14` and several auxiliary `pre-pull` / `pre-rebase` snapshots) remain in the local stash list and are intentionally not auto-dropped — they will be inspected and dropped per-stash with user confirmation in a follow-up housekeeping pass.
+
+Conclusion: the parallel-agent pattern scales to at least N = 14 on `reports/**/*.md` with a single deferred-defer rule extension (item f). Phase 5 inherits a clean allowlist of 534 entries (314 papers/theory plus 217 domains-tail plus 3 deferred specs).
+
 ## 12. Verification Snapshot
 
-At the moment of writing this update:
+At the moment of writing this Phase 4 closure update (2026-04-25):
 
-- `origin/main` is at `3c4432c4` (Phase 2 batch 2-5 tip).
+- `origin/main` was at `ebf3a3bc` (Phase 4 batch 4-9 shrink tip) immediately before this update commit; the closure commit advances it by one.
 - Local `HEAD` matched `origin/main` (clean fast-forward state) before this update commit.
-- All nine `proposals/*.md` and all twenty-five `experiments/*.md` files verified CJK = 0 by `python3 tool/own_doc_lint.py --rule 1` (exit 0).
-- Allowlist now at 1015 entries (1050 pre-session, 1049 post-Phase-0, 1040 post-Phase-1, 1015 post-Phase-2).
+- All nine `proposals/*.md`, all twenty-five `experiments/*.md`, all two hundred Phase-3 `domains/**/*.md`, and 281 of 284 Phase-4 `reports/**/*.md` files verified CJK = 0 by `python3 tool/own_doc_lint.py --rule 1` (exit 0).
+- Allowlist now at 534 entries (1050 pre-session, 1049 post-Phase-0, 1040 post-Phase-1, 1015 post-Phase-2, 815 post-Phase-3, 534 post-Phase-4 with 3 specs deferred to Phase 5).
+- The three Phase-4-deferred fusion/KSTAR specs were SAFE-REVERTed to HEAD on 2026-04-25 (see Section 11.7); WT is clean.
+- Ten Phase-4 stashes (`phase-4-2` through `phase-4-14` plus pre-pull / pre-rebase auxiliaries) are preserved in the local stash list and intentionally not touched; user-confirmed housekeeping will follow.
 - All modified tracked files outside the new log path are auto-regenerated `reports/*.json` artifacts from meta runs; these are intentionally not staged and remain untracked relative to this commit, per session protocol.
 
 ## 13. Closing Note
 
 This session moved the `.own` governance model from an aspirational document to a mechanically enforced contract over sixteen rules. The remaining five rules (own#15, #18, #19, #20, #21) are SOFT by design — they describe human-loop review or long-horizon drift detection where a HARD block would fire on noise. All auto-verifiable rules now block merges.
 
-Phase 0 plus Phase 1 plus Phase 2 plus Phase 3 together translated 244 files and the allowlist now stands at 815 entries. The parallel-translation pattern has been validated at N = 3 (Phase 1), N = 5 (Phase 2), and N = 10 (Phase 3). Phase 3 surfaced two new race patterns (sibling `git stash -u` wipeout and allowlist re-introduction) now captured in Section 11.6; the next session should open with Phase 4 (`reports/` 284 files), carrying forward the 11.5 plus 11.6 discipline.
+Phase 0 plus Phase 1 plus Phase 2 plus Phase 3 plus Phase 4 together translated 525 files (10 + 9 + 25 + 200 + 281) and the allowlist now stands at 534 entries (down from 1050 at session start, a 49 percent net shrink). The parallel-translation pattern has been validated at N = 3 (Phase 1), N = 5 (Phase 2), N = 10 (Phase 3), and N = 14 (Phase 4). Phase 4 surfaced one new failure mode — external regex/dictionary mass-translate corruption contained by SAFE-REVERT, captured in Section 11.7 — and produced three deferred fusion/KSTAR specs that roll into Phase 5. The next session should open with Phase 5 (`papers/` plus `theory/` 314 files plus 3 deferred specs), carrying forward the 11.5 plus 11.6 plus 11.7 discipline.
