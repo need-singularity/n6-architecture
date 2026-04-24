@@ -36,14 +36,18 @@
 #   .loop             -> own#18, own#19 (migrated 2026-04-21)
 #   loop-rules.json   -> own#20, own#21 (migrated 2026-04-21)
 
-own 1 live "doc-english-required — English documentation required"
+own 1 live "doc-english-required — English documentation required (HARD)"
   slug doc-english-required
-  decl CLAUDE.md (domains/, engine/, theory/, theory/*, reports/, experiments/, papers/, bridge/, n6shared/, each chip-* domain)
-  scope .md documents, source comments, git commit messages — English required
+  decl CLAUDE.md (domains/, engine/, theory/, theory/*, reports/, experiments/, papers/, bridge/, n6shared/, each chip-* domain) tool/own_doc_lint.py tool/own1_legacy_allowlist.json
+  scope .md documents under domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/ — English required (HARD block for new files; 1050 legacy files allowlisted via tool/own1_legacy_allowlist.json as of 2026-04-24). Root READMEs governed by own#17 separately.
   status live
   since 2026-04-21
-  why n6-architecture language policy (2026-04-21) — documents, comments, commits must be English primary. arXiv compatibility + international contribution priority.
-  note hexa-lang /.raw 에 없음 — 프로젝트 고유 (hexa-lang 자체는 언어 중립).
+  why n6-architecture language policy — documents, comments, commits must be English primary. arXiv compatibility + international contribution priority. Promoted from SOFT log to HARD block on 2026-04-24 via user 'hard go' directive; legacy CJK .md files grandfathered and frozen in OWN1_LEGACY_ALLOWLIST sidecar.
+  note hexa-lang /.raw has no equivalent — project-specific. Legacy allowlist is a FROZEN grandfather list; new CJK .md files under decl scope fail the HARD check.
+  verify python3 tool/own_doc_lint.py --rule 1
+  cron on-commit
+  on_fail block
+  label own#1 doc-english HARD gate
 
 own 2 live "n6-master-identity — σ·φ = n·τ = J₂ = 24 준수"
   slug n6-master-identity
