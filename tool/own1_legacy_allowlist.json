@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "description": "own#1 doc-english-required \u2014 legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
+    "description": "own#1 doc-english-required — legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
-    "directive": "user 'hard go' \u2014 promote own#1 from SOFT log to HARD block",
-    "count": 715,
+    "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
+    "count": 695,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -27,8 +27,8 @@
       {
         "date": "2026-04-24",
         "action": "scope_expansion",
-        "directive": "user 'hard!!! \ubaa8\ub450 english only'",
-        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) \u2014 including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
+        "directive": "user 'hard!!! 모두 english only'",
+        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) — including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
       }
     ],
     "shrink_history": [
@@ -110,6 +110,13 @@
         "removed": 20,
         "date": "2026-04-25",
         "remaining": 715
+      },
+      {
+        "phase": "phase-4-2",
+        "batch": "phase-4-2-breakthroughs-b",
+        "date": "2026-04-25",
+        "removed": 20,
+        "remaining": 695
       }
     ]
   },
@@ -541,17 +548,11 @@
     "reports/breakthroughs/arxiv-millennium-survey-180papers-2026-04-15.md",
     "reports/breakthroughs/bsd-A3-modified-with-joint-covariance-2026-04-15.md",
     "reports/breakthroughs/bsd-kappa-asymptotic-964k-2026-04-15.md",
-    "reports/breakthroughs/bt-111-mk4-lemma-tau2-sigma-2026-04-15.md",
     "reports/breakthroughs/bt-1176-nuclear-reactor-kinetics-2026-04-12.md",
     "reports/breakthroughs/bt-1387-huckel-aromatic-2026-04-12.md",
     "reports/breakthroughs/bt-1389-cube-octahedron-duality-2026-04-12.md",
     "reports/breakthroughs/bt-1392-millennium-7-breakthrough-ideas-2026-04-12.md",
     "reports/breakthroughs/bt-1393-n6-dfs-10k-autonomous-2026-04-12.md",
-    "reports/breakthroughs/bt-1394-millennium-dfs-round3-2026-04-12.md",
-    "reports/breakthroughs/bt-1395-millennium-dfs-round4-2026-04-12.md",
-    "reports/breakthroughs/bt-1396-dfs5-representation-theory-2026-04-12.md",
-    "reports/breakthroughs/bt-1396-dfs5-tqft-reptheory-2026-04-12.md",
-    "reports/breakthroughs/bt-1396-tqft-lattice-knot-dfs5-2026-04-12.md",
     "reports/breakthroughs/bt-1397-uncovered-domains-2026-04-12.md",
     "reports/breakthroughs/bt-1398-millennium-dfs-round6-2026-04-12.md",
     "reports/breakthroughs/bt-1399-millennium-dfs-round7-2026-04-12.md",
@@ -574,7 +575,6 @@
     "reports/breakthroughs/bt-1415-millennium-dfs-round21-2026-04-14.md",
     "reports/breakthroughs/bt-1417-dfs23-info-coding-2026-04-15.md",
     "reports/breakthroughs/bt-1417-millennium-dfs-round23-2026-04-15.md",
-    "reports/breakthroughs/bt-1419-millennium-dfs-round25-2026-04-15.md",
     "reports/breakthroughs/bt-18-fi24prime-3a-path-2026-04-15.md",
     "reports/breakthroughs/bt-18-hauptmodul-gamma047plus-2026-04-15.md",
     "reports/breakthroughs/bt-18-moonshine-l5-barrier-2026-04-15.md",
@@ -588,7 +588,6 @@
     "reports/breakthroughs/bt-748-752-new-domains-2026-04-11.md",
     "reports/breakthroughs/bt-reinforcement-dimensional-unfolding-2026-04-06.md",
     "reports/breakthroughs/consciousness-triple-fusion-2026-04-15.md",
-    "reports/breakthroughs/emergence-312-meta-analysis-2026-04-15.md",
     "reports/breakthroughs/external-coordination-infrastructure-2026-04-15.md",
     "reports/breakthroughs/lean4-formalization-plan-2026-04-15.md",
     "reports/breakthroughs/millennium-n6-attractor-2026-04-11.md",
@@ -596,20 +595,8 @@
     "reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md",
     "reports/breakthroughs/new-bt-new-domains-part1-2026-04-06.md",
     "reports/breakthroughs/new-bt-new-domains-part2-2026-04-06.md",
-    "reports/breakthroughs/new-domain-breakthrough-2026-04-06.md",
-    "reports/breakthroughs/ouroboros-atlas-audit-2026-04-15.md",
-    "reports/breakthroughs/v3-e1-m3-toolchain-bootstrap-2026-04-16.md",
-    "reports/breakthroughs/v3-loop19-lean4-extended-kappa-bootstrap-2026-04-16.md",
-    "reports/breakthroughs/v3-saturation-adjacent-2026-04-16.md",
-    "reports/breakthroughs/v3-t1-abelian-sixfolds-deep-dive-2026-04-15.md",
-    "reports/breakthroughs/v3-t2-moonshine-l5-retry-2026-04-15.md",
-    "reports/breakthroughs/v3-t3-joint-distribution-modeling-2026-04-15.md",
-    "reports/breakthroughs/v3-t4-guth-maynard-2024-deep-dive-2026-04-15.md",
-    "reports/breakthroughs/v3-t5-hirahara-mcsp-deep-2026-04-15.md",
     "reports/breakthroughs/v3-t6-balaban-2d-modern-reorg-2026-04-15.md",
-    "reports/breakthroughs/v4-loop3-M3-primes-E6-uniqueness-2026-04-16.md",
     "reports/breakthroughs/v4-t1-alpha-log2-over-4-derivation-attempt-2026-04-16.md",
-    "reports/breakthroughs/v4-t4-A3-double-prime-rigorization-2026-04-16.md",
     "reports/breakthroughs/v4-t5-cross-bt-survey-544-546-547-2026-04-16.md",
     "reports/bsd-kappa-0.175-decomposition.md",
     "reports/changelogs/2026-04-11-weekly.md",
