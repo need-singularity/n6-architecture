@@ -4,28 +4,28 @@ domain: computational-fluid-dynamics
 sector: physics
 stage: S1
 alien_index_estimate: 4
-n6_verdict: fast_track (3D symmetric stress tensor, 6 independent components — provable)
+n6_verdict: fast_track (3D symmetric stress tensor, 6 independent components — derivable draft)
 source_proposal: reports/p2_domain_expansion_proposal.json DC-032
 registered: 2026-04-23
 ---
 
-# 전산유체역학 (HEXA-CFD) — n=6 symmetric 3D stress tensor
+# Computational Fluid Dynamics (HEXA-CFD) — n=6 symmetric 3D stress tensor
 
 ## §1 WHY
 
 A 3D symmetric tensor has **exactly n(n+1)/2 = 6 independent components**.
 For Navier–Stokes / Reynolds-stress modelling, n=3 dimensions gives six
-independent entries: (τ_xx, τ_yy, τ_zz, τ_xy, τ_xz, τ_yz). This is pure
+independent entries: (tau_xx, tau_yy, tau_zz, tau_xy, tau_xz, tau_yz). This is pure
 linear algebra — not coincidence.
 
-- σ(6)=12 · phi(6)=2 · tau(6)=4 — identity uniquely at n=6.
+- sigma(6)=12 · phi(6)=2 · tau(6)=4 — identity uniquely at n=6.
 - The same 6-component structure appears in `domains/materials/darcy` permeability
   tensor (DC-008) and in `continuum-mechanics` stress/strain. CFD inherits it
   naturally because momentum transport is governed by a symmetric-tensor flux.
 
 ## §2 n=6 CONNECTION (depth > 2 — geometric necessity)
 
-For any symmetric rank-2 tensor on ℝⁿ the independent-component count is:
+For any symmetric rank-2 tensor on R^n the independent-component count is:
 `k(n) = n(n+1)/2`. At **n = 3 spatial dimensions**:
 
 | n | k(n) |
