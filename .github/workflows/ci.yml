@@ -22,7 +22,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: "pip"
 
       - name: Install test dependencies
         run: |
@@ -46,29 +45,10 @@ jobs:
             echo "No test files in tests/ — skipping pytest"
           fi
 
-  # ── Job 2: Rust cargo check + test ──────────────────────────
-  rust-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: dtolnay/rust-toolchain@stable
-
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            tools/nexus/target
-          key: cargo-${{ runner.os }}-${{ hashFiles('tools/nexus/Cargo.lock', 'tools/nexus/Cargo.toml') }}
-          restore-keys: |
-            cargo-${{ runner.os }}-
-
-      - name: Cargo check
-        run: cd tools/nexus && cargo check
-
-      - name: Cargo test
-        run: cd tools/nexus && cargo test
+  # ── Job 2: Rust cargo check + test — REMOVED 2026-04-24 ─────
+  # Rationale: tools/nexus/Cargo.toml path was stale (removed long ago).
+  # No Cargo.toml exists anywhere in this repo; .own rule #10 bans .rs files
+  # in n6-architecture. Rust testing belongs to the nexus/ sister repo's own CI.
 
   # ── Job 3b: Stage A preflight — shared constants generator-clean + flatten ──
   # Stage A consolidation (proposals/dup_derivation_consolidation_phase2_2026_04_24.md).
