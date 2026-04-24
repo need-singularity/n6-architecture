@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-015
 registered: 2026-04-23
 ---
 
-# 민족음악학 (HEXA-ETHNOMUSIC) — n=6 hexatonic scales
+# Ethnomusicology (HEXA-ETHNOMUSIC) — n=6 hexatonic scales
 
 ## §1 WHY
 
