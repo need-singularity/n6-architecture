@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "description": "own#1 doc-english-required \u2014 legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
+    "description": "own#1 doc-english-required — legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
-    "directive": "user 'hard go' \u2014 promote own#1 from SOFT log to HARD block",
-    "count": 815,
+    "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
+    "count": 795,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -27,8 +27,8 @@
       {
         "date": "2026-04-24",
         "action": "scope_expansion",
-        "directive": "user 'hard!!! \ubaa8\ub450 english only'",
-        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) \u2014 including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
+        "directive": "user 'hard!!! 모두 english only'",
+        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) — including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
       }
     ],
     "shrink_history": [
@@ -582,17 +582,7 @@
     "reports/breakthroughs/bt-1417-dfs23-info-coding-2026-04-15.md",
     "reports/breakthroughs/bt-1417-millennium-dfs-round23-2026-04-15.md",
     "reports/breakthroughs/bt-1418-dfs23b-rep-theory-modular-2026-04-15.md",
-    "reports/breakthroughs/bt-1418-millennium-dfs-round24-2026-04-15.md",
     "reports/breakthroughs/bt-1419-millennium-dfs-round25-2026-04-15.md",
-    "reports/breakthroughs/bt-1420-millennium-dfs-round26-2026-04-15.md",
-    "reports/breakthroughs/bt-1421-ai-inference-cost-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1422-ai-training-cost-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1423-ai-quality-scale-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1424-ai-agent-serving-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1425-ai-enterprise-custom-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1426-ai-eval-pipeline-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1427-ai-consciousness-mk5-2026-04-20.md",
-    "reports/breakthroughs/bt-1428-ai-safety-mk5-2026-04-20.md",
     "reports/breakthroughs/bt-18-baby-monster-p10-retry-2026-04-15.md",
     "reports/breakthroughs/bt-18-fi24prime-3a-path-2026-04-15.md",
     "reports/breakthroughs/bt-18-hauptmodul-gamma047plus-2026-04-15.md",
@@ -624,7 +614,6 @@
     "reports/breakthroughs/new-domain-breakthrough-2026-04-06.md",
     "reports/breakthroughs/ouroboros-atlas-audit-2026-04-15.md",
     "reports/breakthroughs/v3-e1-m3-toolchain-bootstrap-2026-04-16.md",
-    "reports/breakthroughs/v3-e5-kappa-7bin-power-law-2026-04-15.md",
     "reports/breakthroughs/v3-loop19-lean4-extended-kappa-bootstrap-2026-04-16.md",
     "reports/breakthroughs/v3-saturation-adjacent-2026-04-16.md",
     "reports/breakthroughs/v3-t1-abelian-sixfolds-deep-dive-2026-04-15.md",
@@ -633,16 +622,7 @@
     "reports/breakthroughs/v3-t4-guth-maynard-2024-deep-dive-2026-04-15.md",
     "reports/breakthroughs/v3-t5-hirahara-mcsp-deep-2026-04-15.md",
     "reports/breakthroughs/v3-t6-balaban-2d-modern-reorg-2026-04-15.md",
-    "reports/breakthroughs/v4-loop10-M3-case4b-iii-2026-04-16.md",
-    "reports/breakthroughs/v4-loop11-M3-case4c-i-2026-04-16.md",
-    "reports/breakthroughs/v4-loop12-M3-case4c-ii-2026-04-16.md",
-    "reports/breakthroughs/v4-loop13-M3-case4c-iii-capstone-2026-04-16.md",
     "reports/breakthroughs/v4-loop3-M3-primes-E6-uniqueness-2026-04-16.md",
-    "reports/breakthroughs/v4-loop4-M3-case2-2026-04-16.md",
-    "reports/breakthroughs/v4-loop5-M3-case2b-2026-04-16.md",
-    "reports/breakthroughs/v4-loop6-M3-case3-2026-04-16.md",
-    "reports/breakthroughs/v4-loop8-M3-case4b-i-2026-04-16.md",
-    "reports/breakthroughs/v4-loop9-M3-case4b-ii-2026-04-16.md",
     "reports/breakthroughs/v4-t1-alpha-log2-over-4-derivation-attempt-2026-04-16.md",
     "reports/breakthroughs/v4-t4-A3-double-prime-rigorization-2026-04-16.md",
     "reports/breakthroughs/v4-t5-cross-bt-survey-544-546-547-2026-04-16.md",
