@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 63,
+    "count": 62,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -269,6 +269,15 @@
         "removed": 1,
         "new_count": 63,
         "note": "B11 YELLOW carry - hexa-dna-molecular translated (KR->EN), CJK=0 verified."
+      },
+      {
+        "phase": "phase-6-B11-carry-chip-hbm",
+        "batch": "phase-6-B11-carry-chip-hbm",
+        "date": "2026-04-25",
+        "removed": 1,
+        "before": 63,
+        "after": 62,
+        "note": "B11 YELLOW carry - chip-hbm.md translated (KR->EN), CJK=0 verified."
       }
     ]
   },
@@ -290,7 +299,6 @@
     "domains/compute/chip-design/hexa-quantum-hybrid/hexa-quantum-hybrid.md",
     "domains/compute/chip-design/hexa-superconducting/hexa-superconducting.md",
     "domains/compute/chip-design/hexa-topo-anyon/hexa-topo-anyon.md",
-    "domains/compute/chip-hbm/chip-hbm.md",
     "domains/compute/chip-hexa1/chip-hexa1.md",
     "domains/compute/chip-isa-n6/chip-isa-n6.md",
     "domains/compute/chip-isa-n6/xn6-isa-24-spec/xn6-isa-24-spec.md",
