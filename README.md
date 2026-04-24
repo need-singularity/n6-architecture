@@ -628,7 +628,7 @@ n6 map                  # open the 3D Reality Map (4,098 nodes)
 | P3 | **Y4 GATE-BARRIER** | BT-542 P=NP | **PARTIAL** | 1,028 | 4 barrier audit, GCT 3 observations, new MISS 7 |
 | P4 | **Y5+Y6** | BT-543 YM + BT-544 NS | **PARTIAL / NEAR** | 1,188 | β₀=σ-sopfr rewriting + 3mid resonance + D158 conditional |
 | P5 | **Y7+Y8** | BT-545 Hodge + BT-546 BSD | **PARTIAL / PARTIAL** | 1,321 | Lemma 1 unconditional 5-step, Thm 1 (A3) conditional |
-| P6 | retrospective | BT-547 Poincare | retrospective-only | 600 | Perelman solution acknowledged, C1~C5 decisive tool extraction |
+| P6 | retrospective | BT-547 Poincare | retrospective-only | 600 | Perelman's 2003 proof acknowledged, C1~C5 decisive tool extraction |
 | PΩ | **Y9 HONEST-HARNESS** | closure + v3 design | complete | 1,332 | honesty 28/28 PASS, atlas queue 14 items, v3 Z1~Z10 draft |
 
 **total lines**: ~10,000 · **verdict distribution**: PARTIAL 5 / NEAR 1 / MISS 0 · **Y9 honesty gate**: all Phases PASS (violations 0) · **atlas draft queue**: 14 items awaiting approval
