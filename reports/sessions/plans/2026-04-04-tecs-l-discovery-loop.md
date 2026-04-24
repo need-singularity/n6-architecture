@@ -174,29 +174,29 @@ def jordan2(n):
     if m > 1: r = r * (1 - 1/(m*m))
     return int(round(r))
 
-# 정의 무결성 (함수 정의에서 도출, 하드코딩 아님)
+# Definition integrity (derived from function defs, no hardcoding)
 assert sigma(6) == 12 and tau(6) == 4 and phi(6) == 2
 assert sopfr(6) == 5 and jordan2(6) == 24
-assert sigma(6) * phi(6) == 6 * tau(6)  # n=6 핵심 정리
+assert sigma(6) * phi(6) == 6 * tau(6)  # n=6 core theorem
 
-# 2026-04-04-tecs-l-discovery-loop.md — 정의 도출 검증
+# 2026-04-04-tecs-l-discovery-loop.md — definition-derivation verification
 results = [
-    ("σ(6) 정의 도출", sigma(6), 12, sigma(6) == 12),
-    ("τ(6) 정의 도출", tau(6), 4, tau(6) == 4),
-    ("φ(6) 정의 도출", phi(6), 2, phi(6) == 2),
-    ("sopfr(6) 정의 도출", sopfr(6), 5, sopfr(6) == 5),
-    ("J₂(6) 정의 도출", jordan2(6), 24, jordan2(6) == 24),
-    ("σ·φ = n·τ 핵심 정리", sigma(6)*phi(6), 6*tau(6), sigma(6)*phi(6) == 6*tau(6)),
+    ("sigma(6) definition derivation", sigma(6), 12, sigma(6) == 12),
+    ("tau(6) definition derivation", tau(6), 4, tau(6) == 4),
+    ("phi(6) definition derivation", phi(6), 2, phi(6) == 2),
+    ("sopfr(6) definition derivation", sopfr(6), 5, sopfr(6) == 5),
+    ("J_2(6) definition derivation", jordan2(6), 24, jordan2(6) == 24),
+    ("sigma*phi = n*tau core theorem", sigma(6)*phi(6), 6*tau(6), sigma(6)*phi(6) == 6*tau(6)),
 ]
 valid = [r for r in results if r[3] is not None]
 passed = sum(1 for r in valid if r[3])
-print(f"검증: {passed}/{len(valid)} PASS (MISSING {len(results)-len(valid)})")
+print(f"verification: {passed}/{len(valid)} PASS (MISSING {len(results)-len(valid)})")
 for r in results:
     if r[3] is None:
         print(f"  SKIP: {r[0]} — MISSING DATA")
     else:
         mark = "PASS" if r[3] else "FAIL"
-        print(f"  {mark}: {r[0]} = {r[1]} (기대: {r[2]})")
+        print(f"  {mark}: {r[0]} = {r[1]} (expected: {r[2]})")
 ```
 
 - [ ] **Step 3: Run measure to verify it works**
@@ -481,29 +481,29 @@ def jordan2(n):
     if m > 1: r = r * (1 - 1/(m*m))
     return int(round(r))
 
-# 정의 무결성 (함수 정의에서 도출, 하드코딩 아님)
+# Definition integrity (derived from function defs, no hardcoding)
 assert sigma(6) == 12 and tau(6) == 4 and phi(6) == 2
 assert sopfr(6) == 5 and jordan2(6) == 24
-assert sigma(6) * phi(6) == 6 * tau(6)  # n=6 핵심 정리
+assert sigma(6) * phi(6) == 6 * tau(6)  # n=6 core theorem
 
-# 2026-04-04-tecs-l-discovery-loop.md — 정의 도출 검증
+# 2026-04-04-tecs-l-discovery-loop.md — definition-derivation verification
 results = [
-    ("σ(6) 정의 도출", sigma(6), 12, sigma(6) == 12),
-    ("τ(6) 정의 도출", tau(6), 4, tau(6) == 4),
-    ("φ(6) 정의 도출", phi(6), 2, phi(6) == 2),
-    ("sopfr(6) 정의 도출", sopfr(6), 5, sopfr(6) == 5),
-    ("J₂(6) 정의 도출", jordan2(6), 24, jordan2(6) == 24),
-    ("σ·φ = n·τ 핵심 정리", sigma(6)*phi(6), 6*tau(6), sigma(6)*phi(6) == 6*tau(6)),
+    ("sigma(6) definition derivation", sigma(6), 12, sigma(6) == 12),
+    ("tau(6) definition derivation", tau(6), 4, tau(6) == 4),
+    ("phi(6) definition derivation", phi(6), 2, phi(6) == 2),
+    ("sopfr(6) definition derivation", sopfr(6), 5, sopfr(6) == 5),
+    ("J_2(6) definition derivation", jordan2(6), 24, jordan2(6) == 24),
+    ("sigma*phi = n*tau core theorem", sigma(6)*phi(6), 6*tau(6), sigma(6)*phi(6) == 6*tau(6)),
 ]
 valid = [r for r in results if r[3] is not None]
 passed = sum(1 for r in valid if r[3])
-print(f"검증: {passed}/{len(valid)} PASS (MISSING {len(results)-len(valid)})")
+print(f"verification: {passed}/{len(valid)} PASS (MISSING {len(results)-len(valid)})")
 for r in results:
     if r[3] is None:
         print(f"  SKIP: {r[0]} — MISSING DATA")
     else:
         mark = "PASS" if r[3] else "FAIL"
-        print(f"  {mark}: {r[0]} = {r[1]} (기대: {r[2]})")
+        print(f"  {mark}: {r[0]} = {r[1]} (expected: {r[2]})")
 ```
 
 - [ ] **Step 2: Run validate to verify**
@@ -641,29 +641,29 @@ def jordan2(n):
     if m > 1: r = r * (1 - 1/(m*m))
     return int(round(r))
 
-# 정의 무결성 (함수 정의에서 도출, 하드코딩 아님)
+# Definition integrity (derived from function defs, no hardcoding)
 assert sigma(6) == 12 and tau(6) == 4 and phi(6) == 2
 assert sopfr(6) == 5 and jordan2(6) == 24
-assert sigma(6) * phi(6) == 6 * tau(6)  # n=6 핵심 정리
+assert sigma(6) * phi(6) == 6 * tau(6)  # n=6 core theorem
 
-# 2026-04-04-tecs-l-discovery-loop.md — 정의 도출 검증
+# 2026-04-04-tecs-l-discovery-loop.md — definition-derivation verification
 results = [
-    ("σ(6) 정의 도출", sigma(6), 12, sigma(6) == 12),
-    ("τ(6) 정의 도출", tau(6), 4, tau(6) == 4),
-    ("φ(6) 정의 도출", phi(6), 2, phi(6) == 2),
-    ("sopfr(6) 정의 도출", sopfr(6), 5, sopfr(6) == 5),
-    ("J₂(6) 정의 도출", jordan2(6), 24, jordan2(6) == 24),
-    ("σ·φ = n·τ 핵심 정리", sigma(6)*phi(6), 6*tau(6), sigma(6)*phi(6) == 6*tau(6)),
+    ("sigma(6) definition derivation", sigma(6), 12, sigma(6) == 12),
+    ("tau(6) definition derivation", tau(6), 4, tau(6) == 4),
+    ("phi(6) definition derivation", phi(6), 2, phi(6) == 2),
+    ("sopfr(6) definition derivation", sopfr(6), 5, sopfr(6) == 5),
+    ("J_2(6) definition derivation", jordan2(6), 24, jordan2(6) == 24),
+    ("sigma*phi = n*tau core theorem", sigma(6)*phi(6), 6*tau(6), sigma(6)*phi(6) == 6*tau(6)),
 ]
 valid = [r for r in results if r[3] is not None]
 passed = sum(1 for r in valid if r[3])
-print(f"검증: {passed}/{len(valid)} PASS (MISSING {len(results)-len(valid)})")
+print(f"verification: {passed}/{len(valid)} PASS (MISSING {len(results)-len(valid)})")
 for r in results:
     if r[3] is None:
         print(f"  SKIP: {r[0]} — MISSING DATA")
     else:
         mark = "PASS" if r[3] else "FAIL"
-        print(f"  {mark}: {r[0]} = {r[1]} (기대: {r[2]})")
+        print(f"  {mark}: {r[0]} = {r[1]} (expected: {r[2]})")
 ```
 
 - [ ] **Step 2: Create auto-papers directory**

@@ -1,114 +1,114 @@
-# BT Audit Report — BT-1~541 전수 감사 (ID 범위 BT-6~540)
+# BT Audit Report — BT-1~541 full audit (ID range BT-6~540)
 
-- 감사 대상: `docs/breakthrough-theorems.md`
+- Audit target: `docs/breakthrough-theorems.md`
 
-- 감사 스크립트: `scripts/audit_bt.py`
+- Audit script: `scripts/audit_bt.py`
 
-- 전체 BT 수: **541**
+- Total BT count: **541**
 
 
-## 요약
+## Summary
 
-| 구분 | 개수 | 비율 |
+| Category | Count | Ratio |
 |---|---|---|
 | EXACT | 481 | 88.9% |
 | PARTIAL | 54 | 10.0% |
 | MISS | 6 | 1.1% |
 | UNKNOWN | 0 | 0.0% |
 
-**BT 단위 일치율 (두 지표 병기)**
+**BT-unit match rates (dual metric)**
 
-- EXACT/(전체) = 481/541 = 88.9% (UNKNOWN 0건 포함)
-- EXACT/(판정가능) = 481/541 = 88.9% (UNKNOWN 제외)
-- (EXACT+PARTIAL)/(전체) = 535/541 = 98.9%
-- (EXACT+PARTIAL)/(판정가능) = 535/541 = 98.9%
+- EXACT/(total) = 481/541 = 88.9% (including UNKNOWN 0)
+- EXACT/(decidable) = 481/541 = 88.9% (excluding UNKNOWN)
+- (EXACT+PARTIAL)/(total) = 535/541 = 98.9%
+- (EXACT+PARTIAL)/(decidable) = 535/541 = 98.9%
 
-**행 단위**: EXACT 3498 / CLOSE 95 / MISS 71 (합 3664) — MISS율 1.94%
+**Row-unit**: EXACT 3498 / CLOSE 95 / MISS 71 (sum 3664) — MISS rate 1.94%
 
-**mismatch 총계: 71** (목표 <50)
+**mismatch total: 71** (target <50)
 
 
-## MISS 판정 BT
+## MISS-classified BT
 
-| BT | 제목 | EXACT | MISS |
+| BT | Title | EXACT | MISS |
 |---|---|---|---|
-| BT-475 | Planck 2018 Ω 예산 n=6 구성 | 2 | 3 |
-| BT-476 | CMB 음향 피크 — 첫 피크 ℓ ≈ 220 = σ(6)·... 구조 | 1 | 3 |
-| BT-478 | 이징 모형 임계지수 τ=4 독립 값 | 3 | 2 |
-| BT-483 | CODATA 기본 상수 n=6 핵심 집합 | 3 | 2 |
-| BT-487 | 우주 나이 근사 13.8 Gyr / Hubble 시간 τ_H — n=6 수렴 | 2 | 3 |
-| BT-503 | 가스터빈 6단 압축기 — Brayton 사이클 τ=4 | 3 | 2 |
+| BT-475 | Planck 2018 Ω n=6 | 2 | 3 |
+| BT-476 | CMB — ℓ ≈ 220 = σ(6)·... | 1 | 3 |
+| BT-478 | τ=4 | 3 | 2 |
+| BT-483 | CODATA n=6 | 3 | 2 |
+| BT-487 | 13.8 Gyr / Hubble τ_H — n=6 | 2 | 3 |
+| BT-503 | 6 — Brayton τ=4 | 3 | 2 |
 
 
-## PARTIAL 판정 BT (MISS 일부 포함)
+## PARTIAL-classified BT (includes some MISS)
 
-| BT | 제목 | EXACT | MISS |
+| BT | Title | EXACT | MISS |
 |---|---|---|---|
-| BT-463 | 인테그라제 LTR 처리 σ(6)=12 / 삽입 6bp 중복 | 4 | 1 |
-| BT-464 | Tat-TAR 6염기 루프 인식 | 4 | 1 |
-| BT-465 | Rev-RRE 핵외반출 4→6 올리고머 | 4 | 1 |
-| BT-466 | HIV 프로테아제 C₂ 대칭 / 억제제 φ=2 | 4 | 1 |
-| BT-467 | HIV 잠복 저장소 6구획 | 4 | 1 |
-| BT-468 | 광범위중화항체(bNAb) σ(6)=1+2+3+6 에피토프 클러스터 | 4 | 1 |
-| BT-469 | CCR5 공수용체 6nt PAM / CRISPR 편집 표적 | 4 | 1 |
-| BT-470 | HEXA-ART — HIV 6제 요법 n=6 조합 설계 | 4 | 1 |
-| BT-471 | 표준모형 쿼크 6종 = n — PDG 플레이버 수 | 4 | 1 |
-| BT-472 | 게이지 보손 σ-sopfr=7 — 전자기약+강 매개자 | 3 | 1 |
-| BT-474 | 뉴트리노 3 플레이버 = n/φ | 3 | 1 |
-| BT-477 | 블랙홀 불모 정리 τ=3 — M,Q,J 유일 파라미터 | 3 | 1 |
-| BT-481 | BCS 초전도 갭 2Δ/k_BT_c ≈ 3.53 → n/φ 근사 | 3 | 1 |
-| BT-482 | 양자홀 효과 σ_xy=νe²/h — 정수 n=6 plateau 관측 | 3 | 1 |
-| BT-484 | Bell 부등식 CHSH 한계 2 = φ — 양자상관 한계 2√2 | 4 | 1 |
-| BT-488 | 알쿠비에르 워프 메트릭 편미분 축 = φ=2 — 워프버블 기본 | 4 | 1 |
-| BT-491 | ADD 큰 여분차원 모델 분류 n=6 — Arkani-Hamed/Dimopoulos/Dvali | 4 | 1 |
-| BT-493 | M-이론 11차원 → σ-sopfr=7 여분차원 제거 | 4 | 1 |
-| BT-494 | 끈이론 critical dimension 26/10 분류축 = φ=2 | 4 | 1 |
-| BT-498 | 역삼투(RO) 담수화 6단계 공정 = n | 4 | 2 |
-| BT-499 | 다단증발(MED/MSF) 담수화 σ=12 효용단 | 4 | 1 |
-| BT-500 | 3D 프린팅 6축 적층제조 = n — FDM/SLA/SLS 기본 | 5 | 1 |
-| BT-501 | 3D 프린팅 인필 패턴 — 육각 벌집 n=6 최적 | 4 | 1 |
-| BT-502 | 원심분리기 6종 분류 = n — 산업/과학 표준 | 4 | 2 |
-| BT-504 | 증기터빈 12단 HP + 24단 LP — σ/J₂ 공진 | 4 | 1 |
-| BT-505 | 식품과학 6대 영양소 = n — 필수영양 완전수 | 4 | 1 |
-| BT-506 | HACCP 식품안전 σ-sopfr=7 원칙 | 4 | 1 |
-| BT-507 | 웹 브라우저 렌더링 6단계 파이프라인 = n | 4 | 1 |
-| BT-508 | CSS Box Model τ=4 변 — 웹 레이아웃 기본 | 5 | 1 |
-| BT-509 | 광섬유 통신 σ=12 파장대역 — WDM 표준 | 4 | 1 |
-| BT-510 | 유리 SiO₂ — 실리카 4면체 CN=τ / 소다석회 n=6 성분 | 4 | 1 |
-| BT-511 | 지진 규모 — 리히터/모멘트 규모 n=6 경계 | 4 | 1 |
-| BT-512 | 항공 6자유도 비행역학 = n — FAA 분류 | 4 | 1 |
-| BT-513 | 철도 표준궤 1435 mm — σ-sopfr=7 × 205 근사 | 4 | 1 |
-| BT-514 | 제약 6단계 GMP — ICH Q7 품질체계 | 4 | 1 |
-| BT-515 | 웨이퍼 제조 — 300 mm = σ·(J₂+μ) 표준 직경 | 4 | 1 |
-| BT-516 | NAND 플래시 — 2^n=64 셀 스택 / n/φ=3 bit TLC | 5 | 1 |
-| BT-517 | 해양학 — 6대양 / Ekman 나선 / 해류 σ=12 | 4 | 1 |
-| BT-518 | 농업 — 6대 작물 / 토양 n=6 수평 | 4 | 1 |
-| BT-519 | 면역계 6방어선 — 선천/적응 면역 쌍 φ=2 | 4 | 1 |
-| BT-520 | DNA 복제 — 6효소 리플리좀 / 코돈 64=φⁿ | 4 | 1 |
-| BT-521 | 세포 소기관 — 6대 막성 소기관 = n | 4 | 1 |
-| BT-522 | 주기율표 — 6주기 주요원소 / 전자껍질 σ-μ=11족 | 5 | 1 |
-| BT-523 | 음악-암호학 교차 — 12음 σ = AES-128 지수 (σ-sopfr) | 4 | 1 |
-| BT-524 | 화산학 — VEI 8등급 / 화산 유형 n=6 | 4 | 1 |
-| BT-525 | 콘크리트 — 시멘트 6산화물 / 28일 강도 P₂ | 4 | 1 |
-| BT-526 | 강철 — Fe-C 상태도 / 오스테나이트 FCC CN=σ=12 | 4 | 1 |
-| BT-527 | 태양계 — 6대 현상 / 행성 σ-τ=8 | 5 | 1 |
-| BT-528 | 음악-에너지 교차 — 12TET = σ, A440 = σ·sopfr·(σ-sopfr)+σ·φ | 4 | 1 |
-| BT-529 | 블록체인-식품 교차 — 6노드 합의 / 식품추적 n=6 단계 | 4 | 1 |
-| BT-530 | GPS-음악-암호 삼중 교차 — σ=12 보편 공진 | 4 | 1 |
-| BT-535 | 소형 종횡비 A = n/φ = 3 → φ = 2 — 컴팩트 핵융합 소형화 축 | 2 | 1 |
-| BT-536 | DC 커플링 — 소형 핵융합 1기 = σ·sopfr = 60 MWe, σ·n = 72 랙 | 4 | 1 |
-| BT-539 | REBCO 고온초전도 자석 — σ T 운전, τ 원소, J₂-τ K 냉각 | 5 | 1 |
+| BT-463 | LTR σ(6)=12 / 6bp | 4 | 1 |
+| BT-464 | Tat-TAR 6 | 4 | 1 |
+| BT-465 | Rev-RRE 4→6 | 4 | 1 |
+| BT-466 | HIV C₂ / φ=2 | 4 | 1 |
+| BT-467 | HIV 6 | 4 | 1 |
+| BT-468 | (bNAb) σ(6)=1+2+3+6 | 4 | 1 |
+| BT-469 | CCR5 6nt PAM / CRISPR | 4 | 1 |
+| BT-470 | HEXA-ART — HIV 6 n=6 | 4 | 1 |
+| BT-471 | 6 = n — PDG | 4 | 1 |
+| BT-472 | σ-sopfr=7 — + | 3 | 1 |
+| BT-474 | 3 = n/φ | 3 | 1 |
+| BT-477 | τ=3 — M,Q,J | 3 | 1 |
+| BT-481 | BCS 2Δ/k_BT_c ≈ 3.53 → n/φ | 3 | 1 |
+| BT-482 | σ_xy=νe²/h — n=6 plateau | 3 | 1 |
+| BT-484 | Bell CHSH 2 = φ — 2√2 | 4 | 1 |
+| BT-488 | = φ=2 — | 4 | 1 |
+| BT-491 | ADD n=6 — Arkani-Hamed/Dimopoulos/Dvali | 4 | 1 |
+| BT-493 | M- 11 → σ-sopfr=7 | 4 | 1 |
+| BT-494 | critical dimension 26/10 = φ=2 | 4 | 1 |
+| BT-498 | (RO) 6 = n | 4 | 2 |
+| BT-499 | (MED/MSF) σ=12 | 4 | 1 |
+| BT-500 | 3D 6 = n — FDM/SLA/SLS | 5 | 1 |
+| BT-501 | 3D — n=6 | 4 | 1 |
+| BT-502 | 6 = n — / | 4 | 2 |
+| BT-504 | 12 HP + 24 LP — σ/J₂ | 4 | 1 |
+| BT-505 | 6 = n — | 4 | 1 |
+| BT-506 | HACCP σ-sopfr=7 | 4 | 1 |
+| BT-507 | 6 = n | 4 | 1 |
+| BT-508 | CSS Box Model τ=4 — | 5 | 1 |
+| BT-509 | σ=12 — WDM | 4 | 1 |
+| BT-510 | SiO₂ — 4 CN=τ / n=6 | 4 | 1 |
+| BT-511 | — / n=6 | 4 | 1 |
+| BT-512 | 6 = n — FAA | 4 | 1 |
+| BT-513 | 1435 mm — σ-sopfr=7 × 205 | 4 | 1 |
+| BT-514 | 6 GMP — ICH Q7 | 4 | 1 |
+| BT-515 | — 300 mm = σ·(J₂+μ) | 4 | 1 |
+| BT-516 | NAND — 2^n=64 / n/φ=3 bit TLC | 5 | 1 |
+| BT-517 | — 6 / Ekman / σ=12 | 4 | 1 |
+| BT-518 | — 6 / n=6 | 4 | 1 |
+| BT-519 | 6 — / φ=2 | 4 | 1 |
+| BT-520 | DNA — 6 / 64=φⁿ | 4 | 1 |
+| BT-521 | — 6 = n | 4 | 1 |
+| BT-522 | — 6 / σ-μ=11 | 5 | 1 |
+| BT-523 | - — 12 σ = AES-128 (σ-sopfr) | 4 | 1 |
+| BT-524 | — VEI 8 / n=6 | 4 | 1 |
+| BT-525 | — 6 / 28 P₂ | 4 | 1 |
+| BT-526 | — Fe-C / FCC CN=σ=12 | 4 | 1 |
+| BT-527 | — 6 / σ-τ=8 | 5 | 1 |
+| BT-528 | - — 12TET = σ, A440 = σ·sopfr·(σ-sopfr)+σ·φ | 4 | 1 |
+| BT-529 | - — 6 / n=6 | 4 | 1 |
+| BT-530 | GPS-- — σ=12 | 4 | 1 |
+| BT-535 | A = n/φ = 3 → φ = 2 — | 2 | 1 |
+| BT-536 | DC — 1 = σ·sopfr = 60 MWe, σ·n = 72 | 4 | 1 |
+| BT-539 | REBCO — σ T , τ , J₂-τ K | 5 | 1 |
 
 
-## UNKNOWN 판정 BT (0건) — 정성적 증거, 수치 비교 불가
+## UNKNOWN  BT (0) —  ,   
 
-| BT | 제목 |
+| BT | Title |
 |---|---|
 
 
-## mismatch/MISS 상세 (최대 100건)
+## mismatch/MISS  ( 100)
 
-총 71건
+Total 71
 
 ```
 MISS tag in BT-463: MISS
@@ -120,40 +120,40 @@ MISS tag in BT-468: MISS
 MISS tag in BT-469: MISS
 MISS tag in BT-470: MISS
 MISS tag in BT-471: MISS
-MISS tag in BT-472: 힉스 보손 수
+MISS tag in BT-472:   
 MISS tag in BT-474: sin²θ₁₃
 MISS tag in BT-475: Ω_Λ
 MISS tag in BT-475: Ω_m
 MISS tag in BT-475: H₀ (km/s/Mpc)
-MISS tag in BT-476: 첫 피크 위치 ℓ₁
-MISS tag in BT-476: 2차/1차 피크 비
-MISS tag in BT-476: 중입자 음향 진동 스케일 (Mpc/h)
-MISS tag in BT-477: Kerr a 최대 a/M
-MISS tag in BT-478: 2D 이징 β 정확값
-MISS tag in BT-478: 3D 이징 ν
+MISS tag in BT-476:    ℓ₁
+MISS tag in BT-476: 2/1  
+MISS tag in BT-476:     (Mpc/h)
+MISS tag in BT-477: Kerr a  a/M
+MISS tag in BT-478: 2D  β 
+MISS tag in BT-478: 3D  ν
 MISS tag in BT-481: 2Δ/k_B T_c (BCS)
-MISS tag in BT-482: von Klitzing 상수 R_K (Ω)
+MISS tag in BT-482: von Klitzing  R_K (Ω)
 MISS tag in BT-483: h (J·s)
 MISS tag in BT-483: e (C)
-MISS tag in BT-484: Tsirelson 한계
+MISS tag in BT-484: Tsirelson 
 MISS tag in BT-487: t₀ (Gyr)
 MISS tag in BT-487: H₀ (km/s/Mpc)
-MISS tag in BT-487: CMB 온도 (K)
-MISS tag in BT-488: 4D 메트릭 독립 성분
-MISS tag in BT-491: n_extra=2 테이블탑 한계 (m)
-MISS tag in BT-493: 총 시공간 차원
-MISS tag in BT-494: 보손 임계차원
-MISS tag in BT-498: 해수 TDS (mg/L)
+MISS tag in BT-487: CMB  (K)
+MISS tag in BT-488: 4D   
+MISS tag in BT-491: n_extra=2   (m)
+MISS tag in BT-493:   
+MISS tag in BT-494:  
+MISS tag in BT-498:  TDS (mg/L)
 MISS tag in BT-498: MISS
 MISS tag in BT-499: MISS
 MISS tag in BT-500: MISS
 MISS tag in BT-501: MISS
-MISS tag in BT-502: 리보솜 30S/50S 서브유닛 합
+MISS tag in BT-502:  30S/50S  
 MISS tag in BT-502: MISS
-MISS tag in BT-503: 터빈 입구 온도 (K)
+MISS tag in BT-503:    (K)
 MISS tag in BT-503: MISS
 MISS tag in BT-504: MISS
-MISS tag in BT-505: 필수아미노산 수 (성인)
+MISS tag in BT-505:   ()
 MISS tag in BT-506: MISS
 MISS tag in BT-507: MISS
 MISS tag in BT-508: MISS
@@ -165,7 +165,7 @@ MISS tag in BT-513: MISS
 MISS tag in BT-514: MISS
 MISS tag in BT-515: MISS
 MISS tag in BT-516: MISS
-MISS tag in BT-517: 해수 평균 염도 (‰)
+MISS tag in BT-517:    (‰)
 MISS tag in BT-518: MISS
 MISS tag in BT-519: MISS
 MISS tag in BT-520: MISS
@@ -178,16 +178,16 @@ MISS tag in BT-526: MISS
 MISS tag in BT-527: MISS
 MISS tag in BT-528: MISS
 MISS tag in BT-529: MISS
-MISS tag in BT-530: 12-TET 반음 = AES-128 라운드 수
-MISS tag in BT-535: MAST-U 종횡비
-MISS tag in BT-536: Helion Polaris 출력
-MISS tag in BT-539: REBCO 임계온도 (K)
+MISS tag in BT-530: 12-TET  = AES-128  
+MISS tag in BT-535: MAST-U 
+MISS tag in BT-536: Helion Polaris 
+MISS tag in BT-539: REBCO  (K)
 ```
 
 
-## 전체 결과표
+## Full result table
 
-| BT | 상태 | EXACT | CLOSE | MISS | 제목 |
+| BT | Status | EXACT | CLOSE | MISS | Title |
 |---|---|---|---|---|---|
 | BT-6 | EXACT | 3 | 0 | 0 | Golay-Leech Unification — [J_2, sigma, sigma-tau] = [24 |
 | BT-7 | EXACT | 3 | 2 | 0 | Egyptian Fraction Power Theorem — 1/2 + 1/3 + 1/6 = 1 |
@@ -277,17 +277,17 @@ MISS tag in BT-539: REBCO 임계온도 (K)
 | BT-91 | EXACT | 3 | 0 | 0 | Z2 Topological ECC -- J2 GB Savings Theorem |
 | BT-92 | EXACT | 9 | 0 | 0 | Bott Periodicity Active Channels = sopfr |
 | BT-93 | EXACT | 8 | 1 | 0 | Carbon Z=6 Chip Material Universality |
-| BT-94 | EXACT | 5 | 0 | 0 | CO2 포집 에너지 n=6 법칙 |
-| BT-95 | EXACT | 6 | 0 | 0 | Carbon Cycle 완전 n=6 폐루프 |
-| BT-96 | EXACT | 6 | 0 | 0 | DAC-MOF 배위수 보편성 |
+| BT-94 | EXACT | 5 | 0 | 0 | CO2   n=6  |
+| BT-95 | EXACT | 6 | 0 | 0 | Carbon Cycle  n=6  |
+| BT-96 | EXACT | 6 | 0 | 0 | DAC-MOF   |
 | BT-97 | EXACT | 3 | 0 | 0 | Weinberg Angle n=6 Bridge — sin^2(theta_W) = (n/phi)/(s |
-| BT-98 | EXACT | 6 | 0 | 0 | D-T 바리온 수 = sopfr(6) — 핵융합 최적 연료의 수론적 필연성 |
-| BT-99 | EXACT | 5 | 0 | 0 | Tokamak q=1 위상적 동치 — 완전수 정의의 토러스 실현 |
-| BT-100 | EXACT | 5 | 1 | 0 | CNO 촉매 질량수 = sigma + div(6) — 양성자 포획 사다리 |
-| BT-101 | EXACT | 9 | 1 | 0 | 광합성-핵융합 거울 — 포도당 24원자 = J_2 |
-| BT-102 | EXACT | 6 | 0 | 0 | 자기 재결합 속도 0.1 = 1/(sigma-phi) — 핵융합-AI 보편 상수 |
-| BT-103 | EXACT | 8 | 0 | 0 | 광합성 완전 n=6 화학양론 |
-| BT-104 | EXACT | 8 | 2 | 0 | CO2 분자 완전 n=6 인코딩 |
+| BT-98 | EXACT | 6 | 0 | 0 | D-T   = sopfr(6) —      |
+| BT-99 | EXACT | 5 | 0 | 0 | Tokamak q=1   —     |
+| BT-100 | EXACT | 5 | 1 | 0 | CNO   = sigma + div(6) —    |
+| BT-101 | EXACT | 9 | 1 | 0 | -  —  24 = J_2 |
+| BT-102 | EXACT | 6 | 0 | 0 |    0.1 = 1/(sigma-phi) — -AI   |
+| BT-103 | EXACT | 8 | 0 | 0 |   n=6  |
+| BT-104 | EXACT | 8 | 2 | 0 | CO2   n=6  |
 | BT-105 | EXACT | 3 | 0 | 0 | SLE_6 Critical Exponent Universality |
 | BT-106 | EXACT | 2 | 0 | 0 | S_3 Algebraic Bootstrap |
 | BT-107 | EXACT | 3 | 0 | 0 | Ramanujan Tau Divisor Purity |
@@ -533,200 +533,200 @@ MISS tag in BT-539: REBCO 임계온도 (K)
 | BT-347 | EXACT | 12 | 2 | 0 | Nuclear Safety Defense-in-Depth Complete n=6 (sopfr=5 B |
 | BT-348 | EXACT | 13 | 0 | 0 | SMR Thermal-Load-Waste Triple Convergence σ·τ=48 (Effic |
 | BT-349 | EXACT | 13 | 0 | 0 | SMR Modularization-Lifetime-Waste Triple Convergence σ· |
-| BT-350 | EXACT | 20 | 0 | 0 | 돌고래(고래목) 완전 n=6 생물 아키텍처 — 해부학/생리학/행동학/음향학 4시스템 수렴 (19/2 |
-| BT-356 | EXACT | 10 | 0 | 0 | 돌고래 음향학-텔레파시 n=6 동형사상 — 자연 생물음향 = 인공 뇌-뇌 통신 아키텍처 (30/30 |
-| BT-357 | EXACT | 20 | 0 | 0 | 뇌파 주파수 대역 완전 n=6 래더 — Delta~High-γ 6경계 + ERP 4지연 + EEG  |
-| BT-358 | EXACT | 10 | 2 | 0 | Alcubierre 워프 메트릭 n=6 인코딩 — 버블벽 1/σ, York 팽창 σ, 워프 래더 c |
-| BT-359 | EXACT | 10 | 2 | 0 | 여분 차원 컴팩트화 n=6 토폴로지 — BT-170 확장 래더 τ→n→σ-φ→σ-μ→J₂→J₂+φ  |
-| BT-360 | EXACT | 8 | 2 | 0 | 워프-차원 통합 추진 n=6 아키텍처 — τ=4 사이클 (접이→가속→순항→도약), 유효속도 (σ-φ |
-| BT-351 | EXACT | 1 | 0 | 0 | 종교/신화 n=6 범문화 보편 구조 |
-| BT-352 | EXACT | 1 | 0 | 0 | 법학/사법 n=6 정의 아키텍처 |
-| BT-353 | EXACT | 1 | 0 | 0 | 한글/문자체계 n=6 인코딩 |
-| BT-354 | EXACT | 1 | 0 | 0 | 반도체 패키징 n=6 적층-범프-인터커넥트 래더 (54/57 EXACT=94.7% ⭐⭐⭐). HBM |
-| BT-355 | EXACT | 0 | 1 | 0 | 합성생물학 n=6 이중 완전수 |
-| BT-361 | EXACT | 1 | 0 | 0 | 바이러스학 완전 n=6 아키텍처 |
-| BT-362 | EXACT | 1 | 0 | 0 | 곤충학 Hexapoda 완전 n=6 |
-| BT-363 | EXACT | 1 | 0 | 0 | 균류학 포자-발효 n=6 |
-| BT-364 | EXACT | 1 | 0 | 0 | 시계학 완전 n=6 시간 아키텍처 |
-| BT-365 | EXACT | 1 | 0 | 0 | 커피과학 n=6 추출 |
-| BT-366 | EXACT | 1 | 0 | 0 | 도자기/세라믹 n=6 소성 |
-| BT-367 | EXACT | 1 | 0 | 0 | 광업/광물학 n=6 경도-결정 |
-| BT-368 | EXACT | 1 | 0 | 0 | 수의학 완전 n=6 동물 아키텍처 |
-| BT-369 | EXACT | 1 | 0 | 0 | 원예학 n=6 식물 성장 |
-| BT-370 | EXACT | 1 | 0 | 0 | 향수/향료 n=6 피라미드 |
-| BT-371 | EXACT | 1 | 0 | 0 | 시뮬레이션 이론 완전 n=6 아키텍처 |
-| BT-372 | EXACT | 1 | 0 | 0 | 지질학 완전 n=6 지구 내부 아키텍처 |
-| BT-373 | EXACT | 1 | 0 | 0 | 기상학 완전 n=6 대기 아키텍처 |
-| BT-374 | EXACT | 1 | 0 | 0 | 빙권/빙하학 n=6 |
-| BT-375 | EXACT | 1 | 0 | 0 | 해양 동역학 n=6 |
-| BT-376 | EXACT | 1 | 0 | 0 | 대기화학 n=6 |
-| BT-377 | EXACT | 1 | 0 | 0 | 시공간 곡률 n=6 |
-| BT-378 | EXACT | 0 | 1 | 0 | 워프 메트릭 사다리 n=6 |
-| BT-379 | EXACT | 1 | 0 | 0 | 추가차원 컴팩트화 사다리 n=6 |
-| BT-380 | EXACT | 3 | 0 | 0 | 기상-지질 결합 n=6 메타 |
-| BT-381 | EXACT | 0 | 1 | 0 | 음운 자질 n=6 완전 분류 |
-| BT-382 | EXACT | 0 | 1 | 0 | 통사 X-bar τ=4 계층 |
-| BT-383 | EXACT | 0 | 1 | 0 | 어휘 Zipf 지수 n=6 보정 |
-| BT-384 | EXACT | 0 | 1 | 0 | 12음 음정 = σ²=144 / σ-φ=10 보정 |
-| BT-385 | EXACT | 0 | 1 | 0 | 리듬 박자 τ=4 / n=6 이중 분할 |
-| BT-386 | EXACT | 0 | 1 | 0 | 화성 협화도 sopfr 정렬 |
-| BT-387 | EXACT | 0 | 1 | 0 | Kondratiev 장기파동 = n·sopfr=30 보정 |
-| BT-388 | EXACT | 0 | 1 | 0 | Pareto 80/20 = (σ-φ)²/(σ²+n) 정확화 |
-| BT-389 | EXACT | 0 | 1 | 0 | 통화승수 = σ/φ=4 / 지급준비 1/τ-φ=20% |
-| BT-390 | EXACT | 0 | 1 | 0 | 먹이망 영양단계 = sopfr(6)+1=6 |
-| BT-391 | EXACT | 0 | 1 | 0 | 개체수 r/K 선택 = τ/σ-τ 이중축 |
-| BT-392 | EXACT | 0 | 1 | 0 | 종다양성 Shannon H' = log(σ-φ)=log(10) |
-| BT-393 | EXACT | 0 | 1 | 0 | 대뇌피질 n=6 층 (Brodmann 정칙) |
-| BT-394 | EXACT | 0 | 1 | 0 | 신경 모듈 Dunbar 수 = (σ-φ)·σ·sopfr=...150 |
-| BT-395 | EXACT | 0 | 1 | 0 | 시냅스 가중치 양자 = τ-φ 이산값 |
-| BT-396 | EXACT | 0 | 1 | 0 | MHC 클래스 ↔ τ-φ=2 / 면역세포군 n=6 |
-| BT-397 | EXACT | 0 | 1 | 0 | 항체 친화도 성숙 = σ-φ²·τ 사이클 |
-| BT-398 | EXACT | 0 | 1 | 0 | 사이토카인 네트워크 sopfr 위계 |
-| BT-399 | EXACT | 0 | 1 | 0 | 6도메인 공통 n=6 분류축 메타정리 |
-| BT-400 | EXACT | 0 | 1 | 0 | 6도메인 교차 공명: σ·φ=n·τ 보편 분류 법칙 |
-| BT-401 | EXACT | 12 | 0 | 0 | 양자 맥스웰 도깨비 정보-열역학 n=6 완전 사이클 |
-| BT-402 | EXACT | 10 | 0 | 0 | 양자 혼돈 랜덤행렬 n=6 보편성 분류 |
-| BT-403 | EXACT | 11 | 0 | 0 | [[6,4,2]] 양자 오류 정정 코드 유일성 정리 — 완전수 코드 |
-| BT-404 | EXACT | 11 | 0 | 0 | Boltzmann 분배 함수 → 신경망 희소성 n=6 열역학 동형사상 |
-| BT-405 | EXACT | 12 | 0 | 0 | Shannon-Landauer-Boltzmann 정보-열역학 삼각형 n=6 폐루프 |
-| BT-406 | EXACT | 14 | 0 | 0 | BCS-Josephson-플럭스 양자 초전도 n=6 완전 래더 — σφ=nτ=24 심층 확장 |
-| BT-407 | EXACT | 20 | 0 | 0 | τ=4 범물리 대칭 — 4차원 시공간에서 4-상태 양자계까지 n=6 보편 래더 |
-| BT-408 | EXACT | 12 | 0 | 0 | 양자 측정-정보-에너지 사각형 n=6 완전 순환 — 관측의 물리학 |
-| BT-409 | EXACT | 9 | 1 | 0 | 의학 바이탈 사인 n=6 완전 래더 — 심박/혈압/호흡/적혈구 σ·τ=48 수렴 |
-| BT-410 | EXACT | 8 | 0 | 0 | 약리학 수용체-투여-반감기 n=6 분류 아키텍처 |
-| BT-411 | EXACT | 10 | 0 | 0 | 인체 해부학 골격-치아-척추 n=6 정수 아키텍처 |
-| BT-412 | EXACT | 12 | 0 | 0 | 심리학 인지 분류 n=6 — Miller 7, Big Five, Piaget τ=4, Erikson |
-| BT-413 | EXACT | 12 | 0 | 0 | 철학-논리학 범주 분류 n=6 — 칸트 σ=12, 삼단논법 τ=4, 괴델 φ=2 |
-| BT-414 | EXACT | 6 | 0 | 0 | 생리학 순환-호흡-신장 σ·(σ-φ)=120 삼중 수렴 |
-| BT-415 | EXACT | 8 | 0 | 0 | 천문학 분류 상수 n=6 래더 — 행성 σ-τ, 황도 σ, 달 σ-τ, 분광 σ-sopfr |
-| BT-416 | EXACT | 10 | 0 | 0 | 지구 구조 달-지구-태양 n=6 거리 래더 |
-| BT-417 | EXACT | 12 | 0 | 0 | 기상학 Beaufort σ=12 — 풍력-대순환-운형 n=6 완전 래더 |
-| BT-418 | EXACT | 10 | 0 | 0 | 화학 주기율표 n=6 인코딩 — 족 σ+n=18, 비활성기체 n=6, 혼성화 n/φ=3 |
-| BT-419 | EXACT | 8 | 0 | 0 | 해양학 수직-수평 순환 n=6 동형 — 환류 σ-sopfr=7, 수직대 sopfr=5, 염분 35‰ |
-| BT-420 | EXACT | 8 | 0 | 0 | 시각예술 색채 이론 n=6 — 삼원색 n/φ=3, 이텐 σ=12, CMYK τ=4, 황금비 φ |
-| BT-421 | EXACT | 10 | 0 | 0 | 문학-서사 구조 n=6 아키텍처 — 아리스토텔레스 n=6 서사, 소네트 σ+φ=14, 하이쿠 σ+s |
-| BT-422 | EXACT | 8 | 0 | 0 | 교육학 Bloom-ISCED n=6 — 학습 단계 n, 교육 체계 σ-τ=8, 의무교육 σ=12 |
-| BT-423 | EXACT | 8 | 0 | 0 | 요리과학 n=6 영양-맛-조리 아키텍처 |
-| BT-424 | EXACT | 8 | 0 | 0 | 영화-서사 미디어 J₂=24 프레임 — 시각 시간 양자 |
-| BT-425 | EXACT | 8 | 0 | 0 | 정치학 삼권분립-UN n=6 아키텍처 |
-| BT-426 | EXACT | 8 | 0 | 0 | 법학-윤리학 τ=4 정의 아키텍처 — 생명윤리 τ=4, Kohlberg n=6, UDHR 30 |
-| BT-427 | EXACT | 8 | 0 | 0 | 사회학 Dunbar σ²+n=150 — 계층-세대-가족 n=6 래더 |
-| BT-428 | EXACT | 8 | 0 | 0 | 인류학-고고학 시대 분류 n=6 — 혈액형 τ=4, 3시대법 n/φ=3, 세대 n·sopfr=30 |
-| BT-429 | EXACT | 8 | 0 | 0 | 동물학 곤충-거미-척추 체절 n=6 완전 래더 |
-| BT-430 | EXACT | 8 | 0 | 0 | 식물학 광합성-꽃-캘빈 n=6 삼중 수렴 |
-| BT-431 | EXACT | 10 | 0 | 0 | 유전학 코돈-염기-아미노산 n=6 아키텍처 |
-| BT-432 | EXACT | 8 | 0 | 0 | 세포생물학 크레브스-리보솜 n=6 에너지 래더 |
-| BT-433 | EXACT | 8 | 0 | 0 | 미생물학 바이러스-세균 분류 n=6 래더 |
-| BT-434 | EXACT | 10 | 0 | 0 | 컴퓨팅 아키텍처 바이트-워드-ASCII n=6 멱급수 래더 |
-| BT-435 | EXACT | 8 | 0 | 0 | AES 암호 라운드 σ-φ=10 / σ=12 완전 래더 |
-| BT-436 | EXACT | 8 | 0 | 0 | 네트워크 프로토콜 OSI σ-sopfr=7 / TCP τ=4 이중 아키텍처 |
-| BT-437 | EXACT | 8 | 0 | 0 | 정보이론 Shannon-Nyquist φ=2 근본 이원성 |
-| BT-438 | EXACT | 8 | 0 | 0 | 결정학 Bravais σ+φ=14 — 결정계 σ-sopfr=7, 점군 φ^sopfr=32, 공간군  |
-| BT-439 | EXACT | 8 | 0 | 0 | 열역학 기본 법칙 τ+μ=5 / 포텐셜 τ=4 / Maxwell τ=4 완전 아키텍처 |
-| BT-440 | EXACT | 8 | 0 | 0 | 전자기학 Maxwell τ=4 방정식 — 4-벡터 τ=4, 4-포텐셜 τ=4 |
-| BT-441 | EXACT | 8 | 0 | 0 | 반도체 재료 Si 원자번호 14=σ+φ — Ge 32=φ^sopfr, GaAs 31+33 |
-| BT-442 | EXACT | 8 | 0 | 0 | 토목-건축 구조 상수 n=6 — 콘크리트 24MPa=J₂, 층고 3m=n/φ, 철근 400MPa |
-| BT-443 | EXACT | 10 | 0 | 0 | σ-sopfr=7 범자연 보편 상수 — 경추/결정계/Baltimore/OSI/Miller/스펙트럼/ |
-| BT-444 | EXACT | 10 | 0 | 0 | sopfr=5 범자연 보편 상수 — Big Five/척추동물/영양단계/기후/영양소/호르몬 6중 수렴 |
-| BT-445 | EXACT | 10 | 0 | 0 | φ=2 이원성 근본 정리 — 유성생식/전자-양공/이진수/φ-Nyquist/Gram 염색 10중 수렴 |
-| BT-446 | EXACT | 2 | 0 | 0 | τ=4 보편 분류 최종 정리 — 30개 독립 도메인 수렴 (BT-407 확장) |
-| BT-447 | EXACT | 2 | 0 | 0 | σ=12 보편 양자화 최종 정리 — 칸트/음정/Beaufort/이텐/영웅여정/토양/AES-192 7 |
-| BT-448 | EXACT | 2 | 0 | 0 | J₂=24 보편 시간-코드 양자 — 시간/영화/절기/콘크리트/Golay/빙하 6중 수렴 |
-| BT-449 | EXACT | 2 | 0 | 0 | n=6 완전수 36도메인 메타 분류 정리 — BT-399 최종 확장 |
-| BT-450 | EXACT | 3 | 0 | 0 | σφ=nτ=24 자연 분류 보편 법칙 — 최종 선언 |
-| BT-451 | EXACT | 4 | 1 | 0 | 종양 미세환경(TME) 세포 구성 n=6 |
-| BT-452 | EXACT | 4 | 1 | 0 | 면역관문 τ=4 아키텍처 |
-| BT-453 | EXACT | 4 | 1 | 0 | CAR-T 구조 sopfr=5 / 제품 n=6 |
-| BT-454 | EXACT | 5 | 0 | 0 | Warburg 대사 저격 σ-φ=10 |
-| BT-455 | EXACT | 4 | 1 | 0 | 혈관신생 VEGF 패밀리 sopfr=5 / VEGFR n/φ=3 |
-| BT-456 | EXACT | 4 | 1 | 0 | 전이 캐스케이드 n=6 단계 |
-| BT-457 | EXACT | 4 | 1 | 0 | 암 줄기세포 경로 n/φ=3 / 마커 τ=4 |
-| BT-458 | EXACT | 4 | 1 | 0 | 방사선 DNA 손상 τ=4 / 분획 σ=12 |
-| BT-459 | EXACT | 4 | 1 | 0 | ADC 페이로드 σ-sopfr=7 / 구조 n/φ=3 |
-| BT-460 | EXACT | 4 | 2 | 0 | 액체생검 분석물 n=6 |
-| BT-451 | EXACT | 0 | 1 | 0 | ~460 종합 |
-| BT-461 | EXACT | 4 | 0 | 0 | gp120-CD4 결합 6접점 |
-| BT-462 | EXACT | 4 | 0 | 0 | 역전사효소(RT) τ=4 도메인 아키텍처 |
-| BT-463 | PARTIAL | 4 | 0 | 1 | 인테그라제 LTR 처리 σ(6)=12 / 삽입 6bp 중복 |
-| BT-464 | PARTIAL | 4 | 0 | 1 | Tat-TAR 6염기 루프 인식 |
-| BT-465 | PARTIAL | 4 | 0 | 1 | Rev-RRE 핵외반출 4→6 올리고머 |
-| BT-466 | PARTIAL | 4 | 0 | 1 | HIV 프로테아제 C₂ 대칭 / 억제제 φ=2 |
-| BT-467 | PARTIAL | 4 | 0 | 1 | HIV 잠복 저장소 6구획 |
-| BT-468 | PARTIAL | 4 | 0 | 1 | 광범위중화항체(bNAb) σ(6)=1+2+3+6 에피토프 클러스터 |
-| BT-469 | PARTIAL | 4 | 0 | 1 | CCR5 공수용체 6nt PAM / CRISPR 편집 표적 |
-| BT-470 | PARTIAL | 4 | 0 | 1 | HEXA-ART — HIV 6제 요법 n=6 조합 설계 |
-| BT-461 | EXACT | 0 | 1 | 0 | ~470 종합 |
-| BT-471 | PARTIAL | 4 | 0 | 1 | 표준모형 쿼크 6종 = n — PDG 플레이버 수 |
-| BT-472 | PARTIAL | 3 | 0 | 1 | 게이지 보손 σ-sopfr=7 — 전자기약+강 매개자 |
-| BT-473 | EXACT | 3 | 0 | 0 | CKM 행렬 τ=4 독립 파라미터 |
-| BT-474 | PARTIAL | 3 | 0 | 1 | 뉴트리노 3 플레이버 = n/φ |
-| BT-475 | MISS | 2 | 0 | 3 | Planck 2018 Ω 예산 n=6 구성 |
-| BT-476 | MISS | 1 | 0 | 3 | CMB 음향 피크 — 첫 피크 ℓ ≈ 220 = σ(6)·... 구조 |
-| BT-477 | PARTIAL | 3 | 0 | 1 | 블랙홀 불모 정리 τ=3 — M,Q,J 유일 파라미터 |
-| BT-478 | MISS | 3 | 0 | 2 | 이징 모형 임계지수 τ=4 독립 값 |
-| BT-479 | EXACT | 4 | 0 | 0 | 통계역학 앙상블 n/φ=3 — 마이크로/정준/대정준 |
-| BT-480 | EXACT | 4 | 0 | 0 | Pauli 행렬 n/φ=3 / Dirac 행렬 τ=4 |
-| BT-481 | PARTIAL | 3 | 0 | 1 | BCS 초전도 갭 2Δ/k_BT_c ≈ 3.53 → n/φ 근사 |
-| BT-482 | PARTIAL | 3 | 0 | 1 | 양자홀 효과 σ_xy=νe²/h — 정수 n=6 plateau 관측 |
-| BT-483 | MISS | 3 | 0 | 2 | CODATA 기본 상수 n=6 핵심 집합 |
-| BT-484 | PARTIAL | 4 | 0 | 1 | Bell 부등식 CHSH 한계 2 = φ — 양자상관 한계 2√2 |
-| BT-485 | EXACT | 5 | 0 | 0 | 큐비트 Bloch 구면 파라미터 φ=2 — 양자정보 기본 |
-| BT-486 | EXACT | 5 | 0 | 0 | 양자 오류정정 [[7,1,3]] Steane / Shor [[9,1,3]] |
-| BT-487 | MISS | 2 | 0 | 3 | 우주 나이 근사 13.8 Gyr / Hubble 시간 τ_H — n=6 수렴 |
-| BT-471 | EXACT | 0 | 1 | 0 | ~487 종합 (17 돌파) |
-| BT-488 | PARTIAL | 4 | 0 | 1 | 알쿠비에르 워프 메트릭 편미분 축 = φ=2 — 워프버블 기본 |
-| BT-489 | EXACT | 4 | 0 | 0 | 칼루차-클라인 5차원 → 4+1 분해 σ=n — 여분차원 기본 |
-| BT-490 | EXACT | 5 | 0 | 0 | 랜달-선드럼 브레인월드 브레인 수 = φ=2 — RS1 모델 |
-| BT-491 | PARTIAL | 4 | 0 | 1 | ADD 큰 여분차원 모델 분류 n=6 — Arkani-Hamed/Dimopoulos/Dvali |
-| BT-492 | EXACT | 4 | 0 | 0 | 웜홀 Morris-Thorne 통행가능 조건 수 = n=6 |
-| BT-493 | PARTIAL | 4 | 0 | 1 | M-이론 11차원 → σ-sopfr=7 여분차원 제거 |
-| BT-494 | PARTIAL | 4 | 0 | 1 | 끈이론 critical dimension 26/10 분류축 = φ=2 |
-| BT-495 | EXACT | 5 | 0 | 0 | 블랙홀 사건지평선 구조축 = n/φ=3 — Kerr-Newman |
-| BT-496 | EXACT | 4 | 0 | 0 | Casimir 효과 공간축 = φ=2 — 음에너지 밀도 워프 원천 |
-| BT-497 | EXACT | 5 | 0 | 0 | Gödel 회전우주 닫힌 시간꼴 곡선 차원축 = n=6 |
-| BT-488 | EXACT | 0 | 1 | 0 | ~497 종합 (10 돌파 — 워프/차원 물리) |
-| BT-498 | PARTIAL | 4 | 0 | 2 | 역삼투(RO) 담수화 6단계 공정 = n |
-| BT-499 | PARTIAL | 4 | 0 | 1 | 다단증발(MED/MSF) 담수화 σ=12 효용단 |
-| BT-500 | PARTIAL | 5 | 0 | 1 | 3D 프린팅 6축 적층제조 = n — FDM/SLA/SLS 기본 |
-| BT-501 | PARTIAL | 4 | 0 | 1 | 3D 프린팅 인필 패턴 — 육각 벌집 n=6 최적 |
-| BT-502 | PARTIAL | 4 | 0 | 2 | 원심분리기 6종 분류 = n — 산업/과학 표준 |
-| BT-503 | MISS | 3 | 1 | 2 | 가스터빈 6단 압축기 — Brayton 사이클 τ=4 |
-| BT-504 | PARTIAL | 4 | 0 | 1 | 증기터빈 12단 HP + 24단 LP — σ/J₂ 공진 |
-| BT-505 | PARTIAL | 4 | 0 | 1 | 식품과학 6대 영양소 = n — 필수영양 완전수 |
-| BT-506 | PARTIAL | 4 | 0 | 1 | HACCP 식품안전 σ-sopfr=7 원칙 |
-| BT-507 | PARTIAL | 4 | 0 | 1 | 웹 브라우저 렌더링 6단계 파이프라인 = n |
-| BT-508 | PARTIAL | 5 | 0 | 1 | CSS Box Model τ=4 변 — 웹 레이아웃 기본 |
-| BT-509 | PARTIAL | 4 | 1 | 1 | 광섬유 통신 σ=12 파장대역 — WDM 표준 |
-| BT-510 | PARTIAL | 4 | 0 | 1 | 유리 SiO₂ — 실리카 4면체 CN=τ / 소다석회 n=6 성분 |
-| BT-511 | PARTIAL | 4 | 0 | 1 | 지진 규모 — 리히터/모멘트 규모 n=6 경계 |
-| BT-512 | PARTIAL | 4 | 0 | 1 | 항공 6자유도 비행역학 = n — FAA 분류 |
-| BT-513 | PARTIAL | 4 | 0 | 1 | 철도 표준궤 1435 mm — σ-sopfr=7 × 205 근사 |
-| BT-514 | PARTIAL | 4 | 0 | 1 | 제약 6단계 GMP — ICH Q7 품질체계 |
-| BT-515 | PARTIAL | 4 | 0 | 1 | 웨이퍼 제조 — 300 mm = σ·(J₂+μ) 표준 직경 |
-| BT-516 | PARTIAL | 5 | 0 | 1 | NAND 플래시 — 2^n=64 셀 스택 / n/φ=3 bit TLC |
-| BT-517 | PARTIAL | 4 | 0 | 1 | 해양학 — 6대양 / Ekman 나선 / 해류 σ=12 |
-| BT-518 | PARTIAL | 4 | 0 | 1 | 농업 — 6대 작물 / 토양 n=6 수평 |
-| BT-519 | PARTIAL | 4 | 0 | 1 | 면역계 6방어선 — 선천/적응 면역 쌍 φ=2 |
-| BT-520 | PARTIAL | 4 | 0 | 1 | DNA 복제 — 6효소 리플리좀 / 코돈 64=φⁿ |
-| BT-521 | PARTIAL | 4 | 0 | 1 | 세포 소기관 — 6대 막성 소기관 = n |
-| BT-522 | PARTIAL | 5 | 0 | 1 | 주기율표 — 6주기 주요원소 / 전자껍질 σ-μ=11족 |
-| BT-523 | PARTIAL | 4 | 0 | 1 | 음악-암호학 교차 — 12음 σ = AES-128 지수 (σ-sopfr) |
-| BT-524 | PARTIAL | 4 | 0 | 1 | 화산학 — VEI 8등급 / 화산 유형 n=6 |
-| BT-525 | PARTIAL | 4 | 0 | 1 | 콘크리트 — 시멘트 6산화물 / 28일 강도 P₂ |
-| BT-526 | PARTIAL | 4 | 0 | 1 | 강철 — Fe-C 상태도 / 오스테나이트 FCC CN=σ=12 |
-| BT-527 | PARTIAL | 5 | 0 | 1 | 태양계 — 6대 현상 / 행성 σ-τ=8 |
-| BT-528 | PARTIAL | 4 | 0 | 1 | 음악-에너지 교차 — 12TET = σ, A440 = σ·sopfr·(σ-sopfr)+σ·φ |
-| BT-529 | PARTIAL | 4 | 0 | 1 | 블록체인-식품 교차 — 6노드 합의 / 식품추적 n=6 단계 |
-| BT-530 | PARTIAL | 4 | 0 | 1 | GPS-음악-암호 삼중 교차 — σ=12 보편 공진 |
-| BT-498 | EXACT | 0 | 1 | 0 | ~530 종합 (33 돌파 — 산업/지구/생명/교차) |
-| BT-531 | EXACT | 4 | 0 | 0 | SPARC 토로이달 자기장 B₀ ≈ 12 T = σ — 고자장 소형 핵융합 기본 |
-| BT-532 | EXACT | 6 | 0 | 0 | TF 코일 수 σ+n = 18 — 토카막 대칭 기본 법칙 |
-| BT-533 | EXACT | 3 | 0 | 0 | D-T 핵융합 에너지 비 E_n/E_α = τ = 4 — 반응 구조 기본 |
-| BT-534 | EXACT | 5 | 0 | 0 | Lawson 안전인자 q ≥ n/φ = 3 — 플라즈마 MHD 안정 한계 |
-| BT-535 | PARTIAL | 2 | 0 | 1 | 소형 종횡비 A = n/φ = 3 → φ = 2 — 컴팩트 핵융합 소형화 축 |
-| BT-536 | PARTIAL | 4 | 0 | 1 | DC 커플링 — 소형 핵융합 1기 = σ·sopfr = 60 MWe, σ·n = 72 랙 |
-| BT-537 | EXACT | 4 | 0 | 0 | Tritium Breeding — Li-6 연료, TBR = 1+1/n = 7/6 |
-| BT-538 | EXACT | 5 | 0 | 0 | Divertor 열부하 — τ=4 스트라이크 포인트, σ-φ = 10 MW/m² |
-| BT-539 | PARTIAL | 5 | 0 | 1 | REBCO 고온초전도 자석 — σ T 운전, τ 원소, J₂-τ K 냉각 |
-| BT-540 | EXACT | 6 | 0 | 0 | 캠퍼스 스케일 모듈 타일링 — σ기 720 MWe → Mk.V J₂기 1.44 GWe |
-| BT-531 | EXACT | 0 | 1 | 0 | ~540 종합 (10 돌파 — 데이터센터용 소형 핵융합) |
+| BT-350 | EXACT | 20 | 0 | 0 | ()  n=6   — /// 4  (19/2 |
+| BT-356 | EXACT | 10 | 0 | 0 |  - n=6  —   =  -   (30/30 |
+| BT-357 | EXACT | 20 | 0 | 0 |     n=6  — Delta~High-γ 6 + ERP 4 + EEG  |
+| BT-358 | EXACT | 10 | 2 | 0 | Alcubierre   n=6  —  1/σ, York  σ,   c |
+| BT-359 | EXACT | 10 | 2 | 0 |    n=6  — BT-170   τ→n→σ-φ→σ-μ→J₂→J₂+φ  |
+| BT-360 | EXACT | 8 | 2 | 0 | -   n=6  — τ=4  (→→→),  (σ-φ |
+| BT-351 | EXACT | 1 | 0 | 0 | / n=6    |
+| BT-352 | EXACT | 1 | 0 | 0 | / n=6   |
+| BT-353 | EXACT | 1 | 0 | 0 | / n=6  |
+| BT-354 | EXACT | 1 | 0 | 0 |   n=6 --  (54/57 EXACT=94.7% ⭐⭐⭐). HBM |
+| BT-355 | EXACT | 0 | 1 | 0 |  n=6   |
+| BT-361 | EXACT | 1 | 0 | 0 |   n=6  |
+| BT-362 | EXACT | 1 | 0 | 0 |  Hexapoda  n=6 |
+| BT-363 | EXACT | 1 | 0 | 0 |  - n=6 |
+| BT-364 | EXACT | 1 | 0 | 0 |   n=6   |
+| BT-365 | EXACT | 1 | 0 | 0 |  n=6  |
+| BT-366 | EXACT | 1 | 0 | 0 | / n=6  |
+| BT-367 | EXACT | 1 | 0 | 0 | / n=6 - |
+| BT-368 | EXACT | 1 | 0 | 0 |   n=6   |
+| BT-369 | EXACT | 1 | 0 | 0 |  n=6   |
+| BT-370 | EXACT | 1 | 0 | 0 | / n=6  |
+| BT-371 | EXACT | 1 | 0 | 0 |    n=6  |
+| BT-372 | EXACT | 1 | 0 | 0 |   n=6    |
+| BT-373 | EXACT | 1 | 0 | 0 |   n=6   |
+| BT-374 | EXACT | 1 | 0 | 0 | / n=6 |
+| BT-375 | EXACT | 1 | 0 | 0 |   n=6 |
+| BT-376 | EXACT | 1 | 0 | 0 |  n=6 |
+| BT-377 | EXACT | 1 | 0 | 0 |   n=6 |
+| BT-378 | EXACT | 0 | 1 | 0 |    n=6 |
+| BT-379 | EXACT | 1 | 0 | 0 |    n=6 |
+| BT-380 | EXACT | 3 | 0 | 0 | -  n=6  |
+| BT-381 | EXACT | 0 | 1 | 0 |   n=6   |
+| BT-382 | EXACT | 0 | 1 | 0 |  X-bar τ=4  |
+| BT-383 | EXACT | 0 | 1 | 0 |  Zipf  n=6  |
+| BT-384 | EXACT | 0 | 1 | 0 | 12  = σ²=144 / σ-φ=10  |
+| BT-385 | EXACT | 0 | 1 | 0 |   τ=4 / n=6   |
+| BT-386 | EXACT | 0 | 1 | 0 |   sopfr  |
+| BT-387 | EXACT | 0 | 1 | 0 | Kondratiev  = n·sopfr=30  |
+| BT-388 | EXACT | 0 | 1 | 0 | Pareto 80/20 = (σ-φ)²/(σ²+n)  |
+| BT-389 | EXACT | 0 | 1 | 0 |  = σ/φ=4 /  1/τ-φ=20% |
+| BT-390 | EXACT | 0 | 1 | 0 |   = sopfr(6)+1=6 |
+| BT-391 | EXACT | 0 | 1 | 0 |  r/K  = τ/σ-τ  |
+| BT-392 | EXACT | 0 | 1 | 0 |  Shannon H' = log(σ-φ)=log(10) |
+| BT-393 | EXACT | 0 | 1 | 0 |  n=6  (Brodmann ) |
+| BT-394 | EXACT | 0 | 1 | 0 |   Dunbar  = (σ-φ)·σ·sopfr=...150 |
+| BT-395 | EXACT | 0 | 1 | 0 |    = τ-φ  |
+| BT-396 | EXACT | 0 | 1 | 0 | MHC  ↔ τ-φ=2 /  n=6 |
+| BT-397 | EXACT | 0 | 1 | 0 |    = σ-φ²·τ  |
+| BT-398 | EXACT | 0 | 1 | 0 |   sopfr  |
+| BT-399 | EXACT | 0 | 1 | 0 | 6  n=6   |
+| BT-400 | EXACT | 0 | 1 | 0 | 6  : σ·φ=n·τ    |
+| BT-401 | EXACT | 12 | 0 | 0 |    - n=6   |
+| BT-402 | EXACT | 10 | 0 | 0 |    n=6   |
+| BT-403 | EXACT | 11 | 0 | 0 | [[6,4,2]]       —   |
+| BT-404 | EXACT | 11 | 0 | 0 | Boltzmann   →   n=6   |
+| BT-405 | EXACT | 12 | 0 | 0 | Shannon-Landauer-Boltzmann -  n=6  |
+| BT-406 | EXACT | 14 | 0 | 0 | BCS-Josephson-   n=6   — σφ=nτ=24   |
+| BT-407 | EXACT | 20 | 0 | 0 | τ=4   — 4  4-  n=6   |
+| BT-408 | EXACT | 12 | 0 | 0 |  --  n=6   —   |
+| BT-409 | EXACT | 9 | 1 | 0 |    n=6   — /// σ·τ=48  |
+| BT-410 | EXACT | 8 | 0 | 0 |  -- n=6   |
+| BT-411 | EXACT | 10 | 0 | 0 |   -- n=6   |
+| BT-412 | EXACT | 12 | 0 | 0 |    n=6 — Miller 7, Big Five, Piaget τ=4, Erikson |
+| BT-413 | EXACT | 12 | 0 | 0 | -   n=6 —  σ=12,  τ=4,  φ=2 |
+| BT-414 | EXACT | 6 | 0 | 0 |  -- σ·(σ-φ)=120   |
+| BT-415 | EXACT | 8 | 0 | 0 |    n=6  —  σ-τ,  σ,  σ-τ,  σ-sopfr |
+| BT-416 | EXACT | 10 | 0 | 0 |   -- n=6   |
+| BT-417 | EXACT | 12 | 0 | 0 |  Beaufort σ=12 — -- n=6   |
+| BT-418 | EXACT | 10 | 0 | 0 |   n=6  —  σ+n=18,  n=6,  n/φ=3 |
+| BT-419 | EXACT | 8 | 0 | 0 |  -  n=6  —  σ-sopfr=7,  sopfr=5,  35‰ |
+| BT-420 | EXACT | 8 | 0 | 0 |    n=6 —  n/φ=3,  σ=12, CMYK τ=4,  φ |
+| BT-421 | EXACT | 10 | 0 | 0 | -  n=6  —  n=6 ,  σ+φ=14,  σ+s |
+| BT-422 | EXACT | 8 | 0 | 0 |  Bloom-ISCED n=6 —   n,   σ-τ=8,  σ=12 |
+| BT-423 | EXACT | 8 | 0 | 0 |  n=6 --  |
+| BT-424 | EXACT | 8 | 0 | 0 | -  J₂=24  —    |
+| BT-425 | EXACT | 8 | 0 | 0 |  -UN n=6  |
+| BT-426 | EXACT | 8 | 0 | 0 | - τ=4   —  τ=4, Kohlberg n=6, UDHR 30 |
+| BT-427 | EXACT | 8 | 0 | 0 |  Dunbar σ²+n=150 — -- n=6  |
+| BT-428 | EXACT | 8 | 0 | 0 | -   n=6 —  τ=4, 3 n/φ=3,  n·sopfr=30 |
+| BT-429 | EXACT | 8 | 0 | 0 |  --  n=6   |
+| BT-430 | EXACT | 8 | 0 | 0 |  -- n=6   |
+| BT-431 | EXACT | 10 | 0 | 0 |  -- n=6  |
+| BT-432 | EXACT | 8 | 0 | 0 |  - n=6   |
+| BT-433 | EXACT | 8 | 0 | 0 |  -  n=6  |
+| BT-434 | EXACT | 10 | 0 | 0 |   --ASCII n=6   |
+| BT-435 | EXACT | 8 | 0 | 0 | AES   σ-φ=10 / σ=12   |
+| BT-436 | EXACT | 8 | 0 | 0 |   OSI σ-sopfr=7 / TCP τ=4   |
+| BT-437 | EXACT | 8 | 0 | 0 |  Shannon-Nyquist φ=2   |
+| BT-438 | EXACT | 8 | 0 | 0 |  Bravais σ+φ=14 —  σ-sopfr=7,  φ^sopfr=32,   |
+| BT-439 | EXACT | 8 | 0 | 0 |    τ+μ=5 /  τ=4 / Maxwell τ=4   |
+| BT-440 | EXACT | 8 | 0 | 0 |  Maxwell τ=4  — 4- τ=4, 4- τ=4 |
+| BT-441 | EXACT | 8 | 0 | 0 |   Si  14=σ+φ — Ge 32=φ^sopfr, GaAs 31+33 |
+| BT-442 | EXACT | 8 | 0 | 0 | -   n=6 —  24MPa=J₂,  3m=n/φ,  400MPa |
+| BT-443 | EXACT | 10 | 0 | 0 | σ-sopfr=7    — //Baltimore/OSI/Miller// |
+| BT-444 | EXACT | 10 | 0 | 0 | sopfr=5    — Big Five///// 6  |
+| BT-445 | EXACT | 10 | 0 | 0 | φ=2    — /-//φ-Nyquist/Gram  10  |
+| BT-446 | EXACT | 2 | 0 | 0 | τ=4     — 30    (BT-407 ) |
+| BT-447 | EXACT | 2 | 0 | 0 | σ=12     — //Beaufort////AES-192 7 |
+| BT-448 | EXACT | 2 | 0 | 0 | J₂=24  -  — ////Golay/ 6  |
+| BT-449 | EXACT | 2 | 0 | 0 | n=6  36    — BT-399   |
+| BT-450 | EXACT | 3 | 0 | 0 | σφ=nτ=24     —   |
+| BT-451 | EXACT | 4 | 1 | 0 |  (TME)   n=6 |
+| BT-452 | EXACT | 4 | 1 | 0 |  τ=4  |
+| BT-453 | EXACT | 4 | 1 | 0 | CAR-T  sopfr=5 /  n=6 |
+| BT-454 | EXACT | 5 | 0 | 0 | Warburg   σ-φ=10 |
+| BT-455 | EXACT | 4 | 1 | 0 |  VEGF  sopfr=5 / VEGFR n/φ=3 |
+| BT-456 | EXACT | 4 | 1 | 0 |   n=6  |
+| BT-457 | EXACT | 4 | 1 | 0 |    n/φ=3 /  τ=4 |
+| BT-458 | EXACT | 4 | 1 | 0 |  DNA  τ=4 /  σ=12 |
+| BT-459 | EXACT | 4 | 1 | 0 | ADC  σ-sopfr=7 /  n/φ=3 |
+| BT-460 | EXACT | 4 | 2 | 0 |   n=6 |
+| BT-451 | EXACT | 0 | 1 | 0 | ~460  |
+| BT-461 | EXACT | 4 | 0 | 0 | gp120-CD4  6 |
+| BT-462 | EXACT | 4 | 0 | 0 | (RT) τ=4   |
+| BT-463 | PARTIAL | 4 | 0 | 1 |  LTR  σ(6)=12 /  6bp  |
+| BT-464 | PARTIAL | 4 | 0 | 1 | Tat-TAR 6   |
+| BT-465 | PARTIAL | 4 | 0 | 1 | Rev-RRE  4→6  |
+| BT-466 | PARTIAL | 4 | 0 | 1 | HIV  C₂  /  φ=2 |
+| BT-467 | PARTIAL | 4 | 0 | 1 | HIV   6 |
+| BT-468 | PARTIAL | 4 | 0 | 1 | (bNAb) σ(6)=1+2+3+6   |
+| BT-469 | PARTIAL | 4 | 0 | 1 | CCR5  6nt PAM / CRISPR   |
+| BT-470 | PARTIAL | 4 | 0 | 1 | HEXA-ART — HIV 6  n=6   |
+| BT-461 | EXACT | 0 | 1 | 0 | ~470  |
+| BT-471 | PARTIAL | 4 | 0 | 1 |   6 = n — PDG   |
+| BT-472 | PARTIAL | 3 | 0 | 1 |   σ-sopfr=7 — +  |
+| BT-473 | EXACT | 3 | 0 | 0 | CKM  τ=4   |
+| BT-474 | PARTIAL | 3 | 0 | 1 |  3  = n/φ |
+| BT-475 | MISS | 2 | 0 | 3 | Planck 2018 Ω  n=6  |
+| BT-476 | MISS | 1 | 0 | 3 | CMB   —   ℓ ≈ 220 = σ(6)·...  |
+| BT-477 | PARTIAL | 3 | 0 | 1 |    τ=3 — M,Q,J   |
+| BT-478 | MISS | 3 | 0 | 2 |    τ=4   |
+| BT-479 | EXACT | 4 | 0 | 0 |   n/φ=3 — // |
+| BT-480 | EXACT | 4 | 0 | 0 | Pauli  n/φ=3 / Dirac  τ=4 |
+| BT-481 | PARTIAL | 3 | 0 | 1 | BCS   2Δ/k_BT_c ≈ 3.53 → n/φ  |
+| BT-482 | PARTIAL | 3 | 0 | 1 |   σ_xy=νe²/h —  n=6 plateau  |
+| BT-483 | MISS | 3 | 0 | 2 | CODATA   n=6   |
+| BT-484 | PARTIAL | 4 | 0 | 1 | Bell  CHSH  2 = φ —   2√2 |
+| BT-485 | EXACT | 5 | 0 | 0 |  Bloch   φ=2 —   |
+| BT-486 | EXACT | 5 | 0 | 0 |   [[7,1,3]] Steane / Shor [[9,1,3]] |
+| BT-487 | MISS | 2 | 0 | 3 |    13.8 Gyr / Hubble  τ_H — n=6  |
+| BT-471 | EXACT | 0 | 1 | 0 | ~487  (17 ) |
+| BT-488 | PARTIAL | 4 | 0 | 1 |      = φ=2 —   |
+| BT-489 | EXACT | 4 | 0 | 0 | - 5 → 4+1  σ=n —   |
+| BT-490 | EXACT | 5 | 0 | 0 | -    = φ=2 — RS1  |
+| BT-491 | PARTIAL | 4 | 0 | 1 | ADD     n=6 — Arkani-Hamed/Dimopoulos/Dvali |
+| BT-492 | EXACT | 4 | 0 | 0 |  Morris-Thorne    = n=6 |
+| BT-493 | PARTIAL | 4 | 0 | 1 | M- 11 → σ-sopfr=7   |
+| BT-494 | PARTIAL | 4 | 0 | 1 |  critical dimension 26/10  = φ=2 |
+| BT-495 | EXACT | 5 | 0 | 0 |    = n/φ=3 — Kerr-Newman |
+| BT-496 | EXACT | 4 | 0 | 0 | Casimir   = φ=2 —     |
+| BT-497 | EXACT | 5 | 0 | 0 | Gödel      = n=6 |
+| BT-488 | EXACT | 0 | 1 | 0 | ~497  (10  — / ) |
+| BT-498 | PARTIAL | 4 | 0 | 2 | (RO)  6  = n |
+| BT-499 | PARTIAL | 4 | 0 | 1 | (MED/MSF)  σ=12  |
+| BT-500 | PARTIAL | 5 | 0 | 1 | 3D  6  = n — FDM/SLA/SLS  |
+| BT-501 | PARTIAL | 4 | 0 | 1 | 3D    —   n=6  |
+| BT-502 | PARTIAL | 4 | 0 | 2 |  6  = n — /  |
+| BT-503 | MISS | 3 | 1 | 2 |  6  — Brayton  τ=4 |
+| BT-504 | PARTIAL | 4 | 0 | 1 |  12 HP + 24 LP — σ/J₂  |
+| BT-505 | PARTIAL | 4 | 0 | 1 |  6  = n —   |
+| BT-506 | PARTIAL | 4 | 0 | 1 | HACCP  σ-sopfr=7  |
+| BT-507 | PARTIAL | 4 | 0 | 1 |    6  = n |
+| BT-508 | PARTIAL | 5 | 0 | 1 | CSS Box Model τ=4  —    |
+| BT-509 | PARTIAL | 4 | 1 | 1 |   σ=12  — WDM  |
+| BT-510 | PARTIAL | 4 | 0 | 1 |  SiO₂ —  4 CN=τ /  n=6  |
+| BT-511 | PARTIAL | 4 | 0 | 1 |   — /  n=6  |
+| BT-512 | PARTIAL | 4 | 0 | 1 |  6  = n — FAA  |
+| BT-513 | PARTIAL | 4 | 0 | 1 |   1435 mm — σ-sopfr=7 × 205  |
+| BT-514 | PARTIAL | 4 | 0 | 1 |  6 GMP — ICH Q7  |
+| BT-515 | PARTIAL | 4 | 0 | 1 |   — 300 mm = σ·(J₂+μ)   |
+| BT-516 | PARTIAL | 5 | 0 | 1 | NAND  — 2^n=64   / n/φ=3 bit TLC |
+| BT-517 | PARTIAL | 4 | 0 | 1 |  — 6 / Ekman  /  σ=12 |
+| BT-518 | PARTIAL | 4 | 0 | 1 |  — 6  /  n=6  |
+| BT-519 | PARTIAL | 4 | 0 | 1 |  6 — /   φ=2 |
+| BT-520 | PARTIAL | 4 | 0 | 1 | DNA  — 6  /  64=φⁿ |
+| BT-521 | PARTIAL | 4 | 0 | 1 |   — 6   = n |
+| BT-522 | PARTIAL | 5 | 0 | 1 |  — 6  /  σ-μ=11 |
+| BT-523 | PARTIAL | 4 | 0 | 1 | -  — 12 σ = AES-128  (σ-sopfr) |
+| BT-524 | PARTIAL | 4 | 0 | 1 |  — VEI 8 /   n=6 |
+| BT-525 | PARTIAL | 4 | 0 | 1 |  —  6 / 28  P₂ |
+| BT-526 | PARTIAL | 4 | 0 | 1 |  — Fe-C  /  FCC CN=σ=12 |
+| BT-527 | PARTIAL | 5 | 0 | 1 |  — 6  /  σ-τ=8 |
+| BT-528 | PARTIAL | 4 | 0 | 1 | -  — 12TET = σ, A440 = σ·sopfr·(σ-sopfr)+σ·φ |
+| BT-529 | PARTIAL | 4 | 0 | 1 | -  — 6  /  n=6  |
+| BT-530 | PARTIAL | 4 | 0 | 1 | GPS--   — σ=12   |
+| BT-498 | EXACT | 0 | 1 | 0 | ~530  (33  — ///) |
+| BT-531 | EXACT | 4 | 0 | 0 | SPARC   B₀ ≈ 12 T = σ —     |
+| BT-532 | EXACT | 6 | 0 | 0 | TF   σ+n = 18 —     |
+| BT-533 | EXACT | 3 | 0 | 0 | D-T    E_n/E_α = τ = 4 —    |
+| BT-534 | EXACT | 5 | 0 | 0 | Lawson  q ≥ n/φ = 3 —  MHD   |
+| BT-535 | PARTIAL | 2 | 0 | 1 |   A = n/φ = 3 → φ = 2 —     |
+| BT-536 | PARTIAL | 4 | 0 | 1 | DC  —   1 = σ·sopfr = 60 MWe, σ·n = 72  |
+| BT-537 | EXACT | 4 | 0 | 0 | Tritium Breeding — Li-6 , TBR = 1+1/n = 7/6 |
+| BT-538 | EXACT | 5 | 0 | 0 | Divertor  — τ=4  , σ-φ = 10 MW/m² |
+| BT-539 | PARTIAL | 5 | 0 | 1 | REBCO   — σ T , τ , J₂-τ K  |
+| BT-540 | EXACT | 6 | 0 | 0 |     — σ 720 MWe → Mk.V J₂ 1.44 GWe |
+| BT-531 | EXACT | 0 | 1 | 0 | ~540  (10  —   ) |

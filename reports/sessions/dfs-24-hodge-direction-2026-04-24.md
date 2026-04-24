@@ -67,7 +67,7 @@
 
 **Falsifier**: if Mostaed's Weil Hodge class count on abelian 6-folds is found ≠ J_2² / k for k ∈ {1, φ, τ}, then Π_HODGE_int's numerological triple-match is post-hoc and should be demoted.
 
-**Honesty gate**: Π_HODGE_int is declared "소수차 근사" in the source — this is *already* flagged as non-proof. Probe P3 should *not* upgrade it; it can only tighten or demote.
+**Honesty gate**: Pi_HODGE_int is declared "small-prime-order approximation" in the source — this is *already* flagged as non-proof. Probe P3 should *not* upgrade it; it can only tighten or demote.
 
 ---
 
