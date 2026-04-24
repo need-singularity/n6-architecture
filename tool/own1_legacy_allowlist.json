@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 119,
+    "count": 118,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -201,6 +201,14 @@
         "removed": 17,
         "new_count": 139,
         "note": "B3 YELLOW continuation - 17 energy files translated (battery-scale-1..8, fusion*, nuclear, power-grid, room-temp-sc, smr-datacenter, solar, superconductor, thermal-management)"
+      },
+      {
+        "phase": "phase-6-10",
+        "batch": "phase-6-10-sscb",
+        "date": "2026-04-25",
+        "removed": 1,
+        "new_count": 118,
+        "note": "B10 YELLOW closure - sscb.md translated (Korean -> English), CJK=0 verified. B10 batch complete."
       }
     ]
   },
@@ -257,7 +265,6 @@
     "domains/compute/hexa-proglang/hexa-proglang.md",
     "domains/compute/hexa-super/hexa-super.md",
     "domains/compute/hexa-wafer/hexa-wafer.md",
-    "domains/compute/sscb/sscb.md",
     "domains/physics/antimatter-factory/antimatter-factory.md",
     "domains/physics/classical-mechanics-accelerator/classical-mechanics-accelerator.md",
     "domains/physics/cosmic-observatory/cosmic-observatory.md",
