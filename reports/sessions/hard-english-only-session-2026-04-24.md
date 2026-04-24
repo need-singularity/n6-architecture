@@ -2,12 +2,14 @@
 
 ## 1. Session Metadata
 
-- Date: 2026-04-24
-- Duration: approximately 8+ hours (interactive, multi-agent orchestration)
-- Scope: `.own` governance hardening, lifting enforcement coverage from 24 percent to 100 percent, plus kickoff of the allowlist shrinkage program
-- origin/main trajectory (this session): `7b1408e7` -> Phase 4 closure HEAD (plus 41 commits in original window; later extended through Phase 3 then Phase 4)
+- Date: 2026-04-24 (extended 2026-04-25 for Phase 5)
+- Duration: approximately 8+ hours initial, plus Phase 5 run on 2026-04-25 (interactive, multi-agent orchestration)
+- Scope: `.own` governance hardening, lifting enforcement coverage from 24 percent to 100 percent, plus the allowlist shrinkage program through Phase 5
+- origin/main trajectory (this session): `7b1408e7` -> Phase 5 close-out HEAD `77e10b9f`
 - Branch: `main`
 - Repo: `n6-architecture`
+- Allowlist state at Phase 5 close-out: **235 entries** (meta_count == len == unique == 235)
+- Phase 5 status: **Done partial (11 deferred to Phase 6)**
 
 ## 2. Outcomes Summary
 
@@ -201,8 +203,8 @@ Note: the per-batch allowlist columns are non-monotonic across the table because
 | Phase 2 | 2026-04-24     | `experiments/` (5 parallel batches 2-1..2-5)  | 25            | Done            |
 | Phase 3 | 2026-04-24     | `domains/` priority (10 parallel batches 3-1..3-10) | 200 of 417    | Done            |
 | Phase 4 | 2026-04-25     | `reports/` (14 parallel batches 4-1..4-14)    | 281 of 284    | Done (2026-04-25, 3 deferred specs -> Phase 5) |
-| Phase 5 | 2026-08 to 09  | `papers/` plus `theory/` (high difficulty); plus 3 deferred fusion/KSTAR specs | 314 plus 3 def. | Scheduled       |
-| Phase 6 | 2026-10 to 12  | `domains/` remaining plus allowlist retire    | 217 plus meta | Scheduled       |
+| Phase 5 | 2026-04-25     | `papers/` plus `theory/` (high difficulty); plus 3 deferred fusion/KSTAR specs | 306 of 317    | Done partial (11 deferred to Phase 6) |
+| Phase 6 | 2026-10 to 12  | 11 Phase-5 deferrals plus `domains/` remaining plus allowlist retire | 11 + 217 plus meta | Scheduled       |
 
 Target: allowlist entries equals 0 by 2026 Q4, at which point the `own1_legacy_allowlist.json` file is deleted and own#1 becomes unconditional HARD for the full tree.
 
@@ -356,3 +358,70 @@ At the moment of writing this Phase 4 closure update (2026-04-25):
 This session moved the `.own` governance model from an aspirational document to a mechanically enforced contract over sixteen rules. The remaining five rules (own#15, #18, #19, #20, #21) are SOFT by design — they describe human-loop review or long-horizon drift detection where a HARD block would fire on noise. All auto-verifiable rules now block merges.
 
 Phase 0 plus Phase 1 plus Phase 2 plus Phase 3 plus Phase 4 together translated 525 files (10 + 9 + 25 + 200 + 281) and the allowlist now stands at 534 entries (down from 1050 at session start, a 49 percent net shrink). The parallel-translation pattern has been validated at N = 3 (Phase 1), N = 5 (Phase 2), N = 10 (Phase 3), and N = 14 (Phase 4). Phase 4 surfaced one new failure mode — external regex/dictionary mass-translate corruption contained by SAFE-REVERT, captured in Section 11.7 — and produced three deferred fusion/KSTAR specs that roll into Phase 5. The next session should open with Phase 5 (`papers/` plus `theory/` 314 files plus 3 deferred specs), carrying forward the 11.5 plus 11.6 plus 11.7 discipline.
+
+## 14. Phase 5 Execution (2026-04-25, 16 batches, 306 of 317 files)
+
+Phase 5 ran the same day as the Phase 4 closure, using a 16-way parallel-agent pattern against `papers/**/*.md` (165), `theory/**/*.md` (149), and the three Phase-4-deferred fusion/KSTAR specs (3) — 317 targets total. Final outcome: **306 files translated, 11 deferred to Phase 6, 0 hard violations**. Allowlist shrank from 354 (pre-Phase-5 tip) to **235** (-119 net).
+
+### 14.1 Batch outcome table
+
+| Batch | Status        | Files done | Defer | Last translate SHA     | Shrink SHA  |
+| ----- | ------------- | ---------: | ----: | ---------------------- | ----------- |
+| B1    | Done          | 20         | 0     | `c414e728`             | `406a076f`  |
+| B2    | Done          | 19         | 0     | `765adbab`             | `a38c3f65`  |
+| B3    | Done          | 19         | 0     | `9b904258`             | `b9c0f4e2`  |
+| B4    | Done          | 19         | 0     | `26ded32b`             | `f19b50d1`  |
+| B5    | Done          | 26         | 0     | `88fdd0d3`             | `2580f31b`  |
+| B6    | Done          | 21         | 0     | `c31cbd63`             | `0d58c862`  |
+| B7    | Done          | 20         | 0     | `2c82ec39`             | `5ccf70d8`  |
+| B8    | Done partial  | 19         | 2     | `4bbc226f`             | `2e1a56b4`  |
+| B9    | Done          | 21         | 0     | `bd91363d`             | `281ae391`  |
+| B10   | Done          | 5 (21 plan)| 0     | `e78e9e27`             | `798d258a`  |
+| B11   | Done          | 20         | 0     | `62d2a615`             | `3e15bc76`  |
+| B12   | Done partial  | 19         | 5     | `a37cedee`             | `6d61943a`  |
+| B13   | Done          | 26         | 0     | `473b8357`             | `703180c3`  |
+| B14   | Done          | 24         | 0     | `c0271c40` (one of)    | `77e10b9f`  |
+| B15   | Defer         | 0          | 4     | —                      | —           |
+| B16   | Done          | 11         | 0     | `dc1607d4`             | `de3626eb`  |
+| **Total** | —         | **306**    | **11**| —                      | —           |
+
+### 14.2 Deferred files (11) -> Phase 6
+
+B15 (4) — scale infeasible for single-agent, ASCII art column alignment, dense rep-theory / fusion-plasma terminology:
+
+- `theory/breakthroughs/breakthrough-theorems.md` (125,694 CJK, 28k lines)
+- `reports/sessions/specs/2026-04-02-kstar-300s-steady-state-design.md` (11,872 CJK)
+- `reports/sessions/specs/2026-04-02-kstar-n6-tokamak-design.md` (15,141 CJK)
+- `reports/sessions/specs/2026-04-02-ultimate-fusion-powerplant-design.md` (15,851 CJK)
+
+B8 (2) — terminology uncertainty, risk of mis-translation of specialized physics:
+
+- `papers/moonshine-barrier-honest-report-2026-04-15.md` (9,319 CJK; Moonshine / VOA / Monster-group)
+- `papers/n6-ultimate-superconductor-integrated-paper.md` (7,359 CJK; condensed-matter)
+
+B12 (5) — apex density per stall-resistance protocol:
+
+- `theory/roadmap-v2/_archive-phase-01-forced-3-axes.md` (6,342 CJK, 1,234 lines)
+- `theory/roadmap-v2/n6arch-axes/axis-r1-emergence.md` (5,258 CJK, 906 lines)
+- `theory/roadmap-v2/n6arch-axes/axis-r2-refinement.md` (5,548 CJK, 970 lines)
+- `theory/roadmap-v2/n6arch-axes/axis-r3-finalization.md` (5,656 CJK, 1,166 lines)
+- `theory/roadmap-v2/round-03-emergence-saturation.md` (4,685 CJK, 1,001 lines)
+
+### 14.3 Race-pattern observations
+
+Phase 5 was the worst sibling-race environment to date. The `tool/own1_legacy_allowlist.json` single-file contention point that N = 14 tolerated in Phase 4 broke down at N = 16 (papers+theory+specs):
+
+- **Sibling-stash-wipeout** was extremely aggressive. Multiple batches recorded 5+ reverts each from siblings stashing and re-applying the pre-shrink allowlist on top of a fresh shrink commit, wiping out the in-flight batch's removals.
+- **Recovery pattern evolved**: stage-via-`git add` (index-level add rather than re-reading the WT), atomic tmp-file-then-rename for the allowlist JSON, and immediate per-file commit after every translation (rather than batching translations and committing in bulk). Batches that stuck to this pattern (B5, B13, B14, B16) had zero reverts; batches that batched (B8, B12) produced the partial / deferred outcomes.
+- **Cross-label commit interleaving**: sibling agents committed files belonging to other batches under their own batch label. Notable: several `B14` shrink commits carried files originally planned under `B8`. Auditors reconciling batch provenance should cross-reference by file path rather than by commit message label.
+
+### 14.4 Closure metrics
+
+- Files translated Phase 5: **306 of 317** (96.5 percent).
+- Allowlist: **354 -> 235** entries (-119 net).
+- HARD lint post-close-out: `python3 tool/own_doc_lint.py --rule 1` -> exit 0, HARD = 0, SOFT = 0.
+- Final origin/main tip (Phase 5 close-out): `77e10b9f` plus this session-log commit.
+- Allowlist meta-parity fixed at close-out: `_meta.count` was stale at 274, reset to 235 to match `len(allowlist)` and `len(set(allowlist))`.
+- 11 deferrals rolled into Phase 6 handoff document: `reports/sessions/phase-6-handoff-2026-04-25.md`.
+
+Conclusion: the parallel-translation pattern reaches its ceiling at N = 16 with a single JSON serialization point. Phase 6 should split by sub-directory (papers/theory/specs independent allowlist files, or per-batch lockfiles) before attempting a wider parallel window, but the 11 Phase-5 deferrals are each small enough for single-file serial agents and do not require re-parallelization.
