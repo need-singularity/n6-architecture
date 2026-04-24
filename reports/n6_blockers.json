@@ -1,13 +1,13 @@
 {
   "schema": "n6-architecture/n6_blockers/1",
-  "ts": "2026-04-23T14:01:53Z",
-  "head": "d3910cdd5781c0c1cbada25b6fde0556539f1cfa",
+  "ts": "2026-04-24T08:02:34Z",
+  "head": "dce4e2c301a5d60b666b05ad43bddf474f42c4df",
   "inputs": {
     "atlas_n6_bytes": 1503957,
     "atlas_signals_n6_bytes": 289669,
     "engine_hexa_total": 17,
-    "engine_selftest_ok": 8,
-    "engine_selftest_stub": 8,
+    "engine_selftest_ok": 12,
+    "engine_selftest_stub": 4,
     "engine_selftest_fail": 0,
     "integrity_hook_executable": true,
     "build_log_total": 129,

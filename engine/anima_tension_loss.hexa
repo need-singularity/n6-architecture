@@ -1,11 +1,100 @@
-// anima_tension_loss.py → .hexa 포팅 스텁
-// 원본 경로: engine/anima_tension_loss.py
-// 포팅 상태: STUB (의존 라이브러리: numpy, torch; 원본 134 줄)
-// 원본 요약: Anima Tension Loss
-// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
-// 원본 로직은 git history 에 보존됨
+// engine/anima_tension_loss.hexa
+// ──────────────────────────────────────────────────────────────────────────
+// Anima Tension Loss — minimal real selftest (R24-selftest-flip)
+// 원본 SSOT: engine/anima_tension_loss.py (git 94bf0e28^, 134 줄 numpy+torch)
+// 원본 역할: PureField dual-engine Tension = |A - G|² meta-loss regularizer
+//
+// 이식 범위 (torch 의존 파트는 범위 밖):
+//   - tension_meta_loss(task_loss, tension, alpha) = task_loss + alpha·tension
+//   - homeostasis_target(tension, setpoint, deadband):
+//       deviation = |tension - setpoint|
+//       if deviation <= deadband: 0
+//       else: (deviation - deadband)²
+//   - adversarial forward (bias flip) 부분은 TensionWrapper 없이 검증 불가 → 생략
+// 규칙: R1 HEXA-FIRST, R18 미니멀, N61 한글
+// ──────────────────────────────────────────────────────────────────────────
 
-fn main() {
-    println("STUB: anima_tension_loss.py (HEXA 포팅 대기)")
-    println("의존: numpy, torch")
+fn abs_f(x: f64) -> f64 {
+    if x < 0.0 { return -x }
+    return x
 }
+
+// Meta-loss regularizer: total = task + α·tension
+fn tension_meta_loss(task_loss: f64, tension: f64, alpha: f64) -> f64 {
+    return task_loss + alpha * tension
+}
+
+// Homeostasis target: dead-band squared-distance penalty around setpoint
+fn homeostasis_target(tension: f64, setpoint: f64, deadband: f64) -> f64 {
+    let dev: f64 = abs_f(tension - setpoint)
+    if dev <= deadband { return 0.0 }
+    let over: f64 = dev - deadband
+    return over * over
+}
+
+// ── 자기 테스트 ───────────────────────────────────────────
+fn main() -> i64 {
+    let mut pass: i64 = 0
+    let mut fail: i64 = 0
+
+    // T1: homeostasis_target(1.0, 1.0, 0.3) == 0.0  (at setpoint)
+    let h1: f64 = homeostasis_target(1.0, 1.0, 0.3)
+    if abs_f(h1) < 0.000001 {
+        println("T1 PASS : homeostasis_target(setpoint) = 0")
+        pass = pass + 1
+    } else {
+        println("T1 FAIL : setpoint target not zero")
+        fail = fail + 1
+    }
+
+    // T2: homeostasis_target(1.2, 1.0, 0.3) == 0.0  (within deadband)
+    let h2: f64 = homeostasis_target(1.2, 1.0, 0.3)
+    if abs_f(h2) < 0.000001 {
+        println("T2 PASS : within deadband ⇒ 0")
+        pass = pass + 1
+    } else {
+        println("T2 FAIL : deadband interior not zero")
+        fail = fail + 1
+    }
+
+    // T3: homeostasis_target(2.0, 1.0, 0.3) > 0.0  (outside deadband)
+    let h3: f64 = homeostasis_target(2.0, 1.0, 0.3)
+    // |2.0-1.0|=1.0, over=0.7, penalty=0.49
+    let expected3: f64 = 0.7 * 0.7
+    if h3 > 0.0 && abs_f(h3 - expected3) < 0.000001 {
+        println("T3 PASS : outside deadband ⇒ (dev-deadband)² = 0.49")
+        pass = pass + 1
+    } else {
+        println("T3 FAIL : deadband exterior penalty wrong")
+        fail = fail + 1
+    }
+
+    // T4: tension_meta_loss 단조성 — ∂/∂tension > 0 when α > 0
+    let m_lo: f64 = tension_meta_loss(1.0, 0.5, 0.3)
+    let m_hi: f64 = tension_meta_loss(1.0, 2.0, 0.3)
+    if m_hi > m_lo {
+        println("T4 PASS : meta-loss monotone in tension (α>0)")
+        pass = pass + 1
+    } else {
+        println("T4 FAIL : meta-loss non-monotone")
+        fail = fail + 1
+    }
+
+    // T5: tension = 0 ⇒ total_loss = task_loss (regularizer vanishes)
+    let m_zero: f64 = tension_meta_loss(0.75, 0.0, 0.3)
+    if abs_f(m_zero - 0.75) < 0.000001 {
+        println("T5 PASS : tension=0 ⇒ total = task_loss")
+        pass = pass + 1
+    } else {
+        println("T5 FAIL : zero-tension does not collapse to task loss")
+        fail = fail + 1
+    }
+
+    println("────────────────────────────────────────")
+    println("SELFTEST anima_tension_loss : PASS/FAIL below")
+    println(pass)
+    println(fail)
+    return fail
+}
+
+main()

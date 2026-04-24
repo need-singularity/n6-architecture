@@ -1,11 +1,149 @@
-// emergent_n6_trainer.py → .hexa 포팅 스텁
-// 원본 경로: engine/emergent_n6_trainer.py
-// 포팅 상태: STUB (의존 라이브러리: numpy, torch; 원본 227 줄)
-// 원본 요약: Emergent N6 Trainer
-// 본격 포팅: nexus verify --hexa <domain> 으로 추진 예정
-// 원본 로직은 git history 에 보존됨
+// engine/emergent_n6_trainer.hexa
+// ──────────────────────────────────────────────────────────────────────────
+// Emergent N6 Trainer — minimal real selftest (R24-selftest-flip)
+// 원본 SSOT: engine/emergent_n6_trainer.py (git 94bf0e28^, 227 줄 torch)
+// 원본 역할: 자기수렴 학습 루프 — 아키텍처 파라미터가 meta-loss 경사로
+//           n=6 최적값 {4/3, ln(4/3), 1/e} 에 수렴
+//
+// 이식 범위 (torch 학습 루프는 범위 밖):
+//   - 수렴 타겟 3 상수:
+//       TARGET_FFN_RATIO = 4/3
+//       TARGET_DROPOUT   = ln(4/3)  ≈ 0.28768207
+//       TARGET_GATE_FRAC = 1/e      ≈ 0.36787944
+//   - exp / ln 은 테일러 급수 근사 (ε=1e-6 수렴)
+//   - 학습 루프(optim.step, gradient) 는 hexa 범위 밖 → 생략
+// 규칙: R1 HEXA-FIRST, R18 미니멀, N61 한글
+// ──────────────────────────────────────────────────────────────────────────
 
-fn main() {
-    println("STUB: emergent_n6_trainer.py (HEXA 포팅 대기)")
-    println("의존: numpy, torch")
+fn abs_f(x: f64) -> f64 {
+    if x < 0.0 { return -x }
+    return x
 }
+
+// e = Σ 1/k!  (k=0..N), N=20 항이면 이중정밀 정확도 초과 달성
+fn euler_e() -> f64 {
+    let mut s: f64 = 1.0
+    let mut term: f64 = 1.0
+    let mut k: i64 = 1
+    while k <= 20 {
+        term = term / (1.0 * k)
+        s = s + term
+        k = k + 1
+    }
+    return s
+}
+
+// exp(x) via Taylor: Σ x^k/k!  (x ∈ [0,1] 에서 10~15 항이면 ε=1e-10)
+fn exp_taylor(x: f64) -> f64 {
+    let mut s: f64 = 1.0
+    let mut term: f64 = 1.0
+    let mut k: i64 = 1
+    while k <= 20 {
+        term = term * x / (1.0 * k)
+        s = s + term
+        k = k + 1
+    }
+    return s
+}
+
+// ln(1+u) via Taylor: Σ (-1)^(k+1) · u^k / k  (u ∈ (-1,1], |u|<0.5 에서 빠른 수렴)
+// 여기서는 ln(4/3) = ln(1 + 1/3) 에만 쓰므로 u=1/3 ⇒ 50항이면 1e-12 정확도
+fn ln_one_plus(u: f64) -> f64 {
+    let mut s: f64 = 0.0
+    let mut term: f64 = u
+    let mut k: i64 = 1
+    while k <= 60 {
+        if k % 2 == 1 {
+            s = s + term / (1.0 * k)
+        } else {
+            s = s - term / (1.0 * k)
+        }
+        term = term * u
+        k = k + 1
+    }
+    return s
+}
+
+// 수렴 타겟 상수 (정의 기반)
+fn target_ffn_ratio() -> f64 {
+    return 4.0 / 3.0
+}
+fn target_dropout() -> f64 {
+    return ln_one_plus(1.0 / 3.0)          // ln(4/3)
+}
+fn target_gate_frac() -> f64 {
+    return 1.0 / euler_e()                  // 1/e
+}
+
+// ── 자기 테스트 ───────────────────────────────────────────
+fn main() -> i64 {
+    let mut pass: i64 = 0
+    let mut fail: i64 = 0
+    let eps: f64 = 0.0001
+
+    // T1: 4/3 - 1.0 = 1/3  (bottleneck over-provisioning)
+    let diff: f64 = target_ffn_ratio() - 1.0
+    if abs_f(diff - (1.0 / 3.0)) < eps {
+        println("T1 PASS : 4/3 - 1 = 1/3  (over-provisioning margin)")
+        pass = pass + 1
+    } else {
+        println("T1 FAIL : 4/3 bottleneck identity")
+        fail = fail + 1
+    }
+
+    // T2: exp(TARGET_DROPOUT) = 4/3   (dropout-ratio bijection)
+    let dropout_v: f64 = target_dropout()
+    let roundtrip: f64 = exp_taylor(dropout_v)
+    if abs_f(roundtrip - (4.0 / 3.0)) < eps {
+        println("T2 PASS : exp(ln(4/3)) = 4/3  (bijection)")
+        pass = pass + 1
+    } else {
+        println("T2 FAIL : exp/ln round-trip broken")
+        fail = fail + 1
+    }
+
+    // T3: TARGET_GATE_FRAC · e = 1.0   (inverse Euler identity)
+    let prod: f64 = target_gate_frac() * euler_e()
+    if abs_f(prod - 1.0) < eps {
+        println("T3 PASS : (1/e)·e = 1  (inverse Euler identity)")
+        pass = pass + 1
+    } else {
+        println("T3 FAIL : 1/e identity broken")
+        fail = fail + 1
+    }
+
+    // T4: ln(4/3) literal ≈ 0.28768207  (hardcoded reference)
+    if abs_f(dropout_v - 0.28768207) < eps {
+        println("T4 PASS : ln(4/3) ≈ 0.28768207")
+        pass = pass + 1
+    } else {
+        println("T4 FAIL : ln(4/3) numeric drift")
+        fail = fail + 1
+    }
+
+    // T5: 1/e literal ≈ 0.36787944  (hardcoded reference)
+    if abs_f(target_gate_frac() - 0.36787944) < eps {
+        println("T5 PASS : 1/e ≈ 0.36787944")
+        pass = pass + 1
+    } else {
+        println("T5 FAIL : 1/e numeric drift")
+        fail = fail + 1
+    }
+
+    // T6: e ≈ 2.71828 (Taylor 합 vs 참값)
+    if abs_f(euler_e() - 2.71828182) < eps {
+        println("T6 PASS : Σ 1/k! ≈ e = 2.71828182")
+        pass = pass + 1
+    } else {
+        println("T6 FAIL : e series drift")
+        fail = fail + 1
+    }
+
+    println("────────────────────────────────────────")
+    println("SELFTEST emergent_n6_trainer : PASS/FAIL below")
+    println(pass)
+    println(fail)
+    return fail
+}
+
+main()

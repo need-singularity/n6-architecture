@@ -1,8 +1,8 @@
 {
   "schema": "n6-architecture/n6_selftest/1",
-  "ts": "2026-04-23T14:04:16Z",
-  "total": 30,
-  "pass": 30,
+  "ts": "2026-04-24T08:02:26Z",
+  "total": 51,
+  "pass": 51,
   "fail": 0,
   "verdicts": [
     {
@@ -142,6 +142,111 @@
     },
     {
       "scanner": "scan_claim_effectiveness",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_dir_inventory",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_coverage_map",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_claim_cmd_purity",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_claim_meta_hygiene",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_manifest_phase_monotonic",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_registry_cso_parity",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_selftest_fn_parity",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_version_phase_alignment",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_recheck_cadence_enum",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_must_fail_expected_pair",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_claim_type_enum",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants_manifest",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants_atom_values",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants_atom_faithful",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants_relations_live",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants_generator_orbits",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_invariants_composition",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_silicon_functor_manifest",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_measurement_boundary_manifest",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_thermodynamic_closure_manifest",
+      "verdict": "PASS",
+      "rc": 0
+    },
+    {
+      "scanner": "scan_emission_completeness",
       "verdict": "PASS",
       "rc": 0
     },
