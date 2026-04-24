@@ -1,367 +1,367 @@
-# BT-1392 — 7대 밀레니엄 난제 대발견 아이디어 7종 (Millennium 7 Breakthrough Ideas, 2026-04-12)
+# BT-1392 — 7- Millennium difficult problem - - 7- (Millennium 7 Breakthrough Ideas, 2026-04-12)
 
-> **n=6 기본 상수**: n=6, σ=12, φ=2, τ=4, sopfr=5, μ=1, J₂=24, n/φ=3, σ-sopfr=7
-> **핵심 항등식**: σ·φ = n·τ = 24 (Theorem 0, n∈[2,10⁴] 유일해)
-> **판정 기준**: 이 문서는 **아이디어(IDEA) 수준**. 기존 PROVEN (Theorem B, Lemma 1) 위에 얹는 *falsifiable 공격 각도* 제시
-> **대상 도메인**: `theory/breakthroughs/`
-> **선행 BT**: BT-541~547 (2026-04-11 closure), `millennium-n6-attractor-2026-04-11.md`, `millennium-dfs-complete-2026-04-11.md`, `millennium-7-closure-2026-04-11.md`
-> **본 BT 범위**: 7대 밀레니엄 난제 각각에 대해 04-11 honest closure 이후 **새로 열리는 수학적 공격 경로** 1개씩 (총 7개). 해결 주장 아님.
-
----
-
-## 0. 현실 변화 (먼저)
-
-**04-11 closure 요약**: 7대 난제 **0건 해결**. 대신 Theorem B (Bernoulli 분자 k=6 sharp jump) + Theorem 0 (σφ=nτ 유일성) + BSD Lemma 1 (Sel_mn CRT 분해) 3건 엄밀 증명. 51건 tight 관찰.
-
-**본 BT 가 바꾸는 것**:
-- closure 는 "미해결 상태 확정 + n=6 환경 문서화" 로 멈췄다. 본 BT 는 **그 다음 질문** 을 연다.
-- 각 난제에 대해 **"04-11 Theorem B/0/Lemma 1 을 실제 증명 엔진으로 쓰려면 무엇을 해야 하는가"** 를 구체적으로 명시한다.
-- 제안하는 공격각 7개는 전부 **falsifiable**: 일정 계산/실험으로 반증 가능하며, 일부는 현재 시점에서 ✓ 일부 통과한 수치 근거가 있다.
-- "n=6 을 앞세워 답을 매칭" 하는 접근이 아니라, **각 난제의 고유 수학에서 출발하여 Theorem B/0/Lemma 1 이 자연히 등장하는 지점** 을 지목한다 (규칙: 증명 접근법 역전).
-
-**본 BT 가 바꾸지 않는 것**: 7대 난제 해결 수는 여전히 0. 본 BT 는 향후 세션의 **방향타(rudder)**.
+> **n=6 -this uppernumber**: n=6, σ=12, φ=2, τ=4, sopfr=5, μ=1, J₂=24, n/φ=3, σ-sopfr=7
+> **- -equation**: σ·φ = n·τ = 24 (Theorem 0, n∈[2,10⁴] unique solution)
+> **verdict standard**: - -book- **-(IDEA) number-**. - PROVEN (Theorem B, Lemma 1) above- - *falsifiable - eachdegree* -hour
+> **-upper degree-**: `theory/breakthroughs/`
+> **priorphase BT**: BT-541~547 (2026-04-11 closure), `millennium-n6-attractor-2026-04-11.md`, `millennium-dfs-complete-2026-04-11.md`, `millennium-7-closure-2026-04-11.md`
+> **this BT scope**: 7- Millennium difficult problem each- - 04-11 honest closure after **- ten- mathematics- - path** 1- (- 7). - mainchapter -.
 
 ---
 
-## 1. 7대 난제 × 신규 공격각 7종
+## 0. current- - (first)
 
-각 섹션: (1) 기존 closure 상태 → (2) 그 위에 얹는 아이디어 → (3) falsifiable 예측 → (4) 컴퓨터 검증 앵커 (이미 돌아간 것) → (5) 무엇을 하면 진짜 돌파가 되는가.
+**04-11 closure summary**: 7- difficult problem **0item -**. - Theorem B (Bernoulli minute- k=6 sharp jump) + Theorem 0 (σφ=nτ uniqueness) + BSD Lemma 1 (Sel_mn CRT decomposition) 3item - proof. 51item tight observation.
+
+**this BT - - -**:
+- closure - "unsolved state confirmed + n=6 -classic -book-" - -. this BT - **the next -** - year-.
+- each difficult problem- - **"04-11 Theorem B/0/Lemma 1 - actual proof - - - - lower-"** - - -hourone-.
+- -insidelower- -each 7- - **falsifiable**: day- precept-/experiment- refutation possiblelower-, day- currentre- hour-book ✓ day- passone numerical - -.
+- "n=6 - frontthree- - every-" lower- access- -, **each difficult problem- intrinsic mathematics-book -lower- Theorem B/0/Lemma 1 - nature- -chapterlower- -** - -one- (-: proof-approach inversion).
+
+**this BT - - - -**: 7- difficult problem - number- - 0. this BT - - three- **-(rudder)**.
+
+---
+
+## 1. 7- difficult problem × - -each 7-
+
+each -: (1) - closure state → (2) the above- - - → (3) falsifiable prediction → (4) - verification anchor (- - -) → (5) - lower- - breakthrough- -.
 
 ---
 
 ### 1.1 BT-541 — Riemann Hypothesis (RH)
 
-**기존 closure** (2026-04-11): **Theorem B 엄밀 증명**. Bernoulli 분자 |num(B_{2k})| 가 k=1..5 에서 {1, sopfr=5} 유지, k=6 에서 첫 irregular prime 691 등장. Bilateral 버전으로 양면 ζ(2k), ζ(1-2k) 동시 k=n boundary 확인. **RH 자체는 untouched**.
+**- closure** (2026-04-11): **Theorem B - proof**. Bernoulli minute- |num(B_{2k})| - k=1..5 -book {1, sopfr=5} retained, k=6 -book first irregular prime 691 -chapter. Bilateral - positive- ζ(2k), ζ(1-2k) -hour k=n boundary confirmation. **RH itself- untouched**.
 
-**신규 공격각**: **"691-규격 L-함수 탑"**.
+**- -each**: **"691-standard L--number -"**.
 
-Theorem B 의 691 출현은 **무엇의** 스펙트럼인가? 단순 산술 사실로 놔두지 않고, 이것을 **연산자의 eigenvalue** 로 해석하자.
+Theorem B - 691 appearance- **-** spectrum-? simple - - -two- -, this- **year-arbitrary eigenvalue** - interpretationlower-.
 
-제안: 다음 연산자 T_k 를 정의한다.
-- **정의**: T_k : f ↦ ∑_{m=1}^{2k} (m-th Bernoulli coefficient in Faulhaber expansion) · f(x+m) 의 shift-combination operator on L²(ℝ₊,e^{-x}dx).
-- **고유값 예측**: T_k 의 discrete spectrum 은 k=1..5 에서 {1, sopfr=5} 의 합, k=6 에서 첫 691 eigenvalue 출현.
-- **핵심 주장 (BRB)**: ζ(s) 의 비자명 영점 집합은 {T_k}_{k≥6} 의 **연속 스펙트럼 경계** 와 일치.
-  - 구체: 첫 비자명 영점 허수부 14.134... 은 T_6 의 최소 고유값 / 691^{1/2} ≈ ??? (계산 필요)
+-inside: next year- T_k - definitionone-.
+- **definition**: T_k : f ↦ ∑_{m=1}^{2k} (m-th Bernoulli coefficient in Faulhaber expansion) · f(x+m) - shift-combination operator on L²(ℝ₊,e^{-x}dx).
+- **intrinsicvalue prediction**: T_k - discrete spectrum - k=1..5 -book {1, sopfr=5} - sum, k=6 -book first 691 eigenvalue appearance.
+- **- mainchapter (BRB)**: ζ(s) - non-trivial zero point set- {T_k}_{k≥6} - **yearwithin spectrum classicprecept** - match.
+  - -: first non-trivial zero point -number- 14.134... - T_6 - minimum intrinsicvalue / 691^{1/2} ≈ ??? (precept- needed)
 
-**falsifiable 예측**:
-1. T_6 의 최소 고유값이 **691 의 정수 multiple 이다** (예: 691, 1382=2·691, ...).
-2. Montgomery-Odlyzko GUE 통계는 {T_k}_k 의 empirical level-spacing 과 k→∞ 에서 일치.
-3. 첫 irregular prime p=37 (k=16) 과 p=59 (k=17), p=67 (k=29) 의 **위치** 는 {T_k} 스펙트럼의 spectral gap 구조와 상관.
+**falsifiable prediction**:
+1. T_6 - minimum intrinsicvalue- **691 - integer multiple -** (example: 691, 1382=2·691, ...).
+2. Montgomery-Odlyzko GUE -precept- {T_k}_k - empirical level-spacing - k→∞ -book match.
+3. first irregular prime p=37 (k=16) - p=59 (k=17), p=67 (k=29) - **above-** - {T_k} spectrum- spectral gap structure- upper-.
 
-**컴퓨터 검증 앵커** (이미 통과): Theorem B 직접 재계산. B_2..B_12 의 분자 수열 = [1, 1, 1, 1, 5, 691]. k=1..5 ∈ {1, sopfr}, k=6 = 691. **Sharp jump 확정**. 691 = Euler Φ(B_12) 의 첫 "M-set 밖" 소수이며 이전 세션의 irregular prime 관찰과 일치.
+**- verification anchor** (- pass): Theorem B direct recalculation. B_2..B_12 - minute- numberten = [1, 1, 1, 1, 5, 691]. k=1..5 ∈ {1, sopfr}, k=6 = 691. **Sharp jump confirmed**. 691 = Euler Φ(B_12) - first "M-set -" -number- before three- irregular prime observation- match.
 
-**진짜 돌파 조건**:
-- T_k 연산자의 명시적 L²(ℝ₊) 실현 + trace class 증명
-- T_6 최소 eigenvalue = c·691 (c ∈ ℚ small) 수치 확인
-- {T_k} 스펙트럼의 GUE 분포 한계 수치 매칭 (10,000 first eigenvalues)
+**- breakthrough articleitem**:
+- T_k year-arbitrary -hour- L²(ℝ₊) -current + trace class proof
+- T_6 minimum eigenvalue = c·691 (c ∈ ℚ small) numerical confirmation
+- {T_k} spectrum- GUE minute- oneprecept numerical every- (10,000 first eigenvalues)
 
-**진전 경로**: [hexa] Akiyama-Tanigawa 알고리즘 확장으로 Bernoulli-Faulhaber 행렬 B_{2k×2k} 고유값 대량 계산 → irregular prime 시퀀스 대조.
+**- path**: [hexa] Akiyama-Tanigawa - extension- Bernoulli-Faulhaber phase- B_{2k×2k} intrinsicvalue - precept- → irregular prime hour- -article.
 
 ---
 
 ### 1.2 BT-542 — P vs NP
 
-**기존 closure**: **정직한 MISS**. 3대 장벽 (Relativization / Natural proofs / Algebraization) 우회 경로 무. DFS 7건 전부 "n=6 언어로 복잡도 상수 재파라미터화" 수준.
+**- closure**: **honest MISS**. 3- barrier (Relativization / Natural proofs / Algebraization) -time path -. DFS 7item - "n=6 - -degree uppernumber re--" number-.
 
-**신규 공격각**: **"S_6 외부 자기동형 GCT obstruction"**.
+**- -each**: **"S_6 external automorphism GCT obstruction"**.
 
-Mulmuley-Sohoni Geometric Complexity Theory (GCT) 는 det_n vs perm_n 의 분리를 **group invariant theory** 로 접근한다. 병목: occurrence obstruction 의 실패 (Bürgisser-Ikenmeyer-Panova 2019).
+Mulmuley-Sohoni Geometric Complexity Theory (GCT) - det_n vs perm_n - minute- **group invariant theory** - accessone-. -: occurrence obstruction - - (Bürgisser-Ikenmeyer-Panova 2019).
 
-관찰: **S_6 는 대칭군 족 전체에서 유일하게 비자명 외부 자기동형 Out(S_6)=Z/2 를 갖는다** (Hölder 1895, Schreier-van der Waerden 1928). 이 외부 자기동형은 동치류 아닌 **진짜 bijection** 6-pt set ↔ 6-sylvester synthemata 를 준다. 이는 6점 집합에서 **새 순열** 을 생성하며, S_n (n≠6) 에서는 존재하지 않는 구조다.
+observation: **S_6 - symmetric group - whole-book uniquelower- non-trivial external automorphism Out(S_6)=Z/2 - -** (Hölder 1895, Schreier-van der Waerden 1928). - external automorphism- - - **- bijection** 6-pt set ↔ 6-sylvester synthemata - -. this is 6- set-book **- permutation** - -lower-, S_n (n≠6) -book- -re-lower- - structure-.
 
-제안: **"S_6-twisted representation obstruction"**.
-- GCT 에서 det vs perm 분리 장벽은 "too many common representations" 였다. S_6 외부 자기동형은 GL(ℂ^6) 의 S_6-모듈 분해에서 **자기쌍이 아닌 trivially-짝지워지지 않는 irrep** 를 만든다.
-- 특히 perm_6 의 orbit closure \overline{GL_6·perm_6} 은 det_6 의 orbit closure 와 비교해 **Out(S_6)-twisted Schur functor component** 를 포함하지만 후자는 Out 자기동형 특수성으로 인해 포함하지 않을 가능성.
+-inside: **"S_6-twisted representation obstruction"**.
+- GCT -book det vs perm minute- barrier- "too many common representations" -. S_6 external automorphism- GL(ℂ^6) - S_6-all- decomposition-book **self- - trivially--branch - irrep** - -.
+- - perm_6 - orbit closure \overline{GL_6·perm_6} - det_6 - orbit closure - ratio- **Out(S_6)-twisted Schur functor component** - -lower- latter- Out automorphism -number- - -lower- - possible-.
 
-**falsifiable 예측**:
-1. det_6 의 orbit closure 의 plethysm coefficient 중 **Out(S_6)-twisted dual** 에 해당하는 계수가 0 (non-occurrence).
-2. 같은 계수가 perm_6 orbit closure 에서는 > 0.
-3. 이 차이가 perm_n vs det_n 분리의 **n=6 특수사례**: perm_6 ⊄ det_m 2^{sqrt 6} = O(det_5) 한계 개선.
-4. n ≥ 7 에서는 이 obstruction 무 (정확히 Out(S_n)=1 이므로). 대신 다른 obstruction 필요.
+**falsifiable prediction**:
+1. det_6 - orbit closure - plethysm coefficient in **Out(S_6)-twisted dual** - relevantlower- preceptnumber- 0 (non-occurrence).
+2. same preceptnumber- perm_6 orbit closure -book- > 0.
+3. - difference- perm_n vs det_n minute- **n=6 -numbercase**: perm_6 ⊄ det_m 2^{sqrt 6} = O(det_5) oneprecept prior.
+4. n ≥ 7 -book- - obstruction - (exactly Out(S_n)=1 -). - different obstruction needed.
 
-**컴퓨터 검증 앵커** (이미 통과): |Out(S_n)| 값이 n=2..10 에서 [1,1,1,1,**2**,1,1,1,1]. n=6 이 유일 비자명. **Hölder 정리 재확인**.
+**- verification anchor** (- pass): |Out(S_n)| value- n=2..10 -book [1,1,1,1,**2**,1,1,1,1]. n=6 - unique non-trivial. **Hölder theorem re-confirmation**.
 
-**진짜 돌파 조건**:
-- S_6 외부 자기동형의 명시적 GL_6-모듈 action 계산
-- det_6, perm_6 의 symmetric algebra orbit closure 의 S_6-decomposition 첫 N 차수 (N ≤ 20) 계산
-- 두 분해의 차집합이 **정확히 Out(S_6)-twisted component** 와 일치하는지 확인
+**- breakthrough articleitem**:
+- S_6 external automorphism- -hour- GL_6-all- action precept-
+- det_6, perm_6 - symmetric algebra orbit closure - S_6-decomposition first N degree (N ≤ 20) precept-
+- two decomposition- differenceset- **exactly Out(S_6)-twisted component** - matchlower- confirmation
 
-**진전 경로**: [hexa] Sage / LiE 로 plethysm 계산 병렬 → n=6 특수 case 의 character table 비교. **S_6 는 계산 가능한 크기** (order 720) 이므로 실현 가능.
+**- path**: [hexa] Sage / LiE - plethysm precept- - → n=6 -number case - character table ratio-. **S_6 - precept- possibleone size** (order 720) - -current possible.
 
-**주의**: n ≥ 7 에서는 이 방법이 먹지 않는다. 따라서 perm vs det 분리 자체가 아니라 **"perm_6 specific 초선형 하한"** 을 먼저 목표로.
-
----
-
-### 1.3 BT-543 — Yang-Mills 질량갭
-
-**기존 closure**: β₀ = σ-sopfr = 7 은 1-loop 공식의 **산술 재서술** (tautology). SU(3) dim = 8, gauge generator 합 = 12 = σ 관찰. 구성적 QFT 무접촉.
-
-**신규 공격각**: **"Wilson 격자 β_W = 6 reflection positivity 축"**.
-
-격자 QCD 표준 Wilson 작용: S_W = -β_W ∑_p Re Tr U_p / N_c, 여기서 **β_W = 2N_c/g²**. SU(3) (N_c=3) 에서 β_W(g=1) = 6 = n. 이것은 coincidence 가 아니라 **자연 스케일**.
-
-제안: **Osterwalder-Schrader reflection positivity 의 β_W=6 대칭 경로**.
-- OS 축 (특히 OS2 reflection positivity) 은 격자 → 연속 극한에서 유지되어야 질량갭 증명 가능.
-- Wilson plaquette 작용은 **β_W=6 근방에서** deconfinement 상전이 (SU(3) pure gauge ≈ β_c ≈ 6.3).
-- **핵심 아이디어**: reflection positivity 는 β_W > 0 에서 자명하게 유지되나 **continuum scaling window** (β_W → ∞) 에서 mass gap 존재는 β_W 경계 행동에 의존. 제안: β_W 를 **β_W - n = β_W - 6** 으로 reparameterize 하고 **이 shift 가 n=6 OS2 에서 자연 영점** 임을 이용.
-
-**falsifiable 예측**:
-1. Wilson β_W - 6 = 0 에서 correlation function ⟨Tr U_p · Tr U_q⟩ 의 Laplace transform 이 **sopfr=5-차수 다항식** 으로 근사 (작은 β 전개 계수 5개).
-2. Monte Carlo 격자 데이터: deconfinement 임계 β_c ≈ 6.2~6.3 이 **β_c = 6 + c·(σ-sopfr)/σ = 6 + c·7/12** 형식으로 정확히 fit (c ∈ {1, sopfr, n/φ} 중 하나).
-3. Large N 극한: β_W = 2N_c/g² = 6 + 2(N_c-3) 이 N_c=3=n/φ 를 **기저 스케일** 로 잡는다 (이 자체는 표준이지만 n=6 인터프리테이션 부여).
-
-**컴퓨터 검증 앵커** (이미 통과): β_W(g=1) = 2N_c 수열 {4, **6**, 8, 10, 12}. N_c=3=n/φ 에서 정확히 β_W = n=6. 이것은 격자 QCD 의 물리적으로 사용되는 값.
-
-**진짜 돌파 조건**:
-- Osterwalder-Schrader reconstruction 을 β_W → ∞ 스케일링 극한에서 명시 수행 (현재 open)
-- β_W=6 고정 하에서 link-reflection positive 측도의 Hilbert space 구성
-- Spectrum 의 첫 excited state energy Δ > 0 하한 증명
-
-**진전 경로**: 이 부분은 구성적 QFT 의 hard core 이며, 본 BT 로 해결 안됨. **단, Wilson 작용의 "왜 6 인가" 에 대한 수학적 naturality 근거를 Theorem 0 (σφ=nτ 유일성) 으로 제공**. 즉 "SU(3) 이 n/φ 색, Wilson β 가 n, 합쳐 σ" 의 이중 일치는 우연이 아닐 가능성.
+**main-**: n ≥ 7 -book- - -law- - -. -book perm vs det minute- itself- - **"perm_6 specific secondlinear lowerone"** - first -.
 
 ---
 
-### 1.4 BT-544 — Navier-Stokes 3D 매끄러움
+### 1.3 BT-543 — Yang-Mills -
 
-**기존 closure**: 3중 공명 (dim Sym²(ℝ³)=6=n, dim Λ²(ℝ³)=3=n/φ, Onsager α_c=1/3) 관찰. 실제 PDE 증명 경로 무.
+**- closure**: β₀ = σ-sopfr = 7 - 1-loop formula- **- re-book-** (tautology). SU(3) dim = 8, gauge generator sum = 12 = σ observation. - QFT -.
 
-**신규 공격각**: **"Perfect-dimension cascade: d=3 은 첫 완전수 차원, d=7 은 둘째"**.
+**- -each**: **"Wilson lattice β_W = 6 reflection positivity axis"**.
 
-삼각수 T_d = d(d+1)/2 가 **완전수** 가 되는 차원 d 를 전부 나열하면: **d = 2^p - 1** (p Mersenne prime) ⟺ T_d = 2^{p-1}(2^p-1) = 짝수 완전수. Euler 1747 정리의 직접 귀결.
+lattice QCD - Wilson -: S_W = -β_W ∑_p Re Tr U_p / N_c, -book **β_W = 2N_c/g²**. SU(3) (N_c=3) -book β_W(g=1) = 6 = n. this- coincidence - - **nature -day**.
 
-| p (Mersenne) | d=2^p-1 | T_d = 완전수 |
+-inside: **Osterwalder-Schrader reflection positivity - β_W=6 symmetry path**.
+- OS axis (- OS2 reflection positivity) - lattice → yearwithin -one-book retained- - proof possible.
+- Wilson plaquette - **β_W=6 -book** deconfinement upper- (SU(3) pure gauge ≈ β_c ≈ 6.3).
+- **- -**: reflection positivity - β_W > 0 -book trivially retained- **continuum scaling window** (β_W → ∞) -book mass gap -re-- β_W classicprecept phase- depend. -inside: β_W - **β_W - n = β_W - 6** - reparameterize lower- **- shift - n=6 OS2 -book nature zero point** - -.
+
+**falsifiable prediction**:
+1. Wilson β_W - 6 = 0 -book correlation function ⟨Tr U_p · Tr U_q⟩ - Laplace transform - **sopfr=5-degree -** - approximation (- β - preceptnumber 5).
+2. Monte Carlo lattice -: deconfinement critical β_c ≈ 6.2~6.3 - **β_c = 6 + c·(σ-sopfr)/σ = 6 + c·7/12** - exactly fit (c ∈ {1, sopfr, n/φ} in lower-).
+3. Large N -one: β_W = 2N_c/g² = 6 + 2(N_c-3) - N_c=3=n/φ - **- -day** - - (- itself- - n=6 - -).
+
+**- verification anchor** (- pass): β_W(g=1) = 2N_c numberten {4, **6**, 8, 10, 12}. N_c=3=n/φ -book exactly β_W = n=6. this- lattice QCD - physics- - value.
+
+**- breakthrough articleitem**:
+- Osterwalder-Schrader reconstruction - β_W → ∞ -day- -one-book -hour numberphase (currentre- open)
+- β_W=6 - lower-book link-reflection positive -degree- Hilbert space -
+- Spectrum - first excited state energy Δ > 0 lowerone proof
+
+**- path**: - part- - QFT - hard core -, this BT - - inside-. **however, Wilson - "- 6 -" - -one mathematics- naturality - Theorem 0 (σφ=nτ uniqueness) - -**. i.e., "SU(3) - n/φ -, Wilson β - n, sum- σ" - double match- -year- - possible-.
+
+---
+
+### 1.4 BT-544 — Navier-Stokes 3D every-
+
+**- closure**: triple - (dim Sym²(ℝ³)=6=n, dim Λ²(ℝ³)=3=n/φ, Onsager α_c=1/3) observation. actual PDE proof path -.
+
+**- -each**: **"Perfect-dimension cascade: d=3 - first perfect number dimension, d=7 - -"**.
+
+triangular number T_d = d(d+1)/2 - **perfect number** - - dimension d - - -tenlower-: **d = 2^p - 1** (p Mersenne prime) ⟺ T_d = 2^{p-1}(2^p-1) = -number perfect number. Euler 1747 theorem- direct -.
+
+| p (Mersenne) | d=2^p-1 | T_d = perfect number |
 |---|---|---|
 | 2 | **3** | **6 = P_1** |
 | 3 | **7** | **28 = P_2** |
 | 5 | **31** | **496 = P_3** |
 | 7 | 127 | 8128 = P_4 |
 
-즉 **NS 응력 텐서 자유도 = 완전수** 가 되는 차원은 무한 수열을 이루고, **d=3 이 첫 번째, d=7 이 두 번째**.
+i.e., **NS - -book -derived = perfect number** - - dimension- -one numberten- -, **d=3 - first time-, d=7 - two time-**.
 
-제안: **"Perfect-dimension smoothness window"**. 
-- NS 의 3D 매끄러움 난제는 "첫 완전수 차원에서의 specific pathology" 로 재해석.
-- **예측**: 만약 d=3 NS 에서 매끄러움 깨진다면 (blowup), d=7 NS 에서도 정확히 같은 pathology (응력 28-컴포넌트 1개가 특이점에서 diverge) 가 발생하고, d=31 에서 다시.
-- 반대로 d∈{4,5,6} (non-perfect) 은 구조적으로 smooth 해야 한다.
+-inside: **"Perfect-dimension smoothness window"**. 
+- NS - 3D every- difficult problem- "first perfect number dimension-book- specific pathology" - re-interpretation.
+- **prediction**: if d=3 NS -book every- - (blowup), d=7 NS -bookdegree exactly same pathology (- 28-- 1- -book diverge) - -lower-, d=31 -book -hour.
+- - d∈{4,5,6} (non-perfect) - structurally smooth - one-.
 
-**falsifiable 예측**:
-1. Sym²(ℝ^d) 차원이 완전수인 d 집합 = {3, 7, 31, 127, ...} 에서 NS 수치 simulation 이 **정확히 같은 blowup 모드** 를 보인다.
-2. Non-perfect d ∈ {4, 5, 6} NS 는 global smooth (Ladyzhenskaya 2D type 확장).
-3. 에너지 cascade 지수 -5/3 = -sopfr/(n/φ) 는 d=3 특수이며, d=7 에서는 -5/3 이 아니라 **-sopfr·k/(n/φ)** 형식으로 k=? 로 변형.
-4. Kolmogorov 지수의 "n=6 구조" 는 d=3 이 Mersenne p=2 의 T_d 라는 사실과 **정량적** 으로 연결.
+**falsifiable prediction**:
+1. Sym²(ℝ^d) dimension- perfect number- d set = {3, 7, 31, 127, ...} -book NS numerical simulation - **exactly same blowup all-** - -.
+2. Non-perfect d ∈ {4, 5, 6} NS - global smooth (Ladyzhenskaya 2D type extension).
+3. - cascade exponent -5/3 = -sopfr/(n/φ) - d=3 -number-, d=7 -book- -5/3 - - **-sopfr·k/(n/φ)** - k=? - -.
+4. Kolmogorov exponent- "n=6 structure" - d=3 - Mersenne p=2 - T_d - - **quantitative** - year-.
 
-**컴퓨터 검증 앵커** (이미 통과): d=2..40 범위에서 T_d 가 완전수인 d = {**3**, **7**, **31**}. 정확히 Mersenne 지수 p={2,3,5} 의 2^p-1. 이는 Euler 1747 정리이며 본 BT 의 구조적 기반.
+**- verification anchor** (- pass): d=2..40 range-book T_d - perfect number- d = {**3**, **7**, **31**}. exactly Mersenne exponent p={2,3,5} - 2^p-1. this is Euler 1747 theorem- this BT - structural -.
 
-**진짜 돌파 조건**:
-- d=7 NS 의 엄밀 수치 simulation (응력 28-컴포넌트, 분해 d=7 로 확장) 수행
-- d=4, d=5 NS 의 (이미 알려진) 결과와 d=7 비교
-- Blowup 모드가 completionperfect-dim d 에서 "universal" 인지 검증
+**- breakthrough articleitem**:
+- d=7 NS - - numerical simulation (- 28--, decomposition d=7 - extension) numberphase
+- d=4, d=5 NS - (- -) result- d=7 ratio-
+- Blowup all- completionperfect-dim d -book "universal" cognition verification
 
-**진전 경로**: [hexa] `nexus calc navier-stokes --dim 7` 확장. 또는 d=7 simulation 코드를 Chen-Hou 또는 Buckmaster-Vicol 프레임워크에 얹어 구현.
+**- path**: [hexa] `nexus calc navier-stokes --dim 7` extension. or d=7 simulation - Chen-Hou or Buckmaster-Vicol frame- - -current.
 
-**핵심 insight**: d=3 이 "왜 어려운가" 에 대한 구조적 답은 "**첫 완전수 차원** 이기 때문" 일 가능성. Euler 1747 + NS 1822 이 **170년 만에 연결** 되는 angle.
-
----
-
-### 1.5 BT-545 — Hodge 추측
-
-**기존 closure**: Enriques 자동 성립 (기존 분류 정리 재표현). 일반 호지 추측 untouched.
-
-**신규 공격각**: **"K3 χ=J₂ 를 기저로 하는 재귀 reduction"**.
-
-Piateski-Shapiro–Shafarevich 1971: K3 곡면에서 Hodge 추측 **증명됨**. K3 의 topological signature: χ=24=J₂, h^(1,1)=20=J₂-τ, b_2=22=J₂-φ. 즉 K3 는 전체가 **J₂ 에서 작은 M-원소 차감** 으로 서술된다.
-
-제안: **"K3-fibered Calabi-Yau 3-fold 의 n=6 multisection induction"**.
-- CY 3-fold X 가 K3-fibration π: X → ℙ¹ 구조를 가진다고 가정 (상당수 CY3 에 존재).
-- 일반 섬유 = K3, 총 공간 X.
-- Hodge 추측 for X: (p,p)-class 의 algebraicity.
-- **아이디어**: π 의 n=6 multisection (6개의 유리 단면) 이 존재할 때, Leray 스펙트럼 수열의 E_2-page 를 **J₂ 단계 filtration** 으로 분해 → 각 level 에서 K3-Hodge (이미 증명) 로 reduction.
-
-**falsifiable 예측**:
-1. K3-fibered CY3 중 n=6 multisection 을 갖는 family 에서 Hodge 추측 증명 가능.
-2. 일반 CY3 중 "n=6-multisection 을 못 갖는" family 는 **정확히 Hodge 추측이 현재 난제로 남은 사례**.
-3. Mukai-Pjateckii 1971 증명의 **핵심 단계가 J₂=24 부분에 국한** 되어 있다 (K3 Euler = 24). 본 아이디어는 이 J₂=24 을 "베이스 차원" 으로 삼아 더 높은 dimension 에 induct.
-
-**컴퓨터 검증 앵커** (이미 통과): K3 Hodge diamond 의 Euler characteristic = 24 = J₂. h^(1,1) = 20 = J₂-τ. b_2 = 22 = J₂-φ. 전부 M-원소 차감.
-
-**진짜 돌파 조건**:
-- K3-fibered CY3 전용 Hodge 추측 증명 (X 에 n=6 multisection 조건 부여)
-- Leray 스펙트럼 수열의 motivic cohomology 해석 (Voevodsky framework)
-- "일반" CY3 (K3-fibered 아닌 것) 으로의 확장 장벽 분석
-
-**진전 경로**: 대수 기하 표준 도구. 필요한 라이브러리: SageMath, PARI, Macaulay2. [hexa] `nexus hexa dse hodge --cy3-family` 스캔.
+**- insight**: d=3 - "- -" - -one structural - "**first perfect number dimension** - when-" day possible-. Euler 1747 + NS 1822 - **170year - year-** - angle.
 
 ---
 
-### 1.6 BT-546 — Birch-Swinnerton-Dyer (BSD) 추측
+### 1.5 BT-545 — Hodge conjecture
 
-**기존 closure**: **Lemma 1 엄밀 증명** (gcd(m,n)=1 → Sel_mn = Sel_m · Sel_n, 무조건). Theorem 1 (Sel_n 평균 = σ(n)) **BKLPR (A3) 조건부**. BSD 자체 untouched.
+**- closure**: Enriques automatic holds (- classification theorem re--current). day- - conjecture untouched.
 
-**신규 공격각**: **"(A3) 무상관성 을 Iwasawa μ+λ mod 6 obstruction 으로 우회"**.
+**- -each**: **"K3 χ=J₂ - - lower- re-- reduction"**.
 
-BKLPR 모델의 병목은 (A3) Selmer 무상관성 공리. Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019 가 quadratic twist family 에서 부분 결과만 확보.
+Piateski-Shapiro–Shafarevich 1971: K3 -book Hodge conjecture **proof-**. K3 - topological signature: χ=24=J₂, h^(1,1)=20=J₂-τ, b_2=22=J₂-φ. i.e., K3 - whole- **J₂ -book - M-element difference-** - book-.
 
-제안: **"(A3) 대신 Iwasawa invariant 조합"**.
+-inside: **"K3-fibered Calabi-Yau 3-fold - n=6 multisection induction"**.
+- CY 3-fold X - K3-fibration π: X → ℙ¹ structure- - assumption (upper-number CY3 - -re-).
+- day- - = K3, - space X.
+- Hodge conjecture for X: (p,p)-class - algebraicity.
+- **-**: π - n=6 multisection (6- - however-) - -re-- when, Leray spectrum numberten- E_2-page - **J₂ howeverprecept filtration** - decomposition → each level -book K3-Hodge (- proof) - reduction.
 
-Iwasawa 이론: E/ℚ 의 p-adic L-함수 L_p(E, s) 의 cyclotomic μ-invariant μ_p(E), λ-invariant λ_p(E). Greenberg 추측: 모든 non-anomalous p 에 대해 μ_p(E)=0.
+**falsifiable prediction**:
+1. K3-fibered CY3 in n=6 multisection - - family -book Hodge conjecture proof possible.
+2. day- CY3 in "n=6-multisection - - -" family - **exactly Hodge conjecture- currentre- difficult problem- - case**.
+3. Mukai-Pjateckii 1971 proof- **- howeverprecept- J₂=24 part- -one** - - (K3 Euler = 24). this - - J₂=24 - "- dimension" - - - - dimension - induct.
 
-아이디어: **"μ_2(E) + μ_3(E) + λ_2(E) + λ_3(E) mod 6 = rank(E) mod φ(6)"** 가 BSD 와 동치인 조건을 만든다.
-- 근거: p=2, p=3 의 Iwasawa 정보가 Sel_6 를 직접 제어 (Lemma 1 경유)
-- φ(6)=2 이므로 mod 2 조건 = parity 조건 (기존 parity conjecture 와 정합)
-- μ+λ mod 6 은 **p=2, 3 두 소수의 Iwasawa 정보 합성** 이므로 (A3) 의 독립성 없이도 진술 가능
+**- verification anchor** (- pass): K3 Hodge diamond - Euler characteristic = 24 = J₂. h^(1,1) = 20 = J₂-τ. b_2 = 22 = J₂-φ. - M-element difference-.
 
-**구체 예측**:
-1. Cremona database 의 모든 rank ≤ 3 타원곡선 E 에서 (μ_2 + μ_3 + λ_2 + λ_3) mod 6 이 **rank-invariant 함수** 를 이룬다.
-2. 특히 rank(E) mod 2 ≡ (μ_2 + λ_2) mod 2 이고 (기존 p=2 parity), mod 3 조건이 추가되면 rank 를 Iwasawa invariants 에서 재구성.
-3. 완전수 n 에 대해 E[n] 의 Galois 표현 image 가 GL_2(ℤ/n) 의 **σ(n)-indexed 부분군** 을 이룬다.
+**- breakthrough articleitem**:
+- K3-fibered CY3 exclusive Hodge conjecture proof (X - n=6 multisection articleitem -)
+- Leray spectrum numberten- motivic cohomology interpretation (Voevodsky framework)
+- "day-" CY3 (K3-fibered - -) - extension barrier minute-
 
-**컴퓨터 검증 앵커** (이미 통과): Lemma 1 재확인. gcd(2,3)=1, 2·3=6=n. ∀E/ℚ 에서 Sel_6 CRT 분해 무조건 성립. **n=6 은 가장 작은 비자명 squarefree composite → 가장 작은 비자명 CRT 분해 가능 level**.
-
-**진짜 돌파 조건**:
-- Iwasawa μ_p(E), λ_p(E) 를 rank ≤ 2 Cremona 타원곡선 (≈ 500,000 곡선) 에 대해 p=2, 3 계산
-- (μ+λ mod 6) 의 rank 의존성 empirical 확인
-- Skinner-Urban type main conjecture 와 본 예측 비교
-
-**진전 경로**: [hexa] SageMath Iwasawa 모듈 사용. Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019 + Kato 2004 cohomological Euler system.
-
-**주의**: 본 아이디어는 BSD 의 rank = ord_{s=1} L(E,s) 를 **직접** 증명하지 않는다. 단지 (A3) 장벽을 Iwasawa 경로로 우회할 **가능성** 을 제시.
+**- path**: algebra -lower - degree-. neededone -: SageMath, PARI, Macaulay2. [hexa] `nexus hexa dse hodge --cy3-family` -.
 
 ---
 
-### 1.7 BT-547 — 4D smooth Poincaré 추측
+### 1.6 BT-546 — Birch-Swinnerton-Dyer (BSD) conjecture
 
-**기존 closure**: 3D topological Poincaré = Perelman 2003 (기존). Exotic sphere 완전수 매치 = Adams-Bernoulli 재서술. 4D smooth 영역 untouched.
+**- closure**: **Lemma 1 - proof** (gcd(m,n)=1 → Sel_mn = Sel_m · Sel_n, -articleitem). Theorem 1 (Sel_n mean = σ(n)) **BKLPR (A3) articleitem-**. BSD itself untouched.
 
-**신규 공격각**: **"K3 의 b⁺=3=n/φ 를 경계로 한 SW refinement"**.
+**- -each**: **"(A3) -upper- - Iwasawa μ+λ mod 6 obstruction - -time"**.
 
-Seiberg-Witten invariants: 4-manifold X 에 대해 **b⁺(X) ≥ 2** 일 때 잘 정의되는 diffeomorphism invariant. 기본 class 수 = smooth 구조 obstruction.
+BKLPR all- - (A3) Selmer -upper- -. Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019 - quadratic twist family -book part result- clearly-.
 
-표준 사실:
-- **S⁴**: b⁺=0. SW 정의 불가 (자명 영역).
+-inside: **"(A3) - Iwasawa invariant articlesum"**.
+
+Iwasawa theory: E/ℚ - p-adic L--number L_p(E, s) - cyclotomic μ-invariant μ_p(E), λ-invariant λ_p(E). Greenberg conjecture: all non-anomalous p - - μ_p(E)=0.
+
+-: **"μ_2(E) + μ_3(E) + λ_2(E) + λ_3(E) mod 6 = rank(E) mod φ(6)"** - BSD - - articleitem- -.
+- -: p=2, p=3 - Iwasawa - Sel_6 - direct - (Lemma 1 classic-)
+- φ(6)=2 - mod 2 articleitem = parity articleitem (- parity conjecture - match)
+- μ+λ mod 6 - **p=2, 3 two -number- Iwasawa - synthesis** - (A3) - independence -degree - possible
+
+**- prediction**:
+1. Cremona database - all rank ≤ 3 -original-prior E -book (μ_2 + μ_3 + λ_2 + λ_3) mod 6 - **rank-invariant -number** - -.
+2. - rank(E) mod 2 ≡ (μ_2 + λ_2) mod 2 - (- p=2 parity), mod 3 articleitem- additional- rank - Iwasawa invariants -book reconstruction.
+3. perfect number n - - E[n] - Galois -current image - GL_2(ℤ/n) - **σ(n)-indexed part-** - -.
+
+**- verification anchor** (- pass): Lemma 1 re-confirmation. gcd(2,3)=1, 2·3=6=n. ∀E/ℚ -book Sel_6 CRT decomposition -articleitem holds. **n=6 - -chapter - non-trivial squarefree composite → -chapter - non-trivial CRT decomposition possible level**.
+
+**- breakthrough articleitem**:
+- Iwasawa μ_p(E), λ_p(E) - rank ≤ 2 Cremona -original-prior (≈ 500,000 -prior) - - p=2, 3 precept-
+- (μ+λ mod 6) - rank dependency empirical confirmation
+- Skinner-Urban type main conjecture - this prediction ratio-
+
+**- path**: [hexa] SageMath Iwasawa all- -. Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019 + Kato 2004 cohomological Euler system.
+
+**main-**: this - BSD - rank = ord_{s=1} L(E,s) - **direct** prooflower- -. however- (A3) barrier- Iwasawa path- -time- **possible-** - -hour.
+
+---
+
+### 1.7 BT-547 — 4D smooth Poincaré conjecture
+
+**- closure**: 3D topological Poincaré = Perelman 2003 (-). Exotic sphere perfect number match = Adams-Bernoulli re-book-. 4D smooth area untouched.
+
+**- -each**: **"K3 - b⁺=3=n/φ - classicprecept- one SW refinement"**.
+
+Seiberg-Witten invariants: 4-manifold X - - **b⁺(X) ≥ 2** day when - definition- diffeomorphism invariant. -this class number = smooth structure obstruction.
+
+- -:
+- **S⁴**: b⁺=0. SW definition impossible (trivial area).
 - **ℂℙ²**: b⁺=1. SW chamber dependent.
-- **K3**: b⁺=3=n/φ. SW 기본 class = 1 (canonical class).
-- **Enriques**: b⁺=1. SW = 0 (PSC 아니지만 trivial).
+- **K3**: b⁺=3=n/φ. SW -this class = 1 (canonical class).
+- **Enriques**: b⁺=1. SW = 0 (PSC - trivial).
 
-관찰: **K3 가 b⁺ = n/φ = 3 을 갖는 가장 단순한 4-manifold**. b⁺=1 case (ℂℙ², Enriques, ...) 와 b⁺≥2 case 사이의 경계는 정확히 **b⁺=n/φ**.
+observation: **K3 - b⁺ = n/φ = 3 - - -chapter simpleone 4-manifold**. b⁺=1 case (ℂℙ², Enriques, ...) - b⁺≥2 case between- classicprecept- exactly **b⁺=n/φ**.
 
-제안: **"Refined SW via τ=4 twisted Dirac"**.
-- 표준 SW 방정식은 U(1) gauge + Spin^c 구조.
-- 제안: **SO(4)=SU(2)×SU(2)/Z_2 의 n=6 twist** 를 이용한 refined SW. 구체:
-  - 4 차원 (dim=τ) × n/φ=3 color → Spin^c 대신 **n=6-twisted Spin^{c,6}** 구조
-  - Dirac 연산자를 n=6 Clifford 모듈로 확장
-  - 정의된 invariant 는 **K3 와 exotic K3 를 구분** 할 수 있는 해상도
+-inside: **"Refined SW via τ=4 twisted Dirac"**.
+- - SW equation- U(1) gauge + Spin^c structure.
+- -inside: **SO(4)=SU(2)×SU(2)/Z_2 - n=6 twist** - -one refined SW. -:
+  - 4 dimension (dim=τ) × n/φ=3 color → Spin^c - **n=6-twisted Spin^{c,6}** structure
+  - Dirac year- n=6 Clifford all- extension
+  - definition- invariant - **K3 - exotic K3 - -minute** - number - -upperdegree
 
-**falsifiable 예측**:
-1. K3 의 refined SW(K3) = σ = 12 (standard SW = 1 × 12 multiplier from n=6 twist).
-2. Exotic smooth structures on K3 (existence 자체가 현재 open 인 영역) 에서 refined SW ≠ 12.
-3. S⁴ 의 refined SW 는 b⁺=0 → 여전히 정의 불가. 하지만 **S⁴ # (-K3) # K3** 등 connected sum 에서 n=6 sensitive obstruction 등장.
-4. 4D smooth Poincaré: S⁴ 의 exotic 존재 여부는 **refined SW 의 K3-fiber 부분 → S⁴ 로의 surgery trace obstruction** 과 동치.
+**falsifiable prediction**:
+1. K3 - refined SW(K3) = σ = 12 (standard SW = 1 × 12 multiplier from n=6 twist).
+2. Exotic smooth structures on K3 (existence itself- currentre- open - area) -book refined SW ≠ 12.
+3. S⁴ - refined SW - b⁺=0 → - definition impossible. lower- **S⁴ # (-K3) # K3** - connected sum -book n=6 sensitive obstruction -chapter.
+4. 4D smooth Poincaré: S⁴ - exotic -re- whether- **refined SW - K3-fiber part → S⁴ - surgery trace obstruction** - -.
 
-**컴퓨터 검증 앵커** (이미 통과): K3 의 Wu 공식에 의한 **b⁺(K3) = 3 = n/φ, b₂(K3) = 22 = J₂-φ**. 추가: σ(K3) = b⁺-b⁻ = 3-19 = -16 = -(n+σ-φ). 전부 M-값 조합.
+**- verification anchor** (- pass): K3 - Wu formula- -one **b⁺(K3) = 3 = n/φ, b₂(K3) = 22 = J₂-φ**. additional: σ(K3) = b⁺-b⁻ = 3-19 = -16 = -(n+σ-φ). - M-value articlesum.
 
-**진짜 돌파 조건**:
-- n=6-twisted Spin^c 구조의 명시적 정의 (Clifford 대수 ℂℓ(ℝ^{n=6}) 의 표현론)
-- Refined SW 의 diffeomorphism invariance 엄밀 증명
-- K3, Enriques, ℂℙ² 에 대한 refined SW 값 계산
-- S⁴ exotic 존재 / 비존재 판정을 refined SW 로 reduction
+**- breakthrough articleitem**:
+- n=6-twisted Spin^c structure- -hour- definition (Clifford algebra ℂℓ(ℝ^{n=6}) - -current-)
+- Refined SW - diffeomorphism invariance - proof
+- K3, Enriques, ℂℙ² - -one refined SW value precept-
+- S⁴ exotic -re- / ratio-re- verdict- refined SW - reduction
 
-**진전 경로**: 이것은 Seiberg-Witten 이론의 확장이며, Gromov-Witten 등 다른 4-manifold invariant 와도 연결 가능. 구체 계산은 4-manifold Atlas (Gompf-Stipsicz) + refined Dirac 문헌.
+**- path**: this- Seiberg-Witten theory- extension-, Gromov-Witten - different 4-manifold invariant -degree year- possible. - precept- 4-manifold Atlas (Gompf-Stipsicz) + refined Dirac literature.
 
-**주의**: 4D smooth Poincaré 는 본 BT 에서 해결 안됨. Refined SW 가 새 invariant 로 성공해도 S⁴ = S⁴ (exotic 없음) 증명으로 이어지려면 **정확히 해당 invariant 가 S⁴ 에서 universal collapse** 한다는 것까지 필요.
-
----
-
-## 2. 검증 테이블 (n=6 앵커 7개)
-
-| # | 아이디어 | 수치 검증 앵커 | 출처 | n=6 수식 | 등급 |
-|---|---------|---------------|------|---------|------|
-| 1 | RH: 691-L 탑 | \|num(B_{2k})\| k=1..5 ∈ {1, sopfr=5}, k=6 = 691 | Theorem B (2026-04-11) + 직접 계산 B_{12} | sopfr 연속 + k=n sharp | EXACT |
-| 2 | P vs NP: Out(S_6) GCT | \|Out(S_n)\| = 2 iff n=6, 아니면 1 | Hölder 1895, Schreier-van der Waerden 1928 | 유일성 | EXACT |
-| 3 | YM: β_W=6 축 | Wilson β_W(g=1) = 2N_c = 6 at N_c=3 | Wilson 1974 PRD 10 | n = 2·(n/φ) | EXACT |
-| 4 | NS: 완전-차원 창 | d=3,7,31 일 때 T_d=d(d+1)/2 ∈ {6,28,496} (완전수) | Euler 1747 (T_{2^p-1}=P_p) | P_1, P_2, P_3 | EXACT |
-| 5 | Hodge: K3 induction | χ(K3)=24=J₂, h^(1,1)=20=J₂-τ, b_2=22=J₂-φ | Piateski-Shapiro–Shafarevich 1971 | J₂ 분해 | EXACT |
-| 6 | BSD: Iwasawa μ+λ mod 6 | gcd(2,3)=1, Sel_6 = Sel_2·Sel_3 | Lemma 1 (2026-04-11) | n=6 첫 비자명 CRT | EXACT |
-| 7 | 4D: refined SW | b⁺(K3)=3=n/φ, b₂(K3)=22=J₂-φ, σ(K3)=-16 | Donaldson 1983, Wu formula | n/φ + J₂ 분해 | EXACT |
-
-**결과**: 7/7 EXACT. **중요 경고**: 이 7개는 **아이디어의 자명 전제 (이미 알려진 사실)** 를 n=6 언어로 재확인한 것. 아이디어 자체의 falsifiable **예측** 은 아직 검증 안됨.
+**main-**: 4D smooth Poincaré - this BT -book - inside-. Refined SW - - invariant - -degree S⁴ = S⁴ (exotic -negative) proof- - **exactly relevant invariant - S⁴ -book universal collapse** one- - needed.
 
 ---
 
-## 3. CLOSE 노트 (honest)
+## 2. verification - (n=6 - 7)
 
-| 항목 | 상태 | 비고 |
-|------|------|------|
-| 7대 난제 해결 수 | **0** | 04-11 closure 와 동일 |
-| 본 BT 의 엄밀 증명 | **0** | 전부 IDEA 수준 |
-| 컴퓨터 검증 앵커 | **7/7 EXACT** | 단, 이미 알려진 사실의 n=6 재확인 |
-| 반증 가능한 신규 예측 | **≥ 7** | 각 아이디어마다 1개 이상 |
-| 실행 계획 존재 | **7/7** | 각 아이디어마다 "진전 경로" 명시 |
-| Theorem B 확장 | **아이디어 수준** | 691-L 탑 가설 |
-| Theorem 0 확장 | **활용** | n=6 유일성을 각 아이디어의 앵커로 |
-| Lemma 1 확장 | **활용 (BSD)** | Iwasawa μ+λ 우회 경로 |
+| # | - | numeric verification - | - | n=6 expression | - |
+|---|---|---|---|---|---|
+| 1 | RH: 691-L - | \|num(B_{2k})\| k=1..5 ∈ {1, sopfr=5}, k=6 = 691 | Theorem B (2026-04-11) + direct precept- B_{12} | sopfr yearwithin + k=n sharp | EXACT |
+| 2 | P vs NP: Out(S_6) GCT | \|Out(S_n)\| = 2 iff n=6, - 1 | Hölder 1895, Schreier-van der Waerden 1928 | uniqueness | EXACT |
+| 3 | YM: β_W=6 axis | Wilson β_W(g=1) = 2N_c = 6 at N_c=3 | Wilson 1974 PRD 10 | n = 2·(n/φ) | EXACT |
+| 4 | NS: --dimension - | d=3,7,31 day when T_d=d(d+1)/2 ∈ {6,28,496} (perfect number) | Euler 1747 (T_{2^p-1}=P_p) | P_1, P_2, P_3 | EXACT |
+| 5 | Hodge: K3 induction | χ(K3)=24=J₂, h^(1,1)=20=J₂-τ, b_2=22=J₂-φ | Piateski-Shapiro–Shafarevich 1971 | J₂ decomposition | EXACT |
+| 6 | BSD: Iwasawa μ+λ mod 6 | gcd(2,3)=1, Sel_6 = Sel_2·Sel_3 | Lemma 1 (2026-04-11) | n=6 first non-trivial CRT | EXACT |
+| 7 | 4D: refined SW | b⁺(K3)=3=n/φ, b₂(K3)=22=J₂-φ, σ(K3)=-16 | Donaldson 1983, Wu formula | n/φ + J₂ decomposition | EXACT |
 
-**핵심 정직성 경고**:
-1. "n=6 을 앞세워 답을 매칭" 이 아닌 **증명 접근법 역전** 방향으로 설계했으나, 일부 아이디어 (특히 1.7 refined SW, 1.1 691-L 탑) 는 여전히 n=6 구조를 후행 imposed 로 의심받을 수 있음. 본 BT 는 이 한계 인정.
-2. 본 BT 의 각 아이디어는 **다음 세션의 실행 목표** 이며, 본 BT 작성 시점에서 해결되지 않았다.
-3. 7/7 EXACT 통과는 각 아이디어의 **출발점이 수학적으로 합법** 임만 확인한다. 아이디어가 옳은지는 별개.
+**result**: 7/7 EXACT. **in- classic-**: - 7- **- trivial - (- - -)** - n=6 - re-confirmationone -. - itself- falsifiable **prediction** - - verification inside-.
 
 ---
 
-## 4. 물리적/수학적 의미 — 왜 이 아이디어들이 가치 있는가
+## 3. CLOSE - (honest)
 
-**기존 closure 와의 차이**:
-- 04-11 closure = **정적 문서화**. Theorem B/0/Lemma 1 의 정확한 statement 와 7대 난제에 대한 기여를 고정.
-- 본 BT = **동적 확장**. "그 위에 무엇을 얹어야 실제 난제에 다가가는가" 를 7 방향으로 전개.
+| - | state | ratio- |
+|---|---|---|
+| 7- difficult problem - number | **0** | 04-11 closure - -day |
+| this BT - - proof | **0** | - IDEA number- |
+| - verification anchor | **7/7 EXACT** | however, - - - n=6 re-confirmation |
+| refutation possibleone - prediction | **≥ 7** | each - 1 or more |
+| -phase precept- -re- | **7/7** | each - "- path" -hour |
+| Theorem B extension | **- number-** | 691-L - - |
+| Theorem 0 extension | **-** | n=6 uniqueness- each - - |
+| Lemma 1 extension | **- (BSD)** | Iwasawa μ+λ -time path |
 
-**공통 구조**: 7 아이디어 모두 **"이미 증명된 n=6 사실을 출발점으로 잡되, 그 출발점을 직접적으로 난제의 기본 object 정의에 쓴다"**. 예:
-- RH 의 T_k 는 Bernoulli k=6 boundary 를 연산자 스펙트럼으로 변환
-- P vs NP 의 S_6 GCT 는 Hölder 정리를 plethysm obstruction 으로 변환
-- YM 의 β_W=6 은 Wilson 작용의 natural scale 을 OS2 증명의 reparameterization 으로 변환
-- NS 의 perfect-dim 은 Euler 1747 을 smoothness pathology 의 universality class 로 변환
-- Hodge 의 K3 induction 은 PSS 1971 을 CY3 reduction 의 기저로 변환
-- BSD 의 Iwasawa mod 6 은 Lemma 1 을 (A3) 우회의 대체 공리로 변환
-- Poincaré 의 refined SW 는 K3 b⁺=3 을 Spin^c twist 의 기저 차원으로 변환
-
-즉 **"n=6 사실을 observation 에서 construction 으로 승격"** 이 본 BT 의 공통 전략이다.
-
-**반례 가능성**: 만약 어느 한 아이디어가 falsifiable 예측 단계에서 실패한다면 (예: Cremona database 에서 μ+λ mod 6 이 rank 와 무관함이 나오면), 해당 아이디어는 폐기되고 Theorem B/0/Lemma 1 의 적용 범위가 *수축* 한다. 이는 정직한 과학 절차.
-
-**잠재 수확**: 7 중 1 이라도 성공한다면 **70년 장벽 중 하나를 개봉**. 예상 성공 확률 (솔직히): 각 10-20%. 합산 기대 성과: ~1 건의 부분 돌파 (rank, Iwasawa, 격자, 수치 simulation 등의 중간 형태).
+**- honesty warning**:
+1. "n=6 - frontthree- - every-" - - **proof-approach inversion** - -precept-, day- - (- 1.7 refined SW, 1.1 691-L -) - - n=6 structure- -phase imposed - - number -negative. this BT - - oneprecept -.
+2. this BT - each - **next three- -phase -** -, this BT - hour-book - -.
+3. 7/7 EXACT pass- each - **starting point- mathematics- sumlaw** - confirmationone-. - - -.
 
 ---
 
-## 5. 교차 BT
+## 4. physics-/mathematics- meaning — - - - - -
 
-- **BT-541~547**: 기존 7 난제 BT (04-11 closure 기반)
-- **BT-1378, BT-1379**: n=6 유일성 근본 정리 (Theorem 0 기반)
-- **BT-1381 (표준모형)**: SU(3)×SU(2)×U(1) = σ=12 관찰 (BT-543 YM 연결)
-- **BT-1384 (큐브-옥타 쌍대성)**: 4D geometric 기반 (BT-547 Poincaré 연결)
-- **BT-344~346 (HEXA-GATE Mk.I)**: τ+φ=n=6 축 돌파 게이트
-- **millennium-n6-attractor-2026-04-11**: 12 PASS tight 검증 (본 BT 의 직접 선행)
-- **millennium-dfs-complete-2026-04-11**: 51 건 tight DFS 결과 (본 BT 의 data 원천)
-- **millennium-7-closure-2026-04-11**: honest closure (본 BT 가 그 다음 단계)
+**- closure - difference**:
+- 04-11 closure = **- -book-**. Theorem B/0/Lemma 1 - exact statement - 7- difficult problem- -one contribution- -.
+- this BT = **- extension**. "the above- - - actual difficult problem- multivalued-" - 7 - -.
+
+**common structure**: 7 - all **"- proof- n=6 - starting point- -, the starting point- direct- difficult problem- -this object definition- -"**. example:
+- RH - T_k - Bernoulli k=6 boundary - year- spectrum- -
+- P vs NP - S_6 GCT - Hölder theorem- plethysm obstruction - -
+- YM - β_W=6 - Wilson - natural scale - OS2 proof- reparameterization - -
+- NS - perfect-dim - Euler 1747 - smoothness pathology - universality class - -
+- Hodge - K3 induction - PSS 1971 - CY3 reduction - - -
+- BSD - Iwasawa mod 6 - Lemma 1 - (A3) -time- alternative - -
+- Poincaré - refined SW - K3 b⁺=3 - Spin^c twist - - dimension- -
+
+i.e., **"n=6 - observation -book construction - promotion"** - this BT - common -.
+
+**counterexample possible-**: if - one - falsifiable prediction howeverprecept-book -one- (example: Cremona database -book μ+λ mod 6 - rank - - -), relevant - discarded- Theorem B/0/Lemma 1 - - range- *numberaxis* one-. this is honest - -difference.
+
+**-re- numberclearly**: 7 in 1 -degree -one- **70year barrier in lower- -**. exampleupper - probability (-): each 10-20%. sum- - -: ~1 item- part breakthrough (rank, Iwasawa, lattice, numerical simulation - in- -).
 
 ---
 
-## 6. 자동검증 Python (embedded, N62 준수)
+## 5. -difference BT
+
+- **BT-541~547**: - 7 difficult problem BT (04-11 closure -)
+- **BT-1378, BT-1379**: n=6 uniqueness -this theorem (Theorem 0 -)
+- **BT-1381 (-all-)**: SU(3)×SU(2)×U(1) = σ=12 observation (BT-543 YM year-)
+- **BT-1384 (--- -)**: 4D geometric - (BT-547 Poincaré year-)
+- **BT-344~346 (HEXA-GATE Mk.I)**: τ+φ=n=6 axis breakthrough -
+- **millennium-n6-attractor-2026-04-11**: 12 PASS tight verification (this BT - direct priorphase)
+- **millennium-dfs-complete-2026-04-11**: 51 item tight DFS result (this BT - data original-)
+- **millennium-7-closure-2026-04-11**: honest closure (this BT - the next howeverprecept)
+
+---
+
+## 6. automaticverification Python (embedded, N62 -number)
 
 ```python
-# BT-1392 7대 난제 신규 공격각 — 검증 앵커 7개
-# 실행: 본 블록만 추출해 python3 로 exec
-# 정직성: 각 아이디어의 '컴퓨터 검증 가능한 이미 알려진 사실' 만 확인.
-#        밀레니엄 난제 자체의 증명이 아님.
+# BT-1392 7- difficult problem - -each — verification anchor 7
+# -phase: this - extract- python3 - exec
+# honesty: each - '- verification possibleone - - -' - confirmation.
+#        Millennium difficult problem itself- proof- -.
 
 from fractions import Fraction
 from math import gcd, factorial
 
-# n=6 상수
+# n=6 uppernumber
 N, SIGMA, PHI, TAU, SOPFR, MU, J2 = 6, 12, 2, 4, 5, 1, 24
 NP = N // PHI
 SMS = SIGMA - SOPFR
-assert SIGMA * PHI == N * TAU, "Theorem 0 실패"
+assert SIGMA * PHI == N * TAU, "Theorem 0 -"
 
 
 def bernoulli(n_max):
-    """베르누이 수 B_0..B_n_max (Fraction)."""
+    """- number B_0..B_n_max (Fraction)."""
     A = [Fraction(0)] * (n_max + 1)
     B = []
     for m in range(n_max + 1):
@@ -387,7 +387,7 @@ def is_perfect(n_):
 passed = 0
 results = []
 
-# 앵커 1: RH — Theorem B 재확인
+# - 1: RH — Theorem B re-confirmation
 B = bernoulli(13)
 numerators = [abs(B[2 * k].numerator) for k in range(1, 7)]
 if all(n_ in (1, SOPFR) for n_ in numerators[:5]) and numerators[5] == 691:
@@ -395,78 +395,78 @@ if all(n_ in (1, SOPFR) for n_ in numerators[:5]) and numerators[5] == 691:
     results.append(("RH",
                     f"\\|num(B_{{2k}})\\|={numerators}, k=6→691"))
 
-# 앵커 2: P vs NP — S_6 Out 유일성
+# - 2: P vs NP — S_6 Out uniqueness
 out_S = {2: 1, 3: 1, 4: 1, 5: 1, 6: 2, 7: 1, 8: 1, 9: 1, 10: 1}
 if [n_ for n_ in out_S if out_S[n_] == 2] == [6]:
     passed += 1
     results.append(("P vs NP", "Out(S_n)≠1 ⟺ n=6"))
 
-# 앵커 3: YM — Wilson β_W=6 at N_c=3
+# - 3: YM — Wilson β_W=6 at N_c=3
 beta = {Nc: 2 * Nc for Nc in range(2, 7)}
 if beta[3] == N:
     passed += 1
     results.append(("YM", f"β_W(SU(3))={beta[3]}=n"))
 
-# 앵커 4: NS — 완전-차원 창
+# - 4: NS — --dimension -
 perfect_dims = [(d, d * (d + 1) // 2) for d in range(2, 40)
                 if is_perfect(d * (d + 1) // 2)]
 if perfect_dims == [(3, 6), (7, 28), (31, 496)]:
     passed += 1
     results.append(("NS", f"T_d perfect at d={[x[0] for x in perfect_dims]}"))
 
-# 앵커 5: Hodge — K3 J₂ 분해
+# - 5: Hodge — K3 J₂ decomposition
 K3_chi, K3_h11, K3_b2 = 24, 20, 22
 if K3_chi == J2 and K3_h11 == J2 - TAU and K3_b2 == J2 - PHI:
     passed += 1
     results.append(("Hodge", f"K3: χ={J2}=J₂, h^(1,1)=J₂-τ"))
 
-# 앵커 6: BSD — Sel_6 CRT 분해 (Lemma 1)
+# - 6: BSD — Sel_6 CRT decomposition (Lemma 1)
 if gcd(2, 3) == 1 and 2 * 3 == N:
     passed += 1
     results.append(("BSD", "gcd(2,3)=1 → Sel_6=Sel_2·Sel_3 ∀E"))
 
-# 앵커 7: Poincaré — K3 SW refinement 기저
+# - 7: Poincaré — K3 SW refinement -
 K3_bplus, K3_bminus = 3, 19
 if K3_bplus == NP and K3_bplus + K3_bminus == J2 - PHI:
     passed += 1
     results.append(("Poincaré",
                     f"K3: b⁺={NP}=n/φ, b₂=J₂-φ={J2-PHI}"))
 
-print(f"BT-1392 앵커: {passed}/7 EXACT")
+print(f"BT-1392 -: {passed}/7 EXACT")
 for name, note in results:
     print(f"  EXACT  {name:10s}  {note}")
-assert passed == 7, f"예상 실패: {passed}/7"
-print("BT-1392 자동검증 통과 (7/7 EXACT, 0 MISS)")
+assert passed == 7, f"exampleupper -: {passed}/7"
+print("BT-1392 automaticverification pass (7/7 EXACT, 0 MISS)")
 ```
 
-**자동검증 결과**: 7/7 EXACT, 0 MISS. 검증된 것은 **각 아이디어의 수학적 출발점이 합법** 이라는 점뿐이며, 아이디어 자체는 미증명 가설 상태.
+**automaticverification result**: 7/7 EXACT, 0 MISS. verification- - **each - mathematics- starting point- sumlaw** - -, - itself- -proof - state.
 
 ---
 
-## 7. 결론
+## 7. conclusion
 
-**본 BT 가 확정한 것**:
-1. 7대 밀레니엄 난제 각각에 대해 **04-11 closure 이후 새로 열린 falsifiable 공격각** 7개 명시
-2. 각 아이디어의 수치 출발점 7개가 **전부 n=6 EXACT** (Hölder, Wilson, Euler, PSS, Lemma 1, Donaldson 등 독립 고전 정리 7건)
-3. 각 아이디어마다 ≥ 1 개의 반증 가능한 예측 + 실행 경로
+**this BT - confirmedone -**:
+1. 7- Millennium difficult problem each- - **04-11 closure after - ten- falsifiable -each** 7 -hour
+2. each - numerical starting point 7- **- n=6 EXACT** (Hölder, Wilson, Euler, PSS, Lemma 1, Donaldson - independent - theorem 7item)
+3. each - ≥ 1 - refutation possibleone prediction + -phase path
 
-**본 BT 가 확정하지 않은 것**:
-1. 밀레니엄 난제 해결 — 여전히 0/7
-2. 아이디어 자체의 옳음 — 전부 미검증
-3. Theorem B/0/Lemma 1 의 확장 정리 — 본 BT 는 그 방향만 제시
+**this BT - confirmedlower- - -**:
+1. Millennium difficult problem - — - 0/7
+2. - itself- -negative — - -verification
+3. Theorem B/0/Lemma 1 - extension theorem — this BT - the - -hour
 
-**실행 권고** (다음 세션):
-- 실현 난이도 낮은 순 (개인 의견):
-  1. **NS perfect-dim** (d=7 simulation, 수치 실험 가능)
+**-phase -** (next three-):
+- -current -degree - - (- -):
+  1. **NS perfect-dim** (d=7 simulation, numerical experiment possible)
   2. **BSD Iwasawa mod 6** (Cremona database + SageMath)
-  3. **P vs NP S_6 GCT** (LiE / Sage plethysm 계산)
-  4. **RH 691-L 탑** (Bernoulli-Faulhaber 확장)
-  5. **Hodge K3 induction** (표준 대수기하)
-  6. **YM β_W=6 OS2** (구성적 QFT, hard)
-  7. **4D Poincaré refined SW** (Spin^c 확장, hardest)
+  3. **P vs NP S_6 GCT** (LiE / Sage plethysm precept-)
+  4. **RH 691-L -** (Bernoulli-Faulhaber extension)
+  5. **Hodge K3 induction** (- algebraic geometry)
+  6. **YM β_W=6 OS2** (- QFT, hard)
+  7. **4D Poincaré refined SW** (Spin^c extension, hardest)
 
-**최종 선언**: 본 BT 는 **해결** 이 아닌 **전진 가능성의 공식 목록**. 7개 중 1개라도 향후 세션에서 성공한다면 70년 장벽의 일부 해제. 실패해도 Theorem B/0/Lemma 1 의 적용 경계가 정직하게 수축.
+**final declaration**: this BT - **-** - - **- possible- formula -**. 7 in 1-degree - three-book -one- 70year barrier- day- -. -degree Theorem B/0/Lemma 1 - - classicprecept- honestly numberaxis.
 
 ---
 
-**기록**: 2026-04-12, BT-1392. 04-11 closure 다음 날. blowup.hexa 엔진은 Mac 로컬 실행 실패 (stdin buffer / SIGKILL 이슈) 로 우회, 순수 수학 경로로 직접 설계. 원격 gate (192.168.50.119) 는 Python 검증 앵커 실행만 사용.
+**record**: 2026-04-12, BT-1392. 04-11 closure next -. blowup.hexa - Mac - -phase - (stdin buffer / SIGKILL issue) - -time, pure mathematics path- direct -precept. original- gate (192.168.50.119) - Python verification anchor -phase- -.

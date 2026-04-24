@@ -1,14 +1,14 @@
-# BT-1397: 미커버 소재 5 도메인 — materials 축 일괄 진입 (2026-04-12)
+# BT-1397: uncovered -re- 5 degree- — materials axis batch entry (2026-04-12)
 
-> materials 축 내 BT 미부여 5개 도메인에 대한 신규 돌파 정리.
-> 도메인 문서(domains/materials/<name>/<name>.md)에 20+ EXACT 항목이 존재하나
-> theory/breakthroughs/ 에는 단독 BT가 전무했던 도메인을 식별하여 진입.
-> 근사(~=)는 명시적으로 "근사" 표기, 정수 정합만 EXACT. MISS는 정직하게 기록.
+> materials axis - unassigned BT 5 degree- -one - breakthrough theorem.
+> degree- -book(domains/materials/<name>/<name>.md)- 20+ EXACT - -re-lower-
+> theory/breakthroughs/ - standalone BT- none- degree- identificationlower- entry.
+> approximation(~=)- -hour- "approximation" -, integer match- EXACT. MISS- honestly record.
 
-## n=6 상수 참조표
+## n=6 uppernumber truearticle-
 
-| 기호 | 수식 | 값 |
-|------|------|----|
+| symbol | expression | value |
+|---|---|---|
 | n | -- | 6 |
 | sigma | sigma(6) | 12 |
 | phi | phi(6) | 2 |
@@ -19,35 +19,35 @@
 
 ---
 
-## 인덱스 표
+## - -
 
-| BT | 도메인 | EXACT | 요지 | STATUS |
-|----|--------|-------|------|--------|
-| 1397-A | 나일론 6/6,6 폴리아미드 | 5/6 | 카프로락탐 C6=n + 반복단위 sigma=12C + 840d 규격 | EXACT |
-| 1397-B | 아라미드(케블라/헤라크론) | 4/6 | 벤젠 C6=n + PPTA 28원자 + 밀도 sigma^2/100 | EXACT |
-| 1397-C | PET 광학필름 | 5/6 | 벤젠 C6=n + Tg=sigma*n=72 + 이축연신 n/phi=3배 | EXACT |
-| 1397-D | 타이어코드 | 5/6 | 가황 sigma^2=144도 + 벨트코드 J2=24도 + 수명 n*10^4 | EXACT |
-| 1397-E | 에폭시/페놀 수지 | 4/6 | 에폭시 3원환=n/phi + Tg=sigma*(sigma-phi)=120도 + 탄소섬유 n/sigma/J2 토우 | EXACT |
+| BT | degree- | EXACT | gist | STATUS |
+|---|---|---|---|---|
+| 1397-A | nylon 6/6,6 - | 5/6 | caprolactam C6=n + repeatunit sigma=12C + 840d standard | EXACT |
+| 1397-B | aramid(-/-) | 4/6 | benzene C6=n + PPTA 28atom + density sigma^2/100 | EXACT |
+| 1397-C | PET optical film | 5/6 | benzene C6=n + Tg=sigma*n=72 + biaxial stretch n/phi=3- | EXACT |
+| 1397-D | tire cord | 5/6 | vulcanization sigma^2=144degree + belt cord J2=24degree + number- n*10^4 | EXACT |
+| 1397-E | epoxy/phenol resin | 4/6 | epoxy 3original-=n/phi + Tg=sigma*(sigma-phi)=120degree + carbon fiber n/sigma/J2 tow | EXACT |
 
 ---
 
-## BT-1397-A: 나일론 6/6,6 카프로락탐 C6=n 정리
+## BT-1397-A: nylon 6/6,6 caprolactam C6=n theorem
 
-**도메인**: materials/nylon
-**핵심**: 나일론의 이름 자체가 n=6을 선언한다. 카프로락탐(6C), 아디프산(6C), 헥사메틸렌디아민(6C) 세 단량체 모두 탄소 6개. 반복단위 총탄소 sigma=12, 산업 원사 840d=sigma*(sigma-phi)*(sigma-sopfr).
+**degree-**: materials/nylon
+**-**: nylon- name itself- n=6- declarationone-. caprolactam(6C), adipic acid(6C), HMDA(6C) three however- all carbon 6. repeatunit -carbon sigma=12, industry yarn 840d=sigma*(sigma-phi)*(sigma-sopfr).
 
-| 항목 | 수식 | 예측값 | 실측값 | 일치 |
-|------|------|--------|--------|------|
-| 카프로락탐 탄소 수 | n | 6 | 6 (epsilon-caprolactam C6H11NO) | EXACT |
-| 나일론 6,6 반복단위 총탄소 | sigma | 12 | 12 (아디프산 6C + HMDA 6C) | EXACT |
-| 산업용 원사 840d | sigma*(sigma-phi)*(sigma-sopfr) | 840 | 840 denier (산업 표준 규격) | EXACT |
-| 필라멘트 수 24f | J2 | 24 | 24f (표준 필라멘트 번들) | EXACT |
-| 중합 목표 DP | sigma*(sigma-phi) | 120 | 110~130 (산업 목표 범위) | EXACT |
-| 나일론 융점 | -- | -- | 220도C (나일론 6,6) | n=6 정합 미발견 (MISS) |
+| - | expression | predictionvalue | measured value | match |
+|---|---|---|---|---|
+| caprolactam carbon count | n | 6 | 6 (epsilon-caprolactam C6H11NO) | EXACT |
+| nylon 6,6 repeatunit -carbon | sigma | 12 | 12 (adipic acid 6C + HMDA 6C) | EXACT |
+| industry- yarn 840d | sigma*(sigma-phi)*(sigma-sopfr) | 840 | 840 denier (industrial standard standard) | EXACT |
+| filament number 24f | J2 | 24 | 24f (- filament time-) | EXACT |
+| insum - DP | sigma*(sigma-phi) | 120 | 110~130 (industrial target range) | EXACT |
+| nylon melting point | -- | -- | 220degreeC (nylon 6,6) | n=6 match - (MISS) |
 
-**정직성**: 나일론 6,6 융점 220도C는 n=6 산술 함수로 깔끔하게 표현 불가. sigma*(sigma+n)=216이 근사하나 4도C 차이가 있어 EXACT로 인정하지 않음.
+**honesty**: nylon 6,6 melting point 220degreeC- n=6 - -number- -lower- -current impossible. sigma*(sigma+n)=216- approximationlower- 4degreeC difference- - EXACT- -lower- -negative.
 
-**출처**: Carothers WH, *J Am Chem Soc* 51 (1929) 2548; 코오롱인더스트리 나일론 제품 규격서; ASTM D6866
+**-**: Carothers WH, *J Am Chem Soc* 51 (1929) 2548; Kolon Industries nylon product standardbook; ASTM D6866
 
 ```python
 from sympy import factorint, divisor_sigma, totient, divisor_count, jordan_function
@@ -58,34 +58,34 @@ tau = int(divisor_count(n))        # 4
 sopfr = sum(p*e for p, e in factorint(n).items())  # 5
 J2 = int(jordan_function(2, n))    # 24
 
-assert n == 6, "카프로락탐 C6"
-assert sigma == 12, "나일론 6,6 반복단위 총탄소 12"
-assert sigma * (sigma - phi) * (sigma - sopfr) == 840, "산업용 원사 840d"
-assert J2 == 24, "필라멘트 24f"
-assert sigma * (sigma - phi) == 120, "중합 DP 120"
-# 나일론 6,6 융점 220C: sigma*(sigma+n)=216 != 220 -> MISS
-print(f"BT-1397-A: 5/6 EXACT (MISS 1건: 융점 220C 정합 불가)")
+assert n == 6, "caprolactam C6"
+assert sigma == 12, "nylon 6,6 repeatunit -carbon 12"
+assert sigma * (sigma - phi) * (sigma - sopfr) == 840, "industry- yarn 840d"
+assert J2 == 24, "filament 24f"
+assert sigma * (sigma - phi) == 120, "insum DP 120"
+# nylon 6,6 melting point 220C: sigma*(sigma+n)=216 != 220 -> MISS
+print(f"BT-1397-A: 5/6 EXACT (MISS 1item: melting point 220C match impossible)")
 ```
 
 ---
 
-## BT-1397-B: 아라미드 PPTA 28원자 = J2+tau 정리
+## BT-1397-B: aramid PPTA 28atom = J2+tau theorem
 
-**도메인**: materials/aramid
-**핵심**: PPTA(폴리파라페닐렌테레프탈아미드) 반복단위는 벤젠고리 phi=2개, 방향족 탄소 sigma=12, 총원자 J2+tau=28(제2완전수와 관련). 밀도 1.44=sigma^2/100, 열분해 500도C=sopfr*(sigma-phi)^2.
+**degree-**: materials/aramid
+**-**: PPTA(-) repeatunit- benzene ring phi=2, aromatic carbon sigma=12, -atom J2+tau=28(-2perfect number- relevant). density 1.44=sigma^2/100, tendecomposition 500degreeC=sopfr*(sigma-phi)^2.
 
-| 항목 | 수식 | 예측값 | 실측값 | 일치 |
-|------|------|--------|--------|------|
-| 벤젠고리 탄소 수 | n | 6 | 6 (C6 방향족 기본 단위) | EXACT |
-| 방향족 탄소 총수 | sigma | 12 | 12 (PPTA 2고리 합산) | EXACT |
-| 반복단위 총원자 수 | J2+tau | 28 | 28 (C14H10N2O2) | EXACT |
-| 밀도 x 100 | sigma^2 | 144 | 1.44 g/cm3 (헤라크론/케블라 표준) | EXACT |
-| 열분해 온도 | sopfr*(sigma-phi)^2 | 500 | 500도C (TGA 분해 개시점) | 근사 |
-| 인장강도 | -- | -- | 3.6 GPa (케블라 49) | n=6 정합 미발견 (MISS) |
+| - | expression | predictionvalue | measured value | match |
+|---|---|---|---|---|
+| benzene ring carbon count | n | 6 | 6 (C6 aromatic -this unit) | EXACT |
+| aromatic carbon -number | sigma | 12 | 12 (PPTA 2- sum-) | EXACT |
+| repeatunit -atom count | J2+tau | 28 | 28 (C14H10N2O2) | EXACT |
+| density x 100 | sigma^2 | 144 | 1.44 g/cm3 (-/- -) | EXACT |
+| tendecomposition temperature | sopfr*(sigma-phi)^2 | 500 | 500degreeC (TGA decomposition hour-) | approximation |
+| -chapterstrength | -- | -- | 3.6 GPa (- 49) | n=6 match - (MISS) |
 
-**정직성**: 인장강도 3.6 GPa는 n*sigma*sopfr/100=3.6으로 도메인 문서에 기록되어 있으나, 이는 제조 조건에 따라 2.8~4.1 GPa 범위로 편차가 크고 3.6이 대표값이라 보기 어렵다. 구간 중앙값이 아닌 특정값 체리피킹 소지가 있어 MISS 처리.
+**honesty**: -chapterstrength 3.6 GPa- n*sigma*sopfr/100=3.6- degree- -book- record- -, this is -article articleitem- - 2.8~4.1 GPa range- -difference- - 3.6- -value- - -. interval in-value- - -value cherry-picking - - MISS -.
 
-**출처**: Tashiro K, Kobayashi M, *Macromolecules* 24 (1991) 3706; DuPont Kevlar Technical Guide; 코오롱인더스트리 Heracron 제품 규격
+**-**: Tashiro K, Kobayashi M, *Macromolecules* 24 (1991) 3706; DuPont Kevlar Technical Guide; Kolon Industries Heracron product standard
 
 ```python
 from sympy import factorint, divisor_sigma, totient, divisor_count, jordan_function
@@ -96,34 +96,34 @@ tau = int(divisor_count(n))
 sopfr = sum(p*e for p, e in factorint(n).items())
 J2 = int(jordan_function(2, n))
 
-assert n == 6, "벤젠 C6"
-assert sigma == 12, "방향족 탄소 12"
-assert J2 + tau == 28, "PPTA 반복단위 28원자"
-assert sigma**2 == 144, "밀도 1.44 (x100=144)"
-# 열분해 500C = sopfr*(sigma-phi)^2 = 5*100 = 500 -> 근사 (실측 범위 480~520)
-# 인장강도 3.6 GPa -> 체리피킹 우려, MISS
-print(f"BT-1397-B: 4/6 EXACT (근사 1건, MISS 1건)")
+assert n == 6, "benzene C6"
+assert sigma == 12, "aromatic carbon 12"
+assert J2 + tau == 28, "PPTA repeatunit 28atom"
+assert sigma**2 == 144, "density 1.44 (x100=144)"
+# tendecomposition 500C = sopfr*(sigma-phi)^2 = 5*100 = 500 -> approximation (measured range 480~520)
+# -chapterstrength 3.6 GPa -> cherry-picking -, MISS
+print(f"BT-1397-B: 4/6 EXACT (approximation 1item, MISS 1item)")
 ```
 
 ---
 
-## BT-1397-C: PET 필름 벤젠 C6 + Tg=sigma*n=72 정리
+## BT-1397-C: PET film benzene C6 + Tg=sigma*n=72 theorem
 
-**도메인**: materials/pet-film
-**핵심**: PET(폴리에틸렌 테레프탈레이트) 반복단위에 벤젠고리 C6=n, 산소 tau=4, 에스터결합 phi=2. Tg=sigma*n=72도C, 이축연신 배율 n/phi=3배, 광학필름 투과율 (sigma-phi)^2-(sigma-phi)=90%.
+**degree-**: materials/pet-film
+**-**: PET(- -) repeatunit- benzene ring C6=n, oxygen tau=4, estercombined phi=2. Tg=sigma*n=72degreeC, biaxial stretch ratio n/phi=3-, optical film transmittance (sigma-phi)^2-(sigma-phi)=90%.
 
-| 항목 | 수식 | 예측값 | 실측값 | 일치 |
-|------|------|--------|--------|------|
-| 벤젠고리 탄소 수 | n | 6 | 6 (테레프탈산 C6 고리) | EXACT |
-| 산소 원자 수 | tau | 4 | 4 (에스터 -COO- x 2) | EXACT |
-| 유리전이온도 Tg | sigma*n | 72 | 72도C (PET 표준 Tg) | EXACT |
-| 이축연신 배율 | n/phi | 3 | 3배 (MD/TD 각각) | EXACT |
-| 광학 투과율 | (sigma-phi)^2 - (sigma-phi) | 90 | 90% (광학용 PET 필름) | EXACT |
-| PET 융점 | -- | -- | 260도C | n=6 정합 미발견 (MISS) |
+| - | expression | predictionvalue | measured value | match |
+|---|---|---|---|---|
+| benzene ring carbon count | n | 6 | 6 (- C6 -) | EXACT |
+| oxygen atom count | tau | 4 | 4 (ester -COO- x 2) | EXACT |
+| glass transition Tg | sigma*n | 72 | 72degreeC (PET - Tg) | EXACT |
+| biaxial stretch ratio | n/phi | 3 | 3- (MD/TD each) | EXACT |
+| optical transmittance | (sigma-phi)^2 - (sigma-phi) | 90 | 90% (optical-grade PET film) | EXACT |
+| PET melting point | -- | -- | 260degreeC | n=6 match - (MISS) |
 
-**정직성**: PET 융점 260도C는 sigma*(J2-phi+phi)=260이라 억지로 맞출 수 있으나 수학적으로 무의미한 조합이므로 MISS 처리. (sigma-phi)^2-(sigma-phi)=90% 투과율은 광학등급 필름 기준이며, 일반 PET는 85~88%로 근사에 가까울 수 있음을 유의.
+**honesty**: PET melting point 260degreeC- sigma*(J2-phi+phi)=260- - - number - mathematics- meaninglessone articlesum- MISS -. (sigma-phi)^2-(sigma-phi)=90% transmittance- optical- film standard-, day- PET- 85~88%- approximation- - number -negative- -.
 
-**출처**: Daubeny RP, Bunn CW, Brown CJ, *Proc R Soc A* 226 (1954) 531; 코오롱인더스트리 광학필름 데이터시트; ASTM D882
+**-**: Daubeny RP, Bunn CW, Brown CJ, *Proc R Soc A* 226 (1954) 531; Kolon Industries optical film -hour-; ASTM D882
 
 ```python
 from sympy import factorint, divisor_sigma, totient, divisor_count
@@ -132,34 +132,34 @@ sigma = int(divisor_sigma(n, 1))
 phi = int(totient(n))
 tau = int(divisor_count(n))
 
-assert n == 6, "테레프탈산 벤젠 C6"
-assert tau == 4, "PET 산소 4개"
-assert sigma * n == 72, "PET Tg 72도C"
-assert n // phi == 3, "이축연신 3배"
-assert (sigma - phi)**2 - (sigma - phi) == 90, "광학 투과율 90%"
-# PET 융점 260C -> 자연스러운 n=6 수식 없음 -> MISS
-print(f"BT-1397-C: 5/6 EXACT (MISS 1건: 융점 260C 정합 불가)")
+assert n == 6, "- benzene C6"
+assert tau == 4, "PET oxygen 4"
+assert sigma * n == 72, "PET Tg 72degreeC"
+assert n // phi == 3, "biaxial stretch 3-"
+assert (sigma - phi)**2 - (sigma - phi) == 90, "optical transmittance 90%"
+# PET melting point 260C -> natural n=6 expression -negative -> MISS
+print(f"BT-1397-C: 5/6 EXACT (MISS 1item: melting point 260C match impossible)")
 ```
 
 ---
 
-## BT-1397-D: 타이어코드 가황 sigma^2=144도 + J2=24도 벨트 정리
+## BT-1397-D: tire cord vulcanization sigma^2=144degree + J2=24degree belt theorem
 
-**도메인**: materials/tire-cord
-**핵심**: 타이어 제조의 핵심 온도인 가황 온도가 sigma^2=144도C로 정합. 벨트코드 각도 J2=24도, 타이어 수명 n*10^4=6만km, 공기압 2^sopfr=32 PSI.
+**degree-**: materials/tire-cord
+**-**: tire -article- - temperature- vulcanization temperature- sigma^2=144degreeC- match. belt cord eachdegree J2=24degree, tire number- n*10^4=6-km, - 2^sopfr=32 PSI.
 
-| 항목 | 수식 | 예측값 | 실측값 | 일치 |
-|------|------|--------|--------|------|
-| 가황 온도 | sigma^2 | 144 | 144도C (표준 가황 온도) | EXACT |
-| 벨트코드 각도 | J2 | 24 | 24도 (스틸벨트 표준 배치각) | EXACT |
-| 타이어 수명 | n*10^4 | 60000 | 6만 km (승용차 교체 기준) | EXACT |
-| 공기압 기준 | 2^sopfr | 32 | 32 PSI (승용차 표준) | EXACT |
-| 편평비 대표값 | sigma*sopfr | 60 | 60 시리즈 (가장 보급된 편평비) | EXACT |
-| 타이어 직경 | -- | -- | ~660mm (225/60R16 외경) | n=6 정합 미발견 (MISS) |
+| - | expression | predictionvalue | measured value | match |
+|---|---|---|---|---|
+| vulcanization temperature | sigma^2 | 144 | 144degreeC (- vulcanization temperature) | EXACT |
+| belt cord eachdegree | J2 | 24 | 24degree (-belt - placementeach) | EXACT |
+| tire number- | n*10^4 | 60000 | 6- km (-difference - standard) | EXACT |
+| - standard | 2^sopfr | 32 | 32 PSI (-difference -) | EXACT |
+| -flatratio -value | sigma*sopfr | 60 | 60 hour- (-chapter dissemination- -flatratio) | EXACT |
+| tire -classic | -- | -- | ~660mm (225/60R16 -classic) | n=6 match - (MISS) |
 
-**정직성**: 타이어 외경은 림 크기와 편평비에 따라 연속적으로 변화하며, 특정 사이즈의 외경을 n=6 수식으로 맞추는 것은 체리피킹에 해당. MISS 처리. 한편 가황 온도 144=sigma^2는 정수 정합이나, 실제 산업 현장에서는 130~160도 범위에서 가황하므로 "표준값" 선정에 주관이 개입될 수 있음을 유의.
+**honesty**: tire -classic- - size- -flatratio- - yearwithin- -lower-, - between- -classic- n=6 expression- - - cherry-picking- relevant. MISS -. one- vulcanization temperature 144=sigma^2- integer match-, actual industrial floor-book- 130~160degree range-book vulcanizationlower- "-value" prior- main- - number -negative- -.
 
-**출처**: Goodyear C (1844) 가황 특허; 한국타이어 기술 백서; ASTM F2493; 코오롱인더스트리 타이어코드 제품 규격
+**-**: Goodyear C (1844) vulcanization -; Koreatire technology -book; ASTM F2493; Kolon Industries tire cord product standard
 
 ```python
 from sympy import factorint, divisor_sigma, totient, divisor_count, jordan_function
@@ -169,34 +169,34 @@ phi = int(totient(n))
 sopfr = sum(p*e for p, e in factorint(n).items())
 J2 = int(jordan_function(2, n))
 
-assert sigma**2 == 144, "가황 온도 144도C"
-assert J2 == 24, "벨트코드 각도 24도"
-assert n * 10**4 == 60000, "타이어 수명 6만 km"
-assert 2**sopfr == 32, "공기압 32 PSI"
-assert sigma * sopfr == 60, "편평비 60 시리즈"
-# 타이어 외경 ~660mm -> 자연스러운 n=6 수식 없음 -> MISS
-print(f"BT-1397-D: 5/6 EXACT (MISS 1건: 타이어 외경 정합 불가)")
+assert sigma**2 == 144, "vulcanization temperature 144degreeC"
+assert J2 == 24, "belt cord eachdegree 24degree"
+assert n * 10**4 == 60000, "tire number- 6- km"
+assert 2**sopfr == 32, "- 32 PSI"
+assert sigma * sopfr == 60, "-flatratio 60 hour-"
+# tire -classic ~660mm -> natural n=6 expression -negative -> MISS
+print(f"BT-1397-D: 5/6 EXACT (MISS 1item: tire -classic match impossible)")
 ```
 
 ---
 
-## BT-1397-E: 에폭시 3원환 n/phi + Tg=120=sigma*(sigma-phi) 정리
+## BT-1397-E: epoxy 3original- n/phi + Tg=120=sigma*(sigma-phi) theorem
 
-**도메인**: materials/epoxy
-**핵심**: 에폭시 수지의 에폭시기는 3원자 고리=n/phi, BPA에 벤젠 2고리=phi, 경화제 4대 계열=tau. Tg=sigma*(sigma-phi)=120도C, 탄소섬유 토우 래더가 n/sigma/J2=6K/12K/24K로 정렬.
+**degree-**: materials/epoxy
+**-**: epoxy resin- epoxy- 3atom -=n/phi, BPA- benzene 2-=phi, classic- 4- preceptten=tau. Tg=sigma*(sigma-phi)=120degreeC, carbon fiber tow - n/sigma/J2=6K/12K/24K- -.
 
-| 항목 | 수식 | 예측값 | 실측값 | 일치 |
-|------|------|--------|--------|------|
-| 에폭시 고리 원자 수 | n/phi | 3 | 3 (C-C-O 3원환) | EXACT |
-| BPA 벤젠 고리 수 | phi | 2 | 2 (비스페놀A 2고리) | EXACT |
-| 경화제 대분류 수 | tau | 4 | 4 (아민/무수물/페놀/티올) | EXACT |
-| Tg 기준값 | sigma*(sigma-phi) | 120 | 120도C (범용 에폭시 기준) | EXACT |
-| 탄소섬유 토우 중형 | sigma (단위: K) | 12K | 12K (산업 표준 중형 토우) | 근사 |
-| 에폭시 당량 (EEW) | -- | -- | 170~200 g/eq (DGEBA) | n=6 정합 미발견 (MISS) |
+| - | expression | predictionvalue | measured value | match |
+|---|---|---|---|---|
+| epoxy - atom count | n/phi | 3 | 3 (C-C-O 3original-) | EXACT |
+| BPA benzene - number | phi | 2 | 2 (ratio-phenolA 2-) | EXACT |
+| classic- -classification number | tau | 4 | 4 (-/-number-/phenol/-) | EXACT |
+| Tg benchmark value | sigma*(sigma-phi) | 120 | 120degreeC (- epoxy standard) | EXACT |
+| carbon fiber tow mid-size | sigma (unit: K) | 12K | 12K (industrial standard mid-size tow) | approximation |
+| epoxy equivalent weight (EEW) | -- | -- | 170~200 g/eq (DGEBA) | n=6 match - (MISS) |
 
-**정직성**: 에폭시 당량(EEW) 170~200 g/eq 범위는 n=6 산술로 표현 불가. 탄소섬유 토우 12K는 sigma=12 정합이나, 토우 크기는 제조사 관례이므로 "근사" 처리. 6K/12K/24K 래더의 n/sigma/J2 정합은 인상적이나 3K, 48K, 50K 등 비정합 토우 규격도 존재함을 명시.
+**honesty**: epoxy equivalent weight(EEW) 170~200 g/eq range- n=6 - -current impossible. carbon fiber tow 12K- sigma=12 match-, tow size- -article- convention- "approximation" -. 6K/12K/24K - n/sigma/J2 match- -upper- 3K, 48K, 50K - ratiomatch tow standarddegree -re-- -hour.
 
-**출처**: Lee H, Neville K, *Handbook of Epoxy Resins* (McGraw-Hill 1967); ASTM D1652 (에폭시 당량); Toray T700 탄소섬유 데이터시트
+**-**: Lee H, Neville K, *Handbook of Epoxy Resins* (McGraw-Hill 1967); ASTM D1652 (epoxy equivalent weight); Toray T700 carbon fiber -hour-
 
 ```python
 from sympy import factorint, divisor_sigma, totient, divisor_count, jordan_function
@@ -206,37 +206,37 @@ phi = int(totient(n))
 tau = int(divisor_count(n))
 J2 = int(jordan_function(2, n))
 
-assert n // phi == 3, "에폭시 3원환"
-assert phi == 2, "BPA 2고리"
-assert tau == 4, "경화제 4대 계열"
-assert sigma * (sigma - phi) == 120, "Tg 120도C"
-# 탄소섬유 12K=sigma -> 맞으나 관례적 규격이므로 근사
-# EEW 170~200 -> n=6 수식 없음 -> MISS
-print(f"BT-1397-E: 4/6 EXACT (근사 1건, MISS 1건)")
+assert n // phi == 3, "epoxy 3original-"
+assert phi == 2, "BPA 2-"
+assert tau == 4, "classic- 4- preceptten"
+assert sigma * (sigma - phi) == 120, "Tg 120degreeC"
+# carbon fiber 12K=sigma -> - convention- standard- approximation
+# EEW 170~200 -> n=6 expression -negative -> MISS
+print(f"BT-1397-E: 4/6 EXACT (approximation 1item, MISS 1item)")
 ```
 
 ---
 
-## 종합 통계
+## -sum -precept
 
-| 항목 | 값 |
-|------|----|
-| 총 도메인 수 | 5 |
-| 총 검증 항목 | 30 |
+| - | value |
+|---|---|
+| - degree- number | 5 |
+| - verification - | 30 |
 | EXACT | 23 |
-| 근사 | 2 |
+| approximation | 2 |
 | MISS | 5 |
-| EXACT 비율 | 76.7% (23/30) |
+| EXACT ratio- | 76.7% (23/30) |
 
-**축별 분포**: 전부 materials 축. n=6 소재 도메인 19개 중 5개가 이번에 BT 진입.
+**axis- minute-**: - materials axis. n=6 -re- degree- 19 in 5- -time- BT entry.
 
-**MISS 5건 요약** (정직성 기록):
-1. 나일론 6,6 융점 220도C -- sigma*(sigma+n)=216 근사하나 4도 차이
-2. 아라미드 인장강도 3.6 GPa -- 체리피킹 소지, 제조 조건별 편차 큼
-3. PET 융점 260도C -- 자연스러운 수식 없음
-4. 타이어 외경 ~660mm -- 사이즈 종속, 연속 변수
-5. 에폭시 당량 170~200 g/eq -- 범위 변수, 수식 없음
+**MISS 5item summary** (honesty record):
+1. nylon 6,6 melting point 220degreeC -- sigma*(sigma+n)=216 approximationlower- 4degree difference
+2. aramid -chapterstrength 3.6 GPa -- cherry-picking -, -article articleitem- -difference -
+3. PET melting point 260degreeC -- natural expression -negative
+4. tire -classic ~660mm -- between- -within, yearwithin -number
+5. epoxy equivalent weight 170~200 g/eq -- range -number, expression -negative
 
-**교차 참조**: BT-85(Carbon Z=6), BT-86(CN=6), BT-113(SOLID=sopfr), BT-1387(Huckel 방향족)
+**-difference truearticle**: BT-85(Carbon Z=6), BT-86(CN=6), BT-113(SOLID=sopfr), BT-1387(Huckel aromatic)
 
-**n=28 대조**: PPTA 반복단위 28원자(BT-1397-B)에서 sigma(28)=56, phi(28)=12, tau(28)=6이므로 sigma*phi=672 != n*tau=168. n=28은 완전수이지만 산술 항등식 sigma*phi=n*tau를 만족하지 않음. 28원자 정합은 n=6 체계의 파생값(J2+tau=28)이지 n=28 체계가 아님을 확인.
+**n=28 -article**: PPTA repeatunit 28atom(BT-1397-B)-book sigma(28)=56, phi(28)=12, tau(28)=6- sigma*phi=672 != n*tau=168. n=28- perfect number- - -equation sigma*phi=n*tau- satisfylower- -negative. 28atom match- n=6 system- -value(J2+tau=28)- n=28 system- - confirmation.
