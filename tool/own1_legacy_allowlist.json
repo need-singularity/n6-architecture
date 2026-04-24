@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "description": "own#1 doc-english-required \u2014 legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
+    "description": "own#1 doc-english-required — legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
-    "directive": "user 'hard go' \u2014 promote own#1 from SOFT log to HARD block",
-    "count": 534,
+    "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
+    "count": 510,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -27,8 +27,8 @@
       {
         "date": "2026-04-24",
         "action": "scope_expansion",
-        "directive": "user 'hard!!! \ubaa8\ub450 english only'",
-        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) \u2014 including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
+        "directive": "user 'hard!!! 모두 english only'",
+        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) — including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
       }
     ],
     "shrink_history": [
@@ -379,7 +379,6 @@
     "domains/space/space-engineering/space-engineering.md",
     "domains/space/space-systems/space-systems.md",
     "papers/M10star-21-unified-theorem-2026-04-15.md",
-    "papers/bernoulli-18-arxiv-stub-2026-04-15.md",
     "papers/consciousness-measurement-protocol-2026-04-15.md",
     "papers/consciousness-red-team-n6-failure-2026-04-15.md",
     "papers/embody-p10-1-l13-l14-unified-spec-2026-04-15.md",
@@ -395,7 +394,6 @@
     "papers/group-P/F5-journal-submission-format-2026-04-15.md",
     "papers/hexa-chip-6stage-unified.md",
     "papers/lemmas-A3-A4-conditional-2026-04-15.md",
-    "papers/monte-carlo-control-e-2026-04-22.md",
     "papers/moonshine-barrier-honest-report-2026-04-15.md",
     "papers/n6-66-techniques-integrated-paper.md",
     "papers/n6-acoustics-paper.md",
@@ -521,9 +519,6 @@
     "papers/n6-working-memory-paper.md",
     "papers/n6-writing-systems-paper.md",
     "papers/n=6-convergence-80-domains-2026-04-19.md",
-    "papers/pandoc_templates/_submission_top48_template.md",
-    "papers/pandoc_templates/build_report.md",
-    "papers/pandoc_templates/build_report_all.md",
     "reports/sessions/specs/2026-04-02-kstar-300s-steady-state-design.md",
     "reports/sessions/specs/2026-04-02-kstar-n6-tokamak-design.md",
     "reports/sessions/specs/2026-04-02-ultimate-fusion-powerplant-design.md",
