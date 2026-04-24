@@ -1,10 +1,10 @@
 {
   "_meta": {
     "description": "own#1 doc-english-required — legacy CJK-containing .md files grandfathered at HARD promotion (2026-04-24).",
-    "policy": "New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/) must be English-only (CJK density 0%). This list is FROZEN — additions require explicit maintainer sign-off. Long-term goal: shrink to zero via Korean-to-English migration.",
+    "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 1050,
+    "count": 1059,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -12,12 +12,24 @@
       "experiments/",
       "papers/",
       "bridge/",
-      "n6shared/"
+      "n6shared/",
+      "proposals/"
     ],
     "tool": "tool/own_doc_lint.py check_rule_1_doc_english()",
     "related_rules": [
       "own#5 OWN5_LEGACY_ALLOWLIST (pattern reuse)",
       "own#17 public-readme-english-only (root READMEs HARD already)"
+    ],
+    "scope_root_docs": [
+      "CONTRIBUTING.md"
+    ],
+    "history": [
+      {
+        "date": "2026-04-24",
+        "action": "scope_expansion",
+        "directive": "user 'hard!!! 모두 english only'",
+        "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) — including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
+      }
     ]
   },
   "allowlist": [
@@ -638,6 +650,15 @@
     "papers/pandoc_templates/_submission_top48_template.md",
     "papers/pandoc_templates/build_report.md",
     "papers/pandoc_templates/build_report_all.md",
+    "proposals/anthropic-fellows-research.md",
+    "proposals/kim-sangwook-quantum.md",
+    "proposals/kolon-materials-z6.md",
+    "proposals/kr-ai-grant-2026-strategic-matching-2026-04-24.md",
+    "proposals/nexus_drill_darwin_fallback_2026_04_23.md",
+    "proposals/own1-hard-english-only-translation-roadmap-2026-04-24.md",
+    "proposals/samsung-foundry-hexa-6stage.md",
+    "proposals/sod-youtube.md",
+    "proposals/yoo-hyunjun-architecture.md",
     "reports/E1_signal_soc_map_20260415.md",
     "reports/E2_signal_bt_autocorr_20260415.md",
     "reports/E6_signal_homology_20260415.md",

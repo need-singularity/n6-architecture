@@ -117,20 +117,26 @@ def _walk_md(root: Path, skip_dirs: set[str] | None = None) -> list[Path]:
 # own#1 doc-english-required — HARD block (promoted 2026-04-24 via 'hard go').
 #
 # Scope (matches .own own#1 decl): repo-root public docs + full decl path set
-# (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/).
+# (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/,
+# proposals/) + CONTRIBUTING.md.
 # Threshold: CJK density 0% — not even a single Korean/Japanese/Han character
 # in a new .md file under these paths. Matches own#17's standard for root
-# READMEs; now extended to the entire documented corpus.
+# READMEs; now extended project-wide to the documented corpus + proposals +
+# contributor docs (2026-04-24 'hard!!! 모두 english only' directive).
 #
 # Legacy files (>1k existing CJK-containing .md docs as of promotion date)
 # are grandfathered via OWN1_LEGACY_ALLOWLIST — a frozen sidecar JSON that
 # must be pruned (not grown) over time. Pattern reuses own#5 OWN5_LEGACY_ALLOWLIST
-# approach. The allowlist is FROZEN at 1050 entries — new CJK .md files under
-# own#1 decl scope will fail the HARD check and block merges.
+# approach. The allowlist is FROZEN and SHRINK-ONLY: existing entries may be
+# removed once the underlying file is translated, but no new grandfathers may
+# be added. New CJK .md files under own#1 decl scope will fail the HARD check
+# and block merges.
 CJK_RE = re.compile(r"[぀-ヿ㐀-䶿一-鿿가-힯]")
 
 # own#1 decl scope directories (relative to repo root). These are the
 # directories where .md files must be English-only going forward.
+# Scope expanded 2026-04-24 (user 'hard!!! 모두 english only' directive) —
+# proposals/ added so contributor proposals also fall under HARD English-only.
 OWN1_SCOPE_DIRS = (
     "domains",
     "theory",
@@ -139,27 +145,57 @@ OWN1_SCOPE_DIRS = (
     "papers",
     "bridge",
     "n6shared",
+    "proposals",
 )
-# Root-level public READMEs are owned by own#17 (public-readme-english-only),
-# which runs its own HARD audit via hexa-lang/tool/readme_english_audit.hexa.
-# We do NOT re-enforce them here to avoid double-jeopardy and to keep each
-# rule's scope crisp. own#1 = in-tree corpus under decl scope.
-OWN1_ROOT_DOCS: tuple[str, ...] = ()
+# Root-level docs that own#1 also enforces. Root README.md is governed by
+# own#17 (public-readme-english-only) and is intentionally excluded here to
+# avoid double-jeopardy. CONTRIBUTING.md is added 2026-04-24 per the
+# 'hard!!! 모두 english only' directive — contributor-facing root docs are
+# project scope, not just internal corpus.
+OWN1_ROOT_DOCS: tuple[str, ...] = ("CONTRIBUTING.md",)
 
 
 def _load_own1_allowlist() -> set[str]:
     """Load the frozen grandfather list of legacy CJK .md files.
 
     Sidecar: tool/own1_legacy_allowlist.json (generated 2026-04-24 from pre-scan
-    of 1050 CJK-containing .md files in own#1 decl scope). Missing file is
-    treated as an empty set — HARD check then flags everything, which is the
+    of CJK-containing .md files in own#1 decl scope). Missing file is treated
+    as an empty set — the HARD check then flags everything, which is the
     intended fail-loud behaviour if the allowlist is accidentally removed.
+
+    Policy verification (advisory, log-only — does not fail the lint):
+      * `_meta.policy` should mention FROZEN or SHRINK-ONLY. Anything else is a
+        sign the allowlist policy doc has been weakened — emit a warning.
+      * `_meta.count` should match the actual entry count. A mismatch suggests
+        an un-recorded mutation (likely an unsanctioned addition under the
+        shrink-only policy); warn but do not fail (operational flexibility —
+        the lint must keep running so that translation work can land).
+    The shrink-only policy is enforced socially / via PR review; these are
+    observability hooks, not gates.
     """
     if not OWN1_ALLOWLIST_PATH.is_file():
         return set()
     try:
         data = json.loads(OWN1_ALLOWLIST_PATH.read_text(encoding="utf-8"))
-        entries = data.get("allowlist", [])
+        entries = data.get("allowlist", []) if isinstance(data, dict) else []
+        meta = data.get("_meta", {}) if isinstance(data, dict) else {}
+        # Policy presence check — log-only.
+        policy = str(meta.get("policy", "")).upper()
+        if "FROZEN" not in policy and "SHRINK-ONLY" not in policy and "SHRINK_ONLY" not in policy:
+            print(
+                "[own_doc_lint] WARN own1 allowlist _meta.policy missing FROZEN/SHRINK-ONLY marker — "
+                "review tool/own1_legacy_allowlist.json",
+                file=sys.stderr,
+            )
+        # Count parity check — log-only.
+        declared = meta.get("count")
+        actual = len(entries) if isinstance(entries, list) else 0
+        if isinstance(declared, int) and declared != actual:
+            print(
+                f"[own_doc_lint] WARN own1 allowlist _meta.count={declared} but actual entries={actual} — "
+                f"possible un-recorded mutation (shrink-only policy)",
+                file=sys.stderr,
+            )
         return {str(p) for p in entries if isinstance(p, str) and p.strip()}
     except Exception:
         return set()

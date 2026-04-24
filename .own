@@ -38,33 +38,41 @@
 
 own 1 live "doc-english-required — English documentation required (HARD)"
   slug doc-english-required
-  decl .md documents under (domains/, engine/, theory/, theory/*, reports/, experiments/, papers/, bridge/, n6shared/, each chip-* domain) + source comments + commit messages tool/own_doc_lint.py tool/own1_legacy_allowlist.json
-  scope .md documents under domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/ — English required (HARD block for new files; 1050 legacy files allowlisted via tool/own1_legacy_allowlist.json as of 2026-04-24). Root READMEs governed by own#17 separately.
+  decl .md documents under (domains/, engine/, theory/, theory/*, reports/, experiments/, papers/, bridge/, n6shared/, proposals/, each chip-* domain) + CONTRIBUTING.md + source comments + commit messages tool/own_doc_lint.py tool/own1_legacy_allowlist.json
+  scope HARD block — project-wide English-only for .md files; allowlist is shrink-only. Covers domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/ + CONTRIBUTING.md (1059 legacy files allowlisted via tool/own1_legacy_allowlist.json as of 2026-04-24). Root README.md governed by own#17 separately.
   status live
   since 2026-04-21
-  why n6-architecture language policy — documents, comments, commits must be English primary. arXiv compatibility + international contribution priority. Promoted from SOFT log to HARD block on 2026-04-24 via user 'hard go' directive; legacy CJK .md files grandfathered and frozen in OWN1_LEGACY_ALLOWLIST sidecar.
-  note hexa-lang /.raw has no equivalent — project-specific. Legacy allowlist is a FROZEN grandfather list; new CJK .md files under decl scope fail the HARD check.
+  why n6-architecture language policy — documents, comments, commits must be English primary. arXiv compatibility + international contribution priority. Promoted from SOFT log to HARD block on 2026-04-24 via user 'hard go' directive; scope re-extended project-wide on 2026-04-24 via user 'hard!!! 모두 english only' directive. Allowlist entries may be removed upon translation but never added. Any new .md must be English. Legacy CJK .md files grandfathered and frozen in OWN1_LEGACY_ALLOWLIST sidecar.
+  note hexa-lang /.raw has no equivalent — project-specific. Legacy allowlist is a FROZEN, shrink-only grandfather list; no new grandfather entries. New CJK .md files under decl scope fail the HARD check.
   verify python3 tool/own_doc_lint.py --rule 1
   cron on-commit
   on_fail block
   label own#1 doc-english HARD gate
 
-own 2 live "n6-master-identity — σ·φ = n·τ = J₂ = 24 준수"
+own 2 live "n6-master-identity — σ·φ = n·τ = J₂ = 24 준수 (HARD)"
   slug n6-master-identity
-  decl domains/compute/chip-process/CLAUDE.md domains/compute/chip-packaging/CLAUDE.md domains/compute/chip-materials/CLAUDE.md domains/compute/chip-yield/CLAUDE.md
-  scope chip-* 도메인 설계/검증 — n=6 마스터 항등식 위반 금지 (σ(6)=12, φ(6)=2, τ(6)=4, J₂=24)
+  decl domains/compute/chip-process/ domains/compute/chip-packaging/ domains/compute/chip-materials/ domains/compute/chip-yield/ tool/own_doc_lint.py
+  scope HARD block — chip-* 도메인 + theory/proofs/theorem-r* 본문에서 n=6 마스터 항등식 위반 금지 (σ(6)=12, φ(6)=2, τ(6)=4, J₂=24).
   status live
   since 2026-04-21
-  why n6-architecture 전체 도메인은 n=6 유일성 정리 (σ(n)·φ(n) = n·τ(n) iff n=6) 에서 파생. chip-* CLAUDE.md 4개에서 절대규칙으로 명시.
+  why n6-architecture 전체 도메인은 n=6 유일성 정리 (σ(n)·φ(n) = n·τ(n) iff n=6) 에서 파생. chip-* 도메인은 governance policy 상 본 항등식을 절대규칙으로 적용. Promoted to HARD block 2026-04-24 (user 'hard!!!' directive).
   note theory/proofs/theorem-r1-uniqueness.md 가 본 항등식의 증명 SSOT.
+  verify python3 tool/own_doc_lint.py --rule 2
+  cron on-commit
+  on_fail block
+  label own#2 master-identity HARD gate
 
-own 3 live "one-doc-per-domain — 도메인당 문서 1개"
+own 3 live "one-doc-per-domain — 도메인당 문서 1개 (HARD)"
   slug one-doc-per-domain
-  decl domains/CLAUDE.md domains/compute/chip-process/CLAUDE.md domains/compute/chip-packaging/CLAUDE.md domains/compute/chip-materials/CLAUDE.md domains/compute/chip-yield/CLAUDE.md
-  scope domains/<axis>/<name>/ 아래 <name>.md + CLAUDE.md 외 본문 문서 금지. 통합 완료 선언.
+  decl domains/ tool/own_doc_lint.py
+  scope HARD block — domains/<axis>/<name>/ 아래 <name>.md (canonical body) 외 추가 본문 문서 금지. 통합 완료 선언.
   status live
   since 2026-04-21
-  why 295 도메인 문서 sprawl 방지 — 도메인당 1 본문 + 1 CLAUDE.md + 검증코드 .md 임베드.
+  why 295 도메인 문서 sprawl 방지 — 도메인당 단일 canonical body + 검증코드 .md 임베드. Promoted to HARD block 2026-04-24.
+  verify python3 tool/own_doc_lint.py --rule 3
+  cron on-commit
+  on_fail block
+  label own#3 one-doc-per-domain HARD gate
 
 own 4 live "domain-15-section-template — 15섹션 템플릿 준수"
   slug domain-15-section-template
