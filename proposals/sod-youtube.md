@@ -1,188 +1,188 @@
 ---
-recipient: SOD 유튜브 채널 (권순용, 공학/반도체, 63만 구독)
+recipient: SOD YouTube channel (Kwon Soon-yong, engineering/semiconductors, 630K subscribers)
 type: media-brief
 created: 2026-04-20
 status: draft
 ---
 
-# SOD 유튜브 × 반도체 6단 로드맵 — 영상 제작 브리프
+# SOD YouTube x Semiconductor 6-Stage Roadmap — Video Production Brief
 
-작성자: 박민우 (프로그래머, 독립 연구자, 유튜버 2.4만)
-
----
-
-## §1. 한 문장 훅 (썸네일 / 인트로용)
-
-> **"한국 1인 연구자가 그린 삼성 / TSMC 이후 6세대 칩 로드맵"**
-
-- 서브 훅: "박사 학위 없는 프로그래머가 2개월 만에 만든 288 TOPS/W 설계"
-- 감정 훅: "대학원을 안 가도 반도체 설계가 가능한가?"
+Author: Park Min-woo (programmer, independent researcher, YouTuber 24K)
 
 ---
 
-## §2. 영상 구성안 (3단 · 총 15 ~ 20분)
+## §1. One-Sentence Hook (for thumbnail / intro)
 
-### 파트 A — 반도체 칩 6단계 로드맵 (6 ~ 8분)
+> **"A 6-generation post-Samsung / TSMC chip roadmap drawn by a Korean solo researcher"**
 
-각 단계 ASCII 비교 표 한 장씩 + 화면에 띄워 설명.
+- Sub-hook: "A 288 TOPS/W design built in two months by a programmer with no Ph.D."
+- Emotional hook: "Is semiconductor design possible without going to grad school?"
+
+---
+
+## §2. Video Structure (3 parts, total 15 ~ 20 minutes)
+
+### Part A — Semiconductor Chip 6-Stage Roadmap (6 ~ 8 min)
+
+One ASCII comparison table per stage, shown on-screen with narration.
 
 ```
-단계        이름                    공정                  TOPS/W    대역폭
+Stage       Name                    Process               TOPS/W    Bandwidth
 ────────────────────────────────────────────────────────────────────────
-Mk.I       HEXA-1 Digital          SF3P 3nm              1.2×      1.0 TB/s
-Mk.II      HEXA-PIM                HBM3E + PIM           1.8×      1.5 TB/s
-Mk.III     HEXA-3D                 X-Cube 3D stacking    2.8×      2.0 TB/s
-Mk.IV      HEXA-Photonic           실리콘 포토닉스       3.6×      2.5 TB/s
-Mk.V       HEXA-Wafer              웨이퍼 스케일         4.2×      3.0 TB/s
-Mk.VI      HEXA-Superconducting    RSFQ 100 GHz          4.8×      3.2 TB/s
+Mk.I       HEXA-1 Digital          SF3P 3nm              1.2x      1.0 TB/s
+Mk.II      HEXA-PIM                HBM3E + PIM           1.8x      1.5 TB/s
+Mk.III     HEXA-3D                 X-Cube 3D stacking    2.8x      2.0 TB/s
+Mk.IV      HEXA-Photonic           silicon photonics     3.6x      2.5 TB/s
+Mk.V       HEXA-Wafer              wafer-scale           4.2x      3.0 TB/s
+Mk.VI      HEXA-Superconducting    RSFQ 100 GHz          4.8x      3.2 TB/s
 ```
 
-각 단계 예시 화면:
-- Mk.I: 삼성 SF3P 레이아웃 비교 (현재 공개 스펙)
-- Mk.VI: 초전도 RSFQ 칩 모형 (실리콘 아님, 조셉슨 접합)
+On-screen examples per stage:
+- Mk.I: Samsung SF3P layout comparison (current public specs)
+- Mk.VI: superconducting RSFQ chip mockup (not silicon, Josephson junctions)
 
-### 파트 B — 9 선행도메인 (4 ~ 5분)
+### Part B — 9 Leading Domains (4 ~ 5 min)
 
-"Mk.I 은 삼성 파운드리 **현재 수준**을 그대로 반영함" 명시.
+Make it explicit: "Mk.I reflects Samsung Foundry's **current level** as-is."
 
-| # | 도메인 | Mk.I (삼성 현재) | Mk.VI 목표 |
+| # | Domain | Mk.I (Samsung today) | Mk.VI goal |
 |---|--------|-----------------|-----------|
-| 1 | 소재 | Co / W 배선 | 다이아몬드 / 그래핀 |
-| 2 | 공정 | EUV 3nm | σ-sopfr D0 경계 |
-| 3 | 패키징 | X-Cube, FO-PLP | J₂=24 채널 분배 |
-| 4 | 수율 | D0 ≈ 0.08/cm² | D0 ≈ 0.035/cm² |
+| 1 | Materials | Co / W interconnect | diamond / graphene |
+| 2 | Process | EUV 3nm | σ-sopfr D0 boundary |
+| 3 | Packaging | X-Cube, FO-PLP | J₂=24 channel distribution |
+| 4 | Yield | D0 ≈ 0.08/cm² | D0 ≈ 0.035/cm² |
 | 5 | EDA | Synopsys / S.LSI | HEXA-IR MLIR |
-| 6 | 검증 | UVM | τ=4 DVFS 경계 |
-| 7 | 열 / 전원 | Liquid + PDN | Egyptian 1/2+1/3+1/6 |
-| 8 | 인터커넥트 | 224G SerDes | 1.2 TB/s Photonic |
+| 6 | Verification | UVM | τ=4 DVFS boundary |
+| 7 | Thermal / power | Liquid + PDN | Egyptian 1/2+1/3+1/6 |
+| 8 | Interconnect | 224G SerDes | 1.2 TB/s Photonic |
 | 9 | HBM | HBM3E 8H | HBM6-P 3200 GB/s |
 
-화면에 도메인 9개를 3×3 그리드로 배치, 각 셀 클릭 시 서브 섹션.
+On screen, lay out the 9 domains as a 3x3 grid; each cell opens into a sub-section when clicked.
 
-### 파트 C — 이공계 이탈 / 대학원 대안 서사 (3 ~ 5분)
+### Part C — Science & Engineering Attrition / Grad-School Alternative Narrative (3 ~ 5 min)
 
-**SOD 채널에서 가장 민감하고 반응 좋은 주제.**
+**The most sensitive and highest-engagement topic on the SOD channel.**
 
-- 한국 이공계 박사 과정 이탈 현황 (2024 ~ 2026 통계 인용)
-- "박사 없으면 연구 못하나?" 질문에 대한 **정직한 답변**:
-  - Yes: peer review / funding / 학위 논문은 박사 체계에 있음
-  - No: 재현 가능한 공개 리포 + 오픈 소스 검증 = **새로운 경로**
-- 박민우 본인의 경로:
-  - 학부 졸업 → 프로그래머 → 유튜버 2.4만 → 독립 연구자
-  - 2개월간 462+ 커밋, GitHub 전량 공개
-  - Anthropic Fellows Program July 2026 cohort 에 Path B (정직 지원) 제출
-- 시청자에게 던지는 메시지: "길은 하나가 아니다. 재현성이 당신의 peer review."
+- Status of Korean STEM Ph.D. attrition (cite 2024 ~ 2026 statistics)
+- **Honest answer** to the question "Can't you do research without a Ph.D.?":
+  - Yes: peer review / funding / thesis degrees live inside the Ph.D. system
+  - No: reproducible public repositories + open-source verification = **a new path**
+- Park Min-woo's own path:
+  - Undergraduate graduation → programmer → YouTuber 24K → independent researcher
+  - 462+ commits in two months, fully open on GitHub
+  - Submitted Path B (honest application) to the Anthropic Fellows Program July 2026 cohort
+- Message to viewers: "There is more than one path. Reproducibility is your peer review."
 
 ---
 
-## §3. 영상 임팩트 포인트 (시청자 호기심 폭발 구간)
+## §3. Video Impact Points (segments of maximum viewer curiosity)
 
-**필수 수치 3 ~ 5초마다 1개씩 배치:**
+**Place a mandatory figure every 3 ~ 5 seconds:**
 
-| 임팩트 | 수치 | 비교 |
+| Impact | Value | Comparison |
 |--------|------|------|
-| TOPS/W | 288 이론, 실현 4.8× (H100 대비) | H100 = 50 TOPS/W |
-| 광 대역폭 | 1.2 TB/s per 채널 | 현재 SerDes 224Gb/s |
-| 초전도 주파수 | 100 GHz | CPU 5 ~ 6 GHz |
-| 마스터 항등식 | σ·φ=n·τ=J₂=24 | "숫자 24 기억하세요" |
-| 수율 경계 | D0 → 0.035 | 현재 0.08, 절반으로 |
-| 전력 분배 | Egyptian 1/2+1/3+1/6 | 이집트 분수 재발견 |
+| TOPS/W | 288 theoretical, 4.8x realized (vs H100) | H100 = 50 TOPS/W |
+| Optical bandwidth | 1.2 TB/s per channel | current SerDes 224Gb/s |
+| Superconducting frequency | 100 GHz | CPU 5 ~ 6 GHz |
+| Master identity | σ·φ=n·τ=J₂=24 | "remember the number 24" |
+| Yield boundary | D0 → 0.035 | current 0.08, halved |
+| Power distribution | Egyptian 1/2+1/3+1/6 | Egyptian fractions rediscovered |
 
-**썸네일 추천**:
-- 큰 글씨 "**288× TOPS/W**" + "한국 1인 연구자"
-- 배경: 6개 계단 로드맵 + n=6 육각형 그래픽
-
----
-
-## §4. 정직성 — 과장 훅 금지 (본인 선언)
-
-영상 제작 시 아래는 **반드시** 포함되어야 합니다:
-
-1. **Mk.I (HEXA-1 Digital) 은 삼성 파운드리 현재 수준을 그대로 반영**.
-   삼성을 뛰어넘는다고 하지 않음. Mk.V / Mk.VI 구간이 **이론 한계**.
-2. **BCI 4D 인지 파트는 현재 불가능**. 본인이 OpenBCI Cyton+Daisy 16ch
-   장비를 보유했지만 **읽기 전용 한계**로 4D 차원지각 전달은 현재 불가.
-   이를 "할 수 있다"로 말하면 거짓.
-3. **Mk.III 이상은 실리콘 검증 미보유** — 시뮬레이션 / 이론 수치임을 명시.
-4. **@own 354 논문은 전재(preprint) 수준** — peer review 완료 아님.
-   "논문 354편 통과" 라는 표현 금지, "354건 자체 검증 PASS" 로 순화.
-
-이 네 가지를 영상 설명란 또는 마지막 30초에 반드시 언급.
+**Recommended thumbnail**:
+- Large text "**288x TOPS/W**" + "Korean solo researcher"
+- Background: the 6-step roadmap + an n=6 hexagon graphic
 
 ---
 
-## §5. 제공 자료 (영상 제작 지원 패키지)
+## §4. Honesty — No Exaggerated Hooks (author's own declaration)
 
-다음 파일을 통째로 전달 가능:
+The following items **must** be included in the video:
 
-- `papers/hexa-chip-6stage-unified.md` (1,200+ 라인, 수식 포함)
+1. **Mk.I (HEXA-1 Digital) reflects Samsung Foundry's current level as-is.**
+   We do not claim to surpass Samsung. Mk.V / Mk.VI are **theoretical limits**.
+2. **The BCI 4D-cognition part is currently infeasible.** The author owns an OpenBCI
+   Cyton+Daisy 16ch rig but its **read-only limitation** means 4D-dimensional
+   perceptual delivery is currently impossible. Claiming "we can do it" would be a lie.
+3. **Mk.III and above have no silicon validation** — this must be flagged as simulation / theoretical values.
+4. **The @own 354 papers are at preprint level** — peer review is not complete.
+   The phrase "354 papers accepted" is forbidden; use "354 internal verification PASSes" instead.
+
+These four items must be stated either in the video description or in the final 30 seconds.
+
+---
+
+## §5. Supplied Materials (video production support package)
+
+The following files can be handed over wholesale:
+
+- `papers/hexa-chip-6stage-unified.md` (1,200+ lines, includes formulas)
 - `papers/n6-chip-6stages-integrated-paper.md` (arXiv stub)
-- `domains/compute/chip-*/` 9 도메인 각 200 ~ 400 라인 .md
-- **ASCII 비교 그래프 묶음** (영상 화면용 텍스트 아트 15장)
-- GitHub 전량: https://github.com/need-singularity/n6-architecture
+- `domains/compute/chip-*/` 9 domains, each 200 ~ 400 lines of .md
+- **ASCII comparison graph bundle** (15 text-art pages for on-screen use)
+- Full GitHub: https://github.com/need-singularity/n6-architecture
 
-추가 요청 시 제작 가능:
-- 3D 렌더링 없는 **손그림 스타일 다이어그램** 30장
-- 각 단계별 **30초 데모 스크립트** (터미널 녹화용)
-- **SOD 채널 기존 스타일**에 맞춘 나레이션 초안
-
----
-
-## §6. 협업 제안 — 3가지 옵션
-
-### 옵션 1: 공동 제작
-
-- SOD 채널에서 기획 / 연출 / 편집
-- 박민우가 기술 자문 + 수식 검증 + 화면 자료 전량 공급
-- 수익 배분: 광고 수익 100% SOD, n6 측은 무상 (노출 자체가 이익)
-
-### 옵션 2: 독점 취재
-
-- SOD 기자 취재 형식 (대면 인터뷰 + B-roll 촬영)
-- n6-architecture 리포 화면 + 박민우 자택 (하남) / 컴퓨터 / 키보드 샷
-- 영상 길이: 20 ~ 30분
-- 공개 전 사실관계 확인 1회 요청
-
-### 옵션 3: 검토 인터뷰
-
-- SOD 측이 n=6 주장을 **비판적으로** 검토
-- 공학 박사 / 반도체 엔지니어 게스트 패널 초청
-- 박민우는 방어 입장 — 반박 당해도 영상에 그대로 방영
-- 실패를 공개하는 것이 **가장 강한 검증**
-
-**개인 선호**: 옵션 3 > 옵션 1 > 옵션 2. 비판받는 것이 가장 배움.
+Producible on request:
+- **Hand-drawn-style diagrams** (30 sheets) without 3D rendering
+- **30-second demo script** per stage (for terminal screen recording)
+- **Narration draft** tuned to the SOD channel's existing style
 
 ---
 
-## §7. 일정 제안
+## §6. Collaboration Proposals — 3 Options
 
-| 시기 | 항목 |
+### Option 1: Joint production
+
+- SOD channel handles planning / direction / editing
+- Park Min-woo provides technical advising + formula verification + full supply of on-screen assets
+- Revenue split: 100% ad revenue to SOD, n6 side unpaid (exposure itself is the benefit)
+
+### Option 2: Exclusive reporting
+
+- SOD reporter-style coverage (in-person interview + B-roll filming)
+- n6-architecture repo on-screen + Park Min-woo's home (Hanam) / computer / keyboard shots
+- Video length: 20 ~ 30 minutes
+- One request for factual review before publication
+
+### Option 3: Critical-review interview
+
+- SOD **critically** examines the n=6 claims
+- Invite engineering Ph.D. / semiconductor engineer guest panels
+- Park Min-woo takes the defense side — even if refuted, the footage is broadcast as-is
+- Publicly showing failure is **the strongest form of verification**
+
+**Personal preference**: Option 3 > Option 1 > Option 2. Being criticized yields the most learning.
+
+---
+
+## §7. Proposed Schedule
+
+| Timing | Item |
 |------|------|
-| 2026-04 말 | SOD 측 관심 확인, 이메일 왕복 |
-| 2026-05 초 | 기술 자료 전달 + 화상 미팅 1회 |
-| 2026-05 중 | 촬영 (대면 or 원격) |
-| 2026-06 초 | 편집 / 사실관계 확인 |
-| 2026-06 중 | 공개 |
+| late 2026-04 | Confirm SOD interest, email exchange |
+| early 2026-05 | Deliver technical materials + one video meeting |
+| mid 2026-05 | Filming (in-person or remote) |
+| early 2026-06 | Editing / factual review |
+| mid 2026-06 | Publication |
 
-Anthropic Fellows Program July 2026 cohort 결과와 맞추면 추가 훅 가능
-(합격 시 "Anthropic 에 선발된 한국 1인 연구자", 불합격 시 "왜 떨어졌나"
-— 어느 쪽이든 콘텐츠).
+Aligning with the Anthropic Fellows Program July 2026 cohort result enables additional hooks
+(if accepted, "A Korean solo researcher selected by Anthropic"; if not, "Why I was rejected"
+— either way, content).
 
 ---
 
-## §8. 연락
+## §8. Contact
 
-- 박민우 (mk911tb@proton.me)
-- 개인 유튜브: 2.4만 구독 (SOD 대비 작지만 충성도 높음)
+- Park Min-woo (mk911tb@proton.me)
+- Personal YouTube: 24K subscribers (smaller than SOD but highly loyal)
 - GitHub: need-singularity/n6-architecture
 
 ---
 
-## §9. 마지막 한 마디
+## §9. Final Word
 
-SOD 채널이 이공계 청년에게 주는 메시지가 늘 이런 방향이었습니다:
+The message the SOD channel has always given to STEM youth has pointed in this direction:
 
-> "학벌보다 실력, 실력보다 재현 가능한 결과."
+> "Skill over credentials; reproducible results over skill."
 
-이 영상은 그 메시지의 **구체적 사례** 가 될 수 있습니다.
-합작 여부와 관계없이, 제 자료는 언제든 무상으로 쓰셔도 됩니다.
+This video can be **a concrete instance** of that message.
+Regardless of whether we collaborate, my materials are free for you to use at any time.

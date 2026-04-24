@@ -10,7 +10,7 @@ promote_cross_repo` (n6a-20260422-004 convention, priority_floor=95).
 ```
 $ ~/.hx/bin/nexus drill --help
 hexa resolver: ⚠ heavy-compute (...run.hexa drill) remote dispatch failed (exit 64)
-              — Mac 로컬 실행 시 stage0 SIGKILL 위험 (Gatekeeper + 4GB RSS cap)
+              — local Mac execution risks stage0 SIGKILL (Gatekeeper + 4GB RSS cap)
 NEXUS_REMOTE_DOWNGRADE {"heavy_compute":true,"cmd":"drill","hosts_tried":[],
   "reason":"remote_unavailable","fallback":"abort"}
 ```
@@ -29,7 +29,7 @@ $ HEXA_ALLOW_LOCAL_FALLBACK=1 ~/.hx/bin/nexus drill --help
 NEXUS_REMOTE_DOWNGRADE {"heavy_compute":true,"cmd":"drill","hosts_tried":[],
   "reason":"remote_unavailable","fallback":"local"}
 hexa resolver: remote dispatch returned 64, running locally
-nexus drill: --seed 필수 — 비어있음. 예: nexus drill --seed "P=NP barrier"
+nexus drill: --seed required — empty. Example: nexus drill --seed "P=NP barrier"
 ```
 
 CLI is now responsive; real runs still need to be careful about seed
