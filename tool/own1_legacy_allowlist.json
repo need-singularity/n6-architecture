@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 1059,
+    "count": 1049,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -30,13 +30,17 @@
         "directive": "user 'hard!!! 모두 english only'",
         "details": "Added proposals/ to OWN1_SCOPE_DIRS and CONTRIBUTING.md to OWN1_ROOT_DOCS. 9 CJK-containing proposals/*.md grandfathered into the allowlist (1050 -> 1059) — including the own1-hard-english-only-translation-roadmap-2026-04-24.md proposal co-landed by the parallel roadmap agent. Allowlist policy hardened to FROZEN, SHRINK-ONLY (no new grandfather)."
       }
+    ],
+    "shrink_history": [
+      {
+        "date": "2026-04-24",
+        "removed": 10,
+        "scope": "bridge + n6shared",
+        "batch": "phase-0"
+      }
     ]
   },
   "allowlist": [
-    "bridge/calc_tools_registry.md",
-    "bridge/calculator-registry.md",
-    "bridge/ecosystem_9projects_report.md",
-    "bridge/origins/ready-absorber/sedi_brainwire_bridge.md",
     "domains/cognitive/ai-adversarial/ai-adversarial.md",
     "domains/cognitive/ai-agent-serving/ai-agent-serving.md",
     "domains/cognitive/ai-alignment/ai-alignment.md",
@@ -479,12 +483,6 @@
     "experiments/paper/p4_bipartite_audit_top10.md",
     "experiments/paper_ranking_p3_top48.md",
     "experiments/red_team_cycle1.md",
-    "n6shared/GRADE_RUBRIC_1_TO_10PLUS.md",
-    "n6shared/logs/absorbed/README.md",
-    "n6shared/specs/atlas.signals.n6.spec.md",
-    "n6shared/specs/atlas.signals.n6.spec.v0.3-draft.md",
-    "n6shared/tools/atlas-auto-promote-design-2026-04-15.md",
-    "n6shared/tools/atlas-promotion-runbook-2026-04-15.md",
     "papers/M10star-21-unified-theorem-2026-04-15.md",
     "papers/bernoulli-18-arxiv-stub-2026-04-15.md",
     "papers/consciousness-measurement-protocol-2026-04-15.md",
