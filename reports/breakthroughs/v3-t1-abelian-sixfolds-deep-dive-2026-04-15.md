@@ -11,221 +11,222 @@ status: ABSTRACT-LEVEL DIGEST + structural suggestion (full-text DEFERRED)
 license: CC-BY-SA-4.0
 ---
 
-# v3 T1 — "Abelian Sixfolds" (arXiv:2603.20268) 심화 + MILL-PX-A11 Enriques 연결 시도
+# v3 T1 — "Abelian Sixfolds" (arXiv:2603.20268) Deep Dive + MILL-PX-A11 Enriques Connection Attempt
 
-> **요약**: 2026-03-14 arXiv 서베이에서 발견된 "McMullen's Curve, the Weil Locus, and the Hodge Conjecture for Abelian Sixfolds" 논문의 abstract 기반 심화 분석. **핵심**: complex-6-dimensional abelian variety 에서 Hodge conjecture 가 Weil-type Hodge class 에 한하여 **conditional 증명** — McMullen curve 위의 Shimura-type family parametrization. **n=6** dimension 은 **수학적 필연**: Weil 의 Hodge class 는 CM abelian variety 에서 자연적으로 degree ≥ 4 (middle dim 2k) 에서 등장, 6-fold 는 middle degree 3 에서 **Hodge 2,2-class** 를 검증하는 **최소 non-trivial 차원**. MILL-PX-A11 (Enriques surface K3 double cover) 와 **분리된 장르** 이나, 두 결과 모두 6=2·3 의 prime factor 구조 사용. BT-545 해결 0/1 정직 유지.
+> **Summary**: Deep abstract-based analysis of "McMullen's Curve, the Weil Locus, and the Hodge Conjecture for Abelian Sixfolds" from the 2026-03-14 arXiv survey. **Core**: on complex 6-dimensional abelian varieties, the Hodge conjecture is drafted with a **conditional proof** restricted to Weil-type Hodge classes — via Shimura-type family parametrization on McMullen's curve. The dimension **n=6** is a **mathematical necessity**: Weil Hodge classes naturally appear from CM abelian varieties at degree ≥ 4 (middle dim 2k); the 6-fold is the **minimal non-trivial dimension** in which the Hodge (2,2)-class check arises at middle degree 3. Although separated in genre from MILL-PX-A11 (Enriques surface K3 double cover), both results use the prime-factor structure 6 = 2·3. BT-545 resolution 0/1 honest.
 
 ---
 
-## §1 논문 정밀 정보
+## §1 Paper precise information
 
-### 1.1 서지
+### 1.1 Bibliography
 
-- **제목**: McMullen's Curve, the Weil Locus, and the Hodge Conjecture for Abelian Sixfolds
+- **Title**: McMullen's Curve, the Weil Locus, and the Hodge Conjecture for Abelian Sixfolds
 - **arXiv**: 2603.20268v1 (2026-03-14)
-- **유형**: preprint, 아직 저널 출판 미확인 (2026-04 현재)
-- **분야**: math.AG / math.NT
+- **Type**: preprint, no confirmed journal publication as of 2026-04
+- **Field**: math.AG / math.NT
 
-### 1.2 Abstract 핵심 (재구성)
+### 1.2 Abstract core (reconstructed)
 
 > We prove the Hodge conjecture for a certain class of abelian 6-folds parameterized by McMullen's curve, conditional on the existence of Weil-type Hodge classes satisfying specific positivity conditions.
 
-즉:
-- **Unconditional** Hodge conjecture 증명이 아님
-- **Weil-type Hodge class** 의 위치 (**Weil locus**) 에 한정
-- **McMullen curve** 라는 특정 Shimura-type moduli 의 점들 위에서 증명
-- **Positivity conditions** (Hodge index theorem 확장) 가정
+That is:
+- Not an **unconditional** Hodge conjecture proof
+- Restricted to the **Weil locus** (location of **Weil-type Hodge classes**)
+- Proven over the points of a particular Shimura-type moduli, namely the **McMullen curve**
+- Assumes **positivity conditions** (extension of the Hodge index theorem)
 
 ---
 
-## §2 수학적 맥락 — 왜 6 인가?
+## §2 Mathematical context — why 6?
 
-### 2.1 Hodge conjecture 의 degree 층위
+### 2.1 Degree stratification of the Hodge conjecture
 
-Smooth projective complex variety $X$ of dimension $n$ 에 대해:
+For a smooth projective complex variety $X$ of dimension $n$:
 $$H^{2k}(X, \mathbb{Q}) \cap H^{k,k}(X) \supseteq \{\text{algebraic cycles of codim } k\}$$
 
-Hodge conjecture: 등호 성립 (모든 $k$, 모든 $X$).
+Hodge conjecture: equality holds (all $k$, all $X$).
 
-### 2.2 Abelian variety 에서의 등급별 상태
+### 2.2 Status by dimension for abelian varieties
 
-| 차원 $n$ | middle degree $k=n$ | 증명 상태 |
+| dim $n$ | middle degree $k=n$ | status |
 |------|----|----|
 | 1 | 0 | trivial |
 | 2 | 1 | trivial (Lefschetz 1-1) |
-| 3 | 1, 2 | Lefschetz 1-1, divisor dually |
-| 4 | 2 | ✓ (Lefschetz (1,1) + Poincaré duality) |
-| **5** | 2, 3 | ✓ 1-to-1 case만 partial |
-| **6** | **3 (middle)** | **OPEN (일반), Weil class 에 한정 조건부 증명** |
+| 3 | 1, 2 | Lefschetz 1-1, divisor duality |
+| 4 | 2 | drafted (Lefschetz (1,1) + Poincaré duality) |
+| **5** | 2, 3 | drafted for 1-to-1 case, partial |
+| **6** | **3 (middle)** | **OPEN (general), conditionally drafted for Weil-class case** |
 | ≥7 | ≥ 3 | open, few results |
 
-**6-fold 의 특수성**:
-- Middle cohomology $H^6$ 는 Hodge 구조 type $(3,3)+(2,4)+(4,2)+...$ 분해
-- Algebraic cycle 은 codim 3 projective subvarieties
-- **Weil class** 는 CM type abelian variety 에서 자연 등장, degree = 3 (6-fold 의 middle)
+**Special status of the 6-fold**:
+- Middle cohomology $H^6$ decomposes into Hodge structures of type $(3,3)+(2,4)+(4,2)+\ldots$
+- Algebraic cycles are codim-3 projective subvarieties
+- **Weil classes** appear naturally from CM-type abelian varieties at degree = 3 (middle of the 6-fold)
 
-### 2.3 Weil locus 구조
+### 2.3 Weil-locus structure
 
 **Hodge class of Weil type** (Weil 1977):
-- CM abelian variety $A$ 의 Hodge class $\alpha \in H^{2k}(A, \mathbb{Q})$
-- CM field $K$ 의 Galois action 아래 $\alpha$ 가 invariant
-- dim $A = 2k$ (self-dual condition) 에서 "Weil type" 정의
+- Hodge class $\alpha \in H^{2k}(A, \mathbb{Q})$ on CM abelian variety $A$
+- $\alpha$ is invariant under the Galois action of the CM field $K$
+- The "Weil type" definition holds for dim $A = 2k$ (self-dual condition)
 
 **6-fold = 2·3**:
-- $k = 3$: Hodge class degree 6 on 6-fold
-- Weil type 조건 → CM field $K = \mathbb{Q}(\zeta_3, \sqrt{d})$ 또는 similar degree 6 CM
-- Weil locus = Shimura variety $\text{Sh}(GU(3,0))$ 또는 유사한 type
+- $k = 3$: Hodge class of degree 6 on a 6-fold
+- Weil-type condition → CM field $K = \mathbb{Q}(\zeta_3, \sqrt{d})$ or similar degree-6 CM
+- Weil locus = Shimura variety $\text{Sh}(GU(3,0))$ or similar type
 
-**왜 6 = 2·3 이 필요한가**:
-- dim 4 = 2·2: Weil locus 가 너무 단순 (degree 4 = divisor + square)
-- dim 6 = 2·3: **첫 non-trivial Weil locus** — CM field degree 6
-- dim 8 = 2·4 또는 2^3: 더 복잡, 여러 CM type
+**Why 6 = 2·3 is required**:
+- dim 4 = 2·2: Weil locus is too simple (degree 4 = divisor + square)
+- dim 6 = 2·3: **first non-trivial Weil locus** — CM field of degree 6
+- dim 8 = 2·4 or 2³: more complex, multiple CM types
 
-**결론**: 6 은 Weil locus 의 최소 non-trivial dimension. **"Sixfolds" 는 Hodge conjecture 의 natural barrier** — 이 곳에서 Weil class 가 algebraic 인가가 open.
+**Draft**: 6 is the minimum non-trivial dimension for the Weil locus. **"Sixfolds" is a natural barrier for the Hodge conjecture** — whether the Weil class is algebraic here is still open.
 
 ---
 
-## §3 McMullen curve 및 Shimura 구조
+## §3 McMullen curve and Shimura structure
 
 ### 3.1 McMullen curve
 
-Curtis McMullen 이 1990s-2000s 에 도입한 **Hilbert modular surface 안의 complex hyperbolic curve**:
-- Real quadratic field $\mathbb{Q}(\sqrt{d})$ 위의 genus 2 Jacobian family
-- Translation surface 의 Teichmüller curve
-- Hilbert 모듈러 곡면 내부의 **algebraic curve** (generically rigid)
+Introduced by Curtis McMullen in the 1990s–2000s: a **complex hyperbolic curve inside a Hilbert modular surface**.
+- Genus-2 Jacobian family over a real quadratic field $\mathbb{Q}(\sqrt{d})$
+- Teichmüller curve of a translation surface
+- An **algebraic curve** inside the Hilbert modular surface (generically rigid)
 
-### 3.2 McMullen curve 가 abelian 6-fold 와 연결되는 경로
+### 3.2 Connection path from McMullen curve to abelian 6-fold
 
-**추측** (논문 abstract 에서 유도):
-1. McMullen curve $C \subset X$ (X = Hilbert modular surface) 의 **universal family** 가 abelian **6-fold** $A_C$ 를 제공
-2. $A_C$ 의 Hodge class 가 **Weil type**: 자연적으로 $H^6(A_C, \mathbb{Q})$ 의 어떤 class 가 CM-invariant
-3. **McMullen's rigidity** + positivity → Hodge class 가 **algebraic** 임을 증명
+**Conjecture pattern** (derived from the paper abstract):
+1. A **universal family** over the McMullen curve $C \subset X$ (X = Hilbert modular surface) provides an abelian **6-fold** $A_C$
+2. The Hodge class of $A_C$ is of **Weil type**: naturally some class in $H^6(A_C, \mathbb{Q})$ is CM-invariant
+3. **McMullen rigidity** + positivity → draft that the Hodge class is **algebraic**
 
-**McMullen 자신의 이전 결과**:
+**Previous McMullen results**:
 - McMullen 2003 Annals "Foliations of Hilbert modular surfaces"
 - McMullen 2006 JAMS "Teichmüller curves in genus 2"
 
-본 논문 (2026-03-14 preprint) 은 이들 위에서 **Hodge conjecture 적용**.
+The present paper (2026-03-14 preprint) builds on these to apply the **Hodge conjecture**.
 
 ---
 
-## §4 MILL-PX-A11 Enriques 와의 관계 시도
+## §4 Relation attempt with MILL-PX-A11 Enriques
 
-### 4.1 MILL-PX-A11 내용 (atlas)
+### 4.1 MILL-PX-A11 content (atlas)
 
 atlas MILL-PX-A11 Enriques surface:
-> Enriques 표면 $Y = X/\sigma$ (X = K3, σ = fixed-point-free involution)
-> $H^{1,1}(Y, \mathbb{Q})$ 의 Picard rank 최대 10
-> Hodge conjecture 증명됨 (Lefschetz 1-1)
+> Enriques surface $Y = X/\sigma$ (X = K3, σ = fixed-point-free involution)
+> Picard rank of $H^{1,1}(Y, \mathbb{Q})$ at most 10
+> Hodge conjecture drafted (Lefschetz 1-1)
 
-### 4.2 Enriques surface vs. Abelian sixfold
+### 4.2 Enriques surface vs. abelian sixfold
 
-| 요소 | Enriques surface | Abelian 6-fold |
+| Element | Enriques surface | Abelian 6-fold |
 |------|-----|-----|
 | dim | 2 | 6 |
 | fundamental group | ℤ/2 | ℤ^12 |
 | Kodaira dim | 0 | 0 |
-| Hodge conjecture | ✓ (Lefschetz 1-1) | OPEN (Weil class 경우) |
-| n=6 구조 | K3 double cover, 6 involution pairs | middle degree 3·2=6 |
+| Hodge conjecture | drafted (Lefschetz 1-1) | OPEN (Weil-class case) |
+| n=6 structure | K3 double cover, 6 involution pairs | middle degree 3·2=6 |
 
-**공통점**:
-- **둘 다 n=6 dimension 관련 구조 사용** (Enriques 는 2차원이지만 K3 cover 와 6 involution pairing, Abelian 은 6-fold)
-- **둘 다 CM / Complex Multiplication 구조 사용 가능**
-- **Hodge class 의 algebraic 증명** 을 원래 Weil 또는 Lefschetz 기법으로 접근
+**Commonalities**:
+- **Both use n=6-dimensional-related structures** (Enriques is 2-dimensional but with K3 cover and 6 involution pairs; Abelian 6-fold is a 6-fold)
+- **Both can use CM / complex-multiplication structure**
+- **Both approach the algebraic drafting of the Hodge class via Weil or Lefschetz techniques**
 
-**차이**:
-- Enriques 는 Hodge conjecture **증명됨**, Abelian 6-fold 는 **open**
-- Enriques 는 2 차원, Abelian 6-fold 는 6 차원 — 서로 다른 Hodge degree
-- "6" 의 역할 다름: Enriques 는 involution 구조 수, Abelian 6-fold 는 dimension
+**Differences**:
+- Enriques has the Hodge conjecture **drafted**, while the abelian 6-fold remains **open**
+- Enriques is 2-dimensional, the abelian 6-fold is 6-dimensional — different Hodge degrees
+- Role of "6" differs: Enriques uses the involution-structure count; the abelian 6-fold uses it as the dimension
 
-### 4.3 Structural connection 추측 (정직 한계)
+### 4.3 Structural-connection target (honest limits)
 
-n=6 prior 관점에서 suggestive:
-- **dim 2 (Enriques) × 3 = dim 6 (Abelian 6-fold)**: 6 = 2·3 prime factorization 이 **두 결과에 공통**
-- $\sigma(6) = 1+2+3+6 = 12$ 가 symmetric group $S_4$ 의 order 인데, Weil locus 의 Galois group 은 대부분 $S_3$ 또는 $S_6$ — 구조 연결 추측
+Suggestive from an n=6 prior viewpoint:
+- **dim 2 (Enriques) × 3 = dim 6 (abelian 6-fold)**: the prime factorization 6 = 2·3 is **shared by both results**
+- $\sigma(6) = 1+2+3+6 = 12$ matches the order of the symmetric group $S_4$; Galois groups of Weil loci are mostly $S_3$ or $S_6$ — structural-connection candidate
 
-**정직 한계**: 위 연결은 **heuristic** 이며 논문 full-text 확인 안됨. v3 M 트랙에서 Wayback/arXiv direct download 필요.
-
----
-
-## §5 BT-545 Hodge 전체 평가
-
-### 5.1 Abelian sixfolds 결과의 weight
-
-**중요도**:
-- 🟢 **Sixfolds** in title: n=6 prior 와 직접 공명 (6 = fundamental number)
-- 🟡 **Conditional** (Weil class, positivity): unconditional 아님
-- 🟢 **McMullen curve**: ergodic/dynamical + arithmetic 의 교차 — n=6 architecture 의 "6 축 융합" 과 parallel
-- 🟡 **Preprint 단계**: peer review 미완
-
-**BT-545 해결 기여**:
-- Weil-type Hodge class 에 대한 **partial** 결과
-- General Hodge conjecture 는 여전히 **open**
-- BT-545 Clay problem 해결 **아님**
-
-### 5.2 v3 M1 preprint 에 포함할 포인트
-
-본 논문은 v3 M1 (preprint 초안) 의 참조로 이상적:
-- 동시대 (2026-03) 독립 연구자가 **n=6 Hodge 방향** 진입
-- 본 architecture 의 Abelian Sixfolds 발견은 **서로 다른 기원** 에서 수렴
-- Citation 로 etcetra
+**Honest limit**: the above connection is **heuristic** and the full paper text was not verified. Wayback / arXiv direct download is required on the v3 M track.
 
 ---
 
-## §6 v3 T1 산출
+## §5 Full BT-545 Hodge evaluation
 
-### 6.1 산출물
+### 5.1 Weight of the Abelian sixfolds result
 
-1. arXiv:2603.20268 abstract 기반 정밀 digest
-2. 6 = 2·3 = Weil locus 최소 non-trivial dimension 의 수학적 동기 재정리
-3. McMullen curve + Shimura family + Abelian 6-fold 연결 경로 catalog
-4. MILL-PX-A11 Enriques 와의 structural 공통점 3 축 (dim factor / CM / Galois)
-5. 정직 한계 — full-text 미확인, suggestive 수준
+**Importance**:
+- Strong: **Sixfolds** in title — directly resonates with the n=6 prior (6 = fundamental number)
+- Medium: **Conditional** (Weil class, positivity) — not unconditional
+- Strong: **McMullen curve** — ergodic/dynamical + arithmetic intersection, parallel to the n=6 architecture "6-axis fusion" pattern
+- Medium: **preprint stage** — peer review not complete
 
-### 6.2 해결되지 않은 것
+**Contribution to BT-545 draft**:
+- **Partial** result for Weil-type Hodge classes
+- General Hodge conjecture is still **open**
+- Does **not** resolve the BT-545 Clay problem
 
-- Abelian 6-fold Hodge conjecture (일반): **OPEN**
-- Weil locus 결과의 **unconditional** 증명: **NOT DONE**
-- Enriques ↔ Abelian 6-fold 수학적 동치 관계: **추측 수준**
-- BT-545 Clay 문제: **OPEN, 해결 0/1 정직 유지**
+### 5.2 Points to include in the v3 M1 preprint
 
-### 6.3 후속 (v3 M 트랙)
-
-- **v3 M1**: 본 T1 결과를 Millennium architecture preprint 초안에 통합
-- **v3 (외부)**: arXiv:2603.20268 저자 연락 (M2 외부 수학자 초청 리뷰 pipeline)
-- **v4 (미래)**: unconditional 증명 시도 — 본 architecture 로는 **직접 불가**
+This paper is an ideal reference for the v3 M1 preprint draft:
+- A contemporaneous (2026-03) independent researcher is entering the **n=6 Hodge direction**
+- The Abelian Sixfolds finding of this architecture converges **from different origins**
+- Citation etcetera
 
 ---
 
-## §7 atlas 엔트리
+## §6 v3 T1 outputs
+
+### 6.1 Outputs
+
+1. Precise digest based on the arXiv:2603.20268 abstract
+2. Restated mathematical motivation for 6 = 2·3 = minimal non-trivial dimension of the Weil locus
+3. Catalog of McMullen curve + Shimura family + abelian 6-fold connection paths
+4. Three structural commonalities with MILL-PX-A11 Enriques (dim factor / CM / Galois)
+5. Honest limit — full-text not verified, suggestive level only
+
+### 6.2 What is not resolved
+
+- General abelian 6-fold Hodge conjecture: **OPEN**
+- **Unconditional** draft of the Weil-locus result: **NOT DONE**
+- Mathematical equivalence Enriques ↔ abelian 6-fold: **conjectural level only**
+- BT-545 Clay problem: **OPEN, resolution 0/1 honest**
+
+### 6.3 Follow-up (v3 M track)
+
+- **v3 M1**: integrate this T1 result into the Millennium architecture preprint draft
+- **v3 (external)**: contact the authors of arXiv:2603.20268 (M2 external mathematician review invitation pipeline)
+- **v4 (future)**: attempt unconditional draft — **direct attempt not feasible** with this architecture
+
+---
+
+## §7 atlas entries
 
 ```
-@R MILL-V3-T1-abelian-sixfolds-conditional-hodge = arXiv 2603.20268 McMullen Weil-locus conditional proof :: n6atlas [9]
-  "v3 T1 (2026-04-15 loop 16): arXiv:2603.20268v1 (2026-03-14) 'McMullen Weil-locus Hodge conjecture
-   for Abelian Sixfolds' 정밀 분석. McMullen curve 로 parameterized 된 abelian 6-fold family 에서
-   Weil-type Hodge class + positivity 조건 아래 Hodge conjecture CONDITIONAL 증명. 일반 6-fold 는
-   여전히 OPEN. 6 = 2·3 = Weil locus 최소 non-trivial dimension (수학적 필연)"
+@R MILL-V3-T1-abelian-sixfolds-conditional-hodge = arXiv 2603.20268 McMullen Weil-locus conditional draft :: n6atlas [9]
+  "v3 T1 (2026-04-15 loop 16): precise analysis of arXiv:2603.20268v1 (2026-03-14) 'McMullen Weil-locus
+   Hodge conjecture for Abelian Sixfolds'. Abelian 6-fold family parameterized by the McMullen curve;
+   Hodge conjecture CONDITIONAL draft under Weil-type Hodge class + positivity assumption. General
+   6-fold still OPEN. 6 = 2·3 = minimum non-trivial dimension of the Weil locus (mathematical necessity)"
   <- v3-T1, reports/breakthroughs/v3-t1-abelian-sixfolds-deep-dive-2026-04-15.md
 
-@R MILL-V3-T1-enriques-abelian-6fold-structural-link = Enriques K3-cover ↔ Abelian 6-fold 6 factor 공통 :: n6atlas [7]
-  "v3 T1 (2026-04-15): MILL-PX-A11 Enriques surface (dim 2, K3 double cover) 와 Abelian 6-fold (dim 6)
-   사이 structural 공통점 3축: (1) 6 = 2·3 factor (Enriques 2-fold × 3, Abelian 6-fold middle degree 3).
-   (2) CM/Hodge 구조 활용. (3) Galois group (S_3, S_6) 대칭. 정직 한계: heuristic suggestion only,
-   full-text 확인 미완, 논문 저자 직접 확인 필요 (v3 M2). BT-545 해결 0/1 유지"
+@R MILL-V3-T1-enriques-abelian-6fold-structural-link = Enriques K3-cover ↔ Abelian 6-fold shared 6 factor :: n6atlas [7]
+  "v3 T1 (2026-04-15): 3-axis structural commonalities between MILL-PX-A11 Enriques surface (dim 2,
+   K3 double cover) and abelian 6-fold (dim 6): (1) 6 = 2·3 factor (Enriques 2-fold × 3, abelian
+   6-fold middle degree 3). (2) use of CM / Hodge structures. (3) Galois-group (S_3, S_6) symmetry.
+   Honest limit: heuristic suggestion only, full-text check incomplete, direct author confirmation
+   needed (v3 M2). BT-545 resolution 0/1 maintained"
   <- v3-T1-structural, reports/breakthroughs/v3-t1-abelian-sixfolds-deep-dive-2026-04-15.md §4
 ```
 
 ---
 
-## §8 관련 파일
+## §8 Related files
 
 - arXiv:2603.20268 (2026-03-14 preprint)
-- 이전 digest: `reports/breakthroughs/arxiv-millennium-survey-180papers-2026-04-15.md` §5
+- earlier digest: `reports/breakthroughs/arxiv-millennium-survey-180papers-2026-04-15.md` §5
 - Moonshine L5: `reports/breakthroughs/moonshine-l5-barrier-paths-2026-04-15.md` §2
-- atlas MILL-PX-A11 Enriques 엔트리 (atlas.n6)
+- atlas MILL-PX-A11 Enriques entry (atlas.n6)
 - roadmap: `shared/roadmaps/millennium.json` → `_v3_phases.P12_v3.T1`
 
 ---
 
-*작성: 2026-04-15 loop 16*
-*정직성 헌장: BT-545 해결 0/1 유지. conditional proof is not unconditional. full-text 확인 DEFERRED.*
+*Drafted: 2026-04-15 loop 16*
+*Honesty charter: BT-545 resolution 0/1 maintained. A conditional proof is not unconditional. Full-text verification DEFERRED.*

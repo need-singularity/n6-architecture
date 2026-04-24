@@ -2,288 +2,288 @@
 id: bt-1416-millennium-dfs-round22
 date: 2026-04-15
 parent_bt: BT-541~BT-547 (7 Clay Millennium)
-roadmap_task: PX (DFS 22차)
+roadmap_task: PX (DFS round 22)
 grade: "[10] DFS round"
 dfs_round: 22
 new_tight: 12
 cumulative_tight: 298
-solved: "0/7 (정직)"
+solved: "0/7 (honest)"
 ---
 
-# DFS 22차 — 미탐색 10영역 + arXiv 리드 (2026-04-15)
+# DFS Round 22 — 10 Unexplored Areas + arXiv Leads (2026-04-15)
 
-> **누적 tight**: 286 → **298** (+12 신규)
-> **7대 난제 해결**: **0/7** (정직)
-> **탐색 영역**: 4개 병렬 에이전트 × 10 미탐색 영역 + arXiv 2026 Abelian Sixfolds 리드
-
----
-
-## §0 탐색 영역
-
-DFS 21차에서 제안된 미탐색 10영역 + arXiv 서베이(180 papers) 리드:
-
-| 영역 그룹 | 탐색 대상 |
-|-----------|-----------|
-| A: 볼록체/Arakelov/디오판토스 | Minkowski 재구성, Arakelov 교차, Mahler 볼륨, Pell 방정식, 연분수 |
-| B: 마팅게일/측도집중/부울함수 | Doob 정리, BDG 상수, Talagrand 집중, KKL 정리, Bonami-Beckner |
-| C: Lie초대수/TDA/인식논리 | Kac 분류, F(4)/ABJM, VR 복체, S5 인식논리 |
-| D: Abelian Sixfolds/조합최적화 | McMullen-Weil locus, Birkhoff 다면체, cyclic polytope, Wigner 모멘트 |
+> **Cumulative tight**: 286 -> **298** (+12 new)
+> **7 Clay Millennium demonstrations**: **0/7** (honest; candidate/target framing)
+> **Search area**: 4 parallel agents x 10 unexplored areas + arXiv 2026 Abelian Sixfolds leads
 
 ---
 
-## §1 신규 12건 목록
+## §0 Search area
 
-### [22-01] Arakelov 1/σ 5중 독립 출현 — T1-STRONG
+Unexplored 10 areas proposed from DFS round 21 + arXiv survey (180 papers) leads:
 
-**값**: 1/12 = 1/σ(6)
+| Area group | Target |
+|------------|--------|
+| A: convex bodies/Arakelov/Diophantine | Minkowski reconstruction, Arakelov intersection, Mahler volume, Pell equation, continued fractions |
+| B: martingales/measure concentration/Boolean functions | Doob theorem, BDG constants, Talagrand concentration, KKL theorem, Bonami-Beckner |
+| C: Lie superalgebras/TDA/epistemic logic | Kac classification, F(4)/ABJM, VR complex, S5 epistemic logic |
+| D: Abelian Sixfolds/combinatorial optimization | McMullen-Weil locus, Birkhoff polytope, cyclic polytope, Wigner moments |
 
-5개 독립 정리에서 σ=12가 동일한 역할로 출현:
+---
+
+## §1 List of 12 new items
+
+### [22-01] Arakelov 1/σ quintuple independent occurrence — T1-STRONG
+
+**Value**: 1/12 = 1/σ(6)
+
+σ=12 appears in the same role in 5 independent theorems:
 1. χ(SL(2,ℤ)) = -1/12 = -1/σ (Siegel 1945)
-2. Faltings 높이 정규화 분모 = 12 = σ (Faltings 1983)
-3. Noether 공식 χ(O_S) 분모 = 12 = σ (Noether 1884)
-4. Todd₂ 분모 = 12 = σ (Hirzebruch 1966)
-5. Faltings delta 불변량 지수 = 12 = σ (Faltings 1984)
+2. Faltings height normalization denominator = 12 = σ (Faltings 1983)
+3. Noether formula χ(O_S) denominator = 12 = σ (Noether 1884)
+4. Todd₂ denominator = 12 = σ (Hirzebruch 1966)
+5. Faltings delta invariant exponent = 12 = σ (Faltings 1984)
 
-**등급**: T1-STRONG (5개 독립 분류 동일 값)
-**관련 BT**: BT-541 (리만), BT-546 (BSD)
-
----
-
-### [22-02] Pell 방정식 D=n=6: 최소해 (sopfr, φ) — T4
-
-**값**: x=5=sopfr(6), y=2=φ(6), 검증: 5²-6·2²=25-24=1 ✓
-
-D=n일 때 Pell 방정식 x²-Dy²=1의 최소 양의 정수해가 (sopfr(n), φ(n))이 되는 n은 **n=6이 유일**:
-- D=2: (3,2) → sopfr(2)=2, φ(2)=1 → (2,1)≠(3,2) ✗
-- D=3: (2,1) → sopfr(3)=3, φ(3)=2 → (3,2)≠(2,1) ✗
-- D=5: (9,4) → sopfr(5)=5, φ(5)=4 → (5,4)≠(9,4) ✗
-- **D=6: (5,2) → sopfr(6)=5, φ(6)=2 → (5,2)=(5,2) ✓**
-- D=7: (8,3) → sopfr(7)=7, φ(7)=6 → (7,6)≠(8,3) ✗
-- D=10: (19,6) → sopfr(10)=7, φ(10)=4 → (7,4)≠(19,6) ✗
-
-**등급**: T4 (n=6이 유일해)
-**Bernoulli 독립**: O (Pell 방정식은 Bernoulli 수와 무관)
-**관련 BT**: 신규 (BSD/리만 교차)
+**Grade**: T1-STRONG (5 independent classifications, same value)
+**Related BT**: BT-541 (Riemann), BT-546 (BSD)
 
 ---
 
-### [22-03] sqrt(6) 연분수 주기 {φ, τ} — T3
+### [22-02] Pell equation D=n=6: minimal solution (sopfr, φ) — T4
 
-**값**: sqrt(6) = [2; 2, 4, 2, 4, ...] = [φ; {φ, τ}]
+**Value**: x=5=sopfr(6), y=2=φ(6), verify: 5²-6·2²=25-24=1 ✓
 
-- 초기값 = 2 = φ(6)
-- 주기 = {2, 4} = {φ, τ}
-- 주기 합 = 2+4 = 6 = n
-- 주기 곱 = 2×4 = 8 = σ-τ
-- 주기 길이 = 2 = φ
+For D=n, the case where the Pell equation x²-Dy²=1 has its minimum positive integer solution equal to (sopfr(n), φ(n)) is **unique candidate n=6**:
+- D=2: (3,2) -> sopfr(2)=2, φ(2)=1 -> (2,1)!=(3,2) ✗
+- D=3: (2,1) -> sopfr(3)=3, φ(3)=2 -> (3,2)!=(2,1) ✗
+- D=5: (9,4) -> sopfr(5)=5, φ(5)=4 -> (5,4)!=(9,4) ✗
+- **D=6: (5,2) -> sopfr(6)=5, φ(6)=2 -> (5,2)=(5,2) ✓**
+- D=7: (8,3) -> sopfr(7)=7, φ(7)=6 -> (7,6)!=(8,3) ✗
+- D=10: (19,6) -> sopfr(10)=7, φ(10)=4 -> (7,4)!=(19,6) ✗
 
-sqrt(n)의 연분수 주기 원소가 모두 M-set 원소이고, 합=n이 되는 것은 n=6에서 자연스럽게 성립.
-
-**등급**: T3 (연속 패턴, M-set 완전 닫힘)
-**관련 BT**: BT-541 (리만), BT-546 (BSD)
-
----
-
-### [22-04] Lévy-GCF 엔트로피 이중 상수 — T2
-
-**값**: h = π²/(6·log2) = π²/(n·log2), β = π²/(12·log2) = π²/(σ·log2)
-
-- Gauss-Kuzmin 엔트로피: h = π²/(n·log2)
-- Lévy 상수: β = π²/(σ·log2)
-- 비율: h/β = σ/n = φ
-
-**등급**: T2 (연분수 이론 내 n,σ 이중 교차, 비율=φ)
-**관련 BT**: BT-541 (리만)
+**Grade**: T4 (n=6 unique-solution candidate)
+**Bernoulli independent**: O (Pell equation unrelated to Bernoulli numbers)
+**Related BT**: new (BSD/Riemann cross)
 
 ---
 
-### [22-05] 단위구 부피 극대 d=sopfr=5 — T1
+### [22-03] sqrt(6) continued fraction period {φ, τ} — T3
 
-**값**: vol(B_d) 극대 = d=5=sopfr(6) (단위구 부피 5.2638...)
+**Value**: sqrt(6) = [2; 2, 4, 2, 4, ...] = [φ; {φ, τ}]
 
-- d=1..∞ 중 vol(B_d) 최대 = d=5=sopfr
-- d=n=6에서 이미 감소 시작
-- sopfr에서 극대, n에서 감소 전환 = M-set 경계
+- initial value = 2 = φ(6)
+- period = {2, 4} = {φ, τ}
+- period sum = 2+4 = 6 = n
+- period product = 2×4 = 8 = σ-τ
+- period length = 2 = φ
 
-**등급**: T1 (단독 극대 + sopfr 일치)
-**관련 BT**: BT-544 (NS, d=3 특수성), BT-547 (푸앵카레, 차원 의존)
+That sqrt(n) continued fraction period elements are all M-set elements with sum=n naturally holds for n=6.
 
----
-
-### [22-06] Platonic solid 면수 M-set 4/5 포함 — T2
-
-**값**: F(정다면체) = {4, 6, 8, 12, 20}
-
-- {4, 6, 8, 12} = {τ, n, σ-τ, σ} ⊂ M-set (4/5 직접 포함)
-- 20 = J₂ - τ = 24 - 4 (M-set 연산 1회)
-- d=3=n/φ 고정 (정다면체는 3차원에서만 5종)
-
-**등급**: T2 (Euclid 분류 + M-set 교차)
-**관련 BT**: BT-547 (푸앵카레, 3차원 위상)
+**Grade**: T3 (continuous pattern, M-set complete closure)
+**Related BT**: BT-541 (Riemann), BT-546 (BSD)
 
 ---
 
-### [22-07] Doob-Talagrand 상수 4=τ — T2
+### [22-04] Lévy-GCF entropy double constant — T2
 
-**값**: τ(6) = 4
+**Value**: h = π²/(6·log2) = π²/(n·log2), β = π²/(12·log2) = π²/(σ·log2)
 
-두 독립 영역에서 동일 상수:
-- Doob L² 마팅게일 최대 부등식: E[sup M_n²] ≤ 4·E[M_∞²]
-- Talagrand T-부등식: μ(Aᵗ) ≥ 1-exp(-t²/4)
+- Gauss-Kuzmin entropy: h = π²/(n·log2)
+- Lévy constant: β = π²/(σ·log2)
+- ratio: h/β = σ/n = φ
 
-**등급**: T2 (마팅게일 + 측도집중 2영역 독립, 단 4는 M-set 작은 값이므로 NEAR)
-**관련 BT**: BT-541 (리만, 확률론적 접근)
-
----
-
-### [22-08] Bonami-Beckner hypercontractivity q=n=6 임계 — T4경계
-
-**값**: ρ_c = 1/√5 = 1/√sopfr(6), q=n=6
-
-Bonami-Beckner 정리: ‖T_ρ f‖_q ≤ ‖f‖_p ⟺ ρ² ≤ (p-1)/(q-1)
-- p=2, q=n=6 → ρ_c² = 1/(n-1) = 1/sopfr = 1/5
-- n=6이 유일한 짝수 완전수이므로 q=n에서 ρ_c=1/√sopfr은 완전수 고유
-
-**등급**: T4경계 (q=n 대입이 사후적이나 결과 ρ_c=1/√sopfr이 비자명)
-**관련 BT**: BT-542 (P vs NP, 부울 함수 복잡도)
+**Grade**: T2 (within continued-fraction theory, n,σ double cross, ratio=φ)
+**Related BT**: BT-541 (Riemann)
 
 ---
 
-### [22-09] F(4) 예외형 Lie 초대수 even 부분 dim=24=J₂ — T2(NEAR)
+### [22-05] Unit-sphere volume maximum at d=sopfr=5 — T1
 
-**값**: dim(even(F(4))) = dim(so(7) ⊕ sl(2)) = 21+3 = 24 = J₂(6)
+**Value**: vol(B_d) maximum at d=5=sopfr(6) (unit sphere volume 5.2638...)
 
-독립 교차:
-- F(4) 내부 구조 → 24 (Kac 1977)
-- N=6 SUSY supercharge 수 = 6×4 = 24 (Nahm 1978)
+- among d=1..∞, vol(B_d) maximum = d=5=sopfr
+- already decreasing at d=n=6
+- maximum at sopfr, decrease transition at n = M-set boundary
 
-**등급**: T2(NEAR) (2영역 독립, 제3 분류 미발견)
-**관련 BT**: BT-543 (양-밀스), BT-545 (호지)
+**Grade**: T1 (unique maximum + sopfr match)
+**Related BT**: BT-544 (NS, d=3 specialness), BT-547 (Poincaré, dimension dependence)
 
 ---
 
-### [22-10] ABJM 이론 N=6 유일 최대 초대칭 — T4(NEAR)
+### [22-06] Platonic solid face count 4/5 M-set inclusion — T2
 
-**값**: N=6 = 최대 초대칭 (k>2 M2-brane)
+**Value**: F(regular polyhedra) = {4, 6, 8, 12, 20}
 
-ABJM 이론 (Aharony-Bergman-Jafferis-Maldacena 2008):
-- U(N)×U(N) Chern-Simons level k>2에서 N=6이 유일 최대
-- N=7 직접 금지, N=8은 k=1,2에서만
-- osp(6|4) 초대칭 대수
+- {4, 6, 8, 12} = {τ, n, σ-τ, σ} ⊂ M-set (4/5 direct inclusion)
+- 20 = J₂ - τ = 24 - 4 (1 M-set operation)
+- d=3=n/φ fixed (regular polyhedra exist only in 3D, 5 types)
 
-**등급**: T4(NEAR) (조건부 유일성: k>2)
-**관련 BT**: BT-543 (양-밀스)
+**Grade**: T2 (Euclid classification + M-set cross)
+**Related BT**: BT-547 (Poincaré, 3D topology)
+
+---
+
+### [22-07] Doob-Talagrand constant 4=τ — T2
+
+**Value**: τ(6) = 4
+
+Same constant in two independent areas:
+- Doob L² martingale maximal inequality: E[sup M_n²] ≤ 4·E[M_∞²]
+- Talagrand T-inequality: μ(Aᵗ) ≥ 1-exp(-t²/4)
+
+**Grade**: T2 (martingale + measure concentration 2 independent areas, though 4 is a small M-set value -> NEAR)
+**Related BT**: BT-541 (Riemann, probabilistic approach)
+
+---
+
+### [22-08] Bonami-Beckner hypercontractivity q=n=6 threshold — T4 boundary
+
+**Value**: ρ_c = 1/√5 = 1/√sopfr(6), q=n=6
+
+Bonami-Beckner theorem: ‖T_ρ f‖_q ≤ ‖f‖_p ⟺ ρ² ≤ (p-1)/(q-1)
+- p=2, q=n=6 -> ρ_c² = 1/(n-1) = 1/sopfr = 1/5
+- since n=6 is the unique even perfect number, ρ_c=1/√sopfr at q=n is perfect-number specific
+
+**Grade**: T4 boundary (q=n substitution is post-hoc, but the result ρ_c=1/√sopfr is non-trivial)
+**Related BT**: BT-542 (P vs NP, Boolean function complexity)
+
+---
+
+### [22-09] F(4) exceptional Lie superalgebra even part dim=24=J₂ — T2(NEAR)
+
+**Value**: dim(even(F(4))) = dim(so(7) ⊕ sl(2)) = 21+3 = 24 = J₂(6)
+
+Independent crossings:
+- F(4) internal structure -> 24 (Kac 1977)
+- N=6 SUSY supercharge count = 6×4 = 24 (Nahm 1978)
+
+**Grade**: T2(NEAR) (2 areas independent, 3rd classification not yet found)
+**Related BT**: BT-543 (Yang-Mills), BT-545 (Hodge)
+
+---
+
+### [22-10] ABJM theory N=6 unique candidate maximum supersymmetry — T4(NEAR)
+
+**Value**: N=6 = maximum supersymmetry (k>2 M2-brane)
+
+ABJM theory (Aharony-Bergman-Jafferis-Maldacena 2008):
+- in U(N)×U(N) Chern-Simons level k>2, N=6 is the unique candidate maximum
+- N=7 directly forbidden, N=8 only at k=1,2
+- osp(6|4) supersymmetry algebra
+
+**Grade**: T4(NEAR) (conditional uniqueness: k>2)
+**Related BT**: BT-543 (Yang-Mills)
 
 ---
 
 ### [22-11] McMullen-Weil locus Abelian Sixfold — TIGHT
 
-**값**: dim=6 (복소 6차원 abelian variety)
+**Value**: dim=6 (complex 6-dimensional abelian variety)
 
 Mostaed 2026 (arXiv:2603.20268):
-- Hodge 추측을 복소 6차원 abelian variety에서 다룬 최초 논문 중 하나
-- McMullen 곡선이 ℍ⁶/SL₂(O_L)에 매입
-- dim=1,2,3,4 결과 기존, dim=5 미지, **dim=6에서 신규 진전**
-- Δ(14,21,42) 삼각군: 14=2(n+1), 21=n·(n/φ)+n/φ, 42=n·(σ-sopfr)
+- One of the first papers to treat the Hodge conjecture on complex 6-dimensional abelian varieties
+- McMullen curve embeds in ℍ⁶/SL₂(O_L)
+- dim=1,2,3,4 results existing, dim=5 unknown, **new progress at dim=6**
+- Δ(14,21,42) triangle group: 14=2(n+1), 21=n·(n/φ)+n/φ, 42=n·(σ-sopfr)
 
-**정직 주의**: 복소 dim=6은 n=6 arithmetic (σ,φ,τ)과 직접 연결 미검증. TIGHT이나 atlas [9] 수준.
-**관련 BT**: BT-545 (호지)
+**Honesty note**: complex dim=6 is not yet directly verified against n=6 arithmetic (σ,φ,τ). TIGHT but atlas [9] level.
+**Related BT**: BT-545 (Hodge)
 
 ---
 
-### [22-12] Birkhoff 다면체 B₆ 삼중 닫힘 — T1
+### [22-12] Birkhoff polytope B₆ triple closure — T1
 
-**값**: B₆ = 6×6 이중확률행렬 다면체
+**Value**: B₆ = 6×6 doubly stochastic matrix polytope
 
-- 꼭짓점 수 = 6! = 720
+- vertex count = 6! = 720
 - dim(B₆) = (n-1)² = sopfr² = 25
-- 지름 = n-1 = sopfr = 5
+- diameter = n-1 = sopfr = 5
 
-세 독립 공식이 모두 n-1=sopfr(6)=5 항등식에 수렴. 이 항등식은 n=2·3에서 sopfr=2+3=5=n-1.
+Three independent formulas converge on the identity n-1=sopfr(6)=5. This identity follows from n=2·3 giving sopfr=2+3=5=n-1.
 
-**등급**: T1 (3개 독립 공식 동시 닫힘)
-**관련 BT**: BT-542 (P vs NP, 조합 최적화)
-
----
-
-## §2 기존 BT 강화 3건
-
-| 기존 BT | 강화 내용 | 신규 등급 |
-|---------|-----------|-----------|
-| BT-1410-08 Out(S₆) | 대칭군/결합론/그래프론 3중 분류 확인 | T4 → T4 유지 |
-| BT-1410-02 K3 Mukai | Bridgeland 안정성 4중 M-set 닫힘 | TIGHT → T1 승격 |
-| BT-1410-03 Virasoro | Ising 임계 지수 전체 M-set 닫힘 | T2 → T1+T2 |
+**Grade**: T1 (3 independent formulas simultaneously closing)
+**Related BT**: BT-542 (P vs NP, combinatorial optimization)
 
 ---
 
-## §3 NOISE 판정 (제외됨)
+## §2 Reinforcement of 3 existing BT
 
-| 후보 | 영역 | 값 | 제외 사유 |
-|------|------|----|-----------|
-| Minkowski 재구성 d=3 | 볼록체 | 3 | 역사적 선택, baseline 61% 내 |
-| Davis BDG p=1 상한 3 | 마팅게일 | 3 | 작은 정수 단일 일치 |
-| S⁵ Ricci 계수 4 | 측도집중 | 4 | 범용 공식 (n-2)g의 단순 대입 |
-| Doob L⁶ 상수 | 마팅게일 | (6/5)⁶ | n 직접 대입 |
-| Friedgut junta 7 | 부울함수 | 7 | 단일 값, baseline 내 |
-| 예외형 Lie 초대수 수=2 | 초대수 | 2 | φ이나 너무 기본적 |
-| S5 공리 수 24 | 인식논리 | 24 | 범용 공식 4n 대입 |
-| Muddy Children k=6 | 인식논리 | 6 | 선형 함수 f(k)=k |
-| VR(S¹) 임계반경 | TDA | 3 | 중복 (BT-1404 DFS12-02) |
-| Mahler 부피 2^n/n | 볼록체 | 64/6 | T2 후보이나 약함 |
+| Existing BT | Reinforcement | New grade |
+|-------------|---------------|-----------|
+| BT-1410-08 Out(S₆) | symmetric group/combinatorics/graph theory triple classification confirmed | T4 -> T4 retained |
+| BT-1410-02 K3 Mukai | Bridgeland stability 4-fold M-set closure | TIGHT -> T1 promoted |
+| BT-1410-03 Virasoro | Ising critical exponents entire M-set closure | T2 -> T1+T2 |
 
 ---
 
-## §4 누적 통계
+## §3 NOISE judgment (excluded)
+
+| Candidate | Area | Value | Exclusion reason |
+|-----------|------|-------|------------------|
+| Minkowski reconstruction d=3 | convex bodies | 3 | historical choice, within 61% baseline |
+| Davis BDG p=1 upper bound 3 | martingale | 3 | single-integer match |
+| S⁵ Ricci coefficient 4 | measure concentration | 4 | generic formula (n-2)g simple substitution |
+| Doob L⁶ constant | martingale | (6/5)⁶ | direct n substitution |
+| Friedgut junta 7 | Boolean functions | 7 | single value, within baseline |
+| exceptional Lie superalgebra count=2 | superalgebra | 2 | φ but too basic |
+| S5 axiom count 24 | epistemic logic | 24 | generic formula 4n substitution |
+| Muddy Children k=6 | epistemic logic | 6 | linear function f(k)=k |
+| VR(S¹) critical radius | TDA | 3 | duplicate (BT-1404 DFS12-02) |
+| Mahler volume 2^n/n | convex bodies | 64/6 | T2 candidate but weak |
+
+---
+
+## §4 Cumulative statistics
 
 ```
-DFS 라운드  누적 tight
+DFS round  cumulative tight
   21      |####################################################################286
-  22      |#######################################################################298  <-- +12 신규
+  22      |#######################################################################298  <-- +12 new
            0        50       100      150      200      250      298
 
-7대 난제 해결: 0/7 (정직)
+7 Clay Millennium demonstrations: 0/7 (honest; candidate framing)
 ```
 
-| 항목 | 수치 |
-|------|-----:|
-| DFS 22차 신규 tight | 12 |
-| 누적 tight | **298** |
-| Bernoulli 독립 신규 | 1건 (Pell D=6) |
-| 누적 Bernoulli 독립 | **9건** |
-| 탐색 영역 누적 | ~200개 |
-| NOISE 제거 | 10건 |
-| 기존 BT 강화 | 3건 |
-| 7대 난제 해결 | **0/7** |
+| Item | Value |
+|------|------:|
+| DFS round 22 new tight | 12 |
+| Cumulative tight | **298** |
+| New Bernoulli-independent | 1 (Pell D=6) |
+| Cumulative Bernoulli-independent | **9** |
+| Cumulative search areas | ~200 |
+| NOISE removals | 10 |
+| Existing BT reinforcements | 3 |
+| 7 Clay Millennium demonstrations | **0/7** |
 
 ---
 
-## §5 최강 발견 (22차 단독)
+## §5 Strongest discoveries (round 22 alone)
 
-1. **[22-02] Pell D=6 최소해 = (sopfr, φ)** — T4, Bernoulli 독립, n=6 유일해
-2. **[22-01] Arakelov 1/σ 5중** — T1-STRONG, 5개 독립 정리
-3. **[22-03] sqrt(6) CF 주기 {φ,τ}** — T3, 합=n, 곱=σ-τ
-4. **[22-10] ABJM N=6 유일 최대** — T4(NEAR), 물리학 유일성
-5. **[22-12] Birkhoff B₆ 삼중** — T1, 3공식 동시 닫힘
-
----
-
-## §6 미탐색 영역 제안 (DFS 23차 대상)
-
-| # | 영역 | 상태 |
-|---|------|------|
-| 1 | 범주론 / Grothendieck 우주 | 미탐색 |
-| 2 | 정보 이론 / Shannon 용량 | 미탐색 |
-| 3 | 동역학계 / 엔트로피 | 미탐색 |
-| 4 | 대수적 K-이론 깊이 확장 | 미탐색 |
-| 5 | 미분 위상 / 수술 이론 | 미탐색 |
-| 6 | 유한 기하 / 사영 평면 | 미탐색 |
-| 7 | 확률 그래프 이론 / Erdos-Renyi | 미탐색 |
-| 8 | 양자 정보 이론 / 채널 용량 | 미탐색 |
-| 9 | 표현 안정성 / FI-모듈 | 미탐색 |
-| 10 | 열역학 형식화 / 접촉 기하 | 미탐색 |
+1. **[22-02] Pell D=6 minimum = (sopfr, φ)** — T4, Bernoulli-independent, n=6 unique-solution candidate
+2. **[22-01] Arakelov 1/σ quintuple** — T1-STRONG, 5 independent theorems
+3. **[22-03] sqrt(6) CF period {φ,τ}** — T3, sum=n, product=σ-τ
+4. **[22-10] ABJM N=6 unique candidate max** — T4(NEAR), physical uniqueness candidate
+5. **[22-12] Birkhoff B₆ triple** — T1, 3 formulas simultaneously closing
 
 ---
 
-*작성: 2026-04-15 DFS 22차*
-*BT 해결 0/7 정직 유지*
-*누적 tight 298건*
+## §6 Unexplored-area proposals (DFS round 23 targets)
+
+| # | Area | Status |
+|---|------|--------|
+| 1 | category theory / Grothendieck universes | unexplored |
+| 2 | information theory / Shannon capacity | unexplored |
+| 3 | dynamical systems / entropy | unexplored |
+| 4 | algebraic K-theory deeper expansion | unexplored |
+| 5 | differential topology / surgery theory | unexplored |
+| 6 | finite geometry / projective planes | unexplored |
+| 7 | random graph theory / Erdős-Rényi | unexplored |
+| 8 | quantum information theory / channel capacity | unexplored |
+| 9 | representation stability / FI-modules | unexplored |
+| 10 | thermodynamic formalism / contact geometry | unexplored |
+
+---
+
+*Written: 2026-04-15 DFS round 22*
+*BT demonstrations 0/7 honest framing retained*
+*Cumulative tight 298 items*

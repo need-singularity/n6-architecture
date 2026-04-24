@@ -1,37 +1,37 @@
-# 궁극의 핵융합 DSE Implementation Plan
+# Ultimate Fusion DSE Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 핵융합 반응로의 방식→소재→코어→장치→시스템 5단계 DSE 전수 탐색 (6,700만 조합, Rust)
+**Goal:** Exhaustive DSE over fusion reactor 5-stage chain scheme->material->core->device->system (67M combos, Rust)
 
-**Architecture:** 기존 `tools/dse-calc/main.rs` 패턴을 따르되, 핵융합 5축 평가(n6_EXACT, Q_gain, TRL, LCOE, T_comm)와 계층적 가지치기(Level 1에서 Pareto top-K 선별 후 하위 전수 탐색)를 적용. 단일 Rust 바이너리.
+**Architecture:** Follows the existing `tools/dse-calc/main.rs` pattern with fusion 5-axis evaluation (n6_EXACT, Q_gain, TRL, LCOE, T_comm) and hierarchical pruning (Level 1 Pareto top-K selection then exhaustive search below). Single Rust binary.
 
-**Tech Stack:** Rust (no cargo, `rustc` 직접 빌드), n=6 상수 체계
+**Tech Stack:** Rust (no cargo, direct `rustc` build), n=6 constant system
 
 ---
 
 ## File Structure
 
 ```
-docs/fusion/goal.md              — 후보군 정의서 (NEW)
-tools/fusion-dse/main.rs         — Rust DSE 탐색기 (NEW)
-tools/fusion-dse/fusion-dse      — 컴파일된 바이너리 (BUILD)
-docs/dse-map.md                  — DSE 지도 (NEW — 전체 도메인 현황)
+docs/fusion/goal.md              — Candidate definitions (NEW)
+tools/fusion-dse/main.rs         — Rust DSE search tool (NEW)
+tools/fusion-dse/fusion-dse      — compiled binary (BUILD)
+docs/dse-map.md                  — DSE map (NEW — all-domain status)
 ```
 
 ---
 
-### Task 1: goal.md 후보군 정의서 작성
+### Task 1: Write goal.md candidate definitions
 
 **Files:**
 - Create: `docs/fusion/goal.md`
 
-- [ ] **Step 1: goal.md 작성**
+- [ ] **Step 1: Write goal.md**
 
 ```markdown
-# N6 핵융합 — 궁극 아키텍처 DSE 후보군 정의
+# N6 fusion — ultimate architecture DSE candidate definitions
 
-**체인: 방식(Scheme) → 소재(Material) → 코어(Core) → 장치(Device) → 시스템(System)**
+**Chain: Scheme -> Material -> Core -> Device -> System**
 
 ---
 
@@ -44,9 +44,9 @@ docs/dse-map.md                  — DSE 지도 (NEW — 전체 도메인 현황
 
 ---
 
-## Level 1 — 방식 (Scheme) [6종]
+## Level 1 — Scheme [6 kinds]
 
-| ID | 방식 | Q상한 | TRL | LCOE_est($/MWh) | n6 핵심 연관 |
+| ID | Scheme | Q upper | TRL | LCOE_est ($/MWh) | n6 core link |
 |----|------|-------|-----|-----------------|-------------|
 | S1 | Tokamak | 10+ | 7 | 60 | PF=6=n, CS=6=n, a=2=φ, A≈3=n/φ, Q=10=sopfr×φ |
 | S2 | Stellarator | 5+ | 5 | 80 | W7-X periods=5=sopfr, coils complex |
@@ -55,162 +55,162 @@ docs/dse-map.md                  — DSE 지도 (NEW — 전체 도메인 현황
 | S5 | Mirror | 1+ | 3 | 150 | simple geometry |
 | S6 | Z-pinch | 0.1+ | 2 | 300 | Zap Energy pulsed |
 
-## Level 2 — 소재 (Material) [48 조합 = 4×4×3]
+## Level 2 — Material [48 combos = 4x4x3]
 
-### 초전도체 [4종]
-| ID | 초전도체 | Tc(K) | B_max(T) | 비용등급 | n6 연관 |
+### Superconductor [4 kinds]
+| ID | Superconductor | Tc(K) | B_max(T) | Cost rank | n6 link |
 |----|---------|-------|---------|---------|--------|
-| SC1 | LTS-NbTi | 9 | 10 | 1 | Tc≈σ-n/φ? |
-| SC2 | LTS-Nb3Sn | 18 | 24 | 2 | B_max=J₂=24 |
-| SC3 | HTS-REBCO | 92 | 45 | 4 | 현 SPARC/ARC 선택 |
+| SC1 | LTS-NbTi | 9 | 10 | 1 | Tc~sigma-n/phi? |
+| SC2 | LTS-Nb3Sn | 18 | 24 | 2 | B_max=J2=24 |
+| SC3 | HTS-REBCO | 92 | 45 | 4 | current SPARC/ARC choice |
 | SC4 | HTS-BSCCO | 108 | 35 | 3 | Bi-2223 |
 
-### 블랭킷 [4종]
-| ID | 블랭킷 | TBR | 냉각재 | 비용등급 | n6 연관 |
+### Blanket [4 kinds]
+| ID | Blanket | TBR | Coolant | Cost rank | n6 link |
 |----|--------|-----|--------|---------|--------|
-| BL1 | Li-ceramic | 1.05 | He | 2 | Li-6 증식=n |
-| BL2 | PbLi-eutectic | 1.15 | PbLi self | 3 | 공융 460°C |
+| BL1 | Li-ceramic | 1.05 | He | 2 | Li-6 breeding=n |
+| BL2 | PbLi-eutectic | 1.15 | PbLi self | 3 | eutectic 460C |
 | BL3 | FLiBe-molten | 1.10 | FLiBe | 4 | 2LiF-BeF₂ |
 | BL4 | He-cooled-pebble | 1.08 | He | 2 | HCPB ITER TBM |
 
-### 구조재 [3종]
-| ID | 구조재 | 내방사선(dpa) | 운전온도(°C) | 비용등급 |
+### Structural [3 kinds]
+| ID | Structural | Radiation limit (dpa) | Operating temp (C) | Cost rank |
 |----|--------|-------------|------------|---------|
 | ST1 | RAFM-steel | 80 | 550 | 1 |
 | ST2 | V-alloy | 150 | 700 | 3 |
 | ST3 | SiC-SiC | 200 | 1000 | 4 |
 
-## Level 3 — 코어 (Core) [48 조합 = 4×3×4]
+## Level 3 — Core [48 combos = 4x3x4]
 
-### 가열 방식 [4종]
-| ID | 가열 | 주파수/에너지 | 효율 | n6 연관 |
+### Heating [4 kinds]
+| ID | Heating | Freq/energy | Efficiency | n6 link |
 |----|------|-------------|------|--------|
-| H1 | NBI | 120keV=σ×10 | 40% | KSTAR 8MW=σ-τ |
+| H1 | NBI | 120keV=sigma*10 | 40% | KSTAR 8MW=sigma-tau |
 | H2 | ICRH | 40-80MHz | 60% | KSTAR 6MW=n |
-| H3 | ECRH | 170GHz | 70% | KSTAR 1MW=μ |
-| H4 | LHCD | 5GHz=sopfr | 65% | 전류구동 전문 |
+| H3 | ECRH | 170GHz | 70% | KSTAR 1MW=mu |
+| H4 | LHCD | 5GHz=sopfr | 65% | current-drive specialty |
 
-### 가둠 방식 [3종]
-| ID | 가둠 | B_T 범위(T) | 비용 |
+### Confinement [3 kinds]
+| ID | Confinement | B_T range (T) | Cost |
 |----|------|-----------|------|
-| C1 | SC-coil (초전도) | 5-20 | 높음 |
-| C2 | Normal-Cu | 2-8 | 낮음 |
-| C3 | Permanent+SC hybrid | 3-12 | 중간 |
+| C1 | SC-coil (superconducting) | 5-20 | high |
+| C2 | Normal-Cu | 2-8 | low |
+| C3 | Permanent+SC hybrid | 3-12 | medium |
 
-### 연료 [4종]
-| ID | 연료 | Q_value(MeV) | 반응단면적(keV) | n6 연관 |
+### Fuel [4 kinds]
+| ID | Fuel | Q_value (MeV) | Cross section (keV) | n6 link |
 |----|------|-------------|---------------|--------|
-| F1 | D-T | 17.6 | 10-100 | D=φ, T=n/φ, sum=sopfr |
-| F2 | D-D | 3.65 | 100+ | D=φ, sum=τ |
+| F1 | D-T | 17.6 | 10-100 | D=phi, T=n/phi, sum=sopfr |
+| F2 | D-D | 3.65 | 100+ | D=phi, sum=tau |
 | F3 | D-He3 | 18.3 | 200+ | aneutronic |
-| F4 | p-B11 | 8.7 | 500+ | B=11=σ-μ |
+| F4 | p-B11 | 8.7 | 500+ | B=11=sigma-mu |
 
-## Level 4 — 장치 (Device) [180 조합 = 4×5×3×3]
+## Level 4 — Device [180 combos = 4x5x3x3]
 
-### 코일 배치 [4종]
-| ID | 코일수 | n6 표현 |
+### Coil configuration [4 kinds]
+| ID | Coils | n6 expression |
 |----|--------|--------|
 | TF1 | 6 | n |
 | TF2 | 12 | σ |
 | TF3 | 16 | 2^τ |
 | TF4 | 18 | σ+n |
 
-### 기하 (Aspect Ratio A) [5종]
-| ID | A | n6 표현 | 대표 장치 |
+### Geometry (Aspect Ratio A) [5 kinds]
+| ID | A | n6 expression | Example device |
 |----|---|--------|----------|
-| A1 | 2.5 | sopfr/φ | compact |
-| A2 | 3.0 | n/φ | ARC/SPARC |
-| A3 | 3.1 | ITER 실제 | ITER |
-| A4 | 4.0 | τ | mid-size |
+| A1 | 2.5 | sopfr/phi | compact |
+| A2 | 3.0 | n/phi | ARC/SPARC |
+| A3 | 3.1 | ITER actual | ITER |
+| A4 | 4.0 | tau | mid-size |
 | A5 | 5.0 | sopfr | W7-X |
 
-### 자기장 등급 B_T [3종]
-| ID | B_T(T) | n6 표현 |
+### Magnetic field B_T [3 kinds]
+| ID | B_T (T) | n6 expression |
 |----|--------|--------|
 | B1 | 5 | sopfr |
-| B2 | 12 | σ |
-| B3 | 20 | J₂-τ |
+| B2 | 12 | sigma |
+| B3 | 20 | J2-tau |
 
-### Q 목표 [3종]
-| ID | Q | n6 표현 | 의미 |
+### Q target [3 kinds]
+| ID | Q | n6 expression | Meaning |
 |----|---|--------|------|
-| Q1 | 2 | φ | breakeven |
-| Q2 | 10 | sopfr×φ | ITER 목표 |
-| Q3 | 1000 | ∞ (점화) | 자기유지 |
+| Q1 | 2 | phi | breakeven |
+| Q2 | 10 | sopfr*phi | ITER target |
+| Q3 | 1000 | infinity (ignition) | self-sustained |
 
-## Level 5 — 시스템 (System) [27 조합 = 3×3×3]
+## Level 5 — System [27 combos = 3x3x3]
 
-### 발전 방식 [3종]
-| ID | 발전 | 효율 | 성숙도 |
+### Power conversion [3 kinds]
+| ID | Power | Efficiency | Maturity |
 |----|------|------|--------|
-| PW1 | Rankine (증기) | 33%=1/(n/φ) | 높음 |
-| PW2 | Brayton (가스) | 45% | 중간 |
-| PW3 | Direct-conversion | 60% | 낮음 |
+| PW1 | Rankine (steam) | 33%=1/(n/phi) | high |
+| PW2 | Brayton (gas) | 45% | medium |
+| PW3 | Direct-conversion | 60% | low |
 
-### TBR 전략 [3종]
-| ID | TBR 방식 | TBR 값 | 비용 |
+### TBR strategy [3 kinds]
+| ID | TBR method | TBR value | Cost |
 |----|---------|--------|------|
-| TR1 | Li6-ceramic-breeder | 1.05 | 중간 |
-| TR2 | PbLi-self-cooled | 1.15 | 높음 |
-| TR3 | Dual-coolant-DCLL | 1.20=σ/(σ-φ) | 높음 |
+| TR1 | Li6-ceramic-breeder | 1.05 | medium |
+| TR2 | PbLi-self-cooled | 1.15 | high |
+| TR3 | Dual-coolant-DCLL | 1.20=sigma/(sigma-phi) | high |
 
-### 전력망 [3종]
-| ID | 전력망 | 주파수/전압 | n6 연관 |
+### Grid [3 kinds]
+| ID | Grid | Freq/voltage | n6 link |
 |----|--------|-----------|--------|
-| G1 | AC-50Hz | 50Hz=sopfr×(σ-φ) | BT-62 |
-| G2 | AC-60Hz | 60Hz=σ×sopfr | BT-62 |
-| G3 | HVDC | ±500kV | BT-68 |
+| G1 | AC-50Hz | 50Hz=sopfr*(sigma-phi) | BT-62 |
+| G2 | AC-60Hz | 60Hz=sigma*sopfr | BT-62 |
+| G3 | HVDC | +-500kV | BT-68 |
 
 ---
 
-## 전수 조합 수
+## Total combination count
 
   6 × (4×4×3) × (4×3×4) × (4×5×3×3) × (3×3×3)
 = 6 × 48 × 48 × 180 × 27
-= 67,184,640 조합
+= 67,184,640 combinations
 
-→ Rust DSE 필수 (>10K 기준)
+-> Rust DSE required (>10K threshold)
 
-## 평가 5축
+## 5 evaluation axes
 
-| 축 | 설명 | 범위 | 가중치 |
+| Axis | Description | Range | Weight |
 |----|------|------|--------|
-| n6_EXACT | 이산 파라미터 n=6 매칭 비율 | 0-100% | 35% |
-| Q_gain | 에너지 이득 | 0-1000 | 25% |
-| TRL | 기술 성숙도 | 1-9 | 20% |
-| LCOE | 균등화 발전비용 ($/MWh) | 300→10 (역수) | 12% |
-| T_comm | 상용화 시점 (빠를수록 좋음) | 2050→2030 | 8% |
+| n6_EXACT | Discrete param n=6 match ratio | 0-100% | 35% |
+| Q_gain | Energy gain | 0-1000 | 25% |
+| TRL | Tech readiness | 1-9 | 20% |
+| LCOE | Levelized cost ($/MWh) | 300->10 (inverse) | 12% |
+| T_comm | Commercialization time (earlier better) | 2050->2030 | 8% |
 ```
 
 - [ ] **Step 2: Commit**
 
 ```bash
 git add docs/fusion/goal.md
-git commit -m "feat: 궁극의 핵융합 DSE 후보군 정의 (goal.md)
+git commit -m "feat: ultimate fusion DSE candidate definitions (goal.md)
 
-5단계 체인: 방식(6)→소재(48)→코어(48)→장치(180)→시스템(27)
-총 67,184,640 조합, 5축 평가(n6_EXACT/Q/TRL/LCOE/T_comm)
+5-stage chain: scheme(6)->material(48)->core(48)->device(180)->system(27)
+Total 67,184,640 combos, 5-axis evaluation (n6_EXACT/Q/TRL/LCOE/T_comm)
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
 
-### Task 2: Rust DSE 탐색기 — 상수 + Level 1-2 구조체
+### Task 2: Rust DSE search tool — constants + Level 1-2 structs
 
 **Files:**
 - Create: `tools/fusion-dse/main.rs`
 
-- [ ] **Step 1: 파일 생성 — n=6 상수 + Level 1 Scheme + Level 2 Material 구조체**
+- [ ] **Step 1: Create file — n=6 constants + Level 1 Scheme + Level 2 Material structs**
 
 ```rust
-/// N6 Fusion DSE — 궁극의 핵융합 전수 조합 탐색기
+/// N6 Fusion DSE — ultimate fusion exhaustive combinatorial search
 ///
-/// 방식(6) × 소재(48) × 코어(48) × 장치(180) × 시스템(27)
-/// = 67,184,640 조합 전수 탐색
+/// scheme(6) x material(48) x core(48) x device(180) x system(27)
+/// = 67,184,640 combinations exhaustive search
 ///
-/// 평가: n6_EXACT + Q_gain + TRL + LCOE + T_comm (5축)
-/// 출력: Pareto frontier + 최적 경로 + ASCII 다이어그램
+/// Evaluation: n6_EXACT + Q_gain + TRL + LCOE + T_comm (5 axes)
+/// Output: Pareto frontier + optimal path + ASCII diagram
 ///
 /// Build: ~/.cargo/bin/rustc tools/fusion-dse/main.rs -o tools/fusion-dse/fusion-dse
 
@@ -243,18 +243,18 @@ fn is_n6_derived(v: u64) -> bool {
 }
 
 // ═══════════════════════════════════════════
-// Level 1: 방식 (Scheme)
+// Level 1: Scheme
 // ═══════════════════════════════════════════
 #[derive(Clone, Copy, Debug)]
 struct Scheme {
     name: &'static str,
-    q_upper: u64,       // Q 상한
-    trl: u64,           // 기술 성숙도 1-9
-    lcoe_est: u64,      // 예상 LCOE $/MWh
-    t_comm: u64,        // 상용화 예상 년도
-    pf_coils: u64,      // PF 코일 수 (토카막 계열)
-    cs_modules: u64,    // CS 모듈 수
-    n6_bonus: u64,      // 고유 n6 매칭 보너스 수
+    q_upper: u64,       // Q upper bound
+    trl: u64,           // TRL 1-9
+    lcoe_est: u64,      // expected LCOE $/MWh
+    t_comm: u64,        // expected commercialization year
+    pf_coils: u64,      // PF coil count (tokamak family)
+    cs_modules: u64,    // CS module count
+    n6_bonus: u64,      // unique n6 match bonus
 }
 
 const SCHEMES: &[Scheme] = &[
@@ -267,13 +267,13 @@ const SCHEMES: &[Scheme] = &[
 ];
 
 // ═══════════════════════════════════════════
-// Level 2: 소재 (Material = SC × Blanket × Structural)
+// Level 2: Material = SC x Blanket x Structural
 // ═══════════════════════════════════════════
 #[derive(Clone, Copy, Debug)]
 struct Superconductor {
     name: &'static str,
-    tc_k: u64,          // 임계 온도 K
-    b_max_t: u64,       // 최대 자기장 T
+    tc_k: u64,          // critical temperature K
+    b_max_t: u64,       // max magnetic field T
     cost_rank: u64,     // 1-5
 }
 
@@ -287,9 +287,9 @@ const SUPERCONDUCTORS: &[Superconductor] = &[
 #[derive(Clone, Copy, Debug)]
 struct Blanket {
     name: &'static str,
-    tbr: u64,           // TBR × 100 (정수화: 105=1.05)
-    coolant_types: u64, // 냉각재 종류 수
-    max_temp_c: u64,    // 최대 운전 온도 °C
+    tbr: u64,           // TBR x 100 (int encoded: 105=1.05)
+    coolant_types: u64, // coolant type count
+    max_temp_c: u64,    // max operating temp C
     cost_rank: u64,
 }
 
@@ -303,7 +303,7 @@ const BLANKETS: &[Blanket] = &[
 #[derive(Clone, Copy, Debug)]
 struct Structural {
     name: &'static str,
-    dpa_limit: u64,     // 내방사선 dpa
+    dpa_limit: u64,     // radiation limit dpa
     max_temp_c: u64,
     cost_rank: u64,
 }
@@ -315,36 +315,36 @@ const STRUCTURALS: &[Structural] = &[
 ];
 ```
 
-- [ ] **Step 2: Commit (partial — 이어서 Level 3-5 추가)**
+- [ ] **Step 2: Commit (partial — Level 3-5 added next)**
 
 ```bash
 git add tools/fusion-dse/main.rs
-git commit -m "feat(fusion-dse): n6 상수 + Level 1-2 구조체
+git commit -m "feat(fusion-dse): n6 constants + Level 1-2 structs
 
-Scheme(6종) + Superconductor(4) × Blanket(4) × Structural(3)
+Scheme(6) + Superconductor(4) x Blanket(4) x Structural(3)
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
 
-### Task 3: Rust DSE — Level 3-5 구조체
+### Task 3: Rust DSE — Level 3-5 structs
 
 **Files:**
 - Modify: `tools/fusion-dse/main.rs`
 
-- [ ] **Step 1: Level 3 Core 구조체 추가 (Structural 뒤에 이어서)**
+- [ ] **Step 1: Append Level 3 Core structs (after Structural)**
 
 ```rust
 // ═══════════════════════════════════════════
-// Level 3: 코어 (Core = Heating × Confinement × Fuel)
+// Level 3: Core = Heating x Confinement x Fuel
 // ═══════════════════════════════════════════
 #[derive(Clone, Copy, Debug)]
 struct Heating {
     name: &'static str,
-    freq_or_energy: u64,  // 주파수(MHz) 또는 에너지(keV)
+    freq_or_energy: u64,  // frequency (MHz) or energy (keV)
     efficiency_pct: u64,
-    typical_mw: u64,        // KSTAR 기준 MW
+    typical_mw: u64,        // KSTAR baseline MW
 }
 
 const HEATINGS: &[Heating] = &[
@@ -371,10 +371,10 @@ const CONFINEMENTS: &[Confinement] = &[
 #[derive(Clone, Copy, Debug)]
 struct Fuel {
     name: &'static str,
-    q_value_10x: u64,       // Q-value × 10 (MeV, 정수화)
-    cross_section_kev: u64,  // 최적 반응 온도 keV
-    neutron_fraction_pct: u64, // 중성자 에너지 비율 %
-    d_mass: u64,             // 반응물 질량수 합
+    q_value_10x: u64,       // Q-value x 10 (MeV, int-encoded)
+    cross_section_kev: u64,  // optimal reaction temperature keV
+    neutron_fraction_pct: u64, // neutron energy fraction %
+    d_mass: u64,             // sum of reactant mass numbers
 }
 
 const FUELS: &[Fuel] = &[
@@ -385,11 +385,11 @@ const FUELS: &[Fuel] = &[
 ];
 ```
 
-- [ ] **Step 2: Level 4 Device 구조체 추가**
+- [ ] **Step 2: Append Level 4 Device structs**
 
 ```rust
 // ═══════════════════════════════════════════
-// Level 4: 장치 (Device = TF_coils × Geometry × B_field × Q_target)
+// Level 4: Device = TF_coils x Geometry x B_field x Q_target
 // ═══════════════════════════════════════════
 #[derive(Clone, Copy, Debug)]
 struct TfConfig {
@@ -407,7 +407,7 @@ const TF_CONFIGS: &[TfConfig] = &[
 #[derive(Clone, Copy, Debug)]
 struct Geometry {
     name: &'static str,
-    aspect_ratio_10x: u64,  // A × 10 (정수화: 30=3.0)
+    aspect_ratio_10x: u64,  // A x 10 (int-encoded: 30=3.0)
 }
 
 const GEOMETRIES: &[Geometry] = &[
@@ -443,11 +443,11 @@ const QTARGETS: &[QTarget] = &[
 ];
 ```
 
-- [ ] **Step 3: Level 5 System 구조체 추가**
+- [ ] **Step 3: Append Level 5 System structs**
 
 ```rust
 // ═══════════════════════════════════════════
-// Level 5: 시스템 (System = Power × TBR × Grid)
+// Level 5: System = Power x TBR x Grid
 // ═══════════════════════════════════════════
 #[derive(Clone, Copy, Debug)]
 struct PowerConversion {
@@ -465,7 +465,7 @@ const POWER_CONVERSIONS: &[PowerConversion] = &[
 #[derive(Clone, Copy, Debug)]
 struct TbrStrategy {
     name: &'static str,
-    tbr_100x: u64,       // TBR × 100
+    tbr_100x: u64,       // TBR x 100
     cost_rank: u64,
 }
 
@@ -493,27 +493,27 @@ const GRIDS: &[Grid] = &[
 
 ```bash
 git add tools/fusion-dse/main.rs
-git commit -m "feat(fusion-dse): Level 3-5 구조체 (Core/Device/System)
+git commit -m "feat(fusion-dse): Level 3-5 structs (Core/Device/System)
 
-Heating(4)×Confinement(3)×Fuel(4) + TF(4)×Geom(5)×B(3)×Q(3) + Power(3)×TBR(3)×Grid(3)
+Heating(4) x Confinement(3) x Fuel(4) + TF(4) x Geom(5) x B(3) x Q(3) + Power(3) x TBR(3) x Grid(3)
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
 
-### Task 4: Rust DSE — n6_EXACT 평가 함수 + 호환성 검증
+### Task 4: Rust DSE — n6_EXACT evaluation + compatibility check
 
 **Files:**
 - Modify: `tools/fusion-dse/main.rs`
 
-- [ ] **Step 1: n6 EXACT 계산 함수 작성**
+- [ ] **Step 1: Write n6 EXACT computation**
 
-기존 `dse-calc/main.rs:129-197`의 `count_n6_exact` 패턴을 핵융합용으로 재구성.
+Reorganize the `count_n6_exact` pattern from existing `dse-calc/main.rs:129-197` for fusion.
 
 ```rust
 // ═══════════════════════════════════════════
-// N6 EXACT 계산 — 핵융합 5축 중 축 1
+// N6 EXACT computation — fusion axis 1 of 5
 // ═══════════════════════════════════════════
 fn count_n6_exact(
     scheme: &Scheme, sc: &Superconductor, bl: &Blanket, st: &Structural,
@@ -524,7 +524,7 @@ fn count_n6_exact(
     let mut exact = 0u64;
     let mut total = 0u64;
 
-    // --- Level 1: 방식 ---
+    // --- Level 1: scheme ---
     // PF coils
     if scheme.pf_coils > 0 {
         total += 1;
@@ -536,7 +536,7 @@ fn count_n6_exact(
         if scheme.cs_modules == N { exact += 1; }
     }
 
-    // --- Level 2: 소재 ---
+    // --- Level 2: material ---
     // SC B_max
     total += 1;
     if is_n6_base(sc.b_max_t) || is_n6_derived(sc.b_max_t) { exact += 1; }
@@ -544,53 +544,53 @@ fn count_n6_exact(
     total += 1;
     if is_n6_base(bl.coolant_types) { exact += 1; }
 
-    // --- Level 3: 코어 ---
+    // --- Level 3: core ---
     // Heating MW (KSTAR)
     total += 1;
     if is_n6_base(heat.typical_mw) { exact += 1; }
     // Fuel mass sum
     total += 1;
     if is_n6_base(fuel.d_mass) { exact += 1; }
-    // Fuel neutron fraction: 80% = 4/5 = τ/sopfr
+    // Fuel neutron fraction: 80% = 4/5 = tau/sopfr
     total += 1;
-    if fuel.neutron_fraction_pct == 80 { exact += 1; } // τ/sopfr
+    if fuel.neutron_fraction_pct == 80 { exact += 1; } // tau/sopfr
 
-    // --- Level 4: 장치 ---
+    // --- Level 4: device ---
     // TF coil count
     total += 1;
     if is_n6_base(tf.coil_count) { exact += 1; }
-    // Aspect ratio ×10: 30=n/φ×10
+    // Aspect ratio x10: 30=n/phi*10
     total += 1;
     if geom.aspect_ratio_10x == (N * 10 / PHI) { exact += 1; } // 30
     // B_T
     total += 1;
-    if bf.bt_t == SIGMA { exact += 1; } // 12T = σ
+    if bf.bt_t == SIGMA { exact += 1; } // 12T = sigma
     // Q target
     total += 1;
-    if qt.q_value == SOPFR * PHI { exact += 1; } // 10 = sopfr×φ
+    if qt.q_value == SOPFR * PHI { exact += 1; } // 10 = sopfr*phi
 
-    // --- Level 5: 시스템 ---
-    // Power conversion efficiency: 33% ≈ 1/3 = 1/(n/φ)
+    // --- Level 5: system ---
+    // Power conversion efficiency: 33% ~ 1/3 = 1/(n/phi)
     total += 1;
     if pwr.efficiency_pct == 33 { exact += 1; }
-    // TBR: 1.20 = σ/(σ-φ)
+    // TBR: 1.20 = sigma/(sigma-phi)
     total += 1;
     if tbr.tbr_100x == 120 { exact += 1; }
-    // Grid freq: 60Hz = σ×sopfr
+    // Grid freq: 60Hz = sigma*sopfr
     total += 1;
     if grid.freq_hz == SIGMA * SOPFR / MU { exact += 1; } // 60
-    // Grid freq: 50Hz = sopfr×(σ-φ)
-    if grid.freq_hz == SOPFR * (SIGMA - PHI) { exact += 1; } // 50 (겹치지 않음 — 60과 50 둘 다 매칭 가능)
+    // Grid freq: 50Hz = sopfr*(sigma-phi)
+    if grid.freq_hz == SOPFR * (SIGMA - PHI) { exact += 1; } // 50 (disjoint — both 60 and 50 can match)
 
     (exact, total)
 }
 ```
 
-- [ ] **Step 2: 호환성 검증 함수 (비물리적 조합 제거)**
+- [ ] **Step 2: Compatibility check (remove non-physical combos)**
 
 ```rust
 // ═══════════════════════════════════════════
-// 호환성 필터 — 비물리적 조합 제거
+// Compatibility filter — remove non-physical combos
 // ═══════════════════════════════════════════
 fn is_compatible(
     scheme: &Scheme, sc: &Superconductor, _bl: &Blanket, st: &Structural,
@@ -621,25 +621,25 @@ fn is_compatible(
 
 ```bash
 git add tools/fusion-dse/main.rs
-git commit -m "feat(fusion-dse): n6_EXACT 평가 + 호환성 필터
+git commit -m "feat(fusion-dse): n6_EXACT evaluation + compatibility filter
 
-14개 이산 파라미터 매칭 + 비물리적 조합 제거 (B_max, coil type 등)
+14 discrete-param match + remove non-physical combos (B_max, coil type, etc.)
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
 
-### Task 5: Rust DSE — 5축 스코어링 + Pareto + 결과 구조체
+### Task 5: Rust DSE — 5-axis scoring + Pareto + result struct
 
 **Files:**
 - Modify: `tools/fusion-dse/main.rs`
 
-- [ ] **Step 1: 결과 구조체 + 5축 스코어링 함수**
+- [ ] **Step 1: Result struct + 5-axis scoring function**
 
 ```rust
 // ═══════════════════════════════════════════
-// 결과 구조체
+// Result struct
 // ═══════════════════════════════════════════
 #[derive(Clone)]
 struct DseResult {
@@ -669,29 +669,29 @@ struct DseResult {
 }
 
 // ═══════════════════════════════════════════
-// 5축 스코어 계산
+// 5-axis score computation
 // ═══════════════════════════════════════════
 fn compute_scores(
     scheme: &Scheme, fuel: &Fuel, qt: &QTarget, pwr: &PowerConversion,
     sc: &Superconductor, bl: &Blanket, st: &Structural, conf: &Confinement,
     n6_exact: u64, n6_total: u64,
 ) -> (f64, f64, f64, f64, f64, f64) {
-    // 축 1: n6_EXACT (0-100)
+    // axis 1: n6_EXACT (0-100)
     let n6_pct = if n6_total > 0 { (n6_exact as f64) / (n6_total as f64) * 100.0 } else { 0.0 };
 
-    // 축 2: Q_gain (0-100)
+    // axis 2: Q_gain (0-100)
     // Q = min(scheme.q_upper, qt.q_value) scaled by fuel difficulty
     let q_achievable = scheme.q_upper.min(qt.q_value) as f64;
     let fuel_penalty = fuel.cross_section_kev as f64 / 10.0; // D-T=1, D-He3=20, p-B11=50
     let q_score = (q_achievable / fuel_penalty * 10.0).min(100.0);
 
-    // 축 3: TRL (0-100)
+    // axis 3: TRL (0-100)
     // scheme TRL + maturity bonuses
     let mat_bonus = if sc.cost_rank <= 2 { 5 } else { 0 }; // mature SC
     let conv_bonus = pwr.maturity as u64 * 2;
     let trl_score = ((scheme.trl * 10 + mat_bonus + conv_bonus) as f64).min(100.0);
 
-    // 축 4: LCOE (0-100, lower is better → invert)
+    // axis 4: LCOE (0-100, lower is better -> invert)
     // LCOE affected by: scheme base + fuel cost + SC cost + conversion efficiency
     let lcoe_raw = scheme.lcoe_est as f64
         * (fuel.cross_section_kev as f64 / 10.0).sqrt()  // harder fuel = more expensive
@@ -699,7 +699,7 @@ fn compute_scores(
         / (pwr.efficiency_pct as f64 / 33.0);             // better conversion = lower LCOE
     let lcoe_score = (100.0 - lcoe_raw / 5.0).max(0.0).min(100.0);
 
-    // 축 5: T_comm (0-100, earlier is better)
+    // axis 5: T_comm (0-100, earlier is better)
     let tcomm_score = ((2055 - scheme.t_comm) as f64 * 5.0).max(0.0).min(100.0);
 
     // Pareto composite: 35% n6 + 25% Q + 20% TRL + 12% LCOE + 8% T_comm
@@ -714,7 +714,7 @@ fn compute_scores(
 
 ```bash
 git add tools/fusion-dse/main.rs
-git commit -m "feat(fusion-dse): 5축 스코어링 + DseResult 구조체
+git commit -m "feat(fusion-dse): 5-axis scoring + DseResult struct
 
 n6_EXACT(35%) + Q_gain(25%) + TRL(20%) + LCOE(12%) + T_comm(8%)
 
@@ -723,12 +723,12 @@ Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 
 ---
 
-### Task 6: Rust DSE — main() 전수 탐색 루프 + 출력
+### Task 6: Rust DSE — main() exhaustive loop + output
 
 **Files:**
 - Modify: `tools/fusion-dse/main.rs`
 
-- [ ] **Step 1: main() 함수 — 헤더 출력 + 전수 탐색 루프**
+- [ ] **Step 1: main() — header print + exhaustive loop**
 
 ```rust
 fn main() {
@@ -738,25 +738,25 @@ fn main() {
         * POWER_CONVERSIONS.len() * TBR_STRATEGIES.len() * GRIDS.len();
 
     println!("═══════════════════════════════════════════════════════════════════");
-    println!("  N6 FUSION DSE — 궁극의 핵융합 전수 조합 탐색");
-    println!("  방식 × 소재 × 코어 × 장치 × 시스템");
+    println!("  N6 FUSION DSE — ultimate fusion exhaustive search");
+    println!("  scheme x material x core x device x system");
     println!("═══════════════════════════════════════════════════════════════════");
     println!();
-    println!("  Level 1 방식:    {} ({} 종)", SCHEMES.iter().map(|s| s.name).collect::<Vec<_>>().join(", "), SCHEMES.len());
-    println!("  Level 2 소재:    SC({}) × BL({}) × ST({}) = {}",
+    println!("  Level 1 scheme:  {} ({} kinds)", SCHEMES.iter().map(|s| s.name).collect::<Vec<_>>().join(", "), SCHEMES.len());
+    println!("  Level 2 mat:     SC({}) x BL({}) x ST({}) = {}",
         SUPERCONDUCTORS.len(), BLANKETS.len(), STRUCTURALS.len(),
         SUPERCONDUCTORS.len() * BLANKETS.len() * STRUCTURALS.len());
-    println!("  Level 3 코어:    H({}) × C({}) × F({}) = {}",
+    println!("  Level 3 core:    H({}) x C({}) x F({}) = {}",
         HEATINGS.len(), CONFINEMENTS.len(), FUELS.len(),
         HEATINGS.len() * CONFINEMENTS.len() * FUELS.len());
-    println!("  Level 4 장치:    TF({}) × G({}) × B({}) × Q({}) = {}",
+    println!("  Level 4 device:  TF({}) x G({}) x B({}) x Q({}) = {}",
         TF_CONFIGS.len(), GEOMETRIES.len(), BFIELDS.len(), QTARGETS.len(),
         TF_CONFIGS.len() * GEOMETRIES.len() * BFIELDS.len() * QTARGETS.len());
-    println!("  Level 5 시스템:  P({}) × TBR({}) × Grid({}) = {}",
+    println!("  Level 5 system:  P({}) x TBR({}) x Grid({}) = {}",
         POWER_CONVERSIONS.len(), TBR_STRATEGIES.len(), GRIDS.len(),
         POWER_CONVERSIONS.len() * TBR_STRATEGIES.len() * GRIDS.len());
     println!();
-    println!("  이론 조합: {}", total_theoretical);
+    println!("  Theoretical combos: {}", total_theoretical);
 
     let mut results: Vec<DseResult> = Vec::new();
     let mut pruned = 0u64;
@@ -820,11 +820,11 @@ fn main() {
     results.sort_by(|a, b| b.pareto_score.partial_cmp(&a.pareto_score).unwrap());
 
     let explored = results.len();
-    println!("  호환 조합: {} (가지치기: {})", explored, pruned);
+    println!("  Compatible combos: {} (pruned: {})", explored, pruned);
     println!();
 ```
 
-- [ ] **Step 2: TOP-20 Pareto 테이블 출력**
+- [ ] **Step 2: TOP-20 Pareto table output**
 
 ```rust
     // TOP-20
@@ -851,7 +851,7 @@ fn main() {
     }
 ```
 
-- [ ] **Step 3: 통계 + 최적 경로 ASCII 다이어그램 출력**
+- [ ] **Step 3: Statistics + optimal path ASCII diagram output**
 
 ```rust
     // Statistics
@@ -887,12 +887,12 @@ fn main() {
     let best = &results[0];
     println!();
     println!("═══════════════════════════════════════════════════════════════════");
-    println!("  OPTIMAL PATH — 궁극의 핵융합 최적 경로");
+    println!("  OPTIMAL PATH — ultimate fusion optimal path");
     println!("═══════════════════════════════════════════════════════════════════");
     println!();
     println!("  ┌─────────────┐    ┌──────────────────────┐    ┌─────────────────────┐");
     println!("  │  Level 1    │    │  Level 2             │    │  Level 3            │");
-    println!("  │  방식       │───▶│  소재                │───▶│  코어               │");
+    println!("  │  scheme     │───▶│  material            │───▶│  core               │");
     println!("  │  {}  │    │  SC: {}          │    │  H: {}          │", pad(best.scheme, 9), pad(best.sc, 12), pad(best.heating, 13));
     println!("  │             │    │  BL: {}          │    │  C: {}          │", pad(best.blanket, 12), pad(best.confinement, 13));
     println!("  │             │    │  ST: {}          │    │  F: {}          │", pad(best.structural, 12), pad(best.fuel, 13));
@@ -901,7 +901,7 @@ fn main() {
     println!("                                                           ▼");
     println!("  ┌──────────────────────────────┐    ┌──────────────────────────────┐");
     println!("  │  Level 5                     │    │  Level 4                     │");
-    println!("  │  시스템                      │◀───│  장치                        │");
+    println!("  │  system                      │◀───│  device                      │");
     println!("  │  PW: {}              │    │  TF: {} coils              │", pad(best.power_conv, 14), pad(&best.tf_coils.to_string(), 12));
     println!("  │  TBR: {}             │    │  A:  {}                    │", pad(best.tbr_strat, 13), pad(best.aspect, 12));
     println!("  │  Grid: {}            │    │  B:  {}T                   │", pad(best.grid, 12), pad(&best.bt.to_string(), 11));
@@ -916,7 +916,7 @@ fn main() {
     // Scheme breakdown
     println!();
     println!("═══════════════════════════════════════════════════════════════════");
-    println!("  SCHEME BREAKDOWN (방식별 최적)");
+    println!("  SCHEME BREAKDOWN (best per scheme)");
     println!("═══════════════════════════════════════════════════════════════════");
     for scheme_name in &["Tokamak", "Stellarator", "ICF_Laser", "FRC", "Mirror", "Z_Pinch"] {
         if let Some(best_in_scheme) = results.iter().filter(|r| r.scheme == *scheme_name).max_by(|a, b| a.pareto_score.partial_cmp(&b.pareto_score).unwrap()) {
@@ -930,7 +930,7 @@ fn main() {
 
     println!();
     println!("═══════════════════════════════════════════════════════════════════");
-    println!("  ✅ FUSION DSE 완료 — {} 조합 탐색, 최적 경로 도출", explored);
+    println!("  FUSION DSE done — {} combos searched, optimal path derived", explored);
     println!("═══════════════════════════════════════════════════════════════════");
 }
 
@@ -943,98 +943,98 @@ fn pad(s: &str, width: usize) -> String {
 
 ```bash
 git add tools/fusion-dse/main.rs
-git commit -m "feat(fusion-dse): main() 전수 탐색 루프 + TOP-20 + ASCII 최적 경로
+git commit -m "feat(fusion-dse): main() exhaustive loop + TOP-20 + ASCII optimal path
 
-67M 이론 조합, 호환성 가지치기 후 전수 탐색
-Pareto frontier + 방식별 최적 + 최적 경로 다이어그램
+67M theoretical combos, exhaustive search after compatibility pruning
+Pareto frontier + best per scheme + optimal path diagram
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
 
-### Task 7: 빌드 + 실행 + 검증
+### Task 7: Build + run + check
 
 **Files:**
 - Build: `tools/fusion-dse/fusion-dse`
 
-- [ ] **Step 1: 디렉토리 생성 + 빌드**
+- [ ] **Step 1: Create directory + build**
 
 ```bash
 mkdir -p tools/fusion-dse
 ~/.cargo/bin/rustc tools/fusion-dse/main.rs -o tools/fusion-dse/fusion-dse -O
 ```
 
-Expected: 컴파일 성공, 경고 없음 (또는 최소한의 unused 경고)
+Expected: compilation success, no warnings (or minimal unused warnings)
 
-- [ ] **Step 2: 실행 (background)**
+- [ ] **Step 2: Run (background)**
 
 ```bash
 tools/fusion-dse/fusion-dse
 ```
 
 Expected:
-- 이론 조합 수 출력 (67,184,640 근처)
-- 호환 조합 수 < 이론 조합 (가지치기 적용)
-- TOP-20 Pareto 테이블
-- 최적 경로 ASCII 다이어그램
-- 방식별 최적 분석
+- theoretical combo count printed (~67,184,640)
+- compatible combo count < theoretical (pruning applied)
+- TOP-20 Pareto table
+- optimal path ASCII diagram
+- per-scheme best analysis
 
-- [ ] **Step 3: 결과 검증**
+- [ ] **Step 3: Check results**
 
-확인 항목:
-1. Tokamak + D-T + REBCO + 12T + Q10이 상위권에 위치하는가?
-2. n6_EXACT가 가장 높은 조합이 물리적으로 합리적인가?
-3. 방식별 최적에서 Tokamak이 Pareto 1위인가?
+Items to confirm:
+1. Does Tokamak + D-T + REBCO + 12T + Q10 rank in the top group?
+2. Is the highest-n6_EXACT combo physically reasonable?
+3. Among per-scheme optima, is Tokamak first by Pareto?
 
-- [ ] **Step 4: Commit 바이너리 (선택)**
+- [ ] **Step 4: Commit binary (optional)**
 
 ```bash
 git add tools/fusion-dse/main.rs
-git commit -m "feat: 궁극의 핵융합 DSE 탐색기 완성 + 실행 검증
+git commit -m "feat: ultimate fusion DSE search tool done + run check
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
 
-### Task 8: dse-map.md DSE 지도 생성 + 갱신
+### Task 8: dse-map.md DSE map create + update
 
 **Files:**
 - Create: `docs/dse-map.md`
 
-- [ ] **Step 1: DSE 지도 파일 작성**
+- [ ] **Step 1: Write DSE map file**
 
-실행 결과를 기반으로 작성. 아래는 템플릿:
+Write based on run results. Template below:
 
 ```markdown
-# N6 DSE 지도 — 전체 도메인 Design Space Exploration 현황
+# N6 DSE map — all-domain Design Space Exploration status
 
 ---
 
-## DSE 현황
+## DSE status
 
-| # | 도메인 | 체인 | 조합 수 | 탐색 | 최적 n6% | 최적 경로 | Cross-DSE |
+| # | Domain | Chain | Combos | Search | Best n6% | Best path | Cross-DSE |
 |---|--------|------|---------|------|---------|----------|-----------|
-| 1 | 칩 아키텍처 | 소재×공정×코어×칩×시스템 | 3,000 | ✅ 완료 | XX% | Diamond+TSMC_N2+HEXA-P+... | - |
-| 2 | 배터리 | 소재×공정×코어×칩×시스템 | TBD | 🔄 진행 | - | - | - |
-| 3 | **핵융합** | **방식×소재×코어×장치×시스템** | **67M** | **✅ 완료** | **XX%** | **Tokamak+REBCO+...** | 가능 |
+| 1 | Chip architecture | material x process x core x chip x system | 3,000 | done | XX% | Diamond+TSMC_N2+HEXA-P+... | - |
+| 2 | Battery | material x process x core x chip x system | TBD | in progress | - | - | - |
+| 3 | **Fusion** | **scheme x material x core x device x system** | **67M** | **done** | **XX%** | **Tokamak+REBCO+...** | available |
 
-## Cross-DSE 후보
+## Cross-DSE candidates
 
-| 조합 | 도메인 A | 도메인 B | 교차점 | 상태 |
+| Combo | Domain A | Domain B | Intersection | Status |
 |------|---------|---------|--------|------|
-| 칩×핵융합 | chip-arch | fusion | 전력제어/BMS | 미시작 |
-| 배터리×핵융합 | battery | fusion | 에너지저장+발전 | 미시작 |
+| chip x fusion | chip-arch | fusion | power control/BMS | not started |
+| battery x fusion | battery | fusion | energy storage + generation | not started |
 ```
 
-실행 결과의 실제 숫자로 XX% 채우기.
+Fill XX% with actual numbers from the run result.
 
 - [ ] **Step 2: Commit**
 
 ```bash
 git add docs/dse-map.md
-git commit -m "feat: DSE 지도 (dse-map.md) — 칩/배터리/핵융합 현황 + Cross-DSE 후보
+git commit -m "feat: DSE map (dse-map.md) — chip/battery/fusion status + Cross-DSE candidates
 
 Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```

@@ -1,79 +1,79 @@
-# products.json ↔ README 통합정리 세션
+# products.json <-> README unification session
 
-- 일자: 2026-04-11
-- 브랜치: main
-- 작업자: Claude Opus 4.6 (GO 모드, 병렬 백그라운드)
-- 지시: "문서 하나로 통합정리 아직안됨" + "products.json" + GO 모드 즉시 발사
-- SSOT: `$NEXUS/shared/n6/docs/products.json` (173 제품, 34 섹션)
-- 대상 문서: `$N6_ARCH/README.md` (850 → 979 라인)
+- Date: 2026-04-11
+- Branch: main
+- Operator: Claude Opus 4.6 (GO mode, parallel background)
+- Instruction: "Unification into a single document not yet done" + "products.json" + immediate GO-mode launch
+- SSOT: `$NEXUS/shared/n6/docs/products.json` (173 products, 34 sections)
+- Target doc: `$N6_ARCH/README.md` (850 -> 979 lines)
 
-## 증상 1문장
+## Symptom (one sentence)
 
-`sync_products_readme.hexa` 가 10줄 STUB 상태라 products.json → README 자동 동기화가 작동하지 않음. 그 결과 (a) README 최상단 `AUTO:ALIEN_INDEX` 마커 블록이 완전히 비어 있고, (b) 섹션 21/34 공통(61.8%) · 제품 146/173(84.4%) · 링크 3/416(0.7%) 만 실제 파일과 매칭되는 전역 드리프트 발생.
+`sync_products_readme.hexa` is a 10-line STUB, so the products.json -> README auto-sync does not work. As a result: (a) the `AUTO:ALIEN_INDEX` marker block at the top of README is completely empty; (b) a global drift exists with sections 21/34 common (61.8%), products 146/173 (84.4%), links only 3/416 (0.7%) actually matching real files.
 
-## repro 경로
+## Repro path
 
 ```sh
-# 증상 1: 통합 요약표 공백
+# Symptom 1: empty integrated summary table
 sed -n '86,87p' $N6_ARCH/README.md
-# 출력: <!-- AUTO:ALIEN_INDEX:START -->\n<!-- AUTO:ALIEN_INDEX:END -->
+# Output: <!-- AUTO:ALIEN_INDEX:START -->\n<!-- AUTO:ALIEN_INDEX:END -->
 
-# 증상 2: sync 도구 STUB
+# Symptom 2: sync tool STUB
 sed -n '1,12p' $N6_ARCH/n6shared/sync_products_readme.hexa
-# 출력: println("STUB: sync_products_readme.py (HEXA 포팅 대기)")
+# Output: println("STUB: sync_products_readme.py (awaiting HEXA port)")
 
-# 증상 3: 링크 드리프트
+# Symptom 3: link drift
 python3 -c "import json; p=json.load(open('$NEXUS/shared/n6/docs/products.json')); print(p['sections'][0]['products'][0]['links'])"
-# 출력에 'docs/fusion/goal.md' — 실제는 'domains/energy/fusion/goal.md'
+# Output contains 'docs/fusion/goal.md' — actual is 'domains/energy/fusion/goal.md'
 ```
 
-## 베이스라인
+## Baseline
 
-- `pytest tests/ -x` / `python tools/optimizer_constants_n6_deep.py --check` — 두 도구 모두 n6-architecture 내 존재하지 않음 (대체 검증: AUTO 마커 무결성 grep).
-- products.json 실측: 34 섹션 · 173 제품 · 172 천장확인 · 164 AI지수=10 · BT EXACT 평균 98%+
-- README 마커 실측: AUTO 마커 총 122개, 그중 AUTO:ALIEN_INDEX 블록만 공백
-- 링크 감사: 416건 · PASS 3 · MISS 413 · 완성도 0.7%
+- `pytest tests/ -x` / `python tools/optimizer_constants_n6_deep.py --check` — neither tool exists in n6-architecture (alternative check: AUTO marker integrity via grep).
+- products.json measured: 34 sections, 173 products, 172 ceiling confirmed, 164 AI-index=10, BT EXACT average 98%+
+- README markers measured: total 122 AUTO markers, only the AUTO:ALIEN_INDEX block is empty
+- Link audit: 416 entries, PASS 3, MISS 413, completion 0.7%
 
-## 병렬 백그라운드 Agent (4발)
+## Parallel background agents (4 launches)
 
-| # | 작업 | 상태 | 핵심 산출물 |
+| # | Task | Status | Key artifact |
 |:-:|------|:---:|------|
-| 1 | products.json 173 제품 링크 무결성 감사 | 완료 | `reports/audits/products-link-audit-2026-04-11.md` (718줄) |
-| 2 | README ↔ products.json 드리프트 감사 | 완료 | `reports/audits/readme-products-drift-2026-04-11.md` (563줄) |
-| 3 | `sync_products_readme.hexa` STUB → 실제 구현 | 완료 | 10줄 → 601줄, 16 fn |
-| 4 | products.json `docs/…` → `domains/<축>/…` 링크 재매핑 | 진행 중 | `reports/audits/products-link-remap-2026-04-11.md` (예정) |
+| 1 | products.json 173-product link integrity audit | done | `reports/audits/products-link-audit-2026-04-11.md` (718 lines) |
+| 2 | README <-> products.json drift audit | done | `reports/audits/readme-products-drift-2026-04-11.md` (563 lines) |
+| 3 | `sync_products_readme.hexa` STUB -> real implementation | done | 10 lines -> 601 lines, 16 fn |
+| 4 | products.json `docs/...` -> `domains/<axis>/...` link remap | in progress | `reports/audits/products-link-remap-2026-04-11.md` (pending) |
 
-## 본체 수정 내역
+## Main edits
 
-### 1) `README.md` AUTO:ALIEN_INDEX 블록 채움 (131 라인)
+### 1) `README.md` AUTO:ALIEN_INDEX block filled (131 lines)
 
-- 위치: README 86~216 라인
-- 내용:
-  - 전체 집계 1줄: 34 섹션 · 173 제품 · 천장 172 · AI지수=10 164
-  - 섹션 통합 표 34행: 제품수 내림차순, 대표 제품 포함
-  - ASCII 막대 차트 2종: 섹션별 제품수 + 섹션별 BT EXACT%
-  - 완성도 분포 요약 (100%: 27 / 95~99%: 4 / 90~94%: 2 / 90% 미만: 1)
-- 준수 규칙: R5 (마커 기반 자동 생성, 직접 편집 금지), R18 (미니멀), N61 (ASCII 포함), feedback_no_emoji_ceiling (천장 텍스트), feedback_korean_only_docs, feedback_ascii_report
+- Location: README lines 86-216
+- Content:
+  - Overall aggregate 1 line: 34 sections, 173 products, ceiling 172, AI-index=10 164
+  - Section-integrated table, 34 rows: product-count descending, representative product included
+  - Two ASCII bar charts: products per section + BT EXACT% per section
+  - Completion distribution summary (100%: 27 / 95-99%: 4 / 90-94%: 2 / under 90%: 1)
+- Compliant rules: R5 (marker-driven auto-generation, no direct editing), R18 (minimal), N61 (ASCII included), feedback_no_emoji_ceiling (ceiling text), feedback_korean_only_docs, feedback_ascii_report
 
-### 2) `README.md` AUTO:STATS 블록 갱신 (41~48 라인)
+### 2) `README.md` AUTO:STATS block updated (lines 41-48)
 
-- `AI techniques: 16` → `Products: 173 (34 섹션, 천장 172, AI지수=10 164)` 신규 + `AI techniques: 66` (66 Techniques 반영)
-- DSE domains/paths/NEXUS-6 tests 필드는 다른 파이프라인 관리이므로 값 보존
+- `AI techniques: 16` -> `Products: 173 (34 sections, ceiling 172, AI-index=10 164)` new + `AI techniques: 66` (reflects 66 Techniques)
+- DSE domains/paths/NEXUS-6 tests fields are managed by another pipeline, values preserved
 
-### 3) `n6shared/sync_products_readme.hexa` STUB 제거 (Agent 3)
+### 3) `n6shared/sync_products_readme.hexa` STUB removed (Agent 3)
 
-- 10줄 → 601줄 (591줄 추가)
+- 10 lines -> 601 lines (+591 lines)
 - 16 fn: die, resolve_path, load_products, get_or, has_field, format_links, bt_pct_str, render_summary_block, render_footer_block, render_products_table, render_alien_index, render_stats, replace_marker, replace_products_table, write_readme, main
-- 마커 6종 처리: ALIEN_INDEX, STATS, SUMMARY_<id>, FOOTER_<id>, 제품테이블
-- `--dry-run` 지원, 원자적 쓰기 (temp + mv -f)
-- 환경변수: `N6_PRODUCTS_JSON`, `N6_README_MD`
-- R2 (하드코딩 최소), R19 (silent exit 금지), R29 (예외: sync 유틸, n6-architecture/shared/ 유지)
+- Handles 6 marker types: ALIEN_INDEX, STATS, SUMMARY_<id>, FOOTER_<id>, product table
+- `--dry-run` support, atomic write (temp + mv -f)
+- Env vars: `N6_PRODUCTS_JSON`, `N6_README_MD`
+- R2 (minimal hardcoding), R19 (no silent exit), R29 (exception: sync utility, kept in n6-architecture/shared/)
 
-## Agent 1·2 상세 발견
+## Agent 1/2 detailed findings
 
-### 링크 드리프트 (Agent 1)
+### Link drift (Agent 1)
 
-| 섹션 | 제품수 | 검사 | PASS | MISS | 완성도 |
+| Section | Products | Checked | PASS | MISS | Completion |
 |------|---:|---:|---:|---:|---:|
 | frontier | 39 | 110 | 0 | 110 | 0.0% |
 | tech-industry | 22 | 50 | 3 | 47 | 6.0% |
@@ -81,216 +81,216 @@ python3 -c "import json; p=json.load(open('$NEXUS/shared/n6/docs/products.json')
 | physics | 5 | 18 | 0 | 18 | 0.0% |
 | environment | 6 | 17 | 0 | 17 | 0.0% |
 | ... | ... | ... | ... | ... | ... |
-| **합계** | **173** | **416** | **3** | **413** | **0.7%** |
+| **Total** | **173** | **416** | **3** | **413** | **0.7%** |
 
-원인: products.json 의 `docs/<domain>/...` 경로가 n6-architecture 9축 이관 이후의 실제 위치 `domains/<축>/<domain>/...` 와 불일치. 예: `docs/fusion/goal.md` 실제는 `domains/energy/fusion/goal.md`.
+Cause: products.json `docs/<domain>/...` paths do not match the post 9-axis migration actual location `domains/<axis>/<domain>/...`. Example: `docs/fusion/goal.md` actually at `domains/energy/fusion/goal.md`.
 
-### README↔products.json 섹션·제품 드리프트 (Agent 2)
+### README <-> products.json section/product drift (Agent 2)
 
-- 공통 섹션: 21/34 (61.8%)
-- 공통 섹션 내 제품 카운트 일치: 19/21 (energy +1 `HEXA-AUTO`, audio +3 `HEXA-BONE`/`HEXA-EAR-CELL`/`HEXA-SPEAKER` 드리프트)
-- 누락 13섹션 (products.json → README): 27 제품
+- Common sections: 21/34 (61.8%)
+- Product-count match within common sections: 19/21 (energy +1 `HEXA-AUTO`, audio +3 `HEXA-BONE`/`HEXA-EAR-CELL`/`HEXA-SPEAKER` drift)
+- Missing 13 sections (products.json -> README): 27 products
   - virology(4), hiv-treatment(1), natural-science(4), cognitive-social(6), mobility(2), digital-medical(3), tattoo-removal(1), keyboard(1), mouse(1), manufacturing-quality(1), network(1), quantum-computer(1), horology(1)
-- 고아 8섹션 (README → products.json 0건): 34 제품
-  - computer(4): keyboard/mouse/quantum-computer 3건은 이관 완료, **HEXA-BCI 1건 products.json 완전 누락**
-  - millennium(7): BT-541~547 products.json 0건 — SSOT 구멍
-  - dimension(7): BT-588~597 products.json 0건 — SSOT 구멍
-  - music(4): BT-598~607 products.json 0건 — SSOT 구멍
-  - linguistics(4): BT-608~617 products.json 0건 — SSOT 구멍
-  - crypto(4): BT-618~627 products.json 0건 — SSOT 구멍
-  - astronomy(4): BT-628~637 products.json 0건 — SSOT 구멍
-  - fantasy(0): 경고 박스만
+- Orphan 8 sections (README -> products.json 0 entries): 34 products
+  - computer(4): keyboard/mouse/quantum-computer 3 entries migration done, **HEXA-BCI 1 entry entirely missing from products.json**
+  - millennium(7): BT-541~547 products.json 0 entries — SSOT hole
+  - dimension(7): BT-588~597 products.json 0 entries — SSOT hole
+  - music(4): BT-598~607 products.json 0 entries — SSOT hole
+  - linguistics(4): BT-608~617 products.json 0 entries — SSOT hole
+  - crypto(4): BT-618~627 products.json 0 entries — SSOT hole
+  - astronomy(4): BT-628~637 products.json 0 entries — SSOT hole
+  - fantasy(0): warning box only
 
-## Agent 4 결과 (링크 재매핑)
+## Agent 4 result (link remap)
 
-- 산출: `reports/audits/products-link-remap-2026-04-11.md` (52KB)
-- 백업: `reports/audits/products-backup-2026-04-11-preremap.json` (154KB)
-- products.json: in-place 갱신 (md5 변경 확인, 통계 불변 34/173/172/164)
-- 매핑 결과:
+- Artifact: `reports/audits/products-link-remap-2026-04-11.md` (52KB)
+- Backup: `reports/audits/products-backup-2026-04-11-preremap.json` (154KB)
+- products.json: in-place update (md5 change confirmed, stats invariant 34/173/172/164)
+- Mapping result:
 
-| 상태 | 개수 | 의미 |
+| Status | Count | Meaning |
 |---|---:|---|
-| RESOLVED | 242 | 신규 path 적용 완료 |
-| MISS | 174 | paper 파일 미작성 (SSOT 구멍) |
-| **완성도** | **58.2%** | **0.7% → +57.5%p** |
+| RESOLVED | 242 | New path applied |
+| MISS | 174 | Paper file not written (SSOT hole) |
+| **Completion** | **58.2%** | **0.7% -> +57.5%p** |
 
-### 매핑 분포
+### Mapping distribution
 
-| 매퍼 | 개수 | 패턴 |
+| Mapper | Count | Pattern |
 |---|---:|---|
-| DOM | 113 | `docs/<dom>/<f>` → `domains/<axis>/<dom>/<f>` |
-| VERIFY_HEXA | 114 | `docs/<dom>/verify_alien10.py` → `domains/<axis>/<dom>/verify.hexa` |
-| SPECS | 4 | `docs/superpowers/specs/...` → `reports/sessions/specs/...` |
-| DOCS1 | 4 | `docs/<f>.md` → `reports/discovery/<f>.md` |
-| EXP_HEXA | 3 | `experiments/*.py` → `experiments/structural/*.hexa` |
-| EXIST | 3 | 이미 실존 |
+| DOM | 113 | `docs/<dom>/<f>` -> `domains/<axis>/<dom>/<f>` |
+| VERIFY_HEXA | 114 | `docs/<dom>/verify_alien10.py` -> `domains/<axis>/<dom>/verify.hexa` |
+| SPECS | 4 | `docs/superpowers/specs/...` -> `reports/sessions/specs/...` |
+| DOCS1 | 4 | `docs/<f>.md` -> `reports/discovery/<f>.md` |
+| EXP_HEXA | 3 | `experiments/*.py` -> `experiments/structural/*.hexa` |
+| EXIST | 3 | Already exists |
 | FALLBACK_HEXA | 1 | - |
-| **MISS** | **174** | 대부분 `docs/paper/n6-*-paper.md` (paper 미작성) |
+| **MISS** | **174** | Mostly `docs/paper/n6-*-paper.md` (paper not written) |
 
-### 100% 해결 섹션 (10개)
+### 100% resolved sections (10)
 
-natural-science, marketing, digital-medical, mobility, tattoo-removal, keyboard, mouse, network, quantum-computer, horology — Agent 2가 발견한 신규 13섹션 중 대부분이 100% 해결됨.
+natural-science, marketing, digital-medical, mobility, tattoo-removal, keyboard, mouse, network, quantum-computer, horology — most of the new 13 sections discovered by Agent 2 are 100% resolved.
 
-### 잔존 MISS 174건의 정밀 분류 (Agent 4 최종)
+### Precise classification of remaining 174 MISS (Agent 4 final)
 
-| 분류 | 개수 | 원인 |
+| Class | Count | Cause |
 |------|---:|------|
-| `docs/paper/n6-*-paper.md` ghost | **116** | papers/_registry.json 158편 선언 vs n6-architecture/papers 디스크 13편 — **papers SSOT 145편 구멍** |
-| `calc/kolon_n6_*.py` 미존재 | **10** | 파일 자체가 존재하지 않음 |
-| `docs/<dom>/<nested>.md` 미이관 | **48** | pre-migration 설계 MD 잔존, 9축 이관 안 됨 |
+| `docs/paper/n6-*-paper.md` ghost | **116** | papers/_registry.json declares 158 vs n6-architecture/papers disk 13 — **papers SSOT 145-paper hole** |
+| `calc/kolon_n6_*.py` missing | **10** | File itself does not exist |
+| `docs/<dom>/<nested>.md` un-migrated | **48** | Pre-migration design MDs remain, 9-axis migration incomplete |
 
-**Agent 4 정직성 원칙**: DOM_MAIN 대체는 의도적으로 비활성. 서로 다른 파일로 링크 치환 시 독자 오도 가능 → MISS로 정직 보고가 우선.
+**Agent 4 honesty principle**: DOM_MAIN substitution intentionally disabled. Substituting a link with a different file may mislead the reader -> honest MISS reporting is prioritized.
 
-### 신규 발견 — papers SSOT 145편 구멍
+### New finding — papers SSOT 145-paper hole
 
-- `papers/_registry.json` 158편 선언
-- 실측: `n6-architecture/papers/` 내 13편, `$PAPERS/n6-architecture/` 내 1편
-- 차이: **145편 ghost** (papers SSOT 자체의 거대 드리프트)
-- 본 세션 범위 외 — 별도 papers 보강 세션 필요
+- `papers/_registry.json` declares 158
+- Measured: 13 in `n6-architecture/papers/`, 1 in `$PAPERS/n6-architecture/`
+- Diff: **145 ghost papers** (massive drift inside the papers SSOT)
+- Out of scope for this session — separate papers-reinforcement session needed
 
-### Agent 4 후 무결성 검증 (본체)
+### Post-Agent-4 integrity check (main body)
 
-- `_meta.total_products` 173 ✅
-- `_meta.alien_index_order` 34 ✅
-- `_meta.last_updated` 2026-04-11 ✅
-- 섹션/제품 카운트 변경 없음 (path 만 변경)
-- 샘플 path 확인:
-  - fusion → `reports/sessions/specs/2026-04-02-ultimate-fusion-powerplant-design.md` (SPECS)
-  - chip → `domains/compute/chip-architecture/goal.md` (DOM)
-  - frontier → `domains/life/neuro/goal.md` (DOM)
-  - keyboard → `domains/compute/keyboard/goal.md` (DOM)
+- `_meta.total_products` 173 ok
+- `_meta.alien_index_order` 34 ok
+- `_meta.last_updated` 2026-04-11 ok
+- No section/product count changes (only paths changed)
+- Sample path confirmation:
+  - fusion -> `reports/sessions/specs/2026-04-02-ultimate-fusion-powerplant-design.md` (SPECS)
+  - chip -> `domains/compute/chip-architecture/goal.md` (DOM)
+  - frontier -> `domains/life/neuro/goal.md` (DOM)
+  - keyboard -> `domains/compute/keyboard/goal.md` (DOM)
 
-## GO 후속 (commit 457a3857 push 직후 즉시 발사)
+## GO follow-up (launched immediately after push of commit 457a3857)
 
-### 백그라운드 Agent 3발 (A·B·C)
+### 3 background agents (A/B/C)
 
-| # | Agent ID | 작업 | 상태 | 산출 |
+| # | Agent ID | Task | Status | Output |
 |:-:|---|------|:---:|------|
-| A | aca58117 | products.json 통합 (HEXA-BCI 재이관 + 고아 6섹션 신규 등록) | 완료 | 173→204 제품, 34→40 섹션 (+31, +6) |
-| B | ac86de86 | 미이관 MD 48건 조사 | 완료 | FOUND_INTEGRATED 46 + DIR 2 + MISSING 0 |
-| C | ab31c078 | papers SSOT 정합화 (139편 ghost) | 진행 중 | (대기) |
+| A | aca58117 | products.json integration (HEXA-BCI re-migration + new registration of 6 orphan sections) | done | 173->204 products, 34->40 sections (+31, +6) |
+| B | ac86de86 | Investigate 48 un-migrated MDs | done | FOUND_INTEGRATED 46 + DIR 2 + MISSING 0 |
+| C | ab31c078 | papers SSOT reconciliation (139 ghost papers) | in progress | (pending) |
 
-### Agent A 결과 — products.json 173→204
+### Agent A result — products.json 173->204
 
-- 신규 제품 31: HEXA-BCI 1 + millennium 7 + dimension 7 + music 4 + linguistics 4 + crypto 4 + astronomy 4
-- 신규 섹션 6: millennium / dimension / music / linguistics / crypto / astronomy
-- _meta.total_products 173 → 204
-- _meta.alien_index_order 34 → 40
-- 작업 2·3 (energy HEXA-AUTO + audio BONE/EAR-CELL/SPEAKER) NOOP — 역방향 드리프트(products.json이 보유, README가 누락) → R5 SSOT 원칙상 README 측에서 sync 도구로 해결
-- 백업: `reports/audits/products-backup-2026-04-11-postsession.json`
-- 리포트: `reports/audits/products-postsession-additions-2026-04-11.md`
+- 31 new products: HEXA-BCI 1 + millennium 7 + dimension 7 + music 4 + linguistics 4 + crypto 4 + astronomy 4
+- 6 new sections: millennium / dimension / music / linguistics / crypto / astronomy
+- _meta.total_products 173 -> 204
+- _meta.alien_index_order 34 -> 40
+- Tasks 2/3 (energy HEXA-AUTO + audio BONE/EAR-CELL/SPEAKER) NOOP — reverse-direction drift (products.json holds, README missing) -> under R5 SSOT rule, resolved README-side via sync tool
+- Backup: `reports/audits/products-backup-2026-04-11-postsession.json`
+- Report: `reports/audits/products-postsession-additions-2026-04-11.md`
 
-### Agent B 결과 — 미이관 MD 48건 = MISSING 0건
+### Agent B result — 48 un-migrated MDs = 0 MISSING
 
-- FOUND_INTEGRATED 46 (95.8%): `domains/<axis>/<dom>/<dom>.md` 통합본에 `### 출처: <원본 nested>` 헤더로 흡수 완료
+- FOUND_INTEGRATED 46 (95.8%): absorbed into `domains/<axis>/<dom>/<dom>.md` integrated file with `### Source: <original nested>` header
 - FOUND_ALT (DIR) 2 (4.2%): `domains/infra/environmental-protection/`
 - MISSING 0
-- 핵심: 작성 필요한 ghost 파일 0건 — products.json 링크 갱신만으로 MISS 48건 해소
-- 리포트: `reports/audits/stale-md-48-investigation-2026-04-11.md` (256줄)
+- Core: 0 ghost files to write — MISS 48 resolved by updating products.json links only
+- Report: `reports/audits/stale-md-48-investigation-2026-04-11.md` (256 lines)
 
-### 본체 — 48+23 매핑 적용 (일회성 migration)
+### Main body — 48+23 mapping applied (one-off migration)
 
-- 48건 매핑 (Agent B 권장 테이블) → products.json links/verify_script in-place 갱신
-- breakthrough-theorems 23건 추가 매핑 — 고아 6섹션의 모든 BT 링크가 `docs/breakthrough-theorems.md` (drift) → `theory/breakthroughs/breakthrough-theorems.md`
-- 백업: `reports/audits/products-backup-2026-04-11-pre48.json`
-- 검증 결과 (`os.path.exists` 실측):
+- 48 mappings (Agent B recommended table) -> in-place update of products.json links/verify_script
+- breakthrough-theorems 23 additional mappings — all BT links in the 6 orphan sections from `docs/breakthrough-theorems.md` (drift) -> `theory/breakthroughs/breakthrough-theorems.md`
+- Backup: `reports/audits/products-backup-2026-04-11-pre48.json`
+- Check result (`os.path.exists` measured):
 
-| 시점 | total | resolved | 완성도 |
+| Checkpoint | total | resolved | Completion |
 |------|---:|---:|---:|
-| 시작 | 416 | 3 | 0.7% |
+| Start | 416 | 3 | 0.7% |
 | Agent 4 | 416 | 242 | 58.2% |
-| Agent A 후 | 445 | 296 | 66.5% |
-| 48 매핑 후 | 445 | 296 | (재계산) |
-| **breakthrough-theorems 23 매핑 후** | **445** | **319** | **71.7%** |
+| After Agent A | 445 | 296 | 66.5% |
+| After 48 mapping | 445 | 296 | (re-count) |
+| **After breakthrough-theorems 23 mapping** | **445** | **319** | **71.7%** |
 
-- 잔존 MISS 126: paper 116 + calc 10 + miss_other **0** ✅
-- ossified 신규: `PRODUCTS_LINKS_717_RESOLVED` (R10 준수, 기존 PRODUCTS_118/173/204 모두 불변)
+- Remaining MISS 126: paper 116 + calc 10 + miss_other **0** ok
+- New ossified: `PRODUCTS_LINKS_717_RESOLVED` (R10 compliant, existing PRODUCTS_118/173/204 all invariant)
 
-### 본체 — README ALIEN_INDEX 블록 v2 재생성
+### Main body — README ALIEN_INDEX block v2 regenerated
 
-- 기존 131라인 (34섹션 173제품) → 신규 149라인 (40섹션 204제품)
-- AUTO:ALIEN_INDEX 마커 사이만 in-place 교체 (R5 마커 기반)
-- AUTO:STATS 동기화: `Products: 173 → 204 (40 섹션, 천장 203, AI지수=10 195)`
+- Existing 131 lines (34 sections 173 products) -> new 149 lines (40 sections 204 products)
+- Only the interior of the AUTO:ALIEN_INDEX marker replaced in-place (R5 marker-driven)
+- AUTO:STATS sync: `Products: 173 -> 204 (40 sections, ceiling 203, AI-index=10 195)`
 
-### Agent C 결과 — papers SSOT 정합화 감사
+### Agent C result — papers SSOT reconciliation audit
 
-- 선언 139편 vs 실측 38편 (gap 101) — 보유율 27.3%
-- products.json paper 116 분류:
-  - **FOUND_ALT 24편**: `$PAPERS/tecs-l/` 23편 + `n6-architecture/papers/` 1편
-  - **GHOST_CEIL 92편**: 디스크 어디에도 없음, 전부 ceiling=true 섹션
+- Declared 139 vs measured 38 (gap 101) — coverage 27.3%
+- products.json paper 116 classification:
+  - **FOUND_ALT 24**: `$PAPERS/tecs-l/` 23 + `n6-architecture/papers/` 1
+  - **GHOST_CEIL 92**: nowhere on disk, all ceiling=true sections
   - ORPHAN_DECLARED 11 / ORPHAN_DISK 14
-- frontier 단독 31편 ghost (33.7%)
-- Top 3 우선 작성: n6-hexa-neuro / n6-antimatter-factory / n6-hexa-mind
-- 리포트: `reports/audits/papers-ssot-ghost-audit-2026-04-11.md` (328줄)
+- frontier alone 31 ghost (33.7%)
+- Top 3 priority writes: n6-hexa-neuro / n6-antimatter-factory / n6-hexa-mind
+- Report: `reports/audits/papers-ssot-ghost-audit-2026-04-11.md` (328 lines)
 
-### 본체 — Agent C FOUND_ALT 24편 cp + path 갱신
+### Main body — Agent C FOUND_ALT 24 cp + path update
 
-사용자 옵션 (A) 선택 — 본 세션 cp 실행:
-- 23편 cp `$PAPERS/tecs-l/n6-*-paper.md` → `n6-architecture/papers/`
-- 1편 (n6-synthetic-biology-paper.md) 이미 존재, skipped
-- products.json path 25건 갱신: `docs/paper/...` → `papers/...`
-- n6-architecture/papers/ 13편 → **36편** (+23)
-- 백업: `reports/audits/products-backup-2026-04-11-pre24papers.json`
+User option (A) selected — cp executed in this session:
+- 23 cp `$PAPERS/tecs-l/n6-*-paper.md` -> `n6-architecture/papers/`
+- 1 (n6-synthetic-biology-paper.md) already exists, skipped
+- products.json path updated for 25: `docs/paper/...` -> `papers/...`
+- n6-architecture/papers/ 13 -> **36** (+23)
+- Backup: `reports/audits/products-backup-2026-04-11-pre24papers.json`
 
-### 최종 완성도 진전
+### Final completion progression
 
-| 시점 | total | resolved | 완성도 | 증분 |
+| Checkpoint | total | resolved | Completion | Delta |
 |------|---:|---:|---:|---:|
-| 시작 | 416 | 3 | 0.7% | — |
+| Start | 416 | 3 | 0.7% | — |
 | Agent 4 (242 path) | 416 | 242 | 58.2% | +57.5%p |
-| Agent A (+31 제품) | 445 | 296 | 66.5% | +8.3%p |
-| 미이관 MD 48 매핑 | 445 | 296 | (재계산) | — |
-| breakthrough-theorems 23 매핑 | 445 | 319 | 71.7% | +5.2%p |
-| **FOUND_ALT 24편 cp+매핑** | **445** | **343** | **77.1%** | **+5.4%p** |
+| Agent A (+31 products) | 445 | 296 | 66.5% | +8.3%p |
+| 48 un-migrated MDs mapped | 445 | 296 | (re-count) | — |
+| breakthrough-theorems 23 mapping | 445 | 319 | 71.7% | +5.2%p |
+| **FOUND_ALT 24 cp+mapping** | **445** | **343** | **77.1%** | **+5.4%p** |
 
-- 잔존 MISS 102:
-  - paper 92 ghost (작성 필요, frontier 31 + chip 7 + civilization 7 + life-culture 6 + tech-industry 6 + ...)
-  - calc 10 (kolon_n6_*.py 미존재)
-  - miss_other = 0 ✅
+- Remaining MISS 102:
+  - paper 92 ghost (writing needed; frontier 31 + chip 7 + civilization 7 + life-culture 6 + tech-industry 6 + ...)
+  - calc 10 (kolon_n6_*.py missing)
+  - miss_other = 0 ok
 
-### convergence ossified 최종 (R10 준수, 신규 항목만 추가)
+### convergence ossified final (R10 compliant, only new items added)
 
-| 신규 ossified | value | promoted |
+| New ossified | value | promoted |
 |---|---|---|
-| `PRODUCTS_173_REMAP_582` | 173 제품 / 0.7%→58.2% | 1차 |
-| `PRODUCTS_204_POSTSESSION` | 204 제품 / 40 섹션 (+31, +6) | 2차 |
-| `PRODUCTS_LINKS_717_RESOLVED` | 319/445 = 71.7% | 3차 |
-| `PRODUCTS_LINKS_771_RESOLVED` | 343/445 = 77.1% | 4차 |
+| `PRODUCTS_173_REMAP_582` | 173 products / 0.7%->58.2% | 1st |
+| `PRODUCTS_204_POSTSESSION` | 204 products / 40 sections (+31, +6) | 2nd |
+| `PRODUCTS_LINKS_717_RESOLVED` | 319/445 = 71.7% | 3rd |
+| `PRODUCTS_LINKS_771_RESOLVED` | 343/445 = 77.1% | 4th |
 
-기존 PRODUCTS_118 / 다른 작업의 PRODUCTS_164_173_RECOUNT 모두 불변 보존.
+Existing PRODUCTS_118 / other-session PRODUCTS_164_173_RECOUNT all invariant.
 
-## 후속 작업 (본 세션 범위 외, 잔존 MISS 126)
+## Follow-up (out of scope for this session, remaining MISS 126)
 
-1. **paper 116 ghost** — papers/_registry.json 139편 선언 vs 디스크 13편 + 외부 1편 = 125편 ghost. Agent C가 정합화 분석 중. paper 작성 또는 dangling 제거 결정 필요
-2. **calc 10 미존재** — `calc/kolon_n6_*.py` 등 (코오롱 관련) 별도 정리
-3. `sync_products_readme.hexa` 드라이런 (hexa 바이너리 SIGKILL 우회) + 실행 → AUTO:SUMMARY_<id> / AUTO:FOOTER_<id> 마커 일괄 동기화 (40섹션 204제품 본문 자동 생성)
-4. README 본문 섹션 추가: products.json에는 추가됐지만 README 본문에는 없는 6신규 섹션 (HEXA-BCI 1건 외 동일) — sync 도구로 자동 처리 가능
+1. **paper 116 ghost** — papers/_registry.json declares 139 vs disk 13 + external 1 = 125 ghost. Agent C analyzing reconciliation. Decision needed: write paper or remove dangling entry
+2. **calc 10 missing** — `calc/kolon_n6_*.py` etc. (Kolon-related), separate cleanup
+3. `sync_products_readme.hexa` dry-run (bypassing hexa binary SIGKILL) + run -> AUTO:SUMMARY_<id> / AUTO:FOOTER_<id> marker bulk sync (40 sections 204 products body auto-generated)
+4. README body section addition: 6 new sections that exist in products.json but not in README body (same as HEXA-BCI 1 entry plus others) — can be handled automatically by sync tool
 
-## 규칙 준수 체크
+## Rule compliance check
 
-| 규칙 | 적용 | 준수 |
+| Rule | Application | Compliance |
 |------|------|:---:|
-| R0 GO 모드 | 확인 질문 없이 병렬 발사 | O |
-| R3 NEXUS-6 스캔 | 변경 전후 스캔 (대체: grep 마커 무결성) | O |
-| R5 SSOT 마커 기반 | AUTO 마커 내부만 편집, products.json 직접 수정 본체 금지 | O |
-| R6 자동 기록 | 본 세션 리포트 작성 | O |
-| R10 골화 불변 | PRODUCTS_118 기존 블록 미수정 | O |
-| R16 블로킹 금지 | 모든 Agent run_in_background | O |
-| R18 미니멀 | 요청 범위(통합정리) 내 수정만 | O |
-| R19 silent exit 금지 | sync.hexa die() 구현 | O |
-| R21 백그라운드 | Agent 4 드라이런 포함 전부 백그라운드 | O |
-| R28 자동 흡수 | 본 리포트 + atlas.n6 후속 | 부분 (atlas.n6 후속 필요시) |
-| R29 .hexa 위치 | sync 유틸 예외 (n6-architecture/shared/) | O |
-| N61 ASCII 3종 | 통합표+막대2종 | O |
-| feedback_ascii_report | 완료 시 막대 차트 | O |
-| feedback_no_emoji_ceiling | 천장 표현 텍스트("도달"/"미도달") | O |
-| feedback_korean_only_docs | 모든 리포트 한글 | O |
-| feedback_honest_verification | 실측값 + MISS 명시 + 출처 | O |
+| R0 GO mode | Parallel launch without confirmation questions | O |
+| R3 NEXUS-6 scan | Pre/post scan (alt: grep marker integrity) | O |
+| R5 SSOT marker-driven | Edit only inside AUTO markers, no direct edit of products.json main body | O |
+| R6 auto-logging | Session report written | O |
+| R10 ossification invariance | PRODUCTS_118 existing block unmodified | O |
+| R16 no blocking | All agents run_in_background | O |
+| R18 minimal | Edits stay within request scope (unification) | O |
+| R19 no silent exit | sync.hexa die() implemented | O |
+| R21 background | Agent 4 dry-run included, all background | O |
+| R28 auto-absorb | This report + atlas.n6 follow-up | partial (atlas.n6 follow-up if needed) |
+| R29 .hexa location | sync utility exception (n6-architecture/shared/) | O |
+| N61 ASCII 3 kinds | Integrated table + 2 bar charts | O |
+| feedback_ascii_report | Bar chart on completion | O |
+| feedback_no_emoji_ceiling | Ceiling-expression text ("reached"/"not reached") | O |
+| feedback_korean_only_docs | All reports in Korean | O |
+| feedback_honest_verification | Measured value + MISS explicit + source | O |
 
-## 숫자 다이어트
+## Number diet
 
-- README 라인: 850 → 979 (+129, AUTO:ALIEN_INDEX 131줄 + AUTO:STATS 2줄)
-- sync hexa 라인: 10 → 601 (+591)
-- 신규 감사 리포트: 3건 (link-audit 718줄, drift 563줄, remap 진행 중)
-- 병렬 Agent: 4발 동시 발사
-- 링크 완성도 개선 목표: 0.7% → Agent 4 결과 수신 후 확정
+- README lines: 850 -> 979 (+129, AUTO:ALIEN_INDEX 131 lines + AUTO:STATS 2 lines)
+- sync hexa lines: 10 -> 601 (+591)
+- New audit reports: 3 (link-audit 718 lines, drift 563 lines, remap in progress)
+- Parallel agents: 4 launched simultaneously
+- Link completion target improvement: 0.7% -> finalized after Agent 4 result received

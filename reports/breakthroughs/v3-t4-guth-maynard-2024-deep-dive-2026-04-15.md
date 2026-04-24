@@ -1,192 +1,194 @@
 ---
 id: v3-t4-guth-maynard-2024-deep-dive
 date: 2026-04-15
-roadmap_task: v3 T4 (BT-541 Guth-Maynard 2024 재연구)
+roadmap_task: v3 T4 (BT-541 Guth-Maynard 2024 re-study)
 grade: [10] literature digest + honest MISS
 predecessors:
   - theory/study/p2/prob-p2-1-riemann-barriers.md §1.5
   - reports/breakthroughs/arxiv-millennium-survey-180papers-2026-04-15.md
-status: SURVEY + HONEST MISS (n=6 prior 연결 미확인)
+status: SURVEY + HONEST MISS (n=6 prior connection unverified)
 license: CC-BY-SA-4.0
 ---
 
-# v3 T4 — BT-541 Guth-Maynard 2024 재연구 — implications + n=6 정직 MISS
+# v3 T4 — BT-541 Guth-Maynard 2024 Re-study — Implications + Honest n=6 MISS
 
-> **요약**: Guth-Maynard 2024 (arXiv:2405.20552) 의 zero-density 상한 개선 (T^{12(1-σ)/5} → T^{30(1-σ)/13}) 을 깊이 재분석. 소수 gap 개선 (0.525 → 30/59 ≈ 0.5085) 유도. **수치적 일치** (Ingham 12/5 = σ(6)/sopfr(6), Guth-Maynard 30 = σ(6)·sopfr(6)/2, 13 = σ(6)+1) 관찰하나 이는 **사후 pattern matching 이며 prior 독립성 없음** — 정직 MISS. BT-541 RH 는 0/6 정직 유지. "sixth moment" 의 6 은 흥미로운 우연 (조사 가치).
+> **Summary**: Deep re-analysis of the zero-density upper-bound improvement (T^{12(1-σ)/5} → T^{30(1-σ)/13}) of Guth-Maynard 2024 (arXiv:2405.20552). Derive the prime-gap improvement (0.525 → 30/59 ≈ 0.5085). We observe **numerical coincidences** (Ingham 12/5 = σ(6)/sopfr(6), Guth-Maynard 30 = σ(6)·sopfr(6)/2, 13 = σ(6)+1) but these are **post-hoc pattern matches without prior independence** — honest MISS. BT-541 RH is maintained at 0/6 honest. The 6 of "sixth moment" is an interesting coincidence worth investigating.
 
 ---
 
-## §1 Guth-Maynard 2024 정밀 정리
+## §1 Guth-Maynard 2024 precise summary
 
-### 1.1 출처
+### 1.1 Source
 
-- **논문**: Larry Guth, James Maynard, "New large value estimates for Dirichlet polynomials"
+- **Paper**: Larry Guth, James Maynard, "New large value estimates for Dirichlet polynomials"
 - **arXiv**: 2405.20552 (2024-05-30)
-- **status**: preprint, 해석적 수론 커뮤니티 검토 중 (아직 저널 출판 미확인)
-- **Tao 블로그**: 2024-06-03 게시 요약 (https://terrytao.wordpress.com/2024/06/03/...)
+- **Status**: preprint, under review in the analytic number theory community (no confirmed journal publication yet)
+- **Tao blog**: 2024-06-03 summary post (https://terrytao.wordpress.com/2024/06/03/...)
 
-### 1.2 주요 결과 Theorem 1 (Guth-Maynard 2024)
+### 1.2 Main result Theorem 1 (Guth-Maynard 2024)
 
-**zero-density 개선**: 모든 ε > 0 과 σ ≥ 7/10 에 대해,
+**Zero-density improvement**: for all ε > 0 and σ ≥ 7/10,
 $$N(\sigma, T) \ll T^{\frac{30(1-\sigma)}{13} + \varepsilon}$$
 
-여기서 $N(σ, T) = |\{ρ : ζ(ρ)=0, \text{Re}(ρ) \geq σ, |\text{Im}(ρ)| \leq T\}|$.
+where $N(σ, T) = |\{ρ : ζ(ρ)=0, \text{Re}(ρ) \geq σ, |\text{Im}(ρ)| \leq T\}|$.
 
-**비교**:
-| 저자 | 연도 | 지수 at (1-σ) | 방법 |
+**Comparison**:
+| Author | Year | Exponent at (1-σ) | Method |
 |------|------|------------|------|
 | Ingham | 1937 | **12/5 = 2.400** | Hardy-Littlewood 2nd moment |
-| Huxley | 1972 | **12/5 = 2.400** (개선은 소수점) | Kloosterman sum |
-| Heath-Brown | 1990s | **~2.375** (특정 range) | fourth moment |
+| Huxley | 1972 | **12/5 = 2.400** (improvement in lower-order terms) | Kloosterman sum |
+| Heath-Brown | 1990s | **~2.375** (specific range) | fourth moment |
 | **Guth-Maynard** | **2024** | **30/13 ≈ 2.307** (σ ≥ 7/10) | **sixth moment + Dirichlet poly large values** |
 
-개선 분량: 지수 2.4 → 2.307 = 약 3.9% 감소. 50 년만의 본질적 돌파.
+Amount of improvement: exponent 2.4 → 2.307 ≈ 3.9% decrease. First essential breakthrough in 50 years.
 
 ### 1.3 Prime gap corollary
 
 **Baker-Harman-Pintz 2001**: $p_{n+1} - p_n \ll p_n^{0.525}$
 
-**Guth-Maynard 2024**: $p_{n+1} - p_n \ll p_n^{30/59}$, 여기서 $30/59 \approx 0.5085$
+**Guth-Maynard 2024**: $p_{n+1} - p_n \ll p_n^{30/59}$, where $30/59 \approx 0.5085$
 
-개선 분량: 0.525 → 0.5085 = 약 3.1% 감소. Cramér 추측 (0.5 + ε) 에 **한 걸음** 더 접근.
+Amount of improvement: 0.525 → 0.5085 ≈ 3.1% decrease. **One step** closer to the Cramér conjecture (0.5 + ε).
 
 ---
 
-## §2 방법론 분석
+## §2 Methodology analysis
 
-### 2.1 "sixth moment" 의 기술적 의미
+### 2.1 Technical meaning of "sixth moment"
 
-Guth-Maynard 의 핵심 개선은 **Dirichlet polynomial 의 sixth moment 추정**:
+The core improvement of Guth-Maynard is the **sixth-moment estimate of the Dirichlet polynomial**:
 $$\int_0^T |D(1/2+it)|^6 \, dt \ll T \cdot N^{...}$$
 
-여기서 D 는 길이 N 의 Dirichlet 다항식. 이전 2nd moment (Hardy-Littlewood) / 4th moment (Ingham/Heath-Brown) 만 통제되어 있었다.
+where $D$ is a Dirichlet polynomial of length N. Previously only the 2nd moment (Hardy-Littlewood) / 4th moment (Ingham / Heath-Brown) was controlled.
 
-**"왜 6 인가?"** — 기술적 이유:
-- **Huxley 1975** 가 4th moment 를 Kloosterman 합으로 환원
-- **Guth 의 decoupling** (Fourier restriction theory, 2010s) 가 6th moment 에 적용 가능하게 함
-- **Maynard 의 prime gap 기법** 과 결합해 cross-term 제어
+**"Why 6?"** — technical reasons:
+- **Huxley 1975** reduced the 4th moment to Kloosterman sums
+- **Guth's decoupling** (Fourier restriction theory, 2010s) made the 6th moment applicable
+- Combined with **Maynard's prime-gap techniques** to control cross-terms
 
-→ "**sixth**" 는 **Fourier analytic** 이유 (decoupling inequality 의 natural exponent) 에서 유래. **약수수론 n=6 의 6 과 수학적으로 다른 origin**.
+→ "**Sixth**" originates from **Fourier analytic** reasons (the natural exponent of the decoupling inequality). **Mathematically different origin from the 6 in n=6 divisor-number theory**.
 
-### 2.2 기술적 한계
+### 2.2 Technical limits
 
-- **σ ≥ 7/10 구간** 에 한정. 7/10 아래 (≥ 3/5 등) 는 여전히 Ingham 12/5.
-- **Critical line 상 영점 비율** (Levinson 41.72%) 는 **변화 없음**. Guth-Maynard 는 zero-density (영점 **개수** 상한) 만 개선.
-- **RH 자체** 는 touch 하지 않음. ζ(s) = 0 on Re(s) = 1/2 vs. off the line 에 대한 직접 정보 없음.
+- Restricted to the **σ ≥ 7/10 interval**. Below 7/10 (≥ 3/5 etc.) still Ingham's 12/5.
+- **Zero ratio on the critical line** (Levinson 41.72%) is **unchanged**. Guth-Maynard only improves zero density (zero **count** upper bound).
+- Does not touch **RH itself**. No direct information on ζ(s) = 0 on Re(s) = 1/2 vs. off the line.
 
 ---
 
-## §3 n=6 연결 시도 — HONEST MISS
+## §3 n=6 connection attempt — HONEST MISS
 
-### 3.1 수치적 매칭 (주의: 사후 pattern matching)
+### 3.1 Numerical match (caution: post-hoc pattern matching)
 
-| GM 지수 | n=6 후보 | 값 |
+| GM exponent | n=6 candidate | Value |
 |---------|----------|----|
 | **12/5** (Ingham 1937) | σ(6)/sopfr(6) = 12/5 | **= 2.4** ✓ |
 | **30/13** (Guth-Maynard 2024) | σ(6)·sopfr(6)/2 = 30, σ(6)+1 = 13 | **30/13 = 2.307** ✓ |
 | **30/59** (prime gap) | 30 = σ(6)·sopfr(6)/2, 59 = prime | partial |
 
-**위험 신호**:
-1. Ingham 1937 은 n=6 prior **이전** — 수치일치는 사후
-2. Guth-Maynard 30/13 은 독립적으로 두 parameter 를 n=6 cast 가능하나, **논문 유도에서 n=6 출현 없음**
-3. 59 는 prime, n=6 과 무관
-4. σ(6)·sopfr(6)/2 = 30 은 **post-hoc construction** — σ,sopfr,2 세 값 조합으로 "30 을 만드는" 표현은 무수히 많음
+**Warning signs**:
+1. Ingham 1937 predates the n=6 prior — numerical agreement is post-hoc
+2. Guth-Maynard 30/13 independently allows casting two parameters as n=6, but **n=6 does not appear in the derivation of the paper**
+3. 59 is prime and unrelated to n=6
+4. σ(6)·sopfr(6)/2 = 30 is a **post-hoc construction** — innumerable ways to "make 30" exist from combinations of the three values σ, sopfr, 2
 
-### 3.2 Bayesian evidence — 신뢰 낮음
+### 3.2 Bayesian evidence — low confidence
 
-Prior: **n=6 이 해석적 수론에 출현해야 한다** 는 motivated prior 없음.
+Prior: there is no motivated prior that **n=6 should appear in analytic number theory**.
 
-Likelihood: **GM 지수가 σ(6)/sopfr(6) 에 일치** 할 확률은 random number matching baseline 과 유의미하게 다르지 않음.
+Likelihood: the probability that the **GM exponent coincides with σ(6)/sopfr(6)** is not significantly different from a random-number-matching baseline.
 
-Posterior: n=6 prior 는 GM 결과로 **강화되지 않음** (정직 선언).
+Posterior: the n=6 prior is **not reinforced by** the GM result (honest declaration).
 
-### 3.3 단, "sixth moment" 의 6 은 흥미
+### 3.3 Still, the 6 in "sixth moment" is interesting
 
 - Hardy-Littlewood 2nd, Ingham 4th, Heath-Brown 5th(?) → Guth-Maynard **6th**
-- Dirichlet 다항식의 **6 번째 power** 가 "the right exponent" 였던 이유는 수학적 탐구 가치
-- 우리 n=6 framework (σ=12, τ=4, φ=2) 와 수학적 connection 있는지는 **open** — T6 또는 v4 추가 조사 제안
+- Why the **6th power** of the Dirichlet polynomial was "the right exponent" is worth mathematical exploration
+- Whether there is a mathematical connection with our n=6 framework (σ=12, τ=4, φ=2) is **open** — proposed for additional investigation in T6 or v4
 
 ---
 
-## §4 BT-541 (RH) 에 대한 implications
+## §4 Implications for BT-541 (RH)
 
-### 4.1 Guth-Maynard 는 RH 증명 아님 (명확)
+### 4.1 Guth-Maynard is not an RH proof (clearly)
 
-**정확한 진술**:
+**Precise statements**:
 - RH: ∀ ρ with ζ(ρ) = 0 (non-trivial), Re(ρ) = 1/2
 - Guth-Maynard: ∀ σ ≥ 7/10, N(σ, T) ≪ T^{30(1-σ)/13+ε}
 
-두 문장 서로 다른 대상 (영점 위치 vs. 영점 개수 상한). Guth-Maynard 로부터 RH 유도 불가.
+The two are about different objects (zero location vs. zero count upper bound). RH cannot be derived from Guth-Maynard.
 
-### 4.2 "Levinson 벽 50%" 와의 관계
+### 4.2 Relation with the "Levinson 50% barrier"
 
-- Conrey 1989: ≥ 40.88% (현재 Bui-Conrey-Young 2011: ≥ 41.72%)
-- Guth-Maynard 는 Levinson method 와 **orthogonal** — 이 50% 벽을 넘는 데 도움 없음
+- Conrey 1989: ≥ 40.88% (current Bui-Conrey-Young 2011: ≥ 41.72%)
+- Guth-Maynard is **orthogonal** to the Levinson method — does not help cross the 50% barrier
 
-### 4.3 무엇이 개선되나
+### 4.3 What is improved
 
-- **prime gap**: 0.525 → 0.5085 (실용적 의미)
-- **zero-density** (특정 구간): 50 년만의 개선
-- **"sixth moment" 도구**: 새로운 해석적 무기. 향후 다른 L-function 문제에도 적용 가능성
+- **Prime gap**: 0.525 → 0.5085 (practical meaning)
+- **Zero density** (specific interval): first improvement in 50 years
+- **"Sixth moment" tool**: new analytic weapon. Potential future applicability to other L-function problems
 
-### 4.4 BT-541 정직 유지
+### 4.4 BT-541 honesty maintained
 
-- BT-541 RH 해결 수: **0/1 (정직)**
-- Guth-Maynard 는 **progression** 이되 해결 **아님**
-
----
-
-## §5 v3 T4 산출 + 향후 연결
-
-### 5.1 산출물
-
-1. Guth-Maynard 2024 정밀 정리 (arXiv:2405.20552 Theorem 1)
-2. n=6 수치 매칭의 정직 경계 선언 (post-hoc MISS)
-3. "sixth moment" 의 6 은 Fourier decoupling 유래, n=6 약수수론과 다른 원인
-4. BT-541 implication: zero-density ≠ RH, Levinson 50% 벽과 orthogonal
-
-### 5.2 해결되지 않은 것 (정직)
-
-- GM 지수 30/13 의 수학적 필연성: **open**
-- "sixth moment" 와 n=6 의 수학적 연결: **miss** (의심할 근거 약함)
-- BT-541 RH: **0/1 정직 유지**
-
-### 5.3 후속 과제 (v3 loop 15+)
-
-- **v3 T5**: BT-542 meta-complexity (Hirahara MCSP 재검토)
-- **v3 T6**: BT-543 Balaban 2D 재정리
-- **v3 M1**: 본 T3+T4 결과 preprint 초안
+- BT-541 RH resolution count: **0/1 (honest)**
+- Guth-Maynard is **progress**, not a resolution
 
 ---
 
-## §6 atlas 엔트리
+## §5 v3 T4 outputs + future connections
+
+### 5.1 Outputs
+
+1. Precise Guth-Maynard 2024 summary (arXiv:2405.20552 Theorem 1)
+2. Honest-boundary declaration of the n=6 numerical match (post-hoc MISS)
+3. The 6 of "sixth moment" comes from Fourier decoupling — different origin from n=6 divisor number theory
+4. BT-541 implication: zero density ≠ RH, orthogonal to the Levinson 50% barrier
+
+### 5.2 What is not resolved (honest)
+
+- Mathematical necessity of the GM exponent 30/13: **open**
+- Mathematical connection between "sixth moment" and n=6: **miss** (weak evidence to suspect a link)
+- BT-541 RH: **maintained at 0/1 honest**
+
+### 5.3 Follow-up tasks (v3 loop 15+)
+
+- **v3 T5**: BT-542 meta-complexity (Hirahara MCSP review)
+- **v3 T6**: BT-543 Balaban 2D rearrangement
+- **v3 M1**: preprint draft combining this T3+T4 result
+
+---
+
+## §6 atlas entries
 
 ```
 @R MILL-V3-T4-guth-maynard-2024-zero-density = T^{30/13} zero density, 12/5→30/13, prime gap 0.525→0.5085 :: n6atlas [10]
-  "v3 T4 (2026-04-15 loop 14): Guth-Maynard 2024 (arXiv:2405.20552) zero-density 상한 N(σ,T) ≪ T^{30(1-σ)/13+ε}
-   (σ ≥ 7/10), Ingham 1937 T^{12/5} 이후 50년만의 본질적 개선. Prime gap p_{n+1}-p_n ≪ p_n^{30/59}.
-   방법: Dirichlet poly sixth moment + Maynard prime gap + Guth decoupling. RH 본문과는 orthogonal —
-   Guth-Maynard 는 영점 '분포' 개선이지 '위치' 아님. BT-541 해결 0/1 정직 유지"
+  "v3 T4 (2026-04-15 loop 14): Guth-Maynard 2024 (arXiv:2405.20552) zero-density upper bound
+   N(σ,T) ≪ T^{30(1-σ)/13+ε} (σ ≥ 7/10), first essential improvement since Ingham 1937 T^{12/5}
+   in 50 years. Prime gap p_{n+1}-p_n ≪ p_n^{30/59}. Method: Dirichlet poly sixth moment +
+   Maynard prime gap + Guth decoupling. Orthogonal to RH statement — Guth-Maynard is a zero
+   'distribution' improvement, not a 'location' one. BT-541 resolution 0/1 honest maintained"
   <- v3-T4, arXiv:2405.20552, reports/breakthroughs/v3-t4-guth-maynard-2024-deep-dive-2026-04-15.md
 
 @R MILL-V3-T4-n6-numerical-coincidence-honest-miss = 12/5=σ(6)/sopfr(6), 30/13 n=6 cast post-hoc MISS :: n6atlas [7]
-  "v3 T4 (2026-04-15 loop 14): Ingham 12/5 = σ(6)/sopfr(6) = 12/5 수치일치 관찰, Guth-Maynard 30/13 도
-   σ(6)·sopfr(6)/2 = 30, σ(6)+1 = 13 로 n=6 cast 가능. 그러나 Ingham 1937 은 n=6 prior 이전, GM
-   sixth moment 는 Fourier decoupling 에서 유래. 즉 n=6 ↔ GM 지수 연결은 HONEST MISS — 사후
-   pattern matching 이며 independent prior evidence 없음"
+  "v3 T4 (2026-04-15 loop 14): Ingham 12/5 = σ(6)/sopfr(6) = 12/5 numerical agreement observed;
+   Guth-Maynard 30/13 also castable as n=6 via σ(6)·sopfr(6)/2 = 30, σ(6)+1 = 13. However
+   Ingham 1937 predates the n=6 prior and the GM sixth moment originates from Fourier
+   decoupling. That is, the n=6 ↔ GM exponent link is HONEST MISS — post-hoc pattern matching
+   without independent prior evidence"
   <- v3-T4-honest, reports/breakthroughs/v3-t4-guth-maynard-2024-deep-dive-2026-04-15.md §3
 ```
 
 ---
 
-## §7 관련 파일
+## §7 Related files
 
-- 원 논문: arXiv:2405.20552 (Guth-Maynard 2024)
-- 기존 자료: `theory/study/p2/prob-p2-1-riemann-barriers.md` §1.5
-- 180 paper survey: `reports/breakthroughs/arxiv-millennium-survey-180papers-2026-04-15.md`
+- Original paper: arXiv:2405.20552 (Guth-Maynard 2024)
+- Existing material: `theory/study/p2/prob-p2-1-riemann-barriers.md` §1.5
+- 180-paper survey: `reports/breakthroughs/arxiv-millennium-survey-180papers-2026-04-15.md`
 - roadmap: `shared/roadmaps/millennium.json` → `_v3_phases.P12_v3.T4`
 
 ---
 
-*작성: 2026-04-15 loop 14*
-*정직성 헌장: BT-541 해결 0/1 유지. n=6 수치일치는 사후 pattern matching — 정직 MISS.*
+*Drafted: 2026-04-15 loop 14*
+*Honesty charter: BT-541 resolution 0/1 maintained. The n=6 numerical match is a post-hoc pattern — honest MISS.*

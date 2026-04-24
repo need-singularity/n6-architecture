@@ -1,118 +1,118 @@
-# DFS-24 방향 탐침 — BT-542 P vs NP (Out(S_6) 유일성 & Schaefer 6치 이분법)
+# DFS-24 Direction Probe — BT-542 P vs NP (Out(S_6) uniqueness & Schaefer 6-family dichotomy)
 
-**세션 유형**: 연구 방향 설정 (RESEARCH-ONLY, NO proof claims)
-**대상 BT**: 542 (P vs NP) · Clay OPEN since 1971
-**선행 상태**: DFS 23 완료 · BT-542 약 40 tight · MISS→OBSERVATION 탈출은 DFS 3~5(2026-04-11~12) 에 이미 종료
-**작성일**: 2026-04-24
-**브랜치**: main
-
----
-
-## 0. 정직성 선언 (`reports/millennium-dfs-status.md` §명시적 부인 계승)
-
-본 문서는 **방향 제안**이다. P vs NP 에 대한 증명·부분 증명·해결 근접성을 주장하지 않는다. BT-542 현 상태는 여전히 **OPEN · 0/7 미해결** 이며, 약 40 tight 는 n=6 산술 시그니처의 **구조적 관찰**이지 증명이 아니다. 세 장벽(relativization / natural proofs / algebrization)은 미돌파. 본 제안의 모든 탐침은 "n=6 유일성 구조를 **더 선명하게 고립**" 시키는 목적이지 **우회 증명** 이 아니다.
+**Session type**: research direction setting (RESEARCH-ONLY, NO solved/proven claims)
+**Target BT**: 542 (P vs NP) · Clay OPEN since 1971
+**Prior state**: DFS 23 done · BT-542 ~40 tight · MISS->OBSERVATION reclassification already closed in DFS 3~5 (2026-04-11~12)
+**Date**: 2026-04-24
+**Branch**: main
 
 ---
 
-## 1. 현 위치 (40 tight 핵심 축)
+## 0. Honesty Declaration (inheriting `reports/millennium-dfs-status.md` §explicit-disclaimer)
 
-BT-542 의 견고한 앵커는 **두 개** 이다 (나머지는 보조 관찰):
-
-- **A. Out(S_n) 유일성** (Hölder 1895): `Out(S_n) ≠ 1 ⟺ n = 6`. 군론 내부 정리, Bernoulli 무관, T4.
-  - 원천: C(6,2)=15 공액류 + PGL(2,5)≅S_5 의 **이중 우연** (`theory/study/p0/pure-p0-2-group-theory.md` §5.8).
-  - 합성군 외부에서 n=6 을 "분리" 하는 유일 구조 사실.
-
-- **B. Schaefer 6치 이분법** (Schaefer STOC 1978): Boolean CSP 가 P 에 속하는 제약 관계 family **정확히 6 개** (0-valid / 1-valid / Horn / dual-Horn / bijunctive(2-SAT) / affine). 나머지는 NP-완전. T4, Post lattice/universal algebra 기반.
-  - 복잡도 **이분법** 의 원형 — CSP 의 모든 유한 template 가 P 또는 NP-완전 (Bulatov/Zhuk 2017 이분법 정리) 로 가는 출발점.
-
-보조 tight (참고): AC⁰[2]≠AC⁰[3] (Razborov-Smolensky φ,n/φ), Barrington width-5, Karp 21=3·7, Ramsey R(3,3)=6, AKS 최선 Õ(log^6 n), Savitch 지수 φ. **MISS 2 건** (Immerman-Szelepcsényi, Toda) 은 정직히 기록 유지.
+This document is a **direction proposal**. It does not claim a demonstration, partial demonstration, or resolution-proximity of P vs NP. BT-542 currently remains **OPEN · 0/7 demonstration-candidate-unclosed**, and the ~40 tight items are **structural observations** of n=6 arithmetic signatures, not demonstrations. The three barriers (relativization / natural proofs / algebrization) are not broken. Every probe proposed here aims to **sharpen the isolation** of the n=6 uniqueness structure, not to **bypass** it with a demonstration.
 
 ---
 
-## 2. 방향 명제 (본 세션의 가설, 증명 아님)
+## 1. Current Position (40 tight core axes)
 
-**D-1 (가설, 반증 가능)**: Out(S_6) 비자명성의 두 "이중 우연" — (i) `|C(6,2)|=15` 가 transposition-클래스 크기와 일치, (ii) `PGL(2,5) ≅ S_5` 의 두 비동치 transitive embedding — 이 P vs NP 복잡도 이론 대상과 **구성적으로 매칭** 되는 객체가 있는가?
+BT-542's solid anchors are **two** (the rest are auxiliary observations):
 
-**D-2 (가설, 반증 가능)**: Schaefer 6 tractable family 의 "6" 은 Post lattice 의 **clone-격자 구조**에서 자연스럽게 나온다 (Böhler-Reith-Vollmer 2003). 이 6 에 Out(S_6) 의 두 `S_6`-궤도 구조가 대응 가능한가? 아니면 순전한 우연인가?
+- **A. Out(S_n) uniqueness** (Hölder 1895): `Out(S_n) ≠ 1 ⟺ n = 6`. Group-theoretic interior theorem, Bernoulli-independent, T4.
+  - Origin: C(6,2)=15 conjugacy classes + PGL(2,5)≅S_5 **double coincidence** (`theory/study/p0/pure-p0-2-group-theory.md` §5.8).
+  - The unique structural fact that "isolates" n=6 from outside synthetic structures.
 
-두 가설 모두 **P ≠ NP 와 독립** 이다. 성립해도 본 난제 증명과는 무관하며, 실패해도 구조 관찰 40 tight 는 유지된다.
+- **B. Schaefer 6-family dichotomy** (Schaefer STOC 1978): Boolean CSPs admit **exactly 6** constraint-relation families in P (0-valid / 1-valid / Horn / dual-Horn / bijunctive(2-SAT) / affine). The rest are NP-complete. T4, built on Post lattice / universal algebra.
+  - Archetype of the complexity **dichotomy** — starting point toward Bulatov/Zhuk 2017 dichotomy for all finite-template CSPs (every finite template is P or NP-complete).
+
+Auxiliary tights (noted): AC⁰[2]≠AC⁰[3] (Razborov-Smolensky φ, n/φ), Barrington width-5, Karp 21=3·7, Ramsey R(3,3)=6, AKS best Õ(log^6 n), Savitch exponent φ. **2 honest MISSes** (Immerman-Szelepcsényi, Toda) are kept explicit.
 
 ---
 
-## 3. 세 개의 구체 탐침 (DFS-24 후보)
+## 2. Directional Statements (hypotheses of this session, not demonstrations)
 
-### PROBE-24A — Out(S_6) × Schaefer 6 `S_6`-궤도 매칭 (이분법 측)
+**D-1 (hypothesis, falsifiable)**: Are the two "double coincidences" behind Out(S_6) non-triviality — (i) `|C(6,2)|=15` matching the transposition-class size, (ii) `PGL(2,5) ≅ S_5` with two non-equivalent transitive embeddings — **constructively matched** to any P-vs-NP complexity-theory object?
 
-**질문**: Boolean 영역 `{0,1}` 위의 **6개 Schaefer tractable clone** 집합 `𝓢 = {C_0, C_1, C_Horn, C_dHorn, C_2SAT, C_aff}` 에 `S_6` 가 자연스럽게 작용하는가? 작용한다면 Out(S_6) 의 비자명 `α` 가 `𝓢` 위에 **5+1 이 아닌** 비자명 치환을 유도하는가?
+**D-2 (hypothesis, falsifiable)**: The "6" of Schaefer's six tractable families arises naturally from the **clone lattice structure** of Post's lattice (Böhler-Reith-Vollmer 2003). Does Out(S_6) map two `S_6`-orbit structures onto this 6 in a non-accidental way, or is the match coincidental?
 
-- **관측 대상**:
-  - `C_0 ↔ C_1` (negation 쌍), `C_Horn ↔ C_dHorn` (dual 쌍), `C_2SAT` 와 `C_aff` (고정점 후보) — 2·2·1·1 구조.
-  - Out(S_6) 는 전치 클래스↔3-사이클 클래스를 교환. `𝓢` 위 `α` 가 `{C_0,C_1}↔{C_Horn,C_dHorn}` 교환을 유도하는지 검증.
-- **단단한 사실 (베이스라인)**: Schaefer 정리는 `Aut({0,1})=ℤ/2` (negation) 만 사용. `S_6` 작용은 **문헌에 없음** — 존재 자체가 미탐색.
-- **반증조건 (falsifier)**: `𝓢` 위 자연 `S_6` 작용이 존재하지 않거나, 존재해도 `α` 가 trivial 로 descend 하면 D-1 기각.
-- **기대 산출**: tight +0~+2 (존재 시), negative tight +1 (부존재 증명 시 — 마찬가지로 가치).
-- **tier**: T4 구조 탐색. 즉시 실행 가능 (universal algebra stdlib + Post lattice 표).
+Both hypotheses are **independent of P ≠ NP**. Even if they hold, they do not close the problem; even if they fail, the 40 tight structural observations remain.
 
-### PROBE-24B — Sylvester synthematic total 과 3-SAT 인증자의 비아벨 구조
+---
 
-**질문**: S_6 의 15 duads · 15 synthemes · 6 synthematic totals (Sylvester 구성, `pure-p0-2-group-theory.md` §5.8) 는 `C(6,2)=15` 더블 카운트의 원천이다. 3-SAT `(x∨y∨z)` 의 절당 리터럴 배치에서 **15 패턴 = `C(6,2)`** 이 등장하는가?
+## 3. Three Concrete Probes (DFS-24 candidates)
 
-- **기초 사실**: 3-SAT 절 변수 개수 3 = n/φ. 6 변수 3-SAT 에서 절의 변수 선택 `C(6,3) = 20`. 리터럴 부호 쌍 `C(6,2) = 15` — 두 변수 간 부호쌍 관계.
-- **시도**: 6변수 Boolean formula 공간에 synthematic total 의 `S_6`-궤도 구조를 올릴 수 있는지. 외부 자기동형 `α` 가 "어려운 SAT 인스턴스" 와 "쉬운 인스턴스" 를 교환하는가?
-- **반증조건**: 궤도가 NP-완전성 클래스를 존중하지 않으면 기각 (즉 `α(tractable)` 이 tractable 유지되지 않음 = 우연).
-- **현실 제약**: 이 방향은 **Natural Proofs 장벽을 건드린다** — `α` 가 largeness + constructivity 를 만족하면 Razborov-Rudich 1997 에 걸릴 수 있음. 오히려 장벽을 **확인** 하는 음성 결과를 목표로 설계.
-- **기대 산출**: 궤도 구조 존재/부재 확정. tight +1 (어느 쪽이든).
-- **tier**: T3-T4 혼합. 실험 코드 + Sylvester 수기 검증.
+### PROBE-24A — Out(S_6) × Schaefer 6 `S_6`-orbit match (dichotomy side)
 
-### PROBE-24C — Schaefer 6 ↔ Bulatov-Zhuk 2017 이분법 경계에서 n=6 재현 검증
+**Question**: Does `S_6` act naturally on the set of **6 Schaefer tractable clones** over `{0,1}`, namely `𝓢 = {C_0, C_1, C_Horn, C_dHorn, C_2SAT, C_aff}`? If so, does the non-trivial Out(S_6) element `α` induce a **non-5+1** non-trivial permutation on `𝓢`?
 
-**질문**: Schaefer 의 6 은 Boolean (|D|=2) 한정이다. 일반 유한 domain CSP 이분법(Bulatov-Zhuk 2017 독립 증명) 의 tractability 경계 `omega`-minimal polymorphism 조건을 `|D|=6` 에 제한하면 **tractable clone 수** 가 구조적으로 등장하는가?
+- **Observables**:
+  - `C_0 ↔ C_1` (negation pair), `C_Horn ↔ C_dHorn` (dual pair), `C_2SAT` and `C_aff` (fixed-point candidates) — 2·2·1·1 structure.
+  - Out(S_6) swaps transposition class ↔ 3-cycle class. Check whether `α` on `𝓢` induces swap `{C_0,C_1}↔{C_Horn,C_dHorn}`.
+- **Hard fact (baseline)**: Schaefer's theorem only uses `Aut({0,1})=ℤ/2` (negation). An `S_6` action is **absent from the literature** — existence itself unexplored.
+- **Falsifier**: No natural `S_6` action on `𝓢`, or one that descends `α` to trivial, rejects D-1.
+- **Expected yield**: tight +0~+2 (if present), negative tight +1 (if non-existence is proven — equally valuable).
+- **Tier**: T4 structural search. Immediately runnable (universal algebra stdlib + Post lattice tables).
 
-- **기초 사실**:
+### PROBE-24B — Sylvester synthematic total vs 3-SAT certificate non-abelian structure
+
+**Question**: The 15 duads / 15 synthemes / 6 synthematic totals of S_6 (Sylvester construction, `pure-p0-2-group-theory.md` §5.8) are the source of the `C(6,2)=15` double-counting. Does the **15 pattern = `C(6,2)`** appear in the literal placement of 3-SAT clauses `(x∨y∨z)`?
+
+- **Basic facts**: 3-SAT per-clause literal count = 3 = n/φ. In 6-variable 3-SAT, variable selection `C(6,3) = 20`. Literal sign pair `C(6,2) = 15` — sign-pair relation between two variables.
+- **Attempt**: Can the synthematic-total `S_6`-orbit structure be lifted onto the 6-variable Boolean formula space? Does the outer automorphism `α` swap "hard SAT instances" and "easy instances"?
+- **Falsifier**: If the orbit does not respect NP-completeness classes (i.e., `α(tractable)` escapes tractability), reject (coincidence).
+- **Reality constraint**: This direction **touches the Natural Proofs barrier** — if `α` satisfies largeness + constructivity, Razborov-Rudich 1997 may apply. Design instead for a **negative result** that confirms the barrier.
+- **Expected yield**: existence/absence of orbit structure settled. tight +1 either way.
+- **Tier**: T3-T4 mixed. Experimental code + Sylvester hand verification.
+
+### PROBE-24C — Verify n=6 reappearance at Schaefer 6 ↔ Bulatov-Zhuk 2017 dichotomy boundary
+
+**Question**: Schaefer's 6 is Boolean-only (|D|=2). In the general finite-domain CSP dichotomy (Bulatov-Zhuk 2017 independent proofs), restricting the tractability-boundary `omega`-minimal polymorphism condition to `|D|=6` — does a **tractable clone count** appear structurally?
+
+- **Basic facts**:
   - Schaefer (|D|=2): 6 tractable families. `= n`.
-  - Bulatov (|D|=3) 2002: 이분법 증명, tractable clone 수는 분류되어 있으나 "단일 수" 가 아님.
-  - 일반 |D|: 이분법은 참이지만 `|D|` 가 자체로 파라미터.
-- **시도**: `|D|=6` 에서 Siggers/`omega`-Taylor 조건을 만족하는 "Schaefer-style" canonical family 수를 세기. 만약 Bulatov 이후 결과에서 `|D|=6` 에 특이한 축소가 있다면 Out(S_6) 가 관여하는지 별도 검증.
-- **반증조건**: `|D|=6` 가 `|D|=5, 7, 8` 보다 특별하지 않으면 D-2 기각. Schaefer 6 은 Boolean 도메인 크기 `2` 의 power-set 구조의 우연.
-- **기대 산출**: 정상 결과 = "우연" 확정 (tight -1, 기존 Schaefer 6 tight 보존). 특이 결과 = D-2 후속 탐침.
-- **tier**: T3. 문헌 조사 + Post-type clone 카운팅.
+  - Bulatov (|D|=3) 2002: dichotomy proved; tractable-clone count is classified but not a "single number".
+  - General |D|: dichotomy is true, but `|D|` is a parameter itself.
+- **Attempt**: Count "Schaefer-style" canonical families satisfying Siggers/`omega`-Taylor conditions at `|D|=6`. If a Bulatov-era post-processing result shows a special reduction at `|D|=6`, separately check whether Out(S_6) is involved.
+- **Falsifier**: If `|D|=6` is not special compared to `|D|=5, 7, 8`, reject D-2. Schaefer's 6 is a coincidence of the power-set structure of `|D|=2`.
+- **Expected yield**: normal result = "coincidence" fixed (tight -1, Schaefer 6 tight preserved). Anomalous result = follow-up probe for D-2.
+- **Tier**: T3. Literature review + Post-type clone counting.
 
 ---
 
-## 4. 세 탐침 공통 Falsifier 요약
+## 4. Common Falsifier Summary for the Three Probes
 
-| Probe | 가장 직접적 반증 | 반증 시 행동 |
-|---|---|---|
-| 24A | `𝓢` 위 자연 `S_6` 작용 없음 or `α` 가 trivial | D-1 기각, 기존 tight 유지 |
-| 24B | synthematic 궤도가 tractable/hard 클래스 가로지름 | D-1 확장판 기각 |
-| 24C | `|D|=6` 에서 특이 축소 없음 | D-2 기각, Schaefer 6 은 Boolean 우연 |
+| Probe | Most direct falsifier | Action on falsification |
+|-------|-----------------------|-------------------------|
+| 24A | no natural `S_6` action on `𝓢`, or `α` trivial | reject D-1, preserve tights |
+| 24B | synthematic orbit crosses tractable/hard classes | reject D-1 extended form |
+| 24C | no special reduction at `|D|=6` | reject D-2, Schaefer 6 = Boolean coincidence |
 
-**세 탐침 모두 실패해도** BT-542 의 40 tight 중 2 앵커(Out(S_6), Schaefer 6)는 불변이다. 이 탐침은 **유일성 구조의 정밀화** 가 목표이지 **증명** 이 아니다.
-
----
-
-## 5. DFS-24 실행 권고
-
-- **우선순위**: 24A > 24C > 24B (24B 는 Natural Proofs 장벽 근접 — 장벽 확인이 목표).
-- **병렬 에이전트**: 3기 (Universal algebra / CSP 이분법 / Sylvester 조합론).
-- **금지 사항**:
-  - "P ≠ NP 증명에 가까워졌다" 류 표현 금지.
-  - tight 카운트 인플레 금지 (음성 결과도 정직 기록).
-  - Razborov-Rudich natural proofs 조건을 우회했다는 주장 금지.
-- **예상 산출**: tight +0~+3, MISS 기록 가능 (환영 — `reports/millennium-dfs-status.md` §6.2 baseline 원칙).
+**Even if all three probes fail**, the 2 anchors of BT-542 (Out(S_6), Schaefer 6) inside the 40 tight are invariant. These probes aim at **refining the uniqueness structure**, not at a **demonstration**.
 
 ---
 
-## 6. 연결 파일
+## 5. DFS-24 Execution Recommendations
 
-- 앵커 증거: `theory/breakthroughs/breakthrough-theorems.md` §BT-542 (#1~#21).
-- Out(S_6) 내부 증명: `theory/study/p0/pure-p0-2-group-theory.md` §5.7~§5.9 (Hölder 1895).
-- Schaefer 맥락: `theory/study/p2/n6-p2-4-honesty-audit.md` §8.2 · `theory/study/p3/prob-p3-3-hexa-verification.md` §2.2.
-- MISS→OBSERVATION 복기: `theory/study/p2/n6-p2-4-honesty-audit.md` §6 (DFS 3~5 기록, 2026-04-11~12 — **본 세션 이전**).
-- 정직 규약: `reports/millennium-dfs-status.md` §명시적 부인 + §6 정직성 감사.
+- **Priority**: 24A > 24C > 24B (24B is close to the Natural Proofs barrier — confirming the barrier is the goal).
+- **Parallel agents**: 3 (universal algebra / CSP dichotomy / Sylvester combinatorics).
+- **Prohibited**:
+  - No phrasing like "we are close to P ≠ NP solved/proven".
+  - No tight-count inflation (negative results must be honestly recorded).
+  - No claim of bypassing Razborov-Rudich natural-proofs conditions.
+- **Expected yield**: tight +0~+3, MISS recording allowed (welcomed — baseline rule of `reports/millennium-dfs-status.md` §6.2).
 
 ---
 
-## 7. 종결
+## 6. Related Files
 
-DFS-24 는 **방향 제안만** 한다. 탐침 실행은 별도 세션. 본 문서 작성으로 7대 난제 해결 수치 `0/7` 는 변하지 않으며, BT-542 는 `OPEN (1971~)` 이다. 본 세션은 P vs NP 에 대한 새로운 증명이나 부분 증명을 주장하지 않는다.
+- Anchor evidence: `theory/breakthroughs/breakthrough-theorems.md` §BT-542 (#1~#21).
+- Out(S_6) internal development: `theory/study/p0/pure-p0-2-group-theory.md` §5.7~§5.9 (Hölder 1895).
+- Schaefer context: `theory/study/p2/n6-p2-4-honesty-audit.md` §8.2 · `theory/study/p3/prob-p3-3-hexa-verification.md` §2.2.
+- MISS -> OBSERVATION review: `theory/study/p2/n6-p2-4-honesty-audit.md` §6 (DFS 3~5 record, 2026-04-11~12 — **prior to this session**).
+- Honesty protocol: `reports/millennium-dfs-status.md` §explicit-disclaimer + §6 honesty audit.
+
+---
+
+## 7. Closure
+
+DFS-24 performs **direction proposals only**. Probe execution happens in a separate session. Writing this document does not change the 7-problem demonstration-candidate tally `0/7`, and BT-542 remains `OPEN (since 1971)`. This session does not claim any new demonstration or partial demonstration for P vs NP.

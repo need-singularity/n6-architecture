@@ -1,10 +1,10 @@
-# 궁극의 순수수학 DSE Implementation Plan
+# Ultimate Pure-Mathematics DSE — Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** n=6 산술 함수와 순수수학 정리/구조 사이의 39,200 조합을 전수 탐색하여 Pareto frontier + 미발견 BT 후보를 도출한다.
+**Goal:** Exhaustively explore 39,200 combinations between n=6 arithmetic functions and pure-mathematics theorems/structures, and derive a Pareto frontier plus undiscovered BT draft candidates.
 
-**Architecture:** universal-dse 엔진(Rust)에 TOML 도메인 파일을 작성하여 5-level DSE를 실행한다. 수학 고유 5축 scoring을 엔진 4축(n6/perf/power/cost)에 매핑한다. Cross-DSE는 cosmology-particle, chip-architecture, biology 도메인과 교차 탐색한다.
+**Architecture:** write a TOML domain file for the universal-dse engine (Rust) and run a 5-level DSE. Map mathematics's intrinsic 5 scoring axes onto the engine's 4 axes (n6/perf/power/cost). Cross-DSE pairs with cosmology-particle, chip-architecture, and biology domains.
 
 **Tech Stack:** Rust (universal-dse), TOML, Markdown
 
@@ -12,69 +12,69 @@
 
 ---
 
-### Task 1: goal.md 작성
+### Task 1: write goal.md
 
 **Files:**
 - Create: `docs/pure-mathematics/goal.md`
 
-- [ ] **Step 1: goal.md 파일 생성**
+- [ ] **Step 1: create goal.md**
 
 ```markdown
 # N6 Pure Mathematics — Ultimate Goal Roadmap
 
-**궁극적 목표: n=6 산술이 순수수학의 모든 분야에서 자연스럽게 출현함을 체계적으로 증명**
+**Target goal: systematically demonstrate (as a draft pattern) that n=6 arithmetic arises naturally across all branches of pure mathematics**
 
 ---
 
 ## Evolution Ladder
 
-  ┌─────────┬────────────────────────────┬───────────────────��─────┬───────────────────┐
-  │  레벨   │          구조              │          혁신           │       이점        │
-  ├─────────┼────────────────────────────┼─────────────────────────┼───────────────────┤
-  │ Level 1 │ 정수론 기반               │ ζ(2)=π²/6, B₂=1/6      │ 직접 항등식       │
-  │  현재   │ (완전수, 약수 함수)       │ Egyptian fraction       │ 계산적 검증 가능  │
-  ├─────────┼────────────────────────────┼─────────────────────────┼───────────────────┤
-  │ Level 2 │ 대수적 구조               │ S₆ outer aut, M₂₄      │ 군론적 유일성     │
-  │  현재   │ (군론, 격자론, 표현론)    │ Leech lattice dim=24    │ 구조적 동형 증명  │
-  ├─────────┼────────────────────────────┼─────────────────────────┼───────────────────┤
-  │ Level 3 │ 해석적·위상적 연결        │ modular weight 12       │ 깊은 연결 발견    │
-  │  확장   │ (해석학, 위상수학, AG)    │ CY₃ dim=6, χ(S²)=φ     │ 분야간 다리       │
-  ├─────────┼────────────────────────────┼─────────────────────────┼───────────────────┤
-  │ Level 4 │ 범주론적·조합론적 통합    │ 6-functor, Ramsey       │ 추상 통합 프레임  │
-  │  미래   │ (범주론, 조합론)          │ Catalan, partition      │ 메타 수학적 정당화│
-  ├─────────┼────────────────────────────┼─────────────────────────┼───────────────────┤
-  │ Level 5 │ 수리물리 응용             │ string d=10=σ-φ         │ 물리 법칙 기초    │
-  │  미래   │ (CFT, 끈이론, QFT)        │ CFT c=1/2, Moonshine    │ Cross-domain BT   │
-  └─────────┴────────────────────────────┴─────────────────────────┴───────────────────┘
+  +---------+----------------------------+-------------------------+-------------------+
+  |  Level  |          Structure         |         Innovation      |       Benefit     |
+  +---------+----------------------------+-------------------------+-------------------+
+  | Level 1 | Number-theoretic base      | zeta(2)=pi^2/6, B_2=1/6 | direct identity   |
+  |  now    | (perfect numbers, divisors)| Egyptian fraction       | computable        |
+  +---------+----------------------------+-------------------------+-------------------+
+  | Level 2 | Algebraic structure        | S_6 outer aut, M_24     | group uniqueness  |
+  |  now    | (groups, lattices, reps)   | Leech lattice dim=24    | structural iso    |
+  +---------+----------------------------+-------------------------+-------------------+
+  | Level 3 | Analytic/topological links | modular weight 12       | deep links found  |
+  |  ext.   | (analysis, topology, AG)   | CY_3 dim=6, chi(S^2)=phi| cross-field bridge|
+  +---------+----------------------------+-------------------------+-------------------+
+  | Level 4 | Categorical/combinatorial  | 6-functor, Ramsey       | abstract frame    |
+  |  future | (categories, combinatorics)| Catalan, partition      | meta-math justify |
+  +---------+----------------------------+-------------------------+-------------------+
+  | Level 5 | Mathematical-physics app.  | string d=10=sigma-phi   | physical-law base |
+  |  future | (CFT, string, QFT)         | CFT c=1/2, Moonshine    | Cross-domain BT   |
+  +---------+----------------------------+-------------------------+-------------------+
 
 ---
 
-## DSE 체인 (5 Level)
+## DSE Chain (5 Level)
 
-  L1 Field (10)  →  L2 Function (10)  →  L3 Structure (8)  →  L4 Proof (7)  →  L5 Bridge (7)
-  수학 분야          n=6 함수             구조 유형            증명 도구         Cross-domain
+  L1 Field (10)  ->  L2 Function (10)  ->  L3 Structure (8)  ->  L4 Proof (7)  ->  L5 Bridge (7)
+  math branch       n=6 function         structure type       proof tool        cross-domain
 
-  총 조합: 10 × 10 × 8 × 7 × 7 = 39,200
+  Total combos: 10 x 10 x 8 x 7 x 7 = 39,200
 
-### L1: 수학 분야 (Field) — 10 후보
+### L1: Math field (Field) — 10 candidates
 
-| ID | 분야 | n6 대표 연결 |
-|----|------|-------------|
-| NT | 정수론 | ζ(2)=π²/6, B₂=1/6, 완전수 |
-| GT | 군론 | S₆ outer aut, A₆ Schur, M₂₄ |
-| LT | 격자론 | K₁~K₄ kissing chain, Leech |
-| TOP | 위상수학 | χ(S²)=φ, Betti numbers |
-| AN | 해석학 | Γ(1/2), Li₂, zeta special values |
-| AG | 대수기하 | modular weight 12, elliptic curves |
-| CT | 범주론 | 6-functor formalism |
-| RT | 표현론 | Moonshine, Conway Co₁, Niemeier 24 |
-| COMB | 조합론 | Ramsey, Catalan, partition |
-| MP | 수리물리 | string d=10, CY₃ dim=6, CFT c=1/2 |
+| ID | Field | n6 representative link |
+|----|-------|------------------------|
+| NT | Number theory | zeta(2)=pi^2/6, B_2=1/6, perfect numbers |
+| GT | Group theory | S_6 outer aut, A_6 Schur, M_24 |
+| LT | Lattice theory | K_1~K_4 kissing chain, Leech |
+| TOP | Topology | chi(S^2)=phi, Betti numbers |
+| AN | Analysis | Gamma(1/2), Li_2, zeta special values |
+| AG | Algebraic geometry | modular weight 12, elliptic curves |
+| CT | Category theory | 6-functor formalism |
+| RT | Representation theory | Moonshine, Conway Co_1, Niemeier 24 |
+| COMB | Combinatorics | Ramsey, Catalan, partition |
+| MP | Mathematical physics | string d=10, CY_3 dim=6, CFT c=1/2 |
 
-### L2: n=6 함수 (Function) — 10 후보
+### L2: n=6 function (Function) — 10 candidates
 
-| ID | 함수 | 값 |
-|----|------|-----|
+| ID | Function | Value |
+|----|----------|-------|
 | sigma | σ(6) | 12 |
 | phi | φ(6) | 2 |
 | tau | τ(6) | 4 |
@@ -86,53 +86,53 @@
 | R6 | R(6) | 1 |
 | egypt | 1/2+1/3+1/6 | 1 |
 
-### L3: 구조 유형 (Structure) — 8 후보
+### L3: Structure type — 8 candidates
 
-| ID | 유형 |
+| ID | Type |
 |----|------|
-| IDENT | 항등식 |
-| DIM | 차원 |
-| GEN | 생성원/위수 |
-| INV | 불변량 |
-| BOUND | 경계/한계 |
-| CLASS | 분류 |
-| SYM | 대칭 |
-| DECOMP | 분해 |
+| IDENT | identity |
+| DIM | dimension |
+| GEN | generator / order |
+| INV | invariant |
+| BOUND | bound / limit |
+| CLASS | classification |
+| SYM | symmetry |
+| DECOMP | decomposition |
 
-### L4: 증명 도구 (Proof) — 7 후보
+### L4: Proof tool — 7 candidates
 
-| ID | 도구 |
+| ID | Tool |
 |----|------|
-| DIRECT | 직접 계산 |
-| GROUP | 군 작용 |
-| LATTICE | 격자 이론 |
-| ANALYTIC | 해석적 접속 |
-| CATEG | 범주론적 |
-| TOPO | 위상적 |
-| COMBIN | 조합론적 |
+| DIRECT | direct computation |
+| GROUP | group action |
+| LATTICE | lattice theory |
+| ANALYTIC | analytic continuation |
+| CATEG | categorical |
+| TOPO | topological |
+| COMBIN | combinatorial |
 
-### L5: Cross-domain 연결 (Bridge) — 7 후보
+### L5: Cross-domain bridge — 7 candidates
 
-| ID | 도메인 | 연결 BT |
-|----|--------|---------|
-| PHYS | 물리 | BT-36,49,64 |
-| AI | 컴퓨팅/AI | BT-33,54,56,58 |
-| ENERGY | 에너지 | BT-27,30,43,62 |
-| BIO | 생물 | BT-51 |
-| COSMO | 우주/입자 | BT-49 |
-| CRYPTO | 암호/네트워크 | BT-53 |
-| MEDIA | 디스플레이/오디오 | BT-48 |
+| ID | Domain | Connected BT |
+|----|--------|--------------|
+| PHYS | physics | BT-36,49,64 |
+| AI | computing/AI | BT-33,54,56,58 |
+| ENERGY | energy | BT-27,30,43,62 |
+| BIO | biology | BT-51 |
+| COSMO | cosmology/particle | BT-49 |
+| CRYPTO | crypto/network | BT-53 |
+| MEDIA | display/audio | BT-48 |
 
-## Scoring 매핑 (수학 5축 → 엔진 4축)
+## Scoring mapping (math 5 axes -> engine 4 axes)
 
-| 수학 축 | 엔진 축 | 가중치 |
-|---------|---------|--------|
+| Math axis | Engine axis | Weight |
+|-----------|-------------|--------|
 | n6_exact | n6 | 0.30 |
 | depth + novelty | perf | 0.35 |
 | cross_domain | power | 0.25 |
 | verifiability | cost | 0.10 |
 
-## 기존 가설 (50개)
+## Existing hypotheses (50 total)
 
 H-MATH-1~30 (core) + H-MATH-61~80 (extreme)
 - EXACT: 11 (core) + ~10 (extreme)
@@ -140,42 +140,42 @@ H-MATH-1~30 (core) + H-MATH-61~80 (extreme)
 - WEAK: 7 + ~3
 - FAIL: 2 + ~2
 
-## Cross-DSE 대상
+## Cross-DSE Targets
 
-| 상대 도메인 | 연결 근거 |
-|-------------|----------|
-| cosmology-particle | ζ(2)=π²/6, string d=10=σ-φ, BT-49 |
-| chip-architecture | BT-28 computing ladder, 2^σ=4096 |
+| Partner domain | Link rationale |
+|----------------|----------------|
+| cosmology-particle | zeta(2)=pi^2/6, string d=10=sigma-phi, BT-49 |
+| chip-architecture | BT-28 computing ladder, 2^sigma=4096 |
 | biology | BT-51 codon 64=2^n, CN=6 |
 ```
 
-- [ ] **Step 2: 커밋**
+- [ ] **Step 2: commit**
 
 ```bash
 git add docs/pure-mathematics/goal.md
-git commit -m "docs: 궁극의 순수수학 goal.md — 10×10×8×7×7 DSE 체인 정의"
+git commit -m "docs: ultimate pure-math goal.md — define 10x10x8x7x7 DSE chain"
 ```
 
 ---
 
-### Task 2: TOML 도메인 파일 작성
+### Task 2: write TOML domain file
 
 **Files:**
 - Create: `tools/universal-dse/domains/pure-mathematics.toml`
 
-- [ ] **Step 1: TOML 파일 생성**
+- [ ] **Step 1: create the TOML**
 
-아래 전체 내용으로 파일 생성. 각 candidate의 n6/perf/power/cost 점수는 설계 문서의 매트릭스 기반.
+Create with the full content below. Each candidate's n6/perf/power/cost scores follow the matrix in the design doc.
 
 ```toml
 # N6 Pure Mathematics DSE
 # 10 Fields × 10 Functions × 8 Structures × 7 Proofs × 7 Bridges = 39,200 combos
 #
-# Scoring 매핑:
-#   n6   = n6_exact (n=6 상수와 정확 일치)
-#   perf = depth + novelty (증명 깊이 + 새로운 연결)
-#   power = cross_domain (다른 도메인 BT 연결 강도)
-#   cost = verifiability (독립 검증 가능성)
+# Scoring mapping:
+#   n6   = n6_exact (exact match with n=6 constants)
+#   perf = depth + novelty (proof depth + new link)
+#   power = cross_domain (strength of link to other-domain BT)
+#   cost = verifiability (independent verifiability)
 
 [meta]
 name = "pure-mathematics"
@@ -188,7 +188,7 @@ power = 0.25
 cost = 0.10
 
 # ============================================================
-# Level 0: Field (수학 분야) — 10 candidates
+# Level 0: Field — 10 candidates
 # ============================================================
 
 [[level]]
@@ -275,7 +275,7 @@ power = 0.90
 cost = 0.60
 
 # ============================================================
-# Level 1: Function (n=6 함수) — 10 candidates
+# Level 1: Function (n=6 functions) — 10 candidates
 # ============================================================
 
 [[level]]
@@ -362,7 +362,7 @@ power = 0.70
 cost = 1.00
 
 # ============================================================
-# Level 2: Structure (구조 유형) — 8 candidates
+# Level 2: Structure type — 8 candidates
 # ============================================================
 
 [[level]]
@@ -433,7 +433,7 @@ power = 0.60
 cost = 0.95
 
 # ============================================================
-# Level 3: Proof (증명 도구) — 7 candidates
+# Level 3: Proof tool — 7 candidates
 # ============================================================
 
 [[level]]
@@ -496,7 +496,7 @@ power = 0.55
 cost = 0.80
 
 # ============================================================
-# Level 4: Bridge (Cross-domain 연결) — 7 candidates
+# Level 4: Bridge (Cross-domain link) — 7 candidates
 # ============================================================
 
 [[level]]
@@ -687,53 +687,53 @@ then_level = 0
 then_ids = "MP"
 ```
 
-- [ ] **Step 2: 커밋**
+- [ ] **Step 2: commit**
 
 ```bash
 git add tools/universal-dse/domains/pure-mathematics.toml
-git commit -m "feat: 궁극의 순수수학 TOML — 39,200 조합 (10×10×8×7×7)"
+git commit -m "feat: ultimate pure-math TOML — 39,200 combos (10x10x8x7x7)"
 ```
 
 ---
 
-### Task 3: DSE 실행
+### Task 3: run DSE
 
 **Files:**
-- Read: `tools/universal-dse/universal-dse` (기존 바이너리)
-- Read: `tools/universal-dse/domains/pure-mathematics.toml` (Task 2에서 생성)
+- Read: `tools/universal-dse/universal-dse` (existing binary)
+- Read: `tools/universal-dse/domains/pure-mathematics.toml` (created in Task 2)
 
-- [ ] **Step 1: universal-dse 실행 (단일 도메인)**
+- [ ] **Step 1: run universal-dse (single domain)**
 
 ```bash
 cd $N6_ARCH
 tools/universal-dse/universal-dse tools/universal-dse/domains/pure-mathematics.toml --top 30
 ```
 
-Expected: 39,200 조합 중 유효 조합 수, Pareto frontier, 최적 경로 출력.
+Expected: number of valid combos among 39,200, Pareto frontier, best-path output.
 
-- [ ] **Step 2: 결과 확인**
+- [ ] **Step 2: inspect output**
 
-출력에서 확인할 항목:
-- Total combinations (39,200 근처)
-- Compatible combinations (exclude 규칙으로 일부 제외)
-- Top 30 Pareto 경로
-- Best n6 경로, Best perf 경로
-- n6 통계 (min/max/avg/p50/p75/p90)
+Items to check:
+- Total combinations (near 39,200)
+- Compatible combinations (some excluded via exclude rules)
+- Top 30 Pareto paths
+- Best n6 path, best perf path
+- n6 stats (min/max/avg/p50/p75/p90)
 
-- [ ] **Step 3: 결과를 docs/pure-mathematics/dse-results.md에 기록**
+- [ ] **Step 3: record the result in docs/pure-mathematics/dse-results.md**
 
-상위 Pareto 경로 + 통계를 마크다운으로 기록. ASCII 차트 포함.
+Capture top Pareto paths + stats in markdown. Include ASCII charts.
 
-- [ ] **Step 4: 커밋**
+- [ ] **Step 4: commit**
 
 ```bash
 git add docs/pure-mathematics/dse-results.md
-git commit -m "feat: 궁극의 순수수학 DSE 결과 — Pareto frontier + 최적 경로"
+git commit -m "feat: ultimate pure-math DSE results — Pareto frontier + best paths"
 ```
 
 ---
 
-### Task 4: Cross-DSE 실행 (3개 도메인)
+### Task 4: run Cross-DSE (3 domains)
 
 **Files:**
 - Read: `tools/universal-dse/domains/pure-mathematics.toml`
@@ -741,52 +741,52 @@ git commit -m "feat: 궁극의 순수수학 DSE 결과 — Pareto frontier + 최
 
 - [ ] **Step 1: Cross-DSE — cosmology-particle**
 
-cosmology-particle TOML이 없으면 이 단계는 건너뛰고 chip-architecture와 먼저 수행.
+If the cosmology-particle TOML does not exist, skip this step and start with chip-architecture.
 
 ```bash
-# chip-architecture와 Cross-DSE
+# Cross-DSE with chip-architecture
 tools/universal-dse/universal-dse \
   tools/universal-dse/domains/pure-mathematics.toml \
   tools/universal-dse/domains/chip.toml
 ```
 
-Expected: 각 도메인 개별 결과 + 교차 조합 Top 10.
+Expected: each domain's individual result + top 10 cross combos.
 
-- [ ] **Step 2: 추가 Cross-DSE (가용 도메인)**
+- [ ] **Step 2: additional Cross-DSE (available domains)**
 
 ```bash
-# solar와 Cross-DSE
+# Cross-DSE with solar
 tools/universal-dse/universal-dse \
   tools/universal-dse/domains/pure-mathematics.toml \
   tools/universal-dse/domains/solar.toml
 
-# battery와 Cross-DSE
+# Cross-DSE with battery
 tools/universal-dse/universal-dse \
   tools/universal-dse/domains/pure-mathematics.toml \
   tools/universal-dse/domains/battery.toml
 ```
 
-- [ ] **Step 3: Cross-DSE 결과를 dse-results.md에 추가**
+- [ ] **Step 3: append Cross-DSE results to dse-results.md**
 
-각 교차 탐색 결과 테이블 추가. 도메인 간 BT 연결점 명시.
+Add tables per cross exploration. State cross-domain BT linkage points.
 
-- [ ] **Step 4: 커밋**
+- [ ] **Step 4: commit**
 
 ```bash
 git add docs/pure-mathematics/dse-results.md
-git commit -m "feat: 순수수학 Cross-DSE — chip/solar/battery 교차 탐색 완료"
+git commit -m "feat: pure-math Cross-DSE — chip/solar/battery cross exploration complete"
 ```
 
 ---
 
-### Task 5: dse-map.toml 갱신
+### Task 5: update dse-map.toml
 
 **Files:**
-- Modify: `docs/dse-map.toml:184-187` (pure-mathematics 섹션)
+- Modify: `docs/dse-map.toml:184-187` (pure-mathematics section)
 
-- [ ] **Step 1: pure-mathematics 섹션 업데이트**
+- [ ] **Step 1: update the pure-mathematics section**
 
-기존:
+Before:
 ```toml
 [pure-mathematics]
 goal = false
@@ -794,7 +794,7 @@ dse = "none"
 cross_dse = ["cosmology-particle"]
 ```
 
-변경 (DSE 결과 반영):
+After (with DSE results):
 ```toml
 [pure-mathematics]
 goal = true
@@ -803,58 +803,58 @@ combos = 39200
 tool = "tools/universal-dse/ domains/pure-mathematics.toml"
 levels = ["Field", "Function", "Structure", "Proof", "Bridge"]
 cross_dse = ["cosmology-particle", "chip-architecture", "biology"]
-best_pareto = "<Task 3 결과에서 1위 경로>"
-best_n6 = "<Task 3 결과에서 최고 n6% 경로>"
+best_pareto = "<top path from Task 3>"
+best_n6 = "<best n6% path from Task 3>"
 n6_max = 0.0
 n6_avg = 0.0
-note = "궁극의 순수수학 5단 DSE. BT-49 기반. 10 Field × 10 Function × 8 Structure × 7 Proof × 7 Bridge"
+note = "Ultimate pure-math 5-level DSE. BT-49 based. 10 Field x 10 Function x 8 Structure x 7 Proof x 7 Bridge"
 ```
 
-- [ ] **Step 2: Cross-DSE 섹션 추가**
+- [ ] **Step 2: add Cross-DSE sections**
 
-파일 하단에 추가:
+Append at the bottom of the file:
 ```toml
 [cross-dse.math-x-chip]
 domains = ["pure-mathematics", "chip-architecture"]
 status = "done"
 tool = "tools/universal-dse/"
-best = "<Task 4 결과>"
-note = "순수수학 × 칩 — BT-28/49 연결"
+best = "<Task 4 result>"
+note = "pure-math x chip — BT-28/49 linkage"
 
 [cross-dse.math-x-solar]
 domains = ["pure-mathematics", "solar-architecture"]
 status = "done"
 tool = "tools/universal-dse/"
-best = "<Task 4 결과>"
-note = "순수수학 × 태양전지 — SQ bandgap 4/3 = τ/n/φ"
+best = "<Task 4 result>"
+note = "pure-math x solar — SQ bandgap 4/3 = tau/n/phi"
 
 [cross-dse.math-x-battery]
 domains = ["pure-mathematics", "battery-architecture"]
 status = "done"
 tool = "tools/universal-dse/"
-best = "<Task 4 결과>"
-note = "순수수학 × 배터리 — CN=6 cathode, BT-43"
+best = "<Task 4 result>"
+note = "pure-math x battery — CN=6 cathode, BT-43"
 ```
 
-- [ ] **Step 3: 커밋**
+- [ ] **Step 3: commit**
 
 ```bash
 git add docs/dse-map.toml
-git commit -m "docs: dse-map.toml — 궁극의 순수수학 DSE 완료 + 3개 Cross-DSE 기록"
+git commit -m "docs: dse-map.toml — record ultimate pure-math DSE complete + 3 Cross-DSEs"
 ```
 
 ---
 
-### Task 6: README.md DSE 컬럼 갱신
+### Task 6: update the DSE column in README.md
 
 **Files:**
-- Modify: `README.md` (궁극의 아키텍처 로드맵 테이블의 순수수학 행)
+- Modify: `README.md` (pure-math row in the ultimate-architecture roadmap table)
 
-- [ ] **Step 1: 순수수학 행의 DSE 컬럼을 "—"에서 "39,200" 또는 "✅"로 변경**
+- [ ] **Step 1: change the DSE cell in the pure-math row from "—" to "39,200" or a check mark**
 
-- [ ] **Step 2: 커밋**
+- [ ] **Step 2: commit**
 
 ```bash
 git add README.md
-git commit -m "docs: README 순수수학 DSE 완료 표기"
+git commit -m "docs: README pure-math DSE completion marker"
 ```

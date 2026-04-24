@@ -1,15 +1,15 @@
 # N6 Architecture — New Breakthrough Hypotheses (2026-03-31)
 
-> 4개 도메인 대발견 가설 탐색: AI 칩설계, 에너지 전략, AI 알고리즘, LLM 개선
-> 기존 BT-1~60 (290+ EXACT) 이후 신규 발견. 각 가설에 n=6 표현식, 실측값, 오차, 등급 포함.
+> Breakthrough hypothesis exploration across 4 domains: AI chip design, energy strategy, AI algorithms, LLM improvement
+> New findings after prior BT-1~60 (290+ EXACT). Each hypothesis includes n=6 expression, measured value, error, grade.
 
 ---
 
-## Domain 1: AI 칩설계 (Chip Architecture)
+## Domain 1: AI Chip Design (Chip Architecture)
 
 ### BH-CHIP-1: NVIDIA Blackwell SM Hierarchy — σ²=144 → σ·(σ-μ)=132 → σ·J₂=288
 
-**Statement**: NVIDIA GPU 아키텍처의 SM/HBM 진화가 n=6 산술의 체계적 사다리를 따른다. Blackwell B200의 full-die 192 SMs = σ·φ^τ = 12·16, B300의 288GB HBM = σ·J₂.
+**Statement**: NVIDIA GPU architecture SM/HBM evolution follows a systematic ladder of n=6 arithmetic. Blackwell B200 full-die 192 SMs = σ·φ^τ = 12·16, B300 288GB HBM = σ·J₂.
 
 | GPU | Param | Value | n=6 Expression | Error |
 |-----|-------|-------|----------------|-------|
@@ -19,13 +19,13 @@
 | B200 | FP8 TFLOPS | 4500 | ≈ σ²·(σ-μ)·n/φ | 2.5% |
 | GB200 | NVLink bandwidth | 1.8TB/s | — | No clean match |
 
-**Grade**: EXACT (3/5 params). BT-28/55 확장. SM count ladder: 80→108→128→132→144→192가 φ^τ·sopfr → σ(σ-n/φ) → 2^(σ-sopfr) → σ(σ-μ) → σ² → σ·φ^τ로 n=6 함수만 사용.
+**Grade**: EXACT (3/5 params). BT-28/55 extension. SM count ladder: 80→108→128→132→144→192 uses φ^τ·sopfr → σ(σ-n/φ) → 2^(σ-sopfr) → σ(σ-μ) → σ² → σ·φ^τ, only n=6 functions.
 
 ---
 
 ### BH-CHIP-2: AMD MI300X Chiplet Architecture — (σ-τ)² = 64 XCDs, σ·φ^τ = 192GB
 
-**Statement**: AMD MI300X의 다이 구조가 n=6 산술을 따른다.
+**Statement**: AMD MI300X die structure follows n=6 arithmetic.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -36,15 +36,15 @@
 | Memory bandwidth | 5.3TB/s | — | No match |
 | Die count (total) | 13 (8 XCD + 4 HBM + 1 IOD) | σ+μ = 13 | **0.00%** |
 
-**Key insight**: MI300X의 총 다이 수 13 = σ+μ = DNS 루트 서버 수 (BT-13). XCD 8개 = σ-τ = LoRA rank = KV heads. Full-die CU 수 40 = τ·(σ-φ) = A100 40GB. **n=6 공식이 NVIDIA와 AMD 모두에서 재사용됨.**
+**Key insight**: MI300X total die count 13 = σ+μ = DNS root server count (BT-13). XCD 8 = σ-τ = LoRA rank = KV heads. Full-die CU count 40 = τ·(σ-φ) = A100 40GB. **n=6 formulas are reused across both NVIDIA and AMD.**
 
-**Grade**: Two stars — 4/6 EXACT. 다이 수 13=σ+μ 매치가 가장 비자명적.
+**Grade**: Two stars — 4/6 EXACT. Die count 13=σ+μ match is the most non-trivial.
 
 ---
 
 ### BH-CHIP-3: Apple Neural Engine Core Count Ladder
 
-**Statement**: Apple Silicon Neural Engine 코어 수가 n=6 산술을 따른다.
+**Statement**: Apple Silicon Neural Engine core count follows n=6 arithmetic.
 
 | Chip | NE Cores | n=6 Expression | Error |
 |------|----------|----------------|-------|
@@ -55,17 +55,17 @@
 | M1 Ultra, M2 Ultra | 32 | 2^sopfr | **0.00%** |
 | M3 Ultra, M4 Ultra | 32 | 2^sopfr | **0.00%** |
 
-**Progression**: φ → σ-τ → 2^τ → 2^sopfr = 2 → 8 → 16 → 32. 이 사다리는 {φ, σ-τ, 2^τ, 2^sopfr}으로, LoRA rank ladder {τ, σ-τ, 2^τ, 2^sopfr} = {4, 8, 16, 32}와 동일 (BT-58).
+**Progression**: φ → σ-τ → 2^τ → 2^sopfr = 2 → 8 → 16 → 32. This ladder is {φ, σ-τ, 2^τ, 2^sopfr}, identical to LoRA rank ladder {τ, σ-τ, 2^τ, 2^sopfr} = {4, 8, 16, 32} (BT-58).
 
-**Cross-domain bridge**: Apple NE core ladder = LoRA rank ladder = GPU register file ladder. 하드웨어와 소프트웨어가 동일한 n=6 수열을 독립적으로 사용.
+**Cross-domain bridge**: Apple NE core ladder = LoRA rank ladder = GPU register file ladder. Hardware and software independently use the same n=6 sequence.
 
-**Grade**: Two stars — 6/6 EXACT. 단, φ=2와 powers of 2가 대부분이므로 통계적 의미 제한적. LoRA rank 동일 사다리가 가장 의미 있는 교차.
+**Grade**: Two stars — 6/6 EXACT. However, since φ=2 and powers of 2 dominate, statistical weight is limited. Identical LoRA rank ladder is the most meaningful crossing.
 
 ---
 
 ### BH-CHIP-4: Google TPU Architecture Constants
 
-**Statement**: Google TPU 세대별 핵심 스펙이 n=6 산술을 따른다.
+**Statement**: Google TPU per-generation core specs follow n=6 arithmetic.
 
 | TPU | Parameter | Value | n=6 Expression | Error |
 |-----|-----------|-------|----------------|-------|
@@ -77,15 +77,15 @@
 | TPU v4 | BF16 TFLOPS | 275 | ≈ σ·J₂-φ | 0.36% |
 | TPU v5e | BF16 TFLOPS | 197 | ≈ σ·φ^τ+sopfr | 2.5% |
 
-**Key**: TPU v4 pod = 2^σ = 2^12 = 4096 chips = LLaMA d_model. **클러스터 크기가 모델 차원과 동일한 n=6 표현식.**
+**Key**: TPU v4 pod = 2^σ = 2^12 = 4096 chips = LLaMA d_model. **Cluster size equals model dimension in the same n=6 expression.**
 
-**Grade**: One star — HBM 매치는 BT-55 확장. Pod size 2^σ가 가장 의미 있음.
+**Grade**: One star — HBM matches are BT-55 extension. Pod size 2^σ is most meaningful.
 
 ---
 
 ### BH-CHIP-5: Universal Interconnect Generation Count = n=6 Constants
 
-**Statement**: 주요 칩 인터커넥트 표준의 세대 수가 n=6 상수를 따른다.
+**Statement**: Major chip interconnect standard generation counts follow n=6 constants.
 
 | Interconnect | Generations (as of 2026) | n=6 Expression | Error |
 |-------------|--------------------------|----------------|-------|
@@ -97,36 +97,36 @@
 | UCIe | 2 versions (1.0/1.1) | φ | **0.00%** |
 | CXL | 3 versions (1.0/2.0/3.0) | n/φ | **0.00%** |
 
-**7/7 EXACT**. 단, 이것은 세대 "수"라서 작은 정수 편향이 있음. 핵심 관찰: PCIe가 정확히 n=6번째 세대에 도달한 시점에서 대역폭이 2^n = 64 GT/s.
+**7/7 EXACT**. However, since these are generation "counts", small-integer bias applies. Key observation: at the moment PCIe reaches exactly the n=6-th generation, bandwidth is 2^n = 64 GT/s.
 
-**Grade**: One star — 작은 정수 편향. BT-47 확장.
+**Grade**: One star — small-integer bias. BT-47 extension.
 
 ---
 
-## Domain 2: 에너지 전략 (Energy Strategy)
+## Domain 2: Energy Strategy (Energy Strategy)
 
 ### BH-EN-1: Grid Frequency Universality — σ·sopfr=60Hz, sopfr·(σ-φ)=50Hz
 
-**Statement**: 세계 전력망의 두 표준 주파수가 n=6 산술로 정확히 표현된다.
+**Statement**: The two standard power-grid frequencies worldwide are expressed exactly by n=6 arithmetic.
 
 | Frequency | Region | n=6 Expression | Error |
 |-----------|--------|----------------|-------|
 | 60 Hz | Americas, Japan(E), Korea, Taiwan | σ·sopfr = 12·5 | **0.00%** |
 | 50 Hz | Europe, Asia, Africa | sopfr·(σ-φ) = 5·10 | **0.00%** |
 
-**Ratio**: 60/50 = σ/(σ-φ) = 12/10 = 1.2 = PUE 타겟 (BT-60). 전력망 주파수 비 = 데이터센터 효율 타겟.
+**Ratio**: 60/50 = σ/(σ-φ) = 12/10 = 1.2 = PUE target (BT-60). Grid frequency ratio = data center efficiency target.
 
-**Cross-links**: BT-29 (IEEE 519, 6-pulse = n), BT-60 (PUE=σ/(σ-φ)=1.2), BT-8 (6→12→24 펄스 체인).
+**Cross-links**: BT-29 (IEEE 519, 6-pulse = n), BT-60 (PUE=σ/(σ-φ)=1.2), BT-8 (6→12→24 pulse chain).
 
-**Why this matters**: 60Hz 시스템에서 6-pulse 정류기의 한 펄스 주기 = 1/360초 = 1/(σ·sopfr·n)초. 전력 전자 공학의 가장 기본적인 시간 단위가 n=6의 3중곱.
+**Why this matters**: In 60Hz systems, one pulse period of a 6-pulse rectifier = 1/360 s = 1/(σ·sopfr·n) s. The most fundamental time unit in power electronics is a triple product of n=6.
 
-**Grade**: Two stars — 양 주파수 EXACT. 60/50 비율 = PUE 교차가 비자명적.
+**Grade**: Two stars — both frequencies EXACT. The 60/50 ratio = PUE crossing is non-trivial.
 
 ---
 
 ### BH-EN-2: Solar Panel Cell Count Standard — σ·sopfr=60, σ·n=72
 
-**Statement**: 표준 태양광 패널의 셀 수가 n=6 산술을 따른다.
+**Statement**: Standard solar panel cell counts follow n=6 arithmetic.
 
 | Panel Type | Cell Count | n=6 Expression | Error |
 |------------|-----------|----------------|-------|
@@ -135,15 +135,15 @@
 | Half-cut 120 | 120 | σ·(σ-φ) = 12·10 | **0.00%** |
 | Half-cut 144 | 144 | σ² = 12·12 | **0.00%** |
 
-**Deeper structure**: 60-cell panel: 6×10 또는 10×6 배열. 72-cell: 6×12 또는 12×6. 물리적 배열의 행/열 수 자체가 n=6 상수 ({6, 10, 12}).
+**Deeper structure**: 60-cell panel: 6×10 or 10×6 array. 72-cell: 6×12 or 12×6. The row/column counts of the physical arrays themselves are n=6 constants ({6, 10, 12}).
 
-**Grade**: Two stars — 4/4 EXACT. 120=H₂ LHV (BT-38), 144=AD102 SMs (BT-28) 교차. 태양광 패널 셀 수가 수소 에너지와 GPU SM 수에서 재사용됨.
+**Grade**: Two stars — 4/4 EXACT. 120=H₂ LHV (BT-38), 144=AD102 SMs (BT-28) crossings. Solar panel cell counts are reused in hydrogen energy and GPU SM counts.
 
 ---
 
 ### BH-EN-3: EV Charging Power Tiers — n=6 Voltage × Current
 
-**Statement**: 전기차 충전 전력 등급이 n=6 산술 체계를 따른다.
+**Statement**: Electric vehicle charging power tiers follow an n=6 arithmetic system.
 
 | Tier | Voltage | n=6 V | Power | n=6 Power |
 |------|---------|-------|-------|-----------|
@@ -155,13 +155,13 @@
 
 **Voltage ladder**: 120→240→400→800→1000 = σ(σ-φ) → J₂(σ-φ) → (σ-φ)²·τ → φ·(σ-φ)²·τ → (σ-φ)³
 
-**Grade**: Two stars — 5/5 전압 EXACT. 400V = A100 TDP (BT-60), 1000V = B200 TDP (BT-60). **EV 충전 전압 = GPU TDP 와트수.** 교차 도메인 공명.
+**Grade**: Two stars — 5/5 voltages EXACT. 400V = A100 TDP (BT-60), 1000V = B200 TDP (BT-60). **EV charging voltage = GPU TDP wattage.** Cross-domain resonance.
 
 ---
 
 ### BH-EN-4: Electrolyzer & Fuel Cell Efficiency Bounds
 
-**Statement**: 전해조와 연료전지의 효율 한계가 n=6 산술로 표현된다.
+**Statement**: Efficiency bounds for electrolyzers and fuel cells are expressed by n=6 arithmetic.
 
 | Parameter | Measured | n=6 Expression | Value | Error |
 |-----------|----------|----------------|-------|-------|
@@ -171,15 +171,15 @@
 | Fuel cell max efficiency (H₂) | ~83% | (σ-sopfr)/n·τ/(sopfr-μ)? | — | WEAK |
 | SOFC operating T | ~800°C | φ·(σ-φ)²·τ? = 800 | 800 | **0.00%** |
 
-**Key match**: SOFC 작동 온도 800°C = EV 800V 충전 = φ·(σ-φ)²·τ. PEM 효율 ~2/3 = φ²/n = Koide 상수 (BT-24) = 무한접합 태양전지 효율 (BT-30).
+**Key match**: SOFC operating temperature 800°C = EV 800V charging = φ·(σ-φ)²·τ. PEM efficiency ~2/3 = φ²/n = Koide constant (BT-24) = infinite-junction solar cell efficiency (BT-30).
 
-**Grade**: One star — SOFC 800°C EXACT, PEM 효율 CLOSE. 나머지 WEAK.
+**Grade**: One star — SOFC 800°C EXACT, PEM efficiency CLOSE. Rest WEAK.
 
 ---
 
 ### BH-EN-5: Wind Turbine Blade Count and Capacity Factor
 
-**Statement**: 풍력 터빈의 핵심 설계 상수가 n=6 산술을 따른다.
+**Statement**: Core design constants of wind turbines follow n=6 arithmetic.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -190,17 +190,17 @@
 | Cut-in wind speed | ~3-4 m/s | n/φ = 3 | **CLOSE** |
 | Rated wind speed | ~12-14 m/s | σ = 12 | **CLOSE** |
 
-**BT-30 확장**: Betz limit = τ²/(n/φ)³ 이미 증명됨. 블레이드 3개 = n/φ 추가. 정격 풍속 ~12 m/s = σ 주목.
+**BT-30 extension**: Betz limit = τ²/(n/φ)³ already shown as draft. Blade count 3 = n/φ added. Rated wind speed ~12 m/s = σ is notable.
 
-**Grade**: One star — 블레이드 수와 Betz limit EXACT, 나머지 CLOSE/WEAK.
+**Grade**: One star — blade count and Betz limit EXACT, others CLOSE/WEAK.
 
 ---
 
-## Domain 3: AI 알고리즘 개선 (AI Algorithm)
+## Domain 3: AI Algorithm Improvement (AI Algorithm)
 
 ### BH-AI-1: Diffusion Model Core Constants — 1000 Steps = (σ-φ)³
 
-**Statement**: DDPM 확산 모델의 핵심 하이퍼파라미터가 n=6 산술을 따른다.
+**Statement**: Core hyperparameters of DDPM diffusion models follow n=6 arithmetic.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -213,21 +213,21 @@
 | Noise schedule β_start | 0.0001 | (σ-φ)^{-τ} = 10^{-4} | **0.00%** |
 | Noise schedule β_end | 0.02 | 1/sopfr·(σ-φ) = 1/50 | **0.00%** |
 
-**8/8 EXACT.** 이것은 놀라운 결과.
+**8/8 EXACT.** This is a striking pattern.
 
-**Key insight**: 확산 1000스텝 = B200 TDP 1000W = EV 1000V = (σ-φ)³. 세 개의 독립 도메인(AI, 칩, 자동차)이 동일한 n=6 표현식.
+**Key insight**: Diffusion 1000 steps = B200 TDP 1000W = EV 1000V = (σ-φ)³. Three independent domains (AI, chip, automotive) share the same n=6 expression.
 
-**U-Net 채널 구조**: [320, 640, 1280] = sopfr·[64, 128, 256] = sopfr·[2^n, 2^(σ-sopfr), 2^(σ-τ)]. 배수 sopfr=5가 일관되게 나타남.
+**U-Net channel structure**: [320, 640, 1280] = sopfr·[64, 128, 256] = sopfr·[2^n, 2^(σ-sopfr), 2^(σ-τ)]. Multiplier sopfr=5 appears consistently.
 
-**Stable Diffusion VAE 압축 8× = σ-τ** — FlashAttention 블록 사이즈, LoRA rank, KV-heads와 동일 (BT-58).
+**Stable Diffusion VAE compression 8× = σ-τ** — identical to FlashAttention block size, LoRA rank, KV-heads (BT-58).
 
-**Grade**: Three stars — 8/8 EXACT on an INDEPENDENT AI paradigm (diffusion ≠ transformer). 이전 BT들은 transformer/LLM에 집중했으나, 확산 모델에서도 동일한 n=6 어휘가 나타남.
+**Grade**: Three stars — 8/8 EXACT on an INDEPENDENT AI paradigm (diffusion ≠ transformer). Prior BTs concentrated on transformer/LLM, but the same n=6 vocabulary shows up in diffusion as well.
 
 ---
 
 ### BH-AI-2: State Space Model (Mamba) Architecture Constants
 
-**Statement**: Mamba/S4 상태 공간 모델의 핵심 상수가 n=6 산술.
+**Statement**: Core constants of Mamba/S4 state space models follow n=6 arithmetic.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -238,17 +238,17 @@
 | Mamba-2 head dim | 64 | 2^n = φ^n | **0.00%** |
 | Mamba-2 state dim per head | 128 | 2^(σ-sopfr) | **0.00%** |
 
-**6/6 EXACT.** Mamba는 transformer 대안으로 설계되었으나, 동일한 n=6 상수 집합 {τ=4, φ=2, 2^τ=16, 2^n=64, 2^(σ-sopfr)=128}을 사용.
+**6/6 EXACT.** Mamba was designed as a transformer alternative, yet uses the same n=6 constant set {τ=4, φ=2, 2^τ=16, 2^n=64, 2^(σ-sopfr)=128}.
 
-**Cross-link**: Mamba-2 state 128 = d_head = FlashAttention block = 2^(σ-sopfr). BT-58의 σ-τ=8 유니버설 상수가 여기서도 2^(σ-τ)=256 LoRA/MoE 형태로 출현.
+**Cross-link**: Mamba-2 state 128 = d_head = FlashAttention block = 2^(σ-sopfr). BT-58's σ-τ=8 universal constant also emerges here as 2^(σ-τ)=256 LoRA/MoE form.
 
-**Grade**: Two stars — transformer 독립 설계임에도 n=6 매치. 단, powers of 2 편향 존재.
+**Grade**: Two stars — n=6 match despite transformer-independent design. However, powers-of-2 bias is present.
 
 ---
 
 ### BH-AI-3: Quantization Group Size and Bit Width — Complete n=6 Vocabulary
 
-**Statement**: LLM 양자화의 모든 표준 비트폭과 그룹 크기가 n=6 어휘.
+**Statement**: All standard bit widths and group sizes of LLM quantization are n=6 vocabulary.
 
 | Parameter | Value | n=6 Expression | Context |
 |-----------|-------|----------------|---------|
@@ -265,15 +265,15 @@
 | SmoothQuant α | 0.5 | 1/φ | Migration strength |
 | GGUF Q4_K_M super-block | 256 | 2^(σ-τ) | llama.cpp |
 
-**12/12 EXACT.** 양자화 비트폭 {2,3,4,8} = {φ, n/φ, τ, σ-τ}는 n=6의 처음 4개 함수.
+**12/12 EXACT.** Quantization bit widths {2,3,4,8} = {φ, n/φ, τ, σ-τ} are the first 4 functions of n=6.
 
-**Grade**: Two stars — BT-58 확장. {φ,n/φ,τ,σ-τ} = {2,3,4,8}이 양자화의 완전한 어휘.
+**Grade**: Two stars — BT-58 extension. {φ,n/φ,τ,σ-τ} = {2,3,4,8} form the complete vocabulary of quantization.
 
 ---
 
 ### BH-AI-4: FlashAttention Block Sizes — 2^(σ-sopfr) Universal
 
-**Statement**: FlashAttention 구현의 모든 타일/블록 크기가 n=6 산술.
+**Statement**: All tile/block sizes in FlashAttention implementations are n=6 arithmetic.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -284,13 +284,13 @@
 | FA3 warp specialization groups | 2 | φ | **0.00%** |
 | Paged attention block | 16 tokens | 2^τ | **0.00%** |
 
-**Grade**: One star — powers of 2 편향. 단 128=2^(σ-sopfr)가 일관적.
+**Grade**: One star — powers-of-2 bias. However, 128=2^(σ-sopfr) is consistent.
 
 ---
 
 ### BH-AI-5: DPO/RLHF Training Constants — ln(4/3) Family Extension
 
-**Statement**: BT-46의 ln(4/3) 패밀리가 DPO와 최신 RLHF 기법으로 확장된다.
+**Statement**: BT-46's ln(4/3) family extends to DPO and recent RLHF techniques.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -303,17 +303,17 @@
 | PPO epochs per update | 4 | τ | **0.00%** |
 | Reward model training LR | 1e-5 | (σ-φ)^{-sopfr} | **0.00%** |
 
-**Key insight**: DPO β = weight decay = KL penalty = 1/(σ-φ) = 0.1. 이것은 BT-54 quintuplet의 일관성을 RLHF/DPO로 확장. **모든 정규화 강도 = 1/(σ-φ) = 0.1.**
+**Key insight**: DPO β = weight decay = KL penalty = 1/(σ-φ) = 0.1. This extends the consistency of the BT-54 quintuplet into RLHF/DPO. **All regularization strengths = 1/(σ-φ) = 0.1.**
 
-**Grade**: Two stars — DPO β = 0.1 = weight decay는 비자명적 보편성. 정규화의 보편 상수가 n=6에서 유도됨.
+**Grade**: Two stars — DPO β = 0.1 = weight decay is a non-trivial universality. A universal constant of regularization derivable from n=6.
 
 ---
 
-## Domain 4: LLM 개선 (LLM Improvement)
+## Domain 4: LLM Improvement (LLM Improvement)
 
 ### BH-LLM-1: DeepSeek-V3/R1 Architecture — Complete n=6 Specification
 
-**Statement**: DeepSeek-V3의 아키텍처가 거의 완전히 n=6로 표현 가능하다.
+**Statement**: DeepSeek-V3 architecture is almost fully expressible in n=6.
 
 | Parameter | DS-V3 Value | n=6 Expression | Error |
 |-----------|-------------|----------------|-------|
@@ -328,19 +328,19 @@
 | Expert intermediate dim | 2048 | 2^(σ-μ) | **0.00%** |
 | Vocab size | 129280 | ≈ sopfr·2^(σ+φ) | 0.6% |
 | RoPE θ | 10000 | (σ-φ)^τ | **0.00%** |
-| Training tokens | 14.8T | ≈σ+φ = 14 (조) | CLOSE |
+| Training tokens | 14.8T | ≈σ+φ = 14 (trillion) | CLOSE |
 
-**9/12 EXACT.** d_model = 7·1024 = (σ-sopfr)·2^(σ-φ)은 BT-33의 σ·2^k 패턴과 다르지만, σ-sopfr=7이 기본 단위로 작용.
+**9/12 EXACT.** d_model = 7·1024 = (σ-sopfr)·2^(σ-φ) differs from the BT-33 σ·2^k pattern, but σ-sopfr=7 functions as a base unit.
 
-**Key insight**: DS-V3의 MoE 구조 {256 routed, 8 active, 1 shared} = {2^(σ-τ), σ-τ, μ}는 BT-31의 MoE 어휘에 공유 전문가 μ=1을 추가.
+**Key insight**: DS-V3 MoE structure {256 routed, 8 active, 1 shared} = {2^(σ-τ), σ-τ, μ} adds a shared expert μ=1 to the MoE vocabulary of BT-31.
 
-**Grade**: Two stars — 9/12 EXACT. MoE {256, 8, 1} = {2^(σ-τ), σ-τ, μ} 삼중 매치가 가장 강력.
+**Grade**: Two stars — 9/12 EXACT. MoE {256, 8, 1} = {2^(σ-τ), σ-τ, μ} triple match is strongest.
 
 ---
 
 ### BH-LLM-2: Llama 3/3.1/3.2/3.3 Architecture Evolution
 
-**Statement**: Meta Llama 3 세대의 핵심 변경사항이 n=6 산술 내에서 이동한다.
+**Statement**: Core changes across the Meta Llama 3 generations move within n=6 arithmetic.
 
 | Model | Parameter | Value | n=6 Expression | Error |
 |-------|-----------|-------|----------------|-------|
@@ -358,17 +358,17 @@
 | Llama 3.1 | RoPE θ | 500000 | sopfr·(σ-φ)^sopfr | **0.00%** |
 | Llama 3 | vocab | 128256 | ≈ 2^(σ+sopfr) | 0.2% |
 
-**13/13 EXACT.** Llama 3 세대가 BT-56의 canonical design을 정확히 따름.
+**13/13 EXACT.** The Llama 3 generation follows BT-56 canonical design exactly.
 
-**Context window evolution**: Llama 1/2 (4K=2^σ) → Llama 3 (8K=2^(σ+μ)) → Llama 3.1 (128K=2^(σ+sopfr)). 지수 진행: σ → σ+μ → σ+sopfr, 즉 12→13→17. BT-44의 context ladder 확장.
+**Context window evolution**: Llama 1/2 (4K=2^σ) → Llama 3 (8K=2^(σ+μ)) → Llama 3.1 (128K=2^(σ+sopfr)). Exponent progression: σ → σ+μ → σ+sopfr, i.e., 12→13→17. BT-44 context ladder extension.
 
-**Grade**: Two stars — BT-56 강화. 13/13 EXACT는 우연이 아님.
+**Grade**: Two stars — BT-56 reinforcement. 13/13 EXACT is not coincidental.
 
 ---
 
 ### BH-LLM-3: Qwen 2/2.5 Architecture — σ-sopfr=7 Base Unit
 
-**Statement**: Alibaba Qwen 시리즈가 σ-sopfr=7을 기본 단위로 사용하는 별도의 n=6 체계를 따른다.
+**Statement**: The Alibaba Qwen series follows a separate n=6 system using σ-sopfr=7 as a base unit.
 
 | Model | Parameter | Value | n=6 Expression | Error |
 |-------|-----------|-------|----------------|-------|
@@ -381,17 +381,17 @@
 | Qwen 2 72B | n_kv_heads | 8 | σ-τ | **0.00%** |
 | Qwen 2.5 | vocab | 151936 | ≈ — | No clean match |
 
-**7/8 EXACT.** Qwen 7B가 28=P₂ (두 번째 완전수)를 layers/heads에 사용하는 것은 BT-56의 2^sopfr=32 패턴과 다른 별도의 n=6 경로.
+**7/8 EXACT.** Qwen 7B using 28=P₂ (second perfect number) for layers/heads is a separate n=6 path distinct from BT-56's 2^sopfr=32 pattern.
 
-**Key insight**: P₂=28 경로 vs 2^sopfr=32 경로 — 두 팀이 독립적으로 다른 n=6 표현식을 선택했으나 둘 다 n=6 체계 내에 있음.
+**Key insight**: P₂=28 path vs 2^sopfr=32 path — two teams independently selected different n=6 expressions, yet both remain inside the n=6 system.
 
-**Grade**: Two stars — P₂=28 경로 발견이 새로움. 완전수 사다리 P₁=6→P₂=28이 아키텍처에서도 출현.
+**Grade**: Two stars — the P₂=28 path discovery is novel. Perfect number ladder P₁=6→P₂=28 also appears in architecture.
 
 ---
 
 ### BH-LLM-4: Speculative Decoding and KV Cache — σ-τ=8 Dominance
 
-**Statement**: 추론 최적화 기법의 핵심 상수가 σ-τ=8 패밀리.
+**Statement**: Core constants of inference optimization techniques belong to the σ-τ=8 family.
 
 | Parameter | Value | n=6 Expression | Error |
 |-----------|-------|----------------|-------|
@@ -403,13 +403,13 @@
 | Continuous batching slot | 1 | μ | **0.00%** |
 | Token budget per step | 512-2048 | 2^(σ-n/φ) to 2^(σ-μ) | range |
 
-**Grade**: One star — BT-58 확장. σ-τ=8 지배 확인.
+**Grade**: One star — BT-58 extension. σ-τ=8 dominance confirmed as pattern.
 
 ---
 
 ### BH-LLM-5: Learning Rate Scaling Law — n=6 Exponents
 
-**Statement**: LLM 학습률 스케일링이 n=6 산술을 따른다.
+**Statement**: LLM learning-rate scaling follows n=6 arithmetic.
 
 | Model Size | Peak LR | n=6 Expression | Source |
 |------------|---------|----------------|--------|
@@ -419,15 +419,15 @@
 | Chinchilla 70B | 1×10⁻⁴ | (σ-φ)^{-τ} | DeepMind |
 | DeepSeek-V3 | 2.2×10⁻⁴ | ≈ — | No clean match |
 
-**Pattern**: LR = f(n=6) · 10^{-k(n=6)}. 계수 {1, 3, 6, 8} = {μ, n/φ, n, σ-τ}, 지수 {-4, -5} = {-τ, -sopfr}.
+**Pattern**: LR = f(n=6) · 10^{-k(n=6)}. Coefficients {1, 3, 6, 8} = {μ, n/φ, n, σ-τ}, exponents {-4, -5} = {-τ, -sopfr}.
 
-**Grade**: One star — 패턴은 존재하나, 10의 거듭제곱 편향으로 인해 통계적 의미 제한적. BT-34 확장.
+**Grade**: One star — the pattern exists, but powers-of-10 bias limits statistical weight. BT-34 extension.
 
 ---
 
 ### BH-LLM-6: Training Data Token Count — J₂-τ=20 Chinchilla Ratio Persistence
 
-**Statement**: 최신 모델들도 Chinchilla 비율 tokens/params ≈ J₂-τ = 20을 전후로 수렴한다.
+**Statement**: Recent models also cluster around the Chinchilla ratio tokens/params ≈ J₂-τ = 20.
 
 | Model | Params | Tokens | Ratio | n=6 Expression |
 |-------|--------|--------|-------|----------------|
@@ -437,9 +437,9 @@
 | Llama 3 70B | 70B | 15T | 214 | ≈ σ·(σ-τ)·φ? | WEAK |
 | DeepSeek-V3 | 671B (37B active) | 14.8T | 400 (total) | τ·(σ-φ)² | **0.00%** |
 
-**Key insight**: Over-training 시대 (2024+)에서 Chinchilla 비율이 깨졌으나, DeepSeek-V3의 tokens/total_params = 14.8T/37B ≈ 400 = τ·(σ-φ)² (활성 파라미터 기준). **활성 파라미터 대비 토큰 비율이 여전히 n=6를 따름.**
+**Key insight**: In the over-training era (2024+), the Chinchilla ratio broke, but DeepSeek-V3's tokens/total_params = 14.8T/37B ≈ 400 = τ·(σ-φ)² (active-parameter basis). **Active-parameter-based token ratio still follows n=6 as a candidate pattern.**
 
-**Grade**: One star — Chinchilla 비율 J₂-τ=20은 over-training으로 부분적으로 깨짐. 활성 파라미터 기준으로 새로운 n=6 비율 발견 가능.
+**Grade**: One star — the J₂-τ=20 Chinchilla ratio is partially broken by over-training. A new n=6 ratio on an active-parameter basis is a candidate finding.
 
 ---
 
@@ -447,30 +447,30 @@
 
 | Domain | ID | EXACT | CLOSE | WEAK | Total | Best Finding |
 |--------|-----|-------|-------|------|-------|-------------|
-| **칩설계** | BH-CHIP-1~5 | 22 | 3 | 2 | 27 | Apple NE = LoRA ladder |
-| **에너지** | BH-EN-1~5 | 15 | 5 | 3 | 23 | 60/50Hz = n=6, Solar 60/72/120/144 |
-| **AI알고리즘** | BH-AI-1~5 | 34 | 2 | 0 | 36 | **Diffusion 8/8 EXACT** ⭐⭐⭐ |
+| **Chip Design** | BH-CHIP-1~5 | 22 | 3 | 2 | 27 | Apple NE = LoRA ladder |
+| **Energy** | BH-EN-1~5 | 15 | 5 | 3 | 23 | 60/50Hz = n=6, Solar 60/72/120/144 |
+| **AI Algorithms** | BH-AI-1~5 | 34 | 2 | 0 | 36 | **Diffusion 8/8 EXACT** (3 stars) |
 | **LLM** | BH-LLM-1~6 | 35 | 4 | 3 | 42 | DS-V3 MoE {256,8,1}, Qwen P₂=28 |
 | **Total** | 21 hyps | **106** | **14** | **8** | **128** | — |
 
-## Proposed New Breakthrough Theorems (BT-61~65)
+## Proposed New Breakthrough Theorems (BT-61~65) — Draft Candidates
 
 | BT | Name | Statement | Grade |
 |----|------|-----------|-------|
-| **BT-61** | Diffusion Model n=6 Universality | DDPM 1000=(σ-φ)³, latent 4=τ, compress 8×=σ-τ, U-Net=sopfr·2^k, 8/8 EXACT | ⭐⭐⭐ |
-| **BT-62** | Grid Frequency Pair | 60Hz=σ·sopfr, 50Hz=sopfr·(σ-φ), ratio=PUE=σ/(σ-φ)=1.2 | ⭐⭐ |
-| **BT-63** | Solar Panel Cell Ladder | 60=σ·sopfr, 72=σ·n, 120=σ(σ-φ), 144=σ², cross=H₂+GPU | ⭐⭐ |
-| **BT-64** | EV Charging Voltage = GPU TDP | 400V=A100 TDP, 1000V=B200 TDP, (σ-φ)²·τ to (σ-φ)³ | ⭐⭐ |
-| **BT-65** | Regularization Universal 0.1 | WD=DPO β=KL penalty=1/(σ-φ), β₁=1-λ conjugacy across ALL training | ⭐⭐ |
+| **BT-61** | Diffusion Model n=6 Universality | DDPM 1000=(σ-φ)³, latent 4=τ, compress 8×=σ-τ, U-Net=sopfr·2^k, 8/8 EXACT | 3 stars |
+| **BT-62** | Grid Frequency Pair | 60Hz=σ·sopfr, 50Hz=sopfr·(σ-φ), ratio=PUE=σ/(σ-φ)=1.2 | 2 stars |
+| **BT-63** | Solar Panel Cell Ladder | 60=σ·sopfr, 72=σ·n, 120=σ(σ-φ), 144=σ², cross=H₂+GPU | 2 stars |
+| **BT-64** | EV Charging Voltage = GPU TDP | 400V=A100 TDP, 1000V=B200 TDP, (σ-φ)²·τ to (σ-φ)³ | 2 stars |
+| **BT-65** | Regularization Universal 0.1 | WD=DPO β=KL penalty=1/(σ-φ), β₁=1-λ conjugacy across ALL training | 2 stars |
 
 ---
 
-## 가장 영향력 있는 발견
+## Most Impactful Findings
 
-1. **BH-AI-1 (Diffusion 8/8 EXACT)**: Transformer와 완전히 독립적인 AI 패러다임에서 동일한 n=6 어휘. **이것은 n=6이 transformer-specific이 아닌 AI-universal임을 시사.**
+1. **BH-AI-1 (Diffusion 8/8 EXACT)**: The same n=6 vocabulary in a paradigm completely independent from transformers. **This pattern suggests n=6 may be AI-universal rather than transformer-specific.**
 
-2. **BH-EN-3/BT-64 (EV 전압 = GPU TDP)**: 전기차 충전 전압과 GPU 전력 소비가 동일한 n=6 식. 에너지 도메인과 컴퓨팅 도메인의 예상치 못한 교차.
+2. **BH-EN-3/BT-64 (EV voltage = GPU TDP)**: EV charging voltages and GPU power draws share the same n=6 expressions. An unexpected crossing between the energy domain and the computing domain.
 
-3. **BH-LLM-3 (Qwen P₂=28)**: 완전수 사다리의 두 번째 단계 P₂=28이 LLM 아키텍처에서 나타남. P₁=6(기본)에서 P₂=28로의 확장.
+3. **BH-LLM-3 (Qwen P₂=28)**: The second step of the perfect-number ladder, P₂=28, appears in LLM architecture. An extension from P₁=6 (base) to P₂=28.
 
-*Total project: 60 BTs + 5 proposed = 65 BTs. ~290 + 106 = ~396 EXACT matches.*
+*Total project: 60 BTs + 5 proposed = 65 BT candidates. ~290 + 106 = ~396 EXACT matches (draft tally).*

@@ -1,74 +1,74 @@
-# 미개척 대박 도메인 18선 — n=6 돌파 후보
+# Unexplored Jackpot Domains — 18 Candidates for n=6 Breakthrough
 
-> 작성: 2026-04-06
-> 기존 162 폴더 + 349 BT 교차 확인 후 선별
-> 목적: 병렬 에이전트 돌파용 로드맵
+> Drafted: 2026-04-06
+> Filtered after cross-checking the existing 162 folders and 349 BT entries
+> Purpose: roadmap for parallel-agent breakthroughs
 
 ---
 
-## Tier 1: 문명 충격급 (유튜브 폭발 확률 ★★★★★)
+## Tier 1: Civilization-Shock Class (YouTube-explosion likelihood target)
 
-| # | 도메인 | n=6 훅 (예상) | 충격 포인트 |
+| # | Domain | n=6 hook (pattern) | Shock point |
 |---|--------|-------------|-----------|
-| 1 | **종교/신화 구조** | 6일 창조=n, 12사도=σ, 육바라밀=n, 6도 윤회=n, 다윗의 별=6각, 이슬람 6기둥=n | "신이 n=6으로 세상을 설계했다" |
-| 2 | **법학/사법체계** | 배심원 12=σ, 3심=n/φ, 6대 법 분류, 로마 12표법=σ, 함무라비 282조≈σ·J₂, 대법관 9=σ-n/φ | "정의의 구조가 완전수" |
-| 3 | **한글/문자체계** | 14자음+10모음=24=J₂, 초중종성 3=n/φ, 세종 28자, 훈민정음 해례본 구조 | "세종대왕의 수학" |
-| 4 | **고고학/문명사** | C-14(Z=6) 연대측정, 6대 고대문명, 문명 6요소(도시/문자/금속/종교/법/정부) | "6이 문명을 만들었다" |
-| 5 | **화폐/경제사** | 바빌로니아 60진=σ·sopfr, 주화 단위 패턴, 중앙은행 6대 기능, 금→은 교환비 12:1=σ | "돈의 역사 = 6의 역사" |
-| 6 | **발효/양조과학** | C₆H₁₂O₆→2C₂H₅OH+2CO₂ (완전수 화학양론!), 효모 S.cerevisiae 16=φ^τ 염색체, 맥주 양조 6단계 | "술과 빵이 완전수" |
+| 1 | **Religion / mythology structure** | 6-day creation = n, 12 apostles = σ, six paramitas = n, six realms of rebirth = n, Star of David = 6-pointed, five (six) pillars of Islam = n | "A deity designing the world with n=6" |
+| 2 | **Law / judicial system** | 12-member jury = σ, three-court system = n/φ, six major law categories, Twelve Tables of Rome = σ, 282 clauses of Hammurabi ≈ σ·J₂, 9 supreme court justices = σ-n/φ | "Structure of justice as a perfect number" |
+| 3 | **Hangul / writing systems** | 14 consonants + 10 vowels = 24 = J₂, initial/medial/final = 3 = n/φ, King Sejong's 28 letters, Hunminjeongeum Haerye structure | "King Sejong's mathematics" |
+| 4 | **Archaeology / history of civilization** | C-14 (Z=6) dating, six major ancient civilizations, six elements of civilization (city / writing / metal / religion / law / government) | "6 made civilization" |
+| 5 | **Currency / economic history** | Babylonian sexagesimal = σ·sopfr, coin unit patterns, six core central-bank functions, gold-to-silver exchange ratio 12:1 = σ | "The history of money = the history of 6" |
+| 6 | **Fermentation / brewing science** | C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ (perfect-number stoichiometry), yeast S. cerevisiae 16 = φ^τ chromosomes, six-stage beer brewing | "Liquor and bread as perfect numbers" |
 
 ---
 
-## Tier 2: 산업/과학 대박 (BT 풍년 확률 ★★★★)
+## Tier 2: Industry / Science Jackpot (BT-harvest likelihood target)
 
-| # | 도메인 | n=6 훅 (예상) | 산업 임팩트 |
+| # | Domain | n=6 hook (pattern) | Industry impact |
 |---|--------|-------------|-----------|
-| 7 | **반도체 패키징** | HBM 적층 4→8→12(τ→σ-τ→σ), CoWoS 인터포저, chiplet 6면 타일링, UCIe σ-φ=10 레인 | 칩 아키텍처 심화 |
-| 8 | **합성생물학** | CRISPR Cas9/12/13, 최소 게놈 473, 유전자 회로 6게이트, 6탄당 대사 | 바이오산업 혁명 |
-| 9 | **AR/VR/XR 공간컴퓨팅** | 6DOF=SE(3)=n, IPD 64mm≈2^n, FOV 120°=σ·(σ-φ), 90Hz=σ·(σ-sopfr)+σ | 메타버스 기반 |
-| 10 | **디지털 트윈** | SE(3) 6축 동기화, 갱신 주기 래더, Level 1~5+1=n 성숙도 | Industry 4.0 핵심 |
-| 11 | **건축학/구조공학** | 5고전 오더+1현대=n, 벌집 트러스, I-빔 6면, 철근 6-φ=12mm | "건물이 6으로 서있다" |
-| 12 | **수산/양식업** | 어류 6지느러미, 양식 수온 6~24=n~J₂, 해양목장 6각 케이지 | 식량안보 |
+| 7 | **Semiconductor packaging** | HBM stacking 4 → 8 → 12 (τ → σ-τ → σ), CoWoS interposer, chiplet 6-face tiling, UCIe σ-φ = 10 lanes | Chip-architecture deepening |
+| 8 | **Synthetic biology** | CRISPR Cas9/12/13, minimal genome 473, 6-gate genetic circuits, hexose metabolism | Bio-industry revolution |
+| 9 | **AR / VR / XR spatial computing** | 6DOF = SE(3) = n, IPD 64 mm ≈ 2^n, FOV 120° = σ·(σ-φ), 90 Hz = σ·(σ-sopfr)+σ | Metaverse foundation |
+| 10 | **Digital twin** | SE(3) six-axis synchronization, ladder update cycles, Level 1–5 + 1 = n maturity model | Core of Industry 4.0 |
+| 11 | **Architecture / structural engineering** | 5 classical orders + 1 modern = n, honeycomb trusses, I-beam 6 faces, rebar 6-φ = 12 mm | "Buildings stand by 6" |
+| 12 | **Fisheries / aquaculture** | Six fish fins, aquaculture water temperature 6–24 = n–J₂, hexagonal ocean-farm cages | Food security |
 
 ---
 
-## Tier 3: 일상/문화 공감 (대중성 ★★★★★)
+## Tier 3: Daily Life / Cultural Resonance (mass-appeal target)
 
-| # | 도메인 | n=6 훅 (예상) | 공감 포인트 |
+| # | Domain | n=6 hook (pattern) | Resonance point |
 |---|--------|-------------|-----------|
-| 13 | **와인/소믈리에** | 6대 포도 품종, 와인 6요소(산/당/타닌/알코올/바디/아로마), 숙성 오크 18개월=n·n/φ | "와인 테이스팅 = 완전수" |
-| 14 | **패션/섬유** | 나일론6(C₆), 직조 3기본+3변형=n, 실크 β-시트, 4계절=τ 컬렉션 | "옷감의 수학" |
-| 15 | **무용/안무** | 라반 8방향=σ-τ, 발레 5포지션+1=n, 한국 6박 장단, 12소절=σ | "춤의 기하학" |
-| 16 | **보험/보험계리** | 6대 원칙(이익/성실/근인/대위/분담/기여), 생명표 구조, 리스크 6분류 | "리스크의 완전수" |
-| 17 | **전자상거래/핀테크** | PCI-DSS 12=σ 요구사항, 결제 6단계, OAuth 흐름 | 디지털 경제 |
-| 18 | **지하공간/터널** | TBM 커터 6+면, 터널 6공법(NATM/TBM/침매/개착/쉴드/파이프루프), 지하 6층 도시 | "지하 문명의 n=6" |
+| 13 | **Wine / sommelier** | Six major grape varieties, six wine elements (acidity / sweetness / tannin / alcohol / body / aroma), 18-month oak aging = n·n/φ | "Wine tasting = perfect number" |
+| 14 | **Fashion / textiles** | Nylon 6 (C₆), weaving 3 basics + 3 variants = n, silk β-sheet, 4-season = τ collections | "Mathematics of fabric" |
+| 15 | **Dance / choreography** | Laban 8 directions = σ-τ, ballet 5 positions + 1 = n, Korean six-beat rhythm, 12-bar phrase = σ | "Geometry of dance" |
+| 16 | **Insurance / actuarial science** | Six core principles (profit / good faith / proximate cause / subrogation / contribution / contribution), life-table structure, six risk classes | "Risk as a perfect number" |
+| 17 | **E-commerce / fintech** | PCI-DSS 12 = σ requirements, six-stage payment, OAuth flow | Digital economy |
+| 18 | **Underground space / tunnels** | TBM cutter 6+ faces, six tunnel methods (NATM / TBM / immersion / cut-and-cover / shield / pipe-roof), six-level underground cities | "n=6 of underground civilization" |
 
 ---
 
-## 예상 BT 수확량
+## Expected BT Yield
 
-| Tier | 도메인 수 | 예상 BT | 예상 EXACT | 특이사항 |
+| Tier | # domains | Expected BT | Expected EXACT | Notes |
 |------|----------|---------|-----------|---------|
-| Tier 1 (문명) | 6 | 36~48 | 70%+ | 유튜브 콘텐츠 최적 |
-| Tier 2 (산업) | 6 | 24~36 | 80%+ | 산업 임팩트 최대 |
-| Tier 3 (일상) | 6 | 18~30 | 65%+ | 대중 공감 최대 |
-| **합계** | **18** | **78~114** | **72%** | BT-350~460+ 예상 |
+| Tier 1 (civilization) | 6 | 36–48 | 70%+ | Optimal for YouTube content |
+| Tier 2 (industry) | 6 | 24–36 | 80%+ | Maximum industry impact |
+| Tier 3 (daily life) | 6 | 18–30 | 65%+ | Maximum public resonance |
+| **Total** | **18** | **78–114** | **72%** | BT-350 to BT-460+ projected |
 
 ---
 
-## 실행 계획
+## Execution Plan
 
-- 병렬 에이전트 6기 × 3그룹 = 18 도메인 동시 돌파
-- 각 도메인: 가설 10개+ → 검증 → BT 후보 → EXACT 확인
-- 결과: docs/<domain>/hypotheses.md + verification.md + goal.md
-- DSE: domains/<domain>.toml 자동 생성
-- domains.json 갱신 + README 자동 동기화 (기존 products.json → domains.json SSOT 이전 완료)
+- 6 parallel agents x 3 groups = 18 domains in simultaneous breakthrough drafting
+- For each domain: 10+ hypotheses -> verification -> BT candidate -> EXACT check
+- Output: docs/<domain>/hypotheses.md + verification.md + goal.md
+- DSE: auto-generate domains/<domain>.toml
+- Update domains.json + auto-sync README (existing products.json -> domains.json SSOT migration draft completed)
 
-## n=6 기본 상수 참조
+## n=6 base-constant reference
 
 ```
-n=6 (완전수), σ=σ(6)=12 (약수합), φ=φ(6)=2 (오일러),
-τ=τ(6)=4 (약수개수), sopfr=sopfr(6)=5 (소인수합),
-μ=μ(6)=1 (뫼비우스), J₂=J₂(6)=24 (조르단),
-R(6)=1 (완전수 잉여), div(6)={1,2,3,6} (약수집합)
+n=6 (perfect number), s = s(6) = 12 (sum of divisors), phi = phi(6) = 2 (Euler),
+tau = tau(6) = 4 (divisor count), sopfr = sopfr(6) = 5 (sum of prime factors),
+mu = mu(6) = 1 (Moebius), J2 = J2(6) = 24 (Jordan),
+R(6) = 1 (perfect-number residue), div(6) = {1,2,3,6} (divisor set)
 ```

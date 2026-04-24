@@ -1,123 +1,123 @@
-# BT-1396 — DFS 5차 TQFT·격자·매듭·표현론 (2026-04-12)
+# BT-1396 — DFS Round 5 TQFT / Lattice / Knot / Representation Theory (2026-04-12)
 
-> **n=6 기본 상수**: n=6, σ=12, φ=2, τ=4, sopfr=5, J₂=24, n/φ=3, σ-sopfr=7, σ-τ=8
-> **선행**: BT-1394~1395 (80 tight)
-> **본 BT 범위**: TQFT + 격자이론 + 매듭이론 + 표현론 — 신규 12건
-> **누적**: 80+12 = **92건 tight**
-> **7대 난제 해결**: 0/7 (정직)
-
----
-
-## 0. 정직성 선언
-
-본 DFS의 원시 발견은 ~56건이나, S₆·E₆·sl(6) 등 "n=6이 정의에 포함"되는 자명한 것을 제외.
-아래 12건은 **n=6이 정의에 직접 포함되지 않거나, 포함되더라도 구조적 비자명성**을 가진 것만 선별.
+> **n=6 base constants**: n=6, sigma=12, phi=2, tau=4, sopfr=5, J_2=24, n/phi=3, sigma-sopfr=7, sigma-tau=8
+> **Antecedents**: BT-1394 ~ BT-1395 (80 tight)
+> **Scope of this BT**: TQFT + lattice theory + knot theory + representation theory — 12 new
+> **Cumulative**: 80+12 = **92 tight**
+> **7 Millennium draft status**: 0/7 (honest)
 
 ---
 
-## 1. 신규 tight 12건
+## 0. Honesty declaration
 
-### 1.1 격자이론 (3건)
+This DFS found ~56 raw hits, but we exclude trivial ones where "n=6 is in the definition" (S_6, E_6, sl(6), etc.).
+The 12 below are selected only where **n=6 is not directly in the definition, or where structural non-triviality exists despite inclusion**.
 
-**[DFS5-01] 구 포장 최적 해결 차원 = {φ, n/φ, σ-τ, J₂}** (EXACT)
-- 출처: Hales 2005 (d=3), Viazovska 2016 (d=8), Cohn-Kumar-Miller-Radchenko-Viazovska 2022 (d=24)
-- 최적 격자 포장이 완전히 해결된 비자명 차원: {2,3,8,24}
-- 2=φ, 3=n/φ, 8=σ-τ, 24=J₂ — 4개 전부 n=6 불변량
-- d=4,5,6,7,9,...23은 미해결, 모두 n=6 불변량 아님 → 대조 PASS
-- **n=6이 정의에 포함되지 않는 순수 최적화 문제에서 n=6 불변량만 해결**
+---
 
-**[DFS5-02] E₈ 포장 밀도 분모 384 = τ²·J₂** (TIGHT)
-- η(E₈) = π⁴/384. 384 = 16·24 = τ²·J₂
-- 출처: Viazovska 2016
+## 1. 12 new tight findings
 
-**[DFS5-03] D₆ 격자 kissing 수 = σ·n = 72, E₆ kissing = n/φ·J₂ = 72** (TIGHT)
-- 출처: Conway-Sloane 1988
-- 6차원 최밀 격자의 kissing 수 = 72 = σ·n = n²·φ
+### 1.1 Lattice theory (3)
 
-### 1.2 매듭이론 (3건)
+**[DFS5-01] Optimal sphere-packing resolved dimensions = {phi, n/phi, sigma-tau, J_2}** (EXACT)
+- Source: Hales 2005 (d=3), Viazovska 2016 (d=8), Cohn-Kumar-Miller-Radchenko-Viazovska 2022 (d=24)
+- Non-trivial dimensions with fully resolved optimal lattice packing: {2, 3, 8, 24}
+- 2 = phi, 3 = n/phi, 8 = sigma-tau, 24 = J_2 — all 4 are n=6 invariants
+- d=4, 5, 6, 7, 9, ..., 23 unresolved, none are n=6 invariants -> contrast PASS
+- **Only n=6 invariants are resolved in a pure optimization problem whose definition does not involve n=6**
 
-**[DFS5-04] 교차수 c인 매듭 수 K(c): K(n/φ)=1, K(τ)=1, K(sopfr)=2, K(n)=n/φ, K(σ-sopfr)=σ-sopfr** (TIGHT)
-- 출처: Rolfsen 매듭 표, Hoste-Thistlethwaite-Weeks
+**[DFS5-02] E_8 packing density denominator 384 = tau^2 * J_2** (TIGHT)
+- eta(E_8) = pi^4 / 384. 384 = 16 * 24 = tau^2 * J_2
+- Source: Viazovska 2016
+
+**[DFS5-03] D_6 lattice kissing number = sigma*n = 72, E_6 kissing = n/phi * J_2 = 72** (TIGHT)
+- Source: Conway-Sloane 1988
+- 6-dimensional densest-lattice kissing number = 72 = sigma*n = n^2 * phi
+
+### 1.2 Knot theory (3)
+
+**[DFS5-04] Number of knots with crossing number c: K(n/phi)=1, K(tau)=1, K(sopfr)=2, K(n)=n/phi, K(sigma-sopfr)=sigma-sopfr** (TIGHT)
+- Source: Rolfsen knot table, Hoste-Thistlethwaite-Weeks
 - K(3)=1, K(4)=1, K(5)=2, K(6)=3, K(7)=7
-- **K(7)=7=σ-sopfr: 숫자가 자기 자신을 가리키는 자기참조**
-- K(6)=3=n/φ: 교차수 n인 매듭이 n/φ개
+- **K(7)=7=sigma-sopfr: the number refers to itself, self-reference**
+- K(6)=3=n/phi: there are n/phi knots with crossing number n
 
-**[DFS5-05] 매듭 행렬식 수열: det(3₁)=n/φ, det(4₁)=sopfr, det(5₂)=σ-sopfr** (TIGHT)
-- 출처: Alexander polynomial 특수값
-- Trefoil det=3, Figure-8 det=5, 5₂ det=7
-- n=6 산술 소수 {3,5,7}={n/φ, sopfr, σ-sopfr} 연속 등장
+**[DFS5-05] Knot-determinant sequence: det(3_1)=n/phi, det(4_1)=sopfr, det(5_2)=sigma-sopfr** (TIGHT)
+- Source: Alexander polynomial special values
+- Trefoil det=3, Figure-8 det=5, 5_2 det=7
+- Consecutive appearance of n=6 arithmetic primes {3, 5, 7} = {n/phi, sopfr, sigma-sopfr}
 
-**[DFS5-06] 교차수 n=6인 2성분 링크 수 = n = 6** (TIGHT)
-- 출처: Rolfsen 링크 표
-- 직접 대응: 교차수=n, 링크 수=n
+**[DFS5-06] Number of 2-component links with crossing number n=6 = n = 6** (TIGHT)
+- Source: Rolfsen link table
+- Direct correspondence: crossings = n, number of links = n
 
-### 1.3 TQFT / Verlinde (2건)
+### 1.3 TQFT / Verlinde (2)
 
-**[DFS5-07] Verlinde 순환: k=τ→dim=n/φ, k=n→dim=τ** (TIGHT)
-- 출처: Verlinde 1988, SU(2) Chern-Simons on T²
-- level k에서 T² Hilbert space dim = k/2+1
-- k=τ=4 → dim=3=n/φ, k=n=6 → dim=4=τ
-- τ→n/φ→τ: 두 불변량이 서로를 가리키는 순환 구조
-- k=σ=12 → dim=7=σ-sopfr (추가 매치)
+**[DFS5-07] Verlinde cycle: k=tau -> dim=n/phi, k=n -> dim=tau** (TIGHT)
+- Source: Verlinde 1988, SU(2) Chern-Simons on T^2
+- T^2 Hilbert-space dim at level k = k/2 + 1
+- k=tau=4 -> dim=3=n/phi, k=n=6 -> dim=4=tau
+- tau -> n/phi -> tau: cyclic structure where the two invariants point at each other
+- k=sigma=12 -> dim=7=sigma-sopfr (additional match)
 
-**[DFS5-08] Jones polynomial |J(3₁)|² = n/φ at q=e^{2πi/n}** (TIGHT)
-- 출처: Jones 1985, Trefoil 평가
-- q=6차 단위근에서 Trefoil Jones 다항식의 절대값 제곱 = 3 = n/φ
+**[DFS5-08] Jones polynomial |J(3_1)|^2 = n/phi at q = e^{2 pi i / n}** (TIGHT)
+- Source: Jones 1985, Trefoil evaluation
+- At the 6th root of unity, absolute value squared of the Trefoil Jones polynomial = 3 = n/phi
 
-### 1.4 표현론 (4건)
+### 1.4 Representation theory (4)
 
-**[DFS5-09] sl(2) Casimir 이중 적중** (EXACT — n=6 무관)
-- j=2: Casimir c₂=6=n, dim=5=sopfr (spin-2 표현)
-- j=3: Casimir c₂=12=σ, dim=7=σ-sopfr (spin-3 표현)
-- **n=6이 정의에 포함되지 않음** — sl(2)는 모든 n에 존재
-- n=6의 핵심 쌍 (n,sopfr)과 (σ,σ-sopfr)가 Casimir-dimension 쌍으로 재현
+**[DFS5-09] sl(2) Casimir double match** (EXACT — n=6 independent)
+- j=2: Casimir c_2 = 6 = n, dim = 5 = sopfr (spin-2 representation)
+- j=3: Casimir c_2 = 12 = sigma, dim = 7 = sigma-sopfr (spin-3 representation)
+- **n=6 is not in the definition** — sl(2) exists for all n
+- Core n=6 pairs (n, sopfr) and (sigma, sigma-sopfr) reproduced as Casimir-dimension pairs
 
-**[DFS5-10] |W(E₆)| = n!·n·σ = 51840** (EXACT)
-- 출처: Bourbaki, Lie groups Ch.4-6
-- 51840 = 720·6·12 = n!·n·σ
-- 소인수분해: 2⁷·3⁴·5 = φ^{σ-sopfr}·(n/φ)^τ·sopfr
-- E₆ rank=6=n이므로 반-자명하나, Weyl 위수의 세 인자가 독립 n=6 불변량
+**[DFS5-10] |W(E_6)| = n! * n * sigma = 51840** (EXACT)
+- Source: Bourbaki, Lie groups Ch. 4-6
+- 51840 = 720 * 6 * 12 = n! * n * sigma
+- Prime factorization: 2^7 * 3^4 * 5 = phi^{sigma-sopfr} * (n/phi)^tau * sopfr
+- Semi-trivial because E_6 rank = 6 = n, but the three factors of the Weyl order are independent n=6 invariants
 
-**[DFS5-11] S₆ 최대 기약표현 dim = τ² = 16** (TIGHT)
-- Young diagram λ=(3,2,1): dim = 6!/45 = 16 = τ²
-- 이 λ는 n=6의 유일한 완전 비대칭 분할 (행합·열수 모두 distinct)
-- S_n에서 최대 기약표현의 dim이 n=6 산술로 깔끔한 것은 n=6 특수
+**[DFS5-11] Maximum irreducible-representation dim of S_6 = tau^2 = 16** (TIGHT)
+- Young diagram lambda = (3, 2, 1): dim = 6! / 45 = 16 = tau^2
+- This lambda is the unique fully asymmetric partition of n=6 (all rows, columns distinct)
+- For S_n, having the max irreducible-rep dim expressed cleanly in n=6 arithmetic is special to n=6
 
-**[DFS5-12] E₆ 양의 근 수 = n² = 36** (TIGHT)
-- 전체 근 수 = 2·36 = 72 = σ·n
-- rank=n이므로 반-자명, 그러나 n²이 양의 근 수인 것은 A_{n-1}이 아닌 E₆에서 성립
+**[DFS5-12] Number of positive roots of E_6 = n^2 = 36** (TIGHT)
+- Total roots = 2 * 36 = 72 = sigma * n
+- Semi-trivial because rank = n, but n^2 as positive-root count holds for E_6 (not A_{n-1})
 
 ---
 
-## 2. 집계
+## 2. Summary
 
 ```
 +==============================================================+
-|  BT-1396 DFS 5차 집계                                         |
+|  BT-1396 DFS round 5 summary                                  |
 +==============================================================+
-| 영역       | 원시  | 선별 | MISS | 최강 발견                   |
+| Area       | Raw   | Sel. | MISS | Strongest candidate         |
 |------------|-------|------|------|-----------------------------|
-| 격자이론   | ~10   | 3    | 1    | 구 포장 해결 차원 = M-set   |
-| 매듭이론   | ~8    | 3    | 0    | K(7)=7 자기참조             |
-| TQFT       | ~6    | 2    | 1    | Verlinde 순환               |
-| 표현론     | ~30   | 4    | 0    | sl(2) Casimir 이중 적중     |
+| Lattice    | ~10   | 3    | 1    | Sphere-packing dims = M-set |
+| Knot       | ~8    | 3    | 0    | K(7)=7 self-reference       |
+| TQFT       | ~6    | 2    | 1    | Verlinde cycle              |
+| Rep theory | ~30   | 4    | 0    | sl(2) Casimir double match  |
 +==============================================================+
-| 누적 tight | 80 + 12 = 92건                                   |
-| 7대 난제   | 해결 0/7 (정직)                                    |
+| Cumulative tight | 80 + 12 = 92                                |
+| 7 Millennium | draft status 0/7 (honest)                      |
 +==============================================================+
 ```
 
 ---
 
-## 3. 자명성 등급
+## 3. Non-triviality grade
 
-| 발견 | n=6 정의 포함? | 자명도 |
+| Finding | n=6 in definition? | Triviality level |
 |------|---------------|--------|
-| 구 포장 차원 | 아니오 | **비자명** |
-| sl(2) Casimir | 아니오 | **비자명** |
-| K(7)=7 | 아니오 (7=σ-sopfr) | **비자명** |
-| Verlinde 순환 | 부분 (k=6 선택) | 반자명 |
-| E₆ Weyl | 예 (rank=6) | 반자명 |
-| S₆ max irrep | 예 | 반자명 |
-| 매듭 det 수열 | 아니오 | **비자명** |
-| 6차원 kissing | 예 | 반자명 |
+| Sphere packing dims | No | **non-trivial** |
+| sl(2) Casimir | No | **non-trivial** |
+| K(7)=7 | No (7 = sigma-sopfr) | **non-trivial** |
+| Verlinde cycle | Partial (k=6 selected) | semi-trivial |
+| E_6 Weyl | Yes (rank=6) | semi-trivial |
+| S_6 max irrep | Yes | semi-trivial |
+| Knot det sequence | No | **non-trivial** |
+| 6-dim kissing | Yes | semi-trivial |

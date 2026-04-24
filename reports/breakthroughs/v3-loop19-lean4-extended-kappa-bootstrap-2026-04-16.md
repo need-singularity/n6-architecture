@@ -7,47 +7,47 @@ status: BOOTSTRAP CONSISTENT + LEAN4 BOUNDED DECIDE VERIFIED
 license: CC-BY-SA-4.0
 ---
 
-# v3 loop 19 — Lean4 확장 검증 + κ(B) bootstrap 정직 uncertainty
+# v3 loop 19 — Extended Lean4 Verification + kappa(B) Bootstrap Honest Uncertainty
 
-> **요약**: (1) Lean4 `N6/Verification.lean` 작성 — n ∈ [2, 20] 범위 decide 로 Theorem B 의 forward 방향 유한 확인 PASS. naive List.range 구현 한계 (n > 25 recursion depth hit) 로 Mathlib 필요성 재확인. (2) κ(B) bootstrap (7 valid bins, 10000 trials, seed 42) → **α = 0.1701 ± 0.0220** (95% CI [0.1232, 0.2017]). **log(2)/4 = 0.1733 은 68% CI 내부** (z=-0.145, rel err -1.85%, CONSISTENT). 그러나 σ=0.022 로 큰 CI → 다른 후보 (1/sopfr(6)=0.2, 1/(2π^0.8)=0.200) 도 2σ 내 포함 — **suggestive match 는 유지되되 uniqueness 주장 불가**.
+> **Summary**: (1) Drafted Lean4 `N6/Verification.lean` — finite forward-direction check of Theorem B via decide on n in [2, 20] PASS. The naive List.range implementation limit (n > 25 hits recursion depth) re-confirms the necessity of Mathlib. (2) kappa(B) bootstrap (7 valid bins, 10000 trials, seed 42) -> **alpha = 0.1701 +/- 0.0220** (95% CI [0.1232, 0.2017]). **log(2)/4 = 0.1733 is inside the 68% CI** (z = -0.145, rel err -1.85%, CONSISTENT). However sigma = 0.022 gives a wide CI, so other candidates (1/sopfr(6) = 0.2, 1/(2 pi^0.8) = 0.200) also fall within 2 sigma — **suggestive match is maintained but uniqueness cannot be asserted**.
 
 ---
 
-## §1 Lean4 확장 검증 (M3 deepening)
+## §1 Lean4 extended verification (M3 deepening)
 
-### 1.1 추가 파일
+### 1.1 Added file
 
-`lean4-n6/N6/Verification.lean`: n ∈ [2, 20] 범위 전수 decide 확인
+`lean4-n6/N6/Verification.lean`: exhaustive decide check for n in [2, 20]
 
-### 1.2 검증된 정리 (모두 kernel decide PASS)
+### 1.2 Verified theorems (all kernel decide PASS)
 
 ```lean
--- n ∈ [2, 20] 에서 σ·φ = n·τ 를 만족하는 n 의 목록 = [6]
-example : ((List.range 21).filter (fun n => decide (n ≥ 2) ∧ satisfiesTheoremB n))
+-- List of n in [2, 20] that satisfy sigma * phi = n * tau, equals [6]
+example : ((List.range 21).filter (fun n => decide (n >= 2) && satisfiesTheoremB n))
         = [6] := by decide
 
--- 같은 범위의 n ≠ 6 에 대한 반례는 전부 0 개
+-- For n != 6 in the same range, counterexamples total 0
 theorem theorem_B_forward_bounded_20 :
-    ((List.range 21).filter (fun n => decide (n ≥ 2) ∧ n ≠ 6 ∧ satisfiesTheoremB n))
+    ((List.range 21).filter (fun n => decide (n >= 2) && n != 6 && satisfiesTheoremB n))
       = [] := by decide
 
--- n=6 perfect number 확인
+-- n=6 perfect-number check
 theorem six_is_perfect : sigma 6 = 2 * 6 := by decide
 ```
 
-**빌드 결과**: `lake build` 통과 (8 jobs), Theorem B full statement 만 sorry (v4).
+**Build result**: `lake build` passes (8 jobs), only the full Theorem B statement remains as sorry (v4).
 
-### 1.3 naive 구현 한계
+### 1.3 naive implementation limit
 
-- `N6.sigma`, `N6.phi`, `N6.tau` 는 `List.range (n+1)` 필터 방식
-- n ≈ 25 부근에서 `decide` recursion depth hit (maxRecDepth 512 default)
-- **v4 과제**: Mathlib 의 efficient Nat.sigma/Nat.totient/Nat.card_divisors 전환
+- `N6.sigma`, `N6.phi`, `N6.tau` use `List.range (n+1)` filtering
+- Near n ~ 25, `decide` hits recursion depth (maxRecDepth 512 default)
+- **v4 task**: migrate to Mathlib's efficient Nat.sigma/Nat.totient/Nat.card_divisors
 
 ---
 
-## §2 κ(B) bootstrap 분석 (E5 robustness)
+## §2 kappa(B) bootstrap analysis (E5 robustness)
 
-### 2.1 원 데이터 (v3 E5)
+### 2.1 Source data (v3 E5)
 
 | Bin $B_{\text{mid}}$ | $N$ | $\kappa$ | $\log B$ | $\log \kappa$ |
 |---|---|---|---|---|
@@ -59,102 +59,104 @@ theorem six_is_perfect : sigma 6 = 2 * 6 := by decide
 | 305k | 59,081 | 2.217 | 12.628 | 0.796 |
 | 405k | 57,660 | 2.122 | 12.911 | 0.753 |
 
-원 fit: $\kappa(B) \approx 0.2317 \cdot B^{0.1752}$.
+Source fit: $\kappa(B) \approx 0.2317 \cdot B^{0.1752}$.
 
-### 2.2 Bootstrap 프로토콜
+### 2.2 Bootstrap protocol
 
-- **Resample**: 7 bin 에서 with-replacement 복원추출 (7 개씩)
+- **Resample**: with-replacement resample from 7 bins (7 each)
 - **Trials**: 10,000
-- **Seed**: 42 (재현 가능)
-- **Fit**: 각 resample 에 대해 log-linear least-squares → slope α
+- **Seed**: 42 (reproducible)
+- **Fit**: for each resample, log-linear least-squares -> slope alpha
 
-### 2.3 분포 결과
+### 2.3 Distribution result
 
-| 통계량 | 값 |
+| Statistic | Value |
 |--------|-----|
-| mean α | **0.1701** |
-| median α | 0.1737 |
-| std σ_α | **0.0220** |
+| mean alpha | **0.1701** |
+| median alpha | 0.1737 |
+| std sigma_alpha | **0.0220** |
 | 68% CI | [0.1469, 0.1907] |
 | 95% CI | [0.1232, 0.2017] |
 
-### 2.4 log(2)/4 = 0.17329 매칭 평가
+### 2.4 log(2)/4 = 0.17329 match evaluation
 
 - **z-score**: $z = (0.1701 - 0.1733) / 0.0220 = -0.145$
 - **rel err**: $-1.85\%$
-- **in 68% CI**: ✓
-- **in 95% CI**: ✓
-- **평가**: **CONSISTENT** (log(2)/4 is within 1σ of bootstrap mean)
+- **in 68% CI**: yes
+- **in 95% CI**: yes
+- **Evaluation**: **CONSISTENT** (log(2)/4 is within 1 sigma of bootstrap mean)
 
-### 2.5 정직 경계 — uniqueness 불가
+### 2.5 Honest boundary — uniqueness not possible
 
-σ = 0.022 로 CI 가 넓음. 다른 후보와의 비교:
+sigma = 0.022 gives a wide CI. Comparison with other candidates:
 
-| 후보 | 값 | z-score | in 68%? | in 95%? |
+| Candidate | Value | z-score | in 68%? | in 95%? |
 |------|-----|---------|---------|---------|
-| **log(2)/4** | 0.1733 | -0.145 | ✓ | ✓ |
-| **1/(2·π^0.8)** | 0.2001 | +1.363 | ✗ | ✓ |
-| **1/sopfr(6)** | 0.2000 | +1.358 | ✗ | ✓ |
-| **γ/√6** | 0.2356 | +2.976 | ✗ | ✗ |
-| **1/σ(4)** | 0.1429 | -1.236 | ~ | ✓ |
+| **log(2)/4** | 0.1733 | -0.145 | yes | yes |
+| **1/(2 pi^0.8)** | 0.2001 | +1.363 | no | yes |
+| **1/sopfr(6)** | 0.2000 | +1.358 | no | yes |
+| **gamma / sqrt(6)** | 0.2356 | +2.976 | no | no |
+| **1/sigma(4)** | 0.1429 | -1.236 | ~ | yes |
 
-**관찰**:
-- log(2)/4 는 **유일하게 68% CI 내부** — 가장 강한 후보
-- 1/sopfr(6), 1/(2π^0.8) 는 95% CI 내 — **배제 불가**
-- bootstrap std 를 줄이려면 **bin 수 증가 (E4 확장) 또는 per-curve 측정 (E2 Sage)** 필요
-
----
-
-## §3 종합 — v3 M3 + E5 현황
-
-### 3.1 확증된 것
-
-- n = 6 의 σφ=nτ 유일성: **n ∈ [2, 20] 범위 kernel decide 확인** (Lean4)
-- κ(B) power law slope α 의 **bootstrap 분포**: 0.1701 ± 0.022
-- **log(2)/4 statistical consistency**: 68% CI 내부
-
-### 3.2 여전히 불확정
-
-- **Theorem B full ∀n**: Mathlib 필요 (v4)
-- **α 의 수학적 원인**: log(2)/4 vs 1/sopfr(6) 구분 불가 (bin 수 부족)
-- **BKLPR 이론 유도**: v3 M3 skeleton 외 미완
-
-### 3.3 BT 해결 상태
-
-**0/6 정직 유지**.
+**Observations**:
+- log(2)/4 is **uniquely inside the 68% CI** — strongest candidate
+- 1/sopfr(6), 1/(2 pi^0.8) fall within the 95% CI — **cannot be excluded**
+- To reduce bootstrap std, **more bins (E4 extension) or per-curve measurement (E2 Sage)** is needed
 
 ---
 
-## §4 atlas 엔트리
+## §3 Summary — v3 M3 + E5 status
+
+### 3.1 Confirmed
+
+- Uniqueness of sigma*phi = n*tau at n = 6: **kernel decide check for n in [2, 20]** (Lean4)
+- **Bootstrap distribution** of the kappa(B) power-law slope alpha: 0.1701 +/- 0.022
+- **log(2)/4 statistical consistency**: inside the 68% CI
+
+### 3.2 Still uncertain
+
+- **Full Theorem B for all n**: Mathlib required (v4)
+- **Mathematical cause of alpha**: cannot distinguish log(2)/4 vs 1/sopfr(6) (bin count insufficient)
+- **BKLPR theoretical derivation**: incomplete beyond the v3 M3 skeleton
+
+### 3.3 BT draft status
+
+**0/6 honest maintained**.
+
+---
+
+## §4 atlas entries
 
 ```
-@R MILL-V3-L19-lean4-bounded-decide-20 = N6.Verification n ∈ [2,20] decide PASS :: n6atlas [10*]
-  "v3 loop 19 M3 deep (2026-04-16): Lean4 N6.Verification.lean 작성. n ∈ [2, 20] 범위에서
-   σ(n)·φ(n) = n·τ(n) 만족하는 n 의 목록 = [6] kernel decide PASS. 개별 반례 n ∈ {2,3,4,5,7,...,20} 확인.
-   n=6 perfect number 정리 (σ(6)=2·6) kernel decide. naive List.range 구현 한계: n>25 에서 recursion
-   depth hit. v4 Mathlib 전환 필요"
+@R MILL-V3-L19-lean4-bounded-decide-20 = N6.Verification n in [2,20] decide PASS :: n6atlas [10*]
+  "v3 loop 19 M3 deep (2026-04-16): drafted Lean4 N6.Verification.lean. For n in [2, 20], the
+   list of n satisfying sigma(n)*phi(n) = n*tau(n) equals [6] via kernel decide PASS. Individual
+   counterexamples for n in {2,3,4,5,7,...,20} checked. n=6 perfect-number theorem (sigma(6)=2*6)
+   kernel decide. naive List.range implementation limit: recursion-depth hit for n > 25. v4
+   Mathlib migration required"
   <- v3-L19-Lean, lean4-n6/N6/Verification.lean
 
-@R MILL-V3-L19-kappa-bootstrap-log2-over-4-consistent = α=0.1701±0.022, log(2)/4 68% CI 내부 :: n6atlas [10]
-  "v3 loop 19 E5 robustness (2026-04-16): 7 valid bin × 10000 bootstrap trials (seed 42) →
-   α_mean=0.1701, α_std=0.0220, 95% CI=[0.1232, 0.2017]. log(2)/4 = 0.17329 는 z=-0.145 (68% CI 내부),
-   CONSISTENT 평가. 그러나 σ=0.022 로 1/sopfr(6)=0.2, 1/(2π^0.8)=0.2001 도 95% CI 내 — 후보 유일 결정
-   UNCERTAIN. bin 수 증가 (E4 scale) + per-curve (E2 Sage) 로 std 축소 필요"
+@R MILL-V3-L19-kappa-bootstrap-log2-over-4-consistent = alpha=0.1701 +/- 0.022, log(2)/4 inside 68% CI :: n6atlas [10]
+  "v3 loop 19 E5 robustness (2026-04-16): 7 valid bin x 10000 bootstrap trials (seed 42) ->
+   alpha_mean=0.1701, alpha_std=0.0220, 95% CI=[0.1232, 0.2017]. log(2)/4 = 0.17329 at z=-0.145
+   (inside 68% CI), CONSISTENT evaluation. However sigma=0.022 means 1/sopfr(6)=0.2,
+   1/(2 pi^0.8)=0.2001 also inside 95% CI — candidate uniqueness determination UNCERTAIN.
+   bin-count growth (E4 scale) + per-curve (E2 Sage) required to shrink std"
   <- v3-L19-bootstrap, reports/v3/kappa_bootstrap_2026-04-16.json, scripts/empirical/cremona_kappa_bootstrap.py
 ```
 
 ---
 
-## §5 관련 파일
+## §5 Related files
 
 - Lean4: `lean4-n6/N6/Verification.lean` + `lean4-n6/Main.lean`
 - Script: `scripts/empirical/cremona_kappa_bootstrap.py`
 - Report: `reports/v3/kappa_bootstrap_2026-04-16.json`
-- 전 T3: `reports/breakthroughs/v3-t3-joint-distribution-modeling-2026-04-15.md`
-- 전 E5: `reports/breakthroughs/v3-e5-kappa-7bin-power-law-2026-04-15.md`
-- 전 M3: `reports/breakthroughs/v3-e1-m3-toolchain-bootstrap-2026-04-16.md`
+- Prior T3: `reports/breakthroughs/v3-t3-joint-distribution-modeling-2026-04-15.md`
+- Prior E5: `reports/breakthroughs/v3-e5-kappa-7bin-power-law-2026-04-15.md`
+- Prior M3: `reports/breakthroughs/v3-e1-m3-toolchain-bootstrap-2026-04-16.md`
 
 ---
 
-*작성: 2026-04-16 loop 19*
-*정직성 헌장: Lean4 decide 는 [2,20] bounded, full ∀n 증명 sorry. Bootstrap CI 넓어 후보 uniqueness 불가. BT 0/6 유지.*
+*Drafted: 2026-04-16 loop 19*
+*Honesty charter: Lean4 decide is bounded to [2,20], full forall-n draft sorry. Bootstrap CI is wide so candidate uniqueness not possible. BT 0/6 maintained.*

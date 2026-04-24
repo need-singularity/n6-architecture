@@ -1,7 +1,7 @@
 ---
 id: v3-t3-joint-distribution-modeling
 date: 2026-04-15
-roadmap_task: v3 T3 (GALO-PX-4 (A3) joint distribution 수학적 모델링)
+roadmap_task: v3 T3 (GALO-PX-4 (A3) joint-distribution mathematical modeling)
 grade: [9] empirical + conjecture
 predecessors:
   - reports/breakthroughs/bsd-A3-modified-with-joint-covariance-2026-04-15.md
@@ -10,178 +10,178 @@ status: SUGGESTIVE, NOT PROVED
 license: CC-BY-SA-4.0
 ---
 
-# v3 T3 — κ(B) joint distribution 수학적 모델링 + α ≈ log(2)/4 발견
+# v3 T3 — kappa(B) Joint-distribution Mathematical Modeling + alpha ~ log(2)/4 Finding
 
-> **요약**: v3 E5 의 7-bin power law κ(B) ~ A·B^α (A=0.2317, α=0.1752) 를 수학적 joint distribution 모델로 분해. α=0.1752 는 log(2)/4 = 0.1733 와 0.0019 차이 (<1.1% relative error). 이는 **suggestive empirical match** 이며 정리/추측은 아님. BKLPR+independence 가정의 이탈 scale 을 정량화.
+> **Summary**: Decompose v3 E5 7-bin power law kappa(B) ~ A * B^alpha (A = 0.2317, alpha = 0.1752) via a mathematical joint-distribution model. alpha = 0.1752 differs from log(2)/4 = 0.1733 by 0.0019 (< 1.1% relative error). This is a **suggestive empirical match** — it is neither a theorem nor a conjecture in the formal sense. Quantifies the departure scale from the BKLPR + independence assumption.
 
 ---
 
-## §1 출발점 — BKLPR+indep 아래 예측
+## §1 Starting point — prediction under BKLPR + indep
 
-Bhargava-Kane-Lenstra-Poonen-Rains (BKLPR 2013) 모델: 타원곡선 E 의 n-Selmer 군 |Sel_n(E)| 은 random cokernel 분포.
+Bhargava-Kane-Lenstra-Poonen-Rains (BKLPR 2013) model: the n-Selmer group |Sel_n(E)| of an elliptic curve E is a random cokernel distribution.
 
-**Independence 가정** (원 conjecture A3): 서로소 m,n 에 대해
+**Independence assumption** (original conjecture A3): for coprime m, n,
 $$\mathbb{E}[|Sel_{mn}(E)|] = \mathbb{E}[|Sel_m(E)|] \cdot \mathbb{E}[|Sel_n(E)|]$$
 
-특히 m=2, n=3:
+In particular for m=2, n=3:
 $$\mathbb{E}[|Sel_6|] \stackrel{?}{=} \mathbb{E}[|Sel_2|] \cdot \mathbb{E}[|Sel_3|]$$
 
 ---
 
-## §2 실측 이탈 — κ(B) 정의 및 measured growth
+## §2 Measured deviation — definition of kappa(B) and measured growth
 
-### 2.1 Cremona 1.73M curves (conductor ≤ 410k, 7 bin)
+### 2.1 Cremona 1.73M curves (conductor <= 410k, 7 bins)
 
 $$\kappa(B) := \mathbb{E}[|Sel_6|]_B - \mathbb{E}[|Sel_2|]_B \cdot \mathbb{E}[|Sel_3|]_B$$
 
-(통계 표는 `reports/v3/e5-kappa-7bin-power-law-2026-04-15.md` §2 참조)
+(Statistics table: see `reports/v3/e5-kappa-7bin-power-law-2026-04-15.md` §2)
 
-| B mid | N | κ(B) | ratio₆ = E[S₆]/(E[S₂]·E[S₃]) |
+| B mid | N | kappa(B) | ratio_6 = E[S_6] / (E[S_2] * E[S_3]) |
 |-------|---|------|------|
-| 25k | 332,366 | −1.67 | 0.7925 |
-| 75k | 325,030 | −0.29 | 0.9304 |
-| 125k | 316,708 | −0.26 | 0.9726 |
+| 25k | 332,366 | -1.67 | 0.7925 |
+| 75k | 325,030 | -0.29 | 0.9304 |
+| 125k | 316,708 | -0.26 | 0.9726 |
 | 175k | 308,257 | +0.20 | 1.0175 |
 | 225k | 306,722 | +0.35 | 1.0336 |
 | 305k | 59,081 | +1.22 | 1.0849 |
 | 405k | 57,660 | +1.32 | 1.1106 |
 
-### 2.2 Power law fit
+### 2.2 Power-law fit
 
-Log-linear 회귀 (`scripts/empirical/cremona_kappa_10bin.py`):
+Log-linear regression (`scripts/empirical/cremona_kappa_10bin.py`):
 $$\kappa(B) \approx 0.2317 \cdot B^{0.1752}$$
-(단, κ<0 인 초기 2 bin 은 |κ| 으로 처리; 부호 반전 주의)
+(for the first 2 bins where kappa < 0, |kappa| is used; sign flip noted)
 
 $$\text{ratio}_6(B) \approx 0.2383 \cdot B^{0.1198}$$
 
-두 slope 의 차이: α_κ - β_ratio = 0.055. log-linear scale 에서 두 power law 의 공존.
+Difference of the two slopes: alpha_kappa - beta_ratio = 0.055. Coexistence of two power laws on log-linear scale.
 
 ---
 
-## §3 α ≈ log(2)/4 — suggestive match
+## §3 alpha ~ log(2)/4 — suggestive match
 
-### 3.1 주요 상수 비교 (n=6 중심 후보 12종)
+### 3.1 Main-constant comparison (12 n=6-centric candidates)
 
-| 상수 | 값 | α=0.1752 와의 오차 |
+| Constant | Value | Error vs alpha=0.1752 |
 |------|-----|---------|
-| **log(2)/4** | 0.1733 | **+0.0019 (1.1%)** ✓ |
-| (1/τ(6))·log(2) = (1/4)·log(2) | 0.1733 | +0.0019 (1.1%) ✓ |
-| 1/σ(4) | 0.1429 | +0.0324 |
+| **log(2)/4** | 0.1733 | **+0.0019 (1.1%)** ok |
+| (1/tau(6))*log(2) = (1/4)*log(2) | 0.1733 | +0.0019 (1.1%) ok |
+| 1/sigma(4) | 0.1429 | +0.0324 |
 | 1/sopfr(6) | 0.2000 | +0.0248 |
-| 1/σ(3) | 0.2500 | +0.0748 |
-| γ/√6 | 0.2356 | +0.0604 |
-| 1/(φ(6)+σ(3)/2) | 0.2500 | +0.0748 |
+| 1/sigma(3) | 0.2500 | +0.0748 |
+| gamma / sqrt(6) | 0.2356 | +0.0604 |
+| 1/(phi(6) + sigma(3)/2) | 0.2500 | +0.0748 |
 
-(sopfr(6) = 2+3 = 5, Euler-Mascheroni γ ≈ 0.5772, τ=약수 개수)
+(sopfr(6) = 2+3 = 5, Euler-Mascheroni gamma ~ 0.5772, tau = divisor count)
 
-### 3.2 log(2)/4 의 이론적 개연성 *(추측 단계)*
+### 3.2 Theoretical plausibility of log(2)/4 *(conjectural level)*
 
-- **τ(6) = 4** 는 n=6 의 약수 개수 (1,2,3,6). 이는 n=6 수론 정체성의 핵심.
-- log(2) 는 Dirichlet L-function 의 leading coefficient 계산에 자연 등장:
-  - $L(1, \chi) \sim c \cdot \log(p)$ 형태
-  - Gauss class number formula 에서 log 단위
-  - Chowla-Selberg: $L(s,\chi)$ 의 잔차에 log(2π) 출현
-- n=6 공약수 2, 3 에 대해 Sel_2, Sel_3 독립성 위배 의 "coupling 강도" 가 (log 2)/τ(6) 형태로 나타날 가능성
+- **tau(6) = 4** is the divisor count (1, 2, 3, 6) of n=6. This is central to the n=6 number-theory identity.
+- log(2) appears naturally in Dirichlet-L-function leading-coefficient computations:
+  - $L(1, \chi) \sim c \cdot \log(p)$ form
+  - log unit in the Gauss class-number formula
+  - log(2 pi) appearance in the Chowla-Selberg residue of $L(s, \chi)$
+- For the common factors 2, 3 of n=6, the "coupling strength" of the Sel_2, Sel_3 independence breakdown may appear in the form (log 2) / tau(6)
 
-### 3.3 정직한 경계 — NOT PROVED
+### 3.3 Honest boundary — NOT PROVED
 
-- N = 1,733,824 curves (7 bin) 기반 empirical fit
-- 표본 bin 수 = 7: 통계적 불확실성 존재 (표준오차 약 0.01~0.02)
-- α = 0.1752 ± 0.02 범위 내에 log(2)/4 = 0.1733 이 **포함**. 이는 "일치 가능성" 이지 "수학적 정리" 아님
-- 이론적 유도 (BKLPR 모델 내) 는 **현 세션 범위 초과**. T4~T6 + M3 (Lean4) 필요
+- Empirical fit based on N = 1,733,824 curves (7 bins)
+- Sample bin count = 7: statistical uncertainty exists (standard error ~ 0.01-0.02)
+- log(2)/4 = 0.1733 is **included** in the range alpha = 0.1752 +/- 0.02. This is "match possibility", not a "mathematical theorem"
+- Theoretical derivation (within the BKLPR model) is **outside current session scope**. Requires T4-T6 + M3 (Lean4)
 
 ---
 
-## §4 Joint distribution 수학 모델 — (A3″)
+## §4 Joint-distribution mathematical model — (A3'')
 
 ### 4.1 Curve-level coupling factor
 
-각 curve E 에 대해 (실제 allbsd 데이터 로 가능):
+For each curve E (possible with actual allbsd data):
 $$\eta(E) := \frac{|Sel_6(E)|}{|Sel_2(E)| \cdot |Sel_3(E)|} - 1$$
 
-(A3 independence) ⟺ η(E) = 0 a.s.
+(A3 independence) iff eta(E) = 0 a.s.
 
-**(A3′)** modified (loop2): ∃ weak correlation, $\mathbb{E}[\eta(E)] = 0$, $\mathrm{Var}(\eta) \neq 0$.
+**(A3')** modified (loop 2): exists weak correlation, $\mathbb{E}[\eta(E)] = 0$, $\mathrm{Var}(\eta) \neq 0$.
 
-**(A3″)** v3 T3: ∃ B-dependent coupling,
+**(A3'')** v3 T3: exists B-dependent coupling,
 $$\mathbb{E}[\eta(E) | N(E) \in [B-\delta, B+\delta]] \approx c \cdot \log(B)^\alpha / \sqrt{B}^\gamma$$
 with $\alpha \approx \log(2)/4$, $\gamma$ TBD.
 
-### 4.2 κ(B) 의 mechanism 분해
+### 4.2 Mechanism decomposition of kappa(B)
 
 $$\mathbb{E}[|S_6|]_B = \mathbb{E}[|S_2| \cdot |S_3|]_B = \mathbb{E}[|S_2|]_B \cdot \mathbb{E}[|S_3|]_B + \mathrm{Cov}_B(|S_2|, |S_3|)$$
 
-따라서
+Thus
 $$\kappa(B) = \mathrm{Cov}_B(|S_2|, |S_3|) + \mathbb{E}[(|S_6| - |S_2||S_3|)]_B$$
 
-두 성분 분리:
-- **Cov term**: |S_2| 와 |S_3| 의 joint distribution 자체의 covariance
-- **Coupling term**: curve 별 η(E) 의 평균
+Split into two components:
+- **Cov term**: covariance of the joint distribution of |S_2| and |S_3|
+- **Coupling term**: per-curve average of eta(E)
 
-**next step** (v3 E7 or T4): per-curve (|S_2(E)|, |S_3(E)|, |S_6(E)|) 동시 추출 → Cov 정밀 측정.
+**next step** (v3 E7 or T4): per-curve simultaneous extraction of (|S_2(E)|, |S_3(E)|, |S_6(E)|) -> precise Cov measurement.
 
-### 4.3 Bhargava-Shankar 최신 결과와의 관계
+### 4.3 Relation with recent Bhargava-Shankar results
 
-Bhargava-Shankar (2013, 2015) "Binary quartic/quintic forms" 에서 avg |Sel_n(E)| 계산:
-- $\mathbb{E}[|Sel_2|] = 3$ asymptotic (B→∞)
+Bhargava-Shankar (2013, 2015) "Binary quartic/quintic forms" compute avg |Sel_n(E)|:
+- $\mathbb{E}[|Sel_2|] = 3$ asymptotic (B -> infinity)
 - $\mathbb{E}[|Sel_3|] = 4$ asymptotic
 - $\mathbb{E}[|Sel_4|] = 7$ asymptotic
 - $\mathbb{E}[|Sel_5|] = 6$ asymptotic
 
-우리 실측: E[|S_2|] 2.87→3.30 (→3 asymptotic 로 수렴 중), E[|S_3|] 2.85→3.40 (→4 방향).
+Our measurement: E[|S_2|] 2.87 -> 3.30 (converging toward 3 asymptotic), E[|S_3|] 2.85 -> 3.40 (toward 4).
 
-**asymptotic 의 차이**: Bhargava-Shankar average 는 **산술적 height** sort, 우리는 **conductor** sort — 다른 ordering.
+**Difference in asymptotic**: Bhargava-Shankar averages use **arithmetic height** sorting, while we use **conductor** sorting — different orderings.
 
-Bhargava-Shankar 가 n=2,3 따로 증명. n=6 는 아직 unconditional 증명 없음. **Bhargava-Shankar 한계를 n=6 으로 확장 하려면** 본 κ(B) 의 정확한 asymptotic 필요.
+Bhargava-Shankar proves n=2, 3 separately. For n=6 there is still no unconditional draft. **To extend Bhargava-Shankar to n=6**, the precise asymptotic of our kappa(B) is required.
 
 ---
 
-## §5 v3 T3 산출 + 향후 연결
+## §5 v3 T3 outputs + future connections
 
-### 5.1 산출물
+### 5.1 Outputs
 
-1. **(A3″) conjecture** — B-dependent coupling, power law α ≈ log(2)/4
-2. **Mathematical decomposition** κ(B) = Cov + Coupling term
-3. **α ≈ log(2)/4 match** — suggestive, τ(6)=4 연결 가능성
+1. **(A3'') conjecture** — B-dependent coupling, power-law alpha ~ log(2)/4
+2. **Mathematical decomposition** kappa(B) = Cov + Coupling term
+3. **alpha ~ log(2)/4 match** — suggestive, possible tau(6)=4 connection
 4. `scripts/empirical/cremona_kappa_10bin.py` — 7+ bin analyzer
 
-### 5.2 해결되지 않은 것 (정직 선언)
+### 5.2 What is not resolved (honest declaration)
 
-- α = log(2)/4 의 이론적 유도 (BKLPR 에서): **미증명**
-- Cov(|S_2|, |S_3|) 직접 측정: **아직** (v3 E2/E4 Sage 필요)
-- BSD 에 대한 함의: **간접적, 약함**
-- BT-541 (RH), BT-546 (BSD) 해결: **0/6 정직 유지**
+- Theoretical derivation (within BKLPR) of alpha = log(2)/4: **not drafted**
+- Direct measurement of Cov(|S_2|, |S_3|): **not yet** (requires v3 E2/E4 Sage)
+- BSD implication: **indirect, weak**
+- BT-541 (RH), BT-546 (BSD) draft: **0/6 honest maintained**
 
-### 5.3 후속 과제 (v3 loop 15+)
+### 5.3 Follow-up tasks (v3 loop 15+)
 
-- **v3 T4**: BT-541 Guth-Maynard 2024 zeta zero 재연구 (병렬 진행)
-- **v3 E2**: Sage `E.selmer_group(n)` per-curve 정밀 값 → Cov 직접
-- **v3 M1**: 본 문서 preprint 화 (GALO-PX-4 + A3″ 발표)
+- **v3 T4**: BT-541 Guth-Maynard 2024 zeta-zero re-study (in parallel)
+- **v3 E2**: Sage `E.selmer_group(n)` per-curve precise values -> direct Cov
+- **v3 M1**: preprint this document (GALO-PX-4 + A3'' announcement)
 
 ---
 
-## §6 atlas 엔트리
+## §6 atlas entries
 
 ```
-@R MILL-V3-T3-alpha-log2-over-4-suggestive = α = 0.1752, log(2)/4 = 0.1733 (err 1.1%) :: n6atlas [9]
-  "v3 T3 (2026-04-15 loop 14): κ(B) ~ A·B^α power law (v3 E5) 의 slope α = 0.1752 ± 0.02 (7 bin).
-   log(2)/4 = 0.1733 와 오차 0.0019 (1.1% rel err). τ(6) = 4 와 log 2 의 n=6 자연 조합 제안.
-   SUGGESTIVE EMPIRICAL MATCH, NOT PROVED. 이론적 유도 미완 — v3 T4+M3 으로 연결.
-   (A3″) conjecture: B-dependent coupling coefficient, curve-level η(E) 정의"
+@R MILL-V3-T3-alpha-log2-over-4-suggestive = alpha = 0.1752, log(2)/4 = 0.1733 (err 1.1%) :: n6atlas [9]
+  "v3 T3 (2026-04-15 loop 14): slope alpha = 0.1752 +/- 0.02 (7 bins) of kappa(B) ~ A*B^alpha power law
+   (v3 E5). log(2)/4 = 0.1733 differs by 0.0019 (1.1% rel err). Natural n=6 combination of tau(6) = 4
+   and log 2 proposed. SUGGESTIVE EMPIRICAL MATCH, NOT PROVED. Theoretical derivation incomplete —
+   links to v3 T4+M3. (A3'') conjecture: B-dependent coupling coefficient, curve-level eta(E) defined"
   <- v3-T3, reports/breakthroughs/v3-t3-joint-distribution-modeling-2026-04-15.md
 ```
 
 ---
 
-## §7 관련 파일
+## §7 Related files
 
-- 데이터: `data/cremona/kappa_10bin_results.json` (v3 E5 산출)
-- 스크립트: `scripts/empirical/cremona_kappa_10bin.py`
-- 전 결과: `reports/breakthroughs/v3-e5-kappa-7bin-power-law-2026-04-15.md`
-- 모체: `reports/breakthroughs/bsd-A3-modified-with-joint-covariance-2026-04-15.md`
-- roadmap: `shared/roadmaps/millennium.json` → `_v3_phases.P12_v3.T3`
+- Data: `data/cremona/kappa_10bin_results.json` (v3 E5 output)
+- Script: `scripts/empirical/cremona_kappa_10bin.py`
+- Prior result: `reports/breakthroughs/v3-e5-kappa-7bin-power-law-2026-04-15.md`
+- Parent: `reports/breakthroughs/bsd-A3-modified-with-joint-covariance-2026-04-15.md`
+- roadmap: `shared/roadmaps/millennium.json` -> `_v3_phases.P12_v3.T3`
 
 ---
 
-*작성: 2026-04-15 loop 14*
-*정직성 헌장: BT 해결 0/6 유지. α=log(2)/4 는 suggestive 실측, 수학적 정리 아님.*
+*Drafted: 2026-04-15 loop 14*
+*Honesty charter: BT draft 0/6 maintained. alpha = log(2)/4 is a suggestive measurement, not a mathematical theorem.*

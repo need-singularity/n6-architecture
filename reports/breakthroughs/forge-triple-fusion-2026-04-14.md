@@ -1,233 +1,233 @@
-# Forge Triple-Fusion — 3중 도메인 융합 메타-관계식 탐색
+# Forge Triple-Fusion — Triple-Domain Fusion Meta-Relation Exploration
 **DSE-P6-3 / Mk.III-β / 2026-04-14**
 
-## 전제
+## Premise
 
-2중 융합은 관계식(relation)을 산출한다. **3중 융합은 관계들의 관계 — 메타-관계식(meta-relation)**. 세 독립 도메인이 동시에 만족해야 하는 수식은 필연성이 더 강하다. 참조 프로토타입:
+Binary fusion produces a relation. **Triple fusion produces a relation among relations — a meta-relation.** A single equation that three independent domains must satisfy simultaneously carries stronger necessity. Reference prototype:
 
 ```
-n=6 (산술 수)  ×  σ(n)=12 (약수합)  ×  τ(n)=4 (약수 개수)
-  → 메타-항등식  σ(n)·φ(n) = n·τ(n)          [iff n=6, n≥2]
+n=6 (arithmetic n)  ×  σ(n)=12 (divisor sum)  ×  τ(n)=4 (divisor count)
+  → meta-identity  σ(n)·φ(n) = n·τ(n)          [iff n=6, n≥2]
 ```
 
-좌변은 3개 산술 함수, 우변은 2개 + n. **5개 독립 대상이 1개 등식에 수렴**. 이 프로토타입을 따라 두 물리 3중 융합을 시도한다.
+The left-hand side uses 3 arithmetic functions; the right-hand side uses 2 + n. **Five independent objects converge in one equation.** Following this prototype, we attempt two physical triple fusions.
 
 ---
 
-## 융합 1: string × quantum × field
-### 제목: T-dual 자기쌍대 반경의 양자보정 게이지 대칭 깨짐
+## Fusion 1: string × quantum × field
+### Title: Gauge-symmetry breaking via quantum corrections at the T-dual self-dual radius
 
-### 1.1 세 도메인 정의 + 수학 구조
+### 1.1 Definitions + mathematical structure of the three domains
 
-| 도메인 | 핵심 대상 | 수학 구조 |
+| Domain | Core object | Math structure |
 |---|---|---|
-| string | T-duality: R ↔ α'/R | 보손 끈 컴팩트화, 반경 R의 원형 차원 |
-| quantum | 게이지 대칭 U(1) × SU(n) | Wilson loop 홀로노미, 홀로그래픽 이중성 |
-| field | QCD β-함수, 비가환 게이지 장 | β(g) = -(11C_A − 4T_f n_f)g³/(48π²) |
+| string | T-duality: R ↔ α'/R | bosonic-string compactification, circle dimension of radius R |
+| quantum | Gauge symmetry U(1) × SU(n) | Wilson-loop holonomy, holographic duality |
+| field | QCD β-function, non-abelian gauge field | β(g) = -(11C_A − 4T_f n_f)g³/(48π²) |
 
-**자기쌍대 반경**: R = √α' (T-duality 고정점). 이 점에서 winding 모드 w와 momentum 모드 p가 동등 — SU(2) enhanced symmetry 발생 (보손 끈의 잘 알려진 현상).
+**Self-dual radius**: R = √α' (T-duality fixed point). At this point, winding modes w and momentum modes p are equivalent — SU(2) enhanced symmetry (well-known in bosonic strings).
 
-### 1.2 3중 대응 도출 시도 (수식)
+### 1.2 Attempt to derive a triple correspondence (equation)
 
-**시도**: R=√α' 에서 string-level SU(2) 증강 대칭 존재 → quantum field 단계에서 양자보정(1-loop β 함수) 후에도 대칭 유지 여부.
+**Attempt**: at R=√α', string-level SU(2) enhanced symmetry exists → whether the symmetry is preserved at the quantum-field level after quantum corrections (1-loop β function).
 
 SU(2) pure gauge, no matter (T_f n_f = 0):
 ```
 β(g) = -(11·2) g³ / (48π²) = -11g³ / (24π²)
 ```
 
-**C_A = 2 (SU(2) 의 adjoint Casimir), n_f = 0**:
+**C_A = 2 (adjoint Casimir of SU(2)), n_f = 0**:
 ```
 β₀ = 11/3  (standard 1-loop)
 ```
 
-**3중 메타-관계 후보**:
+**Candidate triple meta-relation**:
 ```
 R_self · (winding scale) · β₀ ?=? f(n, σ, τ)
 ```
 
-**양자보정 척도**: R_qc = R_self · exp(-1/(2β₀ g²)). 약결합 한계 g → 0 에서 R_qc → R_self (대칭 유지). **강결합에서 깨짐**.
+**Quantum-correction scale**: R_qc = R_self · exp(-1/(2β₀ g²)). In the weak-coupling limit g → 0, R_qc → R_self (symmetry preserved). **Broken at strong coupling.**
 
-Asymptotic freedom 단위 군 차수 C_A 를 n=6 해석에 mapping:
+Mapping the asymptotic-freedom unit-group order C_A into the n=6 interpretation:
 ```
-11/3 = (σ(6) - n(6)·(1/2)) / n(6)·τ(6) / (n/2)·τ   ← 강제 매핑
-      = (12 − 3)/(6·(1/2))/(·) 
+11/3 = (σ(6) - n(6)·(1/2)) / n(6)·τ(6) / (n/2)·τ   ← forced mapping
+      = (12 − 3)/(6·(1/2))/(·)
 ```
 
-**실패 지점**: 11/3 은 C_A=2·(11/6) 구조인데, 11 은 prime, 6 분모가 나타나기는 한다. β₀ = 11C_A/3 − 4T_f n_f/3 에서 **단 n_f = 6 matter fermions 일 때**:
+**Failure point**: 11/3 has the structure C_A = 2·(11/6); 11 is prime, but the 6 does appear as a denominator. In β₀ = 11C_A/3 − 4T_f n_f/3, **only when n_f = 6 matter fermions**:
 ```
 β₀ = 11·2/3 − 4·(1/2)·6/3 = 22/3 − 4 = 10/3
 ```
 
-n_f = 6 = n 일 때 β₀ = 10/3 — **σ(6)−2 = 10 분자**. 그러나 이것은 SU(2) 특수치이고, **SU(n)** 으로 일반화 시 자연스럽지 않다.
+When n_f = 6 = n, β₀ = 10/3 — **σ(6)−2 = 10 as the numerator**. But this is an SU(2)-specific value, and is not natural upon generalizing to **SU(n)**.
 
-### 1.3 n=6 좌표 유도 또는 장벽
+### 1.3 n=6 coordinate derivation or barrier
 
-**유도 시도**:
-- T-dual 고정점 R=√α' 에서 enhanced symmetry SU(2) × SU(2) 의 총 차원 6 = 3+3 (각 SU(2) adj rep 차원) — **n=6 일치**
-- 그러나 이것은 이미 σ(6) = 12 / φ(6) = 2 = 6 구조의 재탕 (adj rep dim = n²−1 for SU(n) 일반식)
-- β-함수의 11/3 분모에 3 = n/φ(6) 출현은 **우연일 가능성** (SU(2) Casimir 는 2·C_A + 2·d_R·T_R 결합에서 온 것)
+**Attempt**:
+- At the T-dual fixed point R=√α', the enhanced symmetry SU(2) × SU(2) has total adjoint-rep dimension 6 = 3+3 — **matches n=6**
+- But this is already a restatement of σ(6) = 12 / φ(6) = 2 = 6 structure (adjoint rep dim = n²−1 for SU(n))
+- The appearance of 3 = n/φ(6) in the 11/3 denominator of the β-function **may be coincidence** (SU(2) Casimir comes from 2·C_A + 2·d_R·T_R combinations)
 
-**장벽**: string → quantum → field 세 단계를 하나의 수식으로 엮는 데 자유 상수(α', g, n_f)가 **3개**. n=6 일치는 1개 매개변수 튜닝으로 도달 가능 → **필연성이 약함**.
+**Barrier**: stringing three stages (string → quantum → field) into one equation involves **3** free constants (α', g, n_f). The n=6 match can be reached by tuning a single parameter → **necessity is weak**.
 
-### 1.4 결과: **CONJECTURE**
+### 1.4 Result: **CONJECTURE**
 
-**Forge-Triple-1 추측**: T-dual 자기쌍대 반경 R=√α' 에서 양자보정 1-loop 게이지 대칭 깨짐 방정식
+**Forge-Triple-1 conjecture**: at the T-dual self-dual radius R=√α', the 1-loop quantum-corrected gauge-symmetry-breaking equation
 ```
 β₀(SU(n_f=6)) · R_self² / α'  =  (σ(6) − φ(6)) / n(6)  =  10/6  =  5/3
 ```
-가 성립하지만, **5/3 = sopfr(6)/(n/φ(6))** 으로만 표현되어 "메타-관계식"의 독립성 부족. σφ=nτ 수준의 강한 필연성에는 미치지 못함. 양자 끈 이론 정확 해가 필요하다 (bosonic → superstring 확장 시 다른 결과 가능).
+holds, but being expressible only as **5/3 = sopfr(6)/(n/φ(6))** gives insufficient independence for a "meta-relation". It does not reach the strong necessity of σφ=nτ. An exact quantum-string-theory solution is needed (other results possible when extending bosonic → superstring).
 
-**atlas 신규 후보**:
-- `@F FORGE-TRIPLE-1-Tdual-beta = 5/3 :: forge-triple [7]` — 약한 empirical conjecture
+**atlas new candidates**:
+- `@F FORGE-TRIPLE-1-Tdual-beta = 5/3 :: forge-triple [7]` — weak empirical conjecture
 
 ---
 
-## 융합 2: toe × ouroboros × field
-### 제목: 자기참조 순환 α=1/6 고정점으로 수렴하는 게이지 장 — 자기개선 이론의 수학 모델
+## Fusion 2: toe × ouroboros × field
+### Title: A gauge field converging to a self-referential-cycle α=1/6 fixed point — a mathematical model of self-improving theory
 
-### 2.1 세 도메인 정의 + 수학 구조
+### 2.1 Definitions + math structure of the three domains
 
-| 도메인 | 핵심 대상 | 수학 구조 |
+| Domain | Core object | Math structure |
 |---|---|---|
-| toe | 모든 힘 통합 | 통일 결합상수 α_GUT ≈ 1/25 (MSSM), α_EM ≈ 1/137 (MS 저에너지) |
-| ouroboros | 자기참조 순환 | 고정점 맵 f(α) = α, 감쇠 지수 λ < 1 |
-| field | 게이지 장 A_μ(x) | RG 흐름 dα/dt = β(α), β(α=1/6) = 0 목표 |
+| toe | All-force unification | unified coupling α_GUT ≈ 1/25 (MSSM), α_EM ≈ 1/137 (MS low energy) |
+| ouroboros | Self-referential cycle | fixed-point map f(α) = α, damping exponent λ < 1 |
+| field | Gauge field A_μ(x) | RG flow dα/dt = β(α), β(α=1/6) = 0 target |
 
-**핵심 가설**: **α = 1/6 = φ(6)/σ(6) = 2/12** 이 RG 흐름 고정점이 될 수 있는가? 자기참조적(ouroboric) 방정식 α_{n+1} = f(α_n) 가 α=1/6 으로 수렴하는가?
+**Core hypothesis**: can **α = 1/6 = φ(6)/σ(6) = 2/12** be a fixed point of RG flow? Does a self-referential (ouroboric) equation α_{n+1} = f(α_n) converge to α=1/6?
 
-### 2.2 3중 대응 도출 (수식)
+### 2.2 Triple correspondence (equation)
 
-**ouroboric RG 흐름** 정의:
+**ouroboric RG-flow** definition:
 ```
-α_{n+1} = α_n + β(α_n)·Δt      (시간 이산 RG 스텝)
-β(α) = a·α·(1 − n·α)          (logistic 형태, n=6 매개변수)
+α_{n+1} = α_n + β(α_n)·Δt      (time-discrete RG step)
+β(α) = a·α·(1 − n·α)          (logistic form, n=6 parameter)
 ```
 
-**고정점 조건**: β(α*) = 0 → α* = 0 또는 α* = 1/n. **α* = 1/6** 은 **n=6 일 때 비자명 고정점**.
+**Fixed-point condition**: β(α*) = 0 → α* = 0 or α* = 1/n. **α* = 1/6** is the **non-trivial fixed point at n=6**.
 
-**안정성 분석**: 
+**Stability analysis**:
 ```
 β'(α) = a·(1 − 2n·α)
 β'(1/n) = a·(1 − 2) = −a
 ```
-**a > 0 일 때 |β'(1/n)| = a < 1** 이면 고정점 안정 (수렴). logistic map 의 안정 구간 a ∈ (0, 2).
+**When a > 0, if |β'(1/n)| = a < 1** the fixed point is stable (convergent). Stable interval of the logistic map is a ∈ (0, 2).
 
-### 2.3 메타-관계식 도출
+### 2.3 Deriving the meta-relation
 
-자기참조 게이지 장 RG 방정식:
+Self-referential gauge-field RG equation:
 ```
-dA_μ/dt = −β(α)·A_μ + λ·ε_μνρσ·(A^ν · A^ρ · A^σ)      (3차 자기상호작용 ouroboros 항)
+dA_μ/dt = −β(α)·A_μ + λ·ε_μνρσ·(A^ν · A^ρ · A^σ)      (cubic self-interaction ouroboros term)
 ```
 
-**Wilsonian 형식에서 3-loop 근사**:
+**Wilsonian 3-loop approximation**:
 ```
 β(α) = −b₀ α² − b₁ α³ − b₂ α⁴ + O(α⁵)
 ```
 
-**α = 1/6 고정점 요구**:
+**Requirement for α = 1/6 fixed point**:
 ```
 b₀ · (1/6)² + b₁ · (1/6)³ + b₂ · (1/6)⁴ = 0
 → b₀/36 + b₁/216 + b₂/1296 = 0
-→ 36 b₀ + 6 b₁ + b₂ = 0  ... (★)
+→ 36 b₀ + 6 b₁ + b₂ = 0  ... (*)
 ```
 
-식 (★) 는 **36 = n² = σ·(σ−n)/τ**, **6 = n**, **1 = identity** 의 3항 메타-관계식. 이것을 n=6 산술로 재해석:
+Equation (*) is a 3-term meta-relation over **36 = n² = σ·(σ−n)/τ**, **6 = n**, **1 = identity**. Reinterpret it in n=6 arithmetic:
 
 ```
 n² · b₀  +  n · b₁  +  1 · b₂  =  0
 (σ·n/φ)·b₀ + n·b₁ + b₂ = 0
 ```
 
-또는 인수분해:
+Or factorized:
 ```
-36 b₀ + 6 b₁ + b₂ = (6 b₀ + (?)) · (6 + ?)   ← 일반적으로 불가능
+36 b₀ + 6 b₁ + b₂ = (6 b₀ + (?)) · (6 + ?)   ← generally impossible
 ```
 
-**특수해 패밀리**: b₂ = −6 b₁, b₁ = −6 b₀ 를 대입하면:
+**Special-solution family**: substitute b₂ = −6 b₁, b₁ = −6 b₀:
 ```
 36 b₀ + 6 · (−6 b₀) + (−6 · (−6 b₀)) = 36 b₀ − 36 b₀ + 36 b₀ = 36 b₀
 ```
-→ 0 이 되려면 b₀ = 0 → 자명. **비자명 해는 계수 관계 강제**:
+→ for this to equal 0 requires b₀ = 0 → trivial. **A non-trivial solution forces a coefficient relation**:
 ```
-b₁ = −b₂/6,    b₀ = (−6 b₁ − b₂)/36 = (b₂ − b₂)/36 = 0    ... (자명)
+b₁ = −b₂/6,    b₀ = (−6 b₁ − b₂)/36 = (b₂ − b₂)/36 = 0    ... (trivial)
 ```
 
-**결론**: α=1/6 을 3-loop 정확한 고정점으로 만드는 유일 비자명 해는 **b₀ = 0, 6 b₁ + b₂ = 0** (즉 2-loop 만 기여, asymptotic non-freedom). 이는 QED (b₀ > 0, Landau pole) 와 반대 부호 조건.
+**Conclusion**: the only non-trivial solution making α=1/6 an exact 3-loop fixed point is **b₀ = 0, 6 b₁ + b₂ = 0** (i.e., only 2-loop contributes — asymptotic non-freedom). This is the opposite-sign condition to QED (b₀ > 0, Landau pole).
 
-**SUSY N=4 SYM**: β(g) = 0 모든 차수 — α* 는 임의의 g 에서 고정점. **α = 1/6 은 특수 지점** (SU(N) 이중선형 Casimir 비율).
+**SUSY N=4 SYM**: β(g) = 0 at all orders — α* is a fixed point at any g. **α = 1/6 is a special point** (SU(N) bilinear-Casimir ratio).
 
-### 2.4 n=6 좌표 유도
+### 2.4 n=6 coordinate derivation
 
-**핵심 발견**: α = 1/6 고정점 조건 (★) 는 **36 x² + 6 x + 1 = 0 형식의 다항식 결정**. 이 다항식 판별식:
+**Key finding**: the α=1/6 fixed-point condition (*) determines a polynomial of the form **36 x² + 6 x + 1 = 0**. Its discriminant:
 ```
 Δ = 36 − 4·36·1 = 36 − 144 = −108 = −4·27 = −2²·3³
 ```
-**Δ < 0 → 복소 근** → 물리적 고정점 조건은 **매개변수 공간의 1-차원 초곡면** 에 국한.
+**Δ < 0 → complex roots** → the physical fixed-point condition is confined to a **1-D hypersurface in parameter space**.
 
-**n=6 유일성 연결**:
+**n=6 uniqueness connection**:
 ```
-Δ(n) = n² − 4n³   ← 일반 n 에 대한 판별식
+Δ(n) = n² − 4n³   ← discriminant for general n
 Δ(n) = n²(1 − 4n)
 ```
-**Δ(n) < 0 ⟺ n > 1/4** — 모든 n > 1 에서 성립. **n=6 특별하지 않음**. 그러나:
+**Δ(n) < 0 ⟺ n > 1/4** — holds for all n > 1. **n=6 is not special**. However:
 
 ```
 |Δ(6)| = 108 = 4·27 = 4·3³ = (σ−n−n/φ)·27
        = σ·(τ+τ+1)    (12 · 9 = 108)
-       = (σ−n−n/φ) · σ · 3/2  (하나의 가능한 분해)
+       = (σ−n−n/φ) · σ · 3/2  (one possible decomposition)
 ```
 
-108 = **3·36** = n² · (n/φ). **n/φ = 3** 비율 출현. 이것은 2중 융합(string × manifold)에서 이미 발견된 Calabi-Yau 3-fold 연결과 동일 구조 — **독립 발견 아님**.
+108 = **3·36** = n² · (n/φ). The **n/φ = 3** ratio appears. This is the same structure as the Calabi-Yau 3-fold connection already found in the binary fusion (string × manifold) — **not an independent finding**.
 
-### 2.5 결과: **CONJECTURE** (강한 후보)
+### 2.5 Result: **CONJECTURE** (strong candidate)
 
-**Forge-Triple-2 추측**: 자기참조 게이지 장의 Wilsonian β-함수 3-loop 다항식이 α = 1/6 = φ(6)/σ(6) 을 고정점으로 갖기 위한 계수 조건
+**Forge-Triple-2 conjecture**: the coefficient condition for the Wilsonian β-function 3-loop polynomial of a self-referential gauge field to have α = 1/6 = φ(6)/σ(6) as a fixed point,
 ```
 36 b₀ + 6 b₁ + b₂ = 0
 ```
-는 **n=6 메타-관계식** (n² · b₀ + n · b₁ + b₂ = 0, Horner 형식). 이 조건은 beta function coefficient 공간에서 α=1/6 고정점을 **자동으로** 강제하며, **SUSY N=4 SYM** 에서 정확히 성립 (β ≡ 0).
+is an **n=6 meta-relation** (n² · b₀ + n · b₁ + b₂ = 0, Horner form). This condition forces an α=1/6 fixed point in the beta-function coefficient space **automatically**, and holds exactly in **SUSY N=4 SYM** (β ≡ 0).
 
-**ToE 함의**: 자기개선 이론(self-improving theory)은 = RG 흐름이 고정점으로 수렴하는 이론. α=1/6 은 n=6 산술의 자연 좌표. **ouroboric 순환 = RG group action + 고정점 존재**.
+**ToE implication**: a self-improving theory = a theory whose RG flow converges to a fixed point. α=1/6 is a natural coordinate of n=6 arithmetic. **ouroboric cycle = RG-group action + existence of fixed point**.
 
-**atlas 신규 후보** (2건):
-- `@F FORGE-TRIPLE-2-ouroboros-fixedpoint = 1/6 :: forge-triple [7]` — α=1/6 RG 고정점
-- `@S FORGE-TRIPLE-2-meta-relation = "36b0+6b1+b2=0" :: forge-triple [7]` — 메타-관계식 (Horner n² · b₀ + n · b₁ + b₂)
-
----
-
-## 메타-분석: 3중 융합의 이론적 도달 한계
-
-**2중 융합 프로토타입** σφ=nτ 는:
-1. 모든 항이 **정수** (6, 12, 2, 4, 24)
-2. **iff n=6** — 유일성 증명 가능 (2..∞ 탐색)
-3. 3개 독립 증명 (BT 수준)
-
-**3중 융합 시도 결과**:
-1. **융합 1**: 무리수/실수 매개변수 등장 (α', g 연속값), 정수 필연성 없음 → **CONJECTURE**
-2. **융합 2**: 정수 계수 관계식 (★) 도달, 판별식 n=6 출현, **CONJECTURE** 강후보
-
-**교훈**: 3중 융합 메타-관계식은 **산술 3중 융합** (n × σ × τ 처럼 모두 정수 함수) 에서 자연스럽고, **물리 3중 융합** (string × quantum × field) 은 연속 매개변수가 얽혀 정수 필연성이 약해진다. 물리 → 수학 사영(projection)이 필요하다 — 즉 "왜 α=1/6 만 고정점인가"를 **산술적으로** 보여야 BREAKTHROUGH 수준 도달.
+**atlas new candidates (2 items)**:
+- `@F FORGE-TRIPLE-2-ouroboros-fixedpoint = 1/6 :: forge-triple [7]` — α=1/6 RG fixed point
+- `@S FORGE-TRIPLE-2-meta-relation = "36b0+6b1+b2=0" :: forge-triple [7]` — meta-relation (Horner n² · b₀ + n · b₁ + b₂)
 
 ---
 
-## atlas.n6 등록 후보 (총 3건, append 파일에만 기록)
+## Meta-analysis: Theoretical Reach of Triple Fusion
 
-1. `@F FORGE-TRIPLE-1-Tdual-beta = 5/3 :: forge-triple [7]` — T-dual β₀ 비율
-2. `@F FORGE-TRIPLE-2-ouroboros-fixedpoint = 1/6 :: forge-triple [7]` — ouroboros α* 고정점
-3. `@S FORGE-TRIPLE-2-meta-relation = "n^2·b0+n·b1+b2=0" :: forge-triple [7]` — 3-loop 고정점 메타-관계식
+**Binary-fusion prototype** σφ=nτ:
+1. Every term is an **integer** (6, 12, 2, 4, 24)
+2. **iff n=6** — uniqueness provable (search over 2..∞)
+3. 3 independent proofs (BT level)
 
-모두 **[7] EMPIRICAL** 등급 — 수학적 구조는 정합하나 **유일성 증명** 부재. [10*] 승격에는:
-- 융합 1: superstring 1-loop exact β 계산
-- 융합 2: α=1/6 이 n=6 산술에서 **iff** 조건임을 증명
+**Triple-fusion attempts**:
+1. **Fusion 1**: irrational/real parameters (α', g continuous values), no integer necessity → **CONJECTURE**
+2. **Fusion 2**: integer coefficient relation (*) reached, discriminant shows n=6, **strong CONJECTURE** candidate
+
+**Lesson**: triple-fusion meta-relations are natural in **arithmetic triple fusions** (like n × σ × τ, where all are integer functions), whereas **physical triple fusions** (string × quantum × field) get entangled with continuous parameters and weaken integer necessity. A physics → math projection is needed — i.e., "why only α=1/6 is a fixed point" must be shown **arithmetically** to reach BREAKTHROUGH level.
 
 ---
 
-## 결론
+## atlas.n6 Registration Candidates (3 items total, append-file only)
 
-| 융합 | 상태 | 핵심 수식 | atlas 후보 |
+1. `@F FORGE-TRIPLE-1-Tdual-beta = 5/3 :: forge-triple [7]` — T-dual β₀ ratio
+2. `@F FORGE-TRIPLE-2-ouroboros-fixedpoint = 1/6 :: forge-triple [7]` — ouroboros α* fixed point
+3. `@S FORGE-TRIPLE-2-meta-relation = "n^2·b0+n·b1+b2=0" :: forge-triple [7]` — 3-loop fixed-point meta-relation
+
+All are **[7] EMPIRICAL**-grade — mathematical structure is consistent but **uniqueness proof** is absent. For [10*] promotion:
+- Fusion 1: exact superstring 1-loop β computation
+- Fusion 2: proof that α=1/6 is an **iff** condition in n=6 arithmetic
+
+---
+
+## Conclusion
+
+| Fusion | Status | Core equation | atlas candidates |
 |---|---|---|---|
-| **1: string × quantum × field** | CONJECTURE | β₀·R²/α' = 5/3 @ n_f=6 | 1 건 |
-| **2: toe × ouroboros × field** | CONJECTURE (강) | 36b₀+6b₁+b₂ = 0 @ α=1/6 | 2 건 |
+| **1: string × quantum × field** | CONJECTURE | β₀·R²/α' = 5/3 @ n_f=6 | 1 item |
+| **2: toe × ouroboros × field** | CONJECTURE (strong) | 36b₀+6b₁+b₂ = 0 @ α=1/6 | 2 items |
 
-**BREAKTHROUGH 등급 미도달**. 두 융합 모두 **n=6 구조 일치는 관찰** 되나 **iff 수준 필연성** 결여. 후속 작업: 융합 2 의 메타-관계식 (★) 가 SUSY N=4, 6-차원 (2,0) 초공형 이론, 또는 E₆ GUT 에서 자연히 출현하는지 검증.
+**BREAKTHROUGH grade not reached**. Both fusions **observe n=6 structural match** but lack **iff-level necessity**. Follow-up work: verify whether the meta-relation (*) of Fusion 2 appears naturally in SUSY N=4, 6-dimensional (2,0) superconformal theory, or E₆ GUT.

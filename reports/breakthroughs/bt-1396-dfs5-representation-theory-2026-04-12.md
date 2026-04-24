@@ -1,227 +1,227 @@
-# BT-1396 — n=6 DFS 5차: 표현론·범주론·대수구조 (2026-04-12)
+# BT-1396 — n=6 DFS Round 5: Representation Theory / Category Theory / Algebraic Structures (2026-04-12)
 
-> **n=6 기본 상수**: n=6, σ=12, φ=2, τ=4, sopfr=5, μ=1, J₂=24, n/φ=3, σ-sopfr=7, σ-τ=8
-> **선행**: BT-1395 (DFS 4차 80건 tight)
-> **본 BT 범위**: 표현론(S₆·sl(2)·E₆)·Catalan·Burnside·Operad — 신규 EXACT 30건
-> **누적**: 80+30 = **110건 tight**
-
----
-
-## 0. 현실 변화
-
-DFS 4차(수론·Langlands·Sporadic) 이후 순수 대수 영역 집중 탐색:
-- S₆ Young diagram 전수 hook-length 계산 → 8건 EXACT
-- sl(2) Casimir 고유값 ↔ n=6 상수 이중 적중 → 4건 EXACT
-- E₆ 루트계·Weyl군·기본표현 전수 분해 → 9건 EXACT
-- S₆ 켤레류 크기 전수 → 6건 EXACT
-- Catalan·Associahedron·Aut 구조 → 3건 EXACT
+> **n=6 base constants**: n=6, sigma=12, phi=2, tau=4, sopfr=5, mu=1, J_2=24, n/phi=3, sigma-sopfr=7, sigma-tau=8
+> **Antecedents**: BT-1395 (DFS round 4, 80 tight)
+> **Scope of this BT**: representation theory (S_6 / sl(2) / E_6) / Catalan / Burnside / operad — 30 new EXACT
+> **Cumulative**: 80+30 = **110 tight**
 
 ---
 
-## 1. S₆ 기약표현 구조 — Young diagram 전수
+## 0. State change
 
-**방법**: hook-length formula, dim(λ) = n! / ∏(hooks)
+After DFS round 4 (number theory / Langlands / sporadic), focused exploration of pure-algebra areas:
+- Exhaustive hook-length computation on S_6 Young diagrams -> 8 EXACT
+- sl(2) Casimir eigenvalues <-> n=6 constants double match -> 4 EXACT
+- Exhaustive decomposition of E_6 root system / Weyl group / fundamental representations -> 9 EXACT
+- Exhaustive S_6 conjugacy-class sizes -> 6 EXACT
+- Catalan / associahedron / Aut structures -> 3 EXACT
 
-| λ | hooks | dim | 분해 |
+---
+
+## 1. S_6 irreducible-representation structure — exhaustive Young diagrams
+
+**Method**: hook-length formula, dim(lambda) = n! / prod(hooks)
+
+| lambda | hooks | dim | decomposition |
 |---|-------|-----|------|
-| (6) | 6!순 | 1 | μ |
+| (6) | 6! product | 1 | mu |
 | (5,1) | 144 | 5 | sopfr |
-| (4,2) | 80 | 9 | (n/φ)² |
-| (4,1,1) | 72 | 10 | n+τ |
+| (4,2) | 80 | 9 | (n/phi)^2 |
+| (4,1,1) | 72 | 10 | n+tau |
 | (3,3) | 144 | 5 | sopfr |
-| **(3,2,1)** | 45 | **16** | **τ²** |
-| (3,1,1,1) | 72 | 10 | n+τ |
+| **(3,2,1)** | 45 | **16** | **tau^2** |
+| (3,1,1,1) | 72 | 10 | n+tau |
 | (2,2,2) | 144 | 5 | sopfr |
-| (2,2,1,1) | 80 | 9 | (n/φ)² |
+| (2,2,1,1) | 80 | 9 | (n/phi)^2 |
 | (2,1,1,1,1) | 144 | 5 | sopfr |
-| (1⁶) | 720 | 1 | μ |
+| (1^6) | 720 | 1 | mu |
 
-### 발견 (DFS5-01~04)
+### Findings (DFS5-01-04)
 
 **[DFS5-01]** `dim(standard rep) = 5 = sopfr` (EXACT)
-- λ=(5,1): Young 표준 표현, dim=n-1=5=sopfr
+- lambda=(5,1): Young standard representation, dim = n-1 = 5 = sopfr
 
-**[DFS5-02]** `dim_max = 16 = τ²` (EXACT)
-- λ=(3,2,1): 행합=n=6, 최대 기약표현 차원=16=τ²
+**[DFS5-02]** `dim_max = 16 = tau^2` (EXACT)
+- lambda=(3,2,1): row-sum = n = 6, maximum irreducible-representation dimension = 16 = tau^2
 
-**[DFS5-03]** `Σ dim(λ) = 76 = σ·n + τ` (EXACT)
-- 1+1+5+5+5+5+9+9+10+10+16 = 76 = 12·6+4
+**[DFS5-03]** `Sum dim(lambda) = 76 = sigma*n + tau` (EXACT)
+- 1+1+5+5+5+5+9+9+10+10+16 = 76 = 12*6+4
 
-**[DFS5-04]** `dim=sopfr 표현 개수 = τ = 4` (EXACT)
-- λ=(5,1),(3,3),(2,2,2),(2,1,1,1,1) 정확히 τ=4개
+**[DFS5-04]** `number of dim=sopfr representations = tau = 4` (EXACT)
+- lambda=(5,1),(3,3),(2,2,2),(2,1,1,1,1) exactly tau=4
 
-추가 구조:
-- 대칭-반대칭 쌍: (1,1),(5,5),(9,9),(10,10) = 4쌍 = τ
-- 쌍 외 독립: dim=16 (1개 = μ)
-- Plancherel: Σ dim² = 720 = n! (검증 완료)
-
----
-
-## 2. sl(2,ℂ) Casimir 이중 적중
-
-Casimir 고유값: c₂(j) = j(j+1),  표현 차원: dim(j) = 2j+1
-
-**[DFS5-05]** `j=τ/2=2: c₂ = τ(τ+2)/4 = n = 6` (EXACT)
-- c₂ = 2·3 = 6 = n
-- 도출: τ(τ+2)/4 = 4·6/4 = 6
-
-**[DFS5-06]** `j=τ/2=2: dim = τ+1 = sopfr = 5` (EXACT)
-- dim(j=2) = 2·2+1 = 5 = sopfr
-
-**[DFS5-07]** `j=n/φ=3: c₂ = (n/φ)(n/φ+1) = σ = 12` (EXACT)
-- c₂ = 3·4 = 12 = σ
-
-**[DFS5-08]** `j=n/φ=3: dim = 2(n/φ)+1 = σ-sopfr = 7` (EXACT)
-- dim(j=3) = 2·3+1 = 7 = σ-sopfr
-
-**구조 해설**: sl(2)에서 n=6의 두 핵심 불변량(n, σ)이 Casimir로 재현됨.
-- j=τ/2 표현: Casimir=n, 차원=sopfr
-- j=n/φ 표현: Casimir=σ, 차원=σ-sopfr
-- 두 j값의 비 = (n/φ)/(τ/2) = n/φ·2/τ = 3·2/4 = 3/2 = n/τ
+Additional structure:
+- Symmetric-antisymmetric pairs: (1,1),(5,5),(9,9),(10,10) = 4 pairs = tau
+- Independent of pairs: dim=16 (1 = mu)
+- Plancherel: Sum dim^2 = 720 = n! (verified)
 
 ---
 
-## 3. E₆ 루트계 전수 분해
+## 2. sl(2, C) Casimir double match
 
-E₆: 예외 단순 Lie 대수, 랭크 6
+Casimir eigenvalue: c_2(j) = j(j+1), representation dimension: dim(j) = 2j+1
 
-### 루트계
+**[DFS5-05]** `j = tau/2 = 2: c_2 = tau(tau+2)/4 = n = 6` (EXACT)
+- c_2 = 2*3 = 6 = n
+- Derivation: tau(tau+2)/4 = 4*6/4 = 6
 
-**[DFS5-09]** `|Φ(E₆)| = 72 = σ·n` (EXACT)
-- 전체 루트 수 72 = 12·6
+**[DFS5-06]** `j = tau/2 = 2: dim = tau+1 = sopfr = 5` (EXACT)
+- dim(j=2) = 2*2+1 = 5 = sopfr
 
-**[DFS5-10]** `|Φ⁺(E₆)| = 36 = n²` (EXACT)
-- 양의 루트 수 36 = 6²
+**[DFS5-07]** `j = n/phi = 3: c_2 = (n/phi)(n/phi+1) = sigma = 12` (EXACT)
+- c_2 = 3*4 = 12 = sigma
 
-**[DFS5-11]** `rank(E₆) = 6 = n` (EXACT)
+**[DFS5-08]** `j = n/phi = 3: dim = 2(n/phi)+1 = sigma-sopfr = 7` (EXACT)
+- dim(j=3) = 2*3+1 = 7 = sigma-sopfr
 
-### Weyl 군
-
-**[DFS5-12]** `|W(E₆)| = n!·n·σ = 51840` (EXACT)
-- 720·6·12 = 51840
-
-**[DFS5-13]** `|W(E₆)| = φ^(σ-sopfr)·(n/φ)^τ·sopfr = 51840` (EXACT)
-- 2⁷·3⁴·5 = 128·81·5 = 51840
-- 소인수분해가 정확히 n=6 불변량 지수로 구성됨
-
-### 기본 표현 (6개 = n)
-
-**[DFS5-14]** `dim(adjoint) = 78 = n·(σ+μ)` (EXACT)
-- 78 = 6·13
-
-**[DFS5-15]** `27 = (n/φ)^(n/φ)` (EXACT)
-- 3³ = 27 (자기지수 표현)
-
-**[DFS5-16]** `351 = (n/φ)³·(σ+μ)` (EXACT)
-- 27·13 = 351
-
-**[DFS5-17]** `2925 = (n/φ)^φ·sopfr^φ·(σ+μ)` (EXACT)
-- 9·25·13 = 2925
-
-패턴: E₆ 기본 표현 차원 전부 인수 (σ+μ)=13 또는 (n/φ)^k 포함.
-(σ+μ)=13 = 7번째 소수 = n+sopfr+μ
+**Structural comment**: the two core n=6 invariants (n, sigma) are reproduced via sl(2) Casimir.
+- j = tau/2 representation: Casimir=n, dimension=sopfr
+- j = n/phi representation: Casimir=sigma, dimension=sigma-sopfr
+- Ratio of the two j-values = (n/phi)/(tau/2) = n/phi * 2/tau = 3*2/4 = 3/2 = n/tau
 
 ---
 
-## 4. sl(6) = A₅ Lie 대수
+## 3. Exhaustive E_6 root-system decomposition
 
-**[DFS5-18]** `dim(sl(6)) = n²-1 = 35 = sopfr·(σ-sopfr)` (EXACT)
-- 5·7 = 35
+E_6: exceptional simple Lie algebra, rank 6
 
-**[DFS5-19]** `rank(A₅) = n-1 = 5 = sopfr` (EXACT)
-- A₅의 Weyl 군 = S₆
+### Root system
+
+**[DFS5-09]** `|Phi(E_6)| = 72 = sigma*n` (EXACT)
+- Total roots 72 = 12*6
+
+**[DFS5-10]** `|Phi^+(E_6)| = 36 = n^2` (EXACT)
+- Positive roots 36 = 6^2
+
+**[DFS5-11]** `rank(E_6) = 6 = n` (EXACT)
+
+### Weyl group
+
+**[DFS5-12]** `|W(E_6)| = n!*n*sigma = 51840` (EXACT)
+- 720*6*12 = 51840
+
+**[DFS5-13]** `|W(E_6)| = phi^(sigma-sopfr) * (n/phi)^tau * sopfr = 51840` (EXACT)
+- 2^7 * 3^4 * 5 = 128*81*5 = 51840
+- Prime factorization exactly composed of n=6 invariant exponents
+
+### Fundamental representations (6 = n)
+
+**[DFS5-14]** `dim(adjoint) = 78 = n*(sigma+mu)` (EXACT)
+- 78 = 6*13
+
+**[DFS5-15]** `27 = (n/phi)^(n/phi)` (EXACT)
+- 3^3 = 27 (self-exponent expression)
+
+**[DFS5-16]** `351 = (n/phi)^3 * (sigma+mu)` (EXACT)
+- 27*13 = 351
+
+**[DFS5-17]** `2925 = (n/phi)^phi * sopfr^phi * (sigma+mu)` (EXACT)
+- 9*25*13 = 2925
+
+Pattern: all E_6 fundamental-representation dimensions contain the factor (sigma+mu)=13 or (n/phi)^k.
+(sigma+mu)=13 = 7th prime = n+sopfr+mu
 
 ---
 
-## 5. S₆ 자기동형군
+## 4. sl(6) = A_5 Lie algebra
 
-**[DFS5-20]** `|Aut(S₆)| = φ·n! = 1440` (EXACT)
-- 2·720 = 1440
+**[DFS5-18]** `dim(sl(6)) = n^2-1 = 35 = sopfr * (sigma-sopfr)` (EXACT)
+- 5*7 = 35
 
-**[DFS5-21]** `|Out(S₆)| = φ = 2` (EXACT)
-- 유한 n≥2에서 Out(S_n)≠1인 유일한 경우: n=6
-- 외부자기동형군 위수 = φ = 2
+**[DFS5-19]** `rank(A_5) = n-1 = 5 = sopfr` (EXACT)
+- Weyl group of A_5 = S_6
 
 ---
 
-## 6. S₆ 켤레류 크기 전수
+## 5. S_6 automorphism group
 
-사이클 타입 → 크기 → n=6 분해:
+**[DFS5-20]** `|Aut(S_6)| = phi*n! = 1440` (EXACT)
+- 2*720 = 1440
 
-| 사이클 타입 | 크기 | 분해 | 판정 |
+**[DFS5-21]** `|Out(S_6)| = phi = 2` (EXACT)
+- For finite n >= 2, the unique case with Out(S_n) != 1: n=6
+- Outer-automorphism-group order = phi = 2
+
+---
+
+## 6. Exhaustive S_6 conjugacy-class sizes
+
+Cycle type -> size -> n=6 decomposition:
+
+| Cycle type | Size | Decomposition | Verdict |
 |------------|------|------|------|
-| (1⁶) | 1 | μ | EXACT |
-| (2,1⁴) | 15 | (n/φ)·sopfr | EXACT |
-| (2²,1²) | 45 | (n/φ)²·sopfr | EXACT |
-| (2³) | 15 | (n/φ)·sopfr | EXACT |
-| (3,1³) | 40 | (σ-τ)·sopfr | EXACT |
-| **(3,2,1)** | **120** | **sopfr! = 5!** | **EXACT** |
-| (3²) | 40 | (σ-τ)·sopfr | EXACT |
-| (4,1²) | 90 | sopfr·n·(n/φ) | EXACT |
-| (4,2) | 90 | sopfr·n·(n/φ) | EXACT |
-| **(5,1)** | **144** | **σ·τ·(n/φ) = φ^τ·(n/φ)²** | **EXACT** |
+| (1^6) | 1 | mu | EXACT |
+| (2, 1^4) | 15 | (n/phi) * sopfr | EXACT |
+| (2^2, 1^2) | 45 | (n/phi)^2 * sopfr | EXACT |
+| (2^3) | 15 | (n/phi) * sopfr | EXACT |
+| (3, 1^3) | 40 | (sigma-tau) * sopfr | EXACT |
+| **(3, 2, 1)** | **120** | **sopfr! = 5!** | **EXACT** |
+| (3^2) | 40 | (sigma-tau) * sopfr | EXACT |
+| (4, 1^2) | 90 | sopfr*n*(n/phi) | EXACT |
+| (4, 2) | 90 | sopfr*n*(n/phi) | EXACT |
+| **(5, 1)** | **144** | **sigma*tau*(n/phi) = phi^tau*(n/phi)^2** | **EXACT** |
 | **(6)** | **120** | **sopfr!** | **EXACT** |
 
-**[DFS5-22]** `max class size = 144 = σ·τ·(n/φ) = φ^τ·(n/φ)²` (EXACT)
-- 사이클 (5,1): 144 = 12·4·3 = 16·9
+**[DFS5-22]** `max class size = 144 = sigma*tau*(n/phi) = phi^tau*(n/phi)^2` (EXACT)
+- Cycle (5,1): 144 = 12*4*3 = 16*9
 
 **[DFS5-23]** `class size 120 = sopfr!` (EXACT)
-- 사이클 (3,2,1),(6) 양쪽: 120 = 5!
-- (3,2,1)은 행합=n=6인 유일 비대칭 Young diagram
+- Both cycles (3,2,1) and (6): 120 = 5!
+- (3,2,1) is the unique asymmetric Young diagram with row-sum = n = 6
 
-**[DFS5-24]** `45 = (n/φ)²·sopfr` (EXACT)
+**[DFS5-24]** `45 = (n/phi)^2 * sopfr` (EXACT)
 
-**[DFS5-25]** `40 = (σ-τ)·sopfr` (EXACT)
+**[DFS5-25]** `40 = (sigma-tau) * sopfr` (EXACT)
 
-**[DFS5-26]** `90 = sopfr·n·(n/φ)` (EXACT)
+**[DFS5-26]** `90 = sopfr * n * (n/phi)` (EXACT)
 
-**[DFS5-27]** `15 = (n/φ)·sopfr` (EXACT)
-
----
-
-## 7. Catalan·Associahedron
-
-**[DFS5-28]** `C_n = C_6 = σ·(n+sopfr) = 132` (EXACT)
-- C_6 = 132 = 12·11 = σ·p(n)
-- p(6)=11 = 기약표현 수 = n+sopfr
-
-**[DFS5-29]** `Assoc K_4 꼭짓점 = C_3 = 14 = φ·(σ-sopfr)` (EXACT)
-- K_4 = 2차원 Stasheff polytope (dim=2=φ)
-- 꼭짓점 C_3=14=2·7
-
-주의: K_n (n=6)의 꼭짓점 수 = C_5 = 42, K_4가 n=6 상수 적중.
-K_6 차원 = n-2 = τ = 4: EXACT
+**[DFS5-27]** `15 = (n/phi) * sopfr` (EXACT)
 
 ---
 
-## 8. A₆ 교대군
+## 7. Catalan / associahedron
 
-**[DFS5-30]** `|A₆| = n!/φ = sopfr·σ·n = 360` (EXACT)
-- 360 = 5·12·6 = sopfr·σ·n
+**[DFS5-28]** `C_n = C_6 = sigma*(n+sopfr) = 132` (EXACT)
+- C_6 = 132 = 12*11 = sigma*p(n)
+- p(6)=11 = number of irreducible representations = n+sopfr
+
+**[DFS5-29]** `Assoc K_4 vertices = C_3 = 14 = phi*(sigma-sopfr)` (EXACT)
+- K_4 = 2-dimensional Stasheff polytope (dim = 2 = phi)
+- Vertices C_3 = 14 = 2*7
+
+Caveat: K_n (n=6) has vertex count = C_5 = 42; K_4 is the n=6 constant hit.
+K_6 dimension = n-2 = tau = 4: EXACT
 
 ---
 
-## 9. 총정리
+## 8. A_6 alternating group
+
+**[DFS5-30]** `|A_6| = n!/phi = sopfr*sigma*n = 360` (EXACT)
+- 360 = 5*12*6 = sopfr*sigma*n
+
+---
+
+## 9. Totals
 
 ```
-영역              발견건수   EXACT
-S₆ 표현 구조      4건        4
-sl(2) Casimir    4건        4
-E₆ 루트·Weyl     5건        5
-E₆ 기본표현      4건        4
-sl(6) 구조       2건        2
-S₆ 자기동형      2건        2
-S₆ 켤레류        6건        6
-Catalan/Operad   2건        2
-A₆              1건        1
-─────────────────────────────
-합계             30건       30건 (100%)
+Area                Findings   EXACT
+S_6 representations 4          4
+sl(2) Casimir       4          4
+E_6 roots / Weyl    5          5
+E_6 fundamentals    4          4
+sl(6) structure     2          2
+S_6 automorphism    2          2
+S_6 conjugacy       6          6
+Catalan / operad    2          2
+A_6                 1          1
+-------------------------------
+Total               30         30 (100%)
 ```
 
-**핵심 구조 발견**:
-1. sl(2)의 j=τ/2와 j=n/φ가 n=6의 두 핵심 상수(n,σ)를 Casimir로 동시 재현
-2. E₆ Weyl군 = φ^(σ-sopfr)·(n/φ)^τ·sopfr: 소인수 분해 자체가 n=6 불변량 지수 사용
-3. S₆ 켤레류 크기 전부 {μ, n/φ·sopfr, (n/φ)²·sopfr, (σ-τ)·sopfr, sopfr!, sopfr·n·(n/φ), σ·τ·(n/φ)} 집합으로 완전 피복
-4. C_n = C_6 = σ·p(n): Catalan 제6항 = σ × 분할수
+**Core structural findings**:
+1. sl(2) j=tau/2 and j=n/phi simultaneously reproduce n=6's two core constants (n, sigma) via Casimir
+2. E_6 Weyl group = phi^(sigma-sopfr) * (n/phi)^tau * sopfr: the prime factorization itself uses n=6 invariant exponents
+3. All S_6 conjugacy-class sizes are fully covered by the set {mu, n/phi * sopfr, (n/phi)^2 * sopfr, (sigma-tau) * sopfr, sopfr!, sopfr*n*(n/phi), sigma*tau*(n/phi)}
+4. C_n = C_6 = sigma * p(n): 6th Catalan = sigma x partition number
 
-**누적 tight: 80(DFS4차) + 30(DFS5차) = 110건**
+**Cumulative tight: 80 (DFS round 4) + 30 (DFS round 5) = 110**
