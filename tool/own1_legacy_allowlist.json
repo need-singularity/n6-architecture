@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 20,
+    "count": 19,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -591,14 +591,12 @@
     "papers/moonshine-barrier-honest-report-2026-04-15.md",
     "papers/n6-hexa-chip-7dan-integrated-paper.md",
     "papers/n6-hexa-consciousness-integrated-paper.md",
-    "papers/n6-hexa-starship-integrated-paper.md",
     "papers/n6-ultimate-superconductor-integrated-paper.md",
     "reports/sessions/specs/2026-04-02-kstar-300s-steady-state-design.md",
     "reports/sessions/specs/2026-04-02-kstar-n6-tokamak-design.md",
     "reports/sessions/specs/2026-04-02-ultimate-fusion-powerplant-design.md",
     "theory/breakthroughs/breakthrough-theorems.md",
-    "theory/constants/atlas-constants.md",
-    "theory/roadmap-v2/_archive-phase-01-forced-3-axes.md"
+    "theory/constants/atlas-constants.md"
   ],
   "shrink_history": [
     {
@@ -646,6 +644,14 @@
       "entry": "theory/roadmap-v2/n6arch-axes/axis-r1-emergence.md",
       "new_count": 22,
       "note": "B12 part B RED-lite - axis-r1-emergence.md (907L, CJK 5258 -> 0) translated. n6-arch subproject 7 Millennium Problems R1 axis emergence: 30 seeds, 7 candidate axes (NUM-CORE, DISCRETE-CLASS, PDE-RESONANCE, GALOIS-ASSEMBLY, LATTICE-VOA, PHYSICAL-NATURALNESS, HONEST-HARNESS)."
+    },
+    {
+      "phase": "phase-6-D-B12B-archive-phase-01",
+      "removed": [
+        "theory/roadmap-v2/_archive-phase-01-forced-3-axes.md"
+      ],
+      "count_after": 19,
+      "date": "2026-04-25"
     }
   ]
 }
