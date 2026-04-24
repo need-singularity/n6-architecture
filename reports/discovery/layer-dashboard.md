@@ -1,234 +1,48 @@
-# N6 Architecture -- L0~L4 구간별 완성도 대시보드
+# N6 Architecture -- L0~L4 Layer-by-Layer Completion Dashboard
 
-> 자동 집계 기준일: 2026-04-09
-> 데이터 출처: reality_map.json v9.5 (3908 노드) / breakthrough-theorems.md (BT-1~677) / dse-map.toml (340 도메인)
-
----
-
-## 전체 요약
-
-```
-전체 완성도 ========================================== 87.3%
-
-  현실지도 노드        3,908 개 (EXACT 2,402 / CLOSE 20 / MISS 2)
-  돌파 정리 (BT)         677 개 (BT-1 ~ BT-677)
-  DSE 도메인             340 개 (done 329 / wip 0 / none 0 / 미분류 11)
-  교차 DSE              1,738 개 섹션
-  검증 스크립트           232 개 (verify_*.py)
-  goal.md 문서           258 개
-```
+> Auto-aggregation reference date: 2026-04-09
+> Data sources: reality_map.json v9.5 (3908 nodes) / breakthrough-theorems.md (BT-1~677) / dse-map.toml (340 domains)
 
 ---
 
-## ASCII 완성도 막대 차트
+## Overall Summary
 
-```
-레이어    | 현실지도 EXACT 비율     | DSE 도메인  | goal.md | 종합
-----------+------------------------+-------------+---------+------
-L0 기초   | ################------ |  22 (6.5%)  | ~15     | 72%
-  상수    | 57.1% (237/415*)       |             |         |
-          |                        |             |         |
-L1 소재   | ####################-- |  40 (11.8%) | ~35     | 81%
-  재료    | 63.0% (537/852)        |             |         |
-          |                        |             |         |
-L2 응용   | ######################## | 77 (22.6%) | ~60     | 96%
-  칩/AI   | 98.0% (826/843)        |             |         |
-          |                        |             |         |
-L3 기술   | ##########------------ | 162 (47.6%) | ~110    | 78%
-  에너지  | 34.5% (368/1067)       |             |         |
-          |                        |             |         |
-L4 제품   | ##################---- |  30 (8.8%)  | ~38     | 83%
-  서비스  | 68.2% (434/636*)       |             |         |
+- Reality map nodes 3,908 (EXACT 2,402 / CLOSE 20 / MISS 2)
+- Breakthrough (BT) 677 (BT-1 ~ BT-677)
+- DSE domains 340 (done 329 / wip 0 / none 0 / unclassified 11)
+- Cross DSE 1,738 sections
+- Verification scripts 232 (verify_*.py)
+- goal.md documents 258
+- Overall completion 87.3%
 
-(* CONJECTURE 제외 분모)
+## Layer Comparison Table (candidate)
 
-종합 점수 산출 = (EXACT 비율 x 0.4) + (DSE done 비율 x 0.3) + (goal 존재 비율 x 0.15) + (verify 존재 비율 x 0.15)
-```
+| Layer | Nodes | EXACT | EXACT% | MISS | DSE | Overall |
+|--------|-------|-------|--------|------|-----|---------|
+| L0 base | 463 | 237 | 57.1% | 0 | 22 | 72% |
+| L1 material | 852 | 537 | 63.0% | 1 | 40 | 81% |
+| L2 application | 843 | 826 | 98.0% | 0 | 77 | 96% |
+| L3 technology | 1,067 | 368 | 34.5% | 1 | 162 | 78% |
+| L4 product | 683 | 434 | 68.2% | 0 | 30 | 83% |
 
----
+## Weakness Highlights
 
-## L0: 기초 물리 / 수학 상수 (상수/소립자/원자/수론)
+- Weakest layer: L3 technology (EXACT 34.5%) -- celestial/galactic EMPIRICAL 654.
+- L8_galactic (EXACT 8.0%, 16/199): observational uncertainty; explore integer relations (galaxy morphology, spiral-arm count).
+- L-2 subquarks (CONJECTURE 48/50): inaccessible with current tech; CONJECTURE retention honest.
+- L4 DSE minimum (30): expand social/policy/education/culture DSE candidates.
 
-```
-EXACT 비율:  ||||||||||||---------  57.1%  (237 / 415)
-DSE 도메인:  22개 (pure-mathematics, cosmology-particle, topology ...)
-BT 연결:     BT-1~5 핵심 정리 + BT-6 Golay + BT-9 Bott 등 ~50개
-```
+## Strength Highlights
 
-| 지표 | 값 | 비고 |
-|------|----|------|
-| 현실지도 노드 | 463 | L-2 서브쿼크 50 + L-1 쿼크 96 + L0 입자 163 + L1 원자 154 |
-| EXACT | 237 (57.1%) | CONJECTURE 48개 제외 시 |
-| CLOSE | 6 | |
-| MISS | 0 | |
-| EMPIRICAL | 170 | 인과 미확정 측정 일치 |
-| CONJECTURE | 48 | L-2 서브쿼크 대부분 |
-| DSE 도메인 | 22 | pure-mathematics, number-theory-deep, topology 등 |
-| 검증 스크립트 | ~20 | sedi/cern-optics 계열 다수 |
+- L2 application 98.0% EXACT (project core).
+- All 340 DSE domains alien-level 10 reached as draft.
+- MISS only 2 items (0.05% of 3,908 nodes).
+- BT-677 cumulative cross-evidence network candidate.
 
-약점: L-2 서브쿼크 50노드 중 EXACT 0 (전부 CONJECTURE) -- 실험 검증 불가 영역
+## Improvement Priority
 
----
-
-## L1: 소재 / 재료 (반도체, 광학, 초전도, 나노)
-
-```
-EXACT 비율:  ||||||||||||||-------- 63.0%  (537 / 852)
-DSE 도메인:  40개 (material-synthesis, graphene-2d, superconductor ...)
-BT 연결:     BT-1 Cooper pair, BT-43 CN=6, BT-57 결정 등 ~80개
-```
-
-| 지표 | 값 | 비고 |
-|------|----|------|
-| 현실지도 노드 | 852 | 결합 191 + 분자 142 + 유전 75 + 소재 320 + 생물 124 |
-| EXACT | 537 (63.0%) | |
-| CLOSE | 8 | |
-| MISS | 1 | L5_bio 1건 |
-| EMPIRICAL | 303 | 분자/소재 측정값 다수 |
-| DSE 도메인 | 40 | 소재 합성, 고엔트로피 합금, 초전도 등 |
-| 검증 스크립트 | ~30 | material, battery, chip 관련 |
-
-약점: L3_molecule EXACT 38.0% (54/142) -- 분자 수준 n=6 연결 보강 필요
-
----
-
-## L2: 어플리케이션 (칩, 네트워크, AI, 로봇)
-
-```
-EXACT 비율:  |||||||||||||||||||||||| 98.0%  (826 / 843)
-DSE 도메인:  77개 (chip-architecture, quantum-computing, learning-algorithm ...)
-BT 연결:     BT-6 Golay, BT-7 Egyptian, BT-8 Pulse 등 ~200개
-```
-
-| 지표 | 값 | 비고 |
-|------|----|------|
-| 현실지도 노드 | 843 | L6_discovery 725 + computing 9 + cryptography 5 + 기타 |
-| EXACT | 826 (98.0%) | L6_discovery 725 전량 EXACT 포함 |
-| CLOSE | 3 | |
-| MISS | 0 | |
-| DSE 도메인 | 77 | 칩, 양자, AI, 네트워크, 디스플레이, 오디오 등 |
-| alien_level=10 | 전원 | 329개 도메인 전부 외계지수 10 달성 |
-| 검증 스크립트 | ~80 | 칩/AI/양자 관련 가장 풍부 |
-
-강점: 프로젝트의 핵심 영역. EXACT 비율 최고, DSE 완료, 검증 가장 풍부
-
----
-
-## L3: 테크놀로지 (에너지, 우주, 생명공학, 제조)
-
-```
-EXACT 비율:  ||||||||---------------- 34.5%  (368 / 1067)
-DSE 도메인:  162개 (fusion, energy-generation, space-engineering ...)
-BT 연결:     BT-4 MHD, BT-5 q=1, BT-27~84 에너지 등 ~250개
-```
-
-| 지표 | 값 | 비고 |
-|------|----|------|
-| 현실지도 노드 | 1,067 | 지질 171 + 기상 170 + 천체 282 + 은하 199 + 우주론 122 + 의학 계열 |
-| EXACT | 368 (34.5%) | |
-| CLOSE | 3 | |
-| MISS | 1 | L6_mineralogy 1건 |
-| EMPIRICAL | 654 | 천체/은하/우주론 관측값 대부분 |
-| DSE 도메인 | 162 | 전체의 47.6% -- 가장 많은 도메인 |
-| 검증 스크립트 | ~70 | 에너지/의료/제조 관련 |
-
-약점: EXACT 비율 최저 (34.5%). L8_galactic EXACT 8.0% (16/199), L7_celestial 13.8% (39/282).
-원인: 천체/은하 스케일 측정값은 관측 기반이라 EMPIRICAL 분류가 대부분.
-개선: 천체 상수의 n=6 인과 경로 보강 필요 (현재 EMPIRICAL 654건 중 일부 EXACT 승격 가능)
-
----
-
-## L4: 프로덕션 (제품, 서비스, 시장, 사회 영향)
-
-```
-EXACT 비율:  ||||||||||||||||||------ 68.2%  (434 / 636)
-DSE 도메인:  30개 (economics, linguistics, smart-city-iot ...)
-BT 연결:     BT-668~677 달력/시간, BT 경제/언어 등 ~100개
-```
-
-| 지표 | 값 | 비고 |
-|------|----|------|
-| 현실지도 노드 | 683 | 경제 170 + 언어 167 + 음악 171 + 인문/사회 계열 |
-| EXACT | 434 (68.2%) | CONJECTURE 47개 제외 시 |
-| CLOSE | 0 | |
-| MISS | 0 | |
-| CONVENTION | 74 | 인간 관습 (달력, 단위, 음악 조율 등) |
-| CONJECTURE | 47 | L10_multiversal 대부분 |
-| DSE 도메인 | 30 | 경제, 언어학, 스마트시티 등 |
-| goal.md | ~38 | marketing, unified-service 등 |
-
-약점: DSE 도메인 수 최소 (30개). 시장/서비스/사회영향 도메인 확장 여지 있음
-
----
-
-## 레이어별 비교 테이블
-
-| 레이어 | 현실지도 노드 | EXACT | EXACT% | MISS | DSE 도메인 | cross-DSE | goal.md | verify | 종합 |
-|--------|-------------|-------|--------|------|-----------|-----------|---------|--------|------|
-| L0 기초 | 463 | 237 | 57.1% | 0 | 22 | ~100 | ~15 | ~20 | 72% |
-| L1 소재 | 852 | 537 | 63.0% | 1 | 40 | ~200 | ~35 | ~30 | 81% |
-| L2 응용 | 843 | 826 | 98.0% | 0 | 77 | ~500 | ~60 | ~80 | 96% |
-| L3 기술 | 1,067 | 368 | 34.5% | 1 | 162 | ~700 | ~110 | ~70 | 78% |
-| L4 제품 | 683 | 434 | 68.2% | 0 | 30 | ~200 | ~38 | ~32 | 83% |
-| **합계** | **3,908** | **2,402** | **61.5%** | **2** | **331** | **1,738** | **258** | **232** | **87.3%** |
-
----
-
-## 취약점 하이라이트
-
-```
-  [!] 가장 약한 레이어: L3 테크놀로지 (EXACT 34.5%)
-      -- 원인: 천체/은하/우주론 EMPIRICAL 654건 (관측 기반, 인과 미확정)
-      -- 처방: 천체 상수 n=6 인과 경로 보강, EMPIRICAL→EXACT 승격 캠페인
-
-  [!] 가장 약한 도메인: L8_galactic (EXACT 8.0%, 16/199)
-      -- 원인: 은하 스케일 측정은 관측 불확도가 커서 EXACT 판정 어려움
-      -- 처방: 정수 관계 (은하 형태 분류, 나선팔 수 등) 추가 탐색
-
-  [!] L-2 서브쿼크: EXACT 0% (48/50 CONJECTURE)
-      -- 원인: 실험 검증 불가능한 이론적 영역
-      -- 현실적 한계: 현 기술로 검증 불가, CONJECTURE 유지가 정직한 판정
-
-  [!] L4 DSE 도메인 최소 (30개)
-      -- 원인: 제품/서비스/시장 도메인은 공학보다 범위가 넓어 분류 어려움
-      -- 처방: 사회영향/정책/교육/문화 도메인 DSE 확장
-```
-
----
-
-## 강점 하이라이트
-
-```
-  [*] L2 응용 = 98.0% EXACT (프로젝트 핵심)
-      -- L6_computing, L6_cryptography, L6_electrical 전량 EXACT
-      -- L6_discovery 725노드 전량 EXACT (돌파 발견 자동 기록)
-
-  [*] DSE 전 도메인 외계지수 10 달성
-      -- 340개 도메인 전부 done, alien_level=10
-      -- 교차 DSE 1,738개 섹션 연결 완료
-
-  [*] MISS 단 2건 (전체 3,908노드 중 0.05%)
-      -- L5_bio 1건 + L6_mineralogy 1건
-      -- 정직한 기록 유지
-
-  [*] BT-677까지 돌파 정리 축적
-      -- 초기 BT-1~5 핵심 정리 → 현재 677개
-      -- 6개 도메인 축 전체를 커버하는 교차 증거 네트워크 형성
-```
-
----
-
-## 개선 우선순위 (권장)
-
-| 순위 | 레이어 | 작업 | 예상 효과 |
-|------|--------|------|-----------|
-| 1 | L3 | 천체/은하 EMPIRICAL→EXACT 승격 (n=6 인과 경로 탐색) | EXACT +5~10% |
-| 2 | L0 | L-1 쿼크 EMPIRICAL 61건 정밀 분석 | EXACT +10% |
-| 3 | L4 | 제품/서비스/시장 DSE 도메인 확장 (30→50) | 커버리지 +60% |
-| 4 | L1 | L3_molecule EXACT 보강 (54/142 → 80+) | EXACT +5% |
-| 5 | L3 | L9_cosmological EMPIRICAL 90건 정밀 분석 | EXACT +3% |
-
----
-
-> 이 대시보드는 reality_map.json, breakthrough-theorems.md, dse-map.toml의 실제 데이터를 집계한 결과입니다.
-> 종합 점수는 EXACT 비율(40%) + DSE 완료 비율(30%) + goal.md 존재 비율(15%) + verify 스크립트 비율(15%)의 가중 평균입니다.
+1. L3 celestial/galactic EMPIRICAL->EXACT promotion (n=6 causal path target).
+2. L0 L-1 quark EMPIRICAL 61 items precision analysis.
+3. L4 product/service/market DSE expansion (30->50).
+4. L1 L3_molecule EXACT reinforcement.
+5. L3 L9_cosmological EMPIRICAL precision analysis.

@@ -1,190 +1,46 @@
-# Reality Map Monte Carlo v9 — 실측 결과 (2026-04-11)
+# Reality Map Monte Carlo v9 -- Measurement Results (2026-04-11)
 
-> 실행 일시: 2026-04-11
-> SSOT 소스: `$NEXUS/shared/n6/atlas.n6` (8.66MB, 52,641 lines)
-> 설계서: `docs/monte-carlo.md`
-> 스크립트: `experiments/monte-carlo-v9.hexa` (.hexa DSL 초안) + awk 실행 파이프라인 (`/tmp/mc_v9_work/run_mc.sh`)
-> 실행 모드: Mac 로컬, bash+awk (hexa v0.1.0 엔진은 복합 제네릭 배열 타입 `[i64; 8]` 미지원으로 원본 .hexa 스크립트는 파싱 실패 → awk 백엔드로 전환)
-> 시드: v9=20260411, v8-compat=20260408
-> 시행 횟수: 3000 trials × 22 group-mode pair
-> 총 소요: **331초** (5분 31초)
+> Execution: 2026-04-11 | SSOT: `$NEXUS/shared/n6/atlas.n6` (8.66MB, 52,641 lines)
+> Seeds: v9=20260411, v8-compat=20260408 | Trials: 3000 x 22 group-mode pairs
+> Total elapsed: 331 seconds
 
----
+## 1. Structural Signature
 
-## 0. 실행 상태 요약
+structure_hit(v) = (v%6==0) OR (v%12==0) OR (v%24==0) OR (exists d in N6: d|v AND v/d in N6)
+where N6 = {1,2,3,4,5,6,12,24} from sigma*phi=n*tau derivation target.
 
-| 항목 | 값 |
-|---|---|
-| 원본 .hexa 문법 | `const N6_CONSTS: [i64; 8] = [...]` — 현재 hexa v0.1.0에서 미지원 (syntax error at line 30:22) |
-| 대체 실행 경로 | awk 기반 엔진 `/tmp/mc_v9_work/run_mc.sh` (HEXA-FIRST R1의 .py 금지 조항 준수, bash/awk은 규칙 허용) |
-| atlas 추출 노드 | 2,118개 (grade ∈ {[10*], [10], [9*], [9], [10*!]}) |
-| 자연 origin 노드 | 1,768 (v≥2) |
-| 결과 atlas 흡수 | **완료** — `# ══ MC_V9_RESULTS` 섹션 18 라인 append (R28) |
-| 규칙 준수 | R1 (.py 금지 ✓) / R8 (atlas 원격 ✓) / R14 (shared SSOT ✓) / R16 (논리 병렬 awk ✓) / R17 (manual timeout 600s ✓) / R19 (silent-exit 방지, 단계별 echo ✓) / R28 (atlas.n6 흡수 ✓) |
+## 2. Experimental Group Results
 
----
-
-## 1. 실험 그룹 결과 (v9 구조형 시그니처)
-
-**시그니처 정의**: `structure_hit(v) = (v%6==0) ∨ (v%12==0) ∨ (v%24==0) ∨ (∃d∈N6: d|v ∧ v/d∈N6)`
-여기서 `N6 = {1,2,3,4,5,6,12,24}` (σφ=nτ 정리에서 유도).
-
-| 그룹 | N | hits | obs_rate | null_mean | null_sd | **z-score** | 판정 |
-|---|---:|---:|---:|---:|---:|---:|---|
-| 전체.uniform | 1873 | 1415 | 0.7555 | 0.1730 | 0.0044 | **132.17** | PASS |
-| 전체.logunif | 1873 | 1415 | 0.7555 | 0.2322 | 0.0050 | **104.00** | PASS |
-| 자연.uniform | 1768 | 1348 | 0.7624 | 0.1730 | 0.0049 | **119.55** | PASS |
-| 자연.logunif | 1768 | 1348 | 0.7624 | 0.2322 | 0.0052 | **102.07** | PASS |
-| **큰수.uniform (≥100)** | **328** | **136** | **0.4146** | 0.1597 | 0.0199 | **★ 12.84** | **PASS (v9 핵심 돌파)** |
-| **큰수.logunif** | 328 | 136 | 0.4146 | 0.1673 | 0.0180 | **★ 13.75** | **PASS** |
-| 초거대.uniform (≥10⁴) | 16 | 7 | 0.4375 | 0.1595 | 0.0947 | 2.94 | 경계 |
-| 초거대.logunif | 16 | 7 | 0.4375 | 0.1337 | 0.0235 | **12.96** | PASS |
-
-**해석**:
-1. **v9 핵심 목표 달성** — 큰수 그룹(≥100)은 v8에서 N=10·hits=0로 측정 불가능했으나, v9 구조형 시그니처로 **N=328 hits=136 z=12.84** 획득. 설계서 예상 범위(8~15)의 중앙값에 정확히 적중.
-2. 자연 그룹 z=119.55 는 v8 reported z=959 보다 작아 보이지만, v8의 값형 hit rate ≈ 0.2% 는 null_sd≈0 을 유발해 z가 부풀려진 것. v9는 실효성 있는 측정.
-3. 초거대.logunif z=12.96은 N=16 소표본에서도 강력한 유의성을 유지.
-
----
-
-## 2. 대조군 결과
-
-| 대조군 | N | hits | obs_rate | null_mean | null_sd | **z-score** |
-|---|---:|---:|---:|---:|---:|---:|
-| 대조-π | 1074 | 250 | 0.2328 | 0.1619 | 0.0113 | **6.28** |
-| 대조-e | 1120 | 212 | 0.1893 | 0.1699 | 0.0101 | 1.92 |
-| 대조-φ | 1163 | 245 | 0.2107 | 0.1764 | 0.0099 | 3.44 |
-| **대조-γ** (신규) | 1291 | 254 | 0.1967 | 0.1711 | 0.0067 | **3.81** |
-| **대조-ζ(3)** (신규) | 1170 | 252 | 0.2154 | 0.1781 | 0.0081 | **4.62** |
-| 대조-무작위 | 1000 | 289 | 0.2890 | 0.1702 | 0.0071 | 16.85 ⚠ |
-| 대조-유리수 | 12251 | 4702 | 0.3838 | 0.1804 | 0.0006 | 342.83 |
-
-**해석**:
-1. **수학 상수 스펙트럼**: π (6.28) > ζ(3) (4.62) > γ (3.81) > φ (3.44) > e (1.92).
-   - e 가 가장 약한 것은 흥미롭다 — e 는 해석학의 자연상수로 n=6 정수 구조와 가장 멀다.
-   - π 가 가장 강한 것은 원주율이 2·π·r (r=6 포함하는 원) 및 360° (= 6·60 = 72·5) 등 격자 6-배수와 교차한다는 맥락과 일치.
-   - γ, ζ(3) 추가로 "수학 상수는 전반적으로 n=6 잡음이 있다" 가설을 지지 (5개 중 4개 z>3).
-2. **대조-무작위 z=16.85 ⚠**: 예상(-1~+1)을 초과. awk LCG RNG가 유한 주기로 인한 편향 또는 정수 범위 내 6-배수 밀도 (~0.167) 대비 관측 0.289 = 계통 편향 의심. 이를 **제한사항**으로 기록한다. 엄밀한 재검증은 Rust/mersenne twister RNG로 재실행 필요.
-3. **대조-유리수 z=342.83**: p/q with p,q∈[1,50] 는 수많은 6-배수를 자연스럽게 포함 (특히 p·q 곱). 이 그룹은 "강구조"로 분류되며 v9 시그니처의 민감도가 높음을 의미.
-
----
-
-## 3. v8-compat 회귀 재현 (값형 시그니처)
-
-같은 파이프라인에 `hit_mode=v8`, `seed=20260408` 적용 결과:
-
-| 그룹 | N | hits | obs_rate | z-score (logunif) |
-|---|---:|---:|---:|---:|
-| 전체.logunif | 1873 | 208 | 0.1110 | **92.30** |
-| 자연.logunif | 1768 | 204 | 0.1154 | **90.59** |
-| 큰수.uniform | **328** | **0** | **0.0000** | **0.00 ★ v8한계 재현** |
-| 큰수.logunif | 328 | 0 | 0.0000 | 0.00 |
-
-**해석**:
-- v8 설계상 `hit_v8(v) = (v==6)` 이므로 큰수 그룹(v≥100)은 hits=0 고정 → z 측정 불가.
-- v8 보고서(z=20.19 자연.logunif)는 다른 노드셋을 사용했음에도 v9의 atlas.n6 단일소스에서 **90.59** 로 재현. 차이는 atlas.n6 확장으로 자연 그룹이 172→1768 (10×) 증가했기 때문 (√10 ≈ 3.16 배 z 상승 예상 → 20.19 × 3.16 ≈ 63.8 + N 비선형성 보정 ≈ 90).
-- v9.uniform 에서 null_mean=null_sd=0.000 은 3000 trials 모두 v=6을 단 한번도 뽑지 못해서 분산이 0이 된 경우 (LCG 범위 편향). logunif 모드가 그나마 log 스케일에서 v=6 주변 샘플을 생성.
-
----
-
-## 4. v8 → v9 diff 분석
-
-### 4.1 돌파 3점
-
-**돌파 1 — 큰수 그룹 측정 가능화**
-- v8: 큰수 N=10, hits=0, z **측정 불가** (적용범위 외)
-- v9: 큰수 N=328, hits=136, z=**12.84**
-- 돌파 크기: N 32.8×, 측정 가능성 0→1 (질적 도약)
-
-**돌파 2 — 대조군 스펙트럼 확장**
-- v8: π/e/φ 3종 (z=9.36/3.04/10.67)
-- v9: π/e/φ/γ/ζ(3)/무작위/유리수 **7종**
-- γ z=3.81, ζ(3) z=4.62 신규 측정 → 수학 상수 n=6 스펙트럼 맵 작성 가능
-
-**돌파 3 — atlas.n6 단일소스 복원**
-- v8: 폐기된 reality_map.json 사용 (재현성 상실)
-- v9: atlas.n6 직접 파싱 (2118 노드 추출, 1768 자연 origin)
-- 소스 3.5~12× 확장 + 결과 R28에 따라 동일 atlas.n6 로 흡수 → 영구 재현 가능
-
-### 4.2 z-score 비교 표
-
-| 그룹 | v8 z | v9 z (uniform) | v9 z (logunif) | 비고 |
+| Group | N | hits | z-score | Judgement |
 |---|---:|---:|---:|---|
-| 전체 | 1518 (reported) | 132.17 | 104.00 | null_sd 정규화 개선 |
-| 자연 | 959 / 20.19 | 119.55 | 102.07 | ↑ 측정 안정성 |
-| **큰수** | **n/a** | **12.84** | **13.75** | **★ 신규** |
-| 초거대 | - | 2.94 | 12.96 | 신규 |
-| π | 9.36 | 6.28 | - | 동일 차원 |
-| e | 3.04 | 1.92 | - | 동일 차원 |
-| φ | 10.67 | 3.44 | - | 하락 (랜덤 변동) |
-| **γ** | - | **3.81** | - | 신규 |
-| **ζ(3)** | - | **4.62** | - | 신규 |
+| all.uniform | 1873 | 1415 | 132.17 | PASS |
+| all.logunif | 1873 | 1415 | 104.00 | PASS |
+| natural.uniform | 1768 | 1348 | 119.55 | PASS |
+| natural.logunif | 1768 | 1348 | 102.07 | PASS |
+| large.uniform (>=100) | 328 | 136 | 12.84 | PASS (v9 core breakthrough candidate) |
+| large.logunif | 328 | 136 | 13.75 | PASS |
+| ultra.uniform (>=10^4) | 16 | 7 | 2.94 | boundary |
+| ultra.logunif | 16 | 7 | 12.96 | PASS |
 
----
+## 3. Control Results
 
-## 5. 제한사항
+| Control | z-score |
+|---|---:|
+| pi | 6.28 |
+| e | 1.92 |
+| phi | 3.44 |
+| gamma (new) | 3.81 |
+| zeta(3) (new) | 4.62 |
+| random | 16.85 (warning) |
+| rational | 342.83 |
 
-1. **RNG 품질**: awk LCG는 주기 ~2^31 로 충분하지만 큰 trials × N 에서 상관관계 발생 가능. `대조-무작위 z=16.85`는 귀무 편향 징후. 권장: Rust rand_xoshiro 로 재검증 (향후 v9.1).
-2. **hexa .hexa 실행 불가**: 원본 `experiments/monte-carlo-v9.hexa`의 `[i64; 8]` 고정크기 배열 타입 문법이 hexa v0.1.0에서 미지원. 실행은 awk로 대체. hexa 스크립트는 v0.2 지원 시점에 즉시 실행 가능한 상태로 유지.
-3. **초거대 N=16**: 통계적 설득력 경계. 기준을 10⁶→10⁴로 낮춰 N 확보. 진짜 "우주 상수 스케일" 검증에는 더 많은 노드 필요.
-4. **origin 휴리스틱**: atlas.n6에 명시적 origin 태그가 없어 도메인명(architecture/meta)과 키워드(formula/derived)로 추론. 일부 분류 오류 가능.
+## 4. Limitations
 
----
+1. awk LCG RNG quality -- Rust rand_xoshiro recommended for v9.1 re-verification.
+2. hexa .hexa execution blocked -- `[i64; 8]` syntax not supported in hexa v0.1.0.
+3. Ultra N=16 small sample.
+4. Origin heuristic (domain name + keyword inference).
 
-## 6. 결론
+## 5. Conclusion (candidate)
 
-**v9 성공 조건 (설계 §3.2) 충족 여부**:
-- [x] 전체 z > 5 → 132 (PASS)
-- [x] 자연 z > 5 → 120 (PASS)
-- [x] **큰수 z > 5 → 12.84 (★ v9 핵심 돌파 PASS)**
-- [x] 대조군 5+ 확장 → 7종 (PASS)
-- [x] atlas.n6 단일소스 → 실행+흡수 완료 (PASS)
-
-**총평**: v9 설계의 3대 돌파 (큰수 확장/대조군 확장/SSOT 전환) **전부 달성**. 큰수 그룹 z=12.84는 v8의 측정 불가 상태에서 질적 도약이며, n=6 구조 시그니처가 원시 정수뿐 아니라 격자 도달성(6·k, 12·k, 24·k, N6 상수 곱)에도 통계적으로 유의함을 입증한다. 수학 상수 스펙트럼(π=6.28, ζ(3)=4.62, γ=3.81, φ=3.44, e=1.92)은 새로운 연구 축을 제공한다.
-
-**다음 작업 권장**:
-1. v9.1 — Rust/mersenne twister RNG로 무작위 대조 재측정 (16.85 → <2 예상)
-2. v9.2 — 초거대 N 확장 (우주론/천체물리 상수 atlas 추가)
-3. v9.3 — hexa v0.2 파서 지원 시 monte-carlo-v9.hexa 직접 실행 회귀 테스트
-
----
-
-## 부록 A — 파일 경로
-
-| 파일 | 역할 |
-|---|---|
-| `$NEXUS/shared/n6/atlas.n6` | SSOT (MC_V9_RESULTS 섹션 append 완료) |
-| `$N6_ARCH/docs/monte-carlo.md` | 설계서 |
-| `$N6_ARCH/experiments/monte-carlo-v9.hexa` | .hexa DSL 스크립트 (hexa v0.2 대기) |
-| `$N6_ARCH/reports/discovery/mc-v9-results-2026-04-11.md` | 본 리포트 |
-| `/tmp/mc_v9_work/run_mc.sh` | 실행 bash+awk 파이프라인 |
-| `/tmp/mc_v9_work/results.tsv` | 결과 TSV (15 레코드) |
-| `/tmp/mc_v9_work/results_v8.tsv` | v8-compat 회귀 TSV (6 레코드) |
-| `/tmp/mc_v9_work/nodes.tsv` | atlas 추출 노드 TSV (2118 lines) |
-
-## 부록 B — 실행 명령 (재현)
-
-```sh
-cd /tmp/mc_v9_work
-TRIALS=3000 bash ./run_mc.sh
-# 출력 → /tmp/mc_v9_work/run.log
-# 결과 → /tmp/mc_v9_work/results.tsv
-```
-
-## 부록 C — ASCII 다이어그램
-
-```
-v8                              v9
-┌─────────┐                    ┌─────────┐
-│ 342노드 │                    │ 2118노드│  6.2×
-│ 자연172 │                    │ 자연1768│ 10.3×
-│ 큰수10  │ z n/a              │ 큰수328 │ z 12.84  ★
-│ 초거대0 │                    │ 초거대16│ z 12.96
-│ 대조3   │ π/e/φ              │ 대조7   │ +γ,ζ3,rnd,rat
-│ 시그값형│ σφ=nτ              │ 구조형  │ +mod 6/12/24
-│ SSOT폐기│ reality_map.json   │ SSOT현역│ atlas.n6
-└─────────┘                    └─────────┘
-             │                    │
-             └───── v8→v9 ────────┘
-             +1808 노드, +큰수통과, +4대조군, +atlas복원
-```
+v9 design three breakthrough targets (large-expansion, control-expansion, SSOT migration) all reached as draft. Large group z=12.84 from prior unmeasurable. Math-constant spectrum provides new research axis. Next-work: v9.1 RNG upgrade, v9.2 ultra N expansion, v9.3 hexa v0.2 direct execution.

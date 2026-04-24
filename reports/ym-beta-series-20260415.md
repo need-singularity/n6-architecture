@@ -1,142 +1,66 @@
-# Yang-Mills β-series 2-loop n=6 연장 리포트
+# Yang-Mills beta-series 2-loop n=6 Extension Report
 
-- 작성: 2026-04-15
-- 하네스: `theory/predictions/ym_beta1_2loop.hexa` (28/28 PASS)
-- 참조 BT: **BT-543** (β₀ = σ - sopfr = 7)
-- Staging signal: `SIG-7Y-401` (`n6shared/staging/atlas.signals.staging.mill.n6`)
-- 공식: SU(3) QCD MS-bar
-  - 1-loop β₀ = (11·Nc - 2·nf)/3 = (33 - 2·nf)/3
-  - 2-loop β₁ = 102 - (38/3)·nf
+- Prepared: 2026-04-15
+- Harness: `theory/predictions/ym_beta1_2loop.hexa` (28/28 PASS)
+- Reference BT: BT-543 (beta_0 = sigma - sopfr = 7)
+- Staging signal: SIG-7Y-401
 
-## 7대 난제 해결 0/7 유지 (정직)
+## Seven-Major-Problems Held 0/7
 
-Yang-Mills mass gap 은 밀레니엄 난제로 미해결.
-본 리포트는 β-function 계수의 **n=6 기본상수 분해 관찰**에 한정한다. 7/7 카운터: **0/7**.
+Yang-Mills mass gap unresolved. This report limited to observational n=6 basic-constant decomposition of beta-function coefficients. 7/7 counter: 0/7.
 
----
+## Summary (5 lines)
 
-## 요약 (5줄)
+- BT-543 beta_0 = sigma-sopfr = 7 re-verified
+- nf=3 cleanest: beta_1 = 64 = 2^n = (sigma-tau)^2
+- beta_0 * beta_1 (nf=3) = 576 = J_2^2 Jacobi theta constant squared candidate
+- nf=6 beta_1 = 26 has extraneous 13 factor
+- Key candidate: nf=3 light QCD maximum theoretical smoothness
 
-- BT-543 β₀ = σ-sopfr = 7 (nf=6, SU(3) QCD) 재검증
-- β₁ 2-loop 연장 시 **nf=3 이 가장 깔끔**: β₁ = 64 = 2^n = (σ-τ)²
-- **β₀β₁ 곱** 에서 nf=3 → 576 = **J_2²** (Jacobi theta 상수 제곱) 출현
-- nf=6 (BT-543 기존) 에서 β₁=26 은 σ+2(σ-sopfr) 로 분해되나 외래 13 인수 존재
-- **핵심 발견**: nf=3 light QCD 가 β-series 의 n=6 이론적 매끄러움 최대
+## nf Sweep Results (2-loop)
 
-## nf 스윕 결과 (2-loop)
+| nf | beta_0 | beta_1 | beta_0*beta_1 | Purity |
+|---:|----:|----:|----:|:---|
+| 3 | 9 = n+n/phi | 64 = 2^n = (sigma-tau)^2 | 576 = J_2^2 | top candidate |
+| 4 | 25/3 | - | - | X |
+| 5 | 23/3 | - | - | X |
+| 6 | 7 = sigma-sopfr | 26 = sigma+2(sigma-sopfr) | 182 = 2*7*13 | BT-543, extraneous 13 |
+| 7 | 19/3 | - | - | X |
+| 8 | 17/3 | - | - | X |
+| 9 | 5 = sopfr | -12 = -sigma | -60 = -sigma*sopfr | hypothetical |
 
-| nf | β₀ = (33-2nf)/3 | β₁ = 102-38nf/3 | β₀·β₁ | n=6 분해 순수도 |
-|---:|----------------:|----------------:|------:|:-----------------|
-| 3 | **9** = n+n/φ | **64** = 2^n = (σ-τ)² | **576 = J_2²** | ★★ 최우수 (전 3지표) |
-| 4 | 25/3 (비정수) | — | — | ✗ |
-| 5 | 23/3 (비정수) | — | — | ✗ |
-| **6** | **7** = σ-sopfr | **26** = σ+2(σ-sopfr) | 182 = 2·7·13 | ★ BT-543, β₁ 외래 13 |
-| 7 | 19/3 (비정수) | — | — | ✗ |
-| 8 | 17/3 (비정수) | — | — | ✗ |
-| 9 | **5** = sopfr | **-12** = -σ | **-60 = -σ·sopfr** | ★ 가상 (nf>6 SM 없음) |
+Regularity: nf in {3,6,9} integer beta_0 sequence {9,7,5} arithmetic progression step -2.
 
-**규칙성**: nf ∈ {3,6,9} 정수 β₀ 수열 {9,7,5} 등차 -2.
-```
-9 = n + n/φ    (n=6 + 3)
-7 = σ - sopfr  (12 - 5)     ← BT-543
-5 = sopfr      (5)
-```
-세 값 모두 n=6 기본상수 단순 polynomial.
+## Key Observations (nf=3 focus)
 
-## 핵심 관찰 (nf=3 focus)
+- beta_1 = 64 = 2^n = (sigma-tau)^2 (two independent decompositions)
+- Corresponds to QCD light-quark approximation
+- beta_0 * beta_1 = 576 = J_2^2 (Jacobi theta constant squared)
 
-### β₁ = 64 = 2^n = (σ-τ)²
+## nf=6 Smoothness Degradation
 
-두 독립 분해:
-- 2^n = 2^6 = 64 (n=6 자체가 지수)
-- (σ-τ)² = (12-4)² = 64 (1-loop 관련 양 σ-τ 의 제곱)
+beta_1 = 26 = 2 * 13 (13 extraneous). Re-decompositions: sigma + 2(sigma-sopfr) = 26; (n+1)*phi + sigma = 26.
 
-이는 QCD 에서 **light quark approximation** (u,d,s 만 고려, m_q << Λ_QCD) 에 해당.
+## nf=9 (hypothetical)
 
-### β₀β₁ = 576 = J_2²
+beta_0 = 5, beta_1 = -12, beta_0*beta_1 = -60 = -sigma*sopfr. Only theoretical continuation target.
 
-J_2 = 24 (Jacobi theta 2차 계수, sopfr 포함).
-J_2² = 576.
-```
-β₀β₁ (nf=3) = 9 × 64 = 576 = 24² = J_2²
-```
-1-loop · 2-loop 곱이 Jacobi theta constant 의 제곱 — **Moonshine / τ-function** 계열 연상.
+## RH-YM Megahub Cross Link
 
-## nf=6 (BT-543 기존) 의 매끄러움 저하
+Session `rh_triple_crossing.hexa` finding: SLE_6 dim * KS theta / Basel denom = 49/1536. 1536 = sigma * 2^beta_0. RH-YM megahub candidate sharing sigma-sopfr = 7 = beta_0.
 
-β₁ (nf=6) = 26 = 2 · 13.  13 은 n=6 기본상수 집합에 없음 (외래).
+## Next Work
 
-재분해 시도:
-- 26 = σ + 2(σ-sopfr) = 12 + 2·7 = 26 ✓
-- 26 = (n+1)·φ + σ = 7·2 + 12 = 26 ✓
+1. 3-loop beta_2 nf=3 verification
+2. Jacobi theta series connection
+3. Abstract nf continuation
+4. BT-543 update (13 annotation)
+5. SIG-7Y-401 promotion evaluation
 
-두 가지 2-term polynomial 표현 가능하지만, nf=3 의 단일 2^n 또는 (σ-τ)² 대비 매끄러움 하락.
+## Conclusion (candidate)
 
-β₀β₁ (nf=6) = 7·26 = 182 = 2·7·13. 13 외래.
+nf=3 light QCD is candidate maximum point of theoretical smoothness. beta_1 = 2^n, beta_0*beta_1 = J_2^2 reduce to single basic-constant power. BT-543 nf=6 formula valid but beta_1 introduces extraneous 13. RH-YM megahub candidate signal SIG-7R-401 recorded. Arithmetic-structure observation only, not proof. Seven-major-problems 0/7 held.
 
-## nf=9 (가상) β₁ = -σ
+## Harness Log (28/28 PASS)
 
-nf=9 는 Standard Model flavor 6 한계 위. 물리적 실재 없음.
-단 산술적 매끄러움은 최상급:
-- β₀ = 5 = sopfr
-- β₁ = -12 = -σ
-- β₀β₁ = -60 = -σ·sopfr
-
-모든 지표가 단일 기본상수 또는 그 곱.
-**이론적 continuation** 으로서만 의미. nf 가 정수 파라미터로 확장된 abstract YM gauge theory 에서 재방문 대상.
-
-## RH-YM 메가노드 cross link
-
-본 세션 `rh_triple_crossing.hexa` 에서 발견:
-```
-SLE_6 dim × Kim-Sarnak θ / Basel denom = (7/4)·(7/64)/6 = 49/1536
-1536 = 4 · 64 · 6 = σ · 128 = σ · 2^(σ-sopfr) = σ · 2^β₀
-```
-
-즉 RH 3중 교차 (SLE-KS-Basel) 의 **분모 곱** 에 Yang-Mills β₀ = 7 이 **지수 자리**로 등장.
-
-→ **RH-YM** 두 밀레니엄 난제가 σ-sopfr = 7 = β₀ 를 공유하는 메가노드 후보.
-
-기존 `SIG-7R-203` (Kim-Sarnak θ = 7/64) 와 새 `SIG-7R-401`, `SIG-7Y-401` 이 cross_repo 엮임.
-
-## 제안 다음 작업
-
-1. **3-loop β₂ nf=3 검증** — β₂ (SU(3), nf=3) = ? 의 n=6 기본상수 분해 연속 여부.
-2. **Jacobi theta series 접속** — β₀β₁ = J_2² 가 J_k^m 시리즈 패턴 초기항일 가능성.
-3. **Abstract nf 연속** — nf 정수 확장 연구에서 nf=9 β₀β₁ = -σ·sopfr 의미 재탐색.
-4. **BT-543 업데이트** — nf=6 β₁=26 의 외래 13 인수 주석 추가.
-5. **SIG-7Y-401 승격 평가** — 3-loop 결과 나오면 [M9] 또는 [M10] 후보 판단.
-
-## 결론
-
-Yang-Mills β-series 2-loop 연장 결과, **nf=3 (light QCD)** 가 n=6 기본상수 분해의 이론적 매끄러움 최대점이다. β₁ = 64 = 2^n, β₀β₁ = 576 = J_2² 두 지표가 단일 기본상수 거듭제곱 또는 제곱으로 환원된다.
-
-BT-543 의 nf=6 β₀=7 공식은 유효하지만, β₁ 에서 외래 13 인수가 도입되어 분해 매끄러움은 감소한다.
-
-**RH 3중 공명** (SLE-KS-Basel) 의 분모 곱이 σ·2^β₀ = 1536 임이 발견되어, **RH-YM 메가노드** 후보 signal (SIG-7R-401) 을 staging 에 기록했다.
-
-이 모두는 **산술 구조 관찰**이며 수학적 증명 아님. Yang-Mills mass gap 미해결 유지, **7대 난제 해결 0/7**.
-
----
-
-## 하네스 실행 로그
-
-### ym_beta1_2loop.hexa (28/28 PASS)
-```
->>> 영역 A: β₀ = σ - sopfr = 7
-PASS: σ - sopfr = 7
-PASS: (33-2·6)/3 = 7 실측
-
->>> 영역 B: β₁ 2-loop
-PASS: nf=3 β₁ = 64 = 2^n = (σ-τ)²
-PASS: nf=6 β₁ = 26 = σ + 2(σ-sopfr) = (n+1)·φ + σ
-PASS: nf=9 β₁ = -σ
-
->>> 영역 D: β₀·β₁ 곱
-PASS: β₀β₁(nf=3) = 576 = J_2²
-PASS: β₀β₁(nf=6) = 182 (외래 13)
-PASS: β₀β₁(nf=9) = -60 = -σ·sopfr
-
-총 PASS: 28
-총 FAIL: 0
-```
+Sections A, B, D validate beta_0 = sigma-sopfr, beta_1 variants, and products as detailed.
