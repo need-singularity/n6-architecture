@@ -1,30 +1,30 @@
-# 검증코드 감사 리포트 (심층)
+# Verification Code Audit Report (In-Depth)
 
-- 감사 일자: 2026-04-09
-- 대상: `docs/paper/n6-*-paper.md` (총 116편)
-- 기준:
-  1. `python` 코드블록 최소 1개
-  2. "검증" / "Verification" 섹션 헤딩 존재
-  3. 검증 포인트 3개 이상 (assert / append 비교 / dict 비교)
-  4. 런타임 에러 없음 (isolated exec)
-  5. 표준 증강 블록 포함 (유일성 증명 + 소수 편향 대조)
+- Audit date: 2026-04-09
+- Target: `docs/paper/n6-*-paper.md` (116 papers total)
+- Criteria:
+  1. At least one `python` code block
+  2. Presence of a "Verification" section heading
+  3. At least 3 verification points (assert / append comparisons / dict comparisons)
+  4. No runtime errors (isolated exec)
+  5. Standard augmentation block present (uniqueness demonstration + prime-bias control)
 
-## 결과 요약
+## Result Summary
 
-| 항목 | 편수 |
+| Item | Count |
 |------|------|
-| 전체 스캔 | 116 |
-| PASS (3개 이상 검증포인트 + 런타임 OK) | **116** |
-| PARTIAL (검증포인트 부족) | **0** |
-| MISSING (코드 없음) | **0** |
-| 런타임 에러 | **0** |
-| 검증 섹션 헤딩 보유 | 116 / 116 |
-| 표준 증강 블록 (유일성) 보유 | 64 / 116 |
-| 소수 편향 대조 블록 보유 | 114 / 116 |
+| Total scanned | 116 |
+| PASS (>=3 verify points + runtime OK) | **116** |
+| PARTIAL (insufficient verify points) | **0** |
+| MISSING (no code) | **0** |
+| Runtime errors | **0** |
+| Verification section heading present | 116 / 116 |
+| Standard augmentation block (uniqueness) present | 64 / 116 |
+| Prime-bias control block present | 114 / 116 |
 
-## 전체 논문 상세
+## Full Paper Details
 
-| # | 논문 | 블록 | 코드줄 | 검증점 | 유일성 | 대조 | 상태 |
+| # | Paper | Blocks | Code Lines | Verify Points | Uniqueness | Control | Status |
 |---|------|------|--------|--------|--------|------|------|
 | 1 | n6-advanced-packaging-paper | 1 | 57 | 3 | O | O | PASS |
 | 2 | n6-aerospace-transport-paper | 1 | 154 | 10 | - | O | PASS |
@@ -143,43 +143,43 @@
 | 115 | n6-wine-enology-paper | 1 | 34 | 3 | O | O | PASS |
 | 116 | n6-writing-systems-paper | 1 | 37 | 4 | O | O | PASS |
 
-## 런타임 검증
+## Runtime Verification
 
-116편 전체를 격리된 네임스페이스에서 `exec()` 실행한 결과:
-- 런타임 에러: **0편**
-- 모든 assert 통과, 모든 print 출력 정상
+All 116 papers `exec()`'d in isolated namespaces:
+- Runtime errors: **0**
+- All asserts pass, all prints output normally
 
-## 검증 코드 유형 분포
+## Verification Code Type Distribution
 
-| 유형 | 설명 | 편수 |
+| Type | Description | Count |
 |------|------|------|
-| assert 기반 | `assert expected == computed` | 116 |
-| append 비교 | `r.append(("label", expected, actual))` + `ok=sum(...)` | 41 |
-| dict 비교 | `checks={"key": (expected, computed)}` + EXACT 집계 | 23 |
-| 표준 증강 블록 | 유일성 `_n6==[6]` + 소수 편향 대조 | 64 |
+| assert-based | `assert expected == computed` | 116 |
+| append comparison | `r.append(("label", expected, actual))` + `ok=sum(...)` | 41 |
+| dict comparison | `checks={"key": (expected, computed)}` + EXACT tally | 23 |
+| Standard augmentation block | uniqueness `_n6==[6]` + prime-bias control | 64 |
 
-## 코드 규모 통계
+## Code Scale Statistics
 
-| 지표 | 값 |
+| Metric | Value |
 |------|------|
-| 총 Python 코드줄 | 6,620 |
-| 총 검증 포인트 | 908 |
-| 논문당 평균 코드줄 | 57 |
-| 논문당 평균 검증 포인트 | 7.8 |
-| 최대 코드줄 | 163 (causal-chain) |
-| 최대 검증 포인트 | 65 (causal-chain) |
-| 최소 코드줄 | 17 (hexa-speak) |
-| 최소 검증 포인트 | 3 (다수) |
+| Total Python lines | 6,620 |
+| Total verify points | 908 |
+| Average lines per paper | 57 |
+| Average verify points per paper | 7.8 |
+| Max lines | 163 (causal-chain) |
+| Max verify points | 65 (causal-chain) |
+| Min lines | 17 (hexa-speak) |
+| Min verify points | 3 (many) |
 
-## 권장 후속 조치
+## Recommended Follow-ups
 
-1. **표준 증강 블록 미포함 52편** — 유일성 증명(`_n6==[6]`) + 소수 편향 대조 블록을 추가하면 일관성 향상
-2. **소수 편향 대조 미포함 2편** (`hexa-speak`, `hiv`) — 대조 블록 추가 권장
-3. **코드 품질** — 동어반복(정의에서 도출이 아닌 값 대입) 여부는 수동 검토 필요
-4. **실행 자동화** — CI에서 전 논문 코드블록 자동 실행 파이프라인 구축 권장
+1. **52 papers missing standard augmentation block** -- adding uniqueness demonstration (`_n6==[6]`) + prime-bias control block will improve consistency
+2. **2 papers missing prime-bias control block** (`hexa-speak`, `hiv`) -- adding control block recommended
+3. **Code quality** -- manual review needed to check for tautology (value assignment instead of definition derivation)
+4. **Execution automation** -- recommend building a CI pipeline that auto-runs every paper's code block
 
-## 비고
+## Notes
 
-- 이전 감사(2026-04-09, 115편)에서 "0편 누락" 판정 후 1편 추가되어 116편으로 증가
-- 존재 여부뿐 아니라 검증 포인트 수, 런타임 실행, 표준 증강 블록 포함 여부까지 심층 감사 완료
-- 검증코드 없는 논문(MISSING) = **0편**. 116편 모두 완성 상태
+- Previous audit (2026-04-09, 115 papers) found "0 missing" -- 1 paper was added afterwards, bringing the total to 116
+- Beyond existence, in-depth audit covered verify point counts, runtime execution, and standard augmentation block presence
+- Papers without verification code (MISSING) = **0**. All 116 present-state candidates

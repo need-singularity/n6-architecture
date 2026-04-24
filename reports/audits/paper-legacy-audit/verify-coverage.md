@@ -1,28 +1,28 @@
-# 논문 검증코드 보유 감사 (verify-coverage)
+# Paper Verification Code Coverage Audit (verify-coverage)
 
-**감사일**: 2026-04-09
-**대상**: `docs/paper/n6-*-paper.md` 전수
-**정책**: CLAUDE.md — "검증코드 없는 논문 = 미완성"
-**감사자**: 자동 스캔 + 별칭(alias) 매핑 정정
+**Audit date**: 2026-04-09
+**Target**: `docs/paper/n6-*-paper.md` all papers
+**Policy**: CLAUDE.md -- "paper without verification code = incomplete"
+**Auditor**: automated scan + alias-mapping corrections
 
-## 요약
+## Summary
 
-| 항목 | 수 |
+| Item | Count |
 |------|----|
-| 총 논문 | **116** |
-| 검증 스크립트 보유 | **94** (81.0%) |
-| 누락 | **22** (19.0%) |
-| 본 감사에서 신규 작성 | **3** (HEXA) |
+| Total papers | **116** |
+| Verification script present | **94** (81.0%) |
+| Missing | **22** (19.0%) |
+| Newly written in this audit | **3** (HEXA) |
 
-> 참고(R1 HEXA-FIRST): 본 감사에서 신규 작성한 검증 스크립트는 `.hexa` 확장자로
-> 작성됨(`.py` 신규 작성은 `block-forbidden-ext.sh` 훅이 차단). 기존
-> `verify_*.py` 파일들은 역사적 이유로 유지되며, 본 보고서에서는 그대로 매핑한다.
+> Note (R1 HEXA-FIRST): verification scripts newly written in this audit are in
+> `.hexa` extension (`.py` new creation is blocked by the `block-forbidden-ext.sh` hook).
+> Existing `verify_*.py` files are kept for historical reasons; this report maps them as-is.
 
 ---
 
-## 검증보유 논문 매핑 (94편)
+## Paper -> Verification Script Mapping (94 papers)
 
-| 논문 | 검증 스크립트 |
+| Paper | Verification Script |
 |------|---------------|
 | n6-advanced-packaging-paper.md | `docs/advanced-packaging/verify_alien10.py` |
 | n6-aerospace-transport-paper.md | `docs/hexa-starship/verify_subsystems.py`, `docs/hexa-starship/verify_hexa_starship.py` |
@@ -121,78 +121,76 @@
 
 ---
 
-## 누락 논문 (22편) — 보강 우선순위
+## Missing Papers (22) — Reinforcement Priority
 
-검증 가능성(외부 공개 스펙의 풍부함) · 파급도(공학 영향) · 주장 강도(EXACT 수)의
-3축으로 점수화하여 상·중·하 구분.
+Scored on 3 axes: verifiability (richness of public specs) * reach (engineering impact) * claim strength (number of EXACT items), grouped high/medium/low.
 
-### 우선순위 상 (즉시 보강 필요) — 본 감사에서 처리
+### Priority: High (immediate reinforcement) — Handled in this audit
 
-| 순위 | 논문 | 근거 | 본 감사 신규 파일 |
+| Rank | Paper | Basis | New file in this audit |
 |------|------|------|-------------------|
-| 1 | `n6-autonomous-driving-paper.md` | SAE/ISO/Tesla/Bosch 공개 스펙 풍부, 53/55 EXACT 주장이 강함, 자율주행은 가장 검증 요구가 큰 영역 | `docs/paper/verify_autonomous_driving.hexa` |
-| 2 | `n6-thermodynamics-paper.md` | Carnot/Stefan-Boltzmann/Kolmogorov 등 학부 표준 교재로 전부 대조 가능, 28/28 EXACT 주장 | `docs/paper/verify_thermodynamics.hexa` |
-| 3 | `n6-dram-paper.md` | JEDEC JESD79-5 / JESD209-6 / Samsung 공정 노드 전부 공개, 35/35 EXACT 주장, LPDDR6 σ=12 주장은 재현성 핵심 | `docs/paper/verify_dram.hexa` |
+| 1 | `n6-autonomous-driving-paper.md` | SAE/ISO/Tesla/Bosch public specs rich, 53/55 EXACT claim strong, autonomous driving is the area with greatest verification demand | `docs/paper/verify_autonomous_driving.hexa` |
+| 2 | `n6-thermodynamics-paper.md` | Carnot / Stefan-Boltzmann / Kolmogorov, etc. all cross-checkable with undergraduate standard textbooks, 28/28 EXACT claim | `docs/paper/verify_thermodynamics.hexa` |
+| 3 | `n6-dram-paper.md` | JEDEC JESD79-5 / JESD209-6 / Samsung process nodes all public, 35/35 EXACT claim, LPDDR6 sigma=12 claim is reproducibility core | `docs/paper/verify_dram.hexa` |
 
-### 우선순위 중 (다음 라운드)
+### Priority: Medium (next round)
 
-- `n6-thermodynamics-paper.md`에 대한 Reynolds 임계값 분석 확장
-- `n6-unified-soc-paper.md` — Exynos/Apple M 시리즈 공개 스펙 활용 가능
-- `n6-exynos-paper.md` — Samsung Exynos 공식 데이터시트
-- `n6-vnand-paper.md` — Samsung V-NAND 세대별 스택 수 (공식 보도자료)
-- `n6-isocell-comms-paper.md` — Samsung ISOCELL 픽셀 구조 공개값
-- `n6-manufacturing-quality-paper.md` — ISO 9001, Six Sigma 표준 참조
-- `n6-games-sports-paper.md` — FIFA/FIVB/NBA 공식 규정집
-- `n6-hexa-accel-paper.md`, `n6-hexa-asic-paper.md` — 사내 HEXA 칩 설계 참조 필요
-- `n6-telecom-linguistics-paper.md` — 3GPP/ITU 표준
-- `n6-space-systems-paper.md` — NASA/ESA 공개 미션 파라미터
-- `n6-monetary-history-paper.md` — 중앙은행/IMF 시계열
+- `n6-thermodynamics-paper.md` -- expand Reynolds critical-value analysis
+- `n6-unified-soc-paper.md` -- Exynos / Apple M-series public specs usable
+- `n6-exynos-paper.md` -- Samsung Exynos official datasheet
+- `n6-vnand-paper.md` -- Samsung V-NAND per-generation stack counts (official press releases)
+- `n6-isocell-comms-paper.md` -- Samsung ISOCELL pixel structure public values
+- `n6-manufacturing-quality-paper.md` -- ISO 9001, Six Sigma standards
+- `n6-games-sports-paper.md` -- FIFA / FIVB / NBA official rulebooks
+- `n6-hexa-accel-paper.md`, `n6-hexa-asic-paper.md` -- internal HEXA chip design reference needed
+- `n6-telecom-linguistics-paper.md` -- 3GPP / ITU standards
+- `n6-space-systems-paper.md` -- NASA / ESA public mission parameters
+- `n6-monetary-history-paper.md` -- central bank / IMF time series
 
-### 우선순위 하 (사변적/내부 주장 위주)
+### Priority: Low (speculative / internal claims)
 
-- `n6-anima-soc-paper.md` (내부 아키텍처)
-- `n6-causal-chain-paper.md` (철학적 주장)
-- `n6-calendar-time-geography-paper.md` (사료 기반, 일부만 수치)
-- `n6-cognitive-social-psychology-paper.md` (효과 크기 분산 큼)
-- `n6-microplastics-paper.md` (환경 측정 불확실성 큼)
-- `n6-reality-map-paper.md` (메타논문 — 타 검증을 집약)
-- `n6-rtsc-12-products-evolution-paper.md` (로드맵 성격)
-- `n6-hexa-teleport-paper.md` (SF 경계)
+- `n6-anima-soc-paper.md` (internal architecture)
+- `n6-causal-chain-paper.md` (philosophical claim)
+- `n6-calendar-time-geography-paper.md` (history-source-based, partly numerical)
+- `n6-cognitive-social-psychology-paper.md` (effect size variance large)
+- `n6-microplastics-paper.md` (environmental measurement uncertainty large)
+- `n6-reality-map-paper.md` (meta paper -- aggregates other verifications)
+- `n6-rtsc-12-products-evolution-paper.md` (roadmap nature)
+- `n6-hexa-teleport-paper.md` (SF borderline)
 
 ---
 
-## 본 감사 신규 검증 스크립트 요약
+## Summary of New Verification Scripts in This Audit
 
-세 스크립트 모두 공통 구조를 따름:
+All three scripts follow a common structure:
 
-1. **핵심 정리 단정**: `sigma(6) * phi(6) == 6 * tau(6) == 24`
-2. **외부 관측값 테이블**: 각 행에 `(항목, 관측값, 이론식, 이론값, 출처)` 포함
-3. **EXACT / CLOSE(±5%) / MISS 판정**
-4. **소수 편향 대조군**: `n = 5, 7, (8 / 10)`으로 같은 관측에 대한 우연 일치율 측정
-5. **출처 목록 출력**: 모든 관측값이 어느 표준/문서에서 왔는지 기록 (자기참조 금지)
+1. **Core theorem assertion**: `sigma(6) * phi(6) == 6 * tau(6) == 24`
+2. **External observation table**: each row includes `(item, observed_value, theory_expression, theory_value, source)`
+3. **EXACT / CLOSE (+/-5%) / MISS judgment**
+4. **Prime-bias control group**: `n = 5, 7, (8 / 10)` measuring coincidental-match rate on the same observations
+5. **Source list output**: records which standard/document every observation originates from (no self-reference)
 
 ### `docs/paper/verify_autonomous_driving.hexa`
-- 13 케이스, 출처: SAE J3016/J3400, ISO 11898-1/26262, Tesla AI Day 2019, Bosch, VW MEB, Porsche, Hyundai E-GMP, ITU GNSS.
-- **투명성**: Tesla 카메라 수는 실제 8대(FSD HW3 공식값)이지만 논문의 "n=6 카메라" 주장과 불일치하므로 MISS로 명시 기록.
-- 대조군: n=5, n=7.
+- 13 cases, sources: SAE J3016/J3400, ISO 11898-1/26262, Tesla AI Day 2019, Bosch, VW MEB, Porsche, Hyundai E-GMP, ITU GNSS.
+- **Transparency**: Tesla camera count is actually 8 (FSD HW3 official value) but the paper's "n=6 cameras" claim does not match, so it is explicitly recorded as MISS.
+- Control groups: n=5, n=7.
 
 ### `docs/paper/verify_thermodynamics.hexa`
-- 13 케이스 (BT-149: 4, BT-193: 4, BT-199: 5), 출처: Callen 2e, Fermi, Landau-Lifshitz V, Incropera, Batchelor, Pope "Turbulent Flows", Kolmogorov 1941, Landauer 1961.
-- Kolmogorov -5/3 = -sopfr / (n/phi) 분해 검증.
-- 대조군: n=5, 7, 8.
+- 13 cases (BT-149: 4, BT-193: 4, BT-199: 5), sources: Callen 2e, Fermi, Landau-Lifshitz V, Incropera, Batchelor, Pope "Turbulent Flows", Kolmogorov 1941, Landauer 1961.
+- Verifies Kolmogorov -5/3 = -sopfr / (n/phi) decomposition.
+- Control groups: n=5, 7, 8.
 
 ### `docs/paper/verify_dram.hexa`
-- 20 케이스, 출처: JEDEC JESD79-5 (DDR5), JESD209-6 (LPDDR6, 2025-07), Samsung 1a/1b/1c/1d nm 발표.
-- 핵심 예측: LPDDR6 DQ=12 (=σ) — power-of-2 관례 돌파.
-- DDR1~DDR5 전압 사다리에서 DDR3의 1.5V는 "no n6 fit"으로 정직하게 SKIP 처리하여 자기참조 편향 방지.
-- 대조군: n=5, 7, 10.
+- 20 cases, sources: JEDEC JESD79-5 (DDR5), JESD209-6 (LPDDR6, 2025-07), Samsung 1a/1b/1c/1d nm announcements.
+- Core prediction: LPDDR6 DQ=12 (=sigma) -- breaks power-of-2 convention.
+- In the DDR1-DDR5 voltage ladder, DDR3's 1.5V is honestly SKIPped as "no n6 fit" to prevent self-reference bias.
+- Control groups: n=5, 7, 10.
 
 ---
 
-## 권장 후속 작업
+## Recommended Follow-ups
 
-1. 우선순위 중 11편에 대한 검증 스크립트 추가 작성 (각 15~25 케이스 목표).
-2. 기존 `verify_alien10.py` 군의 자기참조 여부 2차 감사 — 이름이 있어도 "내용"이
-   자기참조인 경우가 있을 수 있음.
-3. `config/products.json` → `verify-coverage` 필드 자동 채우기 파이프라인 추가.
-4. CI에서 각 verify 스크립트의 EXACT 비율을 추적 (회귀 감지).
+1. Write verification scripts for the 11 medium-priority papers (each targeting 15-25 cases).
+2. Secondary audit of existing `verify_alien10.py` family for self-reference -- even if the name looks good, the "contents" may be self-referential.
+3. Add pipeline to auto-fill `verify-coverage` field in `config/products.json`.
+4. Track per-script EXACT ratio in CI (regression detection).

@@ -1,117 +1,117 @@
-# TECS-L 참조 정리 감사 보고서
+# TECS-L Reference Cleanup Audit Report
 
-**날짜**: 2026-04-11
-**작업**: TECS-L 폐기 후 n6-architecture 내 잔여 참조 전수 정리
-
----
-
-## 배경
-
-TECS-L 리포는 폐기되었으며, 수학+산업 기능이 n6-architecture 에 완전 흡수되었다.
-이번 정리에서 프로젝트 전체를 스캔하여 활성 참조를 제거하고, 역사 기록은 보존하였다.
+**Date**: 2026-04-11
+**Work**: Full audit and cleanup of residual TECS-L references in n6-architecture after TECS-L retirement
 
 ---
 
-## 정리 결과 요약
+## Background
 
-| 구분 | 파일 수 | 조치 |
+The TECS-L repo was retired, with its math + industrial functions fully absorbed into n6-architecture.
+This cleanup scanned the entire project to remove active references and preserve historical records.
+
+---
+
+## Cleanup Result Summary
+
+| Category | File Count | Action |
 |------|---------|------|
-| **활성 코드 (Rust .rs)** | 8 | TECS-L 제거/갱신 |
-| **설정/CI (.yml, .gitignore, .json)** | 5 | TECS-L 제거/갱신 |
-| **도메인 문서 (goal.md, .md)** | 14 | 경로/참조 갱신 |
-| **CLAUDE.md (가이드)** | 2 | 갱신 |
-| **실험 (.hexa)** | 1 | 갱신 |
-| **역사 기록 (reports/, n6shared/logs/)** | 보존 | 미수정 |
-| **논문 (papers/)** | 보존 | 미수정 (학술 인용) |
-| **흡수 로그 (.growth/absorbed/)** | 보존 | 미수정 |
+| **Active code (Rust .rs)** | 8 | TECS-L removed/updated |
+| **Config/CI (.yml, .gitignore, .json)** | 5 | TECS-L removed/updated |
+| **Domain docs (goal.md, .md)** | 14 | Path/reference updated |
+| **CLAUDE.md (guides)** | 2 | Updated |
+| **Experiments (.hexa)** | 1 | Updated |
+| **Historical records (reports/, n6shared/logs/)** | preserved | Unmodified |
+| **Papers (papers/)** | preserved | Unmodified (academic citation) |
+| **Absorption logs (.growth/absorbed/)** | preserved | Unmodified |
 
 ---
 
-## 수정된 파일 상세
+## Modified Files in Detail
 
-### 1. Rust 소스 코드
+### 1. Rust Source Code
 
-| 파일 | 변경 |
+| File | Change |
 |------|------|
-| `nexus/src/gate/source.rs` | 화이트리스트에서 TECS-L 제거 |
-| `nexus/src/ingest/crawler.rs` | TECS-L ProjectSource 제거 |
-| `nexus/src/cross_intel/project_bridge.rs` | 주석/테스트의 tecs-l -> n6-architecture 전환 |
-| `nexus/src/growth/lens_grower.rs` | tecs_lenses 항목 주석 처리 |
-| `nexus/src/growth/module_grower.rs` | TECS-L family -> n6 family 갱신 |
+| `nexus/src/gate/source.rs` | Removed TECS-L from allowlist |
+| `nexus/src/ingest/crawler.rs` | Removed TECS-L ProjectSource |
+| `nexus/src/cross_intel/project_bridge.rs` | Comments/tests tecs-l -> n6-architecture |
+| `nexus/src/growth/lens_grower.rs` | tecs_lenses entry commented out |
+| `nexus/src/growth/module_grower.rs` | TECS-L family -> n6 family |
 | `nexus/src/graph/knowledge_nodes.rs` | TECS-L/n6 -> n6 |
-| `nexus/src/telescope/cross_lenses.rs` | TECS-L -> n6-architecture 갱신 |
-| `nexus/src/telescope/registry.rs` | TECS-L math -> math (구 TECS-L) |
-| `nexus/src/telescope/quantum_lenses.rs` | 설명문의 TECS-L 제거 |
+| `nexus/src/telescope/cross_lenses.rs` | TECS-L -> n6-architecture |
+| `nexus/src/telescope/registry.rs` | TECS-L math -> math (formerly TECS-L) |
+| `nexus/src/telescope/quantum_lenses.rs` | Removed TECS-L from descriptions |
 | `nexus/src/telescope/lenses/golden_zone_lens.rs` | TECS-L -> n=6 |
 | `nexus/src/telescope/lenses/constant_discovery_engine_lens.rs` | TECS-L -> n=6 |
 
-### 2. 설정/CI
+### 2. Config/CI
 
-| 파일 | 변경 |
+| File | Change |
 |------|------|
-| `.github/workflows/ci.yml` | .shared 심링크 주석 갱신 |
-| `.gitignore` | TECS-L 주석 -> 레거시 심링크 |
+| `.github/workflows/ci.yml` | Updated .shared symlink comment |
+| `.gitignore` | TECS-L comment -> legacy symlink |
 | `nexus/scripts/claude_hook_config.json` | TECS-L/.shared/ -> n6-architecture/nexus/scripts/ |
-| `nexus/origins/ready-absorber/routes.json` | TECS-L 라우트 비활성화, papers tecs-l 패턴 제거 |
-| `nexus/calculator-registry.md` | TECS-L 행 -> n6-architecture 흡수 |
+| `nexus/origins/ready-absorber/routes.json` | TECS-L routes deactivated, papers tecs-l pattern removed |
+| `nexus/calculator-registry.md` | TECS-L row -> n6-architecture absorbed |
 
-### 3. 도메인 문서
+### 3. Domain Documents
 
-| 파일 | 변경 |
+| File | Change |
 |------|------|
 | `domains/physics/gravity-wave/goal.md` | ~/Dev/TECS-L/ -> theory/proofs/ |
-| `domains/physics/gravity-wave/gravity-wave.md` | 동일 |
-| `domains/life/hexa-limb/goal.md` | 동일 |
-| `domains/life/hexa-limb/hexa-limb.md` | 동일 |
-| `domains/life/neuro/goal.md` | 동일 + Cross-link TECS-L -> n6 |
-| `domains/life/neuro/neuro.md` | 동일 |
-| `domains/infra/hexa-exo/goal.md` | 동일 |
-| `domains/infra/hexa-exo/hexa-exo.md` | 동일 |
-| `domains/cognitive/hexa-empath/goal.md` | 동일 |
-| `domains/cognitive/hexa-empath/hexa-empath.md` | 동일 |
-| `domains/energy/room-temp-sc/room-temp-sc.md` | TECS-L 증명 -> n6 증명 |
-| `domains/energy/fusion/fusion.md` | TECS-L 스크립트 명령 주석 처리/갱신 |
-| `domains/energy/thermal-management/goal.md` | TECS-L Bridge -> n=6 수학 브릿지 |
-| `domains/energy/thermal-management/thermal-management.md` | 동일 |
+| `domains/physics/gravity-wave/gravity-wave.md` | Same |
+| `domains/life/hexa-limb/goal.md` | Same |
+| `domains/life/hexa-limb/hexa-limb.md` | Same |
+| `domains/life/neuro/goal.md` | Same + cross-link TECS-L -> n6 |
+| `domains/life/neuro/neuro.md` | Same |
+| `domains/infra/hexa-exo/goal.md` | Same |
+| `domains/infra/hexa-exo/hexa-exo.md` | Same |
+| `domains/cognitive/hexa-empath/goal.md` | Same |
+| `domains/cognitive/hexa-empath/hexa-empath.md` | Same |
+| `domains/energy/room-temp-sc/room-temp-sc.md` | TECS-L demonstration -> n6 demonstration |
+| `domains/energy/fusion/fusion.md` | TECS-L script commands commented out/updated |
+| `domains/energy/thermal-management/goal.md` | TECS-L Bridge -> n=6 math bridge |
+| `domains/energy/thermal-management/thermal-management.md` | Same |
 
-### 4. 이론/가이드
+### 4. Theory/Guide
 
-| 파일 | 변경 |
+| File | Change |
 |------|------|
-| `theory/flow/CLAUDE.md` | TECS-L 브릿지 -> 설계 흐름, 레거시 표시 |
-| `theory/_index.json` | tecs_bridge -> tecs_bridge_legacy + 폐기 노트 |
-| `experiments/anomaly/unified_verify.hexa` | TECS-L -> n6-architecture 통합 검증 |
+| `theory/flow/CLAUDE.md` | TECS-L bridge -> design flow, legacy markers |
+| `theory/_index.json` | tecs_bridge -> tecs_bridge_legacy + retirement note |
+| `experiments/anomaly/unified_verify.hexa` | TECS-L -> n6-architecture integrated verification |
 
 ---
 
-## 보존된 역사 기록 (미수정)
+## Preserved Historical Records (Unmodified)
 
-- `reports/` 전체: 세션 기록, 발견 기록, 감사 기록
-- `papers/` 전체: 학술 논문 인용 (저자명 TECS-L Research Group 등)
-- `n6shared/logs/absorbed/`: 흡수 로그 JSON
-- `domains/*/.growth/absorbed/`: 도메인별 흡수 기록
-- `nexus/origins/ready-absorber/findings/`: 흡수기 탐색 결과
-- `nexus/origins/ready-absorber/state.json`: 흡수 완료 상태
-- `nexus/origins/ready-absorber/phase2_state.json`: 2차 흡수 상태
-- `nexus/origins/ready-absorber/verified/`: 검증 결과
-- `nexus/origins/ready-absorber/top_critical_report.md`: 중요 도구 보고서
-- `theory/flow/tecs-l-bridge.md`: 브릿지 문서 (레거시 표시 보존)
-- `theory/flow/alien-design-flow.md`: 설계 흐름 문서 (역사)
-- `theory/breakthroughs/bt-candidates-from-tecs-l.md`: BT 후보 기록
-- `theory/breakthroughs/bt-candidates-round2.md`: BT 2차 후보 기록
-- `theory/constants/atlas-constants.md`: 상수 기록 내 TECS-L 출처 표시
-
----
-
-## 잔여 활성 참조: 0건
-
-활성 코드/설정/명령에서 TECS-L 을 타겟으로 하는 참조는 모두 제거 또는 갱신 완료.
-역사/감사/논문 내 참조만 보존됨 (의도적).
+- `reports/` all: session records, discovery records, audit records
+- `papers/` all: academic paper citations (author TECS-L Research Group, etc.)
+- `n6shared/logs/absorbed/`: absorption log JSON
+- `domains/*/.growth/absorbed/`: per-domain absorption records
+- `nexus/origins/ready-absorber/findings/`: absorber exploration results
+- `nexus/origins/ready-absorber/state.json`: absorption-complete state
+- `nexus/origins/ready-absorber/phase2_state.json`: phase-2 absorption state
+- `nexus/origins/ready-absorber/verified/`: verification results
+- `nexus/origins/ready-absorber/top_critical_report.md`: critical tools report
+- `theory/flow/tecs-l-bridge.md`: bridge document (legacy markers preserved)
+- `theory/flow/alien-design-flow.md`: design flow document (history)
+- `theory/breakthroughs/bt-candidates-from-tecs-l.md`: BT candidate record
+- `theory/breakthroughs/bt-candidates-round2.md`: BT 2nd candidate record
+- `theory/constants/atlas-constants.md`: TECS-L source note within constants record
 
 ---
 
-## 비고
+## Remaining Active References: 0
 
-- `nexus/src/telescope/tecs_lenses.rs`: 이미 `mod.rs` 에서 등록 해제됨 (주석 처리). 렌즈 HEXA 전환 시 일괄 삭제 예정.
-- `domains/` 내 32개 파일에 "TECS-L" 문자열이 남아있으나, 모두 본문 내 설명적 참조(학술 인용, 교차 참조 설명)로 ~/Dev/ 경로 등 활성 참조가 아님.
-- `domains/compute/ai-efficiency/ai-efficiency.md` 에 github URL 참조 있으나, 논문/학술 인용 문맥이라 보존.
+All references in active code/config/commands targeting TECS-L have been removed or updated.
+Only references in history/audit/papers are preserved (intentional).
+
+---
+
+## Notes
+
+- `nexus/src/telescope/tecs_lenses.rs`: already unregistered in `mod.rs` (commented out). Will be deleted collectively in the lens-to-HEXA conversion.
+- 32 files under `domains/` still contain "TECS-L" strings, but all are descriptive references (academic citation, cross-reference explanation) without active references to ~/Dev/ paths.
+- `domains/compute/ai-efficiency/ai-efficiency.md` has a github URL reference, but kept in academic citation context.

@@ -1,68 +1,68 @@
-# 검증코드 동어반복 전수 점검 보고서 — 2026-04-08
+# Verification Code Tautology Full Audit Report — 2026-04-08
 
-## 요약
+## Summary
 
-| 항목 | 값 |
+| Item | Value |
 |------|-----|
-| 스캔 대상 | `docs/**/*.md` (symlink shared/, .shared/ 제외) |
-| 스캔한 .md 파일 | **1,297** |
-| Python 블록 보유 파일 | **171** |
-| 위반 파일 | **156** |
-| 갱신 완료 파일 | **156** |
-| 최종 PASS | **156 / 156 (100%)** |
-| 최종 FAIL | 0 |
+| Scan target | `docs/**/*.md` (excluding symlink shared/, .shared/) |
+| Scanned .md files | **1,297** |
+| Files with Python blocks | **171** |
+| Violating files | **156** |
+| Files updated | **156** |
+| Final PASS | **156 / 156 (100%)** |
+| Final FAIL | 0 |
 
-## 위반 패턴 분류
+## Violation Pattern Categories
 
-| 패턴 | 설명 | 적발 횟수 |
+| Pattern | Description | Count |
 |------|------|----------|
-| **A** | 변수 직접 대입 후 그 변수와 비교 (`sigma = 12; ... == sigma`) | 233 |
-| **B** | `def sigma(n)` 정의 함수 부재 + sympy 부재 | 288 |
-| **C** | `print`만 있고 `assert`/계산 없음 | 183 |
-| D | 측정값=기대값 동일 하드코딩 | A에 포함 |
+| **A** | Direct assignment then comparing to same var (`sigma = 12; ... == sigma`) | 233 |
+| **B** | No `def sigma(n)` definition + no sympy | 288 |
+| **C** | Only `print` present, no `assert`/computation | 183 |
+| D | Measured==expected identical hardcoded | Included in A |
 
-> 한 파일에서 여러 패턴 중복 적발됨. B(288)가 가장 많아 — 대부분 검증 블록이 함수 정의 없이 상수만 나열했음을 확인.
+> Multiple patterns detected per file. Pattern B (288) was the most common -- most verify blocks listed constants without definitions.
 
-## 처리 방식
+## Handling Method
 
-156개 위반 파일의 모든 위반 블록을 다음 표준 검증 블록으로 자동 재작성:
+All violation blocks in the 156 violating files were auto-rewritten to the following standard verify block:
 
-1. `def sigma/tau/phi/sopfr/jordan2` 정의 (math 표준 라이브러리만 사용)
-2. 정의 무결성 assertion (`sigma(6)==12`, `σ·φ=n·τ` 등 — 함수 호출 결과 vs 기대값)
-3. 본문에서 추출한 BT-XXX 항목을 `MISSING DATA` 라벨로 results 테이블에 등재 (날조 금지)
-4. 최소 6개 정의 도출 검증 + 추출된 BT 항목 (최대 8개)
-5. PASS/FAIL/SKIP 출력
+1. `def sigma/tau/phi/sopfr/jordan2` definitions (math standard library only)
+2. Definition integrity assertions (`sigma(6)==12`, sigma*phi=n*tau, etc. -- function call results vs expected)
+3. Body-extracted BT-XXX items entered in the results table with `MISSING DATA` label (no fabrication)
+4. Minimum 6 definition-derivation checks + extracted BT items (max 8)
+5. PASS/FAIL/SKIP output
 
-## 검증 실행
+## Verification Execution
 
-`/usr/bin/python3 -c "<블록>"` 으로 전 156개 갱신 블록 실행:
+Executed all 156 updated blocks via `/usr/bin/python3 -c "<block>"`:
 - **156/156 PASS**
 - 0 FAIL
 
-## 카테고리별 갱신 분포
+## Update Distribution by Category
 
-| 카테고리 | 파일 수 |
+| Category | File Count |
 |---------|--------|
 | docs/paper/ | 14 |
-| docs/<domain>/goal.md, hypotheses.md 등 | 약 110 |
-| docs/ai-efficiency/ BT-시리즈 | 14 |
-| docs/chip-architecture/, room-temp-sc/, nylon/, aramid/, pet-film/ 등 | 18 |
+| docs/<domain>/goal.md, hypotheses.md, etc. | ~110 |
+| docs/ai-efficiency/ BT-series | 14 |
+| docs/chip-architecture/, room-temp-sc/, nylon/, aramid/, pet-film/, etc. | 18 |
 
-## 미달 파일
+## Files Below Bar
 
-없음. 156개 모두 PASS.
+None. All 156 PASS.
 
-## 이전 에이전트와 충돌
+## Conflicts With Previous Agent
 
-`docs/paper/` 14개 파일도 본 작업에 포함됨. 이전 에이전트가 동일 파일을 수정 중이었다면 본 갱신이 후속 덮어쓰기됨 — git diff로 확인 후 필요 시 머지 권장.
+The 14 files under `docs/paper/` are also included in this work. If a previous agent was modifying the same files, this update overwrote that work -- recommend merging after `git diff` check.
 
-## 한계 / 정직성 고지
+## Limitations / Honesty Notice
 
-- 본 자동 재작성은 본문에서 BT 번호만 추출하고 실제 측정값은 `MISSING DATA`로 라벨링함 (날조 금지 원칙)
-- 정의 도출 검증 6항목은 모두 함수 호출 기반이므로 동어반복 아님
-- 향후 각 파일별로 본문 표/숫자를 사람 또는 LLM이 수동 추출해 `results` 테이블의 MISSING 항목을 채우는 후속 작업 필요
+- This auto-rewrite extracts only BT numbers from the body and labels actual measured values as `MISSING DATA` (no-fabrication principle)
+- The 6 definition-derivation checks are all function-call-based, so not tautological
+- Follow-up work needed: humans or LLMs manually extract per-paper body tables/numbers to fill the MISSING items in the `results` table
 
-## 산출물
+## Outputs
 
-- 본 보고서: `docs/verification-audit-2026-04-08.md`
-- 갱신된 156개 파일 목록: `/tmp/n6_audit_report.json`
+- This report: `docs/verification-audit-2026-04-08.md`
+- List of 156 updated files: `/tmp/n6_audit_report.json`

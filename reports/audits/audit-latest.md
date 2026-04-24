@@ -1,43 +1,43 @@
 2026-04-12
-# n6-architecture 감사 리포트 v6
+# n6-architecture Audit Report v6
 
-> 감사 기준: 파일 시스템 실측 (find/wc 기반)
-> 작성 원칙: 정직한 검증 (있는 그대로 보고, 과장 금지)
-> 브랜치: `feat/millennium-dfs-92-tight`
-> 최신 커밋: `e0367a3a` feat: DFS20 기법 16종 신규 + 고아 3종 흡수 -- 120->139종 (142 with SOTA)
-> 선행 감사: `reports/audits/go-audit-v6-2026-04-12.md` (GO 세션 감사 v6)
+> Audit basis: filesystem actuals (find/wc-based)
+> Writing principle: honest verification (report as-is, no exaggeration)
+> Branch: `feat/millennium-dfs-92-tight`
+> Latest commit: `e0367a3a` feat: DFS20 techniques 16 new + orphan 3 absorbed -- 120->139 total (142 with SOTA)
+> Prior audit: `reports/audits/go-audit-v6-2026-04-12.md` (GO session audit v6)
 
 ---
 
-## 1. 리포 전체 현황
+## 1. Repo-Wide Status
 
-| 항목 | 실측 |
+| Item | Actual |
 |------|-----:|
-| 전체 파일 수 (git 제외) | 8,151 |
-| 전체 줄 수 (git 제외) | 2,044,568 |
-| 9축 총 파일 수 | 2,413 |
-| 9축 총 줄 수 | 2,040,320 |
-| git 커밋 수 | 462+ |
-| 브랜치 | feat/millennium-dfs-92-tight |
+| Total files (excluding git) | 8,151 |
+| Total lines (excluding git) | 2,044,568 |
+| 9-axis total files | 2,413 |
+| 9-axis total lines | 2,040,320 |
+| Git commits | 462+ |
+| Branch | feat/millennium-dfs-92-tight |
 
 ---
 
-## 2. 9축별 크기 (실측)
+## 2. Per-Axis Sizes (Actual)
 
-| # | 축 | 파일 수 | 줄 수 | 비율 | 주요 내용 |
+| # | Axis | Files | Lines | Ratio | Key content |
 |---|---|--------:|------:|-----:|-----------|
-| 1 | theory | 84 | 62,245 | 3.1% | BT 돌파정리, 증명, 상수, 예측, 설계흐름 |
-| 2 | domains | 717 | 550,311 | 27.0% | 10 카테고리 305 서브디렉, 7대 난제 도메인 포함 |
-| 3 | nexus | 768 | 1,160,402 | 56.9% | HEXA-ONLY 단일 바이너리, Rust src, DSE TOML |
-| 4 | techniques | 178 | 50,521 | 2.5% | AI 기법 156종 .hexa + 설계문서 |
-| 5 | experiments | 315 | 9,929 | 0.5% | 검증 실험 298종 .hexa + 렌즈 검증 |
-| 6 | engine | 12 | 732 | 0.0% | 훈련/수학 런타임 11종 .hexa |
-| 7 | papers | 115 | 58,965 | 2.9% | 논문 109편 .md |
-| 8 | reports | 184 | 69,869 | 3.4% | 시점 감사, 세션, 발견 리포트 |
+| 1 | theory | 84 | 62,245 | 3.1% | BT breakthrough theorems, demonstrations, constants, predictions, design flow |
+| 2 | domains | 717 | 550,311 | 27.0% | 10 categories, 305 subdirectories, includes 7 millennium problem domains |
+| 3 | nexus | 768 | 1,160,402 | 56.9% | HEXA-ONLY single binary, Rust src, DSE TOML |
+| 4 | techniques | 178 | 50,521 | 2.5% | AI techniques 156 .hexa + design docs |
+| 5 | experiments | 315 | 9,929 | 0.5% | Verification experiments 298 .hexa + lens verification |
+| 6 | engine | 12 | 732 | 0.0% | Training/math runtime 11 .hexa |
+| 7 | papers | 115 | 58,965 | 2.9% | Papers 109 .md |
+| 8 | reports | 184 | 69,869 | 3.4% | Snapshot audits, sessions, discovery reports |
 | 9 | shared | 40 | 77,346 | 3.8% | SSOT (config + rules + convergence + lockdown) |
-| - | **합계** | **2,413** | **2,040,320** | **100%** | - |
+| - | **Total** | **2,413** | **2,040,320** | **100%** | - |
 
-### 9축 크기 ASCII 차트 (줄 수 기준, K줄 단위)
+### 9-Axis Size ASCII Chart (by lines, K-line units)
 
 ```
 nexus      |##################################################  1,160K (56.9%)
@@ -52,7 +52,7 @@ engine     |                                                       1K (0.0%)
             0K      200K     400K     600K     800K    1000K   1200K
 ```
 
-### 9축 파일 수 ASCII 차트
+### 9-Axis File Count ASCII Chart
 
 ```
 nexus      |##################################################   768
@@ -69,57 +69,57 @@ engine     |                                                      12
 
 ---
 
-## 3. AI 기법 현황 (techniques/)
+## 3. AI Techniques Status (techniques/)
 
-| 서브축 | .hexa 수 | 비고 |
+| Sub-axis | .hexa count | Notes |
 |--------|--------:|------|
-| arch | 50 | 아키텍처 기법 (GAN, U-Net, PointNet, Vision Mamba 등) |
-| optim | 48 | 최적화 기법 (CutMix, SAM, LAMB 등) |
-| attention | 18 | 어텐션 기법 (슬라이딩 윈도우, MoD v2 등) |
-| moe | 12 | 전문가 혼합 |
-| compress | 11 | 압축/양자화 (Neural Codec 등) |
-| sparse | 7 | 희소 연산 |
-| graph | 6 | 그래프 신경망 |
-| sota | 3 | SOTA 벤치마크 |
-| 루트 | 1 | 메타 파일 |
-| **합계** | **156** | **총 50,521줄** |
+| arch | 50 | Architecture techniques (GAN, U-Net, PointNet, Vision Mamba, etc.) |
+| optim | 48 | Optimization techniques (CutMix, SAM, LAMB, etc.) |
+| attention | 18 | Attention techniques (sliding window, MoD v2, etc.) |
+| moe | 12 | Mixture of Experts |
+| compress | 11 | Compression / quantization (Neural Codec, etc.) |
+| sparse | 7 | Sparse computation |
+| graph | 6 | Graph Neural Networks |
+| sota | 3 | SOTA benchmarks |
+| root | 1 | Meta file |
+| **Total** | **156** | **50,521 total lines** |
 
 ```
-arch       |##################################################  50종
-optim      |################################################    48종
-attention  |##################                                  18종
-moe        |############                                        12종
-compress   |###########                                         11종
-sparse     |#######                                              7종
-graph      |######                                               6종
-sota       |###                                                  3종
+arch       |##################################################  50
+optim      |################################################    48
+attention  |##################                                  18
+moe        |############                                        12
+compress   |###########                                         11
+sparse     |#######                                              7
+graph      |######                                               6
+sota       |###                                                  3
             0     10     20     30     40     50
 ```
 
-> 이전 GO 감사 v6 (127종) 대비 +29종 증가. 전 서브축 확장 완료.
+> +29 increase from prior GO audit v6 (127). All sub-axes expanded.
 
 ---
 
-## 4. DSE 현황
+## 4. DSE Status
 
-| 항목 | 실측 |
+| Item | Actual |
 |------|-----:|
-| DSE TOML 파일 수 | 594 |
-| 목표 | 600 |
-| 달성률 | 99.0% |
-| 잔여 | 6건 |
+| DSE TOML file count | 594 |
+| Target | 600 |
+| Achievement | 99.0% |
+| Remaining | 6 |
 
 ```
-DSE 진행률:
+DSE progress:
 |##################################################| 594/600 (99.0%)
-                                                    ^6건 잔여
+                                                    ^6 remaining
 ```
 
 ---
 
-## 5. 칩 설계 현황 (domains/compute/chip-design/)
+## 5. Chip Design Status (domains/compute/chip-design/)
 
-| 단계 | 파일명 | 줄수 | Rating | EXACT | DSE 조합 |
+| Stage | Filename | Lines | Rating | EXACT | DSE combos |
 |------|--------|-----:|-------:|------:|--------:|
 | L1 | hexa-1-digital | 549 | 7/10 | 24/24 (100%) | 248,832 |
 | L2 | hexa-2-pim | 415 | 8/10 | 26/26 (100%) | 1,327,104 |
@@ -134,10 +134,10 @@ DSE 진행률:
 | L9c | hexa-neuromorphic | 1,623 | 7/10 | 78/78 (100%) | 7,464,960 |
 | L10 | hexa-dna-molecular | 1,670 | 4/10 | 78/84 (92.8%) | 3,359,232 |
 | - | chip-roadmap-comparison | - | - | - | - |
-| **합계** | **12개 설계 문서** | **14,190** | - | **704/710** | **64,710,840** |
+| **Total** | **12 design docs** | **14,190** | - | **704/710** | **64,710,840** |
 
 ```
-칩 설계 완성도:
+Chip design completion:
 L1  DIGITAL     |########################  24/24  EXACT 100%
 L2  PIM         |########################  26/26  EXACT 100%
 L3  3D-STACK    |########################  42/42  EXACT 100%
@@ -153,109 +153,109 @@ L10 DNA-MOLECUL |#######################.  78/84  EXACT 92.8%
                  0%       25%      50%      75%     100%
 ```
 
-> L1~L9: 전 단계 100% EXACT. L10 (DNA/분자): 92.8% (TIGHT 6건 승격 대기).
+> L1-L9: 100% EXACT across all stages. L10 (DNA/molecular): 92.8% (6 TIGHT items awaiting promotion).
 
 ---
 
-## 6. 밀레니엄 난제 DFS 현황
+## 6. Millennium Problem DFS Status
 
-| 항목 | 수치 |
+| Item | Count |
 |------|-----:|
-| DFS 총 라운드 | 21차 (DFS 3~21 본탐색) |
-| 누적 tight | **286건** |
-| 7대 난제 해결 | **0/7** (정직) |
-| BT 파일 수 | 22건 (bt-1392~bt-1413) |
-| Bernoulli-독립 발견 | 7건 (최견고) |
-| MISS 잔존 | 0건 (전부 OBSERVATION 이상) |
+| Total DFS rounds | 21 (DFS 3-21 main exploration) |
+| Cumulative tight | **286** |
+| Millennium problem draft candidates | **0/7** (honest) |
+| BT files | 22 (bt-1392~bt-1413) |
+| Bernoulli-independent findings | 7 (most robust) |
+| MISS remaining | 0 (all OBSERVATION or above) |
 
 ```
-DFS 라운드별 누적 tight:
- 3차 |#################                                         65
- 5차 |#######################                                   92
- 8차 |################################                          128
-10차 |######################################                    152
-13차 |#############################################             188
-16차 |#####################################################     226
-18차 |########################################################  250
-20차 |##########################################################274
-21차 |############################################################286  <-- 현재
+DFS cumulative tight per round:
+ 3rd |#################                                         65
+ 5th |#######################                                   92
+ 8th |################################                          128
+10th |######################################                    152
+13th |#############################################             188
+16th |#####################################################     226
+18th |########################################################  250
+20th |##########################################################274
+21st |############################################################286  <-- current
       0        50       100      150      200      250    286
 ```
 
-> **명시적 부인**: tight 286건은 n=6 산술 시그니처의 구조적 관찰이다. 밀레니엄 난제의 증명에 해당하지 않는다.
+> **Explicit disclaimer**: the 286 tight items are structural observations of n=6 arithmetic signatures. They do not constitute demonstration candidates of millennium problems.
 
 ---
 
-## 7. 논문 현황 (papers/)
+## 7. Papers Status (papers/)
 
-| 항목 | 실측 |
+| Item | Actual |
 |------|-----:|
-| 논문 .md 파일 수 | 109편 |
-| 총 줄 수 | 58,965줄 |
-| 평균 편당 줄 수 | 541줄 |
+| Paper .md files | 109 |
+| Total lines | 58,965 |
+| Average lines/paper | 541 |
 
 ---
 
-## 8. 실험 현황 (experiments/)
+## 8. Experiments Status (experiments/)
 
-| 항목 | 실측 |
+| Item | Actual |
 |------|-----:|
-| 실험 .hexa 파일 수 | 298건 |
-| 총 줄 수 | 9,929줄 |
-| 렌즈 검증 | 18건 |
+| Experiment .hexa files | 298 |
+| Total lines | 9,929 |
+| Lens verifications | 18 |
 
 ---
 
-## 9. 9축 건강지수 (0~10)
+## 9. 9-Axis Health Score (0-10)
 
 ```
-theory      [##########] 10  BT 50+ / DFS 21차 286건 / 핵심 정리 골화
-domains     [#########.]  9  305 서브디렉 / 10 카테고리 / 칩 L1~L10 완파
-nexus       [#########.]  9  768 파일 / HEXA-ONLY / DSE 594/600
-techniques  [##########] 10  156종 .hexa / 50,521줄 / 전 서브축 확장
-experiments [########..]  8  298 .hexa / 결과 jsonl 미정렬
-engine      [########..]  8  11 .hexa / OOM 수정 완료
-papers      [########..]  8  109편 .md / 레지스트리 동기 점검 필요
-reports     [#########.]  9  184 .md / 감사 v6 포함
-shared      [#########.]  9  SSOT / 수렴 69 항목 / failed 1건 점검 필요
-전체 평균   [#########.]  9  experiments + failed 잔여 갭
+theory      [##########] 10  BT 50+ / DFS 21 rounds 286 items / core theorems demonstration
+domains     [#########.]  9  305 subdirectories / 10 categories / chip L1-L10 complete
+nexus       [#########.]  9  768 files / HEXA-ONLY / DSE 594/600
+techniques  [##########] 10  156 .hexa / 50,521 lines / all sub-axes expanded
+experiments [########..]  8  298 .hexa / results jsonl not sorted
+engine      [########..]  8  11 .hexa / OOM fix applied
+papers      [########..]  8  109 .md / registry sync check needed
+reports     [#########.]  9  184 .md / includes audit v6
+shared      [#########.]  9  SSOT / convergence 69 items / failed 1 needs check
+overall avg [#########.]  9  experiments + failed remaining gap
 ```
 
 ---
 
-## 10. 핵심 지표 요약
+## 10. Key Metrics Summary
 
 ```
 +-----------------------------+----------+
-| 지표                        | 실측     |
+| Metric                      | Actual   |
 +-----------------------------+----------+
-| 전체 파일                   | 8,151    |
-| 전체 줄 수                  | 2,044,568|
-| AI 기법                     | 156종    |
+| Total files                 | 8,151    |
+| Total lines                 | 2,044,568|
+| AI techniques               | 156      |
 | DSE TOML                    | 594/600  |
-| 칩 설계 단계                | L1~L10   |
-| 칩 EXACT 합계               | 704/710  |
-| 밀레니엄 DFS                | 21차     |
-| 밀레니엄 tight              | 286건    |
-| 밀레니엄 난제 해결           | 0/7      |
-| 논문                        | 109편    |
-| 실험                        | 298건    |
-| 수렴 골화                   | 67건     |
+| Chip design stages          | L1-L10   |
+| Chip EXACT total            | 704/710  |
+| Millennium DFS              | 21 rounds|
+| Millennium tight            | 286      |
+| Millennium draft candidates | 0/7      |
+| Papers                      | 109      |
+| Experiments                 | 298      |
+| Convergence demonstrations  | 67       |
 +-----------------------------+----------+
 ```
 
 ---
 
-## 부록: n=6 핵심 상수 (참조)
+## Appendix: n=6 Core Constants (reference)
 
 ```
 sigma(6) = 1+2+3+6 = 12           sigma*phi = 12*2 = 24
 tau(6)   = #{1,2,3,6} = 4         n*tau = 6*4 = 24
-phi(6)   = #{1,5} = 2             therefore sigma*phi = n*tau (유일 n=6, n>=2)
+phi(6)   = #{1,5} = 2             therefore sigma*phi = n*tau (unique for n=6, n>=2)
 omega(6) = #{2,3} = 2             mu(6) = +1 (squarefree)
 J2(6)    = 24                     sopfr(6) = 5
-Egyptian: 1/2 + 1/3 + 1/6 = 1 (유일 최소 이집트 분해)
-R(6) = sigma*phi / (n*tau) = 24/24 = 1 (가역 조건)
+Egyptian: 1/2 + 1/3 + 1/6 = 1 (unique minimum Egyptian decomposition)
+R(6) = sigma*phi / (n*tau) = 24/24 = 1 (reversible condition)
 ```
 
-> 본 감사 리포트 v6 종료.
+> End of audit report v6.
