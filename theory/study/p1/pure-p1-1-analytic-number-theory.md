@@ -1,43 +1,44 @@
-# PURE-P1-1 — 해석적 정수론 (ζ 함수/함수방정식/Perron·Mellin/explicit formula)
+# PURE-P1-1 — Analytic Number Theory (zeta function / functional equation / Perron-Mellin / explicit formula)
 
-> 트랙: P1-PURE / 1번 태스크
-> 완료 기준: ξ(s) 함수방정식 ξ(s) = ξ(1-s) 를 θ 급수·Mellin 경로로 유도할 수 있고,
-> ψ(x) 의 explicit formula ψ(x) = x - Σ_ρ x^ρ/ρ - ln(2π) - ½ ln(1 - x^{-2}) 를
-> 한 줄씩 이해할 수 있다.
-> 출처 기반: Iwaniec-Kowalski "Analytic Number Theory" (AMS Colloquium Publ. 53, 2004) ch. 5,
-> Edwards "Riemann's Zeta Function" (Academic Press, 1974) ch. 1~3,
-> Titchmarsh-Heath-Brown "The Theory of the Riemann Zeta-Function" (2판, 1986) ch. 2, ch. 3.
-> **정직성**: 이 파일은 교재 요약이다. 새로운 결과는 없다. 모든 정리·공식은 위 3개 교재에서
-> 재구성하였고, 유도 경로 이름(Riemann 1859 원논문 포함)과 페이지는 각 교재 판본 기준으로
-> 적었다. 지어낸 정리·저자·연도는 포함하지 않았다.
-
----
-
-## 0. 목적과 범위
-
-밀레니엄 P1 학습 로드맵의 첫 태스크는 **해석적 정수론의 핵심 도구**를 손에 익히는 것이다.
-뒤이어 P2~P3 단계에서 RH·BSD·Langlands·GRH 등 ζ 기반 문제들을 직접 다루려면,
-다음 6가지 기초가 반드시 먼저 자리잡아야 한다.
-
-1. Riemann ζ(s) 의 정의 영역 확장 (해석적 연속)
-2. 함수방정식 ξ(s) = ξ(1-s) 유도 (θ 급수 + Mellin + reflection)
-3. 자명 영점 (s = -2, -4, -6, ...) 의 의미
-4. 비자명 영점 (critical strip 0 < Re(s) < 1) 와 RH 가설
-5. Chebyshev ψ(x) 와 explicit formula
-6. Perron 공식, Mellin 변환 — 합(sum)과 적분(contour)을 오가는 다리
-
-이 노트는 프로젝트 상수 (n=6, σ=12, φ=2, τ=4, sopfr=5, J₂=24) 와는 **직접 관련이 없다**.
-순수하게 해석적 정수론을 정리한다. 단, σ·φ = n·τ ⟺ n=6 정리 자체가 ζ 와 Dirichlet 급수
-∑ σ(n)/n^s = ζ(s)ζ(s-1) 등을 통해 P2·P3 단계에서 ζ 영점 분포와 연결되는 점은 마지막
-§9 에서 메모만 남긴다 (증명은 P2 문서 몫).
+> Track: P1-PURE / Task 1
+> Completion criterion: be able to derive the ξ(s) functional equation ξ(s) = ξ(1-s) via the θ-series / Mellin route,
+> and to walk line by line through the explicit formula for ψ(x):
+> ψ(x) = x - Σ_ρ x^ρ/ρ - ln(2π) - ½ ln(1 - x^{-2}).
+> Source base: Iwaniec-Kowalski "Analytic Number Theory" (AMS Colloquium Publ. 53, 2004) ch. 5,
+> Edwards "Riemann's Zeta Function" (Academic Press, 1974) ch. 1-3,
+> Titchmarsh-Heath-Brown "The Theory of the Riemann Zeta-Function" (2nd ed., 1986) ch. 2, ch. 3.
+> **Honesty**: this file is a textbook summary. It contains no new results. Every theorem and formula is
+> reconstructed from the three textbooks above, and the derivation paths (including Riemann's 1859 paper)
+> and page numbers follow each textbook edition. No invented theorems, authors, or dates are included.
 
 ---
 
-## 1. ζ 함수와 해석적 연속
+## 0. Purpose and Scope
 
-### 1.1 Dirichlet 급수 정의
+The first task of the Millennium P1 learning roadmap is to gain hands-on familiarity with the core tools of
+analytic number theory. To then handle ζ-based problems such as RH, BSD, Langlands, GRH in stages P2-P3,
+the following six foundations must be in place first.
 
-Re(s) > 1 에서
+1. Extension of the domain of definition of Riemann ζ(s) (analytic continuation)
+2. Derivation of the functional equation ξ(s) = ξ(1-s) (θ-series + Mellin + reflection)
+3. Meaning of the trivial zeros (s = -2, -4, -6, ...)
+4. Non-trivial zeros (critical strip 0 < Re(s) < 1) and the RH hypothesis
+5. Chebyshev ψ(x) and the explicit formula
+6. Perron formula, Mellin transform — a bridge between sums and contour integrals
+
+These notes are not directly related to the project constants (n=6, σ=12, φ=2, τ=4, sopfr=5, J₂=24).
+They are purely a summary of analytic number theory. However, since the σ·φ = n·τ ⟺ n=6 candidate itself
+connects to ζ-zero distributions at stages P2 and P3 via Dirichlet series such as
+∑ σ(n)/n^s = ζ(s)ζ(s-1), a brief memo is left in §9 only (the argument itself is deferred to the P2
+document).
+
+---
+
+## 1. The ζ Function and Analytic Continuation
+
+### 1.1 Dirichlet Series Definition
+
+For Re(s) > 1,
 
 ```
           ∞   1
@@ -45,50 +46,50 @@ Re(s) > 1 에서
          n=1  n^s
 ```
 
-이 급수는 σ = Re(s) > 1 인 반평면에서 **절대수렴**, **균등수렴(컴팩트 집합에서)**,
-그리고 각 컴팩트 집합에서 해석적이다 (Weierstrass M-판정).
+This series is absolutely convergent, uniformly convergent on compact subsets, and analytic on each compact
+subset of the half-plane σ = Re(s) > 1 (Weierstrass M-test).
 
-### 1.2 Euler 곱 (Re(s) > 1)
+### 1.2 Euler Product (Re(s) > 1)
 
 ```
            ┌       1     ┐
-  ζ(s) = ∏ │ ──────────  │      (p 는 소수 전체)
+  ζ(s) = ∏ │ ──────────  │      (p over all primes)
          p └  1 - p^{-s} ┘
 ```
 
-유도: (1 - p^{-s})^{-1} = ∑_{k=0}^∞ p^{-ks}. 모든 소수 p 에 대해 곱하고 산술기본정리
-(모든 양의 정수가 유일한 소인수분해) 를 쓰면 ∑ 1/n^s 를 얻는다.
+Derivation: (1 - p^{-s})^{-1} = ∑_{k=0}^∞ p^{-ks}. Multiply over all primes p and use the fundamental
+theorem of arithmetic (unique factorisation of every positive integer) to obtain ∑ 1/n^s.
 
-### 1.3 σ > 1 에서 σ > 0 으로 (첫 번째 확장)
+### 1.3 From σ > 1 to σ > 0 (first extension)
 
-(1 - 2^{1-s}) ζ(s) = ∑_{n=1}^∞ (-1)^{n-1} / n^s = η(s) (Dirichlet η, 교대급수)
-는 σ > 0 에서 수렴한다. 따라서
+(1 - 2^{1-s}) ζ(s) = ∑_{n=1}^∞ (-1)^{n-1} / n^s = η(s) (Dirichlet η, alternating series) converges for
+σ > 0. Hence
 
 ```
   ζ(s) = η(s) / (1 - 2^{1-s})
 ```
 
-로 σ > 0, s ≠ 1 + 2π i k / ln 2 까지 해석적으로 연장할 수 있다. 이는 Hardy 식의 **첫 단계** 확장으로,
-완전한 함수방정식으로 가기엔 부족하지만, 우변 η 가 수렴한다는 점에서 의미가 크다.
+extends ζ analytically to σ > 0, s ≠ 1 + 2π i k / ln 2. This is the first-step extension in Hardy's style,
+insufficient to obtain the full functional equation, but meaningful since the right-hand side η converges.
 
-(출처: Titchmarsh §2.1)
+(Source: Titchmarsh §2.1)
 
-### 1.4 s = 1 에서의 단극
+### 1.4 Simple Pole at s = 1
 
-ζ(s) 는 s = 1 에서 잔차 1 인 단순극을 갖는다:
+ζ(s) has a simple pole of residue 1 at s = 1:
 
 ```
   ζ(s) = 1/(s-1) + γ + O(s-1)       (s → 1)
 ```
 
-여기서 γ = 0.5772156... 는 Euler-Mascheroni 상수. 유도: ζ(s) - 1/(s-1)
-을 적분 표현으로 쓰고 s → 1 극한을 취한다 (Edwards §1.3).
+where γ = 0.5772156... is the Euler-Mascheroni constant. Derivation: write ζ(s) - 1/(s-1) as an integral
+representation and take the limit s → 1 (Edwards §1.3).
 
 ---
 
-## 2. θ 급수와 Mellin 변환
+## 2. θ-series and Mellin Transform
 
-### 2.1 Jacobi θ 함수
+### 2.1 Jacobi θ Function
 
 ```
           ∞
@@ -96,24 +97,24 @@ Re(s) > 1 에서
         n=-∞
 ```
 
-즉 θ(x) = 1 + 2 ∑_{n=1}^∞ e^{-π n² x}.
+i.e. θ(x) = 1 + 2 ∑_{n=1}^∞ e^{-π n² x}.
 
-### 2.2 θ 변환 공식 (푸아송 합)
+### 2.2 θ Transformation Formula (Poisson Summation)
 
-**정리 (Jacobi).** x > 0 에서
+**Theorem (Jacobi).** For x > 0,
 
 ```
   θ(x) = x^{-1/2} · θ(1/x)
 ```
 
-**증명 개요.** f(y) = e^{-π y² x} 의 푸리에 변환은 f̂(ξ) = x^{-1/2} e^{-π ξ² / x}.
-푸아송 합 공식 ∑_{n∈Z} f(n) = ∑_{k∈Z} f̂(k) 를 대입하면 바로 나온다.
+**Proof sketch.** The Fourier transform of f(y) = e^{-π y² x} is f̂(ξ) = x^{-1/2} e^{-π ξ² / x}.
+Substitute into the Poisson summation formula ∑_{n∈Z} f(n) = ∑_{k∈Z} f̂(k).
 
-(출처: Iwaniec-Kowalski §5.2, Edwards §1.5)
+(Source: Iwaniec-Kowalski §5.2, Edwards §1.5)
 
-### 2.3 Mellin 변환
+### 2.3 Mellin Transform
 
-f: (0,∞) → C 가 적당한 감소 조건을 만족할 때
+For f: (0,∞) → C satisfying suitable decay conditions,
 
 ```
                   ∞
@@ -121,14 +122,13 @@ f: (0,∞) → C 가 적당한 감소 조건을 만족할 때
                  0
 ```
 
-를 Mellin 변환이라 한다.
+is called the Mellin transform.
 
-예. f(x) = e^{-x} 이면 M[f](s) = Γ(s) (Re s > 0).
+Example. f(x) = e^{-x} gives M[f](s) = Γ(s) (Re s > 0).
 
-### 2.4 ζ 의 적분 표현
+### 2.4 Integral Representation of ζ
 
-Γ(s/2) π^{-s/2} n^{-s} = ∫₀^∞ x^{s/2 - 1} e^{-π n² x} dx 를 n 에 대해 합하면
-(σ > 1)
+From Γ(s/2) π^{-s/2} n^{-s} = ∫₀^∞ x^{s/2 - 1} e^{-π n² x} dx, summing over n (σ > 1),
 
 ```
                                       ∞
@@ -136,18 +136,18 @@ f: (0,∞) → C 가 적당한 감소 조건을 만족할 때
                                       0
 ```
 
-여기서 ψ(x) := ∑_{n=1}^∞ e^{-π n² x} = (θ(x) - 1)/2 (이 장 한정 표기; ψ 는
-다음 장에서 Chebyshev ψ 와 기호가 겹치지만, 여기서는 θ 로부터 온 것임).
+where ψ(x) := ∑_{n=1}^∞ e^{-π n² x} = (θ(x) - 1)/2 (notation local to this chapter; this ψ clashes with
+Chebyshev ψ in the next chapter, but here it comes from θ).
 
 ---
 
-## 3. 함수방정식 ξ(s) = ξ(1-s)
+## 3. Functional Equation ξ(s) = ξ(1-s)
 
-### 3.1 Riemann 의 방법 (1859)
+### 3.1 Riemann's Method (1859)
 
-(Edwards §1.6, Iwaniec-Kowalski §5.3 참고 재구성)
+(Reconstruction following Edwards §1.6, Iwaniec-Kowalski §5.3)
 
-적분을 x ∈ (0,1) 과 x ∈ (1,∞) 로 쪼갠다.
+Split the integral into x ∈ (0,1) and x ∈ (1,∞).
 
 ```
                                          1                      ∞
@@ -155,8 +155,8 @@ f: (0,∞) → C 가 적당한 감소 조건을 만족할 때
                                         0                      1
 ```
 
-첫 번째 적분에서 x → 1/x 치환을 하고 θ 변환 공식 θ(x) = x^{-1/2} θ(1/x), 즉
-2 ψ(x) + 1 = x^{-1/2} (2 ψ(1/x) + 1) 를 대입하면
+In the first integral, substitute x → 1/x and apply the θ transformation formula θ(x) = x^{-1/2} θ(1/x),
+i.e. 2 ψ(x) + 1 = x^{-1/2} (2 ψ(1/x) + 1), to obtain
 
 ```
   ∫₀¹ x^{s/2-1} ψ(x) dx
@@ -164,104 +164,103 @@ f: (0,∞) → C 가 적당한 감소 조건을 만족할 때
      = ∫₁^∞ x^{(1-s)/2 - 1} ψ(x) dx + ½ · (1/(s-1) - 1/s)
 ```
 
-따라서
+Therefore
 
 ```
   π^{-s/2} Γ(s/2) ζ(s) = 1/(s(s-1))
                         + ∫₁^∞ [x^{s/2-1} + x^{(1-s)/2 - 1}] ψ(x) dx
 ```
 
-우변의 두 번째 항은 s 와 1-s 에 대해 **대칭**이다. 좌변 ζ(s) 는 이 식으로 **모든 s (s=0,1 제외)**
-에서 해석적으로 정의된다.
+The second term on the right is symmetric in s and 1-s. The left-hand side ζ(s) is analytically defined by
+this formula for all s (except s=0,1).
 
-### 3.2 ξ(s) 정의
+### 3.2 Definition of ξ(s)
 
 ```
   ξ(s) := ½ s(s-1) π^{-s/2} Γ(s/2) ζ(s)
 ```
 
-이렇게 두면 s(s-1) 이 극을 상쇄하여 ξ(s) 는 **전함수(entire)** 가 된다. §3.1 의
-대칭적 형태를 써서 바로 다음을 얻는다.
+Setting this up makes s(s-1) cancel the poles, so ξ(s) becomes entire. Using the symmetric form of §3.1 we
+immediately obtain the following.
 
-**정리 (함수방정식).**
+**Theorem (functional equation).**
 
 ```
   ξ(s) = ξ(1-s)
 ```
 
-(출처: Iwaniec-Kowalski Thm 5.3, Edwards §1.6, Titchmarsh §2.6)
+(Source: Iwaniec-Kowalski Thm 5.3, Edwards §1.6, Titchmarsh §2.6)
 
-### 3.3 대칭성의 기하학적 의미
+### 3.3 Geometric Meaning of the Symmetry
 
-s ↦ 1-s 는 실선 Re(s) = 1/2 를 축으로 하는 반사(reflection). ξ(s) 의 영점은 이 축에
-대해 대칭으로 분포한다. RH 는 "모든 비자명 영점이 이 축 위에 있다" 는 주장.
+s ↦ 1-s is the reflection across the line Re(s) = 1/2. The zeros of ξ(s) are distributed symmetrically with
+respect to this axis. RH is the claim that all non-trivial zeros lie on this axis.
 
-### 3.4 함수방정식의 다른 형태
+### 3.4 Alternative Form of the Functional Equation
 
-Γ 함수의 반사·이중공식을 이용하면
+Using the reflection and duplication formulas for Γ,
 
 ```
   ζ(s) = 2^s π^{s-1} sin(πs/2) Γ(1-s) ζ(1-s)
 ```
 
-(위 형태는 Edwards §1.7, Titchmarsh §2.1). 이 형태에서 s = -2k (k=1,2,3,...) 를
-대입하면 sin(-kπ) = 0 이 Γ(1-s) 의 극과 만나고, 남는 것이 **ζ(-2k) = 0** (k ≥ 1).
-이것이 **자명 영점(trivial zeros)** 의 정체다.
+(this form: Edwards §1.7, Titchmarsh §2.1). Substituting s = -2k (k=1,2,3,...) into this form, sin(-kπ) = 0
+meets the pole of Γ(1-s) and what remains is ζ(-2k) = 0 (k ≥ 1). These are the trivial zeros.
 
 ---
 
-## 4. 영점의 분포
+## 4. Distribution of Zeros
 
-### 4.1 자명 영점
+### 4.1 Trivial Zeros
 
 ```
   ζ(-2) = ζ(-4) = ζ(-6) = ... = 0
 ```
 
-함수방정식에서 바로 나온다. 단, ζ(0) = -1/2 이지 0 이 **아님**에 주의 (s=0 은
-ξ 의 극 상쇄 인자 s(s-1) 때문에 ξ(0) = ½ · 0 · (-1) · ... = 0 이 아니라 유한값).
+follows immediately from the functional equation. Note that ζ(0) = -1/2, not 0 (since at s=0 the pole of
+Γ(s/2) is cancelled by the factor s(s-1) of ξ, giving ξ(0) a finite value rather than 0).
 
-실제로 Γ(s/2) 는 s=0 에서 극을 갖고, s(s-1) 이 그 극을 정확히 상쇄한다.
+In fact Γ(s/2) has a pole at s=0, and s(s-1) cancels it exactly.
 
-### 4.2 비자명 영점 — critical strip
+### 4.2 Non-Trivial Zeros — Critical Strip
 
-정의. **critical strip** 은 0 < Re(s) < 1.
+Definition. The critical strip is 0 < Re(s) < 1.
 
-**정리 (Hadamard-de la Vallée Poussin 1896).** Re(s) = 1 위에는 ζ(s) 의 영점이 없다.
+**Theorem (Hadamard, de la Vallée Poussin 1896).** There are no zeros of ζ(s) on Re(s) = 1.
 
-함수방정식으로 Re(s) = 0 위에도 영점이 없다. 따라서 비자명 영점은 모두
-0 < Re(s) < 1 안에 들어있다.
+By the functional equation there are also no zeros on Re(s) = 0. Hence all non-trivial zeros lie in
+0 < Re(s) < 1.
 
-**Riemann 가설 (RH, 1859).** 모든 비자명 영점 ρ 는 Re(ρ) = 1/2 를 만족한다.
+**Riemann Hypothesis (RH, 1859).** Every non-trivial zero ρ satisfies Re(ρ) = 1/2.
 
-(미증명; Clay 밀레니엄 문제.)
+(Open; Clay Millennium problem.)
 
-### 4.3 critical line 위의 영점 수
+### 4.3 Number of Zeros on the Critical Line
 
-**정리 (Hardy 1914).** Re(s) = 1/2 위에는 무한히 많은 ζ 영점이 있다.
+**Theorem (Hardy 1914).** There are infinitely many zeros of ζ on Re(s) = 1/2.
 
-**정리 (Selberg 1942).** 이 위의 영점 수는 양의 비율을 차지한다.
+**Theorem (Selberg 1942).** The number of zeros on this line accounts for a positive proportion.
 
-**정리 (Levinson 1974; Conrey 1989 개선).** 비자명 영점 중 적어도 40% 이상이
-critical line 위에 있다 (Conrey 는 40.58% 까지).
+**Theorem (Levinson 1974; Conrey 1989 improvement).** At least 40% of the non-trivial zeros lie on the
+critical line (Conrey reaches 40.58%).
 
-이 결과들은 RH 증명은 아니지만, "많이 있다" 를 정량화한다.
+These results are not candidate resolutions of RH but quantify the "many" statement.
 
-### 4.4 영점 개수의 근사 — Riemann-von Mangoldt
+### 4.4 Approximation of the Zero Count — Riemann-von Mangoldt
 
-0 < Im(ρ) < T 를 만족하는 비자명 영점의 개수 N(T) 는
+The number N(T) of non-trivial zeros with 0 < Im(ρ) < T satisfies
 
 ```
   N(T) = (T/2π) ln(T/2π) - T/2π + O(ln T)
 ```
 
-(출처: Titchmarsh §9.4, Edwards §6.7)
+(Source: Titchmarsh §9.4, Edwards §6.7)
 
 ---
 
-## 5. Chebyshev ψ(x) 와 그 정체
+## 5. Chebyshev ψ(x) and Its Identity
 
-### 5.1 정의
+### 5.1 Definition
 
 ```
                           ∞
@@ -269,33 +268,33 @@ critical line 위에 있다 (Conrey 는 40.58% 까지).
          n≤x         p   k=1
 ```
 
-여기서 von Mangoldt 함수
+where the von Mangoldt function is
 
 ```
   Λ(n) = { ln p,  n = p^k (k ≥ 1)
-         { 0,     그 외
+         { 0,     otherwise
 ```
 
-### 5.2 PNT 와의 동치
+### 5.2 Equivalence with PNT
 
-**정리.** 다음 3개는 동치이다.
+**Theorem.** The following three are equivalent.
 
 ```
   π(x) ~ x/ln x   ⟺   θ(x) ~ x   ⟺   ψ(x) ~ x
 ```
 
-여기서 θ(x) = ∑_{p≤x} ln p (Chebyshev θ).
+where θ(x) = ∑_{p≤x} ln p (Chebyshev θ).
 
-(출처: Apostol §4.5, Iwaniec-Kowalski §2.4)
+(Source: Apostol §4.5, Iwaniec-Kowalski §2.4)
 
 ---
 
-## 6. Perron 공식
+## 6. Perron Formula
 
-### 6.1 진술
+### 6.1 Statement
 
-**정리 (Perron).** a(n) 이 산술함수이고 f(s) = ∑ a(n)/n^s 가 σ = σ₀ 에서 절대수렴하면,
-x 가 정수가 아닐 때
+**Theorem (Perron).** If a(n) is an arithmetic function and f(s) = ∑ a(n)/n^s is absolutely convergent at
+σ = σ₀, then, for non-integer x,
 
 ```
                                  c + i∞
@@ -305,25 +304,26 @@ x 가 정수가 아닐 때
                                 c - i∞
 ```
 
-여기서 c > σ₀ 는 수렴축보다 큰 실수. (출처: Iwaniec-Kowalski Thm 5.1, Titchmarsh §3.12)
+where c > σ₀ is a real number greater than the abscissa of convergence. (Source: Iwaniec-Kowalski Thm 5.1,
+Titchmarsh §3.12)
 
-### 6.2 유한 버전
+### 6.2 Truncated Version
 
-수치적으로 쓸 때는 T 만큼 잘라서 오차 항을 붙인다:
+For numerical use, truncate at height T and attach an error term:
 
 ```
                        c + iT
                 1
-  ∑ a(n) = ────── · ∫       f(s) · x^s / s · ds + O(오차)
+  ∑ a(n) = ────── · ∫       f(s) · x^s / s · ds + O(error)
  n ≤ x       2π i
                       c - iT
 ```
 
-오차 항은 a(n) 과 f(s) 의 크기, T, x 에 의존.
+The error term depends on the sizes of a(n) and f(s), on T, and on x.
 
-### 6.3 ζ 에 적용
+### 6.3 Application to ζ
 
-a(n) = Λ(n), f(s) = -ζ'(s)/ζ(s) 에 대해 Perron 을 쓰면
+Taking a(n) = Λ(n), f(s) = -ζ'(s)/ζ(s) in Perron,
 
 ```
                           c + i∞
@@ -333,69 +333,68 @@ a(n) = Λ(n), f(s) = -ζ'(s)/ζ(s) 에 대해 Perron 을 쓰면
                          c - i∞
 ```
 
-여기서 c > 1.
+with c > 1.
 
-### 6.4 contour 이동 — 극점 수집
+### 6.4 Contour Shift — Residue Harvesting
 
-적분 경로를 c = 1 + ε 에서 왼쪽으로 (가령 Re(s) = -A) 옮기면서, 지나가는
-특이점(극점)에서 잔차를 수집한다. 특이점:
+Move the integration contour from c = 1 + ε to the left (say Re(s) = -A), collecting residues at the
+singular points traversed.
 
-- s = 1 (ζ 의 극): 잔차 = x^1 · 1 = x
-- s = 0 (1/s 의 극): 잔차 = -ζ'(0)/ζ(0) · x^0 = -ζ'(0)/ζ(0) = ln(2π)
-  (ζ(0) = -1/2, ζ'(0) = -½ ln(2π))
-- s = ρ (ζ 의 비자명 영점, critical strip): 잔차 = -x^ρ/ρ
-- s = -2k (자명 영점, k = 1, 2, ...): 잔차 = -x^{-2k} / (-2k) = x^{-2k}/(2k)
+- s = 1 (pole of ζ): residue = x^1 · 1 = x
+- s = 0 (pole of 1/s): residue = -ζ'(0)/ζ(0) · x^0 = -ζ'(0)/ζ(0) = ln(2π)
+- s = ρ (non-trivial zero of ζ, critical strip): residue = -x^ρ/ρ
+- s = -2k (trivial zero, k = 1, 2, ...): residue = -x^{-2k} / (-2k) = x^{-2k}/(2k)
 
-자명 영점들의 기여를 모으면 ½ ∑_{k=1}^∞ x^{-2k}/k = -½ ln(1 - x^{-2}).
+Summing the trivial-zero contributions gives ½ ∑_{k=1}^∞ x^{-2k}/k = -½ ln(1 - x^{-2}).
 
 ---
 
-## 7. Explicit formula
+## 7. Explicit Formula
 
-### 7.1 최종 형태
+### 7.1 Final Form
 
-극점 수집 결과를 전부 더하면
+Summing all harvested residues,
 
 ```
   ψ(x) = x - ∑  x^ρ/ρ - ln(2π) - ½ ln(1 - x^{-2})
              ρ
 ```
 
-여기서 ρ 는 ζ 의 모든 비자명 영점, 그리고 x > 1 (x 가 소수 거듭제곱이면 중간점 규약).
+where ρ ranges over all non-trivial zeros of ζ, and x > 1 (midpoint convention if x is a prime power).
 
-**출처.** Iwaniec-Kowalski §5.5, Edwards §3.2~3.3, Titchmarsh §3.5. 이 식은
-**von Mangoldt explicit formula** 라 부른다 (Riemann 이 1859년 π(x) 에 대해 제시한
-공식의 ψ 버전, von Mangoldt 1895 가 엄밀화).
+**Source.** Iwaniec-Kowalski §5.5, Edwards §3.2-3.3, Titchmarsh §3.5. This identity is called the
+von Mangoldt explicit formula (a ψ-version of Riemann's 1859 formula for π(x), rigorised by von Mangoldt
+1895).
 
-### 7.2 의미
+### 7.2 Interpretation
 
-- 주된 항(main term) x 는 "평균적으로 ψ(x) ≈ x" 라는 PNT 의 뼈대.
-- ∑_ρ x^ρ/ρ 는 **보정 진동항(oscillation)**. 각 영점 ρ = β + iγ 는 진폭 x^β/|ρ|
-  주기 (2π/ln x · γ) 의 파동으로 기여한다.
-- -ln(2π) 는 상수 보정.
-- -½ ln(1 - x^{-2}) 는 자명 영점들의 기여 (x → ∞ 에서 0 으로 감).
+- The main term x is the backbone of PNT: "on average, ψ(x) ≈ x".
+- ∑_ρ x^ρ/ρ is a corrective oscillation term. Each zero ρ = β + iγ contributes a wave with amplitude
+  x^β/|ρ| and period (2π/ln x · γ).
+- -ln(2π) is a constant correction.
+- -½ ln(1 - x^{-2}) is the trivial-zero contribution (→ 0 as x → ∞).
 
-RH 가 참이면 모든 ρ 는 β = 1/2 이므로 |x^ρ/ρ| ≤ x^{1/2}/|ρ|, 따라서
-
-```
-  ψ(x) = x + O(x^{1/2} · ln² x)   (RH 조건부)
-```
-
-### 7.3 RH 없이 알려진 오차
-
-무조건으로는 (RH 없이)
+Under RH, every ρ has β = 1/2, so |x^ρ/ρ| ≤ x^{1/2}/|ρ|, hence
 
 ```
-  ψ(x) = x + O(x exp(-c √(ln x)))   (어떤 c > 0)
+  ψ(x) = x + O(x^{1/2} · ln² x)   (conditional on RH)
 ```
 
-가 Hadamard-de la Vallée Poussin 1896 의 제로프리 영역에서 나온다.
+### 7.3 Unconditional Error Known Without RH
 
-(출처: Iwaniec-Kowalski §5.7, Titchmarsh §3.9)
+Unconditionally (without RH),
 
-### 7.4 Riemann 1859 의 원래 형태
+```
+  ψ(x) = x + O(x exp(-c √(ln x)))   (some c > 0)
+```
 
-Riemann 자신은 π(x) (소수 세는 함수) 버전을 제시:
+follows from the zero-free region of Hadamard-de la Vallée Poussin 1896.
+
+(Source: Iwaniec-Kowalski §5.7, Titchmarsh §3.9)
+
+### 7.4 Riemann's Original 1859 Form
+
+Riemann himself stated a π(x) (prime-counting function) version:
 
 ```
                         ∞
@@ -406,97 +405,99 @@ Riemann 자신은 π(x) (소수 세는 함수) 버전을 제시:
                    ρ
 ```
 
-이후 π(x) = ∑_{k=1}^∞ (μ(k)/k) J(x^{1/k}) 로 복원. (Edwards §1.17)
+Later π(x) is recovered via π(x) = ∑_{k=1}^∞ (μ(k)/k) J(x^{1/k}). (Edwards §1.17)
 
 ---
 
-## 8. Mellin 변환과 곱셈 구조
+## 8. Mellin Transform and Multiplicative Structure
 
-### 8.1 Mellin 변환 성질
+### 8.1 Mellin Transform Properties
 
-| 연산 | 변환 |
-| ---- | ---- |
+| Operation | Transform |
+| --------- | --------- |
 | f(ax) | a^{-s} · M[f](s) |
 | x^a · f(x) | M[f](s + a) |
-| f'(x) | -(s-1) · M[f](s-1) (부분적분 조건부) |
-| ∫₀^x f(t) dt | -(1/s) · M[f](s+1) (수렴조건부) |
+| f'(x) | -(s-1) · M[f](s-1) (conditional on integration by parts) |
+| ∫₀^x f(t) dt | -(1/s) · M[f](s+1) (conditional on convergence) |
 
-### 8.2 합성곱 정리
+### 8.2 Convolution Theorem
 
 ```
-  M[f ⋆ g](s) = M[f](s) · M[g](s)      (⋆: 곱셈합성곱)
+  M[f ⋆ g](s) = M[f](s) · M[g](s)      (⋆: multiplicative convolution)
 ```
 
-여기서 (f ⋆ g)(x) := ∫₀^∞ f(x/t) g(t) dt/t.
+where (f ⋆ g)(x) := ∫₀^∞ f(x/t) g(t) dt/t.
 
-### 8.3 예 — Dirichlet 급수는 Mellin
+### 8.3 Example — Dirichlet Series as Mellin
 
-f(x) = ∑ a_n · [0,1]_n(x) (계단함수) 에 대해
+For f(x) = ∑ a_n · [0,1]_n(x) (step function),
 
 ```
   M[f](s) = ∑ a_n / n^s · (...)
 ```
 
-형태가 나와서, Perron 공식이 Mellin 역변환으로 자연스럽게 해석된다.
+emerges, so the Perron formula is naturally interpreted as an inverse Mellin transform.
 
 ---
 
-## 9. n=6 정리와의 연결 (P2·P3 몫)
+## 9. Link to the n=6 Candidate (assigned to P2 and P3)
 
-이 노트는 P1 학습이고, σ·φ=n·τ ⟺ n=6 증명은 P0 단계에서 기초편, P2 단계에서
-해석적 접근을 다룬다. 다만 연결 고리만 메모한다.
+These are P1 study notes; the candidate argument for σ·φ=n·τ ⟺ n=6 is handled in P0 (foundations) and
+again at P2 (analytic approach). Only the connection points are noted here.
 
-- **Dirichlet 급수.** Re(s) > 2 에서 ∑ σ(n)/n^s = ζ(s)ζ(s-1), ∑ φ(n)/n^s = ζ(s-1)/ζ(s),
+- Dirichlet series. For Re(s) > 2, ∑ σ(n)/n^s = ζ(s)ζ(s-1), ∑ φ(n)/n^s = ζ(s-1)/ζ(s),
   ∑ τ(n)/n^s = ζ(s)². (Apostol Thm 11.5, 11.7)
-- **n 과 τ.** ∑ n τ(n)/n^s = ∑ τ(n)/n^{s-1} = ζ(s-1)² (s ↦ s-1).
-- **곱셈 구조.** σ·φ 의 Dirichlet 급수는 일반적으로 닫힌 형태가 복잡하지만,
-  특정 점 s 에서의 값 비교를 통해 n=6 유일성이 **해석적 증명** 으로 재구성될 수
-  있을지는 P2 의 연구 대상이다. (이 노트에서는 진술만 남기고 증명은 미수록.)
+- n and τ. ∑ n τ(n)/n^s = ∑ τ(n)/n^{s-1} = ζ(s-1)² (s ↦ s-1).
+- Multiplicative structure. The Dirichlet series of σ·φ generally has no simple closed form, but whether
+  the uniqueness of n=6 can be reconstructed as an analytic candidate argument by comparing values at
+  special points s is a target of P2 research. (Only the statement is left here; the argument is not
+  included.)
 
 ---
 
-## 10. 참고 경로 (교재 페이지/장 단위)
+## 10. Reference Pointers (textbook pages / chapters)
 
-| 항목 | Iwaniec-Kowalski | Edwards | Titchmarsh |
+| Topic | Iwaniec-Kowalski | Edwards | Titchmarsh |
 | --- | --- | --- | --- |
-| ζ Euler 곱 | Thm 1.1 | §1.3 | §1.1 |
-| 해석적 연속 (첫 확장) | §5.1 | §1.4 | §2.1 |
-| θ 변환 | §5.2 | §1.5 | §2.5 |
-| 함수방정식 ξ(s)=ξ(1-s) | Thm 5.3 | §1.6 | §2.6 |
-| 자명 영점 | §5.3 | §1.9 | §2.12 |
-| Perron 공식 | Thm 5.1 | §3.1 | §3.12 |
-| Explicit formula | §5.5 | §3.2~3.3 | §3.5 |
-| Re(s)=1 무영점 | §5.4 | §3.5 | §3.6 |
+| ζ Euler product | Thm 1.1 | §1.3 | §1.1 |
+| Analytic continuation (first extension) | §5.1 | §1.4 | §2.1 |
+| θ transformation | §5.2 | §1.5 | §2.5 |
+| Functional equation ξ(s)=ξ(1-s) | Thm 5.3 | §1.6 | §2.6 |
+| Trivial zeros | §5.3 | §1.9 | §2.12 |
+| Perron formula | Thm 5.1 | §3.1 | §3.12 |
+| Explicit formula | §5.5 | §3.2-3.3 | §3.5 |
+| Re(s)=1 zero-free | §5.4 | §3.5 | §3.6 |
 | Riemann-von Mangoldt N(T) | §5.4 | §6.7 | §9.4 |
 
 ---
 
-## 11. 이 단원에서 얻어야 할 5가지
+## 11. Five Takeaways from this Unit
 
-1. **ζ(s) 를 σ > 1 에서 정의** — Dirichlet 급수 ∑ n^{-s}
-2. **θ 급수 변환 공식** — θ(x) = x^{-1/2} θ(1/x)
-3. **ξ(s) = ξ(1-s) 함수방정식** — ½ s(s-1) π^{-s/2} Γ(s/2) ζ(s) 는 s↔1-s 대칭
-4. **영점의 3분류** — 자명 (ζ(-2k)=0) / 비자명 (critical strip) / RH 위치 (Re=1/2)
-5. **ψ(x) explicit formula** — ψ(x) = x - ∑_ρ x^ρ/ρ - ln(2π) - ½ ln(1-x^{-2})
+1. Define ζ(s) for σ > 1 — Dirichlet series ∑ n^{-s}
+2. θ-series transformation formula — θ(x) = x^{-1/2} θ(1/x)
+3. ξ(s) = ξ(1-s) functional equation — ½ s(s-1) π^{-s/2} Γ(s/2) ζ(s) is symmetric under s↔1-s
+4. Three classes of zeros — trivial (ζ(-2k)=0) / non-trivial (critical strip) / RH location (Re=1/2)
+5. ψ(x) explicit formula — ψ(x) = x - ∑_ρ x^ρ/ρ - ln(2π) - ½ ln(1-x^{-2})
 
-이 5가지가 손에 익어야 다음 P1 단계 — 타원곡선 L-함수·NS 에너지 부등식·Hodge-de Rham·
-Yang-Mills 경로적분·exotic sphere·NP-완전 — 로 나아갈 수 있다.
-
----
-
-## 12. 추가 읽을거리 (교재 내에서)
-
-- Edwards "Riemann's Zeta Function" 부록: Riemann 1859 원논문 영문 번역
-- Iwaniec-Kowalski ch. 6: zero-density 정리, short interval 소수 분포
-- Titchmarsh ch. 10: Riemann-Siegel 공식 (수치 계산용 ζ)
-- Bombieri "The Riemann Hypothesis — official Clay statement" (Clay Institute 웹페이지)
+With these five in hand one can proceed to the next P1 stage — elliptic curve L-functions, NS energy
+inequality, Hodge-de Rham, Yang-Mills path integrals, exotic spheres, NP-completeness.
 
 ---
 
-## 13. 정직성 선언
+## 12. Further Reading (within the textbooks)
 
-- 이 노트는 교재 요약이다. 새 결과 없음.
-- 공식/정리는 위 3개 교재에서 가져왔다. 페이지 번호·장 번호는 각 판본(연도) 기준.
-- 수치 상수(Euler γ ≈ 0.5772..., Conrey 40.58% 등) 는 교재 값 그대로.
-- 프로젝트 상수(n=6 등) 는 §9 에서 연결점 메모만 남겼고 증명은 포함하지 않았다.
-- 지어낸 정리·저자·연도는 없다. 미심적은 모두 "(미증명)" 또는 "(조건부)" 명시.
+- Appendix of Edwards "Riemann's Zeta Function": English translation of Riemann's 1859 paper
+- Iwaniec-Kowalski ch. 6: zero-density theorems, prime distribution in short intervals
+- Titchmarsh ch. 10: Riemann-Siegel formula (for numerical ζ)
+- Bombieri "The Riemann Hypothesis — official Clay statement" (Clay Institute web page)
+
+---
+
+## 13. Honesty Declaration
+
+- These notes are a textbook summary. No new result.
+- Formulas and theorems are taken from the three textbooks above. Page and chapter numbers follow each
+  edition (year).
+- Numerical constants (Euler γ ≈ 0.5772..., Conrey 40.58%, etc.) are quoted as in the textbooks.
+- Project constants (n=6, etc.) appear only as link memos in §9; no candidate argument is included.
+- No invented theorems, authors, or dates. Anything uncertain is explicitly marked (open) or (conditional).

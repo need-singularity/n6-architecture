@@ -1,45 +1,46 @@
-# PURE-P1-3 — 편미분방정식과 나비에-스토크스 (유도/약해·강해·고전해/에너지 부등식)
+# PURE-P1-3 — Partial Differential Equations and Navier-Stokes (derivation / weak, strong, classical solutions / energy inequality)
 
-> 트랙: P1-PURE / 3번 태스크
-> 완료 기준: 뉴턴 제2법칙에서 연속체역학 응력 텐서를 거쳐 비압축 NS 방정식을 유도하고,
-> 약해(weak)·강해(strong)·고전해(classical) 의 정의를 구분할 수 있으며, Leray
-> 약해의 에너지 부등식 ½|u|²_{L²}(t) + ν∫₀^t |∇u|²_{L²} ds ≤ ½|u₀|²_{L²} 를 유도할 수 있다.
-> 2D 전역 존재성(Ladyzhenskaya 1963)과 3D 열림 상황을 정확히 진술할 수 있다.
-> 출처 기반: Evans "Partial Differential Equations" (GSM 19, 2판 2010) ch. 8 + ch. 5,
-> Temam "Navier-Stokes Equations: Theory and Numerical Analysis" (AMS Chelsea, 재판 2001)
-> ch. 1~3, Constantin-Foias "Navier-Stokes Equations" (Chicago Lectures in Math, 1988)
-> ch. 1~3, Lemarié-Rieusset "Recent Developments in the Navier-Stokes Problem"
-> (Chapman & Hall/CRC, 2002) ch. 1~3.
-> **정직성**: 교재 요약. 지어낸 정리·연도·저자 없음.
-
----
-
-## 0. 목적
-
-P1 로드맵 3번 태스크는 **NS 방정식의 유도와 기초 해의 의미론**이다. 다음을 숙지한다.
-
-1. 뉴턴 제2법칙 → 연속체 → 응력 텐서 → NS
-2. 비압축 조건 ∇·u = 0
-3. 약해·강해·고전해 구분
-4. Galerkin 근사와 Leray 1934 구성
-5. 에너지 부등식
-6. 2D 전역 정규성(Ladyzhenskaya 1963) vs 3D 열림
+> Track: P1-PURE / Task 3
+> Completion criterion: derive the incompressible NS equations from Newton's second law via the
+> continuum-mechanics stress tensor, distinguish weak, strong, and classical solutions, and derive the
+> energy inequality for a Leray weak solution
+> ½|u|²_{L²}(t) + ν∫₀^t |∇u|²_{L²} ds ≤ ½|u₀|²_{L²}.
+> Be able to state precisely 2D global existence (Ladyzhenskaya 1963) versus the 3D open situation.
+> Source base: Evans "Partial Differential Equations" (GSM 19, 2nd ed. 2010) ch. 8 + ch. 5,
+> Temam "Navier-Stokes Equations: Theory and Numerical Analysis" (AMS Chelsea, reprint 2001) ch. 1-3,
+> Constantin-Foias "Navier-Stokes Equations" (Chicago Lectures in Math, 1988) ch. 1-3,
+> Lemarié-Rieusset "Recent Developments in the Navier-Stokes Problem" (Chapman & Hall/CRC, 2002) ch. 1-3.
+> **Honesty**: textbook summary. No invented theorems, dates, or authors.
 
 ---
 
-## 1. 연속체 역학과 NS 유도
+## 0. Purpose
 
-### 1.1 Eulerian vs Lagrangian 서술
+Task 3 of the P1 roadmap is the derivation of NS and the basic semantics of its solutions. Master the
+following.
 
-**Lagrangian.** 입자의 궤적 x(t; a), a = 초기 위치 를 추적.
+1. Newton's second law → continuum mechanics → stress tensor → NS
+2. Incompressibility ∇·u = 0
+3. Distinction between weak, strong, and classical solutions
+4. Galerkin approximation and the Leray 1934 construction
+5. Energy inequality
+6. 2D global regularity (Ladyzhenskaya 1963) vs 3D open
 
-**Eulerian.** 고정된 공간점 x 에서 속도장 u(x, t) 를 기록.
+---
 
-NS 는 Eulerian 서술을 쓴다.
+## 1. Continuum Mechanics and NS Derivation
 
-### 1.2 질량 보존 (연속 방정식)
+### 1.1 Eulerian vs Lagrangian Descriptions
 
-ρ = 밀도, u = 속도. 임의의 부피 Ω 에 대해
+Lagrangian. Track a particle trajectory x(t; a), where a is the initial position.
+
+Eulerian. Record the velocity field u(x, t) at a fixed spatial point x.
+
+NS uses the Eulerian description.
+
+### 1.2 Mass Conservation (Continuity Equation)
+
+With ρ = density and u = velocity, for any volume Ω,
 
 ```
    d
@@ -47,13 +48,13 @@ NS 는 Eulerian 서술을 쓴다.
    dt  Ω        ∂Ω
 ```
 
-여기서 ν 는 외향 법선. 발산정리 ∫_{∂Ω} ρ u · ν dS = ∫_Ω ∇·(ρ u) dx 를 쓰면
+where ν is the outward normal. Using the divergence theorem ∫_{∂Ω} ρ u · ν dS = ∫_Ω ∇·(ρ u) dx,
 
 ```
-  ∂ρ/∂t + ∇·(ρ u) = 0            (연속 방정식)
+  ∂ρ/∂t + ∇·(ρ u) = 0            (continuity equation)
 ```
 
-비압축 유체(incompressible)의 경우 ρ = const 이므로
+For an incompressible fluid ρ = const, so
 
 ```
   ∇ · u = 0
@@ -61,24 +62,24 @@ NS 는 Eulerian 서술을 쓴다.
 
 (Temam §1.1, Evans §8.1)
 
-### 1.3 운동량 보존 — 뉴턴 제2법칙의 연속체 버전
+### 1.3 Momentum Conservation — Continuum Version of Newton's Second Law
 
-체적 Ω 안의 물체에 대한 뉴턴 제2법칙:
+Newton's second law applied to the body within a volume Ω:
 
 ```
    d
-  ─── ∫ ρ u dx = (∫ 체적력 f dx)  +  (∫ 표면력 dS)
+  ─── ∫ ρ u dx = (∫ body force f dx)  +  (∫ surface force dS)
    dt   Ω            Ω                   ∂Ω
 ```
 
-**Cauchy 응력 원리.** 표면력은 **응력 텐서 σ_{ij}** 로 표현된다:
+Cauchy's stress principle. The surface force is expressed via the stress tensor σ_{ij}:
 
 ```
-  (표면력)_i  =  ∫  σ_{ij} ν_j dS
-                ∂Ω
+  (surface force)_i  =  ∫  σ_{ij} ν_j dS
+                        ∂Ω
 ```
 
-발산정리 + 좌변 재료 미분 유도:
+Divergence theorem + material-derivative derivation of the left side:
 
 ```
   ρ (∂u/∂t + (u·∇)u)_i  =  f_i  +  ∂_j σ_{ij}
@@ -86,370 +87,370 @@ NS 는 Eulerian 서술을 쓴다.
 
 (Temam §1.2, Evans §8.1)
 
-### 1.4 Newtonian 유체의 구성 관계
+### 1.4 Constitutive Relation for Newtonian Fluids
 
-**Newtonian 유체의 응력 텐서.**
+Stress tensor of a Newtonian fluid.
 
 ```
   σ_{ij} = -p δ_{ij} + λ (∇·u) δ_{ij} + μ (∂_i u_j + ∂_j u_i)
 ```
 
-- p = 압력 (thermodynamic pressure)
-- λ, μ = Lamé 점성 계수
-- μ > 0 = shear 점성
+- p = pressure (thermodynamic pressure)
+- λ, μ = Lamé viscosity coefficients
+- μ > 0 = shear viscosity
 
-비압축(∇·u = 0)이면 λ 항이 사라진다:
+For incompressible flow (∇·u = 0) the λ term vanishes:
 
 ```
   σ_{ij} = -p δ_{ij} + μ (∂_i u_j + ∂_j u_i)
 ```
 
-이 σ 를 운동량 방정식에 대입하면
+Substituting this σ into the momentum equation gives
 
 ```
   ρ (∂u/∂t + (u·∇)u) = -∇p + μ Δu + f
 ```
 
-### 1.5 비압축 NS (최종)
+### 1.5 Incompressible NS (final)
 
-ν := μ/ρ (운동점성), 체적력을 다시 f 라 두면
+With ν := μ/ρ (kinematic viscosity) and again letting the body force be f,
 
 ```
   ∂u/∂t + (u·∇)u = -∇p/ρ + ν Δu + f
   ∇ · u = 0
 ```
 
-경계조건 + 초기조건 u|_{t=0} = u₀ 와 함께 풀어야 한다.
+to be solved together with boundary conditions and initial data u|_{t=0} = u₀.
 
 (Temam Thm 1.1, Evans §8.1, Constantin-Foias §1.1)
 
 ---
 
-## 2. 해의 세 가지 의미
+## 2. Three Notions of Solution
 
-### 2.1 고전해 (classical solution)
+### 2.1 Classical Solution
 
-u ∈ C¹_t C²_x, p ∈ C⁰_t C¹_x 이면서 NS 를 **점마다(pointwise)** 만족.
+u ∈ C¹_t C²_x, p ∈ C⁰_t C¹_x, and NS holds pointwise.
 
-이는 가장 강한 의미의 해이며, 3D 에서는 존재성 자체가 아직 열림(open).
+This is the strongest notion; in 3D even its existence is still open.
 
-### 2.2 강해 (strong solution)
+### 2.2 Strong Solution
 
-u ∈ L²_t H²_x ∩ L∞_t H¹_x 과 같이 좀 더 약한 정규성으로 NS 를 **거의 모든 점에서**
-만족. 에너지 소멸 등식(dissipation equality)이 등호로 성립.
+Slightly weaker regularity such as u ∈ L²_t H²_x ∩ L∞_t H¹_x, with NS satisfied almost everywhere. The
+energy-dissipation equality holds with equality.
 
-3D 에서 소시간(local-in-time) 강해의 존재성은 Leray 1934 + Fujita-Kato 1964 이후
-알려짐. 그러나 **대시간(global)** 으로의 연장은 열림.
+In 3D, short-time (local-in-time) existence of a strong solution has been known since Leray 1934 +
+Fujita-Kato 1964; but global-in-time extension is open.
 
-### 2.3 약해 (weak solution, Leray-Hopf)
+### 2.3 Weak Solution (Leray-Hopf)
 
-**정의 (Leray 1934).** u: (0,T) × Ω → R³ 가 약해라 함은
+**Definition (Leray 1934).** u: (0,T) × Ω → R³ is a weak solution if
 
 - u ∈ L∞([0,T]; L²) ∩ L²([0,T]; H¹)
-- ∇·u = 0 (분포 의미)
-- 임의의 시험 함수 ϕ ∈ C_c^∞((0,T)×Ω; R³), ∇·ϕ = 0 에 대해
+- ∇·u = 0 (in the sense of distributions)
+- For every test function ϕ ∈ C_c^∞((0,T)×Ω; R³) with ∇·ϕ = 0,
 
 ```
   ∫₀^T ∫_Ω [ -u · ∂_t ϕ - (u ⊗ u) : ∇ϕ + ν ∇u : ∇ϕ ] dx dt = ∫₀^T ∫_Ω f · ϕ dx dt
 ```
 
-그리고 에너지 부등식 (아래 §3) 을 만족.
+and the energy inequality (§3 below) holds.
 
 (Temam §3.1, Constantin-Foias §3.3, Lemarié-Rieusset §3.1)
 
-### 2.4 약해 ≠ 고전해
+### 2.4 Weak ≠ Classical
 
-약해는 존재성과 에너지 부등식은 확보하지만, 유일성·정규성은 일반적으로 얻지 못한다.
-3D 에서 약해가 고전해인지는 열림 (Millennium Problem 의 핵심).
+A weak solution secures existence and the energy inequality but generally does not secure uniqueness or
+regularity. Whether a 3D weak solution is classical is open (core of the Millennium Problem).
 
 ---
 
-## 3. 에너지 부등식
+## 3. Energy Inequality
 
-### 3.1 에너지 등식 (formal)
+### 3.1 Energy Equality (formal)
 
-u 가 충분히 매끄러우면, NS 양변에 u 를 내적하고 Ω 에 대해 적분:
+If u is sufficiently smooth, dot both sides of NS with u and integrate over Ω:
 
 ```
   ∫_Ω u · ∂_t u dx + ∫_Ω u · (u·∇)u dx = -∫_Ω u · ∇p dx + ν ∫_Ω u · Δu dx + ∫_Ω f · u dx
 ```
 
-각 항:
+Each term:
 
 - ∫ u · ∂_t u = (1/2) d/dt ∫ |u|²
-- ∫ u · (u·∇)u = (1/2) ∫ (u·∇)|u|² = (1/2) ∫ ∇·(u |u|²) = 0 (경계조건 + 발산 0)
-- ∫ u · ∇p = ∫ ∇·(pu) - ∫ p ∇·u = 0 (두 항 모두 0)
-- ∫ u · Δu = -∫ |∇u|²  (부분적분 + 경계)
-- ∫ f · u = 외부 일률
+- ∫ u · (u·∇)u = (1/2) ∫ (u·∇)|u|² = (1/2) ∫ ∇·(u |u|²) = 0 (boundary conditions + divergence 0)
+- ∫ u · ∇p = ∫ ∇·(pu) - ∫ p ∇·u = 0 (both terms 0)
+- ∫ u · Δu = -∫ |∇u|²  (integration by parts + boundary)
+- ∫ f · u = external power input
 
-따라서
+Hence
 
 ```
   (1/2) d/dt |u|²_{L²} + ν |∇u|²_{L²} = ∫ f · u dx
 ```
 
-시간 적분:
+Integrating in time:
 
 ```
   (1/2) |u(t)|²_{L²} + ν ∫₀^t |∇u|²_{L²} ds = (1/2) |u₀|²_{L²} + ∫₀^t ∫ f · u dx ds
 ```
 
-f = 0 이면 **에너지 등식(energy equality)**:
+If f = 0 we get the energy equality:
 
 ```
   (1/2) |u(t)|²_{L²} + ν ∫₀^t |∇u|²_{L²} ds = (1/2) |u₀|²_{L²}
 ```
 
-### 3.2 에너지 부등식 (약해 버전)
+### 3.2 Energy Inequality (weak-solution version)
 
-약해에서는 등호가 아닌 **부등식**:
+For a weak solution, not an equality but an inequality:
 
 ```
-  (1/2) |u(t)|²_{L²} + ν ∫₀^t |∇u|²_{L²} ds ≤ (1/2) |u₀|²_{L²}   (거의 모든 t)
+  (1/2) |u(t)|²_{L²} + ν ∫₀^t |∇u|²_{L²} ds ≤ (1/2) |u₀|²_{L²}   (for almost every t)
 ```
 
-이는 Leray 1934 의 구성에서 자동으로 나온다 (Galerkin 절단 + 극한에서 약수렴 +
-lower semicontinuity).
+This comes automatically out of Leray's 1934 construction (Galerkin truncation + weak convergence in the
+limit + lower semicontinuity).
 
 (Temam §3.3, Lemarié-Rieusset §3.3)
 
-### 3.3 부등식이 등식이 되는 경우
+### 3.3 When the Inequality Becomes an Equality
 
-**정리 (Constantin-Foias).** 약해 u 가 L⁴_t L⁴_x 에 속하면 에너지 등식이 성립한다.
+**Theorem (Constantin-Foias).** If the weak solution u belongs to L⁴_t L⁴_x, then the energy equality holds.
 
 (Constantin-Foias §3.4 Prop 3.2)
 
-3D 에서 이 조건을 약해가 자동으로 만족하는지는 열림.
+Whether this condition is automatic for a 3D weak solution is open.
 
 ---
 
-## 4. Leray 1934 구성 — Galerkin 근사
+## 4. Leray 1934 Construction — Galerkin Approximation
 
-### 4.1 개요
+### 4.1 Overview
 
-Leray 가 도입한 방법 (1934 Acta Math 논문, Essai sur le mouvement d'un liquide
-visqueux emplissant l'espace). Temam §3.4, Constantin-Foias §3.1 에 재구성.
+The method introduced by Leray (1934 Acta Math paper, Essai sur le mouvement d'un liquide visqueux
+emplissant l'espace). Reconstructed in Temam §3.4, Constantin-Foias §3.1.
 
-1. 유한차원 부분공간 V_m ⊂ H¹ (divergence-free) 을 택한다 (고유함수 전개).
-2. V_m 위의 Galerkin 시스템을 풀어서 근사해 u_m 을 얻는다.
-3. m → ∞ 극한을 취한다. 이때 약수렴 + 에너지 부등식이 살아남는다.
+1. Choose a finite-dimensional subspace V_m ⊂ H¹ (divergence-free) via an eigenfunction expansion.
+2. Solve the Galerkin system on V_m to obtain an approximate solution u_m.
+3. Take the limit m → ∞. Weak convergence + the energy inequality survive.
 
-### 4.2 Galerkin 시스템
+### 4.2 Galerkin System
 
-u_m = ∑_{k=1}^m g_k^m(t) w_k (w_k = Stokes 연산자 고유함수). 각 w_k 에 대해 NS 의
-약형식을 테스트:
+u_m = ∑_{k=1}^m g_k^m(t) w_k (w_k = eigenfunctions of the Stokes operator). Testing the weak form of NS
+against each w_k,
 
 ```
   (∂_t u_m, w_k) + B(u_m, u_m, w_k) + ν (∇u_m, ∇w_k) = (f, w_k)
 ```
 
-여기서 B(u, v, w) := ∫ (u·∇)v · w dx.
+where B(u, v, w) := ∫ (u·∇)v · w dx.
 
-이는 m 개의 ODE 시스템이며, Cauchy-Peano 로 국소해, ODE 에너지 추정으로 전역해 존재.
+This is an ODE system in m unknowns; Cauchy-Peano yields a local solution, and ODE energy estimates extend
+it to a global solution.
 
-### 4.3 균일 추정
+### 4.3 Uniform Estimates
 
-각 u_m 에 대해 에너지 등식 (유한차원이므로 등식)
+For each u_m we have the energy equality (an equality, since finite-dimensional):
 
 ```
   (1/2) |u_m(t)|² + ν ∫₀^t |∇u_m|² ds = (1/2) |u_m(0)|²
 ```
 
-이로부터
+From this
 
 ```
-  sup_{t∈[0,T]} |u_m(t)|_{L²} ≤ |u₀|_{L²}       (균일)
-  ∫₀^T |∇u_m|²_{L²} ds ≤ (1/(2ν)) |u₀|²_{L²}      (균일)
+  sup_{t∈[0,T]} |u_m(t)|_{L²} ≤ |u₀|_{L²}       (uniform)
+  ∫₀^T |∇u_m|²_{L²} ds ≤ (1/(2ν)) |u₀|²_{L²}      (uniform)
 ```
 
-즉 u_m 은 L∞_t L² ∩ L²_t H¹ 에서 균일 유계.
+so u_m is uniformly bounded in L∞_t L² ∩ L²_t H¹.
 
-### 4.4 극한 — 약수렴
+### 4.4 Taking the Limit — Weak Convergence
 
-Banach-Alaoglu 로 부분수열 u_{m_k} → u 약-*수렴 (L∞_t L²) 및 u_{m_k} ⇀ u 약수렴
-(L²_t H¹). 컴팩트성 정리 (Aubin-Lions) 로 L²_t L² 에서 강수렴. 이 강수렴으로 비선형
-항 (u·∇)u 의 극한 통과가 가능해진다. 선형 항은 약수렴으로 충분.
+Banach-Alaoglu gives a subsequence u_{m_k} → u weak-* in L∞_t L² and u_{m_k} ⇀ u weakly in L²_t H¹. A
+compactness theorem (Aubin-Lions) gives strong convergence in L²_t L². This strong convergence allows
+taking the limit in the nonlinear term (u·∇)u. Linear terms require only weak convergence.
 
-### 4.5 Leray 의 결론
+### 4.5 Leray's Conclusion
 
-**정리 (Leray 1934).** f ∈ L²([0,T]; H^{-1}), u₀ ∈ L²(R³; R³), ∇·u₀ = 0 이면,
-3D 에서 약해 u ∈ L∞([0,T]; L²) ∩ L²([0,T]; H¹) 가 존재하여 에너지 부등식을 만족.
+**Theorem (Leray 1934).** If f ∈ L²([0,T]; H^{-1}), u₀ ∈ L²(R³; R³), ∇·u₀ = 0, then in 3D there exists a
+weak solution u ∈ L∞([0,T]; L²) ∩ L²([0,T]; H¹) satisfying the energy inequality.
 
 (Temam Thm 3.1, Constantin-Foias Thm 3.1, Lemarié-Rieusset Thm 14.1)
 
-**유일성과 정규성은 미증명.** (Millennium 문제)
+Uniqueness and regularity are open. (Millennium problem)
 
 ---
 
-## 5. 2D 전역 정규성 — Ladyzhenskaya 1963
+## 5. 2D Global Regularity — Ladyzhenskaya 1963
 
-### 5.1 진술
+### 5.1 Statement
 
-**정리 (Leray 1933 약형식; Ladyzhenskaya 1959~1963; Lions 1969 확장).** d = 2 일 때,
-u₀ ∈ H¹, f = 0 이면 약해가 **유일하고, 전역으로 정규(global regular)** 이다.
+**Theorem (Leray 1933 weak form; Ladyzhenskaya 1959-1963; Lions 1969 extension).** For d = 2, if u₀ ∈ H¹
+and f = 0, then the weak solution is unique and globally regular.
 
-(Constantin-Foias Thm 10.1, Temam Ch. 3 Thm 3.3, Ladyzhenskaya
-"The Mathematical Theory of Viscous Incompressible Flow" 1963 원문)
+(Constantin-Foias Thm 10.1, Temam Ch. 3 Thm 3.3, Ladyzhenskaya "The Mathematical Theory of Viscous
+Incompressible Flow" 1963 original text)
 
-### 5.2 핵심 부등식 — 2D Ladyzhenskaya 부등식
+### 5.2 Key Inequality — 2D Ladyzhenskaya Inequality
 
 ```
   |u|_{L⁴(R²)}⁴ ≤ C · |u|²_{L²} · |∇u|²_{L²}
 ```
 
-(Sobolev embedding H^{1/2}(R²) ↪ L⁴(R²) 의 정량화; Ladyzhenskaya 1963 §1.7)
+(Quantitative form of the Sobolev embedding H^{1/2}(R²) ↪ L⁴(R²); Ladyzhenskaya 1963 §1.7.)
 
-이 부등식이 성립하면, 2D NS 의 비선형 항 |B(u, u, u)| ≤ C |u|_{L⁴}² |∇u|_{L²}
-를 ν |∇u|² 로 흡수할 수 있다. 그래서 에너지 방법이 **계속** 작동하고 전역해가 나온다.
+When this inequality holds, the nonlinear term |B(u, u, u)| ≤ C |u|_{L⁴}² |∇u|_{L²} of 2D NS can be
+absorbed into ν |∇u|². The energy method therefore keeps working, and a global solution is obtained.
 
-### 5.3 3D 에서는 왜 실패하나
+### 5.3 Why It Fails in 3D
 
-3D 에서는 Sobolev 지수가 달라져
+In 3D the Sobolev exponent changes so that
 
 ```
   |u|_{L⁴(R³)}⁴ ≤ C · |u|_{L²} · |∇u|_{L²}³
 ```
 
-형태가 된다. 이 지수 3 때문에 비선형 항을 점성이 흡수하지 못하고, 에너지 방법만으로는
-전역해 존재성이 안 나온다. 이것이 3D NS 의 열림 원인.
+Because of this exponent 3, the viscosity cannot absorb the nonlinear term, and the energy method alone
+does not yield global existence. This is the source of the 3D NS open question.
 
 (Constantin-Foias §11.1, Lemarié-Rieusset §11)
 
 ---
 
-## 6. 부분 정규성 — Caffarelli-Kohn-Nirenberg
+## 6. Partial Regularity — Caffarelli-Kohn-Nirenberg
 
-### 6.1 진술
+### 6.1 Statement
 
-**정리 (CKN 1982).** Leray-Hopf 약해 u 의 **특이점 집합** S = {(x, t) : u 가 이 점
-근방에서 유한하지 않음} 은 parabolic Hausdorff 측도 P¹(S) = 0.
+**Theorem (CKN 1982).** For a Leray-Hopf weak solution u, the singular set S = {(x, t) : u is not finite
+near this point} satisfies parabolic Hausdorff measure P¹(S) = 0.
 
-(Caffarelli-Kohn-Nirenberg "Partial regularity of suitable weak solutions of the
-Navier-Stokes equations" Comm. Pure Appl. Math. 35, 1982)
+(Caffarelli-Kohn-Nirenberg "Partial regularity of suitable weak solutions of the Navier-Stokes equations"
+Comm. Pure Appl. Math. 35, 1982)
 
-### 6.2 의미
+### 6.2 Interpretation
 
-특이점이 있더라도 "드물게" 있다는 보장. 1차원 parabolic 차원 (공간+시간 2로 셈)
-이하로 제한된다.
+A guarantee that, even if singularities exist, they are rare: bounded in 1-dimensional parabolic dimension
+(with space+time counted as 2).
 
-단, 1차원 특이점 집합 존재 자체가 배제된 것은 아니다. Tao 2016 의 "만리장성" 추측,
-Jia-Sverak 2014 self-similar blow-up 시나리오 등은 모두 이 한계 내에 있다.
-
----
-
-## 7. 밀레니엄 문제의 정확한 진술
-
-### 7.1 Clay Institute 공식 진술 (Fefferman 2000)
-
-**문제.** R³ 위의 NS 방정식을 다음 조건에서 풀 수 있는가?
-
-- 초기 데이터 u₀: R³ → R³, ∇·u₀ = 0, 매끈하고 빠르게 감소(Schwartz).
-- 외력 f = 0.
-
-다음 두 가지 진술 중 하나를 증명하거나 반증하라.
-
-(A) **존재성과 매끄러움.** 모든 T > 0 에 대해 매끄러운 고전해 u, p 가 존재하고,
-   모든 k 에 대해 ∂^α u 가 유한.
-
-(B) **유한시간 blow-up.** T* < ∞ 가 존재하여 sup_{x} |u(x, t)| → ∞ (t → T*).
-
-R³/Z³ (주기 경계) 도 별도로 제시됨.
-
-(Fefferman "Existence and smoothness of the Navier-Stokes equation" Clay Millennium
-Problem statement, 2000)
-
-### 7.2 현재까지의 부분 결과
-
-- Leray 1934: 3D 전역 약해 존재
-- CKN 1982: 약해 특이점의 P¹ 차원 소실
-- Fujita-Kato 1964: 3D 소시간 강해 (u₀ ∈ H^{1/2})
-- Koch-Tataru 2001: BMO^{-1} 초기 데이터에 대한 소시간 강해
-- Escauriaza-Seregin-Sverak 2003: L³_x L∞_t 블로우업 기준
-
-이 모두 3D 전역 정규성 증명은 아니다.
+However, the existence of a 1-dimensional singular set is not itself excluded. Tao's 2016 "Great Wall"
+candidate, Jia-Sverak 2014 self-similar blow-up scenarios, etc., all sit within this bound.
 
 ---
 
-## 8. Stokes 문제와 사영 연산자
+## 7. Precise Statement of the Millennium Problem
 
-### 8.1 Stokes 방정식
+### 7.1 Clay Institute Official Statement (Fefferman 2000)
 
-NS 에서 비선형 항 (u·∇)u 를 빼면:
+Problem. Can the NS equations on R³ be resolved under the following conditions?
+
+- Initial data u₀: R³ → R³, ∇·u₀ = 0, smooth and rapidly decaying (Schwartz class).
+- External force f = 0.
+
+Demonstrate or refute one of the two statements below.
+
+(A) Existence and smoothness. For every T > 0, a smooth classical solution u, p exists and ∂^α u is finite
+    for every k.
+
+(B) Finite-time blow-up. There exists T* < ∞ such that sup_{x} |u(x, t)| → ∞ (as t → T*).
+
+R³/Z³ (periodic boundary) is also offered separately.
+
+(Fefferman "Existence and smoothness of the Navier-Stokes equation" Clay Millennium Problem statement, 2000)
+
+### 7.2 Partial Results to Date
+
+- Leray 1934: 3D global weak-solution existence
+- CKN 1982: vanishing P¹ dimension of the singular set of a weak solution
+- Fujita-Kato 1964: 3D short-time strong solution (u₀ ∈ H^{1/2})
+- Koch-Tataru 2001: short-time strong solution for BMO^{-1} initial data
+- Escauriaza-Seregin-Sverak 2003: L³_x L∞_t blow-up criterion
+
+None of these demonstrate 3D global regularity.
+
+---
+
+## 8. Stokes Problem and Projection Operator
+
+### 8.1 Stokes Equations
+
+Drop the nonlinear term (u·∇)u from NS:
 
 ```
   ∂u/∂t - ν Δu + ∇p = f
   ∇·u = 0
 ```
 
-이는 **선형 방정식** 이고, 완전 이론이 있다 (존재성·유일성·스펙트럼).
+This is a linear equation with a complete theory (existence, uniqueness, spectrum).
 
-### 8.2 Leray 사영 연산자 P
+### 8.2 Leray Projection Operator P
 
-L²(Ω; R³) 위에 **Helmholtz 분해**:
+On L²(Ω; R³) take the Helmholtz decomposition:
 
 ```
   L² = H ⊕ G
-  H := { v ∈ L² : ∇·v = 0 (분포), v·ν|_{∂Ω} = 0 }
+  H := { v ∈ L² : ∇·v = 0 (distributionally), v·ν|_{∂Ω} = 0 }
   G := { ∇ϕ : ϕ ∈ H¹ }
 ```
 
-P: L² → H 는 H 로의 사영 (L² 내적). NS 에 P 를 적용하면 ∇p 항이 사라지고
+P: L² → H is the projection onto H (L² inner product). Applying P to NS kills the ∇p term:
 
 ```
   ∂u/∂t + P((u·∇)u) = ν Δu + Pf
 ```
 
-형태가 된다. 이 형식은 이론 분석에 매우 유용.
+This form is extremely useful for theoretical analysis.
 
 (Constantin-Foias §2.1, Lemarié-Rieusset §3.3)
 
 ---
 
-## 9. 3D 강해 — 소시간 존재
+## 9. 3D Strong Solutions — Short-Time Existence
 
 ### 9.1 Fujita-Kato 1964
 
-**정리.** u₀ ∈ H^{1/2}(R³; R³), ∇·u₀ = 0 이면, T* > 0 가 존재하여
-[0, T*) 위에 유일한 강해 u ∈ C([0,T*); H^{1/2}) ∩ L²_{loc}((0, T*); H^{3/2}) 가 존재.
+**Theorem.** If u₀ ∈ H^{1/2}(R³; R³), ∇·u₀ = 0, there exists T* > 0 and a unique strong solution
+u ∈ C([0,T*); H^{1/2}) ∩ L²_{loc}((0, T*); H^{3/2}) on [0, T*).
 
-또한 |u₀|_{H^{1/2}} 가 충분히 작으면 T* = ∞ 까지 연장 가능 ("small data global").
+Also, if |u₀|_{H^{1/2}} is sufficiently small, the solution extends to T* = ∞ ("small data global").
 
 (Fujita-Kato 1964, Lemarié-Rieusset §15)
 
-### 9.2 블로우업 기준 — Serrin, BKM, ESS
+### 9.2 Blow-up Criteria — Serrin, BKM, ESS
 
-**정리 (Serrin 1962).** 강해 u 가 T* 에서 blow-up 한다면
-∫₀^{T*} |u|^s_{L^r} dt = ∞, (3/r + 2/s ≤ 1, r > 3) 이다.
+**Theorem (Serrin 1962).** If a strong solution u blows up at T*, then
+∫₀^{T*} |u|^s_{L^r} dt = ∞ with 3/r + 2/s ≤ 1, r > 3.
 
-**정리 (Beale-Kato-Majda 1984).** ∫₀^{T*} |ω|_{L∞} dt = ∞, 여기서 ω = ∇ × u 소용돌이.
+**Theorem (Beale-Kato-Majda 1984).** ∫₀^{T*} |ω|_{L∞} dt = ∞, where ω = ∇ × u is the vorticity.
 
-**정리 (Escauriaza-Seregin-Sverak 2003).** sup_{t<T*} |u(t)|_{L³(R³)} = ∞ 가 강해
-블로우업의 필요조건.
+**Theorem (Escauriaza-Seregin-Sverak 2003).** sup_{t<T*} |u(t)|_{L³(R³)} = ∞ is a necessary condition for
+strong-solution blow-up.
 
 (Lemarié-Rieusset §11, Constantin-Foias §11.4)
 
 ---
 
-## 10. 프로젝트 상수와의 연결 (메모만)
+## 10. Link to the Project Constants (memo only)
 
-NS 방정식의 차원 3D 는 프로젝트 상수 n = 6 과 **직접** 연결되지 않는다. 다만
-n6-architecture 의 BT-1~200 시리즈 중 일부(BT-51, BT-543, BT-544 관련) 에서 NS
-의 3중 공명·특성 부등식에 시도된 보조정리가 있다. 이는 **검증 결과 부분결과**
-단계이며, 이 노트(P1)에서는 순수 교재 요약만 담는다.
+The NS dimension 3D is not directly connected to the project constant n = 6. Some auxiliary drafts in the
+n6-architecture BT-1-200 series (near BT-51, BT-543, BT-544) have attempted a triple-resonance or
+characteristic-inequality route for NS. These remain at a verification-only partial-result stage; this P1
+note contains only the pure textbook summary.
 
 ---
 
-## 11. 참고 경로 (교재 페이지/장 단위)
+## 11. Reference Pointers (textbook pages / chapters)
 
-| 항목 | Evans PDE | Temam NSE | Constantin-Foias | Lemarié-Rieusset |
+| Topic | Evans PDE | Temam NSE | Constantin-Foias | Lemarié-Rieusset |
 | --- | --- | --- | --- | --- |
-| 연속체 유도 | §8.1 | §1.1~1.2 | §1.1 | §1.1 |
-| 비압축 조건 | §8.2 | §1.3 | §1.2 | §1.2 |
-| 약해 정의 | §8.2 | §3.1 | §3.3 | §3.1 |
-| Galerkin 구성 | - | §3.4 | §3.1 | §14 |
-| 에너지 부등식 | - | §3.3 | §3.4 | §3.3 |
+| Continuum derivation | §8.1 | §1.1-1.2 | §1.1 | §1.1 |
+| Incompressibility | §8.2 | §1.3 | §1.2 | §1.2 |
+| Weak-solution definition | §8.2 | §3.1 | §3.3 | §3.1 |
+| Galerkin construction | - | §3.4 | §3.1 | §14 |
+| Energy inequality | - | §3.3 | §3.4 | §3.3 |
 | Leray 1934 | - | Thm 3.1 | Thm 3.1 | Thm 14.1 |
-| 2D 전역 정규성 | - | Thm 3.3 | Thm 10.1 | §8 |
+| 2D global regularity | - | Thm 3.3 | Thm 10.1 | §8 |
 | CKN 1982 | - | - | - | §11.7 |
 | Fujita-Kato 1964 | - | - | §8 | §15 |
 | BKM 1984 | - | - | §11.4 | §11 |
@@ -457,23 +458,23 @@ n6-architecture 의 BT-1~200 시리즈 중 일부(BT-51, BT-543, BT-544 관련) 
 
 ---
 
-## 12. 이 단원에서 얻어야 할 5가지
+## 12. Five Takeaways from this Unit
 
-1. **비압축 NS 방정식** (∂_t u + (u·∇)u = -∇p/ρ + νΔu, ∇·u = 0) 을 뉴턴 법칙에서
-   유도할 수 있다.
-2. **고전해·강해·약해** 구분.
-3. **에너지 부등식** ½|u|²_{L²}(t) + ν∫₀^t|∇u|²_{L²} ≤ ½|u₀|²_{L²}.
-4. **Leray 1934 약해 존재 + 2D 전역 정규성(Ladyzhenskaya 1963) vs 3D 열림**.
-5. **Fefferman 공식 Millennium 문제 진술** (A 존재·매끄러움 vs B 블로우업).
+1. Incompressible NS equations (∂_t u + (u·∇)u = -∇p/ρ + νΔu, ∇·u = 0) derived from Newton's law.
+2. Classical, strong, weak distinction.
+3. Energy inequality ½|u|²_{L²}(t) + ν∫₀^t|∇u|²_{L²} ≤ ½|u₀|²_{L²}.
+4. Leray 1934 weak-solution existence + 2D global regularity (Ladyzhenskaya 1963) vs 3D open.
+5. Fefferman's official Millennium-problem statement (A existence-smoothness vs B blow-up).
 
 ---
 
-## 13. 정직성 선언
+## 13. Honesty Declaration
 
-- 이 노트는 교재 요약이다. 새 결과 없음.
-- Leray 1934 원논문, Ladyzhenskaya 1963 책, CKN 1982 논문, Fefferman 2000 Clay
-  진술문은 모두 공식 공개 자료이며 제목·연도는 정확.
-- 2D Ladyzhenskaya 부등식의 정확한 형태는 Ladyzhenskaya 1963 §1.7 재구성.
-- 공식/정리/저자/연도는 위 4개 교재 + 공식 진술 문서에서 가져왔다.
-- 지어낸 정리·저자·연도는 없다.
-- 프로젝트 상수(n=6)와의 연결은 §10 에 메모만 남겼다.
+- These notes are a textbook summary. No new result.
+- The original papers Leray 1934, Ladyzhenskaya 1963 book, CKN 1982, Fefferman 2000 Clay statement are all
+  publicly available official sources; the titles and years are accurate.
+- The precise form of the 2D Ladyzhenskaya inequality follows Ladyzhenskaya 1963 §1.7.
+- Formulas, theorems, authors, and years are taken from the four textbooks above and the official statement
+  document.
+- No invented theorems, authors, or dates.
+- The link to the project constant (n=6) is left as a memo only in §10.
