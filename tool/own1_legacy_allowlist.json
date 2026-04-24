@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 49,
+    "count": 46,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -378,6 +378,30 @@
         "count_before": 50,
         "count_after": 49,
         "date": "2026-04-25"
+      },
+      {
+        "phase": "phase-6-D-B12-xn6-opcode-table",
+        "date": "2026-04-25",
+        "removed": 1,
+        "entry": "domains/compute/chip-isa-n6/xn6-opcode-table/xn6-opcode-table.md",
+        "new_count": 48,
+        "note": "B12 part A - xn6-opcode-table.md translated (Korean -> English), CJK=0 verified."
+      },
+      {
+        "phase": "phase-6-D-B12-chip-pim",
+        "date": "2026-04-25",
+        "removed": 1,
+        "entry": "domains/compute/chip-pim/chip-pim.md",
+        "new_count": 47,
+        "note": "B12 RED-lite part A - chip-pim.md (858L, CJK 3524 -> 0) translated. Ultimate PIM (HEXA-PIM) doc, processing-in-memory, σ²=144 SM, σ·J₂=288 MAC, Egyptian 1/2+1/3+1/6 power split. Distinct from chip-design/hexa-2-pim."
+      },
+      {
+        "phase": "phase-6-D-B12-chip-materials",
+        "batch": "phase-6-D-B12-chip-materials",
+        "date": "2026-04-25",
+        "removed": 1,
+        "new_count": 46,
+        "note": "B12 part A - chip-materials.md translated (KR->EN, 850L), CJK=0 verified."
       }
     ]
   },
@@ -391,11 +415,8 @@
     "domains/cognitive/ai-quality-scale/ai-quality-scale.md",
     "domains/cognitive/ai-training-cost/ai-training-cost.md",
     "domains/compute/chip-isa-n6/xn6-isa-24-spec/xn6-isa-24-spec.md",
-    "domains/compute/chip-isa-n6/xn6-opcode-table/xn6-opcode-table.md",
-    "domains/compute/chip-materials/chip-materials.md",
     "domains/compute/chip-npu-n6/chip-npu-n6.md",
     "domains/compute/chip-photonic/chip-photonic.md",
-    "domains/compute/chip-pim/chip-pim.md",
     "domains/compute/chip-rtl-gen/chip-rtl-gen.md",
     "domains/compute/chip-sc/chip-sc.md",
     "domains/compute/chip-wafer/chip-wafer.md",
