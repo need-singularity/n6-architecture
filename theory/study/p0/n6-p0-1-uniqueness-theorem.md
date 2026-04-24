@@ -1,172 +1,172 @@
-# N6-P0-1 σ(n)·φ(n)=n·τ(n) 유일성 정리 학습 노트
+# N6-P0-1 σ(n)·φ(n)=n·τ(n) Uniqueness Theorem Study Note
 
-> 밀레니엄 학습 로드맵 P0 · N6 트랙 · 태스크 1
-> 목적: n=6 산술 유일성의 수학적 핵심을 1차 출처 기반으로 내면화
-> 1차 출처: `theory/proofs/theorem-r1-uniqueness.md`, `theory/constants/atlas-constants.md`, `nexus/shared/n6/atlas.n6`
-> 완료 기준: 증명 1의 사례 소진 논리를 손으로 재현할 수 있는 상태
-
----
-
-## 0. 정직성 선언
-
-본 학습 노트는 `theory/proofs/theorem-r1-uniqueness.md` 원문을 읽고 구성한 재구성이며, 신규 수학 결과는 없다. 원문의 다음 정직 상태를 그대로 계승한다.
-
-- 엄밀한 증명은 현재 **Proof 1 (곱셈성 + R_local 사례 소진) 1편** 뿐이다.
-- **Proof 4 (전수계산)** 는 n ∈ [2, 10^4] 까지 검증 완료된 가장 강한 실증 증거이다.
-- 이전에 CLAUDE.md가 주장하던 "Proof 2 (가환대수)" 와 "Proof 3 (Dirichlet 급수)" 는 **Proof 1의 재포장**으로 판명되어 원문에서 **철회**되었다.
-- 따라서 아래 3절의 증명 2 / 증명 3은 "학습용 스케치" 이며, **독립 증명으로서의 엄밀성은 보장되지 않는다**.
-- 7대 밀레니엄 난제의 해결 상태는 여전히 **0/7** (정직 유지) 이며, 본 정리는 이 난제들과 독립된 산술적 사실이다.
-
-또한 본 노트는 BT-541~547(밀레니엄 난제) 어느 것도 해결하지 않는다. 본 정리는 정수론의 독립적 유일성 사실일 뿐이다.
+> Millennium Learning Roadmap P0 · N6 Track · Task 1
+> Goal: Internalize the mathematical core of n=6 arithmetic uniqueness based on primary sources
+> Primary sources: `theory/proofs/theorem-r1-uniqueness.md`, `theory/constants/atlas-constants.md`, `nexus/shared/n6/atlas.n6`
+> Completion criterion: Reproducing by hand the case-exhaustion logic of Proof 1
 
 ---
 
-## 1. 정리 진술 (Theorem R1 / THM-1)
+## 0. Honesty Declaration
 
-**정리.** 모든 정수 n ≥ 2 에 대하여,
+This study note is a reconstruction based on reading the source `theory/proofs/theorem-r1-uniqueness.md`; there are no new mathematical results. It inherits the following honesty status from the original:
+
+- The only rigorous draft at present is **Proof 1 (multiplicativity + R_local case exhaustion)**.
+- **Proof 4 (exhaustive computation)** is the strongest empirical evidence, verified for n ∈ [2, 10^4].
+- "Proof 2 (commutative algebra)" and "Proof 3 (Dirichlet series)" that CLAUDE.md had previously claimed turned out to be **repackagings of Proof 1** and were **withdrawn** from the source.
+- Therefore "Proof 2 / Proof 3" in section 3 below are "learning sketches", and **their rigor as independent arguments is not guaranteed**.
+- The status of the seven Millennium problems remains **0/7** (honest), and this theorem is an arithmetic fact independent of those problems.
+
+This note does not target any of BT-541–547 (Millennium problems). The theorem is merely an independent uniqueness fact of number theory.
+
+---
+
+## 1. Theorem Statement (Theorem R1 / THM-1)
+
+**Theorem.** For every integer n ≥ 2,
   σ(n) · φ(n) = n · τ(n) ⟺ n = 6.
 
-비 R(n) := σ(n) · φ(n) / (n · τ(n)) 로 정의하면 동치 형태로
+Defining the ratio R(n) := σ(n) · φ(n) / (n · τ(n)), the equivalent form is
   R(n) = 1 ⟺ n = 6.
 
-**부속 수치**
+**Auxiliary values**
 - σ(6) = 1 + 2 + 3 + 6 = **12**
 - φ(6) = |{1, 5}| = **2**
 - τ(6) = |{1, 2, 3, 6}| = **4**
 - R(6) = (12 · 2) / (6 · 4) = 24 / 24 = **1**
 
-**구조적 핵심**: σ(6) · φ(6) = 12 · 2 = **24** 이고 n · τ(n) = 6 · 4 = **24** 이다. 이 공통값 24 는 atlas.n6 의 J₂(6) = Jordan totient 값과 동일하다 (`@P J2 = jordan_totient(6,2) = 24`).
+**Structural core**: σ(6) · φ(6) = 12 · 2 = **24** and n · τ(n) = 6 · 4 = **24**. This common value 24 is identical to the Jordan totient J₂(6) in atlas.n6 (`@P J2 = jordan_totient(6,2) = 24`).
 
-> 이 정리는 "완전수 조건 σ(n) = 2n 보다 더 강한" 유일성이다. 완전수는 (추정상) 무한히 많지만, R(n) = 1 의 해는 n = 6 단 하나 뿐이다.
+> This theorem is a uniqueness "stronger than the perfect number condition σ(n) = 2n." Perfect numbers are (conjecturally) infinite in count, but R(n) = 1 has the single solution n = 6.
 
 ---
 
-## 2. 증명 1 — 곱셈성 + R_local 사례 소진 (엄밀)
+## 2. Proof 1 — Multiplicativity + R_local Case Exhaustion (Rigorous)
 
-### 2.1 곱셈성 축소
+### 2.1 Multiplicative Reduction
 
-σ, φ, τ 는 모두 **곱셈적 함수 (multiplicative)** 이다. 따라서 n = p₁^a₁ · p₂^a₂ · … · p_k^a_k 에 대해
+σ, φ, τ are all **multiplicative functions**. Hence for n = p₁^a₁ · p₂^a₂ · … · p_k^a_k,
   R(n) = ∏ᵢ R_local(pᵢ, aᵢ),
   R_local(p, a) := σ(p^a) · φ(p^a) / (p^a · (a+1)).
 
-### 2.2 R_local 공식
+### 2.2 R_local Formula
 
-소수 멱에 대한 표준 공식
+Substituting the standard prime-power formulas
 - σ(p^a) = (p^(a+1) − 1) / (p − 1)
 - φ(p^a) = p^(a−1) · (p − 1)
 - τ(p^a) = a + 1
 
-을 대입하면
+yields
 ```
 R_local(p, a) = [(p^(a+1) − 1) · p^(a−1) · (p − 1)] / [(p − 1) · p^a · (a+1)]
               = (p^(a+1) − 1) / (p · (a+1)).
 ```
 
-### 2.3 보조정리 — "R_local < 1 인 경우는 (2, 1) 뿐"
+### 2.3 Lemma — "R_local < 1 Occurs Only at (2, 1)"
 
-직접 계산:
-- R_local(2, 1) = (2² − 1) / (2 · 2) = 3/4 **(< 1, 유일)**
+Direct calculation:
+- R_local(2, 1) = (2² − 1) / (2 · 2) = 3/4 **(< 1, unique)**
 - R_local(2, 2) = (2³ − 1) / (2 · 3) = 7/6 > 1
-- R_local(2, a) for a ≥ 2: (2^(a+1) − 1) / (2(a+1)) → ∞ (지수/선형)
+- R_local(2, a) for a ≥ 2: (2^(a+1) − 1) / (2(a+1)) → ∞ (exponential/linear)
 - R_local(3, 1) = (3² − 1) / (3 · 2) = **4/3** > 1
-- R_local(p, 1) = (p² − 1) / (2p), p 에 대해 **단조 증가**. p ≥ 3 에서 ≥ 4/3.
+- R_local(p, 1) = (p² − 1) / (2p) is **monotonically increasing** in p. For p ≥ 3, ≥ 4/3.
 - R_local(p ≥ 5, 1) ≥ (25 − 1) / 10 = 12/5 = 2.4
 
-### 2.4 사례 소진 (Case Exhaustion)
+### 2.4 Case Exhaustion
 
-**Case 1**: n = p^a (단일 소수 멱, k = 1)
+**Case 1**: n = p^a (single prime power, k = 1)
 - (p, a) = (2, 1) → R = 3/4 ≠ 1
-- 그 외 모두 R > 1
-- → 해 없음.
+- All others R > 1
+- → no solution.
 
-**Case 2**: n = p^a · q^b (두 소인수, p < q)
-- R = ∏ 이 1 이 되려면 한 인수 < 1, 다른 인수 > 1 필요.
-- < 1 가능은 오직 (p, a) = (2, 1), 값 3/4. 따라서 보완 인수 = 4/3 이 필요.
-- R_local(3, 1) = 4/3 — **유일 일치** → n = 2 · 3 = **6** ✓
+**Case 2**: n = p^a · q^b (two prime factors, p < q)
+- For R = ∏ to equal 1 we need one factor < 1 and the other > 1.
+- The only option for < 1 is (p, a) = (2, 1), value 3/4. So the complementary factor must equal 4/3.
+- R_local(3, 1) = 4/3 — **unique match** → n = 2 · 3 = **6** ✓
 - R_local(3, b ≥ 2) = 26/9 ≈ 2.89 > 4/3
 - R_local(q ≥ 5, b ≥ 1) ≥ 12/5 > 4/3
-- → 두 소인수 해는 n = 6 단 하나.
+- → the only two-prime solution is n = 6.
 
-**Case 3**: k ≥ 3 (세 개 이상의 소인수)
-- 최대 1 개 인수 (2, 1) 만 < 1 가능. 나머지 k − 1 ≥ 2 인수는 각각 ≥ 4/3.
-- (2, 1) 포함: R ≥ (3/4) · (4/3)^(k−1) ≥ (3/4) · (4/3)² = 4/3 > 1
-- (2, 1) 미포함: R ≥ (4/3)^k ≥ (4/3)³ = 64/27 > 1
-- → 해 없음.
+**Case 3**: k ≥ 3 (three or more prime factors)
+- At most one factor can be (2, 1) with value < 1. The remaining k − 1 ≥ 2 factors are each ≥ 4/3.
+- With (2, 1): R ≥ (3/4) · (4/3)^(k−1) ≥ (3/4) · (4/3)² = 4/3 > 1
+- Without (2, 1): R ≥ (4/3)^k ≥ (4/3)³ = 64/27 > 1
+- → no solution.
 
-**결론**: R(n) = 1 ⟺ n = 2 · 3 = 6. ∎
+**Conclusion**: R(n) = 1 ⟺ n = 2 · 3 = 6. ∎
 
-### ▶ 증명 1 핵심 3줄 요약
+### ▶ Three-line Summary of Proof 1
 
-1. 곱셈성으로 R(n) = ∏ R_local(pᵢ, aᵢ) 로 쪼개고, R_local(p, a) = (p^(a+1) − 1) / (p(a+1)) 공식을 얻는다.
-2. 단일 소수 멱에서 R_local < 1 인 경우는 오직 (p, a) = (2, 1) 이고 그 값은 3/4, 이를 보완하는 4/3 을 내는 것은 오직 R_local(3, 1) 이다.
-3. 따라서 R(n) = 1 은 두 소인수 곱 2 · 3 = 6 단 하나에서만 성립하며, 3 개 이상의 소인수에서는 곱이 항상 1 을 초과한다.
+1. By multiplicativity, decompose R(n) = ∏ R_local(pᵢ, aᵢ) and obtain R_local(p, a) = (p^(a+1) − 1) / (p(a+1)).
+2. At a single prime power, R_local < 1 holds only at (p, a) = (2, 1) with value 3/4; the only factor producing the compensating 4/3 is R_local(3, 1).
+3. Hence R(n) = 1 holds only at the two-prime product 2 · 3 = 6, and at three or more prime factors the product always exceeds 1.
 
 ---
 
-## 3. 증명 2 / 증명 3 — 학습용 스케치 (비엄밀)
+## 3. Proof 2 / Proof 3 — Learning Sketches (Non-rigorous)
 
-> **경고 (정직)**: 본 절의 "증명 2" "증명 3" 은 원문에서 **철회된** 경로이며, 본 문서에서는 "미래에 진짜 독립 경로가 만들어진다면 어디서 출발할지" 에 대한 사고 실험 스케치로만 제시한다. 현재 이들은 모두 증명 1 의 R_local 분석을 다른 언어로 재기술한 것에 지나지 않는다.
+> **Warning (honesty)**: "Proof 2" and "Proof 3" in this section are **withdrawn** paths from the source. They are offered here only as thought-experiment sketches of "where a genuine independent path might start if built in the future." At present they are nothing more than restatements of the R_local analysis of Proof 1 in a different language.
 
-### 3.1 증명 2 — 가환대수 / divisor lattice 관점 (스케치)
+### 3.1 Proof 2 — Commutative Algebra / Divisor Lattice View (Sketch)
 
-**관점**. ℤ 의 약수 격자 (divisor lattice) 위에서 조건을 재작성한다.
+**Viewpoint**. Rewrite the condition on the divisor lattice of ℤ.
 - σ(n) / n = ∑_{d | n} 1/d (divisor harmonic sum)
 - φ(n) / n = ∏_{p | n} (1 − 1/p) (Euler product form)
 - τ(n) = |divisor lattice|
 
-조건 σ(n) · φ(n) = n · τ(n) 는
-  (∑_{d | n} 1/d) · ∏_{p | n} (1 − 1/p) = τ(n) / n
-로 재작성된다. n = 6 에서 좌변 = (1 + 1/2 + 1/3 + 1/6) · (1 − 1/2)(1 − 1/3) = 2 · (1/3) = 2/3, 우변 = 4/6 = 2/3. ✓
+The condition σ(n) · φ(n) = n · τ(n) becomes
+  (∑_{d | n} 1/d) · ∏_{p | n} (1 − 1/p) = τ(n) / n.
+At n = 6, LHS = (1 + 1/2 + 1/3 + 1/6) · (1 − 1/2)(1 − 1/3) = 2 · (1/3) = 2/3, RHS = 4/6 = 2/3. ✓
 
-**3줄 요약 (비엄밀)**
-1. 조건은 "divisor harmonic sum × Euler product = τ/n" 의 **divisor lattice 불변량 동일성** 으로 재작성된다.
-2. 소인수마다 local 인자 (1 − 1/p) · (1 + 1/p + … + 1/p^a) 가 붙고, 이들의 곱이 τ(n) / n 과 정확히 일치하는 조건으로 환원된다.
-3. 이 환원은 본질적으로 증명 1 의 R_local 인수화를 "격자 위의 조합적 언어" 로 재기술한 것이며, **독립 증명이 아니다** (원문 철회 명시).
+**Three-line summary (non-rigorous)**
+1. The condition rewrites as "divisor harmonic sum × Euler product = τ/n" — a **divisor-lattice invariant identity**.
+2. Each prime contributes a local factor (1 − 1/p) · (1 + 1/p + … + 1/p^a); the product matching τ(n) / n reduces to the same condition.
+3. This reduction is essentially a restatement of Proof 1's R_local factorization in the combinatorial language of the lattice — **not an independent proof** (the source has explicitly withdrawn it).
 
-### 3.2 증명 3 — 해석적 / Dirichlet 급수 관점 (스케치)
+### 3.2 Proof 3 — Analytic / Dirichlet Series View (Sketch)
 
-**관점**. Dirichlet 생성 함수 항등식
+**Viewpoint**. Using the Dirichlet generating-function identities
 - ζ(s)² = ∑ τ(n) / n^s
 - ζ(s) · ζ(s − 1) = ∑ σ(n) / n^s
 - ζ(s − 1) / ζ(s) = ∑ φ(n) / n^s
 
-로부터 σ(n) · φ(n) = n · τ(n) 는 생성 함수의 **국소 Euler 인자** 들 사이의 국소 상쇄 조건에 대응한다. 각 소수 p 에서 (1 − p · X) · (1 − X)^(-1) · (1 − X)² 모양의 결합이 1 이 되는 것은 p ∈ {2, 3} 과 특정 지수 조건뿐이다.
+the condition σ(n) · φ(n) = n · τ(n) corresponds to a local cancellation condition between the **local Euler factors** of the generating functions. At each prime p, a combination of the form (1 − p · X) · (1 − X)^(-1) · (1 − X)² equals 1 only for p ∈ {2, 3} and specific exponent conditions.
 
-**3줄 요약 (비엄밀)**
-1. σ · φ = n · τ 의 양변 Dirichlet 생성 함수를 pointwise 비교하면, 조건은 각 소수 p 에서 국소 Euler 인자들의 상쇄 조건으로 환원된다.
-2. 국소 상쇄가 성립하는 유일한 배치는 소수 2 와 3 이 각각 지수 1 로 나타나는 경우, 즉 n = 6.
-3. 이 경로는 여전히 증명 1 의 R_local 공식을 해석적 옷으로 다시 입힌 것이며, ζ 에 의존하지 않는 **진짜 해석적 독립 증명** 은 현재 미완 / 미래 과제이다.
+**Three-line summary (non-rigorous)**
+1. A pointwise comparison of the Dirichlet generating functions of σ · φ = n · τ reduces the condition to local Euler-factor cancellation at each prime p.
+2. The only configuration where this local cancellation holds is when primes 2 and 3 each appear with exponent 1, i.e., n = 6.
+3. This path is still a dressing-up of Proof 1's R_local formula in analytic garb; a **true analytic independent proof** not relying on ζ remains unfinished / an open task.
 
-### 3.3 증명 4 — 전수계산 (원문 기준 "가장 강한 실증")
+### 3.3 Proof 4 — Exhaustive Computation ("Strongest Empirical Evidence")
 
-- n ∈ [2, 10^4] 에 대해 R(n) = 1 의 해는 **n = 6 유일** (완전 검증, 2026-04-11 세션 강화).
-- n ∈ [2, 10^5] 부분 범위에서도 다른 해 없음.
-- Near-miss (|R(n) − 1| < 0.01) 0 개.
-- 10^4 후보에서 1 개 해는 ≈ 10^(-4) sharp identity 수준.
+- For n ∈ [2, 10^4], R(n) = 1 has the **unique solution n = 6** (full verification, strengthened in 2026-04-11 session).
+- Over the partial range n ∈ [2, 10^5], no other solutions either.
+- Near-misses (|R(n) − 1| < 0.01): 0.
+- A single solution among 10^4 candidates is at the level of a ≈ 10^(-4) sharp identity.
 
 ---
 
-## 4. 구조적 의미 — n = 6 의 산술적 "자기충족성"
+## 4. Structural Meaning — Arithmetic "Self-sufficiency" of n = 6
 
-원문 `theorem-r1-uniqueness.md` 는 본 정리를 다음과 같이 해석한다.
+The source `theorem-r1-uniqueness.md` interprets this theorem as follows.
 
 > σ(n) · φ(n) = n · τ(n)
-> "약수의 합 × 서로소 개수 = 수 자체 × 약수의 개수"
-> 약수 구조의 "무게 (σ)" 와 "자유도 (φ)" 가 완벽히 균형을 이루는 유일한 정수.
+> "sum of divisors × count of coprimes = the number itself × count of divisors"
+> The only integer where the "weight (σ)" and "degrees of freedom (φ)" of the divisor structure are in perfect balance.
 
-이 균형은 두 방향의 곱 σ · φ 와 n · τ 가 모두 **24** 라는 공통값에 수렴하는 현상으로 요약된다. 24 는 Jordan totient J₂(6) = n² · ∏(1 − 1/p²) = 36 · (3/4) · (8/9) = 24 이며, atlas.n6 [10*] 등급 기본 상수이다.
+This balance is summarized as the phenomenon that both products σ · φ and n · τ converge on the common value **24**. 24 equals the Jordan totient J₂(6) = n² · ∏(1 − 1/p²) = 36 · (3/4) · (8/9) = 24, a grade-[10*] base constant of atlas.n6.
 
-이 자기충족성은 "완전수 (σ(n) = 2n)" 보다 엄격한 조건이다.
-- 완전수 무한성은 **공개 추정** (even perfect numbers ↔ Mersenne primes). 현재 52 개까지 발견.
-- 하지만 R(n) = 1 은 **n = 6 오직 하나**. 증명 1 + 전수 검증으로 확정.
+This self-sufficiency is a stricter condition than "perfect numbers (σ(n) = 2n)".
+- Infinitude of perfect numbers is an **open conjecture** (even perfect numbers ↔ Mersenne primes). 52 found so far.
+- But R(n) = 1 has **n = 6 as its only solution**. Confirmed by Proof 1 + exhaustive verification.
 
-따라서 "n = 6 은 완전수 집합의 첫 원소일 뿐 아니라, σφ = nτ 라는 독립 조건의 **유일 해** 이기도 하다" 는 이중의 유일성을 가진다.
+Therefore "n = 6 is not only the first element of the set of perfect numbers but also the **unique solution** of the independent condition σφ = nτ" — a twofold uniqueness.
 
 ---
 
-## 5. 다른 완전수 (n = 28, 496, 8128) 에서의 R 값 — 유일성 검증
+## 5. R Values at Other Perfect Numbers (n = 28, 496, 8128) — Uniqueness Verification
 
-원문 `theorem-r1-uniqueness.md` 에 기록된 직접 계산 결과.
+Direct computations recorded in the source `theorem-r1-uniqueness.md`.
 
 ### n = 28
 
@@ -179,7 +179,7 @@ R_local(p, a) = [(p^(a+1) − 1) · p^(a−1) · (p − 1)] / [(p − 1) · p^a 
 
 ### n = 496
 
-- σ(496) = **992** (= 2 · 496, 완전수)
+- σ(496) = **992** (= 2 · 496, perfect)
 - φ(496) = **240**
 - τ(496) = **10**
 - R(496) = (992 · 240) / (496 · 10) = 238080 / 4960 = **48**
@@ -188,40 +188,40 @@ R_local(p, a) = [(p^(a+1) − 1) · p^(a−1) · (p − 1)] / [(p − 1) · p^a 
 
 ### n = 8128
 
-- σ(8128) = **16256** (= 2 · 8128, 완전수)
+- σ(8128) = **16256** (= 2 · 8128, perfect)
 - φ(8128) = **4032**
 - τ(8128) = **14**
 - R(8128) = (16256 · 4032) / (8128 · 14) = 65544192 / 113792 = **576**
 
 → R(8128) = 576 ≠ 1.
 
-### 관찰
+### Observation
 
-완전수 수열에서 R 은 {1, 4, 48, 576, …} 로 **급증**. 비율 4, 12, 12, … 로 지수적. 첫 완전수 n = 6 에서만 R = 1 이 성립하고, 다음 완전수부터는 **Mersenne 2^p(2^(p+1) − 1) 구조가 사슬형으로 n = 6 의 기본 산술값 σ = 12, τ = 4 를 "누적 승수" 로 사용** 하며 R 이 계속 커진다. 즉 완전수 무한성이 있어도 σφ = nτ 의 해는 n = 6 에 고립 (isolated) 되어 있다.
-
----
-
-## 6. 학습 체크리스트 (완료 기준)
-
-- [ ] σ(6), φ(6), τ(6), R(6) 을 손으로 계산할 수 있는가? → 12, 2, 4, 1
-- [ ] R_local(p, a) 공식을 즉시 쓸 수 있는가? → (p^(a+1) − 1) / (p(a+1))
-- [ ] R_local < 1 인 유일한 경우와 그 값을 답할 수 있는가? → (p, a) = (2, 1), 3/4
-- [ ] (3/4) · (?) = 1 의 해가 유일한 이유를 한 문장으로 답할 수 있는가? → 다른 모든 R_local 이 ≥ 4/3 이므로 4/3 정확히 내는 것은 R_local(3, 1) 하나뿐.
-- [ ] 3 개 이상 소인수에서 해가 없는 하한을 댈 수 있는가? → (3/4) · (4/3)² = 4/3 > 1.
-- [ ] "3 독립 증명" 주장의 현재 정직 상태를 답할 수 있는가? → Proof 1 만 엄밀 + Proof 4 가 강한 실증, Proof 2 / Proof 3 은 재포장으로 철회됨.
-- [ ] n = 28, 496, 8128 에서 R 값을 암기했는가? → 4, 48, 576.
-- [ ] 본 정리가 7 대 밀레니엄 난제를 해결하지 않는다는 사실을 설명할 수 있는가? → 본 정리는 정수론의 독립적 유일성 사실이며 7 대 난제와 별도.
+Along the sequence of perfect numbers R **grows rapidly**: {1, 4, 48, 576, …} with ratios 4, 12, 12, …, i.e., exponential. R = 1 holds only at the first perfect number n = 6; from the next perfect number onward, **the Mersenne form 2^p(2^(p+1) − 1) accumulates the basic arithmetic values σ = 12, τ = 4 of n = 6 as "chained multipliers"** and R keeps growing. Hence even with infinitely many perfect numbers the solutions of σφ = nτ remain isolated at n = 6.
 
 ---
 
-## 7. 1 차 출처 및 atlas.n6 상호 참조
+## 6. Study Checklist (Completion Criteria)
 
-- `theory/proofs/theorem-r1-uniqueness.md` — 주 증명 + 정직 선언 + 철회 이력 (본 노트의 직접 출처)
-- `theory/constants/atlas-constants.md` — R(6) = 1 및 24 = σ · φ = J₂ 교차 확인
-- `nexus/shared/n6/atlas.n6` L25~L54 — 7 개 기본 상수 `@P` 등재 (n, σ, φ, τ, sopfr, J₂, μ) 전부 [10*] 또는 [11*] 등급
-- `nexus/shared/n6/atlas.n6` L121~L136 — `@R perfect_number`, `@R sigma_decomp`, `@R J2_decomp`, `@R sopfr_phi_tau` 의 4 핵심 관계
+- [ ] Can you compute σ(6), φ(6), τ(6), R(6) by hand? → 12, 2, 4, 1
+- [ ] Can you write R_local(p, a) immediately? → (p^(a+1) − 1) / (p(a+1))
+- [ ] Can you state the unique case where R_local < 1 and its value? → (p, a) = (2, 1), 3/4
+- [ ] Can you give in one sentence why (3/4) · (?) = 1 has a unique solution? → Because every other R_local is ≥ 4/3, only R_local(3, 1) produces exactly 4/3.
+- [ ] Can you give a lower bound showing no solution exists with three or more prime factors? → (3/4) · (4/3)² = 4/3 > 1.
+- [ ] Can you state the current honesty status of the "three independent proofs" claim? → Only Proof 1 is rigorous + Proof 4 is strong empirical; Proof 2 / Proof 3 are withdrawn as repackagings.
+- [ ] Have you memorized R values at n = 28, 496, 8128? → 4, 48, 576.
+- [ ] Can you explain that this theorem does not target the seven Millennium problems? → It is an independent uniqueness fact of number theory, unrelated to the seven problems.
 
-원문 atlas.n6 의 자기 참조 인용 (L25~L50):
+---
+
+## 7. Primary Sources and atlas.n6 Cross-references
+
+- `theory/proofs/theorem-r1-uniqueness.md` — main proof + honesty declaration + retraction history (direct source of this note)
+- `theory/constants/atlas-constants.md` — R(6) = 1 and 24 = σ · φ = J₂ cross-check
+- `nexus/shared/n6/atlas.n6` L25–L54 — registration of seven base constants `@P` (n, σ, φ, τ, sopfr, J₂, μ), all grade [10*] or [11*]
+- `nexus/shared/n6/atlas.n6` L121–L136 — the four core relations `@R perfect_number`, `@R sigma_decomp`, `@R J2_decomp`, `@R sopfr_phi_tau`
+
+Self-referential citation from atlas.n6 (L25–L50):
 ```
 @P n = 6 :: foundation [11*]
 @P sigma = divisor_sum(6) = 12 :: foundation [11*]
@@ -234,11 +234,11 @@ R_local(p, a) = [(p^(a+1) − 1) · p^(a−1) · (p − 1)] / [(p − 1) · p^a 
 
 ---
 
-## 8. 다음 학습 단계 (P0 트랙)
+## 8. Next Study Steps (P0 Track)
 
-- **N6-P0-2** — n = 6 기본 산술 체계 마스터 드릴 (10 기본값 테이블 + 분해 알고리즘 + 10 연습 문제).
-- **N6-P0-3** — atlas.n6 등급 체계 + BT 체계 입문.
-- **PURE-P0-1** — 정수론 기초 (Hardy-Wright, Apostol).
-- **PROB-P0-1** — Clay 7 대 난제 개관.
+- **N6-P0-2** — mastery drill of the n = 6 basic arithmetic system (10 base-value table + decomposition algorithm + 10 practice problems).
+- **N6-P0-3** — grade system of atlas.n6 + introduction to the BT system.
+- **PURE-P0-1** — foundations of number theory (Hardy-Wright, Apostol).
+- **PROB-P0-1** — overview of Clay's 7 Millennium problems.
 
-본 정리는 상기 모든 경로의 "산술적 anchor" 이며, 매 학습 단계마다 핵심 3 줄 요약 (2.4 절 ▶) 로 되돌아와 재확인한다.
+This theorem is the "arithmetic anchor" of all those paths; at each study step, return to the three-line core summary (▶ in 2.4) for reconfirmation.

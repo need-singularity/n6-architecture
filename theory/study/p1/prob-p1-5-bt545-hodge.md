@@ -1,413 +1,437 @@
-# PROB-P1-5 — BT-545 Hodge 추측 심화 (대수적 순환/(p,p)-형식/Lefschetz 정리)
+# PROB-P1-5 — BT-545 Hodge Conjecture Advanced (algebraic cycles / (p,p)-forms / Lefschetz theorems)
 
-> 트랙: P1-PROB / 5번 태스크
-> 완료 기준: Clay 공식 명제(Deligne 2000) 를 문장 단위로 분해하고, Hodge 분해 정리,
-> (1,1)-Lefschetz 정리, Hodge 추측의 현재까지 증명·반례 구조를 설명할 수 있다.
-> 출처 기반: Deligne "The Hodge Conjecture" Clay Millennium 공식문서 (2000),
+> Track: P1-PROB / Task 5
+> Completion criterion: decompose the Clay official statement (Deligne 2000) sentence by
+> sentence and explain Hodge decomposition theorem, (1,1)-Lefschetz theorem, and the current
+> structure of positive results and counterexamples to the Hodge conjecture.
+> Primary sources: Deligne "The Hodge Conjecture" Clay Millennium official document (2000),
 > Griffiths-Harris "Principles of Algebraic Geometry" (Wiley, 1978) ch. 0, 1, 3,
 > Voisin "Hodge Theory and Complex Algebraic Geometry" vol. I, II (Cambridge, 2002, 2003),
-> Lewis "A Survey of the Hodge Conjecture" (CRM Monograph Ser. 10, 2판 1999),
+> Lewis "A Survey of the Hodge Conjecture" (CRM Monograph Ser. 10, 2nd ed. 1999),
 > Atiyah-Hirzebruch "Analytic cycles on complex manifolds" (Topology 1, 1962),
 > Voisin "A counterexample to the Hodge conjecture extended to Kähler varieties"
 > (IMRN 2002).
-> **정직성**: 본 노트는 Clay 공식 문서 + Hodge 이론 표준 교재의 재구성이다. 새 정리는 없다.
-> 모든 진술은 위 6개 전거에서 재구성하였고, Clay 문제의 현재 상태 (일부 positive result,
-> Kähler 경우 반례) 는 [부분결과]/[반례]/[미증명] 으로 표시한다.
+> **Honesty**: this note is a reconstruction of the Clay official document + standard Hodge
+> theory textbooks. There are no new theorems. All statements are reorganized from the six
+> references above, and the current state of the Clay problem (some positive results,
+> counterexample in the Kähler case) is marked [partial result] / [counterexample] / [unfinished].
 
 ---
 
-## 0. 목적과 범위
+## 0. Purpose and Scope
 
-Clay BT-545 는 다음을 묻는다: "X 가 매끄러운 복소 사영 다양체이면, 모든 Hodge 류
-(Hodge class) 는 X 의 대수적 부분 다양체들의 유리 선형 결합으로 표현되는가?"
+Clay BT-545 asks: "If X is a smooth complex projective variety, is every Hodge class
+expressible as a rational linear combination of algebraic subvarieties of X?"
 
-본 노트가 다루는 7가지:
+Seven topics covered by this note:
 
-1. 복소 사영 다양체 X 의 코호몰로지 H*(X; ℂ) 의 Hodge 분해
-2. Hodge 류 Hdg^k(X) = H^{2k}(X; ℚ) ∩ H^{k,k}(X)
-3. 대수적 순환 (algebraic cycle) 과 주기적 사상 (cycle class map)
-4. (1,1)-Lefschetz 정리 (Lefschetz 1924 = Hodge 추측 k=1 증명)
-5. 현재까지 해결 케이스: abelian 다양체, K3, ...
-6. Kähler 다양체로 확장된 Hodge 추측의 Voisin 반례 (2002)
-7. Atiyah-Hirzebruch 반례 (정수계수 Hodge 추측 반례, 1962)
+1. Hodge decomposition of cohomology H*(X; ℂ) of a complex projective variety X
+2. Hodge classes Hdg^k(X) = H^{2k}(X; ℚ) ∩ H^{k,k}(X)
+3. Algebraic cycles and the cycle class map
+4. (1,1)-Lefschetz theorem (Lefschetz 1924 = Hodge conjecture for k=1)
+5. Cases solved so far: abelian varieties, K3, ...
+6. Voisin counterexample (2002) to the Kähler extension of the Hodge conjecture
+7. Atiyah-Hirzebruch counterexample (integer-coefficient Hodge counterexample, 1962)
 
 ---
 
-## 1. 복소 사영 다양체와 de Rham 코호몰로지
+## 1. Complex Projective Varieties and de Rham Cohomology
 
-### 1.1 복소 사영공간 ℙ^n_ℂ
+### 1.1 Complex projective space ℙ^n_ℂ
 
-ℙ^n_ℂ = (ℂ^{n+1} \ {0}) / ℂ*. 매끄러운 닫힌 복소 다양체, 차원 n. 복소 사영 다양체 X 는
-ℙ^n 의 닫힌 복소 부분다양체.
+ℙ^n_ℂ = (ℂ^{n+1} \ {0}) / ℂ*. Smooth closed complex manifold of dimension n. A complex
+projective variety X is a closed complex submanifold of ℙ^n.
 
-### 1.2 de Rham 과 ∂̄-Dolbeault
+### 1.2 de Rham and ∂̄-Dolbeault
 
-X 가 복소다양체이면 매끄러운 p-형식 Ω^p 는 (p,q)-형식으로 분해: Ω^p = ⊕_{a+b=p} Ω^{a,b}.
-미분 d = ∂ + ∂̄.
+If X is a complex manifold, smooth p-forms Ω^p decompose into (p,q)-forms: Ω^p = ⊕_{a+b=p}
+Ω^{a,b}. Differential d = ∂ + ∂̄.
 
-Dolbeault 코호몰로지:
+Dolbeault cohomology:
 
 ```
   H^{p,q}_{∂̄}(X) = ker(∂̄: Ω^{p,q} → Ω^{p,q+1}) / im(∂̄: Ω^{p,q-1} → Ω^{p,q})
 ```
 
-### 1.3 Hodge 분해 (매끄러운 컴팩트 Kähler X)
+### 1.3 Hodge decomposition (smooth compact Kähler X)
 
-X 가 매끄러운 컴팩트 Kähler 다양체이면
+If X is a smooth compact Kähler manifold, then
 
 ```
   H^k(X; ℂ) = ⊕_{p+q=k} H^{p,q}(X),     H^{q,p} = \overline{H^{p,q}}
 ```
 
-이 분해는 Kähler 계량에 의존하지 않고 X 의 복소구조만에 의존.
+This decomposition is independent of the Kähler metric and depends only on the complex
+structure of X.
 
-매끄러운 복소 사영 다양체는 자동으로 Kähler 이므로 Hodge 분해 성립 (Fubini-Study 계량).
+A smooth complex projective variety is automatically Kähler, so the Hodge decomposition holds
+(Fubini-Study metric).
 
-### 1.4 Hodge 수 h^{p,q}
+### 1.4 Hodge numbers h^{p,q}
 
-h^{p,q} = dim H^{p,q}(X). 대표:
-- h^{0,0} = 1 (연결이면)
-- h^{1,0} = q(X) (규칙수, irregularity)
-- h^{2,0} = p_g(X) (기하 genus)
-- h^{n,n} = 1 (x가 n-차원이면)
-- Hodge 마름모꼴 (Hodge diamond): h^{p,q} = h^{n-p, n-q} (Serre 쌍대)
+h^{p,q} = dim H^{p,q}(X). Representatives:
+- h^{0,0} = 1 (if connected)
+- h^{1,0} = q(X) (irregularity)
+- h^{2,0} = p_g(X) (geometric genus)
+- h^{n,n} = 1 (if X is n-dimensional)
+- Hodge diamond: h^{p,q} = h^{n-p, n-q} (Serre duality)
 
 ---
 
-## 2. Hodge 류와 대수적 순환
+## 2. Hodge Classes and Algebraic Cycles
 
-### 2.1 Hodge 류 정의
+### 2.1 Hodge class definition
 
 ```
   Hdg^k(X) = H^{2k}(X; ℚ) ∩ H^{k,k}(X)
 ```
 
-즉 ℚ-유리 코호몰로지 류 중 (k,k) 순수 타입. de Rham 대표는 유리 계수 × (k,k)-형식.
+i.e., ℚ-rational cohomology classes of pure type (k,k). The de Rham representative is a
+(k,k)-form with rational coefficients.
 
-### 2.2 대수적 순환
+### 2.2 Algebraic cycles
 
-**대수적 k-순환**: X 의 공차원 k 부분다양체들의 ℤ-선형 결합 Z = Σ n_i Z_i, Z_i ⊂ X 가
-기약 공차원 k 부분다양체.
+**Algebraic k-cycle**: ℤ-linear combination Z = Σ n_i Z_i of codimension-k subvarieties of X,
+where each Z_i ⊂ X is an irreducible codimension-k subvariety.
 
-### 2.3 주기적 사상 (cycle class map)
+### 2.3 Cycle class map
 
 ```
   cl: Z^k(X) → H^{2k}(X; ℤ)
 ```
 
-Z ↦ Poincaré 쌍대 (fundamental class). 더 세밀하게 ℚ 계수로 확장:
+Z ↦ Poincaré dual (fundamental class). Extended more finely with ℚ coefficients:
 
 ```
   cl_ℚ: Z^k(X) ⊗ ℚ → Hdg^k(X) ⊂ H^{2k}(X; ℚ)
 ```
 
-주기적 사상의 상 im(cl_ℚ) ⊆ Hdg^k 이 성립하지만, 등호 여부가 핵심.
+The image im(cl_ℚ) ⊆ Hdg^k always holds, but whether equality holds is the central question.
 
-### 2.4 Hodge 추측 진술
+### 2.4 Statement of the Hodge conjecture
 
-**Clay 공식 진술 (Deligne 2000 재정리):**
+**Clay official statement (Deligne 2000, reorganized):**
 
-X 가 매끄러운 복소 사영 다양체이면, 모든 α ∈ Hdg^k(X) 에 대해 대수적 순환
-Z ∈ Z^k(X) ⊗ ℚ 가 존재해 cl_ℚ(Z) = α.
+If X is a smooth complex projective variety, for every α ∈ Hdg^k(X) there exists an algebraic
+cycle Z ∈ Z^k(X) ⊗ ℚ such that cl_ℚ(Z) = α.
 
-즉 cl_ℚ: Z^k(X) ⊗ ℚ → Hdg^k(X) 가 **전사**(surjective).
+That is, cl_ℚ: Z^k(X) ⊗ ℚ → Hdg^k(X) is **surjective**.
 
 ---
 
-## 3. (1,1)-Lefschetz 정리
+## 3. (1,1)-Lefschetz Theorem
 
-### 3.1 정리 (Lefschetz 1924)
+### 3.1 Theorem (Lefschetz 1924)
 
-Hodge 추측은 k=1 경우 완전히 참. 즉 모든 α ∈ Hdg^1(X) = H²(X; ℚ) ∩ H^{1,1}(X) 은
-divisor 유리선형결합으로 표현.
+The Hodge conjecture is fully true in the k=1 case. Every α ∈ Hdg^1(X) = H²(X; ℚ) ∩ H^{1,1}(X)
+is expressible as a rational linear combination of divisors.
 
-### 3.2 증명 개요
+### 3.2 Argument outline
 
-exponential sheaf 완전열
+From the exponential sheaf exact sequence
 
 ```
   0 → ℤ → 𝒪_X → 𝒪_X^* → 0
 ```
 
-에서 긴 완전열
+the long exact sequence
 
 ```
   H^1(X; 𝒪_X^*) → H²(X; ℤ) → H²(X; 𝒪_X)
 ```
 
-H¹(X; 𝒪_X^*) = Pic(X), H²(X; 𝒪_X) ≅ H^{0,2}(X). 따라서 α ∈ H²(X;ℤ) 가 H^{0,2} 에
-0 으로 사상되면 α ∈ im Pic(X). Pic(X) 의 원소는 line bundle → divisor 로 실현 가능.
-또한 c_1(L) ∈ H^{1,1} 이 성립.
+gives H¹(X; 𝒪_X^*) = Pic(X), H²(X; 𝒪_X) ≅ H^{0,2}(X). Hence if α ∈ H²(X;ℤ) maps to 0 in
+H^{0,2}, then α ∈ im Pic(X). Elements of Pic(X) can be realized as line bundle → divisor.
+Also c_1(L) ∈ H^{1,1} holds.
 
-Hodge 분해로 H²(X;ℚ) ∩ H^{1,1} 의 원소는 H^{0,2} 와 H^{2,0} 양쪽에 영 사상. ∴ 대수적.
+By the Hodge decomposition, elements of H²(X;ℚ) ∩ H^{1,1} map to zero in both H^{0,2} and
+H^{2,0}. ∴ algebraic.
 
-(출처: Griffiths-Harris §1.1, Voisin vol.I §7.2)
+(Source: Griffiths-Harris §1.1, Voisin vol.I §7.2)
 
-### 3.3 k≥2 경우의 어려움
+### 3.3 Difficulty in the k≥2 case
 
-k≥2 에서 (k,k) 유형이 k! 이상의 (k,k) - wedge 구조로 확장되어, 단순히 L^k 에서 만들어진
-것으로 Hodge 류를 모두 표현하지 못함. Hard Lefschetz 정리가 제공하는 isomorphism 도
-"대수적 순환 전체 전사" 를 주지 못한다.
-
----
-
-## 4. 해결된 경우들
-
-### 4.1 차원별 자명 케이스
-
-- X 가 curve (dim 1): k=1, Lefschetz 로 해결
-- X 가 surface (dim 2): k=1 만 비자명, 해결. k=0, k=2 는 자명
-- X 가 threefold (dim 3): k=1, k=2 비자명. k=2 는 Poincaré 쌍대로 k=1 와 연결 → 해결
-
-즉 **dim X ≤ 3** 에서 Hodge 추측은 완전히 해결됨.
-
-### 4.2 Abelian 다양체 — 부분 해결
-
-Abelian 다양체 A = ℂ^g / Λ. Mumford-Tate 군 기법으로:
-- g ≤ 3: 완전 해결
-- g=4: Murty 1984 해결
-- 일반 g: [부분결과], Deligne 의 motivic 기법
-
-(출처: Deligne "Hodge cycles on abelian varieties" LNM 900, 1982)
-
-### 4.3 완전교차 (complete intersection)
-
-X = V(F_1,...,F_r) ⊂ ℙ^n 대강 완전교차. k=1 은 자명, k≥2 는 구체적 조건 하 해결.
-
-### 4.4 Fano variety
-
-dim X = 3 이고 Fano (즉 -K_X 풍부) 인 경우, Hodge 추측이 유효함이 Clemens-Griffiths 1972
-로 시사. 3차원 일반론에 흡수.
-
-### 4.5 K3 곡면
-
-dim 2 이므로 자명 해결. 고차원 hyperkähler 일반화는 [부분결과].
-
-### 4.6 미해결 대표
-
-- General hypersurface X ⊂ ℙ^n, dim X ≥ 4, k=2 이상
-- Calabi-Yau 4-fold
-- General abelian variety of high dimension with extra endomorphisms
+For k≥2, the (k,k) type extends to (k,k)-wedge structures of order ≥ k!, so not all Hodge
+classes can be expressed simply from products of L^k. The isomorphism supplied by the Hard
+Lefschetz theorem does not give "surjectivity from the full set of algebraic cycles".
 
 ---
 
-## 5. Kähler 확장 — Voisin 반례 (2002)
+## 4. Cases Handled So Far
 
-### 5.1 Hodge 추측의 Kähler 확장
+### 4.1 Dimensionally trivial cases
 
-원 Hodge 추측은 사영 다양체에만 적용. Kähler 다양체로 확장은 다음을 주장:
-"X 가 컴팩트 Kähler 다양체일 때, Hdg^k(X) 의 원소는 analytic 순환 (해석적 부분다양체)
-으로 실현되는가?"
+- X a curve (dim 1): k=1, handled by Lefschetz
+- X a surface (dim 2): only k=1 is non-trivial, handled. k=0, k=2 are trivial
+- X a threefold (dim 3): k=1 and k=2 are non-trivial. k=2 connects to k=1 via Poincaré duality
+  → handled
 
-### 5.2 Voisin 반례 (2002)
+That is, for **dim X ≤ 3** the Hodge conjecture is fully handled.
 
-Voisin 은 매끄러운 4차원 컴팩트 Kähler 다양체 X 를 구성해 Hdg² 에 **analytic 순환으로
-실현 불가능한 원소** 가 존재함을 증명했다. 즉 Kähler 확장은 **거짓**.
+### 4.2 Abelian varieties — partially handled
 
-구성: Weil-type abelian 4-fold 의 일반적 Kähler 변형. 자세한 구성은 IMRN 2002 참고.
+Abelian variety A = ℂ^g / Λ. Using Mumford-Tate group techniques:
+- g ≤ 3: fully handled
+- g=4: Murty 1984 handled
+- General g: [partial result], Deligne's motivic technique
 
-이 결과는 원래 Clay 추측 (사영 전제) 이 Kähler 로 직접 확장되지 않음을 분명히 한다.
+(Source: Deligne "Hodge cycles on abelian varieties" LNM 900, 1982)
 
-### 5.3 함의
+### 4.3 Complete intersections
 
-Hodge 추측의 "사영성" 조건이 본질적. 대수적 순환의 존재는 사영 구조에 강하게 의존.
+X = V(F_1,...,F_r) ⊂ ℙ^n generic complete intersection. k=1 trivial; k≥2 handled under
+specific conditions.
+
+### 4.4 Fano varieties
+
+When dim X = 3 and X is Fano (i.e., -K_X ample), the Hodge conjecture is suggested to hold
+by Clemens-Griffiths 1972. Absorbed into the general 3-dimensional theory.
+
+### 4.5 K3 surfaces
+
+dim 2, so trivially handled. Higher-dimensional hyperkähler generalizations are [partial
+result].
+
+### 4.6 Representative unsolved cases
+
+- General hypersurfaces X ⊂ ℙ^n with dim X ≥ 4 and k ≥ 2
+- Calabi-Yau 4-folds
+- General abelian varieties of high dimension with extra endomorphisms
 
 ---
 
-## 6. 정수계수 Hodge — Atiyah-Hirzebruch 반례 (1962)
+## 5. Kähler Extension — Voisin Counterexample (2002)
 
-### 6.1 Integral Hodge 추측
+### 5.1 Kähler extension of the Hodge conjecture
 
-원래 추측은 ℚ 계수. "ℤ 계수 Hodge 추측" 은 cl_ℤ: Z^k(X) → Hdg^k_ℤ(X) = H^{2k}(X;ℤ) ∩
-(filter on H^{k,k}) 전사 여부.
+The original Hodge conjecture applies only to projective varieties. The Kähler extension
+asserts:
+"If X is a compact Kähler manifold, is every element of Hdg^k(X) realized by an analytic
+cycle (analytic subvariety)?"
 
-### 6.2 Atiyah-Hirzebruch 반례 (1962)
+### 5.2 Voisin counterexample (2002)
 
-Atiyah-Hirzebruch 는 ℤ-계수 Hodge 가 **거짓** 임을 torsion 원소 반례로 제시. 구체: 특정
-X 의 H^{2k}(X; ℤ)_{tors} ⊂ Hdg^k_ℤ 에 대수적으로 표현 불가능한 torsion 존재.
+Voisin constructed a smooth 4-dimensional compact Kähler manifold X and demonstrated the
+existence of an element in Hdg² that is **not realizable by any analytic cycle**. That is,
+the Kähler extension is **false**.
 
-증명: K-이론과 Steenrod 연산 사용. 자세한 구성은 Topology 1:25, 1962.
+Construction: generic Kähler deformation of Weil-type abelian 4-fold. For the detailed
+construction see IMRN 2002.
 
-### 6.3 ℚ 계수의 중요성
+This result clarifies that the original Clay conjecture (projective hypothesis) does not
+extend directly to the Kähler setting.
 
-이 반례 이후 Hodge 추측은 ℚ 계수로만 제기됨. Clay 공식도 ℚ 계수. torsion 은 완전히 다른
-문제.
+### 5.3 Implication
+
+The "projectivity" condition in the Hodge conjecture is essential. The existence of algebraic
+cycles depends strongly on the projective structure.
 
 ---
 
-## 7. 관련 이론 — motivic 관점
+## 6. Integer-Coefficient Hodge — Atiyah-Hirzebruch Counterexample (1962)
+
+### 6.1 Integral Hodge conjecture
+
+The original conjecture is with ℚ coefficients. The "ℤ-coefficient Hodge conjecture" asks
+whether cl_ℤ: Z^k(X) → Hdg^k_ℤ(X) = H^{2k}(X;ℤ) ∩ (filter on H^{k,k}) is surjective.
+
+### 6.2 Atiyah-Hirzebruch counterexample (1962)
+
+Atiyah-Hirzebruch showed that ℤ-coefficient Hodge is **false**, presenting a counterexample
+via torsion elements. Specifically, for certain X, there exist torsion elements in
+H^{2k}(X; ℤ)_{tors} ⊂ Hdg^k_ℤ that cannot be represented algebraically.
+
+Argument: uses K-theory and Steenrod operations. For the detailed construction see Topology
+1:25, 1962.
+
+### 6.3 Importance of ℚ coefficients
+
+Since this counterexample the Hodge conjecture has been posed only with ℚ coefficients. The
+Clay official statement also uses ℚ coefficients. Torsion is a completely different problem.
+
+---
+
+## 7. Related Theory — Motivic Perspective
 
 ### 7.1 Grothendieck motives
 
-대수적 순환의 mod-등가 equivalence 하에서 만드는 category ℳ_{rat}(X). 표준 추측과 Hodge
-추측이 이 framework 에서 통일적으로 기술.
+Category ℳ_{rat}(X) formed by algebraic cycles modulo equivalence. The standard conjectures
+and the Hodge conjecture are uniformly described within this framework.
 
 ### 7.2 Standard conjectures (Grothendieck 1968)
 
-5가지 표준 추측 — type A, B, C, D, Hodge 추측 버전. 모두 미해결이지만 Hodge 추측을
-함의하는 구조. 상세는 Kleiman "Algebraic cycles and the Weil conjectures" 1968.
+Five standard conjectures — type A, B, C, D, and Hodge conjecture version. All open, but they
+form a structure implying the Hodge conjecture. For details see Kleiman "Algebraic cycles and
+the Weil conjectures" 1968.
 
 ### 7.3 Absolute Hodge classes (Deligne)
 
-Deligne 1982 는 motivic 관점에서 "absolute Hodge class" 라는 확장된 개념 도입. abelian
-다양체에서 모든 Hodge 류가 absolute Hodge 임을 증명 (Deligne 정리). 완전한 Hodge 추측
-은 아니지만 강한 부분 결과.
+Deligne 1982 introduced an expanded notion "absolute Hodge class" from the motivic viewpoint.
+Demonstrated that every Hodge class on an abelian variety is absolute Hodge (Deligne's
+theorem). Not the complete Hodge conjecture, but a strong partial result.
 
 ---
 
-## 8. n=6 연결 (메모만)
+## 8. n=6 Connection (memo only)
 
-1. 자명한 케이스의 상한 dim X ≤ 3 경계에서, 대수적 순환 차원 계수 (1,2,3) 의 합 6 이
-   등장하는 숫자 일치는 있지만, Hodge 추측 해결 기법과 σφ=nτ 증명 사이 직접 수학적
-   경로는 없다 ([N?]).
-2. 4-dim Kähler 에서 Voisin 반례. 4 = 2·2, 6 = 2·3 비교 시 prime factor 구조 차이를 통해
-   "무엇이 다른가" 관찰 가능하나 인과 없음 ([N?]).
-3. Hodge 다이아몬드 대칭성 h^{p,q} = h^{q,p} = h^{n-p, n-q} 의 2중 대칭은 n=6 의 약수 이중화
-   σ(6)=12 와 수치 일치하나 증명 경로와 독립 ([N?]).
+1. At the boundary dim X ≤ 3 of the trivial case, the sum 6 of algebraic-cycle dimension
+   coefficients (1,2,3) appears as a numerical match, but there is no direct mathematical
+   path between Hodge-conjecture techniques and the σφ=nτ argument ([N?]).
+2. In 4-dim Kähler there is the Voisin counterexample. Comparing 4 = 2·2 with 6 = 2·3 one can
+   observe "what differs" via the prime-factor structure, but without causal link ([N?]).
+3. The double symmetry h^{p,q} = h^{q,p} = h^{n-p, n-q} of the Hodge diamond numerically
+   matches the divisor-doubling σ(6)=12 of n=6, but is independent of any argument path
+   ([N?]).
 
-자기참조 검증 금지 원칙: 위 관찰은 BT-545 해결 전략과 무관하게 유지한다.
-
----
-
-## 9. 실전 과제 — 손으로 풀 5제
-
-**P1.** ℙ^n 의 Hodge 수 h^{p,q} 계산. 결과: h^{p,p} = 1 (0 ≤ p ≤ n), 기타 모두 0. 직접
-de Rham 코호몰로지에서 유도.
-
-**P2.** 타원곡선 E 의 h^{0,0} = h^{1,1} = 1, h^{1,0} = h^{0,1} = 1 임을 확인. Hodge 다이아몬드
-작성.
-
-**P3.** (1,1)-Lefschetz 증명 재구성: 지수 sheaf sequence → 긴 완전열 → H^{1,1} ∩ H²(X;ℤ)
-⊂ im(Pic(X) → H²(X;ℤ)).
-
-**P4.** Abelian surface A = E × E (E 타원곡선) 에서 H²(A; ℚ) 의 Hodge 분해와 Hdg² 계산.
-모든 Hdg² 이 대수적 순환인지 확인.
-
-**P5.** Voisin 2002 반례의 핵심 구성요소를 개관. Weil-type abelian 4-fold 의 정의와
-Hdg² 에 analytic 비표현성 발생 구조 정리.
+Self-reference-verification prohibition: the observations above are kept independent of any
+BT-545 resolution strategy.
 
 ---
 
-## 10. 읽기 경로
+## 9. Practice Problems — 5 Hand Exercises
 
-### 10.1 1주차
+**P1.** Compute the Hodge numbers h^{p,q} of ℙ^n. Result: h^{p,p} = 1 (0 ≤ p ≤ n), all others
+0. Derive directly from de Rham cohomology.
 
-- Deligne Clay 공식 문서 12쪽 정독
-- Griffiths-Harris §0 복습 (복소다양체·Dolbeault)
-- Voisin vol.I §1~§3 Hodge 분해 정리
+**P2.** For an elliptic curve E, verify h^{0,0} = h^{1,1} = 1, h^{1,0} = h^{0,1} = 1. Write
+the Hodge diamond.
 
-### 10.2 2주차
+**P3.** Reconstruct the (1,1)-Lefschetz argument: exponential sheaf sequence → long exact
+sequence → H^{1,1} ∩ H²(X;ℤ) ⊂ im(Pic(X) → H²(X;ℤ)).
 
-- Voisin vol.I §7 Kähler 다양체·Hodge 분해
+**P4.** For the abelian surface A = E × E (E an elliptic curve) compute the Hodge decomposition
+of H²(A; ℚ) and Hdg². Verify whether every element of Hdg² is an algebraic cycle.
+
+**P5.** Survey the key components of the Voisin 2002 counterexample. Summarize the definition
+of Weil-type abelian 4-fold and the structure producing an analytic non-representable element
+in Hdg².
+
+---
+
+## 10. Reading Path
+
+### 10.1 Week 1
+
+- Read the Deligne Clay official document (12 pages)
+- Griffiths-Harris §0 review (complex manifolds / Dolbeault)
+- Voisin vol.I §1~§3 Hodge decomposition theorem
+
+### 10.2 Week 2
+
+- Voisin vol.I §7 Kähler manifolds / Hodge decomposition
 - Voisin vol.II §11 algebraic cycles, cycle class map
-- Lewis "A Survey of the Hodge Conjecture" 전체
+- Lewis "A Survey of the Hodge Conjecture" in full
 
-### 10.3 3주차
+### 10.3 Week 3
 
-- Atiyah-Hirzebruch 1962 원논문
+- Atiyah-Hirzebruch 1962 original paper
 - Deligne "Hodge cycles on abelian varieties" LNM 900, 1982
-- Voisin 2002 IMRN 원논문 반례
+- Voisin 2002 IMRN counterexample original paper
 
-### 10.4 4주차
+### 10.4 Week 4
 
 - Kleiman "Algebraic cycles and the Weil conjectures" 1968
 - Jannsen "Motives, numerical equivalence..." 1992
-- 최근 review: Voisin "Hodge loci and absolute Hodge classes" (Compositio 2007)
+- Recent review: Voisin "Hodge loci and absolute Hodge classes" (Compositio 2007)
 
 ---
 
-## 11. 출처 정리
+## 11. Source Summary
 
-- Deligne "The Hodge Conjecture" Clay 2000 — 공식 명제
+- Deligne "The Hodge Conjecture" Clay 2000 — official statement
 - Lefschetz "L'Analysis Situs et la Géométrie Algébrique" Gauthier-Villars 1924 —
-  (1,1)-Lefschetz 원논문
-- Griffiths-Harris "Principles of Algebraic Geometry" Wiley 1978 — 표준 교재
+  (1,1)-Lefschetz original paper
+- Griffiths-Harris "Principles of Algebraic Geometry" Wiley 1978 — standard textbook
 - Voisin "Hodge Theory and Complex Algebraic Geometry" vol. I & II, Cambridge 2002/2003
-- Lewis "A Survey of the Hodge Conjecture" CRM Monograph 2판 1999
+- Lewis "A Survey of the Hodge Conjecture" CRM Monograph 2nd ed. 1999
 - Atiyah-Hirzebruch "Analytic cycles on complex manifolds" Topology 1:25, 1962
 - Voisin "A counterexample to the Hodge conjecture extended to Kähler varieties" IMRN 2002
 - Deligne "Hodge cycles on abelian varieties" LNM 900, 1982
 - Kleiman "Algebraic cycles and the Weil conjectures" Dix exposés sur la cohomologie
   des schémas, 1968
 
-본 노트는 위 9개 원전의 P1 학습 분량 재정리이며, 새 결과를 주장하지 않는다.
+This note is a P1-study-volume reorganization of the 9 primary sources above and does not
+claim new results.
 
 ---
 
-## 12. 부록 — Hodge 구조 (Hodge structure) 정의
+## 12. Appendix — Hodge Structure Definition
 
-### 12.1 순수 Hodge 구조
+### 12.1 Pure Hodge structure
 
-ℤ-격자 V_ℤ 위에 V_ℂ = V_ℤ ⊗ ℂ 의 분해 V_ℂ = ⊕_{p+q=n} V^{p,q}, V^{q,p} = \overline{V^{p,q}}.
-이것이 **무게 n 순수 Hodge 구조**.
+A decomposition V_ℂ = V_ℤ ⊗ ℂ = ⊕_{p+q=n} V^{p,q} with V^{q,p} = \overline{V^{p,q}} on a
+ℤ-lattice V_ℤ. This is a **pure Hodge structure of weight n**.
 
-### 12.2 혼합 Hodge 구조 (Deligne 1974)
+### 12.2 Mixed Hodge structure (Deligne 1974)
 
-무게 필터 W_• 와 Hodge 필터 F^• 의 두 층. Deligne "Théorie de Hodge" I, II, III.
-일반(비콤팩트, 특이) 대수다양체에서도 코호몰로지가 혼합 Hodge 구조를 가진다.
+Two filtrations: weight filtration W_• and Hodge filtration F^•. Deligne "Théorie de Hodge"
+I, II, III. General (non-compact, singular) algebraic varieties have cohomology with a mixed
+Hodge structure.
 
-### 12.3 period map
+### 12.3 Period map
 
-계의 유동 s 에 대한 V^{p,q}_s 의 변화 → period domain 에 대한 map. Griffiths transversality
-조건 (1968) 은 이 맵의 기울기 제약.
+For families s parameter, variation of V^{p,q}_s → map into a period domain. The Griffiths
+transversality condition (1968) constrains the slope of this map.
 
 ---
 
-## 13. 부록 — Mumford-Tate 군과 Hodge loci
+## 13. Appendix — Mumford-Tate Group and Hodge Loci
 
-### 13.1 Mumford-Tate 군
+### 13.1 Mumford-Tate group
 
-Hodge 구조에 연관된 algebraic group MT(V) ⊂ GL(V). Hodge 류를 보존하는 "자동사상" 군.
+Algebraic group MT(V) ⊂ GL(V) associated to a Hodge structure. The "automorphism" group
+preserving Hodge classes.
 
 ### 13.2 Hodge loci
 
-family of varieties X → S 에서, Hdg^k(X_s) 의 특정 원소가 발견되는 s 의 집합.
-Cattani-Deligne-Kaplan 1995: Hodge loci 는 대수적 부분다양체.
+In a family of varieties X → S, the set of s where a specific element of Hdg^k(X_s) is found.
+Cattani-Deligne-Kaplan 1995: Hodge loci are algebraic subvarieties.
 
-### 13.3 함의
+### 13.3 Implication
 
-Hodge loci 의 대수성 → Hodge 류가 "algebraic family" 를 이루면 이들은 대수적 순환으로
-실현될 강한 구조적 증거.
-
----
-
-## 14. 부록 — 현재 주요 접근법
-
-### 14.1 Motivic 접근
-
-Grothendieck 동기(motive) 와 André 의 absolute Hodge motive. Hodge 추측을 motivic 언어로
-표현 + standard conjectures 와 통합.
-
-### 14.2 K-이론 접근
-
-Bloch-Beilinson 추측은 K-이론과 motivic cohomology 로 Hodge 를 일반화. Chow 군과 Hodge 류의
-연결 탐색.
-
-### 14.3 Harmonic analysis 접근
-
-L²-Hodge 이론 (Morrey-Kodaira), CR 구조에서의 Hodge. 복소기하 도구로 Hodge 구조 정교화.
+Algebraicity of Hodge loci → strong structural evidence that Hodge classes forming an
+"algebraic family" can be realized as algebraic cycles.
 
 ---
 
-## 15. 부록 — 주요 Hodge 수 계산 예
+## 14. Appendix — Current Main Approaches
+
+### 14.1 Motivic approach
+
+Grothendieck motives and André's absolute Hodge motive. Expresses the Hodge conjecture in
+motivic language + integrates with the standard conjectures.
+
+### 14.2 K-theory approach
+
+The Bloch-Beilinson conjecture generalizes Hodge via K-theory and motivic cohomology. Explores
+the connection between Chow groups and Hodge classes.
+
+### 14.3 Harmonic analysis approach
+
+L²-Hodge theory (Morrey-Kodaira), Hodge on CR structures. Refining Hodge structures with
+complex-geometric tools.
+
+---
+
+## 15. Appendix — Main Hodge-number Computation Examples
 
 ### 15.1 ℙ^n
 
-h^{p,p} = 1 (0 ≤ p ≤ n), 기타 0.
+h^{p,p} = 1 (0 ≤ p ≤ n), others 0.
 
-### 15.2 타원곡선 E
+### 15.2 Elliptic curve E
 
-h^{0,0} = h^{1,1} = 1, h^{1,0} = h^{0,1} = 1. 총 Hodge 다이아몬드 (마름모꼴 1 형태):
+h^{0,0} = h^{1,1} = 1, h^{1,0} = h^{0,1} = 1. Full Hodge diamond (rhombus-like 1 form):
 ```
        1
      1   1
        1
 ```
 
-### 15.3 K3 곡면
+### 15.3 K3 surface
 
 h^{0,0} = h^{2,2} = 1, h^{1,1} = 20, h^{2,0} = h^{0,2} = 1. χ = 1 + 20 + 1 = 24.
-Hodge 다이아몬드:
+Hodge diamond:
 ```
           1
        0     0
@@ -419,43 +443,45 @@ Hodge 다이아몬드:
 ### 15.4 Calabi-Yau 3-fold
 
 h^{0,0} = h^{3,3} = 1, h^{3,0} = h^{0,3} = 1, h^{2,0} = h^{0,2} = 0,
-h^{1,1} = a, h^{2,1} = h^{1,2} = b. 모듈라이 공간 차원이 b, Kähler class 는 a 차원.
+h^{1,1} = a, h^{2,1} = h^{1,2} = b. Moduli space dimension b, Kähler class a-dimensional.
 
 ### 15.5 Abelian variety A = E × E
 
-h^{p,q}(A) = binomial(2, p)·binomial(2, q). H²(A; ℚ) = 6 차원, (1,1)-부분 h^{1,1} = 4.
+h^{p,q}(A) = binomial(2, p)·binomial(2, q). H²(A; ℚ) is 6-dimensional, (1,1)-part h^{1,1} = 4.
 
 ---
 
-## 16. 부록 — Lefschetz (1,1) 증명 재구성
+## 16. Appendix — Reconstruction of the Lefschetz (1,1) Argument
 
-### 16.1 exponential sheaf 열
+### 16.1 Exponential sheaf sequence
 
 0 → ℤ → 𝒪_X → 𝒪_X^* → 0 (𝒪_X^* = multiplicative group).
 
-### 16.2 긴 완전열
+### 16.2 Long exact sequence
 
 ```
   H^1(X; 𝒪_X) → H^1(X; 𝒪_X^*) = Pic(X) → H²(X; ℤ) → H²(X; 𝒪_X)
 ```
 
-### 16.3 Hodge 분해 활용
+### 16.3 Application of the Hodge decomposition
 
-H²(X; 𝒪_X) = H^{0,2}(X). 따라서 α ∈ H²(X; ℤ) 가 H^{0,2} 에서 영으로 사상 ⟺ α ∈ im(Pic).
-Hodge 분해로 α ∈ H²(X; ℚ) ∩ H^{1,1} ⟹ α 는 ℤ-계수 배수에서 Hdg¹ 원소이고, H^{0,2} 성분이 0.
+H²(X; 𝒪_X) = H^{0,2}(X). Therefore α ∈ H²(X; ℤ) maps to zero in H^{0,2} ⟺ α ∈ im(Pic).
+By Hodge decomposition, α ∈ H²(X; ℚ) ∩ H^{1,1} ⟹ α (up to ℤ-coefficient multiple) is a Hdg¹
+element with H^{0,2} component zero.
 
-### 16.4 결론
+### 16.4 Conclusion
 
-Hdg¹(X) 의 모든 원소가 Pic(X) 상으로 실현 ⟹ divisor 의 (ℚ-계수) 선형결합으로 실현.
-∴ (1,1) Hodge 추측 증명.
+Every element of Hdg¹(X) is realized in Pic(X) ⟹ realized as a (ℚ-coefficient) linear
+combination of divisors. ∴ the (1,1) Hodge conjecture is demonstrated.
 
 ---
 
-## 17. 다음 문서
+## 17. Next Documents
 
-- PROB-P1-6 : BT-546 BSD 심화
-- PROB-P1-7 : BT-547 푸앵카레 심화
-- N6-P1-3 : n=6 정직성 원칙
+- PROB-P1-6 : BT-546 BSD advanced
+- PROB-P1-7 : BT-547 Poincaré advanced
+- N6-P1-3 : n=6 honesty principle
 
-BT-545 는 P2~P3 단계에서 motivic 통합과 standard conjectures, Hodge loci 분석으로
-심화한다. 본 P1 노트는 Clay 명제의 정밀 분해 + 대표 해결/반례 지도 를 목적으로 한다.
+BT-545 is deepened at the P2~P3 stage via motivic unification, the standard conjectures, and
+Hodge loci analysis. The aim of this P1 note is "precise decomposition of the Clay statement
++ representative resolution / counterexample map".

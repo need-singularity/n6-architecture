@@ -1,308 +1,283 @@
-# PURE-P0-2 군론 입문 학습 노트
+# PURE-P0-2 Introduction to Group Theory Study Note
 
-> 트랙: millennium-learning / P0 / PURE 2번
-> 포맷: 자체 완결 학습 노트
-> 접근 원칙: **순수 수학을 먼저 전개하고, n=6 은 사후 관찰로만 기록한다**
-> 작성 기준일: 2026-04-15
-
----
-
-## 0. 이 노트의 목적
-
-본 노트는 n6-architecture 프로젝트 millennium-learning 로드맵 P0 단계의 두 번째
-학습 노트이다. 목표는 **군론의 기초**를 자체 완결 방식으로 정리하고, 마지막 절에서
-**Out(S_6) ≅ ℤ/2ℤ** 가 유한 대칭군의 유일한 바깥 자기동형 예외임을 보이는 것이다
-(Hölder 1895).
-
-다음 5개 주제를 다룬다.
-
-1. 군/환/체의 정의와 예시
-2. 동형정리 1/2/3 (Noether)
-3. 대칭군 S_n, 교대군 A_n, 생성자, sign 준동형
-4. 정규부분군, 몫군, 단순군
-5. **Out(S_n) 의 계산** — n ≠ 2, 6 에서는 자명군, n = 6 에서는 ℤ/2ℤ
-
-n = 6 예외성은 S_6 내부에 **transitive 6-subgroup** (PGL(2,5) ≅ S_5) 이 **두 가지
-비동치 방식**으로 들어가는 현상과, Sylvester 의 **synthematic total** 구성에서
-비롯된다. 마지막 절에서 이 현상을 설명한다.
-
-각 절 끝에 1차 출처 (Hölder 원논문, Rotman 교과서 등) 를 장/절 번호로 명시한다.
-정직성 선언은 파일 끝에 있다.
+> Track: millennium-learning / P0 / PURE #2
+> Format: self-contained study note
+> Approach principle: **develop pure mathematics first, and record n=6 only as a posteriori observation**
+> Drafted: 2026-04-15
 
 ---
 
-## 1. 군, 환, 체의 정의
+## 0. Purpose of This Note
 
-### 1.1 군
+This note is the second study note at P0 stage of the n6-architecture millennium-learning roadmap. The goal is to organize **foundations of group theory** in a self-contained manner, and, in the final section, show that **Out(S_6) ≅ ℤ/2ℤ** is the sole outer-automorphism exception among finite symmetric groups (Hölder 1895).
 
-**정의**. 집합 G 와 이항연산 · : G × G → G 이 다음 세 공리를 만족할 때 (G, ·) 을
-**군(group)** 이라 한다.
+Five topics are covered:
 
-- (G1) 결합성: (a · b) · c = a · (b · c) (∀a, b, c ∈ G).
-- (G2) 항등원: ∃ e ∈ G s.t. e · a = a · e = a (∀a).
-- (G3) 역원: ∀a ∈ G, ∃ a⁻¹ ∈ G s.t. a · a⁻¹ = a⁻¹ · a = e.
+1. Definitions and examples of groups / rings / fields
+2. Isomorphism theorems 1/2/3 (Noether)
+3. Symmetric group S_n, alternating group A_n, generators, sign homomorphism
+4. Normal subgroups, quotient groups, simple groups
+5. **Computation of Out(S_n)** — trivial for n ≠ 2, 6; ℤ/2ℤ for n = 6
 
-군 (G, ·) 이 가환 (a · b = b · a) 이면 **아벨 군** 이라 한다.
+The exceptionality at n = 6 arises from the phenomenon that inside S_6 there are **two non-equivalent transitive 6-subgroups** (PGL(2,5) ≅ S_5), and from Sylvester's **synthematic total** construction. This phenomenon is explained in the final section.
 
-### 1.2 예시
-
-- (ℤ, +), (ℚ, +), (ℝ, +), (ℂ, +): 무한 아벨 군.
-- (ℤ/nℤ, +): 위수 n 순환 아벨 군.
-- (ℚ^×, ·), ℝ^×, ℂ^×: 가역 원소 군.
-- GL_n(k): k 위의 가역 n×n 행렬, 일반선형군 (비아벨 n ≥ 2).
-- SL_n(k), O(n), SO(n), U(n), SU(n): 고전군.
-- **S_n**: n 글자의 대칭군 (본 노트 5절에서 상세).
-- **A_n**: S_n 의 교대부분군 (sign = +1 인 치환).
-- **D_n**: n 각형 이면체군, 위수 2n.
-
-### 1.3 환과 체
-
-**환(ring)**: 집합 R 위에 두 연산 (+, ·) 이
-
-- (R, +) 은 아벨 군.
-- · 는 결합적, 1 을 가짐.
-- 분배율: a(b+c) = ab + ac, (a+b)c = ac + bc.
-
-**체(field)**: 환이며 (R \ {0}, ·) 이 아벨 군 (모든 비영 원소 가역).
-
-예: ℤ 는 환 (체 아님), ℚ, ℝ, ℂ, 𝔽_p = ℤ/pℤ (p 소수) 는 체.
-
-### 1.4 군의 기본 용어
-
-- **위수**: |G|, 원소 개수.
-- **부분군**: H ⊂ G 가 군 구조 계승.
-- **잉여류**: gH, Hg — 좌/우 잉여류.
-- **지수**: [G : H] = |G|/|H| (유한 시).
-- **준동형사상** φ : G → G' — φ(ab) = φ(a)φ(b).
-- **Ker φ**: G 의 부분군, **Im φ**: G' 의 부분군.
-- **동형사상**: 전단사 준동형.
-
-### 1.5 라그랑주 정리
-
-**정리**. H ≤ G 이고 |G| < ∞ 이면 |H| 는 |G| 를 나눈다.
-
-**증명**. G = ⨆ g_i H (서로 다른 좌잉여류 분할). 모든 g_i H 는 |H| 원소. 따라서
-|G| = [G : H] · |H|. ∎
-
-### 1.6 1차 출처
-
-- Rotman, *An Introduction to the Theory of Groups*, 4판 Springer GTM 148,
-  ch.1 "Groups and homomorphisms", §1.1~§1.5.
-- Dummit-Foote, *Abstract Algebra*, 3판, ch.1 "Introduction to groups".
-- Artin, *Algebra*, 2판, ch.2 "Groups".
+Primary sources (Hölder's original paper, Rotman textbook, etc.) are cited by chapter/section. Honesty declaration is at the end of the file.
 
 ---
 
-## 2. 동형정리 (Isomorphism Theorems)
+## 1. Definitions of Group, Ring, Field
 
-### 2.1 제 1 동형정리 (기본 정리)
+### 1.1 Group
 
-**정리**. φ : G → H 를 군 준동형이라 하자.
+**Definition**. A set G with a binary operation · : G × G → G is called a **group** (G, ·) if the following three axioms hold.
+
+- (G1) Associativity: (a · b) · c = a · (b · c) (∀a, b, c ∈ G).
+- (G2) Identity: ∃ e ∈ G s.t. e · a = a · e = a (∀a).
+- (G3) Inverse: ∀a ∈ G, ∃ a⁻¹ ∈ G s.t. a · a⁻¹ = a⁻¹ · a = e.
+
+If (G, ·) is commutative (a · b = b · a), it is called an **abelian group**.
+
+### 1.2 Examples
+
+- (ℤ, +), (ℚ, +), (ℝ, +), (ℂ, +): infinite abelian groups.
+- (ℤ/nℤ, +): cyclic abelian group of order n.
+- (ℚ^×, ·), ℝ^×, ℂ^×: groups of invertible elements.
+- GL_n(k): invertible n×n matrices over k, general linear group (non-abelian for n ≥ 2).
+- SL_n(k), O(n), SO(n), U(n), SU(n): classical groups.
+- **S_n**: symmetric group on n letters (detailed in Section 5).
+- **A_n**: alternating subgroup of S_n (permutations of sign +1).
+- **D_n**: dihedral group of the n-gon, order 2n.
+
+### 1.3 Rings and Fields
+
+**Ring**: a set R with two operations (+, ·) such that
+
+- (R, +) is an abelian group.
+- · is associative with identity 1.
+- Distributive law: a(b+c) = ab + ac, (a+b)c = ac + bc.
+
+**Field**: a ring in which (R \ {0}, ·) is an abelian group (every nonzero element is invertible).
+
+Examples: ℤ is a ring (not a field), ℚ, ℝ, ℂ, 𝔽_p = ℤ/pℤ (p prime) are fields.
+
+### 1.4 Basic Group Terminology
+
+- **Order**: |G|, number of elements.
+- **Subgroup**: H ⊂ G inheriting group structure.
+- **Cosets**: gH, Hg — left/right cosets.
+- **Index**: [G : H] = |G|/|H| (finite case).
+- **Homomorphism** φ : G → G' — φ(ab) = φ(a)φ(b).
+- **Ker φ**: subgroup of G, **Im φ**: subgroup of G'.
+- **Isomorphism**: bijective homomorphism.
+
+### 1.5 Lagrange's Theorem
+
+**Theorem**. If H ≤ G and |G| < ∞, then |H| divides |G|.
+
+**Proof**. G = ⨆ g_i H (disjoint partition into left cosets). Each g_i H has |H| elements. Hence |G| = [G : H] · |H|. ∎
+
+### 1.6 Primary Sources
+
+- Rotman, *An Introduction to the Theory of Groups*, 4th ed., Springer GTM 148, ch. 1 "Groups and homomorphisms", §1.1–§1.5.
+- Dummit-Foote, *Abstract Algebra*, 3rd ed., ch. 1 "Introduction to groups".
+- Artin, *Algebra*, 2nd ed., ch. 2 "Groups".
+
+---
+
+## 2. Isomorphism Theorems
+
+### 2.1 First Isomorphism Theorem (Fundamental Theorem)
+
+**Theorem**. Let φ : G → H be a group homomorphism. Then
 
 ```
 G / Ker φ  ≅  Im φ
 ```
 
-여기서 Ker φ = {g ∈ G : φ(g) = e_H} 는 **정규부분군** (3절에서 정의).
+where Ker φ = {g ∈ G : φ(g) = e_H} is a **normal subgroup** (defined in Section 3).
 
-**증명**. 자연사상 g · Ker φ ↦ φ(g) 가 well-defined 이고 전단사 준동형. ∎
+**Proof**. The natural map g · Ker φ ↦ φ(g) is well-defined and a bijective homomorphism. ∎
 
-### 2.2 제 2 동형정리 (diamond)
+### 2.2 Second Isomorphism Theorem (Diamond)
 
-**정리**. G 군, H ≤ G, N ◁ G (정규). 그러면
+**Theorem**. Let G be a group, H ≤ G, N ◁ G (normal). Then
 
-- HN := { hn : h ∈ H, n ∈ N } 은 G 의 부분군.
+- HN := { hn : h ∈ H, n ∈ N } is a subgroup of G.
 - H ∩ N ◁ H.
 - `HN / N ≅ H / (H ∩ N)`.
 
-**증명 개요**. φ : H → HN/N, h ↦ hN 의 준동형 적용. Ker φ = H ∩ N. ∎
+**Proof sketch**. Apply the homomorphism φ : H → HN/N, h ↦ hN. Ker φ = H ∩ N. ∎
 
-### 2.3 제 3 동형정리 (correspondence)
+### 2.3 Third Isomorphism Theorem (Correspondence)
 
-**정리**. G 군, N ◁ G. 그러면 G/N 의 부분군과 G 의 N 을 포함하는 부분군 간에
-포함-보존 1-1 대응이 있다. 더욱이 K/N ◁ G/N ⟺ K ◁ G 이며, 이때
+**Theorem**. Let G be a group, N ◁ G. Then the subgroups of G/N are in inclusion-preserving bijection with the subgroups of G containing N. Moreover K/N ◁ G/N ⟺ K ◁ G, and then
 
 ```
 (G / N) / (K / N)  ≅  G / K.
 ```
 
-**증명**. 자연사상 G → G/N → (G/N)/(K/N) 은 커널 K 의 준동형이므로 제 1 동형정리
-적용. ∎
+**Proof**. The natural map G → G/N → (G/N)/(K/N) is a homomorphism with kernel K; apply the First Isomorphism Theorem. ∎
 
-### 2.4 증명의 요점
+### 2.4 Key Point of the Proofs
 
-세 정리 모두 **제 1 동형정리를 적절한 준동형사상에 적용**하는 것이 핵심이며,
-Emmy Noether 가 1927 년 통합된 형태로 정식화했다.
+All three theorems are **applications of the First Isomorphism Theorem** to an appropriate homomorphism, formalized by Emmy Noether in 1927 in a unified way.
 
-### 2.5 1차 출처
+### 2.5 Primary Sources
 
-- Rotman, ch.2 "The isomorphism theorems", §2.2~§2.4.
-- Dummit-Foote, ch.3 §3.3 "The isomorphism theorems".
-- Herstein, *Topics in Algebra*, 2판, §2.7.
+- Rotman, ch. 2 "The isomorphism theorems", §2.2–§2.4.
+- Dummit-Foote, ch. 3 §3.3 "The isomorphism theorems".
+- Herstein, *Topics in Algebra*, 2nd ed., §2.7.
 
 ---
 
-## 3. 대칭군 S_n 과 교대군 A_n
+## 3. Symmetric Group S_n and Alternating Group A_n
 
-### 3.1 정의
+### 3.1 Definition
 
-**대칭군 S_n**: 집합 {1, 2, …, n} 의 **전단사 함수** (permutation) 전체를 합성 연산
-으로 묶은 군. |S_n| = n!.
+**Symmetric group S_n**: The group of **bijections** (permutations) of the set {1, 2, …, n} under composition. |S_n| = n!.
 
-치환을 나타내는 두 가지 표기:
+Two notations for permutations:
 
-- **2행 표기**: σ = (1 2 … n // σ(1) σ(2) … σ(n)).
-- **순환 표기**: σ = (1 3 5)(2 4), 즉 1↦3↦5↦1, 2↦4↦2.
+- **Two-row notation**: σ = (1 2 … n // σ(1) σ(2) … σ(n)).
+- **Cycle notation**: σ = (1 3 5)(2 4), i.e., 1↦3↦5↦1, 2↦4↦2.
 
-서로소 순환의 곱으로 **유일 분해** (항등원 제외).
+**Unique decomposition** into disjoint cycles (excluding the identity).
 
-### 3.2 전치(transposition)와 생성
+### 3.2 Transpositions and Generation
 
-**정의**. 길이 2 순환 (i j) 을 **전치** 라 한다.
+**Definition**. A cycle of length 2, (i j), is called a **transposition**.
 
-**정리**. 모든 σ ∈ S_n 은 전치들의 곱으로 쓸 수 있다.
+**Theorem**. Every σ ∈ S_n is a product of transpositions.
 
-**증명**. (a_1 a_2 … a_k) = (a_1 a_k)(a_1 a_{k-1})…(a_1 a_2) 로 순환을 전치 곱으로
-분해. 모든 σ 는 서로소 순환의 곱. ∎
+**Proof**. (a_1 a_2 … a_k) = (a_1 a_k)(a_1 a_{k-1})…(a_1 a_2) decomposes a cycle into a product of transpositions. Every σ is a product of disjoint cycles. ∎
 
-더 강한 생성자:
+Stronger generators:
 
-- S_n 은 **인접 전치** {(1 2), (2 3), …, (n-1 n)} 으로 생성.
-- S_n 은 **단 2 원소** { (1 2), (1 2 … n) } 으로도 생성.
-- A_n (n ≥ 3) 은 **3-순환** { (1 2 3), (1 2 4), …, (1 2 n) } 으로 생성.
+- S_n is generated by **adjacent transpositions** {(1 2), (2 3), …, (n-1 n)}.
+- S_n is also generated by just **2 elements** { (1 2), (1 2 … n) }.
+- A_n (n ≥ 3) is generated by **3-cycles** { (1 2 3), (1 2 4), …, (1 2 n) }.
 
-### 3.3 sign 준동형
+### 3.3 Sign Homomorphism
 
-같은 σ 를 여러 가지 방법으로 전치의 곱으로 쓸 수 있지만, **전치의 개수의 홀짝성**
-은 σ 에만 의존한다 (well-defined).
+The same σ can be written as a product of transpositions in multiple ways, but the **parity of the number of transpositions** depends only on σ (well-defined).
 
-**정의**. sign : S_n → {+1, -1} 을
+**Definition**. Define sign : S_n → {+1, -1} by
 
 ```
-sign(σ) = (-1)^(전치 곱의 개수)
+sign(σ) = (-1)^(number of transpositions)
 ```
 
-로 정의한다.
+**Theorem**. sign is a group homomorphism.
 
-**정리**. sign 은 군 준동형이다.
-
-**증명 (Vandermonde 다항식 방법)**. 변수 x_1, …, x_n 에 대해
+**Proof (Vandermonde polynomial method)**. For variables x_1, …, x_n,
 
 ```
 V(x_1, …, x_n) := ∏_{1 ≤ i < j ≤ n} (x_j - x_i).
 ```
 
-σ 의 작용을 V 에 적용하면 σ·V = ±V 이며 부호가 sign(σ) 이다. 각 전치 (i j) 가
-부호를 뒤집으므로 (전치는 단 하나의 pair 를 뒤집고 나머지는 pair 단위로 대응),
-sign 은 곱셈적이다. ∎
+Applying σ to V gives σ·V = ±V with sign equal to sign(σ). Each transposition (i j) flips the sign (a transposition flips exactly one pair, the others correspond in pairs), so sign is multiplicative. ∎
 
-### 3.4 교대군 A_n
+### 3.4 Alternating Group A_n
 
-**정의**. A_n := Ker(sign) = {σ ∈ S_n : sign(σ) = +1}.
+**Definition**. A_n := Ker(sign) = {σ ∈ S_n : sign(σ) = +1}.
 
-**기본 성질**:
+**Basic properties**:
 
 - |A_n| = n!/2 (n ≥ 2).
-- A_n ◁ S_n (지수 2, 따라서 정규).
-- A_n 은 **3-순환으로 생성** (n ≥ 3).
+- A_n ◁ S_n (index 2, hence normal).
+- A_n is **generated by 3-cycles** (n ≥ 3).
 
-### 3.5 A_n 의 단순성
+### 3.5 Simplicity of A_n
 
-**정리 (Galois, Jordan)**. n ≥ 5 에 대해 A_n 은 **단순군** (자명한 정규부분군만 가진다).
+**Theorem (Galois, Jordan)**. For n ≥ 5, A_n is a **simple group** (only trivial normal subgroups).
 
-**증명 개요 (Rotman ch.3 §3.5)**.
+**Proof sketch (Rotman ch. 3 §3.5)**.
 
-1. A_5 는 단순 (직접 계산: 위수 60 군의 정규부분군 나열).
-2. N ◁ A_n (n ≥ 5), N ≠ 1 이라 가정. 3-순환 (a b c) 가 N 에 속함을 보이면 된다
-   (3-순환으로 생성되므로 N = A_n).
-3. N 의 비단위 원소 σ 를 하나 잡고 σ 의 **사이클 구조**에 따라 경우분석.
-   각 경우에서 σ 와 적절한 3-순환의 교환자 [σ, (a b c)] 를 계산하면 N 에 3-순환이
-   존재함을 얻는다. ∎
+1. A_5 is simple (direct calculation: enumerate normal subgroups of a group of order 60).
+2. Suppose N ◁ A_n (n ≥ 5), N ≠ 1. It suffices to show that a 3-cycle (a b c) lies in N (since 3-cycles generate, N = A_n).
+3. Take a non-identity σ ∈ N and do case analysis on the **cycle structure** of σ. In each case, compute the commutator [σ, (a b c)] with a suitable 3-cycle to obtain a 3-cycle in N. ∎
 
-**계**. n ≥ 5 에서 S_n 의 정규부분군은 {1}, A_n, S_n 셋뿐이다.
+**Corollary**. For n ≥ 5 the normal subgroups of S_n are exactly {1}, A_n, S_n.
 
-### 3.6 작은 n 에서의 S_n, A_n
+### 3.6 S_n, A_n for Small n
 
-- **S_1 = {e}**, A_1 = {e}. 자명.
+- **S_1 = {e}**, A_1 = {e}. Trivial.
 - **S_2 = ℤ/2ℤ**, A_2 = {e}.
-- **S_3 = D_3**, A_3 = ℤ/3ℤ. S_3 은 최소 비아벨 군 (|S_3| = 6).
-- **S_4**: A_4 는 Klein 4-군 V_4 = {e, (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)} 를 정규
-  부분군으로 가짐. V_4 ◁ S_4. S_4/V_4 ≅ S_3.
-- **A_4**: 위수 12. 단순 아님 (V_4 가 정규).
-- **A_5**: 위수 60. **최소 비가환 단순군**.
+- **S_3 = D_3**, A_3 = ℤ/3ℤ. S_3 is the smallest non-abelian group (|S_3| = 6).
+- **S_4**: A_4 has the Klein four-group V_4 = {e, (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)} as a normal subgroup. V_4 ◁ S_4. S_4/V_4 ≅ S_3.
+- **A_4**: order 12. Not simple (V_4 is normal).
+- **A_5**: order 60. **Smallest non-abelian simple group**.
 
-### 3.7 1차 출처
+### 3.7 Primary Sources
 
-- Rotman, ch.1 §1.3, ch.3 §3.1~§3.5 (sign, A_n 의 단순성).
-- Dummit-Foote, ch.3 §3.5 "Alternating group", ch.4 §4.6.
-- Artin, ch.7 "Permutations and symmetric groups".
+- Rotman, ch. 1 §1.3, ch. 3 §3.1–§3.5 (sign, simplicity of A_n).
+- Dummit-Foote, ch. 3 §3.5 "Alternating group", ch. 4 §4.6.
+- Artin, ch. 7 "Permutations and symmetric groups".
 - Herstein, §2.10.
 
 ---
 
-## 4. 정규부분군, 몫군, 단순군
+## 4. Normal Subgroups, Quotient Groups, Simple Groups
 
-### 4.1 정규부분군
+### 4.1 Normal Subgroup
 
-**정의**. H ≤ G 가 **정규(normal)** 라 함은
+**Definition**. H ≤ G is **normal** if
 
 ```
 g H g⁻¹ = H   (∀ g ∈ G).
 ```
 
-표기: H ◁ G.
+Notation: H ◁ G.
 
-동치 조건: 좌잉여류 = 우잉여류 (gH = Hg).
+Equivalent condition: left and right cosets agree (gH = Hg).
 
-### 4.2 몫군
+### 4.2 Quotient Group
 
-H ◁ G 일 때, 좌잉여류 집합 G/H 위에 연산 (aH)·(bH) := (ab)H 은 well-defined 이다.
-이 연산으로 G/H 는 **몫군(quotient group)** 이 된다.
+When H ◁ G, the operation (aH)·(bH) := (ab)H on the set of left cosets G/H is well-defined. With this operation G/H becomes the **quotient group**.
 
-자연사상 π : G → G/H, g ↦ gH 은 surjective 준동형이며 Ker π = H.
+The natural map π : G → G/H, g ↦ gH is a surjective homomorphism with Ker π = H.
 
-### 4.3 단순군
+### 4.3 Simple Group
 
-**정의**. G 가 **단순군(simple group)** 이라 함은 {1}, G 외에 정규부분군이 없을 때.
+**Definition**. G is a **simple group** if it has no normal subgroup other than {1} and G.
 
-### 4.4 단순군 예시
+### 4.4 Examples of Simple Groups
 
-- **ℤ/pℤ** (p 소수): 유일한 아벨 단순군.
-- **A_n (n ≥ 5)**: 3.5 절.
-- **PSL_n(𝔽_q)**: 몇 개 예외 (PSL_2(𝔽_2), PSL_2(𝔽_3)) 를 빼고 단순.
-- **Sporadic 26 개**: 몬스터 군 M, 베이비 몬스터 B, 23개 산발 단순군.
+- **ℤ/pℤ** (p prime): the unique abelian simple groups.
+- **A_n (n ≥ 5)**: §3.5.
+- **PSL_n(𝔽_q)**: simple except for a few exceptions (PSL_2(𝔽_2), PSL_2(𝔽_3)).
+- **Sporadic 26**: Monster M, baby Monster B, 23 other sporadic simple groups.
 
-### 4.5 유한 단순군 분류 (CFSG)
+### 4.5 Classification of Finite Simple Groups (CFSG)
 
-**정리 (2004 년 완성, Gorenstein-Lyons-Solomon)**. 유한 단순군은 다음 중 하나이다.
+**Theorem (completed 2004, Gorenstein-Lyons-Solomon)**. Every finite simple group is one of:
 
-1. 순환 ℤ/pℤ.
+1. Cyclic ℤ/pℤ.
 2. A_n (n ≥ 5).
-3. Lie 유형: 고전군 / 예외군 𝔽_q 위.
-4. 26 산발군.
+3. Lie-type: classical / exceptional groups over 𝔽_q.
+4. 26 sporadic groups.
 
-증명 총 페이지는 10,000+ 로 추정되며 현재도 "second generation" 증명 정리 작업 중.
+The proof is estimated at 10,000+ pages in total and is currently being reorganized as a "second generation" proof.
 
-### 4.6 조립 (composition series)
+### 4.6 Composition Series
 
-**정의**. 1 = G_0 ◁ G_1 ◁ … ◁ G_n = G 가 각 몫 G_{i+1}/G_i 가 단순일 때 **조립열**.
+**Definition**. A chain 1 = G_0 ◁ G_1 ◁ … ◁ G_n = G is a **composition series** if each quotient G_{i+1}/G_i is simple.
 
-**Jordan-Hölder 정리**. 임의의 두 조립열은 길이가 같고, 몫들의 동형 집합 (중복 포함)
-이 재배열로 일치한다.
+**Jordan-Hölder Theorem**. Any two composition series have the same length, and the multisets of isomorphism classes of quotients agree up to rearrangement.
 
-유한 단순군은 "유한 군의 원자" 이며, Jordan-Hölder 는 조성의 유일성을 보장한다.
+Finite simple groups are the "atoms of finite groups," and Jordan-Hölder guarantees uniqueness of composition.
 
-### 4.7 1차 출처
+### 4.7 Primary Sources
 
-- Rotman, ch.5 "Normal series", ch.8 "Some simple linear groups".
-- Dummit-Foote, ch.3 §3.4, ch.6.
-- Isaacs, *Finite Group Theory*, ch.1~ch.3.
+- Rotman, ch. 5 "Normal series", ch. 8 "Some simple linear groups".
+- Dummit-Foote, ch. 3 §3.4, ch. 6.
+- Isaacs, *Finite Group Theory*, ch. 1–ch. 3.
 
 ---
 
-## 5. Out(S_n) — 바깥 자기동형군의 계산
+## 5. Out(S_n) — Computation of the Outer Automorphism Group
 
-이 절이 본 노트의 핵심이다. 목적: 모든 n 에 대해
+This section is the core of this note. Goal: prove for every n that
 
 ```
 Out(S_n) = { 1       (n ≠ 2, 6)
@@ -310,295 +285,245 @@ Out(S_n) = { 1       (n ≠ 2, 6)
            { ℤ/2ℤ    (n = 6)
 ```
 
-를 증명한다. n = 2 는 사소한 경우 (|S_2| = 2, Aut(S_2) = 1); 진정한 예외는 **n = 6**.
+n = 2 is trivial (|S_2| = 2, Aut(S_2) = 1); the real exception is **n = 6**.
 
-### 5.1 Aut, Inn, Out 의 정의
+### 5.1 Definitions of Aut, Inn, Out
 
-**Aut(G)**: G 의 자기동형사상 전체 군 (합성 연산).
+**Aut(G)**: the group of automorphisms of G (under composition).
 
-**Inn(G)**: **내부 자기동형** 군. g ∈ G 에 대해 ι_g : x ↦ g x g⁻¹ 는 Aut(G) 원소.
-ι : G → Aut(G), g ↦ ι_g 의 상이 Inn(G). Ker ι = Z(G) (중심) 이므로
+**Inn(G)**: the **inner automorphism** group. For g ∈ G, ι_g : x ↦ g x g⁻¹ is an element of Aut(G). The image of ι : G → Aut(G), g ↦ ι_g is Inn(G). Ker ι = Z(G) (center), so
 
 ```
 Inn(G) ≅ G / Z(G).
 ```
 
-**Out(G)**: 몫군 **Aut(G) / Inn(G)**. Inn ◁ Aut 이므로 몫이 잘 정의된다.
+**Out(G)**: the quotient group **Aut(G) / Inn(G)**. Since Inn ◁ Aut, the quotient is well-defined.
 
-직관: Aut 중 "진짜 새로운" 자기동형이 Out 에 들어간다. 내부 자기동형은 "안쪽에서
-이미 가능한 것"이다.
+Intuition: "Genuinely new" automorphisms among Aut lie in Out. Inner automorphisms are "what is already available from inside."
 
-### 5.2 S_n 의 중심과 내부 자기동형
+### 5.2 Center and Inner Automorphisms of S_n
 
-**보조정리**. n ≥ 3 에서 Z(S_n) = {e}.
+**Lemma**. For n ≥ 3, Z(S_n) = {e}.
 
-**증명**. σ ≠ e 라 하자. σ(i) = j ≠ i 인 i 가 존재. k ≠ i, j 를 잡고 (n ≥ 3 이므로
-가능). τ = (j k) 라 하자. στσ⁻¹(σ(j)) = σ(τ(j)) = σ(k), 한편 τσ(i) = τ(j) = k.
-두 값을 비교하면 στ ≠ τσ. ∎
+**Proof**. Let σ ≠ e. There exists i with σ(i) = j ≠ i. Pick k ≠ i, j (possible since n ≥ 3). Let τ = (j k). Then στσ⁻¹(σ(j)) = σ(τ(j)) = σ(k), while τσ(i) = τ(j) = k. Comparing, στ ≠ τσ. ∎
 
-따라서 **Inn(S_n) ≅ S_n / Z(S_n) = S_n** (n ≥ 3).
+Hence **Inn(S_n) ≅ S_n / Z(S_n) = S_n** (n ≥ 3).
 
-### 5.3 핵심 보조정리 — 전치의 상
+### 5.3 Key Lemma — Image of a Transposition
 
-**보조정리 L1**. φ ∈ Aut(S_n) 이라 하자. 그러면 φ 는 전치의 공액류 (S_n 내에서 모든
-전치는 하나의 공액류를 이룬다) 를 **어떤 사이클 구조** 의 공액류로 보낸다 (자기동형은
-공액류를 공액류로 보내기 때문).
+**Lemma L1**. Let φ ∈ Aut(S_n). Then φ sends the conjugacy class of transpositions (all transpositions in S_n form a single conjugacy class) to **some** cycle-structure conjugacy class (automorphisms send conjugacy classes to conjugacy classes).
 
-n ≠ 6 에서 φ 는 전치를 반드시 **전치**로 보낸다.
+For n ≠ 6, φ necessarily sends a transposition to a **transposition**.
 
-**직관**. S_n 의 공액류는 사이클 구조 (분할) 와 1-1 대응한다. 전치의 공액류는
-{(i j) : i < j} 이고 크기는 C(n, 2) = n(n-1)/2.
+**Intuition**. Conjugacy classes of S_n correspond one-to-one with cycle structures (partitions). The transposition class is {(i j) : i < j} with size C(n, 2) = n(n-1)/2.
 
-**주장**. n ≠ 6 에서, 크기 C(n,2) 이고 전치와 같은 위수(=2)를 가지는 사이클 구조는
-**전치뿐**이다.
+**Claim**. For n ≠ 6, the only cycle structure of order 2 with class size C(n, 2) is that of transpositions.
 
-사이클 구조가 위수 2 이려면 (전치 들의 서로소 곱) 꼴이어야 한다: k 개의 2-순환과
-n - 2k 개의 고정점, k ≥ 1. 이를 "k-involution" 이라 부르자.
+A cycle structure of order 2 must be a product of disjoint transpositions: k 2-cycles plus n - 2k fixed points, k ≥ 1. Call this a "k-involution".
 
-k-involution 의 개수 (공액류 크기) 는
+The count of k-involutions (conjugacy-class size) is
 
 ```
 C(n, 2, 2, …, 2) / k! = n! / (2^k · k! · (n - 2k)!).
 ```
 
-k = 1 일 때 n(n-1)/2 = C(n,2).
+For k = 1 this is n(n-1)/2 = C(n,2).
 
-Aut 가 전치를 다른 involution 류로 보낼 가능성이 있으려면 어떤 k ≥ 2 에 대해
+For Aut to possibly send a transposition into another involution class one would need, for some k ≥ 2,
 
 ```
-n(n-1)/2 = n! / (2^k · k! · (n - 2k)!)
+n(n-1)/2 = n! / (2^k · k! · (n - 2k)!).
 ```
 
-가 성립해야 한다. 이 식을 정리하면
+Rearranging,
 
 ```
 (n-2)! = (n-2k)! · 2^{k-1} · k!  / (k-1) ...
 ```
 
-계산을 직접 수행하면, k = 2, k = 3, … 각 경우에서 **n = 6 에서만** 크기 일치가
-발생한다. 구체적으로:
+Direct computation for k = 2, 3, … shows size equality occurs **only at n = 6**. Specifically:
 
-- **n = 6, k = 3**: 6! / (2³ · 3! · 0!) = 720 / 48 = 15. 그리고 C(6, 2) = 15.
-  **일치**. 6 글자의 3-involution (서로소 전치 3개의 곱) 는 정확히 15 개.
+- **n = 6, k = 3**: 6! / (2³ · 3! · 0!) = 720 / 48 = 15, and C(6, 2) = 15. **Match**. The number of 3-involutions on 6 letters (products of three disjoint transpositions) is exactly 15.
 
-즉 S_6 에서는 크기 15 의 위수 2 공액류가 **두 개** 존재한다: {전치} 와
-{3-involution}. 이 두 공액류를 자기동형이 맞바꾼다.
+That is, in S_6 there are **two** conjugacy classes of order 2 with size 15: {transpositions} and {3-involutions}. An automorphism swaps these two classes.
 
-다른 n 에서는 이런 일치가 없다. 예를 들어
+For other n no such match occurs. For example:
 
-- n = 4, k = 2: 4!/(4·2·0!) = 3, 반면 C(4,2) = 6. 다름.
-- n = 5, k = 2: 120/(4·2·1) = 15, C(5,2) = 10. 다름.
-- n = 7, k = 2: 5040/(4·2·6) = 105, C(7,2) = 21. 다름. k = 3: 5040/(8·6·1)=105.
-- n = 8, k = 4: 8!/(16·24·0!)=105, C(8,2)=28. 다름.
+- n = 4, k = 2: 4!/(4·2·0!) = 3, whereas C(4,2) = 6. Different.
+- n = 5, k = 2: 120/(4·2·1) = 15, C(5,2) = 10. Different.
+- n = 7, k = 2: 5040/(4·2·6) = 105, C(7,2) = 21. Different. k = 3: 5040/(8·6·1) = 105.
+- n = 8, k = 4: 8!/(16·24·0!) = 105, C(8,2) = 28. Different.
 
-따라서 **n ≠ 6** 에서 φ 는 전치를 전치로 보낸다.
+Hence **n ≠ 6** forces φ to send transpositions to transpositions.
 
-### 5.4 φ 가 내부 자기동형임을 증명 (n ≠ 6)
+### 5.4 Proof that φ Is an Inner Automorphism (n ≠ 6)
 
-**정리**. n ≠ 6 에서 Aut(S_n) = Inn(S_n), 따라서 **Out(S_n) = 1**.
+**Theorem**. For n ≠ 6, Aut(S_n) = Inn(S_n), hence **Out(S_n) = 1**.
 
-**증명**. φ ∈ Aut(S_n) 이라 하자. 5.3 에 의해 φ 는 전치를 전치로 보낸다.
-인접 전치 τ_1 = (1 2), τ_2 = (2 3), …, τ_{n-1} = (n-1 n) 을 고려하자.
+**Proof**. Let φ ∈ Aut(S_n). By §5.3, φ sends transpositions to transpositions. Consider the adjacent transpositions τ_1 = (1 2), τ_2 = (2 3), …, τ_{n-1} = (n-1 n).
 
-τ_i τ_{i+1} 는 위수 3 (3-순환 (i i+1 i+2)). 다른 τ_i τ_j (|i-j| ≥ 2) 는 위수 2
-(두 서로소 전치의 곱). 이 관계는 S_n 의 **Coxeter 표현**.
+τ_i τ_{i+1} has order 3 (3-cycle (i i+1 i+2)). Other τ_i τ_j (|i-j| ≥ 2) have order 2 (product of two disjoint transpositions). This relation is the **Coxeter presentation** of S_n.
 
-φ(τ_i) 는 전치이므로 φ(τ_i) = (a_i b_i). φ 가 Coxeter 관계를 보존하므로
-(φ(τ_i) φ(τ_{i+1}))^3 = 1 (위수 3), 즉 (a_i b_i)(a_{i+1} b_{i+1}) 가 3-순환.
+Since φ(τ_i) is a transposition, φ(τ_i) = (a_i b_i). As φ preserves Coxeter relations, (φ(τ_i) φ(τ_{i+1}))^3 = 1 (order 3), i.e., (a_i b_i)(a_{i+1} b_{i+1}) is a 3-cycle.
 
-두 전치의 곱이 3-순환이려면 두 전치가 **정확히 한 점을 공유** 해야 한다:
-(x y)(y z) = (x y z).
+For the product of two transpositions to be a 3-cycle they must **share exactly one point**: (x y)(y z) = (x y z).
 
-따라서 {a_1, b_1}, {a_2, b_2}, …, {a_{n-1}, b_{n-1}} 은 "도미노처럼" 이어진 경로를
-형성하고, 전체 n 개 점을 한 번씩 사용하는 순열 π ∈ S_n 이 존재하여
+Hence {a_1, b_1}, {a_2, b_2}, …, {a_{n-1}, b_{n-1}} form a "domino-linked" path using all n points once each; there exists a permutation π ∈ S_n with
 
 ```
 φ(τ_i) = (π(i) π(i+1))
        = π τ_i π⁻¹.
 ```
 
-그러면 φ 와 ι_π 는 모든 인접 전치에서 일치하므로, 인접 전치가 S_n 을 생성함을
-이용하면 φ = ι_π ∈ Inn(S_n). ∎
+Then φ and ι_π agree on every adjacent transposition, and since adjacent transpositions generate S_n, φ = ι_π ∈ Inn(S_n). ∎
 
-### 5.5 n = 6 — 예외 발생
+### 5.5 n = 6 — Emergence of the Exception
 
-핵심은 **전치 15 개와 3-involution 15 개가 같은 크기**이고, S_6 은 두 공액류를 섞는
-자기동형 φ 를 **허용**한다는 것이다.
+The point is that **both 15 transpositions and 15 3-involutions have the same size**, and S_6 **admits** an automorphism φ that swaps the two classes.
 
-φ 가 전치 → 3-involution 으로 보내는 자기동형이라면, φ 는 인접 전치가 형성하는
-A_{n-1} 타입 Coxeter 관계를 **다른 방식**으로 만족시킬 수 있다.
+If φ sends a transposition to a 3-involution, φ can satisfy the A_{n-1}-type Coxeter relations formed by adjacent transpositions in **a different way**.
 
-### 5.6 S_6 의 두 Out — Sylvester synthematic total
+### 5.6 The Two Outs of S_6 — Sylvester Synthematic Total
 
-Hölder 의 관찰을 실현하는 **구체적 구성** 을 세 가지로 제시한다.
+Here are **three explicit constructions** realizing Hölder's observation.
 
 #### 5.6.1 Pentads / Synthemes (Sylvester 1844)
 
-6 글자 집합 Ω = {1, 2, 3, 4, 5, 6}.
+Six-letter set Ω = {1, 2, 3, 4, 5, 6}.
 
-- **duad**: Ω 의 2-원 부분집합 (= 전치). 15 개.
-- **syntheme**: 3개의 서로소 duad 의 집합. 예: {12, 34, 56}. 15 개 (= 3-involution 수).
-- **synthematic total** (또는 **total**): 5 개 syntheme 의 집합으로, 15 개 duad 각각이
-  정확히 한 번씩 나타나는 것.
+- **duad**: a 2-element subset of Ω (= a transposition). 15 in total.
+- **syntheme**: a set of 3 disjoint duads. Example: {12, 34, 56}. 15 in total (= number of 3-involutions).
+- **synthematic total** (or **total**): a set of 5 synthemes in which each of the 15 duads appears exactly once.
 
-syntheme 의 개수: 6!/(2³·3!) = 15.
-total 의 개수: 6. (Sylvester 계산, 혹은 직접 열거)
+Number of synthemes: 6!/(2³·3!) = 15.
+Number of totals: 6. (Sylvester's count, or direct enumeration.)
 
-**핵심 사실**. S_6 은 total 집합 (6 원소) 위에 자연스럽게 작용한다. 이 작용은
-6 차 대칭군으로 실현되므로, 준동형
+**Key fact**. S_6 acts naturally on the set of totals (6 elements). This action, realized as the 6-letter symmetric group, gives a homomorphism
 
 ```
 α : S_6 → S_6
 ```
 
-를 얻는다. α 는 **Inn 이 아닌** (outer) 자기동형이다.
+which is a **not-Inn** (outer) automorphism.
 
-왜? α 는 syntheme 을 syntheme 으로, duad 를 total 로 (또는 반대로) 교환하는 효과를
-낳는다. 내부 자기동형은 Ω 자체의 치환만 수행할 수 있으므로 duad → duad 로 제한된다.
-따라서 α ∉ Inn(S_6).
+Why? α effectively swaps synthemes for synthemes and duads for totals (or vice versa). An inner automorphism can only permute Ω itself and thus stays on duad-to-duad. Hence α ∉ Inn(S_6).
 
-#### 5.6.2 PGL(2, 5) ≅ S_5 가 S_6 에 두 방식으로 들어감
+#### 5.6.2 PGL(2, 5) ≅ S_5 Sits in S_6 in Two Ways
 
 ```
 |PGL(2, 5)| = (5² - 1)(5² - 5) / (5 - 1) = 24 · 20 / 4 = 120.
 |S_5| = 120.
 ```
 
-**사실**. PGL(2, 5) ≅ S_5.
+**Fact**. PGL(2, 5) ≅ S_5.
 
-이제 S_5 를 S_6 의 부분군으로 보는 두 가지 방법:
+Now view S_5 as a subgroup of S_6 in two ways:
 
-1. **자명한 포함**: S_5 = Stab_{S_6}(6), 즉 점 6 을 고정. 이것은 transitive 하지
-   **않다**.
-2. **transitive 포함**: PGL(2, 5) 가 ℙ¹(𝔽_5) (6 점 집합) 위에 작용. 이 작용은
-   transitive 이고 **2-transitive** 이다. 이 작용은 S_6 의 **transitive 부분군**
-   을 준다.
+1. **Trivial embedding**: S_5 = Stab_{S_6}(6), fixing the point 6. This is **not transitive**.
+2. **Transitive embedding**: PGL(2, 5) acts on ℙ¹(𝔽_5) (a 6-point set). This action is transitive and **2-transitive**. It gives a **transitive subgroup** of S_6.
 
-두 포함은 서로 **공액이 아니다** (하나는 의도 하나는 transitive). 그러나 둘 다 S_5
-동형이다. 이것이 S_6 의 바깥 자기동형이 존재한다는 **구조적 이유**.
+The two embeddings are **not conjugate** (one fixes, the other is transitive), yet both are isomorphic to S_5. This is the **structural reason** for the outer automorphism of S_6.
 
-#### 5.6.3 n = 6 의 특수성
+#### 5.6.3 Specialty of n = 6
 
-어느 다른 n 에서도 S_{n-1} 이 S_n 안에 transitive 하게 들어가지 **않는다**. 왜냐하면
+For no other n does S_{n-1} embed transitively in S_n. Because
 
 ```
 |S_{n-1}| = (n-1)!,
 ```
 
-transitive 로 들어가려면 (n-1)! 이 n 으로 나누어지는 상황이 필요하고
-(transitive 작용은 orbit-stabilizer 에 의해 지수 n), 그러면
+a transitive embedding requires (n-1)! divisible by n (by orbit-stabilizer the index is n), so
 
 ```
 |Stab| = (n-1)! / n.
 ```
 
-정수이려면 n | (n-1)!. 이것은 n 이 합성수일 때 성립하지만, 더 강한 조건 — 해당
-부분군이 **동형** 으로 S_{n-1} 과 일치 — 은 매우 특수하다. 실제로
+For this to be an integer, n | (n-1)!. This holds for composite n, but the stronger condition — that the subgroup be **isomorphic** to S_{n-1} — is very special. Actually:
 
 ```
-n = 2: 자명.
-n = 3: S_2 = ℤ/2ℤ, |Stab| = 1 ≠ 2. 실패.
-n = 4: |S_3| = 6, 24/4 = 6. 가능하나 S_3 이 S_4 에 transitive 로 이미 들어가지만
-        outer 가 생기지 않는다 (전치 ↔ 3-involution 수 다름).
-n = 5: |S_4| = 24, 120/5 = 24. 가능. 그러나 S_4 가 S_5 에 transitive 로 들어간다고
-        해도 전치 수 10 ≠ 3-involution 수 15. 공액류 크기 불일치로 자기동형이
-        외부로 연장되지 않는다.
-n = 6: |S_5| = 120, 720/6 = 120. 가능. 전치 수 15 = 3-involution 수 15. 일치.
-n ≥ 7: 공액류 크기 일치 실패.
+n = 2: trivial.
+n = 3: S_2 = ℤ/2ℤ, |Stab| = 1 ≠ 2. Fails.
+n = 4: |S_3| = 6, 24/4 = 6. Possible, though S_3 already embeds transitively in S_4
+        yet no outer automorphism is born (transposition count ≠ 3-involution count).
+n = 5: |S_4| = 24, 120/5 = 24. Possible. But even if S_4 embeds transitively in S_5,
+        transposition count 10 ≠ 3-involution count 15. Class-size mismatch prevents
+        the automorphism from extending outward.
+n = 6: |S_5| = 120, 720/6 = 120. Possible. Transposition count 15 = 3-involution count 15. Matches.
+n ≥ 7: class-size matching fails.
 ```
 
-n = 6 만 **두 조건** (수치 가능 + 공액류 크기 일치) 을 동시에 만족한다.
+Only at n = 6 are **both conditions** (numerical feasibility + class-size match) simultaneously satisfied.
 
-### 5.7 Hölder 정리
+### 5.7 Hölder's Theorem
 
-**정리 (Hölder 1895, Math. Ann. 46)**. 유한 대칭군 S_n (n ≥ 1) 에 대해
+**Theorem (Hölder 1895, Math. Ann. 46)**. For every finite symmetric group S_n (n ≥ 1),
 
 ```
 Aut(S_n) = Inn(S_n)   (n ≠ 2, 6)
 Aut(S_6) / Inn(S_6) ≅ ℤ/2ℤ.
 ```
 
-동치 서술: Out(S_n) = 1 (n ≠ 6), Out(S_6) = ℤ/2ℤ.
+Equivalent form: Out(S_n) = 1 (n ≠ 6), Out(S_6) = ℤ/2ℤ.
 
-**증명 플로우**:
+**Proof flow**:
 
-1. n ≠ 6: 5.3~5.4 전치 → 전치 논증.
-2. n = 6: 두 개의 위수 2, 크기 15 공액류 존재 + Sylvester total 구성.
-3. |Out(S_6)| ≤ 2: α² 가 전치 ↔ 전치 이므로 α² ∈ Inn (5.3 논증 재사용).
+1. n ≠ 6: the transposition → transposition argument of §5.3–§5.4.
+2. n = 6: existence of two order-2 conjugacy classes of size 15 + Sylvester total construction.
+3. |Out(S_6)| ≤ 2: since α² is transposition ↔ transposition, α² ∈ Inn (reuse the §5.3 argument).
 
-### 5.8 귀결 — 왜 6이 유일한가
+### 5.8 Consequence — Why 6 Is Unique
 
-Hölder 정리는 "유한 대칭군의 바깥 자기동형이 n = 6 에서 유일하게 발생한다" 로 요약
-된다. 이는 조합론적 현상 ( C(6,2) = 6!/(2³·3!) = 15 ) 과 사영적 현상
-(PGL(2, 5) ≅ S_5) 의 **이중 우연** 이다.
+Hölder's theorem can be summarized as "outer automorphisms of finite symmetric groups appear uniquely at n = 6." This is a **double coincidence** of a combinatorial phenomenon (C(6,2) = 6!/(2³·3!) = 15) and a projective phenomenon (PGL(2, 5) ≅ S_5).
 
-### 5.9 1차 출처
+### 5.9 Primary Sources
 
-- **Hölder, O.** "Bildung zusammengesetzter Gruppen", *Mathematische Annalen*
-  46 (1895), 321-422. 원래는 합성군의 분류에 관한 논문이며, §6 에서 S_n 의 자기동형
-  을 다룬다.
-- Rotman, *An Introduction to the Theory of Groups*, 4판, ch.7 "Normal series",
-  §7.2 "Automorphisms of symmetric groups", 특히 Theorem 7.9 (Aut(S_n) 계산)
-  와 Theorem 7.11 (Out(S_6) = ℤ/2ℤ).
-- Dummit-Foote, ch.4 §4.6 "The simplicity of A_n and the outer automorphism
-  of S_6".
-- Cameron, *Permutation Groups*, ch.6 (synthematic total 의 조합론).
+- **Hölder, O.** "Bildung zusammengesetzter Gruppen", *Mathematische Annalen* 46 (1895), 321–422. Originally on classification of composite groups; §6 treats automorphisms of S_n.
+- Rotman, *An Introduction to the Theory of Groups*, 4th ed., ch. 7 "Normal series", §7.2 "Automorphisms of symmetric groups" — especially Theorem 7.9 (computation of Aut(S_n)) and Theorem 7.11 (Out(S_6) = ℤ/2ℤ).
+- Dummit-Foote, ch. 4 §4.6 "The simplicity of A_n and the outer automorphism of S_6".
+- Cameron, *Permutation Groups*, ch. 6 (combinatorics of synthematic totals).
 
 ---
 
-## 6. 정리와 다음 단계
+## 6. Conclusions and Next Steps
 
-### 6.1 n = 6 — 유일한 유한 대칭군 바깥 자기동형
+### 6.1 n = 6 — the Unique Outer Automorphism of a Finite Symmetric Group
 
-본 노트의 결론을 명시적으로 적는다.
+The conclusion of this note is explicit:
 
-> **유일성 선언 (Out 버전)**. n = 6 은 Aut(S_n)/Inn(S_n) ≠ 1 인 유일한 양의 정수
-> 이다.
+> **Uniqueness declaration (Out version)**. n = 6 is the unique positive integer with Aut(S_n)/Inn(S_n) ≠ 1.
 
-이 사실은 순수 군론의 내부 결과이며, 프로젝트 핵심 정리 R1 (σ·φ = n·τ ⟺ n = 6)
-과는 **다른 경로** 로 n = 6 의 특별함을 드러낸다.
+This is an internal result of pure group theory and reveals the specialness of n = 6 via a **different path** than the project's core theorem R1 (σ·φ = n·τ ⟺ n = 6).
 
 ```
-정수론 쪽:   σ(n)·φ(n) = n·τ(n) ⟺ n = 6.  (R1 정리)
-군론 쪽:     Out(S_n) ≠ 1 ⟺ n = 6.        (Hölder 정리)
+Number-theory side:  σ(n)·φ(n) = n·τ(n) ⟺ n = 6.   (Theorem R1)
+Group-theory side:   Out(S_n) ≠ 1 ⟺ n = 6.         (Hölder's theorem)
 ```
 
-두 유일성은 서로 독립된 수학적 사실이며, 이 노트 자체로는 둘을 연결하는 심층적
-원인을 주장하지 않는다. 프로젝트 메타이론 (n6-boundary-metatheory) 은 이 두 결과
-를 "분할의 균형 + 사영 우연" 양면의 반영으로 본다.
+The two uniquenesses are independent mathematical facts, and this note does not claim any deep causal link between them. The project meta-theory (n6-boundary-metatheory) views both results as reflections of two facets — "balance of decomposition + projective coincidence."
 
-### 6.2 다음 단계 연결
+### 6.2 Next-step Connections
 
-- **PURE-P0-3 (복소해석 입문)**: ζ(2) = π²/6, 감마 함수, 해석적 연속.
-- **P1 단계**: Galois 이론 (체 확장), 표현론 (S_n 표현), Schur-Weyl, PSL_2 의 작용.
-- **P3 밀레니엄 접근**: BSD, 홀드 콤플렉스, Hodge 추측 등에서 대칭군·교대군 작용.
+- **PURE-P0-3 (Introduction to Complex Analysis)**: ζ(2) = π²/6, gamma function, analytic continuation.
+- **P1 stage**: Galois theory (field extensions), representation theory (representations of S_n), Schur-Weyl, actions of PSL_2.
+- **P3 Millennium approach**: BSD, Hodge conjectures, etc., and actions of symmetric/alternating groups.
 
-### 6.3 연습문제 (복습용)
+### 6.3 Practice Problems (Review)
 
-1. Out(A_6) 을 계산하라. (답: |Out(A_6)| = 4, 즉 ℤ/2ℤ × ℤ/2ℤ.)
-2. PGL(2, 𝔽_5) 가 S_5 와 동형임을 직접 체크하라.
-3. S_6 의 15 개 syntheme 을 모두 나열하고, 6 개의 synthematic total 을 확인하라.
-4. n = 6 에서 외부 자기동형 α 를 하나 명시적으로 써라 (전치 (1 2) 의 상).
+1. Compute Out(A_6). (Answer: |Out(A_6)| = 4, i.e., ℤ/2ℤ × ℤ/2ℤ.)
+2. Directly check that PGL(2, 𝔽_5) is isomorphic to S_5.
+3. List all 15 synthemes of S_6 and verify the 6 synthematic totals.
+4. Write an explicit outer automorphism α for n = 6 (specifying the image of the transposition (1 2)).
 
 ---
 
-## 정직성 선언
+## Honesty Declaration
 
-본 노트는 **학습 요약** 이다. 새로운 정리나 밀레니엄 난제 해결은 포함하지 않는다.
-n6-architecture 프로젝트의 7대 밀레니엄 난제 해결 현황은 **0/7** 이며, 본 노트
-작성으로 이 숫자는 변하지 않는다.
+This note is a **study summary**. It contains no new theorems or Millennium-problem targets. The project's Millennium-problem status remains **0/7**, and this note does not change that number.
 
-인용된 정리, 저자, 논문, 장 번호는 실재한다. 구체적으로:
+Cited theorems, authors, papers, and chapter numbers are real. Specifically:
 
-- Hölder 1895 는 *Mathematische Annalen* 46권, 321-422 페이지의 "Bildung
-  zusammengesetzter Gruppen" 이 맞다. 이 논문은 유한군의 조립과 S_n 의 자기동형을
-  동시에 다룬다.
-- Rotman *An Introduction to the Theory of Groups* 4판 (Springer GTM 148) 의
-  §7.2 는 Aut(S_n) 을 다룬다 (정확한 정리 번호는 판본마다 미세하게 다를 수 있으므로
-  학습자는 본인 판본에서 재확인 권장).
-- Sylvester 의 synthematic total 구성은 1844 년 그의 논문에서 제시되었으며,
-  Cameron 의 *Permutation Groups* (LMS 45) ch.6 에 현대적 설명이 있다.
+- Hölder 1895 is correctly located in *Mathematische Annalen* vol. 46, pp. 321–422, "Bildung zusammengesetzter Gruppen". The paper simultaneously addresses composition of finite groups and automorphisms of S_n.
+- Rotman *An Introduction to the Theory of Groups*, 4th ed. (Springer GTM 148), §7.2 deals with Aut(S_n) (exact theorem numbers may differ slightly between editions; readers are encouraged to double-check in their own edition).
+- Sylvester's synthematic-total construction appeared in his 1844 paper and is modernized in Cameron, *Permutation Groups* (LMS 45), ch. 6.
 
-자기참조 검증 금지 규칙을 준수하여, Out(S_6) ≠ 1 이라는 결과는 순수 군론 논리의
-내부 결과로만 기록되었다. 이 사실을 프로젝트의 다른 n = 6 현상과 "원인-결과"로
-연결하는 주장은 본 노트에서 하지 않는다.
+Adhering to the no-self-referential-verification rule, the result Out(S_6) ≠ 1 is recorded only as an internal result of pure group-theoretic logic. No "cause-effect" link between this fact and other n = 6 phenomena in the project is claimed in this note.

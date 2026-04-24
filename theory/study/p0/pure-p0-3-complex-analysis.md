@@ -1,34 +1,33 @@
-# PURE-P0-3 — 복소해석 입문 (해석적 연속/유수/감마/ζ(2)=π²/6)
+# PURE-P0-3 — Introduction to Complex Analysis (Analytic Continuation / Residues / Gamma / ζ(2)=π²/6)
 
-> 트랙: P0-PURE / 3번 태스크
-> 완료 기준: ζ(2) = π²/6 증명 1종을 재구성할 수 있다
-> 출처 기반: Stein-Shakarchi "Complex Analysis" (2003), Ahlfors "Complex Analysis" 3판 (1979), Conway "Functions of One Complex Variable I" 2판 (1978), Titchmarsh "The Theory of the Riemann Zeta-Function" 2판 (Heath-Brown 1986)
-> **정직성**: 이 파일은 교재 요약이다. ζ(2)=π²/6 은 Euler 1735 의 원 증명을 현대 전개로 재구성한다.
-
----
-
-## 0. 목적과 범위
-
-P0 복소해석 입문의 목표는:
-
-1. 해석적 연속(analytic continuation) 원리
-2. 유수 정리(residue theorem)
-3. 감마 함수 Γ(s) 정의와 함수 방정식
-4. 리만 제타 함수 ζ(s) 정의와 함수 방정식 개요
-5. **ζ(2) = π²/6 증명** (Euler sinc 곱 전개 방법 재구성, 대안 2종 언급)
-
-(5) 가 이 노트의 핵심이다. n=6 과의 연결은 **관찰**로 기록하되 인과 주장은 하지 않는다.
+> Track: P0-PURE / Task 3
+> Completion criterion: able to reconstruct one proof of ζ(2) = π²/6
+> Source basis: Stein-Shakarchi "Complex Analysis" (2003), Ahlfors "Complex Analysis" 3rd ed. (1979), Conway "Functions of One Complex Variable I" 2nd ed. (1978), Titchmarsh "The Theory of the Riemann Zeta-Function" 2nd ed. (Heath-Brown 1986)
+> **Honesty**: this file is a textbook summary. The ζ(2) = π²/6 proof is a modern reconstruction of Euler's 1735 original argument.
 
 ---
 
-## 1. 해석적 연속 원리
+## 0. Goal and Scope
 
-### 1.1 해석적 함수 (Holomorphic function)
+The goals of this P0 complex-analysis introduction are:
 
-**정의** (Stein-Shakarchi Ch. 1).
+1. Analytic continuation principle
+2. Residue theorem
+3. Definition of the gamma function Γ(s) and its functional equation
+4. Definition of the Riemann zeta function ζ(s) and an overview of its functional equation
+5. **Proof of ζ(2) = π²/6** (reconstruction of Euler's sinc-product method, plus two alternatives)
 
-열린 집합 Ω ⊆ ℂ 에서 정의된 복소 함수 f: Ω → ℂ 가 **해석적(holomorphic)** ⟺
-각 점 z₀ ∈ Ω 에서 복소 미분
+(5) is the core of this note. Connections with n = 6 are recorded only as **observations** without causal claims.
+
+---
+
+## 1. Analytic Continuation Principle
+
+### 1.1 Holomorphic Function
+
+**Definition** (Stein-Shakarchi Ch. 1).
+
+A complex function f : Ω → ℂ defined on an open set Ω ⊆ ℂ is **holomorphic** ⟺ at each point z₀ ∈ Ω the complex derivative
 
 ```
           f(z₀ + h) - f(z₀)
@@ -36,78 +35,72 @@ f'(z₀) = lim ─────────────────
         h→0        h
 ```
 
-이 존재한다 (h 가 ℂ 에서 0 으로, 모든 방향에서 같은 극한).
+exists (h ∈ ℂ going to 0 from every direction with the same limit).
 
-**동치 표현 (Cauchy-Riemann)**: f(x+iy) = u(x,y) + iv(x,y) 일 때
+**Equivalent formulation (Cauchy-Riemann)**: For f(x+iy) = u(x,y) + iv(x,y),
 - ∂u/∂x = ∂v/∂y
 - ∂u/∂y = -∂v/∂x
 
-### 1.2 해석적 ⟺ 급수 전개 가능
+### 1.2 Holomorphic ⟺ Power-series Expansion
 
-**정리 (Stein-Shakarchi Thm 2.4.4)**.
+**Theorem (Stein-Shakarchi Thm 2.4.4)**.
 
-f 가 Ω 에서 해석적 ⟺ f 는 각 점 z₀ 주변에서 수렴 멱급수
-f(z) = Σ_{n≥0} a_n (z - z₀)^n 로 표현된다.
+f is holomorphic on Ω ⟺ around each point z₀ f is expressible as a convergent power series f(z) = Σ_{n≥0} a_n (z - z₀)^n.
 
-### 1.3 일치의 원리 (Identity Theorem)
+### 1.3 Identity Theorem
 
-**정리** (Stein-Shakarchi Thm 2.4.6).
+**Theorem** (Stein-Shakarchi Thm 2.4.6).
 
-f, g 가 영역(연결 열린집합) Ω 에서 해석적이고, Ω 안에서 **집적점(accumulation point)이 있는 집합** 위에서
-f = g 이면, f ≡ g 전체 Ω 에서.
+If f, g are holomorphic on a domain (connected open set) Ω, and f = g on a set with an **accumulation point** inside Ω, then f ≡ g on all of Ω.
 
-**따름정리**: 해석적 함수의 연속은 **유일하다**. 두 가지 연속이 같은 영역 안에서
-비어있지 않은 공통 영역을 가지면, 거기서 일치하므로 그 너머로도 강제된다.
+**Corollary**: Analytic continuations are **unique**. If two continuations share a nonempty common domain, they agree there, forcing agreement beyond.
 
-### 1.4 해석적 연속의 예
+### 1.4 Examples of Analytic Continuation
 
-- **기하급수**: 1/(1-z) = Σ_{n≥0} z^n (|z| < 1 수렴) 의 연속은 ℂ \ {1} 전체로 확장 (명시 공식 그대로).
-- **ζ(s) = Σ n^{-s}**: Re(s) > 1 에서 정의. 전체 복소평면(s=1 제외)으로 연속 가능 — 아래 5절.
+- **Geometric series**: 1/(1-z) = Σ_{n≥0} z^n (convergent for |z| < 1) continues to all of ℂ \ {1} (same explicit formula).
+- **ζ(s) = Σ n^{-s}**: defined for Re(s) > 1. Extends to the whole complex plane except s = 1 — see Section 5.
 
 ---
 
-## 2. 유수 정리 (Residue Theorem)
+## 2. Residue Theorem
 
-### 2.1 고립 특이점과 유수
+### 2.1 Isolated Singularities and Residues
 
-f 가 z₀ 를 제외한 z₀ 의 punctured neighborhood 에서 해석적이면 z₀ 는 **고립 특이점**.
-Laurent 전개
+If f is holomorphic on a punctured neighborhood of z₀ except at z₀, then z₀ is an **isolated singularity**. The Laurent expansion
 
 ```
 f(z) = Σ_{n=-∞}^{∞} a_n (z - z₀)^n
 ```
 
-에서 **유수(residue)** := a_{-1}. 표기 Res(f, z₀).
+has **residue** := a_{-1}. Notation Res(f, z₀).
 
-### 2.2 유수 정리
+### 2.2 Residue Theorem
 
-**정리 (Stein-Shakarchi Thm 3.2.1)**.
+**Theorem (Stein-Shakarchi Thm 3.2.1)**.
 
-Ω ⊆ ℂ 가 단순 연결, γ 가 Ω 안의 양의 방향 단순 닫힌 곡선.
-f 가 Ω 에서 유한개의 고립 특이점 z₁, ..., z_k 를 제외하고 해석적이며,
-이 특이점들이 γ 내부에 있다고 하자. 그러면
+Let Ω ⊆ ℂ be simply connected and γ a positively oriented simple closed curve inside Ω. If f is holomorphic on Ω except for isolated singularities z₁, …, z_k that lie inside γ, then
 
 ```
 ∮_γ f(z) dz  =  2πi · Σ_{j=1}^{k} Res(f, z_j)
 ```
 
-### 2.3 실해석 적용
+### 2.3 Applications to Real Analysis
 
-**예 1**: ∫_{-∞}^{∞} dx/(1+x²) = π. (f(z) = 1/(1+z²) 의 상반평면 반원 contour, pole at z=i, Res = 1/(2i).)
+**Example 1**: ∫_{-∞}^{∞} dx/(1+x²) = π. (f(z) = 1/(1+z²), upper half-plane semicircular contour, pole at z=i, Res = 1/(2i).)
 
-**예 2**: ∫_0^∞ (sin x)/x dx = π/2.
+**Example 2**: ∫_0^∞ (sin x)/x dx = π/2.
 
-**예 3 (P1 예고)**: Riemann zeta 함수의 함수 방정식은 contour deformation 과 유수 계산으로 유도.
+**Example 3 (P1 preview)**: The functional equation of the Riemann zeta function is derived via contour deformation and residues.
 
 ---
 
-## 3. 감마 함수 Γ(s)
+## 3. Gamma Function Γ(s)
 
-### 3.1 적분 정의
+### 3.1 Integral Definition
 
-**정의** (Stein-Shakarchi Ch. 6).
+**Definition** (Stein-Shakarchi Ch. 6).
 
-Re(s) > 0 에서
+For Re(s) > 0,
 
 ```
           ∞
@@ -115,54 +108,54 @@ Re(s) > 0 에서
           0
 ```
 
-절대수렴은 Re(s) > 0 에서 확인.
+Absolute convergence verified for Re(s) > 0.
 
-### 3.2 함수 방정식
+### 3.2 Functional Equation
 
-**정리**. Re(s) > 0 에서
+**Theorem**. For Re(s) > 0,
 
 ```
 Γ(s + 1) = s · Γ(s)
 ```
 
-**증명**. 부분적분:
+**Proof**. Integration by parts:
 ∫_0^∞ t^s e^{-t} dt = [-t^s e^{-t}]_0^∞ + s ∫_0^∞ t^{s-1} e^{-t} dt = 0 + s·Γ(s). □
 
-### 3.3 양의 정수에서
+### 3.3 At Positive Integers
 
 Γ(1) = ∫_0^∞ e^{-t} dt = 1.
 ⟹ Γ(n) = (n-1)! (n ∈ ℕ, n ≥ 1).
 
-### 3.4 해석적 연속
+### 3.4 Analytic Continuation
 
-Γ(s+1) = s·Γ(s) ⟹ Γ(s) = Γ(s+1)/s 로 Re(s) > -1 로 연장.
-반복하여 Γ(s)는 ℂ \ {0, -1, -2, -3, ...} 전체로 연장되며, 음의 정수 0, -1, -2, ... 에서 단순 극점 (residue (-1)^n/n!).
+Γ(s+1) = s·Γ(s) ⟹ Γ(s) = Γ(s+1)/s extends to Re(s) > -1.
+Iterating, Γ(s) extends to ℂ \ {0, -1, -2, -3, …}, with simple poles at 0, -1, -2, … having residue (-1)^n/n!.
 
-### 3.5 반사 공식 (Euler's reflection)
+### 3.5 Reflection Formula (Euler's)
 
-**정리** (Stein-Shakarchi Thm 6.1.4).
+**Theorem** (Stein-Shakarchi Thm 6.1.4).
 
 ```
 Γ(s) · Γ(1 - s) = π / sin(πs)
 ```
 
-**결과**: Γ(1/2) = √π.
+**Result**: Γ(1/2) = √π.
 
-### 3.6 곱 공식 (Weierstrass)
+### 3.6 Product Formula (Weierstrass)
 
 ```
 1/Γ(s) = s · e^{γs} · ∏_{n≥1} (1 + s/n)·e^{-s/n}
 ```
 
-(γ = Euler-Mascheroni 상수.)
+(γ = Euler-Mascheroni constant.)
 
 ---
 
-## 4. 리만 제타 함수 ζ(s)
+## 4. Riemann Zeta Function ζ(s)
 
-### 4.1 Dirichlet 급수 정의
+### 4.1 Dirichlet-Series Definition
 
-Re(s) > 1 에서
+For Re(s) > 1,
 
 ```
          ∞
@@ -170,49 +163,50 @@ Re(s) > 1 에서
          n=1
 ```
 
-이 급수는 Re(s) > 1 에서 절대수렴하고 해석적.
+This series absolutely converges and is holomorphic for Re(s) > 1.
 
-### 4.2 오일러 곱 (PURE-P0-1 §5)
+### 4.2 Euler Product (PURE-P0-1 §5)
 
 ```
 ζ(s) = ∏_p (1 - p^{-s})^{-1}   (Re(s) > 1)
 ```
 
-### 4.3 해석적 연속
+### 4.3 Analytic Continuation
 
-**정리 (Riemann 1859)**. ζ(s) 는 **ℂ \ {1}** 전체로 해석적 연속되며, s=1 에서 단순 극점 (residue 1).
+**Theorem (Riemann 1859)**. ζ(s) continues analytically to **ℂ \ {1}**, with a simple pole at s=1 (residue 1).
 
-**스케치**: Γ(s) 와의 관계
+**Sketch**: Relation with Γ(s)
 ```
 Γ(s) ζ(s) = ∫_0^∞  t^{s-1} / (e^t - 1)  dt  (Re(s) > 1)
 ```
-contour 변형 (Hankel contour) 로 좌반평면으로 연속.
+contour deformation (Hankel contour) continues to the left half-plane.
 
-### 4.4 함수 방정식
+### 4.4 Functional Equation
 
-**정리 (Riemann 1859)**.
+**Theorem (Riemann 1859)**.
 
 ```
 ξ(s) := (1/2) s (s-1) π^{-s/2} Γ(s/2) ζ(s)
 ```
-로 정의하면 ξ 는 전해석이고 ξ(s) = ξ(1 - s).
 
-**따름**:
+defines an entire ξ satisfying ξ(s) = ξ(1 - s).
+
+**Consequence**:
 ```
 ζ(1 - s) = 2 (2π)^{-s} cos(πs/2) Γ(s) ζ(s)
 ```
 
-### 4.5 영점과 RH
+### 4.5 Zeros and RH
 
-- **자명 영점**: s = -2, -4, -6, ... (음의 짝수).
-- **비자명 영점**: 0 < Re(s) < 1 의 "critical strip" 에.
-- **Riemann Hypothesis**: 모든 비자명 영점은 Re(s) = 1/2 위에 있다. **미해결**.
+- **Trivial zeros**: s = -2, -4, -6, … (negative even integers).
+- **Non-trivial zeros**: inside the "critical strip" 0 < Re(s) < 1.
+- **Riemann Hypothesis**: all non-trivial zeros lie on Re(s) = 1/2. **Unresolved**.
 
 ---
 
-## 5. ζ(2) = π²/6 : Euler sinc 곱 전개 증명 재구성
+## 5. ζ(2) = π²/6: Reconstruction of Euler's Sinc-Product Proof
 
-### 5.1 목표
+### 5.1 Goal
 
 ```
          ∞
@@ -220,11 +214,11 @@ contour 변형 (Hankel contour) 로 좌반평면으로 연속.
          n=1
 ```
 
-### 5.2 준비: Weierstrass / Hadamard 인수분해
+### 5.2 Preparation: Weierstrass / Hadamard Factorization
 
-**정리** (Ahlfors Thm 5.8).
+**Theorem** (Ahlfors Thm 5.8).
 
-sin(z) 는 전해석이고 영점은 z = kπ (k ∈ ℤ). 따라서 인수분해
+sin(z) is entire and its zeros are z = kπ (k ∈ ℤ). Hence the factorization
 
 ```
            ∞
@@ -232,10 +226,9 @@ sin(z) = z · ∏ (1 - z²/(kπ)²)
            k=1
 ```
 
-**주의**: 단순 ∏ (1 - z/(kπ)) 로 쓰면 수렴하지 않는다. **(1 - z²/(kπ)²) = (1 - z/(kπ))(1 + z/(kπ))**
-같이 쌍으로 묶은 꼴에서 절대수렴.
+**Note**: A plain ∏ (1 - z/(kπ)) does not converge. Pairing as **(1 - z²/(kπ)²) = (1 - z/(kπ))(1 + z/(kπ))** gives absolute convergence.
 
-스케일링: z → πx 로 바꾸면
+Scaling z → πx:
 
 ```
              ∞
@@ -243,7 +236,7 @@ sin(πx) = πx · ∏ (1 - x²/n²)     (Euler 1735)
              n=1
 ```
 
-### 5.3 양변을 x 로 나누기
+### 5.3 Divide Both Sides by x
 
 ```
                   ∞
@@ -251,7 +244,7 @@ sin(πx)/(πx) = ∏  (1 - x²/n²)
                 n=1
 ```
 
-좌변을 **Taylor 전개** (|x| 작을 때):
+**Taylor expansion** of the left side (for small |x|):
 
 ```
 sin(πx) = πx - (πx)³/6 + (πx)⁵/120 - ⋯
@@ -259,83 +252,80 @@ sin(πx)/(πx) = 1 - (πx)²/6 + (πx)⁴/120 - ⋯
              = 1 - (π²/6) x² + (π⁴/120) x⁴ - ⋯
 ```
 
-### 5.4 우변 전개 (x² 계수)
+### 5.4 Right-hand-side Expansion (x² Coefficient)
 
 ```
 ∞
-∏ (1 - x²/n²) = 1 - (Σ_{n=1}^∞ 1/n²) · x² + (고차 x⁴, x⁶, ...)
+∏ (1 - x²/n²) = 1 - (Σ_{n=1}^∞ 1/n²) · x² + (higher x⁴, x⁶, …)
 n=1
 ```
 
-(무한곱의 x² 계수 = 각 인자에서 x²/n² 를 하나씩만 뽑은 합 = -Σ 1/n². 고차 항들은 pair 로 뽑은 것부터.)
+(The x² coefficient of the infinite product equals the sum of picking exactly one x²/n² from each factor = -Σ 1/n². Higher terms come from picking pairs.)
 
-### 5.5 계수 비교
+### 5.5 Coefficient Comparison
 
-x² 계수 비교:
+Compare x² coefficients:
 
-**좌변 계수**: -π²/6.
-**우변 계수**: -Σ_{n=1}^∞ 1/n² = -ζ(2).
+**Left-hand coefficient**: -π²/6.
+**Right-hand coefficient**: -Σ_{n=1}^∞ 1/n² = -ζ(2).
 
-두 해석적 함수가 x 의 멱급수로 일치 ⟹ 각 계수 일치 (일치의 원리, §1.3):
+Two holomorphic functions equal as power series in x ⟹ every coefficient matches (identity theorem, §1.3):
 
 ```
 -π²/6 = -ζ(2)
 ⟹ ζ(2) = π²/6   □
 ```
 
-### 5.6 엄밀성 체크
+### 5.6 Rigor Check
 
-1. **sin(πx) 의 곱 표현**이 절대수렴하는가? — 예. (1 - x²/n²) 에서 |x²/n²| 이 n ≥ N 에서 1/2 미만,
-   log 전개로 Σ log(1 - x²/n²) 절대수렴. (Ahlfors §5.2)
+1. **Absolute convergence of the product for sin(πx)?** — Yes. |x²/n²| < 1/2 for n ≥ N, and Σ log(1 - x²/n²) converges absolutely via log expansion. (Ahlfors §5.2)
 
-2. **계수 비교가 허용되는가?** — 예. 양변 모두 x=0 주변에서 해석적 (zero 에서 제거 가능 특이점),
-   Taylor 계수는 유일.
+2. **Is coefficient comparison allowed?** — Yes. Both sides are holomorphic near x = 0 (removable singularity at zero), and Taylor coefficients are unique.
 
-3. **Weierstrass 인수분해 자체의 증명**은 §5.2 의 참조 교재에 맡긴다.
+3. **Proof of Weierstrass factorization itself** is left to the reference texts cited in §5.2.
 
-### 5.7 x⁴ 계수로 ζ(4) 얻기
+### 5.7 Getting ζ(4) from the x⁴ Coefficient
 
-**보너스** (동일 방법):
+**Bonus** (same method):
 
-좌변 x⁴ 계수: π⁴/120.
-우변 x⁴ 계수: Σ_{m<n} 1/(m²n²) = (1/2)[(Σ 1/n²)² - Σ 1/n⁴] = (1/2)[ζ(2)² - ζ(4)].
+LHS x⁴ coefficient: π⁴/120.
+RHS x⁴ coefficient: Σ_{m<n} 1/(m²n²) = (1/2)[(Σ 1/n²)² - Σ 1/n⁴] = (1/2)[ζ(2)² - ζ(4)].
 
-따라서 π⁴/120 = (1/2)(ζ(2)² - ζ(4)) = (1/2)(π⁴/36 - ζ(4))
-⟹ ζ(4) = π⁴/36 - π⁴/60 = π⁴ (5/180 - 3/180) = π⁴·(2/180)·... 계산
+Hence π⁴/120 = (1/2)(ζ(2)² - ζ(4)) = (1/2)(π⁴/36 - ζ(4))
+⟹ ζ(4) = π⁴/36 - π⁴/60 = π⁴ (5/180 - 3/180) = π⁴·(2/180)·... computing
 
-정확: ζ(4) = **π⁴/90**.
+Exact: ζ(4) = **π⁴/90**.
 
-(이 결과는 Euler 1735 원 논문에 수록.)
+(Result recorded in Euler's original 1735 paper.)
 
 ---
 
-## 6. 대안 증명 언급
+## 6. Alternative Proofs (Mentioned)
 
-### 6.1 Cauchy cot 전개 방법
+### 6.1 Cauchy Cotangent-expansion Method
 
-**아이디어**: cot(πz) 는 극점 z = k (k ∈ ℤ) 을 가지며 각 극점에서 residue 1/π.
-contour integral
+**Idea**: cot(πz) has poles at z = k (k ∈ ℤ) with residue 1/π at each. The contour integral
 
 ```
 ∮_C (π cot(πz)) · f(z) dz
 ```
 
-에서 C 를 큰 사각형으로 취하면, Σ_{k} f(k) 를 유수 정리로 계산.
+over a large rectangle C computes Σ_{k} f(k) via residues.
 
-**적용**: f(z) = 1/z² 로 하면 z=0 에서 이중극점, residue 계산 과정에서 ζ(2) 등장. 결론 ζ(2) = π²/6.
+**Application**: With f(z) = 1/z², z=0 is a double pole; computing the residue produces ζ(2). Conclusion ζ(2) = π²/6.
 
-**장점**: 완전히 복소해석적, 유수정리만 사용.
-**참조**: Ahlfors §5.2.3, Titchmarsh §4.5.
+**Strength**: Fully complex-analytic, uses only the residue theorem.
+**Reference**: Ahlfors §5.2.3, Titchmarsh §4.5.
 
-### 6.2 Fourier 급수 방법
+### 6.2 Fourier-series Method
 
-**아이디어**: [−π, π] 에서 f(x) = x 의 Fourier 급수
+**Idea**: Fourier series of f(x) = x on [−π, π]:
 
 ```
 x = 2 Σ_{n≥1} ((-1)^{n+1}/n) sin(nx)
 ```
 
-Parseval 등식
+By Parseval's identity,
 
 ```
 (1/π) ∫_{-π}^{π} x² dx = Σ_{n≥1} (2/n)²
@@ -343,83 +333,79 @@ Parseval 등식
 ⟹ ζ(2) = π²/6
 ```
 
-**장점**: 실해석 유일, 복소해석 불필요.
-**참조**: Stein-Shakarchi *Fourier Analysis*, §3.
+**Strength**: Purely real-analytic, no complex analysis needed.
+**Reference**: Stein-Shakarchi *Fourier Analysis*, §3.
 
-### 6.3 이중 적분 방법 (Apostol / Beukers)
+### 6.3 Double-integral Method (Apostol / Beukers)
 
 ```
 ∫∫_{[0,1]²}  dx dy / (1 - xy)  =  ζ(2) = π²/6
 ```
 
-좌변을 직접 계산하면 π²/6. Beukers 는 이 방법으로 ζ(3) 의 무리성 증명을 구성.
+Direct computation of the left side gives π²/6. Beukers used this method to prove the irrationality of ζ(3).
 
-**참조**: Apostol *Mathematical Analysis*, 2판.
+**Reference**: Apostol *Mathematical Analysis*, 2nd ed.
 
 ---
 
-## 7. n=6 관찰 (정직한 독립성)
+## 7. n = 6 Observation (Honest Independence)
 
-### 7.1 ζ(2) = π²/6 에서 6
+### 7.1 The 6 in ζ(2) = π²/6
 
-ζ(2) = π²/**6**. 분모에 6 이 등장한다. 이것은
+ζ(2) = π²/**6**. A 6 appears in the denominator. It arises
 
-- 증명 (§5) 에서 **sinc 의 Taylor 전개 x³ 계수 = -1/6** 에서 직접 유래.
-- 즉 "3! = 6" 의 구조적 결과이지, 수론적 n=6 (completeness in R1 theorem) 과 **다르다**.
+- in the proof (§5) directly from the fact that the Taylor expansion of sinc has **x³ coefficient = -1/6**;
+- hence a structural consequence of "3! = 6", **different** from the number-theoretic n = 6 (completeness in R1 theorem).
 
-**정직 주장**: 이 ζ(2) 의 6 과 PURE-P0-1 R1 정리의 n=6 은 **같은 구조에서 나오지 않는다**.
-R1 의 6 은 σ, φ, τ 의 곱셈성으로부터 오고, ζ(2) 의 6 은 sin 함수의 Taylor 전개로부터 온다.
-두 6 이 동일한 이유를 주장하려면 별도의 논증이 필요하다 (현재 없음).
+**Honest claim**: The 6 in ζ(2) and the n = 6 of the PURE-P0-1 R1 theorem **do not come from the same structure**. The 6 in R1 comes from multiplicativity of σ, φ, τ; the 6 in ζ(2) comes from the Taylor expansion of sin. Asserting that the two 6s share a cause requires a separate argument (currently absent).
 
-### 7.2 유사 관찰
+### 7.2 Analogous Observations
 
-- ζ(4) = π⁴/**90**. 여기서 90 = 9·10 = 2·3²·5. 특별한 6 구조 없음.
+- ζ(4) = π⁴/**90**. Here 90 = 9·10 = 2·3²·5. No particular 6 structure.
 - ζ(6) = π⁶/**945**. 945 = 3³·5·7.
 - ζ(2k) = (-1)^{k+1} · (2π)^{2k} · B_{2k} / (2·(2k)!) (Euler).
 
-이 공식들은 **Bernoulli 수** B_{2k} 와 (2k)! 에 의해 결정된다. 6 의 등장은 k=1 에서의 2! = 2 와
-전체 정규화 (2π)²/(2·2) = π² 로 π²/6 가 되는 결과.
+These formulas are determined by the Bernoulli numbers B_{2k} and (2k)!. The appearance of 6 comes from 2! = 2 at k=1 and the overall normalization (2π)²/(2·2) = π², yielding π²/6.
 
-### 7.3 경고 (feedback_honest_verification)
+### 7.3 Caution (feedback_honest_verification)
 
-ζ(2) 의 6 에서 R1 정리의 6 을 끌어내려는 시도는 **패턴매칭 편향**이다.
-두 사실이 모두 6을 언급한다는 것은 관찰이며, 구조적 연결은 증명 전까지 추측(conjecture) 이다.
+Attempts to derive the 6 of the R1 theorem from the 6 of ζ(2) are **pattern-matching bias**. The fact that both mention 6 is an observation; a structural connection is a **conjecture** until proven.
 
 ---
 
-## 8. 정직성 체크
+## 8. Honesty Check
 
-### 8.1 이 노트가 주장하지 않는 것
+### 8.1 Things Not Claimed by This Note
 
-- Weierstrass 인수분해의 **엄밀 증명**은 참조 교재.
-- Riemann 함수 방정식의 **전체 증명**은 참조 교재 (Titchmarsh §2.6).
-- ζ(2k+1) (홀수 인덱스) 의 폐쇄형 — 현재까지 **알려지지 않음**. Apéry 1979 는 ζ(3) 의 **무리성**만 증명.
+- **Strict proof** of the Weierstrass factorization is left to reference texts.
+- **Full proof** of the Riemann functional equation is left to reference texts (Titchmarsh §2.6).
+- A closed form for ζ(2k+1) (odd indices) — **currently unknown**. Apéry 1979 proved only the **irrationality** of ζ(3).
 
-### 8.2 sopfr=5 편향 경고
+### 8.2 sopfr=5 Bias Caution
 
-ζ(2) = π²/6 과 sopfr 관측은 무관. 이 노트에서 sopfr 은 사용하지 않는다.
+ζ(2) = π²/6 and sopfr observations are unrelated. This note does not use sopfr.
 
-### 8.3 7대 난제 해결 카운트
+### 8.3 Seven-Millennium-problem Solved Count
 
-이 노트로 해결된 밀레니엄 난제: **0 / 7**.
+Number of Millennium problems solved by this note: **0 / 7**.
 
-(특히 RH 는 §4.5 에 **미해결**로 명시.)
+(In particular RH is explicitly marked **unresolved** in §4.5.)
 
 ---
 
-## 9. 참고 문헌
+## 9. References
 
 1. E. M. Stein, R. Shakarchi, *Complex Analysis*, Princeton Univ. Press, 2003. (Ch. 1-3, 5-6)
 2. L. V. Ahlfors, *Complex Analysis*, 3rd ed., McGraw-Hill, 1979. (Ch. 5)
 3. J. B. Conway, *Functions of One Complex Variable I*, 2nd ed., Springer, 1978.
 4. E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, 2nd ed. (ed. D. R. Heath-Brown), Oxford, 1986.
-5. L. Euler, "De summis serierum reciprocarum", *Comm. Acad. Sci. Petrop.* 7 (1735), 123–134. (ζ(2) = π²/6 원 논문)
+5. L. Euler, "De summis serierum reciprocarum", *Comm. Acad. Sci. Petrop.* 7 (1735), 123–134. (Original paper for ζ(2) = π²/6)
 6. B. Riemann, "Über die Anzahl der Primzahlen unter einer gegebenen Grösse", *Monatsber. Berliner Akad.* (1859).
 7. R. Apéry, "Irrationalité de ζ(2) et ζ(3)", *Astérisque* 61 (1979).
 8. F. Beukers, "A note on the irrationality of ζ(2) and ζ(3)", *Bull. London Math. Soc.* 11 (1979).
 
 ---
 
-**작성**: P0-PURE 트랙 / 3번 태스크
-**상태**: 교재 요약 완료, ζ(2) = π²/6 Euler sinc 방법 재구성 수록 (대안 3종 언급)
-**다음**: P0-PURE 종합 검토 → P1 (해석적 수론 본격 진입)
+**Written for**: P0-PURE track / Task 3
+**Status**: textbook summary complete; ζ(2) = π²/6 via Euler sinc reconstruction included (3 alternatives mentioned)
+**Next**: P0-PURE comprehensive review → P1 (serious entry into analytic number theory)

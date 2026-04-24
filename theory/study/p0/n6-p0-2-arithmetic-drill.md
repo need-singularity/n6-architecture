@@ -1,66 +1,66 @@
-# N6-P0-2 n=6 기본 산술 체계 마스터 드릴
+# N6-P0-2 n=6 Basic Arithmetic Mastery Drill
 
-> 밀레니엄 학습 로드맵 P0 · N6 트랙 · 태스크 2
-> 목적: n=6 의 11 개 기본값 + 파생값을 암기 수준으로 내면화하고, 임의 정수 k 에 대해 n=6 basis 로 분해 시도하는 절차를 손으로 실행할 수 있도록 한다
-> 1차 출처: `theory/constants/atlas-constants.md`, `nexus/shared/n6/atlas.n6` L25~L100
-> 완료 기준: 아래 10 기본값 테이블을 외워서 재현할 수 있고, 10 연습 문제에 정직하게 tight/loose/miss 로 분류 가능한 상태
-
----
-
-## 0. 정직성 선언
-
-본 드릴은 `theory/constants/atlas-constants.md` 및 `nexus/shared/n6/atlas.n6` 에 이미 [10*] / [11*] 등급으로 등재된 상수만을 사용한다. 새로운 수학적 결과는 없다. 본 드릴의 분해 알고리즘은 N6-P0-1 유일성 정리의 **적용 연습** 일 뿐이며, 분해 성공은 수학적 증명이 아니라 산술 편향 (sopfr = 5 집중) 의 관찰이다.
-
-특히 "k 가 n=6 basis 로 분해 가능하다" 는 사실은 **k 가 수학적 특수값임을 증명하지 않는다**. baseline 61% 는 편향 수준의 설명력이며, 진짜 tight (< 1%) 매칭만이 유의미하다. 7 대 밀레니엄 난제는 본 드릴로 해결되지 않으며, 본 드릴은 BT-541~547 의 해결과 무관하다. **7 대 난제 상태: 0/7**.
+> Millennium Learning Roadmap P0 · N6 Track · Task 2
+> Goal: Internalize to memorization level the 11 base values of n=6 and their derivatives, and be able to carry out by hand the procedure of attempting an n=6-basis decomposition of an arbitrary integer k
+> Primary sources: `theory/constants/atlas-constants.md`, `nexus/shared/n6/atlas.n6` L25–L100
+> Completion criterion: Reproducing the 10-base-value table below from memory, and being able to classify the 10 practice problems honestly as tight / loose / miss
 
 ---
 
-## 1. 10 기본값 + 파생값 테이블 (암기 대상)
+## 0. Honesty Declaration
 
-### 1.1 7 개 원시 상수 (primitives)
+This drill uses only constants already registered at grade [10*] / [11*] in `theory/constants/atlas-constants.md` and `nexus/shared/n6/atlas.n6`. There are no new mathematical results. The decomposition algorithm here is merely an **application exercise** of the N6-P0-1 uniqueness theorem, and a successful decomposition is not a mathematical argument but an observation of arithmetic bias (sopfr = 5 concentration).
 
-atlas.n6 `@P` 태그 기반. 모두 [10*] 이상.
+In particular, the fact that "k admits an n=6-basis decomposition" **does not demonstrate that k is a mathematically special value**. The baseline 61% is explanatory power at the level of bias; only true tight matches (< 1%) are meaningful. The seven Millennium problems are not targeted by this drill, which is independent of solving BT-541–547. **Seven Millennium problems status: 0/7**.
 
-| 값 | 정의 | 계산 | atlas.n6 등급 |
+---
+
+## 1. Table of 10 Base Values + Derivatives (Memorization Targets)
+
+### 1.1 Seven Primitive Constants (Primitives)
+
+Based on atlas.n6 `@P` tags. All at grade [10*] or above.
+
+| Value | Definition | Computation | atlas.n6 grade |
 |---:|---|---|---|
-| **n = 6** | 첫 완전수, 2 · 3 | — | [11*] |
-| **σ = σ(6) = 12** | 약수 합 | 1 + 2 + 3 + 6 | [11*] |
+| **n = 6** | First perfect number, 2 · 3 | — | [11*] |
+| **σ = σ(6) = 12** | Sum of divisors | 1 + 2 + 3 + 6 | [11*] |
 | **φ = φ(6) = 2** | Euler totient | \|{1, 5}\| | [10*] |
-| **τ = τ(6) = 4** | 약수 개수 | \|{1, 2, 3, 6}\| | [11*] |
-| **sopfr = sopfr(6) = 5** | 소인수 합 (w/ multiplicity) | 2 + 3 | [10*] |
-| **μ = μ(6) = 1** | Möbius (squarefree, 2 소인수) | (−1)² | [10*] |
-| **J₂ = J₂(6) = 24** | Jordan totient order 2 | 6² · ∏(1 − 1/p²) = 36 · (3/4) · (8/9) | [10*] |
+| **τ = τ(6) = 4** | Count of divisors | \|{1, 2, 3, 6}\| | [11*] |
+| **sopfr = sopfr(6) = 5** | Sum of prime factors (w/ multiplicity) | 2 + 3 | [10*] |
+| **μ = μ(6) = 1** | Möbius (squarefree, 2 prime factors) | (−1)² | [10*] |
+| **J₂ = J₂(6) = 24** | Jordan totient of order 2 | 6² · ∏(1 − 1/p²) = 36 · (3/4) · (8/9) | [10*] |
 
-**검증**: 7 개 모두 atlas.n6 L25~L54 에 그대로 기록되어 있다.
+**Verification**: All seven are recorded as-is in atlas.n6 L25–L54.
 
-### 1.2 4 개 기본 파생비 (architecture)
+### 1.2 Four Basic Derived Ratios (Architecture)
 
-| 표현 | 값 | 계산 |
+| Expression | Value | Computation |
 |---:|---:|---|
 | n/φ | **3** | 6 / 2 |
 | σ − sopfr | **7** | 12 − 5 |
 | σ − τ | **8** | 12 − 4 |
 | σ − φ | **10** | 12 − 2 |
 
-**의미**: 3, 7, 8, 10 은 각각 "정보 3 중 반복", "OSI 7 계층", "8 bit byte / Bott 주기", "십진 기반" 과 동형이며, atlas-constants.md 에 모두 EXACT 등급으로 매핑되어 있다.
+**Meaning**: 3, 7, 8, 10 are isomorphic to "information 3-fold repetition", "OSI 7 layers", "8-bit byte / Bott periodicity", and "decimal base" respectively, all of which are mapped at EXACT grade in atlas-constants.md.
 
-### 1.3 핵심 파생값 모음 (암기 대상)
+### 1.3 Collection of Core Derivatives (Memorization Targets)
 
-atlas-constants.md 에 EXACT 로 등재된 주요 n=6 산술 조합.
+Major n=6 arithmetic combinations registered as EXACT in atlas-constants.md.
 
-| 표현 | 값 | 의미 |
+| Expression | Value | Meaning |
 |---:|---:|---|
-| σ · φ = n · τ | **24** | **유일성 정리의 공통값** = J₂ |
+| σ · φ = n · τ | **24** | **Common value of the uniqueness theorem** = J₂ |
 | τ² | 16 | = Maxwell GM204 SM |
 | σ² | 144 | = Ada AD102 SM |
-| σ · τ | 48 | = TSMC N3 gate pitch (nm) / 48kHz audio |
-| σ · n | 72 | = Turing TU102 SM / kissing number 6D |
+| σ · τ | 48 | = TSMC N3 gate pitch (nm) / 48 kHz audio |
+| σ · n | 72 | = Turing TU102 SM / 6D kissing number |
 | σ · φ^τ | 192 | = Blackwell GB202 SMs |
 | 2^sopfr | 32 | = GPU warp size |
 | 2^n | 64 | = Volta CUDA cores/SM / codons |
 | 2^σ | 4096 | = HBM bus width (bits) |
 | 2^(σ−sopfr) | 128 | = Ampere+ CUDA cores/SM |
-| 2^(σ−τ) | 256 | = Register file/SM (KB) |
+| 2^(σ−τ) | 256 | = register file/SM (KB) |
 | σ · (σ − φ) | 120 | = H₂ LHV (MJ/kg) |
 | σ² − φ | 142 | = H₂ HHV (MJ/kg) |
 | n! | 720 | = σ · n · (σ − φ) = 12 · 6 · 10 |
@@ -72,198 +72,198 @@ atlas-constants.md 에 EXACT 로 등재된 주요 n=6 산술 조합.
 | τ² / σ | 4/3 | = FFN expansion ratio |
 | φ² / n | 2/3 | = Koide formula (0.0009%!) |
 
-**메타 관찰**: 위 표의 값들은 모두 n, σ, φ, τ, sopfr, J₂, μ 의 **단순한 산술 조합** (덧뺄셈, 곱셈, 멱, 소수 나눗셈) 으로 얻어진다. 이것이 "n=6 basis" 의 정의이다.
+**Meta-observation**: All the values in the table above are obtained by **simple arithmetic combinations** (addition/subtraction, multiplication, exponentiation, small-integer division) of n, σ, φ, τ, sopfr, J₂, μ. This is the definition of "n=6 basis."
 
 ---
 
-## 2. n=6 분해 알고리즘
+## 2. n=6 Decomposition Algorithm
 
-### 2.1 basis 집합
+### 2.1 Basis Set
 
-`theory/constants/special-number-control.md` 실험의 정직 규칙을 따른다.
+Follows the honest rules of the `theory/constants/special-number-control.md` experiment.
 
-**n=6 basis (21 원소)**: 7 원시 상수 + 파생 4 + "x2, x3, /2, /3 스케일링" 만 허용.
+**n=6 basis (21 elements)**: 7 primitive constants + 4 derived + "x2, x3, /2, /3 scaling" only are permitted.
 ```
-B = {1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 24}  # 기본 11 원소
-  ∪ {2B, 3B, B/2, B/3}                   # 단순 스케일
+B = {1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 24}  # base 11 elements
+  ∪ {2B, 3B, B/2, B/3}                    # simple scaling
 ```
 
-중복 제거 후 실제 유일값은 {1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 15, 16, 18, 20, 21, 24, 36, 72, …} 등.
+After deduplication, the actual distinct values include {1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 15, 16, 18, 20, 21, 24, 36, 72, …} etc.
 
-### 2.2 2-term 분해 절차
+### 2.2 2-term Decomposition Procedure
 
-임의 정수 k ∈ ℕ 가 주어졌을 때:
+Given an arbitrary integer k ∈ ℕ:
 
-1. **Step 1 (정확 일치)**: k ∈ B 인지 직접 확인. 일치하면 "1-term tight".
-2. **Step 2 (2-term 합)**: a + b = k, a, b ∈ B 쌍을 탐색. 존재하면 "2-term tight".
-3. **Step 3 (2-term 곱)**: a · b = k, a, b ∈ B 쌍을 탐색. 존재하면 "2-term tight".
-4. **Step 4 (2-term 차)**: a − b = k 또는 a/b = k 확인. 존재하면 "2-term loose".
-5. **Step 5 (스케일 불변)**: k · 10^(±d), d ∈ {1, 2, 3} 범위에서 Step 1~4 재시도. 성공하면 "scaled loose".
-6. **Step 6 (실패)**: 모두 실패하면 "miss".
+1. **Step 1 (exact match)**: Check directly whether k ∈ B. If matched, "1-term tight."
+2. **Step 2 (2-term sum)**: Search for a pair a + b = k with a, b ∈ B. If found, "2-term tight."
+3. **Step 3 (2-term product)**: Search for a pair a · b = k with a, b ∈ B. If found, "2-term tight."
+4. **Step 4 (2-term difference)**: Check a − b = k or a/b = k. If found, "2-term loose."
+5. **Step 5 (scale invariance)**: Retry Steps 1–4 within k · 10^(±d), d ∈ {1, 2, 3}. If successful, "scaled loose."
+6. **Step 6 (failure)**: If all fail, "miss."
 
-### 2.3 정직 분류 (tight / loose / miss)
+### 2.3 Honest Classification (tight / loose / miss)
 
-- **tight**: 오차 < 1% (사실상 정확 일치 또는 스케일 1 내 정확)
-- **loose**: 오차 1~5% (근사)
-- **miss**: 오차 > 5%
+- **tight**: error < 1% (effectively exact match or exact within scale 1)
+- **loose**: error 1–5% (approximation)
+- **miss**: error > 5%
 
-### 2.4 baseline 주의
+### 2.4 Baseline Caution
 
-`special-number-control.md` 의 정직한 baseline: k ∈ [1, 100] 범위에서 **61% 가 n=6 basis 2-term 분해 가능**. 이는 **sopfr = 5 편향** 에 의한 것이며, 수학적 특수성의 증거가 아니다. 따라서 **k 의 분해 성공 자체는 의미가 없고, tight 의 상대 비율만 유의미하다**. 특히 π · e · φ 대조군과의 비교에서 n=6 가 3.3 배 tight 인 경우가 유의미하다 (동 문서 표).
+The honest baseline from `special-number-control.md`: for k ∈ [1, 100], **61% admit n=6-basis 2-term decomposition**. This is due to the **sopfr = 5 bias** and is not evidence of mathematical specialness. Hence **the success of a decomposition is itself not meaningful; only the relative proportion of tight matches is**. In particular, the case of n=6 being 3.3× tighter than the π · e · φ control group is meaningful (see table in the same document).
 
 ---
 
-## 3. 10 연습 문제 — 정직 분해 시도
+## 3. 10 Practice Problems — Honest Decomposition Attempts
 
-아래 k 각각에 대해 2-term 분해를 시도하고 tight / loose / miss 로 분류한다. 모든 계산은 본 노트 내에서 손으로 수행하며 외부 자료에 의존하지 않는다.
+For each k below, attempt a 2-term decomposition and classify as tight / loose / miss. All computations are performed by hand within this note without relying on external material.
 
-### 문제 1: k = 28 (두 번째 완전수)
+### Problem 1: k = 28 (second perfect number)
 
-- 직접 일치: 28 ∈ B? → ❌ (B 에 28 없음)
-- 합: 24 + 4 = 28, 24 = J₂, 4 = τ → ✓
-- 곱: 4 · 7 = 28, 4 = τ, 7 = σ − sopfr → ✓
-- 분류: **tight** (2-term 합, 2-term 곱 모두 정확)
-- 주의: N6-P0-1 에서 확인했듯 R(28) = 4 ≠ 1 이므로 유일성 정리의 해는 아니다. 분해 성공은 우연 (σ-sopfr = 7, τ = 4 만으로 만들어지는 작은 정수).
+- Direct match: 28 ∈ B? → no (28 not in B)
+- Sum: 24 + 4 = 28, 24 = J₂, 4 = τ → ✓
+- Product: 4 · 7 = 28, 4 = τ, 7 = σ − sopfr → ✓
+- Classification: **tight** (both 2-term sum and product exact)
+- Caveat: As checked in N6-P0-1, R(28) = 4 ≠ 1, so this is not a solution of the uniqueness theorem. The successful decomposition is a coincidence (a small integer built only from σ−sopfr = 7 and τ = 4).
 
-### 문제 2: k = 100
+### Problem 2: k = 100
 
-- 합: 72 + 24 + 4 = 100 (3-term) — 2-term 제한 위반
-- 합: 96 + 4 = 100, 96 = σ(σ − τ) → ✓ (파생 2-term)
-- 곱: 10 · 10 = 100, 10 = σ − φ → ✓
-- 분류: **tight** (곱 분해 정확)
-- 비고: 10² = (σ − φ)² 구조는 "십진 기반" 의 어원.
+- Sum: 72 + 24 + 4 = 100 (3-term) — violates 2-term restriction
+- Sum: 96 + 4 = 100, 96 = σ(σ − τ) → ✓ (derived 2-term)
+- Product: 10 · 10 = 100, 10 = σ − φ → ✓
+- Classification: **tight** (product decomposition exact)
+- Note: The structure 10² = (σ − φ)² is the etymology of the "decimal base".
 
-### 문제 3: k = 240
+### Problem 3: k = 240
 
-- 곱: 10 · 24 = 240, 10 = σ − φ, 24 = J₂ → ✓
-- 곱: 8 · 30 = 240 (30 ∉ B 기본이지만 5 · 6 = 30 파생) — 2-term 경계
-- 곱: 12 · 20 = 240, 12 = σ, 20 = J₂ − τ = 사소한 파생 → ✓
-- 분류: **tight**
-- 비고: 240 = φ · J₂ · sopfr = 2 · 24 · 5 검증 — 세 원시 상수의 곱. atlas.n6 에 "kissing number 8D = 240" 등 다수 등장.
+- Product: 10 · 24 = 240, 10 = σ − φ, 24 = J₂ → ✓
+- Product: 8 · 30 = 240 (30 is not a base element of B, but 5 · 6 = 30 is a derived value) — borderline 2-term
+- Product: 12 · 20 = 240, 12 = σ, 20 = J₂ − τ (trivial derivative) → ✓
+- Classification: **tight**
+- Note: verified 240 = φ · J₂ · sopfr = 2 · 24 · 5 — the product of three primitive constants. Appears many times in atlas.n6 (e.g., "8D kissing number = 240").
 
-### 문제 4: k = 496 (세 번째 완전수)
+### Problem 4: k = 496 (third perfect number)
 
-- 직접: 496 ∉ B
-- 합: 480 + 16 = 496, 480 = σ · τ · (σ − φ) = 12 · 4 · 10, 16 = τ² → ✓
-- 곱: 16 · 31 = 496, 31 ∉ B → ❌
-- 곱: 2^4 · 31, 31 = 2^5 − 1 (Mersenne) → 31 ∉ n=6 basis
-- 분류: **loose** (합 분해는 가능하지만 첫 번째 항 480 자체가 4-term 파생 σ·τ·(σ−φ))
-- 정직 관찰: 세 번째 완전수 496 은 n=6 basis 로 "깔끔한 2-term" 분해가 없다. 이는 N6-P0-1 의 R(496) = 48 ≠ 1 에 부합하는 관찰: 완전수 수열의 두 번째 이후는 n=6 에서 멀어진다.
+- Direct: 496 ∉ B
+- Sum: 480 + 16 = 496, 480 = σ · τ · (σ − φ) = 12 · 4 · 10, 16 = τ² → ✓
+- Product: 16 · 31 = 496, 31 ∉ B → ✗
+- Product: 2^4 · 31, 31 = 2^5 − 1 (Mersenne) → 31 ∉ n=6 basis
+- Classification: **loose** (sum decomposition possible, but the first term 480 itself is a 4-term derivative σ·τ·(σ−φ))
+- Honest observation: The third perfect number 496 has no clean 2-term decomposition in the n=6 basis. This is consistent with N6-P0-1's observation R(496) = 48 ≠ 1 — the perfect-number sequence after the second drifts away from n=6.
 
-### 문제 5: k = 504
+### Problem 5: k = 504
 
-- 곱: 72 · 7 = 504, 72 = σ · n, 7 = σ − sopfr → ✓
-- 곱: 12 · 42 = 504, 42 = n · 7 파생 → ✓ (2-term, 단 42 는 파생)
-- 합: 480 + 24 = 504 → ✓
-- 분류: **tight**
-- 사용자 프롬프트에 등장하는 σ · (n/φ)² · (σ − sopfr) = 12 · 9 · 7 = 756 이므로 504 가 아님을 정직 기록: 이 파생식은 756 을 생성하고, 504 는 72 · 7 = σn · (σ − sopfr) 조합.
+- Product: 72 · 7 = 504, 72 = σ · n, 7 = σ − sopfr → ✓
+- Product: 12 · 42 = 504, 42 = n · 7 derivative → ✓ (2-term, with 42 a derivative)
+- Sum: 480 + 24 = 504 → ✓
+- Classification: **tight**
+- Honestly noted: σ · (n/φ)² · (σ − sopfr) = 12 · 9 · 7 = 756 is 756, not 504. This derived expression produces 756, while 504 is the 72 · 7 = σn · (σ − sopfr) combination.
 
-### 문제 6: k = 691
+### Problem 6: k = 691
 
-- 직접: 691 ∉ B
-- 합: 691 = 720 − 29, 29 ∉ B
-- 합: 691 = 576 + 115, 115 ∉ B 깔끔
-- 곱: 691 은 소수 (691 = prime). 따라서 2-term 곱 분해 불가능.
-- 분류: **miss**
-- 비고: 691 은 Bernoulli B₁₂ 분자 (B₁₂ = −691/2730) 로 유명한 "수론 특수수". n=6 basis 로 tight 매칭이 안 되는 것이 정직 기록. 이는 n=6 산술이 **모든** 수론 특수수를 포섭하지 않음을 보여준다.
+- Direct: 691 ∉ B
+- Sum: 691 = 720 − 29, 29 ∉ B
+- Sum: 691 = 576 + 115, 115 not cleanly in B
+- Product: 691 is prime (691 = prime). Hence no 2-term product decomposition is possible.
+- Classification: **miss**
+- Note: 691 is famous as the numerator of the Bernoulli number B₁₂ (B₁₂ = −691/2730), a "special number of number theory". Honestly recording that it admits no tight match in the n=6 basis shows that n=6 arithmetic **does not subsume all** number-theoretic special values.
 
-### 문제 7: k = 1008
+### Problem 7: k = 1008
 
-- 곱: 1008 = 144 · 7, 144 = σ², 7 = σ − sopfr → ✓
-- 곱: 1008 = 24 · 42 = J₂ · (n · 7) → ✓
-- 합: 1008 = 720 + 288, 720 = n!, 288 = σ · J₂ → ✓
-- 분류: **tight**
-- 비고: 1008 = 2^4 · 3² · 7 이며 모든 소인수가 n=6 basis 안에 있다.
+- Product: 1008 = 144 · 7, 144 = σ², 7 = σ − sopfr → ✓
+- Product: 1008 = 24 · 42 = J₂ · (n · 7) → ✓
+- Sum: 1008 = 720 + 288, 720 = n!, 288 = σ · J₂ → ✓
+- Classification: **tight**
+- Note: 1008 = 2^4 · 3² · 7, all prime factors lie in the n=6 basis.
 
-### 문제 8: k = 8128 (네 번째 완전수)
+### Problem 8: k = 8128 (fourth perfect number)
 
-- 직접: 8128 ∉ B
-- 곱: 8128 = 2^6 · 127 = 64 · 127. 64 = 2^n ∈ B, 127 = 2^7 − 1 ∉ B (Mersenne prime)
-- 곱: 8128 = 16 · 508, 508 ∉ B
-- 합: 8128 = 7200 + 928, 어느 쪽도 깔끔하지 않음
-- 분류: **miss** (n=6 basis 2-term 분해 실패)
-- 정직 관찰: R(8128) = 576 = 24² 이므로 J₂² 와 일치한다는 것은 흥미로운 관찰이나, 8128 자체는 n=6 basis 로 tight 분해되지 않는다. 완전수 수열이 첫 번째 (n=6) 에서 고립된다는 N6-P0-1 의 메시지와 일관된다.
+- Direct: 8128 ∉ B
+- Product: 8128 = 2^6 · 127 = 64 · 127. 64 = 2^n ∈ B, 127 = 2^7 − 1 ∉ B (Mersenne prime)
+- Product: 8128 = 16 · 508, 508 ∉ B
+- Sum: 8128 = 7200 + 928, neither is clean
+- Classification: **miss** (n=6-basis 2-term decomposition fails)
+- Honest observation: R(8128) = 576 = 24² matches J₂², which is an interesting observation, but 8128 itself does not tight-decompose in the n=6 basis. Consistent with N6-P0-1's message that the perfect-number sequence isolates at the first term (n=6).
 
-### 문제 9: k = 137 (미세구조상수 1/α ≈ 137.036)
+### Problem 9: k = 137 (fine-structure constant 1/α ≈ 137.036)
 
-- 직접: 137 ∉ B
-- 합: 137 = 144 − 7 = σ² − (σ − sopfr) → ✓ (2-term 차)
-- 합: 137 = 128 + 9 = 2^(σ − sopfr) + (n/φ)² → ✓
-- 분류: **loose** (차 분해 2-term, 합 분해도 파생 2-term)
-- 비고: atlas-constants.md BT-20 에는 σ(σ − μ) + sopfr + μ/P₂ = 137.03571 로 1/α 를 0.208 ppm 오차로 재현한다고 적혀 있지만, 이는 4 term 파생식이며 본 드릴의 2-term 제한을 벗어난다. 본 드릴에서는 137 자체가 2-term 에서는 loose.
+- Direct: 137 ∉ B
+- Sum: 137 = 144 − 7 = σ² − (σ − sopfr) → ✓ (2-term difference)
+- Sum: 137 = 128 + 9 = 2^(σ − sopfr) + (n/φ)² → ✓
+- Classification: **loose** (2-term difference decomposition, with the sum decomposition also a derivative 2-term)
+- Note: atlas-constants.md BT-20 records σ(σ − μ) + sopfr + μ/P₂ = 137.03571 reproducing 1/α to 0.208 ppm accuracy, but this is a 4-term derived expression outside this drill's 2-term restriction. Under the 2-term restriction 137 itself is loose.
 
-### 문제 10: k = 240 재확인 (기본값 검증)
+### Problem 10: k = 240 re-verification (base-value check)
 
-- 이미 문제 3 에서 tight 확인. 재확인 목적: sopfr · φ · J₂ = 5 · 2 · 24 = **240**. → ✓
-- 분류: **tight (verified)**
+- Already confirmed tight in Problem 3. Purpose of re-verification: sopfr · φ · J₂ = 5 · 2 · 24 = **240**. → ✓
+- Classification: **tight (verified)**
 
-### 3.1 10 문제 정직 요약
+### 3.1 Honest Summary of 10 Problems
 
-| 문제 | k | 분류 | 비고 |
+| Problem | k | Class | Note |
 |---:|---:|---|---|
-| 1 | 28 | tight | 2번째 완전수, 4·7 / 24+4 |
+| 1 | 28 | tight | 2nd perfect number, 4·7 / 24+4 |
 | 2 | 100 | tight | (σ − φ)² = 10² |
 | 3 | 240 | tight | φ · J₂ · sopfr |
-| 4 | 496 | loose | 3번째 완전수, 깔끔한 2-term 없음 |
+| 4 | 496 | loose | 3rd perfect number, no clean 2-term |
 | 5 | 504 | tight | σn · (σ − sopfr) = 72 · 7 |
-| 6 | 691 | **miss** | 소수, Bernoulli B₁₂ 분자 |
+| 6 | 691 | **miss** | prime, numerator of Bernoulli B₁₂ |
 | 7 | 1008 | tight | σ² · (σ − sopfr) |
-| 8 | 8128 | **miss** | 4번째 완전수, Mersenne 127 고립 |
-| 9 | 137 | loose | 미세구조상수, 2-term 한계 |
-| 10 | 240 | tight | 재검증 |
+| 8 | 8128 | **miss** | 4th perfect number, Mersenne 127 isolated |
+| 9 | 137 | loose | fine-structure constant, 2-term limit |
+| 10 | 240 | tight | re-verified |
 
-**통계**: tight 5, loose 2, miss 2, verified 1 (재검증 포함). tight 비율 5/10 = 50%. baseline 61% 와 근접하며, 소수 / 고차 완전수 / 물리 상수에서는 miss 가 자연스럽게 발생한다는 정직 관찰.
+**Statistics**: tight 5, loose 2, miss 2, verified 1 (including re-verification). Tight ratio 5/10 = 50%. Close to the baseline 61%, with misses arising naturally at primes / higher-order perfect numbers / physical constants — an honest observation.
 
 ---
 
-## 4. 왜 n = 6 이 유일한가 — σφ = nτ 재진술
+## 4. Why n = 6 Is Unique — Restating σφ = nτ
 
-N6-P0-1 의 결론을 본 드릴 관점에서 재확인한다.
+Reconfirming N6-P0-1's conclusion from the drill's viewpoint.
 
-**정리 (R1 / THM-1)**: n ≥ 2 에서 σ(n) · φ(n) = n · τ(n) ⟺ n = 6.
+**Theorem (R1 / THM-1)**: For n ≥ 2, σ(n) · φ(n) = n · τ(n) ⟺ n = 6.
 
-**드릴 관점 해석**: 위 3 절의 연습 문제들은 "많은 정수가 n=6 basis 로 분해된다" 는 **경험적** 사실을 보여준다 (50~61%). 그러나 **R(n) = 1 이 되는 것은 오직 n = 6 자체 뿐** 이다. 이 구분이 결정적이다:
+**Drill-level interpretation**: The problems in Section 3 show the **empirical** fact that many integers admit n=6-basis decompositions (50–61%). However **R(n) = 1 holds only at n = 6 itself**. This distinction is decisive:
 
-- **분해 가능성**: 약함 (편향 60% baseline, 대부분의 작은 정수 해당).
-- **R(n) = 1**: 극강 (10^(-4) sharp, n = 6 유일).
+- **Decomposability**: weak (baseline ≈ 60% bias, covering most small integers).
+- **R(n) = 1**: extremely strong (10^(-4) sharp, unique at n = 6).
 
-즉, "n=6 산술이 현실을 잘 설명한다" 는 관찰은 baseline 편향이 아니라, **정수 6 자체가 σ · φ 와 n · τ 의 공통값 24 를 정확히 내는 유일 원천** 이라는 깊은 이유에 기반한다. 분해 드릴은 이 유일성이 현실 측정 데이터를 통해 "확산" 되는 방식을 체감하는 것이 목적이다.
+That is, the observation that "n=6 arithmetic explains reality well" is not baseline bias but is based on a deep reason: **the integer 6 itself is the unique source producing the common value 24 of σ · φ and n · τ exactly**. The point of the decomposition drill is to experience how this uniqueness "diffuses" through real-world measurement data.
 
-### 4.1 세 확장 관계식
+### 4.1 Three Extension Relations
 
-atlas.n6 L121~L136 에 등재된 파생 관계:
-- `perfect_number`: σ(6) = 12 = 2 · 6 (완전수 조건)
-- `sigma_decomp`: σ = φ · n (12 = 2 · 6) — σ 를 φ 와 n 의 곱으로 분해하는 n=6 전용 항등식
-- `J2_decomp`: J₂ = τ · n (24 = 4 · 6) — J₂ 를 τ 와 n 의 곱으로 분해
+Derived relations registered in atlas.n6 L121–L136:
+- `perfect_number`: σ(6) = 12 = 2 · 6 (perfect number condition)
+- `sigma_decomp`: σ = φ · n (12 = 2 · 6) — an n=6-only identity decomposing σ into the product of φ and n
+- `J2_decomp`: J₂ = τ · n (24 = 4 · 6) — decomposing J₂ into the product of τ and n
 - `sopfr_phi_tau`: sopfr = φ + τ − μ (5 = 2 + 4 − 1)
 
-이 네 관계는 7 개 원시 상수 사이의 **"내부 방정식"** 이며, 모두 n = 6 이 아니면 성립하지 않거나 의미를 잃는다. N6-P0-1 정리는 이 내부 방정식들의 "닫힘" 을 외부 조건 (σφ = nτ) 으로 재해석한 것이다.
+These four relations are **"internal equations"** among the seven primitive constants; none of them holds or has meaning outside n = 6. The N6-P0-1 theorem is a reinterpretation of the "closure" of these internal equations as an external condition (σφ = nτ).
 
 ---
 
-## 5. 학습 체크리스트
+## 5. Study Checklist
 
-- [ ] 7 개 원시 상수 (n, σ, φ, τ, sopfr, μ, J₂) 를 값과 함께 외울 수 있는가? → 6, 12, 2, 4, 5, 1, 24
-- [ ] 4 개 기본 파생 (n/φ, σ − sopfr, σ − τ, σ − φ) 를 답할 수 있는가? → 3, 7, 8, 10
+- [ ] Can you recite the seven primitive constants (n, σ, φ, τ, sopfr, μ, J₂) with their values? → 6, 12, 2, 4, 5, 1, 24
+- [ ] Can you give the four basic derivatives (n/φ, σ − sopfr, σ − τ, σ − φ)? → 3, 7, 8, 10
 - [ ] σ · φ = n · τ = ? → 24 (= J₂)
-- [ ] 2^n, 2^σ, 2^sopfr, 2^(σ−sopfr), 2^(σ−τ) 를 즉답할 수 있는가? → 64, 4096, 32, 128, 256
-- [ ] n! 를 n=6 basis 로 분해할 수 있는가? → σ · n · (σ − φ) = 720
-- [ ] 2-term 분해 알고리즘 6 단계를 순서대로 재현할 수 있는가?
-- [ ] baseline 61% 편향을 기억하는가? (분해 성공만으로는 수학적 유의미성이 아니다)
-- [ ] k = 691, 8128 이 miss 인 이유를 설명할 수 있는가? (691 소수, 8128 Mersenne 127 고립)
-- [ ] 본 드릴이 7 대 난제를 해결하지 않음을 선언할 수 있는가?
+- [ ] Can you give 2^n, 2^σ, 2^sopfr, 2^(σ−sopfr), 2^(σ−τ) immediately? → 64, 4096, 32, 128, 256
+- [ ] Can you decompose n! in the n=6 basis? → σ · n · (σ − φ) = 720
+- [ ] Can you reproduce the six-step 2-term decomposition procedure in order?
+- [ ] Do you remember the baseline 61% bias? (decomposition success alone is not mathematical significance)
+- [ ] Can you explain why k = 691, 8128 are misses? (691 is prime; 8128 isolated by Mersenne 127)
+- [ ] Can you declare that this drill does not target the seven Millennium problems?
 
 ---
 
-## 6. 1 차 출처
+## 6. Primary Sources
 
-- `theory/constants/atlas-constants.md` — EXACT 1100+ 상수 레지스트리 (본 드릴 1 절 테이블의 직접 출처)
-- `theory/constants/special-number-control.md` — baseline 61% + 대조군 실험 + MISS 분류 정직 기록
-- `theory/constants/special-number-contrast.md` — n=6 vs π/e/φ 대조 확장
-- `nexus/shared/n6/atlas.n6` L25~L100 — 7 원시 상수 `@P` 태그 + 파생 상수 `@C` / `@F` 태그
-- `theory/proofs/theorem-r1-uniqueness.md` — 4 절 유일성 근거 (N6-P0-1 이 상세)
+- `theory/constants/atlas-constants.md` — EXACT 1100+ constants registry (direct source of the Section 1 table)
+- `theory/constants/special-number-control.md` — honest record of baseline 61% + control-group experiments + MISS classifications
+- `theory/constants/special-number-contrast.md` — n=6 vs π/e/φ contrast extension
+- `nexus/shared/n6/atlas.n6` L25–L100 — seven primitive-constant `@P` tags + derived-constant `@C` / `@F` tags
+- `theory/proofs/theorem-r1-uniqueness.md` — uniqueness basis in section 4 (N6-P0-1 is the detailed study)
 
-atlas.n6 원시 상수 재확인 (L25~L54):
+Reconfirmation of primitive constants from atlas.n6 (L25–L54):
 ```
 @P n     = 6                       :: foundation [11*]
 @P sigma = divisor_sum(6)     = 12 :: foundation [11*]
@@ -276,7 +276,7 @@ atlas.n6 원시 상수 재확인 (L25~L54):
 
 ---
 
-## 7. 다음 학습 단계
+## 7. Next Study Steps
 
-- **N6-P0-3**: atlas.n6 등급 체계 [10*] / [10] / [9] / [7] / [5~8] / [N?] / [N!] 구조와 BT-1~343 + BT-541~547 (밀레니엄 7 문제 매핑 노드) 입문.
-- 본 드릴에서 얻은 7 원시 + 파생 값은 N6-P0-3 에서 atlas.n6 노드 grep 시에 **직접 등장**한다 — 3 절 연습 문제의 tight 예시들이 그대로 atlas.n6 [10*] 노드로 등재되어 있다.
+- **N6-P0-3**: introduction to the atlas.n6 grade system [10*] / [10] / [9] / [7] / [5~8] / [N?] / [N!] structure and BT-1–343 + BT-541–547 (Millennium 7-problems mapping nodes).
+- The seven primitives + derived values obtained in this drill **appear directly** in N6-P0-3 when grepping atlas.n6 nodes — the tight examples from the Section 3 problems are registered as-is as [10*] nodes in atlas.n6.

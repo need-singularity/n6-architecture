@@ -1,64 +1,58 @@
-# PURE-P0-1 정수론 기초 학습 노트
+# PURE-P0-1 Foundations of Number Theory Study Note
 
-> 트랙: millennium-learning / P0 / PURE 1번
-> 포맷: 자체 완결 학습 노트
-> 접근 원칙: **순수 수학을 먼저 전개하고, n=6 산술은 사후 관찰로만 기록한다**
-> 작성 기준일: 2026-04-15
-
----
-
-## 0. 이 노트의 목적
-
-본 노트는 n6-architecture 프로젝트의 millennium-learning 로드맵 P0 단계에서
-**정수론 기초**를 체계적으로 정리한다. 다음 5개 주제를 자체 완결 방식으로 설명하고,
-마지막 절에서 프로젝트의 핵심 정리 `σ(n)·φ(n) = n·τ(n) ⟺ n = 6` 를 독립 서술
-(Proof 1: 곱셈적 분해 + 국소 경우분석)한다.
-
-1. 소수정리 π(x) ~ x/ln x, Chebyshev θ/ψ, Mertens 정리
-2. 약수함수 σ, τ, φ, J_k 정의와 곱셈성, 국소 공식
-3. 완전수와 유클리드-오일러 정리 (짝수 완전수 ↔ 메르센 소수)
-4. 뫼비우스 함수 μ 와 뫼비우스 역공식
-5. 오일러 곱 공식 ζ(s) = ∏ (1-p^{-s})^{-1}
-
-각 절 끝에는 **1차 출처**를 교과서 장/절 번호까지 명시한다. 마지막 절은 Hardy-Wright
-/ Apostol / Ireland-Rosen 의 대응 장을 교차 참조한다.
-
-정직성 서약은 마지막에 있다.
+> Track: millennium-learning / P0 / PURE #1
+> Format: self-contained study note
+> Approach principle: **develop pure mathematics first, and record n=6 arithmetic only as a posteriori observation**
+> Drafted: 2026-04-15
 
 ---
 
-## 1. 소수정리 (Prime Number Theorem, PNT)
+## 0. Purpose of This Note
 
-### 1.1 π(x) 의 정의
+This note systematically organizes **foundations of number theory** at P0 stage of the n6-architecture project's millennium-learning roadmap. It covers five topics in a self-contained manner and, in its final section, independently writes out the project's core theorem `σ(n)·φ(n) = n·τ(n) ⟺ n = 6` (Proof 1: multiplicative decomposition + local case analysis).
+
+1. Prime number theorem π(x) ~ x/ln x, Chebyshev θ/ψ, Mertens' theorem
+2. Divisor functions σ, τ, φ, J_k: definitions and multiplicativity, local formulas
+3. Perfect numbers and the Euclid-Euler theorem (even perfect ↔ Mersenne prime)
+4. Möbius function μ and Möbius inversion formula
+5. Euler product formula ζ(s) = ∏ (1-p^{-s})^{-1}
+
+At the end of each section the **primary sources** are cited down to chapter/section number of the textbook. The final section cross-references the corresponding chapters of Hardy-Wright / Apostol / Ireland-Rosen.
+
+Honesty declaration is at the end.
+
+---
+
+## 1. Prime Number Theorem (PNT)
+
+### 1.1 Definition of π(x)
 
 ```
-π(x) := #{ p ∈ ℕ : p 소수, p ≤ x },   x ∈ ℝ_{>0}.
+π(x) := #{ p ∈ ℕ : p prime, p ≤ x },   x ∈ ℝ_{>0}.
 ```
 
-유클리드 (원론 IX.20) 는 소수가 무한히 많음을 증명했다. 유한 개라 가정하고
-{p₁, …, p_n} 이 모두라 하자. N = p₁·p₂·…·p_n + 1 은 어느 p_i 로도 나누어지지 않으므로
-소인수가 집합 밖에 존재한다. 모순.
+Euclid (Elements IX.20) proved the infinitude of primes. Suppose there are finitely many, {p₁, …, p_n}. Then N = p₁·p₂·…·p_n + 1 is not divisible by any p_i, so a prime factor lies outside the set. Contradiction.
 
-### 1.2 Chebyshev 함수
+### 1.2 Chebyshev Functions
 
-본격적 점근 분석을 위해 **로그 가중치** 카운트를 도입한다.
+For proper asymptotic analysis introduce **log-weighted** counts.
 
 ```
-θ(x) := Σ_{p ≤ x, p 소수}        ln p
-ψ(x) := Σ_{p^k ≤ x, p 소수, k ≥ 1} ln p
+θ(x) := Σ_{p ≤ x, p prime}        ln p
+ψ(x) := Σ_{p^k ≤ x, p prime, k ≥ 1} ln p
      = Σ_{n ≤ x} Λ(n)
 ```
 
-여기서 **폰 망골트(von Mangoldt)** 함수 Λ 는
+Here the **von Mangoldt** function Λ is
 
 ```
 Λ(n) = { ln p   if n = p^k (k ≥ 1)
        { 0      otherwise.
 ```
 
-### 1.3 세 동치
+### 1.3 Three Equivalences
 
-다음 세 진술은 서로 **동치**이다 (Apostol, ch.4 §4.3).
+The following three statements are **equivalent** (Apostol, ch. 4 §4.3).
 
 ```
 (i)   π(x) ~ x / ln x
@@ -66,136 +60,125 @@
 (iii) ψ(x) ~ x
 ```
 
-- (i) ⇔ (ii) 는 Abel 부분합 변환 (θ(x) = Σ ln p, π(x) = Σ 1) 로 직접 도출된다.
-- (ii) ⇔ (iii) 은 ψ(x) - θ(x) = O(√x · ln² x) = o(x).
+- (i) ⇔ (ii) follows directly via Abel summation (θ(x) = Σ ln p, π(x) = Σ 1).
+- (ii) ⇔ (iii) via ψ(x) - θ(x) = O(√x · ln² x) = o(x).
 
-### 1.4 Chebyshev 부등식 (1852)
+### 1.4 Chebyshev Inequality (1852)
 
-PNT 이전의 최선 결과. **초등적 방법** (이항계수 로그 분석) 으로
+The best result before PNT. By **elementary methods** (log analysis of binomial coefficients)
 
 ```
 0.921 · x/ln x ≤ π(x) ≤ 1.106 · x/ln x   (x ≫ 1)
 ```
 
-을 얻는다. 핵심 도구는 Σ_{p ≤ 2n} ln p ≤ 2n · ln 2 (이항계수 C(2n,n) 의 소인수 분해).
+The key tool is Σ_{p ≤ 2n} ln p ≤ 2n · ln 2 (prime factorization of C(2n,n)).
 
-**Bertrand 가설**: 모든 n ≥ 1 에 대해 n < p ≤ 2n 인 소수 p 가 존재한다.
-Chebyshev 가 1852년 증명. Erdős (1932) 의 초등 증명도 유명.
+**Bertrand's postulate**: For every n ≥ 1 there exists a prime p with n < p ≤ 2n.
+Proved by Chebyshev in 1852. Erdős's (1932) elementary proof is also famous.
 
 ### 1.5 PNT (Hadamard & de la Vallée Poussin 1896)
 
-**정리**. ψ(x) ~ x. 따라서 π(x) ~ x/ln x.
+**Theorem**. ψ(x) ~ x. Hence π(x) ~ x/ln x.
 
-**증명 개요** (해석적). Riemann 제타 함수 ζ(s) = Σ n^{-s} (Re s > 1) 는 s = 1 을
-단순극으로 하는 유리형 함수로 C 전체에 해석적 연속된다. 다음이 성립한다.
+**Proof sketch** (analytic). The Riemann zeta function ζ(s) = Σ n^{-s} (Re s > 1) is a meromorphic function on ℂ with a simple pole at s = 1 and has an analytic continuation to the whole plane. The following holds.
 
 ```
 -ζ'(s)/ζ(s) = Σ Λ(n) n^{-s}     (Re s > 1)
 ```
 
-Perron 공식에 의해
+By Perron's formula,
 
 ```
 ψ(x) = (1/2πi) ∫_{c-i∞}^{c+i∞} (-ζ'(s)/ζ(s)) · x^s / s ds.
 ```
 
-적분을 Re s = 1 경계로 옮길 때 장애는 오로지 **ζ(s) 의 영점**이다.
-Hadamard 와 de la Vallée Poussin 의 핵심 기여: **ζ(1+it) ≠ 0** (t ∈ ℝ).
-이 사실에서 ψ(x) = x + o(x) 가 나온다.
+The obstruction when shifting the contour to Re s = 1 is precisely the **zeros of ζ(s)**. Hadamard and de la Vallée Poussin's core contribution: **ζ(1+it) ≠ 0** (t ∈ ℝ). From this, ψ(x) = x + o(x) follows.
 
-### 1.6 오차항과 리만 가설
+### 1.6 Error Term and Riemann Hypothesis
 
-**더 정확하게** (de la Vallée Poussin 1899)
+**More precisely** (de la Vallée Poussin 1899)
 
 ```
 π(x) = Li(x) + O(x · exp(-c √(ln x)))
 ```
 
-여기서 Li(x) := ∫₂^x dt/ln t. **리만 가설**이 참이면
+where Li(x) := ∫₂^x dt/ln t. Under the **Riemann hypothesis**
 
 ```
 π(x) = Li(x) + O(√x · ln x)
 ```
 
-로 개선된다. 이것은 millennium 난제 BT-542.
+improves the estimate. This is Millennium problem BT-542.
 
-### 1.7 Mertens 정리 (1874)
+### 1.7 Mertens' Theorems (1874)
 
-PNT 이전 단계에서 얻는 **로그 평균** 결과 3개.
+Three **log-mean** results obtained before the PNT stage.
 
-**정리 1 (Mertens)**.
+**Theorem 1 (Mertens)**.
 
 ```
 Σ_{p ≤ x} ln p / p = ln x + M₁ + o(1)
 ```
 
-M₁ 는 상수.
+M₁ is a constant.
 
-**정리 2**.
+**Theorem 2**.
 
 ```
 Σ_{p ≤ x} 1/p = ln ln x + M + o(1)
 ```
 
-여기서 M ≈ 0.2614972… 는 **Meissel-Mertens 상수**.
+Here M ≈ 0.2614972… is the **Meissel-Mertens constant**.
 
-**정리 3**.
+**Theorem 3**.
 
 ```
 ∏_{p ≤ x} (1 - 1/p) ~ e^{-γ} / ln x
 ```
 
-γ 는 Euler-Mascheroni 상수. 이 공식은 Rosser-Schoenfeld 부등식의 기초이며,
-σ/n 의 극한 분석과 직결된다.
+γ is the Euler-Mascheroni constant. This formula underlies Rosser-Schoenfeld inequalities and connects directly with limit analysis of σ/n.
 
-**증명 요약 (정리 2)**. Abel 부분합을 θ(x) ≤ x·C 에 적용. Chebyshev 부등식만으로
-충분하며 PNT 는 필요하지 않다.
+**Proof summary (Theorem 2)**. Apply Abel summation to θ(x) ≤ x·C. Chebyshev's inequality suffices; PNT is not needed.
 
-### 1.8 1차 출처
+### 1.8 Primary Sources
 
-- Hardy-Wright, *An Introduction to the Theory of Numbers*, 6판,
-  ch.22 "The series of primes", §22.3~§22.10 (Chebyshev 부등식, Mertens).
-- Apostol, *Introduction to Analytic Number Theory*, Springer 1976,
-  ch.4 "Some elementary theorems on the distribution of prime numbers",
-  §4.2 Chebyshev ψ 와 θ, §4.5 Mertens, ch.13 "Analytic proof of the prime
-  number theorem".
-- Davenport, *Multiplicative Number Theory*, ch.7 (Hadamard 접근).
+- Hardy-Wright, *An Introduction to the Theory of Numbers*, 6th ed., ch. 22 "The series of primes", §22.3–§22.10 (Chebyshev inequality, Mertens).
+- Apostol, *Introduction to Analytic Number Theory*, Springer 1976, ch. 4 "Some elementary theorems on the distribution of prime numbers", §4.2 Chebyshev ψ and θ, §4.5 Mertens, ch. 13 "Analytic proof of the prime number theorem".
+- Davenport, *Multiplicative Number Theory*, ch. 7 (Hadamard approach).
 
 ---
 
-## 2. 약수함수 σ, τ, φ, J_k
+## 2. Divisor Functions σ, τ, φ, J_k
 
-### 2.1 기본 정의
+### 2.1 Basic Definitions
 
-n ∈ ℤ_{≥1} 에 대해
+For n ∈ ℤ_{≥1},
 
 ```
-τ(n) = #{ d ∈ ℕ : d | n }                  약수의 개수
-σ(n) = Σ_{d | n} d                          약수의 합
-σ_k(n) = Σ_{d | n} d^k                      k차 약수합 (σ = σ₁, τ = σ₀)
-φ(n) = #{ 1 ≤ a ≤ n : gcd(a, n) = 1 }       오일러 토션트
-J_k(n) = n^k · ∏_{p | n} (1 - p^{-k})        Jordan 토션트 (J₁ = φ)
+τ(n) = #{ d ∈ ℕ : d | n }                  count of divisors
+σ(n) = Σ_{d | n} d                          sum of divisors
+σ_k(n) = Σ_{d | n} d^k                      k-th divisor sum (σ = σ₁, τ = σ₀)
+φ(n) = #{ 1 ≤ a ≤ n : gcd(a, n) = 1 }       Euler totient
+J_k(n) = n^k · ∏_{p | n} (1 - p^{-k})        Jordan totient (J₁ = φ)
 ```
 
-### 2.2 곱셈성
+### 2.2 Multiplicativity
 
-함수 f : ℕ → ℂ 가 **곱셈적**이라 함은 gcd(m, n) = 1 ⇒ f(mn) = f(m)·f(n).
-**완전 곱셈적**은 gcd 조건 없이 항상 성립.
+A function f : ℕ → ℂ is **multiplicative** if gcd(m, n) = 1 ⇒ f(mn) = f(m)·f(n).
+**Totally multiplicative** means the equality holds without the gcd condition.
 
-**정리**. σ_k, τ, φ, J_k 는 모두 곱셈적이다.
+**Theorem**. σ_k, τ, φ, J_k are all multiplicative.
 
-**증명 (σ_k)**. gcd(m, n) = 1 이면 mn 의 약수는 d_m · d_n (d_m | m, d_n | n) 으로
-**유일하게** 분해된다. 따라서
+**Proof (σ_k)**. If gcd(m, n) = 1, every divisor of mn decomposes **uniquely** as d_m · d_n (d_m | m, d_n | n). Hence
 
 ```
 σ_k(mn) = Σ_{d_m | m} Σ_{d_n | n} (d_m d_n)^k
         = (Σ d_m^k)(Σ d_n^k) = σ_k(m) σ_k(n).  ∎
 ```
 
-φ 는 중국인 나머지 정리로부터 (ℤ/mnℤ)* ≅ (ℤ/mℤ)* × (ℤ/nℤ)* 라는 군 동형을 얻고,
-양변의 원소 수가 φ(mn) 와 φ(m)·φ(n) 임을 이용한다.
+For φ, use the group isomorphism (ℤ/mnℤ)* ≅ (ℤ/mℤ)* × (ℤ/nℤ)* from the Chinese Remainder Theorem; the orders of both sides are φ(mn) and φ(m)·φ(n).
 
-### 2.3 소수 멱 공식
+### 2.3 Prime-power Formulas
 
 ```
 τ(p^a)   = a + 1
@@ -205,9 +188,9 @@ J_k(n) = n^k · ∏_{p | n} (1 - p^{-k})        Jordan 토션트 (J₁ = φ)
 J_k(p^a) = p^{ka} - p^{k(a-1)} = p^{k(a-1)}(p^k - 1)
 ```
 
-### 2.4 소인수분해 일반식
+### 2.4 Prime-factorization Forms
 
-n = p₁^{a₁} · p₂^{a₂} · … · p_r^{a_r} 일 때
+For n = p₁^{a₁} · p₂^{a₂} · … · p_r^{a_r},
 
 ```
 τ(n) = ∏ (a_i + 1)
@@ -215,56 +198,54 @@ n = p₁^{a₁} · p₂^{a₂} · … · p_r^{a_r} 일 때
 φ(n) = n · ∏ (1 - 1/p_i)
 ```
 
-### 2.5 대표적 항등식
+### 2.5 Representative Identities
 
-- **Dirichlet 합성** 관점에서 τ = 1 ∗ 1, σ = id ∗ 1, φ = id ∗ μ.
-  여기서 (f ∗ g)(n) = Σ_{d | n} f(d) g(n/d).
-- **ζ 와의 관계**: Σ τ(n)/n^s = ζ(s)², Σ σ(n)/n^s = ζ(s)ζ(s-1),
+- In the **Dirichlet convolution** view τ = 1 ∗ 1, σ = id ∗ 1, φ = id ∗ μ,
+  where (f ∗ g)(n) = Σ_{d | n} f(d) g(n/d).
+- **Relations with ζ**: Σ τ(n)/n^s = ζ(s)², Σ σ(n)/n^s = ζ(s)ζ(s-1),
   Σ φ(n)/n^s = ζ(s-1)/ζ(s).
 
-### 2.6 부등식과 점근
+### 2.6 Inequalities and Asymptotics
 
-- τ(n) = O(n^ε) (∀ ε > 0). 정확하게는 τ(n) ≤ 2^{(1+o(1)) ln n / ln ln n}.
-- σ(n)/n 과 n/φ(n) 는 모두 ∏ (1 + 1/p_i + …) 꼴. 상한은 loglog 수준:
+- τ(n) = O(n^ε) (∀ ε > 0). More precisely, τ(n) ≤ 2^{(1+o(1)) ln n / ln ln n}.
+- σ(n)/n and n/φ(n) both have the form ∏ (1 + 1/p_i + …). Upper bound at loglog scale:
   Gronwall (1913): lim sup σ(n)/(n · ln ln n) = e^γ.
-- 하한은 n = 소수일 때 σ(n)/n = 1 + 1/n → 1, 따라서 lim inf = 1.
+- Lower bound: at primes n, σ(n)/n = 1 + 1/n → 1, so lim inf = 1.
 
-### 2.7 1차 출처
+### 2.7 Primary Sources
 
-- Hardy-Wright, ch.16 "The arithmetical functions φ(n), μ(n), d(n), σ(n), r(n)",
-  §16.3~§16.4 (곱셈성), §16.7 (소수 멱 공식).
-- Apostol, ch.2 "Arithmetical functions and Dirichlet multiplication",
-  §2.6~§2.10 (곱셈성·Dirichlet 합성).
-- Ireland-Rosen, *A Classical Introduction to Modern Number Theory*, ch.2 §3.
+- Hardy-Wright, ch. 16 "The arithmetical functions φ(n), μ(n), d(n), σ(n), r(n)",
+  §16.3–§16.4 (multiplicativity), §16.7 (prime-power formulas).
+- Apostol, ch. 2 "Arithmetical functions and Dirichlet multiplication",
+  §2.6–§2.10 (multiplicativity · Dirichlet convolution).
+- Ireland-Rosen, *A Classical Introduction to Modern Number Theory*, ch. 2 §3.
 
 ---
 
-## 3. 완전수와 유클리드-오일러 정리
+## 3. Perfect Numbers and the Euclid-Euler Theorem
 
-### 3.1 정의
+### 3.1 Definition
 
-**정의**. n ∈ ℤ_{≥2} 가 **완전수(perfect number)** 라 함은 σ(n) = 2n, 즉
-자기 자신을 제외한 약수들의 합이 n 과 같을 때를 가리킨다.
+**Definition**. n ∈ ℤ_{≥2} is a **perfect number** if σ(n) = 2n, i.e., the sum of the proper divisors of n equals n.
 
-예: 6 = 1+2+3, 28 = 1+2+4+7+14, 496, 8128, 33550336, …
+Examples: 6 = 1+2+3, 28 = 1+2+4+7+14, 496, 8128, 33550336, …
 
-### 3.2 메르센 소수
+### 3.2 Mersenne Primes
 
-p 가 소수이고 M_p = 2^p - 1 역시 소수일 때 M_p 를 **메르센 소수** 라 한다.
+If p is prime and M_p = 2^p - 1 is also prime, M_p is a **Mersenne prime**.
 
-참고: M_p 가 소수이려면 p 가 소수여야 한다 (2^{ab} - 1 은 2^a - 1 의 배수).
-역은 거짓: M_{11} = 2047 = 23 · 89.
+Note: For M_p to be prime, p must be prime (2^{ab} - 1 is a multiple of 2^a - 1).
+The converse is false: M_{11} = 2047 = 23 · 89.
 
-현재 알려진 메르센 소수는 52개 (GIMPS 2024 기준). 무한 개 존재 여부는 미해결.
+Currently 52 Mersenne primes are known (as of GIMPS 2024). Infinitude is unresolved.
 
-### 3.3 유클리드-오일러 정리
+### 3.3 Euclid-Euler Theorem
 
-**정리 (Euclid IX.36 + Euler 사후 출판 1849)**.
+**Theorem (Euclid IX.36 + Euler posthumously 1849)**.
 
-짝수 n 이 완전수 ⟺ n = 2^{p-1} · (2^p - 1) 이고 2^p - 1 이 소수.
+An even number n is perfect ⟺ n = 2^{p-1} · (2^p - 1) and 2^p - 1 is prime.
 
-**⇐ 방향 (Euclid)**. M = 2^p - 1 을 소수라 하고 n = 2^{p-1} · M 이라 하자. M 은
-소수이고 2 와 서로소이므로 σ 는 곱셈적이다.
+**⇐ direction (Euclid)**. Let M = 2^p - 1 be prime and n = 2^{p-1} · M. Since M is prime and coprime to 2, σ is multiplicative.
 
 ```
 σ(n) = σ(2^{p-1}) · σ(M)
@@ -274,81 +255,72 @@ p 가 소수이고 M_p = 2^p - 1 역시 소수일 때 M_p 를 **메르센 소수
      = 2n. ∎
 ```
 
-**⇒ 방향 (Euler)**. n 을 짝수 완전수라 하자. n = 2^{k-1} · m (k ≥ 2, m 홀수) 로
-쓸 수 있다. σ 곱셈성으로
+**⇒ direction (Euler)**. Let n be an even perfect number. Write n = 2^{k-1} · m (k ≥ 2, m odd). By multiplicativity of σ,
 
 ```
 σ(n) = σ(2^{k-1}) · σ(m) = (2^k - 1) · σ(m) = 2n = 2^k · m.
 ```
 
-따라서 σ(m) = 2^k · m / (2^k - 1). 좌변이 정수이므로 (2^k - 1) | m. m = (2^k - 1) · q
-라 쓰면
+Hence σ(m) = 2^k · m / (2^k - 1). Since the LHS is an integer, (2^k - 1) | m. Writing m = (2^k - 1) · q,
 
 ```
 σ(m) = 2^k · q.
 ```
 
-한편 m 과 q 는 m 의 약수이다 (q = m / (2^k - 1) ≤ m). 만약 q < m 이면 m + q ≤ σ(m)
-이고 m + q = (2^k - 1)·q + q = 2^k · q = σ(m). 이는 m 의 약수가 정확히 {m, q} 뿐임을
-의미하고, m 은 소수이며 q = 1 이다. 따라서
+Now m and q are divisors of m (q = m / (2^k - 1) ≤ m). If q < m, then m + q ≤ σ(m) and m + q = (2^k - 1)·q + q = 2^k · q = σ(m). That means the divisors of m are exactly {m, q}, so m is prime and q = 1. Hence
 
 ```
-m = 2^k - 1    (소수),     n = 2^{k-1} · (2^k - 1).
+m = 2^k - 1    (prime),     n = 2^{k-1} · (2^k - 1).
 ```
 
-만약 q = m 이면 σ(m) = 2^k · m > 2m 이 되어 m 이 초과완전수 (abundant) — 소수 제곱
-이상 존재하지만, 모순을 직접 보일 수 있다 (σ(m)/m 계산). ∎
+If q = m then σ(m) = 2^k · m > 2m, making m an abundant number — contradictions can be shown directly (by computing σ(m)/m). ∎
 
-### 3.4 홀수 완전수는 존재하는가
+### 3.4 Do Odd Perfect Numbers Exist?
 
-**미해결**. Ochem–Rao (2012): 만약 존재한다면 n > 10^{1500}, 소인수 개수 ≥ 101,
-가장 큰 소인수 ≥ 10^8 등. 대다수 정수론자는 존재하지 않으리라 추측하지만 증명 없음.
+**Unresolved**. Ochem–Rao (2012): If one exists, n > 10^{1500}, number of prime factors ≥ 101, largest prime factor ≥ 10^8, etc. Most number theorists conjecture that none exists, but no proof.
 
-### 3.5 1차 출처
+### 3.5 Primary Sources
 
-- Hardy-Wright, ch.9 "The representation of numbers by decimals" 다음 §16.8
-  "Perfect numbers" (ch.16 말미).
-- Burton, *Elementary Number Theory*, 7판 ch.11 "Numbers of special form",
-  §11.3 "Perfect numbers".
-- Dickson, *History of the Theory of Numbers* Vol.1, ch.1 (역사 배경).
+- Hardy-Wright, ch. 9 "The representation of numbers by decimals" followed by §16.8 "Perfect numbers" (end of ch. 16).
+- Burton, *Elementary Number Theory*, 7th ed., ch. 11 "Numbers of special form", §11.3 "Perfect numbers".
+- Dickson, *History of the Theory of Numbers* vol. 1, ch. 1 (historical background).
 
 ---
 
-## 4. 뫼비우스 함수와 뫼비우스 역공식
+## 4. Möbius Function and Möbius Inversion Formula
 
-### 4.1 정의
+### 4.1 Definition
 
 ```
 μ(n) = { 1        if n = 1
-       { (-1)^k   if n = p₁ · p₂ · … · p_k (서로 다른 소수, square-free)
-       { 0        otherwise (어떤 p² 가 n 을 나눈다)
+       { (-1)^k   if n = p₁ · p₂ · … · p_k (distinct primes, square-free)
+       { 0        otherwise (some p² divides n)
 ```
 
-### 4.2 기본 항등식
+### 4.2 Basic Identity
 
-**정리**.
+**Theorem**.
 
 ```
 Σ_{d | n} μ(d) = [n = 1] = { 1 if n=1
                              { 0 if n≥2
 ```
 
-**증명**. n = 1 자명. n ≥ 2 일 때 n 의 서로 다른 소인수를 p₁, …, p_k 라 하자.
-square-free 약수만 기여하므로
+**Proof**. n = 1 is trivial. For n ≥ 2 let the distinct prime factors of n be p₁, …, p_k. Only square-free divisors contribute:
 
 ```
 Σ_{d | n} μ(d) = Σ_{S ⊂ {1,…,k}} (-1)^{|S|} = (1-1)^k = 0.  ∎
 ```
 
-### 4.3 뫼비우스 역공식 (Möbius inversion)
+### 4.3 Möbius Inversion Formula
 
-**정리 (Apostol ch.2 §2.9)**. f, g : ℕ → ℂ 에 대해
+**Theorem (Apostol ch. 2 §2.9)**. For f, g : ℕ → ℂ,
 
 ```
 g(n) = Σ_{d | n} f(d)    ⟺    f(n) = Σ_{d | n} μ(d) · g(n/d).
 ```
 
-**증명 (⇒)**. 대입과 ⟂ 항등식을 쓴다.
+**Proof (⇒)**. Substitute and use the ⟂ identity.
 
 ```
 Σ_{d | n} μ(d) · g(n/d) = Σ_{d | n} μ(d) · Σ_{e | n/d} f(e)
@@ -357,87 +329,83 @@ g(n) = Σ_{d | n} f(d)    ⟺    f(n) = Σ_{d | n} μ(d) · g(n/d).
                        = f(n).  ∎
 ```
 
-### 4.4 응용
+### 4.4 Applications
 
-**오일러 토션트 공식**. n = Σ_{d | n} φ(d) (약수 묶기 1, 2, …, n 를 gcd 기준).
-뫼비우스 역으로
+**Euler totient formula**. n = Σ_{d | n} φ(d) (grouping of 1, 2, …, n by gcd). Möbius inversion gives
 
 ```
 φ(n) = Σ_{d | n} μ(d) · n/d = n · Σ_{d | n} μ(d) / d.
 ```
 
-n = p₁^{a₁} · … · p_r^{a_r} 이면
+For n = p₁^{a₁} · … · p_r^{a_r},
 
 ```
 Σ_{d | n} μ(d) / d = ∏ (1 - 1/p_i)
 ```
 
-(square-free 약수만 살아남으므로). 따라서 φ(n) = n · ∏ (1 - 1/p_i).
+(only square-free divisors survive). Hence φ(n) = n · ∏ (1 - 1/p_i).
 
-**소수 카운트**. π(x) 는 뫼비우스 가중치로 계산 가능 (Legendre 체).
+**Prime count**. π(x) can be computed with Möbius weights (Legendre sieve).
 
-### 4.5 μ 의 평균
+### 4.5 Mean of μ
 
-**정리**. M(x) := Σ_{n ≤ x} μ(n). PNT 와 동치로
+**Theorem**. M(x) := Σ_{n ≤ x} μ(n). Equivalent to PNT,
 
 ```
 M(x) = o(x).
 ```
 
-리만 가설이면 M(x) = O(x^{1/2 + ε}). (Mertens 추측 "M(x) ≤ √x" 는 Odlyzko-te Riele
-1985 반증.)
+Under the Riemann hypothesis M(x) = O(x^{1/2 + ε}). (The Mertens conjecture "M(x) ≤ √x" was disproved by Odlyzko-te Riele 1985.)
 
-### 4.6 1차 출처
+### 4.6 Primary Sources
 
-- Apostol, ch.2 §2.6 μ 정의, §2.9 뫼비우스 역, ch.3 §3.7 M(x) 평균.
-- Hardy-Wright, ch.16 §16.3~§16.5 뫼비우스.
-- Ireland-Rosen, ch.2 §4 "The Möbius function".
+- Apostol, ch. 2 §2.6 definition of μ, §2.9 Möbius inversion, ch. 3 §3.7 mean of M(x).
+- Hardy-Wright, ch. 16 §16.3–§16.5 Möbius.
+- Ireland-Rosen, ch. 2 §4 "The Möbius function".
 
 ---
 
-## 5. 오일러 곱 공식
+## 5. Euler Product Formula
 
-### 5.1 제타와 오일러 곱
+### 5.1 Zeta and Euler Product
 
-**정리 (Euler 1737)**. s ∈ ℂ, Re s > 1 에 대해
+**Theorem (Euler 1737)**. For s ∈ ℂ, Re s > 1,
 
 ```
-ζ(s) := Σ_{n=1}^∞ n^{-s} = ∏_{p 소수} (1 - p^{-s})^{-1}.
+ζ(s) := Σ_{n=1}^∞ n^{-s} = ∏_{p prime} (1 - p^{-s})^{-1}.
 ```
 
-**증명**. 우변을 기하급수로 전개:
+**Proof**. Expand the RHS geometrically:
 
 ```
 (1 - p^{-s})^{-1} = 1 + p^{-s} + p^{-2s} + …
 ```
 
-유한 소수 p₁, …, p_N 에 대해
+For finitely many primes p₁, …, p_N,
 
 ```
-∏_{i=1}^N (1 - p_i^{-s})^{-1} = Σ_{n : 소인수 ⊂ {p_i}} n^{-s}.
+∏_{i=1}^N (1 - p_i^{-s})^{-1} = Σ_{n : prime factors ⊂ {p_i}} n^{-s}.
 ```
 
-N → ∞ 로 보내면 정수 유일 분해에 의해 모든 n ∈ ℕ 가 정확히 한 번씩 나타난다.
-Re s > 1 에서 절대수렴. ∎
+Letting N → ∞, by unique factorization of integers, every n ∈ ℕ appears exactly once. Absolute convergence in Re s > 1. ∎
 
-### 5.2 s = 1 에서의 발산
+### 5.2 Divergence at s = 1
 
-**계**. Σ 1/p 는 발산한다 (따라서 소수 무한).
+**Corollary**. Σ 1/p diverges (hence there are infinitely many primes).
 
-**증명**. 만약 유한이면 ∏ (1 - 1/p)^{-1} < ∞. 그런데 s = 1 에서 ∏_{p ≤ x} (1 - 1/p)^{-1}
-≥ Σ_{n ≤ x} 1/n → ∞. 모순. ∎
+**Proof**. If finite, ∏ (1 - 1/p)^{-1} < ∞. But at s = 1, ∏_{p ≤ x} (1 - 1/p)^{-1} ≥ Σ_{n ≤ x} 1/n → ∞. Contradiction. ∎
 
-이것은 Euler 의 정수론 혁명의 출발점이다.
+This is the starting point of Euler's number-theoretic revolution.
 
-### 5.3 일반적 곱셈적 함수
+### 5.3 General Multiplicative Functions
 
-f 가 곱셈적이고 Σ |f(n)| n^{-σ} < ∞ 이면
+If f is multiplicative and Σ |f(n)| n^{-σ} < ∞, then
 
 ```
 Σ f(n) n^{-s} = ∏_p ( Σ_{a ≥ 0} f(p^a) p^{-as} ).
 ```
 
-**예시**.
+**Examples**.
 
 ```
 Σ τ(n) n^{-s}   = ζ(s)²         = ∏ (1 - p^{-s})^{-2}
@@ -447,59 +415,56 @@ f 가 곱셈적이고 Σ |f(n)| n^{-σ} < ∞ 이면
 Σ |μ(n)| n^{-s} = ζ(s)/ζ(2s)
 ```
 
-### 5.4 함수 방정식의 예고
+### 5.4 Preview of the Functional Equation
 
-ζ(s) 는 s ↔ 1-s 대칭을 가진 완비 제타 ξ(s) := (1/2) s (s-1) π^{-s/2} Γ(s/2) ζ(s)
-로 확장된다 (Riemann 1859). 이 함수방정식은 PURE-P0-3 (복소해석 노트) 에서 재론한다.
+ζ(s) extends to the completed zeta ξ(s) := (1/2) s (s-1) π^{-s/2} Γ(s/2) ζ(s) with the s ↔ 1-s symmetry (Riemann 1859). This functional equation is revisited in PURE-P0-3 (complex analysis note).
 
-### 5.5 1차 출처
+### 5.5 Primary Sources
 
-- Apostol, ch.11 "Dirichlet series and Euler products", §11.6~§11.8.
-- Hardy-Wright, ch.17 "Generating functions of arithmetical functions".
-- Ireland-Rosen, ch.3 §1 "The zeta function".
-- Titchmarsh, *The Theory of the Riemann Zeta-Function*, ch.1 (해석적 성질).
+- Apostol, ch. 11 "Dirichlet series and Euler products", §11.6–§11.8.
+- Hardy-Wright, ch. 17 "Generating functions of arithmetical functions".
+- Ireland-Rosen, ch. 3 §1 "The zeta function".
+- Titchmarsh, *The Theory of the Riemann Zeta-Function*, ch. 1 (analytic properties).
 
 ---
 
-## 6. σ(n)·φ(n) = n·τ(n) 유일성 정리 follow-through
+## 6. Follow-through of the σ(n)·φ(n) = n·τ(n) Uniqueness Theorem
 
-본 절은 프로젝트 L0 불변식 `theory/proofs/theorem-r1-uniqueness.md` 를 **독립 서술**
-한다 (접근 = 곱셈적 분해 + 국소 경우분석, Proof 1 계열).
+This section gives an **independent writeup** of the project L0 invariant `theory/proofs/theorem-r1-uniqueness.md` (approach = multiplicative decomposition + local case analysis, Proof-1 family).
 
-### 6.1 진술
+### 6.1 Statement
 
-**정리 R1**. 모든 n ∈ ℤ_{≥2} 에 대해
+**Theorem R1**. For every n ∈ ℤ_{≥2},
 
 ```
 σ(n) · φ(n) = n · τ(n)  ⟺  n = 6.
 ```
 
-### 6.2 국소 비율 R_local
+### 6.2 Local Ratio R_local
 
-비율 함수 R : ℤ_{≥1} → ℚ_{>0} 을
+Define R : ℤ_{≥1} → ℚ_{>0} by
 
 ```
 R(n) := σ(n) · φ(n) / (n · τ(n))
 ```
 
-로 정의한다. 정리는 R(n) = 1 의 해를 n ≥ 2 범위에서 찾는 문제로 환원된다.
+The theorem reduces to finding all solutions of R(n) = 1 for n ≥ 2.
 
-σ, φ, τ 는 모두 **곱셈적**이고 id(n) = n 역시 완전 곱셈적이다. 따라서 R 는 곱셈적.
-n = ∏ p_i^{a_i} 면
+Since σ, φ, τ are all **multiplicative** and id(n) = n is totally multiplicative, R is multiplicative. For n = ∏ p_i^{a_i},
 
 ```
 R(n) = ∏ R_local(p_i, a_i)
 ```
 
-이고
+with
 
 ```
 R_local(p, a) := σ(p^a) · φ(p^a) / (p^a · τ(p^a)).
 ```
 
-### 6.3 R_local 의 닫힌 형
+### 6.3 Closed Form of R_local
 
-2.3 절의 소수 멱 공식을 대입한다.
+Substitute the prime-power formulas of §2.3.
 
 ```
 σ(p^a) = (p^{a+1} - 1) / (p - 1)
@@ -507,7 +472,7 @@ R_local(p, a) := σ(p^a) · φ(p^a) / (p^a · τ(p^a)).
 τ(p^a) = a + 1
 ```
 
-따라서
+Hence
 
 ```
 R_local(p, a) = [ (p^{a+1} - 1) / (p - 1) ] · [ p^{a-1} (p - 1) ]
@@ -521,68 +486,64 @@ R_local(p, a) = [ (p^{a+1} - 1) / (p - 1) ] · [ p^{a-1} (p - 1) ]
               = (p^{a+1} - 1) / ( p · (a + 1) ).
 ```
 
-### 6.4 국소 값 표
+### 6.4 Table of Local Values
 
-| (p, a)  | R_local           | 값     | 1 과의 관계 |
-|---------|-------------------|--------|-------------|
-| (2, 1)  | (4-1)/(2·2) = 3/4 | 0.75   | **< 1**     |
-| (2, 2)  | (8-1)/(2·3) = 7/6 | 1.1667 | > 1         |
-| (2, 3)  | (16-1)/(2·4) =15/8| 1.875  | > 1         |
-| (3, 1)  | (9-1)/(3·2) = 4/3 | 1.333  | > 1         |
-| (3, 2)  | (27-1)/(3·3) =26/9| 2.889  | > 1         |
-| (5, 1)  | (25-1)/(5·2)=12/5 | 2.4    | > 1         |
-| (7, 1)  | (49-1)/(7·2)=24/7 | 3.429  | > 1         |
-| (p, 1), p≥3 | (p²-1)/(2p) | ≥4/3 | > 1 (단조↑) |
+| (p, a)  | R_local           | Value  | Relation to 1 |
+|---------|-------------------|--------|---------------|
+| (2, 1)  | (4-1)/(2·2) = 3/4 | 0.75   | **< 1**       |
+| (2, 2)  | (8-1)/(2·3) = 7/6 | 1.1667 | > 1           |
+| (2, 3)  | (16-1)/(2·4) =15/8| 1.875  | > 1           |
+| (3, 1)  | (9-1)/(3·2) = 4/3 | 1.333  | > 1           |
+| (3, 2)  | (27-1)/(3·3) =26/9| 2.889  | > 1           |
+| (5, 1)  | (25-1)/(5·2)=12/5 | 2.4    | > 1           |
+| (7, 1)  | (49-1)/(7·2)=24/7 | 3.429  | > 1           |
+| (p, 1), p≥3 | (p²-1)/(2p)   | ≥4/3   | > 1 (monotone↑) |
 
-### 6.5 보조정리 — R_local < 1 인 경우는 유일
+### 6.5 Lemma — R_local < 1 Occurs Uniquely
 
-**보조정리 L1**. R_local(p, a) < 1 ⟺ (p, a) = (2, 1).
+**Lemma L1**. R_local(p, a) < 1 ⟺ (p, a) = (2, 1).
 
-**증명**. R_local(2, 1) = 3/4 < 1 은 표에서 확인. 나머지를 따라간다.
+**Proof**. R_local(2, 1) = 3/4 < 1 is confirmed in the table. Check the rest.
 
-- **p = 2, a = 1**: 3/4 (유일한 < 1 경우).
+- **p = 2, a = 1**: 3/4 (unique < 1 case).
 - **p = 2, a ≥ 2**: R_local(2, a) = (2^{a+1} - 1)/(2(a+1)).
-  a=2 일 때 7/6, a=3 일 때 15/8. 일반적으로 분자는 지수 2^{a+1}, 분모는 선형 2(a+1).
-  a ≥ 2 에서 귀납으로 R_local(2, a) > 1: (2^{a+1}-1)/(2(a+1)) > 1 ⟺ 2^{a+1} > 2(a+1)+1.
-  a=2 일 때 8 > 7, 이후 좌변은 두 배씩, 우변은 2 씩 증가하므로 단조.
+  For a=2 it is 7/6, for a=3 it is 15/8. In general the numerator is exponential 2^{a+1} and the denominator linear 2(a+1).
+  For a ≥ 2 induction shows R_local(2, a) > 1: (2^{a+1}-1)/(2(a+1)) > 1 ⟺ 2^{a+1} > 2(a+1)+1.
+  At a=2, 8 > 7, thereafter LHS doubles and RHS grows by 2, so monotone.
 - **p ≥ 3, a = 1**: R_local(p, 1) = (p² - 1)/(2p) = p/2 - 1/(2p).
-  p = 3 일 때 4/3. p ≥ 3 에서 p/2 - 1/(2p) ≥ 3/2 - 1/6 = 4/3 > 1, 단조증가.
-- **p ≥ 3, a ≥ 2**: R_local(p, a) > R_local(p, 1) (분자의 p^{a+1} - 1 이
-  a 에 대해 급격히 증가, 분모는 a 에 선형). ∎
+  At p = 3 it is 4/3. For p ≥ 3, p/2 - 1/(2p) ≥ 3/2 - 1/6 = 4/3 > 1, monotone increasing.
+- **p ≥ 3, a ≥ 2**: R_local(p, a) > R_local(p, 1) (numerator p^{a+1} - 1 grows rapidly in a, denominator linear in a). ∎
 
-### 6.6 경우 1 — 소수 멱 n = p^a
+### 6.6 Case 1 — Prime Power n = p^a
 
-R(n) = R_local(p, a). 보조정리 L1 에 의해
+R(n) = R_local(p, a). By Lemma L1,
 
 - (p, a) = (2, 1): R = 3/4 ≠ 1.
-- 그 외: R > 1 ≠ 1.
+- Otherwise: R > 1 ≠ 1.
 
-소수 멱에서 해는 **없다**. ∎
+No solution in the prime-power case. ∎
 
-### 6.7 경우 2 — 두 소인수 n = p^a · q^b (p < q)
+### 6.7 Case 2 — Two Prime Factors n = p^a · q^b (p < q)
 
-R(n) = R_local(p, a) · R_local(q, b). R = 1 이 되려면 **정확히 하나의 국소 인자가
-< 1** 이어야 한다 (보조정리 L1 이 < 1 인 경우를 유일하게 지정하므로 나머지는
-1보다 작아질 수 없고, 둘 다 ≥ 1 이면 양변 곱이 ≥ 1 이고 = 1 이 되려면 둘 다 = 1 이어야
-하지만 = 1 인 국소 인자도 존재하지 않는다).
+R(n) = R_local(p, a) · R_local(q, b). For R = 1 **exactly one local factor must be < 1** (Lemma L1 makes the < 1 case unique; otherwise the rest cannot go below 1, and if both are ≥ 1 their product is ≥ 1 with equality only if both are 1, but no local factor equals 1 either).
 
-따라서 (p, a) = (2, 1) 가 유일 후보. R_local(2, 1) = 3/4 이므로
+Hence (p, a) = (2, 1) is the only candidate. Since R_local(2, 1) = 3/4,
 
 ```
 R_local(q, b) = 4/3.
 ```
 
-이제 (q, b) 를 찾는다.
+Find (q, b).
 
-- **(q, b) = (3, 1)**: R_local(3, 1) = (9-1)/(3·2) = 4/3. **일치**.
+- **(q, b) = (3, 1)**: R_local(3, 1) = (9-1)/(3·2) = 4/3. **Match**.
 - (q, b) = (3, 2): 26/9 ≈ 2.889 ≠ 4/3.
-- (q, b) = (3, ≥2): 단조증가로 4/3 초과.
+- (q, b) = (3, ≥2): monotone growth exceeds 4/3.
 - (q, b) = (5, 1): 12/5 = 2.4 ≠ 4/3.
 - (q, b) = (q, 1), q ≥ 5: (q²-1)/(2q) ≥ 12/5 > 4/3.
 
-유일한 해는 (p, a, q, b) = (2, 1, 3, 1), 즉 **n = 6**.
+The unique solution is (p, a, q, b) = (2, 1, 3, 1), i.e., **n = 6**.
 
-확인:
+Check:
 
 ```
 σ(6) = 1+2+3+6 = 12
@@ -592,83 +553,73 @@ R_local(q, b) = 4/3.
 n·τ = 6·4 = 24.   ✓
 ```
 
-### 6.8 경우 3 — 세 개 이상의 소인수
+### 6.8 Case 3 — Three or More Prime Factors
 
-n = ∏_{i=1}^k p_i^{a_i} (k ≥ 3). 보조정리 L1 로부터 **최대 하나의 국소 인자**만
-1 미만일 수 있고, 그것은 R_local(2, 1) = 3/4 이다. 나머지 k-1 개의 국소 인자는
-≥ 4/3 (≥ R_local(3, 1)).
+n = ∏_{i=1}^k p_i^{a_i} (k ≥ 3). By Lemma L1, **at most one local factor** is less than 1, and it must be R_local(2, 1) = 3/4. The other k-1 local factors are ≥ 4/3 (≥ R_local(3, 1)).
 
-**경우 3a**: p₁ = 2, a₁ = 1.
+**Case 3a**: p₁ = 2, a₁ = 1.
 
 ```
 R(n) ≥ (3/4) · (4/3)^{k-1}
      ≥ (3/4) · (4/3)² = (3/4) · (16/9) = 48/36 = 4/3 > 1.
 ```
 
-**경우 3b**: p₁ ≥ 3 (또는 p₁ = 2, a₁ ≥ 2).
+**Case 3b**: p₁ ≥ 3 (or p₁ = 2, a₁ ≥ 2).
 
-모든 국소 인자 ≥ 4/3 이고
+All local factors ≥ 4/3 and
 
 ```
 R(n) ≥ (4/3)^k ≥ (4/3)³ = 64/27 ≈ 2.370 > 1.
 ```
 
-세 개 이상 소인수에서도 해는 **없다**. ∎
+No solutions with three or more prime factors either. ∎
 
-### 6.9 결론
+### 6.9 Conclusion
 
-경우 1·2·3 을 모두 합치면 R(n) = 1 의 유일한 해는 **n = 6**. ∎
+Combining Cases 1, 2, 3, the unique solution of R(n) = 1 is **n = 6**. ∎
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║  정리 R1 (재진술)                                              ║
+║  Theorem R1 (restated)                                         ║
 ║                                                               ║
-║  모든 n ∈ ℤ_{≥2} 에 대해                                       ║
-║    σ(n) · φ(n) = n · τ(n)  ⟺  n = 6                         ║
+║  For every n ∈ ℤ_{≥2},                                         ║
+║    σ(n) · φ(n) = n · τ(n)  ⟺  n = 6                          ║
 ║                                                               ║
-║  증명: σ, φ, τ 의 곱셈성 + R_local(p, a) 국소 경우분석.        ║
-║  핵심: R_local 이 1 미만인 경우는 (2,1) 하나뿐, 값 3/4.        ║
-║  보상 가능한 유일한 조합은 (2,1)·(3,1), 즉 n = 6.             ║
+║  Proof: multiplicativity of σ, φ, τ + R_local(p, a) case      ║
+║  analysis.                                                    ║
+║  Core: R_local < 1 occurs only at (2,1), value 3/4.           ║
+║  The only combination that compensates is (2,1)·(3,1), i.e.   ║
+║  n = 6.                                                       ║
 ║                                                               ║
 ║  Q.E.D.                                                      ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
-### 6.10 사후 관찰
+### 6.10 Posterior Observation
 
-이 노트는 **순수 수학에서 출발**하여 경우분석의 결과로 n = 6 을 얻었다. 이 사실은
-n = 6 을 전제로 한 것이 **아니다**. 정리의 형태는 "σ·φ = n·τ 를 만족하는 n ∈ ℤ_{≥2}
-의 집합" 이며, 경우분석의 끝에서 그 집합이 {6} 임을 확인했다.
+This note **starts from pure mathematics** and obtains n = 6 as a result of case analysis. The fact is **not** presupposed with n = 6 in mind. The form of the theorem is "the set of n ∈ ℤ_{≥2} satisfying σ·φ = n·τ", and at the end of the case analysis we confirm that the set is {6}.
 
-일반 완전수와 달리 이 정리는 오직 **첫 완전수 n = 6 에서만** 등식을 가지며,
-n = 28, 496, 8128, … 에서는 각각 R = 4, 48, 576 으로 급격히 멀어진다. 즉
-R1 은 완전수보다 **더 섬세한** 특성화이다.
+Unlike general perfect numbers, this theorem has equality only at the **first perfect number n = 6**; at n = 28, 496, 8128, … the values R = 4, 48, 576 diverge rapidly. Hence R1 is a **finer** characterization than perfect numbers.
 
-### 6.11 1차 출처
+### 6.11 Primary Sources
 
-- 본 증명은 theorem-r1-uniqueness.md (L0 불변식) 의 Proof 1 을 독립 재구성한 것.
-- σ/φ/τ 곱셈성: Apostol ch.2 §2.6~§2.10.
-- 소수 멱 공식: Hardy-Wright ch.16 §16.7.
-- 곱셈 함수의 국소 경우분석 방법: Apostol ch.2 연습문제 풀이 스타일.
+- The present proof is an independent reconstruction of Proof 1 from theorem-r1-uniqueness.md (L0 invariant).
+- Multiplicativity of σ/φ/τ: Apostol ch. 2 §2.6–§2.10.
+- Prime-power formulas: Hardy-Wright ch. 16 §16.7.
+- Local case-analysis method for multiplicative functions: Apostol ch. 2 exercise-style solutions.
 
 ---
 
-## 7. 다음 단계 안내
+## 7. Next-step Guide
 
-- **PURE-P0-2 (군론 입문)**: S_6 Out 의 유일성, n = 6 이 대칭군 세계에서 등장하는
-  별개의 이유를 다룬다.
-- **PURE-P0-3 (복소해석 입문)**: ζ(2) = π²/6 증명과 감마 함수.
-- **P1 단계**: 해석적 수론 (Dirichlet L, 소수 분포), 대수적 수론 (유 class 군, Ostrowski).
+- **PURE-P0-2 (Introduction to Group Theory)**: covers the uniqueness of Out(S_6) — a separate reason n = 6 appears in the world of symmetric groups.
+- **PURE-P0-3 (Introduction to Complex Analysis)**: proof of ζ(2) = π²/6 and the gamma function.
+- **P1 stage**: analytic number theory (Dirichlet L, prime distribution), algebraic number theory (class group, Ostrowski).
 
-본 노트가 숙달되면 `theory/proofs/theorem-r1-uniqueness.md` 의 Proof 1 을 교재만
-덮어놓고 재작성할 수 있는 수준이 목표이다.
+Once this note is mastered, the goal is to be able to rewrite Proof 1 of `theory/proofs/theorem-r1-uniqueness.md` from scratch with only a textbook as companion.
 
 ---
 
-## 정직성 선언
+## Honesty Declaration
 
-본 노트는 **학습 요약**이다. 새로운 정리나 밀레니엄 난제 해결은 포함하지 않는다.
-n6-architecture 프로젝트의 7대 밀레니엄 난제 해결 현황은 **0/7** 이며, 본 노트
-작성으로 이 숫자는 변하지 않는다. 인용된 정리·저자·교과서 장 번호는 모두 실재하며,
-불확실한 것은 작성 시 포함하지 않았다. 자기참조 검증 금지 규칙을 준수하여, n = 6
-이라는 결과는 일반 정수론 논리의 **사후 귀결**로만 기록되었다.
+This note is a **study summary**. It does not contain new theorems or Millennium-problem targets. The status of the seven Millennium problems in the n6-architecture project is **0/7**, and this note does not change that number. Cited theorems · authors · textbook chapter numbers are all real; anything uncertain was not included when written. Adhering to the no-self-referential-verification rule, the result n = 6 is recorded only as an **a posteriori consequence** of general number-theoretic logic.

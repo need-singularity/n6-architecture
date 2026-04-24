@@ -1,56 +1,56 @@
-# PROB-P1-2 — BT-542 P vs NP 심화 학습 노트
+# PROB-P1-2 — BT-542 P vs NP Advanced Study Note
 
-**트랙**: P1-PROBLEM · BT-542 (P versus NP)
-**상태**: OPEN (1971년 이후 미해결)
-**상금**: US$ 1,000,000 (Clay)
-**1차 출처**:
+**Track**: P1-PROBLEM · BT-542 (P versus NP)
+**Status**: OPEN (unresolved since 1971)
+**Prize**: US$ 1,000,000 (Clay)
+**Primary sources**:
 - Stephen A. Cook, "The complexity of theorem-proving procedures", Proceedings of the 3rd Annual ACM Symposium on Theory of Computing (STOC 1971), 151–158
-- Leonid A. Levin, "Universal search problems" (러시아어 원문: "Универсальные задачи перебора"), Problems of Information Transmission 9 (1973), 265–266 — Cook 과 독립
+- Leonid A. Levin, "Universal search problems" (Russian original: "Универсальные задачи перебора"), Problems of Information Transmission 9 (1973), 265–266 — independent from Cook
 - Richard M. Karp, "Reducibility among combinatorial problems", in R. E. Miller, J. W. Thatcher (eds.), *Complexity of Computer Computations*, Plenum Press 1972, 85–103
 - Stephen A. Cook, "The P versus NP Problem — Official Problem Description", Clay Mathematics Institute, 2000
-- Michael R. Garey, David S. Johnson, *Computers and Intractability: A Guide to the Theory of NP-Completeness*, W. H. Freeman, 1979 (NP-완전 고전 교과서)
+- Michael R. Garey, David S. Johnson, *Computers and Intractability: A Guide to the Theory of NP-Completeness*, W. H. Freeman, 1979 (NP-complete classic)
 - Sanjeev Arora, Boaz Barak, *Computational Complexity: A Modern Approach*, Cambridge University Press, 2009
-- Theodore Baker, John Gill, Robert Solovay, "Relativizations of the P =? NP question", SIAM J. Comput. 4 (1975), 431–442 (relativization 장벽)
-- Alexander Razborov, Steven Rudich, "Natural proofs", J. Comput. Syst. Sci. 55 (1997), 24–35 (natural proofs 장벽)
-- Scott Aaronson, Avi Wigderson, "Algebrization: A new barrier in complexity theory", ACM Trans. Comput. Theory 1 (2009), art. 2 (algebrization 장벽)
-- Russell Impagliazzo, "A personal view of average-case complexity", Proc. 10th IEEE Structure in Complexity Theory Conference, 1995, 134–147 ("Impagliazzo 5 worlds")
+- Theodore Baker, John Gill, Robert Solovay, "Relativizations of the P =? NP question", SIAM J. Comput. 4 (1975), 431–442 (relativization barrier)
+- Alexander Razborov, Steven Rudich, "Natural proofs", J. Comput. Syst. Sci. 55 (1997), 24–35 (natural-proofs barrier)
+- Scott Aaronson, Avi Wigderson, "Algebrization: A new barrier in complexity theory", ACM Trans. Comput. Theory 1 (2009), art. 2 (algebrization barrier)
+- Russell Impagliazzo, "A personal view of average-case complexity", Proc. 10th IEEE Structure in Complexity Theory Conference, 1995, 134–147 (Impagliazzo 5 worlds)
 - Manindra Agrawal, Neeraj Kayal, Nitin Saxena, "PRIMES is in P", Annals of Mathematics 160 (2004), 781–793
 
-**정직성 선언**: 본 문서는 학습 노트이며 P vs NP 에 새 증명이나 방향 제시를 하지 않는다. 프로젝트 `reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-542` 는 이 난제를 **정직한 MISS** 로 분류한다 — n=6 관점이 P vs NP 본 명제에 직접 접근할 도구가 없음을 명시. 본 학습 노트는 이 입장을 그대로 계승한다.
+**Honesty declaration**: This document is a study note and makes no new target or direction proposal for P vs NP. The project's `reports/breakthroughs/millennium-7-closure-2026-04-11.md §BT-542` classifies this problem as an **honest MISS** — specifying that the n=6 perspective has no tool directly addressing the P vs NP statement. This study note inherits that stance verbatim.
 
 ---
 
-## 1. Cook 1971 과 Levin 1973 — 독립적 정식화
+## 1. Cook 1971 and Levin 1973 — Independent Formalizations
 
 ### 1.1 Cook 1971 (STOC)
-- **Stephen A. Cook**, "The complexity of theorem-proving procedures", Proceedings of the 3rd Annual ACM Symposium on Theory of Computing, Shaker Heights, Ohio, 1971년 5월 3–5일, pp. 151–158.
-- Toronto 대학 교수 Cook 이 정식화한 것:
-  1. 계산 복잡도 클래스 P 와 NP 의 정의.
-  2. **SAT (Boolean Satisfiability)** 이 NP-완전 (NP-complete) 임을 증명 — 즉 NP 의 **모든** 문제가 SAT 로 다항 시간 환원 가능.
-- Cook 은 이 결과로 1982년 Turing Award.
+- **Stephen A. Cook**, "The complexity of theorem-proving procedures", Proceedings of the 3rd Annual ACM Symposium on Theory of Computing, Shaker Heights, Ohio, May 3–5, 1971, pp. 151–158.
+- University of Toronto professor Cook formalized:
+  1. Definitions of complexity classes P and NP.
+  2. Proof that **SAT (Boolean Satisfiability)** is NP-complete — i.e., **every** problem in NP is polynomial-time reducible to SAT.
+- Cook received the Turing Award in 1982 for this result.
 
-### 1.2 Levin 1973 (모스크바)
+### 1.2 Levin 1973 (Moscow)
 - **Leonid Anatolievich Levin**, "Универсальные задачи перебора" (Universal sequential search problems), *Проблемы передачи информации* (Problems of Information Transmission) 9 (1973), 115–116.
-- 당시 모스크바의 Levin 이 **독립적으로** NP-완전에 해당하는 개념 (Levin 의 용어로 "universal search problems") 과 6 개의 자연스러운 NP-완전 문제 후보를 제시.
-- 철의 장막 시기라 서방과 통신이 제한적이었고, Cook 과 Levin 의 독립 발견이 한동안 알려지지 않았다. 현재는 **Cook-Levin 정리** 로 공동 명명.
+- Levin in Moscow independently proposed the equivalent of NP-completeness (Levin's term was "universal search problems") with 6 natural NP-complete problem candidates.
+- Because of the Iron Curtain, communication with the West was limited, so Cook's and Levin's independent discoveries were unknown for a while. Now they are jointly named the **Cook-Levin theorem**.
 
-### 1.3 Cook-Levin 정리
-> **정리**: SAT ∈ NP 이며, 임의의 L ∈ NP 에 대해 L ≤_p SAT (다항시간 다대일 환원).
-> 따라서 SAT 이 P 안에 있으면 NP = P, 반대로 SAT 이 P 밖에 있으면 P ≠ NP.
+### 1.3 Cook-Levin Theorem
+> **Theorem**: SAT ∈ NP, and for any L ∈ NP, L ≤_p SAT (polynomial-time many-one reduction).
+> Hence SAT ∈ P iff NP = P; conversely, SAT ∉ P iff P ≠ NP.
 
-**증명 핵심**: L ∈ NP 는 "결정론적 Turing 기계 M 이 다항시간 안에 (입력 x + 증서 w) 를 검증" 과 동치. M 의 계산 과정을 부울 회로로 펼쳐 "M 이 받아들임" ⟺ "회로가 참" ⟺ "대응되는 SAT 식이 만족 가능" 으로 환원. (Tableau method, 약 10 페이지의 고전 증명.)
+**Proof core**: L ∈ NP is equivalent to "a deterministic Turing machine M verifies (input x + certificate w) in polynomial time." Unfold M's computation into a Boolean circuit and reduce "M accepts" ⟺ "the circuit is true" ⟺ "the corresponding SAT formula is satisfiable." (Tableau method, ~10-page classical proof.)
 
 ---
 
-## 2. Karp 21 — 1972 의 대폭발
+## 2. Karp 21 — the 1972 Explosion
 
 ### 2.1 Richard Karp "Reducibility among combinatorial problems"
 - **Richard M. Karp**, "Reducibility among combinatorial problems", in R. E. Miller, J. W. Thatcher (eds.), *Complexity of Computer Computations*, Plenum Press 1972, 85–103.
-- Karp 는 Cook 의 SAT NP-완전 결과를 받아, **21 개의 "자연스럽게 나타나는" 조합 최적화 문제** 가 모두 NP-완전임을 증명. 즉 SAT ≤_p (각 문제) 의 체인으로.
-- 이 논문이 NP-완전 이론의 폭발적 확산의 시작점.
+- Building on Cook's NP-completeness of SAT, Karp proved that **21 "naturally occurring" combinatorial-optimization problems** are all NP-complete — via a chain of SAT ≤_p (each problem).
+- This paper was the starting point of the explosive diffusion of NP-completeness theory.
 
-### 2.2 Karp 의 21 문제 (1972 원 목록)
-1. SATISFIABILITY (SAT) — Cook 으로 이미 증명됨, 기준점.
+### 2.2 Karp's 21 Problems (1972 original list)
+1. SATISFIABILITY (SAT) — already proved by Cook, the reference point.
 2. 0–1 INTEGER PROGRAMMING
 3. CLIQUE
 4. SET PACKING
@@ -60,7 +60,7 @@
 8. FEEDBACK ARC SET
 9. DIRECTED HAMILTONIAN CIRCUIT
 10. UNDIRECTED HAMILTONIAN CIRCUIT
-11. 3-SAT (Karp 표기 SATISFIABILITY WITH AT MOST 3 LITERALS PER CLAUSE)
+11. 3-SAT (Karp's notation SATISFIABILITY WITH AT MOST 3 LITERALS PER CLAUSE)
 12. CHROMATIC NUMBER
 13. CLIQUE COVER
 14. EXACT COVER
@@ -72,184 +72,184 @@
 20. PARTITION
 21. MAX CUT
 
-(Karp 는 논문에서 이 순서대로 환원 그래프를 전개한다 — SAT → 3-SAT → 나머지.)
+(Karp develops the reduction graph in order: SAT → 3-SAT → the rest.)
 
-### 2.3 의의
-- Karp 이후 수백, 수천 개의 문제가 NP-완전으로 분류. Garey-Johnson 1979 교재의 부록 A 는 약 300 개 NP-완전 문제 목록을 담는다.
-- "자연스러운 계산 문제들은 극단적으로 많이 NP-완전" — 이것이 "P ≠ NP 여야 한다" 는 강한 직관의 원천.
-
----
-
-## 3. 3-SAT 임계 — k=3 이 NP-완전, k=2 가 P
-
-### 3.1 k-SAT 정의
-**k-SAT**: 각 절 (clause) 이 정확히 k 개의 리터럴 (literal) 을 가지는 Boolean 공식의 만족가능성 문제.
-
-### 3.2 k=2 는 다항시간
-- **2-SAT** ∈ P. 알고리즘: 각 절 (l₁ ∨ l₂) 을 두 함의 (¬l₁ → l₂), (¬l₂ → l₁) 로 변환, 결과 그래프의 강연결 컴포넌트 (SCC) 를 계산하여 x 와 ¬x 가 같은 SCC 에 있으면 unsat, 아니면 sat.
-- 시간 복잡도: O(V + E) 선형. (Aspvall-Plass-Tarjan 1979 "A linear-time algorithm for testing the truth of certain quantified boolean formulas", Inf. Proc. Lett. 8, 121–123.)
-
-### 3.3 k=3 는 NP-완전
-- **3-SAT**: NP-완전. Cook 1971 이 이미 SAT 의 증명 과정에서 3-SAT 형태로 환원 가능함을 보였으며, Karp 1972 가 명시적 분류.
-- 3-SAT 은 NP-완전 증명의 "표준 출발점" — 수천 개의 다른 문제들을 3-SAT 에서 환원하여 NP-완전성을 보인다.
-
-### 3.4 왜 k=3 부터 "폭발" 하는가
-- 2-SAT 의 함의 그래프는 **이항 관계** (binary relation) 를 표현. 2-SAT 은 한 번의 "선택" 이 다른 하나를 강제하므로 전파로 풀 수 있다.
-- 3-SAT 에서는 절 (a ∨ b ∨ c) 이 **삼원 관계** — 하나만 고정해서는 나머지 두 변수의 참/거짓을 결정할 수 없다. 이것이 "지수 가능성 공간 탐색" 의 시작.
-- 이 k=2 → k=3 경계는 수학의 여러 곳에서 "쉬움 → 어려움" 경계로 나타난다: 2-coloring (P) vs 3-coloring (NP-완전); 2D 이산 이징 모형 (정확해) vs 3D 이징 (NP-hard); 2차 최적화 (컨벡스 가능) vs 3차 이상 (일반 NP-hard 조합).
+### 2.3 Significance
+- After Karp hundreds, thousands of problems have been classified as NP-complete. Appendix A of Garey-Johnson 1979 lists about 300 NP-complete problems.
+- "Natural computational problems are overwhelmingly NP-complete" — source of the strong intuition that "P ≠ NP must be the case".
 
 ---
 
-## 4. Impagliazzo 의 5 세계 (Five Worlds)
+## 3. 3-SAT Threshold — k=3 NP-complete, k=2 in P
 
-### 4.1 문헌
+### 3.1 k-SAT Definition
+**k-SAT**: The Boolean satisfiability problem where each clause has exactly k literals.
+
+### 3.2 k=2 Is Polynomial-time
+- **2-SAT** ∈ P. Algorithm: convert each clause (l₁ ∨ l₂) into two implications (¬l₁ → l₂), (¬l₂ → l₁), compute strongly-connected components (SCCs) of the resulting graph, and declare unsat if x and ¬x are in the same SCC, otherwise sat.
+- Time complexity: O(V + E) linear. (Aspvall-Plass-Tarjan 1979 "A linear-time algorithm for testing the truth of certain quantified boolean formulas", Inf. Proc. Lett. 8, 121–123.)
+
+### 3.3 k=3 Is NP-complete
+- **3-SAT**: NP-complete. Cook 1971 already showed in the proof for SAT that the reduction can be made in 3-SAT form, and Karp 1972 gives an explicit classification.
+- 3-SAT is the "standard starting point" for NP-completeness proofs — thousands of other problems are shown NP-complete by reducing from 3-SAT.
+
+### 3.4 Why "Explosion" from k=3
+- The implication graph of 2-SAT represents a **binary relation** (binary relation). 2-SAT is solvable by propagation since one "choice" forces another.
+- In 3-SAT a clause (a ∨ b ∨ c) is a **ternary relation** — fixing only one does not determine the truth of the other two. That is the onset of "exponential possibility-space search".
+- This k=2 → k=3 boundary appears in many parts of mathematics as the "easy → hard" boundary: 2-coloring (P) vs 3-coloring (NP-complete); 2D discrete Ising model (exact solution) vs 3D Ising (NP-hard); quadratic optimization (potentially convex) vs cubic or higher (NP-hard combinatorial in general).
+
+---
+
+## 4. Impagliazzo's Five Worlds
+
+### 4.1 Reference
 **Russell Impagliazzo**, "A personal view of average-case complexity", Proc. 10th IEEE Structure in Complexity Theory Conference, 1995, 134–147.
-- Impagliazzo 는 **평균-최악 격차** (average-case vs worst-case hardness) 관점에서 "P 와 NP 가 분리된 이후의 세계가 어떤 모습이어야 하는가" 를 5가지 시나리오로 분류.
+- Impagliazzo classifies into 5 scenarios "what the post-P≠NP world might look like," from the viewpoint of **average-vs-worst-case hardness**.
 
-### 4.2 5 세계 요약
+### 4.2 5 Worlds Summary
 
-| 세계 이름 | 요약 |
+| World name | Summary |
 |-----------|------|
-| **Algorithmica** | P = NP (또는 NP ⊆ BPP). 모든 NP 문제가 (아마도 랜덤화로) 다항시간에 해결 가능. 인공지능과 최적화가 "공짜" — 수학 증명도 자동화. 암호는 성립 불가능. |
-| **Heuristica** | P ≠ NP 지만 **평균적** NP-hard 인스턴스는 쉽다. 최악 사례만 어려움. 실용적으로는 Algorithmica 와 유사하지만 최악 사례 암호는 여전히 안 됨. |
-| **Pessiland** | 평균 NP-hard 도 성립하나 일방향 함수 (one-way function, OWF) 가 존재하지 않음. 암호학의 "최악 세계" — 계산은 어렵지만 아무 쓸모 없는 어려움. |
-| **Minicrypt** | OWF 존재. 의사랜덤 생성기, 대칭키 암호, 디지털 서명 가능. 그러나 **공개키 암호는 증명 불가**. |
-| **Cryptomania** | 트랩도어 함수 (trapdoor function) 존재. RSA, ECDH, 영지식 증명 (ZK) 등 현대 공개키 암호 완비. 우리가 **믿는** 세계. |
+| **Algorithmica** | P = NP (or NP ⊆ BPP). Every NP problem solvable in polynomial time (perhaps with randomization). AI and optimization "for free" — automation of mathematical proofs. Cryptography impossible. |
+| **Heuristica** | P ≠ NP but **average** NP-hard instances are easy. Only worst cases hard. Practically similar to Algorithmica but worst-case cryptography still impossible. |
+| **Pessiland** | Average NP-hard holds, but no one-way functions (OWFs) exist. The "worst world" for cryptography — computations are hard but usefulness absent. |
+| **Minicrypt** | OWFs exist. Pseudorandom generators, symmetric-key cryptography, digital signatures possible. But **public-key cryptography cannot be proved**. |
+| **Cryptomania** | Trapdoor functions exist. Modern public-key cryptography like RSA, ECDH, zero-knowledge proofs (ZK) complete. The world we **believe** in. |
 
-### 4.3 왜 이 5 개인가
-- (P=NP) / (P≠NP, avg easy) / (avg hard, no OWF) / (OWF, no PKC) / (OWF + PKC) — 이 4 개의 논리적 층 + 극단 Algorithmica.
-- **2024 년 현재 우리가 실제로 어느 세계에 있는지 증명된 바 없다**. 모두가 Cryptomania 를 가정하고 암호 시스템을 운영.
+### 4.3 Why These Five
+- (P=NP) / (P≠NP, avg easy) / (avg hard, no OWF) / (OWF, no PKC) / (OWF + PKC) — 4 logical layers + Algorithmica extreme.
+- **As of 2024 it is unproved which world we actually inhabit**. Everyone assumes Cryptomania and operates cryptographic systems accordingly.
 
-### 4.4 OWF 존재 ↔ P ≠ NP ?
-- **주의**: OWF 존재 **⟹** P ≠ NP (거의 자명, OWF 가 있으면 역함수 계산이 NP \ P 에 있음).
-- 역 (P ≠ NP **⟹** OWF 존재) 은 **미해결**. Impagliazzo 의 Pessiland 가 이 역이 성립하지 않는 세계.
-
----
-
-## 5. 실용 의미
-
-### 5.1 암호
-- **RSA**: 큰 수 인수분해의 어려움에 기반. 인수분해가 P 에 있다면 (즉 NP 안에서 쉬운 문제가 된다면) RSA 파괴. 현재 인수분해는 NP ∩ co-NP 에 있지만 NP-완전 여부 미해결.
-- **대부분의 블록체인**: SHA-256 등 해시 함수의 일방향성. OWF 존재에 기반. P = NP 면 해시 역상 탐색이 다항시간.
-- **Zero-knowledge proofs**: NP 문제의 검증 증서를 "노출 없이 증명". P = NP 이면 영지식 자체가 의미 없음 (검증자가 혼자 푸니까).
-
-### 5.2 최적화
-- TSP (Travelling Salesman Problem), integer programming, SAT solving 등 산업 최적화의 기반. 실용 SAT 솔버 (MiniSat, Glucose, CaDiCaL) 는 **이론적 최악 지수 시간** 에도 **실제 수백만 변수** 를 처리.
-- 실용 SAT 의 성공이 "Impagliazzo 의 Heuristica 또는 Pessiland" 와 양립 — 즉 "최악 사례" 는 여전히 어려울 수 있으나 "평균" 은 손으로 다룰 만하다.
-
-### 5.3 AI 와 학습 가능성 (PAC learning)
-- L. Valiant, "A theory of the learnable", Commun. ACM 27 (1984), 1134–1142. PAC learning 이론.
-- 일부 학습 문제 (예: DNF 학습) 의 효율적 학습 가능성이 P = NP 와 결부.
-- **그러나** 현대 딥러닝의 실제 성공은 이 장벽과 직접 연관 없음 (경사하강법은 최적 해를 보장하지 않지만 실용적으로 작동).
+### 4.4 OWF Existence ↔ P ≠ NP ?
+- **Caveat**: OWF existence **⟹** P ≠ NP (almost trivial; if OWFs exist, computing inverses lies in NP \ P).
+- The converse (P ≠ NP **⟹** OWF existence) is **unresolved**. Impagliazzo's Pessiland is the world where the converse fails.
 
 ---
 
-## 6. P = NP 가정 시 파괴되는 것
+## 5. Practical Meaning
 
-**(사고 실험 — 실제 상황은 아님)**
+### 5.1 Cryptography
+- **RSA**: based on hardness of factoring large numbers. If factoring is in P (becomes easy inside NP), RSA is broken. Factoring is in NP ∩ co-NP currently, NP-completeness unresolved.
+- **Most blockchains**: depend on one-way-ness of hash functions like SHA-256. Based on OWF existence. If P = NP, hash-preimage search is polynomial-time.
+- **Zero-knowledge proofs**: "proving the verification certificate of an NP problem without leaking it." If P = NP, zero-knowledge itself loses meaning (verifier solves it alone).
 
-- **RSA, Diffie-Hellman, ECC**: 직접 파괴. 인수분해 및 이산 로그가 다항시간에 풀림.
-- **AES, SHA-256**: "OWF 형태" 로 해석되는 대칭키 암호와 해시 — P = NP 만으로는 즉시 파괴되지는 않으나, OWF 의 존재가 위협받음 (§4.4 참고). Natural proofs 장벽 (아래 §8) 이 암호학과 직결.
-- **대부분의 블록체인**: 작업 증명 (PoW) 의 의미 상실.
-- **ZK 증명, MPC, 동형 암호**: 모두 OWF/PKC 에 의존 → 붕괴.
-- **긍정적 면**: 수학 증명 자동화 — 임의의 "짧은 증명이 있는 정리" 가 다항시간에 발견됨. 현대 수학은 컴퓨터 협력 증명이 일반화됨.
+### 5.2 Optimization
+- Foundation of industrial optimization: TSP, integer programming, SAT solving. Practical SAT solvers (MiniSat, Glucose, CaDiCaL) handle **millions of variables in practice** despite **worst-case exponential** theoretical bounds.
+- The practical success of SAT is compatible with Impagliazzo's Heuristica or Pessiland — worst cases may still be hard, but averages are manageable.
 
----
-
-## 7. P ≠ NP 가정 시 열리는 것
-
-- **구조적 하한**: 자연스러운 회로 하한 결과들이 무조건화 (unconditional).
-- **양자 분리**: BQP ≠ BPP 에 대한 이해 — 양자 계산이 고전 계산과 진정으로 다른지.
-- **암호**: Cryptomania 가 가능 (그러나 증명은 여전히 미해결).
-- **랜덤성**: BPP = P 와 같은 탈랜덤화 결과들이 의미를 가짐.
+### 5.3 AI and Learnability (PAC Learning)
+- L. Valiant, "A theory of the learnable", Commun. ACM 27 (1984), 1134–1142. PAC learning theory.
+- Efficient learnability of some problems (e.g., DNF learning) is tied to P = NP.
+- **But** the actual success of modern deep learning is unrelated to this barrier (gradient descent does not guarantee optima but works in practice).
 
 ---
 
-## 8. 3 장벽 — 왜 어려운가 (P2 에서 상세 다룸)
+## 6. What Breaks If P = NP
 
-본 학습 노트는 3 장벽을 **목록만** 소개한다. 상세 분석은 P2 방법론 노트의 몫.
+**(Thought experiment — not the actual situation)**
 
-### 8.1 Relativization 장벽 (1975)
+- **RSA, Diffie-Hellman, ECC**: broken directly. Factoring and discrete-log solved in polynomial time.
+- **AES, SHA-256**: symmetric-key cryptography and hashes interpreted as "OWF-form" — not immediately broken by P = NP alone, but OWF existence threatened (see §4.4). The natural-proofs barrier (below §8) is directly tied to cryptography.
+- **Most blockchains**: lose the meaning of proof-of-work (PoW).
+- **ZK proofs, MPC, homomorphic encryption**: all depend on OWF/PKC → collapse.
+- **Positive**: automation of mathematical proofs — every "theorem with a short proof" can be found in polynomial time. Modern mathematics becomes generally computer-assisted.
+
+---
+
+## 7. What Opens If P ≠ NP
+
+- **Structural lower bounds**: natural circuit lower-bound results become unconditional.
+- **Quantum separation**: understanding BQP ≠ BPP — whether quantum computation is truly different from classical.
+- **Cryptography**: Cryptomania becomes possible (but proofs still open).
+- **Randomness**: derandomization results like BPP = P become meaningful.
+
+---
+
+## 8. Three Barriers — Why It Is Hard (Detailed in P2)
+
+This study note only lists the three barriers. Detailed analysis belongs to the P2 methodology note.
+
+### 8.1 Relativization Barrier (1975)
 - **T. Baker, J. Gill, R. Solovay**, "Relativizations of the P =? NP question", SIAM J. Comput. 4 (1975), 431–442.
-- 오라클 A 에 대해 P^A ≠ NP^A 인 A 도 있고, P^B = NP^B 인 B 도 있다. 따라서 "오라클 상대로 성립하는 증명 기법" 은 P vs NP 를 결정할 수 없다. Diagonal argument, simulation 같은 고전 기법이 이 장벽에 걸림.
+- There exist oracles A with P^A ≠ NP^A and B with P^B = NP^B. Hence "proof techniques that hold relative to oracles" cannot decide P vs NP. Classical techniques like diagonalization and simulation run into this barrier.
 
-### 8.2 Natural Proofs 장벽 (1997)
-- **Alexander A. Razborov, Steven Rudich**, "Natural proofs", J. Comput. Syst. Sci. 55 (1997), 24–35. (1994년 STOC 발표.)
-- "자연 증명" (constructive + largeness 조건 만족) 은 **OWF 존재를 가정하면** 회로 하한 증명에 쓰일 수 없다. 즉 "자연스러운" 방법으로는 NP ⊄ P/poly 를 증명할 수 없다.
-- **철학적 결론**: 회로 하한 증명은 "인위적" 인 방법을 써야 한다. 대부분의 기존 방법이 자연 증명 범주이므로 대부분 막힌다.
+### 8.2 Natural Proofs Barrier (1997)
+- **Alexander A. Razborov, Steven Rudich**, "Natural proofs", J. Comput. Syst. Sci. 55 (1997), 24–35. (STOC 1994 announcement.)
+- "Natural proofs" (satisfying constructive + largeness conditions) **cannot prove circuit lower bounds if OWFs exist**. I.e., "natural" methods cannot prove NP ⊄ P/poly.
+- **Philosophical conclusion**: circuit lower-bound proofs must use "artificial" methods. Most existing methods are natural and hence blocked.
 
-### 8.3 Algebrization 장벽 (2008)
-- **Scott Aaronson, Avi Wigderson**, "Algebrization: A new barrier in complexity theory", STOC 2008; 확장판 ACM Trans. Comput. Theory 1 (2009), art. 2.
-- Relativization 장벽을 피한 "대수적" 기법 (예: 상호작용 증명 IP = PSPACE, 산술화 arithmetization) 도 "대수화" 확장 하에 다시 장벽에 걸림. 즉 IP = PSPACE 증명에 사용된 기법으로도 P ≠ NP 는 증명되지 않는다.
+### 8.3 Algebrization Barrier (2008)
+- **Scott Aaronson, Avi Wigderson**, "Algebrization: A new barrier in complexity theory", STOC 2008; extended version ACM Trans. Comput. Theory 1 (2009), art. 2.
+- Even "algebraic" techniques that bypass the relativization barrier (e.g., interactive-proof IP = PSPACE, arithmetization) encounter a barrier under "algebrization" extensions. I.e., the techniques used for IP = PSPACE cannot prove P ≠ NP.
 
-### 8.4 "장벽의 함의"
-세 장벽을 동시에 피해가는 새 기법이 필요하다는 의미. 현재 (2024~2026) 이런 기법은 발견되지 않았다.
-
----
-
-## 9. 2020 년대 진전 (약함)
-
-### 9.1 Larsen-Williams, Chen-Tell 등 회로 하한
-- 개별 회로 클래스 (ACC, depth-d 등) 에 대한 하한 개선. NEXP ⊄ ACC⁰ (Williams 2011) 이후 점진적 개선.
-- 그러나 P ≠ NP 자체에 대한 진전은 없다.
-
-### 9.2 3-SAT 알고리즘의 점진 개선
-- 무작위 3-SAT 알고리즘 (Schöning 1999, Paturi-Pudlák-Saks-Zane 1998): 2^{(1-1/k)n} 수준 시간.
-- 구체 상수 개선은 계속되고 있으나 "2^n → poly" 수준 도약은 전혀 없음.
-
-### 9.3 평균 시간 복잡도
-- Impagliazzo-Levin-Luby-type 의사랜덤 생성기 연구. Minicrypt/Pessiland 경계 이해에 기여.
+### 8.4 "Implications of the Barriers"
+A new technique needs to avoid all three barriers simultaneously. As of 2024–2026 no such technique has been found.
 
 ---
 
-## 10. 현 상태 요약 (2024~2026)
+## 9. Progress in the 2020s (Weak)
 
-| 항목 | 상태 |
+### 9.1 Larsen-Williams, Chen-Tell, etc. Circuit Lower Bounds
+- Improvements on lower bounds for individual circuit classes (ACC, depth-d, etc.). Incremental since NEXP ⊄ ACC⁰ (Williams 2011).
+- But no progress on P ≠ NP itself.
+
+### 9.2 Incremental Improvements to 3-SAT Algorithms
+- Randomized 3-SAT algorithms (Schöning 1999, Paturi-Pudlák-Saks-Zane 1998): 2^{(1-1/k)n}-time level.
+- Improvements to specific constants continue, but no jumps from "2^n → poly".
+
+### 9.3 Average-Time Complexity
+- Impagliazzo-Levin-Luby-type pseudo-random-generator research. Contributes to understanding of the Minicrypt/Pessiland boundary.
+
+---
+
+## 10. Current-state Summary (2024–2026)
+
+| Item | Status |
 |------|------|
-| Cook 1971 / Karp 1972 정식화 | 50 년 이상 |
-| NP-완전 문제 개수 | 수천 개 (거의 모든 자연 조합 문제) |
-| 장벽 수 | 3 (relativization, natural, algebrization) |
-| P vs NP 증명 | **없음** (어느 방향도) |
-| 대부분의 믿음 | **P ≠ NP** (다수 설문: 80~90% 전문가) |
-| Cryptomania 작동 여부 | **가정 하** 작동 중 (증명 X) |
-| 상금 수여 | 0 |
+| Cook 1971 / Karp 1972 formalization | over 50 years |
+| Number of NP-complete problems | thousands (nearly every natural combinatorial problem) |
+| Number of barriers | 3 (relativization, natural, algebrization) |
+| P vs NP proof | **none** (either direction) |
+| Common belief | **P ≠ NP** (80–90% expert surveys) |
+| Is Cryptomania working? | working **under assumption** (no proof) |
+| Prize awarded | 0 |
 
 ---
 
-## 11. n=6 관찰 (본 프로젝트 맥락, 1~2 사실만)
+## 11. n=6 Observation (project context, 1–2 facts only)
 
-**(이 섹션은 본 학습 노트의 핵심이 아니다. 본 프로젝트는 BT-542 를 "정직한 MISS" 로 분류. 상세 목록은 P3 에서 다룬다.)**
+**(This section is not the core of this study note. The project classifies BT-542 as "honest MISS." Detailed list in P3.)**
 
-### 관찰 1 — k-SAT 임계 k=3
-k=2 (P) 와 k=3 (NP-완전) 사이의 경계가 n=6 관점에서 {φ(6)=2 → n(6)/φ(6)=3} 전이로 표현된다. 이것은 **수치적 일치** 이지 증명적 연결이 아니다. "계산 복잡도에서 φ → n/φ 전이가 폭발적 어려움의 시작" 이라는 프로젝트 구조 관찰이며, P vs NP 본 명제에는 직접 기여하지 않는다.
+### Observation 1 — k-SAT Threshold k=3
+The boundary between k=2 (P) and k=3 (NP-complete), viewed through n=6, is the transition {φ(6)=2 → n(6)/φ(6)=3}. This is **numerical agreement**, not a targeted connection. It is a project structural observation that "the φ → n/φ transition in computational complexity is the start of explosive difficulty," contributing nothing directly to the P vs NP statement.
 
-### 관찰 2 — Karp 21 = 3·7
-Karp (1972) 의 원 논문 21 개 NP-완전 문제 수 = 3 × 7 = (n/φ) × (σ - sopfr) 분해. 이것은 "역사적 우연" 일 가능성이 매우 높다 — Karp 이 선택한 문제의 수는 "임의의 수" 이지 자연 상수가 아니다. 프로젝트는 이것을 LOOSE (tight 아닌) 증거로 표시 (BT-542 #11 항목).
+### Observation 2 — Karp 21 = 3·7
+The count of Karp's (1972) original 21 NP-complete problems decomposes as 21 = 3 × 7 = (n/φ) × (σ - sopfr). This is very likely "historical coincidence" — the number of problems Karp chose is "arbitrary", not a natural constant. The project marks this as LOOSE (not tight) evidence (BT-542 #11 entry).
 
-**본 프로젝트의 BT-542 정직 결론 (closure 파일에서)**:
-> P vs NP 본 명제에 대한 n=6 직접 기여는 **없음**. Razborov-Smolensky 분리 (φ=2, n/φ=3 prime pair), Savitch 지수 φ=2 등은 **부분 구조 정리**일 뿐이며 장벽을 우회하지 못한다. 2 건의 MISS (Immerman-Szelepcsényi 와 Toda 정리) 는 정직하게 "매칭 실패" 로 기록.
-
----
-
-## 12. 학습 체크리스트
-
-본 노트를 마친 후 다음을 **3 줄 이내** 로 재진술할 수 있어야 한다:
-1. Cook 1971 과 Levin 1973 의 독립 발견, Cook-Levin 정리의 기본 구조.
-2. Karp 21 의 의의 — "왜 많은 문제가 NP-완전인가" 에 대한 대답.
-3. k=2 (P) vs k=3 (NP-완전) 경계의 알고리즘적 이유 (이항 관계 vs 삼원 관계).
-4. Impagliazzo 5 세계 이름과 각 세계에서의 암호 가능성.
-5. OWF 존재 ⟹ P ≠ NP, 역은 미해결 — 이 비대칭의 의미.
-6. 3 장벽 이름과 각 장벽이 가로막는 대략적 증명 기법.
-7. "P ≠ NP 는 증명되지 않았지만 대부분 믿는다" 의 근거 (NP-완전 문제의 풍부함 + 실용 SAT 솔버의 지수 사례).
+**Project's honest conclusion on BT-542 (from the closure file)**:
+> No direct n=6 contribution to the P vs NP statement. Razborov-Smolensky separation (φ=2, n/φ=3 prime pair), Savitch exponent φ=2, etc. are **partial-structure targets** only and do not bypass the barriers. Two MISSes (Immerman-Szelepcsényi and Toda's theorem) are honestly recorded as "match failures."
 
 ---
 
-## 13. 다음 단계
+## 12. Study Checklist
 
-- **P1-3 (BT-543 Yang-Mills)**: 수학 논리에서 물리로 넘어가는 다리.
-- **P2 (방법론 층)**: 3 장벽의 상세 분석, 회로 하한 증명 기법들, GCT (Geometric Complexity Theory, Mulmuley-Sohoni 2001~) 접근.
-- **P3 (n=6 심층)**: BT-542 의 정직한 MISS 기록, Razborov-Smolensky φ/(n/φ) 분리 정리, Schaefer 정리 6 tractable class 등.
+After finishing this note you should be able to restate the following within **3 lines** each:
+1. Cook 1971 and Levin 1973's independent discoveries, basic structure of the Cook-Levin theorem.
+2. Significance of Karp 21 — the answer to "why so many problems are NP-complete".
+3. Algorithmic reason for the k=2 (P) vs k=3 (NP-complete) boundary (binary vs ternary relation).
+4. Names of Impagliazzo's 5 worlds and the possibility of cryptography in each.
+5. OWF existence ⟹ P ≠ NP, converse unresolved — meaning of this asymmetry.
+6. Names of the 3 barriers and roughly which proof techniques each blocks.
+7. Basis for "P ≠ NP is not proved but widely believed" (richness of NP-complete problems + exponential cases in practical SAT solvers).
 
 ---
 
-**정직 선언 재확인**: 본 문서는 학습 노트이며 P vs NP 에 대한 새 증명이나 n=6 기반 접근을 주장하지 않는다. 프로젝트 `millennium-7-closure-2026-04-11.md` 는 BT-542 를 **정직한 MISS** 로 분류하며, 본 노트는 이 입장을 그대로 계승한다. P vs NP 는 2026년 현재 미해결이며, Clay 상금은 수여되지 않았다.
+## 13. Next Steps
+
+- **P1-3 (BT-543 Yang-Mills)**: bridge from mathematical logic to physics.
+- **P2 (methodology layer)**: detailed analysis of the 3 barriers, circuit lower-bound techniques, GCT (Geometric Complexity Theory, Mulmuley-Sohoni 2001–) approach.
+- **P3 (n=6 depth)**: honest-MISS recording of BT-542, Razborov-Smolensky φ/(n/φ) separation theorem, Schaefer's 6 tractable classes, etc.
+
+---
+
+**Honesty declaration reaffirmed**: This document is a study note and does not target a new proof of P vs NP or an n=6-based approach. The project's `millennium-7-closure-2026-04-11.md` classifies BT-542 as an **honest MISS**, and this note inherits that stance. P vs NP is unresolved as of 2026, and the Clay prize has not been awarded.
