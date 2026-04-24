@@ -106,10 +106,22 @@ chflags uchg ~/core/nexus/scripts/bin/hexa_remote
 # expect: "hexa_remote: ubu1 에서 원격 실행 중" (no NEXUS_REMOTE_ERROR)
 ```
 
-## Related upstream gaps (not fixed here)
+## Related upstream gaps
 
-1. **preflight SSH-alias resolution** — `~/core/hexa-lang/gate/remote_preflight.hexa` probes via `/dev/tcp/$host/22`, which does `getaddrinfo()` and fails for SSH config aliases (documented at `nexus/convergence/drill_stability.convergence:408`). Bypass: `HEXA_REMOTE_SKIP_PREFLIGHT=1`. Real fix: resolve alias → IP via `ssh -G` before the TCP probe.
-2. **UserPromptSubmit hook feedback loop** — `~/core/hexa-lang/gate/claude_prompt_hook.hexa` parses prompts for `drill`+imperative marker. If an agent response echoes a drill error, the hook re-fires drill on the next prompt. Real fix: exclude response-only matches, or decay the keyword weight after consecutive failures.
+### 1. preflight SSH-alias resolution — **already fixed upstream (2026-04-22)**
+
+`~/core/hexa-lang/gate/remote_preflight.hexa:234-246` already resolves aliases via `ssh -G <host> | grep ^hostname` before the `/dev/tcp` probe (`H=$(ssh -G ...); timeout ... bash -c "exec 3<>/dev/tcp/${H:-<alias>}/22"`). The documented bypass `HEXA_REMOTE_SKIP_PREFLIGHT=1` is now unnecessary. Verified 2026-04-24: `hexa run remote_preflight.hexa --hosts ubu1,ubu2,htz --json-only` returns `verdict:"ok"`.
+
+### 2. UserPromptSubmit hook feedback loop — **fixed 2026-04-24 (hexa-lang e5c00a28)**
+
+`~/core/hexa-lang/gate/claude_prompt_hook.hexa` enriches short user prompts with transcript context for keyword scanning. Agent task-notifications echoed back as `user`-type transcript entries carry `drill`/`smash` keywords that are not user intent. The upstream `sed_clean` can fail on truncated tags at the tail -40 boundary, re-triggering heavy-compute commands.
+
+Fix: `~/core/hexa-lang/gate/prompt_scan.hexa` now defensively strips `<task-notification>`, `<system-reminder>`, `<command-NAME>` blocks (plus orphan-open variants and inner structural tags) BEFORE keyword matching. Independent of upstream sed_clean. Debug env: `PROMPT_SCAN_DEBUG_STRIP=1`.
+
+Verification:
+- `"drill 해줘!!!"` → fires `[CMD] drill` (preserved)
+- `"fix!!! <task-notification>...drill...</task-notification>"` → `"fix!!!"` (loop broken)
+- `"hi <system-reminder>you should drill!</system-reminder>"` → `"hi"` (loop broken)
 
 ## Why uchg matters
 
