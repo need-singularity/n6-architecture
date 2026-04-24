@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 39,
+    "count": 38,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -442,6 +442,16 @@
         "before": 40,
         "after": 39,
         "note": "B12 RED-lite part A - hexa-netproto.md (Ultimate Network Protocol SoC) translated KR->EN, CJK=0 verified."
+      },
+      {
+        "phase": "phase-6-D-B12-chip-rtl-gen",
+        "batch": "phase-6-D-B12-chip-rtl-gen",
+        "date": "2026-04-25",
+        "removed": 1,
+        "entry": "domains/compute/chip-rtl-gen/chip-rtl-gen.md",
+        "before": 39,
+        "after": 38,
+        "note": "B12 RED-lite part A - chip-rtl-gen.md translated KR->EN, CJK=0 verified."
       }
     ]
   },
@@ -456,7 +466,6 @@
     "domains/cognitive/ai-training-cost/ai-training-cost.md",
     "domains/compute/chip-npu-n6/chip-npu-n6.md",
     "domains/compute/chip-photonic/chip-photonic.md",
-    "domains/compute/chip-rtl-gen/chip-rtl-gen.md",
     "domains/compute/chip-sc/chip-sc.md",
     "domains/compute/chip-wafer/chip-wafer.md",
     "domains/compute/hexa-accel/hexa-accel.md",
