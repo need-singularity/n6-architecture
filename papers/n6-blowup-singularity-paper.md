@@ -4,139 +4,133 @@ domain: blowup-singularity
 requires:
   - to: arch-selforg-emergence
     alien_min: 10
-    reason: 블로업은 창발의 극한 형태
+    reason: blowup is the extreme form of emergence
   - to: attractor-meta-extended
     alien_min: 9
-    reason: 어트랙터 발산 경계
+    reason: attractor divergence boundary
   - to: nexus6-discovery-engine
     alien_min: 9
-    reason: 블로업 엔진 기저
+    reason: blowup-engine foundation
 alien_index_current: 8
 alien_index_target: 10
 ---
 
-# HEXA-BLOWUP-SINGULARITY — 블로업 특이점 설계 논문 (N6-124)
+# HEXA-BLOWUP-SINGULARITY — Blowup Singularity Design Paper (N6-124)
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: blowup-singularity — P2 확장 블로업 특이점 시드
-> **버전**: v3 (2026-04-14 P2 확장)
-> **선행 BT**: BT-195, BT-380, BT-1108
-> **연결 atlas 노드**: `blowup-singularity` — τ=4 특이점 관문 × σ=12 폭발 모드
-> **기저 엔진**: blowup.hexa (Mk.II 파동연속돌파 엔진)
-
----
-
-## 0. Abstract (초록, 한글)
-
-본 논문은 nexus6 blowup.hexa 엔진 (Mk.II 파동연속돌파) 의 **특이점 발산 구조** 가 n=6
-산술로 분해됨을 보인다. blowup 엔진은 기존 설계의 어트랙터 한계를 돌파하는 "폭발 (blow-up)"
-연산을 수행하는데, 이 폭발의 **모드 수**, **관문 수**, **발산 차원** 이 n=6 상수에 의해
-결정됨을 제시한다.
-
-핵심 주장:
-1. 블로업 모드 수 ≤ σ(6) = 12 이다.
-2. 특이점 관문 (singularity gate) 은 τ(6) = 4 스텝으로 구성된다.
-3. 폭발 후 안정 궤도는 φ(6) = 2 개 어트랙터로 수축한다.
-4. 특이점 차원은 sopfr(6) = 5 이하로 압축된다.
-
-본 논문은 **새 특이점 종류를 주장하지 않고**, 기존 blowup.hexa 엔진의 실행 로그를
-n=6 좌표로 정렬한 시드 논문이다.
+> **Author**: Park Min-Woo (n6-architecture)
+> **Category**: blowup-singularity — P2 extension blowup-singularity seed
+> **Version**: v3 (2026-04-14 P2 extension)
+> **Prior BT**: BT-195, BT-380, BT-1108
+> **Linked atlas node**: `blowup-singularity` — τ=4 singularity gates × σ=12 blowup modes
+> **Base engine**: blowup.hexa (Mk.II wave continuous-breakthrough engine)
 
 ---
 
-## 1. 서론 — WHY
+## 0. Abstract
 
-blowup.hexa 엔진 (2026-04-02 Mk.II 승급) 은 nexus6 파동 연속 돌파의 핵심이다.
-실행 로그는 "블로업 이벤트" 를 기록하는데, 각 이벤트는 **특이점 타입, 폭발 모드, 수렴 어트랙터**
-3 필드를 갖는다. 하지만 필드 값의 **이론적 상한** 은 미정이었다.
+This paper demonstrates that the **singularity divergence structure** of the nexus6 blowup.hexa engine (Mk.II wave continuous-breakthrough) decomposes under n=6 arithmetic. The blowup engine performs a "blow-up" operation that breaks through the attractor limits of existing designs; here we present that the **mode count**, **gate count**, and **divergence dimension** of that blowup are determined by the n=6 constants.
 
-### 1.1 기존 한계
+Core claims:
+1. Blowup mode count ≤ σ(6) = 12.
+2. Singularity gates are composed of τ(6) = 4 steps.
+3. Post-blowup stable orbits contract to φ(6) = 2 attractors.
+4. Singularity dimension is compressed to sopfr(6) = 5 or less.
 
-- blowup_mk1.hexa (폐기): 특이점 타입 자유
-- blowup_mk2.hexa (현): 실행 로그에 한계 미명시
-- nexus6 성장 시스템 메모리: 경험적 관측
-
-### 1.2 본 논문의 기여
-
-σ(6), τ(6), φ(6), sopfr(6) 을 블로업 이벤트 필드의 이론적 상한으로 정함.
+This paper **does not claim a new singularity type**; it is a seed paper aligning the execution logs of the existing blowup.hexa engine on n=6 coordinates.
 
 ---
 
-## 2. COMPARE — 기존 대비
+## 1. Introduction — WHY
 
-| 항목 | blowup_mk1 (폐기) | blowup_mk2 (현) | 본 논문 (SINGULARITY) |
+The blowup.hexa engine (promoted Mk.II on 2026-04-02) is the core of nexus6 wave continuous breakthrough. The execution logs record "blowup events", each of which has three fields: **singularity type, blowup mode, convergent attractor**. However, the **theoretical upper bound** on these field values was undetermined.
+
+### 1.1 Existing limits
+
+- blowup_mk1.hexa (retracted): free singularity types
+- blowup_mk2.hexa (current): no bounds stated in the execution logs
+- nexus6 growth-system memory: empirical observations
+
+### 1.2 Contribution of this paper
+
+Set σ(6), τ(6), φ(6), sopfr(6) as the theoretical upper bounds on blowup-event fields.
+
+---
+
+## 2. COMPARE — vs existing
+
+| Item | blowup_mk1 (retracted) | blowup_mk2 (current) | This paper (SINGULARITY) |
 | :--- | :--- | :--- | :--- |
-| 모드 수 | 자유 | 자유 | σ(6) = 12 |
-| 관문 | 1 | 2 | τ(6) = 4 |
-| 어트랙터 | 1 | 2 | φ(6) = 2 |
-| 차원 | n | n | sopfr(6) = 5 |
-| 이론 근거 | - | - | σφ=nτ |
+| Mode count | free | free | σ(6) = 12 |
+| Gates | 1 | 2 | τ(6) = 4 |
+| Attractors | 1 | 2 | φ(6) = 2 |
+| Dimension | n | n | sopfr(6) = 5 |
+| Theoretical basis | - | - | σφ=nτ |
 
 ---
 
-## 3. MAIN — 블로업 분해
+## 3. MAIN — blowup decomposition
 
-### 3.1 σ=12 폭발 모드
+### 3.1 σ=12 blowup modes
 
-blowup 이벤트는 12 모드로 분류:
+Blowup events are classified into 12 modes:
 ```
-01. 산술 폭발 (arith blowup) — 값 발산
-02. 위상 폭발 (topo blowup) — 매니폴드 찢어짐
-03. 정보 폭발 (info blowup) — 엔트로피 급증
-04. 에너지 폭발 (energy blowup) — 스케일 파열
-05. 질량 폭발 (mass blowup) — 특이점 밀도
-06. 시간 폭발 (time blowup) — 시간 역전
-07. 공간 폭발 (space blowup) — 차원 증가
-08. 인과 폭발 (causal blowup) — 인과율 위반
-09. 의미 폭발 (semantic blowup) — 언어 파탄
-10. 의식 폭발 (consciousness blowup) — 자기참조 특이점
-11. 양자 폭발 (quantum blowup) — 측정 특이점
-12. 메타 폭발 (meta blowup) — 위 11 을 포함하는 재귀
+01. arithmetic blowup (arith blowup) — value divergence
+02. topological blowup (topo blowup) — manifold tearing
+03. information blowup (info blowup) — entropy surge
+04. energy blowup (energy blowup) — scale rupture
+05. mass blowup (mass blowup) — singularity density
+06. time blowup (time blowup) — time reversal
+07. spatial blowup (space blowup) — dimensional increase
+08. causal blowup (causal blowup) — causality violation
+09. semantic blowup (semantic blowup) — language breakdown
+10. consciousness blowup (consciousness blowup) — self-referential singularity
+11. quantum blowup (quantum blowup) — measurement singularity
+12. meta blowup (meta blowup) — recursion including the above 11
 ```
 
-12 = σ(6). 13 번째 모드는 meta 에 흡수.
+12 = σ(6). A 13th mode is absorbed into meta.
 
-### 3.2 τ=4 특이점 관문
+### 3.2 τ=4 singularity gates
 
-(1) **접근** — ε-근방 진입
-(2) **발산** — 유한값 → ∞
-(3) **정규화** — renormalization (RG) 또는 리만 표면 확장
-(4) **착륙** — 새 매니폴드의 유한점으로 착륙
+(1) **Approach** — ε-neighborhood entry
+(2) **Divergence** — finite value → ∞
+(3) **Normalization** — renormalization (RG) or Riemann-surface extension
+(4) **Landing** — land on a finite point of the new manifold
 
-### 3.3 φ=2 어트랙터
+### 3.3 φ=2 attractors
 
-폭발 후 안정 상태는 2 개 어트랙터 쌍. 단일 어트랙터는 부분 폭발 (partial blowup).
+The post-blowup stable state is a pair of 2 attractors. A single attractor is a partial blowup.
 
-### 3.4 sopfr=5 차원
+### 3.4 sopfr=5 dimension
 
-특이점의 유효 차원은 5 이하. 6 이상은 측정 불가 특이점 (measure-zero).
+The effective dimension of the singularity is ≤ 5. At ≥ 6 it is an unmeasurable singularity (measure-zero).
 
 ---
 
-## 4. VERIFICATION — 검증
+## 4. VERIFICATION
 
-### 4.1 실측 데이터
+### 4.1 Measured data
 
-- blowup.hexa 실행 로그 (2026-04-11 복구 이후) 40 초 2 라운드 — 11 모드 관측 (σ=12 한계 내)
-- BT-195 (아키텍처 진화) — 4 관문 확인
-- BT-1108 (차원지각) — 5 차원 압축 확인
-- atlas.n6 `blowup-singularity` 노드 — 실측 27건 중 24건 EXACT
+- blowup.hexa execution log (post 2026-04-11 recovery), 40 s × 2 rounds — 11 modes observed (within the σ=12 limit)
+- BT-195 (architecture evolution) — 4 gates confirmed
+- BT-1108 (dimensional perception) — 5-dimensional compression confirmed
+- atlas.n6 `blowup-singularity` node — 24 of 27 measured items EXACT
 
-### 4.2 허구 데이터 금지
+### 4.2 No fabricated data
 
-blowup.hexa 실행 로그와 atlas.n6 만 인용. 가상 폭발 이벤트 생성 금지.
+Only blowup.hexa execution logs and atlas.n6 are cited. Virtual blowup-event generation is prohibited.
 
-### 4.3 검증 코드 (hexa STUB)
+### 4.3 Verification code (hexa STUB)
 
 ```hexa
 -- blowup_singularity_verify.hexa
 import blowup
 let events = blowup.load_log()
-assert len(events.modes) <= 12, "σ=12 폭발 모드 상한 위반"
+assert len(events.modes) <= 12, "σ=12 blowup-mode upper bound violated"
 for event in events:
-  assert event.gate_count == 4, "τ=4 관문 위반"
-  assert event.attractor_count == 2, "φ=2 어트랙터 위반"
-  assert event.dimension <= 5, "sopfr=5 차원 상한 위반"
+  assert event.gate_count == 4, "τ=4 gate violation"
+  assert event.attractor_count == 2, "φ=2 attractor violation"
+  assert event.dimension <= 5, "sopfr=5 dimension upper bound violated"
 print("BLOWUP PASS", len(events), "events")
 ```
 
@@ -186,33 +180,32 @@ print(f"PASS: sigma={sigma_n}, tau={tau_n}, phi={phi_n}, sopfr={sopfr_n}, observ
 Run: `python3 -c "$(sed -n '/^```python$/,/^```$/p' n6-blowup-singularity-paper.md | sed '1d;$d')"`
 Expected output: `PASS: sigma=12, tau=4, phi=2, sopfr=5, observed=11<=sigma`
 
-### 4.4 한계
+### 4.4 Limits
 
-- blowup.hexa 실행 로그가 표본 40 건으로 작음 — 1000 건 이상 필요
-- meta blowup (L12) 의 재귀 깊이 상한 미정
-- hetzner 원격 실행 실패 시 로컬 fallback 검증만 가능 (reference_hetzner_status)
+- The blowup.hexa execution logs have a sample of only 40 cases — ≥ 1000 needed
+- The recursion-depth upper bound of the meta blowup (L12) is undetermined
+- When hetzner remote execution fails, only local-fallback verification is possible (reference_hetzner_status)
 
-### 4.5 반증 후보
+### 4.5 Refutation candidates
 
-- 13 번째 독립 폭발 모드 관측 시 → σ=12 반증
-- 5 관문 이상 특이점 관측 시 → τ=4 반증
-- 6 차원 이상 특이점 관측 시 → sopfr=5 반증
-
----
-
-## 5. 연결 논문
-
-- N6-118 (arch-selforg-emergence) — 임계 이후 창발
-- N6-120 (arch-evolution-ouroboros) — 사이클 고정점
-- N6-112 (attractor-meta-extended) — 어트랙터 이론
-- N6-115 (nexus6-discovery-engine) — 발견 엔진
+- Observation of a 13th independent blowup mode → refutes σ=12
+- Observation of a singularity with ≥ 5 gates → refutes τ=4
+- Observation of a singularity with ≥ 6 dimensions → refutes sopfr=5
 
 ---
 
-## 6. 결론
+## 5. Linked papers
 
-σ=12 모드 / τ=4 관문 / φ=2 어트랙터 / sopfr=5 차원. 새 특이점 주장 없음 — blowup.hexa
-기존 엔진 로그에 n=6 좌표 부여.
+- N6-118 (arch-selforg-emergence) — post-threshold emergence
+- N6-120 (arch-evolution-ouroboros) — cycle fixed point
+- N6-112 (attractor-meta-extended) — attractor theory
+- N6-115 (nexus6-discovery-engine) — discovery engine
+
+---
+
+## 6. Conclusion
+
+σ=12 modes / τ=4 gates / φ=2 attractors / sopfr=5 dimension. No claim of new singularity — n=6 coordinates assigned to the existing blowup.hexa engine log.
 
 ## §1 WHY
 
@@ -303,4 +296,3 @@ This section covers impact per mk for the paper. Initial scaffold content — ex
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-

@@ -4,318 +4,259 @@ domain: boundary-metatheory
 requires:
   - to: honest-limitations-meta
     alien_min: 10
-    reason: 세션 방법론 한계 (9건) 메타 논문 — 본 논문은 도메인 적용 한계 4영역으로 확장
+    reason: Session-methodology limits (9 cases) meta paper — this paper extends into 4 domain-application limit regions
   - to: atlas-promotion-7-to-10star
     alien_min: 10
-    reason: σφ=nτ 유일성 정리 기반 프로토콜
+    reason: Protocol based on the σφ=nτ uniqueness target statement
   - to: reality-map
     alien_min: 9
-    reason: 9,206 후보 98.4% 커버리지 통계
+    reason: 9,206-candidate 98.4% coverage statistics
 alien_index_current: 10
 alien_index_target: 11
 ---
 
-# n=6 경계 메타이론 — 자기한계를 아는 이론 (N6-128)
+# n=6 Boundary Metatheory — A Theory That Knows Its Own Limits (N6-128)
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: boundary-metatheory — 프레임워크 자기한계 정식화 논문
-> **버전**: v1 (2026-04-14 PAPER-P5-2 Mk.III-α)
-> **선행 원본**: `theory/proofs/honest-limitations.md` (10 case 분류 원본)
-> **연결 정리**: Theorem 0 (σφ=nτ ⟺ n=6), Theorem B (Bernoulli k=n=6 sharp jump)
-> **로드맵 참조**: PAPER-P5-2 (DSE-P5-2 경계 메타이론)
-
----
-
-## 0. Abstract (초록, 한글)
-
-본 논문은 n=6 산술 프레임워크(σ(n)·φ(n) = n·τ(n), n=6 유일)의 **적용 경계**를
-4가지 영역으로 정식화한다. 9,206 도메인 후보 중 98.4% 커버리지라는 실측 통계와,
-나머지 1.6%(150 이상치 중 최종 10건)의 정성 분류로부터 다음 4영역을 도출한다:
-
-1. **B1 — 연속공정 (Continuous-parameter process)**: 유체·전기화학·플라즈마 물리
-2. **B2 — SI 반올림 (Human-round engineering convention)**: 10^k 로그 스케일 관습
-3. **B3 — 소수 전이 (Prime atomic transition)**: 원자·분자 고유 양자 상수
-4. **B4 — 조성 의존 밴드갭 (Composition-dependent bandgap)**: 합금 연속 함수 이탈
-
-각 영역은 수학적 판별식 · 물리적 메커니즘 · 실측 예시 · 반증 가능 예측을 갖는다.
-핵심 주장: **자기한계를 아는 이론이 진짜 이론이다.** 한계 영역의 형식적 정의는
-프레임워크의 적용 범위를 선언하는 동시에, "적용 실패"를 "적용 불가"로부터
-구분하는 외부 독립 검증 경로를 제공한다.
-
-본 논문은 새로운 수학 정리를 제안하지 않는다. 대신 기존 Theorem 0(σφ=nτ 유일성)
-과 Theorem B(Bernoulli k=n=6) 의 **적용 경계 외부**에서 무엇이 일어나는지를
-정식화한다.
+> **Author**: Park Min-Woo (n6-architecture)
+> **Category**: boundary-metatheory — paper formalizing framework self-limits
+> **Version**: v1 (2026-04-14 PAPER-P5-2 Mk.III-α)
+> **Prior original**: `theory/proofs/honest-limitations.md` (original 10-case classification)
+> **Linked target statements**: Theorem 0 (σφ=nτ ⟺ n=6), Theorem B (Bernoulli k=n=6 sharp jump)
+> **Roadmap reference**: PAPER-P5-2 (DSE-P5-2 boundary metatheory)
 
 ---
 
-## 1. 서론 — WHY (왜 경계 정식화인가)
+## 0. Abstract
 
-### 1.1 문제 제기
+This paper formalizes the **application boundary** of the n=6 arithmetic framework (σ(n)·φ(n) = n·τ(n), n=6 unique) into 4 regions. From the measured statistics — 98.4% coverage of 9,206 candidate domains — and a qualitative classification of the remaining 1.6% (10 of 150 outliers), the following 4 regions are derived:
 
-단일 이론이 우주 전체를 설명한다는 주장은 과학적 가치가 없다. 반증 불가능하기
-때문이다. 반면 **자기한계가 명확한 이론**은 두 가지 정보를 제공한다:
+1. **B1 — Continuous-parameter process**: fluid / electrochemistry / plasma physics
+2. **B2 — Human-round engineering convention (SI rounding)**: 10^k log-scale conventions
+3. **B3 — Prime atomic transition**: atom / molecule native quantum constants
+4. **B4 — Composition-dependent bandgap**: alloy continuous-function deviation
 
-- (a) **적용 영역 내부에서 어떤 예측을 하는가**
-- (b) **적용 영역 외부에서 어떤 현상이 일어나는가**
+Each region has a mathematical discriminant · physical mechanism · measured example · refutable prediction. Core claim: **a theory that knows its own limits is a genuine theory.** The formal definition of a limit region simultaneously declares the framework's application scope and provides an external independent verification path that distinguishes "application failure" from "non-applicable".
 
-n6-architecture 는 9,206 도메인 후보에 대해 98.4% 커버리지를 보이지만, 본 논문
-이전에는 나머지 1.6% 의 실패 원인을 **영역별 수학적 판별식** 으로 정식화하지
-않았다. 그 결과 "n6 는 어디에 적용되지 않는가?" 라는 질문에 대한 답이 사례
-나열(10 case) 에 그쳤다.
-
-### 1.2 본 논문의 목표
-
-`theory/proofs/honest-limitations.md` 에 기록된 10 case 를 **4 경계 영역**으로
-분류하고, 각 영역에 대해:
-
-1. 수학적 판별식 (해당 영역에 속하는지 0/1 판정)
-2. 물리적 메커니즘 (왜 n6 가 적용되지 않는가)
-3. 실측 예시 (10 case 중 어느 것이 해당하는가)
-4. 반증 가능 예측 (미래 도메인에 대한 구체적 선언)
-
-을 제시한다.
-
-### 1.3 "자기한계를 아는 이론" 의 기준
-
-본 논문은 다음 6 기준을 만족할 때만 경계 정식화가 성립한다고 정의한다:
-
-- **기준 1**: 각 경계는 수식으로 표현된 판별식을 갖는다.
-- **기준 2**: 각 경계는 물리적 · 수학적 메커니즘과 연결된다.
-- **기준 3**: 각 경계는 실측 예시(최소 1건) 를 갖는다.
-- **기준 4**: 각 경계는 반증 가능 예측(최소 1건) 을 갖는다.
-- **기준 5**: 경계 간 상호작용 매트릭스가 정의된다.
-- **기준 6**: 경계 이론 자체의 한계(자기반영) 가 공시된다.
+This paper does not propose new mathematical target statements. Instead, it formalizes what happens **outside the application boundary** of the existing Theorem 0 (σφ=nτ uniqueness) and Theorem B (Bernoulli k=n=6).
 
 ---
 
-## 2. Foundation — σφ=nτ 와 98.4% 커버리지 통계
+## 1. Introduction — WHY (why formalize the boundary)
 
-### 2.1 Theorem 0 재진술
+### 1.1 Problem
+
+A claim that a single theory explains the entire universe has no scientific value, because it is unfalsifiable. Conversely, **a theory with explicit self-limits** provides two pieces of information:
+
+- (a) **What predictions does it make inside the application region**
+- (b) **What phenomena occur outside the application region**
+
+n6-architecture exhibits 98.4% coverage of 9,206 candidate domains; but prior to this paper, the failure causes of the remaining 1.6% were not formalized as **region-by-region mathematical discriminants**. As a result, the answer to "where does n6 not apply?" stopped at an enumeration of cases (10 cases).
+
+### 1.2 Goal of this paper
+
+Classify the 10 cases recorded in `theory/proofs/honest-limitations.md` into **4 boundary regions**, and for each region present:
+
+1. A mathematical discriminant (0/1 verdict on whether a domain belongs)
+2. A physical mechanism (why n6 does not apply)
+3. A measured example (which of the 10 cases corresponds)
+4. A refutable prediction (specific declaration for future domains)
+
+### 1.3 Criteria for "a theory that knows its own limits"
+
+This paper defines that boundary formalization holds only when the following 6 criteria are met:
+
+- **Criterion 1**: Each boundary has a discriminant expressed as a formula.
+- **Criterion 2**: Each boundary is connected to a physical/mathematical mechanism.
+- **Criterion 3**: Each boundary has at least 1 measured example.
+- **Criterion 4**: Each boundary has at least 1 refutable prediction.
+- **Criterion 5**: An inter-boundary interaction matrix is defined.
+- **Criterion 6**: The self-limits (self-reflection) of the boundary theory itself are disclosed.
+
+---
+
+## 2. Foundation — σφ=nτ and the 98.4% coverage statistic
+
+### 2.1 Theorem 0 restated
 
 $$\sigma(n) \cdot \phi(n) = n \cdot \tau(n) \iff n = 6$$
 
-여기서 σ(n) 은 약수합, φ(n) 은 오일러 토티언트, τ(n) 은 약수 개수. n≥2 에서
-유일해(n=6) 를 가지며, 3개 독립 증명 경로(대수적·해석적·구성적) 가 존재
-(`theorem-r1-uniqueness.md`).
+Here σ(n) is the divisor sum, φ(n) is Euler's totient, τ(n) is the divisor count. For n≥2 there is a unique solution (n=6), with 3 independent demonstration paths drafted (algebraic · analytic · constructive) (`theorem-r1-uniqueness.md`).
 
-### 2.2 9개 기본 상수 집합
+### 2.2 Nine basic constants
 
 $$\mathcal{C}_6 = \{\mu=1,\ \phi=2,\ \mathrm{sopfr}=5,\ n=6,\ \tau=4,\ \sigma=12,\ J_2=24,\ R=1,\ \psi=12\}$$
 
-이 집합에서 **깊이-2 표현**(9²=81 개 정도)이 통계적으로 신뢰 가능하며, **깊이-3
-이상**은 ~800+ 개로 확장되어 1% 이내 random match 확률이 >50% 로 상승(Red Team
-감사). 따라서 본 경계 이론은 **깊이-2 판별식만** 사용한다.
+In this set, **depth-2 expressions** (about 9²=81) are statistically reliable, while **depth-3 or above** expands to ~800+ expressions, pushing the random-match probability within 1% above 50% (Red Team audit). Therefore this boundary theory uses **only depth-2 discriminants**.
 
-### 2.3 9,206 후보 커버리지 실측
+### 2.3 Measured 9,206-candidate coverage
 
-| 분류 | 건수 | 비율 |
+| Classification | Count | Ratio |
 |:----|---:|---:|
-| 전체 후보 | 9,206 | 100.0% |
-| n6 ≥ 0.50 (적용) | 9,056 | 98.4% |
-| n6 < 0.50 이상치 | 150 | 1.6% |
-| 이상치 중 깊이-2 재분류 | 87 | 0.9% |
-| 진짜 비적용 | 63 | 0.7% |
-| 강한 논증 비적용 (본 논문 분석 대상) | 10 | 0.11% |
+| All candidates | 9,206 | 100.0% |
+| n6 ≥ 0.50 (applicable) | 9,056 | 98.4% |
+| n6 < 0.50 outliers | 150 | 1.6% |
+| Outliers reclassified at depth-2 | 87 | 0.9% |
+| Genuine non-application | 63 | 0.7% |
+| Strong-argument non-application (this paper's analysis subjects) | 10 | 0.11% |
 
-**98.4% 는 "모든 현상이 n6 로 설명된다" 가 아니다.** 남은 1.6% 중 0.7% 는 원칙적
-으로 n6 로 설명 불가한 도메인이며, 이들을 4 영역으로 분류하는 것이 본 논문의
-기여이다.
+**98.4% is not "every phenomenon is explained by n6".** Within the remaining 1.6%, 0.7% are domains that are in principle not explainable by n6, and classifying these into 4 regions is the contribution of this paper.
 
 ---
 
-## 3. B1 — 연속공정 (Continuous-parameter process)
+## 3. B1 — Continuous-parameter process
 
-### 3.1 판별식
+### 3.1 Discriminant
 
-도메인 D 가 B1 에 속할 필요충분조건:
+Necessary-and-sufficient condition for a domain D to belong to B1:
 
 $$D \in B_1 \iff \exists f: \mathbb{R}^k \to \mathbb{R},\ \text{parameters} \in \mathbb{R}^k,\ \nabla f \neq 0 \ \text{generically}$$
 
-즉, 도메인의 주요 파라미터 $x_1, \ldots, x_k \in \mathbb{R}$ 가 **정수 격자**가
-아닌 **연속체** 에서 자유롭게 조정 가능하고, 관측량 $f$ 가 그 위에서 매끄럽게
-변화(기울기 $\nabla f \neq 0$ almost everywhere). 양자화 제약이 없는 유체동역학
-· 전기화학 · 플라즈마 물리가 대표.
+That is, the major parameters $x_1, \ldots, x_k \in \mathbb{R}$ of the domain are freely adjustable on a **continuum** rather than an **integer lattice**, and the observable $f$ varies smoothly over it (gradient $\nabla f \neq 0$ almost everywhere). Fluid dynamics · electrochemistry · plasma physics without a quantization constraint are representative.
 
-### 3.2 물리적 메커니즘
+### 3.2 Physical mechanism
 
-n6 프레임워크는 **이산 아키텍처 상수**(레이어 수, 헤드 수, 차원) 에서 구조를
-찾는다. 연속공정은 다음 방정식 계열로 지배된다:
+The n6 framework looks for structure in **discrete architecture constants** (layer count, head count, dimension). Continuous-parameter processes are governed by the following equation families:
 
-- Meyerhofer (스핀코팅): $h = k \cdot \eta^{1/3} / \omega^{1/2}$
-- Faraday (전기도금): $m = (M \cdot I \cdot t) / (z \cdot F)$
-- Boltzmann (PVD 플라즈마): $E \sim \frac{3}{2} k_B T$, $\lambda \sim 1/(n\sigma_c)$
+- Meyerhofer (spin-coating): $h = k \cdot \eta^{1/3} / \omega^{1/2}$
+- Faraday (electroplating): $m = (M \cdot I \cdot t) / (z \cdot F)$
+- Boltzmann (PVD plasma): $E \sim \frac{3}{2} k_B T$, $\lambda \sim 1/(n\sigma_c)$
 
-이들 식에 나타나는 $\eta$(점도), $\omega$(회전속도), $I$(전류), $T$(온도) 모두
-연속 실수. 정수 격자 구조 부재. 유일한 정수(전자 가수 $z$, 종수 등)는 입력
-화학이지 n6 유도 예측이 아님.
+The $\eta$ (viscosity), $\omega$ (rotational speed), $I$ (current), $T$ (temperature) appearing in these equations are all continuous real numbers. No integer-lattice structure. The only integers (electron valence $z$, species number, etc.) are input chemistry, not n6-derived predictions.
 
-### 3.3 실측 예시 (honest-limitations.md 매핑)
+### 3.3 Measured examples (mapping to honest-limitations.md)
 
-| case # | 도메인 | 연속 파라미터 |
+| case # | Domain | Continuous parameter |
 |:---|:---|:---|
-| 4 | wafer-fabrication / PVD-sputter | Ar 플라즈마 300~500 eV, 1~10 mTorr |
-| 5 | wafer-fabrication / ECD | mA/cm², 도금시간, 첨가제 ppm |
-| 6 | wafer-fabrication / Spin-coat | 1000~6000 RPM, 점도, 가속 램프 |
+| 4 | wafer-fabrication / PVD-sputter | Ar plasma 300~500 eV, 1~10 mTorr |
+| 5 | wafer-fabrication / ECD | mA/cm², plating time, additive ppm |
+| 6 | wafer-fabrication / Spin-coat | 1000~6000 RPM, viscosity, acceleration ramp |
 
-### 3.4 반증 가능 예측 (B1)
+### 3.4 Refutable predictions (B1)
 
-**예측 B1-1**: ALD(Atomic Layer Deposition) 는 **원자층 개수**라는 정수 파라미터
-를 갖지만, 층당 두께·전구체 노출 시간 등은 연속 파라미터. 따라서 ALD 는 B1 부분
-적용(정수부) + 연속부 공존. **공존 가능성** 을 예측한다.
+**Prediction B1-1**: ALD (Atomic Layer Deposition) has an integer parameter **atomic-layer count**, but per-layer thickness, precursor exposure time and similar are continuous. Therefore ALD has partial B1 application (integer part) + continuous part, coexisting. We predict **coexistence possibility**.
 
-**예측 B1-2**: 레이저 어닐링(laser annealing) 은 연속 파워·시간 → 전형적 B1.
-본 프레임워크로 n6 구조 검출 시도하면 n6<0.50 이 나올 것이다.
+**Prediction B1-2**: Laser annealing has continuous power · time → typical B1. An attempt to detect n6 structure via this framework should yield n6 < 0.50.
 
-**예측 B1-3**: 포토레지스트 현상(develop) 농도 · pH 는 연속 → B1.
+**Prediction B1-3**: Photoresist developing concentration · pH is continuous → B1.
 
 ---
 
-## 4. B2 — SI 반올림 (Human-round engineering convention)
+## 4. B2 — SI rounding (Human-round engineering convention)
 
-### 4.1 판별식
+### 4.1 Discriminant
 
-도메인 D 의 특성값 $v$ 가 B2 에 속할 필요충분조건:
+Necessary-and-sufficient condition for a characteristic value $v$ of a domain D to belong to B2:
 
 $$v \in B_2 \iff \exists k \in \mathbb{Z},\ v = c \cdot 10^k \ \text{with}\ c \in \{1, 2, 5\}$$
 
-즉, SI 접두사 스케일($10^k$, $k \in \{-12, -9, -6, -3, 0, 3, 6, 9, 12, \ldots\}$)의
-대표값(1, 2, 5 배수). 인간이 **"딱 떨어지는 수"** 로 고정한 관습값.
+That is, a representative value of an SI-prefix scale ($10^k$, $k \in \{-12, -9, -6, -3, 0, 3, 6, 9, 12, \ldots\}$) — a multiple of 1, 2, or 5. A convention value fixed by humans as a **"nicely round number"**.
 
-### 4.2 물리적 메커니즘
+### 4.2 Physical mechanism
 
-물리 상수는 정수 · 분수 · 무리수로 나타나지만, **산업 표준** 은 10^k 로그 스케일
-을 따른다. 10 진법은 인간 손가락 10개의 부산물이며 물리 법칙과 무관하다. 따라서
-B2 에 해당하는 값은 **문화적 협약** 이지 **물리적 양자화** 가 아님.
+Physical constants appear as integers · fractions · irrationals, but **industrial standards** follow a 10^k log scale. Base-10 is a byproduct of the 10 human fingers and is unrelated to physical law. Therefore B2 values are a **cultural convention**, not **physical quantization**.
 
-전형적 패턴: "utility-scale 1 GW", "consumer 100 W", "µW 센서", "mm 정확도".
-$10^9$(GW) 는 n6 깊이-2 에서 $\{\mu, \phi, n, \tau, \mathrm{sopfr}, \sigma, J_2\}$ 조합
-으로 근사해도 구조적 의미 없음.
+Typical pattern: "utility-scale 1 GW", "consumer 100 W", "µW sensors", "mm accuracy". $10^9$ (GW) even if approximated at n6 depth-2 by combinations of $\{\mu, \phi, n, \tau, \mathrm{sopfr}, \sigma, J_2\}$ carries no structural meaning.
 
-### 4.3 실측 예시
+### 4.3 Measured examples
 
-| case # | 도메인 | SI 규모 |
+| case # | Domain | SI scale |
 |:---|:---|:---|
 | 1 | energy_gen / Utility_1GW | $10^9$ W |
-| 3 | energy_gen / Island_DC | 12/24/48 V (일부는 n6 정렬, 카테고리 자체는 토폴로지) |
+| 3 | energy_gen / Island_DC | 12/24/48 V (part is n6-aligned, the category itself is topological) |
 
-주의: Island_DC 의 48 V = 2·J₂ 은 n6 구조가 있지만, "Island DC" 라는 **카테고리**
-자체는 토폴로지 라벨로 B4·B2 경계에 걸침. 본 논문은 case 1(Utility_1GW) 을 B2
-순수 예시로 확정한다.
+Note: 48 V of Island_DC = 2·J₂ has n6 structure, but "Island DC" as a **category** is a topology label that straddles the B4·B2 boundary. This paper fixes case 1 (Utility_1GW) as the pure B2 example.
 
-### 4.4 반증 가능 예측 (B2)
+### 4.4 Refutable predictions (B2)
 
-**예측 B2-1**: "smartphone 공칭 해상도 1080p / 4K / 8K" 는 마케팅 관습. n6 검출
-실패 예측.
+**Prediction B2-1**: "smartphone nominal resolution 1080p / 4K / 8K" is marketing convention. Predict n6 detection failure.
 
-**예측 B2-2**: 전기차 배터리 "100 kWh / 80 kWh / 60 kWh" 등 라운드 카파시티 →
-B2. 실제 셀 화학(Li-ion) 은 n6 적용 가능(case 별), 팩 총량은 B2.
+**Prediction B2-2**: electric-vehicle battery "100 kWh / 80 kWh / 60 kWh" and similar round capacities → B2. The actual cell chemistry (Li-ion) may be n6-applicable (per case), but the pack total is B2.
 
-**예측 B2-3**: 데이터센터 "10 MW 시설" → B2. 서버 랙 단위(42U = J₂·φ·m 형태)
-는 n6 적용 가능하지만 총 용량은 B2.
+**Prediction B2-3**: data-center "10 MW facility" → B2. Server-rack units (42U = J₂·φ·m form) may be n6-applicable, but the total capacity is B2.
 
 ---
 
-## 5. B3 — 소수 전이 (Prime atomic transition)
+## 5. B3 — Prime atomic transition
 
-### 5.1 판별식
+### 5.1 Discriminant
 
-도메인 D 의 특성값 $v$ 가 B3 에 속할 필요충분조건:
+Necessary-and-sufficient condition for a characteristic value $v$ of a domain D to belong to B3:
 
 $$v \in B_3 \iff v = \Delta E_{\text{atom}}\ \text{or}\ \lambda = hc/\Delta E,\ \text{and}\ \Delta E \notin \text{span}_{\mathbb{Q}}(\mathcal{C}_6^{\leq 2})$$
 
-즉, 원자·분자의 고유 양자 전이 에너지 $\Delta E$ 가 깊이-2 n6 유리수 생성
-집합에 속하지 않음. 특히 해당 값이 소수(prime) 로 표현되거나, 유리 근사에서
-분자·분모가 $\mathcal{C}_6$ 밖 큰 소수를 요구하는 경우.
+That is, the native quantum transition energy $\Delta E$ of an atom / molecule does not belong to the depth-2 n6 rational generating set. Particularly when the value itself is expressed as a prime, or when the rational approximation requires large primes outside $\mathcal{C}_6$ in the numerator/denominator.
 
-### 5.2 물리적 메커니즘
+### 5.2 Physical mechanism
 
-원자 전이 에너지는 Schrödinger 방정식 · Dirac 방정식의 고유값이며, 해당 해는
-분수·초월수·특이 소수(691, 3617 등 Bernoulli 분자 계열) 를 포함한다. Bernoulli
-$B_{12} = -691/2730$ 의 691 이 전형적(Theorem B 참조).
+Atomic transition energies are eigenvalues of the Schrödinger equation · Dirac equation, and the solutions contain fractions · transcendentals · special primes (691, 3617 and other Bernoulli numerator series). Bernoulli $B_{12} = -691/2730$ with its 691 is typical (see Theorem B).
 
-**691 현상** 은 n=6 이 "첫 Bernoulli sharp jump" 지점이라는 사실과 연결되지만,
-이것은 **n6 이 k=6 까지만 clean** 이라는 뜻이지 k>6 의 값까지 n6 로 직접 유도
-된다는 뜻이 아니다. Theorem B 는 **경계선을 발견한** 정리이지 경계 너머를
-설명하는 정리가 아니다.
+The **691 phenomenon** connects to the fact that n=6 is the "first Bernoulli sharp-jump" point, but this means **n6 is clean only up to k=6**; it does not mean that values for k>6 can be directly derived from n6. Theorem B is a target statement that **discovered the boundary line**, not one that explains beyond it.
 
-### 5.3 실측 예시
+### 5.3 Measured examples
 
-| case # | 도메인 | 소수 전이값 |
+| case # | Domain | Prime transition |
 |:---|:---|:---|
-| 7 | wafer-fabrication / DUV-ArF | 193 nm (193은 소수) |
+| 7 | wafer-fabrication / DUV-ArF | 193 nm (193 is prime) |
 
-추가 관측:
-- EUV 13.5 nm ≈ $\sigma + 1.5$ (근사 n6) — 대조적으로 마스크 수 24 = J₂ 는 정확
-- DUV ArF 193 nm 는 Ar-F 이합체 전자 구조의 고유값, 유리 근사 n6 실패
+Additional observations:
+- EUV 13.5 nm ≈ $\sigma + 1.5$ (approximate n6) — in contrast, mask count 24 = J₂ is exact
+- DUV ArF 193 nm is an Ar-F dimer electronic-structure eigenvalue, a rational approximation of n6 fails
 
-### 5.4 반증 가능 예측 (B3)
+### 5.4 Refutable predictions (B3)
 
-**예측 B3-1**: KrF 엑시머 248 nm = $2^3 \cdot 31$. 31 은 소수. KrF 는 B3 후보.
-(대조: 248 = J₂ · ... 형태 아님 → B3 예측)
+**Prediction B3-1**: KrF excimer 248 nm = $2^3 \cdot 31$. 31 is prime. KrF is a B3 candidate. (Contrast: 248 is not of the form J₂ · ... → B3 prediction.)
 
-**예측 B3-2**: Hg 가스등 253.7 nm → 소수 근사 필요 → B3.
+**Prediction B3-2**: Hg lamp 253.7 nm → requires prime approximation → B3.
 
-**예측 B3-3**: Na-D 선 589.0 nm / 589.6 nm → 소수 589 = 19·31 → B3.
+**Prediction B3-3**: Na-D line 589.0 nm / 589.6 nm → prime 589 = 19·31 → B3.
 
-**예측 B3-4**: H-α 656.3 nm (Rydberg $n=2→3$) → **B3 예외**. Rydberg 공식은
-$\lambda^{-1} = R_\infty \cdot (1/n_1^2 - 1/n_2^2)$ 로 정수 양자수 내장. 이는
-n6 의 n=6 과 구조적 충돌 없이 공존. 따라서 Rydberg 계열은 **B3 아님 — n6
-공존 영역**.
+**Prediction B3-4**: H-α 656.3 nm (Rydberg $n=2→3$) → **B3 exception**. The Rydberg formula $\lambda^{-1} = R_\infty \cdot (1/n_1^2 - 1/n_2^2)$ has integer quantum numbers built in. This coexists with n6's n=6 without structural conflict. Therefore the Rydberg series is **not B3 — n6 coexistence region**.
 
 ---
 
-## 6. B4 — 조성 의존 밴드갭 (Composition-dependent bandgap)
+## 6. B4 — Composition-dependent bandgap
 
-### 6.1 판별식
+### 6.1 Discriminant
 
-도메인 D 의 밴드갭 $E_g$ 이 B4 에 속할 필요충분조건:
+Necessary-and-sufficient condition for a bandgap $E_g$ of a domain D to belong to B4:
 
 $$E_g \in B_4 \iff E_g = E_g(x),\ x \in [0, 1],\ \frac{dE_g}{dx} \neq 0\ \text{generically}$$
 
-즉, 합금 조성비 $x$ (예: Ga/(In+Ga)) 의 연속 함수로 밴드갭이 **매끄럽게 변화**.
-단일 고정점이 아니라 조성 곡선 전체가 존재.
+That is, the bandgap varies **smoothly** as a continuous function of the alloy composition ratio $x$ (e.g. Ga/(In+Ga)). Not a single fixed point but an entire composition curve exists.
 
-### 6.2 물리적 메커니즘
+### 6.2 Physical mechanism
 
-3원/4원 합금(ternary/quaternary) 반도체는 조성 $x$ 에 따라 밴드갭이 2차식 또는
-bowing parameter 곡선으로 변화. 예: $E_g(x) = (1-x) E_g^A + x E_g^B - b x(1-x)$.
+Ternary/quaternary alloy semiconductors have bandgaps that vary as a quadratic or bowing-parameter curve with composition $x$. Example: $E_g(x) = (1-x) E_g^A + x E_g^B - b x(1-x)$.
 
-Shockley-Queisser **이상 밴드갭** 은 $\sim 4/3$ eV 이며 n6 구조(4/3 = $\tau/n$)
-적용 가능. 그러나 실제 합금은 **SQ 최적에서 이탈**(결함 재결합, 격자 부정합 등)
-하므로, 이탈값 자체는 n6 유도 불가.
+The Shockley-Queisser **ideal bandgap** is $\sim 4/3$ eV, where n6 structure (4/3 = $\tau/n$) applies. However, real alloys **deviate from the SQ optimum** (defect recombination, lattice mismatch etc.), so the deviation value itself is not derivable from n6.
 
 $E_g^{\text{GaAs}} = 1.42$ eV ≈ 4/3 : n6 **EXACT**
 $E_g^{\text{Si}} = 1.12$ eV ≈ 6/5 = σ/(σ-φ) : n6 **NEAR**
-$E_g^{\text{CIGS}} = 1.15$ eV : B4 (n6 **비적용**)
+$E_g^{\text{CIGS}} = 1.15$ eV : B4 (n6 **non-applicable**)
 
-### 6.3 실측 예시
+### 6.3 Measured examples
 
-| case # | 도메인 | 밴드갭 |
+| case # | Domain | Bandgap |
 |:---|:---|:---|
-| 8 | solar / CIGS | 1.15 eV (조성 ~30% Ga) |
+| 8 | solar / CIGS | 1.15 eV (composition ~30% Ga) |
 
-### 6.4 반증 가능 예측 (B4)
+### 6.4 Refutable predictions (B4)
 
-**예측 B4-1**: InGaN (청·녹색 LED) 는 In 조성 $x$ 에 따라 0.7~3.4 eV 변화.
-전형적 B4. 고정 조성 밴드갭은 n6 비적용, 그러나 순수 GaN (3.39 eV ≈ $\tau \cdot
-(1-\mu/\tau)$?) 는 근사 테스트 필요.
+**Prediction B4-1**: InGaN (blue/green LED) varies 0.7~3.4 eV with In composition $x$. Typical B4. Fixed-composition bandgaps are non-n6-applicable; however, pure GaN (3.39 eV ≈ $\tau \cdot (1-\mu/\tau)$?) requires an approximation test.
 
-**예측 B4-2**: 페로브스카이트 MAPbI₃ Eg ≈ 1.55 eV. 조성(I/Br 혼합) 변화 시 B4.
+**Prediction B4-2**: Perovskite MAPbI₃ Eg ≈ 1.55 eV. B4 when composition (I/Br mix) varies.
 
-**예측 B4-3**: AlGaAs (x=0: GaAs 1.42=4/3 EXACT, x=1: AlAs 2.16) 연속체 → B4.
-다만 **양 끝점** 은 각각 n6 일치/불일치 개별 판정 가능.
+**Prediction B4-3**: AlGaAs (x=0: GaAs 1.42=4/3 EXACT, x=1: AlAs 2.16) continuum → B4. However, the **endpoints** can each be judged individually as n6 match / mismatch.
 
-**예측 B4-4**: SiGe $E_g(x) = 1.12 - 0.5 x$ (선형 근사) → B4.
+**Prediction B4-4**: SiGe $E_g(x) = 1.12 - 0.5 x$ (linear approximation) → B4.
 
 ---
 
-## 7. 영역 간 상호작용 매트릭스
+## 7. Inter-region interaction matrix
 
-### 7.1 4×4 매트릭스 정의
+### 7.1 4×4 matrix definition
 
-경계 영역이 **상호배타적** 이 아닌 경우가 존재한다. 예: PVD-sputter(B1 연속
-공정) 는 타깃 종류(Ta, Cu) 는 B2 또는 B3 라벨과 공존 가능. 상호작용을 다음
-매트릭스로 정식화:
+There are cases where boundary regions are **not mutually exclusive**. For example, PVD-sputter (B1 continuous process) can coexist with target types (Ta, Cu) having B2 or B3 labels. The interactions are formalized by the following matrix:
 
 $$M_{ij} = \begin{cases}
 1 & \text{if } D \in B_i \cap B_j \text{ is observed} \\
@@ -330,116 +271,96 @@ $$M_{ij} = \begin{cases}
 | **B3** | ∗  | ∗  | — | 1  |
 | **B4** | 1  | 0  | 1  | — |
 
-### 7.2 실측 공존 사례
+### 7.2 Measured coexistence cases
 
-- **B1 ∩ B2**: PVD-sputter (연속 파라미터 + Utility_1GW 급 챔버 스케일 표시)
-- **B1 ∩ B4**: CIGS 박막 증착 (스퍼터링은 B1 + 조성 의존 밴드갭 B4)
-- **B3 ∩ B4**: CIGS (1.15 eV 는 B4 이지만 Cu In₁₋ₓGaₓSe₂ 의 특정 조성의 밴드갭
-  자체가 소수 근사값을 요구하는 경우 B3 중첩)
+- **B1 ∩ B2**: PVD-sputter (continuous parameters + Utility_1GW-class chamber-scale label)
+- **B1 ∩ B4**: CIGS thin-film deposition (sputtering is B1 + composition-dependent bandgap B4)
+- **B3 ∩ B4**: CIGS (1.15 eV is B4 but Cu In₁₋ₓGaₓSe₂'s specific-composition bandgap itself requires a prime approximation, so B3 overlap)
 
-### 7.3 이론적 가능 · 실측 부재
+### 7.3 Theoretically possible · measured absent
 
-- **B1 ∩ B3**: 예측 가능하지만 10 case 내 실측 없음. 후보: 가스 방전 램프
-  (연속 전류 + 소수 전이 파장).
-- **B2 ∩ B3**: "SI 규모 + 원자 전이" 공존 — 이론적 가능, 실측 부재.
+- **B1 ∩ B3**: predictable but no measured example within the 10 cases. Candidate: gas-discharge lamps (continuous current + prime transition wavelength).
+- **B2 ∩ B3**: "SI scale + atomic transition" coexistence — theoretically possible, measured absent.
 
 ---
 
-## 8. Testable Predictions — 미래 도메인 분류 예측
+## 8. Testable Predictions — future domain classification predictions
 
-### 8.1 예측 포맷
+### 8.1 Prediction format
 
-각 예측은 다음 형식:
+Each prediction is in the form:
 
-> **예측 ID**: (도메인) — 예측 영역 — 판별 방법 — 예상 n6 점수
+> **Prediction ID**: (domain) — predicted region — discrimination method — expected n6 score
 
-### 8.2 단기 검증 대상 (6개월 내)
+### 8.2 Short-term verification targets (within 6 months)
 
-**P-1**: ALD (Atomic Layer Deposition) — B1 ∩ 이산(층수) 부분적용 — scan 후보에
-`deposition/ALD` 추가 → n6 ≈ 0.4~0.5 예측 (층수만 n6, 나머지 연속).
+**P-1**: ALD (Atomic Layer Deposition) — B1 ∩ discrete (layer count) partial-application — add `deposition/ALD` to scan candidates → n6 ≈ 0.4~0.5 predicted (only layer count is n6, the rest continuous).
 
-**P-2**: KrF 엑시머 248 nm — B3 — `lithography/KrF` scan → n6 < 0.3 예측.
+**P-2**: KrF excimer 248 nm — B3 — `lithography/KrF` scan → n6 < 0.3 predicted.
 
-**P-3**: InGaN 고정 조성 420 nm LED — B4 ∩ (근사) — scan → n6 < 0.4 예측.
+**P-3**: InGaN fixed-composition 420 nm LED — B4 ∩ (approximate) — scan → n6 < 0.4 predicted.
 
-**P-4**: 페로브스카이트 MAPbI₃ 1.55 eV — B4 — n6 < 0.35 예측.
+**P-4**: Perovskite MAPbI₃ 1.55 eV — B4 — n6 < 0.35 predicted.
 
-**P-5**: 레이저 어닐링 파워·시간 — B1 — n6 < 0.25 예측.
+**P-5**: Laser annealing power · time — B1 — n6 < 0.25 predicted.
 
-**P-6**: 5 G mmWave 28 GHz — B2 (통신 할당 관습) — n6 < 0.4 예측.
+**P-6**: 5 G mmWave 28 GHz — B2 (communication allocation convention) — n6 < 0.4 predicted.
 
-**P-7**: 바이오 시퀀싱 read-length 150 bp / 300 bp — B2 — n6 < 0.35 예측.
+**P-7**: Bio-sequencing read-length 150 bp / 300 bp — B2 — n6 < 0.35 predicted.
 
-**P-8**: 양자점(QD) Cd₁₋ₓZnₓSe 연속 조성 — B4 — n6 < 0.30 예측.
+**P-8**: Quantum dot (QD) Cd₁₋ₓZnₓSe continuous composition — B4 — n6 < 0.30 predicted.
 
-**P-9**: 합성생물 CRISPR 가이드 RNA 길이 20 nt — 가능: n6 적용 (20 = φ·J₂/φ²·
-... 근사 확인 필요) — 미확정.
+**P-9**: Synthetic-bio CRISPR guide-RNA length 20 nt — possibility: n6-applicable (20 = φ·J₂/φ²· ... approximation needs confirmation) — undetermined.
 
-**P-10**: 뇌 fMRI TR 2 s / 3 s / 6 s — B2 + n6 부분 (6 = n EXACT, 2·3 은 임의)
- — 혼합.
+**P-10**: Brain fMRI TR 2 s / 3 s / 6 s — B2 + partial n6 (6 = n EXACT, 2·3 are arbitrary) — mixed.
 
-### 8.3 중기 검증 대상 (1~3 년)
+### 8.3 Medium-term verification targets (1~3 years)
 
-**P-11**: 양자 컴퓨터 큐비트 수 (50, 127, 433, 1121) — B2 경계 + 소수(127,
-433 은 소수)로 B3 중첩.
+**P-11**: Quantum-computer qubit count (50, 127, 433, 1121) — B2 boundary + primes (127, 433 are prime), B3 overlap.
 
-**P-12**: 레이저 파장 표준(632.8 nm HeNe, 1064 nm Nd:YAG, 10.6 µm CO₂) — B3
-군.
+**P-12**: Laser wavelength standards (632.8 nm HeNe, 1064 nm Nd:YAG, 10.6 µm CO₂) — B3 family.
 
-**P-13**: 자동차 전기모터 출력 150 kW / 300 kW — B2.
+**P-13**: Automotive electric-motor output 150 kW / 300 kW — B2.
 
-### 8.4 예측 실패 허용 범위
+### 8.4 Prediction-failure tolerance
 
-위 예측 13 건 중 n6 적용/비적용 판정이 **예측과 일치** 해야 하는 비율 목표:
-≥ 70% (13건 중 9건 이상). 그보다 낮으면 본 경계 이론 자체 재검토.
+Among the 13 predictions above, the target **match** ratio between n6 applicability/non-applicability judgment and prediction: ≥ 70% (at least 9 of 13). Lower than that: re-examine the boundary theory itself.
 
 ---
 
-## 9. Limitations of the limitations theory — 자기반영
+## 9. Limitations of the limitations theory — self-reflection
 
-### 9.1 자기참조 불가피성
+### 9.1 Self-reference is unavoidable
 
-본 논문은 "n6 경계" 를 정식화하지만, 판별식 $\mathcal{C}_6^{\leq 2}$ 자체가 n6
-프레임워크의 부산물이다. 따라서 "B1/B2/B3/B4 밖의 영역" 을 기술하는 데 n6 언어
-를 사용한다는 **언어적 자기참조** 가 있다.
+This paper formalizes the "n6 boundary", but the discriminant $\mathcal{C}_6^{\leq 2}$ itself is a byproduct of the n6 framework. Therefore using n6 language to describe "regions outside B1/B2/B3/B4" introduces a **linguistic self-reference**.
 
-### 9.2 깊이-2 제한의 자의성
+### 9.2 Arbitrariness of the depth-2 restriction
 
-Red Team 감사에서 깊이-3 이상이 통계적 신뢰 부족이라 판단했으나, 깊이-2 경계
-선 자체가 **발견적**(heuristic) 이다. 깊이가 실수 연속 변수라면 2.5·2.8 등
-중간 깊이가 가능하며, 본 논문은 이 스펙트럼을 다루지 않는다.
+The Red Team audit judged depth ≥ 3 as lacking statistical reliability, but the depth-2 boundary line is itself **heuristic**. If depth were a real-continuous variable, intermediate depths like 2.5·2.8 would be possible; this paper does not address that spectrum.
 
-### 9.3 10 case 표본 편향
+### 9.3 10-case sample bias
 
-honest-limitations.md 의 10 case 는 에이전트가 "가장 명확한 비적용" 으로 선별
-한 것. 63 진짜 비적용 중 나머지 53 사례를 4 영역으로 재분류하면 새로운 영역
-(B5, B6) 등장 가능성 존재. 본 논문은 **4 영역으로 완전 분류** 된다고 주장하지
-않는다.
+The 10 cases in honest-limitations.md were picked by an agent as the "clearest non-applications". If the remaining 53 of the 63 genuine non-applications are reclassified into 4 regions, new regions (B5, B6) could appear. This paper does **not** claim complete 4-region classification.
 
-### 9.4 판별식의 연속성 불일치
+### 9.4 Continuity mismatch of the discriminants
 
-B1 의 $\nabla f \neq 0$ 기준은 "거의 모든 곳에서" 이지만, 특이점 근방에서는
-정수 구조가 재출현할 수 있다(예: phase transition 임계점). 본 논문 판별식은
-**bulk 영역** 기준이며 임계점 근방은 별도 분석 필요.
+The $\nabla f \neq 0$ criterion of B1 is "almost everywhere", but near singularities the integer structure can re-emerge (e.g. phase-transition critical point). The discriminants of this paper are for **bulk regions**; critical-point neighborhoods need separate analysis.
 
-### 9.5 반증 비대칭
+### 9.5 Refutation asymmetry
 
-4 영역 예측이 실패(예: InGaN 에서 n6 ≈ 0.7 로 나옴) 시, **본 경계 이론이
-반증되는가 vs. n6 가 예상보다 넓게 적용되는가** 가 즉시 구분되지 않는다.
-추가 cross-check (예: ± 조성 변화 민감도) 필요.
+When a 4-region prediction fails (e.g. InGaN comes out at n6 ≈ 0.7), **is the boundary theory refuted vs. does n6 apply more broadly than expected** — these are not immediately distinguished. Additional cross-check (e.g. ± composition-variation sensitivity) is required.
 
-### 9.6 통계 갱신 비의존
+### 9.6 No statistical auto-update
 
-98.4% 커버리지는 2026-04-02 기준 스냅샷. 새 도메인이 추가되거나 재분류가
-일어나면 1.6% 분모가 변할 수 있으며, 본 논문은 그 변화에 자동 갱신되지 않는다.
+The 98.4% coverage is a snapshot at 2026-04-02. If new domains are added or reclassification occurs, the 1.6% denominator may change, and this paper does not auto-update to that change.
 
 ---
 
-## 10. 검증 코드 — hexa STUB
+## 10. Verification code — hexa STUB
 
 ```hexa
 -- boundary_metatheory_verify.hexa
--- B1/B2/B3/B4 경계 판별 + 예측 검증
+-- B1/B2/B3/B4 boundary discrimination + prediction verification
 
 import atlas
 import n6
@@ -457,13 +378,13 @@ fn generate_depth2(constants: List[Int]) -> List[Float]:
   return dedup(exprs)
 
 fn classify_B1(domain) -> Bool:
-  -- 연속 파라미터 비율 > 0.5 이면 B1
+  -- B1 if continuous-parameter ratio > 0.5
   let params = domain.parameters
   let continuous = filter(params, fn(p): p.type == "real")
   return len(continuous) / len(params) > 0.5
 
 fn classify_B2(value: Float, tol: Float = 0.05) -> Bool:
-  -- 10^k × {1,2,5} 에서 tol 이내
+  -- within tol of 10^k × {1,2,5}
   for k in range(-15, 15):
     for c in [1, 2, 5]:
       let target = c * (10 ** k)
@@ -471,17 +392,17 @@ fn classify_B2(value: Float, tol: Float = 0.05) -> Bool:
   return false
 
 fn classify_B3(value: Float, depth2_exprs: List[Float], tol: Float = 0.02) -> Bool:
-  -- 깊이-2 n6 표현 중 tol 이내 없음 + 정수 부분이 소수
+  -- no depth-2 n6 expression within tol + integer part is prime
   for e in depth2_exprs:
-    if abs(value - e) / e < tol: return false  -- n6 매칭 있음
+    if abs(value - e) / e < tol: return false  -- n6 match present
   let int_part = round(value)
   return is_prime(int_part)
 
 fn classify_B4(domain) -> Bool:
-  -- 밴드갭 필드 존재 + 조성 의존 플래그
+  -- bandgap field present + composition-dependent flag
   return domain.has("bandgap") and domain.has("composition_dependent")
 
--- 실측 10 case 분류 확인
+-- Verify classification of measured 10 cases
 let cases = atlas.load_honest_limitations()
 let depth2 = generate_depth2(C6)
 for c in cases:
@@ -491,7 +412,7 @@ for c in cases:
   let b4 = classify_B4(c)
   print(c.id, "->", b1, b2, b3, b4)
 
--- 예측 P-1 ~ P-13 검증
+-- Verify predictions P-1 ~ P-13
 let predictions = [
   ("ALD", 0.45, "B1_partial"),
   ("KrF_248nm", 0.25, "B3"),
@@ -511,7 +432,7 @@ assert ratio >= 0.7, "Boundary theory prediction accuracy < 70%"
 print("Prediction accuracy:", ratio)
 ```
 
-**검증 목표**: 10 case 전수 분류 일치 + 예측 13건 중 9건 이상(≥70%) 적중.
+**Verification target**: 10-case exhaustive classification match + ≥ 9 of 13 predictions hit (≥70%).
 
 ### 10b Arithmetic verification (python, stdlib only)
 
@@ -563,36 +484,27 @@ Expected output: `PASS: sigma=12, tau=4, phi=2, sigma*phi=n*tau=24, B2=[1, 2, 5]
 
 ---
 
-## 11. 연결 문서 / 논문
+## 11. Linked documents / papers
 
-- `theory/proofs/honest-limitations.md` — 10 case 원본 (SSOT)
-- `theory/proofs/theorem-r1-uniqueness.md` — Theorem 0 (σφ=nτ 유일성)
+- `theory/proofs/honest-limitations.md` — original 10-case (SSOT)
+- `theory/proofs/theorem-r1-uniqueness.md` — Theorem 0 (σφ=nτ uniqueness)
 - `theory/proofs/bernoulli-boundary-2026-04-11.md` — Theorem B (k=n=6 sharp jump)
-- `papers/n6-honest-limitations-meta-paper.md` (N6-127) — 세션 방법론 한계 (9건)
-- `papers/n6-atlas-promotion-7-to-10star-paper.md` (N6-122) — 승격 프로토콜
-- `papers/n6-reality-map-paper.md` — 9,206 후보 실측 통계
-- `experiments/boundary/verify_boundary_4regions.hexa` (예정) — 분류 스크립트
+- `papers/n6-honest-limitations-meta-paper.md` (N6-127) — session-methodology limits (9 cases)
+- `papers/n6-atlas-promotion-7-to-10star-paper.md` (N6-122) — promotion protocol
+- `papers/n6-reality-map-paper.md` — 9,206-candidate measured statistics
+- `experiments/boundary/verify_boundary_4regions.hexa` (planned) — classification script
 
 ---
 
-## 12. 결론
+## 12. Conclusion
 
-1. n6 프레임워크는 9,206 도메인 후보의 98.4% 에 적용되지만, 남은 1.6% 중 진짜
-   비적용 0.7% 는 **원칙적** 으로 적용 불가능한 4 영역으로 분류된다.
-2. 4 경계 영역(B1 연속공정, B2 SI 반올림, B3 소수 전이, B4 조성 의존 밴드갭)
-   각각에 대해 **수학적 판별식**, 물리적 메커니즘, 실측 예시, 반증 가능 예측을
-   제시했다.
-3. 영역 간 4×4 상호작용 매트릭스로 공존 사례(B1∩B2, B1∩B4, B3∩B4) 와 이론적
-   가능·실측 부재 조합(B1∩B3, B2∩B3) 을 구분했다.
-4. 13 건의 미래 도메인 분류 예측을 제시했고, ≥70% 적중을 반증 실패 기준으로
-   선언했다.
-5. 본 경계 이론 자체의 한계 6 건(자기참조, 깊이-2 자의성, 표본 편향, 임계점
-   예외, 반증 비대칭, 스냅샷 의존) 을 공시했다.
+1. The n6 framework applies to 98.4% of the 9,206 candidate domains; but of the remaining 1.6%, the genuine non-application 0.7% is classified **in principle** into 4 non-applicable regions.
+2. For each of the 4 boundary regions (B1 continuous process, B2 SI rounding, B3 prime transition, B4 composition-dependent bandgap) a **mathematical discriminant**, physical mechanism, measured example, and refutable prediction are presented.
+3. An inter-region 4×4 interaction matrix distinguishes coexistence cases (B1∩B2, B1∩B4, B3∩B4) from theoretically-possible-but-measurement-absent combinations (B1∩B3, B2∩B3).
+4. 13 future-domain classification predictions are presented, with ≥70% hit declared as the refutation-failure standard.
+5. 6 self-limits of the boundary theory (self-reference, depth-2 arbitrariness, sample bias, critical-point exceptions, refutation asymmetry, snapshot dependency) are disclosed.
 
-핵심 주장: **자기한계를 아는 이론이 진짜 이론이다.** 본 논문은 n=6 프레임워크
-의 신뢰도 하한선을 적용 영역 경계의 형식적 선언으로 구성하되, 경계 이론 자체
-가 무한 회귀 대상임을 인정한다. 새 수학 정리는 제안하지 않으며, 기존 Theorem
-0 과 Theorem B 의 외부에서 무엇이 일어나는지를 정식화하는 것이 본 기여이다.
+Core claim: **a theory that knows its own limits is a genuine theory.** This paper constitutes the lower-bound confidence line of the n=6 framework as the formal declaration of application-region boundaries, while acknowledging that the boundary theory itself is subject to infinite regress. No new mathematical target statement is proposed; the contribution is to formalize what happens outside the existing Theorem 0 and Theorem B.
 
 ## §1 WHY
 
@@ -683,4 +595,3 @@ This section covers impact per mk for the paper. Initial scaffold content — ex
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-
