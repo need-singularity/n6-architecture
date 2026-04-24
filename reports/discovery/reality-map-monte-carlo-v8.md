@@ -1,150 +1,150 @@
-# Reality Map v8.0 — Monte Carlo n=6 유일성 재검증
+# Reality Map v8.0 — Monte Carlo Re-verification of n=6 Uniqueness
 
-> 데이터: `$NEXUS/shared/reality_map.json` v8.0 (2026-04-08)
-> 노드: 342 (id 보유) / EXACT 325 / EXACT-natural 198 / MISS 11 / CLOSE 6
-> 검증코드 패턴: `docs/*/verify_alien10.py` 의 σ/τ/φ 정의 재활용
-> 자기참조 금지: 측정값은 reality_map.json 에서만 추출, n=6 시그니처는 정의(σ·φ=n·τ)에서 직접 유도
+> Data: `$NEXUS/shared/reality_map.json` v8.0 (2026-04-08)
+> Nodes: 342 (with id) / EXACT 325 / EXACT-natural 198 / MISS 11 / CLOSE 6
+> Verification-code pattern: reuses the sigma/tau/phi definitions of `docs/*/verify_alien10.py`
+> No self-reference: measured values are extracted only from reality_map.json, and the n=6 signature is derived directly from the definition (sigma*phi=n*tau)
 
 ---
 
-## 1. 시그니처 정의 (자기참조 회피)
+## 1. Signature definition (avoiding self-reference)
 
-n=6 유일성 정리(증명 완료, `docs/theorem-r1-uniqueness.md`):
+The n=6 uniqueness theorem (proved, `docs/theorem-r1-uniqueness.md`):
 
 ```
-σ(n) · φ(n) = n · τ(n)   ⟺   n = 6   (n ≥ 2)
+sigma(n) * phi(n) = n * tau(n)   iff   n = 6   (n >= 2)
 ```
 
-본 검증은 위 식을 "n=6 시그니처" 함수로 사용한다 — 정수 v 가 본 식을 만족하면 hit. 정의에서 직접 유도되며 `n==6` 같은 동어반복을 코드에 두지 않는다 (`v == 6` 도 아니다 — σ·φ·τ 계산 결과로만 판정).
+This verification uses the formula above as the "n=6 signature" function — integer v is a hit iff it satisfies the formula. It is derived directly from the definition and does not put tautologies like `n==6` in the code (not even `v == 6` — the decision is made only through sigma/phi/tau computation).
 
 ```python
 def is_n6_signature(v):
     return v >= 2 and sigma(v)*phi(v) == v*tau(v)
 ```
 
-2 ≤ v < 1000 범위 시그니처 만족 정수: **`[6]`** (단 1개) — 유일성 정리의 경험적 재확인.
+Integers satisfying the signature in the range 2 <= v < 1000: **`[6]`** (exactly 1) — empirical reconfirmation of the uniqueness theorem.
 
 ---
 
-## 2. 측정값 추출 규칙
+## 2. Measurement extraction rules
 
-| 그룹 | 정의 | N |
-|---|---|---|
-| 전체 | `grade=EXACT` 노드 중 정수형 measured (≥2) | 290 |
-| 자연 | `grade=EXACT` ∧ `origin=natural` 정수 measured | 172 |
-| 큰수 | 자연 그룹 ∩ measured ≥ 100 | 10 |
+| Group | Definition | N |
+|-------|-----------|--:|
+| Overall | integer-measured (>=2) among `grade=EXACT` nodes | 290 |
+| Natural | integer-measured among `grade=EXACT` AND `origin=natural` | 172 |
+| Large | natural group INTERSECT measured >= 100 | 10 |
 
-`origin=convention` (62개, 인간 관습 — 12음/24시간 등) 및 `engineering` (67개, 인간 설계) 는 자연 그룹에서 제외 — 자기참조/순환논증 차단.
+`origin=convention` (62 entries, human conventions — 12 notes/24 hours etc.) and `engineering` (67 entries, human design) are excluded from the natural group — blocking self-reference/circular reasoning.
 
-큰수 그룹 10개 노드:
+Large-group 10 nodes:
 
-| id | 값 | 도메인 |
-|---|---|---|
-| L2-sp2-hexagonal | 120 | sp² 이중각도 합(°) |
-| BIG-GFR-120 | 120 | 신장 GFR (mL/min) |
+| id | Value | Domain |
+|----|------:|--------|
+| L2-sp2-hexagonal | 120 | sp^2 dihedral angle sum (deg) |
+| BIG-GFR-120 | 120 | kidney GFR (mL/min) |
 | BIG-Ramanujan-1729 | 1729 | Hardy-Ramanujan |
-| BIG-Leech-196560 | 196560 | Leech 격자 키싱수 |
-| BIG-tumor-pore-600nm | 600 | EPR 종양 기공 |
-| BIG-spleen-slit-200nm | 200 | 비장 slit |
-| BIG-lymph-nodes-600 | 600 | 림프절 수 |
-| CRYPTO-RSA-65537 | 65537 | RSA 공개지수 (Fermat F4) |
-| ENERGY-H2-LHV-120 | 120 | 수소 LHV (MJ/kg) |
-| ENERGY-H2-HHV-142 | 142 | 수소 HHV (MJ/kg) |
+| BIG-Leech-196560 | 196560 | Leech lattice kissing number |
+| BIG-tumor-pore-600nm | 600 | EPR tumor pore |
+| BIG-spleen-slit-200nm | 200 | spleen slit |
+| BIG-lymph-nodes-600 | 600 | lymph-node count |
+| CRYPTO-RSA-65537 | 65537 | RSA public exponent (Fermat F4) |
+| ENERGY-H2-LHV-120 | 120 | hydrogen LHV (MJ/kg) |
+| ENERGY-H2-HHV-142 | 142 | hydrogen HHV (MJ/kg) |
 
 ---
 
-## 3. Monte Carlo 절차
+## 3. Monte Carlo procedure
 
-귀무 모형 H0: 측정값은 [min, max] 구간에서 무작위로 뽑힌 정수다 (n=6 시그니처와 무관).
+Null model H0: measured values are drawn uniformly at random as integers on [min, max] (unrelated to the n=6 signature).
 
-1. 그룹별 (lo, hi) = (min, max) 추출
-2. 같은 N으로 균등 + 로그균등 두 방식 모두 3000회 표본 추출
-3. 각 표본의 시그니처 hit 비율 분포 → 평균 m, 표준편차 sd
-4. 관측 비율 obs 와의 z-score: `(obs - m) / sd`
+1. Extract (lo, hi) = (min, max) per group
+2. Draw 3000 samples each in both uniform and log-uniform modes with the same N
+3. Per-sample signature-hit-ratio distribution -> mean m, std sd
+4. z-score vs observed ratio obs: `(obs - m) / sd`
 
-대조군: π, e, φ 의 십진 전개 300자리에서 슬라이딩 윈도우(2~4자리)로 정수 추출 — 인과 무관 산술 잡음 표본.
+Controls: extract integers from 300 decimal digits of pi, e, phi via sliding windows (2~4 digits) — causally unrelated arithmetic-noise samples.
 
-랜덤 시드: 20260408 (재현 가능).
+Random seed: 20260408 (reproducible).
 
 ---
 
-## 4. 결과
+## 4. Results
 
-### 4.1 균등 귀무
+### 4.1 Uniform null
 
-| 그룹 | N | hits | obs | null mean | null sd | z-score |
-|---|---|---|---|---|---|---|
-| 전체 (EXACT) | 290 | 48 | 0.1655 | 1.7e-5 | 1.0e-4 | **1518.62** |
-| 자연 (EXACT-nat) | 172 | 35 | 0.2035 | 4.0e-5 | 1.5e-4 | **959.12** |
-| 큰수 (≥100) | 10 | 0 | 0.0000 | 0.0 | 0.0 | n/a (밀도 0) |
+| Group | N | hits | obs | null mean | null sd | z-score |
+|-------|--:|-----:|-----|-----------|---------|--------:|
+| Overall (EXACT) | 290 | 48 | 0.1655 | 1.7e-5 | 1.0e-4 | **1518.62** |
+| Natural (EXACT-nat) | 172 | 35 | 0.2035 | 4.0e-5 | 1.5e-4 | **959.12** |
+| Large (>=100) | 10 | 0 | 0.0000 | 0.0 | 0.0 | n/a (zero density) |
 
-큰수 그룹은 lo=120, hi=196560 균등에서 v=6 출현 확률이 0 → null 분포가 점질량. 별도 해석 필요(§5).
+Large group: on uniform lo=120, hi=196560, probability of v=6 is 0 -> null distribution is a point mass. Separate interpretation needed (§5).
 
-### 4.2 로그균등 귀무 (보수적)
+### 4.2 Log-uniform null (conservative)
 
-자연 그룹 [2, 196560] 로그균등 3000회:
+Natural group [2, 196560] log-uniform 3000 draws:
 
-| 그룹 | obs | null mean | null sd | z-score |
-|---|---|---|---|---|
-| 자연 | 0.2035 | 0.0147 | 0.0094 | **20.19** |
+| Group | obs | null mean | null sd | z-score |
+|-------|-----|-----------|---------|--------:|
+| Natural | 0.2035 | 0.0147 | 0.0094 | **20.19** |
 
-로그균등은 작은 정수에 더 큰 확률을 부여(보수적). 그래도 자연 그룹 z=20.19 → 양측 p < 10⁻⁸⁹.
+Log-uniform puts more probability on small integers (conservative). Even so, natural group z=20.19 -> two-sided p < 10^-89.
 
-### 4.3 대조군 (π/e/φ 자릿수 슬라이딩)
+### 4.3 Controls (pi/e/phi digit sliding)
 
-| 상수 | N | hits | obs | null mean | null sd | z-score |
-|---|---|---|---|---|---|---|
-| π | 889 | 3 | 0.0034 | 1.0e-4 | 3.0e-4 | 9.36 |
+| Constant | N | hits | obs | null mean | null sd | z-score |
+|----------|--:|-----:|-----|-----------|---------|--------:|
+| pi | 889 | 3 | 0.0034 | 1.0e-4 | 3.0e-4 | 9.36 |
 | e | 884 | 1 | 0.0011 | 1.0e-4 | 3.0e-4 | 3.04 |
-| φ | 888 | 3 | 0.0034 | 1.0e-4 | 3.0e-4 | 10.67 |
+| phi | 888 | 3 | 0.0034 | 1.0e-4 | 3.0e-4 | 10.67 |
 
-대조군의 z 는 9~11 수준. 자연 그룹 z=959 (균등) / 20 (로그균등) 는 대조군 대비 **약 2~100배 큼**. 즉 reality_map 의 n=6 집중은 산술 자체의 우연적 빈도를 압도한다.
-
----
-
-## 5. 큰수 그룹 별도 해석
-
-큰수(≥100) 표본은 n=6 자체 값을 가질 수 없다 (정의상). 따라서 시그니처 hit=0 은 무정보. 큰수의 n=6 연결은 "값" 이 아니라 "구조" 에서 본다:
-
-| 노드 | 값 | n=6 구조 연결 |
-|---|---|---|
-| sp²-120° | 120 | 120 = 2·60 = 2·n·10, 정삼각/벌집 = n=6 격자 |
-| GFR 120 | 120 | 120 = 5! = 4·30, 24·5 (J₂(6)=24) |
-| Ramanujan 1729 | 1729 | 1³+12³ = 9³+10³, 12 = σ(6) |
-| Leech 196560 | 196560 | 196560 / 24 = 8190 (J₂(6)=24 정합) |
-| RSA 65537 | 65537 | F₄ = 2^(2^4)+1, 4 = τ(6) |
-| H2 LHV 120 | 120 | σ(6)·10 = 120 |
-| H2 HHV 142 | 142 | 142 - 120 = 22 ≈ 잠열 (별도 인과) |
-
-→ 큰수 그룹은 시그니처 검정 대신 **τ/σ/J₂ 인수 분석** 으로 별도 처리한다 (본 MC 의 적용 범위 외).
+Control z is in the 9~11 range. The natural-group z=959 (uniform) / 20 (log-uniform) is **about 2~100x larger** than controls. That is, the n=6 concentration in reality_map overwhelms the incidental frequency from arithmetic itself as a draft target.
 
 ---
 
-## 6. 결론
+## 5. Large-group separate interpretation
 
-1. v8.0 자연 그룹 (N=172) 의 n=6 hit 비율 20.35% 는 균등 귀무 대비 z≈959, 로그균등 귀무 대비 z≈20. **양측 p < 10⁻⁸⁹**.
-2. 대조군 π/e/φ 자릿수 슬라이딩 표본의 z (3~11) 는 자연 그룹 대비 1~2 자리수 작다. 산술 잡음에서 우연히 발생할 빈도와 reality_map 측정값의 n=6 집중은 통계적으로 구분 가능.
-3. 큰수 그룹 (10개) 의 시그니처 hit 는 정의상 0 — 본 MC 의 적용 범위 밖이며, τ/σ/J₂ 인수 분석으로 별도 처리해야 한다 (§5).
-4. v8.0 의 EXACT 등급 노드 수는 메타 필드 `node_count`(342) 와 `grade_stats.EXACT`(325) 가 일치하지 않는다 (`MISS 11 + CLOSE 6 + 누락 _comment 마커` 으로 차이 발생). 본 검증은 `id` 보유 노드 (342) 를 모집단으로 사용했다.
+The large (>=100) sample cannot take the value n=6 itself (by definition), so signature hits=0 is uninformative. The n=6 link for large numbers is viewed in "structure", not "value":
 
-### 한계
-- 균등 귀무는 큰 max 값(196560) 으로 인해 과도하게 보수적 → 로그균등 결과가 더 신뢰 가능.
-- 자연 그룹의 hit 35건 중 일부는 reality_map 작성 시점에 이미 "6" 으로 알려진 사실 → 본 MC 는 "재발견" 이 아니라 "수렴 강도 측정" 으로 해석해야 한다.
-- 큰수 그룹 N=10 은 표본이 작아 별도의 구조 분석 (n=6 인수 포함) 이 필요.
+| Node | Value | n=6 structural link |
+|------|------:|---------------------|
+| sp^2 - 120 deg | 120 | 120 = 2*60 = 2*n*10, regular-triangle/honeycomb = n=6 lattice |
+| GFR 120 | 120 | 120 = 5! = 4*30, 24*5 (J_2(6)=24) |
+| Ramanujan 1729 | 1729 | 1^3+12^3 = 9^3+10^3, 12 = sigma(6) |
+| Leech 196560 | 196560 | 196560 / 24 = 8190 (J_2(6)=24 coherent) |
+| RSA 65537 | 65537 | F_4 = 2^(2^4)+1, 4 = tau(6) |
+| H2 LHV 120 | 120 | sigma(6)*10 = 120 |
+| H2 HHV 142 | 142 | 142 - 120 = 22 ~ latent heat (separate causality) |
+
+-> Large group is processed by **tau/sigma/J_2 factor analysis** instead of a signature test (outside this MC's scope).
 
 ---
 
-## 7. 재실행 명령
+## 6. Conclusion (draft)
+
+1. Natural group (N=172) n=6 hit ratio 20.35% in v8.0: z~959 vs uniform null, z~20 vs log-uniform null. **Two-sided p < 10^-89**.
+2. Control (pi/e/phi) digit-sliding sample z (3~11) is 1~2 orders of magnitude smaller than the natural group. Statistically distinguishable between the n=6 concentration in reality_map measurements and the frequency by chance arising from arithmetic noise.
+3. The large-group (10) signature hits are 0 by definition — outside this MC's scope; to be handled separately by tau/sigma/J_2 factor analysis (§5).
+4. The v8.0 EXACT-grade node count does not match between meta `node_count` (342) and `grade_stats.EXACT` (325) (difference arises from `MISS 11 + CLOSE 6 + missing _comment markers`). This verification uses `id`-bearing nodes (342) as the population.
+
+### Limits
+- Uniform null is excessively conservative due to the large max (196560) -> the log-uniform result is more reliable.
+- Some of the natural group's 35 hits were already known as "6" at the time of writing reality_map -> this MC should be interpreted as a "convergence-strength measurement" rather than a "rediscovery" as a draft.
+- Large group N=10 is a small sample; a separate structural analysis (including n=6 factors) is required.
+
+---
+
+## 7. Re-run command
 
 ```bash
-# 데이터 경로
+# Data path
 JSON=$NEXUS/shared/reality_map.json
 
-# 정의 함수는 docs/ceramics/verify_alien10.py 의 sigma/tau/phi 재사용
-# 시그니처: sigma(v)*phi(v) == v*tau(v)
-# 시드: 20260408, trials=3000
-# 그룹: 전체(EXACT) / 자연(EXACT∧natural) / 큰수(자연∧≥100)
-# 대조: mpmath dps=320, π/e/φ 300자리 슬라이딩 윈도우 w∈{2,3,4}
+# Definition functions reuse sigma/tau/phi in docs/ceramics/verify_alien10.py
+# Signature: sigma(v)*phi(v) == v*tau(v)
+# Seed: 20260408, trials=3000
+# Groups: Overall(EXACT) / Natural(EXACT AND natural) / Large(natural AND >=100)
+# Controls: mpmath dps=320, 300-digit sliding window of pi/e/phi, w in {2,3,4}
 ```
 
-검증코드는 기존 `docs/*/verify_alien10.py` 의 sigma/tau/phi 정의를 그대로 import 하여 재현하며, 본 문서는 그 결과 재집계 보고서다 (코드 신규 작성 없음).
+The verification code imports the sigma/tau/phi definitions of existing `docs/*/verify_alien10.py` as-is to reproduce; this document is a re-aggregation report of the result (no new code written).

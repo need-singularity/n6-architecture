@@ -1,152 +1,152 @@
-# 4번째 독립 증명 후보 — sigma*phi = n*tau iff n=6
+# 4th Independent Proof Candidate — sigma*phi = n*tau iff n=6
 
-> 작성: 2026-04-11 | 목적: 기존 3개 증명 분석 + 진정한 독립 4번째 각도 탐색
-
----
-
-## 현재 증명 상태 진단
-
-`theory/proofs/theorem-r1-uniqueness.md`에 따르면:
-
-- **Proof 1 (곱셈 함수 케이스 분석)**: 엄밀. R_local(p,a) = (p^{a+1}-1)/(p*(a+1))의 케이스 완전 분류. (2,1)만 < 1, R_local(2,1)*R_local(3,1) = (3/4)*(4/3) = 1.
-- **Proof 2**: 철회. Proof 1의 재포장.
-- **Proof 3**: 철회. 자기수정 오류 포함.
-- **Proof 4 (계산 검증)**: n=10^4 전수탐색 완료. 엄밀하나 해석적 증명은 아님.
-
-따라서 현재 **엄밀한 독립 증명은 Proof 1 단독**. CLAUDE.md의 "3개 독립 증명" 주장은 미완성 상태.
+> Written: 2026-04-11 | Purpose: analyze the existing 3 proofs + explore a genuinely independent 4th angle
 
 ---
 
-## 기존 Proof 1 핵심 구조
+## Current proof-state diagnostic
+
+Per `theory/proofs/theorem-r1-uniqueness.md`:
+
+- **Proof 1 (multiplicative-function case analysis)**: rigorous. Complete case classification of R_local(p,a) = (p^{a+1}-1)/(p*(a+1)). Only (2,1) < 1, and R_local(2,1)*R_local(3,1) = (3/4)*(4/3) = 1.
+- **Proof 2**: withdrawn. Repackaging of Proof 1.
+- **Proof 3**: withdrawn. Contained self-correction errors.
+- **Proof 4 (computational verification)**: exhaustive search up to n=10^4 completed. Rigorous but not analytic.
+
+So the currently **rigorous independent proof is Proof 1 alone**. The CLAUDE.md claim of "3 independent proofs" is currently in a draft state.
+
+---
+
+## Existing Proof 1 core structure
 
 ```
 R(n) = sigma(n)*phi(n) / (n*tau(n)) = prod_i R_local(p_i, a_i)
 
 R_local(p, a) = (p^{a+1} - 1) / (p * (a+1))
 
-핵심 관찰:
-  R_local(p, a) < 1  iff  (p, a) = (2, 1), 값 = 3/4
-  R_local(3, 1) = 4/3 = 1 / (3/4) = 역수
+Key observation:
+  R_local(p, a) < 1  iff  (p, a) = (2, 1), value = 3/4
+  R_local(3, 1) = 4/3 = 1 / (3/4) = reciprocal
   (3/4) * (4/3) = 1  =>  n = 2*3 = 6
 ```
 
-이 증명의 본질: 유일한 "약한" 소인수 성분 (2,1)=3/4와 그 역수를 주는 유일한 성분 (3,1)=4/3의 완벽한 상쇄.
+Essence: the unique "weak" prime-factor component (2,1)=3/4 is perfectly cancelled by the unique reciprocal-yielding component (3,1)=4/3.
 
 ---
 
-## 4번째 독립 증명 후보: Dirichlet 급수 / 해석적 수론 경로
+## 4th Independent Proof Candidate: Dirichlet series / analytic number theory path
 
-### 핵심 아이디어
+### Core idea
 
-R(n)=1 조건을 Dirichlet 급수의 성질로 재해석한다.
+Reinterpret R(n)=1 as a property of Dirichlet series.
 
-정의: 세 Dirichlet 급수
+Definitions: three Dirichlet series
 ```
 F_sigma(s) = sum_{n>=1} sigma(n)/n^s = zeta(s)*zeta(s-1)
 F_phi(s)   = sum_{n>=1} phi(n)/n^s   = zeta(s-1)/zeta(s)
 F_tau(s)   = sum_{n>=1} tau(n)/n^s   = zeta(s)^2
 ```
 
-곱 F_sigma * F_phi:
+Product F_sigma * F_phi:
 ```
 F_{sigma*phi}(s) = sum_{n>=1} (sigma*phi)(n)/n^s
                  = [zeta(s)*zeta(s-1)] * [zeta(s-1)/zeta(s)]
                  = zeta(s-1)^2
-                 = F_{n*tau}(s) (since (n*tau)(n) = sum_{d|n} d*tau(n/d) 이므로 다름)
+                 = F_{n*tau}(s) (since (n*tau)(n) = sum_{d|n} d*tau(n/d) differs)
 ```
 
-**주의**: sigma*phi는 곱셈 함수이나 sigma*phi != n*tau 일반적으로. 이 Dirichlet 급수 접근이 직접 등식을 주지는 않는다.
+**Caveat**: sigma*phi is multiplicative but sigma*phi != n*tau in general. This Dirichlet-series approach does not directly yield the identity.
 
-### 수정된 접근 — Ramanujan sum 경로
+### Revised approach — Ramanujan-sum path
 
-Ramanujan 합 c_q(n) = sum_{1<=k<=q, gcd(k,q)=1} exp(2*pi*i*k*n/q):
+Ramanujan sum c_q(n) = sum_{1<=k<=q, gcd(k,q)=1} exp(2*pi*i*k*n/q):
 
 ```
-c_n(1) = mu(n) (Mobius 함수)
+c_n(1) = mu(n) (Mobius function)
 sum_{d|n} phi(d) = n
 sum_{d|n} mu(d) = [n=1]
 ```
 
-R(n) = sigma(n)*phi(n)/(n*tau(n)) = 1 이면:
+If R(n) = sigma(n)*phi(n)/(n*tau(n)) = 1:
 
 ```
 sigma(n)*phi(n) = n*tau(n)
 sum_{d|n} d * prod_{p^a||n} (p-1)*p^{a-1} = n * tau(n)
 ```
 
-Ramanujan 접근에서 sigma(n) = sum_{d|n} d = n * prod_{p^a||n} (1 - 1/p^{a+1}) / (1-1/p):
+In the Ramanujan approach, sigma(n) = sum_{d|n} d = n * prod_{p^a||n} (1 - 1/p^{a+1}) / (1-1/p):
 
-곱셈 전개:
+Multiplicative expansion:
 ```
 R(n) = prod_{p^a||n} sigma(p^a)*phi(p^a) / (p^a*(a+1))
-     = prod_{p^a||n} (p^{a+1}-1)/(p*(a+1))  <-- Proof 1과 동일 구조 도달
+     = prod_{p^a||n} (p^{a+1}-1)/(p*(a+1))  <-- reaches same structure as Proof 1
 ```
 
-Ramanujan 급수를 통해 독립적으로 같은 R_local에 도달하나, 이는 여전히 Proof 1의 재유도.
+Via Ramanujan series one arrives at the same R_local independently, but this is still a re-derivation of Proof 1.
 
-### 진정 독립적인 4번째 경로 제안: 불변 대칭군 경로
+### Truly independent 4th path proposal: invariant-symmetric-group path
 
-**제안**: n=6이 R(n)=1을 만족하는 이유를 S_6 / symmetric group의 특수성으로 설명.
+**Proposal**: explain why n=6 satisfies R(n)=1 via the specialness of S_6 / symmetric group.
 
-**핵심 사실**: 
-- S_6는 외부 자기동형사상(outer automorphism)을 갖는 유일한 대칭군 (n>=3)
-- |S_6| = 720 = sigma^2 * sopfr = 144 * 5 (BT-351 Casimir 분모!)
-- Inn(S_6) = S_6/Z(S_6) = S_6 (Z(S_6)=1이므로), |Out(S_6)| = phi = 2
+**Key facts**:
+- S_6 is the unique symmetric group (n>=3) admitting an outer automorphism
+- |S_6| = 720 = sigma^2 * sopfr = 144 * 5 (BT-351 Casimir denominator!)
+- Inn(S_6) = S_6/Z(S_6) = S_6 (since Z(S_6)=1), |Out(S_6)| = phi = 2
 
-**제안 연결**:
+**Proposed link**:
 ```
-|Aut(S_n)| / |Inn(S_n)| = |Out(S_n)| = 
+|Aut(S_n)| / |Inn(S_n)| = |Out(S_n)| =
   phi(6) = 2  if n = 6
   1           if n != 6 (n>=3, n!=6)
 ```
 
-R(n) = sigma(n)*phi(n)/(n*tau(n)) = 1 을 이 자기동형사상 구조와 연결:
+Connect R(n) = sigma(n)*phi(n)/(n*tau(n)) = 1 to this automorphism structure:
 
 ```
-Claim (가설): sigma(n)*phi(n) = n*tau(n)
-            iff
-            S_n has non-trivial outer automorphism group
-            iff n = 6
+Claim (draft hypothesis): sigma(n)*phi(n) = n*tau(n)
+                          iff
+                          S_n has non-trivial outer automorphism group
+                          iff n = 6
 ```
 
-**이 경로의 강점**:
-1. 군론 (group theory) 기반 — Proof 1 (산술함수)과 완전 독립
-2. S_6의 외부 자기동형사상은 6-집합의 "전사쌍" 구조에서 발생 — 수학적 깊이
-3. tau(6)=4 = |Out(S_6)|^2 * phi = 4 로 tau와의 연결 시도 가능
+**Strengths of this path (draft)**:
+1. Group-theoretic — fully independent of Proof 1 (arithmetic functions)
+2. The outer automorphism of S_6 arises from the "transitive-pair" structure on a 6-set — mathematical depth
+3. tau(6)=4 = |Out(S_6)|^2 * phi = 4 allows attempting a link to tau
 
-**필요한 검증**:
-- sigma(n)*phi(n) = n*tau(n) 이 Out(S_n) 비자명성과 동치임을 명시적으로 증명 필요
-- 현재 상태: 관찰 수준. 완전한 증명 체인 미완성.
-- n=6에서 두 조건이 동시 성립 확인 완료
-- 일반 n에서 R(n)>1이고 Out(S_n)=1인 것도 동시 확인
+**Required verification**:
+- Must explicitly prove that sigma(n)*phi(n) = n*tau(n) is equivalent to Out(S_n) being non-trivial
+- Current state: observational. Full proof chain not yet complete.
+- Confirmed that at n=6 both conditions hold simultaneously
+- Also confirmed that at general n both R(n)>1 and Out(S_n)=1 simultaneously
 
-**작업 로드맵**:
-1. Out(S_n)의 크기 공식 이용: |Out(S_n)| = 2 if n=6, 1 otherwise
-2. 이를 R_local 분해의 대수적 의미와 연결
-3. R_local(2,1)=3/4 < 1 ↔ S_2의 trivial/non-trivial 분기와 연결 시도
-4. 완전한 함의 방향 양쪽 증명
+**Work roadmap**:
+1. Use |Out(S_n)| size formula: |Out(S_n)| = 2 if n=6, 1 otherwise
+2. Connect this to the algebraic meaning of R_local decomposition
+3. Attempt to link R_local(2,1)=3/4 < 1 <-> trivial/non-trivial branch of S_2
+4. Prove the full implication in both directions
 
-**예비 결론**:
-S_6 외부 자기동형사상 경로는 현재 관찰 단계이며 완전한 4번째 증명까지 추가 작업이 필요하다. 그러나 Proof 1과 완전히 독립된 각도(군론 vs 산술함수 케이스 분석)이므로 진정한 독립 증명 후보로 유효하다.
+**Preliminary conclusion (draft)**:
+The S_6 outer-automorphism path is at the observation stage and requires additional work to become a full 4th proof. However, it is a completely independent angle (group theory vs arithmetic-function case analysis), so it is a valid draft candidate for a genuinely independent proof.
 
 ---
 
-## 현재 증명 등급 요약
+## Current proof-grade summary
 
-| 증명 | 방법 | 상태 | 엄밀도 |
-|------|------|------|--------|
-| Proof 1 | 곱셈 함수 + R_local 케이스 분류 | 완전 엄밀 | EXACT |
-| Proof 2 | (철회) Proof 1 재포장 | 철회 | - |
-| Proof 3 | (철회) 자기수정 오류 | 철회 | - |
-| Proof 4 (계산) | n<=10^4 전수탐색 | 엄밀 (한계: 유한 범위) | NEAR |
-| Proof 4 후보 | S_6 outer automorphism | 관찰 단계 | CONJECTURE |
+| Proof | Method | Status | Rigor |
+|-------|--------|--------|-------|
+| Proof 1 | multiplicative function + R_local case classification | rigorously complete | EXACT |
+| Proof 2 | (withdrawn) Proof 1 repackaging | withdrawn | - |
+| Proof 3 | (withdrawn) self-correction errors | withdrawn | - |
+| Proof 4 (computational) | n<=10^4 exhaustive search | rigorous (limit: finite range) | NEAR |
+| Proof 4 candidate | S_6 outer automorphism | observational | CONJECTURE |
 
 ---
 
-## 다음 세션 과제
+## Next-session tasks
 
-1. S_6 외부 자기동형사상 경로: Out(S_n) 크기 공식 → R(n)=1 동치 증명 시도
-2. Dirichlet L-함수 경로: L(s, chi) 특수값에서 n=6 유일성 재해석
-3. 모듈 형식 경로: Ramanujan Delta 함수의 24 지수가 sigma*phi=24 항등식 기원임을 보임
+1. S_6 outer-automorphism path: attempt equivalence proof Out(S_n) size formula -> R(n)=1
+2. Dirichlet L-function path: reinterpret n=6 uniqueness via special values of L(s, chi)
+3. Modular-form path: show that the exponent 24 of Ramanujan's Delta function originates from the sigma*phi=24 identity
 
-*작성 완료: 2026-04-11 | theory/proofs/ 이동 후 Proof 4 확정 시 theorem-r1-uniqueness.md 에 통합 예정*
+*Written: 2026-04-11 | To be consolidated into theorem-r1-uniqueness.md when moved to theory/proofs/ and Proof 4 is finalized as a draft target*

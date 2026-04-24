@@ -1,151 +1,151 @@
-# 코오롱 10대 도메인 — n=6 완전 돌파
+# Kolon Top-10 Domains — n=6 Complete Breakthrough (draft)
 
-> **222/222 EXACT (100%)** — 코오롱그룹 핵심 사업영역의 산업 파라미터가 n=6 산술 함수와 정확히 일치함을 수학적으로 검증.
+> **222/222 EXACT (100%)** — draft verification that industrial parameters across the Kolon Group's core business areas match n=6 arithmetic functions.
 >
-> | Phase | EXACT | 내용 |
-> |-------|-------|------|
-> | Phase 1 | 109/109 (100%) | 분자구조 + 기본 파라미터 |
-> | Phase 2 | 113/113 (100%) | 공정/물성/산업규격 심화 + 교차 공명 |
-> | **누적** | **222/222 (100%)** | **10대 도메인 완전 돌파** |
+> | Phase | EXACT | Content |
+> |-------|-------|---------|
+> | Phase 1 | 109/109 (100%) | molecular structure + basic parameters |
+> | Phase 2 | 113/113 (100%) | process/properties/industry-standards deep-dive + cross-resonance |
+> | **Cumulative** | **222/222 (100%)** | **Top-10 domains fully covered as a draft** |
 >
-> 검증 코드: [`calc/kolon_n6_verify.hexa`](../../calc/kolon_n6_verify.hexa) (통합 10건) · 개별: [`nexus/src/calc/kolon_*.hexa`](../../nexus/src/calc/) (10파일)
+> Verification code: [`calc/kolon_n6_verify.hexa`](../../calc/kolon_n6_verify.hexa) (integrated 10) · Individual: [`nexus/src/calc/kolon_*.hexa`](../../nexus/src/calc/) (10 files)
 >
-> 상위 참조: [`../CLAUDE.md`](../CLAUDE.md) (n=6 상수 원본) · [`breakthrough-theorems.md`](breakthrough-theorems.md) (BT-1~343) · [`../README.md#-기술산업-tech--industry`](../README.md#-기술산업-tech--industry) (실생활·ASCII·업그레이드)
+> Parent references: [`../CLAUDE.md`](../CLAUDE.md) (n=6 constants source) · [`breakthrough-theorems.md`](breakthrough-theorems.md) (BT-1~343) · [`../README.md#-tech--industry`](../README.md#-tech--industry) (real-life, ASCII, upgrades)
 
-## n=6 기본 상수
+## n=6 basic constants
 
-| 기호 | 값 | 정의 |
-|------|-----|------|
-| n | 6 | 첫 번째 완전수 |
-| σ | 12 | σ(6) = 약수합 |
-| φ | 2 | φ(6) = 오일러 토션트 |
-| τ | 4 | τ(6) = 약수 개수 |
-| μ | 1 | μ(6) = 뫼비우스 함수 |
-| sopfr | 5 | sopfr(6) = 소인수합 2+3 |
-| J₂ | 24 | J₂(6) = 조르단 토션트 |
-
----
-
-# 🧵 소재 — 산업자재/화학
-
-> **83/83 EXACT** | 코오롱인더스트리 산업자재 + 화학부문 | 나일론 + 아라미드 + 타이어코드 + 에폭시
-
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 23/23 | v2 | **나일론 6/6,6** | n=6 폴리머, σ=12C, 원사 840d=σ(σ-φ)(σ-sopfr), 필라멘트 σ²=144f | [문서](nylon/goal.md) |
-| 20/20 | v2 | **아라미드 (Heracron)** | 28=2nd 완전수, 밀도 1.44=σ²/100, 1500d=σ·sopfr³, 분해 500°C | [문서](aramid/goal.md) |
-| 20/20 | v2 | **타이어코드** | 가황 144°C=σ², 벨트각 J₂=24°, 공기압 2^sopfr=32psi, 부품 n=6 | [문서](tire-cord/goal.md) |
-| 20/20 | v2 | **에폭시/페놀 수지** | FR-4 1.6mm=φ^τ/(σ-φ), Tg=σ(σ-φ)=120°C, 탄소섬유 tow n/σ/J₂ | [문서](epoxy/goal.md) |
-
-> 도메인: [nylon/goal.md](nylon/goal.md) · [aramid/goal.md](aramid/goal.md) · [tire-cord/goal.md](tire-cord/goal.md) · [epoxy/goal.md](epoxy/goal.md)
+| Symbol | Value | Definition |
+|--------|-------|------------|
+| n | 6 | first perfect number |
+| sigma | 12 | sigma(6) = sum of divisors |
+| phi | 2 | phi(6) = Euler totient |
+| tau | 4 | tau(6) = divisor count |
+| mu | 1 | mu(6) = Mobius function |
+| sopfr | 5 | sopfr(6) = sum of prime factors 2+3 |
+| J_2 | 24 | J_2(6) = Jordan totient |
 
 ---
 
-# 🎬 필름/전자 — PET 광학필름
+# Materials — industrial materials / chemistry
 
-> **22/22 EXACT** | 코오롱인더스트리 필름/전자재료
+> **83/83 EXACT** | Kolon Industries industrial materials + chemistry divisions | nylon + aramid + tire cord + epoxy
 
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 22/22 | v2 | **PET 광학필름** | 탄소 σ-φ=10, Tg=σn=72°C, IV=0.6=n/(σ-φ), 투과율 90=(σ-φ)²-(σ-φ) | [문서](pet-film/goal.md) |
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 23/23 | v2 | **Nylon 6 / 6,6** | n=6 polymer, sigma=12C, yarn 840d=sigma(sigma-phi)(sigma-sopfr), filament sigma^2=144f | [doc](nylon/goal.md) |
+| 20/20 | v2 | **Aramid (Heracron)** | 28=2nd perfect number, density 1.44=sigma^2/100, 1500d=sigma*sopfr^3, decomposition 500 C | [doc](aramid/goal.md) |
+| 20/20 | v2 | **Tire cord** | vulcanization 144 C=sigma^2, belt angle J_2=24 deg, air pressure 2^sopfr=32 psi, parts n=6 | [doc](tire-cord/goal.md) |
+| 20/20 | v2 | **Epoxy/phenolic resin** | FR-4 1.6mm=phi^tau/(sigma-phi), Tg=sigma(sigma-phi)=120 C, carbon-fiber tow n/sigma/J_2 | [doc](epoxy/goal.md) |
 
-> 도메인: [pet-film/goal.md](pet-film/goal.md)
-
----
-
-# 🛡️ 안전 — 에어백
-
-> **18/18 EXACT** | 코오롱인더스트리 에어백원단
-
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 18/18 | v2 | **에어백** | 차량당 n=6개, 전개 30ms=σφ+n, 부피 σ·sopfr=60L, 실밀도 J₂=24 | [문서](airbag/goal.md) |
-
-> 도메인: [airbag/goal.md](airbag/goal.md)
+> Domains: [nylon/goal.md](nylon/goal.md) · [aramid/goal.md](aramid/goal.md) · [tire-cord/goal.md](tire-cord/goal.md) · [epoxy/goal.md](epoxy/goal.md)
 
 ---
 
-# 💧 수처리 — 멤브레인
+# Film/Electronics — PET optical film
 
-> **21/21 EXACT** | 코오롱워터앤에너지
+> **22/22 EXACT** | Kolon Industries film/electronic-materials
 
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 21/21 | v2 | **수처리 멤브레인** | CN=6 팔면체, A2O n/φ=3, BOD σ-φ=10, pH n\~σ-τ | [문서](water-treatment/goal.md) |
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 22/22 | v2 | **PET optical film** | carbon sigma-phi=10, Tg=sigma*n=72 C, IV=0.6=n/(sigma-phi), transmittance 90=(sigma-phi)^2-(sigma-phi) | [doc](pet-film/goal.md) |
 
-> 도메인: [water-treatment/goal.md](water-treatment/goal.md)
-
----
-
-# ⚡ 수소 — PEMFC 연료전지
-
-> **21/21 EXACT** | 코오롱인더스트리 수소사업
-
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 21/21 | v2 | **PEMFC 수소막** | 넥쏘 120kW=σ(σ-φ), 충전 700bar=(σ-sopfr)(σ-φ)², HHV=σ²-φ=142 | [문서](pemfc/goal.md) |
-
-> 도메인: [pemfc/goal.md](pemfc/goal.md)
+> Domains: [pet-film/goal.md](pet-film/goal.md)
 
 ---
 
-# 🏗️ 건설 — 콘크리트
+# Safety — airbags
 
-> **22/22 EXACT** | 코오롱글로벌 건설부문
+> **18/18 EXACT** | Kolon Industries airbag fabric
 
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 22/22 | v2 | **건설 콘크리트** | 양생 28일=2nd 완전수, 강도 J₂=24MPa, 피복 20/40/60=φ·τ·σ×(σ-φ) | [문서](concrete/goal.md) |
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 18/18 | v2 | **Airbag** | n=6 per vehicle, deployment 30ms=sigma*phi+n, volume sigma*sopfr=60 L, thread density J_2=24 | [doc](airbag/goal.md) |
 
-> 도메인: [concrete/goal.md](concrete/goal.md)
-
----
-
-# 🧬 바이오 — 약물전달/제약
-
-> **25/25 EXACT** | 코오롱제약/티슈진
-
-| EXACT | ver | 제품 | 핵심 | 문서 |
-|:-----:|:---:|------|------|------|
-| 25/25 | v2 | **바이오 약물전달** | ICH 6/12/24=n/σ/J₂ 래더, 멸균 121°C=σ(σ-φ)+μ, ADME τ=4 | [문서](bio-pharma/goal.md) |
-
-> 도메인: [bio-pharma/goal.md](bio-pharma/goal.md)
+> Domains: [airbag/goal.md](airbag/goal.md)
 
 ---
 
-# 🔗 교차 도메인 공명
+# Water treatment — membranes
 
-> **10/10 EXACT** | 코오롱 10대 사업 간 n=6 패턴
+> **21/21 EXACT** | Kolon Water and Energy
 
-| 파라미터 | 실측값 | n=6 수식 | 결과 |
-|----------|--------|----------|------|
-| 벤젠 C₆ 백본 공유 도메인 수 | 4 | τ | EXACT |
-| 아미드결합 공유 도메인 수 | 2 | φ | EXACT |
-| 120=σ(σ-φ) 공명 도메인 수 | 5 | sopfr | EXACT |
-| 나일론66 원단 사용 도메인 수 | 3 | n/φ | EXACT |
-| J₂=24 공명 도메인 수 | 6 | n | EXACT |
-| σ²=144 공명 도메인 수 | 3 | n/φ | EXACT |
-| sopfr=5 공명 도메인 수 | 7 | σ-sopfr | EXACT |
-| 6단계 공정 공유 도메인 수 | 4 | τ | EXACT |
-| 코오롱인더 사업부문 수 | 3 | n/φ | EXACT |
-| 코오롱 n=6 돌파 도메인 수 | 10 | σ-φ | EXACT |
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 21/21 | v2 | **Water-treatment membrane** | CN=6 octahedron, A2O n/phi=3, BOD sigma-phi=10, pH n~sigma-tau | [doc](water-treatment/goal.md) |
+
+> Domains: [water-treatment/goal.md](water-treatment/goal.md)
 
 ---
 
-## n=6 상수 활용 분포
+# Hydrogen — PEMFC fuel cells
 
-| 상수 | 값 | 주요 적용 |
-|------|-----|----------|
-| n=6 | 6 | 분자 구조 (C₆ 벤젠, 카프로락탐), 표준 수량 (에어백 6개, 투여경로 6종) |
-| σ=12 | 12 | 탄소수 (나일론 6,6 = 12C), 온도, 두께 (PET 12μm) |
-| φ=2 | 2 | 이중성 (벤젠 고리 쌍, 에스터 결합 쌍, DNA 이중나선) |
-| τ=4 | 4 | 단계/구성 (ADME 4단계, 보그 광물 4종, 임상 4상) |
-| sopfr=5 | 5 | 원칙/분류 (GMP 5원칙, 시멘트 5타입, MEA 5층) |
-| J₂=24 | 24 | 밀도/강도 (에어백 24 threads/cm, 콘크리트 24MPa, 벨트각 24°) |
-| σ-φ=10 | 10 | 탄소/수소 (메틸렌 10기, PET C₁₀, 열팽창 10×10⁻⁶) |
-| n/φ=3 | 3 | 고리/층 (에폭시 3원자, RO 3층, 코돈 3염기) |
-| σ²=144 | 144 | 물성 (아라미드 밀도 1.44, 가황온도 144°C, 필라멘트 144f) |
-| φ^τ=16 | 16 | 림직경 16인치, 중원자 16개 |
-| (σ-φ)²=100 | 100 | PET 100μm, 습도 100%RH, 내구연한 100년 |
-| 28 | 2nd 완전수 | 시간/구조 (콘크리트 28일, 아라미드 28원자) |
-| σ·(σ-φ)=120 | 120 | 5도메인 공명 (에폭시Tg, 에어백L, 슬럼프mm, 넥쏘kW, 수소LHV) |
+> **21/21 EXACT** | Kolon Industries hydrogen business
+
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 21/21 | v2 | **PEMFC hydrogen membrane** | Nexo 120 kW=sigma(sigma-phi), filling 700 bar=(sigma-sopfr)(sigma-phi)^2, HHV=sigma^2-phi=142 | [doc](pemfc/goal.md) |
+
+> Domains: [pemfc/goal.md](pemfc/goal.md)
+
+---
+
+# Construction — concrete
+
+> **22/22 EXACT** | Kolon Global construction division
+
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 22/22 | v2 | **Construction concrete** | curing 28 days=2nd perfect number, strength J_2=24 MPa, cover 20/40/60=phi*tau*sigma*(sigma-phi) | [doc](concrete/goal.md) |
+
+> Domains: [concrete/goal.md](concrete/goal.md)
+
+---
+
+# Bio — drug delivery / pharma
+
+> **25/25 EXACT** | Kolon Pharmaceutical / TissueGene
+
+| EXACT | ver | Product | Core | Document |
+|:-----:|:---:|---------|------|----------|
+| 25/25 | v2 | **Bio drug delivery** | ICH 6/12/24=n/sigma/J_2 ladder, sterilization 121 C=sigma(sigma-phi)+mu, ADME tau=4 | [doc](bio-pharma/goal.md) |
+
+> Domains: [bio-pharma/goal.md](bio-pharma/goal.md)
+
+---
+
+# Cross-domain resonance
+
+> **10/10 EXACT** | n=6 patterns across Kolon's top 10 businesses
+
+| Parameter | Measured | n=6 formula | Result |
+|-----------|----------|-------------|--------|
+| Benzene C_6 backbone shared-domain count | 4 | tau | EXACT |
+| Amide-bond shared-domain count | 2 | phi | EXACT |
+| 120=sigma(sigma-phi) resonance-domain count | 5 | sopfr | EXACT |
+| Nylon-66 fabric shared-domain count | 3 | n/phi | EXACT |
+| J_2=24 resonance-domain count | 6 | n | EXACT |
+| sigma^2=144 resonance-domain count | 3 | n/phi | EXACT |
+| sopfr=5 resonance-domain count | 7 | sigma-sopfr | EXACT |
+| 6-stage process shared-domain count | 4 | tau | EXACT |
+| Kolon Industries division count | 3 | n/phi | EXACT |
+| Kolon n=6 breakthrough-domain count | 10 | sigma-phi | EXACT |
+
+---
+
+## n=6 constant-usage distribution
+
+| Constant | Value | Primary usage |
+|----------|-------|---------------|
+| n=6 | 6 | molecular structure (C_6 benzene, caprolactam), standard quantities (6 airbags, 6 routes of administration) |
+| sigma=12 | 12 | carbon count (nylon 6,6 = 12C), temperature, thickness (PET 12 um) |
+| phi=2 | 2 | duality (benzene-ring pair, ester-bond pair, DNA double helix) |
+| tau=4 | 4 | steps/components (ADME 4 steps, Bogue minerals 4, clinical phase 4) |
+| sopfr=5 | 5 | principles/classes (GMP 5 principles, cement 5 types, MEA 5 layers) |
+| J_2=24 | 24 | density/strength (airbag 24 threads/cm, concrete 24 MPa, belt angle 24 deg) |
+| sigma-phi=10 | 10 | carbon/hydrogen (methylene 10 groups, PET C_10, thermal expansion 10 * 10^-6) |
+| n/phi=3 | 3 | rings/layers (epoxy 3 atoms, RO 3 layers, codon 3 bases) |
+| sigma^2=144 | 144 | properties (aramid density 1.44, vulcanization 144 C, filament 144f) |
+| phi^tau=16 | 16 | rim diameter 16 inches, heavy atom count 16 |
+| (sigma-phi)^2=100 | 100 | PET 100 um, humidity 100 %RH, lifetime 100 years |
+| 28 | 2nd perfect number | time/structure (concrete 28 days, aramid 28 atoms) |
+| sigma*(sigma-phi)=120 | 120 | 5-domain resonance (epoxy Tg, airbag L, slump mm, Nexo kW, hydrogen LHV) |

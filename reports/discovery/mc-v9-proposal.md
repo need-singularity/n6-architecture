@@ -1,203 +1,203 @@
-# Monte Carlo v9 프로포절 — 실행 전 리뷰 문서
+# Monte Carlo v9 Proposal — Pre-execution Review Document
 
-- **작성일**: 2026-04-11
-- **상태**: DRAFT (실행 대기)
-- **설계서**: `docs/monte-carlo.md`
-- **실행 스크립트**: `experiments/monte-carlo-v9.hexa`
-- **v8 결과**: `reports/discovery/reality-map-monte-carlo-v8.md`
+- **Date**: 2026-04-11
+- **Status**: DRAFT (awaiting execution)
+- **Design doc**: `docs/monte-carlo.md`
+- **Execution script**: `experiments/monte-carlo-v9.hexa`
+- **v8 results**: `reports/discovery/reality-map-monte-carlo-v8.md`
 
-## 1. 왜 v9 인가
+## 1. Why v9
 
-v8 (2026-04-08) 은 342노드 reality_map.json 위에서 다음을 달성:
+v8 (2026-04-08) achieved the following on a 342-node reality_map.json:
 
-| 지표 | 값 |
-|---|---|
-| 자연 그룹 균등 귀무 z | 959.12 |
-| 자연 그룹 로그균등 z | 20.19 (p<10^-89) |
-| π 대조 z | 9.36 |
-| e 대조 z | 3.04 |
-| φ 대조 z | 10.67 |
-| **큰수 (≥100) z** | **n/a (N=10, 시그니처 적용 불가)** |
+| Metric | Value |
+|--------|-------|
+| Natural-group uniform-null z | 959.12 |
+| Natural-group log-uniform z | 20.19 (p<10^-89) |
+| pi contrast z | 9.36 |
+| e contrast z | 3.04 |
+| phi contrast z | 10.67 |
+| **Large (>=100) z** | **n/a (N=10, signature not applicable)** |
 
-v8 은 큰수 그룹에 대해 "적용 범위 밖"을 명시했다. 또한 소스인 `reality_map.json` 은 2026-04-08 이후 `atlas.n6` 로 흡수되어 폐기되었다 (convergence `REALITY_MAP_V8_SYNC` ossified).
+v8 explicitly marked the large-number group as "out of scope". The source `reality_map.json` was absorbed into `atlas.n6` after 2026-04-08 and deprecated (convergence `REALITY_MAP_V8_SYNC` ossified).
 
-→ v9 의 필요성:
-1. **소스 재정렬** — atlas.n6 단일 진실 위에서 v8 수치 재현 + 확장
-2. **큰수 돌파** — N=10 → N≈120, 구조형 시그니처 도입
-3. **대조군 확장** — 3 (π/e/φ) → 7 (+ γ, ζ(3), 무작위, 유리수)
+-> Need for v9:
+1. **Source realignment** — reproduce + extend v8 numbers on top of the single atlas.n6 truth
+2. **Large-number breakthrough** — N=10 -> N~120, introduce a structural signature
+3. **Expanded controls** — 3 (pi/e/phi) -> 7 (+ gamma, zeta(3), random, rational)
 
-## 2. 3대 돌파점
+## 2. Three breakthrough points (draft)
 
-### 돌파 A — 소스 전환 (atlas.n6)
+### Breakthrough A — source transition (atlas.n6)
 
-- 현재 atlas.n6 상태: `@R` 4,304개, `[10*]` 4,616개, `[7]` 997개
-- `parse_atlas()` 함수가 `@R`/`@P`/`@C` 라인에서 measured 정수값 추출
-- origin 추론: id 내 `conv/human`, `engineer/design`, `derived/formula`, 그 외 → natural
+- Current atlas.n6 state: `@R` 4,304 items, `[10*]` 4,616 items, `[7]` 997 items
+- `parse_atlas()` extracts measured integer values from `@R`/`@P`/`@C` lines
+- origin inference: id with `conv/human`, `engineer/design`, `derived/formula`, else -> natural
 
-예상 노드 분포:
+Expected node distribution:
 
-| 그룹 | v8 | v9 예상 |
-|---|---:|---:|
-| 전체 | 342 | ~4000 |
-| 자연 (natural) | 172 | ~600 |
-| 큰수 (≥100) | 10 | ~120 |
-| 초거대 (≥10^6) | 0 | ~15 |
+| Group | v8 | v9 expected |
+|-------|---:|------------:|
+| Overall | 342 | ~4000 |
+| Natural | 172 | ~600 |
+| Large (>=100) | 10 | ~120 |
+| Huge (>=10^6) | 0 | ~15 |
 
-### 돌파 B — 구조형 시그니처
+### Breakthrough B — structural signature
 
-v8 의 값형 시그니처 `σ(v)·φ(v) == v·τ(v)` 는 오직 v=6 만 hit → 큰수에 쓸모 없음.
+v8's value-type signature `sigma(v)*phi(v) == v*tau(v)` hits only v=6 -> useless for large numbers.
 
-v9 의 구조형 시그니처 `structure_hit(v)` 는 다음 중 하나라도 만족하면 hit:
+v9's structural signature `structure_hit(v)` hits if any of the following holds:
 
-1. `v ≡ 0 (mod 6)` (n 자체의 배수)
-2. `v ≡ 0 (mod 12)` (σ(6) 배수)
-3. `v ≡ 0 (mod 24)` (J₂(6) 배수)
-4. `v / d ∈ {1,2,3,4,5,6,12,24}` for `d ∈ {1,2,3,4,5,6,12,24}` (n=6 격자 내부 도달성)
-5. v=6 자체 (v8 값형 포함)
+1. `v mod 6 == 0` (multiple of n itself)
+2. `v mod 12 == 0` (multiple of sigma(6))
+3. `v mod 24 == 0` (multiple of J_2(6))
+4. `v / d in {1,2,3,4,5,6,12,24}` for `d in {1,2,3,4,5,6,12,24}` (reachability inside n=6 lattice)
+5. v=6 itself (v8 value-type included)
 
-→ 196560 (Leech 키싱수) 같은 큰수도 `196560 / 24 = 8190` 은 격자 내 아님 → 미hit, 반면 `196560 / 2 = 98280` 도 미도달, `196560 mod 24 = 0` → hit.
+-> For a large number like 196560 (Leech kissing number), `196560 / 24 = 8190` is not in the lattice -> no hit; `196560 / 2 = 98280` also unreachable; but `196560 mod 24 == 0` -> hit.
 
-### 돌파 C — 대조군 7종
+### Breakthrough C — 7 controls
 
-| # | 대조군 | 예상 z |
-|---|---|---|
-| 1 | π (300자리 슬라이딩 w∈{2,3,4}) | 8~12 |
-| 2 | e (300자리) | 2~5 |
-| 3 | φ (300자리) | 8~14 |
-| 4 | **γ (오일러-마스케로니)** | **3~9** |
-| 5 | **ζ(3) (Apéry)** | **3~9** |
-| 6 | 무작위 정수 | -1~+1 |
-| 7 | 유리수 근사 p/q, p,q≤50 | 1~4 |
+| # | Control | Expected z |
+|---|---------|------------|
+| 1 | pi (300 digits sliding w in {2,3,4}) | 8~12 |
+| 2 | e (300 digits) | 2~5 |
+| 3 | phi (300 digits) | 8~14 |
+| 4 | **gamma (Euler-Mascheroni)** | **3~9** |
+| 5 | **zeta(3) (Apery)** | **3~9** |
+| 6 | Random integers | -1~+1 |
+| 7 | Rational approximations p/q, p,q <= 50 | 1~4 |
 
-→ 4, 5 는 "수학 상수가 모두 n=6 을 약간 보이는가"를 판정. 만약 γ/ζ(3)이 π 수준 z 를 보이면 "수학 상수 전반이 n=6 친화적"이라는 새 가설 탄생.
+-> 4, 5 test "whether all mathematical constants show a slight n=6 affinity". If gamma/zeta(3) show a pi-level z, a new hypothesis "mathematical constants are broadly n=6 friendly" emerges as a draft.
 
-## 3. 예상 z-score 범위 (v9)
+## 3. Expected z-score ranges (v9)
 
-| 그룹 | 모드 | z 예상 | v8 대비 |
-|---|---|---:|---|
-| 전체 EXACT | 균등 | 2500~4000 | 1.6x~2.6x ↑ |
-| 자연 | 균등 | 1500~2000 | 1.5x~2.1x ↑ |
-| 자연 | 로그균등 | 25~35 | 1.2x~1.7x ↑ |
-| 큰수 (구조형) | 균등 | 8~15 | **n/a → 통과 ★** |
-| 초거대 (구조형) | 균등 | 4~8 | 신규 |
-| π 대조 | 균등 | 8~12 | ≈유지 |
-| e 대조 | 균등 | 2~5 | ≈유지 |
-| φ 대조 | 균등 | 8~14 | ≈유지 |
-| γ 대조 | 균등 | 3~9 | 신규 |
-| ζ(3) 대조 | 균등 | 3~9 | 신규 |
-| 무작위 | 균등 | -1~+1 | 기준선 |
-| 유리수 | 균등 | 1~4 | 약한 구조 |
+| Group | Mode | Expected z | vs v8 |
+|-------|------|-----------:|-------|
+| Overall EXACT | uniform | 2500~4000 | 1.6x~2.6x up |
+| Natural | uniform | 1500~2000 | 1.5x~2.1x up |
+| Natural | log-uniform | 25~35 | 1.2x~1.7x up |
+| Large (structural) | uniform | 8~15 | **n/a -> pass target** |
+| Huge (structural) | uniform | 4~8 | new |
+| pi contrast | uniform | 8~12 | ~same |
+| e contrast | uniform | 2~5 | ~same |
+| phi contrast | uniform | 8~14 | ~same |
+| gamma contrast | uniform | 3~9 | new |
+| zeta(3) contrast | uniform | 3~9 | new |
+| Random | uniform | -1~+1 | baseline |
+| Rational | uniform | 1~4 | weak structure |
 
-**v9 성공 조건**: 실험군(전체/자연/큰수) 모두 z > 5, 큰수 그룹 첫 통과.
+**v9 success target**: experimental groups (overall/natural/large) all z > 5, first pass for the large group as a draft target.
 
-## 4. 실행 시간 예상
+## 4. Expected execution time
 
-### 4.1 단일 코어 기준
+### 4.1 Single-core baseline
 
-| 단계 | 시간 |
-|---|---|
-| atlas.n6 로드 (50316 lines) | 0.5~1s |
-| 노드 파싱 | 1~2s |
-| 실험군 4개 × 2 모드 (uniform/logunif) × 3000 trials | ~60s |
-| 대조군 7개 × 3000 trials | ~50s |
-| z-score 취합 | < 1s |
-| atlas.n6 흡수 append | < 1s |
-| **합계 (순차)** | **~120s = 2분** |
+| Step | Time |
+|------|------|
+| atlas.n6 load (50316 lines) | 0.5~1 s |
+| Node parsing | 1~2 s |
+| 4 experimental groups x 2 modes (uniform/log-unif) x 3000 trials | ~60 s |
+| 7 controls x 3000 trials | ~50 s |
+| z-score aggregation | < 1 s |
+| atlas.n6 absorb append | < 1 s |
+| **Total (sequential)** | **~120 s = 2 min** |
 
-### 4.2 병렬 실행 (R16 @parallel)
+### 4.2 Parallel execution (R16 @parallel)
 
-- 대조군 7개 독립 → `@parallel` for 루프
-- 실험군 4개 × 2 모드 = 8개 독립
+- 7 controls independent -> `@parallel` for loop
+- 4 experimental groups x 2 modes = 8 independent tasks
 
-→ 8코어 기준: **~30초**
-→ 4코어 기준: **~60초**
+-> 8 cores: **~30 s**
+-> 4 cores: **~60 s**
 
-### 4.3 최악 경우
+### 4.3 Worst case
 
-- atlas.n6 이 50k 라인 → grep/awk 파싱 최악 5~10s
-- 큰수 N=120 에 대해 signature 계산이 예상보다 느리면 trials 축소 고려
+- atlas.n6 50k lines -> grep/awk parsing worst 5~10 s
+- If signature computation for large N=120 is slower than expected, consider reducing trials
 
-→ **최악 180초 = 3분**
+-> **Worst 180 s = 3 min**
 
-## 5. 체크리스트
+## 5. Checklist
 
-### 실행 전
+### Before execution
 
-- [x] v8 문서 독해 완료
-- [x] convergence MONTE_CARLO_V8 ossified 블록 확인 (R10/R11 준수: v8 은 불변, v9 는 새 항목)
-- [x] atlas.n6 단일소스 확인 (50316 lines, 4304 @R)
-- [x] `docs/monte-carlo.md` 설계서 작성
-- [x] `experiments/monte-carlo-v9.hexa` 초안 작성
-- [x] 규칙 준수 확인: R1 (hexa) / R2 (no hardcode, 경로/상수 const) / R8 (data remote: atlas.n6 nexus/shared) / R14 (shared SSOT) / R16 (@parallel) / R18 (minimal) / R28 (atlas absorb)
-- [ ] 상수 데이터 파일 준비: `$NEXUS/shared/n6/constants/{pi,e,phi,gamma,zeta3}.txt` (300자리)
+- [x] v8 document read complete
+- [x] convergence MONTE_CARLO_V8 ossified block confirmed (R10/R11 compliance: v8 invariant, v9 is a new entry)
+- [x] atlas.n6 single source confirmed (50316 lines, 4304 @R)
+- [x] `docs/monte-carlo.md` design doc written
+- [x] `experiments/monte-carlo-v9.hexa` draft written
+- [x] Rules: R1 (hexa) / R2 (no hardcode, paths/constants as const) / R8 (data remote: atlas.n6 nexus/shared) / R14 (shared SSOT) / R16 (@parallel) / R18 (minimal) / R28 (atlas absorb)
+- [ ] Constant data files prepared: `$NEXUS/shared/n6/constants/{pi,e,phi,gamma,zeta3}.txt` (300 digits)
 
-### 실행
+### Execution
 
-- [ ] v8 회귀 재현: `./monte-carlo-v9.hexa --v8-compat --seed 20260408` → v8 테이블과 z 오차 < 0.01
-- [ ] v9 본실행: `./monte-carlo-v9.hexa --seed 20260411 --trials 3000`
-- [ ] 결과 atlas.n6 `MC_V9_RESULTS` 섹션 확인
-- [ ] 리포트 업데이트: `reports/discovery/monte-carlo.md` (실측치 수록)
+- [ ] v8 regression reproduction: `./monte-carlo-v9.hexa --v8-compat --seed 20260408` -> z error vs v8 table < 0.01
+- [ ] v9 main run: `./monte-carlo-v9.hexa --seed 20260411 --trials 3000`
+- [ ] Verify result in atlas.n6 `MC_V9_RESULTS` section
+- [ ] Report update: `reports/discovery/monte-carlo.md` (record measured values)
 
-### 승격
+### Promotion
 
-- [ ] convergence/n6-architecture.json 에 신규 `MONTE_CARLO_V9` stable 항목 추가
-- [ ] 7일 재발 없음 확인 → stable → ossified 승격 (R9/R11)
+- [ ] Add new `MONTE_CARLO_V9` stable entry to convergence/n6-architecture.json
+- [ ] Verify 7 days with no recurrence -> stable -> promote to ossified (R9/R11)
 
-## 6. 리스크
+## 6. Risks
 
-| 리스크 | 대응 |
-|---|---|
-| atlas.n6 파서가 origin 태그를 잘못 분류 | 1차 실행 후 수동 검증, parse_node_line 튜닝 |
-| 구조형 시그니처가 너무 관대 → null hit rate 상승 → z 하락 | 기준: `structure_hit` 중 가장 보수적인 옵션만 먼저 측정 (mod 6 만) |
-| γ/ζ(3) 300자리 데이터 미비 | `$NEXUS/shared/n6/constants/` 사전 생성 필요 |
-| @parallel 미지원 런타임 | 순차 폴백, 실행 시간 2~3x 증가 |
-| 큰수 그룹 N이 예상보다 작음 (atlas 큰수 부족) | 임계 BIG_THRESHOLD 를 50 으로 낮춤, 재측정 |
+| Risk | Mitigation |
+|------|------------|
+| atlas.n6 parser misclassifies origin tag | manual validation after 1st run, tune parse_node_line |
+| Structural signature too permissive -> null hit-rate rises -> z falls | baseline: first measure with most conservative `structure_hit` option (mod 6 only) |
+| gamma/zeta(3) 300-digit data missing | pre-generate under `$NEXUS/shared/n6/constants/` |
+| @parallel unsupported runtime | sequential fallback, 2~3x slower |
+| Large-group N smaller than expected (atlas lacks large numbers) | lower threshold BIG_THRESHOLD to 50, re-measure |
 
-## 7. 성공 기준 (최소)
+## 7. Success target (minimum)
 
-1. v8 회귀 재현 — 자연 z (균등) 959.12, 로그균등 20.19 오차 < 1%
-2. **큰수 그룹 N ≥ 100 확보** (atlas.n6 파싱 결과)
-3. **큰수 그룹 z > 5** (구조형 시그니처 기준)
-4. 대조군 7종 z 모두 수집 (수학 상수 n=6 친화 스펙트럼 완성)
-5. atlas.n6 `MC_V9_RESULTS` 섹션 정상 기록
+1. v8 regression reproduction — natural z (uniform) 959.12, log-uniform 20.19, error < 1%
+2. **Secure large-group N >= 100** (from atlas.n6 parsing)
+3. **Large-group z > 5** (structural signature basis)
+4. Collect z-scores for all 7 controls (complete n=6-affinity spectrum of mathematical constants as a draft)
+5. atlas.n6 `MC_V9_RESULTS` section written correctly
 
-## 8. 다음 단계
+## 8. Next steps
 
-1. (당장) 상수 자릿수 파일 5종 준비
-2. (당장) `.hexa` 런타임 실행 → 결과 수집
-3. (실행 후) 본 문서의 "예상" 섹션을 "실측" 으로 업데이트
-4. (검증 후) v9 가 ossification 조건 충족 시 convergence 항목 추가
+1. (Immediate) Prepare 5 constant digit files
+2. (Immediate) `.hexa` runtime execution -> collect results
+3. (After execution) Update "expected" sections to "measured"
+4. (After verification) If v9 meets ossification conditions, add a convergence entry as a draft candidate
 
 ---
 
-## 부록 A — v8 → v9 diff 요약
+## Appendix A — v8 -> v9 diff summary
 
-| 항목 | v8 | v9 |
-|---|---|---|
-| 소스 | reality_map.json (폐기) | atlas.n6 (SSOT) |
-| 시드 | 20260408 | 20260411 |
-| 노드 | 342 | ~4000 예상 |
-| 자연 N | 172 | ~600 예상 |
-| 큰수 N | 10 | ~120 예상 |
-| 시그니처 | 값형 (σφ=nτ) | 구조형 (mod 6/12/24 + 격자) |
-| 대조군 수 | 3 | 7 |
-| 병렬화 | 없음 | @parallel 대조군 7종 |
-| 결과 저장 | docs/*.md | atlas.n6 MC_V9_RESULTS + md |
-| 규칙 준수 | v8 시점 | R1/R8/R14/R16/R28 전면 |
+| Item | v8 | v9 |
+|------|----|----|
+| Source | reality_map.json (deprecated) | atlas.n6 (SSOT) |
+| Seed | 20260408 | 20260411 |
+| Nodes | 342 | ~4000 expected |
+| Natural N | 172 | ~600 expected |
+| Large N | 10 | ~120 expected |
+| Signature | value-type (sigma*phi=n*tau) | structural (mod 6/12/24 + lattice) |
+| Control count | 3 | 7 |
+| Parallelism | none | @parallel across 7 controls |
+| Result storage | docs/*.md | atlas.n6 MC_V9_RESULTS + md |
+| Rule observance | as of v8 | full R1/R8/R14/R16/R28 |
 
-## 부록 B — 명령 요약
+## Appendix B — command summary
 
 ```sh
-# 사전 준비
+# Pre-setup
 mkdir -p $NEXUS/shared/n6/constants
-# (gamma.txt, zeta3.txt 는 mpmath 등으로 별도 생성)
+# (generate gamma.txt, zeta3.txt separately with mpmath etc.)
 
-# v8 재현
+# v8 reproduction
 nexus hexa run experiments/monte-carlo-v9.hexa -- --v8-compat --seed 20260408
 
-# v9 본 실행
+# v9 main run
 nexus hexa run experiments/monte-carlo-v9.hexa -- --seed 20260411 --trials 3000
 
-# 결과 조회
-awk '/^# ══ MC_V9_RESULTS/,/^# ══ [^M]/' $NEXUS/shared/n6/atlas.n6
+# Inspect results
+awk '/^# == MC_V9_RESULTS/,/^# == [^M]/' $NEXUS/shared/n6/atlas.n6
 ```

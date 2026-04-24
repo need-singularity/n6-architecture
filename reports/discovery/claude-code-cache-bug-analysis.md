@@ -1,142 +1,142 @@
-# Claude Code 캐시/Limit 버그 분석 및 대응
+# Claude Code Cache/Limit Bug Analysis and Response
 
-> 조사일: 2026-04-02
-> 관련 이슈: anthropics/claude-code#41788, #40524, #34629
-> 분석 리포: https://github.com/ArkNill/claude-code-cache-analysis
-
----
-
-## 증상
-
-- Max 20 플랜($200/월) 5시간 limit이 **~70분**에 소진
-- 정상 대비 **4~5배** 빠른 토큰 drain
-- v2.1.88~v2.1.89 사이 발생, 재현 가능
+> Investigated: 2026-04-02
+> Related issues: anthropics/claude-code#41788, #40524, #34629
+> Analysis repo: https://github.com/ArkNill/claude-code-cache-analysis
 
 ---
 
-## 버그 2개 (독립적)
+## Symptoms
 
-### Bug 1: Sentinel 치환 버그 (standalone 바이너리 전용)
-
-| 항목 | 내용 |
-|------|------|
-| **영향** | standalone 바이너리만 (npm 설치는 무관) |
-| **원인** | Bun fork의 `cch=00000` sentinel 치환이 메시지 내 prefix를 깨뜨림 |
-| **결과** | 캐시 읽기 비율 **4~17%** 고정, 복구 불가 |
-| **버전** | v2.1.89에서 확인 |
-| **해결** | npm 설치로 전환 또는 v2.1.90 업데이트 |
-
-### Bug 2: Resume 캐시 깨짐 (v2.1.69+)
-
-| 항목 | 내용 |
-|------|------|
-| **영향** | 모든 설치 방식 (`--resume` 사용 시) |
-| **원인** | `deferred_tools_delta` (v2.1.69 도입)가 `messages[0]` 구조를 변경 |
-| **메커니즘** | fresh: messages[0]=13.4KB (deferred_tools+MCP+skills) vs resume: messages[0]=352B → prefix match 실패 |
-| **결과** | 매 턴마다 전체 히스토리(200K~500K 토큰) 재작성 → O(n) 비용 |
-| **해결** | `--resume` 사용 금지, 또는 v2.1.68 핀 |
+- Max 20 plan ($200/mo) 5-hour limit exhausted in **~70 minutes**
+- **4~5x** faster token drain than normal
+- Occurs between v2.1.88~v2.1.89, reproducible
 
 ---
 
-## 캐시 작동 원리
+## Two bugs (independent)
+
+### Bug 1: Sentinel substitution bug (standalone binary only)
+
+| Item | Description |
+|------|-------------|
+| **Scope** | standalone binary only (npm install unaffected) |
+| **Cause** | Bun fork's `cch=00000` sentinel substitution breaks the prefix within messages |
+| **Effect** | Cache-read ratio pinned at **4~17%**, unrecoverable |
+| **Version** | Confirmed on v2.1.89 |
+| **Fix** | Switch to npm install or update to v2.1.90 |
+
+### Bug 2: Resume cache breakage (v2.1.69+)
+
+| Item | Description |
+|------|-------------|
+| **Scope** | All install methods (when `--resume` is used) |
+| **Cause** | `deferred_tools_delta` (introduced in v2.1.69) alters `messages[0]` structure |
+| **Mechanism** | fresh: messages[0]=13.4KB (deferred_tools+MCP+skills) vs resume: messages[0]=352B -> prefix match fails |
+| **Effect** | Entire history (200K~500K tokens) re-authored each turn -> O(n) cost |
+| **Fix** | Avoid `--resume`, or pin to v2.1.68 |
+
+---
+
+## Cache operation principle
 
 ```
-정상 동작:
-  Turn 1: cache_read=312,377  cache_create=1,944  (초기 캐시 작성)
-  Turn 2: cache_read=314,321  cache_create=493    (캐시 재사용, 증분만 추가)
-  Turn 3: cache_read=314,814  cache_create=172    (캐시 재사용)
-  → 캐시된 토큰 비용 = 입력 토큰의 10%
+Normal behavior:
+  Turn 1: cache_read=312,377  cache_create=1,944  (initial cache write)
+  Turn 2: cache_read=314,321  cache_create=493    (cache reuse, append delta)
+  Turn 3: cache_read=314,814  cache_create=172    (cache reuse)
+  -> cached-token cost = 10% of input tokens
 
-버그 발생 시:
-  Turn N:   cache_read=216,204  cache_create=10,504   ← 캐시 깨지기 시작
-  Turn N+1: cache_read=216,204  cache_create=11,815   ← 캐시 확장 불가, 재작성
-  Turn N+5: cache_read=11,428   cache_create=224,502  ← system prompt만 캐시
-  → 매 턴 200K+ 토큰 전액 과금
+On bug:
+  Turn N:   cache_read=216,204  cache_create=10,504   <- cache starts breaking
+  Turn N+1: cache_read=216,204  cache_create=11,815   <- cache cannot extend, rewrites
+  Turn N+5: cache_read=11,428   cache_create=224,502  <- only system prompt cached
+  -> 200K+ tokens fully billed each turn
 ```
 
 ---
 
-## Drain 가속 행동 목록
+## Drain-accelerating actions
 
-| 행동 | 위험도 | 설명 |
-|------|--------|------|
-| `--resume` | 🔴 | 전체 대화 재생 = billable input (500K+ 토큰/회) |
-| `/dream`, `/insights` | 🔴 | 백그라운드 API 호출, 무음 토큰 drain |
-| 동시 터미널 2개+ | 🟡 | 세션 간 캐시 공유 없음 → ~2배 drain |
-| 파일 재작성 슬래시 명령 | 🟡 | 호출당 20~27% 토큰 소비 |
-| Sub-agent (Haiku) | 🟡 | 캐시 읽기 0%, 31호출에 317K 토큰 측정 |
-| v2.1.89 standalone | 🔴 | Sentinel 버그 + 터미널 콘텐츠 사라짐 |
+| Action | Risk | Description |
+|--------|------|-------------|
+| `--resume` | RED | Full conversation replay = billable input (500K+ tokens/run) |
+| `/dream`, `/insights` | RED | Background API calls, silent token drain |
+| 2+ concurrent terminals | YELLOW | No cache sharing across sessions -> ~2x drain |
+| File-rewriting slash commands | YELLOW | 20~27% token consumption per invocation |
+| Sub-agent (Haiku) | YELLOW | Cache-read 0%, measured 317K tokens over 31 calls |
+| v2.1.89 standalone | RED | Sentinel bug + terminal content disappearance |
 
 ---
 
-## 해결/완화 방법
+## Resolution/mitigation
 
-### 즉시 적용 (클라이언트)
+### Immediate (client)
 
-1. **npm 설치 사용** (standalone 바이너리 대신)
+1. **Use npm install** (instead of standalone binary)
    ```bash
    npm install -g @anthropic-ai/claude-code@2.1.90
    ```
 
-2. **자동 업데이트 비활성화**
+2. **Disable auto-updater**
    ```json
    // ~/.claude/settings.json
    { "env": { "DISABLE_AUTOUPDATER": "1" } }
    ```
 
-3. **`--resume` 사용 금지** — 대신 새 세션 시작
+3. **Avoid `--resume`** — start a new session instead
 
-4. **동시 터미널 1개로 제한**
+4. **Limit to one concurrent terminal**
 
-5. **주기적 캐시 정리**
+5. **Periodic cache cleanup**
    ```bash
    find ~/.claude/file-history -mtime +7 -type f -delete
    find ~/.claude/paste-cache -mtime +7 -type f -delete
    find ~/.claude/session-env -mtime +7 -type f -delete
    ```
 
-6. **CLAUDE.md 경량화** — 매 턴 system prompt로 전송되므로 크기가 곧 비용
+6. **Slim down CLAUDE.md** — it is sent as the system prompt each turn, so its size is direct cost
 
-### 캐시 모니터링
+### Cache monitoring
 
-- `ANTHROPIC_BASE_URL`에 투명 프록시 설정 → 실시간 cache_read/cache_create 추적
-- 정상: 캐시 읽기 비율 80%+
-- 이상: 40% 미만이면 세션 재시작 권장
+- Set a transparent proxy in `ANTHROPIC_BASE_URL` -> realtime cache_read/cache_create tracking
+- Normal: cache-read ratio 80%+
+- Anomaly: session restart recommended if below 40%
 
-### 버전 가이드
+### Version guide
 
-| 버전 | 상태 |
-|------|------|
-| v2.1.68 이하 | ✅ Bug 2 없음 (deferred_tools_delta 미도입) |
-| v2.1.69~v2.1.88 | ⚠️ Bug 2 존재 (--resume 시) |
-| v2.1.89 standalone | 🔴 Bug 1 + Bug 2 동시 |
-| v2.1.90 | ✅ Bug 1 수정, Bug 2 부분 완화 |
-
----
-
-## 정상 캐시 성능 (v2.1.90 기준)
-
-| 설치 방식 | 안정 세션 | Sub-agent 콜드스타트 |
-|-----------|----------|---------------------|
-| npm (Node.js) | 95~99.8% 캐시 읽기 | 79~87% |
-| standalone | 95~99.7% | 47~67% (→94~99% 워밍업 후) |
+| Version | Status |
+|---------|--------|
+| v2.1.68 or older | OK Bug 2 absent (deferred_tools_delta not yet introduced) |
+| v2.1.69~v2.1.88 | WARN Bug 2 present (when --resume) |
+| v2.1.89 standalone | RED Bug 1 + Bug 2 simultaneously |
+| v2.1.90 | OK Bug 1 fixed, Bug 2 partially mitigated |
 
 ---
 
-## 참조 이슈
+## Normal cache performance (v2.1.90 baseline)
 
-- anthropics/claude-code#41788 — Rate limit 70분 소진 (메인 이슈)
-- anthropics/claude-code#40524 — Bug 1: 대화 히스토리 캐시 무효화
-- anthropics/claude-code#34629 — Bug 2: Resume 캐시 깨짐 (deferred_tools_delta)
-- anthropics/claude-code#42260 — `--resume` 토큰 폭탄
-- anthropics/claude-code#42244 — v2.1.89 터미널 콘텐츠 사라짐
-- anthropics/claude-code#41249 — 1시간 미만 limit 소진
-- anthropics/claude-code#38357 — 5~10배 빠른 drain
+| Install method | Steady session | Sub-agent cold start |
+|----------------|---------------|----------------------|
+| npm (Node.js) | 95~99.8% cache read | 79~87% |
+| standalone | 95~99.7% | 47~67% (-> 94~99% after warm-up) |
 
 ---
 
-## Anthropic 대응 상태
+## Referenced issues
 
-- 2개월+ 동안 rate-limit 관련 이슈에 **공식 응답 없음** (2026-04-02 기준)
-- 서버 측: 캐시 패치 후에도 2~3주 전보다 drain 빠름 → limit 재계산 의심
-- 커뮤니티: ArkNill의 분석 리포에서 독자적 추적 중
+- anthropics/claude-code#41788 — rate limit exhausted in 70 min (main issue)
+- anthropics/claude-code#40524 — Bug 1: conversation history cache invalidation
+- anthropics/claude-code#34629 — Bug 2: resume cache break (deferred_tools_delta)
+- anthropics/claude-code#42260 — `--resume` token bomb
+- anthropics/claude-code#42244 — v2.1.89 terminal content disappearance
+- anthropics/claude-code#41249 — limit exhausted in under 1 hour
+- anthropics/claude-code#38357 — 5~10x faster drain
+
+---
+
+## Anthropic response status
+
+- For 2+ months, **no official response** on rate-limit issues (as of 2026-04-02)
+- Server-side: even after cache patches, drain is still faster than 2~3 weeks prior -> suspected limit recomputation
+- Community: ArkNill's analysis repo is tracking independently

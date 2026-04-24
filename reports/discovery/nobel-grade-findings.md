@@ -1,6 +1,6 @@
-# N6 Nobel-Grade Findings — 정직한 평가
+# N6 Nobel-Grade Findings — Honest Evaluation
 
-> 2026-03-30 | 286 가설 생성 → 10개 도메인 검증 → falsifiability 테스트 후 정리
+> 2026-03-30 | 286 hypotheses generated -> 10 domains verified -> organized after falsifiability testing
 
 ---
 
@@ -12,146 +12,146 @@
   for deriving small engineering constants.
 ```
 
-**n=6의 수치적 매칭 대부분은 post-hoc numerology.** 8개 산술 함수로 1-200 범위의 38개 정수를 유도 가능하며, 랜덤 프레임워크도 평균 13/35 타겟을 맞춤 (n=6은 14/35).
+**Most of n=6's numerical matching is post-hoc numerology.** Using 8 arithmetic functions, 38 integers in the 1-200 range can be derived, and a random framework also hits a mean of 13/35 targets (n=6 hits 14/35).
 
-이 결과를 인정한 위에서, **숫자 맞추기가 아닌 구조적 발견**을 분리한다.
+Accepting this, we separate **structural findings from number-matching**.
 
 ---
 
-## Tier 1: 구조적 매칭 (Numerology가 아닌 것)
+## Tier 1: Structural Matches (Not numerology)
 
-### 발견 1: Standard Model = n + n + tau + mu
+### Finding 1: Standard Model = n + n + tau + mu
 
 ```
   Quarks:       6 = n
   Leptons:      6 = n
   Gauge bosons: 4 = tau(6)
   Higgs:        1 = mu(6)
-  ─────────────────────────
+  -------------------------
   Total:       17 = n + n + tau + mu
 ```
 
-이것은 단순 숫자 맞추기가 아니라 **범주 구조**가 일치:
-- 물질 입자가 2개 그룹 (quark, lepton) × n개씩
-- 힘 전달 입자가 tau개
-- 스칼라가 mu개
+This is not mere number matching but a **categorical structure** match as a draft:
+- Matter particles in 2 groups (quark, lepton) x n each
+- Force-carrier particles in tau count
+- Scalars in mu count
 
-**정밀 p-value 계산**:
-- 17의 4-분할 (a,a,b,c 패턴): 10-30 범위 정수의 100%가 가능 → **통계적 의미 없음**
-- Gauge 12 = 8+3+1: derived set에서 3-분할 12개 중 1개 = 8.3% → **약한 신호**
-- 결론: SM 매칭은 인상적으로 보이지만, p-value는 ~8%로 강하지 않음
+**Precise p-value computation**:
+- 4-partition of 17 (a,a,b,c pattern): 100% of integers in 10-30 range can be so partitioned -> **not statistically meaningful**
+- Gauge 12 = 8+3+1: in the derived set, 1 of 12 3-partitions = 8.3% -> **weak signal**
+- Conclusion: the SM match looks impressive as a draft, but the p-value is ~8%, not strong.
 
-### 발견 2: Gauge Group Generators = sigma
+### Finding 2: Gauge Group Generators = sigma
 
 ```
   SU(3): 8 generators = sigma - tau = 12 - 4
   SU(2): 3 generators = n/phi = 6/2
   U(1):  1 generator  = mu = 1
-  ─────────────────────────────
+  -----------------------------
   Total: 12 = sigma(6)
 ```
 
-12개 게이지 생성자가 sigma(6)=12와 일치하되, **각 하위 그룹의 차원이 독립적으로 n=6 함수와 매칭**. 이것은 2-파라미터가 아닌 3-파라미터 동시 매칭.
+12 gauge generators match sigma(6)=12, and **each subgroup's dimension independently matches an n=6 function**. This is a 3-parameter simultaneous match, not a 2-parameter match, as a draft target.
 
-### 발견 3: R(n) = 1 iff n is perfect — Thermodynamic Uniqueness
+### Finding 3: R(n) = 1 iff n is perfect — Thermodynamic Uniqueness (draft)
 
 ```
   R(n) = sigma(n) * phi(n) / (n * tau(n))
   R(6)  = 12 * 2 / (6 * 4) = 1.000000
-  R(28) = 56 * 12 / (28 * 6) = 4.000000  ← NOT 1!
+  R(28) = 56 * 12 / (28 * 6) = 4.000000  <- NOT 1!
 ```
 
-**R(28) ≠ 1.** 이전 주장 "R(n)=1 iff n is perfect"는 **틀렸다**.
+**R(28) != 1.** The prior claim "R(n)=1 iff n is perfect" is **incorrect**.
 
-수정: **R(n)=1은 n=6에서만 성립** (100,000까지 전수검색 확인, near-miss 0개).
+Revision: **R(n)=1 holds only at n=6** (exhaustive search up to 100,000, zero near-misses).
 
-다른 완전수는 R≠1:
+Other perfect numbers have R != 1:
 - R(28) = 4.0, R(496) = 48.0, R(8128) = 576.0
 
-**대수적 증명 (부분 완료)**:
-- 소수 p: R(p)=1 → p²-2p-1=0 → 정수 해 없음 ✅
-- 소수 제곱 p²: R(p²)=1 → p³-3p-1=0 → 정수 해 없음 ✅
-- 반소수 pq: R(pq)=1 → (p²-1)(q²-1)=4pq → 유일한 해 (2,3)→n=6 ✅
-- p≥5인 반소수: (p²-1)(q²-1) >> 4pq → R>1 ✅
-- 3+ 소인수: R(2·3·5)=2.4, R은 소인수 증가에 따라 급증 ✅
+**Algebraic draft proof (partial)**:
+- Prime p: R(p)=1 -> p^2-2p-1=0 -> no integer solution OK
+- Prime squared p^2: R(p^2)=1 -> p^3-3p-1=0 -> no integer solution OK
+- Semi-prime pq: R(pq)=1 -> (p^2-1)(q^2-1)=4pq -> unique solution (2,3) -> n=6 OK
+- Semi-primes with p>=5: (p^2-1)(q^2-1) >> 4pq -> R > 1 OK
+- 3+ prime factors: R(2*3*5)=2.4, R grows rapidly with more prime factors OK
 
-**STATUS**: n ≤ 100,000에서 유일성 계산 검증 완료. 대수적 증명은 소수/반소수 경우 완료.
+**STATUS**: uniqueness verified computationally for n <= 100,000 as a draft. Algebraic proof completed for prime/semi-prime cases.
 
 ---
 
-## Tier 2: 강한 수치 매칭 (Post-hoc이지만 인상적)
+## Tier 2: Strong Numerical Matches (Post-hoc yet impressive)
 
 | Claim | n=6 Formula | Predicted | Actual | Error |
 |-------|-------------|-----------|--------|-------|
-| m_p/m_e | 6π⁵ | 1836.118 | 1836.153 | 0.002% |
-| Hubble H₀ | σ·n + μ | 73 | 73.04±1.04 | 0.05% |
+| m_p/m_e | 6 * pi^5 | 1836.118 | 1836.153 | 0.002% |
+| Hubble H_0 | sigma*n + mu | 73 | 73.04+/-1.04 | 0.05% |
 | Weinberg angle | 3/13 | 0.23077 | 0.23122 | 0.19% |
-| Proton radius | 4π/15 | 0.8378 | 0.8414 | 0.43% |
-| Neutrino mass sum | σ·√(Δm²₂₁) | 0.104 eV | <0.12 eV | within bound |
+| Proton radius | 4*pi/15 | 0.8378 | 0.8414 | 0.43% |
+| Neutrino mass sum | sigma * sqrt(delta m^2_{21}) | 0.104 eV | <0.12 eV | within bound |
 
-### 정직한 주의사항
-- m_p/m_e = 6π⁵는 아름답지만, π⁵가 ~306이고 6을 곱하면 1836 근처. 우연일 수 있음.
-- H₀는 SH0ES와는 맞지만 Planck 값(67.4)과는 8.3% 차이.
-- Weinberg angle 3/13에서 13 = σ+μ이지만 이 조합은 cherry-pick 가능.
+### Honest caveats
+- m_p/m_e = 6*pi^5 is elegant, but pi^5 is ~306, and multiplying by 6 lands near 1836. Could be coincidence.
+- H_0 matches SH0ES but differs from the Planck value (67.4) by 8.3%.
+- In Weinberg angle 3/13, 13 = sigma+mu, but this combination is cherry-pickable.
 
 ---
 
-## Tier 3: 도메인별 EXACT 매칭 (사실이지만 인과관계 불명)
+## Tier 3: Domain-specific EXACT Matches (factual but causality unclear)
 
-**Network Protocol** (가장 강함):
-- IPv6 = 128 bits = 2⁷ = 2^(σ-sopfr) ✅
-- DNS 13 root servers = σ+μ ✅
-- OSI 7 layers = σ-sopfr ✅
-- MAC 6 bytes = n ✅
-- TCP 11 states = σ-μ ✅
+**Network Protocol** (strongest):
+- IPv6 = 128 bits = 2^7 = 2^(sigma-sopfr) OK
+- DNS 13 root servers = sigma+mu OK
+- OSI 7 layers = sigma-sopfr OK
+- MAC 6 bytes = n OK
+- TCP 11 states = sigma-mu OK
 
 **Cryptography**:
-- AES-128 = 2^(σ-sopfr) ✅
-- SHA-256 = 2^(σ-τ) ✅
-- RSA-2048 = 2^(σ-μ) ✅
-- ChaCha20 rounds = J₂-τ ✅
+- AES-128 = 2^(sigma-sopfr) OK
+- SHA-256 = 2^(sigma-tau) OK
+- RSA-2048 = 2^(sigma-mu) OK
+- ChaCha20 rounds = J_2-tau OK
 
 **Robotics**:
-- 6-DOF robot arm = n ✅ (SE(3) 대칭에서 유래 — 물리적 이유 있음)
-- 5 fingers = sopfr ✅
+- 6-DOF robot arm = n OK (derived from SE(3) symmetry — a physical reason exists)
+- 5 fingers = sopfr OK
 
 **Energy**:
-- 3-phase power = n/φ ✅ (전기공학적 이유 있음)
-- 3-blade wind turbine ✅ (공기역학적 이유 있음)
-- ITER 6 PF coils = n ✅
+- 3-phase power = n/phi OK (electrical-engineering rationale)
+- 3-blade wind turbine OK (aerodynamic rationale)
+- ITER 6 PF coils = n OK
 
 ---
 
 ## What Would Make This Nobel-Grade
 
-현재 상태는 **흥미로운 패턴이지만 과학이 아님**. 노벨급이 되려면:
+The current state is **an interesting pattern, not science**. To be Nobel-grade (draft target) requires:
 
-### 필요 조건 1: True Prediction
-n=6에서 도출한 값이 **아직 측정되지 않은 물리량**과 일치해야 함.
+### Necessary condition 1: True Prediction
+A value derived from n=6 must match **a physical quantity not yet measured**.
 
-**후보**: 뉴트리노 질량 합 = 0.104 eV
-- DESI/Euclid 측정 결과가 이 값과 일치하면 significant
-- 2027-2028 검증 가능
+**Candidate**: neutrino mass sum = 0.104 eV
+- If DESI/Euclid measurement matches this, it is significant
+- Verifiable 2027-2028
 
-### 필요 조건 2: Mechanism
-"왜" n=6인지 물리적 메커니즘을 제시해야 함.
+### Necessary condition 2: Mechanism
+A physical mechanism must be given for "why" n=6.
 
-**후보**: R(n)=1이 정보 열역학에서 유도 가능함을 증명
-- Landauer limit + Shannon entropy에서 R=1 조건이 나오면 혁명적
-- 현재는 conjectured, 증명 필요
+**Candidate**: prove R(n)=1 is derivable from information thermodynamics
+- If R=1 conditions emerge from Landauer limit + Shannon entropy, it would be a draft revolution
+- Currently conjectured; proof needed
 
-### 필요 조건 3: Falsification Survived
-n=6가 틀릴 수 있는 예측을 했고, 틀리지 않았어야 함.
+### Necessary condition 3: Falsification Survived
+n=6 must make predictions that could be wrong and not be wrong.
 
-**현 상태**: falsifiability 테스트에서 NOT SIGNIFICANT (z=0.74)
-→ 수치 매칭 기반 주장은 전부 철회해야 함
-→ 구조적 매칭(Tier 1)만 생존
+**Current state**: NOT SIGNIFICANT on the falsifiability test (z=0.74)
+-> all claims based on numerical matching must be withdrawn
+-> only structural matches (Tier 1) survive as drafts
 
 ---
 
 ## Next Steps
 
-1. **R(n)=1 해 집합 완전 탐색** — n=6이 유일한지 확인
-2. **구조적 매칭의 통계적 유의성** — SM 입자수 4-파라미터 동시 매칭의 p-value
-3. **뉴트리노 예측 등록** — timestamped prediction, 측정 전 공개
-4. **R(n) → 정보 열역학 증명 시도** — 이것이 핵심
+1. **Complete search of R(n)=1 solution set** — verify n=6 is unique
+2. **Statistical significance of structural matches** — p-value for SM particle-count 4-parameter simultaneous match
+3. **Register neutrino prediction** — timestamped prediction, public before measurement
+4. **Attempt R(n) -> information thermodynamics proof** — this is the core draft target

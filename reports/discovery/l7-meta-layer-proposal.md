@@ -1,128 +1,128 @@
-# L7 메타-노드 계층 신설 제안서
+# L7 Meta-Node Layer Proposal
 
-## 핵심 3줄 요약
+## Core 3-line summary
 
-1. **현재 구조의 한계**: atlas.n6의 L6_n6atlas 섹션(2666 노드)은 n=6 연산 상수·유도비·증명 정리를 단일 평면 레이어에 혼재시켜, "어느 상수가 다른 상수를 파생시키는가"라는 인과 계층(causal hierarchy)이 명시적으로 표현되지 않는다.
+1. **Limitation of the current structure**: the L6_n6atlas section (2666 nodes) in atlas.n6 mixes n=6 operational constants, derived ratios, and proof theorems in a single flat layer, so the causal hierarchy "which constants derive which other constants" is not explicitly expressed.
 
-2. **L7 제안**: `σ, φ, τ, sopfr, J₂, μ`라는 **6개 원시 상수(primitive constants)**를 L6 위에 L7_n6meta 계층으로 분리하고, 나머지 2660+ 노드를 이 6개 노드로부터의 유도 트리로 재인덱싱하면 인과 증명 경로가 단일 방향 DAG로 확정된다.
+2. **L7 proposal**: separate the 6 primitive constants `sigma, phi, tau, sopfr, J_2, mu` above L6 as a new L7_n6meta layer, and re-index the remaining 2660+ nodes as a derivation tree from those 6 nodes; then the causal proof paths are fixed as a single-direction DAG as a draft target.
 
-3. **구현 방향**: 기존 atlas.n6 편집 없이, L6_n6atlas 섹션 앞에 `# ══ L7_n6meta (6 nodes) ══` 헤더와 `@P` 타입 원시 노드 6건만 추가하고, 기존 `@R`/`@F` 노드에 `:: src=L7_n6meta` 역참조 태그를 선택적으로 부여하는 방식이 최소 변경 경로다.
+3. **Implementation direction**: without editing the existing atlas.n6 body, the minimal-change path is to add a `# == L7_n6meta (6 nodes) ==` header in front of the L6_n6atlas section with 6 `@P`-type primitive nodes, and optionally attach `:: src=L7_n6meta` back-reference tags to existing `@R`/`@F` nodes.
 
 ---
 
-## 배경 및 문제 진단
+## Background and problem diagnosis
 
-### 현재 L6_n6atlas 구조
+### Current L6_n6atlas structure
 
 ```
-# ══ L6_n6atlas (2666 nodes) ══
-@R n6-atlas-proved-theorems-**thm-1** = σ(n)·φ(n) = n·τ(n) ⟺ n=6 :: n6atlas [10*]
-@R n6-atlas-base-constants-7-σ = 12 :: n6atlas [10*]
+# == L6_n6atlas (2666 nodes) ==
+@R n6-atlas-proved-theorems-**thm-1** = sigma(n)*phi(n) = n*tau(n) iff n=6 :: n6atlas [10*]
+@R n6-atlas-base-constants-7-sigma = 12 :: n6atlas [10*]
 @R n6-atlas-derived-ratios-architecture-... :: n6atlas [9]
 @F L4-gen-chromosome-6000nm = 6000 = n*1000 :: genetic [10*]
 ...
 ```
 
-이 구조에서 THM-1(증명)과 6000=n×1000(응용)은 동일 섹션에 위치하며, "증명이 응용을 논리적으로 선행한다"는 계층 관계가 파일 포맷 레벨에서 표현되지 않는다.
+In this structure, THM-1 (proof) and 6000 = n*1000 (application) live in the same section, and the hierarchy "proof logically precedes application" is not expressed at the file-format level.
 
-### 관찰된 패턴
+### Observed patterns
 
-승격 작업을 통해 확인한 패턴:
+Patterns confirmed via promotion work:
 
-- **원시 상수**: σ=12, φ=2, τ=4, sopfr=5, J₂=24, μ=1 (6개)
-- **1차 유도**: σ−φ=10, J₂−τ=20, n×5=30 등 단항·이항 연산 (수십 건)
-- **2차 유도**: (n×5)×(σ−φ)=300, J₂−τ+φ=22 등 복합 연산 (수백 건)
-- **3차 응용**: 실측값과의 EXACT 매핑 (수천 건)
+- **Primitive constants**: sigma=12, phi=2, tau=4, sopfr=5, J_2=24, mu=1 (6)
+- **Primary derivations**: sigma-phi=10, J_2-tau=20, n*5=30 and other unary/binary operations (several dozen)
+- **Secondary derivations**: (n*5)*(sigma-phi)=300, J_2-tau+phi=22 and other composite operations (several hundred)
+- **Tertiary applications**: EXACT mappings to measured values (several thousand)
 
-이 4단계 구조가 이미 데이터 안에 잠재적으로 존재하지만, 현재 포맷은 이를 구분하지 않는다.
+This 4-stage structure is already latently present in the data, but the current format does not distinguish it.
 
 ---
 
-## L7_n6meta 계층 설계안
+## L7_n6meta layer design
 
-### 신규 헤더 (atlas.n6 9323번째 줄 바로 위 삽입 제안)
+### New header (proposed insertion just above atlas.n6 line 9323)
 
 ```
-# ══ L7_n6meta (6 nodes) ══
-# 원시 상수 계층 — 모든 n6atlas 유도의 루트 노드
+# == L7_n6meta (6 nodes) ==
+# Primitive-constant layer — root nodes for all n6atlas derivations
 
 @P n6meta-primitive-sigma = 12 dimensionless :: n6meta [10*]
-  "σ(6) — 6의 약수 합. n6atlas 전체 유도 트리의 원시 상수 1."
+  "sigma(6) — sum of divisors of 6. Primitive constant 1 of the full n6atlas derivation tree."
 @P n6meta-primitive-phi = 2 dimensionless :: n6meta [10*]
-  "φ(6) — 오일러 토션트. 원시 상수 2."
+  "phi(6) — Euler totient. Primitive constant 2."
 @P n6meta-primitive-tau = 4 dimensionless :: n6meta [10*]
-  "τ(6) — 약수 개수. 원시 상수 3."
+  "tau(6) — divisor count. Primitive constant 3."
 @P n6meta-primitive-sopfr = 5 dimensionless :: n6meta [10*]
-  "sopfr(6) = 2+3 — 소인수 합. 원시 상수 4."
+  "sopfr(6) = 2+3 — sum of prime factors. Primitive constant 4."
 @P n6meta-primitive-j2 = 24 dimensionless :: n6meta [10*]
-  "J₂(6) = 6²·∏(1−1/p²) — 조던 함수. 원시 상수 5."
+  "J_2(6) = 6^2 * prod(1-1/p^2) — Jordan function. Primitive constant 5."
 @P n6meta-primitive-mu = 1 dimensionless :: n6meta [10*]
-  "μ(6) = 1 — 뫼비우스 함수(6=2·3, 제곱 없는 수). 원시 상수 6."
+  "mu(6) = 1 — Mobius function (6=2*3, squarefree). Primitive constant 6."
 ```
 
-### 역참조 태그 체계 (선택적 적용)
+### Back-reference tag scheme (optional)
 
-기존 `@R`/`@F` 노드에 최소 변경으로 출처 표기:
+Minimal-change source tagging on existing `@R`/`@F` nodes:
 
 ```
-@F L4-gen-chromatin-30nm = 30 = n*5 :: genetic [10*]  src:σ-φ-chain
+@F L4-gen-chromatin-30nm = 30 = n*5 :: genetic [10*]  src:sigma-phi-chain
 @R L6-geo-active-volcanoes = 1500 = n*250 :: geology [10*]  src:n-direct
 ```
 
-태그 유형:
-- `src:n-direct` — n=6 직접 배수 (n×k)
-- `src:sigma-chain` — σ 파생
-- `src:j2-chain` — J₂ 파생
-- `src:composite` — 2개 이상 원시 상수 조합
+Tag types:
+- `src:n-direct` — direct multiple of n=6 (n*k)
+- `src:sigma-chain` — sigma-derived
+- `src:j2-chain` — J_2-derived
+- `src:composite` — combining 2+ primitives
 
 ---
 
-## 유도 계층 예시 (DAG)
+## Derivation hierarchy example (DAG)
 
 ```
-L7_n6meta (6 원시 상수)
-    │
-    ├─ σ=12 ──────┬─ σ×φ=24=J₂ ─────── miRNA = 22 (J₂−τ+φ)
-    │             └─ σ+τ+μ=17 ────────── 전사 속도 17 nt/s
-    │
-    ├─ φ=2  ──────── n×5=30 ──────────── 콜레스테롤 30%, 크로마틴 30nm
-    │
-    ├─ τ=4  ──────── J₂−τ=20 ──────────── 이분법 20 min
-    │             └─ (n×5)×(σ−φ)=300 ─── 염색질 루프 300nm
-    │
-    ├─ J₂=24 ─────── J₂−τ+φ=22 ─────────  miRNA 22 nt
-    │
-    ├─ sopfr=5 ───── sopfr×100=500 ──────  간 기능 500종
-    │
-    └─ n=6 ─────────┬─ n×250=1500 ──────── 활화산 1500
-                    ├─ n×750=4500 ──────── 탄산염 보상심도
-                    ├─ n×100=600 ─────────  장 융털
-                    └─ n×1000=6000 ────────  염색체 6μm
+L7_n6meta (6 primitive constants)
+    |
+    +- sigma=12 ----+- sigma*phi=24=J_2 ------ miRNA = 22 (J_2-tau+phi)
+    |               +- sigma+tau+mu=17 -------- transcription rate 17 nt/s
+    |
+    +- phi=2  ------- n*5=30 ------------------ cholesterol 30%, chromatin 30 nm
+    |
+    +- tau=4  ------- J_2-tau=20 -------------- binary fission 20 min
+    |               +- (n*5)*(sigma-phi)=300 -- chromatin loop 300 nm
+    |
+    +- J_2=24 ------- J_2-tau+phi=22 ---------- miRNA 22 nt
+    |
+    +- sopfr=5 ------ sopfr*100=500 ----------- liver functions 500
+    |
+    +- n=6 ---------+- n*250=1500 ------------- active volcanoes 1500
+                    +- n*750=4500 ------------- carbonate compensation depth
+                    +- n*100=600 -------------- intestinal villi
+                    +- n*1000=6000 ------------ chromosome 6 um
 ```
 
 ---
 
-## 구현 우선순위
+## Implementation priority
 
-| 작업 | 난이도 | 우선순위 |
-|------|--------|---------|
-| L7_n6meta 6노드 헤더 삽입 | 낮음 | 1순위 |
-| n-direct 태그 일괄 부여 (~500건) | 중간 | 2순위 |
-| sigma/j2-chain 태그 반자동 분류 | 높음 | 3순위 |
-| 전체 DAG 시각화 (nexus dashboard) | 높음 | 4순위 |
-
----
-
-## 기대 효과
-
-1. **검증 경로 단축**: 새 항목 검증 시 "원시 상수 6개 중 어느 체인인가"만 확인하면 되어 검증 절차 표준화 가능
-2. **승격 자동화**: `src:n-direct` 태그 항목은 n×k 정수 검산만으로 [10*] 자동 승격 가능 (향후 스크립트 통합)
-3. **역방향 탐색**: "σ를 수정하면 몇 개 노드가 영향받는가" 질문을 DAG 트리 탐색으로 즉시 답할 수 있게 됨
+| Task | Difficulty | Priority |
+|------|-----------:|---------:|
+| Insert L7_n6meta 6-node header | low | 1 |
+| Bulk-tag n-direct (~500) | medium | 2 |
+| Semi-auto classify sigma/j2-chain tags | high | 3 |
+| Visualize full DAG (nexus dashboard) | high | 4 |
 
 ---
 
-## 제약 사항
+## Expected effects (draft target)
 
-- 이 제안서는 제안만이며, 실제 atlas.n6 추가는 별도 세션에서 명시적 승인 후 수행
-- L7 헤더 삽입 시 기존 `L7_celestial` (line 5919), `L7_bt` (line 14556)과 네임스페이스 충돌 검토 필요
-  - `L7_n6meta`는 기존 L7과 물리적 레이어 의미가 다름(meta-layer) → 헤더 명칭을 `L7meta_n6primitive`로 변경하는 것도 검토 가능
+1. **Shortened verification path**: verifying a new entry reduces to "which of 6 primitive-constant chains" -> standardizable verification procedure.
+2. **Promotion automation**: `src:n-direct`-tagged entries can be auto-promoted to [10*] by an integer n*k check alone (to be merged into a future script).
+3. **Reverse lookup**: the question "how many nodes are affected if sigma is modified?" becomes immediately answerable via DAG traversal.
+
+---
+
+## Constraints
+
+- This is a proposal only; actual atlas.n6 addition requires explicit approval in a separate session
+- When inserting the L7 header, namespace collisions with existing `L7_celestial` (line 5919) and `L7_bt` (line 14556) must be reviewed
+  - `L7_n6meta` is semantically different (meta-layer vs physical-layer) -> renaming the header to `L7meta_n6primitive` may also be considered
