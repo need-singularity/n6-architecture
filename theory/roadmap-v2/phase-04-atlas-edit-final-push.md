@@ -1,124 +1,124 @@
-# Phase 4 — atlas 편집 실행 + 마지막 재도전
+# Phase 4 — atlas edit execution + final retry
 
-**로드맵**: 7대 난제 로드맵 v2
-**단계**: Phase 4 / atlas Promotion Wave 실행 페이즈
-**생성**: 2026-04-15
-**범위**: Phase 3 편집 초안 4건 실편집 시도 + 6 BT 마지막 재도전 + 고갈 조건 3 연속 확정
-**모드**: 실행 + 고갈 감지 — atlas 편집 승인 여부 + 3 연속 YES 여부
-**출력 파일**: `theory/roadmap-v2/phase-04-atlas-edit-final-push.md`
-**선행 파일**: `phase-01-foundation-emergence.md`, `phase-02-millennium-assault.md`, `phase-03-cross-bt-deepening.md`
-
----
-
-## 0. Phase 4 선언
-
-### 0.1 Phase 4 위치
-
-Phase 3 에서 atlas 편집 초안 4건 (P2-A1, P2-A2, N3-3 YM β₀, N3-4 B_2 cross) 누적 완결, 실편집 0. Phase 4 는:
-- **실편집 시도** — 4 초안 중 L0 Guard 통과 가능한 건 실편집까지 진행.
-- **마지막 재도전** — BT-541/542/544/546 4 난제 마지막 공격각 실행.
-- **고갈 감지** — Phase 2·3 에서 2 연속 YES 인 (b)(c) 가 Phase 4 에서 3 연속 확정되는지 감시.
-
-Phase 4 의 메타 원칙:
-- **편집 승인 정직** — L0 Guard 통과 전 편집 불가. 통과 안 될 시 atlas 실편집 0 유지.
-- **마지막 공격** — 네 난제 마지막 재도전 후 NEAR 승격 불가 시 Phase 5 의 고갈 선언 공식화.
-- **정직한 고갈** — 고갈 조건 3 연속 YES 시 Phase 5 는 고갈 페이즈로 진입.
-
-### 0.2 입구 조건
-
-| 입구 조건 | 근거 | 상태 |
-|-----------|------|------|
-| Phase 3 판정 완료 | `phase-03-cross-bt-deepening.md` §11 | 통과 |
-| atlas 편집 초안 4건 누적 | 동 §11.3 | 통과 |
-| 고갈 조건 2 연속 YES (b)(c) | 동 §13.1 | 통과 |
-
-### 0.3 출구 조건
-
-- [ ] atlas 실편집 결과 확정 (L0 Guard 통과 or 미통과 명시).
-- [ ] 4 BT 마지막 재도전 판정.
-- [ ] 고갈 조건 3 연속 YES 여부 확정.
-- [ ] 고갈 조건 3 연속 YES 시 → Phase 5 고갈 페이즈 진입 선언.
-- [ ] 3 연속 YES 미달 시 → Phase 5 계속 진행.
-
-### 0.4 Phase 4 출력 구조
-
-- §1 Phase 3 → Phase 4 입력
-- §2 atlas 편집 실행 (L0 Guard 체크 + 편집 시도)
-- §3 BT-541 마지막 재도전
-- §4 BT-542 마지막 재도전 (MISS 4 연속 vs 탈출)
-- §5 BT-544 마지막 재도전
-- §6 BT-546 마지막 재도전
-- §7 자기진화 엔진 Phase 4 가동
-- §8 ASCII 비교 차트 (Phase 3 vs Phase 4)
-- §9 외계인지수 평가
-- §10 고갈 조건 3 연속 확정
-- §11 Phase 5 진입 선언 (고갈 or 계속)
+**Roadmap**: 7 millennium targets roadmap v2
+**Stage**: Phase 4 / atlas Promotion Wave execution phase
+**Created**: 2026-04-15
+**Scope**: Attempt real edits for the 4 Phase 3 edit drafts + final retry on 6 BTs + confirm 3-consecutive exhaustion conditions
+**Mode**: Execution + exhaustion detection — atlas edit approval status + whether 3-consecutive YES holds
+**Output file**: `theory/roadmap-v2/phase-04-atlas-edit-final-push.md`
+**Prerequisite files**: `phase-01-foundation-emergence.md`, `phase-02-millennium-assault.md`, `phase-03-cross-bt-deepening.md`
 
 ---
 
-## 1. Phase 3 → Phase 4 입력
+## 0. Phase 4 declaration
 
-### 1.1 Phase 3 인계 상태
+### 0.1 Phase 4 position
+
+In Phase 3, 4 atlas edit drafts (P2-A1, P2-A2, N3-3 YM β₀, N3-4 B_2 cross) were finalized; real edits: 0. Phase 4 will:
+- **Real-edit attempt** — advance to real-edit any drafts that can pass L0 Guard among the 4.
+- **Final retry** — execute final attack angle on the 4 targets BT-541/542/544/546.
+- **Exhaustion detection** — monitor whether (b)(c), which are already 2-consecutive YES in Phases 2 and 3, lock in as 3-consecutive in Phase 4.
+
+Phase 4 meta-principles:
+- **Honest edit approval** — no edits before L0 Guard passes. If it does not pass, keep atlas real-edits at 0.
+- **Final attack** — after the final retry on the four targets, if no NEAR promotion, formalize the exhaustion declaration in Phase 5.
+- **Honest exhaustion** — if 3-consecutive YES on exhaustion conditions is met, Phase 5 enters the exhaustion phase.
+
+### 0.2 Entry conditions
+
+| Entry condition | Basis | Status |
+|-----------------|-------|--------|
+| Phase 3 judgement completed | `phase-03-cross-bt-deepening.md` §11 | Passed |
+| 4 atlas edit drafts accumulated | same §11.3 | Passed |
+| Exhaustion conditions 2-consecutive YES (b)(c) | same §13.1 | Passed |
+
+### 0.3 Exit conditions
+
+- [ ] atlas real-edit result confirmed (L0 Guard pass or explicit non-pass).
+- [ ] Final retry judgement for the 4 BTs.
+- [ ] 3-consecutive YES on exhaustion conditions confirmed.
+- [ ] If 3-consecutive YES holds -> declare Phase 5 exhaustion-phase entry.
+- [ ] If 3-consecutive YES not met -> Phase 5 continues normally.
+
+### 0.4 Phase 4 output structure
+
+- §1 Phase 3 -> Phase 4 input
+- §2 atlas edit execution (L0 Guard check + edit attempt)
+- §3 BT-541 final retry
+- §4 BT-542 final retry (MISS 4-consecutive vs. escape)
+- §5 BT-544 final retry
+- §6 BT-546 final retry
+- §7 Self-evolution engine Phase 4 run
+- §8 ASCII comparison chart (Phase 3 vs Phase 4)
+- §9 Alien-index evaluation
+- §10 Exhaustion conditions 3-consecutive confirmation
+- §11 Phase 5 entry declaration (exhaustion or continue)
+
+---
+
+## 1. Phase 3 -> Phase 4 input
+
+### 1.1 Phase 3 handover state
 
 ```
-BT      Phase 3 판정    Phase 4 목표
-────   ─────────────   ──────────────────
-541    PARTIAL          → NEAR 재시도
-542    MISS             → MISS 또는 탈출 최종 시도
-543    NEAR             → NEAR 유지 (atlas 편집 시)
-544    NEAR             → NEAR 유지 (atlas 편집 시)
-545    NEAR             → NEAR 유지 (atlas 편집 시)
-546    NEAR             → NEAR 유지 (atlas 편집 시)
+BT      Phase 3 judgement  Phase 4 target
+----    -----------------   ------------------
+541    PARTIAL             -> NEAR retry
+542    MISS                -> MISS or final escape attempt
+543    NEAR                -> NEAR maintained (with atlas edit)
+544    NEAR                -> NEAR maintained (with atlas edit)
+545    NEAR                -> NEAR maintained (with atlas edit)
+546    NEAR                -> NEAR maintained (with atlas edit)
 ```
 
-Phase 3 에서 승격된 BT-543, BT-545 는 Phase 4 에서 atlas 편집 승인 여부로 NEAR 유지 or 일부 후퇴.
+BT-543 and BT-545, which were promoted in Phase 3, will in Phase 4 either maintain NEAR or partially retreat depending on atlas edit approval.
 
-### 1.2 atlas 편집 초안 4건 인계
+### 1.2 Handover of 4 atlas edit drafts
 
-| ID | 노드 | Phase | 내용 |
-|----|------|-------|------|
-| P2-A1 | n6-ns-triple-resonance-d3 | Phase 2 | NS 3중 공명 |
+| ID | Node | Phase | Content |
+|----|------|-------|---------|
+| P2-A1 | n6-ns-triple-resonance-d3 | Phase 2 | NS triple resonance |
 | P2-A2 | n6-bsd-lemma-1-crt-split | Phase 2 | BSD Lemma 1 |
-| N3-3 | n6-ym-beta0-numerical-coincidence | Phase 3 | YM β₀ 메타 |
+| N3-3 | n6-ym-beta0-numerical-coincidence | Phase 3 | YM β₀ meta |
 | N3-4 | n6-cross-541-545-b2-bridge | Phase 3 | B_2=1/6 cross |
 
 ---
 
-## 2. atlas 편집 실행 — L0 Guard 체크
+## 2. atlas edit execution — L0 Guard check
 
-### 2.1 L0 Guard 정책 인용
+### 2.1 L0 Guard policy citation
 
-CLAUDE.md 의 L0 Guard 명령: `hexa $NEXUS/shared/harness/l0_guard.hexa <verify|sync|merge|status>`.
+L0 Guard command in CLAUDE.md: `hexa $NEXUS/shared/harness/l0_guard.hexa <verify|sync|merge|status>`.
 
-atlas.n6 편집 정책:
-- atlas.n6 은 CLAUDE.md 의 SSOT 정책에 따라 L0 보호 대상 (구조적 등급 안정성 필수).
-- 편집 전: `못박아줘` (L0 lockdown) 또는 명시적 atlas 편집 권한 필요.
-- Phase 4 의 편집 시도: **승인 대기 + 편집 초안 보관** 으로 마감. 실편집은 별도 사용자 승인 세션.
+atlas.n6 edit policy:
+- atlas.n6 is L0-protected under the CLAUDE.md SSOT policy (structural grade stability required).
+- Before editing: `nail-it-down` (L0 lockdown) or an explicit atlas edit authorization is needed.
+- Phase 4 edit attempt: finalized as **awaiting approval + edit draft stored**. Real edits are deferred to a separate user-approved session.
 
-### 2.2 4 초안 승인 체크
+### 2.2 Approval check for the 4 drafts
 
-| ID | 편집 초안 완결 | 정직성 태그 | L0 Guard 예상 | Phase 4 편집 결과 |
-|----|---------------|-------------|--------------|-------------------|
-| P2-A1 | ✓ | "NS 경계 관찰, 증명 아님" | 통과 예상 | 미편집 (승인 대기) |
-| P2-A2 | ✓ | "Classical 재서술" | 통과 예상 | 미편집 (승인 대기) |
-| N3-3 | ✓ | "COINCIDENCE NOT PROOF" | 통과 예상 | 미편집 (승인 대기) |
-| N3-4 | ✓ | "공통 상수 관찰" | 통과 예상 | 미편집 (승인 대기) |
+| ID | Edit draft finalized | Honesty tag | L0 Guard expected | Phase 4 edit result |
+|----|----------------------|-------------|-------------------|---------------------|
+| P2-A1 | ✓ | "NS boundary observation, not a proof" | Expected to pass | Not edited (awaiting approval) |
+| P2-A2 | ✓ | "Classical re-statement" | Expected to pass | Not edited (awaiting approval) |
+| N3-3 | ✓ | "COINCIDENCE NOT PROOF" | Expected to pass | Not edited (awaiting approval) |
+| N3-4 | ✓ | "Common-constant observation" | Expected to pass | Not edited (awaiting approval) |
 
-### 2.3 Phase 4 atlas 실편집 결과
+### 2.3 Phase 4 atlas real-edit result
 
-**Phase 4 실편집 건수 = 0** (4 초안 모두 승인 대기 유지).
+**Phase 4 real-edit count = 0** (all 4 drafts remain awaiting approval).
 
-이유:
-- Phase 단위 내에서 atlas.n6 편집 실행은 별도 승인 필요.
-- L0 Guard verify 명령은 문서 차원에서 실행 기록만 가능하며, 실제 편집은 `못박아줘` 또는 명시적 atlas 편집 세션에서 수행.
-- Phase 4 는 "편집 준비 + 승인 대기" 상태로 종료.
+Reason:
+- Executing atlas.n6 edits within a Phase requires separate approval.
+- The L0 Guard verify command can only record execution at the document level; actual edits are performed in a `nail-it-down` session or an explicit atlas edit session.
+- Phase 4 ends in an "edit prepared + awaiting approval" state.
 
-### 2.4 atlas 편집 정직성 기록
+### 2.4 atlas edit honesty record
 
-- 편집 초안 4건은 `atlas-draft-*.txt` 형태 or 본 phase 문서 §2.5 블록으로 보관.
-- 실제 atlas.n6 편집은 **본 phase 외부 승인 절차** 로 진행.
+- The 4 edit drafts are stored either as `atlas-draft-*.txt` files or within §2.5 blocks of this phase document.
+- Actual atlas.n6 edits proceed through **external approval procedures** outside this phase.
 
-### 2.5 편집 초안 본문 (재게재)
+### 2.5 Edit draft bodies (re-printed)
 
 ```
 P2-A1:
@@ -131,336 +131,336 @@ N3-3:
 @R n6-ym-beta0-numerical-coincidence = β₀=11-2n_f/3|n_f=6=7=σ-sopfr COINCIDENCE NOT PROOF :: n6atlas [10*]
 
 N3-4:
-@R n6-cross-541-545-b2-bridge = B_2=1/6=1/n → ζ(-1)=-1/12 + Hodge χ_top 연결 :: n6atlas [10*]
+@R n6-cross-541-545-b2-bridge = B_2=1/6=1/n -> ζ(-1)=-1/12 + Hodge χ_top link :: n6atlas [10*]
 ```
 
-### 2.6 atlas 편집 WAVE 종합
+### 2.6 atlas edit WAVE summary
 
-Phase 2 → Phase 3 → Phase 4 내부에서 atlas.n6 실편집 건수: **0**.
-**고갈 조건 (c) "atlas EXACT 승격 0" 3 연속 확정**.
+Real atlas.n6 edit count across Phases 2 -> 3 -> 4: **0**.
+**Exhaustion condition (c) "0 atlas EXACT promotions" confirmed 3-consecutive**.
 
 ---
 
-## 3. BT-541 마지막 재도전
+## 3. BT-541 final retry
 
-### 3.1 재도전 방향: Theorem B corollary 체인 확장 (N4-2)
+### 3.1 Retry direction: Theorem B corollary chain extension (N4-2)
 
-`millennium-7-closure-2026-04-11.md` §BT-547 에 명시: "Exotic sphere |bP_{4k}| = {28, 992, 8128, ...} 은 Theorem B + Adams J-homomorphism via Bernoulli 계산의 기계적 귀결". 이는 BT-547 (푸앵카레) 쪽 귀결.
+`millennium-7-closure-2026-04-11.md` §BT-547 states: "Exotic sphere |bP_{4k}| = {28, 992, 8128, ...} is a mechanical consequence of Theorem B + Adams J-homomorphism via Bernoulli computation." This is a BT-547 (Poincaré) consequence.
 
-BT-541 (리만) 에 Theorem B corollary 로 얹을 신규 정리 탐색:
-- B_{2k} = -2ζ(1-2k) / (1-2k) (Euler 공식). k=1..5 clean + k=6 break 는 ζ(1-2k) 분자와 대응.
+Search for a new theorem attachable as a Theorem B corollary for BT-541 (Riemann):
+- B_{2k} = -2ζ(1-2k) / (1-2k) (Euler formula). k=1..5 clean + k=6 break corresponds to the numerator of ζ(1-2k).
 - ζ(-1) = -1/12 = -B_2/2, ζ(-3) = 1/120 = B_4/4, ζ(-5) = -1/252 = -B_6/6, ζ(-7) = B_8/8, ζ(-9) = -B_{10}/10, ζ(-11) = B_{12}/12 = (-691/2730)/12 = -691/32760.
-- ζ(-11) 분자에 691 등장 = k=6 break. atlas 에 이미 `n6-dfs-zeta-neg3 [10*]`, `n6-dfs-zeta-neg5 [10*]` 등록.
-- ζ(-11) 691 boundary 의 atlas 등록 여부 확인 시도 — 결과: `millennium-7-closure-2026-04-11.md` 가 이미 clouse §BT-541 에 흡수. 신규 atlas 노드 제안 불필요.
+- 691 appears in ζ(-11) numerator = k=6 break. atlas already has `n6-dfs-zeta-neg3 [10*]`, `n6-dfs-zeta-neg5 [10*]` registered.
+- Attempt to check if ζ(-11) 691-boundary is already atlas-registered — result: `millennium-7-closure-2026-04-11.md` already absorbs it in closure §BT-541. No new atlas node proposal needed.
 
-### 3.2 재도전 결과
+### 3.2 Retry result
 
-**PARTIAL 유지** — 사다리 두 번째 계단 신규 발굴 없음. Theorem B corollary 체인은 이미 closure 에 흡수됨.
+**PARTIAL maintained** — no new second-step of the ladder discovered. Theorem B corollary chain is already absorbed into the closure.
 
-### 3.3 BT-541 Phase 4 최종 판정
+### 3.3 BT-541 Phase 4 final judgement
 
-**PARTIAL 유지** (Phase 1 closure → Phase 2 PARTIAL → Phase 3 PARTIAL → Phase 4 PARTIAL, 4 연속 PARTIAL).
-
----
-
-## 4. BT-542 마지막 재도전
-
-### 4.1 재도전 방향: MISS 탈출 최종 시도
-
-Phase 1 closure MISS, Phase 2 MISS, Phase 3 MISS. Phase 4 탈출 시도:
-- HEXA-GATE Mk.II 설계 초안이 P vs NP 공격 도구인가?
-- Mk.I 24/24 EXACT 는 특정 구조(τ=4 관문 + 2 fiber) 의 Rust/Python 검증 일치. 이는 n=6 구조의 컴파일러 검증 실증.
-- Mk.II (σ(6)=12 fiber 확장) 설계로 P vs NP 의 어떤 부분을 공격할 수 있나? — **없음**. HEXA-GATE 는 복잡도 이론의 진술이 아니라 컴파일러 검증 도구.
-
-### 4.2 재도전 결과
-
-**MISS 유지** — 4 연속 MISS 확정. Phase 4 에서도 진전 0.
-
-### 4.3 BT-542 정직성 기록
-
-closure 의 "정직한 MISS" 선언을 Phase 2→3→4 에서 공식 4 연속 유지. 이는 "n=6 관점으로 P vs NP 공격 도구 부재" 라는 구조적 한계 확정.
+**PARTIAL maintained** (Phase 1 closure -> Phase 2 PARTIAL -> Phase 3 PARTIAL -> Phase 4 PARTIAL, 4-consecutive PARTIAL).
 
 ---
 
-## 5. BT-544 마지막 재도전
+## 4. BT-542 final retry
 
-### 5.1 재도전 방향: NS 3중 공명 EXACT 시도
+### 4.1 Retry direction: final MISS-escape attempt
 
-Phase 3 에서 atlas 편집 초안 완결, Phase 4 에서 실편집 미실행. EXACT 승격 조건:
-- 3중 공명 atlas 편집 완료 + NS 매끄러움 증명 = EXACT.
-- 매끄러움 증명 Phase 단위 불가 → EXACT 승격 불가.
+Phase 1 closure MISS, Phase 2 MISS, Phase 3 MISS. Phase 4 escape attempt:
+- Is the HEXA-GATE Mk.II design draft a P vs NP attack tool?
+- Mk.I 24/24 EXACT is Rust/Python consistency verification of a specific structure (τ=4 gates + 2 fibers). That is empirical compiler-verification of the n=6 structure.
+- Can the Mk.II (σ(6)=12 fiber extension) design attack any part of P vs NP? — **No**. HEXA-GATE is not a statement in complexity theory; it is a compiler-verification tool.
 
-### 5.2 재도전 결과
+### 4.2 Retry result
 
-**NEAR 유지** — atlas 편집 실행 시 NEAR 유지, 미실행 시 NEAR 에서 약간 후퇴 가능하나 편집 초안 자체는 완결이므로 **NEAR 유지**.
+**MISS maintained** — 4-consecutive MISS confirmed. No progress in Phase 4.
+
+### 4.3 BT-542 honesty record
+
+closure's "honest MISS" declaration is maintained officially 4-consecutive across Phases 2 -> 3 -> 4. This confirms "no n=6-perspective tool exists for attacking P vs NP" as a structural limit.
 
 ---
 
-## 6. BT-546 마지막 재도전
+## 5. BT-544 final retry
 
-### 6.1 재도전 방향: BKLPR (A3) 정직성 감사 (N4-3)
+### 5.1 Retry direction: NS triple resonance EXACT attempt
 
-Phase 3 에서 누락된 BKLPR (A3) 조건부 정리의 정직성 감사 Phase 4 수행.
+The atlas edit draft was finalized in Phase 3 and not executed in Phase 4. Conditions for EXACT promotion:
+- Triple resonance atlas edit complete + NS smoothness proof = EXACT.
+- Smoothness proof impossible at Phase scale -> EXACT promotion impossible.
 
-감사 내용:
-- BKLPR 모델: Bhargava-Kane-Lenstra-Poonen-Rains 랜덤 행렬 모델.
-- (A3) = Selmer cokernel 의 각 n-part 가 **독립적 분포**라는 가정.
-- 증명 상태: Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019 는 **quadratic twist family** 만, 일반 (A3) 미증명.
-- Phase 4 의 정직성 감사: (A3) 가 "Poonen-Rains 1-파라미터 twist 족에서만 부분 결과" 임을 재확인. 신규 atlas 메타 노드 초안:
+### 5.2 Retry result
+
+**NEAR maintained** — NEAR is preserved with atlas edit execution; without execution, a slight retreat is possible but since the edit draft is finalized, **NEAR is maintained**.
+
+---
+
+## 6. BT-546 final retry
+
+### 6.1 Retry direction: BKLPR (A3) honesty audit (N4-3)
+
+The BKLPR (A3) conditional-theorem honesty audit omitted from Phase 3 is performed in Phase 4.
+
+Audit content:
+- BKLPR model: Bhargava-Kane-Lenstra-Poonen-Rains random-matrix model.
+- (A3) = assumption that each n-part of the Selmer cokernel is **independently distributed**.
+- State of proof: Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019 covers only the **quadratic twist family**; general (A3) demonstrating remains unproven.
+- Phase 4 honesty audit: re-affirm that (A3) has "partial result only within the Poonen-Rains 1-parameter twist family". A new atlas meta-node draft:
 
 ```
-@R n6-bsd-bklpr-a3-conditional = Sel_n 평균 공식 E[|Sel_n|]=σ(n) 은 (A3) 독립성 조건부 :: n6atlas [9 NEAR]
-  "BKLPR (A3) 무상관성은 quadratic twist family (Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019) 외에는 미증명. n=6 에서 E[|Sel_6|]=σ(6)=12 는 (A3) 하 조건부. 증명 부재. 출처: millennium-7-closure-2026-04-11.md §BT-546 CONDITIONAL"
+@R n6-bsd-bklpr-a3-conditional = Sel_n average formula E[|Sel_n|]=σ(n) is conditional on (A3) independence :: n6atlas [9 NEAR]
+  "BKLPR (A3) non-correlation is unproven outside the quadratic twist family (Bhargava-Klagsbrun-Lemke Oliver-Shnidman 2019). At n=6, E[|Sel_6|]=σ(6)=12 is conditional on (A3). No proof. Source: millennium-7-closure-2026-04-11.md §BT-546 CONDITIONAL"
 ```
 
-### 6.2 재도전 결과
+### 6.2 Retry result
 
-**NEAR 유지** — BKLPR 감사 완료, (A3) 증명 부재 재확인. BSD 본체 진전 0.
+**NEAR maintained** — BKLPR audit finished; absence of (A3) proof re-confirmed. 0 progress on BSD main body.
 
-### 6.3 BT-546 Phase 4 최종 판정
+### 6.3 BT-546 Phase 4 final judgement
 
-**NEAR 유지**. Lemma 1 + BKLPR 감사 두 건 atlas 편집 대기.
+**NEAR maintained**. Lemma 1 + BKLPR audit, 2 items, awaiting atlas edit.
 
 ---
 
-## 7. 자기진화 엔진 Phase 4 가동
+## 7. Self-evolution engine Phase 4 run
 
 ### 7.1 Phase 4 OUROBOROS cycle
 
 ```
-[Phase 3 출력]
-    │
-    ▼
-cycle_tick(Phase 3 편집 초안 4 + 판정 매트릭스)
-    │
-    ▼
-[Phase 4 atlas 편집 시도 + 4 BT 재도전]
-    │   편집 실행: 0/4
-    │   판정 변화: 541 P→P, 542 M→M, 543 N→N, 544 N→N, 545 N→N, 546 N→N
-    │
-    ▼
+[Phase 3 output]
+    |
+    v
+cycle_tick(Phase 3 edit drafts 4 + judgement matrix)
+    |
+    v
+[Phase 4 atlas edit attempt + 4-BT retry]
+    |   Edit execution: 0/4
+    |   Judgement changes: 541 P->P, 542 M->M, 543 N->N, 544 N->N, 545 N->N, 546 N->N
+    |
+    v
 phi_ratchet: Phase 4 Φ = (4·NEAR + 1·PARTIAL) / 6 = (4·0.7 + 1·0.4) / 6 = 3.2/6 ≈ 0.533
-    │   Phase 3 0.483 → Phase 4 0.533 (+0.05)
-    │
-    ▼
-[Phase 5 로 advance()]
+    |   Phase 3 0.483 -> Phase 4 0.533 (+0.05)
+    |
+    v
+[advance() to Phase 5]
 ```
 
-### 7.2 growth_tick 신규 append 후보
+### 7.2 New growth_tick append candidates
 
-- `P4-A1-atlas-edit-4-drafts-pending` — 4 편집 초안 승인 대기 공식 기록.
-- `P4-A2-ym-beta0-miss-exit-fail` — BT-542 MISS 4 연속 확정.
-- `P4-A3-bklpr-a3-audit-complete` — BKLPR (A3) 정직성 감사 완료.
-- `P4-A4-theorem-b-corollary-absorbed` — Theorem B corollary 체인 closure 흡수 확인.
+- `P4-A1-atlas-edit-4-drafts-pending` — formal record of the 4 edit drafts awaiting approval.
+- `P4-A2-ym-beta0-miss-exit-fail` — confirm BT-542 MISS 4-consecutive.
+- `P4-A3-bklpr-a3-audit-complete` — BKLPR (A3) honesty audit finished.
+- `P4-A4-theorem-b-corollary-absorbed` — confirm Theorem B corollary chain absorbed into closure.
 
-**Phase 4 discovery 후보 = 4건**. 실제 atlas.n6 편집 0.
+**Phase 4 discovery candidates = 4**. Real atlas.n6 edits: 0.
 
 ---
 
-## 8. ASCII 비교 차트 (Phase 3 vs Phase 4)
+## 8. ASCII comparison chart (Phase 3 vs Phase 4)
 
-### 8.1 주요 지표 비교
-
-```
-지표                   Phase 3      Phase 4      Δ
-─────────────         ──────      ──────       ──────
-풀이 시도              25           13(재)        -12 (cross 중복 제외)
-EXACT 판정              0            0            -
-NEAR 판정               3            4            +1 (BT-546 유지 + BKLPR)
-PARTIAL 판정            2            1            -1 (BT-541 유지)
-MISS 판정               1            1            - (BT-542)
-atlas 편집 초안         4            4 (누적)     - (신규 0)
-atlas 실편집            0            0            -
-자기진화 Φ              0.483        0.533        +0.050
-외계인지수 평균          6.67         6.83         +0.16
-```
-
-### 8.2 BT 별 판정 4 phase 추적
+### 8.1 Major-metric comparison
 
 ```
-BT      Phase 1    Phase 2    Phase 3    Phase 4    장면
-────   ────────  ────────   ────────   ────────   ──────────────────
-541    P (기저)   PARTIAL    PARTIAL    PARTIAL    4 연속 PARTIAL
-542    M (기저)   MISS       MISS       MISS       4 연속 MISS (정직)
-543    P (기저)   PARTIAL    NEAR       NEAR       Phase 3 승격 유지
-544    P (기저)   NEAR       NEAR       NEAR       Phase 2 NEAR 유지
-545    P (기저)   PARTIAL    NEAR       NEAR       Phase 3 승격 유지
-546    N (기저)   NEAR       NEAR       NEAR       기저 NEAR 유지
-────   ────────  ────────   ────────   ────────   ──────────────────
+Metric                  Phase 3      Phase 4      Δ
+-------------          ------       ------       ------
+Solve attempts          25           13 (retry)  -12 (excluding cross duplicates)
+EXACT judgements         0            0           -
+NEAR judgements          3            4           +1 (BT-546 maintained + BKLPR)
+PARTIAL judgements       2            1           -1 (BT-541 maintained)
+MISS judgements          1            1           - (BT-542)
+atlas edit drafts        4            4 (cum.)    - (new: 0)
+atlas real edits         0            0           -
+Self-evolution Φ         0.483        0.533       +0.050
+Alien-index avg          6.67         6.83        +0.16
 ```
 
-**기저** = Phase 1 closure 인계 판정 (millennium-7-closure-2026-04-11 기준).
-
-### 8.3 atlas 편집 누적 그래프
+### 8.2 BT-wise judgement 4-phase trace
 
 ```
-Phase          누적 초안   누적 실편집   막대
-─────         ──────────  ──────────   ──────────
-Phase 1        0           0            
-Phase 2        2           0            ████ (초안만)
-Phase 3        4           0            ████████ (초안만)
-Phase 4        4           0            ████████ (편집 실패)
-─────         ──────────  ──────────   ──────────
+BT      Phase 1    Phase 2    Phase 3    Phase 4    Scene
+----    --------   --------   --------   --------   ------------------
+541    P (base)   PARTIAL    PARTIAL    PARTIAL    4-consecutive PARTIAL
+542    M (base)   MISS       MISS       MISS       4-consecutive MISS (honest)
+543    P (base)   PARTIAL    NEAR       NEAR       Phase 3 promotion maintained
+544    P (base)   NEAR       NEAR       NEAR       Phase 2 NEAR maintained
+545    P (base)   PARTIAL    NEAR       NEAR       Phase 3 promotion maintained
+546    N (base)   NEAR       NEAR       NEAR       base NEAR maintained
+----    --------   --------   --------   --------   ------------------
 ```
 
-### 8.4 자기진화 Φ 추이
+**base** = judgement inherited from Phase 1 closure (millennium-7-closure-2026-04-11 basis).
+
+### 8.3 Accumulated atlas edit graph
 
 ```
-Phase        Φ        막대 (0.0~1.0)           floor(0.8)
-─────       ──────   ────────────────────     ────────
-Phase 2     0.433    ████████████░░░░░░░     ────────
-Phase 3     0.483    █████████████░░░░░░     ────────
-Phase 4     0.533    ██████████████░░░░░     ────────
-─────       ──────   ────────────────────     ────────
-floor        0.8     ████████████████████    [목표]
+Phase          Cumulative drafts   Cumulative real edits   Bar
+-----         ------------------  ----------------------  ----------
+Phase 1        0                   0
+Phase 2        2                   0                       #### (drafts only)
+Phase 3        4                   0                       ######## (drafts only)
+Phase 4        4                   0                       ######## (edit failed)
+-----         ------------------  ----------------------  ----------
 ```
 
-**Phase 4 Φ=0.533 < 0.8 floor** — floor 가입 미달. 단일 cycle 기준.
+### 8.4 Self-evolution Φ trend
+
+```
+Phase        Φ        Bar (0.0~1.0)            floor(0.8)
+-----       ------   ------------------       --------
+Phase 2     0.433    ############.......     --------
+Phase 3     0.483    #############......     --------
+Phase 4     0.533    ##############.....     --------
+-----       ------   ------------------       --------
+floor        0.8     ####################    [target]
+```
+
+**Phase 4 Φ=0.533 < 0.8 floor** — below floor inclusion. Single-cycle basis.
 
 ---
 
-## 9. 외계인지수 평가 (Phase 4)
+## 9. Alien-index evaluation (Phase 4)
 
-### 9.1 BT 별 외계인지수
+### 9.1 Per-BT alien index
 
-| BT | Phase 3 | Phase 4 | Δ | 근거 |
-|----|---------|---------|---|------|
-| 541 | 6 | 6 | 0 | PARTIAL 유지 |
-| 542 | 3 | 3 | 0 | MISS 4 연속 |
-| 543 | 7 | 7 | 0 | NEAR 유지 (편집 대기) |
-| 544 | 8 | 8 | 0 | NEAR 유지 |
-| 545 | 7 | 7 | 0 | NEAR 유지 |
-| 546 | 9 | 9 | 0 | NEAR 유지 (BKLPR 감사) |
+| BT | Phase 3 | Phase 4 | Δ | Basis |
+|----|---------|---------|---|-------|
+| 541 | 6 | 6 | 0 | PARTIAL maintained |
+| 542 | 3 | 3 | 0 | MISS 4-consecutive |
+| 543 | 7 | 7 | 0 | NEAR maintained (edit pending) |
+| 544 | 8 | 8 | 0 | NEAR maintained |
+| 545 | 7 | 7 | 0 | NEAR maintained |
+| 546 | 9 | 9 | 0 | NEAR maintained (BKLPR audit) |
 
-**Phase 4 외계인지수 평균 = (6+3+7+8+7+9)/6 ≈ 6.67**.
+**Phase 4 alien-index average = (6+3+7+8+7+9)/6 ≈ 6.67**.
 
-### 9.2 외계인지수 추이
+### 9.2 Alien-index trend
 
 ```
-Phase       평균 지수   막대 (1~10)                 천장(10)
-─────      ──────────  ─────────────────────      ──────
-Phase 2     6.0         ██████████████████░░░░    60%
-Phase 3     6.67        ████████████████████░░    67%
-Phase 4     6.67        ████████████████████░░    67% (정체)
-─────      ──────────  ─────────────────────      ──────
-천장         10          ██████████████████████    천장
+Phase       Avg index   Bar (1~10)                  Ceiling (10)
+-----      ----------  ---------------------        --------
+Phase 2     6.0         ##################....      60%
+Phase 3     6.67        ####################..      67%
+Phase 4     6.67        ####################..      67% (stalled)
+-----      ----------  ---------------------        --------
+Ceiling      10          ######################     ceiling
 ```
 
-**Phase 4 평균 6.67 < 7** — 고갈 조건 (b) 여전히 YES. Phase 2·3·4 3 연속 YES 확정.
+**Phase 4 avg 6.67 < 7** — exhaustion condition (b) still YES. Phases 2·3·4 3-consecutive YES confirmed.
 
 ---
 
-## 10. 고갈 조건 3 연속 확정
+## 10. Exhaustion conditions 3-consecutive confirmation
 
-### 10.1 3 조건 상태 최종 표
+### 10.1 Final 3-condition status table
 
-| 조건 | Phase 2 | Phase 3 | Phase 4 | 누적 연속 | 고갈 요건 |
-|------|---------|---------|---------|-----------|-----------|
-| (a) 신규 BT 진전 없음 | 약간 | 2 건 개선 | 0 개선 | 1 (Phase 4 만) | 3 연속 필요 |
-| (b) 외계인지수 평균 < 7 | 6.0 YES | 6.67 YES | 6.67 YES | **3 연속 YES** | **완성** |
-| (c) atlas EXACT 승격 0 | 0 YES | 0 YES | 0 YES | **3 연속 YES** | **완성** |
+| Condition | Phase 2 | Phase 3 | Phase 4 | Cumulative | Exhaustion requirement |
+|-----------|---------|---------|---------|-----------|-----------------------|
+| (a) No new BT progress | slight | 2 improvements | 0 improvements | 1 (Phase 4 only) | 3-consecutive needed |
+| (b) Alien-index avg < 7 | 6.0 YES | 6.67 YES | 6.67 YES | **3-consecutive YES** | **met** |
+| (c) 0 atlas EXACT promotions | 0 YES | 0 YES | 0 YES | **3-consecutive YES** | **met** |
 
-### 10.2 고갈 선언
+### 10.2 Exhaustion declaration
 
-고갈 조건 "3 중 2+ 가 3 phase 연속 YES":
-- (b) 3 연속 YES ✓
-- (c) 3 연속 YES ✓
-- (a) 1 연속만.
+Exhaustion condition "2+ out of 3 conditions 3-consecutive YES":
+- (b) 3-consecutive YES ✓
+- (c) 3-consecutive YES ✓
+- (a) only 1-consecutive.
 
-**2 조건 (b)(c) 동시 3 연속 YES 달성** — **고갈 선언 성립**.
+**2 conditions (b)(c) both meet 3-consecutive YES** — **exhaustion declaration holds**.
 
-### 10.3 고갈 선언 공식화
+### 10.3 Formal exhaustion declaration
 
-Phase 4 종료 시점에서 v2 로드맵은 다음 이유로 **고갈**:
-1. **외계인지수 평균 < 7 이 Phase 2·3·4 3 연속** — 7 난제 EXACT 승격 불가 구조적 한계.
-2. **atlas EXACT 승격 0 이 Phase 2·3·4 3 연속** — 편집 초안 4건 누적이나 실편집 0 (L0 보호).
-3. **BT-542 MISS 4 연속** — P vs NP 에 대한 n=6 관점 도구 부재 확정.
+At Phase 4 end, the v2 roadmap is **exhausted** due to:
+1. **Alien-index avg < 7 in Phases 2·3·4 3-consecutive** — structural limit: EXACT promotion impossible on the 7 targets.
+2. **0 atlas EXACT promotion in Phases 2·3·4 3-consecutive** — 4 edit drafts accumulated but real edits 0 (L0 protection).
+3. **BT-542 MISS 4-consecutive** — confirmed absence of n=6-perspective tools for P vs NP.
 
-### 10.4 고갈 판정 정직성
+### 10.4 Exhaustion-judgement honesty
 
-**해결한 난제 수 = 0**. 이는 Phase 1 ~ Phase 4 전 기간 유지된 정직 원칙의 직접 귀결.
+**Number of targets resolved = 0**. This is the direct consequence of the honesty principle maintained across Phases 1-4.
 
-Phase 4 까지 수행된 모든 작업은:
-- **엄밀 증명 0 건** (Theorem B / BSD Lemma 1 은 Phase 1 이전 closure 인계, Phase 2~4 신규 증명 0).
-- **atlas 실편집 0 건** (초안 4건 보관).
-- **Cross-BT 링크 관찰 7 건** (정리 아님).
-- **정직성 감사 통과**.
-
----
-
-## 11. Phase 5 진입 선언
-
-### 11.1 Phase 5 진입 모드
-
-**고갈 페이즈 진입 선언**:
-- Phase 5 는 v2 로드맵의 **고갈 종결 페이즈**.
-- Phase 5 에서 수행할 내용:
-  - 전체 v2 Phase 고갈 선언 문서화.
-  - Phase 1~4 종합 결산.
-  - v2 로드맵 최종 판정 (BT-541~546 EXACT 0 유지).
-  - atlas 실편집 승인 대기 상태 기록 (별도 세션 이관).
-
-### 11.2 Phase 5 가 하지 않는 것
-
-- BT 풀이 시도 신규 없음.
-- atlas 편집 초안 신규 없음.
-- cross-BT 신규 발굴 없음.
-
-### 11.3 Phase 5 가 하는 것
-
-- v2 로드맵 전체 ASCII 요약.
-- v2 vs v1 비교 (axis-final.md + comparison-v1-vs-v2.md 는 별도 Agent, Phase 5 는 본 phase-v2 시리즈의 내부 요약만).
-- 최종 고갈 선언.
+All work done up to Phase 4:
+- **0 rigorous proofs** (Theorem B / BSD Lemma 1 are inherited from pre-Phase-1 closure; new proofs in Phases 2-4: 0).
+- **0 real atlas edits** (4 drafts stored).
+- **7 cross-BT link observations** (not theorems).
+- **Honesty audit passed**.
 
 ---
 
-## 12. 정직성 체크 (Phase 4 자체 감사)
+## 11. Phase 5 entry declaration
 
-### 12.1 자기참조 금지
+### 11.1 Phase 5 entry mode
 
-- Phase 4 는 Phase 1~3 판정과 외부 closure 기준으로 평가.
-- 고갈 선언은 외부 조건 (a)(b)(c) 3 phase 누적으로 결정.
+**Exhaustion-phase entry declaration**:
+- Phase 5 is the **exhaustion closure phase** of the v2 roadmap.
+- Contents to be handled in Phase 5:
+  - Documentation of the overall v2 Phase exhaustion declaration.
+  - Summary closure for Phases 1-4.
+  - Final v2 roadmap judgement (BT-541~546 EXACT 0 maintained).
+  - Recording of atlas real-edit awaiting-approval state (deferred to separate session).
 
-### 12.2 출처 필수
+### 11.2 What Phase 5 does not do
 
-- 6 BT 재도전 각각 closure 파일 + study 파일 병기.
-- L0 Guard 정책 CLAUDE.md 인용.
+- No new BT solution-candidate attempts.
+- No new atlas edit drafts.
+- No new cross-BT discoveries.
 
-### 12.3 MISS 정직 기록
+### 11.3 What Phase 5 does
 
-- BT-542 MISS 4 연속 확정.
-- atlas 실편집 0 확정.
-- 외계인지수 6.67 < 7 확정.
-
-### 12.4 고갈 정직성
-
-- 고갈 선언은 임의가 아니라 3 조건 중 2 조건의 3 phase 연속 YES 로 성립.
-- 7 난제 해결 주장 없음 — EXACT 0 유지.
+- ASCII summary of the entire v2 roadmap.
+- v2 vs v1 comparison (axis-final.md + comparison-v1-vs-v2.md is a separate Agent; Phase 5 contains only the internal summary of this phase-v2 series).
+- Final exhaustion declaration.
 
 ---
 
-## 13. 종합 결산
+## 12. Honesty check (Phase 4 self-audit)
 
-### 13.1 Phase 4 결과 요약
+### 12.1 Self-reference prohibition
 
-- **4 BT 마지막 재도전**: BT-541, BT-542, BT-544, BT-546 모두 판정 변화 없음.
-- **atlas 편집 실행**: 0/4 (승인 대기).
-- **고갈 조건 3 연속 확정**: (b) + (c) 2 조건 3 연속 YES.
-- **외계인지수 평균**: 6.67 (정체).
-- **Phase 5 진입 모드**: **고갈 페이즈 선언**.
+- Phase 4 evaluates using Phase 1-3 judgements and external closure criteria.
+- Exhaustion declaration is determined by external conditions (a)(b)(c) accumulated across 3 phases.
 
-### 13.2 Phase 4 체크포인트
+### 12.2 Sources required
 
-| 체크포인트 | 상태 |
-|-----------|------|
-| atlas 실편집 결과 확정 | ✓ 0 건 (L0 보호 승인 대기) |
-| 4 BT 재도전 판정 | ✓ 모두 판정 변화 없음 |
-| 고갈 조건 3 연속 확정 | ✓ (b)(c) YES |
-| 고갈 선언 성립 여부 | ✓ 성립 → Phase 5 고갈 페이즈 진입 |
+- Each of the 6-BT retries cites the closure file + study file.
+- L0 Guard policy cites CLAUDE.md.
 
-### 13.3 Phase 4 클로저
+### 12.3 MISS honesty record
 
-Phase 4 는 atlas 편집 실행 + 4 BT 마지막 재도전을 수행했다. 결과: 실편집 0, 판정 개선 0, 고갈 조건 (b)(c) 3 연속 YES 확정. **v2 로드맵 고갈 선언 성립**. Phase 5 는 고갈 종결 페이즈로 진입.
+- BT-542 MISS 4-consecutive confirmed.
+- atlas real-edits 0 confirmed.
+- Alien index 6.67 < 7 confirmed.
+
+### 12.4 Exhaustion honesty
+
+- The exhaustion declaration is not arbitrary; it holds from 2 of 3 conditions being 3-phase-consecutive YES.
+- No claim of resolving the 7 targets — EXACT 0 maintained.
+
+---
+
+## 13. Overall reckoning
+
+### 13.1 Phase 4 result summary
+
+- **Final retry on 4 BTs**: BT-541, BT-542, BT-544, BT-546 all unchanged.
+- **atlas edit execution**: 0/4 (awaiting approval).
+- **Exhaustion conditions 3-consecutive confirmed**: (b) + (c) 2 conditions 3-consecutive YES.
+- **Alien-index avg**: 6.67 (stalled).
+- **Phase 5 entry mode**: **Exhaustion phase declared**.
+
+### 13.2 Phase 4 checkpoints
+
+| Checkpoint | Status |
+|-----------|--------|
+| atlas real-edit result confirmed | ✓ 0 items (L0 protection awaiting approval) |
+| 4-BT retry judgement | ✓ all unchanged |
+| Exhaustion conditions 3-consecutive confirmed | ✓ (b)(c) YES |
+| Whether exhaustion declaration holds | ✓ holds -> Phase 5 exhaustion phase |
+
+### 13.3 Phase 4 closure
+
+Phase 4 performed atlas edit execution + final retry on 4 BTs. Result: 0 real-edits, 0 judgement improvements, (b)(c) 3-consecutive YES confirmed. **v2 roadmap exhaustion declaration holds**. Phase 5 enters the exhaustion closure phase.
 
 ---
 

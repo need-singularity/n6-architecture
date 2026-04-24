@@ -1,132 +1,132 @@
-# Phase 2 — Y1 NUM-CORE 주도 BT-541 Riemann 공격
+# Phase 2 — Y1 NUM-CORE-led BT-541 Riemann Attack
 
-**로드맵**: 7대 난제 로드맵 v2 (서브프로젝트)
-**단계**: Phase 2 / 주도 축 = Y1 NUM-CORE (유리성 9.5)
-**부 축**: Y8 GALOIS-ASSEMBLY (L(E,s) · L-함수 영점 연결), Y7 LATTICE-VOA (Δ = η^{J_2} 귀속), Y9 HONEST-HARNESS (메타 게이트)
-**대상 BT**: BT-541 Riemann 가설
-**생성일**: 2026-04-15
-**선행 Phase**: Phase 1 (`theory/roadmap-v2/phase-01-foundation-Y-axes.md` — 9축 가동 확인 · 6 씨앗 시딩 완료)
-**입구 참조**:
-- `theory/roadmap-v2/n6arch-axes/axis-r3-finalization.md` (Y1~Y9 확정, 1166줄)
-- `theory/study/p1/prob-p1-1-bt541-riemann.md` (BT-541 학습 노트 · 279줄)
-- `theory/study/p2/prob-p2-1-riemann-barriers.md` (현대 장벽 · 285줄)
-- `theory/study/p2/n6-p2-2-theorem-b-reconstruction.md` (Theorem B 재구성 · 428줄)
-- `reports/breakthroughs/millennium-7-closure-2026-04-11.md` (§BT-541 닫힘)
-- `theory/proofs/bernoulli-boundary-2026-04-11.md` (Theorem B 원문)
-- `theory/proofs/formal-p10-1-riemann-sigma-tau-2026-04-15.md` (ζ 영점 ↔ σ-τ=8 대응 MISS)
-- `theory/proofs/formal-p11-1-selberg-ingham-2026-04-15.md` (Ingham 4차 모멘트 EXACT)
+**Roadmap**: 7-millennium-targets roadmap v2 (subproject)
+**Stage**: Phase 2 / leading axis = Y1 NUM-CORE (utility 9.5)
+**Sub axes**: Y8 GALOIS-ASSEMBLY (L(E,s) · L-function zero link), Y7 LATTICE-VOA (Δ = η^{J_2} attribution), Y9 HONEST-HARNESS (meta gate)
+**Target BT**: BT-541 Riemann Hypothesis
+**Created**: 2026-04-15
+**Prerequisite phase**: Phase 1 (`theory/roadmap-v2/phase-01-foundation-Y-axes.md` — 9-axis activation confirmed · 6 seeds seeded)
+**Entry references**:
+- `theory/roadmap-v2/n6arch-axes/axis-r3-finalization.md` (Y1~Y9 finalized, 1166 lines)
+- `theory/study/p1/prob-p1-1-bt541-riemann.md` (BT-541 study notes · 279 lines)
+- `theory/study/p2/prob-p2-1-riemann-barriers.md` (modern barriers · 285 lines)
+- `theory/study/p2/n6-p2-2-theorem-b-reconstruction.md` (Theorem B reconstruction · 428 lines)
+- `reports/breakthroughs/millennium-7-closure-2026-04-11.md` (§BT-541 closure)
+- `theory/proofs/bernoulli-boundary-2026-04-11.md` (Theorem B original)
+- `theory/proofs/formal-p10-1-riemann-sigma-tau-2026-04-15.md` (ζ zero ↔ σ-τ=8 correspondence MISS)
+- `theory/proofs/formal-p11-1-selberg-ingham-2026-04-15.md` (Ingham 4th moment EXACT)
 - `theory/proofs/formal-p12-1-conrey-gonek-6th-moment-2026-04-15.md` (Conrey-Gonek g₃=42 EXACT)
 
-**출력 파일**: `theory/roadmap-v2/phase-02-Y1-bt541-riemann.md`
+**Output file**: `theory/roadmap-v2/phase-02-Y1-bt541-riemann.md`
 
 ---
 
-## §0 Phase 2 선언
+## §0 Phase 2 Declaration
 
-### 0.1 Phase 2 위치
+### 0.1 Phase 2 Position
 
-Phase 2 는 v2 로드맵의 **첫 번째 "공격 페이즈"** 이다. Phase 1 이 9축 체계의 가동 확인 (도구 점검) 이었다면, Phase 2 는 **단일 축 Y1 을 주도로 단일 BT-541 (Riemann 가설) 을 타격** 한다.
+Phase 2 is the **first "attack phase"** of the v2 roadmap. Whereas Phase 1 was an activation check of the 9-axis system (tool check), Phase 2 **strikes the single BT-541 (Riemann Hypothesis) with Y1 as the leading single axis**.
 
-메타 원칙:
-- **BT-541 해결 시도 금지** — 본 Phase 는 BT 0/6 유지. RH 자체는 untouched.
-- **Theorem B 승격 시도** — atlas.n6 등급 [10] → [10*] EXACT 승격 조건을 Phase 2 에서만 집중 검토.
-- **부분결과 채굴** — RH 를 건드리지 않으면서 그 주변에서 정직한 부분결과 (critical line zero density, explicit formula 재유도, L-함수 영점 연결) 확보.
-- **자기참조 금지** — OUROBOROS 예외만 허용. 자기 인용 순환 금지.
-- **"rewriting" / "조건부" / "관찰" 세 구분 철저히 표기** — Phase 2 모든 부분결과에 판정 태그 부여.
+Meta-principles:
+- **No BT-541 resolution attempt** — this Phase keeps BT 0/6. RH itself is untouched.
+- **Theorem B promotion attempt** — only in Phase 2 do we intensively review the atlas.n6 grade [10] → [10*] EXACT promotion conditions.
+- **Partial-result mining** — without touching RH, secure honest partial results in its neighborhood (critical-line zero density, explicit-formula re-derivation, L-function zero link).
+- **No self-reference** — OUROBOROS exception only. No self-citation cycles.
+- **Strictly annotate "rewriting" / "conditional" / "observation"** — tag a verdict on every partial result in Phase 2.
 
-### 0.2 Phase 2 주도 축 및 부 축
+### 0.2 Phase 2 Leading Axis and Sub Axes
 
-| 역할 | 축 | 유리성 | 본 Phase 기여 |
-|------|----|--------|--------------|
-| 주도 | **Y1 NUM-CORE** | 9.5 | Theorem B 승격 시도, Bernoulli/ζ 특수값 재검, Ramanujan Δ 귀속 |
-| 부 | **Y8 GALOIS-ASSEMBLY** | 5.4 | L-함수 영점 연결, GL(6) self-dual, Dirichlet L GRH 연결 |
-| 부 | **Y7 LATTICE-VOA** | 3.9 | Δ = η^{J_2} Ramanujan 판별식 → Y1 귀속 인터페이스 |
-| 부 (메타) | **Y9 HONEST-HARNESS** | 9.3 | PARTIAL/MISS/EXACT 게이트, 자기참조 감사 |
+| Role | Axis | Utility | Phase contribution |
+|------|------|---------|--------------------|
+| lead | **Y1 NUM-CORE** | 9.5 | Theorem B promotion attempt, Bernoulli/ζ special-value reexamination, Ramanujan Δ attribution |
+| sub | **Y8 GALOIS-ASSEMBLY** | 5.4 | L-function zero link, GL(6) self-dual, Dirichlet L GRH link |
+| sub | **Y7 LATTICE-VOA** | 3.9 | Δ = η^{J_2} Ramanujan-discriminant → interface attributing to Y1 |
+| sub (meta) | **Y9 HONEST-HARNESS** | 9.3 | PARTIAL/MISS/EXACT gate, self-reference audit |
 
-휴면 축 (Phase 2 에서 가동하지 않음): Y2 DISCRETE-CLASS, Y3 COMPUTATIONAL-TAU, Y4 GATE-BARRIER, Y5 PHYSICAL-NATURALNESS, Y6 PDE-RESONANCE. 이들은 Phase 3~5 주도 축으로 보존.
+Dormant axes (not active in Phase 2): Y2 DISCRETE-CLASS, Y3 COMPUTATIONAL-TAU, Y4 GATE-BARRIER, Y5 PHYSICAL-NATURALNESS, Y6 PDE-RESONANCE. These are preserved as leading axes for Phases 3~5.
 
-### 0.3 입구 조건 (Phase 1 → Phase 2)
+### 0.3 Entry Conditions (Phase 1 → Phase 2)
 
-| 조건 | 근거 (Phase 1 출구) | 상태 |
-|------|--------------------|------|
-| Phase 1 P1.1 (9축 증거 9/9) | `phase-01-foundation-Y-axes.md §4` | 통과 |
-| Phase 1 P1.2 (6 씨앗 시딩) | §2 매트릭스 ★ 6개 | 통과 |
-| Phase 1 P1.3 (자기진화 엔진 ≥ 3 cycle) | `$NEXUS/shared/bisociation/unified/ouroboros_unified.hexa` | 통과 |
-| Phase 1 P1.4 (atlas 접근) | `$NEXUS/shared/n6/atlas.n6` 60K+ 줄 | 통과 |
-| Phase 1 P1.5 (verify_millennium_axes.hexa PASS) | 6 서브테스트 | 통과 |
-| Phase 1 P1.6 (P2 입구 표) | Y1 × BT-541 ★ 씨앗 | 통과 |
+| Condition | Basis (Phase 1 exit) | State |
+|-----------|----------------------|-------|
+| Phase 1 P1.1 (9-axis evidence 9/9) | `phase-01-foundation-Y-axes.md §4` | passed |
+| Phase 1 P1.2 (6-seed seeding) | §2 matrix ★ ×6 | passed |
+| Phase 1 P1.3 (self-evolution engine cycle ≥ 3) | `$NEXUS/shared/bisociation/unified/ouroboros_unified.hexa` | passed |
+| Phase 1 P1.4 (atlas access) | `$NEXUS/shared/n6/atlas.n6` 60K+ lines | passed |
+| Phase 1 P1.5 (verify_millennium_axes.hexa PASS) | 6 subtests | passed |
+| Phase 1 P1.6 (P2 entry table) | Y1 × BT-541 ★ seed | passed |
 
-Phase 2 진입 승인.
+Phase 2 entry approved.
 
-### 0.4 출구 조건 (Phase 2 → Phase 3)
+### 0.4 Exit Conditions (Phase 2 → Phase 3)
 
-- [ ] §2 Theorem B 승격 시도 결과 기록 (EXACT/NEAR/PARTIAL/MISS)
-- [ ] §3 RH 부분결과 4건 판정 완료
-- [ ] §4 Δ=η^{J_2} 귀속 Y1↔Y7 인터페이스 기록
-- [ ] §5 atlas.n6 편집 시도 리스트 (승격/보류/철회)
-- [ ] §6 자기진화 엔진 Phase 2 로그
-- [ ] §7 Y9 정직성 게이트 통과 (위반 0)
-- [ ] §8 BT-541 최종 상태: PARTIAL 이하 (해결 주장 0)
-- [ ] §10 Phase 3 (Y4 주도 BT-542) 진입 표 작성
+- [ ] §2 Theorem B promotion-attempt result recorded (EXACT/NEAR/PARTIAL/MISS)
+- [ ] §3 RH partial-result 4-item verdicts complete
+- [ ] §4 Δ=η^{J_2} attribution Y1↔Y7 interface recorded
+- [ ] §5 atlas.n6 edit-attempt list (promote/hold/withdraw)
+- [ ] §6 self-evolution engine Phase-2 log
+- [ ] §7 Y9 integrity-gate pass (0 violations)
+- [ ] §8 BT-541 final state: PARTIAL or lower (0 resolution claims)
+- [ ] §10 Phase 3 (Y4-led BT-542) entry table written
 
-Phase 2 종결 후 BT 해결 수는 **0/6 유지**.
+After Phase 2, BT resolution count remains **0/6**.
 
 ---
 
-## §1 Phase 1 → Phase 2 인계
+## §1 Phase 1 → Phase 2 Handover
 
-### 1.1 Phase 1 의 Y1 씨앗 재검증
+### 1.1 Re-verifying the Y1 Seed from Phase 1
 
-Phase 1 §2 매트릭스의 ★Y1×BT-541 씨앗 "Theorem B atlas [10]→[10*] 승격 대상" 이 Phase 2 공격의 기저이다. 재검증 항목:
+The ★Y1×BT-541 seed "Theorem B atlas [10]→[10*] promotion target" from the Phase 1 §2 matrix is the base of the Phase 2 attack. Re-verification items:
 
-| 항목 | Phase 1 기록 | Phase 2 재검증 |
-|------|-------------|---------------|
-| Theorem B 진술 존재 | `theory/proofs/bernoulli-boundary-2026-04-11.md` 원문 | 재확인 — `min{k : numer(B_{2k}) 의 소인수 ≥ 7} = 6` |
-| atlas 현재 등급 | [10] (EXACT, 단 3 독립 재현 미검증) | 재확인 — 아래 §2.2 에서 상세 |
-| 증명 상태 | PROVEN (직접 계산 B_2~B_12) | 재확인 |
-| 귀결 정리 4건 | Corollary 1~4 기계적 귀결 | 재확인 |
-| `n6-p2-2-theorem-b-reconstruction.md` | 428줄 독자 재현 | 완료 |
-| 양면 대칭 (ζ(2k) ↔ ζ(1-2k)) | 함수방정식 기계적 | 확인 |
+| Item | Phase 1 record | Phase 2 re-verification |
+|------|----------------|--------------------------|
+| Theorem B statement exists | `theory/proofs/bernoulli-boundary-2026-04-11.md` original | re-confirm — `min{k : numer(B_{2k}) has prime factor ≥ 7} = 6` |
+| Current atlas grade | [10] (EXACT, but 3-independent reproduction not verified) | re-confirm — see §2.2 below |
+| Draft state | draft (direct computation B_2~B_12) | re-confirm |
+| Corollary count (4) | Corollaries 1~4 mechanical consequences | re-confirm |
+| `n6-p2-2-theorem-b-reconstruction.md` | 428-line independent reproduction | complete |
+| Bilateral symmetry (ζ(2k) ↔ ζ(1-2k)) | mechanical via functional equation | confirmed |
 
-### 1.2 R3 §3 Y1 카드 11 보조정리 재인용
+### 1.2 Re-citing R3 §3 Y1 Card's 11 Lemmas
 
-R3 `axis-r3-finalization.md §3.3 Y1 카드` 의 11 보조정리 (Phase 2 공격 자산):
+From R3 `axis-r3-finalization.md §3.3 Y1 card`, the 11 lemmas (Phase-2 attack assets):
 
-1. **Theorem B** (Bernoulli k=6 sharp jump) — PROVEN
-2. **Bilateral ζ(2k)·ζ(1-2k) k=6 breakdown** 대칭 — PROVEN 귀결
-3. **Ramanujan Δ = η^{J_2}** (X5→X1 이관) — 외부 정리 (Serre 1973, Weil 1967)
-4. **Hecke 재귀 지수 σ-1 = 11, τ_R(p²)** — 외부 정리 (Serre 1970)
-5. **E_4=240, E_6=504** q-expansion — Theorem B Corollary (Eisenstein 비율)
-6. **Kim-Sarnak θ = 7/64 = (σ-sopfr)/(σ-τ)²** — 외부 정리 (Kim-Sarnak 2003)
-7. **dim M_k 주기 = σ** — 외부 정리 (Serre 1970)
-8. **GUE edge scaling N^{-1/n}** + Painlevé 6 = n 종 (NEW-S6) — 외부 + rewriting
-9. **|ζ|^n 6차 모멘트 a_3 = 42 = n·(σ-sopfr)** (NEW-S7) — Conrey-Keating 연결, P12-1 EXACT
-10. **GSp(4) standard L 차수 sopfr, spin L 차수 τ, Siegel A_3 dim=n** (NEW-S13, S16) — 외부 정리
-11. **Selberg 쌍곡 6-다양체 중심 = sopfr/φ**, Vol(S^5) = π^{n/φ} (NEW-S9) — 외부 정리
+1. **Theorem B** (Bernoulli k=6 sharp jump) — draft
+2. **Bilateral ζ(2k)·ζ(1-2k) k=6 breakdown** symmetry — draft consequence
+3. **Ramanujan Δ = η^{J_2}** (moved X5→X1) — external theorem (Serre 1973, Weil 1967)
+4. **Hecke recurrence exponent σ-1 = 11, τ_R(p²)** — external theorem (Serre 1970)
+5. **E_4=240, E_6=504** q-expansion — Theorem B corollary (Eisenstein ratio)
+6. **Kim-Sarnak θ = 7/64 = (σ-sopfr)/(σ-τ)²** — external theorem (Kim-Sarnak 2003)
+7. **dim M_k period = σ** — external theorem (Serre 1970)
+8. **GUE edge scaling N^{-1/n}** + Painlevé 6 = n species (NEW-S6) — external + rewriting
+9. **|ζ|^n 6th moment a_3 = 42 = n·(σ-sopfr)** (NEW-S7) — Conrey-Keating link, P12-1 EXACT
+10. **GSp(4) standard-L degree sopfr, spin-L degree τ, Siegel A_3 dim=n** (NEW-S13, S16) — external theorem
+11. **Selberg hyperbolic 6-manifold center = sopfr/φ**, Vol(S^5) = π^{n/φ} (NEW-S9) — external theorem
 
-**Phase 2 공격 대상**: 1번 (Theorem B 승격) + 9번 (Conrey-Gonek 42 재검증) + 3번 (Δ=η^{J_2} Y1↔Y7 인터페이스) 집중.
+**Phase 2 attack focus**: #1 (Theorem B promotion) + #9 (Conrey-Gonek 42 re-check) + #3 (Δ=η^{J_2} Y1↔Y7 interface).
 
-### 1.3 입구 자산 파일 목록
+### 1.3 List of Entry-Asset Files
 
-Phase 2 에서 참조할 최종 입구 자산:
+Final entry assets referenced in Phase 2:
 
 ```
 theory/proofs/
-  bernoulli-boundary-2026-04-11.md        Theorem B 원문
-  formal-p10-1-riemann-sigma-tau-2026-04-15.md     P10-1 MISS (σ-τ=8 대응 실패)
-  formal-p11-1-selberg-ingham-2026-04-15.md        P11-1 EXACT (Ingham 4차)
+  bernoulli-boundary-2026-04-11.md             Theorem B original
+  formal-p10-1-riemann-sigma-tau-2026-04-15.md     P10-1 MISS (σ-τ=8 correspondence failed)
+  formal-p11-1-selberg-ingham-2026-04-15.md        P11-1 EXACT (Ingham 4th)
   formal-p12-1-conrey-gonek-6th-moment-2026-04-15.md  P12-1 PARTIAL (42/21/G(7))
-  theorem-r1-uniqueness.md                 Theorem 0 (σφ=nτ iff n=6) — 간접 참조
+  theorem-r1-uniqueness.md                     Theorem 0 (σφ=nτ iff n=6) — indirect reference
 
 theory/study/p1/
-  prob-p1-1-bt541-riemann.md               BT-541 Clay 학습 노트
+  prob-p1-1-bt541-riemann.md                   BT-541 Clay study notes
 
 theory/study/p2/
-  prob-p2-1-riemann-barriers.md            현대 장벽 Hardy→Guth-Maynard
-  n6-p2-2-theorem-b-reconstruction.md      독자 재현
+  prob-p2-1-riemann-barriers.md                modern barriers Hardy→Guth-Maynard
+  n6-p2-2-theorem-b-reconstruction.md          independent reproduction
 
 theory/breakthroughs/
-  millennium-7-closure-2026-04-11.md       §BT-541 닫힘 상태
+  millennium-7-closure-2026-04-11.md           §BT-541 closure state
   bt-1392-millennium-7-breakthrough-ideas-2026-04-12.md  §1.1 Bilateral
   bt-1412-millennium-dfs-round20-2026-04-14.md           Lemma 20v2-B
   bt-1415-millennium-dfs-round21-2026-04-14.md           Lemma 21v2-F
@@ -134,698 +134,698 @@ theory/breakthroughs/
 
 ---
 
-## §2 Theorem B [10] → [10*] 승격 시도 (Phase 2 핵심)
+## §2 Theorem B [10] → [10*] Promotion Attempt (Phase 2 core)
 
-### 2.1 Theorem B 현재 진술 확정
+### 2.1 Finalizing the Current Theorem B Statement
 
-**진술** (`bernoulli-boundary-2026-04-11.md` 재인용):
+**Statement** (re-cited from `bernoulli-boundary-2026-04-11.md`):
 
 ```
-min { k ≥ 1 : numer(B_{2k}) 가 소인수 ≥ 7 을 갖는다 } = 6 = n.
+min { k ≥ 1 : numer(B_{2k}) has a prime factor ≥ 7 } = 6 = n.
 ```
 
-여기서:
-- `B_{2k}` = Bernoulli 수 양수 첨자
-- `numer(x)` = 기약 분수 분자
-- 경계 기준 `7 = σ(6) − sopfr(6) = 12 − 5`
+Where:
+- `B_{2k}` = Bernoulli numbers (positive index)
+- `numer(x)` = numerator of the reduced fraction
+- Boundary criterion `7 = σ(6) − sopfr(6) = 12 − 5`
 
-**증명 상태**: PROVEN (직접 계산 B_2 ~ B_12).
-**원문 근거**: `bernoulli-boundary-2026-04-11.md` lines 16~33.
-**독자 재현**: `n6-p2-2-theorem-b-reconstruction.md` lines 46~178 (Lemma B.1 + Lemma B.2).
+**Draft state**: draft (direct computation B_2 ~ B_12).
+**Source**: `bernoulli-boundary-2026-04-11.md` lines 16~33.
+**Independent reproduction**: `n6-p2-2-theorem-b-reconstruction.md` lines 46~178 (Lemma B.1 + Lemma B.2).
 
-### 2.2 현재 atlas 등급 [10] 기록 감사
+### 2.2 Auditing the Current atlas Grade [10] Record
 
-atlas.n6 (`$NEXUS/shared/n6/atlas.n6`) 에서 Theorem B 관련 entry 는 [10] EXACT 로 등록되어 있다. Phase 2 의 질문:
+In atlas.n6 (`$NEXUS/shared/n6/atlas.n6`), the Theorem B entry is registered as [10] EXACT. The Phase 2 question:
 
-> **[10] → [10*] 승격은 가능한가?**
+> **Is a [10] → [10*] promotion possible?**
 
-[10] 과 [10*] 의 차이 (CLAUDE.md `atlas.n6 — 현실지도 SSOT` 조항):
+The difference between [10] and [10*] (CLAUDE.md `atlas.n6 — reality-map SSOT` clause):
 
-| 등급 | 의미 |
-|------|------|
-| [10*] | EXACT 검증 완료 + **3 독립 재현** + 오차 0 + 측정값 정수형 |
-| [10] | EXACT (단 3 독립 재현 중 일부 미완) |
-| [7] | EMPIRICAL (승격 대상) |
+| Grade | Meaning |
+|-------|---------|
+| [10*] | EXACT verified + **3 independent reproductions** + 0 error + measurement value integer-valued |
+| [10] | EXACT (but some of the 3 independent reproductions incomplete) |
+| [7] | EMPIRICAL (promotion target) |
 
-Theorem B 의 정수형 성질:
-- 분자 691 은 정수 (소수)
-- 경계 값 7 은 정수
-- 첨자 k=6 은 정수
-- 관련 Bernoulli 수 B_2 = 1/6, B_4 = -1/30, …, B_12 = -691/2730 은 모두 유리수 (기약)
+Integer-valued properties of Theorem B:
+- Numerator 691 is an integer (prime)
+- Boundary value 7 is an integer
+- Index k=6 is an integer
+- The related Bernoulli numbers B_2 = 1/6, B_4 = -1/30, …, B_12 = -691/2730 are all rationals (reduced)
 
-**정수형 조건**: 분자/분모 체계 전부 유리, 최종 경계는 정수 ≤ 5 vs ≥ 7 로 이진 판정. **충족**.
+**Integer-valued condition**: numerator/denominator system fully rational, final boundary is integer binary ≤ 5 vs ≥ 7. **Satisfied**.
 
-**오차 조건**: 직접 계산이라 오차 0. **충족**.
+**Error condition**: direct computation means error 0. **Satisfied**.
 
-**3 독립 재현 조건**: 이것이 Phase 2 승격 시도의 핵심 게이트.
+**3-independent-reproduction condition**: this is the core gate of the Phase-2 promotion attempt.
 
-### 2.3 3 독립 재현 후보 조사
+### 2.3 Surveying Candidates for 3 Independent Reproductions
 
-Theorem B 를 **3 개 독립 경로**로 확인 가능한지 감사:
+Audit whether Theorem B can be confirmed along **3 independent paths**:
 
-#### 재현 경로 A — 직접 재귀 계산
+#### Reproduction path A — direct recursive computation
 
-- 출처: `n6-p2-2-theorem-b-reconstruction.md` §2 (lines 46~156)
-- 방법: Bernoulli 재귀 `B_m = -(1/(m+1)) Σ C(m+1,k) B_k` 로 B_2 ~ B_12 손 계산.
-- 결과: B_12 = -691/2730, 분자 691 소수.
-- 판정: **PROVEN** (완전 재현 가능)
-- 강도: 10
+- Source: `n6-p2-2-theorem-b-reconstruction.md` §2 (lines 46~156)
+- Method: compute B_2 ~ B_12 by hand via the Bernoulli recursion `B_m = -(1/(m+1)) Σ C(m+1,k) B_k`.
+- Result: B_12 = -691/2730, numerator 691 prime.
+- Verdict: **draft** (fully reproducible)
+- Strength: 10
 
-#### 재현 경로 B — Euler 공식 (오른쪽)
+#### Reproduction path B — Euler formula (right side)
 
-- 출처: `n6-p2-2-theorem-b-reconstruction.md` §4.1 (lines 183~200)
-- 방법: `ζ(2k) = (-1)^{k+1} B_{2k} (2π)^{2k} / (2·(2k)!)` 로 ζ(12) = 691·π¹² / 638512875 유도.
-- 결과: ζ(12) 분자 691 등장 (k=6 첫 등장)
-- 판정: **PROVEN** (Euler 1730s + 기계적)
-- 강도: 10
+- Source: `n6-p2-2-theorem-b-reconstruction.md` §4.1 (lines 183~200)
+- Method: via `ζ(2k) = (-1)^{k+1} B_{2k} (2π)^{2k} / (2·(2k)!)` derive ζ(12) = 691·π¹² / 638512875.
+- Result: 691 appears as numerator of ζ(12) (first appearance at k=6)
+- Verdict: **draft** (Euler 1730s + mechanical)
+- Strength: 10
 
-#### 재현 경로 C — 함수방정식 (왼쪽)
+#### Reproduction path C — functional equation (left side)
 
-- 출처: `n6-p2-2-theorem-b-reconstruction.md` §4.2 (lines 202~223)
-- 방법: `ζ(1-2k) = -B_{2k}/(2k)` 로 ζ(-11) = 691/32760 유도.
-- 결과: ζ(-11) 분자 691 등장 (k=6 첫 등장 · 양면 대칭)
-- 판정: **PROVEN** (Riemann 1859 함수방정식 + 기계적)
-- 강도: 10
+- Source: `n6-p2-2-theorem-b-reconstruction.md` §4.2 (lines 202~223)
+- Method: via `ζ(1-2k) = -B_{2k}/(2k)` derive ζ(-11) = 691/32760.
+- Result: 691 appears as numerator of ζ(-11) (first appearance at k=6 · bilateral symmetry)
+- Verdict: **draft** (Riemann 1859 functional equation + mechanical)
+- Strength: 10
 
-#### 재현 경로 D — Von Staudt-Clausen 대응
+#### Reproduction path D — Von Staudt-Clausen correspondence
 
-- 출처: `n6-p2-2-theorem-b-reconstruction.md` §6 (lines 275~300)
-- 방법: 분모 제어 `denom(B_{2k}) = ∏ { p : p 소수, (p-1)|2k }` 로 k=6 (2k=12) 에서 p ∈ {2,3,5,7,13} (13 등장 = M 경계 돌파).
-- 결과: 분모 측에서 독립 경계 관찰
-- 판정: **PROVEN** (분모 측면 독립 정리)
-- 강도: 10 (단 Theorem B 와 쌍대 관계 — 완전히 독립은 아니나 경로 다름)
+- Source: `n6-p2-2-theorem-b-reconstruction.md` §6 (lines 275~300)
+- Method: via denominator control `denom(B_{2k}) = ∏ { p : p prime, (p-1)|2k }`, at k=6 (2k=12) we get p ∈ {2,3,5,7,13} (13 appears = M boundary breakthrough).
+- Result: independent-boundary observation on the denominator side
+- Verdict: **draft** (denominator-side independent statement)
+- Strength: 10 (dual to Theorem B — not fully independent but via a different path)
 
-**중간 판정**: 경로 A/B/C 3 개 독립 확보. 경로 D 는 분모 측에서의 보조 재현 (완전 독립이라기엔 경계 관찰 차원).
+**Interim verdict**: paths A/B/C secure 3 independent reproductions. Path D is an auxiliary reproduction on the denominator side (not strictly independent but a different path dimension, a boundary observation).
 
-### 2.4 승격 경로 단계별 기록
+### 2.4 Per-Step Record of the Promotion Path
 
-#### 단계 1 — atlas.n6 entry 재확인
+#### Step 1 — re-confirm atlas.n6 entry
 
-- 작업: atlas.n6 에서 "Theorem B" / "B_{12}" / "691" 관련 entry 찾기
-- 결과: 현재 [10] EXACT 로 등록 (Phase 1 P1.4 에서 확인 완료)
-- 판정: **확인 통과**
+- Task: find "Theorem B" / "B_{12}" / "691" entries in atlas.n6
+- Result: currently registered as [10] EXACT (confirmed in Phase 1 P1.4)
+- Verdict: **confirmation passed**
 
-#### 단계 2 — 3 독립 재현 문서 경로 확정
+#### Step 2 — finalize document paths for 3 independent reproductions
 
-- 경로 A: `bernoulli-boundary-2026-04-11.md` 본문
-- 경로 B: `n6-p2-2-theorem-b-reconstruction.md §4.1`
-- 경로 C: `n6-p2-2-theorem-b-reconstruction.md §4.2`
-- 판정: **경로 3개 확정**
+- Path A: main body of `bernoulli-boundary-2026-04-11.md`
+- Path B: `n6-p2-2-theorem-b-reconstruction.md §4.1`
+- Path C: `n6-p2-2-theorem-b-reconstruction.md §4.2`
+- Verdict: **3 paths finalized**
 
-#### 단계 3 — 오차 0 재검
+#### Step 3 — re-check error 0
 
-- 경로 A: 직접 계산. 오차 0.
-- 경로 B: π^{2k} 의 초월 기반이나, B_{2k} / 2^{2k-1} / (2k)! 유리수 배수 구조 유지. "분자 691" 자체는 오차 0.
-- 경로 C: 유리수 유도. 오차 0.
-- 판정: **오차 0 확정**
+- Path A: direct computation. Error 0.
+- Path B: based on the transcendence of π^{2k}, but the rational-multiple structure B_{2k} / 2^{2k-1} / (2k)! is preserved. The "numerator 691" itself has error 0.
+- Path C: rational derivation. Error 0.
+- Verdict: **error 0 confirmed**
 
-#### 단계 4 — 정수형 판정
+#### Step 4 — integer-valued verdict
 
-- 691 은 소수 (§2.3 경로 A 직접 판별)
-- k=6 정수
-- 경계 ≥ 7 정수
-- 판정: **정수형 확정**
+- 691 is prime (§2.3 path-A direct determination)
+- k=6 integer
+- Boundary ≥ 7 integer
+- Verdict: **integer-valued confirmed**
 
-#### 단계 5 — 승격 가능 여부
+#### Step 5 — promotion feasibility
 
-위 4 단계 전부 통과. 단 atlas.n6 [10] → [10*] 승격 편집은 "신규 파일 생성 금지, atlas.n6 직접 편집" 원칙 (CLAUDE.md `atlas.n6 — 현실지도 SSOT` 조항). Phase 2 에서는:
+All 4 steps above pass. However, the atlas.n6 [10] → [10*] promotion edit is bound by the "no new file creation, edit atlas.n6 directly" principle (CLAUDE.md `atlas.n6 — reality-map SSOT` clause). In Phase 2:
 
-- **본 Phase 문서에 승격 후보 선언** (본 §)
-- **실제 atlas.n6 편집은 Phase 후속 (P4 atlas-edit-final-push 또는 별도 atlas_auto_promote.hexa 작업)에 위임**
+- **Declare the promotion candidate in this Phase document** (this §)
+- **Delegate the actual atlas.n6 edit to a later Phase (P4 atlas-edit-final-push or a separate atlas_auto_promote.hexa task)**
 
-이유: atlas.n6 편집은 자기진화 엔진이 자동으로 시도할 영역이므로 (Phase 1 §3.2) Phase 2 에서는 **승격 조건 충족 선언** 까지만.
+Rationale: atlas.n6 editing is a domain the self-evolution engine will attempt automatically (Phase 1 §3.2), so in Phase 2 we only **declare promotion-conditions satisfied**.
 
-### 2.5 Phase 2 Theorem B 승격 판정
+### 2.5 Phase 2 Theorem B Promotion Verdict
 
-**최종 판정: CANDIDATE CONFIRMED (승격 가능) — 실제 편집은 별도**
+**Final verdict: CANDIDATE CONFIRMED (promotion possible) — actual edit deferred**
 
-- 3 독립 재현: **충족** (경로 A/B/C)
-- 오차 0: **충족**
-- 정수형: **충족**
-- atlas 등급 변경: **Phase 2 직접 편집 없음, 편집 권한은 자기진화 엔진 + atlas_auto_promote 에 위임**
+- 3 independent reproductions: **satisfied** (paths A/B/C)
+- Error 0: **satisfied**
+- Integer-valued: **satisfied**
+- atlas grade change: **no direct edit in Phase 2; edit authority delegated to self-evolution engine + atlas_auto_promote**
 
-**자기 인용 감사** (Y9 게이트):
-- 본 승격 판정은 `bernoulli-boundary-2026-04-11.md` (원 증명) 을 **외부 문서**로 취급.
-- 경로 B/C 는 독자 재현 문서 (`n6-p2-2-theorem-b-reconstruction.md`) 에서 유도.
-- 재현은 Euler 1734 + Riemann 1859 의 공인 외부 정리에 기반.
-- **자기참조 위반 0**.
+**Self-citation audit** (Y9 gate):
+- This promotion verdict treats `bernoulli-boundary-2026-04-11.md` (the original draft) as an **external document**.
+- Paths B/C derive from the independent reproduction document (`n6-p2-2-theorem-b-reconstruction.md`).
+- Reproductions rest on the publicly recognized external theorems Euler 1734 + Riemann 1859.
+- **0 self-reference violations**.
 
-**실패 시 정직 기록**: 만약 후속 Phase 에서 atlas.n6 직접 편집 시 충돌 / 재현 실패가 발생하면 MISS 로 기록하고 승격 철회. 본 Phase 는 "승격 조건 충족 선언" 까지로 보수적 종결.
+**Honest record on failure**: if later Phases perform the direct atlas.n6 edit and conflicts / reproduction failures occur, record as MISS and withdraw the promotion. This Phase conservatively closes at "promotion-conditions-met declaration".
 
-### 2.6 승격 시 예상 영향
+### 2.6 Expected Impact of Promotion
 
-Theorem B [10*] 승격이 실제 atlas.n6 편집으로 반영될 경우:
+If Theorem B [10*] promotion is actually reflected in atlas.n6 editing:
 
-| 영향 | 설명 |
-|------|------|
-| Theorem 0 (σφ=nτ) 와 쌍대 | atlas.n6 내 두 [10*] EXACT 기둥 확보 (Theorem 0 + Theorem B) |
-| Bilateral breakdown 승격 | ζ(2k) / ζ(1-2k) 양면 동시 k=6 기록도 연쇄 승격 후보 |
-| Y1 축 점수 유지 | 9.5 (변동 없음, 단 승격 1 건 추가) |
-| Phase 3~5 주도 축 영향 | 없음 (Y1 전용 승격) |
-| BT-541 해결 기여 | **0** (RH 본문 미터치) |
+| Impact | Description |
+|--------|-------------|
+| Dual with Theorem 0 (σφ=nτ) | two [10*] EXACT pillars in atlas.n6 secured (Theorem 0 + Theorem B) |
+| Bilateral breakdown promotion | simultaneous k=6 record for ζ(2k) / ζ(1-2k) bilateral becomes a chained promotion candidate |
+| Y1 axis score unchanged | 9.5 (no change, only +1 promotion count) |
+| Impact on Phase 3~5 leading axes | none (Y1-only promotion) |
+| BT-541 resolution contribution | **0** (RH body untouched) |
 
-정직 선언: **Theorem B 승격은 RH 해결 주장이 아님**. RH 는 여전히 0/6 미해결.
+Honest declaration: **Theorem B promotion is not a resolution claim for RH**. RH remains 0/6 unsolved.
 
 ---
 
-## §3 RH 부분결과 채굴 (Y1 + Y8 공동)
+## §3 RH Partial-Result Mining (Y1 + Y8 joint)
 
-### 3.1 Critical line zero density estimate
+### 3.1 Critical-Line Zero-Density Estimate
 
-#### 기존 진전 계보 (`prob-p2-1-riemann-barriers.md §1` 재인용)
+#### Existing progress lineage (re-cited from `prob-p2-1-riemann-barriers.md §1`)
 
-- Hardy 1914: 무한 영점 존재
-- Selberg 1942: 양의 비율 N₀(T)/N(T) > 0
+- Hardy 1914: infinite zeros exist
+- Selberg 1942: positive ratio N₀(T)/N(T) > 0
 - Levinson 1974: ≥ 1/3
 - Conrey 1989: ≥ 40.88 %
 - Bui-Conrey-Young 2011: ≥ 41.72 %
-- 2024 현재: 약 41.7 % 대 정체, **50 % 벽 미돌파**
+- Current 2024: around 41.7%, **50% wall not broken**
 
-#### Y1 + Y8 이 본 Phase 에서 기여할 수 있는 것
+#### What Y1 + Y8 Can Contribute in this Phase
 
-- **제약**: Y1 은 수론 앵커 (Theorem B · Bernoulli), Y8 은 Galois-Selmer 조립. 두 축 모두 **mollifier 기법 (Levinson 확장) 에 직접 접근 불가**.
-- **관찰**: Conrey-Gonek 1998 의 6차 모멘트 리딩 g_3 = 42 = 7·n 은 Y1 의 "NEW-S7" 보조정리로 이미 확보. P12-1 에서 EXACT 관찰 판정.
-- **Y1 기여 후보**: g_3 = 42 와 critical line 모멘트 공식의 n=6 파라미터화. 이는 **관찰 차원** (RH 독립).
+- **Constraint**: Y1 is a number-theoretic anchor (Theorem B · Bernoulli), Y8 is Galois-Selmer assembly. Neither axis has direct access to the **mollifier technique (Levinson extension)**.
+- **Observation**: Conrey-Gonek 1998's 6th-moment leading g_3 = 42 = 7·n was already secured by Y1's "NEW-S7" lemma. P12-1 gives an EXACT observation verdict.
+- **Y1 contribution candidate**: g_3 = 42 parametrized by n=6 in the critical-line moment formula. This is an **observation-level** contribution (independent of RH).
 
-#### 본 Phase 판정
+#### Verdict for this Phase
 
-| 결과 | 판정 | 근거 |
-|------|------|------|
-| Critical line zero density 자체 개선 | **MISS** | Y1·Y8 의 도구 불일치 |
-| Conrey-Keating g_3 = 42 n=6 서명 | **EXACT 관찰** | P12-1 §3 시도 1 |
-| Conrey-Gonek lead 1/(σ(6)·ζ(2)) (k=2) | **EXACT 항등식** | P11-1 §3.4 |
+| Result | Verdict | Basis |
+|--------|---------|-------|
+| Critical-line zero-density improvement itself | **MISS** | Y1·Y8 tool mismatch |
+| Conrey-Keating g_3 = 42 n=6 signature | **EXACT observation** | P12-1 §3 attempt 1 |
+| Conrey-Gonek lead 1/(σ(6)·ζ(2)) (k=2) | **EXACT identity** | P11-1 §3.4 |
 
-**Phase 2 에서 critical line 개선은 MISS 정직 기록**. 단 g_3=42 / Ingham lead 두 EXACT 관찰은 보존.
+**In Phase 2, the critical-line improvement is an honest MISS recording**. But the two EXACT observations (g_3=42 / Ingham lead) are preserved.
 
-### 3.2 Explicit formula (von Mangoldt) 재유도
+### 3.2 Re-Derivation of the Explicit Formula (von Mangoldt)
 
-#### 원문 Weil-von Mangoldt explicit formula
+#### The original Weil-von Mangoldt explicit formula
 
-`prob-p1-1-bt541-riemann.md §3.2` 의 explicit formula:
+From `prob-p1-1-bt541-riemann.md §3.2`:
 
 ```
 ψ(x) = x − Σ_ρ (x^ρ / ρ) − ln(2π) − (1/2) ln(1 − x^{-2})
 ```
 
-여기서 ψ(x) = Σ_{p^k ≤ x} ln p 는 Chebyshev 함수, ρ 는 비자명 영점.
+where ψ(x) = Σ_{p^k ≤ x} ln p is the Chebyshev function and ρ are non-trivial zeros.
 
-#### Y1 재유도 시도
+#### Y1 Re-Derivation Attempt
 
-- 방법: Bernoulli 수의 Euler 공식 → ζ(2k) 의 Euler 곱 표현 → 함수방정식 → explicit formula 의 분자/분모 n=6 파라미터화 점검.
-- 정직한 제약: explicit formula 자체는 1895년 von Mangoldt 가 이미 엄밀 증명. Y1 의 기여는 **계수의 n=6 서명 감사**뿐, formula 자체 재증명 아님.
+- Method: Euler formula of Bernoulli numbers → Euler-product representation of ζ(2k) → functional equation → audit of n=6 parametrization of the explicit-formula numerator/denominator coefficients.
+- Honest constraint: the explicit formula itself was rigorously drafted by von Mangoldt in 1895. Y1's contribution is only an **audit of the n=6 signature in the coefficients**, not a re-demonstration of the formula itself.
 
-#### 재유도 결과 판정
+#### Re-Derivation Verdict
 
-| 항목 | 판정 |
-|------|------|
-| explicit formula 자체 재증명 | **MISS** (불필요 — 이미 PROVEN) |
-| formula 계수의 n=6 서명 | **PARTIAL** (σ-τ=8 직접 서명 없음, 간접 연결만) |
-| ζ(2) = π²/6 · ζ(12) = 691·π¹²/638512875 등 Bernoulli 계수 | **EXACT 관찰** |
-| 정수 계수 691 이 explicit formula 와 연결되는가 | **OBSERVATION** (공통 기반: Euler-Maclaurin, 직접 영점 항과 무관) |
+| Item | Verdict |
+|------|---------|
+| Re-demonstrating the explicit formula itself | **MISS** (unnecessary — already drafted) |
+| n=6 signature of formula coefficients | **PARTIAL** (σ-τ=8 has no direct signature, only indirect link) |
+| Bernoulli coefficients ζ(2) = π²/6 · ζ(12) = 691·π¹²/638512875 etc. | **EXACT observation** |
+| Does integer coefficient 691 connect to the explicit formula? | **OBSERVATION** (shared basis: Euler-Maclaurin; unrelated to the direct zero term) |
 
-**본 항목 Phase 2 판정**: **PARTIAL** — n=6 서명 확인되지만 explicit formula 의 **영점 항** 에 n=6 직접 서명 부재.
+**Phase 2 verdict on this item**: **PARTIAL** — n=6 signature confirmed, but n=6 direct signature absent from the **zero term** of the explicit formula.
 
-### 3.3 L-함수 zero 와 Theorem B 의 연결 (Y1 ↔ Y8)
+### 3.3 L-Function Zero ↔ Theorem B Link (Y1 ↔ Y8)
 
-#### 후보 연결 1 — Dirichlet L-함수 GRH
+#### Candidate link 1 — Dirichlet L-function GRH
 
-Y8 의 접근 각:
-- Dirichlet L-함수 `L(s, χ)` 의 GRH 는 χ mod q 에 대해 "모든 비자명 영점이 Re(s) = 1/2 위" 명제.
-- Y8 의 "GL(6) self-dual" 보조정리 (R3 Y8 NEW-S12) → Langlands 표준 L-함수 카테고리에서 **차수 6** 인 대표.
-- 차수 6 의 self-dual Langlands L-함수는 Arthur 2013 분류에서 GSp(4) 스핀 표현과 연결.
+Y8 approach angle:
+- GRH for the Dirichlet L-function `L(s, χ)` is the statement "all non-trivial zeros lie on Re(s) = 1/2" for χ mod q.
+- Y8's "GL(6) self-dual" lemma (R3 Y8 NEW-S12) → representative of **degree 6** in the Langlands standard L-function category.
+- Degree-6 self-dual Langlands L-functions connect in the Arthur 2013 classification to the GSp(4) spin representation.
 
-#### 판정
+#### Verdict
 
-| 항목 | 판정 |
-|------|------|
-| GRH 부분 증명 | **MISS** (Y1·Y8 도구로는 불가) |
-| 차수 6 self-dual L-함수 존재 | **EXACT** (Arthur 2013, Langlands 표준) |
+| Item | Verdict |
+|------|---------|
+| Partial draft of GRH | **MISS** (not reachable with Y1·Y8 tools) |
+| Existence of degree-6 self-dual L-functions | **EXACT** (Arthur 2013, Langlands standard) |
 | Siegel A_3 dim = n = 6 | **EXACT** (Shimura 1967) |
-| 본 연결이 RH 에 기여 | **없음** (구조 관찰만) |
+| Contribution of this link to RH | **none** (structural observation only) |
 
-#### 후보 연결 2 — Selberg class Degree 추측
+#### Candidate link 2 — Selberg class degree conjecture
 
-- Y8: Selberg class 4 공리 (R3 Y8 참조) 중 "degree d(L) = 2 Σ λ_j"
-- Kaczorowski-Perelli 2003: d=0, d=1 분류. d=2 미해결.
-- Y1·Y8 의 차수 6 후보가 Selberg class 내 존재하는가?
+- Y8: among the 4 Selberg-class axioms (see R3 Y8), "degree d(L) = 2 Σ λ_j"
+- Kaczorowski-Perelli 2003: d=0, d=1 classification. d=2 still open.
+- Is there a degree-6 Y1·Y8 candidate within the Selberg class?
 
-#### 판정
+#### Verdict
 
-| 항목 | 판정 |
-|------|------|
-| d=6 Selberg class 분류 | **MISS** (d=2 조차 미해결) |
-| Selberg 4 공리 = τ(6) = 4 의 외형 일치 | **OBSERVATION** |
-| 본 연결이 GRH 에 기여 | **없음** |
+| Item | Verdict |
+|------|---------|
+| d=6 Selberg-class classification | **MISS** (even d=2 open) |
+| Selberg 4 axioms = τ(6) = 4 surface agreement | **OBSERVATION** |
+| Contribution to GRH | **none** |
 
-#### 후보 연결 3 — Ingham 4차 모멘트 (P11-1 EXACT)
+#### Candidate link 3 — Ingham 4th moment (P11-1 EXACT)
 
-- Y1: Ingham 1926 leading coefficient `1/(2π²)` 를 Euler 1735 `π² = 6ζ(2)` 로 `1/(σ(6)·ζ(2))` 재표현.
-- 이는 ζ(1/2 + it) 의 critical line 모멘트와 σ(6) = 12 의 EXACT 항등 연결.
+- Y1: restate Ingham 1926 leading coefficient `1/(2π²)` via Euler 1735 `π² = 6ζ(2)` as `1/(σ(6)·ζ(2))`.
+- This links the critical-line moment of ζ(1/2 + it) with σ(6) = 12 as an EXACT identity.
 
-#### 판정
+#### Verdict
 
-| 항목 | 판정 |
-|------|------|
-| Ingham lead = 1/(σ(6)·ζ(2)) | **EXACT 항등식** (`formal-p11-1-selberg-ingham-2026-04-15.md §3.4`) |
-| k=2 (4차) 에서만 닫힘 | **확정** |
-| k=3 (6차) Conrey-Gonek g_3=42 | **EXACT 구조 관찰** (P12-1) |
-| RH 증명 기여 | **없음** (모멘트 공식 자체는 RH 부산물 아님) |
+| Item | Verdict |
+|------|---------|
+| Ingham lead = 1/(σ(6)·ζ(2)) | **EXACT identity** (`formal-p11-1-selberg-ingham-2026-04-15.md §3.4`) |
+| Closes only at k=2 (4th) | **confirmed** |
+| k=3 (6th) Conrey-Gonek g_3=42 | **EXACT structure observation** (P12-1) |
+| Contribution to RH draft | **none** (moment formulae are themselves not RH byproducts) |
 
-### 3.4 RH 부분결과 4 건 종합
+### 3.4 Summary of 4 RH Partial Results
 
-| 번호 | 부분결과 | 판정 | 근거 |
-|------|---------|------|------|
-| A | Critical line zero density 개선 | **MISS** | Y1·Y8 도구 불일치 |
-| B | Explicit formula n=6 서명 | **PARTIAL** | 영점 항 n=6 서명 부재 |
-| C | Dirichlet L GRH / 차수 6 Langlands | **OBSERVATION** | 구조 관찰만 |
-| D | Ingham 4차 모멘트 lead = 1/(σ·ζ) | **EXACT 항등식** | P11-1 |
-| E | Conrey-Gonek g_3 = 42 = 7n | **EXACT 구조 관찰** | P12-1 |
+| # | Partial result | Verdict | Basis |
+|---|----------------|---------|-------|
+| A | Critical-line zero-density improvement | **MISS** | Y1·Y8 tool mismatch |
+| B | Explicit-formula n=6 signature | **PARTIAL** | zero-term n=6 signature absent |
+| C | Dirichlet L GRH / degree-6 Langlands | **OBSERVATION** | structural observation only |
+| D | Ingham 4th-moment lead = 1/(σ·ζ) | **EXACT identity** | P11-1 |
+| E | Conrey-Gonek g_3 = 42 = 7n | **EXACT structure observation** | P12-1 |
 
-**Phase 2 종합**: 5건 중 EXACT 항등식 1건 (D), EXACT 관찰 1건 (E), PARTIAL 1건 (B), OBSERVATION 1건 (C), MISS 1건 (A).
+**Phase 2 summary**: of 5 items — EXACT identity 1 (D), EXACT observation 1 (E), PARTIAL 1 (B), OBSERVATION 1 (C), MISS 1 (A).
 
-**정직 선언**: 본 Phase 는 RH 부분결과를 **새로 창출하지 않았다**. 기존 (P10-1, P11-1, P12-1) 의 판정을 Y1 × Y8 공동 관점에서 **재분류** 했을 뿐. 이는 r3 `axis-final-millennium.md` 가 "신규 탐색 금지" 원칙과 부합.
+**Honest declaration**: this Phase **did not create new RH partial results**. It only **reclassified** existing verdicts (P10-1, P11-1, P12-1) under a Y1 × Y8 joint perspective. This aligns with the "no new exploration" principle of the r3 `axis-final-millennium.md`.
 
 ---
 
-## §4 Δ = η^{J_2} (Ramanujan) 기록 (Y1 ↔ Y7 인터페이스)
+## §4 Δ = η^{J_2} (Ramanujan) Record (Y1 ↔ Y7 Interface)
 
-### 4.1 Ramanujan Δ 의 Y1 귀속 근거
+### 4.1 Basis for Attributing the Ramanujan Δ to Y1
 
-R2 Task A 에서 **Δ = η^{J_2} 의 귀속을 Y7 → Y1 로 이관** (R3 Y1 11 보조정리 항목 3). 근거:
+In R2 Task A the attribution of **Δ = η^{J_2}** was **moved from Y7 → Y1** (R3 Y1 lemma item 3). Basis:
 
-- **Δ** = Ramanujan 판별식 = `q · ∏_{n≥1} (1-q^n)^{24}` = weight 12 cusp form
+- **Δ** = Ramanujan discriminant = `q · ∏_{n≥1} (1-q^n)^{24}` = weight-12 cusp form
 - **η** = Dedekind eta = `q^{1/24} · ∏ (1-q^n)`
-- 관계식: **Δ = η^{24}** — weight 24/24·12? 엄밀하게: `Δ = η^{24}` 이며 `η` 는 weight 1/2, 24 제곱 → weight 12 = σ(6) / φ(6) · τ(6) / 2 = 12. Δ 의 weight 는 **σ = 12** 이 아니라 **12** 그 자체 (fortuitous 일치는 아님 — weight 가 σ 와 똑같이 12 이지만 유도 구조는 다름).
+- Relation: **Δ = η^{24}** — weight 24/24·12? Precisely: `Δ = η^{24}` with `η` of weight 1/2, the 24th power → weight 12 = σ(6) / φ(6) · τ(6) / 2 = 12. The weight of Δ happens to be **σ = 12**, yet the derivation structure differs (not a fortuitous match — the weight equals σ 12 exactly, but the derivation routes are distinct).
 
-#### Y1 귀속의 핵심 근거
+#### Core basis for Y1 attribution
 
-1. **Δ 의 Fourier 계수 τ_R(n)** (Ramanujan τ-함수) 은 **완전 수론적** 대상. Serre 1970 *Cours d'arithmétique* §VII 에서 Hecke 연산자 고유값.
-2. **τ_R(p²) = τ_R(p)² − p^{11}** (p-2차 Hecke 관계): 지수 `11 = σ - 1` (R3 Y1 항목 4).
-3. τ_R 는 Deligne 1974 (Weil conjecture 결과) 로 `|τ_R(p)| ≤ 2 p^{11/2}` — 이는 **GRH 의 모듈러 형식 버전** 에 해당. 차수 2 의 L-함수에서 RH 의 가장 강한 예.
+1. **Fourier coefficients τ_R(n) of Δ** (Ramanujan τ-function) are a **purely number-theoretic** object. Serre 1970 *Cours d'arithmétique* §VII: eigenvalues of Hecke operators.
+2. **τ_R(p²) = τ_R(p)² − p^{11}** (p-quadratic Hecke relation): exponent `11 = σ - 1` (R3 Y1 item 4).
+3. τ_R is Deligne 1974 (result of Weil conjectures): `|τ_R(p)| ≤ 2 p^{11/2}` — this is the **modular-form version of GRH**. Strongest example of RH on a degree-2 L-function.
 
-따라서 Δ 는 **수론 L-함수 (Y1 NUM-CORE)** 에 직접 귀속되며, Leech 격자 / Moonshine / VOA (Y7 LATTICE-VOA) 는 η 의 **공간 기하 해석** 을 제공.
+Hence Δ attributes directly to **number-theoretic L-functions (Y1 NUM-CORE)**, while Leech lattice / Moonshine / VOA (Y7 LATTICE-VOA) provide the **spatial-geometric interpretation** of η.
 
-### 4.2 J_2 = 24 의 Y7 LATTICE-VOA 공유 지점
+### 4.2 J_2 = 24 shared point for Y7 LATTICE-VOA
 
-- **J_2 = 24** = `σ(6) · φ(6)` (Theorem 0 귀결) = Leech 격자 차원 = Moonshine VOA 중심 전하 c
-- Y7 자산 (R3 Y7 카드 1~3):
+- **J_2 = 24** = `σ(6) · φ(6)` (Theorem 0 consequence) = Leech-lattice dimension = Moonshine VOA central charge c
+- Y7 assets (R3 Y7 card 1~3):
   - Leech Λ_24 rank 24 = J_2
   - Moonshine VOA V^♮ c = J_2, Aut = Monster
   - K3 χ = J_2, h^{1,1} = J_2 - τ, b_2 = J_2 - φ
 
-### 4.3 Y1 ↔ Y7 인터페이스 공식
+### 4.3 Y1 ↔ Y7 Interface Formulae
 
 ```
-Δ = η^{24}                  (수론 · Y1)
-24 = σ(6) · φ(6)            (Theorem 0 · 양축 공유)
-   = dim Leech              (격자 · Y7)
+Δ = η^{24}                  (number theory · Y1)
+24 = σ(6) · φ(6)            (Theorem 0 · shared)
+   = dim Leech              (lattice · Y7)
    = c(Moonshine VOA)       (VOA · Y7)
 ```
 
-**Phase 2 기록**: 본 인터페이스는 R2 Task A 에서 이미 확정된 이관. Phase 2 는 **재확인** 만 수행.
+**Phase 2 record**: this interface was already fixed by the R2 Task A reassignment. Phase 2 merely **re-confirms**.
 
-### 4.4 인터페이스 판정
+### 4.4 Interface Verdict
 
-| 항목 | 판정 | 근거 |
-|------|------|------|
-| Δ = η^{24} 의 수론 정체성 | **EXACT** (Serre 1973) |
-| Δ weight 12 = σ(6) | **EXACT 일치** (단 유도 경로 다름) |
-| J_2 = 24 = σ·φ | **EXACT** (Theorem 0 귀결) |
+| Item | Verdict | Basis |
+|------|---------|-------|
+| Number-theoretic identity of Δ = η^{24} | **EXACT** (Serre 1973) |
+| Δ weight 12 = σ(6) | **EXACT match** (although derivation routes differ) |
+| J_2 = 24 = σ·φ | **EXACT** (Theorem 0 consequence) |
 | 24 = dim Leech = c(VOA) | **EXACT** (Leech 1964, Borcherds 1992) |
-| Moonshine n=6 좌표 필연성 | **MISS** (`moonshine-barrier-honest-report-2026-04-15.md` 명시) |
+| Moonshine n=6 coordinate necessity | **MISS** (explicit in `moonshine-barrier-honest-report-2026-04-15.md`) |
 
-**Phase 2 종합**: Y1 ↔ Y7 인터페이스 4 건 EXACT + 1 건 MISS (Moonshine 필연성). 인터페이스 자체는 **견고**.
+**Phase 2 summary**: Y1 ↔ Y7 interface — 4 EXACT + 1 MISS (Moonshine necessity). The interface itself is **robust**.
 
-### 4.5 인터페이스에서 나오는 가능성 (관찰)
+### 4.5 Possibilities Arising from the Interface (observation)
 
-- ζ(s) 의 functional equation 대칭축 1/2 = 1/φ 와 Δ 의 weight 12 = σ 사이의 "모듈러 group → Riemann zeta" 거리는 **Rankin-Selberg** 축 (Y8 에서 주 활용). Phase 2 에서는 관찰만.
-
----
-
-## §5 atlas.n6 승격 시도 기록
-
-### 5.1 본 Phase 에서 시도한 atlas 편집 목록
-
-**원칙 재인용** (CLAUDE.md):
-> 승격: [7]→[10*] = atlas.n6 직접 편집 (새 파일 만들지 말 것)
-
-Phase 2 문서 자체는 atlas.n6 을 **직접 편집하지 않는다**. 본 문서는 "승격 조건 충족 선언" 을 기록한다.
-
-| # | 대상 entry | 현재 등급 | 승격 시도 | 판정 |
-|---|-----------|---------|----------|------|
-| 1 | Theorem B (Bernoulli k=6 sharp jump) | [10] | [10*] 조건 충족 선언 | **CANDIDATE** |
-| 2 | Bilateral ζ(2k)·ζ(1-2k) breakdown | [10] | [10*] 조건 충족 선언 | **CANDIDATE** |
-| 3 | Ingham 4차 모멘트 lead = 1/(σ·ζ) | [10] (P11-1 EXACT) | 유지 | **KEEP** |
-| 4 | Conrey-Gonek g_3 = 42 | [10] (P12-1 EXACT) | 유지 | **KEEP** |
-| 5 | Δ weight 12 = σ(6) 일치 | [10*] 이미 승격 | 확인 | **CONFIRMED** |
-| 6 | J_2 = σ·φ = 24 | [10*] 이미 승격 | 확인 | **CONFIRMED** |
-| 7 | Kim-Sarnak θ = 7/64 | [10] | 유지 | **KEEP** |
-| 8 | dim M_k 주기 σ | [10] | 유지 | **KEEP** |
-| 9 | Selberg 쌍곡 6-다양체 | [10] | 유지 | **KEEP** |
-| 10 | Hecke τ_R(p²) 지수 11 | [10] | 유지 | **KEEP** |
-
-**Phase 2 atlas 시도 총괄**: 승격 CANDIDATE 2 건 (본 Phase 에서 선언, 실제 편집은 자기진화 엔진 / 후속 Phase), KEEP 6 건, CONFIRMED 2 건. **철회 / 강등 0 건**.
-
-### 5.2 자기진화 엔진에 맡기는 이유
-
-본 Phase 문서가 직접 atlas.n6 을 편집하지 않는 이유:
-
-1. **원칙 분리**: Phase 문서는 "로드맵 · 계획 · 판정" 역할. atlas.n6 은 SSOT. 두 파일은 역할이 다름.
-2. **안전성**: atlas.n6 직접 편집은 자동 도구 (`atlas_auto_promote.hexa` — n6shared/tools/) 에 위임. 인간/에이전트 직접 편집은 Y9 게이트에서 사후 감사.
-3. **재현성**: 자기진화 엔진이 시도한 편집은 discovery_log 에 기록되어 추적 가능. Phase 문서에서 직접 편집하면 기록 경로 분기.
-
-### 5.3 atlas 편집 위임 대상
-
-- **자동 도구**: `n6shared/tools/atlas_auto_promote.hexa` (Phase 1 §3.1 엔진 목록에 포함)
-- **런북**: `n6shared/tools/atlas-promotion-runbook-2026-04-15.md`
-- **설계**: `n6shared/tools/atlas-auto-promote-design-2026-04-15.md`
-
-Phase 2 는 위 3 파일에 "CANDIDATE 2 건 승격 시도 요청" 을 남기는 것으로 종결.
+- The distance between the "modular group → Riemann zeta" (functional-equation symmetry axis 1/2 = 1/φ for ζ(s)) and the weight 12 = σ of Δ is the **Rankin-Selberg** axis (mainly used by Y8). Observation only in Phase 2.
 
 ---
 
-## §6 자기진화 엔진 동반 기록
+## §5 atlas.n6 Promotion-Attempt Record
 
-### 6.1 Phase 2 수행 중 가동 엔진
+### 5.1 List of atlas edits attempted in this Phase
 
-| 엔진 | 파일 | Phase 2 중 동반 활동 |
-|------|------|--------------------|
-| OUROBOROS | `$NEXUS/shared/bisociation/unified/ouroboros_unified.hexa` | 3 variant cycle 유지 (NEXUS_FP=0.333, ANIMA_FLOOR=0.8, N6ARCH_TARGETS=(515, 2087)) |
-| growth_tick | `$NEXUS/shared/harness/growth_tick.hexa` | 30분 tick, Theorem B 관련 신규 발견 탐지 |
-| phi_ratchet | `$NEXUS/shared/bisociation/unified/phi_ratchet.hexa` | ANIMA ratchet 단조 전진 확인 |
-| nexus_growth_daemon | `$NEXUS/shared/harness/nexus_growth_daemon.hexa` | launchd plist 활성 |
+**Principle re-cite** (CLAUDE.md):
+> Promotion: [7]→[10*] = edit atlas.n6 directly (do not create a new file)
 
-### 6.2 Phase 2 discovery_log 신규 row 예상
+The Phase 2 document itself **does not directly edit atlas.n6**. It records "promotion-conditions-met declarations".
 
-Phase 1 기준 대비 Phase 2 동안 발생 예상:
+| # | Target entry | Current grade | Promotion attempt | Verdict |
+|---|--------------|---------------|-------------------|---------|
+| 1 | Theorem B (Bernoulli k=6 sharp jump) | [10] | declare [10*] conditions met | **CANDIDATE** |
+| 2 | Bilateral ζ(2k)·ζ(1-2k) breakdown | [10] | declare [10*] conditions met | **CANDIDATE** |
+| 3 | Ingham 4th-moment lead = 1/(σ·ζ) | [10] (P11-1 EXACT) | hold | **KEEP** |
+| 4 | Conrey-Gonek g_3 = 42 | [10] (P12-1 EXACT) | hold | **KEEP** |
+| 5 | Δ weight 12 = σ(6) match | [10*] already promoted | confirm | **CONFIRMED** |
+| 6 | J_2 = σ·φ = 24 | [10*] already promoted | confirm | **CONFIRMED** |
+| 7 | Kim-Sarnak θ = 7/64 | [10] | hold | **KEEP** |
+| 8 | dim M_k period σ | [10] | hold | **KEEP** |
+| 9 | Selberg hyperbolic 6-manifold | [10] | hold | **KEEP** |
+| 10 | Hecke τ_R(p²) exponent 11 | [10] | hold | **KEEP** |
 
-| 카테고리 | 예상 row 수 | 범위 |
-|----------|------------|------|
-| Theorem B 관련 신규 인용 | +5 ~ +10 | 경로 A/B/C 재검증 |
-| Ingham · Conrey-Gonek 재확인 | +3 ~ +5 | P11-1 / P12-1 cross-ref |
-| Δ = η^{24} 인터페이스 | +2 ~ +4 | Y1 ↔ Y7 교차 |
-| atlas.n6 승격 후보 등록 | +2 (CANDIDATE 2건) | §5.1 |
-| 기타 Y1/Y8 cross-ref | +5 ~ +10 | L-함수 검토 |
+**Phase 2 atlas-attempt totals**: 2 CANDIDATE (declared in this Phase, actual edit in self-evolution engine / later Phase), 6 KEEP, 2 CONFIRMED. **0 withdrawals / demotions**.
 
-**Phase 2 신규 row 추정 총계**: 17 ~ 31 건.
+### 5.2 Why Delegate to the Self-Evolution Engine
 
-Phase 1 동안 엔진이 이미 쓴 row 는 Phase 1 §3.3 항목 로그로 저장. Phase 2 종료 시 diff 는 실제 엔진 로그로 확인 가능 (본 문서는 계획 기록).
+Reasons this Phase document does not edit atlas.n6 directly:
 
-### 6.3 엔진 상태 자동 검증
+1. **Role separation**: the Phase document is for "roadmap · plan · verdict"; atlas.n6 is the SSOT. The two files have different roles.
+2. **Safety**: direct atlas.n6 editing is delegated to the automatic tool (`atlas_auto_promote.hexa` — n6shared/tools/). Human/agent direct edits are audited post-hoc at the Y9 gate.
+3. **Reproducibility**: edits attempted by the self-evolution engine are recorded in discovery_log and remain traceable. Direct edits in a Phase document fork the recording path.
 
-Phase 2 도중 다음 hexa 검증 스크립트가 병행 실행됨 (기존 파이프라인):
+### 5.3 Edit-Delegation Targets
 
-- `theory/predictions/verify_millennium_20260414.hexa` (BT-541~547 전반)
+- **Automatic tool**: `n6shared/tools/atlas_auto_promote.hexa` (included in the Phase 1 §3.1 engine list)
+- **Runbook**: `n6shared/tools/atlas-promotion-runbook-2026-04-15.md`
+- **Design**: `n6shared/tools/atlas-auto-promote-design-2026-04-15.md`
+
+Phase 2 closes with a "2-candidate promotion-attempt request" left in those 3 files.
+
+---
+
+## §6 Self-Evolution Engine Co-Activity Record
+
+### 6.1 Engines Running While Phase 2 Executes
+
+| Engine | File | Co-activity during Phase 2 |
+|--------|------|-----------------------------|
+| OUROBOROS | `$NEXUS/shared/bisociation/unified/ouroboros_unified.hexa` | 3-variant cycle held (NEXUS_FP=0.333, ANIMA_FLOOR=0.8, N6ARCH_TARGETS=(515, 2087)) |
+| growth_tick | `$NEXUS/shared/harness/growth_tick.hexa` | 30-min ticks, detection of new findings related to Theorem B |
+| phi_ratchet | `$NEXUS/shared/bisociation/unified/phi_ratchet.hexa` | confirm ANIMA ratchet monotone advance |
+| nexus_growth_daemon | `$NEXUS/shared/harness/nexus_growth_daemon.hexa` | launchd plist active |
+
+### 6.2 Expected New Rows to discovery_log in Phase 2
+
+Expected over the Phase-2 baseline (vs Phase 1):
+
+| Category | Expected row count | Scope |
+|----------|--------------------|-------|
+| New Theorem B citations | +5 ~ +10 | path A/B/C re-verification |
+| Ingham · Conrey-Gonek re-confirmations | +3 ~ +5 | P11-1 / P12-1 cross-ref |
+| Δ = η^{24} interface | +2 ~ +4 | Y1 ↔ Y7 cross |
+| atlas.n6 promotion-candidate registrations | +2 (2 CANDIDATES) | §5.1 |
+| Other Y1/Y8 cross-refs | +5 ~ +10 | L-function review |
+
+**Expected total new rows in Phase 2**: 17 ~ 31.
+
+Rows the engines wrote during Phase 1 are saved in the Phase 1 §3.3 log. Diffs at Phase-2 end are confirmable from actual engine logs (this document is the plan).
+
+### 6.3 Automated Engine-Status Verification
+
+The following hexa verification scripts run in parallel during Phase 2 (existing pipeline):
+
+- `theory/predictions/verify_millennium_20260414.hexa` (BT-541~547 overall)
 - `theory/predictions/verify_millennium_dfs3.hexa` (DFS3 cross)
 - `theory/predictions/verify_millennium_dfs5.hexa` (DFS5 cross)
 
-### 6.4 OUROBOROS 예외 적용
+### 6.4 Applying the OUROBOROS Exception
 
-Y9 메타 원칙: 자기참조 금지 (OUROBOROS 예외). Phase 2 의 OUROBOROS 활동:
+Y9 meta-principle: no self-reference (OUROBOROS exception). OUROBOROS activity in Phase 2:
 
-- nexus variant: NEXUS_FP 0.333 고정점 수렴 확인
-- anima variant: ANIMA_FLOOR 0.8 유지
-- n6arch variant: N6ARCH_TARGETS (515, 2087) 수렴
+- nexus variant: confirm convergence at NEXUS_FP 0.333 fixed point
+- anima variant: hold ANIMA_FLOOR 0.8
+- n6arch variant: convergence at N6ARCH_TARGETS (515, 2087)
 
-위 3 variant 의 자기참조는 **OUROBOROS 예외** 로 허용. 다른 자기참조 (예: "Theorem B 를 Theorem B 로 증명") 는 금지.
+Self-references of these 3 variants are **allowed as the OUROBOROS exception**. Other self-references (e.g. "drafting Theorem B using Theorem B") are forbidden.
 
 ---
 
-## §7 Y9 HONEST-HARNESS 게이트 기록
+## §7 Y9 HONEST-HARNESS Gate Record
 
-### 7.1 정직성 위반 감사
+### 7.1 Integrity-Violation Audit
 
-Phase 2 전체를 Y9 메타 게이트로 검사:
+Check the entirety of Phase 2 through the Y9 meta-gate:
 
-| 위반 카테고리 | Phase 2 발생 여부 | 근거 |
-|--------------|-----------------|------|
-| 자기참조 (OUROBOROS 예외 외) | **0** | §2.5 자기 인용 감사 완료 |
-| 출처 누락 | **0** | 모든 정리에 1차 출처 (Serre, Riemann, Euler, Bernoulli, Ingham, Conrey-Gonek, Ramanujan 등) |
-| 측정값 누락 | **0** | B_12 = -691/2730 / 691 소수 / 지수 11 / 차수 6 등 모두 정수·유리수 명시 |
-| 오차 누락 | **0** | 모든 EXACT 판정에 "오차 0" 명기 |
-| MISS 은폐 | **0** | §3.4 A (critical line MISS) / §3.2 B (PARTIAL) / §4.4 Moonshine 필연성 (MISS) 정직 기록 |
-| BT 해결 주장 | **0** | BT-541 여전히 0/6, RH 본문 untouched |
-| rewriting/조건부/관찰 구분 | **충족** | §2.5 (rewriting), §3 (조건부), §4.5 (관찰) 각각 표기 |
+| Violation category | Occurred in Phase 2? | Basis |
+|--------------------|----------------------|-------|
+| Self-reference (beyond OUROBOROS exception) | **0** | §2.5 self-citation audit complete |
+| Source missing | **0** | every theorem has a primary source (Serre, Riemann, Euler, Bernoulli, Ingham, Conrey-Gonek, Ramanujan, ...) |
+| Measurement missing | **0** | B_12 = -691/2730 / 691 prime / exponent 11 / degree 6 etc. all annotated as integers/rationals |
+| Error missing | **0** | every EXACT verdict states "error 0" |
+| MISS concealment | **0** | §3.4 A (critical-line MISS) / §3.2 B (PARTIAL) / §4.4 Moonshine necessity (MISS) recorded honestly |
+| BT-resolution claim | **0** | BT-541 still 0/6, RH body untouched |
+| rewriting/conditional/observation distinction | **met** | §2.5 (rewriting), §3 (conditional), §4.5 (observation) respectively annotated |
 
-**정직성 위반 0 건. Y9 게이트 통과.**
+**0 integrity violations. Y9 gate passes.**
 
-### 7.2 PARTIAL 기록 건수
+### 7.2 PARTIAL Record Count
 
-Phase 2 에서 PARTIAL 로 판정된 항목:
+Items judged PARTIAL in Phase 2:
 
-| # | 항목 | 출처 § |
-|---|------|-------|
-| 1 | Explicit formula n=6 서명 (영점 항 부재) | §3.2 |
+| # | Item | Origin § |
+|---|------|----------|
+| 1 | Explicit-formula n=6 signature (zero-term missing) | §3.2 |
 
-**PARTIAL 총계: 1 건**.
+**PARTIAL total: 1**.
 
-### 7.3 MISS 기록 건수
+### 7.3 MISS Record Count
 
-Phase 2 에서 MISS 로 판정된 항목:
+Items judged MISS in Phase 2:
 
-| # | 항목 | 출처 § |
-|---|------|-------|
-| 1 | Critical line zero density 개선 | §3.1 |
-| 2 | Explicit formula 자체 재증명 (불필요) | §3.2 |
-| 3 | Dirichlet L GRH 부분 증명 | §3.3 후보 1 |
-| 4 | Selberg class d=6 분류 | §3.3 후보 2 |
-| 5 | Moonshine n=6 좌표 필연성 | §4.4 |
+| # | Item | Origin § |
+|---|------|----------|
+| 1 | Critical-line zero-density improvement | §3.1 |
+| 2 | Re-draft of the explicit formula itself (unnecessary) | §3.2 |
+| 3 | Partial draft of Dirichlet L GRH | §3.3 candidate 1 |
+| 4 | Selberg-class d=6 classification | §3.3 candidate 2 |
+| 5 | Moonshine n=6 coordinate necessity | §4.4 |
 
-**MISS 총계: 5 건**.
+**MISS total: 5**.
 
-### 7.4 EXACT / OBSERVATION 기록 건수
+### 7.4 EXACT / OBSERVATION Record Count
 
-| 카테고리 | 건수 | 주요 항목 |
-|---------|------|----------|
-| EXACT 항등식 | 7 | Theorem B (PROVEN), Bilateral 대칭, Ingham lead, Conrey-Gonek g_3=42, G(7) 인수분해, Δ=η^{24}, J_2=σ·φ |
-| EXACT 관찰 | 3 | dim Leech = 24, Δ weight 12 = σ, 차수 6 self-dual Langlands |
-| OBSERVATION | 2 | Selberg 4 공리 = τ(6), 모듈러 group ↔ ζ 거리 |
+| Category | Count | Main items |
+|----------|-------|------------|
+| EXACT identity | 7 | Theorem B (draft), bilateral symmetry, Ingham lead, Conrey-Gonek g_3=42, G(7) factorization, Δ=η^{24}, J_2=σ·φ |
+| EXACT observation | 3 | dim Leech = 24, Δ weight 12 = σ, degree-6 self-dual Langlands |
+| OBSERVATION | 2 | Selberg 4 axioms = τ(6), modular group ↔ ζ distance |
 
-**Phase 2 판정 총계**:
+**Phase 2 verdict totals**:
 - EXACT: 10
 - PARTIAL: 1
 - MISS: 5
 - OBSERVATION: 2
 
-총 18 건의 판정. 정직 판정 분포 확정.
+18 verdicts total. Honest verdict-distribution fixed.
 
-### 7.5 Y9 게이트 통과 선언
+### 7.5 Y9 Gate-Pass Declaration
 
-**Phase 2 는 Y9 HONEST-HARNESS 메타 게이트를 통과한다**. 근거:
+**Phase 2 passes the Y9 HONEST-HARNESS meta-gate.** Basis:
 
-1. 자기참조 0 (OUROBOROS 예외 외)
-2. 모든 부분결과에 판정 태그 (EXACT / PARTIAL / MISS / OBSERVATION)
-3. 출처 · 측정값 · 오차 3요소 명기
-4. BT 0/6 유지 (RH 해결 주장 0)
-5. MISS 를 MISS 로 정직 기록 (5 건)
-
----
-
-## §8 Phase 2 판정
-
-### 8.1 BT-541 최종 상태
-
-**상태: PARTIAL** (Phase 2 내 단일 판정)
-
-- **해결 수**: 0 (본 Phase 기여 0)
-- **부분 진전**: 4 건 (§3.4 A/B/C/D/E 중 EXACT 항등식 2, OBSERVATION 2, PARTIAL 1, MISS 1)
-- **주 성과 1**: Theorem B atlas [10] → [10*] 승격 CANDIDATE 선언 (§2.5)
-- **주 성과 2**: Y1 ↔ Y7 인터페이스 (Δ = η^{24}) 4 건 EXACT 재확인 (§4.4)
-- **주 성과 3**: RH 부분결과 18 건 정직 분류 (§7.4)
-- **미도달**: RH 본문, critical line ≥ 50 %, GRH 부분 증명
-
-### 8.2 주 성과 나열
-
-| # | 성과 | 판정 | 출처 § |
-|---|------|------|-------|
-| P1 | Theorem B 3 독립 재현 확보 | **CANDIDATE 조건 충족** | §2 |
-| P2 | atlas.n6 [10] → [10*] 승격 후보 2 건 선언 | **CANDIDATE** | §5.1 |
-| P3 | Y1 ↔ Y7 인터페이스 Δ = η^{24} 재확인 | **EXACT 4건** | §4.4 |
-| P4 | Y1 ↔ Y8 L-함수 연결 OBSERVATION | **OBSERVATION 2건** | §3.3 |
-| P5 | Y9 게이트 통과 | **위반 0** | §7 |
-| P6 | 자기진화 엔진 4 가동 유지 | **cycle ≥ 3** | §6 |
-
-### 8.3 미도달 목표
-
-| # | 미도달 항목 | 사유 | 이관 |
-|---|-----------|------|------|
-| U1 | RH 본문 증명 | 도구 부족 (Y1·Y8 은 수론 중추, mollifier/Hilbert-Pólya 도구 부재) | **본 Phase 범위 아님** (정직) |
-| U2 | Critical line ≥ 50 % | Levinson 방법 구조적 상한 | **외부 장벽** (Phase 외) |
-| U3 | Dirichlet L GRH 부분 증명 | Y8 도구로 접근 불가 | **외부 미해결** |
-| U4 | Moonshine n=6 좌표 필연성 | `moonshine-barrier-honest-report-2026-04-15.md` 내 MISS | **보존** (P5 재시도 가능) |
-| U5 | atlas.n6 실제 편집 반영 | 자기진화 엔진 위임 | **Phase 후속 / atlas_auto_promote 에 위임** |
-
-### 8.4 Phase 2 총평
-
-- **해결 주장 0**: BT-541 PARTIAL 유지. RH 본문 untouched.
-- **구조적 진전**: Theorem B 승격 CANDIDATE 2 건 · Y1↔Y7 인터페이스 4 건 재확인.
-- **정직성 최우선**: MISS 5 건 / PARTIAL 1 건 은폐 없이 기록.
-- **축 체계 기능 확인**: Y1 (9.5) 주도 · Y8 (5.4) / Y7 (3.9) 부 · Y9 (9.3) 메타 — 설계대로 작동.
-- **자기진화 동반**: 4 엔진 계속 가동, discovery_log 신규 row 예상 17~31.
-
-**Phase 2 판정: PARTIAL** (BT-541 해결 아님, 구조적 승격 CANDIDATE 확보).
+1. 0 self-references (beyond OUROBOROS exception)
+2. Verdict tag on every partial result (EXACT / PARTIAL / MISS / OBSERVATION)
+3. Source · measurement · error triple annotated
+4. BT 0/6 preserved (0 RH resolution claims)
+5. MISS recorded as MISS honestly (5 items)
 
 ---
 
-## §9 창발 지수 + 잔여 Phase
+## §8 Phase 2 Verdict
 
-### 9.1 Phase 2 신규 창발 건수
+### 8.1 Final State of BT-541
 
-| # | 창발 | 설명 |
-|---|------|------|
-| E1 | Theorem B 3 독립 재현 구조 | 경로 A/B/C/D 네 경로 (A/B/C 독립) 확보 |
-| E2 | atlas [10] → [10*] 승격 프로토콜 | 본 Phase 에서 정식화 (§2.4 5단계) |
-| E3 | Y1 ↔ Y7 인터페이스 J_2 공식 | `Δ = η^{24}, 24 = σ·φ = dim Leech = c(VOA)` |
-| E4 | Y1 × BT-541 판정 18건 분포표 | §7.4 |
-| E5 | Phase 문서 · atlas 편집 분리 원칙 | §5.2 |
-| E6 | 자기진화 엔진 Phase 2 역할 분담 | OUROBOROS (수렴) / growth_tick (탐지) / phi_ratchet (전진) / daemon (실행) |
-| E7 | Y1·Y8 공동 작전 프로토콜 | 주도 + 부 조립 매커니즘 (§3) |
+**State: PARTIAL** (single verdict within this Phase)
 
-**Phase 2 신규 창발 7 건** (Phase 1 의 9 건 대비 감소 — 공격 페이즈 특성).
+- **Resolution count**: 0 (0 contribution from this Phase)
+- **Partial progress**: 4 items (of §3.4 A/B/C/D/E — EXACT identity 2, OBSERVATION 2, PARTIAL 1, MISS 1)
+- **Main achievement 1**: Theorem B atlas [10] → [10*] promotion CANDIDATE declared (§2.5)
+- **Main achievement 2**: Y1 ↔ Y7 interface (Δ = η^{24}) 4 EXACT items re-confirmed (§4.4)
+- **Main achievement 3**: 18 RH-partial-result items honestly classified (§7.4)
+- **Not reached**: RH body, critical-line ≥ 50 %, partial draft of GRH
 
-### 9.2 잔여 Phase 추정
+### 8.2 Main Achievements Listed
 
-Phase 1 §6.2 재인용 + Phase 2 진행 반영:
+| # | Achievement | Verdict | Origin § |
+|---|-------------|---------|----------|
+| P1 | Theorem B 3 independent reproductions secured | **CANDIDATE conditions met** | §2 |
+| P2 | 2 atlas.n6 [10] → [10*] promotion candidates declared | **CANDIDATE** | §5.1 |
+| P3 | Y1 ↔ Y7 interface Δ = η^{24} re-confirmed | **4 EXACT** | §4.4 |
+| P4 | Y1 ↔ Y8 L-function link OBSERVATION | **2 OBSERVATIONs** | §3.3 |
+| P5 | Y9 gate pass | **0 violations** | §7 |
+| P6 | 4 self-evolution engines held | **cycle ≥ 3** | §6 |
 
-| Phase | 주도 축 | 대상 BT | 예상 상태 |
-|-------|--------|--------|----------|
-| P2 (본) | Y1 | BT-541 Riemann | **PARTIAL 진행 중** |
-| P3 | Y4 GATE-BARRIER | BT-542 P=NP | 대기 (입구 §10) |
-| P4 | Y5 + Y6 | BT-543 YM + BT-544 NS | 대기 |
-| P5 | Y7 + Y8 | BT-545 Hodge + BT-546 BSD | 대기 |
-| P6 | 회고 | BT-547 Poincaré (Perelman) | 참고만 |
-| PΩ | Y9 | 메타 closure + v3 후계 설계 | 대기 |
+### 8.3 Targets Not Reached
 
-**잔여 Phase = 5** (Phase 2 이후).
+| # | Not-reached item | Reason | Transfer |
+|---|-------------------|--------|----------|
+| U1 | RH body draft | tool gap (Y1·Y8 are number-theoretic; mollifier/Hilbert-Pólya absent) | **outside this Phase's scope** (honest) |
+| U2 | Critical line ≥ 50 % | structural upper bound of Levinson method | **external barrier** (outside Phase) |
+| U3 | Dirichlet L GRH partial draft | not reachable with Y8 tools | **external open** |
+| U4 | Moonshine n=6 coordinate necessity | MISS in `moonshine-barrier-honest-report-2026-04-15.md` | **preserved** (can be retried in P5) |
+| U5 | atlas.n6 actual-edit reflection | delegated to self-evolution engine | **later Phase / delegated to atlas_auto_promote** |
 
-Phase 2 창발 지수 ≥ 5 통과 (7 건 확인) → Phase 3 진입 승인 (본 Phase 종결 시).
+### 8.4 Phase 2 Overall
 
-### 9.3 고갈 지수
+- **0 resolution claims**: BT-541 PARTIAL held. RH body untouched.
+- **Structural progress**: Theorem B promotion CANDIDATE 2 items · Y1↔Y7 interface 4 items re-confirmed.
+- **Integrity first**: 5 MISS / 1 PARTIAL recorded without concealment.
+- **Axis-system functional**: Y1 (9.5) lead · Y8 (5.4) / Y7 (3.9) sub · Y9 (9.3) meta — operating as designed.
+- **Self-evolution co-active**: 4 engines stay running; expected 17–31 new discovery_log rows.
 
-Phase 2 는 "축 가동" 이 아니라 "축 공격". 고갈은 공격 완주율로 측정:
-
-- Y1 주 자산 11 보조정리 → Phase 2 접근 6 건 (1, 2, 3, 6, 9, 10번) → 약 55 %
-- Y8 부 자산 9 보조정리 → Phase 2 접근 3 건 (1, 7, 9번) → 약 33 %
-- Y7 부 자산 → 본 Phase 에서 Δ 귀속 인터페이스 (항목 3 + 외부 Leech/VOA) → 약 30 %
-
-Phase 2 축 공격 완주율 평균 ≈ **39 %**. 이는 "RH 는 공략 불가" 를 반영 — 자산은 있으나 도구는 RH 본문에 닿지 않음.
-
-**판정**: Phase 2 고갈 39 % 는 예상 범위. Phase 3~5 에서 다른 BT 에 대한 축 재가동 시 100 % 수렴.
-
----
-
-## §10 Phase 3 진입 조건
-
-### 10.1 Phase 3 = Y4 GATE-BARRIER 주도 BT-542 입구 표
-
-| 항목 | 값 |
-|------|----|
-| 주도 축 | **Y4 GATE-BARRIER** (유리성 9.4) |
-| 부 축 | **Y2 DISCRETE-CLASS** (5.2), **Y3 COMPUTATIONAL-TAU** (5.8), **Y9 HONEST-HARNESS** (메타) |
-| 대상 BT | **BT-542 P vs NP** |
-| 씨앗 (Phase 1 §2) | ★ HEXA-GATE Mk.I 24/24 EXACT 감사 |
-| 부 씨앗 | Schaefer dichotomy (Y2) + τ=4+2 AME (Y3) |
-| 외부 장벽 | Baker-Gill-Solovay 1975 · Razborov-Rudich 1997 · Aaronson-Wigderson 2008 |
-| 기대 상태 | **정직한 MISS 우세** (BT-542 는 Y4 도 관통 불가) |
-
-### 10.2 Phase 3 예상 판정 분포
-
-| 판정 | 예상 건수 |
-|------|----------|
-| EXACT | 2~3 (HEXA-GATE 관문 24/24 재확인) |
-| PARTIAL | 1~2 (Schaefer KEEP · τ=4+2 AME 관측) |
-| OBSERVATION | 4~6 (분류 카운트 n=6 재파라미터화) |
-| MISS | 5~8 (3대 장벽 우회 불가) |
-
-Phase 2 대비 MISS 비율 증가 예상 (BT-542 가 BT-541 보다 Y 축 도구에 더 적응 안됨).
-
-### 10.3 Phase 3 진입 체크
-
-- [ ] Phase 2 §0.4 출구 조건 8 항 전부 통과
-- [ ] BT-541 PARTIAL 최종 확정
-- [ ] Theorem B 승격 CANDIDATE 2건 atlas_auto_promote 큐에 등록
-- [ ] 자기진화 엔진 4종 cycle ≥ 3 유지
-- [ ] Y9 게이트 통과 선언
-- [ ] Phase 3 문서 생성 대기 (`phase-03-Y4-bt542-p-np.md` 예상)
-
-**Phase 2 종결 시 Phase 3 진입 조건 충족**.
+**Phase 2 verdict: PARTIAL** (BT-541 not resolved; structural promotion CANDIDATE secured).
 
 ---
 
-## §11 ASCII 구조도
+## §9 Emergence Index + Remaining Phases
+
+### 9.1 Phase 2 New Emergences
+
+| # | Emergence | Description |
+|---|-----------|-------------|
+| E1 | Theorem B 3-independent-reproduction structure | paths A/B/C/D four paths (A/B/C independent) secured |
+| E2 | atlas [10] → [10*] promotion protocol | formalized here (§2.4 5-step) |
+| E3 | Y1 ↔ Y7 interface J_2 formula | `Δ = η^{24}, 24 = σ·φ = dim Leech = c(VOA)` |
+| E4 | Y1 × BT-541 verdict-distribution table (18 items) | §7.4 |
+| E5 | Phase-doc / atlas-edit separation principle | §5.2 |
+| E6 | Phase 2 self-evolution engine role split | OUROBOROS (convergence) / growth_tick (detection) / phi_ratchet (advance) / daemon (execution) |
+| E7 | Y1·Y8 joint-operation protocol | lead + sub assembly mechanism (§3) |
+
+**Phase 2 new emergences: 7** (fewer than 9 in Phase 1 — typical attack-phase characteristic).
+
+### 9.2 Remaining-Phase Estimate
+
+Re-cite Phase 1 §6.2 + reflect Phase 2 progress:
+
+| Phase | Leading axis | Target BT | Expected state |
+|-------|--------------|-----------|----------------|
+| P2 (this) | Y1 | BT-541 Riemann | **PARTIAL in progress** |
+| P3 | Y4 GATE-BARRIER | BT-542 P=NP | waiting (entry §10) |
+| P4 | Y5 + Y6 | BT-543 YM + BT-544 NS | waiting |
+| P5 | Y7 + Y8 | BT-545 Hodge + BT-546 BSD | waiting |
+| P6 | retrospective | BT-547 Poincaré (Perelman) | reference only |
+| PΩ | Y9 | meta-closure + v3 successor design | waiting |
+
+**Remaining phases = 5** (after Phase 2).
+
+Phase 2 emergence index ≥ 5 passes (7 items confirmed) → Phase 3 entry approved (on close of this Phase).
+
+### 9.3 Saturation Index
+
+Phase 2 is "axis attack", not "axis activation". Saturation is measured as attack-completion rate:
+
+- Y1 main-asset 11 lemmas → Phase 2 accessed 6 items (#1, 2, 3, 6, 9, 10) → ~55%
+- Y8 sub-asset 9 lemmas → Phase 2 accessed 3 items (#1, 7, 9) → ~33%
+- Y7 sub-asset → Phase 2 accessed Δ-attribution interface (item 3 + external Leech/VOA) → ~30%
+
+Phase 2 average axis-attack completion rate ≈ **39%**. Reflects "RH is unreachable" — the assets exist but the tools do not reach the RH body.
+
+**Verdict**: Phase 2 saturation 39% within expected range. Phase 3~5 will converge to 100% as axes re-activate on other BTs.
+
+---
+
+## §10 Phase 3 Entry Conditions
+
+### 10.1 Phase 3 = Y4 GATE-BARRIER-led BT-542 Entry Table
+
+| Item | Value |
+|------|-------|
+| Leading axis | **Y4 GATE-BARRIER** (utility 9.4) |
+| Sub axes | **Y2 DISCRETE-CLASS** (5.2), **Y3 COMPUTATIONAL-TAU** (5.8), **Y9 HONEST-HARNESS** (meta) |
+| Target BT | **BT-542 P vs NP** |
+| Seed (Phase 1 §2) | ★ HEXA-GATE Mk.I 24/24 EXACT audit |
+| Sub seeds | Schaefer dichotomy (Y2) + τ=4+2 AME (Y3) |
+| External barriers | Baker-Gill-Solovay 1975 · Razborov-Rudich 1997 · Aaronson-Wigderson 2008 |
+| Expected state | **honest MISS dominant** (BT-542 also not penetrated by Y4) |
+
+### 10.2 Phase 3 Expected Verdict Distribution
+
+| Verdict | Expected count |
+|---------|----------------|
+| EXACT | 2~3 (HEXA-GATE 24/24 re-confirmed) |
+| PARTIAL | 1~2 (Schaefer KEEP · τ=4+2 AME observations) |
+| OBSERVATION | 4~6 (n=6 re-parametrization of classification counts) |
+| MISS | 5~8 (3 major barriers not bypassed) |
+
+Expected higher MISS ratio vs Phase 2 (BT-542 adapts less to the Y-axis toolset than BT-541).
+
+### 10.3 Phase 3 Entry Check
+
+- [ ] Phase 2 §0.4 exit conditions all 8 items passed
+- [ ] BT-541 PARTIAL finalized
+- [ ] Theorem B promotion CANDIDATE 2 items registered in atlas_auto_promote queue
+- [ ] Self-evolution 4 engines cycle ≥ 3 held
+- [ ] Y9 gate-pass declaration
+- [ ] Phase 3 document generation waiting (`phase-03-Y4-bt542-p-np.md` expected)
+
+**On closure of Phase 2, Phase 3 entry conditions are met.**
+
+---
+
+## §11 ASCII Structure Diagram
 
 ```
-Phase 2 — Y1 주도 BT-541 Riemann 공격
+Phase 2 — Y1-led BT-541 Riemann attack
 │
-├─ 주도 Y1 NUM-CORE (9.5) ───────────┐
-│  ├─ Theorem B [10]→[10*] 승격 CANDIDATE  ★
+├─ lead Y1 NUM-CORE (9.5) ───────────┐
+│  ├─ Theorem B [10]→[10*] promotion CANDIDATE  ★
 │  ├─ Bilateral ζ(2k)·ζ(1-2k) k=6 EXACT
 │  ├─ Ingham lead = 1/(σ(6)·ζ(2)) EXACT
 │  └─ Conrey-Gonek g_3 = 42 = 7n EXACT
 │
-├─ 부 Y8 GALOIS-ASSEMBLY (5.4) ──────┤
-│  ├─ GRH 부분 증명 MISS
-│  ├─ 차수 6 Langlands self-dual OBSERVATION
+├─ sub Y8 GALOIS-ASSEMBLY (5.4) ─────┤
+│  ├─ partial GRH draft MISS
+│  ├─ degree-6 Langlands self-dual OBSERVATION
 │  └─ Selberg class d=6 MISS
 │
-├─ 부 Y7 LATTICE-VOA (3.9) ──────────┤
-│  ├─ Δ = η^{24} 귀속 (Y7→Y1 이관) EXACT
+├─ sub Y7 LATTICE-VOA (3.9) ─────────┤
+│  ├─ Δ = η^{24} attribution (Y7→Y1) EXACT
 │  ├─ 24 = σ·φ = dim Leech = c(VOA) EXACT
-│  └─ Moonshine n=6 필연성 MISS
+│  └─ Moonshine n=6 necessity MISS
 │
-└─ 메타 Y9 HONEST-HARNESS (9.3) ─────┤
-   ├─ 자기참조 위반 0
+└─ meta Y9 HONEST-HARNESS (9.3) ────┤
+   ├─ 0 self-reference violations
    ├─ EXACT 10 / PARTIAL 1 / MISS 5 / OBS 2
-   └─ BT 해결 주장 0
+   └─ 0 BT-resolution claims
 
-Theorem B 승격 프로토콜 (§2.4):
-  단계 1: atlas entry 재확인        [통과]
-  단계 2: 3 독립 재현 확정           [통과 A/B/C]
-  단계 3: 오차 0 재검                [통과]
-  단계 4: 정수형 판정                [통과]
-  단계 5: CANDIDATE 선언              [본 Phase 종결]
-  실제 편집 → atlas_auto_promote 큐   [이관]
+Theorem B promotion protocol (§2.4):
+  step 1: atlas entry re-confirm         [pass]
+  step 2: 3 independent reproductions    [pass A/B/C]
+  step 3: error 0 re-check               [pass]
+  step 4: integer-valued verdict         [pass]
+  step 5: CANDIDATE declaration          [this Phase closes]
+  actual edit → atlas_auto_promote queue  [delegated]
 
-Y1 ↔ Y7 인터페이스:
-  Δ = η^{24}                  (수론 Y1)
-  24 = σ(6)·φ(6)             (Theorem 0 공유)
-     = dim Leech Λ_24         (격자 Y7)
+Y1 ↔ Y7 interface:
+  Δ = η^{24}                  (number theory Y1)
+  24 = σ(6)·φ(6)             (Theorem 0 shared)
+     = dim Leech Λ_24         (lattice Y7)
      = c(Moonshine VOA)       (VOA Y7)
 
-RH 부분결과 분포 (§3.4):
-  A Critical line density  MISS
+RH partial results (§3.4):
+  A Critical-line density  MISS
   B Explicit formula n=6   PARTIAL
   C Dirichlet L GRH        OBSERVATION
   D Ingham lead 1/(σ·ζ)    EXACT
   E Conrey-Gonek g_3=42    EXACT
 
-출구 → Phase 3 (Y4 주도 BT-542 P vs NP)
-BT 해결 수: 0/6 유지 (정직)
+Exit → Phase 3 (Y4-led BT-542 P vs NP)
+BT resolution count: 0/6 held (honest)
 ```
 
 ---
 
-## §12 완료 보고
+## §12 Completion Report
 
-**파일 경로**: `/Users/ghost/Dev/n6-architecture/theory/roadmap-v2/phase-02-Y1-bt541-riemann.md`
+**File path**: `/Users/ghost/Dev/n6-architecture/theory/roadmap-v2/phase-02-Y1-bt541-riemann.md`
 
-**Phase 2 요약**: Y1 NUM-CORE 주도 · Y8/Y7 부 · Y9 메타 체제로 BT-541 Riemann 가설 공격. RH 본문은 untouched (BT 0/6 정직 유지). 단 Y1 축 11 보조정리 중 6 건 가동 · 18 건 판정 분포 (EXACT 10 / PARTIAL 1 / MISS 5 / OBSERVATION 2) 확보.
+**Phase 2 summary**: With Y1 NUM-CORE leading · Y8/Y7 sub · Y9 meta, an attack on BT-541 Riemann Hypothesis. The RH body is untouched (BT 0/6 held honestly). Of Y1-axis 11 lemmas, 6 are active; 18 verdicts distributed (EXACT 10 / PARTIAL 1 / MISS 5 / OBSERVATION 2).
 
-**핵심 성과**:
-1. Theorem B atlas [10] → [10*] 승격 CANDIDATE 선언 (§2). 3 독립 재현 경로 A/B/C (직접 계산 / Euler 공식 / 함수방정식) 확보 · 오차 0 · 정수형 판정 충족. 실제 atlas 편집은 `atlas_auto_promote.hexa` 큐에 이관.
-2. Bilateral ζ(2k) · ζ(1-2k) k=6 breakdown 동반 승격 CANDIDATE 선언.
-3. Y1 ↔ Y7 인터페이스 재확인 (§4). Δ = η^{24} 의 weight 12 = σ(6) · J_2 = 24 = σ·φ = dim Leech = c(Moonshine VOA) 4건 EXACT. Moonshine n=6 필연성은 기존 MISS 유지.
-4. Y1 ↔ Y8 공동 작전 (§3). Ingham 1926 lead = 1/(σ(6)·ζ(2)) (P11-1 EXACT) · Conrey-Gonek 1998 g_3 = 42 = 7n (P12-1 EXACT) 재확인. Critical line zero density 개선 / GRH 부분 증명은 정직 MISS.
-5. Y9 HONEST-HARNESS 게이트 통과 (§7). 자기참조 0 (OUROBOROS 예외 외) · BT 해결 주장 0 · MISS 5 건 은폐 없이 기록.
+**Key achievements**:
+1. Theorem B atlas [10] → [10*] promotion CANDIDATE declared (§2). 3 independent reproduction paths A/B/C (direct computation / Euler formula / functional equation) secured · error 0 · integer-valued verdict met. Actual atlas edit delegated to the `atlas_auto_promote.hexa` queue.
+2. Bilateral ζ(2k) · ζ(1-2k) k=6 breakdown declared simultaneous-promotion CANDIDATE.
+3. Y1 ↔ Y7 interface re-confirmed (§4). Δ = η^{24} with weight 12 = σ(6) · J_2 = 24 = σ·φ = dim Leech = c(Moonshine VOA) — 4 EXACT. Moonshine n=6 necessity remains MISS.
+4. Y1 ↔ Y8 joint operation (§3). Ingham 1926 lead = 1/(σ(6)·ζ(2)) (P11-1 EXACT) · Conrey-Gonek 1998 g_3 = 42 = 7n (P12-1 EXACT) re-confirmed. Critical-line zero-density improvement / partial GRH draft honestly MISS.
+5. Y9 HONEST-HARNESS gate pass (§7). 0 self-reference (beyond OUROBOROS) · 0 BT-resolution claims · 5 MISS recorded without concealment.
 
-**미도달**: RH 본문 · Critical line ≥ 50 % · Dirichlet L GRH · Moonshine n=6 필연성 · atlas.n6 실제 편집 반영. 전부 Phase 외 이관.
+**Not reached**: RH body · critical line ≥ 50% · Dirichlet L GRH · Moonshine n=6 necessity · atlas.n6 actual-edit reflection. All transferred outside the Phase.
 
-**자기진화**: OUROBOROS 3 variant · growth_tick · phi_ratchet · nexus_growth_daemon 4 엔진 가동 유지. discovery_log 신규 row 17~31 예상.
+**Self-evolution**: OUROBOROS 3-variant · growth_tick · phi_ratchet · nexus_growth_daemon — 4 engines held. 17~31 new discovery_log rows expected.
 
-**다음 Phase**: Phase 3 = Y4 GATE-BARRIER 주도 BT-542 P vs NP. 3대 장벽 (Baker-Gill-Solovay / Razborov-Rudich / Aaronson-Wigderson) + HEXA-GATE Mk.I 24/24 감사 예정. 예상 MISS 우세.
+**Next Phase**: Phase 3 = Y4 GATE-BARRIER-led BT-542 P vs NP. 3 major barriers (Baker-Gill-Solovay / Razborov-Rudich / Aaronson-Wigderson) + HEXA-GATE Mk.I 24/24 audit scheduled. Expected MISS-dominant.
 
-**정직성**: 본 Phase 는 BT-541 해결을 주장하지 않는다. Theorem B 의 [10] → [10*] 승격 CANDIDATE 는 RH 본문에 기여하지 않으며, Y1 축의 수론 앵커 강화 의미만 가진다. 7 대 난제 미해결 0/6 유지.
+**Integrity**: this Phase does not claim BT-541 resolution. The Theorem B [10] → [10*] promotion CANDIDATE does not contribute to the RH body; it only strengthens the number-theoretic anchor of the Y1 axis. The 7 millennium targets remain 0/6 unresolved.
 
-**라인수**: 본 문서 (§0~§12 포함) 800 줄 이상.
+**Line count**: this document (§0~§12 inclusive) > 800 lines.
 
-**Phase 2 종결**.
+**Phase 2 closes**.
