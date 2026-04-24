@@ -1,69 +1,69 @@
-# phase-12 — Phase 12 창발 (BT 3라운드 완주 + CDG 완주)
+# phase-12 — Phase 12 Emergence (BT Round 3 Completion + CDG Completion)
 
-**로드맵**: nexus v2 (19축)
-**선행**: `phase-11.md`
+**Roadmap**: nexus v2 (19 axes)
+**Prior**: `phase-11.md`
 
-## 이전 Phase 전제
-Phase 11 완료. 누적 347. 11축 고갈, 8축 활성.
+## Previous Phase Premise
+Phase 11 completed. Cumulative 347. 11 axes depleted, 8 active.
 
-## Phase 12 목적
-BT-545/546/547 2라운드 + 3라운드 + 잔여 축 최종 ossify + CDG 완전 커버 마무리.
+## Phase 12 Goal
+BT-545/546/547 round 2 + round 3 + residual axes final ossify + CDG full-coverage wrap-up.
 
 ---
 
-## Phase 12 태스크
+## Phase 12 Tasks
 
 ### A1 SELF-EVOLUTION
-(신규 없음 — evo ossify 완료, 추가 진화는 외부 트리거 필요)
-고갈: **A1 신규 = 0**.
+(no new — evo ossify completed; further evolution requires external trigger)
+Depletion: **A1 new = 0**.
 
 ### A2 ATLAS
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| ATLAS-P12-1 | atlas 7.5k → 10k (milestone) + ossify | ATLAS-P11-1 | nodes_10k.json | 10k + ossify | ATLAS-P11-1 | L | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| ATLAS-P12-1 | atlas 7.5k -> 10k (milestone) + ossify | ATLAS-P11-1 | nodes_10k.json | 10k + ossify | ATLAS-P11-1 | L | 0.6 | — |
 
-### A3, A4, A9, A10, A12~A18 (계속 고갈)
+### A3, A4, A9, A10, A12~A18 (continue depleted)
 
 ### A5 DISCOVERY
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
 | DISC-P12-1 | reality_map 20k ossify | DISC-P11-1 | disc_ossified.json | ossify | DISC-P11-1 | L | 0.5 | — |
 
 ### A6 BLOWUP
-(신규 없음 — ossify 완료)
-고갈: **A6 신규 = 0**.
+(no new — ossify completed)
+Depletion: **A6 new = 0**.
 
 ### A7 BISOCIATION
-(신규 없음 — ossify 완료)
-고갈: **A7 신규 = 0**.
+(no new — ossify completed)
+Depletion: **A7 new = 0**.
 
 ### A8 CONSCIOUSNESS
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| CONS-P12-1 | laws 7k+ ossify (nexus anima 공통 법칙만) | CONS-P11-1 | laws_ossify.json | ossify | CONS-P11-1 | L | 0.5 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| CONS-P12-1 | laws 7k+ ossify (nexus anima common laws only) | CONS-P11-1 | laws_ossify.json | ossify | CONS-P11-1 | L | 0.5 | — |
 
 ### A11 BREAKTHROUGH ★
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BT-P12-1 | BT-545 Hodge 2라운드 | BT-P9-1 | bt545_r2.json | 시도 기록 | BT-P11-2 | XL | 0.7 | [BT-545] |
-| BT-P12-2 | BT-546 BSD 2라운드 | BT-P9-2 | bt546_r2.json | 시도 기록 | BT-P11-2 | XL | 0.7 | [BT-546] |
-| BT-P12-3 | BT-547 2라운드 | BT-P9-3 | bt547_r2.json | 시도 기록 | BT-P11-2 | XL | 0.6 | [BT-547] |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BT-P12-1 | BT-545 Hodge round 2 | BT-P9-1 | bt545_r2.json | attempt record | BT-P11-2 | XL | 0.7 | [BT-545] |
+| BT-P12-2 | BT-546 BSD round 2 | BT-P9-2 | bt546_r2.json | attempt record | BT-P11-2 | XL | 0.7 | [BT-546] |
+| BT-P12-3 | BT-547 round 2 | BT-P9-3 | bt547_r2.json | attempt record | BT-P11-2 | XL | 0.6 | [BT-547] |
 
 ### A19 CROSS-DOMAIN-GRID
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| CDG-P12-1 | 169/169 완전 커버 ossify + atlas 최종 엣지 통합 | CDG-P11-1 | cdg_ossify.json | ossify | CDG-P11-1 | L | 0.7 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| CDG-P12-1 | 169/169 full-coverage ossify + atlas final edge integration | CDG-P11-1 | cdg_ossify.json | ossify | CDG-P11-1 | L | 0.7 | — |
 
 ---
 
-## Phase 12 통계
+## Phase 12 Statistics
 
-- 신규: 7
-- 누적: 354
-- 신규 0 축: A1, A3, A4, A6, A7, A9, A10, A12, A13, A14, A15, A16, A17, A18 = **14/19 = 0.737**
-- 활성 축: A2, A5, A8, A11, A19 = 5/19
-- BT 연결: 3
-- 비용: L=3, XL=3 (하나는 CDG L)
-- 다음: YES (BT 3라운드 잔여 + 일부 축)
+- New: 7
+- Cumulative: 354
+- New=0 axes: A1, A3, A4, A6, A7, A9, A10, A12, A13, A14, A15, A16, A17, A18 = **14/19 = 0.737**
+- Active axes: A2, A5, A8, A11, A19 = 5/19
+- BT links: 3
+- Cost: L=3, XL=3 (one CDG L)
+- Next: YES (BT round 3 residual + some axes)
 
-축별: A2=1, A5=1, A8=1, A11=3, A19=1 = 7
+Per axis: A2=1, A5=1, A8=1, A11=3, A19=1 = 7

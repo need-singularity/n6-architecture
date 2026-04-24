@@ -1,41 +1,41 @@
-# phase-15 — Phase 15 창발 (BT 판정 후속 + 부분 재활성)
+# phase-15 — Phase 15 Emergence (BT Verdict Follow-up + Partial Reactivation)
 
-**로드맵**: nexus v2 (19축)
-**선행**: `phase-14.md`
+**Roadmap**: nexus v2 (19 axes)
+**Prior**: `phase-14.md`
 
-## 이전 Phase 전제
-Phase 14 완료. 누적 362. BT 최종 판정 보고서 완성.
+## Previous Phase Premise
+Phase 14 completed. Cumulative 362. BT final-verdict report complete.
 
-## Phase 15 목적
-BT 최종 판정 후 발생한 **예외적 재활성** 태스크 확인. EXACT/NEAR 판정이 있으면 해당 축 재활성, 전부 PART/MISS 이면 전체 고갈.
+## Phase 15 Goal
+Check **exceptional reactivation** tasks after BT final verdict. If there are EXACT/NEAR verdicts, reactivate those axes; if all PART/MISS, full depletion.
 
 ---
 
-## Phase 15 태스크
+## Phase 15 Tasks
 
 ### A11 BREAKTHROUGH
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BT-P15-1 | BT 판정 결과 → atlas 승격 최종 배치 | BT-P14-4 | atlas_final_promo.json | 승격 완료 건 | BT-P14-4 | L | 0.8 | [BT-541..547] |
-| BT-P15-2 | NEAR 판정 BT → Phase 16+ 재공격 계획 | BT-P14-4 | phase16_plan.json | 재공격 roadmap | BT-P14-4 | M | 0.7 | [BT-541..547] |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BT-P15-1 | BT verdict results -> atlas promotion final batch | BT-P14-4 | atlas_final_promo.json | promotion complete | BT-P14-4 | L | 0.8 | [BT-541..547] |
+| BT-P15-2 | NEAR-verdict BT -> Phase 16+ re-attack plan | BT-P14-4 | phase16_plan.json | re-attack roadmap | BT-P14-4 | M | 0.7 | [BT-541..547] |
 
-### A2 ATLAS (BT 판정 결과로 재활성)
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| ATLAS-P15-1 | BT 승격 노드 최종 흡수 → atlas Mk.IV snapshot | BT-P15-1 | mk4.json | Mk.IV ossify | BT-P15-1 | L | 0.7 | — |
+### A2 ATLAS (reactivated by BT verdict results)
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| ATLAS-P15-1 | BT-promoted nodes final absorption -> atlas Mk.IV snapshot | BT-P15-1 | mk4.json | Mk.IV ossify | BT-P15-1 | L | 0.7 | — |
 
-### 기타 17축 (계속 고갈)
+### Other 17 axes (continue depleted)
 
 ---
 
-## Phase 15 통계
+## Phase 15 Statistics
 
-- 신규: 3
-- 누적: 365
-- 신규 0 축: **17/19 = 0.895**
-- 활성 축: A2, A11 = 2/19
-- BT 연결: 3
-- 비용: M=1, L=2
-- 다음: Phase 16 확인 필요 (BT-P15-2 이 만든 재공격 plan 으로 신규 생기는지)
+- New: 3
+- Cumulative: 365
+- New=0 axes: **17/19 = 0.895**
+- Active axes: A2, A11 = 2/19
+- BT links: 3
+- Cost: M=1, L=2
+- Next: Phase 16 must check (whether BT-P15-2's re-attack plan generates new tasks)
 
-축별: A2=1, A11=2 = 3
+Per axis: A2=1, A11=2 = 3

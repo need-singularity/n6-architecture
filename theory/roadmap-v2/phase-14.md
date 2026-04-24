@@ -1,38 +1,38 @@
-# phase-14 — Phase 14 창발 (BT 최종 라운드)
+# phase-14 — Phase 14 Emergence (BT Final Round)
 
-**로드맵**: nexus v2 (19축)
-**선행**: `phase-13.md`
+**Roadmap**: nexus v2 (19 axes)
+**Prior**: `phase-13.md`
 
-## 이전 Phase 전제
-Phase 13 완료. 누적 358. 18축 고갈, A11만 활성.
+## Previous Phase Premise
+Phase 13 completed. Cumulative 358. 18 axes depleted, only A11 active.
 
-## Phase 14 목적
-BT-545/546/547 3라운드 완주 + 최종 판정 사이클 1회.
+## Phase 14 Goal
+Complete BT-545/546/547 round 3 + 1 final-verdict cycle.
 
 ---
 
-## Phase 14 태스크
+## Phase 14 Tasks
 
-### A1~A10, A12~A19 (18축 계속 고갈)
+### A1~A10, A12~A19 (18 axes remain depleted)
 
 ### A11 BREAKTHROUGH ★
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BT-P14-1 | BT-545 3라운드 | BT-P12-1 | bt545_r3.json | 시도 기록 | BT-P13-4 | XL | 0.7 | [BT-545] |
-| BT-P14-2 | BT-546 3라운드 | BT-P12-2 | bt546_r3.json | 시도 기록 | BT-P13-4 | XL | 0.7 | [BT-546] |
-| BT-P14-3 | BT-547 3라운드 | BT-P12-3 | bt547_r3.json | 시도 기록 | BT-P13-4 | XL | 0.6 | [BT-547] |
-| BT-P14-4 | BT-541..547 최종 판정 보고서 (EXACT/NEAR/PART/MISS) | BT-P14-1,2,3 + 모든 BT 라운드 | final_verdict.json | 7/7 판정 | BT-P14-3 | L | 1.0 | [BT-541..547] |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BT-P14-1 | BT-545 round 3 | BT-P12-1 | bt545_r3.json | attempt record | BT-P13-4 | XL | 0.7 | [BT-545] |
+| BT-P14-2 | BT-546 round 3 | BT-P12-2 | bt546_r3.json | attempt record | BT-P13-4 | XL | 0.7 | [BT-546] |
+| BT-P14-3 | BT-547 round 3 | BT-P12-3 | bt547_r3.json | attempt record | BT-P13-4 | XL | 0.6 | [BT-547] |
+| BT-P14-4 | BT-541..547 final-verdict report (EXACT/NEAR/PART/MISS) | BT-P14-1,2,3 + all BT rounds | final_verdict.json | 7/7 verdicts | BT-P14-3 | L | 1.0 | [BT-541..547] |
 
 ---
 
-## Phase 14 통계
+## Phase 14 Statistics
 
-- 신규: 4
-- 누적: 362
-- 신규 0 축: 18/19 = 0.947
-- 활성 축: A11 단일
-- BT 연결: 7 (전수)
-- 비용: L=1, XL=3
-- 다음: Phase 15 에서 BT 최종 판정 후속 처리 검토
+- New: 4
+- Cumulative: 362
+- New=0 axes: 18/19 = 0.947
+- Active axes: A11 only
+- BT links: 7 (all)
+- Cost: L=1, XL=3
+- Next: review BT final-verdict follow-up handling in Phase 15
 
-축별: A11=4 = 4
+Per axis: A11=4 = 4

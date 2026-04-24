@@ -1,37 +1,37 @@
-# phase-16 — Phase 16 창발 (재공격 2차)
+# phase-16 — Phase 16 Emergence (Re-attack Round 2)
 
-**로드맵**: nexus v2 (19축)
-**선행**: `phase-15.md`
+**Roadmap**: nexus v2 (19 axes)
+**Prior**: `phase-15.md`
 
-## 이전 Phase 전제
-Phase 15 완료. 누적 365. 17축 고갈, A2/A11 재활성.
+## Previous Phase Premise
+Phase 15 completed. Cumulative 365. 17 axes depleted, A2/A11 reactivated.
 
-## Phase 16 목적
-Phase 15 에서 재활성된 NEAR 판정 BT 재공격 + 그로 인한 파급 태스크.
+## Phase 16 Goal
+Re-attack the NEAR-verdict BT reactivated in Phase 15 + downstream ripple tasks.
 
 ---
 
-## Phase 16 태스크
+## Phase 16 Tasks
 
 ### A11 BREAKTHROUGH
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BT-P16-1 | NEAR 판정 BT 재공격 4라운드 (최대 3건) | BT-P15-2 phase16_plan | bt_r4.json | 3 라운드 실행 | BT-P15-2 | XL | 0.6 | [BT-541..547] |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BT-P16-1 | NEAR-verdict BT re-attack round 4 (max 3 items) | BT-P15-2 phase16_plan | bt_r4.json | 3 rounds executed | BT-P15-2 | XL | 0.6 | [BT-541..547] |
 
 ### A2 ATLAS
-(Mk.IV 완료, 추가 진화 없음)
-고갈: **A2 신규 = 0**.
+(Mk.IV complete, no further evolution)
+Depletion: **A2 new = 0**.
 
-### 기타 17축 (계속 고갈)
+### Other 17 axes (continue depleted)
 
 ---
 
-## Phase 16 통계
+## Phase 16 Statistics
 
-- 신규: 1
-- 누적: 366
-- 신규 0 축: **18/19 = 0.947**
-- 활성 축: A11 단일
-- BT 연결: 1
-- 비용: XL=1
-- 다음: Phase 17 (재공격 결과 판정 뒤 후속 태스크)
+- New: 1
+- Cumulative: 366
+- New=0 axes: **18/19 = 0.947**
+- Active axes: A11 only
+- BT links: 1
+- Cost: XL=1
+- Next: Phase 17 (follow-up tasks after re-attack verdict)

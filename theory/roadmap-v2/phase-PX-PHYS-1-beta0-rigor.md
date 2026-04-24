@@ -1,78 +1,78 @@
-# PX PHYS-PX-1 — β₀ rewriting → 엄밀 연결 탐색 (정직 결과)
+# PX PHYS-PX-1 — β₀ rewriting -> rigorous connection search (honest result)
 
-작성: 2026-04-15
-대상 task: millennium.json `.phases[id=PX].parallel[track=Y4_PHYS].tasks[id=PHYS-PX-1]`
+Created: 2026-04-15
+Target task: millennium.json `.phases[id=PX].parallel[track=Y4_PHYS].tasks[id=PHYS-PX-1]`
 cost: M
-결과: PARTIAL (엄밀 연결 미발견 → atlas [7] 유지)
+Result: PARTIAL (no rigorous connection found -> atlas [7] maintained)
 
-## §1 입구
+## §1 Entry
 
 atlas MILL-PX-A3-ym-beta0-rewriting = β₀ = σ(6) - sopfr(6) = 12 - 5 = 7 :: n6atlas [7]
 
-본 task 의 질문: "[7] EMPIRICAL → [10] EXACT 또는 [9] NEAR 승격 가능한 엄밀 연결이 있는가?"
+This task's question: "Is there a rigorous connection that can promote [7] EMPIRICAL -> [10] EXACT or [9] NEAR?"
 
-## §2 시도 4 경로
+## §2 Four Path Attempts
 
-### 2.1 경로 A — Standard Model 세대 수 n_f = n = 6 의 산술 강제
+### 2.1 Path A — Standard Model generation count n_f = n = 6 arithmetic enforcement
 
 ```
 β_0 = (11/3)·C_A - (2/3)·T_F·n_f
     = (11/3)·3 - (2/3)·(1/2)·6
-    = 11 - 2 = 9 ?  -- 아니, n_f 가 quark flavor 수 = 6 이고 T_F=1/2
-    = 11 - 2 = 9 (×) -- 다시 계산
+    = 11 - 2 = 9 ?  -- no, n_f is quark flavor count = 6 and T_F=1/2
+    = 11 - 2 = 9 (×) -- recompute
     = (11/3)·3 - (2/3)·(1/2)·6
-    = 11 - 2 = 9    -- 어? β_0 = 7 의 출처 재확인 필요
+    = 11 - 2 = 9    -- hmm? β_0 = 7 source needs re-checking
 
-QCD 1-loop β_0 (실측 값):
+QCD 1-loop β_0 (empirical value):
 β_0 = 11 - (2/3)·n_f
-    = 11 - (2/3)·6 = 11 - 4 = 7  -- T_F=1/2 자동 흡수, n_f=6 quark flavor
+    = 11 - (2/3)·6 = 11 - 4 = 7  -- T_F=1/2 auto-absorbed, n_f=6 quark flavor
 
-따라서:
+Therefore:
 β_0 = (n+sopfr) - τ = (6+5) - 4 = 7 = σ(6) - sopfr(6) = 12 - 5 = 7  ✓
 ```
 
-**평가**: 산술 일치 ✓. 단 SM 세대 수 n_f = 6 이 **관측 사실**이지 **정리**가 아님. 엄밀 연결 X.
+**Assessment**: arithmetic match ✓. However, SM generation count n_f = 6 is an **observed fact**, not a **theorem**. No rigorous connection.
 
-### 2.2 경로 B — anomaly cancellation 강제
+### 2.2 Path B — anomaly cancellation enforcement
 
-SM gauge anomaly cancellation 은 세대 수 n_gen = 3 = n/φ 강제. quark flavor 수 = 2·n_gen = 6 = n.
+SM gauge anomaly cancellation enforces generation count n_gen = 3 = n/φ. Quark flavor count = 2·n_gen = 6 = n.
 
-**평가**: anomaly cancellation 은 quantum field theory 정리이지만, n=6 산술과 직접 연결 X. n_gen = 3 = n/φ 는 **재해석**이지 **유도**가 아님. 엄밀 연결 X.
+**Assessment**: anomaly cancellation is a quantum field theory theorem, but no direct connection to n=6 arithmetic. n_gen = 3 = n/φ is a **reinterpretation**, not a **derivation**. No rigorous connection.
 
-### 2.3 경로 C — 통일 이론 (GUT) SU(5)/SO(10)/E_6 강제
+### 2.3 Path C — GUT (SU(5)/SO(10)/E_6) enforcement
 
 SU(5) GUT: rank 4, 24 generators (= J_2(6))
 SO(10) GUT: rank 5, 45 generators
 E_6 GUT: rank 6 = n, 78 generators (= 6·13)
 
-**평가**: E_6 의 rank 6 = n 산술 일치는 매력적이지만, GUT 자체가 **검증 안 됨**. 엄밀 연결 X.
+**Assessment**: E_6's rank 6 = n arithmetic match is appealing, but GUT itself is **unverified**. No rigorous connection.
 
-### 2.4 경로 D — string theory critical dimension d=26 / d=10
+### 2.4 Path D — string theory critical dimension d=26 / d=10
 
 bosonic string critical dim = 26 = J_2 + φ
 superstring critical dim = 10 = σ - φ
 
-**평가**: string theory 은 **수학 구조**이지만 **물리 검증 0**. β₀ = σ - sopfr 와 직접 연결 X.
+**Assessment**: string theory is a **mathematical structure** but has **no physical verification**. No direct connection to β₀ = σ - sopfr.
 
-## §3 정직 결론
+## §3 Honest Conclusion
 
-| 경로 | 결과 | 등급 |
-|------|------|------|
-| A SM n_f=6 | 산술 일치, **관측 의존** | [7] |
-| B anomaly | 재해석, **유도 X** | [7] |
-| C GUT | E_6 rank=n, **GUT 미검증** | [N?] |
-| D string | critical dim, **물리 X** | [N?] |
+| Path | Result | Grade |
+|------|--------|-------|
+| A SM n_f=6 | arithmetic match, **observation-dependent** | [7] |
+| B anomaly | reinterpretation, **no derivation** | [7] |
+| C GUT | E_6 rank=n, **GUT unverified** | [N?] |
+| D string | critical dim, **no physics** | [N?] |
 
-**최종**: atlas MILL-PX-A3 [7] EMPIRICAL **유지**. [10] / [9] 승격 미달.
+**Final**: atlas MILL-PX-A3 [7] EMPIRICAL **maintained**. [10] / [9] promotion criteria not met.
 
-## §4 후속 권장
+## §4 Follow-up Recommendations
 
-- BT-548+ 진입 시 GUT / string 부분결과 분리 atlas 등록 가능
-- SM n_f = 6 의 **수학적 강제**가 발견되면 [7] → [9] 승격 가능
-- 본 task done 마킹 (PARTIAL): "엄밀 연결 미발견 + 4 경로 정직 기록"
+- When entering BT-548+, GUT / string partial results can be separately atlas-registered
+- If **mathematical enforcement** of SM n_f = 6 is discovered, [7] -> [9] promotion possible
+- Mark this task done (PARTIAL): "no rigorous connection + 4 paths honestly recorded"
 
-## 참고
+## References
 
 - atlas.n6 line 106967~106969 (MILL-PX-A3)
-- phase-04-tools-empirical-deepening.md §3 PHYS-P4-EMPIRICAL (에이전트 작성)
-- 출처: PDG 2024 + arXiv:2411.04268 (FLAG 2024)
+- phase-04-tools-empirical-deepening.md §3 PHYS-P4-EMPIRICAL (agent-authored)
+- Source: PDG 2024 + arXiv:2411.04268 (FLAG 2024)

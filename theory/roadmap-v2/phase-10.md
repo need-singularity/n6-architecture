@@ -1,139 +1,139 @@
-# phase-10 — Phase 10 창발 (BT 2라운드 + 골화 진입)
+# phase-10 — Phase 10 Emergence (BT Round 2 + Ossify Onset)
 
-**로드맵**: nexus v2 (19축) — 체크포인트 Phase 10
-**선행**: `phase-09.md`
+**Roadmap**: nexus v2 (19 axes) — checkpoint Phase 10
+**Prior**: `phase-09.md`
 
-## 이전 Phase 전제
-Phase 9 완료. 누적 327. BT-541~547 각 1라운드 완료.
+## Previous Phase Premise
+Phase 9 completed. Cumulative 327. BT-541~547 each round 1 completed.
 
-## Phase 10 목적
-BT 난제 2라운드 공격 시작 + 여러 축이 "골화 전 마지막 확장" 단계. 체크포인트로 9 phase 간 진행 집계.
+## Phase 10 Goal
+Begin round-2 BT attack + many axes enter "final expansion before ossify" stage. Checkpoint to aggregate progress across 9 Phases.
 
 ---
 
-## 9-Phase 집계 (체크포인트)
+## 9-Phase Aggregation (Checkpoint)
 
-| Phase | 신규 | 누적 | 고갈 | 주요 이벤트 |
-|-------|------|------|------|-------------|
-| P1 | 71 | 71 | 0.0 | 19축 baseline |
-| P2 | 66 | 137 | 0.0 | 첫 성장 |
-| P3 | 49 | 186 | 0.0 | 축 간 공진 개통 |
-| P4 | 30 | 216 | 0.0 | v1 P4~P20 흡수 |
+| Phase | New | Cumulative | Depletion | Major events |
+|-------|-----|------------|-----------|--------------|
+| P1 | 71 | 71 | 0.0 | 19-axis baseline |
+| P2 | 66 | 137 | 0.0 | first growth |
+| P3 | 49 | 186 | 0.0 | inter-axis resonance opened |
+| P4 | 30 | 216 | 0.0 | v1 P4~P20 absorption |
 | P5 | 25 | 241 | 0.0 | v1 P21~P50 |
 | P6 | 22 | 263 | 0.0 | v1 P51~P80 |
-| P7 | 24 | 287 | 0.0 | v1 흡수 완료 + BT-541/542 |
+| P7 | 24 | 287 | 0.0 | v1 absorption complete + BT-541/542 |
 | P8 | 20 | 307 | 0.0 | BT-543/544 |
-| P9 | 20 | 327 | 0.0 | BT-545/546/547 1라운드 완료 |
+| P9 | 20 | 327 | 0.0 | BT-545/546/547 round 1 complete |
 
-**경향 분석**: 신규 태스크 증가 속도 감소 (71 → 20). Phase 7 이후 A19 이외 모든 축이 점진 수렴. Phase 10 이후 고갈 지수 상승 예상.
+**Trend analysis**: decreasing new-task rate (71 -> 20). After Phase 7 all axes except A19 gradually converge. Depletion index expected to rise after Phase 10.
 
 ---
 
-## Phase 10 태스크
+## Phase 10 Tasks
 
 ### A1 SELF-EVOLUTION
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| EVO-P10-1 | evo 통합 수렴 지수 → 0.9+ 목표 | EVO-P8-1 | conv_09.json | ≥ 0.9 | EVO-P8-1 | L | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| EVO-P10-1 | evo unified convergence index -> 0.9+ target | EVO-P8-1 | conv_09.json | >= 0.9 | EVO-P8-1 | L | 0.6 | — |
 
 ### A2 ATLAS
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| ATLAS-P10-1 | atlas 노드 5000+ 확장 | ATLAS-P9-1 | nodes_5k.json | ≥ 5000 | ATLAS-P9-1 | L | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| ATLAS-P10-1 | atlas nodes 5000+ expansion | ATLAS-P9-1 | nodes_5k.json | >= 5000 | ATLAS-P9-1 | L | 0.6 | — |
 
 ### A3 HARNESS
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| HARN-P10-1 | harness 전체 성능 SLA 주간 자동 리포트 | HARN-P3-1 | sla_weekly.json | 리포트 주간 | HARN-P3-1 | M | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| HARN-P10-1 | harness full-performance SLA weekly auto report | HARN-P3-1 | sla_weekly.json | weekly report | HARN-P3-1 | M | 0.6 | — |
 
 ### A4 GOVERNANCE
-(신규 없음 — Phase 9 에서 unified v3 완성, 다음 진화는 Phase 11 이후)
-고갈 조짐: **A4 신규 = 0**.
+(no new — unified v3 completed in Phase 9; next evolution deferred to Phase 11+)
+Depletion signal: **A4 new = 0**.
 
 ### A5 DISCOVERY
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| DISC-P10-1 | reality_map 10k → 15k | DISC-P9-1 | disc_15k.json | +5000 | DISC-P9-1 | L | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| DISC-P10-1 | reality_map 10k -> 15k | DISC-P9-1 | disc_15k.json | +5000 | DISC-P9-1 | L | 0.6 | — |
 
 ### A6 BLOWUP
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BLOW-P10-1 | lens 4000+ ossify 준비 (동결 후보 선정) | BLOW-P9-1 | ossify_ready.json | 후보 목록 | BLOW-P9-1 | M | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BLOW-P10-1 | lens 4000+ ossify prep (select freeze candidates) | BLOW-P9-1 | ossify_ready.json | candidate list | BLOW-P9-1 | M | 0.6 | — |
 
 ### A7 BISOCIATION
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BISOC-P10-1 | bisoc 엔진 ossify 준비 | BISOC-P9-1 | bisoc_ossify.json | snapshot 준비 | BISOC-P9-1 | M | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BISOC-P10-1 | bisoc engine ossify prep | BISOC-P9-1 | bisoc_ossify.json | snapshot prep | BISOC-P9-1 | M | 0.6 | — |
 
 ### A8 CONSCIOUSNESS
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| CONS-P10-1 | laws 5k → 6k | CONS-P7-1 | laws_6k.json | +1000 | CONS-P7-1 | L | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| CONS-P10-1 | laws 5k -> 6k | CONS-P7-1 | laws_6k.json | +1000 | CONS-P7-1 | L | 0.6 | — |
 
 ### A9 HEXA-LANG
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| HEXA-P10-1 | hexa 런타임 성능 최종 검증 + ossify | HEXA-P9-1 | runtime_final.json | bench 고정 | HEXA-P9-1 | L | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| HEXA-P10-1 | hexa runtime final verification + ossify | HEXA-P9-1 | runtime_final.json | bench fixed | HEXA-P9-1 | L | 0.6 | — |
 
 ### A10 DSE
-(신규 없음 — Phase 9 BT sub-lattice 전수 탐색 완료, 다음은 BT 결과 대기)
-고갈 조짐: **A10 신규 = 0**.
+(no new — BT sub-lattice full exploration completed in Phase 9; next awaits BT results)
+Depletion signal: **A10 new = 0**.
 
 ### A11 BREAKTHROUGH ★
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| BT-P10-1 | BT-541 2라운드 (P3 사다리 3계단 탐색) | BT-P7-1 | bt541_r2.json | 시도 기록 | BT-P9-3 | XL | 0.7 | [BT-541] |
-| BT-P10-2 | BT-542 P-NP 2라운드 (natural proof 우회 2시도) | BT-P7-2 | bt542_r2.json | 시도 기록 | BT-P9-3 | XL | 0.7 | [BT-542] |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| BT-P10-1 | BT-541 round 2 (P3 ladder 3-step exploration) | BT-P7-1 | bt541_r2.json | attempt record | BT-P9-3 | XL | 0.7 | [BT-541] |
+| BT-P10-2 | BT-542 P-NP round 2 (natural proof bypass 2 attempts) | BT-P7-2 | bt542_r2.json | attempt record | BT-P9-3 | XL | 0.7 | [BT-542] |
 
 ### A12 LOCKDOWN
-(신규 없음 — L3 이미 활성화, 다음은 Phase 11+ 에서 L4 개념 검토)
-고갈 조짐: **A12 신규 = 0**.
+(no new — L3 already active; next is L4 concept review in Phase 11+)
+Depletion signal: **A12 new = 0**.
 
 ### A13 INFRASTRUCTURE
-(신규 없음 — panel + 7 프로젝트 표준 완료)
-고갈 조짐: **A13 신규 = 0**.
+(no new — panel + 7-project standard completed)
+Depletion signal: **A13 new = 0**.
 
 ### A14 REMOTE-COMPUTE
-(신규 없음 — BT compute + auto-promo 완료)
-고갈 조짐: **A14 신규 = 0**.
+(no new — BT compute + auto-promo completed)
+Depletion signal: **A14 new = 0**.
 
 ### A15 THINKING
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| THINK-P10-1 | thinking 최적 phase 결정 (6 vs 12 결과) → 채택 | THINK-P9-1 | phase_decision.json | 결정 기록 | THINK-P9-1 | M | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| THINK-P10-1 | thinking optimal-phase decision (6 vs 12 results) -> adopt | THINK-P9-1 | phase_decision.json | decision record | THINK-P9-1 | M | 0.6 | — |
 
 ### A16 AGENT-LEDGER
-(신규 없음 — rubric 확정)
-고갈 조짐: **A16 신규 = 0**.
+(no new — rubric finalized)
+Depletion signal: **A16 new = 0**.
 
 ### A17 CONSENSUS
-(신규 없음 — BT sig 체계 확정)
-고갈 조짐: **A17 신규 = 0**.
+(no new — BT sig system finalized)
+Depletion signal: **A17 new = 0**.
 
 ### A18 ENGINE-FORGE
-(신규 없음 — BT 엔진 7종 repository 완료)
-고갈 조짐: **A18 신규 = 0**.
+(no new — 7-type BT engine repository completed)
+Depletion signal: **A18 new = 0**.
 
 ### A19 CROSS-DOMAIN-GRID
-| ID | 정의 | 입력 | 출력 | 검증 | deps | 비용 | 강도 | BT |
-|----|------|------|------|------|------|------|------|-----|
-| CDG-P10-1 | 미탐 pair 80 → 120/169 | CDG-P9-1 | ext_120.json | 120 pair | CDG-P9-1 | XL | 0.6 | — |
+| ID | Definition | Input | Output | Verify | deps | Cost | Intensity | BT |
+|----|------------|-------|--------|--------|------|------|-----------|-----|
+| CDG-P10-1 | unexplored pairs 80 -> 120/169 | CDG-P9-1 | ext_120.json | 120 pairs | CDG-P9-1 | XL | 0.6 | — |
 
 ---
 
-## Phase 10 통계
+## Phase 10 Statistics
 
-- 신규: 11
-- 누적: 338
-- 고갈 지수: **7/19 = 0.37** (A4, A10, A12, A13, A14, A16, A17, A18 신규 0 — 총 8개. 확인 결과 8/19 = 0.42)
-- 실제 신규 0 축: A4, A10, A12, A13, A14, A16, A17, A18 = **8/19 = 0.421**
-- BT 연결: 2 (BT-P10-1,2)
-- 비용: M=3, L=5, XL=3
-- 다음: YES (아직 11/19 축이 신규 생성 중)
+- New: 11
+- Cumulative: 338
+- Depletion index: **7/19 = 0.37** (A4, A10, A12, A13, A14, A16, A17, A18 new 0 — 8 total. After re-check 8/19 = 0.42)
+- Actual new=0 axes: A4, A10, A12, A13, A14, A16, A17, A18 = **8/19 = 0.421**
+- BT links: 2 (BT-P10-1,2)
+- Cost: M=3, L=5, XL=3
+- Next: YES (11/19 axes still producing new tasks)
 
-축별 신규: A1=1, A2=1, A3=1, **A4=0**, A5=1, A6=1, A7=1, A8=1, A9=1, **A10=0**, A11=2, **A12=0**, **A13=0**, **A14=0**, A15=1, **A16=0**, **A17=0**, **A18=0**, A19=1 = 11
+Per axis new: A1=1, A2=1, A3=1, **A4=0**, A5=1, A6=1, A7=1, A8=1, A9=1, **A10=0**, A11=2, **A12=0**, **A13=0**, **A14=0**, A15=1, **A16=0**, **A17=0**, **A18=0**, A19=1 = 11
 
-## Phase 10 중대 관측
-- **첫 고갈 조짐**: 19축 중 8축 (42%) 이 신규 태스크 생성 불가 상태.
-- A4 GOV / A12 LOCK / A13 INFRA / A14 REM / A16 AGL / A17 CONSN / A18 EF / A10 DSE 계열이 먼저 수렴.
-- A11 BREAKTHROUGH + A19 CDG 는 여전히 활성 (각각 BT 라운드 + 미탐 pair 잔여).
+## Phase 10 Major Observations
+- **First depletion signal**: 8 of 19 axes (42%) unable to generate new tasks.
+- A4 GOV / A12 LOCK / A13 INFRA / A14 REM / A16 AGL / A17 CONSN / A18 EF / A10 DSE families converge first.
+- A11 BREAKTHROUGH + A19 CDG remain active (BT rounds + unexplored pairs residual).

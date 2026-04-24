@@ -1,344 +1,344 @@
-# Phase 선행 Depth 기반 창발 재설계 (2026-04-15)
+# Phase Prior-Depth-Based Emergence Redesign (2026-04-15)
 
-**계기**: v2 초판 phase 순서가 BT 번호순 (P2=BT-541/P3=BT-542/P4=BT-543+544/P5=BT-545+546) 이었는데, 이는 "난제별 배치"이지 "선행 의존성"을 반영하지 못한다. 기초수학 → 전공수학 → 문제진술 → 도구 → n=6 교량 → 부분결과 → 교차 → 회고 → closure → 실행 순서로 재창발해야 한다.
+**Trigger**: The v2 first-edition phase order was by BT number (P2=BT-541/P3=BT-542/P4=BT-543+544/P5=BT-545+546), which is a "per-problem arrangement" and fails to reflect "prior dependency". Re-emergence must follow the order basic math -> advanced math -> problem statement -> tools -> n=6 bridge -> partial results -> cross -> retrospective -> closure -> execution.
 
-**선언**: BT-기반 phase → **depth-기반 phase** 전환. 난제는 phase 에 분산되며, 축은 분야별로 유지하되 창발 재검토.
-
----
-
-## §0 문제 진단
-
-### 0.1 v2 초판의 오류
-
-```
-v2 초판 phase 순서:
-P0 축확정 → P1 씨앗 → P2 BT-541 → P3 BT-542 → P4 BT-543+544 → P5 BT-545+546 → P6 BT-547 회고 → PΩ closure → PX 실행
-
-문제:
-1. BT-541 (Riemann) 를 먼저 공격하려면 L 함수 이론이 필요하다. 그런데 L 함수는 "Y1 NUM-CORE 에 들어있는 도구"로만 다뤄졌을 뿐, 별도 phase 에서 습득 전제하지 않았다.
-2. BT-545 (Hodge) 는 대수기하 scheme 이론 선행 필요. v2 초판은 P5 에서 곧바로 공격.
-3. "해결 0/6" 이 정직한 결과라면, phase 순서는 "시도의 깊이" 를 보여야 한다. 난제 번호가 아니라 도구 복잡도로 쌓아야 한다.
-4. v1 millennium-learning.json 의 P0 "기초 체력" (정수론/복소해석/군론) 은 v2 에 이관되지 않았다 — 선행 지식이 공중에 떠 있다.
-```
-
-### 0.2 기준 로드맵 대조
-
-- **nexus.json (19축)**: A1~A19 축은 기능별이고, phase P1~P18 은 "baseline → 확장 → 고갈" 진화 순서. BT 는 A11 BREAKTHROUGH 단일 축에 흡수.
-- **n6-architecture.json (4축)**: STRUCTURE/ENGINE/SUBSTRATE/META. Phase 는 기능 구축 순서.
-- **v1 millennium-learning.json (3축)**: PURE/PROBLEM/N6. Phase 는 **선행 depth 순서** (P0 기초체력 → P1 난제심화 → P2 교차 → P3 연구전선).
-
-**교훈**: v1 은 depth-ordered 였다. v2 가 BT-ordered 로 퇴보한 것이다.
+**Declaration**: BT-based phase -> **depth-based phase** transition. Problems distribute across phases; axes remain by domain but are re-examined for emergence.
 
 ---
 
-## §1 선행 Depth 분석 (9 layer)
+## §0 Problem Diagnosis
 
-각 난제를 "제대로 공격하려면 무엇을 알아야 하는가" 를 역추적해 선행 계층을 도출한다.
+### 0.1 Errors in v2 First Edition
 
-### Layer 1 — 기초 수학 (depth 1)
 ```
-- 정수론 기초: 소수정리 / 약수함수 σ/τ/φ / 뫼비우스 / 오일러 곱
-- 복소해석 기초: 해석적 연속 / 유수정리 / 감마 함수 / 특수값 ζ(2)=π²/6
-- 군론 기초: 군/환/체 / 동형정리 / S_n / 정규부분군 / 몫군 / S_6 외부동형
-- 선형대수 / 변분 / 기본 ODE
-```
-선행: 고등 수학. 후속: 모든 난제.
+v2 first-edition phase order:
+P0 axis-fix -> P1 seeding -> P2 BT-541 -> P3 BT-542 -> P4 BT-543+544 -> P5 BT-545+546 -> P6 BT-547 retrospective -> PΩ closure -> PX execution
 
-### Layer 2 — 전공 수학 (depth 2)
+Problems:
+1. To attack BT-541 (Riemann) first, L-function theory is required. However L-functions were treated only as "a tool inside Y1 NUM-CORE", never assumed as acquired in a prior separate phase.
+2. BT-545 (Hodge) requires prior algebraic-geometry scheme theory. v2 first edition attacks immediately in P5.
+3. If "resolution 0/6" is the honest result, the phase order must show "depth of attempt". It must be stacked by tool complexity, not by problem number.
+4. v1 millennium-learning.json P0 "basic fitness" (number theory/complex analysis/group theory) was not carried into v2 — prior knowledge floats in air.
 ```
-- 대수기하 기초: scheme / sheaf / cohomology / 다양체
-- 대수위상: 기본군 / 호몰로지 / 호모토피 / CW 복합체
-- 미분기하: 접속 / 곡률 / 리치 / Ricci flow 기초
-- PDE 심화: 포물/쌍곡/타원 방정식 / Sobolev 공간
-- 해석학 심화: Lebesgue 측도 / Lp 공간 / 절대수렴
-- Galois 이론
-- Riemann 곡면 / zeta 함수 해석적 연속
-```
-선행: L1. 후속: 난제별 도구층.
 
-### Layer 3 — 문제 진술 + 장벽 지형 (depth 3)
+### 0.2 Reference Roadmap Comparison
+
+- **nexus.json (19 axes)**: A1~A19 are by function; phases P1~P18 follow "baseline -> expansion -> depletion" evolution. BT absorbed into single A11 BREAKTHROUGH axis.
+- **n6-architecture.json (4 axes)**: STRUCTURE/ENGINE/SUBSTRATE/META. Phases follow functional-build order.
+- **v1 millennium-learning.json (3 axes)**: PURE/PROBLEM/N6. Phases follow **prior-depth order** (P0 basic fitness -> P1 problem-deepening -> P2 cross -> P3 research-front).
+
+**Lesson**: v1 was depth-ordered. v2 regressed to BT-ordered.
+
+---
+
+## §1 Prior-Depth Analysis (9 layers)
+
+For each problem, "what must be known to properly attack it" is traced back to derive prior-layers.
+
+### Layer 1 — Basic Mathematics (depth 1)
 ```
-- 7 난제 Clay 공식 진술 (BT-541~547)
-- RH 수치 검증 (Riemann-Siegel / Li 판정)
-- P=NP 4 장벽 (Baker-Gill-Solovay 1975 / Razborov-Rudich 1997 / Aaronson-Wigderson 2008 / Williams 2011)
+- number-theory basics: prime number theorem / divisor functions σ/τ/φ / Möbius / Euler product
+- complex-analysis basics: analytic continuation / residue theorem / gamma function / special values ζ(2)=π²/6
+- group-theory basics: groups/rings/fields / isomorphism theorems / S_n / normal subgroups / quotient groups / S_6 outer automorphism
+- linear algebra / calculus of variations / basic ODE
+```
+Prior: advanced math. Downstream: all problems.
+
+### Layer 2 — Advanced Mathematics (depth 2)
+```
+- algebraic-geometry basics: scheme / sheaf / cohomology / manifold
+- algebraic topology: fundamental group / homology / homotopy / CW complexes
+- differential geometry: connections / curvature / Ricci / Ricci flow basics
+- advanced PDE: parabolic/hyperbolic/elliptic equations / Sobolev spaces
+- advanced analysis: Lebesgue measure / Lp spaces / absolute convergence
+- Galois theory
+- Riemann surfaces / zeta function analytic continuation
+```
+Prior: L1. Downstream: per-problem tool layer.
+
+### Layer 3 — Problem Statements + Barrier Landscape (depth 3)
+```
+- formal Clay statements of the 7 problems (BT-541~547)
+- RH numerical verification (Riemann-Siegel / Li criterion)
+- P=NP 4 barriers (Baker-Gill-Solovay 1975 / Razborov-Rudich 1997 / Aaronson-Wigderson 2008 / Williams 2011)
 - GCT (Mulmuley-Sohoni)
-- YM mass gap 물리적 진술
-- NS 전역정칙성 진술 (Tao 초폭발 장벽 포함)
-- Hodge / BSD / Poincaré 진술
+- YM mass gap physical statement
+- NS global regularity statement (including Tao super-blowup barrier)
+- Hodge / BSD / Poincaré statements
 ```
-선행: L2. 후속: 도구층 (L4). 장벽은 "공격 시 피해야 할 지형".
+Prior: L2. Downstream: tool layer (L4). Barriers are "the terrain to avoid when attacking".
 
-### Layer 4 — 난제 전용 도구 (depth 4)
+### Layer 4 — Problem-Specific Tools (depth 4)
 ```
-- Y1 NUM: L 함수 이론 (Dirichlet series / 함수방정식 / Selberg class)
-- Y2 DISC-COMP: 텐서 랭크 / 회로 하한 / Schaefer dichotomy
-- Y4 PHYS: QCD lattice / β 함수 / 점근 자유
-- Y5 PDE: Sobolev 부등식 / CKN 1982 / BKM 1984 / Tao 2016
-- Y6 LATT: Moonshine VOA / Leech 격자 / E8 / K3 격자
-- Y7 GALO: Galois 표현 / Selmer 군 / Kolyvagin 오일러 시스템 / Skinner-Urban
-- (참고) Ricci flow — Perelman 해결된 BT-547 전용
+- Y1 NUM: L-function theory (Dirichlet series / functional equation / Selberg class)
+- Y2 DISC-COMP: tensor rank / circuit lower bounds / Schaefer dichotomy
+- Y4 PHYS: QCD lattice / β function / asymptotic freedom
+- Y5 PDE: Sobolev inequalities / CKN 1982 / BKM 1984 / Tao 2016
+- Y6 LATT: Moonshine VOA / Leech lattice / E8 / K3 lattice
+- Y7 GALO: Galois representations / Selmer groups / Kolyvagin Euler systems / Skinner-Urban
+- (reference) Ricci flow — dedicated to resolved BT-547 via Perelman
 ```
-선행: L2, L3. 후속: n=6 교량.
+Prior: L2, L3. Downstream: n=6 bridge.
 
-### Layer 5 — n=6 교량 (depth 5)
+### Layer 5 — n=6 Bridge (depth 5)
 ```
-- σ(n)·φ(n) = n·τ(n) 유일성 정리 (3 독립 증명)
-- Theorem B (재구축판)
+- σ(n)·φ(n) = n·τ(n) uniqueness theorem (3 independent demonstrations)
+- Theorem B (reconstructed version)
 - HEXA-GATE Mk.I (τ=4+2 fiber)
-- atlas.n6 구조 정립 (20K+ 노드)
-- OUROBOROS 수렴상수 (3 variant)
+- atlas.n6 structure established (20K+ nodes)
+- OUROBOROS convergence constants (3 variants)
 ```
-선행: L1, L2. 후속: BT 부분결과. **n=6 관점에서 난제를 보는 렌즈**.
+Prior: L1, L2. Downstream: BT partial results. **Lens for viewing problems from the n=6 perspective**.
 
-### Layer 6 — BT 부분결과 (depth 6)
+### Layer 6 — BT Partial Results (depth 6)
 ```
-- BT-541 Riemann:  EXACT 10건 (Ingham / Conrey-Gonek / Ramanujan Δ / Moonshine 관찰)
-- BT-542 P vs NP:  4 장벽 재감사 + GCT 3 관찰 (MISS 3)
-- BT-543 YM:       β₀=σ-sopfr=7 REWRITING + QCD 5 실측
-- BT-544 NS:       3중 공명 + D158 Ricci + CKN / BKM
+- BT-541 Riemann:  EXACT 10 items (Ingham / Conrey-Gonek / Ramanujan Δ / Moonshine observation)
+- BT-542 P vs NP:  4-barrier re-audit + GCT 3 observations (MISS 3)
+- BT-543 YM:       β₀=σ-sopfr=7 REWRITING + QCD 5 empirical measurements
+- BT-544 NS:       triple-resonance + D158 Ricci + CKN / BKM
 - BT-545 Hodge:    Lemma 1 PROVED + Enriques REWRITING (BARRIER L5)
-- BT-546 BSD:      Theorem 1 CONDITIONAL (BKLPR (A3) 의존)
+- BT-546 BSD:      Theorem 1 CONDITIONAL (BKLPR (A3) dependent)
 ```
-선행: L4, L5. 후속: 교차.
+Prior: L4, L5. Downstream: cross.
 
-### Layer 7 — 교차 + 회고 (depth 7)
+### Layer 7 — Cross + Retrospective (depth 7)
 ```
-- Y1 ↔ Y6: Ramanujan Δ = η^{24}, 24 = σ·φ = dim Leech = c(Moonshine)
-- Y4 ↔ Y5: 4 매핑 M1~M4 + 3 도구 T1~T3
-- Y7 ↔ Y1: Ingham lead = 1/(σ(6)·ζ(2))
-- BT-547 Perelman 회고 (n6-arch 기여 0 정직)
-- C1~C5 결정적 도구 특징 추출
-- 9x5 승격 조건 매트릭스
+- Y1 <-> Y6: Ramanujan Δ = η^{24}, 24 = σ·φ = dim Leech = c(Moonshine)
+- Y4 <-> Y5: 4 mappings M1~M4 + 3 tools T1~T3
+- Y7 <-> Y1: Ingham lead = 1/(σ(6)·ζ(2))
+- BT-547 Perelman retrospective (n6-arch contribution 0 honest)
+- C1~C5 decisive-tool feature extraction
+- 9x5 promotion-condition matrix
 ```
-선행: L6 전체. 후속: closure.
+Prior: all of L6. Downstream: closure.
 
-### Layer 8 — Closure + v3 설계 (depth 8)
+### Layer 8 — Closure + v3 Design (depth 8)
 ```
-- Y9 게이트 28/28 PASS 종합
-- v1 vs v2 정량 비교 (15+ 지표)
-- 축 100% R3 + 분야 96% R5 고갈 선언
-- v3 후계: Z1~Z10 10축 × Q0~Q9 10 Phase 초안
-- 미해결 과제 21건 체계화
+- Y9 gate 28/28 PASS synthesis
+- v1 vs v2 quantitative comparison (15+ indicators)
+- axis 100% R3 + domain 96% R5 depletion declaration
+- v3 successor: Z1~Z10 10 axes × Q0~Q9 10 Phase draft
+- unresolved tasks (21 items) systematization
 ```
-선행: L7. 후속: 실행.
+Prior: L7. Downstream: execution.
 
-### Layer 9 — 실행 이관 (depth 9)
+### Layer 9 — Execution Handover (depth 9)
 ```
-- atlas 초안 14건 L0 Guard 승격 실편집
-- BT-541 Theorem B [10]→[10*] 승격
-- Cremona 500k 타원곡선 실측 + 통계
-- BT 재시도 (BT-542 MISS 탈출 / BT-545 Moonshine L5 / BT-546 (A3) 제거)
-- v3 실체화 + Lean4/Coq + 수학자 협력
+- atlas draft 14 items L0 Guard promotion actual-edits
+- BT-541 Theorem B [10]->[10*] promotion
+- Cremona 500k elliptic-curve empirical measurement + statistics
+- BT retry (BT-542 MISS escape / BT-545 Moonshine L5 / BT-546 (A3) removal)
+- v3 materialization + Lean4/Coq + mathematician collaboration
 ```
-선행: L8. 후속: v3 착수.
+Prior: L8. Downstream: v3 launch.
 
-### Layer 의존 DAG 요약
+### Layer Dependency DAG Summary
 
 ```
-L1 (기초) ──┬──→ L2 (전공) ───┬──→ L3 (진술+장벽) ──┐
-            │                  │                      ├──→ L4 (도구) ──┐
-            │                  │                      │                ├──→ L6 (부분결과) ──→ L7 (교차+회고)
-            │                  └──→ L5 (n=6 교량) ──┘                    │                                       │
-            │                                                              │                                       │
-            └──────────────────────────────────────────────────────────────┘                                       │
-                                                                                                                   │
-                                                                                                    ┌──────────────┘
-                                                                                                    ▼
-                                                                                             L8 (closure) ──→ L9 (실행)
+L1 (basic) ──┬──→ L2 (advanced) ─┬──→ L3 (statement+barriers) ──┐
+             │                   │                               ├──→ L4 (tools) ──┐
+             │                   │                               │                  ├──→ L6 (partial results) ──→ L7 (cross+retro)
+             │                   └──→ L5 (n=6 bridge) ───────┘                       │                                     │
+             │                                                                        │                                     │
+             └───────────────────────────────────────────────────────────────────────┘                                     │
+                                                                                                                             │
+                                                                                                              ┌──────────────┘
+                                                                                                              ▼
+                                                                                                       L8 (closure) ──→ L9 (execution)
 ```
 
 ---
 
-## §2 축 창발 재검토 (9 → 10)
+## §2 Axis Emergence Re-examination (9 -> 10)
 
-v2 초판의 9축을 depth 렌즈로 재검토.
+Re-examine v2 first-edition's 9 axes through the depth lens.
 
-### 2.1 기존 9축 감사
+### 2.1 Existing 9-Axis Audit
 
-| 축 | 이름 | 유리성 | 문제점 |
-|----|------|--------|--------|
+| Axis | Name | Utility | Problem |
+|------|------|---------|---------|
 | Y1 | NUM-CORE | 9.5 | OK |
-| Y2 | DISCRETE-CLASS | 5.2 | **Y3 와 중복** — 이산/복잡도/τ는 한 묶음 |
-| Y3 | COMPUTATIONAL-TAU | 5.8 | Y2 와 중복 |
+| Y2 | DISCRETE-CLASS | 5.2 | **overlaps Y3** — discrete/complexity/τ form one bundle |
+| Y3 | COMPUTATIONAL-TAU | 5.8 | overlaps Y2 |
 | Y4 | GATE-BARRIER | 9.4 | OK |
 | Y5 | PHYSICAL-NATURALNESS | 5.6 | OK |
 | Y6 | PDE-RESONANCE | 6.6 | OK |
-| Y7 | LATTICE-VOA | 3.9 | OK (유리성 낮지만 BT-545 전담) |
+| Y7 | LATTICE-VOA | 3.9 | OK (low utility but dedicated to BT-545) |
 | Y8 | GALOIS-ASSEMBLY | 5.4 | OK |
-| Y9 | HONEST-HARNESS | 9.3 | OK (메타) |
+| Y9 | HONEST-HARNESS | 9.3 | OK (meta) |
 
-**문제 1**: Y2+Y3 는 "이산/조합/복잡도" 단일 주제 — 분리 부적절.
-**문제 2**: 교차 (cross-BT) 작업이 "Y9 메타" 에 흡수되거나 "개별 BT phase" 에 흩어져 독립 축 없음.
-**문제 3**: 선행 기초 수학 (L1, L2) 을 담당할 축 없음 — 공중에 뜸.
+**Problem 1**: Y2+Y3 is a single topic "discrete/combinatorial/complexity" — inappropriate to separate.
+**Problem 2**: Cross (cross-BT) work is absorbed into "Y9 meta" or scattered across individual BT phases — no independent axis.
+**Problem 3**: no axis responsible for prior basic math (L1, L2) — floats in air.
 
-### 2.2 재창발 결과 — 10축
+### 2.2 Re-emergence Result — 10 Axes
 
-**Y2+Y3 합병** + **CROSS 신규** + **PREREQ 신규** = 10축.
+**Y2+Y3 merge** + **CROSS new** + **PREREQ new** = 10 axes.
 
-| 신축 ID | 이름 | 유리성 | 역할 | 전신 |
-|---------|------|--------|------|------|
-| Y1 | **NUM-CORE** | 9.5 | 수론 앵커 + L 함수 | (유지) |
-| Y2 | **DISC-COMP** | 6.0 | 이산/복잡도/τ=4+2 (통합) | 구 Y2+Y3 합병 |
-| Y3 | **BARRIER** | 9.4 | 장벽 지형 감사 | 구 Y4 rename |
-| Y4 | **PHYS** | 5.6 | 물리 자연성 / QCD / 게이지 | 구 Y5 |
-| Y5 | **PDE** | 6.6 | PDE 공명 / Sobolev / 폭발 | 구 Y6 |
-| Y6 | **LATT-VOA** | 3.9 | 격자 / VOA / Moonshine | 구 Y7 |
-| Y7 | **GALO-SELMER** | 5.4 | Galois 표현 / Selmer / p-adic | 구 Y8 |
-| Y8 | **CROSS-BRIDGE** | 7.5 | BT↔BT 교차 / cross-axis 매핑 | **신규** |
-| Y9 | **PREREQ-BASIS** | 8.5 | 기초 + 전공 수학 (L1, L2) | **신규** |
-| Y10 | **HONEST-HARNESS** | 9.3 | 메타 정직 게이트 | 구 Y9 rename |
+| New ID | Name | Utility | Role | Predecessor |
+|--------|------|---------|------|-------------|
+| Y1 | **NUM-CORE** | 9.5 | number-theory anchor + L-functions | (unchanged) |
+| Y2 | **DISC-COMP** | 6.0 | discrete/complexity/τ=4+2 (integrated) | old Y2+Y3 merged |
+| Y3 | **BARRIER** | 9.4 | barrier-landscape audit | old Y4 renamed |
+| Y4 | **PHYS** | 5.6 | physical naturalness / QCD / gauge | old Y5 |
+| Y5 | **PDE** | 6.6 | PDE resonance / Sobolev / blowup | old Y6 |
+| Y6 | **LATT-VOA** | 3.9 | lattice / VOA / Moonshine | old Y7 |
+| Y7 | **GALO-SELMER** | 5.4 | Galois representations / Selmer / p-adic | old Y8 |
+| Y8 | **CROSS-BRIDGE** | 7.5 | BT<->BT cross / cross-axis mapping | **new** |
+| Y9 | **PREREQ-BASIS** | 8.5 | basic + advanced math (L1, L2) | **new** |
+| Y10 | **HONEST-HARNESS** | 9.3 | meta honesty gate | old Y9 renamed |
 
-**축 수**: 9 → 10 (순증 1, 합병 -1 + 신규 +2).
-**평균 유리성**: 6.74 → 7.17 (+0.43, Y2+Y3 합병 시너지 + CROSS/PREREQ 신규 가치).
+**Axis count**: 9 -> 10 (net +1, merge -1 + new +2).
+**Average utility**: 6.74 -> 7.17 (+0.43, Y2+Y3 merge synergy + CROSS/PREREQ new value).
 
-### 2.3 축 x BT 커버 매트릭스 (신)
+### 2.3 Axis x BT Cover Matrix (New)
 
 ```
              541   542   543   544   545   546   Perelman
 Y1 NUM      [10]    2     2     6     3     5     1
-Y2 DISC       2   [10]    2     1     4     3     1   (통합으로 강도 +)
+Y2 DISC       2   [10]    2     1     4     3     1   (merge strengthens)
 Y3 BARRIER    3   [10]    3     3     3     3     2
 Y4 PHYS       1     2   [ 8]    4     2     1     1
-Y5 PDE        2     1     4   [ 8]    2     1     3   (Perelman 관련 3)
+Y5 PDE        2     1     4   [ 8]    2     1     3   (Perelman-related 3)
 Y6 LATT       3     2     2     1   [ 7]    3     1
 Y7 GALO       4     2     2     1     3   [ 9]    1
-Y8 CROSS    [ 8]  [ 7]  [ 7]  [ 7]  [ 7]  [ 7]    5   (cross 전담)
-Y9 PREREQ   [ 9]  [ 8]  [ 7]  [ 8]  [ 9]  [ 8]    7   (기초 전체 커버)
-Y10 HONEST    8     8     8     8     8     8     8   (메타)
+Y8 CROSS    [ 8]  [ 7]  [ 7]  [ 7]  [ 7]  [ 7]    5   (cross-dedicated)
+Y9 PREREQ   [ 9]  [ 8]  [ 7]  [ 8]  [ 9]  [ 8]    7   (full basics cover)
+Y10 HONEST    8     8     8     8     8     8     8   (meta)
 ```
 
 ---
 
-## §3 Phase 창발 — Depth 기반 10 Phase
+## §3 Phase Emergence — Depth-Based 10 Phases
 
-선행 depth 순서로 Phase 재배치. 각 Phase 는 "특정 depth layer 의 작업" 에 집중하며 BT 는 phase 에 분산.
+Re-arrange phases in prior-depth order. Each Phase focuses on "tasks at a specific depth layer"; BT is distributed across phases.
 
-### 3.1 Phase 종합표
+### 3.1 Phase Summary Table
 
-| Phase | Depth | 이름 | 주 축 | 상태 | 비고 |
-|-------|-------|------|-------|------|------|
-| **P0** | 0 | 축 확정 (R1~R3) | Y10 | done | 10축 FINAL |
-| **P1** | 1 | L1 기초 수학 | Y9 | done | 정수론/복소해석/군론/선대/미적분 |
-| **P2** | 2 | L2 전공 수학 | Y9 | partial | 대수기하/위상/미분기하/PDE/Galois |
-| **P3** | 3 | L3 문제 진술 + 장벽 | Y3 | done | 7 Clay 진술 + 4 장벽 + GCT |
-| **P4** | 4 | L4 난제 도구 | Y1,Y2,Y4,Y5,Y6,Y7 | partial | 각 축 전용 도구 |
-| **P5** | 5 | L5 n=6 교량 | Y1,Y8 | done | σφ=nτ / Theorem B / HEXA-GATE / atlas |
-| **P6** | 6 | L6 BT 부분결과 | Y1~Y7 | partial | v2 초판 P2~P5 내용 통합 |
-| **P7** | 7 | L7 교차 + 회고 | Y8, Y10 | done | cross + Perelman + C1~C5 |
-| **PΩ** | 8 | closure + v3 설계 | Y10 | done | v2 CLOSURE |
-| **PX** | 9 | 실행 이관 | 전 축 | planned | 22건 PENDING |
+| Phase | Depth | Name | Main Axis | Status | Note |
+|-------|-------|------|-----------|--------|------|
+| **P0** | 0 | axis finalization (R1~R3) | Y10 | done | 10-axis FINAL |
+| **P1** | 1 | L1 basic math | Y9 | done | number-theory/complex-analysis/group-theory/linear-algebra/calculus |
+| **P2** | 2 | L2 advanced math | Y9 | partial | algebraic-geometry/topology/differential-geometry/PDE/Galois |
+| **P3** | 3 | L3 problem statements + barriers | Y3 | done | 7 Clay statements + 4 barriers + GCT |
+| **P4** | 4 | L4 problem tools | Y1,Y2,Y4,Y5,Y6,Y7 | partial | per-axis dedicated tools |
+| **P5** | 5 | L5 n=6 bridge | Y1,Y8 | done | σφ=nτ / Theorem B / HEXA-GATE / atlas |
+| **P6** | 6 | L6 BT partial results | Y1~Y7 | partial | v2 first-edition P2~P5 content integrated |
+| **P7** | 7 | L7 cross + retrospective | Y8, Y10 | done | cross + Perelman + C1~C5 |
+| **PΩ** | 8 | closure + v3 design | Y10 | done | v2 CLOSURE |
+| **PX** | 9 | execution handover | all axes | planned | 22 PENDING |
 
-**Phase 수**: 10 (v2 초판 9 에서 +1).
+**Phase count**: 10 (vs 9 in v2 first edition).
 
-### 3.2 Phase 상세 — Task 분산
+### 3.2 Phase Details — Task Distribution
 
-#### P1 L1 기초 수학 (Y9 PREREQ 주도, 6 tasks)
+#### P1 L1 Basic Math (led by Y9 PREREQ, 6 tasks)
 ```
-- PREREQ-P1-1: 정수론 기초 (σ/τ/φ/뫼비우스/오일러곱) + σφ=nτ 유일성 증명 추적
-- PREREQ-P1-2: 복소해석 기초 (해석적 연속/유수/감마/ζ(2)=π²/6)
-- PREREQ-P1-3: 군론 기초 (S_6 외부 자기동형)
-- PREREQ-P1-4: 선형대수 + 변분 + 라그랑지안
-- PREREQ-P1-5: 기본 ODE/PDE (지수/삼각/푸리에)
-- PREREQ-P1-6: 측정 가능한 완전수 직관 (Euclid-Euler)
-```
-
-#### P2 L2 전공 수학 (Y9 PREREQ 주도, 6 tasks)
-```
-- PREREQ-P2-1: 대수기하 기초 (scheme/sheaf/cohomology/다양체)
-- PREREQ-P2-2: 대수위상 (기본군/호몰로지/CW)
-- PREREQ-P2-3: 미분기하 + Ricci 곡률 (Perelman 예비)
-- PREREQ-P2-4: PDE 심화 (Sobolev 공간 / W^{s,p})
-- PREREQ-P2-5: Lebesgue 측도 / Lp 공간
-- PREREQ-P2-6: Galois 이론 + Riemann 곡면 + 해석적 연속
+- PREREQ-P1-1: number-theory basics (σ/τ/φ/Möbius/Euler product) + σφ=nτ uniqueness demonstration tracing
+- PREREQ-P1-2: complex-analysis basics (analytic continuation/residue/gamma/ζ(2)=π²/6)
+- PREREQ-P1-3: group-theory basics (S_6 outer automorphism)
+- PREREQ-P1-4: linear algebra + calculus of variations + Lagrangian
+- PREREQ-P1-5: basic ODE/PDE (exponential/trigonometric/Fourier)
+- PREREQ-P1-6: measurable perfect-number intuition (Euclid-Euler)
 ```
 
-#### P3 L3 문제 진술 + 장벽 (Y3 BARRIER 주도, 8 tasks)
+#### P2 L2 Advanced Math (led by Y9 PREREQ, 6 tasks)
 ```
-- BARRIER-P3-1: BT-541 RH Clay 공식 진술 + Riemann-Siegel / Li 판정 경로
-- BARRIER-P3-2: BT-542 P=NP Clay 진술
-- BARRIER-P3-3: BT-543 YM mass gap 물리 진술
-- BARRIER-P3-4: BT-544 NS 전역정칙성 진술 + Tao 2016 초폭발
-- BARRIER-P3-5: BT-545/546/547 Hodge/BSD/Poincaré 진술 통합
-- BARRIER-P3-6: 4 장벽 감사 (Relativization/Natural/Algebrization/NEXP)
-- BARRIER-P3-7: GCT (Mulmuley-Sohoni) 3 관찰
-- BARRIER-P3-8: 7 난제 일반적 실패 사례 정리
+- PREREQ-P2-1: algebraic-geometry basics (scheme/sheaf/cohomology/manifold)
+- PREREQ-P2-2: algebraic topology (fundamental group/homology/CW)
+- PREREQ-P2-3: differential geometry + Ricci curvature (Perelman prep)
+- PREREQ-P2-4: advanced PDE (Sobolev spaces / W^{s,p})
+- PREREQ-P2-5: Lebesgue measure / Lp spaces
+- PREREQ-P2-6: Galois theory + Riemann surfaces + analytic continuation
 ```
 
-#### P4 L4 난제 전용 도구 (6 축 주도, 6 tasks)
+#### P3 L3 Problem Statements + Barriers (led by Y3 BARRIER, 8 tasks)
 ```
-- NUM-P4-1:     L 함수 이론 심화 (Y1)
-- DISC-P4-1:    텐서 랭크 + 회로 하한 + Schaefer dichotomy (Y2)
-- PHYS-P4-1:    QCD lattice + β 함수 + 점근 자유 (Y4)
+- BARRIER-P3-1: BT-541 RH Clay formal statement + Riemann-Siegel / Li criterion paths
+- BARRIER-P3-2: BT-542 P=NP Clay statement
+- BARRIER-P3-3: BT-543 YM mass gap physical statement
+- BARRIER-P3-4: BT-544 NS global regularity statement + Tao 2016 super-blowup
+- BARRIER-P3-5: BT-545/546/547 Hodge/BSD/Poincaré statements integrated
+- BARRIER-P3-6: 4-barrier audit (Relativization/Natural/Algebrization/NEXP)
+- BARRIER-P3-7: GCT (Mulmuley-Sohoni) 3 observations
+- BARRIER-P3-8: general failure-case compilation for the 7 problems
+```
+
+#### P4 L4 Problem-Dedicated Tools (led by 6 axes, 6 tasks)
+```
+- NUM-P4-1:     L-function theory deepening (Y1)
+- DISC-P4-1:    tensor rank + circuit lower bounds + Schaefer dichotomy (Y2)
+- PHYS-P4-1:    QCD lattice + β function + asymptotic freedom (Y4)
 - PDE-P4-1:     CKN 1982 + BKM 1984 + Chen-Hou 2022 (Y5)
 - LATT-P4-1:    Moonshine VOA + Leech / E8 / K3 (Y6)
-- GALO-P4-1:    Galois 표현 + Selmer + Kolyvagin / Skinner-Urban (Y7)
+- GALO-P4-1:    Galois representations + Selmer + Kolyvagin / Skinner-Urban (Y7)
 ```
 
-#### P5 L5 n=6 교량 (Y1, Y8 주도, 5 tasks)
+#### P5 L5 n=6 Bridge (led by Y1, Y8, 5 tasks)
 ```
-- NUM-P5-1:     σ(n)·φ(n)=n·τ(n) 유일성 3 독립 증명 (완료)
-- NUM-P5-2:     Theorem B 재구축판 (atlas [10] 등록)
+- NUM-P5-1:     σ(n)·φ(n)=n·τ(n) uniqueness 3-independent demonstration (complete)
+- NUM-P5-2:     Theorem B reconstructed version (atlas [10] registered)
 - DISC-P5-1:    HEXA-GATE Mk.I 24/24 EXACT (τ=4+2 fiber) (Y2)
-- CROSS-P5-1:   atlas.n6 구조 정립 (20K+ 노드 SSOT)
-- HONEST-P5-1:  OUROBOROS 3 variant 수렴상수 기록
+- CROSS-P5-1:   atlas.n6 structure establishment (20K+ node SSOT)
+- HONEST-P5-1:  OUROBOROS 3-variant convergence-constant record
 ```
 
-#### P6 L6 BT 부분결과 (v2 초판 P2~P5 통합, 6 tasks)
+#### P6 L6 BT Partial Results (v2 first-edition P2~P5 integrated, 6 tasks)
 ```
-- NUM-P6-1:     BT-541 EXACT 10건 (Ingham/Conrey-Gonek/Δ=η^24/Moonshine) + Bilateral
-- DISC-P6-1:    BT-542 4 장벽 + GCT 3 관찰 (MISS 3) — PARTIAL
-- PHYS-P6-1:    BT-543 β₀=σ-sopfr=7 REWRITING + QCD 5 실측 — PARTIAL
-- PDE-P6-1:     BT-544 3중 공명 + D158 Ricci + CKN + BKM — NEAR
+- NUM-P6-1:     BT-541 EXACT 10 (Ingham/Conrey-Gonek/Δ=η^24/Moonshine) + Bilateral
+- DISC-P6-1:    BT-542 4-barrier + GCT 3 observations (MISS 3) — PARTIAL
+- PHYS-P6-1:    BT-543 β₀=σ-sopfr=7 REWRITING + QCD 5 empirical — PARTIAL
+- PDE-P6-1:     BT-544 triple-resonance + D158 Ricci + CKN + BKM — NEAR
 - LATT-P6-1:    BT-545 Lemma 1 PROVED + Enriques REWRITING + L5 BARRIER MISS — PARTIAL
 - GALO-P6-1:    BT-546 Theorem 1 + Corollary n=6 (BKLPR (A3) CONDITIONAL) — PARTIAL
 ```
 
-#### P7 L7 교차 + 회고 (Y8 CROSS, Y10 HONEST 주도, 5 tasks)
+#### P7 L7 Cross + Retrospective (led by Y8 CROSS, Y10 HONEST, 5 tasks)
 ```
-- CROSS-P7-1:   Y1 ↔ Y6 — Δ=η^{24}, 24=σ·φ=dim Leech=c(Moonshine) (4 EXACT)
-- CROSS-P7-2:   Y4 ↔ Y5 — 4 매핑 M1~M4 + 3 도구 T1~T3
-- CROSS-P7-3:   Y7 ↔ Y1 — Ingham lead = 1/(σ(6)·ζ(2)) EXACT
-- HONEST-P7-1:  BT-547 Perelman 회고 (n6-arch 기여 0 정직)
-- HONEST-P7-2:  C1~C5 결정적 도구 추출 + 9x5 승격 조건 매트릭스
-```
-
-#### PΩ closure + v3 설계 (Y10 HONEST 주도, 9 tasks)
-```
-(v2 초판 PΩ 그대로 — Y9→Y10 rename 만 적용)
-- HONEST-PO-1~8:  게이트 종합 + 성적표 + 판정 종합 + atlas 초안 + v1↔v2 비교 + 고갈 분석 + v3 설계 + 미해결 21건
-- CROSS-PO-1:     Y1 → Z1 계승 설계 (v3)
+- CROSS-P7-1:   Y1 <-> Y6 — Δ=η^{24}, 24=σ·φ=dim Leech=c(Moonshine) (4 EXACT)
+- CROSS-P7-2:   Y4 <-> Y5 — 4 mappings M1~M4 + 3 tools T1~T3
+- CROSS-P7-3:   Y7 <-> Y1 — Ingham lead = 1/(σ(6)·ζ(2)) EXACT
+- HONEST-P7-1:  BT-547 Perelman retrospective (n6-arch contribution 0 honest)
+- HONEST-P7-2:  C1~C5 decisive-tool extraction + 9x5 promotion-condition matrix
 ```
 
-#### PX 실행 이관 (전 축, 22 tasks)
+#### PΩ Closure + v3 Design (led by Y10 HONEST, 9 tasks)
 ```
-(v2 초판 PX 그대로 유지 — 모든 22건 planned)
-```
-
-### 3.3 Phase 수치 종합
-
-```
-Phase  Depth  Tasks  Status    주 축         난이도 의존
-P0     0      9      done      Y10           — (창발)
-P1     1      6      done      Y9            L0
-P2     2      6      partial   Y9            L1
-P3     3      8      done      Y3            L2
-P4     4      6      partial   Y1,Y2,Y4~Y7   L2, L3
-P5     5      5      done      Y1, Y8        L1, L2
-P6     6      6      partial   Y1~Y7         L4, L5
-P7     7      5      done      Y8, Y10       L6
-PΩ     8      9      done      Y10           L7
-PX     9      22     planned   전 축         L8
-────────────────────────────────────────────────
-총     —      82     —         —             —
+(v2 first-edition PΩ as-is — Y9->Y10 rename applied)
+- HONEST-PO-1~8:  gate synthesis + report card + verdict synthesis + atlas draft + v1<->v2 comparison + depletion analysis + v3 design + 21-item unresolved
+- CROSS-PO-1:     Y1 -> Z1 succession design (v3)
 ```
 
-**총 task**: 82 (v2 초판 100 에서 감소 — v2 초판 P2~P5 BT별 세부 task 를 P6 단일 phase 에 6개로 압축).
+#### PX Execution Handover (all axes, 22 tasks)
+```
+(v2 first-edition PX as-is — all 22 items planned)
+```
+
+### 3.3 Phase Numeric Summary
+
+```
+Phase  Depth  Tasks  Status    Main Axes       Difficulty Deps
+P0     0      9      done      Y10             — (emergence)
+P1     1      6      done      Y9              L0
+P2     2      6      partial   Y9              L1
+P3     3      8      done      Y3              L2
+P4     4      6      partial   Y1,Y2,Y4~Y7     L2, L3
+P5     5      5      done      Y1, Y8          L1, L2
+P6     6      6      partial   Y1~Y7           L4, L5
+P7     7      5      done      Y8, Y10         L6
+PΩ     8      9      done      Y10             L7
+PX     9      22     planned   all axes        L8
+─────────────────────────────────────────────────
+Total  —      82     —         —               —
+```
+
+**Total tasks**: 82 (down from 100 in v2 first edition — v2 first-edition P2~P5 per-BT detailed tasks compressed into a single P6 phase of 6).
 
 ---
 
-## §4 BT × Phase 분산 매트릭스
+## §4 BT × Phase Distribution Matrix
 
-"각 BT 가 어느 Phase 에서 어떤 depth 로 다뤄지는가" 종합.
+Synthesize "which depth each BT is handled at within which Phase".
 
 ```
         P1    P2    P3    P4    P5    P6    P7    PΩ    PX
@@ -352,90 +352,94 @@ BT-545  ○     ●     ○     ●     —     ●     ○     ○     ●
 BT-546  ○     ●     ○     ●     —     ●     ○     ○     ●
 BT-547  ○     ●     ○     —     —     —     ●     —     —
 
-○: 간접 기여 (선행 학습 / 진술 / 도구)
-●: 직접 공격 / 부분결과 / 이관
+○: indirect contribution (prior learning / statement / tools)
+●: direct attack / partial result / handover
 ```
 
-**핵심 관찰**:
-- 각 BT 는 **9 phase 에 분산** (BT 번호별 phase 없음).
-- BT-541 (Riemann) 은 L1 L2 L3 L4 L5 L6 L7 에서 동시 다뤄짐 → 선행 누적 최대.
-- BT-547 Perelman 은 해결되었으므로 L2 (Ricci flow 참고) + L7 (회고) 만 다룸.
+**Key observations**:
+- Each BT is **distributed across 9 phases** (no per-BT-number phase).
+- BT-541 (Riemann) is addressed across L1 L2 L3 L4 L5 L6 L7 simultaneously -> max prior accumulation.
+- BT-547 Perelman is resolved so only L2 (Ricci flow reference) + L7 (retrospective) are covered.
 
 ---
 
-## §5 v1 Content 이관 매핑
+## §5 v1 Content Migration Mapping
 
-v1 `millennium-learning.json` (3축 PURE/PROBLEM/N6, 4 phase P0~P3) 의 내용을 새 구조로 배치.
+Map v1 `millennium-learning.json` (3 axes PURE/PROBLEM/N6, 4 phases P0~P3) content into the new structure.
 
-| v1 location | 신 구조 위치 | 비고 |
-|-------------|-------------|------|
-| v1 PURE P0 (기초 수학) | **P1 L1** (Y9 PREREQ) | 정수론/복소해석/군론 |
-| v1 PURE P1 (전공 수학) | **P2 L2** (Y9 PREREQ) | 대수기하/PDE/위상 |
-| v1 PROBLEM P0~P1 (난제 진술) | **P3 L3** (Y3 BARRIER) | Clay 공식 문서 |
-| v1 PROBLEM P2 (4 장벽) | **P3 L3** (Y3 BARRIER) | barrier 감사 |
-| v1 N6 P0~P1 (σφ=nτ) | **P5 L5** (Y1 NUM) | n=6 교량 기저 |
-| v1 N6 P2~P3 (부분결과) | **P6 L6** (BT별 축) | 기존 breakthroughs BT-541~547 |
+| v1 location | New location | Note |
+|-------------|--------------|------|
+| v1 PURE P0 (basic math) | **P1 L1** (Y9 PREREQ) | number-theory/complex-analysis/group-theory |
+| v1 PURE P1 (advanced math) | **P2 L2** (Y9 PREREQ) | algebraic-geometry/PDE/topology |
+| v1 PROBLEM P0~P1 (problem statements) | **P3 L3** (Y3 BARRIER) | Clay formal documents |
+| v1 PROBLEM P2 (4 barriers) | **P3 L3** (Y3 BARRIER) | barrier audit |
+| v1 N6 P0~P1 (σφ=nτ) | **P5 L5** (Y1 NUM) | n=6 bridge foundation |
+| v1 N6 P2~P3 (partial results) | **P6 L6** (per-BT axis) | existing breakthroughs BT-541~547 |
 
-**결과**: v1 의 모든 학습 진도가 새 depth 구조에 자연스럽게 분포.
-
----
-
-## §6 정직성 태그 유지
-
-v2 초판에서 확립한 8단계 태그 체계는 그대로 유지하며, 새 phase 구조에서는 **phase status** 와 **task verdict** 를 분리 기록:
-
-| Phase Status | 의미 | 적용 Phase |
-|--------------|------|----------|
-| `done` | 해당 depth layer 학습/작업 완료 | P0, P1, P3, P5, P7, PΩ |
-| `partial` | 일부 task 미완 / verdict MISS 포함 | P2, P4, P6 |
-| `planned` | 아직 착수 전 | PX |
-
-| Task Verdict | 의미 | 대표 |
-|--------------|------|------|
-| EXACT | 외부 출처 검증 완료 | NUM-P6-1 (Ingham 등) |
-| PARTIAL | 부분 진전, 본문 미도달 | BT-541~543, 545, 546 |
-| NEAR | 해결 근접 관찰, 미증명 | BT-544 NS |
-| MISS | 시도 실패 정직 기록 | 24건 |
-| CONDITIONAL | 가정 의존 | Thm 1 (BKLPR A3), D158 Ricci |
-| REWRITING | 기존 사실 재정리 | β₀=7, Enriques |
-| CANDIDATE | 승격 후보 (미실행) | Theorem B [10*] |
-
-**BT 해결 수**: **0/6** 유지 (푸앵카레 제외).
+**Result**: all v1 learning progress naturally distributes into the new depth structure.
 
 ---
 
-## §7 축/Phase 개편 효과 비교
+## §6 Honesty Tags Maintained
+
+The 8-level tag system established in v2 first edition is maintained as-is; in the new phase structure **phase status** and **task verdict** are recorded separately:
+
+| Phase Status | Meaning | Applied Phase |
+|--------------|---------|---------------|
+| `done` | depth-layer learning/work complete | P0, P1, P3, P5, P7, PΩ |
+| `partial` | some tasks not done / verdict MISS included | P2, P4, P6 |
+| `planned` | not yet started | PX |
+
+| Task Verdict | Meaning | Representative |
+|--------------|---------|----------------|
+| EXACT | external-source verification complete | NUM-P6-1 (Ingham etc.) |
+| PARTIAL | partial progress, main body not reached | BT-541~543, 545, 546 |
+| NEAR | resolution-near observation, unproven | BT-544 NS |
+| MISS | failed attempt honest record | 24 items |
+| CONDITIONAL | depends on assumption | Thm 1 (BKLPR A3), D158 Ricci |
+| REWRITING | re-organization of existing fact | β₀=7, Enriques |
+| CANDIDATE | promotion candidate (unexecuted) | Theorem B [10*] |
+
+**BT resolution count**: **0/6** maintained (excluding Poincaré).
+
+---
+
+## §7 Axis/Phase Reorganization Effect Comparison
 
 ```
-지표                        v2 초판        신 구조 (depth)       변화
-──────────────────────────────────────────────────────────────────
-축 수                       9 (Y1~Y9)      10 (Y1~Y10)           +1
-축 평균 유리성              6.74           7.17                  +0.43
-Phase 수                   9 (P0~PΩ,PX)  10 (P0~P7,PΩ,PX)     +1
-Phase 순서                 BT 번호         선행 depth            질적 전환
-v1 content 이관            일부            전체                  개선
-BT × Phase 분산            편중 (1 BT = 1 phase) 분산 (1 BT = 7 phase) 개선
-도구 선행 명시             없음 (phase 내 암묵) P4 독립 phase    신규
-기초 수학 커버             없음            P1 독립 phase (Y9)    신규
-교차 작업 독립화           없음 (메타 흡수) Y8 CROSS 축 + P7    신규
-정직 태그                  유지            유지                   —
-BT 해결 수                 0/6             0/6                    유지
-atlas 실편집               0/14            0/14                   유지
+Indicator                   v2 first-ed       New structure (depth)  Change
+────────────────────────────────────────────────────────────────────────
+Axis count                  9 (Y1~Y9)         10 (Y1~Y10)            +1
+Axis average utility        6.74              7.17                   +0.43
+Phase count                 9 (P0~PΩ,PX)      10 (P0~P7,PΩ,PX)       +1
+Phase order                 BT number         prior depth            qualitative transition
+v1 content migration        partial           whole                  improved
+BT × Phase distribution     concentrated      distributed            improved
+                            (1 BT = 1 phase)  (1 BT = 7 phases)
+Tool prior explicit         none (implicit    P4 independent phase   new
+                            within phase)
+Basic math coverage         none              P1 independent phase   new
+                                              (Y9)
+Cross-work independence     none (absorbed    Y8 CROSS axis + P7     new
+                            into meta)
+Honesty tags                maintained        maintained             —
+BT resolution count         0/6               0/6                    unchanged
+atlas actual-edits          0/14              0/14                   unchanged
 ```
 
 ---
 
-## §8 요약
+## §8 Summary
 
-1. **v2 초판 오류**: phase 를 BT 번호순으로 배치해 선행 depth 를 무시했다.
-2. **진단**: 기초 수학 (L1) / 전공 수학 (L2) / 도구 (L4) / n=6 교량 (L5) 이 phase 로 독립화되지 못해 공중에 떴다.
-3. **축 재창발**: 9 → 10. Y2+Y3 합병, CROSS + PREREQ 2 신규.
-4. **Phase 재창발**: depth 0~9 의 10 layer 로 재배치. P0 축확정 / P1~P2 기초+전공 / P3 진술+장벽 / P4 도구 / P5 n=6 교량 / P6 BT 부분결과 / P7 교차+회고 / PΩ closure / PX 실행.
-5. **BT 분산**: 각 BT 가 여러 phase 에 분산. P6 단일 phase 에 부분결과 집약.
-6. **v1 이관**: v1 PURE/PROBLEM/N6 content 가 새 구조에 자연스럽게 배치됨.
-7. **정직성**: BT 해결 0/6 + MISS 24건 + atlas 0/14 실편집 그대로 유지.
-8. **JSON 반영**: `shared/roadmaps/millennium.json` 신 10축 × 10 Phase 구조로 재작성.
+1. **v2 first-edition error**: phase ordered by BT number, ignoring prior depth.
+2. **Diagnosis**: basic math (L1) / advanced math (L2) / tools (L4) / n=6 bridge (L5) were not independently phase-ized, leaving them floating.
+3. **Axis re-emergence**: 9 -> 10. Y2+Y3 merge, CROSS + PREREQ 2 new.
+4. **Phase re-emergence**: rearranged into 10 depth layers 0~9. P0 axis-fix / P1~P2 basic+advanced / P3 statements+barriers / P4 tools / P5 n=6 bridge / P6 BT partial results / P7 cross+retrospective / PΩ closure / PX execution.
+5. **BT distribution**: each BT distributed across multiple phases. Partial results aggregated in single P6 phase.
+6. **v1 migration**: v1 PURE/PROBLEM/N6 content naturally placed in new structure.
+7. **Honesty**: BT resolution 0/6 + MISS 24 items + atlas 0/14 actual-edits maintained.
+8. **JSON reflection**: `shared/roadmaps/millennium.json` rewritten to new 10-axis × 10-Phase structure.
 
 ---
 
-_END OF phase-depth-emergence.md — 선행 depth 기반 재창발 설계_
+_END OF phase-depth-emergence.md — prior-depth-based re-emergence design_
