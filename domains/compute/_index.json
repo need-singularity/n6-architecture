@@ -15,7 +15,8 @@
   "_changelog": [
     "1.0.0 (2026-04-12): compute 축 sub-SSOT 신설. 칩 6단계 로드맵 6 도메인 등록 (chip-hexa1, chip-pim, chip-3d, chip-photonic, chip-wafer, chip-sc). project_chip_architecture_goal.md 출처.",
     "1.1.0 (2026-04-12): 전체 58 도메인 domains 배열 추가 (디스크 실측). chip-design 누락 보정. 타 카테고리 sub-SSOT 포맷 통일.",
-    "1.2.0 (2026-04-17): sscb 도메인 등록 (59). §7 작동성 검증 10/10 PASS, BOM $31.5, Mk-∞ 사양, smash/free Mk.II 주입."
+    "1.2.0 (2026-04-17): sscb 도메인 등록 (59). §7 작동성 검증 10/10 PASS, BOM $31.5, Mk-∞ 사양, smash/free Mk.II 주입.",
+    "1.3.0 (2026-04-24): own#16 registry sync — chip-eda, chip-hbm, chip-interconnect, chip-materials, chip-packaging, chip-process, chip-thermal-power, chip-verify-test, chip-yield 9 domains registered (disk measured, body .md present)."
   ],
   "chip_6stage_roadmap": {
     "_doc": "HEXA-1 -> PIM -> 3D -> Photonic -> Wafer -> Superconducting 6단 진화 로드맵. 출처: ~/.claude-claude2/projects/-Users-ghost-Dev-n6-architecture/memory/project_chip_architecture_goal.md",
@@ -1084,6 +1085,87 @@
     {
       "slug": "wifi6-cert",
       "parent": "certificates",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-eda",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-hbm",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-interconnect",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-materials",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-packaging",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-process",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-thermal-power",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-verify-test",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "chip-yield",
       "files": 1,
       "has_claude_md": false,
       "has_domain_md": true,

@@ -13,7 +13,8 @@
   },
   "_count": 24,
   "_changelog": [
-    "1.0.0 (2026-04-12): energy 축 sub-SSOT 신설. 전체 16개 도메인 등록."
+    "1.0.0 (2026-04-12): energy 축 sub-SSOT 신설. 전체 16개 도메인 등록.",
+    "1.1.0 (2026-04-24): own#16 registry sync — tabletop-fusion domain registered (disk measured, body .md present)."
   ],
   "domains": [
     {
@@ -233,6 +234,15 @@
     {
       "slug": "battery-scale-8-grid",
       "parent": "battery-architecture",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "tabletop-fusion",
       "files": 1,
       "has_claude_md": false,
       "has_domain_md": true,

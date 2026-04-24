@@ -15,7 +15,8 @@
   "_changelog": [
     "1.0.0 (2026-04-12): physics 축 sub-SSOT 신설. 전체 37개 도메인 등록.",
     "1.1.0 (2026-04-19): tabletop-antimatter 독립 도메인 분리 (부모 antimatter-factory §9 → 독립). 37 → 38.",
-    "1.1.0 (2026-04-23): DIS-P2-1 fast-track 1 domain — computational-fluid-dynamics."
+    "1.1.0 (2026-04-23): DIS-P2-1 fast-track 1 domain — computational-fluid-dynamics.",
+    "1.2.0 (2026-04-24): own#16 registry sync — 9 domains registered (calabi-yau-nav, m-theory-11d, meta-closure-nav, multiverse-nav, particle-accelerator, pet-cyclotron, tabletop-blackhole, warp-drive, wormhole). Disk measured, body .md present."
   ],
   "domains": [
     {
@@ -368,6 +369,87 @@
       "has_hexa": false,
       "has_verify": false,
       "status": "S1"
+    },
+    {
+      "slug": "calabi-yau-nav",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "m-theory-11d",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "meta-closure-nav",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "multiverse-nav",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "particle-accelerator",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "pet-cyclotron",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "tabletop-blackhole",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "warp-drive",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
+    },
+    {
+      "slug": "wormhole",
+      "files": 1,
+      "has_claude_md": false,
+      "has_domain_md": true,
+      "has_hexa": false,
+      "has_verify": false,
+      "status": "basic"
     }
   ],
   "_note": "physics 축 전체 멤버 목록은 ../_index.json physics 키 SSOT 를 따른다 (중복 등록 금지)."
