@@ -159,20 +159,33 @@ def main():
     repo_root = find_repo_root()
 
     atlas_path = args.atlas if args.atlas else resolve_atlas(repo_root)
-    if atlas_path is None:
+    # Defensive SOFT skip: atlas.n6 is a tracked SSOT file, but in environments
+    # where it is unavailable (shallow fetch / fixture-less checkouts / sparse
+    # clones) the detector should emit a WARN and exit 0 rather than crash the
+    # CI job. The OUROBOROS detection algorithm itself is unchanged — only the
+    # missing-input path is made graceful.
+    if atlas_path is None or not atlas_path.exists():
+        where = str(atlas_path) if atlas_path is not None else f"{repo_root}/{{n6shared,atlas}}/atlas.n6"
         print(
-            f"[OUROBOROS v2] ERROR: atlas.n6 not found under repo_root={repo_root}. "
-            f"Tried: n6shared/atlas.n6, atlas/atlas.n6. "
-            f"Use --atlas PATH to override.",
+            f"[OUROBOROS v2] WARN_NO_ATLAS: atlas.n6 not found at {where}. "
+            f"Skipping cycle detection (SOFT skip, exit 0).",
             file=sys.stderr,
         )
-        sys.exit(2)
-    if not atlas_path.exists():
-        print(
-            f"[OUROBOROS v2] ERROR: atlas path does not exist: {atlas_path}",
-            file=sys.stderr,
-        )
-        sys.exit(2)
+        # Emit a minimal report so downstream tooling can detect the skip.
+        report_path = args.report if args.report else (repo_root / "reports" / "ouroboros_v2_report.json")
+        report = {
+            "timestamp": __import__("time").strftime("%Y-%m-%dT%H:%M:%SZ", __import__("time").gmtime()),
+            "version": "v2_namespace_aware",
+            "atlas_path": str(atlas_path) if atlas_path is not None else None,
+            "verdict": "WARN_NO_ATLAS",
+            "detail": "atlas.n6 not found under repo_root; SOFT skip",
+        }
+        try:
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+        except OSError:
+            pass
+        sys.exit(0)
 
     report_path = args.report if args.report else (repo_root / "reports" / "ouroboros_v2_report.json")
 

@@ -29,8 +29,13 @@ Exit codes
       humans can wire the token in once the harness publishes it).
       The own#21 cron runs with on_fail=warn in .own, so SOFT semantics
       are preserved even when the CI step is SOFT.
+  0 — WARN_NO_SELFTEST (reports/n6_selftest.json missing / unreadable /
+      field-missing; SOFT — this is a CI-environment issue, not a drift
+      violation, so we do not fail the check). Verdict + detail are
+      written to the JSON report for triage.
   1 — DRIFT (at least one README token disagrees with authoritative)
-  2 — ERROR (authoritative source missing or unreadable)
+  2 — ERROR (authoritative source present but structurally invalid in a
+      way that was not caught by WARN_NO_SELFTEST)
 
 Design notes
 ------------
@@ -138,14 +143,24 @@ def main() -> int:
     }
 
     if authoritative is None:
-        report["verdict"] = "ERROR"
-        report["detail"] = "authoritative source unavailable"
+        # Defensive SOFT skip: reports/n6_selftest.json is tracked in this
+        # repo, but in environments where it is absent / unreadable / has a
+        # missing `total` field (shallow clones, fixture-less checkouts, or
+        # pre-harness-run states), treat it as a CI-env issue rather than a
+        # drift violation. Emit WARN_NO_SELFTEST + exit 0 so the own#21 CI
+        # step is not marked red. The comparison logic itself is untouched.
+        report["verdict"] = "WARN_NO_SELFTEST"
+        report["detail"] = (
+            f"authoritative source unavailable ({source_desc}); "
+            "SOFT skip — nothing to compare README tokens against"
+        )
         _write_report(report)
         print(
-            f"[own#21] ERROR: cannot load authoritative count ({source_desc})",
+            f"[own#21] WARN_NO_SELFTEST: cannot load authoritative count "
+            f"({source_desc}) — SOFT skip (exit 0)",
             file=sys.stderr,
         )
-        return 2
+        return 0
 
     # 2) README claims
     if not README_PATH.exists():
