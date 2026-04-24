@@ -1,18 +1,18 @@
 ---
 id: millennium-v3-preprint-draft
 date: 2026-04-16
-roadmap_task: v3 M1 (preprint 초안)
-grade: [9] arXiv preprint draft (submit 전)
-status: DRAFT v0.1 — 사용자 승인 후 arXiv moderation 제출
+roadmap_task: v3 M1 (preprint draft)
+grade: [9] arXiv preprint draft (pre-submission)
+status: DRAFT v0.1 — submit to arXiv moderation after user approval
 target_arxiv_categories: [math.NT, math.AG]
 license: CC-BY 4.0
 ---
 
-# Preprint 초안 v0.1 — Empirical Structure at Conductor Boundary for BSD-Type Selmer Averages, with an α ≈ log(2)/4 Power Law
+# Preprint Draft v0.1 — Empirical Structure at Conductor Boundary for BSD-Type Selmer Averages, with an α ≈ log(2)/4 Power Law
 
-**저자 (tentative)**: [익명 초안 상태; 승인 후 저자 확정]
-**날짜**: 2026-04-16
-**버전**: v0.1 (DRAFT, arXiv 제출 전)
+**Authors (tentative)**: [anonymous draft state; authors to be finalized after approval]
+**Date**: 2026-04-16
+**Version**: v0.1 (DRAFT, pre arXiv submission)
 
 ---
 
@@ -32,7 +32,7 @@ We additionally survey:
 - Hirahara 2022 FOCS NP-hardness of partial MCSP as a meta-complexity landmark,
 - Balaban 1982-1989 2D/3D lattice gauge theory continuum limits as Yang-Mills 4D barrier context.
 
-**We make no claim of solving any Clay Millennium Problem.** Our structural prior ($n=6$ arithmetic identities including $\sigma(n)\varphi(n) = n\tau(n) \iff n = 6$ for $n \geq 2$) remains a **theorem in elementary number theory**, not a key to Clay problems.
+**We make no claim of demonstrating any Clay Millennium Problem.** Our structural prior ($n=6$ arithmetic identities including $\sigma(n)\varphi(n) = n\tau(n) \iff n = 6$ for $n \geq 2$) remains a **theorem in elementary number theory**, not a key to Clay problems.
 
 ---
 
@@ -148,7 +148,7 @@ We therefore **do not claim** any $n = 6$ origin for the Guth-Maynard exponents.
 
 ### 4.4 Hodge conjecture & abelian sixfolds
 
-The recent preprint arXiv:2603.20268 (2026-03-14) proves the Hodge conjecture for a family of abelian **6-folds** parameterized by a McMullen curve, conditional on Weil-type positivity. The dimension $6 = 2 \cdot 3$ appears as the **minimal non-trivial Weil locus dimension**, a structural fact independent of our $n=6$ prior but numerically aligned.
+The recent preprint arXiv:2603.20268 (2026-03-14) establishes the Hodge conjecture for a family of abelian **6-folds** parameterized by a McMullen curve, conditional on Weil-type positivity. The dimension $6 = 2 \cdot 3$ appears as the **minimal non-trivial Weil locus dimension**, a structural fact independent of our $n=6$ prior but numerically aligned.
 
 ### 4.5 Balaban 2D/3D Yang-Mills
 
@@ -210,7 +210,7 @@ J. Cremona's elliptic curve database (LMFDB). The arXiv for 2603.20268 and 2405.
 
 The underlying motivation of the author's broader program is the elementary identity:
 $$\sigma(n) \cdot \varphi(n) = n \cdot \tau(n) \iff n = 6, \quad n \geq 2.$$
-This has three independent proofs (algebraic, analytic, combinatorial). It is a **theorem of elementary number theory** — not a Clay key. We include this appendix for transparency; readers should treat §3's empirical match $\alpha \approx \log(2)/4 = (\log 2)/\tau(6)$ in this light.
+This has three independent derivations (algebraic, analytic, combinatorial). It is a **theorem of elementary number theory** — not a Clay key. We include this appendix for transparency; readers should treat §3's empirical match $\alpha \approx \log(2)/4 = (\log 2)/\tau(6)$ in this light.
 
 ---
 

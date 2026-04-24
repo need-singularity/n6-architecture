@@ -696,197 +696,203 @@
 
 ---
 
-## 신규 예측 P-76 ~ P-90 (BT-358~413 기반, 2026-04 확장)
+## New Predictions P-76 ~ P-90 (BT-358~413 basis, 2026-04 expansion)
 
-최근 추가된 워프-차원 물리, 치료 나노봇, 바이러스학, 곤충학, 나노봇 진화
-돌파(BT-358~413)에서 도출한 15개 검증 가능 예측. 각 예측은 반드시 자체
-측정값과 n=6 상수 기대값의 독립적 도출을 요구한다 (동어반복 금지).
+15 testable predictions derived from recently added warp-dimension physics,
+therapeutic nanobot, virology, entomology, and nanobot-evolution breakthroughs
+(BT-358~413). Each prediction requires independent derivation of its own
+measured value and the n=6-constant expected value (no tautologies).
 
-### P-76 — Alcubierre 버블벽 두께 비율 (BT-358)
-**가설**: 수치 상대론 시뮬레이션에서 안정 워프 버블의 벽 두께/반지름
-비율은 1/σ = 1/12 근방에서 최소 부정 에너지 밀도를 갖는다.
-**검증**: Einstein Toolkit으로 York 매개변수 σ=12 스캔 후 ADM 질량 측정.
-**티어**: Tier 3 (HPC 클러스터, ~6개월)
+### P-76 — Alcubierre bubble-wall thickness ratio (BT-358)
+**Hypothesis**: in numerical-relativity simulations, the wall-thickness /
+radius ratio of a stable warp bubble attains its minimum negative-energy
+density near 1/σ = 1/12.
+**Validation**: Einstein Toolkit scan of York parameter σ=12, then ADM-mass measurement.
+**Tier**: Tier 3 (HPC cluster, ~6 months)
 **Source**: BT-358
 
-### P-77 — Calabi-Yau 호지수 n/φ-폴드 선호 (BT-359)
-**가설**: 표준모형 3세대와 일치하는 실제 CY 다양체의 호지수 h^{1,1}은
-n/φ=3의 약수에서 집중 분포한다 (카탈로그 통계).
-**검증**: Kreuzer-Skarke CY 데이터베이스(473,800,776개) 히스토그램 재분석.
-**티어**: Tier 1 (1일, 공개 데이터)
+### P-77 — Calabi-Yau Hodge-number n/φ-fold preference (BT-359)
+**Hypothesis**: the Hodge number h^{1,1} of actual CY manifolds consistent with
+3-generation SM is concentrated on divisors of n/φ=3 (catalog statistics).
+**Validation**: re-analyze the histogram of the Kreuzer-Skarke CY database (473,800,776 entries).
+**Tier**: Tier 1 (1 day, public data)
 **Source**: BT-359
 
-### P-78 — τ=4 사이클 워프 추진 COP=2 (BT-360)
-**가설**: 4단계(충전→부스트→순항→감속) 사이클의 성능계수는
-정확히 σ/n = 2에 수렴한다.
-**검증**: lattice field theory 시뮬레이션 에너지 대차대조표.
-**티어**: Tier 3 (연구소)
+### P-78 — τ=4 cycle warp-drive COP=2 (BT-360)
+**Hypothesis**: the coefficient of performance of a 4-stage cycle
+(charge → boost → cruise → decelerate) converges exactly to σ/n = 2.
+**Validation**: lattice field theory simulation energy balance sheet.
+**Tier**: Tier 3 (lab)
 **Source**: BT-360
 
-### P-79 — 바이러스 캡시드 T=3 정이십면체 편향 (BT-바이러스)
-**가설**: 전수 조사된 동물 바이러스 캡시드 삼각분할수 T의 최빈값은
-T=n/φ=3이며 전체 중 ≥1/φ=50%.
-**검증**: VIPERdb 1000+ 캡시드 T-값 히스토그램.
-**티어**: Tier 1 (1일, 공개 DB)
-**Source**: BT-바이러스학 (H-VIRO-N 참조)
+### P-79 — viral capsid T=3 icosahedral bias (BT-virology)
+**Hypothesis**: in an exhaustive survey of animal virus capsids, the mode of
+the triangulation number T is T=n/φ=3, with >=1/φ=50% of the total.
+**Validation**: histogram over 1000+ capsids in VIPERdb.
+**Tier**: Tier 1 (1 day, public DB)
+**Source**: BT-virology (see H-VIRO-N)
 
-### P-80 — 곤충 6다리 발생학적 보편성 (BT-곤충)
-**가설**: 모든 성충 곤충(100만+종)의 다리 수는 정확히 n=6이며,
-배아 T1/T2/T3 체절마다 1쌍씩(총 n=6 쌍 DIp 유전자 발현)이다.
-**검증**: Drosophila Dll/dac/hth 발현 분석, 곤충학 표준 교재 100% 검증.
-**티어**: Tier 1 (1일, 문헌)
-**Source**: BT-곤충학
+### P-80 — insect 6-legged developmental universality (BT-entomology)
+**Hypothesis**: all adult insects (1M+ species) have exactly n=6 legs, with
+one pair per embryonic T1/T2/T3 segment (a total of n=6 pair DIp gene expressions).
+**Validation**: Drosophila Dll/dac/hth expression analysis, 100% check of standard entomology texts.
+**Tier**: Tier 1 (1 day, literature)
+**Source**: BT-entomology
 
-### P-81 — 치료 나노봇 6DOF 조작 정밀도 (BT-404~406)
-**가설**: SE(3)=n=6 자유도 나노봇의 표적 도달률은 DOF<6일 때 급감,
-6에서 포화 (log-sigmoid, 변곡점=6).
-**검증**: in-vitro microfluidic 추적, DOF={3,4,5,6,7} 비교.
-**티어**: Tier 2 (4주, 실험실)
+### P-81 — therapeutic nanobot 6DOF manipulation precision (BT-404~406)
+**Hypothesis**: the target-reach rate of SE(3)=n=6 DOF nanobots drops sharply
+for DOF<6 and saturates at 6 (log-sigmoid, inflection point = 6).
+**Validation**: in-vitro microfluidic tracking, comparing DOF={3,4,5,6,7}.
+**Tier**: Tier 2 (4 weeks, lab)
 **Source**: BT-404~406
 
-### P-82 — 나노봇 Mk.III 군집 σ=12 합의 임계 (BT-407)
-**가설**: 분산 나노봇 군집의 Byzantine 내성은 노드 수 12 이상에서
-2/3 임계(BT-112)와 결합해 완전 수렴.
-**검증**: 시뮬레이션 n={6,9,12,15,18} 비교, 합의 시간 측정.
-**티어**: Tier 1 (2일, 멀티코어 CPU)
+### P-82 — nanobot Mk.III swarm σ=12 consensus threshold (BT-407)
+**Hypothesis**: the Byzantine resilience of distributed nanobot swarms combines
+with the 2/3 threshold (BT-112) and fully converges at a node count of >=12.
+**Validation**: simulation comparison of n={6,9,12,15,18}, measuring consensus time.
+**Tier**: Tier 1 (2 days, multicore CPU)
 **Source**: BT-407
 
-### P-83 — 나노봇 τ=4 운용 사이클 (BT-408)
-**가설**: 주입→순찰→작용→배출 4단계 기본 사이클이 혈중 반감기와
-일치 (T_cycle ∝ τ=4 시간).
-**검증**: 동물 모델 PK/PD 스터디, τ 스윕.
-**티어**: Tier 3 (6개월, GLP)
+### P-83 — nanobot τ=4 operation cycle (BT-408)
+**Hypothesis**: the 4-stage base cycle (inject → patrol → act → excrete) matches
+blood half-life (T_cycle ∝ τ=4 hours).
+**Validation**: animal-model PK/PD study, τ sweep.
+**Tier**: Tier 3 (6 months, GLP)
 **Source**: BT-408
 
-### P-84 — 의식칩 대뇌피질 6층 직접 매핑 (BT-254 + BT-90)
-**가설**: ANIMA-6 칩의 캐시 계층 수가 대뇌피질 층수 n=6과
-일치할 때 SNN 시뮬레이션 에너지 효율 극대.
-**검증**: 계층 수 ={4,5,6,7,8} 스윕, pJ/spike 측정.
-**티어**: Tier 2 (2주, 1 GPU + FPGA)
+### P-84 — consciousness-chip direct mapping to 6 cerebral-cortex layers (BT-254 + BT-90)
+**Hypothesis**: energy efficiency of SNN simulation is maximized when the
+ANIMA-6 chip's cache-hierarchy depth equals the n=6 cortex layer count.
+**Validation**: layer-count sweep of {4,5,6,7,8}, pJ/spike measurements.
+**Tier**: Tier 2 (2 weeks, 1 GPU + FPGA)
 **Source**: BT-254, BT-90
 
-### P-85 — Z₂ 위상 ECC J₂=24 GB 절약 (BT-91)
-**가설**: 기존 SECDED 대비 Z₂ 위상 ECC는 288GB HBM에서
-정확히 J₂=24 GB 오버헤드 절약 (identity).
-**검증**: RTL 시뮬, 비트 밀도 대조.
-**티어**: Tier 1 (1주, EDA 툴)
+### P-85 — Z₂ topological ECC saves J₂=24 GB (BT-91)
+**Hypothesis**: relative to conventional SECDED, Z₂ topological ECC saves
+exactly J₂=24 GB of overhead on 288 GB HBM (identity).
+**Validation**: RTL simulation, bit-density contrast.
+**Tier**: Tier 1 (1 week, EDA tooling)
 **Source**: BT-91
 
-### P-86 — Bott 주기 활성 채널 sopfr=5 (BT-92)
-**가설**: KO 이론 8주기 중 비자명 위상 채널은 정확히
-sopfr(6)=5개, 포화율 ≈ 1-1/e = 0.632.
-**검증**: 토폴로지컬 절연체 ARPES 데이터 재분석.
-**티어**: Tier 3 (시설)
+### P-86 — Bott-periodic active channels sopfr=5 (BT-92)
+**Hypothesis**: among the 8 periods of KO theory, the non-trivial topological
+channels count is exactly sopfr(6)=5, with saturation ≈ 1-1/e = 0.632.
+**Validation**: re-analyze topological-insulator ARPES data.
+**Tier**: Tier 3 (facility)
 **Source**: BT-92
 
-### P-87 — Miller 인지 채널 τ±μ=4±1 하드웨어 확증 (BT-263)
-**가설**: 인간 작업기억 실험에서 최적 chunk 수는 4, 표준편차 1,
-ANIMA-6 CLR 레지스터와 정확히 일치.
-**검증**: N-back 과제 n={3,4,5,6} 메타분석 (100+ 연구).
-**티어**: Tier 1 (2일, 메타분석)
+### P-87 — Miller cognitive channel τ±μ=4±1 hardware corroboration (BT-263)
+**Hypothesis**: in human working-memory experiments, the optimal chunk count is 4
+with standard deviation 1, matching exactly the ANIMA-6 CLR register.
+**Validation**: N-back task n={3,4,5,6} meta-analysis (100+ studies).
+**Tier**: Tier 1 (2 days, meta-analysis)
 **Source**: BT-263
 
-### P-88 — 격자 세포 육각 배열 n=6 (BT-255)
-**가설**: 내후각피질 격자 세포의 발화 필드 인접 거리 비율은
-육각 배열(n=6 이웃)을 ±5% 내에서 따른다.
-**검증**: Moser lab 공개 데이터셋 재분석.
-**티어**: Tier 1 (3일)
+### P-88 — grid-cell hexagonal arrangement n=6 (BT-255)
+**Hypothesis**: the adjacent firing-field distance ratio of entorhinal-cortex
+grid cells follows a hexagonal arrangement (n=6 neighbors) to within ±5%.
+**Validation**: re-analyze Moser-lab public datasets.
+**Tier**: Tier 1 (3 days)
 **Source**: BT-255
 
-### P-89 — 바이러스 RNA 6-뉴클레오티드 프레임 (BT-바이러스)
-**가설**: +ssRNA 바이러스(Coronaviridae 등)의 ORF 프레임시프트는
--1/+2 두 방향이지만, 거리 통계에서 6의 배수 피크 집중.
-**검증**: NCBI RefSeq coronavirus 게놈 전수 스캔.
-**티어**: Tier 1 (1일, bioinformatics)
-**Source**: BT-바이러스학
+### P-89 — viral-RNA 6-nucleotide frame (BT-virology)
+**Hypothesis**: +ssRNA viruses (Coronaviridae et al.) ORF frameshifts are in
+-1/+2 both directions, but distance statistics concentrate on multiples-of-6 peaks.
+**Validation**: exhaustive scan of NCBI RefSeq coronavirus genomes.
+**Tier**: Tier 1 (1 day, bioinformatics)
+**Source**: BT-virology
 
-### P-90 — 곤충 비늘가루 육각 격자 (BT-곤충)
-**가설**: 나비·나방 날개 비늘(scale)의 마이크로리브는 육각 격자
-간격 ±3% 내로 수렴 (구조색 결정).
-**검증**: SEM 이미지 FFT 분석, 100종 대조.
-**티어**: Tier 1 (1주, 박물관 표본 + SEM)
-**Source**: BT-곤충학
+### P-90 — insect scale-dust hexagonal lattice (BT-entomology)
+**Hypothesis**: the microribs of butterfly and moth wing scales converge to a
+hexagonal lattice spacing within ±3% (structural-color determination).
+**Validation**: FFT analysis of SEM images, 100-species comparison.
+**Tier**: Tier 1 (1 week, museum specimens + SEM)
+**Source**: BT-entomology
 
 ---
 
-## 신규 예측 P-91 ~ P-98 (실생활 킬러앱 검증, 2026-04 확장)
+## New Predictions P-91 ~ P-98 (everyday killer-app verification, 2026-04 expansion)
 
-n=6 산술 상수(σ=12, τ=4, φ=2, sopfr=5, J₂=24)가 일상 기술에
-직접 적용될 때의 킬러앱 예측 8건. 농업·교통·에너지·수처리·기상·
-백신·재활용·배터리 도메인을 포괄한다.
+8 killer-app predictions in which the n=6 arithmetic constants (σ=12, τ=4, φ=2,
+sopfr=5, J₂=24) apply directly to everyday technology. Domains covered:
+agriculture, transport, energy, water treatment, meteorology, vaccines,
+recycling, batteries.
 
-### P-91 — 농업 수확량 σ=12배 증대 (C₆H₁₂O₆ 최적화)
-**가설**: C₆H₁₂O₆(포도당) 광합성 최적화 + n=6단 재배 사이클
-(파종→발아→성장→개화→결실→수확) 적용 시 단위면적 수확량 σ=12배 향상.
-**검증**: 대조군 대비 6단 순환재배 최적화 실험, 동일 품종·토양·일조 조건.
-**반증 기준**: 대조군 대비 수확량 증가가 6배 미만
-**n=6 근거**: C₆H₁₂O₆ 탄소수 = n = 6, 재배 단계 = n = 6
-**티어**: Tier 2 (실험실 검증, 1작기 ~4개월)
-**Source**: BT-농업최적화
+### P-91 — agriculture yield σ=12× increase (C₆H₁₂O₆ optimization)
+**Hypothesis**: applying C₆H₁₂O₆ (glucose) photosynthesis optimization and an
+n=6-step cultivation cycle (sow → germinate → grow → bloom → fruit → harvest)
+improves yield per unit area by σ=12×.
+**Validation**: 6-step cyclic cultivation optimization experiments vs control, identical cultivar / soil / sunlight.
+**Falsification criterion**: yield increase less than 6× vs control
+**n=6 basis**: C₆H₁₂O₆ carbon count = n = 6, cultivation stages = n = 6
+**Tier**: Tier 2 (lab validation, 1 growing season ~4 months)
+**Source**: BT-agriculture-optimization
 
-### P-92 — 교통 신호 τ=4 최적화로 대기 시간 1/4
-**가설**: 신호 주기를 τ=4 단계(적→좌회전→직진→보행)로 최적화하면
-평균 대기 시간 75% 감소 (기존 다단계 대비).
-**검증**: 도시 교차로 시뮬레이션(SUMO/VISSIM) + 실증 배치, 1000교차로 표본.
-**반증 기준**: τ=4 단계가 τ=5 이상 단계 대비 대기 시간 개선 없음
-**n=6 근거**: τ(6) = 4 단계 제어, μ(6) = 1 (뫼비우스 함수 = 완벽 균형)
-**티어**: Tier 1 (즉시 검증, 시뮬레이션 3일)
-**Source**: BT-교통최적화
+### P-92 — τ=4 traffic-signal optimization cuts wait time by 1/4
+**Hypothesis**: optimizing signal cycles into τ=4 stages (red → left-turn →
+through → pedestrian) reduces mean wait time by 75% vs conventional multi-stage.
+**Validation**: urban-intersection simulation (SUMO/VISSIM) + field deployment, 1000-intersection sample.
+**Falsification criterion**: τ=4 stages show no wait-time improvement vs τ>=5 stages
+**n=6 basis**: τ(6) = 4 stage control, μ(6) = 1 (Möbius function = full balance)
+**Tier**: Tier 1 (immediate, 3-day simulation)
+**Source**: BT-traffic-optimization
 
-### P-93 — 가정 전력 φ=2 절감 (스마트그리드)
-**가설**: 스마트미터 n=6종 통합 모니터링 + AI 피크 분산으로
-가정 전력비 φ=2배(50%) 절감 달성.
-**검증**: 1000가구 대조군 실험 (스마트그리드 vs 기존), 12개월 추적.
-**반증 기준**: 절감률 25% 미만
-**n=6 근거**: φ(6) = 2 최적 관리 주기, sopfr(6) = 5 핵심 파라미터(전압/전류/역률/주파수/위상)
-**티어**: Tier 2 (실험실 검증, 12개월)
-**Source**: BT-에너지관리
+### P-93 — household electricity φ=2 savings (smart grid)
+**Hypothesis**: integrated monitoring of n=6 smart-meter types + AI peak-spreading
+achieves φ=2× (50%) household-electricity-cost savings.
+**Validation**: 1000-household control experiment (smart grid vs legacy), 12-month tracking.
+**Falsification criterion**: savings rate below 25%
+**n=6 basis**: φ(6) = 2 optimal management cycle, sopfr(6) = 5 core parameters (voltage / current / power factor / frequency / phase)
+**Tier**: Tier 2 (lab validation, 12 months)
+**Source**: BT-energy-management
 
-### P-94 — 수처리 멤브레인 수명 sopfr=5년 수렴
-**가설**: n=6 최적화 멤브레인 설계(6각 기공 배열 + σ-φ=10 수질 기준)
-시 교체 주기가 정확히 sopfr=5년에 수렴.
-**검증**: 가속 노화 시험(ASTM D3045) + 현장 장기 모니터링, 기존 멤브레인 대조.
-**반증 기준**: 수명이 3년 미만이거나 7년 초과 (sopfr=5 ±40% 이탈)
-**n=6 근거**: sopfr(6) = 5, σ-φ = 10 (통합 수질 기준 10항목)
-**티어**: Tier 3 (전문 검증, 5년 장기)
-**Source**: BT-수처리
+### P-94 — water-treatment membrane lifetime converges to sopfr=5 years
+**Hypothesis**: with an n=6-optimized membrane design (hexagonal pore array +
+σ-φ=10 water-quality criteria), the replacement cycle converges to exactly
+sopfr=5 years.
+**Validation**: accelerated-aging test (ASTM D3045) + long-term field monitoring, contrast with legacy membranes.
+**Falsification criterion**: lifetime below 3 years or above 7 years (deviating sopfr=5 ±40%)
+**n=6 basis**: sopfr(6) = 5, σ-φ = 10 (10-item integrated water-quality criteria)
+**Tier**: Tier 3 (specialist validation, 5-year long-term)
+**Source**: BT-water-treatment
 
-### P-95 — 태풍 에너지 φ=2 감축 (해수면 냉각 어레이)
-**가설**: σ²=144 km² 해수면 냉각 어레이 배치 시 태풍 에너지
-φ=2배(50%) 감축 가능. 해수면 온도 n=6°C 저감 목표.
-**검증**: 수치 기상 모델(WRF) 시뮬레이션 + 단일 태풍 실증.
-**반증 기준**: 에너지 감축 20% 미만
-**n=6 근거**: σ²(6) = 144 km² 배치 면적, η = 1-1/e 효율, n = 6°C 해수면 온도 저감
-**티어**: Tier 3 (전문 검증, HPC + 현장 1년)
-**Source**: BT-기상제어
+### P-95 — typhoon-energy φ=2 reduction (sea-surface cooling array)
+**Hypothesis**: deploying a σ²=144 km² sea-surface cooling array reduces
+typhoon energy by φ=2× (50%). Target sea-surface temperature reduction = n=6°C.
+**Validation**: numerical meteorological model (WRF) simulation + single-typhoon demonstration.
+**Falsification criterion**: energy reduction below 20%
+**n=6 basis**: σ²(6) = 144 km² deployment area, η = 1-1/e efficiency, n = 6°C sea-surface temperature reduction
+**Tier**: Tier 3 (specialist validation, HPC + 1-year field)
+**Source**: BT-meteorological-control
 
-### P-96 — 백신 개발 σ=12배 가속 (6개월→2주)
-**가설**: mRNA 플랫폼 + σ=12 분주 병렬 최적화 + τ=4 어쥬번트
-단계(항원제시→활성화→증폭→기억)로 백신 개발 6개월→2주 달성.
-면역 지속 기간 = σ·n/φ = 36개월.
-**검증**: 차세대 팬데믹 모의 대응 (WHO 협력), 임상 1상 진입 속도 측정.
-**반증 기준**: 개발 기간 1개월 초과 (σ=6배 미만 가속)
-**n=6 근거**: σ(6) = 12 분주 배수, τ(6) = 4 어쥬번트 단계, σ·n/φ = 36 면역 지속월
-**티어**: Tier 3 (전문 검증, GLP 6개월)
-**Source**: BT-백신플랫폼
+### P-96 — vaccine development σ=12× acceleration (6 months → 2 weeks)
+**Hypothesis**: mRNA platform + σ=12 parallel-aliquot optimization + τ=4
+adjuvant stages (antigen-present → activate → amplify → memory) achieves
+6-months → 2-weeks vaccine development. Immune-persistence duration = σ·n/φ = 36 months.
+**Validation**: next-generation pandemic simulation response (WHO collaboration), measure time-to-Phase-1-entry.
+**Falsification criterion**: development time exceeds 1 month (less than σ=6× acceleration)
+**n=6 basis**: σ(6) = 12 aliquot multiplier, τ(6) = 4 adjuvant stages, σ·n/φ = 36 immune-persistence months
+**Tier**: Tier 3 (specialist validation, GLP 6 months)
+**Source**: BT-vaccine-platform
 
-### P-97 — 재활용률 J₂=24 조합 최적화로 99.7%
-**가설**: AI 분류 J₂(6)=24 카테고리 + σ(6)·φ(6)=24 조합 최적화로
-재활용률 99.7% 달성 (현행 ~60% 대비).
-**검증**: 시범 재활용 센터 운영, 입력/출력 물질 수지 측정, 6개월 운영 데이터.
-**반증 기준**: 재활용률 90% 미만
-**n=6 근거**: J₂(6) = 24 분류 카테고리, σ·φ = 6·τ = 24 (핵심 정리), 99.7% = 열역학 한계 근접
-**티어**: Tier 2 (실험실 검증, 6개월)
-**Source**: BT-순환경제
+### P-97 — recycling rate 99.7% via J₂=24 combination optimization
+**Hypothesis**: AI classification into J₂(6)=24 categories + σ(6)·φ(6)=24
+combination optimization achieves a 99.7% recycling rate (vs current ~60%).
+**Validation**: pilot recycling-center operation, input/output mass-balance measurements, 6-month data.
+**Falsification criterion**: recycling rate below 90%
+**n=6 basis**: J₂(6) = 24 classification categories, σ·φ = 6·τ = 24 (core identity), 99.7% = near thermodynamic limit
+**Tier**: Tier 2 (lab validation, 6 months)
+**Source**: BT-circular-economy
 
-### P-98 — 리튬 회수율 τ=4 단계로 99.2%
-**가설**: τ=4 단계 복원 공정(해체→분리→정제→재합성)으로 폐배터리
-리튬 회수율 99.2% 달성. 채굴 대비 에너지 σ-φ=10배 절감.
-**검증**: 파일럿 플랜트 운영, 투입/회수 질량 비교 (ICP-MS 분석).
-**반증 기준**: 회수율 95% 미만
-**n=6 근거**: τ(6) = 4 단계 복원, σ-φ = 10배 에너지 절감, 희토류 자급률 n·(σ-φ) = 60%
-**티어**: Tier 2 (실험실 검증, 3개월)
-**Source**: BT-배터리순환
+### P-98 — lithium recovery rate 99.2% via τ=4 stages
+**Hypothesis**: τ=4 stage recovery process (disassemble → separate → refine →
+resynthesize) achieves a 99.2% lithium recovery rate from spent batteries. Energy
+savings vs mining = σ-φ=10×.
+**Validation**: pilot-plant operation, input/recovery mass comparison (ICP-MS analysis).
+**Falsification criterion**: recovery rate below 95%
+**n=6 basis**: τ(6) = 4 recovery stages, σ-φ = 10× energy savings, rare-earth self-sufficiency n·(σ-φ) = 60%
+**Tier**: Tier 2 (lab validation, 3 months)
+**Source**: BT-battery-circularity
 
 ---
 
@@ -895,13 +901,13 @@ n=6 산술 상수(σ=12, τ=4, φ=2, sopfr=5, J₂=24)가 일상 기술에
 | Tier | Count | Time | Hardware | Feasibility |
 |------|-------|------|----------|-------------|
 | **Tier 1** (Today) | 27 | 1-5 days | 1-4x GPU | High |
-| **Tier 2** (Medium) | 14 | 1-12 months | 4-64x GPU / 현장 | Medium |
+| **Tier 2** (Medium) | 14 | 1-12 months | 4-64x GPU / field | Medium |
 | **Tier 3** (Specialized) | 19 | Years | Lab/satellite/grid/facility | Low (external) |
 | **Tier 4** (Industry) | 13 | Months-years | Industry data | Observable |
-| **킬러앱** (신규) | 5 | 3-12 months | 실험실/파일럿 | Medium-High |
+| **Killer-app** (new) | 5 | 3-12 months | Lab / pilot | Medium-High |
 
-**Total predictions**: 98 (P-1 through P-98, +8 실생활 킬러앱 신규)
-**Total source BTs**: BT-1~413 + 도메인별 킬러앱 BT (413+ breakthrough theorems)
+**Total predictions**: 98 (P-1 through P-98, +8 new everyday killer-apps)
+**Total source BTs**: BT-1~413 + per-domain killer-app BTs (413+ breakthrough theorems)
 
 **New high-impact tests (BT-162~340)**:
 - P-46 (DPO beta=0.1) — validates 6th independent algorithm converging to 1/(sigma-phi), testable today.

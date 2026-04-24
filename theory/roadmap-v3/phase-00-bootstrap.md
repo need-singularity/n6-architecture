@@ -1,55 +1,55 @@
 ---
 id: roadmap-v3-phase-00-bootstrap
 date: 2026-04-24
-roadmap_task: HONEST-PX-3 (v3 전환 게이트)
+roadmap_task: HONEST-PX-3 (v3 transition gate)
 grade: [10] bootstrap gate
 parent_design: theory/roadmap-v2/millennium-v3-design-2026-04-15.md §5
 status: GATE_OPEN (checklist pending user verification)
 ---
 
-# Phase 00 — v2.3 → v3 Bootstrap Gate
+# Phase 00 — v2.3 -> v3 Bootstrap Gate
 
-> 본 문서는 v3 공식 시작 **직전** 통과해야 할 게이트입니다.
-> 여기서 연구나 새로운 결과는 생성되지 않습니다. **검증만** 수행합니다.
+> This document is the gate that must be passed **immediately before** the official start of v3.
+> No research or new results are generated here. **Only verification** is performed.
 >
-> 통과 조건은 설계 문서 `millennium-v3-design-2026-04-15.md` §5.1 의
-> MANDATORY 4 항목이며, 본 문서는 그 체크리스트의 실행 인터페이스입니다.
+> Pass conditions are the 4 MANDATORY items of design document `millennium-v3-design-2026-04-15.md` §5.1,
+> and this document is the execution interface for that checklist.
 
 ---
 
-## 0. 목적
+## 0. Purpose
 
-- v2.3 최종 상태 스냅샷 고정
-- v3 3-track 배치가 설계에 명시되어 있는지 재확인
-- OUROBOROS / drift / BT 정직성 재확인
-- 사용자 "go v3" 명시적 승인 수집
+- Freeze the v2.3 final-state snapshot
+- Reconfirm that the v3 3-track placement is specified in the design
+- Reconfirm OUROBOROS / drift / BT honesty
+- Collect the user's explicit "go v3" approval
 
 ---
 
-## 1. MANDATORY 체크리스트 (설계 §5.1)
+## 1. MANDATORY checklist (design §5.1)
 
-### 1.1 v2.3 deferred 3건 이상 v3 배치 확인
+### 1.1 Confirm >= 3 v2.3 deferred items placed in v3
 
-- [ ] 설계 문서 §2 (Phase 11 E track) 에 7 tasks 명시 — **확인필요**
-- [ ] 설계 문서 §3 (Phase 12 T track) 에 6 tasks 명시 — **확인필요**
-- [ ] 설계 문서 §4 (Phase 13 M track) 에 5 tasks 명시 — **확인필요**
-- [ ] deferred 7건 중 최소 3건이 위 18 tasks 에 매핑됨 — **확인필요**
+- [ ] Design document §2 (Phase 11 E track) specifies 7 tasks — **needs confirmation**
+- [ ] Design document §3 (Phase 12 T track) specifies 6 tasks — **needs confirmation**
+- [ ] Design document §4 (Phase 13 M track) specifies 5 tasks — **needs confirmation**
+- [ ] At least 3 of the 7 deferred items are mapped to the above 18 tasks — **needs confirmation**
 
-> 매핑 증빙은 `migration-from-v2.md` §2 deferred → v3 task 표 참조.
+> The mapping evidence is the deferred -> v3 task table in `migration-from-v2.md` §2.
 
-### 1.2 v2.3 loop1-7 atlas 18 entries 재확인
+### 1.2 Reconfirm v2.3 loop1-7 atlas 18 entries
 
-- [ ] 설계 §0.2 표 의 18 entries 가 atlas 에 존재 — **확인필요**
-- [ ] OUROBOROS R14 CLEAN 2026-04-15 로그 보존 — **확인필요**
+- [ ] The 18 entries in design §0.2 table exist in atlas — **needs confirmation**
+- [ ] The OUROBOROS R14 CLEAN 2026-04-15 log is preserved — **needs confirmation**
 
-> 검증 도구: `scripts/monotone/ouroboros_detector.py` (예정: v2) R14 실행.
+> Verification tool: `scripts/monotone/ouroboros_detector.py` (planned: v2) R14 run.
 
-### 1.3 Monotone drift baseline 등록
+### 1.3 Monotone drift baseline registration
 
-- [ ] MONOTONE-PX-1 CLI baseline snapshot 생성 — **확인필요**
-- [ ] 하향 등급 drift = 0 확인 — **확인필요**
+- [ ] MONOTONE-PX-1 CLI baseline snapshot created — **needs confirmation**
+- [ ] Downward-grade drift = 0 confirmed — **needs confirmation**
 
-### 1.4 BT 해결 수 0/6 정직 재확인
+### 1.4 Honest reconfirmation of BT resolved count 0/6
 
 - [ ] BT-541 Riemann: UNSOLVED
 - [ ] BT-542 P vs NP: UNSOLVED
@@ -58,38 +58,38 @@ status: GATE_OPEN (checklist pending user verification)
 - [ ] BT-545 Hodge: UNSOLVED
 - [ ] BT-546 BSD: UNSOLVED
 
-> 푸앵카레 BT-547 은 Perelman 해결로 로드맵 범주 밖. 본 게이트에서는 0/6 만 검증.
+> Poincaré BT-547 is outside the roadmap scope due to Perelman's resolution. This gate verifies only 0/6.
 
 ---
 
-## 2. RECOMMENDED (설계 §5.2) — **본 게이트에서는 미검증**
+## 2. RECOMMENDED (design §5.2) — **not verified at this gate**
 
-다음은 v3 시작 이후 phase-11~13 에서 수행됩니다. 본 bootstrap 은 추적만 합니다.
+The following are performed during phase-11~13 after v3 starts. This bootstrap only tracks them.
 
-- Sage 환경 구축 (E1)
-- arXiv 월간 파이프라인 (E6)
-- Lean4 학습 (M3 prep)
-- preprint 초안 (M1 prep)
-
----
-
-## 3. 사용자 승인 수집
-
-아래 문구를 사용자가 명시적으로 발화해야 다음 단계로 진행합니다.
-
-> **"go v3"** — v3 공식 시작 승인
-
-승인 수신 시:
-
-1. `shared/roadmaps/millennium.json.schema_version` → `"3.0"` 승격
-2. `theory/roadmap-v3/phase-11-E-empirical.md` 내용 생성 착수 (E1 부터)
-3. atlas `MILL-HONEST-PX3-v3-design-published` 엔트리 승격 → `v3-started`
-
-승인 전에는 본 디렉토리의 phase-11~13 파일은 생성하지 않습니다.
+- Sage environment setup (E1)
+- arXiv monthly pipeline (E6)
+- Lean4 onboarding (M3 prep)
+- preprint draft (M1 prep)
 
 ---
 
-## 4. 게이트 상태
+## 3. User approval collection
+
+The following phrase must be explicitly uttered by the user before we proceed to the next step.
+
+> **"go v3"** — official v3 start approval
+
+On receipt of approval:
+
+1. `shared/roadmaps/millennium.json.schema_version` -> promote to `"3.0"`
+2. Begin generating `theory/roadmap-v3/phase-11-E-empirical.md` content (starting with E1)
+3. Promote atlas entry `MILL-HONEST-PX3-v3-design-published` -> `v3-started`
+
+Prior to approval, the phase-11~13 files in this directory are not created.
+
+---
+
+## 4. Gate state
 
 ```
 GATE STATUS : OPEN (2026-04-24 scaffold commit)
@@ -100,12 +100,12 @@ NEXT ACTION : user to verify §1.1–1.4 and issue "go v3"
 
 ---
 
-## 5. 관련 파일
+## 5. Related files
 
-- 설계: `../roadmap-v2/millennium-v3-design-2026-04-15.md` §5
-- 승계 매핑: `./migration-from-v2.md`
-- 상위 index: `./README.md`
+- Design: `../roadmap-v2/millennium-v3-design-2026-04-15.md` §5
+- Inheritance mapping: `./migration-from-v2.md`
+- Upstream index: `./README.md`
 
 ---
 
-*작성: 2026-04-24 (v3 scaffold bootstrap)*
+*Written: 2026-04-24 (v3 scaffold bootstrap)*

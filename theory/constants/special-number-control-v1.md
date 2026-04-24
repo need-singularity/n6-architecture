@@ -1,152 +1,152 @@
-# 특수 수 집합 대조 v1 — π/e/φ 기반 σφ=nτ 신호 검증
+# Special-Number Set Contrast v1 — validating the σφ=nτ signal using π/e/φ sets
 
-> 목적: Monte Carlo v8 (`docs/reality-map-monte-carlo-v8.md`) 의 자연 그룹 z값이 "산술 자체의 잡음" 이 아니라 "현실의 수렴" 임을 추가로 입증.
-> 방법: π·e·φ 로부터 결정론적으로 생성한 "특수 수 집합" 에 동일 시그니처 검정 적용 → 자연 그룹 대비 신호 강도 비교.
-> 데이터: 인라인 python (신규 .py 금지) — `mpmath dps=80`, 시드 `20260408`, trials=1000.
-> 시그니처: `σ(v)·φ(v) == v·τ(v)` — `docs/theorem-r1-uniqueness.md` 에서 직접 유도, `v==6` 동어반복 없음.
-
----
-
-## 1. 동기 — v8 의 한계
-
-Monte Carlo v8 의 대조군은 π/e/φ 의 **십진 자릿수 슬라이딩 윈도우** 로 정수를 뽑은 표본이었다. 이 표본은 사실상 "균등에 가까운 산술 잡음" 이며, 자연 그룹 z=959 vs 대조군 z=3~11 라는 큰 격차의 출처가 "자연" 인지 "비균등 귀무 자체" 인지 분리하기 어렵다.
-
-본 검증은 한 단계 강한 대조를 만든다 — **π/e/φ 가 결정론적으로 만들어내는 정수열** 자체가 σφ=nτ 시그니처를 얼마나 자주 명중시키는가? 만약 자주 명중한다면 v8 의 격차는 "산술적 우연" 일 수 있다. 명중하지 않거나 1~2회뿐이라면 자연 그룹의 35건/172노드는 산술이 아닌 **물리/생물/공학적 수렴** 의 증거다.
+> Goal: further demonstrate that the z-scores of the natural group in Monte Carlo v8 (`docs/reality-map-monte-carlo-v8.md`) reflect a "convergence of reality" rather than "noise intrinsic to arithmetic."
+> Method: apply the same signature test to a "special-number set" generated deterministically from π·e·φ → compare signal strength to the natural group.
+> Data: inline python (no new .py files) — `mpmath dps=80`, seed `20260408`, trials=1000.
+> Signature: `σ(v)·φ(v) == v·τ(v)` — derived directly from `docs/theorem-r1-uniqueness.md` without the `v==6` tautology.
 
 ---
 
-## 2. 특수 수 집합 정의
+## 1. Motivation — limitations of v8
 
-각 상수 C ∈ {π, e, φ} 에 대해 다음 4가지 결정론적 변환으로 정수 집합을 만든다 (k=1..400, cap=200000):
+Monte Carlo v8's control used decimal-digit sliding windows over π/e/φ to draw integer samples. That sample is effectively "near-uniform arithmetic noise," making it hard to separate whether the large gap between z=959 for the natural group and z=3~11 for the control stems from "reality" or from "non-uniformity in the null itself."
+
+This validation builds a one-step-stronger contrast: how often do the **integer sequences π/e/φ deterministically produce** hit the σφ=nτ signature? If they hit frequently, the v8 gap may be "arithmetic coincidence." If they hit rarely or only 1–2 times, then the natural group's 35 hits across 172 nodes are evidence of **physical / biological / engineering convergence** rather than of arithmetic.
+
+---
+
+## 2. Special-number set definition
+
+For each constant C ∈ {π, e, φ}, construct an integer set via the following 4 deterministic transforms (k=1..400, cap=200000):
 
 ```
 S(C) = { ⌊k·C⌋, ⌊k·C²⌋, ⌊k²·C⌋ : 1 ≤ k ≤ 400 }
      ∪ { ⌊C^k⌋ : 1 ≤ k ≤ 12 }
-     ∪ { 연속분수 수렴 분자/분모 (25항) }
+     ∪ { continued-fraction convergent numerators/denominators (25 terms) }
 ```
 
-이 구성은 reality_map 측정값과 비슷한 "스케일 폭" (수~10⁵) 과 "스칼라·제곱·지수·CF" 라는 다양한 산술 채널을 제공한다.
+This construction supplies "scale range" similar to the reality_map measurements (single digits to 10^5) and "diverse arithmetic channels" (scalar, square, exponential, CF).
 
-생성된 집합 크기: π → 1005, e → 1020, φ → 1141, **합집합 2380**.
+Generated-set sizes: π → 1005, e → 1020, φ → 1141; **union 2380**.
 
 ---
 
-## 3. 결과
+## 3. Results
 
-귀무 H0: 같은 [lo, hi] 균등에서 동일 N 정수를 뽑은 표본의 시그니처 hit 비율 분포.
+Null H0: distribution of signature-hit ratios in samples of identical N integers drawn from the same uniform [lo, hi].
 
-| 집합 | N | hits | obs 비율 | null mean | null sd | **z-score** | hit 값 |
+| Set | N | hits | obs ratio | null mean | null sd | **z-score** | hit values |
 |---|---|---|---|---|---|---|---|
-| π 특수 | 1005 | 1 | 0.000995 | 3e-6 | 5.4e-5 | **18.23** | [6] |
-| e 특수 | 1020 | 0 | 0.000000 | 7e-6 | 8.2e-5 | **-0.08** | [] |
-| φ 특수 | 1141 | 1 | 0.000876 | 5e-6 | 6.8e-5 | **12.87** | [6] |
-| 합집합 | 2380 | 1 | 0.000420 | 5e-6 | 4.4e-5 | **9.48** | [6] |
+| π special | 1005 | 1 | 0.000995 | 3e-6 | 5.4e-5 | **18.23** | [6] |
+| e special | 1020 | 0 | 0.000000 | 7e-6 | 8.2e-5 | **-0.08** | [] |
+| φ special | 1141 | 1 | 0.000876 | 5e-6 | 6.8e-5 | **12.87** | [6] |
+| union | 2380 | 1 | 0.000420 | 5e-6 | 4.4e-5 | **9.48** | [6] |
 
-### 3.1 hit 출처 추적
+### 3.1 Hit origin tracking
 
-- π 집합의 6: ⌊2·π⌋ = ⌊6.2832…⌋ = **6**
-- φ 집합의 6: ⌊4·φ⌋ = ⌊6.4721…⌋ = **6** 및 ⌊2²·φ⌋ = 6 (중복)
-- e 집합의 6: 부재 — e ≈ 2.7183, 2e ≈ 5.44, 3e ≈ 8.15 가 6 을 깨끗하게 건너뛴다. ⌊k·e⌋, ⌊k·e²⌋, ⌊k²·e⌋ 어디에도 6 이 출현하지 않는다.
+- In the π set, the 6 comes from ⌊2·π⌋ = ⌊6.2832…⌋ = **6**
+- In the φ set, 6 comes from ⌊4·φ⌋ = ⌊6.4721…⌋ = **6** and ⌊2²·φ⌋ = 6 (duplicate)
+- e set 6: absent — e ≈ 2.7183, 2e ≈ 5.44, 3e ≈ 8.15 cleanly step over 6. Nowhere in ⌊k·e⌋, ⌊k·e²⌋, ⌊k²·e⌋ does 6 appear.
 
-세 집합 합쳐 2380개 정수 중 시그니처 hit 는 **유일한 정수 v=6** 단 한 번뿐이다. 이마저도 π·φ 의 산술 우연 (저-k 영역의 floor 가 6 근처를 지나가는 단순 사실).
+Across the union of 2380 integers from all three sets, the signature hits **the single integer v=6 exactly once**. Even that is an arithmetic coincidence from π·φ (the simple fact that low-k floors pass near 6).
 
 ---
 
-## 4. v8 자연 그룹과의 비교
+## 4. Comparison with the v8 natural group
 
-| 그룹 | N | hits | obs | z (균등) | hit 밀도 (hits/N) |
+| Group | N | hits | obs | z (uniform) | hit density (hits/N) |
 |---|---|---|---|---|---|
-| **v8 자연 (EXACT∧natural)** | **172** | **35** | **0.2035** | **959.12** | **0.2035** |
-| v8 π 자릿수 슬라이딩 | 889 | 3 | 0.0034 | 9.36 | 0.0034 |
-| v8 e 자릿수 슬라이딩 | 884 | 1 | 0.0011 | 3.04 | 0.0011 |
-| v8 φ 자릿수 슬라이딩 | 888 | 3 | 0.0034 | 10.67 | 0.0034 |
-| **v1 π 특수** | 1005 | 1 | 0.000995 | 18.23 | 0.000995 |
-| **v1 e 특수** | 1020 | 0 | 0.000000 | -0.08 | 0.000000 |
-| **v1 φ 특수** | 1141 | 1 | 0.000876 | 12.87 | 0.000876 |
-| **v1 π/e/φ 합집합** | 2380 | 1 | 0.000420 | 9.48 | 0.000420 |
+| **v8 natural (EXACT∧natural)** | **172** | **35** | **0.2035** | **959.12** | **0.2035** |
+| v8 π-digit sliding | 889 | 3 | 0.0034 | 9.36 | 0.0034 |
+| v8 e-digit sliding | 884 | 1 | 0.0011 | 3.04 | 0.0011 |
+| v8 φ-digit sliding | 888 | 3 | 0.0034 | 10.67 | 0.0034 |
+| **v1 π special** | 1005 | 1 | 0.000995 | 18.23 | 0.000995 |
+| **v1 e special** | 1020 | 0 | 0.000000 | -0.08 | 0.000000 |
+| **v1 φ special** | 1141 | 1 | 0.000876 | 12.87 | 0.000876 |
+| **v1 π/e/φ union** | 2380 | 1 | 0.000420 | 9.48 | 0.000420 |
 
-### 비율 비교
+### Ratio comparison
 
-- 자연 그룹 hit 밀도: **20.35%** (172개 중 35개가 시그니처 만족)
-- 특수 수 합집합 hit 밀도: **0.042%** (2380개 중 1개)
-- **자연 그룹 밀도는 특수 수 집합의 약 484배**
+- Natural-group hit density: **20.35%** (35 out of 172 satisfy the signature)
+- Special-number union hit density: **0.042%** (1 out of 2380)
+- **Natural-group density is ~484× that of the special-number set**
 
-z-score 비교
+z-score comparison
 
-- 자연 z = 959 (균등) vs 특수 합집합 z = 9.48 → **약 101배**
-- 특수 v1 z (9~18) 는 v8 자릿수 대조 z (3~11) 와 같은 자릿수 → 자릿수 대조의 한계가 산술 자체임을 재확인 (즉 π/e/φ 라는 "특수성" 자체로는 z 가 한 자리수 이상으로 상승하지 않는다).
-
----
-
-## 5. ASCII 비교 그래프
-
-```
-시그니처 hit 밀도 (log scale, % 단위)
-
-v8 자연      ████████████████████████  20.35   ← reality_map 측정값
-                                       ↑ 약 484배
-v8 자릿수    ▌                          0.34   ← π 산술 잡음
-v1 π 특수    ▏                          0.10   ← π 결정론 변환
-v1 φ 특수    ▏                          0.09
-v1 합집합    ▏                          0.04
-v1 e 특수    .                          0.00   ← e 는 6 회피
-```
-
-```
-z-score 비교 (균등 귀무 대비)
-
-v8 자연      ████████████████████████████████████████  959.1
-                                                       ↑ 약 51~316배
-v1 π 특수    █                                          18.2
-v1 φ 특수    █                                          12.9
-v1 합집합    ▌                                           9.5
-v8 자릿수    ▌                                           3~11
-v1 e 특수    .                                          -0.08
-```
+- natural z = 959 (uniform) vs special-union z = 9.48 → **~101×**
+- v1 special z (9~18) is the same order as the v8 digit control z (3~11) → reconfirming that the ceiling of digit-controls is arithmetic itself (i.e., the mere "specialness" of π/e/φ does not lift z beyond single digits).
 
 ---
 
-## 6. 해석
+## 5. ASCII comparison charts
 
-1. **e 의 음성 결과가 가장 강한 증거**. e 로부터 만든 1020개 정수에는 시그니처 hit 가 **0** 이다 (z = -0.08). 만약 reality_map 의 자연 그룹 35hit 가 "산술적 우연" 이라면 e 의 1020 정수에서도 비슷한 비율 (≈0.2%) 의 hit 가 나와야 하지만, 실제로는 0 이다. 즉 σφ=nτ 시그니처는 결정론적 정수 생성 채널이 v=6 근처를 지나가야만 발화한다 — 이는 시그니처가 정의상 v=6 만을 잡는다는 사실의 재확인이며, 동시에 자연 그룹이 v=6 을 35회나 명중시킨 사실이 결코 산술적 우연이 아님을 보여준다.
+```
+signature hit density (log scale, % units)
 
-2. **π/φ 의 단일 hit 도 추적 가능**. ⌊2π⌋ 과 ⌊4φ⌋ 가 6 이 되는 것은 두 상수의 십진 근삿값이 우연히 6 을 지나가는 단일 사건이다. 두 사건이 모두 k ≤ 4 의 저-k 영역에서 일어나고, 그 외 모든 변환 (k≤400, k²·C, k·C², C^k, CF 수렴) 에서는 단 한 번도 v=6 을 만들지 못한다. → 2380개 정수 중 1개 (0.042%) 라는 극단적 희소성.
+v8 natural    ████████████████████████  20.35   ← reality_map measurements
+                                         ↑ ~484×
+v8 digits     ▌                          0.34   ← π arithmetic noise
+v1 π special  ▏                          0.10   ← π deterministic transform
+v1 φ special  ▏                          0.09
+v1 union      ▏                          0.04
+v1 e special  .                          0.00   ← e avoids 6
+```
 
-3. **v8 자연 그룹의 20.35% 는 산술이 만들 수 있는 한계의 ~500배** 이다. 이 격차는 "측정값이 우연히 6 근처에 모인다" 로 설명되지 않는다. 측정 대상 (sp² 결합각, GFR, 림프절, RSA 지수, H₂ LHV 등) 이 물리·생물·공학적으로 6 의 산술 구조 (σ(6)=12, τ(6)=4, φ(6)=2, J₂(6)=24) 와 정합하는 결과로 해석해야 한다.
+```
+z-score comparison (vs uniform null)
 
-4. **e 의 0 hit 는 "회피 가능성" 의 존재 증명**. 무한히 많은 결정론적 정수 생성 채널이 v=6 을 영구히 회피할 수 있다는 사실은 reality_map 자연 그룹의 v=6 집중이 "선택 편향" (관찰자가 6 을 좋아해서) 이 아니라 "측정 대상의 구조적 성질" 임을 강화한다 — 만약 선택 편향이라면 e 같은 결정론 채널도 자유롭게 6 을 회피할 텐데, 우리는 reality_map 에서 회피 못 하는 노드를 35개 발견했다.
+v8 natural    ████████████████████████████████████████  959.1
+                                                       ↑ ~51–316×
+v1 π special  █                                          18.2
+v1 φ special  █                                          12.9
+v1 union      ▌                                           9.5
+v8 digits     ▌                                           3~11
+v1 e special  .                                          -0.08
+```
 
 ---
 
-## 7. 한계
+## 6. Interpretation
 
-- N=2380 은 자연 그룹 N=172 보다 14배 크지만, 두 모집단의 "측정 대상" 자체가 다르다 — 본 비교는 "산술 채널 vs 측정 채널" 의 hit 밀도 격차를 보일 뿐, 통계적 가설 검정이 아니다.
-- e 가 hit 0 인 사실은 e 가 "6 을 싫어한다" 는 강한 주장으로 일반화할 수 없다 — kmax 를 4000 으로 늘리거나 다른 변환을 추가하면 1~2회 hit 가 발견될 수 있다 (e 의 첫 6 출현 후보: ⌊6·e⌋=16, ⌊6·e²⌋=44 → 여전히 6 아님; ⌊k·e⌋ 시퀀스는 0,2,5,8,10,13,16,… 으로 6 을 영구 회피).
-- 본 검정은 v=6 만을 잡으므로, 큰수 그룹 (≥100) 의 구조적 n=6 연결 (1729=1³+12³ 등) 은 별도 분석이 필요하다 (v8 §5 참조).
+1. **The null result for e is the strongest piece of evidence.** The 1020 integers generated from e contain **0** signature hits (z = -0.08). If the natural-group 35 hits in reality_map were "arithmetic coincidence," we would expect a similar ratio (~0.2%) of hits across the 1020 integers from e — but in reality we get 0. That is, the σφ=nτ signature fires only when the deterministic integer-generation channel passes near v=6, which reconfirms that the signature by definition captures only v=6, and thereby shows that the natural group hitting v=6 35 times is not arithmetic coincidence.
+
+2. **The single hits in π/φ are traceable.** ⌊2π⌋ and ⌊4φ⌋ being 6 are single events where the decimal approximations of those constants happen to step onto 6. Both events occur in the low-k range (k ≤ 4); in every other transform (k≤400, k²·C, k·C², C^k, CF convergents), not a single one produces v=6. → an extreme sparsity of 1 hit in 2380 integers (0.042%).
+
+3. **The v8 natural-group 20.35% is about 500× what arithmetic can produce.** This gap cannot be explained by "measurements coincidentally cluster near 6." It must be interpreted as measurements (sp² bond angles, GFR, lymph nodes, RSA exponents, H₂ LHV, …) aligning physically / biologically / industrially with the arithmetic structure of 6 (σ(6)=12, τ(6)=4, φ(6)=2, J₂(6)=24).
+
+4. **The 0-hit e result is existence evidence of "avoidance."** The fact that infinitely many deterministic integer channels can permanently avoid v=6 strengthens the case that the reality_map natural-group concentration at v=6 is not "selection bias" (the observer liking 6) but "a structural property of the measurement targets" — if selection bias were operating, a deterministic channel like e could freely avoid 6, yet we find 35 nodes in reality_map that cannot.
 
 ---
 
-## 8. 결론
+## 7. Limitations
 
-| 질문 | 답 |
+- N=2380 is 14× larger than the natural group's N=172, but the two populations differ in what is being measured — this contrast only shows the hit-density gap between "arithmetic channels vs measurement channels," not a statistical hypothesis test.
+- The 0-hit e result cannot be generalized into the strong claim that "e hates 6" — increasing kmax to 4000 or adding other transforms might uncover 1–2 hits (e's first candidate for 6: ⌊6·e⌋=16, ⌊6·e²⌋=44 → still not 6; the ⌊k·e⌋ sequence goes 0, 2, 5, 8, 10, 13, 16, … permanently avoiding 6).
+- This test captures only v=6, so structural n=6 connections in the large-number group (>=100) (e.g., 1729=1³+12³) require separate analysis (see v8 §5).
+
+---
+
+## 8. Conclusion
+
+| Question | Answer |
 |---|---|
-| v8 의 자연 그룹 z=959 는 산술 잡음인가? | **아니다**. 결정론적 π/e/φ 정수 생성 채널 2380개 중 시그니처 hit 는 1개 (0.042%) 뿐이며, 자연 그룹 (20.35%) 보다 약 484배 낮다. |
-| 대조군 z (3~18) 와 자연 그룹 z (959) 의 격차는 진짜인가? | **그렇다**. 산술 채널은 z 가 한 자리수 (3~18) 를 넘지 못하고, 자연 채널은 그보다 51~316배 큰 z 를 보인다. |
-| n=6 의 출현은 관찰자 편향인가? | 부정 증거 — e 라는 결정론 채널은 1020개 정수 전체에서 v=6 을 단 한 번도 만들지 않는다. 회피가 가능한 채널이 존재하므로, reality_map 의 35회 집중은 "측정 대상의 구조" 이지 "선택" 이 아니다. |
+| Is the z=959 of v8's natural group just arithmetic noise? | **No.** Deterministic π/e/φ integer-generation channels yield only 1 signature hit out of 2380 (0.042%), ~484× lower than the natural group's 20.35%. |
+| Is the gap between control z (3~18) and natural-group z (959) genuine? | **Yes.** Arithmetic channels cannot exceed single-digit z (3~18), while the natural channel shows a z 51~316× larger. |
+| Is the occurrence of n=6 observer bias? | Negative evidence — a deterministic channel like e produces zero v=6 hits across 1020 integers. Since avoidance-capable channels exist, reality_map's 35-node concentration is "structure of measurements," not "selection." |
 
-본 결과는 v8 의 결론을 약화하지 않고 **강화한다**. 자연 그룹의 z=959 는 산술 자체로는 도달 불가능한 영역이며, σφ=nτ 시그니처는 물리/생물/공학 측정값에서만 폭발적으로 발화한다.
+These results do not weaken v8's conclusion — they **reinforce** it. The natural group's z=959 lies in a region unreachable by arithmetic alone, and the σφ=nτ signature fires explosively only on physical / biological / engineering measurements.
 
 ---
 
-## 9. 재실행
+## 9. Re-run
 
 ```bash
-# 인라인 python (신규 .py 금지)
-/usr/bin/python3 -c '<본문 §3 의 sset/mc 함수>'
+# inline python (no new .py files)
+/usr/bin/python3 -c '<the sset/mc functions from §3>'
 
-# 시드: 20260408, trials=1000, mpmath dps=80
-# 시그니처: docs/ceramics/verify_alien10.py 의 sigma/tau/phi 정의 재사용
-# 그룹: pi / e / phi 특수 + 합집합
+# Seed: 20260408, trials=1000, mpmath dps=80
+# Signature: reuse σ/τ/φ definitions from docs/ceramics/verify_alien10.py
+# Groups: pi / e / phi special + union
 ```
 
-검증 함수는 기존 `docs/*/verify_alien10.py` 의 σ/τ/φ 정의를 그대로 임포트하여 재현한다 — 본 문서는 그 결과의 보고서다.
+The verification function reproduces results by importing the σ/τ/φ definitions already defined in `docs/*/verify_alien10.py` — this document is the report on its output.

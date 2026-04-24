@@ -1,33 +1,33 @@
 ---
 id: roadmap-v3-migration-from-v2
 date: 2026-04-24
-roadmap_task: HONEST-PX-3 (v2 → v3 승계 매핑)
+roadmap_task: HONEST-PX-3 (v2 -> v3 inheritance mapping)
 grade: [10] migration note
 parent_design: theory/roadmap-v2/millennium-v3-design-2026-04-15.md
 scope: what-is-carried-forward vs what-is-new
 ---
 
-# v2 → v3 Migration Note
+# v2 -> v3 Migration Note
 
-> 본 문서는 v2.3 에서 v3 로 **승계되는 것** 과 **신규 생성되는 것** 을 명시합니다.
-> v3 는 v2 를 **삭제하지 않고** 위에 쌓는 구조 (additive) 입니다.
+> This document specifies what is **carried forward** from v2.3 into v3 versus what is **newly created**.
+> v3 **does not delete** v2 — it is an additive layer on top of it.
 
 ---
 
-## 1. 승계 (CARRIED FORWARD as-is)
+## 1. Carried forward (as-is)
 
-### 1.1 Phase 구조 (변경 없음)
+### 1.1 Phase structure (no changes)
 
-v2.3 의 아래 phase 파일은 `theory/roadmap-v2/` 에 그대로 보존되며 v3 에서 **참조만** 됩니다.
+The v2.3 phase files below remain in `theory/roadmap-v2/` and are **only referenced** from v3.
 
-| v2.3 phase | 파일 위치 | v3 상태 |
+| v2.3 phase | file location | v3 status |
 |-----------|----------|--------|
 | P0 axis-final | `roadmap-v2/axis-final.md` | carried (read-only) |
-| P1 foundation | `roadmap-v2/phase-01-foundation-Y-axes.md` 외 | carried |
-| P2 BT-541 | `roadmap-v2/phase-02-Y1-bt541-riemann.md` 외 | carried |
-| P3 BT-542 | `roadmap-v2/phase-03-Y4-bt542-pnp.md` 외 | carried |
-| P4 BT-543/544 | `roadmap-v2/phase-04-Y5Y6-bt543-bt544.md` 외 | carried |
-| P5 BT-545/546 | `roadmap-v2/phase-05-Y7Y8-bt545-bt546.md` 외 | carried |
+| P1 foundation | `roadmap-v2/phase-01-foundation-Y-axes.md` et al. | carried |
+| P2 BT-541 | `roadmap-v2/phase-02-Y1-bt541-riemann.md` et al. | carried |
+| P3 BT-542 | `roadmap-v2/phase-03-Y4-bt542-pnp.md` et al. | carried |
+| P4 BT-543/544 | `roadmap-v2/phase-04-Y5Y6-bt543-bt544.md` et al. | carried |
+| P5 BT-545/546 | `roadmap-v2/phase-05-Y7Y8-bt545-bt546.md` et al. | carried |
 | P6 BT-547 | `roadmap-v2/phase-06-bt547-poincare-retrospect.md` | carried |
 | P7 cross-BT | `roadmap-v2/phase-07-cross-bt-transfer-protocol.md` | carried |
 | P8 meta-audit | `roadmap-v2/phase-08-meta-audit-philosophy.md` | carried |
@@ -36,65 +36,65 @@ v2.3 의 아래 phase 파일은 `theory/roadmap-v2/` 에 그대로 보존되며 
 | PΩ closure | `roadmap-v2/phase-omega-Y9-closure-v3-design.md` | carried |
 | PX extension | `roadmap-v2/phase-PX-*.md` (4 files) | carried |
 
-### 1.2 JSON 산출물 (변경 없음)
+### 1.2 JSON artifacts (no changes)
 
-- `shared/roadmaps/millennium.json` — v2.3 구조 유지, `schema_version` 만 `"3.0"` 승격 예정 (Phase-00 gate 통과 후)
-- 155 tasks / 143 done / 5 partial / 7 deferred / saturation_index 1.0 / R14 CLEAN — **보존**
+- `shared/roadmaps/millennium.json` — v2.3 structure preserved; only `schema_version` to be promoted to `"3.0"` (after Phase-00 gate passes)
+- 155 tasks / 143 done / 5 partial / 7 deferred / saturation_index 1.0 / R14 CLEAN — **preserved**
 
-### 1.3 Atlas entries (변경 없음, 누적)
+### 1.3 Atlas entries (no changes, cumulative)
 
-설계 §0.2 의 loop1~7 18 entries 는 이미 atlas 에 등록. v3 는 **추가만** 하며 삭제/수정 없음.
+The design §0.2 loop1~7 18 entries are already registered in atlas. v3 **only appends** and never deletes or modifies.
 
-### 1.4 도구 (변경 없음, 확장만)
+### 1.4 Tooling (no changes, extension only)
 
 - `scripts/empirical/*.py` (5 files) — carried
-- `scripts/monotone/*.py` (2 files) — carried, M5 에서 v2 확장
+- `scripts/monotone/*.py` (2 files) — carried, extended by v2 in M5
 
-### 1.5 Breakthrough 문서 (변경 없음)
+### 1.5 Breakthrough documents (no changes)
 
-설계 §7 의 6 breakthrough .md 파일 — carried (M1 preprint 후보 pool).
+The 6 breakthrough .md files from design §7 — carried (M1 preprint candidate pool).
 
 ---
 
-## 2. Deferred → v3 task 매핑 (MANDATORY §5.1 증빙)
+## 2. Deferred -> v3 task mapping (MANDATORY §5.1 evidence)
 
-v2.3 deferred 7 항목 → v3 18 tasks 배치 현황:
+v2.3 deferred 7 items -> v3 18 tasks placement status:
 
-| v2.3 deferred | v3 배치 | phase | 근거 |
+| v2.3 deferred | v3 placement | phase | basis |
 |--------------|---------|-------|------|
-| Sage/Pari 도구 정밀화 | **E1, E2, E3** | phase-11 | 설계 §2 E1~E3 |
-| Cremona 3M 확장 | **E4, E5** | phase-11 | 설계 §2 E4~E5 |
-| arXiv 정기 서베이 | **E6, E7** | phase-11 | 설계 §2 E6~E7 |
-| Moonshine L5 (BT-18) | **T2** | phase-12 | 설계 §3 T2 |
-| Lean4 형식화 | **M3** | phase-13 | 설계 §4 M3 |
-| preprint 투고 | **M1** | phase-13 | 설계 §4 M1 |
-| 수학자 peer review | **M2, M4** | phase-13 | 설계 §4 M2, M4 |
+| Sage/Pari tooling refinement | **E1, E2, E3** | phase-11 | design §2 E1~E3 |
+| Cremona 3M extension | **E4, E5** | phase-11 | design §2 E4~E5 |
+| arXiv regular survey | **E6, E7** | phase-11 | design §2 E6~E7 |
+| Moonshine L5 (BT-18) | **T2** | phase-12 | design §3 T2 |
+| Lean4 formalization | **M3** | phase-13 | design §4 M3 |
+| preprint submission | **M1** | phase-13 | design §4 M1 |
+| mathematician peer review | **M2, M4** | phase-13 | design §4 M2, M4 |
 
-**매핑 결과**: 7/7 deferred 가 v3 track 에 배치됨. §5.1 의 "≥ 3 배치" 요건 **초과 달성**.
+**Mapping result**: 7/7 deferred items are placed into v3 tracks. §5.1's ">= 3 placements" requirement is **exceeded**.
 
 ---
 
-## 3. 신규 (NEW in v3)
+## 3. New (NEW in v3)
 
-### 3.1 Phase (3개)
+### 3.1 Phases (3)
 
-- `phase-11-E-empirical.md` — E track 7 tasks (설계 §2)
-- `phase-12-T-theoretical.md` — T track 6 tasks (설계 §3)
-- `phase-13-M-meta.md` — M track 5 tasks (설계 §4)
+- `phase-11-E-empirical.md` — E track 7 tasks (design §2)
+- `phase-12-T-theoretical.md` — T track 6 tasks (design §3)
+- `phase-13-M-meta.md` — M track 5 tasks (design §4)
 
-**현재 상태**: PENDING (본 스캐폴드에서는 미생성, 사용자 authorize 후 착수)
+**Current status**: PENDING (not generated in this scaffold; work begins after user authorize)
 
-### 3.2 Schema 변경
+### 3.2 Schema changes
 
-- `millennium.json.schema_version`: `"2.3"` → `"3.0"` (phase-00 gate 통과 시점)
-- 신규 phase 필드 `v3_tracks: {E, T, M}` 추가 예정
-- 기존 155 tasks 구조는 **불변**, v3 tasks 18 개가 추가되어 총 173 tasks 예정
+- `millennium.json.schema_version`: `"2.3"` -> `"3.0"` (at phase-00 gate pass)
+- New phase field `v3_tracks: {E, T, M}` planned
+- The existing 155-tasks structure is **unchanged**; 18 v3 tasks are appended for a planned total of 173 tasks
 
-### 3.3 신규 디렉토리
+### 3.3 New directory
 
-- `theory/roadmap-v3/` — 본 디렉토리 (스캐폴드 생성됨)
+- `theory/roadmap-v3/` — this directory (scaffold created)
 
-### 3.4 신규 도구 (예정)
+### 3.4 New tooling (planned)
 
 - `scripts/monotone/ouroboros_detector_v2.py` (M5, namespace-aware)
 - `.github/workflows/arxiv-quarterly.yml` (E6)
@@ -102,27 +102,27 @@ v2.3 deferred 7 항목 → v3 18 tasks 배치 현황:
 
 ---
 
-## 4. 삭제/폐기 (DELETED)
+## 4. Deleted / retired
 
-**없음**. v3 는 additive migration 입니다. v2.3 산출물 중 삭제되는 항목은 0 건.
-
----
-
-## 5. 호환성 경계
-
-- v2 를 읽는 외부 도구는 v3 출범 후에도 `roadmap-v2/` 경로로 계속 작동합니다.
-- `millennium.json` 은 단일 파일 유지 (분기 없음). schema_version 필드로만 v2/v3 구분.
-- atlas entries 는 append-only, v2 entries 의 id 재사용 금지.
+**None**. v3 is an additive migration. Zero v2.3 artifacts are removed.
 
 ---
 
-## 6. 관련 파일
+## 5. Compatibility boundary
 
-- 설계: `../roadmap-v2/millennium-v3-design-2026-04-15.md`
-- 게이트: `./phase-00-bootstrap.md`
-- 상위 index: `./README.md`
-- JSON: `../../shared/roadmaps/millennium.json` (cwd 기준: `shared/roadmaps/millennium.json`)
+- External tools that read v2 continue to work via the `roadmap-v2/` path even after v3 launch.
+- `millennium.json` remains a single file (no fork). v2/v3 are distinguished only by the schema_version field.
+- atlas entries are append-only; v2 entry id reuse is forbidden.
 
 ---
 
-*작성: 2026-04-24 (v3 scaffold bootstrap)*
+## 6. Related files
+
+- Design: `../roadmap-v2/millennium-v3-design-2026-04-15.md`
+- Gate: `./phase-00-bootstrap.md`
+- Upstream index: `./README.md`
+- JSON: `../../shared/roadmaps/millennium.json` (cwd-relative: `shared/roadmaps/millennium.json`)
+
+---
+
+*Written: 2026-04-24 (v3 scaffold bootstrap)*
