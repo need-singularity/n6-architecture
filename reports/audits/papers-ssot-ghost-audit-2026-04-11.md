@@ -1,68 +1,68 @@
-# papers SSOT 정합화 ghost 감사 리포트
+# papers SSOT consistency ghost-audit report
 
-- 생성일: 2026-04-11
-- 범위: 읽기 전용 감사 (수정 없음)
-- 대상 SSOT
-  - `$N6_ARCH/papers/_registry.json` (_meta.total_papers 선언값 139)
-  - `$N6_ARCH/papers/` 디렉토리
-  - `$PAPERS/` 외부 리포 (tecs-l, n6-architecture, 루트)
-  - `$NEXUS/shared/n6/docs/products.json` (40 섹션 / 204 제품, 일부 product의 `links[].path`가 `docs/paper/n6-*-paper.md`)
-- 참고: `reports/audits/products-link-remap-2026-04-11.md` (Agent 4 paper MISS 116건 선행 보고)
+- Created: 2026-04-11
+- Scope: read-only audit (no modifications)
+- Target SSOTs
+  - `$N6_ARCH/papers/_registry.json` (declared `_meta.total_papers` = 139)
+  - `$N6_ARCH/papers/` directory
+  - `$PAPERS/` external repos (tecs-l, n6-architecture, root)
+  - `$NEXUS/shared/n6/docs/products.json` (40 sections / 204 products; some products' `links[].path` reference `docs/paper/n6-*-paper.md`)
+- Reference: `reports/audits/products-link-remap-2026-04-11.md` (prior Agent 4 paper MISS 116 items report)
 
 ---
 
-## 1. 선언 대 실측 차이 총괄
+## 1. Declared vs measured diff overview
 
-### 1-1. 실측 디스크 스캔 (n6-*-paper.md basename)
+### 1-1. Measured disk scan (n6-*-paper.md basenames)
 
-| 위치 | 파일 수 |
+| Location | File count |
 |---|---:|
 | `$N6_ARCH/papers/` | 13 |
 | `$PAPERS/tecs-l/` | 23 |
 | `$PAPERS/n6-architecture/` | 1 (`n6-millennium-problems-paper.md`) |
-| `$PAPERS/` 루트 | 1 (`n6-hexa-neuro-bci-paper.md`) |
-| 합집합 (중복 제거, basename 기준) | **38** |
+| `$PAPERS/` root | 1 (`n6-hexa-neuro-bci-paper.md`) |
+| Union (de-duplicated by basename) | **38** |
 
-### 1-2. 선언값 비교
+### 1-2. Declared comparison
 
-| 항목 | 값 |
+| Item | Value |
 |---|---:|
-| `_registry.json _meta.total_papers` 선언 | 139 |
-| `_registry.json` 실제 참조 유니크 basename | 127 |
-| `products.json` `links[].path` 중 paper.md 유니크 basename | 116 |
-| 디스크 실측 유니크 basename | 38 |
-| **ghost 총 개수** (products 선언 - 디스크 존재) | **92** |
-| **orphan 디스크** (디스크 - products 참조) | **14** |
+| Declared `_registry.json _meta.total_papers` | 139 |
+| Unique basenames actually referenced in `_registry.json` | 127 |
+| Unique paper.md basenames in `products.json` `links[].path` | 116 |
+| Unique basenames measured on disk | 38 |
+| **ghost total** (products declared - disk existing) | **92** |
+| **disk orphans** (disk - products referenced) | **14** |
 
-### 1-3. 산출 공식
+### 1-3. Derivation formulas
 
 ```
-선언 139 (meta) vs 실측 디스크 38  →  선언 잉여 101편
-선언 127 (_registry path 기준) vs 디스크 38  →  잉여 89편
-products 116 vs 디스크 24 (products ∩ disk)  →  ghost 92편
+Declared 139 (meta) vs measured disk 38  ->  declared surplus 101
+Declared 127 (_registry path) vs disk 38  ->  surplus 89
+products 116 vs disk 24 (products intersect disk)  ->  ghost 92
 ```
 
-> _meta.total_papers=139 중 실측 38 = **실제 보유율 27.3%**.
-> products.json 참조 116 중 실제 해소 24 = **해소율 20.7%**.
+> Of the declared `_meta.total_papers=139`, 38 measured = **actual retention rate 27.3%**.
+> Of the 116 products.json references, 24 resolve = **resolution rate 20.7%**.
 
 ---
 
-## 2. products.json paper 링크 ghost 분포
+## 2. products.json paper-link ghost distribution
 
-### 2-1. 분류별 집계
+### 2-1. Tally by category
 
-| 분류 | 개수 | 의미 |
+| Category | Count | Meaning |
 |---|---:|---|
-| **FOUND_ALT** | 24 | 선언 path와 다른 경로에 파일 존재 (주로 `$PAPERS/tecs-l/`) |
-| **GHOST_CEIL** | 92 | 디스크 어디에도 없음, 전부 ceiling=True 섹션 소속 |
-| **GHOST_NOCEIL** | 0 | ceiling=False 섹션 소속 ghost 없음 (quantum-computer 섹션은 paper link 자체 없음) |
-| **ORPHAN_DECLARED** | 11 | _registry.json 선언만, products.json 참조 0 |
-| **ORPHAN_DISK** | 14 | 디스크 실존, products.json 참조 0 (ORPHAN_DECLARED 11 포함 + 3편 추가) |
+| **FOUND_ALT** | 24 | File exists at a path different from the declared one (mostly `$PAPERS/tecs-l/`) |
+| **GHOST_CEIL** | 92 | Not on disk anywhere; all in ceiling=True sections |
+| **GHOST_NOCEIL** | 0 | No ghosts in ceiling=False sections (the quantum-computer section has no paper links at all) |
+| **ORPHAN_DECLARED** | 11 | Declared only in _registry.json, 0 references from products.json |
+| **ORPHAN_DISK** | 14 | Exists on disk, 0 references from products.json (includes 11 ORPHAN_DECLARED + 3 extra) |
 
-### 2-2. 분류별 ASCII 차트
+### 2-2. ASCII chart by category
 
 ```
-분류          개수   막대 (최대 92)
+Category      Count   Bar (max 92)
 GHOST_CEIL     92    ##################################################################
 FOUND_ALT      24    #################
 ORPHAN_DISK    14    ##########
@@ -72,11 +72,11 @@ GHOST_NOCEIL    0
 
 ---
 
-## 3. FOUND_ALT 24편 — path 갱신 후보
+## 3. FOUND_ALT 24 items — path update candidates
 
-선언 path는 전부 `docs/paper/n6-*.md` 패턴이지만 실제 파일은 `$PAPERS/tecs-l/` (23편)과 `$N6_ARCH/papers/` (1편)에 존재. products.json의 `links[].path` 갱신 또는 파일 이관 필요.
+All declared paths follow the `docs/paper/n6-*.md` pattern, but the actual files are at `$PAPERS/tecs-l/` (23) and `$N6_ARCH/papers/` (1). Update `products.json` `links[].path` or physically migrate the files.
 
-| 선언 path (products.json) | 실제 위치 | 소속 섹션 |
+| Declared path (products.json) | Actual location | Section |
 |---|---|---|
 | `docs/paper/n6-aerospace-transport-paper.md` | `$PAPERS/tecs-l/n6-aerospace-transport-paper.md` | aerospace |
 | `docs/paper/n6-autonomous-driving-paper.md` | `$PAPERS/tecs-l/n6-autonomous-driving-paper.md` | robotics |
@@ -103,226 +103,226 @@ GHOST_NOCEIL    0
 | `docs/paper/n6-unified-soc-paper.md` | `$PAPERS/tecs-l/n6-unified-soc-paper.md` | chip |
 | `papers/n6-synthetic-biology-paper.md` | `$N6_ARCH/papers/n6-synthetic-biology-paper.md` | tech-industry |
 
-권장 조치: 단일 migration 스크립트로 products.json의 `links[].path`를 실제 경로로 갱신 (또는 n6-architecture/papers/로 물리 이관 후 경로 단일화).
+Recommended action: a single migration script that updates `products.json` `links[].path` to the actual paths (or physically moves files to `n6-architecture/papers/` for unified paths).
 
 ---
 
-## 4. GHOST_CEIL 92편 — 섹션별 분포 (천장 도달 대상)
+## 4. GHOST_CEIL 92 items — section distribution (ceiling-reached targets)
 
-### 4-1. 섹션별 ghost 수 (Top 10 — ASCII 차트)
+### 4-1. Ghosts per section (Top 10 — ASCII chart)
 
 ```
-섹션              ghost  막대 (최대 31)
-frontier           31   ###############################
-chip                7   #######
-civilization        7   #######
-life-culture        6   ######
-tech-industry       6   ######
-software            5   #####
-environment         4   ####
-ai                  3   ###
-energy              3   ###
-physics             3   ###
-audio               3   ###
-fusion              2   ##
-materials           2   ##
-play                2   ##
-aerospace           1   #
-robotics            1   #
-sf                  1   #
-safety              1   #
-display             1   #
-virology            1   #
-hiv-treatment       1   #
-cognitive-social    1   #
+Section            ghosts  Bar (max 31)
+frontier            31     ###############################
+chip                 7     #######
+civilization         7     #######
+life-culture         6     ######
+tech-industry        6     ######
+software             5     #####
+environment          4     ####
+ai                   3     ###
+energy               3     ###
+physics              3     ###
+audio                3     ###
+fusion               2     ##
+materials            2     ##
+play                 2     ##
+aerospace            1     #
+robotics             1     #
+sf                   1     #
+safety               1     #
+display              1     #
+virology             1     #
+hiv-treatment        1     #
+cognitive-social     1     #
 ```
 
-총 22개 섹션에 걸쳐 ghost paper가 분포. frontier 단독 31편이 전체 ghost의 33.7%.
+Ghost papers are distributed across 22 sections. Frontier alone contributes 31 items = 33.7% of all ghosts.
 
-### 4-2. 섹션별 ghost 목록 (요약)
+### 4-2. Per-section ghost list (summary)
 
-#### aerospace (1편)
-- `docs/paper/n6-hexa-starship-paper.md` ← HEXA-STARSHIP
+#### aerospace (1)
+- `docs/paper/n6-hexa-starship-paper.md` <- HEXA-STARSHIP
 
-#### ai (3편)
+#### ai (3)
 - `docs/paper/n6-causal-chain-paper.md`
 - `docs/paper/n6-reality-map-paper.md`
 - `docs/paper/n6-rtsc-12-products-evolution-paper.md`
 
-#### audio (3편)
-- `docs/paper/n6-hexa-ear-paper.md` ← HEXA-EAR Ultimate
-- `docs/paper/n6-hexa-speak-paper.md` ← HEXA-SPEAK
+#### audio (3)
+- `docs/paper/n6-hexa-ear-paper.md` <- HEXA-EAR Ultimate
+- `docs/paper/n6-hexa-speak-paper.md` <- HEXA-SPEAK
 - `docs/paper/n6-isocell-comms-paper.md`
 
-#### chip (7편)
+#### chip (7)
 - `n6-anima-soc-paper.md`, `n6-dram-paper.md`, `n6-exynos-paper.md`, `n6-hexa-asic-paper.md`, `n6-hexa-topo-paper.md`, `n6-performance-chip-paper.md`, `n6-vnand-paper.md`
 
-#### civilization (7편)
+#### civilization (7)
 - `n6-archaeology-paper.md`, `n6-dance-choreography-paper.md`, `n6-horology-paper.md`, `n6-jurisprudence-paper.md`, `n6-monetary-history-paper.md`, `n6-religion-mythology-paper.md`, `n6-writing-systems-paper.md`
 
-#### cognitive-social (1편)
-- `docs/paper/n6-consciousness-chip-paper.md` ← HEXA-CONSCIOUSNESS
+#### cognitive-social (1)
+- `docs/paper/n6-consciousness-chip-paper.md` <- HEXA-CONSCIOUSNESS
 
-#### display (1편)
+#### display (1)
 - `docs/paper/n6-display-8stack-paper.md`
 
-#### energy (3편)
+#### energy (3)
 - `n6-battery-energy-paper.md`, `n6-datacenter-reactor-paper.md`, `n6-energy-efficiency-paper.md`
 
-#### environment (4편)
+#### environment (4)
 - `n6-carbon-capture-paper.md`, `n6-environment-thermal-paper.md`, `n6-hexa-recycle-paper.md`, `n6-microplastics-paper.md`
 
-#### frontier (31편) — 전체 ghost의 33.7%
+#### frontier (31) — 33.7% of all ghosts
 - `n6-antimatter-factory-paper.md`, `n6-biology-medical-paper.md`, `n6-desal-paper.md`, `n6-entomology-paper.md`, `n6-hexa-accel-paper.md`, `n6-hexa-cloak-paper.md`, `n6-hexa-cosmic-paper.md`, `n6-hexa-defense-paper.md`, `n6-hexa-dream-paper.md`, `n6-hexa-empath-paper.md`, `n6-hexa-exo-paper.md`, `n6-hexa-fabric-paper.md`, `n6-hexa-glass-paper.md`, `n6-hexa-grav-paper.md`, `n6-hexa-holo-paper.md`, `n6-hexa-hover-paper.md`, `n6-hexa-limb-paper.md`, `n6-hexa-mind-paper.md`, `n6-hexa-mram-paper.md`, `n6-hexa-neuro-paper.md`, `n6-hexa-olfact-paper.md`, `n6-hexa-one-paper.md`, `n6-hexa-oracle-paper.md`, `n6-hexa-sim-paper.md`, `n6-hexa-skin-paper.md`, `n6-hexa-skyway-paper.md`, `n6-hexa-telepathy-paper.md`, `n6-hexa-teleport-paper.md`, `n6-hexa-tsunami-paper.md`, `n6-hexa-weather-paper.md`, `n6-seabed-grid-paper.md`
 
-#### fusion (2편)
+#### fusion (2)
 - `n6-fusion-powerplant-paper.md`, `n6-plasma-fusion-deep-paper.md`
 
-#### hiv-treatment (1편)
+#### hiv-treatment (1)
 - `n6-hiv-paper.md`
 
-#### life-culture (6편)
+#### life-culture (6)
 - `n6-aquaculture-paper.md`, `n6-dolphin-bioacoustics-paper.md`, `n6-fashion-textile-paper.md`, `n6-fermentation-paper.md`, `n6-insurance-paper.md`, `n6-wine-enology-paper.md`
 
-#### materials (2편)
+#### materials (2)
 - `n6-crystallography-materials-paper.md`, `n6-material-synthesis-paper.md`
 
-#### physics (3편)
+#### physics (3)
 - `n6-particle-cosmology-paper.md`, `n6-pure-mathematics-paper.md`, `n6-superconductor-paper.md`
 
-#### play (2편)
+#### play (2)
 - `n6-fun-car-paper.md`, `n6-motorcycle-paper.md`
 
-#### robotics (1편)
+#### robotics (1)
 - `n6-robotics-transport-paper.md`
 
-#### safety (1편)
+#### safety (1)
 - `n6-ultimate-safety-paper.md`
 
-#### sf (1편)
+#### sf (1)
 - `n6-hexa-ufo-paper.md`
 
-#### software (5편)
+#### software (5)
 - `n6-hexa-ios-paper.md`, `n6-hexa-macos-paper.md`, `n6-hexa-netproto-paper.md`, `n6-hexa-proglang-paper.md`, `n6-software-crypto-paper.md`
 
-#### tech-industry (6편)
+#### tech-industry (6)
 - `n6-advanced-packaging-paper.md`, `n6-ar-vr-xr-paper.md`, `n6-construction-structural-paper.md`, `n6-digital-twin-paper.md`, `n6-ecommerce-fintech-paper.md`, `n6-underground-tunnel-paper.md`
 
-#### virology (1편)
+#### virology (1)
 - `n6-virology-paper.md`
 
 ---
 
-## 5. ORPHAN_DECLARED 11편 — _registry.json만 참조, products.json 미참조
+## 5. ORPHAN_DECLARED 11 items — _registry.json only, not referenced in products.json
 
-`_registry.json`의 `papers_chunk_d_2026-04-11` 섹션에 선언되었지만, `products.json`의 어떤 product도 이 path들을 참조하지 않음. 해당 파일들은 디스크(`$N6_ARCH/papers/`)에 실제 존재하므로 **paper는 유효**하지만 product 매핑이 누락됨.
+Declared in `_registry.json`'s `papers_chunk_d_2026-04-11` section, but no product in `products.json` references these paths. The files do exist on disk (`$N6_ARCH/papers/`), so **the papers are valid** but the product mapping is missing.
 
-| path | 디스크 존재 | products.json 참조 |
+| path | Disk exists | products.json reference |
 |---|---|---|
-| `papers/n6-ai-17-techniques-experimental-paper.md` | O | X |
-| `papers/n6-atlas-promotion-7-to-10-paper.md` | O | X |
-| `papers/n6-cross-paradigm-ai-paper.md` | O | X |
-| `papers/n6-curvature-geometry-paper.md` | O | X |
-| `papers/n6-dimensional-unfolding-paper.md` | O | X |
-| `papers/n6-extra-dimensions-paper.md` | O | X |
-| `papers/n6-geology-prem-paper.md` | O | X |
-| `papers/n6-hexa-earphone-paper.md` | O | X |
-| `papers/n6-meteorology-paper.md` | O | X |
-| `papers/n6-oceanography-paper.md` | O | X |
-| `papers/n6-warp-metric-paper.md` | O | X |
+| `papers/n6-ai-17-techniques-experimental-paper.md` | Y | N |
+| `papers/n6-atlas-promotion-7-to-10-paper.md` | Y | N |
+| `papers/n6-cross-paradigm-ai-paper.md` | Y | N |
+| `papers/n6-curvature-geometry-paper.md` | Y | N |
+| `papers/n6-dimensional-unfolding-paper.md` | Y | N |
+| `papers/n6-extra-dimensions-paper.md` | Y | N |
+| `papers/n6-geology-prem-paper.md` | Y | N |
+| `papers/n6-hexa-earphone-paper.md` | Y | N |
+| `papers/n6-meteorology-paper.md` | Y | N |
+| `papers/n6-oceanography-paper.md` | Y | N |
+| `papers/n6-warp-metric-paper.md` | Y | N |
 
-권장 조치: 각 paper의 대응 product(예: `n6-fusion-powerplant-paper`가 있듯이 `n6-curvature-geometry-paper`에 대응되는 physics 섹션 product)를 products.json에 신규 등록하거나, 기존 product의 `links[]`에 path 추가.
+Recommended action: register a corresponding product in products.json for each paper (e.g., as `n6-fusion-powerplant-paper` exists, add a physics-section product for `n6-curvature-geometry-paper`), or add the path to an existing product's `links[]`.
 
 ---
 
-## 6. ORPHAN_DISK 14편 — 디스크 존재, products.json 미참조
+## 6. ORPHAN_DISK 14 items — on disk, not referenced in products.json
 
-ORPHAN_DECLARED 11편 + 아래 3편:
+11 ORPHAN_DECLARED items + the following 3:
 
-| 파일 | 경로 |
+| File | Path |
 |---|---|
 | `n6-hexa-neuro-bci-paper.md` | `$PAPERS/n6-hexa-neuro-bci-paper.md` |
 | `n6-millennium-problems-paper.md` | `$PAPERS/n6-architecture/n6-millennium-problems-paper.md` |
 | `n6-sota-ssm-paper.md` | `$N6_ARCH/papers/n6-sota-ssm-paper.md` |
 
-이 3편은 `_registry.json`에도 `products.json`에도 공식 참조가 없으므로 SSOT 등록 필요.
+These 3 have no official references in `_registry.json` or `products.json`, so SSOT registration is required.
 
 ---
 
-## 7. 권장 액션 매트릭스
+## 7. Recommended-action matrix
 
-| 분류 | 개수 | 조치 | 우선순위 |
+| Category | Count | Action | Priority |
 |---|---:|---|:---:|
-| FOUND_ALT | 24 | products.json `links[].path` 실제 경로로 갱신 (또는 n6-architecture/papers/로 이관) | **P0** |
-| GHOST_CEIL (frontier) | 31 | paper 신규 작성 — bt=264 최대 영향 | **P1** |
-| GHOST_CEIL (chip) | 7 | paper 신규 작성 | P2 |
-| GHOST_CEIL (civilization) | 7 | paper 신규 작성 | P2 |
-| GHOST_CEIL (life-culture) | 6 | paper 신규 작성 | P2 |
-| GHOST_CEIL (tech-industry) | 6 | paper 신규 작성 | P2 |
-| GHOST_CEIL 기타 | 35 | paper 신규 작성 | P3 |
-| ORPHAN_DECLARED | 11 | products.json에 product 매핑 추가 | P2 |
-| ORPHAN_DISK (추가 3편) | 3 | _registry.json + products.json 양쪽 등록 | P3 |
-| `_meta.total_papers` 139 값 교정 | 1 | 실측 38 또는 정합 기준값으로 조정 | **P0** |
+| FOUND_ALT | 24 | Update products.json `links[].path` to actual paths (or migrate to n6-architecture/papers/) | **P0** |
+| GHOST_CEIL (frontier) | 31 | Author new papers — maximum impact at bt=264 | **P1** |
+| GHOST_CEIL (chip) | 7 | Author new papers | P2 |
+| GHOST_CEIL (civilization) | 7 | Author new papers | P2 |
+| GHOST_CEIL (life-culture) | 6 | Author new papers | P2 |
+| GHOST_CEIL (tech-industry) | 6 | Author new papers | P2 |
+| GHOST_CEIL other | 35 | Author new papers | P3 |
+| ORPHAN_DECLARED | 11 | Add product mapping in products.json | P2 |
+| ORPHAN_DISK (extra 3) | 3 | Register in both _registry.json and products.json | P3 |
+| Correct `_meta.total_papers` 139 | 1 | Adjust to measured 38 or to a target value for SSOT consistency | **P0** |
 
 ---
 
-## 8. Top 3 우선 작성 paper 권장
+## 8. Top-3 recommended papers to author first
 
-frontier 섹션은 bt_count=264로 전체 섹션 중 최대이므로 ghost 해소 효과가 가장 큼. frontier 31편 중 BT 매핑이 가장 선행된 제품 기준:
+The frontier section has the largest bt_count (264) and thus the greatest ghost-resolution impact. Among the 31 frontier ghosts, the items whose BT mapping is most advanced:
 
-| 순위 | paper basename | 제품 | 섹션 bt |
+| Rank | paper basename | Product | Section bt |
 |:---:|---|---|---:|
-| 1 | `n6-hexa-neuro-paper.md` | HEXA-NEURO (뇌-기계 인터페이스) | 264 |
-| 2 | `n6-antimatter-factory-paper.md` | HEXA-ANTIMATTER (반물질 공장) | 264 |
-| 3 | `n6-hexa-mind-paper.md` | HEXA-MIND (의식 업로드) | 264 |
+| 1 | `n6-hexa-neuro-paper.md` | HEXA-NEURO (brain-machine interface) | 264 |
+| 2 | `n6-antimatter-factory-paper.md` | HEXA-ANTIMATTER (antimatter factory) | 264 |
+| 3 | `n6-hexa-mind-paper.md` | HEXA-MIND (consciousness upload) | 264 |
 
-> 참고: `_registry.json`의 `papers_chunk_c_2026-04-08` 청크에 `n6-hexa-neuro-paper.md`, `n6-hexa-mind-paper.md`가 이미 "계획"으로 선언돼 있으나 실제 파일 미존재. 이 청크 11편이 아직 0편 작성 상태.
+> Reference: `_registry.json` `papers_chunk_c_2026-04-08` already declares `n6-hexa-neuro-paper.md`, `n6-hexa-mind-paper.md` as "planned", but the actual files are absent. This chunk's 11 papers are currently 0-written.
 
 ---
 
-## 9. 총괄 요약
+## 9. Overall summary
 
-| 측정 | 값 |
+| Measurement | Value |
 |---|---:|
-| 선언 `_meta.total_papers` | 139 |
-| 디스크 실측 basename 합집합 | **38** |
-| products.json 참조 basename | 116 |
-| GHOST (products 선언만) | **92** |
-| FOUND_ALT (대체 경로 존재) | **24** |
-| ORPHAN_DECLARED (_registry 전용) | 11 |
-| ORPHAN_DISK (디스크 전용) | 14 |
-| 선언 대 실측 gap (139 - 38) | **101** |
+| Declared `_meta.total_papers` | 139 |
+| Measured disk-basename union | **38** |
+| products.json-referenced basenames | 116 |
+| GHOST (declared only in products) | **92** |
+| FOUND_ALT (alt path exists) | **24** |
+| ORPHAN_DECLARED (_registry only) | 11 |
+| ORPHAN_DISK (disk only) | 14 |
+| Declared vs measured gap (139 - 38) | **101** |
 
-### 9-1. 정합도 지표
+### 9-1. Consistency indicators
 
 ```
-선언 139 → 실측 38
-완성도: 27.3%  [##########                                      ]
+Declared 139 -> measured 38
+Completion: 27.3%  [##########                                      ]
 
-products 116 → 해소 24
-해소율:  20.7%  [########                                        ]
+products 116 -> resolved 24
+Resolution: 20.7%  [########                                        ]
 
-GHOST 작성 필요: 92편
-ORPHAN 매핑 필요: 14편
-경로 갱신 필요: 24편
+GHOST to author: 92
+ORPHAN to map:  14
+Paths to update: 24
 ```
 
-### 9-2. 본 감사의 한계
+### 9-2. Limitations of this audit
 
-- 본 리포트는 **파일 존재 여부만 판정**했으며 paper 본문 품질/완성도/BT 검증 여부는 판정 대상 아님.
-- `_registry.json`의 `papers_chunk_c_2026-04-08` (11편) 중 `n6-synthetic-biology-paper.md` 1편만 실측 존재. 나머지 10편은 ghost.
-- `papers_chunk_d_2026-04-11` 11편은 전부 디스크 존재 (ORPHAN_DECLARED).
-- products.json 수정 제안만 있으며 실제 경로 갱신/이관/paper 작성은 **사용자 승인 후 별도 세션**에서 진행.
+- This report judges **only file existence**; paper-body quality / completeness / BT verification is out of scope.
+- Of the 11 items in `_registry.json`'s `papers_chunk_c_2026-04-08`, only 1 (`n6-synthetic-biology-paper.md`) actually exists. The other 10 are ghosts.
+- All 11 items in `papers_chunk_d_2026-04-11` exist on disk (ORPHAN_DECLARED).
+- Only proposals for products.json changes are given; actual path updates, migrations, or paper authoring will proceed in **separate user-approved sessions**.
 
-### 9-3. 사용자 승인 요청 항목
+### 9-3. Items requiring user approval
 
-1. `_meta.total_papers: 139` → 실측 기준(38 또는 '140으로 목표 상향') 중 어느 정책으로 교정할지
-2. FOUND_ALT 24편: products.json path 갱신 방식(예: 상대 경로 `../papers/tecs-l/...` vs 절대 경로)
-3. GHOST_CEIL 92편: frontier 31편부터 순차 작성 승인 여부
-4. ORPHAN_DECLARED 11편: products.json에 신규 product 생성할지, 기존 product에 link 추가할지
+1. `_meta.total_papers: 139` -> whether to correct to the measured value (38) or raise the target (e.g., 140)
+2. FOUND_ALT 24 items: products.json path-update style (e.g., relative path `../papers/tecs-l/...` vs absolute)
+3. GHOST_CEIL 92 items: approval to author sequentially starting from the 31 frontier items
+4. ORPHAN_DECLARED 11 items: whether to create new products in products.json or add links to existing products
 
 ---
 
-감사 수행자: Claude (n6-architecture 세션)
-감사 일시: 2026-04-11
-감사 방식: 읽기 전용 (SSOT 미수정)
+Auditor: Claude (n6-architecture session)
+Date: 2026-04-11
+Audit mode: read-only (no SSOT modification)

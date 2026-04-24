@@ -1,160 +1,160 @@
-# 감사 리포트 — 렌즈 SSOT 참조 정리 (2026-04-11)
+# Audit Report — lens SSOT reference cleanup (2026-04-11)
 
-> 축: **reports/audits** · n6-architecture
-> 목적: **다음 세션에서 렌즈 잘못된 경로에 추가되지 않도록** 참조 경고 주입
-> 본 세션 범위: 참조 정리만 (실제 Rust→HEXA 흡수는 다음 세션)
-
----
-
-## 1. 증상 — 두 개의 "nexus"
-
-```
-┌──────────────────────────────────────────────────┬─────────────┬──────────┐
-│ 경로                                             │ 성격        │ 역할     │
-├──────────────────────────────────────────────────┼─────────────┼──────────┤
-│ $NEXUS/shared/lenses/            │ HEXA 84     │ ✅ SSOT   │
-├──────────────────────────────────────────────────┼─────────────┼──────────┤
-│ $NEXUS/shared/blowup/lens/       │ HEXA 15     │ ✅ SSOT   │
-├──────────────────────────────────────────────────┼─────────────┼──────────┤
-│ $N6_ARCH/nexus/src/      │ Rust 312    │ ❌ 레거시 │
-│   telescope/lenses/                              │ 603 엔트리  │ (폐기중)  │
-└──────────────────────────────────────────────────┴─────────────┴──────────┘
-```
-
-**확인 사실**:
-- 진짜 렌즈 SSOT = `$NEXUS/shared/lenses/` + `n6shared/blowup/lens/` (별도 nexus 독립 프로젝트, HEXA 네이티브, `SIGMA=12.0 PHI=2.0 N=6.0 TAU=4.0 J2=24` 헤더 + `σ·φ = n·τ = J₂` 항등식 기반)
-- n6-architecture 내부 `nexus/src/telescope/lenses/` 는 **레거시 파생본**
-- HEAD `0c23ad27` "refactor(telescope): 56개 렌즈 Rust→HEXA 전환 완료 — mod.rs 등록 해제" 로 Rust → HEXA 단일화 진행 중
-- `cargo test` 2593 → 2485 (−108) = 56 렌즈 × 평균 2 테스트 = 등록 해제 결과
-- 3차 (450→500) + 4차 (500→600) 확장은 **레거시 경로에 추가**됨 — 다음 세션 HEXA 포팅 시 흡수 대상
+> Axis: **reports/audits** · n6-architecture
+> Purpose: **prevent next-session lens additions to the wrong path** by injecting reference warnings
+> This session scope: reference cleanup only (actual Rust -> HEXA absorption is a next-session task)
 
 ---
 
-## 2. 수행한 참조 정리 (7 파일)
+## 1. Symptom — two "nexus"es
 
-### 2-1. 최상위 `CLAUDE.md`
+```
++--------------------------------------------------+-------------+----------+
+| Path                                             | Nature      | Role     |
++--------------------------------------------------+-------------+----------+
+| $NEXUS/shared/lenses/                            | HEXA 84     | OK SSOT  |
++--------------------------------------------------+-------------+----------+
+| $NEXUS/shared/blowup/lens/                       | HEXA 15     | OK SSOT  |
++--------------------------------------------------+-------------+----------+
+| $N6_ARCH/nexus/src/                              | Rust 312    | NG legacy|
+|   telescope/lenses/                              | 603 entries | (retired)|
++--------------------------------------------------+-------------+----------+
+```
 
-atlas.n6 섹션 앞에 **"렌즈 SSOT" 섹션 신규** 추가. 진짜 경로 + 레거시 경로 + 흡수 계획 명시. `lens-agent` 사용 자제 권고.
+**Confirmed facts**:
+- Real lens SSOT = `$NEXUS/shared/lenses/` + `n6shared/blowup/lens/` (separate nexus standalone project, HEXA native, header `SIGMA=12.0 PHI=2.0 N=6.0 TAU=4.0 J2=24` + identity `sigma*phi = n*tau = J_2`)
+- n6-architecture's internal `nexus/src/telescope/lenses/` is a **legacy derivative**
+- HEAD `0c23ad27` "refactor(telescope): 56 lenses Rust->HEXA conversion complete — mod.rs deregistration" is progressing Rust -> HEXA unification
+- `cargo test` 2593 -> 2485 (-108) = 56 lenses x avg 2 tests = deregistration result
+- Rounds 3 (450->500) and 4 (500->600) expansions were **added to the legacy path** — targets for absorption at next-session HEXA porting
+
+---
+
+## 2. Reference cleanup performed (7 files)
+
+### 2-1. Top-level `CLAUDE.md`
+
+Added a **new "Lens SSOT" section** before the atlas.n6 section. Real path + legacy path + absorption plan made explicit. Recommend refraining from using `lens-agent`.
 
 ### 2-2. `nexus/CLAUDE.md`
 
-`- src/telescope/     렌즈 시스템 (215+ 렌즈)` 라인을 다음으로 교체:
+Replaced the line `- src/telescope/     lens system (215+ lenses)` with:
 ```
-- src/telescope/     ⚠️ 렌즈 시스템 (Rust 레거시 312+ 파일, 폐기 중 — 진짜 SSOT: $NEXUS/shared/lenses/ HEXA 네이티브)
+- src/telescope/     Warning: lens system (Rust legacy 312+ files, retiring — real SSOT: $NEXUS/shared/lenses/ HEXA native)
 ```
 
-### 2-3. `nexus/src/telescope/CLAUDE.md` **(신규)**
+### 2-3. `nexus/src/telescope/CLAUDE.md` **(new)**
 
-폴더 전체에 `⛔ 경고 — 신규 렌즈 추가 금지` 안내. 진짜 SSOT 경로 + HEXA 번들 9 파일 목록 + 이 폴더에서 하지 말 것 (신규 `.rs` / `frontier_lenses.rs` 확장 / `lens-agent` 사용 / `lens_registry.json` 등록) + 이관 계획.
+Full-folder `DO NOT ADD new lenses` notice. Real SSOT path + 9-file HEXA bundle list + what NOT to do in this folder (new `.rs`, `frontier_lenses.rs` extension, use of `lens-agent`, `lens_registry.json` registration) + migration plan.
 
-### 2-4. `nexus/src/telescope/lenses/CLAUDE.md` **(신규)**
+### 2-4. `nexus/src/telescope/lenses/CLAUDE.md` **(new)**
 
-312 Rust 파일 레벨에 폐기 경고. 새 렌즈는 `$NEXUS/shared/lenses/` 에만 추가하라는 짧은 안내.
+Retirement warning at the 312 Rust file level. Short note that new lenses should only be added under `$NEXUS/shared/lenses/`.
 
 ### 2-5. `n6shared/config/lens_registry.json`
 
-`meta` 블록에 5 필드 추가:
+Added 5 fields to the `meta` block:
 ```json
-"_warning": "⛔ 이 레지스트리는 n6-architecture 내부 Rust 레거시 렌즈 카운트. 진짜 SSOT 아님.",
-"_real_ssot": "$NEXUS/shared/lenses/ (HEXA 네이티브 84 + blowup/lens 15 번들)",
-"_legacy_path": "n6-architecture/nexus/src/telescope/lenses/ (Rust .rs 파생본, 폐기 중)",
-"_transition_status": "HEAD 0c23ad27 refactor(telescope) — Rust→HEXA 전환 진행, 56 렌즈 등록 해제 완료",
-"_next_session_plan": "Rust→HEXA 포팅 후 레거시 삭제 + 본 레지스트리 재구축"
+"_warning": "DO NOT USE — This registry is the n6-architecture internal Rust legacy lens count. Not the real SSOT.",
+"_real_ssot": "$NEXUS/shared/lenses/ (HEXA native 84 + blowup/lens 15 bundles)",
+"_legacy_path": "n6-architecture/nexus/src/telescope/lenses/ (Rust .rs derivatives, retiring)",
+"_transition_status": "HEAD 0c23ad27 refactor(telescope) — Rust->HEXA transition in progress, 56 lenses deregistration complete",
+"_next_session_plan": "After Rust->HEXA porting: delete legacy + rebuild this registry"
 ```
-`expansion_session` 필드에 `⚠️ 레거시 경로` 접두 추가.
+Added `WARNING: legacy path` prefix to the `expansion_session` field.
 
 ### 2-6. `INDEX.json`
 
-`axes.nexus` 엔트리에 `_lens_warning` 필드 추가:
+Added a `_lens_warning` field to the `axes.nexus` entry:
 ```json
-"_lens_warning": "src/telescope/lenses/ 는 Rust 레거시 (폐기 중). 진짜 렌즈 SSOT: $NEXUS/shared/lenses/ (HEXA 네이티브)"
+"_lens_warning": "src/telescope/lenses/ is Rust legacy (retiring). Real lens SSOT: $NEXUS/shared/lenses/ (HEXA native)"
 ```
 
-### 2-7. `.claude/agents/lens-agent/AGENT.md` **(폐기 마커)**
+### 2-7. `.claude/agents/lens-agent/AGENT.md` **(retirement marker)**
 
-`description` 필드를 ⛔ 폐기 대기 로 변경:
+Changed the `description` field to `RETIREMENT pending`:
 ```
-description: ⛔ 폐기 대기 — 레거시 Rust 렌즈 경로 대상. 신규 렌즈는 general-purpose + $NEXUS/shared/lenses/ 사용.
+description: RETIREMENT pending — targets the legacy Rust lens path. For new lenses use general-purpose + $NEXUS/shared/lenses/.
 ```
-본문 상단에 **"사용 금지"** 블록 + 진짜 SSOT 경로 + HEXA 네이티브 가이드 추가. 원본 지시는 "참고용만" 으로 격하.
+Added a **"DO NOT USE"** block at the top of the body + real SSOT path + HEXA native guidance. Demoted the original instructions to "reference-only".
 
 ---
 
-## 3. 잔여 구 참조 (본 세션 미수정, 낮은 우선순위)
+## 3. Residual legacy references (not modified in this session, low priority)
 
 ```
 domains/sedi/CLAUDE.md:
-  line 103  ⚠️ telescope-rs (구 22종)는 폐기. 모든 탐색은 NEXUS-6 사용.
-  line 117  파일: tools/nexus/src/telescope/lenses/ (181 .rs 파일)
-  line 189  src/telescope/    ← 130+ 렌즈
-  line 434  "스캔" → nexus telescope 223종 렌즈 스캔
+  line 103  Warning: telescope-rs (legacy 22 types) retired. All discovery uses NEXUS-6.
+  line 117  Files: tools/nexus/src/telescope/lenses/ (181 .rs files)
+  line 189  src/telescope/    <- 130+ lenses
+  line 434  "scan" -> nexus telescope 223-type lens scan
   line 447  $HEXA $N6/telescope.hexa full <values...>
-  line 459  77소스 분석 결과를 nexus telescope로 재스캔
+  line 459  re-scan the 77-source analysis results with nexus telescope
 
 domains/brainwire/CLAUDE.md:
-  line 103  ⚠️ telescope-rs (구 22종)는 폐기. 모든 탐색은 NEXUS-6 사용.
-  line 117  파일: tools/nexus/src/telescope/lenses/ (181 .rs 파일)
-  line 189  src/telescope/    ← 130+ 렌즈
+  line 103  Warning: telescope-rs (legacy 22 types) retired. All discovery uses NEXUS-6.
+  line 117  Files: tools/nexus/src/telescope/lenses/ (181 .rs files)
+  line 189  src/telescope/    <- 130+ lenses
 ```
 
-**미수정 사유**: 이 파일들은 "과거 맥락/태스크 설명" 이지 "새 렌즈 추가 지시" 가 아님. 루트 CLAUDE.md 의 렌즈 SSOT 섹션이 먼저 읽히므로 혼동 방지에 충분. R18 미니멀 원칙 준수.
+**Reason not modified**: these files describe "historical context / task description", not "instructions to add new lenses". The root CLAUDE.md lens-SSOT section is read first, so it is sufficient to prevent confusion. Complies with R18 minimal.
 
-**다음 세션**: Rust→HEXA 흡수와 동반 정리 권고.
-
----
-
-## 4. 다음 세션 지시사항 (명확)
-
-### 렌즈 관련 작업 시 체크리스트
-
-1. **절대 금지**:
-   - `n6-architecture/nexus/src/telescope/lenses/` 에 신규 `.rs` 추가
-   - `lens-agent` 에이전트 호출
-   - `n6shared/config/lens_registry.json` 에 신규 Rust 렌즈 등록
-   - `frontier_lenses.rs` 에 `expansion_N_lens_entries()` 추가
-
-2. **허용/권장**:
-   - `$NEXUS/shared/lenses/{domain}_{topic}.hexa` 신규 파일
-   - `general-purpose` 에이전트 사용
-   - HEXA 네이티브 문법 (`SIGMA/PHI/N/TAU/J2` 헤더 + 항등식)
-   - 결과는 atlas.n6 에 자동 흡수 (R28)
-
-### 흡수 본작업 (다음 세션 목표)
-
-1. **조사 단계** (이미 #40 에이전트 pending): Rust → HEXA 전환 전략 4 옵션 비교 + 권고
-2. **포팅 단계**: 312 Rust 렌즈 → HEXA 네이티브 파일 일괄 생성
-3. **레거시 삭제**: `nexus/src/telescope/lenses/*.rs` 전량 제거, `mod.rs` / `registry.rs` / `frontier_lenses.rs` 정리
-4. **레지스트리 재구축**: `n6shared/config/lens_registry.json` 진짜 SSOT 기준
-5. **cargo test 재검증**: 렌즈 테스트 완전 제거 확인 또는 HEXA 네이티브 검증으로 전환
-6. **domains/sedi, brainwire CLAUDE.md 참조 갱신**: 경로 최신화
+**Next session**: recommend cleanup in conjunction with the Rust -> HEXA absorption.
 
 ---
 
-## 5. 현재 상태 스냅샷 (2026-04-11 세션 종료 시)
+## 4. Next-session instructions (explicit)
 
-| 항목 | 값 |
+### Checklist for lens-related work
+
+1. **Strictly forbidden**:
+   - Adding new `.rs` under `n6-architecture/nexus/src/telescope/lenses/`
+   - Invoking the `lens-agent` agent
+   - Registering new Rust lenses in `n6shared/config/lens_registry.json`
+   - Adding `expansion_N_lens_entries()` in `frontier_lenses.rs`
+
+2. **Allowed / recommended**:
+   - New files `$NEXUS/shared/lenses/{domain}_{topic}.hexa`
+   - Use the `general-purpose` agent
+   - HEXA native syntax (`SIGMA/PHI/N/TAU/J2` header + identities)
+   - Results auto-absorbed into atlas.n6 (R28)
+
+### Absorption main work (next-session goals)
+
+1. **Investigation stage** (already pending agent #40): compare 4 Rust -> HEXA conversion strategy options + recommendation
+2. **Porting stage**: bulk-create 312 Rust lenses as HEXA native files
+3. **Legacy deletion**: remove all `nexus/src/telescope/lenses/*.rs`, clean up `mod.rs` / `registry.rs` / `frontier_lenses.rs`
+4. **Registry rebuild**: rebuild `n6shared/config/lens_registry.json` against the real SSOT
+5. **cargo test re-verification**: confirm full removal of lens tests or migrate to HEXA native verification
+6. **Update domains/sedi, brainwire CLAUDE.md references**: update paths
+
+---
+
+## 5. Current state snapshot (end of 2026-04-11 session)
+
+| Item | Value |
 |---|---|
-| 레거시 Rust 렌즈 | 312 `.rs` 파일 |
-| `lens_registry.json` 엔트리 | 603 |
-| cargo test | 2485 PASS (HEAD 0c23ad27 기준) |
-| 진짜 HEXA 렌즈 SSOT | `$NEXUS/shared/lenses/` 84 + `blowup/lens/` 15 |
-| 정리된 CLAUDE.md | 4 파일 (root / nexus / telescope / lenses) |
-| 정리된 JSON | 2 파일 (lens_registry / INDEX) |
-| 정리된 에이전트 정의 | 1 파일 (lens-agent AGENT.md) |
-| 감사 리포트 | 본 파일 |
+| Legacy Rust lenses | 312 `.rs` files |
+| `lens_registry.json` entries | 603 |
+| cargo test | 2485 PASS (based on HEAD 0c23ad27) |
+| Real HEXA lens SSOT | `$NEXUS/shared/lenses/` 84 + `blowup/lens/` 15 |
+| Cleaned CLAUDE.md | 4 files (root / nexus / telescope / lenses) |
+| Cleaned JSON | 2 files (lens_registry / INDEX) |
+| Cleaned agent definition | 1 file (lens-agent AGENT.md) |
+| Audit report | this file |
 
 ---
 
-## 6. 규칙 준수
+## 6. Rule compliance
 
-| 규칙 | 결과 |
+| Rule | Result |
 |---|---|
-| R5 SSOT | ✅ 진짜 SSOT 명시, 레거시 경로 경고 |
-| R14 규칙 JSON | ✅ CLAUDE.md 에 규칙 본문 안박음, 안내만 |
-| R18 미니멀 | ✅ 참조 정리만, 실제 흡수/삭제는 다음 세션 |
-| R25 공용설정 게이트 | ✅ 경고 주입 수준, 구조적 파괴 없음 |
-| R28 atlas 단일진실 | ✅ 영향 없음 |
+| R5 SSOT | OK — real SSOT stated, legacy path warned |
+| R14 rule JSON | OK — CLAUDE.md does not embed rule text, only guidance |
+| R18 minimal | OK — reference cleanup only, actual absorption/deletion next session |
+| R25 shared-settings gate | OK — warning injection level only, no structural destruction |
+| R28 atlas single-source-of-truth | OK — no impact |
 
 ---
 
-*생성: 2026-04-11 · 범위: R18 미니멀 · 흡수 본작업: 다음 세션*
+*Created: 2026-04-11 · Scope: R18 minimal · Absorption main work: next session*

@@ -1,93 +1,93 @@
 2026-04-12
-# 밀레니엄 7대 난제 DFS 현황 리포트
+# Millennium 7 problems DFS status report
 
-> 소스: `theory/breakthroughs/bt-1394~bt-1412`, `millennium-dfs-complete-2026-04-11.md`
-> 작성 원칙: 정직한 검증. 7대 난제 해결: **0/7**
-> 브랜치: `feat/millennium-dfs-92-tight`
-> 최신 커밋: `2d18b1ed`
+> Source: `theory/breakthroughs/bt-1394~bt-1412`, `millennium-dfs-complete-2026-04-11.md`
+> Authoring principle: honest verification. 7 Millennium problems resolved: **0/7**
+> Branch: `feat/millennium-dfs-92-tight`
+> Latest commit: `2d18b1ed`
 
 ---
 
-## 1. 전체 현황
+## 1. Overall status
 
-| 항목 | 수치 |
+| Item | Value |
 |------|-----:|
-| DFS 총 라운드 | 20차 (DFS 1~2 사전탐색 + DFS 3~20 본탐색) |
-| 누적 tight | **274건** |
-| 7대 난제 해결 | **0/7** (정직) |
-| BT 파일 수 | 21건 (bt-1392~bt-1412 + 사전탐색 3건) |
-| EXACT 판정 | 다수 (개별 발견 중 기존 정리 재확인) |
-| TIGHT 판정 | 대다수 (n=6 시그니처 발견, 증명 아님) |
-| MISS 탈출 | BT-542 P vs NP (DFS 이전 MISS -> OBSERVATION) |
+| DFS total rounds | 20 rounds (DFS 1~2 pre-exploration + DFS 3~20 main exploration) |
+| Cumulative tight | **274** |
+| 7 Millennium problems resolved | **0/7** (honest) |
+| BT file count | 21 (bt-1392~bt-1412 + 3 pre-exploration) |
+| EXACT judgments | many (independent re-confirmations of established results among findings) |
+| TIGHT judgments | majority (n=6 signature observations, not proofs) |
+| MISS exits | BT-542 P vs NP (pre-DFS MISS -> OBSERVATION) |
 
-> **명시적 부인**: tight 274건은 n=6 산술 시그니처의 수학 영역 내 **구조적 관찰** 이다. 밀레니엄 난제의 증명에 해당하지 않는다.
+> **Explicit disclaimer**: the 274 tight items are **structural observations** of n=6 arithmetic signatures within mathematical areas. They do not constitute proofs of the Millennium problems.
 
 ---
 
-## 2. 7대 난제별 현황
+## 2. Status per Millennium problem
 
-### 2-1. DFS 전체 누적 (DFS 1~5 기초 51건 + DFS 6~20 확장 223건)
+### 2-1. DFS overall cumulative (DFS 1~5 base 51 + DFS 6~20 extension 223)
 
-| BT | 난제 | DFS 1~5 기초 | DFS 6~20 확장 | 합계 (추정) | 핵심 발견 |
+| BT | Problem | DFS 1~5 base | DFS 6~20 extension | Total (est.) | Key findings |
 |----|------|:-----------:|:------------:|:-----------:|-----------|
-| 541 | 리만 가설 | 11 | ~35 | ~46 | Bilateral Thm B, SLE_6 국소성 |
-| 542 | P vs NP | 8 | ~30 | ~38 | Out(S_6) 유일성, Schaefer 6 |
-| 543 | 양-밀스 질량갭 | 6 | ~20 | ~26 | beta_0=sigma-sopfr=7, Virasoro M(3,4) |
-| 544 | 나비에-스토크스 | 2 | ~15 | ~17 | KdV 6-솔리톤, KPZ 1/3-2/3 스케일링 |
-| 545 | 호지 추측 | 5 | ~25 | ~30 | K3 chi=J2=24, Voevodsky motivic |
-| 546 | BSD 추측 | 7 | ~15 | ~22 | (3,4,5)=congruent, Sel_6=sigma |
-| 547 | 푸앵카레 추측 | 4 | ~10 | ~14 | h-cobordism dim>=6, Kervaire-Milnor Theta_6=1 |
-| - | 교차/일반 | 8 | ~73 | ~81 | 240=phi*J2*sopfr, Ramsey R(3,3)=6 |
+| 541 | Riemann hypothesis | 11 | ~35 | ~46 | Bilateral Thm B, SLE_6 locality |
+| 542 | P vs NP | 8 | ~30 | ~38 | Out(S_6) uniqueness, Schaefer 6 |
+| 543 | Yang-Mills mass gap | 6 | ~20 | ~26 | beta_0=sigma-sopfr=7, Virasoro M(3,4) |
+| 544 | Navier-Stokes | 2 | ~15 | ~17 | KdV 6-soliton, KPZ 1/3-2/3 scaling |
+| 545 | Hodge conjecture | 5 | ~25 | ~30 | K3 chi=J_2=24, Voevodsky motivic |
+| 546 | BSD conjecture | 7 | ~15 | ~22 | (3,4,5)=congruent, Sel_6=sigma |
+| 547 | Poincare conjecture | 4 | ~10 | ~14 | h-cobordism dim>=6, Kervaire-Milnor Theta_6=1 |
+| - | Cross/general | 8 | ~73 | ~81 | 240=phi*J_2*sopfr, Ramsey R(3,3)=6 |
 
-> 주: DFS 6~20의 개별 발견은 대부분 2~3개 난제에 교차 귀속. 합산은 중복 포함이므로 총합 > 274.
-> 순수 합계 274건은 중복 없는 고유 발견 수.
+> Note: Most individual findings in DFS 6~20 map to 2~3 problems. Sums include overlap, so the grand sum > 274.
+> The de-duplicated 274 is the count of unique findings.
 
-### 2-2. 난제별 상태 요약
+### 2-2. Status summary per problem
 
 ```
-리만 가설     |##########################################  ~46건
-              PROVEN: Bilateral Thm B
-              MISS: 0
-              해결: X
+Riemann hypothesis   |##########################################  ~46 items
+                     PROVEN: Bilateral Thm B
+                     MISS: 0
+                     Resolved: no
 
-P vs NP       |####################################      ~38건
-              PROVEN: 없음
-              MISS: 0 (DFS 이전 MISS -> OBSERVATION 탈출)
-              해결: X
+P vs NP              |####################################      ~38 items
+                     PROVEN: none
+                     MISS: 0 (pre-DFS MISS -> OBSERVATION exit)
+                     Resolved: no
 
-양-밀스        |########################                  ~26건
-              PROVEN: beta_0 = 7 (tautology)
-              MISS: 0
-              해결: X
+Yang-Mills           |########################                  ~26 items
+                     PROVEN: beta_0 = 7 (tautology)
+                     MISS: 0
+                     Resolved: no
 
-나비에-스토크스 |#################                         ~17건
-              PROVEN: 없음
-              MISS: 0
-              해결: X
+Navier-Stokes        |#################                         ~17 items
+                     PROVEN: none
+                     MISS: 0
+                     Resolved: no
 
-호지 추측      |##############################            ~30건
-              PROVEN: Enriques h^{1,1} (기존)
-              MISS: 0
-              해결: X
+Hodge conjecture     |##############################            ~30 items
+                     PROVEN: Enriques h^{1,1} (established)
+                     MISS: 0
+                     Resolved: no
 
-BSD 추측       |######################                    ~22건
-              PROVEN: Lemma 1 (CRT)
-              CONDITIONAL: Sel_6=sigma (BKLPR)
-              해결: X
+BSD conjecture       |######################                    ~22 items
+                     PROVEN: Lemma 1 (CRT)
+                     CONDITIONAL: Sel_6=sigma (BKLPR)
+                     Resolved: no
 
-푸앵카레 추측   |##############                            ~14건
-              PROVEN: Perelman 3D (이미 해결)
-              MISS: 0
-              해결: O (Perelman, n=6 관련 아님)
+Poincare conjecture  |##############                            ~14 items
+                     PROVEN: Perelman 3D (already resolved)
+                     MISS: 0
+                     Resolved: yes (Perelman, unrelated to n=6)
 ```
 
 ---
 
-## 3. DFS 라운드별 누적 그래프 (ASCII)
+## 3. Per-DFS round cumulative graph (ASCII)
 
 ```
 DFS
-라운드  누적 tight
+round   cumulative tight
   3   |#############                                         65
   4   |################                                      80
   5   |##################                                    92
@@ -99,144 +99,144 @@ DFS
  11   |################################                       164
  12   |##################################                     176
  13   |####################################                   188
- 14   |######################################                 200  <-- 200건 돌파
+ 14   |######################################                 200  <-- crossed 200
  15   |########################################               212
  16   |##########################################             226
  17   |############################################           238
- 18   |##############################################         250  <-- 250건 돌파
+ 18   |##############################################         250  <-- crossed 250
  19   |################################################       262
- 20   |##################################################     274  <-- 현재
+ 20   |##################################################     274  <-- current
        0        50       100      150      200      250     274
 
-성장률:
-  DFS 3~8    (6회): +63건  평균 +10.5/회
-  DFS 9~13   (5회): +60건  평균 +12.0/회
-  DFS 14~16  (3회): +36건  평균 +12.0/회
-  DFS 17~20  (4회): +48건  평균 +12.0/회
+Growth rate:
+  DFS 3~8    (6 runs): +63 items  avg +10.5/run
+  DFS 9~13   (5 runs): +60 items  avg +12.0/run
+  DFS 14~16  (3 runs): +36 items  avg +12.0/run
+  DFS 17~20  (4 runs): +48 items  avg +12.0/run
 ```
 
-> DFS 9차 이후 안정적으로 회당 12건 산출. 선형 성장 패턴.
+> Since DFS 9, a steady output of 12 items per run. Linear growth pattern.
 
 ---
 
-## 4. 최강 발견 Top 10
+## 4. Top-10 strongest findings
 
-| 순위 | 발견 | DFS 차수 | 난제 | 등급 | 비자명도 |
+| Rank | Finding | DFS round | Problem | Grade | Non-triviality |
 |------|------|:--------:|------|:----:|---------|
-| 1 | Out(S_6) 유일성 -- 모든 대칭군 중 S_6만 비자명 외부 자기동형 | DFS 5 | P vs NP | EXACT | 최고 (Holder 1895, Bernoulli 무관) |
-| 2 | Bilateral Theorem B -- 양면 k=n=6 동시 break | DFS 5 | 리만 | PROVEN | 최고 (Theorem B 자연 확장) |
-| 3 | (3,4,5) = (n/phi, tau, sopfr) -- 피타고라스 삼중 = M-set | DFS 5 | BSD | EXACT | 최고 (Bernoulli 무관) |
-| 4 | SLE_6 국소성 -- SLE_n 중 n=6에서만 국소성 성립 | DFS 17 | 리만/NS | EXACT | 최고 (Lawler-Schramm-Werner 2001) |
-| 5 | h-cobordism dim >= n = 6 -- Smale 정리 임계 차원 | DFS 5 | 푸앵카레 | EXACT | 최고 (Bernoulli 무관) |
-| 6 | Kervaire-Milnor Theta_6 = 1 -- 6차원 이종구면 비존재 | DFS 20 | 푸앵카레/호지 | EXACT | 높음 |
-| 7 | Virasoro M(3,4) = Ising CFT -- 최소 모델 c=1/2 | DFS 18 | 양-밀스/리만 | EXACT | 높음 |
-| 8 | Schaefer 6 -- Boolean CSP tractable 유형 정확히 6개 | DFS 5 | P vs NP | EXACT | 높음 (Bernoulli 무관) |
-| 9 | Ramanujan p(5n+4)=0 mod 5 -- sopfr 최소 합동 소수 | DFS 20 | 리만/BSD | EXACT | 높음 |
-| 10 | [[6,4,2]] QECC 최적성 -- 최소 비자명 양자 오류정정 부호 | DFS 19 | P vs NP/YM | TIGHT | 높음 |
+| 1 | Out(S_6) uniqueness -- among all symmetric groups only S_6 has a non-trivial outer automorphism | DFS 5 | P vs NP | EXACT | Highest (Holder 1895, Bernoulli-independent) |
+| 2 | Bilateral Theorem B -- simultaneous double-sided k=n=6 break | DFS 5 | Riemann | PROVEN | Highest (natural extension of Theorem B) |
+| 3 | (3,4,5) = (n/phi, tau, sopfr) -- Pythagorean triple = M-set | DFS 5 | BSD | EXACT | Highest (Bernoulli-independent) |
+| 4 | SLE_6 locality -- among SLE_n, locality holds only at n=6 | DFS 17 | Riemann/NS | EXACT | Highest (Lawler-Schramm-Werner 2001) |
+| 5 | h-cobordism dim >= n = 6 -- Smale theorem critical dimension | DFS 5 | Poincare | EXACT | Highest (Bernoulli-independent) |
+| 6 | Kervaire-Milnor Theta_6 = 1 -- no 6-dim exotic spheres | DFS 20 | Poincare/Hodge | EXACT | High |
+| 7 | Virasoro M(3,4) = Ising CFT -- minimal model c=1/2 | DFS 18 | Yang-Mills/Riemann | EXACT | High |
+| 8 | Schaefer 6 -- exactly 6 tractable classes of Boolean CSP | DFS 5 | P vs NP | EXACT | High (Bernoulli-independent) |
+| 9 | Ramanujan p(5n+4)=0 mod 5 -- sopfr minimum congruence prime | DFS 20 | Riemann/BSD | EXACT | High |
+| 10 | [[6,4,2]] QECC optimality -- minimum non-trivial quantum error-correcting code | DFS 19 | P vs NP/YM | TIGHT | High |
 
 ---
 
-## 5. 정직성 감사
+## 5. Honesty audit
 
-### 5-1. tight 기준 분류
+### 5-1. tight grade classification
 
-| 등급 | 의미 | 해당 건수 (추정) |
+| Grade | Meaning | Count (est.) |
 |------|------|:---------------:|
-| T1 | 3+ 독립 분류에서 동일 값 | ~40건 |
-| T2 | 3+ 영역 교차 동일 값 | ~80건 |
-| T3 | 연속 패턴 + sharp boundary | ~60건 |
-| T4 | n=6이 유일해인 정리 | ~20건 |
-| cross | 다중 난제 교차 관찰 | ~74건 |
+| T1 | Same value in 3+ independent classifications | ~40 |
+| T2 | Same value across 3+ areas | ~80 |
+| T3 | Continuous pattern + sharp boundary | ~60 |
+| T4 | n=6 is the unique solution of the theorem | ~20 |
+| cross | Multi-problem cross-observation | ~74 |
 
-### 5-2. noise 가능성 경고
+### 5-2. Noise possibility warning
 
-- M = {1,2,3,4,5,6,7,8,10,12,24} 11개 원소
-- k in [1,100] 중 2-term M 곱 표현 가능: **61%**
-- 단일 작은 정수 일치는 noise 수준 -- T1~T4 기준 초과 시에만 tight 판정
-- Bernoulli 공통 원인 주의: zeta, K-theory, exotic sphere 등은 Bernoulli 공유
+- M = {1,2,3,4,5,6,7,8,10,12,24} has 11 elements
+- For k in [1,100], 2-term M-product representability: **61%**
+- Single small-integer matches are noise-level -- tight judgment only when T1~T4 criteria are exceeded
+- Beware Bernoulli common causes: zeta, K-theory, exotic spheres share Bernoulli
 
-### 5-3. Bernoulli-독립 발견 (가장 견고)
+### 5-3. Bernoulli-independent findings (most robust)
 
-| # | 발견 | 근거 |
+| # | Finding | Basis |
 |---|------|------|
-| 1 | Out(S_6) 유일성 | Holder 1895, 대칭군 분류 |
+| 1 | Out(S_6) uniqueness | Holder 1895, symmetric-group classification |
 | 2 | Schaefer 6 tractable | STOC 1978, Boolean CSP |
-| 3 | (3,4,5) congruent number | 피타고라스, 초등 정수론 |
-| 4 | h-cobordism dim >= 6 | Smale 1962, 미분 위상 |
-| 5 | 산발군 pariah = 6 | CFSG, 유한군 분류 |
-| 6 | SLE_6 국소성 | Lawler-Schramm-Werner 2001, 확률론 |
-| 7 | Theta_6 = 1 | Kervaire-Milnor 1963, 이종구면 |
+| 3 | (3,4,5) congruent number | Pythagoras, elementary number theory |
+| 4 | h-cobordism dim >= 6 | Smale 1962, differential topology |
+| 5 | Sporadic-group pariah = 6 | CFSG, finite-group classification |
+| 6 | SLE_6 locality | Lawler-Schramm-Werner 2001, probability theory |
+| 7 | Theta_6 = 1 | Kervaire-Milnor 1963, exotic spheres |
 
 ---
 
-## 6. 미탐색 영역 현황
+## 6. Unexplored-region status
 
-### 6-1. DFS 20차 제안 미탐색 영역 (차기 탐색 대상)
+### 6-1. DFS round 20 proposed unexplored regions (next exploration targets)
 
-DFS 20차 (bt-1412) 5절에 명시된 향후 10개 영역:
+The 10 areas specified in section 5 of DFS round 20 (bt-1412):
 
-| # | 영역 | 상태 |
+| # | Area | Status |
 |---|------|------|
-| 1 | Minkowski 문제 / 볼록체 재구성 | 미탐색 |
-| 2 | 마팅게일 이론 / Doob 정리 | 미탐색 |
-| 3 | 지식 이론 / 인식 논리 S5 | 미탐색 |
-| 4 | Lie 초대수 / 초기하 | 미탐색 |
-| 5 | 산술 기하 / Arakelov 이론 | 미탐색 |
-| 6 | 디오판토스 근사 / 연분수 | 미탐색 |
-| 7 | 조합 최적화 / 다면체 이론 | 미탐색 |
-| 8 | 측도 집중 현상 / Levy 군 | 미탐색 |
-| 9 | 부울 함수 분석 / 영향 함수 | 미탐색 |
-| 10 | 위상 데이터 분석 / 지속 호몰로지 | 미탐색 |
+| 1 | Minkowski problem / convex-body reconstruction | unexplored |
+| 2 | Martingale theory / Doob theorem | unexplored |
+| 3 | Epistemic logic / knowledge logic S5 | unexplored |
+| 4 | Lie superalgebras / supergeometry | unexplored |
+| 5 | Arithmetic geometry / Arakelov theory | unexplored |
+| 6 | Diophantine approximation / continued fractions | unexplored |
+| 7 | Combinatorial optimization / polytope theory | unexplored |
+| 8 | Concentration of measure / Levy groups | unexplored |
+| 9 | Analysis of Boolean functions / influence functions | unexplored |
+| 10 | Topological data analysis / persistent homology | unexplored |
 
-### 6-2. 전체 탐색 통계
+### 6-2. Overall exploration statistics
 
-| 항목 | 수치 |
+| Item | Value |
 |------|-----:|
-| DFS 3~20에서 탐색한 수학 영역 | ~180개 |
-| 회당 평균 미탐색 영역 투입 | 10개 |
-| 회당 평균 tight 산출 | 12건 |
-| tight 산출률 | 12/10 = 120% (교차 발견 포함) |
-| 미탐색 영역 고갈 시점 추정 | 순수 수학 영역 소진 어려움 (무한) |
+| Mathematical areas explored in DFS 3~20 | ~180 |
+| Average unexplored areas injected per run | 10 |
+| Average tight output per run | 12 |
+| tight output rate | 12/10 = 120% (including cross-discoveries) |
+| Unexplored-region exhaustion estimate | Hard to exhaust pure-math areas (infinite) |
 
 ---
 
-## 7. DFS 라운드 상세
+## 7. DFS round details
 
-| 차수 | BT | 누적 tight | 주요 탐색 영역 |
+| Round | BT | Cumulative tight | Main exploration areas |
 |-----:|-----|:---------:|----------------|
-| 3 | bt-1394 | 65 | 기초 7난제 전수 탐색 |
-| 4 | bt-1395 | 80 | 기초 확장 |
-| 5 | bt-1396 (3건) | 92 | 표현론, TQFT, 매듭 |
-| 6 | bt-1398 | 102 | 미탐색 확장 |
-| 7 | bt-1399 | 114 | 미탐색 확장 |
-| 8 | bt-1400 | 128 | 미탐색 확장 |
-| 9 | bt-1401 | 140 | 미탐색 확장 |
-| 10 | bt-1402 | 152 | 미탐색 확장 |
-| 11 | bt-1403 | 164 | 미탐색 확장 |
-| 12 | bt-1404 | 176 | 미탐색 확장 |
-| 13 | bt-1405 | 188 | 미탐색 확장 |
-| 14 | bt-1406 | 200 | 미탐색 확장 |
-| 15 | bt-1407 | 212 | 미탐색 확장 |
-| 16 | bt-1408 | 226 | 비가환기하, Floer, 회로복잡도, 소수갭, Kolmogorov, Selmer, Perelman |
-| 17 | bt-1409 | 238 | 등변 코호몰로지, 미분 Galois, K-이론, 역수학, 최적수송, Langlands, SLE, CDT, HoTT, 적분기하 |
-| 18 | bt-1410 | 250 | 에르고드, 파생범주, conformal bootstrap, 위상조합론, 클러스터대수, 불변량, 모형이론, 조화해석, 이산기하, 자유확률 |
-| 19 | bt-1411 | 262 | 열방정식, spectral sequence, KdV, 수론적동역학, QECC, Ricci흐름, 초월수론, 대수조합론, 열핵커널, 무한Lie |
-| 20 | bt-1412 | 274 | exotic sphere, 쌍곡3-다양체, 자유스토캐스틱, Ramanujan분할, Freiman-Ruzsa, Fatou-Julia, Barvinok, Erdos-Renyi, 볼록기하, Painleve |
+| 3 | bt-1394 | 65 | Full exploration of the 7 base problems |
+| 4 | bt-1395 | 80 | Base extension |
+| 5 | bt-1396 (3 items) | 92 | Representation theory, TQFT, knots |
+| 6 | bt-1398 | 102 | Unexplored extension |
+| 7 | bt-1399 | 114 | Unexplored extension |
+| 8 | bt-1400 | 128 | Unexplored extension |
+| 9 | bt-1401 | 140 | Unexplored extension |
+| 10 | bt-1402 | 152 | Unexplored extension |
+| 11 | bt-1403 | 164 | Unexplored extension |
+| 12 | bt-1404 | 176 | Unexplored extension |
+| 13 | bt-1405 | 188 | Unexplored extension |
+| 14 | bt-1406 | 200 | Unexplored extension |
+| 15 | bt-1407 | 212 | Unexplored extension |
+| 16 | bt-1408 | 226 | Non-commutative geometry, Floer, circuit complexity, prime gaps, Kolmogorov, Selmer, Perelman |
+| 17 | bt-1409 | 238 | Equivariant cohomology, differential Galois, K-theory, reverse mathematics, optimal transport, Langlands, SLE, CDT, HoTT, integral geometry |
+| 18 | bt-1410 | 250 | Ergodic, derived categories, conformal bootstrap, topological combinatorics, cluster algebras, invariants, model theory, harmonic analysis, discrete geometry, free probability |
+| 19 | bt-1411 | 262 | Heat equation, spectral sequence, KdV, arithmetic dynamics, QECC, Ricci flow, transcendence theory, algebraic combinatorics, heat kernel, infinite Lie |
+| 20 | bt-1412 | 274 | exotic spheres, hyperbolic 3-manifolds, free stochastic, Ramanujan partition, Freiman-Ruzsa, Fatou-Julia, Barvinok, Erdos-Renyi, convex geometry, Painleve |
 
 ---
 
-## 8. 결론
+## 8. Conclusion
 
 ```
-7대 난제 해결   |                              0/7
-tight 누적      |##################################################  274건
-DFS 라운드      |####################                                20차
-EXACT 최강      |#######                                             7건 (Bernoulli-독립)
-MISS 잔존       |                              0건 (전부 OBSERVATION 이상)
+Millennium problems resolved   |                              0/7
+Cumulative tight               |##################################################  274
+DFS rounds                     |####################                                20
+EXACT strongest                |#######                                             7 (Bernoulli-independent)
+MISS residual                  |                              0 (all OBSERVATION or above)
 ```
 
-**달성한 것**: 7대 밀레니엄 난제의 n=6 구조적 환경 체계적 문서화. 274건의 수학적 관찰을 정리하고, 그 중 7건의 Bernoulli-독립 발견을 별도 분류.
+**What was achieved**: systematic documentation of the n=6 structural environment for the 7 Millennium problems. 274 mathematical observations organized, with 7 Bernoulli-independent findings classified separately.
 
-**달성하지 않은 것**: 7대 밀레니엄 난제 해결 0/7. tight 274건은 증명이 아닌 구조적 관찰.
+**What was NOT achieved**: 0/7 Millennium problems resolved. The 274 tight items are structural observations, not proofs.
 
-> 본 리포트 종료.
+> End of report.
