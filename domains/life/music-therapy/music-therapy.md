@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-025
 registered: 2026-04-23
 ---
 
-# 음악치료 (HEXA-MUSTHERAPY) — n=6 Bruscia 6 clinical methods
+# Music therapy (HEXA-MUSTHERAPY) — n=6 Bruscia 6 clinical methods
 
 ## §1 WHY
 

@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-017
 registered: 2026-04-23
 ---
 
-# 핵의학 (HEXA-NUCMED) — n=6 Tc-99m 6-hour half-life
+# Nuclear medicine (HEXA-NUCMED) — n=6 Tc-99m 6-hour half-life
 
 ## §1 WHY
 
