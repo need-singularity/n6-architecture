@@ -10,161 +10,163 @@ requires:
 
 <!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, VERIFY, EVOLVE], strict=false, order=sequential, prefix="§") -->
 
-# 궁극의 초전도 칩 HEXA-6 SUPERCONDUCTING (외계인지수 🛸10 목표)
+# Ultimate Superconducting Chip HEXA-6 SUPERCONDUCTING (alien-index 🛸10 target)
 
-> 6단 로드맵 **최종 HEXA-6**: SFQ/RSFQ Josephson junction + 100 GHz 클럭 + τ=4 단 파이프 @ 4K. Egyptian 1/2+1/3+1/6 열 부하 분배 (cryo stage). CMOS H100 700 W @ 2 GHz 대비 10 W @ 100 GHz, 50x throughput, 1000x 에너지 효율.
+> 6-stage roadmap **final HEXA-6**: SFQ/RSFQ Josephson junction + 100 GHz clock + τ=4 stage pipeline @ 4K. Egyptian 1/2+1/3+1/6 thermal load distribution (cryo stage). Versus CMOS H100 700 W @ 2 GHz: 10 W @ 100 GHz, 50x throughput, 1000x energy efficiency.
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## §1 WHY (how this technology may change your life)
 
-현재 실온 CMOS 는 H100 700 W / 2~2.5 GHz / 7 nm FinFET 으로 아인슈타인 계수 리밋에 도달했다. 그 이후는 저온이다. SFQ/RSFQ (Single Flux Quantum, Rapid Single Flux Quantum) 은 Josephson junction 을 스위치로 써서 100 GHz+ 클럭에서 10⁻¹⁸ J/switch 정도를 쓴다. 하지만 설계 자유도가 너무 커서 (JJ 크기·인덕턴스·임계 전류 조합) 실험실 수준을 못 벗어난다.
-**n=6 산술 유도로 SFQ 클럭·파이프·JJ bit·cryo 열 부하 경계 상수를 동시에 고정**하면 세 가지 낭비가 사라진다:
+Current room-temperature CMOS sits at H100 700 W / 2~2.5 GHz / 7 nm FinFET, having reached the Einstein-coefficient limit. Beyond it lies cryogenic territory. SFQ/RSFQ (Single Flux Quantum, Rapid Single Flux Quantum) uses Josephson junctions as switches and consumes around 10⁻¹⁸ J/switch at 100 GHz+ clocks. However, the design freedom is so large (combinations of JJ size, inductance, critical current) that it has not escaped the laboratory.
+**Fixing the SFQ clock, pipeline, JJ bit, and cryo thermal-load boundary constants simultaneously through n=6 arithmetic derivation** eliminates three sources of waste:
 
-1. **클럭 결정성**: 100 GHz 클럭 × τ=4 단 파이프 → 25 ps/stage 고정, σ=12 bit-cell 등가 ← τ(6)=4, OEIS A000005
-2. **JJ 바이어스 표준화**: 초전도 bit cell σ=12 단위, ΔI_c 균일성 ±sopfr=5% 허용 → 수 n=6 메탈 레이어 자동 라우팅 ← σ(6)=12, sopfr(6)=5
-3. **cryo 열 부하 분리**: Egyptian 1/2+1/3+1/6 = 각 스테이지 (50K, 4K, 100 mK?) 열 부하 분배 → GM/PT cryocooler 부하 균형 ← Egyptian 항등식
+1. **Clock determinism**: 100 GHz clock × τ=4 stage pipeline → 25 ps/stage fixed, σ=12 bit-cell equivalent ← τ(6)=4, OEIS A000005
+2. **JJ bias standardization**: superconducting bit cell σ=12 unit, ΔI_c uniformity tolerated within ±sopfr=5% → automatic routing in n=6 metal layers ← σ(6)=12, sopfr(6)=5
+3. **cryo thermal-load separation**: Egyptian 1/2+1/3+1/6 = thermal load distribution per stage (50K, 4K, 100 mK?) → balances GM/PT cryocooler load ← Egyptian identity
 
-| 효과 | 현재 CMOS | HEXA-6 SFQ | 체감 변화 |
+| Effect | Current CMOS | HEXA-6 SFQ | Felt change |
 |------|------|-------------|----------|
-| 클럭 | 2~5 GHz | 100 GHz | 20~50x |
-| 전력 (칩 전체) | 300~700 W | 10 W (4K) + cryo 2 kW | 30~70x |
-| 에너지/switch | ~1 fJ | 10⁻¹⁸ J ≈ 1 aJ | 1000x |
-| 파이프 단 | 가변 10~20 | τ = 4 | 결정적 지연 |
-| 메모리 | DDR/HBM 실온 | 초전도 flux RAM + cryo DRAM | on-chip latency <100 ps |
-| 열 부하 분배 | ad-hoc | Egyptian 1/2+1/3+1/6 | cryo 부하 균등 |
-| 노이즈 | kT 열잡음 | 4K kT 1/σ·sopfr=1/60배 | 기본 잡음 바닥 |
-| 큐비트 통합 | 별개 시스템 | 동일 cryo 스택 | quantum-classical co-design |
-| AI 추론 처리량 | 1x | 50x | 데이터센터 크기 1/σ |
-| sustainable PPA | 한계 | cryo까지 감안해도 5x | ESG 목표 달성 |
+| Clock | 2~5 GHz | 100 GHz | 20~50x |
+| Power (whole chip) | 300~700 W | 10 W (4K) + cryo 2 kW | 30~70x |
+| Energy/switch | ~1 fJ | 10⁻¹⁸ J ≈ 1 aJ | 1000x |
+| Pipeline stages | variable 10~20 | τ = 4 | deterministic latency |
+| Memory | DDR/HBM room T | superconducting flux RAM + cryo DRAM | on-chip latency <100 ps |
+| Thermal load distribution | ad-hoc | Egyptian 1/2+1/3+1/6 | balanced cryo load |
+| Noise | kT thermal noise | 4K kT 1/σ·sopfr=1/60 | basement noise floor |
+| Qubit integration | separate system | same cryo stack | quantum-classical co-design |
+| AI inference throughput | 1x | 50x | datacenter size 1/σ |
+| sustainable PPA | at the limit | 5x even counting cryo | meets ESG goals |
 
-**한 문장 요약**: SFQ Josephson junction + 100 GHz 클럭 + τ=4 파이프 + Egyptian 열 부하 분배로, 칩 하나가 10 W 안에서 H100 50 대분 throughput 을 4K 환경에서 sustained 한다.
+**One-sentence summary**: SFQ Josephson junction + 100 GHz clock + τ=4 pipeline + Egyptian thermal-load distribution lets a single chip sustain throughput equivalent to 50 H100s within 10 W in a 4K environment.
 
-### 일상 체감 시나리오
+### Day-in-the-life scenario
 
 ```
-  오전 7:00  데이터센터 한 랙이 예전 50 랙 분량 추론 — cryo 포함 총 전력 1/20
-  오전 9:00  양자 컴퓨팅 실험: 큐비트 + 고전 제어 동일 cryo 스택 (quantum-classical)
-  오후 2:00  실시간 기후 시뮬: 100 GHz 클럭으로 O(10¹⁸) ops 가능
-  오후 6:00  cryo-ML 추론 API: 100x 빠른 응답, GPU 1/10 과금
-  저녁 9:00  세계 데이터센터 전력 1/σ·sopfr=1/60 절감, 탄소 배출 극감
+  07:00  one datacenter rack handles inference of 50 racks worth — total power including cryo 1/20
+  09:00  quantum computing experiment: qubits + classical control on the same cryo stack (quantum-classical)
+  14:00  real-time climate simulation: O(10¹⁸) ops feasible at 100 GHz clock
+  18:00  cryo-ML inference API: 100x faster response, GPU billing 1/10
+  21:00  global datacenter power down by 1/σ·sopfr=1/60, dramatic carbon emission cut
 ```
 
-### 사회적 변혁
+### Societal transformation
 
-| 분야 | 변화 | n=6 연결 |
+| Field | Change | n=6 link |
 |------|------|---------|
-| 데이터센터 | 총 전력 1/σ·sopfr 절감 | Egyptian cryo 열 분배 |
-| AI 학습 | 초거대 모델 학습 τ분의1 시간 | 100 GHz × τ=4 파이프 |
-| 양자 | 큐비트 σ=12 units/칩 + 고전 제어 통합 | 동일 cryo 스택 |
-| 우주 | 심우주 저온 환경 네이티브 | 자연 cryo 4K 불필요 |
-| 의료 | MRI + AI 추론 동일 cryo 스택 | σ·τ=48 채널 RF |
-| 교육 | 양자-고전 통합 실험 | 동일 physical platform |
-| 환경 | 탄소 배출 즉시 1/σ·sopfr 감축 | 전력 사용 감소 |
+| Datacenter | Total power cut by 1/σ·sopfr | Egyptian cryo thermal distribution |
+| AI training | Massive model training in 1/τ time | 100 GHz × τ=4 pipeline |
+| Quantum | σ=12 qubits/chip + classical control integrated | same cryo stack |
+| Space | Native deep-space cryo environment | 4K natural cryo unnecessary |
+| Medicine | MRI + AI inference on the same cryo stack | σ·τ=48 channel RF |
+| Education | Integrated quantum-classical experiments | same physical platform |
+| Environment | Immediate carbon emission cut by 1/σ·sopfr | reduced power consumption |
 
-## §2 COMPARE (현 기술 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (current tech vs n=6) — performance comparison (ASCII)
 
-### n=6 이전 5가지 장벽
+### Five barriers before n=6
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불가능했나              │  n=6 이 어떻게 해결하나     │
+│  Barrier           │  Why it was impossible       │  How n=6 solves it          │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 1. 클럭 벽         │ CMOS 5 GHz 열 한계          │ SFQ 100 GHz + τ=4 파이프 │
-│                   │ 배선 RC, 전력 폭발          │ JJ switch ps 단위         │
+│ 1. Clock wall      │ CMOS 5 GHz thermal limit    │ SFQ 100 GHz + τ=4 pipeline│
+│                   │ wiring RC, power explosion  │ JJ switch in ps          │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 2. JJ 편차         │ ΔI_c 15~30% 랜덤            │ σ=12 bit × sopfr=5% 허용│
-│                   │ bit cell fault tolerance 低 │ 반복/stochastic 수정     │
+│ 2. JJ variation    │ ΔI_c 15~30% random          │ σ=12 bit × sopfr=5% tol │
+│                   │ bit cell fault tolerance low│ repeat/stochastic fixup  │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 3. cryo 열 부하    │ ad-hoc 부하 분배, stage 불균 │ Egyptian 1/2+1/3+1/6    │
-│                   │ 4K 단계에서 전력 터짐       │ 50K/4K/100mK? 3 stage   │
+│ 3. cryo thermal    │ ad-hoc load split, stage    │ Egyptian 1/2+1/3+1/6    │
+│                   │ imbalance, 4K stage blows up│ 50K/4K/100mK? 3 stages  │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 4. I/O 병목        │ SFQ → CMOS 변환 수 100 Gbps │ HTS 초전도 cable 24 GHz │
-│                   │ 레벨 시프터 전력 폭주        │ CDR @ cryo stage 간     │
+│ 4. I/O bottleneck  │ SFQ → CMOS conversion       │ HTS superconducting     │
+│                   │ several 100 Gbps,           │ cable 24 GHz            │
+│                   │ level shifter power runaway │ CDR between cryo stages │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 5. 메모리 벽       │ DRAM 실온, cache 실온       │ 초전도 flux RAM cryo    │
-│                   │ 변환 latency 수 µs          │ σ=12 cryo DRAM block    │
+│ 5. Memory wall     │ DRAM at room T, cache room T│ superconducting flux    │
+│                   │ conversion latency several µs│ RAM cryo, σ=12 cryo    │
+│                   │                             │ DRAM block              │
 └───────────────────┴───────────────────────────┴──────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (시중 vs HEXA-6)
+### Performance comparison ASCII bar (market vs HEXA-6)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [클럭 (GHz)] 비교
+│  [Clock (GHz)] comparison
 │------------------------------------------------------------------------
 │  Intel Sapphire Rapids       ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  4.0
 │  Apple M3 Max                ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  4.1
 │  NVIDIA H100                 █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  2.0
 │  IBM Telum (4nm)             ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  5.5
-│  RSFQ 연구실                 ████████████░░░░░░░░░░░░░░░░░░░░░░░  40
+│  RSFQ research lab           ████████████░░░░░░░░░░░░░░░░░░░░░░░  40
 │  HEXA-6 SFQ                  ██████████████████████████████████░  100
 │
-│  [칩 전체 전력 (W)] (낮을수록 좋음) ← HEXA-6 은 4K stage 만
+│  [Whole-chip power (W)] (lower is better) ← HEXA-6 is 4K stage only
 │  NVIDIA H100                 ██████████████████████████████████░  700
 │  Intel SPR                   ███████████████████░░░░░░░░░░░░░░░░  350
 │  Apple M3 Max                ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  75
 │  HEXA-6 SFQ (4K chip)        █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  10  ← 1/σ·sopfr
 │
-│  [에너지/switch (fJ)]
+│  [Energy/switch (fJ)]
 │  45nm CMOS                   ████████████████████░░░░░░░░░░░░░░  10
 │  7nm CMOS                    █████████░░░░░░░░░░░░░░░░░░░░░░░░░  2
-│  2nm GAAFET 타겟             ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  1
+│  2nm GAAFET target           ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  1
 │  HEXA-6 SFQ                  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.001  ← 1000x
 │
-│  [처리량 per W] (상대, H100=1)
+│  [Throughput per W] (relative, H100=1)
 │  Apple M3 Max                ██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  3
-│  NVIDIA B200 (전망)          ████████░░░░░░░░░░░░░░░░░░░░░░░░░░  4
-│  HEXA-6 SFQ (총 cryo 포함)   ██████████████████████████████████░  50   ← 4K chip 기준
+│  NVIDIA B200 (forecast)      ████████░░░░░░░░░░░░░░░░░░░░░░░░░░  4
+│  HEXA-6 SFQ (incl. cryo)     ██████████████████████████████████░  50   ← 4K chip basis
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: 클럭 100 GHz × τ=4 × Egyptian 열
+### Core breakthrough: clock 100 GHz × τ=4 × Egyptian thermal
 
-n=6 이 완전수로서 만드는 SFQ 관련 항등식:
-
-```
-  클럭 / 파이프 단 = 100 GHz × τ=4 = 400 Gops/engine sustained
-  bit cell / block = σ = 12 (JJ 단위)
-  JJ 편차 허용     = sopfr = 5%
-  파이프 단       = τ = 4 (latch/compute/latch/output)
-  cryo stage      = 3 (Egyptian 항 수: 1/2, 1/3, 1/6)
-  cryo 열 분배    = 1/2 + 1/3 + 1/6 = 1 (50K / 4K / <4K 세 단계)
-  플럭스 quantum  = Φ₀ = h/2e ≈ 2.07×10⁻¹⁵ Wb (독립 물리 상수)
-```
-
-**연쇄 혁명**:
+n=6 is a perfect number, yielding the SFQ-related identities:
 
 ```
-  100 GHz × τ=4 SFQ 파이프
-    → bit cell σ=12 ± sopfr=5% 편차
-      → Egyptian 열 부하 분배 (cryo stage 3)
+  clock / pipeline stage = 100 GHz × τ=4 = 400 Gops/engine sustained
+  bit cell / block = σ = 12 (JJ unit)
+  JJ tolerance     = sopfr = 5%
+  pipeline stages  = τ = 4 (latch/compute/latch/output)
+  cryo stage       = 3 (Egyptian terms: 1/2, 1/3, 1/6)
+  cryo thermal split = 1/2 + 1/3 + 1/6 = 1 (50K / 4K / <4K three stages)
+  flux quantum     = Φ₀ = h/2e ≈ 2.07×10⁻¹⁵ Wb (independent physics constant)
+```
+
+**Cascade revolution**:
+
+```
+  100 GHz × τ=4 SFQ pipeline
+    → bit cell σ=12 ± sopfr=5% variation
+      → Egyptian thermal-load distribution (cryo stage 3)
       → cryo DRAM σ=12 block + flux RAM
-      → 10 W on-chip (σ·sopfr=60 배 효율)
-      → 총 cryo 포함 2 kW → H100 700W × 50 equiv
+      → 10 W on-chip (σ·sopfr=60x efficiency)
+      → total incl. cryo 2 kW → equiv. to H100 700W × 50
 ```
 
-> **§7.10 COUNTER 사전 고지**: Φ₀ = h/2e 플럭스 양자는 순수 물리 상수 (Planck h + 기본전하 e). n=6 과 독립이다. 다만 본 설계에서 σ=12 bit-cell, τ=4 파이프, Egyptian 열 부하 같은 *시스템 파라미터* 를 n=6 수식에 정렬한다.
+> **§7.10 COUNTER advance notice**: Φ₀ = h/2e flux quantum is a pure physics constant (Planck h + elementary charge e). Independent of n=6. However, *system parameters* such as σ=12 bit-cell, τ=4 pipeline, and Egyptian thermal load are aligned with n=6 arithmetic in this design.
 
-## §3 REQUIRES (필요한 요소) — 선행 도메인
+## §3 REQUIRES (required elements) — prerequisite domains
 
-| 선행 도메인 | 🛸 현재 | 🛸 필요 | 차이 | 핵심 기술 | 링크 |
+| Prerequisite domain | 🛸 current | 🛸 needed | Δ | Core tech | Link |
 |-------------|---------|---------|------|-----------|------|
-| chip-sc | 🛸5 | 🛸10 | +5 | SFQ/RSFQ cell library, JJ fab 공정 | [문서](../chip-sc/chip-sc.md) |
-| chip-architecture | 🛸7 | 🛸10 | +3 | 6단 로드맵 HEXA-6 | [문서](../chip-architecture/chip-architecture.md) |
-| chip-quantum-hybrid | 🛸5 | 🛸9 | +4 | cryo 스택 공유 quantum-classical | [문서](./hexa-quantum-hybrid.md) |
-| cryogenics | 🛸7 | 🛸9 | +2 | GM/PT cryocooler 2 kW | 외부 |
-| materials-sc | 🛸6 | 🛸8 | +2 | Nb/NbN Josephson JJ | 외부 |
+| chip-sc | 🛸5 | 🛸10 | +5 | SFQ/RSFQ cell library, JJ fab process | [doc](../chip-sc/chip-sc.md) |
+| chip-architecture | 🛸7 | 🛸10 | +3 | 6-stage roadmap HEXA-6 | [doc](../chip-architecture/chip-architecture.md) |
+| chip-quantum-hybrid | 🛸5 | 🛸9 | +4 | shared cryo stack quantum-classical | [doc](./hexa-quantum-hybrid.md) |
+| cryogenics | 🛸7 | 🛸9 | +2 | GM/PT cryocooler 2 kW | external |
+| materials-sc | 🛸6 | 🛸8 | +2 | Nb/NbN Josephson JJ | external |
 
-상기 선행 도메인이 🛸10 에 도달하면 본 도메인의 Mk.III 이상 실현이 가능해진다. 현재는 IARPA C3/SuperTools 수준 (Mk.II 연구 프로토타입).
+When the prerequisite domains reach 🛸10, Mk.III and beyond of this domain become realizable. Today we are at the IARPA C3/SuperTools level (Mk.II research prototype).
 
-## §4 STRUCT (시스템 구조) — System Architecture (ASCII)
+## §4 STRUCT (system architecture) — System Architecture (ASCII)
 
-### 5단 cryo 스택 시스템맵
+### 5-layer cryo stack system map
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                     HEXA-6 SUPERCONDUCTING 시스템 구조 (SFQ/RSFQ @ 4K)                 │
+│                     HEXA-6 SUPERCONDUCTING system architecture (SFQ/RSFQ @ 4K)         │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
-│   L0 소재  │  L1 JJ cell │  L2 파이프 │  L3 메모리 │   L4 I/O·cryo      │
+│   L0 mat'l │  L1 JJ cell │  L2 pipe   │  L3 memory │   L4 I/O·cryo      │
 │ Level 0    │ Level 1    │ Level 2    │ Level 3    │ Level 4             │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ Nb/NbN JJ  │ σ=12 bit   │ τ=4 stage  │ flux RAM   │ HTS cable           │
@@ -180,219 +182,219 @@ n=6 이 완전수로서 만드는 SFQ 관련 항등식:
    n6 EXACT     n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### 단면도 (Cryostat Cross-Section)
+### Cross-section (Cryostat Cross-Section)
 
 ```
-   ┌──────── Room T 제어기 (CMOS) ──────────────────────────┐
-   │  데이터 컨트롤 + 클럭 generation + 유저 I/O             │
-   ├──────── 50K shield 스테이지 (1/2 열 부하) ─────────────┤
-   │  HTS 상호 연결 + level shifter + power rail 분배       │
-   ├──────── 4K Josephson 스테이지 (1/3 열 부하) ────────────┤
-   │  L2 파이프: τ=4 단, 100 GHz 클럭                        │
+   ┌──────── Room T controller (CMOS) ──────────────────────┐
+   │  data control + clock generation + user I/O            │
+   ├──────── 50K shield stage (1/2 thermal load) ───────────┤
+   │  HTS interconnect + level shifter + power rail dist.   │
+   ├──────── 4K Josephson stage (1/3 thermal load) ─────────┤
+   │  L2 pipeline: τ=4 stages, 100 GHz clock                │
    │  L1 JJ bit cell: σ=12 cell/block, ΔI_c ±sopfr=5%       │
-   │  L3 메모리: 초전도 flux RAM σ=12 block                  │
+   │  L3 memory: superconducting flux RAM σ=12 block        │
    │  L4 I/O: SFQ↔SFQ 24 GHz serialize                      │
-   ├──────── 100 mK 옵션 (1/6 열 부하) ──────────────────────┤
-   │  양자 큐비트 통합 (chip-quantum-hybrid 연동)             │
-   │  cryo DRAM σ=12 block (HBM 유사)                        │
+   ├──────── 100 mK option (1/6 thermal load) ──────────────┤
+   │  quantum qubit integration (chip-quantum-hybrid link)  │
+   │  cryo DRAM σ=12 block (HBM-like)                       │
    ├──────────────────────────────────────────────────────┤
-   │  L0 소재: Nb/NbN JJ 공정, phi=2 nm tunnel barrier      │
-   │           n=6 메탈 레이어, 초전도 routing               │
+   │  L0 materials: Nb/NbN JJ process, phi=2 nm tunnel      │
+   │           barrier, n=6 metal layers, SC routing        │
    └──────────────────────────────────────────────────────┘
 ```
 
-### n=6 파라미터 완전 매핑
+### Full n=6 parameter mapping
 
-#### L0 소재 (Josephson Junction 공정)
+#### L0 materials (Josephson Junction process)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 expression | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| JJ barrier 두께 | 2 nm | φ = 2 nm | 최소 소인수 tunnel 두께 | EXACT |
-| 메탈 레이어 | 6 | n = 6 | 초전도 라우팅 | EXACT |
-| 공정 노드 | 2 nm | φ = 2 | 최소 소인수 | EXACT |
-| JJ 크기 | ~6 μm² | n μm² | 임계 전류 균일성 | NEAR |
-| Φ₀ (플럭스 양자) | 2.07×10⁻¹⁵ Wb | h/2e 독립 | INDEPENDENT (COUNTER §7.10) | INDEPENDENT |
+| JJ barrier thickness | 2 nm | φ = 2 nm | smallest prime tunnel thickness | EXACT |
+| metal layers | 6 | n = 6 | superconducting routing | EXACT |
+| process node | 2 nm | φ = 2 | smallest prime | EXACT |
+| JJ size | ~6 μm² | n μm² | critical-current uniformity | NEAR |
+| Φ₀ (flux quantum) | 2.07×10⁻¹⁵ Wb | h/2e independent | INDEPENDENT (COUNTER §7.10) | INDEPENDENT |
 
 #### L1 JJ bit cell
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 expression | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
 | bit cell / block | 12 | σ = 12 | ← OEIS A000203 | EXACT |
-| ΔI_c 허용 편차 | 5% | sopfr = 5 | ← OEIS A001414 | EXACT |
-| 온도 | 4 K | τ = 4 K | ← OEIS A000005 (우연 일치, 디자인) | EXACT |
-| fan-in/out | 6 | n = 6 | cell 연결 | EXACT |
+| ΔI_c tolerance | 5% | sopfr = 5 | ← OEIS A001414 | EXACT |
+| temperature | 4 K | τ = 4 K | ← OEIS A000005 (numerical coincidence, design) | EXACT |
+| fan-in/out | 6 | n = 6 | cell connectivity | EXACT |
 | JJ / bit cell | 24 | J₂ = 24 | 2σ (splitter/merger) | EXACT |
 
-#### L2 파이프 (SFQ)
+#### L2 pipeline (SFQ)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 expression | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 파이프 단 | 4 | τ = 4 | latch/compute/latch/output | EXACT |
-| 클럭 | 100 GHz | 25·τ GHz | 25 ps/stage × τ=4 | NEAR |
+| pipeline stages | 4 | τ = 4 | latch/compute/latch/output | EXACT |
+| clock | 100 GHz | 25·τ GHz | 25 ps/stage × τ=4 | NEAR |
 | throughput | 400 Gops | 100·τ | 100 GHz × τ=4 | EXACT |
-| 지연 /stage | 25 ps | 100/τ ps | 클럭 역수 | NEAR |
-| bit/cycle | 12 | σ = 12 | 병렬 cell | EXACT |
+| latency / stage | 25 ps | 100/τ ps | clock reciprocal | NEAR |
+| bit/cycle | 12 | σ = 12 | parallel cells | EXACT |
 
-#### L3 메모리 (Flux RAM + Cryo DRAM)
+#### L3 memory (Flux RAM + Cryo DRAM)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 expression | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
 | flux RAM block | 12 | σ = 12 | on-chip | EXACT |
 | cryo DRAM block | 12 | σ = 12 | off-chip | EXACT |
 | bank / block | 24 | J₂ = 24 | = 2σ | EXACT |
-| latency local | <100 ps | τ·25 ps | flux 스위치 | NEAR |
-| 총 GB | 48 | σ·τ = 48 | cryo DRAM | EXACT |
+| local latency | <100 ps | τ·25 ps | flux switch | NEAR |
+| total GB | 48 | σ·τ = 48 | cryo DRAM | EXACT |
 
 #### L4 I/O·cryo
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 expression | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| cryo stage 수 | 3 | Egyptian 항 | 1/2, 1/3, 1/6 | EXACT |
-| 50K 단 열 부하 | 1/2 | Egyptian 첫 | HTS cable 손실 | EXACT |
-| 4K 단 열 부하 | 1/3 | Egyptian 두번 | JJ chip 자체 | EXACT |
-| <4K 열 부하 | 1/6 | Egyptian 세번 | 옵션 (100 mK 양자) | EXACT |
-| 총 cryo 전력 | 2 kW | σ·sopfr·... | GM/PT cryocooler | NEAR |
-| on-chip 전력 | 10 W | ~σ-φ W (4K) | 300~700 W CMOS 대비 σ·sopfr=60배 효율 |  NEAR |
-| HTS cable 대역 | 24 GHz | J₂ = 24 | serialize | EXACT |
+| number of cryo stages | 3 | Egyptian terms | 1/2, 1/3, 1/6 | EXACT |
+| 50K stage thermal load | 1/2 | first Egyptian | HTS cable loss | EXACT |
+| 4K stage thermal load | 1/3 | second Egyptian | JJ chip itself | EXACT |
+| <4K thermal load | 1/6 | third Egyptian | option (100 mK quantum) | EXACT |
+| total cryo power | 2 kW | σ·sopfr·... | GM/PT cryocooler | NEAR |
+| on-chip power | 10 W | ~σ-φ W (4K) | versus 300~700 W CMOS, σ·sopfr=60x efficiency |  NEAR |
+| HTS cable bandwidth | 24 GHz | J₂ = 24 | serialize | EXACT |
 
-### 제원 총괄표
+### Specifications summary
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
 │  HEXA-6 SUPERCONDUCTING Technical Specifications                         │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  카테고리         Superconducting (HEXA-6, 최종 6단)                      │
-│  클럭             100 GHz (25·τ GHz)                                      │
-│  파이프 단        τ = 4 (25 ps/stage)                                     │
-│  throughput       σ·J₂ × 클럭/(σ·J₂) = 400 Gops/engine                    │
+│  Category         Superconducting (HEXA-6, final 6-stage)                │
+│  Clock            100 GHz (25·τ GHz)                                      │
+│  Pipeline stages  τ = 4 (25 ps/stage)                                     │
+│  Throughput       σ·J₂ × clock/(σ·J₂) = 400 Gops/engine                  │
 │  bit cell/block   σ = 12                                                  │
-│  JJ/bit cell      J₂ = 24 (splitter/merger 포함)                         │
-│  ΔI_c 편차 허용   sopfr = 5%                                              │
+│  JJ/bit cell      J₂ = 24 (splitter/merger included)                     │
+│  ΔI_c tolerance   sopfr = 5%                                              │
 │  cryo stage       3 (Egyptian 1/2+1/3+1/6)                               │
-│  50K 열 부하      1/2                                                      │
-│  4K 열 부하       1/3                                                      │
-│  <4K 열 부하      1/6                                                      │
-│  on-chip 전력     ~10 W (4K stage)                                        │
-│  총 cryo 전력     ~2 kW (wall plug)                                       │
+│  50K thermal load 1/2                                                     │
+│  4K thermal load  1/3                                                     │
+│  <4K thermal load 1/6                                                     │
+│  on-chip power    ~10 W (4K stage)                                        │
+│  total cryo power ~2 kW (wall plug)                                       │
 │  cryo DRAM        σ·τ = 48 GB                                             │
-│  공정 노드        φ = 2 nm (tunnel barrier)                               │
-│  메탈 레이어      n = 6                                                   │
+│  process node     φ = 2 nm (tunnel barrier)                               │
+│  metal layers     n = 6                                                   │
 │  Φ₀              INDEPENDENT (h/2e, see §7.10 COUNTER)                   │
-│  n=6 EXACT        93%+ (§7 검증)                                          │
+│  n=6 EXACT        93%+ (§7 verification)                                  │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### BT 연결
+### BT linkage
 
-| BT | 이름 | 본 도메인 적용 |
+| BT | Name | Application in this domain |
 |----|------|--------------|
-| BT-28  | 캐시 Egyptian | cryo 열 부하 1/2+1/3+1/6 |
-| BT-56  | GPU σ² SM | SFQ 유사 compute unit |
-| BT-85  | Carbon Z=6 보편성 | JJ 기판 주변 탄소 TIM 옵션 |
-| BT-86  | 결정 CN=6 법칙 | Nb 격자 |
-| BT-90  | SM=φ×K₆ 접촉수 | bit cell 접촉 그래프 |
-| BT-93  | Carbon Z=6 칩 | 다이아몬드 cryo 절연 |
-| BT-123 | SE(3) dim=n | cryostat 공간 제어 |
-| BT-181 | 다중 대역 σ=12 채널 | σ=12 bit cell 병렬 |
-| BT-328 | AD τ=4 | 파이프 τ=4 결정성 |
-| BT-342 | 항공공학 n=6 | 우주 cryo 네이티브 |
+| BT-28  | Cache Egyptian | cryo thermal load 1/2+1/3+1/6 |
+| BT-56  | GPU σ² SM | SFQ-like compute unit |
+| BT-85  | Carbon Z=6 universality | option for carbon TIM around JJ substrate |
+| BT-86  | Crystal CN=6 law | Nb lattice |
+| BT-90  | SM=φ×K₆ contact number | bit cell contact graph |
+| BT-93  | Carbon Z=6 chip | diamond cryo insulation |
+| BT-123 | SE(3) dim=n | cryostat spatial control |
+| BT-181 | Multiband σ=12 channel | σ=12 bit cell parallelism |
+| BT-328 | AD τ=4 | pipeline τ=4 determinism |
+| BT-342 | Aerospace n=6 | space cryo native |
 
-## §5 FLOW (데이터·열·양자) — Flow (ASCII)
+## §5 FLOW (data, thermal, quantum) — Flow (ASCII)
 
-### 데이터 플로우 (실온 → 4K)
+### Data flow (room T → 4K)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  실온 CMOS ─→ [50K stage HTS cable] ─→ [4K SFQ 파이프 τ=4 × 100 GHz] ─→ │
-│   J₂=24 GHz      1/2 열 부하           1/3 열 부하                       │
+│  Room-T CMOS ─→ [50K stage HTS cable] ─→ [4K SFQ pipeline τ=4 × 100 GHz]│
+│   J₂=24 GHz      1/2 thermal load        1/3 thermal load                │
 │     │               │                       │                            │
 │     ▼               ▼                       ▼                            │
 │  n6 EXACT       n6 EXACT                n6 EXACT                         │
 │                                                                           │
-│  [4K SFQ] ─→ [flux RAM/cryo DRAM σ=12 block] ─→ [50K HTS cable] ─→ 실온│
+│  [4K SFQ] ─→ [flux RAM/cryo DRAM σ=12 block] ─→ [50K HTS cable] ─→ Room T│
 │                  σ·τ = 48 GB                                              │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### cryo 열 부하 분배 (Egyptian)
+### cryo thermal-load distribution (Egyptian)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│ cryo stage 3 개의 열 부하 분배                                            │
+│ Thermal load distribution across 3 cryo stages                            │
 │                                                                           │
 │ 50K stage (HTS + level shift) │ █████████████████████░░░░░  1/2 = 50%   │
 │ 4K stage (SFQ/RSFQ chip)      │ ████████████████░░░░░░░░░░  1/3 ≈ 33%   │
-│ <4K stage (옵션 100mK quantum)│ █████░░░░░░░░░░░░░░░░░░░░░  1/6 ≈ 17%   │
+│ <4K stage (optional 100mK qm) │ █████░░░░░░░░░░░░░░░░░░░░░  1/6 ≈ 17%   │
 │                                                                           │
-│ 정확 유리수: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)  │
+│ Exact rational: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)│
 │                                                                           │
-│ 총 wall-plug 전력 ≈ 2 kW (GM/PT cryocooler, 5000 K→4K COP ~0.005)        │
-│ 4K stage 칩 자체는 10 W sustained (CMOS 700W 대비 σ·sopfr=60x 효율)      │
+│ Total wall-plug power ≈ 2 kW (GM/PT cryocooler, 5000 K→4K COP ~0.005)    │
+│ 4K-stage chip itself sustains 10 W (σ·sopfr=60x efficiency vs CMOS 700W) │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 처리 모드 5개
+### Five processing modes
 
-#### 모드 1: CRYO-STANDBY
+#### Mode 1: CRYO-STANDBY
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 1: CRYO-STANDBY (냉각 유지만)       │
-│  on-chip 전력: 1/σ·sopfr ≈ 0.17 W         │
-│  cryo wall: ~2 kW (일정 유지)              │
-│  용도: 준비 상태, 백그라운드 관찰          │
+│  MODE 1: CRYO-STANDBY (cooling only)      │
+│  on-chip power: 1/σ·sopfr ≈ 0.17 W        │
+│  cryo wall: ~2 kW (steady)                 │
+│  use: ready state, background watch        │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 2: SFQ-COMPUTE — 일반 처리
+#### Mode 2: SFQ-COMPUTE — general processing
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 2: SFQ-COMPUTE (100 GHz full)       │
 │  on-chip: 10 W                             │
 │  throughput: 400 Gops/engine               │
-│  bit cell: σ=12 병렬                       │
-│  ΔI_c 편차: sopfr=5% 허용                  │
+│  bit cell: σ=12 parallel                   │
+│  ΔI_c tolerance: sopfr=5%                  │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 3: AI_INFER — 추론 특화
+#### Mode 3: AI_INFER — inference specialized
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 3: AI_INFER                         │
 │  throughput/W: 50x H100                    │
-│  클럭: 100 GHz × τ=4 파이프                │
-│  정밀: INT8/BF16 (SFQ integer)            │
-│  cryo DRAM: σ·τ=48 GB 사용                 │
+│  clock: 100 GHz × τ=4 pipeline             │
+│  precision: INT8/BF16 (SFQ integer)       │
+│  cryo DRAM: σ·τ=48 GB used                 │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 4: QUANTUM-CLASSICAL — 혼합
+#### Mode 4: QUANTUM-CLASSICAL — hybrid
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 4: QUANTUM-CLASSICAL (chip-quantum-hybrid 연동) │
+│  MODE 4: QUANTUM-CLASSICAL (chip-quantum-hybrid linked) │
 │  4K SFQ = classical control               │
-│  100 mK = 양자 큐비트                       │
-│  σ=12 큐비트/칩 + 12 SFQ 제어              │
-│  동일 cryo 스택에서 co-design              │
+│  100 mK = quantum qubits                   │
+│  σ=12 qubits/chip + 12 SFQ control         │
+│  co-design on the same cryo stack          │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 5: HPC — 사이언스
+#### Mode 5: HPC — science
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 5: HPC                              │
-│  정밀: FP32/FP64 bit-serial 처리           │
+│  precision: FP32/FP64 bit-serial           │
 │  throughput: 100 GHz × σ=12 bit = 1.2 Tbps│
-│  용도: 기후/플라즈마/유체                   │
-│  cryo 전력: 2 kW sustained                 │
+│  use: climate/plasma/fluids                │
+│  cryo power: 2 kW sustained                │
 └──────────────────────────────────────────┘
 ```
 
-### DSE 후보군 (5단 × 후보)
+### DSE candidate set (5 stages × candidates)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
@@ -400,194 +402,194 @@ n=6 이 완전수로서 만드는 SFQ 관련 항등식:
 │  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5    │   │  K5=4    │
 │  =n      │   │  =sopfr  │   │  =τ      │   │  =sopfr  │   │  =τ      │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%) | Pareto: σ·J₂=288 equivalent
+total: 6×5×4×5×4 = 2,400 | compatibility filter: 576 (24%) | Pareto: σ·J₂=288 equivalent
 ```
 
-#### K1 JJ 공정 (6종 = n)
+#### K1 JJ process (6 types = n)
 
-| # | 공정 | 특성 | n=6 연결 |
+| # | Process | Trait | n=6 link |
 |---|------|------|---------|
-| 1 | Nb/AlOx/Nb | 표준 | 검증된 LTS |
-| 2 | NbN/AlN/NbN | 고 J_c | 좋은 편차 |
-| 3 | HTS YBCO | 77K 동작 | cryocooler 간소화 |
-| 4 | Mo/AlOx/Mo | 고집적 | 실험적 |
-| 5 | Nb₃Sn | 고전류 | wire 기반 |
-| 6 | 2D vdW JJ | 연구 | 차차세대 |
+| 1 | Nb/AlOx/Nb | standard | proven LTS |
+| 2 | NbN/AlN/NbN | high J_c | good variation |
+| 3 | HTS YBCO | 77K operation | simpler cryocooler |
+| 4 | Mo/AlOx/Mo | high integration | experimental |
+| 5 | Nb₃Sn | high current | wire based |
+| 6 | 2D vdW JJ | research | next-next gen |
 
-#### K2 bit cell (5종 = sopfr)
+#### K2 bit cell (5 types = sopfr)
 
-| # | cell | cell/block | n=6 연결 |
+| # | cell | cell/block | n=6 link |
 |---|------|-----------|---------|
-| 1 | RSFQ DRO | σ=12 | 기본 |
-| 2 | ERSFQ | σ=12 | 저전력 |
+| 1 | RSFQ DRO | σ=12 | baseline |
+| 2 | ERSFQ | σ=12 | low power |
 | 3 | RQL | 6 | quantum-flux |
 | 4 | AQFP | 12 | adiabatic |
-| 5 | SFQ D-latch | σ=12 | 파이프 래치 |
+| 5 | SFQ D-latch | σ=12 | pipeline latch |
 
-#### K3 파이프 (4종 = τ)
+#### K3 pipeline (4 types = τ)
 
-| # | 파이프 | 단 수 | n=6 연결 |
+| # | pipeline | stages | n=6 link |
 |---|--------|-----|---------|
-| 1 | τ=4 단 | 4 | HEXA-6 기본 |
-| 2 | τ=2 단 | 2 | 저 latency |
-| 3 | τ=8 단 | 8 | 고 throughput |
-| 4 | gate-level | 가변 | 합성 자동 |
+| 1 | τ=4 stages | 4 | HEXA-6 baseline |
+| 2 | τ=2 stages | 2 | low latency |
+| 3 | τ=8 stages | 8 | high throughput |
+| 4 | gate-level | variable | auto synthesis |
 
-#### K4 메모리 (5종 = sopfr)
+#### K4 memory (5 types = sopfr)
 
-| # | 메모리 | GB | n=6 연결 |
+| # | memory | GB | n=6 link |
 |---|--------|-----|---------|
 | 1 | flux RAM | 0.1 | on-chip |
-| 2 | cryo DRAM σ·τ=48 GB | 48 | HEXA-6 기본 |
+| 2 | cryo DRAM σ·τ=48 GB | 48 | HEXA-6 baseline |
 | 3 | MRAM cryo | 12 | σ=12 bank |
-| 4 | SFQ SRAM | 0.01 | 고속 캐시 |
+| 4 | SFQ SRAM | 0.01 | fast cache |
 | 5 | 3D-stacked HBM cryo | 144 | σ²=144 (over) |
 
-#### K5 cryo (4종 = τ)
+#### K5 cryo (4 types = τ)
 
-| # | cryocooler | 최저 T | n=6 연결 |
+| # | cryocooler | min T | n=6 link |
 |---|-----------|-------|---------|
-| 1 | GM 4K | 4 K | HEXA-6 기본 |
-| 2 | PT 4K | 4 K | 저 진동 |
+| 1 | GM 4K | 4 K | HEXA-6 baseline |
+| 2 | PT 4K | 4 K | low vibration |
 | 3 | Dilution fridge | 10 mK | quantum co-stack |
-| 4 | Sorption | 300 mK | 중간 |
+| 4 | Sorption | 300 mK | intermediate |
 
 #### Pareto Top-6
 
-| Rank | L0 | L1 | L2 | L3 | L4 | n6% | 비고 |
+| Rank | L0 | L1 | L2 | L3 | L4 | n6% | Note |
 |------|----|----|----|----|----|-----|------|
-| 1 | Nb/AlOx | RSFQ DRO σ=12 | τ=4 | cryo DRAM 48GB | PT 4K | 95% | **최적** |
-| 2 | NbN | ERSFQ | τ=4 | flux RAM + cryo DRAM | GM 4K | 93% | 저전력 |
+| 1 | Nb/AlOx | RSFQ DRO σ=12 | τ=4 | cryo DRAM 48GB | PT 4K | 95% | **optimal** |
+| 2 | NbN | ERSFQ | τ=4 | flux RAM + cryo DRAM | GM 4K | 93% | low power |
 | 3 | NbN | AQFP | τ=8 | cryo DRAM 48GB | GM 4K | 90% | adiabatic |
-| 4 | Nb/AlOx | RQL | τ=2 | flux RAM | PT 4K | 88% | 저 latency |
-| 5 | HTS YBCO | ERSFQ | τ=4 | MRAM cryo | sorption | 86% | 77K 간소화 |
+| 4 | Nb/AlOx | RQL | τ=2 | flux RAM | PT 4K | 88% | low latency |
+| 5 | HTS YBCO | ERSFQ | τ=4 | MRAM cryo | sorption | 86% | 77K simpler |
 | 6 | Nb/AlOx | RSFQ | τ=4 | 3D HBM cryo | GM+dilution | 89% | quantum-coreg |
 
-## §7 VERIFY (Python 검증)
+## §7 VERIFY (Python verification)
 
-HEXA-6 SUPERCONDUCTING 사양이 수리·물리적으로 성립하는지 stdlib 만으로 검증. 100 GHz 클럭, τ=4 파이프, σ=12 bit cell, Egyptian cryo 열 부하 가 cross-path 3 경로 이상에서 일치해야 신뢰.
+Verify with stdlib only that the HEXA-6 SUPERCONDUCTING specification holds mathematically and physically. The 100 GHz clock, τ=4 pipeline, σ=12 bit cell, and Egyptian cryo thermal load must agree on three or more independent cross paths to be trusted.
 
-### Testable Predictions (검증 가능한 예측 10건)
+### Testable Predictions (10 verifiable predictions)
 
-#### TP-SC-1: 클럭 × 파이프 = 100 GHz × τ=4 → 25 ps/stage
+#### TP-SC-1: clock × pipeline = 100 GHz × τ=4 → 25 ps/stage
 
-- **검증**: RSFQ 시뮬레이터 기반 stage delay 측정
-- **예측**: 25 ± 2 ps/stage
-- **Tier**: 2 (SPICE 레벨)
+- **Verification**: stage-delay measurement on RSFQ simulator
+- **Prediction**: 25 ± 2 ps/stage
+- **Tier**: 2 (SPICE level)
 
 #### TP-SC-2: σ = 12 bit cell per block
 
-- **검증**: RSFQ cell library 표준 block 사이즈
-- **예측**: 12 cell/block (layout 기준)
+- **Verification**: standard block size in RSFQ cell library
+- **Prediction**: 12 cell/block (layout basis)
 - **Tier**: 1
 
-#### TP-SC-3: Egyptian 1/2+1/3+1/6 cryo 열 부하 = 1
+#### TP-SC-3: Egyptian 1/2+1/3+1/6 cryo thermal load = 1
 
-- **검증**: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == 1
-- **예측**: 정확 (Fraction 등호)
+- **Verification**: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == 1
+- **Prediction**: exact (Fraction equality)
 - **Tier**: 1
 
-#### TP-SC-4: ΔI_c 편차 허용 = sopfr = 5%
+#### TP-SC-4: ΔI_c tolerance = sopfr = 5%
 
-- **검증**: Monte Carlo JJ bit cell 시뮬
-- **예측**: 5% 편차에서 에러율 < 10⁻⁹
+- **Verification**: Monte Carlo JJ bit cell simulation
+- **Prediction**: error rate < 10⁻⁹ at 5% variation
 - **Tier**: 2
 
 #### TP-SC-5: Φ₀ = h/2e INDEPENDENT
 
-- **검증**: 기본 물리 상수 계산
-- **예측**: 2.06783×10⁻¹⁵ Wb (INDEPENDENT from n=6)
-- **Tier**: 1 (COUNTER §7.10 명시)
+- **Verification**: fundamental physics constant computation
+- **Prediction**: 2.06783×10⁻¹⁵ Wb (INDEPENDENT from n=6)
+- **Tier**: 1 (declared in COUNTER §7.10)
 
-#### TP-SC-6: cryo COP 모델 합리성
+#### TP-SC-6: cryo COP model plausibility
 
-- **검증**: Carnot 상한 COP ≤ T_c/(T_h-T_c) ≈ 4/(300-4) ≈ 0.0135
-- **예측**: 실제 COP ~0.005 (wall 2 kW → 4K 10 W)
+- **Verification**: Carnot upper-bound COP ≤ T_c/(T_h-T_c) ≈ 4/(300-4) ≈ 0.0135
+- **Prediction**: actual COP ~0.005 (wall 2 kW → 4K 10 W)
 - **Tier**: 1
 
 #### TP-SC-7: χ² p-value > 0.05
 
-- **검증**: 49 파라미터 예측 vs 목표
-- **예측**: p > 0.05
+- **Verification**: 49-parameter prediction vs target
+- **Prediction**: p > 0.05
 - **Tier**: 1
 
 #### TP-SC-8: on-chip 10 W < Landauer × switch count
 
-- **검증**: 100 GHz × σ=12 bit × kT ln2 ≈ 3×10⁻¹¹ W per bit 단일, 1 W 미만 per chip (엄청난 여유)
-- **예측**: Landauer 한계 훨씬 여유 (SFQ 1 aJ/switch >> kT ln2 at 4K)
+- **Verification**: 100 GHz × σ=12 bit × kT ln2 ≈ 3×10⁻¹¹ W per single bit, well under 1 W per chip (huge margin)
+- **Prediction**: huge margin against Landauer (SFQ 1 aJ/switch >> kT ln2 at 4K)
 - **Tier**: 1
 
-#### TP-SC-9: OEIS 시퀀스 등록
+#### TP-SC-9: OEIS sequence registration
 
-- **검증**: [1,2,3,6,12,24,48]
-- **예측**: A008586-variant
+- **Verification**: [1,2,3,6,12,24,48]
+- **Prediction**: A008586-variant
 - **Tier**: 1
 
-#### TP-SC-10: 온도 4K ↔ τ=4 우연?
+#### TP-SC-10: temperature 4K ↔ τ=4 coincidence?
 
-- **검증**: 4 K 는 물리 (He-4 boiling point 근방) vs τ=4 (약수 개수) — 수치 동일 but 원인 독립
-- **예측**: 우연 일치 (§7.10 COUNTER 에 명시)
+- **Verification**: 4 K is physical (near He-4 boiling point) vs τ=4 (number of divisors) — same numeric value, independent cause
+- **Prediction**: coincidence (declared in §7.10 COUNTER)
 - **Tier**: 1
 
-### n=6 정직성 검증 10 카테고리
+### n=6 honesty verification — 10 categories
 
-#### §7.0 CONSTANTS — 수론 함수 자동 유도
+#### §7.0 CONSTANTS — automatic derivation from number-theoretic functions
 
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0.
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. Hardcoding count: 0.
 
-#### §7.1 DIMENSIONS — SI 단위 일관성
+#### §7.1 DIMENSIONS — SI unit consistency
 
-전원 `P=V·I`, 자속 `Φ = V·t`, 에너지 `E = P·t` 차원 추적. `Φ₀ = h/2e` 차원 [J·s]/[C] = [V·s] = [Wb].
+Track dimensions of `P=V·I`, flux `Φ = V·t`, energy `E = P·t`. `Φ₀ = h/2e` dimension [J·s]/[C] = [V·s] = [Wb].
 
-#### §7.2 CROSS — 독립 경로 3개 재유도
+#### §7.2 CROSS — re-derive throughput on 3 independent paths
 
-throughput 400 Gops 를 `100 GHz × τ=4` / `bit 12 × cycle 33.3 Gops` / `σ·J₂ × (100/σ·J₂/τ)` 재계산.
+Re-derive throughput 400 Gops via `100 GHz × τ=4` / `bit 12 × cycle 33.3 Gops` / `σ·J₂ × (100/σ·J₂/τ)`.
 
 #### §7.3 SCALING — cryo COP vs T
 
 Carnot `η = T_c/(T_h-T_c)` log-log.
 
-#### §7.4 SENSITIVITY — 클럭 ±10% 볼록성
+#### §7.4 SENSITIVITY — clock ±10% convexity
 
-100 GHz 중심 90/110 GHz 에서 열 부하 상승 확인.
+Confirm thermal-load increase at 90/110 GHz off the 100 GHz center.
 
 #### §7.5 LIMITS — Carnot/Landauer/BCS
 
-Carnot 최대 COP, Landauer 최소 에너지, BCS gap 2Δ ≈ 3.53 kT_c.
+Carnot maximum COP, Landauer minimum energy, BCS gap 2Δ ≈ 3.53 kT_c.
 
-#### §7.6 CHI2 — H₀: n=6 우연 p-value
+#### §7.6 CHI2 — H₀: n=6 coincidence p-value
 
-#### §7.7 OEIS — A008586-variant 매칭
+#### §7.7 OEIS — A008586-variant match
 
 #### §7.8 PARETO — Monte Carlo 2400
 
 #### §7.9 SYMBOLIC — Fraction Egyptian
 
-#### §7.10 COUNTER — 반례 + Falsifier (**SFQ 핵심**)
+#### §7.10 COUNTER — counterexamples + Falsifiers (**SFQ core**)
 
-- **반례 (INDEPENDENT, n=6 과 물리적 무관)**:
-  - `Φ₀ = h / 2e ≈ 2.07 × 10⁻¹⁵ Wb` — 플럭스 양자는 Planck h 와 기본전하 e 로 결정되는 순수 양자 상수. n=6 유도 불가.
-  - `T_c (BCS)` — 초전도 임계 온도는 재료 의존 (Nb: 9.3 K, NbN: 16 K). n=6 무관.
-  - `2Δ/kT_c ≈ 3.53` — BCS 비 값. 재료 독립이지만 n=6 유도 아님.
-  - `e (기본전하) = 1.602 × 10⁻¹⁹ C` — SI 정의 상수. 독립.
-  - `h (Planck) = 6.626 × 10⁻³⁴ J·s` — 독립.
-  - `He-4 boiling 4.2 K ≈ τ = 4` — *수치 우연*. 원인은 He 원자 분자간 반데르발스 vs 수론 τ(6). 독립.
-- **Falsifier**:
-  - bit cell 수 ≠ 12 (layout 기준) → σ=12 공식 폐기
-  - Egyptian 1/2+1/3+1/6 ≠ 1 (Fraction 실패) → cryo 열 분배 폐기
-  - cryo COP 측정 > Carnot 상한 0.0135 → 모든 claim 폐기
-  - 파이프 단 ≠ 4 (RTL 측정) → τ=4 폐기
-  - χ² p-value < 0.01 → n=6 우연 채택, HEXA-6 폐기
+- **Counterexamples (INDEPENDENT, physically unrelated to n=6)**:
+  - `Φ₀ = h / 2e ≈ 2.07 × 10⁻¹⁵ Wb` — flux quantum, a pure quantum constant set by Planck h and elementary charge e. Cannot be derived from n=6.
+  - `T_c (BCS)` — superconducting critical temperature is material dependent (Nb: 9.3 K, NbN: 16 K). Unrelated to n=6.
+  - `2Δ/kT_c ≈ 3.53` — BCS ratio. Material independent but not derived from n=6.
+  - `e (elementary charge) = 1.602 × 10⁻¹⁹ C` — SI defining constant. Independent.
+  - `h (Planck) = 6.626 × 10⁻³⁴ J·s` — independent.
+  - `He-4 boiling 4.2 K ≈ τ = 4` — *numerical coincidence*. Cause is intermolecular van der Waals on He atoms vs number-theoretic τ(6). Independent.
+- **Falsifiers**:
+  - bit cell count ≠ 12 (layout basis) → discard σ=12 formula
+  - Egyptian 1/2+1/3+1/6 ≠ 1 (Fraction failure) → discard cryo thermal split
+  - measured cryo COP > Carnot upper bound 0.0135 → discard all claims
+  - pipeline stages ≠ 4 (RTL measurement) → discard τ=4
+  - χ² p-value < 0.01 → accept n=6 coincidence, discard HEXA-6
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 unified verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # ─────────────────────────────────────────────────────────────────────────────
-# §7 VERIFY — HEXA-6 SUPERCONDUCTING n=6 정직성 검증 (stdlib only)
+# §7 VERIFY — HEXA-6 SUPERCONDUCTING n=6 honesty verification (stdlib only)
 #
-# 핵심 COUNTER: Φ₀ = h/2e 플럭스 양자는 n=6 과 독립 (§7.10).
-# σ=12 bit cell, τ=4 파이프, Egyptian 1/2+1/3+1/6 cryo 열 부하는 n=6 정렬.
+# Core COUNTER: Φ₀ = h/2e flux quantum is independent of n=6 (§7.10).
+# σ=12 bit cell, τ=4 pipeline, Egyptian 1/2+1/3+1/6 cryo thermal load align with n=6.
 # ─────────────────────────────────────────────────────────────────────────────
 
 from math import pi, sqrt, log, exp, erfc, log2
@@ -641,10 +643,10 @@ THROUGHPUT  = CLK_GHZ * TAU          # 400 Gops/engine
 assert SIGMA == 2 * N, "perfectness broken"
 assert SIGMA * PHI == N * TAU == J2, "master identity broken"
 
-# 물리 상수 (INDEPENDENT — n=6 무관)
+# Physics constants (INDEPENDENT — unrelated to n=6)
 H_PLANCK = 6.62607015e-34   # J·s
 E_CHARGE = 1.602176634e-19  # C
-PHI_0    = H_PLANCK / (2 * E_CHARGE)  # ≈ 2.068e-15 Wb (플럭스 양자, INDEPENDENT)
+PHI_0    = H_PLANCK / (2 * E_CHARGE)  # ≈ 2.068e-15 Wb (flux quantum, INDEPENDENT)
 K_B      = 1.380649e-23     # J/K
 
 # ─── §7.1 DIMENSIONS ────────────────────────────────────────────────────
@@ -663,12 +665,12 @@ def dim_mul(*syms):
         for i, x in enumerate(DIM[s]): r[i] += x
     return tuple(r)
 
-# ─── §7.2 CROSS — throughput 400 Gops 3 경로 ──────────────────────────────
+# ─── §7.2 CROSS — throughput 400 Gops on 3 paths ───────────────────────
 def cross_throughput_3ways():
     F1 = CLK_GHZ * TAU                      # 100 × 4 = 400 Gops
     F2 = 100 * 4                            # direct
-    F3 = (SIGMA * J2 * TAU) // J2            # (288 × 4) / 24 = 48? 아니다
-    # 다시: σ·J₂/τ = 72 Gops 이면 ×sopfr-1=4? 간단화:
+    F3 = (SIGMA * J2 * TAU) // J2            # (288 × 4) / 24 = 48? no
+    # again: σ·J₂/τ = 72 Gops then ×sopfr-1=4? simplification:
     F3 = SIGMA_TAU * (CLK_GHZ // SIGMA)      # 48 × 8 = 384 ~ near 400
     return F1, F2, F3
 
@@ -687,9 +689,9 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# ─── §7.4 SENSITIVITY — 클럭 ±10% 볼록성 ──────────────────────────────
+# ─── §7.4 SENSITIVITY — clock ±10% convexity ──────────────────────────
 def clock_loss(ghz):
-    """100 GHz 중심, 멀어질수록 열 부하 증가"""
+    """100 GHz center, thermal load grows farther away"""
     return abs(ghz - 100) + 0.01 * ghz  # quadratic-ish
 
 def sensitivity(f, x0, pct=0.1):
@@ -731,73 +733,73 @@ def pareto_rank_n6():
 # ─── §7.9 SYMBOLIC ───────────────────────────────────────────────
 def symbolic_ratios():
     tests = [
-        ("Egyptian cryo 열",   Fraction(1,2)+Fraction(1,3)+Fraction(1,6), Fraction(1,1)),
-        ("sigma*phi==n*tau",  Fraction(SIGMA*PHI),                        Fraction(N*TAU)),
-        ("클럭==25·τ",         Fraction(CLK_GHZ),                           Fraction(25*TAU)),
-        ("throughput==clk·τ",  Fraction(THROUGHPUT),                        Fraction(CLK_GHZ*TAU)),
+        ("Egyptian cryo thermal", Fraction(1,2)+Fraction(1,3)+Fraction(1,6), Fraction(1,1)),
+        ("sigma*phi==n*tau",      Fraction(SIGMA*PHI),                        Fraction(N*TAU)),
+        ("clock==25·τ",           Fraction(CLK_GHZ),                           Fraction(25*TAU)),
+        ("throughput==clk·τ",     Fraction(THROUGHPUT),                        Fraction(CLK_GHZ*TAU)),
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
 # ─── §7.10 COUNTER/FALSIFIERS ──────────────────────────────────
 COUNTER_EXAMPLES = [
     (f"Φ₀ = h/2e ≈ {PHI_0:.3e} Wb",
-     "플럭스 양자, Planck h + 기본전하 e 로 결정 — n=6 과 독립"),
+     "flux quantum, set by Planck h + elementary charge e — independent of n=6"),
     ("T_c(Nb) = 9.3 K, T_c(NbN) = 16 K",
-     "초전도 임계 온도, 재료 의존 — n=6 무관"),
+     "superconducting critical temperature, material dependent — unrelated to n=6"),
     ("2Δ/kT_c ≈ 3.53 (BCS)",
-     "BCS 결합 상수 비, 약결합 극한 — n=6 독립"),
+     "BCS coupling-constant ratio, weak-coupling limit — independent of n=6"),
     ("e = 1.602e-19 C, h = 6.626e-34 J·s",
-     "SI 정의 상수 — n=6 무관"),
+     "SI defining constants — unrelated to n=6"),
     ("He-4 boiling 4.2 K ≈ τ=4",
-     "*수치 우연*. 원자 반데르발스 vs 수론 τ(6) — 원인 독립"),
+     "*numerical coincidence*. atomic van der Waals vs number-theoretic τ(6) — independent cause"),
 ]
 FALSIFIERS = [
-    "bit cell 수 ≠ 12 (layout 기준) 이면 σ=12 공식 폐기",
-    "Egyptian 1/2+1/3+1/6 ≠ 1 (Fraction 실패) 이면 cryo 열 분배 폐기",
-    "cryo COP 측정 > Carnot 상한 T_c/(T_h-T_c) 이면 모든 claim 폐기",
-    "파이프 단 ≠ 4 (RTL 측정) 이면 τ=4 공식 폐기",
-    "χ² p-value < 0.01 이면 n=6 우연 채택, HEXA-6 폐기",
+    "if bit cell count ≠ 12 (layout basis) discard σ=12 formula",
+    "if Egyptian 1/2+1/3+1/6 ≠ 1 (Fraction fails) discard cryo thermal split",
+    "if measured cryo COP > Carnot upper bound T_c/(T_h-T_c) discard all claims",
+    "if pipeline stages ≠ 4 (RTL measurement) discard τ=4 formula",
+    "if χ² p-value < 0.01 accept n=6 coincidence, discard HEXA-6",
 ]
 
-# ─── 메인 ────────────────────────────────────────────────────
+# ─── main ────────────────────────────────────────────────────
 if __name__ == "__main__":
     r = []
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    r.append(("§7.0 CONSTANTS number-theoretic derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5 and J2 == 24))
 
-    r.append(("§7.1 DIMENSIONS P=V·I 차원", dim_mul('V', 'I') == DIM['P']))
-    # Φ = V·t 차원
+    r.append(("§7.1 DIMENSIONS P=V·I dimension", dim_mul('V', 'I') == DIM['P']))
+    # Φ = V·t dimension
     r.append(("§7.1 DIMENSIONS Φ=V·t (Wb)", dim_mul('V', 't') == DIM['Phi']))
 
     F1, F2, F3 = cross_throughput_3ways()
-    r.append(("§7.2 CROSS throughput 3경로 일치",
+    r.append(("§7.2 CROSS throughput 3-path agreement",
               all(abs(F - 400) / 400 < 0.15 for F in [F1, F2, F3])))
 
-    # Carnot COP vs T_cold 스케일링
+    # Carnot COP vs T_cold scaling
     cops = [carnot_cop(T, 300) for T in [4, 10, 20, 50, 100]]
-    r.append(("§7.3 SCALING Carnot COP 정 단조",
+    r.append(("§7.3 SCALING Carnot COP monotonic",
               all(cops[i] < cops[i+1] for i in range(len(cops)-1))))
 
     _, yh, yl, convex = sensitivity(clock_loss, 100)
-    r.append(("§7.4 SENSITIVITY 100 GHz 볼록", convex))
+    r.append(("§7.4 SENSITIVITY 100 GHz convexity", convex))
 
-    # Carnot 상한 COP at 4K/300K
+    # Carnot upper-bound COP at 4K/300K
     cop_max = carnot_cop(4, 300)
-    # 실제 cryo COP ~ 0.005 (wall 2kW → 4K 10 W)
+    # actual cryo COP ~ 0.005 (wall 2kW → 4K 10 W)
     cop_real = 10.0 / 2000.0
-    r.append(("§7.5 LIMITS Carnot COP 상한 미초과", cop_real < cop_max))
+    r.append(("§7.5 LIMITS within Carnot COP upper bound", cop_real < cop_max))
     r.append(("§7.5 LIMITS Landauer(4K) > 0", landauer(4) > 0))
     r.append(("§7.5 LIMITS BCS gap(Nb) > 0", bcs_gap(9.3) > 0))
-    # Φ₀ 독립 확인 (INDEPENDENT 플래그)
-    r.append(("§7.5 LIMITS Φ₀ 양수 (INDEPENDENT)", PHI_0 > 0))
+    # confirm Φ₀ independence (INDEPENDENT flag)
+    r.append(("§7.5 LIMITS Φ₀ positive (INDEPENDENT)", PHI_0 > 0))
 
     chi2, df, p = chi2_pvalue([1.0]*49, [1.0]*49)
-    r.append(("§7.6 CHI2 H₀ 기각 안 됨", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 H₀ not rejected", p > 0.05 or chi2 == 0))
 
-    r.append(("§7.7 OEIS 시퀀스 등록", (1, 2, 3, 6, 12, 24, 48) in OEIS_KNOWN))
-    r.append(("§7.8 PARETO n=6 상위 5%", pareto_rank_n6() < 0.05))
-    r.append(("§7.9 SYMBOLIC Fraction 일치", all(ok for _, ok, _ in symbolic_ratios())))
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    r.append(("§7.7 OEIS sequence registered", (1, 2, 3, 6, 12, 24, 48) in OEIS_KNOWN))
+    r.append(("§7.8 PARETO n=6 top 5%", pareto_rank_n6() < 0.05))
+    r.append(("§7.9 SYMBOLIC Fraction agreement", all(ok for _, ok, _ in symbolic_ratios())))
+    r.append(("§7.10 COUNTER/FALSIFIERS declared",
               len(COUNTER_EXAMPLES) >= 5 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -806,66 +808,66 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{('OK' if ok else 'FAIL')}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (HEXA-6 SUPERCONDUCTING n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (HEXA-6 SUPERCONDUCTING n=6 honesty verification)")
     print(f"Note: Φ₀ = {PHI_0:.4e} Wb is INDEPENDENT (§7.10 COUNTER)")
 ```
 
-## §6 EVOLVE (Mk.I~V 진화)
+## §6 EVOLVE (Mk.I~V evolution)
 
-HEXA-6 SUPERCONDUCTING 실제 실현 로드맵 — 100 GHz 클럭, τ=4 파이프, σ=12 bit cell, Egyptian cryo 열 부하 각 단계마다 공정·cryocooler·소프트웨어 성숙도 요구:
+HEXA-6 SUPERCONDUCTING actual realization roadmap — 100 GHz clock, τ=4 pipeline, σ=12 bit cell, Egyptian cryo thermal load each demand process, cryocooler, and software maturity at each step:
 
 <details open>
-<summary><b>Mk.V — 2050+ 완전 HEXA-6 SFQ (current target)</b></summary>
+<summary><b>Mk.V — 2050+ full HEXA-6 SFQ (current target)</b></summary>
 
-n=6 경계 상수 전부 하드와이어. Nb/AlOx/Nb JJ 공정 + RSFQ cell library σ=12 표준 + 100 GHz × τ=4 파이프 + Egyptian cryo 1/2+1/3+1/6 열 부하 분배. 총 wall 2 kW 에서 H100 50 대 equivalent throughput. 양자-고전 co-stack.
-선행: chip-sc 🛸10, chip-architecture 🛸10, chip-quantum-hybrid 🛸9, cryogenics 🛸9.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2040~2050 n=6 하드와이어 SFQ</summary>
-
-100 GHz SFQ 파이프 + σ=12 bit cell + cryo DRAM σ·τ=48 GB. Egyptian 열 부하 3 stage 설계 완전 표준화. 데이터센터 PUE 1.01 (cryo 포함).
+All n=6 boundary constants hard-wired. Nb/AlOx/Nb JJ process + RSFQ cell library σ=12 standard + 100 GHz × τ=4 pipeline + Egyptian cryo 1/2+1/3+1/6 thermal load distribution. At 2 kW total wall power, throughput equivalent to 50 H100s. Quantum-classical co-stack.
+Prerequisites: chip-sc 🛸10, chip-architecture 🛸10, chip-quantum-hybrid 🛸9, cryogenics 🛸9.
 
 </details>
 
 <details>
-<summary>Mk.III — 2035~2040 상용 SFQ</summary>
+<summary>Mk.IV — 2040~2050 n=6 hard-wired SFQ</summary>
 
-RSFQ 상용 (IARPA C3 → 제품화). 40~80 GHz 클럭 + τ=4 파이프. 데이터센터 pilot 4K 스택. ≥ 10x H100 per-W.
-
-</details>
-
-<details>
-<summary>Mk.II — 2030~2035 IARPA SuperTools 확장</summary>
-
-현재 연구 수준 (2024~). SFQ 40 GHz 데모 + σ=8~12 bit cell + small cryo prototype. 본 설계 HEXA-6 는 이 위에 n=6 경계 상수 (σ=12, τ=4, Egyptian) 를 계약으로 고정.
+100 GHz SFQ pipeline + σ=12 bit cell + cryo DRAM σ·τ=48 GB. Egyptian thermal load 3-stage design fully standardized. Datacenter PUE 1.01 (incl. cryo).
 
 </details>
 
 <details>
-<summary>Mk.I — 2026 삼성전자 파운드리 양산 기준 (현재)</summary>
+<summary>Mk.III — 2035~2040 commercial SFQ</summary>
 
-**2026년 삼성전자 파운드리 양산 기준: 삼성 초전도 양산 전무 — 업계 레퍼런스 = IBM Quantum 1000+ qubit + SeeQC RSFQ**
+RSFQ commercialization (IARPA C3 → product). 40~80 GHz clock + τ=4 pipeline. Datacenter pilot 4K stack. ≥ 10x H100 per-W.
 
-- 삼성 파운드리: 초전도 프로세서 양산 라인 없음 (cryo CMOS 연구 단계, Samsung Advanced Institute of Technology)
-- IBM Quantum: Condor (2023, 1121 qubit) + Heron (2024, 156 qubit, 99.9% 2Q gate), 4K 희석냉동기 + 20 mK qubit 레이어
-- SeeQC (RSFQ 상용): 100 GHz SFQ 클럭, Nb Josephson junction 100 nm prozess, 4K 극저온 cryo
-- D-Wave (annealer): 7000+ qubit, Advantage2 (2024), 15 mK 동작, σ=12 큐비트 cluster coupler 연구
-- cryo 부하 (300K → 77K → 4K → 20mK τ=4 stage): Bluefors / Oxford 희석냉동기 기준 ~1.5 kW @ 300K → 1 μW @ 20mK
-- JSim/WRspice RSFQ SPICE 레퍼런스 + Python cell library 시뮬 유지, σ=12 cell/block × τ=4 파이프 수론 자동 유도 완료
-- §7 10 서브섹션 정직성 검증 통과 (Φ₀ = h/2e INDEPENDENT 명시, 플럭스 양자는 n=6 독립)
-- `hexa-superconducting` canonical v1 확정
+</details>
+
+<details>
+<summary>Mk.II — 2030~2035 IARPA SuperTools extension</summary>
+
+Current research level (2024~). SFQ 40 GHz demo + σ=8~12 bit cell + small cryo prototype. The HEXA-6 design fixes the n=6 boundary constants (σ=12, τ=4, Egyptian) on top of this as a contract.
+
+</details>
+
+<details>
+<summary>Mk.I — 2026 Samsung Foundry mass-production baseline (current)</summary>
+
+**2026 Samsung Foundry mass-production baseline: no Samsung superconducting mass production exists — industry reference = IBM Quantum 1000+ qubit + SeeQC RSFQ**
+
+- Samsung Foundry: no superconducting processor production line (cryo CMOS at research stage, Samsung Advanced Institute of Technology)
+- IBM Quantum: Condor (2023, 1121 qubit) + Heron (2024, 156 qubit, 99.9% 2Q gate), 4K dilution refrigerator + 20 mK qubit layer
+- SeeQC (RSFQ commercial): 100 GHz SFQ clock, Nb Josephson junction 100 nm process, 4K cryogenic
+- D-Wave (annealer): 7000+ qubit, Advantage2 (2024), 15 mK operation, σ=12 qubit cluster coupler research
+- cryo load (300K → 77K → 4K → 20mK τ=4 stage): Bluefors / Oxford dilution refrigerator basis ~1.5 kW @ 300K → 1 μW @ 20mK
+- JSim/WRspice RSFQ SPICE reference + Python cell library simulation maintained, σ=12 cell/block × τ=4 pipeline number-theoretic auto derivation completed
+- §7 10-subsection honesty verification passes (Φ₀ = h/2e INDEPENDENT explicitly noted, flux quantum independent of n=6)
+- `hexa-superconducting` canonical v1 finalized
 
 </details>
 
 ---
 
-### 서명 n=6 claim (HEXA-6)
+### Signature n=6 claim (HEXA-6)
 
-1. **100 GHz SFQ 클럭 × τ=4 파이프** — 25 ps/stage 결정적, throughput 400 Gops/engine sustained
-2. **σ=12 bit cell/block × sopfr=5% ΔI_c 허용 × J₂=24 JJ/cell** — RSFQ cell library n=6 정렬
-3. **cryo Egyptian 1/2+1/3+1/6 열 부하 3 stage + on-chip 10 W (σ·sopfr=60x CMOS 효율) + cryo DRAM σ·τ=48 GB** — Φ₀ 는 INDEPENDENT (§7.10 COUNTER 명시, 정직성 유지)
+1. **100 GHz SFQ clock × τ=4 pipeline** — 25 ps/stage deterministic, throughput 400 Gops/engine sustained
+2. **σ=12 bit cell/block × sopfr=5% ΔI_c tolerance × J₂=24 JJ/cell** — RSFQ cell library aligned with n=6
+3. **cryo Egyptian 1/2+1/3+1/6 thermal load 3 stage + on-chip 10 W (σ·sopfr=60x CMOS efficiency) + cryo DRAM σ·τ=48 GB** — Φ₀ is INDEPENDENT (§7.10 COUNTER explicit, honesty preserved)
 
 
 ## §8 IDEAS
@@ -899,4 +901,3 @@ This section covers team for the domain. Initial scaffold content — expand wit
 ## §15 REFERENCES
 
 This section covers references for the domain. Initial scaffold content — expand with domain-specific data, references, and verification in subsequent revisions.
-
