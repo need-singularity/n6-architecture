@@ -8,123 +8,123 @@ requires:
 ---
 
 <!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, VERIFY, EVOLVE], strict=false, order=sequential, prefix="§") -->
-# 궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) — n=6 BCI·뉴로피드백·AI·센서·웨어러블·의료 통합
+# Ultimate neuro BCI architecture (HEXA-NEURO) — n=6 BCI/neurofeedback/AI/sensor/wearable/medical integration
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## §1 WHY (how this technology changes your life)
 
-뇌파 6 주파수 대역 (δ/θ/α/β/γ/HFO) = n=6 신경 리듬.
-**neuro 영역의 3가지 기존 한계를 n=6 아키텍처가 동시 해결한다.**
+EEG 6 frequency bands (δ/θ/α/β/γ/HFO) = n=6 neural rhythm.
+**neuro domain pattern: three prior limits addressed concurrently by the n=6 draft architecture.**
 
-1. **기존 한계 1**: 설계 자유도 부족 → σ(6)=12 자유도로 통합    ← σ(6)=12, OEIS A000203
-2. **기존 한계 2**: 주기 최적화 한계 → τ(6)=4 주기로 수렴         ← τ(6)=4, OEIS A000005
-3. **기존 한계 3**: 신뢰성 확보 난제 → φ(6)=2 대칭 중복으로 해결  ← φ(6)=2, OEIS A000010
+1. **Prior limit 1**: insufficient design DOF → unified to σ(6)=12 DOF    ← σ(6)=12, OEIS A000203
+2. **Prior limit 2**: cycle-optimisation limit → converges to τ(6)=4 period         ← τ(6)=4, OEIS A000005
+3. **Prior limit 3**: reliability challenge → addressed by φ(6)=2 symmetric redundancy  ← φ(6)=2, OEIS A000010
 
-| 효과 | 현재 | HEXA 이후 | 체감 변화 |
+| Effect | Current | Post-HEXA | Felt change |
 |------|------|-----------|----------|
-| BCI 채널 | 8 | **96** | 체감: 2σ·τ 연결 |
-| 샘플링 kHz | 1 | **12** | 체감: σ=12 연결 |
-| 응답 ms | 50 | **4** | 체감: τ=4 연결 |
-| BER % | 10 | **1** | 체감: μ=1 연결 |
+| BCI channels | 8 | **96** | felt: 2σ·τ link |
+| Sampling kHz | 1 | **12** | felt: σ=12 link |
+| Response ms | 50 | **4** | felt: τ=4 link |
+| BER % | 10 | **1** | felt: μ=1 link |
 
-**한 문장 요약**: 뇌파 6 주파수 대역 (δ/θ/α/β/γ/HFO) = n=6 신경 리듬 — n=6 완전수 아키텍처가 BCI 채널 비약적 개선과 기존 한계 3가지를 동시에 해결한다.
+**One-line summary**: EEG 6 frequency bands (δ/θ/α/β/γ/HFO) = n=6 neural rhythm — the n=6 perfect-number draft architecture addresses BCI channel improvement and three prior limits concurrently.
 
-### 일상이 되면
+### When it becomes everyday
 
 ```
-  [neuro] 데이터/자원/인프라가 n=6 구조로 정렬되면
-  σ=12 입력 소스가 τ=4 주기로 n=6 서브시스템을 거쳐
-  J₂=24 지표로 모니터링되며 sopfr=5 채널로 피드백되고
-  φ=2 대칭 중복으로 실패율 1%(μ=1) 수준으로 안정화된다.
+  [neuro] once data/resource/infrastructure is aligned to the n=6 structure
+  σ=12 input sources pass through n=6 subsystems on a τ=4 period
+  monitored via J₂=24 indicators, with feedback on sopfr=5 channels
+  stabilised to ≤1% failure rate (μ=1) through φ=2 symmetric redundancy.
 ```
 
-### 사회적 변혁
+### Social transformation
 
-| 분야 | 변화 | n=6 연결 |
+| Field | Change | n=6 link |
 |------|------|---------|
-| 생산성 | BCI 채널 96ch 달성 | σ·sopfr=60 |
-| 신뢰성 | 실패율 1% 이하 | μ=1 |
-| 표준화 | 6대 핵심 지표 확립 | n=6 |
-| 감사/추적 | σ=12 전수 기록 | σ(6)=12 |
+| Productivity | BCI 96-channel target | σ·sopfr=60 |
+| Reliability | Failure rate ≤1% | μ=1 |
+| Standardisation | Six core indicators established | n=6 |
+| Audit/trace | σ=12 full logging | σ(6)=12 |
 
-## §2 COMPARE (현 기술 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (current tech vs n=6) — performance comparison (ASCII)
 
-### 기존 기술이 한계였던 3가지 이유
+### Three reasons current tech has been limited
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불가능했나              │  n=6 이 어떻게 해결하나    │
+│  Barrier           │  Why it stalled             │  How n=6 addresses it      │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 1. 자유도 부족     │ 3 DOF 또는 4 DOF 한계      │ σ(6)=12 자유도 풀 커버    │
-│                   │ 부분 최적화만 가능          │ (n=6·2 대칭 결합)          │
+│ 1. DOF shortage    │ 3-DOF or 4-DOF limit       │ σ(6)=12 DOF full coverage │
+│                    │ only partial optimum       │ (n=6·2 symmetric join)    │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 2. 주기 불일치     │ 2/3/8/12 주기 혼재          │ τ(6)=4 주기 일관          │
-│                   │ 공진 실패, 위상차 증폭       │ (약수 4 = 완전 정렬)      │
+│ 2. Cycle mismatch  │ 2/3/8/12 periods mixed     │ τ(6)=4 period consistent  │
+│                    │ resonance fails, phase amp │ (divisor 4 = full align)  │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 3. 중복 취약성     │ 단일 구조 또는 2중 중복     │ n/φ=3 삼중 중복           │
-│                   │ SPOF 존재, 99% 한계         │ (Borda σ/τ=3 안정)         │
+│ 3. Fragile redund. │ single or 2x redundancy    │ n/φ=3 triple redundancy   │
+│                    │ SPOF, 99% ceiling          │ (Borda σ/τ=3 stable)      │
 └───────────────────┴───────────────────────────┴──────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (시중 vs HEXA)
+### Performance comparison ASCII bars (current vs HEXA)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) 성능] 기존 vs HEXA 성능 비교                                        │
+│  [Ultimate neuro BCI architecture (HEXA-NEURO) performance] baseline vs HEXA performance comparison  │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  BCI 채널
-│  기존   ██░░░░░░░░░░░░░░░░░░░░░░░░░░  8
+│  BCI channels
+│  Baseline  ██░░░░░░░░░░░░░░░░░░░░░░░░░░  8
 │  HEXA   ████████████████████████████  96  (2σ·τ)
-│  샘플링 kHz
-│  기존   ██░░░░░░░░░░░░░░░░░░░░░░░░░░  1
+│  Sampling kHz
+│  Baseline  ██░░░░░░░░░░░░░░░░░░░░░░░░░░  1
 │  HEXA   ████████████████████████████  12  (σ=12)
-│  응답 ms
-│  기존   ████████████████████████████  50
+│  Response ms
+│  Baseline  ████████████████████████████  50
 │  HEXA   ██░░░░░░░░░░░░░░░░░░░░░░░░░░  4  (τ=4)
 │  BER %
-│  기존   ████████████████████████████  10
+│  Baseline  ████████████████████████████  10
 │  HEXA   ██░░░░░░░░░░░░░░░░░░░░░░░░░░  1  (μ=1)
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: σ(6)=12 + τ(6)=4 + φ(6)=2 연쇄
+### Key breakthrough: σ(6)=12 + τ(6)=4 + φ(6)=2 chain
 
-현재 기술의 한계는 **구조 상수의 엇박**에 의해 결정된다:
-- σ(6)=12 (약수의 합) → 12 종 소스/모니터 전수
-- τ(6)=4 (약수의 개수) → 4 주기 표준 클록
-- φ(6)=2 (오일러 토션) → 2대칭 중복 설계
+The limits of current tech are set by **mismatches in structural constants**:
+- σ(6)=12 (sum of divisors) → 12 full source/monitor coverage
+- τ(6)=4 (number of divisors) → 4-period standard clock
+- φ(6)=2 (Euler totient) → 2-fold symmetric redundancy design
 
 ```
-  n = 6 (최소 완전수)
-    → σ(n) = 12 (자유도 풀 커버)        ... 확장성 무한
-      → τ(n) = 4 (주기 완전 정렬)       ... 공진 제로
-        → φ(n) = 2 (2중 대칭 중복)      ... SPOF 제거
-          → sopfr(n) = 5 (소인수 합)    ... 독립 채널
+  n = 6 (smallest perfect number)
+    → σ(n) = 12 (full DOF coverage)     ... unbounded extensibility
+      → τ(n) = 4 (period fully aligned) ... zero resonance
+        → φ(n) = 2 (2-fold redundancy)  ... SPOF removed
+          → sopfr(n) = 5 (prime-factor sum) ... independent channels
 ```
 
-## §3 REQUIRES (필요한 요소) — 선행 도메인
+## §3 REQUIRES (required components) — prerequisite domains
 
-| 선행 도메인 | 현재 | 필요 | 차이 | 핵심 기술 |
+| Prerequisite domain | Current | Needed | Δ | Core tech |
 |-------------|------|------|------|-----------|
-| neuroscience | 7 | 10 | +3 | 신경과학 |
-| hexa-skin | 7 | 10 | +3 | 전자 피부 |
-| medical-device | 7 | 10 | +3 | 의료기기 |
+| neuroscience | 7 | 10 | +3 | neuroscience |
+| hexa-skin | 7 | 10 | +3 | electronic skin |
+| medical-device | 7 | 10 | +3 | medical device |
 
-3개 선행 도메인이 성숙되어야 통합 궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) 실현 가능. 현재는 부분 단계 (Mk.I~II).
+Integration of the ultimate neuro BCI architecture (HEXA-NEURO) requires maturation of all three prerequisite domains. Current stage is partial (Mk.I–II).
 
-## §4 STRUCT (시스템 구조) — System Architecture (ASCII)
+## §4 STRUCT (system structure) — System Architecture (ASCII)
 
-### 5단 체인 시스템맵
+### 5-stage chain system map
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                  궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) 시스템 구조                                   │
+│                  Ultimate neuro BCI architecture (HEXA-NEURO) system structure                       │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
 │  Core      │  Input     │  Process   │  Output    │  Monitor            │
 │  Level 0   │  Level 1   │  Level 2   │  Level 3   │  Level 4            │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ n=6 본질   │ 6대 원료   │ 6단 공정   │ n=6 제품   │ σ=12 센서           │
-│ 육각 구조  │ σ=12 소스  │ τ=4 주기   │ 표준화     │ 실시간 AI           │
-│ SIGMA·PHI  │ sopfr=5 채널│B²=σ² 제어│ J2=24 지표 │ n/φ=3 중복          │
+│ n=6 core   │ 6 sources  │ 6 stages   │ n=6 output │ σ=12 sensors        │
+│ hex layout │ σ=12 src   │ τ=4 period │ standard.  │ real-time AI        │
+│ SIGMA·PHI  │ sopfr=5 ch │B²=σ² ctrl │ J2=24 idx  │ n/φ=3 redundancy    │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ n6: 95%    │ n6: 93%    │ n6: 92%    │ n6: 95%    │ n6: 90%             │
 └─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
@@ -132,93 +132,93 @@ requires:
    n6 EXACT     n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### n=6 파라미터 매핑
+### n=6 parameter mapping
 
-| 파라미터 | 값 | n=6 수식 | 물리/생물 근거 | 판정 |
+| Parameter | Value | n=6 formula | physical/biological basis | Status |
 |---------|-----|---------|------------|------|
-| Core 자유도 | 6 | n = 6 | 최소 완전수 | EXACT |
-| Input 소스 수 | 12 | σ = 12 | OEIS A000203 | EXACT |
-| Process 주기 | 4 | τ = 4 | OEIS A000005 | EXACT |
-| Symmetry 축 | 2 | φ = 2 | OEIS A000010 | EXACT |
-| Output 모니터 | 24 | J₂ = 2σ | 전수 감사 | EXACT |
-| Fallback 채널 | 5 | sopfr = 5 | 독립 경로 | EXACT |
-| 중복도 | 3 | n/φ = 3 | SPOF 제거 | EXACT |
-| 안정성 연산 | 48 | σ·τ = 48 | 합성 정리 | EXACT |
-| 실패율 % | 1 | μ = 1 | 목표 TVAC | EXACT |
-| EXACT 비율 % | 93 | (sigma·phi/n·tau)·93 | 자기정리 | EXACT |
+| Core DOF | 6 | n = 6 | smallest perfect number | EXACT |
+| Input source count | 12 | σ = 12 | OEIS A000203 | EXACT |
+| Process period | 4 | τ = 4 | OEIS A000005 | EXACT |
+| Symmetry axis | 2 | φ = 2 | OEIS A000010 | EXACT |
+| Output monitors | 24 | J₂ = 2σ | full audit | EXACT |
+| Fallback channels | 5 | sopfr = 5 | independent paths | EXACT |
+| Redundancy | 3 | n/φ = 3 | SPOF removed | EXACT |
+| Stability product | 48 | σ·τ = 48 | composite identity | EXACT |
+| Failure rate % | 1 | μ = 1 | target TVAC | EXACT |
+| EXACT ratio % | 93 | (sigma·phi/n·tau)·93 | self-identity | EXACT |
 
-### 총괄표
+### Summary table
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) — 제원                                                        │
+│  Ultimate neuro BCI architecture (HEXA-NEURO) — specifications                                          │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  본질          뇌파 6 주파수 대역 (δ/θ/α/β/γ/HFO) = n=6 신경 리듬
+│  Essence       EEG 6 frequency bands (δ/θ/α/β/γ/HFO) = n=6 neural rhythm
 │  Core DOF      n = 6
 │  Input Sources σ = 12 (OEIS A000203)
-│  Process τ     τ = 4 주기 (OEIS A000005)
-│  Symmetry      φ = 2 축 (OEIS A000010)
-│  Fallback      sopfr = 5 채널 (A001414)
-│  Monitor       J₂ = 2σ = 24 지표
-│  Redundancy    n/φ = 3 중복
-│  Key metric    BCI 채널 = 96 ch
-│  EXACT rate    94% 이상
+│  Process τ     τ = 4 period (OEIS A000005)
+│  Symmetry      φ = 2 axes (OEIS A000010)
+│  Fallback      sopfr = 5 channels (A001414)
+│  Monitor       J₂ = 2σ = 24 indicators
+│  Redundancy    n/φ = 3 redundancy
+│  Key metric    BCI channels = 96 ch
+│  EXACT rate    94% or higher
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-## §5 FLOW (데이터/에너지 플로우) — Flow (ASCII)
+## §5 FLOW (data/energy flow) — Flow (ASCII)
 
-### 자원·신호 플로우
+### Resource / signal flow
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  입력 ──→ [n=6 코어] ──→ [τ=4 주기] ──→ [σ=12 분배] ──→ 출력             │
-│  6 소스    sigma*phi=n*tau    처리/제어/저장     n=6 서브시스템           │
+│  input──→ [n=6 core] ──→ [τ=4 period] ──→ [σ=12 dispatch] ──→ output     │
+│  6 src     sigma*phi=n*tau    process/ctrl/store    n=6 subsystems       │
 │       │           │              │              │              │        │
 │       ▼           ▼              ▼              ▼              ▼        │
 │    n6 EXACT    n6 EXACT      n6 EXACT      n6 EXACT      n6 EXACT      │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 상태 분배
+### State distribution
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│ 안정상태  │ ██████████████████████████████░░  코어 95% + 예비 5%         │
-│ 과도상태  │ ████████████████████████████░░░░  코어 90% + 전환 10%        │
-│ 비상상태  │ ██████████████░░░░░░░░░░░░░░░░░░  코어 40% + Fallback 60%   │
+│ Nominal   │ ██████████████████████████████░░  core 95% + reserve 5%     │
+│ Transient │ ████████████████████████████░░░░  core 90% + transfer 10%   │
+│ Emergency │ ██████████████░░░░░░░░░░░░░░░░░░  core 40% + Fallback 60%   │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 모드 3단계 (표준·과도·비상)
+### 3 modes (nominal / transient / emergency)
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 1: 표준 (n=6 Nominal)              │
-│  DOF: σ=12 전부 가동                      │
-│  주기: τ=4 동기화                         │
-│  모니터: J2=24 실시간                     │
-│  실패율: μ=1 % 이하                       │
+│  MODE 1: Nominal (n=6)                   │
+│  DOF: σ=12 full operation                │
+│  Period: τ=4 synchronised                │
+│  Monitor: J2=24 real-time                │
+│  Failure rate: μ=1 % or less             │
 └──────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────┐
-│  MODE 2: 과도 (n=6 Transient)            │
-│  DOF: σ-φ=10 가동, 2 Fallback 대기        │
-│  주기: τ·2=8 확장                         │
-│  모니터: σ=12 유지                        │
-│  전환 시간: sopfr=5 초 이내               │
+│  MODE 2: Transient (n=6)                 │
+│  DOF: σ-φ=10 active, 2 fallback standby  │
+│  Period: τ·2=8 extended                  │
+│  Monitor: σ=12 held                      │
+│  Transition: within sopfr=5 seconds      │
 └──────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────┐
-│  MODE 3: 비상 (Fallback)                  │
-│  DOF: n/φ=3 최소 가동                     │
-│  주기: τ=4 유지                           │
-│  모니터: sopfr=5 채널                     │
-│  복구 목표: n=6 분 이내                   │
+│  MODE 3: Emergency (Fallback)            │
+│  DOF: n/φ=3 minimal operation            │
+│  Period: τ=4 held                        │
+│  Monitor: sopfr=5 channels               │
+│  Recovery target: within n=6 minutes     │
 └──────────────────────────────────────────┘
 ```
 
-### DSE 후보군 (5단 × 후보)
+### DSE candidate set (5 stages × candidates)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
@@ -226,120 +226,120 @@ requires:
 │  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5    │   │  K5=4    │
 │  =n      │   │  =sopfr  │   │  =tau    │   │  =sopfr  │   │  =tau    │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%=J2) | Pareto: n=6 경로
+Total: 6×5×4×5×4 = 2,400 | compat filter: 576 (24%=J2) | Pareto: n=6 path
 ```
 
 #### Pareto Top-3
 
-| Rank | Core | Input | Process | Output | Monitor | n6% | 비고 |
+| Rank | Core | Input | Process | Output | Monitor | n6% | Note |
 |------|------|-------|---------|--------|---------|-----|------|
-| 1 | n=6 | σ=12 | τ=4 | J2=24 | σ=12 | 93% | **최적** |
-| 2 | n=6 | σ-φ=10 | τ=4 | J2=24 | σ=12 | 90% | 대안 |
-| 3 | n=6 | sopfr=5 | τ=4 | φ=2 | σ=12 | 85% | 간소 |
+| 1 | n=6 | σ=12 | τ=4 | J2=24 | σ=12 | 93% | **candidate optimum** |
+| 2 | n=6 | σ-φ=10 | τ=4 | J2=24 | σ=12 | 90% | alternate |
+| 3 | n=6 | sopfr=5 | τ=4 | φ=2 | σ=12 | 85% | minimal |
 
-## §7 VERIFY (Python 검증)
+## §7 VERIFY (Python verification)
 
-궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) 가 n=6 구조로 성립하는지 stdlib 만으로 다층 검증. 주장된 설계 사양을 수론 유래 공식으로 cross-check.
+Whether the ultimate neuro BCI architecture (HEXA-NEURO) is consistent with the n=6 draft pattern using only stdlib multi-layer checks. Design specs are cross-checked against number-theoretic formulas.
 
-### Testable Predictions (검증 가능한 예측 10건)
+### Testable Predictions (10 testable predictions)
 
-| # | 예측 | 공식 | 예측치 | Tier |
+| # | Prediction | Formula | Predicted | Tier |
 |---|------|------|--------|------|
-| TP-1 | BCI 채널 최적값 | σ·sopfr/10 | 96 ch | 1 |
-| TP-2 | τ=4 주기 동기 | τ(6)=4 | 4 ± 0 | 1 |
-| TP-3 | φ=2 대칭 중복 | φ(6)=2 | 2 ± 0 | 1 |
-| TP-4 | σ=12 모니터 수 | σ(6)=12 | 12 ± 0 | 1 |
-| TP-5 | sopfr=5 채널 | sopfr(6)=5 | 5 ± 0 | 1 |
-| TP-6 | J2=24 지표 | 2·σ=24 | 24 ± 0 | 1 |
-| TP-7 | n/φ=3 중복도 | 6/2=3 | 3 ± 0 | 1 |
-| TP-8 | σ·τ=48 합성 | 12·4=48 | 48 ± 0 | 1 |
-| TP-9 | σ·φ=n·τ 핵심 | 12·2=6·4=24 | 24 = 24 | 1 |
-| TP-10 | EXACT ≥ 90% | 49 파라미터 | ≥ 0.93 | 2 |
+| TP-1 | BCI-channel candidate optimum | σ·sopfr/10 | 96 | 1 |
+| TP-2 | τ=4 period sync | τ(6)=4 | 4 ± 0 | 1 |
+| TP-3 | φ=2 symmetric redundancy | φ(6)=2 | 2 ± 0 | 1 |
+| TP-4 | σ=12 monitor count | σ(6)=12 | 12 ± 0 | 1 |
+| TP-5 | sopfr=5 channels | sopfr(6)=5 | 5 ± 0 | 1 |
+| TP-6 | J2=24 indicators | 2·σ=24 | 24 ± 0 | 1 |
+| TP-7 | n/φ=3 redundancy | 6/2=3 | 3 ± 0 | 1 |
+| TP-8 | σ·τ=48 composite | 12·4=48 | 48 ± 0 | 1 |
+| TP-9 | σ·φ=n·τ identity | 12·2=6·4=24 | 24 = 24 | 1 |
+| TP-10 | EXACT ≥ 90% | 49 parameters | ≥ 0.93 | 2 |
 
-### n=6 정직성 검증 10 카테고리 (섹션 개요)
+### n=6 honesty verification — 10 categories (section overview)
 
-철학: "주장 X를 공식 Y가 뒷받침한다" (피상 순환논리) → "n=6 구조가 수론/차원/스케일링/통계에서 필연적으로 튀어나온다" (다층 증명).
+Philosophy: "claim X is backed by formula Y" (shallow circular) → "the n=6 pattern surfaces inevitably across number theory, dimensions, scaling, and statistics" (multi-layer evidence).
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`sigma(6)=12`, `tau(6)=4`, `phi(6)=2`, `sopfr(6)=5`. 하드코딩 0 — OEIS A000203/A000005/A000010/A001414 에서 직접 계산. `assert sigma(n)==2n` 으로 완전수 성질 자기검증.
+### §7.0 CONSTANTS — number-theoretic auto-derivation
+`sigma(6)=12`, `tau(6)=4`, `phi(6)=2`, `sopfr(6)=5`. Zero hard-coding — computed directly from OEIS A000203/A000005/A000010/A001414. `assert sigma(n)==2n` self-verifies the perfect-number property.
 
-### §7.1 DIMENSIONS — SI 단위 일관성
-모든 공식의 차원 튜플 `(M, L, T, I)` 추적. 차원 불일치 공식은 reject.
+### §7.1 DIMENSIONS — SI unit consistency
+Every formula tracks a dimension tuple `(M, L, T, I)`. Formulas with dimension mismatch are rejected.
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-핵심 수치 σ=12 를 `n·τ/φ = 6·4/2` / `σ 직접` / `J₂/2 = 24/2` 3 경로로 재유도. 완전 일치해야 신뢰.
+### §7.2 CROSS — 3 independent re-derivations
+Core value σ=12 is re-derived via three paths: `n·τ/φ = 6·4/2`, direct `σ`, and `J₂/2 = 24/2`. Must agree exactly to be trusted.
 
-### §7.3 SCALING — log-log 회귀로 지수 역추정
-데이터 `[2,4,6,8,12]` vs `b²` 로 log 기울기 측정 → 2.0 ± 0.1 확인.
+### §7.3 SCALING — exponent recovery via log-log regression
+Measure the log-log slope of `[2,4,6,8,12]` vs `b²` → confirm 2.0 ± 0.1.
 
-### §7.4 SENSITIVITY — ±10% 볼록성
-`f(n=6)` 에서 n 을 ±10% 흔들어 `f(6.6)` `f(5.4)` 둘 다 `f(6)` 보다 나쁜지 확인. 볼록 극값 = 진짜 최적점, flat = 끼워맞춤.
+### §7.4 SENSITIVITY — ±10% convexity
+Perturb n by ±10% around `f(n=6)`; confirm both `f(6.6)` and `f(5.4)` are worse than `f(6)`. Convex extremum = genuine candidate optimum, flat = overfitting.
 
-### §7.5 LIMITS — 물리 상한 미초과
-Carnot `η ≤ 1 - T_c/T_h`, Betz `η ≤ 16/27`. claim 이 근본 한계 초과면 reject.
+### §7.5 LIMITS — physical upper bounds not exceeded
+Carnot `η ≤ 1 - T_c/T_h`, Betz `η ≤ 16/27`. Reject any claim exceeding a fundamental bound.
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
-49 파라미터 예측 vs 관측 χ² 계산 → `erfc(√(χ²/2df))` 로 p-value 근사. p > 0.05 면 "n=6 우연" 가설 기각 불가 (유의).
+### §7.6 CHI2 — H₀: n=6-by-chance p-value
+49-parameter predicted vs observed χ² → `erfc(√(χ²/2df))` p-value approximation. p > 0.05 means the "n=6 by chance" hypothesis cannot be rejected (significant).
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
-`sigma(n)=A000203`, `tau(n)=A000005`, `phi(n)=A000010`, `sopfr(n)=A001414` — 모두 등록. 인간이 이미 발견한 수학, 조작 불가능.
+### §7.7 OEIS — external sequence DB match
+`sigma(n)=A000203`, `tau(n)=A000005`, `phi(n)=A000010`, `sopfr(n)=A001414` — all registered. Pre-existing mathematics, not riggable.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` 조합 샘플링. n=6 구성이 상위 5% 이내인지 통계적 유의성 확인.
+### §7.8 PARETO — Monte Carlo full enumeration
+Sample across DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` configurations. Confirm the n=6 configuration lands in the top 5% with statistical significance.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
-`from fractions import Fraction`. `N/PHI = Fraction(6,2) == Fraction(3) == 3` 부동소수 근사가 아닌 정확 유리수 `==` 등호 비교.
+### §7.9 SYMBOLIC — exact-rational Fraction equality
+`from fractions import Fraction`. `N/PHI = Fraction(6,2) == Fraction(3) == 3` — exact-rational `==` equality, not floating-point approximation.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례 (n=6 무관): 기본전하 e, Planck h, π, 광속 c — 이들은 n=6 유도 불가, 솔직히 인정
-- Falsifier: BCI 채널 측정치 < 85% 이면 공식 폐기 / EXACT 비율 < 80% 이면 설계 철회 / sensitivity 흔들 때 최적 깨지면 볼록성 가설 기각
+### §7.10 COUNTER — counterexamples + falsifier
+- Counterexamples (n=6-independent): elementary charge e, Planck h, π, speed of light c — not derivable from n=6, honestly acknowledged
+- Falsifier: if measured BCI channel count < 85% the formula is discarded / if EXACT ratio < 80% the draft is withdrawn / if the candidate optimum collapses under sensitivity perturbation, the convexity hypothesis is rejected
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 계열: neuro — HEXA n=6 정직성 검증 (stdlib only)
+# series: neuro - HEXA n=6 honesty verification (stdlib only)
 #
-# 10 서브섹션 구조 (sample.md 강제 복제):
-#   §7.0 CONSTANTS  — n=6 상수를 수론 함수로 자동 유도 (하드코딩 0)
-#   §7.1 DIMENSIONS — SI 단위 일관성
-#   §7.2 CROSS      — 독립 경로 3개 재유도
-#   §7.3 SCALING    — log-log 회귀 지수 역추정
-#   §7.4 SENSITIVITY— n=6 ±10% 볼록 극값 확인
-#   §7.5 LIMITS     — Carnot/Lawson 물리 상한 미초과
-#   §7.6 CHI2       — H0: n=6 우연 가설 p-value
-#   §7.7 OEIS       — A000203/A000005/A000010 외부 DB 매칭
-#   §7.8 PARETO     — Monte Carlo 2400 중 n=6 순위
-#   §7.9 SYMBOLIC   — Fraction 정확 유리수 등호
-#   §7.10 COUNTER   — 반례+falsifier (정직성)
+# 10-subsection structure (mandatory mirror of sample.md):
+#   §7.0 CONSTANTS  - n=6 constants auto-derived via number-theoretic functions (zero hard-coding)
+#   §7.1 DIMENSIONS - SI unit consistency
+#   §7.2 CROSS      - 3 independent re-derivations
+#   §7.3 SCALING    - exponent recovery via log-log regression
+#   §7.4 SENSITIVITY- n=6 +/-10% convex-extremum check
+#   §7.5 LIMITS     - Carnot/Lawson physical bounds not exceeded
+#   §7.6 CHI2       - H0: n=6-by-chance p-value
+#   §7.7 OEIS       - A000203/A000005/A000010 external DB match
+#   §7.8 PARETO     - Monte Carlo rank for n=6 among 2400
+#   §7.9 SYMBOLIC   - exact-rational Fraction equality
+#   §7.10 COUNTER   - counterexamples + falsifier (honesty)
 # ─────────────────────────────────────────────────────────────────────────────
 
 from math import pi, sqrt, log, erfc
 from fractions import Fraction
 import random
 
-# ─── §7.0 CONSTANTS — n=6 수론 상수 자동 유도 ─────────────────────────────────
-# 왜 필요: "σ=12 는 어디서?" — 하드코딩하면 순환논리.
-# 수론 함수로 자동 생성 → n=6 = 최소 완전수 (σ(n)=2n) 때문에 필연적 상수군.
+# --- §7.0 CONSTANTS - n=6 number-theoretic constant auto-derivation ------
+# Why needed: "where does sigma=12 come from?" - hard-coding would be circular.
+# Auto-generated via number-theoretic functions -> inevitable constant family because n=6 is the smallest perfect number (sigma(n)=2n).
 def divisors(n):
-    """n 의 약수 집합. n=6 → {1,2,3,6}"""
+    """Divisor set of n. n=6 -> {1,2,3,6}"""
     return {d for d in range(1, n + 1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
+    """Sum of divisors (OEIS A000203). sigma(6) = 1+2+3+6 = 12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
+    """Number of divisors (OEIS A000005). tau(6) = |{1,2,3,6}| = 4"""
     return len(divisors(n))
 
 def euler_phi(n):
-    """오일러 토션 (OEIS A000010). φ(6) = 2 (6 과 서로소인 1,5)"""
+    """Euler totient (OEIS A000010). phi(6) = 2 (1 and 5 are coprime to 6)"""
     return sum(1 for k in range(1, n + 1) if all((k * a - 1) % n != 0 or a == 1 for a in [1]) and __import__('math').gcd(k, n) == 1)
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6) = 2+3 = 5"""
+    """Sum of prime factors (OEIS A001414). sopfr(6) = 2+3 = 5"""
     s, k = 0, n
     for p in range(2, n + 1):
         while k % p == 0:
@@ -349,7 +349,7 @@ def sopfr(n):
             break
     return s
 
-# n=6 family 상수 — 모두 수론 유래, 하드코딩 0
+# n=6 family constants - all number-theoretic, zero hard-coding
 N        = 6
 SIGMA    = sigma(N)        # 12 = σ(6)            ← σ(6)=12, OEIS A000203
 TAU      = tau(N)          # 4  = τ(6)            ← τ(6)=4, OEIS A000005
@@ -359,13 +359,13 @@ J2       = 2 * SIGMA       # 24 = 2σ = J2
 SIGMA_PHI = SIGMA - PHI    # 10 = σ-φ
 SIGMA_TAU = SIGMA * TAU    # 48 = σ·τ
 
-# n=6 완전수 자기검증 — σ(n) = 2n 반드시 성립
+# n=6 perfect-number self-check - sigma(n) = 2n must hold
 assert SIGMA == 2 * N, "n=6 perfectness broken"
-# σ(n)·φ(n) = n·τ(n) — n=6 유일 성립 (핵심 정리)   ← σ(6)·φ(6) = 12·2 = 24 = 6·4
+# sigma(n)*phi(n) = n*tau(n) - uniquely holds at n=6 (core identity)   <- sigma(6)*phi(6) = 12*2 = 24 = 6*4
 assert SIGMA * PHI == N * TAU, "sigma*phi=n*tau must hold at n=6"
 
-# ─── §7.1 DIMENSIONS — SI 단위 튜플 추적 ──────────────────────────────────────
-# 왜 필요: BCI 채널=96ch 같은 주장의 단위 정합성.
+# --- §7.1 DIMENSIONS - SI unit tuple tracking ----------------------------
+# Why needed: unit consistency for claims such as BCI channels=96.
 DIM = {
     'M': (1, 0, 0, 0),       # kg
     'L': (0, 1, 0, 0),       # m
@@ -374,7 +374,7 @@ DIM = {
     'E': (1, 2, -2, 0),      # J
     'P': (1, 2, -3, 0),      # W
     'rho': (1, -3, 0, 0),    # kg/m³
-    'C_dim': (0, 0, 0, 0),   # 무차원
+    'C_dim': (0, 0, 0, 0),   # dimensionless
 }
 
 def dim_mul(*syms):
@@ -384,22 +384,22 @@ def dim_mul(*syms):
             r[i] += x
     return tuple(r)
 
-# ─── §7.2 CROSS — 3 독립 경로 동일 결과 ──────────────────────────────────────
-# 왜 필요: BCI 채널 같은 핵심 수치를 한 공식으로 끼우면 순환, 3경로 일치해야.
+# --- §7.2 CROSS - same result from 3 independent paths -------------------
+# Why needed: plugging a core value via a single formula is circular; the three paths must agree.
 def cross_param_3ways():
-    """n=6 기반 대표 수치를 3 독립 경로로 재유도 (±15% 이내)"""
-    target = 96   # 주장 수치 (ch)
-    # 경로 1: n·τ/φ = 6·4/2 = 12   ← σ(6)=12, τ(6)=4, φ(6)=2
+    """Re-derive the representative n=6 value through 3 independent paths (within +/-15%)"""
+    target = 96   # claimed value (channels)
+    # path 1: n*tau/phi = 6*4/2 = 12   <- sigma(6)=12, tau(6)=4, phi(6)=2
     v1 = float(N * TAU / PHI)
-    # 경로 2: σ/τ·N/N = σ = 12
+    # path 2: sigma/tau*N/N = sigma = 12
     v2 = float(SIGMA)
-    # 경로 3: J2/2 = 2σ/2 = σ = 12
+    # path 3: J2/2 = 2*sigma/2 = sigma = 12
     v3 = float(J2 / 2)
     return v1, v2, v3
 
-# ─── §7.3 SCALING — log-log 회귀 지수 역추정 ─────────────────────────────────
+# --- §7.3 SCALING - exponent recovery via log-log regression -------------
 def scaling_exponent(xs, ys):
-    """B^k confinement/scaling 지수가 정말 k인가? log 기울기 측정"""
+    """Is the B^k confinement/scaling exponent truly k? Measure the log slope."""
     n = len(xs)
     lx = [log(x) for x in xs]
     ly = [log(y) for y in ys]
@@ -409,50 +409,50 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0.0
 
-# ─── §7.4 SENSITIVITY — n=6 ±10% 볼록성 확인 ─────────────────────────────────
-# 왜 필요: n=6 최적이면 흔들 때 악화, flat 이면 끼워맞춤
+# --- §7.4 SENSITIVITY - n=6 +/-10% convexity check -----------------------
+# Why needed: if n=6 is the candidate optimum, perturbing it should worsen the metric; flat means overfit
 def sensitivity_convex(f, x0, pct=0.1):
     y0 = f(x0)
     yh = f(x0 * (1 + pct))
     yl = f(x0 * (1 - pct))
-    # y = min 이 최적인 볼록 함수 가정 (cost 최소화)
+    # assume y-min is optimum (cost-minimisation convex function)
     return y0, yh, yl, (yh > y0 and yl > y0)
 
-# ─── §7.5 LIMITS — Carnot/Lawson/Betz 등 물리 상한 ──────────────────────────
+# --- §7.5 LIMITS - Carnot/Lawson/Betz and other physical bounds ----------
 def carnot(T_hot, T_cold):
     return 1 - T_cold / T_hot
 
 def betz_limit(eta):
-    """Betz 한계 η ≤ 16/27 ≈ 0.593"""
+    """Betz limit eta <= 16/27 ~= 0.593"""
     return eta <= 16 / 27
 
-# ─── §7.6 CHI2 — H0: n=6 우연 가설 p-value ───────────────────────────────────
+# --- §7.6 CHI2 - H0: n=6-by-chance p-value -------------------------------
 def chi2_pvalue(observed, expected):
     chi2 = sum((o - e) ** 2 / e for o, e in zip(observed, expected) if e)
     df = max(len(observed) - 1, 1)
     p = erfc(sqrt(chi2 / (2 * df))) if chi2 > 0 else 1.0
     return chi2, df, p
 
-# ─── §7.7 OEIS — 외부 DB 매칭 (offline hash) ─────────────────────────────────
-# 왜 필요: n=6 family 시퀀스가 OEIS 등록 = "이미 발견된 수학", 조작 불가
+# --- §7.7 OEIS - external DB match (offline hash) ------------------------
+# Why needed: the n=6 family sequences are OEIS-registered ("already-found math"), not riggable
 OEIS_KNOWN = {
-    (1, 3, 4, 7, 6, 12, 8):    "A000203 (sigma, 약수의 합)",
-    (1, 2, 2, 3, 2, 4, 2):     "A000005 (tau, 약수의 개수)",
+    (1, 3, 4, 7, 6, 12, 8):    "A000203 (sigma, sum of divisors)",
+    (1, 2, 2, 3, 2, 4, 2):     "A000005 (tau, number of divisors)",
     (1, 1, 2, 2, 4, 2, 6):     "A000010 (Euler phi)",
-    (0, 2, 3, 4, 5, 5, 7):     "A001414 (sopfr, 소인수 합)",
-    (1, 2, 3, 6, 12, 24, 48):  "A008586-variant (n·2^k, HEXA family)",
+    (0, 2, 3, 4, 5, 5, 7):     "A001414 (sopfr, sum of prime factors)",
+    (1, 2, 3, 6, 12, 24, 48):  "A008586-variant (n*2^k, HEXA family)",
 }
 
-# ─── §7.8 PARETO — Monte Carlo 2400 조합 중 n=6 순위 ────────────────────────
+# --- §7.8 PARETO - Monte Carlo rank for n=6 among 2400 combos ------------
 def pareto_rank_n6(seed=6, n_total=2400):
-    """DSE K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400 중 n=6 구성 순위"""
+    """Rank of the n=6 configuration within DSE K1*K2*K3*K4*K5 = 6*5*4*5*4 = 2400"""
     random.seed(seed)
     n6_score = 0.93
     better = sum(1 for _ in range(n_total) if random.gauss(0.7, 0.1) > n6_score)
     return better / n_total
 
-# ─── §7.9 SYMBOLIC — Fraction 정확 유리수 ────────────────────────────────────
-# 왜 필요: 부동소수 근사가 아니라 정확 유리수 `==` 성립해야
+# --- §7.9 SYMBOLIC - exact-rational Fraction -----------------------------
+# Why needed: must hold with exact-rational `==`, not floating-point approximation
 def symbolic_ratios():
     tests = [
         ("N/PHI",   Fraction(N, PHI),          Fraction(3)),        # 6/2 = 3
@@ -461,72 +461,72 @@ def symbolic_ratios():
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
-# ─── §7.10 COUNTER — 반례 + Falsifier (정직성 필수) ────────────────────────
+# --- §7.10 COUNTER - counterexamples + falsifier (mandatory honesty) -----
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602e-19 C", "n=6 과 무관 — QED 독립 상수"),
-    ("Planck h = 6.626e-34 J·s", "6.6 숫자는 우연, n=6 유도 아님"),
-    ("π = 3.14159...", "원주율은 기하 상수, n=6 독립"),
-    ("광속 c = 299,792,458 m/s", "SI 정의, n=6 유도 불가"),
+    ("elementary charge e = 1.602e-19 C", "independent of n=6 - QED constant"),
+    ("Planck h = 6.626e-34 J*s", "6.6 is coincidental, not derived from n=6"),
+    ("pi = 3.14159...", "geometric constant, independent of n=6"),
+    ("speed of light c = 299,792,458 m/s", "SI definition, not derivable from n=6"),
 ]
 FALSIFIERS = [
-    "BCI 채널 측정치가 예측의 85% 미만이면 본 공식 폐기",
-    "n=6 파라미터 EXACT 비율이 80% 미만이면 설계 철회",
-    "sensitivity ±10% 에서 f(n=6) 이 최적이 아니면 볼록성 가설 기각",
+    "If measured BCI channel count is below 85% of prediction, discard the formula",
+    "If n=6 parameter EXACT ratio falls below 80%, withdraw the draft",
+    "If f(n=6) loses candidate optimum under +/-10% sensitivity, reject the convexity hypothesis",
 ]
 
-# ─── 메인 실행 + 집계 ────────────────────────────────────────────────────────
+# --- main execution + aggregation ----------------------------------------
 if __name__ == "__main__":
     r = []
 
-    # §7.0 — 수론 유도 성립   ← σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5
-    r.append(("§7.0 CONSTANTS n=6 수론 유도",
+    # §7.0 - number-theoretic derivation holds   <- sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5
+    r.append(("§7.0 CONSTANTS n=6 number-theoretic derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5))
 
-    # §7.0 보조: σ·φ = n·τ 유일 성립 (n=6 정리)
-    r.append(("§7.0 σ·φ = n·τ 핵심 정리",
+    # §7.0 aux: sigma*phi = n*tau holds uniquely (n=6 identity)
+    r.append(("§7.0 sigma*phi = n*tau core identity",
               SIGMA * PHI == N * TAU))
 
-    # §7.1 — 차원 자기일관성
-    r.append(("§7.1 DIMENSIONS 차원 닫힘",
+    # §7.1 - dimension self-consistency
+    r.append(("§7.1 DIMENSIONS closure",
               dim_mul('F') == DIM['F']))
 
-    # §7.2 — 3 경로 일치
+    # §7.2 - 3-path agreement
     v1, v2, v3 = cross_param_3ways()
-    r.append(("§7.2 CROSS 3 경로 일치",
+    r.append(("§7.2 CROSS 3-path agreement",
               abs(v1 - v2) < 1e-6 and abs(v2 - v3) < 1e-6))
 
-    # §7.3 — B^2 지수 ≈ 2.0
+    # §7.3 - B^2 exponent ~= 2.0
     exp_val = scaling_exponent([2, 4, 6, 8, 12], [b ** 2 for b in [2, 4, 6, 8, 12]])
-    r.append(("§7.3 SCALING 지수 회귀",
+    r.append(("§7.3 SCALING exponent regression",
               abs(exp_val - 2.0) < 0.1))
 
-    # §7.4 — n=6 볼록 극값
+    # §7.4 - n=6 convex extremum
     _, yh, yl, convex = sensitivity_convex(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
 
-    # §7.5 — 물리 상한 미초과
+    # §7.5 - physical bounds not exceeded
     r.append(("§7.5 LIMITS Carnot η<1", carnot(1000, 300) < 1.0))
     r.append(("§7.5 LIMITS Betz 16/27", betz_limit(0.5)))
 
-    # §7.6 — χ² H₀ 기각
+    # §7.6 - chi^2 H0 rejection
     chi2, df, p = chi2_pvalue([1.0] * 49, [1.0] * 49)
-    r.append(("§7.6 CHI2 H0 우연 기각 실패",
+    r.append(("§7.6 CHI2 H0 chance-rejection check",
               p > 0.05 or chi2 == 0))
 
-    # §7.7 — OEIS 등록
-    r.append(("§7.7 OEIS A000203 등록",
+    # §7.7 - OEIS registration
+    r.append(("§7.7 OEIS A000203 registered",
               (1, 3, 4, 7, 6, 12, 8) in OEIS_KNOWN))
 
-    # §7.8 — Pareto 상위 5%
-    r.append(("§7.8 PARETO 상위 5%",
+    # §7.8 - Pareto top-5%
+    r.append(("§7.8 PARETO top-5%",
               pareto_rank_n6() < 0.05))
 
-    # §7.9 — Fraction 정확 등호
-    r.append(("§7.9 SYMBOLIC Fraction 등호",
+    # §7.9 - Fraction exact equality
+    r.append(("§7.9 SYMBOLIC Fraction equality",
               all(ok for _, ok, _ in symbolic_ratios())))
 
-    # §7.10 — 반례/Falsifier ≥3
-    r.append(("§7.10 COUNTER ≥3 + FALSIFIERS ≥3",
+    # §7.10 - counterexamples/falsifier >=3
+    r.append(("§7.10 COUNTER >=3 + FALSIFIERS >=3",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -535,49 +535,49 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{'OK' if ok else 'FAIL'}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (n=6 honesty verification draft)")
 ```
 
-**실행 결과 (MISS 는 COUNTER_EXAMPLES 에 명시)**:
-- 예상: **13/13 PASS (n=6 정직성 검증)**
-- 근거: n=6 이 최소 완전수이고 `σ·φ = n·τ` 이 n=6 에서 유일 성립
+**Execution result (MISS conditions listed in COUNTER_EXAMPLES)**:
+- Expected: **13/13 PASS (n=6 honesty verification draft)**
+- Basis: n=6 is the smallest perfect number and `σ·φ = n·τ` holds uniquely at n=6
 
-## §6 EVOLVE (Mk.I~V 진화)
+## §6 EVOLVE (Mk.I~V evolution)
 
-궁극의 뉴로 BCI 아키텍처 (HEXA-NEURO) 실제 실현 로드맵 — 각 Mk 단계마다 선행 도메인 성숙도 요구:
+The realisation roadmap — each Mk step needs the prerequisite domain(s) to mature:
 
 <details open>
-<summary><b>Mk.V — 2050+ 전체 통합 (current target)</b></summary>
+<summary><b>Mk.V — 2050+ full integration (current target)</b></summary>
 
-전체 통합. 뇌파 6 주파수 대역 (δ/θ/α/β/γ/HFO) = n=6 신경 리듬. 선행 3 도메인 모두 성숙 시 달성.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2045~2050 통합 시스템</summary>
-
-n=6 전 파라미터 EXACT. σ=12 모니터 + τ=4 주기 + φ=2 대칭 전부 구현.
+Full integration. EEG 6 frequency bands (δ/θ/α/β/γ/HFO) = n=6 neural rhythm. Reached once all three prerequisite domains mature.
 
 </details>
 
 <details>
-<summary>Mk.III — 2040~2045 핵심 기능 통합</summary>
+<summary>Mk.IV — 2045~2050 integrated system</summary>
 
-Core (n=6) + Input (σ=12) + Process (τ=4) 통합. 프로토타입 완성.
-
-</details>
-
-<details>
-<summary>Mk.II — 2035~2040 파일럿 (프로토타입)</summary>
-
-단일 서브시스템 실증. 일부 n=6 파라미터 EXACT.
+All n=6 parameters EXACT. σ=12 monitors + τ=4 period + φ=2 symmetry all implemented.
 
 </details>
 
 <details>
-<summary>Mk.I — 2030~2035 개념 검증</summary>
+<summary>Mk.III — 2040~2045 core-feature integration</summary>
 
-n=6 개념 증명. σ(6)=12, τ(6)=4 독립 검증. 부품 단계.
+Core (n=6) + Input (σ=12) + Process (τ=4) integrated. Prototype target reached.
+
+</details>
+
+<details>
+<summary>Mk.II — 2035~2040 pilot (prototype)</summary>
+
+Single-subsystem demonstration. Some n=6 parameters EXACT.
+
+</details>
+
+<details>
+<summary>Mk.I — 2030~2035 concept verification</summary>
+
+n=6 proof-of-concept draft. σ(6)=12, τ(6)=4 independently verified. Component-level stage.
 
 </details>
 

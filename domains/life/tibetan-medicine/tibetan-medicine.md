@@ -9,14 +9,14 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-059
 registered: 2026-04-23
 ---
 
-# 티베트 의학 (HEXA-SOWA-RIGPA) — n=6 six-taste diagnostic axis
+# Tibetan Medicine (HEXA-SOWA-RIGPA) — n=6 six-taste diagnostic axis
 
 ## §1 WHY
 
 Sowa Rigpa (Tibetan medicine) classifies foods, herbs, and physiological
 states along a **six-taste** axis:
 
-| # | 맛 (taste) | Tibetan | Western analogue   |
+| # | Taste     | Tibetan | Western analogue   |
 |---|-----------|---------|--------------------|
 | 1 | sweet     | mngar   | sugars             |
 | 2 | sour      | skyur   | acid / fermented   |

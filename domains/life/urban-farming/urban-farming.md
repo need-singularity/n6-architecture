@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-004
 registered: 2026-04-23
 ---
 
-# 도시농업 (HEXA-URBFARM) — n=6 Hoagland 6 macronutrients
+# Urban Farming (HEXA-URBFARM) — n=6 Hoagland 6 macronutrients
 
 ## §1 WHY
 

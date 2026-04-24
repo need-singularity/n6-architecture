@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-006
 registered: 2026-04-23
 ---
 
-# 소화기내과 (HEXA-GI) — n=6 GI tract 6 segments
+# Gastrointestinal Medicine (HEXA-GI) — n=6 GI tract 6 segments
 
 ## §1 WHY
 

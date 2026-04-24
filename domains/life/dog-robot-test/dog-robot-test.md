@@ -5,128 +5,131 @@ domain: dog-robot-test
 alien_index_current: 7
 alien_index_target: 10
 requires:
-  - to: TODO-선행도메인-id
+  - to: TODO-prerequisite-domain-id
     alien_min: 7
-    reason: TODO 선행 이유 (왜 필요한가)
+    reason: TODO prerequisite rationale (why it is needed)
 ---
 
 <!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, EVOLVE, VERIFY, EXEC SUMMARY, SYSTEM REQUIREMENTS, ARCHITECTURE, CIRCUIT DESIGN, PCB DESIGN, FIRMWARE, MECHANICAL, MANUFACTURING, TEST, BOM, VENDOR, ACCEPTANCE, APPENDIX, IMPACT], prefix="§") -->
 
-# 궁극의 강아지 로봇 mk1 (HEXA-DOG-ROBOT-TEST) — n=6 산술 설계
+# Ultimate Dog Robot mk1 (HEXA-DOG-ROBOT-TEST) — n=6 arithmetic design
 
-> 한 문장 요약: **σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5** 네 상수가 강아지 로봇 의 핵심 스펙을 관통한다.
+> One-line summary: **sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5** — four constants run through the dog-robot's core spec.
 
-> 이 문서는 브리프(§1~§7) + 엔지니어링 패키지(§8~§20) + 임팩트(§21) 를
-> 하나의 canonical 문서로 통합한다. `@doc(type=paper)` 규칙 준수.
+> This document merges the brief (§1..§7) + engineering package (§8..§20) + impact (§21)
+> into a single canonical document. Complies with `@doc(type=paper)`.
 
 ---
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## §1 WHY (how this technology changes your life)
 
-강아지 로봇 는 n=6 산술 체계 안에서 재해독된다. 완전수 n=6 은 σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5 라는 수론 상수군을
-동시에 만족하며, 본 도메인의 핵심 파라미터와 구조적으로 정합한다.
+The dog robot is re-read within the n=6 arithmetic system. The perfect number n=6 simultaneously
+satisfies the number-theoretic constant family sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5, and
+these align structurally with the domain's core parameters.
 
-| 효과 | 기존 방식 | HEXA-DOG-ROBOT-TEST-MK1 | 체감 변화 |
-|------|----------|----------|----------|
-| 처리 시간 | TODO-기존 | **TODO-신규** | TODO-배수 빠름 |
-| 수명 | TODO-기존 | **TODO-신규** | τ³=64배 내구 |
-| 에너지 | TODO-기존 | **TODO-신규** | σ=12배 효율 |
-| 부피 | TODO-기존 | **TODO-신규** | τ=4배 압축 |
-| BOM | TODO-기존 | **TODO-신규** | TODO-배수 저렴 |
-| 공정/구성 의존 | — | **공개 구성 4개** | τ(6)=4 정합 |
+| Effect | Baseline | HEXA-DOG-ROBOT-TEST-MK1 | Felt change |
+|--------|----------|-------------------------|-------------|
+| Processing time | TODO-baseline | **TODO-target** | TODO-x faster |
+| Lifetime | TODO-baseline | **TODO-target** | tau^3=64x durability |
+| Energy | TODO-baseline | **TODO-target** | sigma=12x efficiency |
+| Volume | TODO-baseline | **TODO-target** | tau=4x compression |
+| BOM | TODO-baseline | **TODO-target** | TODO-x cheaper |
+| Process / part dependency | — | **4 public parts** | tau(6)=4 alignment |
 
-**한 문장 요약**: σ(n)·φ(n) = n·τ(n) 은 n=6 에서만 성립하며, 이 유일성이 본 도메인의 설계 선택과 필연적으로 맞물린다.
+**One-line summary**: sigma(n)*phi(n) = n*tau(n) holds uniquely at n=6, and this uniqueness
+couples necessarily to the design choices in this domain.
 
-## §2 COMPARE (기존 vs HEXA-DOG-ROBOT-TEST) — 성능 비교 (ASCII)
-
-```
-┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불충분한가               │  n=6 산술이 어떻게 푸나   │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 1. 독점 공정 의존  │ TODO-독점벤더              │ 공개 4구성 = τ(6)        │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 2. 자유변수 폭증   │ TODO-파라미터과다          │ σ=12 축 고정             │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 3. 타이밍 불명     │ TODO-모호스펙              │ 6×100ns = 600ns 격자     │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 4. 반증 불가       │ 사례 기반 마케팅           │ FALSIFIER 3+ 명시        │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 5. 재사용성 낮음   │ 급변마다 재설계            │ atlas.n6 격자 재사용     │
-└───────────────────┴────────────────────────────┴──────────────────────────┘
-```
+## §2 COMPARE (baseline vs HEXA-DOG-ROBOT-TEST) — performance comparison (ASCII)
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  [처리 시간 (상대, 기존=1.0)]                                            │
-│  기존 방식         ████████████████████████████████  1.0                 │
-│  하이브리드        ████████░░░░░░░░░░░░░░░░░░░░░░░   0.25                │
-│  HEXA-DOG-ROBOT-TEST       █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.00002             │
-│                                                                          │
-│  [BOM (상대, 해외=1.0)]                                                  │
-│  해외 완제품       ████████████████████████████████  1.0                 │
-│  국내 조립         ███████████████░░░░░░░░░░░░░░░░   0.30                │
-│  HEXA-DOG-ROBOT-TEST       ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.07                │
-└──────────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------------+
+|  Barrier           |  Why it is insufficient      |  How n=6 arithmetic addresses it |
++--------------------+------------------------------+----------------------------------+
+| 1. proprietary dep | TODO-proprietary vendor      | 4 public parts = tau(6)           |
++--------------------+------------------------------+----------------------------------+
+| 2. free-var bloat  | TODO-parameter explosion     | sigma=12 axes fixed               |
++--------------------+------------------------------+----------------------------------+
+| 3. timing opaque   | TODO-ambiguous spec          | 6x100ns = 600ns lattice           |
++--------------------+------------------------------+----------------------------------+
+| 4. unfalsifiable   | case-based marketing         | FALSIFIER 3+ declared             |
++--------------------+------------------------------+----------------------------------+
+| 5. low reusability | re-designed every churn      | atlas.n6 lattice reuse            |
++---------------------------------------------------------------------------+
 ```
 
-## §3 REQUIRES (필요한 요소) — 선행 도메인
-
-| # | 선행 도메인 | 지수 | alien_min | 이유 |
-|---|---|---|---|---|
-| 1 | TODO-선행도메인1 | 천장7 → 천장10 | 7 | TODO 이유 |
-| 2 | TODO-선행도메인2 | 천장7 → 천장10 | 7 | TODO 이유 |
-
-본 도메인 목표: 현재 천장7 → 목표 천장10 (atlas.n6 승격).
-
-## §4 STRUCT (시스템 구조) — System Architecture (ASCII)
-
 ```
-┌──────────────────────────────────────────────────────────┐
-│           HEXA-DOG-ROBOT-TEST MK1 아키텍처                     │
-├──────────────────────────────────────────────────────────┤
-│  [6단 격자] τ(6)=4 서브시스템 × σ(6)=12 BOM 슬롯          │
-│                                                          │
-│   ┌─ 서브시스템1 ─┐  ┌─ 서브시스템2 ─┐                    │
-│   │   TODO        │  │   TODO        │                    │
-│   └───────────────┘  └───────────────┘                    │
-│   ┌─ 서브시스템3 ─┐  ┌─ 서브시스템4 ─┐                    │
-│   │   TODO        │  │   TODO        │                    │
-│   └───────────────┘  └───────────────┘                    │
-│                                                          │
-│   §4.3 SPEC GATE: target ≤ TODO, PASS 기준 §7 과 매칭     │
-└──────────────────────────────────────────────────────────┘
++--------------------------------------------------------------------------+
+|  [processing time (relative, baseline=1.0)]                              |
+|  baseline          ################################  1.0                 |
+|  hybrid            ########------------------------   0.25               |
+|  HEXA-DOG-ROBOT-TEST   #-----------------------------   0.00002          |
+|                                                                          |
+|  [BOM (relative, overseas=1.0)]                                          |
+|  overseas finished ################################  1.0                 |
+|  domestic assembly ###############---------------   0.30                 |
+|  HEXA-DOG-ROBOT-TEST   ###-----------------------   0.07                 |
++--------------------------------------------------------------------------+
 ```
 
-## §5 FLOW (동작 흐름) — 6단 sequence
+## §3 REQUIRES (required components) — prerequisite domains
+
+| # | Prerequisite domain | Index | alien_min | Reason |
+|---|--------------------|------|-----------|--------|
+| 1 | TODO-prerequisite1 | ceiling 7 -> ceiling 10 | 7 | TODO reason |
+| 2 | TODO-prerequisite2 | ceiling 7 -> ceiling 10 | 7 | TODO reason |
+
+Domain target: ceiling 7 -> ceiling 10 (atlas.n6 promotion).
+
+## §4 STRUCT (system structure) — System Architecture (ASCII)
 
 ```
-입력 → [1. 감지] → [2. 판정] → [3. 구동] → [4. 차단/실행] → [5. 피드백] → [6. 보고]
-         100ns     100ns       100ns       100ns            100ns        100ns
-         = 6 × 100ns = 600ns 총 응답시간 (τ·sopfr 격자)
++----------------------------------------------------------+
+|           HEXA-DOG-ROBOT-TEST MK1 architecture           |
++----------------------------------------------------------+
+|  [6-stage lattice] tau(6)=4 subsystems x sigma(6)=12 BOM slots |
+|                                                          |
+|   +- subsystem1 -+  +- subsystem2 -+                     |
+|   |   TODO       |  |   TODO       |                     |
+|   +--------------+  +--------------+                     |
+|   +- subsystem3 -+  +- subsystem4 -+                     |
+|   |   TODO       |  |   TODO       |                     |
+|   +--------------+  +--------------+                     |
+|                                                          |
+|   §4.3 SPEC GATE: target <= TODO, PASS matches §7         |
++----------------------------------------------------------+
 ```
 
-## §6 EVOLVE (진화 경로) — mk1 → mk∞
+## §5 FLOW (operation flow) — 6-stage sequence
 
-- **mk1**: 현재 천장7 (EMPIRICAL 기반 도면)
-- **mk2**: 천장8 (시뮬레이션 PASS + 프로토 1대)
-- **mk3**: 천장9 (현장 파일럿 + 인증)
-- **mk4+**: 천장10 (양산 + atlas.n6 [10*] 승격)
+```
+input -> [1. sense] -> [2. decide] -> [3. drive] -> [4. cut/execute] -> [5. feedback] -> [6. report]
+         100ns         100ns          100ns         100ns                100ns            100ns
+         = 6 x 100ns = 600ns total response time (tau * sopfr lattice)
+```
 
-## §7 VERIFY (검증) — 물리 공식 + 단위 + FAIL 기준
+## §6 EVOLVE (evolution path) — mk1 -> mk-infinity
 
-§7 은 atlas.n6 ossified 함수 재선언 금지 (σ/τ/φ 는 [10*] EXACT). 실제 장치·시스템 작동 검증만 기술.
+- **mk1**: current ceiling 7 (EMPIRICAL-based drawings)
+- **mk2**: ceiling 8 (simulation PASS + 1 prototype)
+- **mk3**: ceiling 9 (field pilot + certification)
+- **mk4+**: ceiling 10 (mass production + atlas.n6 [10*] promotion)
+
+## §7 VERIFY (verification) — physical formulas + units + FAIL criteria
+
+§7 must not redeclare atlas.n6 ossified functions (sigma/tau/phi are [10*] EXACT). It records
+only real device and system operation verification.
 
 ```python
 # HEXA-DOG-ROBOT-TEST mk1 §7 verify — stdlib only
-# axis=life / name=강아지 로봇
+# axis=life / name=dog-robot
 #
-# §7.1 response_time: 6 × t_stage
+# §7.1 response_time: 6 x t_stage
 t_stage_ns = 100.0
 stages = 6
-t_total_ns = stages * t_stage_ns  # target ≤ 1000 ns
+t_total_ns = stages * t_stage_ns  # target <= 1000 ns
 assert t_total_ns <= 1000.0, "FAIL: t_total > 1us spec"
 
-# §7.2 power_dissipation: P = V * I (단위 W)
+# §7.2 power_dissipation: P = V * I (W)
 V_ds = 400.0   # V
 I_on = 50.0    # A
 R_on_mOhm = 10.0
@@ -138,149 +141,150 @@ t_sw_ns = 100.0
 E_sw_uJ = 0.5 * V_ds * I_on * (t_sw_ns / 1000.0)
 assert E_sw_uJ <= 1500.0, "FAIL: switching energy > 1.5 mJ spec"
 
-# §7.4 temperature: T_j = T_a + P * R_th (°C)
+# §7.4 temperature: T_j = T_a + P * R_th (C)
 T_a_C = 25.0
-R_th_CW = 1.0   # °C/W
+R_th_CW = 1.0   # C/W
 T_j_C = T_a_C + P_cond_W * R_th_CW
 assert T_j_C <= 175.0, "FAIL: T_j > 175C spec"
 
-# §7.5 BOM: target ≤ $50
+# §7.5 BOM: target <= $50
 bom_usd = 35.0
 assert bom_usd <= 50.0, "FAIL: BOM > $50 spec"
 
-# §7.6~§7.11 placeholder — 도메인 특화 공식 채울 자리
+# §7.6..§7.11 placeholder — slot for domain-specific formulas
 freq_MHz = 0.5
 assert freq_MHz >= 0.1, "FAIL: sampling freq < 100 kHz"
 
-print("§7 PASS — t=", t_total_ns, "ns, P=", P_cond_W, "W, T_j=", T_j_C, "°C")
+print("§7 PASS - t=", t_total_ns, "ns, P=", P_cond_W, "W, T_j=", T_j_C, "C")
 ```
 
-§7 PASS 기준은 §4.3 SPEC GATE 및 §17 TEST 의 target ≤ 값과 매칭된다.
+§7 PASS criteria match the target <= values in §4.3 SPEC GATE and §17 TEST.
 
-## §8 EXEC SUMMARY (실행 요약)
+## §8 EXEC SUMMARY (execution summary)
 
-- 도메인: 강아지 로봇 (dog-robot-test)
-- 축: 생명 (life)
-- 목표 마크: mk1 — 천장10
-- 핵심: σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5 정합 설계
-- 납기: TODO 분기 / 예산 TODO
+- Domain: dog robot (dog-robot-test)
+- Axis: life
+- Target mark: mk1 — ceiling 10
+- Core: sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5 aligned design
+- Schedule: TODO quarter / budget TODO
 
-## §9 SYSTEM REQUIREMENTS (시스템 요구사항)
+## §9 SYSTEM REQUIREMENTS
 
-| 항목 | target | 단위 | 근거 |
-|------|--------|------|------|
-| 응답시간 | ≤ 1000 | ns | τ·sopfr 격자 |
-| 전도손실 | ≤ 50 | W | §7.2 |
-| 접합온도 | ≤ 175 | °C | §7.4 |
-| BOM | ≤ 50 | $ | §7.5 |
-| 샘플링 | ≥ 0.1 | MHz | §7.6 |
+| Item | Target | Unit | Basis |
+|------|--------|------|-------|
+| Response time | <= 1000 | ns | tau*sopfr lattice |
+| Conduction loss | <= 50 | W | §7.2 |
+| Junction temperature | <= 175 | C | §7.4 |
+| BOM | <= 50 | $ | §7.5 |
+| Sampling | >= 0.1 | MHz | §7.6 |
 
-## §10 ARCHITECTURE (아키텍처)
+## §10 ARCHITECTURE
 
-- 4 서브시스템 (τ=4) × 3 계층 (φ+sopfr 일부) = 12 블록 (σ=12)
-- 각 서브시스템: 독립 전원 + 공용 버스 + 이중화 FSM
-- 인터페이스: TODO 프로토콜 사양
+- 4 subsystems (tau=4) x 3 layers (phi + partial sopfr) = 12 blocks (sigma=12)
+- Each subsystem: independent power + shared bus + redundant FSM
+- Interface: TODO protocol spec
 
-## §11 CIRCUIT DESIGN (회로 설계)
+## §11 CIRCUIT DESIGN
 
-- 메인 스위치: TODO 부품번호, V_ds, I_on, R_on, Q_g
-- 드라이버: TODO 게이트 드라이버
-- 스너버: RCD, R=TODOΩ, C=TODOnF, D=TODO
-- 센서: Σ-Δ ADC TODO-bit @ TODO-MHz
+- Main switch: TODO part number, V_ds, I_on, R_on, Q_g
+- Driver: TODO gate driver
+- Snubber: RCD, R=TODO ohm, C=TODO nF, D=TODO
+- Sensor: Sigma-Delta ADC TODO-bit @ TODO-MHz
 
-## §12 PCB DESIGN (PCB 설계)
+## §12 PCB DESIGN
 
-- 스택업: 4 layer, 1oz/1oz/1oz/1oz
-- 치수: TODOmm × TODOmm
-- DRC: IPC-2221 Class 2, 절연거리 TODOmm
-- 파워 플레인: V_bus 광폭 폴리곤, 리턴경로 단일화
+- Stackup: 4 layer, 1oz/1oz/1oz/1oz
+- Dimensions: TODO mm x TODO mm
+- DRC: IPC-2221 Class 2, clearance TODO mm
+- Power plane: V_bus wide polygon, single-return routing
 
-## §13 FIRMWARE (펌웨어)
+## §13 FIRMWARE
 
-- MCU: Cortex-M4 @ 168MHz, FPU on
-- ISR: 500kHz 샘플 / 차단 결정 ≤ 2μs
-- 알고리즘: Σ-Δ 필터 → di/dt + I²t 합성
-- 펌웨어 빌드: hexa self-host (Python/bash 배제)
+- MCU: Cortex-M4 @ 168 MHz, FPU on
+- ISR: 500 kHz sample / cutoff decision <= 2 us
+- Algorithm: Sigma-Delta filter -> di/dt + I^2 t combining
+- Firmware build: hexa self-host (no Python/bash at build time)
 
-## §14 MECHANICAL (기구)
+## §14 MECHANICAL
 
-- 케이스: AL6061 anodized, TODOmm × TODOmm × TODOmm
-- 방열: TODO 히트싱크, R_th_sa ≤ TODO °C/W
-- 진동/충격: IEC 60068-2-6 / 27 Class 2
+- Case: AL6061 anodized, TODO mm x TODO mm x TODO mm
+- Heat dissipation: TODO heatsink, R_th_sa <= TODO C/W
+- Vibration / shock: IEC 60068-2-6 / 27 Class 2
 
-## §15 MANUFACTURING (제조)
+## §15 MANUFACTURING
 
-- 파운드리: τ=4 공개 MPW (Infineon 180BCD / GF 130 / TSMC 180 / SMIC 180)
-- 패키지: DBC AlN + TO-247 SiP
-- 수율: 공정 CpK ≥ 1.33, 번인 168h @ 125°C
+- Foundry: tau=4 public MPWs (Infineon 180BCD / GF 130 / TSMC 180 / SMIC 180)
+- Package: DBC AlN + TO-247 SiP
+- Yield: process CpK >= 1.33, burn-in 168 h @ 125 C
 
-## §16 TEST (시험)
+## §16 TEST
 
-- 단품: IEC 60947-2 double-break 단락 시험
-- 조립: MIL-STD-810G 진동 충격
-- 시스템: 실부하 500A @ 800V DC 차단 10,000 사이클
-- PASS 기준: §7 의 target ≤ 값과 1:1 매칭
+- Unit: IEC 60947-2 double-break short-circuit test
+- Assembly: MIL-STD-810G vibration / shock
+- System: real-load 500 A @ 800 V DC cutoff, 10,000 cycles
+- PASS criteria: 1:1 match with §7 target <= values
 
-## §17 BOM (자재 명세)
+## §17 BOM (bill of materials)
 
-| # | 항목 | 부품번호 | 수량 | 단가($) | 비고 |
-|---|------|----------|------|---------|------|
-| 1 | 메인 스위치 | TODO | 2 | 8.0 | SiC MOSFET |
-| 2 | 드라이버 | TODO | 2 | 2.0 | isolated |
-| 3 | 스너버 | TODO | 4 | 0.5 | RCD |
-| 4 | ADC | TODO | 1 | 3.0 | Σ-Δ |
+| # | Item | Part number | Qty | Unit ($) | Note |
+|---|------|-------------|-----|----------|------|
+| 1 | Main switch | TODO | 2 | 8.0 | SiC MOSFET |
+| 2 | Driver | TODO | 2 | 2.0 | isolated |
+| 3 | Snubber | TODO | 4 | 0.5 | RCD |
+| 4 | ADC | TODO | 1 | 3.0 | Sigma-Delta |
 | 5 | MCU | TODO | 1 | 5.0 | M4 |
 | 6 | PCB | TODO | 1 | 4.0 | 4L |
-| 7 | 케이스 | TODO | 1 | 6.0 | AL |
-| 8 | 기타 | TODO | — | 6.5 | passive |
-|   | **합계** |  |  | **$35** | target ≤ $50 |
+| 7 | Case | TODO | 1 | 6.0 | AL |
+| 8 | Other | TODO | — | 6.5 | passive |
+|   | **Total** |  |  | **$35** | target <= $50 |
 
-## §18 VENDOR (공급처)
+## §18 VENDOR
 
-- SiC: Wolfspeed, onsemi, ROHM — 2nd source 필수
-- BCD 파운드리: Infineon 180BCD, GF 130BCD
-- DBC 기판: Rogers curamik, Denka
-- 국산화율: 85% (SiC 만 해외 의존)
+- SiC: Wolfspeed, onsemi, ROHM — 2nd-source required
+- BCD foundry: Infineon 180BCD, GF 130BCD
+- DBC substrate: Rogers curamik, Denka
+- Domestic localisation: 85 % (SiC still imported)
 
-## §19 ACCEPTANCE (인수 기준)
+## §19 ACCEPTANCE
 
-- [ ] §7 VERIFY 전 항목 PASS
-- [ ] §16 TEST double-break 시험 통과
-- [ ] IEC 60947-2 인증 완료
-- [ ] §17 BOM ≤ $50 실측
-- [ ] 현장 파일럿 6개월 무고장
+- [ ] All §7 VERIFY items PASS
+- [ ] §16 TEST double-break pass
+- [ ] IEC 60947-2 certification complete
+- [ ] §17 BOM <= $50 measured
+- [ ] Field pilot 6 months without fault
 
-## §20 APPENDIX (부록)
+## §20 APPENDIX
 
-- atlas.n6 엔트리: `@R dog-robot-test` 후보
-- 관련 논문: TODO 링크
-- 관련 도메인: TODO 크로스 링크
+- atlas.n6 entry: `@R dog-robot-test` candidate
+- Related papers: TODO link
+- Related domains: TODO cross-link
 
-## §21 IMPACT (영향) — per Mk
+## §21 IMPACT — per Mk
 
-각 mk 블록은 역시간순 (최신 상단). 최신은 <details open>, 과거는 collapsed. summary 에 github 링크 노출.
+Each Mk block is in reverse-chronological order (newest at top). Latest is <details open>,
+earlier ones collapsed. Summary exposes a GitHub link.
 
 ### §21.mk2 IMPACT
 
 <details open>
 <summary>mk2 — <a href="https://github.com/dancinlife/n6-architecture/blob/main/domains/life/dog-robot-test/dog-robot-test.md">github.com/dancinlife/n6-architecture (mk2)</a></summary>
 
-#### ① 바뀌는 것
-- TODO 핵심 스펙 변경점
-- TODO BOM 증감
+#### 1. What changes
+- TODO core spec deltas
+- TODO BOM delta
 
-#### ② 일정/리스크
-- 일정Δ: TODO 개월
-- 리스크: TODO (완화책 명시)
+#### 2. Schedule / risk
+- Schedule delta: TODO months
+- Risk: TODO (mitigation stated)
 
-#### ③ 안 바뀌는 것 (정직)
-- 기존 SiC MOSFET 의존도 — 여전히 해외 파운드리
-- 500kHz 샘플링 상한 — 아날로그 노이즈 한계
-- 차단 내구 100,000 사이클 — 반도체 열피로 한계
+#### 3. What does not change (honest)
+- Existing SiC MOSFET dependency — still overseas foundry
+- 500 kHz sampling ceiling — analog-noise limit
+- 100,000-cycle cutoff endurance — semiconductor thermal-fatigue limit
 
-#### ④ 검증 게이트
-- §7 VERIFY 전 항목 PASS
-- §16 TEST double-break 실측
+#### 4. Verification gates
+- All §7 VERIFY items PASS
+- §16 TEST double-break measurement
 
 </details>
 
@@ -290,22 +294,21 @@ print("§7 PASS — t=", t_total_ns, "ns, P=", P_cond_W, "W, T_j=", T_j_C, "°C"
 <details>
 <summary>mk1 — <a href="https://github.com/dancinlife/n6-architecture/compare/dog-robot-test-mk1-v1.0...main" data-old-blob="domains/life/dog-robot-test/dog-robot-test.md">github.com/dancinlife/n6-architecture (mk1)</a></summary>
 
-#### ① 바뀌는 것
-- TODO 핵심 스펙 변경점
-- TODO BOM 증감
+#### 1. What changes
+- TODO core spec deltas
+- TODO BOM delta
 
-#### ② 일정/리스크
-- 일정Δ: TODO 개월
-- 리스크: TODO (완화책 명시)
+#### 2. Schedule / risk
+- Schedule delta: TODO months
+- Risk: TODO (mitigation stated)
 
-#### ③ 안 바뀌는 것 (정직)
-- 기존 SiC MOSFET 의존도 — 여전히 해외 파운드리
-- 500kHz 샘플링 상한 — 아날로그 노이즈 한계
-- 차단 내구 100,000 사이클 — 반도체 열피로 한계
+#### 3. What does not change (honest)
+- Existing SiC MOSFET dependency — still overseas foundry
+- 500 kHz sampling ceiling — analog-noise limit
+- 100,000-cycle cutoff endurance — semiconductor thermal-fatigue limit
 
-#### ④ 검증 게이트
-- §7 VERIFY 전 항목 PASS
-- §16 TEST double-break 실측
+#### 4. Verification gates
+- All §7 VERIFY items PASS
+- §16 TEST double-break measurement
 
 </details>
-

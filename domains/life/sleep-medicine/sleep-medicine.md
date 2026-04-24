@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-002
 registered: 2026-04-23
 ---
 
-# 수면의학 (HEXA-SLEEPMED) — n=6 AASM sleep staging
+# Sleep Medicine (HEXA-SLEEPMED) — n=6 AASM sleep staging
 
 ## §1 WHY
 

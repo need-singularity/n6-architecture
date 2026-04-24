@@ -9,7 +9,7 @@ source_proposal: reports/p2_domain_expansion_proposal.json DC-022
 registered: 2026-04-23
 ---
 
-# 방사선생물학 (HEXA-RADBIO) — n=6 DNA DSB repair pathways
+# Radiation Biology (HEXA-RADBIO) — n=6 DNA DSB repair pathways
 
 ## §1 WHY
 
