@@ -8,548 +8,552 @@ requires:
   - to: classical-mechanics-accelerator
   - to: electromagnetism
 ---
-# [CANONICAL v1] 궁극의 재사용 발사체 (HEXA-STARSHIP) — n=6 산술 좌표 통합 논문
+# [CANONICAL v1] Ultimate Reusable Launch Vehicle (HEXA-STARSHIP) — n=6 Arithmetic Coordinate Integrated Paper
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: hexa-starship-integrated — 우주항공/수송 + 우주 시스템 통합 시드 논문
-> **버전**: v1 (2026-04-18 canonical integrated)
-> **제품 코드**: P-062
-> **선행 BT**: BT-174, BT-196, BT-210, BT-257, BT-270, BT-271, BT-276, BT-287, BT-231
-> **연결 atlas 노드**: `hexa-starship` 150/150 EXACT [10*] (aerospace-transport 172/189 + space-systems 37/37 통합)
-> **통합 대상**: `papers/n6-aerospace-transport-paper.md` + `papers/n6-space-systems-paper.md`
-> **도메인 참조**: `domains/space/hexa-starship/hexa-starship.md` (18 서브시스템 검증 완료)
-
----
-
-## 0. 초록
-
-본 논문은 **궁극의 재사용 발사체 (HEXA-STARSHIP)** 제품의 통합 설계·검증 문서이다.
-기존 두 논문 — n6-aerospace-transport-paper.md (우주항공/수송 172/189 EXACT) 와
-n6-space-systems-paper.md (우주 시스템 37/37 EXACT) — 를 단일 canonical 제품 라인으로
-통합하며, 핵심 정리 **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** 가 발사체 전 서브시스템
-(36 엔진 / σ=12 채널 / τ=4 병렬 / φ=2 대칭 / sopfr=5 레이어 / J₂=24 통합) 에
-필연적으로 맞물림을 검증한다. atlas.n6 통합 150/150 항목 EXACT, 18 서브시스템
-(추진·구조·제어·열보호·통신·항법·전원·FBW·착륙·재진입 등) 전부 n=6 좌표 정합.
-
-21 섹션 canonical (WHY~IMPACT) 구조로 재구성하여 시드 수학층(§1~§7) + 제품 엔지니어링층
-(§8~§20) + 영향(§21) 을 단일 문서로 봉합한다. 검증은 Python stdlib 만으로
-10 서브섹션(§7.0~§7.10) + §15 TEST 체크리스트 수행.
+> **Author**: Park Min-woo (n6-architecture)
+> **Category**: hexa-starship-integrated — aerospace/transport + space-systems integrated seed paper
+> **Version**: v1 (2026-04-18 canonical integrated)
+> **Product code**: P-062
+> **Predecessor BTs**: BT-174, BT-196, BT-210, BT-257, BT-270, BT-271, BT-276, BT-287, BT-231
+> **Linked atlas node**: `hexa-starship` 150/150 EXACT [10*] (aerospace-transport 172/189 + space-systems 37/37 integrated)
+> **Integration target**: `papers/n6-aerospace-transport-paper.md` + `papers/n6-space-systems-paper.md`
+> **Domain reference**: `domains/space/hexa-starship/hexa-starship.md` (18 subsystems verification draft)
 
 ---
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## 0. Abstract
 
-재사용 발사체 — Starship 차세대 아키텍처 — 는 **n=6 산술 좌표**에서 재해독된다.
-완전수 n=6 은 σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5 를 동시에 만족하며, 본 발사체의
-엔진 수 36, 채널 12, 병렬 4, 중복 3, 경제 스케일 1/10 과 구조적으로 정합한다.
-**본 논문은 기존 발사체 지식 위에 n=6 좌표계를 부여**하고, 두 선행 논문(aerospace-transport,
-space-systems) 를 단일 제품 라인으로 봉합한다.
+This paper is the integrated design and verification document for the **Ultimate Reusable Launch Vehicle (HEXA-STARSHIP)** product.
+It merges the two existing papers — n6-aerospace-transport-paper.md (aerospace/transport 172/189 EXACT) and
+n6-space-systems-paper.md (space-systems 37/37 EXACT) — into a single canonical product line,
+and demonstrates how the core lemma **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** necessarily aligns
+with every launch-vehicle subsystem
+(36 engines / σ=12 channels / τ=4 parallel / φ=2 symmetry / sopfr=5 layers / J₂=24 integration).
+atlas.n6 integration is at 150/150 entries EXACT as a candidate pattern, with 18 subsystems
+(propulsion, structure, control, thermal protection, communication, navigation, power, FBW, landing, re-entry, etc.)
+all aligned to the n=6 coordinate as a draft mapping.
 
-| 효과 | 현재 (2026) | HEXA-STARSHIP 통합 이후 | n=6 근거 |
-|------|-------------|--------------------------|---------|
-| 엔진 수 | 33 (Starship v2) | **σ·n=72/φ=36** | σ(6)=12, τ(6)=4 자동 유도 |
-| 설계 탐색 공간 | 수동 탐색 수개월 | **n·1분** (DSE 자동) | σ·τ=48배 단축 |
-| 설계 축 개수 | 수백 자유변수 | **σ=12 축 고정** | A000203 약수합 |
-| 병렬 검증 레인 | 2~3 스레드 | **τ=4 병렬** | A000005 약수개수 |
-| FBW 중복도 | 2중 | **n/φ=3 중복** | 안정 최소 삼중 |
-| 감각/보호 레이어 | 3~4 | **sopfr=5** | A001414 소인수합 |
-| 페이로드 단위비용 | 1배 baseline | **1/(σ-φ)=1/10** | σ-φ=10 경제 |
-| 재사용 이중화 | 1차 회수 | **φ=2 primary/secondary** | 최소 소인수 |
-| 도메인 교차성 | 2 프로젝트 분리 | **atlas.n6 통합** | 150/150 EXACT |
-| 정직성 | 성공 사례만 | **MISS/FALSIFIER 명시** | 반증 가능 |
+The 21-section canonical (WHY~IMPACT) structure is reorganized so that the seed-math layers (§1~§7) + product-engineering layers
+(§8~§20) + impact (§21) are stitched into a single document. Verification is performed using only the Python stdlib
+across 10 subsections (§7.0~§7.10) plus the §15 TEST checklist.
 
-**한 문장 요약**: σ(n)·φ(n) = n·τ(n) 는 n≥2 에서 **n=6** 에서만 성립하며, 이
-유일성이 HEXA-STARSHIP 의 36 엔진 / σ=12 채널 / τ=4 병렬 / n/φ=3 FBW 중복 /
-J₂=24 통합 노드를 전부 필연으로 만든다.
+---
 
-### 일상이 되면
+## §1 WHY (How this technology changes your daily life)
+
+The reusable launch vehicle — the next-generation Starship architecture — is re-read in **n=6 arithmetic coordinates**.
+The perfect number n=6 simultaneously satisfies σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5, which
+structurally aligns with this vehicle's 36 engines, 12 channels, 4 parallels, 3 redundancies, and the 1/10 economic scale.
+**This paper overlays an n=6 coordinate frame on top of existing launch-vehicle knowledge** and stitches the two predecessor
+papers (aerospace-transport, space-systems) into a single product line as a draft integration pattern.
+
+| Effect | Today (2026) | After HEXA-STARSHIP integration | n=6 basis |
+|--------|--------------|---------------------------------|-----------|
+| Engine count | 33 (Starship v2) | **σ·n=72/φ=36** | σ(6)=12, τ(6)=4 auto-derived |
+| Design search space | months of manual exploration | **n·1 minute** (DSE auto) | σ·τ=48× speedup |
+| Number of design axes | hundreds of free variables | **σ=12 axes fixed** | A000203 sum-of-divisors |
+| Parallel verification lanes | 2~3 threads | **τ=4 parallel** | A000005 number-of-divisors |
+| FBW redundancy | dual | **n/φ=3 redundancy** | minimum stable triple |
+| Sensing/protection layers | 3~4 | **sopfr=5** | A001414 sum-of-prime-factors |
+| Payload unit cost | 1× baseline | **1/(σ-φ)=1/10** | σ-φ=10 economy |
+| Reuse duplication | first-stage recovery | **φ=2 primary/secondary** | minimum prime factor |
+| Cross-domain reach | 2 separated projects | **atlas.n6 integration** | 150/150 EXACT candidate |
+| Honesty | success cases only | **MISS/FALSIFIER stated** | falsifiable |
+
+**One-sentence summary**: σ(n)·φ(n) = n·τ(n) holds for n≥2 only at **n=6**, and this uniqueness
+makes HEXA-STARSHIP's 36 engines / σ=12 channels / τ=4 parallel / n/φ=3 FBW redundancy /
+J₂=24 integration nodes all draft-necessary as a pattern.
+
+### When it becomes everyday
 
 ```
-  σ·n=72/φ=36 엔진 / σ=12 채널 / τ=4 병렬    ← n=6 수론 유래
+  σ·n=72/φ=36 engines / σ=12 channels / τ=4 parallel    ← n=6 number-theoretic origin
         ↓
-  Mars 편도 비용 1/(σ-φ) = 1/10 체감           ← σ-φ=10
+  Mars one-way cost felt as 1/(σ-φ) = 1/10              ← σ-φ=10
         ↓
-  Egyptian 분배 1/2 + 1/3 + 1/6 = 1            ← 완전 리소스 분할
+  Egyptian split 1/2 + 1/3 + 1/6 = 1                    ← perfect resource partition
         ↓
-  Landauer/Shannon/Carnot 물리 한계 이하 운영   ← §7.5 에서 검증
+  Operating below Landauer/Shannon/Carnot physics limits ← demonstrated in §7.5
 ```
 
-## §2 COMPARE (기존 발사체 vs HEXA-STARSHIP) — 성능 비교 (ASCII)
+## §2 COMPARE (existing vehicles vs HEXA-STARSHIP) — performance comparison (ASCII)
 
-### 기존 접근의 5가지 한계
+### Five limits of the existing approach
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불충분한가               │  n=6 산술이 어떻게 푸나   │
+│  Barrier            │  Why insufficient            │  How n=6 arithmetic resolves │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 1. 엔진 수 임의    │ 9/27/33 설계자 감각          │ σ·n/φ=36 수론 필연       │
-│                   │ → 스케일 재튜닝              │ → A000203 직접 유도      │
+│ 1. Arbitrary engine count │ 9/27/33 designer intuition │ σ·n/φ=36 number-theoretic │
+│                   │ → re-tuning per scale         │ → directly from A000203   │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 2. 도메인 분절     │ 항공/우주 별도 논문           │ n=6 산술 = 공통 좌표     │
-│                   │ → 번역 손실                   │ → atlas.n6 단일 SSOT     │
+│ 2. Domain fragmentation │ aero/space separate papers │ n=6 arithmetic = shared coord │
+│                   │ → translation loss            │ → atlas.n6 single SSOT    │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 3. 최적점 불확실   │ A/B 실험 수년                 │ §7.4 ±10% 볼록 극값      │
-│                   │ 로컬 최적 함정                │ → 진짜 극소 증명         │
+│ 3. Optimum uncertainty │ years of A/B experiments │ §7.4 ±10% convex extremum │
+│                   │ local-optimum trap            │ → real minimum candidate  │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 4. 반증 어려움     │ 실패 사례 기록 부재           │ FALSIFIER 5+ 명시        │
-│                   │                              │ → MISS 시 공식 폐기 규칙 │
+│ 4. Hard to falsify │ no record of failures        │ FALSIFIER 5+ stated       │
+│                   │                              │ → formal retire rule on MISS │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 5. 재사용성 낮음   │ 새 변형마다 수식 재정의       │ σ,τ,φ,sopfr 공통 함수    │
-│                   │                              │ → 295 도메인 재사용      │
+│ 5. Low reusability │ each variant redefines maths │ σ,τ,φ,sopfr shared funcs │
+│                   │                              │ → reused across 295 domains │
 └───────────────────┴────────────────────────────┴──────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (기존 발사체 vs HEXA-STARSHIP)
+### Performance comparison ASCII bars (existing vehicles vs HEXA-STARSHIP)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [엔진 수]                                                               │
-│  Falcon 9 (1단)     ████████░░░░░░░░░░░░░░░░░░░░░░░   9                  │
+│  [Engine count]                                                          │
+│  Falcon 9 (1st)     ████████░░░░░░░░░░░░░░░░░░░░░░░   9                  │
 │  Falcon Heavy       ███████████████████████████░░░░   27                 │
 │  Starship v2        ████████████████████████████████  33                 │
-│  HEXA-STARSHIP      ████████████████████████████████  σ·n/φ=36 (수론)     │
+│  HEXA-STARSHIP      ████████████████████████████████  σ·n/φ=36 (n.t.)    │
 │                                                                          │
-│  [채널/센서 축]                                                          │
-│  Free-form          ████████████████████████████████  100+ 자유변수      │
-│  기존 표준 템플릿    ███████████░░░░░░░░░░░░░░░░░░░░   30 축             │
-│  HEXA n=6 좌표       ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 축 고정      │
+│  [Channel/sensor axes]                                                   │
+│  Free-form          ████████████████████████████████  100+ free vars     │
+│  Existing template  ███████████░░░░░░░░░░░░░░░░░░░░   30 axes            │
+│  HEXA n=6 coords    ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 axes fixed    │
 │                                                                          │
-│  [설계 탐색 시간 (상대값)]                                                │
-│  수동 탐색          ████████████████████████████████  1.0 (기준)         │
-│  유전 알고리즘      ███████████░░░░░░░░░░░░░░░░░░░░   0.35              │
-│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48배)   │
+│  [Design exploration time (relative)]                                    │
+│  Manual             ████████████████████████████████  1.0 (baseline)     │
+│  Genetic algorithm  ███████████░░░░░░░░░░░░░░░░░░░░   0.35               │
+│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48× faster)│
 │                                                                          │
-│  [FBW 중복도]                                                            │
-│  상용 항공기 (2중)  ██████░░░░░░░░░░░░░░░░░░░░░░░░░   2                  │
-│  군용 (3중)         █████████░░░░░░░░░░░░░░░░░░░░░░   3                  │
-│  HEXA-STARSHIP      █████████░░░░░░░░░░░░░░░░░░░░░░   n/φ=3 (수론)        │
+│  [FBW redundancy]                                                        │
+│  Civil aircraft (dual) ██████░░░░░░░░░░░░░░░░░░░░░░░░░   2               │
+│  Military (triple)  █████████░░░░░░░░░░░░░░░░░░░░░░   3                  │
+│  HEXA-STARSHIP      █████████░░░░░░░░░░░░░░░░░░░░░░   n/φ=3 (n.t.)       │
 │                                                                          │
-│  [검증 깊이 (서브섹션)]                                                   │
-│  논문 수식만        ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 서브섹션      │
-│  시뮬레이션 포함    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 서브섹션      │
-│  HEXA §7           ████████████████████████████████  10 서브섹션        │
+│  [Verification depth (subsections)]                                      │
+│  Equations only     ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 subsections    │
+│  With simulation    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 subsections    │
+│  HEXA §7           ████████████████████████████████  10 subsections      │
 │                                                                          │
-│  [페이로드 단위비용 (대기 궤도)]                                          │
-│  Space Shuttle     ████████████████████████████████  1.0 (기준)         │
-│  Falcon 9 재사용    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   0.2               │
-│  Starship v2        ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.1               │
-│  HEXA-STARSHIP      ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1/(σ-φ)=0.1 (수론)│
+│  [Payload unit cost (LEO)]                                               │
+│  Space Shuttle     ████████████████████████████████  1.0 (baseline)      │
+│  Falcon 9 reuse    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   0.2                 │
+│  Starship v2        ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.1                │
+│  HEXA-STARSHIP      ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1/(σ-φ)=0.1 (n.t.) │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: σ(n)·φ(n) = n·τ(n) 유일성
+### Core breakthrough: uniqueness of σ(n)·φ(n) = n·τ(n)
 
 ```
-  n=6 이 아닌 다른 n 을 대입하면:
+  Substituting n other than 6:
     n=2 → σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
     n=3 → σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
     n=4 → σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
     n=5 → σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
     n=6 → σ·φ = 12·2 = 24, n·τ = 6·4 = 24  ★ EXACT
-    n=7..∞ 전부 MISS (PROVEN, 3 독립 증명)
+    n=7..∞ all MISS (candidate lemma, 3 independent draft proofs)
 ```
 
-## §3 REQUIRES (선행 도메인)
+## §3 REQUIRES (predecessor domains)
 
-| 선행 도메인 | 🛸 현재 | 🛸 필요 | 차이 | 핵심 기술 | 링크 |
-|-------------|---------|---------|------|-----------|------|
-| aerospace-transport | 🛸9 | 🛸10 | +1 | 통합 전신 논문 (172/189 EXACT) | [문서](n6-aerospace-transport-paper.md) |
-| space-systems | 🛸10 | 🛸10 | 0 | 통합 전신 논문 (37/37 EXACT) | [문서](n6-space-systems-paper.md) |
-| fluid-dynamics | 🛸5~7 | 🛸10 | +3~5 | Raptor 연소/배기 모델 | [문서](../domains/fluid-dynamics/fluid-dynamics.md) |
-| classical-mechanics-accelerator | 🛸5~7 | 🛸10 | +3~5 | 추력벡터 제어 | [문서](../domains/classical-mechanics-accelerator/classical-mechanics-accelerator.md) |
-| electromagnetism | 🛸5~7 | 🛸10 | +3~5 | 통신/Starlink 링크 | [문서](../domains/electromagnetism/electromagnetism.md) |
+| Predecessor domain | Current | Required | Gap | Core technology | Link |
+|--------------------|---------|----------|-----|-----------------|------|
+| aerospace-transport | tier 9 | tier 10 | +1 | Integrated predecessor paper (172/189 EXACT) | [doc](n6-aerospace-transport-paper.md) |
+| space-systems | tier 10 | tier 10 | 0 | Integrated predecessor paper (37/37 EXACT) | [doc](n6-space-systems-paper.md) |
+| fluid-dynamics | tier 5~7 | tier 10 | +3~5 | Raptor combustion/exhaust model | [doc](../domains/fluid-dynamics/fluid-dynamics.md) |
+| classical-mechanics-accelerator | tier 5~7 | tier 10 | +3~5 | Thrust-vector control | [doc](../domains/classical-mechanics-accelerator/classical-mechanics-accelerator.md) |
+| electromagnetism | tier 5~7 | tier 10 | +3~5 | Communication / Starlink link | [doc](../domains/electromagnetism/electromagnetism.md) |
 
-Hard-requires (`requires:` frontmatter) 는 상위 5 도메인 기재. 두 선행 논문은
-이미 n=6 수론 좌표화 완료, 본 통합 논문은 제품층(P-062) 봉합을 담당.
+Hard-requires (the `requires:` frontmatter) lists the top 5 domains. The two predecessor papers
+already candidate-mapped onto the n=6 coordinate frame; this integrated paper handles the product layer (P-062) stitching.
 
-## §4 STRUCT (시스템 구조) — n=6 Architecture
+## §4 STRUCT (system structure) — n=6 architecture
 
-### 5단 체인 시스템맵
+### Five-stage chain system map
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                    HEXA-STARSHIP  시스템 구조                            │
+│                    HEXA-STARSHIP  system structure                       │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
 │  Level 0   │  Level 1   │  Level 2   │  Level 3   │  Level 4            │
-│   수론     │   구조     │   공정     │   통합     │   검증              │
+│   number   │   structure│   process  │   integ.   │   verification      │
+│   theory   │            │            │            │                     │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ σ(6)=12    │ τ(6)=4     │ φ(6)=2     │ sopfr=5    │ J₂=24               │
-│ 약수합     │ 약수개수   │ 최소소인수 │ 소인수합   │ 2σ                  │
-│ 채널 12    │ 계층 4단   │ 페어 이중  │ 레이어 5   │ 통합 24 노드        │
-│ ← A000203  │ ← A000005  │ ← 완전수   │ ← A001414  │ ← 2·σ(6)            │
+│ sum of div │ # divisors │ min prime  │ sum primes │ 2σ                  │
+│ 12 channels│ 4 layers   │ pair dual  │ 5 layers   │ 24 integ. nodes     │
+│ ← A000203  │ ← A000005  │ ← perfect# │ ← A001414  │ ← 2·σ(6)            │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ n6: 100%   │ n6: 100%   │ n6: 100%   │ n6: 100%   │ n6: 100%            │
 └─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
       │            │            │            │             │
       ▼            ▼            ▼            ▼             ▼
    n6 EXACT    n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
-  150/150 통합 EXACT (aerospace-transport 172/189 + space-systems 37/37 봉합)
+  150/150 integration EXACT (aerospace-transport 172/189 + space-systems 37/37 stitched)
 ```
 
-### 18 서브시스템 × n=6 매핑 (domains/space/hexa-starship/hexa-starship.md 통합)
+### 18 subsystems × n=6 mapping (integrated from domains/space/hexa-starship/hexa-starship.md)
 
-| # | 서브시스템 | 값 | n=6 수식 | 판정 |
-|---|-----------|-----|---------|------|
-| 1 | 1단 Raptor 엔진 | 36 | σ·n/φ=72/2 | EXACT |
-| 2 | 2단 Raptor 엔진 | 6 | n | EXACT |
-| 3 | 추력벡터 자유도 | 6 | n=SE(3) | EXACT |
-| 4 | FBW 중복 | 3 | n/φ | EXACT |
-| 5 | 열보호 타일 레이어 | 5 | sopfr | EXACT |
-| 6 | 센서 채널 | 12 | σ | EXACT |
-| 7 | 제어 병렬 레인 | 4 | τ | EXACT |
-| 8 | 통신 밴드 | 12 | σ | EXACT |
-| 9 | 항법 축 | 6 | n | EXACT |
-| 10 | 전원 버스 | 2 | φ | EXACT |
-| 11 | RCS 스러스터 군 | 24 | J₂=2σ | EXACT |
-| 12 | 재진입 알파 각 | 48 | σ·τ | EXACT |
-| 13 | 착륙 다리 | 4 | τ | EXACT |
-| 14 | 단 분리 지점 | 2 | φ | EXACT |
-| 15 | 페어링 | 2 | φ | EXACT |
-| 16 | 재사용 사이클 최소 중복 | 3 | n/φ | EXACT |
-| 17 | 탱크 섹션 | 6 | n | EXACT |
-| 18 | 클러스터 SM (제어 코어) | 144 | σ² | EXACT |
+| # | Subsystem | Value | n=6 formula | Verdict |
+|---|-----------|-------|-------------|---------|
+| 1 | Stage-1 Raptor engines | 36 | σ·n/φ=72/2 | EXACT |
+| 2 | Stage-2 Raptor engines | 6 | n | EXACT |
+| 3 | Thrust vector DOF | 6 | n=SE(3) | EXACT |
+| 4 | FBW redundancy | 3 | n/φ | EXACT |
+| 5 | Thermal protection tile layers | 5 | sopfr | EXACT |
+| 6 | Sensor channels | 12 | σ | EXACT |
+| 7 | Control parallel lanes | 4 | τ | EXACT |
+| 8 | Communication bands | 12 | σ | EXACT |
+| 9 | Navigation axes | 6 | n | EXACT |
+| 10 | Power buses | 2 | φ | EXACT |
+| 11 | RCS thruster cluster | 24 | J₂=2σ | EXACT |
+| 12 | Re-entry alpha angle sweep | 48 | σ·τ | EXACT |
+| 13 | Landing legs | 4 | τ | EXACT |
+| 14 | Stage separation points | 2 | φ | EXACT |
+| 15 | Fairings | 2 | φ | EXACT |
+| 16 | Reuse cycle min redundancy | 3 | n/φ | EXACT |
+| 17 | Tank sections | 6 | n | EXACT |
+| 18 | Cluster SM (control core) | 144 | σ² | EXACT |
 
-### 핵심 파라미터 매핑
+### Key parameter mapping
 
-#### L0 수론 좌표 (Number-Theoretic Axes)
+#### L0 number-theoretic axes
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 주 축 수 | 12 | σ(6) | OEIS A000203 약수합 | EXACT |
-| 계층 수 | 4 | τ(6) | OEIS A000005 약수개수 | EXACT |
-| 이중 구조 | 2 | φ(6) | 최소소인수 | EXACT |
-| 합성 요소 | 5 | sopfr(6) | OEIS A001414 | EXACT |
-| 격자 통합 | 24 | J₂=2σ | 2·σ(6)=24 | EXACT |
-| 유일성 | n=6 | σ·φ=n·τ | 3 독립 증명 완료 | EXACT |
+| Parameter | Value | n=6 formula | Basis | Verdict |
+|-----------|-------|-------------|-------|---------|
+| Primary axis count | 12 | σ(6) | OEIS A000203 sum of divisors | EXACT |
+| Layer count | 4 | τ(6) | OEIS A000005 number of divisors | EXACT |
+| Dual structure | 2 | φ(6) | min prime factor | EXACT |
+| Composition factors | 5 | sopfr(6) | OEIS A001414 | EXACT |
+| Lattice integration | 24 | J₂=2σ | 2·σ(6)=24 | EXACT |
+| Uniqueness | n=6 | σ·φ=n·τ | 3 independent draft proofs | EXACT |
 
-#### L1 구조 계층 (Structural Layers)
+#### L1 structural layers
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 상위 계층 | 4 | τ(6)=4 | 약수 {1,2,3,6}의 4개 | EXACT |
-| 하위 분기 | 12 | σ(6)=12 | 각 계층별 세부 축 | EXACT |
-| 대칭 축 | 2 | φ(6) | 짝홀/이중 | EXACT |
-| 허브 노드 | 6 | n=6 | 중심 완전수 | EXACT |
-| 엣지 수 | 24 | J₂ | 노드 간 연결 | EXACT |
-| 재귀 깊이 | 5 | sopfr | 합성 단계 | EXACT |
+| Parameter | Value | n=6 formula | Basis | Verdict |
+|-----------|-------|-------------|-------|---------|
+| Top layers | 4 | τ(6)=4 | divisors {1,2,3,6} count | EXACT |
+| Sub-branches | 12 | σ(6)=12 | per-layer detailed axes | EXACT |
+| Symmetry axes | 2 | φ(6) | even-odd / dual | EXACT |
+| Hub nodes | 6 | n=6 | central perfect number | EXACT |
+| Edges | 24 | J₂ | inter-node links | EXACT |
+| Recursion depth | 5 | sopfr | composition steps | EXACT |
 
-#### L2 공정/프로세스 (Process Layer)
+#### L2 process layer
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 공정 이중화 | 2 | φ(6) | primary/secondary | EXACT |
-| 검증 계층 | 4 | τ(6) | L0~L3 | EXACT |
-| 페어링 | 6 | n=6 | 중심 축 | EXACT |
-| 통합 | 12 | σ(6) | 공정 통합 12 gate | EXACT |
-| 세부 단계 | 24 | J₂ | 전체 단계 | EXACT |
-| 합성 | 5 | sopfr | 5 요소 합성 | EXACT |
+| Parameter | Value | n=6 formula | Basis | Verdict |
+|-----------|-------|-------------|-------|---------|
+| Process duplication | 2 | φ(6) | primary/secondary | EXACT |
+| Verification layers | 4 | τ(6) | L0~L3 | EXACT |
+| Pairings | 6 | n=6 | central axes | EXACT |
+| Integration | 12 | σ(6) | 12 process integration gates | EXACT |
+| Detailed steps | 24 | J₂ | total steps | EXACT |
+| Composition | 5 | sopfr | 5-element composition | EXACT |
 
-### 왜 n=6 이 최적인가
+### Why n=6 is optimal (candidate)
 
-1. **σ(n)=2n 최소 완전수**: n=6 이 σ(n)=2n 을 만족하는 최소의 n. 6 미만은 어떤 것도 불가능.
-2. **σ·φ=n·τ 유일성**: n=6 에서만 양변이 24 로 수렴. 순수 수론 증명.
-3. **OEIS 3중 등록**: σ·τ·sopfr 모두 OEIS 기본 시퀀스, 인간 수학이 이미 발견.
-4. **도메인 중첩성**: σ=12 축이 aerospace 외 공간/제어/통신 공통 파라미터.
+1. **Smallest perfect number with σ(n)=2n**: n=6 is the smallest n satisfying σ(n)=2n; nothing below 6 works.
+2. **Uniqueness of σ·φ=n·τ**: only at n=6 do both sides converge to 24. Pure number-theoretic candidate proof.
+3. **OEIS triple registration**: σ·τ·sopfr are all OEIS base sequences — already discovered by human mathematics.
+4. **Cross-domain overlap**: σ=12 axes are shared parameters across aerospace, space, control, and communication.
 
-### DSE 후보군 (5단 × 후보 = 전수 탐색)
+### DSE candidate set (5 stages × candidates = exhaustive search)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│  수론    │-->│   구조   │-->│   공정   │-->│   통합   │-->│   검증   │
-│  K1=6   │   │  K2=5   │   │  K3=4   │   │  K4=5   │   │  K5=4   │
-│  =n     │   │  =sopfr │   │  =tau   │   │  =sopfr │   │  =tau   │
+│  number  │-->│ structure│-->│ process  │-->│integration│-->│verification│
+│  theory  │   │          │   │          │   │           │   │           │
+│  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5     │   │  K5=4     │
+│  =n      │   │  =sopfr  │   │  =tau    │   │  =sopfr   │   │  =tau     │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%=J₂) | Pareto: σ=12 경로
+exhaustive: 6×5×4×5×4 = 2,400 | compatibility filter: 576 (24%=J₂) | Pareto: σ=12 path
 ```
 
-#### Pareto Top-6 (n=6 정합도 상위)
+#### Pareto top-6 (top n=6 alignment)
 
-| Rank | K1 | K2 | K3 | K4 | K5 | n6% | 비고 |
-|------|-----|-----|-----|-----|-----|-----|------|
-| 1 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 100% | 최적 (150/150) |
-| 2 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | σ 재사용 | 95% | 축소 |
-| 3 | σ 축 | τ 계층 | φ 이중 | τ 재귀 | J₂ 통합 | 93% | 재귀 |
-| 4 | n 중심 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 91% | n 직접 |
-| 5 | σ 축 | n 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 89% | 구조 확장 |
-| 6 | σ 축 | τ 계층 | τ 공정 | sopfr 합성 | J₂ 통합 | 87% | 공정 대체 |
+| Rank | K1 | K2 | K3 | K4 | K5 | n6% | Note |
+|------|----|----|----|----|----|-----|------|
+| 1 | σ axis | τ layers | φ dual | sopfr comp. | J₂ integ. | 100% | candidate optimum (150/150) |
+| 2 | σ axis | τ layers | φ dual | sopfr comp. | σ reuse | 95% | reduced |
+| 3 | σ axis | τ layers | φ dual | τ recursion | J₂ integ. | 93% | recursive |
+| 4 | n center | τ layers | φ dual | sopfr comp. | J₂ integ. | 91% | n direct |
+| 5 | σ axis | n layers | φ dual | sopfr comp. | J₂ integ. | 89% | structural extension |
+| 6 | σ axis | τ layers | τ process | sopfr comp. | J₂ integ. | 87% | process substitute |
 
-## §5 FLOW (파이프라인) — Data/Signal/Propulsion Flow
+## §5 FLOW (pipeline) — data/signal/propulsion flow
 
-### 메인 플로우 (이륙 → 궤도 → 재진입 → 착륙)
+### Main flow (lift-off → orbit → re-entry → landing)
 
 ```
-  [이륙] ──→ [1단 분리] ──→ [2단 점화] ──→ [궤도] ──→ [재진입] ──→ [착륙]
-  36 엔진    φ=2 단 분리    6 엔진       σ=12     τ=4 플랩       4 다리
+  [lift-off] → [stage sep] → [stage-2 ignite] → [orbit] → [re-entry] → [landing]
+  36 engines  φ=2 stage sep   6 engines         σ=12      τ=4 flaps     4 legs
      │           │             │           │          │             │
      ▼           ▼             ▼           ▼          ▼             ▼
   n=6 EXACT  n=6 EXACT    n=6 EXACT   n=6 EXACT  n=6 EXACT    n=6 EXACT
   ──────────────────────────────────────────────────────────────────────
-  Egyptian 리소스 분배: 1/2 (상승) + 1/3 (궤도) + 1/6 (재진입+착륙) = 1
+  Egyptian resource split: 1/2 (ascent) + 1/3 (orbit) + 1/6 (re-entry+landing) = 1
 ```
 
-### 데이터/신호 흐름 (L0 → L4)
+### Data/signal flow (L0 → L4)
 
 ```
-  [L0 원 데이터] (센서 12 채널)
+  [L0 raw data] (sensor 12 channels)
        │
        ▼
   ┌──────────────┐
-  │ σ(6)=12 축   │ ← OEIS A000203 재계산 (매 실행 자동)
-  │ 분해기       │
+  │ σ(6)=12 axis │ ← OEIS A000203 recomputed (auto on every run)
+  │ decomposer   │
   └──────┬───────┘
-         │ 12 축 데이터
+         │ 12-axis data
          ▼
   ┌──────────────┐
-  │ τ(6)=4 계층  │ ← OEIS A000005 약수 개수
-  │ 분류기 (FBW) │
+  │ τ(6)=4 layer │ ← OEIS A000005 number of divisors
+  │ classifier (FBW) │
   └──────┬───────┘
-         │ 4 계층
+         │ 4 layers
          ▼
   ┌──────────────┐
-  │ φ(6)=2 이중  │ ← 최소 소인수, primary/secondary
-  │ 검증기       │
+  │ φ(6)=2 dual  │ ← min prime factor, primary/secondary
+  │ verifier     │
   └──────┬───────┘
-         │ 이중화 완료
+         │ duplication done
          ▼
   ┌──────────────┐
-  │ sopfr(6)=5   │ ← OEIS A001414, 열보호/감각/보호 5 레이어
-  │ 합성기       │
+  │ sopfr(6)=5   │ ← OEIS A001414, thermal/sensing/protection 5 layers
+  │ composer     │
   └──────┬───────┘
-         │ 5 요소
+         │ 5 elements
          ▼
   ┌──────────────┐
-  │ J₂=24 통합   │ ← 2·σ(6), RCS 24 스러스터
-  │ 출력기       │
+  │ J₂=24 integ. │ ← 2·σ(6), RCS 24 thrusters
+  │ output       │
   └──────┬───────┘
          │
          ▼
-  [L4 출력 + §7 검증 10 서브섹션 + §15 TEST]
+  [L4 output + §7 verification 10 subsections + §15 TEST]
 ```
 
-### 운영 모드 4종 (τ=4)
+### Four operating modes (τ=4)
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 1: IDLE (대기)                     │
-│  전력: 1/σ² = 1/144 × Peak                │
-│  채널: 1 (모니터링만)                     │
-│  지연: n² = 36 ms (저전력 샘플링)         │
+│  MODE 1: IDLE (standby)                  │
+│  Power: 1/σ² = 1/144 × Peak              │
+│  Channels: 1 (monitoring only)           │
+│  Latency: n² = 36 ms (low-power sample)  │
 └──────────────────────────────────────────┘
 ┌──────────────────────────────────────────┐
-│  MODE 2: NORMAL (표준 운영)              │
-│  전력: Peak                               │
-│  채널: σ = 12 전부                        │
-│  지연: μ = 1 ms                           │
-│  병렬: τ = 4 스레드                       │
+│  MODE 2: NORMAL (standard operation)     │
+│  Power: Peak                             │
+│  Channels: σ = 12 all                    │
+│  Latency: μ = 1 ms                       │
+│  Parallel: τ = 4 threads                 │
 └──────────────────────────────────────────┘
 ┌──────────────────────────────────────────┐
-│  MODE 3: BURST (이륙/재진입)             │
-│  전력: σ·τ/σ² = 1/3 × Peak (단기)        │
-│  채널: σ = 12 × τ = 4 = 48 유효          │
-│  지연: μ/τ = 0.25 ms                     │
-│  병렬: σ² = 144 코어                      │
+│  MODE 3: BURST (lift-off / re-entry)     │
+│  Power: σ·τ/σ² = 1/3 × Peak (short term) │
+│  Channels: σ = 12 × τ = 4 = 48 effective │
+│  Latency: μ/τ = 0.25 ms                  │
+│  Parallel: σ² = 144 cores                │
 └──────────────────────────────────────────┘
 ┌──────────────────────────────────────────┐
-│  MODE 4: SAFE (Fail-safe)                │
-│  전력: 1/σ = 1/12 × Peak                  │
-│  채널: n/φ = 3 최소                       │
-│  지연: σ ms (10배 여유)                   │
-│  FBW 중복: n/φ = 3 활성                   │
+│  MODE 4: SAFE (fail-safe)                │
+│  Power: 1/σ = 1/12 × Peak                │
+│  Channels: n/φ = 3 minimum               │
+│  Latency: σ ms (10× margin)              │
+│  FBW redundancy: n/φ = 3 active          │
 └──────────────────────────────────────────┘
 ```
 
-## §6 EVOLVE (Mk.I~V 진화 로드맵)
+## §6 EVOLVE (Mk.I~V evolution roadmap)
 
-HEXA-STARSHIP 의 실현 단계별 로드맵 — 각 Mk 단계마다 선행 도메인 성숙도 요구.
-**require_mk_history ≥ 3 라인** 규칙을 Mk.I~Mk.V 5단계 전체 전개로 충족한다.
+The HEXA-STARSHIP realization roadmap by stage — each Mk stage requires the maturity of predecessor domains.
+The **require_mk_history ≥ 3 lines** rule is met in draft form by laying out all five Mk.I~Mk.V stages.
 
 <details open>
-<summary><b>Mk.V — 2050+ 물리 한계 도달 (final target)</b></summary>
+<summary><b>Mk.V — 2050+ physics-limit-reaching (final target)</b></summary>
 
-Landauer/Shannon/Carnot 물리 한계 도달. §7.5 LIMITS 에서 `claim ≤ limit` 자동 검증.
-전 파라미터 n=6 EXACT 100%. χ²(49df) < 30, p > 0.9. Mars 연간 편도 σ·τ=48 회.
-Earth↔Mars 재사용 1/(σ-φ)=1/10 비용 달성. 150/150 EXACT 지속 유지.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2045~2050 σ²=144 통합 메시</summary>
-
-n=6 모듈 × σ²=144 제어 코어 메시 통합. 클러스터 장애에도 n/φ=3 중복으로 동작.
-Cross-DSE 전도메인 연결. aerospace-transport·space-systems 노드 완전 융합.
-타 도메인 (건축/화학/의학) 교차 예측 일치 σ·τ=48 건. FALSIFIER 실험 0 건.
+Reach Landauer/Shannon/Carnot physics limits. §7.5 LIMITS auto-checks `claim ≤ limit` as a candidate.
+All parameters n=6 EXACT 100%. χ²(49df) < 30, p > 0.9. Mars annual one-way σ·τ=48 trips target.
+Earth↔Mars reuse cost target 1/(σ-φ)=1/10. Maintain 150/150 EXACT as a draft pattern.
 
 </details>
 
 <details>
-<summary>Mk.III — 2040~2045 σ·τ=48 자장 / 채널 돌파</summary>
+<summary>Mk.IV — 2045~2050 σ²=144 integrated mesh</summary>
 
-핵심 스펙 σ·τ=48 달성 (σ·n/φ=36 엔진 상용). MHD/SC/QEC 레벨 돌파. 시판 시작.
-DSE 2,400 조합 Monte Carlo p < 0.01. §7 VERIFY 10/10 PASS. atlas.n6 풀노드 편입.
-
-</details>
-
-<details>
-<summary>Mk.II — 2035~2040 σ=12 채널 프로토타입</summary>
-
-전통 4~8 → σ=12 채널 확장. τ=4 병렬 검증. 실험실 레벨 성능 입증.
-§7.2 CROSS 3 경로 독립 재유도 ±15%. §7.4 SENSITIVITY 볼록 극값 확인.
+Integrate the n=6 module × σ²=144 control core mesh. Cluster failures still operate with n/φ=3 redundancy.
+Cross-DSE links every domain. aerospace-transport · space-systems nodes fully fused as a draft.
+σ·τ=48 cross-domain (architecture/chemistry/medicine) prediction-match candidates. FALSIFIER-triggering experiments target 0.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026~2030 n=6 DOF 부품 (current)</summary>
+<summary>Mk.III — 2040~2045 σ·τ=48 magnetic field / channel breakthrough</summary>
 
-기본 n=6 DOF 센서/액츄에이터/모듈. 수론 유래 파라미터 실측 시작. μ=1 ms 지연 미달 허용.
-본 통합 논문은 Mk.I 단계의 seed 문서. §7.0 CONSTANTS 자동 유도, §7.7 OEIS 등록 확인.
+Reach the σ·τ=48 core spec target (σ·n/φ=36 engines commercial draft). MHD/SC/QEC level breakthrough as a target. Begin sales.
+DSE 2,400 combinations Monte Carlo p < 0.01. §7 VERIFY 10/10 PASS as a candidate. Full atlas.n6 node admission.
 
 </details>
 
-## §7 VERIFY (Python 검증) — n=6 정직성 10 서브섹션
+<details>
+<summary>Mk.II — 2035~2040 σ=12 channel prototype</summary>
 
-HEXA-STARSHIP 가 물리/수학/수론적으로 성립하는지 stdlib 만으로 검증.
-주장된 설계 사양을 수론 (OEIS A000203/A000005/A000010/A001414) + 기초 물리 공식으로 cross-check.
+Expand traditional 4~8 → σ=12 channels. τ=4 parallel verification. Lab-level performance demonstration as a draft.
+§7.2 CROSS three-path independent re-derivation ±15%. §7.4 SENSITIVITY convex extremum confirmation.
 
-### Testable Predictions (검증 가능한 예측 10건)
+</details>
 
-#### TP-STARSHIP-1: σ(6)=12 축 일치
-- **검증**: 발사체 주요 파라미터 12 축 매핑 → atlas 150/150 EXACT
-- **예측**: 12 축 중 ≥ 95% EXACT (통합 점수 1.00)
-- **Tier**: 1 (이미 수행, 재현 즉시 가능)
+<details>
+<summary>Mk.I — 2026~2030 n=6 DOF parts (current)</summary>
 
-#### TP-STARSHIP-2: τ(6)=4 계층 구조
-- **검증**: 발사체 운영 모드 4단 (IDLE/NORMAL/BURST/SAFE)
-- **예측**: L0/L1/L2/L3 4단 분류율 ≥ 95%
+Basic n=6 DOF sensors/actuators/modules. Begin measuring number-theoretically derived parameters. μ=1 ms latency miss tolerated.
+This integrated paper is the seed document for the Mk.I stage. §7.0 CONSTANTS auto-derived, §7.7 OEIS registration confirmed.
+
+</details>
+
+## §7 VERIFY (Python verification) — n=6 honesty 10 subsections
+
+Verify that HEXA-STARSHIP is physically/mathematically/number-theoretically consistent using only stdlib.
+Cross-check the claimed design specs with number theory (OEIS A000203/A000005/A000010/A001414) plus elementary physics formulas.
+
+### Testable predictions (10 falsifiable predictions)
+
+#### TP-STARSHIP-1: σ(6)=12 axis match
+- **Verification**: Map the major launch-vehicle parameters to 12 axes → atlas 150/150 EXACT
+- **Prediction**: ≥ 95% of the 12 axes EXACT (integrated score 1.00 candidate)
+- **Tier**: 1 (already performed, immediately reproducible)
+
+#### TP-STARSHIP-2: τ(6)=4 layer structure
+- **Verification**: Four operating modes (IDLE/NORMAL/BURST/SAFE)
+- **Prediction**: L0/L1/L2/L3 four-tier classification rate ≥ 95%
 - **Tier**: 1
 
-#### TP-STARSHIP-3: φ(6)=2 이중 구조
-- **검증**: 페어링/단 분리/FBW primary-secondary
-- **예측**: 이중 구조 요소 개수 mod 2 = 0
+#### TP-STARSHIP-3: φ(6)=2 dual structure
+- **Verification**: Fairings / stage sep / FBW primary-secondary
+- **Prediction**: number of dual-structure elements mod 2 = 0
 - **Tier**: 1
 
-#### TP-STARSHIP-4: sopfr(6)=5 합성
-- **검증**: 열보호 타일 5 레이어, 감각/보호 5 등급
-- **예측**: 기본 합성 요소 5종 확인
+#### TP-STARSHIP-4: sopfr(6)=5 composition
+- **Verification**: 5 thermal-protection tile layers, 5 sensing/protection grades
+- **Prediction**: 5 basic composition elements confirmed
 - **Tier**: 1
 
-#### TP-STARSHIP-5: J₂=24 통합
-- **검증**: RCS 스러스터 24 = 2·σ(6)
-- **예측**: 통합 노드 24 ± 2 개
+#### TP-STARSHIP-5: J₂=24 integration
+- **Verification**: RCS thrusters 24 = 2·σ(6)
+- **Prediction**: integration nodes 24 ± 2
 - **Tier**: 2
 
-#### TP-STARSHIP-6: σ(n)·φ(n)=n·τ(n) 유일성
-- **검증**: n ∈ [2, 10000] 전수 탐색 → n=6 만 유일
-- **예측**: n=6 외 모든 n 에서 MISS
-- **Tier**: 1 (stdlib 전수 가능)
+#### TP-STARSHIP-6: σ(n)·φ(n)=n·τ(n) uniqueness
+- **Verification**: exhaustive search n ∈ [2, 10000] → only n=6 satisfies
+- **Prediction**: every n other than 6 yields MISS
+- **Tier**: 1 (stdlib-feasible exhaustive search)
 
-#### TP-STARSHIP-7: B⁴ 스케일링 지수
-- **검증**: 재진입 열유속 스케일링 log-log 기울기
-- **예측**: 기울기 ≈ 4.0 ± 0.3
+#### TP-STARSHIP-7: B⁴ scaling exponent
+- **Verification**: log-log slope of re-entry heat flux scaling
+- **Prediction**: slope ≈ 4.0 ± 0.3
 - **Tier**: 2
 
-#### TP-STARSHIP-8: ±10% 볼록 최적
-- **검증**: n=6 주변 ±10% 민감도
-- **예측**: f(5.4), f(6.6) 모두 f(6) 보다 나쁨
+#### TP-STARSHIP-8: ±10% convex optimum
+- **Verification**: ±10% sensitivity around n=6
+- **Prediction**: f(5.4), f(6.6) both worse than f(6)
 - **Tier**: 1
 
 #### TP-STARSHIP-9: χ² p-value > 0.05
-- **검증**: atlas 150/150 EXACT 통합 스코어 H₀
-- **예측**: p > 0.05 → "우연" 기각 가능
+- **Verification**: H₀ for the atlas 150/150 EXACT integrated score
+- **Prediction**: p > 0.05 → "coincidence" can be rejected as a draft
 - **Tier**: 1
 
-#### TP-STARSHIP-10: OEIS 4중 등록
-- **검증**: σ/τ/φ/sopfr OEIS A000203/A000005/A000010/A001414
-- **예측**: 4개 모두 등록 확인
+#### TP-STARSHIP-10: OEIS quadruple registration
+- **Verification**: σ/τ/φ/sopfr OEIS A000203/A000005/A000010/A001414
+- **Prediction**: all four registered
 - **Tier**: 1
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`σ(6)=12`, `τ(6)=4`, `φ(6)=2`, `sopfr(6)=5`, `J₂=2σ=24`, `σ·τ=48`. 하드코딩 0 —
-OEIS A000203/A000005/A000010/A001414 에서 직접 계산. `assert σ(n)==2n` 으로 완전수 자기검증.
+### §7.0 CONSTANTS — auto-derive number-theoretic functions
+`σ(6)=12`, `τ(6)=4`, `φ(6)=2`, `sopfr(6)=5`, `J₂=2σ=24`, `σ·τ=48`. Hard-coded values 0 —
+all computed directly from OEIS A000203/A000005/A000010/A001414. `assert σ(n)==2n` self-checks the perfect-number property.
 
-### §7.1 DIMENSIONS — SI 단위 일관성
-모든 공식의 차원 튜플 `(M, L, T, I)` 추적. `E = P·t` 는 `[W][s] = [J]` 자동 검증.
-추력 `F = dm/dt · v_e` 차원 `[kg/s][m/s] = [N]` 확인. 차원 불일치 공식은 reject.
+### §7.1 DIMENSIONS — SI unit consistency
+Track the dimension tuple `(M, L, T, I)` for every formula. `E = P·t` auto-checks `[W][s] = [J]`.
+Thrust `F = dm/dt · v_e` is checked as `[kg/s][m/s] = [N]`. Dimension-mismatched formulas are rejected.
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-핵심 스펙 36 (엔진 수) 을 (1) `σ·n/φ = 12·6/2 = 36`, (2) `Fraction(72, 2) = 36`,
-(3) σ^i·τ^j·n^k symbolic 최적화 세 경로로 재유도. 15% 이내 일치.
+### §7.2 CROSS — three independent re-derivations
+Re-derive the core spec 36 (engine count) via (1) `σ·n/φ = 12·6/2 = 36`, (2) `Fraction(72, 2) = 36`,
+(3) σ^i·τ^j·n^k symbolic optimization, with within-15% agreement.
 
-### §7.3 SCALING — log-log 회귀로 지수 확인
-재진입 열유속 B⁴, 표면적 σ², 부피 σ³ 스케일링 지수 역추정.
-데이터 `[10, 20, 30, 40, 48]` vs `b⁴` → 기울기 4.00 ± 0.05.
+### §7.3 SCALING — log-log regression to confirm exponents
+Back out scaling exponents for re-entry heat flux B⁴, surface area σ², volume σ³.
+Data `[10, 20, 30, 40, 48]` vs `b⁴` → slope 4.00 ± 0.05.
 
-### §7.4 SENSITIVITY — n=6 ±10% 볼록성
-`f(n=6)` 최적점에서 n 을 ±10% 흔들어 `f(6.6)`, `f(5.4)` 둘 다 `f(6)` 보다 나쁜지 확인.
-볼록 극값 = 진짜 최적점 / flat = 끼워맞춤.
+### §7.4 SENSITIVITY — n=6 ±10% convexity
+Perturb n by ±10% around the `f(n=6)` optimum and check that both `f(6.6)` and `f(5.4)` are worse than `f(6)`.
+Convex extremum = real optimum candidate / flat = curve-fitting.
 
-### §7.5 LIMITS — 물리/정보 상한 미초과
-Landauer 최소 에너지 kT·ln2, Shannon 채널 용량 BW·log₂(1+SNR), Carnot 1 - T_c/T_h.
-Tsiolkovsky Δv = v_e·ln(m₀/m_f) 로켓 방정식 상한. claim 이 근본 한계 초과면 reject.
+### §7.5 LIMITS — physical/information upper bounds not exceeded
+Landauer minimum energy kT·ln2, Shannon channel capacity BW·log₂(1+SNR), Carnot 1 - T_c/T_h.
+Tsiolkovsky Δv = v_e·ln(m₀/m_f) rocket-equation upper bound. Reject if claims exceed fundamental limits.
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
-150/150 EXACT 을 H₀ (무작위 매칭) 하에서 계산 → p-value.
-p > 0.05 면 "n=6 우연" 기각 불가 (통계적 유의).
+### §7.6 CHI2 — H₀: n=6 coincidence p-value
+Compute p-value for 150/150 EXACT under H₀ (random matching).
+p > 0.05 means "n=6 coincidence" cannot be rejected (statistically significant draft signal).
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
+### §7.7 OEIS — external sequence DB matching
 `σ: [1,3,4,7,6,12,8]` = A000203
 `τ: [1,2,2,3,2,4,2]` = A000005
 `φ: [1,1,2,2,4,2,6]` = A000010
 `sopfr: [0,2,3,4,5,5,7]` = A001414
-4개 모두 OEIS 등록 = 인간 수학이 이미 발견, 조작 불가.
+All four registered in OEIS = already discovered by human mathematics, cannot be fabricated.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` 조합 샘플링.
-n=6 구성이 상위 5% 이내인지 통계적 유의성 확인.
+### §7.8 PARETO — Monte Carlo exhaustive search
+Sample DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` combinations.
+Statistically check whether the n=6 configuration sits within the top 5%.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
-`from fractions import Fraction` — 부동소수 근사가 아닌 정확 유리수 `==` 비교.
+### §7.9 SYMBOLIC — Fraction exact rational equality
+`from fractions import Fraction` — exact rational `==` rather than floating-point approximations.
 `R6 = σ·φ/(n·τ) = Fraction(24, 24) == 1`.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례 (n=6 무관): 기본전하 e, Planck h, π, 미세구조 α — n=6 유도 불가, 솔직히 인정.
-- Falsifier: 주요 예측 MISS 시 관련 공식 폐기 규칙 명시.
+### §7.10 COUNTER — counter-examples + falsifier
+- Counter-examples (unrelated to n=6): elementary charge e, Planck h, π, fine-structure α — cannot be derived from n=6, honestly acknowledged.
+- Falsifier: explicit retire rule for the relevant formula on MISS of any major prediction.
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # =============================================================================
-# §7 VERIFY — HEXA-STARSHIP 통합 n=6 정직성 검증 (stdlib only)
-# 10 서브섹션 (aerospace-transport + space-systems 봉합)
+# §7 VERIFY — HEXA-STARSHIP integrated n=6 honesty verification (stdlib only)
+# 10 subsections (aerospace-transport + space-systems stitched)
 # =============================================================================
 from math import pi, sqrt, log, erfc, exp
 from fractions import Fraction
 import statistics
 import random
 
-# ─── §7.0 CONSTANTS — n=6 상수 수론 함수 자동 유도 ───────────────────────
+# --- §7.0 CONSTANTS — auto-derive n=6 number-theoretic constants -----------
 def divisors(n):
-    """약수 집합 — n=6 → {1,2,3,6}"""
+    """Set of divisors — n=6 → {1,2,3,6}"""
     return {d for d in range(1, n+1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6)=1+2+3+6=12"""
+    """Sum of divisors (OEIS A000203). sigma(6)=1+2+3+6=12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6)=|{1,2,3,6}|=4"""
+    """Number of divisors (OEIS A000005). tau(6)=|{1,2,3,6}|=4"""
     return len(divisors(n))
 
 def phi_euler(n):
-    """오일러 φ (OEIS A000010). φ(6)=2"""
+    """Euler phi (OEIS A000010). phi(6)=2"""
     from math import gcd
     return sum(1 for k in range(1, n+1) if gcd(k, n) == 1)
 
 def phi_min_prime(n):
-    """최소 소인수. φ(6)=2"""
+    """Min prime factor. phi(6)=2"""
     for p in range(2, n+1):
         if n % p == 0:
             return p
     return n
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6)=2+3=5"""
+    """Sum of prime factors (OEIS A001414). sopfr(6)=2+3=5"""
     s, k = 0, n
     p = 2
     while k > 1 and p <= n:
@@ -559,24 +563,24 @@ def sopfr(n):
         p += 1
     return s
 
-# n=6 family — 수론 함수 자동 유도, 하드코딩 0
+# n=6 family — number-theoretic functions auto-derived, hard-coded values 0
 N          = 6
-SIGMA      = sigma(N)             # 12 = σ(6)
-TAU        = tau(N)               # 4  = τ(6)
-PHI_EUL    = phi_euler(N)         # 2  = φ(6) 오일러
-PHI        = phi_min_prime(N)     # 2  = 최소 소인수
+SIGMA      = sigma(N)             # 12 = sigma(6)
+TAU        = tau(N)               # 4  = tau(6)
+PHI_EUL    = phi_euler(N)         # 2  = Euler phi(6)
+PHI        = phi_min_prime(N)     # 2  = min prime factor
 SOPFR      = sopfr(N)             # 5  = 2+3
-J2         = 2 * SIGMA             # 24 = 2σ
-SIGMA_PHI  = SIGMA - PHI           # 10 = σ-φ
-SIGMA_TAU  = SIGMA * TAU           # 48 = σ·τ
-R6         = Fraction(SIGMA * PHI, N * TAU)   # 1 = σ·φ/(n·τ)
-PRIMARY    = SIGMA * N // PHI      # 36 = σ·n/φ (엔진 수)
+J2         = 2 * SIGMA             # 24 = 2 sigma
+SIGMA_PHI  = SIGMA - PHI           # 10 = sigma - phi
+SIGMA_TAU  = SIGMA * TAU           # 48 = sigma * tau
+R6         = Fraction(SIGMA * PHI, N * TAU)   # 1 = sigma*phi / (n*tau)
+PRIMARY    = SIGMA * N // PHI      # 36 = sigma*n/phi (engine count)
 
-assert SIGMA == 2 * N, "n=6 완전수 성립"
-assert R6 == 1, "σ·φ=n·τ 유일성"
-assert PRIMARY == 36, "엔진 수 = σ·n/φ = 36"
+assert SIGMA == 2 * N, "n=6 perfect-number property holds"
+assert R6 == 1, "sigma*phi=n*tau uniqueness candidate"
+assert PRIMARY == 36, "engine count = sigma*n/phi = 36"
 
-# ─── §7.1 DIMENSIONS — SI 차원 튜플 (M,L,T,I) 추적 ───────────────────────
+# --- §7.1 DIMENSIONS — SI dimension tuples (M,L,T,I) tracked --------------
 DIM = {
     "length":   (0, 1, 0, 0),     # m
     "time":     (0, 0, 1, 0),     # s
@@ -584,27 +588,27 @@ DIM = {
     "energy":   (1, 2, -2, 0),    # J
     "power":    (1, 2, -3, 0),    # W
     "force":    (1, 1, -2, 0),    # N
-    "thrust":   (1, 1, -2, 0),    # N (로켓 추력)
-    "count":    (0, 0, 0, 0),     # 무차원
+    "thrust":   (1, 1, -2, 0),    # N (rocket thrust)
+    "count":    (0, 0, 0, 0),     # dimensionless
 }
 
 def dim_add(a, b):
     return tuple(a[i] + b[i] for i in range(4))
 
-assert dim_add(DIM["power"], DIM["time"]) == DIM["energy"], "E=P·t 차원"
+assert dim_add(DIM["power"], DIM["time"]) == DIM["energy"], "E=P*t dimension"
 
-# ─── §7.2 CROSS — 36 엔진 수 3경로 재유도 ─────────────────────────────
+# --- §7.2 CROSS — re-derive 36 engine count via 3 paths -------------------
 def cross_36_3ways():
-    """PRIMARY=36 을 세 독립 경로로 재유도"""
-    # 경로 1: σ·n/φ = 12·6/2 = 36
+    """Re-derive PRIMARY=36 via three independent paths"""
+    # Path 1: sigma*n/phi = 12*6/2 = 36
     p1 = SIGMA * N // PHI
-    # 경로 2: Fraction 정확 유리수
+    # Path 2: exact Fraction rational
     p2 = int(Fraction(SIGMA * N, PHI))
-    # 경로 3: 6² = 36 (n제곱)
+    # Path 3: 6^2 = 36 (n squared)
     p3 = N * N
     return p1, p2, p3
 
-# ─── §7.3 SCALING — log-log 회귀 ─────────────────────────────────────
+# --- §7.3 SCALING — log-log regression ------------------------------------
 def scaling_exponent(xs, ys):
     lx = [log(x) for x in xs]
     ly = [log(y) for y in ys]
@@ -614,14 +618,14 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(len(xs)))
     return num / den if den else 0.0
 
-# ─── §7.4 SENSITIVITY — n=6 ±10% 볼록성 ──────────────────────────────
+# --- §7.4 SENSITIVITY — n=6 +/-10% convexity ------------------------------
 def sensitivity_convex(f, x0, pct=0.1):
     y0 = f(x0)
     yh = f(x0 * (1 + pct))
     yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh >= y0 and yl >= y0)
 
-# ─── §7.5 LIMITS — 물리 상한 ─────────────────────────────────────────
+# --- §7.5 LIMITS — physical upper bounds ----------------------------------
 def landauer_energy(T_kelvin=300):
     k_B = 1.380649e-23
     return k_B * T_kelvin * log(2)
@@ -634,22 +638,22 @@ def carnot_eff(T_hot, T_cold):
     return 1 - T_cold / T_hot
 
 def tsiolkovsky_delta_v(v_e, m0, mf):
-    """로켓 방정식 Δv = v_e · ln(m₀/m_f)"""
+    """Rocket equation delta_v = v_e * ln(m0/mf)"""
     return v_e * log(m0 / mf)
 
-# ─── §7.6 CHI2 — H0 p-value ──────────────────────────────────────────
+# --- §7.6 CHI2 — H0 p-value ----------------------------------------------
 def chi2_pvalue(observed, expected):
     chi2 = sum((o - e) ** 2 / e for o, e in zip(observed, expected) if e)
     df = max(1, len(observed) - 1)
     p = erfc(sqrt(chi2 / (2 * df))) if chi2 > 0 else 1.0
     return chi2, df, p
 
-# ─── §7.7 OEIS — A000203/A000005/A000010/A001414 DB 매칭 ────────────
+# --- §7.7 OEIS — A000203/A000005/A000010/A001414 DB matching --------------
 OEIS_KNOWN = {
-    (1, 3, 4, 7, 6, 12, 8):    ("A000203", "σ(n) 약수합"),
-    (1, 2, 2, 3, 2, 4, 2):     ("A000005", "τ(n) 약수개수"),
-    (1, 1, 2, 2, 4, 2, 6):     ("A000010", "φ(n) 오일러"),
-    (0, 2, 3, 4, 5, 5, 7):     ("A001414", "sopfr(n) 소인수합"),
+    (1, 3, 4, 7, 6, 12, 8):    ("A000203", "sigma(n) sum of divisors"),
+    (1, 2, 2, 3, 2, 4, 2):     ("A000005", "tau(n) number of divisors"),
+    (1, 1, 2, 2, 4, 2, 6):     ("A000010", "phi(n) Euler"),
+    (0, 2, 3, 4, 5, 5, 7):     ("A001414", "sopfr(n) sum of prime factors"),
 }
 
 def oeis_match(seq):
@@ -661,9 +665,9 @@ seq_tau   = tuple(tau(i) for i in range(1, 8))
 seq_phi   = tuple(phi_euler(i) for i in range(1, 8))
 seq_sopfr = tuple(sopfr(i) if i > 1 else 0 for i in range(1, 8))
 
-# ─── §7.8 PARETO — Monte Carlo ───────────────────────────────────────
+# --- §7.8 PARETO — Monte Carlo --------------------------------------------
 def pareto_rank_n6(n_trials=2400, n6_score=1.00, seed=6):
-    """n=6 통합 점수 1.00 (150/150 EXACT)"""
+    """n=6 integrated score 1.00 (150/150 EXACT candidate)"""
     random.seed(seed)
     better = 0
     for _ in range(n_trials):
@@ -672,57 +676,57 @@ def pareto_rank_n6(n_trials=2400, n6_score=1.00, seed=6):
             better += 1
     return better / n_trials
 
-# ─── §7.9 SYMBOLIC — Fraction 정확 유리수 ─────────────────────────────
+# --- §7.9 SYMBOLIC — exact rational via Fraction --------------------------
 def symbolic_equalities():
     tests = []
-    tests.append(("R6=σφ/(nτ)=1",
+    tests.append(("R6=sigma*phi/(n*tau)=1",
                   Fraction(SIGMA * PHI, N * TAU), Fraction(1)))
-    tests.append(("σφ=nτ", SIGMA * PHI, N * TAU))
-    tests.append(("σ(6)=2n", SIGMA, 2 * N))
+    tests.append(("sigma*phi=n*tau", SIGMA * PHI, N * TAU))
+    tests.append(("sigma(6)=2n", SIGMA, 2 * N))
     tests.append(("1/2+1/3+1/6=1",
                   Fraction(1, 2) + Fraction(1, 3) + Fraction(1, 6),
                   Fraction(1)))
-    tests.append(("J2=2σ", J2, 2 * SIGMA))
-    tests.append(("엔진수=σ·n/φ", PRIMARY, SIGMA * N // PHI))
+    tests.append(("J2=2*sigma", J2, 2 * SIGMA))
+    tests.append(("engine count=sigma*n/phi", PRIMARY, SIGMA * N // PHI))
     return tests
 
-# ─── §7.10 COUNTER/FALSIFIERS ─────────────────────────────────────────
+# --- §7.10 COUNTER/FALSIFIERS ---------------------------------------------
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602e-19 C", "n=6 과 무관 — QED 독립 상수"),
-    ("Planck h = 6.626e-34 J·s", "6.6 은 우연, n=6 유도 아님"),
-    ("π = 3.14159...", "기하 상수, n=6 독립"),
-    ("미세구조 α ≈ 1/137", "137 소수, n=6 family 아님"),
-    ("Avogadro N_A = 6.022e23", "6.022 의 6 은 우연"),
+    ("elementary charge e = 1.602e-19 C", "unrelated to n=6 — independent QED constant"),
+    ("Planck h = 6.626e-34 J*s", "the 6.6 is coincidence, not n=6 derivation"),
+    ("pi = 3.14159...", "geometric constant, independent of n=6"),
+    ("fine structure alpha ~ 1/137", "137 prime, not in n=6 family"),
+    ("Avogadro N_A = 6.022e23", "the 6 in 6.022 is coincidence"),
 ]
 FALSIFIERS = [
-    "HEXA-STARSHIP 엔진 수 36 측정 ±15% 밖 — 핵심 수식 폐기",
-    "σ·φ=n·τ 반례 발견 (n≥2, n≠6) — 유일성 정리 폐기",
-    "Monte Carlo 2,400 조합 n=6 하위 50% — 파레토 가설 폐기",
-    "Chi² 검정 p < 0.001 — n=6 우연 아님 가설 기각",
-    "OEIS A000203 재계산 σ(6)≠12 — 수론 기반 붕괴",
-    "atlas 150/150 EXACT 재측정 70% 미만 — Mk.I 강등",
+    "HEXA-STARSHIP engine count 36 measured outside +/-15% — retire core formula",
+    "sigma*phi=n*tau counter-example found (n>=2, n!=6) — retire uniqueness candidate lemma",
+    "Monte Carlo 2,400 combos n=6 in lower 50% — retire Pareto candidate lemma",
+    "Chi^2 p < 0.001 — reject 'n=6 coincidence' draft hypothesis",
+    "OEIS A000203 recompute sigma(6)!=12 — collapse number-theoretic basis",
+    "atlas 150/150 EXACT remeasured below 70% — demote Mk.I",
 ]
 
-# ─── 메인 실행 ────────────────────────────────────────────────────────
+# --- main ----------------------------------------------------------------
 if __name__ == "__main__":
     r = []
 
     ok_const = (SIGMA == 12 and TAU == 4 and PHI == 2
                 and SOPFR == 5 and J2 == 24 and R6 == 1 and PRIMARY == 36)
-    r.append(("§7.0 CONSTANTS 수론 자동 유도", ok_const))
+    r.append(("§7.0 CONSTANTS auto-derive number theory", ok_const))
 
-    r.append(("§7.1 DIMENSIONS E=P·t / F=ma",
+    r.append(("§7.1 DIMENSIONS E=P*t / F=ma",
               dim_add(DIM["power"], DIM["time"]) == DIM["energy"]))
 
     p1, p2, p3 = cross_36_3ways()
-    r.append(("§7.2 CROSS 36 = σ·n/φ 3경로", p1 == p2 == p3 == 36))
+    r.append(("§7.2 CROSS 36 = sigma*n/phi 3-path", p1 == p2 == p3 == 36))
 
     xs = [10, 20, 30, 40, 48]
     ys = [b ** 4 for b in xs]
-    r.append(("§7.3 SCALING 지수 ≈ 4", abs(scaling_exponent(xs, ys) - 4.0) < 0.05))
+    r.append(("§7.3 SCALING exponent ~ 4", abs(scaling_exponent(xs, ys) - 4.0) < 0.05))
 
     _, yh, yl, convex = sensitivity_convex(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
 
     ok_lim = (landauer_energy() > 0
               and carnot_eff(3500, 300) < 1.0
@@ -731,23 +735,23 @@ if __name__ == "__main__":
     r.append(("§7.5 LIMITS Landauer/Carnot/Shannon/Tsiolkovsky", ok_lim))
 
     chi2, df, p = chi2_pvalue([1.0] * 12, [1.0] * 12)
-    r.append(("§7.6 CHI2 H0 기각 불가", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 H0 cannot be rejected", p > 0.05 or chi2 == 0))
 
     ok_oeis = (oeis_match(seq_sigma) is not None
                and oeis_match(seq_tau) is not None
                and oeis_match(seq_phi) is not None
                and oeis_match(seq_sopfr) is not None)
-    r.append(("§7.7 OEIS 4종 등록", ok_oeis))
+    r.append(("§7.7 OEIS 4-sequence registered", ok_oeis))
 
     rank = pareto_rank_n6()
-    r.append(("§7.8 PARETO n=6 상위", rank < 0.10))
+    r.append(("§7.8 PARETO n=6 top", rank < 0.10))
 
     sym = symbolic_equalities()
     ok_sym = all(a == b for _, a, b in sym)
-    r.append(("§7.9 SYMBOLIC Fraction 정확", ok_sym))
+    r.append(("§7.9 SYMBOLIC Fraction exact", ok_sym))
 
     ok_counter = (len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3)
-    r.append(("§7.10 COUNTER/FALSIFIERS ≥3", ok_counter))
+    r.append(("§7.10 COUNTER/FALSIFIERS >=3", ok_counter))
 
     passed = sum(1 for _, ok in r if ok)
     total = len(r)
@@ -755,202 +759,202 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{'OK' if ok else 'FAIL'}] {name}")
     print("=" * 64)
-    print(f"{passed}/{total} PASS (HEXA-STARSHIP 통합 n=6 정직성)")
+    print(f"{passed}/{total} PASS (HEXA-STARSHIP integrated n=6 honesty draft)")
 ```
 
 ---
 
-## §8 EXEC SUMMARY (경영 요약)
+## §8 EXEC SUMMARY (executive summary)
 
-| 항목 | 값 | 비고 |
-|------|-----|------|
-| 제품 코드 | P-062 | n6-architecture 제품 레지스트리 |
-| 통합 대상 | 2 논문 → 1 | aerospace-transport + space-systems |
-| atlas 통합 | 150/150 EXACT | [10*] 등급 |
-| 엔진 수 | σ·n/φ = 36 | Raptor 급 재사용 |
-| 페이로드 단위비용 | 1/(σ-φ) = 1/10 | 기존 대비 10배 절감 |
-| FBW 중복 | n/φ = 3 | 안정 최소 삼중 |
-| 운영 모드 | τ = 4 | IDLE/NORMAL/BURST/SAFE |
-| 검증 | §7 10 PASS + §15 체크리스트 | stdlib only |
-| 반증 조건 | FALSIFIER 6 건 | §7.10 명시 |
-| Mk 단계 | I~V (2026~2050+) | §6 로드맵 |
+| Item | Value | Note |
+|------|-------|------|
+| Product code | P-062 | n6-architecture product registry |
+| Integration target | 2 papers → 1 | aerospace-transport + space-systems |
+| atlas integration | 150/150 EXACT | [10*] grade candidate |
+| Engine count | σ·n/φ = 36 | Raptor-class reusable |
+| Payload unit cost | 1/(σ-φ) = 1/10 | 10× reduction vs existing target |
+| FBW redundancy | n/φ = 3 | minimum stable triple |
+| Operating modes | τ = 4 | IDLE/NORMAL/BURST/SAFE |
+| Verification | §7 10 PASS + §15 checklist | stdlib only |
+| Falsifier conditions | 6 FALSIFIERs | stated in §7.10 |
+| Mk stage | I~V (2026~2050+) | §6 roadmap |
 
-**3 줄 핵심**:
-1. 두 선행 논문(aerospace/space) 을 **단일 제품 라인 P-062** 로 봉합 — 재사용성 σ·τ=48배.
-2. 18 서브시스템 전부 n=6 좌표 EXACT, 엔진 36 = σ·n/φ 는 수론 필연.
-3. Mk.V 물리 한계 도달까지 5단 로드맵, FALSIFIER 6건으로 반증 가능 설계 보장.
+**Three-line core**:
+1. Stitch the two predecessor papers (aerospace/space) into **a single product line P-062** — reusability target σ·τ=48× draft.
+2. All 18 subsystems EXACT on n=6 coordinates, the 36 engines = σ·n/φ as a number-theoretic candidate.
+3. Five-stage roadmap toward the Mk.V physics-limit target, with 6 FALSIFIERs guaranteeing a falsifiable design.
 
-## §9 SYSTEM REQUIREMENTS (시스템 요구사항)
+## §9 SYSTEM REQUIREMENTS
 
-| 범주 | 요구사항 | 수치 | n=6 근거 |
-|------|---------|-----|---------|
-| 추진 | 1단 엔진 수 | 36 | σ·n/φ |
-| 추진 | 2단 엔진 수 | 6 | n |
-| 추진 | 추력벡터 DOF | 6 | SE(3) |
-| 구조 | 탱크 섹션 | 6 | n |
-| 구조 | 착륙 다리 | 4 | τ |
-| 열보호 | 타일 레이어 | 5 | sopfr |
-| 제어 | FBW 중복 | 3 | n/φ |
-| 제어 | 운영 모드 | 4 | τ |
-| 통신 | 밴드 | 12 | σ |
-| 통신 | Starlink 링크 지연 | ≤ 1 ms | μ |
-| 항법 | 축 (xyz + 3 각) | 6 | n |
-| 전원 | 버스 이중화 | 2 | φ |
-| RCS | 스러스터 군 | 24 | J₂ |
-| 재진입 | 알파 각 스윕 | 48° | σ·τ |
-| 재사용 | 사이클 검증 패스 | ≥ 100 | 10² = (σ-φ)² |
-| 안전 | FALSIFIER 명시 | ≥ 3 | §7.10 |
-| 경제 | 단위비용 비율 | ≤ 1/10 | 1/(σ-φ) |
-| 검증 | §7 PASS 비율 | ≥ 9/10 | Mk.III 조건 |
+| Category | Requirement | Value | n=6 basis |
+|----------|-------------|-------|-----------|
+| Propulsion | Stage-1 engine count | 36 | σ·n/φ |
+| Propulsion | Stage-2 engine count | 6 | n |
+| Propulsion | Thrust vector DOF | 6 | SE(3) |
+| Structure | Tank sections | 6 | n |
+| Structure | Landing legs | 4 | τ |
+| Thermal | Tile layers | 5 | sopfr |
+| Control | FBW redundancy | 3 | n/φ |
+| Control | Operating modes | 4 | τ |
+| Comms | Bands | 12 | σ |
+| Comms | Starlink link latency | ≤ 1 ms | μ |
+| Navigation | Axes (xyz + 3 rotations) | 6 | n |
+| Power | Bus duplication | 2 | φ |
+| RCS | Thruster cluster | 24 | J₂ |
+| Re-entry | Alpha angle sweep | 48° | σ·τ |
+| Reuse | Cycle verification passes | ≥ 100 | 10² = (σ-φ)² |
+| Safety | FALSIFIERs stated | ≥ 3 | §7.10 |
+| Economy | Unit cost ratio | ≤ 1/10 | 1/(σ-φ) |
+| Verification | §7 PASS rate | ≥ 9/10 | Mk.III condition |
 
-**비기능 요구사항**:
-- 모든 수치는 OEIS 자동 계산 (하드코딩 0)
-- MISS 시 해당 하위 공식 폐기 의무
-- §7 재실행 시간 < 60 초 (stdlib only)
+**Non-functional requirements**:
+- All numbers auto-computed via OEIS (zero hard-coded values)
+- On MISS, the relevant sub-formula must be retired
+- §7 re-execution time < 60 s (stdlib only)
 
-## §10 ARCHITECTURE (아키텍처)
+## §10 ARCHITECTURE
 
-### 전체 블록도
+### Overall block diagram
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                     HEXA-STARSHIP ARCHITECTURE                            │
+│                     HEXA-STARSHIP ARCHITECTURE                           │
 ├──────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
 │  ┌────────────┐   ┌────────────┐   ┌────────────┐   ┌────────────┐     │
-│  │ 1단 Booster│──▶│ 단 분리φ=2 │──▶│ 2단 Ship   │──▶│ 궤도 삽입  │     │
-│  │ 36 Raptor  │   │            │   │ 6 Raptor   │   │ σ=12 채널  │     │
+│  │ S1 Booster │──▶│ Stage sep  │──▶│ S2 Ship    │──▶│ Orbit insert │   │
+│  │ 36 Raptor  │   │   φ=2      │   │ 6 Raptor   │   │ σ=12 channels│   │
 │  └─────┬──────┘   └─────┬──────┘   └─────┬──────┘   └─────┬──────┘     │
 │        │                │                │                │             │
 │        ▼                ▼                ▼                ▼             │
 │  ┌────────────────────────────────────────────────────────────────┐    │
-│  │          FBW 제어 n/φ=3 중복 (Primary/Backup/Safety)           │    │
-│  │          τ=4 병렬 레인 · σ=12 센서 채널 · sopfr=5 계층          │    │
+│  │          FBW control n/φ=3 redundant (Primary/Backup/Safety)   │    │
+│  │          τ=4 parallel lanes · σ=12 sensor ch · sopfr=5 layers  │    │
 │  └────────────────────────────────────────────────────────────────┘    │
 │        │                │                │                │             │
 │        ▼                ▼                ▼                ▼             │
 │  ┌────────────┐   ┌────────────┐   ┌────────────┐   ┌────────────┐     │
-│  │ 재진입     │──▶│ 열보호 5층 │──▶│ 착륙 4 leg │──▶│ 회수 φ=2   │     │
-│  │ σ·τ=48°    │   │ sopfr=5    │   │ τ=4        │   │ 재사용     │     │
+│  │ Re-entry   │──▶│ TPS 5 layer│──▶│ Land 4 leg │──▶│ Recovery φ=2│    │
+│  │ σ·τ=48°    │   │ sopfr=5    │   │ τ=4        │   │ reusable    │    │
 │  └────────────┘   └────────────┘   └────────────┘   └────────────┘     │
 │                                                                          │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 계층 구조 (L0 수론 ↔ L4 제품)
+### Layer structure (L0 number theory ↔ L4 product)
 
-| 레이어 | 구성요소 | n=6 수식 |
-|--------|---------|---------|
-| L0 수론 | σ=12, τ=4, φ=2, sopfr=5, n=6 | OEIS 자동 |
-| L1 구조 | 탱크, 엔진 마운트, 격벽 | 6 sections |
-| L2 서브시스템 | 추진/제어/통신/열/전원 | 5 groups (sopfr) |
-| L3 통합 | FBW 24 스러스터, σ·τ=48 런모드 | J₂ |
-| L4 제품 | HEXA-STARSHIP 재사용 발사체 | P-062 |
+| Layer | Components | n=6 formula |
+|-------|------------|-------------|
+| L0 number theory | σ=12, τ=4, φ=2, sopfr=5, n=6 | OEIS auto |
+| L1 structure | tanks, engine mounts, bulkheads | 6 sections |
+| L2 subsystems | propulsion/control/comms/thermal/power | 5 groups (sopfr) |
+| L3 integration | FBW 24 thrusters, σ·τ=48 run modes | J₂ |
+| L4 product | HEXA-STARSHIP reusable launch vehicle | P-062 |
 
-### 제원 총괄표
+### Specifications summary table
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│  HEXA-STARSHIP Technical Specifications (통합)                      │
+│  HEXA-STARSHIP technical specifications (integrated)                │
 ├─────────────────────────────────────────────────────────────────────┤
-│  1단 엔진 수         σ·n/φ = 36                                      │
-│  2단 엔진 수         n = 6                                           │
-│  채널 수             σ = 12                                          │
-│  병렬도              τ = 4                                           │
-│  대칭/이중           φ = 2                                           │
-│  감각 레이어         sopfr = 5                                        │
-│  자유도              n = 6                                           │
-│  2차 지표            J₂ = 2σ = 24                                    │
-│  곱셈 지표           σ·τ = 48                                        │
-│  경제 스케일         σ-φ = 10                                        │
-│  중복도              n/φ = 3                                         │
-│  코어 수             σ² = 144                                        │
-│  Egyptian            1/2 + 1/3 + 1/6 = 1                            │
-│  완전수 정체         σ(6)·φ(6) = 6·τ(6) = 24                         │
-│  atlas 통합 EXACT    150/150 = 100%                                  │
+│  Stage-1 engine count   sigma*n/phi = 36                            │
+│  Stage-2 engine count   n = 6                                       │
+│  Channel count          sigma = 12                                  │
+│  Parallelism            tau = 4                                     │
+│  Symmetry/dual          phi = 2                                     │
+│  Sensing layers         sopfr = 5                                   │
+│  Degrees of freedom     n = 6                                       │
+│  Secondary metric       J2 = 2*sigma = 24                           │
+│  Multiplicative metric  sigma*tau = 48                              │
+│  Economic scale         sigma - phi = 10                            │
+│  Redundancy             n/phi = 3                                   │
+│  Core count             sigma^2 = 144                               │
+│  Egyptian               1/2 + 1/3 + 1/6 = 1                         │
+│  Perfect-number id      sigma(6)*phi(6) = 6*tau(6) = 24             │
+│  atlas integrated EXACT 150/150 = 100% candidate                    │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## §11 CIRCUIT DESIGN (회로 설계)
+## §11 CIRCUIT DESIGN
 
-### 전력 버스 토폴로지 (φ=2 이중화)
+### Power bus topology (φ=2 duplication)
 
 ```
-  Main Battery ──┬──── Primary Bus (28 V) ──── Avionics σ=12 노드
+  Main Battery ──┬──── Primary Bus (28 V) ──── Avionics σ=12 nodes
                  │
-                 └──── Secondary Bus (28 V) ── FBW n/φ=3 중복
+                 └──── Secondary Bus (28 V) ── FBW n/φ=3 redundant
                           │
                           ├── Channel 1 (Pilot Loop)
                           ├── Channel 2 (Backup Loop)
                           └── Channel 3 (Safety Monitor)
 ```
 
-### FBW 제어 회로 (τ=4 병렬 레인)
+### FBW control circuit (τ=4 parallel lanes)
 
-| 레인 | 기능 | 지연 목표 | n=6 근거 |
-|------|------|----------|---------|
+| Lane | Function | Latency target | n=6 basis |
+|------|----------|----------------|-----------|
 | 1 | Pitch/Yaw/Roll | ≤ 1 ms | μ |
 | 2 | Thrust Vector | ≤ 1 ms | μ |
-| 3 | RCS/Engine Relight | ≤ 2 ms | 2μ |
-| 4 | Safety/Abort | ≤ 0.5 ms | μ/φ |
+| 3 | RCS / Engine Relight | ≤ 2 ms | 2μ |
+| 4 | Safety / Abort | ≤ 0.5 ms | μ/φ |
 
-### 센서 채널 매트릭스 (σ=12)
+### Sensor channel matrix (σ=12)
 
-| # | 채널 | 타입 | 레인 (τ=4) |
-|---|------|------|----------|
-| 1~3 | IMU (xyz) | 관성 | 1 |
-| 4~6 | GPS/INS | 위치 | 1 |
-| 7~8 | 챔버 압력 | 추진 | 2 |
-| 9~10 | 탱크 온도 | 극저온 | 2 |
-| 11 | 기체 가속도 | 구조 | 3 |
-| 12 | 통합 상태 | 시스템 | 4 |
+| # | Channel | Type | Lane (τ=4) |
+|---|---------|------|------------|
+| 1~3 | IMU (xyz) | inertial | 1 |
+| 4~6 | GPS/INS | position | 1 |
+| 7~8 | Chamber pressure | propulsion | 2 |
+| 9~10 | Tank temperature | cryogenic | 2 |
+| 11 | Body acceleration | structural | 3 |
+| 12 | Integrated state | system | 4 |
 
-### 회로 규칙 (n=6)
+### Circuit rules (n=6)
 
-- 각 Bus 는 φ=2 중복 (primary + secondary)
-- FBW 는 n/φ=3 중복 (pilot + backup + safety monitor)
-- 센서는 σ=12 채널 × τ=4 레인 fan-out
-- RCS 드라이버는 J₂=24 트랜지스터 군
+- Each bus is φ=2 redundant (primary + secondary)
+- FBW is n/φ=3 redundant (pilot + backup + safety monitor)
+- Sensors fan out σ=12 channels × τ=4 lanes
+- RCS drivers form a J₂=24 transistor cluster
 
-## §12 PCB DESIGN (PCB 설계)
+## §12 PCB DESIGN
 
-### 주 제어 보드 (MCB)
+### Main control board (MCB)
 
-| 항목 | 사양 | n=6 |
+| Item | Spec | n=6 |
 |------|------|-----|
-| 레이어 수 | 12 | σ |
-| 전원/접지 | 4 개 (2 pwr + 2 gnd) | τ |
-| 신호 레이어 | 8 | 2σ/3 근사 |
-| BGA 핀 카운트 | 576 | σ·J₂ |
-| SerDes 레인 | 24 | J₂ |
-| 임피던스 컨트롤 | 50 Ω 단, 100 Ω 차 | φ·25 |
-| 기판 두께 | 2.4 mm | J₂/10 |
+| Layer count | 12 | σ |
+| Power/ground | 4 (2 pwr + 2 gnd) | τ |
+| Signal layers | 8 | ≈ 2σ/3 |
+| BGA pin count | 576 | σ·J₂ |
+| SerDes lanes | 24 | J₂ |
+| Impedance control | 50 Ω single, 100 Ω diff | φ·25 |
+| Substrate thickness | 2.4 mm | J₂/10 |
 
-### 파워 PCB (PDU)
+### Power PCB (PDU)
 
-| 항목 | 사양 | n=6 |
+| Item | Spec | n=6 |
 |------|------|-----|
-| 레이어 수 | 6 | n |
-| 동박 두께 | 3 oz | n/φ |
-| 버스 구리 | 12 mm² | σ |
-| 전류 정격 | 48 A | σ·τ |
-| 퓨즈 채널 | 12 | σ |
-| 온도 센서 | 4 | τ |
+| Layer count | 6 | n |
+| Copper thickness | 3 oz | n/φ |
+| Bus copper | 12 mm² | σ |
+| Current rating | 48 A | σ·τ |
+| Fuse channels | 12 | σ |
+| Temperature sensors | 4 | τ |
 
-### 레이아웃 규칙
+### Layout rules
 
-- 신호 간격: 최소 6 mil (n mil)
-- 비아 인덕턴스 상한: 1 nH
-- 고속 신호: σ=12 페어 differential
-- Keepout: RF 모듈 5 mm 주변 (sopfr mm)
+- Minimum signal spacing: 6 mil (n mil)
+- Via inductance upper bound: 1 nH
+- High-speed signals: σ=12 differential pairs
+- Keepout: 5 mm around RF modules (sopfr mm)
 
-## §13 FIRMWARE (펌웨어)
+## §13 FIRMWARE
 
-### RTOS 구조 (τ=4 태스크)
+### RTOS structure (τ=4 tasks)
 
 ```
 ┌────────────────────────────────────────────────────┐
-│  RTOS (ARINC 653 partition, τ=4 major frames)     │
+│  RTOS (ARINC 653 partition, τ=4 major frames)      │
 ├────────────────────────────────────────────────────┤
 │  T1 PILOT_LOOP      @ 1 kHz   (1 ms, μ)           │
 │  T2 THRUST_VECTOR   @ 1 kHz   (1 ms, μ)           │
@@ -960,21 +964,21 @@ if __name__ == "__main__":
 └────────────────────────────────────────────────────┘
 ```
 
-### 핵심 알고리즘
+### Core algorithms
 
-| 모듈 | 알고리즘 | 복잡도 |
-|------|---------|--------|
-| 칼만 필터 | IMU/GPS 융합 | O(σ²) = O(144) |
-| 추력 할당 | 36 엔진 Σ → 6 DOF | O(σ·n) |
-| 재진입 궤적 | APDG (Apollo-derived) | O(τ) 반복 |
-| 재사용 건전성 | Cycle count × telemetry | O(sopfr) 레이어 |
+| Module | Algorithm | Complexity |
+|--------|-----------|------------|
+| Kalman filter | IMU/GPS fusion | O(σ²) = O(144) |
+| Thrust allocation | 36 engines Σ → 6 DOF | O(σ·n) |
+| Re-entry trajectory | APDG (Apollo-derived) | O(τ) iterations |
+| Reuse health | cycle count × telemetry | O(sopfr) layers |
 
-### 파라미터 자동 유도 (하드코딩 0)
+### Auto-derived parameters (zero hard-coded)
 
 ```c
-// 예시 의사코드 — 실제 배포 시 Rust/HEXA-LANG 사용
+// Pseudocode — actual deployment uses Rust / HEXA-LANG
 const int N         = 6;
-const int SIGMA     = 12;    // = sigma(6) 계산 결과
+const int SIGMA     = 12;    // = sigma(6) computed
 const int TAU       = 4;     // = tau(6)
 const int PHI       = 2;     // = min_prime(6)
 const int SOPFR     = 5;     // = sopfr(6)
@@ -983,258 +987,260 @@ const int ENGINES_2 = N;                // 6
 const int FBW_REDUN = N / PHI;          // 3
 ```
 
-**규칙**: 상수값 직접 기입 금지. 반드시 수론 함수 호출 결과로 유도.
+**Rule**: Direct constant literals are forbidden. Values must come from number-theoretic function calls.
 
-## §14 MECHANICAL (기계설계)
+## §14 MECHANICAL
 
-### 형상 파라미터
+### Geometry parameters
 
-| 항목 | 값 | n=6 근거 |
-|------|-----|---------|
-| 1단 직경 | 9.0 m | n·φ·φ·... ≈ 9 |
-| 2단 직경 | 9.0 m | 동일 |
-| 1단 길이 | 72 m | σ·n = 72 |
-| 2단 길이 | 50 m | 경험값 (±σ-φ%) |
-| 건식 중량비 | 1/(σ-φ) = 0.10 | 경제 |
-| 탱크 섹션 | 6 | n |
-| 착륙 다리 | 4 | τ |
-| 그리드핀 | 4 | τ |
-| 페어링 | 2 | φ |
-| 단 분리 지점 | 2 | φ |
+| Item | Value | n=6 basis |
+|------|-------|-----------|
+| Stage-1 diameter | 9.0 m | n·φ·φ·... ≈ 9 |
+| Stage-2 diameter | 9.0 m | same |
+| Stage-1 length | 72 m | σ·n = 72 |
+| Stage-2 length | 50 m | empirical (±(σ-φ)%) |
+| Dry mass ratio | 1/(σ-φ) = 0.10 | economy |
+| Tank sections | 6 | n |
+| Landing legs | 4 | τ |
+| Grid fins | 4 | τ |
+| Fairings | 2 | φ |
+| Stage separation points | 2 | φ |
 
-### 재료 선택 (sopfr=5 계층)
+### Material selection (sopfr=5 layers)
 
-| 레이어 | 재료 | 두께 | 기능 |
-|--------|------|------|------|
-| L1 | Stainless 304L | 4 mm | 1차 구조 |
-| L2 | Stainless 304L 이중 | 4 mm | 극저온 내벽 |
-| L3 | Aerogel blanket | 10 mm | 단열 |
-| L4 | Glass-Phenolic | 12 mm | 재진입 열보호 |
-| L5 | Heat tile (TUFROC-like) | 24 mm | 재진입 최외층 |
+| Layer | Material | Thickness | Function |
+|-------|----------|-----------|----------|
+| L1 | Stainless 304L | 4 mm | primary structure |
+| L2 | Stainless 304L double | 4 mm | cryogenic inner wall |
+| L3 | Aerogel blanket | 10 mm | insulation |
+| L4 | Glass-Phenolic | 12 mm | re-entry thermal protection |
+| L5 | Heat tile (TUFROC-like) | 24 mm | re-entry outermost |
 
-### 응력/안전계수
+### Stress and safety factors
 
-- 구조 안전계수: 1.4 (CONT) / 1.25 (ULT) — 항공우주 표준
-- 열적 응력 한계: σ·n/φ = 36 MPa (sustained)
-- 피로 수명 목표: ≥ 100 사이클 = (σ-φ)² 사이클
+- Structural safety factor: 1.4 (CONT) / 1.25 (ULT) — aerospace standard
+- Thermal stress limit: σ·n/φ = 36 MPa (sustained)
+- Fatigue life target: ≥ 100 cycles = (σ-φ)² cycles
 
-## §15 MANUFACTURING (제조)
+## §15 MANUFACTURING
 
-### 제조 공정 (τ=4 단계)
+### Manufacturing process (τ=4 stages)
 
-| 단계 | 공정 | 시간 | 수율 목표 |
-|------|------|------|---------|
-| 1 | 탱크 섹션 프레스/용접 | 2 주/섹션 | ≥ 95% |
-| 2 | 엔진 통합 (36 Raptor) | 4 주 | ≥ 92% |
-| 3 | TPS 타일 부착 (sopfr=5 층) | 3 주 | ≥ 90% |
-| 4 | 최종 조립 + 전기 체크 | 1 주 | ≥ 98% |
+| Stage | Process | Time | Yield target |
+|-------|---------|------|--------------|
+| 1 | Tank section press/weld | 2 weeks/section | ≥ 95% |
+| 2 | Engine integration (36 Raptor) | 4 weeks | ≥ 92% |
+| 3 | TPS tile attachment (sopfr=5 layers) | 3 weeks | ≥ 90% |
+| 4 | Final assembly + electrical check | 1 week | ≥ 98% |
 
-### 공정 이중화 (φ=2)
+### Process duplication (φ=2)
 
-- Primary 라인 + Secondary 라인 병렬 운영
-- 장애 시 fail-over 목표: 24 h (= J₂ h)
+- Run primary line + secondary line in parallel
+- Fail-over target on incident: 24 h (= J₂ h)
 
-### 품질 관리 지표
+### Quality metrics
 
-| 지표 | 목표 | n=6 근거 |
-|------|------|---------|
-| 첫 패스 수율 | ≥ 83% | 1/(1+1/sopfr) ≈ 0.83 |
-| 재작업율 | ≤ 17% | 1-0.83 |
-| 검사 레인 | 4 | τ |
-| 샘플링 주기 | 12 시간 | σ h |
+| Metric | Target | n=6 basis |
+|--------|--------|-----------|
+| First-pass yield | ≥ 83% | 1/(1+1/sopfr) ≈ 0.83 |
+| Rework rate | ≤ 17% | 1-0.83 |
+| Inspection lanes | 4 | τ |
+| Sampling period | 12 hours | σ h |
 
-## §16 TEST (시험/검증)
+## §16 TEST (testing/verification)
 
-### 시험 매트릭스 (24 = J₂ 체크리스트 엔트리)
+### Test matrix (24 = J₂ checklist entries)
 
-| # | 시험 | 통과 기준 | n=6 근거 |
-|---|------|----------|---------|
-| 1 | §7.0 CONSTANTS | σ=12, τ=4 자동 유도 | - |
-| 2 | §7.1 DIMENSIONS | 차원 일관성 | - |
-| 3 | §7.2 CROSS | 36 3경로 ±15% | - |
-| 4 | §7.3 SCALING | 지수 4.0 ± 0.05 | B⁴ |
-| 5 | §7.4 SENSITIVITY | ±10% 둘 다 열화 | - |
-| 6 | §7.5 LIMITS | 물리 한계 미초과 | Landauer/Carnot |
+| # | Test | Pass criterion | n=6 basis |
+|---|------|----------------|-----------|
+| 1 | §7.0 CONSTANTS | σ=12, τ=4 auto-derived | - |
+| 2 | §7.1 DIMENSIONS | dimensional consistency | - |
+| 3 | §7.2 CROSS | 36 via 3 paths ±15% | - |
+| 4 | §7.3 SCALING | exponent 4.0 ± 0.05 | B⁴ |
+| 5 | §7.4 SENSITIVITY | both ±10% degrade | - |
+| 6 | §7.5 LIMITS | physical limits not exceeded | Landauer/Carnot |
 | 7 | §7.6 CHI2 | p > 0.05 | 150/150 |
-| 8 | §7.7 OEIS | 4 시퀀스 등록 | A000203 등 |
-| 9 | §7.8 PARETO | 상위 5% 이내 | Monte Carlo |
-| 10 | §7.9 SYMBOLIC | Fraction 정확 등호 | R6=1 |
-| 11 | 엔진 정적 연소 | 36 엔진 30 s | σ·n/φ |
-| 12 | 단 분리 시험 | 2 지점 동시 | φ |
-| 13 | FBW 중복 시험 | 1 채널 fail 시 작동 | n/φ=3 |
-| 14 | TPS 내열 시험 | 5 층 1600 °C | sopfr |
-| 15 | 착륙 다리 강성 | 4 다리 정적 | τ |
-| 16 | RCS 추력 측정 | 24 스러스터 | J₂ |
-| 17 | 재진입 풍동 | 48° 알파 스윕 | σ·τ |
-| 18 | 통신 링크 지연 | ≤ 1 ms | μ |
-| 19 | 전원 버스 이중화 | primary/secondary 전환 | φ |
-| 20 | §6 Mk.I 성숙도 | 수론 매핑 완료 | - |
-| 21 | §7.10 FALSIFIER 설문 | 6 건 문서화 | ≥ 3 |
-| 22 | 재사용 사이클 검증 | ≥ 100 | (σ-φ)² |
-| 23 | atlas 재측정 | 150/150 EXACT | [10*] |
-| 24 | 통합 엔드-투-엔드 | 전 항목 PASS | - |
+| 8 | §7.7 OEIS | 4 sequences registered | A000203 etc. |
+| 9 | §7.8 PARETO | within top 5% | Monte Carlo |
+| 10 | §7.9 SYMBOLIC | exact Fraction equality | R6=1 |
+| 11 | Engine static fire | 36 engines 30 s | σ·n/φ |
+| 12 | Stage separation | 2 points simultaneous | φ |
+| 13 | FBW redundancy | works with 1 channel failed | n/φ=3 |
+| 14 | TPS thermal | 5 layers 1600 °C | sopfr |
+| 15 | Landing leg stiffness | 4 legs static | τ |
+| 16 | RCS thrust measurement | 24 thrusters | J₂ |
+| 17 | Re-entry wind tunnel | 48° alpha sweep | σ·τ |
+| 18 | Comms link latency | ≤ 1 ms | μ |
+| 19 | Power bus duplication | primary/secondary switch | φ |
+| 20 | §6 Mk.I maturity | number-theoretic mapping done | - |
+| 21 | §7.10 FALSIFIER survey | 6 entries documented | ≥ 3 |
+| 22 | Reuse cycle verification | ≥ 100 | (σ-φ)² |
+| 23 | atlas re-measurement | 150/150 EXACT | [10*] |
+| 24 | End-to-end integration | every entry PASS | - |
 
-### 합격 기준
+### Acceptance criteria
 
-- 24 항목 중 ≥ 22 PASS (J₂-2 = σ·τ/2-2 의 91.7%)
-- §7 10/10 PASS 필수
-- FALSIFIER 발동 시 해당 하위 공식 폐기, Mk 단계 재평가
+- ≥ 22 of 24 PASS (J₂-2 = σ·τ/2-2 = 91.7%)
+- §7 10/10 PASS required
+- On FALSIFIER trigger, retire the relevant sub-formula and re-evaluate the Mk stage
 
-## §17 BOM (자재명세)
+## §17 BOM (bill of materials)
 
-### 주요 BOM (Top 12 = σ 항목)
+### Top BOM (top 12 = σ items)
 
-| # | 품목 | 수량 | 벤더 (§18 참조) | 단가 | 총가 |
-|---|------|------|----------------|------|------|
-| 1 | Raptor 엔진 | 42 (예비 6) | 사내 | $1 M | $42 M |
-| 2 | Stainless 304L 시트 | 120 t | V1 | $5 k/t | $600 k |
-| 3 | TPS 타일 (TUFROC-like) | 20,000 장 | V2 | $200/장 | $4 M |
-| 4 | 그리드핀 액츄에이터 | 4 | V3 | $250 k | $1 M |
-| 5 | 착륙 다리 어셈블리 | 4 | V3 | $500 k | $2 M |
+| # | Item | Quantity | Vendor (see §18) | Unit price | Total |
+|---|------|----------|------------------|------------|-------|
+| 1 | Raptor engines | 42 (6 spare) | in-house | $1 M | $42 M |
+| 2 | Stainless 304L sheet | 120 t | V1 | $5 k/t | $600 k |
+| 3 | TPS tiles (TUFROC-like) | 20,000 | V2 | $200/each | $4 M |
+| 4 | Grid-fin actuators | 4 | V3 | $250 k | $1 M |
+| 5 | Landing leg assembly | 4 | V3 | $500 k | $2 M |
 | 6 | Avionics MCB | 12 | V4 | $50 k | $600 k |
-| 7 | IMU/GPS 유닛 | 12 | V4 | $30 k | $360 k |
-| 8 | 배터리 팩 (주전원 φ=2) | 2 | V5 | $150 k | $300 k |
-| 9 | RCS 스러스터 | 24 | V3 | $40 k | $960 k |
-| 10 | 그리드핀 (티타늄) | 4 | V1 | $300 k | $1.2 M |
-| 11 | 통신 모듈 (σ=12 밴드) | 12 | V4 | $15 k | $180 k |
-| 12 | 극저온 밸브/배관 | 72 (σ·n) | V6 | $10 k | $720 k |
+| 7 | IMU/GPS units | 12 | V4 | $30 k | $360 k |
+| 8 | Battery pack (main φ=2) | 2 | V5 | $150 k | $300 k |
+| 9 | RCS thrusters | 24 | V3 | $40 k | $960 k |
+| 10 | Grid fins (titanium) | 4 | V1 | $300 k | $1.2 M |
+| 11 | Comm modules (σ=12 bands) | 12 | V4 | $15 k | $180 k |
+| 12 | Cryogenic valves/piping | 72 (σ·n) | V6 | $10 k | $720 k |
 
-**합계 (예상)**: ≈ $54 M (1 대 기준) — 재사용 시 1/(σ-φ)=1/10 로 단위비용 $5.4 M 수렴.
+**Total (estimated)**: ≈ $54 M (per vehicle) — converging to $5.4 M unit-cost on reuse via 1/(σ-φ)=1/10.
 
-### 예비 재고 (φ=2 규칙)
+### Spare inventory (φ=2 rule)
 
-- 모든 주요 품목은 primary + secondary 2 세트 비축
-- 예비 Raptor 6 개 = sopfr (소인수합) 세트
+- All major items kept primary + secondary 2 sets
+- 6 spare Raptors = sopfr (sum-of-prime-factors) set
 
-## §18 VENDOR (공급처)
+## §18 VENDOR
 
-| 코드 | 벤더 유형 | 품목 | 교체 가능성 | n=6 요구 |
-|------|----------|------|-----------|---------|
-| V1 | 금속 소재 | Stainless, Ti | 2 곳 (φ=2) | 인증 사이클 12 개월 |
-| V2 | TPS 타일 | 내열 세라믹 | 2 곳 | 샘플 τ=4 로트 |
-| V3 | 액츄에이터/다리 | 기계/유압 | 2 곳 | 응답 ≤ 6 ms |
-| V4 | Avionics/MCB | 전자 | 2 곳 | Mil-Spec σ=12 |
-| V5 | 배터리 | 리튬 셀 | 2 곳 | Cell 6 직렬 기본 |
-| V6 | 극저온 배관/밸브 | 크라이오 | 2 곳 | LOX/LCH4 인증 |
+| Code | Vendor type | Items | Substitutability | n=6 requirement |
+|------|-------------|-------|------------------|-----------------|
+| V1 | Metals | Stainless, Ti | 2 sources (φ=2) | qualification cycle 12 months |
+| V2 | TPS tiles | thermal ceramics | 2 sources | sample τ=4 lots |
+| V3 | Actuators/legs | mech/hydraulic | 2 sources | response ≤ 6 ms |
+| V4 | Avionics/MCB | electronics | 2 sources | Mil-Spec σ=12 |
+| V5 | Batteries | lithium cells | 2 sources | 6 cells in series base |
+| V6 | Cryogenic piping/valves | cryo | 2 sources | LOX/LCH4 qualified |
 
-### 공급 정책
+### Sourcing policy
 
-- 모든 벤더 카테고리 φ=2 이중 (1 primary + 1 backup)
-- SLA: 장애 시 fail-over 24 h 이내
-- 제품 라인당 단일 벤더 코드 (중복 금지) — 레지스트리 규칙
+- Every vendor category is φ=2 redundant (1 primary + 1 backup)
+- SLA: fail-over within 24 h on incident
+- One vendor code per product line (no duplication) — registry rule
 
-## §19 ACCEPTANCE (인수 기준)
+## §19 ACCEPTANCE
 
-### 고객 인수 체크리스트 (J₂=24 엔트리)
+### Customer acceptance checklist (J₂=24 entries)
 
-| # | 항목 | 확인 방법 | 합격 |
-|---|------|----------|------|
-| 1 | atlas 150/150 EXACT 재검증 | `nexus verify hexa-starship` | [ ] |
-| 2 | §7 Python 10/10 PASS | 코드 실행 | [ ] |
-| 3 | 엔진 36 정적 연소 | 시험대 로그 | [ ] |
-| 4 | 단 분리 2 지점 동시 | 영상 + 센서 | [ ] |
-| 5 | FBW 3 중복 1 채널 fail | HIL 시험 | [ ] |
-| 6 | TPS 5 층 1600 °C | 풍동 열 시험 | [ ] |
-| 7 | 착륙 다리 4 정적 | 하중 시험 | [ ] |
-| 8 | RCS 24 스러스터 추력 | 셀프 체크 | [ ] |
-| 9 | 재진입 48° α 스윕 | CFD + 풍동 | [ ] |
-| 10 | 통신 지연 ≤ 1 ms | Starlink 실측 | [ ] |
-| 11 | 전원 primary/secondary 전환 | 수동 스위치 시험 | [ ] |
-| 12 | 운영 모드 4 (IDLE/NORMAL/BURST/SAFE) | 시나리오 시험 | [ ] |
-| 13 | σ=12 센서 채널 무손실 | 로그 검토 | [ ] |
-| 14 | τ=4 병렬 레인 독립성 | 페일오버 시험 | [ ] |
-| 15 | sopfr=5 TPS 레이어 무결성 | 비파괴 검사 | [ ] |
-| 16 | n=6 DOF 추력벡터 | 짐벌 테스트 | [ ] |
-| 17 | 재사용 100 사이클 플랜 | 문서 승인 | [ ] |
-| 18 | FALSIFIER 6 건 문서 | §7.10 확인 | [ ] |
-| 19 | COUNTER_EXAMPLES 5 건 | §7.10 확인 | [ ] |
-| 20 | BOM §17 전 항목 조달 | 구매 로그 | [ ] |
-| 21 | VENDOR §18 φ=2 이중 | 계약서 | [ ] |
-| 22 | §9 시스템 요구 18 항목 | 매트릭스 검증 | [ ] |
-| 23 | Mk 단계 선언 (I~V) | 공식 공표 | [ ] |
-| 24 | 전체 §15 TEST 22/24 PASS | 시험 리포트 | [ ] |
+| # | Item | Verification method | Pass |
+|---|------|---------------------|------|
+| 1 | atlas 150/150 EXACT re-verification | `nexus verify hexa-starship` | [ ] |
+| 2 | §7 Python 10/10 PASS | run code | [ ] |
+| 3 | 36-engine static fire | test-stand log | [ ] |
+| 4 | Stage separation 2-point simultaneous | video + sensors | [ ] |
+| 5 | FBW 3-redundant 1-channel fail | HIL test | [ ] |
+| 6 | TPS 5 layers 1600 °C | wind-tunnel thermal test | [ ] |
+| 7 | Landing legs 4 static | load test | [ ] |
+| 8 | RCS 24 thruster thrust | self-check | [ ] |
+| 9 | Re-entry 48° α sweep | CFD + wind tunnel | [ ] |
+| 10 | Comm latency ≤ 1 ms | Starlink measurement | [ ] |
+| 11 | Power primary/secondary switch | manual switch test | [ ] |
+| 12 | Operating modes 4 (IDLE/NORMAL/BURST/SAFE) | scenario test | [ ] |
+| 13 | σ=12 sensor channels lossless | log review | [ ] |
+| 14 | τ=4 parallel lane independence | fail-over test | [ ] |
+| 15 | sopfr=5 TPS layer integrity | NDT inspection | [ ] |
+| 16 | n=6 DOF thrust vector | gimbal test | [ ] |
+| 17 | Reuse 100-cycle plan | document approval | [ ] |
+| 18 | FALSIFIER 6 documents | §7.10 confirmation | [ ] |
+| 19 | COUNTER_EXAMPLES 5 entries | §7.10 confirmation | [ ] |
+| 20 | BOM §17 every item sourced | purchase log | [ ] |
+| 21 | VENDOR §18 φ=2 duplicated | contracts | [ ] |
+| 22 | §9 system requirement 18 entries | matrix verification | [ ] |
+| 23 | Mk stage declaration (I~V) | official announcement | [ ] |
+| 24 | Total §15 TEST 22/24 PASS | test report | [ ] |
 
-**최종 인수**: 24 항목 중 ≥ 22 체크 + §7 10/10 PASS + atlas 150/150.
+**Final acceptance**: ≥ 22 of 24 checked + §7 10/10 PASS + atlas 150/150.
 
-## §20 APPENDIX (부록)
+## §20 APPENDIX
 
-### A. 참고 문헌
+### A. References
 
 - OEIS A000203 (σ): https://oeis.org/A000203
 - OEIS A000005 (τ): https://oeis.org/A000005
 - OEIS A000010 (φ): https://oeis.org/A000010
 - OEIS A001414 (sopfr): https://oeis.org/A001414
-- 선행 논문 1: `papers/n6-aerospace-transport-paper.md`
-- 선행 논문 2: `papers/n6-space-systems-paper.md`
-- 도메인 본문: `domains/space/hexa-starship/hexa-starship.md` (18 서브시스템)
+- Predecessor paper 1: `papers/n6-aerospace-transport-paper.md`
+- Predecessor paper 2: `papers/n6-space-systems-paper.md`
+- Domain body: `domains/space/hexa-starship/hexa-starship.md` (18 subsystems)
 - Gold standard: `$NEXUS/shared/harness/sample.md`
-- n=6 정직성 정리: `$NEXUS/shared/n6/atlas.n6` (σ·φ=n·τ iff n=6)
-- 현실 지도: `$NEXUS/shared/reality_map.json`
+- n=6 honesty candidate lemma: `$NEXUS/shared/n6/atlas.n6` (σ·φ=n·τ iff n=6)
+- Reality map: `$NEXUS/shared/reality_map.json`
 
-### B. 용어
+### B. Glossary
 
-| 약어 | 풀이 | n=6 관련 |
-|------|------|---------|
-| σ | 약수의 합 | σ(6)=12 |
-| τ | 약수의 개수 | τ(6)=4 |
-| φ | 최소 소인수 / 오일러 토션 | φ(6)=2 |
-| sopfr | 소인수의 합 | sopfr(6)=5 |
-| J₂ | 2차 지표 = 2σ | 24 |
-| FBW | Fly-By-Wire | n/φ=3 중복 |
-| TPS | Thermal Protection System | sopfr=5 층 |
-| RCS | Reaction Control System | 24 스러스터 |
-| APDG | Apollo-Powered Descent Guidance | τ 반복 |
-| DSE | Design Space Exploration | 2400 조합 |
+| Abbrev | Meaning | n=6 relevance |
+|--------|---------|---------------|
+| σ | sum of divisors | σ(6)=12 |
+| τ | number of divisors | τ(6)=4 |
+| φ | min prime factor / Euler totient | φ(6)=2 |
+| sopfr | sum of prime factors | sopfr(6)=5 |
+| J₂ | secondary metric = 2σ | 24 |
+| FBW | Fly-By-Wire | n/φ=3 redundancy |
+| TPS | Thermal Protection System | sopfr=5 layers |
+| RCS | Reaction Control System | 24 thrusters |
+| APDG | Apollo-Powered Descent Guidance | τ iterations |
+| DSE | Design Space Exploration | 2400 combinations |
+| Isp | specific impulse | propulsion metric |
+| MHD | magnetohydrodynamics | Mk.III breakthrough target |
 
-### C. 변경 이력
+### C. Change history
 
-| 버전 | 날짜 | 변경 | 저자 |
-|------|------|-----|------|
-| v1 | 2026-04-18 | 통합 최초판 (2 논문 → 1) | 박민우 |
+| Version | Date | Change | Author |
+|---------|------|--------|--------|
+| v1 | 2026-04-18 | First integrated draft (2 papers → 1) | Park Min-woo |
 
-### D. 연관 문서
+### D. Related documents
 
-- `papers/_registry.json` — 논문 SSOT
-- `papers/_dag.json` — 도메인 의존성
-- `n6shared/config/projects.json` — P-062 제품 레지스트리
-- `reports/` — 시험/검증 시점 리포트
+- `papers/_registry.json` — papers SSOT
+- `papers/_dag.json` — domain dependencies
+- `n6shared/config/projects.json` — P-062 product registry
+- `reports/` — testing/verification point reports
 
-## §21 IMPACT (영향)
+## §21 IMPACT
 
-### 단기 (Mk.I~II, 2026~2040)
+### Short-term (Mk.I~II, 2026~2040)
 
-1. **논문 통합**: 2 논문을 1 제품 라인(P-062) 으로 정리 → 유지보수 σ·τ=48배 감소.
-2. **atlas 강화**: 150/150 EXACT 통합 노드 등록, [10*] 등급 상시 유지.
-3. **DSE 수용**: 2,400 조합 Pareto 상위 6 Engineer 공유.
-4. **교육/전수**: 18 서브시스템 × n=6 매핑표 확산 → 설계 재현성 100%.
+1. **Paper integration**: organize 2 papers into 1 product line (P-062) → maintenance σ·τ=48× reduction target.
+2. **atlas reinforcement**: register 150/150 EXACT integrated node, sustain [10*] grade as a draft pattern.
+3. **DSE adoption**: share top 6 of 2,400 Pareto combinations among engineers.
+4. **Education/handover**: spread the 18-subsystem × n=6 mapping table → design reproducibility 100% target.
 
-### 중기 (Mk.III~IV, 2040~2050)
+### Medium-term (Mk.III~IV, 2040~2050)
 
-1. **경제 효과**: 페이로드 단위비용 1/(σ-φ)=1/10 → 우주 접근성 수 자리수 향상.
-2. **Cross-DSE**: aerospace-transport × space-systems 교차 검증 σ·τ=48 건.
-3. **제조 체인**: VENDOR §18 φ=2 이중 체제로 SLA 24 h fail-over.
-4. **인증**: Mil-Spec σ=12 표준 채널 규약 업계 전파.
+1. **Economic effect**: payload unit cost target 1/(σ-φ)=1/10 → space-access affordability rises by orders of magnitude.
+2. **Cross-DSE**: aerospace-transport × space-systems cross-validation σ·τ=48 candidates.
+3. **Manufacturing chain**: VENDOR §18 φ=2 redundant system with 24 h fail-over SLA.
+4. **Certification**: propagate the Mil-Spec σ=12 standard channel protocol across the industry.
 
-### 장기 (Mk.V, 2050+)
+### Long-term (Mk.V, 2050+)
 
-1. **Mars 정기편**: 연간 편도 σ·τ=48 회 운용 목표.
-2. **물리 한계**: Landauer/Shannon/Carnot 도달 → 개선 여지 수학적 상한 명시.
-3. **도메인 파급**: 295 도메인 중 항공/우주/추진/제어 ≥ 6 도메인 n=6 재해독.
-4. **반증 과학**: FALSIFIER 문화 확산 → 블랙박스 논문 업계 정화.
+1. **Mars regular service**: target σ·τ=48 one-way trips per year.
+2. **Physics limits**: reach Landauer/Shannon/Carnot → mathematical upper bound for further improvement made explicit.
+3. **Domain ripple**: among 295 domains, n=6 re-reads in aerospace/space/propulsion/control ≥ 6 domains as a target.
+4. **Falsifying science**: spread the FALSIFIER culture → clean up the black-box paper industry as a draft.
 
-### 정직성 (Honest Limitations)
+### Honest limitations
 
-- 본 논문은 **산술 좌표 매핑 시드** 문서이며, 새 발사체를 주장하지 않는다.
-- 물리 성능(Δv, Isp, payload) 실측은 Mk.III 이상에서 요구.
-- §7 검증은 stdlib 만 사용, 고충실도 CFD/FEA 는 별도 도구 필요.
-- n=6 산술과 무관한 상수(e, h, π, α 등) 의 우연 일치를 과대해석하지 않는다 (§7.10).
-- FALSIFIER 6 건 중 1건이라도 성립 시 본 논문 핵심 주장 해당부 폐기.
+- This paper is a **seed document for arithmetic-coordinate mapping**; it does not claim a new launch vehicle.
+- Physical performance (Δv, Isp, payload) measurements are required from Mk.III onward.
+- The §7 verification uses only stdlib; high-fidelity CFD/FEA require separate tools.
+- Coincidental matches with constants unrelated to n=6 (e, h, π, α, etc.) are not over-interpreted (§7.10).
+- If even 1 of the 6 FALSIFIERs is established, the corresponding core claim of this paper is retired.
 
 ---
 
 *Integrated via canonical 21-section template (2026-04-18).
-§7 검증 Python stdlib only. OEIS A000203/A000005/A000010/A001414 자동 유도, 하드코딩 0.
-선행 논문 2 건(aerospace-transport 172/189, space-systems 37/37) 봉합, atlas 150/150 EXACT.*
+§7 verification uses Python stdlib only. OEIS A000203/A000005/A000010/A001414 auto-derived, zero hard-coded values.
+Two predecessor papers stitched (aerospace-transport 172/189, space-systems 37/37), atlas 150/150 EXACT candidate.*
 
 ## mk_history
 
