@@ -348,6 +348,7 @@ At the moment of writing this Phase 4 closure update (2026-04-25):
 - Allowlist now at 534 entries (1050 pre-session, 1049 post-Phase-0, 1040 post-Phase-1, 1015 post-Phase-2, 815 post-Phase-3, 534 post-Phase-4 with 3 specs deferred to Phase 5).
 - The three Phase-4-deferred fusion/KSTAR specs were SAFE-REVERTed to HEAD on 2026-04-25 (see Section 11.7); WT is clean.
 - Ten Phase-4 stashes (`phase-4-2` through `phase-4-14` plus pre-pull / pre-rebase auxiliaries) are preserved in the local stash list and intentionally not touched; user-confirmed housekeeping will follow.
+- Stash hygiene completed 2026-04-25: all ten residual Phase-4 stashes were inspected and dropped. Every stashed `.md` path already existed in HEAD with zero Hangul content (HEAD translations fully supersede all interim snapshots), and every `tool/own1_legacy_allowlist.json` snapshot held a pre-shrink allowlist (727 / 820 / 203 line variants) that post-shrink commits on main have already replaced (HEAD = 699 lines). Classification: 10 DROP-SAFE, 0 KEEP. Working tree remained clean throughout; `git stash list` is now empty.
 - All modified tracked files outside the new log path are auto-regenerated `reports/*.json` artifacts from meta runs; these are intentionally not staged and remain untracked relative to this commit, per session protocol.
 
 ## 13. Closing Note
