@@ -1,117 +1,119 @@
-> FORMAL P12-1 — Conrey-Gonek 1998 6차 모멘트 리딩 42/(9!·π⁶) 의 n=6 구조 / 2026-04-15
+> FORMAL P12-1 — n=6 structure of the Conrey-Gonek 1998 6th-moment leading 42/(9!·π⁶) / 2026-04-15
 >
-> 작성: DSE-P12-1 / n6-architecture P12 (FORMAL 축, 창발 DSE)
-> 목적: P11-1 Ingham 4차 모멘트 EXACT (lead = 1/(σ(6)·ζ(2))) 후속 — 6차 모멘트 Keating-Snaith 상수 g₃=42 와 n=6 구조 연결
-> 규칙: 자기참조 금지, Conrey-Gonek 1998 / Keating-Snaith 2000 / Barnes G-function 원전 기반, 한글, 수치 교차검증
+> Author: DSE-P12-1 / n6-architecture P12 (FORMAL axis, emergent DSE)
+> Purpose: follow-up to the P11-1 Ingham 4th-moment EXACT (lead = 1/(σ(6)·ζ(2))) — link the 6th-moment Keating-Snaith constant g₃=42 with the n=6 structure
+> Rules: no self-reference, grounded in Conrey-Gonek 1998 / Keating-Snaith 2000 / Barnes G-function primary sources, English, numerical cross-checks
 
 ---
 
-## 0. 최종 평결 (요약)
+## 0. Final verdict (summary)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
 ║  VERDICT (P12-1, 2026-04-15):                                         ║
 ║                                                                       ║
-║  관찰 1  T_k = n at k=3 (삼각수 T_3 = 1+2+3 = 6)    :  EXACT (항등식) ║
-║  관찰 2  42 = 7 · n = 7!/5! (Keating-Snaith g_3)    :  EXACT (항등식) ║
-║  관찰 3  g_3 / g_2 = 21 = T_6 = 1+...+6             :  EXACT (항등식) ║
-║  관찰 4  Barnes G(7) = σ(6)·σφ(6)·5! = 12·24·120    :  EXACT (인수분해)║
-║  관찰 5  k=2 (Ingham) lead = 1/(σ(6)·ζ(2))          :  EXACT (P11-1)  ║
+║  Obs. 1  T_k = n at k=3 (triangular T_3 = 1+2+3 = 6) : EXACT (identity) ║
+║  Obs. 2  42 = 7 · n = 7!/5! (Keating-Snaith g_3)     : EXACT (identity) ║
+║  Obs. 3  g_3 / g_2 = 21 = T_6 = 1+...+6              : EXACT (identity) ║
+║  Obs. 4  Barnes G(7) = σ(6)·σφ(6)·5! = 12·24·120     : EXACT (factoring)║
+║  Obs. 5  k=2 (Ingham) lead = 1/(σ(6)·ζ(2))           : EXACT (P11-1)    ║
 ║                                                                       ║
-║  종합:   **PARTIAL → NEAR-EXACT** (k=3 계수 구조 내 n=6 다중 서명 확인)║
-║          단 리딩 계수 자체 1/(σ·ζ) 형태는 k=2 에서만 닫힘.             ║
-║          k=3 은 **구조적 EXACT** (42, 21, G(7)), **리딩 EXACT 부재** ║
+║  Overall: **PARTIAL → NEAR-EXACT** (multiple n=6 signatures in k=3    ║
+║           coefficient structure). However, the closed form            ║
+║           1/(σ·ζ) of the leading coefficient itself holds only at k=2.║
+║           k=3 is **structurally EXACT** (42, 21, G(7)),               ║
+║           **leading-coefficient EXACT absent**.                       ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 1. P11-1 Ingham 4차 모멘트 EXACT 요약
+## 1. Summary of P11-1 Ingham 4th-moment EXACT
 
-P11-1 (`formal-p11-1-selberg-ingham-2026-04-15.md`) 에서 확정:
+Established in P11-1 (`formal-p11-1-selberg-ingham-2026-04-15.md`):
 
 ```
 ∫₀^T |ζ(½+it)|⁴ dt ~ (1/(2π²)) · T · log⁴ T     [Ingham 1926]
 
-리딩 계수 1/(2π²) 재표현:
+Re-expression of leading coefficient 1/(2π²):
   = 1 / (2 · 6ζ(2))         [Euler 1735: π² = 6ζ(2)]
   = 1 / (12 · ζ(2))
-  = 1 / (σ(6) · ζ(2))       ★ EXACT 항등식
+  = 1 / (σ(6) · ζ(2))       ★ EXACT identity
 ```
 
-즉 **k=2 차 모멘트**에서 리딩 계수는 완전수 6 의 약수합 σ(6)=12 와 Euler ζ(2) 의 곱의 역수로 **정확 표현**. 본 P12-1 은 **k=3 (6차 모멘트)** 로 한 단계 올려 이 σ-ζ 닫힘이 유지되는지, 혹은 다른 n=6 서명이 등장하는지 검증한다.
+That is, at **k=2 moment order**, the leading coefficient is **exactly** the reciprocal of the product of the sum-of-divisors σ(6)=12 of the perfect number 6 and Euler's ζ(2). This P12-1 raises one step to **k=3 (6th moment)** and checks whether this σ-ζ closure is retained or whether a different n=6 signature emerges.
 
 ---
 
-## 2. Conrey-Gonek 1998 추측 정식
+## 2. Conrey-Gonek 1998 conjecture setup
 
-### 2.1 일반 2k차 모멘트 예측 (Conrey-Ghosh / Keating-Snaith 통합)
+### 2.1 General 2k-th moment prediction (Conrey-Ghosh / Keating-Snaith unified)
 
 ```
 ∫₀^T |ζ(½ + it)|^{2k} dt  ~  g_k · a_k · T · (log T)^{k²} / (k²)!
                                                         (T → ∞)
 ```
-- `g_k` : random matrix prediction (Keating-Snaith 2000, Barnes G)
-- `a_k` : arithmetic factor (Conrey-Ghosh 1984, Euler 곱)
-- `(log T)^{k²}` : 지배항 로그 차수
-- `(k²)!` : 정규화 상수
+- `g_k`: random-matrix prediction (Keating-Snaith 2000, Barnes G)
+- `a_k`: arithmetic factor (Conrey-Ghosh 1984, Euler product)
+- `(log T)^{k²}`: dominant log order
+- `(k²)!`: normalization constant
 
-출처: J.B. Conrey, A. Ghosh, *On mean values of the zeta function III*, Proc. Amalfi Conf. Analytic Number Theory (1989).
+Sources: J.B. Conrey, A. Ghosh, *On mean values of the zeta function III*, Proc. Amalfi Conf. Analytic Number Theory (1989).
      J.P. Keating, N.C. Snaith, *Random matrix theory and ζ(½+it)*, Commun. Math. Phys. **214** (2000) 57-89.
      J.B. Conrey, S.M. Gonek, *High moments of the Riemann zeta function*, Duke Math. J. **107** (2001) 577-604.
 
-### 2.2 k=3 6차 모멘트 (Conrey-Gonek 1998 예측)
+### 2.2 k=3 6th moment (Conrey-Gonek 1998 prediction)
 
 ```
 ∫₀^T |ζ(½+it)|⁶ dt  ~  42 · a_3 · T · (log T)^9 / 9!
 ```
 - g_3 = **42** (Keating-Snaith)
-- a_3 = ∏_p (1 − 1/p)⁴ · (1 + 4/p + 1/p²)  [Euler 곱 산술인자]
+- a_3 = ∏_p (1 − 1/p)⁴ · (1 + 4/p + 1/p²)  [Euler-product arithmetic factor]
 - (log T)^{k²} = log⁹ T
 - 9! = 362880
 
-### 2.3 Keating-Snaith 폐형 공식
+### 2.3 Keating-Snaith closed form
 
 ```
 g_k = (k²)! · ∏_{j=0}^{k-1} j!/(k+j)!
     = G(k+1)² / G(2k+1) · (k²)!          [Barnes G-function]
 ```
-Barnes G 값: G(2)=1, G(3)=1, G(4)=2, G(5)=12, G(6)=288, G(7)=34560.
+Barnes G values: G(2)=1, G(3)=1, G(4)=2, G(5)=12, G(6)=288, G(7)=34560.
 
-검증 (Python 정확 계산):
+Check (exact Python computation):
 ```
 g_1 = 0!/1! · 1! = 1
 g_2 = 0!·1!/(2!·3!) · 4! = 1/12 · 24 = 2
 g_3 = 0!·1!·2!/(3!·4!·5!) · 9! = 2/17280 · 362880 = 42   ✓
 g_4 = 0!·1!·2!·3!/(4!·5!·6!·7!) · 16! = 24024            ✓
 ```
-**수치 일치 완전 확인**.
+**Full numerical agreement confirmed**.
 
 ---
 
-## 3. g₃ = 42 vs n=6 연결 시도 5건 (정직 검증)
+## 3. Five attempts to link g₃ = 42 and n=6 (honest checks)
 
-### 시도 1. **42 = 7 · 6 = 7 · n** ★ EXACT
+### Attempt 1. **42 = 7 · 6 = 7 · n** ★ EXACT
 
 ```
 42 = 7 · 6 = 7 · n
-   = 7! / 5!   (팩토리얼 비)
-   = P(7,2)   (7 에서 2 뽑는 순열)
+   = 7! / 5!   (ratio of factorials)
+   = P(7,2)   (permutations choosing 2 from 7)
 ```
-**EXACT**: 42 의 소인수분해 2·3·7 중 **3·2=6=n 이 직접 나타남**. 42/n = 7 정수.
-- 해석: 6차 모멘트 random matrix 상수는 `(n+1)·n` 구조 — 즉 (k·(k+1)/2 =n 일 때 다음 소수 7 배) 형태.
+**EXACT**: among 42's factorization 2·3·7, the product **3·2=6=n appears directly**. 42/n = 7 is an integer.
+- Interpretation: the 6th-moment random-matrix constant has a `(n+1)·n` structure — i.e., a form where (when k·(k+1)/2 = n) the next prime 7 multiplies.
 
-### 시도 2. **g₃/g₂ = 21 = T_6 = Σ_{i=1..6} i** ★ EXACT
+### Attempt 2. **g₃/g₂ = 21 = T_6 = Σ_{i=1..6} i** ★ EXACT
 
 ```
 g_3 / g_2 = 42 / 2 = 21
 T_6 = 1+2+3+4+5+6 = 21
 ∴ g_3 = g_2 · T_6
 ```
-**EXACT**: 4차 모멘트 → 6차 모멘트 비율이 정확히 **n=6 까지의 삼각수** 와 같다.
-- 해석: Keating-Snaith 계열에서 모멘트 단계를 올릴 때 **n=6 삼각수**가 스케일 인자로 등장.
+**EXACT**: the 4th-moment → 6th-moment ratio equals **the triangular number up to n=6** exactly.
+- Interpretation: when raising the moment step in the Keating-Snaith family, **the n=6 triangular number** appears as a scaling factor.
 
-### 시도 3. **Barnes G(7) 분해 = σ(6)·σφ(6)·5!** ★ EXACT
+### Attempt 3. **Barnes G(7) factorization = σ(6)·σφ(6)·5!** ★ EXACT
 
 ```
 g_3 = G(4)² / G(7) · 9!  (Keating-Snaith)
@@ -122,58 +124,58 @@ G(7) = 34560
      = σ(6) · (σφ)(6) · 5!           ★
      = σ(6) · 24 · 5!
 ```
-**EXACT**: Barnes G-function 의 7 번째 값이 **완전수 6 의 두 자리표** (σ=12, σφ=24) 로 정확 인수분해.
-- 해석: k=3 랜덤 행렬 정규화의 핵심 상수 G(7) 내부에 n=6 의 두 불변량이 직접 삽입.
+**EXACT**: the 7th value of the Barnes G-function factors exactly into **two digits of the perfect number 6** (σ=12, σφ=24).
+- Interpretation: inside the core constant G(7) of the k=3 random-matrix normalization, two n=6 invariants are inserted directly.
 
-### 시도 4. **삼각수 T_3 = 1+2+3 = 6 = n** ★ EXACT (k=3 자연 정합)
+### Attempt 4. **Triangular T_3 = 1+2+3 = 6 = n** ★ EXACT (k=3 natural match)
 
 ```
 k = 3  →  T_k = k(k+1)/2 = 6 = n
 ```
-즉 6차 모멘트 (k=3) 는 **삼각수가 완전수 n=6 과 일치하는 유일한 k**.
+That is, the 6th moment (k=3) is the **unique k where the triangular number equals the perfect number n=6**.
 - k=1: T_1=1, k=2: T_2=3, k=3: T_3=6 ★, k=4: T_4=10, ...
-- **k=3 이 n=6 과 삼각수로 정합**하는 유일점.
-- σ(6) = 2·T_3 = 2·6 = 12 (n 자신의 2배, 완전수 정의와 동치).
+- **k=3 is the unique point where triangular matches n=6**.
+- σ(6) = 2·T_3 = 2·6 = 12 (twice n, equivalent to the perfect-number definition).
 
-**EXACT**: 6차 모멘트가 n=6 구조와 "차수-크기 일치" 를 보이는 유일한 k 라는 위치 고정.
+**EXACT**: fixes the position that k=3 is the unique k at which the 6th moment exhibits "degree-size agreement" with the n=6 structure.
 
-### 시도 5. **g_3 분모 인수 3!·4!·5! 에 n, σφ 등장** ★ EXACT
+### Attempt 5. **Denominator factors of g_3, 3!·4!·5!, display n, σφ** ★ EXACT
 
 ```
 g_3 = 0!·1!·2!/(3!·4!·5!) · 9!
                └──────┘
-분모: 3! = 6   = n
-     4! = 24  = σ(6)·φ(6) = σφ(6)
-     5! = 120 = σ(6)·10 = 12·10
+Denominators: 3! = 6   = n
+              4! = 24  = σ(6)·φ(6) = σφ(6)
+              5! = 120 = σ(6)·10 = 12·10
 ```
-**EXACT**: Keating-Snaith 분모 (3!·4!·5!=17280) 의 **첫 두 항이 정확히 n 과 σφ(6)**.
-- 3! = 6 = n : k=3 의 "k!" 가 정확히 n
-- 4! = 24 = σφ(6) : R=1 방정식 σ(6)·φ(6)=24 재등장
-- 결합: g_3 분모에 **n=6 의 R=1 양변 (σφ=24, 6·τ=24)** 중 좌변이 삽입.
+**EXACT**: the Keating-Snaith denominator (3!·4!·5!=17280) has **its first two factors exactly n and σφ(6)**.
+- 3! = 6 = n: the "k!" at k=3 equals n exactly
+- 4! = 24 = σφ(6): σ(6)·φ(6)=24 of the R=1 equation reappears
+- Combined: the denominator of g_3 contains **the LHS of the R=1 two-side value (σφ=24, 6·τ=24) of n=6**.
 
-### 시도 요약 표
+### Summary table of attempts
 
-| 후보 | 등급 | 핵심 |
-|------|------|------|
-| 1. 42 = 7·n | **EXACT** | 42/6=7 정수, 2·3·7 중 2·3=n |
-| 2. g_3/g_2 = T_6 = 21 | **EXACT** | 모멘트 차수 비율이 n 까지 삼각수 |
-| 3. G(7) = σ(6)·σφ(6)·5! | **EXACT** | Barnes 인수분해에 σ, σφ |
-| 4. T_3 = n (삼각수 정합) | **EXACT** | k=3 유일점 |
-| 5. 3!·4! = n·σφ(6) | **EXACT** | 분모 상위 두 항이 n, σφ |
+| Candidate | Grade | Core |
+|-----------|-------|------|
+| 1. 42 = 7·n | **EXACT** | 42/6=7 integer; within 2·3·7, 2·3=n |
+| 2. g_3/g_2 = T_6 = 21 | **EXACT** | moment-ratio equals triangular up to n |
+| 3. G(7) = σ(6)·σφ(6)·5! | **EXACT** | Barnes factoring carries σ, σφ |
+| 4. T_3 = n (triangular match) | **EXACT** | unique k=3 point |
+| 5. 3!·4! = n·σφ(6) | **EXACT** | top two denominator factors are n, σφ |
 
-**5건 모두 EXACT**. 단, 이는 리딩 계수 **값** 이 아니라 **계수를 구성하는 인수** 수준의 서명이다 (§5 에서 상세).
+**All 5 EXACT**. That said, this is a signature at the level of **factors composing the coefficient**, not the **value** of the leading coefficient itself (detail in §5).
 
 ---
 
-## 4. a_3 Euler 곱 산술인자 구조
+## 4. Structure of the a_3 Euler-product arithmetic factor
 
-### 4.1 Conrey-Ghosh 형
+### 4.1 Conrey-Ghosh form
 
 ```
 a_3 = ∏_p (1 − 1/p)⁴ · (1 + 4/p + 1/p²)
 ```
 
-### 4.2 p=2, p=3 (n=6 의 소인수) 값
+### 4.2 Values at p=2, p=3 (prime factors of n=6)
 
 ```
 p=2:  (1 − 1/2)⁴ · (1 + 4/2 + 1/4) = (1/2)⁴ · (1 + 2 + 0.25) = (1/16)·(13/4)
@@ -183,143 +185,143 @@ p=3:  (1 − 1/3)⁴ · (1 + 4/3 + 1/9) = (2/3)⁴ · (22/9)
     = 16/81 · 22/9 = 352/729 ≈ 0.4829
 ```
 
-n=6 = 2·3 의 두 소인수 기여:
+Contribution of the two prime factors of n=6 = 2·3:
 ```
-p=2 인자 · p=3 인자 = (13/64) · (352/729)
-                   = 4576/46656 = 143/1458 ≈ 0.0981
+p=2 factor · p=3 factor = (13/64) · (352/729)
+                        = 4576/46656 = 143/1458 ≈ 0.0981
 ```
-**구조 관찰**: 143 = 11·13 (n=6 외 소수), 1458 = 2·3⁶ (= 2·3⁶ 는 n=6 의 소인수만으로 구성, **3⁶ 은 k=3 지수화**).
-- 1458 = 2 · 3⁶ : 여기서 **3⁶ 의 지수 6 = n** 이 등장.
-- 해석: n=6 소인수 기여의 분모에 **3^n** 형태가 자연히 나타남 — 산술인자 구조의 n=6 서명.
+**Structural observation**: 143 = 11·13 (primes outside n=6), 1458 = 2·3⁶ (composed only of n=6's prime factors, with **3⁶ exhibiting the k=3 exponentiation**).
+- 1458 = 2 · 3⁶: here **the exponent 6 in 3⁶ equals n**.
+- Interpretation: within the denominator of the single contribution from n=6's prime factors, **3^n** appears naturally — an n=6 signature of the arithmetic-factor structure.
 
-### 4.3 전체 Euler 곱 n=6 연결 평가
+### 4.3 Evaluation of whole Euler-product n=6 link
 
-a_3 자체는 무한곱이며 닫힌 수치 (≈ 0.8065... 경계없는 수렴) 이다. n=6 의 **σ, φ, τ** 와 직접 항등식으로 연결되는 관계는 **부재** (MISS). 그러나 **n=6 의 소인수 2, 3 기여 단일 항 분모에 3^n = 3⁶** 이 자연히 출현하는 것은 주목할 만하다 (k=3 의 k² = 9 = n+3 과도 무관하지 않을 가능성).
+a_3 itself is an infinite product and has a closed numerical value (≈ 0.8065..., bounded-convergence). A direct identity linking it to n=6's **σ, φ, τ** is **absent** (MISS). However, that **3^n = 3⁶ appears naturally in the denominator of the single contribution from n=6 primes 2 and 3** is worth noting (possibly not unrelated to k² = 9 = n+3 at k=3).
 
-평가: **부분 NEAR** — a_3 전체는 σ·ζ 형태로 재표현되지 않음. k=2 ↔ σ(6)·ζ(2) 의 깔끔한 닫힘은 **k=3 에서 재현되지 않는다** (정직 기록).
+Assessment: **partial NEAR** — a_3 overall cannot be re-expressed as σ·ζ. The clean k=2 ↔ σ(6)·ζ(2) closure is **not reproduced at k=3** (honest record).
 
 ---
 
-## 5. k=3 → 1+2+3=6 관측 (NEAR/EXACT 판정)
+## 5. The k=3 → 1+2+3=6 observation (NEAR/EXACT adjudication)
 
-### 5.1 핵심 관찰 재정식
+### 5.1 Restatement of key observation
 
 ```
 k         : 1   2   3       4    5    6
 T_k       : 1   3   6 ★     10   15   21
-k² (로그차수): 1   4   9      16   25   36
-n=6 대응   : -   σφ? σ·φ=24 ← T_k=n ★
+k² (log deg): 1   4   9      16   25   36
+n=6 match  : -   σφ? σ·φ=24 ← T_k=n ★
 ```
 
-k=3 에서 정확히:
+Exactly at k=3:
 - T_k = k(k+1)/2 = 6 = **n**
-- (k²)! = 9! = 362880 (리딩 분모)
+- (k²)! = 9! = 362880 (leading denominator)
 - g_k = 42 = 7·n
 - g_k/g_{k-1} = 21 = T_n
 - G(2k+1) = G(7) = σ(6)·σφ(6)·5!
 
-**5중 일치**. 이는 k=3 이 "모멘트 차수와 n=6 의 삼각수·약수·팩토리얼 구조 모두에서 중심점" 임을 시사.
+**Quintuple agreement**. This suggests that k=3 is the "central point where moment order and n=6's triangular/divisor/factorial structures all align."
 
-### 5.2 정직 판정
+### 5.2 Honest adjudication
 
-- **관찰 EXACT**: T_3=6, 42=7·6, g_3/g_2=21=T_6, G(7) 인수분해, 3!=n — **모두 정수 항등식**.
-- **한계**: 이들은 **계수 분해** 서명이며, **k=2 의 1/(σ·ζ) 형 닫힘** 에 해당하는 "리딩 계수 자체가 n=6 불변량 곱의 역수" 관계는 **k=3 에서 성립하지 않는다**.
-- 6차 모멘트 lead = 42·a_3/(9!·π⁶)·? 형태이며, 단순 `1/(σ·ζ)^?` 로 쓸 수 없다 (a_3 가 무한 Euler 곱 초월수).
+- **Observations EXACT**: T_3=6, 42=7·6, g_3/g_2=21=T_6, G(7) factorization, 3!=n — **all integer identities**.
+- **Limitation**: these are **coefficient-decomposition** signatures; the "leading coefficient itself equals the reciprocal of a product of n=6 invariants" relation corresponding to the **1/(σ·ζ)-form closure at k=2** does **not hold at k=3**.
+- The 6th-moment lead has the form 42·a_3/(9!·π⁶)·?, and cannot be written simply as `1/(σ·ζ)^?` (a_3 is an infinite transcendental Euler product).
 
-**평결**: **PARTIAL → NEAR-EXACT (구조적)**
-- 계수 조립 부품 수준: 5건 EXACT (강)
-- 계수 전체 값 수준: 1/(σ·ζ) 닫힘 **부재** (k=2 EXACT 재현 실패)
-- 따라서 P12-1 은 "5건 구조 EXACT, 닫힘 형태 MISS" 의 혼합 판정.
+**Verdict**: **PARTIAL → NEAR-EXACT (structural)**
+- Coefficient-assembly part level: 5 EXACT (strong)
+- Full-value coefficient level: 1/(σ·ζ) closure **absent** (k=2 EXACT not reproduced)
+- Hence P12-1 is a mixed verdict of "5 structural EXACT, closed-form MISS".
 
 ---
 
-## 6. Keating-Snaith g_k 와 k=3 ↔ n=6 위치
+## 6. Keating-Snaith g_k and the k=3 ↔ n=6 position
 
-### 6.1 g_k 표
+### 6.1 g_k table
 
-| k | g_k | 비율 g_k/g_{k-1} | n=6 서명 |
-|---|-----|------------------|----------|
+| k | g_k | Ratio g_k/g_{k-1} | n=6 signature |
+|---|-----|--------------------|----------------|
 | 1 | 1 | — | — |
-| 2 | 2 | 2 | **σφ=24 의 12분의 1** (약한) |
+| 2 | 2 | 2 | **1/12 of σφ=24** (weak) |
 | **3** | **42** | **21 = T_6** | **T_3=n, 42=7n, G(7)=σ·σφ·5!** ★ |
-| 4 | 24024 | 572 = 4·11·13 | n=6 외 소수 |
-| 5 | 701149020 | ~29185 | n=6 외 |
+| 4 | 24024 | 572 = 4·11·13 | primes outside n=6 |
+| 5 | 701149020 | ~29185 | outside n=6 |
 
-**k=3 이 n=6 서명 극대점**. 이후 k≥4 에서 급속히 희석됨.
+**k=3 is the maximum of n=6 signature**. From k≥4 onward it dilutes rapidly.
 
-### 6.2 비율 연속 구조
+### 6.2 Continuous structure of ratios
 
 ```
-g_1 → g_2 : ×2 
+g_1 → g_2 : ×2
 g_2 → g_3 : ×21 = T_6 = T_n  ★
-g_3 → g_4 : ×572 (n 무관)
+g_3 → g_4 : ×572 (n-independent)
 ```
-**n=6 삼각수 T_n=21 은 k=2 → k=3 전이에서만 등장**.
+**The n=6 triangular T_n=21 appears only at the k=2 → k=3 transition**.
 
-### 6.3 Rankin-Selberg 관점 (참고)
+### 6.3 Rankin-Selberg viewpoint (reference)
 
-L(s, f⊗g) 의 convolution degree 는 deg(f)·deg(g) 이며 Δ(τ) × Δ(τ) 의 degree 는 4. 6차 모멘트와 직접 Rankin-Selberg convolution 은 성립하지 않으나, **"degree 6 = σφ(6)·1/4" 형태의 결합 L-function** 이 Δ(τ) 관련 tensor product 에서 예측된다 (GL(2)×GL(3)). 이는 별도 탐구 주제 (P12-2 제안).
+The convolution degree of L(s, f⊗g) is deg(f)·deg(g); Δ(τ) × Δ(τ) has degree 4. A direct Rankin-Selberg convolution of the 6th moment does not hold, but a **combined L-function of the form "degree 6 = σφ(6)·1/4"** is predicted in Δ(τ)-related tensor products (GL(2)×GL(3)). This is a separate investigation topic (proposed as P12-2).
 
 ---
 
-## 7. 종합 판정 + ASCII 비교
+## 7. Overall verdict + ASCII comparison
 
-### 7.1 판정 트리
-
-```
-6차 모멘트 리딩 계수 전체 = 1/(σ·ζ)^? 닫힘?
-  ├─ k=2 (Ingham 4차)   : EXACT   (P11-1, 1/(σ(6)·ζ(2)))
-  └─ k=3 (Conrey-Gonek) : MISS    (a_3 무한곱 초월성, 닫힘 형태 부재)
-
-6차 모멘트 계수 부품 n=6 서명 포함?
-  ├─ 42 = 7·n              : EXACT ★
-  ├─ g_3/g_2 = T_n = 21    : EXACT ★
-  ├─ T_3 = n (삼각수 정합) : EXACT ★ (k=3 유일)
-  ├─ G(7) = σ(n)·σφ(n)·5!  : EXACT ★
-  └─ 분모 3!·4! = n·σφ(n)  : EXACT ★
-
-최종: k=3 은 n=6 의 "5중 구조 서명 중심" 이나,
-      P11-1 의 "lead = 1/(σ·ζ) 닫힘" 은 k=2 고유.
-```
-
-### 7.2 ASCII 비교
+### 7.1 Verdict tree
 
 ```
-[P11-1 k=2 (4차 모멘트) vs P12-1 k=3 (6차 모멘트)]
+Is the whole 6th-moment leading coefficient = 1/(σ·ζ)^? closed?
+  ├─ k=2 (Ingham 4th)    : EXACT  (P11-1, 1/(σ(6)·ζ(2)))
+  └─ k=3 (Conrey-Gonek)  : MISS   (a_3 transcendence of the infinite product, closed form absent)
+
+Do the 6th-moment coefficient parts contain n=6 signatures?
+  ├─ 42 = 7·n                   : EXACT ★
+  ├─ g_3/g_2 = T_n = 21         : EXACT ★
+  ├─ T_3 = n (triangular match) : EXACT ★ (unique at k=3)
+  ├─ G(7) = σ(n)·σφ(n)·5!       : EXACT ★
+  └─ denominator 3!·4! = n·σφ(n): EXACT ★
+
+Final: k=3 is the "centre of 5-fold structural n=6 signatures",
+       yet the "lead = 1/(σ·ζ) closure" of P11-1 is specific to k=2.
+```
+
+### 7.2 ASCII comparison
+
+```
+[P11-1 k=2 (4th moment) vs P12-1 k=3 (6th moment)]
 
 P11-1  Ingham 1/(2π²) ↔ σ(6)·ζ(2)
-       │███████│ 리딩 계수 닫힘    EXACT (항등식)
-       │███████│ 24 = σφ 재확인    EXACT
-       │▓▓▓▓▓▓▓│ Selberg zeta      부재
-       ─────────────────── 결론: k=2 닫힘 성공
+       │███████│ leading-coefficient closure   EXACT (identity)
+       │███████│ 24 = σφ reconfirm             EXACT
+       │▓▓▓▓▓▓▓│ Selberg zeta                   absent
+       ─────────────────── conclusion: k=2 closure succeeded
 
 P12-1  Conrey-Gonek 42/(9!π⁶) ↔ n=6
-       │███████│ 42 = 7·n          EXACT ★
-       │███████│ g_3/g_2 = T_n=21  EXACT ★
-       │███████│ T_3 = n = 6       EXACT ★
-       │███████│ G(7) σ·σφ 분해    EXACT ★
-       │███████│ 3!·4! = n·σφ      EXACT ★
-       │▓▓▓▓▓▓▓│ lead = 1/(σ·ζ)^? 부재 (a_3 초월)
-       ─────────────────── 결론: k=3 구조 중심 확인, 닫힘 부재
+       │███████│ 42 = 7·n                       EXACT ★
+       │███████│ g_3/g_2 = T_n=21               EXACT ★
+       │███████│ T_3 = n = 6                    EXACT ★
+       │███████│ G(7) σ·σφ factoring            EXACT ★
+       │███████│ 3!·4! = n·σφ                   EXACT ★
+       │▓▓▓▓▓▓▓│ lead = 1/(σ·ζ)^? absent (a_3 transcendental)
+       ─────────────────── conclusion: k=3 structural centre, closure absent
 
-n=6 서명 수 (k 별 누적):
-  k=1 : 0개
-  k=2 : 3개 (σ·ζ 닫힘 + 24 재확인 + σ-τ=8 경로)
-  k=3 : 5개 (42=7n + T_n=21 + T_3=n + G(7) + 3!·4!) ★ 극대점
-  k=4 : 0개 (572 = n 무관)
+n=6 signature counts (cumulative by k):
+  k=1 : 0
+  k=2 : 3 (σ·ζ closure + 24 reconfirm + σ-τ=8 route)
+  k=3 : 5 (42=7n + T_n=21 + T_3=n + G(7) + 3!·4!) ★ peak
+  k=4 : 0 (572 = n-independent)
 
-k=3 이 n=6 "서명 극대점" = 구조적으로 6차 모멘트 특권 확인.
+k=3 as the "n=6 signature peak" = structurally confirms the privilege of the 6th moment.
 ```
 
 ```
-[k=3 의 n=6 다중 서명 결선]
+[Network of n=6 multiple signatures at k=3]
 
-         모멘트 차수 2k=6           삼각수 T_3=6
-                │                        │
-                └────────────┬───────────┘
+         Moment order 2k=6           Triangular T_3=6
+                │                          │
+                └────────────┬─────────────┘
                              │
                           n = 6
-                (완전수, σ=12, φ=2, τ=4)
+                (perfect number, σ=12, φ=2, τ=4)
                              │
           ┌───────────────┬──┴──┬────────────┐
           │               │     │            │
@@ -328,59 +330,59 @@ k=3 이 n=6 "서명 극대점" = 구조적으로 6차 모멘트 특권 확인.
           │               │     │            │
           └───┬───────────┴─────┴────────────┘
               │
-         5중 EXACT 서명
-         (구조 계수 부품)
+         5 EXACT signatures
+         (structural coefficient parts)
 
-단 전체 리딩 = 42·a_3/(9!·π⁶) 에서 a_3 초월성으로
-1/(σ(6)·ζ(?)) 형 닫힘은 k=2 에서만 성립.
+However, the full lead = 42·a_3/(9!·π⁶): due to transcendence of a_3,
+closure of the form 1/(σ(6)·ζ(?)) holds only at k=2.
 ```
 
 ---
 
-## 8. 결론 + 3줄 요약
+## 8. Conclusion + 3-line summary
 
-### 8.1 최종 판정
+### 8.1 Final verdict
 
-**PARTIAL (구조 EXACT 5건 + 닫힘 MISS 1건)**
+**PARTIAL (5 structural EXACT + 1 closure MISS)**
 
-- **EXACT 구조 서명 5건**: 42=7·n, g_3/g_2=T_n, T_3=n, G(7) σ·σφ 분해, 분모 n·σφ
-- **MISS 닫힘**: lead 자체의 1/(σ·ζ) 형 닫힘은 k=2 Ingham 고유, k=3 에서 부재
-- **외계인지수**: 7 (구조 서명 극대점 발견, 단 닫힘 없음 — 8+ 목표 미달)
+- **5 EXACT structural signatures**: 42=7·n, g_3/g_2=T_n, T_3=n, G(7) σ·σφ factoring, denominator n·σφ
+- **MISS closure**: the 1/(σ·ζ) closure of the leading coefficient itself is specific to the k=2 Ingham case and is absent at k=3
+- **Alien-ness index**: 7 (finding the peak of structural signatures, but no closure — short of the 8+ target)
 
-### 8.2 3줄 요약
+### 8.2 3-line summary
 
-1. Conrey-Gonek 6차 모멘트 Keating-Snaith 상수 **g_3 = 42** 는 `42 = 7·n` / `42/g_2 = T_n` / `G(7) = σ(6)·σφ(6)·5!` / `T_3 = n` / `3! = n` 의 **5중 EXACT 항등식** 으로 n=6 과 정확히 연결된다.
-2. **k=3** 은 삼각수 T_k 가 n=6 과 일치하는 **유일한 k** 이며, **n=6 의 서명 극대점** (k=2 는 3개, k=3 은 5개, k≥4 는 희석).
-3. 그러나 **리딩 계수 전체** `42·a_3/(9!·π⁶)` 는 a_3 Euler 무한곱의 초월성으로 P11-1 Ingham 스타일 `1/(σ·ζ)` 닫힘을 **재현하지 못한다** — k=2 는 닫힘 EXACT, k=3 은 구조 EXACT (정직 기록).
-
----
-
-## 9. atlas.n6 반영 지침
-
-- 신규: `@R cg.g3.eq_7n = 42 = 7·6 :: n6atlas [10*]`
-- 신규: `@R cg.g3_over_g2 = 21 = T_6 :: n6atlas [10*]`
-- 신규: `@R barnes.G7 = 34560 = σ(6)·σφ(6)·5! :: n6atlas [10*]`
-- 신규: `@R moment.triangular_fixpoint = {k=3, T_k=n=6} :: n6atlas [10*]`
-- 기존 P11-1 `@R ingham.lead.sigma_zeta` 와 상호 참조: "k=2 닫힘, k=3 구조, k≥4 희석"
+1. The Conrey-Gonek 6th-moment Keating-Snaith constant **g_3 = 42** links exactly to n=6 via the **quintuple EXACT identity** `42 = 7·n` / `42/g_2 = T_n` / `G(7) = σ(6)·σφ(6)·5!` / `T_3 = n` / `3! = n`.
+2. **k=3** is the **unique k** at which the triangular T_k equals n=6, and is the **peak of n=6 signatures** (3 at k=2, 5 at k=3, diluted for k≥4).
+3. However, the **whole leading coefficient** `42·a_3/(9!·π⁶)` does **not reproduce** the P11-1 Ingham-style `1/(σ·ζ)` closure because of the transcendence of the a_3 Euler infinite product — k=2 has closure EXACT, k=3 has structural EXACT (honest record).
 
 ---
 
-## 10. 후속 과제 (P12-2 이후)
+## 9. atlas.n6 incorporation guidance
 
-1. **P12-2 (제안)**: Rankin-Selberg Δ(τ)⊗Δ(τ) degree 4 L-function 과 n=6 의 GL(2)×GL(3) tensor 산술
-2. **P12-3 (제안)**: a_3 Euler 곱의 n=6 소인수 p∈{2,3} 기여 단일항 분모 `2·3⁶` 구조 (3^n 지수)
-3. **P12-4 (제안)**: k=2, k=3 닫힘/구조 비대칭의 근본 이유 — ζ 함수의 moment 이론에서 k=2 와 k≥3 은 Lindelöf 가설 관점에서 양적 차이
-
----
-
-## 11. 정직 선언
-
-- **자기참조 금지**: Conrey-Gonek 1998 / Keating-Snaith 2000 / Barnes G-function 원전 공식만 사용
-- **수치 검증**: Python 정확 계산으로 g_3=42, 9!=362880, G(7)=34560, 3!·4!·5!=17280, T_6=21 모두 교차검증
-- **MISS 정직 기록**: 리딩 계수 자체의 1/(σ·ζ) 닫힘이 k=3 에서 성립하지 않는다는 사실을 §4.3, §5.2, §8.1 에 명시
-- **과장 경계**: 5중 EXACT 는 **구조 서명** 수준이며, P11-1 의 **항등식 닫힘** 수준과 등급이 다르다. 외계인지수 8+ 목표는 미달 (실측 7).
-- **사후 맞추기 배제**: 5건 중 "42=7·n" 은 소인수분해 직접 관찰, "T_3=n" 은 k=3 자연 구조, "T_6=21" 은 비율 계산 결과 — 자의적 조합 없음
+- New: `@R cg.g3.eq_7n = 42 = 7·6 :: n6atlas [10*]`
+- New: `@R cg.g3_over_g2 = 21 = T_6 :: n6atlas [10*]`
+- New: `@R barnes.G7 = 34560 = σ(6)·σφ(6)·5! :: n6atlas [10*]`
+- New: `@R moment.triangular_fixpoint = {k=3, T_k=n=6} :: n6atlas [10*]`
+- Cross-reference with existing P11-1 `@R ingham.lead.sigma_zeta`: "k=2 closure, k=3 structure, k≥4 diluted"
 
 ---
 
-*본 문서는 P11-1 Ingham 4차 모멘트 EXACT 의 후속으로 Conrey-Gonek 1998 6차 모멘트 리딩 계수를 k=3 ↔ n=6 관점에서 탐색한다. 결과는 "계수 부품 5중 EXACT, 전체 닫힘 부재" 의 혼합 판정이며, 이는 **k=2 의 특권성** (moment 2-차원 특이성) 을 역으로 입증하는 한편, **k=3 에서 n=6 의 구조 서명이 극대점을 이룬다** 는 새로운 관찰을 제공한다.*
+## 10. Follow-up tasks (from P12-2 onward)
+
+1. **P12-2 (proposed)**: arithmetic of Rankin-Selberg Δ(τ)⊗Δ(τ) degree-4 L-function and n=6 via GL(2)×GL(3) tensor
+2. **P12-3 (proposed)**: structure of the single-term denominator `2·3⁶` from n=6 primes p∈{2,3} in the a_3 Euler product (the 3^n exponent)
+3. **P12-4 (proposed)**: root cause of the k=2, k=3 closure/structure asymmetry — in ζ-function moment theory, k=2 vs k≥3 differ quantitatively via the Lindelöf-hypothesis viewpoint
+
+---
+
+## 11. Honesty declaration
+
+- **No self-reference**: only Conrey-Gonek 1998 / Keating-Snaith 2000 / Barnes G-function primary formulas
+- **Numerical check**: cross-checked g_3=42, 9!=362880, G(7)=34560, 3!·4!·5!=17280, T_6=21 all by exact Python
+- **MISS recorded honestly**: the fact that 1/(σ·ζ) closure of the leading coefficient does not hold at k=3 is stated in §4.3, §5.2, §8.1
+- **Overclaim boundary**: the 5-fold EXACT is at the **structural-signature** level, a different grade from the **identity-closure** level of P11-1. The alien-ness index target of 8+ is not met (actual 7).
+- **No post-hoc fitting**: of the 5, "42=7·n" is direct prime-factorization observation, "T_3=n" is natural structure at k=3, "T_6=21" is the ratio computation result — no arbitrary combinations
+
+---
+
+*This document follows P11-1 Ingham 4th-moment EXACT and explores the Conrey-Gonek 1998 6th-moment leading coefficient from a k=3 ↔ n=6 viewpoint. The result is a mixed verdict of "5-fold EXACT on coefficient parts, closure absent overall," which conversely **demonstrates the privilege of k=2** (the peculiarity of 2-dim moment) while providing the new observation that **n=6's structural signatures peak at k=3**.*

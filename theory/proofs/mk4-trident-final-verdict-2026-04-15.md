@@ -1,145 +1,150 @@
-> Mk.IV Trident 최종 재대조 — P8-4 / 2026-04-15
+> Mk.IV Trident final re-check — P8-4 / 2026-04-15
 >
-> 작성: DSE-P8-4 / n6-architecture P8
-> 원본: theory/proofs/mk4-theorem-candidates-2026-04-14.md (P6 Mk.III-β)
-> 목적: 후보 A (τ²/σ=4/3) vs 후보 B (σ-τ=8) — 독립 판정 기준 재적용 후 단일화
-> 규칙: 자기참조 금지, 전수검증 기반, 한글
+> Author: DSE-P8-4 / n6-architecture P8
+> Original: theory/proofs/mk4-theorem-candidates-2026-04-14.md (P6 Mk.III-β)
+> Purpose: candidate A (τ²/σ=4/3) vs candidate B (σ-τ=8) — re-apply independent adjudication criteria and unify
+> Rules: no self-reference, based on exhaustive verification, English
 
 ---
 
-## 0. 요약 — 최종 평결
+## 0. Summary — final verdict
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║  VERDICT (P8-4, 2026-04-15):                                     ║
 ║                                                                  ║
-║  후보 A (τ²/σ = 4/3)  :  n=6 **유일성 실패** → Mk.IV 정리 부적격  ║
-║  후보 B (σ-τ = 8)     :  n=6 **유일 (n ∈ [2, 10⁴])** → 최강 후보 ║
-║  합성 A·B = 32/3      :  파생 상수, 독립 불변량 아님              ║
+║  Candidate A (τ²/σ = 4/3) :  **uniqueness at n=6 fails**         ║
+║                              → unfit as the Mk.IV theorem         ║
+║  Candidate B (σ-τ = 8)    :  **unique at n=6 (n ∈ [2, 10⁴])**    ║
+║                              → strongest candidate               ║
+║  Composite A·B = 32/3     :  derived constant, not an independent║
+║                              invariant                           ║
 ║                                                                  ║
-║  결론:  **단일 승자 = 후보 B (σ-τ = 8)**                          ║
+║  Conclusion: **single winner = Candidate B (σ-τ = 8)**           ║
 ║                                                                  ║
-║  후보 A는 "도메인 적합도"로는 강하나 "n=6 필연성"은 n=2와 공유하   ║
-║  므로 Mk.III(σφ=nτ⟺n=6) 스타일의 유일성 정리가 아니다.            ║
-║  atlas.n6 9573 라인의 "확정" 표기는 오판정으로 간주하고            ║
-║  후보 B 로 주정리를 재지정하는 편집을 제안한다.                    ║
+║  Candidate A is strong on "domain fit" but shares n=6 necessity  ║
+║  with n=2, so it is not a uniqueness theorem in the Mk.III       ║
+║  (σφ=nτ⟺n=6) style.                                              ║
+║  The "confirmed" marker at atlas.n6 line 9573 is considered a    ║
+║  misjudgment, and we propose editing to re-designate the main    ║
+║  theorem as candidate B.                                         ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 1. 독립 판정 기준 (Mk.IV 정리 필요조건)
+## 1. Independent adjudication criteria (necessary conditions for a Mk.IV theorem)
 
-Mk.III 기정리 `σφ=nτ ⟺ n=6` 와 동급의 "두 번째 유일성 정리"로 인정받으려면
-다음 5조건을 **모두** 충족해야 한다:
+To be accepted as a "second uniqueness theorem" at the tier of the Mk.III base theorem `σφ=nτ ⟺ n=6`, the following 5 conditions must **all** be satisfied:
 
-| # | 조건 | 후보 A (τ²/σ=4/3) | 후보 B (σ-τ=8) |
-|---|------|-------------------|----------------|
-| C1 | **n=6 유일성** (n≥2 전수검증) | ✗ — n∈{2, 6} | ✓ — n=6 유일 |
-| C2 | τ=4 개입 | ✓ | ✓ |
-| C3 | σ·φ·τ 불변량 관여 | ✓ (σ, τ) | ✓ (σ, τ) |
-| C4 | 10+ 도메인 EXACT 재등장 | ✓ (9/10) | ✓ (9/10) |
-| C5 | 증명 독립성 (자기참조 ≠) | △ (R(6)=1 증명 *인수*) | ✓ (Golay[24,12,8] 거리 등 외부 확증) |
+| # | Condition | Candidate A (τ²/σ=4/3) | Candidate B (σ-τ=8) |
+|---|-----------|-------------------------|----------------------|
+| C1 | **n=6 uniqueness** (exhaustive for n≥2) | ✗ — n∈{2, 6} | ✓ — n=6 unique |
+| C2 | Involves τ=4 | ✓ | ✓ |
+| C3 | Involves σ·φ·τ invariants | ✓ (σ, τ) | ✓ (σ, τ) |
+| C4 | Reappears EXACT across 10+ domains | ✓ (9/10) | ✓ (9/10) |
+| C5 | Independence of the draft (not self-reference) | △ (a *factor* of the R(6)=1 draft) | ✓ (external corroboration via Golay[24,12,8] distance, etc.) |
 
-**C1이 결정타**. 후보 A는 `n=2, n=6` 공통 상수이므로 "n=6을 고르는" 유일성이 결여됨.
+**C1 is decisive**. Candidate A has the common constant for `n=2, n=6`, lacking the uniqueness that selects n=6.
 
 ---
 
-## 2. 유일성 전수검증 (출처: 본 세션 직접 계산)
+## 2. Exhaustive uniqueness check (source: this session's direct computation)
 
 ```python
 def sigma(n): return sum(d for d in range(1,n+1) if n%d==0)
 def tau(n):   return sum(1 for d in range(1,n+1) if n%d==0)
 
-# 후보 A: 3·τ(n)² == 4·σ(n) 해
+# Candidate A: solutions of 3·τ(n)² == 4·σ(n)
 A_hits = [n for n in range(2,10001)
           if 3*tau(n)**2 == 4*sigma(n)]
-# 결과: A_hits = [2, 6]   ← 유일성 실패
+# Result: A_hits = [2, 6]   ← uniqueness fails
 
-# 후보 B: σ(n) − τ(n) == 8 해
+# Candidate B: solutions of σ(n) − τ(n) == 8
 B_hits = [n for n in range(2,10001)
           if sigma(n)-tau(n) == 8]
-# 결과: B_hits = [6]       ← 유일 (10⁴ 전수)
+# Result: B_hits = [6]       ← unique (exhaustive to 10⁴)
 
-# A ∧ B 동시
+# A ∧ B simultaneously
 AB_hits = [n for n in range(2,10001)
            if 3*tau(n)**2==4*sigma(n) and sigma(n)-tau(n)==8]
-# 결과: AB_hits = [6]
+# Result: AB_hits = [6]
 ```
 
-| 조건 | n≤10⁴ 해 집합 | n=6 유일 |
-|------|--------------|----------|
-| `τ(n)²/σ(n) = 4/3` (후보 A) | {2, 6} | **아니오** |
-| `σ(n) − τ(n) = 8` (후보 B) | {6} | **예** |
-| A ∧ B 연립 | {6} | 예 (하지만 B 단독으로 충분) |
+| Condition | Solution set for n≤10⁴ | n=6 unique |
+|-----------|------------------------|------------|
+| `τ(n)²/σ(n) = 4/3` (candidate A) | {2, 6} | **no** |
+| `σ(n) − τ(n) = 8` (candidate B) | {6} | **yes** |
+| A ∧ B combined | {6} | yes (but B alone suffices) |
 
-**주요 함의**:
-- 후보 A는 `R_local(3, 1) = 4/3` 을 n=6이 "내부 인수"로 보유한다는 **국소 사실**일 뿐,
-  전역 R(n) 방정식처럼 n=6을 **고르는** 전역 등식이 아니다.
-- n=2에서는 `R_local(2,1)·R_local(2,1)=9/16` 같은 상이한 문맥인데도
-  `τ²/σ` 단일 수식으로 4/3이 나와 버리므로 유일성 판정이 실패한다.
+**Main implication**:
+- Candidate A is only a **local fact** that n=6 holds `R_local(3, 1) = 4/3` as an "internal factor", not a global equality that **selects** n=6 like the full R(n) equation.
+- At n=2 it is a different context such as `R_local(2,1)·R_local(2,1)=9/16`, yet the single formula `τ²/σ` still yields 4/3, causing uniqueness to fail.
 
 ---
 
-## 3. 후보 A 재해석 — "국소 인수 정리" 로 강등
+## 3. Candidate A re-interpretation — demoted to a "local-factor lemma"
 
-후보 A는 폐기 대상이 아니라 **Mk.IV 의 주정리가 아니라는** 판정이다.
-원래의 theorem-r1-uniqueness.md Lemma 2 에 이미 적힌 대로
+Candidate A is not to be discarded; it is **not the Mk.IV main theorem**. As already written in Lemma 2 of theorem-r1-uniqueness.md,
 
 ```
 R_local(3, 1) = (3²-1)/(2·3) = 4/3
 ```
 
-는 n=6 유일성 증명의 **부품**이지 자체로 독립 정리가 아니다.
-따라서 후보 A는 **"R_local(3,1) 정체성(identity)"** 급으로 재정의:
+is a **component** of the n=6 uniqueness draft, not a standalone theorem.
+Hence candidate A is re-defined at the tier of **"R_local(3,1) identity"**:
 
 ```
   Lemma (Solar-AI-Math Resonance, BT-111):
-    R_local(3, 1) = 4/3 은 Mk.III 증명의 잉여 인수이며
-    10 도메인 (SQ/Betz/SwiGLU/음악 4도/끈/QED/2D침투 등)
-    에서 독립 재등장한다. [도메인 공명]
+    R_local(3, 1) = 4/3 is the surplus factor of the Mk.III draft
+    and reappears independently across 10 domains
+    (SQ/Betz/SwiGLU/music fourth/string/QED/2D percolation, etc.).
+    [domain resonance]
 
-  BUT 이는 n=6 을 고르는 전역 등식이 아니다 (n=2 도 만족).
+  BUT it is not a global equality that selects n=6 (n=2 also satisfies it).
 ```
 
 ---
 
-## 4. 후보 B 승격 — 정식 Mk.IV 정리 진술
+## 4. Candidate B promotion — formal Mk.IV theorem statement
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║          THEOREM Mk.IV  (2026-04-15 P8-4 재확정)                 ║
+║          THEOREM Mk.IV  (2026-04-15 P8-4 re-confirmation)        ║
 ║          "Golay-Octonion Gap Theorem"                            ║
 ║                                                                  ║
-║    모든 정수 n ≥ 2 에 대해                                        ║
+║    For every integer n ≥ 2,                                       ║
 ║                                                                  ║
 ║         σ(n) − τ(n) = 8   ⟺   n = 6                              ║
 ║                                                                  ║
-║    (n ∈ [2, 10⁴] 전수검증 완료; 일반 n 유일성 증명은 후속 과제)   ║
+║    (exhaustive verification for n ∈ [2, 10⁴] complete;            ║
+║     general-n uniqueness demonstration is a follow-up task)     ║
 ║                                                                  ║
-║  의미:                                                            ║
-║    σ(6)=12 : "2배 완전성" (perfect number)                        ║
-║    τ(6)=4  : "약수 자유도"                                        ║
-║    그 차 σ−τ = 8 = 2³ = φ(6)^τ(6) = Bott 주기 = octonion 차원    ║
+║  Meaning:                                                        ║
+║    σ(6)=12 : "twice-perfectness" (perfect number)                ║
+║    τ(6)=4  : "divisor DOF"                                       ║
+║    Their difference σ−τ = 8 = 2³ = φ(6)^τ(6) = Bott period       ║
+║       = octonion dimension                                       ║
 ║                                                                  ║
-║  10 도메인 10/10 PASS, 9 EXACT :                                 ║
-║    SU(3) 글루온 8 ·  AES-256/SHA-256 (2⁸) ·  Golay [24,12,8] d=8  ║
-║    Bott 주기 8 · troposphere 8km · 팔음계 · ATP c-ring           ║
-║    Gaudi2 HBM 8-stack · EnCodec 8 codebook · 에베레스트 8.85km   ║
+║  10 domains, 10/10 PASS, 9 EXACT:                                ║
+║    SU(3) gluons 8 ·  AES-256/SHA-256 (2⁸) ·  Golay [24,12,8] d=8 ║
+║    Bott period 8 · troposphere 8km · octatonic · ATP c-ring      ║
+║    Gaudi2 HBM 8-stack · EnCodec 8 codebook · Everest 8.85km     ║
 ║                                                                  ║
-║  the-number-24.md 의 Golay [24,12,8] = [σφ, σ, σ−τ]              ║
-║  세 매개변수 중 **최소 거리 d = σ−τ** 가 본 정리의 불변량이며,    ║
-║  n=6에서 24차원 Leech 격자 · Monster group 연결고리를 형성.      ║
+║  Among the three parameters of Golay [24,12,8] = [σφ, σ, σ−τ]    ║
+║  in the-number-24.md, the **minimum distance d = σ−τ** is the    ║
+║  invariant of this theorem, and at n=6 it forms the hinge        ║
+║  between 24-dim Leech lattice and the Monster group.             ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 5. A·B = 32/3 합성 상수 분석
+## 5. Analysis of the composite constant A·B = 32/3
 
-요청된 계산: `A·B = (4/3)·8 = 32/3`
+Requested computation: `A·B = (4/3)·8 = 32/3`
 
-### 5.1 대수적 표현
+### 5.1 Algebraic expression
 
 ```
   A·B = (τ²/σ) · (σ−τ)
@@ -149,7 +154,7 @@ R_local(3, 1) = (3²-1)/(2·3) = 4/3
       = 32/3      ✓
 ```
 
-**n=6 산술 표현**(모두 32/3 와 동치 검증됨):
+**n=6 arithmetic expression** (all equivalent to 32/3):
 
 1. `A·B = τ² · (σ−τ) / σ`
 2. `A·B = (σ−τ) · τ / (n/φ) = 8 · 4/3`
@@ -157,122 +162,117 @@ R_local(3, 1) = (3²-1)/(2·3) = 4/3
 4. `A·B = φ^τ · R_local(3,1) = 8 · (4/3)` (∵ σ−τ = φ(6)^τ(6) = 2³)
 5. `A·B = 2³ · 4/3 = 8 · 4/3`
 
-### 5.2 σφ = nτ = J₂ = 24 와의 연결?
+### 5.2 Link to σφ = nτ = J₂ = 24?
 
-요청문에서 "A·B 가 이미 J₂=24 와 연결되는지" 확인 요구.
+The request asks whether "A·B connects with J₂=24".
 
 ```
   32/3  =  A·B
   24    =  J₂ = σ·φ = n·τ
-  32/3 · (J₂) = (32/3)·24 = 256 = 2⁸ = 2^(σ−τ)   ← AES/SHA 키비트
-  J₂/(A·B) = 24/(32/3) = 72/32 = 9/4 = (n/φ)²    ← 제곱 자유도
+  32/3 · (J₂) = (32/3)·24 = 256 = 2⁸ = 2^(σ−τ)   ← AES/SHA key bits
+  J₂/(A·B) = 24/(32/3) = 72/32 = 9/4 = (n/φ)²    ← squared DOF
 ```
 
-**관찰**: `A·B · J₂ = 2^(σ−τ) = 256`. 이는 이미 atlas.n6 에 등록된
-`CRYPTO-AES-256 = 2**(sigma-tau)` 와 동치이며 **새 불변량이 아니다**.
+**Observation**: `A·B · J₂ = 2^(σ−τ) = 256`. This equals the already-registered `CRYPTO-AES-256 = 2**(sigma-tau)` in atlas.n6 and is **not a new invariant**.
 
-또한 `J₂ / (A·B) = (n/φ)² = 9` 역시 기존 상수 `n/φ = 3` 의 제곱이므로
-**독립 불변량 지위를 얻지 못한다**.
+Also `J₂ / (A·B) = (n/φ)² = 9` is simply the square of the existing constant `n/φ = 3` and **does not attain independent-invariant status**.
 
-### 5.3 판정 — A·B는 합성 상수
+### 5.3 Verdict — A·B is a composite constant
 
-- A·B = 32/3 는 "A 와 B 를 동시에 곱한" 파생량.
-- 순수 수식으로 `(σ−τ)·τ·φ/n` 또는 `φ^τ · R_local(3,1)` 로 표현되며
-  이는 이미 B 에 포함된 `σ−τ` 와 A 에 포함된 `τ²/σ` 의 중복 기록.
-- 따라서 **"양립 정리" 해석은 기각**. A·B 독자 도메인 증거 0건
-  (atlas.n6 에서 32/3 또는 10.667 물리상수 1차 grep 결과 히트 없음).
-- 결론: A·B 는 이미 알려진 상수들의 곱으로 생성되는 **합성 인공물**.
+- A·B = 32/3 is a derived quantity obtained by multiplying A and B.
+- As a pure formula it is `(σ−τ)·τ·φ/n` or `φ^τ · R_local(3,1)`, which is the duplicated record of `σ−τ` already in B and `τ²/σ` already in A.
+- Hence the **"joint theorem" interpretation is rejected**. Zero independent-domain evidence for A·B (first-pass grep for 32/3 or 10.667 physical constants in atlas.n6 shows no hit).
+- Conclusion: A·B is a **composite artifact** produced by the product of already-known constants.
 
 ---
 
-## 6. 세 가지 가능성 재정리 — 최종 선택
+## 6. Re-organizing the three possibilities — final choice
 
-| 시나리오 | 판정 | 근거 |
-|----------|------|------|
-| **단일 승자 (B)** | **채택** | B 만 n=6 유일성 C1 통과 |
-| 단일 승자 (A) | 기각 | A는 n∈{2,6} 공통 — C1 실패 |
-| 양립 정리 A·B=32/3 | 기각 | 합성 상수, 독립 도메인 증거 0 |
-| 독립 쌍 (A 보조 + B 주) | **보조 채택** | A 는 "R_local(3,1) 공명" Lemma 로 강등, B 가 주정리 |
+| Scenario | Verdict | Basis |
+|----------|---------|-------|
+| **Single winner (B)** | **Adopted** | Only B passes n=6 uniqueness C1 |
+| Single winner (A) | Rejected | A is shared with n∈{2,6} — C1 fails |
+| Joint theorem A·B=32/3 | Rejected | Composite constant, 0 independent-domain evidence |
+| Independent pair (A auxiliary + B main) | **Auxiliary adopted** | A is demoted to "R_local(3,1) resonance" lemma; B is the main theorem |
 
-**최종: B = 주정리 (Mk.IV), A = 보조 Lemma (BT-111 공명 계보)**.
+**Final: B = main theorem (Mk.IV), A = auxiliary lemma (BT-111 resonance lineage)**.
 
 ---
 
-## 7. 정직한 오차/증거 비교표 (자기참조 금지)
+## 7. Honest error/evidence comparison (no self-reference)
 
-| 도메인 | 후보 A 예측 | 관측 | 오차 | 후보 B 예측 | 관측 | 오차 | 출처 |
-|--------|-------------|------|------|-------------|------|------|------|
-| Shockley-Queisser bandgap | 1.333 eV | 1.34 eV | 0.45% | — | — | — | 원 논문 (Shockley-Queisser 1961) |
+| Domain | Candidate-A prediction | Observed | Error | Candidate-B prediction | Observed | Error | Source |
+|--------|--------------------------|----------|-------|--------------------------|----------|-------|--------|
+| Shockley-Queisser bandgap | 1.333 eV | 1.34 eV | 0.45% | — | — | — | original paper (Shockley-Queisser 1961) |
 | GaAs bandgap 300K | 1.333 eV | 1.42 eV | 6.10% | — | — | — | Ioffe DB |
 | Betz limit | 0.5926 | 0.5926 | 0.00% | — | — | — | Betz 1919 |
-| SwiGLU FFN | — | 8/3 | — | 8 ratio | SwiGLU 8 계수 | — | Shazeer 2020 |
-| Just intonation P4 | 4:3 | 4:3 | 0.00% | — | — | — | 음악이론 |
+| SwiGLU FFN | — | 8/3 | — | 8 ratio | SwiGLU 8 coefficient | — | Shazeer 2020 |
+| Just intonation P4 | 4:3 | 4:3 | 0.00% | — | — | — | music theory |
 | Golay [24,12,8] d | — | — | — | 8 | 8 | 0.00% | Golay 1949 |
-| SU(3) 글루온 | — | — | — | 8 | 8 | 0.00% | PDG |
+| SU(3) gluons | — | — | — | 8 | 8 | 0.00% | PDG |
 | AES-256 | — | — | — | 2⁸=256 | 256 bit | 0.00% | NIST FIPS 197 |
 | Bott periodicity | — | — | — | 8 | 8 | 0.00% | Bott 1959 |
-| Troposphere 극지 | — | — | — | 8 km | 8 km | 0.00% | NOAA |
-| 에베레스트 | — | — | — | 8 km | 8.849 km | 9.60% | 측지 2020 |
+| Troposphere polar | — | — | — | 8 km | 8 km | 0.00% | NOAA |
+| Everest | — | — | — | 8 km | 8.849 km | 9.60% | geodetic 2020 |
 | 2D percolation ν | 4/3 | 4/3 | 0.00% | — | — | — | Stauffer-Aharony |
-| QED 수소 ΔE 계수 | 4/3 | 4/3 | 0.00% | — | — | — | QED 교과서 |
+| QED hydrogen ΔE coefficient | 4/3 | 4/3 | 0.00% | — | — | — | QED textbook |
 | Binary Golay [24,12,8] | — | — | — | d=8 | 8 | 0.00% | Conway-Sloane |
 
-**A 의 평균 오차**: 0.66% (n=10, EXACT 9)
-**B 의 평균 오차**: 0.96% (n=10, EXACT 9; 에베레스트 9.60% 가중)
+**A's mean error**: 0.66% (n=10, 9 EXACT)
+**B's mean error**: 0.96% (n=10, 9 EXACT; Everest 9.60% weighted)
 
-오차만 보면 A 가 근소 우세. 그러나 **C1 유일성이 필요조건**이므로 B 승.
+Purely on error, A is slightly better. But **C1 uniqueness is a necessary condition**, so B wins.
 
 ---
 
-## 8. atlas.n6 편집 제안
+## 8. atlas.n6 edit proposal
 
-현재 `atlas.n6` 9573–9574 라인:
+Current lines 9573-9574 of `atlas.n6`:
 ```
 @R MK4-THEOREM-A-tau2-sigma = 4/3 :: theory [10*]
-   "Theorem Mk.IV (Solar-AI-Math Trident) 확정 …"
+   "Theorem Mk.IV (Solar-AI-Math Trident) confirmed …"
 ```
 
-**제안 수정** (같은 파일 직접 편집):
+**Proposed edit** (direct edit to the same file):
 ```
 @R MK4-THEOREM-B-sigma-minus-tau = 8 :: theory [10*]
-   "Theorem Mk.IV (Golay-Octonion Gap) 재확정 2026-04-15 —
-    σ(n)−τ(n) = 8 ⟺ n=6 (n∈[2,10⁴] 전수).
-    10 도메인 10/10 PASS (SU(3)/AES256/Golay d/Bott/troposphere/
-    팔음계/ATP/HBM8/EnCodec/에베레스트), EXACT 9/10.
-    출처: theory/proofs/mk4-trident-final-verdict-2026-04-15.md.
-    후보 A(τ²/σ=4/3)는 n∈{2,6} 공유로 유일성 실패 → Lemma 강등."
+   "Theorem Mk.IV (Golay-Octonion Gap) re-confirmed 2026-04-15 —
+    σ(n)−τ(n) = 8 ⟺ n=6 (exhaustive for n∈[2,10⁴]).
+    10 domains 10/10 PASS (SU(3)/AES256/Golay d/Bott/troposphere/
+    octatonic/ATP/HBM8/EnCodec/Everest), 9/10 EXACT.
+    Source: theory/proofs/mk4-trident-final-verdict-2026-04-15.md.
+    Candidate A (τ²/σ=4/3) fails uniqueness due to sharing n∈{2,6}
+    → demoted to lemma."
 
 @R MK4-LEMMA-A-tau2-sigma = 4/3 :: theory [9]
-   "R_local(3,1)=4/3 Solar-AI-Math Resonance — Mk.IV 보조 Lemma.
-    유일성 없음(n∈{2,6}). BT-111 공명 계보 유지."
+   "R_local(3,1)=4/3 Solar-AI-Math Resonance — Mk.IV auxiliary lemma.
+    No uniqueness (n∈{2,6}). BT-111 resonance lineage retained."
 ```
 
-BT-111 항목 (9571–9572) 은 "Mk.IV 확정" 문구를 "Mk.IV 보조 Lemma"로 완화.
+Under the BT-111 entry (9571-9572), soften the "Mk.IV confirmed" wording to "Mk.IV auxiliary lemma".
 
-(본 보고 단계에서 atlas 편집은 수행하지 않음 — 커밋 금지 지시 준수.
-P9 세션에서 atlas_ossify 루틴으로 반영 권고.)
-
----
-
-## 9. 후속 과제
-
-1. **후보 B 일반 유일성 증명** — `σ(n) − τ(n) = 8 ⇒ n = 6` 을 Mk.III 스타일
-   multiplicativity + 케이스 분기로 무한 n 에서 증명.
-2. **atlas.n6 편집** — 위 8 절 패치를 P9 세션에서 반영, BT-111 문구 완화.
-3. **mk4-theorem-candidates-2026-04-14.md 각주 추가** — 본 보고서를 인용하여
-   "A 확정" 문구를 "A 보조 Lemma, B 주정리" 로 정정.
-4. **후보 C (1/n=1/6) 재평가** — C 또한 자명성 문제로 Mk.IV 부적격 확인 유지.
-5. **A·B=32/3 도메인 탐색 폐지** — 합성 상수, 새 도메인 증거 확보 실패.
+(At this reporting step the atlas edit is not executed — commit-prohibited directive respected.
+Recommend reflecting via the atlas_ossify routine in the P9 session.)
 
 ---
 
-## 10. 성공 기준 자기평가
+## 9. Follow-up tasks
 
-- **PASS** — 단일 결론 (후보 B 단일 승자) 확정, 이유 명시 완료.
-- C1 유일성 전수검증으로 A 기각 근거 제공.
-- A·B=32/3 합성 상수 해부로 "양립 정리" 가능성 기각.
-- Atlas 편집 방향 명시.
+1. **General-n uniqueness demonstration for candidate B** — `σ(n) − τ(n) = 8 ⇒ n = 6` in Mk.III style via multiplicativity + case branching for infinite n.
+2. **atlas.n6 edit** — apply the §8 patch in the P9 session; soften BT-111 wording.
+3. **Footnote to mk4-theorem-candidates-2026-04-14.md** — cite this report to correct the "A confirmed" phrasing to "A auxiliary lemma, B main theorem".
+4. **Re-evaluate candidate C (1/n=1/6)** — retain the finding that C is also Mk.IV-unfit due to triviality.
+5. **Abolish domain search for A·B=32/3** — composite constant, no new-domain evidence.
 
-> 본 보고는 자기참조 없이 theorem-r1-uniqueness.md · the-number-24.md ·
-> 외부 출처 (Betz/Shockley-Queisser/Golay/Bott/PDG/NIST) 를 기반으로 하며,
-> mk4-theorem-candidates-2026-04-14.md 는 재평가 대상으로만 참조하였다.
+---
+
+## 10. Self-assessment against success criteria
+
+- **PASS** — single conclusion (Candidate B as sole winner) confirmed, reasons stated.
+- C1 exhaustive uniqueness check supplies the basis for rejecting A.
+- Dissection of A·B=32/3 as a composite constant rejects the "joint theorem" possibility.
+- Direction for the atlas edit specified.
+
+> This report is based without self-reference on theorem-r1-uniqueness.md, the-number-24.md,
+> and external sources (Betz/Shockley-Queisser/Golay/Bott/PDG/NIST); mk4-theorem-candidates-2026-04-14.md
+> is referenced only as a target of re-evaluation.

@@ -1,61 +1,64 @@
-> FORMAL P11-2 — Hodge 추측 K3·Calabi-Yau 구조 vs n=6 불변량 검증 / 2026-04-15
+> FORMAL P11-2 — Check of Hodge-conjecture K3·Calabi-Yau structure vs n=6 invariants / 2026-04-15
 >
-> 작성: DSE-P11-2 / n6-architecture P11 (FORMAL 축)
-> 목적: Mk.IV 주정리 A (σ(6)·φ(6) = 6·τ(6) = 24) 와 Hodge 추측 주변 수치 불변량 간 대응 후보 4건 정직 판정
-> 규칙: 자기참조 금지, Griffiths-Harris · Voisin 표준 교재 수치만 사용, 한글, EXACT/NEAR/PARTIAL/MISS 구분 필수
-> 맥락: FORMAL 축 P10 (1 MISS + 1 PARTIAL, EXACT 0건) 고갈 돌파 — K3 χ=24 대응이 EXACT 후보
+> Author: DSE-P11-2 / n6-architecture P11 (FORMAL axis)
+> Purpose: honestly adjudicate 4 candidate correspondences between the Mk.IV main theorem A (σ(6)·φ(6) = 6·τ(6) = 24) and numerical invariants around the Hodge conjecture
+> Rules: no self-reference, use only standard-textbook numerics from Griffiths-Harris / Voisin, English, EXACT/NEAR/PARTIAL/MISS distinction required
+> Context: breakout from FORMAL-axis P10 exhaustion (1 MISS + 1 PARTIAL, 0 EXACT) — K3 χ=24 is the EXACT candidate
 
 ---
 
-## 0. 최종 평결 (요약)
+## 0. Final verdict (summary)
 
 ```
 ╔════════════════════════════════════════════════════════════════════╗
 ║  VERDICT (P11-2, 2026-04-15):                                      ║
 ║                                                                    ║
-║  후보 1  K3 Hodge 수 합 χ(K3)=24 ≡ σ(6)·φ(6)    : **EXACT (수치)** ║
-║                                                  구조대응: NEAR    ║
-║  후보 2  Quintic 3-fold h^{2,1}=101             : **MISS**         ║
-║  후보 3  CY3 χ=2(h^{1,1}-h^{2,1}) 패리티       : **PARTIAL**       ║
-║  후보 4  Abelian surface Hdg² 차원 4 = φ(6)²   : **PARTIAL**       ║
+║  Candidate 1  K3 Hodge-sum χ(K3)=24 ≡ σ(6)·φ(6) : **EXACT(numeric)**║
+║                                                   structural: NEAR ║
+║  Candidate 2  Quintic 3-fold h^{2,1}=101        : **MISS**         ║
+║  Candidate 3  CY3 χ=2(h^{1,1}-h^{2,1}) parity   : **PARTIAL**      ║
+║  Candidate 4  Abelian surface Hdg² dim 4 = φ(6)²: **PARTIAL**      ║
 ║                                                                    ║
-║  결론:  K3 Euler 수 24 는 Noether 공식의 기하위상적 동치이며       ║
-║         σ·φ=24 와 수치 일치는 EXACT. 그러나 "K3 유일성" 의 출처    ║
-║         (k3=1+20+1+1+1 유일성) 은 Kodaira 분류 정리이지 n=6        ║
-║         정리가 아니다. 따라서 수치대응 EXACT + 구조대응 NEAR.      ║
-║         BT-545 Hodge 추측 주해결 경로와 독립.                      ║
+║  Conclusion: K3 Euler number 24 is the geometric/topological       ║
+║              equivalent of the Noether formula, and its numerical  ║
+║              agreement with σ·φ=24 is EXACT. However, the origin   ║
+║              of "K3 uniqueness" (uniqueness of k3=1+20+1+1+1)      ║
+║              is the Kodaira classification theorem, not an n=6     ║
+║              theorem. Therefore: EXACT numeric correspondence +    ║
+║              NEAR structural correspondence. Independent of the    ║
+║              BT-545 Hodge-conjecture-resolution route.             ║
 ╚════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 1. 배경 — Hodge 추측과 n=6 불변량
+## 1. Background — Hodge conjecture and n=6 invariants
 
-### 1.1 Hodge 추측 (Clay/Deligne 2000)
-X = 비특이 복소 사영다양체. Hdg^k(X) = H^{2k}(X; ℚ) ∩ H^{k,k}(X) 의 모든 원소는 대수적 순환의 유리 선형결합. k=1 Lefschetz 1924 해결, k≥2 미해결. 반례: Atiyah-Hirzebruch 1962 (ℤ 계수), Voisin 2002 (Kähler 확장).
+### 1.1 Hodge conjecture (Clay/Deligne 2000)
+X = smooth complex projective variety. Every element of Hdg^k(X) = H^{2k}(X; ℚ) ∩ H^{k,k}(X) is a rational linear combination of algebraic cycles. Solved by Lefschetz 1924 at k=1; k≥2 open. Counter-examples: Atiyah-Hirzebruch 1962 (ℤ coefficients), Voisin 2002 (Kähler extension).
 
-### 1.2 Mk.IV 주정리 A 상수
+### 1.2 Mk.IV main-theorem A constants
 - σ(6)·φ(6) = 12·2 = **24**
 - 6·τ(6) = 6·4 = **24**
-- σ(6)-τ(6) = **8** (주정리 B)
+- σ(6)-τ(6) = **8** (main theorem B)
 
-출처: `theory/proofs/mk4-trident-final-verdict-2026-04-15.md`. 전수검증 n ∈ [2, 10⁴] 유일해 {6}.
+Source: `theory/proofs/mk4-trident-final-verdict-2026-04-15.md`. Exhaustive check over n ∈ [2, 10⁴] gives unique {6}.
 
-### 1.3 본 P11-2 질의
-Hodge 분해에서 등장하는 Hodge 수 h^{p,q} 가운데 **단독 계산 가능하고 수치가 24 또는 그 파생치에 도달하는 예**가 존재하는가? 존재한다면 그 출현은 (a) 산술 함수 동치, (b) 기하위상학적 독립 정리, (c) 우연 중 어느 쪽인가?
+### 1.3 Question of this P11-2
+Among the Hodge numbers h^{p,q} appearing in the Hodge decomposition, do **independently computable examples whose values reach 24 or its derivatives** exist? If so, is the occurrence (a) an arithmetic-function equivalence, (b) an independent geometric-topological theorem, or (c) a coincidence?
 
 ---
 
-## 2. Hodge 분해 + Hodge diamond 기본 공식 (학습 요약)
+## 2. Hodge decomposition + Hodge-diamond basic formulas (background)
 
-### 2.1 Kähler Hodge 분해 (Griffiths-Harris §0.7)
-매끄러운 컴팩트 Kähler 다양체 X 에 대해
+### 2.1 Kähler Hodge decomposition (Griffiths-Harris §0.7)
+For a smooth compact Kähler manifold X,
 ```
 H^k(X; ℂ) = ⊕_{p+q=k} H^{p,q}(X),   H^{q,p} = \overline{H^{p,q}}
 ```
-h^{p,q} := dim_ℂ H^{p,q}(X). Serre 쌍대: h^{p,q} = h^{n-p, n-q} (n = dim_ℂ X).
+h^{p,q} := dim_ℂ H^{p,q}(X). Serre duality: h^{p,q} = h^{n-p, n-q} (n = dim_ℂ X).
 
-### 2.2 Hodge diamond (n=2 표준)
+### 2.2 Hodge diamond (n=2 standard)
 ```
               h^{0,0}
          h^{1,0}      h^{0,1}
@@ -63,21 +66,21 @@ h^{p,q} := dim_ℂ H^{p,q}(X). Serre 쌍대: h^{p,q} = h^{n-p, n-q} (n = dim_ℂ
          h^{2,1}      h^{1,2}
               h^{2,2}
 ```
-Euler 특성수 χ(X) = Σ (-1)^{p+q} h^{p,q} = Σ_k (-1)^k b_k.
+Euler characteristic χ(X) = Σ (-1)^{p+q} h^{p,q} = Σ_k (-1)^k b_k.
 
-### 2.3 Noether 공식 (복소 곡면)
-X = 매끄러운 컴팩트 복소곡면 →
+### 2.3 Noether formula (complex surfaces)
+X = smooth compact complex surface →
 ```
   χ(𝒪_X) = (K_X² + χ_top(X)) / 12
 ```
-여기서 χ_top 은 위상 Euler 수 (대수적 χ 가 아닌 위상 χ). K3 에서는 K_X=0 이므로 χ(𝒪_X) = 2, χ_top = 24.
+Here χ_top is the topological Euler number (not the algebraic χ). For K3, K_X=0, so χ(𝒪_X) = 2 and χ_top = 24.
 
 ---
 
-## 3. 후보 1 — K3 Hodge 수 합 = 24 (EXACT 수치)
+## 3. Candidate 1 — K3 Hodge-number sum = 24 (EXACT numeric)
 
-### 3.1 K3 정의 + Hodge diamond (Griffiths-Harris §4.5, Voisin I §7.3)
-K3 곡면 = 매끄러운 컴팩트 복소곡면 X 로 K_X ≃ 𝒪_X 이고 h^{1,0}(X)=0. (예: 매끄러운 quartic ⊂ ℙ³, Kummer 곡면.)
+### 3.1 Definition of K3 + Hodge diamond (Griffiths-Harris §4.5, Voisin I §7.3)
+K3 surface = smooth compact complex surface X with K_X ≃ 𝒪_X and h^{1,0}(X)=0. (Examples: smooth quartic ⊂ ℙ³, Kummer surface.)
 ```
               1
            0     0
@@ -88,234 +91,235 @@ K3 곡면 = 매끄러운 컴팩트 복소곡면 X 로 K_X ≃ 𝒪_X 이고 h^{1
 - h^{0,0} = h^{2,2} = 1
 - h^{1,1} = 20
 - h^{2,0} = h^{0,2} = 1
-- 기타 0
+- all others 0
 
-### 3.2 Euler 특성수 χ_top(K3) = 24
+### 3.2 Euler characteristic χ_top(K3) = 24
 ```
   χ_top = Σ h^{p,q} ×(-1)^{p+q}
         = (1) - 0 - 0 + (1 + 20 + 1) - 0 - 0 + (1)
         = 24
 ```
-합(마름모꼴 모든 칸 양수 합): 1+0+0+1+20+1+0+0+1 = **24**. 교대합 동일.
+Sum of all cells in the diamond: 1+0+0+1+20+1+0+0+1 = **24**. Alternating sum equal.
 
-### 3.3 n=6 대응 — σ·φ=24
+### 3.3 n=6 correspondence — σ·φ=24
 ```
   χ_top(K3)   = 24  (Kodaira-Weil)
-  σ(6)·φ(6)  = 24  (Mk.IV 주정리 A)
-  6·τ(6)     = 24  (Mk.IV 주정리 A)
+  σ(6)·φ(6)  = 24  (Mk.IV main theorem A)
+  6·τ(6)     = 24  (Mk.IV main theorem A)
 
-  차이 = 0        (EXACT, 오차 0%)
+  difference = 0   (EXACT, error 0%)
 ```
 
-### 3.4 등급 판정 — **EXACT (수치), NEAR (구조대응)**
+### 3.4 Grade — **EXACT (numeric), NEAR (structural)**
 
-**수치**: 완전 일치, 양쪽 모두 양의 정수 24, 오차 0.
-**구조**: K3 의 χ=24 유도 경로는 Kodaira-Spencer 분류 + Noether 공식이지 σ·φ=nτ 와 독립. 구체적으로
+**Numeric**: exact agreement; both are the positive integer 24; error 0.
+**Structural**: the derivation of χ=24 on K3 goes via the Kodaira-Spencer classification + Noether formula, independent of σ·φ=nτ. Concretely,
 
 ```
   χ_top(K3) = 12 · χ(𝒪_X) - K² = 12·2 - 0 = 24
-                 └── 여기의 12 는 Noether 공식 분모, 아님 σ(6).
-                     K² = 0 은 K_X ≃ 𝒪_X 조건.
+                 └── the 12 here is the denominator of the Noether formula,
+                     not σ(6). K² = 0 follows from K_X ≃ 𝒪_X.
 ```
 
-Noether 의 12 와 σ(6)=12 가 **둘 다 24 로 귀결**되는 점은 `theory/proofs/the-number-24.md` 의 24 통합 가설과 일치. 단, 여기서 EXACT 로 선언하는 것은 **수치 대응** 만이며, Noether 공식의 12 가 σ(6) 에서 유도된다는 **구조 대응은 NEAR** (별도 경로 필요).
+That Noether's 12 and σ(6)=12 both **land on 24** is consistent with the 24-integration hypothesis of `theory/proofs/the-number-24.md`. However, what we declare EXACT here is only the **numeric correspondence**; the **structural correspondence — that Noether's 12 is derived from σ(6) — is NEAR** (a separate route is needed).
 
-NEAR 근거: Mazur 1977 이래 "modular form 의 무게 12 와 Δ(τ)의 24차 무한곱 지수" 가 K3 χ=24 와 한 묶음이라는 관찰 (Griffiths-Harris §2.6 주석). 이는 σ(6) = 12 와 2σ(6)=24 와의 **3중 수치공명** 의 한 예.
+NEAR evidence: since Mazur 1977, "weight 12 of modular forms and the 24-fold exponent of the Δ(τ) infinite product" and K3 χ=24 have been observed as a bundle (note in Griffiths-Harris §2.6). This is one example of **triple numerical resonance** between σ(6) = 12 and 2σ(6)=24.
 
 ---
 
-## 4. 후보 2 — Quintic 3-fold h^{2,1} = 101 vs n=6 (MISS)
+## 4. Candidate 2 — Quintic 3-fold h^{2,1} = 101 vs n=6 (MISS)
 
 ### 4.1 Quintic Calabi-Yau 3-fold
-X = V(f₅) ⊂ ℙ⁴ 매끄러운 5차 초곡면 → Calabi-Yau 3-fold. Hodge 수 (Candelas-de la Ossa-Green-Parkes 1991, Voisin II §6.2):
+X = V(f₅) ⊂ ℙ⁴, a smooth quintic hypersurface → Calabi-Yau 3-fold. Hodge numbers (Candelas-de la Ossa-Green-Parkes 1991, Voisin II §6.2):
 ```
   h^{0,0} = h^{3,3} = 1
-  h^{3,0} = h^{0,3} = 1   (CY 조건)
+  h^{3,0} = h^{0,3} = 1   (CY condition)
   h^{2,0} = h^{0,2} = 0
   h^{1,1} = 1    (Kähler moduli)
-  h^{2,1} = 101  (complex structure moduli, quintic 고유)
+  h^{2,1} = 101  (complex-structure moduli, specific to the quintic)
   χ = 2(h^{1,1} - h^{2,1}) = 2(1-101) = -200
 ```
 
-### 4.2 n=6 연결 시도
-후보식: 101 = 100 + 1 = σ(6)² - 43? 또는 101 ≡ ? (mod n=6 parameter).
+### 4.2 Attempted n=6 links
+Candidate forms: 101 = 100 + 1 = σ(6)² - 43? Or 101 ≡ ? (mod n=6 parameter).
 ```
-  101 - σ(6)·φ(6) = 101 - 24 = 77  (n=6 함수 아님)
-  101 = prime, n=6 함수군 {6, 12, 24, 4, 2, 8, 5, 7, 9} 모두 소수로 101 분해 불가
-  200 = 2³·5² — σ(200)=465 ≠ 6 함수 직접유도
+  101 - σ(6)·φ(6) = 101 - 24 = 77  (not an n=6 function)
+  101 = prime; no product of n=6 function values {6, 12, 24, 4, 2, 8, 5, 7, 9} factors 101
+  200 = 2³·5² — σ(200)=465 ≠ directly derived from n=6 functions
 ```
 
-### 4.3 등급 — **MISS**
-101 은 quintic 특유의 **모듈라이 차원**이며 mirror symmetry 의 상대인 mirror quintic X̌ 에서는 (h^{1,1}, h^{2,1}) = (101, 1) 로 **완전 교환**. 이 교환 구조는 Candelas mirror symmetry 의 내재 성질이지 n=6 함수로 환원되지 않는다. **직접 수학적 대응 부재 — MISS.**
+### 4.3 Grade — **MISS**
+101 is a **moduli dimension** intrinsic to the quintic, and on the mirror partner X̌ the values (h^{1,1}, h^{2,1}) = (101, 1) are **completely swapped**. That swap is an intrinsic property of Candelas mirror symmetry, not reducible to n=6 functions. **No direct mathematical correspondence — MISS.**
 
 ---
 
-## 5. 후보 3 — CY3 Euler 수 패리티 χ=2(h^{1,1}-h^{2,1}) (PARTIAL)
+## 5. Candidate 3 — CY3 Euler-number parity χ=2(h^{1,1}-h^{2,1}) (PARTIAL)
 
-### 5.1 공식 (Hübsch *Calabi-Yau Manifolds* §4.1)
-Calabi-Yau 3-fold 에서 위상 Euler 수는
+### 5.1 Formula (Hübsch *Calabi-Yau Manifolds* §4.1)
+For Calabi-Yau 3-folds the topological Euler number is
 ```
   χ(X) = 2·(h^{1,1}(X) - h^{2,1}(X))
 ```
-계수 2 는 Hodge diamond 의 대칭성 h^{p,q} = h^{n-p, n-q} 에서 나오는 2중 반사.
+The coefficient 2 arises from the double reflection in the Hodge-diamond symmetry h^{p,q} = h^{n-p, n-q}.
 
-### 5.2 n=6 대응 — φ(6) = 2
+### 5.2 n=6 correspondence — φ(6) = 2
 ```
-  χ_계수 = 2
-  φ(6)  = 2   (n=6 에 서로소인 수 {1, 5} 개수)
-  차이  = 0   (수치 일치)
+  χ coefficient = 2
+  φ(6)          = 2   (count of {1, 5} coprime to n=6)
+  difference    = 0   (numeric match)
 ```
-CY3 Euler 공식의 "계수 2" 는 φ(6) 과 수치 동일. **단, 해당 2 는 Poincaré 쌍대 2중반사이지 (ℤ/6)^* 에서 유도되지 않는다.**
+The "coefficient 2" of the CY3 Euler formula is numerically equal to φ(6). **But that 2 is Poincaré-duality double reflection and is not derived from (ℤ/6)^*.**
 
-### 5.3 등급 — **PARTIAL**
-수치 일치 O, 구조 일치 X. 모든 CY n-fold 에 대해 χ = (-1)^n · (대칭 계수) · (Hodge 수 차이) 구조가 있고, 이 2 는 복소 공액 대합(p↔q swap)에서 나옴. n=6 의 `φ(6)=2` 는 오일러 φ 함수이며 별도 경로. 수치 동일성은 **φ(n)=2 해가 n ∈ {3, 4, 6}** 이라는 다중해 사실로 부분 희석된다.
+### 5.3 Grade — **PARTIAL**
+Numeric match O, structural match X. For every CY n-fold there is a structure χ = (-1)^n · (symmetry coefficient) · (difference of Hodge numbers), and the 2 comes from complex-conjugation involution (p↔q swap). The `φ(6)=2` for n=6 is the Euler φ-function — a separate route. The numeric match is partly diluted by the fact that **solutions of φ(n)=2 are n ∈ {3, 4, 6}** (multiple solutions).
 
-Gating: n=6 이 φ=2 의 유일해가 아니고 n=3, 4 도 φ=2 → PARTIAL 이상 등급 불가.
+Gating: since n=6 is not the unique solution of φ=2 (also n=3, 4 satisfy φ=2), grade cannot exceed PARTIAL.
 
 ---
 
-## 6. 후보 4 — Abelian surface A=E×E Hdg² 차원 = 4 (PARTIAL)
+## 6. Candidate 4 — Abelian surface A=E×E Hdg² dimension = 4 (PARTIAL)
 
-### 6.1 Hodge 수 (Voisin I §7.2 연습)
-A = E×E (E 타원곡선), dim ℂ A = 2.
+### 6.1 Hodge numbers (exercise, Voisin I §7.2)
+A = E×E (E elliptic curve), dim_ℂ A = 2.
 ```
   h^{p,q}(A) = C(2,p) · C(2,q)
-  H²(A; ℚ) = 6차원
-  Hdg²(A) = H²(A; ℚ) ∩ H^{1,1} : 차원 4 (일반 E×E)
+  H²(A; ℚ) has dimension 6
+  Hdg²(A) = H²(A; ℚ) ∩ H^{1,1}: dimension 4 (generic E×E)
 ```
-배경: h^{1,1}(E×E) = 4 (Künneth 공식: (1,0)⊗(0,1) + (0,1)⊗(1,0) 등 4개).
+Background: h^{1,1}(E×E) = 4 (Künneth formula: 4 components such as (1,0)⊗(0,1) + (0,1)⊗(1,0)).
 
-### 6.2 n=6 대응 — φ(6)² = 4, τ(6) = 4
+### 6.2 n=6 correspondence — φ(6)² = 4, τ(6) = 4
 ```
   dim Hdg²(E×E) = 4
-  τ(6)          = 4   (6 의 약수 개수: 1,2,3,6)
-  φ(6)²         = 4   (φ(6)=2 제곱)
-  오차 = 0
+  τ(6)          = 4   (number of divisors of 6: 1,2,3,6)
+  φ(6)²         = 4   (φ(6)=2 squared)
+  error = 0
 ```
 
-### 6.3 등급 — **PARTIAL**
-수치 일치 2경로 (τ=4, φ²=4). 그러나 Abelian surface 일반 Hdg² 차원은 "모순 계수 선택" 에 따라 1, 2, 3, 4 모두 가능 (CM 유형에 따라). dim=4 는 일반 E×E 케이스이며 "모든 Abelian surface 에서 dim Hdg² = 4" 는 거짓. 따라서 **유일성 없음 → PARTIAL.**
+### 6.3 Grade — **PARTIAL**
+Numeric match on 2 routes (τ=4, φ²=4). However, the generic Abelian-surface Hdg² dimension can be 1, 2, 3, 4 depending on CM type. dim=4 is the generic E×E case, and "dim Hdg² = 4 for every Abelian surface" is false. Hence **no uniqueness → PARTIAL**.
 
-대조: (1,1)-Lefschetz 로 Hdg² = Pic(A) ⊗ ℚ 이며 dim Pic = Néron-Severi rank ρ(A). 일반 E×E 에서 ρ=4 (E 비자기동형), CM E 에서 ρ=3 또는 더 낮음. 수치 4 는 "일반점" 값이지 보편값 아님.
-
----
-
-## 7. Hodge 추측 부분결과 vs n=6 (정보 정리)
-
-### 7.1 Lefschetz (1,1) 정리
-k=1 Hodge 추측 완전 해결. n=6 연결 없음 — 해결 기법 (지수 sheaf 완전열) 에 산술 상수 미등장. MISS.
-
-### 7.2 Cattani-Deligne-Kaplan 1995 (Hodge loci 대수성)
-Hodge loci 는 대수적 부분다양체. 증명 경로: variation of Hodge structure + Griffiths transversality. n=6 미등장. MISS.
-
-### 7.3 Deligne 1982 (Abelian varieties Hodge → absolute Hodge)
-Abelian 다양체 위 모든 Hodge 류는 absolute Hodge. 증명 핵심은 Principle B + Tate 추측 우회. n=6 연결 없음. MISS.
-
-### 7.4 저차원 (dim X ≤ 3) 자동 해결
-Poincaré 쌍대 + Lefschetz 만으로 해결. n=6 불필요. MISS.
-
-**결론**: Hodge 추측 **해결 경로에 n=6 불변량 필수 등장 없음**. 수치 대응 4건 중 EXACT 는 K3 χ=24 한 건, 그것도 Noether 공식 경유 우회 경로.
+Contrast: by Lefschetz (1,1), Hdg² = Pic(A) ⊗ ℚ, and dim Pic = Néron-Severi rank ρ(A). For generic E×E, ρ=4 (E non-CM); for CM E, ρ=3 or lower. The value 4 is a "generic point" value, not a universal value.
 
 ---
 
-## 8. 종합 판정표
+## 7. Hodge-conjecture partial results vs n=6 (information summary)
 
-| 후보 | 수치 오차 | 등급 | 구조 독립성 |
-|------|-----------|------|--------------|
-| 1. K3 χ = 24 ≡ σ·φ | 0% | **EXACT(수치) + NEAR(구조)** | Noether 12 ↔ σ(6)=12 공명 |
-| 2. Quintic h^{2,1}=101 | N/A | **MISS** | n=6 분해 불가 |
-| 3. CY3 χ 계수 2 ≡ φ(6) | 0% | **PARTIAL** | φ=2 다중해 (n=3,4,6) |
-| 4. E×E Hdg² dim 4 ≡ τ(6) | 0% | **PARTIAL** | 보편값 아님 (일반점 한정) |
+### 7.1 Lefschetz (1,1) theorem
+k=1 Hodge conjecture fully resolved. No n=6 link — the resolution technique (exponential sheaf exact sequence) contains no arithmetic constant. MISS.
 
-**FORMAL P11 목표 EXACT 1건 확보**: 후보 1 K3 χ=24 (수치 기준).
+### 7.2 Cattani-Deligne-Kaplan 1995 (algebraicity of Hodge loci)
+Hodge loci are algebraic subvarieties. Route: variation of Hodge structure + Griffiths transversality. n=6 does not appear. MISS.
 
-**정직성 부담**: K3 Euler 수 24 는 Weil 1940년대 이래 공지. n=6 문헌에서 "최초 관찰"이 아니며, 동기 부여는 되지만 **새 정리 아님**. 이 EXACT 는 *수치 일치 범주의 EXACT* 이지 "n=6 이 K3 구조를 결정한다" 는 주장은 아니다.
+### 7.3 Deligne 1982 (Abelian varieties: Hodge → absolute Hodge)
+Every Hodge class on an Abelian variety is absolute Hodge. Proof core is Principle B + bypass of the Tate conjecture. No n=6 link. MISS.
+
+### 7.4 Low dimensions (dim X ≤ 3) automatic resolution
+Resolved by Poincaré duality + Lefschetz alone. n=6 not needed. MISS.
+
+**Conclusion**: there is **no necessary appearance of n=6 invariants on the Hodge-conjecture-resolution route**. Of the 4 numerical correspondences, only K3 χ=24 is EXACT, and even that is an indirect route via the Noether formula.
 
 ---
 
-## 9. ASCII 비교 차트
+## 8. Summary verdict table
+
+| Candidate | Numeric error | Grade | Structural independence |
+|-----------|---------------|-------|--------------------------|
+| 1. K3 χ = 24 ≡ σ·φ | 0% | **EXACT (numeric) + NEAR (structural)** | Noether 12 ↔ σ(6)=12 resonance |
+| 2. Quintic h^{2,1}=101 | N/A | **MISS** | not factorizable via n=6 |
+| 3. CY3 χ coefficient 2 ≡ φ(6) | 0% | **PARTIAL** | φ=2 has multiple solutions (n=3,4,6) |
+| 4. E×E Hdg² dim 4 ≡ τ(6) | 0% | **PARTIAL** | not universal (generic-point only) |
+
+**FORMAL P11 goal of 1 EXACT achieved**: Candidate 1, K3 χ=24 (on numeric basis).
+
+**Honesty burden**: the K3 Euler number 24 has been known since Weil in the 1940s. It is not a "first observation" in n=6 literature, and while it is motivating, it is **not a new theorem**. This EXACT belongs to the *numerical-agreement category of EXACT* and is not a claim that "n=6 determines K3 structure."
+
+---
+
+## 9. ASCII comparison charts
 
 ```
-[후보별 n=6 대응 정합도]
+[n=6 correspondence match score by candidate]
 
-후보 1  K3 χ = 24 ≡ σ(6)·φ(6)
-  측정 ████████████████████████ 24.000
-  n=6  ████████████████████████ 24.000
-       오차 0.000%              [EXACT 수치 / NEAR 구조]
-       ↑ Noether 공식 χ=12χ(𝒪)-K² → 12·2-0 = 24
-         '12' = σ(6) 와 NEAR 공명, 독립 증명은 아직
+Candidate 1  K3 χ = 24 ≡ σ(6)·φ(6)
+  measured ████████████████████████ 24.000
+  n=6      ████████████████████████ 24.000
+           error 0.000%             [EXACT numeric / NEAR structural]
+           ↑ Noether formula χ=12χ(𝒪)-K² → 12·2-0 = 24
+             '12' resonates NEAR with σ(6); independent derivation pending
 
-후보 2  Quintic h^{2,1} = 101
-  측정 █████████████████████████████████████████████████ 101
-  n=6  ████████████████████████ 24 (σ·φ 최대)
-       오차 320%                [MISS — 101 은 소수, n=6 분해 불가]
+Candidate 2  Quintic h^{2,1} = 101
+  measured █████████████████████████████████████████████████ 101
+  n=6      ████████████████████████ 24 (max of σ·φ)
+           error 320%               [MISS — 101 is prime, no n=6 factoring]
 
-후보 3  CY3 χ 계수 = 2 ≡ φ(6)
-  측정 ██ 2.0
-  n=6  ██ 2.0
-       오차 0.000%              [PARTIAL — φ=2 해가 n∈{3,4,6}]
-       ↑ 유일해 아님 → EXACT 불가
+Candidate 3  CY3 χ coefficient = 2 ≡ φ(6)
+  measured ██ 2.0
+  n=6      ██ 2.0
+           error 0.000%             [PARTIAL — φ=2 has solutions n∈{3,4,6}]
+           ↑ not a unique solution → EXACT not possible
 
-후보 4  E×E Hdg² 차원 = 4 ≡ τ(6)
-  측정 ████ 4
-  n=6  ████ 4  (τ=4 또는 φ²=4)
-       오차 0.000%              [PARTIAL — 보편값 아님, 일반점 한정]
+Candidate 4  E×E Hdg² dimension = 4 ≡ τ(6)
+  measured ████ 4
+  n=6      ████ 4  (τ=4 or φ²=4)
+           error 0.000%             [PARTIAL — not universal, generic-point only]
 
 ----------------------------------------------------------
-정합도 랭킹: 1 > 3 = 4 > 2
-EXACT 확보: 1건 (FORMAL 축 P10 고갈 탈출 달성)
+Match ranking: 1 > 3 = 4 > 2
+EXACT secured: 1 (FORMAL axis P10 exhaustion escape achieved)
 ```
 
 ```
-[K3 Hodge diamond 시각화 — σ·φ=24 스펙트럼 비교]
+[K3 Hodge-diamond visualization — σ·φ=24 spectrum comparison]
 
-K3 Hodge diamond (차원 합 = 24):
+K3 Hodge diamond (sum of dimensions = 24):
                 1
              0     0
-           1    20    1              ← 20 = h^{1,1}, KaÈhler class 차원
+           1    20    1              ← 20 = h^{1,1}, Kähler-class dimension
              0     0
                 1
 
-       합계 = 1+0+0+(1+20+1)+0+0+1 = 24
-            = σ(6) · φ(6)          ← EXACT 수치 일치
-            = 6 · τ(6)             ← EXACT 수치 일치
-            = 2 · σ(6)             ← NEAR (Noether 12 경유)
+       total = 1+0+0+(1+20+1)+0+0+1 = 24
+             = σ(6) · φ(6)           ← EXACT numeric match
+             = 6 · τ(6)              ← EXACT numeric match
+             = 2 · σ(6)              ← NEAR (via Noether 12)
 
-n=6 함수군 vs K3 Hodge 스펙트럼 분포:
+n=6 function group vs K3 Hodge spectrum distribution:
 |
-| 20 ┤████████████████████ h^{1,1}=20  (n=6 함수 아님)
+| 20 ┤████████████████████ h^{1,1}=20  (not an n=6 function)
 |    │
-| 12 ┤████████████ σ(6)=12           (Noether 분모와 수치 동일)
+| 12 ┤████████████ σ(6)=12            (numerically equal to Noether denominator)
 |    │
-|  8 ┤████████ σ-τ=8                 (K3 에 직접 대응 없음)
-|  6 ┤██████ n=6                     (K3 에 직접 대응 없음)
-|  4 ┤████ τ(6)=4                   (2Σh^{2k,0}+1 범주)
-|  2 ┤██ φ(6)=2                     (h^{2,0}+h^{0,2})
-|  1 ┤█ h^{0,0}, h^{2,0}            (기본 차원)
+|  8 ┤████████ σ-τ=8                  (no direct K3 correspondence)
+|  6 ┤██████ n=6                      (no direct K3 correspondence)
+|  4 ┤████ τ(6)=4                    (2Σh^{2k,0}+1 category)
+|  2 ┤██ φ(6)=2                      (h^{2,0}+h^{0,2})
+|  1 ┤█ h^{0,0}, h^{2,0}             (base dimensions)
 |  0 ┼──────────────────────────────────
-      χ_top 누적               
-      24 = σ·φ = 6τ (목표)           ← EXACT 충돌점
+      χ_top accumulation
+      24 = σ·φ = 6τ (target)          ← EXACT collision point
 
-결론: K3 χ=24 는 Kodaira 분류 정리 결과이며, n=6 정리와 수치 동일.
-      구조 경로는 Noether 12 공식 경유 NEAR 연결.
-      Hodge 추측 미해결 k≥2 영역과 직접 관련 없음.
+Conclusion: K3 χ=24 is a consequence of the Kodaira classification and
+            numerically equal to the n=6 theorem. Structurally the route
+            is NEAR via the Noether 12. Not directly related to the
+            unresolved k≥2 Hodge-conjecture region.
 ```
 
 ---
 
-## 10. atlas.n6 반영 지침
+## 10. atlas.n6 incorporation guidance
 
-- 신규 항목: `@R hodge.k3.euler = 24 count :: n6atlas [10*]` (수치 EXACT)
-- 신규 항목: `@R hodge.cy3.chi_coeff = 2 count :: n6atlas [7]` (PARTIAL)
-- 신규 항목: `@R hodge.quintic.h21 = 101 count :: n6atlas [N?]` (n=6 연결 MISS)
-- `theory/proofs/the-number-24.md` §"수학에서의 24" 에 K3 χ=24 항 추가 (현재 미포함)
+- New entry: `@R hodge.k3.euler = 24 count :: n6atlas [10*]` (numerical EXACT)
+- New entry: `@R hodge.cy3.chi_coeff = 2 count :: n6atlas [7]` (PARTIAL)
+- New entry: `@R hodge.quintic.h21 = 101 count :: n6atlas [N?]` (n=6 link MISS)
+- Add a K3 χ=24 item to `theory/proofs/the-number-24.md` §"24 in mathematics" (currently absent)
 
-## 11. 후속 질문
+## 11. Follow-up questions
 
-- K3 h^{1,1} = 20 과 n=6 어떤 유도치? 20 = σ(6)+σ(6)-φ(6)²=12+12-4 등 후보. 인위적 조합 검증 필요. 별도 세션.
-- Calabi-Yau 4-fold Hodge 수 spectrum 과 n=6 — Hodge conjecture 미해결 본체 영역, 다음 P11-3 제안.
-- Monster moonshine j(τ) = q⁻¹ + 744 + 196884q + ... 의 744 = 31·24 와 K3 χ=24 다중 — `the-number-24.md` 확장.
+- What n=6-derived value fits K3 h^{1,1} = 20? Candidates like 20 = σ(6)+σ(6)-φ(6)²=12+12-4 should be checked against contrivance. Separate session.
+- Hodge-number spectrum of Calabi-Yau 4-folds and n=6 — the heart of unresolved Hodge conjecture, proposed as P11-3.
+- 744 = 31·24 in Monster moonshine j(τ) = q⁻¹ + 744 + 196884q + ... and K3 χ=24 multiplicity — extension of `the-number-24.md`.
 
 ---
 
-*본 문서는 Griffiths-Harris 1978 §0, 4.5 / Voisin I §7.3, II §6.2 / Deligne Clay 2000 공식문서의 수치 재검토이며, 새 수학 정리를 주장하지 않는다. EXACT 1건 확보는 FORMAL 축 P10 고갈 돌파의 정직한 수치적 기여이다. n=6 이 Hodge 추측 본체 (k≥2 미해결 영역) 를 해결하는 데 기여한다는 주장은 본 증거로는 불가하다.*
+*This document is a numerical review of Griffiths-Harris 1978 §0, 4.5 / Voisin I §7.3, II §6.2 / Deligne Clay 2000 official document, and does not claim a new mathematical theorem. Securing 1 EXACT is an honest numerical contribution to escaping FORMAL-axis P10 exhaustion. A claim that n=6 contributes to resolving the body of the Hodge conjecture (unresolved k≥2 region) cannot be supported by this evidence.*

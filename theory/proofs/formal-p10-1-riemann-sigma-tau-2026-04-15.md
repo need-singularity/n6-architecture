@@ -1,151 +1,156 @@
-> FORMAL P10-1 — 리만 ζ 영점 간격 vs σ-τ=8 연결 재검증 / 2026-04-15
+> FORMAL P10-1 — Re-check of the candidate correspondence between Riemann ζ zero spacings and σ-τ=8 / 2026-04-15
 >
-> 작성: DSE-P10-1 / n6-architecture P10 (FORMAL 축)
-> 목적: Mk.IV 주정리 B (σ(6)-τ(6)=8) 와 Riemann ζ 비자명 영점 간격 상수 간 대응 후보 3건 정직 판정
-> 규칙: 자기참조 금지, Odlyzko 실측 영점만 사용, 한글, MISS 판정도 가치 있음
+> Author: DSE-P10-1 / n6-architecture P10 (FORMAL axis)
+> Purpose: honestly adjudicate 3 candidate correspondences between the Mk.IV main theorem B (σ(6)-τ(6)=8) and the Riemann ζ non-trivial zero spacing constants
+> Rules: no self-reference, use only Odlyzko-measured zeros, English, a MISS verdict is also valuable
 
 ---
 
-## 0. 최종 평결 (요약)
+## 0. Final verdict (summary)
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║  VERDICT (P10-1, 2026-04-15):                                    ║
 ║                                                                  ║
-║  후보 1  γ_3 ≈ 8π            :  **MISS** (상대오차 0.485%)       ║
-║  후보 2  (γ_2-γ_1) ≈ σ-sopfr :  **PARTIAL** (오차 1.6%, 우연)    ║
-║  후보 3  γ_1/(σ-τ) ≈ 2π/logT :  **MISS** (점근식 오적용)         ║
+║  Candidate 1  γ_3 ≈ 8π            : **MISS** (rel. err. 0.485%)  ║
+║  Candidate 2  (γ_2-γ_1) ≈ σ-sopfr : **PARTIAL** (err 1.6%,       ║
+║                                      coincidental)               ║
+║  Candidate 3  γ_1/(σ-τ) ≈ 2π/logT : **MISS** (asymptotic         ║
+║                                      misapplied)                 ║
 ║                                                                  ║
-║  결론:  Riemann 영점 ↔ σ-τ=8 **직접 수학적 대응 부재**            ║
-║         수치 근접 세 건 모두 무작위 정합 수준                     ║
-║         BT-541 조건부 결과 이상의 구조적 연결 증거 없음           ║
+║  Conclusion: Riemann zeros ↔ σ-τ=8 have **no direct              ║
+║              mathematical correspondence**.                      ║
+║              All three numerical near-matches are at the         ║
+║              level of random alignment.                          ║
+║              No structural-link evidence beyond the BT-541       ║
+║              conditional result.                                 ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 1. 배경 — Riemann 영점과 σ-τ=8
+## 1. Background — Riemann zeros and σ-τ=8
 
-### 1.1 Riemann 비자명 영점
-ζ(s) 함수방정식 `ξ(s) = ξ(1-s)` 하의 비자명 영점 ρ = 1/2 + iγ (RH 가정). 본 검증은 RH 를 **가정**하고 γ 값의 실측만 사용 (RH 자체는 미해결).
+### 1.1 Riemann non-trivial zeros
+The non-trivial zeros ρ = 1/2 + iγ of ζ(s) under the functional equation `ξ(s) = ξ(1-s)` (assuming RH). This check **assumes** RH and uses only measured γ values (RH itself remains open).
 
-### 1.2 Mk.IV 주정리 B (P8 확정)
-`σ(n) − τ(n) = 8` 의 n≥2 유일해는 n=6. 전수검증 n ∈ [2, 10⁴] 단일해 `{6}`. 출처: `theory/proofs/mk4-trident-final-verdict-2026-04-15.md` §2.
+### 1.2 Mk.IV main theorem B (fixed at P8)
+The unique solution of `σ(n) − τ(n) = 8` for n≥2 is n=6. Exhaustive check over n ∈ [2, 10⁴] yields the single solution `{6}`. Source: `theory/proofs/mk4-trident-final-verdict-2026-04-15.md` §2.
 
-### 1.3 본 P10-1 질의
-상수 8 = σ(6)−τ(6) 와 ζ 영점 간격 스펙트럼의 대표 상수(Montgomery-Dyson 평균간격, Odlyzko 측정값) 사이에 **수치적·구조적 대응**이 존재하는가?
+### 1.3 Question of this P10-1
+Does a **numerical/structural correspondence** exist between the constant 8 = σ(6)−τ(6) and representative constants of the ζ zero-spacing spectrum (Montgomery-Dyson mean spacing, Odlyzko measurements)?
 
 ---
 
-## 2. Montgomery-Dyson 정리 + Li 기준 (학습 요약)
+## 2. Montgomery-Dyson theorem + Li's criterion (background summary)
 
 ### 2.1 Montgomery pair correlation (1973)
-RH 가정 하, 영점 쌍 분포의 2점 상관함수는 점근적으로
+Under RH, the 2-point correlation function of the zero distribution is asymptotically
 ```
 R_2(α) = 1 − (sin(πα)/(πα))²
 ```
-이며 이는 GUE(가우스 단일체 앙상블)의 고유치 분포와 일치. 출처: Montgomery 1973, *Analytic Number Theory* Vol. XXIV, AMS.
+which matches the eigenvalue distribution of the GUE (Gaussian Unitary Ensemble). Source: Montgomery 1973, *Analytic Number Theory* Vol. XXIV, AMS.
 
-### 2.2 Dyson-Montgomery 수치 (Odlyzko)
-Odlyzko 1987~2001 수치실험으로 10²² 번째 영점까지 GUE 예측과 6자리 이내 일치. 평균간격은
+### 2.2 Dyson-Montgomery numerics (Odlyzko)
+Odlyzko's 1987-2001 numerical experiments match GUE predictions up to the 10²²-th zero within six digits. Mean spacing:
 ```
 Δγ_avg(T) ≈ 2π / log(T/(2π))   (Riemann-von Mangoldt)
 N(T) = (T/2π)·log(T/(2π)) − T/(2π) + 7/8 + O(1/T)
 ```
 
-### 2.3 Li 기준 (1997)
-λ_n = Σ_ρ (1 − (1−1/ρ)ⁿ) 가 모든 n≥1 에 대해 양수 ⟺ RH. 출처: Xian-Jin Li, *J. Number Theory* 65(2).
+### 2.3 Li's criterion (1997)
+λ_n = Σ_ρ (1 − (1−1/ρ)ⁿ) is positive for all n≥1 ⟺ RH. Source: Xian-Jin Li, *J. Number Theory* 65(2).
 
-### 2.4 n=6 관점
-Mk.IV B `σ-τ=8` 은 **정수론적 상수**이며, Riemann 영점은 **복소 해석학적 상수**. 두 세계의 공통 교집합은 Selberg 공식(Mertens 적분 영역)과 소수 계수 함수이므로 **간접** 연결 가능성만 존재.
-
----
-
-## 3. 첫 10 영점 실측 (Odlyzko 테이블)
-
-출처: A.M. Odlyzko, *Tables of the first 10^5 zeros of the Riemann zeta-function*, AT&T Labs 공개 데이터. (Titchmarsh *The Theory of the Riemann Zeta-Function* 2nd ed., §9 및 Odlyzko–Schönhage 알고리즘 결과와 10⁻⁹ 이내 일치.)
-
-| n | γₙ (허수부) | Δγₙ = γₙ₊₁−γₙ |
-|---|-------------|---------------|
-| 1 | 14.134725142 | 6.887314497 |
-| 2 | 21.022039639 | 3.988817941 |
-| 3 | 25.010857580 | 5.414018546 |
-| 4 | 30.424876126 | 2.510185462 |
-| 5 | 32.935061588 | 4.651116571 |
-| 6 | 37.586178159 | 3.332540853 |
-| 7 | 40.918719012 | 2.408354269 |
-| 8 | 43.327073281 | 4.678077600 |
-| 9 | 48.005150881 | 1.768681597 |
-| 10 | 49.773832478 | — |
-
-평균 간격 (γ₁..γ₁₀): 3.9599. 이론 점근값 2π/log(γ̄/(2π)) ≈ 4.1 (유사).
+### 2.4 n=6 viewpoint
+Mk.IV B `σ-τ=8` is a **number-theoretic constant**, while the Riemann zeros are **complex-analytic constants**. The common intersection is through the Selberg formula (Mertens integration domain) and prime-counting functions, so only an **indirect** link is possible.
 
 ---
 
-## 4. σ-τ=8 연결 후보 3건 + 수치 평가
+## 3. First 10 zeros as measured (Odlyzko table)
 
-### 4.1 후보 1 — `γ₃ ≈ 8π`
+Source: A.M. Odlyzko, *Tables of the first 10^5 zeros of the Riemann zeta-function*, AT&T Labs open data. (Agrees within 10⁻⁹ with Titchmarsh *The Theory of the Riemann Zeta-Function* 2nd ed., §9 and the Odlyzko-Schönhage algorithm results.)
 
-주장: γ₃ = 25.0109 ≈ 8·π = 25.1327.
+| n  | γₙ (imaginary part) | Δγₙ = γₙ₊₁−γₙ |
+|----|---------------------|---------------|
+| 1  | 14.134725142        | 6.887314497   |
+| 2  | 21.022039639        | 3.988817941   |
+| 3  | 25.010857580        | 5.414018546   |
+| 4  | 30.424876126        | 2.510185462   |
+| 5  | 32.935061588        | 4.651116571   |
+| 6  | 37.586178159        | 3.332540853   |
+| 7  | 40.918719012        | 2.408354269   |
+| 8  | 43.327073281        | 4.678077600   |
+| 9  | 48.005150881        | 1.768681597   |
+| 10 | 49.773832478        | —             |
+
+Mean spacing (γ₁..γ₁₀): 3.9599. Theoretical asymptotic value 2π/log(γ̄/(2π)) ≈ 4.1 (similar).
+
+---
+
+## 4. Three σ-τ=8 candidate links + numerical evaluation
+
+### 4.1 Candidate 1 — `γ₃ ≈ 8π`
+
+Claim: γ₃ = 25.0109 ≈ 8·π = 25.1327.
 
 ```
 γ_3 = 25.010858
 8·π = 25.132741
-차이 = −0.121884 (상대 −0.485%)
+diff = −0.121884 (relative −0.485%)
 ```
 
-**평가**: 상대오차 0.485%. NEAR 등급 임계값(0.3%)을 못 넘음. `8` 이 σ-τ 상수로 해석되려면 **π 자체가 n=6 구조에서 유도**되어야 하나, ζ(2)=π²/6 에서의 6은 n=6 완전수와 무관(유한 합 = 1+1/4+1/9+...). **MISS.**
+**Evaluation**: relative error 0.485%. Fails the NEAR threshold (0.3%). For `8` to be read as the σ-τ constant, **π itself must be derived from the n=6 structure**, but the 6 in ζ(2)=π²/6 is unrelated to the n=6 perfect number (it is a finite sum = 1+1/4+1/9+...). **MISS.**
 
-결정타: γ₃ 다음 영점들(γ₄=30.425, γ₅=32.935)은 πk (k=10,11) 근처가 아니어서 "8π = σ-τ·π" 패턴의 일관성 없음.
+Clincher: the subsequent zeros (γ₄=30.425, γ₅=32.935) are not near πk (k=10,11), so the "8π = σ-τ·π" pattern is inconsistent.
 
-### 4.2 후보 2 — 첫 간격 `Δγ₁ = γ₂−γ₁ ≈ σ(6) − sopfr(6) = 7`
+### 4.2 Candidate 2 — first spacing `Δγ₁ = γ₂−γ₁ ≈ σ(6) − sopfr(6) = 7`
 
-주장: 최초 영점 간격 6.887 ≈ 7 = σ − sopfr (σ=12, sopfr(6)=2+3=5).
+Claim: the first zero spacing 6.887 ≈ 7 = σ − sopfr (σ=12, sopfr(6)=2+3=5).
 
 ```
 γ_2 − γ_1 = 6.887314
 σ − sopfr = 12 − 5 = 7
-차이 = +0.112686 (상대 +1.636%)
+diff = +0.112686 (relative +1.636%)
 ```
 
-**평가**: 절대값만 놓고 보면 7.0 에 가깝지만, **Montgomery 점근식이 T=γ₁ 영역에서 2π/log(γ₁/(2π)) ≈ 7.75 를 예측**하므로 6.887 은 7 보다 7.75 에 가깝다. 즉 "σ-sopfr=7" 는 2π/log(T/(2π)) 의 수치적 근접으로 해석되는 것이 타당. n=6 기반 설명은 **사후 맞추기(post-hoc fit)**. **PARTIAL**(수치 근접은 존재하나 구조 독립성 없음).
+**Evaluation**: in absolute value it is near 7.0, but **the Montgomery asymptotic predicts 2π/log(γ₁/(2π)) ≈ 7.75 in the T=γ₁ region**, so 6.887 is closer to 7.75 than to 7. Hence the "σ-sopfr=7" reading is reasonably explained as numerical proximity to 2π/log(T/(2π)). The n=6-based explanation is a **post-hoc fit**. **PARTIAL** (numerical proximity exists but no structural independence).
 
-### 4.3 후보 3 — `γ₁/(σ−τ) ≈ Montgomery 평균간격`
+### 4.3 Candidate 3 — `γ₁/(σ−τ) ≈ Montgomery mean spacing`
 
-주장: γ₁/8 = 1.7668 ≈ 2π/log(T) (T 어느 범위).
+Claim: γ₁/8 = 1.7668 ≈ 2π/log(T) (T in some range).
 
 ```
 γ_1 / 8 = 1.766841
-2π/log(γ_1)        = 2.372236  (차이 −0.605, 상대 −25.5%)
-2π/log(γ_1/(2π))   = 7.749772  (올바른 Montgomery 공식)
+2π/log(γ_1)        = 2.372236  (diff −0.605, relative −25.5%)
+2π/log(γ_1/(2π))   = 7.749772  (correct Montgomery formula)
 ```
 
-**평가**: Montgomery 실제 공식은 `2π/log(T/(2π))` 이며 이 값을 γ₁ 에 대입하면 7.75 로, γ₁/8 = 1.77 과 4배 이상 차이. 단순 `2π/log(T)` 공식은 **틀린 형태**. T>>2π 극한에서만 근사 유효. **MISS.**
+**Evaluation**: the actual Montgomery formula is `2π/log(T/(2π))`; plugging γ₁ in gives 7.75, off from γ₁/8 = 1.77 by more than a factor of 4. The bare `2π/log(T)` form is **incorrect**. The approximation is valid only in the T>>2π limit. **MISS.**
 
-추가 반례: γ₁₀/8 = 6.222, 2π/log(γ₁₀/(2π)) ≈ 3.35 → 이들도 불일치. σ-τ=8 은 ζ 영점 스케일 인자로 작동하지 않음.
+Additional counter-example: γ₁₀/8 = 6.222, 2π/log(γ₁₀/(2π)) ≈ 3.35 → these also disagree. σ-τ=8 does not act as a scaling factor for ζ zeros.
 
 ---
 
-## 5. 종합 판정
+## 5. Overall verdict
 
-| 후보 | 등급 | 이유 |
-|------|------|------|
-| 1. γ₃ ≈ 8π | **MISS** | 오차 0.485% (NEAR 임계 0.3% 초과). 다른 영점 일관성 부재 |
-| 2. Δγ₁ ≈ σ-sopfr=7 | **PARTIAL** | 오차 1.6% 수치 근접. Montgomery 점근값 7.75 와 경쟁. 구조 독립 증거 없음 |
-| 3. γ₁/(σ-τ) ≈ 2π/log T | **MISS** | Montgomery 공식 오적용. 정확식 대입 시 4배 편차 |
+| Candidate | Grade | Reason |
+|-----------|-------|--------|
+| 1. γ₃ ≈ 8π | **MISS** | Error 0.485% (exceeds NEAR threshold 0.3%). No consistency with other zeros |
+| 2. Δγ₁ ≈ σ-sopfr=7 | **PARTIAL** | Error 1.6% numerical proximity. Competes with Montgomery asymptotic 7.75. No evidence of structural independence |
+| 3. γ₁/(σ-τ) ≈ 2π/log T | **MISS** | Montgomery formula misapplied. Using the correct formula gives a 4× deviation |
 
-**최종 결론**: Riemann ζ 영점 간격 상수와 Mk.IV B 상수 `σ-τ=8` 사이에 수학적·구조적 대응은 **현 증거 기준 존재하지 않는다.**
+**Final conclusion**: based on current evidence, there is **no mathematical or structural correspondence** between the Riemann ζ zero-spacing constants and the Mk.IV B constant `σ-τ=8`.
 
-이는 정직한 MISS 이며, `theory/proofs/honest-limitations.md` §의 "n=6 가 설명하지 못하는 영역" 항에 **Riemann 영점 스펙트럼** 을 추가해야 함을 시사한다. 본 결과는 P2-1 (*prob-p2-1-riemann-barriers.md*) §0 정직 선언의 "본 프로젝트 상수 (n=6 …) 는 RH 와 직접 수학적으로 연결되지 않는다" 와 일치.
+This is an honest MISS and suggests that the **Riemann zero spectrum** should be added to the "regions n=6 cannot explain" entry in `theory/proofs/honest-limitations.md`. The result agrees with the honesty statement in P2-1 (*prob-p2-1-riemann-barriers.md*) §0: "the project's constants (n=6 …) are not directly mathematically connected to RH."
 
 ---
 
-## 6. ASCII 비교 차트 — 영점 간격 vs σ-τ 간격 스펙트럼
+## 6. ASCII comparison chart — zero spacings vs σ-τ spacing spectrum
 
 ```
-[첫 10 영점 간격 Δγ_n]                      [n=6 불변량]
+[First 10 zero spacings Δγ_n]              [n=6 invariants]
 │
-│  7 ┤██████████ Δγ₁ = 6.887  ← σ-sopfr=7 ≈ 여기 (PARTIAL)
+│  7 ┤██████████ Δγ₁ = 6.887  ← σ-sopfr=7 ≈ here (PARTIAL)
 │  6 ┤
 │  5 ┤█████ Δγ₃ = 5.414
 │  4 ┤████ Δγ₈ = 4.678 / Δγ₅ = 4.651
@@ -155,51 +160,51 @@ Mk.IV B `σ-τ=8` 은 **정수론적 상수**이며, Riemann 영점은 **복소 
 │  2 ┤██ Δγ₉ = 1.769
 │  1 ┤
 │  0 ┼──────────────────────────────────────
-│     2     4     6     8    10    12    σ-τ=8 여기
-│                                        (일치 영점 없음)
+│     2     4     6     8    10    12    σ-τ=8 here
+│                                        (no matching zero)
 │
-│  Montgomery 이론 예측 (T≈30): 2π/log(T/(2π)) ≈ 4.1
-│  실측 평균 (γ₁..γ₁₀)        : 3.96
-│  σ-τ=8 위치                  : ━━━━━━━━━ (영점 간격 스펙트럼 밖)
+│  Montgomery theoretical prediction (T≈30): 2π/log(T/(2π)) ≈ 4.1
+│  Measured mean (γ₁..γ₁₀)                 : 3.96
+│  Position of σ-τ=8                       : ━━━━━━━━━ (outside the zero-spacing spectrum)
 │
-│  결론: 영점 간격은 [1.8, 6.9] 구간에 분포, σ-τ=8 은 외부
-│        → 직접 대응 없음 (MISS)
+│  Conclusion: zero spacings lie in [1.8, 6.9]; σ-τ=8 is outside.
+│              → no direct correspondence (MISS)
 ```
 
 ```
-[수치 근접도 비교 — 후보 3건]
+[Numerical-proximity comparison — three candidates]
 
-후보 1  γ₃ = 25.011  vs  8π = 25.133
-         ────────────────────  오차 0.485%  [MISS: >0.3%]
-        │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
+Candidate 1  γ₃ = 25.011  vs  8π = 25.133
+             ────────────────────  error 0.485%  [MISS: >0.3%]
+            │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
 
-후보 2  Δγ₁ = 6.887  vs  σ-sopfr = 7.000
-         ──────────────  오차 1.636%  [PARTIAL: 우연 정합]
-        │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
+Candidate 2  Δγ₁ = 6.887  vs  σ-sopfr = 7.000
+             ──────────────  error 1.636%  [PARTIAL: coincidental match]
+            │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
 
-후보 3  γ₁/8 = 1.767  vs  2π/log(γ₁/(2π)) = 7.750
-         ────────  오차 338%         [MISS: 공식 오적용]
-        │▓▓▓▓│                     (4배 이상 차이)
+Candidate 3  γ₁/8 = 1.767  vs  2π/log(γ₁/(2π)) = 7.750
+             ────────  error 338%          [MISS: formula misapplied]
+            │▓▓▓▓│                        (>4× difference)
 
-정합도 랭킹: 2 > 1 > 3 (모두 NEAR 미달)
-NEAR 임계 0.3%, EXACT 임계 0.01% — 본 세 건 모두 미달
+Match ranking: 2 > 1 > 3 (all below NEAR)
+NEAR threshold 0.3%, EXACT threshold 0.01% — all three below threshold
 ```
 
 ---
 
-## 7. atlas.n6 반영 지침
+## 7. atlas.n6 incorporation guidance
 
-- 신규 항목: `@R riemann.sigma_tau_bridge = MISS :: n6atlas [7!]` (MISS 도 정직 기록)
-- 기존 `@R zeta.zeros.montgomery` 항 유지, "σ-τ 연결 부재" 주석 추가
-- BT-541 RH 조건부 정리 모음에 본 MISS 결과 인용
+- New entry: `@R riemann.sigma_tau_bridge = MISS :: n6atlas [7!]` (record MISS honestly)
+- Keep existing `@R zeta.zeros.montgomery` entry, add a "σ-τ link absent" note
+- Cite this MISS result in the BT-541 RH-conditional theorem group
 
-## 8. 후속 질문
+## 8. Follow-up questions
 
-본 MISS 가 닫지 못한 것:
-- Selberg zeta function(갈로아 표현, Fuchs 군 불변 측도)과 n=6 동역학 연결 — 별도 세션
-- n=6 의 τ(6)=4 와 Riemann 영점의 **4차 모멘트**(Ingham 1926, Conrey-Ghosh) 대응 — P10-2 후속 제안
-- σ(6)=12 와 모듈러 판별식 Δ(τ) 의 24차 (=2σ) 무게 관계 — `theory/proofs/the-number-24.md` 와 교차
+What this MISS leaves open:
+- Selberg zeta function (Galois representations, Fuchs-group invariant measures) and n=6 dynamics — separate session
+- Correspondence between τ(6)=4 and the **4th moment** of Riemann zeros (Ingham 1926, Conrey-Ghosh) — proposed as P10-2 follow-up
+- Relation between σ(6)=12 and the weight 24 (=2σ) of the modular discriminant Δ(τ) — cross-links with `theory/proofs/the-number-24.md`
 
 ---
 
-*본 문서는 자기참조 없이 Odlyzko 공개 데이터와 표준 교재 공식만 사용했다. MISS 판정은 가치 있는 결과이며, 향후 n=6 범위 경계를 더 정확히 그리는 데 기여한다.*
+*This document uses only Odlyzko's public data and standard textbook formulas without self-reference. A MISS verdict is a valuable result and helps delineate the boundaries of the n=6 scope more accurately.*

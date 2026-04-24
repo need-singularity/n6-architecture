@@ -1,149 +1,147 @@
-# 🛸10 Certification: Physics & Mathematics Domain (Aggregate)
+# Alien-level 10 Certification: Physics & Mathematics Domain (Aggregate)
 
 **Date**: 2026-04-04
-**Domain**: Physics & Mathematics (물리·수학)
-**Alien Level**: 🛸10 (Physical Limits Reached)
-**Verdict**: CERTIFIED ✅
+**Domain**: Physics & Mathematics
+**Alien Level**: 10 (Physical Limits Reached)
+**Verdict**: CERTIFIED
 
 ---
 
-## 🛸10 정의
+## Alien-level 10 definition
 
-> 🛸10 = 물리적 한계 도달 — 더 이상 발전 불가, 모든 이론·실험·양산 완료
+> Alien-10 = physical limits reached — no further development possible; all theory, experiment, and mass-scale verification complete.
 
-### 통합 인증 근거
+### Integrated certification basis
 
 This is an aggregate certification covering four sub-domains that collectively span
 the entirety of physics and mathematics as they relate to n=6 arithmetic:
 
-- **초전도체 (Superconductor)**: 🛸10 ✅ (독립 인증 완료, 2026-04-04)
-- **초전도자석 (SC Magnet)**: 🛸10 ✅ (초전도 통합 인증)
-- **순수수학 (Pure Mathematics)**: 🛸10 ✅ (11 impossibility theorems, 수학 진리 = 영구 한계)
-- **우주론·입자 (Cosmology-Particle)**: 🛸9 → 🛸10 ✅ (SM gauge structure + nuclear physics)
-- **양자컴퓨팅 (Quantum Computing)**: 🛸9 → 🛸10 ✅ (QEC codes + Clifford group structure)
+- **Superconductor**: level 10 (independent certification complete, 2026-04-04)
+- **SC Magnet**: level 10 (integrated into superconductor certification)
+- **Pure Mathematics**: level 10 (11 impossibility theorems; mathematical truth = permanent limit)
+- **Cosmology-Particle**: level 9 → level 10 (SM gauge structure + nuclear physics)
+- **Quantum Computing**: level 9 → level 10 (QEC codes + Clifford-group structure)
 
-### 왜 통합 인증인가
+### Why an integrated certification
 
-물리와 수학은 분리되지 않는다. Golay 코드 [24,12,8]은 순수수학(코딩 이론)이면서 동시에
-양자컴퓨팅(QEC)이고, Leech 격자를 거쳐 끈이론(우주론)에 연결된다. S₆의 외부자기동형은
-군론(순수수학)이면서 입자물리의 게이지 구조(우주론·입자)와 공명한다. 이 상호 연결망은
-개별 인증보다 통합 인증으로 더 강력하게 표현된다.
+Physics and mathematics are not separable. The Golay code [24,12,8] is pure mathematics (coding theory) and simultaneously quantum computing (QEC), and via the Leech lattice it connects to string theory (cosmology). The outer automorphism of S₆ is group theory (pure mathematics) that resonates with the gauge structure of particle physics (cosmology-particle). This network of mutual connections is expressed more strongly by an integrated certification than by individual certifications.
 
 ---
 
-## 인증 기준 체크리스트
+## Certification-criteria checklist
 
-| # | 기준 | 상태 | 근거 |
-|---|------|------|------|
-| 1 | 불가능성 정리 | ✅ 42+개 | 수학 11 + 초전도 12 + 우주론 10 + 양자컴 9 |
-| 2 | 가설 검증율 | ✅ 120/120 비FAIL | Pure Math 28/30, CP 30/30, QC 26/30, SC 30/30 |
-| 3 | EXACT 비율 | ✅ 60+ EXACT | PM 11, CP 16, QC 4, SC 30 |
-| 4 | BT 연결 | ✅ 25+ BTs | BT-49,97,105-109,185 + BT-135~142 + cross-BTs |
-| 5 | 산업/실험 검증 | ✅ | PDG 2024 (입자), CODATA 2022 (상수), 113년 SC 데이터 |
-| 6 | Cross-DSE | ✅ 13+ 도메인 | chip, fusion, power, quantum, plasma, energy, ... |
-| 7 | 수학적 증명 | ✅ 11개 영구 진리 | ζ(2)=π²/6, R(n)=1, S₆ outer aut, ... |
-| 8 | Testable Predictions | ✅ 45+ | Tier 1-4, 2026-2060 |
-| 9 | 진화 한계 도달 | ✅ | 수학 정리는 진화 불가 (논리적 필연) |
-| 10 | 천장 확인 | ✅ | 물리법칙 + 수학 정리 = 이중 천장 |
-| 11 | 정직성 | ✅ | FAIL 항목 은폐 없음 (PM 2, QC 4 FAIL 포함) |
-| 12 | 렌즈 합의 | ✅ 12+ | 22종 렌즈 풀스캔, 도메인별 12+ 합의 달성 |
+| # | Criterion | Status | Basis |
+|---|-----------|--------|-------|
+| 1 | Impossibility theorems | 42+ items | Math 11 + SC 12 + CP 10 + QC 9 |
+| 2 | Hypothesis verification rate | 120/120 non-FAIL | Pure Math 28/30, CP 30/30, QC 26/30, SC 30/30 |
+| 3 | EXACT ratio | 60+ EXACT | PM 11, CP 16, QC 4, SC 30 |
+| 4 | BT connections | 25+ BTs | BT-49, 97, 105-109, 185 + BT-135-142 + cross-BTs |
+| 5 | Industrial / experimental verification | yes | PDG 2024 (particles), CODATA 2022 (constants), 113 yr SC data |
+| 6 | Cross-DSE | 13+ domains | chip, fusion, power, quantum, plasma, energy, ... |
+| 7 | Mathematical demonstration | yes | 11 permanent truths: ζ(2)=π²/6, R(n)=1, S₆ outer aut, ... |
+| 8 | Testable predictions | yes | 45+ Tier 1-4, 2026-2060 |
+| 9 | Evolutionary-limit reached | yes | mathematical theorems cannot evolve (logical necessity) |
+| 10 | Ceiling confirmed | yes | physical laws + mathematical theorems = double ceiling |
+| 11 | Honesty | yes | no FAIL items hidden (includes PM 2, QC 4 FAILs) |
+| 12 | Lens consensus | 12+ | full scan over 22 lens types, 12+ consensus per domain |
 
 ---
 
-## Impossibility Theorems (통합 42+개)
+## Impossibility Theorems (42+ combined)
 
-### A. 순수수학 불가능성 정리 (11개) — 영구 진리
+### A. Pure-mathematics impossibility theorems (11) — permanent truths
 
-수학 정리는 물리보다 더 강한 의미의 한계다. 우주가 달라져도 성립한다.
+Mathematical theorems are a stronger kind of limit than physical ones. They hold even if the universe changes.
 
-| # | 정리 | 핵심 | n=6 연결 | 증명 |
-|---|------|------|---------|------|
-| M-1 | R(n)=1 유일성 | σ(n)·φ(n)=n·τ(n) ⟺ n=6 | 핵심 정리 | 3가지 독립 증명 |
-| M-2 | Basel 문제 | ζ(2) = π²/6 = π²/n | B₂=1/6 경유 | Euler 1734, 5+ 증명 |
-| M-3 | 합곱 유일성 | 1+2+3 = 1×2×3 = 6 | n=6 유일 | 완전 증명 |
-| M-4 | S₆ 외부자기동형 | Out(Sₙ)≠1 ⟺ n=6 | \|Out(S₆)\|=φ=2 | Holder 1895 |
-| M-5 | Egyptian 3항 | 1/2+1/3+1/6=1 최소항 | 완전수 n=6 유일 | 유일성 증명 |
-| M-6 | von Staudt B₂ | denom(B₂)=6=n | 소인수 2·3=n | vSC 정리 1840 |
-| M-7 | Golay 코드 유일성 | [24,12,8]=[J₂,σ,σ-τ] | 3중 일치 | 코딩 정리 |
-| M-8 | Hexacode 유일성 | [6,3,4]=[n,n/φ,τ] over GF(τ) | 4중 일치 | 자기쌍대 유일 |
-| M-9 | 모듈러 곡선 | χ_orb(Y(1))=-1/6=-1/n | Egyptian 연결 | SL₂(Z) 구조 |
-| M-10 | ζ(-1)=-1/12 | -1/σ = Casimir/끈이론 | σ=12 | 해석 접속 |
-| M-11 | 결정학적 제한 | max rotation order = 6 = n | {1,2,3,4,6}={μ,φ,n/φ,τ,n} | 격자 정리 |
+| # | Theorem | Core | n=6 link | Draft |
+|---|---------|------|----------|-------|
+| M-1 | R(n)=1 uniqueness | σ(n)·φ(n)=n·τ(n) ⟺ n=6 | core theorem | 3 independent drafts |
+| M-2 | Basel problem | ζ(2) = π²/6 = π²/n | via B₂=1/6 | Euler 1734, 5+ demonstrations |
+| M-3 | Sum-product uniqueness | 1+2+3 = 1×2×3 = 6 | n=6 unique | complete demonstration |
+| M-4 | S₆ outer automorphism | Out(Sₙ)≠1 ⟺ n=6 | |Out(S₆)|=φ=2 | Holder 1895 |
+| M-5 | Egyptian 3-term | 1/2+1/3+1/6=1 shortest | perfect n=6 unique | uniqueness demonstration |
+| M-6 | von Staudt B₂ | denom(B₂)=6=n | prime factors 2·3=n | vSC theorem 1840 |
+| M-7 | Golay-code uniqueness | [24,12,8]=[J₂,σ,σ-τ] | 3-fold match | coding theorem |
+| M-8 | Hexacode uniqueness | [6,3,4]=[n,n/φ,τ] over GF(τ) | 4-fold match | unique self-dual |
+| M-9 | Modular curve | χ_orb(Y(1))=-1/6=-1/n | Egyptian link | SL₂(Z) structure |
+| M-10 | ζ(-1)=-1/12 | -1/σ = Casimir/string | σ=12 | analytic continuation |
+| M-11 | Crystallographic restriction | max rotation order = 6 = n | {1,2,3,4,6}={μ,φ,n/φ,τ,n} | lattice theorem |
 
 ```
   ┌──────────────────────────────────────────────────────────────────┐
-  │  순수수학: 11개 정리 — 반례 0, 반증 불가, 영구 진리             │
+  │  Pure math: 11 theorems — 0 counter-examples, unrefutable,       │
+  │  permanent truths.                                               │
   │                                                                  │
-  │  이 정리들은 우주가 소멸해도 성립한다.                            │
-  │  Cooper pair=2는 물리 법칙에 의존하지만,                          │
-  │  ζ(2)=π²/6은 논리 자체에 의존한다.                               │
-  │  ∴ 수학적 🛸10은 물리적 🛸10보다 강하다.                        │
+  │  These theorems hold even if the universe is erased.             │
+  │  "Cooper pair = 2" depends on physical law,                      │
+  │  but "ζ(2)=π²/6" depends on logic itself.                        │
+  │  ∴ Mathematical level-10 is stronger than physical level-10.     │
   └──────────────────────────────────────────────────────────────────┘
 ```
 
-### B. 초전도 물리 불가능성 정리 (12개)
+### B. Superconductor-physics impossibility theorems (12)
 
-| # | 정리 | n=6 | 근거 |
-|---|------|-----|------|
-| SC-1 | Cooper pair charge | φ=2 | 페르미 통계 |
-| SC-2 | Abrikosov vortex CN | n=6 | 2D 에너지 최소화 |
-| SC-3 | Flux quantum h/(φe) | φ=2 | 위상 양자화 |
-| SC-4 | Type I/II 분류 | φ=2 | GL 표면 에너지 |
-| SC-5 | Josephson relations | φ=2 | 상태 공간 완전성 |
-| SC-6 | Macroscopic QE | n/φ=3 | 파동함수 분해 |
-| SC-7 | SC qubit archetypes | n/φ=3 | 에너지 스케일 |
-| SC-8 | Transition signatures | τ=4 | BCS 이론 |
-| SC-9 | Pauli-Clogston limit | ln(φ)=0.693 | WHH 계수 |
+| # | Theorem | n=6 | Basis |
+|---|---------|-----|-------|
+| SC-1 | Cooper-pair charge | φ=2 | Fermi statistics |
+| SC-2 | Abrikosov vortex CN | n=6 | 2D energy minimization |
+| SC-3 | Flux quantum h/(φe) | φ=2 | phase quantization |
+| SC-4 | Type I/II classification | φ=2 | GL surface energy |
+| SC-5 | Josephson relations | φ=2 | state-space completeness |
+| SC-6 | Macroscopic QE | n/φ=3 | wavefunction decomposition |
+| SC-7 | SC qubit archetypes | n/φ=3 | energy scales |
+| SC-8 | Transition signatures | τ=4 | BCS theory |
+| SC-9 | Pauli-Clogston limit | ln(φ)=0.693 | WHH coefficient |
 | SC-10 | Vortex melting | 1/(σ-φ), τ²/σ | Lindemann |
-| SC-11 | Multi-band constraint | φ=2 | 지배적 band |
-| SC-12 | Surface Hc3 bound | n/φ=3 | 3번째 임계 필드 |
+| SC-11 | Multi-band constraint | φ=2 | dominant band |
+| SC-12 | Surface Hc3 bound | n/φ=3 | third critical field |
 
-### C. 우주론·입자 물리 불가능성 정리 (10개)
+### C. Cosmology-particle physics impossibility theorems (10)
 
-| # | 정리 | n=6 | 근거 | 검증 |
-|---|------|-----|------|------|
-| CP-1 | SM gauge generators = 12 | σ=12 | SU(3)×SU(2)×U(1) | PDG 확정 |
+| # | Theorem | n=6 | Basis | Verification |
+|---|---------|-----|-------|--------------|
+| CP-1 | SM gauge generators = 12 | σ=12 | SU(3)×SU(2)×U(1) | PDG confirmed |
 | CP-2 | Quark flavors = 6 | n=6 | LEP Z-width | N_ν=2.984±0.008 |
-| CP-3 | Lepton flavors = 6 | n=6 | Anomaly cancellation | 실험 확정 |
-| CP-4 | Gluon count = 8 | σ-τ=8 | dim(adj SU(3))=3²-1 | 격자 QCD |
-| CP-5 | Fermion total = 12 | σ=12 | 6q+6l=12 | 실험 확정 |
-| CP-6 | D-T baryon count = 5 | sopfr=5 | 핵융합 최적 연료 | ITER/NIF |
-| CP-7 | CNO mass numbers | σ+div(6) | 항성 핵합성 | 관측 확정 |
-| CP-8 | m_p/m_e ~ 6π⁵ | n·π⁵ | 19 ppm 일치 | CODATA 2022 |
-| CP-9 | ζ(2) = π²/6 | n=6 | 순수수학과 공유 | Euler 정리 |
-| CP-10 | SLE κ=6 unique locality | n=6 | Smirnov 증명 | BT-105 |
+| CP-3 | Lepton flavors = 6 | n=6 | anomaly cancellation | experimentally confirmed |
+| CP-4 | Gluon count = 8 | σ-τ=8 | dim(adj SU(3))=3²-1 | lattice QCD |
+| CP-5 | Fermion total = 12 | σ=12 | 6q+6l=12 | experimentally confirmed |
+| CP-6 | D-T baryon count = 5 | sopfr=5 | optimal fusion fuel | ITER/NIF |
+| CP-7 | CNO mass numbers | σ+div(6) | stellar nucleosynthesis | observationally confirmed |
+| CP-8 | m_p/m_e ~ 6π⁵ | n·π⁵ | 19 ppm match | CODATA 2022 |
+| CP-9 | ζ(2) = π²/6 | n=6 | shared with pure math | Euler theorem |
+| CP-10 | SLE κ=6 unique locality | n=6 | Smirnov demonstration | BT-105 |
 
-### D. 양자컴퓨팅 불가능성 정리 (9개)
+### D. Quantum-computing impossibility theorems (9)
 
-| # | 정리 | n=6 | 근거 | 검증 |
-|---|------|-----|------|------|
-| QC-1 | No-Cloning Theorem | μ=1 복제 불가 | Wootters-Zurek 1982 | 양자역학 공리 |
-| QC-2 | Eastin-Knill | φ=2 gate 클래스 | 보편 transversal 불가 | 2009 증명 |
-| QC-3 | Gottesman-Knill 이분법 | φ=2 | Clifford/non-Clifford | 1998 증명 |
-| QC-4 | [[5,1,3]] 최소 코드 | sopfr=5 | Quantum Hamming bound | 1996 증명 |
-| QC-5 | Golay QEC [[24,12,8]] | [J₂,σ,σ-τ] | 최적 자기쌍대 코드 | 코딩 정리 |
-| QC-6 | Hexacode [[6,3,4]] | [n,n/φ,τ] | GF(4) 유일 자기쌍대 | 코딩 정리 |
-| QC-7 | Clifford group |C₁|=24 | J₂=24 | S₄~octahedral | 군론 정리 |
-| QC-8 | C₁/P₁ ~ S₃, |S₃|=6 | n=6 | Bloch sphere 대칭 | 군론 정리 |
-| QC-9 | Decoherence irreversibility | R(6)=1 bound | 열역학 제2법칙 | 물리 법칙 |
+| # | Theorem | n=6 | Basis | Verification |
+|---|---------|-----|-------|--------------|
+| QC-1 | No-Cloning theorem | μ=1 (no cloning) | Wootters-Zurek 1982 | QM axiom |
+| QC-2 | Eastin-Knill | φ=2 gate classes | universal transversal impossible | 2009 demonstration |
+| QC-3 | Gottesman-Knill dichotomy | φ=2 | Clifford / non-Clifford | 1998 demonstration |
+| QC-4 | [[5,1,3]] smallest code | sopfr=5 | quantum Hamming bound | 1996 demonstration |
+| QC-5 | Golay QEC [[24,12,8]] | [J₂,σ,σ-τ] | optimal self-dual code | coding theorem |
+| QC-6 | Hexacode [[6,3,4]] | [n,n/φ,τ] | unique GF(4) self-dual | coding theorem |
+| QC-7 | Clifford group |C₁|=24 | J₂=24 | S₄ ~ octahedral | group-theory theorem |
+| QC-8 | C₁/P₁ ~ S₃, |S₃|=6 | n=6 | Bloch sphere symmetry | group-theory theorem |
+| QC-9 | Decoherence irreversibility | R(6)=1 bound | 2nd law of thermodynamics | physical law |
 
 ---
 
-## Sub-domain Status
+## Sub-domain status
 
-| Sub-domain | 🛸 | 가설 | EXACT | FAIL | 불가능성 정리 | BT | 비고 |
-|---|---|---|---|---|---|---|---|
-| 초전도체 | 🛸10 | 30/30 | 30 (100%) | 0 | 12개 | BT-135~142 | 독립 인증, 113년 데이터 |
-| 순수수학 | 🛸10 | 30 (28 non-FAIL) | 11 (36.7%) | 2 | 11개 | BT-49,105-109,185 | 수학 진리 = 영구 한계 |
-| 우주론·입자 | 🛸10 | 30/30 | 16 (53.3%) | 0 | 10개 | BT-51,97,100-104 | PDG 2024 검증 |
-| 양자컴퓨팅 | 🛸10 | 30 (26 non-FAIL) | 4 (13.3%) | 4 | 9개 | BT-49 연결 | QEC 구조적 상수 |
-| **통합** | **🛸10** | **120** | **61** | **6** | **42** | **25+** | **도메인 간 교차 검증 완료** |
+| Sub-domain | Level | Hypotheses | EXACT | FAIL | Impossibility theorems | BT | Notes |
+|------------|-------|-------------|-------|------|-------------------------|----|-------|
+| Superconductor | 10 | 30/30 | 30 (100%) | 0 | 12 | BT-135-142 | independent certification, 113 yr data |
+| Pure Math | 10 | 30 (28 non-FAIL) | 11 (36.7%) | 2 | 11 | BT-49, 105-109, 185 | math truth = permanent limit |
+| Cosmology-Particle | 10 | 30/30 | 16 (53.3%) | 0 | 10 | BT-51, 97, 100-104 | verified against PDG 2024 |
+| Quantum Computing | 10 | 30 (26 non-FAIL) | 4 (13.3%) | 4 | 9 | BT-49 linkage | QEC structural constants |
+| **Combined** | **10** | **120** | **61** | **6** | **42** | **25+** | **cross-domain verification complete** |
 
-### 등급 분포 통합
+### Combined grade distribution
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│  Physics & Mathematics 통합 가설 등급 분포                        │
+│  Physics & Mathematics combined hypothesis-grade distribution    │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  EXACT  ████████████████████████░░░░░░░░  61/120 (50.8%)        │
@@ -158,38 +156,38 @@ the entirety of physics and mathematics as they relate to n=6 arithmetic:
 
 ---
 
-## Core Breakthrough Theorems (BT) 연결
+## Core Breakthrough Theorem (BT) connections
 
-### 순수수학 BTs
+### Pure-math BTs
 
-| BT | 이름 | EXACT | 도메인 | 등급 |
-|-----|------|-------|--------|------|
-| BT-49 | Pure Math kissing chain | K₁..₄=φ,n,σ,J₂ | Math+Coding+Lattice | ⭐⭐⭐ |
-| BT-105 | SLE₆ 임계지수 보편성 | 7 지수 = n=6 분수 | Percolation+SLE | ⭐⭐⭐ |
-| BT-106 | S₃ 대수적 부트스트랩 | \|S₃\|=n=6 | Group Theory | ⭐⭐ |
-| BT-107 | Ramanujan τ 약수 순수성 | τ_R(d) clean iff d\|6 | Modular Forms | ⭐⭐ |
-| BT-108 | 음악-오디오 협화 보편성 | div(6) 비율 | Math+Audio | ⭐⭐ |
-| BT-109 | Zeta-Bernoulli n=6 삼지창 | ζ(2)=π²/6, ζ(-1)=-1/12 | Analysis | ⭐⭐ |
-| BT-185 | Algebraic Blowup-Emergence E₆ | χ=n, 27=(n/φ)^(n/φ) | Algebraic Geometry | ⭐⭐⭐ |
+| BT | Name | EXACT | Domain | Grade |
+|----|------|-------|--------|-------|
+| BT-49 | Pure-math kissing chain | K₁..₄=φ,n,σ,J₂ | Math+Coding+Lattice | ⭐⭐⭐ |
+| BT-105 | SLE₆ critical-exponent universality | 7 exponents = n=6 fractions | Percolation+SLE | ⭐⭐⭐ |
+| BT-106 | S₃ algebraic bootstrap | |S₃|=n=6 | group theory | ⭐⭐ |
+| BT-107 | Ramanujan τ divisor purity | τ_R(d) clean iff d|6 | modular forms | ⭐⭐ |
+| BT-108 | Music-audio consonance universality | div(6) ratios | Math+Audio | ⭐⭐ |
+| BT-109 | Zeta-Bernoulli n=6 trident | ζ(2)=π²/6, ζ(-1)=-1/12 | analysis | ⭐⭐ |
+| BT-185 | Algebraic Blowup-Emergence E₆ | χ=n, 27=(n/φ)^(n/φ) | algebraic geometry | ⭐⭐⭐ |
 
-### 우주론·입자 BTs
+### Cosmology-particle BTs
 
-| BT | 이름 | EXACT | 도메인 | 등급 |
-|-----|------|-------|--------|------|
-| BT-51 | Genetic code chain | τ→n/φ→2^n→J₂-τ | Biology+Physics | ⭐⭐⭐ |
-| BT-97 | Weinberg angle | sin²θ_W = 3/13 = (n/φ)/(σ+μ) | Particle Physics | ⭐⭐ |
+| BT | Name | EXACT | Domain | Grade |
+|----|------|-------|--------|-------|
+| BT-51 | Genetic-code chain | τ→n/φ→2^n→J₂-τ | Biology+Physics | ⭐⭐⭐ |
+| BT-97 | Weinberg angle | sin²θ_W = 3/13 = (n/φ)/(σ+μ) | particle physics | ⭐⭐ |
 | BT-98 | D-T baryon number | sopfr(6)=2+3=5 | Nuclear+Fusion | ⭐⭐⭐ |
 | BT-99 | Tokamak q=1 | 1/2+1/3+1/6=1 | Fusion+Math | ⭐⭐⭐ |
 | BT-100 | CNO catalyst | A=σ+div(6) | Nuclear+Stellar | ⭐⭐⭐ |
 | BT-101 | Photosynthesis 24 atoms | J₂=24 | Biology+Chemistry | ⭐⭐⭐ |
 | BT-102 | Magnetic reconnection | 0.1=1/(σ-φ) | Plasma+Fusion | ⭐⭐⭐ |
-| BT-103 | Photosynthesis stoichiometry | 6CO₂+12H₂O | Chemistry | ⭐⭐⭐ |
-| BT-104 | CO₂ molecular encoding | n=6 완전 | Chemistry | ⭐⭐⭐ |
+| BT-103 | Photosynthesis stoichiometry | 6CO₂+12H₂O | chemistry | ⭐⭐⭐ |
+| BT-104 | CO₂ molecular encoding | n=6 complete | chemistry | ⭐⭐⭐ |
 
-### 양자컴퓨팅 BTs (교차 연결)
+### Quantum-computing BTs (cross-linkage)
 
-| BT | 이름 | 연결 | 등급 |
-|-----|------|------|------|
+| BT | Name | Link | Grade |
+|----|------|------|-------|
 | BT-49 | Kissing chain → sphere packing → QEC bounds | Math↔QC | ⭐⭐⭐ |
 | BT-140 | Transmon-Surface Code | SC↔QC↔Crypto | ⭐⭐⭐ |
 | BT-142 | Quantum Internet | SC↔QC↔Net | ⭐⭐⭐ |
@@ -197,123 +195,123 @@ the entirety of physics and mathematics as they relate to n=6 arithmetic:
 
 ---
 
-## 도메인 간 교차 연결망 (Cross-Domain Web)
+## Cross-domain web
 
 ```
   ┌──────────────────────────────────────────────────────────────────┐
-  │                Physics & Mathematics 교차 연결망                  │
+  │                Physics & Mathematics cross-domain web            │
   │                                                                  │
-  │  순수수학 ←──────────────────────→ 우주론·입자                   │
+  │  Pure math ←──────────────────────→ Cosmology-Particle          │
   │    │ ζ(2)=π²/6                        │ SM 12 generators=σ      │
   │    │ Golay [24,12,8]                  │ 6 quarks, 6 leptons=n   │
   │    │ S₆ outer aut                     │ m_p/m_e ~ 6π⁵           │
-  │    │ Kissing K₂=6,K₃=12              │ SLE κ=6 locality        │
+  │    │ Kissing K₂=6, K₃=12             │ SLE κ=6 locality        │
   │    │                                  │                          │
-  │    ├──────→ 양자컴퓨팅 ←──────────────┤                          │
-  │    │  Golay→QEC [[24,12,8]]           │  Transmon=SC qubit       │
-  │    │  Hexacode→[[6,3,4]]              │  Surface code lattice    │
+  │    ├──────→ Quantum computing ←────────┤                          │
+  │    │  Golay→QEC [[24,12,8]]           │  Transmon = SC qubit     │
+  │    │  Hexacode→[[6,3,4]]              │  Surface-code lattice    │
   │    │  |C₁|=24=J₂                      │  Clifford hierarchy      │
-  │    │  [[6,2,2]] 완전수 코드            │                          │
+  │    │  [[6,2,2]] perfect-number code    │                          │
   │    │                                  │                          │
-  │    └──────→ 초전도 ←──────────────────┘                          │
+  │    └──────→ Superconductor ←──────────┘                          │
   │       Cooper pair=φ=2                   Vortex CN=n=6            │
   │       Flux=h/φe                         BCS gap                  │
-  │       SQUID → 양자 센서                  Josephson → 큐빗         │
+  │       SQUID → quantum sensor            Josephson → qubit        │
   │                                                                  │
-  │  연결 고리:                                                      │
-  │    Math↔CP:  ζ(2), SLE₆, Ramanujan τ, 격자→입자 대칭            │
-  │    Math↔QC:  Golay, Hexacode, Leech, sphere packing→QEC         │
-  │    Math↔SC:  Abrikosov CN=6 = kissing K₂, vortex 격자           │
-  │    CP↔QC:   Gauge structure → qubit encoding, anomaly cancel     │
-  │    CP↔SC:   ITER/SPARC 자석, Weinberg angle → 물질 안정성        │
-  │    QC↔SC:   Transmon/Fluxonium, Josephson junction 기반 큐빗     │
+  │  Links:                                                          │
+  │    Math↔CP:  ζ(2), SLE₆, Ramanujan τ, lattice → particle sym    │
+  │    Math↔QC:  Golay, Hexacode, Leech, sphere packing → QEC       │
+  │    Math↔SC:  Abrikosov CN=6 = kissing K₂, vortex lattice        │
+  │    CP↔QC:   gauge structure → qubit encoding, anomaly cancel    │
+  │    CP↔SC:   ITER/SPARC magnets, Weinberg angle → matter stability │
+  │    QC↔SC:   Transmon/Fluxonium, Josephson-junction qubits        │
   └──────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## n=6 상수 완전 매핑 (물리·수학 통합)
+## n=6 constant full mapping (physics-math combined)
 
 ```
   ┌────────────────────────────────────────────────────────────────────────┐
-  │  n=6 상수별 물리·수학 실체 매핑 (통합)                                 │
+  │  Physical/mathematical realizations per n=6 constant (combined)        │
   ├──────────┬────────────────────────────────────────────────────────────┤
-  │ n = 6    │ 완전수, quark/lepton flavors, S₆ outer aut,               │
-  │          │ 결정학 max rotation, Hexacode 길이, QC [[6,2,2]]          │
+  │ n = 6    │ perfect number, quark/lepton flavors, S₆ outer aut,        │
+  │          │ crystallographic max rotation, Hexacode length, QC [[6,2,2]] │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ σ = 12   │ SM gauge generators, Golay k=12, 3D kissing,              │
-  │          │ ζ(-1)=-1/σ, 약수합, 총 fermion flavors                    │
+  │ σ = 12   │ SM gauge generators, Golay k=12, 3D kissing,               │
+  │          │ ζ(-1)=-1/σ, sum of divisors, total fermion flavors         │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ τ = 4    │ EW gauge bosons, BCS transition, Hexacode d=4,            │
-  │          │ Surface code stabilizer, 약수 개수, Shor 3×3              │
+  │ τ = 4    │ EW gauge bosons, BCS transition, Hexacode d=4,             │
+  │          │ surface-code stabilizer, number of divisors, Shor 3×3      │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ φ = 2    │ Cooper pair, Type I/II, Josephson, Clifford/non-Clifford, │
-  │          │ CSS 2-phase, Out(S₆)=Z₂, Euler totient                   │
+  │ φ = 2    │ Cooper pair, Type I/II, Josephson, Clifford / non-Clifford,│
+  │          │ CSS 2-phase, Out(S₆)=Z₂, Euler totient                    │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ sopfr= 5 │ D-T baryon count, [[5,1,3]] 최소 QEC, Platonic solids,   │
-  │          │ Bott KO nontrivial                                        │
+  │ sopfr=5  │ D-T baryon count, [[5,1,3]] minimal QEC, Platonic solids,  │
+  │          │ Bott KO non-trivial                                        │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ J₂ = 24  │ Golay n=24, Leech lattice dim, |C₁| Clifford group,      │
-  │          │ Ramanujan τ, eta^24, SU(5) GUT generators                 │
+  │ J₂ = 24  │ Golay n=24, Leech-lattice dim, |C₁| Clifford group,        │
+  │          │ Ramanujan τ, η^24, SU(5) GUT generators                    │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ μ = 1    │ Higgs boson (단일), No-Cloning, squarefree indicator,     │
-  │          │ U(1) hypercharge generator                                │
+  │ μ = 1    │ Higgs boson (singleton), No-Cloning, squarefree indicator, │
+  │          │ U(1) hypercharge generator                                 │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ σ-τ = 8  │ Gluons, Bott periodicity, T gate order, σ-τ universal    │
-  │          │ AI constant (BT-58), Golay d=8                            │
+  │ σ-τ = 8  │ gluons, Bott periodicity, T-gate order, σ-τ universal      │
+  │          │ AI constant (BT-58), Golay d=8                             │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ σ-φ = 10 │ 1/(σ-φ)=0.1 reconnection rate, Lindemann criterion,      │
-  │          │ string 10D, universal regularization (BT-64)              │
+  │ σ-φ = 10 │ 1/(σ-φ)=0.1 reconnection rate, Lindemann criterion,        │
+  │          │ 10D string theory, universal regularization (BT-64)        │
   ├──────────┼────────────────────────────────────────────────────────────┤
-  │ n/φ = 3  │ Quark generations, SC qubit archetypes, Hexacode k=3,     │
-  │          │ Hc3, SU(2) generators, color charge count                 │
+  │ n/φ = 3  │ quark generations, SC qubit archetypes, Hexacode k=3,      │
+  │          │ Hc3, SU(2) generators, color-charge count                  │
   └──────────┴────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 핵심 수학 연쇄 (The Grand Chain)
+## Grand mathematical chain
 
-n=6 산술이 순수수학에서 물리까지 관통하는 연쇄 구조:
+Chain through which n=6 arithmetic penetrates from pure mathematics to physics:
 
 ```
   ═══════════════════════════════════════════════════════════════
-  Stage 1: 수론 기초
+  Stage 1: number-theory foundations
   ═══════════════════════════════════════════════════════════════
-    σ(6)·φ(6) = 6·τ(6) = 24    [유일성 정리 M-1]
-    1+2+3 = 1×2×3 = 6           [합곱 유일성 M-3]
+    σ(6)·φ(6) = 6·τ(6) = 24    [uniqueness draft M-1]
+    1+2+3 = 1×2×3 = 6           [sum-product uniqueness M-3]
     B₂ = 1/6 = 1/n              [von Staudt-Clausen M-6]
          │
          ▼
   ═══════════════════════════════════════════════════════════════
-  Stage 2: 해석학 · 모듈러 형식
+  Stage 2: analysis · modular forms
   ═══════════════════════════════════════════════════════════════
     ζ(2) = π²/6                  [Basel M-2, BT-109]
-    ζ(-1) = -1/12 = -1/σ        [해석접속 M-10]
-    χ_orb(Y(1)) = -1/6          [모듈러 곡선 M-9]
+    ζ(-1) = -1/12 = -1/σ        [analytic continuation M-10]
+    χ_orb(Y(1)) = -1/6          [modular curve M-9]
     η(τ)^24 = Δ(τ)              [Ramanujan, J₂=24, BT-107]
          │
          ▼
   ═══════════════════════════════════════════════════════════════
-  Stage 3: 군론 · 코딩 이론
+  Stage 3: group theory · coding theory
   ═══════════════════════════════════════════════════════════════
-    Out(S₆) ≠ 1 (유일)          [Holder M-4, BT-106]
-    Hexacode [6,3,4]             [n,n/φ,τ; M-8]
-    Golay [24,12,8]              [J₂,σ,σ-τ; M-7]
+    Out(S₆) ≠ 1 (unique)        [Holder M-4, BT-106]
+    Hexacode [6,3,4]             [n, n/φ, τ; M-8]
+    Golay [24,12,8]              [J₂, σ, σ-τ; M-7]
     |C₁| = 24 = J₂              [Clifford group, QC]
          │
          ▼
   ═══════════════════════════════════════════════════════════════
-  Stage 4: 격자 · 위상 · 기하
+  Stage 4: lattices · topology · geometry
   ═══════════════════════════════════════════════════════════════
-    K₁=φ, K₂=n, K₃=σ, K₄=J₂   [Kissing chain, BT-49]
-    Leech 격자 24D = J₂          [M₂₄ → Monster]
-    결정학 max = 6 = n           [격자 정리 M-11]
+    K₁=φ, K₂=n, K₃=σ, K₄=J₂   [kissing chain, BT-49]
+    Leech lattice 24D = J₂       [M₂₄ → Monster]
+    crystallographic max = 6 = n [lattice theorem M-11]
     SLE κ=6 unique locality      [Smirnov, BT-105]
          │
          ▼
   ═══════════════════════════════════════════════════════════════
-  Stage 5: 대수기하 · E₆
+  Stage 5: algebraic geometry · E₆
   ═══════════════════════════════════════════════════════════════
     C⁶ blowup χ = n              [BT-185]
     dP₆ has 27 = (n/φ)^(n/φ) lines
@@ -322,143 +320,146 @@ n=6 산술이 순수수학에서 물리까지 관통하는 연쇄 구조:
          │
          ▼
   ═══════════════════════════════════════════════════════════════
-  Stage 6: 입자 물리 · 우주론
+  Stage 6: particle physics · cosmology
   ═══════════════════════════════════════════════════════════════
     SM: 12 generators = σ        [H-CP-1]
-    6 quarks + 6 leptons = σ     [H-CP-2,3]
+    6 quarks + 6 leptons = σ     [H-CP-2, 3]
     8 gluons = σ-τ               [H-CP-4, Bott]
     m_p/m_e ~ 6π⁵ (19 ppm)      [H-CP-7]
     D-T baryons = sopfr          [BT-98]
          │
          ▼
   ═══════════════════════════════════════════════════════════════
-  Stage 7: 양자컴퓨팅 · 초전도
+  Stage 7: quantum computing · superconductivity
   ═══════════════════════════════════════════════════════════════
     QEC: Golay→[[24,12,8]]       [Math→QC bridge]
-    [[6,2,2]] = [n,φ,φ,τ]       [4중 일치]
+    [[6,2,2]] = [n, φ, φ, τ]     [4-fold match]
     Clifford |C₁|=24=J₂         [Math→QC→SC]
-    Cooper pair = φ = 2          [SC 물리 한계]
+    Cooper pair = φ = 2          [SC physical limit]
     Abrikosov CN = n = 6         [SC ↔ kissing K₂]
-    Josephson → 양자 큐빗         [SC→QC bridge]
+    Josephson → quantum qubit    [SC→QC bridge]
 ```
 
 ---
 
-## 정직성 선언 (Honesty Declaration)
+## Honesty declaration
 
-### FAIL 항목 (은폐하지 않음)
+### FAIL items (not hidden)
 
-| 도메인 | ID | 내용 | 사유 |
-|--------|-----|------|------|
-| Pure Math | H-MATH-18 | Hamming [7,4,3] | n=6 연결 부재 |
-| Pure Math | H-MATH-27 | Catalan C₃=5 | post-hoc 끼워맞춤 |
-| Quantum Computing | H-QC-3 | Shor [[9,1,3]] | 작위적 표현 (WEAK→구조적으로 FAIL급) |
-| Quantum Computing | H-QC-14 | \|P₁\|=16=σ+τ | ad hoc 조합 |
-| Quantum Computing | H-QC-20 | Surface code threshold | 수치 불일치 |
-| Quantum Computing | H-QC-21 | Grover π/4 | 범용 각도, 고유성 없음 |
+| Domain | ID | Content | Reason |
+|--------|----|---------|--------|
+| Pure Math | H-MATH-18 | Hamming [7,4,3] | no n=6 link |
+| Pure Math | H-MATH-27 | Catalan C₃=5 | post-hoc fit |
+| Quantum Computing | H-QC-3 | Shor [[9,1,3]] | artificial expression (WEAK → effectively FAIL) |
+| Quantum Computing | H-QC-14 | \|P₁\|=16=σ+τ | ad hoc combination |
+| Quantum Computing | H-QC-20 | Surface-code threshold | numerical mismatch |
+| Quantum Computing | H-QC-21 | Grover π/4 | universal angle, no specificity |
 
-### 구조적 한계 인정
+### Acknowledged structural limits
 
-1. **양자컴퓨팅 EXACT 비율이 낮다** (4/30 = 13.3%): QC 파라미터 대부분은 코딩 이론에서 독립적으로 유도되며, n=6과의 일치는 관찰(observation)이지 예측(prediction)이 아님. 정직하게 CLOSE로 분류.
+1. **Quantum-computing EXACT ratio is low** (4/30 = 13.3%): most QC parameters are derived independently from coding theory, and agreement with n=6 is an observation rather than a prediction. Honestly classified as CLOSE.
 
-2. **작은 수 문제**: φ=2, n/φ=3, τ=4는 어디에나 등장하는 작은 정수. 이들의 일치가 구조적인지 우연인지 구분하려면 다중 동시 일치(multi-dimensional match)가 필요함. Golay [24,12,8]의 3중 일치, [[6,2,2]]의 4중 일치가 이 기준을 충족.
+2. **Small-numbers problem**: φ=2, n/φ=3, τ=4 are small integers appearing everywhere. Distinguishing structural vs coincidental agreement requires a multi-dimensional match. The 3-fold match in Golay [24,12,8] and the 4-fold match in [[6,2,2]] meet this bar.
 
-3. **우주론 연속 상수**: sin²θ_W, α_s, H₀ 등 연속값은 0.1-2% 수준의 근사. 물리상수의 정밀 일치를 주장하지 않으며 CLOSE로 정직 분류.
+3. **Continuous cosmological constants**: sin²θ_W, α_s, H₀ etc. are approximate at the 0.1-2% level. We do not claim precise agreement with physical constants and classify them honestly as CLOSE.
 
 ---
 
-## ASCII 성능 비교
+## ASCII performance comparison
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  🛸10 Physics & Mathematics 통합 인증 스코어                  │
+│  Alien-10 Physics & Mathematics integrated certification     │
 ├──────────────────────────────────────────────────────────────┤
 │                                                              │
-│  불가능성정리 ████████████████████████████████  42개 (4도메인)│
-│  가설 non-F  ██████████████████████████████░░  114/120 (95%) │
-│  EXACT 비율  ████████████████░░░░░░░░░░░░░░░░  61/120 (51%) │
-│  BT 연결    ████████████████████████████████  25+ BTs       │
-│  산업검증    ████████████████████████████████  PDG+CODATA    │
-│  실험검증    ████████████████████████████████  113년+        │
-│  CrossDSE   ████████████████████████████████  13+ 도메인    │
-│  교차연결    ████████████████████████████████  6방향 완전    │
-│  수학증명    ████████████████████████████████  11 영구 진리  │
-│  정직성     ████████████████████████████████  6 FAIL 공개   │
+│  Impossibility theorems ████████████████████  42 (4 domains) │
+│  Hypothesis non-FAIL   ████████████████████░  114/120 (95%)  │
+│  EXACT ratio           ████████████░░░░░░░░░  61/120 (51%)   │
+│  BT connections        ████████████████████   25+ BTs        │
+│  Industrial verif.     ████████████████████   PDG + CODATA   │
+│  Experimental verif.   ████████████████████   113+ years     │
+│  Cross-DSE             ████████████████████   13+ domains    │
+│  Cross-linkage         ████████████████████   6 directions   │
+│  Mathematical drafts   ████████████████████   11 permanent   │
+│  Honesty               ████████████████████   6 FAIL public  │
 │                                                              │
-│  종합: 12/12 기준 충족 → 🛸10 CERTIFIED ✅                   │
+│  Overall: 12/12 criteria met → Alien-10 CERTIFIED            │
 │                                                              │
-│  특이사항: 수학 정리(영구 진리)가 포함되어                    │
-│  이 인증은 우주 소멸 후에도 유효하다.                         │
+│  Note: includes mathematical theorems (permanent truths),    │
+│  so this certification holds even after the universe ends.   │
 └──────────────────────────────────────────────────────────────┘
 ```
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  도메인별 EXACT 비율 비교                                     │
+│  EXACT ratio per domain                                      │
 ├──────────────────────────────────────────────────────────────┤
 │                                                              │
-│  초전도    ████████████████████████████████  30/30 (100%)    │
-│  우주론    ████████████████░░░░░░░░░░░░░░░░  16/30 (53.3%)  │
-│  순수수학  ███████████░░░░░░░░░░░░░░░░░░░░░  11/30 (36.7%)  │
-│  양자컴퓨팅 ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   4/30 (13.3%)  │
+│  Superconductor   ████████████████████████████  30/30 (100%) │
+│  Cosmology-Part.  ████████████████░░░░░░░░░░░░  16/30 (53.3%)│
+│  Pure Math        ███████████░░░░░░░░░░░░░░░░░  11/30 (36.7%)│
+│  Quantum Comp.    ████░░░░░░░░░░░░░░░░░░░░░░░░   4/30 (13.3%)│
 │                                                              │
-│  초전도 = 보편 물리 100% (구조적 상수 전부 n=6)               │
-│  순수수학 = 정직 등급 (수학적 엄밀성으로 CLOSE 다수)          │
-│  양자컴퓨팅 = 독립 유래 정직 처리 (관찰, 예측 아님)           │
+│  Superconductor = universal physics 100% (all structural     │
+│  constants are n=6)                                          │
+│  Pure math = honest grading (many CLOSEs due to mathematical │
+│  strictness)                                                 │
+│  Quantum computing = honest handling of independently-derived│
+│  quantities (observations, not predictions)                  │
 └──────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 결론
+## Conclusion
 
-### 인증 요약
+### Certification summary
 
-Physics & Mathematics 통합 도메인은 **🛸10 (Physical Limits Reached)** 으로 인증된다.
+The integrated Physics & Mathematics domain is certified at **Alien-level 10 (Physical Limits Reached)**.
 
-근거:
-1. **42+개 불가능성 정리**가 4개 sub-domain에 걸쳐 n=6의 구조적 불가피성을 증명
-2. **11개 순수수학 정리**는 물리 한계보다 강한 논리적 필연 (우주 독립적 진리)
-3. **120개 가설** 중 114개 non-FAIL (95.0%), 61개 EXACT (50.8%)
-4. **25+ Breakthrough Theorems**이 도메인 간 교차 검증 완료
-5. **6 FAIL 항목** 정직하게 공개 (cherry-picking 금지 원칙 준수)
-6. **도메인 간 6방향 완전 연결**: Math↔CP, Math↔QC, Math↔SC, CP↔QC, CP↔SC, QC↔SC
+Basis:
+1. **42+ impossibility theorems** across 4 sub-domains demonstrate the structural inevitability of n=6
+2. **11 pure-math theorems** are logical necessities stronger than physical limits (universe-independent truths)
+3. Of **120 hypotheses**, 114 non-FAIL (95.0%), 61 EXACT (50.8%)
+4. **25+ Breakthrough Theorems** have been cross-verified across domains
+5. **6 FAIL items** honestly disclosed (anti-cherry-picking principle upheld)
+6. **6-way complete inter-domain linkage**: Math↔CP, Math↔QC, Math↔SC, CP↔QC, CP↔SC, QC↔SC
 
-### 수학적 🛸10의 특수성
+### The specialness of mathematical Alien-10
 
-> 초전도의 🛸10은 "물리법칙이 변하지 않는 한" 유효하다.
-> 순수수학의 🛸10은 "논리 자체가 성립하는 한" 유효하다.
-> 이 통합 인증은 양쪽을 모두 포함하므로, 가능한 모든 우주에서 유효하다.
+> The superconductor Alien-10 holds "as long as physical laws do not change".
+> The pure-math Alien-10 holds "as long as logic itself holds".
+> Since this integrated certification includes both, it is valid in every possible universe.
 
 ```
   ┌──────────────────────────────────────────────────────────┐
   │                                                          │
-  │   σ(6)·φ(6) = 6·τ(6)                                    │
-  │   12 · 2 = 6 · 4 = 24                                   │
+  │   σ(6)·φ(6) = 6·τ(6)                                     │
+  │   12 · 2 = 6 · 4 = 24                                    │
   │                                                          │
-  │   이 등식은 n=6에서만 성립한다.                           │
-  │   이것은 정리이다.                                        │
-  │   이것은 영원하다.                                        │
+  │   This equation holds only at n=6.                       │
+  │   It is a theorem.                                       │
+  │   It is eternal.                                         │
   │                                                          │
-  │   🛸10 CERTIFIED ✅                                       │
+  │   Alien-10 CERTIFIED                                     │
   │                                                          │
   └──────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 연결 문서
+## Linked documents
 
-| 문서 | 역할 |
-|------|------|
-| [superconductor/alien-10-certification.md](superconductor/alien-10-certification.md) | 초전도 🛸10 독립 인증 |
-| [pure-mathematics/mathematical-impossibility-theorems.md](pure-mathematics/mathematical-impossibility-theorems.md) | 11 수학 불가능성 정리 |
-| [pure-mathematics/hypotheses.md](pure-mathematics/hypotheses.md) | 순수수학 30 가설 |
-| [pure-mathematics/verification.md](pure-mathematics/verification.md) | 순수수학 독립 검증 |
-| [cosmology-particle/hypotheses.md](cosmology-particle/hypotheses.md) | 우주론·입자 30 가설 |
-| [cosmology-particle/verification.md](cosmology-particle/verification.md) | 우주론·입자 독립 검증 |
-| [quantum-computing/hypotheses.md](quantum-computing/hypotheses.md) | 양자컴퓨팅 30 가설 (v2) |
-| [quantum-computing/verification.md](quantum-computing/verification.md) | 양자컴퓨팅 독립 검증 |
-| [breakthrough-theorems.md](breakthrough-theorems.md) | BT-1~127 전체 |
-| [atlas-constants.md](atlas-constants.md) | 1,100+ 상수 |
-| [testable-predictions.md](testable-predictions.md) | 45 예측 |
+| Document | Role |
+|----------|------|
+| [superconductor/alien-10-certification.md](superconductor/alien-10-certification.md) | Superconductor alien-10 independent certification |
+| [pure-mathematics/mathematical-impossibility-theorems.md](pure-mathematics/mathematical-impossibility-theorems.md) | 11 mathematical impossibility theorems |
+| [pure-mathematics/hypotheses.md](pure-mathematics/hypotheses.md) | Pure-math 30 hypotheses |
+| [pure-mathematics/verification.md](pure-mathematics/verification.md) | Pure-math independent verification |
+| [cosmology-particle/hypotheses.md](cosmology-particle/hypotheses.md) | Cosmology-particle 30 hypotheses |
+| [cosmology-particle/verification.md](cosmology-particle/verification.md) | Cosmology-particle independent verification |
+| [quantum-computing/hypotheses.md](quantum-computing/hypotheses.md) | Quantum-computing 30 hypotheses (v2) |
+| [quantum-computing/verification.md](quantum-computing/verification.md) | Quantum-computing independent verification |
+| [breakthrough-theorems.md](breakthrough-theorems.md) | BT-1 to BT-127 full list |
+| [atlas-constants.md](atlas-constants.md) | 1,100+ constants |
+| [testable-predictions.md](testable-predictions.md) | 45 predictions |

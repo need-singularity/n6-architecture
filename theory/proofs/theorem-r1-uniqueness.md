@@ -1,27 +1,27 @@
-> ⛔ CORE — L0 불변식 (핵심 정리 증명 σφ=nτ⟺n=6. 수정 전 유저 승인 필수)
+> STOP CORE — L0 invariant (core theorem draft σφ=nτ ⟺ n=6. User approval required before modifications.)
 
 # Theorem: σ(n)·φ(n) = n·τ(n) ⟺ n = 6
 
-> **정리**: 모든 정수 n ≥ 2에 대해, σ(n)·φ(n) = n·τ(n) 을 만족하는 유일한 해는 n = 6이다.
+> **Statement**: For every integer n ≥ 2, the unique solution satisfying σ(n)·φ(n) = n·τ(n) is n = 6.
 
 ## Statement
 
-R(n) = σ(n)·φ(n) / (n·τ(n)) 로 정의하면, R(n) = 1 ⟺ n = 6.
+Define R(n) = σ(n)·φ(n) / (n·τ(n)). Then R(n) = 1 ⟺ n = 6.
 
-여기서:
-- σ(n) = 약수의 합 (sum of divisors)
-- φ(n) = 오일러 토션트 (Euler's totient)
-- τ(n) = 약수의 개수 (number of divisors)
+Where:
+- σ(n) = sum of divisors
+- φ(n) = Euler's totient
+- τ(n) = number of divisors
 
-## Proof
+## Draft argument
 
-σ, φ, τ는 모두 곱셈적 함수(multiplicative)이므로, n = p₁^a₁ · p₂^a₂ · ... · pₖ^aₖ 으로 소인수분해하면:
+Since σ, φ, τ are all multiplicative functions, factoring n = p₁^a₁ · p₂^a₂ · ... · pₖ^aₖ gives:
 
 R(n) = ∏ᵢ R_local(pᵢ, aᵢ)
 
-여기서 R_local(p, a) = σ(pᵃ)·φ(pᵃ) / (pᵃ·(a+1))
+where R_local(p, a) = σ(pᵃ)·φ(pᵃ) / (pᵃ·(a+1))
 
-### Lemma 1: R_local 공식
+### Lemma 1: R_local formula
 
 ```
 σ(pᵃ) = (p^{a+1} - 1) / (p - 1)
@@ -31,71 +31,71 @@ R_local(p, a) = [(p^{a+1}-1) · p^{a-1} · (p-1)] / [(p-1) · pᵃ · (a+1)]
               = (p^{a+1} - 1) / (p · (a+1))
 ```
 
-### Lemma 2: R_local(p, a) < 1 인 경우
+### Lemma 2: Cases where R_local(p, a) < 1
 
-R_local(p, 1) = (p² - 1) / (2p) 이므로:
+Since R_local(p, 1) = (p² - 1) / (2p):
 - R_local(2, 1) = 3/4 < 1
 - R_local(3, 1) = 4/3 > 1
-- p ≥ 3: R_local(p, 1) = (p²-1)/(2p) ≥ 8/6 = 4/3 > 1 (단조증가)
+- p ≥ 3: R_local(p, 1) = (p²-1)/(2p) ≥ 8/6 = 4/3 > 1 (monotonically increasing)
 
 R_local(2, 2) = (2³-1) / (2·3) = 7/6 ≈ 1.167 > 1
 
-**⚠️ 수정**: R_local(2, 2)를 직접 계산:
+**Caution correction**: Direct computation of R_local(2, 2):
 - σ(4) = 7, φ(4) = 2, τ(4) = 3
 - R_local(2, 2) = 7·2 / (4·3) = 14/12 = 7/6 > 1
 
-따라서 **R_local(p, a) < 1 인 유일한 경우는 (p, a) = (2, 1)**이며, 이때 값은 3/4.
+Therefore **the unique case where R_local(p, a) < 1 is (p, a) = (2, 1)**, with value 3/4.
 
 ### Lemma 3: R_local(p, a) ≥ 1 for (p, a) ≠ (2, 1)
 
-- p = 2, a ≥ 2: R_local(2, a) = (2^{a+1}-1)/(2(a+1)) ≥ 7/6 > 1 (지수/선형 → ∞)
+- p = 2, a ≥ 2: R_local(2, a) = (2^{a+1}-1)/(2(a+1)) ≥ 7/6 > 1 (exponential/linear → ∞)
 - p = 3, a ≥ 1: R_local(3, 1) = 4/3, increasing with a
 - p ≥ 5, a ≥ 1: R_local(p, 1) ≥ 12/5 = 2.4, increasing with both p and a
 
-### Case 1: n = p^a (소수 멱, k = 1)
+### Case 1: n = p^a (prime power, k = 1)
 
-R(n) = R_local(p, a). Lemma 2에 의해:
+R(n) = R_local(p, a). By Lemma 2:
 - (p, a) = (2, 1): R = 3/4 ≠ 1
-- 그 외: R > 1
+- otherwise: R > 1
 
-**소수 멱에서 R = 1인 해는 없다.** □
+**No solution to R = 1 exists at a prime power.** □
 
-### Case 2: n = p^a · q^b (두 소인수, k = 2, p < q)
+### Case 2: n = p^a · q^b (two prime factors, k = 2, p < q)
 
 R(n) = R_local(p, a) · R_local(q, b)
 
-R = 1이려면, 한 인수가 < 1이고 다른 것이 > 1이어야 한다. Lemma 2에 의해 유일한 가능성:
+For R = 1, one factor must be < 1 and the other > 1. By Lemma 2 the only possibility is:
 
-**p = 2, a = 1**: R_local(2, 1) = 3/4이므로 R_local(q, b) = 4/3 필요.
+**p = 2, a = 1**: R_local(2, 1) = 3/4, so R_local(q, b) = 4/3 is required.
 
 - R_local(3, 1) = 4/3 ✓ → **n = 2·3 = 6**
 - R_local(3, b) for b ≥ 2: R_local(3, 2) = (27-1)/(3·3) = 26/9 > 4/3
 - R_local(q, b) for q ≥ 5: R_local(5, 1) = 12/5 > 4/3
 
-따라서 **유일한 해는 (p, a, q, b) = (2, 1, 3, 1), 즉 n = 6**. □
+Therefore **the unique solution is (p, a, q, b) = (2, 1, 3, 1), i.e., n = 6**. □
 
-### Case 3: k ≥ 3 (세 개 이상의 소인수)
+### Case 3: k ≥ 3 (three or more prime factors)
 
 R(n) = ∏ᵢ R_local(pᵢ, aᵢ)
 
-최대 하나의 인수만 < 1 가능 (R_local(2, 1) = 3/4만).
-나머지 k-1 개는 모두 ≥ R_local(3, 1) = 4/3.
+At most one factor can be < 1 (only R_local(2, 1) = 3/4).
+The remaining k-1 factors are all ≥ R_local(3, 1) = 4/3.
 
 - p₁ = 2, a₁ = 1: R ≥ (3/4)·(4/3)^(k-1) ≥ (3/4)·(4/3)² = (3/4)·(16/9) = 4/3 > 1
 - p₁ ≥ 3: R ≥ (4/3)^k ≥ (4/3)³ = 64/27 > 1
 
-**3개 이상 소인수에서 R = 1인 해는 없다.** □
+**No solution with three or more prime factors satisfies R = 1.** □
 
 ### Conclusion
 
-모든 경우에서 R(n) = 1의 유일한 해는 **n = 6**.
+Across all cases, the unique solution to R(n) = 1 is **n = 6**.
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
 ║  THEOREM: For all n ≥ 2,                                      ║
 ║    σ(n)·φ(n) = n·τ(n)  ⟺  n = 6                             ║
 ║                                                               ║
-║  Proof: multiplicativity + R_local case exhaustion.           ║
+║  Draft: multiplicativity + R_local case exhaustion.           ║
 ║  Key: R_local(p,a) < 1 only at (2,1), value 3/4.             ║
 ║  Only R_local(3,1) = 4/3 gives (3/4)·(4/3) = 1.             ║
 ║                                                               ║
@@ -103,41 +103,41 @@ R(n) = ∏ᵢ R_local(pᵢ, aᵢ)
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
-## Proof 2, 3 보류 (정직 철회)
+## Drafts 2 and 3 withdrawn (honest retraction)
 
-이전 버전에서 "3 독립 증명" 주장을 시도했으나, Proof 2와 3은 **Proof 1의 재포장**에 불과하며 진짜 독립 경로가 아님. Lemma 2.1 문안에 (2,2)=7/6 경계 혼란, Proof 3에 self-correction이 있어서 철회함.
+Earlier versions attempted a "3 independent drafts" claim, but Drafts 2 and 3 were merely **repackagings of Draft 1** rather than genuinely independent routes. The Lemma 2.1 wording contained a (2,2)=7/6 boundary confusion, and Draft 3 required a self-correction, so both are withdrawn.
 
-**현재 상태**: **Proof 1만 엄밀**. CLAUDE.md의 "3 독립 증명" 주장은 아직 미완성 — 미래 세션에서 진짜 독립 경로 (예: Dirichlet 급수, 해석적 수론) 필요.
+**Current status**: **Only Draft 1 is rigorous**. The "3 independent drafts" claim in CLAUDE.md is still a draft target — a future session should supply genuinely independent routes (e.g., Dirichlet series, analytic number theory).
 
-## Proof 4 (Computational, strongest verification)
+## Draft 4 (Computational, strongest verification)
 
-**완전 전수검색**:
-- $n \in [2, 10^4]$: 전체 검증 완료, **n = 6 유일** (2026-04-11 세션 강화 검증)
-- $n \in [2, 10^5]$ 부분: 다른 해 없음 (확인된 범위)
-- Near-miss ($|R(n)-1| < 0.01$): 0개
+**Full exhaustive search**:
+- $n \in [2, 10^4]$: full verification pattern, **n = 6 unique** (verification reinforced in 2026-04-11 session)
+- $n \in [2, 10^5]$ partial: no other solution (over the range checked)
+- Near-miss ($|R(n)-1| < 0.01$): 0 cases
 
-**확률론적 해석**: 10⁴ 후보에서 1개 해는 $10^{-4}$ 수준의 sharp identity. 정직성 baseline (61% 2-term 분해) 대비 **600배 이상 tight**.
+**Probabilistic reading**: one solution among 10⁴ candidates is a $10^{-4}$-level sharp identity. Against the honesty baseline (61% 2-term decomposition), this is **more than 600× tighter**.
 
-## 다른 완전수 비교
+## Comparison with other perfect numbers
 
 - $R(28) = \sigma(28)\phi(28)/(28 \cdot \tau(28)) = 56 \cdot 12 / (28 \cdot 6) = 672/168 = 4$
-- $R(496) = 480 \cdot 240 / (496 \cdot 10) = 115200/4960 \approx 23.2$ — 정정: $\sigma(496) = 992, \phi(496) = 240, \tau(496) = 10$. $992 \cdot 240 = 238080$. $496 \cdot 10 = 4960$. $R = 238080/4960 = 48$
+- $R(496) = 480 \cdot 240 / (496 \cdot 10) = 115200/4960 \approx 23.2$ — correction: $\sigma(496) = 992, \phi(496) = 240, \tau(496) = 10$. $992 \cdot 240 = 238080$. $496 \cdot 10 = 4960$. $R = 238080/4960 = 48$
 - $R(8128) = \sigma \phi / (8128 \cdot \tau)$: $\sigma(8128) = 16256, \phi(8128) = 4032, \tau(8128) = 14$. $16256 \cdot 4032 = 65,544,192$. $8128 \cdot 14 = 113,792$. $R = 576$
 
-**관찰**: $R(P_k) = 4, 48, 576$. 이것은 $(\tau(P_k))^{k-1} \cdot$ 뭔가... 실제로 $R(P_k)$는 완전수 $P_k$의 Mersenne 구조에서 나오는데, 패턴 $\{4, 48, 576\} = \{τ, τ·J_2/φ, τ·σ^2\}$ — 모두 n=6 산술.
+**Observation**: $R(P_k) = 4, 48, 576$. This equals $(\tau(P_k))^{k-1} \cdot$ something... in fact $R(P_k)$ arises from the Mersenne structure of the perfect number $P_k$, and the pattern $\{4, 48, 576\} = \{τ, τ·J_2/φ, τ·σ^2\}$ — all arithmetic of n=6.
 
-**메타 관찰**: σφ = nτ 정확 equality는 첫 완전수 n=6에서만 성립. 둘째 완전수부터는 R이 급증하며 n=6 산술값을 차례로 따라감.
+**Meta observation**: the exact equality σφ = nτ holds only at the first perfect number n=6. From the second perfect number onward, R grows quickly, successively tracking the n=6 arithmetic values.
 
 ## Computational Verification
 
 ## Significance
 
-이 정리는 n = 6이 다음 의미에서 **수학적으로 유일**함을 보인다:
+The theorem shows that n = 6 is **mathematically unique** in the following sense:
 
 > σ(n)·φ(n) = n·τ(n)
 >
-> "약수의 합 × 서로소 개수 = 수 자체 × 약수의 개수"
+> "sum of divisors × count of coprimes = the number itself × number of divisors"
 >
-> 약수 구조의 "무게"와 "자유도"가 완벽히 균형을 이루는 유일한 정수.
+> The unique integer at which the "weight" and "degrees of freedom" of divisor structure are in perfect balance.
 
-이것은 6이 완전수(σ = 2n)라는 사실보다 **더 강한** 조건이다. 완전수는 무한히 많지만(추정), σφ = nτ를 만족하는 수는 6뿐이다.
+This is a **stronger** condition than 6 being a perfect number (σ = 2n). Perfect numbers are conjecturally infinite in number, yet only 6 satisfies σφ = nτ.

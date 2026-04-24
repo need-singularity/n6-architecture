@@ -308,189 +308,229 @@ understood as genuinely open questions, not hidden successes.
 
 ---
 
-## P0~P3 세션 한계 (2026-04-14)
+## P0-P3 session limitations (2026-04-14)
 
-> 배경: P4 단계 honest-limitations 확장. 2026-04-14 PAPER/CHIP/EDGE/FAB
-> P0~P3 전 과정에서 발견·누적된 방법론·실측·증빙 한계를 전수 기록한다.
-> 축소·은폐 없이 원인·영향·후속 조치를 정직하게 남기는 것이 목적이며,
-> 본 섹션은 append-only 이다. 한계를 삭제하거나 완화 표현으로 대체하는
-> 편집은 금지한다. 정직 기록은 프레임워크 신뢰도의 하한선을 정의한다.
+> Context: P4-stage honest-limitations extension. Records, without omission,
+> all methodology / measurement / evidence limitations discovered and
+> accumulated across the 2026-04-14 PAPER/CHIP/EDGE/FAB P0-P3 process.
+> The aim is to leave causes, impact and follow-up actions honestly on the
+> record without shrinking or hiding them. This section is append-only.
+> Edits that delete limitations or soften their wording are prohibited.
+> Honest records define the lower bound of framework trust.
 >
-> 관련 규칙: R0 (정직 검증 원칙), R3 (측정값·오차·출처 필수),
-> R9 (dry-run 우선, 자동 반영 금지), R14 (atlas.n6 승격 수동 승인),
-> R17 (HEXA-FIRST, 시뮬 명시 의무), R22 (BT 참조 교차 링크).
+> Related rules: R0 (honest-verification principle), R3 (measurement / error /
+> source mandatory), R9 (dry-run first, no automatic application), R14 (manual
+> approval for atlas.n6 promotion), R17 (HEXA-FIRST, simulation disclosure
+> required), R22 (BT-reference cross-links).
 
-### 1. hexa 런타임 오정보 — runtime.c 누락 주장
+### 1. hexa runtime misinformation — the "runtime.c missing" claim
 
-P1~P3 커밋 메시지 3건에 "hexa runtime.c 누락으로 실행 불가" 문구가
-기록되었으나, 실제 원인은 구 stage1 빌드 경로가 소스 트리 이동 후
-끊긴 것이었다. 현 stage0 빌드는 runtime.c 없이도 자립 실행 가능한
-구조이며, 13개의 .hexa 파일이 실제로는 run 가능한 상태였다.
+Three P1-P3 commit messages recorded the phrase "cannot execute due to missing
+hexa runtime.c", but the actual cause was that the old stage1 build path had
+been broken after the source tree moved. The current stage0 build is
+self-contained and runs without runtime.c, and the 13 .hexa files were in fact
+runnable.
 
-- **원인**: 에이전트가 stage1 캐시 경로를 stage0 소스와 혼동, 빌드
-  실패 메시지를 "런타임 파일 부재"로 오인·전파.
-- **영향**: PAPER-P1/P2/P3 커밋 로그 오염. 후속 세션 재현 시 존재하지
-  않는 runtime.c 파일을 복구하려 할 위험.
-- **후속 조치**: stage0 빌드 경로 재검증, 커밋 메시지 교정 대신 본 문서
-  섹션으로 역참조 링크 남김 (R3 출처 필수 원칙 준수). BT-1417 로
-  런타임 진단 경로 등록 제안.
+- **Cause**: the agent confused the stage1 cache path with the stage0 source,
+  misreading the build-failure message as "runtime file missing" and
+  propagating that error.
+- **Impact**: contamination of PAPER-P1/P2/P3 commit logs. Risk that a later
+  session attempting reproduction might try to restore a non-existent
+  runtime.c.
+- **Follow-up**: revalidate the stage0 build path; instead of amending the
+  commit messages, leave a back-reference link through this document section
+  (complying with the R3 source-mandatory principle). Propose registering a
+  runtime-diagnosis loop under BT-1417.
 
-### 2. parse 전용 우회 — run 가능 파일의 parse-only 검증
+### 2. parse-only detour — parse-only validation of runnable files
 
-P1 단계에서 13개의 .hexa 파일이 실제로는 `hexa run` 가능했음에도
-에이전트가 `hexa parse` 로만 검증을 수행했다. 후속 stage0 재검증에서
-해당 파일들의 run 결과가 정상임을 확인했다.
+During P1, 13 .hexa files that were actually runnable with `hexa run` were
+validated only with `hexa parse`. A later stage0 re-validation confirmed that
+they all run correctly.
 
-- **원인**: 첫 parse 실패 한두 건 후 에이전트가 "parse-only 가
-  안전하다" 고 판단, 전체 파이프라인을 축소.
-- **영향**: 파일 실행 부작용(atlas.n6 lens 등록, 측정값 생성)이 누락된
-  채 P1 결과가 집계되어, 측정값 SSOT 가 일시적으로 불완전.
-- **후속 조치**: P4 세션에서 13 파일 run 재실행 및 결과 반영. 에이전트
-  지시문에 "parse-only 는 컴파일 오류 디버그 전용이며 최종 검증은 run
-  필수" 명시. R17 HEXA-FIRST 시뮬 명시 의무에 하위 조항 추가 검토.
+- **Cause**: after one or two initial parse failures, the agent decided
+  "parse-only is safer" and shrank the entire pipeline.
+- **Impact**: file-execution side effects (atlas.n6 lens registration,
+  measurement generation) were omitted while P1 results were aggregated,
+  making the measurement SSOT temporarily incomplete.
+- **Follow-up**: in the P4 session the 13 files were re-run and the results
+  reflected. Agent instructions were updated to state "parse-only is for
+  compile-error debugging only; final validation requires run." Consider
+  adding a sub-rule to R17 HEXA-FIRST simulation disclosure.
 
-### 3. dry-run 원칙 — atlas.n6 승격 수동 승인 대기
+### 3. dry-run principle — atlas.n6 promotion pending manual approval
 
-P2 단계에서 atlas.n6 [7]→[10*] 승격 후보 40건을 자동 탐지했으나
-R9 dry-run 원칙에 따라 자동 승격은 0건으로 제한했다. Tier-1 핵심 9건
-포함 전 후보가 수동 승인 대기 상태이며, 이는 한계이자 설계된 안전장치다.
+During P2, 40 candidates for atlas.n6 promotion [7]→[10*] were auto-detected,
+but by the R9 dry-run principle, automatic promotion was capped at 0.
+All candidates, including the 9 Tier-1 core entries, are in manual-approval
+queue. This is both a limitation and a designed safeguard.
 
-- **원인**: atlas.n6 이 실측 지도의 SSOT 이므로 자동 승격은 자기참조
-  검증 위험을 유발. R9 에 의거 수동 승인 게이트 유지.
-- **영향**: 측정 등급 상향이 세션 경계를 넘어 지연. 단기적으로 EMPIRICAL
-  → EXACT 전환 속도 저하, 장기적으로 승격 품질 보장.
-- **후속 조치**: Tier-1 9건 수동 리뷰 세션 별도 확보, 각 건별 3개 독립
-  증명 채널 확인 후 일괄 편집. 과잉 승격은 롤백 불가능하므로 의도적
-  지연이 적절.
+- **Cause**: atlas.n6 is the SSOT of the measurement map, so automatic
+  promotion risks self-referential verification. Per R9, the manual-approval
+  gate is retained.
+- **Impact**: upgrades to measurement grade are delayed across session
+  boundaries. Short term slows the EMPIRICAL → EXACT transition; long term
+  guarantees promotion quality.
+- **Follow-up**: secure a dedicated manual-review session for the 9 Tier-1
+  entries and edit them in bulk after verifying 3 independent demonstration
+  channels per entry. Since over-promotion cannot be rolled back, deliberate
+  delay is appropriate.
 
-### 4. 실 HW 부재 — EDA 툴 없는 테이프아웃 서명
+### 4. No real HW — tapeout signing without EDA tools
 
-CHIP 트랙 P0~P3 에서 Magic / KLayout / OpenROAD / Calibre 등 실제 EDA
-툴체인 없이 GDSII / DRC / LVS / STA 가 전부 시뮬 경로로 산출되었다.
-"tapeout 서명" 항목은 개념적 체크리스트 통과이지 물리적 마스크 발주
-가능 상태가 아니다.
+In CHIP track P0-P3, GDSII / DRC / LVS / STA were all produced via a
+simulation path, without a real EDA toolchain such as Magic / KLayout /
+OpenROAD / Calibre. "Tapeout signing" entries are conceptual checklist
+passes, not a state from which physical masks could be ordered.
 
-- **원인**: EDA 라이선스·PDK 미보유. 내부 프레임워크는 τ=4 관문 통과
-  여부만 검증할 뿐, 파운드리 서명 규칙은 미적용.
-- **영향**: CHIP-P2/P3 커밋의 "tapeout-ready" 표현이 외부 독자에게
-  과대 해석될 여지. 실제 fab 제출에는 PDK·sign-off 재작업 필수.
-- **후속 조치**: CHIP 문서에 "tapeout-concept / not-sign-off" 레이블
-  일괄 부착, BT-1418 로 EDA 재측정 루프 등록 예정. 실 파운드리 접점
-  확보 전에는 본 한계를 상단 고지.
+- **Cause**: EDA licenses and PDK unavailable. The internal framework only
+  verifies τ=4 gate passage and does not apply foundry sign-off rules.
+- **Impact**: the "tapeout-ready" wording in CHIP-P2/P3 commits could be
+  over-interpreted by external readers. Actual fab submission requires
+  PDK + sign-off rework.
+- **Follow-up**: attach "tapeout-concept / not-sign-off" labels across CHIP
+  documents; plan to register an EDA re-measurement loop under BT-1418.
+  Until real foundry contact is secured, keep this limitation in the top
+  notice.
 
-### 5. Monte Carlo z>3.0 미실행 — 666 verified 재사용
+### 5. Monte Carlo z>3.0 not rerun — reuse of 666-verified
 
-P3 단계의 500+ 가설 검증 수치는 실제 Monte Carlo 시뮬을 재실행한
-결과가 아니라, 기존 666 verified 카운트를 z>3.0 기준으로 필터링해 재사용한
-것이다. 새 가설에 대한 MC 통계량은 산출되지 않았다.
+The 500+ hypothesis-check numbers at stage P3 were not obtained by re-running
+the Monte Carlo simulation but by filtering the existing 666 verified count
+under the z>3.0 criterion and reusing it. MC statistics for the new
+hypotheses were not produced.
 
-- **원인**: MC 재실행에 수 시간~수십 분 단위 소요가 예상되었고, 세션
-  시간 내 우선순위가 낮게 판단됨.
-- **영향**: P3 "z>3.0 통계 유의" 보고가 기존 세션 산출의 재요약에 가까우며,
-  신규 가설의 독립 검증 근거로는 부족.
-- **후속 조치**: 별도 세션에서 MC 파이프라인 재가동, 신규 가설 전수
-  재측정. 최소 z>3.0 컷오프, 목표 z>5.0. BT-1419 로 MC 재실행 루프 등록.
+- **Cause**: MC re-execution was expected to take hours to tens of minutes,
+  and its priority was deemed low within the session.
+- **Impact**: the P3 "z>3.0 statistically significant" report is close to a
+  rerelease of prior-session output, insufficient as independent verification
+  evidence for new hypotheses.
+- **Follow-up**: restart the MC pipeline in a dedicated session and
+  re-measure all new hypotheses. Minimum z>3.0 cutoff, target z>5.0.
+  Register an MC re-execution loop under BT-1419.
 
-### 6. DOI 시뮬 — CrossRef/DataCite 미등록
+### 6. DOI simulation — not registered with CrossRef/DataCite
 
-48편 논문 DOI 에 "10.NEXUS6.n6-arch/2026-XXX" 패턴이 부여되었으나
-이는 내부 네임스페이스이며 CrossRef / DataCite / JaLC 에 실제 등록
-되지 않았다. 현재 DOI 는 링크 불가능한 placeholder 다.
+DOIs of the pattern "10.NEXUS6.n6-arch/2026-XXX" were assigned to 48
+papers, but this is an internal namespace and the DOIs were not actually
+registered with CrossRef / DataCite / JaLC. The current DOIs are
+non-resolvable placeholders.
 
-- **원인**: DOI 등록에는 등록 기관 가입·prefix 구매·메타데이터 제출이
-  필요하며 비용·행정 절차가 세션 범위를 벗어남.
-- **영향**: 외부 인용 시 DOI resolver 실패. 내부 인덱싱에만 유효.
-- **후속 조치**: Zenodo (CERN) 무료 DOI 채널 경유를 우선 검토, 등록
-  후 papers/_submission_top48.json DOI 필드 일괄 갱신. 그 전까지는
-  "internal-DOI / not-resolvable" 주석 병기.
+- **Cause**: DOI registration requires joining a registrar, purchasing a
+  prefix, and submitting metadata. Cost and administrative steps are out of
+  scope for the session.
+- **Impact**: external citations fail at the DOI resolver. Useful only for
+  internal indexing.
+- **Follow-up**: first explore the free Zenodo (CERN) DOI route; after
+  registration, bulk-update the DOI field in papers/_submission_top48.json.
+  Until then, attach an "internal-DOI / not-resolvable" note.
 
-### 7. 86,240 셀 fit 휴리스틱 — base_affinity + seed=42
+### 7. 86,240-cell fit heuristic — base_affinity + seed=42
 
-FAB 트랙 셀 라이브러리 fit 점수는 seed=42 로 결정적이지만, 산출 공식은
-`base_affinity(cell_type) + hash(cell_id + domain) % bucket` 휴리스틱
-이며 실제 PPA 벤치마크 측정이 아니다.
+The fit scores of the FAB-track cell library are deterministic under
+seed=42, but the formula is the heuristic
+`base_affinity(cell_type) + hash(cell_id + domain) % bucket`, not actual
+PPA benchmark measurements.
 
-- **원인**: 86K 셀에 대한 실 STA / 파워 시뮬은 내부 인프라로 수 일
-  단위 소요. 초기 빠른 랭킹용으로 휴리스틱이 도입되고 그대로 고정됨.
-- **영향**: fit 상위 순위가 실 실리콘 성능과 일치한다는 보장 없음.
-  "fit=1.0" 은 휴리스틱 내 최대값일 뿐 실측 최적이 아님.
-- **후속 조치**: 상위 100 셀에 한정해 실 STA 돌려 휴리스틱 순위와
-  상관계수 산출 (목표 r>0.7), 미달 시 fit 함수 재설계. R3 측정값 필수
-  원칙에 따라 본 산출 전 "heuristic-score" 레이블 의무.
+- **Cause**: real STA / power simulation for 86K cells takes days of
+  internal-infrastructure time. The heuristic was introduced for fast
+  initial ranking and fixed in place.
+- **Impact**: there is no guarantee that high fit ranks correspond to real
+  silicon performance. "fit=1.0" is only the maximum inside the heuristic,
+  not a measured optimum.
+- **Follow-up**: run real STA on the top 100 cells and compute the
+  correlation coefficient against the heuristic ranking (target r>0.7);
+  if below threshold, redesign the fit function. Per the R3
+  measurement-mandatory principle, attach a "heuristic-score" label before
+  any such output.
 
-### 8. alien_index 등록 미이행 — 195→210+ 계획서 상태
+### 8. alien_index registration unexecuted — 195→210+ in plan state
 
-EDGE 트랙 alien_index 195→210+ 상향 계획이 수립되었으나, 실제 제품
-레지스트리(domains.json / _submission_top48) 편집은 수동 승인 대기
-상태로 남았다. 현 수치는 아직 계획 문서에만 존재한다. (기존 products.json → domains.json SSOT 이전 완료)
+The EDGE-track plan to lift alien_index 195→210+ was drafted, but the
+actual product-registry edit (domains.json / _submission_top48) remains
+in manual-approval queue. The current numbers exist only in the plan
+document. (The migration from products.json → domains.json SSOT is complete.)
 
-- **원인**: R9 dry-run 원칙 + R14 atlas 수동 승인과 동일한 안전장치.
-  alien_index 는 외부 노출 메트릭이므로 자동 상향이 금지된다.
-- **영향**: P3 리포트의 "alien_index 210+" 문구가 현 시점 제품 메타와
-  불일치. 외부 비교 시 혼란 가능.
-- **후속 조치**: 세션 내 수동 승인 루프 설계 — 상향 후보 각 건에 근거
-  BT 링크 + 3 독립 측정 강제. 그 전까지 모든 리포트에 "계획값 / 미반영"
-  명시.
+- **Cause**: same safeguard as R9 dry-run + R14 atlas manual approval.
+  alien_index is an externally exposed metric, so automatic uplift is
+  prohibited.
+- **Impact**: the P3 report's "alien_index 210+" wording is inconsistent
+  with the current product metadata, risking confusion in external
+  comparisons.
+- **Follow-up**: design a manual-approval loop within a session — require
+  a grounding BT link + 3 independent measurements per candidate. Until
+  then, mark all reports with "plan value / not reflected".
 
-### 9. bipartite 3023 엣지 키워드 휴리스틱 — P4-2 별도 감사 중
+### 9. bipartite 3023-edge keyword heuristic — separate audit P4-2 underway
 
-PAPER 트랙 bipartite 매칭의 3023 엣지는 논문 키워드 · 도메인 태그 ·
-제목 토큰 일치 휴리스틱으로 산출되었으며, 실제 논문 본문에 해당 기술이
-기술적으로 언급되는지 여부는 PAPER-P4-2 에서 별도 grep 감사 중이다.
+The 3023 edges of the PAPER-track bipartite matching were produced by a
+heuristic matching paper keywords, domain tags and title tokens. Whether
+the relevant technique is actually mentioned in the paper body is being
+audited separately by grep in PAPER-P4-2.
 
-- **원인**: 초기 링킹에 본문 전수 검색은 계산량 초과로 키워드 휴리스틱
-  채택. 상위 10 fit=1.0 쌍에 대해서만 본문 감사가 진행 중.
-- **영향**: fit=1.0 쌍 중 일부가 "키워드는 일치하나 논문은 다른 맥락"
-  인 거짓 양성일 가능성. 감사 종료 전에는 bipartite 결과를 강한 증거로
-  인용 금지.
-- **후속 조치**: PAPER-P4-2 완료 후 거짓 양성 비율 통계 본 섹션에 추가
-  기록. 임계 이상이면 매칭 알고리즘 재설계 (본문 임베딩 기반).
-- **P4-2 감사 결과 (2026-04-14)**: fit>=0.95 상위 10 쌍 전수 grep 감사
-  완료. **0/10 PASS — 거짓 양성율 100%**. fit=1.0 2건(mamba2→anima-soc,
-  rwkv→anima-soc) 포함 10건 모두 논문 본문에 해당 기술 키워드 미기재.
-  변형 5종(underscore→space, dash, 한글, 약어) 확장 검색에도 0건.
-  결론: 현 bipartite 매칭은 메타데이터 유사성만 반영하며, 본문 수준
-  증거로 인용 불가. 알고리즘 재설계(본문 임베딩 기반) 필수.
-  상세: experiments/paper/bipartite_audit_top10.md
+- **Cause**: full-text search for initial linking exceeded the compute
+  budget, so the keyword heuristic was adopted. Body-text audit is
+  progressing only for the top 10 fit=1.0 pairs.
+- **Impact**: some fit=1.0 pairs may be false positives of the form
+  "keywords match but the paper is in a different context". Until the
+  audit closes, bipartite results may not be cited as strong evidence.
+- **Follow-up**: once PAPER-P4-2 is complete, append false-positive-rate
+  statistics to this section. If above threshold, schedule a
+  matching-algorithm redesign (body-embedding based).
+- **P4-2 audit result (2026-04-14)**: grep-audit completed on all top 10
+  fit>=0.95 pairs. **0/10 PASS — false-positive rate 100%**. All 10
+  pairs, including the 2 fit=1.0 cases (mamba2→anima-soc, rwkv→anima-soc),
+  lack the corresponding technical keyword in the paper body. Extended
+  search with 5 variant forms (underscore→space, dash, Korean, acronym)
+  also produced 0 hits. Conclusion: the current bipartite match reflects
+  only metadata similarity and cannot be cited as body-text evidence.
+  Algorithm redesign (body-embedding based) is required.
+  Detail: experiments/paper/bipartite_audit_top10.md
 
 ---
 
-## 후속 세션 체크리스트
+## Follow-up-session checklist
 
-1. **hexa stage0 빌드 경로 재검증** — runtime.c 오정보 커밋 3건을 역추적
-   하고 stage0 자립 빌드를 전 .hexa 파일에서 run 재실행. 13 parse-only
-   파일 포함.
-2. **atlas.n6 Tier-1 9건 수동 승격 실행** — [7]→[10*] 핵심 후보 9건을
-   개별 리뷰, 3 독립 증명 확인 후 atlas.n6 직접 편집. 승격 로그를 별도
-   reports/ 에 고정.
-3. **EDA 툴 확보 후 GDSII/DRC/LVS 재측정** — Magic / KLayout / OpenROAD
-   오픈소스 체인 구성, 샘플 셀 1개에 대해 sign-off 파이프라인 최소 통과
-   확인. CHIP 문서에 "not-sign-off" 라벨 일괄 부착.
-4. **MC 실제 시뮬 돌려 z>3.0 확정** — 신규 500+ 가설에 대해 Monte Carlo
-   재실행, z>3.0 컷오프 적용 후 z 분포 히스토그램 산출. 결과를 별도
-   BT-1419 에 등록.
-5. **제품 등록 수동 승인 루프** — alien_index 195→210+ 후보를 건별 승인,
-   각 건에 BT 링크 + 3 독립 측정 강제. 미승인 건은 계획값 플래그 유지.
-6. **DOI Zenodo 경유 등록** — 48편 중 공개 가능한 논문부터 Zenodo DOI
-   발급, _submission_top48.json 일괄 갱신. internal-DOI 는 즉시 정리.
-7. **bipartite 본문 감사 종료 및 거짓 양성율 반영** — PAPER-P4-2 결과
-   수신 시 본 섹션 9번 항목에 통계 append, 임계 초과 시 알고리즘 재설계
-   세션 예약.
+1. **Re-validate hexa stage0 build path** — trace back the 3 runtime.c
+   misinformation commits and re-run the stage0 self-contained build on
+   every .hexa file. Include the 13 parse-only files.
+2. **Manually promote 9 atlas.n6 Tier-1 entries** — review the 9 core
+   [7]→[10*] candidates individually and edit atlas.n6 directly after
+   confirming 3 independent demonstrations per entry. Fix the promotion
+   log in a dedicated reports/ file.
+3. **Re-measure GDSII/DRC/LVS after securing EDA tools** — assemble the
+   open-source Magic / KLayout / OpenROAD chain and confirm at least a
+   minimum sign-off pipeline pass on one sample cell. Attach the
+   "not-sign-off" label across CHIP documents.
+4. **Actually run MC and confirm z>3.0** — re-execute Monte Carlo on the
+   500+ new hypotheses, apply a z>3.0 cutoff, and produce a z-distribution
+   histogram. Register the results under BT-1419.
+5. **Manual-approval loop for product registration** — approve alien_index
+   195→210+ candidates one by one, requiring a BT link + 3 independent
+   measurements per case. Keep the plan-value flag on any unapproved case.
+6. **DOI registration via Zenodo** — issue Zenodo DOIs for the publishable
+   subset of the 48 papers and bulk-update _submission_top48.json.
+   Retire the internal-DOIs immediately.
+7. **Close bipartite body audit and reflect false-positive rate** — upon
+   receipt of the PAPER-P4-2 result, append the statistics to item 9 of
+   this section; if above threshold, schedule a matching-algorithm
+   redesign session.
 
 ---
 
-## 정직 기록 원칙 재확인
+## Reconfirming the honest-record principles
 
-본 P4 확장은 다음 원칙 하에 작성되었다:
+This P4 extension was written under the following principles:
 
-- **축소 금지** — 한계를 "개선 여지" 로 순화하지 않는다.
-- **은폐 금지** — 커밋 로그 오염조차 삭제하지 않고 역참조로 남긴다.
-- **실측 우선** — 휴리스틱·재사용·시뮬 경로는 반드시 명시하고 실측과
-  구분한다.
-- **자기참조 금지** — atlas.n6 승격·alien_index 상향은 자동화하지 않고
-  수동 승인 게이트를 유지한다.
-- **후속 가시성** — 각 한계에 후속 조치와 담당 BT/루프를 명시해 방치를
-  방지한다.
+- **No shrinking** — do not soften limitations into "room for improvement".
+- **No hiding** — even commit-log contamination is kept via back-reference
+  rather than deleted.
+- **Measurements first** — heuristic, reused or simulated paths must be
+  disclosed and clearly distinguished from measurements.
+- **No self-reference** — atlas.n6 promotion and alien_index uplift are
+  not automated; the manual-approval gate is retained.
+- **Follow-up visibility** — each limitation is annotated with the
+  follow-up action and the responsible BT/loop to prevent neglect.
 
-이 원칙들은 R0·R3·R9·R14·R17·R22 와 연동되며, 위반 감지 시 loop-guard
-는 본 문서를 우선 참조한다.
+These principles are linked with R0, R3, R9, R14, R17, R22, and when a
+violation is detected, loop-guard consults this document first.

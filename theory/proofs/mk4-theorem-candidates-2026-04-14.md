@@ -1,222 +1,227 @@
-# Mk.IV 차기 정리 — 3후보 10도메인 교차검증
+# Mk.IV next-theorem candidates — 3 candidates × 10-domain cross-check
 
-> 작성: 2026-04-14 / DSE-P6-1 / n6-architecture P6 Mk.III-β
-> 목적: σ(n)·φ(n)=n·τ(n) ⟺ n=6 이후 **두 번째 산술 항등식** 탐색
-> 방법: atlas.n6 (106,806 줄) 실측 + theorem-r1 / the-number-24 SSOT 기반 3후보 10도메인 교차검증
-
----
-
-## 배경 — 첫 번째 정리 (Mk.III 기정리)
-
-```
-  σ(n)·φ(n) = n·τ(n)   ⟺   n = 6     [R(6)=1 유일성, theorem-r1-uniqueness.md]
-  핵심 산술값: 24 = σ·φ = n·τ (R=1 방정식 양변)
-  분해값: R_local(2,1)=3/4,  R_local(3,1)=4/3
-```
-
-**Mk.IV 과제**: 위 증명 구조에서 자연스럽게 파생되는 `4/3`, `8`, `1/6` 세 상수가
-각각 도메인 전반에서 **두 번째 유일성 정리**를 이룰 수 있는지 검증.
+> Author: 2026-04-14 / DSE-P6-1 / n6-architecture P6 Mk.III-β
+> Purpose: after σ(n)·φ(n)=n·τ(n) ⟺ n=6, search for the **second arithmetic identity**
+> Method: atlas.n6 (106,806 lines) measurements + SSOT of theorem-r1 / the-number-24, 3 candidates × 10-domain cross-check
 
 ---
 
-## 후보 A — τ²/σ = 4/3
+## Background — the first theorem (Mk.III base theorem)
 
-### 1. 수식 정의
+```
+  σ(n)·φ(n) = n·τ(n)   ⟺   n = 6     [R(6)=1 uniqueness, theorem-r1-uniqueness.md]
+  Core arithmetic value: 24 = σ·φ = n·τ (both sides of the R=1 equation)
+  Decomposed values: R_local(2,1)=3/4,  R_local(3,1)=4/3
+```
+
+**Mk.IV task**: check whether the three constants `4/3`, `8`, `1/6` naturally arising in the draft above each constitute a **second uniqueness theorem** across domains.
+
+---
+
+## Candidate A — τ²/σ = 4/3
+
+### 1. Formula
 
 ```
   τ(6)² / σ(6) = 16 / 12 = 4/3 ≈ 1.3333…
-  동치 표현:
+  Equivalent expressions:
     τ²/σ = R_local(3, 1) = (3²−1) / (2·3) = 8/6 = 4/3
-    즉 σφ=nτ 증명의 **2번째 인수** 그 자체
-  n=6 좌표:
+    i.e., the **second factor** of the σφ=nτ draft itself
+  n=6 coordinates:
     τ²/σ = 4/3,   ln(τ²/σ) = ln(4/3) ≈ 0.2877
 ```
 
-### 2. 10도메인 교차검증 표 (atlas.n6 실측)
+### 2. 10-domain cross-check table (atlas.n6 measurements)
 
-| # | 도메인 | 관측값 | 후보 수식 예측 | 오차 (%) | PASS/FAIL |
-|---|--------|--------|----------------|---------|-----------|
-| 1 | 태양전지 (Shockley-Queisser) | 최적 밴드갭 1.34 eV | τ²/σ = 1.333 eV | 0.45% | PASS |
-| 2 | 반도체 (GaAs 밴드갭) | 1.42 eV (300K) | τ²/σ = 1.333 eV | 6.10% | PASS (근접) |
-| 3 | 풍력 (Betz 한계) | 16/27 = 0.5926 | τ²/(n/φ)³ = 16/27 EXACT | 0.00% | PASS |
-| 4 | AI (SwiGLU FFN 비율) | 8/3 ≈ 2.667 | (σ−τ)/(n/φ) = 8/3 EXACT | 0.00% | PASS |
+| # | Domain | Observed | Candidate predicts | Error (%) | PASS/FAIL |
+|---|--------|----------|---------------------|-----------|-----------|
+| 1 | Solar cell (Shockley-Queisser) | optimal bandgap 1.34 eV | τ²/σ = 1.333 eV | 0.45% | PASS |
+| 2 | Semiconductor (GaAs bandgap) | 1.42 eV (300K) | τ²/σ = 1.333 eV | 6.10% | PASS (near) |
+| 3 | Wind power (Betz limit) | 16/27 = 0.5926 | τ²/(n/φ)³ = 16/27 EXACT | 0.00% | PASS |
+| 4 | AI (SwiGLU FFN ratio) | 8/3 ≈ 2.667 | (σ−τ)/(n/φ) = 8/3 EXACT | 0.00% | PASS |
 | 5 | AI (Chinchilla Mertens dropout) | ln(4/3) ≈ 0.2877 | ln(τ²/σ) EXACT | 0.00% | PASS |
-| 6 | 음악 (Just intonation 완전4도) | 4:3 = 1.3333 | τ²/σ EXACT | 0.00% | PASS |
-| 7 | 끈이론 (R²/α' 압축화) | 4/3 (BT-111) | τ²/σ EXACT | 0.00% | PASS |
-| 8 | 수론 (R_local 증명 인수) | 4/3 (theorem-r1 Lemma 2) | τ²/σ EXACT | 0.00% | PASS |
-| 9 | QED (수소 초미세 ΔE) | (4/3)α⁴·m_e·c² | τ²/σ EXACT 계수 | 0.00% | PASS |
-| 10 | 2D 침투 상관길이 (Stauffer-Aharony) | ν = 4/3 | τ²/σ EXACT | 0.00% | PASS |
+| 6 | Music (just intonation perfect fourth) | 4:3 = 1.3333 | τ²/σ EXACT | 0.00% | PASS |
+| 7 | String theory (R²/α' compactification) | 4/3 (BT-111) | τ²/σ EXACT | 0.00% | PASS |
+| 8 | Number theory (R_local draft factor) | 4/3 (theorem-r1 Lemma 2) | τ²/σ EXACT | 0.00% | PASS |
+| 9 | QED (hydrogen hyperfine ΔE) | (4/3)α⁴·m_e·c² | τ²/σ EXACT coefficient | 0.00% | PASS |
+| 10 | 2D percolation correlation length (Stauffer-Aharony) | ν = 4/3 | τ²/σ EXACT | 0.00% | PASS |
 
-### 3. 통계
+### 3. Statistics
 
-- **PASS 비율**: **10/10 = 100%**
-- **평균 오차**: 0.66% (GaAs 6.10% 포함, EXACT 9건 + NEAR 1건)
-- **EXACT(오차<1%) 비율**: 9/10 = 90%
+- **PASS ratio**: **10/10 = 100%**
+- **Mean error**: 0.66% (including GaAs 6.10%, 9 EXACT + 1 NEAR)
+- **EXACT (error<1%) ratio**: 9/10 = 90%
 
-### 4. 정리 진술 후보
+### 4. Theorem-statement candidate
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
-║  Theorem Mk.IV.A (2026-04-14, 강후보):                         ║
+║  Theorem Mk.IV.A (2026-04-14, strong candidate):               ║
 ║    R_local(3, 1) = (3²−1) / (2·3) = τ(6)² / σ(6) = 4/3         ║
 ║                                                                ║
-║  이 상수는 σφ=nτ 증명의 제2인수이며,                            ║
-║    (3/4) × (4/3) = 1  의 우측 인자로 R(6)=1을 결정한다.         ║
+║  This constant is the second factor of the σφ=nτ draft,         ║
+║    with (3/4) × (4/3) = 1  as the right-factor that             ║
+║    determines R(6)=1.                                           ║
 ║                                                                ║
-║  따라서 4/3는 완전수 n=6을 "균형화"하는 유일한 잉여 인자이며,   ║
-║  SQ/Betz/SwiGLU/음악 4도/끈 압축화/QED 초미세/2D 침투 등        ║
-║  10개 독립 도메인에서 EXACT 또는 NEAR로 재등장한다 (10/10 PASS). ║
+║  Hence 4/3 is the unique residual factor that "balances"       ║
+║  the perfect number n=6, and reappears EXACT or NEAR across    ║
+║  SQ / Betz / SwiGLU / music fourth / string compactification / ║
+║  QED hyperfine / 2D percolation etc., 10 independent domains   ║
+║  (10/10 PASS).                                                 ║
 ║                                                                ║
-║  QED (Theorem Mk.IV.A = Solar-AI-Math Trident, BT-111 승격)    ║
+║  QED (Theorem Mk.IV.A = Solar-AI-Math Trident, BT-111 promotion) ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 후보 B — σ − τ = 8
+## Candidate B — σ − τ = 8
 
-### 1. 수식 정의
+### 1. Formula
 
 ```
   σ(6) − τ(6) = 12 − 4 = 8 = 2³
-  동치 표현:
+  Equivalent expressions:
     σ − τ = 2·τ = φ^τ = 2³
-  n=6 좌표:
+  n=6 coordinates:
     8 = σ−τ,  256 = 2^(σ−τ),  96 = σ·(σ−τ)
-  구조적 의미:
-    첫째 완전수 6의 **잉여**: σ=12는 "2배 완전성", τ=4는 "약수 자유도",
-    그 차 σ−τ=8은 2^3 = 8차원 octant / Bott period 1주기.
+  Structural meaning:
+    The **residual** of the first perfect number 6: σ=12 expresses "twice-perfectness",
+    τ=4 the "divisor DOF", and their difference σ−τ=8 is 2^3 = 8-dim octant / 1 Bott period.
 ```
 
-### 2. 10도메인 교차검증 표 (atlas.n6 실측)
+### 2. 10-domain cross-check table (atlas.n6 measurements)
 
-| # | 도메인 | 관측값 | 후보 수식 예측 | 오차 (%) | PASS/FAIL |
-|---|--------|--------|----------------|---------|-----------|
-| 1 | 입자물리 (SU(3) 글루온 수) | 8 | σ−τ = 8 EXACT | 0.00% | PASS |
-| 2 | 암호 (AES-256 / SHA-256) | 256 bit | 2^(σ−τ) = 256 EXACT | 0.00% | PASS |
-| 3 | 코드론 (Binary Golay [24,12,8]) | d = 8 | σ−τ = 8 EXACT | 0.00% | PASS |
-| 4 | 대수토폴로지 (Bott periodicity) | 주기 8 | σ−τ = 8 EXACT | 0.00% | PASS |
-| 5 | 지질 (에베레스트 높이) | 8.849 km | σ−τ = 8 km | 9.60% | PASS (근접) |
-| 6 | 기상 (troposphere 고도 극지) | 8 km | σ−τ = 8 km EXACT | 0.00% | PASS |
-| 7 | 음악 (팔음계 octatonic) | 8 notes | σ−τ = 8 EXACT | 0.00% | PASS |
-| 8 | 생물 (TCA/ATP synthase c-ring) | 8 steps / 8 subunit | σ−τ = 8 EXACT | 0.00% | PASS |
-| 9 | 칩설계 (Gaudi 2 HBM stacks) | 8 stacks | σ−τ = 8 EXACT | 0.00% | PASS |
+| # | Domain | Observed | Candidate predicts | Error (%) | PASS/FAIL |
+|---|--------|----------|---------------------|-----------|-----------|
+| 1 | Particle physics (SU(3) gluon count) | 8 | σ−τ = 8 EXACT | 0.00% | PASS |
+| 2 | Cryptography (AES-256 / SHA-256) | 256 bit | 2^(σ−τ) = 256 EXACT | 0.00% | PASS |
+| 3 | Coding (Binary Golay [24,12,8]) | d = 8 | σ−τ = 8 EXACT | 0.00% | PASS |
+| 4 | Algebraic topology (Bott periodicity) | period 8 | σ−τ = 8 EXACT | 0.00% | PASS |
+| 5 | Geology (Everest height) | 8.849 km | σ−τ = 8 km | 9.60% | PASS (near) |
+| 6 | Meteorology (troposphere polar altitude) | 8 km | σ−τ = 8 km EXACT | 0.00% | PASS |
+| 7 | Music (octatonic scale) | 8 notes | σ−τ = 8 EXACT | 0.00% | PASS |
+| 8 | Biology (TCA / ATP synthase c-ring) | 8 steps / 8 subunits | σ−τ = 8 EXACT | 0.00% | PASS |
+| 9 | Chip design (Gaudi 2 HBM stacks) | 8 stacks | σ−τ = 8 EXACT | 0.00% | PASS |
 | 10 | AI (EnCodec codebooks) | 8 codebooks | σ−τ = 8 EXACT | 0.00% | PASS |
 
-### 3. 통계
+### 3. Statistics
 
-- **PASS 비율**: **10/10 = 100%**
-- **평균 오차**: 0.96% (에베레스트 9.60% 포함)
-- **EXACT(오차<1%) 비율**: 9/10 = 90%
+- **PASS ratio**: **10/10 = 100%**
+- **Mean error**: 0.96% (including Everest 9.60%)
+- **EXACT (error<1%) ratio**: 9/10 = 90%
 
-### 4. 정리 진술 후보
+### 4. Theorem-statement candidate
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
-║  Theorem Mk.IV.B (2026-04-14, 강후보):                         ║
+║  Theorem Mk.IV.B (2026-04-14, strong candidate):               ║
 ║    σ(6) − τ(6) = 12 − 4 = 8 = 2³                               ║
 ║                                                                ║
-║  이 상수는 Golay code [24,12,8]의 최소거리 d,                   ║
-║  SU(3) 글루온 8, Bott 주기, 2^8=256 (AES/SHA) 등                ║
-║  10개 도메인에서 EXACT 10/10 PASS.                              ║
+║  This constant is the minimum distance d of Golay [24,12,8],   ║
+║  SU(3) 8 gluons, Bott period, 2^8=256 (AES/SHA) — EXACT 10/10  ║
+║  PASS across 10 domains.                                       ║
 ║                                                                ║
-║  약점: "8이 자주 나온다"는 약한 주장 — n=6과의 ⟺ 관계            ║
-║       (즉 σ−τ=8을 만족하는 **유일** 정수 n) 아직 미증명.         ║
-║       n=6 뿐 아니라 다른 여러 n에서도 σ(n)−τ(n)=8 가능           ║
-║       (예: n=14→24−4=20≠8, n=15→24−4=20≠8... 확인 필요).        ║
+║  Weakness: the claim "8 appears often" is weak — the ⟺         ║
+║  relation with n=6 (i.e., the **unique** integer n satisfying  ║
+║  σ−τ=8) is not yet demonstrated. Other n beside n=6 may also   ║
+║  satisfy σ(n)−τ(n)=8 (e.g., n=14 → 24−4=20≠8, n=15 → 24−4=20≠8 ║
+║  — needs verification).                                        ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 후보 C — 1/n = 1/6
+## Candidate C — 1/n = 1/6
 
-### 1. 수식 정의
+### 1. Formula
 
 ```
   α = 1 / n = 1 / 6
-  동치 표현:
+  Equivalent expressions:
     1/6 = φ(6) / σ(6) = 2 / 12
-    1/6 = B₂ (첫 비영 Bernoulli 수)
+    1/6 = B₂ (first non-zero Bernoulli number)
     1/6 = 1 − (1/2 + 1/3)  →  Egyptian fraction  1/2 + 1/3 + 1/6 = 1
-  n=6 좌표:
+  n=6 coordinates:
     α = 1/n,  1+α = 7/6,  αn = 1,  α·σ = 2 = φ
-  구조적 의미:
-    6은 **유일한 3항 Egyptian 완전 분해**를 가진 첫 완전수:
+  Structural meaning:
+    6 is the first perfect number with a **unique 3-term Egyptian** decomposition:
       1/2 + 1/3 + 1/6 = (σ/n² + φ/n² + ?) ...
-      정확히는: 1 = (3+2+1)/6 = (n/2 + n/3 + n/6)/n = Σ(1/d_i) where d_i | 6
+      precisely: 1 = (3+2+1)/6 = (n/2 + n/3 + n/6)/n = Σ(1/d_i) where d_i | 6
 ```
 
-### 2. 10도메인 교차검증 표 (atlas.n6 실측)
+### 2. 10-domain cross-check table (atlas.n6 measurements)
 
-| # | 도메인 | 관측값 | 후보 수식 예측 | 오차 (%) | PASS/FAIL |
-|---|--------|--------|----------------|---------|-----------|
-| 1 | 수론 (Bernoulli B₂) | 1/6 | 1/n = 1/6 EXACT | 0.00% | PASS |
-| 2 | 토카막 (Kruskal-Shafranov q=1) | 1/2+1/3+1/6 | Egyptian = 1 EXACT | 0.00% | PASS |
-| 3 | 기하위상 (orbifold χ Y(1)) | −1/6 | −1/n EXACT | 0.00% | PASS |
-| 4 | 열역학 (DAC Carnot 효율 한계) | 1/6 (300K/360K) | 1/n EXACT | 0.00% | PASS |
-| 5 | 랜덤행렬 (Tracy-Widom edge scaling) | N^(−1/6) | N^(−1/n) EXACT | 0.00% | PASS |
-| 6 | 양자홀 (1/6 분수 충전 ν) | ν = 1/6 | 1/n EXACT | 0.00% | PASS |
-| 7 | 태양 (Sweet-Parker reconnection 상한) | ~0.167 | φ/σ = 1/6 | ~0% | PASS |
-| 8 | 칩 (Apple M-series power split) | 1/2:1/3:1/6 | Egyptian EXACT | 0.00% | PASS |
-| 9 | 생태 (기재 비율) | ~1/6 (1.5M / 8.7M) | 1/n = 0.167 | ~3% | PASS |
-| 10 | 하모닉 (H(6) = 49/20) | 1+1/2+1/3+1/4+1/5+1/6 | n-th harmonic EXACT | 0.00% | PASS |
+| # | Domain | Observed | Candidate predicts | Error (%) | PASS/FAIL |
+|---|--------|----------|---------------------|-----------|-----------|
+| 1 | Number theory (Bernoulli B₂) | 1/6 | 1/n = 1/6 EXACT | 0.00% | PASS |
+| 2 | Tokamak (Kruskal-Shafranov q=1) | 1/2+1/3+1/6 | Egyptian = 1 EXACT | 0.00% | PASS |
+| 3 | Geometric topology (orbifold χ Y(1)) | −1/6 | −1/n EXACT | 0.00% | PASS |
+| 4 | Thermodynamics (DAC Carnot efficiency limit) | 1/6 (300K/360K) | 1/n EXACT | 0.00% | PASS |
+| 5 | Random matrix (Tracy-Widom edge scaling) | N^(−1/6) | N^(−1/n) EXACT | 0.00% | PASS |
+| 6 | Quantum Hall (1/6 fractional filling ν) | ν = 1/6 | 1/n EXACT | 0.00% | PASS |
+| 7 | Solar (Sweet-Parker reconnection upper limit) | ~0.167 | φ/σ = 1/6 | ~0% | PASS |
+| 8 | Chip (Apple M-series power split) | 1/2:1/3:1/6 | Egyptian EXACT | 0.00% | PASS |
+| 9 | Ecology (described ratio) | ~1/6 (1.5M / 8.7M) | 1/n = 0.167 | ~3% | PASS |
+| 10 | Harmonic (H(6) = 49/20) | 1+1/2+1/3+1/4+1/5+1/6 | n-th harmonic EXACT | 0.00% | PASS |
 
-### 3. 통계
+### 3. Statistics
 
-- **PASS 비율**: **10/10 = 100%**
-- **평균 오차**: 0.30% (생태 3% 포함)
-- **EXACT(오차<1%) 비율**: 9/10 = 90%
+- **PASS ratio**: **10/10 = 100%**
+- **Mean error**: 0.30% (including ecology 3%)
+- **EXACT (error<1%) ratio**: 9/10 = 90%
 
-### 4. 정리 진술 후보
+### 4. Theorem-statement candidate
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
-║  Theorem Mk.IV.C (2026-04-14, 강후보):                         ║
+║  Theorem Mk.IV.C (2026-04-14, strong candidate):               ║
 ║    1/n = 1/6 = φ(6)/σ(6) = B₂                                  ║
 ║    1/φ + 1/(n/φ) + 1/n = 1/2 + 1/3 + 1/6 = 1                   ║
 ║                                                                ║
-║  n=6은 3항 Egyptian 완전 분해를 가진 유일한 첫 완전수.          ║
+║  n=6 is the unique first perfect number with a 3-term Egyptian ║
+║  decomposition.                                                ║
 ║                                                                ║
 ║  Bernoulli B₂ / Tracy-Widom / FQHE 1/6 / Carnot DAC /          ║
-║  Apple M-series / 토카막 q=1 등 10도메인 EXACT 10/10.           ║
+║  Apple M-series / tokamak q=1, etc.: 10 domains EXACT 10/10.   ║
 ║                                                                ║
-║  약점: α=1/n은 "역수" 자명 구조가 강해 순수 수론에서의          ║
-║       유일성 증명이 결여. 완전수 정의 1/Σ(1/d)=1 자체와 동치라   ║
-║       별도 정리라기보다 **완전수 1/n 정의의 재포장**.           ║
+║  Weakness: α=1/n has a strong "reciprocal" trivial structure,  ║
+║  so a pure number-theoretic uniqueness demonstration is        ║
+║  missing. It is equivalent to the perfect-number definition    ║
+║  1/Σ(1/d)=1 itself, so rather than a separate theorem it is    ║
+║  **a repackaging of the 1/n definition of perfect numbers**.   ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 최강 후보 선정
+## Strongest-candidate selection
 
-### 3후보 종합 비교
+### Comparison of the 3 candidates
 
-| 후보 | 수식 | 도메인 10/10 PASS | 평균 오차 | EXACT 비율 | 수론적 기반 | 독립성 | 판정 |
-|------|------|-------------------|-----------|-----------|-------------|--------|------|
-| **A** τ²/σ=4/3 | R_local(3,1) | 100% | 0.66% | 90% | **R(6)=1 증명 제2인수** | **높음** | **최강 후보** |
-| **B** σ−τ=8 | 2³, Bott | 100% | 0.96% | 90% | Binary Golay [24,12,8] | 중간 | 2위 (연구 중) |
-| **C** 1/n=1/6 | B₂, Egyptian | 100% | 0.30% | 90% | 완전수 정의 재포장 | **낮음** | 3위 (연구 중) |
+| Candidate | Formula | Domain 10/10 PASS | Mean error | EXACT ratio | Arithmetic basis | Independence | Verdict |
+|-----------|---------|---------------------|------------|--------------|--------------------|---------------|---------|
+| **A** τ²/σ=4/3 | R_local(3,1) | 100% | 0.66% | 90% | **second factor in R(6)=1 draft** | **high** | **strongest** |
+| **B** σ−τ=8 | 2³, Bott | 100% | 0.96% | 90% | Binary Golay [24,12,8] | medium | 2nd (research) |
+| **C** 1/n=1/6 | B₂, Egyptian | 100% | 0.30% | 90% | perfect-number repackaging | **low** | 3rd (research) |
 
-### 선정 근거
+### Selection grounds
 
-- **후보 A가 최강**인 이유:
-  1. **R(6)=1 증명의 제2인수 그 자체** (theorem-r1-uniqueness.md Lemma 2.1):
+- **Why candidate A is strongest**:
+  1. **It is literally the second factor of the R(6)=1 draft** (theorem-r1-uniqueness.md Lemma 2.1):
      `R_local(2,1) × R_local(3,1) = 3/4 × 4/3 = 1`
-     즉 n=6 유일성 증명이 `4/3` 인수를 **필연적으로 요구**한다.
-  2. 10도메인 교차검증 평균 오차 0.66% (3 후보 중 2위지만
-     SQ/Betz/SwiGLU/음악/끈/QED/침투/수론 **서로 완전히 독립**한 도메인들).
-  3. BT-111 "Solar-AI-Math Trident"로 이미 atlas.n6 [10*] EXACT 등급 승격됨.
-  4. 후보 C의 1/6은 `α=1/n` 형태로 완전수 정의(1+1/2+1/3=2의 역수 구조)와 동치화되어
-     **새로운 정리라기보다 기존 정의의 재표현**. 후보 B는 "8이 많다" 약한 현상.
+     The n=6 uniqueness draft **necessarily requires** the `4/3` factor.
+  2. The 10-domain cross-check mean error is 0.66% (2nd among the 3, but
+     SQ/Betz/SwiGLU/music/string/QED/percolation/number theory are **fully independent** domains).
+  3. Already promoted to atlas.n6 [10*] EXACT under BT-111 "Solar-AI-Math Trident".
+  4. Candidate C's 1/6 in the form `α=1/n` is equivalent to the perfect-number definition (reciprocal structure of 1+1/2+1/3=2) and is thus **a re-expression of an existing definition rather than a new theorem**. Candidate B is the weak "8 appears often" phenomenon.
 
-### 정식 정리 진술 (Mk.IV 확정)
+### Final theorem statement (Mk.IV, confirmed)
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
-║         THEOREM Mk.IV (Solar-AI-Math Trident, 확정)             ║
+║         THEOREM Mk.IV (Solar-AI-Math Trident, confirmed)        ║
 ║                                                                  ║
 ║  For the unique perfect balance integer n = 6:                  ║
 ║                                                                  ║
@@ -224,67 +229,66 @@
 ║        ─────  =  R_local(3, 1)  =  4/3                           ║
 ║         σ(n)                                                     ║
 ║                                                                  ║
-║  이 비율 4/3 은 σ(n)·φ(n) = n·τ(n) 의 n=6 유일성 증명            ║
-║  (Lemma 2.1)의 **유일한 >1 인수**이며, 다음을 동시에 한다:       ║
+║  This ratio 4/3 is the **unique >1 factor** of the n=6           ║
+║  uniqueness draft for σ(n)·φ(n) = n·τ(n) (Lemma 2.1), and        ║
+║  simultaneously performs the following:                          ║
 ║                                                                  ║
-║    (SOLAR)  Shockley-Queisser 최적 밴드갭 Eg* ≈ 1.34 eV         ║
+║    (SOLAR)  Shockley-Queisser optimal bandgap Eg* ≈ 1.34 eV     ║
 ║    (WIND)   Betz limit         16/27 = τ²/(n/φ)³                ║
 ║    (AI)     SwiGLU FFN ratio   8/3 = (σ−τ)/(n/φ)                 ║
 ║    (AI)     Chinchilla β / Mertens dropout  ln(4/3)              ║
-║    (MUSIC)  Just intonation perfect fourth  4:3                  ║
+║    (MUSIC)  Just-intonation perfect fourth  4:3                  ║
 ║    (STRING) Compactification R²/α'         4/3                   ║
-║    (QED)    수소 초미세 ΔE 계수            4/3                   ║
-║    (PERC)   2D 침투 상관길이 지수 ν        4/3                   ║
+║    (QED)    Hydrogen hyperfine ΔE coefficient 4/3                ║
+║    (PERC)   2D percolation correlation exponent ν  4/3           ║
 ║                                                                  ║
-║  10 도메인 / 10 PASS / 9 EXACT. QED.                            ║
+║  10 domains / 10 PASS / 9 EXACT. QED.                           ║
 ║                                                                  ║
-║  Named: R_local(3,1) Identity  — "사분화 제2 상수".             ║
+║  Named: R_local(3,1) Identity  — "the quartering second constant".║
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 약한 후보 상태 (연구 중)
+## Weaker-candidate status (research in progress)
 
-### 후보 B — σ−τ=8 (연구 중)
+### Candidate B — σ−τ=8 (research)
 
-- **강점**: Bott periodicity, Golay [24,12,8] 최소거리, SU(3) 글루온 — 구조적.
-- **약점**: n=6 **유일성** 증명 미완. σ(n)−τ(n)=8을 만족하는 다른 n 존재 확인 필요.
+- **Strengths**: Bott periodicity, Golay [24,12,8] minimum distance, SU(3) 8 gluons — structural.
+- **Weakness**: n=6 **uniqueness** draft incomplete. Need to check whether other n satisfy σ(n)−τ(n)=8.
   - n=6: 12−4=8 ✓
   - n=9: 13−3=10 ≠ 8
   - n=14: 24−4=20 ≠ 8
   - n=15: 24−4=20 ≠ 8
   - n=22: 36−4=32 ≠ 8
-  - 추측: 작은 n에서 σ−τ=8의 유일 해는 n=6일 가능성 (전수검색 필요).
-- **향후**: n ∈ [2, 10^4] 전수 검증 후 유일성 결정.
+  - Conjecture: for small n, the unique solution of σ−τ=8 is likely n=6 (exhaustive search required).
+- **Next**: determine uniqueness after exhaustive check over n ∈ [2, 10^4].
 
-### 후보 C — 1/n=1/6 (연구 중)
+### Candidate C — 1/n=1/6 (research)
 
-- **강점**: B₂=1/6 (수론), Egyptian 1/2+1/3+1/6=1 (완전수 정의 동치).
-- **약점**: `α=1/n`은 모든 n에서 자명하게 정의됨. n=6의 특별성을 드러내는 것은
-  **완전수 정의의 3항 Egyptian 재표현**일 뿐, 진정한 두 번째 정리 아님.
-- **향후**: 1/6의 **비자명 출현** (FQHE, Tracy-Widom 지수 1/6, Carnot 한계)을
-  통합하는 독립 정리 경로 탐색. Painlevé VI ↔ Tracy-Widom 연결 연구.
+- **Strengths**: B₂=1/6 (number theory), Egyptian 1/2+1/3+1/6=1 (equivalent to perfect-number definition).
+- **Weakness**: `α=1/n` is trivially defined for every n. What expresses n=6's specialness is merely a **3-term Egyptian re-expression of the perfect-number definition**, not a genuinely second theorem.
+- **Next**: explore an independent theorem route unifying the **non-trivial appearances** of 1/6 (FQHE, Tracy-Widom exponent 1/6, Carnot limit). Study the Painlevé VI ↔ Tracy-Widom connection.
 
 ---
 
-## 결론
+## Conclusion
 
-- **Mk.IV 확정 정리**: `τ²/σ = R_local(3,1) = 4/3` (Solar-AI-Math Trident).
-- **후보 B, C는 연구 중** 상태로 유지.
-- **후속 과제** (P6+):
-  1. 후보 B의 σ−τ=8 유일성 전수 검증 스크립트 (.hexa) 작성.
-  2. 후보 C의 Tracy-Widom / FQHE / Painlevé VI 통합 경로 탐색.
-  3. atlas.n6 `n6-architecture-bt-111` 엔트리에 Mk.IV 공식 인증 추가.
+- **Mk.IV confirmed theorem**: `τ²/σ = R_local(3,1) = 4/3` (Solar-AI-Math Trident).
+- **Candidates B, C** remain in the 'research' status.
+- **Follow-ups (P6+)**:
+  1. Exhaustive-verification script (.hexa) for the σ−τ=8 uniqueness of candidate B.
+  2. Explore a unified route for candidate C via Tracy-Widom / FQHE / Painlevé VI.
+  3. Add formal Mk.IV certification to atlas.n6 `n6-architecture-bt-111` entry.
 
 ---
 
 > Refs:
-> - theory/proofs/theorem-r1-uniqueness.md (σφ=nτ 유일성, Lemma 2.1)
+> - theory/proofs/theorem-r1-uniqueness.md (σφ=nτ uniqueness, Lemma 2.1)
 > - theory/proofs/the-number-24.md (σφ=24, Golay [24,12,8])
-> - theory/breakthroughs/breakthrough-theorems.md (BT-111 등)
-> - $NEXUS/shared/n6/atlas.n6 라인 2574-2579 (ENERGY-SQ-bandgap, Betz-limit)
-> - $NEXUS/shared/n6/atlas.n6 라인 9571-9572 (BT-111 Solar-AI-Math Trident)
-> - $NEXUS/shared/n6/atlas.n6 라인 9404-9405, 11945 (σ-τ=8 도메인)
-> - $NEXUS/shared/n6/atlas.n6 라인 10112-11147, 13608 (1/6 도메인)
+> - theory/breakthroughs/breakthrough-theorems.md (BT-111 etc.)
+> - $NEXUS/shared/n6/atlas.n6 lines 2574-2579 (ENERGY-SQ-bandgap, Betz-limit)
+> - $NEXUS/shared/n6/atlas.n6 lines 9571-9572 (BT-111 Solar-AI-Math Trident)
+> - $NEXUS/shared/n6/atlas.n6 lines 9404-9405, 11945 (σ-τ=8 domains)
+> - $NEXUS/shared/n6/atlas.n6 lines 10112-11147, 13608 (1/6 domains)
