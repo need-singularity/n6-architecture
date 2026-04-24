@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 41,
+    "count": 40,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -449,7 +449,6 @@
     "domains/compute/chip-rtl-gen/chip-rtl-gen.md",
     "domains/compute/chip-sc/chip-sc.md",
     "domains/compute/chip-wafer/chip-wafer.md",
-    "domains/compute/hexa-3d/hexa-3d.md",
     "domains/compute/hexa-accel/hexa-accel.md",
     "domains/compute/hexa-holo/hexa-holo.md",
     "domains/compute/hexa-ios/hexa-ios.md",
@@ -486,6 +485,15 @@
         "domains/compute/hexa-one/hexa-one.md"
       ],
       "count_after": 41
+    },
+    {
+      "phase": "phase-6-D-B12-hexa-3d",
+      "removed": [
+        "domains/compute/hexa-3d/hexa-3d.md"
+      ],
+      "count_before": 41,
+      "count_after": 40,
+      "timestamp": "2026-04-24T22:03:12Z"
     }
   ]
 }
