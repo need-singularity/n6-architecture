@@ -5,560 +5,561 @@ requires:
   - to: chip-architecture
 ---
 
-<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, VERIFY, EVOLVE, VT 6-tier Terminal + VOID 연계], strict=false, order=sequential, prefix="§") -->
+<!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, VERIFY, EVOLVE, VT 6-tier Terminal + VOID linkage], strict=false, order=sequential, prefix="§") -->
 
-# 궁극의 iOS 기반 SoC (HEXA-IOS)
+# Ultimate iOS-based SoC (HEXA-IOS)
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## §1 WHY (how this technology may change your life)
 
-n=6 A/M 시리즈 차세대는 수십 년간 누적된 타협의 산물이다. 코어마다 다른 피치, 전원마다 다른 전압, 프로토콜마다 다른 헤더.
-**n=6 산술 유도로 모든 경계 상수가 결정되면** 세 가지 낭비가 사라진다:
+The next-generation n=6 A/M series is the product of decades of accumulated compromises. Different pitches per core, different voltages per power rail, different headers per protocol.
+**Once all boundary constants are determined by n=6 arithmetic derivation**, three forms of waste disappear:
 
-1. **설계 자유도 붕괴**: τ(6)=4 단 파이프 + σ(6)=12 코어 + J₂=24 I/O 로 고정 → "선택지 폭발"이 "조합 폭발"로 바뀐다 ← σ(6)=12, τ(6)=4, OEIS A000203
-2. **낭비 전력 회수**: 자연수 약수 구조에 정렬된 클럭·전원·대역폭은 정수 나눗셈만 쓴다 → 분수 연산·LUT 변환 제거 ← τ(6)=4, OEIS A000005
-3. **AI-native 합성**: "이런 칩 만들어줘" 한마디로 RTL SystemVerilog 가 떨어진다 — n=6 경로는 수학적으로 결정되어 있어 탐색 공간이 2400 이하로 압축된다 ← φ(6)=2, OEIS A000010
+1. **Design freedom collapse**: fixed at tau(6)=4 pipeline stages + sigma(6)=12 cores + J_2=24 I/O, "choice explosion" turns into "combinatorial explosion" <- sigma(6)=12, tau(6)=4, OEIS A000203
+2. **Wasted-power recovery**: clocks, power, and bandwidth aligned to the natural-number divisor structure use only integer division -> fractional ops and LUT conversions are eliminated <- tau(6)=4, OEIS A000005
+3. **AI-native synthesis**: a single prompt "build me a chip like this" yields RTL SystemVerilog — n=6 paths are mathematically determined so the search space compresses to <= 2400 <- phi(6)=2, OEIS A000010
 
-| 효과 | 현재 | HEXA 적용 후 | 체감 변화 |
+| Effect | Today | After HEXA | Felt change |
 |------|------|-------------|----------|
-| 설계 자유도 | 수만 조합 | σ·J₂=288 Pareto | AI 가 한 번에 최적안 제시 |
-| 전력 효율 | 1x | σ·sopfr=60x (B⁴ 스케일) | 데이터센터 전력 1/σ 로 |
-| 제조 수율 | 60~70% | 95%+ (n=6 경계) | 한 웨이퍼당 수익 2배 |
-| 검증 시간 | 18개월 | τ=4개월 | 출시 주기 1/σ-φ=1/10 |
-| I/O 대역폭 | 100~400 Gbps | σ·J₂=288 Gbps/레인 | 8K/16K 실시간 스트림 |
-| 전력 분배 | ad-hoc | 1/2+1/3+1/6 Egyptian | 열설계 한방 해결 |
-| 소프트웨어 | 레이어 10+ | n=6 레이어 | 디버깅 τ=4배 빨라짐 |
-| AI-native 생성 | 불가능 | "한마디" → RTL | 엔지니어 설계 시간 1/σ |
-| 테스트 커버리지 | 80% | 99.9% (1-1/σ(σ-φ)²) | 리콜 공포 사라짐 |
-| 상호 운용 | 수십 표준 | n=6 계약 | 벤더락인 소멸 |
+| Design freedom | tens of thousands of combos | sigma*J_2=288 Pareto | AI proposes optimum in one shot |
+| Power efficiency | 1x | sigma*sopfr=60x (B^4 scale) | Datacenter power -> 1/sigma |
+| Manufacturing yield | 60-70% | 95%+ (n=6 boundary) | Wafer revenue 2x |
+| Verification time | 18 months | tau=4 months | Release cycle 1/sigma-phi=1/10 |
+| I/O bandwidth | 100-400 Gbps | sigma*J_2=288 Gbps/lane | 8K/16K real-time stream |
+| Power distribution | ad-hoc | 1/2+1/3+1/6 Egyptian | Thermal design solved in one stroke |
+| Software | 10+ layers | n=6 layers | Debugging tau=4x faster |
+| AI-native generation | impossible | "one sentence" -> RTL | Engineer design time 1/sigma |
+| Test coverage | 80% | 99.9% (1-1/sigma(sigma-phi)^2) | Recall fear gone |
+| Interoperability | dozens of standards | n=6 contract | Vendor lock-in dissolves |
 
-**한 문장 요약**: n=6 산술 유도로 설계·전력·제조·AI 합성이 한 지도로 수렴하여, 개발 속도 τ배·전력 σ·sopfr배·수율 n=6배가 동시에 달성된다.
+**One-sentence summary**: n=6 arithmetic derivation makes design, power, manufacturing, and AI synthesis converge onto a single map, so dev speed tau-fold, power sigma*sopfr-fold, and yield n=6-fold are achieved at the same time.
 
-### 일상 체감 시나리오
+### Daily-life scenario
 
 ```
-  오전 7:00  스마트폰 충전 잔량 95% (σ·sopfr=60kW/kg SC 모터급 효율)
-  오전 9:00  사내 슈퍼컴이 "보고서 요약" 1초 완료 (τ=4개 파이프 스테이지)
-  오후 2:00  팀 채팅에 "이런 기능 만들어줘" → 15분 후 프로토타입
-  오후 6:00  퇴근길 자율주행 차량이 n=6 센서 융합으로 혼잡도 90% 회피
-  저녁 9:00  8K 홀로그램 통화 (대역 σ·J₂=288 Gbps), 배터리 5% 소모
+  07:00 AM  Smartphone charge level 95% (sigma*sopfr=60kW/kg SC-motor-class efficiency)
+  09:00 AM  In-house supercomputer completes "summarize report" in 1 s (tau=4 pipeline stages)
+  02:00 PM  Team chat "build me this feature" -> prototype in 15 minutes
+  06:00 PM  Self-driving car on the way home avoids 90% of congestion via n=6 sensor fusion
+  09:00 PM  8K hologram call (bandwidth sigma*J_2=288 Gbps), 5% battery drain
 ```
 
-### 사회적 변혁
+### Societal transformation
 
-| 분야 | 변화 | n=6 연결 |
+| Field | Change | n=6 link |
 |------|------|---------|
-| 반도체 | 설계-검증-제조 한 사이클 τ=4개월 | n=6 경계 상수 고정 |
-| AI | 모델 학습 비용 1/σ·sopfr=1/60 | B⁴ 스케일링 + pJ 효율 |
-| 통신 | 6G 전국 커버리지 τ=4년 | J₂=24 다중접속 |
-| 보안 | 포스트 양자 암호 즉시 상용 | 격자 n=6 기저 |
-| 개발자 | "한마디 → 앱" 일상화 | AI-native DSL |
-| 교육 | 컴퓨터과학 n=6 단 커리큘럼 | φ=2 계층 추상화 |
-| 환경 | 데이터센터 전력 1/σ 절감 | Egyptian 분배 |
+| Semiconductor | design-verify-fab one cycle tau=4 months | n=6 boundary constants fixed |
+| AI | model training cost 1/sigma*sopfr=1/60 | B^4 scaling + pJ efficiency |
+| Communications | 6G nationwide coverage tau=4 years | J_2=24 multi-access |
+| Security | post-quantum crypto immediately deployable | lattice n=6 basis |
+| Developer | "one sentence -> app" routine | AI-native DSL |
+| Education | computer science n=6-stage curriculum | phi=2 layered abstraction |
+| Environment | datacenter power 1/sigma savings | Egyptian distribution |
 
 
-## §2 COMPARE (현 기술 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (current tech vs n=6) — performance comparison (ASCII)
 
-### n=6 이전 5가지 장벽
-
-```
-┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불가능했나              │  n=6 이 어떻게 해결하나     │
-├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 1. 조합 폭발       │ 설계 공간 10^6+ 기본        │ DSE 2400 으로 압축           │
-│                   │ 경험적 탐색에 수년 소요     │ 6×5×4×5×4 = 2400 τ=1        │
-├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 2. 검증 지옥       │ 커버리지 80%가 한계         │ n=6 대칭으로 99.9% 달성      │
-│                   │ 후반 bug 수정이 치명적       │ 1 - 1/(σ·(σ-φ)²) 커버리지    │
-├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 3. 전력 벽         │ 쓰로틀링·발열·블랙아웃     │ Egyptian 1/2+1/3+1/6 분배  │
-│                   │ 컴퓨트만 키우면 TDP 한계    │ B⁴ σ·sopfr=60x 효율 상승    │
-├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 4. 벤더락인        │ 제조사마다 고유 프로토콜    │ n=6 계약 + σ=12 표준 I/O    │
-│                   │ 상호 운용 비용 폭주          │ 오픈 소스 전제 공개 인터페이스 │
-├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 5. 사람 병목       │ HW/SW 전문가 공급 부족     │ AI-native 합성 자동화        │
-│                   │ 설계 한 장 수백만 달러      │ "한마디" → 1/σ 비용          │
-└───────────────────┴───────────────────────────┴──────────────────────────┘
-```
-
-### 성능 비교 ASCII 막대 (시중 vs HEXA)
+### 5 barriers before n=6
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  [성능 (TOPS/W)] 비교: 기존 vs HEXA
-│------------------------------------------------------------------------
-│  Intel Sapphire Rapids  ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  30
-│  NVIDIA H100            ██████░░░░░░░░░░░░░░░░░░░░░░░░░░  60
-│  Google TPU v5          ██████████░░░░░░░░░░░░░░░░░░░░░░  90
-│  Apple M3 Max           █████░░░░░░░░░░░░░░░░░░░░░░░░░░░  48
-│  HEXA 칩                 ████████████████████████████████  288 (σ·J₂=288 스케일)
-│
-│  [전력 효율 (pJ/op)] (낮을수록 좋음)
-│  기존 GPU                 ████████████████████████████░░░░  150
-│  기존 NPU                 ████████████████░░░░░░░░░░░░░░░░  40
-│  HEXA                   ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  2
-└──────────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------------+
+|  Barrier            |  Why was it impossible       |  How n=6 addresses it      |
++-------------------+---------------------------+--------------------------+
+| 1. Combinatorial   | Design space 10^6+ baseline | Compressed to DSE 2400       |
+|    explosion       | Years of empirical search   | 6x5x4x5x4 = 2400 tau=1       |
++-------------------+---------------------------+--------------------------+
+| 2. Verification    | Coverage capped at 80%      | n=6 symmetry reaches 99.9%   |
+|    hell            | Late-stage bugs are fatal   | 1 - 1/(sigma*(sigma-phi)^2)  |
++-------------------+---------------------------+--------------------------+
+| 3. Power wall      | Throttling, heat, blackout  | Egyptian 1/2+1/3+1/6 split   |
+|                   | Compute-only hits TDP wall   | B^4 sigma*sopfr=60x lift     |
++-------------------+---------------------------+--------------------------+
+| 4. Vendor lock-in  | Proprietary protocols/vendor| n=6 contract + sigma=12 I/O  |
+|                   | Interoperability cost surges | Open-source default interface|
++-------------------+---------------------------+--------------------------+
+| 5. People bottleneck| HW/SW expert shortage      | AI-native synthesis automation|
+|                   | Millions of dollars per design | "one sentence" -> 1/sigma cost|
++-------------------+---------------------------+--------------------------+
 ```
 
-### 핵심 돌파구: σ·φ = n·τ = J₂ = 24
-
-n=6 이 유일한 완전수로서 만드는 항등식이 다섯 산술 함수를 하나로 묶는다:
+### Performance comparison ASCII bars (current vs HEXA)
 
 ```
-  σ(6) = 12, φ(6) = 2 → σ·φ = 24  ← OEIS A000203 × A000010
-  n·τ  = 6·4 = 24                  ← OEIS A000005
-  J₂   = 2σ = 24                    (2차 기저)
-  → σ·φ = n·τ = J₂ = 24             — 마스터 항등식
++--------------------------------------------------------------------------+
+|  [Performance (TOPS/W)] comparison: existing vs HEXA
+|------------------------------------------------------------------------
+|  Intel Sapphire Rapids  ###..............................  30
+|  NVIDIA H100            ######..........................  60
+|  Google TPU v5          ##########......................  90
+|  Apple M3 Max           #####...........................  48
+|  HEXA chip              ################################  288 (sigma*J_2=288 scale)
+|
+|  [Power efficiency (pJ/op)] (lower is better)
+|  Existing GPU             ############################....  150
+|  Existing NPU             ################................  40
+|  HEXA                   ####............................  2
++--------------------------------------------------------------------------+
 ```
 
-**연쇄 혁명**:
+### Key breakthrough: sigma*phi = n*tau = J_2 = 24
+
+The identity that emerges because n=6 is the unique perfect number ties five number-theoretic functions into one:
 
 ```
-  n=6 경계 상수 고정
-    → DSE 압축: 6×5×4×5×4 = 2400
-      → 검증 가속: σ=12 대칭 활용, 커버리지 99.9%
-      → 전력 절감: Egyptian 1/2+1/3+1/6 전원 분배
-      → 제조 개선: σ·J₂=288 경계 = 수율 95%+
-      → AI 합성: 한마디 → RTL 자동 생성
+  sigma(6) = 12, phi(6) = 2 -> sigma*phi = 24  <- OEIS A000203 x A000010
+  n*tau    = 6*4 = 24                          <- OEIS A000005
+  J_2      = 2*sigma = 24                      (2nd-order basis)
+  -> sigma*phi = n*tau = J_2 = 24              — master identity
+```
+
+**Chain reaction**:
+
+```
+  n=6 boundary constants fixed
+    -> DSE compression: 6x5x4x5x4 = 2400
+      -> verification acceleration: leverage sigma=12 symmetry, coverage 99.9%
+      -> power saving: Egyptian 1/2+1/3+1/6 power-rail distribution
+      -> manufacturing improvement: sigma*J_2=288 boundary = 95%+ yield
+      -> AI synthesis: one sentence -> auto-generated RTL
 ```
 
 
-## §3 REQUIRES (필요한 요소) — 선행 도메인
+## §3 REQUIRES — prerequisite domains
 
-| 선행 도메인 | 🛸 현재 | 🛸 필요 | 차이 | 핵심 기술 | 링크 |
+| Prerequisite domain | UFO now | UFO needed | Gap | Key tech | Link |
 |-------------|---------|---------|------|-----------|------|
-| chip-architecture | 🛸7 | 🛸10 | +3 | 아키텍처 | [문서](../chip-architecture/chip-architecture.md) |
+| chip-architecture | UFO7 | UFO10 | +3 | architecture | [doc](../chip-architecture/chip-architecture.md) |
 
-상기 선행 도메인이 🛸10 에 도달하면 본 도메인의 Mk.III 이상 실현이 가능해진다. 현재는 Mk.I~II 부품/프로토타입 단계.
+Once the prerequisite domain reaches UFO10, Mk.III or above of this domain becomes feasible. Currently at the Mk.I-II component/prototype stage.
 
 
-## §4 STRUCT (시스템 구조) — System Architecture (ASCII)
+## §4 STRUCT — System Architecture (ASCII)
 
-### 5단 체인 시스템맵
+### 5-stage chain system map
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                     궁극의 iOS 기반 SoC (HEXA-IOS) 시스템 구조                                   │
-├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
-│   L0 소재  │   L1 코어   │  L2 연산   │  L3 메모리 │   L4 I/O·제어       │
-│ Level 0    │ Level 1    │ Level 2    │ Level 3    │ Level 4             │
-├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ C Z=6/Si   │ σ²=144 SM  │ τ=4 파이프 │ 4단 캐시    │ σ·J₂=288 레인       │
-│ phi=2nm    │ n=6 ALU    │ φ=2 FMA   │ 1/2+1/3+1/6│ J₂=24 PHY           │
-│ CN=6 격자  │ sopfr=5 stg│ n=6 벡터폭 │ Egyptian   │ n=6 프로토콜       │
-│ n=6 결정   │ 60 kW/kg   │ 288 TOPS   │ σ·τ=48 GB  │ 48 Gbps/레인       │
-├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ n6: 95%    │ n6: 93%    │ n6: 92%    │ n6: 94%    │ n6: 91%             │
-└─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
-      │            │            │            │             │
-      ▼            ▼            ▼            ▼             ▼
++--------------------------------------------------------------------------+
+|                     Ultimate iOS-based SoC (HEXA-IOS) system structure                                |
++------------+------------+------------+------------+---------------------+
+|   L0 mat.  |   L1 core   |  L2 compute|  L3 memory |   L4 I/O / control  |
+| Level 0    | Level 1    | Level 2    | Level 3    | Level 4             |
++------------+------------+------------+------------+---------------------+
+| C Z=6/Si   | sigma^2=144 SM | tau=4 pipe| 4-stage cache | sigma*J_2=288 lanes |
+| phi=2nm    | n=6 ALU    | phi=2 FMA  | 1/2+1/3+1/6| J_2=24 PHY          |
+| CN=6 lat.  | sopfr=5 stg| n=6 vec wid| Egyptian   | n=6 protocol        |
+| n=6 cryst. | 60 kW/kg   | 288 TOPS   | sigma*tau=48 GB | 48 Gbps/lane    |
++------------+------------+------------+------------+---------------------+
+| n6: 95%    | n6: 93%    | n6: 92%    | n6: 94%    | n6: 91%             |
++-----+------+-----+------+-----+------+-----+------+------+--------------+
+      |            |            |            |             |
+      v            v            v            v             v
    n6 EXACT     n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### 단면도 (Layered Cross-Section)
+### Layered Cross-Section
 
 ```
-   ┌───────────── I/O 링 (σ·J₂=288 레인) ─────────────┐
-   │ PHY  ║ MAC-PHY ║ Ctrl ║ Pwr ║ CLK ║ JTAG       │
-   ├──────╨─────────╨──────╨─────╨─────╨────────────┤
-   │    L2 연산 텐서코어 σ²=144 SM (12×12)            │
-   │    τ=4 파이프 × φ=2 FMA × n=6 벡터폭             │
-   ├─────────────────────────────────────────────────┤
-   │    L3 메모리 4단 계위 (Egyptian 1/2 + 1/3 + 1/6) │
-   │    REG 64B → L1 32KB → L2 1024KB → DRAM σ·τ=48GB│
-   ├─────────────────────────────────────────────────┤
-   │    L1 코어: n=6 ALU, sopfr=5 stage, φ=2 issue    │
-   ├─────────────────────────────────────────────────┤
-   │    L0 소재: C/Si/GaAs n=6 격자, phi=2nm GAAFET   │
-   └─────────────────────────────────────────────────┘
+   +------------- I/O ring (sigma*J_2=288 lanes) -------------+
+   | PHY  || MAC-PHY || Ctrl || Pwr || CLK || JTAG          |
+   +------+---------+------+-----+-----+-------------------+
+   |    L2 compute tensor cores sigma^2=144 SM (12x12)       |
+   |    tau=4 pipe x phi=2 FMA x n=6 vector width            |
+   +-------------------------------------------------+
+   |    L3 memory 4-stage hierarchy (Egyptian 1/2 + 1/3 + 1/6) |
+   |    REG 64B -> L1 32KB -> L2 1024KB -> DRAM sigma*tau=48GB|
+   +-------------------------------------------------+
+   |    L1 core: n=6 ALU, sopfr=5 stage, phi=2 issue  |
+   +-------------------------------------------------+
+   |    L0 material: C/Si/GaAs n=6 lattice, phi=2nm GAAFET   |
+   +-------------------------------------------------+
 ```
 
-### n=6 파라미터 완전 매핑
+### Full n=6 parameter mapping
 
-#### L0 소재
+#### L0 material
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 결정 배위수 | 6 | CN = n | BT-86 결정 n=6 법칙 | EXACT |
-| 메탈 레이어 | 6 | n = 6 | 전력/신호/클럭/GND 균형 | EXACT |
-| 트랜지스터/MAC | 12 | σ = 12 | 약수 합 ← σ(6)=12, OEIS A000203 | EXACT |
-| 노드 | 2 nm | φ = 2 | 최소 소인수 | EXACT |
+| Crystal coordination number | 6 | CN = n | BT-86 crystal n=6 law | EXACT |
+| Metal layers | 6 | n = 6 | power/signal/clock/GND balance | EXACT |
+| Transistors per MAC | 12 | sigma = 12 | divisor sum <- sigma(6)=12, OEIS A000203 | EXACT |
+| Node | 2 nm | phi = 2 | smallest prime factor | EXACT |
 
-#### L1 코어
+#### L1 core
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| SM 수 | 144 | σ² = 144 | 12×12 텐서코어 배열 | EXACT |
-| 파이프 단 | 4 | τ = 4 | 약수 개수 ← τ(6)=4, OEIS A000005 | EXACT |
-| 이슈 폭 | 2 | φ = 2 | dual-issue | EXACT |
-| 스테이지 | 5 | sopfr = 5 | 소인수 합 2+3 | EXACT |
-| 벡터 폭 | 6 | n = 6 | SIMD 레인 수 | EXACT |
-| Clock | 3 GHz | σ/τ = 3 | 컴퓨트/메모리 비 | EXACT |
+| SM count | 144 | sigma^2 = 144 | 12x12 tensor core array | EXACT |
+| Pipeline stages | 4 | tau = 4 | divisor count <- tau(6)=4, OEIS A000005 | EXACT |
+| Issue width | 2 | phi = 2 | dual-issue | EXACT |
+| Stages | 5 | sopfr = 5 | sum of prime factors 2+3 | EXACT |
+| Vector width | 6 | n = 6 | SIMD lane count | EXACT |
+| Clock | 3 GHz | sigma/tau = 3 | compute/memory ratio | EXACT |
 
-#### L2 연산
+#### L2 compute
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| FMA/cycle | 2 | φ = 2 | 이슈 폭 | EXACT |
-| MAC ops | 288 | σ·J₂ = 288 | 12×24 MAC 어레이 | EXACT |
-| 정밀 모드 | 4 | τ = 4 | FP32/FP16/BF16/INT8 | EXACT |
-| MoE 슬롯 | 24 | J₂ = 24 | 2σ, MoE expert 개수 | EXACT |
+| FMA/cycle | 2 | phi = 2 | issue width | EXACT |
+| MAC ops | 288 | sigma*J_2 = 288 | 12x24 MAC array | EXACT |
+| Precision modes | 4 | tau = 4 | FP32/FP16/BF16/INT8 | EXACT |
+| MoE slots | 24 | J_2 = 24 | 2*sigma, MoE expert count | EXACT |
 
-#### L3 메모리
+#### L3 memory
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 캐시 계위 | 4 | τ = 4 | REG/L1/L2/DRAM | EXACT |
-| 대역 분배 | 1/2:1/3:1/6 | Egyptian | 합=1 정확 유리수 | EXACT |
-| DRAM 용량 | 48 GB | σ·τ = 48 | 뱅크 × 랭크 | EXACT |
-| 라인 크기 | 64 B | 2^n = 64 | Euclidean 정렬 | EXACT |
+| Cache hierarchy | 4 | tau = 4 | REG/L1/L2/DRAM | EXACT |
+| Bandwidth split | 1/2:1/3:1/6 | Egyptian | sum=1 exact rational | EXACT |
+| DRAM capacity | 48 GB | sigma*tau = 48 | banks x ranks | EXACT |
+| Line size | 64 B | 2^n = 64 | Euclidean alignment | EXACT |
 
-#### L4 I/O·제어
+#### L4 I/O / control
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| PHY 레인 | 288 | σ·J₂ = 288 | UCIe 표준 확장 | EXACT |
-| 데이터 폭 | 24 bit | J₂ = 24 | 2σ 다중접속 | EXACT |
-| 전원 도메인 | 8 | σ-τ = 8 | 분리 전원 레일 | EXACT |
-| 프로토콜 계층 | 6 | n = 6 | L1~L7 축약 | EXACT |
+| PHY lanes | 288 | sigma*J_2 = 288 | UCIe standard extension | EXACT |
+| Data width | 24 bit | J_2 = 24 | 2*sigma multi-access | EXACT |
+| Power domains | 8 | sigma-tau = 8 | separate power rails | EXACT |
+| Protocol layers | 6 | n = 6 | L1-L7 condensed | EXACT |
 
-### 제원 총괄표
+### Specifications summary
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  궁극의 iOS 기반 SoC (HEXA-IOS) Technical Specifications                                         │
-├──────────────────────────────────────────────────────────────────────────┤
-│  카테고리         chip                                               │
-│  코어 배열       σ² = 144 SM (12×12)                                     │
-│  MAC 어레이      σ·J₂ = 288 MAC                                          │
-│  파이프 단       τ = 4                                                   │
-│  벡터 폭         n = 6                                                   │
-│  메모리 계위     τ = 4 단 (REG/L1/L2/DRAM)                              │
-│  대역 분배       1/2 + 1/3 + 1/6 (Egyptian)                             │
-│  I/O 레인        σ·J₂ = 288                                              │
-│  전력 분배       1/2 컴퓨트 + 1/3 메모리 + 1/6 I/O                       │
-│  메탈 레이어     n = 6                                                   │
-│  공정 노드       φ = 2 nm (GAAFET)                                      │
-│  클럭 비         σ/τ = 3 (컴퓨트:메모리)                                 │
-│  전력 효율       σ·sopfr = 60 kW/kg 등가                                 │
-│  n=6 EXACT      93%+ (§7 검증)                                           │
-└──────────────────────────────────────────────────────────────────────────┘
++--------------------------------------------------------------------------+
+|  Ultimate iOS-based SoC (HEXA-IOS) Technical Specifications                                         |
++--------------------------------------------------------------------------+
+|  Category         chip                                               |
+|  Core array       sigma^2 = 144 SM (12x12)                                     |
+|  MAC array        sigma*J_2 = 288 MAC                                          |
+|  Pipeline stages  tau = 4                                                   |
+|  Vector width     n = 6                                                   |
+|  Memory hierarchy tau = 4 stages (REG/L1/L2/DRAM)                              |
+|  Bandwidth split  1/2 + 1/3 + 1/6 (Egyptian)                             |
+|  I/O lanes        sigma*J_2 = 288                                              |
+|  Power split      1/2 compute + 1/3 memory + 1/6 I/O                       |
+|  Metal layers     n = 6                                                   |
+|  Process node     phi = 2 nm (GAAFET)                                      |
+|  Clock ratio      sigma/tau = 3 (compute:memory)                                 |
+|  Power efficiency sigma*sopfr = 60 kW/kg equivalent                                 |
+|  n=6 EXACT       93%+ (§7 verify)                                           |
++--------------------------------------------------------------------------+
 ```
 
-### BT 연결
+### BT links
 
-| BT | 이름 | 본 도메인 적용 |
+| BT | Name | Application in this domain |
 |----|------|--------------|
-| BT-28  | 캐시 계위 Egyptian | 1/2+1/3+1/6 대역 분배 |
-| BT-56  | GPU 산술 σ²=144 SM | 텐서코어 배열 |
-| BT-85  | Carbon Z=6 보편성 | 다이 베이스 소재 |
-| BT-86  | 결정 CN=6 법칙 | 격자 배위수 |
-| BT-90  | SM=φ×K₆ 접촉수 | 온보드 σ²=144 코어 |
-| BT-93  | Carbon Z=6 칩 소재 | 다이아몬드 기판 |
-| BT-123 | SE(3) dim=n=6 | 6-DOF 프로세싱 |
-| BT-181 | 다중 대역 σ=12 채널 | I/O 다중접속 |
-| BT-328 | AD τ=4 서브시스템 | ASIL-D 안전 |
-| BT-342 | 항공공학 n=6 준용 | 경계 상수 수식 |
+| BT-28  | cache hierarchy Egyptian | 1/2+1/3+1/6 bandwidth split |
+| BT-56  | GPU arithmetic sigma^2=144 SM | tensor core array |
+| BT-85  | Carbon Z=6 universality | die base material |
+| BT-86  | crystal CN=6 law | lattice coordination number |
+| BT-90  | SM = phi x K_6 contact number | onboard sigma^2=144 cores |
+| BT-93  | Carbon Z=6 chip material | diamond substrate |
+| BT-123 | SE(3) dim=n=6 | 6-DOF processing |
+| BT-181 | multi-band sigma=12 channel | I/O multi-access |
+| BT-328 | AD tau=4 subsystem | ASIL-D safety |
+| BT-342 | aerospace n=6 reuse | boundary constant formulas |
 
 
-## §5 FLOW (데이터/에너지 플로우) — Flow (ASCII)
+## §5 FLOW (data/energy flow) — Flow (ASCII)
 
-### 에너지 플로우
-
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  전원 입력 ─→ [σ-τ=8 도메인 분배] ─→ [Egyptian 1/2+1/3+1/6] ─→ 소비       │
-│   48V/12V     8개 전원 레일          1/2 컴퓨트 + 1/3 메모리 + 1/6 I/O    │
-│       │            │                         │                │          │
-│       ▼            ▼                         ▼                ▼          │
-│    n6 EXACT    n6 EXACT                  n6 EXACT         n6 EXACT       │
-├──────────────────────────────────────────────────────────────────────────┤
-│  데이터 플로우:                                                           │
-│  외부 I/O ─→ [σ·J₂=288 레인 PHY] ─→ [τ=4 파이프] ─→ [σ²=144 SM] ─→ 출력 │
-│   J₂=24 폭      288 × 48 Gbps          4 stg           144 SM 병렬      │
-└──────────────────────────────────────────────────────────────────────────┘
-```
-
-### 처리 모드별 전력 분배
+### Energy flow
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ 저부하    │ ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░  컴퓨트 10% + 유휴 90%         │
-│ 정상      │ ████████████████░░░░░░░░░░░░░░  컴퓨트 50% + 메모리 30%+IO20%│
-│ 피크      │ ████████████████████████░░░░░░  컴퓨트 75% + 메모리 15%+IO10%│
-│ AI 추론   │ ████████████████████████████░░  컴퓨트 80% + 메모리 15%+IO 5%│
-│ AI 학습   │ █████████████████████████████░  컴퓨트 90% + 기타 10%         │
-└──────────────────────────────────────────────────────────────────────────┘
++--------------------------------------------------------------------------+
+|  Power input -> [sigma-tau=8 domain split] -> [Egyptian 1/2+1/3+1/6] -> consumption       |
+|   48V/12V     8 power rails           1/2 compute + 1/3 memory + 1/6 I/O    |
+|       |            |                         |                |          |
+|       v            v                         v                v          |
+|    n6 EXACT    n6 EXACT                  n6 EXACT         n6 EXACT       |
++--------------------------------------------------------------------------+
+|  Data flow:                                                           |
+|  External I/O -> [sigma*J_2=288 lane PHY] -> [tau=4 pipe] -> [sigma^2=144 SM] -> output |
+|   J_2=24 width   288 x 48 Gbps            4 stg            144 SM parallel       |
++--------------------------------------------------------------------------+
 ```
 
-### 데이터 모드 5개
-
-#### 모드 1: IDLE — 저부하 대기
+### Power split per processing mode
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 1: IDLE (σ-τ=8 도메인 대기)         │
-│  소비 전력: 10% of TDP                    │
-│  클럭: 1 GHz (DVFS 최저)                  │
-│  활성 도메인: 1/σ-τ = 1/8                 │
-│  용도: 백그라운드, 로우파워 태스크         │
-└──────────────────────────────────────────┘
++--------------------------------------------------------------------------+
+| Low load  | ##............................  compute 10% + idle 90%         |
+| Normal    | ################..............  compute 50% + memory 30%+IO 20%|
+| Peak      | ########################......  compute 75% + memory 15%+IO 10%|
+| AI infer  | ############################..  compute 80% + memory 15%+IO 5% |
+| AI train  | #############################.  compute 90% + other 10%         |
++--------------------------------------------------------------------------+
 ```
 
-#### 모드 2: COMPUTE — 일반 처리
+### Five data modes
+
+#### Mode 1: IDLE — low-load standby
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 2: COMPUTE (τ=4 파이프 full)        │
-│  소비 전력: 50~75% of TDP                 │
-│  클럭: 3 GHz (σ/τ)                        │
-│  SM 활성: σ²=144 중 π=50% 평균            │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 1: IDLE (sigma-tau=8 domain idle)   |
+|  Power: 10% of TDP                        |
+|  Clock: 1 GHz (DVFS minimum)              |
+|  Active domain: 1/(sigma-tau) = 1/8       |
+|  Use: background, low-power tasks         |
++------------------------------------------+
 ```
 
-#### 모드 3: AI_INFER — AI 추론 특화
+#### Mode 2: COMPUTE — general processing
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 3: AI_INFER (텐서코어 점유)          │
-│  클럭: 3 GHz, 텐서 페이드업                │
-│  SM 활성: σ²=144 전부                      │
-│  정밀: INT8 + BF16 혼합 (τ=4 모드)         │
-│  처리량: σ·J₂·10³ = 288,000 토큰/s (7B)   │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 2: COMPUTE (tau=4 pipe full)        |
+|  Power: 50-75% of TDP                     |
+|  Clock: 3 GHz (sigma/tau)                 |
+|  SM active: pi=50% average of sigma^2=144 |
++------------------------------------------+
 ```
 
-#### 모드 4: AI_TRAIN — AI 학습
+#### Mode 3: AI_INFER — AI inference specialized
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 4: AI_TRAIN (backward + optimizer) │
-│  메모리: σ·τ=48GB 모두 활성                │
-│  I/O: σ·J₂=288 레인 full                  │
-│  정밀: FP32 + BF16 혼합                    │
-│  전력: 90% peak TDP                        │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 3: AI_INFER (tensor core occupancy) |
+|  Clock: 3 GHz, tensor fade-up             |
+|  SM active: all of sigma^2=144            |
+|  Precision: INT8 + BF16 mixed (tau=4 mode)|
+|  Throughput: sigma*J_2*10^3 = 288,000 tok/s (7B) |
++------------------------------------------+
 ```
 
-#### 모드 5: HPC — 하이퍼스케일
+#### Mode 4: AI_TRAIN — AI training
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 5: HPC (FP64 과학 연산)              │
-│  정밀: FP64 sustained                      │
-│  대역: Egyptian 재배분 (메모리 50%)        │
-│  용도: 기후·유전체·핵융합 시뮬레이션       │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 4: AI_TRAIN (backward + optimizer) |
+|  Memory: sigma*tau=48GB all active        |
+|  I/O: sigma*J_2=288 lanes full            |
+|  Precision: FP32 + BF16 mixed             |
+|  Power: 90% peak TDP                      |
++------------------------------------------+
 ```
 
-### DSE 후보군 (5단 × 후보 = 전수 탐색)
+#### Mode 5: HPC — hyperscale
 
 ```
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│   L0     │-->│   L1     │-->│   L2     │-->│   L3     │-->│   L4     │
-│  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5    │   │  K5=4    │
-│  =n      │   │  =sopfr  │   │  =τ      │   │  =sopfr  │   │  =τ      │
-└──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%) | Pareto: J₂=24 경로
++------------------------------------------+
+|  MODE 5: HPC (FP64 scientific compute)    |
+|  Precision: FP64 sustained                |
+|  Bandwidth: Egyptian re-split (memory 50%)|
+|  Use: climate, genomics, fusion sims      |
++------------------------------------------+
 ```
 
-#### K1 소재 (6종 = n)
+### DSE candidate set (5 stages x candidates = exhaustive search)
 
-| # | 소재 | 특성 | n=6 연결 |
+```
++----------+   +----------+   +----------+   +----------+   +----------+
+|   L0     |-->|   L1     |-->|   L2     |-->|   L3     |-->|   L4     |
+|  K1=6    |   |  K2=5    |   |  K3=4    |   |  K4=5    |   |  K5=4    |
+|  =n      |   |  =sopfr  |   |  =tau    |   |  =sopfr  |   |  =tau    |
++----------+   +----------+   +----------+   +----------+   +----------+
+Total: 6x5x4x5x4 = 2,400 | compatibility filter: 576 (24%) | Pareto: J_2=24 paths
+```
+
+#### K1 material (6 types = n)
+
+| # | Material | Property | n=6 link |
 |---|------|------|---------|
-| 1 | Diamond-Graphene | 절연·고열전도 | C Z=6 |
-| 2 | Si (bulk) | 가성비 최고 | Si Z=14 |
-| 3 | GaAs (고속) | 고주파 특화 | V족 |
-| 4 | SiC (전력) | 고전압/고온 | C Z=6 합금 |
-| 5 | GaN (전력) | 스위칭 특화 | III족 |
-| 6 | InP (포토닉) | 광통신 | V족 |
+| 1 | Diamond-Graphene | insulator + high thermal conductivity | C Z=6 |
+| 2 | Si (bulk) | best cost-performance | Si Z=14 |
+| 3 | GaAs (high-speed) | high-frequency specialized | group V |
+| 4 | SiC (power) | high-voltage/high-temp | C Z=6 alloy |
+| 5 | GaN (power) | switching specialized | group III |
+| 6 | InP (photonic) | optical comms | group V |
 
-#### K2 코어 아키텍처 (5종 = sopfr)
+#### K2 core architecture (5 types = sopfr)
 
-| # | 아키텍처 | IPC | n=6 연결 |
+| # | Architecture | IPC | n=6 link |
 |---|---------|-----|---------|
-| 1 | Out-of-order | 4 | τ=4 이슈 |
-| 2 | In-order VLIW | 6 | n=6 슬롯 |
-| 3 | GPU SIMT | 144 | σ²=144 SM |
-| 4 | Systolic | 288 | σ·J₂=288 MAC |
-| 5 | Dataflow | 12 | σ=12 노드 |
+| 1 | Out-of-order | 4 | tau=4 issue |
+| 2 | In-order VLIW | 6 | n=6 slots |
+| 3 | GPU SIMT | 144 | sigma^2=144 SM |
+| 4 | Systolic | 288 | sigma*J_2=288 MAC |
+| 5 | Dataflow | 12 | sigma=12 nodes |
 
-#### K3 메모리 (4종 = τ)
+#### K3 memory (4 types = tau)
 
-| # | 메모리 | 대역 | n=6 연결 |
+| # | Memory | Bandwidth | n=6 link |
 |---|--------|-----|---------|
-| 1 | HBM3 | 819 GB/s | σ·τ=48 스택 |
-| 2 | DDR5 | 51 GB/s | σ·J₂=288 bit |
-| 3 | SRAM | 1 TB/s | 64B 라인 |
-| 4 | MRAM (비휘발) | 100 GB/s | σ=12 bank |
+| 1 | HBM3 | 819 GB/s | sigma*tau=48 stacks |
+| 2 | DDR5 | 51 GB/s | sigma*J_2=288 bit |
+| 3 | SRAM | 1 TB/s | 64B line |
+| 4 | MRAM (non-volatile) | 100 GB/s | sigma=12 banks |
 
-#### K4 I/O (5종 = sopfr)
+#### K4 I/O (5 types = sopfr)
 
-| # | I/O | 대역 | n=6 연결 |
+| # | I/O | Bandwidth | n=6 link |
 |---|-----|-----|---------|
-| 1 | UCIe | 288 GB/s | σ·J₂=288 레인 |
-| 2 | PCIe 6.0 | 128 GB/s | 16레인 |
-| 3 | CXL 3.0 | 128 GB/s | Cache coherent |
-| 4 | Ethernet 400G | 50 GB/s | σ·J₂/6 |
-| 5 | Optical (MZI) | 1.2 TB/s | λ=12 파장 |
+| 1 | UCIe | 288 GB/s | sigma*J_2=288 lanes |
+| 2 | PCIe 6.0 | 128 GB/s | 16 lanes |
+| 3 | CXL 3.0 | 128 GB/s | cache coherent |
+| 4 | Ethernet 400G | 50 GB/s | sigma*J_2/6 |
+| 5 | Optical (MZI) | 1.2 TB/s | lambda=12 wavelengths |
 
-#### K5 제어 (4종 = τ)
+#### K5 control (4 types = tau)
 
-| # | 시스템 | 특성 | n=6 연결 |
+| # | System | Property | n=6 link |
 |---|--------|-----|---------|
-| 1 | Central Scheduler | σ=12 큐 | L4 제어 |
-| 2 | Distributed (actor) | n=6 토러스 | NoC |
-| 3 | Dataflow | τ=4 파이프 | SM 로컬 |
-| 4 | AI Self-schedule | 144 SM 자율 | RL 기반 |
+| 1 | Central Scheduler | sigma=12 queues | L4 control |
+| 2 | Distributed (actor) | n=6 torus | NoC |
+| 3 | Dataflow | tau=4 pipe | SM-local |
+| 4 | AI Self-schedule | 144 SM autonomous | RL-based |
 
 #### Pareto Top-6
 
-| Rank | L0 | L1 | L2 | L3 | L4 | n6% | 비고 |
+| Rank | L0 | L1 | L2 | L3 | L4 | n6% | Notes |
 |------|----|----|----|----|----|-----|------|
-| 1 | Diamond | Systolic | HBM3 | UCIe | AI | 94% | **최적** |
-| 2 | Si | GPU | HBM3 | UCIe | Dist | 92% | 보수 |
-| 3 | GaAs | Dataflow | SRAM | Optical | Dataflow | 91% | 저지연 |
-| 4 | SiC | VLIW | DDR5 | CXL | Central | 88% | 전력 |
-| 5 | GaN | OoO | MRAM | PCIe | Central | 85% | 비휘발 |
-| 6 | InP | GPU | SRAM | Optical | AI | 90% | 광통신 |
+| 1 | Diamond | Systolic | HBM3 | UCIe | AI | 94% | **best** |
+| 2 | Si | GPU | HBM3 | UCIe | Dist | 92% | conservative |
+| 3 | GaAs | Dataflow | SRAM | Optical | Dataflow | 91% | low latency |
+| 4 | SiC | VLIW | DDR5 | CXL | Central | 88% | power |
+| 5 | GaN | OoO | MRAM | PCIe | Central | 85% | non-volatile |
+| 6 | InP | GPU | SRAM | Optical | AI | 90% | optical comms |
 
 
-## §7 VERIFY (Python 검증)
+## §7 VERIFY (Python verification)
 
-궁극의 iOS 기반 SoC (HEXA-IOS) 가 물리/수학적으로 성립하는지 stdlib 만으로 검증. 주장된 설계 사양을 기초 공식으로 cross-check.
+Whether the Ultimate iOS-based SoC (HEXA-IOS) holds physically/mathematically is checked using stdlib only. Cross-checks claimed design specs against basic formulas.
 
-### Testable Predictions (검증 가능한 예측 10건)
+### Testable Predictions (10 predictions)
 
-#### TP-HEXA-IOS-1: MAC 어레이 = σ·J₂ = 288
-- **검증**: 12×24 systolic 어레이 구현 후 MAC 계산 수 측정
-- **예측**: 288 ± 2 MAC/cycle
-- **Tier**: 1 (RTL 합성 즉시)
+#### TP-HEXA-IOS-1: MAC array = sigma*J_2 = 288
+- **Check**: implement 12x24 systolic array and measure MAC count
+- **Prediction**: 288 ± 2 MAC/cycle
+- **Tier**: 1 (immediate after RTL synthesis)
 
-#### TP-HEXA-IOS-2: σ² = 144 SM 배열 대칭성
-- **검증**: 12×12 SM 배열 응답 시간 σ=12 등가
-- **예측**: 응답 시간 분산 < 1%
+#### TP-HEXA-IOS-2: sigma^2 = 144 SM array symmetry
+- **Check**: response time of 12x12 SM array equivalent across sigma=12
+- **Prediction**: response-time variance < 1%
 - **Tier**: 1
 
-#### TP-HEXA-IOS-3: τ=4 파이프 깊이 + φ=2 이슈 → IPC 2
-- **검증**: OoO/VLIW 하이브리드 코어 시뮬레이터
-- **예측**: IPC sustained = 2.0 ± 0.1
+#### TP-HEXA-IOS-3: tau=4 pipeline depth + phi=2 issue -> IPC 2
+- **Check**: OoO/VLIW hybrid core simulator
+- **Prediction**: IPC sustained = 2.0 ± 0.1
 - **Tier**: 1
 
-#### TP-HEXA-IOS-4: Egyptian 1/2+1/3+1/6 전원 분배 = 1.0 정확
-- **검증**: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)
-- **예측**: 정확 등호 (부동소수 근사 아님)
-- **Tier**: 1 (순수 수학, 즉시)
+#### TP-HEXA-IOS-4: Egyptian 1/2+1/3+1/6 power split = 1.0 exact
+- **Check**: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)
+- **Prediction**: exact equality (not floating-point approximation)
+- **Tier**: 1 (pure math, immediate)
 
-#### TP-HEXA-IOS-5: B⁴ 스케일링 지수 = 4 ± 0.1
-- **검증**: 자장 [10,20,30,40,48] vs 성능 데이터 log-log 회귀
-- **예측**: slope = 4.0 ± 0.1
+#### TP-HEXA-IOS-5: B^4 scaling exponent = 4 ± 0.1
+- **Check**: log-log regression on field [10,20,30,40,48] vs performance data
+- **Prediction**: slope = 4.0 ± 0.1
 - **Tier**: 2
 
-#### TP-HEXA-IOS-6: SM 수 ±10% 흔들면 볼록 최적
-- **검증**: 130/144/158 SM 배열 성능 벤치
-- **예측**: 144 가 볼록 극값 (130, 158 보다 성능 상위)
+#### TP-HEXA-IOS-6: shaking SM count by ±10% gives a convex optimum
+- **Check**: bench 130/144/158 SM array performance
+- **Prediction**: 144 is a convex extremum (better than 130 and 158)
 - **Tier**: 1
 
-#### TP-HEXA-IOS-7: Carnot/Landauer 상한 미초과
-- **검증**: 전력 효율 ≤ 1 - T_c/T_h, 비트 삭제 ≥ kT ln2
-- **예측**: 모든 claim 이 물리 한계 이내
-- **Tier**: 1 (즉시)
+#### TP-HEXA-IOS-7: Carnot/Landauer bounds not exceeded
+- **Check**: power efficiency <= 1 - T_c/T_h, bit erasure >= kT ln2
+- **Prediction**: all claims within physical bounds
+- **Tier**: 1 (immediate)
 
-#### TP-HEXA-IOS-8: χ² p-value > 0.05 (n=6 우연 가설 기각 불가)
-- **검증**: 49 파라미터 예측 vs 목표값 χ² 계산
-- **예측**: p > 0.05
+#### TP-HEXA-IOS-8: chi^2 p-value > 0.05 (cannot reject n=6 chance hypothesis)
+- **Check**: chi^2 across 49-parameter prediction vs target
+- **Prediction**: p > 0.05
 - **Tier**: 1
 
-#### TP-HEXA-IOS-9: OEIS A000203/A000005/A000010 시퀀스 등록
-- **검증**: [1,2,3,6,12,24,48] 이 OEIS A008586-variant
-- **예측**: 외부 DB 매칭 OK
-- **Tier**: 1 (순수 수학, 즉시)
+#### TP-HEXA-IOS-9: OEIS A000203/A000005/A000010 sequence registration
+- **Check**: [1,2,3,6,12,24,48] is OEIS A008586-variant
+- **Prediction**: external DB match OK
+- **Tier**: 1 (pure math, immediate)
 
-#### TP-HEXA-IOS-10: Fraction 정확 유리수 일치
-- **검증**: D/H = Fraction(24,8) == Fraction(6,2) == 3
-- **예측**: 부동소수 아닌 정확 분수 등호
-- **Tier**: 1 (순수 수학, 즉시)
+#### TP-HEXA-IOS-10: Fraction exact rational equality
+- **Check**: D/H = Fraction(24,8) == Fraction(6,2) == 3
+- **Prediction**: exact rational equality, not floating point
+- **Tier**: 1 (pure math, immediate)
 
-### n=6 정직성 검증 10 카테고리 (섹션 개요)
+### n=6 honesty check 10 categories (section overview)
 
-철학: "주장 X를 공식 Y가 뒷받침한다" (피상 순환논리) → "n=6 구조가 수론/차원/스케일링/통계에서 필연적으로 튀어나온다" (다층 증명).
+Philosophy: "claim X is supported by formula Y" (surface-level circular reasoning) -> "n=6 structure necessarily emerges from number theory / dimensions / scaling / statistics" (multi-layered evidence).
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0 — OEIS A000203/A000005/A001414 에서 직접 계산. `assert σ(n)==2n` 으로 완전수 성질 자기검증.
+### §7.0 CONSTANTS — automatic derivation of number-theoretic functions
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J_2=2*sigma=24`. Hard-coding 0 — computed directly from OEIS A000203/A000005/A001414. `assert sigma(n)==2n` self-checks the perfect-number property.
 
-### §7.1 DIMENSIONS — SI 단위 일관성
-모든 공식의 차원 튜플 `(M, L, T, I)` 추적. `P = V·I` 는 `[V][A] = [W]` 자동 검증. 차원 불일치 공식은 reject.
+### §7.1 DIMENSIONS — SI unit consistency
+Track dimension tuple `(M, L, T, I)` for every formula. `P = V*I` auto-checks `[V][A] = [W]`. Reject any formula with dimension mismatch.
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-288 MAC 를 `σ·J₂` / `12×24 배열` / `σ²+φ·σ² = 144+288` 3가지로 재유도. 15% 이내 일치해야 신뢰.
+### §7.2 CROSS — re-derive via 3 independent paths
+Re-derive 288 MAC by `sigma*J_2` / `12x24 array` / `sigma^2 + phi*sigma^2 = 144+288`. Trust requires agreement within 15%.
 
-### §7.3 SCALING — log-log 회귀로 지수 역추정
-`B⁴ confinement` 지수가 정말 4인가? 데이터 `[10,20,30,40,48]` vs `b⁴` 로 log 기울기 측정 → 4.0 ± 0.1 확인.
+### §7.3 SCALING — back-estimate exponent via log-log regression
+Is the `B^4 confinement` exponent really 4? Measure log slope of data `[10,20,30,40,48]` vs `b^4` -> confirm 4.0 ± 0.1.
 
-### §7.4 SENSITIVITY — ±10% 볼록성
-`f(n=6)` 에서 n 을 ±10% 흔들어 `f(6.6)` `f(5.4)` 둘 다 `f(6)` 보다 나쁜지 확인. 볼록 극값 = 진짜 최적점, flat = 끼워맞춤.
+### §7.4 SENSITIVITY — ±10% convexity
+Shake n by ±10% in `f(n=6)` and confirm both `f(6.6)` and `f(5.4)` are worse than `f(6)`. Convex extremum = candidate optimum, flat = curve fitting.
 
-### §7.5 LIMITS — 물리 상한 미초과
-Carnot `η ≤ 1 - T_c/T_h`, Landauer `E ≥ kT ln2`, Shannon C = B·log₂(1+SNR) 등. claim 이 근본 한계 초과면 reject.
+### §7.5 LIMITS — physical upper bounds not exceeded
+Carnot `eta <= 1 - T_c/T_h`, Landauer `E >= kT ln2`, Shannon C = B*log_2(1+SNR), etc. Reject claims that exceed fundamental limits.
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
-49 파라미터 예측 vs 관측 χ² 계산 → `erfc(√(χ²/2df))` 로 p-value 근사. p > 0.05 면 "n=6 우연" 가설 기각 불가 (유의).
+### §7.6 CHI2 — H_0: n=6 chance hypothesis p-value
+Compute chi^2 across 49-parameter prediction vs observation -> approximate p-value via `erfc(sqrt(chi^2/2df))`. p > 0.05 means the "n=6 by chance" hypothesis cannot be rejected (significant).
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
-`[1,2,3,6,12,24,48]` 이 OEIS A008586-variant (n·2^k) 에 등록됨. 수론 DB 에 존재 = 인간이 이미 발견한 수학, 조작 불가능.
+### §7.7 OEIS — external sequence DB matching
+`[1,2,3,6,12,24,48]` registered as OEIS A008586-variant (n*2^k). Presence in a number-theory DB = mathematics already discovered by humans, not manipulable.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` 조합 샘플링. n=6 구성이 상위 5% 이내인지 통계적 유의성 확인.
+### §7.8 PARETO — Monte Carlo exhaustive search
+Sample DSE `K1xK2xK3xK4xK5 = 6x5x4x5x4 = 2400` combinations. Statistically check whether the n=6 configuration ranks within the top 5%.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
-`from fractions import Fraction`. `Egyptian = Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)` 부동소수 근사가 아닌 정확 유리수 `==` 등호 비교.
+### §7.9 SYMBOLIC — exact rational equality with Fraction
+`from fractions import Fraction`. `Egyptian = Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)` — exact rational `==` comparison rather than floating-point approximation.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례 (n=6 무관): 기본전하 e, Planck h, π — 이들은 n=6 유도 불가, 솔직히 인정
-- Falsifier: MAC/cycle 측정 < 245 → σ·J₂=288 공식 폐기 / p-value < 0.01 → n=6 가설 폐기 / Egyptian 합 ≠ 1 → 구조 폐기
+### §7.10 COUNTER — counterexamples + falsifier
+- Counterexamples (independent of n=6): elementary charge e, Planck h, pi — these are not derivable from n=6, openly acknowledged
+- Falsifiers: MAC/cycle measured < 245 -> discard sigma*J_2=288 formula / p-value < 0.01 -> discard n=6 hypothesis / Egyptian sum != 1 -> discard structure
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
-# ─────────────────────────────────────────────────────────────────────────────
-# §7 VERIFY — 궁극의 iOS 기반 SoC (HEXA-IOS) n=6 정직성 검증 (stdlib only, chip domain)
+# -----------------------------------------------------------------------------
+# §7 VERIFY — Ultimate iOS-based SoC (HEXA-IOS) n=6 honesty checks (stdlib only, chip domain)
 #
-# 10 섹션 구조:
-#   §7.0 CONSTANTS  — n=6 상수를 수론 함수에서 자동 유도 (하드코딩 0)
-#   §7.1 DIMENSIONS — SI 단위 일관성 (P=V·I 차원 추적)
-#   §7.2 CROSS      — 같은 결과를 독립 경로 ≥3 으로 재유도
-#   §7.3 SCALING    — log-log 회귀로 B⁴ 지수 역추정
-#   §7.4 SENSITIVITY— n=6 ±10% 흔들어 볼록 극값 확인
-#   §7.5 LIMITS     — Carnot/Landauer 물리 상한 미초과
-#   §7.6 CHI2       — H₀: n=6 우연 가설 p-value 계산
-#   §7.7 OEIS       — n=6 family 시퀀스 외부 DB (A-id) 매칭
-#   §7.8 PARETO     — Monte Carlo 2400 조합 중 n=6 순위
-#   §7.9 SYMBOLIC   — Fraction 정확 유리수 등호 일치
-#   §7.10 COUNTER   — 반례 + falsifier 명시 (정직성)
-# ─────────────────────────────────────────────────────────────────────────────
+# 10-section structure:
+#   §7.0 CONSTANTS  — auto-derive n=6 constants from number-theoretic functions (0 hardcoded)
+#   §7.1 DIMENSIONS — SI unit consistency (track P=V*I dimensions)
+#   §7.2 CROSS      — re-derive same result via >=3 independent paths
+#   §7.3 SCALING    — back-estimate B^4 exponent via log-log regression
+#   §7.4 SENSITIVITY— shake n=6 by ±10% to confirm convex extremum
+#   §7.5 LIMITS     — Carnot/Landauer physical bounds not exceeded
+#   §7.6 CHI2       — H_0: compute n=6 chance-hypothesis p-value
+#   §7.7 OEIS       — match n=6 family sequence to external DB (A-id)
+#   §7.8 PARETO     — Monte Carlo rank of n=6 among 2400 combos
+#   §7.9 SYMBOLIC   — exact rational equality via Fraction
+#   §7.10 COUNTER   — explicit counterexamples + falsifier (honesty)
+# -----------------------------------------------------------------------------
 
 from math import pi, sqrt, log, erfc, log2
 from fractions import Fraction
 import random
 
-# ─── §7.0 CONSTANTS — n=6 상수를 수론 함수에서 자동 유도 ──────────────────────
-# 왜 필요: "σ=12 는 어디서?" "왜 τ=4?" — 하드코딩하면 순환논리.
-# 수론 함수로 자동 생성 → n=6 이 "완전수" (σ(n)=2n) 이기 때문에 필연적 상수군.
+# --- §7.0 CONSTANTS — auto-derive n=6 constants from number theory ----------
+# Why needed: "where does sigma=12 come from?" "why tau=4?" — hardcoding is circular.
+# Auto-generate via number-theoretic functions -> n=6 is a "perfect number" (sigma(n)=2n)
+# so the constant family is necessary.
 def divisors(n):
-    """약수 집합. n=6 → {1,2,3,6}"""
+    """Set of divisors. n=6 -> {1,2,3,6}"""
     return {d for d in range(1, n+1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
+    """Sum of divisors (OEIS A000203). sigma(6) = 1+2+3+6 = 12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
+    """Number of divisors (OEIS A000005). tau(6) = |{1,2,3,6}| = 4"""
     return len(divisors(n))
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6) = 2+3 = 5"""
+    """Sum of prime factors (OEIS A001414). sopfr(6) = 2+3 = 5"""
     s, k = 0, n
     for p in range(2, n+1):
         while k % p == 0:
@@ -567,12 +568,12 @@ def sopfr(n):
     return s
 
 def phi_min_prime(n):
-    """최소 소인수. φ(6) = 2"""
+    """Smallest prime factor. phi(6) = 2"""
     for p in range(2, n+1):
         if n % p == 0: return p
 
 def euler_phi(n):
-    """Euler totient (OEIS A000010). φ_E(6) = 2"""
+    """Euler totient (OEIS A000010). phi_E(6) = 2"""
     r = n
     p = 2
     nn = n
@@ -584,27 +585,27 @@ def euler_phi(n):
     if nn > 1: r -= r // nn
     return r
 
-# n=6 family — 모두 수론 함수로 유도, 하드코딩 0
+# n=6 family — all derived from number-theoretic functions, 0 hardcoded
 N          = 6
-SIGMA      = sigma(N)            # 12 = σ(6)  ← OEIS A000203
-TAU        = tau(N)              # 4  = τ(6)  ← OEIS A000005
+SIGMA      = sigma(N)            # 12 = sigma(6)  <- OEIS A000203
+TAU        = tau(N)              # 4  = tau(6)    <- OEIS A000005
 PHI        = phi_min_prime(N)    # 2  = min prime
 SOPFR      = sopfr(N)            # 5  = 2+3
-EULER_PHI  = euler_phi(N)        # 2  = |{1,5}|  ← OEIS A000010
-J2         = 2 * SIGMA            # 24 = 2σ
-SIGMA_PHI  = SIGMA - PHI          # 10 = σ-φ
-SIGMA_TAU  = SIGMA * TAU          # 48 = σ·τ
-MAC        = SIGMA * J2           # 288 = σ·J₂
+EULER_PHI  = euler_phi(N)        # 2  = |{1,5}|   <- OEIS A000010
+J2         = 2 * SIGMA            # 24 = 2*sigma
+SIGMA_PHI  = SIGMA - PHI          # 10 = sigma-phi
+SIGMA_TAU  = SIGMA * TAU          # 48 = sigma*tau
+MAC        = SIGMA * J2           # 288 = sigma*J_2
 
-# 자기검증: n=6 은 완전수 — σ(n)=2n 성립해야
+# Self-check: n=6 is a perfect number — sigma(n)=2n must hold
 assert SIGMA == 2 * N, "n=6 perfectness broken"
-# 마스터 항등식: σ·φ = n·τ = J₂
+# Master identity: sigma*phi = n*tau = J_2
 assert SIGMA * PHI == N * TAU == J2, "master identity broken"
 
-# ─── §7.1 DIMENSIONS — 차원해석 (SI 단위 일관성) ──────────────────────────────
-# 왜 필요: P=V·I 가 단위 맞나? [V][A] = [W] 성립해야.
+# --- §7.1 DIMENSIONS — dimensional analysis (SI unit consistency) ----------
+# Why needed: do units match in P=V*I? [V][A] = [W] must hold.
 DIM = {
-    'P': (1, 2, -3,  0),  # W  = kg·m²/s³  ← σ(6)=12, τ(6)=4
+    'P': (1, 2, -3,  0),  # W  = kg*m^2/s^3  <- sigma(6)=12, tau(6)=4
     'V': (1, 2, -3, -1),  # V  = W/A
     'I': (0, 0,  0,  1),  # A  = A
     'F': (1, 1, -2,  0),  # N
@@ -613,28 +614,28 @@ DIM = {
 }
 
 def dim_mul(*syms):
-    """차원 곱: V*I → [V][A] = [W]"""
+    """Dimension product: V*I -> [V][A] = [W]"""
     r = [0, 0, 0, 0]
     for s in syms:
         for i, x in enumerate(DIM[s]): r[i] += x
     return tuple(r)
 
-# ─── §7.2 CROSS — 동일 결과 독립 경로 3개로 재유도 ─────────────────────────────
-# 왜 필요: MAC=288 을 공식 하나로만 맞추면 순환. 3가지 독립 경로 일치해야 신뢰.
+# --- §7.2 CROSS — re-derive same result via 3 independent paths ----------
+# Why needed: matching MAC=288 via a single formula is circular. 3 independent paths must agree.
 def cross_mac_3ways():
-    """MAC 어레이 288 을 σ·J₂ / 12×24 배열 / σ²+σ·J₂/2 3 경로로 계산"""
-    # 경로 1: σ·J₂ 직접 ← σ(6)=12, J₂=24
-    F1 = SIGMA * J2                          # 12·24 = 288
-    # 경로 2: 12×24 systolic 배열 크기
+    """Compute MAC array 288 via sigma*J_2 / 12x24 array / sigma^2 + sigma*J_2/2"""
+    # Path 1: direct sigma*J_2 <- sigma(6)=12, J_2=24
+    F1 = SIGMA * J2                          # 12*24 = 288
+    # Path 2: 12x24 systolic array size
     F2 = 12 * 24                             # = 288
-    # 경로 3: σ² + σ·J₂/2 = 144 + 144 = 288
+    # Path 3: sigma^2 + sigma*J_2/2 = 144 + 144 = 288
     F3 = SIGMA ** 2 + (SIGMA * J2) // 2
     return F1, F2, F3
 
-# ─── §7.3 SCALING — 스케일링 법칙 로그 회귀 ─────────────────────────────────
-# 왜 필요: "B⁴ confinement" 지수가 정말 4인가? 데이터 log-log 회귀로 역추정.
+# --- §7.3 SCALING — log regression of scaling law -----------------------
+# Why needed: is the "B^4 confinement" exponent really 4? Recover via log-log regression.
 def scaling_exponent(xs, ys):
-    """log-log 기울기 = 스케일링 지수. B⁴ 면 기울기 ≈ 4.0"""
+    """log-log slope = scaling exponent. For B^4, slope ~ 4.0"""
     n = len(xs)
     lx = [log(x) for x in xs]
     ly = [log(y) for y in ys]
@@ -643,59 +644,59 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# ─── §7.4 SENSITIVITY — ±10% 흔들어 볼록성 확인 ──────────────────────────────
-# 왜 필요: n=6 이 "최적점" 이면 ±10% 흔들 때 열화. 단순 끼워맞춤이면 flat.
+# --- §7.4 SENSITIVITY — ±10% shake to confirm convexity ------------------
+# Why needed: if n=6 is the optimum, ±10% shake should worsen it. Flat = mere curve fitting.
 def sensitivity(f, x0, pct=0.1):
-    """f(x0±10%) 둘 다 f(x0) 보다 나빠야 최적 (볼록 극값)"""
+    """Both f(x0±10%) must be worse than f(x0) for an optimum (convex extremum)"""
     y0 = f(x0); yh = f(x0 * (1 + pct)); yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh > y0 and yl > y0)
 
-# ─── §7.5 LIMITS — 물리 상한 미초과 ─────────────────────────────────────────
-# 왜 필요: Carnot/Landauer 근본 한계 안 넘어야 realistic claim.
+# --- §7.5 LIMITS — physical bounds not exceeded -------------------------
+# Why needed: must not exceed Carnot/Landauer fundamental limits to be a realistic claim.
 def carnot(T_hot, T_cold):
-    """카르노 효율. η ≤ 1 - T_c/T_h"""
+    """Carnot efficiency. eta <= 1 - T_c/T_h"""
     return 1 - T_cold / T_hot
 
 K_BOLTZMANN = 1.380649e-23
 def landauer(T):
-    """Landauer 한계: 비트 삭제 최소 에너지 = kT ln2"""
+    """Landauer limit: minimum energy for bit erasure = kT ln2"""
     return K_BOLTZMANN * T * log(2)
 
 def shannon(B, snr):
-    """Shannon 용량. C = B·log₂(1+SNR)"""
+    """Shannon capacity. C = B*log_2(1+SNR)"""
     return B * log2(1 + snr)
 
-# ─── §7.6 CHI2 — H₀: n=6 우연 가설 p-value ──────────────────────────────────
-# 왜 필요: "49/49 맞음" 이 우연일 확률은? χ² → p-value.
+# --- §7.6 CHI2 — H_0: n=6 chance hypothesis p-value -------------------
+# Why needed: what is the probability that "49/49 match" is by chance? chi^2 -> p-value.
 def chi2_pvalue(observed, expected):
-    """χ² = Σ(O-E)²/E. p-value 는 erfc 로 근사 (stdlib 한계)"""
+    """chi^2 = sum((O-E)^2/E). p-value approximated via erfc (stdlib limit)"""
     chi2 = sum((o - e) ** 2 / e for o, e in zip(observed, expected) if e)
     df = len(observed) - 1
     p = erfc(sqrt(chi2 / (2 * df))) if chi2 > 0 else 1.0
     return chi2, df, p
 
-# ─── §7.7 OEIS — 외부 시퀀스 DB 매칭 (offline hash) ─────────────────────────
-# 왜 필요: n=6 family 시퀀스가 OEIS 에 등록 = "인간이 이미 발견한 수학".
+# --- §7.7 OEIS — external sequence DB match (offline hash) -----------
+# Why needed: n=6 family sequences registered in OEIS = "mathematics already discovered by humans".
 OEIS_KNOWN = {
-    (1, 2, 3, 6, 12, 24, 48): "A008586-variant (n·2^k, HEXA family)",
+    (1, 2, 3, 6, 12, 24, 48): "A008586-variant (n*2^k, HEXA family)",
     (1, 3, 4, 7, 6, 12, 8):    "A000203 (sigma)",
     (1, 2, 2, 3, 2, 4, 2):     "A000005 (tau)",
     (0, 2, 3, 4, 5, 5, 7):     "A001414 (sopfr)",
     (1, 1, 2, 2, 4, 2, 6):     "A000010 (euler phi)",
 }
 
-# ─── §7.8 PARETO — Monte Carlo 전수 탐색 ────────────────────────────────────
-# 왜 필요: DSE 2,400 조합 중 n=6 구성이 상위권인가? 통계적 유의성.
+# --- §7.8 PARETO — Monte Carlo exhaustive search ----------------------
+# Why needed: among 2,400 DSE combos, does the n=6 configuration rank high? Statistical significance.
 def pareto_rank_n6():
-    """K1=n × K2=sopfr × K3=τ × K4=sopfr × K5=τ = 6×5×4×5×4 = 2400"""
+    """K1=n x K2=sopfr x K3=tau x K4=sopfr x K5=tau = 6x5x4x5x4 = 2400"""
     random.seed(6)
     n_total = 2400
-    n6_score = 0.94  # n=6 실제 구성 §4 STRUCT EXACT 비율
+    n6_score = 0.94  # n=6 actual configuration §4 STRUCT EXACT ratio
     better = sum(1 for _ in range(n_total) if random.gauss(0.7, 0.1) > n6_score)
-    return better / n_total  # 상위 %. 낮을수록 좋음
+    return better / n_total  # top-percent. lower is better
 
-# ─── §7.9 SYMBOLIC — Fraction 으로 정확 유리수 일치 ────────────────────────
-# 왜 필요: Egyptian 1/2+1/3+1/6=1 이 부동소수 근사가 아닌 정확 분수로 증명.
+# --- §7.9 SYMBOLIC — exact rational equality via Fraction ---------------
+# Why needed: prove Egyptian 1/2+1/3+1/6=1 as exact fractions, not floating-point approximation.
 def symbolic_ratios():
     tests = [
         ("Egyptian",  Fraction(1,2)+Fraction(1,3)+Fraction(1,6), Fraction(1,1)),
@@ -704,67 +705,67 @@ def symbolic_ratios():
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
-# ─── §7.10 COUNTER — 반례/Falsifier (정직성 필수) ──────────────────────────
-# 왜 필요: 정직한 이론은 반증 조건을 명시. n=6 이 안 맞는 영역도 공개.
+# --- §7.10 COUNTER — counterexamples / falsifier (honesty required) ---
+# Why needed: an honest theory states its falsification conditions. Disclose where n=6 doesn't fit.
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602×10⁻¹⁹ C", "n=6 과 무관 — QED 독립 상수"),
-    ("Planck h = 6.626×10⁻³⁴",     "6.6 는 우연, n=6 유도 아님"),
-    ("π = 3.14159...",              "원주율은 기하 상수, n=6 독립"),
-    ("미세구조상수 α ≈ 1/137",     "QED 재규격화 상수, n=6 무관"),
+    ("elementary charge e = 1.602x10^-19 C", "unrelated to n=6 — independent QED constant"),
+    ("Planck h = 6.626x10^-34",     "the 6.6 is coincidence, not n=6 derivation"),
+    ("pi = 3.14159...",              "circle constant, geometric, independent of n=6"),
+    ("fine-structure alpha ~ 1/137", "QED renormalization constant, unrelated to n=6"),
 ]
 FALSIFIERS = [
-    "MAC/cycle 측정 < 245 (288×85%) 이면 σ·J₂ 공식 폐기",
-    "SM 배열 대칭성 분산 > 5% 이면 σ²=144 폐기",
-    "Egyptian 합 ≠ 1 (Fraction 등호 실패) 이면 전원 분배 구조 폐기",
-    "χ² p-value < 0.01 이면 n=6 우연 가설 채택, 본 설계 폐기",
+    "MAC/cycle measured < 245 (288*85%) -> discard sigma*J_2 formula",
+    "SM array symmetry variance > 5% -> discard sigma^2=144",
+    "Egyptian sum != 1 (Fraction equality fails) -> discard power-split structure",
+    "chi^2 p-value < 0.01 -> accept n=6 chance hypothesis, discard this design",
 ]
 
-# ─── 메인 실행 + 집계 ────────────────────────────────────────────────────────
+# --- main execution + aggregation ----------------------------------------
 if __name__ == "__main__":
     r = []
 
-    # §7.0 상수 수론 유도
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    # §7.0 number-theoretic derivation of constants
+    r.append(("§7.0 CONSTANTS number-theoretic derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5))
 
-    # §7.1 P=V·I 차원
-    r.append(("§7.1 DIMENSIONS P=V·I",
+    # §7.1 P=V*I dimension
+    r.append(("§7.1 DIMENSIONS P=V*I",
               dim_mul('V', 'I') == DIM['P']))
 
-    # §7.2 3경로 ±15% 일치
+    # §7.2 3-path agreement within ±15%
     F1, F2, F3 = cross_mac_3ways()
-    r.append(("§7.2 CROSS MAC 3경로 일치",
+    r.append(("§7.2 CROSS MAC 3-path agreement",
               all(abs(F - 288) / 288 < 0.15 for F in [F1, F2, F3])))
 
-    # §7.3 B⁴ 지수 ≈ 4.0
+    # §7.3 B^4 exponent ~ 4.0
     exp_B = scaling_exponent([10, 20, 30, 40, 48], [b**4 for b in [10,20,30,40,48]])
-    r.append(("§7.3 SCALING B⁴ 지수 ≈ 4",
+    r.append(("§7.3 SCALING B^4 exponent ~ 4",
               abs(exp_B - 4.0) < 0.1))
 
-    # §7.4 n=6 볼록 최적
+    # §7.4 n=6 convex optimum
     _, yh, yl, convex = sensitivity(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
 
-    # §7.5 물리 상한
-    r.append(("§7.5 LIMITS Carnot η < 1", carnot(1e8, 300) < 1.0))
+    # §7.5 physical bounds
+    r.append(("§7.5 LIMITS Carnot eta < 1", carnot(1e8, 300) < 1.0))
     r.append(("§7.5 LIMITS Landauer > 0", landauer(300) > 0))
 
-    # §7.6 χ² p-value > 0.05 (H₀ 기각 안 됨 = n=6 구조 유의)
+    # §7.6 chi^2 p-value > 0.05 (cannot reject H_0 = n=6 structure significant)
     chi2, df, p = chi2_pvalue([1.0] * 49, [1.0] * 49)
-    r.append(("§7.6 CHI2 H₀ 기각 안 됨", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 H_0 not rejected", p > 0.05 or chi2 == 0))
 
-    # §7.7 OEIS 등록 ← A000203/A000005/A000010
-    r.append(("§7.7 OEIS 시퀀스 등록", (1, 2, 3, 6, 12, 24, 48) in OEIS_KNOWN))
+    # §7.7 OEIS registered <- A000203/A000005/A000010
+    r.append(("§7.7 OEIS sequence registered", (1, 2, 3, 6, 12, 24, 48) in OEIS_KNOWN))
 
-    # §7.8 Pareto 상위 5%
-    r.append(("§7.8 PARETO n=6 상위 5%", pareto_rank_n6() < 0.05))
+    # §7.8 Pareto top 5%
+    r.append(("§7.8 PARETO n=6 top 5%", pareto_rank_n6() < 0.05))
 
-    # §7.9 Fraction 정확 일치
-    r.append(("§7.9 SYMBOLIC Fraction 일치",
+    # §7.9 exact Fraction equality
+    r.append(("§7.9 SYMBOLIC Fraction equality",
               all(ok for _, ok, _ in symbolic_ratios())))
 
-    # §7.10 반례/Falsifier 존재 = 정직성
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    # §7.10 counterexamples/falsifier present = honesty
+    r.append(("§7.10 COUNTER/FALSIFIERS present",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -773,62 +774,62 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{('OK' if ok else 'FAIL')}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (n=6 honesty checks)")
 ```
 
 
-## §6 EVOLVE (Mk.I~V 진화)
+## §6 EVOLVE (Mk.I-V evolution)
 
-궁극의 iOS 기반 SoC (HEXA-IOS) 실제 실현 로드맵 — 각 Mk 단계마다 공정/소프트웨어 성숙도 요구:
+Realization roadmap of the Ultimate iOS-based SoC (HEXA-IOS) — each Mk stage requires process/software maturity:
 
 <details open>
-<summary><b>Mk.V — 2050+ 완전 AI-native (current target)</b></summary>
+<summary><b>Mk.V — 2050+ full AI-native (current target)</b></summary>
 
-n=6 경계 상수 전부 하드와이어. AI-native 합성으로 "한마디 → RTL → 웨이퍼" τ=4개월 자동화.
-선행 조건: chip-architecture 🛸10, compiler-os 🛸10, programming-language 🛸10 전부 도달.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2040~2050 n=6 하드와이어 실리콘</summary>
-
-σ²=144 SM + σ·J₂=288 MAC + Egyptian 전원 분배 전면 실리콘화.
-EUV/High-NA σ-φ=10nm 노드 기반 웨이퍼 스케일.
+All n=6 boundary constants hardwired. AI-native synthesis automates "one sentence -> RTL -> wafer" in tau=4 months.
+Prerequisites: chip-architecture UFO10, compiler-os UFO10, programming-language UFO10 all reached.
 
 </details>
 
 <details>
-<summary>Mk.III — 2035~2040 RTL 통합 칩</summary>
+<summary>Mk.IV — 2040-2050 n=6 hardwired silicon</summary>
 
-HEXA-1 디지털 코어 + σ=12 채널 I/O + τ=4 단 캐시 통합 SoC.
-기존 파운드리 7nm 공정 사용 가능.
-
-</details>
-
-<details>
-<summary>Mk.II — 2030~2035 프로토타입 FPGA</summary>
-
-n=6 경계 상수 FPGA 프로토타입. 288 MAC 시뮬레이션 + 소프트웨어 에뮬레이션.
-벤치마크 기존 대비 σ-φ=10x 효율 달성.
+sigma^2=144 SM + sigma*J_2=288 MAC + Egyptian power split, full silicon implementation.
+Wafer-scale on EUV/High-NA sigma-phi=10nm node.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026~2030 소프트웨어 레퍼런스</summary>
+<summary>Mk.III — 2035-2040 RTL-integrated chip</summary>
 
-CPU 에뮬레이션 레퍼런스 + Python 검증 코드. n=6 상수 수론 자동 유도 완료.
-§7 10 서브섹션 정직성 검증 통과. `hexa-ios` 문서 canonical v2 확정.
+HEXA-1 digital core + sigma=12 channel I/O + tau=4 stage cache integrated SoC.
+Existing foundry 7 nm process usable.
 
 </details>
 
-## §16 VT 6-tier Terminal + VOID 연계 (CHIP-P2-3)
+<details>
+<summary>Mk.II — 2030-2035 prototype FPGA</summary>
 
-- 참조: `../hexa-macos/vt_6tier_terminal.md` — 6 계층 프로토콜 공용 스펙
-- iOS 측 특이점:
-  - tier 2 INPUT 에 **BCI** (OpenBCI 16ch → n=6 축약) + 멀티 터치 + IME 를 동시 수용
-  - tier 1 RENDER 는 hexa-holo 출력 지원 (SoC 내장 neural renderer)
-- VOID 연계: `/Users/ghost/Dev/void/` app 트리를 iOS 앱으로 번들, tier 1+6 을 호스트 구동
-- n=6 정렬: 공용 스펙 9/9 EXACT + BCI 확장 축 2개 (τ 대역폭 분할 / σ 채널 선택) 추가
+n=6 boundary constants on FPGA prototype. 288 MAC simulation + software emulation.
+Benchmark sigma-phi=10x efficiency vs existing.
+
+</details>
+
+<details>
+<summary>Mk.I — 2026-2030 software reference</summary>
+
+CPU emulation reference + Python verification code. n=6 constants auto-derived from number theory.
+§7 10-subsection honesty checks pass. `hexa-ios` document canonical v2 finalized.
+
+</details>
+
+## §16 VT 6-tier Terminal + VOID linkage (CHIP-P2-3)
+
+- Reference: `../hexa-macos/vt_6tier_terminal.md` — 6-tier protocol shared spec
+- iOS-side specifics:
+  - tier 2 INPUT accepts **BCI** (OpenBCI 16ch -> n=6 reduction) + multi-touch + IME simultaneously
+  - tier 1 RENDER supports hexa-holo output (SoC-embedded neural renderer)
+- VOID linkage: bundle the `/Users/ghost/Dev/void/` app tree as an iOS app, host-driven on tier 1+6
+- n=6 alignment: 9/9 EXACT in shared spec + 2 BCI extension axes (tau bandwidth split / sigma channel select) added
 
 
 ## §8 IDEAS
@@ -862,4 +863,3 @@ This section covers team for the domain. Initial scaffold content — expand wit
 ## §15 REFERENCES
 
 This section covers references for the domain. Initial scaffold content — expand with domain-specific data, references, and verification in subsequent revisions.
-
