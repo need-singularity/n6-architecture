@@ -1,6 +1,6 @@
 # N6 Architecture — Detailed Visuals & Results
 
-> README.md 에서 분리된 상세 시각화 및 실험 결과.
+> Detailed visualizations and experimental results separated from README.md.
 
 ---
 

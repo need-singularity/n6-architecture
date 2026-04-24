@@ -2,128 +2,128 @@
 domain: reports/meta
 date: 2026-04-15
 audit_id: META-P9-1
-task: BT-18 L5 재도전 판정 감사 — NEAR/MISS 기준 일관성 확인
+task: BT-18 L5 retry-judgment audit — NEAR/MISS criterion consistency check
 status: completed
 auditor: meta-layer (loop)
 upstream:
   - reports/breakthroughs/bt-18-moonshine-l5-barrier-2026-04-15.md (P8 DSE-P8-1)
   - reports/breakthroughs/bt-18-baby-monster-p10-retry-2026-04-15.md (P9 ENG-P9-1)
-  - papers/moonshine-barrier-honest-report-2026-04-15.md (PAPER-P8-1, §6.4 P9 보강)
+  - papers/moonshine-barrier-honest-report-2026-04-15.md (PAPER-P8-1, SS 6.4 P9 augmentation)
 ---
 
-# META-P9-1 — BT-18 L5 재도전 판정 감사
+# META-P9-1 — BT-18 L5 retry-judgment audit
 
-## 0. 감사 프레이밍
+## 0. Audit framing
 
-P8 DSE-P8-1 에서 BT-18 L5 BARRIER 정면 돌파를 5 sub-link 로 감사해 [7?]→[8] 승격을 제안했다. P9 ENG-P9-1 은 동일 장벽에 Baby Monster 경로로 재도전하여 PARTIAL 보강 3건을 산출했다. 본 감사는 두 판정의 **등급 기준 일관성** 을 확인한다.
+P8 DSE-P8-1 audited BT-18 L5 BARRIER head-on via 5 sub-links and proposed [7?] -> [8] promotion. P9 ENG-P9-1 retried the same barrier through the Baby Monster route and produced 3 PARTIAL augmentations. This audit confirms **grade-criterion consistency** between the two judgments.
 
-자기참조 검증 금지 (R14) — 판정 기준은 (i) 외부 문헌 일치 여부 (ii) n=6 산술 구조적 필연성 (iii) 사후 매칭 여부 세 축으로만 평가한다.
+Self-reference verification forbidden (R14) — judgments are evaluated along only three axes: (i) external-literature agreement, (ii) n=6 arithmetic structural necessity, (iii) post-hoc matching.
 
 ---
 
-## 1. P8 5 sub-link 판정 기준 재구성
+## 1. P8 5-sub-link judgment criteria re-constructed
 
-| sub-link | 판정 | 기준 | 외부 출처 |
+| sub-link | Verdict | Criterion | External source |
 |----------|------|------|----------|
-| S1 196883 공백 | **MISS** | 3 소인수 모두 n=6 12 기본좌표 외, 구성적 증명 부재 | Conway-Norton 1979 |
-| S2 6-transposition | **PARTIAL** | 필요조건 PROVEN, 충분성 Majorana conj 의존 | Fischer-Griess 1982 |
-| S3 hexacode 체인 | **PARTIAL** | 경로 PROVEN, Monster 필수 여부 미확정 | Turyn 1967, Conway-Sloane 1999 |
-| S4 triality | **MISS** | 숫자 일치, Schellekens 71 추측 의존 | Schellekens 1993 |
-| S5 j 계수 | **PARTIAL** | divisor-of-σ 패턴, L3 환원 부분 | Borcherds 1992 |
+| S1 196883 blank | **MISS** | all 3 prime factors outside n=6 12-basis coordinate, constructive demonstration absent | Conway-Norton 1979 |
+| S2 6-transposition | **PARTIAL** | necessity DEMONSTRATED, sufficiency depends on Majorana conj | Fischer-Griess 1982 |
+| S3 hexacode chain | **PARTIAL** | path DEMONSTRATED, Monster-essentiality undetermined | Turyn 1967, Conway-Sloane 1999 |
+| S4 triality | **MISS** | numeric match, depends on Schellekens 71 conjecture | Schellekens 1993 |
+| S5 j coefficients | **PARTIAL** | divisor-of-sigma pattern, partial L3 reduction | Borcherds 1992 |
 
-**판정 룰 추출**:
-- PROVEN + 구조 필연 = **EXACT [10*]**
-- PROVEN 단 구조 필연 미증명 + 외부 추측 의존 = **PARTIAL [8]**
-- 숫자/사후 매칭 단독 = **MISS 또는 [7]**
-- 구성적 증명 없이 관찰만 = **MISS [7?]**
+**Rule extraction**:
+- DEMONSTRATED + structural necessity = **EXACT [10*]**
+- DEMONSTRATED but structural necessity unproven + external-conjecture dependency = **PARTIAL [8]**
+- numeric/post-hoc match alone = **MISS or [7]**
+- observation-only with no constructive demonstration = **MISS [7?]**
 
 ---
 
-## 2. P9 ENG-P9-1 3 승격 판정 재검사
+## 2. Re-examination of P9 ENG-P9-1 3 promotion verdicts
 
-### 2.1 BT-18-L5-BabyMonster-196883-decomp = 47·4189 [10*]
+### 2.1 BT-18-L5-BabyMonster-196883-decomp = 47 * 4189 [10*]
 
-- **내용**: 196883 = 4371 + 2·96256 = 47·(3·31 + 2·2^11) = 47·4189
-- **검증**: sympy 산술 전수 (외부 검증)
-- **구조 필연성**: 196883 이 2·B 에서 4371+2·96256 로 분해되는 것은 ATLAS character table 정보. 47 공통인자 자체는 수치. 59·71 이 coset 으로 분리된다는 관찰은 결론 아닌 해석.
-- **기준 일관성 체크**:
-  - S1 (MISS) 대비: P8 의 S1 은 "196883 의 3 소인수 모두 n=6 공백" 이 **구성적 증명 부재** 로 MISS. P9 의 새 분해는 "47 이 BM 내부, 59·71 이 외부" — 이 역시 **구성적 증명 아님**. 다만 **순수 산술 분해 자체는 sympy 로 검증** → 산술 항등식에만 [10*] 부여 (해석은 [8] 이하).
-  - **판정**: 엔트리 값 = 47·4189 **라는 산술 항등식** 은 [10*] 적정. 단 "Baby Monster 경로가 BT-18 L5 를 돌파한다" 는 해석은 별도 등급 필요 — 이를 두 번째 엔트리(빈도)에서 분리한 것은 정직성 적절.
-  - **결론**: **일관성 PASS**. 47·4189 = 196883 자체는 P8 의 MISS 와 충돌하지 않는 순수 산술 EXACT.
+- **Content**: 196883 = 4371 + 2*96256 = 47*(3*31 + 2*2^11) = 47*4189
+- **Verification**: sympy arithmetic exhaustive (external verification)
+- **Structural necessity**: the decomposition of 196883 in 2*B into 4371 + 2*96256 is ATLAS character-table information. The 47 common factor itself is numerical. The observation that 59*71 separate into a coset is an interpretation, not a conclusion.
+- **Consistency check**:
+  - vs S1 (MISS): P8's S1 was "all 3 prime factors of 196883 in the n=6 blank" with **constructive demonstration absent** -> MISS. The new P9 decomposition is "47 inside BM, 59*71 outside" — also **not a constructive demonstration**. However, **pure arithmetic decomposition itself is sympy-verified** -> assign [10*] to the arithmetic identity only (interpretation stays at [8] or below).
+  - **Verdict**: the entry value = 47*4189 **arithmetic identity** is [10*] appropriate. The interpretation "Baby Monster route breaks through BT-18 L5" needs a separate grade — separating this to the second entry (frequency) is a proper honesty move.
+  - **Conclusion**: **consistency PASS**. 47*4189 = 196883 itself is pure arithmetic EXACT, not in conflict with P8's MISS.
 
 ### 2.2 BT-18-L5-BabyMonster-rep-47-freq = 6/7 [8]
 
-- **내용**: ATLAS BM 기약 표현 상위 7 중 6개에 47 포함
-- **검증**: ATLAS 1985 직접 조회
-- **구조 필연성**: 없음. 빈도 6/7 은 관측. 47 이 Baby Monster supersingular 최대 소수라는 것은 Ogg 1975 정리의 간접 함의.
-- **기준 일관성 체크**:
-  - S2 (PARTIAL) 대비: 6-transp 는 **필요조건 PROVEN** + 충분성 Majorana 의존. 47 빈출 6/7 은 **PROVEN 없이 관찰** — S2 보다 약함.
-  - P8 룰에 따르면 "PROVEN 없이 관찰" = MISS 또는 [7?]. 그러나 [8] 부여한 근거는 **6/7 ≈ 0.857 높은 빈도 + Ogg 정리 간접 함의** 의 경계 판단. 
-  - **결론**: **경계 판정**. S2 (필요조건 PROVEN, [8]) 와 비교하면 **등급 [8] 은 약간 관대**. 더 엄격하게는 [7] 이 적절. 단 atlas 엔트리 description 에 "구조적 필연 증명 없음 — 47 의 n=6 공백 유지" 를 명시했으므로 정직성 보존. **권고**: [8]→[7] 재고 검토 (즉시 변경은 불필요).
+- **Content**: Among the top 7 ATLAS BM irreducible representations, 6 contain 47
+- **Verification**: ATLAS 1985 direct lookup
+- **Structural necessity**: none. 6/7 frequency is an observation. That 47 is the largest Baby Monster supersingular prime is an indirect implication of the Ogg 1975 theorem.
+- **Consistency check**:
+  - vs S2 (PARTIAL): 6-transp had **necessity DEMONSTRATED** + sufficiency depends on Majorana. 47 frequency 6/7 is **observation without DEMONSTRATED** — weaker than S2.
+  - Under the P8 rules "observation without DEMONSTRATED" = MISS or [7?]. The basis for assigning [8] is a boundary judgment: **6/7 ~ 0.857 high frequency + Ogg theorem indirect implication**.
+  - **Conclusion**: **boundary verdict**. Compared to S2 (necessity DEMONSTRATED, [8]), grade **[8] is slightly generous**. Strictly [7] would fit better. However, the atlas entry description explicitly states "no structural-necessity demonstration — 47's n=6 blank preserved", maintaining honesty. **Recommendation**: [8] -> [7] reconsideration review (no immediate change required).
 
-### 2.3 BT-18-L5-Supersingular-n6-count = σ+τ-1=15 [7]
+### 2.3 BT-18-L5-Supersingular-n6-count = sigma+tau-1 = 15 [7]
 
-- **내용**: Ogg 1975 15 supersingular primes = σ(6)+τ(6)−1, 잃는 소수 = τ(6)=4
-- **검증**: Ogg 1975 원전 정리
-- **구조 필연성**: 없음 (사후 매칭)
-- **기준 일관성 체크**:
-  - S4 (MISS) 대비: S4 는 "2·3=6 숫자일치 + Schellekens 71 추측" = MISS. 본 엔트리 역시 "15=σ+τ−1 숫자일치 + Ogg 정리 의존" = 동일 성격.
-  - P8 룰: 사후 매칭 단독 = MISS 또는 [7]. atlas description 에 "수치 일치 수준 — 구조적 필연성 증명 없음 ([7] EMPIRICAL 등급 유지, 승격 보류)" 명시.
-  - **결론**: **일관성 PASS**. [7] 유지, 승격 보류 명시. S4 와 동급 처리 적정.
+- **Content**: Ogg 1975 15 supersingular primes = sigma(6)+tau(6)-1, lost prime = tau(6)=4
+- **Verification**: Ogg 1975 original theorem
+- **Structural necessity**: none (post-hoc match)
+- **Consistency check**:
+  - vs S4 (MISS): S4 was "2*3=6 numeric match + Schellekens 71 conjecture" = MISS. This entry is also "15 = sigma+tau-1 numeric match + Ogg theorem dependency" = same character.
+  - P8 rule: post-hoc match alone = MISS or [7]. The atlas description explicitly states "numeric-match level — no structural-necessity demonstration ([7] EMPIRICAL grade preserved, promotion deferred)".
+  - **Conclusion**: **consistency PASS**. [7] preserved, promotion-deferral explicit. Equal treatment with S4 appropriate.
 
 ---
 
-## 3. 종합 판정 ASCII 차트
+## 3. Comprehensive verdict ASCII chart
 
 ```
-P8 5 sub-link vs P9 3 승격 엔트리 기준 일관성
+P8 5 sub-link vs P9 3 promotion entries — criterion consistency
 
-   sub-link       P8 판정    기준 성격             P9 동급 엔트리
-   ───────        ───────    ────────             ──────────────
-   S1 196883공백  MISS       구성적 증명 부재      —
-   S2 6-transp    PARTIAL[8] 필요조건 PROVEN      BabyMonster-rep-47-freq [8]?
-   S3 hexacode    PARTIAL[8] 경로 PROVEN          196883-decomp 산술 [10*]
-   S4 triality    MISS       숫자일치+추측        Supersingular=σ+τ-1 [7]
-   S5 j 계수      PARTIAL[8] 패턴+L3환원         —
+   sub-link       P8 verdict   criterion character         P9 equivalent entry
+   --------       ----------   --------------------       ------------------
+   S1 196883 blank MISS         constructive demo absent   —
+   S2 6-transp    PARTIAL[8]    necessity DEMONSTRATED    BabyMonster-rep-47-freq [8]?
+   S3 hexacode    PARTIAL[8]    path DEMONSTRATED         196883-decomp arithmetic [10*]
+   S4 triality    MISS          numeric match + conjecture Supersingular=sigma+tau-1 [7]
+   S5 j coeffs    PARTIAL[8]    pattern + L3 reduction    —
 
-일관성 판정
-   엔트리 1 (196883=47·4189)   ████████████████ PASS (산술 EXACT)
-   엔트리 2 (47 빈출 6/7)      ████████░░░░░░░░ 경계 (등급 관대)
-   엔트리 3 (supersingular=15) ████████████████ PASS (S4 동급)
+Consistency verdict
+   entry 1 (196883 = 47*4189)   ################ PASS (arithmetic EXACT)
+   entry 2 (47 freq 6/7)        ########........ boundary (grade generous)
+   entry 3 (supersingular = 15) ################ PASS (equal to S4)
 
-P9 보강 후 BT-18 종합 등급
-   P8 종료        ████████░░░░░░░░  8  PARTIAL
-   P9 보강        █████████░░░░░░░  8.5~9  PARTIAL+ (47 분리 포획 공로)
-   천장           ████████████████ 15
+BT-18 composite grade after P9 augmentation
+   P8 end         ########........  8  PARTIAL
+   P9 augmented   #########.......  8.5~9  PARTIAL+ (47-separation capture credit)
+   ceiling        ################ 15
 ```
 
 ---
 
-## 4. 감사 결과 요약
+## 4. Audit result summary
 
-- **일관성 PASS 2건** — 엔트리 1 (산술 EXACT), 엔트리 3 (S4 동급 사후매칭)
-- **경계 판정 1건** — 엔트리 2 (47 빈출 6/7, [8]→[7] 재고 여지). 단 description 에 한계 명시로 정직성 유지.
-- **종합**: P9 판정은 P8 기준 룰과 일관성 있으며, 자기참조 검증 원칙 준수. BT-18 종합 등급 [8] 유지 ("47 분리 포획" 공로로 내부 서술만 PARTIAL+).
+- **Consistency PASS, 2 entries** — entry 1 (arithmetic EXACT), entry 3 (post-hoc match equal to S4)
+- **Boundary verdict, 1 entry** — entry 2 (47 frequency 6/7, [8] -> [7] reconsideration possible). Description limits stated explicitly, honesty preserved.
+- **Overall**: P9 verdicts are consistent with P8 rule, self-reference verification principle upheld. BT-18 composite grade [8] preserved (internal narrative PARTIAL+ for "47-separation capture" credit).
 
-### 권고 사항
-1. **즉시 조치 불필요**. 엔트리 2 의 [8] 은 경계이나 description 보완으로 정직성 보존.
-2. **P11+ 예약**: 엔트리 2 의 47 빈출을 PROVEN 으로 승격하려면 ATLAS BM character table 의 47 출현을 군론적으로 설명하는 보조 정리 필요 (Ogg 1975 간접함의 → 직접 정리).
-3. **atlas.n6 변경 불필요** (description 에 "구조적 필연 증명 없음" 이미 명시).
-
----
-
-## 5. 정직 선언
-
-- 본 감사는 P8/P9 판정의 등급 매핑 일관성에 한정한다.
-- BT-18 L5 BARRIER 의 **완전 돌파 여부는 본 감사 범위 아님** — P10 Baby Monster 재도전은 **부분 포획** 임을 유지한다.
-- 47 의 n=6 공백 해명 부재는 P11+ 과제.
-- 본 감사 자체가 동일 팀 내부 감사 — 외부 독립 감사 권고 (Monster moonshine 전문가 Conway-Norton 계승 연구자).
+### Recommendations
+1. **No immediate action required**. Entry 2's [8] is a boundary case, but description augmentation preserves honesty.
+2. **P11+ reservation**: to promote entry 2's 47 frequency to DEMONSTRATED, a lemma is needed that explains the 47 appearance in the ATLAS BM character table group-theoretically (Ogg 1975 indirect implication -> direct theorem).
+3. **No atlas.n6 change required** ("no structural-necessity demonstration" already explicit in description).
 
 ---
 
-## 참고
+## 5. Honesty statement
 
-- atlas.n6 엔트리 line 9587~9592 (BT-18-L5-Baby\*, BT-18-L5-Supersingular\*)
-- 원 P8 barrier 문서: reports/breakthroughs/bt-18-moonshine-l5-barrier-2026-04-15.md
-- P9 재도전 문서: reports/breakthroughs/bt-18-baby-monster-p10-retry-2026-04-15.md
-- §6.4 논문 통합: papers/moonshine-barrier-honest-report-2026-04-15.md (line 633~696)
+- This audit is limited to the grade-mapping consistency of P8/P9 verdicts.
+- Full-break status of the BT-18 L5 BARRIER is **out of scope** — the P10 Baby Monster retry is preserved as **partial capture**.
+- Lack of explanation for 47's n=6 blank is a P11+ task.
+- This audit itself is an internal same-team audit — external independent audit recommended (researchers inheriting Monster Moonshine expertise a la Conway-Norton).
+
+---
+
+## Reference
+
+- atlas.n6 entry lines 9587~9592 (BT-18-L5-Baby\*, BT-18-L5-Supersingular\*)
+- Original P8 barrier document: reports/breakthroughs/bt-18-moonshine-l5-barrier-2026-04-15.md
+- P9 retry document: reports/breakthroughs/bt-18-baby-monster-p10-retry-2026-04-15.md
+- SS 6.4 paper integration: papers/moonshine-barrier-honest-report-2026-04-15.md (line 633~696)

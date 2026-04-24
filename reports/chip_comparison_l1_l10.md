@@ -1,105 +1,105 @@
 2026-04-12
-# 칩 L1~L10 통합 비교표
+# Chip L1~L10 integrated comparison
 
-> 소스: `domains/compute/chip-design/hexa-*.md` 12개 파일 실측 기반
-> 작성 원칙: 정직한 검증 (있는 그대로 보고, 과장 금지)
-> 칩 설계 파일 총 줄수: 14,190줄
-
----
-
-## 1. 전체 비교표
-
-```
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| 단계 | 아키텍처           | 게이트/뉴런            | 클럭/속도     | 전력     | n=6 매핑 | 천장    |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L1   | HEXA-1-DIGITAL     | 12x12=144 MAC          | 5nm ~2GHz     | Egyptian | sigma^2  | 2nm     |
-|      | 디지털 통합 SoC    | (sigma^2)              | tau=4 파이프   | 1/2+1/3  | =144 MAC | GAAFET  |
-|      |                    |                        | 라인           | +1/6=1   |          |         |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L2   | HEXA-2-PIM         | sigma=12 층 x          | HBM 내부      | Egyptian | sigma 층 | CXL 3.0 |
-|      | 메모리 내 연산     | 8 PIM/층 = 6144 MAC   | ~48 TB/s      | 48W 분배 | x8 PIM   | PIM     |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L3   | HEXA-3D-STACK      | n=6 층 TSV 적층        | TSV ~96TB/s   | Egyptian | n=6 층   | 분자    |
-|      | 3D 적층            | + 미세유체 냉각        | 수직 연결     | 3D 분배  |          | 자기조립|
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L4   | HEXA-PHOTONIC      | n=6 파장 WDM           | ~576 Tbps     | 광전력   | n 파장   | 전광학  |
-|      | 광자 인터커넥트    | sigma=12 채널 라우팅   | 광속 전송     | 분배     | sigma 채널|        |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L5   | HEXA-WAFER         | n^2=36 다이 타일       | ~2 PB/s       | Egyptian | n^2=36   | 양자-   |
-|      | 웨이퍼 스케일      | sigma=12 NoC 링크/타일 | 웨이퍼 전역   | 냉각 예산| 다이     | 웨이퍼  |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L6   | HEXA-SUPERCOND     | 6-JJ SFQ 게이트        | ~300 GHz      | 극저온   | n=6 JJ   | 상온    |
-|      | 초전도 SFQ         | sigma=12 JJ/게이트     | SFQ 클록      | 4.2 K    | sigma JJ | 초전도  |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L7   | HEXA-QUANTUM-HYB   | 6 큐비트 hexagonal     | surface code  | 극저온   | n 큐비트 | 위상    |
-|      | 양자-고전 혼합     | sigma=12 커플링        | d=6 에러정정  | 15 mK    | sigma 커플| 큐비트  |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L8   | HEXA-TOPO-ANYON    | n=6 anyon 편조그룹     | tau=4 편조    | 극저온   | n anyon  | 비가환  |
-|      | 위상 양자 anyon    | sigma=12 위상전하      | 깊이          | 2 mK     | tau 깊이 | 보편양자|
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L9a  | HEXA-FIELD-EFFECT  | n=6 장효과 격자        | 장모드 전파   | 극저온   | n 격자   | 보편    |
-|      | 장효과 컴퓨팅      | sigma=12 장모드 커플링 | tau=4 깊이    | 2 mK     | sigma 커플| 장효과  |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L9b  | HEXA-PHOTON-TOPO   | sigma=12 광 모드       | 광양자 융합   | 300K/2mK | sigma 모드| 6파장   |
-|      | 광양자 위상 융합   | phi=2 편광 큐비트      | 6 파장 WDM    | 이종     | phi 편광 | 광양자  |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L9c  | HEXA-NEUROMORPHIC  | n=6 뉴런 팬아웃        | 스파이크 타이밍| 상온/    | n 팬아웃 | 생물학적|
-|      | 뉴로모픽           | sigma=12 시냅스 비트   | tau=4 타이밍  | 28nm     | sigma 비트| 효율    |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-| L10  | HEXA-DNA-MOLECULAR | 6-염기쌍 코돈 단위     | 분자 반응     | 상온     | n 염기쌍 | in-vivo |
-|      | DNA/분자 컴퓨팅    | sigma=12 반응 웰       | tau=4 게이트  | 생화학   | sigma 웰 | 분자    |
-+------+--------------------+------------------------+---------------+----------+----------+---------+
-```
+> Source: empirical basis from 12 files `domains/compute/chip-design/hexa-*.md`
+> Principle: honest verification (report as-is, no exaggeration)
+> Chip-design file total line count: 14,190
 
 ---
 
-## 2. 검증 지표 비교표
+## 1. Overall comparison
 
 ```
-+------+--------------------+----------+--------+-----------+------------+----------+---------+
-| 단계 | 이름               | Rating   | EXACT  | DSE 조합  | 불가능정리 | 렌즈합의 | 동작온도|
-+------+--------------------+----------+--------+-----------+------------+----------+---------+
-| L1   | HEXA-1-DIGITAL     | 7/10     | 24/24  | 248,832   | 6개        | 11/22    | 상온    |
-| L2   | HEXA-2-PIM         | 8/10     | 26/26  | 1,327,104 | 6개        | 13/22    | 상온    |
-| L3   | HEXA-3D-STACK      | 9/10     | 42/42  | 7,962,624 | 12개       | 14/22    | 상온    |
-| L4   | HEXA-PHOTONIC      | 9/10     | 48/48  | 5,971,968 | 12개       | 14/22    | 상온    |
-| L5   | HEXA-WAFER         | 9/10     | 54/54  | 10,077,696| 12개       | 14/22    | 상온    |
-| L6   | HEXA-SUPERCOND     | 8/10     | 60/60  | 5,308,416 | 12개       | 14/22    | 4.2 K   |
-| L7   | HEXA-QUANTUM-HYB   | 7/10     | 66/66  | 5,308,416 | 12개       | 12/22    | 15 mK   |
-| L8   | HEXA-TOPO-ANYON    | 6/10     | 72/72  | 5,308,416 | 12개       | 10/22    | 2 mK    |
-| L9a  | HEXA-FIELD-EFFECT  | 5/10     | 78/78  | 5,308,416 | 12개       | 8/22     | 2 mK    |
-| L9b  | HEXA-PHOTON-TOPO   | 7/10     | 78/78  | 7,464,960 | 14개       | 12/22    | 300K/2mK|
-| L9c  | HEXA-NEUROMORPHIC  | 7/10     | 78/78  | 7,464,960 | 12개       | 10/22    | 상온    |
-| L10  | HEXA-DNA-MOLECULAR | 4/10     | 78/84  | 3,359,232 | 12개       | 8/22     | 상온    |
-+------+--------------------+----------+--------+-----------+------------+----------+---------+
-| 합계 |                    |          |704/710 |64,710,840 | 134개      |          |         |
-+------+--------------------+----------+--------+-----------+------------+----------+---------+
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| stage| architecture        | gates/neurons           | clock/speed    | power     | n=6 map   | ceiling  |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L1   | HEXA-1-DIGITAL     | 12x12=144 MAC          | 5nm ~2GHz      | Egyptian  | sigma^2   | 2nm     |
+|      | digital SoC        | (sigma^2)              | tau=4 pipe     | 1/2+1/3   | =144 MAC  | GAAFET  |
+|      |                    |                        | line           | +1/6=1    |           |         |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L2   | HEXA-2-PIM         | sigma=12 layers x      | HBM inside     | Egyptian  | sigma lyr | CXL 3.0 |
+|      | in-memory compute  | 8 PIM/layer = 6144 MAC | ~48 TB/s       | 48W split | x8 PIM    | PIM     |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L3   | HEXA-3D-STACK      | n=6 layer TSV stack    | TSV ~96TB/s    | Egyptian  | n=6 lyr   | molecular|
+|      | 3D stack           | + micro-fluid cooling  | vertical links | 3D split  |           | self-asmb|
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L4   | HEXA-PHOTONIC      | n=6 wavelength WDM     | ~576 Tbps      | photonic  | n wavlen  | all-opt  |
+|      | photonic interconn | sigma=12 channel route | optical tx     | split     | sigma ch  |          |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L5   | HEXA-WAFER         | n^2=36 die tiles       | ~2 PB/s        | Egyptian  | n^2=36    | quantum- |
+|      | wafer-scale        | sigma=12 NoC/tile      | wafer-wide     | cooling    | dies      | wafer   |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L6   | HEXA-SUPERCOND     | 6-JJ SFQ gate          | ~300 GHz       | cryo       | n=6 JJ    | RT      |
+|      | superconducting SFQ| sigma=12 JJ/gate       | SFQ clock      | 4.2 K      | sigma JJ  | supercond|
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L7   | HEXA-QUANTUM-HYB   | 6 qubit hexagonal      | surface code   | cryo       | n qubit   | topolog. |
+|      | quantum-classic hy | sigma=12 coupling      | d=6 err corr   | 15 mK      | sigma coup| qubit   |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L8   | HEXA-TOPO-ANYON    | n=6 anyon braid group  | tau=4 braid    | cryo       | n anyon   | non-abel|
+|      | topological anyon  | sigma=12 topological Q | depth          | 2 mK       | tau depth | univ QC |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L9a  | HEXA-FIELD-EFFECT  | n=6 field lattice      | field prop     | cryo       | n lattice | univ    |
+|      | field-effect comp. | sigma=12 field mode cp | tau=4 depth    | 2 mK       | sigma coup| field   |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L9b  | HEXA-PHOTON-TOPO   | sigma=12 optical modes | photon fusion  | 300K/2mK   | sigma mode| 6-wavelen|
+|      | photon-topo fusion | phi=2 polariz qubit    | 6-wavelen WDM  | hetero     | phi polar | photon   |
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L9c  | HEXA-NEUROMORPHIC  | n=6 neuron fanout      | spike timing   | room/      | n fanout  | bio      |
+|      | neuromorphic       | sigma=12 synapse bits  | tau=4 timing   | 28nm       | sigma bits| efficient|
++------+--------------------+------------------------+---------------+----------+----------+---------+
+| L10  | HEXA-DNA-MOLECULAR | 6-base-pair codon unit | molecular rxn  | room       | n bp      | in-vivo |
+|      | DNA/molecular comp | sigma=12 reaction well | tau=4 gate     | biochem    | sigma well| molecular|
++------+--------------------+------------------------+---------------+----------+----------+---------+
 ```
 
 ---
 
-## 3. ASCII 성능 비교 차트
-
-### 3-1. Rating (제품 성숙도)
+## 2. Verification-metric comparison
 
 ```
-L1  DIGITAL      |#######...         7/10  (5nm 양산 가능)
-L2  PIM          |########..         8/10  (Samsung/Hynix 1세대 출시)
-L3  3D-STACK     |#########.         9/10  (TSMC CoWoS 상용)
-L4  PHOTONIC     |#########.         9/10  (Intel 연구 단계)
-L5  WAFER        |#########.         9/10  (Cerebras 상용)
-L6  SUPERCOND    |########..         8/10  (IARPA SFQ 연구)
-L7  QUANTUM-HYB  |#######...         7/10  (IBM/Google 100+ 큐비트)
-L8  TOPO-ANYON   |######....         6/10  (Microsoft 연구 초기)
-L9a FIELD-EFF    |#####.....         5/10  (이론 단계)
-L9b PHOTON-TOPO  |#######...         7/10  (Xanadu/PsiQuantum 연구)
-L9c NEUROMORPHIC |#######...         7/10  (Intel Loihi 2세대)
-L10 DNA-MOLECUL  |####......         4/10  (대학 연구 초기)
++------+--------------------+----------+--------+-----------+------------+----------+---------+
+| stage| name               | Rating   | EXACT  | DSE combos| no-go thms  | lens cons | op temp |
++------+--------------------+----------+--------+-----------+------------+----------+---------+
+| L1   | HEXA-1-DIGITAL     | 7/10     | 24/24  | 248,832   | 6          | 11/22    | RT      |
+| L2   | HEXA-2-PIM         | 8/10     | 26/26  | 1,327,104 | 6          | 13/22    | RT      |
+| L3   | HEXA-3D-STACK      | 9/10     | 42/42  | 7,962,624 | 12         | 14/22    | RT      |
+| L4   | HEXA-PHOTONIC      | 9/10     | 48/48  | 5,971,968 | 12         | 14/22    | RT      |
+| L5   | HEXA-WAFER         | 9/10     | 54/54  | 10,077,696| 12         | 14/22    | RT      |
+| L6   | HEXA-SUPERCOND     | 8/10     | 60/60  | 5,308,416 | 12         | 14/22    | 4.2 K   |
+| L7   | HEXA-QUANTUM-HYB   | 7/10     | 66/66  | 5,308,416 | 12         | 12/22    | 15 mK   |
+| L8   | HEXA-TOPO-ANYON    | 6/10     | 72/72  | 5,308,416 | 12         | 10/22    | 2 mK    |
+| L9a  | HEXA-FIELD-EFFECT  | 5/10     | 78/78  | 5,308,416 | 12         | 8/22     | 2 mK    |
+| L9b  | HEXA-PHOTON-TOPO   | 7/10     | 78/78  | 7,464,960 | 14         | 12/22    | 300K/2mK|
+| L9c  | HEXA-NEUROMORPHIC  | 7/10     | 78/78  | 7,464,960 | 12         | 10/22    | RT      |
+| L10  | HEXA-DNA-MOLECULAR | 4/10     | 78/84  | 3,359,232 | 12         | 8/22     | RT      |
++------+--------------------+----------+--------+-----------+------------+----------+---------+
+| tot  |                    |          |704/710 |64,710,840 | 134        |          |         |
++------+--------------------+----------+--------+-----------+------------+----------+---------+
+```
+
+---
+
+## 3. ASCII performance comparison charts
+
+### 3-1. Rating (product maturity)
+
+```
+L1  DIGITAL      |#######...         7/10  (5nm mass-productionable)
+L2  PIM          |########..         8/10  (Samsung/Hynix 1st gen shipped)
+L3  3D-STACK     |#########.         9/10  (TSMC CoWoS commercial)
+L4  PHOTONIC     |#########.         9/10  (Intel research stage)
+L5  WAFER        |#########.         9/10  (Cerebras commercial)
+L6  SUPERCOND    |########..         8/10  (IARPA SFQ research)
+L7  QUANTUM-HYB  |#######...         7/10  (IBM/Google 100+ qubits)
+L8  TOPO-ANYON   |######....         6/10  (Microsoft early research)
+L9a FIELD-EFF    |#####.....         5/10  (theoretical stage)
+L9b PHOTON-TOPO  |#######...         7/10  (Xanadu/PsiQuantum research)
+L9c NEUROMORPHIC |#######...         7/10  (Intel Loihi gen 2)
+L10 DNA-MOLECUL  |####......         4/10  (early university research)
                   0    2    4    6    8   10
 ```
 
-### 3-2. EXACT 검증률
+### 3-2. EXACT verification rate
 
 ```
 L1  DIGITAL      |########################  24/24   100%
@@ -117,14 +117,14 @@ L10 DNA-MOLECUL  |#######################.  78/84   92.8%
                   0%       25%      50%      75%     100%
 ```
 
-### 3-3. DSE 탐색 공간 (조합 수)
+### 3-3. DSE exploration space (combination count)
 
 ```
 L1  DIGITAL      |##                                   248K
 L2  PIM          |######                               1.3M
 L3  3D-STACK     |####################                 8.0M
 L4  PHOTONIC     |###############                      6.0M
-L5  WAFER        |#########################            10.1M  <-- 최대
+L5  WAFER        |#########################            10.1M  <-- max
 L6  SUPERCOND    |#############                        5.3M
 L7  QUANTUM-HYB  |#############                        5.3M
 L8  TOPO-ANYON   |#############                        5.3M
@@ -135,7 +135,7 @@ L10 DNA-MOLECUL  |########                             3.4M
                   0M      2M      4M      6M      8M     10M
 ```
 
-### 3-4. 렌즈 합의 (22점 만점)
+### 3-4. Lens consensus (max 22)
 
 ```
 L1  DIGITAL      |###########...........   11/22
@@ -155,52 +155,52 @@ L10 DNA-MOLECUL  |########..............    8/22
 
 ---
 
-## 4. 진화 경로 (Mk.I -> Mk.V 한계)
+## 4. Evolution path (Mk.I -> Mk.V ceiling)
 
-| 단계 | Mk.I (현재 기술) | Mk.V (물리 한계) |
+| Stage | Mk.I (current tech) | Mk.V (physical ceiling) |
 |------|-------------------|-------------------|
-| L1 | 5nm CMOS 합성 가능 | 2nm GAAFET 한계 |
-| L2 | HBM3-PIM 기반 | CXL 3.0 + PIM 일체화 |
-| L3 | 6층 TSV 기본 적층 | 분자 자기조립 한계 |
-| L4 | 전기-광 하이브리드 | 전광학 한계 |
-| L5 | 36 다이 타일 기본 | 양자-웨이퍼 한계 |
-| L6 | Nb SFQ 4.2K | 상온 초전도 연산 한계 |
-| L7 | Transmon 6Q 15mK | 위상 큐비트 양자 이점 한계 |
-| L8 | Majorana 6다리 T접합 20mK | 비가환 anyon 보편 양자 연산 한계 |
-| L9a | 위상 장효과 트랜지스터 6채널 20mK | 보편 장효과 연산 한계 |
-| L9b | 극저온 광-위상 인터페이스 단일 모듈 | 6파장 광양자 보편 연산 한계 |
-| L9c | 6-팬아웃 뉴런 코어 CMOS 28nm | 생물학적 효율 한계 접근 |
-| L10 | strand displacement 4-게이트 반응기 상온 | in-vivo 분자 컴퓨터 물리 한계 |
+| L1 | 5nm CMOS synthesizable | 2nm GAAFET limit |
+| L2 | HBM3-PIM-based | CXL 3.0 + PIM integration |
+| L3 | 6-layer TSV basic stack | molecular self-assembly limit |
+| L4 | electro-optical hybrid | all-optical limit |
+| L5 | 36 die tiles baseline | quantum-wafer limit |
+| L6 | Nb SFQ 4.2K | room-temp superconducting computation limit |
+| L7 | Transmon 6Q 15mK | topological-qubit quantum-advantage limit |
+| L8 | Majorana 6-leg T-junction 20mK | non-abelian anyon universal QC limit |
+| L9a | topological field-effect transistor 6-channel 20mK | universal field-effect computation limit |
+| L9b | cryo photon-topology interface single module | 6-wavelength photonic-quantum universal computation limit |
+| L9c | 6-fanout neuron core CMOS 28nm | biological efficiency limit approach |
+| L10 | strand-displacement 4-gate reactor room temp | in-vivo molecular computer physical limit |
 
 ---
 
-## 5. n=6 구조 관통 상수
+## 5. n=6 structural-through constants
 
-모든 12개 설계 파일에 공통으로 등장하는 n=6 산술 구조:
+Common n=6 arithmetic structures across all 12 design files:
 
 ```
-n = 6             모든 레벨의 기본 단위 (MAC 크기, 층수, 파장수, 큐비트수, 다이수, 뉴런 팬아웃, 코돈)
-sigma(6) = 12     배선/채널/커플링/시냅스 비트/반응 웰 수
-tau(6) = 4        파이프라인/스테이지/깊이/타이밍
-phi(6) = 2        편극/채널/쌍/편광
-Egyptian 분배     1/2 + 1/3 + 1/6 = 1 (전력/냉각 예산 배분)
-R(6) = 1          sigma*phi / (n*tau) = 24/24 = 1 (가역 조건)
-J2(6) = 24        누적기 폭
-sopfr(6) = 5      보존법칙/파이프라인
+n = 6             basic unit across all levels (MAC size, layers, wavelengths, qubits, dies, neuron fanout, codons)
+sigma(6) = 12     wiring/channel/coupling/synaptic bits/reaction wells
+tau(6) = 4        pipeline/stage/depth/timing
+phi(6) = 2        polarization/channel/pair/polarization
+Egyptian split    1/2 + 1/3 + 1/6 = 1 (power/cooling budget partition)
+R(6) = 1          sigma*phi / (n*tau) = 24/24 = 1 (reversibility condition)
+J2(6) = 24        accumulator width
+sopfr(6) = 5      conservation-law / pipeline
 ```
 
 ---
 
-## 6. 총 통계
+## 6. Grand totals
 
-| 항목 | 실측 |
+| Item | Measured |
 |------|-----:|
-| 칩 설계 파일 수 | 12개 .md + 1개 비교표 |
-| 총 줄수 | 14,190줄 |
-| 총 BT EXACT | 704/710 (99.2%) |
-| 총 DSE 조합 | 64,710,840 |
-| 총 불가능성 정리 | 134개 |
-| 평균 렌즈 합의 | 11.8/22 |
+| Chip-design file count | 12 .md + 1 comparison |
+| Total lines | 14,190 |
+| Total BT EXACT | 704/710 (99.2%) |
+| Total DSE combinations | 64,710,840 |
+| Total no-go theorems | 134 |
+| Average lens consensus | 11.8/22 |
 
-> L1~L9: 전 단계 100% EXACT. L10만 92.8% (TIGHT 6건 존재).
-> 본 비교표 종료.
+> L1~L9: 100% EXACT across all stages. Only L10 is at 92.8% (6 TIGHT cases).
+> End of comparison.

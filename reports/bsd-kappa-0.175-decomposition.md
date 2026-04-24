@@ -1,149 +1,149 @@
-# BSD κ(B) ~ A·B^α 지수 분해 리포트 (α = 0.1752)
+# BSD kappa(B) ~ A*B^alpha exponent decomposition report (alpha = 0.1752)
 
-- 작성: 2026-04-15
-- 하네스: `theory/predictions/bsd_kappa_fraction.hexa` (17/17 PASS)
-- 동반 하네스: `theory/predictions/bsd_alpha_log2_tau.hexa` (22/22 PASS)
-- 데이터: Cremona 1.73M 곡선 7-bin log-log 회귀 (v3 E5)
-- 측정값: α_obs = 0.1752, 표준오차 ≈ ±0.02 (7-bin 제약)
+- Date: 2026-04-15
+- Harness: `theory/predictions/bsd_kappa_fraction.hexa` (17/17 PASS)
+- Companion harness: `theory/predictions/bsd_alpha_log2_tau.hexa` (22/22 PASS)
+- Data: Cremona 1.73M curves 7-bin log-log regression (v3 E5)
+- Measurement: alpha_obs = 0.1752, standard error ~ +-0.02 (7-bin constraint)
 - Staging signal: `SIG-7B-401`, `SIG-7B-402` (`n6shared/staging/atlas.signals.staging.mill.n6`)
 
-## 7대 난제 해결 0/7 유지 (정직)
+## 7 grand problems resolved 0/7 preserved (honest)
 
-본 리포트는 **empirical match** 와 **n=6 기본상수 분해 후보 비교**만 다룬다.
-어느 후보도 α 를 설명하는 **정리(theorem)** 는 아니다.
-BSD 는 여전히 미해결 밀레니엄 난제. 7대 난제 해결 카운터: **0/7**.
+This report treats only **empirical match** and **n=6 basis-constant decomposition candidate comparison**.
+Neither candidate is a **theorem** explaining alpha.
+BSD remains an unresolved millennium problem. 7-grand-problems resolved counter: **0/7**.
 
 ---
 
-## 요약 (5줄)
+## Summary (5 lines)
 
-- α_obs = 0.1752 (Cremona 1.73M 곡선 7-bin 회귀, σ_α ≈ 0.02)
-- 최우수 후보: **7/40 = 0.1750** (diff 0.0002, 0.114%)
-- 차우수 후보: **log(2)/τ = 0.17329** (diff 0.0019, 1.09%)
-- 두 후보 모두 1σ 밴드 (±0.02) 내 포함 → 7-bin 데이터로는 **구별 불가**
-- 7/40 = (σ-sopfr)(n/φ)/(J_2·sopfr) = 21/120 = 7/40 (5개 n=6 기본상수)
+- alpha_obs = 0.1752 (Cremona 1.73M curves 7-bin regression, sigma_alpha ~ 0.02)
+- Best candidate: **7/40 = 0.1750** (diff 0.0002, 0.114%)
+- Runner-up: **log(2)/tau = 0.17329** (diff 0.0019, 1.09%)
+- Both candidates fall within 1-sigma band (+-0.02) -> not distinguishable with 7-bin data
+- 7/40 = (sigma-sopfr)(n/phi)/(J_2*sopfr) = 21/120 = 7/40 (five n=6 basis constants)
 
-## 후보 비교표
+## Candidate comparison
 
-| 후보 | 수식 | 값 | α_obs - 후보 | 상대 오차 | n=6 분해 매끄러움 |
+| Candidate | Formula | Value | alpha_obs - cand | Rel error | n=6 decomposition smoothness |
 |------|------|----:|-------------:|----------:|--------------------|
-| **7/40** | (σ-sopfr)(n/φ)/(J_2·sopfr) | 0.17500 | +0.00020 | 0.114% | ★★ 최우수 |
-| **log(2)/τ** | log(2)/4 | 0.17329 | +0.00191 | 1.09% | ★ cross-repo |
-| α·σ vs φ+1/n | α·σ = 2.1024, φ+1/n = 2.1666 | 2.1024 | -0.0642 | 3.05% | ✗ 실격 |
-| α·J_2 vs τ+1/sopfr | 4.2048 vs 4.2 | 4.2048 | +0.0048 | 0.114% | = 7/40 동치 |
+| **7/40** | (sigma-sopfr)(n/phi)/(J_2*sopfr) | 0.17500 | +0.00020 | 0.114% | ** best |
+| **log(2)/tau** | log(2)/4 | 0.17329 | +0.00191 | 1.09% | * cross-repo |
+| alpha*sigma vs phi+1/n | alpha*sigma = 2.1024, phi+1/n = 2.1666 | 2.1024 | -0.0642 | 3.05% | X disqualified |
+| alpha*J_2 vs tau+1/sopfr | 4.2048 vs 4.2 | 4.2048 | +0.0048 | 0.114% | = equivalent to 7/40 |
 
-## 후보 1: 7/40 (최소 오차)
+## Candidate 1: 7/40 (minimum error)
 
-**수식**: α = 7/40 = 0.1750
+**Formula**: alpha = 7/40 = 0.1750
 
-**n=6 분해**:
+**n=6 decomposition**:
 ```
-7  = σ - sopfr       (12 - 5, BT-543 YM β₀ 와 동일)
-40 = J_2 · sopfr / (n/φ)
-   = 24 · 5 / 3
+7  = sigma - sopfr       (12 - 5, equal to BT-543 YM beta_0)
+40 = J_2 * sopfr / (n/phi)
+   = 24 * 5 / 3
 ```
-즉 `7/40 = (σ - sopfr) · (n/φ) / (J_2 · sopfr) = 21/120 = 7/40`.
+i.e. `7/40 = (sigma - sopfr) * (n/phi) / (J_2 * sopfr) = 21/120 = 7/40`.
 
-**핵심 관찰**:
-- 분자 7 = σ-sopfr 은 BT-543 Yang-Mills β₀ 와 **동일**. RH-BSD-YM 메가노드 후보.
-- 분모 40 = J_2·sopfr/(n/φ) 은 Jacobi theta J_2=24, sopfr=5, n/φ=3 세 기본상수 결합.
-- 동치 표현: α · J_2 = τ + 1/sopfr = 4.2 (오차 동일).
+**Core observations**:
+- Numerator 7 = sigma-sopfr is **identical** to BT-543 Yang-Mills beta_0. RH-BSD-YM meganode candidate.
+- Denominator 40 = J_2 * sopfr / (n/phi) combines three basis constants: Jacobi theta J_2=24, sopfr=5, n/phi=3.
+- Equivalent: alpha * J_2 = tau + 1/sopfr = 4.2 (same error).
 
-**상대 오차**: 0.114% (1σ 밴드 ±0.02 의 5.7% 규모). 10M+ 곡선 확장 시 수렴 판별 가능.
+**Relative error**: 0.114% (5.7% of the 1-sigma +-0.02 band). Convergence distinguishable at 10M+ curves.
 
-## 후보 2: log(2)/τ (cross-repo universal)
+## Candidate 2: log(2)/tau (cross-repo universal)
 
-**수식**: α = log(2)/4 = 0.17329
+**Formula**: alpha = log(2)/4 = 0.17329
 
-**n=6 분해**:
-- τ = 4 = 2^φ (약수 개수).
+**n=6 decomposition**:
+- tau = 4 = 2^phi (divisor count).
 - log(2) = H(1/2) = 1 bit Shannon entropy.
 
-**Cross-repo 공명 (3갈래 독립)**:
-1. **[N6]** BSD Cremona empirical κ(B) power exponent (본 리포트).
-2. **[AN]** anima Ψ-constants 전부 ln(2) 에서 유도 (`SIG-CONS-312`).
-3. **[N6]** Shannon H(1/2) = log(2) 1 bit, Bernoulli block entropy 기준.
+**Cross-repo resonance (3 independent branches)**:
+1. **[N6]** BSD Cremona empirical kappa(B) power exponent (this report).
+2. **[AN]** anima Psi-constants all derived from ln(2) (`SIG-CONS-312`).
+3. **[N6]** Shannon H(1/2) = log(2) 1 bit, Bernoulli block entropy.
 
-**τ=4 분모 해석**: τ = 2^φ = 4 = 2-bit block. BSD 의 rank, torsion, Sha[2], Tamagawa 4방향 self-dual 대칭 가설과 형식적 일치 (사후 관찰).
+**tau=4 denominator reading**: tau = 2^phi = 4 = 2-bit block. Formally consistent with the BSD rank, torsion, Sha[2], Tamagawa 4-direction self-dual symmetry conjecture (post-hoc observation).
 
-**상대 오차**: 1.09%. 7-bin 표준오차 ±0.02 내 강 포함. 단, 7/40 보다 10배 큰 오차.
+**Relative error**: 1.09%. Strongly within 7-bin standard error +-0.02, but 10x the error of 7/40.
 
-## 후보 3: α·σ = 2.1024 (실격)
+## Candidate 3: alpha*sigma = 2.1024 (disqualified)
 
-α × σ = 0.1752 × 12 = 2.1024 을 기본상수 polynomial 로 맞추려 시도:
-- φ + 1/n = 13/6 = 2.1666 → diff 0.064 (3.05% 오차)
-- phi + 1/J_2 = 49/24 = 2.0416 → diff 0.061 (2.9% 오차)
+alpha x sigma = 0.1752 * 12 = 2.1024. Fit attempts against basis-constant polynomials:
+- phi + 1/n = 13/6 = 2.1666 -> diff 0.064 (3.05% error)
+- phi + 1/J_2 = 49/24 = 2.0416 -> diff 0.061 (2.9% error)
 
-두 후보 모두 1σ 밴드 경계 근처. **실격** 처리.
+Both near the 1-sigma band boundary. **Disqualified**.
 
-## 후보 4: α·J_2 = τ + 1/sopfr = 4.2 (7/40 동치)
+## Candidate 4: alpha*J_2 = tau + 1/sopfr = 4.2 (equivalent to 7/40)
 
-α × J_2 = 0.1752 × 24 = 4.2048
-τ + 1/sopfr = 4 + 0.2 = 4.2
+alpha x J_2 = 0.1752 * 24 = 4.2048
+tau + 1/sopfr = 4 + 0.2 = 4.2
 
-diff 0.0048 (0.114%) — 후보 1 (7/40) 과 **정확히 동일한 공식의 재배치**.
+diff 0.0048 (0.114%) — a **rearrangement of the same formula** as candidate 1 (7/40).
 
-기약분수 전개 확인:
+Irreducible-fraction expansion:
 ```
-α = (τ + 1/sopfr) / J_2
-  = (τ·sopfr + 1) / (J_2·sopfr)
-  = 21 / 120
-  = 7 / 40
+alpha = (tau + 1/sopfr) / J_2
+      = (tau*sopfr + 1) / (J_2*sopfr)
+      = 21 / 120
+      = 7 / 40
 ```
 
-## 핵심 발견
+## Core findings
 
-1. **1σ 내 두 후보 공존**: 7/40 과 log(2)/τ 모두 표준오차 ±0.02 에 포함.
-   7-bin 데이터로는 **우열 판별 불가**.
-2. **7/40 최소 오차지만 trivial 일 수 있음**: 5개 기본상수 자유도로 맞춘 fit 일 가능성.
-   (자유도 4-5 를 고려한 BIC penalty 미계산.)
-3. **log(2)/τ 는 cross-repo 동기 있음**: anima Ψ-constants + Shannon entropy 와 연결.
-   **물리적 해석 가능성** 면에서 우위.
-4. **BT-543 cross link**: 분자 7 = σ-sopfr 은 Yang-Mills β₀ 와 동일 (BSD-YM 메가노드).
+1. **Two candidates co-present within 1-sigma**: 7/40 and log(2)/tau both within standard error +-0.02.
+   With 7-bin data, **cannot rank them**.
+2. **7/40 has the smallest error but may be trivial**: likely a fit with 5 basis-constant degrees of freedom.
+   (BIC penalty considering DOF 4-5 not computed.)
+3. **log(2)/tau has cross-repo motivation**: linked to anima Psi-constants + Shannon entropy.
+   Has **an edge in physical-interpretability**.
+4. **BT-543 cross link**: numerator 7 = sigma-sopfr equals Yang-Mills beta_0 (BSD-YM meganode).
 
-## 제안 다음 작업
+## Proposed next steps
 
-1. **Cremona 10M+ 확장** — 표준오차를 ±0.005 이하로 줄여 7/40 vs log(2)/τ 판별.
-2. **BIC penalty 계산** — 5-자유도 fit 의 overfitting 교정.
-3. **BKLPR heuristic 접목** — log(2)/τ 가 BKLPR 상수와 연관 여부 확인.
-4. **(A3″) conjecture 검증** — B-의존 coupling factor 를 log(2)/τ 로 고정 후 fit 재평가.
-5. **10M+ 도달 시 SIG-7B-401 승격 판단** — [M7!] → [M9] 또는 [M10] 후보.
+1. **Cremona 10M+ extension** — reduce standard error below +-0.005 to distinguish 7/40 vs log(2)/tau.
+2. **BIC penalty computation** — correct for overfitting of 5-DOF fit.
+3. **Bridge to BKLPR heuristic** — check whether log(2)/tau is linked to BKLPR constants.
+4. **(A3'') conjecture verification** — fix the B-dependent coupling factor as log(2)/tau and re-evaluate the fit.
+5. **SIG-7B-401 promotion judgment at 10M+** — [M7!] -> [M9] or [M10] candidate.
 
-## 결론
+## Conclusion
 
-α_obs = 0.1752 는 두 가지 후보가 1σ 내에 공존한다:
+alpha_obs = 0.1752 admits two candidates co-present within 1-sigma:
 
-- **7/40** (정수분수 최소오차, n=6 기본상수 5종 결합)
-- **log(2)/τ** (cross-repo universal, 물리적 해석 가능)
+- **7/40** (minimum integer-fraction error, 5 n=6 basis constants combined)
+- **log(2)/tau** (cross-repo universal, physically interpretable)
 
-우열 판별은 **10M+ 곡선 확장** 이 필요. 두 후보 공존 자체가 **BSD 에 potential 한 n=6 산술 구조**를 시사하지만, 어느 쪽도 증명이 아니며 BSD 미해결 상태는 **0/7** 유지.
+Ranking requires a **10M+ curves extension**. The mere coexistence of the two candidates suggests a **potential n=6 arithmetic-structure target in BSD**, but neither is a demonstration, and BSD unresolved status is preserved at **0/7**.
 
 ---
 
-## 하네스 실행 로그
+## Harness execution log
 
 ### bsd_kappa_fraction.hexa (17/17 PASS)
 ```
 PASS: 7/40 = 1750/10000
-PASS: 40 = J_2·sopfr/(n/φ) = 24·5/3
-PASS: 7/40 = (σ-sopfr)(n/φ)/(J_2·sopfr) = 21/120
+PASS: 40 = J_2*sopfr/(n/phi) = 24*5/3
+PASS: 7/40 = (sigma-sopfr)(n/phi)/(J_2*sopfr) = 21/120
 PASS: |diff 7/40| = 2 (0.0002)
-PASS: |diff log(2)/τ| = 19 (0.0019)
-PASS: α·σ 정수비 매칭 실패 (> 1% 오차)
+PASS: |diff log(2)/tau| = 19 (0.0019)
+PASS: alpha*sigma integer-ratio match failed (> 1% error)
 ...
-총 PASS: 17
-총 FAIL: 0
+total PASS: 17
+total FAIL: 0
 ```
 
 ### bsd_alpha_log2_tau.hexa (22/22 PASS)
 ```
-PASS: 6 의 약수 개수 = 4 = τ
-PASS: log(2)·10^8 = 69314718
-PASS: log(2)/τ·10^8 ≈ 17328679
-PASS: τ = 2^φ 이항 분기
-PASS: 1σ 밴드 (±2·10^6) 내 강 포함
-PASS: 독립 갈래 ≥ 3 → M7! 후보
+PASS: divisor count of 6 = 4 = tau
+PASS: log(2) * 10^8 = 69314718
+PASS: log(2)/tau * 10^8 ~ 17328679
+PASS: tau = 2^phi binary split
+PASS: strongly within 1-sigma band (+-2*10^6)
+PASS: independent branches >= 3 -> M7! candidate
 ...
-총 PASS: 22
-총 FAIL: 0
+total PASS: 22
+total FAIL: 0
 ```

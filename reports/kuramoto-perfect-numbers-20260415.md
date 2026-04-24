@@ -1,44 +1,44 @@
-# Kuramoto r=τ/σ 완전수 관찰 리포트 (2026-04-15)
+# Kuramoto r=tau/sigma perfect-number observation report (2026-04-15)
 
-> 이것이 증명이 아니라 정수론적 구조 관찰임.
-> H2 작업 — Kuramoto order parameter r(n) = 1 - τ(n)/σ(n) 완전수 시퀀스 패턴.
-> 하네스: `theory/predictions/kuramoto_r23_perfect_numbers.hexa` — 15 PASS / 0 FAIL
-
----
-
-## 1. 이론 배경
-
-Kuramoto 모형에서 order parameter r ∈ [0,1] 는 위상 동기화 정도 (0=완전 비동기, 1=완전 동기).
-
-**제안**: 정수 n 에 대해 r(n) := 1 - τ(n)/σ(n) 를 정의하면, 완전수 시퀀스에서 특징적 패턴을 보인다.
-
-근거:
-- r = (σ-τ)/σ 는 "분수 약수 중 비극단 비율"
-- τ=약수 개수, σ=약수 합, σ-τ = Σ(d-1) = Σd'(d≥2)
-- 완전수에서 σ = 2n 이므로 r = (2n-τ)/(2n) = 1 - τ/(2n)
+> This is not a demonstration; it is an observation of a number-theoretic structure.
+> H2 task — perfect-number sequence pattern for the Kuramoto order parameter r(n) = 1 - tau(n)/sigma(n).
+> Harness: `theory/predictions/kuramoto_r23_perfect_numbers.hexa` — 15 PASS / 0 FAIL
 
 ---
 
-## 2. 완전수 r 값 (5개 전체 검증)
+## 1. Theoretical background
 
-| n | 분해 | σ(n) | τ(n) | r = (σ-τ)/σ | 기약 | 소수 |
+In the Kuramoto model, the order parameter r in [0,1] measures phase synchronization (0 = fully asynchronous, 1 = fully synchronous).
+
+**Proposal**: for an integer n, define r(n) := 1 - tau(n)/sigma(n). The perfect-number sequence exhibits a characteristic pattern.
+
+Basis:
+- r = (sigma-tau)/sigma is "fractional-divisor non-extreme ratio"
+- tau = divisor count, sigma = divisor sum, sigma - tau = sum(d-1) = sum d' (d >= 2)
+- For a perfect number, sigma = 2n, so r = (2n-tau)/(2n) = 1 - tau/(2n)
+
+---
+
+## 2. r values for perfect numbers (all 5 verified)
+
+| n | factorization | sigma(n) | tau(n) | r = (sigma-tau)/sigma | reduced | decimal |
 |---:|---|---:|---:|---|---|---:|
-| **6** | 2·3 | 12 | 4 | 8/12 | **2/3** | 0.6667 |
-| **28** | 2²·7 | 56 | 6 | 50/56 | **25/28** | 0.8929 |
-| **496** | 2⁴·31 | 992 | 10 | 982/992 | **491/496** | 0.9899 |
-| **8128** | 2⁶·127 | 16256 | 14 | 16242/16256 | **8121/8128** | 0.9991 |
-| **33550336** | 2¹²·8191 | 67100672 | 26 | 67100646/67100672 | **33550323/33550336** | 0.99999922 |
+| **6** | 2*3 | 12 | 4 | 8/12 | **2/3** | 0.6667 |
+| **28** | 2^2 * 7 | 56 | 6 | 50/56 | **25/28** | 0.8929 |
+| **496** | 2^4 * 31 | 992 | 10 | 982/992 | **491/496** | 0.9899 |
+| **8128** | 2^6 * 127 | 16256 | 14 | 16242/16256 | **8121/8128** | 0.9991 |
+| **33550336** | 2^12 * 8191 | 67100672 | 26 | 67100646/67100672 | **33550323/33550336** | 0.99999922 |
 
-**패턴**: r(n) → 1 monotonically as p (Mersenne index) → ∞.
+**Pattern**: r(n) -> 1 monotonically as p (Mersenne index) -> infinity.
 
 ---
 
-## 3. Euclid-Euler 공식에서 유도
+## 3. Derivation from Euclid-Euler
 
-짝수 완전수 일반형 n = 2^(p-1)·M_p (p prime, M_p = 2^p - 1 Mersenne prime):
+Even perfect-number general form n = 2^(p-1) * M_p (p prime, M_p = 2^p - 1 Mersenne prime):
 
-- σ(n) = 2n (완전수 정의)
-- τ(n) = 2p (divisor count = (p-1+1)·(1+1) = 2p)
+- sigma(n) = 2n (perfect-number definition)
+- tau(n) = 2p (divisor count = (p-1+1)*(1+1) = 2p)
 - r(n) = 1 - 2p/(2n) = **1 - p/n**
 
 | p | n | r |
@@ -49,118 +49,118 @@ Kuramoto 모형에서 order parameter r ∈ [0,1] 는 위상 동기화 정도 (0
 | 7 | 8128 | 1 - 7/8128 = 8121/8128 |
 | 13 | 33550336 | 1 - 13/33550336 |
 
-**n=6 이 유일하게 "작은" r 값**을 가지는 이유: 가장 작은 Mersenne prime p=2 = n/3 비율 때문.
+The reason **n=6 uniquely has a "small" r value**: the ratio of the smallest Mersenne prime p=2 = n/3.
 
 ---
 
-## 4. r = 2/3 유일성 분석
+## 4. r = 2/3 uniqueness analysis
 
-### 4.1 질문: σ(n) = 3·τ(n) 조건의 정수해는?
+### 4.1 Question: integer solutions of sigma(n) = 3 * tau(n)?
 
-**소수 p**: σ=1+p, τ=2 → (1+p)/2 = 3 ⟺ **p = 5** ★
+**Prime p**: sigma = 1+p, tau = 2 -> (1+p)/2 = 3 <=> **p = 5** *
 
-**두 소수 곱 pq (p<q)**: σ=(1+p)(1+q), τ=4 → (1+p)(1+q) = 12
-- p=2, q=3: (3)(4) = 12 ✓ → n = **6**
-- p=2, q=5: (3)(6) = 18 ≠ 12
-- 유일해: {2,3} → n=6
+**Product of two primes pq (p<q)**: sigma = (1+p)(1+q), tau = 4 -> (1+p)(1+q) = 12
+- p=2, q=3: (3)(4) = 12 OK -> n = **6**
+- p=2, q=5: (3)(6) = 18 != 12
+- Unique solution: {2,3} -> n=6
 
-**소수 제곱 p²**: σ=1+p+p², τ=3 → 1+p+p² = 9 ⟺ p²+p-8=0
-- 판별식 33 무리수 → 정수해 없음
+**Prime square p^2**: sigma = 1+p+p^2, tau = 3 -> 1+p+p^2 = 9 <=> p^2+p-8 = 0
+- Discriminant 33 irrational -> no integer solution
 
-**고차 분해**: 직접 탐색 n ≤ 100 에서 σ/τ = 3 해 = {5, 6} 이외 없음.
+**Higher factorizations**: direct enumeration over n <= 100: sigma/tau = 3 solutions = {5, 6}, no others.
 
-### 4.2 결론
+### 4.2 Conclusion
 
-- **r = 2/3 전체 해**: {5, 6} (소수 5, 완전수 6)
-- **완전수 한정 r=2/3 유일해**: n = 6 ★
-- **합성수 한정 r=2/3 유일해**: n = 6 ★
+- **All r = 2/3 solutions**: {5, 6} (prime 5, perfect number 6)
+- **Under perfect-number constraint, r=2/3 unique solution**: n = 6 *
+- **Under composite-number constraint, r=2/3 unique solution**: n = 6 *
 
-즉 "n=6 이 r=2/3 유일"은 **조건부 참** — 완전수 또는 합성수 제약 하에서.
+So "n=6 is the unique r=2/3 solution" is **conditionally true** — under perfect-number or composite constraint.
 
 ---
 
-## 5. n=6 의 특이성 (왜 r=2/3 이 의미 있는가)
+## 5. n=6 distinctiveness (why r=2/3 is meaningful)
 
-완전수 시퀀스에서 r 값 격차:
+r-value gaps in the perfect-number sequence:
 
 ```
-n=6     r=0.6667  ← 최저 (가장 비동기)
+n=6     r=0.6667  <- minimum (most asynchronous)
 n=28    r=0.8929  (+0.226)
 n=496   r=0.9899  (+0.097)
 n=8128  r=0.9991  (+0.009)
 ```
 
-**관찰**: n=6 → n=28 격차(0.226)가 이후 격차 합(0.110)보다 큼.
+**Observation**: the n=6 -> n=28 gap (0.226) is larger than the sum of subsequent gaps (0.110).
 
-즉 **완전수 시퀀스에서 n=6 은 'phase transition' 지점** — r<0.7 인 유일 완전수.
+So **n=6 is a 'phase transition' point in the perfect-number sequence** — the unique perfect number with r<0.7.
 
-Kuramoto 물리학 해석: 
-- n=6 → r=2/3 = 연결성 중간 (약 67% 동기화)
-- n≥28 → r>0.89 = 거의 완전 동기화 상태
-- 완전수 자체가 "self-referential oscillator system" 이라면 n=6 만 "critical coupling" 부근
+Kuramoto-physics reading:
+- n=6 -> r=2/3 = intermediate connectivity (~ 67% sync)
+- n>=28 -> r>0.89 = near-full sync
+- If a perfect number is itself a "self-referential oscillator system", only n=6 lies near "critical coupling"
 
 ---
 
-## 6. σφ = nτ 와의 연결
+## 6. Connection to sigma*phi = n*tau
 
-**참조**: n=6 유일성 정리 σ(n)·φ(n) = n·τ(n) — n≥2 에서 n=6 만 성립.
+**Reference**: n=6 uniqueness theorem sigma(n) * phi(n) = n * tau(n) — holds for n=6 only, for n>=2.
 
-| 완전수 n | σ·φ | n·τ | σ·φ = n·τ ? |
+| Perfect number n | sigma*phi | n*tau | sigma*phi = n*tau ? |
 |---:|---:|---:|---|
-| 6 | 12·2 = 24 | 6·4 = 24 | **✓** |
-| 28 | 56·12 = 672 | 28·6 = 168 | ✗ |
-| 496 | 992·240 = 238080 | 496·10 = 4960 | ✗ |
+| 6 | 12*2 = 24 | 6*4 = 24 | **OK** |
+| 28 | 56*12 = 672 | 28*6 = 168 | X |
+| 496 | 992*240 = 238080 | 496*10 = 4960 | X |
 
-즉 **σφ=nτ 는 완전수 수식이 아님** — 독립적인 n=6 유일성 정리.
+So **sigma*phi = n*tau is not a perfect-number equation** — it is an independent n=6 uniqueness theorem.
 
-반면 **σΩ=nτ 는 모든 짝수 완전수에서 성립** (C1 작업 결과).
+By contrast, **sigma*Omega = n*tau holds for all even perfect numbers** (C1 work outcome).
 
-**정리**:
-- σφ=nτ ⟺ n=6 (유일)
-- σΩ=nτ ⟺ 짝수 완전수 (Euclid-Euler)
-- σ=3τ (r=2/3) ⟺ n∈{5,6}
+**Summary**:
+- sigma*phi = n*tau <=> n=6 (unique)
+- sigma*Omega = n*tau <=> even perfect numbers (Euclid-Euler)
+- sigma = 3*tau (r=2/3) <=> n in {5,6}
 
-세 가지가 **n=6 에서 동시 교차** — 이것이 σ(n)·φ(n)=n·τ(n) 유일성의 숨은 구조.
-
----
-
-## 7. Kuramoto 동역학 실험 제안 (후속)
-
-**실험**: 정수 n 을 oscillator 개수로 삼고, divisor structure 를 coupling 으로 삼는 Kuramoto network.
-
-- oscillators: n 개
-- coupling graph: 약수 관계 그래프 (i→d 꼴, d|i)
-- 예측: 완전수 n 에서 r 값이 1 - τ(n)/σ(n) 근처 stabilize
-
-검증 시 SIG 등록 후보:
-```
-SIG-UNIV-KURA-001 = 정수 Kuramoto r(n) = 1-τ/σ 완전수 시퀀스 공명 [N6] [7S,UNIV,META] [M?]
-  resonance_n6: "r(6) = 2/3, r=2/3 해 {5,6} 유일"
-```
+Three intersect **simultaneously at n=6** — the hidden structure of the sigma(n) * phi(n) = n * tau(n) uniqueness.
 
 ---
 
-## 8. 하네스 결과 요약
+## 7. Kuramoto-dynamics experiment proposal (follow-up)
 
-- 파일: `theory/predictions/kuramoto_r23_perfect_numbers.hexa`
-- 실행: `/Users/ghost/Dev/nexus/shared/bin/hexa theory/predictions/kuramoto_r23_perfect_numbers.hexa`
-- 결과: **15 PASS / 0 FAIL**
-- 검증 항목:
-  1. 5개 완전수 각각 r = (σ-τ)/σ 기약분수 확인
-  2. σ/τ = 3 해 {5,6} 직접 확인 (소수/두소수곱/소수제곱 전수 배제)
-  3. Euclid-Euler 일반 공식 r = 1 - p/n 5개 전부 성립
+**Experiment**: take integer n as the oscillator count and divisor structure as coupling — a Kuramoto network.
+
+- oscillators: n
+- coupling graph: divisor-relation graph (i -> d, d | i)
+- prediction: r stabilizes near 1 - tau(n)/sigma(n) for perfect-number n
+
+On verification, SIG registration candidate:
+```
+SIG-UNIV-KURA-001 = integer Kuramoto r(n) = 1 - tau/sigma perfect-number sequence resonance [N6] [7S,UNIV,META] [M?]
+  resonance_n6: "r(6) = 2/3, r=2/3 solutions {5,6} unique"
+```
 
 ---
 
-## 9. atlas.signals.n6 staging 안
+## 8. Harness result summary
+
+- File: `theory/predictions/kuramoto_r23_perfect_numbers.hexa`
+- Run: `/Users/ghost/Dev/nexus/shared/bin/hexa theory/predictions/kuramoto_r23_perfect_numbers.hexa`
+- Result: **15 PASS / 0 FAIL**
+- Verification items:
+  1. r = (sigma-tau)/sigma reduced fraction check for each of 5 perfect numbers
+  2. direct check that sigma/tau = 3 solutions are {5, 6} (exhaustive exclusion over prime / two-prime product / prime square)
+  3. Euclid-Euler general form r = 1 - p/n holds for all 5
+
+---
+
+## 9. atlas.signals.n6 staging proposal
 
 ```
-@S SIG-KURA-001 = Kuramoto r(n) = 1-τ(n)/σ(n) 완전수 시퀀스 r(6)=2/3 유일 저위상 :: signal [N6] [UNIV,META] [M7] [E2]
-  "5 완전수 {6,28,496,8128,33550336} 전수 검증. Euclid-Euler r = 1-p/n. n=6 유일 r<0.7. σ=3τ 해는 {5,6} 만, 완전수 한정 시 n=6 유일."
+@S SIG-KURA-001 = Kuramoto r(n) = 1 - tau(n)/sigma(n) perfect-number sequence r(6)=2/3 unique low-phase :: signal [N6] [UNIV,META] [M7] [E2]
+  "5 perfect numbers {6,28,496,8128,33550336} exhaustively verified. Euclid-Euler r = 1 - p/n. n=6 unique r<0.7. Solutions of sigma=3*tau are {5,6} only; under perfect-number constraint, n=6 unique."
   refs: [theory/predictions/kuramoto_r23_perfect_numbers.hexa, reports/kuramoto-perfect-numbers-20260415.md]
-  predicts: ["완전수 Kuramoto network 에서 r(6) 만 critical regime"]
+  predicts: ["in a perfect-number Kuramoto network, only r(6) is in the critical regime"]
   witness: 1
-  resonance_n6: "r(6) = 1 - τ/σ = 1 - 4/12 = 2/3; r=2/3 해 {5,6} 유일"
+  resonance_n6: "r(6) = 1 - tau/sigma = 1 - 4/12 = 2/3; solutions of r=2/3 are {5,6} unique"
   discovered_in: n6/session-2026-04-15
   discovered_at: 2026-04-15T00:00:00Z
   <- theory/predictions/kuramoto_r23_perfect_numbers.hexa
@@ -168,9 +168,9 @@ SIG-UNIV-KURA-001 = 정수 Kuramoto r(n) = 1-τ/σ 완전수 시퀀스 공명 [N
 
 ---
 
-## 10. 정직성 주석
+## 10. Honesty annotations
 
-- "n=6 이 r=2/3 유일"은 소수/완전수/합성수 제약 하에서만 참 — **무조건 참이 아님** (n=5 도 r=2/3)
-- Kuramoto 동역학 연결은 **구조적 제안** — 실제 동역학 시뮬레이션 미수행
-- SIG-META-001 (σφ=nτ 유일성) 과 SIG-KURA-001 은 **독립적 유일성** — 교차하는 부분이 n=6 뿐
-- 승격 조건: 정수 Kuramoto 시뮬레이션 + cross-repo 재현 시에만 [M9]↑
+- "n=6 uniquely has r=2/3" is true only under prime/perfect/composite constraints — **not unconditionally true** (n=5 also has r=2/3)
+- Kuramoto dynamics connection is a **structural proposal** — actual dynamics simulation not executed
+- SIG-META-001 (sigma*phi=n*tau uniqueness) and SIG-KURA-001 are **independent uniqueness** — only n=6 is common
+- Promotion condition: [M9]+ only upon integer Kuramoto simulation + cross-repo reproduction
