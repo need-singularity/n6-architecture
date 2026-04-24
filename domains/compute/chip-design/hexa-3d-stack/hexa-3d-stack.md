@@ -9,92 +9,92 @@ requires:
 
 <!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, VERIFY, EVOLVE], strict=false, order=sequential, prefix="§") -->
 
-# 궁극의 3D Stack HEXA-3 (TSV + Hybrid Bonding, σ=12 wafer stack)
+# Ultimate 3D Stack HEXA-3 (TSV + Hybrid Bonding, σ=12 wafer stack)
 
-> **위치**: 6단 칩 로드맵의 L3 — 3차원 적층 (TSV + Hybrid Bonding).
-> **목표**: σ=12 웨이퍼 수직 적층, φ=2μm TSV pitch, σ·J₂=288 vertical lane, **σ²=144x 밀도**.
-> **핵심 돌파**: 2D planar 면적 1/144 에 같은 기능 집적. 열은 1/2+1/3+1/6 수직 분할 배출.
+> **Position**: L3 of the 6-tier chip roadmap — 3D stacking (TSV + Hybrid Bonding).
+> **Target**: σ=12 wafer vertical stack, φ=2μm TSV pitch, σ·J₂=288 vertical lanes, **σ²=144x density**.
+> **Core breakthrough**: integrate the same functionality into 1/144 of the 2D planar area. Heat is dissipated through 1/2+1/3+1/6 vertical partitioning.
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## §1 WHY (How this technology changes your life)
 
-Dennard scaling 은 2005 년 멈췄고 Moore's law 는 2020 년 경제적으로 포화되었다. 
-단일 2D 다이의 면적과 배선 RC 지연으로는 **트랜지스터 10¹² 개 이상 달성 불가능**.
+Dennard scaling stopped in 2005 and Moore's law reached economic saturation around 2020.
+A single 2D die, limited by area and interconnect RC delay, **cannot target 10¹² or more transistors**.
 
-**HEXA-3 3D Stack 의 돌파**: Z 축으로 쌓는다. σ=12 웨이퍼 적층 + φ=2μm TSV pitch + σ·J₂=288 수직 레인으로 
-**2D 대비 밀도 σ²=144 배**. 로직+메모리+광통신+전력 분배를 Z 축으로 분리 → 평면 배선 길이 1/σ.
+**HEXA-3 3D Stack breakthrough**: stack along the Z axis. σ=12 wafer stacking + φ=2μm TSV pitch + σ·J₂=288 vertical lanes give
+**σ²=144x density vs 2D**. Logic + memory + optical + power distribution are separated along Z → planar wire length 1/σ.
 
-1. **면적 붕괴**: σ²=144 배 밀도 증가로 같은 기능을 **1/144 면적**에 구현 ← σ(6)²=144, BT-86 CN=6
-2. **배선 RC 지연**: 2D wire length √A → 3D wire length √(A/σ) = 1/√σ ≈ 1/3.46. **지연 1/12** ← σ=12
-3. **열 배출 문제**: 수직 열전달 계수 × Egyptian 1/2+1/3+1/6 분할 구조 → 누적 열 밀도 1/τ=1/4 ← τ(6)=4
+1. **Area collapse**: σ²=144x density increase implements the same functionality in **1/144 area** ← σ(6)²=144, BT-86 CN=6
+2. **Interconnect RC delay**: 2D wire length √A → 3D wire length √(A/σ) = 1/√σ ≈ 1/3.46. **Delay 1/12** ← σ=12
+3. **Heat dissipation**: vertical heat transfer coefficient × Egyptian 1/2+1/3+1/6 partition → cumulative heat density 1/τ=1/4 ← τ(6)=4
 
-| 효과 | 현재 (2D planar) | HEXA-3 3D Stack | 체감 변화 |
+| Effect | Current (2D planar) | HEXA-3 3D Stack | Felt change |
 |------|-----------------|----------------|----------|
-| 밀도 | 1x | **σ² = 144x** | 스마트폰 = 현 데이터센터 |
-| 다이 면적 (동일 기능) | 814 mm² | **5.7 mm²** (1/σ²) | 반지 크기 서버 |
-| 평면 배선 길이 | L | **L/√σ ≈ L/3.46** | 레이턴시 1/σ |
-| TSV 피치 | ~10μm | **φ = 2 μm** (Cu-Cu hybrid) | 수직 레인 σ² 배 |
-| 수직 대역 | 1 TB/s | **σ·J₂ × σ² TB/s** | 캐시 ↔ 메모리 병목 해체 |
-| 열 밀도 | 200 W/cm³ | **50 W/cm³** (Egyptian 분할) | 물냉각 → 공랭 |
-| 상호연결 에너지 | 2 pJ/bit | **0.1 pJ/bit** (σ-φ×) | AI 학습비 1/σ |
-| 적층 수 | 2 (HBM) | **σ = 12** | memory+logic+optical 통합 |
-| 제조 수율 | 80% | **95%** (KGD, known-good-die) | 비용 60% 절감 |
-| 패키지 크기 | 80×80mm | **12×12mm** (σ×σ) | 웨어러블 AI 상용 |
+| Density | 1x | **σ² = 144x** | smartphone = current datacenter |
+| Die area (same function) | 814 mm² | **5.7 mm²** (1/σ²) | ring-sized server |
+| Planar wire length | L | **L/√σ ≈ L/3.46** | latency 1/σ |
+| TSV pitch | ~10μm | **φ = 2 μm** (Cu-Cu hybrid) | vertical lanes σ² times |
+| Vertical bandwidth | 1 TB/s | **σ·J₂ × σ² TB/s** | cache ↔ memory bottleneck dissolved |
+| Heat density | 200 W/cm³ | **50 W/cm³** (Egyptian partition) | liquid cooling → air cooling |
+| Interconnect energy | 2 pJ/bit | **0.1 pJ/bit** (σ-φ×) | AI training cost 1/σ |
+| Stack count | 2 (HBM) | **σ = 12** | memory+logic+optical integrated |
+| Manufacturing yield | 80% | **95%** (KGD, known-good-die) | cost reduction 60% |
+| Package size | 80×80mm | **12×12mm** (σ×σ) | wearable AI commercialized |
 
-**한 문장 요약**: σ=12 웨이퍼를 φ=2μm TSV 와 hybrid bonding 으로 수직 적층하면 밀도가 σ²=144배 증가하고, 배선 지연이 1/σ 로 감소하며, 열은 Egyptian 분할로 배출되어 데이터센터 성능이 손바닥 크기 패키지에 들어온다.
+**One-sentence summary**: stacking σ=12 wafers vertically with φ=2μm TSV and hybrid bonding increases density by σ²=144x, reduces interconnect delay to 1/σ, dissipates heat through Egyptian partitioning, and brings datacenter-class performance into a palm-sized package.
 
-### 일상 체감 시나리오
+### Daily-life scenarios
 
 ```
-  오전 7:00  손목시계가 로컬 GPT-4 급 음성비서 실행 (0.5W, σ=12 layer)
-  오전 9:00  AR 안경이 8K 실시간 번역 (전력 1W, 3D stack 로직+HBM)
-  오후 2:00  드론 카메라 (σ²=144x 밀도) 가 실시간 얼굴 인식 × 1000명
-  오후 6:00  자율주행 SoC σ²=144 배 집적 → 차량 1대에 GPT-5 탑재
-  저녁 9:00  데이터센터 1/6 면적으로 같은 성능 → 도심 에지 서버 보편화
+  07:00 AM  Wristwatch runs local GPT-4-class voice assistant (0.5W, σ=12 layer)
+  09:00 AM  AR glasses do 8K real-time translation (1W, 3D stack logic+HBM)
+  02:00 PM  Drone camera (σ²=144x density) does real-time face recognition × 1000 people
+  06:00 PM  Self-driving SoC σ²=144x integration → one car holds GPT-5
+  09:00 PM  Datacenter at 1/6 area for same performance → urban edge servers ubiquitous
 ```
 
-### 사회적 변혁
+### Societal transformation
 
-| 분야 | 변화 | n=6 연결 |
+| Area | Change | n=6 link |
 |------|------|---------|
-| 스마트폰/AR | 손목 서버급 성능 | σ²=144x 밀도 |
-| 데이터센터 | 면적 1/σ = 1/12 | σ=12 웨이퍼 스택 |
-| 우주 위성 | 1kg 위성 = 구형 슈퍼컴 | 3D 적층 + 방사선 이중화 |
-| 국방/우주 | 슈퍼컴을 드론에 탑재 | σ²=144 배 다이 |
-| 의료 임플란트 | 뇌 BCI + 온디바이스 추론 | 12-stack 2mm³ 칩 |
-| 전력 그리드 | 전선 깔기 1/6 | 수직 전력 네트워크 |
-| 반도체 산업 | EUV 부담 1/σ | stacking 이 scaling 대체 |
+| Smartphone/AR | wrist-server-class performance | σ²=144x density |
+| Datacenter | area 1/σ = 1/12 | σ=12 wafer stack |
+| Space satellite | 1kg sat = former supercomputer | 3D stack + radiation redundancy |
+| Defense/space | supercomputer on drone | σ²=144x die |
+| Medical implant | brain BCI + on-device inference | 12-stack 2mm³ chip |
+| Power grid | wiring 1/6 | vertical power network |
+| Semiconductor industry | EUV burden 1/σ | stacking replaces scaling |
 
 
-## §2 COMPARE (현 기술 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (current tech vs n=6) — performance comparison (ASCII)
 
-### n=6 이전 5가지 장벽
+### Five pre-n=6 barriers
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽                │  왜 불가능했나                  │  HEXA-3 3D 해결법              │
+│  Barrier            │  Why it seemed infeasible      │  HEXA-3 3D candidate          │
 ├─────────────────────┼───────────────────────────────┼───────────────────────────────┤
-│ 1. TSV 피치 한계    │ 10 μm pitch → 밀도 부족        │ φ=2μm Cu-Cu hybrid bond     │
-│                     │ 수직 레인 수 부족              │ σ·J₂=288 수직 레인/mm²       │
+│ 1. TSV pitch limit  │ 10 μm pitch → insufficient    │ φ=2μm Cu-Cu hybrid bond       │
+│                     │ vertical lane count short     │ σ·J₂=288 vertical lane/mm²    │
 ├─────────────────────┼───────────────────────────────┼───────────────────────────────┤
-│ 2. 열 배출 Z 축     │ 누적 열 밀도 → 내부 400℃     │ 1/2+1/3+1/6 Egyptian 수직    │
-│                     │ TSV 주변 hot spot             │ liquid coolant 수직 분할      │
+│ 2. Z-axis heat      │ cumulative heat → 400℃ inside│ 1/2+1/3+1/6 Egyptian vertical │
+│                     │ hot spots around TSV          │ liquid coolant vertical split  │
 ├─────────────────────┼───────────────────────────────┼───────────────────────────────┤
-│ 3. KGD 제조 수율    │ σ stack 수율 = 개별 수율^σ    │ n=6 stack × 98% = 88%        │
-│                     │ 단일 die fail → 전체 stack 폐기 │ 수율 95% KGD 선별 조립        │
+│ 3. KGD yield        │ σ-stack yield = per-die^σ     │ n=6 stack × 98% = 88%         │
+│                     │ one die fail → entire stack   │ 95% yield, KGD screened        │
 ├─────────────────────┼───────────────────────────────┼───────────────────────────────┤
-│ 4. 설계 복잡도      │ 3D place & route 지수폭발      │ σ=12 layer × σ=12 tile 격자 │
-│                     │ thermal-aware routing 난제    │ n=6 정렬 → auto partition    │
+│ 4. Design complexity│ 3D place & route explosion    │ σ=12 layer × σ=12 tile grid   │
+│                     │ thermal-aware routing hard    │ n=6 alignment → auto partition │
 ├─────────────────────┼───────────────────────────────┼───────────────────────────────┤
-│ 5. 검증 시간        │ 3D DRC/LVS × σ = 18개월       │ n=6 symmetric floorplan      │
-│                     │ 열·전기·타이밍 3중 검증      │ τ=4 파이프라인 검증 1/σ       │
+│ 5. Verification time│ 3D DRC/LVS × σ = 18 months    │ n=6 symmetric floorplan        │
+│                     │ thermal·elec·timing 3x check  │ τ=4 pipeline verify 1/σ       │
 └─────────────────────┴───────────────────────────────┴───────────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (시중 3D vs HEXA-3)
+### Performance comparison bars (current 3D vs HEXA-3)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [밀도 (relative, 2D=1x)] 비교
+│  [Density (relative, 2D=1x)] comparison
 │------------------------------------------------------------------------
 │  2D planar (baseline)       █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    1 x
 │  Intel Foveros (2-stack)    ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    2 x
@@ -103,13 +103,13 @@ Dennard scaling 은 2005 년 멈췄고 Moore's law 는 2020 년 경제적으로 
 │  Samsung X-Cube (8 stack)   ████████░░░░░░░░░░░░░░░░░░░░░░░    8 x
 │  HEXA-3 (σ=12 hybrid bond)  ████████████████████████████████  144 x (σ²)
 │
-│  [TSV Pitch (μm)] (낮을수록 좋음)
+│  [TSV Pitch (μm)] (lower is better)
 │  Micro-bump (2018)           ██████████████████████░░░░░░░░░  45
 │  HBM TSV (2020)              ██████████░░░░░░░░░░░░░░░░░░░░░  25
 │  Cu-Cu hybrid (2024)         ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   9
 │  HEXA-3 (φ=2 μm)             █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   2 (φ)
 │
-│  [수직 에너지 (pJ/bit)] (낮을수록 좋음)
+│  [Vertical energy (pJ/bit)] (lower is better)
 │  PCIe off-package            █████████████████████████████░░  2.5
 │  HBM3 TSV                    █████████░░░░░░░░░░░░░░░░░░░░░░  0.9
 │  Hybrid Bonding 5μm          ████░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.3
@@ -117,67 +117,67 @@ Dennard scaling 은 2005 년 멈췄고 Moore's law 는 2020 년 경제적으로 
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: **σ=12 웨이퍼 stack × φ=2μm TSV × σ·J₂=288 수직 레인**
+### Core draft breakthrough: **σ=12 wafer stack × φ=2μm TSV × σ·J₂=288 vertical lanes**
 
-HEXA-3 3D Stack 은 웨이퍼 수직 적층의 기하학적 최적점을 n=6 약수 구조로 고정한다:
-
-```
-  수직 적층 레이어 = σ = 12         ← 로직 + L2 + HBM DRAM + 광 + 전력 + 센서 ...
-  TSV pitch = φ = 2 μm              ← Cu-Cu hybrid bonding
-  수직 레인 (mm² 당) = σ·J₂ = 288   ← 1 mm² = 250,000 TSV 가능, 288 를 고속 데이터용
-  2D ↔ 3D 밀도 비 = σ² = 144       ← 12 layer × 12 면적 효율
-  배선 길이 축소 = 1/√σ ≈ 0.29     ← manhattan distance Z 축 감소
-  열 분할 = 1/2 + 1/3 + 1/6 = 1     ← Egyptian 수직 열 경로
-```
-
-**왜 σ=12 layer 가 최적인가**:
-- 2 layer (Foveros): 로직+DRAM 만 → 메모리 bound 여전히 발생
-- 4 layer (X-Cube): logic+L2+HBM+passive → 광학 통합 불가
-- 8 layer: 균형 있지만 σ² 밀도 이점 부족
-- **12 layer (σ)**: logic×4 + L2×2 + HBM×4 + optical×1 + power×1 = **기능 완전 통합**
-- 24 layer (2σ): 열 배출 불가능, Egyptian 분할로도 3 zone 한계 초과
-
-**연쇄 혁명**:
+HEXA-3 3D Stack pins the geometric optimum of wafer vertical stacking to the n=6 divisor structure:
 
 ```
-  σ=12 웨이퍼 hybrid bonding 적층
-    → TSV φ=2μm pitch → 수직 레인 σ·J₂=288/mm²
-      → 수직 대역 10,000 TB/s/cm² (2D HBM 대비 σ² 배)
-      → 평면 배선 길이 L/√σ → RC 지연 1/σ
-      → 2D 다이 면적 1/σ² = 1/144
-      → 동일 기능 스마트폰 수준 면적
-      → 열은 Egyptian 1/2+1/3+1/6 수직 분할 → 내부 온도 <100℃
-      → 로직+HBM+광통신+전력 Z 축 완전 통합
-      → 데이터센터 → 웨어러블 port
+  Vertical stack layers = σ = 12      ← logic + L2 + HBM DRAM + optical + power + sensor ...
+  TSV pitch = φ = 2 μm                ← Cu-Cu hybrid bonding
+  Vertical lanes (per mm²) = σ·J₂ = 288  ← 1 mm² allows 250,000 TSV, 288 for high-speed data
+  2D ↔ 3D density ratio = σ² = 144   ← 12 layers × 12 area efficiency
+  Wire length reduction = 1/√σ ≈ 0.29 ← Z-axis manhattan distance reduction
+  Heat partition = 1/2 + 1/3 + 1/6 = 1 ← Egyptian vertical heat paths
+```
+
+**Why σ=12 layers is optimal**:
+- 2 layers (Foveros): logic+DRAM only → memory-bound still occurs
+- 4 layers (X-Cube): logic+L2+HBM+passive → optical integration not possible
+- 8 layers: balanced but σ² density benefit insufficient
+- **12 layers (σ)**: logic×4 + L2×2 + HBM×4 + optical×1 + power×1 = **full functional integration** (candidate)
+- 24 layers (2σ): heat dissipation infeasible, Egyptian partition exceeds 3-zone limit
+
+**Cascade revolution**:
+
+```
+  σ=12 wafer hybrid bonding stack
+    → TSV φ=2μm pitch → vertical lane σ·J₂=288/mm²
+      → vertical bandwidth 10,000 TB/s/cm² (σ² times 2D HBM)
+      → planar wire length L/√σ → RC delay 1/σ
+      → 2D die area 1/σ² = 1/144
+      → same functionality at smartphone-level area
+      → heat by Egyptian 1/2+1/3+1/6 vertical partition → internal temp <100℃
+      → logic+HBM+optical+power fully integrated along Z
+      → datacenter → wearable port
 ```
 
 
-## §3 REQUIRES (필요한 요소) — 선행 도메인
+## §3 REQUIRES (required elements) — prerequisite domains
 
-| 선행 도메인 | 🛸 현재 | 🛸 필요 | 차이 | 핵심 기술 | 링크 |
+| Prerequisite domain | 🛸 current | 🛸 required | gap | core technology | link |
 |-------------|---------|---------|------|-----------|------|
-| chip-architecture | 🛸7 | 🛸10 | +3 | 6단 로드맵 L3 | [문서](../chip-architecture/chip-architecture.md) |
-| hexa-2-pim | 🛸5 | 🛸9 | +4 | 메모리 통합 | [문서](./hexa-2-pim.md) |
-| packaging-advanced | 🛸7 | 🛸10 | +3 | Hybrid bonding 2μm | [문서](../packaging/packaging.md) |
-| thermal-liquid | 🛸6 | 🛸9 | +3 | 수직 liquid coolant | [문서](../../energy/thermal-management/thermal-management.md) |
-| lithography-euv | 🛸7 | 🛸9 | +2 | High-NA + 3D litho | [문서](../lithography-euv/lithography-euv.md) |
+| chip-architecture | 🛸7 | 🛸10 | +3 | 6-tier roadmap L3 | [doc](../chip-architecture/chip-architecture.md) |
+| hexa-2-pim | 🛸5 | 🛸9 | +4 | memory integration | [doc](./hexa-2-pim.md) |
+| packaging-advanced | 🛸7 | 🛸10 | +3 | Hybrid bonding 2μm | [doc](../packaging/packaging.md) |
+| thermal-liquid | 🛸6 | 🛸9 | +3 | vertical liquid coolant | [doc](../../energy/thermal-management/thermal-management.md) |
+| lithography-euv | 🛸7 | 🛸9 | +2 | High-NA + 3D litho | [doc](../lithography-euv/lithography-euv.md) |
 
-상기 도메인이 🛸 목표치에 도달하면 HEXA-3 Mk.IV (σ=12 stack 양산) 가 가능. 현재 Mk.II (4 stack hybrid bonding) 수준.
+Once the above domains reach their 🛸 targets, HEXA-3 Mk.IV (σ=12 stack mass production) becomes feasible. Currently at Mk.II level (4-stack hybrid bonding).
 
 
-## §4 STRUCT (시스템 구조) — System Architecture (ASCII)
+## §4 STRUCT (system structure) — System Architecture (ASCII)
 
-### 5단 체인 시스템맵
+### 5-stage chain system map
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                     궁극의 3D Stack HEXA-3 (σ=12 layer) 시스템 구조                │
+│                     Ultimate 3D Stack HEXA-3 (σ=12 layer) system structure           │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
 │   L0 Die   │   L1 TSV   │  L2 Stack  │  L3 Thermal│   L4 Package I/O    │
 │  κ=σ layer │   φ=2μm    │  σ²=144x    │  Egyptian  │  σ·J₂=288 edge      │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ 12 wafer   │ Cu-Cu bond │ 288 vert lane│ 1/2+1/3+1/6│ 288 레인 face-out  │
-│ logic×4    │ SiO₂ dielec│ per mm²     │ 수직 heat  │ 48 Gbps/레인         │
+│ 12 wafer   │ Cu-Cu bond │ 288 vert lane│ 1/2+1/3+1/6│ 288 lanes face-out │
+│ logic×4    │ SiO₂ dielec│ per mm²     │ vertical   │ 48 Gbps/lane         │
 │ DRAM×4     │ 1 μm bond  │ z=12 mm     │ 3 zone     │ 13.8 TB/s           │
 │ opt×1,pwr×1│ pitch      │ 12mm×12mm   │ <100℃ max │ J₂=24 vertical port │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
@@ -188,7 +188,7 @@ HEXA-3 3D Stack 은 웨이퍼 수직 적층의 기하학적 최적점을 n=6 약
    n6 EXACT     n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### 단면도 (Layered Cross-Section) — 3D Vertical Stack
+### Cross-section (layered cross-section) — 3D vertical stack
 
 ```
    ┌─────────── Heat sink + Micro-channel liquid coolant ───────────┐
@@ -203,408 +203,408 @@ HEXA-3 3D Stack 은 웨이퍼 수직 적층의 기하학적 최적점을 n=6 약
    │                  ▲ thermal Zone 3 (1/6 heat): bottom 2 layers  │
    ├──── Layers 1~4: Logic (σ²=144 SM / 4 = 36 SM per layer) ───────┤
    │                  ▼                                             │
-   │    I/O 엣지 σ·J₂=288 UCIe lane  +  organic substrate           │
+   │    I/O edge σ·J₂=288 UCIe lane  +  organic substrate           │
    └────────────────────────────────────────────────────────────────┘
 ```
 
-### n=6 파라미터 완전 매핑
+### Complete n=6 parameter mapping
 
-#### L0 Die 적층 — σ=12 웨이퍼
+#### L0 Die stacking — σ=12 wafers
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 적층 layer | 12 | σ = 12 | logic+mem+opt+pwr+mem... | EXACT |
-| Logic 층 | 4 | τ = 4 | 파이프 stg + SM split | EXACT |
-| DRAM 층 | 4 | τ = 4 | HBM 등가 | EXACT |
-| L2/scratchpad 층 | 2 | φ = 2 | dual L2 | EXACT |
-| 광 + 전력 층 | 2 | φ = 2 | optical + power | EXACT |
-| Die 두께 | 48 μm | σ·τ μm | thinned silicon | EXACT |
-| Stack 총 두께 | 576 μm | σ·J₂ μm | 12 × 48 | EXACT |
+| Stack layers | 12 | σ = 12 | logic+mem+opt+pwr+mem... | EXACT |
+| Logic layers | 4 | τ = 4 | pipeline stages + SM split | EXACT |
+| DRAM layers | 4 | τ = 4 | HBM equivalent | EXACT |
+| L2/scratchpad | 2 | φ = 2 | dual L2 | EXACT |
+| Optical + power | 2 | φ = 2 | optical + power | EXACT |
+| Die thickness | 48 μm | σ·τ μm | thinned silicon | EXACT |
+| Total stack thickness | 576 μm | σ·J₂ μm | 12 × 48 | EXACT |
 | Carbon base | Z=6 | Z = 6 | diamond substrate ← BT-85 | EXACT |
 
 #### L1 TSV + Hybrid Bonding — φ=2μm pitch
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
 | TSV pitch | 2 μm | φ = 2 | Cu-Cu hybrid bonding | EXACT |
 | Cu pad | 0.5 μm | φ/τ μm | bonding pad | EXACT |
 | Dielectric | SiO₂ | Z=14+2Z=6 | thermal SiO₂ | NEAR |
-| 본딩 강도 | 24 MPa | J₂ MPa | Cu thermocompression | EXACT |
-| TSV 저항 | 48 mΩ | σ·τ mΩ | Cu resistance | EXACT |
+| Bond strength | 24 MPa | J₂ MPa | Cu thermocompression | EXACT |
+| TSV resistance | 48 mΩ | σ·τ mΩ | Cu resistance | EXACT |
 | Bond yield | 95% | 1-1/(σ·... ) | KGD + hybrid | NEAR |
-| 수율 stack | 88% | 0.98^12 | 개별 98% × 12 | NEAR |
+| Stack yield | 88% | 0.98^12 | per-die 98% × 12 | NEAR |
 
-#### L2 Stack 밀도 — σ²=144x
+#### L2 Stack density — σ²=144x
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 밀도 증가 | 144x | σ² = 144 | 12 layer × 12 효율 | EXACT |
-| 수직 레인 (/mm²) | 288 | σ·J₂ | 고속 데이터 lane | EXACT |
-| 2D 면적 절감 | 1/144 | 1/σ² | footprint 축소 | EXACT |
-| 평면 배선 축소 | 1/√σ | 1/√σ | manhattan L ↓ | EXACT |
-| Z 축 배선 길이 | 576 μm | σ·J₂ μm | stack 높이 | EXACT |
-| 수직 지연 | 0.5 ns | sopfr ns | 576μm / (1.2×10⁸ m/s) | NEAR |
-| 패키지 크기 | 12×12 mm | σ×σ | 144 mm² | EXACT |
+| Density increase | 144x | σ² = 144 | 12 layer × 12 efficiency | EXACT |
+| Vertical lanes (/mm²) | 288 | σ·J₂ | high-speed data lanes | EXACT |
+| 2D area reduction | 1/144 | 1/σ² | footprint shrink | EXACT |
+| Planar wire reduction | 1/√σ | 1/√σ | manhattan L ↓ | EXACT |
+| Z-axis wire length | 576 μm | σ·J₂ μm | stack height | EXACT |
+| Vertical delay | 0.5 ns | sopfr ns | 576μm / (1.2×10⁸ m/s) | NEAR |
+| Package size | 12×12 mm | σ×σ | 144 mm² | EXACT |
 
-#### L3 Thermal — Egyptian 수직 분할
+#### L3 Thermal — Egyptian vertical partition
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 열 zone | 3 | n/φ = 3 | 1/2 + 1/3 + 1/6 | EXACT |
+| Heat zones | 3 | n/φ = 3 | 1/2 + 1/3 + 1/6 | EXACT |
 | Zone 1 (top) | 50% heat | 1/2 | optical+pwr top | EXACT |
 | Zone 2 (mid) | 33% heat | 1/3 | DRAM mid | EXACT |
 | Zone 3 (bot) | 17% heat | 1/6 | logic bot | EXACT |
-| 열밀도 최대 | 50 W/cm³ | 1/τ × 200 | 원 200 W/cm³ | NEAR |
-| 수직 열전도도 | 150 W/mK | σ·τ·... | TSV Cu bridge | NEAR |
-| 최고 온도 | 100 ℃ | 2·σ-φ·... | Tj limit | EXACT |
+| Max heat density | 50 W/cm³ | 1/τ × 200 | was 200 W/cm³ | NEAR |
+| Vertical thermal conductivity | 150 W/mK | σ·τ·... | TSV Cu bridge | NEAR |
+| Max temperature | 100 ℃ | 2·σ-φ·... | Tj limit | EXACT |
 
 #### L4 Package I/O — σ·J₂=288 edge lane
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| UCIe 레인 (edge) | 288 | σ·J₂ | 4 side × 72/side | EXACT |
-| 레인/edge | 72 | 6·σ | edge density | EXACT |
-| 레인 속도 | 48 Gbps | σ·τ | PAM4 | EXACT |
-| 총 edge 대역 | 13.8 TB/s | σ·J₂×48/8 | 288×48Gbps÷8 | EXACT |
+| UCIe lanes (edge) | 288 | σ·J₂ | 4 side × 72/side | EXACT |
+| Lanes/edge | 72 | 6·σ | edge density | EXACT |
+| Lane speed | 48 Gbps | σ·τ | PAM4 | EXACT |
+| Total edge bandwidth | 13.8 TB/s | σ·J₂×48/8 | 288×48Gbps÷8 | EXACT |
 | Vertical port | 24 | J₂ = 24 | bottom I/O | EXACT |
-| 전원 도메인 | 8 | σ-τ = 8 | separated rail | EXACT |
+| Power domains | 8 | σ-τ = 8 | separated rail | EXACT |
 | Package substrate | organic | n=6 layer | 6 PCB stack | EXACT |
 
-### 제원 총괄표
+### Specification summary
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  궁극의 3D Stack HEXA-3 Technical Specifications                         │
+│  Ultimate 3D Stack HEXA-3 Technical Specifications                       │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  카테고리          3D Wafer Stack + Hybrid Bonding + TSV                 │
-│  적층 레이어       σ = 12 wafer (logic×4 / DRAM×4 / L2×2 / opt+pwr×2)    │
+│  Category          3D Wafer Stack + Hybrid Bonding + TSV                 │
+│  Stack layers      σ = 12 wafer (logic×4 / DRAM×4 / L2×2 / opt+pwr×2)    │
 │  TSV pitch        φ = 2 μm (Cu-Cu hybrid bonding)                        │
-│  수직 레인/mm²    σ·J₂ = 288                                             │
-│  밀도 증가        σ² = 144 x 2D baseline                                 │
-│  평면 배선 길이    1/√σ ≈ 0.29 x                                         │
-│  열 분할          Egyptian 1/2 + 1/3 + 1/6 = 3 thermal zone              │
-│  Stack 두께       σ·J₂ = 576 μm (thinned Si × 12)                        │
-│  패키지 크기      σ × σ = 12 × 12 mm = 144 mm²                           │
-│  수직 에너지      0.1 pJ/bit (Cu-Cu 2μm)                                 │
-│  HBM 용량 (통합)  σ·τ = 48 GB on-stack                                   │
-│  수직 지연        sopfr = 5 (실제 0.5 ns across 576μm)                   │
+│  Vertical lanes/mm²    σ·J₂ = 288                                        │
+│  Density gain      σ² = 144 x 2D baseline                                │
+│  Planar wire length    1/√σ ≈ 0.29 x                                     │
+│  Heat partition   Egyptian 1/2 + 1/3 + 1/6 = 3 thermal zone              │
+│  Stack thickness  σ·J₂ = 576 μm (thinned Si × 12)                        │
+│  Package size      σ × σ = 12 × 12 mm = 144 mm²                          │
+│  Vertical energy   0.1 pJ/bit (Cu-Cu 2μm)                                │
+│  HBM capacity (integ.)  σ·τ = 48 GB on-stack                             │
+│  Vertical delay    sopfr = 5 (actual 0.5 ns across 576μm)                │
 │  Package I/O      σ·J₂ = 288 UCIe lane (4 edge × 72)                     │
-│  KGD 수율         95% per die, 88% per stack (0.98^12)                   │
-│  n=6 EXACT        94%+ (§7 검증)                                         │
+│  KGD yield         95% per die, 88% per stack (0.98^12)                  │
+│  n=6 EXACT        94%+ (§7 verification)                                 │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### BT 연결
+### BT links
 
-| BT | 이름 | HEXA-3 3D Stack 적용 |
+| BT | Name | HEXA-3 3D Stack application |
 |----|------|---------------------|
-| BT-28  | 캐시 계위 Egyptian | 1/2+1/3+1/6 수직 열 분할 |
-| BT-56  | GPU 산술 σ²=144 SM | σ²=144x 밀도 = 동일 SM 1/144 면적 |
-| BT-85  | Carbon Z=6 보편성 | Diamond 기판 (열전도 2000 W/mK) |
-| BT-86  | **결정 CN=6 법칙** | **stacking n=6 배위** (핵심 연결) |
-| BT-90  | SM=φ·K₆ 접촉수 | TSV K₆ mesh 위치 지정 |
-| BT-93  | Carbon Z=6 칩 소재 | 열 배출 C 기판 |
-| BT-123 | **SE(3) dim=n=6** | **6-DOF 수직 정렬 공정** (핵심) |
-| BT-181 | 다중 대역 σ=12 채널 | 12 layer = σ 채널 |
-| BT-328 | AD τ=4 서브시스템 | thermal-safe 4 zone |
-| BT-342 | 항공공학 n=6 준용 | 위성 탑재 3D SoC |
+| BT-28  | cache hierarchy Egyptian | 1/2+1/3+1/6 vertical heat partition |
+| BT-56  | GPU arithmetic σ²=144 SM | σ²=144x density = same SM in 1/144 area |
+| BT-85  | Carbon Z=6 universality | diamond substrate (thermal conductivity 2000 W/mK) |
+| BT-86  | **Crystal CN=6 rule** | **stacking n=6 coordination** (core link) |
+| BT-90  | SM=φ·K₆ contact count | TSV K₆ mesh placement |
+| BT-93  | Carbon Z=6 chip material | C substrate for heat dissipation |
+| BT-123 | **SE(3) dim=n=6** | **6-DOF vertical alignment process** (core) |
+| BT-181 | multi-band σ=12 channel | 12 layers = σ channels |
+| BT-328 | AD τ=4 subsystem | thermal-safe 4 zone |
+| BT-342 | aerospace n=6 analog | satellite 3D SoC |
 
 
-## §5 FLOW (데이터/에너지 플로우) — Flow (ASCII)
+## §5 FLOW (data/energy flow) — Flow (ASCII)
 
-### 에너지 플로우 (Egyptian 수직 분할)
+### Energy flow (Egyptian vertical partition)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  12V rail ─→ Layer 11 (Power) ─→ [σ-τ=8 rail] ─→ 12 layer 수직 분배       │
+│  12V rail ─→ Layer 11 (Power) ─→ [σ-τ=8 rail] ─→ 12 layer vertical dist.  │
 │                     │                                                    │
-│  Egyptian 수직 열 플로우 (3 zone):                                        │
+│  Egyptian vertical thermal flow (3 zone):                                │
 │                                                                          │
 │    ┌─────── Zone 1 (Top, 50%): Optical+Power+DRAM top ──┐                │
-│    │     열 배출: liquid micro-channel 직접 냉각          │                │
-│    │     온도: 80℃ max                                   │                │
+│    │     heat out: liquid micro-channel direct cooling   │                │
+│    │     temp: 80℃ max                                   │                │
 │    ├─────── Zone 2 (Mid, 33%): DRAM mid + L2 ──────────┤                │
-│    │     열 배출: 수직 TSV Cu bridge → Zone 1 로 이동     │                │
-│    │     온도: 90℃ max                                   │                │
+│    │     heat out: vertical TSV Cu bridge → to Zone 1    │                │
+│    │     temp: 90℃ max                                   │                │
 │    ├─────── Zone 3 (Bot, 17%): Logic 4 layer ─────────┤                │
-│    │     열 배출: substrate → PCB 배면 thermal pad       │                │
-│    │     온도: 100℃ max (Tj limit)                       │                │
+│    │     heat out: substrate → PCB backside thermal pad │                │
+│    │     temp: 100℃ max (Tj limit)                       │                │
 │    └────────────────────────────────────────────────────┘                │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  데이터 플로우 — 수직 레인 주력:                                            │
+│  Data flow — vertical lanes dominate:                                      │
 │    Logic L1~L4 ─(288 TSV/mm²)─→ L2 L5~L6 ─→ DRAM L7~L10 ─→ Optical L12   │
-│    수평 I/O: UCIe edge 288 lane (4 side × 72)                            │
-│    수직/수평 대역 비: σ² = 144 (수직이 우세)                               │
+│    Horizontal I/O: UCIe edge 288 lane (4 side × 72)                      │
+│    Vertical/horizontal bandwidth ratio: σ² = 144 (vertical dominant)     │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 처리 모드별 전력 분배 (σ·τ·10 = 480 W TDP 기준)
+### Power distribution per processing mode (σ·τ·10 = 480 W TDP baseline)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│ 저부하     │ █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   48W (10%)  standby         │
-│ 정상       │ ██████░░░░░░░░░░░░░░░░░░░░░░░░░  180W (37%)  L1~L4 만 active │
-│ 피크       │ ████████████████░░░░░░░░░░░░░░░  360W (75%)  all 12 layer    │
-│ AI 추론   │ ████████████████████████████░░░  440W (92%)  Logic+DRAM busy │
-│ 전체 로드 │ ██████████████████████████████░  460W (96%)  thermal throttle│
+│ Low load   │ █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   48W (10%)  standby         │
+│ Normal     │ ██████░░░░░░░░░░░░░░░░░░░░░░░░░  180W (37%)  L1~L4 only active│
+│ Peak       │ ████████████████░░░░░░░░░░░░░░░  360W (75%)  all 12 layer    │
+│ AI inference│ ████████████████████████████░░░  440W (92%)  Logic+DRAM busy │
+│ Full load   │ ██████████████████████████████░  460W (96%)  thermal throttle│
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 데이터 모드 5개
+### Five data modes
 
-#### 모드 1: STANDBY — 수직 리텐션 only
+#### Mode 1: STANDBY — vertical retention only
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 1: STANDBY (DRAM 유지 only)          │
-│  소비 전력: 48 W (10% TDP)                │
-│  활성 layer: 2 (DRAM refresh)              │
-│  Logic: clock-gate 전체                    │
-│  용도: 저전력 standby                      │
+│  MODE 1: STANDBY (DRAM retain only)        │
+│  Power: 48 W (10% TDP)                   │
+│  Active layers: 2 (DRAM refresh)           │
+│  Logic: full clock-gate                    │
+│  Use: low-power standby                    │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 2: LOGIC_ONLY — 로직 층만 사용
+#### Mode 2: LOGIC_ONLY — logic layers only
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 2: LOGIC_ONLY                        │
-│  활성 layer: L1~L4 (logic τ=4 단)          │
+│  Active layers: L1~L4 (logic τ=4)          │
 │  DRAM/L2: standby                          │
-│  전력: 180W (37% TDP)                      │
-│  용도: 일반 컴퓨트, I/O 대기                │
+│  Power: 180W (37% TDP)                     │
+│  Use: general compute, I/O wait            │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 3: FULL_STACK — 12 layer 병렬
+#### Mode 3: FULL_STACK — 12 layer parallel
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 3: FULL_STACK                        │
-│  활성 layer: σ = 12 전부                    │
-│  수직 대역: 10.4 TB/s (σ² TSV)             │
-│  Logic+DRAM+L2 동시 동작                    │
-│  전력: 360 W (75% TDP)                     │
-│  용도: LLM 추론, HPC                        │
+│  Active layers: σ = 12 all                 │
+│  Vertical bandwidth: 10.4 TB/s (σ² TSV)    │
+│  Logic+DRAM+L2 simultaneous                │
+│  Power: 360 W (75% TDP)                    │
+│  Use: LLM inference, HPC                   │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 4: OPTICAL_LINK — 광 통신 우세
+#### Mode 4: OPTICAL_LINK — optical communication dominant
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 4: OPTICAL_LINK (σ=12 λ WDM)          │
-│  Layer 12 optical 주력                     │
-│  데이터센터 간 연결                          │
-│  대역: 1.2 TB/s per WDM stream              │
-│  용도: rack-to-rack AI 학습                 │
+│  Layer 12 optical primary                  │
+│  Datacenter-to-datacenter link             │
+│  Bandwidth: 1.2 TB/s per WDM stream         │
+│  Use: rack-to-rack AI training             │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 5: THERMAL_LIMIT — 온도 제한 running
+#### Mode 5: THERMAL_LIMIT — temperature-constrained running
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 5: THERMAL_LIMIT (Tj=100℃ 근접)     │
-│  Egyptian 재배분 동적 조정                  │
+│  MODE 5: THERMAL_LIMIT (Tj=100℃ near)     │
+│  Egyptian re-partition dynamic adjustment  │
 │  DVFS: 1/2 clock                           │
-│  액체 냉각 micro-channel 100% 가동          │
-│  전력: 460 W (96%), thermal throttle       │
+│  Liquid cooling micro-channel 100% active  │
+│  Power: 460 W (96%), thermal throttle       │
 └──────────────────────────────────────────┘
 ```
 
-### DSE 후보군 (5단 × 후보 = 전수 탐색)
+### DSE candidate set (5 stages × candidates = full exploration)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
 │   L0     │-->│   L1     │-->│   L2     │-->│   L3     │-->│   L4     │
 │  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5    │   │  K5=4    │
-│ 적층 수   │   │ TSV tech │  │ 밀도      │   │ Thermal  │   │ Edge I/O │
+│ stack #  │   │ TSV tech │  │ density   │   │ Thermal  │   │ Edge I/O │
 │  =n      │   │  =sopfr  │   │  =τ      │   │  =sopfr  │   │  =τ      │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%) | Pareto: J₂=24 경로
+Total: 6×5×4×5×4 = 2,400 | compat filter: 576 (24%) | Pareto: J₂=24 path
 ```
 
-#### K1 적층 레이어 수 (6종 = n)
+#### K1 stack layer count (6 variants = n)
 
-| # | Layers | 구성 | n=6 연결 |
+| # | Layers | Composition | n=6 link |
 |---|--------|------|---------|
 | 1 | 2 (Foveros) | L+M | φ=2 |
 | 2 | 4 (Intel EMIB+F) | L+L+M+M | τ=4 |
 | 3 | 6 (n=6) | L+L+M+M+O+P | n=6 |
 | 4 | 8 (X-Cube) | L×2+M×4+O+P | balanced |
 | 5 | 12 (HEXA-3) | L×4+M×4+L2×2+O+P | σ=12 **HEXA-3** |
-| 6 | 24 (overkill) | 두배 | 2σ, 열 한계 |
+| 6 | 24 (overkill) | double | 2σ, thermal limit |
 
-#### K2 TSV 공정 (5종 = sopfr)
+#### K2 TSV process (5 variants = sopfr)
 
-| # | 공정 | Pitch | n=6 연결 |
+| # | Process | Pitch | n=6 link |
 |---|------|-------|---------|
-| 1 | Micro-bump | 45 μm | 레거시 |
-| 2 | HBM TSV | 25 μm | 구형 |
+| 1 | Micro-bump | 45 μm | legacy |
+| 2 | HBM TSV | 25 μm | older |
 | 3 | Cu-Cu hybrid 9μm | 9 μm | σ-φ/... |
 | 4 | Cu-Cu hybrid 5μm | 5 μm | sopfr μm |
 | 5 | Cu-Cu hybrid 2μm | 2 μm | φ=2 **HEXA-3** |
 
-#### K3 밀도 증가 (4종 = τ)
+#### K3 density gain (4 variants = τ)
 
-| # | 밀도 | 이점 | n=6 연결 |
+| # | Density | Benefit | n=6 link |
 |---|------|------|---------|
-| 1 | 2x | 단순 적층 | φ=2 |
+| 1 | 2x | simple stack | φ=2 |
 | 2 | 12x | σ layer | σ=12 |
 | 3 | 48x | σ·τ | balanced |
 | 4 | 144x | σ² | **HEXA-3** σ² |
 
-#### K4 Thermal 전략 (5종 = sopfr)
+#### K4 thermal strategy (5 variants = sopfr)
 
-| # | 전략 | 최고온도 | n=6 연결 |
+| # | Strategy | Max temp | n=6 link |
 |---|------|---------|---------|
-| 1 | 공랭 passive | 150℃ | 실패 |
-| 2 | 공랭 active fan | 120℃ | 한계 |
+| 1 | Passive air | 150℃ | fail |
+| 2 | Active air fan | 120℃ | limit |
 | 3 | Liquid cold plate | 100℃ | OK |
 | 4 | Micro-channel liquid | 90℃ | **HEXA-3** |
-| 5 | Immersion 2-phase | 70℃ | 미래 |
+| 5 | Immersion 2-phase | 70℃ | future |
 
-#### K5 Edge I/O (4종 = τ)
+#### K5 Edge I/O (4 variants = τ)
 
-| # | I/O | 대역 | n=6 연결 |
+| # | I/O | Bandwidth | n=6 link |
 |---|-----|------|---------|
-| 1 | Organic substrate | 6 TB/s | 레거시 |
+| 1 | Organic substrate | 6 TB/s | legacy |
 | 2 | CoWoS-L | 12 TB/s | σ TB/s |
 | 3 | UCIe 288 lane | 13.8 TB/s | σ·J₂ **HEXA-3** |
 | 4 | Full optical (12 λ) | 96 TB/s | σ λ WDM |
 
 #### Pareto Top-6
 
-| Rank | L0 | L1 | L2 | L3 | L4 | n6% | 비고 |
+| Rank | L0 | L1 | L2 | L3 | L4 | n6% | Notes |
 |------|----|----|----|----|----|-----|------|
-| 1 | 12 layer | 2μm Cu-Cu | 144x | Micro-channel | UCIe 288 | **96%** | **HEXA-3 최적** |
-| 2 | 12 layer | 5μm Cu-Cu | 48x | Micro-channel | UCIe | 93% | 차선 |
-| 3 | 8 layer | 2μm Cu-Cu | 144x | Liquid cold | UCIe | 91% | 보수 |
-| 4 | 12 layer | 2μm Cu-Cu | 144x | Immersion | Optical | 94% | 미래 |
-| 5 | 6 layer | 5μm Cu-Cu | 12x | Liquid cold | UCIe | 88% | 중간 |
-| 6 | 24 layer | 2μm Cu-Cu | 144x | Immersion | Optical | 89% | 열 한계 |
+| 1 | 12 layer | 2μm Cu-Cu | 144x | Micro-channel | UCIe 288 | **96%** | **HEXA-3 optimum** |
+| 2 | 12 layer | 5μm Cu-Cu | 48x | Micro-channel | UCIe | 93% | next best |
+| 3 | 8 layer | 2μm Cu-Cu | 144x | Liquid cold | UCIe | 91% | conservative |
+| 4 | 12 layer | 2μm Cu-Cu | 144x | Immersion | Optical | 94% | future |
+| 5 | 6 layer | 5μm Cu-Cu | 12x | Liquid cold | UCIe | 88% | middle |
+| 6 | 24 layer | 2μm Cu-Cu | 144x | Immersion | Optical | 89% | thermal limit |
 
 
-## §7 VERIFY (Python 검증)
+## §7 VERIFY (Python verification)
 
-궁극의 3D Stack HEXA-3 가 물리/수학적으로 성립하는지 stdlib 만으로 검증. 주장된 설계 사양을 기초 공식으로 cross-check.
+Verify that Ultimate 3D Stack HEXA-3 is physically and mathematically consistent using only stdlib. Cross-check the claimed design specs against basic formulas.
 
-### Testable Predictions (검증 가능한 예측 10건)
+### Testable predictions (10 items)
 
-#### TP-HEXA-3-3D-1: 적층 = σ = 12 layer
-- **검증**: 실 hybrid bonding stack 두께 576μm ÷ 48μm/layer = 12
-- **예측**: layer count = 12 ± 0
-- **Tier**: 2 (TSMC SoIC 실측)
+#### TP-HEXA-3-3D-1: stack = σ = 12 layer
+- **Check**: real hybrid bonding stack thickness 576μm ÷ 48μm/layer = 12
+- **Prediction**: layer count = 12 ± 0
+- **Tier**: 2 (TSMC SoIC measurement)
 
 #### TP-HEXA-3-3D-2: TSV pitch = φ = 2 μm
-- **검증**: Cu-Cu hybrid bonding pad pitch 측정
-- **예측**: 2.0 ± 0.1 μm
+- **Check**: measure Cu-Cu hybrid bonding pad pitch
+- **Prediction**: 2.0 ± 0.1 μm
 - **Tier**: 2
 
-#### TP-HEXA-3-3D-3: 밀도 증가 = σ² = 144x
-- **검증**: 2D 기능 동일 (SM 144) 다이 면적 vs 3D stack 면적 비율
-- **예측**: 비율 ≈ 144x
-- **Tier**: 1 (기하 계산)
+#### TP-HEXA-3-3D-3: density gain = σ² = 144x
+- **Check**: 2D same-function (SM 144) die area vs 3D stack area ratio
+- **Prediction**: ratio ≈ 144x
+- **Tier**: 1 (geometric calc)
 
-#### TP-HEXA-3-3D-4: 열 분할 Egyptian = Fraction(1,1) 정확
-- **검증**: Zone 1+2+3 heat fraction 합 = 1
-- **예측**: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)
-- **Tier**: 1 (즉시)
+#### TP-HEXA-3-3D-4: Egyptian heat partition = Fraction(1,1) exact
+- **Check**: Zone 1+2+3 heat fraction sum = 1
+- **Prediction**: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)
+- **Tier**: 1 (immediate)
 
-#### TP-HEXA-3-3D-5: 배선 축소 = 1/√σ 스케일링
-- **검증**: 평면 배선 길이 log-log 회귀
-- **예측**: slope = -0.5
+#### TP-HEXA-3-3D-5: wire reduction = 1/√σ scaling
+- **Check**: log-log regression of planar wire length
+- **Prediction**: slope = -0.5
 - **Tier**: 2
 
-#### TP-HEXA-3-3D-6: layer=12 ±10% 흔들면 볼록 최적
-- **검증**: [10, 12, 14] layer thermal+yield 시뮬레이션
-- **예측**: 12 가 볼록 극값
+#### TP-HEXA-3-3D-6: layer=12 ±10% perturbation convex optimum
+- **Check**: [10, 12, 14] layer thermal+yield simulation
+- **Prediction**: 12 is convex extremum
 - **Tier**: 2
 
-#### TP-HEXA-3-3D-7: 열 상한 미초과 (Tj < 100℃)
-- **검증**: Fourier heat 방정식 + Egyptian 분배
-- **예측**: Tj max < 373 K
+#### TP-HEXA-3-3D-7: thermal upper bound not exceeded (Tj < 100℃)
+- **Check**: Fourier heat equation + Egyptian distribution
+- **Prediction**: Tj max < 373 K
 - **Tier**: 1
 
 #### TP-HEXA-3-3D-8: χ² p-value > 0.05
-- **검증**: 42 파라미터 예측 vs 목표
-- **예측**: p > 0.05
+- **Check**: 42 parameters prediction vs target
+- **Prediction**: p > 0.05
 - **Tier**: 1
 
-#### TP-HEXA-3-3D-9: OEIS A000203 σ(6)=12, A000005 τ(6)=4 등록
-- **검증**: [1,2,3,6,12,24,48] OEIS 일치
-- **예측**: DB 매칭
+#### TP-HEXA-3-3D-9: OEIS A000203 σ(6)=12, A000005 τ(6)=4 registered
+- **Check**: [1,2,3,6,12,24,48] OEIS match
+- **Prediction**: DB match
 - **Tier**: 1
 
-#### TP-HEXA-3-3D-10: Fraction 정확 유리수 일치
-- **검증**: 144 = σ² = Fraction(144)
-- **예측**: 정확 등호
+#### TP-HEXA-3-3D-10: Fraction exact rational equality
+- **Check**: 144 = σ² = Fraction(144)
+- **Prediction**: exact equality
 - **Tier**: 1
 
-### n=6 정직성 검증 10 카테고리 (섹션 개요)
+### n=6 honesty check — 10 categories (section outline)
 
-철학: "주장 X를 공식 Y가 뒷받침한다" (피상 순환논리) → "n=6 구조가 수론/차원/스케일링/통계에서 필연적으로 튀어나온다" (다층 증명).
+Philosophy: shift from "claim X is backed by formula Y" (surface circular reasoning) to "n=6 structure emerges necessarily from number theory/dimension/scaling/statistics" (multi-layer demonstrated pattern).
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0.
+### §7.0 CONSTANTS — number-theoretic functions auto-derived
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. Zero hard-coded constants.
 
-### §7.1 DIMENSIONS — SI 단위 일관성
-Thermal [W/(m·K)], 밀도 [1/m²], TSV pitch [m]. Fourier: q = -k∇T → [W/m²].
+### §7.1 DIMENSIONS — SI unit consistency
+Thermal [W/(m·K)], density [1/m²], TSV pitch [m]. Fourier: q = -k∇T → [W/m²].
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-σ²=144 밀도를 `σ·σ` / `12 layer × 12 efficiency` / `σ·J₂/φ` 3경로 재유도.
+### §7.2 CROSS — three independent rederivations
+σ²=144 density rederived through `σ·σ` / `12 layer × 12 efficiency` / `σ·J₂/φ`.
 
-### §7.3 SCALING — 1/√σ 평면 배선 축소
-Manhattan distance 3D vs 2D 비율 log-log 회귀.
+### §7.3 SCALING — 1/√σ planar wire reduction
+3D vs 2D manhattan distance log-log regression.
 
-### §7.4 SENSITIVITY — layer=12 ±10% 볼록
-10, 12, 14 layer 수율 × 열 손실.
+### §7.4 SENSITIVITY — layer=12 ±10% convex
+10, 12, 14 layer yield × thermal loss.
 
-### §7.5 LIMITS — 물리 상한 미초과
-Fourier heat: Δx/(k·A) × Q ≤ ΔT limit. Cu-Cu bonding 강도 theoretical max.
+### §7.5 LIMITS — physical upper bounds not exceeded
+Fourier heat: Δx/(k·A) × Q ≤ ΔT limit. Cu-Cu bonding strength theoretical max.
 
-### §7.6 CHI2 — H₀: n=6 우연 가설
-42 파라미터 χ² → p-value.
+### §7.6 CHI2 — H₀: n=6 is coincidence
+42 parameters χ² → p-value.
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
+### §7.7 OEIS — external sequence DB match
 `[1,2,3,6,12,24,48,144,288]` A008586-variant.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE 2400 중 HEXA-3 구성 상위 %.
+### §7.8 PARETO — Monte Carlo full exploration
+Rank HEXA-3 configuration in the top % of DSE 2400.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수
-Egyptian, σ²=144, 1/σ² 면적 축소 정확 등호.
+### §7.9 SYMBOLIC — Fraction exact rationals
+Egyptian, σ²=144, 1/σ² area reduction exact equality.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례: 구리 열전도도 401 W/mK — 소재 상수 (n=6 독립)
-- Falsifier:
-  - Layer stack 수 ≠ 12 → σ 폐기
-  - TSV pitch 측정 > 3μm → φ=2 예측 폐기
-  - 밀도 증가 < 120x → σ² 공식 폐기
-  - Egyptian Fraction 합 ≠ 1 → 열 분할 폐기
-  - Tj > 110℃ (373K+) → 열 모델 폐기
-  - χ² p < 0.01 → n=6 구조 우연, HEXA-3 폐기
+### §7.10 COUNTER — counter-examples + falsifiers
+- Counter-examples: copper thermal conductivity 401 W/mK — material constant (n=6 independent)
+- Falsifiers:
+  - Layer stack count ≠ 12 → discard σ
+  - Measured TSV pitch > 3μm → discard φ=2 prediction
+  - Density gain < 120x → discard σ² formula
+  - Egyptian Fraction sum ≠ 1 → discard heat partition
+  - Tj > 110℃ (373K+) → discard thermal model
+  - χ² p < 0.01 → n=6 structure coincidental, discard HEXA-3
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # ─────────────────────────────────────────────────────────────────────────────
-# §7 VERIFY — 궁극의 3D Stack HEXA-3 n=6 정직성 검증 (stdlib only)
+# §7 VERIFY — Ultimate 3D Stack HEXA-3 n=6 honesty check (stdlib only)
 #
-# 10 섹션 구조:
-#   §7.0 CONSTANTS  — n=6 상수 수론 자동 유도
-#   §7.1 DIMENSIONS — thermal W/(m·K), pitch [m] SI 일관성
-#   §7.2 CROSS      — σ²=144 밀도 독립 경로 3개
-#   §7.3 SCALING    — 1/√σ 배선 축소 log-log
-#   §7.4 SENSITIVITY— layer=12 ±10% 볼록
+# 10 section structure:
+#   §7.0 CONSTANTS  — n=6 constants number-theoretic auto-derivation
+#   §7.1 DIMENSIONS — thermal W/(m·K), pitch [m] SI consistency
+#   §7.2 CROSS      — σ²=144 density three independent paths
+#   §7.3 SCALING    — 1/√σ wire reduction log-log
+#   §7.4 SENSITIVITY— layer=12 ±10% convex
 #   §7.5 LIMITS     — Fourier heat / bonding strength
-#   §7.6 CHI2       — H₀: n=6 우연 p-value
-#   §7.7 OEIS       — A000203/A000005 매칭
-#   §7.8 PARETO     — DSE 2400 순위
-#   §7.9 SYMBOLIC   — Fraction 정확 유리수
-#   §7.10 COUNTER   — 반례 + falsifier
+#   §7.6 CHI2       — H₀: n=6 coincidence p-value
+#   §7.7 OEIS       — A000203/A000005 match
+#   §7.8 PARETO     — DSE 2400 rank
+#   §7.9 SYMBOLIC   — Fraction exact rationals
+#   §7.10 COUNTER   — counter-examples + falsifiers
 # ─────────────────────────────────────────────────────────────────────────────
 
 from math import sqrt, log, erfc, log2
@@ -653,7 +653,7 @@ J2        = 2 * SIGMA           # 24
 SIGMA_SQ  = SIGMA * SIGMA       # 144 — density multiplier
 MAC       = SIGMA * J2          # 288 — vertical lane/mm²
 
-# 자기검증
+# self-check
 assert SIGMA == 2 * N, "perfectness broken"
 assert SIGMA * PHI == N * TAU == J2, "master identity broken"
 assert SIGMA_SQ == 144, "density multiplier broken"
@@ -663,10 +663,10 @@ assert PHI == 2, "TSV pitch broken"
 # ─── §7.1 DIMENSIONS ─────────────────────────────────────────────────────
 DIM = {
     'P':   (1, 2, -3,  0),    # W
-    'k':   (1, 1, -3, 0),      # W/(m·K) — 좀 간단화, θ 차원 무시
+    'k':   (1, 1, -3, 0),      # W/(m·K) — simplified, θ axis ignored
     'A':   (0, 2,  0,  0),     # m²
     'L':   (0, 1,  0,  0),     # m
-    'T':   (0, 0,  0,  0),     # K — 4번째 축으로 취급 안함
+    'T':   (0, 0,  0,  0),     # K — not treated as 4th axis
     'q':   (1, 0, -3,  0),     # W/m²
     'F':   (1, 1, -2,  0),     # N
     'press':(1,-1,-2,  0),     # Pa = N/m²
@@ -680,25 +680,25 @@ def dim_mul(*syms):
 
 def dim_check_fourier():
     """q = -k·dT/dL → [W/(m·K)] × [K/m] = [W/m²] = [q]"""
-    # k * (1/L) = W/(m·K) × 1/m = W/m²  — dim 축소: DIM_A(-2) = q(-1,3)... 단순화
-    return True  # 분석적 증명 (위 주석)
+    # k * (1/L) = W/(m·K) × 1/m = W/m²  — simplified dim reduction (see above comment)
+    return True  # analytical derivation (comment above)
 
-# ─── §7.2 CROSS — σ²=144 독립 경로 3개 재유도 ─────────────────────────────
+# ─── §7.2 CROSS — σ²=144 three independent rederivations ────────────────
 def cross_density_3ways():
-    """144x 밀도 3경로"""
+    """144x density via 3 paths"""
     F1 = SIGMA * SIGMA            # σ² = 144
     F2 = SIGMA * J2 // PHI         # σ·J₂/φ = 288/2 = 144
     F3 = 12 * 12                    # 12 layer × 12 efficiency = 144
     return F1, F2, F3
 
 def cross_vertical_lane_3ways():
-    """288 vertical lane/mm² 3경로"""
+    """288 vertical lane/mm² via 3 paths"""
     F1 = SIGMA * J2                # σ·J₂ = 288
     F2 = SIGMA_SQ + SIGMA_SQ        # 144+144 = 288
     F3 = 12 * 24                    # 12 col × 24 row = 288
     return F1, F2, F3
 
-# ─── §7.3 SCALING — 1/√σ 배선 축소 ────────────────────────────────────────
+# ─── §7.3 SCALING — 1/√σ wire reduction ────────────────────────────────
 def scaling_exponent(xs, ys):
     n = len(xs)
     lx = [log(x) for x in xs]
@@ -708,22 +708,22 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# ─── §7.4 SENSITIVITY — layer=12 ±10% 볼록 ───────────────────────────────
+# ─── §7.4 SENSITIVITY — layer=12 ±10% convex ─────────────────────────
 def sensitivity(f, x0, pct=0.1):
     y0 = f(x0); yh = f(x0 * (1 + pct)); yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh > y0 and yl > y0)
 
 def stack_objective(layers):
-    """layer 수 → yield × thermal 손실"""
-    # 12 layer 최적 (yield 0.98^12, thermal OK).
-    # 10 layer: yield 높지만 기능 부족. 14: yield 낮고 thermal 악화.
+    """layer count → yield × thermal loss"""
+    # 12 layer optimum (yield 0.98^12, thermal OK).
+    # 10 layer: high yield but insufficient functionality. 14: low yield, thermal worse.
     lyr = int(round(layers))
     yield_loss = abs(0.98**lyr - 0.98**12)
-    thermal_loss = max(0, lyr - 12) * 5  # 초과 layer thermal penalty
-    func_loss = max(0, 12 - lyr) * 3     # 부족 layer function penalty
+    thermal_loss = max(0, lyr - 12) * 5  # excess layers thermal penalty
+    func_loss = max(0, 12 - lyr) * 3     # deficit layers function penalty
     return yield_loss + thermal_loss + func_loss + 0.01
 
-# ─── §7.5 LIMITS — Fourier heat + bonding ────────────────────────────────
+# ─── §7.5 LIMITS — Fourier heat + bonding ────────────────────────────
 K_CU = 401    # W/(m·K) Cu thermal conductivity
 def fourier_max_heat(k, A_m2, L_m, dT_K):
     """Q = k·A·ΔT/L, max heat flux"""
@@ -756,11 +756,11 @@ OEIS_KNOWN = {
 def pareto_rank_n6():
     random.seed(63)
     n_total = 2400
-    n6_score = 0.96  # §4 HEXA-3 n=6 EXACT 평균
+    n6_score = 0.96  # §4 HEXA-3 n=6 EXACT mean
     better = sum(1 for _ in range(n_total) if random.gauss(0.7, 0.1) > n6_score)
     return better / n_total
 
-# ─── §7.9 SYMBOLIC — Fraction 정확 유리수 ───────────────────────────────
+# ─── §7.9 SYMBOLIC — Fraction exact rationals ──────────────────────────
 def symbolic_ratios():
     tests = [
         ("Egyptian(1/2+1/3+1/6)",   Fraction(1,2)+Fraction(1,3)+Fraction(1,6), Fraction(1,1)),
@@ -769,34 +769,34 @@ def symbolic_ratios():
         ("TSV pitch = φ = 2 μm",      Fraction(PHI),                             Fraction(2)),
         ("Vertical lane = σ·J₂",      Fraction(MAC),                             Fraction(SIGMA*J2)),
         ("Package = σ×σ mm",          Fraction(SIGMA*SIGMA),                     Fraction(144)),
-        ("면적 축소 = 1/σ²",          Fraction(1, SIGMA_SQ),                     Fraction(1,144)),
-        ("Stack 두께 = σ·J₂ μm",     Fraction(SIGMA*J2),                         Fraction(576)),
+        ("Area reduction = 1/σ²",     Fraction(1, SIGMA_SQ),                     Fraction(1,144)),
+        ("Stack thickness = σ·J₂ μm", Fraction(SIGMA*J2),                         Fraction(576)),
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
 # ─── §7.10 COUNTER ──────────────────────────────────────────────────────
 COUNTER_EXAMPLES = [
-    ("Cu 열전도도 401 W/mK",      "소재 상수, n=6 독립"),
-    ("Si 열팽창계수 2.6 ppm/K",   "물성, n=6 무관"),
-    ("Bond strength 1000 MPa Cu", "재료역학, n=6 독립"),
-    ("π = 3.14159...",              "기하 상수, n=6 독립"),
+    ("Cu thermal conductivity 401 W/mK", "material constant, n=6 independent"),
+    ("Si thermal expansion 2.6 ppm/K",   "property, unrelated to n=6"),
+    ("Bond strength 1000 MPa Cu",        "material mechanics, n=6 independent"),
+    ("π = 3.14159...",                    "geometric constant, n=6 independent"),
 ]
 FALSIFIERS = [
-    "적층 layer 수 측정 ≠ 12 (σ) → 구조 폐기",
-    "TSV pitch 측정 > 3μm → φ=2 예측 폐기",
-    "밀도 증가 측정 < 120x (144×83%) → σ² 공식 폐기",
-    "Egyptian 수직 열 분할 합 ≠ 1 → thermal 모델 폐기",
-    "Tj max > 110℃ (383K) → 수직 열 구조 폐기",
-    "χ² p-value < 0.01 → n=6 우연 가설 채택, HEXA-3 폐기",
-    "Package 크기 측정 > 15×15 mm → σ×σ 구조 폐기",
+    "Stack layer count measurement ≠ 12 (σ) → discard structure",
+    "TSV pitch measurement > 3μm → discard φ=2 prediction",
+    "Density gain measurement < 120x (144×83%) → discard σ² formula",
+    "Egyptian vertical heat partition sum ≠ 1 → discard thermal model",
+    "Tj max > 110℃ (383K) → discard vertical heat structure",
+    "χ² p-value < 0.01 → accept n=6 coincidence hypothesis, discard HEXA-3",
+    "Package size measurement > 15×15 mm → discard σ×σ structure",
 ]
 
-# ─── 메인 실행 ────────────────────────────────────────────────────────
+# ─── Main execution ────────────────────────────────────────────────────
 if __name__ == "__main__":
     r = []
 
     # §7.0
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    r.append(("§7.0 CONSTANTS number-theoretic derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SIGMA_SQ == 144))
 
     # §7.1
@@ -805,51 +805,51 @@ if __name__ == "__main__":
 
     # §7.2
     F1, F2, F3 = cross_density_3ways()
-    r.append(("§7.2 CROSS density 3경로 일치 (144)",
+    r.append(("§7.2 CROSS density 3 paths match (144)",
               all(abs(F - 144) / 144 < 0.15 for F in [F1, F2, F3])))
     G1, G2, G3 = cross_vertical_lane_3ways()
-    r.append(("§7.2 CROSS vertical lane 3경로 일치 (288)",
+    r.append(("§7.2 CROSS vertical lane 3 paths match (288)",
               all(abs(G - 288) / 288 < 0.15 for G in [G1, G2, G3])))
 
-    # §7.3 1/√σ 배선 축소 (-0.5 slope)
+    # §7.3 1/√σ wire reduction (-0.5 slope)
     # L ∝ 1/√n → log(L) = -0.5 log(n)
     ns = [4, 9, 16, 25, 36]
     Ls = [1.0 / sqrt(n) for n in ns]
     exp_wire = scaling_exponent(ns, Ls)
-    r.append(("§7.3 SCALING 배선 축소 -0.5 slope",
+    r.append(("§7.3 SCALING wire reduction -0.5 slope",
               abs(exp_wire - (-0.5)) < 0.1))
 
-    # §7.4 layer=12 볼록
+    # §7.4 layer=12 convex
     y0, yh, yl, convex = sensitivity(stack_objective, 12)
-    r.append(("§7.4 SENSITIVITY layer=12 볼록", convex))
+    r.append(("§7.4 SENSITIVITY layer=12 convex", convex))
 
-    # §7.5 물리 상한 — Tj < 110℃
+    # §7.5 physical upper bound — Tj < 110℃
     Q_tdp = 480  # W
     Tj = tj_predict(Q_tdp)
     r.append(("§7.5 LIMITS Tj < 383K (110℃)",
               Tj < 383))
-    # Fourier 용량
+    # Fourier capacity
     Qmax = fourier_max_heat(K_CU, 144e-6, 576e-6, 75)
     r.append(("§7.5 LIMITS Fourier heat > TDP",
               Qmax > Q_tdp))
 
     # §7.6 χ²
     chi2, df, p = chi2_pvalue([1.0] * 42, [1.0] * 42)
-    r.append(("§7.6 CHI2 H₀ 기각 안 됨", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 H₀ not rejected", p > 0.05 or chi2 == 0))
 
     # §7.7
-    r.append(("§7.7 OEIS 시퀀스 등록",
+    r.append(("§7.7 OEIS sequence registered",
               (1, 2, 3, 6, 12, 24, 48, 144, 288) in OEIS_KNOWN))
 
     # §7.8
-    r.append(("§7.8 PARETO n=6 상위 5%", pareto_rank_n6() < 0.05))
+    r.append(("§7.8 PARETO n=6 top 5%", pareto_rank_n6() < 0.05))
 
     # §7.9
-    r.append(("§7.9 SYMBOLIC Fraction 일치",
+    r.append(("§7.9 SYMBOLIC Fraction match",
               all(ok for _, ok, _ in symbolic_ratios())))
 
     # §7.10
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    r.append(("§7.10 COUNTER/FALSIFIERS enumerated",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -858,30 +858,30 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{('OK' if ok else 'FAIL')}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (HEXA-3 3D Stack n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (HEXA-3 3D Stack n=6 honesty check)")
 ```
 
 
-## §6 EVOLVE (Mk.I~V 진화)
+## §6 EVOLVE (Mk.I~V evolution)
 
-궁극의 3D Stack HEXA-3 실제 실현 로드맵:
+Ultimate 3D Stack HEXA-3 realization roadmap:
 
 <details open>
 <summary><b>Mk.V — 2050+ σ=12 layer full stack (current target)</b></summary>
 
-logic×4 + DRAM×4 + L2×2 + optical×1 + power×1 = σ=12 완전 통합.
-φ=2μm Cu-Cu hybrid bonding, σ·J₂=288 TSV/mm², σ²=144x 밀도.
-micro-channel liquid 냉각 + Egyptian 1/2+1/3+1/6 수직 열 분할.
-선행 조건: chip-architecture 🛸10, packaging 🛸10, thermal-liquid 🛸9.
+logic×4 + DRAM×4 + L2×2 + optical×1 + power×1 = σ=12 full integration (candidate).
+φ=2μm Cu-Cu hybrid bonding, σ·J₂=288 TSV/mm², σ²=144x density.
+micro-channel liquid cooling + Egyptian 1/2+1/3+1/6 vertical heat partition.
+Prerequisites: chip-architecture 🛸10, packaging 🛸10, thermal-liquid 🛸9.
 
 </details>
 
 <details>
 <summary>Mk.IV — 2045~2050 Logic+DRAM+L2 8-12 layer</summary>
 
-TSMC SoIC + CoWoS-L 확장. 8 layer 부터 12 layer 양산.
-Cu-Cu hybrid 2μm pitch 상용, liquid cold plate.
-128x 밀도 (σ² 이하).
+TSMC SoIC + CoWoS-L extension. Mass production from 8 to 12 layers.
+Cu-Cu hybrid 2μm pitch commercial, liquid cold plate.
+128x density (below σ²).
 
 </details>
 
@@ -889,33 +889,33 @@ Cu-Cu hybrid 2μm pitch 상용, liquid cold plate.
 <summary>Mk.III — 2035~2045 Logic+DRAM 4-6 layer</summary>
 
 Intel Foveros + EMIB + TSMC SoIC 4 layer.
-5μm Cu-Cu hybrid bonding, 48x 밀도.
-AMD MI300, NVIDIA GB200 계보의 확장.
+5μm Cu-Cu hybrid bonding, 48x density.
+Extension of the AMD MI300, NVIDIA GB200 lineage.
 
 </details>
 
 <details>
-<summary>Mk.II — 2028~2035 HBM 12-stack (L0 검증)</summary>
+<summary>Mk.II — 2028~2035 HBM 12-stack (L0 draft check)</summary>
 
 Samsung/SK Hynix HBM4 12-stack DRAM only.
-TSV 15μm pitch, 12 layer 검증 완료.
-Logic-DRAM 2 stack 하이브리드 (CoWoS).
+TSV 15μm pitch, 12 layer verification demonstrated.
+Logic-DRAM 2-stack hybrid (CoWoS).
 
 </details>
 
 <details>
-<summary>Mk.I — 2026 삼성전자 파운드리 양산 기준 (현재)</summary>
+<summary>Mk.I — 2026 Samsung foundry mass-production baseline (present)</summary>
 
-**2026년 삼성전자 파운드리 양산 기준: X-Cube 3D stacking + TSV 기반 SRAM-on-logic 양산 (2023+)**
+**2026 Samsung foundry mass-production baseline: X-Cube 3D stacking + TSV-based SRAM-on-logic production (2023+)**
 
-- 삼성 X-Cube (eXtended-Cube): SRAM 스택을 로직 다이 위에 TSV 로 직접 결합, 2020 발표 → 2023 양산
-- TSV pitch: 40 μm (Cu TSV, via-middle 방식), SF7/SF5 공정 기반
-- 스택 층수: SRAM 2층 on 로직 1층 = 총 3층 (HEXA-3 목표 12층 대비 1/4)
-- 하이브리드 본딩 (Cu-Cu): 삼성 Advanced Packaging Lab 개발중, 2026년 파일럿 라인 (경쟁: TSMC SoIC, Intel Foveros Direct)
-- HBM3E 12H (2024~): 12층 적층 DRAM, 1024 I/O, 1.2 TB/s, pitch ~48 μm MR-MUF
-- thermal simulator + 3D place&route 툴은 HEXA-3 Mk.I 레퍼런스로 유지 (Ansys RedHawk-SC / Cadence Celsius)
-- σ=12 wafer stack × φ=2μm TSV 는 현재 미구현 — Mk.III 부터 TSV pitch 2μm 목표 (현 40μm 대비 20× 개선 필요)
-- `hexa-3d-stack.md` canonical v1 확정
+- Samsung X-Cube (eXtended-Cube): SRAM stack directly joined on the logic die via TSV, announced 2020 → mass production 2023
+- TSV pitch: 40 μm (Cu TSV, via-middle), on SF7/SF5 process
+- Stack layer count: SRAM 2 layers on logic 1 layer = 3 layers total (1/4 vs HEXA-3 target of 12 layers)
+- Hybrid bonding (Cu-Cu): under development at Samsung Advanced Packaging Lab, pilot line 2026 (competitors: TSMC SoIC, Intel Foveros Direct)
+- HBM3E 12H (2024~): 12-layer DRAM stack, 1024 I/O, 1.2 TB/s, pitch ~48 μm MR-MUF
+- thermal simulator + 3D place&route tools retained as HEXA-3 Mk.I reference (Ansys RedHawk-SC / Cadence Celsius)
+- σ=12 wafer stack × φ=2μm TSV currently not implemented — targeting TSV pitch 2μm from Mk.III onward (20× improvement needed vs current 40μm)
+- `hexa-3d-stack.md` canonical v1 fixed
 
 </details>
 
@@ -951,4 +951,3 @@ This section covers team for the domain. Initial scaffold content — expand wit
 ## §15 REFERENCES
 
 This section covers references for the domain. Initial scaffold content — expand with domain-specific data, references, and verification in subsequent revisions.
-
