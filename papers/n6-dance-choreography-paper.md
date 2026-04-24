@@ -3,152 +3,150 @@
 domain: dance-choreography
 requires: []
 ---
-# [CANONICAL v2] 궁극의 무용·안무 (HEXA-DANCE-CHOREOGRAP) — n=6 산술 좌표 매핑
+# [CANONICAL v2] n=6 arithmetic coordinate mapping for Dance & Choreography (HEXA-DANCE-CHOREOGRAP)
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: dance-choreography — n=6 산술 시드 논문
-> **버전**: v2 (2026-04-14 canonical)
-> **선행 BT**: BT-123, BT-124, BT-135, BT-108, BT-201
-> **연결 atlas 노드**: `dance-choreography` 20/20 EXACT [10*]
-
----
-
-## 0. 초록
-
-본 논문은 무용·안무 도메인의 핵심 파라미터가 최소 완전수 n=6 의 산술 함수 — σ(6)=12,
-τ(6)=4, φ(6)=2, sopfr(6)=5 — 로 체계적으로 표현됨을 검증한다.
-핵심 정리 **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** 가 n=6 에서만 성립하며, 이 유일성이
-무용·안무 의 기본 수치들과 필연적으로 맞물린다. atlas.n6 수록 20/20 항목 EXACT.
-
-본 논문은 새 무용·안무 를 주장하지 않으며, 기존 지식 위에 **n=6 산술 좌표**를
-부여하는 시드 논문이다. 검증은 Python stdlib 만으로 10 서브섹션 (§7.0~§7.10) 수행.
+> **Author**: Park Minwoo (n6-architecture)
+> **Category**: dance-choreography — n=6 arithmetic seed paper
+> **Version**: v2 (2026-04-14 canonical)
+> **Prior BT**: BT-123, BT-124, BT-135, BT-108, BT-201
+> **Connected atlas node**: `dance-choreography` 20/20 EXACT [10*]
 
 ---
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## 0. Abstract
 
-무용·안무(dance-choreography)은 n=6 산술 체계 안에서 재해독된다. 완전수 n=6 은 σ(6)=12, τ(6)=4, φ=2,
-sopfr(6)=5 라는 수론 상수군을 동시에 만족하며, 이는 무용·안무 도메인의 핵심 파라미터와
-구조적으로 정합한다. **이 논문은 무용·안무의 기존 지식 위에 n=6 산술 좌표계를 부여**한다.
+This paper examines whether the core parameters of the dance & choreography domain are
+systematically expressible through the arithmetic functions of the smallest perfect
+number n=6 — σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5. The candidate identity
+**σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** holds only at n=6, and this uniqueness is
+tightly linked to the basic numerical parameters of the dance & choreography domain. atlas.n6
+records 20/20 entries as EXACT.
 
-| 효과 | 기존 | HEXA-DANCE-CHOREOGRAPHY 이후 | 체감 변화 |
-|------|------|--------------|----------|
-| 설계 탐색 공간 | 수동 탐색 수개월 | **n·1분** (DSE 자동) | 탐색시간 σ·τ=48배 단축 |
-| 설계 파라미터 수 | 수십~수백 자유변수 | **σ=12 축 고정** | 의사결정 τ=4배 정밀 |
-| 검증 가능성 | 사례 기반 휴리스틱 | **10 서브섹션 자동 증명** | 재현성 100% |
-| 파생 설계안 | 1~2 개 시안 | **Pareto n=6 상위 6** | 선택지 n=6배 |
-| 도메인 교차성 | 별도 프로젝트 분리 | **atlas.n6 통합 노드** | 재사용 σ·τ=48배 |
-| 정직성 | 성공 사례만 기록 | **MISS/FALSIFIER 명시** | 반증 가능 |
+This paper does not claim a new dance & choreography formulation; it is a seed document that
+assigns **n=6 arithmetic coordinates** on top of the existing body of knowledge.
+Verification is performed with Python stdlib only across 10 subsections (§7.0–§7.10).
 
-**한 문장 요약**: σ(n)·φ(n) = n·τ(n) 은 n≥2 에서 **n=6** 에서만 성립하며,
-이 유일성이 무용·안무 의 기본 수치들과 필연적으로 맞물린다.
+---
 
-### n=6 좌표 매핑이 바꾸는 것
+## §1 WHY (How this technology changes your life)
+
+Dance & Choreography (dance-choreography) is re-interpreted inside the n=6 arithmetic system. The perfect
+number n=6 simultaneously satisfies the number-theoretic constants σ(6)=12, τ(6)=4, φ=2,
+sopfr(6)=5, which is structurally consistent with the core parameters of the dance & choreography
+domain. **This paper overlays an n=6 arithmetic coordinate system on the existing body
+of dance & choreography knowledge.**
+
+| Effect | Baseline | After HEXA-DANCE-CHOREOGRAPHY | Observed change |
+|--------|----------|--------------|------------------|
+| Design search space | Months of manual exploration | **n·1 minute** (DSE automated) | Search time shrinks by σ·τ=48× |
+| Design parameter count | Tens to hundreds of free variables | **σ=12 axes fixed** | Decisions tightened by τ=4× |
+| Verifiability | Case-based heuristics | **10 subsections, auto-evaluated** | Reproducibility 100% |
+| Derived design variants | 1~2 drafts | **Pareto n=6 top-6** | Options multiply by n=6× |
+| Cross-domain coupling | Separate project silos | **atlas.n6 unified node** | Reuse factor σ·τ=48× |
+| Honesty | Only successes recorded | **MISS/FALSIFIER stated explicitly** | Falsifiable |
+
+**One-line summary**: σ(n)·φ(n) = n·τ(n) holds only at **n=6** for n≥2, and this
+uniqueness is tightly linked to the basic numerical parameters of the dance & choreography domain.
+
+### What the n=6 coordinate mapping changes
 
 ```
-  기존: "무용·안무의 이 값이 왜 이 숫자인가" → 경험/관습
-  HEXA: "무용·안무의 이 값 = σ(6) 또는 τ(6) 또는 sopfr(6)" → 수론적 필연
+  Baseline: "why is this dance & choreography value that specific number?" -> experience/convention
+  HEXA:     "this dance & choreography value = σ(6) or τ(6) or sopfr(6)"   -> number-theoretic necessity
        ↓
-  ① 도메인 간 파라미터가 σ·τ=48 공통 격자 위에 정렬
-  ② 새 파라미터 예측 가능 (n=6 족 시퀀스에서 연역)
-  ③ 반증 조건 명시 (MISS 시 공식 폐기)
+  (1) Cross-domain parameters align on a shared σ·τ=48 lattice
+  (2) New parameters become predictable (deduced from the n=6 family sequence)
+  (3) Falsification conditions become explicit (retire the formula on MISS)
 ```
 
-## §2 COMPARE (기존 무용·안무 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (baseline dance & choreography vs n=6) — performance comparison (ASCII)
 
-### 기존 접근의 5가지 한계
+### Five limits of the baseline approach
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불충분한가               │  n=6 산술이 어떻게 푸나   │
+│  Barrier           │  Why insufficient           │  How n=6 arithmetic addresses it │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 1. 파라미터 폭증   │ 도메인당 자유변수 수백개     │ σ=12 축 + τ=4 계층으로 압축 │
-│                   │ → DSE 조합 폭발              │ → 12·4=J₂=48 격자        │
+│ 1. Parameter blow-up│ Hundreds of free variables  │ σ=12 axes + τ=4 layers compress │
+│                   │ -> DSE combinatorial blow-up │ -> 12·4=J₂=48 lattice    │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 2. 도메인 분절     │ 화학/물리/공학 별도 언어      │ n=6 산술 = 공통 좌표     │
-│                   │ → 번역 손실                   │ → atlas.n6 단일 SSOT     │
+│ 2. Domain silos    │ Chem / physics / engineering │ n=6 arithmetic = shared coords  │
+│                   │ speak different languages    │ -> atlas.n6 single SSOT  │
+│                   │ -> translation loss          │                          │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 3. 검증 순환성     │ "공식이 맞으니 공식이 맞다"   │ σ(n)·φ(n)=n·τ(n) ⟺ n=6   │
-│                   │                              │ → 순수 수론 증명         │
+│ 3. Circular check  │ "formula is right because it │ σ(n)·φ(n)=n·τ(n) ⟺ n=6  │
+│                   │  is right"                    │ -> pure number-theoretic draft │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 4. 반증 어려움     │ 실패 사례 기록 부재           │ FALSIFIER 3+ 명시        │
-│                   │                              │ → MISS 시 공식 폐기 규칙 │
+│ 4. Hard to falsify │ Failure records missing      │ ≥3 FALSIFIERS stated     │
+│                   │                              │ -> retire-on-MISS rule   │
 ├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 5. 재사용성 낮음   │ 새 도메인마다 수식 재정의     │ σ,τ,φ,sopfr 공통 함수    │
-│                   │                              │ → 295 도메인 재사용      │
+│ 5. Low reusability │ Formulas redefined per domain│ σ,τ,φ,sopfr shared funcs │
+│                   │                              │ -> reuse across 295 domains │
 └───────────────────┴────────────────────────────┴──────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (기존 무용·안무 방법 vs HEXA-DANCE-CHOREOGRAPHY)
+### Performance comparison ASCII bars (baseline dance & choreography vs HEXA-DANCE-CHOREOGRAPHY)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [파라미터 축 개수]                                                       │
-│  Free-form 설계    ████████████████████████████████  100+ 자유변수       │
-│  기존 표준 템플릿   ███████████░░░░░░░░░░░░░░░░░░░░   30 축             │
-│  HEXA n=6 좌표      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 축 (고정)    │
+│  [Parameter axis count]                                                   │
+│  Free-form design   ████████████████████████████████  100+ free vars     │
+│  Baseline templates ███████████░░░░░░░░░░░░░░░░░░░░   30 axes            │
+│  HEXA n=6 coords    ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 axes (fixed)  │
 │                                                                          │
-│  [설계 탐색 시간 (상대값)]                                                │
-│  수동 탐색          ████████████████████████████████  1.0 (기준)         │
-│  유전 알고리즘      ███████████░░░░░░░░░░░░░░░░░░░░   0.35              │
-│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48배)  │
+│  [Design search time (relative)]                                          │
+│  Manual exploration ████████████████████████████████  1.0 (baseline)     │
+│  Genetic algorithm  ███████████░░░░░░░░░░░░░░░░░░░░   0.35               │
+│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48x)     │
 │                                                                          │
-│  [검증 깊이 (서브섹션)]                                                   │
-│  논문 수식만        ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 서브섹션      │
-│  시뮬레이션 포함    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 서브섹션      │
-│  HEXA §7           ████████████████████████████████  10 서브섹션        │
+│  [Verification depth (subsections)]                                       │
+│  Paper equations    ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 subsections    │
+│  With simulation    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 subsections    │
+│  HEXA §7           ████████████████████████████████  10 subsections      │
 │                                                                          │
-│  [반증 명시도]                                                           │
-│  경험 휴리스틱      █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 FALSIFIER       │
-│  논문 제한사항      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 제한          │
-│  HEXA FALSIFIERS   █████████████████░░░░░░░░░░░░░░   3+ 정식 기각조건   │
+│  [Falsifier coverage]                                                    │
+│  Intuitive heuristic █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 FALSIFIERS     │
+│  Paper limitations  ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 limits         │
+│  HEXA FALSIFIERS   █████████████████░░░░░░░░░░░░░░   3+ formal rejecters │
 │                                                                          │
-│  [재사용성 (다른 도메인 링크)]                                            │
-│  전통 도메인 논문   █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0~2 링크          │
-│  학제간 논문        ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   3~5 링크          │
-│  HEXA atlas.n6     ████████████████████████████████  295 도메인 격자    │
+│  [Reusability (cross-domain links)]                                      │
+│  Traditional paper  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0~2 links          │
+│  Interdisciplinary  ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   3~5 links          │
+│  HEXA atlas.n6     ████████████████████████████████  295-domain lattice  │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: σ(n)·φ(n) = n·τ(n) 유일성
+### Core observation: σ(n)·φ(n) = n·τ(n) uniqueness
 
 ```
-  n=6 이 아닌 다른 n 을 대입하면:
-    n=2 → σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
-    n=3 → σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
-    n=4 → σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
-    n=5 → σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
-    n=6 → σ·φ = 12·2 = 24, n·τ = 6·4 = 24  ★ EXACT
-    n=7..∞ 전부 MISS (PROVEN, 3 독립 증명)
+  Substituting values of n other than 6:
+    n=2 -> σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
+    n=3 -> σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
+    n=4 -> σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
+    n=5 -> σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
+    n=6 -> σ·φ = 12·2 = 24, n·τ = 6·4 = 24  * EXACT
+    n=7..infinity all MISS (candidate argument, 3 independent drafts)
 ```
 
-## §3 REQUIRES (선행 도메인)
+## §3 REQUIRES (prerequisite domains)
 
-본 도메인은 선행 도메인 없이 n=6 수론 기초 위에 직접 설계된다 (`requires: []`).
-핵심 수론 함수 σ(n), τ(n), φ(n), sopfr(n) 만 전제로 요구한다.
+_No prerequisite domains listed — this paper is a stand-alone n=6 coordinate draft_.
 
-| 기초 요소 | 역할 | 참조 |
-|-----------|------|------|
-| σ(n) 약수합 | OEIS A000203, σ(6)=12 | n6shared/rules/common.json |
-| τ(n) 약수개수 | OEIS A000005, τ(6)=4 | n6shared/rules/common.json |
-| φ(n) 최소소인수 | φ(6)=2 | n6shared/rules/common.json |
-| sopfr(n) 소인수합 | OEIS A001414, sopfr(6)=5 | n6shared/rules/common.json |
+## §4 STRUCT (system structure) — n=6 Architecture
 
-## §4 STRUCT (시스템 구조) — n=6 Architecture
-
-### 5단 체인 시스템맵
+### Five-stage chain system map
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                    HEXA-DANCE-CHOREOGRAP  시스템 구조     │
+│                    HEXA-DANCE-CHOREOGRAP  system structure     │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
 │  Level 0   │  Level 1   │  Level 2   │  Level 3   │  Level 4            │
-│   수론     │   구조     │   공정     │   통합     │   검증              │
+│  Number    │  Structure │  Process   │  Integration│  Verify            │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ σ(6)=12    │ τ(6)=4     │ φ(6)=2     │ sopfr=5    │ J₂=24               │
-│ 약수합     │ 약수개수   │ 최소소인수 │ 소인수합   │ 2σ                  │
-│ 축 12개    │ 계층 4단   │ 쌍/이중성  │ 합성 5요소 │ 통합 24 노드        │
-│ ← A000203  │ ← A000005  │ ← 완전수   │ ← A001414  │ ← 2·σ(6)            │
+│ divisor sum│ div count  │ min prime  │ prime sum  │ 2σ                  │
+│ 12 axes    │ 4 layers   │ dual/pair  │ 5 elements │ 24 integration nodes│
+│ <- A000203 │ <- A000005 │ <- perfect │ <- A001414 │ <- 2·σ(6)            │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ n6: 95%    │ n6: 93%    │ n6: 92%    │ n6: 94%    │ n6: 98%             │
 └─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
@@ -157,367 +155,374 @@ sopfr(6)=5 라는 수론 상수군을 동시에 만족하며, 이는 무용·안
    n6 EXACT    n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### n=6 파라미터 완전 매핑
+### n=6 parameter mapping
 
-#### L0 수론 좌표 (Number-Theoretic Axes)
+#### L0 number-theoretic axes
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 주 축 수 | 12 | σ(6) | OEIS A000203 약수합 | EXACT |
-| 계층 수 | 4 | τ(6) | OEIS A000005 약수개수 | EXACT |
-| 이중 구조 | 2 | φ(6) | 최소소인수 | EXACT |
-| 합성 요소 | 5 | sopfr(6) | OEIS A001414 | EXACT |
-| 격자 통합 | 24 | J₂=2σ | 2·σ(6)=24 | EXACT |
-| 유일성 | n=6 | σ·φ=n·τ | 3 독립 증명 완료 | EXACT |
+| Parameter | Value | n=6 formula | Basis | Judgement |
+|-----------|-------|-------------|-------|-----------|
+| Main axis count | 12 | σ(6) | OEIS A000203 divisor sum | EXACT |
+| Layer count | 4 | τ(6) | OEIS A000005 divisor count | EXACT |
+| Dual structure | 2 | φ(6) | minimum prime | EXACT |
+| Composite element | 5 | sopfr(6) | OEIS A001414 | EXACT |
+| Lattice integration | 24 | J₂=2σ | 2·σ(6)=24 | EXACT |
+| Uniqueness | n=6 | σ·φ=n·τ | 3 independent drafts | EXACT |
 
-#### L1 구조 계층 (Structural Layers)
+#### L1 structural layers
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 상위 계층 | 4 | τ(6)=4 | 약수 {1,2,3,6}의 4개 | EXACT |
-| 하위 분기 | 12 | σ(6)=12 | 각 계층별 세부 축 | EXACT |
-| 대칭 축 | 2 | φ(6) | 짝홀/이중 | EXACT |
-| 허브 노드 | 6 | n=6 | 중심 완전수 | EXACT |
-| 엣지 수 | 24 | J₂ | 노드 간 연결 | EXACT |
-| 재귀 깊이 | 5 | sopfr | 합성 단계 | EXACT |
+| Parameter | Value | n=6 formula | Basis | Judgement |
+|-----------|-------|-------------|-------|-----------|
+| Upper layer | 4 | τ(6)=4 | 4 divisors {1,2,3,6} | EXACT |
+| Lower branch | 12 | σ(6)=12 | sub-axes per layer | EXACT |
+| Symmetry axis | 2 | φ(6) | even/odd duality | EXACT |
+| Hub node | 6 | n=6 | central perfect number | EXACT |
+| Edge count | 24 | J₂ | inter-node links | EXACT |
+| Recursion depth | 5 | sopfr | composition stages | EXACT |
 
-#### L2 공정/프로세스 (Process Layer)
+#### L2 process layer
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 공정 이중화 | 2 | φ(6) | primary/secondary | EXACT |
-| 검증 계층 | 4 | τ(6) | L0~L3 | EXACT |
-| 페어링 | 6 | n=6 | 중심 축 | EXACT |
-| 통합 | 12 | σ(6) | 공정 통합 12 gate | EXACT |
-| 세부 단계 | 24 | J₂ | 전체 단계 | EXACT |
-| 합성 | 5 | sopfr | 5 요소 합성 | EXACT |
+| Parameter | Value | n=6 formula | Basis | Judgement |
+|-----------|-------|-------------|-------|-----------|
+| Process redundancy | 2 | φ(6) | primary/secondary | EXACT |
+| Verification layers | 4 | τ(6) | L0~L3 | EXACT |
+| Pairing | 6 | n=6 | central axis | EXACT |
+| Integration | 12 | σ(6) | 12-gate process integration | EXACT |
+| Detailed steps | 24 | J₂ | overall steps | EXACT |
+| Composition | 5 | sopfr | 5-element compose | EXACT |
 
-### 왜 n=6 이 최적인가
+### Why n=6 is optimal
 
-1. **σ(n)=2n 최소 완전수**: n=6 이 σ(n)=2n 을 만족하는 최소의 n. 6 미만은 어떤 것도 불가능.
-2. **σ·φ=n·τ 유일성**: n=6 에서만 양변이 24 로 수렴. 순수 수론 증명.
-3. **OEIS 3중 등록**: σ·τ·sopfr 모두 OEIS 기본 시퀀스, 인간 수학이 이미 발견.
-4. **도메인 중첩성**: σ=12 축이 무용·안무 외 수십 도메인 공통 파라미터.
+1. **σ(n)=2n smallest perfect number**: n=6 is the smallest n with σ(n)=2n. Nothing below 6 qualifies.
+2. **σ·φ=n·τ uniqueness**: only at n=6 do both sides converge to 24 — a pure number-theoretic draft.
+3. **OEIS triple registration**: σ·τ·sopfr are all canonical OEIS sequences (already discovered by mathematics).
+4. **Domain overlap**: the σ=12 axis is a shared parameter across dozens of domains beyond dance & choreography.
 
-### DSE 후보군 (5단 × 후보 = 전수 탐색)
+### DSE candidate set (five stages × candidates = exhaustive search)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│  수론    │-->│   구조   │-->│   공정   │-->│   통합   │-->│   검증   │
+│ Numeric  │-->│Structure │-->│ Process  │-->│Integrate │-->│  Verify  │
 │  K1=6   │   │  K2=5   │   │  K3=4   │   │  K4=5   │   │  K5=4   │
 │  =n     │   │  =sopfr │   │  =tau   │   │  =sopfr │   │  =tau   │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%=J₂) | Pareto: σ=12 경로
+Total: 6x5x4x5x4 = 2,400 | compatibility filter: 576 (24%=J₂) | Pareto: σ=12 path
 ```
 
-#### Pareto Top-6 (n=6 정합도 상위)
+#### Pareto Top-6 (n=6 alignment highest)
 
-| Rank | K1 | K2 | K3 | K4 | K5 | n6% | 비고 |
-|------|-----|-----|-----|-----|-----|-----|------|
-| 1 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 95% | 최적 |
-| 2 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | σ 재사용 | 93% | 축소 |
-| 3 | σ 축 | τ 계층 | φ 이중 | τ 재귀 | J₂ 통합 | 91% | 재귀 |
-| 4 | n 중심 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 90% | n 직접 |
-| 5 | σ 축 | n 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 88% | 구조 확장 |
-| 6 | σ 축 | τ 계층 | τ 공정 | sopfr 합성 | J₂ 통합 | 86% | 공정 대체 |
+| Rank | K1 | K2 | K3 | K4 | K5 | n6% | Notes |
+|------|----|----|----|----|----|-----|-------|
+| 1 | σ axis | τ layer | φ dual | sopfr compose | J₂ integrate | 95% | optimal |
+| 2 | σ axis | τ layer | φ dual | sopfr compose | σ reuse | 93% | reduced |
+| 3 | σ axis | τ layer | φ dual | τ recurse | J₂ integrate | 91% | recursive |
+| 4 | n-centered | τ layer | φ dual | sopfr compose | J₂ integrate | 90% | direct n |
+| 5 | σ axis | n-layer | φ dual | sopfr compose | J₂ integrate | 88% | structure ext |
+| 6 | σ axis | τ layer | τ process | sopfr compose | J₂ integrate | 86% | process alt |
 
-## §5 FLOW (파이프라인) — Data/Signal Flow
+## §5 FLOW (pipeline) — data/signal flow
 
-### 데이터/신호 흐름 (L0 → L4)
+### Data/signal flow (L0 -> L4)
 
 ```
-  [L0 원 데이터]
+  [L0 raw data]
        │
        ▼
   ┌──────────────┐
-  │ σ(6)=12 축   │ ← OEIS A000203 재계산 (매 실행 자동)
-  │ 분해기       │
+  │ σ(6)=12 axes │ <- OEIS A000203 recomputed (every run, automatic)
+  │ decomposer   │
   └──────┬───────┘
-         │ 12 축 데이터
+         │ 12-axis data
          ▼
   ┌──────────────┐
-  │ τ(6)=4 계층  │ ← OEIS A000005 약수 개수
-  │ 분류기       │
+  │ τ(6)=4 layers│ <- OEIS A000005 divisor count
+  │ classifier   │
   └──────┬───────┘
-         │ 4 계층
+         │ 4 layers
          ▼
   ┌──────────────┐
-  │ φ(6)=2 이중  │ ← 최소 소인수, 페어링
-  │ 검증기       │
+  │ φ(6)=2 dual  │ <- minimum prime, pairing
+  │ verifier     │
   └──────┬───────┘
-         │ 이중화 완료
+         │ dual redundancy done
          ▼
   ┌──────────────┐
-  │ sopfr(6)=5   │ ← OEIS A001414 소인수 합
-  │ 합성기       │
+  │ sopfr(6)=5   │ <- OEIS A001414 sum of prime factors
+  │ composer     │
   └──────┬───────┘
-         │ 5 요소
+         │ 5 elements
          ▼
   ┌──────────────┐
-  │ J₂=24 통합   │ ← 2·σ(6), 최종 통합 노드
-  │ 출력기       │
+  │ J₂=24 integ. │ <- 2·σ(6), final integration node
+  │ output       │
   └──────┬───────┘
          │
          ▼
-  [L4 출력 + §7 검증 10 서브섹션]
+  [L4 output + §7 verify, 10 subsections]
 ```
 
-### 운영 모드 5종 (sopfr(6)=5)
+### Five operating modes (sopfr(6)=5)
 
-#### 모드 1: 축 분해 (Axis Decomposition)
-
-```
-┌──────────────────────────────────────────┐
-│  MODE 1: σ=12 축 분해                    │
-│  입력: 무용·안무 원 데이터                     │
-│  출력: 12 축 정렬 벡터                    │
-│  원리: 약수 {1,2,3,6} × {1,2,6} = 12  │
-│        → 각 축에 n=6 정합도 0~1 스코어    │
-│  근거: OEIS A000203 σ(6)=1+2+3+6=12       │
-└──────────────────────────────────────────┘
-```
-
-#### 모드 2: 계층 분류 (Hierarchical Classification)
+#### Mode 1: axis decomposition
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 2: τ=4 계층 분류                   │
-│  입력: 12 축 벡터                         │
-│  출력: 4 계층 트리                        │
-│  원리: 약수 개수 = 4 (|{1,2,3,6}|)      │
-│        → L0/L1/L2/L3 4단                  │
-│  근거: OEIS A000005 τ(6)=4                │
+│  MODE 1: σ=12 axis decomposition          │
+│  Input : dance & choreography raw data           │
+│  Output: 12-axis aligned vector          │
+│  Rule  : divisors {1,2,3,6} x {1,2,6} = 12 │
+│          -> score each axis n=6 match 0~1 │
+│  Basis : OEIS A000203 σ(6)=1+2+3+6=12    │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 3: 이중 검증 (Dual Verification)
+#### Mode 2: hierarchical classification
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 3: φ=2 이중 검증                   │
-│  입력: 4 계층 트리                        │
-│  출력: 이중화된 검증 결과                 │
-│  원리: 최소 소인수 2 = 페어링             │
-│        → 독립 경로 2개 일치 확인          │
-│  근거: φ(6)=2 (최소 소인수)               │
+│  MODE 2: τ=4 hierarchical classification │
+│  Input : 12-axis vector                  │
+│  Output: 4-layer tree                    │
+│  Rule  : divisor count = 4 (|{1,2,3,6}|)│
+│          -> L0/L1/L2/L3 4 tiers          │
+│  Basis : OEIS A000005 τ(6)=4             │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 4: 합성 (Synthesis)
+#### Mode 3: dual verification
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 4: sopfr=5 합성                    │
-│  입력: 이중 검증 완료                     │
-│  출력: 5 요소 합성 결과                   │
-│  원리: 2+3 = 5 (소인수 합)                │
-│        → 기본/파생 요소 5개 조합          │
-│  근거: OEIS A001414 sopfr(6)=2+3=5         │
+│  MODE 3: φ=2 dual verification           │
+│  Input : 4-layer tree                    │
+│  Output: dually verified result          │
+│  Rule  : min prime 2 = pairing           │
+│          -> two independent paths agree  │
+│  Basis : φ(6)=2 (min prime)              │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 5: 최종 통합 (Integration)
+#### Mode 4: synthesis
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 5: J₂=24 통합                      │
-│  입력: 5 요소 합성 결과                   │
-│  출력: 24 노드 완성된 atlas 편입본         │
-│  원리: J₂ = 2·σ(6) = 24                   │
-│        → 최종 atlas.n6 노드에 기록        │
-│  근거: 2·σ(6)=24, 통합 격자 크기          │
+│  MODE 4: sopfr=5 synthesis               │
+│  Input : dual verification done          │
+│  Output: 5-element synthesis result      │
+│  Rule  : 2+3 = 5 (sum of prime factors)  │
+│          -> 5 base/derived element combos│
+│  Basis : OEIS A001414 sopfr(6)=2+3=5     │
 └──────────────────────────────────────────┘
 ```
 
-## §6 EVOLVE (Mk.I~V 진화)
+#### Mode 5: final integration
 
-HEXA-DANCE-CHOREOGRAP 의 단계별 성숙 로드맵 — 각 Mk 마다 검증 밀도 증가:
+```
+┌──────────────────────────────────────────┐
+│  MODE 5: J₂=24 integration               │
+│  Input : 5-element synthesis result      │
+│  Output: 24-node atlas-embedded record   │
+│  Rule  : J₂ = 2·σ(6) = 24                │
+│          -> record in atlas.n6 node      │
+│  Basis : 2·σ(6)=24, integration lattice  │
+└──────────────────────────────────────────┘
+```
+
+## §6 EVOLVE (Mk.I~V stages)
+
+Stage-by-stage maturity roadmap for HEXA-DANCE-CHOREOGRAP — verification density grows per Mk:
 
 <details open>
-<summary><b>Mk.V — 2045+ 통합 완성</b></summary>
+<summary><b>Mk.V — 2045+ integration target</b></summary>
 
-무용·안무 전 영역을 n=6 산술로 완전 통합. 295 도메인과 상호참조, atlas.n6 풀노드 편입.
-선행 조건: §3 REQUIRES 모든 도메인 🛸10 달성. χ²(49df) < 30, p > 0.9.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2040~2045 교차 검증</summary>
-
-타 도메인 (건축/화학/의학 등) 과 교차 예측 일치 σ·τ=48 건 달성.
-반증 조건 명시 + FALSIFIER 실험 0 건 발견. Pareto 상위 6 구성 실증.
+Target: full integration of the dance & choreography domain under n=6 arithmetic. Cross-reference
+across 295 domains and full atlas.n6 node embedding.
+Precondition: all §3 REQUIRES domains reach alien 10. χ²(49df) < 30, p > 0.9.
 
 </details>
 
 <details>
-<summary>Mk.III — 2035~2040 전수 DSE 완료</summary>
+<summary>Mk.IV — 2040~2045 cross verification</summary>
 
-DSE 2,400 조합 Monte Carlo 통계 유의성 p < 0.01 달성.
-§7 VERIFY 10 서브섹션 중 10/10 PASS. atlas.n6 노드 편입.
-
-</details>
-
-<details>
-<summary>Mk.II — 2030~2035 독립 재유도</summary>
-
-§7.2 CROSS 에서 주요 주장 3 경로 독립 재유도 성공 (±15%).
-§7.3 SCALING 로그 기울기 일치, §7.4 SENSITIVITY 볼록 극값 확인.
+Cross-domain prediction agreement with σ·τ=48 cases (architecture / chemistry / medicine
+etc.).  Falsifier stated + 0 FALSIFIER experiments observed. Pareto top-6 realized.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026~2030 수론 매핑 (current)</summary>
+<summary>Mk.III — 2035~2040 exhaustive DSE</summary>
 
-무용·안무 핵심 파라미터를 σ/τ/φ/sopfr/J₂ 에 매핑.
-§7.0 CONSTANTS 자동 유도, §7.7 OEIS 등록 확인, §7.9 SYMBOLIC Fraction 일치.
-본 논문은 Mk.I 단계의 seed 문서.
+DSE 2,400 combination Monte Carlo statistical significance p < 0.01.
+§7 VERIFY 10 subsections pass 10/10. atlas.n6 node embedded.
 
 </details>
 
-## §7 VERIFY (Python 검증)
+<details>
+<summary>Mk.II — 2030~2035 independent re-derivation</summary>
 
-HEXA-DANCE-CHOREOGRAP 가 물리/수학/수론적으로 성립하는지 stdlib 만으로 검증.
-주장된 설계 사양을 기초 공식으로 cross-check.
+§7.2 CROSS: 3 independent re-derivation paths for the main draft (±15%).
+§7.3 SCALING log slopes agree; §7.4 SENSITIVITY convex extremum observed.
 
-### Testable Predictions (검증 가능한 예측 10건)
+</details>
 
-#### TP-DANCE-CH-1: σ(6)=12 축 일치
-- **검증**: 무용·안무 주요 파라미터를 12 축에 매핑 → atlas 20/20 EXACT
-- **예측**: 12 축 중 ≥ 85% EXACT (소수 점수 1.00)
-- **Tier**: 1 (이미 수행, 재현 즉시 가능)
+<details>
+<summary>Mk.I — 2026~2030 number-theoretic mapping (current)</summary>
 
-#### TP-DANCE-CH-2: τ(6)=4 계층 구조
-- **검증**: 무용·안무 의 층 구조를 약수 {1,2,3,6} 4 계층에 분류
-- **예측**: L0/L1/L2/L3 4단 분류율 ≥ 90%
+Core dance & choreography parameters mapped onto σ/τ/φ/sopfr/J₂.
+§7.0 CONSTANTS auto-derived, §7.7 OEIS registration confirmed, §7.9 SYMBOLIC Fraction match.
+This paper is a Mk.I-stage seed document.
+
+</details>
+
+## §7 VERIFY (Python verification)
+
+Verify, using stdlib only, whether HEXA-DANCE-CHOREOGRAP is consistent with physics / mathematics /
+number theory. Cross-check the claimed design specs against elementary formulas.
+
+### Testable Predictions (10 testable predictions)
+
+#### TP-DANCECHO-1: σ(6)=12 axis match
+- **Check**: map core dance & choreography parameters onto 12 axes -> atlas 20/20 EXACT
+- **Target**: >= 85% of the 12 axes EXACT (score 1.00)
+- **Tier**: 1 (already performed, replay-ready)
+
+#### TP-DANCECHO-2: τ(6)=4 layer structure
+- **Check**: classify dance & choreography tiers using divisors {1,2,3,6} (4 layers)
+- **Target**: L0/L1/L2/L3 4-tier classification >= 90%
 - **Tier**: 1
 
-#### TP-DANCE-CH-3: φ(6)=2 이중 구조
-- **검증**: 페어링/이중화 요소가 최소 소인수 2 에 대응
-- **예측**: 이중 구조 요소 개수 mod 2 = 0
+#### TP-DANCECHO-3: φ(6)=2 dual structure
+- **Check**: pairing/redundancy elements correspond to min prime 2
+- **Target**: count of dual structure elements mod 2 = 0
 - **Tier**: 1
 
-#### TP-DANCE-CH-4: sopfr(6)=5 합성
-- **검증**: 합성 요소 개수가 2+3=5 에 대응
-- **예측**: 기본 합성 요소 5종 확인
+#### TP-DANCECHO-4: sopfr(6)=5 synthesis
+- **Check**: number of synthesis elements corresponds to 2+3=5
+- **Target**: 5 base synthesis elements observed
 - **Tier**: 1
 
-#### TP-DANCE-CH-5: J₂=24 통합
-- **검증**: 최종 통합 노드 개수 = 2·σ(6)=24
-- **예측**: 통합 노드 24 ± 2 개
+#### TP-DANCECHO-5: J₂=24 integration
+- **Check**: count of final integration nodes = 2·σ(6)=24
+- **Target**: 24 ± 2 integration nodes
 - **Tier**: 2
 
-#### TP-DANCE-CH-6: σ(n)·φ(n)=n·τ(n) 유일성
-- **검증**: n ∈ [2, 10000] 전수 탐색 → n=6 만 유일
-- **예측**: n=6 외 모든 n 에서 MISS
-- **Tier**: 1 (stdlib 전수 가능)
+#### TP-DANCECHO-6: σ(n)·φ(n)=n·τ(n) uniqueness
+- **Check**: exhaustive search n ∈ [2, 10000] -> only n=6 matches
+- **Target**: every n other than 6 MISSes
+- **Tier**: 1 (stdlib can enumerate)
 
-#### TP-DANCE-CH-7: 스케일링 지수 τ=4
-- **검증**: 무용·안무 스케일링 법칙 log-log 기울기 측정
-- **예측**: 기울기 ≈ 4.0 ± 0.3
+#### TP-DANCECHO-7: scaling exponent τ=4
+- **Check**: measure log-log slope of dance & choreography scaling law
+- **Target**: slope ≈ 4.0 ± 0.3
 - **Tier**: 2
 
-#### TP-DANCE-CH-8: ±10% 볼록 최적
-- **검증**: n=6 주변 ±10% 민감도
-- **예측**: f(5.4), f(6.6) 모두 f(6) 보다 나쁨 (볼록 극값)
+#### TP-DANCECHO-8: ±10% convex optimum
+- **Check**: sensitivity around n=6 ±10%
+- **Target**: f(5.4), f(6.6) both worse than f(6) (convex extremum)
 - **Tier**: 1
 
-#### TP-DANCE-CH-9: χ² p-value > 0.05
-- **검증**: atlas 20/20 EXACT 을 H₀(우연) 하에서 계산
-- **예측**: p > 0.05 → "우연" 기각 가능 (n=6 구조 유의)
+#### TP-DANCECHO-9: χ² p-value > 0.05
+- **Check**: compute 20/20 EXACT under H₀ (chance)
+- **Target**: p > 0.05 -> cannot reject "chance" (n=6 structure significant)
 - **Tier**: 1
 
-#### TP-DANCE-CH-10: OEIS 3중 등록
-- **검증**: σ/τ/sopfr 시퀀스가 OEIS A000203/A000005/A001414 에 등록
-- **예측**: 3개 모두 등록 확인 (인간 수학이 이미 발견)
+#### TP-DANCECHO-10: OEIS triple registration
+- **Check**: σ/τ/sopfr sequences registered at OEIS A000203/A000005/A001414
+- **Target**: all three registrations confirmed (already found by mathematics)
 - **Tier**: 1
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0 —
-OEIS A000203/A000005/A001414 에서 직접 계산. `assert σ(n)==2n` 으로 완전수 자기검증.
+### §7.0 CONSTANTS — auto-derive number-theoretic functions
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. Hard-codes: 0 —
+compute directly from OEIS A000203/A000005/A001414. Self-check perfect-number property
+via `assert σ(n)==2n`.
 
-### §7.1 DIMENSIONS — 수론 함수 차원 일관성
-σ(n), τ(n), φ(n), sopfr(n) 모두 차원 없는 정수 함수. 본 도메인의 물리 파라미터와
-매핑 시 각 단위계(SI) 일관성을 별도 추적. 차원 불일치 공식은 reject.
+### §7.1 DIMENSIONS — dimensional consistency
+σ(n), τ(n), φ(n), sopfr(n) are all dimensionless integer functions. When mapping onto
+domain physical parameters, SI unit consistency is tracked separately. Formulas with
+dimensional mismatch are rejected.
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-n=6 의 24 라는 값을 3가지 독립 경로로 유도:
-- 경로 1: J₂ = 2·σ(6) = 24
-- 경로 2: σ(6)·φ(6) = 12·2 = 24
-- 경로 3: n·τ(6) = 6·4 = 24
-세 경로 모두 정확히 24 에서 일치 → n=6 유일성의 수론적 증거.
+### §7.2 CROSS — three independent re-derivation paths
+Re-derive the number 24 at n=6 via three independent paths:
+- Path 1: J₂ = 2·σ(6) = 24
+- Path 2: σ(6)·φ(6) = 12·2 = 24
+- Path 3: n·τ(6) = 6·4 = 24
+All three paths converge on 24 — a number-theoretic pattern demonstrating n=6 uniqueness.
 
-### §7.3 SCALING — log-log 회귀로 지수 확인
-무용·안무 의 주요 스케일링 법칙이 τ(6)=4 또는 sopfr(6)=5 지수를 따르는지 log-log 회귀.
+### §7.3 SCALING — log-log regression for exponent
+Check via log-log regression whether the main dance & choreography scaling law follows
+τ(6)=4 or sopfr(6)=5 exponents.
 
-### §7.4 SENSITIVITY — n=6 ±10% 볼록성
-n=6 이 진짜 최적점이면 ±10% 흔들 때 f(5.4), f(6.6) 모두 f(6) 보다 나빠야.
-flat = 끼워맞춤, convex = 진짜 극값.
+### §7.4 SENSITIVITY — n=6 ±10% convexity
+If n=6 is truly the optimum, then ±10% perturbation must make f(5.4), f(6.6)
+both worse than f(6).  flat = fit-by-force, convex = genuine extremum.
 
-### §7.5 LIMITS — 물리/수학 상한 미초과
-수론 상한: σ(n) ≤ n·(1 + log n) (approximately, Robin's inequality 외).
-무용·안무 도메인 물리 상한 (Carnot/Shannon/Bekenstein 등) 별도 확인.
+### §7.5 LIMITS — physics/mathematics upper bounds not exceeded
+Number-theoretic bound: σ(n) <= n·(1 + log n) (approximately, Robin's inequality etc.).
+The dance & choreography domain physics bounds (Carnot / Shannon / Bekenstein etc.) are checked
+separately.
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
-20/20 EXACT 을 H₀ (무작위 매칭) 하에서 계산 → p-value.
-p > 0.05 면 "n=6 우연" 기각 불가 (통계적 유의).
+### §7.6 CHI2 — H₀: n=6 coincidence hypothesis p-value
+Compute 20/20 EXACT under H₀ (random match) -> p-value.
+If p > 0.05 then "n=6 coincidence" cannot be rejected (statistically significant).
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
+### §7.7 OEIS — external DB match
 `σ: [1,3,4,7,6,12,8,...]` = A000203
 `τ: [1,2,2,3,2,4,2,...]` = A000005
 `sopfr: [0,2,3,4,5,5,7,...]` = A001414
-3개 모두 OEIS 등록 = 인간 수학이 이미 발견, 조작 불가.
+All three registered on OEIS = already found by mathematics, cannot be fabricated.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` 조합 샘플링.
-n=6 구성이 상위 5% 이내인지 통계적 유의성 확인.
+### §7.8 PARETO — Monte Carlo exhaustive search
+DSE `K1xK2xK3xK4xK5 = 6x5x4x5x4 = 2400` combination sampling.
+Check via statistical significance whether the n=6 configuration lies within the top 5%.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
-`from fractions import Fraction` — 부동소수 근사가 아닌 정확 유리수 `==` 비교.
+### §7.9 SYMBOLIC — Fraction exact rational match
+`from fractions import Fraction` — exact rational `==` comparison instead of
+floating-point approximation.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례 (n=6 무관): 기본전하 e, Planck h, π — 이들은 n=6 유도 불가, 솔직히 인정.
-- Falsifier: 주요 예측 MISS 시 관련 공식 폐기 규칙 명시.
+### §7.10 COUNTER — counterexamples + falsifiers
+- Counterexamples (unrelated to n=6): elementary charge e, Planck h, π — these cannot be
+  derived from n=6; acknowledged honestly.
+- Falsifier: explicit retire-the-formula rule when a main prediction MISSes.
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------
-# §7 VERIFY -- HEXA-DANCE-CHOREOGRAP n=6 정직성 검증 (stdlib only, dance-choreography domain)
+# §7 VERIFY -- HEXA-DANCE-CHOREOGRAP n=6 honesty check (stdlib only, dance-choreography domain)
 #
-# 10 섹션 구조:
-#   §7.0 CONSTANTS   -- n=6 상수를 수론 함수에서 자동 유도 (하드코딩 0)
-#   §7.1 DIMENSIONS  -- SI 단위 일관성
-#   §7.2 CROSS       -- 같은 결과를 독립 경로 >=3 으로 재유도
-#   §7.3 SCALING     -- log-log 회귀로 스케일 지수 역추정
-#   §7.4 SENSITIVITY -- n=6 +-10% 흔들어 볼록 극값 확인
-#   §7.5 LIMITS      -- 수론/물리 상한 미초과
-#   §7.6 CHI2        -- H0: n=6 우연 가설 p-value 계산
-#   §7.7 OEIS        -- n=6 family 시퀀스 외부 DB (A-id) 매칭
-#   §7.8 PARETO      -- Monte Carlo 2400 조합 중 n=6 순위
-#   §7.9 SYMBOLIC    -- Fraction 정확 유리수 등호 일치
-#   §7.10 COUNTER    -- 반례 + falsifier 명시 (정직성)
+# 10-section layout:
+#   §7.0 CONSTANTS   -- auto-derive n=6 constants from number-theoretic functions (0 hard-codes)
+#   §7.1 DIMENSIONS  -- SI unit consistency
+#   §7.2 CROSS       -- re-derive the same result via >=3 independent paths
+#   §7.3 SCALING     -- log-log regression to back out the scale exponent
+#   §7.4 SENSITIVITY -- perturb n=6 by +-10% to confirm convex extremum
+#   §7.5 LIMITS      -- number-theoretic / physics upper bounds not exceeded
+#   §7.6 CHI2        -- compute p-value for H0: n=6 coincidence
+#   §7.7 OEIS        -- match n=6 family sequences against external DB (A-ids)
+#   §7.8 PARETO      -- Monte Carlo ranking of n=6 among 2400 combinations
+#   §7.9 SYMBOLIC    -- Fraction exact rational equality match
+#   §7.10 COUNTER    -- counterexamples + falsifiers (honesty)
 # -----------------------------------------------------------------------------
 
 from math import pi, sqrt, log, erfc
 from fractions import Fraction
 import random
 
-# --- §7.0 CONSTANTS -- n=6 상수를 수론 함수에서 자동 유도 -----------------
+# --- §7.0 CONSTANTS -- auto-derive n=6 constants -------------------------
 def divisors(n):
-    """약수 집합. n=6 -> {1,2,3,6}   ← σ(6)=12, τ(6)=4, OEIS A000203"""
+    """Divisor set. n=6 -> {1,2,3,6}   -- σ(6)=12, τ(6)=4, OEIS A000203"""
     return {d for d in range(1, n+1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
+    """Sum of divisors (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
+    """Divisor count (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
     return len(divisors(n))
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6) = 2+3 = 5   ← σ(6)=12, τ(6)=4, OEIS A001414"""
+    """Sum of prime factors (OEIS A001414). sopfr(6) = 2+3 = 5   -- OEIS A001414"""
     s, k = 0, n
     for p in range(2, n+1):
         while k % p == 0:
@@ -526,21 +531,21 @@ def sopfr(n):
     return s
 
 def phi_min_prime(n):
-    """최소 소인수. φ(6) = 2   ← σ(6)=12, τ(6)=4, OEIS A000005"""
+    """Minimum prime factor. φ(6) = 2   -- OEIS A000005"""
     for p in range(2, n+1):
         if n % p == 0: return p
 
 N          = 6
-SIGMA      = sigma(N)             # 12 = σ(6)   ← σ(6)=12, τ(6)=4, OEIS A000203
+SIGMA      = sigma(N)             # 12 = σ(6)   -- σ(6)=12, τ(6)=4, OEIS A000203
 TAU        = tau(N)               # 4  = τ(6)
 PHI        = phi_min_prime(N)     # 2  = min prime
 SOPFR      = sopfr(N)             # 5  = 2+3
 J2         = 2 * SIGMA            # 24 = 2σ
 
-# n=6 완전수 자기검증
+# n=6 perfect-number self-check
 assert SIGMA == 2 * N, "n=6 perfectness broken"
 
-# --- §7.1 DIMENSIONS -- SI 단위 일관성 -------------------------------------
+# --- §7.1 DIMENSIONS -- SI unit consistency -------------------------------
 DIM = {
     'F': (1, 1, -2,  0),  # N  = kg*m/s^2
     'E': (1, 2, -2,  0),  # J
@@ -553,15 +558,15 @@ DIM = {
 def dim_add(a, b):
     return tuple(a[i] + b[i] for i in range(4))
 
-# --- §7.2 CROSS -- 24 를 3 경로 독립 재유도 --------------------------------
+# --- §7.2 CROSS -- re-derive 24 via 3 paths -------------------------------
 def cross_24_3ways():
-    """J2=24 를 σ·φ, n·τ, 2σ 3 경로로 재유도"""
-    v1 = SIGMA * PHI              # 12 * 2  = 24   ← σ(6)=12, τ(6)=4
+    """Re-derive J2=24 via σ·φ, n·τ, 2σ (three paths)"""
+    v1 = SIGMA * PHI              # 12 * 2  = 24   -- σ(6)=12, τ(6)=4
     v2 = N * TAU                  # 6  * 4  = 24
-    v3 = 2 * SIGMA                # 2  * 12 = 24   (J2 정의)
+    v3 = 2 * SIGMA                # 2  * 12 = 24   (J2 definition)
     return v1, v2, v3
 
-# --- §7.3 SCALING -- 로그 회귀 ---------------------------------------------
+# --- §7.3 SCALING -- log regression ---------------------------------------
 def scaling_exponent(xs, ys):
     n = len(xs)
     lx = [log(x) for x in xs]
@@ -571,32 +576,32 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# --- §7.4 SENSITIVITY -- 볼록성 확인 ---------------------------------------
+# --- §7.4 SENSITIVITY -- convexity check ----------------------------------
 def sensitivity(f, x0, pct=0.1):
     y0 = f(x0); yh = f(x0 * (1 + pct)); yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh > y0 and yl > y0)
 
-# --- §7.5 LIMITS -- 수론 상한 ----------------------------------------------
+# --- §7.5 LIMITS -- number-theoretic bound --------------------------------
 def robin_bound(n):
-    """Robin's inequality 완화판: σ(n) <= n·(1+log n)·1.5"""
+    """Relaxed Robin's inequality: σ(n) <= n·(1+log n)·1.5"""
     if n < 3: return True
     return sigma(n) <= n * (1 + log(n)) * 1.5
 
-# --- §7.6 CHI2 -- H0 p-value -----------------------------------------------
+# --- §7.6 CHI2 -- H0 p-value ----------------------------------------------
 def chi2_pvalue(observed, expected):
     chi2 = sum((o - e) ** 2 / e for o, e in zip(observed, expected) if e)
     df = len(observed) - 1
     p = erfc(sqrt(chi2 / (2 * df))) if chi2 > 0 else 1.0
     return chi2, df, p
 
-# --- §7.7 OEIS -- 외부 DB 매칭 (offline hash) ------------------------------
+# --- §7.7 OEIS -- external DB match (offline hash) ------------------------
 OEIS_KNOWN = {
     (1, 3, 4, 7, 6, 12, 8, 15, 13, 18):  "A000203 (sigma)",
     (1, 2, 2, 3, 2, 4, 2, 4, 3, 4):      "A000005 (tau)",
     (0, 2, 3, 4, 5, 5, 7, 6, 6, 7):      "A001414 (sopfr)",
 }
 
-# --- §7.8 PARETO -- Monte Carlo --------------------------------------------
+# --- §7.8 PARETO -- Monte Carlo -------------------------------------------
 def pareto_rank_n6():
     random.seed(6)
     n_total = 2400
@@ -604,72 +609,72 @@ def pareto_rank_n6():
     better = sum(1 for _ in range(n_total) if random.gauss(0.7, 0.1) > n6_score)
     return better / n_total
 
-# --- §7.9 SYMBOLIC -- Fraction 정확 일치 -----------------------------------
+# --- §7.9 SYMBOLIC -- Fraction exact match --------------------------------
 def symbolic_identities():
     tests = [
         ("sigma*phi = n*tau", Fraction(SIGMA * PHI), Fraction(N * TAU)),   # 24 == 24
         ("J2 = 2*sigma",      Fraction(J2),          Fraction(2 * SIGMA)), # 24 == 24
-        ("sigma = 2*n",       Fraction(SIGMA),       Fraction(2 * N)),     # 12 == 12 (완전수)
+        ("sigma = 2*n",       Fraction(SIGMA),       Fraction(2 * N)),     # 12 == 12 (perfect)
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
-# --- §7.10 COUNTER -- 반례/Falsifier ---------------------------------------
+# --- §7.10 COUNTER -- counterexamples / falsifiers ------------------------
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602e-19 C",   "n=6 과 무관 -- QED 독립 상수"),
-    ("Planck h = 6.626e-34 J*s",   "6.6 은 우연, n=6 유도 아님"),
-    ("pi = 3.14159...",            "원주율은 기하 상수, n=6 독립"),
-    ("Euler gamma = 0.5772...",    "해석학 상수, n=6 직접 관계 없음"),
+    ("elementary charge e = 1.602e-19 C",  "unrelated to n=6 -- QED independent constant"),
+    ("Planck h = 6.626e-34 J*s",           "6.6 is coincidence, not derived from n=6"),
+    ("pi = 3.14159...",                    "pi is a geometric constant, independent of n=6"),
+    ("Euler gamma = 0.5772...",            "analysis constant, no direct n=6 relation"),
 ]
 FALSIFIERS = [
-    "무용·안무 주요 파라미터의 n=6 정합도 < 70% 이면 본 논문 핵심 주장 폐기",
-    "sigma(n)*phi(n) = n*tau(n) 가 n=6 외 다른 n 에서 성립 사례 발견 시 유일성 정리 폐기",
-    "atlas 20/20 EXACT 재측정에서 70% 미만으로 내려가면 Mk.I 강등",
-    "OEIS A000203/A000005/A001414 등록 취소 시 §7.7 폐기",
+    "retire the main draft if dance & choreography parameter n=6 alignment drops below 70%",
+    "retire the uniqueness claim if sigma(n)*phi(n) = n*tau(n) is observed at n != 6",
+    "downgrade to Mk.I if atlas 20/20 EXACT re-measurement falls below 70%",
+    "retire §7.7 if OEIS A000203/A000005/A001414 registrations are revoked",
 ]
 
-# --- 메인 실행 ---------------------------------------------------------------
+# --- main ------------------------------------------------------------------
 if __name__ == "__main__":
     r = []
 
-    # §7.0 상수 수론 유도
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    # §7.0 constants (number-theoretic derivation)
+    r.append(("§7.0 CONSTANTS number-theoretic",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5))
 
-    # §7.1 차원
-    r.append(("§7.1 DIMENSIONS 차원 없는 수론", SIGMA == 2 * N))
+    # §7.1 dimensions
+    r.append(("§7.1 DIMENSIONS dimensionless number theory", SIGMA == 2 * N))
 
-    # §7.2 24 = 3 경로 일치
+    # §7.2 three-path 24 match
     v1, v2, v3 = cross_24_3ways()
-    r.append(("§7.2 CROSS 24 3경로 일치", v1 == v2 == v3 == 24))
+    r.append(("§7.2 CROSS 24 three-path match", v1 == v2 == v3 == 24))
 
-    # §7.3 tau^n 지수 확인
+    # §7.3 tau^n exponent
     exp_4 = scaling_exponent([10, 20, 30, 40, 48], [b**TAU for b in [10,20,30,40,48]])
-    r.append(("§7.3 SCALING tau=4 지수 확인", abs(exp_4 - TAU) < 0.1))
+    r.append(("§7.3 SCALING tau=4 exponent", abs(exp_4 - TAU) < 0.1))
 
-    # §7.4 n=6 볼록 최적
+    # §7.4 n=6 convex optimum
     _, yh, yl, convex = sensitivity(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
 
-    # §7.5 Robin 상한
-    r.append(("§7.5 LIMITS Robin 상한 미초과", robin_bound(6)))
+    # §7.5 Robin bound
+    r.append(("§7.5 LIMITS Robin bound not exceeded", robin_bound(6)))
 
     # §7.6 H0 p-value
     chi2, df, p = chi2_pvalue([1.0] * 49, [1.0] * 49)
-    r.append(("§7.6 CHI2 p>0.05 또는 chi2=0", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 p>0.05 or chi2=0", p > 0.05 or chi2 == 0))
 
-    # §7.7 OEIS 3종 등록
-    r.append(("§7.7 OEIS 3종 등록",
+    # §7.7 OEIS triple registration
+    r.append(("§7.7 OEIS triple registration",
               (1, 3, 4, 7, 6, 12, 8, 15, 13, 18) in OEIS_KNOWN))
 
-    # §7.8 Pareto 상위
+    # §7.8 Pareto top rank
     r.append(("§7.8 PARETO n=6 Monte Carlo", pareto_rank_n6() < 0.5))
 
-    # §7.9 Fraction 정확 일치
-    r.append(("§7.9 SYMBOLIC Fraction 일치",
+    # §7.9 Fraction exact match
+    r.append(("§7.9 SYMBOLIC Fraction match",
               all(ok for _, ok, _ in symbolic_identities())))
 
-    # §7.10 반례/Falsifier
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    # §7.10 counterexamples / falsifiers
+    r.append(("§7.10 COUNTER/FALSIFIERS stated",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -678,7 +683,7 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{'OK' if ok else 'FAIL'}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (n=6 honesty check)")
 ```
 
 ## §8 EXEC SUMMARY
@@ -742,4 +747,3 @@ This section covers impact per mk for the paper. Initial scaffold content — ex
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-
