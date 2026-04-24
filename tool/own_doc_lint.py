@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -33,8 +34,11 @@ TARGET_RULES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16]
 # own#13/#15/#17..#21 already have runtime verifiers (ouroboros detector, .doc-rules, hexa tools).
 
 # Classification — which of the 14 DOC-ONLY rules we can auto-lint.
-AUTO_VERIFIABLE = {1, 3, 4, 6, 7, 11, 16}
-MANUAL_ONLY = {2, 5, 8, 9, 10, 12}
+# Phase 2 (2026-04-24): extended heuristic coverage to own#2/#5/#8/#9/#10/#12.
+# These checks are intentionally conservative — false positives are preferred
+# over false negatives and each flag is a review signal, not a hard fact.
+AUTO_VERIFIABLE = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16}
+MANUAL_ONLY: set[int] = set()
 # Rationale captured in the report + final summary.
 
 
@@ -351,16 +355,420 @@ def check_rule_16_domain_registry() -> list[dict[str, str]]:
 
 
 # -----------------------------------------------------------------------------
+# Phase-2 heuristic checkers (own#2/#5/#8/#9/#10/#12).
+# These trade some false-positive risk for 100% automation coverage — every
+# flag below is a "review signal" the maintainer should eyeball, not a hard
+# factual violation. Tune thresholds as the corpus stabilises.
+# -----------------------------------------------------------------------------
+
+
+# own#2 n6-master-identity — constants σ(6)=12, φ(6)=2, τ(6)=4, J₂=24 must be
+# consistent wherever they are declared as standalone equalities. We extract
+# `NAME(6) = VALUE` or `J₂ = VALUE` patterns and report any file that contradicts
+# the canonical value. Multi-term products (σ·J₂=288) and expressions with
+# additional operators are excluded to avoid false positives.
+IDENTITY_CANONICAL = {
+    "sigma(6)": 12,
+    "phi(6)": 2,
+    "tau(6)": 4,
+    "J2": 24,
+}
+
+# Single-term identity-constant declarations. Excludes lines containing '·', '*',
+# '+', '-', '/' between the symbol and the '=' to skip product/composite forms
+# like "σ·J₂=288" or "σ²=144". We also require the captured number to be
+# *terminal* within its term — if followed by ' + ', ' - ', ' * ', '·', '×',
+# ' / ', '^' the match is a mid-expression coincidence (e.g. 'σ(6)=1+2+3+6')
+# and is discarded.
+_IDENT_SINGLE_RE = re.compile(
+    r"(?P<name>σ\(6\)|sigma\(6\)|φ\(6\)|phi\(6\)|τ\(6\)|tau\(6\)|J[₂2])"
+    r"\s*=\s*(?P<value>\d{1,4})\b"
+)
+_IDENT_COMPOSITE_GUARD_RE = re.compile(r"[·*×/+\-]")
+# After the numeric value — reject if followed by an arithmetic continuation.
+_IDENT_TERM_CONT_RE = re.compile(r"^\s*[+\-*/·×^]")
+
+
+def _normalise_ident_name(raw: str) -> str:
+    mapping = {
+        "σ(6)": "sigma(6)", "sigma(6)": "sigma(6)",
+        "φ(6)": "phi(6)",   "phi(6)": "phi(6)",
+        "τ(6)": "tau(6)",   "tau(6)": "tau(6)",
+        "J₂": "J2",         "J2": "J2",
+    }
+    return mapping.get(raw, raw)
+
+
+def check_rule_2_master_identity() -> list[dict[str, str]]:
+    violations: list[dict[str, str]] = []
+    # Scan chip-* domain bodies + CLAUDE.md + root docs (per .own decl scope).
+    scan_targets: list[Path] = [
+        REPO_ROOT / "CLAUDE.md",
+        REPO_ROOT / "README.md",
+    ]
+    chip_root = REPO_ROOT / "domains" / "compute"
+    if chip_root.is_dir():
+        for d in sorted(chip_root.iterdir()):
+            if d.is_dir() and d.name.startswith("chip-"):
+                for f in d.glob("*.md"):
+                    scan_targets.append(f)
+    theory_proofs = REPO_ROOT / "theory" / "proofs"
+    if theory_proofs.is_dir():
+        for f in sorted(theory_proofs.glob("theorem-r*.md")):
+            scan_targets.append(f)
+
+    for path in scan_targets:
+        if not path.is_file():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            continue
+        for lineno, line in enumerate(text.splitlines(), start=1):
+            # Skip lines with composite operators around the symbol — these are
+            # derived expressions (σ·φ=24, σ·J₂=288, σ²=144, etc.) not base
+            # identity assertions.
+            for m in _IDENT_SINGLE_RE.finditer(line):
+                # Look at the 12 chars before the match for composite operators.
+                prefix = line[max(0, m.start() - 12):m.start()]
+                if _IDENT_COMPOSITE_GUARD_RE.search(prefix):
+                    continue
+                # Reject mid-expression coincidences: if the captured number
+                # is immediately followed by an arithmetic operator (+ - * · × / ^)
+                # the RHS is a sum/product, not a standalone identity constant.
+                tail = line[m.end():]
+                if _IDENT_TERM_CONT_RE.match(tail):
+                    continue
+                name = _normalise_ident_name(m.group("name"))
+                value = int(m.group("value"))
+                canonical = IDENTITY_CANONICAL.get(name)
+                if canonical is not None and value != canonical:
+                    violations.append({
+                        "rule": "own#2",
+                        "path": str(path.relative_to(REPO_ROOT)),
+                        "detail": (
+                            f"line {lineno}: {name}={value} contradicts canonical "
+                            f"{name}={canonical} (context: {line.strip()[:80]!r})"
+                        ),
+                    })
+    return violations
+
+
+# own#5 theory-report-separation — theory/ should host permanent theory (no
+# date/version suffix) while reports/ carries timestamped snapshots. We flag
+# theory/**/*.md filenames matching typical report-suffix patterns.
+_DATE_SUFFIX_RE = re.compile(
+    r"(?:^|[-_])(?:20\d{2}[-_]\d{2}[-_]\d{2}|20\d{6}|v\d+[-_]report|session[-_]\d+)"
+    r"(?:\.md)?$",
+    re.IGNORECASE,
+)
+_THEORY_FILENAME_WHITELIST = {"README.md", "CLAUDE.md", "INDEX.md", "_INDEX.md"}
+
+
+def check_rule_5_theory_report_separation() -> list[dict[str, str]]:
+    violations: list[dict[str, str]] = []
+    theory_root = REPO_ROOT / "theory"
+    if theory_root.is_dir():
+        for md in _walk_md(theory_root):
+            if md.name in _THEORY_FILENAME_WHITELIST:
+                continue
+            # Stem without extension for suffix matching.
+            stem = md.stem
+            if _DATE_SUFFIX_RE.search(stem):
+                violations.append({
+                    "rule": "own#5",
+                    "path": str(md.relative_to(REPO_ROOT)),
+                    "detail": (
+                        "theory/ file carries date/version suffix — move timestamped "
+                        "snapshot to reports/ or rename to a permanent theory title"
+                    ),
+                })
+    return violations
+
+
+# own#8 lens-ssot-external — lens references in .md should point at the external
+# nexus SSOT ($NEXUS/shared/lenses/...) rather than the repo-local deprecated
+# bridge/src/telescope/lenses/ path. We flag two classes of suspect references:
+#   (a) any <bridge/src/telescope/lenses/*.rs> mention in .md (legacy citation)
+#   (b) markdown links of the form `[...](lenses/...)` that resolve to an
+#       internal relative path instead of the external SSOT.
+_LEGACY_LENS_REF_RE = re.compile(r"bridge/src/telescope/lenses/[A-Za-z0-9_./-]+\.rs")
+_INTERNAL_LENS_LINK_RE = re.compile(r"\]\((?:\./)?lenses/[^\)]+\)")
+_EXTERNAL_LENS_OK_RE = re.compile(r"\$NEXUS/shared/lenses|nexus/shared/lenses")
+
+
+def check_rule_8_lens_ssot_external() -> list[dict[str, str]]:
+    violations: list[dict[str, str]] = []
+    # Scope: repo-internal .md under /bridge, /theory, /papers, /domains, root.
+    scan_roots = [
+        REPO_ROOT,
+        REPO_ROOT / "bridge",
+        REPO_ROOT / "theory",
+        REPO_ROOT / "papers",
+        REPO_ROOT / "domains",
+    ]
+    seen: set[Path] = set()
+    for root in scan_roots:
+        if not root.is_dir():
+            continue
+        for md in _walk_md(root):
+            if md in seen:
+                continue
+            seen.add(md)
+            try:
+                text = md.read_text(encoding="utf-8", errors="replace")
+            except Exception:
+                continue
+            for m in _LEGACY_LENS_REF_RE.finditer(text):
+                # Determine line number.
+                lineno = text.count("\n", 0, m.start()) + 1
+                violations.append({
+                    "rule": "own#8",
+                    "path": str(md.relative_to(REPO_ROOT)),
+                    "detail": (
+                        f"line {lineno}: legacy Rust-lens reference '{m.group(0)}' — "
+                        f"replace with $NEXUS/shared/lenses/<domain>_<topic>.hexa"
+                    ),
+                })
+            for m in _INTERNAL_LENS_LINK_RE.finditer(text):
+                lineno = text.count("\n", 0, m.start()) + 1
+                snippet = m.group(0)
+                # Skip if the same line/snippet already cites the external SSOT.
+                line_start = text.rfind("\n", 0, m.start()) + 1
+                line_end = text.find("\n", m.end())
+                line_text = text[line_start: line_end if line_end >= 0 else len(text)]
+                if _EXTERNAL_LENS_OK_RE.search(line_text):
+                    continue
+                violations.append({
+                    "rule": "own#8",
+                    "path": str(md.relative_to(REPO_ROOT)),
+                    "detail": (
+                        f"line {lineno}: relative lens link {snippet!r} bypasses "
+                        f"$NEXUS/shared/lenses/ SSOT"
+                    ),
+                })
+    return violations
+
+
+# own#9 lens-auto-absorb-atlas — recent lens-touching commits must correspond
+# to atlas.n6 growth in lens-originated entries. We compare (1) count of
+# lens-tagged atlas entries and (2) recent git commits mentioning 'lens' in
+# the subject. If there are fresh lens commits but atlas.n6 has zero lens
+# markers, emit a warning. This is a best-effort signal — false positives are
+# possible when a lens commit is purely refactor/cleanup.
+_ATLAS_LENS_PATTERN_RE = re.compile(r"\blens(?:_id|_origin|:)|source\s*=\s*lens", re.IGNORECASE)
+_ATLAS_INLINE_LENS_RE = re.compile(r"[-_/]lens\b", re.IGNORECASE)
+
+
+def _git_log_subjects(since_days: int = 30, grep: str = "lens") -> list[str]:
+    try:
+        result = subprocess.run(
+            [
+                "git", "-C", str(REPO_ROOT),
+                "log",
+                f"--since={since_days} days ago",
+                f"--grep={grep}",
+                "-i",
+                "--pretty=format:%s",
+            ],
+            capture_output=True, text=True, timeout=10, check=False,
+        )
+        if result.returncode != 0:
+            return []
+        return [ln for ln in result.stdout.splitlines() if ln.strip()]
+    except Exception:
+        return []
+
+
+def check_rule_9_lens_absorb_atlas() -> list[dict[str, str]]:
+    violations: list[dict[str, str]] = []
+    atlas_path = REPO_ROOT / "atlas" / "atlas.n6"
+    # Fallback to symlink-style locations.
+    if not atlas_path.is_file():
+        alt = REPO_ROOT / "n6shared" / "atlas.n6"
+        if alt.is_file():
+            atlas_path = alt
+    if not atlas_path.is_file():
+        violations.append({
+            "rule": "own#9",
+            "path": "atlas/atlas.n6",
+            "detail": "atlas.n6 SSOT not found — cannot verify lens absorption",
+        })
+        return violations
+    try:
+        atlas_text = atlas_path.read_text(encoding="utf-8", errors="replace")
+    except Exception as exc:
+        violations.append({
+            "rule": "own#9",
+            "path": str(atlas_path.relative_to(REPO_ROOT)),
+            "detail": f"atlas.n6 unreadable: {exc}",
+        })
+        return violations
+    lens_hits = len(_ATLAS_LENS_PATTERN_RE.findall(atlas_text))
+    inline_lens_hits = len(_ATLAS_INLINE_LENS_RE.findall(atlas_text))
+    total_lens_signal = lens_hits + inline_lens_hits
+
+    recent_lens_commits = _git_log_subjects(since_days=30, grep="lens")
+    if recent_lens_commits and total_lens_signal == 0:
+        violations.append({
+            "rule": "own#9",
+            "path": str(atlas_path.relative_to(REPO_ROOT)),
+            "detail": (
+                f"{len(recent_lens_commits)} lens-tagged commits in last 30d but "
+                f"atlas.n6 contains 0 lens markers — absorption may have stalled"
+            ),
+        })
+    # Independent invariant: atlas entries referencing lens must be non-zero
+    # whenever a lens_registry exists. Emit a soft flag if lens registry has
+    # entries but atlas is silent.
+    lens_registry = REPO_ROOT / "n6shared" / "config" / "lens_registry.json"
+    if lens_registry.is_file() and total_lens_signal == 0:
+        try:
+            reg_text = lens_registry.read_text(encoding="utf-8")
+            if '"lens' in reg_text or "lens_id" in reg_text:
+                violations.append({
+                    "rule": "own#9",
+                    "path": str(lens_registry.relative_to(REPO_ROOT)),
+                    "detail": (
+                        "lens_registry.json declares lenses but atlas.n6 has "
+                        "no lens-originated entries"
+                    ),
+                })
+        except Exception:
+            pass
+    return violations
+
+
+# own#10 rust-lens-ban-legacy — any new .rs file under bridge/src/telescope/ or
+# a top-level lenses/ path is forbidden. Current-state scan (file existence)
+# plus rolling-90-day git-log scan.
+_LENS_RS_PATH_RE = re.compile(
+    r"^(?:bridge/src/telescope/(?:lenses/)?[^/\s]+\.rs|lenses/[^\s]+\.rs)$"
+)
+
+
+def _git_recent_rs_files(since_days: int = 90) -> set[str]:
+    try:
+        result = subprocess.run(
+            [
+                "git", "-C", str(REPO_ROOT),
+                "log",
+                f"--since={since_days} days ago",
+                "--name-only",
+                "--pretty=format:",
+                "--diff-filter=A",  # additions only
+            ],
+            capture_output=True, text=True, timeout=15, check=False,
+        )
+        if result.returncode != 0:
+            return set()
+        return {ln.strip() for ln in result.stdout.splitlines() if ln.strip()}
+    except Exception:
+        return set()
+
+
+def check_rule_10_rust_lens_ban() -> list[dict[str, str]]:
+    violations: list[dict[str, str]] = []
+    # (a) present-state scan.
+    tele_dir = REPO_ROOT / "bridge" / "src" / "telescope"
+    if tele_dir.is_dir():
+        for rs in tele_dir.rglob("*.rs"):
+            violations.append({
+                "rule": "own#10",
+                "path": str(rs.relative_to(REPO_ROOT)),
+                "detail": "legacy Rust lens present in bridge/src/telescope — freeze / migrate to HEXA",
+            })
+    lenses_dir = REPO_ROOT / "lenses"
+    if lenses_dir.is_dir():
+        for rs in lenses_dir.rglob("*.rs"):
+            violations.append({
+                "rule": "own#10",
+                "path": str(rs.relative_to(REPO_ROOT)),
+                "detail": "legacy Rust lens present under /lenses — freeze / migrate to HEXA",
+            })
+    # (b) rolling 90-day git addition scan — catches even deleted files.
+    recent = _git_recent_rs_files(since_days=90)
+    for candidate in sorted(recent):
+        if _LENS_RS_PATH_RE.match(candidate):
+            violations.append({
+                "rule": "own#10",
+                "path": candidate,
+                "detail": "new Rust lens added in rolling 90-day window (git history)",
+            })
+    return violations
+
+
+# own#12 miss-criteria-declared — every experiment doc should declare MISS
+# (failure) criteria ahead of data collection. We scan top-level + first-level
+# experiment files for explicit markers; absence is a review signal.
+_MISS_TOKEN_RE = re.compile(
+    r"miss[ _-]criteria"
+    r"|실패\s*(?:조건|기준)"
+    r"|failure\s+criteria"
+    r"|##\s*MISS\b"
+    r"|###\s+MISS\b"
+    r"|MISS\s*:\s*",
+    re.IGNORECASE,
+)
+_EXPERIMENT_META_WHITELIST = {"README.md", "CLAUDE.md", "INDEX.md"}
+
+
+def check_rule_12_miss_criteria() -> list[dict[str, str]]:
+    violations: list[dict[str, str]] = []
+    roots = [
+        REPO_ROOT / "experiments",
+        REPO_ROOT / "reports" / "experiments",
+        REPO_ROOT / "theory" / "experiments",
+    ]
+    # Only scan top-level + 1-deep experiment docs to stay fast + focused on
+    # human-authored plan/report files (not auto-generated artefacts).
+    for root in roots:
+        if not root.is_dir():
+            continue
+        for entry in sorted(root.iterdir()):
+            candidates: list[Path] = []
+            if entry.is_file() and entry.suffix == ".md":
+                candidates.append(entry)
+            elif entry.is_dir() and not entry.name.startswith("."):
+                for sub in entry.iterdir():
+                    if sub.is_file() and sub.suffix == ".md":
+                        candidates.append(sub)
+            for md in candidates:
+                if md.name in _EXPERIMENT_META_WHITELIST:
+                    continue
+                try:
+                    text = md.read_text(encoding="utf-8", errors="replace")
+                except Exception:
+                    continue
+                if not _MISS_TOKEN_RE.search(text):
+                    violations.append({
+                        "rule": "own#12",
+                        "path": str(md.relative_to(REPO_ROOT)),
+                        "detail": (
+                            "no MISS / 실패 조건 / failure-criteria section detected — "
+                            "declare miss_criteria before data collection"
+                        ),
+                    })
+    return violations
+
+
+# -----------------------------------------------------------------------------
 # Orchestrator
 # -----------------------------------------------------------------------------
 
 CHECKERS = [
     ("own#1", lambda rules: check_rule_1_doc_english(rules)),
+    ("own#2", lambda rules: check_rule_2_master_identity()),
     ("own#3", lambda rules: check_rule_3_one_doc_per_domain()),
     ("own#4", lambda rules: check_rule_4_fifteen_sections()),
+    ("own#5", lambda rules: check_rule_5_theory_report_separation()),
     ("own#6", lambda rules: check_rule_6_paper_verify_embedded()),
     ("own#7", lambda rules: check_rule_7_registry_sync()),
+    ("own#8", lambda rules: check_rule_8_lens_ssot_external()),
+    ("own#9", lambda rules: check_rule_9_lens_absorb_atlas()),
+    ("own#10", lambda rules: check_rule_10_rust_lens_ban()),
     ("own#11", lambda rules: check_rule_11_bt_solution_ban()),
+    ("own#12", lambda rules: check_rule_12_miss_criteria()),
     ("own#16", lambda rules: check_rule_16_domain_registry()),
 ]
 
