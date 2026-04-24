@@ -176,10 +176,22 @@ jobs:
           path: n6-architecture
 
       - name: Checkout hexa-lang (sister repo, tool source)
+        id: checkout-hexa
         uses: actions/checkout@v4
         with:
           repository: need-singularity/hexa-lang
           path: hexa-lang
+        continue-on-error: true
+
+      - name: Guard — hexa-lang checkout result
+        shell: bash
+        run: |
+          if [ ! -d hexa-lang/self ]; then
+            echo "::warning::hexa-lang checkout unavailable — readme-english-audit will SOFT-skip."
+            echo "HEXA_LANG_AVAILABLE=0" >> "$GITHUB_ENV"
+          else
+            echo "HEXA_LANG_AVAILABLE=1" >> "$GITHUB_ENV"
+          fi
 
       - name: Checkout nexus (audit target)
         uses: actions/checkout@v4
@@ -203,6 +215,7 @@ jobs:
         continue-on-error: true
 
       - name: Cache hexa CLI binary
+        if: env.HEXA_LANG_AVAILABLE == '1'
         uses: actions/cache@v4
         id: hexa-cache
         with:
@@ -215,7 +228,7 @@ jobs:
             hexa-cli-${{ runner.os }}-
 
       - name: Bootstrap hexa CLI (from hexa-lang source)
-        if: steps.hexa-cache.outputs.cache-hit != 'true'
+        if: env.HEXA_LANG_AVAILABLE == '1' && steps.hexa-cache.outputs.cache-hit != 'true'
         shell: bash
         working-directory: hexa-lang
         run: |
@@ -232,6 +245,7 @@ jobs:
               -lm -ldl
 
       - name: Expose hexa CLI on PATH
+        if: env.HEXA_LANG_AVAILABLE == '1'
         shell: bash
         working-directory: hexa-lang
         run: |
@@ -240,6 +254,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/hexa-lang" >> "$GITHUB_PATH"
 
       - name: Expose $HOME/core layout expected by audit tool
+        if: env.HEXA_LANG_AVAILABLE == '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -252,9 +267,17 @@ jobs:
           ls -la "$HOME/core"
 
       - name: Public README English-only audit (own#17)
+        if: env.HEXA_LANG_AVAILABLE == '1'
         shell: bash
         working-directory: hexa-lang
         run: hexa tool/readme_english_audit.hexa
+
+      - name: SOFT-skip notice (hexa-lang unavailable)
+        if: env.HEXA_LANG_AVAILABLE != '1'
+        shell: bash
+        run: |
+          echo "::warning::readme-english-audit SOFT-skipped because hexa-lang checkout was unavailable."
+          echo "This is a graceful-degradation path; re-run once hexa-lang is reachable for HARD enforcement."
 
   # ── Job 5: own#20 — .own drift detection (SOFT warn) ──
   # Enforces .own rule #20 (drift-tracked). Tool: hexa-lang/tool/own_runner.hexa.
@@ -271,12 +294,25 @@ jobs:
           path: n6-architecture
 
       - name: Checkout hexa-lang (tool source)
+        id: checkout-hexa
         uses: actions/checkout@v4
         with:
           repository: need-singularity/hexa-lang
           path: hexa-lang
+        continue-on-error: true
+
+      - name: Guard — hexa-lang checkout result
+        shell: bash
+        run: |
+          if [ ! -d hexa-lang/self ]; then
+            echo "::warning::hexa-lang checkout unavailable — own#20 drift detection will SOFT-skip."
+            echo "HEXA_LANG_AVAILABLE=0" >> "$GITHUB_ENV"
+          else
+            echo "HEXA_LANG_AVAILABLE=1" >> "$GITHUB_ENV"
+          fi
 
       - name: Cache hexa CLI binary
+        if: env.HEXA_LANG_AVAILABLE == '1'
         uses: actions/cache@v4
         id: hexa-cache
         with:
@@ -289,7 +325,7 @@ jobs:
             hexa-cli-${{ runner.os }}-
 
       - name: Bootstrap hexa CLI (from hexa-lang source)
-        if: steps.hexa-cache.outputs.cache-hit != 'true'
+        if: env.HEXA_LANG_AVAILABLE == '1' && steps.hexa-cache.outputs.cache-hit != 'true'
         shell: bash
         working-directory: hexa-lang
         run: |
@@ -306,6 +342,7 @@ jobs:
               -lm -ldl
 
       - name: Expose hexa CLI on PATH
+        if: env.HEXA_LANG_AVAILABLE == '1'
         shell: bash
         working-directory: hexa-lang
         run: |
@@ -314,6 +351,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/hexa-lang" >> "$GITHUB_PATH"
 
       - name: Drift detection — techniques + tests count (own#20)
+        if: env.HEXA_LANG_AVAILABLE == '1'
         shell: bash
         working-directory: n6-architecture
         # own_runner.hexa lives in hexa-lang; invoked by absolute path.
@@ -321,6 +359,8 @@ jobs:
         run: hexa "$GITHUB_WORKSPACE/hexa-lang/tool/own_runner.hexa" drift-all
 
       - name: README nexus6 tests count drift (own#21)
+        # Always attempt — Python-only, no hexa dependency.
+        if: always()
         shell: bash
         working-directory: n6-architecture
         continue-on-error: true  # SOFT — .own own#21 on_fail=warn
