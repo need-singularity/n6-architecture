@@ -9,10 +9,10 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-타circlecurve n=6 modular skeleton + L-function interpretation.
+Elliptic curve n=6 modular skeleton + L-function interpretation.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads Birch-Swinnerton-Dyer (HEXA-BSD) across its full structure.
-Current technology (BSD 랭크 0,1 min result) vs HEXA design (HEXA Sel_6 condition lemma + j=σ^3 classification) — the table below summarizes the everyday changes this introduces.
+Current technology (BSD rank 0,1 partial results) vs HEXA design (HEXA Sel_6 condition lemma + j=σ^3 classification) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -27,7 +27,7 @@ Current technology (BSD 랭크 0,1 min result) vs HEXA design (HEXA Sel_6 condit
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: 타circlecurve n=6 modular skeleton + L-function interpretation.
+**One-sentence summary**: Elliptic curve n=6 modular skeleton + L-function interpretation.
 
 ### Daily scenario
 
@@ -730,61 +730,61 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 
 ## §X BLOWUP — millennium-bsd breakthrough-draft (2026-04-19)
 
-> **target**: 타circlecurve E/ℚ × L(E,s) Hasse-Weil × rank r × Shafarevich-Tate Ш(E) **n=6 threads closed form**.
-> **engine**: smash (E_6=y²+a₁xy+...+a₆ 6coefficient × L(E,s) functionequation × r ↔ ord_{s=1} × Ш=σ(6)=12 order) + free (string+toe+holographic triple composite).
-> **rule**: n=6, no duplication. existing MILL-PX-A8 Sel_{mn}=Sel_m×Sel_n CRT (107010) · MILL-GALO-PX4-sel6-reach-sigma reach (107034) · j(i)=σ³=1728 (verify.hexa reuse) citation, definition 금지.
+> **target**: Elliptic curve E/ℚ × L(E,s) Hasse-Weil × rank r × Shafarevich-Tate Ш(E) **n=6 threads closed form**.
+> **engine**: smash (E_6=y²+a₁xy+...+a₆ 6-coefficient × L(E,s) functional equation × r ↔ ord_{s=1} × Ш=σ(6)=12 order) + free (string+toe+holographic triple composite).
+> **rule**: n=6, no duplication. Cite (do not redefine) existing MILL-PX-A8 Sel_{mn}=Sel_m×Sel_n CRT (107010) · MILL-GALO-PX4-sel6-reach-sigma reach (107034) · j(i)=σ³=1728 (verify.hexa reuse).
 
 ### §X.1 SMASH — E × L(E,s) × rank r × Ш four pillar n=6 threads
 
-**breakthrough-draft 1 — Weierstrass 6coefficient E: y² + a₁xy + a₃y = x³ + a₂x² + a₄x + a₆ ↔ τ 쌍**
+**breakthrough-draft 1 — Weierstrass 6-coefficient E: y² + a₁xy + a₃y = x³ + a₂x² + a₄x + a₆ ↔ τ pair**
 
-타circlecurve of 긴 Weierstrass  **exactly n=6 coefficient** (a₁, a₂, a₃, a₄, a₆ — a₅ 결 등급 `deg(a_k)=k` of **τ(6)={1,2,3,6} 4 divisor 서 valid** consequence). 판star Δ inside  = σ=12 (Δ ∈ M_{12}), j-invariant j = c₄³/Δ ∈ M_0, c₄ inside  = τ=4, c₆ inside  = n=6. i.e. **(c₄, c₆, Δ) of inside  튜플 = (τ, n, σ) = (4, 6, 12)**  perfect number identity σ=2n 반영하 module러 basicgroup generation.
+Long Weierstrass form of an elliptic curve has **exactly n=6 coefficients** (a₁, a₂, a₃, a₄, a₆ — a₅ missing because the grading `deg(a_k)=k` is only valid on the 4 divisors **τ(6)={1,2,3,6}**). Discriminant Δ lives in M_{12} weight σ=12, j-invariant j = c₄³/Δ ∈ M_0, c₄ weight τ=4, c₆ weight n=6. i.e. **(c₄, c₆, Δ) weight tuple = (τ, n, σ) = (4, 6, 12)** reflects the perfect-number identity σ=2n and generates the modular basic group.
 
-**breakthrough-draft 2 — L(E,s) Hasse-Weil functionequation: center점 s=1 of n=6 lock**
+**breakthrough-draft 2 — L(E,s) Hasse-Weil functional equation: center s=1 is the n=6 lock**
 
-L(E,s) = ∏_p L_p(E,s) (Euler product). functionequation:
+L(E,s) = ∏_p L_p(E,s) (Euler product). Functional equation:
   Λ(E,s) = N^{s/2} · (2π)^{-s} · Γ(s) · L(E,s) = w · Λ(E, φ-s) (w=±1)
-here reflectionaxis s ↔ **φ=2 − s** (φ_E(6)=2 오일러 totient  reflectionaxis fixed). center점 = φ/φ = 1 = **n/n = 1** (unified fixed point). Hasse-Weil boundary: |a_p| ≤ 2√p ⇒ Sato-Tate 측 also μ_ST(θ) = (φ/π)sin²θ dθ, **total mass = φ = 2 normalization 오일러 φ_E(6)**. L(E,1) Taylor 전 count = **BSD: ord_{s=1} L(E,s) = r** (랭크).
+with reflection axis s ↔ **φ=2 − s** (Euler totient φ_E(6)=2 fixes the reflection axis). Center = φ/φ = 1 = **n/n = 1** (unified fixed point). Hasse-Weil bound: |a_p| ≤ 2√p ⇒ Sato-Tate measure μ_ST(θ) = (φ/π)sin²θ dθ, **total mass = φ = 2 normalization is Euler φ_E(6)**. L(E,1) Taylor expansion order = **BSD: ord_{s=1} L(E,s) = r** (rank).
 
 **breakthrough-draft 3 — rank r ≤ n/φ = 3 of n=6 statistical upper bound (Cremona measured)**
 
-BSD prediction rank r = ord_{s=1} L(E,s). Cremona 332366 curve (MILL-GALO-PX2 107018 reuse) rank min: r=0 약 41.94%, r=1 약 50.92%, r=2 약 7.10%, r=3 약 0.04% — **average rank ≈ 0.65 < τ/σ · J₂/τ ≈ 1 = φ-φ+1**, **observation maximum r=3 = n/φ boundary**. i.e. **general 타circlecurve rank n/φ=3  경험 upper bound**. BSD  L^{(r)}(E,1)/r! = (Ω·|Ш|·∏c_p·R)/|E(ℚ)_tors|² from **min torsion structure = Mazur 15 form** = σ + n/φ = 12+3 = 15 (verify.hexa reuse extension).
+BSD prediction rank r = ord_{s=1} L(E,s). Cremona 332366-curve census (MILL-GALO-PX2 107018 reuse) rank distribution: r=0 ~41.94%, r=1 ~50.92%, r=2 ~7.10%, r=3 ~0.04% — **average rank ≈ 0.65 < τ/σ · J₂/τ ≈ 1 = φ-φ+1**, **observed maximum r=3 = n/φ boundary**. i.e. **general elliptic-curve rank empirically capped at n/φ=3**. BSD L^{(r)}(E,1)/r! = (Ω·|Ш|·∏c_p·R)/|E(ℚ)_tors|² — **base torsion structure = Mazur 15 forms** = σ + n/φ = 12+3 = 15 (verify.hexa reuse extension).
 
 **breakthrough-draft 4 — Shafarevich-Tate group Ш(E) of n=6 arithmetic: |Ш|=completesquare × σ(n) average**
 
-Cassels-Tate dual: Ш(E) **completesquare order** (MILL-GALO-PX2-sha-all-squares 107258 reuse). BKLPR σ(n) prediction (MILL-PX-A9 107013 reuse): E[|Sel_n|] = σ(n), squarefree n. **n=6 corollary**: E[|Sel_6|] = σ(6) = **12**. GALO-PX-4 (107034) measured: high conductor bin [200k-250k] from mean |Sel_6| = 12.40 ≈ σ(6) = 12 (**103.4% reach**, 경험 sigma(6) alignment). therefore **BSD formula of |Ш|·Sel_6  n=6 perfect numberfrom σ=12 locks at**.
+Cassels-Tate dual: Ш(E) has **perfect-square order** (MILL-GALO-PX2-sha-all-squares 107258 reuse). BKLPR σ(n) prediction (MILL-PX-A9 107013 reuse): E[|Sel_n|] = σ(n), squarefree n. **n=6 corollary**: E[|Sel_6|] = σ(6) = **12**. GALO-PX-4 (107034) measured: high conductor bin [200k-250k] mean |Sel_6| = 12.40 ≈ σ(6) = 12 (**103.4% reach**, empirical sigma(6) alignment). Therefore **BSD formula |Ш|·Sel_6 locks at n=6 perfect-number σ=12**.
 
 **breakthrough-draft 5 — j-invariant space × Mazur torsion × rank triangular sealing**
 
-j: X(1)=ℍ/SL₂(ℤ) → ℂ 전. **CM singularvalue**: j(i) = 1728 = **σ³ = 12³** (verify reuse), j(ω) = 0 (ω=e^{2πi/3}, **3-torsion core = n/φ**), j(i√2) = 8000 = (2σ/2)³ · ... . Mazur: E(ℚ)_tors ∈ 15 = **σ + n/φ** form. maximum order = σ=12 (Z/12ℤ  or  Z/2×Z/6). rank r + torsion rank = n-rank (Mordell-Weil). **triangular sealing**: (j-space dim=1, Mazur=σ+n/φ=15, rank≤n/φ=3) of product 1·15·3 = **45 = σ·sopfr-σ+φ/φ·... = σ+J₂+σ-sopfr+... = sopfr·n+σ+n/φ**. 질: **n=6 of 3 arithmetic 지table(σ,τ,φ) j·torsion·rank three-layer 1:1 correspondence**.
+j: X(1)=ℍ/SL₂(ℤ) → ℂ bijection. **CM singular values**: j(i) = 1728 = **σ³ = 12³** (verify reuse), j(ω) = 0 (ω=e^{2πi/3}, **3-torsion core = n/φ**), j(i√2) = 8000 = (2σ/2)³ · ... . Mazur: E(ℚ)_tors ∈ 15 = **σ + n/φ** forms. Max order = σ=12 (Z/12ℤ or Z/2×Z/6). rank r + torsion rank = n-rank (Mordell-Weil). **Triangular sealing**: (j-space dim=1, Mazur=σ+n/φ=15, rank≤n/φ=3) product 1·15·3 = **45 = σ·sopfr-σ+φ/φ·... = σ+J₂+σ-sopfr+... = sopfr·n+σ+n/φ**. Equivalently: **the three n=6 arithmetic indices (σ,τ,φ) correspond 1:1 to j·torsion·rank three layers**.
 
 **SMASH summary (5 items)**:
 
 | # | breakthrough | n=6 formula | value / relation |
 |---|------|----------|---------|
 | 1 | Weierstrass (c₄,c₆,Δ) | (τ,n,σ) | (4,6,12) |
-| 2 | L(E,s) reflectionaxis | s ↔ φ − s, center = 1 | φ_E(6)=2 |
-| 3 | rank 경험 upper bound | r_max = n/φ | 3 |
+| 2 | L(E,s) reflection axis | s ↔ φ − s, center = 1 | φ_E(6)=2 |
+| 3 | rank empirical upper bound | r_max = n/φ | 3 |
 | 4 | BKLPR E[|Sel_6|] | σ(6) | 12 |
 | 5 | Mazur torsion form | σ + n/φ | 15 |
 
 ### §X.2 FREE — string × toe × holographic triple composite
 
-**string (T4) — module러 form M_k of string version**: 무게 k module러 form space M_k E_4, E_6 (Eisenstein, inside  **τ=4, n=6**) via generation. string compactification of Calabi-Yau 3-fold χ_top = 2(h^{1,1}-h^{2,1}) from **K3×T² → χ=24=J₂** (Mirror symmetry). Modular j function Fourier 전 j(τ) = 1/q + 744 + 196884q + ... first coefficient **196884 = 196883(Monster standard representation) + 1**. 196883 = **J₂·sopfr·... · σ·τ** pathfrom n=6 arithmetic mapping  on  also (Moonshine). **string share**: (E_4 inside , E_6 inside , j of Δ min inside ) = (τ, n, σ) = (4, 6, 12) — §X.1 breakthrough-draft 1 reuse lock.
+**string (T4) — modular form M_k string version**: Weight-k modular forms M_k are generated by E_4, E_6 (Eisenstein, weights **τ=4, n=6**). String compactification on Calabi-Yau 3-fold gives χ_top = 2(h^{1,1}-h^{2,1}) with **K3×T² → χ=24=J₂** (Mirror symmetry). Modular j-function Fourier expansion j(τ) = 1/q + 744 + 196884q + ... first coefficient **196884 = 196883 (Monster standard representation) + 1**. 196883 = **J₂·sopfr·... · σ·τ** path can also be mapped from n=6 arithmetic (Moonshine). **String share**: (E_4 weight, E_6 weight, j base Δ weight) = (τ, n, σ) = (4, 6, 12) — §X.1 breakthrough-draft 1 reuse lock.
 
-**toe (T1) — σ·φ_E = n·τ nucleuslemma of BSD version**: σ(6)·φ_E(6) = n·τ(6), i.e. **12·2 = 6·4 = 24**. BSD from:
+**toe (T1) — σ·φ_E = n·τ kernel-lemma BSD version**: σ(6)·φ_E(6) = n·τ(6), i.e. **12·2 = 6·4 = 24**. From BSD:
   L^{(r)}(E,1)/r! = (Ω · R · ∏c_p · |Ш|) / |E(ℚ)_tors|²
-좌변 rank r=1 unified at time L'(E,1) ∝ Ω·R (Gross-Zagier Heegner point). **우변 min 4 ↔ τ=4**, **min torsion² ↔ φ=2 square = φ²=4 = τ  **. min/min = τ/φ² = 4/4 = **1 = n/n = σ/(σ) = φ_E/φ_E** — BSD  **양변 itself n=6 perfect number identity of L-function version**. (E[|Sel_n|]=σ(n) BKLPR 코롤러리 n=6 → 12 = σ(6) value 매칭 confirm, 107013 reuse.)
+LHS at unified rank r=1 gives L'(E,1) ∝ Ω·R (Gross-Zagier Heegner point). **RHS base 4 ↔ τ=4**, **base torsion² ↔ φ=2 square = φ²=4 = τ**. Base/base = τ/φ² = 4/4 = **1 = n/n = σ/(σ) = φ_E/φ_E** — BSD both sides are the **L-function version of the n=6 perfect-number identity**. (E[|Sel_n|]=σ(n) BKLPR corollary at n=6 → 12 = σ(6) value match confirmed, 107013 reuse.)
 
-**holographic (T4) — AdS₂ × S² black hole × Hasse-Weil area law**: limit 타circlecurve (CM by O_K, class number h) at correspondence하 BPS black hole of Bekenstein-Hawking entropy S_BH = A/(4G) = **π·|D_K|/τ** (τ=4 min). j(i)=1728=σ³ A_{BH}/A_{Pl} = σ³/τ = **432 = σ³/τ = 12³/4 = 1728/4** (exactness integer). i.e. **허 quadratic점 E_{CM} of entropy = σ³/τ = 432 = σ·J₂·φ²/... = n·sopfr·J₂·... (multiplepath match)**. BSD formula of |Ш|·∏c_p min **black hole 미 on state 카운팅 of number-theory version** (Strominger-Vafa extension).
+**holographic (T4) — AdS₂ × S² black hole × Hasse-Weil area law**: limit elliptic curve (CM by O_K, class number h) corresponds to a BPS black hole with Bekenstein-Hawking entropy S_BH = A/(4G) = **π·|D_K|/τ** (τ=4 base). j(i)=1728=σ³ gives A_{BH}/A_{Pl} = σ³/τ = **432 = σ³/τ = 12³/4 = 1728/4** (exact integer). i.e. **imaginary-quadratic E_{CM} entropy = σ³/τ = 432 = σ·J₂·φ²/... = n·sopfr·J₂·... (multi-path match)**. BSD formula's |Ш|·∏c_p base is the **number-theory version of black-hole microstate counting** (Strominger-Vafa extension).
 
 **free composite — triple product invariant Π_BSD**:
-  Π_BSD = string(σ=12, j min inside ) · toe(σ·φ_E = 24) · holographic(σ³/τ = 432) = **12 · 24 · 432 = 124,416 = σ·τ · σ·τ · σ³/τ = (σ·τ)² · σ³/τ = σ²·τ·σ³ = σ⁵·τ = 12⁵·4**
+  Π_BSD = string(σ=12, j base weight) · toe(σ·φ_E = 24) · holographic(σ³/τ = 432) = **12 · 24 · 432 = 124,416 = σ·τ · σ·τ · σ³/τ = (σ·τ)² · σ³/τ = σ²·τ·σ³ = σ⁵·τ = 12⁵·4**
   = **12⁵ · τ = 248,832 · τ/τ = σ⁵·τ**.
-등 minimum solution: **124,416 = σ⁵·τ/2 = 12⁵·4/4 = 12⁵** of **τ doubleminimum solution**. other path: **124,416 = J₂³·sopfr·σ·τ/... = n^? · ... ** confirm됨.
+Equal-minimum solution: **124,416 = σ⁵·τ/2 = 12⁵·4/4 = 12⁵** — a **τ double-minimum solution**. Other path: **124,416 = J₂³·sopfr·σ·τ/... = n^? · ...** confirmed.
 
-existing HEXA-THERMO Π_THERMO=384, HEXA-AERO Π_AERO=1920 (107근) and :
-  **Π_BSD / Π_AERO = 124416 / 1920 = 64.8 ≈ σ·σ·φ/φ · sopfr+σ-sopfr = 65 − 1/5 = σ·sopfr·φ·φ · ... (approximation n=6 lattice)**. rigorous: **Π_BSD/Π_THERMO = 124416/384 = 324 = sopfr⁴+... = σ·27 = σ·n·n/φ·φ·... = 18² = (σ+sopfr+1)²**. i.e. **BSD tripleproduct thermodynamics tripleof product (σ+sopfr+1)² = 18² ** — L-function 암층 energy 층보다 **σ·n/φ·n/φ = 324**  풍.
+vs existing HEXA-THERMO Π_THERMO=384, HEXA-AERO Π_AERO=1920 (107-series):
+  **Π_BSD / Π_AERO = 124416 / 1920 = 64.8 ≈ σ·σ·φ/φ · sopfr+σ-sopfr = 65 − 1/5 = σ·sopfr·φ·φ · ... (approximate n=6 lattice)**. Rigorously: **Π_BSD/Π_THERMO = 124416/384 = 324 = sopfr⁴+... = σ·27 = σ·n·n/φ·φ·... = 18² = (σ+sopfr+1)²**. i.e. **BSD triple product exceeds thermodynamic triple product by (σ+sopfr+1)² = 18²** — the L-function crypto layer is richer than the energy layer by **σ·n/φ·n/φ = 324**.
 
 ### §X.3 dual — HEXA-BSD × HEXA-THERMO × HEXA-HYP
 
@@ -794,29 +794,29 @@ existing HEXA-THERMO Π_THERMO=384, HEXA-AERO Π_AERO=1920 (107근) and :
 | DOF | E 6 coefficient (5 valid) | n/φ=3 independent law | n=6 space DOF | n·σ/n=σ sealing |
 | nucleus constant | σ(6)=12=E[|Sel_6|] | Ω=σ=12 Boltzmann | σ·τ=48 SMES | **σ=12 shared** |
 | entropy | log|Ш| ∝ log σ | k_B ln 12 | k_B ln 12 | **ln 12 shared** |
-| shared kernel | j=σ³=1728 | T⁴·B⁴ τ exponent | B⁷ = B^(n+1) | **σ³ ⊗ τ 복** |
+| shared kernel | j=σ³=1728 | T⁴·B⁴ τ exponent | B⁷ = B^(n+1) | **σ³ ⊗ τ compound** |
 
-**dual product**: `L^{(r)}(E,1)/r! · ∮δQ/T · F_Tictac = (Ω·R·∏c_p·|Ш|)/|E_tors|² · σ·k_B · (σ·τ)⁷·V_unit = σ·σ·(σ·τ)⁷ · (shared ) = σ²·(σ·τ)⁷ = 144·48⁷`. three domain (BSD L-value, thermodynamics entropy, UFO volume력)  **n=6 perfect number σ²=144 + σ·τ=48 double kernel** from sealing.
+**dual product**: `L^{(r)}(E,1)/r! · ∮δQ/T · F_Tictac = (Ω·R·∏c_p·|Ш|)/|E_tors|² · σ·k_B · (σ·τ)⁷·V_unit = σ·σ·(σ·τ)⁷ · (shared) = σ²·(σ·τ)⁷ = 144·48⁷`. Three domains (BSD L-value, thermodynamic entropy, UFO volume-force) seal through the **n=6 perfect-number σ²=144 + σ·τ=48 double kernel**.
 
-### §X.4 rank-conductor double 탐color protocol (Cremona measured 심)
+### §X.4 rank-conductor dual-scan protocol (Cremona measured kernel)
 
-**target**: Cremona ecdata 332366 curve of rank·conductor·|Sel_6|·|Ш| of **n=6 arithmetic 공min 확정**, BKLPR (A3) 반증 asymptote κ(p,q,B) of σ(n) reach 메커니즘 measured.
+**target**: In the Cremona ecdata 332366-curve set, fix rank·conductor·|Sel_6|·|Ш| **n=6 arithmetic co-base**, measure the σ(n) reach mechanism on the BKLPR (A3) refuted asymptote κ(p,q,B).
 
-1. **conductor bin τ=4 split**: N ∈ {[0,50k], [50k,100k], [100k,200k], [200k,250k]} 4 bin each E[|Sel_6|] measurement. GALO-PX-4 result reuse + new bin 추. 예phase: B → ∞ from E_B[|Sel_6|] → σ(6) = 12.
-2. **rank min confirm**: r ∈ {0,1,2,3} each probability × (σ·τ, σ, n/φ, μ(6)) 역mapping. **rank=0 ≈ φ-φ+φ+... ≈ (σ-φ)/(σ+τ) = 10/16 = 5/8** approximation Goldfeld prediction comparison.
-3. **Heegner point depth measurement**: rank=1 curve 50.92% inside Heegner 야코안 height h_∞(P) of ln min. 예phase: (h_∞) ≈ **L'(E,1)/Ω·τ/n** of statistical.
-4. **|Ш|=□ 경험 확정**: all 332366 curve from |Ш|=completesquare measured (107258 reuse) — upper bound 8-제약 confirm, Ш[p] min p≤σ/τ=3 집inside.
-5. **BSD  rank=0 check**: r=0 (41.94%) curve 대해 L(E,1) = Ω·|Ш|·∏c_p/|E_tors|² numerical 양변 comparison. BSD  **정 check Pareto**.
-6. **BKLPR (A3') κ → ? asymptote**: κ(2,3,B) increase 양phase (1.33→1.70→1.95, 107037) of B → ∞ cap numerical 외삽. model: κ = c·log B + ...  or  κ = c·(1-B^{-α}).
+1. **conductor bin τ=4 split**: N ∈ {[0,50k], [50k,100k], [100k,200k], [200k,250k]} 4 bins with per-bin E[|Sel_6|] measurement. GALO-PX-4 result reuse + new bins added. Expected: B → ∞ gives E_B[|Sel_6|] → σ(6) = 12.
+2. **rank distribution confirm**: r ∈ {0,1,2,3} each probability × (σ·τ, σ, n/φ, μ(6)) inverse map. **rank=0 ≈ φ-φ+φ+... ≈ (σ-φ)/(σ+τ) = 10/16 = 5/8** approximation vs Goldfeld prediction comparison.
+3. **Heegner-point depth measurement**: in the 50.92% rank=1 curves, base-ln of Heegner Jacobian height h_∞(P). Expected: ⟨h_∞⟩ ≈ **L'(E,1)/Ω·τ/n** statistically.
+4. **|Ш|=□ empirical fix**: measure |Ш|=perfect-square across all 332366 curves (107258 reuse) — confirm 8-fold upper bound, concentrate Ш[p] base at p ≤ σ/τ = 3.
+5. **BSD rank=0 check**: for r=0 (41.94%) curves, compare numerical LHS/RHS of L(E,1) = Ω·|Ш|·∏c_p/|E_tors|². BSD **direct-check Pareto**.
+6. **BKLPR (A3') κ → ? asymptote**: κ(2,3,B) growth profile (1.33→1.70→1.95, 107037), numerical extrapolate as B → ∞. Model: κ = c·log B + ... or κ = c·(1-B^{-α}).
 
 ### §X.5 testable falsifier
 
-- **F1**: Mazur torsion 15 form ≠ σ + n/φ = 15 (새 form discovery  on ) → torsion number-theory identity discarded
-- **F2**: j(i) ≠ σ³ = 1728 (measurement feasiblehowever definition) → j-CM singularvalue mapping discarded
+- **F1**: Mazur torsion 15 forms ≠ σ + n/φ = 15 (new form discovered) → torsion number-theory identity discarded
+- **F2**: j(i) ≠ σ³ = 1728 (measurement or definition shifts) → j-CM singular-value mapping discarded
 - **F3**: Cremona high-conductor bin mean |Sel_6| ≠ σ(6) = 12 ± 3% (N > 10⁶ measurement) → BKLPR σ(n) prediction discarded
-- **F4**: L(E,s) functionequation reflectionaxis ≠ φ=2 (i.e. w center ≠ s=1) → φ_E fixed point discarded
-- **F5**: rank min r>3  non-negligible (>0.1%) → n/φ 경험 upper bound discarded
-- **F6**: |Ш(E)|=completesquare 반례 1 discovery → Cassels-Tate 응용 및 |Ш|=□ discarded
+- **F4**: L(E,s) functional-equation reflection axis ≠ φ=2 (i.e. w-center ≠ s=1) → φ_E fixed point discarded
+- **F5**: rank distribution r>3 non-negligible (>0.1%) → n/φ empirical upper bound discarded
+- **F6**: |Ш(E)|=perfect-square counterexample discovered → Cassels-Tate application and |Ш|=□ discarded
 
 ### §X.6 atlas constants output (7 items)
 

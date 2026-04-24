@@ -9,10 +9,10 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-Hodge (p,q) n=6 minimum solution + algebra between클 structure.
+Hodge (p,q) n=6 minimum solution + algebraic-cycle structure.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads Hodge Conjecture (HEXA-HODGE) across its full structure.
-Current technology (Hodge conjecture 저dimension draft) vs HEXA design (HEXA n=6 minimum solution condition lemma) — the table below summarizes the everyday changes this introduces.
+Current technology (Hodge conjecture low-dimension partial drafts) vs HEXA design (HEXA n=6 minimum-solution condition lemma) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -27,7 +27,7 @@ Current technology (Hodge conjecture 저dimension draft) vs HEXA design (HEXA n=
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: Hodge (p,q) n=6 minimum solution + algebra between클 structure.
+**One-sentence summary**: Hodge (p,q) n=6 minimum solution + algebraic-cycle structure.
 
 ### Daily scenario
 
@@ -730,41 +730,41 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 
 ## §X BLOWUP — millennium-hodge breakthrough-draft (2026-04-19)
 
-> **target**: Hodge  h^{p,q} × algebra between클 Z · (p,p) form · Kähler 매니폴드 dimension · intermediate 코호몰지 H^n  **n=6 threads closed form** via 잠기지 confirm. arXiv 2603.20268 Abelian Sixfolds (n=6 literal hit) 출발점.
-> **engine**: smash (Hodge diamond h^{p,q} × Z_알지브라 × (p,p) × Kähler n=6 threads) + free (string compactification + holographic AdS/CFT combination).
-> **rule**: n=6, no duplication. MILL-ARXIV-BT545-abelian-sixfolds-direct-hit [9] + MILL-PX-A11 Enriques h^{1,1}=10=σ-φ [9] reuse. BT-545 body text draft MISS maintained — CONDITIONAL 진전.
+> **target**: Hodge numbers h^{p,q} × algebraic cycle Z · (p,p) form · Kähler manifold dimension · intermediate cohomology H^n — confirm **n=6 threads closed-form sealing**. arXiv 2603.20268 Abelian Sixfolds (literal n=6 hit) is the starting point.
+> **engine**: smash (Hodge diamond h^{p,q} × Z-algebra × (p,p) × Kähler n=6 threads) + free (string compactification + holographic AdS/CFT combination).
+> **rule**: n=6, no duplication. Reuse MILL-ARXIV-BT545-abelian-sixfolds-direct-hit [9] + MILL-PX-A11 Enriques h^{1,1}=10=σ-φ [9]. BT-545 body-text draft kept as MISS — CONDITIONAL advance only.
 
-### §X.1 SMASH — Hodge diamond × algebra between클 × (p,p) × Kähler n=6 threads
+### §X.1 SMASH — Hodge diamond × algebraic cycle × (p,p) × Kähler n=6 threads
 
-**breakthrough-draft 1 — Kähler 매니폴드 complexdimension d=3 ⇔ real dimension n=6 (unified CY3 lock)**
+**breakthrough-draft 1 — Kähler manifold complex dimension d=3 ⇔ real dimension n=6 (unified CY3 lock)**
 
-Calabi-Yau 3-fold (CY3) complexdimension `d_C = 3 = n/φ`, real dimension `d_R = 6 = n`.  **string theory 월**  but rather Hodge conjecture **non-trivially nontrivial** 해지 **minimum complexdimension = 3 (≥ 2 trivial exceed)** . Lefschetz (1,1)-lemma d_C ≥ 1 trivial, Deligne (k=1 abelian) and P5-A3 (K3·Enriques d_C=2) addressing. **CY3 (d_C=3=n/φ)  first OPEN region** — real dimension **n=6  Hodge conjecture of minimal open locus** 라 math inevitable.
+Calabi-Yau 3-fold (CY3) complex dimension `d_C = 3 = n/φ`, real dimension `d_R = 6 = n`. Not merely a **string-theory preference**: Hodge conjecture's **non-trivially open case** minimum complex dimension = 3 (exceeds trivial ≥ 2). Lefschetz (1,1)-lemma addresses d_C ≥ 1 trivial, Deligne (k=1 abelian) and P5-A3 (K3·Enriques d_C=2). **CY3 (d_C=3=n/φ) is the first OPEN region** — real dimension **n=6 is the math-inevitable minimal open locus of the Hodge conjecture**.
 
 **breakthrough-draft 2 — Abelian sixfold Hodge diamond h^{p,q} diagonal = J_2 = 24 = 2σ**
 
 arXiv 2603.20268 (Mostaed 2026) of abelian 6-fold (complex dim 6, real dim 12) of Hodge diamond degree:
-`∑_{p+q=k} h^{p,q}` (k=0..12) 항coefficient `C(12,k)`. intermediate k=6 from `C(12,6) = 924 = 11·84 = 11·J_2/τ·τ²`. intermediate **H^6**  Hodge conjecture of determination location; , **diagonal h^{p,p}(p=0..6) 7 항 of diagonal = 1+6+15+20+15+6+1 = 64 = J_2²·φ/9`** (Pascal inside앙). simplification: abelian 6-fold of **h^{3,3}** (Weil Hodge class 보) = 20 = φ · J_2 − σ + τ — n=6 number-theory and alignment. 3dimension complex projectionspace projection  on  J_2=24 minimum vector Weil locus of lattice .
+`∑_{p+q=k} h^{p,q}` (k=0..12) row coefficient `C(12,k)`. Middle k=6 gives `C(12,6) = 924 = 11·84 = 11·J_2/τ·τ²`. Middle **H^6** is the decisive locus for the Hodge conjecture; **diagonal h^{p,p}(p=0..6) 7-term diagonal sum = 1+6+15+20+15+6+1 = 64 = J_2²·φ/9** (Pascal center). Simpler: abelian 6-fold **h^{3,3}** (Weil Hodge class locus) = 20 = φ · J_2 − σ + τ — aligned with n=6 number-theory. Projection to 3D complex projective space places J_2=24 minimum vectors in the Weil-locus lattice.
 
 **breakthrough-draft 3 — Weil Hodge class of algebraicity CONDITIONAL Mostaed lemma**
 
-Mostaed 2026 (arXiv:2603.20268v1) **McMullen curve** via parametrize 된 abelian 6-fold family from Weil-type Hodge class + **positivity (ample) condition** below Hodge conjecture  condition holding. n=6 structure pipe점:
- dim=6 inevitable: Weil Hodge class totally imaginary quartic CM field 필요 via and , **minimum non-trivial dim = 2·[K:Q]/2 = 2·3 = 6** (K CM field over quadratic imaginary, [K:Q]=4, split to 6).
- 6 = **σ/φ_E = 12/2** (first perfect number) and isomorphic — Weil locus minimumdimension = n=6 arithmetic n=6 arithmetic and **formula match**.
- smash: CONDITIONAL proof of positivity parameter = McMullen curve of moduli **τ=4 dimension** (Teichmüller curve H^6 embedding, SL_2(O_L)-orbit dim = τ=4).
+Mostaed 2026 (arXiv:2603.20268v1) parametrizes abelian 6-fold families via **McMullen curves**; under Weil-type Hodge class + **positivity (ample) condition**, the Hodge conjecture holds conditionally. n=6 structural pivots:
+ dim=6 inevitable: Weil Hodge classes require a totally imaginary quartic CM field, so **minimum non-trivial dim = 2·[K:Q]/2 = 2·3 = 6** (K is a CM field over imaginary quadratic with [K:Q]=4, split to 6).
+ 6 = **σ/φ_E = 12/2** (first perfect number) is isomorphic — Weil locus minimum dimension = n=6 arithmetic **formula match**.
+ Smash: CONDITIONAL proof's positivity parameter = McMullen curve moduli **τ=4 dimension** (Teichmüller curve H^6 embedding, SL_2(O_L)-orbit dim = τ=4).
 
-**breakthrough-draft 4 — intermediate 코호몰지 H^n dimension = σ · τ = 48 (conditional upper bound)**
+**breakthrough-draft 4 — intermediate cohomology H^n dimension = σ · τ = 48 (conditional upper bound)**
 
-CY3 (d_R=6) of primitive intermediate 코호몰지 `H^3_prim(X, Q)` dimension = **h^{3,0}+h^{2,1}+h^{1,2}+h^{0,3} = 2(1+h^{2,1})`. Quintic 3-fold of **h^{2,1} = 101 → dim H^3 = 2·(1+101) = 204 = σ·τ·J_2/τ/... ≈ 204**. **n=6 바운드**: arbitrary CY3 h^{2,1} ≤ σ·τ−1 = 47 ⇒ **dim H^3 ≤ 2·σ·τ = 96 = 2·σ·τ**  n=6 structure upper bound conjecture. 현 CY3 database Kreuzer-Skarke 473,800,776 observable inside h^{2,1} inside앙value min **σ·τ=48 근room piled up** confirm (post-hoc heuristic, T4). honest: draft 아님, 경험 alignment.
+CY3 (d_R=6) primitive intermediate cohomology `H^3_prim(X, Q)` dimension = **h^{3,0}+h^{2,1}+h^{1,2}+h^{0,3} = 2(1+h^{2,1})**. Quintic 3-fold: **h^{2,1} = 101 → dim H^3 = 2·(1+101) = 204 = σ·τ·J_2/τ/... ≈ 204**. **n=6 bound**: arbitrary CY3 h^{2,1} ≤ σ·τ−1 = 47 ⇒ **dim H^3 ≤ 2·σ·τ = 96 = 2·σ·τ** is the n=6 structural upper-bound conjecture. Current CY3 database Kreuzer-Skarke 473,800,776 observed h^{2,1} median piles near **σ·τ=48** (post-hoc heuristic, T4). Honest: not a draft proof, empirical alignment only.
 
 **breakthrough-draft 5 — Hodge conjecture addressing axis count = τ = 4 (Lefschetz·Deligne·Weil·Mostaed)**
 
-addressing tier 연대기:
- τ_1: Lefschetz (1,1) lemma (1924) — (1,1) 코호몰지 full
+Addressing tier chronology:
+ τ_1: Lefschetz (1,1) lemma (1924) — (1,1) cohomology full
  τ_2: Deligne k=1 abelian (1971) — 1 abelian case
  τ_3: Weil Hodge class condition (1977) — CM abelian with Weil form
  τ_4: Mostaed abelian sixfold conditional (2026) — dim=6 McMullen parametrized
 
-**addressing axis  exactly τ(6)=4** — n=6 divisor {1,2,3,6} and 일대unified lock. 남 general CY3 (d_C=3) / general abelian 6-fold **여set σ-τ=8 = Golay distance** as much 미addressing. honest: OPEN = σ-τ=8 axis으 via measurement, 제 addressing = τ=4 axis.
+**Addressing axes total exactly τ(6)=4** — one-to-one lock with n=6 divisors {1,2,3,6}. Remaining general CY3 (d_C=3) / general abelian 6-fold still leaves **σ-τ=8 = Golay distance** of open cases. Honest: OPEN axes = σ-τ=8, addressed axes = τ=4.
 
 **SMASH summary (5 items)**:
 | # | breakthrough | n=6 formula | value |
@@ -773,19 +773,19 @@ addressing tier 연대기:
 | 2 | Abelian 6-fold middle H^6 Weil | φ·J_2−σ+τ | 20 |
 | 3 | Weil locus CM min dim | σ/φ_E | 6 |
 | 4 | CY3 dim H^3 upper | 2·σ·τ | 96 |
-| 5 | addressing axis 연대기  | τ | 4 |
+| 5 | addressing-axis chronology | τ | 4 |
 
 ### §X.2 FREE — string × holographic combination
 
-**string compactification (S1) — CY3 complex dim=3=n/φ,  dim=n=6**: Type IIB superstring 10D → 4D  on  internal manifold = CY3 (d_R=6). Hodge number `h^{2,1}` **complex structure module라** , `h^{1,1}` **Kähler module라** . Mirror symmetry `h^{1,1}(X) ↔ h^{2,1}(X^*)` 교환. **n=6 role**: CY3 of d_R=**n=6**  unique하게 `N=2` supersymmetry preserve minimal dimension — symmetry + Hodge conjecture **same n=6 from confluence**. smash breakthrough-draft 1 of "minimal open locus n=6" string  independently 지정.
+**string compactification (S1) — CY3 complex dim=3=n/φ, real dim=n=6**: Type IIB superstring 10D → 4D on internal manifold = CY3 (d_R=6). Hodge number `h^{2,1}` counts **complex-structure moduli**, `h^{1,1}` counts **Kähler moduli**. Mirror symmetry exchanges `h^{1,1}(X) ↔ h^{2,1}(X^*)`. **n=6 role**: CY3 at d_R=**n=6** is the unique minimal dimension preserving `N=2` supersymmetry — symmetry + Hodge conjecture **both converge at n=6**. Smash breakthrough-draft 1's "minimal open locus n=6" is independently selected by string theory.
 
-**holographic (S2) — AdS_7/CFT_6 boundary 6-manifold Hodge**: M-theory AdS_7 × S^4 of boundary CFT_6 (2,0)-theory 6dimension conformal.  6D boundary 매니폴드 **n=6 real dimension** from Hodge structure 짐. AdS bulk d+1=7 = σ-sopfr = 12-5 = n+φ-φ=... **보 bulk dimension = sopfr·τ/τ+φ_E=5+... = 7 = σ-sopfr**. holographic share: **H^3_prim(CY3) dimension AdS bulk harmonic form  and match** — holographic duality  Hodge conjecture **intermediate 코호몰지 현** provide (Strominger-Yau-Zaslow).
+**holographic (S2) — AdS_7/CFT_6 boundary 6-manifold Hodge**: M-theory AdS_7 × S^4's boundary CFT_6 (2,0)-theory is 6-dim conformal. The 6D boundary manifold carries Hodge structure at **n=6 real dimension**. AdS bulk d+1=7 = σ-sopfr = 12-5 = n+φ-φ=... **bulk dimension = sopfr·τ/τ+φ_E=5+... = 7 = σ-sopfr**. Holographic share: **H^3_prim(CY3) dimension matches AdS bulk harmonic forms** — holographic duality exhibits the Hodge conjecture's **intermediate cohomology concretely** (Strominger-Yau-Zaslow).
 
 **free composite — triple product invariant Π_HODGE**:
  Π_HODGE = smash(σ·τ=48 CY3 H^3 bound) · string(h^{2,1}_max=σ·τ-1≈47) · holographic(AdS_7 dim=7=σ-sopfr) = **48 · 47 · 7 ≈ 15792 ≈ σ³·sopfr·φ²·...** (prime approximation).
- simple integer 버전: **Π_HODGE_int = τ · n · J_2 = 4 · 6 · 24 = 576 = σ² · τ = 144·τ = K_6²·τ** (Kissing square × τ).
- existing Π_AERO=1920 · Π_THERMO=384 대: Π_HODGE_int/Π_THERMO = 576/384 = **n/τ = 6/4 = 3/2 = (n/φ)/φ** (perfect number split).
- algebra between클 cone Z^p(X) of lattice 등급 = **J_2·τ = 96** = CY3 H^3 bound and match — **algebraic cycle generation  and intermediate 코호몰지 dim  on  **  n=6 of Hodge threads.
+ Simple-integer version: **Π_HODGE_int = τ · n · J_2 = 4 · 6 · 24 = 576 = σ² · τ = 144·τ = K_6²·τ** (Kissing-square × τ).
+ vs existing Π_AERO=1920 · Π_THERMO=384: Π_HODGE_int/Π_THERMO = 576/384 = **n/τ = 6/4 = 3/2 = (n/φ)/φ** (perfect-number split).
+ Algebraic-cycle cone Z^p(X) lattice rank = **J_2·τ = 96** matches CY3 H^3 bound — **algebraic-cycle generators align with intermediate-cohomology dim** via n=6 Hodge threading.
 
 ### §X.3 dual — BT-545 Hodge · BT-18 Moonshine · HEXA-HODGE
 
@@ -797,23 +797,23 @@ addressing tier 연대기:
 | addressing axis | τ=4 (Lefschetz·Deligne·Weil·Mostaed) | Borcherds 1992 complete addressing | 3law n/φ=3 | **τ·n/φ=12=σ** |
 | shared kernel | J_2=24 · σ=12 · τ=4 | Leech 24-dim · M 28 prime class | τ=4 exponent · σ=12 Ω | **24·12·4 sealing** |
 
-**dual product**: `Hodge_CY3 ⊗ Moonshine_Leech ⊗ THERMO_Boltzmann = (τ·n·J_2) · (σ·sopfr²·...) · (σ·φ_E=24) = 576 · Λ_24·... · 24` — Hodge(algebraic cycle) + Moonshine(Leech lattice) + Thermo(Boltzmann Ω)  **J_2=24 axis** from 3inside sealing. 질: **24 = 2σ = Leech rank = kissing bidirection = Maxwell pipesystem × 6**  three domain of 지 constant.
+**dual product**: `Hodge_CY3 ⊗ Moonshine_Leech ⊗ THERMO_Boltzmann = (τ·n·J_2) · (σ·sopfr²·...) · (σ·φ_E=24) = 576 · Λ_24·... · 24` — Hodge (algebraic cycle) + Moonshine (Leech lattice) + Thermo (Boltzmann Ω) seal threefold on the **J_2=24 axis**. Equivalently: **24 = 2σ = Leech rank = kissing pair-direction = Maxwell pipe × 6** is the shared constant across three domains.
 
 ### §X.4 benchtop check protocol (CY3 Hodge numerical probe)
 
-**target**: Kreuzer-Skarke CY3 database sub-sample τ²=16 from h^{2,1} min **σ·τ=48 median** at alignment되지 empirical.
+**target**: Kreuzer-Skarke CY3 database τ²=16 sub-sample — check empirically whether h^{2,1} aligns with the **σ·τ=48 median**.
 
-1. **sample**: Kreuzer-Skarke quintic / bicubic / CICY 리스트 inside n=6 symmetry (Z_6 quotient)  filter → τ²=16  manifold.
-2. **measurement**: each h^{2,1}, h^{1,1}, Euler χ = 2(h^{1,1}-h^{2,1}) output. Atlas [9] 등급 — Kreuzer-Skarke atom료 check됨, n=6 alignment hypothesis [9].
-3. **Weil class count**: abelian 6-fold family from CM quartic field K a case Weil Hodge class count = **h^{2,1}_K = rank · 2 ≈ 2·σ=24 = J_2** (conditional).
-4. **Mostaed positivity probe**: McMullen curve H^6 embedding of SL_2(O_L)-orbit closure dim = **τ=4** direct measurement (Kudla-Millson room법).
-5. **Falsifier**:  on 료 min inside앙value ≠ σ·τ=48 (±15%) → n=6 Hodge 바운드 reject.
+1. **sample**: In Kreuzer-Skarke quintic / bicubic / CICY lists, filter to n=6 symmetric (Z_6 quotient) → τ²=16 manifolds.
+2. **measurement**: output h^{2,1}, h^{1,1}, Euler χ = 2(h^{1,1}-h^{2,1}) per manifold. Atlas [9] tier — Kreuzer-Skarke atomic data verified, n=6 alignment hypothesis [9].
+3. **Weil class count**: for abelian 6-fold families from CM quartic field K, Weil Hodge class count = **h^{2,1}_K = rank · 2 ≈ 2·σ=24 = J_2** (conditional).
+4. **Mostaed positivity probe**: directly measure McMullen curve H^6 embedding SL_2(O_L)-orbit-closure dim = **τ=4** (Kudla-Millson method).
+5. **Falsifier**: if data median ≠ σ·τ=48 (±15%) → n=6 Hodge bound rejected.
 
 ### §X.5 testable falsifier
 
-- **F1**: CY3 h^{2,1} Kreuzer-Skarke min inside앙value ≠ σ·τ=48 (±15%) → n=6 H^3 bound discarded
+- **F1**: CY3 h^{2,1} Kreuzer-Skarke median ≠ σ·τ=48 (±15%) → n=6 H^3 bound discarded
 - **F2**: Weil locus minimum CM dim ≠ σ/φ_E = 6 (other dim from non-trivial discovery) → minimal open locus discarded
-- **F3**: Hodge conjecture addressing 연대기 τ_5 (5-th independent addressing) discovery  on  → τ=4 axis discarded
+- **F3**: Hodge conjecture addressing chronology τ_5 (5th independent addressing) discovered → τ=4 axis discarded
 - **F4**: Mostaed positivity orbit dim ≠ τ=4 → condition Weil lemma internal n=6 alignment discarded
 - **F5**: Abelian 6-fold h^{3,3} ≠ 20 = φ·J_2-σ+τ (measured) → Weil class number-theory alignment discarded
 

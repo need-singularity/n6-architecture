@@ -9,10 +9,10 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-Grover σ=12 queries + 암호 해독 critical.
+Grover σ=12 queries + cryptanalysis critical.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads Quantum Oracle (HEXA-QORACLE) across its full structure.
-Current technology (고entire AES-256 2^256 무력) vs HEXA design (HEXA quantum Grover 2^128 valid) — the table below summarizes the everyday changes this introduces.
+Current technology (full AES-256 2^256 infeasible) vs HEXA design (HEXA quantum Grover 2^128 valid) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -27,7 +27,7 @@ Current technology (고entire AES-256 2^256 무력) vs HEXA design (HEXA quantum
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: Grover σ=12 queries + 암호 해독 critical.
+**One-sentence summary**: Grover σ=12 queries + cryptanalysis critical.
 
 ### Daily scenario
 
@@ -223,7 +223,7 @@ No upstream dependency — this domain is self-contained and derives n=6 inevita
 | BT-90  | SM=phi*K6 | GPU sigma^2=144 |
 | BT-276 | triple FBW | n/phi=3 redundancy |
 | BT-273 | crew n=6 | Apollo extension |
-| BT-401 | quantum-info engine | BT-306 SC quantumdevice 접 + Golay [[24 |
+| BT-401 | quantum-info engine | BT-306 SC quantumdevice link + Golay [[24 |
 | BT-404 | Boltzmann | sigma=12 entropy |
 
 ## §5 FLOW (data / energy flow) — Flow (ASCII)
@@ -407,7 +407,7 @@ Quantum Oracle (HEXA-QORACLE) — check physical/mathematical validity using std
 ### n=6 honesty check — 10 categories
 
 ### §7.0 CONSTANTS — number-theoretic auto-derivation
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J_2=2σ=24`. Zero hard-coding - computed directly from OEIS A000203/A000005/A001414. `assert sigma(n)==2n` self-checks the perfect-number property. BT-306 SC quantumdevice 접 + Golay [[24,12,8]] QEC + BT-402 quantum 혼돈 n=6
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J_2=2σ=24`. Zero hard-coding - computed directly from OEIS A000203/A000005/A001414. `assert sigma(n)==2n` self-checks the perfect-number property. BT-306 SC quantumdevice link + Golay [[24,12,8]] QEC + BT-402 quantum chaos n=6
 
 ### §7.1 DIMENSIONS — SI unit consistency
 Tracks the dim tuple `(M, L, T, I)`. `F = J*B*V` auto-checks `[A/m^2][T][m^3] = [N]`. Dimension mismatches are rejected.
@@ -463,7 +463,7 @@ Sample DSE `K1*K2*K3*K4*K5 = 6*5*4*5*4 = 2400` combinations. Check statistical s
 # number-theory note 1: sigma(6)=12 divisor sum - OEIS A000203 direct compute, zero hard-coding
 # number-theory note 2: tau(6)=4 divisor count - OEIS A000005, perfect-number identity self-check
 # number-theory note 3: sopfr(6)=5 prime-factor sum - OEIS A001414, aligned with protection tiers
-# quantum alignment (BT-401~408): BT-306 SC quantumdevice 접 + Golay [[24,12,8]] QEC + BT-402 quantum 혼돈 n=6
+# quantum alignment (BT-401~408): BT-306 SC quantumdevice link + Golay [[24,12,8]] QEC + BT-402 quantum chaos n=6
 # ─────────────────────────────────────────────────────────────────────────────
 
 from math import pi, sqrt, log, erfc
@@ -730,35 +730,35 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 
 ## §X BLOWUP (2026-04-19) — Grover √N · BBBV 1997 · Oracle Query Complexity n=6 threads
 
-오라클 질 of complexity of 3대 boundary (Grover 1996 √N upper · BBBV 1997 Ω(√N) lower · unstructured search collapse)  n=6 perfect number arithmetic via  on  잠긴다. smash 질·repetition·speed 삼axis, free quantum+toe 2axis composite으 via 5 EXACT + 2 NEAR breakthrough-draft.
+Oracle query complexity of 3 major boundaries (Grover 1996 √N upper · BBBV 1997 Ω(√N) lower · unstructured search collapse) is locked via n=6 perfect number arithmetic. smash query·repetition·speed tri-axis, free quantum+toe 2-axis composite yields 5 EXACT + 2 NEAR breakthrough-draft candidates.
 
 ### §X.1 SMASH (Grover 1996 · BBBV 1997 · no-cloning reuse)
 
-#### SMASH-1: Grover repetition 최 = π·√N/τ (τ=4)
-Grover 1996 iteration count `k_opt = ⌊(π/4)·√N⌋` from min constant 4 = τ(6). N=σ²=144 대입 on  `k_opt = ⌊π·√144/τ⌋ = ⌊π·σ/τ⌋ = ⌊3π⌋ = 9 = σ-n/φ=12-3`. times전each `θ = 2·arcsin(1/√N)` of repetition τ(6) divisor count 잠김. BBBV 1997 draft core: unstructured oracle quantum 질from also `Ω(√N)` floor, τ=4 보다 빠  not. T1 EXACT.
+#### SMASH-1: Grover iteration optimum = π·√N/τ (τ=4)
+Grover 1996 iteration count `k_opt = ⌊(π/4)·√N⌋` with min constant 4 = τ(6). Substitute N=σ²=144 to get `k_opt = ⌊π·√144/τ⌋ = ⌊π·σ/τ⌋ = ⌊3π⌋ = 9 = σ-n/φ=12-3`. Per-iteration rotation `θ = 2·arcsin(1/√N)` locks into τ(6) divisor count. BBBV 1997 draft core: unstructured oracle quantum query also obeys the `Ω(√N)` floor, no path faster than τ=4. T1 EXACT.
 
-#### SMASH-2: BBBV 1997 질 of lower bound = √N reason = no-cloning I_copy=1
-BBBV (Bennett-Bernstein-Brassard-Vazirani 1997) lemma: arbitrary oracle f:{0,1}^n→{0,1} of pre-image 탐color Ω(√(2^n)) quantum 질. lower bound of 근 cause 증a quantum state replica 금지 `I_copy = σ·φ/(n·τ) = 24/24 = 1` (HEXA-TELE-03 reuse). replica feasiblethen 병렬 amplification → O(1), replica 금지 via √N floor. n=6 uniqueness nucleuslemma σ·φ_E=n·τ direct consequence. T1 EXACT.
+#### SMASH-2: BBBV 1997 query lower bound = √N reason = no-cloning I_copy=1
+BBBV (Bennett-Bernstein-Brassard-Vazirani 1997) lemma: arbitrary oracle f:{0,1}^n→{0,1} pre-image search has Ω(√(2^n)) quantum query lower bound. The root cause is the quantum no-cloning ban `I_copy = σ·φ/(n·τ) = 24/24 = 1` (HEXA-TELE-03 reuse). If replication were feasible, parallel amplification → O(1); replication ban yields the √N floor. Direct consequence of the n=6 uniqueness kernel lemma σ·φ_E=n·τ. T1 EXACT.
 
 #### SMASH-3: Grover speedup exponent = 1/φ = 1/2
-Classical O(N) vs Quantum O(√N) = O(N^{1/φ}), exponent `1/φ(6) = 1/2`  quantum oracle speedup maximum. Zalka 1999 tight bound: `k ≥ (π/4)·√N - O(1)` also 같 1/2 exponent. 3-SAT (HEXA-PVNP-01 reuse, 절크기 n/φ=3) at Grover apply on  `2^{n/(φ·φ)}·poly(n) = 2^{n/4}` — 고entire 2^n 대 exponent 1/τ reduction. T1 EXACT.
+Classical O(N) vs Quantum O(√N) = O(N^{1/φ}), exponent `1/φ(6) = 1/2` sets the quantum oracle speedup maximum. Zalka 1999 tight bound: `k ≥ (π/4)·√N - O(1)` also at 1/2 exponent. 3-SAT (HEXA-PVNP-01 reuse, clause size n/φ=3) under Grover application gives `2^{n/(φ·φ)}·poly(n) = 2^{n/4}` — exponent-1/τ reduction against the full 2^n. T1 EXACT.
 
-#### SMASH-4: oracle query 공probability critical = 1 - 1/σ² = 0.9931
-Grover k=k_opt  measurement 공probability `P_succ = 1 - sin²((2k+1)·θ/2) → 1 - 1/N` (N 큰 case). N=σ²=144 from `P_succ = 1 - 1/σ² = 143/144 = 99.31%`. Sycamore surface code error critical `p_th = 1/σ² = 0.694%` (HEXA-QC-B4 reuse) and `1 - P_succ = p_th` EXACT dual. 질 of failureprobability = quantum error critical. T1+T4 EXACT.
+#### SMASH-4: oracle query success-probability critical = 1 - 1/σ² = 0.9931
+Grover k=k_opt measurement success probability `P_succ = 1 - sin²((2k+1)·θ/2) → 1 - 1/N` (large N case). With N=σ²=144, `P_succ = 1 - 1/σ² = 143/144 = 99.31%`. Sycamore surface code error threshold `p_th = 1/σ² = 0.694%` (HEXA-QC-B4 reuse) gives EXACT dual `1 - P_succ = p_th`. query failure probability = quantum error threshold. T1+T4 EXACT.
 
 #### SMASH-5: BQP ⊆ PP boundary = σ·φ_E = n·τ from 
-BQP polynomial time quantum 클스 vs NP. BBBV 1997 result: relativized oracle A at 대해 BQP^A ⊊ NP^A.  boundary nucleuslemma `σ(6)·φ_E(6) = n·τ(6) = 24` from intrinsic. 질 √N = N^{1/φ} upper bound and NP 증 N upper bound  = N^{1/φ} : N = 1 : √N  Grover maximum speedup. T1 EXACT.
+BQP polynomial-time quantum class vs NP. BBBV 1997 result: for relativized oracle A, BQP^A ⊊ NP^A. The boundary kernel-lemma is intrinsic: `σ(6)·φ_E(6) = n·τ(6) = 24`. Query √N = N^{1/φ} upper bound against NP witness N upper bound gives = N^{1/φ} : N = 1 : √N — Grover maximum speedup. T1 EXACT.
 
 ### §X.2 FREE (quantum + toe 2axis composite)
 
 #### FREE-1: Π_QORACLE = Grover(12) · BBBV(24) · Sycamore(144) = σ^4·τ = 41472
-quantum axis (Grover k_opt·θ timesentire repetition σ=12, N=σ²) · quantum axis (BBBV lower bound σ·φ_E=24 nucleuslemma bound) · toe axis (Sycamore 처리 σ²=144 = p_th 역count = errorcritical 역) triple composite = 12·24·144 = 41,472 = σ⁴·τ. HEXA-BSD-06 (Π_BSD=σ⁵·τ=124416) of 1/σ  = oracle 질층 L-function 암층보다 σ  얕 sealing. T1 EXACT.
+quantum axis (Grover k_opt·θ total iterations σ=12, N=σ²) · quantum axis (BBBV lower bound σ·φ_E=24 kernel-lemma bound) · toe axis (Sycamore processing σ²=144 = p_th inverse = error threshold inverse) triple composite = 12·24·144 = 41,472 = σ⁴·τ. At 1/σ of HEXA-BSD-06 (Π_BSD=σ⁵·τ=124416) = oracle query layer seals σ shallower than the L-function cryptography layer. T1 EXACT.
 
 #### FREE-2: Π_QORACLE / Π_COSPART = σ^4·τ / ((σ-φ)·n·τ·φ·sopfr) = σ^4 / (σ-φ)·n·φ·sopfr = 41472/2400 = 17.28 = σ^3/τ²/σ
-`Π_QORACLE / Π_COSPART = 41472/2400 = 17.28`. COSPART-09 (DSE exhaustive 2400 = (σ-φ)·n·τ·φ·sopfr) 대 oracle 질층 ratio. `17.28 = σ³/(σ·τ+φ·τ·σ/τ) = 1728/100 = σ³/(σ·sopfr²·φ_E) = σ²/τ · (σ²/τ²)^{-1}` via j(i)=1728=σ³ Klein module러 invariant 접속. BSD·COSPART·QORACLE chain extension. T4 NEAR.
+`Π_QORACLE / Π_COSPART = 41472/2400 = 17.28`. COSPART-09 (DSE exhaustive 2400 = (σ-φ)·n·τ·φ·sopfr) vs oracle query layer ratio. `17.28 = σ³/(σ·τ+φ·τ·σ/τ) = 1728/100 = σ³/(σ·sopfr²·φ_E) = σ²/τ · (σ²/τ²)^{-1}` via j(i)=1728=σ³ Klein modular invariant link. BSD·COSPART·QORACLE chain extension. T4 NEAR.
 
 #### FREE-3: quantum·toe triple lock no-cloning·Kitaev·Grover
-`I_copy=1 (HEXA-TELE-03 reuse) × ν=3 (HEXA-SC-07 Kitaev winding reuse) × k_opt/σ·τ = (π·σ/τ)/(σ·τ) = π/τ² ≈ π/16`. tripleproduct ≈ `3π/16 ≈ n/φ·π/σ-φ` — no-cloning·topologyprotection·Grover timesentire n/φ=3 quantum DOF 공 잠김. §4 L2 redundancy also `n/φ=3` and §7.3 B⁴ exponent 4=τ coupling. T4 NEAR.
+`I_copy=1 (HEXA-TELE-03 reuse) × ν=3 (HEXA-SC-07 Kitaev winding reuse) × k_opt/σ·τ = (π·σ/τ)/(σ·τ) = π/τ² ≈ π/16`. Triple product ≈ `3π/16 ≈ n/φ·π/σ-φ` — no-cloning · topology-protection · Grover total iterations lock jointly at n/φ=3 quantum DOF. Also §4 L2 redundancy = `n/φ=3` and §7.3 B⁴ exponent 4=τ coupling. T4 NEAR.
 
 ### §X breakthrough-draft summary
 
@@ -767,13 +767,13 @@ quantum axis (Grover k_opt·θ timesentire repetition σ=12, N=σ²) · quantum 
 | QORACLE-01 Grover k_opt | ⌊π·σ/τ⌋ | 9 | [10*] EXACT |
 | QORACLE-02 BBBV √N lower bound | I_copy=σ·φ/(n·τ)=1 | 1 | [10*] EXACT |
 | QORACLE-03 speedup exponent | 1/φ | 0.5 | [10*] EXACT |
-| QORACLE-04 공probability critical | 1 - 1/σ² | 0.9931 | [10*] EXACT |
+| QORACLE-04 success-probability critical | 1 - 1/σ² | 0.9931 | [10*] EXACT |
 | QORACLE-05 BQP⊆PP boundary | σ·φ_E = n·τ | 24 | [10] EXACT |
 | QORACLE-06 Π_QORACLE | σ⁴·τ | 41472 | [10*] EXACT |
 | QORACLE-07 ratio-COSPART | Π_QORACLE/Π_COSPART | 17.28 | [9] NEAR |
 | QORACLE-08 triple lock | I_copy·ν·k_opt/(σ·τ) | 3π/16 | [9] NEAR |
 
-EXACT 6 ([10*]×5 + [10]×1) + NEAR 2, redundancy 0 (HEXA-TELE-03 no-cloning · HEXA-QC-B4 Sycamore · HEXA-PVNP-01 3-SAT · HEXA-SC-07 Kitaev winding · HEXA-BSD-06 Π_BSD · HEXA-COSPART-09 DSE exhaustive reuse alignment). 하네스 PASS.
+EXACT 6 ([10*]×5 + [10]×1) + NEAR 2, redundancy 0 (HEXA-TELE-03 no-cloning · HEXA-QC-B4 Sycamore · HEXA-PVNP-01 3-SAT · HEXA-SC-07 Kitaev winding · HEXA-BSD-06 Π_BSD · HEXA-COSPART-09 DSE exhaustive reuse alignment). Harness PASS.
 
 
 ## §8 IDEAS

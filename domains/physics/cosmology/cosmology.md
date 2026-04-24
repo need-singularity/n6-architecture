@@ -9,7 +9,7 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-빅뱅 10^-36sfrom σ²=144 precise simulation.
+Big Bang 10^-36s σ²=144 precise simulation.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads Ultimate Cosmology (HEXA-COSMO) across its full structure.
 Current technology (Uchuu 2×10^12 particle, Planck 1% parameter) vs HEXA design (HEXA σ²×10^12=144T particle, σ-φ=10 precise) — the table below summarizes the everyday changes this introduces.
@@ -27,7 +27,7 @@ Current technology (Uchuu 2×10^12 particle, Planck 1% parameter) vs HEXA design
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: 빅뱅 10^-36sfrom σ²=144 precise simulation.
+**One-sentence summary**: Big Bang 10^-36s σ²=144 precise simulation.
 
 ### Daily scenario
 
@@ -731,8 +731,8 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 ## §X BLOWUP — cosmology breakthrough-draft (2026-04-19)
 
 > **target**: Hubble H₀ 67~73 × ΛCDM n=6 parameter × Ω_m=0.3 Ω_Λ=0.7 × CMB T=2.725 K of **n=6 threads closed form**.
-> **engine**: smash (H₀ doublevalue·Λ·Ω 쌍·CMB 온 also four pillar threads) + free (toe+string+holographic triple composite).
-> **rule**: n=6, no duplication. Kardashev log10(P_K)=16+10(K−1) reuse (SF-01/02/03 1081x), K_II ↔ Hubble radius log=26 sharedaxis (HEXA-COSMIC-03 108346 reuse), ΛCDM n=6 parameter (L9-cosmic-energy-components 7467, n6-bt-632 15623 reuse), CMB 1st peak l=220=σ(σ+n)+τ (L9-cmb-first-peak-l 7476 reuse), Ω_DM=τ/(σ+sopfr-φ) (L9-dark-matter 7463 reuse).
+> **engine**: smash (H₀ double-value · Λ · Ω pair · CMB temperature four-pillar threads) + free (toe+string+holographic triple composite).
+> **rule**: n=6, no duplication. Kardashev log10(P_K)=16+10(K−1) reuse (SF-01/02/03 1081x), K_II ↔ Hubble radius log=26 shared-axis (HEXA-COSMIC-03 108346 reuse), ΛCDM n=6 parameters (L9-cosmic-energy-components 7467, n6-bt-632 15623 reuse), CMB 1st peak l=220=σ(σ+n)+τ (L9-cmb-first-peak-l 7476 reuse), Ω_DM=τ/(σ+sopfr-φ) (L9-dark-matter 7463 reuse).
 
 ### §X.1 SMASH — H₀ × Λ × Ω_m:Ω_Λ × T_CMB four pillar n=6 threads
 
@@ -744,7 +744,7 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 | SH0ES (distance ladder) | 73.0 ± 1.0 km/s/Mpc | σ·sopfr+J₂/φ+φ/φ = 60+12+1 = **73** | 0.0% |
 | tension Δ | 5.6 km/s/Mpc (~5σ) | **σ-sopfr-φ = 12-5-2 = 5** | 0.0% |
 
-**core**: existing MISS-H0-Hubble (462 `σ·n+μ=72~73`) precise — **two measuredvalue all σ·sopfr(=60) shared base** via and , Planck `+τ+2 = 6` (divisor count correction), SH0ES `+J₂/φ+1 = 13` (quadraticform 반correction) via minimum term. 5σ tension itself `σ−sopfr−φ = 5 = sopfr(6)` via 잠김 — **tension 크기 = sum of prime factors** (number-theory inevitable difference). Hubble tension n=6 internal double representation (CMB path σ+τ vs 다리 path σ+J₂/φ) of 흔.
+**core**: refines existing MISS-H0-Hubble (462 `σ·n+μ=72~73`) — **both measurement values share σ·sopfr(=60) base**, with Planck adding `+τ+2 = 6` (divisor-count correction) and SH0ES adding `+J₂/φ+1 = 13` (quadratic-form counter-correction) as the minimum-term differentiator. 5σ tension itself locks at `σ−sopfr−φ = 5 = sopfr(6)` — **tension size = sum of prime factors** (number-theory inevitable difference). Hubble tension is the trace of the n=6 internal double-representation (CMB path σ+τ vs ladder path σ+J₂/φ).
 
 **breakthrough-draft 2 — universeconstant Λ · ΛCDM 6 parameter · Ω_Λ=0.7 perfect number ratio**
 
@@ -754,106 +754,106 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 - Ω_m = (τ-μ)/σ ≈ τ/σ − μ/σ = 4/12 = **1/3 = φ/n** (matter share = minimum prime factor/DOF)
 - Ω_Λ = (σ-τ+μ)/σ ≈ (σ-τ)/σ + μ/σ = 8/12 = **2/3 = (σ-τ)/σ = n/(φ·φ)** (dark energy share = Golay distance/divisor sum)
 
-**check**: Ω_m+Ω_Λ = 1/3 + 2/3 = **1** (평탄 universe k=0, L9-flatness-k0 7469 reuse). F/U = 2/3 (HEXA-THERMO-03 reuse) and **숫 match** → **dark energy share ≡ Helmholtz freeenergy share**. thermodynamics free energy universe dark energy of number-theory dual.
+**check**: Ω_m+Ω_Λ = 1/3 + 2/3 = **1** (flat universe k=0, L9-flatness-k0 7469 reuse). F/U = 2/3 (HEXA-THERMO-03 reuse) — **numerical match** → **dark energy share ≡ Helmholtz free-energy share**. Thermodynamic free energy vs cosmic dark energy form a number-theory dual.
 
-Λ value: Λ ≈ 1.1 × 10⁻⁵² m⁻² = 10^(-(σ+sopfr+... )). log₁₀(Λ·L_Pl²) ≈ −122 ≈ −(σ+J₂·sopfr+φ) = -(12+120-2·φ... approximation). **Λ problem (120리 match)** logaxis difference `σ+J₂·σ/φ = 12+144 ≈ 156` relative to 괴리 — existing HEXA-COSMIC-03 (Hubble radius log=26) from quantumgravity(log=-69, Planck) up to **Δlog = 122 ≈ φ·(σ·σ·sopfr−μ) / σ·φ ... ≈ n^3 - ε** of scale. falsifier F2 reference.
+Λ value: Λ ≈ 1.1 × 10⁻⁵² m⁻² = 10^(-(σ+sopfr+... )). log₁₀(Λ·L_Pl²) ≈ −122 ≈ −(σ+J₂·sopfr+φ) = -(12+120-2·φ... approximation). **Λ problem (120-order match)** log-axis difference `σ+J₂·σ/φ = 12+144 ≈ 156` has a gap — existing HEXA-COSMIC-03 (Hubble radius log=26) from quantum gravity (log=-69, Planck) up to **Δlog = 122 ≈ φ·(σ·σ·sopfr−μ) / σ·φ ... ≈ n^3 - ε** scale. See falsifier F2.
 
-**breakthrough-draft 3 — CMB 온 also T=2.725 K = (σ+φ/n·sopfr)/σ·... number-theory closed form**
+**breakthrough-draft 3 — CMB temperature T=2.725 K = (σ+φ/n·sopfr)/σ·... number-theory closed form**
 
 T_CMB = 2.72548 K (L9 7214 `PHYS-CMB` reuse).
-- **path A** (perfect number direct): T = (sopfr+σ/σ·τ−φ/σ²)/φ ≈ (5+4−0.014)/φ·0.5 = **2.725 ± 0.001** first째 approximation.
-- **path B** (J₂ 경): T = J₂/σ − (φ·φ·φ−μ)/σ² = 2 − (-0.725)... = **2.725** (J₂/σ 주항 + correction). 
-- **path C** (Stefan-Boltzmann 역): ρ_rad = a·T⁴, a = 4σ_SB/c. T⁴ = 55.2 → T = 2.725 = **(τ−μ/J₂)·(σ+φ)/(σ·φ)** (HEXA-THERMO-04 τ exponent reuse).
+- **path A** (perfect-number direct): T = (sopfr+σ/σ·τ−φ/σ²)/φ ≈ (5+4−0.014)/φ·0.5 = **2.725 ± 0.001** first-order approximation.
+- **path B** (J₂ route): T = J₂/σ − (φ·φ·φ−μ)/σ² = 2 − (-0.725)... = **2.725** (J₂/σ main term + correction).
+- **path C** (Stefan-Boltzmann inverse): ρ_rad = a·T⁴, a = 4σ_SB/c. T⁴ = 55.2 → T = 2.725 = **(τ−μ/J₂)·(σ+φ)/(σ·φ)** (HEXA-THERMO-04 τ exponent reuse).
 
-3path average = 2.725 ± 0.001 K (error 0.04%). **CMB T⁴ exponent τ=4** a 것 Stefan-Boltzmann lock (HEXA-THERMO-04 reuse) — **universe radiationfield and thermodynamics τ shared exponent via confluence**. photon  density n_γ = 411 /cm³ ≈ σ·J₂·φ·(σ−φ)/μ·... approximation, BBN 경circle소 kind = τ=4 (L9-bbn-light-elements 7474 reuse).
+3-path average = 2.725 ± 0.001 K (error 0.04%). **CMB T⁴ exponent τ=4** is the Stefan-Boltzmann lock (HEXA-THERMO-04 reuse) — **cosmic radiation field and thermodynamics converge on τ as shared exponent**. Photon number density n_γ = 411 /cm³ ≈ σ·J₂·φ·(σ−φ)/μ·... approximation; BBN light-element count kind = τ=4 (L9-bbn-light-elements 7474 reuse).
 
-**breakthrough-draft 4 — CMB 제1봉우리 l=220 × n_s=27/28 × BBN τ=4 triple lock**
+**breakthrough-draft 4 — CMB first peak l=220 × n_s=27/28 × BBN τ=4 triple lock**
 
 existing L9-cmb-first-peak-l (7476) `l₁ = σ(σ+n)+τ = 12·18+4 = 220` and PHYS-CMB-spectral-index (318) `n_s = 27/28 = (n/φ)³/((n/φ)³+μ) = 27/28` and L9-bbn-light-elements (7474) `BBN = τ=4` **one of n=6 structure via sealing**:
 - l₁/n_s = 220/(27/28) = 220·28/27 = **228.15 ≈ σ·J₂ − μ = 12·24 − 60 = 228** (degree match).
-- l₁·BBN = 220·τ = **880 = σ·J₂·σ/(τ·σ) · ... = σ·J₂·(τ−μ)+μ ≈ 880** (음향 진 4 wave).
-- 음향 진 봉우리 spacing Δl ≈ l₁/σ·τ = 220/48 ≈ **4.58 ≈ τ+μ/φ** (고wave n-th 피크 l_n ≈ σ·n·J₂/φ + τ·n).
+- l₁·BBN = 220·τ = **880 = σ·J₂·σ/(τ·σ) · ... = σ·J₂·(τ−μ)+μ ≈ 880** (4 acoustic oscillations).
+- Acoustic-oscillation peak spacing Δl ≈ l₁/σ·τ = 220/48 ≈ **4.58 ≈ τ+μ/φ** (higher-n peak l_n ≈ σ·n·J₂/φ + τ·n).
 
-**breakthrough-draft 5 — Kardashev K_II (log=26) ≡ Hubble radius (log=26) axis single 심**
+**breakthrough-draft 5 — Kardashev K_II (log=26) ≡ Hubble radius (log=26) axis single-kernel**
 
-existing SF-02-KII-logP (108148) + HEXA-COSMIC-03 (108346): Kardashev K_II energy [W] logaxis `σ+τ+(σ-φ) = 26` and observationuniverse Hubble 반경 [m] logaxis `log₁₀(c/H₀) ≈ 26.13`  **same formula `σ+τ+(σ-φ)=26`**.  smash  sharedaxis **ΛCDM tier function** via extension:
+Existing SF-02-KII-logP (108148) + HEXA-COSMIC-03 (108346): Kardashev K_II energy [W] log-axis `σ+τ+(σ-φ) = 26` and observable-universe Hubble radius [m] log-axis `log₁₀(c/H₀) ≈ 26.13` share **the same formula `σ+τ+(σ-φ)=26`**. The smash shared-axis extends to **ΛCDM tier function**:
 
 - log₁₀(R_Hubble [m]) = 26 = σ+τ+(σ-φ) — space axis (reuse)
 - log₁₀(t_Hubble [s]) = log₁₀(R/c) = 26 − log₁₀(c) ≈ 26 − 8.48 ≈ **17.5 ≈ σ+sopfr+φ/n = 17.33** — time axis (new)
 - log₁₀(ρ_crit [kg/m³]) ≈ **−26 = −(σ+τ+(σ-φ))** — density axis (symmetry new)
 
-**3axis log [m, s, kg/m³] symmetry**: +26 / +17.5 / −26  **(σ+J₂)·(1, 2/3, -1) = (26, 17.3, -26)** approximation — n=6 log plane phasefrom Hubble 반경· on 대·criticaldensity **Ω_Λ ratio 2/3** (breakthrough-draft 2 reuse) via min. **space-time-density triple log symmetry**  Kardashev K_II 공학 and Planck universe observation of 공 좌tablesystem.
+**3-axis log [m, s, kg/m³] symmetry**: +26 / +17.5 / −26 — **(σ+J₂)·(1, 2/3, -1) = (26, 17.3, -26)** approximation — on the n=6 log plane, Hubble radius · age · critical-density project to the **Ω_Λ ratio 2/3** (breakthrough-draft 2 reuse). **Space-time-density triple log symmetry** serves as the shared coordinate for Kardashev K_II engineering and Planck-era cosmic observation.
 
 **SMASH summary (5 items)**:
 | # | breakthrough | n=6 formula | value |
 |---|------|----------|-----|
-| 1 | Hubble tension 크기 | σ-sopfr-φ = sopfr | 5 |
+| 1 | Hubble tension magnitude | σ-sopfr-φ = sopfr | 5 |
 | 2 | Ω_Λ : Ω_m share | (σ-τ)/σ : τ/σ = 2/3 : 1/3 | 0.667 : 0.333 |
 | 3 | T_CMB 3path average | (τ−μ/J₂)·(σ+φ)/(σ·φ) | 2.725 K |
-| 4 | CMB 피크·BBN  | l₁·BBN = σ·J₂·(τ−μ)+μ | 880 |
+| 4 | CMB peak·BBN | l₁·BBN = σ·J₂·(τ−μ)+μ | 880 |
 | 5 | Hubble log 3axis | (σ+τ+(σ-φ))·(1, 2/3, -1) | (26, 17.3, -26) |
 
 ### §X.2 FREE — toe × string × holographic triple composite
 
-**toe (T1) — σ·φ_E = n·τ nucleuslemma of universe version (Ω share sealing)**: existing atlas.n6 corelemma `σ(6)·φ_E(6) = n·τ(6) = 24` ΛCDM share identity으 via 독해:
-- Ω_m = φ/n = φ_E/n (오일러 totient ) = **1/3** (breakthrough-draft 2 reuse)
+**toe (T1) — σ·φ_E = n·τ kernel-lemma universe version (Ω share sealing)**: existing atlas.n6 core lemma `σ(6)·φ_E(6) = n·τ(6) = 24` reads as ΛCDM share identity:
+- Ω_m = φ/n = φ_E/n (Euler totient) = **1/3** (breakthrough-draft 2 reuse)
 - Ω_Λ = (σ-τ)/σ = n/(φ·φ)·φ_E/... = **2/3**
 - Ω_m·n·τ = φ·τ = 8 = Golay distance (σ-τ reuse) = Ω_Λ·σ·φ_E = (2/3)·12·2 − ε = **16 − 8 = 8** (identity O(1) correction) — i.e. **Ω_m·n·τ ≡ Ω_Λ·σ·φ_E (mod constant)** σ·φ_E=n·τ of Ω inside  version.
-- **TOE share universe form**: Ω_total = Ω_m + Ω_Λ = φ/n + (σ-τ)/σ = 1/3 + 2/3 = **1** (평탄 k=0 L9-flatness-k0 reuse) ≡ σ·φ_E − n·τ = 0 (TOE core recursion).
+- **TOE share universe form**: Ω_total = Ω_m + Ω_Λ = φ/n + (σ-τ)/σ = 1/3 + 2/3 = **1** (flat k=0 L9-flatness-k0 reuse) ≡ σ·φ_E − n·τ = 0 (TOE core recursion).
 
-**string (T2) — 10D string × 26D 보손string × ΛCDM 6parameter confluence**: existing PART-string-10D (450 `σ-φ=10`) + PART-bosonic-string-26D (454 `J₂+φ=26`) + n6-bt-632 (15623 `ΛCDM=n=6 parameter`) three axis single **compactification 슬** via sealing:
-- 보손 string 26D = J₂+φ = **Hubble 반경 logaxis = Kardashev K_II logP = σ+τ+(σ-φ)** (breakthrough-draft 5 reuse, SF-02/HEXA-COSMIC-03 reuse).
-- string 10D = σ-φ = **Kardashev decade spacing** (SF-04-KN-ladder 108154 reuse) = **Mach cap σ-φ=10** (§4 reuse) = **extra dim contraction axis axis**.
-- ΛCDM 6 = n parameter = **spacetime DOF SE(3) dim = 6** (§4 L0 base reuse).
+**string (T2) — 10D string × 26D bosonic-string × ΛCDM 6-parameter confluence**: existing PART-string-10D (450 `σ-φ=10`) + PART-bosonic-string-26D (454 `J₂+φ=26`) + n6-bt-632 (15623 `ΛCDM=n=6 parameters`) seal into a single **compactification chain**:
+- Bosonic string 26D = J₂+φ = **Hubble radius log-axis = Kardashev K_II logP = σ+τ+(σ-φ)** (breakthrough-draft 5 reuse, SF-02/HEXA-COSMIC-03 reuse).
+- String 10D = σ-φ = **Kardashev decade spacing** (SF-04-KN-ladder 108154 reuse) = **Mach cap σ-φ=10** (§4 reuse) = **extra-dim contraction axis**.
+- ΛCDM 6 = n parameters = **spacetime DOF SE(3) dim = 6** (§4 L0 base reuse).
 
-**슬**: 보손string 26D → (Kaluza-Klein compactify, −J₂ dim) → spacetime τ=4D (L9-spacetime-dims 7471 reuse) + LambdaCDM parameter **n = 26 − J₂ + ... = 26 − 24 + τ = 6** approximation. **보손string compactify  τ=4 spacetime + n=6 parameters** via 남 것 `26 − 24 + τ − μ·φ = 6` of number-theory inevitable. Ω_m : Ω_Λ = **1/3 : 2/3** String module러  `1/σ·τ : (σ-τ)/σ` of 복호.
+**Chain**: bosonic string 26D → (Kaluza-Klein compactify, −J₂ dim) → spacetime τ=4D (L9-spacetime-dims 7471 reuse) + ΛCDM parameters **n = 26 − J₂ + ... = 26 − 24 + τ = 6** approximation. **Bosonic string compactifies to τ=4 spacetime + n=6 parameters** via the number-theory inevitability `26 − 24 + τ − μ·φ = 6`. Ω_m : Ω_Λ = **1/3 : 2/3** re-decoded via String modular `1/σ·τ : (σ-τ)/σ`.
 
 **holographic (T3) — AdS/CFT boundary · S_CMB=A/4G · universe area entropy**:
 - AdS/CFT 4G min = **τ=4** (HEXA-THERMO reuse).
-- CMB entropy S_CMB ≈ 2.9·10⁸ k_B / baryon → total S_univ ≈ 10^88 k_B ≈ e^(σ·σ·J₂·(σ-φ)/φ) = e^(12·12·24·10/2) = e^17280 scale ≈ **log S/k_B ≈ J₂·(σ+sopfr) + ε = 24·17 = 408** (measured log ≈ 88 baryon 당, total log ≈ 122 ≈ Λ orders  regression).
-- Hubble radius log = 26 = J₂+φ = 보손string dim = **holography boundary dimension** (3axis log breakthrough-draft 5 reuse).
+- CMB entropy S_CMB ≈ 2.9·10⁸ k_B / baryon → total S_univ ≈ 10^88 k_B ≈ e^(σ·σ·J₂·(σ-φ)/φ) = e^(12·12·24·10/2) = e^17280 scale ≈ **log S/k_B ≈ J₂·(σ+sopfr) + ε = 24·17 = 408** (measured log ≈ 88 per baryon, total log ≈ 122 ≈ Λ orders regression).
+- Hubble radius log = 26 = J₂+φ = bosonic-string dim = **holography boundary dimension** (3-axis log breakthrough-draft 5 reuse).
 
 **free composite — triple product invariant Π_COSMO**:
  Π_COSMO = toe(σ·φ_E=24) · string(σ-φ=10) · holographic(τ=4)
          = **24 · 10 · 4 = 960 = σ·J₂·σ·τ / (σ·τ/σ) − ... = 2·σ·J₂·τ − J₂·φ − J₂ = 2·σ·J₂·τ − J₂·(φ+1)**
          = **960 = σ·φ_E · (σ-φ) · τ = n·τ·(σ-φ)·τ = n·τ²·(σ-φ)**
 
-  Π_COSMO / Π_THERMO = 960/384 = **5/2 = sopfr/φ** → **universe tripleproduct thermodynamics tripleof product sopfr/φ enlargement** (sopfr=5 layer count, universe thermodynamics of 층 × 1/φ  scale).
-  Π_COSMO / Π_AERO = 960/1920 = **1/φ = 1/2** → **universe 항공universe B⁷ forcedensity tripleof product φ⁻¹ 절반 axis** (symmetry 반correction).
- Π_COSMO = Ω_mega/φ = 480/φ = 480/φ ⋯ (HEXA-COSMIC-04 Ω_mega=480 reuse, K_II→K_III  time × φ=2 ).
+  Π_COSMO / Π_THERMO = 960/384 = **5/2 = sopfr/φ** → **cosmic triple product enlarges thermodynamic triple product by sopfr/φ** (sopfr=5 layer count, universe layer × 1/φ scale above thermodynamics).
+  Π_COSMO / Π_AERO = 960/1920 = **1/φ = 1/2** → **cosmic vs aerospace B⁷ force-density triple product at φ⁻¹ half-axis** (symmetry counter-correction).
+ Π_COSMO = Ω_mega/φ = 480/φ ⋯ (HEXA-COSMIC-04 Ω_mega=480 reuse, K_II→K_III time × φ=2).
 
 ### §X.3 dual — HEXA-SF · HEXA-COSMIC · HEXA-COSMO
 
 | axis | HEXA-SF (sf-ufo) | HEXA-COSMIC (space) | HEXA-COSMO (physics) | dual pipesystem |
 |-----|------------------|---------------------|----------------------|-----------|
-| logaxis | K_I/K_II/K_III = 16/26/36 | log R_H = 26 [m] | log t_H = 17.5, log ρ_c = -26 | **σ+τ+(σ-φ) shared** |
-| DOF | 문명 tier n/φ=3 | 하 holo mode 2880 | LambdaCDM parameter n=6 | **n log decade** |
-| entropy | K_II  Gini ≤ 1/σ | S_holo = A/4G | S_CMB ≈ 10^88 k_B | **1/σ·τ upper bound** |
+| log-axis | K_I/K_II/K_III = 16/26/36 | log R_H = 26 [m] | log t_H = 17.5, log ρ_c = -26 | **σ+τ+(σ-φ) shared** |
+| DOF | civilization tier n/φ=3 | holo-mode 2880 | ΛCDM parameters n=6 | **n log decades** |
+| entropy | K_II Gini ≤ 1/σ | S_holo = A/4G | S_CMB ≈ 10^88 k_B | **1/σ·τ upper bound** |
 | time | K_II→K_III 480 yr | Ω_mega=480 collision | Hubble t=14 Gyr = 10^17.5 s | **σ+sopfr+φ/n** |
 | shared kernel | Kardashev decade | holographic dim | string compactify | **σ-φ=10 tier** |
 
-**dual product**: `P_KII · R_Hubble · ρ_crit = 10^26 · 10^26 · 10^−26 = 10^26 = σ+τ+(σ-φ)` — SF 문명(K_II [W]) + COSMIC geometry(R_H [m]) + COSMO density(ρ_c [kg/m³])  single logaxis `26 = σ+τ+(σ-φ)` from sealing. 질으 via **Kardashev K_II ⊗ Hubble R ⊗ criticaldensity = 10^(3·26−52) = 10^26** (3axis phase쇄  single axis 잔존) — 문명 공학 ≡ universe geometry ≡ universe thermodynamics of **triple isomorphic**.
+**dual product**: `P_KII · R_Hubble · ρ_crit = 10^26 · 10^26 · 10^−26 = 10^26 = σ+τ+(σ-φ)` — SF civilization (K_II [W]) + COSMIC geometry (R_H [m]) + COSMO density (ρ_c [kg/m³]) seal to the single log-axis `26 = σ+τ+(σ-φ)`. Equivalently **Kardashev K_II ⊗ Hubble R ⊗ critical-density = 10^(3·26−52) = 10^26** (3-axis phase-chain leaves one axis) — civilization engineering ≡ cosmic geometry ≡ cosmic thermodynamics form a **triple isomorphism**.
 
-### §X.4 benchtop universe protocol (n=6 소form  on sim)
+### §X.4 benchtop universe protocol (n=6 small-form sim)
 
-**target**: σ²=144T particle scale ΛCDM  on sim, τ=4 parameter 그룹 × n/φ=3 statistical 앙phase블, Hubble tension `σ-sopfr-φ=5` auto output.
+**target**: σ²=144T particle scale ΛCDM-on sim, τ=4 parameter groups × n/φ=3 statistical ensembles, Hubble tension `σ-sopfr-φ=5` auto-emerges.
 
-1. **parameter initial**: ΛCDM 6 = {Ω_b h², Ω_c h², 100θ_MC, τ_reion, n_s, ln(10¹⁰A_s)}. Ω_m=φ/n=1/3, Ω_Λ=(σ-τ)/σ=2/3 lock. n_s = (n/φ)³/((n/φ)³+μ)=27/28 (PHYS-CMB-spectral-index reuse).
-2. **H₀ double 주**: H₀^Planck = σ·sopfr+τ+J₂/σ−μ = **67**, H₀^SH0ES = σ·sopfr+J₂/φ+1 = **73**. tension = σ-sopfr-φ = 5 auto 검출.
+1. **parameter initial**: ΛCDM 6 = {Ω_b h², Ω_c h², 100θ_MC, τ_reion, n_s, ln(10¹⁰A_s)}. Ω_m=φ/n=1/3, Ω_Λ=(σ-τ)/σ=2/3 locked. n_s = (n/φ)³/((n/φ)³+μ)=27/28 (PHYS-CMB-spectral-index reuse).
+2. **H₀ double injection**: H₀^Planck = σ·sopfr+τ+J₂/σ−μ = **67**, H₀^SH0ES = σ·sopfr+J₂/φ+1 = **73**. Tension = σ-sopfr-φ = 5 auto-detected.
 3. **T_CMB derivation**: Stefan-Boltzmann ρ_rad = a·T⁴, T = [(τ−μ/J₂)·(σ+φ)/(σ·φ)] ≈ **2.725 K**. τ=4 exponent check (HEXA-THERMO-04 reuse).
-4. **음향 진 피크**: l_n = σ·n·J₂/φ + τ·n ≈ [220, 440+ε, 660+ε, 880+ε] (l₁=220 L9-cmb-first-peak-l reuse). BBN = τ=4 경circle소.
-5. **Kardashev **: sim outputfrom log₁₀(energy/W) auto 라벨 → 16 (K_I) / 26 (K_II) / 36 (K_III) 리 lock.
-6. **F=U−TS universe 판**: Ω_Λ share = (σ-τ)/σ = 2/3 and HEXA-THERMO-03 F/U = 2/3 same time output — dark energy ≡ freeenergy dual.
-7. **samples**: 144T particle × τ=4 parameter 스윕 × μ(6)=1 ms sample = **576T·ms = σ·J₂·τ·σ·10⁹ = 2.76·10¹⁴** scale (benchtop GPU σ²=144 core baseline 48 time convergence).
+4. **Acoustic oscillation peaks**: l_n = σ·n·J₂/φ + τ·n ≈ [220, 440+ε, 660+ε, 880+ε] (l₁=220 L9-cmb-first-peak-l reuse). BBN = τ=4 light-element count.
+5. **Kardashev check**: sim output log₁₀(energy/W) auto-labels → 16 (K_I) / 26 (K_II) / 36 (K_III) tiers locked.
+6. **F=U−TS universe panel**: Ω_Λ share = (σ-τ)/σ = 2/3 and HEXA-THERMO-03 F/U = 2/3 produced together — dark energy ≡ free-energy dual.
+7. **samples**: 144T particles × τ=4 parameter sweep × μ(6)=1 ms samples = **576T·ms = σ·J₂·τ·σ·10⁹ = 2.76·10¹⁴** scale (benchtop GPU σ²=144 core baseline 48-time convergence).
 
 ### §X.5 testable falsifier
 
-- **F1**: Hubble tension 크기 ≠ sopfr=5 (±0.5 km/s/Mpc) → σ-sopfr-φ lock discarded
+- **F1**: Hubble tension magnitude ≠ sopfr=5 (±0.5 km/s/Mpc) → σ-sopfr-φ lock discarded
 - **F2**: Ω_m:Ω_Λ ≠ 1/3:2/3 (±5%) → φ/n : (σ-τ)/σ share discarded
-- **F3**: T_CMB measurement ≠ 2.725 K (±0.01) → (τ−μ/J₂)·(σ+φ)/(σ·φ) 3path discarded
-- **F4**: ΛCDM independent parameter ≠ n=6 (5  or  7 standard 채택  on ) → n parameter lock discarded
-- **F5**: CMB 제1봉우리 l ≠ 220 ±3 → σ(σ+n)+τ reuse discarded
-- **F6**: 보손string compactify result ΛCDM ≠ n (other DOF 채택) → 26−J₂+τ−μ·φ=6 슬 discarded
+- **F3**: T_CMB measurement ≠ 2.725 K (±0.01) → (τ−μ/J₂)·(σ+φ)/(σ·φ) 3-path discarded
+- **F4**: ΛCDM independent parameters ≠ n=6 (5 or 7 standard adopted) → n-parameter lock discarded
+- **F5**: CMB first peak l ≠ 220 ±3 → σ(σ+n)+τ reuse discarded
+- **F6**: bosonic-string compactify yields ΛCDM ≠ n (other DOF adopted) → 26−J₂+τ−μ·φ=6 chain discarded
 
 ### §X.6 atlas constants output (7 items)
 

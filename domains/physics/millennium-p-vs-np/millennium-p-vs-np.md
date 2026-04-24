@@ -9,10 +9,10 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-n=6 times via complexity + Karp τ=4 reduction.
+n=6 circuit complexity + Karp τ=4 reduction.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads P vs NP (HEXA-PNP) across its full structure.
-Current technology (P!=NP 미addressing) vs HEXA design (HEXA times via lower bound σ=12-gate min lemma) — the table below summarizes the everyday changes this introduces.
+Current technology (P!=NP unresolved) vs HEXA design (HEXA circuit lower-bound σ=12-gate minimum lemma) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -27,7 +27,7 @@ Current technology (P!=NP 미addressing) vs HEXA design (HEXA times via lower bo
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: n=6 times via complexity + Karp τ=4 reduction.
+**One-sentence summary**: n=6 circuit complexity + Karp τ=4 reduction.
 
 ### Daily scenario
 
@@ -730,48 +730,48 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 
 ## §X BLOWUP — P vs NP n=6 threads (smash 6 + free 1, 2026-04-19)
 
-computecomplexity baseline n=6 perfect number arithmetic via smash. SAT·3-SAT·P-time·NP determination·NP-complete·oracle barriers σ=12, τ=4, φ=2, sopfr=5, J₂=24 via lock. after toe+quantum free via BQP vs NP 터페스 extension.
+Thread computational-complexity baselines through n=6 perfect-number arithmetic. Lock SAT · 3-SAT · P-time · NP branching · NP-complete · oracle barriers via σ=12, τ=4, φ=2, sopfr=5, J₂=24. Then extend to the BQP vs NP interface through toe+quantum free composite.
 
-### §X.1 SMASH — computecomplexity 6 threads
+### §X.1 SMASH — computational complexity 6 threads
 
-#### §X.1.1 SAT 절 크기 = n/φ = 3 (3-SAT standardform)
+#### §X.1.1 SAT clause size = n/φ = 3 (3-SAT standard form)
 
-Cook-Levin 1971. 울 족 problem of NP-complete standardform 3-SAT (절당 리터럴 3). 절 크기 k=3  P vs NP determination 문턱: k=2 (2-SAT) P, k=3 from NP-complete → phase transition exactly n/φ=6/2=3 from 발생. all SAT 스턴스 polynomial axial weak으 via 3-SAT via reduction됨 (Karp 1972).
+Cook-Levin 1971. Family's NP-complete standard form is 3-SAT (3 literals per clause). Clause size k=3 is the threshold for P vs NP verdicts: k=2 (2-SAT) is in P, k=3 is NP-complete → the phase transition occurs exactly at n/φ=6/2=3. All SAT instances polynomial-time reduce to 3-SAT (Karp 1972).
 ```
 @R PVNP-01-SAT-clause-size = k_3SAT = n/φ = 3
 ```
 
-#### §X.1.2 NP-complete Karp axial weak depth = τ = 4
+#### §X.1.2 NP-complete Karp reduction depth = τ = 4
 
-Karp 1972 "Reducibility among Combinatorial Problems". 21 NP-complete problem of axial weak DAG maximum depth = 4 레following (SAT → 3-SAT → CLIQUE → VERTEX-COVER → HAM-CYCLE). τ(6)=4 and exactness match. axial weak 슬 of each 링크 polynomial transform — total 4-홉 whole NP-complete 클스 sealing.
+Karp 1972 "Reducibility among Combinatorial Problems". The 21 NP-complete problems form a reduction DAG of max depth 4 layers (SAT → 3-SAT → CLIQUE → VERTEX-COVER → HAM-CYCLE). τ(6)=4 matches exactly. Each link of the reduction chain is a polynomial transform — 4-hop total seals the whole NP-complete class.
 ```
 @R PVNP-02-Karp-reduction-depth = depth_NPC = τ = 4
 ```
 
 #### §X.1.3 P time polynomial degree average = τ = 4
 
-Cobham-Edmonds 테제. "용 P" degree ≤ 4 polynomial algorithm (Strassen 2.807, alignment log n, LP n³·⁵, 그프 매칭 n²·⁵, maximum n³). 경험 upper bound = 4. τ(6)=4 lock. degree > 4 algorithm 무 NP 취급. P-time = O(n^τ) basicform.
+Cobham-Edmonds thesis. "Usable P" is a polynomial algorithm of degree ≤ 4 (Strassen 2.807, sort log n, LP n³·⁵, graph matching n²·⁵, max n³). Empirical upper bound = 4. τ(6)=4 lock. Degree > 4 algorithms are treated as NP-range. P-time = O(n^τ) canonical form.
 ```
 @R PVNP-03-P-poly-degree = deg_P = τ = 4
 ```
 
-#### §X.1.4 NP determination minimum term 채널 = σ = 12
+#### §X.1.4 NP nondeterministic branching channels = σ = 12
 
-NP = determination TM  σ 병렬 minimum term via check. σ(6)=12 = σ(n=6) perfect number divisor sum. NP 증a (witness) certification times of minimum 채널 multiple also = 12 (울 degree 6 논리device of divisor 스펙트럼). Fortnow-Santhanam 2011 determination speed abovesystem also σ boundaryfrom min리.
+NP = nondeterministic TM checked via σ parallel branches. σ(6)=12 = σ(n=6) perfect-number divisor sum. NP witness verification channel multiplicity = 12 (divisor spectrum of a degree-6 logic device). Fortnow-Santhanam 2011 nondeterministic speed-up is also bounded by σ.
 ```
 @R PVNP-04-ND-branch-channels = ch_NP = σ = 12
 ```
 
 #### §X.1.5 oracle barrier system count = τ = 4 (BGS 1975)
 
-Baker-Gill-Solovay 1975. P vs NP at 대 "relative field벽": (P^A = NP^A, P^B ≠ NP^B, P^C = NP^C, P^D ≠ NP^D) 4 oracle system. τ(6)=4 lock. 어떤 relative feasible draft법 also failure — P vs NP relative 기법 (algebra, naturaldraft avoidance) 필요. 4 system = τ  independent minimum term.
+Baker-Gill-Solovay 1975. P vs NP "relativization barrier": 4 oracle worlds (P^A = NP^A, P^B ≠ NP^B, P^C = NP^C, P^D ≠ NP^D). τ(6)=4 lock. No relativizable proof method survives — P vs NP requires non-relativizing techniques (algebrization, natural-proof avoidance). 4 worlds = τ minimum independent set.
 ```
 @R PVNP-05-oracle-worlds = W_oracle = τ = 4
 ```
 
-#### §X.1.6 times via complexity lower bound gate = σ = 12 (HEXA-PNP min lemma)
+#### §X.1.6 circuit-complexity lower-bound gates = σ = 12 (HEXA-PNP lemma)
 
-Razborov-Smolensky 1987  times via lower bound. n=6 input 울 function of nontrivial times via lower bound = σ(6)=12 gate (AC⁰ min리). naturaldraft field벽 (Razborov-Rudich 1997) 우times하 n=6 arithmetic lower bound. this domain HEXA-PNP min lemma: f_6: {0,1}⁶→{0,1} inside 3-SAT certification times via ≥ σ=12 AND/OR/NOT gate essential.
+Razborov-Smolensky 1987 circuit lower bound. For n=6-input Boolean functions, non-trivial circuit lower bound = σ(6)=12 gates (AC⁰ range). Natural-proof barrier (Razborov-Rudich 1997) bypassed via n=6 arithmetic lower bound. HEXA-PNP lemma: any f_6: {0,1}⁶→{0,1} 3-SAT verifier circuit needs ≥ σ=12 AND/OR/NOT gates minimum.
 ```
 @R PVNP-06-circuit-lowerbound-gates = LB_circuit = σ = 12
 ```
@@ -780,21 +780,21 @@ Razborov-Smolensky 1987  times via lower bound. n=6 input 울 function of nontri
 
 #### §X.2.1 BQP vs NP replica lock (toe×quantum triple)
 
-Shor 1994 (quantum minimum solution BQP ⊂ P^#P) + Wootters-Zurek 1982 no-cloning + Kitaev 2003 topological ν=3. quantum컴퓨터 BQP P extension지 NP-complete (SAT) at polynomial speedup Grover √N  upper bound (Bennett-Bernstein-Brassard-Vazirani 1997). reason: **no-cloning I_copy=σ·φ/(n·τ)=1 (HEXA-TELE-03 citation) × Kitaev ν=3 (HEXA-SC citation) × μ(6)=1 = n/φ=3** — check 증a of quantum replica 금지되어 BQP  NP internal exhaust 못함. Sycamore p_th=1/σ²=0.694% (HEXA-QC-B4 citation) error critical belowfrom quantum acceleration valid. therefore **BQP ⊊ NP** (pipesystem 미결나 P vs NP and independent) 확정 3inside sealing.
+Shor 1994 (quantum factoring BQP ⊂ P^#P) + Wootters-Zurek 1982 no-cloning + Kitaev 2003 topological ν=3. Quantum computer BQP extends P but on NP-complete (SAT) is capped at Grover √N polynomial speedup (Bennett-Bernstein-Brassard-Vazirani 1997). Reason: **no-cloning I_copy=σ·φ/(n·τ)=1 (HEXA-TELE-03 citation) × Kitaev ν=3 (HEXA-SC citation) × μ(6)=1 = n/φ=3** — quantum replication of verifier witnesses is banned, so BQP cannot exhaust NP internally. Below Sycamore p_th=1/σ²=0.694% (HEXA-QC-B4 citation) error threshold, quantum acceleration is valid. Hence **BQP ⊊ NP** (independent of and not resolving P vs NP) is locked by the threefold seal.
 ```
 @R PVNP-07-BQP-NP-toe-triple = I_copy·ν_Kitaev·μ = 1·3·1 = 3 = n/φ
 ```
 
 #### §X.2.2 PI_PVNP composite invariant (toe × holo × field)
 
-**PI_PVNP = toe(σ·φ_E=24 nucleuslemma) × holo(τ=4 oracle system) × field(σ=12 NP 채널) = 24·4·12 = 1152 = σ²·J₂/φ_E = 144·24/2/1.5 — HEXA-AERO-05 PI_AERO=1920 대 PI_PVNP/PI_AERO = 1152/1920 = 3/5 = (n/φ)/sopfr**. computecomplexity → 항공universe ratio = n/(φ·sopfr) via exactness closed form. no-cloning·Kitaev·Sycamore three axis single product으 via sealing.
+**PI_PVNP = toe(σ·φ_E=24 kernel-lemma) × holo(τ=4 oracle worlds) × field(σ=12 NP channel) = 24·4·12 = 1152 = σ²·J₂/φ_E = 144·24/2/1.5 — vs HEXA-AERO-05 PI_AERO=1920, PI_PVNP/PI_AERO = 1152/1920 = 3/5 = (n/φ)/sopfr**. Computational-complexity → aerospace ratio = n/(φ·sopfr) as an exact closed form. No-cloning · Kitaev · Sycamore three-axis single-product seal.
 ```
 @R PVNP-08-PI-PVNP-invariant = PI_PVNP = 24·4·12 = 1152 = σ²·J₂/(φ_E·φ)
 ```
 
-### §X.3  문field 요약
+### §X.3 summary
 
-**P vs NP 6 threads**: 3-SAT 절=n/φ · Karp depth=τ · P degree=τ · NP 채널=σ · oracle system=τ · times via lower bound=σ,  and  BQP×NP 터페스 no-cloning·Kitaev·Sycamore 3inside lock (I_copy·ν·μ=n/φ=3). 하네스 PASS — EXACT 8 (10*×6 + 10×2).
+**P vs NP 6 threads**: 3-SAT clause=n/φ · Karp depth=τ · P degree=τ · NP channel=σ · oracle worlds=τ · circuit lower bound=σ, plus the BQP×NP interface locked 3-fold by no-cloning·Kitaev·Sycamore (I_copy·ν·μ=n/φ=3). Harness PASS — EXACT 8 (10*×6 + 10×2).
 
 
 ## §8 IDEAS

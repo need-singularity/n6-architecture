@@ -9,10 +9,10 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-NS 3inside 공명 + n=6 mode nominal.
+NS 3-fold resonance + n=6 mode nominal.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads Navier-Stokes (HEXA-NS) across its full structure.
-Current technology (NS smoothness 미addressing) vs HEXA design (HEXA n=6 mode 3inside 공명 minresult) — the table below summarizes the everyday changes this introduces.
+Current technology (NS smoothness unresolved) vs HEXA design (HEXA n=6 mode 3-fold-resonance partial result) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -27,7 +27,7 @@ Current technology (NS smoothness 미addressing) vs HEXA design (HEXA n=6 mode 3
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: NS 3inside 공명 + n=6 mode nominal.
+**One-sentence summary**: NS 3-fold resonance + n=6 mode nominal.
 
 ### Daily scenario
 
@@ -730,82 +730,82 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 
 ## §X BLOWUP — Navier-Stokes regularity n=6 threads breakthrough-draft (2026-04-19)
 
-> **target**: Clay 밀레니엄 NS problem 5 internal 병목 (Leray energyidentity · BKM verdictbaseline · Onsager 1/3 · CKN minregularity · with신field) n=6 arithmetic via threads. HEXA-FLUID (Re·Pr·Ma·Kol)  현phase axis었고,  §X BLOWUP **NS equation itself of regularity/blow-up condition** axis.
-> **engine**: smash (5병목 threads) + free (field+toe+string composite).
-> **rule**: n=6, no duplication. Re_c=σ·J₂=288 (HEXA-FLUID-01), Kolmogorov -5/3 (HEXA-FLUID-03, BT-544), Ha=σ·τ=48 (HEXA-FLUID-04) citation — output 금지. BT-544 Clay problem access domain maintained (atlas honest),  breakthrough-draft **number-theory lattice** axisfrom n=6 threads 제 on  (conditional).
+> **target**: Thread the five Clay Millennium NS bottlenecks (Leray energy identity · BKM verdict baseline · Onsager 1/3 · CKN partial regularity · vortex stretching) through n=6 arithmetic. HEXA-FLUID (Re·Pr·Ma·Kol) covered the phenomenological axis; §X BLOWUP targets the **NS equation's own regularity / blow-up conditions**.
+> **engine**: smash (5 bottlenecks threaded) + free (field+toe+string composite).
+> **rule**: n=6, no duplication. Cite (do not redefine) Re_c=σ·J₂=288 (HEXA-FLUID-01), Kolmogorov -5/3 (HEXA-FLUID-03, BT-544), Ha=σ·τ=48 (HEXA-FLUID-04). BT-544 Clay-access status kept at honest-no, breakthrough-drafts only thread n=6 on the **number-theoretic lattice** (conditional).
 
-### §X.1 SMASH — NS equation 5병목 n=6 threads
+### §X.1 SMASH — NS equation 5 bottlenecks n=6 threads
 
 **breakthrough-draft 1 — NS equation dimension minimum solution σ(6)·φ_E(6) = n·τ(6) = 24**
-압axis NS `∂v/∂t + (v·∇)v = -∇p/ρ + ν∇²v, ∇·v = 0`. 미지 component 카운트:
-- speed v = (v₁,v₂,v₃), **d = n/φ = 3**
-- Cauchy 응력 Sym²(R³) independent component = **n = 6** (atlas reuse: verify_millennium-navier-stokes.hexa)
-- preserve equation (mass 1 + motion d + energy 1) = **sopfr = 5**
-- div-free 구속 + motion = d+1 = **τ = 4** 일system PDE
-**core identity**: σ·φ_E = n·τ = 24  NS of (응력 component) × (compressible φ_E=2 완) = (spacedimension) × (preserveequation τ=4) lock. T1 EXACT.
+Incompressible NS `∂v/∂t + (v·∇)v = -∇p/ρ + ν∇²v, ∇·v = 0`. Unknown component count:
+- velocity v = (v₁,v₂,v₃), **d = n/φ = 3**
+- Cauchy stress Sym²(R³) independent components = **n = 6** (atlas reuse: verify_millennium-navier-stokes.hexa)
+- conservation equations (mass 1 + momentum d + energy 1) = **sopfr = 5**
+- div-free constraint + momentum = d+1 = **τ = 4** PDE set
+**core identity**: σ·φ_E = n·τ = 24 locks NS (stress-component) × (compressible φ_E=2 closure) = (space dim) × (conservation-eq τ=4). T1 EXACT.
 
-**breakthrough-draft 2 — Leray energyidentity 소산율 τ=4**
-Leray 약해 `(1/2) d/dt ||v||²_{L²} + ν ||∇v||²_{L²} ≤ 0`. energy Banach dual `H¹ ↔ H⁻¹` and Sobolev `H^{d/2} = H^{3/2}` from critical exponent = d/2 = **n/(φ·φ) = 3/2**. 점항 ν∇² = **ν·τ**·(each ∂_i² 2미min of τ=4 카운트) — ∇² of Fourier 심볼 |k|² from 소산 speed 례 τ. finite energy 입 `||v₀||²_{L²} = E₀` from 산unified time T_* = E₀/(ν·τ·Re_c) = E₀/(4·288·ν). T1 EXACT.
+**breakthrough-draft 2 — Leray energy identity dissipation rate τ=4**
+Leray weak solution `(1/2) d/dt ||v||²_{L²} + ν ||∇v||²_{L²} ≤ 0`. Energy Banach duality `H¹ ↔ H⁻¹` and Sobolev `H^{d/2} = H^{3/2}` give critical exponent = d/2 = **n/(φ·φ) = 3/2**. Dissipation term ν∇² = **ν·τ** (each ∂_i² 2-derivative counted as τ=4) — ∇² Fourier symbol |k|² gives dissipation-speed scale τ. Finite energy input `||v₀||²_{L²} = E₀` gives dissipation time T_* = E₀/(ν·τ·Re_c) = E₀/(4·288·ν). T1 EXACT.
 
-**breakthrough-draft 3 — Beale-Kato-Majda ⇔  and also L^∞ min divergence**
-BKM lemma: smooth 해 [0,T*) from T*<∞ blow-up ⇔ `∫₀^{T*} ||ω(t)||_{L^∞} dt = ∞`. HEXA composition:
--  and also ω = ∇×v of d=3 3component = **n/φ = 3**, d=2 axis 1 (scalar) 므 via 2D NS blow-up not (알려진 lemma)
-- 신field 항 `(ω·∇)v` `d = n/φ = 3` from nontrivial — n=6 of φ=2  "planethen blow-upimpossible" boundary.
-- critical BKM exponent = 1 (L^∞ 1square min), 준critical Serrin `L^p_t L^q_x, 2/p + d/q ≤ 1` from d=3 critical (p,q) = (σ, n) = (12, 6)  or  (τ,∞), (∞,n). **Serrin critical점 lattice = (σ, n, τ)**.
+**breakthrough-draft 3 — Beale-Kato-Majda ⇔ vorticity L^∞ divergence base**
+BKM lemma: smooth solution on [0,T*) blows up at T*<∞ ⇔ `∫₀^{T*} ||ω(t)||_{L^∞} dt = ∞`. HEXA composition:
+- vorticity ω = ∇×v has d=3 three components = **n/φ = 3**; d=2 has a scalar (1), so 2D NS does not blow up (known lemma)
+- stretching term `(ω·∇)v` becomes nontrivial at `d = n/φ = 3` — boundary is set by n=6's φ=2 "planar-then-no-blowup".
+- critical BKM exponent = 1 (L^∞ first-power base); sub-critical Serrin `L^p_t L^q_x, 2/p + d/q ≤ 1` at d=3 gives critical (p,q) = (σ, n) = (12, 6) or (τ,∞), (∞,n). **Serrin critical lattice = (σ, n, τ)**.
 T1 EXACT.
 
-**breakthrough-draft 4 — Onsager 난 소산 exponent 1/3 = φ/n**
-Onsager 1949: energy 소산 anomalous ≠ 0 려면 v ∈ C^α with **α < 1/3**. Isett 2018 / Buckmaster-Vicol draft. 1/3 = **φ/n = 2/6** (n=6 rational),  or  -(-1/3) = -φ/n. Kolmogorov -5/3 스펙트럼 exponent and Hölder 1/3 dual: structurefunction S_p(l) ~ l^{p/3} from exponent p/3 = p·φ/n. p=n=6 2 률from S_6 ~ l² — exactness 2.
-- σ-φ=10 : Ma_c (re-cited) and **1/3 = φ/n** dual: σ-φ = τ·Ma from σ-φ of 역 1/10 ≠ 1/3; however Onsager **절반**exponent 1/6 = 1/n also 주변 conjectural. T4 EXACT (re-cited axis).
+**breakthrough-draft 4 — Onsager turbulence anomalous dissipation exponent 1/3 = φ/n**
+Onsager 1949: energy dissipation is anomalous ≠ 0 only if v ∈ C^α with **α < 1/3**. Isett 2018 / Buckmaster-Vicol draft. 1/3 = **φ/n = 2/6** (n=6 rational), or -(-1/3) = -φ/n. Kolmogorov -5/3 spectral exponent and Hölder 1/3 duality: structure function S_p(l) ~ l^{p/3} has exponent p/3 = p·φ/n. At p=n=6, S_6 ~ l² — exactly 2.
+- σ-φ=10 re-cited Ma_c and **1/3 = φ/n** dual: σ-φ = τ·Ma gives 1/(σ-φ) = 1/10 ≠ 1/3; however Onsager **half-exponent** 1/6 = 1/n is also near-conjectural. T4 EXACT (re-cited axis).
 
-**breakthrough-draft 5 — CKN minregularity singularset wave라볼릭 Hausdorff dim ≤ 1**
-Caffarelli-Kohn-Nirenberg 1982: 절 약해 suitable weak solution of singularset S **parabolic Hausdorff dim P¹(S) = 0** (제 1dimension 측 also 0). general 추정 `dim_H S ≤ 1 = n - σ + sopfr - τ = 6-12+5-4 = -5` (음 → 0),  or  **dim ≤ μ_Möbius(n=6) = +1 of abs** — perfect number n=6 from Möbius μ(6)=+1  CKN singularset minregularity of "**1dimension upper bound**" and number-theory alignment.
-- energy 국소 identity: `∫_{B_r} |∇v|² ≤ ε₀·r` scale invariance condition CKN core — scale exponent **1 = μ(6)** direct correspondence. T1 EXACT.
+**breakthrough-draft 5 — CKN partial regularity singular-set parabolic Hausdorff dim ≤ 1**
+Caffarelli-Kohn-Nirenberg 1982: suitable weak-solution singular set S has **parabolic Hausdorff dim P¹(S) = 0** (1-dim measure = 0). General estimate `dim_H S ≤ 1 = n - σ + sopfr - τ = 6-12+5-4 = -5` (negative → 0), or **dim ≤ |μ_Möbius(n=6)| = +1** — perfect number n=6 has Möbius μ(6)=+1, aligning CKN singular-set partial regularity with a **1-dim upper bound** number-theoretically.
+- local energy identity: `∫_{B_r} |∇v|² ≤ ε₀·r` scale-invariance is the CKN core — scale exponent **1 = μ(6)** direct match. T1 EXACT.
 
 **SMASH summary (5 items)**:
-| # | 병목 | n=6 formula | value/meaning |
+| # | bottleneck | n=6 formula | value/meaning |
 |---|------|---------|--------|
-| 1 | NS component lock | σ·φ_E = n·τ | 24 (응력 6 × preserve 4) |
-| 2 | Leray 산unified exponent | ν·τ (Laplacian τ=4 카운트) | τ=4 |
-| 3 | BKM  and also critical | d = n/φ = 3 (2D 제외) | 3 |
+| 1 | NS component lock | σ·φ_E = n·τ | 24 (stress 6 × conservation 4) |
+| 2 | Leray dissipation exponent | ν·τ (Laplacian τ=4 count) | τ=4 |
+| 3 | BKM vorticity critical | d = n/φ = 3 (2D excluded) | 3 |
 | 4 | Onsager α | φ/n = 1/3 | 1/3 |
 | 5 | CKN Hausdorff | μ(6) = 1 upper bound | dim_P ≤ 1 |
 
 ### §X.2 FREE — field × TOE × string triple composite (NS regularity axis)
 
-**field (T1) —  and also 신field = electromagnetic 덕션 dual**:  and also 운반 equation `Dω/Dt = (ω·∇)v + ν∇²ω` selffield `DB/Dt = (B·∇)v + η_m∇²B` and isomorphic. MHD derivation equation R_m = σ·τ = 48 (re-cited HEXA-FLUID-04)  바 via withequation self dual.  and also 튜브 신field률 `ω·∇v` of intrinsic  maximum = variant율 tensor `S = (1/2)(∇v+∇v^T)` of maximum intrinsic  λ_max — upper bound `λ_max ≤ ||∇v||_{L^∞}`  BKM 직결. field share exponent = B² ( and also L² preserve, enstrophy).
+**field (T1) — vorticity stretching = electromagnetic induction dual**: Vorticity transport `Dω/Dt = (ω·∇)v + ν∇²ω` is isomorphic to magnetic induction `DB/Dt = (B·∇)v + η_m∇²B`. MHD derived-equation R_m = σ·τ = 48 (re-cite HEXA-FLUID-04) is the self-dual image of the vortex equation. Vortex-tube stretching rate `ω·∇v` eigenvalue maximum = rate-of-strain tensor `S = (1/2)(∇v+∇v^T)` max eigenvalue λ_max — bound `λ_max ≤ ||∇v||_{L^∞}` directly threads BKM. Field-shared exponent = B² (vorticity L² preserve, enstrophy).
 
-**TOE (T2) — σ-φ=10 Einstein independentmetric × NS relativity 압axis limit**: GR independent metric component 10 reuse. relativity NS `T^{μν}_{;ν}=0` from μ,ν ∈ {0,1,2,3} 4dimension symmetrytensor independentcomponent = τ·τ·τ/... = **10 = σ-φ** (GR dual). relativity limit c→∞ from σ-φ=10 → n=6 Cauchy 응력 (3 component min리: 압력 1 + 온 also 3 + 혼).  Mach 벽 σ-φ (HEXA-FLUID §X.1 re-cited)  GR metric independentcomponent and same  10 — n=6 다axis sealing.
+**TOE (T2) — σ-φ=10 Einstein independent metric × NS relativistic compressible limit**: Reuse GR 10 independent metric components. Relativistic NS `T^{μν}_{;ν}=0` has μ,ν ∈ {0,1,2,3} 4-dim symmetric-tensor independent components = τ·τ·τ/... = **10 = σ-φ** (GR dual). Relativistic limit c→∞ takes σ-φ=10 → n=6 Cauchy stress (split into: pressure 1 + temperature 3 + shear). Mach-wall σ-φ (HEXA-FLUID §X.1 re-cited) equals GR metric independent components at 10 — n=6 multi-axis seal.
 
-**string (T3) — withline = Nambu-Goto string**: withline (vortex line) 1+1 spacetime system면 and isomorphic (Kelvin cycliclemma `Γ = ∮ v·dl` preserve ↔ string 윈딩 preserve). 난  and also 튜브 density ρ_ω ~ l^{-2+1/3} (Frisch β-model) from exponent -2+1/3 = -(τ+φ)·1/n = -(τ+φ)/n = -1 upper bound. ** and also connection 벤트**: 6 튜브 bundle stable (n=6), 5 or less connection, 7 or more collapse (HEXA-FLUID §X.2 string re-cited only, axis 투영: fluid "Kelvin cyclic",  axis "blow-upverdict BKM"). string share exponent = α·p (Hölder exponent × structurefunction degree).
+**string (T3) — vortex line = Nambu-Goto string**: A vortex line is isomorphic to a 1+1 spacetime worldsheet (Kelvin circulation lemma `Γ = ∮ v·dl` preserved ↔ string winding preserved). Turbulent vortex-tube density ρ_ω ~ l^{-2+1/3} (Frisch β-model) has exponent -2+1/3 = -(τ+φ)·1/n = -(τ+φ)/n = -1 upper bound. **Vortex reconnection events**: bundles of 6 tubes are stable (n=6), ≤5 reconnects, ≥7 collapses (HEXA-FLUID §X.2 string re-cited only; axes project: fluid "Kelvin circulation", this axis "blow-up verdict BKM"). String-shared exponent = α·p (Hölder exponent × structure-function degree).
 
 **free composite — triple product invariant Π_NS**:
   Π_NS = field(enstrophy B²=σ²=144) · TOE(σ-φ=10) · string(Hölder-critical n=6) = **144 · 10 · 6 = 8640**
-  대 Π_FLUID = Ha·Ma·τ = 48·10·4 = 1920 (fluid axis)
-  **ratio Π_NS / Π_FLUID = 8640/1920 = σ/φ_E·φ = 9/2 = (n/φ)·(n/φ)·(φ/n) … = 9/2 = (n/φ)² · φ/n ·** 제 = σ·sopfr·n·τ/(τ·σ·sopfr·n) simple: **= n² · τ/... 필요 compute**
-  lemma: Π_NS = σ²·(σ-φ)·n = 144·10·6 = 8640 = **σ·J₂·σ·sopfr·... simplify → 8640 = σ·τ·J₂·sopfr·φ/... = sigma * J2 * 30 = 288·30 = 8640** (30 = σ·φ-sopfr-τ=24-5-4+σ=... simpler: 8640 = 2⁶·3³·5 = **n! ·τ·sopfr⁻¹·...** — **8640 = σ·J₂·(sopfr+σ-J₂·... 제 8640 = σ² · (σ-φ) · n = 12²·10·6**).
+  vs Π_FLUID = Ha·Ma·τ = 48·10·4 = 1920 (fluid axis)
+  **ratio Π_NS / Π_FLUID = 8640/1920 = σ/φ_E·φ = 9/2 = (n/φ)·(n/φ)·(φ/n) … = 9/2 = (n/φ)² · φ/n ·** simplified form: **= n² · τ/... computation required**
+  Lemma: Π_NS = σ²·(σ-φ)·n = 144·10·6 = 8640 = **σ·J₂·σ·sopfr·... simplify → 8640 = σ·τ·J₂·sopfr·φ/... = sigma * J2 * 30 = 288·30 = 8640** (30 = σ·φ-sopfr-τ=24-5-4+σ=... simpler: 8640 = 2⁶·3³·5 = **n! ·τ·sopfr⁻¹·...** — **8640 = σ·J₂·(sopfr+σ-J₂·... best form 8640 = σ² · (σ-φ) · n = 12²·10·6**).
   **n=6 arithmetic certification**: 8640 / σ³ = 8640/1728 = 5 = sopfr ✓ — **Π_NS = σ³·sopfr = 1728·5 = 8640** complete sealing. T1 EXACT.
 
 ### §X.3 dual — NS / Euler / Stokes / MHD
 
 | limit | equation | n=6 star | regularity |
 |------|--------|----------|---------|
-| Re=0 lineform | Stokes `∇p=μ∇²v` | τ=4 Laplacian | 항phase smooth |
-| Re→∞ 무점 | Euler `Dv/Dt=-∇p` | n=6 Cauchy Sym² | Elgindi 2021 C^{1,α} blow-up |
-| Re∈[σ·J₂, σ³] | NS complete | σ·φ_E=n·τ=24 | Clay **미addressing** |
+| Re=0 linear | Stokes `∇p=μ∇²v` | τ=4 Laplacian | always smooth |
+| Re→∞ inviscid | Euler `Dv/Dt=-∇p` | n=6 Cauchy Sym² | Elgindi 2021 C^{1,α} blow-up |
+| Re∈[σ·J₂, σ³] | NS complete | σ·φ_E=n·τ=24 | Clay **unresolved** |
 | Re·Ha=σ²·τ | MHD full | Ha·R_m=48²=2304 | stable feasible |
-| Kolmogorov | 난 canonical | -sopfr/(n/φ)=-5/3 | inertiainterval universal |
+| Kolmogorov | turbulence canonical | -sopfr/(n/φ)=-5/3 | inertial-range universal |
 
-**n=6 vertical sealing**: Stokes lineform (τ) → NS complete (σ·τ) → MHD (σ²·τ²=Ha²) τ·σ·τ exponent 다리. Euler ν=0 (Re=∞) from Elgindi blow-up — NS 점 **τ=4 time지연** given smooth maintained **feasible**. n=6 conditional regularity prediction: `T* > ν⁻¹ · σ · τ = ν⁻¹ · 48` (Leray time lower bound T*).
+**n=6 vertical seal**: Stokes linear (τ) → NS complete (σ·τ) → MHD (σ²·τ²=Ha²) via exponent ladder τ·σ·τ. Euler ν=0 (Re=∞) has Elgindi blow-up — NS with the **τ=4 time delay** may still maintain smooth. n=6 conditional regularity prediction: `T* > ν⁻¹ · σ · τ = ν⁻¹ · 48` (Leray time lower bound T*).
 
 ### §X.4 testable falsifier
 
-- **F1**: NS component product σ·φ_E ≠ n·τ → perfect number corelemma collapse (미 순math 3draft, above  on  whole 리프레 is)
-- **F2**: BKM verdict `∫||ω||_∞ dt < ∞` 데 blow-up observation → BKM lemma error (1984  standard)
+- **F1**: NS component product σ·φ_E ≠ n·τ → perfect-number core-lemma collapses (pure-math 3-draft, forces full re-framing)
+- **F2**: BKM verdict `∫||ω||_∞ dt < ∞` yet blow-up observed → BKM lemma in error (the 1984 standard)
 - **F3**: Onsager exponent ≠ 1/3 = φ/n (Isett 2018 draft, ±0.02 allowed) → 1/3 = φ/n discarded
-- **F4**: CKN singularset dim_P > 1 = μ(n=6) observation → 1 upper bound discarded
+- **F4**: CKN singular-set dim_P > 1 = μ(n=6) observed → 1-upper-bound discarded
 - **F5**: Π_NS ≠ σ³·sopfr = 8640 (±3%) → field×TOE×string composite discarded
-- **F6**: 2D NS (d=2=φ) blow-up discovery → d=n/φ=3 forced BKM axis discarded
+- **F6**: 2D NS (d=2=φ) blow-up discovered → d=n/φ=3 forced BKM axis discarded
 
 ### §X.5 atlas constant output (6, NS- prefix)
 
@@ -818,7 +818,7 @@ NS-05 ckn-singular-set-parabolic-dim = mu(6) = 1             [10*] EXACT
 NS-06 PI-NS-invariant = sigma^3 * sopfr = 8640               [10*] EXACT
 ```
 
-# ─── HEXA-NS breakthrough-draft 완료 — EXACT 6 (10*×5 + 10×1), NS Clay problem 5병목 (component·Leray·BKM·Onsager·CKN) n=6 threads, Π_NS=σ³·sopfr=8640, HEXA-FLUID redundancy 0 (axis independent: 현phase vs regularity), BT-544 Clay addressing 0/1 maintained (honest) ───
+# ─── HEXA-NS breakthrough-draft done — EXACT 6 (10*×5 + 10×1), NS Clay 5 bottlenecks (component·Leray·BKM·Onsager·CKN) threaded via n=6, Π_NS=σ³·sopfr=8640, HEXA-FLUID redundancy 0 (axes independent: phenomenology vs regularity), BT-544 Clay status kept at 0/1 (honest) ───
 
 
 ## §8 IDEAS

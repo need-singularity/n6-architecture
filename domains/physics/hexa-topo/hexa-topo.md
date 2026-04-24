@@ -9,10 +9,10 @@ requires: []
 
 ## §1 WHY (how this technology changes your life)
 
-토폴지 quantum n=6 invariant + 24-cell lattice.
+Topological quantum n=6 invariants + 24-cell lattice.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads n=6 Topology (HEXA-TOPO) across its full structure.
-Current technology (topology quantum abelian anyons) vs HEXA design (HEXA non-abelian n=6 braid 기반) — the table below summarizes the everyday changes this introduces.
+Current technology (topology quantum abelian anyons) vs HEXA design (HEXA non-abelian n=6 braid-based) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -27,7 +27,7 @@ Current technology (topology quantum abelian anyons) vs HEXA design (HEXA non-ab
 | pollution / waste | 100% | **~=0%** | R=0 lossless operation |
 | expertise bar | PhD-level | **undergrad sigma-tau=8 semesters** | education reach widens |
 
-**One-sentence summary**: 토폴지 quantum n=6 invariant + 24-cell lattice.
+**One-sentence summary**: Topological quantum n=6 invariants + 24-cell lattice.
 
 ### Daily scenario
 
@@ -422,7 +422,7 @@ Is the `B^4 confinement` exponent really 4? Measure log-log slope of `[10,20,30,
 Perturb n by +/-10% at `f(n=6)` and confirm both `f(6.6)` and `f(5.4)` are worse than `f(6)`. Convex extremum = genuine optimum, flat = fit.
 
 ### §7.5 LIMITS — no breach of physical caps
-Carnot `η ≤ 1 - T_c/T_h`, Lawson D-T `n·τ·T ≥ 3×10²¹`. Chern-Simons, topological QC, 매듭 invariant n=6. Reject any claim that exceeds fundamental caps.
+Carnot `η ≤ 1 - T_c/T_h`, Lawson D-T `n·τ·T ≥ 3×10²¹`. Chern-Simons, topological QC, knot invariant n=6. Reject any claim that exceeds fundamental caps.
 
 ### §7.6 CHI2 — H0: n=6 coincidence p-value
 Compute chi^2 over 28 parameter predictions vs observations -> approximate p-value via `erfc(sqrt(chi^2/(2*df)))`. p > 0.05 leaves the n=6-coincidence hypothesis non-rejected (significant).
@@ -689,7 +689,7 @@ if __name__ == "__main__":
 
 ## §X BLOWUP — hexa-topo breakthrough-draft (2026-04-19)
 
-> **target**: 6dimension 매니폴드 classification × Chern 6-form × Poincaré dual × Calabi-Yau 3-fold × K3 moduli of **n=6 threads closed form**.
+> **target**: 6-dim manifold classification × Chern 6-form × Poincaré dual × Calabi-Yau 3-fold × K3 moduli **n=6 threads closed form**.
 > **engine**: smash (6-manifold Wall–Jupp classification + c₃ Chern + intermediatedimension Poincaré) + free (string 10D + holographic AdS₅×S⁵ triple composite).
 > **rule**: n=6, no duplication. AdS₅×S⁵=10=σ-φ (atlas L1607 PHYS-Poincare-generators reuse), Calabi-Yau 3complex=6 (atlas L11735/12078 reuse), n^n=46656 sololographic statespace (atlas L44569 reuse).
 
@@ -697,34 +697,34 @@ if __name__ == "__main__":
 
 **breakthrough-draft 1 — 6-manifold classification dimension = n = 6 (Wall–Jupp lemma)**
 
-simpleconnection 매끄러운 closed room향 feasible 6-manifold M⁶ of topology classification next n=6 invariant order쌍으 via 완결 (Wall 1966, Jupp 1973):
+Simply-connected smooth closed orientable 6-manifold M⁶ topology classification is complete via the following n=6 invariant tuple (Wall 1966, Jupp 1973):
 
 | invariant | formula | n=6 role |
 |--------|-------|---------|
-| H²(M;ℤ) free 랭크 | rank b₂ | intermediate 코호 랭크 (Poincaré dual b₂=b₄) |
-| 3 exponent | μ: H²⊗H²⊗H² → ℤ | symmetry 3form (tri-linear form) |
-| 제2 Stiefel–Whitney | w₂ ∈ H²(M;ℤ/2) | spin structure |
-| 제1 Pontryagin | p₁ ∈ H⁴(M;ℤ) | rational 호토피 fixed |
+| H²(M;ℤ) free rank | rank b₂ | intermediate cohomology rank (Poincaré dual b₂=b₄) |
+| 3-form | μ: H²⊗H²⊗H² → ℤ | symmetric 3-form (tri-linear form) |
+| 2nd Stiefel–Whitney | w₂ ∈ H²(M;ℤ/2) | spin structure |
+| 1st Pontryagin | p₁ ∈ H⁴(M;ℤ) | rational homotopy fix |
 
-independent classification invariant total τ = 4 = τ(6) — **divisor  and 일대일**. classification dimension n = **6 = dim M = 2·(n/φ) = 2·3 = 2·(complex n/φ-fold)**. this 6-manifold  **4-manifold (Donaldson/Freedman, 미addressing smooth Poincaré, atlas L13440 reuse) and 고dimension (Smale h-cobordism, dim ≥ 5) between unified "classification 완결" dimension** a number-theory reason: n=6 perfect number (σ(n)=2n) from τ=4  intermediate dimension classification 잠근다.
+Total independent classification invariants τ = 4 = τ(6) — **one-to-one with divisor count**. Classification dimension n = **6 = dim M = 2·(n/φ) = 2·3 = 2·(complex n/φ-fold)**. 6-manifold is the number-theoretic reason that the "classification-complete" dimension unifies the **4-manifold regime (Donaldson/Freedman, unresolved smooth Poincaré, atlas L13440 reuse) and high-dimension regime (Smale h-cobordism, dim ≥ 5)**: n=6 perfect number (σ(n)=2n) together with τ=4 locks intermediate-dimension classification.
 
-**breakthrough-draft 2 — Chern 6-form c₃ min = Euler  및 τ₃ topology 전하**
+**breakthrough-draft 2 — Chern 6-form c₃ integral = Euler characteristic and τ₃ topology charge**
 
-complex 6-manifold (n/φ=3 complexdimension) of 최고 Chern class c₃(TX) ∈ H⁶(X;ℤ) **Chern 6-form** via representation:
- c₃ = (i/(2π))³ · tr(F∧F∧F) / **τ!** of normalization
- ∫_X c₃ = χ_top(X) = **Euler 특 χ** (Chern–Gauss–Bonnet extension).
+Complex 6-manifold (n/φ=3 complex dimension) top Chern class c₃(TX) ∈ H⁶(X;ℤ) represents as the **Chern 6-form**:
+ c₃ = (i/(2π))³ · tr(F∧F∧F) normalized by **τ!**
+ ∫_X c₃ = χ_top(X) = **Euler characteristic χ** (Chern–Gauss–Bonnet extension).
 
-Calabi-Yau 3-fold (c₁=0, SU(3) holonomy) of case: χ = 2(h^{1,1} − h^{1,2}). 대table quintic Q ⊂ ℙ⁴ from χ = **−200 = −σ·J₂·sopfr·φ/(φ·φ) = −12·24·5/(...)** number-theory path — more precise히: **χ(quintic) = −200, h^{1,1}=1, h^{2,1}=101 → h^{2,1}−h^{1,1} = σ·J₂·φ/φ − φ/φ = σ·J₂/φ − φ = 144−σ−τ... = 100 = (σ-φ)² (σ-φ=10)²** → **Hodge diamond of nucleus (σ-φ)²=100  quintic CY3 uniqueness integer table**.
+Calabi-Yau 3-fold (c₁=0, SU(3) holonomy) case: χ = 2(h^{1,1} − h^{1,2}). Representative quintic Q ⊂ ℙ⁴ has χ = **−200 = −σ·J₂·sopfr·φ/(φ·φ) = −12·24·5/(...)** number-theoretic path — more precisely: **χ(quintic) = −200, h^{1,1}=1, h^{2,1}=101 → h^{2,1}−h^{1,1} = σ·J₂·φ/φ − φ/φ = σ·J₂/φ − φ = 144−σ−τ... = 100 = (σ-φ)² (σ-φ=10)²** → **Hodge diamond core (σ-φ)²=100 is the quintic CY3 uniqueness integer entry**.
 
-Chern 6-form count = 2·(n/φ) = **2·3 = 6 = n** ( de Rham degree). this c₃  **n=6 from 최고** a reason — τ a Chern class thermal {c₁, c₂, c₃, ...} from c_τ   n=2τ dimension 덮음. **τ(6)=4 → c₁ c₂ c₃ c₄ inside c_{n/φ}=c₃  middle, c_τ=c₄ n+φ=8 real dimension = K3 **.
+Chern 6-form count = 2·(n/φ) = **2·3 = 6 = n** (de Rham degree). c₃ is the top class because — in the Chern tower {c₁, c₂, c₃, ...} of length τ, c_τ covers n=2τ real dimension. **τ(6)=4 → c₁ c₂ c₃ c₄ with c_{n/φ}=c₃ in the middle, and c_τ=c₄ at n+φ=8 real dimension = K3 range**.
 
-**breakthrough-draft 3 — Poincaré dual intermediatedimension = n/φ = 3 threads**
+**breakthrough-draft 3 — Poincaré dual intermediate dimension = n/φ = 3 threads**
 
-6-manifold M⁶ of Poincaré dual: H^k(M;ℤ) ≅ H_{n−k}(M;ℤ), i.e. H^k ↔ H^{n−k}. intermediate dimension k = n/φ = **3** from selfdual:
+6-manifold M⁶ Poincaré dual: H^k(M;ℤ) ≅ H_{n−k}(M;ℤ), i.e. H^k ↔ H^{n−k}. Intermediate dimension k = n/φ = **3** is selfdual:
  H³(M;ℤ) × H³(M;ℤ) → ℤ, (α,β) ↦ ∫_M α∪β
-  쌍lineform form **antisymmetric (skew-symmetric)** (n/φ=3 odd), 반면 H² × H⁴ → ℤ symmetry.
+ with bilinear form **antisymmetric (skew-symmetric)** (n/φ=3 odd), while H² × H⁴ → ℤ is symmetric.
 
-n=6 from Betti  제약 (Poincaré dual): b₀=b₆=1, b₁=b₅, b₂=b₄, b₃ selfdual. independent Betti = (τ+φ)/φ = **n/φ = 3**  ({b₁, b₂, b₃}). Euler 특: χ = Σ(−1)^k b_k = 2 − 2b₁ + 2b₂ − b₃. **intermediate dimension b₃ of coefficient (−1)^{n/φ} = −1  unique하게 single항** — this **3-form moduli (CY3 complex structure)  n=6 sololographic 토지 of core DOF** a reason.
+n=6 Betti constraints (Poincaré dual): b₀=b₆=1, b₁=b₅, b₂=b₄, b₃ selfdual. Independent Bettis = (τ+φ)/φ = **n/φ = 3** ({b₁, b₂, b₃}). Euler characteristic: χ = Σ(−1)^k b_k = 2 − 2b₁ + 2b₂ − b₃. **Intermediate-dimension b₃ coefficient (−1)^{n/φ} = −1 is uniquely a single term** — this is why **3-form moduli (CY3 complex structure) are the core DOF of the n=6 holographic manifold**.
 
 dual lock table:
 
@@ -735,80 +735,80 @@ dual lock table:
 | 2 | H² | H⁴ | symmetry (Kähler) | b₂=b₄, J₂/σ=2 |
 | 3 | H³ | H³ | antisymmetric (selfdual) | middle, n/φ=3 |
 
-**breakthrough-draft 4 — K3 surface 4-real-dim × Euler = J₂ = 24 module라 × 6-manifold connection**
+**breakthrough-draft 4 — K3 surface 4-real-dim × Euler = J₂ = 24 moduli × 6-manifold link**
 
-K3 surface (4-real-dim = 2·φ_E(6), Calabi-Yau 2-fold) of **Euler 특 χ(K3) = J₂ = 24**, complex module라 dimension = **σ·φ/φ − φ·φ = 20 = σ+J₂−J₂+σ−τ = (σ-φ)+σ/φ+τ** — more exactly: K3 moduli = h^{1,1} = **20 = σ·sopfr−σ·φ·... = σ + J₂/τ·φ = 12+20·φ/... ≠**. 바른 path: **Picard rank ≤ 20 = 2·(σ-φ) = 2·10** (σ-φ redundancy). this domain K3 6-manifold of 정 (codim 2) via use: **M⁶ = K3 × T² → b₃(M) = 2·b₁(T²) = 2·φ = 4 = τ** (Künneth).
+K3 surface (4-real-dim = 2·φ_E(6), Calabi-Yau 2-fold) has **Euler characteristic χ(K3) = J₂ = 24**, complex moduli dimension = **σ·φ/φ − φ·φ = 20 = σ+J₂−J₂+σ−τ = (σ-φ)+σ/φ+τ** — more precisely: K3 moduli = h^{1,1} = **20 = σ·sopfr−σ·φ·... = σ + J₂/τ·φ = 12+20·φ/... ≠**. Correct path: **Picard rank ≤ 20 = 2·(σ-φ) = 2·10** (σ-φ redundancy). Used in this domain as the K3 fiber of a 6-manifold (codim 2): **M⁶ = K3 × T² → b₃(M) = 2·b₁(T²) = 2·φ = 4 = τ** (Künneth).
 
-K3·T² of n=6 lock:
- χ(K3×T²) = χ(K3)·χ(T²) = J₂·0 = **0 = R(6)−1** (리벳 0 항 reuse, §4 L3 table)
+K3·T² n=6 lock:
+ χ(K3×T²) = χ(K3)·χ(T²) = J₂·0 = **0 = R(6)−1** (zero-rivet term reuse, §4 L3 table)
  b_total(K3×T²) = Σb_i = 2·(1+0+22+0+1) = J₂+2·(φ-φ)·... = **48 = σ·τ** (atlas HEXA-FUSION B⁴ reuse).
- **K3×T² unique simple CY3 (hyperKähler × 토러스) via σ·τ=48 total Betti  lock** — 48T SC field (atlas L206) and **same ** from 교.
+ **K3×T² is the simplest CY3 (hyperKähler × torus) locked via σ·τ=48 total Betti** — intersects the 48T SC field (atlas L206) through the **same count**.
 
 **breakthrough-draft 5 — 24-cell × F₄ × 6-manifold triple lock**
 
-§7.0 CONSTANTS of "24-cell symmetry F₄" 6-manifold at 박다:
- 24-cell 4D rule 정다, |Aut| = **1152 = σ·τ²·sopfr·... = J₂² × φ = 576·φ = J₂·σ·τ = 24·σ·τ** (atlas HEXA-AERO reuse).
- 24-cell 꼭짓점 set = D₄ 근system = 24 = **J₂ minimum vector** (§3 citation).
- F₄ 예외 Lie algebra dim = **σ·sopfr−sopfr·φ+φ = 52 = sopfr²·φ+φ² = 4·σ+τ** — more exactly dim F₄ = **52 = J₂·φ+τ = 48+4 = σ·τ+τ = τ·(σ+φ/φ·φ)** → **F₄ = J₂ (rank) × τ+... order쌍**.
- 5-sphere S⁵ (AdS₅×S⁵ holography of compact ) dimension = **5 = sopfr(6)**,  space SO(6)/SO(5) isotropy rank n/φ=3.
+§7.0 CONSTANTS "24-cell symmetry F₄" embed in 6-manifold:
+ 24-cell 4D regular polytope, |Aut| = **1152 = σ·τ²·sopfr·... = J₂² × φ = 576·φ = J₂·σ·τ = 24·σ·τ** (atlas HEXA-AERO reuse).
+ 24-cell vertex set = D₄ root system = 24 = **J₂ minimum vectors** (§3 citation).
+ F₄ exceptional Lie algebra dim = **σ·sopfr−sopfr·φ+φ = 52 = sopfr²·φ+φ² = 4·σ+τ** — more precisely dim F₄ = **52 = J₂·φ+τ = 48+4 = σ·τ+τ = τ·(σ+φ/φ·φ)** → **F₄ = J₂ (rank) × τ+... tuple**.
+ 5-sphere S⁵ (AdS₅×S⁵ holography compact part) dimension = **5 = sopfr(6)**, homogeneous space SO(6)/SO(5) isotropy rank n/φ=3.
 
-6-manifold breakthrough-draft lock: **D₄ root = J₂ = 24 → 24-cell symmetry → F₄ Lie → (AdS₅+S⁵ = σ-φ = 10) → n=6 compact fiber.** three unit(root, polytope, 예외group)  J₂=24 onefrom 나 것 **n=6 unified triple confluence**.
+6-manifold breakthrough-draft lock: **D₄ root = J₂ = 24 → 24-cell symmetry → F₄ Lie → (AdS₅+S⁵ = σ-φ = 10) → n=6 compact fiber.** Three structures (root, polytope, exceptional group) all emerge from J₂=24 as **n=6 unified triple confluence**.
 
 **SMASH summary (5 items)**:
 | # | breakthrough | n=6 formula | value |
 |---|------|----------|-----|
-| 1 | 6-manifold classification | n, invariant τ=4  | dim=6, invariants=4 |
-| 2 | Chern 6-form degree | 2·(n/φ) = n | 6 (c₃ 최고) |
+| 1 | 6-manifold classification | n, invariants τ=4 | dim=6, invariants=4 |
+| 2 | Chern 6-form degree | 2·(n/φ) = n | 6 (c₃ top) |
 | 3 | Poincaré intermediate dimension | n/φ | 3 (b₃ selfdual) |
-| 4 | K3×T² Betti  | σ·τ | 48 |
+| 4 | K3×T² Betti sum | σ·τ | 48 |
 | 5 | 24-cell·F₄·S⁵ triple | J₂, σ-φ, sopfr | 24, 10, 5 |
 
 ### §X.2 FREE — string 10D × holographic AdS₅×S⁵ × field Chern triple composite
 
-**toe (T1) — string 10D = σ-φ from 6-manifold via of compactification**: Type IIA/IIB/Heterotic stringtheory critical dimension 10 = **σ-φ** (atlas L11735 reuse). 우리 observation 4D spacetime τ = **τ(6)=4** 빼면 **10 − 4 = n = 6**  여min dimension — this Calabi-Yau 3-fold via compactify (atlas L12078 reuse). **6-manifold = string 여mindimension of essential shape** — i.e. string phenomenology  this domain forced. M-theory 11D of case 여min = 11−4 = **7 = σ−sopfr** (atlas L15775 reuse) 지 M-CY G₂-holonomy via 또 other domain.
+**toe (T1) — string 10D = σ-φ compactified via 6-manifold**: Type IIA/IIB/Heterotic string-theory critical dimension 10 = **σ-φ** (atlas L11735 reuse). Subtracting our observable 4D spacetime τ = **τ(6)=4** leaves **10 − 4 = n = 6** extra dimensions — compactified on a Calabi-Yau 3-fold (atlas L12078 reuse). **6-manifold = essential shape of string extra dimensions** — i.e. string phenomenology is forced into this domain. M-theory 11D case gives extra-dim = 11−4 = **7 = σ−sopfr** (atlas L15775 reuse) via M-CY G₂-holonomy, branching to another domain.
 
-**holographic (T2) — AdS₅×S⁵ = 10 = σ-φ of n=6 split**: AdS/CFT dual of basic background AdS₅×S⁵ total dimension = 5+5 = **σ-φ = 10**. AdS₅ boundary = 4D CFT = τ dimension, S⁵ 반경 = 5 = **sopfr**. **S⁵ = SO(6)/SO(5)** — **SO(n)/SO(sopfr) 균질space**  isotropic 5-sphere.  of space **Killing vector count = n(n−1)/2 = 15 = J₂−σ+φ+φ = sopfr+σ−φ**. Entropy area law S = A/(4G) of min **4 = τ**  Chern 6-form normalization min **τ! = 24 = J₂** of 1 항. holographic 투영: **n^n = 46656 (atlas L44569) = 6-manifold sololographic statespace** — 6-manifold  점당 n=6 baseline n=6  쌓 full tensor.
+**holographic (T2) — AdS₅×S⁵ = 10 = σ-φ n=6 split**: AdS/CFT dual basic background AdS₅×S⁵ total dimension = 5+5 = **σ-φ = 10**. AdS₅ boundary = 4D CFT = τ dimension, S⁵ radius = 5 = **sopfr**. **S⁵ = SO(6)/SO(5)** — **SO(n)/SO(sopfr) homogeneous space** isotropic 5-sphere. Space's **Killing vector count = n(n−1)/2 = 15 = J₂−σ+φ+φ = sopfr+σ−φ**. Area-law entropy S = A/(4G) constant **4 = τ** corresponds to the 1-term of the Chern 6-form normalization **τ! = 24 = J₂**. Holographic projection: **n^n = 46656 (atlas L44569) = 6-manifold holographic state-space** — 6-manifold stacks n=6 baseline × n=6 per point full tensor.
 
-**field (T3) — Chern–Weil × Chern–Simons × topology 전하**: Chern 6-form c₃ = (1/τ!)·(i/(2π))³·tr(F³). 5D Chern–Simons action CS₅ = ∫ tr(A∧dA∧dA + ...) of dimension **5 = sopfr**, boundary 6-manifold at topology 전하 endow. atlas L15777 "Chern-Simons theory" reuse. gauge field F of 6-form selfcomposite **F∧F∧F**  τ! min 3! = 6 = **n** from lock — i.e. Chern 6-form normalization n=6 itself of factorial quantum.
+**field (T3) — Chern–Weil × Chern–Simons × topology charge**: Chern 6-form c₃ = (1/τ!)·(i/(2π))³·tr(F³). 5D Chern–Simons action CS₅ = ∫ tr(A∧dA∧dA + ...) of dimension **5 = sopfr**, endows the boundary 6-manifold with topology charge. Atlas L15777 "Chern-Simons theory" reuse. Gauge field F 6-form self-composition **F∧F∧F** locks at τ! base 3! = 6 = **n** — i.e. Chern 6-form normalization is the factorial quantum of n=6 itself.
 
 **free composite — triple product invariant Π_TOPO**:
  Π_TOPO = toe(string 10D = σ-φ = 10) · holographic(Killing S⁵ = σ+n/φ = 15) · field(Chern 6-form τ! = 6 = n)
         = **10 × 15 × 6 = 900 = σ²·φ² + σ·τ² − ... = (σ-φ)²·σ·φ/φ·φ = (σ-φ)² · σ·φ / φ²**.
- more 깔locked히: **900 = σ²·φ²/φ·... = 30² = (σ·φ·φ/φ+σ-φ·φ)² = (σ·φ+sopfr·φ)²** → **Π_TOPO = (σ+J₂−σ)² = J₂²·φ²/(σ·τ/σ·τ) = 900**.
+ More cleanly: **900 = σ²·φ²/φ·... = 30² = (σ·φ·φ/φ+σ-φ·φ)² = (σ·φ+sopfr·φ)²** → **Π_TOPO = (σ+J₂−σ)² = J₂²·φ²/(σ·τ/σ·τ) = 900**.
  existing HEXA-AERO Π_AERO = 1920 and : **Π_TOPO / Π_AERO = 900/1920 = 15/32 = (σ+n/φ)/(σ·τ·φ·τ/(σ+n/φ))**.
- existing HEXA-THERMO Π_THERMO = 384 and : **Π_TOPO / Π_THERMO = 900/384 = 75/32 = sopfr²·n/(J₂+τ+τ·φ·φ)** — topology  thermo of **(sopfr/φ)² · σ/τ ≈ 2.34** width. topology DOF thermal DOF보다  multipleas much 풍.
+ vs existing HEXA-THERMO Π_THERMO = 384: **Π_TOPO / Π_THERMO = 900/384 = 75/32 = sopfr²·n/(J₂+τ+τ·φ·φ)** — topology exceeds thermo by **(sopfr/φ)² · σ/τ ≈ 2.34** span. Topology DOF is several-fold richer than thermal DOF.
 
 ### §X.3 dual — HEXA-CLOAK · HEXA-FUSION · HEXA-TOPO
 
 | axis | HEXA-CLOAK (sf-ufo) | HEXA-FUSION (energy) | HEXA-TOPO (physics) | dual pipesystem |
 |-----|---------------------|---------------------|---------------------|----------|
-| 여mindimension | CY3 6- (atlas L107621) | n=6 플라즈마 DOF | 6-manifold body | **n=6 shared** |
-| 고 form | light 6-mode topology 2π/σ | B⁴ Lawson | c₃ Chern 6-form | **τ exponent shared** |
-| intermediate dimension | disc 24m ≈ J₂ (atlas HYP-01) | D-T plasma R=σ-φ=10 | b₃ middle cohom | **J₂, σ-φ shared** |
+| extra-dim | CY3 6-fold (atlas L107621) | n=6 plasma DOF | 6-manifold body | **n=6 shared** |
+| high-form | light 6-mode topology 2π/σ | B⁴ Lawson | c₃ Chern 6-form | **τ exponent shared** |
+| intermediate dim | disc 24m ≈ J₂ (atlas HYP-01) | D-T plasma R=σ-φ=10 | b₃ middle cohom | **J₂, σ-φ shared** |
 | holography | ε_r·μ_r=-55/6 (HYP-04) | τ² scaling | AdS₅×S⁵=10, n^n=46656 | **σ-φ shared** |
-| module라 | n/φ=3 cloak 쉘 | σ=12 채널 | K3 moduli ≤ 2(σ-φ)=20 | **σ-φ scale** |
+| moduli | n/φ=3 cloak shell | σ=12 channels | K3 moduli ≤ 2(σ-φ)=20 | **σ-φ scale** |
 
-**dual product**: `Π_CLOAK · Π_FUSION · Π_TOPO` of topology share other two domain of **(σ-φ)² = 100 ratio** via composite. 질으 via **CY3 6-real dimension ⊗ B⁴ Lawson ⊗ Chern c₃ = (σ-φ)·τ·n 공역** from sealing. 6-manifold topology **cloak light 6-mode 및 fusion B⁴ exponent** of math .
+**dual product**: `Π_CLOAK · Π_FUSION · Π_TOPO` — topology shares with the other two domains at **(σ-φ)² = 100 ratio** composite. Equivalently **CY3 6-real dim ⊗ B⁴ Lawson ⊗ Chern c₃ = (σ-φ)·τ·n co-domain** seals. 6-manifold topology is the mathematical spine of **cloak light 6-mode and fusion B⁴ exponent**.
 
 ### §X.4 benchtop topology experiment protocol (n=6 6-manifold lattice)
 
-**target**: σ²=144 site 벤 탑 latticephase Chern  c₃ measurement, Poincaré dual b₃=n/φ=3 confirm, 48T SC field 하 24-cell 정점 mode observation.
+**target**: σ²=144-site benchtop lattice-phase Chern c₃ measurement, Poincaré dual b₃=n/φ=3 confirm, 24-cell vertex mode observation under 48T SC field.
 
-1. **lattice**: 6-torus T⁶ = (S¹)^n of σ²=144 site discrete approximation (sites = n²·τ = 144). 6-color tight-binding H = Σ t_{ij} c_i†c_j, each link at U(1) phase (synthetic gauge).
-2. **Chern **: Brillouin zone T⁶ above c₃ min = Σ_BZ (F∧F∧F)/τ!. prediction c₃ ∈ ℤ, 최저 여기 |c₃| = **n/φ = 3** (atlas L14213 hologra-display reuse).
+1. **lattice**: 6-torus T⁶ = (S¹)^n at σ²=144-site discrete approximation (sites = n²·τ = 144). 6-color tight-binding H = Σ t_{ij} c_i†c_j, each link carries U(1) phase (synthetic gauge).
+2. **Chern integral**: Over Brillouin zone T⁶, c₃ integral = Σ_BZ (F∧F∧F)/τ!. Prediction c₃ ∈ ℤ, lowest excitation |c₃| = **n/φ = 3** (atlas L14213 holographic-display reuse).
 3. **Poincaré dual check**: b₁ vs b₅, b₂ vs b₄ numerical match (±1 allowed). b₃ selfdual skew-form signature = (τ/φ, τ/φ) = (2,2) = (φ, φ).
-4. **24-cell mode**: 48T SC (atlas L206) 속 D₄ root-lattice quantum state, observation 정점  **J₂ = 24 ± 1**.
-5. **K3×T² total Betti**: 공 lattice 4D×2D from Σb_i measurement → **σ·τ = 48 ± τ=4** allowed.
-6. **time timeconstant**: μ(6) = 1 ms (§4 L2) × σ² = 144 ms = **σ²ms** sample링 period.
+4. **24-cell mode**: in 48T SC (atlas L206) D₄ root-lattice quantum state, observed vertex count **J₂ = 24 ± 1**.
+5. **K3×T² total Betti**: on shared 4D×2D lattice, Σb_i measurement → **σ·τ = 48 ± τ=4** allowed.
+6. **time constant**: μ(6) = 1 ms (§4 L2) × σ² = 144 ms = **σ²ms** sampling period.
 
 ### §X.5 testable falsifier
 
-- **F1**: simpleconnection closed 6-manifold classification invariant  ≠ τ(6)=4 → Wall–Jupp lemma condition discarded
-- **F2**: Chern 6-form c₃ 최고 ≠ n=6 (c₂  최고 되면) → complex n/φ=3 전제 discarded
-- **F3**: Poincaré intermediate dimension b₃  symmetric form  되면 (antisymmetric 반증) → n/φ odd discarded
-- **F4**: K3×T² Betti  ≠ σ·τ=48 (±τ within) → K3 χ=24=J₂ definition 필요
-- **F5**: AdS₅×S⁵ dimension ≠ σ-φ=10 → string compactification n=6 기반 discarded
-- **F6**: Chern–Weil normalization τ! min of 3! = n structure 반증 (differential form algebra modification 필요  on )
+- **F1**: simply-connected closed 6-manifold classification invariants ≠ τ(6)=4 → Wall–Jupp lemma conditions discarded
+- **F2**: Chern 6-form c₃ top ≠ n=6 (if c₂ becomes top) → complex n/φ=3 premise discarded
+- **F3**: Poincaré intermediate-dim b₃ symmetric form (antisymmetric refuted) → n/φ-odd discarded
+- **F4**: K3×T² Betti sum ≠ σ·τ=48 (±τ window) → K3 χ=24=J₂ definition needed
+- **F5**: AdS₅×S⁵ dimension ≠ σ-φ=10 → string compactification n=6 basis discarded
+- **F6**: Chern–Weil normalization τ!-base-3! = n structure refuted (differential-form algebra modification needed)
 
 ### §X.6 atlas constants output (7 items)
 

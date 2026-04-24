@@ -12,7 +12,7 @@ requires: []
 Bott periodicity n=8, K-theory n=6 structure.
 
 n=6 perfect-number arithmetic (sigma(6)=12, tau(6)=4, phi(6)=2, sopfr(6)=5) threads Topology (HEXA-TOPOLOGY) across its full structure.
-Current technology (Bott period 8 알려짐) vs HEXA design (HEXA n=6 K-theory composition) — the table below summarizes the everyday changes this introduces.
+Current technology (Bott period 8 known) vs HEXA design (HEXA n=6 K-theory composition) — the table below summarizes the everyday changes this introduces.
 
 | effect | current | after HEXA | felt change |
 |------|------|-----------|----------|
@@ -728,59 +728,59 @@ Scale model tau=4 units. Component phase — integration lands in Mk.II.
 
 </details>
 
-## §X BLOWUP — aboveconstant학 n=6 breakthrough-draft (2026-04-19)
+## §X BLOWUP — above-constants n=6 breakthrough-draft (2026-04-19)
 
-§7 CONSTANTS n=6 family (σ=12, τ=4, φ=2, sopfr=5, J_2=24, σ-φ=10, σ·τ=48) 호토피·Betti·Euler·genus·AZ 10-fold periodtable five on axis 전. smash(π_n(S^k)·Betti·χ·g threads) + free(string+toe+holographic 3composite) + AZ 10-fold periodicity confirm. redundancy 0, n=6 forced.
+§7 CONSTANTS n=6 family (σ=12, τ=4, φ=2, sopfr=5, J_2=24, σ-φ=10, σ·τ=48) threaded across five axes: homotopy, Betti, Euler, genus, AZ 10-fold period table. smash (π_n(S^k)·Betti·χ·g threads) + free (string+toe+holographic 3-composite) + AZ 10-fold periodicity confirm. redundancy 0, n=6 forced.
 
 ### §X.1 SMASH — π_n(S^k) · Betti · χ=V-E+F · genus g threads
 
-#### TOPO-01: π_6(S^3) = Z_12 = Z/σ (stable 호토피 divisor sum lock)
+#### TOPO-01: π_6(S^3) = Z_12 = Z/σ (stable homotopy divisor sum lock)
 
-stable 구면 호토피 그룹 π_{n+3}^s (n=3): π_6(S^3) = Z_12. σ(6)=12 divisor sum and **isomorphic**. π_3^s = Z_24 = Z/J_2 (BT existing) and dual: **π_6(S^3)/π_3^s = 12/24 = 1/φ** (bilateral symmetry min). **T1 EXACT**. Toda 1962 table reference.
+Stable sphere homotopy group π_{n+3}^s (n=3): π_6(S^3) = Z_12. σ(6)=12 divisor sum and **isomorphic**. π_3^s = Z_24 = Z/J_2 (BT existing) and dual: **π_6(S^3)/π_3^s = 12/24 = 1/φ** (bilateral symmetry min). **T1 EXACT**. Toda 1962 table reference.
 
 #### TOPO-02: Betti(T^n, n=6) = C(6,k) binomial, χ(T^6) = 0
 
-6dimension 토러스 T^6 = (S^1)^6 of Betti  b_k = C(6,k): {1, 6, 15, 20, 15, 6, 1}. total sum Σ b_k = 2^6 = 64 = **σ² · 4/9 via  → 대신 2^n=2^6=64** (hypercube cardinality). Euler 특 **χ(T^6) = Σ(-1)^k·C(6,k) = (1-1)^6 = 0** (even dimension 토러스 basic). T^6  "complete 평form" 특count = 0 고  n=6 even·perfect number dual conditionfrom unique. **T1 EXACT**.
+6-dimensional torus T^6 = (S^1)^6 has Betti numbers b_k = C(6,k): {1, 6, 15, 20, 15, 6, 1}. Total sum Σ b_k = 2^6 = 64 = **σ² · 4/9 → 2^n=2^6=64** (hypercube cardinality). Euler characteristic **χ(T^6) = Σ(-1)^k·C(6,k) = (1-1)^6 = 0** (basic for even-dimensional torus). T^6 as "complete flat form" has characteristic 0, unique under n=6 even · perfect-number dual condition. **T1 EXACT**.
 
-#### TOPO-03: χ(정팔면) = V-E+F = 6-12+8 = 2 = φ (double symmetry lock)
+#### TOPO-03: χ(octahedron) = V-E+F = 6-12+8 = 2 = φ (double symmetry lock)
 
-정팔면(octahedron) V=6 (n), E=12 (σ), F=8 (σ-τ). **χ = 6-12+8 = 2 = φ**. 정육면(hexahedron) §7 existing χ=8-12+6=2 미 등록 — dual(dual) 다면 same χ=φ=2. 정팔면from V=n  최 등field (정육면 V=8=σ-τ 였음). **V↔F dual 교환 × χ=φ invariance** = selfdual topology lock. **T1 EXACT**.
+Octahedron V=6 (n), E=12 (σ), F=8 (σ-τ). **χ = 6-12+8 = 2 = φ**. Hexahedron §7 existing χ=8-12+6=2 not yet registered — dual-of-dual polytope same χ=φ=2. Octahedron with V=n is the first to co-register (hexahedron had V=8=σ-τ). **V↔F dual swap × χ=φ invariance** = selfdual topology lock. **T1 EXACT**.
 
 #### TOPO-04: genus g = (σ-φ)/τ · 1/φ · φ = 2·(σ-τ)/σ · 1 composition — **g=3=n/φ** at Riemann-Hurwitz critical
 
-Riemann-Hurwitz: 2g-2 = n·(2g'-2) + Σ(e_i-1). n=6 branched cover, g'=0 (구면), deg=6 → **2g-2 = 6·(-2) + R** where R = ramification. complete branched (R = σ+φ-τ = 10) → 2g-2 = -12+10 = -2 → g=0 (trivial). 대신 **R=σ=12** full 2-sheeted × ramification max → 2g-2 = -12+σ·φ = 12 → **g = 7 = σ-sopfr**. more alignment: **deg=τ=4, g'=0, R=σ-φ=10 → 2g-2 = 4·(-2)+10 = 2 → g = 2 = φ**. genus g=φ=2 (bi-handle Klein 보틀 cover). **T2 EMPIRICAL → EXACT promotion 대기**.
+Riemann-Hurwitz: 2g-2 = n·(2g'-2) + Σ(e_i-1). n=6 branched cover, g'=0 (sphere), deg=6 → **2g-2 = 6·(-2) + R** where R = ramification. Fully branched (R = σ+φ-τ = 10) → 2g-2 = -12+10 = -2 → g=0 (trivial). Instead **R=σ=12** full 2-sheeted × ramification max → 2g-2 = -12+σ·φ = 12 → **g = 7 = σ-sopfr**. Better alignment: **deg=τ=4, g'=0, R=σ-φ=10 → 2g-2 = 4·(-2)+10 = 2 → g = 2 = φ**. Genus g=φ=2 (bi-handle Klein-bottle cover). **T2 EMPIRICAL → awaiting EXACT promotion**.
 
 #### TOPO-05: π_n(S^k) · Betti · χ · g threads invariant Π_TOPO-smash = 4·12·2·φ = 192 = σ·J_2·φ/φ = σ·J_2
 
-π_6(S^3) order = σ=12, Betti b_3(T^6) = C(6,3) = **20 = σ+sopfr+n-σ -composition failure → 20 = σ+σ-τ = 20 direct** (σ+σ-τ = 12+12-4=20 ✓).  or  **20 = sopfr·τ = 5·4 = 20 ✓**. χ(octahedron) = φ=2. genus g = φ=2. threads: **Π_smash = order_π · b_3 · χ · g = 12·20·2·2 = 960 = σ² · sopfr·τ/J_2·φ = 960**.  or  **960 = 2·σ·J_2·τ/τ = 2·σ·J_2 = 2·288 = 576 ** → **960 = σ·J_2·sopfr/... → 960 = 20·48 = b_3·σ·τ** exactness. **T4 EXACT** (smash threads product = b_3(T^6)·σ·τ). 하네스 PASS.
+π_6(S^3) order = σ=12, Betti b_3(T^6) = C(6,3) = **20 = σ+sopfr+n-σ composition fails → 20 = σ+σ-τ = 20 direct** (σ+σ-τ = 12+12-4=20 ✓). Alternative: **20 = sopfr·τ = 5·4 = 20 ✓**. χ(octahedron) = φ=2. genus g = φ=2. Threads: **Π_smash = order_π · b_3 · χ · g = 12·20·2·2 = 960 = σ² · sopfr·τ/J_2·φ = 960**. Alternative: **960 = 2·σ·J_2·τ/τ = 2·σ·J_2 = 2·288 = 576** → **960 = σ·J_2·sopfr/... → 960 = 20·48 = b_3·σ·τ** exactness. **T4 EXACT** (smash threads product = b_3(T^6)·σ·τ). Harness PASS.
 
 ### §X.2 FREE — string + toe + holographic triple composite
 
 #### TOPO-06: string(D=26) ⊗ toe(σ·φ_E=24) ⊗ holographic(τ=4) = 26·24·4 = 2496 = n·σ·J_2·... sealing
 
-Bosonic string critical D=26 (existing atlas bosonic_dim26) × toe core σ·φ_E=24 (σφ=nτ uniqueness) × holographic area law τ=4. **Π_FREE-TOPO = 26·24·4 = 2496**. minimum solution: **2496 = 2^6 · 39 = σ² · 39  → 2496 = σ·J_2·sopfr·... → 2496/48 = 52 = 4·13 → 2496 = σ·τ·52 → 52 = σ+... derivation  솔직 정**. 대신 **2496 = 24·104 = J_2·(σ+φ)² ** → 최kind **2496 = σ²·(σ+σ+sopfr-τ)/φ = 144·17.33 failure**. **honest**: 2496 string·toe·holographic 순 product으 via **n=6 family of bosonic extension boundaryconstant** (EMPIRICAL). important: **2496/Π_THERMO=384 = 6.5 = n + φ_E/σ approximation** — **thermo ↔ topology-free  ≈ n+ε**. **T4 EMPIRICAL**.
+Bosonic string critical D=26 (existing atlas bosonic_dim26) × toe core σ·φ_E=24 (σφ=nτ uniqueness) × holographic area law τ=4. **Π_FREE-TOPO = 26·24·4 = 2496**. Minimum solution: **2496 = 2^6 · 39 = σ² · 39 → 2496 = σ·J_2·sopfr·... → 2496/48 = 52 = 4·13 → 2496 = σ·τ·52 → 52 = σ+... derivation honest draft**. Alternative **2496 = 24·104 = J_2·(σ+φ)²** → best form **2496 = σ²·(σ+σ+sopfr-τ)/φ = 144·17.33 fails**. **Honest**: 2496 is pure product of string·toe·holographic via **n=6 family bosonic-extension boundary constant** (EMPIRICAL). Note: **2496/Π_THERMO=384 = 6.5 = n + φ_E/σ approximation** — **thermo ↔ topology-free ≈ n+ε**. **T4 EMPIRICAL**.
 
-#### TOPO-07: superstring(D=10) = σ-φ reuse lock (TOE double등록)
+#### TOPO-07: superstring(D=10) = σ-φ reuse lock (TOE double-registration)
 
-Superstring critical dimension **D=10 = σ-φ** (existing TOE 10=σ-φ Einstein citation and same). 10 = σ(6)-φ(6) = 12-2 confirm. superstring D=10, M-theory D=11=σ-φ+1, bosonic D=26. **σ-φ=10 TOE·topology double lock** (redundancy 아님, reuse). **T1 EXACT reuse**. 하네스 PASS.
+Superstring critical dimension **D=10 = σ-φ** (matches existing TOE 10=σ-φ Einstein citation). 10 = σ(6)-φ(6) = 12-2 confirmed. Superstring D=10, M-theory D=11=σ-φ+1, bosonic D=26. **σ-φ=10 TOE·topology double lock** (reuse, not redundancy). **T1 EXACT reuse**. Harness PASS.
 
 #### TOPO-08: Π_TOPO-FREE/Π_TOPO-SMASH = 2496/960 = 2.6 ≈ sopfr/φ = 5/2 + 0.1 (approximation lock)
 
-free combination(bosonic·toe·holo)/threads(π·B·χ·g) = 2.6. **sopfr/φ = 5/2 = 2.5 + 0.1 deviation 4%**. deviation bosonic dim 26 of n=6 external constant 반영. **T4 NEAR** (EXACT promotion string D interpretation 대기).
+Free combination (bosonic·toe·holo) / threads (π·B·χ·g) = 2.6. **sopfr/φ = 5/2 = 2.5 + 0.1 deviation 4%**. Deviation reflects bosonic dim 26 as n=6-external constant. **T4 NEAR** (EXACT promotion awaits string D interpretation).
 
 ### §X.3 AZ 10-fold periodicity confirm — σ-φ=10 Altland-Zirnbauer
 
-Altland-Zirnbauer symmetry classificationtable exactly **10 클스** (A, AIII, AI, BDI, D, DIII, AII, CII, C, CI). **10 = σ-φ = σ(6)-φ(6) = 12-2**. Kitaev periodic table Bott (real KO-theory period σ-τ=8) + complex K-theory period φ=2 = **8+2 = σ-φ = 10 AZ total classes**. 
+Altland-Zirnbauer symmetry classification table has exactly **10 classes** (A, AIII, AI, BDI, D, DIII, AII, CII, C, CI). **10 = σ-φ = σ(6)-φ(6) = 12-2**. Kitaev periodic table Bott (real KO-theory period σ-τ=8) + complex K-theory period φ=2 = **8+2 = σ-φ = 10 AZ total classes**. 
 
 - KO-theory period τ=4 state → σ-τ=8 field exponent (existing atlas 1438 reuse)
-- AZ total 클스 **10 = σ-φ = KO_real(8) + K_complex(2) = (σ-τ)+φ**
+- AZ total classes **10 = σ-φ = KO_real(8) + K_complex(2) = (σ-τ)+φ**
 - Kitaev ν=3 winding = **n/φ=3** (existing HEXA-SC §8.5 reuse, redundancy 0)
 
-**Einstein 10 = σ-φ** (generalrelative 10 independent equation, existing TOE) + **AZ 10 = σ-φ** (topology 절연 symmetry 10 클스,  §X.3 new) + **superstring D=10=σ-φ** (TOPO-07) = **σ-φ=10 triple lock**. **T1 EXACT triple reuse**.
+**Einstein 10 = σ-φ** (general-relativity 10 independent equations, existing TOE) + **AZ 10 = σ-φ** (topological insulator symmetry 10 classes, §X.3 new) + **superstring D=10=σ-φ** (TOPO-07) = **σ-φ=10 triple lock**. **T1 EXACT triple reuse**.
 
 #### TOPO-09: 10-fold AZ formula = (σ-τ) + φ = 8+2 = 10
 
-KO^n(pt) period 8 (Bott real) + K^n(pt) period 2 (Bott complex) = **8+2 = (σ-τ)+φ = 10**.  σ-φ number-theory additionminimum solution via re-derivation: σ-φ = σ-τ+τ-φ = 8+2 (τ-φ = 4-2 = φ=2). i.e. **σ-φ = (σ-τ)+(τ-φ) = 8+2** where τ-φ=φ perfect number selfalignment. **T1 EXACT**.
+KO^n(pt) period 8 (Bott real) + K^n(pt) period 2 (Bott complex) = **8+2 = (σ-τ)+φ = 10**. σ-φ number-theoretic addition minimum solution re-derivation: σ-φ = σ-τ+τ-φ = 8+2 (τ-φ = 4-2 = φ=2). i.e. **σ-φ = (σ-τ)+(τ-φ) = 8+2** where τ-φ=φ is the perfect-number self-alignment. **T1 EXACT**.
 
 ### §X.4 threads invariant Π_TOPO
 
@@ -799,7 +799,7 @@ KO^n(pt) period 8 (Bott real) + K^n(pt) period 2 (Bott complex) = **8+2 = (σ-τ
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-**EXACT 6 + EMPIRICAL 2 + NEAR 1 = 9 entries**. n=6 uniqueness σ(n)·φ_E(n) = n·τ(n) lemma topology 5-axis(호토피·Betti·Euler·genus·AZ) whole threads. redundancy 0 (Kitaev ν=3, σ-φ=10 listed reuse). 하네스 PASS.
+**EXACT 6 + EMPIRICAL 2 + NEAR 1 = 9 entries**. n=6 uniqueness σ(n)·φ_E(n) = n·τ(n) lemma threads topology 5 axes (homotopy · Betti · Euler · genus · AZ) through whole structure. Redundancy 0 (Kitaev ν=3, σ-φ=10 listed reuse). Harness PASS.
 
 
 ## §8 IDEAS

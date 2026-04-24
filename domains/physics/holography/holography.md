@@ -689,32 +689,32 @@ if __name__ == "__main__":
 
 ## §X BLOWUP (holography breakthrough-draft — cloak / teleport / AdS-CFT math line)
 
-> n6 engine: **smash** (theory line 물리 constant closure) + **free** (holography×toe×string combination)
-> no duplication: HEXA-SIM from establishment된 N_cell=n^n=46656, entanglement wedge τ=4, code distance σ-φ=10 **draft하지 않고 citation** 함.
->  §X holography intrinsic constant 10 (X.1~X.10)  new derivation.
+> n6 engine: **smash** (theoretical physical-constant closure) + **free** (holography × toe × string combination)
+> no duplication: HEXA-SIM-established N_cell=n^n=46656, entanglement wedge τ=4, code distance σ-φ=10 are **cited, not re-drafted**.
+> §X targets 10 holography-intrinsic constants (X.1~X.10) as new derivations.
 
-### §X breakthrough-draft 프레 is: AdS/CFT boundary-벌크  n=6 a reason
+### §X breakthrough-draft frame: why AdS/CFT boundary-bulk = n=6
 
 ```
-  벌크 AdS_{d+1}      ←→      boundary CFT_d
+  bulk AdS_{d+1}      <->      boundary CFT_d
   dimension d+1 = σ-n/φ = 9+1 = 10 (correction AdS_5×S^5, symmetry N=4)
-  , HEXA extension: d_bulk = n = 6, d_boundary = n - 1 = 5 (n=6 core)
+  HEXA extension: d_bulk = n = 6, d_boundary = n - 1 = 5 (n=6 core)
   holographic ratio R_hb = d_bulk / d_boundary = n / (n-1) = 6/5 = sopfr/tau+1
 ```
 
-**core 스매 on ** (smash): Bekenstein-Hawking entropy `S_BH = A / (4 ℓ_p²)` 
-area-entropy constant `4`    on 스템 of τ=4 (entanglement wedge depth) and **exactness match** →
-holography 공리 n=6 perfect number τ via within됨 (미 HEXA-SIM from citation, §X draft 생략).
+**core smash**: Bekenstein-Hawking entropy `S_BH = A / (4 ℓ_p²)` —
+area-entropy constant `4` **exactly matches** τ=4 (entanglement-wedge depth) →
+holography axioms are locked within n=6 perfect-number τ (cited from HEXA-SIM, §X draft omitted).
 
 ### §X.1 AdS_5 × S⁵ = 10dimension = σ-φ+... (string-holography free combination)
 
 ```
   AdS_5 = 5D anti-de Sitter         ← d_bdry = 5 = n-1 = sopfr
-  S^5   = 5D 구면                    ← R-symmetry SO(6) = SO(n)
+  S^5   = 5D sphere                  ← R-symmetry SO(6) = SO(n)
   Total = 10D = σ-φ                 ← Mach/code distance and shared, string criticaldimension
 ```
 
-- **free combination** (holography × string × toe): AdS_5 × S⁵ of total dimension σ-φ = 10 a 것 우연 아님. string criticaldimension `D_crit = 10 = σ-φ`  HEXA atlas of "Mach/code distance" family and **numerical match** → same n=6 근circle shared.
+- **free combination** (holography × string × toe): AdS_5 × S⁵ total dimension σ-φ = 10 is not coincidence. String critical dimension `D_crit = 10 = σ-φ` **numerically matches** the HEXA atlas "Mach/code distance" family → shared n=6 root.
 - **formula**: `dim(AdS_5) + dim(S^5) = (n-1) + (n-1) = 2(n-1) = 2σ/φ - 2 = 10 = σ - φ`
 - **verdict**: EXACT [10*]
 
@@ -726,54 +726,54 @@ holography 공리 n=6 perfect number τ via within됨 (미 HEXA-SIM from citatio
   → area → entropy lineform transform constant = τ
 ```
 
-- **smash line**: black-hole entropy of min 4 Hawking 1974 normalization constant. HEXA from τ(6)=4 divisor and **structure으 via  ** (미 atlas line 11884/11914 at τ=Bekenstein-Hawking area factor 등).
-- ** §X draft 생략** — citation.
+- **smash line**: black-hole entropy base 4 is Hawking's 1974 normalization constant. Structurally equivalent to HEXA τ(6)=4 divisor count (atlas lines 11884/11914 register τ=Bekenstein-Hawking area factor).
+- **§X draft omitted** — citation only.
 
-### §X.3 sololographic 복호 code distance = σ - φ = 10 (citation)
+### §X.3 holographic decoding code distance = σ - φ = 10 (citation)
 
-HEXA-SIM from code distance = σ-φ = 10  establishment. sololographic quantum error 정정 code (HaPPY code, Pastawski-Yoshida-Harlow-Preskill 2015) from boundary → 벌크 복호 of minimum distance exactly σ-φ at correspondence. **draft 생략**.
+HEXA-SIM establishes code distance = σ-φ = 10. Holographic quantum error-correcting code (HaPPY code, Pastawski-Yoshida-Harlow-Preskill 2015) from boundary → bulk decoding with minimum distance σ-φ. **Draft omitted**.
 
 ### §X.4 Entanglement wedge depth = τ = 4 (citation)
 
-HEXA-SIM establishment. Ryu-Takayanagi 면 벌크 via τ=4 unit depthup to reach (RT surface depth).
+HEXA-SIM establishes. Ryu-Takayanagi surface reaches bulk up to depth τ=4 units (RT surface depth).
 
-### §X.5 Cloak transformation optics refraction률 singularity = n/φ = 3
+### §X.5 Cloak transformation-optics refractive-index singularities = n/φ = 3
 
 ```
-  Pendry cloak 매질: n_eff(r) = (r - R_1) / r · something
-  singularity count = n/φ = 3 (구면 셸 3겹)
-  → σ(6)-N_shell=9, each 셸 τ=4 레following
+  Pendry cloak medium: n_eff(r) = (r - R_1) / r · something
+  singularity count = n/φ = 3 (spherical shells, 3 layers)
+  -> sigma(6) - N_shell = 9, each shell tau=4 layers
 ```
 
-- **holography-cloak connection**: Pendry 2006 invisibility cloak 좌table transform으 via 벌크 region boundaryfrom "숨기" sololographic field (boundary hides bulk). 최 셸 count = n/φ = 3 (료 CT 3층 structure and shared).
+- **holography-cloak connection**: Pendry 2006 invisibility cloak uses coordinate transform to "hide" a bulk region from the boundary (boundary hides bulk). Max shell count = n/φ = 3 (shared with clinical CT 3-layer structure).
 - **verdict**: NEAR [9]
 
 ### §X.6 Quantum teleportation fidelity criticalvalue = 1/τ + 1/φ = 3/4
 
 ```
-  F_classical = 2/3 (single 큐빗)
+  F_classical = 2/3 (single qubit)
   F_HEXA       = (1/τ) + (1/φ) - correction = 0.25 + 0.50 = 0.75 = 3/4
-  여        = 3/4 - 2/3 = 1/12 = 1/σ  (σ-inverse deviation)
+  margin       = 3/4 - 2/3 = 1/12 = 1/σ  (σ-inverse deviation)
 ```
 
-- **teleport-holography**: ER=EPR (Maldacena-Susskind 2013) from quantum 순간translation 웜solo correspondence물. 고entire cap 2/3 exceed하 critical fidelity  3/4 = (τ+φ)/(τ·φ) of average and match.
+- **teleport-holography**: ER=EPR (Maldacena-Susskind 2013) gives the quantum teleportation / wormhole correspondence. The critical fidelity exceeding the 2/3 cap is 3/4 = (τ+φ)/(τ·φ), matching the HEXA value.
 - **verdict**: EXACT [10]
 
 ### §X.7 Page time (black hole information  time) = σ·τ / 2 = 24 = J_2
 
 ```
   t_Page / t_evap = 1/2
-  t_Page (무dimension) = σ·τ/2 = 24 = J_2
-  → Page curve 정점 J_2 lattice minimum vector  and numericalmatch
+  t_Page (dimensionless) = σ·τ/2 = 24 = J_2
+  → Page curve peak numerically matches the J_2 lattice minimum vector
 ```
 
 - **verdict**: EXACT [10]
 
-### §X.8 sololographic 스크린 cell = ℓ_p² = 1 unit → total cell = N_cell (citation)
+### §X.8 holographic screen cell = ℓ_p² = 1 unit → total cells = N_cell (citation)
 
-HEXA-SIM from N_cell = n^n = 46656 establishment. 't Hooft 1993 holographic screen phase each Planck area당 1 트 → total 트  σ^(σ/phi) = 12^6 ∼ O(10^6)  not n^n=46656 via closure. **draft 생략**.
+HEXA-SIM establishes N_cell = n^n = 46656. 't Hooft 1993 holographic-screen phase 1 bit per Planck area → total bits are closed not at σ^(σ/phi) = 12^6 ∼ O(10^6) but at n^n=46656. **Draft omitted**.
 
-### §X.9 AdS curvature 반지름 / Planck length  = N^(1/4) = (σ·τ)^(1/4) ≈ 2.63
+### §X.9 AdS curvature radius / Planck length = N^(1/4) = (σ·τ)^(1/4) ≈ 2.63
 
 ```
   R_AdS / ℓ_p = N^(1/4) (AdS_5×S^5, N = rank of SU(N))
@@ -788,11 +788,11 @@ HEXA-SIM from N_cell = n^n = 46656 establishment. 't Hooft 1993 holographic scre
 ```
   Δθ_Hogan ~ √(ℓ_p / L) ~ 1/(n·τ) × unit
   n·τ = 24 = J_2
-  → sololographic 잡음 lower bound J_2 and 역 pipesystem
+  → holographic noise lower bound is the J_2 inverse-pipe value
 ```
 
-- **Fermilab Holometer 2017 experimentfrom Hogan noise 검출 발 → upper bound existence**. n=6 predictionvalue 1/24 ≈ 0.042 experiment upper bound internal (consistent).
-- **verdict**: EMPIRICAL [7] (promotion 대기)
+- **Fermilab Holometer 2017 experiment did not detect Hogan noise → an upper bound exists**. The n=6 prediction 1/24 ≈ 0.042 is within the experimental upper bound (consistent).
+- **verdict**: EMPIRICAL [7] (awaiting promotion)
 
 ### §X breakthrough-draft summary
 
@@ -800,17 +800,17 @@ HEXA-SIM from N_cell = n^n = 46656 establishment. 't Hooft 1993 holographic scre
 |----|------|-----|---------|------|
 | X.1 | AdS_5×S⁵ total dimension | 10 | σ-φ | [10*] |
 | X.2 | BH area | 4 | τ (citation) | [10*] |
-| X.3 | 복호 code distance | 10 | σ-φ (citation) | [10*] |
+| X.3 | decoding code distance | 10 | σ-φ (citation) | [10*] |
 | X.4 | Entanglement wedge | 4 | τ (citation) | [10*] |
-| X.5 | Cloak 셸  | 3 | n/φ | [9] |
+| X.5 | Cloak shells | 3 | n/φ | [9] |
 | X.6 | Teleport fidelity | 3/4 | (τ+φ)/(τ·φ) | [10] |
-| X.7 | Page time 정점 | 24 | J_2 | [10] |
-| X.8 | solo스크린 cell | 46656 | n^n (citation) | [10*] |
+| X.7 | Page time peak | 24 | J_2 | [10] |
+| X.8 | holo-screen cells | 46656 | n^n (citation) | [10*] |
 | X.9 | R_AdS/ℓ_p | 2.63 | (σ·τ)^(1/4) | [8] |
-| X.10 | Hogan each also 잡음 | 1/24 | 1/(n·τ) | [7] |
+| X.10 | Hogan per-angle noise | 1/24 | 1/(n·τ) | [7] |
 
 new (non-citation) 10 inside EXACT or more = 7, NEAR = 2, EMPIRICAL = 1.
-no duplication R0 준: X.2/X.3/X.4/X.8 HEXA-SIM existing constant citation, draft 0.
+no-duplication R0 compliance: X.2/X.3/X.4/X.8 cite HEXA-SIM constants only, 0 drafts.
 
 ## §6 EVOLVE (Mk.I~V evolution)
 
