@@ -19,8 +19,8 @@ It **cannot** help with:
 
 - Structural "X maps to Y" claims (`BT-378`, `BT-406`, `BT-451~460`, etc.)
 - Heuristic correspondences with no analytical expression (`BT-381~400`, `BT-470`)
-- Z-score anchors that already fail a statistical threshold (`mc-v9-대조-e` z=1.915)
-  — here the correct upgrade is **re-run at larger N**, not promotion.
+- Z-score anchors that already fail a statistical threshold (`mc-v9-control-e` z=1.915)
+  — here the correct upgrade is **re-run at larger N**, not promotion. (entry: `mc-v9-contrast-e`)
 
 Of the 45 `[7]` entries, **36 are structural** and excluded. The remaining
 **9 numerical entries** are evaluated below; **3–5** are proposed for ANU-MC
@@ -110,7 +110,7 @@ path promotion.
 
 | ID | Reason |
 |----|--------|
-| `mc-v9-대조-e` z=1.915 | Failed threshold. ANU can re-run, but promotion needs N ≥ 10k at z ≥ 3.0 first. |
+| `mc-v9-contrast-e` z=1.915 | Failed threshold. ANU can re-run, but promotion needs N ≥ 10k at z ≥ 3.0 first. |
 | `BT-18 L5 Monster sigma+tau-1=15` | Integer-equality claim; MC irrelevant. |
 | `BT-171 SM couplings` | Energy-scale dependent (RGE running); MC cannot fix. |
 | 36 structural `BT-*` entries | No numerical target for MC. |

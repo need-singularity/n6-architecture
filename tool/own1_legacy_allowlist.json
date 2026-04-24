@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 1035,
+    "count": 1030,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -61,6 +61,18 @@
         "removed": 5,
         "scope": "experiments batch 2-2 (chip-verify)",
         "batch": "phase-2-2"
+      },
+      {
+        "date": "2026-04-24",
+        "removed": 5,
+        "scope": "experiments batch 2-1 (anu+atlas+blowup)",
+        "batch": "phase-2-1"
+      },
+      {
+        "date": "2026-04-24",
+        "removed": 5,
+        "scope": "experiments batch 2-5 (paper+ranking+red-team)",
+        "batch": "phase-2-5"
       }
     ]
   },
@@ -482,11 +494,6 @@
     "domains/space/space-engineering/space-engineering.md",
     "domains/space/space-medicine/space-medicine.md",
     "domains/space/space-systems/space-systems.md",
-    "experiments/anu_mc_verification/promote_candidate.md",
-    "experiments/atlas_promotion_p5_report.md",
-    "experiments/blowup/p4_breakthrough_attempt.md",
-    "experiments/blowup/p4_dfs_5module_report.md",
-    "experiments/conjecture_to_10star_20.md",
     "experiments/dse/arch_unified_fuse50_report.md",
     "experiments/dse/atlas_promotion_candidates_p2.md",
     "experiments/dse/atlas_promotion_manual_checklist_40.md",
