@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 574,
+    "count": 554,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -145,6 +145,12 @@
         "date": "2026-04-25",
         "removed": 20,
         "new_count": 574
+      },
+      {
+        "batch": "phase-4-5",
+        "date": "2026-04-25",
+        "removed": 20,
+        "count_after": 554
       }
     ]
   },
@@ -539,26 +545,6 @@
     "reports/audits/readme-products-drift-2026-04-11.md",
     "reports/audits/readme-ssot-audit-2026-04-19.md",
     "reports/audits/zenodo-publish-3-papers-2026-04-11.md",
-    "reports/breakthroughs/bt-1392-millennium-7-breakthrough-ideas-2026-04-12.md",
-    "reports/breakthroughs/bt-1393-n6-dfs-10k-autonomous-2026-04-12.md",
-    "reports/breakthroughs/bt-1397-uncovered-domains-2026-04-12.md",
-    "reports/breakthroughs/bt-1398-millennium-dfs-round6-2026-04-12.md",
-    "reports/breakthroughs/bt-1399-millennium-dfs-round7-2026-04-12.md",
-    "reports/breakthroughs/bt-1406-millennium-dfs-round14-2026-04-12.md",
-    "reports/breakthroughs/bt-1407-millennium-dfs-round15-2026-04-12.md",
-    "reports/breakthroughs/bt-1412-millennium-dfs-round20-2026-04-14.md",
-    "reports/breakthroughs/bt-18-moonshine-l5-barrier-2026-04-15.md",
-    "reports/breakthroughs/bt-18-vacuum-monster-chain-dfs-2026-04-14.md",
-    "reports/breakthroughs/bt-19-alternative-paths-2026-04-15.md",
-    "reports/breakthroughs/bt-19-consciousness-alternate-paths-2026-04-15.md",
-    "reports/breakthroughs/bt-19-perfect-number-near-promotion-2026-04-15.md",
-    "reports/breakthroughs/bt-19-perfect-number-path-2026-04-15.md",
-    "reports/breakthroughs/bt-19-tau4-pci-validation-2026-04-15.md",
-    "reports/breakthroughs/bt-19-tau4-promotion-2026-04-15.md",
-    "reports/breakthroughs/consciousness-triple-fusion-2026-04-15.md",
-    "reports/breakthroughs/new-bt-dimensional-unfolding-2026-04-06.md",
-    "reports/breakthroughs/new-bt-new-domains-part1-2026-04-06.md",
-    "reports/breakthroughs/new-bt-new-domains-part2-2026-04-06.md",
     "reports/sessions/2026-04-11-weekly-audit.md",
     "reports/sessions/2026-04-11-weekly-audit_rerun-2056.md",
     "reports/sessions/cross-domain-resonance-2026-03-31.md",
