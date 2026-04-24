@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 235,
+    "count": 234,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -165,6 +165,14 @@
         "removed": 14,
         "new_count": 293,
         "note": "14 files translated in this session (3 deferred: moonshine-barrier, ultimate-superconductor-integrated, remain CJK>0)"
+      },
+      {
+        "phase": "phase-6-0",
+        "batch": "phase-6-0-green-band",
+        "date": "2026-04-25",
+        "removed": 1,
+        "new_count": 234,
+        "note": "stale-shrink GREEN band: file already CJK=0, allowlist entry removed"
       }
     ]
   },
@@ -390,7 +398,6 @@
     "papers/n6-66-techniques-integrated-paper.md",
     "papers/n6-advanced-packaging-integrated-paper.md",
     "papers/n6-hexa-chip-7dan-integrated-paper.md",
-    "papers/n6-hexa-cogni-integrated-paper.md",
     "papers/n6-hexa-consciousness-integrated-paper.md",
     "papers/n6-hexa-starship-integrated-paper.md",
     "papers/n6-ultimate-superconductor-integrated-paper.md",
