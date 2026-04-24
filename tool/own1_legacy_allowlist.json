@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 50,
+    "count": 49,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -369,6 +369,15 @@
         "entry": "domains/compute/chip-design/hexa-1-digital/hexa-1-digital.md",
         "new_count": 50,
         "note": "B11 carry - hexa-1-digital.md translated (Korean -> English), CJK=0 verified."
+      },
+      {
+        "phase": "phase-6-D-B12-chip-isa-n6",
+        "removed": [
+          "domains/compute/chip-isa-n6/chip-isa-n6.md"
+        ],
+        "count_before": 50,
+        "count_after": 49,
+        "date": "2026-04-25"
       }
     ]
   },
@@ -381,7 +390,6 @@
     "domains/cognitive/ai-interpretability/ai-interpretability.md",
     "domains/cognitive/ai-quality-scale/ai-quality-scale.md",
     "domains/cognitive/ai-training-cost/ai-training-cost.md",
-    "domains/compute/chip-isa-n6/chip-isa-n6.md",
     "domains/compute/chip-isa-n6/xn6-isa-24-spec/xn6-isa-24-spec.md",
     "domains/compute/chip-isa-n6/xn6-opcode-table/xn6-opcode-table.md",
     "domains/compute/chip-materials/chip-materials.md",
