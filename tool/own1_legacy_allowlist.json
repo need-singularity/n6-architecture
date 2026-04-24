@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 61,
+    "count": 59,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -286,6 +286,19 @@
         "removed": 1,
         "new_count": 61,
         "note": "B11 carryover - chip-hexa1.md (1191L canonical+v1-archived) translated, CJK=0 verified."
+      },
+      {
+        "phase": "phase-6-B6-carry-sf",
+        "date": "2026-04-25",
+        "removed": 1,
+        "new_count": 60,
+        "note": "B6 carry - sf-ufo/sf domain overview translated"
+      },
+      {
+        "phase": "phase-6-B6-carry-hypotheses",
+        "date": "2026-04-25",
+        "entries_removed": 1,
+        "count_after": 59
       }
     ]
   },
@@ -332,8 +345,6 @@
     "domains/compute/hexa-super/hexa-super.md",
     "domains/compute/hexa-wafer/hexa-wafer.md",
     "domains/sf-ufo/hexa-ufo/hexa-ufo.md",
-    "domains/sf-ufo/hypotheses/hypotheses.md",
-    "domains/sf-ufo/sf/sf.md",
     "papers/moonshine-barrier-honest-report-2026-04-15.md",
     "papers/n6-66-techniques-integrated-paper.md",
     "papers/n6-advanced-packaging-integrated-paper.md",
