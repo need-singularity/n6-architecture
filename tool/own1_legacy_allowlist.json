@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 44,
+    "count": 42,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -419,6 +419,19 @@
         "new_count": 44,
         "note": "B12 part A wave 1 - xn6-isa-24-spec.md (Ultimate XN6 24-bit ISA Spec, HEXA-ISA24) translated KR->EN, CJK=0 verified.",
         "entry": "domains/compute/chip-isa-n6/xn6-isa-24-spec/xn6-isa-24-spec.md"
+      },
+      {
+        "phase": "phase-6-D-B12-hexa-photon",
+        "date": "2026-04-25",
+        "removed": [
+          "domains/compute/hexa-photon/hexa-photon.md"
+        ],
+        "count_after": 43
+      },
+      {
+        "phase": "phase-6-D-B12-hexa-macos",
+        "removed": 1,
+        "count_after": 42
       }
     ]
   },
@@ -440,11 +453,9 @@
     "domains/compute/hexa-accel/hexa-accel.md",
     "domains/compute/hexa-holo/hexa-holo.md",
     "domains/compute/hexa-ios/hexa-ios.md",
-    "domains/compute/hexa-macos/hexa-macos.md",
     "domains/compute/hexa-mram/hexa-mram.md",
     "domains/compute/hexa-netproto/hexa-netproto.md",
     "domains/compute/hexa-one/hexa-one.md",
-    "domains/compute/hexa-photon/hexa-photon.md",
     "domains/compute/hexa-pim/hexa-pim.md",
     "domains/compute/hexa-proglang/hexa-proglang.md",
     "domains/compute/hexa-super/hexa-super.md",
