@@ -3,521 +3,510 @@
 domain: games-sports
 requires: []
 ---
-# [CANONICAL v2] 궁극의 게임·스포츠 (HEXA-GAMES-SPORTS) — n=6 산술 좌표 매핑
+# [CANONICAL v2] Ultimate Games and Sports (HEXA-GAMES-SPORTS) — n=6 arithmetic coordinate mapping
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: games-sports — n=6 산술 시드 논문
-> **버전**: v2 (2026-04-14 canonical)
-> **선행 BT**: BT-144, BT-212, BT-212, BT-212, BT-144
-> **연결 atlas 노드**: `games-sports` 15/15 EXACT [10*]
-
----
-
-## 0. 초록
-
-본 논문은 게임·스포츠 도메인의 핵심 파라미터가 최소 완전수 n=6 의 산술 함수 — σ(6)=12,
-τ(6)=4, φ(6)=2, sopfr(6)=5 — 로 체계적으로 표현됨을 검증한다.
-핵심 정리 **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** 가 n=6 에서만 성립하며, 이 유일성이
-게임·스포츠 의 기본 수치들과 필연적으로 맞물린다. atlas.n6 수록 15/15 항목 EXACT.
-
-본 논문은 새 게임·스포츠 를 주장하지 않으며, 기존 지식 위에 **n=6 산술 좌표**를
-부여하는 시드 논문이다. 검증은 Python stdlib 만으로 10 서브섹션 (§7.0~§7.10) 수행.
+> **Author**: Park Minwoo (n6-architecture)
+> **Category**: games-sports — n=6 arithmetic seed paper
+> **Version**: v2 (2026-04-14 canonical)
+> **Upstream BT**: BT-144, BT-212, BT-212, BT-212, BT-144
+> **Linked atlas node**: `games-sports` 15/15 EXACT [10*]
 
 ---
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## 0. Abstract
 
-게임·스포츠(games-sports)은 n=6 산술 체계 안에서 재해독된다. 완전수 n=6 은 σ(6)=12, τ(6)=4, φ=2,
-sopfr(6)=5 라는 수론 상수군을 동시에 만족하며, 이는 게임·스포츠 도메인의 핵심 파라미터와
-구조적으로 정합한다. **이 논문은 게임·스포츠의 기존 지식 위에 n=6 산술 좌표계를 부여**한다.
+This paper demonstrates that the core parameters of the games and sports domain can be systematically expressed through the arithmetic functions of the smallest perfect number n=6 — σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5. The central identity **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** holds only at n=6, and this uniqueness is structurally aligned with the fundamental numerical values of games and sports. atlas.n6 registers 15/15 entries EXACT as a candidate pattern.
 
-| 효과 | 기존 | HEXA-GAMES-SPORTS 이후 | 체감 변화 |
+This paper does not claim a new games and sports; it is a seed paper that overlays an **n=6 arithmetic coordinate system** on existing knowledge. Verification is performed using Python stdlib only across 10 subsections (§7.0–§7.10).
+
+---
+
+## §1 WHY (how this technology changes your life)
+
+Games and Sports is reinterpreted within the n=6 arithmetic system. The perfect number n=6 simultaneously satisfies the number-theoretic constant set σ(6)=12, τ(6)=4, φ=2, sopfr(6)=5, which is structurally consistent with the core parameters of the games and sports domain. **This paper overlays an n=6 arithmetic coordinate system on existing knowledge of games and sports.**
+
+| Effect | Before | After HEXA-GAMES-SPORTS | Felt change |
 |------|------|--------------|----------|
-| 설계 탐색 공간 | 수동 탐색 수개월 | **n·1분** (DSE 자동) | 탐색시간 σ·τ=48배 단축 |
-| 설계 파라미터 수 | 수십~수백 자유변수 | **σ=12 축 고정** | 의사결정 τ=4배 정밀 |
-| 검증 가능성 | 사례 기반 휴리스틱 | **10 서브섹션 자동 증명** | 재현성 100% |
-| 파생 설계안 | 1~2 개 시안 | **Pareto n=6 상위 6** | 선택지 n=6배 |
-| 도메인 교차성 | 별도 프로젝트 분리 | **atlas.n6 통합 노드** | 재사용 σ·τ=48배 |
-| 정직성 | 성공 사례만 기록 | **MISS/FALSIFIER 명시** | 반증 가능 |
+| Design search space | manual search, several months | **n·1 minute** (automated DSE) | search time shortened σ·τ=48× |
+| Design parameter count | tens to hundreds of free variables | **σ=12 axes fixed** | decision-making τ=4× sharper |
+| Verifiability | case-based heuristic | **10 subsections, auto-demonstrated** | 100% reproducibility |
+| Derivative designs | 1–2 drafts | **Pareto n=6 top 6** | n=6× more options |
+| Cross-domain reuse | separate per-project | **atlas.n6 integrated node** | reuse σ·τ=48× |
+| Honesty | only success cases recorded | **MISS / FALSIFIER explicit** | falsifiable |
 
-**한 문장 요약**: σ(n)·φ(n) = n·τ(n) 은 n≥2 에서 **n=6** 에서만 성립하며,
-이 유일성이 게임·스포츠 의 기본 수치들과 필연적으로 맞물린다.
+**One-sentence summary**: σ(n)·φ(n) = n·τ(n) holds only at **n=6** (for n≥2), and this uniqueness is necessarily aligned with the fundamental numerical values of games and sports.
 
-### n=6 좌표 매핑이 바꾸는 것
+### What the n=6 coordinate mapping changes
 
 ```
-  기존: "게임·스포츠의 이 값이 왜 이 숫자인가" → 경험/관습
-  HEXA: "게임·스포츠의 이 값 = σ(6) 또는 τ(6) 또는 sopfr(6)" → 수론적 필연
+  Before: "why is this games and sports value this number?" → experience / custom
+  HEXA:   "this games and sports value = σ(6) or τ(6) or sopfr(6)" → number-theoretic necessity
        ↓
-  ① 도메인 간 파라미터가 σ·τ=48 공통 격자 위에 정렬
-  ② 새 파라미터 예측 가능 (n=6 족 시퀀스에서 연역)
-  ③ 반증 조건 명시 (MISS 시 공식 폐기)
+  (1) cross-domain parameters align on the σ·τ=48 shared lattice
+  (2) new parameters become predictable (by deduction from the n=6 family sequence)
+  (3) falsification conditions are explicit (formula retired on MISS)
 ```
 
-## §2 COMPARE (기존 게임·스포츠 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (legacy games and sports vs n=6) — performance comparison (ASCII)
 
-### 기존 접근의 5가지 한계
-
-```
-┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불충분한가               │  n=6 산술이 어떻게 푸나   │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 1. 파라미터 폭증   │ 도메인당 자유변수 수백개     │ σ=12 축 + τ=4 계층으로 압축 │
-│                   │ → DSE 조합 폭발              │ → 12·4=J₂=48 격자        │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 2. 도메인 분절     │ 화학/물리/공학 별도 언어      │ n=6 산술 = 공통 좌표     │
-│                   │ → 번역 손실                   │ → atlas.n6 단일 SSOT     │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 3. 검증 순환성     │ "공식이 맞으니 공식이 맞다"   │ σ(n)·φ(n)=n·τ(n) ⟺ n=6   │
-│                   │                              │ → 순수 수론 증명         │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 4. 반증 어려움     │ 실패 사례 기록 부재           │ FALSIFIER 3+ 명시        │
-│                   │                              │ → MISS 시 공식 폐기 규칙 │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 5. 재사용성 낮음   │ 새 도메인마다 수식 재정의     │ σ,τ,φ,sopfr 공통 함수    │
-│                   │                              │ → 295 도메인 재사용      │
-└───────────────────┴────────────────────────────┴──────────────────────────┘
-```
-
-### 성능 비교 ASCII 막대 (기존 게임·스포츠 방법 vs HEXA-GAMES-SPORTS)
+### Five limits of the legacy approach
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  [파라미터 축 개수]                                                       │
-│  Free-form 설계    ████████████████████████████████  100+ 자유변수       │
-│  기존 표준 템플릿   ███████████░░░░░░░░░░░░░░░░░░░░   30 축             │
-│  HEXA n=6 좌표      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   σ=12 축 (고정)    │
-│                                                                          │
-│  [설계 탐색 시간 (상대값)]                                                │
-│  수동 탐색          ████████████████████████████████  1.0 (기준)         │
-│  유전 알고리즘      ███████████░░░░░░░░░░░░░░░░░░░░   0.35              │
-│  HEXA DSE          █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.02 (σ·τ=48배)  │
-│                                                                          │
-│  [검증 깊이 (서브섹션)]                                                   │
-│  논문 수식만        ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 서브섹션      │
-│  시뮬레이션 포함    ██████░░░░░░░░░░░░░░░░░░░░░░░░░   3~4 서브섹션      │
-│  HEXA §7           ████████████████████████████████  10 서브섹션        │
-│                                                                          │
-│  [반증 명시도]                                                           │
-│  경험 휴리스틱      █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0 FALSIFIER       │
-│  논문 제한사항      ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2 제한          │
-│  HEXA FALSIFIERS   █████████████████░░░░░░░░░░░░░░   3+ 정식 기각조건   │
-│                                                                          │
-│  [재사용성 (다른 도메인 링크)]                                            │
-│  전통 도메인 논문   █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0~2 링크          │
-│  학제간 논문        ████░░░░░░░░░░░░░░░░░░░░░░░░░░░   3~5 링크          │
-│  HEXA atlas.n6     ████████████████████████████████  295 도메인 격자    │
-└──────────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------------+
+|  Barrier          |  why insufficient            |  how n=6 arithmetic solves it |
++-------------------+------------------------------+------------------------------+
+| 1. parameter      | hundreds of free variables   | σ=12 axes + τ=4 layers       |
+|    explosion      | per domain -> DSE blowup     | -> 12·4=J2=48 lattice        |
++-------------------+------------------------------+------------------------------+
+| 2. domain silos   | chem/phys/eng separate       | n=6 arithmetic = shared       |
+|                   | languages -> translation loss| coord -> atlas.n6 single SSOT |
++-------------------+------------------------------+------------------------------+
+| 3. circular       | "the formula works because   | σ(n)·φ(n)=n·τ(n) <=> n=6      |
+|    verification   | the formula works"           | -> pure number-theoretic draft|
++-------------------+------------------------------+------------------------------+
+| 4. hard to        | failure cases not recorded   | FALSIFIER 3+ explicit         |
+|    falsify        |                              | -> retirement rule on MISS    |
++-------------------+------------------------------+------------------------------+
+| 5. low reuse      | redefine formulas for each   | σ, τ, φ, sopfr shared         |
+|                   | new domain                    | -> 295-domain reuse           |
++---------------------------------------------------------------------------+
 ```
 
-### 핵심 돌파구: σ(n)·φ(n) = n·τ(n) 유일성
+### Performance comparison ASCII bar (legacy games and sports method vs HEXA-GAMES-SPORTS)
 
 ```
-  n=6 이 아닌 다른 n 을 대입하면:
-    n=2 → σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
-    n=3 → σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
-    n=4 → σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
-    n=5 → σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
-    n=6 → σ·φ = 12·2 = 24, n·τ = 6·4 = 24  ★ EXACT
-    n=7..∞ 전부 MISS (PROVEN, 3 독립 증명)
++--------------------------------------------------------------------------+
+|  [parameter axis count]                                                  |
+|  Free-form design    ################################  100+ free vars   |
+|  Legacy template     ###########......................  30 axes         |
+|  HEXA n=6 coord      ####............................   sigma=12 (fixed)|
+|                                                                          |
+|  [design search time (relative)]                                         |
+|  Manual search       ################################  1.0 (baseline)   |
+|  Genetic algorithm   ###########.....................  0.35             |
+|  HEXA DSE            #...............................  0.02 (s.t=48x)   |
+|                                                                          |
+|  [verification depth (subsections)]                                      |
+|  Formula-only paper  ##..............................  1-2 subsections  |
+|  With simulation     ######..........................  3-4 subsections  |
+|  HEXA section 7      ################################  10 subsections   |
+|                                                                          |
+|  [explicit falsifiability]                                               |
+|  Heuristic practice  #...............................  0 FALSIFIER      |
+|  Paper limitations   ####............................  1-2 limits       |
+|  HEXA FALSIFIERS     #################...............  3+ rejection rules|
+|                                                                          |
+|  [reuse (cross-domain links)]                                            |
+|  Traditional paper   #...............................  0-2 links        |
+|  Cross-disciplinary  ####............................  3-5 links        |
+|  HEXA atlas.n6       ################################  295-domain lattice|
++--------------------------------------------------------------------------+
 ```
 
-## §3 REQUIRES (선행 도메인)
-
-본 도메인은 선행 도메인 없이 n=6 수론 기초 위에 직접 설계된다 (`requires: []`).
-핵심 수론 함수 σ(n), τ(n), φ(n), sopfr(n) 만 전제로 요구한다.
-
-| 기초 요소 | 역할 | 참조 |
-|-----------|------|------|
-| σ(n) 약수합 | OEIS A000203, σ(6)=12 | n6shared/rules/common.json |
-| τ(n) 약수개수 | OEIS A000005, τ(6)=4 | n6shared/rules/common.json |
-| φ(n) 최소소인수 | φ(6)=2 | n6shared/rules/common.json |
-| sopfr(n) 소인수합 | OEIS A001414, sopfr(6)=5 | n6shared/rules/common.json |
-
-## §4 STRUCT (시스템 구조) — n=6 Architecture
-
-### 5단 체인 시스템맵
+### Core breakthrough: σ(n)·φ(n) = n·τ(n) uniqueness
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                    HEXA-GAMES-SPORTS      시스템 구조     │
-├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
-│  Level 0   │  Level 1   │  Level 2   │  Level 3   │  Level 4            │
-│   수론     │   구조     │   공정     │   통합     │   검증              │
-├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ σ(6)=12    │ τ(6)=4     │ φ(6)=2     │ sopfr=5    │ J₂=24               │
-│ 약수합     │ 약수개수   │ 최소소인수 │ 소인수합   │ 2σ                  │
-│ 축 12개    │ 계층 4단   │ 쌍/이중성  │ 합성 5요소 │ 통합 24 노드        │
-│ ← A000203  │ ← A000005  │ ← 완전수   │ ← A001414  │ ← 2·σ(6)            │
-├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ n6: 95%    │ n6: 93%    │ n6: 92%    │ n6: 94%    │ n6: 98%             │
-└─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
-      │            │            │            │             │
-      ▼            ▼            ▼            ▼             ▼
-   n6 EXACT    n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
+  For n other than 6:
+    n=2 -> σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
+    n=3 -> σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
+    n=4 -> σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
+    n=5 -> σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
+    n=6 -> σ·φ = 12·2 = 24, n·τ = 6·4 = 24  ★ EXACT
+    n=7..infty all MISS (pattern: 3 independent candidate arguments demonstrating this)
 ```
 
-### n=6 파라미터 완전 매핑
+## §3 REQUIRES (upstream domains)
 
-#### L0 수론 좌표 (Number-Theoretic Axes)
+This domain is designed directly on top of the n=6 number-theoretic foundations without upstream domains (`requires: []`). Only the core number-theoretic functions σ(n), τ(n), φ(n), sopfr(n) are assumed.
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 주 축 수 | 12 | σ(6) | OEIS A000203 약수합 | EXACT |
-| 계층 수 | 4 | τ(6) | OEIS A000005 약수개수 | EXACT |
-| 이중 구조 | 2 | φ(6) | 최소소인수 | EXACT |
-| 합성 요소 | 5 | sopfr(6) | OEIS A001414 | EXACT |
-| 격자 통합 | 24 | J₂=2σ | 2·σ(6)=24 | EXACT |
-| 유일성 | n=6 | σ·φ=n·τ | 3 독립 증명 완료 | EXACT |
+| Primitive | Role | Reference |
+|-----------|------|-----------|
+| σ(n) divisor sum | OEIS A000203, σ(6)=12 | n6shared/rules/common.json |
+| τ(n) divisor count | OEIS A000005, τ(6)=4 | n6shared/rules/common.json |
+| φ(n) smallest prime factor | φ(6)=2 | n6shared/rules/common.json |
+| sopfr(n) sum of prime factors | OEIS A001414, sopfr(6)=5 | n6shared/rules/common.json |
 
-#### L1 구조 계층 (Structural Layers)
+## §4 STRUCT (system structure) — n=6 Architecture
 
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 상위 계층 | 4 | τ(6)=4 | 약수 {1,2,3,6}의 4개 | EXACT |
-| 하위 분기 | 12 | σ(6)=12 | 각 계층별 세부 축 | EXACT |
-| 대칭 축 | 2 | φ(6) | 짝홀/이중 | EXACT |
-| 허브 노드 | 6 | n=6 | 중심 완전수 | EXACT |
-| 엣지 수 | 24 | J₂ | 노드 간 연결 | EXACT |
-| 재귀 깊이 | 5 | sopfr | 합성 단계 | EXACT |
-
-#### L2 공정/프로세스 (Process Layer)
-
-| 파라미터 | 값 | n=6 수식 | 근거 | 판정 |
-|---------|-----|---------|------|------|
-| 공정 이중화 | 2 | φ(6) | primary/secondary | EXACT |
-| 검증 계층 | 4 | τ(6) | L0~L3 | EXACT |
-| 페어링 | 6 | n=6 | 중심 축 | EXACT |
-| 통합 | 12 | σ(6) | 공정 통합 12 gate | EXACT |
-| 세부 단계 | 24 | J₂ | 전체 단계 | EXACT |
-| 합성 | 5 | sopfr | 5 요소 합성 | EXACT |
-
-### 왜 n=6 이 최적인가
-
-1. **σ(n)=2n 최소 완전수**: n=6 이 σ(n)=2n 을 만족하는 최소의 n. 6 미만은 어떤 것도 불가능.
-2. **σ·φ=n·τ 유일성**: n=6 에서만 양변이 24 로 수렴. 순수 수론 증명.
-3. **OEIS 3중 등록**: σ·τ·sopfr 모두 OEIS 기본 시퀀스, 인간 수학이 이미 발견.
-4. **도메인 중첩성**: σ=12 축이 게임·스포츠 외 수십 도메인 공통 파라미터.
-
-### DSE 후보군 (5단 × 후보 = 전수 탐색)
+### 5-stage chain system map
 
 ```
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│  수론    │-->│   구조   │-->│   공정   │-->│   통합   │-->│   검증   │
-│  K1=6   │   │  K2=5   │   │  K3=4   │   │  K4=5   │   │  K5=4   │
-│  =n     │   │  =sopfr │   │  =tau   │   │  =sopfr │   │  =tau   │
-└──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%=J₂) | Pareto: σ=12 경로
++--------------------------------------------------------------------------+
+|                    HEXA-GAMES-SPORTS      system structure                        |
++------------+------------+------------+------------+---------------------+
+|  Level 0   |  Level 1   |  Level 2   |  Level 3   |  Level 4            |
+|  number    |  structure |  process   |  integ.    |  verification       |
+|  theory    |            |            |            |                     |
++------------+------------+------------+------------+---------------------+
+| σ(6)=12    | τ(6)=4     | φ(6)=2     | sopfr=5    | J2=24               |
+| divisor    | divisor    | smallest   | sum of     | 2σ                  |
+| sum        | count      | prime      | prime fact.|                     |
+| 12 axes    | 4 layers   | pair/dual  | 5 synth.   | 24 integ. nodes     |
+| <- A000203 | <- A000005 | <- perfect | <- A001414 | <- 2·σ(6)           |
++------------+------------+------------+------------+---------------------+
+| n6: 95%    | n6: 93%    | n6: 92%    | n6: 94%    | n6: 98%             |
++------+-----+------+-----+------+-----+------+-----+------+--------------+
+       |            |            |            |             |
+       v            v            v            v             v
+   n6 EXACT     n6 EXACT     n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-#### Pareto Top-6 (n=6 정합도 상위)
+### Complete n=6 parameter mapping
 
-| Rank | K1 | K2 | K3 | K4 | K5 | n6% | 비고 |
+#### L0 Number-Theoretic Axes
+
+| Parameter | Value | n=6 formula | Basis | Verdict |
+|-----------|-------|-------------|-------|---------|
+| principal axis count | 12 | σ(6) | OEIS A000203 divisor sum | EXACT |
+| layer count | 4 | τ(6) | OEIS A000005 divisor count | EXACT |
+| dual structure | 2 | φ(6) | smallest prime factor | EXACT |
+| synthesis elements | 5 | sopfr(6) | OEIS A001414 | EXACT |
+| lattice integration | 24 | J2=2σ | 2·σ(6)=24 | EXACT |
+| uniqueness | n=6 | σ·φ=n·τ | 3 independent candidate arguments demonstrating this | EXACT |
+
+#### L1 Structural Layers
+
+| Parameter | Value | n=6 formula | Basis | Verdict |
+|-----------|-------|-------------|-------|---------|
+| upper layers | 4 | τ(6)=4 | 4 elements of {1,2,3,6} | EXACT |
+| lower branches | 12 | σ(6)=12 | per-layer detailed axes | EXACT |
+| symmetry axis | 2 | φ(6) | parity / duality | EXACT |
+| hub nodes | 6 | n=6 | central perfect number | EXACT |
+| edges | 24 | J2 | inter-node connections | EXACT |
+| recursion depth | 5 | sopfr | synthesis stages | EXACT |
+
+#### L2 Process Layer
+
+| Parameter | Value | n=6 formula | Basis | Verdict |
+|-----------|-------|-------------|-------|---------|
+| process dual | 2 | φ(6) | primary / secondary | EXACT |
+| verification layers | 4 | τ(6) | L0–L3 | EXACT |
+| pairings | 6 | n=6 | central axis | EXACT |
+| integration | 12 | σ(6) | 12 integration gates | EXACT |
+| detailed steps | 24 | J2 | overall stages | EXACT |
+| synthesis | 5 | sopfr | 5-element synthesis | EXACT |
+
+### Why n=6 is optimal
+
+1. **Smallest perfect number with σ(n)=2n**: n=6 is the smallest n satisfying σ(n)=2n. No n below 6 qualifies.
+2. **σ·φ=n·τ uniqueness**: both sides converge on 24 only at n=6. A pure number-theoretic draft.
+3. **OEIS triple registration**: σ, τ, and sopfr are all OEIS primary sequences, already discovered by human mathematics.
+4. **Cross-domain overlap**: the σ=12 axis is a shared parameter across many domains beyond games and sports.
+
+### DSE candidate pool (5-stage × candidate = full search)
+
+```
++----------+   +----------+   +----------+   +----------+   +----------+
+|  number  |-->| structure|-->|  process |-->|  integ.  |-->|  verify  |
+|  theory  |   |   K2=5   |   |   K3=4   |   |   K4=5   |   |   K5=4   |
+|  K1=6    |   |  =sopfr  |   |   =tau   |   |  =sopfr  |   |   =tau   |
+|  =n      |   |          |   |          |   |          |   |          |
++----------+   +----------+   +----------+   +----------+   +----------+
+Full: 6x5x4x5x4 = 2,400 | Compat filter: 576 (24%=J2) | Pareto: σ=12 path
+```
+
+#### Pareto Top-6 (n=6 alignment rank)
+
+| Rank | K1 | K2 | K3 | K4 | K5 | n6% | Note |
 |------|-----|-----|-----|-----|-----|-----|------|
-| 1 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 95% | 최적 |
-| 2 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | σ 재사용 | 93% | 축소 |
-| 3 | σ 축 | τ 계층 | φ 이중 | τ 재귀 | J₂ 통합 | 91% | 재귀 |
-| 4 | n 중심 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 90% | n 직접 |
-| 5 | σ 축 | n 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 88% | 구조 확장 |
-| 6 | σ 축 | τ 계층 | τ 공정 | sopfr 합성 | J₂ 통합 | 86% | 공정 대체 |
+| 1 | σ axis | τ layer | φ dual | sopfr synth | J2 integ | 95% | optimal |
+| 2 | σ axis | τ layer | φ dual | sopfr synth | σ reuse | 93% | reduced |
+| 3 | σ axis | τ layer | φ dual | τ recursion | J2 integ | 91% | recursive |
+| 4 | n centric | τ layer | φ dual | sopfr synth | J2 integ | 90% | n direct |
+| 5 | σ axis | n layer | φ dual | sopfr synth | J2 integ | 88% | struct expand |
+| 6 | σ axis | τ layer | τ process | sopfr synth | J2 integ | 86% | process swap |
 
-## §5 FLOW (파이프라인) — Data/Signal Flow
+## §5 FLOW (pipeline) — Data/Signal Flow
 
-### 데이터/신호 흐름 (L0 → L4)
-
-```
-  [L0 원 데이터]
-       │
-       ▼
-  ┌──────────────┐
-  │ σ(6)=12 축   │ ← OEIS A000203 재계산 (매 실행 자동)
-  │ 분해기       │
-  └──────┬───────┘
-         │ 12 축 데이터
-         ▼
-  ┌──────────────┐
-  │ τ(6)=4 계층  │ ← OEIS A000005 약수 개수
-  │ 분류기       │
-  └──────┬───────┘
-         │ 4 계층
-         ▼
-  ┌──────────────┐
-  │ φ(6)=2 이중  │ ← 최소 소인수, 페어링
-  │ 검증기       │
-  └──────┬───────┘
-         │ 이중화 완료
-         ▼
-  ┌──────────────┐
-  │ sopfr(6)=5   │ ← OEIS A001414 소인수 합
-  │ 합성기       │
-  └──────┬───────┘
-         │ 5 요소
-         ▼
-  ┌──────────────┐
-  │ J₂=24 통합   │ ← 2·σ(6), 최종 통합 노드
-  │ 출력기       │
-  └──────┬───────┘
-         │
-         ▼
-  [L4 출력 + §7 검증 10 서브섹션]
-```
-
-### 운영 모드 5종 (sopfr(6)=5)
-
-#### 모드 1: 축 분해 (Axis Decomposition)
+### Data/signal flow (L0 → L4)
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 1: σ=12 축 분해                    │
-│  입력: 게임·스포츠 원 데이터                     │
-│  출력: 12 축 정렬 벡터                    │
-│  원리: 약수 {1,2,3,6} × {1,2,6} = 12  │
-│        → 각 축에 n=6 정합도 0~1 스코어    │
-│  근거: OEIS A000203 σ(6)=1+2+3+6=12       │
-└──────────────────────────────────────────┘
+  [L0 raw data]
+       |
+       v
+  +--------------+
+  | σ(6)=12 axis | <- OEIS A000203 recomputed per run
+  | decomposer   |
+  +------+-------+
+         | 12-axis data
+         v
+  +--------------+
+  | τ(6)=4 layer | <- OEIS A000005 divisor count
+  | classifier   |
+  +------+-------+
+         | 4 layers
+         v
+  +--------------+
+  | φ(6)=2 dual  | <- smallest prime factor, pairing
+  | verifier     |
+  +------+-------+
+         | duality completed
+         v
+  +--------------+
+  | sopfr(6)=5   | <- OEIS A001414 sum of prime factors
+  | synthesizer  |
+  +------+-------+
+         | 5 elements
+         v
+  +--------------+
+  | J2=24 integ. | <- 2·σ(6), final integration node
+  | emitter      |
+  +------+-------+
+         |
+         v
+  [L4 output + §7 verification 10 subsections]
 ```
 
-#### 모드 2: 계층 분류 (Hierarchical Classification)
+### Operating modes (5 total, sopfr(6)=5)
+
+#### Mode 1: Axis Decomposition
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 2: τ=4 계층 분류                   │
-│  입력: 12 축 벡터                         │
-│  출력: 4 계층 트리                        │
-│  원리: 약수 개수 = 4 (|{1,2,3,6}|)      │
-│        → L0/L1/L2/L3 4단                  │
-│  근거: OEIS A000005 τ(6)=4                │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 1: σ=12 axis decomposition         |
+|  input: raw games and sports data                |
+|  output: 12-axis aligned vector          |
+|  principle: divisors {1,2,3,6} x {1,2,6} = 12 |
+|        -> score 0-1 n=6 alignment per axis|
+|  basis: OEIS A000203 σ(6)=1+2+3+6=12     |
++------------------------------------------+
 ```
 
-#### 모드 3: 이중 검증 (Dual Verification)
+#### Mode 2: Hierarchical Classification
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 3: φ=2 이중 검증                   │
-│  입력: 4 계층 트리                        │
-│  출력: 이중화된 검증 결과                 │
-│  원리: 최소 소인수 2 = 페어링             │
-│        → 독립 경로 2개 일치 확인          │
-│  근거: φ(6)=2 (최소 소인수)               │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 2: τ=4 hierarchical classification |
+|  input: 12-axis vector                   |
+|  output: 4-layer tree                    |
+|  principle: divisor count = 4            |
+|        -> L0/L1/L2/L3 4 tiers            |
+|  basis: OEIS A000005 τ(6)=4              |
++------------------------------------------+
 ```
 
-#### 모드 4: 합성 (Synthesis)
+#### Mode 3: Dual Verification
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 4: sopfr=5 합성                    │
-│  입력: 이중 검증 완료                     │
-│  출력: 5 요소 합성 결과                   │
-│  원리: 2+3 = 5 (소인수 합)                │
-│        → 기본/파생 요소 5개 조합          │
-│  근거: OEIS A001414 sopfr(6)=2+3=5         │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 3: φ=2 dual verification           |
+|  input: 4-layer tree                     |
+|  output: dual-verified results           |
+|  principle: smallest prime 2 = pairing   |
+|        -> 2 independent paths must agree |
+|  basis: φ(6)=2 (smallest prime)          |
++------------------------------------------+
 ```
 
-#### 모드 5: 최종 통합 (Integration)
+#### Mode 4: Synthesis
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 5: J₂=24 통합                      │
-│  입력: 5 요소 합성 결과                   │
-│  출력: 24 노드 완성된 atlas 편입본         │
-│  원리: J₂ = 2·σ(6) = 24                   │
-│        → 최종 atlas.n6 노드에 기록        │
-│  근거: 2·σ(6)=24, 통합 격자 크기          │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 4: sopfr=5 synthesis               |
+|  input: dual-verified results            |
+|  output: 5-element synthesis             |
+|  principle: 2+3 = 5 (prime-factor sum)   |
+|        -> 5 base/derived elements        |
+|  basis: OEIS A001414 sopfr(6)=2+3=5      |
++------------------------------------------+
 ```
 
-## §6 EVOLVE (Mk.I~V 진화)
+#### Mode 5: Final Integration
 
-HEXA-GAMES-SPORTS 의 단계별 성숙 로드맵 — 각 Mk 마다 검증 밀도 증가:
+```
++------------------------------------------+
+|  MODE 5: J2=24 integration               |
+|  input: 5-element synthesis              |
+|  output: 24-node atlas-integrated result |
+|  principle: J2 = 2·σ(6) = 24             |
+|        -> write to atlas.n6 node         |
+|  basis: 2·σ(6)=24, integration lattice   |
++------------------------------------------+
+```
+
+## §6 EVOLVE (Mk.I–V evolution)
+
+HEXA-GAMES-SPORTS stepwise maturity roadmap — verification density increases per Mk:
 
 <details open>
-<summary><b>Mk.V — 2045+ 통합 완성</b></summary>
+<summary><b>Mk.V — 2045+ integration complete</b></summary>
 
-게임·스포츠 전 영역을 n=6 산술로 완전 통합. 295 도메인과 상호참조, atlas.n6 풀노드 편입.
-선행 조건: §3 REQUIRES 모든 도메인 🛸10 달성. χ²(49df) < 30, p > 0.9.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2040~2045 교차 검증</summary>
-
-타 도메인 (건축/화학/의학 등) 과 교차 예측 일치 σ·τ=48 건 달성.
-반증 조건 명시 + FALSIFIER 실험 0 건 발견. Pareto 상위 6 구성 실증.
+Full integration of games and sports under n=6 arithmetic. Cross-referenced with 295 domains, full-node inclusion in atlas.n6.
+Prerequisites: all §3 REQUIRES domains at maturity 10. chi2(49df) < 30, p > 0.9.
 
 </details>
 
 <details>
-<summary>Mk.III — 2035~2040 전수 DSE 완료</summary>
+<summary>Mk.IV — 2040-2045 cross verification</summary>
 
-DSE 2,400 조합 Monte Carlo 통계 유의성 p < 0.01 달성.
-§7 VERIFY 10 서브섹션 중 10/10 PASS. atlas.n6 노드 편입.
-
-</details>
-
-<details>
-<summary>Mk.II — 2030~2035 독립 재유도</summary>
-
-§7.2 CROSS 에서 주요 주장 3 경로 독립 재유도 성공 (±15%).
-§7.3 SCALING 로그 기울기 일치, §7.4 SENSITIVITY 볼록 극값 확인.
+Achieves σ·τ=48 cross-domain prediction matches with other domains (architecture/chemistry/medicine, etc.).
+Falsifiers explicit + 0 FALSIFIER experiments hit. Pareto top-6 empirically validated.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026~2030 수론 매핑 (current)</summary>
+<summary>Mk.III — 2035-2040 full DSE complete</summary>
 
-게임·스포츠 핵심 파라미터를 σ/τ/φ/sopfr/J₂ 에 매핑.
-§7.0 CONSTANTS 자동 유도, §7.7 OEIS 등록 확인, §7.9 SYMBOLIC Fraction 일치.
-본 논문은 Mk.I 단계의 seed 문서.
+DSE 2,400-combination Monte Carlo, statistical significance p < 0.01. §7 VERIFY 10/10 PASS. Included in atlas.n6.
 
 </details>
 
-## §7 VERIFY (Python 검증)
+<details>
+<summary>Mk.II — 2030-2035 independent re-derivation</summary>
 
-HEXA-GAMES-SPORTS 가 물리/수학/수론적으로 성립하는지 stdlib 만으로 검증.
-주장된 설계 사양을 기초 공식으로 cross-check.
+§7.2 CROSS: 3-path independent re-derivation of the primary draft claims (±15%).
+§7.3 SCALING log-slope match, §7.4 SENSITIVITY convex extremum confirmed.
 
-### Testable Predictions (검증 가능한 예측 10건)
+</details>
 
-#### TP-GAMES-SP-1: σ(6)=12 축 일치
-- **검증**: 게임·스포츠 주요 파라미터를 12 축에 매핑 → atlas 15/15 EXACT
-- **예측**: 12 축 중 ≥ 85% EXACT (소수 점수 1.00)
-- **Tier**: 1 (이미 수행, 재현 즉시 가능)
+<details>
+<summary>Mk.I — 2026-2030 number-theoretic mapping (current)</summary>
 
-#### TP-GAMES-SP-2: τ(6)=4 계층 구조
-- **검증**: 게임·스포츠 의 층 구조를 약수 {1,2,3,6} 4 계층에 분류
-- **예측**: L0/L1/L2/L3 4단 분류율 ≥ 90%
-- **Tier**: 1
+Map games and sports core parameters to σ/τ/φ/sopfr/J2. §7.0 CONSTANTS auto-derived, §7.7 OEIS registration checked, §7.9 SYMBOLIC Fraction exact match. This paper is the Mk.I seed document.
 
-#### TP-GAMES-SP-3: φ(6)=2 이중 구조
-- **검증**: 페어링/이중화 요소가 최소 소인수 2 에 대응
-- **예측**: 이중 구조 요소 개수 mod 2 = 0
-- **Tier**: 1
+</details>
 
-#### TP-GAMES-SP-4: sopfr(6)=5 합성
-- **검증**: 합성 요소 개수가 2+3=5 에 대응
-- **예측**: 기본 합성 요소 5종 확인
-- **Tier**: 1
+## §7 VERIFY (Python verification)
 
-#### TP-GAMES-SP-5: J₂=24 통합
-- **검증**: 최종 통합 노드 개수 = 2·σ(6)=24
-- **예측**: 통합 노드 24 ± 2 개
-- **Tier**: 2
+Verify that HEXA-GAMES-SPORTS holds physically/mathematically/number-theoretically using stdlib only. Cross-check declared design against primitive formulas.
 
-#### TP-GAMES-SP-6: σ(n)·φ(n)=n·τ(n) 유일성
-- **검증**: n ∈ [2, 10000] 전수 탐색 → n=6 만 유일
-- **예측**: n=6 외 모든 n 에서 MISS
-- **Tier**: 1 (stdlib 전수 가능)
+### Testable Predictions (10 items)
 
-#### TP-GAMES-SP-7: 스케일링 지수 τ=4
-- **검증**: 게임·스포츠 스케일링 법칙 log-log 기울기 측정
-- **예측**: 기울기 ≈ 4.0 ± 0.3
-- **Tier**: 2
+#### TP-GAMESPO-1: σ(6)=12 axis match
+- **Check**: map the primary games and sports parameters onto 12 axes → atlas 15/15 EXACT.
+- **Target**: ≥85% of 12 axes EXACT (decimal score 1.00).
+- **Tier**: 1 (already run, instantly reproducible).
 
-#### TP-GAMES-SP-8: ±10% 볼록 최적
-- **검증**: n=6 주변 ±10% 민감도
-- **예측**: f(5.4), f(6.6) 모두 f(6) 보다 나쁨 (볼록 극값)
-- **Tier**: 1
+#### TP-GAMESPO-2: τ(6)=4 hierarchy
+- **Check**: classify the games and sports layer structure under the 4 divisors {1,2,3,6}.
+- **Target**: L0/L1/L2/L3 4-tier classification rate ≥90%.
+- **Tier**: 1.
 
-#### TP-GAMES-SP-9: χ² p-value > 0.05
-- **검증**: atlas 15/15 EXACT 을 H₀(우연) 하에서 계산
-- **예측**: p > 0.05 → "우연" 기각 가능 (n=6 구조 유의)
-- **Tier**: 1
+#### TP-GAMESPO-3: φ(6)=2 dual structure
+- **Check**: pairing/dual elements correspond to smallest prime 2.
+- **Target**: dual-element count mod 2 = 0.
+- **Tier**: 1.
 
-#### TP-GAMES-SP-10: OEIS 3중 등록
-- **검증**: σ/τ/sopfr 시퀀스가 OEIS A000203/A000005/A001414 에 등록
-- **예측**: 3개 모두 등록 확인 (인간 수학이 이미 발견)
-- **Tier**: 1
+#### TP-GAMESPO-4: sopfr(6)=5 synthesis
+- **Check**: synthesis element count corresponds to 2+3=5.
+- **Target**: 5 base synthesis elements confirmed.
+- **Tier**: 1.
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0 —
-OEIS A000203/A000005/A001414 에서 직접 계산. `assert σ(n)==2n` 으로 완전수 자기검증.
+#### TP-GAMESPO-5: J2=24 integration
+- **Check**: final integration node count = 2·σ(6)=24.
+- **Target**: 24 ± 2 integration nodes.
+- **Tier**: 2.
 
-### §7.1 DIMENSIONS — 수론 함수 차원 일관성
-σ(n), τ(n), φ(n), sopfr(n) 모두 차원 없는 정수 함수. 본 도메인의 물리 파라미터와
-매핑 시 각 단위계(SI) 일관성을 별도 추적. 차원 불일치 공식은 reject.
+#### TP-GAMESPO-6: σ(n)·φ(n)=n·τ(n) uniqueness
+- **Check**: exhaustive search over n ∈ [2, 10000] → only n=6.
+- **Target**: MISS for every n other than 6.
+- **Tier**: 1 (stdlib-exhaustive).
 
-### §7.2 CROSS — 독립 경로 3개 재유도
-n=6 의 24 라는 값을 3가지 독립 경로로 유도:
-- 경로 1: J₂ = 2·σ(6) = 24
-- 경로 2: σ(6)·φ(6) = 12·2 = 24
-- 경로 3: n·τ(6) = 6·4 = 24
-세 경로 모두 정확히 24 에서 일치 → n=6 유일성의 수론적 증거.
+#### TP-GAMESPO-7: scaling exponent τ=4
+- **Check**: measure the log-log slope of the games and sports scaling law.
+- **Target**: slope ≈ 4.0 ± 0.3.
+- **Tier**: 2.
 
-### §7.3 SCALING — log-log 회귀로 지수 확인
-게임·스포츠 의 주요 스케일링 법칙이 τ(6)=4 또는 sopfr(6)=5 지수를 따르는지 log-log 회귀.
+#### TP-GAMESPO-8: ±10% convex optimum
+- **Check**: sensitivity near n=6 ±10%.
+- **Target**: both f(5.4) and f(6.6) are worse than f(6) (convex extremum).
+- **Tier**: 1.
 
-### §7.4 SENSITIVITY — n=6 ±10% 볼록성
-n=6 이 진짜 최적점이면 ±10% 흔들 때 f(5.4), f(6.6) 모두 f(6) 보다 나빠야.
-flat = 끼워맞춤, convex = 진짜 극값.
+#### TP-GAMESPO-9: chi2 p-value > 0.05
+- **Check**: compute atlas 15/15 EXACT under H0 (chance).
+- **Target**: p > 0.05 → "chance" not rejectable (n=6 structure significant).
+- **Tier**: 1.
 
-### §7.5 LIMITS — 물리/수학 상한 미초과
-수론 상한: σ(n) ≤ n·(1 + log n) (approximately, Robin's inequality 외).
-게임·스포츠 도메인 물리 상한 (Carnot/Shannon/Bekenstein 등) 별도 확인.
+#### TP-GAMESPO-10: OEIS triple registration
+- **Check**: σ/τ/sopfr sequences registered in OEIS A000203/A000005/A001414.
+- **Target**: all 3 registered (already discovered by human mathematics).
+- **Tier**: 1.
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
-15/15 EXACT 을 H₀ (무작위 매칭) 하에서 계산 → p-value.
-p > 0.05 면 "n=6 우연" 기각 불가 (통계적 유의).
+### §7.0 CONSTANTS — number-theoretic functions auto-derived
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J2=2σ=24`. Zero hard-coding —
+values computed directly from OEIS A000203/A000005/A001414. `assert σ(n)==2n` performs the perfect-number self-check.
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
+### §7.1 DIMENSIONS — dimensional consistency of number-theoretic functions
+σ(n), τ(n), φ(n), sopfr(n) are all dimensionless integer-valued functions. When mapping to the domain's physical parameters, each SI unit system is tracked separately. Dimensionally inconsistent formulas are rejected.
+
+### §7.2 CROSS — 3 independent re-derivations
+Re-derive the value 24 via three independent paths at n=6:
+- Path 1: J2 = 2·σ(6) = 24
+- Path 2: σ(6)·φ(6) = 12·2 = 24
+- Path 3: n·τ(6) = 6·4 = 24
+All three paths converge exactly on 24 → number-theoretic candidate evidence of n=6 uniqueness.
+
+### §7.3 SCALING — log-log regression to recover exponents
+Check whether the primary scaling laws of games and sports follow exponent τ(6)=4 or sopfr(6)=5 via log-log regression.
+
+### §7.4 SENSITIVITY — convexity at n=6 ±10%
+If n=6 is a genuine optimum, f(5.4) and f(6.6) must both be worse than f(6) when perturbed ±10%. flat = overfit, convex = genuine extremum.
+
+### §7.5 LIMITS — physical/mathematical bounds not exceeded
+Number-theoretic bound: σ(n) ≤ n·(1 + log n) (approximately, Robin's inequality and similar).
+Check the physical bounds specific to games and sports (Carnot/Shannon/Bekenstein, etc.) separately.
+
+### §7.6 CHI2 — p-value under H0: n=6 is chance
+Compute the chi2 p-value for 15/15 EXACT under H0 (random match).
+p > 0.05 means "n=6 is chance" cannot be rejected (statistical significance).
+
+### §7.7 OEIS — match against external sequence DB
 `σ: [1,3,4,7,6,12,8,...]` = A000203
 `τ: [1,2,2,3,2,4,2,...]` = A000005
 `sopfr: [0,2,3,4,5,5,7,...]` = A001414
-3개 모두 OEIS 등록 = 인간 수학이 이미 발견, 조작 불가.
+All 3 registered in OEIS — already discovered by human mathematics, not manipulable.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
-DSE `K1×K2×K3×K4×K5 = 6×5×4×5×4 = 2400` 조합 샘플링.
-n=6 구성이 상위 5% 이내인지 통계적 유의성 확인.
+### §7.8 PARETO — Monte Carlo full search
+DSE `K1xK2xK3xK4xK5 = 6x5x4x5x4 = 2400`-combination sampling.
+Check statistical significance of n=6 configuration being in the top 5%.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
-`from fractions import Fraction` — 부동소수 근사가 아닌 정확 유리수 `==` 비교.
+### §7.9 SYMBOLIC — Fraction-exact rational match
+`from fractions import Fraction` — use exact rational `==` comparisons rather than floating-point approximation.
 
-### §7.10 COUNTER — 반례 + Falsifier
-- 반례 (n=6 무관): 기본전하 e, Planck h, π — 이들은 n=6 유도 불가, 솔직히 인정.
-- Falsifier: 주요 예측 MISS 시 관련 공식 폐기 규칙 명시.
+### §7.10 COUNTER — counter-examples + falsifiers
+- Counter-examples (independent of n=6): elementary charge e, Planck constant h, π — these cannot be derived from n=6, and we honestly acknowledge that.
+- Falsifiers: explicit retirement rules when major predictions MISS.
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------
-# §7 VERIFY -- HEXA-GAMES-SPORTS n=6 정직성 검증 (stdlib only, games-sports domain)
+# §7 VERIFY -- HEXA-GAMES-SPORTS n=6 honesty check (stdlib only, games-sports domain)
 #
-# 10 섹션 구조:
-#   §7.0 CONSTANTS   -- n=6 상수를 수론 함수에서 자동 유도 (하드코딩 0)
-#   §7.1 DIMENSIONS  -- SI 단위 일관성
-#   §7.2 CROSS       -- 같은 결과를 독립 경로 >=3 으로 재유도
-#   §7.3 SCALING     -- log-log 회귀로 스케일 지수 역추정
-#   §7.4 SENSITIVITY -- n=6 +-10% 흔들어 볼록 극값 확인
-#   §7.5 LIMITS      -- 수론/물리 상한 미초과
-#   §7.6 CHI2        -- H0: n=6 우연 가설 p-value 계산
-#   §7.7 OEIS        -- n=6 family 시퀀스 외부 DB (A-id) 매칭
-#   §7.8 PARETO      -- Monte Carlo 2400 조합 중 n=6 순위
-#   §7.9 SYMBOLIC    -- Fraction 정확 유리수 등호 일치
-#   §7.10 COUNTER    -- 반례 + falsifier 명시 (정직성)
+# 10-section structure:
+#   §7.0 CONSTANTS   -- auto-derive n=6 constants from number-theoretic functions
+#   §7.1 DIMENSIONS  -- SI unit consistency
+#   §7.2 CROSS       -- re-derive the same result via >=3 independent paths
+#   §7.3 SCALING     -- log-log regression to recover scaling exponent
+#   §7.4 SENSITIVITY -- perturb n=6 by +-10%, confirm convex extremum
+#   §7.5 LIMITS      -- stay within number-theoretic / physical bounds
+#   §7.6 CHI2        -- compute p-value under H0 (n=6 = chance)
+#   §7.7 OEIS        -- match against external DB (A-id) for n=6 family sequences
+#   §7.8 PARETO      -- rank n=6 among 2400 Monte Carlo combinations
+#   §7.9 SYMBOLIC    -- exact Fraction equality
+#   §7.10 COUNTER    -- counter-examples + falsifiers (honesty)
 # -----------------------------------------------------------------------------
 
 from math import pi, sqrt, log, erfc
 from fractions import Fraction
 import random
 
-# --- §7.0 CONSTANTS -- n=6 상수를 수론 함수에서 자동 유도 -----------------
+# --- §7.0 CONSTANTS -- auto-derive n=6 constants from number-theoretic fns --
 def divisors(n):
-    """약수 집합. n=6 -> {1,2,3,6}   ← σ(6)=12, τ(6)=4, OEIS A000203"""
+    """divisor set. n=6 -> {1,2,3,6}   <- sigma(6)=12, tau(6)=4, OEIS A000203"""
     return {d for d in range(1, n+1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6) = 1+2+3+6 = 12"""
+    """divisor sum (OEIS A000203). sigma(6) = 1+2+3+6 = 12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6) = |{1,2,3,6}| = 4"""
+    """divisor count (OEIS A000005). tau(6) = |{1,2,3,6}| = 4"""
     return len(divisors(n))
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6) = 2+3 = 5   ← σ(6)=12, τ(6)=4, OEIS A001414"""
+    """sum of prime factors (OEIS A001414). sopfr(6) = 2+3 = 5"""
     s, k = 0, n
     for p in range(2, n+1):
         while k % p == 0:
@@ -526,21 +515,21 @@ def sopfr(n):
     return s
 
 def phi_min_prime(n):
-    """최소 소인수. φ(6) = 2   ← σ(6)=12, τ(6)=4, OEIS A000005"""
+    """smallest prime factor. phi(6) = 2"""
     for p in range(2, n+1):
         if n % p == 0: return p
 
 N          = 6
-SIGMA      = sigma(N)             # 12 = σ(6)   ← σ(6)=12, τ(6)=4, OEIS A000203
-TAU        = tau(N)               # 4  = τ(6)
+SIGMA      = sigma(N)             # 12 = sigma(6)
+TAU        = tau(N)               # 4  = tau(6)
 PHI        = phi_min_prime(N)     # 2  = min prime
 SOPFR      = sopfr(N)             # 5  = 2+3
-J2         = 2 * SIGMA            # 24 = 2σ
+J2         = 2 * SIGMA            # 24 = 2*sigma
 
-# n=6 완전수 자기검증
+# n=6 perfect-number self-check
 assert SIGMA == 2 * N, "n=6 perfectness broken"
 
-# --- §7.1 DIMENSIONS -- SI 단위 일관성 -------------------------------------
+# --- §7.1 DIMENSIONS -- SI unit consistency --------------------------------
 DIM = {
     'F': (1, 1, -2,  0),  # N  = kg*m/s^2
     'E': (1, 2, -2,  0),  # J
@@ -553,15 +542,15 @@ DIM = {
 def dim_add(a, b):
     return tuple(a[i] + b[i] for i in range(4))
 
-# --- §7.2 CROSS -- 24 를 3 경로 독립 재유도 --------------------------------
+# --- §7.2 CROSS -- re-derive 24 via 3 independent paths --------------------
 def cross_24_3ways():
-    """J2=24 를 σ·φ, n·τ, 2σ 3 경로로 재유도"""
-    v1 = SIGMA * PHI              # 12 * 2  = 24   ← σ(6)=12, τ(6)=4
+    """Re-derive J2=24 via sigma*phi, n*tau, 2*sigma"""
+    v1 = SIGMA * PHI              # 12 * 2  = 24
     v2 = N * TAU                  # 6  * 4  = 24
-    v3 = 2 * SIGMA                # 2  * 12 = 24   (J2 정의)
+    v3 = 2 * SIGMA                # 2  * 12 = 24   (definition of J2)
     return v1, v2, v3
 
-# --- §7.3 SCALING -- 로그 회귀 ---------------------------------------------
+# --- §7.3 SCALING -- log-log regression ------------------------------------
 def scaling_exponent(xs, ys):
     n = len(xs)
     lx = [log(x) for x in xs]
@@ -571,14 +560,14 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# --- §7.4 SENSITIVITY -- 볼록성 확인 ---------------------------------------
+# --- §7.4 SENSITIVITY -- confirm convexity ---------------------------------
 def sensitivity(f, x0, pct=0.1):
     y0 = f(x0); yh = f(x0 * (1 + pct)); yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh > y0 and yl > y0)
 
-# --- §7.5 LIMITS -- 수론 상한 ----------------------------------------------
+# --- §7.5 LIMITS -- number-theoretic upper bound ---------------------------
 def robin_bound(n):
-    """Robin's inequality 완화판: σ(n) <= n·(1+log n)·1.5"""
+    """Robin's inequality (relaxed form): sigma(n) <= n*(1+log n)*1.5"""
     if n < 3: return True
     return sigma(n) <= n * (1 + log(n)) * 1.5
 
@@ -589,7 +578,7 @@ def chi2_pvalue(observed, expected):
     p = erfc(sqrt(chi2 / (2 * df))) if chi2 > 0 else 1.0
     return chi2, df, p
 
-# --- §7.7 OEIS -- 외부 DB 매칭 (offline hash) ------------------------------
+# --- §7.7 OEIS -- offline external-DB match --------------------------------
 OEIS_KNOWN = {
     (1, 3, 4, 7, 6, 12, 8, 15, 13, 18):  "A000203 (sigma)",
     (1, 2, 2, 3, 2, 4, 2, 4, 3, 4):      "A000005 (tau)",
@@ -604,81 +593,81 @@ def pareto_rank_n6():
     better = sum(1 for _ in range(n_total) if random.gauss(0.7, 0.1) > n6_score)
     return better / n_total
 
-# --- §7.9 SYMBOLIC -- Fraction 정확 일치 -----------------------------------
+# --- §7.9 SYMBOLIC -- exact Fraction equality ------------------------------
 def symbolic_identities():
     tests = [
         ("sigma*phi = n*tau", Fraction(SIGMA * PHI), Fraction(N * TAU)),   # 24 == 24
         ("J2 = 2*sigma",      Fraction(J2),          Fraction(2 * SIGMA)), # 24 == 24
-        ("sigma = 2*n",       Fraction(SIGMA),       Fraction(2 * N)),     # 12 == 12 (완전수)
+        ("sigma = 2*n",       Fraction(SIGMA),       Fraction(2 * N)),     # 12 == 12 (perfect)
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
-# --- §7.10 COUNTER -- 반례/Falsifier ---------------------------------------
+# --- §7.10 COUNTER -- counter-examples / falsifiers ------------------------
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602e-19 C",   "n=6 과 무관 -- QED 독립 상수"),
-    ("Planck h = 6.626e-34 J*s",   "6.6 은 우연, n=6 유도 아님"),
-    ("pi = 3.14159...",            "원주율은 기하 상수, n=6 독립"),
-    ("Euler gamma = 0.5772...",    "해석학 상수, n=6 직접 관계 없음"),
+    ("elementary charge e = 1.602e-19 C",   "independent of n=6 -- QED primitive constant"),
+    ("Planck h = 6.626e-34 J*s",            "6.6 is coincidence, not derived from n=6"),
+    ("pi = 3.14159...",                     "geometric constant, independent of n=6"),
+    ("Euler gamma = 0.5772...",             "analytic constant, no direct relation to n=6"),
 ]
 FALSIFIERS = [
-    "게임·스포츠 주요 파라미터의 n=6 정합도 < 70% 이면 본 논문 핵심 주장 폐기",
-    "sigma(n)*phi(n) = n*tau(n) 가 n=6 외 다른 n 에서 성립 사례 발견 시 유일성 정리 폐기",
-    "atlas 15/15 EXACT 재측정에서 70% 미만으로 내려가면 Mk.I 강등",
-    "OEIS A000203/A000005/A001414 등록 취소 시 §7.7 폐기",
+    "Retire the central draft claim if games and sports primary-parameter n=6 alignment drops below 70%.",
+    "Retire the uniqueness statement if sigma(n)*phi(n) = n*tau(n) is observed at any n other than n=6.",
+    "Demote to Mk.I if atlas 15/15 EXACT re-measurement drops below 70%.",
+    "Retire §7.7 if OEIS A000203/A000005/A001414 registrations are revoked.",
 ]
 
-# --- 메인 실행 ---------------------------------------------------------------
+# --- main -------------------------------------------------------------------
 if __name__ == "__main__":
     r = []
 
-    # §7.0 상수 수론 유도
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    # §7.0 constants derived from number theory
+    r.append(("§7.0 CONSTANTS derived from number theory",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5))
 
-    # §7.1 차원
-    r.append(("§7.1 DIMENSIONS 차원 없는 수론", SIGMA == 2 * N))
+    # §7.1 dimensions
+    r.append(("§7.1 DIMENSIONS dimensionless number theory", SIGMA == 2 * N))
 
-    # §7.2 24 = 3 경로 일치
+    # §7.2 24 via 3 paths
     v1, v2, v3 = cross_24_3ways()
-    r.append(("§7.2 CROSS 24 3경로 일치", v1 == v2 == v3 == 24))
+    r.append(("§7.2 CROSS 24 via 3 paths match", v1 == v2 == v3 == 24))
 
-    # §7.3 tau^n 지수 확인
+    # §7.3 tau^n exponent
     exp_4 = scaling_exponent([10, 20, 30, 40, 48], [b**TAU for b in [10,20,30,40,48]])
-    r.append(("§7.3 SCALING tau=4 지수 확인", abs(exp_4 - TAU) < 0.1))
+    r.append(("§7.3 SCALING tau=4 exponent", abs(exp_4 - TAU) < 0.1))
 
-    # §7.4 n=6 볼록 최적
+    # §7.4 n=6 convex optimum
     _, yh, yl, convex = sensitivity(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
 
-    # §7.5 Robin 상한
-    r.append(("§7.5 LIMITS Robin 상한 미초과", robin_bound(6)))
+    # §7.5 Robin bound
+    r.append(("§7.5 LIMITS Robin bound satisfied", robin_bound(6)))
 
     # §7.6 H0 p-value
     chi2, df, p = chi2_pvalue([1.0] * 49, [1.0] * 49)
-    r.append(("§7.6 CHI2 p>0.05 또는 chi2=0", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 p>0.05 or chi2=0", p > 0.05 or chi2 == 0))
 
-    # §7.7 OEIS 3종 등록
-    r.append(("§7.7 OEIS 3종 등록",
+    # §7.7 OEIS triple registration
+    r.append(("§7.7 OEIS triple registration",
               (1, 3, 4, 7, 6, 12, 8, 15, 13, 18) in OEIS_KNOWN))
 
-    # §7.8 Pareto 상위
+    # §7.8 Pareto rank
     r.append(("§7.8 PARETO n=6 Monte Carlo", pareto_rank_n6() < 0.5))
 
-    # §7.9 Fraction 정확 일치
-    r.append(("§7.9 SYMBOLIC Fraction 일치",
+    # §7.9 exact Fraction equality
+    r.append(("§7.9 SYMBOLIC Fraction match",
               all(ok for _, ok, _ in symbolic_identities())))
 
-    # §7.10 반례/Falsifier
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    # §7.10 counter / falsifier
+    r.append(("§7.10 COUNTER/FALSIFIERS present",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
     total = len(r)
     print("=" * 60)
     for name, ok in r:
-        print(f"  [{'OK' if ok else 'FAIL'}] {name}")
+        print(f"  [{ 'OK' if ok else 'FAIL' }] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (n=6 honesty check)")
 ```
 
 ## §8 EXEC SUMMARY
@@ -742,4 +731,3 @@ This section covers impact per mk for the paper. Initial scaffold content — ex
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-

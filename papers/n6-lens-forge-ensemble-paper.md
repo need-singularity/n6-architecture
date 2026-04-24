@@ -4,129 +4,124 @@ domain: lens-forge-ensemble
 requires:
   - to: ai-techniques-68-integrated
     alien_min: 9
-    reason: AI 기법 렌즈군 기저
+    reason: AI technique lens family base
   - to: cross-dse-matrix-112
     alien_min: 9
-    reason: 렌즈 × 도메인 교차 DSE
+    reason: lens x domain cross DSE
   - to: nexus6-discovery-engine
     alien_min: 8
-    reason: 렌즈 Forge 엔진 기저
+    reason: lens Forge engine base
 alien_index_current: 8
 alien_index_target: 10
 ---
 
-# HEXA-LENS-FORGE-ENSEMBLE — 렌즈 앙상블 설계 논문 (N6-123)
+# HEXA-LENS-FORGE-ENSEMBLE — Lens ensemble design paper (N6-123)
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: lens-forge-ensemble — P2 확장 렌즈 앙상블 시드
-> **버전**: v3 (2026-04-14 P2 확장)
-> **선행 BT**: BT-380 (AI 8패러다임), BT-26, BT-33, BT-54, BT-64, BT-67, BT-73
-> **연결 atlas 노드**: `lens-forge-ensemble` — σ=12 렌즈 진동 × τ=4 Forge 관문
-
----
-
-## 0. Abstract (초록, 한글)
-
-본 논문은 n6-architecture 의 **"렌즈 Forge"** (= atlas.n6 항목을 탐색하는 관측 렌즈 제조기)
-가 앙상블로 구성될 때 σ(6)=12 종의 렌즈로 수렴함을 보인다. 선행 논문 HEXA-CROSS-DSE-MATRIX-112
-(N6-113) 가 225 기법 × 10 도메인 매트릭스를 다룬 데 이어, 본 논문은 **렌즈 개수의
-이론적 상한** 을 정한다.
-
-핵심 주장:
-1. 렌즈 앙상블의 유효 렌즈 수 ≤ σ(6) = 12 이다.
-2. Forge 관문은 τ(6)=4 스텝 (식별/매칭/합성/검증) 으로 양자화된다.
-3. 각 렌즈는 φ(6)=2 방향 (관측/해석) 으로 분해된다.
-4. 앙상블 다양성 지수는 sopfr(6)=5 를 상한으로 한다.
-
-본 논문은 새 렌즈 타입을 발견하지 않는다 — 기존 12 렌즈를 σ=12 약수합 구조에 매핑한 시드 논문.
+> **Author**: Park Minwoo (n6-architecture)
+> **Category**: lens-forge-ensemble — P2 extension lens-ensemble seed
+> **Version**: v3 (2026-04-14 P2 extension)
+> **Upstream BT**: BT-380 (8 AI paradigms), BT-26, BT-33, BT-54, BT-64, BT-67, BT-73
+> **Linked atlas node**: `lens-forge-ensemble` — sigma=12 lens oscillations x tau=4 Forge gates
 
 ---
 
-## 1. 서론 — WHY
+## 0. Abstract
 
-n6-architecture 의 atlas.n6 는 "렌즈" (= 관측 프레임) 를 통해 탐색된다. 렌즈 예:
-- arithmetic 렌즈 — n=6 산술 상수
-- topology 렌즈 — 위상 불변량
-- dynamics 렌즈 — 시간 동학
+This paper shows that when the n6-architecture **"lens Forge"** (= an observation-lens factory for exploring atlas.n6 entries) is assembled as an ensemble, it converges on sigma(6)=12 lenses. Following the predecessor paper HEXA-CROSS-DSE-MATRIX-112 (N6-113), which treated a 225-technique x 10-domain matrix, this paper fixes the **theoretical upper bound on the number of lenses**.
 
-그러나 **렌즈 개수의 이론적 상한** 은 미정이었다. Forge 스크립트 (`scripts/forge/*.hexa`) 는
-렌즈를 자동 생성하는데, 제어되지 않으면 무한 분기 가능성이 있었다.
+Core draft claims:
+1. The effective number of lenses in the ensemble is <= sigma(6) = 12.
+2. The Forge gate is quantized to tau(6) = 4 steps (identify / match / synthesize / verify).
+3. Each lens decomposes into phi(6) = 2 directions (observation / interpretation).
+4. The ensemble diversity index is bounded above by sopfr(6) = 5.
+
+This paper does not discover a new lens type — it is a seed paper that maps the existing 12 lenses onto the sigma=12 divisor-sum structure.
 
 ---
 
-## 2. COMPARE — 기존 대비
+## 1. Introduction — WHY
 
-| 항목 | 기존 Forge | 본 논문 (ENSEMBLE) |
+The atlas.n6 of n6-architecture is explored through "lenses" (= observation frames). Examples:
+- arithmetic lens — n=6 number-theoretic constants
+- topology lens — topological invariants
+- dynamics lens — temporal dynamics
+
+However, the **theoretical upper bound on the number of lenses** was undetermined. The Forge scripts (`scripts/forge/*.hexa`) auto-generate lenses, and without control there was a risk of infinite branching.
+
+---
+
+## 2. COMPARE — versus legacy
+
+| Item | Legacy Forge | This paper (ENSEMBLE) |
 | :--- | :--- | :--- |
-| 렌즈 수 상한 | 무제한 | σ(6) = 12 |
-| Forge 단계 | 임의 | τ(6) = 4 스텝 |
-| 렌즈 방향 | 1 (관측만) | φ(6) = 2 (관측+해석) |
-| 다양성 | 측정 | sopfr(6) = 5 상한 |
+| Lens-count cap | unbounded | sigma(6) = 12 |
+| Forge steps | arbitrary | tau(6) = 4 steps |
+| Lens direction | 1 (observation only) | phi(6) = 2 (observation + interpretation) |
+| Diversity | measured | sopfr(6) = 5 cap |
 
 ---
 
-## 3. MAIN — 12 렌즈 분류
+## 3. MAIN — 12-lens classification
 
-### 3.1 σ=12 렌즈 목록
+### 3.1 The sigma=12 lens list
 
 ```
-01. 산술 렌즈 (arithmetic) — σ, φ, τ, sopfr
-02. 위상 렌즈 (topology) — 불변량
-03. 기하 렌즈 (geometry) — 곡률
-04. 동학 렌즈 (dynamics) — 어트랙터
-05. 정보 렌즈 (information) — 엔트로피
-06. 양자 렌즈 (quantum) — 중첩/얽힘
-07. 생물 렌즈 (biological) — 세포/유전
-08. 경제 렌즈 (economic) — 가격/거래
-09. 언어 렌즈 (linguistic) — 문법/의미
-10. 역사 렌즈 (historical) — 시간 축
-11. 인지 렌즈 (cognitive) — 인식/해석
-12. 메타 렌즈 (meta) — 렌즈의 렌즈
+01. arithmetic lens — sigma, phi, tau, sopfr
+02. topology lens — invariants
+03. geometry lens — curvature
+04. dynamics lens — attractors
+05. information lens — entropy
+06. quantum lens — superposition / entanglement
+07. biological lens — cells / genes
+08. economic lens — prices / trades
+09. linguistic lens — grammar / meaning
+10. historical lens — temporal axis
+11. cognitive lens — perception / interpretation
+12. meta lens — lens of lenses
 ```
 
-이 12 개는 σ(6)=1+2+3+6=12 의 약수합과 일치. 추가 렌즈는 메타 렌즈에 흡수.
+These 12 match the divisor sum sigma(6)=1+2+3+6=12. Extra lenses are absorbed into the meta lens.
 
-### 3.2 τ=4 Forge 관문
+### 3.2 tau=4 Forge gates
 
-(1) **식별** — 새 데이터에서 패턴 식별
-(2) **매칭** — 기존 12 렌즈와 매칭 시도
-(3) **합성** — 매칭 실패 시 2 렌즈 합성으로 대응
-(4) **검증** — 합성 렌즈가 σ=12 한계 초과 안 함 확인
+(1) **Identify** — identify patterns in new data
+(2) **Match** — attempt to match against the existing 12 lenses
+(3) **Synthesize** — on match failure, synthesize from 2 lenses to cover
+(4) **Verify** — confirm the synthesized lens does not exceed the sigma=12 cap
 
-### 3.3 φ=2 방향
+### 3.3 phi=2 directions
 
-각 렌즈는 (관측, 해석) 쌍으로 구성. 관측만 있는 "raw" 렌즈는 φ=1, 해석을 포함한 "cooked"
-렌즈는 φ=2.
+Each lens is composed as an (observation, interpretation) pair. A "raw" lens with observation only has phi=1; a "cooked" lens including interpretation has phi=2.
 
-### 3.4 sopfr=5 다양성 상한
+### 3.4 sopfr=5 diversity cap
 
-다양성 지수 D = sum(distinct(lens_i)) ≤ 5. 이상 시 중복 병합.
+Diversity index D = sum(distinct(lens_i)) <= 5. On exceedance, duplicates are merged.
 
 ---
 
-## 4. VERIFICATION — 검증
+## 4. VERIFICATION
 
-### 4.1 실측 데이터
+### 4.1 Measured data
 
-- n6-architecture 의 scripts/forge/ 및 techniques/ 에 실측 렌즈 카운트 — 현재 11 렌즈 (σ=12 한계 내)
-- BT-380 (8 AI 패러다임) — 8 < 12 PASS
-- atlas.n6 `lens-forge-count` 노드 EXACT 승격 대상
+- Measured lens count in n6-architecture's scripts/forge/ and techniques/ — currently 11 lenses (within the sigma=12 cap).
+- BT-380 (8 AI paradigms) — 8 < 12 PASS.
+- atlas.n6 `lens-forge-count` node — candidate for EXACT promotion.
 
-### 4.2 허구 데이터 금지
+### 4.2 No fabricated data
 
-실제 forge 스크립트 렌즈 카운트만 인용. 가상 렌즈 생성 금지.
+Only the lens count from actual forge scripts is cited. Virtual lens generation is prohibited.
 
-### 4.3 검증 코드 (hexa STUB)
+### 4.3 Verification code (hexa STUB)
 
 ```hexa
 -- lens_forge_ensemble_verify.hexa
 import forge
 let lenses = forge.list_lenses()
-assert len(lenses) <= 12, "σ=12 상한 위반: 현재 " + str(len(lenses))
+assert len(lenses) <= 12, "sigma=12 cap violated: current " + str(len(lenses))
 for lens in lenses:
-  assert lens.direction_count in [1, 2], "φ 방향 위반"
+  assert lens.direction_count in [1, 2], "phi direction violated"
 let diversity = forge.diversity_index(lenses)
-assert diversity <= 5, "sopfr=5 다양성 상한 위반"
+assert diversity <= 5, "sopfr=5 diversity cap violated"
 print("LENS FORGE PASS", len(lenses), "lenses, D=", diversity)
 ```
 
@@ -183,20 +178,20 @@ print(f"PASS: sigma={sigma_n} (cap), tau={tau_n} (gates), phi={phi_n} (dirs), so
 Run: `python3 -c "$(sed -n '/^```python$/,/^```$/p' n6-lens-forge-ensemble-paper.md | sed '1d;$d')"`
 Expected output: `PASS: sigma=12 (cap), tau=4 (gates), phi=2 (dirs), sopfr=5 (diversity), listed=12, current=11`
 
-### 4.4 한계
+### 4.4 Limitations
 
-- σ=12 상한이 소프트 상한인지 하드 상한인지 미확정
-- 메타 렌즈 (L12) 의 재귀 깊이 제한 필요
-- sopfr=5 다양성 지수 계산 법 정식화 필요
+- Whether the sigma=12 cap is a soft or hard cap is undetermined.
+- The recursion depth of the meta lens (L12) needs an explicit limit.
+- A formal definition of the sopfr=5 diversity index is required.
 
-### 4.5 반증 후보
+### 4.5 Falsification candidates
 
-- 13 번째 독립 렌즈 발견 시 → σ=12 상한 반증
-- 다양성 지수 > 5 인 의미 있는 앙상블 발견 시 → sopfr 상한 반증
+- Discovery of an independent 13th lens -> falsifies the sigma=12 cap.
+- Discovery of a meaningful ensemble with diversity index > 5 -> falsifies the sopfr cap.
 
 ---
 
-## 5. 연결 논문
+## 5. Linked papers
 
 - N6-113 (cross-dse-matrix-112)
 - N6-115 (nexus6-discovery-engine)
@@ -204,10 +199,9 @@ Expected output: `PASS: sigma=12 (cap), tau=4 (gates), phi=2 (dirs), sopfr=5 (di
 
 ---
 
-## 6. 결론
+## 6. Conclusion
 
-12 렌즈 / τ=4 Forge / φ=2 방향 / sopfr=5 다양성 상한. 새 렌즈 주장 없음 — 기존 forge
-구조에 σ=12 약수합 상한 좌표 부여.
+12 lenses / tau=4 Forge / phi=2 directions / sopfr=5 diversity cap. No new-lens claim — we overlay the sigma=12 divisor-sum cap coordinates on the existing forge structure.
 
 ## §1 WHY
 
@@ -298,4 +292,3 @@ This section covers impact per mk for the paper. Initial scaffold content — ex
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-

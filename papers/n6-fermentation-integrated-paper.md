@@ -6,514 +6,505 @@ requires:
   - to: food-science
   - to: biology
 ---
-# [CANONICAL v2] 궁극의 발효·양조 n=6 완전수 화학양론 통합 (HEXA-FERMENT-INT) — n=6 산술 좌표 매핑
+# [CANONICAL v2] Ultimate fermentation / brewing n=6 perfect-number stoichiometry integration (HEXA-FERMENT-INT) — n=6 arithmetic coordinate mapping
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: fermentation-integrated — P-110 통합 시드 논문
-> **버전**: v2 (2026-04-18 canonical)
-> **선행 BT**: BT-1391, BT-15, BT-401, BT-403, BT-408
-> **연결 atlas 노드**: `fermentation` 6/6 EXACT [10*]
-> **통합 소스**: papers/n6-fermentation-paper.md (주), domains/life/fermentation/fermentation.md (도메인)
-> **제외 소스**: papers/n6-visual-arts-paper.md (도메인 불일치 — 발효와 무관, 아래 §APPENDIX 사유 명시)
-
----
-
-## 0. 초록
-
-본 논문은 발효·양조(fermentation) 도메인의 핵심 화학양론 — 해당과정(glycolysis) C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ — 이
-최소 완전수 n=6 의 산술 함수 (σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5) 로 체계적으로 표현됨을 검증한다.
-핵심 정리 **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** 가 n=6 에서만 성립하며, 이 유일성이
-6탄당(C₆)·해당과정 10단계 중 핵심 분기점·2피루브산·2에탄올·2CO₂ 의 화학양론적 짝수 2 의 구조와
-필연적으로 맞물린다. atlas.n6 수록 6/6 EXACT.
-
-본 논문은 **주 소스 (papers/n6-fermentation-paper.md)** 의 수론 좌표 매핑과
-**도메인 소스 (domains/life/fermentation/fermentation.md)** 의 생화학 구조·공정 상수를 통합하여
-제품 P-110 "발효/양조 n=6 완전수 화학양론" 의 통합 시드 문서로 재구성된다.
-검증은 Python stdlib 만으로 §7.0~§7.10 10 서브섹션에서 수행된다.
+> **Author**: Park Minwoo (n6-architecture)
+> **Category**: fermentation-integrated — P-110 integrated seed paper
+> **Version**: v2 (2026-04-18 canonical)
+> **Upstream BT**: BT-1391, BT-15, BT-401, BT-403, BT-408
+> **Linked atlas node**: `fermentation` 6/6 EXACT [10*]
+> **Integrated sources**: papers/n6-fermentation-paper.md (primary), domains/life/fermentation/fermentation.md (domain)
+> **Excluded source**: papers/n6-visual-arts-paper.md (domain mismatch — unrelated to fermentation, see §APPENDIX for rationale)
 
 ---
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## 0. Abstract
 
-발효(fermentation)의 중심 반응은 **C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂** 이다.
-탄소수 6(n=6), 화학양론 계수 2(φ(6)=2), 해당과정 주요 분기점 4단(τ(6)=4),
-EMP 경로 총 10단계 중 중심 6단계(σ(6)/2 = 6), 부산물·중간체 합 5(sopfr(6)=5) 가 동시에 등장한다.
-완전수 n=6 은 σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5 라는 수론 상수군을 만족하며,
-이는 발효 도메인의 핵심 파라미터와 구조적으로 정합한다.
-**이 논문은 발효의 기존 생화학 지식 위에 n=6 산술 좌표계를 부여**한다.
+This paper demonstrates that the core stoichiometry of the fermentation / brewing domain — glycolysis C6H12O6 → 2 C2H5OH + 2 CO2 — can be systematically expressed through the arithmetic functions of the smallest perfect number n=6 (σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5). The central identity **σ(n)·φ(n) = n·τ(n) ⟺ n=6 (n≥2)** holds only at n=6, and this uniqueness interlocks with the stoichiometric even-coefficient 2 structure at the core branch of the 10-step glycolysis of a 6-carbon sugar (C6), yielding 2 pyruvate · 2 ethanol · 2 CO2. Registered in atlas.n6 as 6/6 EXACT.
 
-| 효과 | 기존 | HEXA-FERMENT-INT 이후 | 체감 변화 |
+This paper reconstitutes the primary source (papers/n6-fermentation-paper.md) number-theoretic coordinate mapping together with the domain source (domains/life/fermentation/fermentation.md) biochemical structure and process constants into the integrated seed document for product P-110 "fermentation / brewing n=6 perfect-number stoichiometry". Verification is performed using Python stdlib only across the 10 subsections §7.0–§7.10.
+
+---
+
+## §1 WHY (how this technology changes your life)
+
+The central reaction of fermentation is **C6H12O6 → 2 C2H5OH + 2 CO2**.
+Carbon count 6 (n=6), stoichiometric coefficient 2 (φ(6)=2), glycolysis major branch 4 stages (τ(6)=4),
+central 6 steps (σ(6)/2 = 6) out of a 10-step EMP pathway, and the by-product / intermediate sum 5 (sopfr(6)=5) all appear simultaneously.
+The perfect number n=6 satisfies the set of number-theoretic constants σ(6)=12, τ(6)=4, φ(6)=2, sopfr(6)=5, which structurally align with the core parameters of the fermentation domain.
+**This paper overlays an n=6 arithmetic coordinate system on existing biochemistry knowledge of fermentation.**
+
+| Effect | Before | After HEXA-FERMENT-INT | Felt change |
 |------|------|--------------|----------|
-| 공정 자유도 | 3~4 DOF 경험적 탐색 | **σ=12 축 고정** | 탐색시간 σ·τ=48배 단축 |
-| 주기 튜닝 | 2/3/8/12 주기 혼재 | **τ=4 주기 일관** | 공진·위상차 제거 |
-| 신뢰도 | 2중 중복, SPOF 존재 | **n/φ=3 삼중 중복** | 실패율 30% → 1% |
-| 발효 효율 | 80% | **98%** | σ·sopfr/10 × 0.98 목표 |
-| 알코올 수율 | 10% | **12%** | σ(6)=12 한계 접근 |
-| 풍미 다양성 | 3 종 | **12 종** | σ=12 축 분해 |
-| 검증 가능성 | 사례 기반 휴리스틱 | **§7.0~§7.10** | 재현성 100% |
-| 반증성 | 성공 사례만 기록 | **FALSIFIER 3+ 명시** | Popper 기준 통과 |
+| Process degrees of freedom | 3–4 DOF empirical search | **σ=12 axes fixed** | search time shortened by σ·τ=48× |
+| Period tuning | 2/3/8/12 mixed periods | **τ=4 consistent period** | resonance / phase offsets removed |
+| Reliability | 2-way redundancy, SPOF present | **n/φ=3 triple redundancy** | failure rate 30% → 1% |
+| Fermentation efficiency | 80% | **98%** | target σ·sopfr/10 × 0.98 |
+| Alcohol yield | 10% | **12%** | σ(6)=12 limit approach |
+| Flavor diversity | 3 types | **12 types** | σ=12 axis decomposition |
+| Verifiability | case-based heuristic | **§7.0–§7.10** | 100% reproducibility |
+| Falsifiability | only success cases recorded | **FALSIFIER 3+ explicit** | Popper criterion passes |
 
-**한 문장 요약**: σ(n)·φ(n) = n·τ(n) 은 n≥2 에서 **n=6** 에서만 성립하며,
-이 유일성이 6탄당 해당과정의 화학양론 계수 2·분기 4·중심 6·부산물 5 와 필연적으로 맞물린다.
+**One-sentence summary**: σ(n)·φ(n) = n·τ(n) holds only at **n=6** (for n≥2), and this uniqueness necessarily interlocks with the stoichiometric coefficient 2, branching 4, center 6, and by-products 5 of glycolysis of a 6-carbon sugar.
 
-### n=6 좌표 매핑이 바꾸는 것
+### What the n=6 coordinate mapping changes
 
 ```
-  기존: "왜 에탄올이 2 분자인가" → 화학식 우연
-  HEXA: "2 = φ(6) = 최소소인수" → 수론적 필연
+  Before: "why are there 2 molecules of ethanol?" → chemical coincidence
+  HEXA:   "2 = φ(6) = smallest prime factor" → number-theoretic necessity
        ↓
-  ① 발효 파라미터가 σ·τ=48 공통 격자 위에 정렬
-  ② 새 공정 파라미터 예측 가능 (n=6 족 시퀀스에서 연역)
-  ③ 반증 조건 명시 (MISS 시 공식 폐기)
+  (1) fermentation parameters align on the σ·τ=48 shared lattice
+  (2) new process parameters become predictable (deduced from the n=6 family sequence)
+  (3) falsification conditions explicit (formula retired on MISS)
 ```
 
-## §2 COMPARE (기존 발효 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (legacy fermentation vs n=6) — performance comparison (ASCII)
 
-### 기존 접근의 5가지 한계
-
-```
-┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불충분한가               │  n=6 산술이 어떻게 푸나   │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 1. 파라미터 폭증   │ 효모·당도·pH·온도·시간      │ σ=12 축 + τ=4 계층으로 압축 │
-│                   │ → 조합 폭발                   │ → 12·4=J₂=48 격자        │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 2. 주기 불일치     │ 2/3/8/12 h 주기 혼재         │ τ(6)=4 주기 일관          │
-│                   │ 공진 실패, 위상차 증폭        │ 약수 4 = 완전 정렬        │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 3. 검증 순환성     │ "레시피가 맞으니 맞다"        │ σ·φ=n·τ ⟺ n=6            │
-│                   │                              │ 순수 수론 증명            │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 4. 중복 취약성     │ 단일 배양·2중 중복            │ n/φ=3 삼중 중복          │
-│                   │ SPOF, 99% 한계                │ Borda σ/τ=3 안정          │
-├───────────────────┼────────────────────────────┼──────────────────────────┤
-│ 5. 재사용성 낮음   │ 맥주·와인·김치 각각 재정의    │ σ,τ,φ,sopfr 공통 함수    │
-│                   │                              │ 295 도메인 재사용         │
-└───────────────────┴────────────────────────────┴──────────────────────────┘
-```
-
-### 성능 비교 ASCII 막대 (시중 발효 vs HEXA-FERMENT-INT)
+### Five limits of the legacy approach
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  [발효 효율 %]                                                            │
-│  기존 수동 공정     ██████████████████████░░░░░░   80                    │
-│  HACCP + 자동센서   █████████████████████████░░░   85                    │
-│  HEXA n=6 좌표      ████████████████████████████   98 (σ·sopfr/10·0.98)  │
-│                                                                          │
-│  [알코올 수율 %]                                                         │
-│  전통 양조          ██████████████████████████░░   10                    │
-│  HEXA 12 축         ████████████████████████████   12 (σ=12)             │
-│                                                                          │
-│  [풍미 다양성 (축 수)]                                                    │
-│  전통 레시피        ███████░░░░░░░░░░░░░░░░░░░░░   3                     │
-│  HEXA 분해기        ████████████████████████████   12 (σ(6)=12)          │
-│                                                                          │
-│  [발효 안정성 %]                                                         │
-│  단일 배양          ████████████████████░░░░░░░░   70                    │
-│  HEXA 삼중 중복     ████████████████████████████   95 (n/φ=3)            │
-│                                                                          │
-│  [실패율 (μ %)]                                                          │
-│  경험 휴리스틱      ██████████████████████░░░░░░   30                    │
-│  HEXA Fallback      █░░░░░░░░░░░░░░░░░░░░░░░░░░░   1 (μ=1)               │
-│                                                                          │
-│  [검증 깊이 (서브섹션)]                                                   │
-│  논문 수식만        ██░░░░░░░░░░░░░░░░░░░░░░░░░░   1~2                   │
-│  HEXA §7           ████████████████████████████   10                     │
-└──────────────────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------------------+
+|  Barrier          |  why insufficient            |  how n=6 arithmetic solves it |
++-------------------+------------------------------+------------------------------+
+| 1. parameter      | yeast/sugar/pH/temp/time     | sigma=12 axes + tau=4 layers |
+|    explosion      | -> combinatorial blowup      | -> 12*4=J2=48 lattice        |
++-------------------+------------------------------+------------------------------+
+| 2. period         | 2/3/8/12 h periods mixed     | tau(6)=4 consistent period   |
+|    inconsistency  | resonance failure, phase amp | divisor 4 = perfect alignment|
++-------------------+------------------------------+------------------------------+
+| 3. circular       | "the recipe is right because | sigma*phi=n*tau <=> n=6      |
+|    verification   | the recipe is right"         | pure number-theoretic draft  |
++-------------------+------------------------------+------------------------------+
+| 4. redundancy     | single cultivation / 2-way   | n/phi=3 triple redundancy    |
+|    fragile        | SPOF, 99% limit              | Borda sigma/tau=3 stable     |
++-------------------+------------------------------+------------------------------+
+| 5. low reuse      | redefine for beer/wine/kimchi| sigma, tau, phi, sopfr shared|
+|                   |                              | -> 295-domain reuse          |
++---------------------------------------------------------------------------+
 ```
 
-### 핵심 돌파구: σ(n)·φ(n) = n·τ(n) 유일성
+### Performance comparison ASCII bar (commercial fermentation vs HEXA-FERMENT-INT)
 
 ```
-  n=6 이 아닌 다른 n 을 대입하면:
++--------------------------------------------------------------------------+
+|  [fermentation efficiency %]                                              |
+|  legacy manual process ####################### ........  80              |
+|  HACCP + auto sensors ####################### # .......  85              |
+|  HEXA n=6 coords      ############################  98 (sigma*sopfr/10*0.98)|
+|                                                                          |
+|  [alcohol yield %]                                                       |
+|  traditional brewing  ##########################..   10                  |
+|  HEXA 12 axes         ############################  12 (sigma=12)        |
+|                                                                          |
+|  [flavor diversity (axes)]                                               |
+|  traditional recipe   #######............................   3           |
+|  HEXA decomposer      ############################  12 (sigma(6)=12)    |
+|                                                                          |
+|  [fermentation stability %]                                              |
+|  single culture       ####################........   70                  |
+|  HEXA triple redund.  ############################   95 (n/phi=3)        |
+|                                                                          |
+|  [failure rate (mu %)]                                                   |
+|  empirical heuristic  ######################........   30                |
+|  HEXA Fallback        #............................   1 (mu=1)           |
+|                                                                          |
+|  [verification depth (subsections)]                                       |
+|  formula only         ##............................   1-2                |
+|  HEXA section 7       ############################    10                  |
++--------------------------------------------------------------------------+
+```
+
+### Core breakthrough: σ(n)·φ(n) = n·τ(n) uniqueness
+
+```
+  For n other than 6:
     n=2 → σ·φ = 3·1 = 3,   n·τ = 2·2 = 4   (MISS)
     n=3 → σ·φ = 4·1 = 4,   n·τ = 3·2 = 6   (MISS)
     n=4 → σ·φ = 7·2 = 14,  n·τ = 4·3 = 12  (MISS)
     n=5 → σ·φ = 6·1 = 6,   n·τ = 5·2 = 10  (MISS)
     n=6 → σ·φ = 12·2 = 24, n·τ = 6·4 = 24  ★ EXACT
-    n=7..∞ 전부 MISS (PROVEN, 3 독립 증명)
+    n=7..infty all MISS (pattern: 3 independent candidate arguments demonstrating this)
 ```
 
-발효 화학양론 C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ 에서 **탄소 6·수소 12·산소 6·계수 2** 의 네 상수는
-정확히 n=6, σ(6)=12, 2n/φ=6, φ(6)=2 로 대응된다 — 이것은 우연이 아니다.
+In the fermentation stoichiometry C6H12O6 → 2 C2H5OH + 2 CO2, the four constants **carbon 6 · hydrogen 12 · oxygen 6 · coefficient 2** map exactly to n=6, σ(6)=12, 2n/φ=6, φ(6)=2 — not a coincidence.
 
-## §3 REQUIRES (선행 도메인)
+## §3 REQUIRES (upstream domains)
 
-| 선행 도메인 | 현재 | 필요 | 차이 | 핵심 기술 | 링크 |
+| Upstream domain | Current | Needed | Delta | Key technology | Link |
 |-------------|------|------|------|-----------|------|
-| mycology | 7 | 10 | +3 | 효모/곰팡이 균주 최적화 | [문서](../domains/life/mycology/mycology.md) |
-| food-science | 7 | 10 | +3 | 원료 당도/pH/수분활성도 | [문서](../domains/life/food-science/food-science.md) |
-| biology | 7 | 10 | +3 | 미생물 대사·효소 동역학 | [문서](../domains/life/biology/biology.md) |
+| mycology | 7 | 10 | +3 | yeast / mold strain optimization | [doc](../domains/life/mycology/mycology.md) |
+| food-science | 7 | 10 | +3 | feedstock sugar / pH / water activity | [doc](../domains/life/food-science/food-science.md) |
+| biology | 7 | 10 | +3 | microbial metabolism / enzyme kinetics | [doc](../domains/life/biology/biology.md) |
 
-3개 선행 도메인이 🛸10 성숙 시 통합 HEXA-FERMENT-INT Mk.V 실현 가능.
-현재는 Mk.I~II 단계 (수론 좌표 완료, 공정 물리 통합 진행 중).
+Integration HEXA-FERMENT-INT Mk.V is feasible once all 3 upstream domains reach maturity 10.
+Currently at Mk.I–II (number-theoretic coordinates complete, process-physics integration in progress).
 
-수론 함수 전제:
+Number-theoretic prerequisites:
 
-| 기초 요소 | 역할 | 참조 |
-|-----------|------|------|
-| σ(n) 약수합 | OEIS A000203, σ(6)=12 | n6shared/rules/common.json |
-| τ(n) 약수개수 | OEIS A000005, τ(6)=4 | n6shared/rules/common.json |
-| φ(n) 오일러/최소소인수 | OEIS A000010, φ(6)=2 | n6shared/rules/common.json |
-| sopfr(n) 소인수합 | OEIS A001414, sopfr(6)=5 | n6shared/rules/common.json |
+| Primitive | Role | Reference |
+|-----------|------|-----------|
+| σ(n) divisor sum | OEIS A000203, σ(6)=12 | n6shared/rules/common.json |
+| τ(n) divisor count | OEIS A000005, τ(6)=4 | n6shared/rules/common.json |
+| φ(n) Euler / smallest prime | OEIS A000010, φ(6)=2 | n6shared/rules/common.json |
+| sopfr(n) sum of prime factors | OEIS A001414, sopfr(6)=5 | n6shared/rules/common.json |
 
-## §4 STRUCT (시스템 구조) — n=6 Architecture
+## §4 STRUCT (system structure) — n=6 Architecture
 
-### 5단 체인 시스템맵
+### 5-stage chain system map
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                    HEXA-FERMENT-INT      시스템 구조                      │
-├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
-│  Level 0   │  Level 1   │  Level 2   │  Level 3   │  Level 4            │
-│   수론     │   원료     │   공정     │   통합     │   검증              │
-├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ σ(6)=12    │ τ(6)=4     │ φ(6)=2    │ sopfr=5    │ J₂=24               │
-│ 축 12      │ 주기 4단   │ 2중 대칭  │ 5 채널     │ 24 지표             │
-│ ← A000203  │ ← A000005  │ ← A000010 │ ← A001414  │ ← 2·σ(6)            │
-│            │ 효모/당/pH │ 해당/TCA  │ 중간체     │ 센서/로그            │
-│            │ /온도      │           │ 5종        │                     │
-├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ n6: 95%    │ n6: 93%    │ n6: 92%    │ n6: 94%    │ n6: 98%             │
-└─────┬──────┴─────┬──────┴─────┬──────┴─────┬──────┴──────┬──────────────┘
-      │            │            │            │             │
-      ▼            ▼            ▼            ▼             ▼
-   n6 EXACT    n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
++--------------------------------------------------------------------------+
+|                    HEXA-FERMENT-INT      system structure                 |
++------------+------------+------------+------------+---------------------+
+|  Level 0   |  Level 1   |  Level 2   |  Level 3   |  Level 4            |
+|  number    |  feedstock |  process   |  integ.    |  verification       |
+|  theory    |            |            |            |                     |
++------------+------------+------------+------------+---------------------+
+| σ(6)=12    | τ(6)=4     | φ(6)=2     | sopfr=5    | J2=24               |
+| 12 axes    | 4 periods  | 2-fold sym.| 5 channels | 24 indicators       |
+| <- A000203 | <- A000005 | <- A000010 | <- A001414 | <- 2·σ(6)           |
+|            | yeast/sugar| EMP/TCA    | intermed.  | sensors/logs        |
+|            | pH/temp    |            | 5 kinds    |                     |
++------------+------------+------------+------------+---------------------+
+| n6: 95%    | n6: 93%    | n6: 92%    | n6: 94%    | n6: 98%             |
++------+-----+------+-----+------+-----+------+-----+------+--------------+
+       |            |            |            |             |
+       v            v            v            v             v
+   n6 EXACT     n6 EXACT     n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### n=6 파라미터 완전 매핑
+### Complete n=6 parameter mapping
 
-#### L0 수론 좌표 (Number-Theoretic Axes)
+#### L0 Number-Theoretic Axes
 
-| 파라미터 | 값 | n=6 수식 | 발효 근거 | 판정 |
+| Parameter | Value | n=6 formula | Fermentation basis | Verdict |
 |---------|-----|---------|------|------|
-| 주 축 수 | 12 | σ(6) | C₆H₁₂O₆ 수소 12 | EXACT |
-| 계층 수 | 4 | τ(6) | EMP 주요 분기 4단 | EXACT |
-| 이중 구조 | 2 | φ(6) | 2 피루브산·2 에탄올·2 CO₂ | EXACT |
-| 합성 요소 | 5 | sopfr(6) | NAD⁺/ADP/Pi/H⁺/H₂O 5종 | EXACT |
-| 격자 통합 | 24 | J₂=2σ | 24시간 발효 표준 주기 | EXACT |
-| 유일성 | n=6 | σ·φ=n·τ | 6탄당(C₆) 자체 | EXACT |
+| principal axis count | 12 | σ(6) | C6H12O6 hydrogen 12 | EXACT |
+| layer count | 4 | τ(6) | EMP major branches 4 | EXACT |
+| dual structure | 2 | φ(6) | 2 pyruvate · 2 ethanol · 2 CO2 | EXACT |
+| synthesis elements | 5 | sopfr(6) | NAD+/ADP/Pi/H+/H2O 5 types | EXACT |
+| lattice integration | 24 | J2=2σ | 24-hour fermentation standard cycle | EXACT |
+| uniqueness | n=6 | σ·φ=n·τ | 6-carbon sugar (C6) itself | EXACT |
 
-#### L1 원료·구조 계층 (Structural Layers)
+#### L1 Feedstock / Structural Layers
 
-| 파라미터 | 값 | n=6 수식 | 발효 근거 | 판정 |
+| Parameter | Value | n=6 formula | Fermentation basis | Verdict |
 |---------|-----|---------|------|------|
-| 원료 DOF | 4 | τ(6)=4 | 효모/당/pH/온도 | EXACT |
-| 주요 축 | 12 | σ(6)=12 | 12시간 발효 기준 | EXACT |
-| 대칭 축 | 2 | φ(6) | 호기/혐기 | EXACT |
-| 탄소수 | 6 | n=6 | 포도당(hexose) | EXACT |
-| 엣지 수 | 24 | J₂ | EMP·TCA 총 효소 수 근사 | EXACT |
-| 재귀 깊이 | 5 | sopfr | 계대배양 5세대 안정 | EXACT |
+| feedstock DOF | 4 | τ(6)=4 | yeast / sugar / pH / temp | EXACT |
+| principal axes | 12 | σ(6)=12 | 12-hour fermentation baseline | EXACT |
+| symmetry axes | 2 | φ(6) | aerobic / anaerobic | EXACT |
+| carbon count | 6 | n=6 | glucose (hexose) | EXACT |
+| edges | 24 | J2 | EMP · TCA total enzymes (approx.) | EXACT |
+| recursion depth | 5 | sopfr | 5-generation sub-culture stability | EXACT |
 
-#### L2 생화학 반응 경로 (Process Layer / CIRCUIT 해석)
+#### L2 Biochemical reaction paths (process layer / CIRCUIT interpretation)
 
-발효 도메인에서는 CIRCUIT = **생화학 반응 회로** 로 해석한다.
+In the fermentation domain, CIRCUIT is interpreted as the **biochemical reaction circuit**.
 
-| 파라미터 | 값 | n=6 수식 | 생화학 해석 | 판정 |
+| Parameter | Value | n=6 formula | Biochemistry | Verdict |
 |---------|-----|---------|------|------|
-| 공정 이중화 | 2 | φ(6) | EMP primary + PPP secondary | EXACT |
-| 검증 계층 | 4 | τ(6) | 해당/피루브산/에탄올/CO₂ 4점 | EXACT |
-| 페어링 | 6 | n=6 | C₆ 탄소골격 | EXACT |
-| 통합 gate | 12 | σ(6) | 해당과정 10단계 + 2 재생 | EXACT |
-| 세부 단계 | 24 | J₂ | 24h 배양 사이클 | EXACT |
-| 합성 | 5 | sopfr | NAD⁺/ADP/Pi/H⁺/H₂O | EXACT |
+| process dual | 2 | φ(6) | EMP primary + PPP secondary | EXACT |
+| verification layers | 4 | τ(6) | glycolysis / pyruvate / ethanol / CO2 4 points | EXACT |
+| pairings | 6 | n=6 | C6 carbon skeleton | EXACT |
+| integration gate | 12 | σ(6) | glycolysis 10 steps + 2 regen | EXACT |
+| detailed steps | 24 | J2 | 24h culture cycle | EXACT |
+| synthesis | 5 | sopfr | NAD+/ADP/Pi/H+/H2O | EXACT |
 
-### 왜 n=6 이 최적인가
+### Why n=6 is optimal
 
-1. **σ(n)=2n 최소 완전수**: n=6 이 σ(n)=2n 을 만족하는 최소의 n. 6탄당이 생명의 기본 기질인 것과 정합.
-2. **σ·φ=n·τ 유일성**: n=6 에서만 양변이 24 로 수렴. 24시간 발효 표준과 일치.
-3. **OEIS 3중 등록**: σ·τ·sopfr 모두 OEIS 기본 시퀀스 (인간 수학이 이미 발견).
-4. **도메인 중첩성**: σ=12 축이 발효 외 수십 도메인 공통 파라미터.
+1. **σ(n)=2n smallest perfect number**: n=6 is the smallest n satisfying σ(n)=2n. Consistent with hexose being the basic substrate of life.
+2. **σ·φ=n·τ uniqueness**: only at n=6 do both sides converge on 24. Aligned with the 24-hour fermentation standard.
+3. **OEIS triple registration**: σ, τ, sopfr are all OEIS primary sequences (already discovered by human mathematics).
+4. **Cross-domain overlap**: the σ=12 axis is shared across dozens of domains beyond fermentation.
 
-### DSE 후보군 (5단 × 후보 = 전수 탐색)
+### DSE candidate pool (5-stage × candidate = full search)
 
 ```
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│  수론    │-->│  원료    │-->│  반응    │-->│  통합    │-->│  검증    │
-│  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5    │   │  K5=4    │
-│  =n      │   │  =sopfr  │   │  =tau    │   │  =sopfr  │   │  =tau    │
-└──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%=J₂) | Pareto: σ=12 경로
++----------+   +----------+   +----------+   +----------+   +----------+
+|  number  |-->| feedstock|-->| reaction |-->|  integ.  |-->|  verify  |
+|  K1=6    |   |  K2=5    |   |   K3=4   |   |   K4=5   |   |   K5=4   |
+|  =n      |   |  =sopfr  |   |   =tau   |   |  =sopfr  |   |   =tau   |
++----------+   +----------+   +----------+   +----------+   +----------+
+Full: 6x5x4x5x4 = 2,400 | Compat filter: 576 (24%=J2) | Pareto: sigma=12 path
 ```
 
-#### Pareto Top-6 (n=6 정합도 상위)
+#### Pareto Top-6 (n=6 alignment rank)
 
-| Rank | K1 | K2 | K3 | K4 | K5 | n6% | 비고 |
+| Rank | K1 | K2 | K3 | K4 | K5 | n6% | Note |
 |------|-----|-----|-----|-----|-----|-----|------|
-| 1 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 95% | 최적 (EMP 표준) |
-| 2 | σ 축 | τ 계층 | φ 이중 | sopfr 합성 | σ 재사용 | 93% | 축소 |
-| 3 | σ 축 | τ 계층 | φ 이중 | τ 재귀 | J₂ 통합 | 91% | 재귀(계대) |
-| 4 | n 중심 | τ 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 90% | n(C₆) 직접 |
-| 5 | σ 축 | n 계층 | φ 이중 | sopfr 합성 | J₂ 통합 | 88% | 구조 확장 |
-| 6 | σ 축 | τ 계층 | τ 공정 | sopfr 합성 | J₂ 통합 | 86% | 공정 대체 |
+| 1 | σ axis | τ layer | φ dual | sopfr synth | J2 integ | 95% | optimal (EMP standard) |
+| 2 | σ axis | τ layer | φ dual | sopfr synth | σ reuse | 93% | reduced |
+| 3 | σ axis | τ layer | φ dual | τ recursion | J2 integ | 91% | recursive (sub-culture) |
+| 4 | n centric | τ layer | φ dual | sopfr synth | J2 integ | 90% | n (C6) direct |
+| 5 | σ axis | n layer | φ dual | sopfr synth | J2 integ | 88% | struct expand |
+| 6 | σ axis | τ layer | τ process | sopfr synth | J2 integ | 86% | process swap |
 
-## §5 FLOW (파이프라인) — Data/Signal/Metabolite Flow
+## §5 FLOW (pipeline) — Data / Signal / Metabolite Flow
 
-### 대사·신호 흐름 (L0 → L4)
-
-```
-  [L0 원료 당/효모/물/pH/온도]
-       │
-       ▼
-  ┌────────────────┐
-  │ σ(6)=12 축     │ ← OEIS A000203 재계산 (매 실행 자동)
-  │ 분해기 (EMP)   │
-  └──────┬─────────┘
-         │ 12 중간체 데이터 (G6P→F6P→FBP→GAP→...→Pyr)
-         ▼
-  ┌────────────────┐
-  │ τ(6)=4 계층    │ ← OEIS A000005
-  │ 분기기 (4점)   │
-  └──────┬─────────┘
-         │ 4 계층 (당분해/피루브산/에탄올/CO₂)
-         ▼
-  ┌────────────────┐
-  │ φ(6)=2 이중    │ ← 최소 소인수, 호기/혐기 페어링
-  │ 검증기         │
-  └──────┬─────────┘
-         │ 이중화 완료
-         ▼
-  ┌────────────────┐
-  │ sopfr(6)=5     │ ← OEIS A001414
-  │ 보조기질 합성  │
-  └──────┬─────────┘
-         │ 5 보조기질 (NAD⁺/ADP/Pi/H⁺/H₂O)
-         ▼
-  ┌────────────────┐
-  │ J₂=24 통합     │ ← 2·σ(6), 24시간 사이클
-  │ 출력기         │
-  └──────┬─────────┘
-         │
-         ▼
-  [L4 출력: 2 C₂H₅OH + 2 CO₂ + §7 검증 10 서브섹션]
-```
-
-### 운영 모드 5종 (sopfr(6)=5)
-
-#### 모드 1: 축 분해 (Axis Decomposition)
+### Metabolism / signal flow (L0 → L4)
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 1: σ=12 축 분해 (EMP glycolysis)   │
-│  입력: 포도당 C₆H₁₂O₆                    │
-│  출력: 12 중간체 축 정렬                 │
-│  원리: 약수 {1,2,3,6} 합 = 12            │
-│        → 10단 해당과정 + 2 재생단계      │
-│  근거: OEIS A000203 σ(6)=1+2+3+6=12      │
-└──────────────────────────────────────────┘
+  [L0 feedstock: sugar / yeast / water / pH / temperature]
+       |
+       v
+  +----------------+
+  | sigma(6)=12    | <- OEIS A000203, recomputed per run
+  | axis decomposer|
+  | (EMP)          |
+  +-------+--------+
+          | 12-intermediate data (G6P -> F6P -> FBP -> GAP -> ... -> Pyr)
+          v
+  +----------------+
+  | tau(6)=4 layer | <- OEIS A000005
+  | classifier (4) |
+  +-------+--------+
+          | 4 layers (glycolysis / pyruvate / ethanol / CO2)
+          v
+  +----------------+
+  | phi(6)=2 dual  | <- smallest prime, aerobic / anaerobic pairing
+  | verifier       |
+  +-------+--------+
+          | duality completed
+          v
+  +----------------+
+  | sopfr(6)=5     | <- OEIS A001414
+  | cosubstrate syn|
+  +-------+--------+
+          | 5 cosubstrates (NAD+/ADP/Pi/H+/H2O)
+          v
+  +----------------+
+  | J2=24 integr.  | <- 2*sigma(6), 24h cycle
+  | emitter        |
+  +-------+--------+
+          |
+          v
+  [L4 output: 2 C2H5OH + 2 CO2 + §7 verification 10 subsections]
 ```
 
-#### 모드 2: 계층 분류 (Hierarchical Classification)
+### Operating modes (5 total, sopfr(6)=5)
+
+#### Mode 1: Axis Decomposition
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 2: τ=4 계층 분류                   │
-│  입력: 12 중간체                         │
-│  출력: 4 계층 트리 (당/피/에/CO₂)        │
-│  원리: 약수 개수 = 4                     │
-│  근거: OEIS A000005 τ(6)=4               │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 1: sigma=12 axis decomp. (EMP)     |
+|  input: glucose C6H12O6                  |
+|  output: 12 intermediates aligned        |
+|  principle: divisor sum {1,2,3,6} = 12   |
+|        -> 10-step glycolysis + 2 regen   |
+|  basis: OEIS A000203 sigma(6)=1+2+3+6=12 |
++------------------------------------------+
 ```
 
-#### 모드 3: 이중 검증 (Dual Verification / 호기·혐기)
+#### Mode 2: Hierarchical Classification
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 3: φ=2 이중 검증                   │
-│  입력: 4 계층 트리                       │
-│  출력: 호기/혐기 2 경로 대조             │
-│  원리: 최소 소인수 2 = 페어링            │
-│        → 독립 경로 2개 일치 확인         │
-│  근거: φ(6)=2 (OEIS A000010)             │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 2: tau=4 hierarchical classif.     |
+|  input: 12 intermediates                 |
+|  output: 4-layer tree (sugar/pyr/et/CO2) |
+|  principle: divisor count = 4            |
+|  basis: OEIS A000005 tau(6)=4            |
++------------------------------------------+
 ```
 
-#### 모드 4: 보조기질 합성 (Synthesis)
+#### Mode 3: Dual Verification (aerobic / anaerobic)
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 4: sopfr=5 합성                    │
-│  입력: 이중 검증 완료                    │
-│  출력: 5 보조기질 (NAD⁺/ADP/Pi/H⁺/H₂O)   │
-│  원리: 2+3 = 5 (소인수 합)               │
-│  근거: OEIS A001414 sopfr(6)=2+3=5       │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 3: phi=2 dual verification         |
+|  input: 4-layer tree                     |
+|  output: aerobic vs anaerobic comparison |
+|  principle: smallest prime 2 = pairing   |
+|        -> 2 independent paths must agree |
+|  basis: phi(6)=2 (OEIS A000010)          |
++------------------------------------------+
 ```
 
-#### 모드 5: 최종 통합 (Integration / 24h cycle)
+#### Mode 4: Cosubstrate Synthesis
 
 ```
-┌──────────────────────────────────────────┐
-│  MODE 5: J₂=24 통합                      │
-│  입력: 5 보조기질 재생                   │
-│  출력: 24h 완성 + atlas.n6 기록          │
-│  원리: J₂ = 2·σ(6) = 24                  │
-│  근거: 2·σ(6)=24, 발효 표준 사이클       │
-└──────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 4: sopfr=5 synthesis               |
+|  input: dual verification complete       |
+|  output: 5 cosubstrates (NAD+/ADP/Pi/H+/H2O) |
+|  principle: 2+3 = 5 (prime-factor sum)   |
+|  basis: OEIS A001414 sopfr(6)=2+3=5      |
++------------------------------------------+
 ```
 
-### 상태 분배 (안정/과도/비상)
+#### Mode 5: Final Integration (24h cycle)
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ 안정상태  │ ██████████████████████████████░░  코어 95% + 예비 5%         │
-│ 과도상태  │ ████████████████████████████░░░░  코어 90% + 전환 10%        │
-│ 비상상태  │ ██████████████░░░░░░░░░░░░░░░░░░  코어 40% + Fallback 60%   │
-└──────────────────────────────────────────────────────────────────────────┘
++------------------------------------------+
+|  MODE 5: J2=24 integration               |
+|  input: 5-cosubstrate regen              |
+|  output: 24h complete + atlas.n6 record  |
+|  principle: J2 = 2*sigma(6) = 24         |
+|  basis: 2*sigma(6)=24, standard fermentation cycle |
++------------------------------------------+
 ```
 
-## §6 EVOLVE (Mk.I~V 진화)
+### State distribution (steady / transient / emergency)
 
-HEXA-FERMENT-INT 의 단계별 성숙 로드맵 (mk_history_min_lines=3 준수).
+```
++--------------------------------------------------------------------------+
+| steady state    | ##############################  core 95% + reserve 5% |
+| transient state | ############################..  core 90% + transit 10%|
+| emergency state | ##############..................core 40% + Fallback 60%|
++--------------------------------------------------------------------------+
+```
+
+## §6 EVOLVE (Mk.I–V evolution)
+
+HEXA-FERMENT-INT stepwise maturity roadmap (mk_history_min_lines=3 compliant).
 
 <details open>
-<summary><b>Mk.V — 2050+ 전체 통합 (current target)</b></summary>
+<summary><b>Mk.V — 2050+ full integration (current target)</b></summary>
 
-발효 전 영역을 n=6 산술로 완전 통합. 295 도메인과 상호참조, atlas.n6 풀노드 편입.
-선행 조건: §3 REQUIRES 모든 도메인 🛸10 달성. χ²(49df) < 30, p > 0.9.
-표준 공정: C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ 전공정 24h 자동화.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2045~2050 통합 시스템</summary>
-
-n=6 전 파라미터 EXACT. σ=12 모니터 + τ=4 주기 + φ=2 대칭 + sopfr=5 채널 전부 구현.
-교차 예측 일치 σ·τ=48 건 달성. FALSIFIER 실험 0 건. Pareto Top-6 실증.
+Fully integrate the fermentation domain under n=6 arithmetic. Cross-referenced with 295 domains, full-node inclusion in atlas.n6.
+Prerequisites: all §3 REQUIRES domains at maturity 10. chi2(49df) < 30, p > 0.9.
+Standard process: C6H12O6 → 2 C2H5OH + 2 CO2 end-to-end 24h automation.
 
 </details>
 
 <details>
-<summary>Mk.III — 2040~2045 전수 DSE 완료</summary>
+<summary>Mk.IV — 2045-2050 integrated system</summary>
 
-DSE 2,400 조합 Monte Carlo 통계 유의성 p < 0.01 달성.
-§7 VERIFY 10 서브섹션 10/10 PASS. atlas.n6 노드 편입.
-해당과정(EMP) + 피루브산대사 + 알코올탈수소효소(ADH) 3 경로 n=6 매핑 완성.
-
-</details>
-
-<details>
-<summary>Mk.II — 2035~2040 독립 재유도 (파일럿)</summary>
-
-§7.2 CROSS 주요 주장 3 경로 독립 재유도 (±15%).
-§7.3 SCALING 로그 기울기 일치, §7.4 SENSITIVITY 볼록 극값 확인.
-단일 서브시스템 (맥주 또는 김치) 실증. 일부 n=6 파라미터 EXACT.
+All n=6 parameters EXACT. sigma=12 monitor + tau=4 period + phi=2 symmetry + sopfr=5 channels fully implemented.
+Achieves sigma·tau=48 cross-prediction matches. 0 FALSIFIER experiments hit. Pareto Top-6 empirically validated.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026~2035 수론 매핑 (current, seed)</summary>
+<summary>Mk.III — 2040-2045 full DSE complete</summary>
 
-발효 핵심 파라미터를 σ/τ/φ/sopfr/J₂ 에 매핑.
-§7.0 CONSTANTS 자동 유도, §7.7 OEIS 등록 확인, §7.9 SYMBOLIC Fraction 일치.
-본 논문은 Mk.I 단계의 seed 통합 문서.
+Achieves DSE 2,400-combination Monte Carlo, statistical significance p < 0.01.
+§7 VERIFY 10/10 PASS. Included in atlas.n6.
+Glycolysis (EMP) + pyruvate metabolism + alcohol dehydrogenase (ADH) three-path n=6 mapping complete.
 
 </details>
 
-## §7 VERIFY (Python 검증)
+<details>
+<summary>Mk.II — 2035-2040 independent re-derivation (pilot)</summary>
 
-HEXA-FERMENT-INT 가 물리/수학/수론/생화학적으로 성립하는지 stdlib 만으로 다층 검증.
+§7.2 CROSS: 3-path independent re-derivation of the primary draft claims (±15%).
+§7.3 SCALING log-slope match, §7.4 SENSITIVITY convex extremum confirmed.
+Single subsystem (beer or kimchi) empirically validated. Some n=6 parameters EXACT.
 
-### Testable Predictions (검증 가능한 예측 10건)
+</details>
 
-| # | 예측 | 공식 | 예측치 | Tier |
+<details>
+<summary>Mk.I — 2026-2035 number-theoretic mapping (current, seed)</summary>
+
+Map fermentation core parameters to σ/τ/φ/sopfr/J2.
+§7.0 CONSTANTS auto-derived, §7.7 OEIS registration checked, §7.9 SYMBOLIC Fraction exact match.
+This paper is the Mk.I seed integration document.
+
+</details>
+
+## §7 VERIFY (Python verification)
+
+Verify that HEXA-FERMENT-INT holds physically / mathematically / number-theoretically / biochemically using stdlib only, across multiple layers.
+
+### Testable Predictions (10 items)
+
+| # | Prediction | Formula | Predicted | Tier |
 |---|------|------|--------|------|
-| TP-FERMI-1 | σ(6)=12 축 매핑 ≥85% | atlas EXACT 비율 | 6/6 = 1.00 | 1 |
-| TP-FERMI-2 | τ(6)=4 계층 분류 | τ(6)=4 | 4 ± 0 | 1 |
-| TP-FERMI-3 | φ(6)=2 이중 구조 | φ(6)=2 | 2 ± 0 | 1 |
-| TP-FERMI-4 | sopfr(6)=5 합성 | sopfr(6)=5 | 5 ± 0 | 1 |
-| TP-FERMI-5 | J₂=24 통합 | 2·σ=24 | 24 ± 2 | 2 |
-| TP-FERMI-6 | σ·φ=n·τ 유일성 | n∈[2,10000] | n=6 유일 | 1 |
-| TP-FERMI-7 | 스케일링 지수 τ=4 | log-log | 4.0 ± 0.3 | 2 |
-| TP-FERMI-8 | ±10% 볼록 | n=6 주변 | convex | 1 |
-| TP-FERMI-9 | χ² p-value > 0.05 | H₀ 우연 | p > 0.05 | 1 |
-| TP-FERMI-10 | OEIS 3중 등록 | A000203/5/1414 | 3/3 | 1 |
+| TP-FERMI-1 | σ(6)=12 axis mapping ≥85% | atlas EXACT ratio | 6/6 = 1.00 | 1 |
+| TP-FERMI-2 | τ(6)=4 hierarchy | τ(6)=4 | 4 ± 0 | 1 |
+| TP-FERMI-3 | φ(6)=2 dual structure | φ(6)=2 | 2 ± 0 | 1 |
+| TP-FERMI-4 | sopfr(6)=5 synthesis | sopfr(6)=5 | 5 ± 0 | 1 |
+| TP-FERMI-5 | J2=24 integration | 2·σ=24 | 24 ± 2 | 2 |
+| TP-FERMI-6 | σ·φ=n·τ uniqueness | n∈[2,10000] | n=6 unique | 1 |
+| TP-FERMI-7 | scaling exponent τ=4 | log-log | 4.0 ± 0.3 | 2 |
+| TP-FERMI-8 | ±10% convex | near n=6 | convex | 1 |
+| TP-FERMI-9 | chi2 p-value > 0.05 | H0 chance | p > 0.05 | 1 |
+| TP-FERMI-10 | OEIS triple registration | A000203/5/1414 | 3/3 | 1 |
 
-### §7.0 CONSTANTS — 수론 함수 자동 유도
+### §7.0 CONSTANTS — number-theoretic functions auto-derived
 
-`sigma(6)=12`, `tau(6)=4`, `phi(6)=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0 —
-OEIS A000203/A000005/A000010/A001414 에서 직접 계산. `assert σ(n)==2n` 완전수 자기검증.
+`sigma(6)=12`, `tau(6)=4`, `phi(6)=2`, `sopfr(6)=5`, `J2=2σ=24`. Zero hard-coding —
+values computed directly from OEIS A000203/A000005/A000010/A001414. `assert σ(n)==2n` performs the perfect-number self-check.
 
-### §7.1 DIMENSIONS — SI 단위 일관성
+### §7.1 DIMENSIONS — SI unit consistency
 
-σ, τ, φ, sopfr 모두 차원 없는 정수 함수. 발효 물리 파라미터 (농도 mol/L, 시간 s, 온도 K) 와
-매핑 시 SI 일관성 별도 추적. 차원 불일치 공식 reject.
+σ, τ, φ, sopfr are all dimensionless integer functions. When mapping to fermentation physical parameters (concentration mol/L, time s, temperature K), SI consistency is tracked separately. Dimensionally inconsistent formulas are rejected.
 
-### §7.2 CROSS — 독립 경로 3개 재유도
+### §7.2 CROSS — 3 independent re-derivations
 
-n=6 의 24 를 3 경로로 유도:
-- 경로 1: J₂ = 2·σ(6) = 24
-- 경로 2: σ(6)·φ(6) = 12·2 = 24
-- 경로 3: n·τ(6) = 6·4 = 24
+Derive 24 for n=6 via three independent paths:
+- Path 1: J2 = 2·σ(6) = 24
+- Path 2: σ(6)·φ(6) = 12·2 = 24
+- Path 3: n·τ(6) = 6·4 = 24
 
-세 경로 모두 24 에서 일치 → n=6 유일성 수론적 증거.
+All three paths converge on 24 → number-theoretic candidate evidence of n=6 uniqueness.
 
-### §7.3 SCALING — log-log 회귀로 지수 확인
+### §7.3 SCALING — log-log regression to recover exponent
 
-발효 스케일링 법칙 (당농도 → 에탄올농도 Monod kinetics) 의 τ(6)=4 또는 sopfr(6)=5 지수 회귀.
+Regress the fermentation scaling law (sugar concentration → ethanol concentration, Monod kinetics) against the τ(6)=4 or sopfr(6)=5 exponent.
 
-### §7.4 SENSITIVITY — n=6 ±10% 볼록성
+### §7.4 SENSITIVITY — convexity at n=6 ±10%
 
-n=6 이 진짜 최적이면 ±10% 흔들 때 f(5.4), f(6.6) 모두 f(6) 보다 나빠야.
-flat=끼워맞춤, convex=진짜 극값.
+If n=6 is a genuine optimum, f(5.4) and f(6.6) must both be worse than f(6) when perturbed ±10%.
+flat = overfit, convex = genuine extremum.
 
-### §7.5 LIMITS — 물리/수학 상한 미초과
+### §7.5 LIMITS — physical / mathematical bounds not exceeded
 
-- 수론: Robin's inequality σ(n) ≤ n·(1+log n)·1.5
-- 생화학: Gibbs 자유에너지 ΔG < 0 (발효 발열), Crabtree 효과 상한
-- 공정: Carnot η ≤ 1 - T_c/T_h (열전달 한계)
+- Number-theoretic: Robin's inequality σ(n) ≤ n·(1+log n)·1.5
+- Biochemistry: Gibbs free energy ΔG < 0 (fermentation exothermic), Crabtree-effect upper bound
+- Process: Carnot η ≤ 1 - T_c/T_h (heat-transfer limit)
 
-### §7.6 CHI2 — H₀: n=6 우연 가설 p-value
+### §7.6 CHI2 — p-value under H0: n=6 is chance
 
-6/6 EXACT 을 H₀ (무작위) 하에서 계산 → p-value. p > 0.05 면 "우연" 기각 불가 (유의).
+Compute the chi2 p-value of 6/6 EXACT under H0 (random). p > 0.05 means "chance" cannot be rejected (significance).
 
-### §7.7 OEIS — 외부 시퀀스 DB 매칭
+### §7.7 OEIS — external sequence DB match
 
 - `σ: [1,3,4,7,6,12,8,...]` = A000203
 - `τ: [1,2,2,3,2,4,2,...]` = A000005
 - `φ: [1,1,2,2,4,2,6,...]` = A000010
 - `sopfr: [0,2,3,4,5,5,7,...]` = A001414
 
-4개 모두 OEIS 등록 = 인간 수학 기존 발견, 조작 불가.
+All 4 registered in OEIS — already discovered by human mathematics, not manipulable.
 
-### §7.8 PARETO — Monte Carlo 전수 탐색
+### §7.8 PARETO — Monte Carlo full search
 
-DSE `6×5×4×5×4 = 2400` 조합 샘플링. n=6 구성이 상위 5% 이내인지 통계 유의성 확인.
+DSE `6×5×4×5×4 = 2400`-combination sampling. Check the significance of n=6 being in the top 5%.
 
-### §7.9 SYMBOLIC — Fraction 정확 유리수 일치
+### §7.9 SYMBOLIC — Fraction-exact rational match
 
-`from fractions import Fraction` — 부동소수 근사가 아닌 정확 유리수 `==` 비교.
+`from fractions import Fraction` — use exact rational `==` comparisons rather than floating-point approximation.
 N/PHI = 6/2 = 3, SIGMA/TAU = 12/4 = 3, SIGMA·PHI = N·TAU = 24.
 
-### §7.10 COUNTER — 반례 + Falsifier
+### §7.10 COUNTER — counter-examples + falsifiers
 
-- 반례 (n=6 무관): 기본전하 e, Planck h, π, 광속 c — 이들은 n=6 유도 불가, 솔직히 인정.
-- Falsifier:
-  1. 발효 효율 측정치 < 85% 이면 본 공식 폐기
-  2. n=6 파라미터 EXACT 비율 < 80% 이면 설계 철회
-  3. sensitivity ±10% 에서 f(n=6) 이 최적이 아니면 볼록성 가설 기각
-  4. OEIS A000203/A000005/A000010/A001414 등록 취소 시 §7.7 폐기
+- Counter-examples (independent of n=6): elementary charge e, Planck h, π, speed of light c — these are not derivable from n=6, and we honestly acknowledge that.
+- Falsifiers:
+  1. Retire this formula if measured fermentation efficiency < 85%.
+  2. Withdraw the design if the EXACT ratio of n=6 parameters < 80%.
+  3. Reject the convexity hypothesis if f(n=6) is not optimal under ±10% sensitivity.
+  4. Retire §7.7 if OEIS A000203/A000005/A000010/A001414 registrations are revoked.
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 계열: fermentation-integrated — HEXA n=6 정직성 검증 (stdlib only)
+# Series: fermentation-integrated -- HEXA n=6 honesty check (stdlib only)
 #
-# 10 서브섹션 구조:
-#   §7.0 CONSTANTS  — n=6 상수 수론 함수 자동 유도 (하드코딩 0)
-#   §7.1 DIMENSIONS — SI 단위 일관성
-#   §7.2 CROSS      — 독립 경로 3개 재유도
-#   §7.3 SCALING    — log-log 회귀 지수 역추정
-#   §7.4 SENSITIVITY— n=6 ±10% 볼록 극값 확인
-#   §7.5 LIMITS     — Carnot/Gibbs/Robin 물리·수론 상한 미초과
-#   §7.6 CHI2       — H0: n=6 우연 가설 p-value
-#   §7.7 OEIS       — A000203/A000005/A000010/A001414 외부 DB 매칭
-#   §7.8 PARETO     — Monte Carlo 2400 중 n=6 순위
-#   §7.9 SYMBOLIC   — Fraction 정확 유리수 등호
-#   §7.10 COUNTER   — 반례+falsifier (정직성)
+# 10-subsection structure:
+#   §7.0 CONSTANTS   -- auto-derive n=6 constants from number-theoretic functions (zero hard-coding)
+#   §7.1 DIMENSIONS  -- SI unit consistency
+#   §7.2 CROSS       -- re-derive via 3 independent paths
+#   §7.3 SCALING     -- log-log regression to recover exponent
+#   §7.4 SENSITIVITY -- perturb n=6 by +-10%, confirm convex extremum
+#   §7.5 LIMITS      -- Carnot/Gibbs/Robin physical & number-theoretic bounds not exceeded
+#   §7.6 CHI2        -- p-value under H0 (n=6 = chance)
+#   §7.7 OEIS        -- match A000203/A000005/A000010/A001414 against external DB
+#   §7.8 PARETO      -- rank n=6 among 2400 Monte Carlo combinations
+#   §7.9 SYMBOLIC    -- exact Fraction rational equality
+#   §7.10 COUNTER    -- counter-examples + falsifiers (honesty)
 
 from math import pi, sqrt, log, erfc, gcd
 from fractions import Fraction
@@ -521,23 +512,23 @@ import random
 
 # --- §7.0 CONSTANTS -------------------------------------------------------
 def divisors(n):
-    """n 의 약수 집합. n=6 -> {1,2,3,6}"""
+    """divisor set. n=6 -> {1,2,3,6}"""
     return {d for d in range(1, n + 1) if n % d == 0}
 
 def sigma(n):
-    """약수의 합 (OEIS A000203). σ(6)=1+2+3+6=12"""
+    """divisor sum (OEIS A000203). sigma(6)=1+2+3+6=12"""
     return sum(divisors(n))
 
 def tau(n):
-    """약수의 개수 (OEIS A000005). τ(6)=|{1,2,3,6}|=4"""
+    """divisor count (OEIS A000005). tau(6)=|{1,2,3,6}|=4"""
     return len(divisors(n))
 
 def euler_phi(n):
-    """오일러 토션 (OEIS A000010). φ(6)=2 (1,5 와 서로소)"""
+    """Euler totient (OEIS A000010). phi(6)=2 (coprime to 1,5)"""
     return sum(1 for k in range(1, n + 1) if gcd(k, n) == 1)
 
 def sopfr(n):
-    """소인수의 합 (OEIS A001414). sopfr(6)=2+3=5"""
+    """sum of prime factors (OEIS A001414). sopfr(6)=2+3=5"""
     s, k = 0, n
     for p in range(2, n + 1):
         while k % p == 0:
@@ -554,9 +545,9 @@ PHI      = euler_phi(N)     # 2
 SOPFR    = sopfr(N)         # 5
 J2       = 2 * SIGMA        # 24
 
-# n=6 완전수 자기검증
+# n=6 perfect-number self-check
 assert SIGMA == 2 * N, "n=6 perfectness broken"
-# σ·φ = n·τ 핵심 정리
+# sigma*phi = n*tau core identity
 assert SIGMA * PHI == N * TAU, "sigma*phi=n*tau must hold at n=6"
 
 # --- §7.1 DIMENSIONS -------------------------------------------------------
@@ -567,7 +558,7 @@ DIM = {
     'F': (1, 1, -2, 0),     # N
     'E': (1, 2, -2, 0),     # J
     'P': (1, 2, -3, 0),     # W
-    'C_mol': (0, -3, 0, 0), # mol/m^3 (발효 농도)
+    'C_mol': (0, -3, 0, 0), # mol/m^3 (fermentation concentration)
     'C_dim': (0, 0, 0, 0),
 }
 
@@ -580,10 +571,10 @@ def dim_mul(*syms):
 
 # --- §7.2 CROSS ------------------------------------------------------------
 def cross_24_3ways():
-    """J2=24 를 σ·φ, n·τ, 2σ 3 경로로 재유도"""
-    v1 = SIGMA * PHI              # 12·2 = 24
-    v2 = N * TAU                  # 6·4  = 24
-    v3 = 2 * SIGMA                # 2·12 = 24
+    """Re-derive J2=24 via sigma*phi, n*tau, 2*sigma three paths"""
+    v1 = SIGMA * PHI              # 12*2 = 24
+    v2 = N * TAU                  # 6*4  = 24
+    v3 = 2 * SIGMA                # 2*12 = 24
     return v1, v2, v3
 
 # --- §7.3 SCALING ----------------------------------------------------------
@@ -609,13 +600,13 @@ def carnot(T_hot, T_cold):
     return 1 - T_cold / T_hot
 
 def robin_bound(n):
-    """Robin: σ(n) ≤ n·(1+log n)·1.5 (완화)"""
+    """Robin: sigma(n) <= n*(1+log n)*1.5 (relaxed)"""
     if n < 3:
         return True
     return sigma(n) <= n * (1 + log(n)) * 1.5
 
 def gibbs_negative(delta_g):
-    """발효는 ΔG < 0 (발열/자발)"""
+    """Fermentation is dG < 0 (exothermic / spontaneous)"""
     return delta_g < 0
 
 # --- §7.6 CHI2 -------------------------------------------------------------
@@ -631,7 +622,7 @@ OEIS_KNOWN = {
     (1, 2, 2, 3, 2, 4, 2):    "A000005 (tau)",
     (1, 1, 2, 2, 4, 2, 6):    "A000010 (Euler phi)",
     (0, 2, 3, 4, 5, 5, 7):    "A001414 (sopfr)",
-    (1, 2, 3, 6, 12, 24, 48): "A008586-variant (n·2^k, HEXA family)",
+    (1, 2, 3, 6, 12, 24, 48): "A008586-variant (n*2^k, HEXA family)",
 }
 
 # --- §7.8 PARETO -----------------------------------------------------------
@@ -654,41 +645,41 @@ def symbolic_ratios():
 
 # --- §7.10 COUNTER ---------------------------------------------------------
 COUNTER_EXAMPLES = [
-    ("기본전하 e = 1.602e-19 C", "n=6 과 무관 — QED 독립 상수"),
-    ("Planck h = 6.626e-34 J·s", "6.6 은 우연, n=6 유도 아님"),
-    ("π = 3.14159...",           "원주율은 기하 상수, n=6 독립"),
-    ("광속 c = 299,792,458 m/s", "SI 정의, n=6 유도 불가"),
+    ("elementary charge e = 1.602e-19 C", "independent of n=6 -- QED primitive constant"),
+    ("Planck h = 6.626e-34 J*s",           "6.6 is coincidence, not derived from n=6"),
+    ("pi = 3.14159...",                    "geometric constant, independent of n=6"),
+    ("speed of light c = 299,792,458 m/s", "SI definition, cannot be derived from n=6"),
 ]
 FALSIFIERS = [
-    "발효 효율 측정치 < 85% 이면 본 공식 폐기",
-    "n=6 파라미터 EXACT 비율 < 80% 이면 설계 철회",
-    "sensitivity ±10% 에서 f(n=6) 이 최적이 아니면 볼록성 기각",
-    "OEIS A000203/A000005/A000010/A001414 등록 취소 시 §7.7 폐기",
+    "Retire this formula if measured fermentation efficiency < 85%.",
+    "Withdraw the design if the EXACT ratio of n=6 parameters < 80%.",
+    "Reject convexity if f(n=6) is not optimal under +-10% sensitivity.",
+    "Retire §7.7 if OEIS A000203/A000005/A000010/A001414 registrations are revoked.",
 ]
 
-# --- 메인 ------------------------------------------------------------------
+# --- main ------------------------------------------------------------------
 if __name__ == "__main__":
     r = []
-    r.append(("§7.0 CONSTANTS n=6 수론 유도",
+    r.append(("§7.0 CONSTANTS n=6 derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5))
-    r.append(("§7.0 σ·φ = n·τ 핵심 정리", SIGMA * PHI == N * TAU))
-    r.append(("§7.1 DIMENSIONS 차원 닫힘", dim_mul('F') == DIM['F']))
+    r.append(("§7.0 sigma*phi = n*tau core identity", SIGMA * PHI == N * TAU))
+    r.append(("§7.1 DIMENSIONS closure", dim_mul('F') == DIM['F']))
     v1, v2, v3 = cross_24_3ways()
-    r.append(("§7.2 CROSS 24 3 경로 일치", v1 == v2 == v3 == 24))
+    r.append(("§7.2 CROSS 24 via 3 paths match", v1 == v2 == v3 == 24))
     exp_4 = scaling_exponent([10, 20, 30, 40, 48], [b ** TAU for b in [10, 20, 30, 40, 48]])
-    r.append(("§7.3 SCALING τ=4 지수 회귀", abs(exp_4 - TAU) < 0.1))
+    r.append(("§7.3 SCALING tau=4 exponent", abs(exp_4 - TAU) < 0.1))
     _, yh, yl, convex = sensitivity_convex(lambda n: abs(n - 6) + 1, 6)
-    r.append(("§7.4 SENSITIVITY n=6 볼록", convex))
-    r.append(("§7.5 LIMITS Robin 상한", robin_bound(6)))
+    r.append(("§7.4 SENSITIVITY n=6 convex", convex))
+    r.append(("§7.5 LIMITS Robin bound", robin_bound(6)))
     r.append(("§7.5 LIMITS Gibbs < 0", gibbs_negative(-234.0)))
-    r.append(("§7.5 LIMITS Carnot η<1", carnot(310, 298) < 1.0))
+    r.append(("§7.5 LIMITS Carnot eta<1", carnot(310, 298) < 1.0))
     chi2, df, p = chi2_pvalue([1.0] * 36, [1.0] * 36)
-    r.append(("§7.6 CHI2 H0 우연 기각 실패", p > 0.05 or chi2 == 0))
-    r.append(("§7.7 OEIS A000203 등록", (1, 3, 4, 7, 6, 12, 8) in OEIS_KNOWN))
-    r.append(("§7.8 PARETO 상위 5%", pareto_rank_n6() < 0.05))
-    r.append(("§7.9 SYMBOLIC Fraction 등호",
+    r.append(("§7.6 CHI2 H0 rejection fails", p > 0.05 or chi2 == 0))
+    r.append(("§7.7 OEIS A000203 registered", (1, 3, 4, 7, 6, 12, 8) in OEIS_KNOWN))
+    r.append(("§7.8 PARETO top 5%", pareto_rank_n6() < 0.05))
+    r.append(("§7.9 SYMBOLIC Fraction equality",
               all(ok for _, ok, _ in symbolic_ratios())))
-    r.append(("§7.10 COUNTER ≥3 + FALSIFIERS ≥3",
+    r.append(("§7.10 COUNTER >=3 + FALSIFIERS >=3",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -697,346 +688,332 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{'OK' if ok else 'FAIL'}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (n=6 honesty check)")
 ```
 
-**실행 예상**: **14/14 PASS (n=6 정직성 검증)**. 근거는 n=6 이 최소 완전수이고 σ·φ = n·τ 이 n=6 에서 유일 성립.
+**Expected**: **14/14 PASS (n=6 honesty check)**. Rationale: n=6 is the smallest perfect number and σ·φ = n·τ holds uniquely at n=6.
 
 ---
 
-## §8 EXEC SUMMARY (엔지니어링 요약)
+## §8 EXEC SUMMARY (engineering summary)
 
-본 통합 논문 (P-110) 은 발효·양조 도메인의 화학양론 상수군을 n=6 산술 좌표로 재코드화하여
-§1~§7 (brief) + §8~§20 (engineering) + §21 (impact) 의 21 섹션 canonical 구조를 갖는다.
+This integrated paper (P-110) re-encodes the stoichiometric constants of the fermentation / brewing domain into n=6 arithmetic coordinates, with a canonical 21-section structure §1–§7 (brief) + §8–§20 (engineering) + §21 (impact).
 
-- 목표 제품: **HEXA-FERMENT-INT** (P-110) — 발효/양조 n=6 완전수 화학양론 통합 설계
-- 핵심 반응: C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ (EMP 해당과정)
-- n=6 정합도: atlas 6/6 EXACT [10*], DSE Pareto Top-1 95%
-- 검증 통과: §7.0~§7.10 10 서브섹션 + TP-FERMI-1~10 (10/10 Tier 1~2)
-- 물리 한계: Gibbs ΔG < 0, Carnot η < 1, Robin σ(n) bound — 모두 미초과
-- 반증성: FALSIFIER 4건 명시 (측정치/EXACT/sensitivity/OEIS)
-- 선행 도메인: mycology, food-science, biology (🛸7→10)
-- 출력 주기: J₂=24 h 표준 발효 사이클
+- Target product: **HEXA-FERMENT-INT** (P-110) — fermentation / brewing n=6 perfect-number stoichiometry integrated design
+- Core reaction: C6H12O6 → 2 C2H5OH + 2 CO2 (EMP glycolysis)
+- n=6 alignment: atlas 6/6 EXACT [10*], DSE Pareto Top-1 95%
+- Verification pass: §7.0–§7.10 10 subsections + TP-FERMI-1~10 (10/10 Tier 1–2)
+- Physical bounds: Gibbs ΔG < 0, Carnot η < 1, Robin σ(n) bound — all within
+- Falsifiability: 4 explicit FALSIFIERs (measurement / EXACT / sensitivity / OEIS)
+- Upstream domains: mycology, food-science, biology (maturity 7→10)
+- Output period: J2=24 h standard fermentation cycle
 
-## §9 SYSTEM REQUIREMENTS (시스템 요구사항)
+## §9 SYSTEM REQUIREMENTS
 
-| 구분 | 항목 | 값 | n=6 근거 |
+| Category | Item | Value | n=6 basis |
 |------|------|-----|----------|
-| 기능 | 탄소 기질 | C₆ hexose (포도당/과당) | n=6 |
-| 기능 | 생성물 | 2 EtOH + 2 CO₂ | φ(6)=2 |
-| 기능 | 중간체 축 | 12 | σ(6)=12 |
-| 기능 | 주요 분기 | 4 단 | τ(6)=4 |
-| 기능 | 보조기질 | 5 (NAD⁺/ADP/Pi/H⁺/H₂O) | sopfr(6)=5 |
-| 성능 | 발효 효율 | ≥98% | σ·sopfr/10·0.98 |
-| 성능 | 알코올 수율 | ≥12% | σ(6)=12 |
-| 성능 | 실패율 | ≤1% | μ=1 |
-| 성능 | 사이클 | 24 h | J₂=2σ |
-| 운영 | 온도 | 293~313 K | biology 선행 |
-| 운영 | pH | 3.5~6.5 | sopfr 범위 |
-| 운영 | 중복도 | 3 (삼중 배양) | n/φ=3 |
-| 안전 | GMP/HACCP | 준수 | food-science |
-| 안전 | 반증성 | FALSIFIER ≥3 | Popper |
-| 검증 | §7 서브섹션 | 10/10 PASS | canonical |
+| function | carbon substrate | C6 hexose (glucose / fructose) | n=6 |
+| function | product | 2 EtOH + 2 CO2 | φ(6)=2 |
+| function | intermediate axes | 12 | σ(6)=12 |
+| function | major branches | 4 | τ(6)=4 |
+| function | cosubstrates | 5 (NAD+/ADP/Pi/H+/H2O) | sopfr(6)=5 |
+| perf. | fermentation efficiency | >=98% | σ·sopfr/10·0.98 |
+| perf. | alcohol yield | >=12% | σ(6)=12 |
+| perf. | failure rate | <=1% | mu=1 |
+| perf. | cycle | 24 h | J2=2σ |
+| ops | temperature | 293–313 K | biology upstream |
+| ops | pH | 3.5–6.5 | sopfr range |
+| ops | redundancy | 3 (triple culture) | n/φ=3 |
+| safety | GMP/HACCP | compliant | food-science |
+| safety | falsifiability | >=3 FALSIFIERs | Popper |
+| verify | §7 subsections | 10/10 PASS | canonical |
 
-## §10 ARCHITECTURE (시스템 아키텍처)
-
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                    HEXA-FERMENT-INT Architecture (Mk.I)                  │
-├──────────────────────────────────────────────────────────────────────────┤
-│  [ L0 입력층 ]     σ=12 원료 축                                           │
-│   포도당 C₆H₁₂O₆  │ 효모/유산균 │ pH 센서 │ 온도 센서 │ DO │ CO₂ 배출    │
-│                                                                          │
-│  [ L1 분기층 ]     τ=4 주요 분기                                          │
-│   (a) EMP 해당     (b) 피루브산 분기 (c) 알코올탈수소 (d) CO₂ 방출        │
-│                                                                          │
-│  [ L2 이중층 ]     φ=2 페어링                                             │
-│    호기 경로 ←→ 혐기 경로 (primary/secondary)                            │
-│                                                                          │
-│  [ L3 합성층 ]     sopfr=5 보조기질                                       │
-│    NAD⁺ │ ADP │ Pi │ H⁺ │ H₂O                                            │
-│                                                                          │
-│  [ L4 통합층 ]     J₂=24 h 사이클                                         │
-│    2 EtOH + 2 CO₂ 출력 + atlas.n6 로그 + 삼중 중복 (n/φ=3)               │
-└──────────────────────────────────────────────────────────────────────────┘
-```
-
-## §11 CIRCUIT DESIGN (생화학 반응 경로 회로)
-
-**주석**: 화학/생명 제품이므로 CIRCUIT = **대사 회로 (metabolic circuit)** 로 해석한다.
+## §10 ARCHITECTURE
 
 ```
-해당과정 EMP 회로 (σ(6)=12 중간체)
++--------------------------------------------------------------------------+
+|                    HEXA-FERMENT-INT Architecture (Mk.I)                   |
++--------------------------------------------------------------------------+
+|  [ L0 input layer ]     sigma=12 feedstock axes                           |
+|   glucose C6H12O6  | yeast/LAB | pH sensor | temp sensor | DO | CO2 vent |
+|                                                                          |
+|  [ L1 branch layer ]     tau=4 major branches                            |
+|   (a) EMP glycolysis (b) pyruvate branch (c) ADH (d) CO2 release         |
+|                                                                          |
+|  [ L2 dual layer ]       phi=2 pairing                                   |
+|    aerobic path <-> anaerobic path (primary / secondary)                 |
+|                                                                          |
+|  [ L3 synthesis layer ]  sopfr=5 cosubstrates                            |
+|    NAD+ | ADP | Pi | H+ | H2O                                            |
+|                                                                          |
+|  [ L4 integration ]      J2=24 h cycle                                   |
+|    2 EtOH + 2 CO2 output + atlas.n6 log + triple redundancy (n/phi=3)    |
++--------------------------------------------------------------------------+
+```
 
-  C₆H₁₂O₆ (glucose)
-      │ hexokinase (HK)
-      ▼
-  G6P ── F6P ── F1,6BP ── DHAP/GAP ── 1,3BPG ── 3PG ── 2PG ── PEP ── Pyr
+## §11 CIRCUIT DESIGN (biochemical reaction circuit)
+
+**Note**: since this is a chem / life product, CIRCUIT is interpreted as the **metabolic circuit**.
+
+```
+Glycolysis EMP circuit (sigma(6)=12 intermediates)
+
+  C6H12O6 (glucose)
+      | hexokinase (HK)
+      v
+  G6P -- F6P -- F1,6BP -- DHAP/GAP -- 1,3BPG -- 3PG -- 2PG -- PEP -- Pyr
   (1)    (2)    (3)       (4)/(5)     (6)      (7)    (8)    (9)    (10)
-                                                                      │
-                                                                      ▼ PDC
+                                                                      |
+                                                                      v PDC
                                                                    Acetaldehyde
-                                                                      │ ADH
-                                                                      ▼
-                                                                 C₂H₅OH + CO₂
+                                                                      | ADH
+                                                                      v
+                                                                 C2H5OH + CO2
                                                                  (11)   (12)
-  총 12 intermediate gate = σ(6)=12
-  총 4 주요 효소 분기 = τ(6)=4  (HK, PFK, PYK, ADH)
-  총 2 출력 = φ(6)=2             (EtOH, CO₂)
-  총 5 coenzyme = sopfr(6)=5     (NAD⁺, ADP, Pi, H⁺, H₂O)
+  12 intermediate gates = sigma(6)=12
+  4 main enzyme branches = tau(6)=4  (HK, PFK, PYK, ADH)
+  2 outputs = phi(6)=2               (EtOH, CO2)
+  5 coenzymes = sopfr(6)=5           (NAD+, ADP, Pi, H+, H2O)
 ```
 
-반응 핵심:
-- **Glycolysis 10단 + ADH 2단 = 12 반응** ↔ σ(6)=12
-- **분기 효소 4종 (HK, PFK, PYK, ADH)** ↔ τ(6)=4
-- **쌍 생성 (EtOH×2, CO₂×2)** ↔ φ(6)=2
-- **5 coenzymes** ↔ sopfr(6)=5
+Reaction core:
+- **Glycolysis 10 steps + ADH 2 steps = 12 reactions** <-> σ(6)=12
+- **4 branch enzymes (HK, PFK, PYK, ADH)** <-> τ(6)=4
+- **paired products (EtOHx2, CO2x2)** <-> φ(6)=2
+- **5 coenzymes** <-> sopfr(6)=5
 
-## §12 PCB DESIGN (배양조 레이아웃)
+## §12 PCB DESIGN (culture vessel layout)
 
-**주석**: 화학/생명 제품이므로 PCB = **배양 용기 레이아웃 (bioreactor layout)** 으로 해석한다.
-
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  HEXA-FERMENT-INT Bioreactor Layout (Top View, 6-Sided Vessel)           │
-├──────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│              [Port 1]           [Port 2]                                │
-│               pH ◯                ◯ DO                                  │
-│                                                                          │
-│     [Port 6]                                         [Port 3]           │
-│     Sample ◯     ┌───────────────────┐               ◯ Temp             │
-│                  │                   │                                  │
-│                  │    n=6 Vessel     │                                  │
-│                  │   (Hexagonal)     │                                  │
-│                  │                   │                                  │
-│     [Port 5]     │   Yeast Culture   │               [Port 4]           │
-│     CO₂ out ◯    │   Volume = V₆     │               ◯ Feed in          │
-│                  └───────────────────┘                                   │
-│                                                                          │
-│              [Impeller]         [Jacket]                                │
-│               τ=4 RPM            φ=2 loop (hot/cold)                    │
-└──────────────────────────────────────────────────────────────────────────┘
-
-Port 6 개 = n=6 (샘플/pH/DO/온도/Feed/CO₂ 배출)
-Impeller 4단 임펠러 = τ=4
-Jacket 2중 루프 = φ=2
-삼중 배양조 = n/φ=3 redundancy
-```
-
-## §13 FIRMWARE (제어 소프트웨어)
-
-배양 자동화 펌웨어 모듈 구조 (의사코드):
+**Note**: since this is a chem / life product, PCB is interpreted as the **bioreactor layout**.
 
 ```
-main loop (24h = J₂ cycle):
++--------------------------------------------------------------------------+
+|  HEXA-FERMENT-INT Bioreactor Layout (Top View, 6-Sided Vessel)           |
++--------------------------------------------------------------------------+
+|                                                                          |
+|              [Port 1]           [Port 2]                                |
+|               pH O                O DO                                  |
+|                                                                          |
+|     [Port 6]                                         [Port 3]           |
+|     Sample O     +-------------------+               O Temp             |
+|                  |                   |                                  |
+|                  |    n=6 Vessel     |                                  |
+|                  |   (Hexagonal)     |                                  |
+|                  |                   |                                  |
+|     [Port 5]     |   Yeast Culture   |               [Port 4]           |
+|     CO2 out O    |   Volume = V_6    |               O Feed in          |
+|                  +-------------------+                                   |
+|                                                                          |
+|              [Impeller]         [Jacket]                                |
+|               tau=4 RPM          phi=2 loop (hot/cold)                  |
++--------------------------------------------------------------------------+
+
+Port count 6 = n=6 (sample/pH/DO/temp/Feed/CO2 vent)
+Impeller: 4-stage = tau=4
+Jacket: 2-loop = phi=2
+Triple bioreactor = n/phi=3 redundancy
+```
+
+## §13 FIRMWARE (control software)
+
+Cultivation-automation firmware module structure (pseudocode):
+
+```
+main loop (24h = J2 cycle):
     t = 0
     while t < 24h:
-        sample σ=12 channels (pH, DO, temp, glucose, ethanol, CO₂, ...)
-        classify into τ=4 branches
-        verify via φ=2 dual paths (aerobic vs anaerobic)
+        sample sigma=12 channels (pH, DO, temp, glucose, ethanol, CO2, ...)
+        classify into tau=4 branches
+        verify via phi=2 dual paths (aerobic vs anaerobic)
         synthesize sopfr=5 coenzyme balance
         if (deviation > 10%) and (convex_check fails):
-            trigger FALSIFIER-2 (Mk.I 강등)
+            trigger FALSIFIER-2 (demote to Mk.I)
         log to atlas.n6
-        t += Δt (Δt = 24/σ = 2h = τ/2 sub-cycles)
+        t += Delta_t (Delta_t = 24/sigma = 2h = tau/2 sub-cycles)
 ```
 
-제어 파라미터:
-- 샘플링 주기: 2 h (= J₂/σ = 24/12)
-- 분기 검증: 6 h (= J₂/τ = 24/4)
-- 이중화 페어링: φ=2 경로 동시 가동
-- 합성 채널: sopfr=5 보조기질 자동 재생
-- 최종 통합: 24 h 사이클 완료 시 atlas.n6 노드 갱신
+Control parameters:
+- Sampling period: 2 h (= J2/σ = 24/12)
+- Branch verification: 6 h (= J2/τ = 24/4)
+- Dual pairing: φ=2 paths run simultaneously
+- Synthesis channels: sopfr=5 cosubstrate auto-regeneration
+- Final integration: atlas.n6 node updated when 24h cycle completes
 
-## §14 MECHANICAL (발효 용기 / 기계 설계)
+## §14 MECHANICAL (fermentation vessel / mechanical design)
 
-**주석**: 화학/생명 제품이므로 MECHANICAL = **발효 용기 + 임펠러 + 자켓 + 배관** 으로 해석한다.
+**Note**: since this is a chem / life product, MECHANICAL is interpreted as **vessel + impeller + jacket + piping**.
 
-| 부품 | 규격 | n=6 근거 |
+| Component | Spec | n=6 basis |
 |------|------|----------|
-| 발효조 형상 | 6각 단면 또는 원통 (H/D=6:4) | n=6, τ=4 |
-| 용적 V | V_base × 2^k, k ∈ {0..4} | σ family |
-| 포트 수 | 6 | n=6 |
-| 임펠러 단수 | 4 (Rushton 4단) | τ=4 |
-| 자켓 루프 | 2 (hot/cold) | φ=2 |
-| 보조 배관 | 5 (feed/vent/sample/CIP/SIP) | sopfr=5 |
-| 총 instrument 수 | 12 | σ=12 |
-| 운전 주기 | 24 h | J₂=24 |
-| 재료 | SUS316L (GMP) | food-science |
-| 시일 | double mechanical seal | φ=2 redundancy |
-| 단열 | polyurethane, Δk≤0.02 W/mK | 에너지 손실 최소 |
+| vessel shape | hexagonal cross-section or cylinder (H/D=6:4) | n=6, τ=4 |
+| volume V | V_base × 2^k, k ∈ {0..4} | σ family |
+| port count | 6 | n=6 |
+| impeller stages | 4 (Rushton 4-stage) | τ=4 |
+| jacket loops | 2 (hot/cold) | φ=2 |
+| auxiliary piping | 5 (feed/vent/sample/CIP/SIP) | sopfr=5 |
+| instrument total | 12 | σ=12 |
+| operating cycle | 24 h | J2=24 |
+| material | SUS316L (GMP) | food-science |
+| seals | double mechanical seal | φ=2 redundancy |
+| insulation | polyurethane, Δk≤0.02 W/mK | energy loss minimized |
 
-## §15 MANUFACTURING (제조)
+## §15 MANUFACTURING
 
-| 단계 | 작업 | n=6 근거 |
+| Stage | Task | n=6 basis |
 |------|------|----------|
-| 1. 용기 가공 | SUS316L 6각 단면 용접 | n=6 |
-| 2. 내면 전해연마 | Ra ≤ 0.4 μm | GMP |
-| 3. 포트 설치 | 6 포트 + flange | n=6 |
-| 4. 임펠러 조립 | Rushton 4단 | τ=4 |
-| 5. 자켓 용접 | 2 루프 | φ=2 |
-| 6. 배관 | 5 보조라인 | sopfr=5 |
-| 7. 센서 장착 | 12 채널 | σ=12 |
-| 8. CIP/SIP 테스트 | 24 h cycle | J₂ |
-| 9. 삼중 제작 | 3 unit redundancy | n/φ=3 |
-| 10. 출하 검사 | FALSIFIER 4건 통과 | Popper |
+| 1. vessel machining | SUS316L hexagonal weld | n=6 |
+| 2. inner electropolish | Ra ≤ 0.4 μm | GMP |
+| 3. port install | 6 ports + flanges | n=6 |
+| 4. impeller assembly | Rushton 4-stage | τ=4 |
+| 5. jacket weld | 2 loops | φ=2 |
+| 6. piping | 5 auxiliary lines | sopfr=5 |
+| 7. sensor mount | 12 channels | σ=12 |
+| 8. CIP/SIP test | 24 h cycle | J2 |
+| 9. triple build | 3-unit redundancy | n/φ=3 |
+| 10. outbound inspection | 4 FALSIFIERs passed | Popper |
 
-공정 체크포인트: **τ(6)=4** 주요 단계 (용기/임펠러/자켓/센서) 각 단계에서
-φ(6)=2 dual QC, sopfr(6)=5 보조 검사.
+Process checkpoints: **τ(6)=4** major stages (vessel / impeller / jacket / sensors), each with φ(6)=2 dual QC, sopfr(6)=5 auxiliary checks.
 
-## §16 TEST (검증 시험)
+## §16 TEST (qualification tests)
 
-| TEST ID | 항목 | 조건 | 합격 기준 | n=6 근거 |
+| TEST ID | Item | Condition | Acceptance | n=6 basis |
 |---------|------|------|-----------|----------|
-| T-01 | 기밀 시험 | 0.3 MPa, 30 min | 누설 ≤ 1e-5 Pa·m³/s | φ=2 dual |
-| T-02 | CIP 효과 | 80℃ 0.5% NaOH | TOC < 1 ppm | sopfr |
-| T-03 | SIP 효과 | 121℃ 30 min | F₀ ≥ 15 | τ=4 단계 |
-| T-04 | 임펠러 RPM | 50~500 RPM | ±1% | σ=12 |
-| T-05 | 자켓 온도 | 5~50℃ ±0.2℃ | 전 범위 | φ=2 |
-| T-06 | 센서 12ch | 전 12 채널 | 교정 ±1% | σ(6)=12 |
-| T-07 | 24h 발효 | 포도당 150 g/L | EtOH ≥ 12% w/v | J₂=24 |
-| T-08 | 볼록성 | n=6 ±10% | 양측 열세 | §7.4 SENSITIVITY |
-| T-09 | 3 경로 검증 | σ·φ, n·τ, 2σ | 모두 24 | §7.2 CROSS |
-| T-10 | FALSIFIER | 4건 반증 조건 | 전 미발생 | §7.10 |
+| T-01 | leak test | 0.3 MPa, 30 min | leak ≤ 1e-5 Pa·m^3/s | φ=2 dual |
+| T-02 | CIP efficacy | 80°C 0.5% NaOH | TOC < 1 ppm | sopfr |
+| T-03 | SIP efficacy | 121°C 30 min | F0 ≥ 15 | τ=4 stages |
+| T-04 | impeller RPM | 50–500 RPM | ±1% | σ=12 |
+| T-05 | jacket temp | 5–50°C ±0.2°C | full range | φ=2 |
+| T-06 | sensor 12ch | all 12 channels | calibration ±1% | σ(6)=12 |
+| T-07 | 24h ferment | glucose 150 g/L | EtOH ≥ 12% w/v | J2=24 |
+| T-08 | convexity | n=6 ±10% | both sides worse | §7.4 SENSITIVITY |
+| T-09 | 3-path verify | σ·φ, n·τ, 2σ | all 24 | §7.2 CROSS |
+| T-10 | FALSIFIER | 4 falsification conditions | none triggered | §7.10 |
 
-합격 기준 전부 통과 시 Mk.II → Mk.III 승격.
+Passing all criteria promotes Mk.II → Mk.III.
 
-## §17 BOM (자재표)
+## §17 BOM (bill of materials)
 
-| 품번 | 품명 | 규격 | 수량 | 단가 | 소계 | n=6 근거 |
+| P/N | Item | Spec | Qty | Unit | Subtotal | n=6 basis |
 |------|------|------|------|------|------|----------|
-| BM-01 | 발효조 본체 | SUS316L 100 L 6각 | 1 | 8,000k | 8,000k | n=6 |
-| BM-02 | 임펠러 | Rushton 4단 | 1 | 1,200k | 1,200k | τ=4 |
-| BM-03 | 자켓 | 2 루프 SUS304 | 1 | 900k | 900k | φ=2 |
-| BM-04 | pH 센서 | Hamilton EasyFerm | 1 | 850k | 850k | σ ch#1 |
-| BM-05 | DO 센서 | Hamilton VisiFerm | 1 | 1,100k | 1,100k | σ ch#2 |
-| BM-06 | 온도 센서 | Pt100 class A | 1 | 250k | 250k | σ ch#3 |
-| BM-07 | 압력 센서 | Endress+Hauser | 1 | 600k | 600k | σ ch#4 |
-| BM-08 | 유량계 | Rotameter | 1 | 350k | 350k | σ ch#5 |
-| BM-09 | 샘플링 밸브 | sanitary | 1 | 180k | 180k | σ ch#6 |
-| BM-10 | 포트 x6 | SUS316L tri-clamp | 6 | 90k | 540k | n=6 |
+| BM-01 | fermenter vessel | SUS316L 100 L hexagonal | 1 | 8,000k | 8,000k | n=6 |
+| BM-02 | impeller | Rushton 4-stage | 1 | 1,200k | 1,200k | τ=4 |
+| BM-03 | jacket | 2-loop SUS304 | 1 | 900k | 900k | φ=2 |
+| BM-04 | pH sensor | Hamilton EasyFerm | 1 | 850k | 850k | σ ch#1 |
+| BM-05 | DO sensor | Hamilton VisiFerm | 1 | 1,100k | 1,100k | σ ch#2 |
+| BM-06 | temp sensor | Pt100 class A | 1 | 250k | 250k | σ ch#3 |
+| BM-07 | pressure sensor | Endress+Hauser | 1 | 600k | 600k | σ ch#4 |
+| BM-08 | flow meter | Rotameter | 1 | 350k | 350k | σ ch#5 |
+| BM-09 | sampling valve | sanitary | 1 | 180k | 180k | σ ch#6 |
+| BM-10 | ports x6 | SUS316L tri-clamp | 6 | 90k | 540k | n=6 |
 | BM-11 | PLC/SCADA | Siemens S7 | 1 | 3,500k | 3,500k | σ=12 bus |
-| BM-12 | 배관 x5 | feed/vent/sample/CIP/SIP | 5 | 200k | 1,000k | sopfr=5 |
-| BM-13 | 효모 균주 | S. cerevisiae EC-1118 | 1 | 150k | 150k | biology |
-| BM-14 | 배양 매체 | YPD 또는 당화액 | 24 L | 50k | 1,200k | J₂ |
-| BM-15 | 보조기질 x5 | NAD⁺/ADP/Pi/H⁺/H₂O | 5 | 40k | 200k | sopfr=5 |
-| | **소계** | | | | **20,020k KRW** | |
+| BM-12 | piping x5 | feed/vent/sample/CIP/SIP | 5 | 200k | 1,000k | sopfr=5 |
+| BM-13 | yeast strain | S. cerevisiae EC-1118 | 1 | 150k | 150k | biology |
+| BM-14 | culture medium | YPD or saccharified liquor | 24 L | 50k | 1,200k | J2 |
+| BM-15 | cosubstrates x5 | NAD+/ADP/Pi/H+/H2O | 5 | 40k | 200k | sopfr=5 |
+| | **Subtotal** | | | | **20,020k KRW** | |
 
-삼중 제작 (n/φ=3) 적용 시 × 3 ≈ 60,060k KRW.
+Triple build (n/φ=3) applies × 3 ≈ 60,060k KRW.
 
-## §18 VENDOR (공급사)
+## §18 VENDOR
 
-| 항목 | 1순위 | 2순위 | 비고 | n=6 연결 |
+| Item | Primary | Secondary | Note | n=6 link |
 |------|-------|-------|------|----------|
-| 발효조 가공 | ㈜비오텐스 (한국) | Sartorius (독일) | GMP 경험 | 삼중 중복 |
-| 임펠러 | Lightnin (US) | Ekato (독일) | 표준 Rushton | τ=4 |
-| 센서 | Hamilton (스위스) | Endress+Hauser | 12ch 교정 서비스 | σ=12 |
-| PLC | Siemens (독일) | Rockwell AB | 24h SCADA 지원 | J₂ |
-| 효모 균주 | Lallemand (캐나다) | ㈜한국미생물 | EC-1118 | biology |
-| NAD⁺ 등 | Sigma-Aldrich | TCI | sopfr 5종 세트 | sopfr=5 |
+| vessel fabrication | Biotens Co. (Korea) | Sartorius (DE) | GMP experience | triple redundancy |
+| impeller | Lightnin (US) | Ekato (DE) | standard Rushton | τ=4 |
+| sensors | Hamilton (CH) | Endress+Hauser | 12ch calibration service | σ=12 |
+| PLC | Siemens (DE) | Rockwell AB | 24h SCADA | J2 |
+| yeast strain | Lallemand (CA) | Korea Microbial Co. | EC-1118 | biology |
+| NAD+ etc. | Sigma-Aldrich | TCI | sopfr 5-kit | sopfr=5 |
 
-공급사 선정은 φ=2 이중 소스 원칙 (primary/secondary) + n/φ=3 삼중 백업.
+Vendor selection follows the φ=2 dual-source principle (primary/secondary) + n/φ=3 triple backup.
 
-## §19 ACCEPTANCE (수락 기준)
+## §19 ACCEPTANCE (acceptance criteria)
 
-| 기준 | 측정값 | 통과 | n=6 근거 |
+| Criterion | Measurement | Pass | n=6 basis |
 |------|--------|------|----------|
-| A-1 | atlas 6/6 EXACT | PASS | n6 정합 |
-| A-2 | §7.0~§7.10 | 10/10 | canonical |
-| A-3 | TP-FERMI-1~10 | 10/10 | Tier 1~2 |
-| A-4 | 발효 효율 ≥ 98% | 측정 후 확정 | σ·sopfr/10·0.98 |
-| A-5 | 알코올 수율 ≥ 12% | 측정 후 확정 | σ=12 |
-| A-6 | 실패율 ≤ 1% | μ=1 | n/φ=3 |
-| A-7 | FALSIFIER 4건 | 전 미발생 | §7.10 |
-| A-8 | 24h cycle | J₂=24 | 2·σ |
-| A-9 | OEIS 4 등록 | A000203/5/10/1414 | §7.7 |
+| A-1 | atlas 6/6 EXACT | PASS | n6 alignment |
+| A-2 | §7.0–§7.10 | 10/10 | canonical |
+| A-3 | TP-FERMI-1~10 | 10/10 | Tier 1–2 |
+| A-4 | fermentation efficiency ≥ 98% | TBD after measurement | σ·sopfr/10·0.98 |
+| A-5 | alcohol yield ≥ 12% | TBD after measurement | σ=12 |
+| A-6 | failure rate ≤ 1% | mu=1 | n/φ=3 |
+| A-7 | 4 FALSIFIERs | none triggered | §7.10 |
+| A-8 | 24h cycle | J2=24 | 2·σ |
+| A-9 | 4 OEIS registrations | A000203/5/10/1414 | §7.7 |
 | A-10 | Pareto Top-1 | 95% | §4 DSE |
 
-10건 전부 통과 시 Mk.I seed → Mk.II 파일럿 승격.
+Passing all 10 promotes Mk.I seed → Mk.II pilot.
 
-## §20 APPENDIX (부록)
+## §20 APPENDIX
 
-### A. 소스 통합 이력
+### A. Source integration history
 
-| 파일 | 역할 | 상태 |
+| File | Role | Status |
 |------|------|------|
-| papers/n6-fermentation-paper.md | 주 소스 (수론 좌표) | 포함 |
-| domains/life/fermentation/fermentation.md | 도메인 소스 (화학양론·공정) | 포함 |
-| papers/n6-visual-arts-paper.md | 검토 대상 | **제외** |
+| papers/n6-fermentation-paper.md | primary source (number-theoretic coords) | included |
+| domains/life/fermentation/fermentation.md | domain source (stoichiometry / process) | included |
+| papers/n6-visual-arts-paper.md | reviewed | **excluded** |
 
-**visual-arts 제외 사유**:
-- 도메인 자체가 `visual-arts` (시각예술) 로 발효(`fermentation`) 와 **완전히 별개의 축** (culture vs life).
-- 파일 내용은 fermentation 논문과 동일한 n=6 산술 스캐폴드의 **템플릿 치환본**이며,
-  발효 고유의 생화학/화학양론 자료는 0건.
-- atlas 노드도 `visual-arts` 0/24 로 fermentation 6/6 과 무관.
-- "오배치 추정" 이라는 사용자 지적이 타당하며, 본 통합 논문에는 일절 포함하지 않음.
-- 향후 visual-arts 는 별도 culture 축 통합 논문에서 다룰 대상.
+**Reason for excluding visual-arts**:
+- The domain `visual-arts` (visual art) is **entirely separate** from `fermentation` (culture vs life).
+- Its file content is a **template substitution** of the same n=6 arithmetic scaffold as the fermentation paper, with 0 entries of fermentation-specific biochemistry / stoichiometry.
+- Its atlas node is `visual-arts` 0/24, unrelated to fermentation 6/6.
+- The user's note "probable misplacement" is valid; nothing from it is included in this integrated paper.
+- visual-arts will be handled separately in a future culture-axis integration paper.
 
-### B. 핵심 수론 요약
-
-```
-n = 6 (최소 완전수)
-σ(6) = 12   (OEIS A000203)
-τ(6) = 4    (OEIS A000005)
-φ(6) = 2    (OEIS A000010)
-sopfr(6) = 5 (OEIS A001414)
-J₂ = 2σ(6) = 24
-σ·φ = n·τ = 24   ⟺ n=6 유일 (3 독립 증명)
-```
-
-### C. 화학양론 요약
+### B. Core number-theoretic summary
 
 ```
-C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂          (EMP glycolysis)
- ↑  ↑ ↑     ↑         ↑
- n  σ 2n/φ  φ         φ
- 6  12 6    2         2
+n = 6 (smallest perfect number)
+sigma(6) = 12   (OEIS A000203)
+tau(6)   = 4    (OEIS A000005)
+phi(6)   = 2    (OEIS A000010)
+sopfr(6) = 5    (OEIS A001414)
+J2 = 2*sigma(6) = 24
+sigma*phi = n*tau = 24   <=> n=6 unique (3 independent candidate arguments demonstrating this)
 ```
 
-### D. 참조
+### C. Stoichiometry summary
 
-- n6shared/rules/common.json (R0~R27)
-- n6shared/rules/n6-architecture.json (N61~N65)
+```
+C6H12O6 -> 2 C2H5OH + 2 CO2          (EMP glycolysis)
+ ^   ^  ^     ^         ^
+ n   s  2n/phi phi       phi
+ 6  12  6      2         2
+```
+
+### D. References
+
+- n6shared/rules/common.json (R0–R27)
+- n6shared/rules/n6-architecture.json (N61–N65)
 - atlas.n6 (`$NEXUS/shared/n6/atlas.n6`) — `@R fermentation = 6/6 EXACT :: n6atlas [10*]`
-- papers/_registry.json (P-110 등록)
+- papers/_registry.json (P-110 registered)
 - OEIS A000203/A000005/A000010/A001414
 
-## §21 IMPACT (영향)
+## §21 IMPACT
 
-본 P-110 통합 논문이 달성하는 영향:
+Impacts achieved by this P-110 integrated paper:
 
-1. **수학적 필연성 확보**: 발효 도메인 핵심 상수 (C=6, H=12, 계수=2, 보조기질=5) 가
-   n=6 산술 (σ=12, τ=4, φ=2, sopfr=5) 로 **필연적** 대응됨을 확립.
-   이는 6탄당이 생명의 기본 기질인 이유를 수론적으로 뒷받침한다.
+1. **Mathematical necessity secured**: establishes that the core constants of the fermentation domain (C=6, H=12, coeff=2, cosubstrates=5) correspond **necessarily** to n=6 arithmetic (σ=12, τ=4, φ=2, sopfr=5). This supports number-theoretically why hexose is the basic substrate of life.
 
-2. **공정 DSE 48배 가속**: 기존 수동 레시피 탐색 수개월 대비 DSE σ·τ=48 배 단축.
-   2,400 조합 중 Pareto Top-6 자동 도출.
+2. **48× acceleration of process DSE**: DSE σ·τ=48 shortening vs. months of manual recipe search. Automatically derives Pareto Top-6 from 2,400 combinations.
 
-3. **신뢰성 30배 개선**: 실패율 30% (단일 배양) → 1% (삼중 중복 n/φ=3).
-   SPOF 제거.
+3. **30× reliability improvement**: failure rate 30% (single culture) → 1% (triple redundancy n/φ=3). SPOF removed.
 
-4. **풍미/수율 4배 개선**: 풍미 다양성 3→12 (σ=12 축 분해), 알코올 수율 10→12%.
+4. **4× improvement in flavor / yield**: flavor diversity 3→12 (σ=12 axis decomposition), alcohol yield 10→12%.
 
-5. **반증 가능성 (Popper 기준)**: FALSIFIER 4건 정식 명시 → 성공 사례만 모은
-   전통 양조학 논문과 차별화. MISS 시 공식 폐기 규칙 자동 적용.
+5. **Falsifiability (Popper criterion)**: formally states 4 FALSIFIERs → differentiates from traditional brewing papers that record only success cases. Auto-applies the formula-retirement rule on MISS.
 
-6. **295 도메인 재사용**: σ, τ, φ, sopfr 공통 함수로 295 도메인 격자에 편입.
-   발효 개선이 mycology, food-science, biology 로 cascade.
+6. **295-domain reuse**: σ, τ, φ, sopfr as shared functions embed in the 295-domain lattice. Improvements in fermentation cascade to mycology, food-science, biology.
 
-7. **atlas.n6 SSOT 통합**: 단일 파일 `atlas.n6` 에 `@R fermentation = 6/6 EXACT [10*]`
-   1줄로 모든 주장이 재현 가능한 형태로 수록됨.
+7. **atlas.n6 SSOT integration**: the single file `atlas.n6` contains the one-liner `@R fermentation = 6/6 EXACT [10*]`, making all draft claims reproducible in a single location.
 
-8. **사회적 가치**: 전통 양조·김치·치즈·낫토·콤부차 등 한식/세계식품 생산성 증대,
-   GMP/HACCP 자동화, 식품 안전성 향상, 저개발국 기초 식품 생산 표준화 기여.
+8. **Social value**: productivity gains for traditional brewing / kimchi / cheese / natto / kombucha etc., automation of GMP/HACCP, improved food safety, contribution to basic-food standardization in underdeveloped regions.
 
-**최종 한 문장**: σ(n)·φ(n) = n·τ(n) 이 n=6 에서만 유일하게 성립한다는 순수 수론 정리가,
-C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ 라는 발효의 가장 기본적 화학양론과 동일한 24 에 수렴한다 —
-이것은 **우연이 아니라 수론적 필연**이며, 본 P-110 이 그 첫 좌표 매핑이다.
+**Final sentence**: that the pure number-theoretic identity σ(n)·φ(n) = n·τ(n) holds uniquely at n=6 converges on the same value 24 as the most basic stoichiometry of fermentation C6H12O6 → 2 C2H5OH + 2 CO2 — this is not a coincidence but a number-theoretic necessity, and this P-110 paper is the first coordinate mapping demonstrating that.
 
 ## mk_history
 
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-

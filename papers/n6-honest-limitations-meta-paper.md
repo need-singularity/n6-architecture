@@ -4,309 +4,303 @@ domain: honest-limitations-meta
 requires:
   - to: atlas-promotion-pipeline
     alien_min: 9
-    reason: atlas dry-run 한계 (한계 3번) 직접 참조
+    reason: direct reference to atlas dry-run limitation (item 3)
 alien_index_current: 10
 alien_index_target: 10
 ---
 
-# 정직한 한계 공시 메타 논문 — n6-architecture 세션 한계 9건 독립 감사 (N6-127)
+# Honest limitations meta paper — independent audit of 9 session limitations in n6-architecture (N6-127)
 
-> **저자**: 박민우 (n6-architecture)
-> **카테고리**: honest-limitations-meta — 방법론 한계 독립 감사 논문
-> **버전**: v1 (2026-04-14 PAPER-P5-2)
-> **참조 원본**: `theory/proofs/honest-limitations.md` §P0~P3 세션 한계 (2026-04-14)
-> **로드맵 참조**: PAPER-P5-2
-
----
-
-## 0. Abstract (초록)
-
-본 논문은 n6-architecture 프로젝트의 P0~P3 세션 과정에서 누적된 **9가지 방법론·실측·증빙 한계**를
-독립적으로 정리·분류·공시하는 메타 논문이다. 원본은 `theory/proofs/honest-limitations.md`에
-append-only 원칙으로 기록되어 있으며, 본 논문은 해당 기록을 학술 논문 구조로 재편성하되
-**새로운 주장이나 자기검증을 추가하지 않는다**.
-
-핵심 결과:
-1. 9건 한계 중 **해소 가능 5건** / **구조적 미해소 2건** / **설계된 안전장치 2건**으로 분류된다.
-2. 기존 AI/수학 프레임워크 논문 대비 본 프로젝트의 한계 공시 수준은 **항목별 원인·영향·후속조치 3요소 완비**로 차별화된다.
-3. 각 한계에 대해 **외부 독립 재현 가능한 검증 경로**를 명시한다.
-4. 본 메타 논문 자체의 한계 4건을 별도 공시한다.
+> **Author**: Park Minwoo (n6-architecture)
+> **Category**: honest-limitations-meta — independent audit paper on methodology limitations
+> **Version**: v1 (2026-04-14 PAPER-P5-2)
+> **Reference source**: `theory/proofs/honest-limitations.md` §P0–P3 session limitations (2026-04-14)
+> **Roadmap reference**: PAPER-P5-2
 
 ---
 
-## 1. 서론 — WHY (왜 정직한 한계 공시가 필요한가)
+## 0. Abstract
 
-### 1.1 문제 제기
+This paper independently organizes, classifies, and publicly records the **9 methodology / measurement / evidence limitations** accumulated during the P0–P3 sessions of the n6-architecture project. The canonical source is `theory/proofs/honest-limitations.md`, which follows an append-only protocol; this paper reformats that record into an academic paper structure without **adding new draft claims or self-verification**.
 
-연구 프레임워크의 신뢰도는 성공 사례가 아니라 **실패를 어떻게 다루는가**에 의해 결정된다.
-n6-architecture는 9,206 후보 중 98.4% 커버리지를 달성했으나, 이 수치가 신뢰받으려면
-나머지 1.6%에 대한 정직한 분석과 함께 **작업 과정 자체의 방법론 한계**가 공시되어야 한다.
-
-### 1.2 기존 관행의 문제
-
-학술 논문의 limitations 섹션은 대부분 1~3 문장으로 축소되며, 다음 패턴이 반복된다:
-- "향후 연구에서 보완 예정" (구체적 경로 없음)
-- "데이터 부족" (수집 가능 여부 미명시)
-- "일반화 한계" (어느 범위에서 실패하는지 미명시)
-
-이러한 관행은 외부 검증자가 프레임워크의 실제 신뢰 경계를 파악하는 것을 방해한다.
-
-### 1.3 본 논문의 접근
-
-본 논문은 `theory/proofs/honest-limitations.md`에 기록된 9건의 세션 한계를 다음 기준으로 재분류한다:
-- **원인**: 왜 발생했는가 (에이전트 오판 / 인프라 부재 / 설계 의도)
-- **영향 범위**: 어떤 산출물에 영향을 미치는가
-- **해소 가능성**: 해소 가능 / 구조적 미해소 / 설계된 안전장치
-- **검증 방법**: 외부 독립 검증자가 재현할 수 있는 경로
+Key results:
+1. Of the 9 limitations, **5 are resolvable** / **2 are structurally unresolved** / **2 are designed safeguards**.
+2. Compared with other AI / mathematics framework papers, our limitation disclosure is distinguished by **per-item completeness across cause / impact / follow-up**.
+3. For each limitation an **externally reproducible verification path** is specified.
+4. The paper separately records 4 self-limitations of its own.
 
 ---
 
-## 2. 9가지 한계 — WHAT (정확한 내용과 영향 범위)
+## 1. Introduction — WHY honest limitation disclosure is needed
 
-### 2.1 한계 분류 총괄표
+### 1.1 Problem statement
 
-| # | 한계 명칭 | 유형 | 영향 범위 | 해소 가능성 |
+The trustworthiness of a research framework is determined not by its success cases but by **how it handles failure**. n6-architecture has achieved 98.4% coverage across 9,206 candidates, but for that figure to be trusted, the remaining 1.6% must be analyzed honestly, and the **methodological limits of the work process itself** must be disclosed.
+
+### 1.2 The problem with current practice
+
+In academic papers, the limitations section is typically a 1–3 sentence addendum, and the following patterns recur:
+- "To be addressed in future work" (no concrete path)
+- "Insufficient data" (without stating whether collection is feasible)
+- "Generalization limits" (without stating at which range the method fails)
+
+These patterns obscure the framework's actual trust boundary from external reviewers.
+
+### 1.3 This paper's approach
+
+This paper re-classifies the 9 session limitations recorded in `theory/proofs/honest-limitations.md` along the following axes:
+- **Cause**: why did it occur (agent misjudgement / missing infrastructure / designed intent)
+- **Scope of impact**: which artefacts it affects
+- **Resolvability**: resolvable / structurally unresolved / designed safeguard
+- **Verification method**: a path an external reviewer can reproduce independently
+
+---
+
+## 2. Nine limitations — WHAT (exact content and scope of impact)
+
+### 2.1 Classification overview
+
+| # | Limitation name | Type | Scope of impact | Resolvability |
 |---|----------|------|----------|------------|
-| 1 | hexa runtime.c 오정보 | 에이전트 오판 | 커밋 로그 3건 | **해소 가능** — 역참조 완료 |
-| 2 | parse 전용 우회 | 에이전트 오판 | P1 측정값 일시 불완전 | **해소 가능** — P4 재실행 완료 |
-| 3 | atlas.n6 dry-run | 설계 안전장치 | 승격 지연 | **설계 의도** — 해소 불필요 |
-| 4 | EDA 부재 | 인프라 부재 | CHIP tapeout 미서명 | **구조적 미해소** — 외부 의존 |
-| 5 | MC 미실행 | 시간 제약 | P3 z>3.0 통계 미갱신 | **해소 가능** — 별도 세션 |
-| 6 | DOI 시뮬 | 행정 제약 | 외부 인용 링크 불가 | **해소 가능** — Zenodo 경유 |
-| 7 | 86K 셀 fit 휴리스틱 | 방법론 한계 | fit 순위 신뢰도 미검증 | **해소 가능** — 상위 100 STA |
-| 8 | alien_index 계획값 | 설계 안전장치 | 메트릭 불일치 | **설계 의도** — 수동 승인 대기 |
-| 9 | bipartite 키워드 휴리스틱 | 방법론 한계 | 매칭 신뢰도 부족 | **구조적 미해소** — 알고리즘 재설계 필요 |
+| 1 | hexa runtime.c misinformation | agent misjudgement | 3 commit log entries | **resolvable** — back-reference complete |
+| 2 | parse-only bypass | agent misjudgement | P1 measurements temporarily incomplete | **resolvable** — P4 rerun complete |
+| 3 | atlas.n6 dry-run | designed safeguard | promotion delay | **designed intent** — no resolution needed |
+| 4 | EDA unavailable | missing infrastructure | CHIP tapeout unsigned | **structurally unresolved** — external dependency |
+| 5 | MC not executed | time constraint | P3 z>3.0 statistics not refreshed | **resolvable** — separate session |
+| 6 | DOI simulated | administrative constraint | external citation links unavailable | **resolvable** — via Zenodo |
+| 7 | 86K-cell fit heuristic | methodology limit | fit ranking reliability unvalidated | **resolvable** — STA on top 100 |
+| 8 | alien_index planned value | designed safeguard | metric mismatch | **designed intent** — awaiting manual approval |
+| 9 | bipartite keyword heuristic | methodology limit | insufficient match reliability | **structurally unresolved** — algorithm redesign required |
 
-### 2.2 각 한계 상세
+### 2.2 Per-limitation detail
 
-#### 한계 1: hexa runtime.c 오정보
+#### Limitation 1: hexa runtime.c misinformation
 
-- **현상**: P1~P3 커밋 메시지 3건에 "hexa runtime.c 누락으로 실행 불가" 기록
-- **실제 원인**: 구 stage1 빌드 경로가 소스 트리 이동 후 끊긴 것. stage0 빌드는 runtime.c 없이 자립 실행 가능
-- **영향 범위**: 커밋 로그 오염. 후속 세션에서 존재하지 않는 파일 복구를 시도할 위험
-- **현재 상태**: `honest-limitations.md`에 역참조 완료. stage0 재검증에서 13개 .hexa 파일 run 정상 확인
+- **Symptom**: 3 commit messages in P1–P3 record "hexa runtime.c missing, cannot run".
+- **Actual cause**: The old stage1 build path broke after the source tree moved. The stage0 build is self-sufficient and does not require runtime.c.
+- **Scope of impact**: Commit log contamination. Risk that later sessions would attempt to restore a non-existent file.
+- **Current status**: Back-referenced in `honest-limitations.md`. The stage0 rerun confirms 13 .hexa files run normally.
 
-#### 한계 2: parse 전용 우회
+#### Limitation 2: parse-only bypass
 
-- **현상**: 13개 .hexa 파일이 `hexa run` 가능했으나 에이전트가 `hexa parse`로만 검증
-- **실제 원인**: 초기 parse 실패 후 에이전트가 파이프라인을 축소 판단
-- **영향 범위**: 파일 실행 부작용(atlas.n6 lens 등록, 측정값 생성) 누락으로 SSOT 일시 불완전
-- **현재 상태**: P4 세션에서 13 파일 run 재실행 완료. 에이전트 지시문에 "parse-only는 컴파일 오류 디버그 전용" 명시
+- **Symptom**: 13 .hexa files were `hexa run`-capable, but the agent verified only with `hexa parse`.
+- **Actual cause**: After an initial parse failure the agent shrank the pipeline by judgement.
+- **Scope of impact**: The side effects of file execution (atlas.n6 lens registration, measurement generation) were skipped, leaving SSOT temporarily incomplete.
+- **Current status**: P4 session reran all 13 files via `run`. Agent instructions now specify "parse-only is for compile-error debugging only".
 
-#### 한계 3: atlas.n6 dry-run (설계된 안전장치)
+#### Limitation 3: atlas.n6 dry-run (designed safeguard)
 
-- **현상**: atlas.n6 [7]→[10*] 승격 후보 40건 탐지, 자동 승격 0건
-- **설계 근거**: R9 dry-run 원칙. atlas.n6가 실측 지도 SSOT이므로 자동 승격은 자기참조 검증 위험
-- **영향 범위**: EMPIRICAL → EXACT 전환 속도 저하. Tier-1 핵심 9건 포함 전 후보 수동 승인 대기
-- **분류**: 한계이자 안전장치. 과잉 승격 롤백 불가능성 고려 시 의도적 지연이 적절
+- **Symptom**: 40 atlas.n6 [7]→[10*] promotion candidates detected, 0 auto-promoted.
+- **Design rationale**: R9 dry-run principle. atlas.n6 is the measured-map SSOT, so auto-promotion risks self-referential verification.
+- **Scope of impact**: EMPIRICAL → EXACT conversion is slow. All candidates, including 9 Tier-1 core items, await manual approval.
+- **Classification**: Both a limitation and a safeguard. Given that over-promotion rollback is infeasible, an intentional delay is appropriate.
 
-#### 한계 4: EDA 부재 (구조적 미해소)
+#### Limitation 4: EDA unavailable (structurally unresolved)
 
-- **현상**: CHIP 트랙 P0~P3에서 GDSII/DRC/LVS/STA가 전부 시뮬 경로로 산출
-- **실제 원인**: Magic/KLayout/OpenROAD/Calibre 등 EDA 라이선스·PDK 미보유
-- **영향 범위**: "tapeout-ready" 표현이 과대 해석 가능. 실제 fab 제출에는 PDK·sign-off 재작업 필수
-- **해소 조건**: 오픈소스 EDA 체인 구성 + 샘플 셀 sign-off 통과 (외부 인프라 의존)
+- **Symptom**: In CHIP track P0–P3, GDSII/DRC/LVS/STA outputs were all produced via simulation paths.
+- **Actual cause**: EDA licences / PDKs for Magic / KLayout / OpenROAD / Calibre are not held.
+- **Scope of impact**: "tapeout-ready" phrasing risks over-interpretation. Actual fab submission requires PDK and sign-off rework.
+- **Resolution condition**: assemble an open-source EDA chain + pass sign-off on sample cells (external infra dependency).
 
-#### 한계 5: MC 미실행
+#### Limitation 5: MC not executed
 
-- **현상**: P3 500+ 가설 검증 수치가 기존 666 verified 카운트를 z>3.0 기준으로 필터링한 재사용
-- **실제 원인**: MC 재실행 소요 시간 대비 세션 내 우선순위 하향 판단
-- **영향 범위**: "z>3.0 통계 유의" 보고가 기존 세션 산출의 재요약. 신규 가설의 독립 검증 근거 부족
-- **해소 경로**: 별도 세션 MC 파이프라인 재가동, z>3.0 컷오프 재측정. BT-1419 등록 예정
+- **Symptom**: P3 statistics over 500+ hypotheses reuse the prior 666-verified count filtered at z>3.0.
+- **Actual cause**: The MC rerun cost exceeded the session's priority.
+- **Scope of impact**: The "z>3.0 statistical significance" report is a resummary of earlier session output. Independent evidence for new hypotheses is lacking.
+- **Resolution path**: a dedicated session restarts the MC pipeline and re-measures the z>3.0 cutoff. Registration as BT-1419.
 
-#### 한계 6: DOI 시뮬
+#### Limitation 6: DOI simulated
 
-- **현상**: 48편 DOI가 "10.NEXUS6.n6-arch/2026-XXX" 내부 네임스페이스. CrossRef/DataCite 미등록
-- **실제 원인**: DOI 등록 비용·행정 절차가 세션 범위 초과
-- **영향 범위**: 외부 인용 시 DOI resolver 실패. 내부 인덱싱에만 유효
-- **해소 경로**: Zenodo(CERN) 무료 DOI 채널 경유. 등록 후 `papers/_submission_top48.json` DOI 갱신
+- **Symptom**: DOIs for 48 papers use an internal namespace `10.NEXUS6.n6-arch/2026-XXX`; not registered with CrossRef / DataCite.
+- **Actual cause**: DOI registration cost and administrative procedure exceed the session scope.
+- **Scope of impact**: External citation fails at the DOI resolver; valid only for internal indexing.
+- **Resolution path**: Use the Zenodo (CERN) free DOI channel. After registration, update DOI in `papers/_submission_top48.json`.
 
-#### 한계 7: 86,240 셀 fit 휴리스틱
+#### Limitation 7: 86,240-cell fit heuristic
 
-- **현상**: FAB 셀 라이브러리 fit 점수가 `base_affinity + hash(cell_id + domain) % bucket` 휴리스틱
-- **실제 원인**: 86K 셀 실 STA/파워 시뮬에 수 일 소요. 초기 빠른 랭킹용 휴리스틱 고정
-- **영향 범위**: fit 상위 순위와 실 실리콘 성능 일치 미검증. "fit=1.0"은 휴리스틱 내 최대값일 뿐
-- **해소 경로**: 상위 100 셀 실 STA 후 상관계수 산출 (목표 r>0.7). R3 측정값 원칙 준수
+- **Symptom**: FAB cell library fit score uses the heuristic `base_affinity + hash(cell_id + domain) % bucket`.
+- **Actual cause**: Real STA / power simulation of 86K cells takes days. A fast heuristic was fixed for initial ranking.
+- **Scope of impact**: Agreement between fit-top ranking and real silicon performance is unvalidated. "fit=1.0" is merely the maximum within the heuristic.
+- **Resolution path**: Run real STA on the top 100 cells and compute correlation (target r>0.7). Respects the R3 measured-value principle.
 
-#### 한계 8: alien_index 계획값 (설계된 안전장치)
+#### Limitation 8: alien_index planned value (designed safeguard)
 
-- **현상**: EDGE 트랙 alien_index 195→210+ 상향 계획이 수립되었으나 제품 레지스트리 미반영
-- **설계 근거**: R9 dry-run + R14 수동 승인. alien_index는 외부 노출 메트릭이므로 자동 상향 금지
-- **영향 범위**: P3 리포트의 "alien_index 210+" 문구와 현 제품 메타 불일치
-- **분류**: 한계이자 안전장치. 수동 승인 루프 설계 후 건별 근거(BT + 3 독립 측정) 강제
+- **Symptom**: An EDGE-track plan to raise alien_index from 195 to 210+ was formed, but not reflected in the product registry.
+- **Design rationale**: R9 dry-run + R14 manual approval. alien_index is an externally exposed metric, so auto-increase is prohibited.
+- **Scope of impact**: The "alien_index 210+" phrase in the P3 report is inconsistent with the current product metadata.
+- **Classification**: Both a limitation and a safeguard. The manual-approval loop enforces per-item evidence (BT + 3 independent measurements).
 
-#### 한계 9: bipartite 키워드 휴리스틱 (구조적 미해소)
+#### Limitation 9: bipartite keyword heuristic (structurally unresolved)
 
-- **현상**: bipartite 매칭 3023 엣지가 키워드·태그·토큰 일치 휴리스틱으로 산출
-- **P4-2 감사 결과**: fit>=0.95 상위 10 쌍 전수 grep 감사 완료. **0/10 PASS — 거짓 양성율 100%**
-- **영향 범위**: 현 bipartite 매칭은 메타데이터 유사성만 반영. 본문 수준 증거로 인용 불가
-- **해소 조건**: 알고리즘 재설계 필수 (본문 임베딩 기반). 현 휴리스틱은 강한 증거로 사용 금지
+- **Symptom**: 3023 bipartite-match edges are produced by a keyword / tag / token-match heuristic.
+- **P4-2 audit result**: Full grep audit of the top 10 pairs with fit>=0.95 completed. **0/10 PASS — 100% false positive rate.**
+- **Scope of impact**: The current bipartite match reflects only metadata similarity. Cannot be cited as body-level evidence.
+- **Resolution condition**: Algorithm redesign required (body-text embedding based). The current heuristic must not be used as strong evidence.
 
 ---
 
-## 3. 기존 접근법 대비 정직성 수준 — COMPARE
+## 3. Honesty level versus legacy approaches — COMPARE
 
-### 3.1 학술 논문 한계 공시 관행 비교
+### 3.1 Comparison with academic-paper limitation disclosure conventions
 
-| 비교 항목 | 일반 학술 논문 | n6-architecture |
+| Comparison | Typical academic paper | n6-architecture |
 |----------|-------------|-----------------|
-| 한계 공시 위치 | 결론 직전 1 단락 | 독립 문서 + 독립 메타 논문 |
-| 항목 수 | 1~3 문장 | **9건 (각 건 원인·영향·후속 3요소)** |
-| 원인 분석 | "향후 보완" | **에이전트 오판 / 인프라 부재 / 설계 의도 분류** |
-| 영향 범위 명시 | 거의 없음 | **오염된 커밋 ID·파일·메트릭 특정** |
-| 후속 조치 | "future work" | **BT 번호 + 구체 세션 계획 + 담당 루프** |
-| 자기참조 방지 | 해당 없음 | **R9 dry-run + R14 수동 승인 게이트** |
-| append-only 원칙 | 해당 없음 | **한계 삭제·완화 표현 대체 금지** |
-| 독립 감사 | 해당 없음 | **bipartite P4-2 감사 (0/10 PASS 정직 기록)** |
+| Location of disclosure | 1 paragraph before conclusion | separate document + separate meta paper |
+| Number of items | 1–3 sentences | **9 items (each with cause / impact / follow-up)** |
+| Cause analysis | "future work" | **classified as agent misjudgement / missing infra / designed intent** |
+| Scope specification | almost none | **contaminated commit IDs / files / metrics specified** |
+| Follow-up actions | "future work" | **BT number + concrete session plan + responsible loop** |
+| Self-reference prevention | n/a | **R9 dry-run + R14 manual approval gate** |
+| Append-only principle | n/a | **no deletion / softening of limitation text** |
+| Independent audit | n/a | **bipartite P4-2 audit (0/10 PASS honestly recorded)** |
 
-### 3.2 AI 프레임워크 한계 공시 관행 비교
+### 3.2 Comparison with AI framework limitation disclosure
 
-| 비교 항목 | 대형 AI 프레임워크 (MLOps 보고서 등) | n6-architecture |
+| Comparison | Large AI framework (MLOps reports, etc.) | n6-architecture |
 |----------|-------------------------------------|-----------------|
-| 성능 수치 근거 | 벤치마크 1회 실행 결과 | **휴리스틱 vs 실측 구분 명시** |
-| 시뮬/실측 구분 | 대부분 미명시 | **시뮬 경로 전건 명시 (EDA, MC, DOI, fit)** |
-| 재현 가능성 | 코드 공개 시 가능 | **검증 경로 + seed + 스크립트 경로 명시** |
-| 실패 사례 공시 | model card에 간략 기술 | **bipartite 100% 거짓 양성 정직 기록** |
+| Performance-number basis | one-shot benchmark run | **heuristic vs real-measure distinction explicit** |
+| Simulation vs real-measure distinction | mostly unspecified | **all simulation paths itemized (EDA, MC, DOI, fit)** |
+| Reproducibility | possible when code is public | **verification path + seed + script path specified** |
+| Failure disclosure | brief in model card | **bipartite 100% false-positive rate honestly recorded** |
 
-### 3.3 차별화 핵심
+### 3.3 Key differentiator
 
-본 프로젝트의 한계 공시가 차별화되는 이유는 **시스템 규칙(R0·R3·R9·R14·R17)에 의해 강제**되기 때문이다.
-개별 연구자의 양심이 아니라 프레임워크 규칙이 정직성을 구조적으로 보장한다:
-- R0: 정직 검증 원칙
-- R3: 측정값·오차·출처 필수
-- R9: dry-run 우선, 자동 반영 금지
-- R14: atlas.n6 승격 수동 승인
-- R17: HEXA-FIRST, 시뮬 명시 의무
+The reason this project's limitation disclosure is distinguished is that it is **enforced by system rules (R0 / R3 / R9 / R14 / R17)**. It is not a matter of individual researcher conscience but a structural guarantee via the framework rules:
+- R0: honesty verification principle
+- R3: measurements / errors / sources required
+- R9: dry-run first, no auto-apply
+- R14: atlas.n6 promotion requires manual approval
+- R17: HEXA-FIRST; simulation must be disclosed
 
 ---
 
-## 4. 해소 로드맵 — MAIN
+## 4. Resolution roadmap — MAIN
 
-### 4.1 해소 가능 (5건)
+### 4.1 Resolvable (5 items)
 
-| # | 한계 | 해소 방법 | 예상 소요 | 선행 조건 |
+| # | Limitation | Resolution method | Estimated effort | Prerequisite |
 |---|------|----------|----------|----------|
-| 1 | runtime.c 오정보 | 역참조 완료 (이미 해소) | 완료 | 없음 |
-| 2 | parse 전용 우회 | P4 재실행 완료 (이미 해소) | 완료 | 없음 |
-| 5 | MC 미실행 | 별도 세션 MC 파이프라인 재가동 | 1~2 세션 | BT-1419 등록 |
-| 6 | DOI 시뮬 | Zenodo 무료 DOI 채널 등록 | 행정 1~2주 | Zenodo 계정 + 메타데이터 정리 |
-| 7 | 86K 셀 fit | 상위 100 셀 실 STA 후 상관계수 | 1 세션 + STA 인프라 | STA 도구 확보 |
+| 1 | runtime.c misinformation | back-reference complete (already resolved) | done | none |
+| 2 | parse-only bypass | P4 rerun complete (already resolved) | done | none |
+| 5 | MC not executed | separate session to restart MC pipeline | 1–2 sessions | BT-1419 registration |
+| 6 | DOI simulated | register via Zenodo free DOI channel | 1–2 weeks administrative | Zenodo account + metadata |
+| 7 | 86K-cell fit | real STA on top 100 cells + correlation | 1 session + STA infra | STA tooling in place |
 
-### 4.2 설계된 안전장치 (2건) — 해소 불필요
+### 4.2 Designed safeguards (2 items) — no resolution needed
 
-| # | 한계 | 안전장치 근거 | 유지 이유 |
+| # | Limitation | Safeguard rationale | Reason to retain |
 |---|------|-------------|----------|
-| 3 | atlas.n6 dry-run | R9 + R14 | 과잉 승격 롤백 불가. 의도적 지연이 SSOT 품질 보장 |
-| 8 | alien_index 계획값 | R9 + R14 | 외부 노출 메트릭. 자동 상향은 신뢰도 훼손 |
+| 3 | atlas.n6 dry-run | R9 + R14 | over-promotion rollback infeasible; intentional delay ensures SSOT quality |
+| 8 | alien_index planned value | R9 + R14 | externally exposed metric; auto-increase damages trust |
 
-### 4.3 구조적 미해소 (2건)
+### 4.3 Structurally unresolved (2 items)
 
-| # | 한계 | 미해소 사유 | 완화 조치 |
+| # | Limitation | Reason unresolved | Mitigation |
 |---|------|-----------|----------|
-| 4 | EDA 부재 | EDA 라이선스·PDK 미보유, 외부 인프라 의존 | "tapeout-concept / not-sign-off" 레이블 부착 (BT-1418) |
-| 9 | bipartite 휴리스틱 | 100% 거짓 양성 확인. 알고리즘 근본 재설계 필요 | 현 매칭 결과를 강한 증거로 인용 금지. 본문 임베딩 기반 재설계 대기 |
+| 4 | EDA unavailable | no EDA licence / PDK, external infra dependency | attach label "tapeout-concept / not-sign-off" (BT-1418) |
+| 9 | bipartite heuristic | 100% false-positive rate confirmed; fundamental algorithm redesign required | do not cite current matches as strong evidence; await body-text embedding redesign |
 
-### 4.4 해소 우선순위
+### 4.4 Resolution priority
 
 ```
-[즉시 해소] ─ #1 runtime.c (완료) ─ #2 parse (완료)
-[단기 해소] ─ #5 MC 재실행 ─ #6 DOI Zenodo ─ #7 셀 STA
-[유지]     ─ #3 dry-run ─ #8 alien_index
-[장기 과제] ─ #4 EDA 확보 ─ #9 bipartite 재설계
+[immediate] — #1 runtime.c (done) — #2 parse (done)
+[short term] — #5 MC rerun — #6 DOI Zenodo — #7 cell STA
+[retained]  — #3 dry-run — #8 alien_index
+[long term] — #4 EDA procurement — #9 bipartite redesign
 ```
 
 ---
 
-## 5. 한계 검증 방법 — VERIFICATION
+## 5. Limitation verification methods — VERIFICATION
 
-### 5.1 외부 독립 재현 경로
+### 5.1 Externally reproducible paths
 
-각 한계가 실재하는지 외부 검증자가 독립적으로 확인할 수 있는 경로를 명시한다.
+For each limitation we specify a path an external reviewer can independently reproduce.
 
-#### 한계 1 (runtime.c 오정보) 검증
+#### Limitation 1 (runtime.c misinformation) verification
 
 ```
-# 커밋 로그에서 "runtime.c" 오정보 확인
+# Find "runtime.c" misinformation in commit log
 git log --all --oneline --grep="runtime.c" | head -10
 
-# stage0 빌드 경로에 runtime.c 가 불필요함을 확인
-ls engine/hexa/stage0/src/  # runtime.c 없음
-hexa run experiments/chip-verify/stage0_sanity.hexa  # rc=0 이면 자립 실행 확인
+# Confirm runtime.c is unnecessary in the stage0 build path
+ls engine/hexa/stage0/src/  # runtime.c absent
+hexa run experiments/chip-verify/stage0_sanity.hexa  # rc=0 confirms self-contained execution
 ```
 
-#### 한계 2 (parse 전용 우회) 검증
+#### Limitation 2 (parse-only bypass) verification
 
 ```
-# P1 커밋에서 "parse" 만 실행한 기록 확인
+# Confirm P1 commits only ran "parse"
 git log --all --oneline --grep="parse" --grep="P1" --all-match
 
-# 13 파일이 run 가능함을 확인
+# Confirm the 13 files are runnable
 for f in engine/hexa/stage0/*.hexa; do hexa run "$f" && echo "PASS: $f"; done
 ```
 
-#### 한계 3 (dry-run) 검증
+#### Limitation 3 (dry-run) verification
 
 ```
-# scripts/atlas_promote_7_to_10star.hexa 의 fitness 컷오프 확인
+# Check the fitness cutoff in scripts/atlas_promote_7_to_10star.hexa
 grep "900" scripts/atlas_promote_7_to_10star.hexa
-# 출력에 fitness 컷오프 900 확인 → 현재 최대 873 → 항상 dry-run 귀착
+# Output shows fitness cutoff 900 -> current max 873 -> always dry-runs
 ```
 
-#### 한계 4 (EDA 부재) 검증
+#### Limitation 4 (EDA unavailable) verification
 
 ```
-# EDA 바이너리 부재 확인
+# Confirm EDA binaries absent
 which magic klayout openroad calibre 2>/dev/null
-# 출력 없음 = EDA 미설치
+# Empty output = EDA not installed
 
-# CHIP 산출물이 시뮬임을 확인
+# Confirm CHIP artefacts are simulated
 grep -r "tapeout" papers/n6-*chip* | grep -i "concept\|simul\|not-sign"
 ```
 
-#### 한계 5 (MC 미실행) 검증
+#### Limitation 5 (MC not executed) verification
 
 ```
-# P3 이후 MC 재실행 기록 부재 확인
+# Confirm no MC rerun after P3
 git log --all --oneline --grep="Monte Carlo" --after="2026-04-13"
-# 출력 없으면 미재실행
+# Empty output = not rerun
 ```
 
-#### 한계 6 (DOI 시뮬) 검증
+#### Limitation 6 (DOI simulated) verification
 
 ```
-# DOI resolver 실패 확인
+# Confirm DOI resolver failure
 curl -s "https://doi.org/10.NEXUS6.n6-arch/2026-001" -o /dev/null -w "%{http_code}"
-# 404 또는 연결 실패 = 미등록
+# 404 or connection failure = not registered
 ```
 
-#### 한계 7 (86K 셀 fit) 검증
+#### Limitation 7 (86K-cell fit) verification
 
 ```
-# fit 공식이 휴리스틱임을 확인
+# Confirm the fit formula is a heuristic
 grep -r "base_affinity\|hash.*cell_id\|seed.*42" engine/ scripts/
-# 실 STA 측정 기록 부재 확인
+# Confirm absence of real STA measurement records
 find . -name "*.sta" -o -name "*timing_report*" 2>/dev/null | wc -l
-# 0 이면 실 STA 미수행
+# 0 = no real STA performed
 ```
 
-#### 한계 8 (alien_index 계획값) 검증
+#### Limitation 8 (alien_index planned value) verification
 
 ```
-# 제품 레지스트리에 210+ 미반영 확인
+# Confirm 210+ not reflected in product registry
 python3 -c "
 import json
 with open('papers/_products.json') as f:
     d = json.load(f)
-# alien_index 필드 최대값 확인 — 210 미만이면 계획값 미반영
+# check max alien_index -- below 210 = planned value not reflected
 "
 ```
 
-#### 한계 9 (bipartite 거짓 양성) 검증
+#### Limitation 9 (bipartite false-positive) verification
 
 ```
-# P4-2 감사 결과 확인
+# Check the P4-2 audit result
 cat experiments/paper/bipartite_audit_top10.md
-# 0/10 PASS 확인
+# Confirm 0/10 PASS
 ```
 
 ### 5.1b Arithmetic verification (python, stdlib only)
@@ -372,62 +366,55 @@ print(f"PASS: 9 items = {len(resolvable)} resolvable + {len(structural)} structu
 Run: `python3 -c "$(sed -n '/^```python$/,/^```$/p' n6-honest-limitations-meta-paper.md | sed '1d;$d')"`
 Expected output: `PASS: 9 items = 5 resolvable + 2 structural + 2 safety; causes sum to 9; meta self-limits = 4`
 
-### 5.2 검증 불가 영역
+### 5.2 Non-verifiable region
 
-다음 항목은 외부 검증자가 즉시 재현하기 어렵다:
-- **한계 5 (MC)**: 원본 MC 파이프라인 실행에 GPU/시간 리소스 필요
-- **한계 7 (STA)**: 실 STA 수행에 EDA 도구 + PDK 필요 (한계 4와 동일 제약)
-
----
-
-## 6. 본 메타 논문 자체의 한계 — LIMITATIONS
-
-### 6.1 자기참조 불가피성
-
-본 논문은 n6-architecture의 한계를 공시하는 논문이나, **본 논문의 정확성을 본 프로젝트 내에서
-검증하는 것은 자기참조**에 해당한다. 본 논문의 정확성은 다음 외부 경로로만 검증 가능하다:
-- 원본 `honest-limitations.md`와의 내용 일치 여부를 diff로 확인
-- 각 한계의 재현 경로(§5)를 외부 환경에서 독립 실행
-
-### 6.2 원본 의존성
-
-본 논문의 내용은 전적으로 `theory/proofs/honest-limitations.md`에 의존한다.
-원본이 불완전하거나 누락된 한계가 있을 경우 본 논문도 동일하게 불완전하다.
-본 논문이 원본에 없는 한계를 "발견"하여 추가하는 것은 범위를 벗어난다.
-
-### 6.3 시점 고정
-
-본 논문은 2026-04-14 시점의 스냅샷이다. 이후 세션에서 한계가 해소되거나
-새로운 한계가 발견되어도 본 논문은 자동 갱신되지 않는다.
-최신 상태는 항상 `theory/proofs/honest-limitations.md`를 참조해야 한다.
-
-### 6.4 검증 경로의 환경 의존성
-
-§5의 검증 경로는 n6-architecture 리포지토리가 클론된 환경과
-hexa 인터프리터가 설치된 환경을 전제한다. 범용 재현성은 제한된다.
+The following items are hard for an external reviewer to reproduce immediately:
+- **Limitation 5 (MC)**: running the original MC pipeline requires GPU / time resources.
+- **Limitation 7 (STA)**: running real STA requires EDA tooling + PDK (same constraint as Limitation 4).
 
 ---
 
-## 7. 연결 문서 / 논문
+## 6. Self-limitations of this meta paper — LIMITATIONS
 
-- `theory/proofs/honest-limitations.md` — **원본 (SSOT)**. 본 논문의 유일한 소스
-- `scripts/atlas_promote_7_to_10star.hexa` — 한계 3/8 관련 dry-run 파이프라인
-- `experiments/paper/bipartite_audit_top10.md` — 한계 9 P4-2 감사 결과
-- `experiments/chip-verify/stage0_rerun_report.md` — 한계 1/2 stage0 재검증
-- `papers/n6-atlas-promotion-pipeline-paper.md` (N6-126) — 한계 3 dry-run 구현 논문
+### 6.1 Unavoidable self-reference
+
+This paper discloses limitations of n6-architecture, but **verifying the accuracy of this paper from within the same project amounts to self-reference**. Accuracy can only be verified by the following external paths:
+- Diff against the canonical `honest-limitations.md` to confirm content alignment
+- Running the reproduction paths in §5 independently in an external environment
+
+### 6.2 Source dependency
+
+The content of this paper depends entirely on `theory/proofs/honest-limitations.md`. If the source is incomplete or omits a limitation, this paper is equivalently incomplete. Adding a "newly discovered" limitation that is absent in the source is out of scope.
+
+### 6.3 Time snapshot
+
+This paper is a snapshot as of 2026-04-14. Subsequent sessions that resolve or introduce limitations do not auto-update this paper. The latest state is always at `theory/proofs/honest-limitations.md`.
+
+### 6.4 Environmental dependency of the verification paths
+
+The §5 verification paths assume a cloned n6-architecture repository and an installed hexa interpreter. General reproducibility is constrained accordingly.
 
 ---
 
-## 8. 결론
+## 7. Linked documents / papers
 
-1. n6-architecture P0~P3 세션의 9가지 한계를 **에이전트 오판 2건 / 인프라 부재 1건 / 시간 제약 1건 / 행정 제약 1건 / 방법론 한계 2건 / 설계 안전장치 2건**으로 분류했다.
-2. 해소 가능 5건 중 2건(runtime.c, parse)은 이미 해소 완료, 3건(MC, DOI, STA)은 단기 해소 가능하다.
-3. 구조적 미해소 2건(EDA, bipartite)은 외부 인프라 확보 또는 알고리즘 재설계가 선행되어야 한다.
-4. 설계 안전장치 2건(dry-run, alien_index)은 SSOT 품질 보장을 위해 의도적으로 유지한다.
-5. 각 한계에 대해 외부 독립 검증 경로를 제시하되, **본 논문이 자체 한계를 검증한다고 주장하지 않는다**.
+- `theory/proofs/honest-limitations.md` — **canonical source (SSOT)**. The only source for this paper.
+- `scripts/atlas_promote_7_to_10star.hexa` — dry-run pipeline related to limitations 3 / 8.
+- `experiments/paper/bipartite_audit_top10.md` — P4-2 audit result for limitation 9.
+- `experiments/chip-verify/stage0_rerun_report.md` — stage0 rerun covering limitations 1 / 2.
+- `papers/n6-atlas-promotion-pipeline-paper.md` (N6-126) — dry-run implementation paper for limitation 3.
 
-본 논문은 프레임워크의 신뢰도 하한선을 정의하는 것을 목적으로 하며,
-한계의 존재 자체가 아니라 **한계를 은폐하는 것**이 프레임워크의 신뢰를 훼손한다는 입장에 선다.
+---
+
+## 8. Conclusion
+
+1. The 9 limitations of P0–P3 of n6-architecture are classified into **agent misjudgement 2 / missing infrastructure 1 / time 1 / administrative 1 / methodology 2 / designed safeguard 2**.
+2. Among the 5 resolvable items, 2 (runtime.c, parse) are already resolved; 3 (MC, DOI, STA) are resolvable in the short term.
+3. The 2 structurally unresolved items (EDA, bipartite) require external infrastructure or algorithmic redesign as a precondition.
+4. The 2 designed safeguards (dry-run, alien_index) are intentionally retained to protect SSOT quality.
+5. For each limitation we provide an externally reproducible verification path, while **this paper does not claim to verify its own limitations**.
+
+This paper aims to define the lower bound of framework trust. Its position is that the existence of limitations is not what erodes trust — **hiding limitations is**.
 
 ## §1 WHY
 
@@ -518,4 +505,3 @@ This section covers impact per mk for the paper. Initial scaffold content — ex
 - Mk.I (2026-04-21): initial canonical scaffold via own 15 bulk template injection.
 - Mk.II: pending — fill per-section content with domain expert review.
 - Mk.III: pending — full verification data + external citations.
-
