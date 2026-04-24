@@ -1,7 +1,7 @@
 {
   "schema": "n6-architecture/n6_blockers/1",
-  "ts": "2026-04-24T08:29:09Z",
-  "head": "8e8e7a33046e23fb89be0c05c482ef168ea6327d",
+  "ts": "2026-04-24T12:34:19Z",
+  "head": "fb054980786520fb3cf871078cb281ccf96b0dbf",
   "inputs": {
     "atlas_n6_bytes": 1503957,
     "atlas_signals_n6_bytes": 289669,
@@ -15,7 +15,7 @@
     "loop_rules_total": 2,
     "loop_rules_drift": 0,
     "nexus_reach": true,
-    "nexus_mode": "local_fallback",
+    "nexus_mode": "remote",
     "build_log_fail_stale_suppressed": 1
   },
   "summary": {
