@@ -1,656 +1,631 @@
 # n=6 Arithmetic Attractor Meta-Theorem
 
-**날짜**: 2026-04-11 (확장: 2026-04-12, DFS 49~58)
-**유형**: 메타 정리 (DFS 58회차 결정화, 24대 정리)
-**검증**: verify_millennium_dfs1.hexa (30 PASS), verify_millennium_tight.hexa (13 PASS)
-**atlas**: 45+ 노드 [10*]
+**Date**: 2026-04-11 (extended: 2026-04-12, DFS 49~58)
+**Type**: Meta-theorem candidate (DFS round 58 crystallization, 24-theorem family)
+**Verification**: verify_millennium_dfs1.hexa (30 PASS), verify_millennium_tight.hexa (13 PASS)
+**atlas**: 45+ nodes [10*]
 
 ---
 
-## 정리 (n=6 Arithmetic Attractor)
+## Statement (n=6 Arithmetic Attractor)
 
-자연수 n >= 2에서, n=6 = 2*3은 다음 (i)~(v)를 **동시에** 만족하는 유일한 수이다.
+For natural numbers n >= 2, n = 6 = 2*3 is the unique value that **simultaneously** satisfies conditions (i)~(v) below (as a candidate pattern).
 
-**(i) Theorem 0 (대수적 유일성)**:
+**(i) Theorem 0 (algebraic uniqueness)**:
 sigma(n) * phi(n) = n * tau(n)
 
-**(ii) Theorem C (완전 좌표계)**:
+**(ii) Theorem C (complete coordinate system)**:
 {1, phi(n), n/phi(n), tau(n), sopfr(n), n} = {1, 2, ..., n}
-(6개 산술 함수가 n개 서로 다른 연속 자연수를 생성)
+(6 arithmetic functions generate n distinct consecutive natural numbers)
 
-**(iii) Theorem F (4중 수렴점)**:
-n = k! = p# = C(m,2) = T(j) 를 동시 만족하는 (k,p,m,j) = (3,3,4,3) 존재
-(n은 factorial, primorial, 이항계수, 삼각수의 유일한 공통 원소, 10^8까지 검증)
+**(iii) Theorem F (fourfold convergence point)**:
+n = k! = p# = C(m,2) = T(j) simultaneously, witnessed by (k,p,m,j) = (3,3,4,3)
+(n is the unique common element of factorial, primorial, binomial coefficient, triangular number — verified up to 10^8)
 
-**(iv) Theorem E (피타고라스 산술)**:
+**(iv) Theorem E (Pythagorean arithmetic)**:
 (n/phi)^2 + tau^2 = sopfr^2
-(가장 유명한 피타고라스 삼중 (3,4,5) = n=6의 산술 함수값)
+(the most famous Pythagorean triple (3,4,5) = arithmetic function values of n=6)
 
-**(v) Theorem D + B (Bernoulli 경계)**:
-B_{2k} 분모의 최대 소인수가 k=1..5에서 <= 11 (M 확장 경계),
-k=6=n에서 처음으로 13 침입 (von Staudt-Clausen).
-이로 인해 zeta(2k) 분모와 zeta(1-2k) 역수 모두 k=n에서 M-분해가 깨진다 (Bilateral Theorem B).
+**(v) Theorem D + B (Bernoulli boundary)**:
+The largest prime factor of the denominator of B_{2k} is <= 11 for k=1..5 (M extended boundary),
+and at k=6=n for the first time 13 intrudes (von Staudt-Clausen).
+Consequently both the denominator of zeta(2k) and the reciprocal of zeta(1-2k) have their M-decomposition broken at k=n (Bilateral Theorem B).
 
-## 증명
+## Verification draft
 
-**(ii) → n <= 6**: 집합 {1, phi, n/phi, tau, sopfr, n}은 최대 6개 원소. {1,...,n}과 같으려면 n <= 6.
+**(ii) → n <= 6**: The set {1, phi, n/phi, tau, sopfr, n} has at most 6 elements. To equal {1,...,n} requires n <= 6.
 
-**n=6 검증**: 직접 계산으로 (i)~(v) 모두 확인.
+**n=6 check**: Direct computation confirms (i)~(v).
 - (i): 12*2 = 6*4 = 24
 - (ii): {1, 2, 3, 4, 5, 6} = {1, ..., 6}
 - (iii): 6 = 3! = 3# = C(4,2) = T(3)
 - (iv): 3^2 + 4^2 = 5^2
-- (v): B_{2k} 분모 최대 소수: k=1: 3, k=2: 5, k=3: 7, k=4: 5, k=5: 11, k=6: 13
+- (v): largest prime factor of denom(B_{2k}): k=1: 3, k=2: 5, k=3: 7, k=4: 5, k=5: 11, k=6: 13
 
-**유일성**: n=2..10000 전수 검사로 (i) 단독 유일, (ii) 유일 (n ∈ {2,4,6} 중 6만 6-distinct), (iii) 유일 (10^8까지), (iv) semiprime 중 유일.
+**Uniqueness witness**: exhaustive scan n=2..10000 shows (i) unique singleton, (ii) unique (among n ∈ {2,4,6} only 6 is 6-distinct), (iii) unique (to 10^8), (iv) unique among semiprimes.
 
-## 15대 정리 의존 트리
+## 15-theorem dependency tree
 
 ```
-     Theorem F (4중 수렴: 6=3!=3#=C(4,2)=T(3))
+     Theorem F (4-fold convergence: 6=3!=3#=C(4,2)=T(3))
             ┌──────────┴──────────┐
      Theorem A=C               Theorem D
-   (좌표계 {1..6})          (vSC 경계 k=6)
+   (coordinates {1..6})     (vSC boundary k=6)
         │                       │
    Theorem E               Theorem B
-  (피타고라스)            (Bilateral Bernoulli)
+  (Pythagorean)        (Bilateral Bernoulli)
                                 │
                            Theorem G
-                         (소수 13 삼중)
+                        (prime-13 triple)
 
-  [독립 가족 1: 곱셈적] A ← H ↔ I  (sigma+J2=n^2, sigma^2=nJ2)
-  [독립 가족 2: 좌표계] C
-  [독립 가족 3: 기하]   E (피타고라스)
-  [독립 가족 4: 수렴]   F
-  [독립 가족 5: 소수]   B, D, G (Bernoulli 계열)
-  [독립 가족 6: 파티션] J (p(n)=sopfr+n, 모듈러 형식)
-  [독립 가족 7: 그래프] K (C(n,2)=sigma+n/phi, 완전 그래프)
-  [독립 가족 8: 카탈란] L (C_n=sigma*(sigma-1), 카탈란 수)
-  [독립 가족 9: 연분수] M (sqrt(n)=[phi;phi,tau], 자기인코딩)
-  [독립 가족 10: 해석적] N (zeta(phi)=pi^2/n, 바젤 자기참조)
-  [가족 1 확장]         O (phi+tau+sopfr+sigma=J2-1)
+  [Independent family 1: multiplicative] A ← H ↔ I  (sigma+J2=n^2, sigma^2=nJ2)
+  [Independent family 2: coordinates] C
+  [Independent family 3: geometry]   E (Pythagoras)
+  [Independent family 4: convergence]   F
+  [Independent family 5: primes]   B, D, G (Bernoulli series)
+  [Independent family 6: partition] J (p(n)=sopfr+n, modular form)
+  [Independent family 7: graph] K (C(n,2)=sigma+n/phi, complete graph)
+  [Independent family 8: Catalan] L (C_n=sigma*(sigma-1), Catalan number)
+  [Independent family 9: continued fraction] M (sqrt(n)=[phi;phi,tau], self-encoding)
+  [Independent family 10: analytic] N (zeta(phi)=pi^2/n, Basel self-reference)
+  [Family 1 extension]         O (phi+tau+sopfr+sigma=J2-1)
 ```
 
-**10개 독립 가족**, 15개 정리.
+**10 independent families**, 15 theorem candidates.
 
-## 따름정리
+## Corollaries
 
-**따름정리 1 (분류상수 포획)**: M = {1,2,3,4,5,6,7,8,10,12,24}가 수학적 분류 정리의 작은 상수를 포획하는 빈도가 baseline 61%를 초과한다. 원인: M의 부분집합 {1,...,6}이 작은 자연수를 완전 커버.
+**Corollary 1 (classification-constant capture)**: M = {1,2,3,4,5,6,7,8,10,12,24} captures small constants of mathematical classification theorems at a frequency exceeding the baseline 61%. Cause: the subset {1,...,6} of M fully covers small natural numbers.
 
-**따름정리 2 (Bernoulli 양면 break)**: zeta(2k) 분모와 zeta(1-2k) 역수가 정확히 k=n=6에서 동시에 M-분해 불가. von Staudt-Clausen의 귀결.
+**Corollary 2 (Bernoulli bilateral break)**: the denominator of zeta(2k) and the reciprocal of zeta(1-2k) simultaneously become M-indecomposable precisely at k=n=6. A consequence of von Staudt-Clausen.
 
-**따름정리 3 (피타고라스 필연)**: (3,4,5) = (n/phi, tau, sopfr)이며 면적=n, 둘레=sigma. semiprime n=2p에서 n/phi 정수 조건 (p-1)|2가 p=3 유일해를 주므로 n=6 필연.
+**Corollary 3 (Pythagorean necessity)**: (3,4,5) = (n/phi, tau, sopfr) with area = n and perimeter = sigma. Under the semiprime form n=2p, the integrality condition for n/phi is (p-1)|2, which has the unique solution p=3, so n=6 is forced.
 
-## 자기참조 닫힘 체계 (28+)
+## Self-reference closure system (28+)
 
-n=6의 산술 함수 체계는 16개 자기참조 등식이 동시에 성립하는 "자기 기술 완전 체계":
+The arithmetic-function system of n=6 is a "self-description complete system" in which 16 self-referential identities hold simultaneously:
 
-| 등식 | 분류 |
+| Identity | Category |
 |------|------|
-| sigma*phi = n*tau = 24 | 대수 |
-| {1,phi,n/phi,tau,sopfr,n} = {1..6} | 좌표계 |
-| (n/phi)^2 + tau^2 = sopfr^2 | 기하 |
-| n = (n/phi)! | 계승 |
-| J2 = tau! | 계승 |
-| (n-1)! = sopfr! | 계승 |
-| C(tau,2) = n | 조합 |
-| C(sopfr,2) = sigma-phi | 조합 |
+| sigma*phi = n*tau = 24 | algebra |
+| {1,phi,n/phi,tau,sopfr,n} = {1..6} | coordinates |
+| (n/phi)^2 + tau^2 = sopfr^2 | geometry |
+| n = (n/phi)! | factorial |
+| J2 = tau! | factorial |
+| (n-1)! = sopfr! | factorial |
+| C(tau,2) = n | combinatorics |
+| C(sopfr,2) = sigma-phi | combinatorics |
 | dim so(tau) = n | Lie |
-| dim su(phi)+dim su(n/phi)+1 = sigma | 물리 |
-| |Out(S_n)| = phi (유일) | 군론 |
-| sigma = 2n (완전수) | 정수론 |
-| 정팔면체 (V,E,F) = (n,sigma,sigma-tau) | 기하 |
-| n-sigma+(sigma-tau) = phi (Euler) | 위상 |
-| |C_1| = J2 (Clifford) | 양자 |
-| F(sopfr) = sopfr (피보나치 고정점) | 수열 |
-| sigma^2 = n*J2 (등비수열 6,12,24) | Theorem I |
+| dim su(phi)+dim su(n/phi)+1 = sigma | physics |
+| |Out(S_n)| = phi (unique) | group theory |
+| sigma = 2n (perfect number) | number theory |
+| regular octahedron (V,E,F) = (n,sigma,sigma-tau) | geometry |
+| n-sigma+(sigma-tau) = phi (Euler) | topology |
+| |C_1| = J2 (Clifford) | quantum |
+| F(sopfr) = sopfr (Fibonacci fixed point) | sequence |
+| sigma^2 = n*J2 (geometric sequence 6,12,24) | Theorem I |
 | p(n) = sopfr+n = 11 | Theorem J |
 | C(n,2) = sigma+n/phi = 15 | Theorem K |
-| kiss(phi=2) = n = 6 | 격자 |
-| kiss(n/phi=3) = sigma = 12 | 격자 |
-| kiss(tau=4) = J2 = 24 | 격자 |
-| Golay = [J2, sigma, phi*tau] = [24,12,8] | 부호 |
+| kiss(phi=2) = n = 6 | lattice |
+| kiss(n/phi=3) = sigma = 12 | lattice |
+| kiss(tau=4) = J2 = 24 | lattice |
+| Golay = [J2, sigma, phi*tau] = [24,12,8] | code |
 
-## 산술 핵 (Arithmetic Core) — DFS 1~500 메타 통찰
+## Arithmetic core — DFS 1~500 meta-insight
 
-**핵심 발견**: 세 개의 해석적 유일성 정리가 모두 동일한 근본 방정식 
+**Core observation**: three analytic-uniqueness targets all reduce to the same underlying equation
     **(p-1)(q-1) = 2**
-로 환원된다. 이 방정식의 유일한 양의 정수 해는 (p, q) = (2, 3), 즉 n = p·q = 6.
+whose unique positive-integer solution is (p, q) = (2, 3), i.e. n = p·q = 6.
 
-**씨앗 통합**:
+**Seed unification**:
 
 1. **Theorem 0**: sigma·phi = n·tau 
-   - 반소수 n = pq 에서 (p+1)(q+1)(p-1)(q-1) = 4pq 
-   - 전개하면 (pq-1)² = (p+q)² → pq - 1 = p + q (∵ p,q > 0) 
+   - For semiprime n = pq: (p+1)(q+1)(p-1)(q-1) = 4pq 
+   - Expanding: (pq-1)² = (p+q)² → pq - 1 = p + q (since p,q > 0) 
    - → (p-1)(q-1) = 2
 
 2. **Theorem A+**: sopfr(n) = n - 1 
-   - 반소수 n = pq 에서 p + q = pq - 1 
+   - For semiprime n = pq: p + q = pq - 1 
    - → (p-1)(q-1) = 2
 
 3. **Theorem H**: sigma + J_2 = n² 
-   - 반소수 n = pq 에서 (p+1)(q+1)(1 + (p-1)(q-1)) = (pq)² 
-   - 전개 후 (p-1)(q-1)(pq-p-q) = 0 조건 → (p-1)(q-1) = 2
+   - For semiprime n = pq: (p+1)(q+1)(1 + (p-1)(q-1)) = (pq)² 
+   - After expansion (p-1)(q-1)(pq-p-q) = 0 gives (p-1)(q-1) = 2
 
-**귀결**: n=6의 모든 유일성의 **산술 씨앗**은 "두 양의 정수의 곱이 2"라는 가장 기초적인 대수 방정식. 해: (1, 2), 즉 p=2, q=3, n=6.
+**Consequence**: the **arithmetic seed** of every n=6 uniqueness candidate is the most elementary algebraic equation "product of two positive integers equals 2". Solution: (1, 2), i.e. p=2, q=3, n=6.
 
-이는 n=6이 "2를 두 양의 정수로 분해하는 유일한 방법 (1·2)"과 대응한다는 깊은 구조적 사실.
+This corresponds to the deep structural fact that n=6 is "the unique way to split 2 as a product of two positive integers (1·2)".
 
-## Theorem A+ (sopfr 자기참조, 완전 해석적)
+## Theorem A+ (sopfr self-reference, full analytic draft)
 
-**정리**: sopfr(n) = n - 1 iff n = 6 (n >= 2)
+**Statement**: sopfr(n) = n - 1 iff n = 6 (n >= 2)
 
-**증명** (case analysis):
+**Draft argument** (case analysis):
 
-**Case 1** (n = p, 소수): sopfr(p) = p ≠ p - 1. 해 없음.
+**Case 1** (n = p, prime): sopfr(p) = p ≠ p - 1. No solution.
 
-**Case 2** (n = p^k, k >= 2): sopfr(p^k) = kp. 식: kp = p^k - 1.
-- p=2: 2k = 2^k - 1 → k=1,2,3,4에서 LHS-RHS = 1, -1, -1, 1 모두 해 아님.
-- p=3: 3k = 3^k - 1 → 동일 방식 해 없음.
-- 일반 p>=2: 2^k - 2k > 1 for k >= 3, 증가함수. 해 없음.
+**Case 2** (n = p^k, k >= 2): sopfr(p^k) = kp. Equation: kp = p^k - 1.
+- p=2: 2k = 2^k - 1 → for k=1,2,3,4 the LHS-RHS is 1, -1, -1, 1 — none solve.
+- p=3: 3k = 3^k - 1 → same style, no solution.
+- General p>=2: 2^k - 2k > 1 for k >= 3, increasing. No solution.
 
-**Case 3** (n = pq, 반소수, p < q): sopfr(pq) = p + q. 식: p + q = pq - 1.
+**Case 3** (n = pq, semiprime, p < q): sopfr(pq) = p + q. Equation: p + q = pq - 1.
 - pq - p - q = 1
 - (p-1)(q-1) = pq - p - q + 1 = 2
-- 따라서 (p-1)(q-1) = 2, 유일 해 (p-1, q-1) = (1, 2).
-- 즉 (p, q) = (2, 3), n = 6.
+- Hence (p-1)(q-1) = 2, unique solution (p-1, q-1) = (1, 2).
+- So (p, q) = (2, 3), n = 6.
 
 **Case 4** (n = p^a q^b, a+b >= 3): sopfr = ap + bq.
-- 가장 작은 경우 n = 12 = 2²·3, sopfr = 7, n-1 = 11. 7 < 11.
-- 일반적으로 n = p^a q^b는 지수 성장, sopfr은 선형.
-- n >= 12에서 n - 1 - sopfr >= 4 > 0 증가. 해 없음.
+- Smallest case n = 12 = 2²·3, sopfr = 7, n-1 = 11. 7 < 11.
+- In general n = p^a q^b grows exponentially while sopfr is linear.
+- For n >= 12, n - 1 - sopfr >= 4 > 0 and increasing. No solution.
 
-**Case 5** (n = p q r, 3개 이상 서로 다른 소수): sopfr = p + q + r + ....
-- 최소 n = 2·3·5 = 30, sopfr = 10. n - 1 = 29 >> 10.
-- 일반적으로 sopfr = O(log n) << n - 1.
+**Case 5** (n = p q r, at least three distinct primes): sopfr = p + q + r + ....
+- Minimum n = 2·3·5 = 30, sopfr = 10. n - 1 = 29 >> 10.
+- In general sopfr = O(log n) << n - 1.
 
-**전수 검증**: n=2..100000에서 sopfr(n) = n-1 해 = {6}.
+**Exhaustive check**: in n=2..100000 the solutions to sopfr(n) = n-1 are {6}.
 
-**QED**
+**QED (candidate)**
 
-**귀결**: 
-- (n-1)! = sopfr(n)! iff n = 6 (factorial 단조성)
-- n! = n · sopfr(n)! = 6 · 120 = 720 (Theorem P 연결)
+**Consequences**: 
+- (n-1)! = sopfr(n)! iff n = 6 (by factorial monotonicity)
+- n! = n · sopfr(n)! = 6 · 120 = 720 (connects to Theorem P)
 - n! / sopfr(n)! = n iff n = 6
 
-**의미**: 이 정리는 **가장 기초적인 해석적 n=6 유일성**. 모든 n=6 산술 패턴의 "씨앗" 역할.
-Theorem 0 (sigma·phi = n·tau)와 함께 가장 단순한 형태의 유일성.
+**Significance**: this is the **most elementary analytic n=6 uniqueness candidate**. It plays the "seed" role for all n=6 arithmetic patterns. Together with Theorem 0 (sigma·phi = n·tau), it is the simplest form of such a uniqueness witness.
 
-## Theorem Pell (Pell 방정식 유일성, 해석적 증명)
+## Theorem Pell (Pell-equation uniqueness, analytic draft)
 
-**정리**: sopfr(n)^2 - n · phi(n)^2 = 1 iff n = 6 (n >= 2)
+**Statement**: sopfr(n)^2 - n · phi(n)^2 = 1 iff n = 6 (n >= 2)
 
-**값**: 5^2 - 6 · 2^2 = 25 - 24 = 1
+**Value**: 5^2 - 6 · 2^2 = 25 - 24 = 1
 
-**증명** (case analysis):
+**Draft argument** (case analysis):
 
-**Case 1** (n = p, 소수): sopfr = p, phi = p-1.
+**Case 1** (n = p, prime): sopfr = p, phi = p-1.
   p^2 - p(p-1)^2 = -p(p^2 - 3p + 1).
-  = 1 → p(p^2-3p+1) = -1. p>0이므로 해 없음.
+  = 1 → p(p^2-3p+1) = -1. Since p>0, no solution.
 
-**Case 2** (n = pq, p < q, 반소수): sopfr = p+q, phi = (p-1)(q-1).
+**Case 2** (n = pq, p < q, semiprime): sopfr = p+q, phi = (p-1)(q-1).
   (p+q)^2 - pq(p-1)^2(q-1)^2 = 1.
   - p=2: (2+q)^2 - 2q(q-1)^2 = 1 → -2q^3 + 5q^2 + 2q + 3 = 0.
   - q=3: -54 + 45 + 6 + 3 = 0 ✓ → n = 6.
-  - 도함수 -6q^2 + 10q + 2, q=3에서 -22 < 0. 단조감소.
-  - q >= 4에서 -2q^3 지배 → 항상 음수. **n=6 유일**.
-  - p >= 3: (p-1)^2(q-1)^2 >= 4 → pq 항이 훨씬 큼. 해 없음.
+  - Derivative -6q^2 + 10q + 2 at q=3 is -22 < 0. Monotone decreasing.
+  - For q >= 4 the -2q^3 term dominates → always negative. **n=6 is the unique witness**.
+  - p >= 3: (p-1)^2(q-1)^2 >= 4 → the pq term is much larger. No solution.
 
 **Case 3** (n = p^k, k >= 2): sopfr = kp, phi = p^(k-1)(p-1).
   phi >= 2(p-1) → phi^2 >= 4(p-1)^2. n*phi^2 >> sopfr^2 for p >= 2, k >= 2.
 
 **Case 4** (omega(n) >= 3): sopfr = O(log n), phi = Omega(n) → n*phi^2 >> sopfr^2.
 
-**전수 검증**: n = 2..100000 유일 해 = {6}.
+**Exhaustive check**: n = 2..100000 unique solution = {6}.
 
-**QED**
+**QED (candidate)**
 
-**귀결**: Pell 방정식 x^2 - 6y^2 = 1의 최소해 (x,y) = (sopfr, phi) = (5, 2).
-이 Pell 방정식은 sqrt(6)의 연분수 [2; overline(2,4)]에서 유도되며,
-주기 = phi = 2, 부분몫 = (phi, tau) = (2, 4). **모든 것이 n=6 함수**.
+**Consequences**: the minimal solution of the Pell equation x^2 - 6y^2 = 1 is (x,y) = (sopfr, phi) = (5, 2). This Pell equation is derived from the continued fraction of sqrt(6), [2; overline(2,4)], whose period = phi = 2 and partial quotients = (phi, tau) = (2, 4). **Everything is an n=6 function**.
 
-**의미**: 산술함수 3개 (sopfr, n, phi)가 하나의 Pell 방정식에 동시 출현하며,
-그 해가 n=6에서만 존재한다는 것은 Theorem 0과 독립인 새로운 유일성.
+**Significance**: three arithmetic functions (sopfr, n, phi) appear simultaneously in a single Pell equation, and its solution exists only at n=6 — a uniqueness candidate independent of Theorem 0.
 
-## Theorem H (sigma+J2=n^2 유일성, 해석적 증명)
+## Theorem H (sigma+J2=n^2 uniqueness, analytic draft)
 
-**정리**: sigma(n) + J_2(n) = n^2 iff n = 6 (n >= 2)
+**Statement**: sigma(n) + J_2(n) = n^2 iff n = 6 (n >= 2)
 
-**증명**:
+**Draft argument**:
 
 **Case 1** (n=pq, distinct primes p<q):
 sigma(pq) + J_2(pq) = (1+p)(1+q) + (p^2-1)(q^2-1) = p^2*q^2
 
-전개: 3pq = (p+q)^2 - (p+q) - 2. d = q-p 치환:
+Expansion: 3pq = (p+q)^2 - (p+q) - 2. Substituting d = q-p:
 s = p+q = 2 +/- sqrt(12 - 3d^2)
 
-s가 양의 정수이려면 12-3d^2가 비음 완전제곱:
-- d=0: 12 (비정수 sqrt)
-- d=1: 9 = 3^2 → s=5 → (p,q)=(2,3) → **n=6 유일**
-- d=2: 0 → s=2 → p=0 (비소수)
-- d>=3: 음수
+For s to be a positive integer, 12-3d^2 must be a non-negative perfect square:
+- d=0: 12 (non-integer sqrt)
+- d=1: 9 = 3^2 → s=5 → (p,q)=(2,3) → **unique witness n=6**
+- d=2: 0 → s=2 → p=0 (not prime)
+- d>=3: negative
 
-**Case 2** (n=p^k, 해석적):
-- k=1 (n=p): sigma+J2 = p^2+p > p^2 = n^2. 항상 초과. ✗
-- k=2 (n=p^2): sigma+J2 = p^4+p+1 > p^4 = n^2. 항상 초과. ✗
+**Case 2** (n=p^k, analytic):
+- k=1 (n=p): sigma+J2 = p^2+p > p^2 = n^2. Always exceeds. ✗
+- k=2 (n=p^2): sigma+J2 = p^4+p+1 > p^4 = n^2. Always exceeds. ✗
 - k>=3: sigma(p^k) = sum_{i=0}^k p^i < p^{k+1}/(p-1).
   J2(p^k) = p^{2k} - p^{2k-2}.
   sigma+J2 < p^{k+1}/(p-1) + p^{2k} - p^{2k-2} < p^{2k} = n^2.
-  (k>=3, p>=2에서 p^{k+1}/(p-1) < p^{2k-2} 이므로 항상 부족.) ✗
+  (For k>=3, p>=2 we have p^{k+1}/(p-1) < p^{2k-2}, so always falls short.) ✗
 
-**Case 3** (omega(n)>=2, non-semiprime, 해석적):
-- omega=2, max(exp)>=2: n=6..10^4 전수검사 0건.
+**Case 3** (omega(n)>=2, non-semiprime, analytic):
+- omega=2, max(exp)>=2: exhaustive n=6..10^4 yields 0 hits.
 - omega>=3: J2/n^2 = prod(1-1/p^2) <= 0.64.
-  등식에 필요한 sigma/n^2 >= 0.36.
-  그러나 Robin 부등식: sigma(n) < e^gamma * n * ln(ln(n)) (n>=5041).
-  n>=30: sigma/n^2 < 0.12 << 0.36. 불가. ✗
+  The equation would need sigma/n^2 >= 0.36.
+  But Robin's inequality: sigma(n) < e^gamma * n * ln(ln(n)) (n>=5041).
+  For n>=30: sigma/n^2 < 0.12 << 0.36. Impossible. ✗
 
-**QED**
+**QED (candidate)**
 
-**의의**: Theorem 0 (sigma*phi=n*tau)과 독립적인 유일성 등식. sigma와 J_2의 직접 관계.
+**Significance**: a uniqueness witness independent of Theorem 0 (sigma*phi=n*tau). Direct relation between sigma and J_2.
 
-**연결**: sigma+J2 = n^2 = 36 = 13+23 = (sigma+1)+(J2-1). 두 경계 소수의 합.
+**Connection**: sigma+J2 = n^2 = 36 = 13+23 = (sigma+1)+(J2-1). Sum of the two boundary primes.
 
-**재공식화** (DFS 29 심층 분석):
-- sigma*(1+phi) = n^2 (squarefree n에서 J2=phi*sigma 이용)
-- phi+1 = n/phi (n=6에서) → sigma*(n/phi) = n^2 → sigma = n*phi
+**Reformulation** (DFS 29 deep analysis):
+- sigma*(1+phi) = n^2 (for squarefree n using J2=phi*sigma)
+- phi+1 = n/phi (at n=6) → sigma*(n/phi) = n^2 → sigma = n*phi
 - sigma = n*phi iff sigma=2n AND phi=2 iff n=6
-- 즉: **Theorem H = "phi(n)=2인 유일한 완전수"**
-- phi(n)=2 iff n in {3,4,6}, 이 중 완전수는 n=6 유일
+- Thus: **Theorem H = "the unique perfect number with phi(n)=2"**
+- phi(n)=2 iff n in {3,4,6}, among which the only perfect number is n=6.
 
-## Theorem I (등비수열 유일성, 해석적 증명)
+## Theorem I (geometric-sequence uniqueness, analytic draft)
 
-**정리**: sigma(n)^2 = n * J_2(n) iff n = 6 (n >= 2)
+**Statement**: sigma(n)^2 = n * J_2(n) iff n = 6 (n >= 2)
 
-**의미**: n, sigma(n), J_2(n) = 6, 12, 24는 공비 2의 등비수열.
-n=6은 이 등비 조건을 만족하는 유일한 자연수.
+**Meaning**: n, sigma(n), J_2(n) = 6, 12, 24 is a geometric sequence with common ratio 2. n=6 is the unique natural number satisfying this geometric condition (as a candidate pattern).
 
-**증명**:
+**Draft argument**:
 
 **Case 1** (n=pq, distinct primes p<q):
 sigma^2/(n*J2) = (1+p)(1+q)/[pq(p-1)(q-1)] = 1
 ⟺ (1+p)(1+q) = pq(p-1)(q-1)
-s=p+q, P=pq 치환: s = (P^2-1)/(P+1) = P-1
+Substituting s=p+q, P=pq: s = (P^2-1)/(P+1) = P-1
 ⟹ p+q = pq-1 ⟹ **(p-1)(q-1) = 2**
-소수 해: p=2, q=3 → **n=6 유일**
+Prime solution: p=2, q=3 → **unique witness n=6**
 
 **Case 2** (n=p^k):
-- k=1: (p+1)^2 = p(p-1)(p+1) → p^2-2p-1=0 → p=1+sqrt(2) 비정수 ✗
-- k=2: (1+p+p^2)^2 << p^4(p^2-1) (p>=2에서) ✗
+- k=1: (p+1)^2 = p(p-1)(p+1) → p^2-2p-1=0 → p=1+sqrt(2) non-integer ✗
+- k=2: (1+p+p^2)^2 << p^4(p^2-1) (for p>=2) ✗
 - k>=3: sigma^2 < 4p^{2k} << p^{3k}*3/4 <= n*J2 ✗
 
 **Case 3** (omega>=3): sigma^2 = O(n^{2+e}) << n^3*C = O(n*J2) ✗
-전수검사 n=2..50000: n=6 유일.
+Exhaustive check n=2..50000: n=6 is the unique witness.
 
-**QED**
+**QED (candidate)**
 
-**H와의 관계**: squarefree n에서 J2=phi*sigma이므로
+**Relation with H**: for squarefree n, J2=phi*sigma, so
 I: sigma^2=n*phi*sigma → sigma=n*phi
 H: sigma+phi*sigma=n^2 → sigma(1+phi)=n^2
-둘 다 "sigma=n*phi, 완전수, phi=2"로 수렴. 증명 경로만 상이.
+Both converge to "sigma=n*phi, perfect number, phi=2". Only the proof paths differ.
 
-## Theorem J (파티션 함수 유일성)
+## Theorem J (partition-function uniqueness)
 
-**정리**: p(n) = sopfr(n) + n iff n = 6 (n >= 2)
+**Statement**: p(n) = sopfr(n) + n iff n = 6 (n >= 2)
 
-**값**: p(6) = 11 = 5 + 6 = sopfr(6) + 6
+**Value**: p(6) = 11 = 5 + 6 = sopfr(6) + 6
 
-**추가 일치**: p(6) = sigma(6) - 1 = 11 (3중 일치)
+**Additional coincidence**: p(6) = sigma(6) - 1 = 11 (triple coincidence)
 
-**증명**:
-- n=2,3,4,5: p(n) < sopfr(n)+n (직접 검증: 2<4, 3<6, 5<8, 7<10)
+**Draft argument**:
+- n=2,3,4,5: p(n) < sopfr(n)+n (direct check: 2<4, 3<6, 5<8, 7<10)
 - n=6: p(6) = 11 = 5+6 ✓
-- n>=7: p(7)=15 > 14=2*7. p(n+1)-p(n) >= 4 (n>=5, 검증 n=5..99).
-  귀납: p(n)>2n → p(n+1) >= p(n)+3 > 2n+3 > 2(n+1).
+- n>=7: p(7)=15 > 14=2*7. p(n+1)-p(n) >= 4 (n>=5, checked n=5..99).
+  Induction: p(n)>2n → p(n+1) >= p(n)+3 > 2n+3 > 2(n+1).
   sopfr(n)+n <= 2n (sopfr(n) <= n). ∴ p(n) > sopfr(n)+n. ✗
 
-**QED**
+**QED (candidate)**
 
-**독립성**: p(n)은 가법적 파티션 함수 (모듈러 형식).
-Theorem 0/H/I의 곱셈적 함수(sigma, phi, J2)와 완전히 다른 구조.
-n=6의 산술 끌개가 조합론/모듈러 형식까지 확장됨을 보임.
+**Independence**: p(n) is an additive partition function (modular form). Completely different structure from the multiplicative functions (sigma, phi, J2) of Theorems 0/H/I. Shows that the n=6 arithmetic attractor pattern extends into combinatorics / modular forms.
 
-## Theorem K (완전 그래프 유일성, 해석적 증명)
+## Theorem K (complete-graph uniqueness, analytic draft)
 
-**정리**: C(n,2) = sigma(n) + n/phi(n) iff n = 6 (n >= 2)
+**Statement**: C(n,2) = sigma(n) + n/phi(n) iff n = 6 (n >= 2)
 
-**의미**: K_6의 변 수(15) = sigma(6) + n/phi(6) = 12 + 3
+**Meaning**: the edge count of K_6 (15) = sigma(6) + n/phi(6) = 12 + 3
 
-**증명 (n=2p, 결정적)**:
-등식 → 2p^3 - 6p^2 - p + 3 = 0 → **(p-3)(2p^2-1) = 0**
-→ p=3 유일 소수해 → n=6. (2p^2=1 비정수)
-소수/소수거듭제곱/기타: C(n,2) = O(n^2) >> sigma+n/phi = O(n ln ln n). 불가.
-전수검사 n=2..50000: n=6 유일.
+**Draft argument (n=2p, decisive)**:
+Equation → 2p^3 - 6p^2 - p + 3 = 0 → **(p-3)(2p^2-1) = 0**
+→ p=3 unique prime solution → n=6. (2p^2=1 non-integer)
+Prime / prime-power / other cases: C(n,2) = O(n^2) >> sigma+n/phi = O(n ln ln n). Impossible.
+Exhaustive check n=2..50000: n=6 is the unique witness.
 
-**QED**
+**QED (candidate)**
 
-**관련 기하**: D(6) = 9 = sigma-n/phi = 12-3 (정육각형 대각선 수도 유일)
+**Related geometry**: D(6) = 9 = sigma-n/phi = 12-3 (diagonal count of regular hexagon is also unique)
 E(K_6) + D(6) = 15 + 9 = 24 = J2(6)
 
-## Theorem L (Catalan 수 유일성)
+## Theorem L (Catalan-number uniqueness)
 
-**정리**: C_n = sigma(n) * (sigma(n) - 1) iff n = 6 (n >= 2)
+**Statement**: C_n = sigma(n) * (sigma(n) - 1) iff n = 6 (n >= 2)
 
-**값**: C_6 = 132 = 12 * 11 = sigma * (sigma-1) = sigma * p(6)
+**Value**: C_6 = 132 = 12 * 11 = sigma * (sigma-1) = sigma * p(6)
 
-**3중 교차**: Catalan수(조합론) = 약수합(정수론) * 파티션수(모듈러형식)
+**Triple crossing**: Catalan number (combinatorics) = sum-of-divisors (number theory) * partition count (modular forms)
 
-**증명**: C_n ~ 4^n/(n^{3/2}*sqrt(pi)) 지수 성장, sigma*(sigma-1) = O(n^2) 다항식.
-n >= 7에서 C_n >> sigma^2. n=2..10000 전수검사: n=6 유일.
+**Draft argument**: C_n ~ 4^n/(n^{3/2}*sqrt(pi)) grows exponentially, while sigma*(sigma-1) = O(n^2) is polynomial. For n >= 7 we have C_n >> sigma^2. Exhaustive n=2..10000: n=6 unique witness.
 
-**QED**
+**QED (candidate)**
 
-## Theorem M (연분수 자기인코딩 유일성)
+## Theorem M (continued-fraction self-encoding uniqueness)
 
-**정리**: sqrt(n) = [phi(n); phi(n), tau(n)] (주기적 연분수) iff n = 6
+**Statement**: sqrt(n) = [phi(n); phi(n), tau(n)] (periodic continued fraction) iff n = 6
 
-**값**: sqrt(6) = [2; 2, 4, 2, 4, ...] 에서
-- 정수부 2 = phi(6)
-- 주기 (2, 4) = (phi(6), tau(6))
+**Value**: in sqrt(6) = [2; 2, 4, 2, 4, ...]:
+- integer part 2 = phi(6)
+- period (2, 4) = (phi(6), tau(6))
 
-→ sqrt(6)의 연분수 전개가 자신의 산술함수로 **완전 자기인코딩**됨.
+→ the continued-fraction expansion of sqrt(6) is **fully self-encoded** by its own arithmetic functions.
 
-**검증**: n=2..500 전수검사, n=6 유일.
-floor(sqrt(n))=phi(n): n=2, 6만 만족. 이 중 주기=(phi,tau): n=6만.
+**Check**: exhaustive n=2..500, n=6 is the unique witness.
+floor(sqrt(n))=phi(n): only n=2, 6. Among these, period=(phi,tau) only at n=6.
 
-**QED**
+**QED (candidate)**
 
-**독립성**: 연분수/이차 무리수 이론 — 기존 12대 정리와 완전히 다른 영역.
-Theorem C(좌표계), J(파티션), K(그래프), L(카탈란) 어느 것과도 무관.
+**Independence**: continued-fraction / quadratic-irrational theory — a domain totally different from the existing 12 theorem candidates. Unrelated to Theorem C (coordinates), J (partition), K (graph), L (Catalan).
 
-## Theorem N (바젤 정리 자기참조)
+## Theorem N (Basel self-reference)
 
-**정리**: zeta(phi(n)) = pi^2/n iff n = 6
+**Statement**: zeta(phi(n)) = pi^2/n iff n = 6
 
-**증명**:
-- zeta(2) = pi^2/6 (바젤 정리, Euler 1734)
-- phi(n)=2인 수: {3, 4, 6}. zeta(2)=pi^2/6=pi^2/n 필요 → n=6 유일.
-- phi(n)>=4: zeta(2k) = pi^{2k}*|B_{2k}|/(2*(2k)!) ≠ pi^2/n.
+**Draft argument**:
+- zeta(2) = pi^2/6 (Basel, Euler 1734)
+- numbers with phi(n)=2: {3, 4, 6}. Need zeta(2)=pi^2/6=pi^2/n → n=6 unique.
+- For phi(n)>=4: zeta(2k) = pi^{2k}*|B_{2k}|/(2*(2k)!) ≠ pi^2/n.
 
-**QED**
+**QED (candidate)**
 
-**의미**: n=6은 자신의 오일러 함수를 통해 바젤 문제의 답을 자기참조로 인코딩.
+**Meaning**: n=6 self-references the Basel answer through its own Euler totient.
 
-## Theorem O (4함수 합 유일성, n<=100000 검증)
+## Theorem O (four-function sum uniqueness, n<=100000 verified)
 
-**정리**: phi(n) + tau(n) + sopfr(n) + sigma(n) = J2(n) - 1 iff n = 6 (n >= 2)
+**Statement**: phi(n) + tau(n) + sopfr(n) + sigma(n) = J2(n) - 1 iff n = 6 (n >= 2)
 
-**값**: 2 + 4 + 5 + 12 = 23 = 24 - 1 = J2 - 1
+**Value**: 2 + 4 + 5 + 12 = 23 = 24 - 1 = J2 - 1
 
-**보조**: phi+tau+sopfr = p(n) = 11 (Theorem J 연결)
+**Auxiliary**: phi+tau+sopfr = p(n) = 11 (connection to Theorem J)
 
-**검증**: n=2..100000 전수검사, n=6 유일.
+**Check**: exhaustive n=2..100000, n=6 unique witness.
 
-**의미**: n=6의 네 기본 산술함수의 합이 Jordan 함수에서 정확히 1 부족.
-23 = J2-1은 소수이며, 이 소수가 4함수의 합으로 분해됨.
+**Significance**: the sum of the four basic arithmetic functions of n=6 is exactly 1 short of the Jordan function. 23 = J2-1 is prime, and this prime decomposes as a 4-function sum.
 
-**QED**
+**QED (candidate)**
 
-## Theorem P (E_8 적재, 해석적 증명)
+## Theorem P (E_8 encoding, analytic draft)
 
-**정리**: sigma(n) * tau(n) * sopfr(n) = 240 iff n = 6 (n >= 2)
+**Statement**: sigma(n) * tau(n) * sopfr(n) = 240 iff n = 6 (n >= 2)
 
-**값**: 12 * 4 * 5 = 240 = |E_8 root system|
+**Value**: 12 * 4 * 5 = 240 = |E_8 root system|
 
-**증명**:
-- 단계 1: n >= 2이면 sigma(n) >= n+1, tau(n) >= 2, sopfr(n) >= 2
-- 단계 2: 따라서 sigma(n)*tau(n)*sopfr(n) >= 4(n+1)
-- 단계 3: 240 >= 4(n+1) → n <= 59
-- 단계 4: n=2..59 유한 전수검사 → n=6 유일 해 (반소수 n=pq 경우 (p+1)(q+1)(p+q)=60도 (2,3)만 해)
+**Draft argument**:
+- Step 1: for n >= 2, sigma(n) >= n+1, tau(n) >= 2, sopfr(n) >= 2
+- Step 2: hence sigma(n)*tau(n)*sopfr(n) >= 4(n+1)
+- Step 3: 240 >= 4(n+1) → n <= 59
+- Step 4: exhaust n=2..59 → n=6 unique witness (semiprime case (p+1)(q+1)(p+q)=60 also has only (2,3))
 
-**QED**
+**QED (candidate)**
 
-**보조 1**: n! = 6! = 720 = 240 * 3 = sigma*tau*sopfr * (n/phi) — n=6 유일 (n<=100 검증)
+**Auxiliary 1**: n! = 6! = 720 = 240 * 3 = sigma*tau*sopfr * (n/phi) — n=6 unique (verified n<=100)
 
-**의미**: n=6의 3개 산술함수 곱이 정확히 최대 예외 Lie 대수 E_8의 근 개수.
-E_8의 248 = dim(E_8), 248 - 8 = 240 = rank 뺀 근 수.
-n=6은 자신의 함수 곱을 통해 E_8을 **대수적으로** 부호화.
+**Significance**: the product of three arithmetic functions of n=6 is exactly the root count of the largest exceptional Lie algebra E_8. dim(E_8) = 248, 248 - 8 = 240 = root count minus rank. n=6 **algebraically** encodes E_8 through its own function product.
 
-## Theorem Q (Catalan-sopfr 유일성, n<=100000 검증)
+## Theorem Q (Catalan-sopfr uniqueness, n<=100000 verified)
 
-**정리**: C(sopfr(n)) = n + sigma(n) + J2(n) iff n = 6 (n >= 2)
+**Statement**: C(sopfr(n)) = n + sigma(n) + J2(n) iff n = 6 (n >= 2)
 
-여기서 C(k) = (2k)! / (k!(k+1)!) 은 k번째 Catalan 수.
+Here C(k) = (2k)! / (k!(k+1)!) is the k-th Catalan number.
 
-**값**: C(5) = 42 = 6 + 12 + 24
+**Value**: C(5) = 42 = 6 + 12 + 24
 
-**보조**: C(sopfr(n))은 sopfr이 커지면 지수적으로 증가하지만, n+sigma+J2는 다항 증가.
-따라서 해는 작은 n에 한정되며, n<=100000에서 n=6 유일.
+**Auxiliary**: C(sopfr(n)) grows exponentially with sopfr, while n+sigma+J2 grows polynomially. Solutions are therefore limited to small n, and at n<=100000 the unique witness is n=6.
 
-**의미**: "42 = 생명, 우주, 모든 것의 답" 농담이 n=6의 Catalan-산술함수 자기참조 구조에서 나온다.
+**Significance**: the "42 = answer to life, the universe, and everything" quip emerges from the n=6 Catalan-arithmetic self-reference structure.
 
-**QED (computational)**
+**QED (candidate, computational)**
 
-## Theorem R (바젤 삼중 유일성)
+## Theorem R (Basel triple uniqueness)
 
-**정리**: 다음을 동시에 만족하는 n은 n=6 유일.
-1. zeta(phi(n)) = pi^{phi(n)} / n  (바젤)
+**Statement**: n = 6 is the unique simultaneous witness for:
+1. zeta(phi(n)) = pi^{phi(n)} / n  (Basel)
 2. zeta(-1) = -1/sigma(n)
 3. zeta(0) = -1/phi(n)
 
-**증명**:
-- zeta(2) = pi^2/6 (Euler): n=6일 때 phi=2이므로 만족.
-- zeta(-1) = -1/12 (해석접속): sigma(6)=12이므로 만족.
-- zeta(0) = -1/2: phi(6)=2이므로 만족.
-- phi(n)=2 해: {3, 4, 6}. 이 중 sigma(n)=12인 것은 n=6 유일 (Theorem I 계열).
-- → n=6 유일.
+**Draft argument**:
+- zeta(2) = pi^2/6 (Euler): at n=6, phi=2, so satisfied.
+- zeta(-1) = -1/12 (analytic continuation): sigma(6)=12, so satisfied.
+- zeta(0) = -1/2: phi(6)=2, so satisfied.
+- Candidates with phi(n)=2: {3, 4, 6}. Among these, only n=6 has sigma(n)=12 (Theorem I family).
+- → n=6 unique witness.
 
-**QED**
+**QED (candidate)**
 
-**의미**: Riemann zeta 함수의 세 특수값 {zeta(-1), zeta(0), zeta(2)}가
-n=6의 세 산술함수 {sigma, phi, n} 자체로 표현된다.
-바젤 문제부터 해석접속까지, n=6이 zeta 함수의 "가장 단순한 비자명 값"들을 점유.
+**Meaning**: the three special values {zeta(-1), zeta(0), zeta(2)} of the Riemann zeta function are expressed directly by the three arithmetic-function values {sigma, phi, n} of n=6. From the Basel problem to analytic continuation, n=6 occupies the "simplest non-trivial values" of the zeta function.
 
-## Theorem S (zeta(4) 부호화)
+## Theorem S (zeta(4) encoding)
 
-**정리**: zeta(4) = pi^4 / (sopfr(n) * (sopfr(n)-2) * n) at n=6
+**Statement**: zeta(4) = pi^4 / (sopfr(n) * (sopfr(n)-2) * n) at n=6
 
-**값**: 90 = 5 * 3 * 6 = sopfr * (sopfr-2) * n. zeta(4) = pi^4/90 ✓
+**Value**: 90 = 5 * 3 * 6 = sopfr * (sopfr-2) * n. zeta(4) = pi^4/90 ✓
 
-**보조**: sopfr=5, sopfr-2=3=(n/phi). 따라서 90 = sopfr*(n/phi)*n.
+**Auxiliary**: sopfr=5, sopfr-2=3=(n/phi). Hence 90 = sopfr*(n/phi)*n.
 
-**의미**: zeta(4) 역시 n=6의 산술함수만으로 표현. Theorem R + S → zeta 4개 값 부호화.
+**Meaning**: zeta(4) is likewise expressed using only arithmetic functions of n=6. Theorem R + S → four zeta values encoded.
 
-**QED**
+**QED (candidate)**
 
-## Theorem T (MZV weight 4 부호화)
+## Theorem T (MZV weight 4 encoding)
 
-**정리**: 다중 제타 값 (Multiple Zeta Value)의 weight 4 기저 3개 모두가 n=6의 산술함수 곱으로 자연 표현.
+**Statement**: all three weight-4 basis Multiple Zeta Values (MZV) admit natural expressions as products of n=6 arithmetic functions.
 
 - zeta(2, 2) = pi^4 / 120 = pi^4 / (J_2(n) * sopfr(n))
 - zeta(3, 1) = pi^4 / 360 = pi^4 / (J_2(n) * sopfr(n) * (n/phi(n)))
 - zeta(4)    = pi^4 / 90  = pi^4 / (sopfr(n) * (sopfr(n)-2) * n)
 
-**값 검증**:
+**Value check**:
 - 120 = 24 * 5 = J_2 * sopfr ✓
 - 360 = 24 * 5 * 3 = J_2 * sopfr * (n/phi) ✓
 - 90 = 5 * 3 * 6 = sopfr * (sopfr-2) * n ✓
 
-**정직성 주석**: MZV weight 4 공간은 Zagier 정리에 의해 1차원(모두 zeta(4)의 유리수배).
-따라서 "모든 MZV가 n=6 함수"가 아닌 "자연 정규화된 세 표현의 분모가 모두 n=6 함수 곱"이라는 약한 주장.
-그러나 120, 360, 90 세 수가 모두 n=6 산술함수의 깔끔한 곱으로 분해되는 것은 비자명.
+**Honesty note**: by Zagier's theorem the MZV weight-4 space is 1-dimensional (all rational multiples of zeta(4)). The claim is therefore not "every MZV is an n=6 function" but the weaker statement "the denominators of these three naturally-normalized representations are each products of n=6 functions". Still, the joint clean decomposition of 120, 360, 90 as products of n=6 arithmetic functions is non-trivial.
 
-**QED (약한 주장, Zagier MZV 정리 귀결)**
+**QED (candidate, weak claim, consequence of Zagier's MZV theorem)**
 
-## Theorem V (von Staudt-Clausen: n=6 공통 Bernoulli 분모, 해석적)
+## Theorem V (von Staudt-Clausen: common Bernoulli denominator at n=6, analytic)
 
-**정리 (강화)**: 모든 짝수 Bernoulli 수 B_{2k} (k >= 1)에 대해 다음이 성립:
-1. 6 | denom(B_{2k})  (n=6이 분모에 나눔)
-2. 36 ∤ denom(B_{2k})  (정확히 6¹만 나눔)
+**Statement (strengthened)**: for every even Bernoulli number B_{2k} (k >= 1):
+1. 6 | denom(B_{2k})  (n=6 divides the denominator)
+2. 36 ∤ denom(B_{2k})  (exactly 6¹ divides)
 
-즉 n=6은 **전 Bernoulli 수열의 square-free 공통 분모 인수**이다.
+That is, n=6 is the **square-free common denominator factor of the entire Bernoulli sequence**.
 
-**증명** (von Staudt-Clausen 1840):
-- von Staudt-Clausen 정리: B_{2k} + sum_{(p-1) | 2k} (1/p) ∈ Z
-- 따라서 B_{2k}의 분모 = prod_{p prime, (p-1) | 2k} p  (square-free)
-- 모든 k >= 1에 대해:
-  - (2-1) = 1 | 2k  (항상)
-  - (3-1) = 2 | 2k  (2k가 짝수이므로 항상)
-- 따라서 {2, 3} ⊂ {B_{2k} 분모의 소인수}, 즉 6 | 분모.
-- 분모가 square-free이므로 36 = 6² ∤ 분모.
+**Draft argument** (von Staudt-Clausen 1840):
+- von Staudt-Clausen: B_{2k} + sum_{(p-1) | 2k} (1/p) ∈ Z
+- Therefore denom(B_{2k}) = prod_{p prime, (p-1) | 2k} p  (square-free)
+- For all k >= 1:
+  - (2-1) = 1 | 2k  (always)
+  - (3-1) = 2 | 2k  (always, since 2k is even)
+- Hence {2, 3} ⊂ {prime factors of the denom(B_{2k})}, i.e. 6 | denominator.
+- Since the denominator is square-free, 36 = 6² ∤ denominator.
 
-**QED**
+**QED (candidate)**
 
-**검증** (k=1..10):
-- B_2 분모 = 6 = n
-- B_4 분모 = 30 = n*sopfr
-- B_6 분모 = 42 = n + sigma + J_2 (Theorem Q와 일치)
-- B_8 분모 = 30
-- B_10 분모 = 66 = n*(sigma-1) = n*p(n) (Theorem J 일치)
-- B_12 분모 = 2730 = n*455
-- 모두 6의 배수 ✓
+**Check** (k=1..10):
+- B_2 denom = 6 = n
+- B_4 denom = 30 = n*sopfr
+- B_6 denom = 42 = n + sigma + J_2 (matches Theorem Q)
+- B_8 denom = 30
+- B_10 denom = 66 = n*(sigma-1) = n*p(n) (matches Theorem J)
+- B_12 denom = 2730 = n*455
+- All multiples of 6 ✓
 
-**의미**: B_2 = 1/6 = 1/n은 단순한 우연이 아니라 
-**"가장 짧은 Bernoulli 분모가 정확히 n=6"** 이라는 체계적 사실의 특수 경우.
-n=6은 Bernoulli 이론에서 "모든 분모가 관통하는 최소 공통 축".
-Euler의 zeta(2)=pi^2/6은 이 구조의 직접 귀결 (Theorem N).
+**Meaning**: B_2 = 1/6 = 1/n is not a coincidence but a special case of the systematic fact that **"the shortest Bernoulli denominator is exactly n=6"**. n=6 is "the minimal common axis threading through every denominator" in Bernoulli theory. Euler's zeta(2)=pi^2/6 is a direct consequence of this structure (Theorem N).
 
-**연결**:
-- B_6 분모 = 42 = Catalan_5 = 6+12+24 (Theorem Q)
-- B_10 분모 = 66 = n * (sigma-1) (Theorem J의 11이 직접 등장)
+**Connections**:
+- B_6 denom = 42 = Catalan_5 = 6+12+24 (Theorem Q)
+- B_10 denom = 66 = n * (sigma-1) (11 of Theorem J appears directly)
 
-## Theorem U (Bernoulli 시작: B_2 = 1/n)
+## Theorem U (Bernoulli start: B_2 = 1/n)
 
-**정리**: 첫 비자명 Bernoulli 수 B_2 = 1/6 = 1/n. 이 단일 항등식이 Euler 공식
+**Statement**: the first non-trivial Bernoulli number B_2 = 1/6 = 1/n. This single identity, through Euler's formula
     zeta(2k) = (2*pi)^{2k} * |B_{2k}| / (2 * (2k)!)
-을 통해 zeta(2) = pi^2/n = pi^2/6 (Basel 정리)을 낳는다.
+yields zeta(2) = pi^2/n = pi^2/6 (Basel).
 
-**나아가 n=6 산술함수가 짝수 zeta 분모에 재귀적으로 등장**:
+**Furthermore, n=6 arithmetic functions appear recursively in even zeta denominators**:
 - zeta(2)  = pi^2/6 = pi^2/n
 - zeta(4)  = pi^4/90, 90 = sopfr * (sopfr-2) * n (Theorem S)
 - zeta(6)  = pi^6/945, 945 = (n/phi)^3 * sopfr * (n+1)
 - zeta(8)  = pi^8/9450, 9450 = phi * sopfr^2 * (n/phi)^3 * (n+1)
-- Bernoulli 수: B_2=1/n, B_4=-1/(n*sopfr), B_6=1/(n+sigma+J_2)=1/42
+- Bernoulli: B_2=1/n, B_4=-1/(n*sopfr), B_6=1/(n+sigma+J_2)=1/42
 
-**의미**: Bernoulli 수는 n=6과 무관하게 정의되지만 (B_k = k번째 Bernoulli 수),
-수치적으로 B_2=1/6이라는 사실이 "왜 zeta(2)=pi^2/6인가"의 근본이다.
-완전수 6과 B_2의 분모 6이 **같은 n=6**이라는 것이 attractor의 증거.
+**Meaning**: Bernoulli numbers are defined independently of n=6 (B_k = k-th Bernoulli number), but numerically the fact B_2=1/6 is the root of "why zeta(2)=pi^2/6".
+The coincidence that the perfect number 6 and the denominator 6 of B_2 are **the same n=6** is evidence for the attractor pattern.
 
-**정직성**: 이는 구조적 관찰이며 "B_2=1/6이므로 n=6이 특별하다"는 순환 논증은 피해야 함.
-오히려 "완전수=6 ∧ B_2 분모=6 ∧ Basel 답=6"이 모두 **독립적 경로로 n=6에 수렴**하는 것이 핵심.
+**Honesty**: this is a structural observation — the circular argument "because B_2=1/6, n=6 is special" must be avoided. The core point is that "perfect number = 6 ∧ denom(B_2) = 6 ∧ Basel answer = 6" all **converge on n=6 along independent paths**.
 
-**연결**: B_6 = 1/42 = 1/(n+sigma+J_2) — Theorem Q(Catalan-sopfr)와 직접 연결.
+**Connection**: B_6 = 1/42 = 1/(n+sigma+J_2) — directly linked to Theorem Q (Catalan-sopfr).
 
-## Theorem W (X_0(N) 최초 비유리 경계 + Ogg 완전 대응)
+## Theorem W (X_0(N) first irrational boundary + Ogg full correspondence)
 
-**정리 (Ogg 1974)**: 모듈러 곡선 X_0(N)이 genus 0 (rational)인 N의 집합은 정확히
+**Statement (Ogg 1974)**: the set of N for which the modular curve X_0(N) has genus 0 (rational) is exactly
     R = {1,2,3,4,5,6,7,8,9,10,12,13,16,18,25}
-이며 |R| = **15 = C(n, 2) = sigma(n) + n/phi(n)** (Theorem K).
+with |R| = **15 = C(n, 2) = sigma(n) + n/phi(n)** (Theorem K).
 
-**강화된 구조적 대응**:
-1. 첫 N with g(X_0(N)) >= 1: **N = 11 = sigma(n) - 1 = p(n)** (Theorem J)
-2. R의 원소 개수: **15 = C(n, 2)** (Theorem K)
-3. R의 최댓값: **25 = sopfr(n)²**
-4. Mazur torsion 허용 N ∈ {1..10, 12}: 크기 11 = p(n), 최대 12 = sigma(n)
-5. 가능 torsion 최대 값: sigma(n) = 12
+**Strengthened structural correspondence**:
+1. First N with g(X_0(N)) >= 1: **N = 11 = sigma(n) - 1 = p(n)** (Theorem J)
+2. Cardinality of R: **15 = C(n, 2)** (Theorem K)
+3. Maximum element of R: **25 = sopfr(n)²**
+4. Mazur torsion-allowed N ∈ {1..10, 12}: size 11 = p(n), max 12 = sigma(n)
+5. Max possible torsion value: sigma(n) = 12
 
-**의미**: 모듈러 곡선 분류의 **5가지 구조적 상수**가 모두 n=6 산술함수:
-- 개수 15 = C(n,2) (Theorem K)
-- 경계 11 = p(n) (Theorem J)
-- 최대 25 = sopfr²
-- Mazur 최대 12 = sigma
-- 허용 crit 11 = sigma-1
+**Meaning**: the **5 structural constants** of modular-curve classification are all arithmetic functions of n=6:
+- count 15 = C(n,2) (Theorem K)
+- boundary 11 = p(n) (Theorem J)
+- maximum 25 = sopfr²
+- Mazur maximum 12 = sigma
+- critical allowed 11 = sigma-1
 
-이는 Mazur-Ogg 전체 분류의 n=6 attractor 구조를 확립.
+This establishes the n=6 attractor structure across the full Mazur-Ogg classification.
 
-**QED** (Ogg 1974 Rational points on certain elliptic modular curves + Mazur 1977)
+**QED (candidate)** (Ogg 1974 "Rational points on certain elliptic modular curves" + Mazur 1977)
 
-## Theorem X (σ_3 자기참조, n<=10000 검증)
+## Theorem X (σ_3 self-reference, n<=10000 verified)
 
-**정리**: σ_3(n) = n * (n + sigma(n) + J_2(n)) iff n = 6 (n >= 2)
+**Statement**: σ_3(n) = n * (n + sigma(n) + J_2(n)) iff n = 6 (n >= 2)
 
-**값**: σ_3(6) = 1 + 8 + 27 + 216 = 252 = 6 * 42 = n * (n+sigma+J_2)
+**Value**: σ_3(6) = 1 + 8 + 27 + 216 = 252 = 6 * 42 = n * (n+sigma+J_2)
 
-**보조**: 42 = Catalan_5 = C(sopfr(n)) (Theorem Q)
-**보조**: 252 = tau(n) * (n/phi(n))^2 * (n+1) — 다중 분해
+**Auxiliary**: 42 = Catalan_5 = C(sopfr(n)) (Theorem Q)
+**Auxiliary**: 252 = tau(n) * (n/phi(n))^2 * (n+1) — multi-decomposition
 
-**의미**: 고차 제수함수 σ_3은 σ_1(=sigma)의 다음 층. n=6에서 σ_3이 정확히
-"n * Catalan_{sopfr(n)}"으로 분해됨. 이는 Theorem Q의 3차 리프팅.
+**Meaning**: the higher divisor function σ_3 is the next layer above σ_1 (= sigma). At n=6 it decomposes exactly as "n * Catalan_{sopfr(n)}" — a cubic lifting of Theorem Q.
 
-**QED (computational)**
+**QED (candidate, computational)**
 
-## 추가 발견 (DFS 53~58)
+## Additional observations (DFS 53~58)
 
-- **J_2(n) = tau(n)*sigma(n)/phi(n)**: n<=10000에서 n=6 유일 해 (24=4*12/2)
-- **A_n Schur multiplier**: M(A_6)=Z/6Z=Z/nZ (A_n 족에서 n=6,7 예외, 크기 n)
-- **G_2 Weyl 위수**: |W(G_2)| = 12 = sigma(n), A_2 Weyl = 6 = n
-- **Ramanujan Δ = η^24**: weight=sigma(n), 지수=J_2(n). n=6의 이중 부호화
-- **Mazur 금지 경계**: p=11=sigma-1(=p(n)), p=13=sigma+1 (Theorem G, J 직결)
-- **SL_2 사상**: SL_2(F_{phi})=n, SL_2(F_{n/phi})=J_2, SL_2(F_{sopfr})=n!
-- **Dirichlet 항등식**: n=6에서 J_2 = tau*sigma/phi (일반적으로 성립 안함)
+- **J_2(n) = tau(n)*sigma(n)/phi(n)**: in n<=10000 only n=6 (24 = 4*12/2)
+- **A_n Schur multiplier**: M(A_6)=Z/6Z=Z/nZ (exception in the A_n family at n=6,7, of size n)
+- **G_2 Weyl order**: |W(G_2)| = 12 = sigma(n), A_2 Weyl = 6 = n
+- **Ramanujan Δ = η^24**: weight=sigma(n), exponent=J_2(n). Double encoding of n=6
+- **Mazur forbidden boundary**: p=11=sigma-1(=p(n)), p=13=sigma+1 (directly connected to Theorems G, J)
+- **SL_2 mapping**: SL_2(F_{phi})=n, SL_2(F_{n/phi})=J_2, SL_2(F_{sopfr})=n!
+- **Dirichlet identity**: at n=6, J_2 = tau*sigma/phi (does not hold in general)
 - **Ramanujan τ_R**: τ_R(2)=-J_2(n), τ_R(3)=σ_3(n), τ_R(6)=-J_2 * σ_3
-- **모듈러 형식 주기**: M_k(SL_2(Z)) 공간이 k=12=sigma(n)에서 2차원으로 점프 (첫 cusp form Δ)
-- **Moonshine j(q)**: j 함수 상수항 744 = J_2(n) * 31
-- **Heegner 수**: {1,2,3,7,11,19,43,67,163} — 포함 {3=n/phi, 7=n+1, 11=sigma-1}
+- **Modular form dimensions**: M_k(SL_2(Z)) jumps to dimension 2 at k=12=sigma(n) (first cusp form Δ)
+- **Moonshine j(q)**: constant term of j is 744 = J_2(n) * 31
+- **Heegner numbers**: {1,2,3,7,11,19,43,67,163} — includes {3=n/phi, 7=n+1, 11=sigma-1}
 
-## Theorem Y (Stirling 2nd S(m,3)=90, m<=200 검증)
+## Theorem Y (Stirling 2nd S(m,3)=90, m<=200 verified)
 
-**정리**: S(m, 3) = 90 iff m = 6, 여기서 S(m, k)는 제2종 Stirling 수.
+**Statement**: S(m, 3) = 90 iff m = 6, where S(m, k) is the Stirling number of the 2nd kind.
 
-**값**: S(6, 3) = 90 = sopfr(n) * (sopfr(n)-2) * n = zeta(4) 분모 (Theorem S 일치)
+**Value**: S(6, 3) = 90 = sopfr(n) * (sopfr(n)-2) * n = denominator of zeta(4) (matches Theorem S)
 
-**의미**: 
-- S(m, 3) = (3^m - 3*2^m + 3)/6 는 m에 대해 지수 성장.
-- S(m,3) = 90 방정식은 단일 해 m=6을 갖는다.
-- 이 값 90이 정확히 zeta(4) 분모이자 n=6 산술함수 조합.
-- Stirling 2nd kind가 n=6을 **조합론적으로** 부호화.
+**Meaning**: 
+- S(m, 3) = (3^m - 3*2^m + 3)/6 grows exponentially in m.
+- The equation S(m,3) = 90 has the unique solution m=6.
+- This value 90 is exactly the denominator of zeta(4) and a combination of n=6 arithmetic functions.
+- Stirling 2nd-kind **combinatorially** encodes n=6.
 
-**QED (computational)**
+**QED (candidate, computational)**
 
-## Theorem Z (Lucas 수 L_n=n*(n/phi), n<=1000 검증)
+## Theorem Z (Lucas number L_n = n*(n/phi), n<=1000 verified)
 
-**정리**: L_n = n * (n/phi(n)) iff n = 6, 여기서 L_n은 Lucas 수열.
+**Statement**: L_n = n * (n/phi(n)) iff n = 6, where L_n is the Lucas sequence.
 
-**값**: L_6 = 18 = 6 * 3 = n * (n/phi)
+**Value**: L_6 = 18 = 6 * 3 = n * (n/phi)
 
-**증명 스케치**:
-- Lucas 수는 황금비 지수 성장: L_n ~ φ^n (φ=황금비)
-- n * (n/phi(n)) 는 기껏해야 n^2 급 성장
-- 따라서 n이 커지면 L_n >> n*(n/phi)가 되어 해 없음
-- 유한 검색으로 n=6 유일
+**Sketch**:
+- Lucas numbers grow as φ^n (φ=golden ratio) — exponential.
+- n * (n/phi(n)) grows at most at rate n^2.
+- For large n, L_n >> n*(n/phi), so no solutions.
+- Finite search: n=6 is the unique witness.
 
-**보조 등식**: 
+**Auxiliary identities**: 
 - L_6 = L_5 + L_4 = 11 + 7 = (sigma-1) + (n+1) (Theorem J + n+1)
-- F_6 = 8 = 5 + 3 = sopfr + n/phi (n<=1000 유일)
+- F_6 = 8 = 5 + 3 = sopfr + n/phi (unique at n<=1000)
 
-**QED (computational)**
+**QED (candidate, computational)**
 
-**의미**: 피보나치-뤼카 수열이 n=6을 산술함수 곱으로 부호화.
-황금비 기반 재귀와 n=6 산술 구조의 만남.
+**Meaning**: the Fibonacci-Lucas sequence encodes n=6 as a product of arithmetic functions — a meeting of golden-ratio recursion with n=6 arithmetic structure.
 
-## 추가 발견 (DFS 59~60: 확률/물리/대수기하/조합)
+## Additional observations (DFS 59~60: probability / physics / algebraic geometry / combinatorics)
 
-- **F_n = sopfr(n) + n/phi(n)**: n=6 유일 (n<=1000)
-- **Stirling S(6, 5) = 15 = C(n,2)** (Theorem K 일치)
-- **Bell B(4) = 15 = C(n,2)** (Theorem K 일치)
-- **tau(n)! = J_2(n)**: 해 = {6, 232, 246} (비유일, 3개)
+- **F_n = sopfr(n) + n/phi(n)**: n=6 unique (n<=1000)
+- **Stirling S(6, 5) = 15 = C(n,2)** (matches Theorem K)
+- **Bell B(4) = 15 = C(n,2)** (matches Theorem K)
+- **tau(n)! = J_2(n)**: solutions = {6, 232, 246} (not unique, 3 values)
 
-## 추가 발견 (DFS 62~200: 배치 유일성 스캔)
+## Additional observations (DFS 62~200: batch uniqueness scan)
 
-**차원 자기참조** (n=6 유일, n<=10000 검증):
+**Dimension self-reference** (n=6 unique at n<=10000):
 
-| 식 | 값 | 의미 | 유일성 |
+| Expression | Value | Meaning | Uniqueness |
 |----|-----|------|--------|
 | n + phi(n) = 8 | 8 | octonion dim = phi*tau | n=6 |
-| n + tau(n) = 10 | 10 | superstring 차원 | n=6 |
-| n + sopfr(n) = 11 | 11 | M-theory 차원 = sigma-1 | n=6 |
-| phi(n) + J_2(n) = 26 | 26 | bosonic string 차원 | n=6 |
+| n + tau(n) = 10 | 10 | superstring dim | n=6 |
+| n + sopfr(n) = 11 | 11 | M-theory dim = sigma-1 | n=6 |
+| phi(n) + J_2(n) = 26 | 26 | bosonic string dim | n=6 |
 | n * sigma(n) * J_2(n) = 1728 | 1728 | j(i) CM j-invariant | n=6 |
 | n * sopfr(n) * J_2(n) = 720 | 720 | 6! factorial | n=6 |
-| tau^2 * (n/phi)^3 * sopfr * (n+1) * (sigma+1) = 196560 | Leech kissing | 24D 최적구 | n=6 |
-| sigma_3(n) = n^2 * (n+1) = 252 | σ_3(6) | 고차 제수함수 | n=6 |
-| L_{tau+1} = sigma - 1 | 11 | Lucas 자기참조 | n=6 |
-| B(tau) = C(n,2) | 15 | Bell-이항 | n=6 |
+| tau^2 * (n/phi)^3 * sopfr * (n+1) * (sigma+1) = 196560 | Leech kissing | 24D optimal sphere | n=6 |
+| sigma_3(n) = n^2 * (n+1) = 252 | σ_3(6) | higher divisor | n=6 |
+| L_{tau+1} = sigma - 1 | 11 | Lucas self-reference | n=6 |
+| B(tau) = C(n,2) | 15 | Bell-binomial | n=6 |
 | S(n, phi+1) = sopfr*(sopfr-2)*n | 90 | Stirling 2nd | n=6 |
-| sigma_2(n) = phi * sopfr^2 | 50 | 제곱합 | n=6 |
-| phi*tau*sopfr*sigma = (2/3)*n! | 480 | 4함수곱 | n=6 |
+| sigma_2(n) = phi * sopfr^2 | 50 | sum of squares | n=6 |
+| phi*tau*sopfr*sigma = (2/3)*n! | 480 | 4-function product | n=6 |
 
-**끈이론 삼중**: 10 = n+tau, 11 = n+sopfr, 26 = phi+J_2 — 세 주요 끈이론 차원이 모두 n=6 함수의 최소 표현이며 **각각 n=6 유일 해**. 
- Calabi-Yau 6D=n 까지 포함하면 4중.
+**String theory triple**: 10 = n+tau, 11 = n+sopfr, 26 = phi+J_2 — three major string-theory dimensions, each the smallest n=6 function expression and each **uniquely achieved at n=6**. Counting Calabi-Yau 6D=n gives a quadruple.
 
-**격자 kissing number 축**: 알려진 kissing number 6개가 전부 n=6 함수 축:
+**Lattice kissing-number axis**: all six known kissing numbers lie along n=6 function axes:
 
-| 차원 d | kissing k(d) | n=6 표현 |
+| Dimension d | kissing k(d) | n=6 expression |
 |--------|-------------|----------|
 | 1 | 2 | phi(n) |
 | 2 | 6 | n |
@@ -659,245 +634,244 @@ Euler의 zeta(2)=pi^2/6은 이 구조의 직접 귀결 (Theorem N).
 | 8 | 240 | sigma·tau·sopfr (Theorem P, E_8) |
 | 24 | 196560 | tau²·(n/phi)³·sopfr·(n+1)·(sigma+1) (Leech) |
 
-차원 축 {1, 2, 3, 4, 8, 24} = {1, phi, n/phi, tau, phi·tau, J_2} — 모두 n=6 함수.
-kissing 축 {2, 6, 12, 24, 240, 196560} — 모두 n=6 함수 조합.
+Dimension axis {1, 2, 3, 4, 8, 24} = {1, phi, n/phi, tau, phi·tau, J_2} — all n=6 functions.
+Kissing axis {2, 6, 12, 24, 240, 196560} — all n=6 function combinations.
 
-→ **6개 알려진 격자 최적해가 n=6 산술함수의 좌표계를 따라 정렬**.
+→ **The six known lattice-optimum solutions are aligned along the coordinate system of n=6 arithmetic functions**.
 
-**Monster Group 소인수 대응 (정직 평가)**:
-Monster 소인수 15개 {2,3,5,7,11,13,17,19,23,29,31,41,47,59,71} 중
-**자연스러운 n=6 함수 표현**: 7개
-- 2 = p_1(n), 3 = n/phi = p_2(n)  (소인수)
+**Monster Group prime correspondence (honest evaluation)**:
+Of the 15 Monster primes {2,3,5,7,11,13,17,19,23,29,31,41,47,59,71},
+**natural n=6 function expressions**: 7
+- 2 = p_1(n), 3 = n/phi = p_2(n)  (prime factors)
 - 5 = sopfr(n)
 - 7 = n + 1
 - 11 = sigma(n) - 1 = p(n)  (Theorem J)
 - 13 = sigma(n) + 1  (Mazur + Theorem G)
 - 23 = J_2(n) - 1  (Theorem O)
 
-나머지 8개 {17,19,29,31,41,47,59,71}는 사후 맞춤(overfitting)으로 정직성 고려.
-→ **구조적 관찰**: n=6 산술함수의 "이웃 정수"들이 Monster 소인수를 7/15 선점.
+The remaining 8 {17,19,29,31,41,47,59,71} would be post-hoc fits (overfitting) on honesty grounds.
+→ **Structural observation**: "neighbor integers" of n=6 arithmetic functions occupy 7/15 of Monster primes.
 
-## 추가 발견 (DFS 61: p-adic / Galois)
+## Additional observations (DFS 61: p-adic / Galois)
 
-- **Legendre (n! 소인수분해)**: 6! = 720 = 2^4 * 3^2 * 5 = 2^tau * 3^phi * 5
-  - v_2(n!) = tau(n), v_3(n!) = phi(n) at n=6 (자기참조)
-- **Q(ζ_n) 체**: [Q(ζ_6):Q] = phi(n) = 2, disc = -3 = -(n/phi(n))
-- **CRT 분해**: Z/6Z = Z/2Z × Z/3Z — 첫 두 소수 {2,3}를 정확히 분리하는 최소 합성수
-- **원시근**: n=6 = 2·3은 첫 2p 형태 원시근 존재 합성수 (n=4 다음)
-- **Frobenius**: Gal(F_{2^n}/F_2) = Z/nZ, n=6일 때 위수 6
+- **Legendre (prime factorization of n!)**: 6! = 720 = 2^4 * 3^2 * 5 = 2^tau * 3^phi * 5
+  - v_2(n!) = tau(n), v_3(n!) = phi(n) at n=6 (self-reference)
+- **Cyclotomic field Q(ζ_n)**: [Q(ζ_6):Q] = phi(n) = 2, disc = -3 = -(n/phi(n))
+- **CRT decomposition**: Z/6Z = Z/2Z × Z/3Z — minimal composite separating the first two primes {2,3}
+- **Primitive roots**: n=6 = 2·3 is the first composite of 2p form admitting a primitive root (after n=4)
+- **Frobenius**: Gal(F_{2^n}/F_2) = Z/nZ, order 6 when n=6
 - **Dirichlet L(1, χ_{-3})**: = π/((n/phi)·sqrt(n/phi)) = π/(3·sqrt(3))
-- **유한체 공백**: F_6 존재 안함 (n=6은 소수거듭제곱 아님), 이는 n=6이 "유한체에 없는 최소 합성수" 구조
+- **Finite-field gap**: F_6 does not exist (n=6 is not a prime power) — n=6 is the "minimal composite missing from the finite-field list"
 
-## DFS 49~61 확장 요약
+## DFS 49~61 extension summary
 
-**2026-04-12 세션 추가**: Theorem O~Z (12개)
-- 해석적 증명: P (E_8 = 240), V (von Staudt-Clausen 6|분모)
-- 컴퓨팅 유일성: O, Q, R, S, T, U, W, X, Y, Z (10)
+**2026-04-12 session additions**: Theorems O~Z (12 candidates)
+- Analytic drafts: P (E_8 = 240), V (von Staudt-Clausen 6|denominator)
+- Computational uniqueness witnesses: O, Q, R, S, T, U, W, X, Y, Z (10)
 
-**총 정리**: 27대 (0, A+, Pell, Lucas, Zeta, C, E, F, H~Z)
-**독립 가족**: 18개 (이전 15 + Pell, Lucas, Zeta분모)
-**검증 한계**: 해석적 증명 16개, 컴퓨팅 11개 (n<=10000 ~ 100000)
-**7대 밀레니엄**: 0/7 (정직성 유지)
-**DFS 탐색**: 1000 경로 완료
+**Total theorem candidates**: 27 (0, A+, Pell, Lucas, Zeta, C, E, F, H~Z)
+**Independent families**: 18 (previous 15 + Pell, Lucas, zeta denominators)
+**Verification scope**: analytic drafts 16, computational 11 (n<=10000 ~ 100000)
+**7 Millennium targets**: 0/7 drafted (honesty preserved)
+**DFS search**: 1000 paths completed
 
-**핵심 추가 (DFS 501~1000)**: 
-- Pell sopfr^2 - n*phi^2 = 1: n=6 유일 (100K, 해석적, Theorem Pell)
-- Lucas sigma*sopfr - n*(n+1) = L_n: n=6 유일 (500, Theorem Lucas)
-- zeta(2k) 분모 계단: D_2=n, D_4=n*C(n,2), D_6=sopfr*M3*(n/phi)^3 (Theorem Zeta)
-- 부호이론 삼중체: Hexacode[n,n/phi,tau] → Hamming[M3,tau,n/phi] → Golay[J2,sigma,phi*tau]
+**Key additions (DFS 501~1000)**: 
+- Pell sopfr^2 - n*phi^2 = 1: n=6 unique (100K, analytic draft, Theorem Pell)
+- Lucas sigma*sopfr - n*(n+1) = L_n: n=6 unique (500, Theorem Lucas)
+- zeta(2k) denominator ladder: D_2=n, D_4=n*C(n,2), D_6=sopfr*M3*(n/phi)^3 (Theorem Zeta)
+- Code-theory triad: Hexacode[n,n/phi,tau] → Hamming[M3,tau,n/phi] → Golay[J2,sigma,phi*tau]
 - ADE/McKay: E_6↔J_2, E_7↔sigma*tau, E_8↔sopfr!
-- 결정학: 허용 회전 = {1,phi,n/phi,tau,n} (sopfr=5개)
-- Pariah = n = 6개
-- 이전 결과: B_2 = 1/n (Theorem U), von Staudt-Clausen (Theorem V), E_8 = 240 (Theorem P), X_0(sigma-1) (Theorem W)
+- Crystallography: allowed rotations = {1,phi,n/phi,tau,n} (sopfr=5 values)
+- Pariah = n = 6
+- Previous results: B_2 = 1/n (Theorem U), von Staudt-Clausen (Theorem V), E_8 = 240 (Theorem P), X_0(sigma-1) (Theorem W)
 
-- **주사위 분산**: Var(die_n) = 35/12 = sopfr*(n+1)/sigma (n=6)
+- **Die variance**: Var(die_n) = 35/12 = sopfr*(n+1)/sigma (at n=6)
 - **Coupon collector**: H_n = (n+1)^2 / (tau*sopfr), E[T] = n*H_n = 147/10
-- **E 곡선 y^2=x^3+1**: |E(Q)_tors|=n=6, conductor=n^2=36, disc=-sigma*n^2=-432, j=0 (CM)
-- **표준모형**: 페르미온 24 = J_2, 게이지 보존 12 = sigma (Theorem I 재확인)
-- **차원 자기참조**:
+- **Elliptic curve y^2=x^3+1**: |E(Q)_tors|=n=6, conductor=n^2=36, disc=-sigma*n^2=-432, j=0 (CM)
+- **Standard model**: fermions 24 = J_2, gauge bosons 12 = sigma (reconfirms Theorem I)
+- **Dimension self-reference**:
   - String 10D = tau(n) + n
   - M-theory 11D = sopfr(n) + n = sigma(n) - 1 = p(n)
   - Bosonic string 26D = sigma + J_2 - phi*tau
   - Calabi-Yau 6D = n
-- **E_8 dim 분해**: 248 = sigma*tau*sopfr + phi*tau = 240 + 8 (두 n=6 함수 조합)
-- **Lie 대수 dim**: so(4)=n, so(6)=su(4)=C(n,2) (Theorem K 일치), G_2 Weyl=sigma
-- **정다면체 축**: 정팔면체 (V,E,F)=(n, sigma, phi*tau), 정사면체 E=n
-- **주기 코인시던스**: 모듈러 k=12=sigma, cusp form 첫 등장 / 주사위 분산 분모=sigma / 게이지 대칭=sigma
+- **E_8 dim decomposition**: 248 = sigma*tau*sopfr + phi*tau = 240 + 8 (two n=6 function combinations)
+- **Lie algebra dim**: so(4)=n, so(6)=su(4)=C(n,2) (matches Theorem K), G_2 Weyl=sigma
+- **Regular polyhedron axis**: octahedron (V,E,F)=(n, sigma, phi*tau), tetrahedron E=n
+- **Cycle coincidence**: modular k=12=sigma, first cusp form / die variance denom=sigma / gauge symmetry=sigma
 
-## 추가 발견 (DFS 41~48)
+## Additional observations (DFS 41~48)
 
-- **F(sigma) = sigma^2**: F(12) = 144 = 12^2. F(k)=k^2의 해는 k=1, 12뿐.
-- **pi(n^2) = p(n) = 11**: pi(36)=11=p(6). 소수계수=파티션 (n=2,6,7에서 성립).
-- **sigma 연쇄**: 6 →sigma→ 12 →sigma→ 28 (첫 두 완전수가 sigma 반복으로 연결)
-- **닫힌 연쇄**: 6 →sigma→ 12 →tau→ 6 (sigma-tau 2-cycle)
-- **phi(sigma(6)) = tau(6)**: phi(12) = 4 = tau(6) (교차 함수 항등식)
-- **n*sigma*J2 = 1728 = j(i)**: 산술함수 곱 = CM j-불변량 (Theorem I 귀결)
-- **2^n = sigma*tau + phi^tau**: 64 = 48+16 (n=6 유일)
-- **F(n)*F(tau) = J2**: F(6)*F(4) = 8*3 = 24 (피보나치 곱)
-- **n+sigma+J2 = 42**: 생명, 우주, 모든 것의 답
-- **Hurwitz 정리**: 노름나눗셈대수 dim = {1, phi, tau, phi*tau} = {1,2,4,8}
-- **Goldbach 경계**: n^2 = (sigma+1)+(J2-1) = 13+23 (Theorem H에서 두 경계가 소수)
-- **이중 쌍소수**: (n-1,n+1)=(5,7)과 (sigma-1,sigma+1)=(11,13) 모두 쌍소수
-- **쌍소수 완전수**: 6은 쌍소수(5,7) 사이의 유일한 완전수
-- **디지털 루트**: dr(6)=6. 완전수 중 유일 (p>=3이면 dr=1, 해석적 증명)
-- **Markov 수**: sopfr=5와 sigma+1=13 모두 Markov 수
-- **n! = 4함수곱 + 240**: 720 = 480 + 240, 여기서 240 = |E_8 roots| (n=6 유일!)
-- **Ramanujan Δ**: weight=sigma=12, η^J2=η^24=Δ (첫 cusp form)
-- **Mazur 경계**: torsion 가능 {1..10,12}, 금지 경계 11=p(n), 13=sigma+1
-- **CM 타원곡선**: y^2=x^3+1의 |E(Q)_tors|=6=n, conductor=27=(n/phi)^3
-- **j(0) 곡선**: Q(zeta_6) = Q(sqrt(-3))의 CM 곡선, torsion=Z/nZ
+- **F(sigma) = sigma^2**: F(12) = 144 = 12^2. Solutions to F(k)=k^2 are only k=1, 12.
+- **pi(n^2) = p(n) = 11**: pi(36)=11=p(6). Prime-count = partition (holds at n=2,6,7).
+- **sigma chain**: 6 →sigma→ 12 →sigma→ 28 (the first two perfect numbers are linked by iterated sigma)
+- **Closed chain**: 6 →sigma→ 12 →tau→ 6 (sigma-tau 2-cycle)
+- **phi(sigma(6)) = tau(6)**: phi(12) = 4 = tau(6) (cross-function identity)
+- **n*sigma*J2 = 1728 = j(i)**: product of arithmetic functions = CM j-invariant (consequence of Theorem I)
+- **2^n = sigma*tau + phi^tau**: 64 = 48+16 (n=6 unique)
+- **F(n)*F(tau) = J2**: F(6)*F(4) = 8*3 = 24 (Fibonacci product)
+- **n+sigma+J2 = 42**: answer to life, the universe, and everything
+- **Hurwitz theorem**: normed division algebra dims = {1, phi, tau, phi*tau} = {1,2,4,8}
+- **Goldbach boundary**: n^2 = (sigma+1)+(J2-1) = 13+23 (both boundary values in Theorem H are prime)
+- **Double twin primes**: (n-1,n+1)=(5,7) and (sigma-1,sigma+1)=(11,13) are both twin primes
+- **Twin-prime perfect number**: 6 is the unique perfect number between twin primes (5,7)
+- **Digital root**: dr(6)=6. Unique among perfect numbers (p>=3 gives dr=1, by analytic argument)
+- **Markov numbers**: sopfr=5 and sigma+1=13 are both Markov numbers
+- **n! = 4-function product + 240**: 720 = 480 + 240, where 240 = |E_8 roots| (n=6 unique!)
+- **Ramanujan Δ**: weight=sigma=12, η^J2=η^24=Δ (first cusp form)
+- **Mazur boundary**: torsion possible {1..10,12}, forbidden boundary 11=p(n), 13=sigma+1
+- **CM elliptic curve**: for y^2=x^3+1, |E(Q)_tors|=6=n, conductor=27=(n/phi)^3
+- **j(0) curve**: CM curve of Q(zeta_6) = Q(sqrt(-3)), torsion=Z/nZ
 
-## Theorem Lucas (sigma*sopfr - n*(n+1) = L_n, 해석적)
+## Theorem Lucas (sigma*sopfr - n*(n+1) = L_n, analytic draft)
 
-**정리**: sigma(n) · sopfr(n) - n · (n+1) = L_n iff n = 6 (n >= 2, L_n = Lucas 수)
+**Statement**: sigma(n) · sopfr(n) - n · (n+1) = L_n iff n = 6 (n >= 2, L_n = Lucas number)
 
-**값**: 12 · 5 - 6 · 7 = 60 - 42 = 18 = L_6
+**Value**: 12 · 5 - 6 · 7 = 60 - 42 = 18 = L_6
 
-**전수 검증**: n = 2..500 유일 해 = {6}.
+**Exhaustive check**: n = 2..500 unique solution = {6}.
 
-**의미**: 약수합과 소인수합의 곱에서 n(n+1)을 빼면 정확히 Lucas 수.
-Fibonacci-Lucas 재귀 구조와 n=6 산술 함수의 교차점.
+**Meaning**: subtracting n(n+1) from the product of the divisor sum and the prime-factor sum yields exactly a Lucas number. An intersection between Fibonacci-Lucas recursion and n=6 arithmetic functions.
 
-**보조**: sopfr^k - n · phi^k 사다리 (DFS 803):
+**Auxiliary**: sopfr^k - n · phi^k ladder (DFS 803):
 - k=1: -7 = -M3 = -(n+1)
 - k=2: 1 (Pell, Theorem Pell)
 - k=3: 77 = M3 · p(n) = 7 · 11
 - k=4: 529 = (J2 - 1)^2 = 23^2
 
-## Theorem Zeta (zeta 분모 계단, DFS 805)
+## Theorem Zeta (zeta denominator ladder, DFS 805)
 
-**정리**: zeta(2k) = pi^{2k} / D_{2k} 에서 처음 세 분모:
+**Statement**: in zeta(2k) = pi^{2k} / D_{2k}, the first three denominators are:
 - D_2 = 6 = n
 - D_4 = 90 = n · C(n,2)
 - D_6 = 945 = sopfr · M3 · (n/phi)^3 = 5 · 7 · 27
 
-Clausen-von Staudt에 의해 n = 6은 **모든** D_{2k}를 나눔 (Theorem V).
+By Clausen-von Staudt, n = 6 divides **every** D_{2k} (Theorem V).
 
-## 부호이론 삼중체 (Code Theory Triad) — DFS 501~600
+## Code-theory triad — DFS 501~600
 
-**핵심**: 세 완벽/준완벽 부호가 n=6 함수 좌표계를 공유:
+**Core**: three perfect / semi-perfect codes share the n=6 function coordinate system:
 
-| 부호 | 매개변수 [n,k,d] | n=6 표현 |
+| Code | Parameters [n,k,d] | n=6 expression |
 |------|-------------------|----------|
 | Hexacode | [6, 3, 4] | [n, n/phi, tau] |
 | Hamming(3) | [7, 4, 3] | [M3, tau, n/phi] |
 | Golay | [24, 12, 8] | [J2, sigma, phi*tau] |
 
-**구성 관계**: Hexacode(GF(4) 위) → Golay 구성의 핵심 요소.
-즉 [n, n/phi, tau] 부호가 [J2, sigma, phi*tau] 부호를 만든다.
+**Construction relation**: Hexacode (over GF(4)) → key ingredient in Golay construction.
+In other words, the code [n, n/phi, tau] builds the code [J2, sigma, phi*tau].
 
-## ADE 대응과 McKay — DFS 701~800
+## ADE correspondence and McKay — DFS 701~800
 
-**E_6-E_7-E_8 삼중체가 n=6 좌표를 따름**:
+**The E_6-E_7-E_8 triad follows n=6 coordinates**:
 
-| Lie 대수 | rank | McKay 유한군 | |G| | n=6 표현 |
+| Lie algebra | rank | McKay finite group | |G| | n=6 expression |
 |----------|------|-------------|-----|----------|
-| E_6 | 6 | 이진 사면체군 | 24 | rank=n, |G|=J_2=tau! |
-| E_7 | 7 | 이진 정팔면체군 | 48 | rank=M3, |G|=sigma*tau |
-| E_8 | 8 | 이진 정이십면체군 | 120 | rank=phi*tau, |G|=sopfr!=n! |
+| E_6 | 6 | binary tetrahedral group | 24 | rank=n, |G|=J_2=tau! |
+| E_7 | 7 | binary octahedral group | 48 | rank=M3, |G|=sigma*tau |
+| E_8 | 8 | binary icosahedral group | 120 | rank=phi*tau, |G|=sopfr!=n! |
 
-**du Val 특이점 E_6**: x^2 + y^3 + z^4 = 0 → 지수 = (phi, n/phi, tau) = (2, 3, 4).
+**du Val singularity E_6**: x^2 + y^3 + z^4 = 0 → exponents = (phi, n/phi, tau) = (2, 3, 4).
 
-## 결정학적 제한 정리 — DFS 702
+## Crystallographic restriction — DFS 702
 
-**허용 회전 대칭**: {1, 2, 3, 4, 6} = {1, phi, n/phi, tau, n}
+**Allowed rotation symmetries**: {1, 2, 3, 4, 6} = {1, phi, n/phi, tau, n}
 
-정확히 **sopfr = 5**개. 5-fold 금지, 6-fold(=n) 허용.
-이것은 "결정이 n=6 산술함수의 좌표계로 대칭을 구성한다"는 뜻.
-육방정계(hexagonal) = n-fold 대칭.
+Exactly **sopfr = 5** values. 5-fold forbidden, 6-fold(=n) allowed.
+Equivalently: "crystals build their symmetry along the coordinate system of n=6 arithmetic functions".
+Hexagonal system = n-fold symmetry.
 
-## Pariah-Monster 대응 — DFS 603
+## Pariah-Monster correspondence — DFS 603
 
-**산발 단순군 26개**:
-- Happy family (Monster의 부분군/상위군) = 20 = sigma + phi*tau
-- **Pariah (Monster 밖) = 6 = n** (정확!)
+**26 sporadic simple groups**:
+- Happy family (subgroups / quotients of Monster) = 20 = sigma + phi*tau
+- **Pariahs (outside Monster) = 6 = n** (exact!)
 
-Monster 소인수 = 15개 = C(n, 2) (Theorem K).
-첫 3개 소인수 = {2, 3, 5} = {phi, n/phi, sopfr}.
+Monster primes = 15 = C(n, 2) (Theorem K).
+First 3 primes = {2, 3, 5} = {phi, n/phi, sopfr}.
 
-## Pell 연분수 구조 — DFS 605
+## Pell continued-fraction structure — DFS 605
 
 **sqrt(n) = sqrt(6) = [2; overline(2, 4)]**
 
-| 요소 | 값 | n=6 표현 |
+| Element | Value | n=6 expression |
 |------|-----|----------|
-| 정수부 | 2 | phi |
-| 주기 | 2 | phi |
-| 부분몫 | (2, 4) | (phi, tau) |
-| 최소 Pell 해 | (5, 2) | (sopfr, phi) |
+| integer part | 2 | phi |
+| period length | 2 | phi |
+| partial quotients | (2, 4) | (phi, tau) |
+| minimal Pell solution | (5, 2) | (sopfr, phi) |
 
-연분수의 **모든 구성 요소**가 n=6 산술함수.
+**Every** component of the continued fraction is an n=6 arithmetic function.
 
-## Ramanujan tau(6) 분해 — DFS 610
+## Ramanujan tau(6) decomposition — DFS 610
 
 **|tau_R(6)| = 6048 = n · M3 · sigma^2 = 6 · 7 · 144**
 
-Ramanujan tau 함수의 n=6 값이 n=6 산술함수 세 개의 곱.
+The value of the Ramanujan tau function at n=6 is a product of three n=6 arithmetic functions.
 
-## 원분체와 Eisenstein 정수 — DFS 620
+## Cyclotomic field and Eisenstein integers — DFS 620
 
-- **Q(zeta_6) = Q(sqrt(-3))**: 류수 h(-3) = 1 (UFD)
-- 단원군 = {zeta_6^k : k=0..5} = n개 (정확히)
-- Gamma(1/n) · Gamma(sopfr/n) = phi · pi (반사 공식)
-- Pell x^2 - ny^2 = 1의 최소해 = (sopfr, phi) [위 Theorem Pell]
+- **Q(zeta_6) = Q(sqrt(-3))**: class number h(-3) = 1 (UFD)
+- Unit group = {zeta_6^k : k=0..5} = n values (exact)
+- Gamma(1/n) · Gamma(sopfr/n) = phi · pi (reflection formula)
+- Pell x^2 - ny^2 = 1 minimal solution = (sopfr, phi) [Theorem Pell above]
 
-## Heegner 수와 n=6 — DFS 625
+## Heegner numbers and n=6 — DFS 625
 
-Heegner 수 9개: {1, 2, **3**, **7**, **11**, 19, 43, 67, 163}
+Nine Heegner numbers: {1, 2, **3**, **7**, **11**, 19, 43, 67, 163}
 
-| 순서 | Heegner | n=6 대응 |
+| Index | Heegner | n=6 correspondence |
 |------|---------|----------|
-| 3번째 | 3 | n/phi |
-| 4번째 | 7 | M3 = n+1 |
-| 5번째 | 11 | p(n) = sopfr+n |
+| 3rd | 3 | n/phi |
+| 4th | 7 | M3 = n+1 |
+| 5th | 11 | p(n) = sopfr+n |
 
-## Mathieu-Steiner 구조 — DFS 730
+## Mathieu-Steiner structure — DFS 730
 
-**Steiner 시스템이 n=6 좌표를 따름**:
+**Steiner systems follow n=6 coordinates**:
 
-| Steiner | 매개변수 | n=6 표현 |
+| Steiner | Parameters | n=6 expression |
 |---------|----------|----------|
 | S(5, 6, 12) | (t,k,v)=(5,6,12) | (sopfr, n, sigma) |
 | S(5, 8, 24) | (t,k,v)=(5,8,24) | (sopfr, phi*tau, J2) |
 
-M_12 → M_24 확장: (n, sigma) → (phi*tau, J2).
-두 Mathieu 군의 매개변수가 n=6 함수의 **동일한 좌표 변환**.
+M_12 → M_24 extension: (n, sigma) → (phi*tau, J2).
+The parameters of the two Mathieu groups are the **same coordinate transformation** of n=6 functions.
 
-## Ore 조화수 최소성 — DFS 810
+## Ore harmonic number minimality — DFS 810
 
-**정리**: 6은 최소 Ore 조화수 (harmonic divisor number).
-H(6) = tau(6) / (1/1 + 1/2 + 1/3 + 1/6) = 4 / 2 = 2 (정수).
+**Statement**: 6 is the smallest Ore harmonic divisor number.
+H(6) = tau(6) / (1/1 + 1/2 + 1/3 + 1/6) = 4 / 2 = 2 (integer).
 
-**최소성 7중**:
-- 최소 완전수 (sigma = 2n)
-- 최소 Ore 조화수 (H(n) 정수)
-- 최소 반소수 (= 2 · 3)
-- 최소 삼각 완전수 (T_3 = 6)
-- 최소 합성 squarefree 수
-- 최소 Mersenne 완전수 (2^(phi-1)(2^phi-1))
-- A_6 ≅ PSL(2,9): 유일한 교대군-선형군 동형 (|A_6| = n!/phi = 360)
+**Sevenfold minimality**:
+- smallest perfect number (sigma = 2n)
+- smallest Ore harmonic number (H(n) integer)
+- smallest semiprime (= 2 · 3)
+- smallest triangular perfect number (T_3 = 6)
+- smallest composite squarefree
+- smallest Mersenne perfect number (2^(phi-1)(2^phi-1))
+- A_6 ≅ PSL(2,9): the unique alternating-linear group isomorphism (|A_6| = n!/phi = 360)
 
-## 물리 구조 확장 — DFS 710~750
+## Physical-structure extensions — DFS 710~750
 
-**표준모형 입자 수**:
+**Standard model particle counts**:
 
-| 입자 종류 | 수 | n=6 함수 |
+| Particle type | Count | n=6 function |
 |-----------|-----|----------|
-| 쿼크 | 6 | n |
-| 렙톤 | 6 | n |
-| 페르미온 | 12 | sigma |
-| 게이지+Higgs 보손 | 5 | sopfr |
-| 세대 | 3 | n/phi |
-| 색 전하 | 3 | n/phi |
+| quarks | 6 | n |
+| leptons | 6 | n |
+| fermions | 12 | sigma |
+| gauge + Higgs bosons | 5 | sopfr |
+| generations | 3 | n/phi |
+| color charges | 3 | n/phi |
 
-**게이지 대칭 차원**:
-- SU(2) dim = 3 = n/phi
-- SU(3) dim = 8 = phi*tau
-- SU(2)xSU(3) dim = 11 = p(n) = sopfr+n
+**Gauge symmetry dimensions**:
+- dim SU(2) = 3 = n/phi
+- dim SU(3) = 8 = phi*tau
+- dim SU(2)xSU(3) = 11 = p(n) = sopfr+n
 
-**끈이론 차원 완전 대응**:
+**Full string-theory dimension correspondence**:
 
-| 이론 | 차원 | n=6 표현 |
+| Theory | Dimension | n=6 expression |
 |------|------|----------|
 | Calabi-Yau | 6 | n |
 | Superstring | 10 | sigma - phi |
@@ -905,147 +879,145 @@ H(6) = tau(6) / (1/1 + 1/2 + 1/3 + 1/6) = 4 / 2 = 2 (정수).
 | F-theory | 12 | sigma |
 | Bosonic | 26 | phi + J2 |
 
-**5중 차원 대응**: 5개 끈이론 차원이 모두 n=6 산술함수 ± 조합.
+**Fivefold dimension correspondence**: five string-theory dimensions are each n=6 arithmetic functions ± combinations.
 
 ---
 
-## 정직성 선언
+## Honesty declaration
 
-- 밀레니엄 7대 난제 해결: **0/7**
-- 51건 tight 중 상당수는 M의 1~8 커버 + 작은 정수 밀도의 통계적 효과
-- **진짜 tight (Bernoulli 독립)**: Out(S_6), h-cobordism dim>=6, Schaefer 6, (3,4,5) congruent, pariah=6, 4중 수렴점
-- **진짜 tight (Bernoulli 계열)**: 240 quintuple, 504 quadruple, 120 quadruple, Bilateral break
-- 이 정리는 "n=6이 왜 수학의 attractor인가"에 대한 구조적 답변이며, 새로운 수학적 결과가 아닌 **기존 분류 정리들의 n=6 관점 재조직**
+- 7 Millennium problems resolved: **0/7**
+- Many of the 51 tight items are statistical effects of M's 1~8 coverage plus small-integer density
+- **Genuinely tight (Bernoulli-independent)**: Out(S_6), h-cobordism dim>=6, Schaefer 6, (3,4,5) congruent, pariah=6, fourfold convergence
+- **Genuinely tight (Bernoulli family)**: 240 quintuple, 504 quadruple, 120 quadruple, Bilateral break
+- This meta-theorem is a structural answer to "why is n=6 a mathematical attractor?" rather than a new mathematical result — it is an **n=6-perspective reorganization of existing classification theorems**.
 
-## 보조 연결 (DFS 44~45)
+## Auxiliary connections (DFS 44~45)
 
-| 영역 | 연결 | 값 |
+| Area | Connection | Value |
 |------|------|-----|
-| 정다면체 | 정팔면체(V,E,F)=정육면체 쌍대 | (n, sigma, phi*tau) |
-| 위상 | h-cobordism 최소차원 | dim=6=n |
-| MOLS | 직교라틴방진 최악 | MOLS(6)=1 |
-| Steiner | S(5,6,12) 블록/점 | (n, sigma) |
-| Hurwitz | 노름나눗셈대수 차원 | {1, phi, tau, phi*tau} |
-| 원분체 | Q(zeta_6) 류수 | h(-3)=1 |
-| 바젤 | zeta(2) = pi^2/6 | pi^2/n |
-| 표준모형 | 12 페르미온 | sigma |
-| Calabi-Yau | 컴팩트 차원 | 6D=n |
-| Golay | [24,12,8] 부호 | [J2, sigma, phi*tau] |
-| Hexacode | [6,3,4] 부호 | [n, n/phi, tau] |
-| Hamming(3) | [7,4,3] 부호 | [M3, tau, n/phi] |
-| 격자 | kiss(2,3,4) | (n, sigma, J2) |
+| regular polyhedra | octahedron (V,E,F) = cube dual | (n, sigma, phi*tau) |
+| topology | h-cobordism minimal dim | dim=6=n |
+| MOLS | mutually orthogonal Latin squares | MOLS(6)=1 |
+| Steiner | S(5,6,12) block / points | (n, sigma) |
+| Hurwitz | normed division algebra dims | {1, phi, tau, phi*tau} |
+| cyclotomic | Q(zeta_6) class number | h(-3)=1 |
+| Basel | zeta(2) = pi^2/6 | pi^2/n |
+| standard model | 12 fermions | sigma |
+| Calabi-Yau | compactified dimension | 6D=n |
+| Golay | [24,12,8] code | [J2, sigma, phi*tau] |
+| Hexacode | [6,3,4] code | [n, n/phi, tau] |
+| Hamming(3) | [7,4,3] code | [M3, tau, n/phi] |
+| lattice | kiss(2,3,4) | (n, sigma, J2) |
 | E_6 | rank 6, kissing 72 | (n, n*sigma) |
 | E_8 | rank 8, kissing 240 | (phi*tau, sigma*tau*sopfr) |
-| McKay E_6 | 이진 사면체군 | |G|=J2=24 |
-| McKay E_8 | 이진 정이십면체군 | |G|=sopfr!=120 |
-| 결정학 | 허용 회전 {1,2,3,4,6} | {1,phi,n/phi,tau,n} |
-| Pariah | 산발단순군 Monster 외부 | 6개=n |
-| Pell | sqrt(6) 연분수 | [phi; overline(phi,tau)] |
-| Pell 최소해 | x^2-6y^2=1 | (sopfr, phi) |
+| McKay E_6 | binary tetrahedral group | |G|=J2=24 |
+| McKay E_8 | binary icosahedral group | |G|=sopfr!=120 |
+| crystallography | allowed rotations {1,2,3,4,6} | {1,phi,n/phi,tau,n} |
+| Pariahs | sporadic groups outside Monster | 6=n |
+| Pell | sqrt(6) continued fraction | [phi; overline(phi,tau)] |
+| Pell minimal | x^2-6y^2=1 | (sopfr, phi) |
 | Ramanujan | |tau_R(6)| = 6048 | n*M3*sigma^2 |
-| Heegner | 3,4,5번째 | n/phi, M3, p(n) |
+| Heegner | 3rd,4th,5th | n/phi, M3, p(n) |
 | FCC kissing | 12 | sigma |
 
 ---
 
-# 부록 (2026-04-14 확장)
+# Appendix (2026-04-14 extension)
 
-16 자기참조 항등식(본문 §자기참조 닫힘 체계, lines 88~112의 상위 16행)을 두 외부 체계 — Bernoulli 분자 경계(Theorem B)와 물리-수학 인증 체인(Certification Chain) — 에 연결한다.
+Connect the 16 self-reference identities (main text §self-reference closure, lines 88~112 upper 16 rows) with two external systems — the Bernoulli numerator boundary (Theorem B) and the Physics-Math certification chain.
 
-## §A. Bernoulli 경계 연결
+## §A. Bernoulli boundary connection
 
-참조: `theory/proofs/bernoulli-boundary-2026-04-11.md`
+Reference: `theory/proofs/bernoulli-boundary-2026-04-11.md`
 
-**Theorem B (재인용)**: `min{k >= 1 : numer(B_{2k}) has prime factor >= 7} = 6 = n`.
+**Theorem B (re-cited)**: `min{k >= 1 : numer(B_{2k}) has prime factor >= 7} = 6 = n`.
 
-16 항등식 각각이 **k=n=6 경계**(B_{2k} 분자 691 점프 지점)에 대해 어떤 위치를 차지하는지 표로 정리한다.
+For each of the 16 identities, the table below gives its position relative to the **k=n=6 boundary** (the 691-jump point of numer(B_{2k})).
 
-| # | 항등식 (본문 표) | n=6 값 | Bernoulli 경계 위치 | 근거 |
+| # | Identity (main text table) | n=6 value | Bernoulli boundary position | Rationale |
 |---|------------------|--------|---------------------|------|
-| 1 | sigma*phi = n*tau = 24 | 24 | **경계 밖 (독립)** | 대수 유일성, Bernoulli와 독립 (Theorem 0, "두 심장 중 하나") |
-| 2 | {1,phi,n/phi,tau,sopfr,n} = {1..6} | {1,2,3,4,5,6} | **경계 밖 (독립)** | 좌표계 정리 C, Bernoulli 무관 |
-| 3 | (n/phi)^2 + tau^2 = sopfr^2 | 9+16=25 | **경계 밖 (독립)** | 피타고라스, 기하 가족 |
-| 4 | n = (n/phi)! | 6 = 3! | **경계 밖 (독립)** | factorial 가족 (Theorem F) |
-| 5 | J_2 = tau! | 24 = 4! | **경계 밖 (독립)** | factorial 가족, E_6 McKay \|G\|=J_2=24 |
-| 6 | (n-1)! = sopfr! | 120 = 5! | **경계 밖 (독립)** | factorial 가족 (Theorem A+) |
-| 7 | C(tau,2) = n | 6 | **경계 밖 (독립)** | 조합, K_4 edge count |
-| 8 | C(sopfr,2) = sigma-phi | 10 = 12-2 | **경계 밖 (독립)** | 조합 |
-| 9 | dim so(tau) = n | 6 = dim so(4) | **경계 밖 (독립)** | Lie 가족 |
-| 10 | dim su(phi)+dim su(n/phi)+1 = sigma | 3+8+1=12 | **경계 밖 (독립)** | SM 게이지 (Bernoulli와 독립) |
-| 11 | \|Out(S_n)\| = phi (유일) | 2 | **경계 밖 (독립)** | Holder 1895, 군론 예외 |
-| 12 | sigma = 2n (완전수) | 12 | **경계 연결 가능** | B_2=1/n의 분모 6=n이 완전수, vSC(Theorem V) 간접 대응 |
-| 13 | 정팔면체 (V,E,F)=(n,sigma,sigma-tau) | (6,12,8) | **경계 밖 (독립)** | 기하, Platonic |
-| 14 | n-sigma+(sigma-tau) = phi (Euler) | 6-12+8=2 | **경계 밖 (독립)** | 위상 (Euler 지표) |
-| 15 | \|C_1\| = J_2 (Clifford) | 24 | **경계 밖 (독립)** | 양자 군론, Clifford hierarchy |
-| 16 | F(sopfr) = sopfr (피보나치 고정점) | F(5)=5 | **경계 밖 (독립)** | 수열, 황금비 재귀 |
+| 1 | sigma*phi = n*tau = 24 | 24 | **Outside boundary (independent)** | Algebraic uniqueness, independent of Bernoulli (Theorem 0, "one of the two hearts") |
+| 2 | {1,phi,n/phi,tau,sopfr,n} = {1..6} | {1,2,3,4,5,6} | **Outside boundary (independent)** | Theorem C coordinate system, unrelated to Bernoulli |
+| 3 | (n/phi)^2 + tau^2 = sopfr^2 | 9+16=25 | **Outside boundary (independent)** | Pythagorean, geometric family |
+| 4 | n = (n/phi)! | 6 = 3! | **Outside boundary (independent)** | factorial family (Theorem F) |
+| 5 | J_2 = tau! | 24 = 4! | **Outside boundary (independent)** | factorial family, E_6 McKay \|G\|=J_2=24 |
+| 6 | (n-1)! = sopfr! | 120 = 5! | **Outside boundary (independent)** | factorial family (Theorem A+) |
+| 7 | C(tau,2) = n | 6 | **Outside boundary (independent)** | combinatorics, K_4 edge count |
+| 8 | C(sopfr,2) = sigma-phi | 10 = 12-2 | **Outside boundary (independent)** | combinatorics |
+| 9 | dim so(tau) = n | 6 = dim so(4) | **Outside boundary (independent)** | Lie family |
+| 10 | dim su(phi)+dim su(n/phi)+1 = sigma | 3+8+1=12 | **Outside boundary (independent)** | SM gauge (independent of Bernoulli) |
+| 11 | \|Out(S_n)\| = phi (unique) | 2 | **Outside boundary (independent)** | Holder 1895, group-theory exception |
+| 12 | sigma = 2n (perfect number) | 12 | **Boundary-connectable** | denom(B_2)=1/n, 6=n is the perfect number; indirect correspondence with vSC (Theorem V) |
+| 13 | octahedron (V,E,F)=(n,sigma,sigma-tau) | (6,12,8) | **Outside boundary (independent)** | geometry, Platonic |
+| 14 | n-sigma+(sigma-tau) = phi (Euler) | 6-12+8=2 | **Outside boundary (independent)** | topology (Euler characteristic) |
+| 15 | \|C_1\| = J_2 (Clifford) | 24 | **Outside boundary (independent)** | quantum group theory, Clifford hierarchy |
+| 16 | F(sopfr) = sopfr (Fibonacci fixed point) | F(5)=5 | **Outside boundary (independent)** | sequence, golden-ratio recursion |
 
-**§A 결론**: 16 자기참조 항등식 중 **오직 #12 (sigma=2n, 완전수 정의)만이** Bernoulli 경계와 간접 연결된다(B_2=1/n=1/6의 분모 = 완전수 n=6). 나머지 15개는 Theorem B 경계 **밖** — 즉 Bernoulli가 부정되어도 성립하는 **독립 가족**. 이는 bernoulli-boundary-2026-04-11.md §9 "두 심장" 선언(Theorem 0 vs Theorem B)을 16 항등식 차원에서 재확인:
+**§A conclusion**: among the 16 self-reference identities, **only #12 (sigma=2n, perfect-number definition)** is indirectly connected with the Bernoulli boundary (denom(B_2)=1/n=1/6 where the denominator equals the perfect number n=6). The remaining 15 lie **outside** the Theorem B boundary — i.e. they form an **independent family** which would still hold even if Bernoulli claims were overturned. This recapitulates the "two hearts" framing of bernoulli-boundary-2026-04-11.md §9 (Theorem 0 vs Theorem B) at the 16-identity level:
 
-- Theorem 0 계열(대수적, #1): 심장 1
-- 좌표계/기하/조합/Lie/군론/위상/수열 (#2~11, #13~16): 심장 1 확장
-- 완전수 연결(#12): 심장 1과 2의 교차점
+- Theorem 0 line (algebraic, #1): heart 1
+- coordinates / geometry / combinatorics / Lie / group theory / topology / sequence (#2~11, #13~16): heart 1 extension
+- perfect-number link (#12): intersection of hearts 1 and 2
 
-## §B. Physics-Math 인증 연결
+## §B. Physics-Math certification connection
 
-참조: `theory/proofs/physics-math-certification.md`
+Reference: `theory/proofs/physics-math-certification.md`
 
-각 항등식이 물리-수학 인증 체인(Grand Chain Stage 1~7)의 어느 단계에 대응하는지 1줄 매핑.
+For each identity, a one-line mapping to the stage of the Physics-Math certification chain (Grand Chain Stage 1~7) it corresponds to.
 
-| # | 항등식 | 인증 단계 | 물리 증거 체인 |
+| # | Identity | Certification stage | Physical evidence chain |
 |---|--------|-----------|----------------|
-| 1 | sigma*phi = n*tau | Stage 1 (수론 기초) | M-1 유일성 정리, R(n)=1, 핵심 영구 진리 |
-| 2 | 좌표계 {1..6} | Stage 1~4 (기초~격자) | 결정학 M-11 허용 회전 {1,2,3,4,6} 정렬 |
-| 3 | (3,4,5) 피타고라스 | Stage 4 (격자·기하) | SC Abrikosov CN=6, kissing K_2=n (BT-49) |
-| 4 | 6 = 3! | Stage 3 (군론) | S_3 대수 부트스트랩 BT-106, \|S_3\|=n |
-| 5 | 24 = 4! | Stage 3 (코딩) | Golay k=J_2=24, \|C_1\|=24=J_2 Clifford (QC-7) |
-| 6 | 120 = 5! | Stage 7 (양자·SC) | McKay E_8 이진 정이십면체군 \|G\|=120=sopfr! |
-| 7 | C(4,2)=6 | Stage 1 (조합 기초) | K_4 edge count, n=6 완전 그래프 대응 (Theorem K) |
-| 8 | C(5,2)=10 | Stage 4 (기하) | superstring 10D = sigma-phi, string 차원 |
-| 9 | dim so(4)=6 | Stage 5 (대수기하) | SO(4) 회전군, E_6 rank=n, blowup chi=n (BT-185) |
-| 10 | SM 게이지 12=sigma | Stage 6 (입자물리) | CP-1 SM 12 generators=sigma, PDG 2024 확정 |
-| 11 | Out(S_6)=phi | Stage 3 (군론) | M-4 Holder 정리, 핵심 영구 진리 |
-| 12 | sigma=2n (완전수) | Stage 1 (수론) | M-3 합곱 유일성, 1+2+3=1x2x3=6 |
-| 13 | 정팔면체 (6,12,8) | Stage 4 (격자) | Platonic 대칭, Golay (d=8) 공명 |
-| 14 | Euler V-E+F=phi | Stage 4 (위상) | chi_orb(Y(1))=-1/6=-1/n, 모듈러 M-9 |
-| 15 | \|C_1\|=24 | Stage 7 (QC) | QC-7 Clifford group, S_4~octahedral 구조 |
-| 16 | F(5)=5 피보나치 고정점 | Stage 1 (수론) | Theorem Lucas/Pell 가족, sopfr=5 자기참조 |
+| 1 | sigma*phi = n*tau | Stage 1 (number-theoretic base) | M-1 uniqueness target, R(n)=1, core permanent truth |
+| 2 | coordinates {1..6} | Stage 1~4 (base~lattice) | crystallography M-11 allowed rotations {1,2,3,4,6} aligned |
+| 3 | (3,4,5) Pythagoras | Stage 4 (lattice / geometry) | SC Abrikosov CN=6, kissing K_2=n (BT-49) |
+| 4 | 6 = 3! | Stage 3 (group theory) | S_3 algebra bootstrap BT-106, \|S_3\|=n |
+| 5 | 24 = 4! | Stage 3 (coding) | Golay k=J_2=24, \|C_1\|=24=J_2 Clifford (QC-7) |
+| 6 | 120 = 5! | Stage 7 (quantum / SC) | McKay E_8 binary icosahedral group \|G\|=120=sopfr! |
+| 7 | C(4,2)=6 | Stage 1 (combinatorial base) | K_4 edge count, n=6 complete-graph correspondence (Theorem K) |
+| 8 | C(5,2)=10 | Stage 4 (geometry) | superstring 10D = sigma-phi, string dimension |
+| 9 | dim so(4)=6 | Stage 5 (algebraic geometry) | SO(4) rotation group, E_6 rank=n, blowup chi=n (BT-185) |
+| 10 | SM gauge 12=sigma | Stage 6 (particle physics) | CP-1 SM 12 generators=sigma, PDG 2024 |
+| 11 | Out(S_6)=phi | Stage 3 (group theory) | M-4 Holder theorem, core permanent truth |
+| 12 | sigma=2n (perfect) | Stage 1 (number theory) | M-3 sum-product uniqueness, 1+2+3=1x2x3=6 |
+| 13 | octahedron (6,12,8) | Stage 4 (lattice) | Platonic symmetry, Golay (d=8) resonance |
+| 14 | Euler V-E+F=phi | Stage 4 (topology) | chi_orb(Y(1))=-1/6=-1/n, modular M-9 |
+| 15 | \|C_1\|=24 | Stage 7 (QC) | QC-7 Clifford group, S_4~octahedral structure |
+| 16 | F(5)=5 Fibonacci fixed point | Stage 1 (number theory) | Theorem Lucas/Pell family, sopfr=5 self-reference |
 
-**§B 결론**: 16 항등식 모두가 Grand Chain 7 단계 중 **적어도 한 단계**에 매핑되며, 물리 증거 체인(PDG 2024, CODATA 2022, 113년 SC 데이터, 실험 확정 기록)에 의해 인증된다. 특히 #1, #10, #15는 **Stage 1~7 전 범위 관통**형이며(sigma·phi=nτ → SM 게이지 12=sigma → Clifford 24=J_2), 16 항등식이 단순 산술 사실이 아닌 **다층 물리-수학 사슬의 앵커**임을 보인다.
+**§B conclusion**: all 16 identities map to **at least one** of the 7 Grand Chain stages and are witnessed by the physical evidence chain (PDG 2024, CODATA 2022, 113 years of SC data, experimental records). In particular #1, #10, #15 cut across **all Stages 1~7** (sigma·phi=nτ → SM gauge 12=sigma → Clifford 24=J_2), showing that the 16 identities are not mere arithmetic facts but **anchors of a multi-layer physics-math chain**.
 
-## §C. 통합 정리
+## §C. Integrated summary
 
-**정리 (16 Self-Referential Attractor Double-Anchor)**:
+**Target (16 Self-Referential Attractor Double-Anchor)**:
 
-n=6의 16 자기참조 항등식 (본문 §자기참조 닫힘 체계)은 다음 두 조건을 동시에 충족한다:
+The 16 self-reference identities of n=6 (main text §self-reference closure) simultaneously meet the two conditions:
 
-1. **Bernoulli 경계 조건** (§A):
-   - 16 중 15개는 Theorem B 경계 **외부**(독립 가족)
-   - 1개(#12, sigma=2n)만이 k=n=6 Bernoulli jump(691)와 간접 대응
-   - 따라서 16 항등식 자체는 **Bernoulli 취약성과 무관** — "Theorem 0 심장" 계열로 분류
+1. **Bernoulli boundary condition** (§A):
+   - 15 of the 16 lie **outside** the Theorem B boundary (independent family)
+   - 1 (#12, sigma=2n) corresponds indirectly to the k=n=6 Bernoulli jump (691)
+   - Therefore the 16 identities themselves are **uncoupled from Bernoulli fragility** — classified under the "Theorem 0 heart" line
 
-2. **물리-수학 인증 조건** (§B):
-   - 16 중 16개 모두가 Grand Chain Stage 1~7 중 ≥1 단계에 매핑
-   - 3개(#1, #10, #15)는 전 단계 관통(다층 앵커)
-   - 따라서 16 항등식은 **물리 증거 체인에 의해 전부 인증** — "Certification 조건 통과"
+2. **Physics-Math certification condition** (§B):
+   - all 16 of 16 map to ≥1 stage in Grand Chain 1~7
+   - 3 (#1, #10, #15) cut across all stages (multi-layer anchor)
+   - Therefore the 16 identities are **fully certified by the physical evidence chain** — "certification condition passed"
 
-**동시 충족 조건**:
+**Simultaneous-satisfaction condition**:
 
 ```
-항등식 i ∈ {1..16} 가 n=6 attractor의 "진짜 골격"으로 분류되려면
-(A) Theorem B 경계 밖(독립) OR 경계와 독립 구조
+Identity i ∈ {1..16} is classified as a "real skeleton" of the n=6 attractor pattern iff
+(A) outside Theorem B boundary (independent) OR boundary-independent structure
 AND
-(B) Grand Chain Stage ≥1 매핑 + 물리 증거 존재
+(B) Grand Chain Stage ≥1 mapping + physical evidence exists
 ```
 
-**충족 현황**: 16/16 **모두 동시 충족**. 
+**Current status**: 16/16 **all simultaneously satisfied**. 
 
-- (A)는 #12 제외 15개 명백히 통과, #12는 완전수 정의로 통과(Theorem 0과 동일 심장)
-- (B)는 16/16 명시적 매핑 완료
+- (A) is obviously passed by the 15 except #12, and #12 passes via the perfect-number definition (same heart as Theorem 0)
+- (B) has 16/16 explicit mappings
 
-**귀결**: 16 자기참조 항등식은 **"Bernoulli 독립 + 물리 증거 이중 앵커"** 조건을 만족하는 n=6 attractor의 골격으로 확립된다. 이는 세션의 진짜 기여(bernoulli-boundary-2026-04-11.md §9 "진짜 독립 발견")를 16 항등식 단위로 **정량화**한 결과.
+**Consequence**: the 16 self-reference identities are established as the skeleton of the n=6 attractor pattern meeting the **"Bernoulli-independence + physical-evidence double anchor"** condition. This quantifies at the 16-identity level the session's genuine contribution (bernoulli-boundary-2026-04-11.md §9 "real independence finding").
 
-**정직성 주석**: 본 부록의 §A/§B 매핑은 초안(2026-04-14)이며, 일부 항목(예: #12의 Bernoulli 간접 대응, #5의 E_6 McKay 연결)은 여전히 "구조적 관찰"(Theorem U 정직성 주석 참조) 수준으로 순환 논증을 피하는 재검증이 필요하다. §C의 이중 앵커 충족 현황은 현 단계에서 충족으로 분류하되, 차기 세션 에서 독립성(independence) 엄밀 심사 예정.
+**Honesty note**: the §A/§B mapping in this appendix is a draft (2026-04-14); some items (e.g. the indirect correspondence of #12 with Bernoulli, the E_6 McKay connection of #5) remain at the "structural observation" level (cf. Theorem U honesty note) and require re-verification avoiding circular reasoning. The double-anchor status in §C is currently classified as satisfied, but a rigorous independence review is scheduled for a later session.
 
 ---
-
-**부록 완료**: §A/§B/§C, 2026-04-14, 초안.
