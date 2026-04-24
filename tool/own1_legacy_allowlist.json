@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 40,
+    "count": 39,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -432,6 +432,16 @@
         "phase": "phase-6-D-B12-hexa-macos",
         "removed": 1,
         "count_after": 42
+      },
+      {
+        "phase": "phase-6-D-B12-hexa-netproto",
+        "batch": "phase-6-D-B12-hexa-netproto",
+        "date": "2026-04-25",
+        "removed": 1,
+        "entry": "domains/compute/hexa-netproto/hexa-netproto.md",
+        "before": 40,
+        "after": 39,
+        "note": "B12 RED-lite part A - hexa-netproto.md (Ultimate Network Protocol SoC) translated KR->EN, CJK=0 verified."
       }
     ]
   },
@@ -453,7 +463,6 @@
     "domains/compute/hexa-holo/hexa-holo.md",
     "domains/compute/hexa-ios/hexa-ios.md",
     "domains/compute/hexa-mram/hexa-mram.md",
-    "domains/compute/hexa-netproto/hexa-netproto.md",
     "domains/compute/hexa-pim/hexa-pim.md",
     "domains/compute/hexa-proglang/hexa-proglang.md",
     "domains/compute/hexa-super/hexa-super.md",
