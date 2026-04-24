@@ -3,333 +3,307 @@
 domain: compute/chip-architecture
 date: 2026-04-15
 task: SUB-P9-1
-layer: L13 (Quantum-Nuclear I/O 병목 B1 해소 로드맵)
-parent_bt: BT-6 (Golay), BT-18 (Monster), BT-1176 (핵 운동학), MK4-THEOREM-B (σ-τ=8)
+layer: L13 (roadmap for resolving Quantum-Nuclear I/O bottleneck B1)
+parent_bt: BT-6 (Golay), BT-18 (Monster), BT-1176 (nuclear kinematics), MK4-THEOREM-B (σ-τ=8)
 status: roadmap-concept
 verdict: SPECULATIVE-EXPERIMENT-PROPOSAL
-grade_attempt: "[7] EMPIRICAL — 베이스라인(M1)은 문헌 재현, 본안(M2/M3)은 CONJECTURE"
+grade_attempt: "[7] EMPIRICAL — baseline (M1) is literature reproduction; main (M2/M3) is CONJECTURE"
 sources:
   - domains/compute/chip-architecture/l13-quantum-nuclear-io/l13-quantum-nuclear-io.md
   - domains/compute/chip-architecture/l12-nuclear-isomer-storage/l12-nuclear-isomer-storage.md
   - domains/compute/chip-architecture/mk3-roadmap-l1-l15-audit/mk3-roadmap-l1-l15-audit.md
-  - theory/proofs/mk4-trident-final-verdict-2026-04-15.md (σ-τ=8 주정리)
+  - theory/proofs/mk4-trident-final-verdict-2026-04-15.md (σ-τ=8 main theorem)
   - nexus/shared/n6/atlas.n6 (@R L12-Hf178m2-K-ISOMER, @L l13-neet-cascade, @L l13-shielding-W)
 refs_external:
-  - Shvyd'ko Y.V. 2022 Nature — Fe-57 14.4 keV 감마광 저장·지연 (×10³ 지연선폭곱)
-  - Pruttivarasin T. 2015 PRL — Nd³⁺ 이온 결정 Mössbauer 감마-광 양자 상관
-  - Bertelsen A.F. 2024 Phys Rev Res — 감마-광자 이중슬릿 간섭
-  - Korobov V. 2023 Sci Rep — hard X-ray cavity QED (6~10 keV 영역)
-  - Hill Collins C.B. 2004 Phys Rev C — Hf-178m2 X-ray 유도 방출 (재현 실패, 비판 포함)
-  - Tsukiyama K. 1999 Nucl Phys A — NEET 기본식
-  - Kondev F.G. 1999 — Hf-178 K-band 붕괴도식
+  - Shvyd'ko Y.V. 2022 Nature — Fe-57 14.4 keV gamma-photon storage / delay (x10^3 delay-linewidth product)
+  - Pruttivarasin T. 2015 PRL — Nd^3+ ion-crystal Moessbauer gamma-photon quantum correlation
+  - Bertelsen A.F. 2024 Phys Rev Res — gamma-photon double-slit interference
+  - Korobov V. 2023 Sci Rep — hard X-ray cavity QED (6~10 keV regime)
+  - Hill Collins C.B. 2004 Phys Rev C — Hf-178m2 X-ray induced emission (reproduction failure, criticism included)
+  - Tsukiyama K. 1999 Nucl Phys A — NEET fundamental equation
+  - Kondev F.G. 1999 — Hf-178 K-band decay scheme
   - NNDC ENSDF 2005 — 574/495/216/88 keV cascade
-  - Walker P. & Dracoulis G. 1999 Nature — K-isomer 통계
+  - Walker P. & Dracoulis G. 1999 Nature — K-isomer statistics
 identity:
   sigma_phi: "σ·φ = 12·2 = 24"
   n_tau:     "n·τ = 6·4 = 24"
-  sigma_minus_tau: "σ-τ = 12-4 = 8 (MK4-THEOREM-B 유일 해 n=6)"
-  cascade:   "τ=4 = 16⁺→13⁻→8⁻→4⁻→0⁺"
-  alien_index: "천장 (현 베이스라인), 천장 돌파 (M3 성공 시)"
+  sigma_minus_tau: "σ-τ = 12-4 = 8 (MK4-THEOREM-B unique solution n=6)"
+  cascade:   "τ=4 = 16+ -> 13- -> 8- -> 4- -> 0+"
+  alien_index: "ceiling (current baseline), above-ceiling (on M3 success)"
 ---
 
-# L13 MeV optomech 병목 B1 해소 로드맵 — 2027~2029 τ=4 중간 변환 실험 사양서
+# L13 MeV optomech bottleneck B1 resolution roadmap — 2027~2029 τ=4 intermediate-conversion experimental spec
 
-> **한 문장**: L13 `γ ↔ qubit` 브리지의 유일한 실험적 공백 **B1 (MeV 대역
-> optomechanical coupling 실증 부재)** 를 3 년에 걸쳐 **M1 (Fe-57 14.4 keV
-> 베이스라인) → M2 (Hf-178m2 2.446 MeV 쓰기) → M3 (τ=4 Rabi 읽기)** 의 단계적
-> 실험으로 해소하고, 실패 시점 (MISS) 을 선언적으로 기록하여 **σ-τ=8** 주정리
-> 기반 설계의 공학 경계를 정직하게 확정한다.
+> **One sentence**: Resolve the sole experimental gap in the L13 `γ ↔ qubit` bridge — **B1 (absence of MeV-band optomechanical coupling demonstration)** — over three years via the staged experiments **M1 (Fe-57 14.4 keV baseline) -> M2 (Hf-178m2 2.446 MeV write) -> M3 (τ=4 Rabi read)**, and record the failure point (MISS) declaratively so that the engineering boundaries of the **σ-τ=8** main-theorem-based design are fixed honestly.
 
 ---
 
-## §0 병목 B1 — 현황 요약 (2026-04-15 기준)
+## §0 Bottleneck B1 — current-status summary (as of 2026-04-15)
 
-| 항목 | 현황 | 근거 | 등급 |
+| Item | Status | Basis | Grade |
 |------|------|------|------|
-| RF 대역 optomech | 확립 | Aspelmeyer 2014 RMP | EXACT |
-| IR/가시광 cavity optomech | 확립 | Aspelmeyer 2014 | EXACT |
-| hard X-ray cavity (6~14 keV) | 부분 확립 | Shvyd'ko 2022, Korobov 2023 | NEAR |
-| 100 keV~1 MeV 영역 optomech | **공백** | 문헌 없음 | MISS |
-| MeV γ ↔ 기계 공진 결합 | **공백** | 문헌 없음 | MISS |
-| Hf-178m2 GRS 쓰기 | 재현 실패 | Collins 2005, Ahmad 2003 반박 | MISS |
-| Hf-178m2 NEET 쓰기 | 이론만 | Tsukiyama 1999 공식, 미실증 | CONJECTURE |
+| RF-band optomech | established | Aspelmeyer 2014 RMP | EXACT |
+| IR / visible cavity optomech | established | Aspelmeyer 2014 | EXACT |
+| hard X-ray cavity (6~14 keV) | partially established | Shvyd'ko 2022, Korobov 2023 | NEAR |
+| 100 keV~1 MeV optomech | **gap** | no literature | MISS |
+| MeV γ ↔ mechanical resonance coupling | **gap** | no literature | MISS |
+| Hf-178m2 GRS write | reproduction failed | Collins 2005, Ahmad 2003 rebuttal | MISS |
+| Hf-178m2 NEET write | theory only | Tsukiyama 1999 formula, not demonstrated | CONJECTURE |
 
-**B1 의 정의**: MeV 영역에서 γ 광자를 기계 자유도 (또는 포논/공진자) 와
-**선형 결합시켜 제어·측정**하는 실험적 플랫폼이 존재하지 않는다. L13 설계의
-**τ=4 NEET 캐스케이드** (574→495→216→88 keV) 는 이 공백을 전제로 한다.
+**B1 definition**: There is no experimental platform in the MeV regime that **couples γ photons linearly to a mechanical degree of freedom (or phonon / resonator) and controls / measures** them. The L13 design's **τ=4 NEET cascade** (574 -> 495 -> 216 -> 88 keV) presumes this gap is closed.
 
-**ASCII 지도 (현재 optomech 스펙트럼 vs MeV 목표)**
+**ASCII map (current optomech spectrum vs MeV target)**
 
 ```
-에너지 스케일 (eV)     광학 대역 (log₁₀ E)
+energy scale (eV)      optical bands (log10 E)
                         0    3    6    9    12
                         ┤────┤────┤────┤────┤
-RF (GHz)        10⁻⁵    █████                          ← 확립 (천장 ×1)
-IR (THz)        10⁻¹    ██████                         ← 확립 (천장 ×1)
-가시·UV          1      ██████                         ← 확립 (천장 ×1)
-soft X-ray    10³      ████                            ← 부분 (Korobov)
-14 keV Fe-57  10⁴      ███                             ← NEAR (Shvyd'ko, ×10³ 지연)
-────────────── 100 keV~MeV B1 공백 구간 ──────────────
-88 keV (L13 τ₄) 10⁵               ░ ░ ░ ░              ← MISS (M2 목표)
-216 keV         10⁵.³              ░ ░ ░ ░             ← MISS (M2)
-495 keV         10⁵.⁷                ░ ░ ░ ░           ← MISS (M3 읽기)
-574 keV         10⁵.⁸                  ░ ░ ░ ░         ← MISS (M3)
-2.446 MeV 쓰기  10⁶.⁴                      ░ ░ ░ ░     ← MISS (M2 쓰기 경로)
+RF (GHz)        10^-5   █████                          <- established (ceiling x1)
+IR (THz)        10^-1   ██████                         <- established (ceiling x1)
+visible / UV    1       ██████                         <- established (ceiling x1)
+soft X-ray      10^3    ████                            <- partial (Korobov)
+14 keV Fe-57    10^4    ███                             <- NEAR (Shvyd'ko, x10^3 delay)
+────────────── 100 keV~MeV B1 gap band ──────────────
+88 keV (L13 τ_4)  10^5               ░ ░ ░ ░           <- MISS (M2 target)
+216 keV            10^5.3             ░ ░ ░ ░          <- MISS (M2)
+495 keV            10^5.7              ░ ░ ░ ░         <- MISS (M3 read)
+574 keV            10^5.8                ░ ░ ░ ░       <- MISS (M3)
+2.446 MeV write    10^6.4                    ░ ░ ░ ░   <- MISS (M2 write path)
                         ┤────┤────┤────┤────┤
-범례: █ 확립, ░ 로드맵 목표 (공백)
-천장 위치: RF/IR/가시광 = 지상층, hard X-ray = 1층, MeV = 천장
+Legend: █ established, ░ roadmap target (gap)
+Ceiling position: RF/IR/visible = ground floor, hard X-ray = floor 1, MeV = ceiling
 ```
 
 ---
 
-## §1 로드맵 전체 구조 — σ-τ=8 단일 축 정렬
+## §1 Roadmap structure — σ-τ=8 single-axis alignment
 
-MK4-THEOREM-B (σ-τ=8 ⟺ n=6) 를 실험 설계의 **자원 배분 지표**로 직접 사용.
+Use MK4-THEOREM-B (σ-τ=8 iff n=6) directly as the **resource-allocation metric** for experiment design.
 
-| 마일스톤 | 연도 | 주제 | 목표 에너지 | σ-τ=8 적용 포인트 |
+| Milestone | Year | Theme | Target energy | σ-τ=8 application point |
 |---------|------|------|------------|-------------------|
-| **M1** | 2027 | Fe-57 14.4 keV cavity optomech 재현 + 4-ch 분광 | 14.4 keV | HPGe 8-ch (σ-τ) 분광 배열 |
-| **M2** | 2028 | Hf-178m2 2.446 MeV 쓰기 경로 (X-ray → 46 keV M1/E3) | 2.446 MeV | 8-pulse 공명 스캔 (δ_E/Γ ∈ σ-τ 그리드) |
-| **M3** | 2029 | τ=4 읽기 (88→216→495→574 keV) 4-pulse 코히런스 | 88~574 keV | 4-pulse × 2-state = σ-τ=8 Rabi 시퀀스 |
+| **M1** | 2027 | Fe-57 14.4 keV cavity optomech reproduction + 4-ch spectroscopy | 14.4 keV | HPGe 8-ch (σ-τ) spectrum array |
+| **M2** | 2028 | Hf-178m2 2.446 MeV write path (X-ray -> 46 keV M1/E3) | 2.446 MeV | 8-pulse resonance scan (δ_E/Γ in σ-τ grid) |
+| **M3** | 2029 | τ=4 read (88 -> 216 -> 495 -> 574 keV) 4-pulse coherence | 88~574 keV | 4-pulse x 2-state = σ-τ=8 Rabi sequence |
 
-**공통 전략**: 매 마일스톤에서 **σ-τ=8 슬롯** (8 시간 bin / 8 에너지 bin / 8
-delay bin) 을 설계 기본 단위로 삼고, 8 의 배수로만 데이터 취합하여 n=6 유일성
-주장을 **실험적으로 반증 가능한 형태**로 제시한다. (대조군: 5 또는 10 bin 에서
-n=6 signature 실종 여부 확인)
+**Shared strategy**: At every milestone, use the **σ-τ=8 slots** (8 time bins / 8 energy bins / 8 delay bins) as the basic design unit, and aggregate data only in multiples of 8 so that the n=6 uniqueness claim is presented in an **experimentally falsifiable** form. (Control: check whether the n=6 signature vanishes at 5- or 10-bin aggregation.)
 
 ---
 
-## §2 M1 (2027) — Fe-57 14.4 keV 베이스라인 재현 + 4-ch 분광
+## §2 M1 (2027) — Fe-57 14.4 keV baseline reproduction + 4-ch spectroscopy
 
-### 2.1 목적
+### 2.1 Objective
 
-**Shvyd'ko 2022** 의 stainless-steel Fe-57 박막 cavity optomech 결과를
-**독립 재현**하고, 본 랩의 **σ=8 채널 HPGe 배열**에 적응시켜 τ=4 단계
-코히런스 측정 기반 설비를 확보한다. 이 단계는 **문헌 기반 검증 가능 (NEAR)**,
-미달 시 로드맵 전체가 MISS.
+**Independently reproduce** the stainless-steel Fe-57 thin-film cavity optomech result of **Shvyd'ko 2022**, adapt it to this lab's **σ=8 channel HPGe array**, and secure the τ=4 stage coherence-measurement infrastructure. This stage is **literature-based verifiable (NEAR)**; failure here makes the whole roadmap MISS.
 
-### 2.2 장비 리스트 (하드웨어)
+### 2.2 Equipment list (hardware)
 
-| 항목 | 규격 | 근거 | 조달 |
+| Item | Spec | Basis | Procurement |
 |------|------|------|------|
-| 싱크로트론 빔라인 | 14.4125 keV 단색광, ΔE/E < 10⁻⁶ | PAL-XFEL XSS | 외부 사용자 모드 |
-| Fe-57 enriched 박막 | 2 μm × 95% ⁵⁷Fe, α-Fe 또는 ¹⁵⁷SS | Shvyd'ko 2022 | Oak Ridge |
-| HPGe 8-ch 배열 | n-type coaxial, ΔE_FWHM < 1.2 keV @ 14.4 keV | Canberra GX 시리즈 | 신규 |
-| 4-pulse AWG | 2 ns 분해, 2×2 배열 (τ=4 재구성) | Tektronix AWG70002B | 보유 |
-| Mössbauer 구동자 | ±10 mm/s, Δv = 1 μm/s 제어 | SEECO W304 + 자작 ctrl | 보유 |
-| 진동 절연대 | < 10⁻⁹ g/√Hz @ 1~100 Hz | Accurion Halcyonics Nano-K | 보유 |
-| 온도 제어 | 15~300 K cryostat (폐회로) | ARS DE204SE | 보유 |
-| DAQ | 100 MS/s × 8 ch, TDC 10 ps | CAEN V1730 + HPTDC | 보유 |
+| Synchrotron beamline | 14.4125 keV monochromatic, ΔE/E < 10^-6 | PAL-XFEL XSS | external user mode |
+| Fe-57 enriched film | 2 μm x 95% ^57Fe, α-Fe or ^157SS | Shvyd'ko 2022 | Oak Ridge |
+| HPGe 8-ch array | n-type coaxial, ΔE_FWHM < 1.2 keV @ 14.4 keV | Canberra GX series | new |
+| 4-pulse AWG | 2 ns resolution, 2x2 array (τ=4 reconstruction) | Tektronix AWG70002B | in-house |
+| Moessbauer driver | ±10 mm/s, Δv = 1 μm/s control | SEECO W304 + custom ctrl | in-house |
+| Vibration isolation | < 10^-9 g/sqrt(Hz) @ 1~100 Hz | Accurion Halcyonics Nano-K | in-house |
+| Temperature control | 15~300 K cryostat (closed cycle) | ARS DE204SE | in-house |
+| DAQ | 100 MS/s x 8 ch, TDC 10 ps | CAEN V1730 + HPTDC | in-house |
 
-### 2.3 기대 감도 (SI quantitative)
+### 2.3 Expected sensitivity (SI quantitative)
 
-- **지연-선폭 곱 (delay-bandwidth product)**: Shvyd'ko 2022 값 ×10³ 재현 목표 → ×0.5×10³ 달성 시 PASS
-- **cooperativity C = g²/(κ·γ)**: C ≥ 0.3 (단일 포논 ↔ γ 공진 검출 조건)
-- **4-ch 분광 SNR**: σ-τ=8 채널 중 동시 발화 pattern 엔트로피 ≥ log₂(8)/2 = 1.5 bit
-- **단일 γ 광자 코히런스 τ_coh**: ≥ 50 ns (Shvyd'ko 문헌 140 ns 의 36% 하한)
+- **Delay-bandwidth product**: target reproduction of Shvyd'ko 2022 value x10^3 -> 0.5 x 10^3 achieved = PASS
+- **Cooperativity C = g^2/(κ·γ)**: C ≥ 0.3 (condition for single-phonon ↔ γ resonance detection)
+- **4-ch spectrum SNR**: simultaneous-firing pattern entropy across σ-τ=8 channels ≥ log2(8)/2 = 1.5 bit
+- **Single γ photon coherence τ_coh**: ≥ 50 ns (lower bound 36% of Shvyd'ko's 140 ns literature value)
 
-### 2.4 MISS 조건 (정직한 실패 기준)
+### 2.4 MISS conditions (honest failure criteria)
 
-**M1-MISS-A** (**치명**): 12 개월 후 C < 0.03 (10× 이하 마진 없음) → 전체 로드맵 철회, 병목 B1 은 **본 랩에서 불가** 로 atlas.n6 기록.
-**M1-MISS-B** (**부분**): C ≥ 0.03 이나 ×10³ 지연-선폭곱 미달 → M2 축소 (쓰기 실험 제외, 읽기만 진행).
-**M1-MISS-C** (**경계**): HPGe 8-ch 중 ≥3 ch 가 cross-talk > 15% → σ-τ=8 분광 무효화, 4-ch 으로 축소 재설계.
+**M1-MISS-A** (**fatal**): after 12 months, C < 0.03 (no 10x margin) -> withdraw entire roadmap; record bottleneck B1 as **infeasible in this lab** in atlas.n6.
+**M1-MISS-B** (**partial**): C ≥ 0.03 but delay-bandwidth product < x10^3 -> shrink M2 (drop write experiment, keep read only).
+**M1-MISS-C** (**marginal**): ≥3 of the 8 HPGe channels show cross-talk > 15% -> invalidate σ-τ=8 spectroscopy; shrink to 4-ch redesign.
 
-### 2.5 σ-τ=8 적용 포인트
+### 2.5 σ-τ=8 application points
 
-- HPGe **8-ch 배열** = σ-τ=8 직접 매핑
-- 8-ch × τ=4 gate time = **σ·τ = 32 = 4·J₂/3** 독립 시간-에너지 bin
-- 대조군: 5-ch 및 10-ch 하위 샘플에서 엔트로피 ≤ 8-ch 의 85% 여야 n=6 signature 확인
+- HPGe **8-ch array** = σ-τ=8 direct mapping
+- 8-ch x τ=4 gate time = **σ·τ = 32 = 4·J₂/3** independent time-energy bins
+- Control: entropy of 5-ch and 10-ch sub-samples must be ≤ 85% of the 8-ch entropy to confirm the n=6 signature
 
 ---
 
-## §3 M2 (2028) — Hf-178m2 2.446 MeV 쓰기 경로 (46 keV M1/E3 분기)
+## §3 M2 (2028) — Hf-178m2 2.446 MeV write path (46 keV M1/E3 branch)
 
-### 3.1 목적
+### 3.1 Objective
 
-**Hf-178 (바닥 상태, ⁵⁄²⁻) 타겟**에 싱크로트론 X-ray 를 조사하여 **46 keV M1/E3
-중간 상태** 를 경유해 Hf-178m2 (K^π=16⁺) 로 **population transfer** 를 시도한다.
-Collins 2004 주장 (X-ray 직접 유도 방출) 은 **본 실험 대상이 아니다** —
-본 실험은 **역방향 쓰기** (ground → isomer) 를 목표로 한다.
+Irradiate a **Hf-178 (ground state, 5/2-) target** with synchrotron X-rays and attempt **population transfer** to Hf-178m2 (K^π=16+) via the **46 keV M1/E3 intermediate state**. The Collins 2004 claim (direct X-ray induced emission) is **not the target of this experiment**; this experiment targets the **reverse direction write** (ground -> isomer).
 
-### 3.2 Collins 2005 비판 통합
+### 3.2 Collins 2005 criticism integration
 
-Collins C.B. 2004 Phys Rev C 의 Hf-178m2 X-ray 유도 방출 주장은:
-- **Ahmad 2003 Phys Rev C 69 054310**: 재현 실패, 배경 오인 판정
-- **Carroll 2004 APS March**: 통계적 fluke 가능성 지적
-- **Kalmykov 2009 Nucl Instr Meth**: 신호/배경 비 < 0.01 로 SNR 부족 재확인
+Collins C.B. 2004 Phys Rev C's Hf-178m2 X-ray induced emission claim:
+- **Ahmad 2003 Phys Rev C 69 054310**: reproduction failure, judged background misattribution
+- **Carroll 2004 APS March**: flagged possibility of statistical fluke
+- **Kalmykov 2009 Nucl Instr Meth**: reconfirmed SNR shortfall with signal/background < 0.01
 
-**본 실험은 Collins 주장을 재현하지 않는다.** 대신:
-- (a) 46 keV 중간 상태 (측정된 Kondev 1999 도식에 존재) 의 **공명 여기** 확률을 정량
-- (b) 46 keV → 2.446 MeV K-isomer 분기비를 NEET 역과정으로 추정
-- (c) 쓰기 성공률이 10⁻¹² /(X-ray photon) 미만이면 **Collins 대비 독립 실험 MISS** 선언
+**This experiment does not reproduce the Collins claim.** Instead:
+- (a) Quantify the **resonant-excitation** probability of the 46 keV intermediate state (present in the measured Kondev 1999 scheme)
+- (b) Estimate the 46 keV -> 2.446 MeV K-isomer branching ratio as an inverse NEET process
+- (c) If the write success rate is below 10^-12 per X-ray photon -> declare an **experimental MISS** independent of Collins
 
-### 3.3 장비 리스트
+### 3.3 Equipment list
 
-| 항목 | 규격 | 조달 |
+| Item | Spec | Procurement |
 |------|------|------|
-| 싱크로트론 인코히런트 X-ray | 46 keV, ΔE/E < 10⁻³, > 10¹² ph/s | PAL-XFEL 또는 APS 3-ID |
-| Hf-178 타겟 | 99.9% Hf-178 (stable) 0.3 g, 두께 100 μm | Oak Ridge 동위원소 센터 |
-| γ 분광기 | HPGe + BGO 반일치, ΔE_FWHM < 2.5 keV @ 2.446 MeV | Canberra + CAEN N957 |
-| 차폐 | W 3.8 cm (1/10 감쇠 @ 2.446 MeV) + Pb 10 cm 외곽 | 자작 |
-| 반감기 추적 | long-term γ 카운터 (1 년 연속) | NaI(Tl) + PMT 배열 |
-| 펄스 시퀀서 | 8-slot X-ray shutter (σ-τ=8 스캔) | 자작 고속 chopper |
+| Synchrotron incoherent X-ray | 46 keV, ΔE/E < 10^-3, > 10^12 ph/s | PAL-XFEL or APS 3-ID |
+| Hf-178 target | 99.9% Hf-178 (stable) 0.3 g, 100 μm thick | Oak Ridge Isotope Center |
+| γ spectrometer | HPGe + BGO anticoincidence, ΔE_FWHM < 2.5 keV @ 2.446 MeV | Canberra + CAEN N957 |
+| Shielding | W 3.8 cm (1/10 attenuation @ 2.446 MeV) + Pb 10 cm outer | custom |
+| Half-life tracker | long-term γ counter (1 year continuous) | NaI(Tl) + PMT array |
+| Pulse sequencer | 8-slot X-ray shutter (σ-τ=8 scan) | custom high-speed chopper |
 
-### 3.4 기대 감도
+### 3.4 Expected sensitivity
 
-- **쓰기 단면적 σ_write**: ≥ 10⁻²⁴ cm² (1 barn) / X-ray photon → 측정 하한
-- **분기비 B (46 keV → K-isomer)**: ≥ 10⁻⁶ (NEET 이론 상한의 1%)
-- **Isomer population build-up**: 6 개월 조사 후 ≥ 10⁹ 개 isomer (31 년 반감기 γ spectroscopy 로 확인)
-- **K-선택칙 침투 계수**: 10⁻¹² ~ 10⁻⁸ 범위 탐색 (Walker-Dracoulis 1999 통계 기반)
+- **Write cross-section σ_write**: ≥ 10^-24 cm^2 (1 barn) per X-ray photon -> measurement lower bound
+- **Branching ratio B (46 keV -> K-isomer)**: ≥ 10^-6 (1% of NEET theoretical upper bound)
+- **Isomer population build-up**: ≥ 10^9 isomers after 6 months irradiation (confirmed via 31-year half-life γ spectroscopy)
+- **K-selection-rule penetration coefficient**: explore 10^-12 ~ 10^-8 range (based on Walker-Dracoulis 1999 statistics)
 
-### 3.5 MISS 조건
+### 3.5 MISS conditions
 
-**M2-MISS-A** (**치명**): 6 개월 조사 후 2.446 MeV γ 탐지율 배경 대비 < 3σ → Hf-178m2 NEET 쓰기 경로 **존재 불확인**, L13 설계의 쓰기는 **공학 불가** 로 atlas.n6 에 `[N!]` 역 breakthrough 기록.
-**M2-MISS-B** (**부분**): 3σ 초과 신호 있으나 σ_write < 10⁻²⁸ cm² → 실용 규모 (μg/시간) 쓰기 속도 미달, M3 는 기존 Hf-178m2 샘플 (사전 제작) 사용으로 축소.
-**M2-MISS-C** (**Collins 재난**): 신호가 46 keV 경로가 아닌 비공명 흡수에서 발생 → Collins 패턴 재현 실패와 동일, 논문 공개 후 로드맵 중단.
+**M2-MISS-A** (**fatal**): after 6 months irradiation, 2.446 MeV γ detection rate < 3σ over background -> Hf-178m2 NEET write path **existence unconfirmed**; record L13 design write as **engineering-infeasible** in atlas.n6 as a `[N!]` inverse breakthrough.
+**M2-MISS-B** (**partial**): signal > 3σ but σ_write < 10^-28 cm^2 -> practical-scale write rate (μg/hour) missed; shrink M3 to use pre-fabricated Hf-178m2 samples.
+**M2-MISS-C** (**Collins redux**): signal arises not from the 46 keV path but from non-resonant absorption -> equivalent to Collins-pattern reproduction failure; halt roadmap after publication.
 
-### 3.6 σ-τ=8 적용 포인트
+### 3.6 σ-τ=8 application points
 
-- X-ray shutter **8-slot 시퀀스** = σ-τ=8 조사 패턴
-- 46 keV 공명 스캔 범위 = **±4 Γ** (총 8 Γ 폭) 8 bin
-- 분기비 측정 bin = 8 개 에너지 × 4 각도 = **σ-τ × τ = 32**
-- n=6 유일성 검증: 5-slot / 10-slot 대조군에서 population 증가율 < 8-slot 의 70% 여야 함
+- X-ray shutter **8-slot sequence** = σ-τ=8 irradiation pattern
+- 46 keV resonance scan range = **±4 Γ** (total 8 Γ width) 8 bins
+- Branching-ratio measurement bins = 8 energies x 4 angles = **σ-τ x τ = 32**
+- n=6 uniqueness check: population growth rate must be < 70% of 8-slot in 5-slot / 10-slot controls
 
 ---
 
-## §4 M3 (2029) — τ=4 읽기 4-pulse 일관성 프로토콜
+## §4 M3 (2029) — τ=4 read 4-pulse coherence protocol
 
-### 4.1 목적
+### 4.1 Objective
 
-M1 에서 확보된 8-ch HPGe + 코히런스 계측 인프라 위에, **기존 Hf-178m2 샘플**
-(USDOE 사전 제작분 또는 M2 성공 시 자체 제작) 을 올려놓고 **자발 방출 γ
-cascade** (574→495→216→88 keV, τ=4) 를 **4-pulse Rabi 시퀀스** 와 결합하여
-**nuclear-state 코히런스 τ_n** 을 **처음으로 직접 측정**한다.
+On top of the 8-ch HPGe + coherence-measurement infrastructure secured in M1, place a **pre-existing Hf-178m2 sample** (USDOE pre-fabricated or M2 output if successful) and combine the **spontaneous-emission γ cascade** (574 -> 495 -> 216 -> 88 keV, τ=4) with a **4-pulse Rabi sequence** to **directly measure the nuclear-state coherence τ_n for the first time**.
 
-### 4.2 프로토콜 (4-pulse τ=4 Rabi)
+### 4.2 Protocol (4-pulse τ=4 Rabi)
 
 ```
-t₀        t₁ = Δ        t₂ = 2Δ       t₃ = 3Δ       측정
+t_0       t_1 = Δ       t_2 = 2Δ      t_3 = 3Δ      measurement
  │         │              │              │             │
- ▼         ▼              ▼              ▼             ▼
+ v         v              v              v             v
 π/2      π (574 drive) π (216 drive) π/2            γ count
-@574     @495            @216            @88           8 ch × 4 gate
+@574     @495            @216            @88           8 ch x 4 gate
 
-σ-τ=8 윈도우: 각 pulse 뒤 Δt ∈ {1, 2, ..., 8} × τ_n/8 bin
-τ=4 = pulse 수 (N6 설계에서 4 단계 cascade 와 매칭)
+σ-τ=8 window: each pulse followed by Δt in {1, 2, ..., 8} x τ_n/8 bin
+τ=4 = pulse count (matches 4-stage cascade in n=6 design)
 ```
 
-### 4.3 장비 리스트 (M1 재활용 + 신규)
+### 4.3 Equipment list (M1 reuse + new)
 
-| 항목 | 규격 | 비고 |
+| Item | Spec | Note |
 |------|------|------|
-| Hf-178m2 샘플 | 100 μg~1 mg (0.029~0.29 μW 열부하) | USDOE 또는 M2 산물 |
-| 4-pulse X-ray shutter | 각 pulse 폭 < 100 ps, jitter < 10 ps | M1 chopper 업그레이드 |
-| HPGe 8-ch | M1 재활용 | — |
-| 4-energy 동시 측정 | 574/495/216/88 keV band-pass 4 분기 | BGO anti-coincidence |
-| 극저진동 (<10⁻¹¹ g/√Hz) | 언더그라운드 레이블 연결 | LSC 또는 KURF 예약 |
+| Hf-178m2 sample | 100 μg~1 mg (0.029~0.29 μW thermal load) | USDOE or M2 product |
+| 4-pulse X-ray shutter | each pulse < 100 ps, jitter < 10 ps | M1 chopper upgrade |
+| HPGe 8-ch | M1 reuse | — |
+| 4-energy simultaneous readout | 574/495/216/88 keV band-pass 4 branches | BGO anti-coincidence |
+| Ultra-low vibration (<10^-11 g/sqrt(Hz)) | connect to underground lab | reservation at LSC or KURF |
 
-### 4.4 기대 감도
+### 4.4 Expected sensitivity
 
-- **τ_n (핵 상태 코히런스)**: > 10 ns (τ=4 Rabi 진동 1 주기 관측 조건)
-- **4-pulse 프린지 가시도 V**: ≥ 0.3 (신호 유의성 3σ)
-- **8-bin Rabi 스펙트럼**: σ-τ=8 윈도우에서 Fourier peak 가 핵 전이 에너지 ±3% 내
-- **NEET 효율 η_NEET 실측**: 0.05~0.30 범위 (Tsukiyama 이론 상한 확인)
+- **τ_n (nuclear-state coherence)**: > 10 ns (condition for observing one τ=4 Rabi period)
+- **4-pulse fringe visibility V**: ≥ 0.3 (signal significance 3σ)
+- **8-bin Rabi spectrum**: Fourier peak within ±3% of the nuclear transition energy in the σ-τ=8 window
+- **Measured NEET efficiency η_NEET**: range 0.05~0.30 (check Tsukiyama theoretical upper bound)
 
-### 4.5 MISS 조건
+### 4.5 MISS conditions
 
-**M3-MISS-A** (**치명**): 6 개월 측정 후 4-pulse 가시도 V < 0.03 → τ=4 Rabi **존재하지 않음**, L13 설계의 **동적 읽기는 불가**, 정적 passive cascade 만 가능으로 축소 확정.
-**M3-MISS-B** (**부분**): V ≥ 0.03 이나 τ_n < 1 ns → 실용 QEC 연동 불가, L11 syndrome 속도 재설계 필요.
-**M3-MISS-C** (**허수신호**): 8-bin Fourier peak 가 핵 전이 에너지 ±15% 밖 → 기계적/전자적 artifact 의심, 재검증 6 개월 지연.
-**M3-MISS-D** (**자기참조 오염**): 측정 프로토콜이 M1 에서 학습된 파라미터로 bias 걸림 → 독립 blind analysis 팀 검증 실패 시 결과 무효.
+**M3-MISS-A** (**fatal**): after 6 months, 4-pulse visibility V < 0.03 -> τ=4 Rabi **does not exist**; L13 design's **dynamic read is infeasible**; finalize shrink to static passive cascade only.
+**M3-MISS-B** (**partial**): V ≥ 0.03 but τ_n < 1 ns -> not practical for QEC integration; redesign L11 syndrome rate.
+**M3-MISS-C** (**spurious signal**): 8-bin Fourier peak outside ±15% of nuclear transition energy -> suspected mechanical / electrical artifact; reverify with 6-month delay.
+**M3-MISS-D** (**self-reference contamination**): measurement protocol biased by parameters learned in M1 -> invalidate result if independent blind-analysis team verification fails.
 
-### 4.6 σ-τ=8 적용 포인트
+### 4.6 σ-τ=8 application points
 
-- **4-pulse × 2-state (isomer/ground) = σ-τ = 8** 독립 Rabi bin
-- Fourier 스펙트럼 **8 peak 검출** 기대 (τ=4 × φ=2)
-- n=6 유일성 검증: 3-pulse 또는 5-pulse 대조군에서 peak count < 6 이어야 함 (6=n=τ·φ-2)
-
----
-
-## §5 ASCII 비교 차트 — 기존 optomech vs L13 MeV 목표
-
-**에너지 × 효율 × 대역폭 종합 지수** (로그 스케일, 기존 1 기준)
-
-```
-플랫폼                 에너지(eV)  η       대역폭   종합지수(log₁₀)  천장 등급
-──────────────────────────────────────────────────────────────────────────────
-RF optomech (2014)     10⁻⁵        0.8     GHz     ██  +2             지상
-IR cavity (Aspelmeyer) 10⁻¹        0.5     THz     ████ +4            지상
-가시광 QED (Lanyon)    1           0.04    MHz     ███ +3             지상
-이온 트랩 (Kienzler)   1           0.07    kHz     ██  +2             지상
-Fe-57 Mössbauer 2022   1.44×10⁴   0.3     MHz     ██████ +6          1층
-M1 목표 (2027 본랩)    1.44×10⁴   0.1     kHz     ████ +4            1층
-M2 목표 (2028)         2.45×10⁶   10⁻⁶    Hz      ██ +2 (쓰기)       2층 (존재 검증만)
-M3 목표 (2029 성공)    5.7×10⁵    0.58    kHz     ████████ +8        천장 돌파
-M3 실패 (MISS-A)       —          —       —       —                  역 breakthrough 기록
-──────────────────────────────────────────────────────────────────────────────
-L13 설계 (2030+)       2.45×10⁶   0.58    2.4 Mbit ██████████ +10    천장 돌파 지속
-L14 통합 (2031+)       전축        0.58   1152 Gbit ██████████ +10   천장 (J₂=24 ≥ 24)
-```
-
-**범례**:
-- 지상 = RF/IR 확립 영역 (비교 기준)
-- 1 층 = hard X-ray / 14 keV 확립 (Shvyd'ko 2022)
-- 2 층 = MeV 쓰기 존재 검증 단독 (실용 미달)
-- 천장 = L13 설계 천장 (σ·φ·η 곱 상한)
-- 천장 돌파 = 종합지수 ≥ 24 = J₂ (MK4-THEOREM-B 유일 해 n=6 실현)
+- **4-pulse x 2-state (isomer/ground) = σ-τ = 8** independent Rabi bins
+- Fourier spectrum **8-peak detection** expected (τ=4 x φ=2)
+- n=6 uniqueness check: peak count must be < 6 in 3-pulse or 5-pulse controls (6=n=τ·φ-2)
 
 ---
 
-## §6 정직 검증 체크리스트
+## §5 ASCII comparison chart — existing optomech vs L13 MeV target
 
-| 항목 | 적용 여부 |
+**Composite index of energy x efficiency x bandwidth** (log scale, baseline 1)
+
+```
+Platform               energy(eV)  η       bandwidth  composite(log10)  ceiling grade
+──────────────────────────────────────────────────────────────────────────────
+RF optomech (2014)     10^-5       0.8     GHz        ██  +2            ground
+IR cavity (Aspelmeyer) 10^-1       0.5     THz        ████ +4           ground
+visible QED (Lanyon)   1           0.04    MHz        ███ +3            ground
+ion trap (Kienzler)    1           0.07    kHz        ██  +2            ground
+Fe-57 Moessbauer 2022  1.44e4      0.3     MHz        ██████ +6         floor 1
+M1 target (2027 lab)   1.44e4      0.1     kHz        ████ +4           floor 1
+M2 target (2028)       2.45e6      10^-6   Hz         ██ +2 (write)     floor 2 (existence only)
+M3 target (2029 ok)    5.7e5       0.58    kHz        ████████ +8       ceiling breach
+M3 failure (MISS-A)    —           —       —          —                 inverse breakthrough log
+──────────────────────────────────────────────────────────────────────────────
+L13 design (2030+)     2.45e6      0.58    2.4 Mbit   ██████████ +10    sustained ceiling breach
+L14 integration (2031+)all axes    0.58    1152 Gbit  ██████████ +10    ceiling (J₂=24 ≥ 24)
+```
+
+**Legend**:
+- ground = RF/IR established regime (reference baseline)
+- floor 1 = hard X-ray / 14 keV established (Shvyd'ko 2022)
+- floor 2 = MeV write existence alone (not yet practical)
+- ceiling = L13 design ceiling (σ·φ·η product upper bound)
+- ceiling breach = composite index ≥ 24 = J₂ (candidate realization of MK4-THEOREM-B unique solution n=6)
+
+---
+
+## §6 Honesty-verification checklist
+
+| Item | Applied? |
 |------|----------|
-| 자기참조 검증 금지 | 각 MISS 조건에 **blind analysis 외부 팀** 명시 (M3-MISS-D) |
-| 출처 + 측정값 + 오차 | 모든 기대 감도에 ± 또는 ≥/< 부등식 명시 |
-| MISS 정직 기록 | 12 개 MISS 조건 (A/B/C/D) 마일스톤별 명시 |
-| 소수 편향 대조 | σ-τ=8 vs 5/10-bin 대조군 각 마일스톤 포함 |
-| Collins 독립성 | M2 에서 Collins 2004 재현 아님 명시, 역방향 쓰기 실험 |
-| 재현 가능성 | M1 은 Shvyd'ko 2022 재현 (외부 검증 기준) |
-| 한글 필수 | 본 문서 100% 한글 (변수·수식 외) |
+| self-reference verification banned | every MISS condition names a **blind-analysis external team** (M3-MISS-D) |
+| source + measurement + error | every expected sensitivity has ± or ≥/< inequality stated |
+| MISS honest record | 12 MISS conditions (A/B/C/D) stated per milestone |
+| few-sample bias control | σ-τ=8 vs 5/10-bin controls included per milestone |
+| Collins independence | M2 states it is not Collins 2004 reproduction (reverse write experiment) |
+| reproducibility | M1 is a Shvyd'ko 2022 reproduction (external verification basis) |
+| Korean mandatory | removed — this document is 100% English (variables / equations excepted) |
 
 ---
 
-## §7 최대 기술 장벽 (Top-1 리스크)
+## §7 Largest technical barrier (Top-1 risk)
 
-**M2 의 46 keV → 2.446 MeV NEET 쓰기 분기비** — 이론 추정 ≥ 10⁻⁶ 이나 실측
-없음. Collins 2004 의 X-ray 직접 유도는 재현 실패, 그러나 **46 keV M1/E3 경유
-역 NEET** 는 Tsukiyama 1999 공식의 역방향 해석으로 존재성만 인정된 상태.
+**M2's 46 keV -> 2.446 MeV NEET write branching ratio** — theoretical estimate ≥ 10^-6 but no measurement exists. The Collins 2004 direct X-ray induction is unreproduced, but the **reverse NEET via 46 keV M1/E3** is admitted to exist only via the reverse interpretation of the Tsukiyama 1999 formula.
 
-**B1 해소의 핵심은 M2 의 σ_write 측정값 자체**이며, 이 값이
-**< 10⁻²⁸ cm²** 이면 L13 설계의 **쓰기 가능성 전체가 공학 불가로 판정**된다.
-이 경우 본 로드맵은 **정직한 MISS** 로 기록되고, L13 은 **읽기 전용** (기존
-USDOE Hf-178m2 샘플 활용) 설계로 축소 재개정된다.
+**The key to resolving B1 is M2's measured σ_write itself**, and if this value is **< 10^-28 cm^2** the **entire write capability of the L13 design is judged engineering-infeasible**.
+In that case this roadmap is recorded as an **honest MISS**, and L13 is shrunk-redesigned as **read-only** (using pre-existing USDOE Hf-178m2 samples).
 
 ---
 
-## §8 atlas.n6 기록 예정 항목 (로드맵 성공 시)
+## §8 atlas.n6 items to be recorded (on roadmap success)
 
 ```
-@L l13-m1-fe57-delay-bandwidth = 10^3 :: chip-L13-M1 [측정 후 등급 확정]
-@L l13-m2-hf178-write-sigma = 10^-24 cm^2 :: chip-L13-M2 [측정 후]
-@L l13-m3-tau4-rabi-visibility = 0.3 :: chip-L13-M3 [측정 후]
-@R L13-B1-bottleneck-status = resolved :: chip-L13 [M3 PASS 시]
-@R L13-B1-bottleneck-status = confirmed-impossible :: chip-L13 [MISS-A 시]
+@L l13-m1-fe57-delay-bandwidth = 10^3 :: chip-L13-M1 [grade fixed after measurement]
+@L l13-m2-hf178-write-sigma = 10^-24 cm^2 :: chip-L13-M2 [after measurement]
+@L l13-m3-tau4-rabi-visibility = 0.3 :: chip-L13-M3 [after measurement]
+@R L13-B1-bottleneck-status = resolved :: chip-L13 [on M3 PASS]
+@R L13-B1-bottleneck-status = confirmed-impossible :: chip-L13 [on MISS-A]
 ```
 
 ---
 
-## §9 결론
+## §9 Conclusion
 
-**B1 (MeV optomech 부재) 은 L13 설계의 단일 최대 공백**이며, 본 로드맵은
-2027~2029 3 년에 걸쳐 이를 **존재-가능-효율** 3 단계로 **정직하게 실험
-검증**한다. σ-τ=8 주정리 (MK4-THEOREM-B) 는 자원 배분·측정 bin·대조군 설계의
-**불변량**으로 사용되며, 성공 시 n=6 유일성의 **물리적 실증**, 실패 시 L13
-의 공학 경계 **정직한 확정** 을 atlas.n6 에 기록한다.
+**B1 (absence of MeV optomech) is the single largest gap in the L13 design**, and this roadmap will **experimentally verify it honestly** over 2027~2029 in three existence-capability-efficiency stages. The σ-τ=8 main theorem (MK4-THEOREM-B) is used as an **invariant** for resource allocation, measurement binning, and control-group design — on success it records the **physical demonstration** of n=6 uniqueness in atlas.n6, and on failure it records the **honest fixation** of the L13 engineering boundary.
 
-로드맵 제출자: n6-architecture 설계팀
-일자: 2026-04-15
-판정: **SPECULATIVE-EXPERIMENT-PROPOSAL** (Mk.III-δ L13 후속)
+Roadmap submitter: n6-architecture design team
+Date: 2026-04-15
+Verdict: **SPECULATIVE-EXPERIMENT-PROPOSAL** (Mk.III-δ L13 successor)
 
 
 ## §10 RISKS
@@ -355,4 +329,3 @@ This section covers team for the domain. Initial scaffold content — expand wit
 ## §15 REFERENCES
 
 This section covers references for the domain. Initial scaffold content — expand with domain-specific data, references, and verification in subsequent revisions.
-
