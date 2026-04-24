@@ -1,38 +1,38 @@
-# 논문 검증코드 전수 감사 — audit-quality-full
+# Paper verification-code full audit -- audit-quality-full
 
-**일자**: 2026-04-09  **대상**: `docs/paper/*.md` (n6-*-paper + paper1~4 + 307/308)
+**Date**: 2026-04-09  **Target**: `docs/paper/*.md` (n6-*-paper + paper1~4 + 307/308)
 
-## 요약
+## Summary
 
-- 전체 논문: **122편**
-- PASS (본문 Python 블록 실행 성공): **122편**
-- FAIL: **0편**
-- MISSING (검증코드 없음): **0편**
-- TIMEOUT: **0편**
-- 엄격 동어반복 의심 (sigma/phi/divisor 계산 부재): **4편**
+- Total papers: **122**
+- PASS (Python block in body executes successfully): **122**
+- FAIL: **0**
+- MISSING (no verification code): **0**
+- TIMEOUT: **0**
+- Strict tautology suspicion (no sigma/phi/divisor computation): **4**
 
-전용 `scripts/verify_*.py`는 `verify_special_number_control.py` 1개만 존재 — 나머지 121편은 전부 본문 임베디드 Python 블록으로 검증.
+There is only one dedicated `scripts/verify_*.py`, namely `verify_special_number_control.py` -- the remaining 121 papers all verify via embedded Python blocks in their bodies.
 
-## products.json 대조
+## products.json cross-check
 
-- `config/products.json` 내 'paper' 언급: **127건**
-- 실제 `docs/paper/` 논문 파일: **122편**
-- 차이 **5건** — SSOT 재동기화 필요 (`scripts/sync_products_readme.py`).
+- Mentions of 'paper' in `config/products.json`: **127**
+- Actual paper files in `docs/paper/`: **122**
+- Difference: **5** -- SSOT re-sync required (`scripts/sync_products_readme.py`).
 
-## 동어반복 플래그 (엄격 기준)
+## Tautology flags (strict criteria)
 
-| 파일 | 이유 |
+| File | Reason |
 |---|---|
-| 307-domain-universality-dataset.md | sigma/phi/tau 정의 부재, 상수 나열 assert |
-| paper1-ai-efficiency.md | 수식 도출 없음, 결과값 직접 비교 |
-| paper3-tokamak-physics.md | 물리 상수 리터럴 기반 검증 |
-| paper4-gut-monster.md | GUT 스케일 숫자 직접 assert |
+| 307-domain-universality-dataset.md | no sigma/phi/tau definition, enumerates constants in assert |
+| paper1-ai-efficiency.md | no formula derivation, directly compares result values |
+| paper3-tokamak-physics.md | verification based on literal physical constants |
+| paper4-gut-monster.md | directly asserts GUT scale numbers |
 
-권고: 위 4편은 `σ(n)·φ(n)=n·τ(n)` 정의로부터 도출 과정을 검증 블록에 포함할 것.
+Recommendation: the four above should include in their verification blocks the derivation chain from `sigma(n)*phi(n) = n*tau(n)`.
 
-## 전수 결과 (요약 표)
+## Full results (summary table)
 
-| # | 논문 | 상태 | 블록수 | 플래그 |
+| # | Paper | Status | Blocks | Flag |
 |---:|---|:-:|:-:|:-:|
 | 1 | 307-domain-universality-dataset.md | PASS | 1 | SELFREF |
 | 2 | 308-fusion-n6-alien-discoveries.md | PASS | 1 |  |
@@ -157,12 +157,12 @@
 | 121 | paper3-tokamak-physics.md | PASS | 1 | SELFREF |
 | 122 | paper4-gut-monster.md | PASS | 1 | SELFREF |
 
-## 실행 환경
+## Execution environment
 
-- Python 3 (시스템), `cwd=docs/paper`, `stdin=DEVNULL`, 블록당 15초 타임아웃
-- 한 논문 내 여러 python 블록은 이어붙여 단일 실행
-- 로그: `/tmp/audit_out.txt`, `/tmp/paper_audit.json`
+- Python 3 (system), `cwd=docs/paper`, `stdin=DEVNULL`, 15-second timeout per block
+- Multiple python blocks within a paper are concatenated and run as one
+- Logs: `/tmp/audit_out.txt`, `/tmp/paper_audit.json`
 
-## 결론
+## Conclusion
 
-122편 전부 **실행 PASS**. 단, 4편은 정의→도출 체인 부재로 자기참조 의심. 검증 엄격도 상향(sigma/phi 실계산 필수)과 products.json↔실파일 5건 괴리 해소가 다음 작업.
+All 122 papers **PASS**. However, 4 are suspected of self-reference due to missing definition-to-derivation chains. Raising verification strictness (requiring actual sigma/phi computation) and resolving the 5-item gap between products.json and actual files are the next tasks.

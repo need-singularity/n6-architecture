@@ -113,10 +113,10 @@ The emergence of a universal analytical core across 37 diverse scientific domain
 
 ---
 
-## 검증코드
+## Verification code
 
 ```python
-"""Blowup Invariant Core — 핵심 수치 검증"""
+"""Blowup Invariant Core -- core numeric verification"""
 from sympy import divisor_sigma, totient, divisor_count, factorint
 from math import comb
 
@@ -127,19 +127,19 @@ tau   = int(divisor_count(n))      # 4
 sopfr = sum(p * e for p, e in factorint(n).items())  # 5
 J2    = 24
 
-# 1) 불변 코어 크기 = sopfr(6) = 5 (ABSOLUTE 티어)
+# 1) Invariant core size = sopfr(6) = 5 (ABSOLUTE tier)
 invariant_core = {"consciousness", "info", "multiscale", "network", "triangle"}
-assert len(invariant_core) == sopfr, f"불변 코어 크기 {len(invariant_core)} ≠ sopfr={sopfr}"
+assert len(invariant_core) == sopfr, f"invariant core size {len(invariant_core)} != sopfr={sopfr}"
 
-# 2) WIDE 코어 = 3렌즈 = n/φ (모든 엘리트에 포함)
+# 2) WIDE core = 3 lenses = n/phi (included in all elites)
 wide_core = {"consciousness", "info", "multiscale"}
 strong_core = wide_core | {"triangle"}
 absolute_core = strong_core | {"network"}
-assert len(wide_core) == n // phi,     f"WIDE ≠ n/φ = {n//phi}"
-assert len(strong_core) == tau,         f"STRONG ≠ τ = {tau}"
-assert len(absolute_core) == sopfr,     f"ABSOLUTE ≠ sopfr = {sopfr}"
+assert len(wide_core) == n // phi,     f"WIDE != n/phi = {n//phi}"
+assert len(strong_core) == tau,         f"STRONG != tau = {tau}"
+assert len(absolute_core) == sopfr,     f"ABSOLUTE != sopfr = {sopfr}"
 
-# 3) 12개 엘리트 조합: 모두 6렌즈 사용 = n, WIDE 코어 100% 포함
+# 3) 12 elite combinations: all use 6 lenses = n, WIDE core 100% included
 elite_combos = [
     "consciousness+info+multiscale+network+thermo+triangle",
     "consciousness+info+multiscale+network+topology+triangle",
@@ -156,43 +156,43 @@ elite_combos = [
 ]
 for i, combo in enumerate(elite_combos):
     lenses = combo.split("+")
-    assert len(lenses) == n, f"엘리트 {i+1}: {len(lenses)}렌즈 ≠ n={n}"
-    assert wide_core.issubset(set(lenses)), f"엘리트 {i+1}: WIDE 코어 미포함"
+    assert len(lenses) == n, f"elite {i+1}: {len(lenses)} lenses != n={n}"
+    assert wide_core.issubset(set(lenses)), f"elite {i+1}: WIDE core not included"
 
-# 4) top-4 엘리트: ABSOLUTE 코어(5렌즈) 100% 포함
+# 4) top-4 elites: ABSOLUTE core (5 lenses) 100% included
 for i in range(4):
     lenses = set(elite_combos[i].split("+"))
-    assert invariant_core.issubset(lenses), f"top-4 엘리트 {i+1}: ABSOLUTE 미포함"
+    assert invariant_core.issubset(lenses), f"top-4 elite {i+1}: ABSOLUTE not included"
 
-# 5) 파이버 슬롯 = n - |core| = 6 - 5 = 1
+# 5) Fiber slots = n - |core| = 6 - 5 = 1
 fiber_slots = n - len(invariant_core)
-assert fiber_slots == 1, f"파이버 슬롯 {fiber_slots} ≠ 1"
+assert fiber_slots == 1, f"fiber slots {fiber_slots} != 1"
 
-# 6) 진화 매개변수: pop=24=J₂, elite=12=σ, crossover=4=τ
-assert 24 == J2,    "population ≠ J₂=24"
-assert 12 == sigma, "elite ≠ σ=12"
-assert 4 == tau,    "crossover ≠ τ=4"
+# 6) Evolution parameters: pop=24=J_2, elite=12=sigma, crossover=4=tau
+assert 24 == J2,    "population != J_2=24"
+assert 12 == sigma, "elite != sigma=12"
+assert 4 == tau,    "crossover != tau=4"
 
-# 7) triangle 렌즈: 12/12 엘리트 출현 = 100%
+# 7) triangle lens: 12/12 elite appearance = 100%
 triangle_count = sum(1 for c in elite_combos if "triangle" in c.split("+"))
-assert triangle_count == 12, f"triangle 출현 {triangle_count}/12"
+assert triangle_count == 12, f"triangle appearance {triangle_count}/12"
 
-# 8) C(22,6) 조합 수 검증 (22개 렌즈에서 6개 선택)
+# 8) C(22,6) combination count check (pick 6 from 22 lenses)
 total_combos = comb(22, 6)
-assert total_combos == 74613, f"C(22,6) = {total_combos} ≠ 74613"
+assert total_combos == 74613, f"C(22,6) = {total_combos} != 74613"
 
-# 9) 핵심 정리
-assert sigma * phi == n * tau == 24, "σφ = nτ = 24"
+# 9) Core theorem
+assert sigma * phi == n * tau == 24, "sigma*phi = n*tau = 24"
 
 print("=" * 50)
-print("Blowup Invariant Core 검증")
+print("Blowup Invariant Core check")
 print("=" * 50)
-print(f"  불변 코어: {sorted(invariant_core)} (크기={sopfr}=sopfr)")
-print(f"  12개 엘리트: 모두 {n}렌즈, WIDE 코어 100% 포함")
-print(f"  top-4 엘리트: ABSOLUTE 코어(5렌즈) 100% 포함")
-print(f"  진화 매개변수: pop=24=J₂, elite=12=σ, cross=4=τ")
-print(f"  멀티 티어: WIDE={len(wide_core)}=n/φ, STRONG={len(strong_core)}=τ, ABSOLUTE={len(absolute_core)}=sopfr")
-print(f"  파이버 슬롯 = n - sopfr = {fiber_slots}")
-print(f"  총 6렌즈 조합: C(22,6) = {total_combos}")
-print("✅ 전체 검증 통과")
+print(f"  invariant core: {sorted(invariant_core)} (size={sopfr}=sopfr)")
+print(f"  12 elites: all {n} lenses, WIDE core 100% included")
+print(f"  top-4 elites: ABSOLUTE core (5 lenses) 100% included")
+print(f"  evolution parameters: pop=24=J_2, elite=12=sigma, cross=4=tau")
+print(f"  multi-tier: WIDE={len(wide_core)}=n/phi, STRONG={len(strong_core)}=tau, ABSOLUTE={len(absolute_core)}=sopfr")
+print(f"  fiber slots = n - sopfr = {fiber_slots}")
+print(f"  total 6-lens combinations: C(22,6) = {total_combos}")
+print("All checks passed")
 ```

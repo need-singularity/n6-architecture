@@ -1,66 +1,66 @@
-# N61 15섹션 템플릿 준수 감사
+# N61 15-section template compliance audit
 
-> 일시: 2026-04-11
-> 기준: `domains/life/neuro/neuro.md` 15섹션 표준
-> 대상: 298개 도메인 문서 (`domains/<축>/<이름>/<이름>.md`)
+> Date: 2026-04-11
+> Baseline: `domains/life/neuro/neuro.md` 15-section standard
+> Target: 298 domain documents (`domains/<axis>/<name>/<name>.md`)
 
-## 요약
+## Summary
 
-| 등급 | 기준 | 도메인 수 | 비율 |
+| Grade | Criteria | Domain count | Ratio |
 |------|------|-----------|------|
-| A | 11+ 섹션 | 294 | 98.7% |
-| B | 5~10 섹션 | 0 | 0% |
-| C | 4 이하 | 4 | 1.3% |
-| **합계** | | **298** | **100%** |
+| A | 11+ sections | 294 | 98.7% |
+| B | 5-10 sections | 0 | 0% |
+| C | 4 or below | 4 | 1.3% |
+| **total** | | **298** | **100%** |
 
-## 15섹션 표준
+## 15-section standard
 
 ```
-## 1. 실생활 효과
-## 2. 목표
-## 3. 가설
-## 4. BT 연결
-## 5. DSE 결과
-## 6. 물리 한계 증명
-## 7. 실험 검증 매트릭스
-## 8. 외계인급 발견
-## 9. Mk.I~V 진화
+## 1. Real-life effects
+## 2. Goals
+## 3. Hypothesis
+## 4. BT link
+## 5. DSE results
+## 6. Physics-limit proof
+## 7. Experimental verification matrix
+## 8. Alien-grade discoveries
+## 9. Mk.I~V evolution
 ## 10. Testable Predictions
-## 11. ASCII 성능비교
-## 12. ASCII 시스템 구조도
-## 13. ASCII 데이터/에너지 플로우
-## 14. 업그레이드 시 (시중 vs v1 vs v2)
-## 15. 검증 방법 (verify.hexa)
+## 11. ASCII performance comparison
+## 12. ASCII system structure diagram
+## 13. ASCII data/energy flow
+## 14. Upgrade comparison (current vs v1 vs v2)
+## 15. Verification method (verify.hexa)
 ```
 
-## A등급 (294개) -- 생략 (전체 15/15 준수)
+## Grade A (294) -- omitted (all 15/15 compliant)
 
-294개 도메인 전부 15/15 완전 준수. 10축 모두 포함:
-- cognitive (21), compute (42→46), culture (25), energy (16)
+All 294 domains fully compliant with 15/15. All 10 axes included:
+- cognitive (21), compute (42->46), culture (25), energy (16)
 - infra (56), life (47), materials (19), physics (37)
 - sf-ufo (17), space (8)
 
-## C등급 (4개) -- 수정 완료
+## Grade C (4) -- fixes completed
 
-| 도메인 | 수정 전 | 수정 후 | 비고 |
+| Domain | Before fix | After fix | Note |
 |--------|---------|---------|------|
-| `compute/chip-dse-pipeline` | 4/15 | 15/15 | 5~15번 비표준명 사용, 표준 헤더 추가 |
-| `compute/chip-isa-n6` | 4/15 | 15/15 | 동일 |
-| `compute/chip-npu-n6` | 4/15 | 15/15 | 동일 |
-| `compute/chip-rtl-gen` | 4/15 | 15/15 | 동일 |
+| `compute/chip-dse-pipeline` | 4/15 | 15/15 | used nonstandard section names for 5~15, standard headers added |
+| `compute/chip-isa-n6` | 4/15 | 15/15 | same |
+| `compute/chip-npu-n6` | 4/15 | 15/15 | same |
+| `compute/chip-rtl-gen` | 4/15 | 15/15 | same |
 
-### 공통 패턴
+### Common pattern
 
-4개 모두 compute 축 칩 설계 하위 도메인. 1~4번은 표준명 준수했으나
-5~15번은 도메인 고유 섹션명 사용 (예: "5종 DSE 분석 요약", "커스텀 opcode 공간 할당" 등).
-기존 내용은 보존하고 문서 끝에 표준 11개 섹션 헤더(빈 상태)를 추가.
+All 4 are chip-design subdomains on the compute axis. Sections 1-4 followed the standard naming but
+5-15 used domain-specific section names (e.g., "5-type DSE analysis summary", "custom opcode space allocation").
+The prior content is preserved, and the 11 standard section headers (empty) were appended at the end of the document.
 
-### 수정 방법
+### Fix method
 
-- 기존 내용: 삭제 없음, 원본 그대로 유지
-- 추가 위치: 문서 최하단 (기존 부록 B 뒤)
-- 추가 내용: `## 5. DSE 결과` ~ `## 15. 검증 방법 (verify.hexa)` 빈 섹션 11개
+- Prior content: no deletion, kept as-is
+- Insertion position: bottom of the document (after prior Appendix B)
+- Inserted content: 11 empty sections from `## 5. DSE results` through `## 15. Verification method (verify.hexa)`
 
-## 결론
+## Conclusion
 
-수정 후 298/298 (100%) A등급 달성. N61 15섹션 템플릿 전체 준수.
+After fixes, 298/298 (100%) achieve Grade A. Full compliance with the N61 15-section template.

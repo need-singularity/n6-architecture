@@ -1,15 +1,15 @@
-# BT 라벨 ↔ 실측값 1:1 정밀 매핑 — 2026-04-08
+# BT Label <-> Measured Value 1:1 Precision Mapping -- 2026-04-08
 
-대상: 논문 44편 + 가설 파일 (상위 50편).
+Target: 44 papers + hypothesis files (top 50).
 
-## 추출 전략 (날조 금지)
-- A) 마크다운 BT 표: `| BT-NNN | 이름 | … | 숫자 |` 행 파싱.
-- B) 인라인 문장: 한 문장 안에 `BT-NNN`과 정수가 동시 등장하면 페어링.
-- 각 정수는 sigma/tau/phi/sopfr/jordan2(6) 또는 그 조합과 일치할 때만 채택.
-- 매칭 5건 미만 파일은 기존 검증 블록 보존 (skip).
-- 모든 기댓값은 산술함수 호출(코드 실행)로 도출. 하드코딩 비교 금지.
+## Extraction Strategy (no fabrication)
+- A) Markdown BT tables: parse rows of the form `| BT-NNN | name | ... | number |`.
+- B) Inline sentences: if a single sentence contains both `BT-NNN` and an integer, pair them.
+- Each integer is accepted only when it matches sigma/tau/phi/sopfr/jordan2(6) or a combination thereof.
+- Files with fewer than 5 matches retain their existing verification block (skip).
+- All expected values are derived by calling arithmetic functions (code execution). Hard-coded comparison is forbidden.
 
-| 파일 | 매칭수 | PASS/TOTAL | 비고 |
+| File | Matches | PASS/TOTAL | Note |
 |---|---|---|---|
 | n6-aerospace-transport-paper.md | 92 | 92/92 | OK |
 | n6-autonomous-driving-paper.md | 28 | 28/28 | OK |
@@ -62,11 +62,11 @@
 | H-OURO-2-sigma12-transformer-universality.md | - | - | skip: no python block |
 | H-OURO-3-convergence-automaton.md | - | - | skip: no results list literal |
 
-## 요약
-- 전체 대상: 50 편
-- 패치 성공: 28 편 / skip: 22 편
-- 1:1 매칭 합계: 721
-- 평균 매칭수/성공편: 25.8
-- 검증 항목 합계: 721
-- PASS 합계: 721
-- PASS 비율: 100.0%
+## Summary
+- Total target: 50 files
+- Patch success: 28 / skip: 22
+- 1:1 match total: 721
+- Average matches per successful file: 25.8
+- Verification items total: 721
+- PASS total: 721
+- PASS ratio: 100.0%
