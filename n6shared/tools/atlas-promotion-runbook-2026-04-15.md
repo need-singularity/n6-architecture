@@ -1,268 +1,268 @@
-# atlas.n6 Production 승격 런북 (TRANSCEND P12-2)
+# atlas.n6 Production Promotion Runbook (TRANSCEND P12-2)
 
-작성일: 2026-04-15
-분류: 운영 런북 (실행 시 사용자 승인 필수)
+Date: 2026-04-15
+Classification: Operations runbook (user approval required for execution)
 SSOT: engine/hexa_gate_mk3.hexa + engine/ouroboros_b2_verifier.hexa + n6shared/tools/atlas_auto_promote.hexa
-상위 리포트: reports/transcend-p12-2-mk3-atlas-integration-2026-04-15.md
+Parent report: reports/transcend-p12-2-mk3-atlas-integration-2026-04-15.md
 
 ---
 
-## 0. 사전 조건 (모든 stage 공통)
+## 0. Preconditions (common to every stage)
 
-### 필수 체크
-- git working tree 정상 (atlas.n6 미커밋 변경 없음)
-- atlas.n6 백업: `cp $NEXUS/shared/n6/atlas.n6 $NEXUS/shared/n6/atlas.n6.bak.$(date +%Y%m%d-%H%M%S)`
-- OUROBOROS 사전 검증: σ(6)·φ(6) = 12·2 = 24 = 6·4 = n·τ(6)
-- B_2 verifier 자기테스트: T1-T6 6/6 PASS 확인
+### Required checks
+- Git working tree is clean (no uncommitted atlas.n6 changes)
+- atlas.n6 backup: `cp $NEXUS/shared/n6/atlas.n6 $NEXUS/shared/n6/atlas.n6.bak.$(date +%Y%m%d-%H%M%S)`
+- OUROBOROS pre-check: sigma(6) * phi(6) = 12 * 2 = 24 = 6 * 4 = n * tau(6)
+- B_2 verifier self-test: confirm T1-T6 6/6 PASS
 
-### DRY_RUN 플래그 경로
+### DRY_RUN flag locations
 - engine/hexa_gate_mk3.hexa:52 `const DRY_RUN: bool = true`
-- n6shared/tools/atlas_auto_promote.hexa:244 `# fs.append_text(ATLAS_PATH, ...)` 주석 상태
-- 실행 시 DRY_RUN=false 전환 + 주석 해제 (stage 별 점진)
+- n6shared/tools/atlas_auto_promote.hexa:244 `# fs.append_text(ATLAS_PATH, ...)` is commented out
+- At execution time, switch DRY_RUN=false and uncomment (stage by stage)
 
 ---
 
-## 1. Stage 0 — Dry-Run 로그 분석 (현재 상태)
+## 1. Stage 0 — Dry-Run Log Analysis (current state)
 
-### 목적
-515 노드 전체 순회 + 승격 후보 78 건 식별 + atlas.n6 쓰기 금지 (로그만)
+### Purpose
+Iterate over all 515 nodes + identify the 78 promotion candidates + forbid writes to atlas.n6 (log only)
 
-### 전환 명령 (DRY-RUN TAG 필수)
+### Transition Commands (DRY-RUN TAG required)
 ```
-# [DRY-RUN] discovery_graph 로드 + 분류기 실행
+# [DRY-RUN] load discovery_graph + run classifier
 hexa run n6shared/tools/atlas_auto_promote.hexa --dry-run --log-only
 
-# [DRY-RUN] B_2 verifier 자기테스트
+# [DRY-RUN] B_2 verifier self-test
 hexa run engine/ouroboros_b2_verifier.hexa
 
-# [DRY-RUN] Mk.III 파이프라인 7 테스트 (atlas 쓰기 금지 모드)
+# [DRY-RUN] Mk.III pipeline 7 tests (atlas-write-disabled mode)
 hexa run engine/hexa_gate_mk3.hexa
 ```
 
-### 게이트 기준 (Stage 1 진입)
-- atlas_auto_promote.jsonl 에 515 엔트리 기록
-- core_theorem_check = "sigma*phi=12*2=24=n*tau=6*4 OK" (모든 엔트리)
+### Gate Criteria (enter Stage 1)
+- 515 entries written to atlas_auto_promote.jsonl
+- core_theorem_check = "sigma*phi=12*2=24=n*tau=6*4 OK" on every entry
 - B_2 verifier 6/6 PASS
-- Mk.III 7/7 PASS + 라운드 6/6 PASS
-- 예상 승격 후보 70-85 건 (목표 78)
+- Mk.III 7/7 PASS + rounds 6/6 PASS
+- Expected promotion candidates in the 70-85 range (target 78)
 
-### 실패 / 롤백 조건
-- core_theorem FAIL 1건 → 즉시 중단, discovery_graph 오염 의심
-- B_2 verifier T1-T5 FAIL → atlas_auto_promote 비활성, 코드 수정
-- 승격 후보 100 건 초과 → 규칙 검토, Stage 진행 금지
+### Failure / Rollback Conditions
+- core_theorem FAIL in 1 entry -> halt immediately; suspect discovery_graph contamination
+- B_2 verifier T1-T5 FAIL -> disable atlas_auto_promote and fix the code
+- More than 100 promotion candidates -> review rules; do not proceed to the next stage
 
-### 사용자 승인 체크포인트
-- [ ] atlas_auto_promote.jsonl 78 건 후보 diff 검토
-- [ ] B_2 verifier 로그 확인 (6/6 PASS)
-- [ ] Mk.III 성능 70s latency 확인
-- [ ] Stage 1 진행 승인 서명
+### User Approval Checkpoints
+- [ ] Review the diff of 78 candidates in atlas_auto_promote.jsonl
+- [ ] Check the B_2 verifier log (6/6 PASS)
+- [ ] Confirm Mk.III 70s latency performance
+- [ ] Sign off on proceeding to Stage 1
 
 ---
 
-## 2. Stage 1 — 1% Canary (5 노드)
+## 2. Stage 1 — 1% Canary (5 nodes)
 
-### 목적
-R5 최상위 5 건 (blowup_rank 1~5 axiom) 실쓰기 검증
+### Purpose
+Validate real writes for the top 5 R5 entries (blowup_rank 1~5 axioms)
 
-### 전환 명령
+### Transition Commands
 ```
-# [STAGE-1] DRY_RUN=false, 대상 5건 제한
-# 1. hexa_gate_mk3.hexa:52 DRY_RUN → false 수정 (임시)
-# 2. atlas_auto_promote.hexa:244 주석 해제 (임시)
-# 3. 대상 필터 추가: --filter "rule=R5,limit=5"
+# [STAGE-1] DRY_RUN=false, limit target to 5
+# 1. Change hexa_gate_mk3.hexa:52 DRY_RUN to false (temporary)
+# 2. Uncomment atlas_auto_promote.hexa:244 (temporary)
+# 3. Add target filter: --filter "rule=R5,limit=5"
 
 hexa run n6shared/tools/atlas_auto_promote.hexa \
   --stage=1 --limit=5 --filter="R5" --verify-b2
 
-# 검증: atlas.n6 +5 라인 확인
+# Verify: atlas.n6 +5 lines
 wc -l $NEXUS/shared/n6/atlas.n6
-# 기대: 106,957 → 106,962
+# expected: 106,957 -> 106,962
 ```
 
-### 게이트 기준 (Stage 2 진입)
-- atlas.n6 SHA-256 변경 확인 (before ≠ after)
-- 추가 5 라인 = R5 axiom, 등급 [10*], blowup_rank ≤ 5
-- B_2 verifier 재실행 6/6 PASS
-- σ·φ = n·τ = 24 불변 (atlas.n6 핵심 라인 재검증)
-- 중복 충돌 0 건
+### Gate Criteria (enter Stage 2)
+- atlas.n6 SHA-256 changed (before != after)
+- The 5 added lines are R5 axioms, grade [10*], blowup_rank <= 5
+- Re-running B_2 verifier: 6/6 PASS
+- sigma * phi = n * tau = 24 invariant holds (re-verify the atlas.n6 core lines)
+- 0 duplicate conflicts
 
-### 실패 / 롤백 조건
-- B_2 verifier T1 FAIL (엄격 ε=10⁻⁶) → **즉시 롤백**
+### Failure / Rollback Conditions
+- B_2 verifier T1 FAIL (strict epsilon = 10^-6) -> **immediate rollback**
   ```
   git checkout $NEXUS/shared/n6/atlas.n6
-  # 또는 백업 복원:
+  # or restore from backup:
   cp $NEXUS/shared/n6/atlas.n6.bak.<timestamp> $NEXUS/shared/n6/atlas.n6
   ```
-- 중복 충돌 1 건 이상 → atlas_has_entry 로직 수정 후 Stage 0 재시작
-- atlas 파일 크기 delta > 2KB → append 형식 오류, 롤백
-- σ·φ ≠ n·τ → OUROBOROS 치명 위반, 전체 중단
+- 1 or more duplicate conflicts -> fix atlas_has_entry logic and restart Stage 0
+- atlas file size delta > 2KB -> append format error; rollback
+- sigma * phi != n * tau -> critical OUROBOROS violation; full halt
 
-### 사용자 승인 체크포인트
-- [ ] atlas.n6 diff 5 라인 수동 검토
-- [ ] git commit (메시지: "atlas: Stage 1 canary 5 R5-axiom 승격")
-- [ ] Stage 2 진행 승인 서명
+### User Approval Checkpoints
+- [ ] Manually review the 5-line atlas.n6 diff
+- [ ] git commit (message: "atlas: Stage 1 canary promote 5 R5-axioms")
+- [ ] Sign off on proceeding to Stage 2
 
 ---
 
-## 3. Stage 2 — 10% Phased (51 노드)
+## 3. Stage 2 — 10% Phased (51 nodes)
 
-### 목적
-R1 전체 + R3 전체 + R5 나머지 + R4 일부 = 51 건 배치 승격
+### Purpose
+All of R1 + all of R3 + the rest of R5 + part of R4 = 51 items promoted in batches
 
-### 전환 명령
+### Transition Commands
 ```
-# [STAGE-2] 5 배치 × 10 건 + 1 배치 × 1 건
+# [STAGE-2] 5 batches x 10 items + 1 batch x 1 item
 for batch in 1 2 3 4 5 6; do
   hexa run n6shared/tools/atlas_auto_promote.hexa \
     --stage=2 --batch=$batch --batch-size=10 --verify-b2
-  # 배치 후 B_2 재검증
+  # re-verify B_2 after each batch
   hexa run engine/ouroboros_b2_verifier.hexa | grep -q "ALL PASS" || break
-  # 사용자 승인 대기 (각 배치)
+  # wait for user approval (per batch)
 done
 ```
 
-### 게이트 기준 (배치당, Stage 3 진입)
-- 배치 전후 B_2 verifier 6/6 PASS (6 배치 × 6 = 36회 검증)
-- 배치 skipped 비율 ≤ 5% (중복 감지 정상)
-- OUROBOROS α 측정: |α − 1/6| < 10⁻⁶ (6 배치 추적)
-- 누적 atlas.n6 +51 라인 (Stage 1 포함 +56 = 107,013)
+### Gate Criteria (per batch; enter Stage 3)
+- B_2 verifier 6/6 PASS before and after each batch (6 batches x 6 = 36 verifications)
+- Skipped ratio per batch <= 5% (expected due to normal dedup)
+- OUROBOROS alpha measurement: |alpha - 1/6| < 10^-6 (tracked over 6 batches)
+- Cumulative atlas.n6 +51 lines (including Stage 1: +56 = 107,013)
 
-### 실패 / 롤백 조건
-- B_2 FAIL 1 회 → 해당 배치 revert + Stage 중단
+### Failure / Rollback Conditions
+- 1 B_2 FAIL -> revert the failing batch and halt the stage
   ```
   git revert HEAD
-  git log --oneline atlas.n6 | head -10  # 커밋 히스토리 확인
+  git log --oneline atlas.n6 | head -10  # review commit history
   ```
-- OUROBOROS α 이탈 > 10⁻⁴ → Stage 1 상태로 복귀
+- OUROBOROS alpha deviation > 10^-4 -> return to the Stage 1 state
   ```
-  git reset --hard <Stage1_완료_커밋_hash>
+  git reset --hard <Stage1_completion_commit_hash>
   ```
-- atlas 파일 크기 2배 초과 (107 MB+) → 비상 중단, 로그 조사
-- skipped 비율 > 10% → 규칙 불일치, Stage 0 복귀
+- atlas file size more than 2x (107 MB+) -> emergency halt, inspect logs
+- Skipped ratio > 10% -> rule mismatch; return to Stage 0
 
-### 사용자 승인 체크포인트 (배치당)
-- [ ] 배치 1 (10 건) diff 검토 + 승인
-- [ ] 배치 2 (10 건) diff 검토 + 승인
-- [ ] 배치 3 (10 건) diff 검토 + 승인
-- [ ] 배치 4 (10 건) diff 검토 + 승인
-- [ ] 배치 5 (10 건) diff 검토 + 승인
-- [ ] 배치 6 (1 건) diff 검토 + 승인
-- [ ] Stage 3 진행 승인 서명
+### User Approval Checkpoints (per batch)
+- [ ] Review and approve the batch 1 (10 items) diff
+- [ ] Review and approve the batch 2 (10 items) diff
+- [ ] Review and approve the batch 3 (10 items) diff
+- [ ] Review and approve the batch 4 (10 items) diff
+- [ ] Review and approve the batch 5 (10 items) diff
+- [ ] Review and approve the batch 6 (1 item) diff
+- [ ] Sign off on proceeding to Stage 3
 
 ---
 
-## 4. Stage 3 — Full Production (515 노드, 잔여 27 건)
+## 4. Stage 3 — Full Production (515 nodes, remaining 27 items)
 
-### 목적
-R2 (NEAR→EXACT 12건) + R4 잔여 10 건 + 중복 해소 = 22 건 마감 + OUROBOROS 수렴 검증
+### Purpose
+R2 (NEAR -> EXACT, 12 items) + remaining R4 10 items + deduplication = close out 22 items + verify OUROBOROS convergence
 
-### 전환 명령
+### Transition Commands
 ```
-# [STAGE-3] 4 배치 × 7 건 (OUROBOROS 7-sample 통계)
+# [STAGE-3] 4 batches x 7 items (OUROBOROS 7-sample statistics)
 for batch in 1 2 3 4; do
   hexa run n6shared/tools/atlas_auto_promote.hexa \
     --stage=3 --batch=$batch --batch-size=7 --verify-b2 --final
 done
 
-# 최종 검증
+# Final verification
 hexa run engine/ouroboros_b2_verifier.hexa
 hexa run engine/hexa_gate_mk3.hexa
-wc -l $NEXUS/shared/n6/atlas.n6  # 기대: 107,035 (+78 라인 누적)
+wc -l $NEXUS/shared/n6/atlas.n6  # expected: 107,035 (+78 lines cumulative)
 ```
 
-### 게이트 기준 (종료 조건)
-- 누적 승격 ≤ 78 건 (설계 최대치 — 초과 시 위반)
-- 최종 OUROBOROS α 편차 ≤ 10⁻⁵
-- atlas.n6 엔트리 8,194 (+78)
-- 전 Stage 통합 로그 atlas_auto_promote.jsonl 78 엔트리 모두 `skipped: false`
-- σ·φ = n·τ = 24 최종 검증 PASS
+### Gate Criteria (completion conditions)
+- Cumulative promotions <= 78 (design ceiling — exceeding this is a violation)
+- Final OUROBOROS alpha deviation <= 10^-5
+- atlas.n6 entries 8,194 (+78)
+- The aggregated atlas_auto_promote.jsonl across all stages has 78 entries all with `skipped: false`
+- sigma * phi = n * tau = 24 final check PASS
 
-### 실패 / 롤백 조건
-- 누적 승격 80 건 초과 → 설계 위반, 전체 revert
+### Failure / Rollback Conditions
+- Cumulative promotions exceed 80 -> design violation; full revert
   ```
-  git reset --hard <Stage0_완료_커밋>
+  git reset --hard <Stage0_completion_commit>
   ```
-- α 최종 편차 > 10⁻⁵ → 전체 atlas.n6 롤백 + 디버그 세션 진입
-- B_2 verifier 자기테스트 5/6 이하 → production 중단, 코드 감사
+- Final alpha deviation > 10^-5 -> roll back the entire atlas.n6 and enter debug session
+- B_2 verifier self-test 5/6 or worse -> halt production and audit code
 
-### 사용자 승인 체크포인트 (최종)
-- [ ] 전체 78 건 atlas.n6 diff 종합 검토
-- [ ] atlas_auto_promote.jsonl 78 엔트리 확인
-- [ ] OUROBOROS 수렴 비율 78/515 ≈ 0.151 ≈ 1/6.6 확인
-- [ ] git commit 통합 (메시지: "atlas: Stage 3 final 78건 승격 완료 — OUROBOROS α=1/6 불변 유지")
-- [ ] Production 완료 서명
+### User Approval Checkpoints (final)
+- [ ] Comprehensive review of all 78 atlas.n6 diffs
+- [ ] Confirm 78 entries in atlas_auto_promote.jsonl
+- [ ] Confirm OUROBOROS convergence ratio 78/515 approx 0.151 approx 1/6.6
+- [ ] Aggregate git commit (message: "atlas: Stage 3 final promote 78 items — OUROBOROS alpha=1/6 invariant preserved")
+- [ ] Sign off on production completion
 
 ---
 
-## 5. 로그 / 메트릭 추적 (공통)
+## 5. Log / Metric Tracking (common)
 
-### 파일 위치
-- 승격 로그: `/Users/ghost/Dev/n6-architecture/n6shared/logs/atlas_auto_promote.jsonl`
-- atlas.n6 delta 스냅샷: `reports/atlas_deltas.jsonl`
-- B_2 verifier 로그: stdout → `n6shared/logs/b2_verifier.log`
-- Mk.III 실행 로그: stdout → `n6shared/logs/mk3_runtime.log`
+### File locations
+- Promotion log: `/Users/ghost/Dev/n6-architecture/n6shared/logs/atlas_auto_promote.jsonl`
+- atlas.n6 delta snapshots: `reports/atlas_deltas.jsonl`
+- B_2 verifier log: stdout -> `n6shared/logs/b2_verifier.log`
+- Mk.III execution log: stdout -> `n6shared/logs/mk3_runtime.log`
 
-### 추적 지표 (stage 별)
-| 지표 | Stage 0 | Stage 1 | Stage 2 | Stage 3 |
+### Tracked Metrics (by stage)
+| Metric | Stage 0 | Stage 1 | Stage 2 | Stage 3 |
 |------|---------|---------|---------|---------|
-| 승격 노드 수 | 0 | 5 | 51 | 78 |
-| atlas.n6 라인 | 106,957 | 106,962 | 107,008 | 107,035 |
-| atlas 엔트리 | 8,116 | 8,121 | 8,167 | 8,194 |
-| B_2 PASS/Test | 6/6 | 6/6 | 36/36 (6 배치×6) | 24/24 (4 배치×6) |
-| 누적 OUROBOROS α | 0 | 0.167 | 0.167 | 0.167 |
-| git 커밋 수 | 0 | 1 | 7 | 11 |
+| Nodes promoted | 0 | 5 | 51 | 78 |
+| atlas.n6 lines | 106,957 | 106,962 | 107,008 | 107,035 |
+| atlas entries | 8,116 | 8,121 | 8,167 | 8,194 |
+| B_2 PASS/Test | 6/6 | 6/6 | 36/36 (6 batches x 6) | 24/24 (4 batches x 6) |
+| Cumulative OUROBOROS alpha | 0 | 0.167 | 0.167 | 0.167 |
+| git commits | 0 | 1 | 7 | 11 |
 
-### 모니터링 명령
+### Monitoring commands
 ```
-# 실시간 B_2 추적
-tail -f n6shared/logs/b2_verifier.log | grep "α"
+# live B_2 tracking
+tail -f n6shared/logs/b2_verifier.log | grep "alpha"
 
-# atlas.n6 SHA 변경 추적
+# track atlas.n6 SHA
 while true; do shasum $NEXUS/shared/n6/atlas.n6; sleep 60; done
 
-# 승격 로그 카운트
+# count promotion log entries
 wc -l n6shared/logs/atlas_auto_promote.jsonl
 ```
 
 ---
 
-## 6. 비상 롤백 절차 (전 stage 적용)
+## 6. Emergency Rollback Procedure (applies to every stage)
 
-### 수준 1 — 부분 롤백 (Stage 복귀)
+### Level 1 — Partial rollback (return to previous stage)
 ```
 git log --oneline atlas.n6 | head -20
-git reset --hard <이전_Stage_마지막_커밋>
+git reset --hard <previous_stage_final_commit>
 ```
 
-### 수준 2 — 백업 복원
+### Level 2 — Restore from backup
 ```
 ls -la $NEXUS/shared/n6/atlas.n6.bak.*
 cp $NEXUS/shared/n6/atlas.n6.bak.<timestamp> $NEXUS/shared/n6/atlas.n6
-hexa run engine/ouroboros_b2_verifier.hexa  # 복구 확인
+hexa run engine/ouroboros_b2_verifier.hexa  # confirm recovery
 ```
 
-### 수준 3 — 전체 폐기
+### Level 3 — Full discard
 ```
-# 승격 시도 기록 전체 삭제
+# delete all promotion attempt records
 rm n6shared/logs/atlas_auto_promote.jsonl
-# atlas.n6 Stage 0 상태로 복귀 (git)
-git checkout HEAD~N -- $NEXUS/shared/n6/atlas.n6  # N = 누적 커밋수
-# DRY_RUN 플래그 true 복구
-# 전체 재설계 세션 진입
+# return atlas.n6 to Stage 0 state (git)
+git checkout HEAD~N -- $NEXUS/shared/n6/atlas.n6  # N = cumulative commit count
+# restore DRY_RUN flag to true
+# enter full redesign session
 ```
 
 ---
 
-## 7. 완료 기준
+## 7. Completion Criteria
 
-- [ ] Stage 0 dry-run 로그 78 건 확인
-- [ ] Stage 1 canary 5 건 atlas append 성공
-- [ ] Stage 2 phased 51 건 배치 승격 완료
-- [ ] Stage 3 production 78 건 최종 승격 완료
-- [ ] B_2 verifier 전 stage PASS (합계 72/72 테스트)
-- [ ] OUROBOROS α=1/6 불변 유지 (|Δα| < 10⁻⁵)
-- [ ] atlas.n6 +78 라인, +0.96% 순증
-- [ ] git 커밋 11 개 (Stage 1:1, Stage 2:6, Stage 3:4)
-- [ ] 사용자 최종 서명
+- [ ] Stage 0 dry-run log confirms 78 items
+- [ ] Stage 1 canary: 5 atlas appends succeed
+- [ ] Stage 2 phased: 51 batch promotions completed
+- [ ] Stage 3 production: 78 final promotions completed
+- [ ] B_2 verifier PASS across every stage (72/72 tests in total)
+- [ ] OUROBOROS alpha=1/6 invariant preserved (|Delta alpha| < 10^-5)
+- [ ] atlas.n6 +78 lines, +0.96% net increase
+- [ ] 11 git commits (Stage 1: 1, Stage 2: 6, Stage 3: 4)
+- [ ] Final user sign-off
 
-**Production 전환 완료 조건**: 위 8 체크 전부 충족 시 TRANSCEND P12-2 운영 전환 완료.
+**Production transition completion condition**: once all 8 checks above are satisfied, TRANSCEND P12-2 operational transition is complete.

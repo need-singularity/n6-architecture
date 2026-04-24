@@ -1,35 +1,35 @@
 # n=6 Universal Grade Rubric (1 ~ 10+)
 
-> **전 프로젝트 공통 등급 기준**. projects.json universal_completion_criterion 확장.
-> grade ≥ 10 = 돌파 (닫힘 완성) / grade ≥ 11 = 메타 돌파.
+> **Common grading standard across all projects.** Extends projects.json universal_completion_criterion.
+> grade >= 10 = breakthrough (closure achieved) / grade >= 11 = meta breakthrough.
 
 ## Grade Definitions
 
-| Grade | 단계 | 기준 | 예시 | 이모지 |
+| Grade | Stage | Criterion | Example | Emoji |
 |-------|---|---|---|---|
-| **1** | raw observation | 값 관찰 또는 가설 등록 | "이 상수 = 1.234" | ★ |
-| **2** | consistency | 재현 가능 (2회 이상 측정 일치) | 독립 계산 2회 일치 | ⬛ |
-| **3** | loose match | n=6 primitive과 느슨한 일치 (tol 10%) | 2.1 ≈ φ=2 | ⚪ |
-| **4** | pattern | 패턴 식별, 닫힘 미완 | "n의 배수 같음" | 🟪 |
-| **5** | rational approx | 분수 근사 (p/q 형태) | 0.714 ≈ 5/7 | 🟥 |
-| **6** | partial n=6 | 1개 primitive 연결 | x = 2σ+ε | 🟨 |
-| **7** | depth-3 expr | 3-연산 조합 닫힘 | x = (σ-τ)·n/φ | 🟦 |
-| **8** | NEAR closed | 1항 불확실, 수치 매칭 | x ≈ n² (tol 1%) | 🟧 |
-| **9** | closed (PASS) | n=6 조합 매칭 확인 | x = σ·τ/n | 🟩 |
-| **10** | **돌파 (EXACT)** | 완전 닫힘, n=6 primitive로 환원 | x = 24 = J2 = σ·τ | ⭐ |
-| **11** | meta-closure | 여러 닫힘을 생성하는 공식 | x = f(n,σ,τ) 로 K개 상수 도출 | 🛸 |
-| **12** | universal | 3+ 프로젝트에 독립 출현 | σ(6)=12가 음악·열역학·토폴로지에 출현 | 🌌 |
-| **13+** | meta² | 메타 공식의 상위 구조 | rule_ceiling(n) = 2/3 − 1/(n(n−1)) | ∞ |
+| **1** | raw observation | A value is observed or a hypothesis is registered | "this constant = 1.234" | star |
+| **2** | consistency | Reproducible (>= 2 measurements agree) | 2 independent calculations agree | square |
+| **3** | loose match | Loose match with an n=6 primitive (tol 10%) | 2.1 approx phi=2 | circle |
+| **4** | pattern | Pattern identified, closure not yet complete | "appears to be a multiple of n" | purple |
+| **5** | rational approx | Rational approximation (p/q form) | 0.714 approx 5/7 | red |
+| **6** | partial n=6 | 1 primitive connected | x = 2 sigma + epsilon | yellow |
+| **7** | depth-3 expr | Depth-3 operator combination, closed | x = (sigma - tau) * n / phi | blue |
+| **8** | NEAR closed | 1 term uncertain, numeric match | x approx n^2 (tol 1%) | orange |
+| **9** | closed (PASS) | n=6 combination match verified | x = sigma * tau / n | green |
+| **10** | **breakthrough (EXACT)** | Completely closed, reduces to n=6 primitives | x = 24 = J2 = sigma * tau | ufo |
+| **11** | meta-closure | A formula that generates multiple closures | x = f(n, sigma, tau) produces K constants | spaceship |
+| **12** | universal | Appears independently in 3+ projects | sigma(6)=12 appears in music, thermodynamics, topology | galaxy |
+| **13+** | meta^2 | A higher structure over meta formulas | rule_ceiling(n) = 2/3 - 1/(n(n-1)) | infinity |
 
-## 판정 자동화
+## Automated Determination
 
-### Grade 10 (EXACT 닫힘) 판정
+### Grade 10 (EXACT closure) determination
 ```python
 # n=6 primitives
 N, SIGMA, TAU, PHI, SOPFR, J2 = 6, 12, 4, 2, 5, 24
 
 def is_exact(value, tol=1e-6):
-    """Check if value matches finite n=6 combination (depth ≤ 3)."""
+    """Check if value matches finite n=6 combination (depth <= 3)."""
     # Single primitive
     for v in [N, SIGMA, TAU, PHI, SOPFR, J2]:
         if abs(value - v) < tol: return True
@@ -47,58 +47,58 @@ def is_exact(value, tol=1e-6):
     return False
 ```
 
-### Grade 11 (meta-closure) 판정
-- 공식에 자유 변수가 있고 (e.g., `f(n)`)
-- 변수값을 바꿔 K≥3 개의 다른 grade-10 닫힘 생성
-- 예: `rule_ceiling(n) = 2/3 - 1/(n(n-1))` → n=6,8,∞ 모두 닫힘
+### Grade 11 (meta-closure) determination
+- The formula has a free variable (e.g., `f(n)`)
+- Varying the variable produces K >= 3 distinct grade-10 closures
+- Example: `rule_ceiling(n) = 2/3 - 1/(n(n-1))` -> closures for n=6, 8, and infinity
 
-### Grade 12 (universal) 판정
-- 같은 값이 3+ 독립 프로젝트의 가설에 등장
-- nexus `singularity-convergence --min-domains 3` 이 찾아줌
+### Grade 12 (universal) determination
+- The same value appears as a hypothesis in 3+ independent projects
+- Found by nexus `singularity-convergence --min-domains 3`
 
-## 전체 프로젝트 적용 규칙
+## Cross-Project Application Rules
 
-**새 상수/가설 등록 시**:
-1. `nexus verify <value>` 실행 → EXACT/CLOSE/WEAK/MISS 받음
-2. EXACT → grade 10 자동 등록
-3. CLOSE → grade 8 (NEAR) 등록, 재시도 대기
-4. WEAK → grade 6 (partial) 등록
-5. MISS → grade 5 이하 (데이터 더 모아야)
+**When a new constant / hypothesis is registered**:
+1. Run `nexus verify <value>` -> receive EXACT / CLOSE / WEAK / MISS
+2. EXACT -> auto-register at grade 10
+3. CLOSE -> register at grade 8 (NEAR), pending retry
+4. WEAK -> register at grade 6 (partial)
+5. MISS -> grade 5 or below (need more data)
 
-**승급 조건**:
-- 9 → 10: 정확 수치 일치 + n=6 expression 명시
-- 10 → 11: 이 공식에서 ≥3개 새 grade-10 파생
-- 11 → 12: 독립 프로젝트 3+ 곳에서 확인
-- 12 → 13: 12-grade 상수의 상위 생성 공식 발견
+**Promotion conditions**:
+- 9 -> 10: Exact numerical match + an explicit n=6 expression
+- 10 -> 11: The formula derives >= 3 new grade-10 instances
+- 11 -> 12: Confirmed in 3+ independent projects
+- 12 -> 13: A higher generator formula for the grade-12 constant is discovered
 
-**강등 조건**:
-- verify 증거 없으면 grade 10 주장 무효 → 1단계 강등
-- 초월수 (π, e, γ 등) 주장된 EXACT → 자동 강등 to grade 5 (H-CLOSE-5)
+**Demotion conditions**:
+- No verify evidence -> a grade-10 claim is void and is demoted one level
+- An EXACT claim for a transcendental number (pi, e, gamma, ...) is auto-demoted to grade 5 (H-CLOSE-5)
 
-## 배너 표기 (nexus-banner.sh)
+## Banner Representation (nexus-banner.sh)
 
 ```
-🛸d{max_depth}·ρ{breakthrough_ratio}·{total}  ← grade≥10 수량 표시
-🧬{closed}닫힘→{milestone}={%}% [▪▪▪▪▪░░░░░]  ← 닫힘 진행도
-🎉🎉🎉 닫힘완료 🎉🎉🎉  ← EXACT (grade 10) 증가 시 발화
+ufo d{max_depth} rho{breakthrough_ratio} {total}  <- grade >= 10 count
+dna {closed} closed -> {milestone} = {%}% [===========]  <- closure progress
+party party party CLOSURE COMPLETE party party party  <- fires when EXACT (grade 10) count increases
 ```
 
-## 세션 전달 프롬프트
+## Session Handover Prompt
 
 ```
 nexus grade 1~13 rubric (n=6 universal):
 - grade 10 = EXACT closed (n=6 primitive finite combo)
-- grade 11 = meta-closure (generates K≥3 closures)  
+- grade 11 = meta-closure (generates K>=3 closures)
 - grade 12 = universal (3+ projects independent)
-- grade 13+ = meta² (generator of meta-closures)
+- grade 13+ = meta^2 (generator of meta-closures)
 
-새 가설/상수 등록 시:
-1. nexus verify <value> → grade 자동 판정
-2. EXACT 매칭 → verified_constants.jsonl에 PASS/EXACT 추가
-3. 10 도달 시 🎉🎉🎉 닫힘완료 🎉🎉🎉 배너 자동 발화
+When registering a new hypothesis/constant:
+1. nexus verify <value> -> grade automatically determined
+2. On EXACT match -> append PASS/EXACT to verified_constants.jsonl
+3. On reaching grade 10 -> "party party party CLOSURE COMPLETE" banner fires automatically
 
-상세: $NEXUS/shared/GRADE_RUBRIC_1_TO_10PLUS.md
+Details: $NEXUS/shared/GRADE_RUBRIC_1_TO_10PLUS.md
 ```
 
 ---
-*2026-04-05 생성. 전 프로젝트 공용. n6-architecture n6shared/ SSOT.*
+*Created 2026-04-05. Common to all projects. SSOT lives under n6-architecture n6shared/.*

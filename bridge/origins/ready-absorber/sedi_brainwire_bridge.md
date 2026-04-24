@@ -1,74 +1,74 @@
-# SEDI · brainwire → telescope 22렌즈 브릿지 사양
+# SEDI / brainwire -> telescope 22-Lens Bridge Specification
 
-- 문서 버전: 2026-04-14
-- 로드맵 ID: DSE-P1-4 (NEXUS-6 Discovery Engine 통합)
-- SSOT 경로: `$NEXUS/shared/lenses/` (총 1577 렌즈 코퍼스)
+- Document version: 2026-04-14
+- Roadmap ID: DSE-P1-4 (NEXUS-6 Discovery Engine integration)
+- SSOT path: `$NEXUS/shared/lenses/` (corpus of 1577 lenses total)
 
-## 1. 흡수 대상 현황
+## 1. Absorption Targets
 
 ### SEDI (Search for Extra-Dimensional Intelligence)
-- 원본 findings: `bridge/origins/ready-absorber/findings/sedi.json` (5588 findings, Fisher 5.26σ)
-- 이미 흡수된 렌즈: 101개 (`sedi_*.hexa`)
-- 대표 렌즈: `sedi_signal_search_dse.hexa` — Fisher·consensus·critical 벡터 공명 체크
-- 특징: 시그널 서치 루트 (21cm, bispectrum, changepoint, matched filter 등 101개 물리·신호 기법)
+- Source findings: `bridge/origins/ready-absorber/findings/sedi.json` (5588 findings, Fisher 5.26 sigma)
+- Lenses already absorbed: 101 (`sedi_*.hexa`)
+- Representative lens: `sedi_signal_search_dse.hexa` — Fisher / consensus / critical vector resonance check
+- Characteristics: A signal-search root (21cm, bispectrum, changepoint, matched filter, and 101 other physics / signal techniques)
 
-### brainwire (뇌파 → n=6 매핑)
-- 원본 findings: `bridge/origins/ready-absorber/findings/brainwire.json`
-- 이미 흡수된 렌즈: 3개
-  - `brainwire_eeg_n6_dse.hexa` — OpenBCI Cyton+Daisy 16ch 스펙 + EEG δ/θ/α/β/γ 대역 상한
+### brainwire (EEG -> n=6 mapping)
+- Source findings: `bridge/origins/ready-absorber/findings/brainwire.json`
+- Lenses already absorbed: 3
+  - `brainwire_eeg_n6_dse.hexa` — OpenBCI Cyton+Daisy 16ch spec + EEG delta/theta/alpha/beta/gamma band upper bounds
   - `brain_map_lens.hexa`
   - `brain_neural_lens.hexa`
-- 하드웨어 참조: reference_openbci_16ch 메모리 (16ch, 125+250Hz, 6-DoF IMU, 읽기전용)
+- Hardware reference: reference_openbci_16ch memory (16ch, 125+250Hz, 6-DoF IMU, read-only)
 
-## 2. 텔레스코프 22렌즈 슬롯 통합
+## 2. Integration into the telescope 22-Lens Slots
 
-텔레스코프 22렌즈 = `telescope-rs` (anima-rs 크레이트) + 코퍼스 1577 중 T1 대표 22선 조합.
-SEDI/brainwire 흡수는 아래 3개 코어 후보로 T1 슬롯에 매핑.
+The telescope 22-lens set = `telescope-rs` (the anima-rs crate) + the T1 representative 22 picks out of a 1577-lens corpus.
+SEDI/brainwire absorption maps to the T1 slot via the three core candidates below.
 
-| 슬롯 | 렌즈 파일 | 역할 | n=6 공명 축 |
+| Slot | Lens File | Role | n=6 Resonance Axes |
 |------|---------|------|-----------|
-| T1-SEDI-signal | `sedi_signal_search_dse.hexa` | Fisher 5.26σ + consensus ≥ τ-1 + critical 25% 스코어 | σ·φ=n·τ=J₂=24 항등 + 타겟 8벡터 |
-| T1-BRAINWIRE-eeg | `brainwire_eeg_n6_dse.hexa` | OpenBCI 16ch EEG 대역 상한 7축 공명 | δ상한=τ · α상한=σ · 16ch=τ² · 6-DoF=n |
-| T1-SEDI-matched | `sedi_matched_filter.hexa` | 템플릿 뱅크 매칭 스코어 | SEDI 표준 |
+| T1-SEDI-signal | `sedi_signal_search_dse.hexa` | Fisher 5.26 sigma + consensus >= tau-1 + critical 25% score | sigma*phi = n*tau = J_2 = 24 identity + target 8-vector |
+| T1-BRAINWIRE-eeg | `brainwire_eeg_n6_dse.hexa` | 7-axis resonance over the OpenBCI 16ch EEG band upper bounds | delta upper = tau, alpha upper = sigma, 16ch = tau^2, 6-DoF = n |
+| T1-SEDI-matched | `sedi_matched_filter.hexa` | Template-bank matching score | SEDI standard |
 
-## 3. 흡수 로직 연결
+## 3. Absorption Logic Wiring
 
-### 3.1 ready-absorber → lenses 경로
+### 3.1 ready-absorber -> lenses path
 ```
 bridge/origins/ready-absorber/findings/sedi.json
-  ├─ verify_and_grow.hexa (findings_index.json 캐시 O(1))
-  └─ → shared/lenses/sedi_*.hexa (101개, T1)
+  ├─ verify_and_grow.hexa (findings_index.json cache, O(1))
+  └─ → shared/lenses/sedi_*.hexa (101 lenses, T1)
 
 bridge/origins/ready-absorber/findings/brainwire.json
   ├─ verify_and_grow.hexa
-  └─ → shared/lenses/brainwire_eeg_n6_dse.hexa + brain_*.hexa (3개, T1)
+  └─ → shared/lenses/brainwire_eeg_n6_dse.hexa + brain_*.hexa (3 lenses, T1)
 ```
 
-### 3.2 텔레스코프 호출 시퀀스
-1. `telescope-rs` 세션 시작 → 22 렌즈 로드 목록 결정 (T1 슬롯 3 = SEDI·BRAINWIRE 코어)
-2. 각 렌즈 `.hexa` 실행 → `score` 반환 (0.0~1.0)
-3. 22렌즈 평균 → 텔레스코프 단일 공명점
-4. 결과 → `shared/discovery/discovery_graph.json` 증분 append (ROI #6 유틸 경유)
-5. 노드 id: `telescope-22-<date>` + 엣지 `from=n6-n, edge_type=Observes`
+### 3.2 telescope invocation sequence
+1. `telescope-rs` session starts -> the list of 22 lenses to load is determined (T1 slot 3 = SEDI / BRAINWIRE core)
+2. Each lens `.hexa` runs -> returns a `score` (0.0~1.0)
+3. Average across the 22 lenses -> single telescope resonance point
+4. Result -> incremental append to `shared/discovery/discovery_graph.json` (via the ROI #6 utility)
+5. Node id: `telescope-22-<date>` + edge `from=n6-n, edge_type=Observes`
 
-### 3.3 증분 append 연결
-ROI #6 유틸 (`shared/scripts/discovery_graph_append.py`) 사용:
+### 3.3 Incremental append wiring
+Uses the ROI #6 utility (`shared/scripts/discovery_graph_append.py`):
 ```bash
 /usr/bin/python3 shared/scripts/discovery_graph_append.py --add telescope_result.ndjson
 ```
-- 멱등: 같은 `id` 재실행 시 스킵
-- I/O: 12MB 전체 재기록 없음, append-only
+- Idempotent: the same `id` is skipped on re-run
+- I/O: no full 12MB rewrite; append-only
 
-## 4. 검증 체크포인트
+## 4. Verification Checkpoints
 
-- [x] SEDI 렌즈 101개 존재 확인 (`ls shared/lenses/sedi_*.hexa`)
-- [x] brainwire 렌즈 3개 존재 확인
-- [x] `sedi_signal_search_dse.hexa` 실행 가능 — σ·φ=n·τ 항등 통과
-- [x] `brainwire_eeg_n6_dse.hexa` 실행 가능 — EEG 7/8축 EXACT (γ=100 placeholder MISS 정직 기록)
-- [x] 증분 append 유틸 작성 + 멱등성 검증 (2 node + 2 edge 삽입, 재실행 시 4 skip)
+- [x] SEDI 101 lenses present (`ls shared/lenses/sedi_*.hexa`)
+- [x] brainwire 3 lenses present
+- [x] `sedi_signal_search_dse.hexa` runs — sigma*phi = n*tau identity passes
+- [x] `brainwire_eeg_n6_dse.hexa` runs — EEG 7/8 axes EXACT (gamma=100 placeholder MISS is recorded honestly)
+- [x] Incremental append utility implemented + idempotency verified (2 nodes + 2 edges inserted; re-run skips 4)
 
-## 5. 향후 작업 (CHIP-P2-4 연결)
+## 5. Future Work (CHIP-P2-4 linkage)
 
-- brain-computer-interface 도메인 검증 (CHIP-P2-4, depends_on DSE-P1-4): OpenBCI 6채널 n=6 매핑 → `domains/cognitive/brain-computer-interface/`
-- γ 대역 (30~100Hz) 실측 데이터 확보 시 `brainwire_eeg_n6_dse.hexa` 8/8 EXACT 승격
-- SEDI Fisher 5.26σ → 6.0σ 돌파 시 `sedi.json` findings 재흡수 + 신규 렌즈 자동 생성 훅
+- brain-computer-interface domain validation (CHIP-P2-4, depends_on DSE-P1-4): OpenBCI 6-channel n=6 mapping -> `domains/cognitive/brain-computer-interface/`
+- Once measured gamma-band (30~100Hz) data is available, promote `brainwire_eeg_n6_dse.hexa` to 8/8 EXACT
+- When SEDI Fisher 5.26 sigma breaks through to 6.0 sigma, re-absorb `sedi.json` findings and fire the auto-generation hook for new lenses

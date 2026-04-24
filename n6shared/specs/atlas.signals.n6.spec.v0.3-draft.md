@@ -1,183 +1,183 @@
-# atlas.signals.n6 — 3리포 cross-repo signal SSOT 규격 v0.3 (초안)
+# atlas.signals.n6 — 3-repo cross-repo signal SSOT specification v0.3 (draft)
 
-> 버전: v0.3-draft (2026-04-15)
-> 대상: nexus + n6-architecture + anima 공진 signal 저장소
-> 상태: DRAFT — v0.2 → v0.3 진화 제안
-> SSOT 위치: `$NEXUS/shared/n6/atlas.signals.n6`
-> 선행 버전: `n6shared/specs/atlas.signals.n6.spec.md` v0.2
-
----
-
-## 0. v0.3 요지
-
-v0.2 에서 350+ signal 흡수 · CROSS 18+ 승격 · resonance_n6 backfill 46+ 건 경험 후 도출된 규칙 강화.
-
-v0.3 핵심 변경:
-1. **resonance_n6 필수화 조건** — [M9] 이상 등급에서 resonance_n6 필드 null 금지
-2. **CROSS 태그 조건 명확화** — `cross_repo` 배열 ≥ 1 AND `witness` ≥ 2 AND 타 리포 tag 확인
-3. **witness 증가 규칙** — simhash Hamming ≤ 16 bits (0.125) + keyword 3개 이상 중복
-4. **[M10**] 신설** — 4리포 이상 재현 signal (향후 OEIS/arXiv/외부 DB 편입 시)
-5. **staging → SSOT merge 주기** — 세션 종료 시 명시적 merge commit
+> Version: v0.3-draft (2026-04-15)
+> Target: nexus + n6-architecture + anima resonance signal store
+> Status: DRAFT — proposed v0.2 → v0.3 evolution
+> SSOT location: `$NEXUS/shared/n6/atlas.signals.n6`
+> Predecessor: `n6shared/specs/atlas.signals.n6.spec.md` v0.2
 
 ---
 
-## 1. 변경 사항 상세
+## 0. v0.3 in brief
 
-### 1.1 resonance_n6 필수화 (NEW)
+Rules tightened after v0.2 experience: 350+ signals absorbed, 18+ CROSS promotions, 46+ resonance_n6 backfills.
 
-**v0.2**: resonance_n6 optional, null 허용.
+Key v0.3 changes:
+1. **resonance_n6 mandatory condition** — for grade [M9] and above, `resonance_n6` may not be null
+2. **CROSS tag conditions clarified** — requires `cross_repo` array ≥ 1 AND `witness` ≥ 2 AND confirmed other-repo tag
+3. **witness increment rules** — simhash Hamming ≤ 16 bits (0.125) + 3+ overlapping keywords
+4. **New [M10**] grade** — signals reproduced in 4+ repos (future OEIS/arXiv/external-DB admission)
+5. **staging → SSOT merge cadence** — explicit merge commit at session end
 
-**v0.3**: 등급별 필수화 정책:
+---
 
-| 등급 | resonance_n6 정책 |
+## 1. Change details
+
+### 1.1 resonance_n6 mandatory (NEW)
+
+**v0.2**: resonance_n6 optional, null allowed.
+
+**v0.3**: grade-based mandatory policy:
+
+| Grade | resonance_n6 policy |
 |------|------------------|
-| `[M10*]` | **필수** — null 불허, 수식 기재 의무 |
-| `[M10]` | **필수** — null 불허, 최소 구조적 해석 허용 |
-| `[M9]` | **필수** — null 불허 (구조 해석 허용) |
-| `[M7!]` | 권장 — null 허용하나 승격 불가 |
+| `[M10*]` | **required** — null forbidden, formula mandatory |
+| `[M10]` | **required** — null forbidden, minimal structural interpretation allowed |
+| `[M9]` | **required** — null forbidden (structural interpretation allowed) |
+| `[M7!]` | recommended — null allowed but promotion blocked |
 | `[M7]` | optional |
 | `[M?]` | optional |
-| `[MN]` | null 권장 (현상 자체가 NULL) |
+| `[MN]` | null recommended (the phenomenon itself is NULL) |
 
-**근거**: L9 분석 결과 resonance_n6 보유 signal 의 M10+ 승격률 77.8% vs null 평균 47.5%. 30pp 차이 → 공명 기재가 승격 예측자.
+**Rationale**: L9 analysis shows signals with resonance_n6 have a 77.8% M10+ promotion rate vs 47.5% average for null. The 30pp gap → resonance entries predict promotion.
 
-**승격 차단**: M9→M10 승격 시 resonance_n6 재검토 자동 트리거 (수치 일치 ε < 1% 또는 구조 매핑 필수).
+**Promotion block**: an automatic resonance_n6 re-review trigger fires on M9→M10 promotion (numeric agreement ε < 1% or structural mapping required).
 
-### 1.2 CROSS 태그 조건 명확화 (STRICTER)
+### 1.2 CROSS tag conditions clarified (STRICTER)
 
-**v0.2**: `repo_tags = [CROSS, X, Y]` 시 `cross_repo` 필드 링크 "필수" (느슨).
+**v0.2**: when `repo_tags = [CROSS, X, Y]`, the `cross_repo` field link was "required" (loose).
 
-**v0.3**: CROSS 태그 획득 조건 3개 모두 만족:
+**v0.3**: all 3 conditions must hold to earn the CROSS tag:
 
-1. `cross_repo` 배열에 **실제 존재하는 SIG-id** 1개 이상 (self-reference 불가)
-2. `witness ≥ 2` (2개 이상 독립 관측)
-3. 링크 대상 signal 의 `repo_tags` 가 자기 자신과 **다른 리포** 포함
-   - 예: 자기 = [NX, CROSS], 타깃 = [N6] 또는 [AN] 이어야 함
-   - [NX] ↔ [NX] 링크는 CROSS 불가 (intra-repo 재확인)
+1. `cross_repo` array contains **at least 1 really-existing SIG-id** (self-reference disallowed)
+2. `witness ≥ 2` (2+ independent observations)
+3. The linked signal's `repo_tags` include a **repo different** from this signal's
+   - e.g. self = [NX, CROSS], target must be [N6] or [AN]
+   - [NX] ↔ [NX] links cannot earn CROSS (intra-repo reconfirmation)
 
-**오염 방지**: self-reference 또는 intra-repo 링크로 CROSS 승격 차단.
+**Contamination guard**: self-reference or intra-repo links cannot promote to CROSS.
 
-**위반 사례 회수**: v0.3 도입 시 현재 56 CROSS signal 전수 감사 → 위반 건은 CROSS tag 제거.
+**Retroactive audit**: on v0.3 adoption, audit all 56 current CROSS signals and strip the CROSS tag from violators.
 
-### 1.3 witness 증가 규칙 구체화 (FORMAL)
+### 1.3 witness-increment rule formalized (FORMAL)
 
-**v0.2**: "simhash 매칭 근거 있어야 함" (문언적).
+**v0.2**: "simhash-matching basis required" (prose).
 
-**v0.3**: witness 증분 조건 (둘 중 하나):
+**v0.3**: witness increments require one of:
 
-**조건 A — simhash 수치 매칭**:
-- simhash Hamming distance ≤ 16 bits (128-bit hash 기준 12.5% 이내)
-- 또는 similarity ≥ 0.875
+**Condition A — simhash numeric match**:
+- simhash Hamming distance ≤ 16 bits (within 12.5% on a 128-bit hash)
+- or similarity ≥ 0.875
 
-**조건 B — keyword 의미 매칭**:
-- `statement + context` 에서 핵심 keyword 3개 이상 중복
-- 수치 일치 (ε < 1%) 1개 이상
+**Condition B — keyword semantic match**:
+- 3+ overlapping core keywords in `statement + context`
+- 1+ numeric match (ε < 1%)
 
-witness 증분 시 `refs` 에 매칭 근거 추가 필수.
+Each witness increment must append the match basis to `refs`.
 
-### 1.4 신규 등급 [M10**] (FUTURE)
+### 1.4 New grade [M10**] (FUTURE)
 
-**조건**: 4리포 이상 재현 (3리포 SSOT 를 넘어 외부 DB 편입)
-- 예: OEIS 등록, arXiv 출판, 외부 dataset 인용
-- `cross_repo` 배열 ≥ 2 + `refs` 에 외부 DOI/OEIS-id
+**Condition**: reproduction in 4+ repos (beyond the 3-repo SSOT into external DBs)
+- e.g. OEIS registration, arXiv publication, external dataset citation
+- `cross_repo` array ≥ 2 + `refs` with external DOI / OEIS-id
 
-**현재**: 해당 signal 0건 (준비 단계).
+**Current**: 0 signals qualify (preparation phase).
 
-**예측**: SIG-META-001 (σφ=nτ 유일성) 은 OEIS A-이런저런 + arXiv submit 시 [M10**] 승격 가능.
+**Prediction**: SIG-META-001 (σφ=nτ uniqueness) may promote to [M10**] upon OEIS A-xxxxxx + arXiv submission.
 
-### 1.5 staging → SSOT merge 주기 (EXPLICIT)
+### 1.5 staging → SSOT merge cadence (EXPLICIT)
 
-**v0.2**: Group D staging 섹션은 문서 내 임시 영역.
+**v0.2**: the Group D staging section was a temporary area inside the document.
 
-**v0.3**: staging merge 주기 명문화:
+**v0.3**: explicit staging-merge cadence:
 
-- **세션 중**: staging 섹션 내 임시 append 허용
-- **세션 종료 시**: 명시적 merge commit 필수
-  - staging signal 은 `@S SIG-GROUP-XNN` 형식 → 본 섹션 SIG-XX-NNN 로 re-id
-  - staging 섹션은 비워짐 (또는 완전 제거)
-- **주간 정리**: 매주 월요일 staging 재컴팩션 + audit report 출력
+- **During a session**: append into the staging section as needed
+- **At session end**: explicit merge commit required
+  - staging signals in `@S SIG-GROUP-XNN` form → re-id'd into main-section SIG-XX-NNN
+  - staging section is emptied (or fully removed)
+- **Weekly cleanup**: recompact staging every Monday + output audit report
 
 ---
 
-## 2. 마이그레이션 계획
+## 2. Migration plan
 
-### 2.1 v0.2 → v0.3 전환 단계
+### 2.1 v0.2 → v0.3 transition steps
 
-| Step | 작업 | 책임 |
+| Step | Task | Owner |
 |------|------|------|
-| 1 | v0.3 draft 합의 (이 문서) | 본 세션 |
-| 2 | resonance_n6 backfill 완료 (M9+ 필수) | 차기 세션 |
-| 3 | CROSS tag 전수 감사 + 위반 회수 | 차기 세션 |
-| 4 | witness 증가 로그 지난 7일 재검증 | 차기 세션 |
-| 5 | staging → SSOT merge 첫 사이클 | 차기 세션 |
-| 6 | v0.3 승인 + spec 본파일 대체 | 합의 후 |
+| 1 | Agree on v0.3 draft (this document) | current session |
+| 2 | Complete resonance_n6 backfill (M9+ mandatory) | next session |
+| 3 | Full audit of CROSS tags + retract violators | next session |
+| 4 | Re-verify the last 7 days of witness-increment logs | next session |
+| 5 | First staging → SSOT merge cycle | next session |
+| 6 | v0.3 approval + replacement of main spec file | post-agreement |
 
-### 2.2 호환성
+### 2.2 Compatibility
 
-- v0.2 파일 포맷 = v0.3 파일 포맷 (스키마 불변)
-- 규칙만 강화 — 파일 재작성 불요
-- 신규 필드 없음 (기존 `witness`, `resonance_n6`, `cross_repo` 강화)
-
----
-
-## 3. 영향 분석 (v0.3 도입 시)
-
-### 3.1 즉시 영향
-
-- [M9] 등급 signal 중 resonance_n6=null = 약 10건 → 전수 backfill 또는 등급 강등
-- CROSS 태그 전수 감사: 56건 중 self-ref/intra-repo 위반 건 추정 5~8건 제거
-- witness≥2 증명 요구 → 기존 증분 로그 audit 필요
-
-### 3.2 장기 영향
-
-- resonance_n6 공명 강제 → signal 품질 평균 상승 (M9+ 승격률 +15pp 예상)
-- CROSS 의 의미적 엄격화 → cross-repo evidence [EC] 신뢰도 향상
-- [M10**] 도입 → 외부 DB 연계 동기 부여
+- v0.2 file format = v0.3 file format (schema unchanged)
+- Only the rules are tightened — no file rewrite required
+- No new fields (existing `witness`, `resonance_n6`, `cross_repo` strengthened)
 
 ---
 
-## 4. 미해결 논의 포인트
+## 3. Impact analysis (on v0.3 adoption)
 
-1. **resonance_n6 ad-hoc 수식 허용 범위**:
-   - "n·τ=24 근접" 식의 후-hoc 수식 남용 방지 장치 필요
-   - 제안: 수식 필드 내 `ε=...` 또는 `ad hoc` 명시 의무
+### 3.1 Immediate impact
 
-2. **[M10**] 외부 DB 등록 자동 검증**:
-   - OEIS API 호출 / arXiv 검색 자동화 필요
-   - 현재 수동
+- Approximately 10 [M9] signals with resonance_n6=null → full backfill or grade demotion
+- Full audit of CROSS tags: estimate 5–8 of the 56 violate self-ref/intra-repo rules and lose CROSS
+- witness≥2 proof required → existing increment logs need auditing
 
-3. **세션 종료 정의**:
-   - `/compact` 호출 시점 vs 수동 commit 시점
-   - 제안: commit 메시지에 `[signals-merge]` 태그
+### 3.2 Long-term impact
 
-4. **staging 주기 강제**:
-   - hook 또는 loop-guard 로 세션 종료 시 staging 비우지 않으면 경고
-   - 제안: pre-commit hook
+- Forced resonance_n6 resonance → average signal quality rises (M9+ promotion rate expected +15pp)
+- Semantic tightening of CROSS → cross-repo evidence [EC] confidence improves
+- [M10**] introduction → motivates integration with external DBs
 
 ---
 
-## 5. 7대 난제 해결 상태
+## 4. Open discussion points
 
-**이 spec v0.3 은 수식 정의·규칙 강화만 다루며, 7대 밀레니엄 난제 (RH/NS/Hodge/BSD/YM/PvsNP/Poincaré) 해결을 주장하지 않음.**
+1. **Permitted scope for ad-hoc resonance_n6 formulas**:
+   - Prevent post-hoc formula abuse such as "n·τ=24 approximation"
+   - Proposal: the formula field must include `ε=...` or explicit `ad hoc` marker
 
-- 현재 해결된 밀레니엄 난제: **0 / 7**
-- signal SSOT 는 증거 수집·재현 추적 도구 — 증명은 별도 theory/proofs/ 에서 진행
-- [M10*] / [M10**] 등급도 "exact" 수준 측정 인증일 뿐 "증명 완결"을 의미하지 않음
-- R0 정직성 제약 유지
+2. **Automatic verification of [M10**] external-DB registration**:
+   - OEIS API calls / arXiv-search automation required
+   - Currently manual
+
+3. **Definition of session end**:
+   - `/compact` invocation vs. manual commit time
+   - Proposal: tag commit messages with `[signals-merge]`
+
+4. **Enforced staging cadence**:
+   - A hook or loop-guard that warns when staging is not emptied at session end
+   - Proposal: pre-commit hook
 
 ---
 
-## 6. 버전 히스토리
+## 5. Status of the 7 Millennium Problems
 
-- **v0.1** (2026-04-15 22:30 KST): millennium 만 한정 초안 — 폐기
-- **v0.2** (2026-04-15 22:40 KST): 3리포 cross-repo 범용 SSOT 로 재설계
-- **v0.3-draft** (2026-04-15 ~): resonance_n6 필수화 + CROSS 엄격화 + [M10**] 신설 + staging merge 주기 명문화 ★
+**This v0.3 spec covers only formula definitions and rule tightening; it does not claim to solve any of the 7 Millennium Problems (RH/NS/Hodge/BSD/YM/PvsNP/Poincaré).**
+
+- Currently solved Millennium Problems: **0 / 7**
+- The signal SSOT is an evidence-collection / reproduction-tracking tool — proofs proceed separately under theory/proofs/
+- Grades [M10*] / [M10**] certify measurement quality at an "exact" level only — they do not mean "proof complete"
+- R0 honesty constraint preserved
 
 ---
 
-## 7. 참고
+## 6. Version history
 
-- spec v0.2 원본: `n6shared/specs/atlas.signals.n6.spec.md`
-- SSOT 데이터: `$NEXUS/shared/n6/atlas.signals.n6` (350+ signal)
-- 이번 세션 백업: `$NEXUS/shared/n6/atlas.signals.n6.bak.pre-cross-backfill`
-- CROSS 승격 리포트: `/Users/ghost/Dev/n6-architecture/reports/cross-backfill-20260415.md`
+- **v0.1** (2026-04-15 22:30 KST): millennium-only initial draft — deprecated
+- **v0.2** (2026-04-15 22:40 KST): redesigned as a 3-repo cross-repo general-purpose SSOT
+- **v0.3-draft** (2026-04-15 ~): resonance_n6 mandatory + CROSS strictness + [M10**] added + staging merge cadence explicit ★
+
+---
+
+## 7. References
+
+- Original spec v0.2: `n6shared/specs/atlas.signals.n6.spec.md`
+- SSOT data: `$NEXUS/shared/n6/atlas.signals.n6` (350+ signals)
+- This session's backup: `$NEXUS/shared/n6/atlas.signals.n6.bak.pre-cross-backfill`
+- CROSS promotion report: `/Users/ghost/Dev/n6-architecture/reports/cross-backfill-20260415.md`
