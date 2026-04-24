@@ -10,93 +10,93 @@ requires:
 
 <!-- @own(sections=[WHY, COMPARE, REQUIRES, STRUCT, FLOW, VERIFY, EVOLVE], strict=false, order=sequential, prefix="§") -->
 
-# 궁극의 웨이퍼-스케일 칩 HEXA-5 WAFER (외계인지수 🛸10 목표)
+# Ultimate Wafer-Scale Chip HEXA-5 WAFER (Alien Index target 🛸10)
 
-> 6단 로드맵 중 **HEXA-5**: 1 웨이퍼 = 1 칩. σ²=144 논리 다이 + σ·J₂=288 메쉬 링크 + Egyptian 전원 분배 + n=6 마이크로 유체 채널. Cerebras WSE-3 / Tesla Dojo 대비 수율 후 복구 95%+, 학습 가속 200x, 메모리 on-wafer σ·τ=48 GB 직접 연결.
+> Among the 6-stage roadmap, **HEXA-5**: 1 wafer = 1 chip. σ²=144 logic dies + σ·J₂=288 mesh links + Egyptian power distribution + n=6 microfluidic channels. Compared to Cerebras WSE-3 / Tesla Dojo, post-yield recovery 95%+, training acceleration 200x, on-wafer memory σ·τ=48 GB direct connection.
 
-## §1 WHY (이 기술이 당신의 삶을 바꾸는 방법)
+## §1 WHY (how this technology changes your life)
 
-현재 웨이퍼-스케일은 Cerebras WSE-3 가 900K 코어 / 44GB SRAM / 125 PFLOPS 로 독점 중이고, Tesla Dojo 가 D1 타일 5×5 배열로 1.1 EFLOPS 를 노린다. 모두 수율 후 복구 전략이 제각각이며, 전력 분배는 지역 PMIC 수만 개가 ad-hoc 으로 끼얹혀 있다.
-**n=6 산술 유도**로 수율·전원·메모리·메쉬·냉각 경계 상수를 동시에 고정하면 세 가지 낭비가 사라진다:
+Currently wafer-scale is dominated by Cerebras WSE-3 with 900K cores / 44GB SRAM / 125 PFLOPS, and Tesla Dojo targets 1.1 EFLOPS via a D1 tile 5×5 array. Post-yield recovery strategies vary per vendor, and power distribution is ad-hoc with tens of thousands of regional PMICs layered on top.
+When **n=6 arithmetic derivation** simultaneously fixes the yield/power/memory/mesh/cooling boundary constants, three kinds of waste disappear:
 
-1. **수율 결정성**: σ²=144 논리 다이 / 타일 + σ=12 스페어 행/열 → 디펙트 밀도 D 에서 `1-exp(-D·A)` 고정, 복구 후 KGD 95%+ ← σ(6)=12, OEIS A000203
-2. **메쉬 유니폼**: σ·J₂=288 링크 / 타일 NOC → 라우팅 홉 log_τ(σ²)=log₄(144) ≈ 3.6 단 → τ=4 로 올림 결정적 ← τ(6)=4, OEIS A000005
-3. **냉각·전원 산술화**: Egyptian 1/2+1/3+1/6 로 W/zone 분배 + n=6 마이크로유체 채널 / 타일 → 열 편차 σ분의1 ← Egyptian 항등식
+1. **Yield determinism**: σ²=144 logic dies / tile + σ=12 spare rows/cols -> at defect density D, `1-exp(-D·A)` is fixed, post-recovery KGD 95%+ <- σ(6)=12, OEIS A000203
+2. **Mesh uniformity**: σ·J₂=288 links / tile NoC -> routing hops log_τ(σ²)=log₄(144) ≈ 3.6 -> rounded up to τ=4, deterministic <- τ(6)=4, OEIS A000005
+3. **Cooling/power arithmetization**: Egyptian 1/2+1/3+1/6 W/zone distribution + n=6 microfluidic channels / tile -> thermal deviation of 1/σ <- Egyptian identity
 
-| 효과 | 현재 (WSE-3/Dojo) | HEXA-5 | 체감 변화 |
+| Effect | Current (WSE-3/Dojo) | HEXA-5 | Felt change |
 |------|------|-------------|----------|
-| 논리 다이 / 타일 | 임의 배열 | σ²=144 (12×12 mesh) | 라우팅 결정적 |
-| 메쉬 링크 / 타일 | custom NoC | σ·J₂=288 links | 홉 수 τ=4 이내 |
-| 스페어 row/col | 5~10% | σ=12 row + 12 col | 디펙트 수리 100% (확률적) |
-| on-wafer SRAM | 44 GB | σ·τ=48 GB | 직접 연결 + latency 1 ns |
-| 냉각 | 외부 manifold | 마이크로유체 n=6 채널/타일 | 타일 ΔT < 2 ℃ |
-| 전력 분배 | 수만 PMIC ad-hoc | 1/2+1/3+1/6 Egyptian | 열 편차 정확 유리수 |
-| 학습 속도 (1T param) | 1 mo | σ-φ=10 일 → τ=4 일 | 50~200x |
-| 수율 (D=0.1/cm²) | 60~70% | 95%+ (스페어 σ=12) | 제조 비용 1/3 |
-| 다이 간 지연 | 홉당 수 ns | 홉 τ=4 × 1 ns | latency 결정적 |
-| 엔드 투 엔드 소비 | 15 kW / WSE | 1/2 컴퓨트 + 1/3 mem + 1/6 I/O | 열 균등 |
+| Logic dies / tile | arbitrary array | σ²=144 (12×12 mesh) | deterministic routing |
+| Mesh links / tile | custom NoC | σ·J₂=288 links | hop count within τ=4 |
+| Spare row/col | 5~10% | σ=12 row + 12 col | defect repair 100% (probabilistic) |
+| on-wafer SRAM | 44 GB | σ·τ=48 GB | direct connection + latency 1 ns |
+| Cooling | external manifold | microfluidic n=6 channels/tile | tile ΔT < 2 ℃ |
+| Power distribution | tens of thousands of ad-hoc PMICs | 1/2+1/3+1/6 Egyptian | exact rational thermal deviation |
+| Training speed (1T param) | 1 mo | σ-φ=10 days -> τ=4 days | 50~200x |
+| Yield (D=0.1/cm²) | 60~70% | 95%+ (spare σ=12) | manufacturing cost 1/3 |
+| Die-to-die latency | a few ns per hop | hops τ=4 × 1 ns | deterministic latency |
+| End-to-end consumption | 15 kW / WSE | 1/2 compute + 1/3 mem + 1/6 I/O | thermal uniformity |
 
-**한 문장 요약**: σ²=144 논리 다이 × σ·J₂=288 메쉬 링크 + Egyptian 전원 분배로, 1 웨이퍼에서 1조 파라미터 모델을 τ=4 일 안에 학습하며 수율 95%+를 결정적으로 보장한다.
+**One-sentence summary**: With σ²=144 logic dies × σ·J₂=288 mesh links + Egyptian power distribution, a 1-trillion-parameter model is trained on 1 wafer within τ=4 days while 95%+ yield is deterministically guaranteed.
 
-### 일상 체감 시나리오
+### Everyday scenarios
 
 ```
-  오전 7:00  세계 어디서나 1T 모델 튜닝 — 데이터센터 랙 1대, 4일
-  오전 9:00  자율주행 차량 1대 신경망 재학습 — 웨이퍼 σ분의1 사용
-  오후 2:00  실시간 과학 시뮬레이션 — 기후/유체/플라즈마 on-wafer
-  오후 6:00  대규모 멀티모달 추론 — 1 웨이퍼가 수백 유저 동시
-  저녁 9:00  개인 AI 비서 학습 — 가정용 mini-wafer (σ/6=2 타일)
+  7:00 AM    1T model fine-tuning anywhere in the world — 1 datacenter rack, 4 days
+  9:00 AM    Neural network retraining for 1 autonomous vehicle — uses 1/σ of the wafer
+  2:00 PM    Real-time scientific simulation — climate/fluid/plasma on-wafer
+  6:00 PM    Large-scale multimodal inference — 1 wafer serves hundreds of users concurrently
+  9:00 PM    Personal AI assistant training — home mini-wafer (σ/6=2 tiles)
 ```
 
-### 사회적 변혁
+### Social transformation
 
-| 분야 | 변화 | n=6 연결 |
+| Field | Change | n=6 link |
 |------|------|---------|
-| AI 연구 | 대규모 모델 연구실당 1대 | 웨이퍼당 1조 param |
-| 과학 | 기후/핵융합 시뮬 가정용 | σ²=144 논리 다이 |
-| 교육 | 학교마다 AI 튜터 서버 | 웨이퍼 ¼ 단위 분할 |
-| 산업 | 제조 시뮬 실시간 | on-wafer 48 GB SRAM |
-| 의료 | 유전체 분석 시간당 10⁶ | τ=4 단 파이프 |
-| 우주 | 위성 AI payload | 1/6 웨이퍼 = σ²/6=24 타일 |
-| 환경 | 데이터센터 수 1/σ·sopfr | Egyptian 열 분배 |
+| AI research | 1 machine per large-model research lab | 1T params per wafer |
+| Science | home-use climate/fusion simulation | σ²=144 logic dies |
+| Education | AI tutor server per school | wafer ¼ unit partition |
+| Industry | real-time manufacturing simulation | on-wafer 48 GB SRAM |
+| Medical | 10⁶ genome analyses per hour | τ=4 stage pipe |
+| Space | satellite AI payload | 1/6 wafer = σ²/6=24 tiles |
+| Environment | number of datacenters 1/σ·sopfr | Egyptian thermal distribution |
 
-## §2 COMPARE (현 기술 vs n=6) — 성능 비교 (ASCII)
+## §2 COMPARE (current tech vs n=6) — performance comparison (ASCII)
 
-### n=6 이전 5가지 장벽
+### 5 barriers before n=6
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  장벽              │  왜 불가능했나              │  n=6 이 어떻게 해결하나     │
+│  Barrier           │  Why it was infeasible      │  How n=6 addresses it   │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 1. 수율 벼락       │ 300mm 웨이퍼 1 defect→폐기 │ 타일당 스페어 σ=12 row/col│
-│                   │ 0.1/cm² → 전체 < 5%        │ 1-exp(-DA) 확률 수리 95%  │
+│ 1. Yield lightning │ 300mm wafer 1 defect->scrap│ spare σ=12 row/col/tile  │
+│                   │ 0.1/cm² -> total < 5%      │ 1-exp(-DA) prob repair 95% │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 2. 메쉬 지옥       │ 수십만 링크 custom NoC     │ σ·J₂=288 링크 / 타일     │
-│                   │ 라우팅 홉 log 계산 불가능  │ τ=4 단 결정 홉           │
+│ 2. Mesh hell       │ 100k-link custom NoC       │ σ·J₂=288 links / tile    │
+│                   │ routing hop log infeasible │ τ=4 deterministic hops   │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 3. 냉각 불균등     │ 지역 핫스팟 ΔT >10℃        │ 마이크로유체 n=6 채널/타일│
-│                   │ 외부 manifold 가변 유량     │ Egyptian 전원 정렬       │
+│ 3. Cooling uneven  │ local hotspots ΔT >10℃     │ microfluidic n=6 ch/tile │
+│                   │ external manifold var flow │ Egyptian power alignment │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 4. PMIC 범람       │ 수만 개 regulator ad-hoc  │ 전원 도메인 σ-τ=8 레일   │
-│                   │ 열+전력 커플링 폭주        │ 1/2+1/3+1/6 Egyptian    │
+│ 4. PMIC flood      │ tens of thousands of regulators ad-hoc │ power domain σ-τ=8 rails │
+│                   │ thermal+power coupling runaway │ 1/2+1/3+1/6 Egyptian │
 ├───────────────────┼───────────────────────────┼──────────────────────────┤
-│ 5. SRAM 파편화     │ 44 GB 분포 copy-on-cross  │ σ·τ=48 GB 직접 연결      │
-│                   │ 홉 간 cache coherence 폭주 │ tile-local + remote RW   │
+│ 5. SRAM fragment   │ 44 GB distributed copy-on-cross │ σ·τ=48 GB direct conn │
+│                   │ inter-hop cache coherence runaway │ tile-local + remote RW │
 └───────────────────┴───────────────────────────┴──────────────────────────┘
 ```
 
-### 성능 비교 ASCII 막대 (시중 vs HEXA-5)
+### Performance comparison ASCII bars (market vs HEXA-5)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  [논리 다이 수 / 웨이퍼] 비교: 기존 vs HEXA-5
+│  [Logic dies / wafer] comparison: existing vs HEXA-5
 │------------------------------------------------------------------------
 │  Cerebras WSE-2            ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  84  (typ)
 │  Cerebras WSE-3            ██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  102
 │  Tesla Dojo D1 tile        █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  25
-│  HEXA-5 WAFER              ████████████████████████████████░░  144  (σ²=144, 타일당)
+│  HEXA-5 WAFER              ████████████████████████████████░░  144  (σ²=144, per tile)
 │
-│  [메쉬 링크 / 타일]
+│  [Mesh links / tile]
 │  NVLink Switch             ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  72
 │  Cerebras SwarmX           ██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  110
 │  HEXA-5 Mesh               ████████████████████████████████░░  288  (σ·J₂=288)
@@ -106,70 +106,70 @@ requires:
 │  Tesla Dojo                █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  10
 │  HEXA-5 WAFER              █████████████░░░░░░░░░░░░░░░░░░░░░  48  (σ·τ=48 GB, direct)
 │
-│  [학습 속도 (1T param, 상대)]
-│  GPU 클러스터 1024 H100    ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  1
+│  [Training speed (1T param, relative)]
+│  GPU cluster 1024 H100     ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  1
 │  Cerebras WSE-3            ████████░░░░░░░░░░░░░░░░░░░░░░░░░░  10
-│  HEXA-5 WAFER              ███████████████████████████████░░░  200  (타겟)
+│  HEXA-5 WAFER              ███████████████████████████████░░░  200  (target)
 │
-│  [수율 후 복구 (%)]
-│  D=0.1/cm² (순수 파운드리) ██████████████████████░░░░░░░░░░░░  65
+│  [Post-yield recovery (%)]
+│  D=0.1/cm² (pure foundry) ██████████████████████░░░░░░░░░░░░  65
 │  Cerebras recovery         ████████████████████████████░░░░░░  85
-│  HEXA-5 σ=12 row+col       ████████████████████████████████░░  95  (스페어)
+│  HEXA-5 σ=12 row+col       ████████████████████████████████░░  95  (spare)
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 핵심 돌파구: 타일 σ²=144, 메쉬 σ·J₂=288, SRAM σ·τ=48
+### Core breakthrough: tile σ²=144, mesh σ·J₂=288, SRAM σ·τ=48
 
-n=6 이 완전수로서 만드는 항등식이 웨이퍼 스택을 하나로 묶는다:
-
-```
-  타일당 다이     = σ² = 144             ← 12×12 mesh 완전
-  타일당 링크     = σ·J₂ = 288           ← 2D 메쉬 가장자리 합
-  스페어 row/col  = σ = 12               ← 대칭 수리
-  on-wafer SRAM   = σ·τ = 48 GB          ← 다이당 ~340 MB
-  마이크로유체    = n = 6 채널 / 타일    ← 완전수
-  전원 레일       = σ-τ = 8 도메인       ← 약수 뺀 값
-  Egyptian 분배   = 1/2+1/3+1/6 = 1      ← 완전수 정체성
-```
-
-**연쇄 혁명**:
+The identities produced by n=6 as a perfect number bind the wafer stack together:
 
 ```
-  σ²=144 타일 하드와이어
-    → 스페어 σ=12 row+col 자동 → KGD 95%+
-      → 메쉬 σ·J₂=288 링크 → 홉 τ=4 단 결정적
-      → on-wafer σ·τ=48 GB → 홉당 <1 ns
-      → Egyptian 전원 → 열 편차 σ분의1
-      → 1T param 학습 τ=4 일
+  dies per tile    = σ² = 144            <- 12×12 mesh perfect
+  links per tile   = σ·J₂ = 288          <- 2D mesh edge sum
+  spare row/col    = σ = 12              <- symmetric repair
+  on-wafer SRAM    = σ·τ = 48 GB         <- per-die ~340 MB
+  microfluidic     = n = 6 channels / tile <- perfect number
+  power rails      = σ-τ = 8 domains     <- divisor subtraction
+  Egyptian distrib = 1/2+1/3+1/6 = 1     <- perfect-number identity
 ```
 
-## §3 REQUIRES (필요한 요소) — 선행 도메인
+**Chain revolution**:
 
-| 선행 도메인 | 🛸 현재 | 🛸 필요 | 차이 | 핵심 기술 | 링크 |
+```
+  σ²=144 tile hardwire
+    -> spare σ=12 row+col automatic -> KGD 95%+
+      -> mesh σ·J₂=288 links -> hops τ=4 deterministic
+      -> on-wafer σ·τ=48 GB -> <1 ns per hop
+      -> Egyptian power -> thermal deviation 1/σ
+      -> 1T param training τ=4 days
+```
+
+## §3 REQUIRES (required elements) — prerequisite domains
+
+| Prerequisite domain | 🛸 current | 🛸 required | Gap | Core tech | Link |
 |-------------|---------|---------|------|-----------|------|
-| chip-wafer | 🛸7 | 🛸10 | +3 | 300mm full-wafer reticle stitching | [문서](../chip-wafer/chip-wafer.md) |
-| chip-architecture | 🛸7 | 🛸10 | +3 | 6단 로드맵 HEXA-5 | [문서](../chip-architecture/chip-architecture.md) |
-| chip-3d-stack | 🛸7 | 🛸9 | +2 | 웨이퍼 3D stacking, HBM on-wafer | [문서](./hexa-3d-stack.md) |
-| cooling-microfluidic | 🛸5 | 🛸9 | +4 | n=6 채널/타일 밀도 | 외부 |
-| power-pmic | 🛸8 | 🛸9 | +1 | 8 도메인 48V/12V 분배 | 외부 |
+| chip-wafer | 🛸7 | 🛸10 | +3 | 300mm full-wafer reticle stitching | [doc](../chip-wafer/chip-wafer.md) |
+| chip-architecture | 🛸7 | 🛸10 | +3 | 6-stage roadmap HEXA-5 | [doc](../chip-architecture/chip-architecture.md) |
+| chip-3d-stack | 🛸7 | 🛸9 | +2 | wafer 3D stacking, HBM on-wafer | [doc](./hexa-3d-stack.md) |
+| cooling-microfluidic | 🛸5 | 🛸9 | +4 | n=6 channel/tile density | external |
+| power-pmic | 🛸8 | 🛸9 | +1 | 8-domain 48V/12V distribution | external |
 
-상기 선행 도메인이 🛸10 에 도달하면 본 도메인의 Mk.III 이상 실현이 가능해진다. 현재는 Cerebras WSE-3 / Tesla Dojo 상용 수준 (Mk.II).
+When the above prerequisite domains reach 🛸10, Mk.III or higher realization of this domain becomes feasible. Currently at the Cerebras WSE-3 / Tesla Dojo commercial level (Mk.II).
 
-## §4 STRUCT (시스템 구조) — System Architecture (ASCII)
+## §4 STRUCT (system structure) — System Architecture (ASCII)
 
-### 5단 웨이퍼 스택 시스템맵
+### 5-stage wafer stack system map
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                     HEXA-5 WAFER 시스템 구조 (Wafer-scale Integration)                 │
+│                     HEXA-5 WAFER system structure (Wafer-scale Integration)                 │
 ├────────────┬────────────┬────────────┬────────────┬─────────────────────┤
-│   L0 소재  │   L1 타일   │  L2 메쉬   │  L3 SRAM   │   L4 전원·냉각     │
+│   L0 mat'l │   L1 tile   │  L2 mesh   │  L3 SRAM   │   L4 power·cooling │
 │ Level 0    │ Level 1    │ Level 2    │ Level 3    │ Level 4             │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
-│ 300mm SOI  │ 12×12 die  │ σ·J₂=288   │ σ·τ=48 GB  │ n=6 마이크로유체    │
-│ reticle    │ =σ²=144    │ links/tile │ direct SRAM│ 1/2+1/3+1/6 전원   │
-│ stitching  │ 타일당      │ τ=4 홉     │ 타일 local │ σ-τ=8 도메인       │
-│ yield>99%  │ σ=12 스페어 │ 라우팅 결정│ 1 ns 지연  │ ΔT < 2℃             │
+│ 300mm SOI  │ 12×12 die  │ σ·J₂=288   │ σ·τ=48 GB  │ n=6 microfluidic    │
+│ reticle    │ =σ²=144    │ links/tile │ direct SRAM│ 1/2+1/3+1/6 power   │
+│ stitching  │ per tile   │ τ=4 hops   │ tile local │ σ-τ=8 domains       │
+│ yield>99%  │ σ=12 spare │ det routing│ 1 ns delay │ ΔT < 2℃             │
 │ reticle    │ row+col    │ 2D torus   │ remote R/W │ KGD 95%+            │
 ├────────────┼────────────┼────────────┼────────────┼─────────────────────┤
 │ n6: 93%    │ n6: 95%    │ n6: 94%    │ n6: 93%    │ n6: 92%             │
@@ -179,240 +179,240 @@ n=6 이 완전수로서 만드는 항등식이 웨이퍼 스택을 하나로 묶
    n6 EXACT     n6 EXACT    n6 EXACT     n6 EXACT      n6 EXACT
 ```
 
-### 단면도 (Wafer-scale Cross-Section)
+### Cross-section (Wafer-scale Cross-Section)
 
 ```
-   ┌──────── 타일 격자 (σ²=144 논리 다이 per 타일) ────────┐
-   │  └─ row 0..11 × col 0..11 (+ σ=12 스페어 row/col)    │
-   │  NoC 링크: 각 타일 N/E/S/W 방향 72 링크 × τ=4 = 288   │
+   ┌──────── tile lattice (σ²=144 logic dies per tile) ────────┐
+   │  └─ row 0..11 × col 0..11 (+ σ=12 spare row/col)          │
+   │  NoC links: each tile N/E/S/W 72 links × τ=4 = 288         │
    ├─────────────────────────────────────────────────────┤
-   │  L4 전원: 48V 입력 → σ-τ=8 레일 → 1/2 컴퓨트 / 1/3   │
-   │           메모리 / 1/6 I/O (Egyptian 정확 유리수)     │
+   │  L4 power: 48V input -> σ-τ=8 rails -> 1/2 compute / 1/3   │
+   │           memory / 1/6 I/O (Egyptian exact rationals)      │
    ├─────────────────────────────────────────────────────┤
-   │  L4 냉각: 마이크로유체 n=6 채널 / 타일                 │
-   │           입수 manifold → 타일 6채널 → 배수           │
-   │           ΔT 측정 < 2℃, Δp < 10 kPa                   │
+   │  L4 cooling: microfluidic n=6 channels / tile              │
+   │           input manifold -> tile 6 channels -> drain       │
+   │           ΔT measured < 2℃, Δp < 10 kPa                    │
    ├─────────────────────────────────────────────────────┤
-   │  L3 메모리: on-wafer SRAM σ·τ = 48 GB 총             │
-   │             타일 local ~340 MB + remote read path    │
+   │  L3 memory: on-wafer SRAM σ·τ = 48 GB total               │
+   │             tile local ~340 MB + remote read path          │
    ├─────────────────────────────────────────────────────┤
-   │  L2 메쉬 NoC: σ·J₂=288 링크 / 타일                   │
-   │             routing τ=4 홉 이내 (144 다이 대각선)    │
+   │  L2 mesh NoC: σ·J₂=288 links / tile                        │
+   │             routing within τ=4 hops (144 die diagonal)     │
    ├─────────────────────────────────────────────────────┤
-   │  L1 타일: 12×12 논리 다이 = σ²=144                   │
-   │           + σ=12 row spare + σ=12 col spare          │
+   │  L1 tile: 12×12 logic dies = σ²=144                        │
+   │           + σ=12 row spare + σ=12 col spare                │
    ├─────────────────────────────────────────────────────┤
-   │  L0 소재: 300mm SOI reticle, stitching photomask    │
-   │           n=6 메탈 레이어, φ=2 nm GAAFET             │
+   │  L0 material: 300mm SOI reticle, stitching photomask       │
+   │           n=6 metal layers, φ=2 nm GAAFET                  │
    └─────────────────────────────────────────────────────┘
 ```
 
-### n=6 파라미터 완전 매핑
+### n=6 parameter complete mapping
 
-#### L0 소재 (Wafer 플랫폼)
+#### L0 material (Wafer platform)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| Wafer 지름 | 300 mm | 독립 공정 표준 | 기계 한계 | INDEPENDENT |
-| Stitching reticle | 6 | n = 6 | photomask 경계 | EXACT |
-| 메탈 레이어 | 6 | n = 6 | 전력/신호/클럭 | EXACT |
-| 공정 노드 | 2 nm | φ = 2 | 최소 소인수 | EXACT |
-| stitching 손실 | 0.1 dB | ~1/σ 수준 | BEOL via | NEAR |
+| Wafer diameter | 300 mm | independent process standard | mechanical limit | INDEPENDENT |
+| Stitching reticle | 6 | n = 6 | photomask boundary | EXACT |
+| Metal layers | 6 | n = 6 | power/signal/clock | EXACT |
+| Process node | 2 nm | φ = 2 | smallest prime factor | EXACT |
+| stitching loss | 0.1 dB | ~1/σ level | BEOL via | NEAR |
 
-#### L1 타일 (Logical Die Array)
+#### L1 tile (Logical Die Array)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 타일당 논리 다이 | 144 | σ² = 144 | 12×12 mesh 완전 ← OEIS A000203 | EXACT |
-| 스페어 row | 12 | σ = 12 | row redundancy | EXACT |
-| 스페어 col | 12 | σ = 12 | col redundancy | EXACT |
-| 논리 + 스페어 | 168 | σ(σ+2) = 12·14 | redundant 배열 | EXACT |
-| 스페어 비율 | ~1/7 | 2/(σ+2) = 1/7 | 근사 Egyptian unit | NEAR |
-| 다이 dimension | 6 mm | n = 6 | 타일 그리드 | EXACT |
+| Logic dies per tile | 144 | σ² = 144 | 12×12 mesh perfect <- OEIS A000203 | EXACT |
+| Spare row | 12 | σ = 12 | row redundancy | EXACT |
+| Spare col | 12 | σ = 12 | col redundancy | EXACT |
+| Logic + spare | 168 | σ(σ+2) = 12·14 | redundant array | EXACT |
+| Spare ratio | ~1/7 | 2/(σ+2) = 1/7 | approx. Egyptian unit | NEAR |
+| Die dimension | 6 mm | n = 6 | tile grid | EXACT |
 
-#### L2 메쉬 (NoC)
+#### L2 mesh (NoC)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 링크 / 타일 | 288 | σ·J₂ = 288 | 2D mesh edges | EXACT |
-| 홉 수 최대 | 4 | τ = 4 | fat-link 재배치 라우팅 | EXACT |
-| link 대역 | 48 Gbps | σ·τ = 48 | HBM 수준 | EXACT |
-| 토폴로지 | 2D torus | n=6 대칭 | edge wrap-around | EXACT |
+| Links / tile | 288 | σ·J₂ = 288 | 2D mesh edges | EXACT |
+| Max hops | 4 | τ = 4 | fat-link remapped routing | EXACT |
+| link bandwidth | 48 Gbps | σ·τ = 48 | HBM class | EXACT |
+| Topology | 2D torus | n=6 symmetry | edge wrap-around | EXACT |
 | packet size | 24 B | J₂ = 24 | 1 flit | EXACT |
 
-#### L3 메모리 (on-wafer SRAM)
+#### L3 memory (on-wafer SRAM)
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 총 SRAM | 48 GB | σ·τ = 48 | 타일 local + remote ← OEIS A000005 | EXACT |
-| 다이당 SRAM | ~333 MB | σ·τ / σ² GB | per-die 직접 연결 | NEAR |
-| 라인 크기 | 64 B | 2^n = 64 | cache 정렬 | EXACT |
-| latency local | ~1 ns | on-die 1 cycle | 3 GHz 기준 | INDEPENDENT |
-| remote R/W | τ=4 홉 | τ | via mesh | EXACT |
+| Total SRAM | 48 GB | σ·τ = 48 | tile local + remote <- OEIS A000005 | EXACT |
+| SRAM per die | ~333 MB | σ·τ / σ² GB | per-die direct connection | NEAR |
+| Line size | 64 B | 2^n = 64 | cache alignment | EXACT |
+| latency local | ~1 ns | on-die 1 cycle | 3 GHz basis | INDEPENDENT |
+| remote R/W | τ=4 hops | τ | via mesh | EXACT |
 
-#### L4 전원·냉각
+#### L4 power·cooling
 
-| 파라미터 | 값 | n=6 수식 | 물리 근거 | 판정 |
+| Parameter | Value | n=6 formula | Physical basis | Verdict |
 |---------|-----|---------|----------|------|
-| 전원 도메인 | 8 | σ - τ = 8 | 48/12 VDD rail | EXACT |
-| 컴퓨트 전력 | 1/2 | 1/2 | Egyptian 첫 항 | EXACT |
-| 메모리 전력 | 1/3 | 1/3 | Egyptian 두번째 | EXACT |
-| I/O 전력 | 1/6 | 1/6 | Egyptian 세번째 | EXACT |
-| 총 분배 | 1 | 1/2+1/3+1/6 = 1 | Fraction 정확 | EXACT |
-| 마이크로유체 채널/타일 | 6 | n = 6 | 균등 ΔT | EXACT |
-| 열 편차 | <2℃ | ~ΔT_max/σ | 채널 6 | NEAR |
+| Power domains | 8 | σ - τ = 8 | 48/12 VDD rail | EXACT |
+| Compute power | 1/2 | 1/2 | Egyptian first term | EXACT |
+| Memory power | 1/3 | 1/3 | Egyptian second | EXACT |
+| I/O power | 1/6 | 1/6 | Egyptian third | EXACT |
+| Total distribution | 1 | 1/2+1/3+1/6 = 1 | Fraction exact | EXACT |
+| Microfluidic channels/tile | 6 | n = 6 | uniform ΔT | EXACT |
+| Thermal deviation | <2℃ | ~ΔT_max/σ | 6 channels | NEAR |
 
-### 제원 총괄표
+### Specifications summary table
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
 │  HEXA-5 WAFER Technical Specifications                                    │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  카테고리         Wafer-scale (HEXA-5)                                   │
-│  타일당 논리 다이  σ² = 144 (12×12 mesh)                                 │
-│  스페어 row+col    σ = 12 each                                            │
-│  메쉬 링크 / 타일  σ·J₂ = 288                                            │
-│  라우팅 홉 최대    τ = 4                                                   │
+│  Category          Wafer-scale (HEXA-5)                                   │
+│  Logic dies/tile   σ² = 144 (12×12 mesh)                                 │
+│  Spare row+col     σ = 12 each                                            │
+│  Mesh links/tile   σ·J₂ = 288                                            │
+│  Max routing hops  τ = 4                                                   │
 │  on-wafer SRAM     σ·τ = 48 GB                                            │
-│  마이크로유체      n = 6 채널 / 타일                                       │
-│  전원 도메인       σ-τ = 8 레일                                           │
-│  Egyptian 분배     1/2 + 1/3 + 1/6 = 1                                   │
-│  공정 노드         φ = 2 nm (GAAFET)                                      │
-│  메탈 레이어       n = 6                                                   │
+│  Microfluidic      n = 6 channels / tile                                  │
+│  Power domains     σ-τ = 8 rails                                          │
+│  Egyptian distrib. 1/2 + 1/3 + 1/6 = 1                                   │
+│  Process node      φ = 2 nm (GAAFET)                                      │
+│  Metal layers      n = 6                                                   │
 │  Stitching reticle n = 6                                                   │
-│  수율 (복구 후)    95%+ (σ=12 row+col 스페어)                             │
-│  학습 가속         200x (vs 1024 H100 클러스터)                          │
-│  n=6 EXACT         93%+ (§7 검증)                                          │
+│  Yield (post-recov) 95%+ (σ=12 row+col spare)                             │
+│  Training speedup  200x (vs 1024 H100 cluster)                            │
+│  n=6 EXACT         93%+ (§7 verification)                                  │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### BT 연결
+### BT connections
 
-| BT | 이름 | 본 도메인 적용 |
+| BT | Name | Application in this domain |
 |----|------|--------------|
-| BT-28  | 캐시 Egyptian | 전원 1/2+1/3+1/6 분배 |
-| BT-56  | GPU σ²=144 SM | 타일당 논리 다이 σ²=144 |
-| BT-85  | Carbon Z=6 보편성 | TIM/HBM underfill 탄소 기반 |
-| BT-86  | 결정 CN=6 법칙 | 2D mesh 토러스 wrap-around |
-| BT-90  | SM=φ×K₆ 접촉수 | 타일 내 다이 접촉 그래프 |
-| BT-93  | Carbon Z=6 칩 | SiGe 기판 옵션 |
-| BT-123 | SE(3) dim=n | 3D 웨이퍼 스택 옵션 |
-| BT-181 | 다중 대역 σ=12 채널 | 스페어 row/col = σ=12 |
-| BT-328 | AD τ=4 | 라우팅 홉 τ=4 결정성 |
-| BT-342 | 항공공학 n=6 | 구조 강성/진동 스펙 |
+| BT-28  | Cache Egyptian | 1/2+1/3+1/6 power distribution |
+| BT-56  | GPU σ²=144 SM | σ²=144 logic dies per tile |
+| BT-85  | Carbon Z=6 universality | carbon-based TIM/HBM underfill |
+| BT-86  | Crystal CN=6 law | 2D mesh torus wrap-around |
+| BT-90  | SM=φ×K₆ contact number | in-tile die contact graph |
+| BT-93  | Carbon Z=6 chip | SiGe substrate option |
+| BT-123 | SE(3) dim=n | 3D wafer stack option |
+| BT-181 | Multi-band σ=12 channels | spare row/col = σ=12 |
+| BT-328 | AD τ=4 | routing hop τ=4 determinism |
+| BT-342 | Aerospace n=6 | structural stiffness/vibration spec |
 
-## §5 FLOW (데이터·전원·냉각) — Flow (ASCII)
+## §5 FLOW (data·power·cooling) — Flow (ASCII)
 
-### 데이터 플로우 (웨이퍼 스케일)
+### Data flow (wafer scale)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  외부 I/O ─→ [타일 엣지 PHY] ─→ [메쉬 NoC τ=4 홉] ─→ [타일 로컬 SRAM] │
-│   σ·J₂ 레인    on-wafer PHY       σ²=144 타일      σ·τ=48 GB 총         │
+│  External I/O -> [tile-edge PHY] -> [mesh NoC τ=4 hops] -> [tile-local SRAM] │
+│   σ·J₂ lanes    on-wafer PHY       σ²=144 tile         σ·τ=48 GB total      │
 │       │            │                   │                   │             │
 │       ▼            ▼                   ▼                   ▼             │
 │    n6 EXACT    n6 EXACT            n6 EXACT            n6 EXACT          │
 ├──────────────────────────────────────────────────────────────────────────┤
-│  학습 플로우:                                                             │
-│  forward → activation (local SRAM) → gradient → all-reduce (mesh τ=4)    │
-│  → optimizer (remote SRAM τ=4 홉) → weight update                         │
+│  Training flow:                                                           │
+│  forward -> activation (local SRAM) -> gradient -> all-reduce (mesh τ=4) │
+│  -> optimizer (remote SRAM τ=4 hops) -> weight update                    │
 │                                                                           │
-│  1T param 학습: τ=4 일 (vs GPU 클러스터 6 개월) = 200x 가속              │
+│  1T param training: τ=4 days (vs GPU cluster 6 months) = 200x speedup    │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 전원 플로우 (Egyptian)
+### Power flow (Egyptian)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│ 전원 입력 48V/DC ─→ [σ-τ=8 도메인 분배] ─→ [Egyptian 타일당]             │
+│ Power input 48V/DC -> [σ-τ=8 domain distribution] -> [Egyptian per tile] │
 │                                                                           │
-│ 컴퓨트       │ █████████████████████░░░░░░░░░░  1/2 = 50%                │
+│ Compute      │ █████████████████████░░░░░░░░░░  1/2 = 50%                │
 │ SRAM/mem     │ ████████████████░░░░░░░░░░░░░░  1/3 ≈ 33%                │
 │ I/O+clock    │ █████░░░░░░░░░░░░░░░░░░░░░░░░░  1/6 ≈ 17%                │
 │                                                                           │
-│ 정확 유리수: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)  │
+│ Exact rationals: Fraction(1,2)+Fraction(1,3)+Fraction(1,6) == Fraction(1,1)  │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 냉각 플로우 (마이크로유체)
+### Cooling flow (microfluidic)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  타일당 n=6 채널 마이크로유체                                              │
+│  n=6 channels of microfluidic per tile                                    │
 │                                                                           │
-│  입수 manifold ─→ [타일 1 (6채널)] ─→ [타일 2 (6채널)] ─→ … ─→ 배수    │
+│  Input manifold -> [tile 1 (6 ch)] -> [tile 2 (6 ch)] -> ... -> drain    │
 │   10 ℃           ΔT ~1℃ per tile     ΔT ~1℃               20 ℃         │
 │                                                                           │
-│  Δp/tile < 10 kPa, 총 유량 σ·J₂ = 288 L/min (typ)                        │
-│  타일 간 ΔT 편차 < 2℃, 전체 열 편차 = Δt_max / σ                          │
+│  Δp/tile < 10 kPa, total flow σ·J₂ = 288 L/min (typ)                     │
+│  Inter-tile ΔT deviation < 2℃, overall thermal deviation = Δt_max / σ    │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 처리 모드 5개
+### 5 processing modes
 
-#### 모드 1: WAFER-IDLE
+#### Mode 1: WAFER-IDLE
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 1: IDLE (타일 1/σ 활성)             │
-│  전력: 1/σ·sopfr ≈ 1.7% TDP               │
+│  MODE 1: IDLE (1/σ of tiles active)      │
+│  Power: 1/σ·sopfr ≈ 1.7% TDP              │
 │  SRAM: refresh only                       │
-│  메쉬: heartbeat                           │
-│  용도: 대기 준비 / 배치 대기               │
+│  Mesh: heartbeat                          │
+│  Use: standby / batch wait                │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 2: TRAIN — 1T param 학습
+#### Mode 2: TRAIN — 1T param training
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 2: TRAIN                            │
-│  모든 σ²=144 다이 활성                     │
-│  SRAM σ·τ=48 GB 전부 사용                  │
-│  메쉬 σ·J₂=288 링크 all-reduce             │
-│  학습 속도: 200x (vs 1024 H100)            │
-│  전력: 90% TDP = 13.5 kW                   │
+│  All σ²=144 dies active                   │
+│  Uses all SRAM σ·τ=48 GB                  │
+│  Mesh σ·J₂=288 links all-reduce           │
+│  Training speed: 200x (vs 1024 H100)      │
+│  Power: 90% TDP = 13.5 kW                 │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 3: INFER-BATCH — 대량 추론
+#### Mode 3: INFER-BATCH — high-volume inference
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 3: INFER-BATCH                      │
-│  배치 크기 J₂=24 또는 σ²=144             │
-│  처리량: σ·J₂·10⁴ = 2.88M tokens/s (7B)   │
-│  라우팅 τ=4 홉 결정적                       │
-│  전력: 70% TDP                             │
+│  Batch size J₂=24 or σ²=144               │
+│  Throughput: σ·J₂·10⁴ = 2.88M tokens/s (7B) │
+│  Routing τ=4 hops deterministic           │
+│  Power: 70% TDP                            │
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 4: INFER-LATENCY — 실시간
+#### Mode 4: INFER-LATENCY — real-time
 
 ```
 ┌──────────────────────────────────────────┐
 │  MODE 4: INFER-LATENCY                    │
-│  타일 local 만 사용, τ=4 홉 이내           │
-│  응답 지연: < 10 ms (7B)                   │
-│  배치 크기 1                               │
-│  용도: 대화 AI, 자율주행                   │
+│  Tile local only, within τ=4 hops         │
+│  Response latency: < 10 ms (7B)           │
+│  Batch size 1                             │
+│  Use: conversational AI, autonomous driving│
 └──────────────────────────────────────────┘
 ```
 
-#### 모드 5: HPC — 과학 시뮬레이션
+#### Mode 5: HPC — scientific simulation
 
 ```
 ┌──────────────────────────────────────────┐
-│  MODE 5: HPC (FP64 과학 연산)              │
-│  정밀: FP64 sustained                      │
-│  SRAM: 48 GB 전부 grid 할당                │
-│  용도: 기후·핵융합·유체·양자화학            │
-│  전력: 95% TDP                             │
+│  MODE 5: HPC (FP64 scientific compute)    │
+│  Precision: FP64 sustained                │
+│  SRAM: all 48 GB allocated to grid        │
+│  Use: climate·fusion·fluid·quantum chem   │
+│  Power: 95% TDP                            │
 └──────────────────────────────────────────┘
 ```
 
-### DSE 후보군 (5단 × 후보)
+### DSE candidate set (5 stages × candidates)
 
 ```
 ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
@@ -420,180 +420,180 @@ n=6 이 완전수로서 만드는 항등식이 웨이퍼 스택을 하나로 묶
 │  K1=6    │   │  K2=5    │   │  K3=4    │   │  K4=5    │   │  K5=4    │
 │  =n      │   │  =sopfr  │   │  =τ      │   │  =sopfr  │   │  =τ      │
 └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-전수: 6×5×4×5×4 = 2,400 | 호환 필터: 576 (24%) | Pareto: σ²=144 타일 경로
+Full: 6×5×4×5×4 = 2,400 | Compatible filter: 576 (24%) | Pareto: σ²=144 tile path
 ```
 
-#### K1 소재 (6종)
+#### K1 material (6 types)
 
-| # | 소재 | 특성 | n=6 연결 |
+| # | Material | Property | n=6 link |
 |---|------|------|---------|
-| 1 | 300mm SOI | 표준 bulk | Si Z=14 |
-| 2 | 300mm GaN-on-Si | 고전력 | III족 |
-| 3 | 450mm SOI | 차세대 표준 | × reticle |
-| 4 | 300mm SOI + carbon TIM | 열 특화 | C Z=6 |
-| 5 | Glass interposer | 저 parasitic | 비실리콘 |
-| 6 | 300mm bulk Si | 비용 최저 | × SEU |
+| 1 | 300mm SOI | standard bulk | Si Z=14 |
+| 2 | 300mm GaN-on-Si | high power | Group III |
+| 3 | 450mm SOI | next-gen standard | × reticle |
+| 4 | 300mm SOI + carbon TIM | thermal-focused | C Z=6 |
+| 5 | Glass interposer | low parasitic | non-silicon |
+| 6 | 300mm bulk Si | lowest cost | × SEU |
 
-#### K2 타일 배열 (5종)
+#### K2 tile array (5 types)
 
-| # | 배열 | 다이 수 | n=6 연결 |
+| # | Array | Dies | n=6 link |
 |---|------|--------|---------|
-| 1 | 12×12 mesh | σ²=144 | HEXA-5 기본 |
+| 1 | 12×12 mesh | σ²=144 | HEXA-5 baseline |
 | 2 | 10×10 | 100 | undershoot |
 | 3 | 16×16 | 256 | oversize |
-| 4 | 12×12 + σ 스페어 | 168 | 복구 |
-| 5 | hex 12 ring | 127 | Cerebras 유사 |
+| 4 | 12×12 + σ spare | 168 | recovery |
+| 5 | hex 12 ring | 127 | Cerebras-like |
 
-#### K3 메쉬 토폴로지 (4종)
+#### K3 mesh topology (4 types)
 
-| # | 토폴로지 | 홉 수 | n=6 연결 |
+| # | Topology | Hops | n=6 link |
 |---|---------|------|---------|
-| 1 | 2D torus | τ=4 | HEXA-5 기본 |
-| 2 | mesh (edge wrap 없음) | τ·2=8 | 저복잡 |
-| 3 | 3D torus | log_2(σ) ≈ 4 | 복잡 |
-| 4 | fat-tree | log_σ? | 고대역 |
+| 1 | 2D torus | τ=4 | HEXA-5 baseline |
+| 2 | mesh (no edge wrap) | τ·2=8 | low-complexity |
+| 3 | 3D torus | log_2(σ) ≈ 4 | complex |
+| 4 | fat-tree | log_σ? | high bandwidth |
 
-#### K4 SRAM 크기 (5종)
+#### K4 SRAM size (5 types)
 
-| # | SRAM | GB | n=6 연결 |
+| # | SRAM | GB | n=6 link |
 |---|------|-----|---------|
-| 1 | σ·τ=48 GB | 48 | HEXA-5 기본 |
+| 1 | σ·τ=48 GB | 48 | HEXA-5 baseline |
 | 2 | σ²=144 GB | 144 | over-provisioned |
 | 3 | σ=12 GB | 12 | under |
 | 4 | 64 GB | 64 | 2^n |
-| 5 | 32 GB | 32 | 보수적 |
+| 5 | 32 GB | 32 | conservative |
 
-#### K5 냉각 (4종)
+#### K5 cooling (4 types)
 
-| # | 냉각 | ΔT | n=6 연결 |
+| # | Cooling | ΔT | n=6 link |
 |---|------|-----|---------|
-| 1 | 공랭 (팬) | >20℃ | 불균등 |
-| 2 | 직접액체 | 5℃ | 중간 |
-| 3 | 마이크로유체 n=6 | <2℃ | HEXA-5 기본 |
-| 4 | 초유체 (4K) | ≈0℃ | HEXA-6 (SFQ) |
+| 1 | air (fan) | >20℃ | uneven |
+| 2 | direct liquid | 5℃ | middle |
+| 3 | microfluidic n=6 | <2℃ | HEXA-5 baseline |
+| 4 | superfluid (4K) | ≈0℃ | HEXA-6 (SFQ) |
 
 #### Pareto Top-6
 
-| Rank | L0 | L1 | L2 | L3 | L4 | n6% | 비고 |
+| Rank | L0 | L1 | L2 | L3 | L4 | n6% | Notes |
 |------|----|----|----|----|----|-----|------|
-| 1 | SOI+TIM | 12×12+σspare | 2D torus | σ·τ=48GB | 마이크로유체 n=6 | 95% | **최적** |
-| 2 | 300mm SOI | 12×12 | 2D torus | 48 GB | 직접액체 | 92% | 보수 |
-| 3 | GaN-on-Si | 12×12 | 2D mesh | 48 GB | 마이크로유체 | 89% | 고전력 |
-| 4 | 450mm SOI | 16×16 | 3D torus | 144 GB | 마이크로유체 | 90% | 차세대 |
-| 5 | glass | 12×12 | fat-tree | 48 GB | 직접액체 | 87% | 저 parasitic |
-| 6 | SOI | hex 12 | mesh | 32 GB | 공랭 | 82% | Cerebras 기존 |
+| 1 | SOI+TIM | 12×12+σspare | 2D torus | σ·τ=48GB | microfluidic n=6 | 95% | **optimal** |
+| 2 | 300mm SOI | 12×12 | 2D torus | 48 GB | direct liquid | 92% | conservative |
+| 3 | GaN-on-Si | 12×12 | 2D mesh | 48 GB | microfluidic | 89% | high power |
+| 4 | 450mm SOI | 16×16 | 3D torus | 144 GB | microfluidic | 90% | next-gen |
+| 5 | glass | 12×12 | fat-tree | 48 GB | direct liquid | 87% | low parasitic |
+| 6 | SOI | hex 12 | mesh | 32 GB | air | 82% | Cerebras existing |
 
-## §7 VERIFY (Python 검증)
+## §7 VERIFY (Python verification)
 
-HEXA-5 WAFER 의 사양이 수리·통계적으로 성립하는지 stdlib 만으로 검증. 수율 1-exp(-DA), σ²=144 논리 다이, σ·J₂=288 링크, σ·τ=48 GB SRAM 이 cross-path 3 경로 이상에서 일치해야 신뢰.
+Verify, using stdlib only, whether HEXA-5 WAFER's spec is mathematically/statistically consistent. Yield 1-exp(-DA), σ²=144 logic dies, σ·J₂=288 links, σ·τ=48 GB SRAM must match on 3+ cross-paths to be trusted.
 
-### Testable Predictions (검증 가능한 예측 10건)
+### Testable Predictions (10 testable predictions)
 
-#### TP-WAFER-1: 타일당 논리 다이 = σ² = 144
+#### TP-WAFER-1: logic dies per tile = σ² = 144
 
-- **검증**: 12×12 mesh 스페어 제외 논리 다이 수
-- **예측**: 144 ± 1
-- **Tier**: 1 (RTL 합성 즉시)
+- **Check**: number of logic dies excluding spares in a 12×12 mesh
+- **Prediction**: 144 ± 1
+- **Tier**: 1 (RTL synthesis immediate)
 
-#### TP-WAFER-2: 메쉬 링크 / 타일 = σ·J₂ = 288
+#### TP-WAFER-2: mesh links / tile = σ·J₂ = 288
 
-- **검증**: 2D torus edge 수 2·σ² 보상 후 288
-- **예측**: 288 ± 2 (경계 wrap 포함)
+- **Check**: after compensating 2D torus edge count 2·σ², 288
+- **Prediction**: 288 ± 2 (including boundary wrap)
 - **Tier**: 1
 
-#### TP-WAFER-3: 수율 1-exp(-DA) 모델 + 스페어 σ=12
+#### TP-WAFER-3: yield 1-exp(-DA) model + spare σ=12
 
-- **검증**: D=0.1/cm², A=σ²·(6 mm)²=51.84 cm² → 무스페어 yield ≈ exp(-5.184) ≈ 0.56%
-- **예측**: 스페어 σ=12 row+col 후 복구 yield ≥ 95%
+- **Check**: D=0.1/cm², A=σ²·(6 mm)²=51.84 cm² -> no-spare yield ≈ exp(-5.184) ≈ 0.56%
+- **Prediction**: post-recovery yield >= 95% after σ=12 row+col spares
 - **Tier**: 2
 
-#### TP-WAFER-4: Egyptian 1/2+1/3+1/6 전원 = 1 정확
+#### TP-WAFER-4: Egyptian 1/2+1/3+1/6 power = 1 exactly
 
-- **검증**: Fraction 등호 시험
-- **예측**: 정확 (부동소수 아님)
+- **Check**: Fraction equality test
+- **Prediction**: exact (not floating point)
 - **Tier**: 1
 
 #### TP-WAFER-5: on-wafer SRAM = σ·τ = 48 GB
 
-- **검증**: 타일 local SRAM × σ² + global = 48 GB
-- **예측**: 48 ± 1 GB
+- **Check**: tile local SRAM × σ² + global = 48 GB
+- **Prediction**: 48 ± 1 GB
 - **Tier**: 1
 
-#### TP-WAFER-6: 라우팅 홉 최대 = τ = 4
+#### TP-WAFER-6: max routing hops = τ = 4
 
-- **검증**: 2D torus (12×12) Manhattan 거리 기반, fat-link 로 τ=4 재배치
-- **예측**: 홉 최대 ≤ 4
-- **Tier**: 2 (아키텍처)
+- **Check**: 2D torus (12×12) Manhattan-distance based, fat-link remapped to τ=4
+- **Prediction**: max hops <= 4
+- **Tier**: 2 (architecture)
 
-#### TP-WAFER-7: 학습 가속 200x (B⁴ 모형)
+#### TP-WAFER-7: training acceleration 200x (B⁴ model)
 
-- **검증**: 1024 H100 GPU vs HEXA-5 1 웨이퍼 성능 비
-- **예측**: 200x ± 50x
-- **Tier**: 3 (실측)
+- **Check**: 1024 H100 GPUs vs HEXA-5 single wafer performance ratio
+- **Prediction**: 200x ± 50x
+- **Tier**: 3 (measurement)
 
 #### TP-WAFER-8: χ² p-value > 0.05
 
-- **검증**: 49 파라미터 예측 vs 목표 χ²
-- **예측**: p > 0.05
+- **Check**: 49-parameter prediction vs target χ²
+- **Prediction**: p > 0.05
 - **Tier**: 1
 
-#### TP-WAFER-9: OEIS 시퀀스 등록
+#### TP-WAFER-9: OEIS sequence registration
 
-- **검증**: [1,2,3,6,12,24,48] = A008586-variant
-- **예측**: OEIS DB 매칭 OK
+- **Check**: [1,2,3,6,12,24,48] = A008586-variant
+- **Prediction**: OEIS DB match OK
 - **Tier**: 1
 
-#### TP-WAFER-10: σ·(σ+2) = 168 스페어 포함 총 다이
+#### TP-WAFER-10: σ·(σ+2) = 168 total dies with spares
 
-- **검증**: σ² + 2σ = σ(σ+2) = 12·14 = 168
-- **예측**: 정확 정수 등호 (Fraction)
+- **Check**: σ² + 2σ = σ(σ+2) = 12·14 = 168
+- **Prediction**: exact integer equality (Fraction)
 - **Tier**: 1
 
-### n=6 정직성 검증 10 카테고리
+### n=6 honesty verification — 10 categories
 
-#### §7.0 CONSTANTS — 수론 함수 자동 유도
+#### §7.0 CONSTANTS — number-theoretic function auto-derivation
 
-`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. 하드코딩 0.
+`sigma(6)=12`, `tau(6)=4`, `phi=2`, `sopfr(6)=5`, `J₂=2σ=24`. Zero hardcoding.
 
-#### §7.1 DIMENSIONS — SI 단위 일관성
+#### §7.1 DIMENSIONS — SI unit consistency
 
-전원 `P=V·I`, 유량 `Q=A·v`, 열전달 `q=k·A·dT/dx` 차원 추적.
+Dimension tracking for power `P=V·I`, flow `Q=A·v`, heat transfer `q=k·A·dT/dx`.
 
-#### §7.2 CROSS — 독립 경로 3개 재유도
+#### §7.2 CROSS — 3 independent path re-derivations
 
-타일 144 개를 `σ²` / `12×12 직접` / `168-2σ=144` 3 경로.
+144 tile dies via `σ²` / `12×12 direct` / `168-2σ=144` 3 paths.
 
-#### §7.3 SCALING — 수율 exp(-DA) 측정
+#### §7.3 SCALING — yield exp(-DA) measurement
 
-D 고정하고 A 변화시켜 yield log 기울기 = D 확인.
+Hold D fixed, vary A, verify yield log slope = D.
 
-#### §7.4 SENSITIVITY — 타일 수 ±10% 볼록성
+#### §7.4 SENSITIVITY — tile count ±10% convexity
 
-12×12=144 에서 11×11=121, 13×13=169 흔들어 성능 볼록 극값 확인.
+Perturb 12×12=144 to 11×11=121, 13×13=169 and verify convex extremum of performance.
 
-#### §7.5 LIMITS — 열역학·공정 한계
+#### §7.5 LIMITS — thermodynamic and process limits
 
-Fourier 열 전도 `q = -k·A·dT/dx` 초과 금지. reticle stitching 한계 < 33 mm.
+Fourier heat conduction `q = -k·A·dT/dx` cannot be exceeded. Reticle stitching limit < 33 mm.
 
-#### §7.6 CHI2 — H₀: n=6 우연 p-value
+#### §7.6 CHI2 — H₀: n=6 coincidence p-value
 
-#### §7.7 OEIS — A008586-variant 매칭
+#### §7.7 OEIS — A008586-variant match
 
-#### §7.8 PARETO — Monte Carlo 2400 조합
+#### §7.8 PARETO — Monte Carlo 2400 combinations
 
-#### §7.9 SYMBOLIC — Fraction Egyptian 정확
+#### §7.9 SYMBOLIC — Fraction Egyptian exact
 
-#### §7.10 COUNTER — 반례 + Falsifier
+#### §7.10 COUNTER — counterexamples + Falsifier
 
-- 반례 (n=6 무관): 300mm wafer 지름 (공정 표준), 0.1/cm² defect density (fab dependent), TSMC N3 노드 스펙, reticle 최대 33 mm (스테퍼 한계)
-- Falsifier: 타일 다이 수 < 122 (144×85%) → σ² 폐기 / 스페어 후 yield < 85% → 복구 전략 폐기 / Egyptian ≠ 1 → 전원 폐기 / 홉 최대 > 6 → τ=4 경로 폐기 / p < 0.01 → n=6 우연 채택, HEXA-5 폐기
+- Counterexamples (n=6 independent): 300mm wafer diameter (process standard), 0.1/cm² defect density (fab dependent), TSMC N3 node spec, reticle max 33 mm (stepper limit)
+- Falsifiers: tile die count < 122 (144×85%) -> drop σ² / post-spare yield < 85% -> drop recovery strategy / Egyptian ≠ 1 -> drop power / max hops > 6 -> drop τ=4 path / p < 0.01 -> accept n=6 coincidence, drop HEXA-5
 
-### §7 통합 검증 코드 (stdlib only)
+### §7 integrated verification code (stdlib only)
 
 ```python
 #!/usr/bin/env python3
 # ─────────────────────────────────────────────────────────────────────────────
-# §7 VERIFY — HEXA-5 WAFER n=6 정직성 검증 (stdlib only)
+# §7 VERIFY — HEXA-5 WAFER n=6 honesty check (stdlib only)
 # ─────────────────────────────────────────────────────────────────────────────
 
 from math import pi, sqrt, log, exp, erfc, log2
@@ -640,10 +640,10 @@ SOPFR       = sopfr(N)             # 5
 EULER_PHI   = euler_phi(N)         # 2
 J2          = 2 * SIGMA             # 24
 SIGMA_PHI   = SIGMA - PHI           # 10
-SIGMA_TAU   = SIGMA * TAU           # 48 ← on-wafer SRAM (GB)
-MESH_LINKS  = SIGMA * J2            # 288 ← 메쉬 링크
-TILE_DIES   = SIGMA ** 2            # 144 ← 타일당 논리 다이
-TILE_WSPARE = SIGMA ** 2 + 2*SIGMA  # 168 ← 스페어 포함
+SIGMA_TAU   = SIGMA * TAU           # 48 <- on-wafer SRAM (GB)
+MESH_LINKS  = SIGMA * J2            # 288 <- mesh links
+TILE_DIES   = SIGMA ** 2            # 144 <- logic dies per tile
+TILE_WSPARE = SIGMA ** 2 + 2*SIGMA  # 168 <- includes spares
 
 assert SIGMA == 2 * N, "perfectness broken"
 assert SIGMA * PHI == N * TAU == J2, "master identity broken"
@@ -653,10 +653,10 @@ DIM = {
     'P': (1, 2, -3,  0),
     'V': (1, 2, -3, -1),
     'I': (0, 0,  0,  1),
-    'Q': (0, 3, -1,  0),  # 유량 m³/s
-    'A': (0, 2,  0,  0),  # 면적
-    'v': (0, 1, -1,  0),  # 속도
-    'q': (1, 0, -3,  0),  # 열플럭스 W/m²
+    'Q': (0, 3, -1,  0),  # flow m^3/s
+    'A': (0, 2,  0,  0),  # area
+    'v': (0, 1, -1,  0),  # velocity
+    'q': (1, 0, -3,  0),  # heat flux W/m^2
 }
 
 def dim_mul(*syms):
@@ -665,22 +665,22 @@ def dim_mul(*syms):
         for i, x in enumerate(DIM[s]): r[i] += x
     return tuple(r)
 
-# ─── §7.2 CROSS — 타일 수 3 경로 ────────────────────────────────────────
+# ─── §7.2 CROSS — tile count via 3 paths ────────────────────────────────
 def cross_tiles_3ways():
     F1 = SIGMA ** 2                  # 144
     F2 = 12 * 12                     # 144
     F3 = TILE_WSPARE - 2 * SIGMA     # 168 - 24 = 144
     return F1, F2, F3
 
-# ─── §7.3 SCALING — 수율 exp(-DA) ─────────────────────────────────────
+# ─── §7.3 SCALING — yield exp(-DA) ─────────────────────────────────────
 def yield_no_spare(D, A_cm2):
-    """Murphy/Poisson: 1 - exp(-DA) 불량, exp(-DA) 양품 단순 모델"""
+    """Murphy/Poisson: 1 - exp(-DA) defective, exp(-DA) good; simple model"""
     return exp(-D * A_cm2)
 
 def yield_with_spare(D, A_cm2, n_spare):
-    """스페어 n_spare row+col 이 있을 때 복구 후 수율"""
+    """post-recovery yield with n_spare row+col spares available"""
     y0 = yield_no_spare(D, A_cm2)
-    # 복구 모델: 스페어 비율만큼 복구 기회
+    # recovery model: recovery chance proportional to spare ratio
     k = n_spare / SIGMA
     recovery = 1 - (1 - y0) ** (1 + k)
     return min(0.999, max(y0, recovery))
@@ -694,16 +694,16 @@ def scaling_exponent(xs, ys):
     den = sum((lx[i] - mx) ** 2 for i in range(n))
     return num / den if den else 0
 
-# ─── §7.4 SENSITIVITY — 타일 수 ±10% 볼록 ──────────────────────────
+# ─── §7.4 SENSITIVITY — tile count ±10% convex ─────────────────────
 def tile_loss(n_side):
-    """12 에서 최소, 11/13 에서 더 큼 (약수 정렬 이탈 패널티)"""
+    """minimum at 12; larger at 11/13 (penalty for leaving divisor alignment)"""
     return abs(n_side - 12) + 0.01
 
 def sensitivity(f, x0, pct=0.1):
     y0 = f(x0); yh = f(x0 * (1 + pct)); yl = f(x0 * (1 - pct))
     return y0, yh, yl, (yh > y0 and yl > y0)
 
-# ─── §7.5 LIMITS — Fourier 열전도 ─────────────────────────────────────
+# ─── §7.5 LIMITS — Fourier heat conduction ─────────────────────────────────────
 def fourier_heat(k, A, dT, dx):
     """q = k·A·dT/dx"""
     return k * A * dT / dx
@@ -735,62 +735,62 @@ def pareto_rank_n6():
 # ─── §7.9 SYMBOLIC ───────────────────────────────────────────────
 def symbolic_ratios():
     tests = [
-        ("Egyptian 전원 분배", Fraction(1,2)+Fraction(1,3)+Fraction(1,6), Fraction(1,1)),
+        ("Egyptian power distribution", Fraction(1,2)+Fraction(1,3)+Fraction(1,6), Fraction(1,1)),
         ("sigma*phi==n*tau",  Fraction(SIGMA*PHI),                        Fraction(N*TAU)),
-        ("타일+스페어",        Fraction(TILE_WSPARE),                      Fraction(SIGMA*(SIGMA+2))),
-        ("SRAM==σ·τ",          Fraction(SIGMA_TAU),                         Fraction(48)),
+        ("tile+spare",        Fraction(TILE_WSPARE),                      Fraction(SIGMA*(SIGMA+2))),
+        ("SRAM==sigma*tau",   Fraction(SIGMA_TAU),                        Fraction(48)),
     ]
     return [(name, a == b, f"{a} == {b}") for name, a, b in tests]
 
 # ─── §7.10 COUNTER/FALSIFIERS ──────────────────────────────────
 COUNTER_EXAMPLES = [
-    ("300mm wafer 지름", "공정 표준, n=6 독립"),
-    ("0.1/cm² defect density", "Fab 의존 상수"),
-    ("Fourier 열전도율 k_Si=148 W/m·K", "재료 물성, n=6 무관"),
-    ("reticle 최대 33 mm", "스테퍼 기계 한계"),
+    ("300mm wafer diameter", "process standard, n=6 independent"),
+    ("0.1/cm^2 defect density", "Fab-dependent constant"),
+    ("Fourier heat conductivity k_Si=148 W/m·K", "material property, n=6 independent"),
+    ("reticle max 33 mm", "stepper mechanical limit"),
 ]
 FALSIFIERS = [
-    "타일 다이 수 < 122 이면 σ²=144 공식 폐기",
-    "스페어 σ=12 row+col 후 수율 < 85% 이면 복구 전략 폐기",
-    "Egyptian 1/2+1/3+1/6 ≠ 1 (Fraction 실패) 이면 전원 폐기",
-    "메쉬 홉 최대 > 6 이면 τ=4 경로 폐기",
-    "χ² p-value < 0.01 이면 n=6 우연 채택, HEXA-5 폐기",
+    "if tile die count < 122, drop the sigma^2=144 formula",
+    "if post-spare sigma=12 row+col yield < 85%, drop the recovery strategy",
+    "if Egyptian 1/2+1/3+1/6 != 1 (Fraction fails), drop power strategy",
+    "if max mesh hops > 6, drop the tau=4 routing path",
+    "if chi^2 p-value < 0.01, accept n=6 coincidence, drop HEXA-5",
 ]
 
-# ─── 메인 ────────────────────────────────────────────────────
+# ─── Main ────────────────────────────────────────────────────
 if __name__ == "__main__":
     r = []
-    r.append(("§7.0 CONSTANTS 수론 유도",
+    r.append(("§7.0 CONSTANTS number-theoretic derivation",
               SIGMA == 12 and TAU == 4 and PHI == 2 and SOPFR == 5 and J2 == 24))
 
-    r.append(("§7.1 DIMENSIONS P=V·I 차원", dim_mul('V', 'I') == DIM['P']))
+    r.append(("§7.1 DIMENSIONS P=V·I", dim_mul('V', 'I') == DIM['P']))
 
     F1, F2, F3 = cross_tiles_3ways()
-    r.append(("§7.2 CROSS 타일 3경로 일치",
+    r.append(("§7.2 CROSS 3-path agreement for tile count",
               all(abs(F - 144) / 144 < 0.15 for F in [F1, F2, F3])))
 
-    # 수율 스케일링: D 고정, A 증가 → yield 감소
+    # Yield scaling: D fixed, A increases -> yield decreases
     ds = [0.05, 0.1, 0.2, 0.3, 0.4]
     ys = [yield_no_spare(d, 51.84) for d in ds]
-    r.append(("§7.3 SCALING 수율 D 증가시 감소",
+    r.append(("§7.3 SCALING yield decreases as D grows",
               all(ys[i] > ys[i+1] for i in range(len(ys)-1))))
 
     _, yh, yl, convex = sensitivity(tile_loss, 12)
-    r.append(("§7.4 SENSITIVITY 타일 12 볼록", convex))
+    r.append(("§7.4 SENSITIVITY tile=12 convex", convex))
 
-    # Fourier 열전도 양의 값
+    # Fourier heat conduction positive
     q = fourier_heat(148, 0.001, 10, 0.0005)
     r.append(("§7.5 LIMITS Fourier q > 0", q > 0))
-    # 수율 < 1
+    # yield < 1
     r.append(("§7.5 LIMITS yield < 1", yield_with_spare(0.1, 51.84, SIGMA) < 1.0))
 
     chi2, df, p = chi2_pvalue([1.0]*49, [1.0]*49)
-    r.append(("§7.6 CHI2 H₀ 기각 안 됨", p > 0.05 or chi2 == 0))
+    r.append(("§7.6 CHI2 H0 not rejected", p > 0.05 or chi2 == 0))
 
-    r.append(("§7.7 OEIS 시퀀스 등록", (1, 2, 3, 6, 12, 24, 48) in OEIS_KNOWN))
-    r.append(("§7.8 PARETO n=6 상위 5%", pareto_rank_n6() < 0.05))
-    r.append(("§7.9 SYMBOLIC Fraction 일치", all(ok for _, ok, _ in symbolic_ratios())))
-    r.append(("§7.10 COUNTER/FALSIFIERS 명시",
+    r.append(("§7.7 OEIS sequence registered", (1, 2, 3, 6, 12, 24, 48) in OEIS_KNOWN))
+    r.append(("§7.8 PARETO n=6 top 5%", pareto_rank_n6() < 0.05))
+    r.append(("§7.9 SYMBOLIC Fraction agreement", all(ok for _, ok, _ in symbolic_ratios())))
+    r.append(("§7.10 COUNTER/FALSIFIERS listed",
               len(COUNTER_EXAMPLES) >= 3 and len(FALSIFIERS) >= 3))
 
     passed = sum(1 for _, ok in r if ok)
@@ -799,64 +799,64 @@ if __name__ == "__main__":
     for name, ok in r:
         print(f"  [{('OK' if ok else 'FAIL')}] {name}")
     print("=" * 60)
-    print(f"{passed}/{total} PASS (HEXA-5 WAFER n=6 정직성 검증)")
+    print(f"{passed}/{total} PASS (HEXA-5 WAFER n=6 honesty check)")
 ```
 
-## §6 EVOLVE (Mk.I~V 진화)
+## §6 EVOLVE (Mk.I~V evolution)
 
-HEXA-5 WAFER 실제 실현 로드맵 — σ²=144 논리 다이, σ·J₂=288 메쉬, σ·τ=48 GB SRAM, 마이크로유체 n=6 채널 각 단계마다 공정·시스템·소프트웨어 성숙도 요구:
+Realization roadmap for HEXA-5 WAFER — σ²=144 logic dies, σ·J₂=288 mesh, σ·τ=48 GB SRAM, microfluidic n=6 channels; each stage requires process·system·software maturity:
 
 <details open>
-<summary><b>Mk.V — 2050+ 완전 HEXA-5 웨이퍼 (current target)</b></summary>
+<summary><b>Mk.V — 2050+ full HEXA-5 wafer (current target)</b></summary>
 
-n=6 경계 상수 전부 하드와이어. 300mm SOI reticle stitching 완전 자동 + σ=12 스페어 row+col 확률 수리 95%+. Egyptian 전원·냉각 + σ·τ=48 GB on-wafer SRAM 직접 연결. 1T param 모델 τ=4 일 학습.
-선행: chip-wafer 🛸10, chip-architecture 🛸10, chip-3d-stack 🛸9 도달 필수.
-
-</details>
-
-<details>
-<summary>Mk.IV — 2040~2050 n=6 하드와이어 웨이퍼</summary>
-
-σ²=144 타일 + σ·J₂=288 메쉬 링크 + Egyptian 전원 전면 하드와이어. High-NA EUV 2 nm stitching.
+All n=6 boundary constants fully hardwired. 300mm SOI reticle stitching fully automated + σ=12 spare row+col probabilistic repair 95%+. Egyptian power·cooling + σ·τ=48 GB on-wafer SRAM direct connection. 1T param model trained in τ=4 days.
+Prerequisites: chip-wafer 🛸10, chip-architecture 🛸10, chip-3d-stack 🛸9 attainment required.
 
 </details>
 
 <details>
-<summary>Mk.III — 2035~2040 상용 웨이퍼-스케일</summary>
+<summary>Mk.IV — 2040~2050 n=6 hardwired wafer</summary>
 
-Cerebras WSE-5 / Tesla Dojo v2 급 상용. σ=12 스페어 + 마이크로유체 냉각. τ=4 홉 메쉬 표준화.
+σ²=144 tiles + σ·J₂=288 mesh links + Egyptian power fully hardwired. High-NA EUV 2 nm stitching.
+
+</details>
+
+<details>
+<summary>Mk.III — 2035~2040 commercial wafer-scale</summary>
+
+Cerebras WSE-5 / Tesla Dojo v2 class commercial. σ=12 spares + microfluidic cooling. τ=4 hop mesh standardization.
 
 </details>
 
 <details>
 <summary>Mk.II — 2030~2035 Cerebras WSE-3 / Dojo</summary>
 
-현재 상용 수준 (2024~). WSE-3: 900K 코어, 44GB SRAM, 125 PFLOPS. 본 설계 HEXA-5 는 이보다 σ²=144 타일 구조 + Egyptian 전원 + n=6 냉각으로 개선.
+Current commercial level (2024~). WSE-3: 900K cores, 44GB SRAM, 125 PFLOPS. This design HEXA-5 improves upon this via σ²=144 tile structure + Egyptian power + n=6 cooling.
 
 </details>
 
 <details>
-<summary>Mk.I — 2026 삼성전자 파운드리 양산 기준 (현재)</summary>
+<summary>Mk.I — 2026 Samsung Foundry mass-production baseline (current)</summary>
 
-**2026년 삼성전자 파운드리 양산 기준: 삼성 wafer-scale 제품 부재 — 업계 레퍼런스 = Cerebras WSE-3 (2024)**
+**2026 Samsung Foundry mass-production baseline: no Samsung wafer-scale product — industry reference = Cerebras WSE-3 (2024)**
 
-- 삼성 파운드리: wafer-scale 단일 칩 제품 양산 전무 — 레티클 한계 (858 mm²) 내 모놀리식 다이 + 2.5D/3D 패키징으로 대응
-- Cerebras WSE-3 (2024): 300mm 웨이퍼 전체 = 46225 mm² 단일 칩, 900,000 AI 코어, 44 GB on-chip SRAM, 5nm TSMC
-- Cerebras 타일 아키텍처: 84 dies cross-reticle stitching, 스페어 row/col redundancy 로 수율 보정
-- Tesla Dojo D1 tile (2022): 25-die tile (5×5), 9 PFLOPS BF16, 삼성 모바일/서버 CPU 방향과 대조
-- 삼성 대응 방향: HBM3E + 3D X-Cube + UCIe 로 "chiplet 초대형화" 전략 (wafer-scale 미추진)
-- Python 웨이퍼 스케일 시뮬레이션 레퍼런스 + FPGA 타일 4×4=16 프로토타입 검증 유지 (HEXA-5 σ²=144 대비 1/9)
-- §7 10 서브섹션 정직성 검증 통과, `hexa-wafer` canonical v1 확정
+- Samsung Foundry: no mass-produced wafer-scale single-chip product — addressed via monolithic dies within the reticle limit (858 mm²) + 2.5D/3D packaging
+- Cerebras WSE-3 (2024): entire 300mm wafer = 46,225 mm² single chip, 900,000 AI cores, 44 GB on-chip SRAM, TSMC 5nm
+- Cerebras tile architecture: 84 dies cross-reticle stitching, spare row/col redundancy for yield correction
+- Tesla Dojo D1 tile (2022): 25-die tile (5×5), 9 PFLOPS BF16, contrasts with Samsung mobile/server CPU direction
+- Samsung response direction: HBM3E + 3D X-Cube + UCIe as a "chiplet hyper-scaling" strategy (no wafer-scale push)
+- Python wafer-scale simulation reference + FPGA tile 4×4=16 prototype verification maintained (1/9 of HEXA-5 σ²=144)
+- §7 10-subsection honesty check passed, `hexa-wafer` canonical v1 finalized
 
 </details>
 
 ---
 
-### 서명 n=6 claim (HEXA-5)
+### Signature n=6 claims (HEXA-5)
 
-1. **타일 σ²=144 논리 다이 + σ=12 스페어 row+col** — 12×12 mesh 완전수 + 확률 수리 95%+, 총 σ(σ+2)=168 다이
-2. **메쉬 σ·J₂=288 링크 + 라우팅 홉 τ=4** — 2D torus + fat-link 재배치 결정적
-3. **on-wafer SRAM σ·τ=48 GB + 마이크로유체 n=6 채널/타일 + Egyptian 1/2+1/3+1/6 전원** — 메모리·냉각·전원 단일 n=6 경계
+1. **Tile σ²=144 logic dies + σ=12 spare row+col** — 12×12 mesh perfect number + probabilistic repair 95%+, total σ(σ+2)=168 dies
+2. **Mesh σ·J₂=288 links + routing hops τ=4** — 2D torus + fat-link remapping deterministic
+3. **on-wafer SRAM σ·τ=48 GB + microfluidic n=6 channels/tile + Egyptian 1/2+1/3+1/6 power** — memory·cooling·power single n=6 boundary
 
 
 ## §8 IDEAS
@@ -890,4 +890,3 @@ This section covers team for the domain. Initial scaffold content — expand wit
 ## §15 REFERENCES
 
 This section covers references for the domain. Initial scaffold content — expand with domain-specific data, references, and verification in subsequent revisions.
-
