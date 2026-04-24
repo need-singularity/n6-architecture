@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 31,
+    "count": 28,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -509,6 +509,30 @@
         "before": 32,
         "after": 31,
         "note": "B12 part A RED-lite - chip-photonic.md (compute/chip-photonic) translated KR->EN (CJK 3875 -> 0). Distinct from chip-design/hexa-photonic."
+      },
+      {
+        "phase": "phase-6-D-B12-hexa-pim",
+        "removed": [
+          "domains/compute/hexa-pim/hexa-pim.md"
+        ],
+        "count_after": 30,
+        "date": "2026-04-25"
+      },
+      {
+        "phase": "phase-6-D-B12-hexa-super",
+        "removed": [
+          "domains/compute/hexa-super/hexa-super.md"
+        ],
+        "count_after": 29
+      },
+      {
+        "phase": "phase-6-D-B12-hexa-accel",
+        "date": "2026-04-25",
+        "before": 29,
+        "after": 28,
+        "removed": [
+          "domains/compute/hexa-accel/hexa-accel.md"
+        ]
       }
     ]
   },
@@ -521,10 +545,7 @@
     "domains/cognitive/ai-interpretability/ai-interpretability.md",
     "domains/cognitive/ai-quality-scale/ai-quality-scale.md",
     "domains/cognitive/ai-training-cost/ai-training-cost.md",
-    "domains/compute/hexa-accel/hexa-accel.md",
     "domains/compute/hexa-mram/hexa-mram.md",
-    "domains/compute/hexa-pim/hexa-pim.md",
-    "domains/compute/hexa-super/hexa-super.md",
     "domains/compute/hexa-wafer/hexa-wafer.md",
     "domains/sf-ufo/hexa-ufo/hexa-ufo.md",
     "papers/moonshine-barrier-honest-report-2026-04-15.md",
