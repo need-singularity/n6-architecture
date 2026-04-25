@@ -1,4 +1,4 @@
-# n6-architecture /.own — L1 unified governance DSL (21 rules)
+# n6-architecture /.own — L1 unified governance DSL (23 rules)
 # Project-local SSOT: declarative rules + cron loop + forward-chain + drift checks.
 # Parallel to L0 (hexa-lang /.raw) with independent id namespace.
 # Grammar: hexa-lang self/raw_loader.hexa (same syntax as .raw / .loop / .chain).
@@ -287,3 +287,27 @@ own 21 live "readme-nexus6-tests-count-drift — README NEXUS-6 tests count matc
   cron daily
   on_fail warn
   label NEXUS-6 test count
+
+own 22 live "proposal-naming — proposal filename category convention (HARD)"
+  slug proposal-naming
+  decl proposals/ tool/proposal_lint.py
+  scope HARD block — proposals/*.md filenames must match category-derived naming pattern. category=identity → kebab-case, no date suffix. category=operational → snake_case + _YYYY_MM_DD. category=phased → kebab-case + -YYYY-MM-DD. Mismatch between declared (frontmatter `category:`) and inferred-from-filename pattern blocks commit.
+  status live
+  since 2026-04-25
+  why filename predicts proposal lifecycle (identity = durable strategic doc, operational = dated audit/op artifact, phased = dated rollout phase). Convention drift erodes the predictive signal and causes proposal repo navigation friction. Promoted to HARD via user '강제' directive on 2026-04-25.
+  verify python3 tool/proposal_lint.py --rule 1
+  cron on-commit
+  on_fail block
+  label own#22 proposal-naming HARD gate
+
+own 23 live "proposal-umbrella — proposal section consolidation (HARD)"
+  slug proposal-umbrella
+  decl proposals/ tool/proposal_lint.py
+  scope HARD block — proposals declaring frontmatter `umbrella: <name>` must consolidate all domain-content H2 sections under a single umbrella section. Multi-section splits are allowed only when sub-sections share the same first-word umbrella token (e.g. AI Business + AI Safety) OR no `umbrella:` is declared. Mirrors the `anthropic-fellows-research.md` reference layout.
+  status live
+  since 2026-04-25
+  why proposal layout consistency — when an umbrella domain is declared, splitting it into multiple H2 sections obscures the portfolio framing. Promoted to HARD via user '강제' directive on 2026-04-25 with the rule "도메인섹션이 전혀 다르면 분리".
+  verify python3 tool/proposal_lint.py --rule 2
+  cron on-commit
+  on_fail block
+  label own#23 proposal-umbrella HARD gate

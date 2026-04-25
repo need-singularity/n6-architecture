@@ -21,15 +21,19 @@ Two HARD rules:
     those domains into a single `## <umbrella> (N bets / consolidated)` block.
 
 Calling convention:
-    python3 tool/proposal_lint.py                        # lint every proposals/*.md
-    python3 tool/proposal_lint.py proposals/foo.md       # single file
+    python3 tool/proposal_lint.py                        # lint every proposals/*.md (both rules)
+    python3 tool/proposal_lint.py proposals/foo.md       # single file (both rules)
+    python3 tool/proposal_lint.py --rule 1               # only proposal#1 across all
+    python3 tool/proposal_lint.py --rule 2               # only proposal#2 across all
+    python3 tool/proposal_lint.py --rule N <file>        # single rule, single file
 
-Exit code: 0 when zero HARD violations, 1 otherwise.
+Exit code: 0 when zero HARD violations for the requested scope, 1 otherwise.
 Stdlib only — no third-party dependencies.
 """
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -287,10 +291,10 @@ def _is_readme_like(path: Path) -> bool:
     return path.stem.lower() in {"readme", "claude", "index", "_index"}
 
 
-def _gather_targets(argv: list[str]) -> list[Path]:
-    if len(argv) > 1:
+def _gather_targets(file_args: list[str]) -> list[Path]:
+    if file_args:
         out: list[Path] = []
-        for arg in argv[1:]:
+        for arg in file_args:
             p = (REPO_ROOT / arg).resolve() if not Path(arg).is_absolute() else Path(arg).resolve()
             if not p.is_file():
                 print(f"[proposal_lint] WARN: {arg} not found", file=sys.stderr)
@@ -310,20 +314,56 @@ def _format_status(rule: str, found: Iterable[dict[str, str]]) -> str:
     return f"{rule} FAIL: {reasons}"
 
 
+def _parse_args(argv: list[str]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        prog="proposal_lint.py",
+        description=(
+            "Naming + umbrella-consolidation lint for proposals/*.md. "
+            "Both rules are HARD."
+        ),
+    )
+    parser.add_argument(
+        "--rule",
+        type=int,
+        choices=(1, 2),
+        default=None,
+        help=(
+            "Run only the given rule (1=naming, 2=umbrella). "
+            "Default: run both."
+        ),
+    )
+    parser.add_argument(
+        "files",
+        nargs="*",
+        help="Optional explicit files; defaults to proposals/*.md.",
+    )
+    return parser.parse_args(argv[1:])
+
+
 def main(argv: list[str]) -> int:
-    targets = _gather_targets(argv)
-    print(f"[proposal_lint] target: {len(targets)} files")
-    all_violations: list[dict[str, str]] = []
+    ns = _parse_args(argv)
+    targets = _gather_targets(ns.files)
+    if ns.rule is None:
+        active_rules = ("proposal#1", "proposal#2")
+    else:
+        active_rules = (f"proposal#{ns.rule}",)
+    print(
+        f"[proposal_lint] target: {len(targets)} files, "
+        f"rules: {','.join(active_rules)}"
+    )
+    in_scope: list[dict[str, str]] = []
     for path in targets:
         rel = path.relative_to(REPO_ROOT) if path.is_absolute() else path
         found = lint_file(path)
-        all_violations.extend(found)
+        # Filter to the rules the caller requested.
+        scoped = [v for v in found if v.get("rule") in active_rules]
+        in_scope.extend(scoped)
         print(f"  {rel}")
-        print(f"    {_format_status('proposal#1', found)}")
-        print(f"    {_format_status('proposal#2', found)}")
-    hard = len(all_violations)  # both rules are HARD
+        for rule in active_rules:
+            print(f"    {_format_status(rule, scoped)}")
+    hard = len(in_scope)  # all active rules are HARD
     print(
-        f"[proposal_lint] total violations: {len(all_violations)} "
+        f"[proposal_lint] total violations: {len(in_scope)} "
         f"(HARD={hard})"
     )
     return 1 if hard else 0
