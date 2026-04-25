@@ -4,7 +4,7 @@
     "policy": "FROZEN, SHRINK-ONLY. New .md files under own#1 decl scope (domains/, theory/, reports/, experiments/, papers/, bridge/, n6shared/, proposals/) and CONTRIBUTING.md must be English-only (CJK density 0%). Entries may be REMOVED upon translation but never ADDED. Long-term goal: shrink to zero via Korean-to-English migration.",
     "promoted_date": "2026-04-24",
     "directive": "user 'hard go' — promote own#1 from SOFT log to HARD block",
-    "count": 12,
+    "count": 11,
     "scope_dirs": [
       "domains/",
       "theory/",
@@ -575,11 +575,20 @@
         "entry": "theory/roadmap-v2/n6arch-axes/axis-r2-refinement.md",
         "new_count": 21,
         "note": "B12 part B Wave 2 - axis-r2-refinement.md (961L, R2 millennium-axis emergence) translated KR->EN, CJK=0 verified, own#11 softener applied (PROVEN -> candidate)."
+      },
+      {
+        "phase": "phase-6-step2-B14a-cognitive-6",
+        "batch": "phase-6-step2-B14a-cognitive-6",
+        "date": "2026-04-25",
+        "removed": 1,
+        "entry": "domains/cognitive/ai-interpretability/ai-interpretability.md",
+        "count_before": 12,
+        "count_after": 11,
+        "note": "translated KR->EN"
       }
     ]
   },
   "allowlist": [
-    "domains/cognitive/ai-interpretability/ai-interpretability.md",
     "domains/cognitive/ai-quality-scale/ai-quality-scale.md",
     "domains/cognitive/ai-training-cost/ai-training-cost.md",
     "domains/sf-ufo/hexa-ufo/hexa-ufo.md",
